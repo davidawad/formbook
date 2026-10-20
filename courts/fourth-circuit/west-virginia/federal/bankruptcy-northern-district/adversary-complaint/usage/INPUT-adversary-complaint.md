@@ -97,7 +97,6 @@ Protea Biosciences, Inc. (“PBI”) and Protea Biosciences Group, Inc. (“PBGI
 
 WHEREFORE, Plaintiffs respectfully request that the Court enter judgment in its favor and against Defendant for the relief provided for in sections 547, 548 and 550 of the Bankruptcy Code and all other relief that is just and proper.
 
-@@after-signature@@
 
 ## Schedule 1
 

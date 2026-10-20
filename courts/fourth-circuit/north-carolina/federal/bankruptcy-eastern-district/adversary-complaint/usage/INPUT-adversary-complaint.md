@@ -138,8 +138,8 @@ The Debtor, prior to the Petition Date, remitted payments to Defendant totaling 
 | Source of Payment/Transfer | Transfer Date | Type of Transfer | Transferee | Transfer Amount |
 |---|---|---|---|---|
 | American Express Bank | 3/17/2023 | ACH | Second Wind Consultants, Inc. | $20,000.00 |
-| Wells Fargo Bank, N.A. Acct No. ***4844 | 4/28/2023 | Wire Transfer | Second Wind Consultants, Inc. | $20,000.00 |
-| Applied Bank Account No. **7552 | 5/9/2023 | Wire Transfer | Second Wind Consultants, Inc. | $247,000.00 |
+| Wells Fargo Bank, N.A. Acct No. \*\*\*4844 | 4/28/2023 | Wire Transfer | Second Wind Consultants, Inc. | $20,000.00 |
+| Applied Bank Account No. \*\*7552 | 5/9/2023 | Wire Transfer | Second Wind Consultants, Inc. | $247,000.00 |
 
 (collectively, the "Transfers").
 
@@ -171,7 +171,7 @@ Section 542(a) provides, in pertinent part, as follows:
 
 # PRAYER FOR RELIEF
 
-~WHEREFORE, and based upon the foregoing, the Debtor prays for the following relief:
+WHEREFORE, and based upon the foregoing, the Debtor prays for the following relief:
 
 1. Have and recover judgment against Defendant avoiding the Transfers made by the Debtor to Defendant totaling $287,000.00, as constructively fraudulent pursuant to §§ 544 and 548 of the Bankruptcy Code and the UVTA;
 
