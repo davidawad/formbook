@@ -1,4 +1,0 @@
-# ARB-LBR 9004-1(g) (rules.md ARB-FORM-003): right margin at least 1/2 inch; no bottom margin is stated. The template sets 3/4 in on the right and a 48 pt bottom (footer).
-# The checker takes one margin for all four sides (bead fb-o14j), so this uses the smallest side, 48 pt.
-params:
-  margin_pt: 48
