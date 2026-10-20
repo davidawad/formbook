@@ -9,7 +9,7 @@ Courts under `courts/ninth-circuit` (65).
 | [Court of Appeals for the Ninth Circuit](court-of-appeals) | `ca9` | up for review | pass | built | — | 71 |
 | [United States Bankruptcy Court, D. Alaska](alaska/federal/bankruptcy-district) | `akb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Alaska](alaska/federal/district) | `akd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Arizona](arizona/federal/bankruptcy-district) | `arb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Arizona](arizona/federal/bankruptcy-district) | `arb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Arizona](arizona/federal/district) | `azd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, C.D. California](california/federal/bankruptcy-central-district) | `cacb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. California](california/federal/bankruptcy-eastern-district) | `caeb` | in progress | — | — | — | 14 |

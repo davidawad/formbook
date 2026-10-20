@@ -13,7 +13,7 @@ Courts under `courts` (375).
 | [Patent Trial and Appeal Board](federal-circuit/patent-trial-and-appeal-board) | `ptab` | in progress | — | — | — | 14 |
 | [Trademark Trial and Appeal Board](federal-circuit/trademark-trial-and-appeal-board) | `ttab` | in progress | — | — | — | 14 |
 | [U S Air Force Court of Criminal Appeals](military/air-force-court-of-criminal-appeals) | `afcca` | up for review | — | — | — | 14 |
-| [U S Army Court of Criminal Appeals](military/army-court-of-criminal-appeals) | `acca` | up for review | — | — | — | 14 |
+| [U S Army Court of Criminal Appeals](military/army-court-of-criminal-appeals) | `acca` | in progress | — | — | — | 14 |
 | [U S Coast Guard Court of Criminal Appeals](military/coast-guard-court-of-criminal-appeals) | `uscgcoca` | up for review | — | — | — | 14 |
 | [United States Court of Appeals For The Armed Forces](military/court-of-appeals-for-the-armed-forces) | `armfor` | up for review | — | — | — | 14 |
 | [United States Court of Military Commission Review](military/court-of-military-commission-review) | `mc` | up for review | — | — | — | 14 |
@@ -124,7 +124,7 @@ Courts under `courts` (375).
 | [Supreme Court of Virginia](fourth-circuit/virginia/state/supreme-court) | `va` | in progress | — | — | — | 14 |
 | [Intermediate Court of Appeals of West Virginia](fourth-circuit/west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | in progress | — | — | — | 14 |
 | [West Virginia Supreme Court](fourth-circuit/west-virginia/state/supreme-court) | `wva` | in progress | — | — | — | 14 |
-| [Court of Appeals for the Fifth Circuit](fifth-circuit/court-of-appeals) | `ca5` | up for review | — | — | — | 14 |
+| [Court of Appeals for the Fifth Circuit](fifth-circuit/court-of-appeals) | `ca5` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Louisiana](fifth-circuit/louisiana/federal/bankruptcy-eastern-district) | `laeb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, M.D. Louisiana](fifth-circuit/louisiana/federal/bankruptcy-middle-district) | `lamb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Louisiana](fifth-circuit/louisiana/federal/bankruptcy-western-district) | `lawb` | in progress | — | — | — | 0 |
@@ -154,7 +154,7 @@ Courts under `courts` (375).
 | [Texas Judicial Panel on Multidistrict Litigation](fifth-circuit/texas/state/judicial-panel-on-multidistrict-litigation) | `texjpml` | in progress | — | — | — | 14 |
 | [Texas Special Court of Review](fifth-circuit/texas/state/special-court-of-review) | `texreview` | in progress | — | — | — | 14 |
 | [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Appellate Panel of The Sixth Circuit](sixth-circuit/bankruptcy-appellate-panel) | `bap6` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The Sixth Circuit](sixth-circuit/bankruptcy-appellate-panel) | `bap6` | in progress | — | — | — | 14 |
 | [Court of Appeals for the Sixth Circuit](sixth-circuit/court-of-appeals) | `ca6` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-eastern-district) | `kyeb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-western-district) | `kywb` | in progress | — | — | — | 0 |
@@ -249,7 +249,7 @@ Courts under `courts` (375).
 | [Court of Appeals for the Ninth Circuit](ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | built | — | 71 |
 | [United States Bankruptcy Court, D. Alaska](ninth-circuit/alaska/federal/bankruptcy-district) | `akb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Alaska](ninth-circuit/alaska/federal/district) | `akd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Arizona](ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Arizona](ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Arizona](ninth-circuit/arizona/federal/district) | `azd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, C.D. California](ninth-circuit/california/federal/bankruptcy-central-district) | `cacb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. California](ninth-circuit/california/federal/bankruptcy-eastern-district) | `caeb` | in progress | — | — | — | 14 |

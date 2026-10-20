@@ -5,7 +5,7 @@ Courts under `courts/sixth-circuit` (30).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The Sixth Circuit](bankruptcy-appellate-panel) | `bap6` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The Sixth Circuit](bankruptcy-appellate-panel) | `bap6` | in progress | — | — | — | 14 |
 | [Court of Appeals for the Sixth Circuit](court-of-appeals) | `ca6` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Kentucky](kentucky/federal/bankruptcy-eastern-district) | `kyeb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Kentucky](kentucky/federal/bankruptcy-western-district) | `kywb` | in progress | — | — | — | 0 |

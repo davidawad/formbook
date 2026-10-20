@@ -1,2 +1,0 @@
-PASS
-468283b94a505a3fd47c593c0be9004c2230f3f2f8f96041068db55abe1a9aa9  usage/OUTPUT-opening-brief.typst.pdf
