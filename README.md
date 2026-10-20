@@ -404,7 +404,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/bankruptcy-northern-district) | `ohnb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, S.D. Ohio](courts/sixth-circuit/ohio/federal/bankruptcy-southern-district) | `ohsb` | in progress | — | — | — | 0 |
-| [District Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/northern-district) | `ohnd` | in progress | — | — | — | 14 |
+| [District Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/northern-district) | `ohnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Ohio](courts/sixth-circuit/ohio/federal/southern-district) | `ohsd` | in progress | — | — | — | 0 |
 | [Ohio Court of Appeals](courts/sixth-circuit/ohio/state/court-of-appeals) | `ohioctapp` | in progress | — | — | — | 14 |
 | [Ohio Court of Claims](courts/sixth-circuit/ohio/state/court-of-claims) | `ohioctcl` | in progress | — | — | — | 0 |
@@ -500,7 +500,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | in progress | — | — | — | 14 |
 | [District Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/district) | `mnd` | up for review | — | — | — | 14 |
 | [Court of Appeals of Minnesota](courts/eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Minnesota](courts/eighth-circuit/minnesota/state/supreme-court) | `minn` | in progress | — | — | — | 14 |
@@ -532,7 +532,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/bankruptcy-district) | `ndb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/bankruptcy-district) | `ndb` | up for review | — | — | — | 14 |
 | [District Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/district) | `ndd` | up for review | — | — | — | 14 |
 | [North Dakota Court of Appeals](courts/eighth-circuit/north-dakota/state/court-of-appeals) | `ndctapp` | in progress | — | — | — | 14 |
 | [North Dakota Supreme Court](courts/eighth-circuit/north-dakota/state/supreme-court) | `nd` | in progress | — | — | — | 14 |
@@ -542,7 +542,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | in progress | — | — | — | 14 |
-| [District Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | — | — | — | 14 |
+| [District Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/district) | `sdd` | in progress | — | — | — | 14 |
 | [Supreme Court of South Dakota](courts/eighth-circuit/south-dakota/state/supreme-court) | `sd` | in progress | — | — | — | 14 |
 
 ## Ninth Circuit
@@ -653,7 +653,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Oregon](courts/ninth-circuit/oregon/federal/bankruptcy-district) | `orb` | up for review | — | — | — | 14 |
-| [District Court, D. Oregon](courts/ninth-circuit/oregon/federal/district) | `ord` | in progress | — | — | — | 14 |
+| [District Court, D. Oregon](courts/ninth-circuit/oregon/federal/district) | `ord` | up for review | — | — | — | 14 |
 | [Court of Appeals of Oregon](courts/ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | in progress | — | — | — | 14 |
 | [Oregon Supreme Court](courts/ninth-circuit/oregon/state/supreme-court) | `or` | in progress | — | — | — | 14 |
 | [Oregon Tax Court](courts/ninth-circuit/oregon/state/tax-court) | `ortc` | todo | — | — | — | 0 |
@@ -665,7 +665,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, E.D. Washington](courts/ninth-circuit/washington/federal/bankruptcy-eastern-district) | `waeb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Washington](courts/ninth-circuit/washington/federal/bankruptcy-western-district) | `wawb` | in progress | — | — | — | 14 |
 | [District Court, E.D. Washington](courts/ninth-circuit/washington/federal/eastern-district) | `waed` | in progress | — | — | — | 14 |
-| [District Court, W.D. Washington](courts/ninth-circuit/washington/federal/western-district) | `wawd` | in progress | — | — | — | 14 |
+| [District Court, W.D. Washington](courts/ninth-circuit/washington/federal/western-district) | `wawd` | up for review | — | — | — | 14 |
 | [Court of Appeals of Washington](courts/ninth-circuit/washington/state/court-of-appeals) | `washctapp` | in progress | — | — | — | 14 |
 | [Washington Supreme Court](courts/ninth-circuit/washington/state/supreme-court) | `wash` | in progress | — | — | — | 14 |
 
@@ -841,14 +841,14 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Third Circuit | 23 | 0 | 9 | 10 | 4 | 0.0% | 39.1% | 0 | 0 | 0 | 10.9% |
 | Fourth Circuit | 32 | 0 | 1 | 29 | 2 | 0.0% | 3.1% | 0 | 0 | 0 | 5.2% |
 | Fifth Circuit | 30 | 0 | 1 | 28 | 1 | 0.0% | 3.3% | 0 | 0 | 0 | 7.0% |
-| Sixth Circuit | 30 | 0 | 6 | 24 | 0 | 0.0% | 20.0% | 0 | 0 | 0 | 7.9% |
+| Sixth Circuit | 30 | 0 | 7 | 23 | 0 | 0.0% | 23.3% | 0 | 0 | 0 | 7.9% |
 | Seventh Circuit | 22 | 0 | 11 | 10 | 1 | 0.0% | 50.0% | 0 | 0 | 0 | 13.3% |
-| Eighth Circuit | 39 | 0 | 11 | 27 | 1 | 0.0% | 28.2% | 0 | 0 | 0 | 11.1% |
-| Ninth Circuit | 65 | 0 | 12 | 49 | 4 | 0.0% | 18.4% | 1 | 0 | 0 | 12.7% |
+| Eighth Circuit | 39 | 0 | 10 | 28 | 1 | 0.0% | 25.6% | 0 | 0 | 0 | 11.1% |
+| Ninth Circuit | 65 | 0 | 14 | 47 | 4 | 0.0% | 21.5% | 1 | 0 | 0 | 12.7% |
 | Tenth Circuit | 34 | 0 | 0 | 31 | 3 | 0.0% | 0.0% | 0 | 0 | 0 | 4.5% |
 | Eleventh Circuit | 32 | 0 | 0 | 32 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 5.6% |
 | D.C. Circuit | 4 | 0 | 3 | 1 | 0 | 0.0% | 75.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 78 | 274 | 24 | 0.0% | 20.7% | 1 | 0 | 0 | 9.5% |
+| **Total** | 376 | 0 | 80 | 272 | 24 | 0.0% | 21.2% | 1 | 0 | 0 | 9.5% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -864,12 +864,12 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 23 |
 | Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 32 |
 | Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 25 |
-| Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 34 |
+| Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 37 |
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 27 |
-| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 39 |
-| Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 44 |
-| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 33 |
-| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 41 |
+| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 37 |
+| Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 46 |
+| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 34 |
+| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 40 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 370 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 373 |
 <!-- tracker:end -->

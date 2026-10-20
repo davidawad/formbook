@@ -36,25 +36,25 @@ Additionally, Plaintiff failed to properly plead the damages required for defama
 
 # II. RELEVANT ALLEGATIONS
 
-NUMBERED: On December 31, 2025, Plaintiff filed his Complaint in which he admits wrestling videos he recorded and posted on his YouTube account of minor children were pirated and reposted on pornographic and inappropriate websites. Ct. Dkt. 1.
+<!--NUMBERED--> On December 31, 2025, Plaintiff filed his Complaint in which he admits wrestling videos he recorded and posted on his YouTube account of minor children were pirated and reposted on pornographic and inappropriate websites. Ct. Dkt. 1.
 
-NUMBERED: The basis of Plaintiff's Complaint stems from four social media posts Defendant Schwab is alleged to have posted on her 'X' (formerly Twitter) account. Id.
+<!--NUMBERED--> The basis of Plaintiff's Complaint stems from four social media posts Defendant Schwab is alleged to have posted on her 'X' (formerly Twitter) account. Id.
 
-NUMBERED: The first post, from December 30, 2023 states: [Image of the post; not in the text layer.] Id. at Exhibit A.
+<!--NUMBERED--> The first post, from December 30, 2023 states: [Image of the post; not in the text layer.] Id. at Exhibit A.
 
-NUMBERED: The second social media post states, "This makes me sick and why I got this convo going. So many parents don't know their kids are on someone's YouTube." Id.
+<!--NUMBERED--> The second social media post states, "This makes me sick and why I got this convo going. So many parents don't know their kids are on someone's YouTube." Id.
 
-NUMBERED: The third social media post states: [Image of the post; not in the text layer.] Id.
+<!--NUMBERED--> The third social media post states: [Image of the post; not in the text layer.] Id.
 
-NUMBERED: The fourth social media post states: [Image of the post; not in the text layer.] Id.
+<!--NUMBERED--> The fourth social media post states: [Image of the post; not in the text layer.] Id.
 
-NUMBERED: Additionally, in Plaintiff's Complaint, Plaintiff takes issue that Ms. Schwab allegedly expressed to someone else that he was her "hero" after Plaintiff was ejected from a youth wrestling match. Id. at Exhibit B.
+<!--NUMBERED--> Additionally, in Plaintiff's Complaint, Plaintiff takes issue that Ms. Schwab allegedly expressed to someone else that he was her "hero" after Plaintiff was ejected from a youth wrestling match. Id. at Exhibit B.
 
-NUMBERED: Plaintiff interprets Defendant Schwab's statements as accusing him of posting videos with inappropriate intent, accusing him of allowing pornographic websites to embed his videos, posing a danger to minors, and engaging in conduct that warranted denial of credentials by schools and tournament directors. Ct. Dkt. 1 at 37.
+<!--NUMBERED--> Plaintiff interprets Defendant Schwab's statements as accusing him of posting videos with inappropriate intent, accusing him of allowing pornographic websites to embed his videos, posing a danger to minors, and engaging in conduct that warranted denial of credentials by schools and tournament directors. Ct. Dkt. 1 at 37.
 
-NUMBERED: As a result of these statements, Plaintiff claims he has lost unspecified business opportunities, sponsorships, and revenue and suffers emotional distress, anxiety and anguish. Id. at 52 and 58.
+<!--NUMBERED--> As a result of these statements, Plaintiff claims he has lost unspecified business opportunities, sponsorships, and revenue and suffers emotional distress, anxiety and anguish. Id. at 52 and 58.
 
-NUMBERED: In Plaintiff's Complaint, Plaintiff alleges Count I: Defamation Per Se, Count II: Defamation Per Quod, Count III: Invasion of Privacy by False Light, and Count IV: Intentional Infliction of Emotional Distress, and Count V: Tortious Interference with Prospective Business Relationships against Defendant Schwab. Id.
+<!--NUMBERED--> In Plaintiff's Complaint, Plaintiff alleges Count I: Defamation Per Se, Count II: Defamation Per Quod, Count III: Invasion of Privacy by False Light, and Count IV: Intentional Infliction of Emotional Distress, and Count V: Tortious Interference with Prospective Business Relationships against Defendant Schwab. Id.
 
 # III. LEGAL STANDARD
 
@@ -138,13 +138,13 @@ As Defendant Schwab's statements are opinion statements regarding a matter of pu
 
 WHEREFORE, Defendant Schwab respectfully requests the Court GRANT her Motion to Dismiss, enter an Order dismissing this matter with prejudice, and for any further relief the Court deems just and proper.
 
-SIGNATURE
+<!--SIGNATURE-->
 
 # PROOF OF SERVICE
 
 The undersigned certifies that a copy of the foregoing instrument was filed via the CM/ECF System and served upon all counsel of record in the above cause by transmitting a copy to all primary and secondary e-mail addresses of record designated by those individuals on the 13th day of April, 2026.
 
-SINGLE: To:
+<!--SINGLE--> To:
 Counsel for Plaintiff
 Richard A. Stefani
 Gray, Stefani, & Mitvalsky, P.L.C.
@@ -154,7 +154,7 @@ Cedar Rapids, IA 52406-0456
 T: 319-364-1535
 rickstefani@gsmlawyers.com
 
-SINGLE: /s/ Sharon Skierkiewicz
+<!--SINGLE--> /s/ Sharon Skierkiewicz
 sskierkiewicz@heylroyster.com
 HEYL, ROYSTER, VOELKER & ALLEN
 33 N. Dearborn St., 7th Floor

@@ -148,10 +148,10 @@
   let chunks = src.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
   for c in chunks {
     let t = c.trim()
-    if t == "SIGNATURE" {
+    if t == "<!--SIGNATURE-->" {
       signature-block(meta)
-    } else if t.starts-with("SINGLE:") {
-      let lines = t.slice("SINGLE:".len()).trim().split("\n").map(l => l.trim()).filter(l => l != "")
+    } else if t.starts-with("<!--SINGLE-->") {
+      let lines = t.slice("<!--SINGLE-->".len()).trim().split("\n").map(l => l.trim()).filter(l => l != "")
       line-stack(lines)
       v(body-leading)
     } else if t.starts-with("#") {
@@ -168,14 +168,14 @@
         set par(leading: single-leading, first-line-indent: 0pt)
         inl(t.trim(">").trim())
       }))
-    } else if t.starts-with("NUMBERED:") {
+    } else if t.starts-with("<!--NUMBERED-->") {
       para-counter.step()
       on-grid({
         set par(leading: body-leading, first-line-indent: 0pt)
         h(para-indent)
         context para-counter.display()
         [.#h(0.3in)]
-        inl(t.slice("NUMBERED:".len()).trim())
+        inl(t.slice("<!--NUMBERED-->".len()).trim())
       })
     } else {
       on-grid({

@@ -131,7 +131,7 @@
 })
 
 /// Markdown body, chunk by chunk (blank-line separated). A chunk is a heading (`#`), a block
-/// quotation (`>`), a list (`- `), a paragraph marked `[unnumbered]` (the lead-in, the WHEREFORE and
+/// quotation (`>`), a list (`- `), a paragraph marked `<!--unnumbered-->` (the lead-in, the WHEREFORE and
 /// the "For her ... Cause of Action" paragraphs, which the exemplar does not number), or a numbered
 /// paragraph. Blocks are appended to one flow; a heading is `sticky`, so it stays with the block after
 /// it. Numbering is a loop counter: a show rule that re-wraps paragraph content recurses without end
@@ -167,8 +167,8 @@
         })
       }
     } else {
-      let unnumbered = t.starts-with("[unnumbered]")
-      let text = if unnumbered { t.slice("[unnumbered]".len()).trim(at: start) } else { t }
+      let unnumbered = t.starts-with("<!--unnumbered-->")
+      let text = if unnumbered { t.slice("<!--unnumbered-->".len()).trim(at: start) } else { t }
       let label = if unnumbered { [] } else {
         n += 1
         [#n.]
