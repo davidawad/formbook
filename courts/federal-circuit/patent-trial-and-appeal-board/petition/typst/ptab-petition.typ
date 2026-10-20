@@ -212,7 +212,9 @@
   // Body: arabic page numbers from 1, running header naming the patent.
   set page(
     numbering: "1",
-    header: align(right)[Petition for Inter Partes Review of #need(meta, "patent-number")],
+    header: none,
+    // PTAB-FORM-010 running identification sits in the footer, below the page number, so it never splits a body paragraph in the text layer.
+    footer: context align(center)[#counter(page).display("1") \ #align(right)[Petition for Inter Partes Review of #need(meta, "patent-number")]],
   )
   counter(page).update(1)
   counter(heading).update(0)

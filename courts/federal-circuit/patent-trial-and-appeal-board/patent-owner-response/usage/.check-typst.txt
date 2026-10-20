@@ -1,0 +1,2 @@
+PASS
+98178e5d1bd36cf80d3ebccd43391cdd3ba81612d9bf6979739e55d08434199c  usage/OUTPUT-patent-owner-response.typst.pdf
