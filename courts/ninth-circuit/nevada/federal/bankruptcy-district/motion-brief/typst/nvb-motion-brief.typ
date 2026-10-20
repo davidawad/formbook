@@ -13,13 +13,13 @@
 #let font-family = ("Times New Roman", "Liberation Serif")          // LR 9004(b): proportional font; vendored in fonts/
 #let type-size = 13pt                     // LR 9004(b): at least 12 point. 13 pt is a style choice (EB Garamond sets smaller than Times at 12); see ../README.md.
 #let pitch = 24pt                         // LR 9004(a): double-spaced; the numbered lines are this pitch
-#let lines-per-page = 28                  // LR 9004(a): each printed line numbered in the left margin, 28 to a page
+#let lines-per-page = 27                  // LR 9004(a): each printed line numbered in the left margin, 28 to a page
 #let page-w = 8.5in                       // LR 9004(a): 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let top-margin = 72pt                    // line 1 sits on the top margin
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the page number
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the page number
 #let left-margin = 1.5in                  // room for the line numbers
-#let right-margin = 0.75in
+#let right-margin = 1in
 #let text-width = page-w - left-margin - right-margin
 #let title-page-lines = 2                 // LR 9004(a): the title page begins 1 1/2 in from the top; line 3 is 1 in + 48 pt = 1.67 in
 #let body-leading = 15.55pt              // the gap that makes a line of 13 pt EB Garamond (line box 0.65em) a 24 pt pitch; measured in ../README.md

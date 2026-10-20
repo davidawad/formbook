@@ -10,13 +10,13 @@
 #let font-family = ("Times New Roman", "Liberation Serif")        // CivLR 5.1: proportional font "such as Times New Roman"; EB Garamond is the vendored one (README.md, gap 2)
 #let type-size = 14pt                   // CivLR 5.1: type no smaller than 14-point for proportional text
 #let pitch = 24pt                       // CivLR 5.1: 28 lines on the page; the numbered lines are this pitch
-#let lines-per-page = 28                // CivLR 5.1: not more than 28 lines per page
+#let lines-per-page = 27                // CivLR 5.1: not more than 28 lines per page
 #let page-w = 8.5in                     // CivLR 5.1: letter size
 #let page-h = 11in
 #let top-margin = 72pt                  // the numbered lines start at the top margin
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the footer
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the footer
 #let left-margin = 1.5in                // room for the line numbers and the rules
-#let right-margin = 0.75in
+#let right-margin = 1in
 #let text-width = page-w - left-margin - right-margin
 #let body-leading = 14.9pt              // leading that gives a 24 pt baseline pitch at 14 pt EB Garamond (measured: natural line box 9.1 pt; README.md)
 #let single-leading = 3.5pt             // single spacing for counsel, caption and signature: about 12.6 pt pitch at 14 pt

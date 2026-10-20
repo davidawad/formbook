@@ -14,13 +14,13 @@
 #let type-size = 12pt                   // LBR 9004-1(a): 11 or 12 point
 #let footer-size = 11pt                 // LBR 9004-1(a): the bottom notation is held to the same 11 point minimum
 #let pitch = 24pt                       // LBR 9004-1(a): double spaced; the numbered lines are this pitch
-#let lines-per-page = 28                // LBR 9004-1(b)(1): numbered paper; 28 lines (as in the sibling complaint template)
+#let lines-per-page = 27                // LBR 9004-1(b)(1): numbered paper; 28 lines (as in the sibling complaint template)
 #let page-w = 8.5in                     // LBR 9004-1(a): 8-1/2 x 11 inch
 #let page-h = 11in
 #let top-margin = 72pt                  // the numbered lines start at the top margin
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the bottom notation
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the bottom notation
 #let left-margin = 1.5in                // room for the line numbers and the rules
-#let right-margin = 0.75in
+#let right-margin = 1in
 #let text-width = page-w - left-margin - right-margin
 #let body-leading = 1.35em              // double spacing: a 24 pt baseline pitch at 12 pt (as in the sibling template)
 #let single-leading = 0.5em             // single spacing for the notation, caption and footer

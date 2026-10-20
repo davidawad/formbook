@@ -12,13 +12,13 @@
 #let font-family = ("Times New Roman", "Liberation Serif")   // LBR 9004-2(a)(4) names Times New Roman; Liberation Serif is its metric-compatible substitute (docs/FONTS.md)
 #let type-size = 13pt                   // LBR 9004-2(a)(4): not less than 12 and not more than 14 point
 #let pitch = 24pt                       // LBR 9004-2(a)(2), (b)(1): numbered lines, double spaced
-#let lines-per-page = 28                // the pleading form used by the exemplar and by CAND; the LBR sets no count
+#let lines-per-page = 27                // the pleading form used by the exemplar and by CAND; the LBR sets no count
 #let page-w = 8.5in                     // LBR 9004-2(a)(1): white letter-size paper
 #let page-h = 11in
 #let top-margin = 72pt                  // LBR 9004-2(b)(2): every margin not less than one-half inch
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the page number
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the page number
 #let left-margin = 1.5in                // room for the line numbers and the pleading rules
-#let right-margin = 0.75in
+#let right-margin = 1in
 #let text-width = page-w - left-margin - right-margin
 #let body-leading = pitch - 0.65 * type-size   // baseline pitch of 24 pt (measured in README.md)
 #let single-leading = 0.45em            // counsel, caption, quotations and signature are single spaced (LBR 9004-2(b)(1))

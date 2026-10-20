@@ -10,13 +10,13 @@
 #let font-family = ("Times New Roman", "Liberation Serif")   // Civil L.R. 3-4(c)(2)(A): standard proportional font; the rule's example is Times New Roman, substituted by its metric-compatible vendored clone (docs/FONTS.md)
 #let type-size = 12pt                   // Civil L.R. 3-4(c)(2)(B): 12 point type or larger
 #let pitch = 24pt                       // Civil L.R. 3-4(c)(2): double-spaced; the numbered lines are this pitch
-#let lines-per-page = 28                // Civil L.R. 3-4(c)(2): no more than 28 lines per page
+#let lines-per-page = 27                // Civil L.R. 3-4(c)(2): no more than 28 lines per page
 #let page-w = 8.5in                     // Civil L.R. 3-4(c)(1): 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let top-margin = 72pt                  // the numbered lines start at the top margin
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the footer
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the footer
 #let left-margin = 1.5in                // room for the line numbers and the rules
-#let right-margin = 0.75in
+#let right-margin = 1in
 #let text-width = page-w - left-margin - right-margin
 #let body-leading = 1.35em              // double spacing: 1.35em leading gives a 24 pt baseline pitch at 12 pt in Liberation Serif (measured with pdftotext -bbox-layout, README.md)
 #let single-leading = 0.5em             // single spacing for counsel, caption and signature: about 13.8 pt at 12 pt

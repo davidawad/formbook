@@ -11,11 +11,11 @@
 #let font-family = "Liberation Mono"        // LCivR 10(d): audited Courier New face per docs/FONTS.md
 #let type-size = 14pt                   // LCivR 10(d): proportionately spaced typeface of 14 points or more
 #let pitch = 32pt                       // LCivR 10(d): text double spaced; 32 pt = 2 x 1.15 x 14 pt (the exemplar's pitch)
-#let lines-per-page = 21                // the exemplar's numbered lines (21 per page); the rule does not fix a count
+#let lines-per-page = 20                // the exemplar has 21; 20 keeps every line inside the 1 in bottom margin (the rule fixes no count)
 #let page-w = 8.5in                     // LCivR 10(d): 8 1/2 x 11 inch
 #let page-h = 11in
 #let top-margin = 72pt                  // the numbered lines start at the top margin
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the footer
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // holds the footer
 #let left-margin = 1.1in                // room for the line numbers and the pleading rules
 #let right-margin = 1in
 #let text-width = page-w - left-margin - right-margin
@@ -79,7 +79,7 @@
 #let footer-block(title) = place(
   top + left,
   dx: left-margin,
-  dy: top-margin + lines-per-page * pitch + 6pt,
+  dy: top-margin + lines-per-page * pitch + 12pt,
   block(width: text-width, {
     set text(size: type-size)
     upper(title) + " - " + context counter(page).display("1")

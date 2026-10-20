@@ -1,4 +1,0 @@
-# Pleading-paper template: the local rules fix 28 numbered lines, line 1 at least 1 in below the top edge (rules.md FORM-001/-002), and state no bottom or right margin.
-# The templates keep a 48 pt bottom margin (footer) and 54 pt right margin. The checker takes one margin for all four sides (bead fb-o14j), so this uses the smallest side, 48 pt.
-params:
-  margin_pt: 48

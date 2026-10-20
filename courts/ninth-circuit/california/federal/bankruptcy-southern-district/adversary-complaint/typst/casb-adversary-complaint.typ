@@ -11,13 +11,13 @@
 #let font-family = ("Times New Roman", "Liberation Serif")        // CASB-FORM-002: vendored in fonts/; see README.md (font is a choice, not a rule text)
 #let type-size = 12pt                   // CASB-FORM-002: 12 point; the rule text is not verified, see README.md
 #let pitch = 24pt                       // CASB-FORM-003: double spacing; the numbered lines are this pitch
-#let lines-per-page = 28                // CASB-FORM-003: pleading paper, 28 numbered lines (exemplars)
+#let lines-per-page = 27                // CASB-FORM-003: pleading paper, 28 numbered lines (exemplars)
 #let page-w = 8.5in                     // CASB-FORM-001 (FRBP 9004(a), legibility; 8 1/2 x 11 paper)
 #let page-h = 11in
 #let top-margin = 72pt                  // the numbered lines start at the top margin
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the footer
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the footer
 #let left-margin = 1.5in                // room for the line numbers and the rules
-#let right-margin = 0.75in
+#let right-margin = 1in
 #let text-width = page-w - left-margin - right-margin
 #let body-leading = 1.35em              // double spacing: 1.35em leading gives a 24 pt baseline pitch at 12 pt (measured, README.md)
 #let single-leading = 0.5em             // single spacing for counsel, caption and signature
@@ -207,7 +207,7 @@
         on-grid({ set par(leading: body-leading); context [#h(para-indent)#(para-counter.display()).#h(0.3in)#cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)] })
       }
       if has-pending {
-        block(breakable: false, width: text-width, { pending; piece })
+        { pending; piece }   // headings are sticky; a paragraph longer than a page must be able to break
       } else {
         piece
       }

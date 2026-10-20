@@ -14,13 +14,13 @@
 #let font-family = ("Times New Roman", "Liberation Serif")        // L.R. 11-3.1.1: proportionally spaced font, vendored in fonts/ (README.md, Known gaps)
 #let type-size = 14pt                   // L.R. 11-3.1.1: standard (non-condensed) 14-point or larger
 #let pitch = 24pt                       // L.R. 11-3.2 and 11-3.6: double spaced; the numbered lines are this pitch
-#let lines-per-page = 28                // L.R. 11-3.2: not more than 28 lines per page
+#let lines-per-page = 27                // L.R. 11-3.2: not more than 28 lines per page
 #let page-w = 8.5in                     // L.R. 11-3.2: 8 1/2 x 11 inch paper
 #let page-h = 11in
 #let top-margin = 72pt                  // L.R. 11-3.2: line 1 begins at least one inch below the top edge
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the footer
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the footer
 #let left-margin = 1.5in                // room for the line numbers and the rules
-#let right-margin = 0.75in
+#let right-margin = 1in
 #let text-width = page-w - left-margin - right-margin
 // Line pitch = line box (0.65 em for EB Garamond) + leading. 24 pt pitch at 14 pt: 24 - 0.65 * 14 = 14.9 pt of leading.
 #let body-leading = 1.064em

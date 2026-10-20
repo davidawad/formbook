@@ -15,13 +15,13 @@
 #let font-family = ("Times New Roman", "Liberation Serif")   // Central Guide 9004-1(b)(2)(C): Times New Roman is a listed typeface; Liberation Serif is its metric-compatible substitute (docs/FONTS.md)
 #let type-size = 12pt                   // Central Guide 9004-1(b)(2)(C): not smaller than 12 point (the floor)
 #let pitch = 24pt                       // Central Guide 9004-1(b)(2)(F): double-spaced; the numbered lines are this pitch
-#let lines-per-page = 28                // Central Guide 9004-1(b)(2)(B)(i): not more than 28 numbered lines per page
+#let lines-per-page = 27                // Central Guide 9004-1(b)(2)(B)(i): not more than 28 numbered lines per page
 #let page-w = 8.5in                     // Central Guide 9004-1(b)(2)(A): 8 1/2 by 11 inch pages
 #let page-h = 11in
 #let top-margin = 72pt                  // Central Guide 9004-1(b)(2)(C): line 1 at least 1 inch below the top edge
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the page number and footer
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the page number and footer
 #let left-margin = 1.5in                // room for the line numbers and the rules
-#let right-margin = 0.75in
+#let right-margin = 1in
 #let text-width = page-w - left-margin - right-margin
 #let body-leading = 1.345em             // double spacing: Liberation Serif's line box is about 0.655em, so 1.345em leading makes a 24 pt baseline pitch at 12 pt (measured, README.md)
 #let single-leading = 0.345em          // single spacing: 12 pt pitch at 12 pt type, so two single lines fit each numbered line (measured, README.md)

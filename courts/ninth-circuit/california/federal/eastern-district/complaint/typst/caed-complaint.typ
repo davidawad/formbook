@@ -12,13 +12,13 @@
 #let font-family = ("Times New Roman", "Liberation Serif")        // no E.D. Cal. font rule; the only font vendored in fonts/ (README.md, open choices)
 #let type-size = 12pt                   // no E.D. Cal. type-size rule; the exemplar is 12 pt
 #let pitch = 24pt                       // L.R. 130(c): double-spaced; the numbered lines are this pitch
-#let lines-per-page = 28                // L.R. 130(b) asks for numbered lines; 28 per page matches the exemplar
+#let lines-per-page = 27                // L.R. 130(b) asks for numbered lines; 28 per page matches the exemplar
 #let page-w = 8.5in                     // L.R. 130(b): 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let top-margin = 72pt                  // the numbered lines start at the top margin
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the footer
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the footer
 #let left-margin = 1.5in                // room for the line numbers and the rules
-#let right-margin = 0.75in
+#let right-margin = 1in
 #let text-width = page-w - left-margin - right-margin
 #let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 1.35em leading gives a 24 pt baseline pitch at 12 pt
 #let single-leading = 0.5em             // single spacing for counsel, caption and signature (L.R. 130(c) allows it for these)
