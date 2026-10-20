@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"       // Rule 23(d)(2): one consistent proportional typeface. Vendored in fonts/.
+#let font-family = "Liberation Serif"   // Rule 23(d)(2): one consistent proportional typeface. No face named (docs/FONTS.md): Liberation Serif.
 #let type-size = 14pt                  // Rule 23(d)(2): 14-point type produced by a proportional print font.
 #let double-leading = 1.07em           // Rule 23(d)(2)-(3): double spacing, no more than 3 lines per inch.
                                        // Calibrated so the baseline pitch is 24.1 pt (see README, "Calibration").

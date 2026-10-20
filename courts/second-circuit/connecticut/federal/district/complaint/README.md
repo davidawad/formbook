@@ -55,7 +55,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 - YAML frontmatter, then the body.
 - Frontmatter fields: `case_number` (with judge initials), `court` (list of lines), `caption.parties` (list of `{names, designation}`; "v." is inserted between parties), `brief_title`, `lead_in` (unnumbered lead-in paragraph, optional), `jury_demand` (true puts "DEMAND FOR JURY TRIAL" in the caption), `date`, `signature` (`signer`, `bar` (optional), `lines`).
-- Body: blank-line-separated chunks. `#` = level 1 heading, `##` = level 2, `###` = level 3. A chunk starting `1. `, `- ` or `* ` is a list. Any other chunk is a numbered paragraph. A chunk beginning with `[unnumbered]` is an unnumbered paragraph.
+- Body: blank-line-separated chunks. `#` = level 1 heading, `##` = level 2, `###` = level 3. A chunk starting `1. `, `- ` or `* ` is a list. Any other chunk is a numbered paragraph. A chunk beginning with `<!-- unnumbered -->` (an HTML comment, which the template strips) is an unnumbered paragraph. This replaces a bare `[unnumbered]` prefix, which printed as text the filing does not show.
 - Do not put paragraph numbers in the text: a chunk that starts `12. ` is read as a list and lettered. The sample's paragraph numbers were stripped for this reason.
 
 ## Known gaps and open choices

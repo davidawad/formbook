@@ -208,7 +208,7 @@ Due to Defendant’s violation(s) of Connecticut Statute Title 42, Ch. 743b § 1
 
 # PRAYER FOR RELIEF
 
-[unnumbered] Wherefore, Plaintiffs, MICHELLE & JARETT FORZANO, respectfully pray for judgment as follows:
+<!-- unnumbered --> Wherefore, Plaintiffs, MICHELLE & JARETT FORZANO, respectfully pray for judgment as follows:
 
 1. An order approving revocation of acceptance of the subject vehicle;
 2. The “full purchase price” of the vehicle, collateral charges, finance charges, incidental and consequential damages under all Counts above;
@@ -221,4 +221,4 @@ Due to Defendant’s violation(s) of Connecticut Statute Title 42, Ch. 743b § 1
 
 # DEMAND FOR JURY TRIAL
 
-[unnumbered] Please take notice that Plaintiffs, MICHELLE & JARETT FORZANO, demand a jury trial in this case.
+<!-- unnumbered --> Please take notice that Plaintiffs, MICHELLE & JARETT FORZANO, demand a jury trial in this case.

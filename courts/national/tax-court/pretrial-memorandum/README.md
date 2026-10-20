@@ -5,7 +5,7 @@
 | Check | Result |
 |---|---|
 | Exemplar | yes: `usage/FILED-EXAMPLE-pretrial-memorandum.pdf` (1 filer, respondent) |
-| Render (`tools/render.sh`) | ok: `usage/OUTPUT-pretrial-memorandum.typst.pdf`, 7 pages, EB Garamond only, no typst warnings. `usage/OUTPUT-pretrial-memorandum-2.typst.pdf` (fictional sample, 3 pages) still renders as before |
+| Render (`tools/render.sh`) | ok: `usage/OUTPUT-pretrial-memorandum.typst.pdf`, 7 pages, Liberation Serif only, no typst warnings. `usage/OUTPUT-pretrial-memorandum-2.typst.pdf` (fictional sample, 3 pages) still renders as before |
 | Overlay (`tools/overlay.sh`) | ok: `usage/OVERLAY-duffy-8711-16-pretrial-memorandum.pdf` and `.txt`. Page map (sample page to exemplar page; exemplar pages are memorandum pages 1 to 23): 1→2, 2→3, 3→4, 4→13, 5→20, 6→21, 7→23. The pairing is by word overlap and is diagnostic only: pages 4 to 7 pair with later memorandum pages because the sample omits memorandum pages 7 to 21 |
 | Pages reviewed | 7 of 7 for the transcribed sample (Gate 2, below); 3 of 3 for the fictional sample |
 
@@ -62,7 +62,7 @@ Known gaps: the form in the sample order is a 2000-era layout with placeholder v
 - **Open choice (flagged):** the form fields are single-spaced. Rule 23(d)(2) requires double spacing "between each line of text", and it is not settled whether a labeled form field or a table cell is "text" for that purpose. The template follows the Court's form, which is single-spaced. If the Court reads the rule to cover the fields, change `field`, `form-block` and the tables to `double-leading`; the page count grows.
 - **Signature block.** As in the petition: the date, a rule above the name, the bar number and contact lines. Kept on one page.
 - **Page numbers.** Centered at the foot of each page on the 3/4-inch line (see Margins).
-- **Typeface.** EB Garamond at 14 pt. Rule 23(d)(2) requires one consistent typeface, 14-point proportional (or 12-point nonproportional); it names no face as a requirement (its examples, Times New Roman and Century Schoolbook, are introduced by "e.g." in the petition's copy of the rule). Any proportional face therefore meets the rule, so the template keeps EB Garamond. The vendored substitutes are in `docs/FONTS.md`; switch only if the Court or the trial judge asks for another face. Face required: no. Font: EB Garamond.
+- **Typeface.** Liberation Serif at 14 pt. Rule 23(d)(2) requires one consistent typeface, 14-point proportional (or 12-point nonproportional); it names no face as a requirement (its examples, Times New Roman and Century Schoolbook, are introduced by "e.g." in the petition's copy of the rule). Any proportional face therefore meets the rule, so the template uses Liberation Serif, the face `docs/FONTS.md` gives when no face is named (EB Garamond was replaced: its glyph bounds put body text outside the 1 in top margin, DEF-FORM-002). Switch only if the Court or the trial judge asks for another face. Face required: no. Font: Liberation Serif.
 
 ## Calibration
 
@@ -112,13 +112,13 @@ Unchanged from 2026-10-14 (the pass above, sha256 `bb43d4cc...` of the old `OUTP
 - The exemplar is a respondent's memorandum from a bankruptcy docket (the DOJ cover letter is pages 1 to 3 of the filing and is not in the exemplar file). The form's field labels match the filing's; the narrative sections follow the filing.
 - The sample is fictional and three pages long. The brief's 8 to 14 page target applies to a long exemplar and does not apply here.
 - The trial calendar and the date of the trial session are frontmatter values. The template does not compute the 21-day deadline or any other date.
-- The mechanical gates of `tools/check.sh` (`checks.yaml`) were not written for this doc type. Checks run by hand here: render (no warnings), font names (`pdffonts`: EB Garamond only), margins (bounding boxes), line pitch (bounding boxes), and the Gate 2 review above.
+- The mechanical gates of `tools/check.sh` (`checks.yaml`) were not written for this doc type. Checks run by hand here: render (no warnings), font names (`pdffonts`: Liberation Serif only), margins (bounding boxes), line pitch (bounding boxes), and the Gate 2 review above.
 
 ## Engines
 
 **docx** (`docx/reference.docx` from `docx/build-reference.sh`, and `docx/tax-pretrial-memorandum.lua`). Output: `usage/OUTPUT-pretrial-memorandum-2.docx` and `usage/OUTPUT-pretrial-memorandum-2.docx.pdf` (LibreOffice conversion, 3 pages).
 
-- Matches the typst output: EB Garamond 14 pt throughout (`pdffonts` shows only EBGaramond-Regular and EBGaramond-Bold); letter, 1 in side margins, 1 in top and bottom; double spacing as exact 24.1 pt lines and single as exact 14.7 pt; 0.5 in first-line indent; caption; the form fields single-spaced with the values at 3.6 in; the attorney block side by side; the amounts table ruled; the status boxes drawn as bordered boxes with an X when checked; flush-left bold section headings; the witness table ruled; the signature block with the rule.
+- Matches the typst output: Liberation Serif 14 pt throughout; letter, 1 in side margins, 1 in top and bottom; double spacing as exact 24.1 pt lines and single as exact 14.7 pt; 0.5 in first-line indent; caption; the form fields single-spaced with the values at 3.6 in; the attorney block side by side; the amounts table ruled; the status boxes drawn as bordered boxes with an X when checked; flush-left bold section headings; the witness table ruled; the signature block with the rule.
 - Differs: (1) the "NAME OF CASE" value wraps to three lines in LibreOffice, two in typst (about 1 pt of width); (2) the checkboxes are text boxes, so they are taller than they are wide; (3) the "SUMMARY OF FACTS" heading moves to page 3 (typst keeps the heading and three lines on page 2), so later pages shift by a few lines; (4) the caption, form and signature block are tables built by the filter, so positions differ by a few points.
 - Pages reviewed: 1-3 of 3 (`.docx.pdf`), at 60 dpi.
 - BLOCKED: none. `tools/check.sh --engine docx` cannot run yet: `checks.yaml` is not in the court folder. The docx was checked by hand (fonts, word text, page images); Word itself was not available, so the file was opened in LibreOffice only.

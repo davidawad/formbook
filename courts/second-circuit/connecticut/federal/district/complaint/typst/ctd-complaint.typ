@@ -103,7 +103,7 @@
 
 /// Numbered paragraphs and lettered lists. Each blank-line-separated chunk of markdown that is neither a
 /// heading nor a list is one numbered paragraph (FRCP 10(b)), unless it starts with the marker
-/// `[unnumbered]`, which the template strips (the wherefore clause and the jury demand are unnumbered).
+/// `<!-- unnumbered -->` (an HTML comment, stripped by the template) (the wherefore clause and the jury demand are unnumbered).
 /// Each chunk ends with v(body-leading), so n lines take exactly n line-pitches and the text stays on the grid.
 /// Numbering is a plain counter in this function, not a `show par` rule: a show rule that re-wraps
 /// paragraph content recurses without end in typst 0.15.
@@ -125,8 +125,8 @@
         v(body-leading)
       })
     } else {
-      let unnumbered = t.starts-with("[unnumbered]")
-      let text-body = if unnumbered { t.slice("[unnumbered]".len()).trim() } else { t }
+      let unnumbered = t.starts-with("<!-- unnumbered -->")
+      let text-body = if unnumbered { t.slice("<!-- unnumbered -->".len()).trim() } else { t }
       if not unnumbered { n += 1 }
       // A paragraph breaks across pages like any text; the heading in front of it stays with its first line.
       block(width: 100%, {

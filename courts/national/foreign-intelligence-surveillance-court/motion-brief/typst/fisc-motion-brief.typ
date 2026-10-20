@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a stated convention)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // Vendored in /fonts. FISC-FORM-004: the rules name no font.
+#let font-family = "Liberation Serif"      // Vendored in /fonts. FISC-FORM-004: the rules name no font, so docs/FONTS.md gives Liberation Serif (Times metrics).
 #let type-size = 12pt                      // FISC-FORM-004: the rules name no size. Convention: 12 pt.
 #let page-margin = 1in                     // FISC-FORM-003: the rules name no margin. Convention: 1 in.
 #let body-leading = 1.35em                 // FISC-FORM-002: "typed (double-spaced)". Gives a 24 pt baseline pitch at 12 pt (see README).
