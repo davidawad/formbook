@@ -61,7 +61,7 @@ authorities:
         find: "§ 54.02(h)"
 ---
 
-<!-- contents -->
+{{contents}}
 
 To the Honorable Justices of the Fifth Court of Appeals:
 
@@ -104,13 +104,13 @@ J.R. asks this Court to:
 - Vacate the certification order; and,
 - Any and all other relief to which Appellant might be entitled.
 
-<!-- signature -->
+{{signature}}
 
 # Certificate of Compliance
 
-This is to certify that this brief complies with Rule 9.4 of the Texas Rules of Appellate Procedure because it is computer generated and contains 1077 words, excluding the parts of the brief exempted by Rule 9.4(i)(1). This brief also complies with the typeface requirements of Rule 9.4(e) because it has been prepared in a conventional typeface of 14 points for the text and 12 points for the footnotes.
+This is to certify that this brief complies with Rule 9.4 of the Texas Rules of Appellate Procedure because it is computer generated and contains {{word-count}} words, excluding the parts of the brief exempted by Rule 9.4(i)(1). This brief also complies with the typeface requirements of Rule 9.4(e) because it has been prepared in a conventional typeface of 14 points for the text and 12 points for the footnotes.
 
-<!-- signer -->
+{{signer}}
 
 # Certificate of Service
 
@@ -120,4 +120,4 @@ Jennifer Balido, DCDAappeals@dallascounty.org
 
 Jessie R. Allen, Jessie.allen@dallascounty.org
 
-<!-- signer -->
+{{signer}}

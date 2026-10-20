@@ -160,7 +160,7 @@
       heading-block(align(center, text(weight: "bold", t.slice(3))))
     } else if t.starts-with("# ") {
       heading-block(align(center, text(weight: "bold", upper(t.slice(2)))))
-    } else if t == "<!-- SIGNATURE -->" {
+    } else if t == "{{SIGNATURE}}" {
       signature-block(meta)
     } else if t == "{{NOTICE_21_DAY}}" {
       notice-21-day(meta)
