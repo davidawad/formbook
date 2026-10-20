@@ -141,7 +141,7 @@ Plaintiff is entitled to a writ of mandamus under 28 U.S.C. §1361 to compel the
 
 # IX. Prayer for Relief
 
-(unnumbered) **WHEREFORE**, Plaintiff prays for judgment as follows:
+**WHEREFORE**, Plaintiff prays for judgment as follows:
 
 1. For a declaratory judgment that Defendants’ implementation of the PPP in a manner that causes debtors in bankruptcy, including Plaintiff, to be ineligible is “in excess of statutory jurisdiction, authority, or limitations, or short of statutory right,” in violation of the APA;
 2. For entry of preliminary and permanent injunctive relief enjoining Defendants from denying Plaintiff a loan under the PPP based on Plaintiff’s status as a chapter 11 debtor;

@@ -217,7 +217,7 @@ I certify that on July 29, 2026, a true and correct copy of the foregoing pleadi
 
 # CERTIFICATE OF COMPLIANCE
 
-Pursuant to the Texas Rule of Appellate Procedure 9.4(i)(1), (3), I hereby certify that this Appellate Brief contains {{word-count}} words. This is a computer-generated document using 14-point typeface for all text and 12-point footnotes.
+Pursuant to the Texas Rule of Appellate Procedure 9.4(i)(1), (3), I hereby certify that this Appellate Brief contains 1,947 words. This is a computer-generated document using 14-point typeface for all text and 12-point footnotes.
 
 # APPENDIX
 

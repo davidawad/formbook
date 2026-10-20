@@ -222,8 +222,12 @@
     })
 
   // Footnotes: single-spaced.
-  show footnote.entry: set text(size: footnote-size)
-  show footnote.entry: set par(leading: single-leading, justify: true)
+  // A footnote is kept whole on one page, not split across a page break.
+  show footnote.entry: it => block(breakable: false, {
+    set text(size: footnote-size)
+    set par(leading: single-leading, justify: true)
+    it
+  })
 
   court-title()
   v(body-leading * 2)

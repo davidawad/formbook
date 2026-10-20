@@ -56,3 +56,5 @@ Differs:
 - Prayer items have a 16 pt gap after each item in both; the docx spacing reads slightly looser.
 
 BLOCKED: none.
+
+Markers (default-eval fix): the INPUT no longer carries an `(unnumbered) ` prefix. The WHEREFORE prayer lead-in (`**WHEREFORE**, ...`) is unnumbered by rule in `prb-adversary-complaint.typ` (a `(unnumbered) ` prefix, if present, is still honored and stripped), so the printed text matches the INPUT. The docx filter (`docx/prb-complaint.lua`) still keys on the old prefix, so its WHEREFORE paragraph is numbered in docx output until that filter is updated (not done here).
