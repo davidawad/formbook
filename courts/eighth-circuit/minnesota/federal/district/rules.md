@@ -1,5 +1,7 @@
 # District of Minnesota (civil district): rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `mnd`. Scope: civil complaints and motion memoranda in `complaint/` and `motion-brief/`. Verified 2026-10-17 against the primary sources below. Re-check whenever a cited rule is amended and at least annually; confirm the assigned judge's procedures and current ECF guide before filing.
 
 ## Sources

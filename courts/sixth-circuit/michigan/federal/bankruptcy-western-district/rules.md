@@ -1,8 +1,18 @@
 # Western District of Michigan Bankruptcy Court rules
 
+Verified against the sources listed under Sources on 2026-10-14.
+
 Primary sources checked 2026-10-14. Re-check every six months and before changing a template. Sources: [Local Bankruptcy Rules, effective October 11, 2026](https://www.miwb.uscourts.gov/sites/miwb/files/local_rules/Final%20-%20Clean_1.pdf), [ECF Administrative Procedures](https://www.miwb.uscourts.gov/sites/miwb/files/local_rules/ECF%20Admin%20Procedures%20Amended%20Eff%2012-13-21.pdf), and the Federal Rules of Bankruptcy Procedure at https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-bankruptcy-procedure.
 
 Kinds: **M** mandatory; **C** convention; **T** template contract; **A** author responsibility.
+
+## Sources
+
+| Tag | Source | URL |
+|---|---|---|
+| S1 | Local Bankruptcy Rules, effective October 11, 2026 | https://www.miwb.uscourts.gov/sites/miwb/files/local_rules/Final%20-%20Clean_1.pdf |
+| S2 | ECF Administrative Procedures | https://www.miwb.uscourts.gov/sites/miwb/files/local_rules/ECF%20Admin%20Procedures%20Amended%20Eff%2012-13-21.pdf |
+| S3 | www.uscourts.gov | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-bankruptcy-procedure |
 
 ## Form and signature (all doc types)
 

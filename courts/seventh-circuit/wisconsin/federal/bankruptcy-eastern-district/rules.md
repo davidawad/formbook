@@ -1,5 +1,7 @@
 # United States Bankruptcy Court, Eastern District of Wisconsin: bankruptcy filing rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias WIEB. This inventory covers the court's existing adversary-complaint and motion-brief document types. Verified 2026-10-17 against the federal bankruptcy rules and official local-rules source below. Check current local rules, judge procedures, and case-specific orders at filing.
 
 ## Primary sources

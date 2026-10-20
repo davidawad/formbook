@@ -1,5 +1,7 @@
 # E.D. Cal. civil filings: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `caed`. Applies to complaint and motion-brief document types under this court folder. Primary sources verified 2026-10-17 against the Local Rules effective February 23, 2026. Re-check on every local-rule revision and at least annually; inspect the court's current rules page before relying on this document.
 
 ## Sources

@@ -1,5 +1,7 @@
 # S.D. Cal. civil filings: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `casd`. Applies to complaint and motion-brief document types under this court folder. The court rules landing page identifies the current edition as Local Rules dated June 1, 2026; verified against that primary-source edition listing on 2026-10-17. Re-check on every amendment and at least annually. Consult the assigned judge's current chambers rules, which the court publishes separately.
 
 ## Sources

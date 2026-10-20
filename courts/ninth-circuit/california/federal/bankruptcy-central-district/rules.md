@@ -1,5 +1,7 @@
 # C.D. Cal. bankruptcy filings: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `cacb`. Applies to adversary complaints and motion briefs. Primary sources verified 2026-10-17. Re-check upon every Local Bankruptcy Rules revision and at least annually; the court's current rules page controls. Bankruptcy judge standing orders may add requirements.
 
 ## Sources

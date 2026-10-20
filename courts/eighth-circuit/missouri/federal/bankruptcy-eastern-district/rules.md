@@ -1,5 +1,7 @@
 # Bankruptcy Court, Eastern District of Missouri: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `moeb`. Scope: adversary complaints and motion memoranda/packages in `adversary-complaint/` and `motion-brief/`. Verified 2026-10-17 against the current local rules effective December 1, 2025, the court's Procedures Manual, and official federal rules. The court has proposed further local-rule changes for December 1, 2026; re-check their approval/effective date and current text before use. Otherwise check every posted rules update and at least annually.
 
 ## Sources

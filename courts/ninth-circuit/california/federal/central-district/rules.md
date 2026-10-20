@@ -1,5 +1,7 @@
 # C.D. Cal. civil filings: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `cacd`. Applies to the complaint and motion-brief document types under this court folder. Primary sources verified 2026-10-17. Re-check on each court rule amendment and at least annually; C.D. Cal. generally revises rules on June 1 and December 1.
 
 ## Sources

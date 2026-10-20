@@ -1,5 +1,7 @@
 # Seventh Circuit Court of Appeals: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `ca7`. Covers opening, answering, and reply briefs. Verified 2026-10-17 against the current rules linked by the Court's rules page; its posted rules PDF states current through December 1, 2025.
 
 ## Primary sources

@@ -1,5 +1,7 @@
 # District Court for the Northern Mariana Islands: civil complaint and motion brief
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `nmid`. Source review date 2026-10-17. **Current adoption is unconfirmed:** the court-hosted source located is a 2017 “Final Redline,” and the applicable adopted version could not be established. Treat the rule summaries below as provisional pending authoritative confirmation; see `docs/box-blocked.md`.
 
 ## Primary sources

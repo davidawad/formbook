@@ -1,5 +1,7 @@
 # S.D. Cal. bankruptcy filings: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `casb`. Applies to adversary complaints and motion briefs. Primary sources verified 2026-10-17 against the court's current rules pages and current rule edition. Proposed amendments published September 3, 2026 were not effective at verification; the court announced a planned December 1, 2026 effective date. Re-check before filing, at each amendment and at least annually.
 
 ## Sources

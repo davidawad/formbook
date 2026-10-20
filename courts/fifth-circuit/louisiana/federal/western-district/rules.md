@@ -1,5 +1,7 @@
 # Western District of Louisiana: complaints and motion memoranda
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `lawd`. Scope: civil complaints and motion memoranda in the Western District of Louisiana. Verified on 2026-10-17 against the court's Local Rules effective May 7, 2024 and the cited Federal Rules. Court-wide requirements apply to both doc types; differences appear below.
 
 ## Sources

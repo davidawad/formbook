@@ -1,8 +1,18 @@
 # Sixth Circuit Bankruptcy Appellate Panel rules
 
+Verified against the sources listed under Sources on 2026-10-17.
+
 Primary sources checked 2026-10-17. Re-check every six months and before changing a template. Sources: [Federal Rules of Bankruptcy Procedure 8014](https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-bankruptcy-procedure), [8015](https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-bankruptcy-procedure), and [8019](https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-bankruptcy-procedure), effective December 1, 2024; [BAP Local Rules](https://www.ca6.uscourts.gov/sites/ca6/files/documents/bap/BapLocalRules.pdf), amended December 1, 2014; and [BAP Practice Guidelines](https://www.ca6.uscourts.gov/sites/ca6/files/documents/bap/2018%20BAP%20Practice%20Guidelines%20.pdf), revised August 2018.
 
 Kinds: **M** mandatory by rule; **C** convention; **T** template contract; **A** author responsibility.
+
+## Sources
+
+| Tag | Source | URL |
+|---|---|---|
+| S1 | Federal Rules of Bankruptcy Procedure 8014 | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-bankruptcy-procedure |
+| S2 | BAP Local Rules | https://www.ca6.uscourts.gov/sites/ca6/files/documents/bap/BapLocalRules.pdf |
+| S3 | BAP Practice Guidelines | https://www.ca6.uscourts.gov/sites/ca6/files/documents/bap/2018%20BAP%20Practice%20Guidelines%20.pdf |
 
 ## Form and length (opening, answering and reply briefs)
 

@@ -1,5 +1,7 @@
 # Bankruptcy Court, District of Minnesota: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `mnb`. Scope: adversary complaints and motion packages/memoranda in `adversary-complaint/` and `motion-brief/`. Verified 2026-10-17. The complete local rules are effective September 3, 2025. Re-check on each annual/posted rule update and at least annually; confirm judge orders, current forms, and CM/ECF procedures before filing.
 
 ## Sources

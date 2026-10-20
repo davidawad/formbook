@@ -1,8 +1,19 @@
 # Sixth Circuit Court of Appeals rules
 
+Verified against the sources listed under Sources on 2026-10-17.
+
 Primary sources were checked 2026-10-17. Re-check the court rules and FRAP at least every six months and before changing a template. The court's [combined rules PDF](https://www.ca6.uscourts.gov/sites/ca6/files/documents/rules_procedures/Full%20Rules%20w%20FRAP_0.pdf) states Sixth Circuit Rules last amended July 13, 2026 and FRAP last amended December 1, 2025. The [Briefs Checklist](https://www.ca6.uscourts.gov/sites/ca6/files/documents/rules_procedures/Briefs%20Checklist.pdf) is an official filing aid.
 
 Kinds: **M** mandatory by rule; **C** convention; **T** template contract; **A** author responsibility. Requirements below are shared by the doc types unless a section narrows them.
+
+## Sources
+
+| Tag | Source | URL |
+|---|---|---|
+| S1 | combined rules PDF | https://www.ca6.uscourts.gov/sites/ca6/files/documents/rules_procedures/Full%20Rules%20w%20FRAP_0.pdf |
+| S2 | Briefs Checklist | https://www.ca6.uscourts.gov/sites/ca6/files/documents/rules_procedures/Briefs%20Checklist.pdf |
+| S3 | www.uscourts.gov | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-appellate-procedure |
+| S4 | www.ca6.uscourts.gov | https://www.ca6.uscourts.gov/cmecf-user-manual |
 
 ## Form and length
 

@@ -1,5 +1,7 @@
 # Bankruptcy Court for the District of Alaska: filing form rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `akb`. Court-wide rules for the adversary-complaint folder. Primary local source: [District of Alaska Local Bankruptcy Rules (December 2024)](https://www.akb.uscourts.gov/sites/akb/files/2024%20-%20Local%20Bankruptcy%20Rules.pdf), verified 2026-10-17 against the court-hosted PDF and its text extraction. The Federal Rules were checked against the official U.S. Courts current-rules pages on 2026-10-17. Re-check the court's local-rules page and linked primary texts before each release and at least every six months; check earlier when an amendment or new effective date is announced.
 
 ## Sources

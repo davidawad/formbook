@@ -1,5 +1,7 @@
 # District of Alaska: filing form rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `akd`. Court-wide rules for the complaint and motion-brief folders. Primary local source: [District of Alaska Local Civil Rules, effective October 15, 2025](https://www.akd.uscourts.gov/sites/akd/files/local_rules/Local_Civil_Rules_10-2025.pdf), verified 2026-10-17 against the court's rules page and the PDF text. The Federal Rules were checked against the official U.S. Courts current-rules page on 2026-10-17. Re-check the court rules page and linked primary texts before each release and at least every six months; check earlier when the court announces amendments or a new effective date.
 
 ## Sources

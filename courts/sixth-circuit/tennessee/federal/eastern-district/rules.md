@@ -1,8 +1,17 @@
 # Eastern District of Tennessee rules
 
+Verified against the sources listed under Sources on 2026-10-14.
+
 Primary sources checked 2026-10-14. Re-check every six months and before changing a template. Sources: [E.D. Tenn. Local Rules](https://www.tned.uscourts.gov/local-rules), revised April 8, 2026 (LR 5.1); FRCP 7, 8, 10, 11, 12, 38, https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure.
 
 Kinds: **M** mandatory; **C** convention; **T** template contract; **A** author responsibility.
+
+## Sources
+
+| Tag | Source | URL |
+|---|---|---|
+| S1 | E.D. Tenn. Local Rules | https://www.tned.uscourts.gov/local-rules |
+| S2 | www.uscourts.gov | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure |
 
 ## Form and caption (complaints and motion briefs)
 

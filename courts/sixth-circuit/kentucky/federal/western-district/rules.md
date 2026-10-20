@@ -1,8 +1,20 @@
 # Western District of Kentucky rules
 
+Verified against the sources listed under Sources on 2026-10-14.
+
 Primary sources checked 2026-10-14. Re-check every six months and before changing a template. Sources: Joint General Order 2026-01 (re-states the Joint Local Rules), https://www.kywd.uscourts.gov/sites/kywd/files/Joint%20General%20Order%2026-01-1.pdf; FRCP 10, https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure; Joint General Order 2017-01A, https://www.kyed.uscourts.gov/sites/kyed/files/JGO17-01A.pdf; and Joint General Order 2018-02, https://www.kywd.uscourts.gov/sites/kywd/files/general-ordes/Joint_General_Order_2018-02.pdf.
 
 Kinds: **M** mandatory; **C** convention; **T** template contract; **A** author responsibility.
+
+## Sources
+
+| Tag | Source | URL |
+|---|---|---|
+| S1 | www.kywd.uscourts.gov | https://www.kywd.uscourts.gov/sites/kywd/files/Joint%20General%20Order%2026-01-1.pdf |
+| S2 | www.uscourts.gov | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure |
+| S3 | www.kyed.uscourts.gov | https://www.kyed.uscourts.gov/sites/kyed/files/JGO17-01A.pdf |
+| S4 | www.kywd.uscourts.gov | https://www.kywd.uscourts.gov/sites/kywd/files/general-ordes/Joint_General_Order_2018-02.pdf |
+| S5 | www.kywd.uscourts.gov | https://www.kywd.uscourts.gov/ |
 
 ## Form (complaint and motion brief)
 

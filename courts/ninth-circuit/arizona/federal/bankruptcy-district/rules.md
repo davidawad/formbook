@@ -1,5 +1,7 @@
 # Bankruptcy Court for the District of Arizona: filing form rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `arb`. Court-wide rules for the adversary-complaint and motion-brief folders. Primary local source: [Local Rules of Bankruptcy Procedure, revised through June 2026](https://www.azb.uscourts.gov/sites/azb/files/Local%20Rules%20Final%20Effective%20June%201%202026.pdf), verified 2026-10-17 against the court's local-rules page and PDF text. Federal rules were checked against the official U.S. Courts current-rules pages on 2026-10-17. Re-check before each release and at least every six months, or sooner if the court announces an amendment or effective date.
 
 ## Sources

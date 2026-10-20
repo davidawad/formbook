@@ -1,5 +1,7 @@
 # United States District Court, Central District of Illinois: filing rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias ILCD. This rules inventory covers the court's existing complaint and motion-brief document types. Verified 2026-10-17 against the primary sources below. Check the current local rules, assigned judge's procedures, and case-specific orders at filing; those authorities control where they add requirements.
 
 ## Primary sources

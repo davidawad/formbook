@@ -1,5 +1,7 @@
 # District of Montana: complaint and motion brief rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `mtd`. Verified 2026-10-17 against the court's rules effective December 1, 2025 (in force at verification) and the future Dec. 1, 2026 version to check changed language. Re-check every six months and before filing.
 
 ## Sources

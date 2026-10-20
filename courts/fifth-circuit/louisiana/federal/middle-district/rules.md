@@ -1,5 +1,7 @@
 # Middle District of Louisiana: complaints and motion memoranda
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `lamd`. Scope: civil complaints and motion memoranda in the Middle District of Louisiana. Verified on 2026-10-17 against the court's posted Local Rules (effective August 18, 2022) and the cited Federal Rules. Court-wide requirements apply to both doc types; differences appear below.
 
 ## Sources

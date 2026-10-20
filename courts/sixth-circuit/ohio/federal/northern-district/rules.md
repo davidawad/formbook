@@ -1,8 +1,17 @@
 # Northern District of Ohio rules
 
+Verified against the sources listed under Sources on 2026-10-17.
+
 Primary sources checked 2026-10-17. Re-check every six months and before changing a template. Sources: [N.D. Ohio Local Rules, current compilation](https://www.ohnd.uscourts.gov/sites/ohnd/files/Civil_Rules_4-15-2025.pdf), revised April 15, 2025 (LR 3.13, 7.1 and 10.1); [Federal Rules of Civil Procedure](https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure).
 
 Kinds: **M** mandatory; **C** convention; **T** template contract; **A** author responsibility.
+
+## Sources
+
+| Tag | Source | URL |
+|---|---|---|
+| S1 | N.D. Ohio Local Rules, current compilation | https://www.ohnd.uscourts.gov/sites/ohnd/files/Civil_Rules_4-15-2025.pdf |
+| S2 | Federal Rules of Civil Procedure | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure |
 
 ## Form, caption and signature (all doc types)
 

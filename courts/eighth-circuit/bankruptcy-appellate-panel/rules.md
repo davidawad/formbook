@@ -1,5 +1,7 @@
 # Eighth Circuit Bankruptcy Appellate Panel briefs: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `bap8`. Scope: opening, answering, and reply briefs before the United States Bankruptcy Appellate Panel for the Eighth Circuit. Verified on 2026-10-17 against the official BAP local-rules publication and the current Federal Rules of Bankruptcy Procedure publication. Re-check the Panel's rules page and national rule publication before every template refresh and at least annually; re-check after a rules amendment or standing order.
 
 ## Primary sources

@@ -1,5 +1,7 @@
 # Western District of Missouri: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `mowd`. Scope: civil complaints and motion memoranda in `complaint/` and `motion-brief/`. Verified 2026-10-17 against primary sources, including the court's local rules effective July 9, 2026. Re-check upon rule revision and at least annually; check current judge-specific procedures and the CM/ECF manual before filing.
 
 ## Sources

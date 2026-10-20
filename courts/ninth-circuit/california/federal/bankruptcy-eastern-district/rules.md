@@ -1,5 +1,7 @@
 # E.D. Cal. bankruptcy filings: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `caeb`. Applies to adversary complaints. Primary sources verified 2026-10-17. Re-check on every published local rule amendment and at least annually; the court listed its Local Bankruptcy Rules effective April 2, 2026 as current at verification. Check judge procedures and current forms before filing.
 
 ## Sources

@@ -1,5 +1,7 @@
 # U.S. Bankruptcy Court, N.D. New York: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `nynb`. Scope: papers filed by counsel through CM/ECF in the United States Bankruptcy Court for the Northern District
 of New York, for the doc types in this folder: `adversary-complaint` (the complaint commencing an adversary proceeding)
 and `motion-brief` (a memorandum of law in support of a motion, in a case or an adversary proceeding). Verified against

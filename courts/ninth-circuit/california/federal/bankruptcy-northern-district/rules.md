@@ -1,5 +1,7 @@
 # N.D. Cal. bankruptcy filings: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `canb`. Applies to adversary complaints. Primary sources verified 2026-10-17 against Bankruptcy Local Rules effective May 4, 2026. Re-check on each amendment and at least annually; judge procedures and standing orders may add requirements.
 
 ## Sources

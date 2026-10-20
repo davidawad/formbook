@@ -1,5 +1,7 @@
 # Bankruptcy Court, Western District of Missouri: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `mowb`. Scope: adversary complaints and motion memoranda in `adversary-complaint/` and `motion-brief/`. Verified 2026-10-17 against the official rules compilation adopted January 5, 2026 and posted court orders. Re-check on every rule/order update and at least annually; apply the current Bankruptcy CM/ECF procedures and assigned judge's orders.
 
 ## Sources

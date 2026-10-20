@@ -1,5 +1,7 @@
 # N.D. Cal. civil filings: rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `cand`. Applies to complaint and motion-brief document types under this court folder. Primary source verified 2026-10-17 against Civil Local Rules effective October 2, 2026. Re-check at each published revision and at least annually; judge standing orders can add requirements.
 
 ## Sources

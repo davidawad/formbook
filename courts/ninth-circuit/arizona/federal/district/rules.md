@@ -1,5 +1,7 @@
 # District of Arizona: civil filing form rules
 
+Verified against the primary sources cited in this file on 2026-10-17.
+
 Alias `azd`. Court-wide rules for the complaint and motion-brief folders. Primary local source: [Local Rules of Civil Procedure (2025–2026), effective December 1, 2025](https://www.azd.uscourts.gov/sites/azd/files/local-rules/LRCiv%202025.pdf), verified 2026-10-17 against the court's current local-rules page and PDF text. Federal rules were checked against the official U.S. Courts current-rules pages on 2026-10-17. Re-check before each release and at least every six months, or sooner if the court posts an amendment or new effective date.
 
 ## Sources
