@@ -69,7 +69,7 @@
 #let line-numbers() = {
   for i in range(1, lines-per-page + 1) {
     place(top + left, dx: 0pt, dy: top-margin + (i - 1) * pitch,
-      block(width: left-margin - 0.42in, height: pitch,
+      block(width: left-margin - 0.5in, height: pitch,
         align(right, text(size: type-size, str(i)))))
   }
 }

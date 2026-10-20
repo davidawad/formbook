@@ -76,7 +76,7 @@
 #let pleading-background() = {
   for i in range(1, lines-per-page + 1) {
     place(top + left, dx: 0pt, dy: top-margin + (i - 1) * line-pitch,
-      block(width: left-margin - 0.42in, height: line-pitch,
+      block(width: left-margin - 0.5in, height: line-pitch,
         align(right, text(size: type-size, top-edge: "cap-height", bottom-edge: "baseline", str(i)))))
   }
   place(top + left, dx: left-margin - 0.2in, line(start: (0pt, 0pt), end: (0pt, page-h), stroke: 0.75pt))

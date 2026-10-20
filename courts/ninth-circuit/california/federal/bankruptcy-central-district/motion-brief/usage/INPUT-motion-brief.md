@@ -155,7 +155,7 @@ Service information continued on attached page.
 
 Service information continued on attached page.
 
-3\. SERVED BY PERSONAL DELIVERY, OVERNIGHT MAIL, FACSIMILE TRANSMISSION OR EMAIL (state method for each person or entity served): Pursuant to F.R.Civ.P. 5 and/or controlling LBR, on (date) ______________, I served the following persons and/or entities by personal delivery, overnight mail service, or (for those who consented in writing to such service method), by facsimile transmission and/or email as follows. Listing the judge here constitutes a declaration that personal delivery on, or overnight mail to, the judge will be completed no later than 24 hours after the document is filed.
+3\. SERVED BY PERSONAL DELIVERY, OVERNIGHT MAIL, FACSIMILE TRANSMISSION OR EMAIL (state method for each person or entity served): Pursuant to F.R.Civ.P. 5 and/or controlling LBR, on (date) \_\_\_\_\_\_\_\_\_\_\_\_\_\_, I served the following persons and/or entities by personal delivery, overnight mail service, or (for those who consented in writing to such service method), by facsimile transmission and/or email as follows. Listing the judge here constitutes a declaration that personal delivery on, or overnight mail to, the judge will be completed no later than 24 hours after the document is filed.
 
 Service information continued on attached page.
 
