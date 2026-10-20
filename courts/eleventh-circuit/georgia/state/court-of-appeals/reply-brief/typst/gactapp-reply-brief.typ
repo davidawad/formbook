@@ -19,7 +19,7 @@
 #let body-leading = 1.65em                 // Rule 2 (c) (2): no less than double spacing. With typst's default line box this gives a
                                            // baseline pitch of about 32.3 pt = 2 x the 1.15 em single line of this face at 14 pt.
 #let single-leading = 0.45em               // Rule 2 (c) (2) excludes block quotations, headings, captions and footnotes: single-spaced.
-#let page-margin = 1in                     // Rule 24 (c): not less than one inch at top, sides and bottom.
+#let page-margin = (top: 1in + 4pt, bottom: 1in + 4pt, x: 1in)  // Rule 24 (c): not less than one inch at top, sides and bottom; 4 pt more so a descender or a superscript stays inside the 1 in margin
 #let para-indent = 0.5in
 #let toc-depth = 3
 #let sig-indent = 3.2in                    // signature block starts right of centre (style; exemplars do the same).

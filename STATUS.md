@@ -424,12 +424,12 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 38 |
 | Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 36 |
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 27 |
-| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 38 |
+| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 39 |
 | Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 47 |
 | Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 34 |
-| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 42 |
+| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 45 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 414 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 418 |
 
 ## Typst per doc type
 
@@ -733,7 +733,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | iasb | [adversary-complaint](courts/eighth-circuit/iowa/federal/bankruptcy-southern-district/adversary-complaint) | yes | 1 | yes | 1 | up for review | **complete** |
 | iasb | [motion-brief](courts/eighth-circuit/iowa/federal/bankruptcy-southern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | iand | [complaint](courts/eighth-circuit/iowa/federal/northern-district/complaint) | yes | 1 | yes | 1 | in progress | **complete** |
-| iand | [motion-brief](courts/eighth-circuit/iowa/federal/northern-district/motion-brief) | yes | 1 | yes | 1 | in progress | **complete** |
+| iand | [motion-brief](courts/eighth-circuit/iowa/federal/northern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | iasd | [complaint](courts/eighth-circuit/iowa/federal/southern-district/complaint) | yes | 1 | yes | 1 | up for review | **complete** |
 | iasd | [motion-brief](courts/eighth-circuit/iowa/federal/southern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | mnb | [adversary-complaint](courts/eighth-circuit/minnesota/federal/bankruptcy-district/adversary-complaint) | yes | 1 | yes | 2 | in progress | **complete** |
@@ -906,14 +906,14 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | gamd | [complaint](courts/eleventh-circuit/georgia/federal/middle-district/complaint) | yes | 1 | yes | 1 | up for review | **complete** |
 | gamd | [motion-brief](courts/eleventh-circuit/georgia/federal/middle-district/motion-brief) | yes | 1 | yes | 1 | in progress | **complete** |
 | gand | [complaint](courts/eleventh-circuit/georgia/federal/northern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
-| gand | [motion-brief](courts/eleventh-circuit/georgia/federal/northern-district/motion-brief) | yes | 1 | yes | 2 | in progress | **complete** |
+| gand | [motion-brief](courts/eleventh-circuit/georgia/federal/northern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | gasd | [complaint](courts/eleventh-circuit/georgia/federal/southern-district/complaint) | yes | 1 | yes | 1 | up for review | **complete** |
 | gasd | [motion-brief](courts/eleventh-circuit/georgia/federal/southern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | gactapp | [answering-brief](courts/eleventh-circuit/georgia/state/court-of-appeals/answering-brief) | yes | 1 | yes | 1 | up for review | **complete** |
-| gactapp | [motion-brief](courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief) | yes | 1 | yes | 1 | in progress | **complete** |
+| gactapp | [motion-brief](courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | gactapp | [opening-brief](courts/eleventh-circuit/georgia/state/court-of-appeals/opening-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | gactapp | [petition-for-rehearing](courts/eleventh-circuit/georgia/state/court-of-appeals/petition-for-rehearing) | yes | 1 | yes | 1 | up for review | **complete** |
-| gactapp | [reply-brief](courts/eleventh-circuit/georgia/state/court-of-appeals/reply-brief) | yes | 1 | yes | 1 | in progress | **complete** |
+| gactapp | [reply-brief](courts/eleventh-circuit/georgia/state/court-of-appeals/reply-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | ga | [answering-brief](courts/eleventh-circuit/georgia/state/supreme-court/answering-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | ga | [motion-brief](courts/eleventh-circuit/georgia/state/supreme-court/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | ga | [opening-brief](courts/eleventh-circuit/georgia/state/supreme-court/opening-brief) | yes | 1 | yes | 1 | up for review | **complete** |

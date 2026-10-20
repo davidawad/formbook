@@ -208,7 +208,7 @@
 #let gand-motion-brief(meta, body) = {
   set page(
     paper: "us-letter",
-    margin: margin,
+    margin: (x: margin, top: margin, bottom: margin + 4pt),  // the bottom edge of the last line (a descender) stays inside the 1 in margin
     footer: page-footer(),
   )
   set text(font: font-family, size: type-size, lang: "en")

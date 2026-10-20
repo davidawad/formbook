@@ -18,7 +18,7 @@
 #let type-size = 14pt                   // Rule 2 (c) (3): serif, proportionally spaced, 14-point or larger, footnotes included
 #let body-leading = 1.65em              // Rule 2 (c) (2): no less than double spacing (baseline pitch about 32.3 pt = 2 x the 1.15 em single line at 14 pt)
 #let single-leading = 0.35em            // Rule 2 (c) (2) exclusions: caption, headings, block quotations, footnotes
-#let margins = (top: 1in, bottom: 1in, x: 1in)  // Rule 24 (c): not less than one inch at top, sides and bottom
+#let margins = (top: 1in + 4pt, bottom: 1in + 4pt, x: 1in)  // Rule 24 (c): not less than one inch at top, sides and bottom; 4 pt more so a superscript footnote marker or a descender stays inside the 1 in margin
 #let para-indent = 0.5in
 #let sig-indent = 3.25in
 #let toc-depth = 3
@@ -122,7 +122,9 @@
     block(above: 1.2em, below: 0.8em, sticky: true, strong(group.heading))
     for e in group.entries {
       block(above: 0.9em, below: 0.9em, breakable: false)[
-        #inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)]) #h(4pt) #if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+        #grid(columns: (1fr, auto), column-gutter: 4pt,
+          [#inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)])],
+          [#if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }])
       ]
     }
   }

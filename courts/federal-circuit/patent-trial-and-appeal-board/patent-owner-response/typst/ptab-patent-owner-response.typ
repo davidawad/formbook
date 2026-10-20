@@ -192,6 +192,7 @@
   // Footnotes: 14-point, single spaced.
   show footnote.entry: set text(size: type-size)
   show footnote.entry: set par(leading: single-leading, first-line-indent: 0pt)
+  show footnote.entry: pad.with(bottom: 0.25em)   // the last line's descenders stay inside the 1 in bottom margin
 
   // Cover: no page number, no header.
   cover(meta)

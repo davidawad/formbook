@@ -39,9 +39,9 @@
 
 /// Round a block up to whole double-spaced lines, so the text after it stays on the pitch of body text.
 /// A one-line block is otherwise shorter than the leading that follows it, and the lines collide.
-#let on-grid(c, sticky: false) = context {
-  let h = measure(width: text-width, c).height
-  block(width: text-width, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, sticky: sticky, c)
+#let on-grid(c, sticky: false, width: text-width) = context {
+  let h = measure(width: width, c).height
+  block(width: width, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, sticky: sticky, c)
 }
 
 /// Heading text: body size (typst's default heading size is larger), double-spaced if it wraps, so each line sits on the pitch.
@@ -164,7 +164,7 @@
       inl(t)
       v(body-leading * 0.5)
     } else if t.starts-with(">") {
-      block(width: text-width, inset: (left: 0.5in, right: 0.5in), on-grid({
+      pad(left: 0.5in, right: 0.5in, on-grid(width: text-width - 1in, {
         set par(leading: single-leading, first-line-indent: 0pt)
         inl(t.trim(">").trim())
       }))
@@ -197,7 +197,7 @@
     margin: margin,
     footer: context align(center, text(size: type-size, counter(page).display("1"))),
   )
-  set text(font: font-family, size: type-size, lang: "en")
+  set text(font: font-family, size: type-size, lang: "en", top-edge: "ascender", bottom-edge: "descender")
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
 
   // Headings: level 1 centered caps; level 2 bold, flush left; level 3 italic, flush left. Each is kept with what follows.
