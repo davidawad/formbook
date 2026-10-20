@@ -1,3 +1,4 @@
-# AZD-LCR 7.1(b)(1) (rules.md AZD-FORM-003): right margin at least 1/2 inch; the templates set 3/4 in on the right.
+# AZD-LCR 7.1(b)(1) (rules.md AZD-FORM-003): right margin at least 1/2 inch; no bottom margin is stated. The template sets 3/4 in on the right and a 48 pt bottom (footer).
+# The checker takes one margin for all four sides (bead fb-o14j), so this uses the smallest side, 48 pt.
 params:
-  margin_pt: 54
+  margin_pt: 48

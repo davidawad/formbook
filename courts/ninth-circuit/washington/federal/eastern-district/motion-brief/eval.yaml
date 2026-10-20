@@ -1,0 +1,4 @@
+# Pleading-paper template: the local rules fix numbered left-margin lines and state no bottom margin; the template keeps a 48 pt bottom margin (footer) and 54 pt right margin.
+# The checker takes one margin for all four sides (bead fb-o14j), so this uses the smallest side, 48 pt.
+params:
+  margin_pt: 48
