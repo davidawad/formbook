@@ -10,7 +10,7 @@ Courts under `courts` (375).
 | [United States Court of Federal Claims](federal-circuit/court-of-federal-claims) | `uscfc` | up for review | — | — | — | 14 |
 | [United States Court of International Trade](federal-circuit/court-of-international-trade) | `cit` | up for review | — | — | — | 14 |
 | [United States Court of Veteran Appeals](federal-circuit/court-of-veteran-appeals) | `cavc` | up for review | — | — | — | 14 |
-| [Patent Trial and Appeal Board](federal-circuit/patent-trial-and-appeal-board) | `ptab` | in progress | — | — | — | 14 |
+| [Patent Trial and Appeal Board](federal-circuit/patent-trial-and-appeal-board) | `ptab` | up for review | — | — | — | 14 |
 | [Trademark Trial and Appeal Board](federal-circuit/trademark-trial-and-appeal-board) | `ttab` | in progress | — | — | — | 14 |
 | [U S Air Force Court of Criminal Appeals](military/air-force-court-of-criminal-appeals) | `afcca` | up for review | — | — | — | 14 |
 | [U S Army Court of Criminal Appeals](military/army-court-of-criminal-appeals) | `acca` | up for review | — | — | — | 14 |
@@ -47,11 +47,11 @@ Courts under `courts` (375).
 | [Superior Court of Rhode Island](first-circuit/rhode-island/state/superior-court) | `risuperct` | todo | — | — | — | 0 |
 | [Supreme Court of Rhode Island](first-circuit/rhode-island/state/supreme-court) | `ri` | in progress | — | — | — | 14 |
 | [Court of Appeals for the Second Circuit](second-circuit/court-of-appeals) | `ca2` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Connecticut](second-circuit/connecticut/federal/bankruptcy-district) | `ctb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Connecticut](second-circuit/connecticut/federal/bankruptcy-district) | `ctb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Connecticut](second-circuit/connecticut/federal/district) | `ctd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. New York](second-circuit/new-york/federal/bankruptcy-eastern-district) | `nyeb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. New York](second-circuit/new-york/federal/bankruptcy-northern-district) | `nynb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, S.D. New York](second-circuit/new-york/federal/bankruptcy-southern-district) | `nysb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, S.D. New York](second-circuit/new-york/federal/bankruptcy-southern-district) | `nysb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. New York](second-circuit/new-york/federal/bankruptcy-western-district) | `nywb` | up for review | — | — | — | 14 |
 | [District Court, E.D. New York](second-circuit/new-york/federal/eastern-district) | `nyed` | up for review | — | — | — | 14 |
 | [District Court, N.D. New York](second-circuit/new-york/federal/northern-district) | `nynd` | up for review | — | — | — | 14 |
@@ -156,7 +156,7 @@ Courts under `courts` (375).
 | [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Appellate Panel of The Sixth Circuit](sixth-circuit/bankruptcy-appellate-panel) | `bap6` | up for review | — | — | — | 14 |
 | [Court of Appeals for the Sixth Circuit](sixth-circuit/court-of-appeals) | `ca6` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, E.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-eastern-district) | `kyeb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, E.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-eastern-district) | `kyeb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-western-district) | `kywb` | in progress | — | — | — | 0 |
 | [District Court, E.D. Kentucky](sixth-circuit/kentucky/federal/eastern-district) | `kyed` | in progress | — | — | — | 0 |
 | [District Court, W.D. Kentucky](sixth-circuit/kentucky/federal/western-district) | `kywd` | up for review | — | — | — | 14 |
@@ -187,12 +187,12 @@ Courts under `courts` (375).
 | [Court of Appeals for the Seventh Circuit](seventh-circuit/court-of-appeals) | `ca7` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, C.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-central-district) | `ilcb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-northern-district) | `ilnb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, S.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-southern-district) | `ilsb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, S.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-southern-district) | `ilsb` | up for review | — | — | — | 14 |
 | [District Court, C.D. Illinois](seventh-circuit/illinois/federal/central-district) | `ilcd` | up for review | — | — | — | 14 |
 | [District Court, N.D. Illinois](seventh-circuit/illinois/federal/northern-district) | `ilnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Illinois](seventh-circuit/illinois/federal/southern-district) | `ilsd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-northern-district) | `innb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, S.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-southern-district) | `insb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, S.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-southern-district) | `insb` | up for review | — | — | — | 14 |
 | [District Court, N.D. Indiana](seventh-circuit/indiana/federal/northern-district) | `innd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Indiana](seventh-circuit/indiana/federal/southern-district) | `insd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-eastern-district) | `wieb` | up for review | — | — | — | 14 |
@@ -249,16 +249,16 @@ Courts under `courts` (375).
 | [Court of Appeals for the Ninth Circuit](ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | built | — | 71 |
 | [United States Bankruptcy Court, D. Alaska](ninth-circuit/alaska/federal/bankruptcy-district) | `akb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Alaska](ninth-circuit/alaska/federal/district) | `akd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Arizona](ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | in progress | — | — | — | 14 |
-| [United States District Court for the District of Arizona](ninth-circuit/arizona/federal/district) | `azd` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, C.D. California](ninth-circuit/california/federal/bankruptcy-central-district) | `cacb` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, E.D. California](ninth-circuit/california/federal/bankruptcy-eastern-district) | `caeb` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, N.D. California](ninth-circuit/california/federal/bankruptcy-northern-district) | `canb` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, S.D. California](ninth-circuit/california/federal/bankruptcy-southern-district) | `casb` | in progress | — | — | — | 14 |
-| [United States District Court for the Central District of California](ninth-circuit/california/federal/central-district) | `cacd` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Arizona](ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | up for review | — | — | — | 14 |
+| [United States District Court for the District of Arizona](ninth-circuit/arizona/federal/district) | `azd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, C.D. California](ninth-circuit/california/federal/bankruptcy-central-district) | `cacb` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, E.D. California](ninth-circuit/california/federal/bankruptcy-eastern-district) | `caeb` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, N.D. California](ninth-circuit/california/federal/bankruptcy-northern-district) | `canb` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, S.D. California](ninth-circuit/california/federal/bankruptcy-southern-district) | `casb` | up for review | — | — | — | 14 |
+| [United States District Court for the Central District of California](ninth-circuit/california/federal/central-district) | `cacd` | up for review | — | — | — | 14 |
 | [United States District Court for the Eastern District of California](ninth-circuit/california/federal/eastern-district) | `caed` | in progress | — | — | — | 14 |
-| [United States District Court for the Northern District of California](ninth-circuit/california/federal/northern-district) | `cand` | in progress | — | — | — | 14 |
-| [United States District Court for the Southern District of California](ninth-circuit/california/federal/southern-district) | `casd` | in progress | — | — | — | 14 |
+| [United States District Court for the Northern District of California](ninth-circuit/california/federal/northern-district) | `cand` | up for review | — | — | — | 14 |
+| [United States District Court for the Southern District of California](ninth-circuit/california/federal/southern-district) | `casd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Guam](ninth-circuit/guam/federal/bankruptcy-district) | `gub` | in progress | — | — | — | 14 |
 | [District Court, D. Guam](ninth-circuit/guam/federal/district) | `gud` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Hawaii](ninth-circuit/hawaii/federal/bankruptcy-district) | `hib` | up for review | — | — | — | 14 |
@@ -270,12 +270,12 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, D. Nevada](ninth-circuit/nevada/federal/bankruptcy-district) | `nvb` | in progress | — | — | — | 14 |
 | [District Court, D. Nevada](ninth-circuit/nevada/federal/district) | `nvd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, Northern Mariana Islands](ninth-circuit/northern-mariana-islands/federal/bankruptcy-district) | `nmib` | in progress | — | — | — | 0 |
-| [District Court, Northern Mariana Islands](ninth-circuit/northern-mariana-islands/federal/district) | `nmid` | in progress | — | — | — | 14 |
+| [District Court, Northern Mariana Islands](ninth-circuit/northern-mariana-islands/federal/district) | `nmid` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Oregon](ninth-circuit/oregon/federal/bankruptcy-district) | `orb` | up for review | — | — | — | 14 |
 | [District Court, D. Oregon](ninth-circuit/oregon/federal/district) | `ord` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, E.D. Washington](ninth-circuit/washington/federal/bankruptcy-eastern-district) | `waeb` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, W.D. Washington](ninth-circuit/washington/federal/bankruptcy-western-district) | `wawb` | in progress | — | — | — | 14 |
-| [District Court, E.D. Washington](ninth-circuit/washington/federal/eastern-district) | `waed` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, E.D. Washington](ninth-circuit/washington/federal/bankruptcy-eastern-district) | `waeb` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Washington](ninth-circuit/washington/federal/bankruptcy-western-district) | `wawb` | up for review | — | — | — | 14 |
+| [District Court, E.D. Washington](ninth-circuit/washington/federal/eastern-district) | `waed` | up for review | — | — | — | 14 |
 | [District Court, W.D. Washington](ninth-circuit/washington/federal/western-district) | `wawd` | up for review | — | — | — | 14 |
 | [Alaska Court of Appeals](ninth-circuit/alaska/state/court-of-appeals) | `alaskactapp` | in progress | — | — | — | 0 |
 | [Alaska Supreme Court](ninth-circuit/alaska/state/supreme-court) | `alaska` | in progress | — | — | — | 14 |

@@ -6,11 +6,11 @@ Courts under `courts/second-circuit` (23).
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [Court of Appeals for the Second Circuit](court-of-appeals) | `ca2` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Connecticut](connecticut/federal/bankruptcy-district) | `ctb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Connecticut](connecticut/federal/bankruptcy-district) | `ctb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Connecticut](connecticut/federal/district) | `ctd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. New York](new-york/federal/bankruptcy-eastern-district) | `nyeb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. New York](new-york/federal/bankruptcy-northern-district) | `nynb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, S.D. New York](new-york/federal/bankruptcy-southern-district) | `nysb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, S.D. New York](new-york/federal/bankruptcy-southern-district) | `nysb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. New York](new-york/federal/bankruptcy-western-district) | `nywb` | up for review | — | — | — | 14 |
 | [District Court, E.D. New York](new-york/federal/eastern-district) | `nyed` | up for review | — | — | — | 14 |
 | [District Court, N.D. New York](new-york/federal/northern-district) | `nynd` | up for review | — | — | — | 14 |

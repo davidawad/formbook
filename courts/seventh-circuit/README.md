@@ -8,12 +8,12 @@ Courts under `courts/seventh-circuit` (22).
 | [Court of Appeals for the Seventh Circuit](court-of-appeals) | `ca7` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, C.D. Illinois](illinois/federal/bankruptcy-central-district) | `ilcb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Illinois](illinois/federal/bankruptcy-northern-district) | `ilnb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, S.D. Illinois](illinois/federal/bankruptcy-southern-district) | `ilsb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, S.D. Illinois](illinois/federal/bankruptcy-southern-district) | `ilsb` | up for review | — | — | — | 14 |
 | [District Court, C.D. Illinois](illinois/federal/central-district) | `ilcd` | up for review | — | — | — | 14 |
 | [District Court, N.D. Illinois](illinois/federal/northern-district) | `ilnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Illinois](illinois/federal/southern-district) | `ilsd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Indiana](indiana/federal/bankruptcy-northern-district) | `innb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, S.D. Indiana](indiana/federal/bankruptcy-southern-district) | `insb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, S.D. Indiana](indiana/federal/bankruptcy-southern-district) | `insb` | up for review | — | — | — | 14 |
 | [District Court, N.D. Indiana](indiana/federal/northern-district) | `innd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Indiana](indiana/federal/southern-district) | `insd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Wisconsin](wisconsin/federal/bankruptcy-eastern-district) | `wieb` | up for review | — | — | — | 14 |
