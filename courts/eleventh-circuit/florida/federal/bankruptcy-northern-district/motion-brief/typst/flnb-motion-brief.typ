@@ -128,8 +128,8 @@
   if words > word-limit { panic("flnb-motion-brief: memorandum of " + str(words) + " words exceeds the " + str(word-limit) + "-word limit (LR 7.1(F))") }
   let filled = body.replace("{{MEMO_WORDS}}", str(words))
   // The signature block sits after the WHEREFORE paragraph and before the certificates (LR 9013-1; LR 5.1(D)).
-  let parts = filled.split("{{SIGNATURE}}")
-  if parts.len() != 2 { panic("flnb-motion-brief: the sample must contain one {{SIGNATURE}} marker") }
+  let parts = filled.split("<!--SIGNATURE-->")
+  if parts.len() != 2 { panic("flnb-motion-brief: the sample must contain one <!--SIGNATURE--> marker") }
 
   set document(title: meta.title)
   set page(

@@ -152,9 +152,9 @@
   cover(meta)
 
   // The body is rendered as one markdown document, so footnote references and definitions work across it.
-  // A line reading [[signature]] places the signature block there (the certificate of service repeats it);
+  // A line reading <!--signature--> places the signature block there (the certificate of service repeats it);
   // without the marker, the signature block closes the document.
-  let pieces = body.split("[[signature]]")
+  let pieces = body.split("<!--signature-->")
   for (i, piece) in pieces.enumerate() {
     cmarker.render(piece, raw-typst: false, smart-punctuation: true, h1-level: 1)
     if i < pieces.len() - 1 {

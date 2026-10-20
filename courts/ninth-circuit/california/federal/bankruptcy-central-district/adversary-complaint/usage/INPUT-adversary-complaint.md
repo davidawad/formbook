@@ -86,7 +86,7 @@ Pre-petition, Debtor was a law firm that provided consumer debt resolution servi
 
 Tony Diab (“Mr. Diab”) owned, operated, dominated and controlled Debtor.
 
-On May 8, 2023, Trustee accepted his appointment as the Chapter 11 Trustee in the Bankruptcy Case. To the extent that Trustee was not appointed until after any of the events alleged in this Complaint, the allegations are based on information and belief. See *Soo Park v. Thompson*, 851 F.3d 910, 928 (9th Cir. 2017); *Miller v. City of Los Angeles*, 2014 U.S. Dist. LEXIS 198871, at *5 (C.D. Cal. Aug. 7, 2014).
+On May 8, 2023, Trustee accepted his appointment as the Chapter 11 Trustee in the Bankruptcy Case. To the extent that Trustee was not appointed until after any of the events alleged in this Complaint, the allegations are based on information and belief. See *Soo Park v. Thompson*, 851 F.3d 910, 928 (9th Cir. 2017); *Miller v. City of Los Angeles*, 2014 U.S. Dist. LEXIS 198871, at \*5 (C.D. Cal. Aug. 7, 2014).
 
 ## C. Ponzi Scheme
 
@@ -104,7 +104,7 @@ Based on the Ponzi Scheme presumption, the Court can presume that the Debtor had
 
 Debtor was insolvent when the Transfers occurred as evidenced by: (a) the 14 UCC-1 statements reflecting secured liens against the Debtor’s owned and after-acquired assets and the assignment or sale of substantial portions of the Debtor’s future income; (b) the priority and non-priority unsecured debt of nearly $142 million listed in Debtor’s schedules; (c) the $424 million of creditor claims filed in this Bankruptcy Case; and (d) Debtor’s balance sheets reflecting, at its highest point, $17.9 million of assets in November 2021.
 
-Moreover, insolvency is presumed as a matter of law where, as in this Bankruptcy Case, the debtor operated a Ponzi scheme. See, e.g., *Glob. Money Mgmt., L.P. v. McDonnold*, 2008 U.S. Dist. LEXIS 128733, at *15 (S.D. Cal. Feb. 27, 2008) (concluding that “if a Ponzi scheme is proven, then the debtor is proven insolvent from the time of its inception”).
+Moreover, insolvency is presumed as a matter of law where, as in this Bankruptcy Case, the debtor operated a Ponzi scheme. See, e.g., *Glob. Money Mgmt., L.P. v. McDonnold*, 2008 U.S. Dist. LEXIS 128733, at \*15 (S.D. Cal. Feb. 27, 2008) (concluding that “if a Ponzi scheme is proven, then the debtor is proven insolvent from the time of its inception”).
 
 ## F. The Subject Transfers
 

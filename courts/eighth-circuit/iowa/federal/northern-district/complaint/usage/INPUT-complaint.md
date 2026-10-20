@@ -138,7 +138,7 @@ By reason of the foregoing, IRP is entitled to an award of compensatory damages,
 
 # PRAYER FOR RELIEF
 
-UNNUMBERED: WHEREFORE, Plaintiff Iowa Rotocast Plastics, Inc. respectfully requests that this Court enter judgment in its favor and against Defendant FUSE, LLC as follows:
+<!--UNNUMBERED--> WHEREFORE, Plaintiff Iowa Rotocast Plastics, Inc. respectfully requests that this Court enter judgment in its favor and against Defendant FUSE, LLC as follows:
 
 1. A declaration that the claims of U.S. Patent No. 10,514,164 are invalid;
 2. A declaration that Grizzly does not infringe, directly or indirectly, any valid and enforceable claim of U.S. Patent No. 10,514,164;
@@ -150,6 +150,6 @@ UNNUMBERED: WHEREFORE, Plaintiff Iowa Rotocast Plastics, Inc. respectfully reque
 
 # JURY DEMAND
 
-UNNUMBERED: Grizzly hereby demands trial by jury of all issues so triable in this Complaint.
+<!--UNNUMBERED--> Grizzly hereby demands trial by jury of all issues so triable in this Complaint.
 
-SIGNATURE
+<!--SIGNATURE-->

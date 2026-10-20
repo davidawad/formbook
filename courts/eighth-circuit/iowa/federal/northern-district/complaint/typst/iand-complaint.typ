@@ -122,7 +122,7 @@
 
 /// Body chunks (blank-line separated markdown): a heading, a list, the SIGNATURE marker, or a paragraph.
 /// Paragraphs are numbered when the sample says so (complaints; Fed. R. Civ. P. 10(b)); a paragraph that
-/// starts with "UNNUMBERED:" is not (the prayer's WHEREFORE and the jury demand). Numbering is
+/// starts with "<!--UNNUMBERED-->" is not (the prayer's WHEREFORE and the jury demand). Numbering is
 /// applied per chunk, not with a show rule: a show rule that re-wraps paragraph content recurses in typst 0.15.
 #let body(meta, src) = {
   let para-counter = counter("paragraph")
@@ -130,9 +130,9 @@
   let chunks = src.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
   for c in chunks {
     let t = c.trim()
-    let unnumbered = t.starts-with("UNNUMBERED:")
-    if unnumbered { t = t.slice("UNNUMBERED:".len()).trim() }
-    if t == "SIGNATURE" {
+    let unnumbered = t.starts-with("<!--UNNUMBERED-->")
+    if unnumbered { t = t.slice("<!--UNNUMBERED-->".len()).trim() }
+    if t == "<!--SIGNATURE-->" {
       signature-block(meta)
     } else if t.starts-with("#") {
       inl(t)

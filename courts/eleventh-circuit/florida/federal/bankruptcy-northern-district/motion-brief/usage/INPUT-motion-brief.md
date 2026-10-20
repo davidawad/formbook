@@ -80,7 +80,7 @@ The undersigned hereby certifies that he has attempted to confer in good faith w
 
 WHEREFORE, Defendant GC SERVICES LIMITED PARTNERSHIP respectfully requests this honorable Court dismiss the Complaint of Plaintiffs as to GC SERVICES LIMITED PARTNERSHIP, and for such other and further relief as the Court deems just and proper.
 
-{{SIGNATURE}}
+<!--SIGNATURE-->
 
 ## CERTIFICATE OF WORD COUNT
 

@@ -32,11 +32,11 @@ Courts under `courts/ninth-circuit` (65).
 | [United States Bankruptcy Court, Northern Mariana Islands](northern-mariana-islands/federal/bankruptcy-district) | `nmib` | in progress | — | — | — | 0 |
 | [District Court, Northern Mariana Islands](northern-mariana-islands/federal/district) | `nmid` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Oregon](oregon/federal/bankruptcy-district) | `orb` | up for review | — | — | — | 14 |
-| [District Court, D. Oregon](oregon/federal/district) | `ord` | in progress | — | — | — | 14 |
+| [District Court, D. Oregon](oregon/federal/district) | `ord` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Washington](washington/federal/bankruptcy-eastern-district) | `waeb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Washington](washington/federal/bankruptcy-western-district) | `wawb` | in progress | — | — | — | 14 |
 | [District Court, E.D. Washington](washington/federal/eastern-district) | `waed` | in progress | — | — | — | 14 |
-| [District Court, W.D. Washington](washington/federal/western-district) | `wawd` | in progress | — | — | — | 14 |
+| [District Court, W.D. Washington](washington/federal/western-district) | `wawd` | up for review | — | — | — | 14 |
 | [Alaska Court of Appeals](alaska/state/court-of-appeals) | `alaskactapp` | in progress | — | — | — | 0 |
 | [Alaska Supreme Court](alaska/state/supreme-court) | `alaska` | in progress | — | — | — | 14 |
 | [High Court of American Samoa](american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |

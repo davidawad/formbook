@@ -106,7 +106,7 @@
 })
 
 /// Markdown body, chunk by chunk (blank-line separated). A chunk is a heading (`#`, `##`, `###`), a
-/// block quotation (`>`), a numbered paragraph (marked `[numbered]`, as the facts are in the exemplar),
+/// block quotation (`>`), a numbered paragraph (marked `<!--numbered-->`, as the facts are in the exemplar),
 /// or a paragraph. Argument paragraphs are not numbered (the exemplar does not number them).
 #let body(md) = {
   let chunks = md.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
@@ -144,8 +144,8 @@
         pad(left: 1in, right: 0.5in, single(inl(lines.join("\n"))))
       })
     } else {
-      let numbered = t.starts-with("[numbered]")
-      let text = if numbered { t.slice("[numbered]".len()).trim(at: start) } else { t }
+      let numbered = t.starts-with("<!--numbered-->")
+      let text = if numbered { t.slice("<!--numbered-->".len()).trim(at: start) } else { t }
       let label = if numbered {
         n += 1
         [#n.]

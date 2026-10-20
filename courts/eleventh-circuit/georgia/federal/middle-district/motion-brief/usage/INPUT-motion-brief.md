@@ -50,7 +50,7 @@ Therefore, the possibility that a defendant acted unlawfully is not sufficient t
 
 ## II.    The official capacity claims against Captain King are duplicative of Plaintiff’s claims against Wilkinson County and must be dismissed.
 
-The Eleventh Circuit has held that “[t]here no longer exists a need to bring official-capacity actions against local government officials, because local government units can be sued directly.” Busby v. City of Orlando, 931 F.2d 764, 776 (11th Cir.1991)). Because the lawsuit against Captain King in his official capacity is actually a lawsuit against Wilkinson County, and Plaintiff has also sued the County, all of the official-capacity claims against Captain King are subject to dismissal. Robinson v. Integrative Det. Health Servs., No. 3:12–CV–20 (CAR), 2014 WL 1314947, at *12 (M.D.Ga. Mar. 28, 2014) (dismissing official capacity claim against Sheriff as duplicative of the plaintiff's claim against the County). Because Wilkinson County is a named party to this action, the official capacity claims against Captain King must be dismissed as a matter of law.[^3]
+The Eleventh Circuit has held that “[t]here no longer exists a need to bring official-capacity actions against local government officials, because local government units can be sued directly.” Busby v. City of Orlando, 931 F.2d 764, 776 (11th Cir.1991)). Because the lawsuit against Captain King in his official capacity is actually a lawsuit against Wilkinson County, and Plaintiff has also sued the County, all of the official-capacity claims against Captain King are subject to dismissal. Robinson v. Integrative Det. Health Servs., No. 3:12–CV–20 (CAR), 2014 WL 1314947, at \*12 (M.D.Ga. Mar. 28, 2014) (dismissing official capacity claim against Sheriff as duplicative of the plaintiff's claim against the County). Because Wilkinson County is a named party to this action, the official capacity claims against Captain King must be dismissed as a matter of law.[^3]
 
 ## III.   Wilkinson County is not a proper party and must be dismissed.
 
@@ -85,7 +85,7 @@ WHEREFORE, for the reasons set forth above and for such other reasons as may be 
 
 This 10th day of June, 2016.
 
-[[signature]]
+<!--signature-->
 
 # CERTIFICATE OF SERVICE
 
@@ -93,4 +93,4 @@ This is to certify that on this date I served the foregoing document upon all pa
 
 This 10th day of June, 2016.
 
-[[signature]]
+<!--signature-->
