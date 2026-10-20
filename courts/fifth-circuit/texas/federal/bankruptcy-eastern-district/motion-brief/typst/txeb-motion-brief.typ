@@ -126,7 +126,7 @@
     if b == "" { continue }
     let lines = b.split("\n").map(l => l.trim())
     let first = lines.at(0)
-    if first == "<<signature>>" {
+    if first == "<!-- signature -->" {
       signature-block(meta.signature)
     } else if first.starts-with("## ") {
       sub-heading(first.slice(3))
@@ -142,18 +142,18 @@
         block(width: text-width, inset: (left: block-indent), above: 0pt, below: 12pt,
           par(leading: single, spacing: 0pt, inl(l.slice(2))))
       }
-    } else if first.starts-with("~> ") {
+    } else if first.starts-with("<!-- right -->") {
       // Right half of the page, single spaced, unnumbered (certificate of service signature).
       block(width: text-width, inset: (left: sig-indent), above: 0pt, below: 0pt, breakable: false,
-        stack(dir: ttb, spacing: single, ..lines.map(l => inl(if l.starts-with("~> ") { l.slice(3) } else { l }))))
-    } else if first.starts-with("~| ") {
+        stack(dir: ttb, spacing: single, ..lines.map(l => inl(if l.starts-with("<!-- right -->") { l.slice("<!-- right -->".len()).trim() } else { l }))))
+    } else if first.starts-with("<!-- flush -->") {
       // Flush left, single spaced, unnumbered (addresses in a certificate).
       block(width: text-width, above: 0pt, below: 0pt, breakable: false,
-        stack(dir: ttb, spacing: single, ..lines.map(l => inl(if l.starts-with("~| ") { l.slice(3) } else { l }))))
-    } else if first.starts-with("~ ") {
+        stack(dir: ttb, spacing: single, ..lines.map(l => inl(if l.starts-with("<!-- flush -->") { l.slice("<!-- flush -->".len()).trim() } else { l }))))
+    } else if first.starts-with("<!-- unnumbered -->") {
       // Unnumbered, indented first line, double spaced (the lead-in and the closing request).
       block(width: text-width, above: 0pt, below: double, sticky: true,
-        par(leading: double, spacing: 0pt, h(indent) + inl(lines.join(" ").slice(2))))
+        par(leading: double, spacing: 0pt, h(indent) + inl(lines.join(" ").slice("<!-- unnumbered -->".len()).trim())))
     } else {
       num += 1
       block(width: text-width, above: 0pt, below: double,

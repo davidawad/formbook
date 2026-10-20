@@ -48,7 +48,7 @@ The local rules copy is dated "Revised 12/1/16". A later revision may exist on t
 
 - YAML frontmatter, then the body.
 - Frontmatter: `caption` (`debtor` optional; `parties` as a list of `{names, designation}`; "v." is inserted between parties), `chapter` (number), `case_number`, `adversary_number`, `division`, `title`, `counsel` (lines), `date`, `signature` (`firm` lines, `signer`, `lines`).
-- Body: blank-line-separated chunks. A `#` heading; a list (`1.`, `-`, `*`, `+`); or a paragraph. A paragraph is numbered unless it starts with `[unnumbered]`.
+- Body: blank-line-separated chunks. A `#` heading; a list (`1.`, `-`, `*`, `+`); or a paragraph. A paragraph is numbered unless it starts with `<!-- unnumbered -->` (an HTML comment, not printed).
 - Not supported: tables, footnotes, raw typst. The template does not number paragraphs in the text itself.
 
 ## Known gaps and open choices

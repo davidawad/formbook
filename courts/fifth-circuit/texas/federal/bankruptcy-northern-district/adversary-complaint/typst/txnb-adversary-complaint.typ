@@ -112,7 +112,7 @@
 })
 
 /// Numbered paragraphs (Fed. R. Civ. P. 10(b)). Each blank-line-separated chunk of markdown that is neither
-/// a heading nor a list is one numbered paragraph. A paragraph whose text starts with "[unnumbered]" is not
+/// a heading nor a list is one numbered paragraph. A paragraph whose text starts with "<!-- unnumbered -->" is not
 /// numbered (prayer, jury demand, or closing). Headings are kept with the paragraph after them.
 /// Numbering is per chunk, not with a `show par` rule: a show rule that re-wraps paragraph content recurses
 /// without end in typst 0.15.
@@ -126,9 +126,9 @@
     } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
       // Lists are lettered (a), (b), ... by the enum setting in the template.
       cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-    } else if t.starts-with("[unnumbered]") {
+    } else if t.starts-with("<!-- unnumbered -->") {
       h(para-indent)
-      cmarker.render(t.slice("[unnumbered]".len()).trim(), raw-typst: false, smart-punctuation: true, h1-level: 1)
+      cmarker.render(t.slice("<!-- unnumbered -->".len()).trim(), raw-typst: false, smart-punctuation: true, h1-level: 1)
     } else {
       // Numbered paragraph (Fed. R. Civ. P. 10(b)): the number is the first thing on the line.
       para-counter.step()

@@ -10,8 +10,8 @@ The primary TRAP PDF (https://www.txcourts.gov/media/1463134/texas-rules-of-appe
 
 | Rule | Requirement | Where the template uses it | Verification |
 |---|---|---|---|
-| TRAP 38.3 | the appellant may file a reply addressing any matter in the appellee's brief; no prescribed contents | front matter is empty (no `{{identity}}`); contents and index are still generated, as the filer did | secondary |
-| TRAP 9.4(i)(2)(C) | 7,500 words for a computer-generated reply brief in a court of appeals | `word-limit` = 7500; `assert` fails the render above it; `{{word-count}}` in the certificate | secondary |
+| TRAP 38.3 | the appellant may file a reply addressing any matter in the appellee's brief; no prescribed contents | front matter is empty (no `<!-- identity -->`); contents and index are still generated, as the filer did | secondary |
+| TRAP 9.4(i)(2)(C) | 7,500 words for a computer-generated reply brief in a court of appeals | `word-limit` = 7500; `assert` fails the render above it; the count typed in the markdown (literal) in the certificate | secondary |
 | TRAP 9.4(c)-(e), (g), 39.7, 9.5 | as for the opening brief | as for the opening brief | secondary |
 | Fifth Court local rules | local limits (a combined reply and cross-appellee brief has its own limit) | not encoded | secondary |
 
@@ -35,6 +35,6 @@ Render: 9 pages (cover; ii contents; iii index; body 1-6). Every page rendered a
 ## Engines
 
 - **typst** (`typst/`): the reference for the form.
-- **docx** (`docx/`): `usage/OUTPUT-reply-brief.docx` and `.docx.pdf` are from the earlier sample and were **not regenerated** on 2026-10-16 (no `soffice` on this box). The docx filter predates the placeholder contract (`{{contents}}`, `{{signature}}`, `{{signer}}`, `{{word-count}}`) and the `authorities` list; a re-render would print the placeholders literally and omit the index. BLOCKED until `docx/texapp.lua` is updated.
+- **docx** (`docx/`): `usage/OUTPUT-reply-brief.docx` and `.docx.pdf` are from the earlier sample and were **not regenerated** on 2026-10-16 (no `soffice` on this box). The docx filter predates the placeholder contract (`<!-- contents -->`, `<!-- signature -->`, `<!-- signer -->`, the count typed in the markdown (literal)) and the `authorities` list; a re-render would print the placeholders literally and omit the index. BLOCKED until `docx/texapp.lua` is updated.
 - BLOCKED: tools/check.sh docx gates 0 to 3 not run (no `checks.yaml`, `rules.md` at the level `check.sh` reads).
 - **latex**: not built for this doc type.

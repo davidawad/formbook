@@ -35,7 +35,7 @@ No font, type size, margin, paper, or spacing rule was found in FRBP 9013, FRBP 
 - Court title, caption (as for the complaint), then the title of the motion, centered and bold.
 - The 14-day negative notice: a bold heading "14-DAY NEGATIVE NOTICE – LBR 7007:" followed by the rule's text, single spaced, before the body.
 - Body: double spaced. Numbered paragraphs (1, 2, ...) with a 0.5-inch first-line indent; unnumbered "~ " paragraphs (the opening "COMES NOW" and the closing request); "# " centered bold headings (BACKGROUND FACTS, STANDARD, ARGUMENT AND AUTHORITIES); "## " bold flush-left sub-headings (unused); "> " block quotations (single spaced, indented 0.75 inch both sides); "- " relief items.
-- Signature: `<<signature>>` marks the place; "Dated" at left, the firm and the signer at right.
+- Signature: `<!-- signature -->` marks the place; "Dated" at left, the firm and the signer at right.
 - Certificate of service: `# CERTIFICATE OF SERVICE`, then "~" text, "~|" addresses (flush left) and "~>" signature (right half).
 
 ## What the overlay shows

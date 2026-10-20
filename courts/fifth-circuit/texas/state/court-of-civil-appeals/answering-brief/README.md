@@ -11,7 +11,7 @@ The primary TRAP PDF (https://www.txcourts.gov/media/1463134/texas-rules-of-appe
 | Rule | Requirement | Where the template uses it | Verification |
 |---|---|---|---|
 | TRAP 38.2(a)(1) | an appellee's brief follows Rule 38.1, except that the identity list is needed only to supplement or correct the appellant's, and the statement of the case, issues and facts may be omitted unless the appellee is dissatisfied with the appellant's | the sample's front matter is a "Supplemental List of Appellant's Counsel" (`identity`); its body keeps statements of the case and facts because the filer did | secondary |
-| TRAP 9.4(i)(2)(B) | 15,000 words, computer-generated | `word-limit` = 15000; `{{word-count}}` in the certificate | secondary |
+| TRAP 9.4(i)(2)(B) | 15,000 words, computer-generated | `word-limit` = 15000; the count typed in the markdown (literal) in the certificate | secondary |
 | TRAP 9.4(c)-(e), (g), 39.7, 9.5 | as for the opening brief | as for the opening brief | secondary |
 
 ## Exemplar and overlay
@@ -36,6 +36,6 @@ Render: 16 pages (cover; ii-iv: supplemental counsel, contents, index; body 1-12
 ## Engines
 
 - **typst** (`typst/`): the reference for the form.
-- **docx** (`docx/`): `usage/OUTPUT-answering-brief.docx` and `.docx.pdf` are from the earlier 8-page sample and were **not regenerated** on 2026-10-16 (no `soffice` on this box). The docx filter predates the placeholder contract (`{{contents}}`, `{{identity}}`, `{{signature}}`, `{{signer}}`, `{{word-count}}`) and the frontmatter `identity` and `authorities` lists, so a re-render would print the placeholders literally and omit the identity list and the index. BLOCKED until `docx/texapp.lua` is updated.
+- **docx** (`docx/`): `usage/OUTPUT-answering-brief.docx` and `.docx.pdf` are from the earlier 8-page sample and were **not regenerated** on 2026-10-16 (no `soffice` on this box). The docx filter predates the placeholder contract (`<!-- contents -->`, `<!-- identity -->`, `<!-- signature -->`, `<!-- signer -->`, the count typed in the markdown (literal)) and the frontmatter `identity` and `authorities` lists, so a re-render would print the placeholders literally and omit the identity list and the index. BLOCKED until `docx/texapp.lua` is updated.
 - BLOCKED: tools/check.sh docx gates 0 to 3 not run (no `checks.yaml`, `rules.md` at the level `check.sh` reads).
 - **latex**: not built for this doc type.
