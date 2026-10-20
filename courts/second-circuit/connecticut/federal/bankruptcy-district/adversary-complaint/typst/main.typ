@@ -14,14 +14,11 @@
   margin: (top: 1in, bottom: 1in, left: margin, right: margin),
   // L. Civ. R. 10 (via Local Bankr. R. 5005-1): the docket number with the judge's initials on every
   // pleading, and page numbers in the bottom margin after page 1.
-  header: context {
-    if counter(page).get().first() > 1 {
-      align(right, text(size: 10pt, "Adv. Pro. No. " + meta.adv_number + " (" + meta.judge + ")"))
-    }
-  },
+  header: none,
   footer: context {
     if counter(page).get().first() > 1 {
-      align(center, text(size: type-size, counter(page).display()))
+      grid(columns: (1fr, auto, 1fr), [], text(size: type-size, counter(page).display()),
+        align(right, text(size: 10pt, "Adv. Pro. No. " + meta.adv_number + " (" + meta.judge + ")")))
     }
   },
 )

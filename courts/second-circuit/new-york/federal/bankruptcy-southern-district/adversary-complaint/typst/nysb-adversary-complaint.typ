@@ -77,7 +77,7 @@
   let names = p.names.map(n => inl(n))
   if "note" in p and p.note != none {
     let k = names.len() - 1
-    names = names.slice(0, k) + ((names.at(k) + footnote(inl(p.note))),)
+    names = names.slice(0, k) + ((names.at(k) + footnote(numbering: "*", inl(p.note)) + counter(footnote).update(n => n - 1)),)
   }
   stack(dir: ttb, spacing: single-leading, ..(names + (align(right, inl(p.designation)),)))
 }

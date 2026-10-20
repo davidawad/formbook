@@ -52,7 +52,7 @@
   let out = names.slice(0, names.len() - 1).map(n => text(n))
   let last = text(names.last())
   if "debtor_footnote" in c {
-    last = last + footnote[#c.debtor_footnote]
+    last = last + super[\*]
   }
   out.push(last)
   out
@@ -93,6 +93,8 @@
   ]
   v(body-leading)
   caption(meta.caption, meta)
+  // The debtors note sits under the caption, in the flow (not a page-foot footnote).
+  if "debtor_footnote" in meta.caption { v(0.4em); block(text(size: 10pt, [\* #meta.caption.debtor_footnote])) }
   v(body-leading)
   block(width: text-width, below: body-leading)[
     #set par(leading: single-leading, spacing: 0pt)

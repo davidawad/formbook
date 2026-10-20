@@ -17,8 +17,10 @@
 #let docket-header = context {
   align(right, text(size: 10pt, "Adv. Pro. No. " + meta.adv_number + " (" + meta.judge + ")"))
 }
+// The docket line sits in the footer beside the page number (CTB-FORM-003 does not fix its position).
 #let page-number = context {
-  align(center, text(size: type-size, counter(page).display()))
+  grid(columns: (1fr, auto, 1fr), [], text(size: type-size, counter(page).display()),
+    align(right, text(size: 10pt, "Adv. Pro. No. " + meta.adv_number + " (" + meta.judge + ")")))
 }
 
 #set page(
@@ -37,7 +39,7 @@
 #pagebreak()
 
 // Front matter: roman numerals.
-#set page(numbering: "i", header: docket-header, footer: page-number)
+#set page(numbering: "i", footer: page-number)
 #counter(page).update(1)
 #toc()
 #pagebreak()
@@ -45,7 +47,7 @@
 #pagebreak()
 
 // Body: arabic numerals from 1.
-#set page(numbering: "1", header: docket-header, footer: page-number)
+#set page(numbering: "1", footer: page-number)
 #counter(page).update(1)
 #body-text(body)
 #signature(meta)

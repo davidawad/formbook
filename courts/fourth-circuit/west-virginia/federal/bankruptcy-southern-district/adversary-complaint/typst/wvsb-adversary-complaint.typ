@@ -56,6 +56,7 @@
 #let caption(meta) = {
   let sides = need(meta, "caption")
   let info = need(meta, "case_info")
+  let notes = ()
   let left = {
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
     for (i, side) in sides.enumerate() {
@@ -69,7 +70,7 @@
       lines(side.names)
       pad(left: 1.8in, {
         inl(side.designation)
-        if "footnote" in side { footnote(inl(side.footnote)) }
+        if "footnote" in side { super[\*]; notes.push(inl(side.footnote)) }
       })
     }
   }
@@ -81,6 +82,8 @@
     pad(right: 1.2em, bottom: 1em, left),
     right,
   )
+  // The debtors note sits under the caption, in the flow (not a page-foot footnote).
+  for n in notes { v(0.4em); block(text(size: 10pt, [\* #n])) }
 }
 
 // ---------------------------------------------------------------------------

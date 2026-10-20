@@ -61,7 +61,7 @@
     v(line-pitch * 0.5)
     for (i, n) in debtors.names.enumerate() {
       inl(n)
-      if i == 0 and "footnote" in debtors { footnote(inl(debtors.footnote)) }
+      if i == 0 and "footnote" in debtors { super[\*] }
       parbreak()
     }
     pad(left: 1.8in, inl(debtors.designation))
@@ -111,6 +111,8 @@
     pad(right: 1.2em, top: 0.6em, bottom: 1em, left-bottom),
     pad(left: 1.2em, top: 1.6em, bottom: 1em, right-bottom),
   )
+  // The debtors note sits under the caption, in the flow (not a page-foot footnote).
+  if "footnote" in debtors { v(0.4em); block(text(size: 10pt, [\* #inl(debtors.footnote)])) }
 }
 
 // ---------------------------------------------------------------------------

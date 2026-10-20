@@ -131,7 +131,7 @@
         block(width: 100%, { set par(leading: body-leading, first-line-indent: 0pt); h(para-indent); inl(t) })
       } else {
         para-counter.step()
-        block(width: 100%, { set par(leading: body-leading, first-line-indent: 0pt); context [#h(para-indent)#(para-counter.display()).#h(number-gap)#with-notes(t, notes)] })
+        block(width: 100%, breakable: not t.contains("[^"), { set par(leading: body-leading, first-line-indent: 0pt); context [#h(para-indent)#(para-counter.display()).#h(number-gap)#with-notes(t, notes)] })
       }
       // The heading is sticky, so it is never left at the foot of a page without its first line.
       let out = { pending; unit }
