@@ -16,8 +16,8 @@
 #let body-leading = 1.75em                 // NMCCA-FORM-002: double-spaced (see README: 2 x 1.2 em single pitch).
 #let single-leading = 0.55em               // single pitch 1.2 em for the caption, headings, quotations, footnotes, signature blocks.
 #let side-margin = 1in                     // NMCCA-FORM-003 (margins are not stated; 1 inch is conventional).
-#let top-margin = 1in
-#let bottom-margin = 1in                   // NMCCA-FORM-003: 1 inch bottom margin after the first page.
+#let top-margin = 1in + 5pt               // the first line's ascenders sit ~5 pt above a 1-inch text box (DEF-FORM-002); still >= 1 inch
+#let bottom-margin = 1in + 4pt               // NMCCA-FORM-003: 1 inch bottom margin after the first page (+4 pt for descenders, DEF-FORM-002).
 #let first-page-bottom-margin = 2in        // NMCCA-FORM-003: first page, for filing stamps.
 #let para-indent = 0.5in
 

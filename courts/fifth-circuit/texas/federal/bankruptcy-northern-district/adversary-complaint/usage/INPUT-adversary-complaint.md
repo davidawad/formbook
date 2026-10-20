@@ -39,7 +39,7 @@ signature:
     - "Attorneys for Prime Asset LLC, Plaintiff"
 ---
 
-[unnumbered] Plaintiff, Prime Asset LLC ("Prime Asset"), by way of this adversary complaint against (i) PrimaLend Capital Partners, LP ("PCP"), Good Floor Loans LLC ("GFL"), LNCMJ Management, LLC ("LNCMJ"), and PCAP Holdings, LP ("PCAP" and, together with PCP, GFL, and LNCMJ, "PrimaLend") and (ii) Mark Jensen ("Jensen" and, together with PrimaLend, the "Defendants"), hereby states as follows:
+<!-- unnumbered --> Plaintiff, Prime Asset LLC ("Prime Asset"), by way of this adversary complaint against (i) PrimaLend Capital Partners, LP ("PCP"), Good Floor Loans LLC ("GFL"), LNCMJ Management, LLC ("LNCMJ"), and PCAP Holdings, LP ("PCAP" and, together with PCP, GFL, and LNCMJ, "PrimaLend") and (ii) Mark Jensen ("Jensen" and, together with PrimaLend, the "Defendants"), hereby states as follows:
 
 # PRELIMINARY STATEMENT
 
@@ -127,47 +127,47 @@ Prime Asset's financial operations are supported by both an RLOC and a subordina
 
 At all relevant times, Jensen has been fully aware of, and taken full advantage of, the pervasive extent of his control over Prime Asset. Indeed, during a January 2025 conversation with Ryan, Jensen sought to convince Ryan to surrender his equity stake in Prime Asset, and Jensen emphasized that very control. While acknowledging that PrimaLend lacked de jure authority over Prime Asset's decision making, Jensen asserted that PrimaLend's "economic" control over Prime Asset gave PrimaLend a de facto equity stake in Prime Asset. Moreover, Jensen asserted that Ryan's equity was effectively held in trust for PrimaLend and that Jensen himself was akin to a de facto board member or company chairman. Jensen argued that Ryan was not losing anything by allowing PrimaLend to acquire Prime Asset's equity because Ryan's ownership was never truly his to begin with. Rather, PrimaLend allowed Ryan to maintain ownership of Prime Asset as an incentive to perform as CEO, when in reality PrimaLend effectively owned Prime Asset.
 
-[unnumbered] [Paragraphs 38 through 122 of the filing (filing pages 10 through 24, the remaining factual allegations and the first five counts) are omitted from this transcription. The text resumes at Count Six.]
+<!-- unnumbered --> [Paragraphs 38 through 122 of the filing (filing pages 10 through 24, the remaining factual allegations and the first five counts) are omitted from this transcription. The text resumes at Count Six.]
 
 # COUNT SIX
 
-[unnumbered] (Declaratory Judgment – All Defendants)
+<!-- unnumbered --> (Declaratory Judgment – All Defendants)
 
-[unnumbered] Prime Asset incorporates all preceding and subsequent allegations as if fully set forth herein.
+<!-- unnumbered --> Prime Asset incorporates all preceding and subsequent allegations as if fully set forth herein.
 
-[unnumbered] On June 26, 2024, without authority or proper documentation, Jensen unilaterally (despite having no equity or management interest in Prime Asset) caused Prime Asset to purchase from AOA approximately $18,000,000 in assets that were subject to over $35,000,000 in debt.
+<!-- unnumbered --> On June 26, 2024, without authority or proper documentation, Jensen unilaterally (despite having no equity or management interest in Prime Asset) caused Prime Asset to purchase from AOA approximately $18,000,000 in assets that were subject to over $35,000,000 in debt.
 
-[unnumbered] Jensen's unilateral action to transfer these debt tranches to Prime Asset without its consent renders the repurchase invalid.
+<!-- unnumbered --> Jensen's unilateral action to transfer these debt tranches to Prime Asset without its consent renders the repurchase invalid.
 
-[unnumbered] Wherefore, Prime Asset respectfully requests a declaratory judgment that the repurchase of these tranches of debt from AOA is invalid and unenforceable.
+<!-- unnumbered --> Wherefore, Prime Asset respectfully requests a declaratory judgment that the repurchase of these tranches of debt from AOA is invalid and unenforceable.
 
 # COUNT SEVEN
 
-[unnumbered] (Declaratory Judgment – All Defendants)
+<!-- unnumbered --> (Declaratory Judgment – All Defendants)
 
-[unnumbered] Prime Asset incorporates all preceding and subsequent allegations as if fully set forth herein.
+<!-- unnumbered --> Prime Asset incorporates all preceding and subsequent allegations as if fully set forth herein.
 
-[unnumbered] PrimaLend has asserted that Prime Asset is indebted to it under the RLOC and Subdebt Agreements, and that this debt extends to the full face value of those agreements.
+<!-- unnumbered --> PrimaLend has asserted that Prime Asset is indebted to it under the RLOC and Subdebt Agreements, and that this debt extends to the full face value of those agreements.
 
-[unnumbered] Pursuant to Texas law, Prime Asset is entitled to offset the debts it owes to PrimaLend, if any, by the amount PrimaLend owes Prime Asset, including for claims of fraudulent transfer, tortious interference, breach of fiduciary duty, and bad faith.
+<!-- unnumbered --> Pursuant to Texas law, Prime Asset is entitled to offset the debts it owes to PrimaLend, if any, by the amount PrimaLend owes Prime Asset, including for claims of fraudulent transfer, tortious interference, breach of fiduciary duty, and bad faith.
 
-[unnumbered] Pursuant to 11 U.S.C. § 553(a), and barring exceptions not applicable here, nothing in the Bankruptcy Code "affect[s] any right of a creditor to offset a mutual debt owing by such creditor to the debtor that arose before the commencement of the case under this title against a claim of such creditor against the debtor that arose before the commencement of the case."
+<!-- unnumbered --> Pursuant to 11 U.S.C. § 553(a), and barring exceptions not applicable here, nothing in the Bankruptcy Code "affect[s] any right of a creditor to offset a mutual debt owing by such creditor to the debtor that arose before the commencement of the case under this title against a claim of such creditor against the debtor that arose before the commencement of the case."
 
-[unnumbered] Wherefore, Prime Asset respectfully requests a declaratory judgment that its debts to the Defendants, if any, are subject to offset under 11 U.S.C. § 553(a) up to the full values of Prime Asset's claims as determined at trial.
+<!-- unnumbered --> Wherefore, Prime Asset respectfully requests a declaratory judgment that its debts to the Defendants, if any, are subject to offset under 11 U.S.C. § 553(a) up to the full values of Prime Asset's claims as determined at trial.
 
 # COUNT EIGHT
 
-[unnumbered] (Order Restraining Foreclosure – All Defendants)
+<!-- unnumbered --> (Order Restraining Foreclosure – All Defendants)
 
-[unnumbered] In reliance on Prime Asset's alleged default under the RLOC Agreement, PrimaLend has taken multiple steps towards foreclosing on Prime Asset's assets—including its demand that Prime Asset surrender all collateral and consent to the appointment of a receiver.
+<!-- unnumbered --> In reliance on Prime Asset's alleged default under the RLOC Agreement, PrimaLend has taken multiple steps towards foreclosing on Prime Asset's assets—including its demand that Prime Asset surrender all collateral and consent to the appointment of a receiver.
 
-[unnumbered] The Defendants' allegations of default, however, do not account for Prime Asset's aforementioned claims, and all amounts allegedly owed by Prime Asset must first be set off by Prime Asset's recovery on account of those claims.
+<!-- unnumbered --> The Defendants' allegations of default, however, do not account for Prime Asset's aforementioned claims, and all amounts allegedly owed by Prime Asset must first be set off by Prime Asset's recovery on account of those claims.
 
-[unnumbered] Pursuant to Tex. Bus. & Com. Code § 9.625, this Court may "order or restrain collection, enforcement, or disposition of collateral on appropriate terms and conditions" wherever the proposed disposition would not comply with the Uniform Commercial Code (as enacted in Tex. Bus. & Com. Code § 9). Such compliance includes, of course, the existence of a valid default prior to any foreclosure.
+<!-- unnumbered --> Pursuant to Tex. Bus. & Com. Code § 9.625, this Court may "order or restrain collection, enforcement, or disposition of collateral on appropriate terms and conditions" wherever the proposed disposition would not comply with the Uniform Commercial Code (as enacted in Tex. Bus. & Com. Code § 9). Such compliance includes, of course, the existence of a valid default prior to any foreclosure.
 
-[unnumbered] Wherefore, Prime Asset respectfully requests an order, pursuant to Tex. Bus. & Com. Code § 9.625, restraining the Defendants from foreclosing on Prime Asset's property except to the extent that, following liquidation and setoff of Prime Asset's claims, Prime Asset retains net-liability towards the Defendants.
+<!-- unnumbered --> Wherefore, Prime Asset respectfully requests an order, pursuant to Tex. Bus. & Com. Code § 9.625, restraining the Defendants from foreclosing on Prime Asset's property except to the extent that, following liquidation and setoff of Prime Asset's claims, Prime Asset retains net-liability towards the Defendants.
 
-[unnumbered] WHEREFORE, for the forgoing reasons, Prime Asset respectfully requests that this Court enter judgment against the Defendants:
+<!-- unnumbered --> WHEREFORE, for the forgoing reasons, Prime Asset respectfully requests that this Court enter judgment against the Defendants:
 
 1. Voiding the September 2022 and October 2022 fraudulent transfers and ordering disgorgement of all funds improperly received by PrimaLend as a result of those transactions;
 2. Granting damages in an amount to be determined at trial, but not less than $45,000,000;

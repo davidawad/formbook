@@ -94,7 +94,7 @@
       align(center)[#v(0.6em) #emph[--against--] #v(0.6em)]
     }
   }
-  #v(2.4em)
+  #v(1.8em)
   #align(center)[
     #text(size: 14pt, weight: "bold")[#upper(need(meta, "brief_title"))]
   ]
@@ -115,7 +115,9 @@
   #need(meta, "phone")
   // 500.13(b): counsel's telephone and facsimile numbers; `fax` is printed under the telephone line when given.
   #if "fax" in meta [ #v(0.3em) #meta.fax ]
-  #if "date" in meta [ #v(0.8em) #meta.date ]
+  #if "date" in meta [ #v(0.4em) #meta.date ]
+  // Keeps the last line's descenders inside the 1 in bottom margin (NY-FORM-001).
+  #v(0.3em)
 ]
 
 // ---------------------------------------------------------------------------

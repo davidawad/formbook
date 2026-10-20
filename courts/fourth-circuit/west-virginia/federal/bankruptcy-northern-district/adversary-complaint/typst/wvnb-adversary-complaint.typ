@@ -147,13 +147,16 @@
   counsel-block(meta)
   court-caption(meta)
 
-  // A line `@@after-signature@@` in the sample starts the part that follows the signature
-  // (the filed Protea complaint puts Schedule 1 on its own page after the signature).
-  let parts = md.split("@@after-signature@@")
-  cmarker.render(parts.at(0), raw-typst: false, smart-punctuation: true)
-  signature-block(meta)
-  for tail in parts.slice(1) {
+  // An attachment (a level-2 heading "Schedule ...") follows the signature block on a page of its own,
+  // as the filed complaints do. The heading itself is the marker: no template-local text is needed in the sample.
+  let cut = md.position("\n## Schedule")
+  if cut == none {
+    cmarker.render(md, raw-typst: false, smart-punctuation: true)
+    signature-block(meta)
+  } else {
+    cmarker.render(md.slice(0, cut), raw-typst: false, smart-punctuation: true)
+    signature-block(meta)
     pagebreak(weak: true)
-    cmarker.render(tail, raw-typst: false, smart-punctuation: true)
+    cmarker.render(md.slice(cut + 1), raw-typst: false, smart-punctuation: true)
   }
 }

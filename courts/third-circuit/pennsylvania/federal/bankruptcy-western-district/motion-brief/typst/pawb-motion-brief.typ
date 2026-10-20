@@ -131,8 +131,12 @@
   // Paragraph spacing equals the leading, so consecutive paragraphs keep the double-spaced pitch.
   set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: true)
   set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
-  show footnote.entry: set text(size: type-size)
-  show footnote.entry: set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em, justify: false)
+  // A footnote is kept whole on one page, not split across a page break (size and leading unchanged).
+  show footnote.entry: it => block(breakable: false, {
+    set text(size: type-size)
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em, justify: false)
+    it
+  })
 
   // Headings (the sample's markdown levels): level 2 is a centered bold caps section ("I. OVERVIEW",
   // "CONCLUSION"); level 3 a bold heading at the margin ("A. ..."); level 4 a bold italic heading ("1. ...").

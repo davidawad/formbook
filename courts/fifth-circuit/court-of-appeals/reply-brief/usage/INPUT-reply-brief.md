@@ -83,7 +83,7 @@ For the foregoing reasons, the Court should grant Plaintiff Ellen Mae Fisher the
 
 # Certificate of Compliance
 
-I hereby certify that the foregoing reply brief complies with the type-volume limitation of Federal Rule of Appellate Procedure 32(a)(7)(B) because it contains {{words}} words, excluding the parts of the brief exempted by Federal Rule of Appellate Procedure 32(f). The brief complies with the typeface and type-style requirements of Federal Rule of Appellate Procedure 32(a)(5) and (6) because it is set in a proportionally spaced serif typeface, 14-point or larger, and the footnotes are set in 12-point type.
+I hereby certify that the foregoing reply brief complies with the type-volume limitation of Federal Rule of Appellate Procedure 32(a)(7)(B) because it contains 1,108 words, excluding the parts of the brief exempted by Federal Rule of Appellate Procedure 32(f). The brief complies with the typeface and type-style requirements of Federal Rule of Appellate Procedure 32(a)(5) and (6) because it is set in a proportionally spaced serif typeface, 14-point or larger, and the footnotes are set in 12-point type.
 
 # Certificate of Service
 

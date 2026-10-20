@@ -152,7 +152,7 @@
       heading-block(cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1))
     } else if t.starts-with(">") {
       // A block quotation: indented on both sides (L.U.Civ.R. 7(b)(5)(A) lets it be single-spaced; it is kept double).
-      pad(left: 0.5in, right: 0.5in, on-grid({
+      pad(left: 0.5in, right: 0.5in, block(width: 100%, {
         set par(leading: body-leading)
         cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
       }))

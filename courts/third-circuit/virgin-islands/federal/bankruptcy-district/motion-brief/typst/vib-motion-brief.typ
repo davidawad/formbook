@@ -206,8 +206,12 @@
         )))
     }
   }
-  show footnote.entry: set text(size: type-size)
-  show footnote.entry: set par(leading: 0.55em, first-line-indent: 0pt)
+  // A footnote is kept whole on one page, not split across a page break (size and leading unchanged).
+  show footnote.entry: it => block(breakable: false, {
+    set text(size: type-size)
+    set par(leading: 0.55em, first-line-indent: 0pt)
+    it
+  })
 
   // Cover: court, caption, title, counsel.
   set par(first-line-indent: 0pt)

@@ -112,7 +112,7 @@
 }
 
 /// Numbered paragraphs (Fed. R. Civ. P. 10(b)). Each blank-line-separated markdown chunk that is
-/// neither a heading nor a list is one numbered paragraph. A chunk starting with "!" is an unnumbered
+/// neither a heading nor a list is one numbered paragraph. A chunk starting with "<!-- unnumbered -->" (an HTML comment, which cmarker and the checker ignore) is an unnumbered
 /// paragraph (the filing's own convention for WHEREFORE and the jury demand). Headings are kept with the
 /// paragraph after them. Lists are lettered (A., B., ...), as in a prayer for relief.
 /// Footnote definitions ("[^name]: ...") are attached to the paragraph that cites them: cmarker only
@@ -141,8 +141,8 @@
       cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
       v(body-leading)
     } else {
-      let unnumbered = t.starts-with("!")
-      let text = if unnumbered { t.slice(1).trim() } else { t }
+      let unnumbered = t.starts-with("<!-- unnumbered -->")
+      let text = if unnumbered { t.slice(19).trim() } else { t }
       // Footnote definitions this paragraph cites, in the order they are defined.
       for d in defs {
         let key = d.match(regex("^\\[\\^([^\\]]+)\\]:")).captures.at(0)

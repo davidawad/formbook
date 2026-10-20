@@ -118,7 +118,7 @@ As a result of Atraverse’s unlawful infringement of the ’955 Patent, Boston 
 
 # PRAYER FOR RELIEF
 
-!WHEREFORE, Boston Scientific respectfully requests the following relief:
+<!-- unnumbered -->WHEREFORE, Boston Scientific respectfully requests the following relief:
 
 1. For judgment in favor of Boston Scientific that Atraverse has infringed and is infringing the claims of the ’955 Patent, both directly and indirectly;
 2. For a preliminary and permanent injunction prohibiting Atraverse, including its officers, agents, employees, and all persons acting in concert or participation with it who receive actual notice of the Court’s Order, from committing further acts of infringement of the ’955 Patent;
@@ -133,6 +133,6 @@ As a result of Atraverse’s unlawful infringement of the ’955 Patent, Boston 
 
 # JURY TRIAL DEMAND
 
-!Pursuant to Federal Rule of Civil Procedure 38(b), Boston Scientific hereby demands a trial by jury of all issues that are or may become triable.
+<!-- unnumbered -->Pursuant to Federal Rule of Civil Procedure 38(b), Boston Scientific hereby demands a trial by jury of all issues that are or may become triable.
 
 [^ap196]: The ’196 application is U.S. Patent Application No. 19/007,196, filed December 31, 2024.

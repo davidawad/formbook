@@ -4,7 +4,10 @@
 -- (the reference for the form). Numbered paragraphs (FRCP 10(b)) are numbered once across the whole complaint.
 -- Frontmatter values are printed as given; nothing in this file is case-specific.
 
-local MARK = "@@after-signature@@" -- the sample's line that starts the part after the signature (Schedule 1)
+-- an attachment: a level-2 heading "Schedule ..." starts the part that follows the signature (on its own page)
+local function starts_attachment(b)
+  return b.t == "Header" and b.level == 2 and pandoc.utils.stringify(b):match("^Schedule") ~= nil
+end
 
 local function esc(s)
   s = s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;")
@@ -183,8 +186,9 @@ function Pandoc(doc)
   -- the body, with the numbered paragraphs; the marker splits off the part after the signature
   local body, tail = {}, nil
   for _, b in ipairs(doc.blocks) do
-    if b.t == "Para" and pandoc.utils.stringify(b) == MARK then
+    if not tail and starts_attachment(b) then
       tail = {}
+      tail[#tail + 1] = fix_header(b)
     elseif b.t == "OrderedList" then
       for _, x in ipairs(numbered(b.content, counter)) do
         if tail then tail[#tail + 1] = x else body[#body + 1] = x end

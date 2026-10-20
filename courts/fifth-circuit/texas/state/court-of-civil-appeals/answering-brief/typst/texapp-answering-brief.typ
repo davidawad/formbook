@@ -132,6 +132,8 @@
     notes += meta.at("cover_notes", default: ())
     text(weight: "bold", notes.map(n => [#n]).join(linebreak()))
   }
+  // Keeps the last cover line above the 1 in bottom margin (the line box extends past the frame).
+  v(0.05in)
 }
 
 /// Identity of parties and counsel, TRAP 38.1(a): one row per role, the names and addresses
@@ -216,10 +218,10 @@
   // A section sign is never left at the end of a line apart from its number.
   let body = body.replace("\u{a7} ", "\u{a7}\u{a0}")
 
-  // The markdown is split at `{{contents}}`: before it, front matter on lower-roman pages;
+  // The markdown is split at `<!-- contents -->`: before it, front matter on lower-roman pages;
   // after it, the table of contents, the index of authorities, then the body from page 1.
-  let parts = body.split(regex("(?m)^\\{\\{contents\\}\\}[ \t]*$"))
-  assert(parts.len() == 2, message: "texapp brief: the markdown needs exactly one {{contents}} line")
+  let parts = body.split(regex("(?m)^<!-- contents -->[ \t]*$"))
+  assert(parts.len() == 2, message: "texapp brief: the markdown needs exactly one <!-- contents --> line")
   let (front, main) = parts
 
   set document(title: meta.brief_title)
@@ -292,11 +294,11 @@
   // Placeholders a body paragraph may hold on its own line.
   let render-md(md) = {
     let md-render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
-    let pieces = md.split(regex("(?m)^(\\{\\{(?:identity|signature|signer)\\}\\})[ \t]*$"))
-    let tags = md.matches(regex("(?m)^\\{\\{(identity|signature|signer)\\}\\}[ \t]*$")).map(m => m.captures.at(0))
+    let pieces = md.split(regex("(?m)^(<!-- (?:identity|signature|signer) -->)[ \t]*$"))
+    let tags = md.matches(regex("(?m)^<!-- (identity|signature|signer) -->[ \t]*$")).map(m => m.captures.at(0))
     for (k, piece) in pieces.enumerate() {
       let t = tags.at(k, default: none)
-      // A certificate (the last level-1 section before `{{signer}}`) is kept on one page with
+      // A certificate (the last level-1 section before `<!-- signer -->`) is kept on one page with
       // its signature, so the signature never stands alone at the top of a page.
       let heads = piece.matches(regex("(?m)^# "))
       if t == "signer" and heads.len() > 0 {

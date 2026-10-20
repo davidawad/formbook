@@ -34,7 +34,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 - Court title: three lines, centered caps, from the division given in the frontmatter.
 - Caption: parties on the left, one asterisk per line of the party column in the middle (the count is measured from the rendered height, so the asterisks follow the text), CIVIL ACTION NO. and the judge lines on the right.
 - Title: centered bold caps. Headings: centered bold caps (level 1), bold sub-heading (level 2), bold italic (level 3), each with one blank line above.
-- Body: paragraphs numbered 1, 2, ... with a 0.5 inch first-line number and double spacing. Sub-lists lettered (a), (b), ... Prayer items lettered A, B, ... (a `:::upper` directive before the list). A paragraph not numbered (the lead-in, the WHEREFORE clause, a bracketed note) is marked `:::unnumbered`.
+- Body: paragraphs numbered 1, 2, ... with a 0.5 inch first-line number and double spacing. Sub-lists lettered (a), (b), ... Prayer items lettered A, B, ... (a `<!-- upper -->` directive (an HTML comment, not printed) before the list). A paragraph not numbered (the lead-in, the WHEREFORE clause, a bracketed note) is marked `:::unnumbered`.
 - Every block is rounded up to whole 24 pt lines (`on-grid`), so no paragraph overlaps the line before it. Typst leaves the leading out of a paragraph's measured height, which is why the rounding is needed (measured, see the review below).
 - Signature block: date at the left, "Respectfully submitted," and the lines at the right half.
 

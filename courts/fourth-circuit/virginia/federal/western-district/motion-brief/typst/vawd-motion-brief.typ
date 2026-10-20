@@ -232,8 +232,12 @@
   )
   set heading(numbering: heading-num)
   set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
-  show footnote.entry: set text(size: footnote-size)
-  show footnote.entry: set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em)
+  // each footnote is unbreakable, so its text is never split across a page break
+  show footnote.entry: it => block(breakable: false, {
+    set text(size: footnote-size)
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em)
+    it
+  })
 
   // Headings: level 1 a centered caps section (no number); levels 2 to 4 numbered, hung from the left margin.
   // Kept with the paragraph after them (a heading never ends a page).

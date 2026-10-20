@@ -13,10 +13,10 @@ Verification status: the primary text, the Texas Rules of Appellate Procedure as
 | TRAP 9.4(e) | conventional typeface no smaller than 14-point; footnotes no smaller than 12-point | `type-size` = 14pt, `footnote-size` = 12pt (measured: footnote glyph boxes are 12/14 of the body's) | secondary |
 | TRAP 9.4(g) | cover: case style, case number, title, filing party, lead counsel's name, address, telephone, email, State Bar number | `cover()`: case number, court, caption, parties, lower court, title, `counsel` lines (the author supplies bar number, telephone and email there) | secondary (sibling `supreme-court/brief-on-the-merits/README.md`) |
 | TRAP 39.7 | a party requesting oral argument notes the request on the cover | `oral_argument_requested: true` prints ORAL ARGUMENT REQUESTED on the cover | secondary |
-| TRAP 9.4(i)(1) | parts not counted: caption, identity of parties and counsel, statement regarding oral argument, table of contents, index of authorities, statement of the case, issues presented, jurisdiction, procedural history, signature, certificates, appendix | `excluded-section` regex on level-1 headings; `{{word-count}}` in the certificate is replaced by the count | secondary |
+| TRAP 9.4(i)(1) | parts not counted: caption, identity of parties and counsel, statement regarding oral argument, table of contents, index of authorities, statement of the case, issues presented, jurisdiction, procedural history, signature, certificates, appendix | `excluded-section` regex on level-1 headings; the count typed in the markdown (literal) in the certificate is replaced by the count | secondary |
 | TRAP 9.4(i)(2)(B) | 15,000 words for a computer-generated brief in a court of appeals | `word-limit` = 15000; `assert` fails the render above it | secondary |
 | TRAP 38.1(a)-(j) | identity of parties and counsel, table of contents, index of authorities, statement of the case, statement regarding oral argument, issues presented, statement of facts, summary of the argument, argument, prayer | identity grid from `identity`; contents generated from headings; index generated from `authorities` with page numbers found in the layout; other sections are markdown headings in the sample | secondary |
-| TRAP 9.5 | certificate of service | markdown section in the sample, signed with `{{signer}}` | not verified (the exemplar cites Rule 9.5) |
+| TRAP 9.5 | certificate of service | markdown section in the sample, signed with `<!-- signer -->` | not verified (the exemplar cites Rule 9.5) |
 | Fifth Court local rules | local length and briefing limits | not encoded | secondary |
 
 Typeface: no face is named by the rules, so EB Garamond (vendored; `docs/FONTS.md`).
@@ -27,18 +27,18 @@ Typeface: no face is named by the rules, so EB Garamond (vendored; `docs/FONTS.m
 
 - `case_number`, `appellant`, `appellee`, `trial_court`, `county`, `trial_cause`, `brief_title`, `counsel` (list of lines for the cover): required.
 - `district`, `seat` (cover court lines; default Fifth, Dallas), `caption`, `trial_judge`, `oral_argument_requested` (bool), `cover_notes` (list of bold lines under it, for example "ACCELERATED APPEAL"): optional.
-- `identity`: list of `{role, lines}`; printed as a two-column, single-spaced list where the body holds `{{identity}}`.
-- `signature` (list of lines; `{{signature}}`) and `signer` (list of lines; `{{signer}}`, for the certificates): single-spaced blocks in the right half of the page, never split. A certificate section is kept on one page with its `{{signer}}` block.
+- `identity`: list of `{role, lines}`; printed as a two-column, single-spaced list where the body holds `<!-- identity -->`.
+- `signature` (list of lines; `<!-- signature -->`) and `signer` (list of lines; `<!-- signer -->`, for the certificates): single-spaced blocks in the right half of the page, never split. A certificate section is kept on one page with its `<!-- signer -->` block.
 - `authorities`: list of groups `{group, items}`; each item `{name, cite, find, italic}`. `find` is a literal string (usually the reporter cite, such as `451 S.W.3d`) searched for in the body; every page where it appears is listed. An authority never found prints a bold "not cited".
 
 Body:
 
-- Everything before the `{{contents}}` line is front matter (identity, record citations), on lower-roman pages from ii after the unnumbered cover. At `{{contents}}` the template inserts the table of contents and the index of authorities, then starts the body on arabic page 1.
+- Everything before the `<!-- contents -->` line is front matter (identity, record citations), on lower-roman pages from ii after the unnumbered cover. At `<!-- contents -->` the template inserts the table of contents and the index of authorities, then starts the body on arabic page 1.
 - `#` headings are centred, bold, upper case; `##` bold; `###` bold italic; all single-spaced and kept with the next block. The contents list levels 1 to 3.
 - `>` block quotations are single-spaced and indented 0.5 in each side. Footnotes (`[^id]`) are 12 pt, single-spaced.
 - Every body paragraph has a 0.5 in first-line indent, except paragraphs under 50 characters (a record or case citation after a quotation). A paragraph ending in a colon is kept on the page with what follows it.
 - A two-column markdown table is a label/text table (first column 2.25 in, no header repeat); other tables keep equal columns.
-- `{{word-count}}` is replaced by the TRAP 9.4(i)(1) count.
+- the count typed in the markdown (literal) is replaced by the TRAP 9.4(i)(1) count.
 - "§ " is joined to its number with a no-break space.
 
 ## Exemplar and overlay
@@ -65,7 +65,7 @@ sh tools/overlay.sh courts/fifth-circuit/texas/state/court-of-civil-appeals/open
 - Pagination: cover unnumbered, front matter lower roman from ii, body arabic from 1 (previously one arabic sequence from the cover).
 - Identity of parties as a single-spaced two-column list (`identity`), rows never split.
 - Index of authorities generated from `authorities`, with page numbers found in the layout (TRAP 38.1(c); was a known gap). Dot leaders run to a right-aligned page column, so numbers never wrap away from their entry.
-- Word count under TRAP 9.4(i)(1) and limit check under 9.4(i)(2)(B); `{{word-count}}` in the certificate (was a known gap).
+- Word count under TRAP 9.4(i)(1) and limit check under 9.4(i)(2)(B); the count typed in the markdown (literal) in the certificate (was a known gap).
 - Signature blocks and certificate signers: single-spaced, right half, unbreakable; a certificate is never separated from its signature (was a known gap).
 - Every body paragraph indented (Typst otherwise skips the first paragraph after a heading); the unindented short-line threshold dropped from 100 to 50 characters, which had left real one-line body paragraphs flush.
 - Lists and tables single-spaced in their cells and unindented; two-column tables as label/text.
@@ -82,6 +82,6 @@ sh tools/overlay.sh courts/fifth-circuit/texas/state/court-of-civil-appeals/open
 ## Engines
 
 - **typst** (`typst/`): the reference for the form.
-- **docx** (`docx/render.sh`, `docx/build-reference.sh`, `docx/reference.docx`, `docx/texapp.lua`): `usage/OUTPUT-opening-brief.docx` and `.docx.pdf` are from the earlier 8-page sample and were **not regenerated** on 2026-10-16: LibreOffice (`soffice`) is not installed on this box. The docx filter does not know the new contract: it would print `{{contents}}`, `{{identity}}`, `{{signature}}`, `{{signer}}` and `{{word-count}}` literally, and it builds no identity grid, index of authorities, roman front-matter numbering or ORAL ARGUMENT REQUESTED line. BLOCKED until `texapp.lua` is updated and the docx is re-rendered where `soffice` exists.
+- **docx** (`docx/render.sh`, `docx/build-reference.sh`, `docx/reference.docx`, `docx/texapp.lua`): `usage/OUTPUT-opening-brief.docx` and `.docx.pdf` are from the earlier 8-page sample and were **not regenerated** on 2026-10-16: LibreOffice (`soffice`) is not installed on this box. The docx filter does not know the new contract: it would print `<!-- contents -->`, `<!-- identity -->`, `<!-- signature -->`, `<!-- signer -->` and the count typed in the markdown (literal) literally, and it builds no identity grid, index of authorities, roman front-matter numbering or ORAL ARGUMENT REQUESTED line. BLOCKED until `texapp.lua` is updated and the docx is re-rendered where `soffice` exists.
 - BLOCKED: tools/check.sh docx gates 0 to 3 not run (no `checks.yaml`, `rules.md` at the level `check.sh` reads; no `.check-docx.txt` stamp).
 - **latex**: not built for this doc type.

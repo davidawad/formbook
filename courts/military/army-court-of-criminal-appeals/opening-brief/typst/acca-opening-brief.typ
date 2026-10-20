@@ -36,6 +36,7 @@
 #let body-leading = 1.65em                 // Rule 13.2 / 17.1(b): double-spaced (baseline pitch ~2.3 x size)
 #let single-leading = 0.45em               // caption, headings, block quotes, footnotes, signature
 #let page-margin = 1in                     // Rule 13.2 / 17.1(b): 1 inch on all four sides
+#let page-margin-bottom = page-margin + 4pt  // the last line's descenders sit 3-4 pt below its text box (DEF-FORM-002); still >= 1 inch
 #let para-indent = 0.5in
 #let para-spacing = body-leading           // no extra gap between double-spaced paragraphs
 
@@ -139,7 +140,7 @@
 
 #let acca-brief(meta, body) = {
   set document(title: brief-title, author: need(meta, "appellant").name)
-  set page(paper: "us-letter", margin: page-margin, numbering: "1", footer: context {
+  set page(paper: "us-letter", margin: (x: page-margin, top: page-margin, bottom: page-margin-bottom), numbering: "1", footer: context {
     // Page 1 carries the panel designation at the foot (Appendix A, "Panel X");
     // later pages print their number, centered.
     let n = counter(page).get().first()

@@ -45,7 +45,8 @@ Not produced by this template (separate filings): the Adversary Proceeding Cover
 - Lettered items (`A. `, `B. `): unnumbered, indented 0.5 inch.
 - Bracketed notes (`[...]`): unnumbered, italic (used only to mark omitted pages of the transcription).
 - Parentheticals (`(...)`): unnumbered continuation of the paragraph before (used after the transfers table).
-- Paragraphs starting with `~` are not numbered (the `~` is removed): used for the prayer's lead-in paragraph.
+- A paragraph that ends with a colon and is followed by a numbered list is not numbered: the prayer lead-in ("WHEREFORE, ... relief:"). No marker is written in the INPUT.
+- Account masks in the transfers table are written with escaped asterisks (`\*\*\*4844`) so they print literally.
 - Block quotations (`>`): indented 1 inch both sides, single-spaced.
 - Tables: single-spaced, the markdown table as given.
 - Prayer for relief: a markdown list (`1.` ...), numbered by the markdown.

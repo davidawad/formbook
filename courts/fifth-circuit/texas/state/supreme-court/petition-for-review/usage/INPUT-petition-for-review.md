@@ -190,7 +190,7 @@ I hereby certify that a true and correct copy of the foregoing document was sent
 
 # CERTIFICATE OF COMPLIANCE
 
-Pursuant to the Texas Rule of Appellate Procedure 9.4(i)(1), (3), I hereby certify that this Appellate Brief contains {{word-count}} words. This is a computer-generated document using 14-point typeface for all text and 12-point footnotes.
+Pursuant to the Texas Rule of Appellate Procedure 9.4(i)(1), (3), I hereby certify that this Appellate Brief contains 1,773 words. This is a computer-generated document using 14-point typeface for all text and 12-point footnotes.
 
 # APPENDIX
 

@@ -108,7 +108,7 @@
 
 /// Each blank-line-separated chunk of markdown is one unit. A chunk starting with "#" is a heading (one
 /// "#" centred, "##" flush left); a chunk starting with "(a)", "(b)", ... is an unnumbered sub-item; a chunk
-/// starting with "%" is an unnumbered paragraph (a WHEREFORE clause); every other chunk is one numbered
+/// starting with "<!-- unnumbered -->" is an unnumbered paragraph (a WHEREFORE clause); every other chunk is one numbered
 /// paragraph. The first `preamble` chunks (frontmatter key, when given) are unnumbered; without it, the chunks
 /// before the first heading are. Numbering is applied per chunk, not with a show rule.
 #let body-content(body, preamble: none) = {
@@ -125,8 +125,8 @@
     if preamble != none and i >= preamble { numbered = true }
     // A paragraph that leads into a lettered sub-item sticks to it (a lead-in is never left alone at a page foot).
     let leads-in = i + 1 < chunks.len() and chunks.at(i + 1).trim().starts-with(regex("^\\([a-z]\\)[ \\t]"))
-    if t.starts-with("%") {
-      out += block(width: text-width, breakable: true, sticky: leads-in, [#h(para-indent)#inl(t.slice(1).trim())])
+    if t.starts-with("<!-- unnumbered -->") {
+      out += block(width: text-width, breakable: true, sticky: leads-in, [#h(para-indent)#inl(t.slice("<!-- unnumbered -->".len()).trim())])
       out += v(body-leading)
     } else if t.starts-with("#") {
       numbered = true

@@ -141,13 +141,13 @@ authorities:
 
 In accord with Rule 38.1 of the Texas Rules of Appellate Procedure, Appellant provides this Court with this complete list of all interested parties.
 
-{{identity}}
+<!-- identity -->
 
 # Citation to the Record
 
 The reporter’s record is cited to as: [10 RR 23] this hypothetical citation would be to volume 10, page 23. The clerk’s record is cited to as: [CR 23] this hypothetical citation would be to page 23 of the one volume clerk’s record.
 
-{{contents}}
+<!-- contents -->
 
 To the Honorable Justices of the Fifth Court of Appeals:
 
@@ -264,13 +264,13 @@ J.R. asks this Court to:
 - Vacate the certification order; and,
 - Any and all other relief to which Appellant might be entitled.
 
-{{signature}}
+<!-- signature -->
 
 # Certificate of Compliance
 
-This is to certify that this brief complies with Rule 9.4 of the Texas Rules of Appellate Procedure because it is computer generated and contains {{word-count}} words, excluding the parts of the brief exempted by Rule 9.4(i)(1). This brief also complies with the typeface requirements of Rule 9.4(e) because it has been prepared in a conventional typeface of 14 points for the text and 12 points for the footnotes.
+This is to certify that this brief complies with Rule 9.4 of the Texas Rules of Appellate Procedure because it is computer generated and contains 2160 words, excluding the parts of the brief exempted by Rule 9.4(i)(1). This brief also complies with the typeface requirements of Rule 9.4(e) because it has been prepared in a conventional typeface of 14 points for the text and 12 points for the footnotes.
 
-{{signer}}
+<!-- signer -->
 
 # Certificate of Service
 
@@ -278,4 +278,4 @@ This is to certify that on December 9, 2020 a true and correct copy of this brie
 
 Jennifer Balido, DCDAappeals@dallascounty.org
 
-{{signer}}
+<!-- signer -->

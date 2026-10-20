@@ -210,7 +210,8 @@
   set enum(numbering: "a.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
   set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading, marker: [•])
   set footnote.entry(separator: line(length: 1.5in, stroke: 0.5pt))
-  show footnote.entry: set text(size: footnote-size)
+  // A footnote is kept whole on one page, not split across a page break.
+  show footnote.entry: it => block(breakable: false, text(size: footnote-size, it))
   set table(stroke: none, inset: (x: 8pt, y: 2pt), align: (left, left, right))
   show table: set text(size: type-size)
 

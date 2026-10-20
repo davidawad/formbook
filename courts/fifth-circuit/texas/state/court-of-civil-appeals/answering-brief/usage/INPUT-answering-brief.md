@@ -136,9 +136,9 @@ authorities:
 
 # Supplemental List of Appellant’s Counsel
 
-{{identity}}
+<!-- identity -->
 
-{{contents}}
+<!-- contents -->
 
 # Statement Regarding Oral Argument
 
@@ -256,19 +256,19 @@ For these reasons, Veronica respectfully requests the following relief:
 - That this Court affirm the award of $14,000.00 attorney fees to Veronica’s attorney as set forth in the Temporary Orders on Appeal.
 - Further, that this Court grant her such other relief, both general and special, at law or in equity, to which she may show herself to be justly entitled.
 
-{{signature}}
+<!-- signature -->
 
 # Certificate of Compliance
 
 I, Karen M. Billingham, certify:
 
-1. This brief complies with the type-volume limitation of Tex. R. App. P. 9.4(i)(2)(B) because it contains {{word-count}} words, excluding the parts of the brief exempted by Tex. R. App. P. 9.4(i)(1).
+1. This brief complies with the type-volume limitation of Tex. R. App. P. 9.4(i)(2)(B) because it contains 2101 words, excluding the parts of the brief exempted by Tex. R. App. P. 9.4(i)(1).
 2. This brief complies with the typeface requirements of Tex. R. App. P. 9.4(e) because it has been prepared in a conventional typeface of 14 points for the text and 12 points for the footnotes.
 
-{{signer}}
+<!-- signer -->
 
 # Certificate of Service
 
 The undersigned certifies that a true and correct copy of the foregoing Appellee’s Brief has been served on all counsel of record via electronic service on this 15th day of February 2021.
 
-{{signer}}
+<!-- signer -->

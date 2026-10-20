@@ -157,6 +157,8 @@
     v(0.4in)
     align(center)[#strong[ORAL ARGUMENT REQUESTED]]
   }
+  // Keeps the last line of the cover above the 1 in bottom margin (the line box extends past the frame).
+  v(0.05in)
 }
 
 // Table of contents: generated from the headings, page numbers from the layout.

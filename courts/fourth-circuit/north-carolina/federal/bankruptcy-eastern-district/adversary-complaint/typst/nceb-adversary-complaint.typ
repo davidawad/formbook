@@ -115,7 +115,7 @@
     it.body
   })
   // Tables: single-spaced, unruled, flush with the text.
-  show table: it => block(width: 100%, above: 6pt, below: 12pt, {
+  show table: it => block(width: 100%, above: 6pt, below: 12pt, breakable: false, {
     set par(leading: single-leading, first-line-indent: 0pt, justify: false)
     set table(stroke: none, inset: (x: 6pt, y: 3pt))
     it
@@ -125,13 +125,14 @@
   let first-heading = items.position(c => c.starts-with("#"))
   if first-heading == none { first-heading = items.len() }
   for (i, c) in items.enumerate() {
+    let next = if i + 1 < items.len() { items.at(i + 1) } else { "" }
     // each chunk is a block of its own, so one allegation never runs into the next
     block(width: 100%, if c.starts-with("#") or c.starts-with("|") or c.starts-with(">") or c.starts-with("- ") or c.match(regex("^\\d+\\. ")) != none {
       // headings, tables, quotations and the prayer list are not numbered
       md(c)
-    } else if c.starts-with("~") {
-      // a paragraph the template must not number: the author writes a leading "~" (removed here)
-      md(c.slice(1).trim())
+    } else if c.ends-with(":") and next.match(regex("^\\d+\\. ")) != none {
+      // a paragraph that introduces a numbered list (the prayer's lead-in "WHEREFORE, ... relief:") is not numbered
+      md(c)
     } else if c.starts-with("(") {
       // a parenthetical that completes the paragraph before it (e.g. a table is followed by "(collectively, ...)")
       md(c)

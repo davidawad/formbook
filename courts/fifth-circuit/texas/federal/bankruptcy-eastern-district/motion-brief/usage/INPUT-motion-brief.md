@@ -41,7 +41,7 @@ signature:
     - "COUNSEL FOR DEFENDANTS"
 ---
 
-~ COMES NOW Defendants Greg N. Wisner and Dana P. Wisner (“Defendants”) file this Defendants’ Motion to Dismiss Count of Complaint Seeking Declaratory Judgment Regarding Discharge and Dischargeabity of a Debt. In support of this Motion, the Defendants state as follows:
+<!-- unnumbered --> COMES NOW Defendants Greg N. Wisner and Dana P. Wisner (“Defendants”) file this Defendants’ Motion to Dismiss Count of Complaint Seeking Declaratory Judgment Regarding Discharge and Dischargeabity of a Debt. In support of this Motion, the Defendants state as follows:
 
 Defendants respectfully submit that the Plaintiff’s request for Declaratory Judgment that the Defendants should be denied a discharge under 11 U.S.C. § 727 or that its debt should be declared nondischargeable under 11 U.S.C. §523 should be dismissed under Federal Rule of Civil Procedure 12(b)(1) for lack of subject matter jurisdiction because the request for relief was filed with the court 88 days after the deadline for seeking such relief.
 
@@ -118,17 +118,17 @@ Bankruptcy rules establishing time limits for filing complaints objecting to deb
 
 The Plaintiff simply missed the deadline to seek relief under Section 523 or Section 727, thus depriving this court of subject matter jurisdiction to consider the request. The Plaintiff’s request for declaratory relief under 727/523 should be dismissed.
 
-~ For the foregoing reasons, the Defendants respectfully request, pursuant to Federal Rules of Civil Procedure 12(b)(1), that this Court enter an order dismissing the claims and causes of action for relief under 11 U.S.C. §727 objection to the Defendant’s discharge and under 11 U.S.C. §523 to determine the dischargeability of the Plaintiff’s claim as specified in this Motion and grant the Defendants such other and further relief to which they may show themselves justly entitled.
+<!-- unnumbered --> For the foregoing reasons, the Defendants respectfully request, pursuant to Federal Rules of Civil Procedure 12(b)(1), that this Court enter an order dismissing the claims and causes of action for relief under 11 U.S.C. §727 objection to the Defendant’s discharge and under 11 U.S.C. §523 to determine the dischargeability of the Plaintiff’s claim as specified in this Motion and grant the Defendants such other and further relief to which they may show themselves justly entitled.
 
-<<signature>>
+<!-- signature -->
 
 # CERTIFICATE OF SERVICE
 
-~ The undersigned hereby certifies that on the 25th day of February 2022, a true and correct copy of the foregoing pleading was served by electronic transmission via the Court’s CM/ECF system upon all parties registered to receive electronic notice in this adversary proceeding and upon the counsel for Plaintiff.
+<!-- unnumbered --> The undersigned hereby certifies that on the 25th day of February 2022, a true and correct copy of the foregoing pleading was served by electronic transmission via the Court’s CM/ECF system upon all parties registered to receive electronic notice in this adversary proceeding and upon the counsel for Plaintiff.
 
-~| William C. Little
+<!-- flush --> William C. Little
 Little & McCool, P.C.
 301 Main Plaza #372
 New Braunfels, Texas 78130
 
-~> /s/ John Paul Stanford
+<!-- right --> /s/ John Paul Stanford

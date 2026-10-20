@@ -121,7 +121,7 @@
     if b == "" { continue }
     let lines = b.split("\n").map(l => l.trim())
     let first = lines.at(0)
-    if first == "<<signature>>" {
+    if first == "<!-- signature -->" {
       signature-block(meta.signature)
     } else if first.starts-with("## ") {
       count-heading(first.slice(3))
@@ -137,9 +137,9 @@
         block(width: text-width, inset: (left: block-indent), above: 0pt, below: double, sticky: true,
           par(leading: double, spacing: 0pt, inl(l.slice(2))))
       }
-    } else if first.starts-with("~ ") {
+    } else if first.starts-with("<!-- unnumbered -->") {
       block(width: text-width, above: 0pt, below: double, sticky: true,
-        par(leading: double, spacing: 0pt, h(indent) + inl(lines.join(" ").slice(2))))
+        par(leading: double, spacing: 0pt, h(indent) + inl(lines.join(" ").slice("<!-- unnumbered -->".len()).trim())))
     } else {
       num += 1
       block(width: text-width, above: 0pt, below: double,

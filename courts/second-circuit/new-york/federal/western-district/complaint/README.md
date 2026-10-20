@@ -84,7 +84,7 @@ sh tools/overlay.sh courts/second-circuit/new-york/federal/western-district/comp
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt body pitch, 15.6 pt single lines, 1 in margins, centered page-number footer); `docx/nywd-complaint.lua` builds the caption, the numbered paragraphs (number, tab, text), the lettered items, the unnumbered paragraphs (`::`) and the signature block as Word paragraphs and tables. Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice; converts with no error; 9 pages).
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt body pitch, 15.6 pt single lines, 1 in margins, centered page-number footer); `docx/nywd-complaint.lua` builds the caption, the numbered paragraphs (number, tab, text), the lettered items, the unnumbered paragraphs (a leading `<!-- unnumbered -->` comment) and the signature block as Word paragraphs and tables. Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice; converts with no error; 9 pages).
 
 - Matches typst: page size and margins, font and size, double spacing, paragraph numbering 1 to 66, lettered items, caption layout (court title, parties box with rules, title and `Civil Action No.`, jury legend), signature block, centered page numbers. Pagination matches the typst render page for page (each page starts with the same paragraph in both).
 - Differs: the number is followed by a tab to 1 in (typst: a 0.5 em gap); the space above the signature block and the caption is a few points different where a page starts with it; Word and LibreOffice place text in exact-height lines a few points lower than typst does.

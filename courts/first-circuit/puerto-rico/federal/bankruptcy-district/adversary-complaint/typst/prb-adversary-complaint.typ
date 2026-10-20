@@ -148,9 +148,10 @@
       has-pending = false
     } else {
       // Each paragraph is its own block: inline pieces would merge into one paragraph and overlap.
-      // A paragraph that starts with "(unnumbered) " (for example the WHEREFORE lead-in of the prayer) is not numbered.
-      let numbered = not t.starts-with("(unnumbered) ")
-      let text-md = if numbered { t } else { t.slice(13) }
+      // The prayer lead-in ("**WHEREFORE**, ...") and any "(unnumbered) " paragraph is not numbered.
+      let marked = t.starts-with("(unnumbered) ")
+      let numbered = not (marked or t.starts-with("**WHEREFORE**"))
+      let text-md = if marked { t.slice(13) } else { t }
       if numbered { para-counter.step() }
       let piece = on-grid({
         set par(leading: body-leading)

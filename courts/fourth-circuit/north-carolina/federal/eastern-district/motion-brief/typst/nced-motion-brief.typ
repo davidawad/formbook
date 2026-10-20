@@ -188,7 +188,11 @@
   set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: false)
   set block(spacing: 0pt)
   // LR 10.1(a) "typed matter": footnotes are typed matter too.
-  show footnote.entry: set text(size: type-size)
+  // each footnote is unbreakable, so its text is never split across a page break
+  show footnote.entry: it => block(breakable: false, {
+    set text(size: type-size)
+    it
+  })
 
   // Level 1 is a centered section ("ARGUMENT" switches the sub-heading scheme).
   show heading.where(level: 1): it => block(sticky: true, width: 100%, above: body-leading, below: body-leading, {

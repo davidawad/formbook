@@ -101,12 +101,12 @@
         set par(leading: body-leading, spacing: body-leading)
         cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
       }
-    } else if t.starts-with("~") {
-      // A single-spaced block (a service list, an address): a leading "~" in the sample marks it. Its
-      // lines are joined with hard breaks (a trailing backslash); the block has no first-line indent.
+    } else if t.contains("\\\n") {
+      // A single-spaced block (a service list, an address): a chunk whose lines end in a hard break (a trailing backslash).
+      // Its lines are joined by those breaks; the block has no first-line indent.
       block(breakable: false, width: 100%, {
         set par(leading: single-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-        cmarker.render(t.slice(1).trim(), raw-typst: false, smart-punctuation: true, h1-level: 1)
+        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
       })
       v(body-leading)
     } else {

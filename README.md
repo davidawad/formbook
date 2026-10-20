@@ -96,8 +96,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [U S Air Force Court of Criminal Appeals](courts/military/air-force-court-of-criminal-appeals) | `afcca` | in progress | — | — | — | 14 |
-| [U S Army Court of Criminal Appeals](courts/military/army-court-of-criminal-appeals) | `acca` | in progress | — | — | — | 14 |
+| [U S Air Force Court of Criminal Appeals](courts/military/air-force-court-of-criminal-appeals) | `afcca` | up for review | — | — | — | 14 |
+| [U S Army Court of Criminal Appeals](courts/military/army-court-of-criminal-appeals) | `acca` | up for review | — | — | — | 14 |
 | [U S Coast Guard Court of Criminal Appeals](courts/military/coast-guard-court-of-criminal-appeals) | `uscgcoca` | up for review | — | — | — | 14 |
 | [United States Court of Appeals For The Armed Forces](courts/military/court-of-appeals-for-the-armed-forces) | `armfor` | up for review | — | — | — | 14 |
 | [United States Court of Military Commission Review](courts/military/court-of-military-commission-review) | `mc` | up for review | — | — | — | 14 |
@@ -108,10 +108,10 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Department of Justice Board of Immigration Appeals](courts/national/board-of-immigration-appeals) | `bia` | up for review | — | — | — | 14 |
-| [United States Foreign Intelligence Surveillance Court](courts/national/foreign-intelligence-surveillance-court) | `fisc` | in progress | — | — | — | 14 |
+| [United States Foreign Intelligence Surveillance Court](courts/national/foreign-intelligence-surveillance-court) | `fisc` | up for review | — | — | — | 14 |
 | [United States Foreign Intelligence Surveillance Court of Review](courts/national/foreign-intelligence-surveillance-court-of-review) | `fiscr` | up for review | — | — | — | 14 |
 | [United States Judicial Panel on Multidistrict Litigation](courts/national/judicial-panel-on-multidistrict-litigation) | `jpml` | up for review | — | — | — | 14 |
-| [United States Tax Court](courts/national/tax-court) | `tax` | in progress | — | — | — | 14 |
+| [United States Tax Court](courts/national/tax-court) | `tax` | up for review | — | — | — | 14 |
 
 ## First Circuit
 
@@ -132,8 +132,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/bankruptcy-district) | `mab` | in progress | — | — | — | 14 |
-| [District Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/district) | `mad` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/bankruptcy-district) | `mab` | up for review | — | — | — | 14 |
+| [District Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/district) | `mad` | up for review | — | — | — | 14 |
 | [Massachusetts Appeals Court](courts/first-circuit/massachusetts/state/appeals-court) | `massappct` | in progress | — | — | — | 14 |
 | [Massachusetts Appellate Tax Board](courts/first-circuit/massachusetts/state/appellate-tax-board) | `masstaxbd` | todo | — | — | — | 0 |
 | [Massachusetts Department of Industrial Accidents](courts/first-circuit/massachusetts/state/department-of-industrial-accidents) | `maworkcompcom` | todo | — | — | — | 0 |
@@ -152,7 +152,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Puerto Rico](courts/first-circuit/puerto-rico/federal/bankruptcy-district) | `prb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Puerto Rico](courts/first-circuit/puerto-rico/federal/bankruptcy-district) | `prb` | up for review | — | — | — | 14 |
 | [District Court, D. Puerto Rico](courts/first-circuit/puerto-rico/federal/district) | `prd` | up for review | — | — | — | 14 |
 | [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](courts/first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Puerto Rico](courts/first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | in progress | — | — | — | 14 |
@@ -170,14 +170,14 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Second Circuit](courts/second-circuit/court-of-appeals) | `ca2` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Second Circuit](courts/second-circuit/court-of-appeals) | `ca2` | up for review | — | — | — | 14 |
 
 ### Connecticut
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Connecticut](courts/second-circuit/connecticut/federal/bankruptcy-district) | `ctb` | in progress | — | — | — | 14 |
-| [United States District Court for the District of Connecticut](courts/second-circuit/connecticut/federal/district) | `ctd` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Connecticut](courts/second-circuit/connecticut/federal/district) | `ctd` | up for review | — | — | — | 14 |
 | [Connecticut Compensation Review Board](courts/second-circuit/connecticut/state/compensation-review-board) | `connworkcompcom` | todo | — | — | — | 0 |
 | [Connecticut Court of Appeals](courts/second-circuit/connecticut/state/court-of-appeals) | `connappct` | in progress | — | — | — | 14 |
 | [Connecticut Supreme Court](courts/second-circuit/connecticut/state/supreme-court) | `conn` | in progress | — | — | — | 14 |
@@ -187,13 +187,13 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, E.D. New York](courts/second-circuit/new-york/federal/bankruptcy-eastern-district) | `nyeb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, N.D. New York](courts/second-circuit/new-york/federal/bankruptcy-northern-district) | `nynb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, N.D. New York](courts/second-circuit/new-york/federal/bankruptcy-northern-district) | `nynb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. New York](courts/second-circuit/new-york/federal/bankruptcy-southern-district) | `nysb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. New York](courts/second-circuit/new-york/federal/bankruptcy-western-district) | `nywb` | up for review | — | — | — | 14 |
 | [District Court, E.D. New York](courts/second-circuit/new-york/federal/eastern-district) | `nyed` | up for review | — | — | — | 14 |
-| [District Court, N.D. New York](courts/second-circuit/new-york/federal/northern-district) | `nynd` | in progress | — | — | — | 14 |
-| [District Court, S.D. New York](courts/second-circuit/new-york/federal/southern-district) | `nysd` | in progress | — | — | — | 14 |
-| [District Court, W.D. New York](courts/second-circuit/new-york/federal/western-district) | `nywd` | in progress | — | — | — | 14 |
+| [District Court, N.D. New York](courts/second-circuit/new-york/federal/northern-district) | `nynd` | up for review | — | — | — | 14 |
+| [District Court, S.D. New York](courts/second-circuit/new-york/federal/southern-district) | `nysd` | up for review | — | — | — | 14 |
+| [District Court, W.D. New York](courts/second-circuit/new-york/federal/western-district) | `nywd` | up for review | — | — | — | 14 |
 | [Appellate Terms of the Supreme Court of New York](courts/second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | in progress | — | — | — | 14 |
 | [New York Commission of Appeals](courts/second-circuit/new-york/state/commission-of-appeals) | `nycommnapp` | todo | — | — | — | 0 |
 | [Court for the Trial of Impeachments](courts/second-circuit/new-york/state/court-for-the-trial-of-impeachments) | `nyimpct` | todo | — | — | — | 0 |
@@ -220,7 +220,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Delaware](courts/third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | — | — | — | 14 |
-| [United States District Court for the District of Delaware](courts/third-circuit/delaware/federal/district) | `ded` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Delaware](courts/third-circuit/delaware/federal/district) | `ded` | up for review | — | — | — | 14 |
 | [Delaware Court of Chancery](courts/third-circuit/delaware/state/court-of-chancery) | `delch` | todo | — | — | — | 0 |
 | [Court on the Judiciary of Delaware](courts/third-circuit/delaware/state/court-on-the-judiciary) | `deljudct` | todo | — | — | — | 0 |
 | [Delaware Family Court](courts/third-circuit/delaware/state/family-court) | `delfamct` | todo | — | — | — | 0 |
@@ -241,9 +241,9 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-western-district) | `pawb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-western-district) | `pawb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/eastern-district) | `paed` | up for review | — | — | — | 14 |
-| [District Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/middle-district) | `pamd` | in progress | — | — | — | 14 |
+| [District Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/middle-district) | `pamd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/western-district) | `pawd` | up for review | — | — | — | 14 |
 | [Commonwealth Court of Pennsylvania](courts/third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | in progress | — | — | — | 14 |
 | [Court of Judicial Discipline of Pennsylvania](courts/third-circuit/pennsylvania/state/court-of-judicial-discipline) | `cjdpa` | in progress | — | — | — | 0 |
@@ -254,7 +254,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Virgin Islands](courts/third-circuit/virgin-islands/federal/bankruptcy-district) | `vib` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Virgin Islands](courts/third-circuit/virgin-islands/federal/bankruptcy-district) | `vib` | up for review | — | — | — | 14 |
 | [District Court, Virgin Islands](courts/third-circuit/virgin-islands/federal/district) | `vid` | up for review | — | — | — | 14 |
 
 ## Fourth Circuit
@@ -323,7 +323,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Fifth Circuit](courts/fifth-circuit/court-of-appeals) | `ca5` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Fifth Circuit](courts/fifth-circuit/court-of-appeals) | `ca5` | up for review | — | — | — | 14 |
 
 ### Louisiana
 
@@ -332,9 +332,9 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, E.D. Louisiana](courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district) | `laeb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, M.D. Louisiana](courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district) | `lamb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Louisiana](courts/fifth-circuit/louisiana/federal/bankruptcy-western-district) | `lawb` | in progress | — | — | — | 0 |
-| [United States District Court Eastern District of Louisiana](courts/fifth-circuit/louisiana/federal/eastern-district) | `laed` | in progress | — | — | — | 14 |
-| [District Court, M.D. Louisiana](courts/fifth-circuit/louisiana/federal/middle-district) | `lamd` | in progress | — | — | — | 14 |
-| [District Court, W.D. Louisiana](courts/fifth-circuit/louisiana/federal/western-district) | `lawd` | in progress | — | — | — | 14 |
+| [United States District Court Eastern District of Louisiana](courts/fifth-circuit/louisiana/federal/eastern-district) | `laed` | up for review | — | — | — | 14 |
+| [District Court, M.D. Louisiana](courts/fifth-circuit/louisiana/federal/middle-district) | `lamd` | up for review | — | — | — | 14 |
+| [District Court, W.D. Louisiana](courts/fifth-circuit/louisiana/federal/western-district) | `lawd` | up for review | — | — | — | 14 |
 | [Louisiana Court of Appeal](courts/fifth-circuit/louisiana/state/court-of-appeal) | `lactapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Louisiana](courts/fifth-circuit/louisiana/state/supreme-court) | `la` | in progress | — | — | — | 14 |
 
@@ -344,7 +344,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, N.D. Mississippi](courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district) | `msnb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, S.D. Mississippi](courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district) | `mssb` | in progress | — | — | — | 0 |
-| [District Court, N.D. Mississippi](courts/fifth-circuit/mississippi/federal/northern-district) | `msnd` | in progress | — | — | — | 14 |
+| [District Court, N.D. Mississippi](courts/fifth-circuit/mississippi/federal/northern-district) | `msnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Mississippi](courts/fifth-circuit/mississippi/federal/southern-district) | `mssd` | up for review | — | — | — | 14 |
 | [Mississippi Chancery Courts](courts/fifth-circuit/mississippi/state/chancery-courts) | `misschanceryct` | in progress | — | — | — | 0 |
 | [Court of Appeals of Mississippi](courts/fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | in progress | — | — | — | 14 |
@@ -834,13 +834,13 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Supreme Court of the United States | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 14.0% |
 |  | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | Federal Circuit and feeder courts | 6 | 0 | 4 | 2 | 0 | 0.0% | 66.6% | 0 | 0 | 0 | 14.0% |
-| Military courts | 6 | 0 | 3 | 3 | 0 | 0.0% | 50.0% | 0 | 0 | 0 | 11.6% |
-| National courts and tribunals | 5 | 0 | 3 | 2 | 0 | 0.0% | 60.0% | 0 | 0 | 0 | 14.0% |
-| First Circuit | 23 | 0 | 9 | 10 | 4 | 0.0% | 39.1% | 0 | 0 | 0 | 11.5% |
-| Second Circuit | 23 | 0 | 5 | 14 | 4 | 0.0% | 21.7% | 0 | 0 | 0 | 11.5% |
-| Third Circuit | 23 | 0 | 9 | 10 | 4 | 0.0% | 39.1% | 0 | 0 | 0 | 10.9% |
+| Military courts | 6 | 0 | 5 | 1 | 0 | 0.0% | 83.3% | 0 | 0 | 0 | 11.6% |
+| National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
+| First Circuit | 23 | 0 | 12 | 7 | 4 | 0.0% | 52.1% | 0 | 0 | 0 | 11.5% |
+| Second Circuit | 23 | 0 | 11 | 8 | 4 | 0.0% | 47.8% | 0 | 0 | 0 | 11.5% |
+| Third Circuit | 23 | 0 | 13 | 6 | 4 | 0.0% | 56.5% | 0 | 0 | 0 | 10.9% |
 | Fourth Circuit | 32 | 0 | 1 | 29 | 2 | 0.0% | 3.1% | 0 | 0 | 0 | 5.2% |
-| Fifth Circuit | 30 | 0 | 1 | 28 | 1 | 0.0% | 3.3% | 0 | 0 | 0 | 7.0% |
+| Fifth Circuit | 30 | 0 | 6 | 23 | 1 | 0.0% | 20.0% | 0 | 0 | 0 | 7.0% |
 | Sixth Circuit | 30 | 0 | 6 | 24 | 0 | 0.0% | 20.0% | 0 | 0 | 0 | 7.9% |
 | Seventh Circuit | 22 | 0 | 11 | 10 | 1 | 0.0% | 50.0% | 0 | 0 | 0 | 13.3% |
 | Eighth Circuit | 39 | 0 | 9 | 29 | 1 | 0.0% | 23.0% | 0 | 0 | 0 | 11.1% |
@@ -848,7 +848,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Tenth Circuit | 34 | 0 | 0 | 31 | 3 | 0.0% | 0.0% | 0 | 0 | 0 | 4.5% |
 | Eleventh Circuit | 32 | 0 | 0 | 32 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 5.6% |
 | D.C. Circuit | 4 | 0 | 3 | 1 | 0 | 0.0% | 75.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 76 | 276 | 24 | 0.0% | 20.2% | 1 | 0 | 0 | 9.5% |
+| **Total** | 376 | 0 | 98 | 254 | 24 | 0.0% | 26.0% | 1 | 0 | 0 | 9.5% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -857,13 +857,13 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 |  | 2 | 2 | 2 | 2 | 2 | 2 | 100.0% | 1 |
 | Supreme Court of the United States | 3 | 3 | 3 | 3 | 3 | 3 | 100.0% | 0 |
 | Federal Circuit and feeder courts | 13 | 13 | 13 | 13 | 13 | 13 | 100.0% | 10 |
-| Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 8 |
-| National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 3 |
-| First Circuit | 26 | 26 | 26 | 26 | 25 | 25 | 96.1% | 23 |
-| Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 20 |
-| Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 23 |
-| Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 32 |
-| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 25 |
+| Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 12 |
+| National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 6 |
+| First Circuit | 26 | 26 | 26 | 26 | 25 | 25 | 96.1% | 26 |
+| Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 29 |
+| Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 27 |
+| Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 36 |
+| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 41 |
 | Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 34 |
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 27 |
 | Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 36 |
@@ -871,5 +871,5 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 32 |
 | Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 40 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 365 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 408 |
 <!-- tracker:end -->
