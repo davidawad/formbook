@@ -217,6 +217,7 @@
   // Footnotes at 10 pt, single spaced (L.R. 5-4(a)(4)).
   show footnote.entry: set text(size: note-size)
   show footnote.entry: set par(leading: single-leading)
+  show footnote.entry: it => block(breakable: false, it)
 
   cover(meta)
   caption(meta)

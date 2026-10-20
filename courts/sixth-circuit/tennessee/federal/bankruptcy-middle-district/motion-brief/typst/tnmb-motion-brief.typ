@@ -194,6 +194,7 @@
 
   // LBR 5005-3(a) applies 12-point type to all filings, footnotes included (the exemplar's are smaller; README.md).
   show footnote.entry: set text(size: type-size)
+  show footnote.entry: it => block(breakable: false, it)
   // Block quotations are single-spaced and indented from both margins.
   show quote.where(block: true): it => pad(x: 0.5in, {
     set par(leading: single-leading, spacing: 0pt)

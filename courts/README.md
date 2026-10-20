@@ -193,7 +193,7 @@ Courts under `courts` (375).
 | [District Court, S.D. Illinois](seventh-circuit/illinois/federal/southern-district) | `ilsd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-northern-district) | `innb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-southern-district) | `insb` | in progress | — | — | — | 14 |
-| [District Court, N.D. Indiana](seventh-circuit/indiana/federal/northern-district) | `innd` | in progress | — | — | — | 14 |
+| [District Court, N.D. Indiana](seventh-circuit/indiana/federal/northern-district) | `innd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Indiana](seventh-circuit/indiana/federal/southern-district) | `insd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-eastern-district) | `wieb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-western-district) | `wiwb` | in progress | — | — | — | 14 |
