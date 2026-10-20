@@ -58,7 +58,10 @@ function resolve(s,    out, i, c, n, d, j, depth, txt, url, k, ital) {
 function flush(   t) {
   if (buf != "") {
     t = resolve(buf)
-    print bkind "\t-\t\t" t
+    if (DEHYPHEN != "" && t ~ /\{\{[^{}]*\}\}/) {    # default checks: a {{name}} placeholder is expanded by the template, so it matches any text:
+      n = split(t, seg, /\{\{[^{}]*\}\}/)              # the block becomes its literal segments, each found in order; the placeholder itself is skipped
+      for (i = 1; i <= n; i++) if (seg[i] !~ /^[ \t]*$/) print bkind "\t-\t\t" seg[i]
+    } else print bkind "\t-\t\t" t
   }
   buf = ""; bkind = ""
 }

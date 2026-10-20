@@ -232,4 +232,66 @@ mod tests {
             "1\t300\t730.5\t310\t740\tx\ti\n1\t72\t72\t80\t86\tx\tword\n2\t300\t720\t1\t1\tx\t1\n";
         assert_eq!(labels(words, 720), "1\ti\n2\t1\n");
     }
+
+    /// DEF-CONT-001 on a one-page document: `blocks_missing` for `md` against PDF text `runs`.
+    fn g0_missing(md: &str, runs: &[&str]) -> String {
+        let chk = format!("{}/../check", env!("CARGO_MANIFEST_DIR"));
+        let dir = std::env::temp_dir().join(format!("fb-g0-{}-{}", std::process::id(), md.len()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let (mdf, runsf, blocks) = (
+            dir.join("a.md"),
+            dir.join("runs.tsv"),
+            dir.join("blocks.tsv"),
+        );
+        std::fs::write(&mdf, md).unwrap();
+        let rows: String = runs
+            .iter()
+            .enumerate()
+            .map(|(i, t)| format!("1\t{}\t0\t0\t0\t0\t{t}\n", 100 + 20 * i))
+            .collect();
+        std::fs::write(&runsf, rows).unwrap();
+        let b = std::process::Command::new("gawk")
+            .args(["-v", "DEHYPHEN=1", "-f", &format!("{chk}/md-blocks.awk")])
+            .arg(&mdf)
+            .output()
+            .unwrap();
+        std::fs::write(&blocks, b.stdout).unwrap();
+        let out = format!("out={}", dir.join("g0").display());
+        let ok = std::process::Command::new("gawk")
+            .env("LC_ALL", "en_US.UTF-8")
+            .args(["-v", "DEHYPHEN=1", "-v", &out, "-v", "footer_top=720"])
+            .args([
+                "-f",
+                &format!("{chk}/norm.awk"),
+                "-f",
+                &format!("{chk}/gate0.awk"),
+            ])
+            .arg(&runsf)
+            .arg(&blocks)
+            .status()
+            .unwrap()
+            .success();
+        assert!(ok);
+        let m = std::fs::read_to_string(dir.join("g0.metrics")).unwrap();
+        m.lines()
+            .find_map(|l| l.strip_prefix("blocks_missing=").map(String::from))
+            .unwrap()
+    }
+
+    #[test]
+    fn placeholder_is_a_wildcard_but_real_text_still_counts() {
+        let md = "First paragraph.\n\nWord count: {{words}} words.\n\n{{toc}}\n\nLast paragraph.\n";
+        let runs = [
+            "First paragraph.",
+            "Word count: 1,577 words.",
+            "Last paragraph.",
+        ];
+        assert_eq!(g0_missing(md, &runs), "0");
+        // a real sentence missing from the PDF still fails
+        let runs = ["First paragraph.", "Word count: 1,577 words."];
+        assert_eq!(g0_missing(md, &runs), "1");
+        // the literal text around the placeholder is still required
+        let runs = ["First paragraph.", "Word total: 1,577.", "Last paragraph."];
+        assert_ne!(g0_missing(md, &runs), "0");
+    }
 }
