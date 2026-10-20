@@ -4,7 +4,7 @@
 - Alias: `scotus`
 - CourtListener: [scotus](https://www.courtlistener.com/?court=scotus)
 - Level: supreme
-- Status: **in progress** (14%); manual status in `court.json`: `todo`
+- Status: **up for review** (14%); manual status in `court.json`: `todo`
 
 ## Checklist
 
@@ -23,13 +23,13 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 ## Doc folders
 
-0 of 3 doc folders with an INPUT pass the typst eval.
+3 of 3 doc folders with an INPUT pass the typst eval.
 
 | Doc folder | Status | Eval |
 |---|---|---|
-| [amicus-brief](amicus-brief) | in progress | not passing |
-| [cert-petition](cert-petition) | in progress | not passing |
-| [merits-brief](merits-brief) | in progress | not passing |
+| [amicus-brief](amicus-brief) | up for review | pass |
+| [cert-petition](cert-petition) | up for review | pass |
+| [merits-brief](merits-brief) | up for review | pass |
 
 ## Folders
 

@@ -10,7 +10,7 @@ Courts under `courts/ninth-circuit/california` (19).
 | [United States Bankruptcy Court, N.D. California](federal/bankruptcy-northern-district) | `canb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. California](federal/bankruptcy-southern-district) | `casb` | up for review | — | — | — | 14 |
 | [United States District Court for the Central District of California](federal/central-district) | `cacd` | up for review | — | — | — | 14 |
-| [United States District Court for the Eastern District of California](federal/eastern-district) | `caed` | in progress | — | — | — | 14 |
+| [United States District Court for the Eastern District of California](federal/eastern-district) | `caed` | up for review | — | — | — | 14 |
 | [United States District Court for the Northern District of California](federal/northern-district) | `cand` | up for review | — | — | — | 14 |
 | [United States District Court for the Southern District of California](federal/southern-district) | `casd` | up for review | — | — | — | 14 |
 | [California Court of Appeal, Fifth Appellate District](state/court-of-appeal-fifth-district) | `calctapp5d` | in progress | — | — | — | 14 |

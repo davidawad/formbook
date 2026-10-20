@@ -17,7 +17,7 @@ Courts under `courts/eighth-circuit` (39).
 | [District Court, S.D. Iowa](iowa/federal/southern-district) | `iasd` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, D. Minnesota](minnesota/federal/bankruptcy-district) | `mnb` | up for review | — | — | — | 14 |
 | [District Court, D. Minnesota](minnesota/federal/district) | `mnd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, E.D. Missouri](missouri/federal/bankruptcy-eastern-district) | `moeb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, E.D. Missouri](missouri/federal/bankruptcy-eastern-district) | `moeb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Missouri](missouri/federal/bankruptcy-western-district) | `mowb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Missouri](missouri/federal/eastern-district) | `moed` | up for review | — | — | — | 14 |
 | [District Court, W.D. Missouri](missouri/federal/western-district) | `mowd` | up for review | — | — | — | 14 |

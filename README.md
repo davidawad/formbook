@@ -79,7 +79,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Supreme Court of the United States](courts/supreme-court-of-the-united-states) | `scotus` | in progress | — | — | — | 14 |
+| [Supreme Court of the United States](courts/supreme-court-of-the-united-states) | `scotus` | up for review | — | — | — | 14 |
 
 ## Federal Circuit and feeder courts
 
@@ -509,7 +509,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Missouri](courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district) | `moeb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, E.D. Missouri](courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district) | `moeb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Missouri](courts/eighth-circuit/missouri/federal/bankruptcy-western-district) | `mowb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Missouri](courts/eighth-circuit/missouri/federal/eastern-district) | `moed` | up for review | — | — | — | 14 |
 | [District Court, W.D. Missouri](courts/eighth-circuit/missouri/federal/western-district) | `mowd` | up for review | — | — | — | 14 |
@@ -580,7 +580,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, N.D. California](courts/ninth-circuit/california/federal/bankruptcy-northern-district) | `canb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. California](courts/ninth-circuit/california/federal/bankruptcy-southern-district) | `casb` | up for review | — | — | — | 14 |
 | [United States District Court for the Central District of California](courts/ninth-circuit/california/federal/central-district) | `cacd` | up for review | — | — | — | 14 |
-| [United States District Court for the Eastern District of California](courts/ninth-circuit/california/federal/eastern-district) | `caed` | in progress | — | — | — | 14 |
+| [United States District Court for the Eastern District of California](courts/ninth-circuit/california/federal/eastern-district) | `caed` | up for review | — | — | — | 14 |
 | [United States District Court for the Northern District of California](courts/ninth-circuit/california/federal/northern-district) | `cand` | up for review | — | — | — | 14 |
 | [United States District Court for the Southern District of California](courts/ninth-circuit/california/federal/southern-district) | `casd` | up for review | — | — | — | 14 |
 | [California Court of Appeal, Fifth Appellate District](courts/ninth-circuit/california/state/court-of-appeal-fifth-district) | `calctapp5d` | in progress | — | — | — | 14 |
@@ -599,7 +599,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Guam](courts/ninth-circuit/guam/federal/bankruptcy-district) | `gub` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Guam](courts/ninth-circuit/guam/federal/bankruptcy-district) | `gub` | up for review | — | — | — | 14 |
 | [District Court, D. Guam](courts/ninth-circuit/guam/federal/district) | `gud` | up for review | — | — | — | 14 |
 | [Supreme Court of Guam](courts/ninth-circuit/guam/state/supreme-court) | `guam` | in progress | — | — | — | 14 |
 
@@ -617,7 +617,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Idaho](courts/ninth-circuit/idaho/federal/bankruptcy-district) | `idb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Idaho](courts/ninth-circuit/idaho/federal/bankruptcy-district) | `idb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Idaho](courts/ninth-circuit/idaho/federal/district) | `idd` | up for review | — | — | — | 14 |
 | [Idaho Court of Appeals](courts/ninth-circuit/idaho/state/court-of-appeals) | `idahoctapp` | in progress | — | — | — | 14 |
 | [Idaho Supreme Court](courts/ninth-circuit/idaho/state/supreme-court) | `idaho` | in progress | — | — | — | 14 |
@@ -635,7 +635,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Nevada](courts/ninth-circuit/nevada/federal/bankruptcy-district) | `nvb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Nevada](courts/ninth-circuit/nevada/federal/bankruptcy-district) | `nvb` | up for review | — | — | — | 14 |
 | [District Court, D. Nevada](courts/ninth-circuit/nevada/federal/district) | `nvd` | up for review | — | — | — | 14 |
 | [Court of Appeals of Nevada](courts/ninth-circuit/nevada/state/court-of-appeals) | `nevapp` | in progress | — | — | — | 14 |
 | [Nevada Supreme Court](courts/ninth-circuit/nevada/state/supreme-court) | `nev` | in progress | — | — | — | 14 |
@@ -831,7 +831,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 <!-- tracker:start -->
 | Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Supreme Court of the United States | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 14.0% |
+| Supreme Court of the United States | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
 |  | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
 | Military courts | 6 | 0 | 5 | 1 | 0 | 0.0% | 83.3% | 0 | 0 | 0 | 11.6% |
@@ -843,19 +843,19 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Fifth Circuit | 30 | 0 | 6 | 23 | 1 | 0.0% | 20.0% | 0 | 0 | 0 | 7.0% |
 | Sixth Circuit | 30 | 0 | 8 | 22 | 0 | 0.0% | 26.6% | 0 | 0 | 0 | 7.9% |
 | Seventh Circuit | 22 | 0 | 15 | 6 | 1 | 0.0% | 68.1% | 0 | 0 | 0 | 13.3% |
-| Eighth Circuit | 39 | 0 | 14 | 24 | 1 | 0.0% | 35.8% | 0 | 0 | 0 | 11.1% |
-| Ninth Circuit | 65 | 0 | 27 | 34 | 4 | 0.0% | 41.5% | 1 | 0 | 0 | 12.7% |
+| Eighth Circuit | 39 | 0 | 15 | 23 | 1 | 0.0% | 38.4% | 0 | 0 | 0 | 11.1% |
+| Ninth Circuit | 65 | 0 | 31 | 30 | 4 | 0.0% | 47.6% | 1 | 0 | 0 | 12.7% |
 | Tenth Circuit | 34 | 0 | 0 | 31 | 3 | 0.0% | 0.0% | 0 | 0 | 0 | 4.5% |
 | Eleventh Circuit | 32 | 0 | 0 | 32 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 5.6% |
 | D.C. Circuit | 4 | 0 | 3 | 1 | 0 | 0.0% | 75.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 128 | 224 | 24 | 0.0% | 34.0% | 1 | 0 | 0 | 9.5% |
+| **Total** | 376 | 0 | 134 | 218 | 24 | 0.0% | 35.6% | 1 | 0 | 0 | 9.5% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
 | Group | Doc types | Template | Sample | Render | Exemplar | Typst complete | % complete | Up for review |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 |  | 2 | 2 | 2 | 2 | 2 | 2 | 100.0% | 2 |
-| Supreme Court of the United States | 3 | 3 | 3 | 3 | 3 | 3 | 100.0% | 0 |
+| Supreme Court of the United States | 3 | 3 | 3 | 3 | 3 | 3 | 100.0% | 3 |
 | Federal Circuit and feeder courts | 13 | 13 | 13 | 13 | 13 | 13 | 100.0% | 13 |
 | Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 12 |
 | National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 6 |
@@ -863,13 +863,13 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 32 |
 | Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 27 |
 | Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 39 |
-| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 45 |
-| Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 40 |
+| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 46 |
+| Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 42 |
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 31 |
-| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 44 |
-| Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 66 |
-| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 37 |
-| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 46 |
+| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 46 |
+| Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 72 |
+| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 39 |
+| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 48 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 473 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 491 |
 <!-- tracker:end -->
