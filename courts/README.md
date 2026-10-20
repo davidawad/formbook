@@ -188,7 +188,7 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, C.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-central-district) | `ilcb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-northern-district) | `ilnb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-southern-district) | `ilsb` | in progress | — | — | — | 14 |
-| [District Court, C.D. Illinois](seventh-circuit/illinois/federal/central-district) | `ilcd` | in progress | — | — | — | 14 |
+| [District Court, C.D. Illinois](seventh-circuit/illinois/federal/central-district) | `ilcd` | up for review | — | — | — | 14 |
 | [District Court, N.D. Illinois](seventh-circuit/illinois/federal/northern-district) | `ilnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Illinois](seventh-circuit/illinois/federal/southern-district) | `ilsd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-northern-district) | `innb` | up for review | — | — | — | 14 |
@@ -271,7 +271,7 @@ Courts under `courts` (375).
 | [District Court, D. Nevada](ninth-circuit/nevada/federal/district) | `nvd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, Northern Mariana Islands](ninth-circuit/northern-mariana-islands/federal/bankruptcy-district) | `nmib` | in progress | — | — | — | 0 |
 | [District Court, Northern Mariana Islands](ninth-circuit/northern-mariana-islands/federal/district) | `nmid` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Oregon](ninth-circuit/oregon/federal/bankruptcy-district) | `orb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Oregon](ninth-circuit/oregon/federal/bankruptcy-district) | `orb` | up for review | — | — | — | 14 |
 | [District Court, D. Oregon](ninth-circuit/oregon/federal/district) | `ord` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Washington](ninth-circuit/washington/federal/bankruptcy-eastern-district) | `waeb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Washington](ninth-circuit/washington/federal/bankruptcy-western-district) | `wawb` | in progress | — | — | — | 14 |
@@ -378,7 +378,7 @@ Courts under `courts` (375).
 | [Georgia Supreme Court](eleventh-circuit/georgia/state/supreme-court) | `ga` | in progress | — | — | — | 14 |
 | [Court of Appeals for the D.C. Circuit](dc-circuit/court-of-appeals) | `cadc` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, District of Columbia](dc-circuit/district-of-columbia/federal/bankruptcy-district) | `dcb` | up for review | — | — | — | 14 |
-| [District Court, District of Columbia](dc-circuit/district-of-columbia/federal/district) | `dcd` | in progress | — | — | — | 14 |
+| [District Court, District of Columbia](dc-circuit/district-of-columbia/federal/district) | `dcd` | up for review | — | — | — | 14 |
 | [District of Columbia Court of Appeals](dc-circuit/district-of-columbia/state/court-of-appeals) | `dc` | in progress | — | — | — | 14 |
 
 [Formbook index](../README.md)

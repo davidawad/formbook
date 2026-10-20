@@ -8,7 +8,7 @@ Courts under `courts/seventh-circuit/illinois` (8).
 | [United States Bankruptcy Court, C.D. Illinois](federal/bankruptcy-central-district) | `ilcb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Illinois](federal/bankruptcy-northern-district) | `ilnb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. Illinois](federal/bankruptcy-southern-district) | `ilsb` | in progress | — | — | — | 14 |
-| [District Court, C.D. Illinois](federal/central-district) | `ilcd` | in progress | — | — | — | 14 |
+| [District Court, C.D. Illinois](federal/central-district) | `ilcd` | up for review | — | — | — | 14 |
 | [District Court, N.D. Illinois](federal/northern-district) | `ilnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Illinois](federal/southern-district) | `ilsd` | up for review | — | — | — | 14 |
 | [Appellate Court of Illinois](state/appellate-court) | `illappct` | in progress | — | — | — | 14 |
