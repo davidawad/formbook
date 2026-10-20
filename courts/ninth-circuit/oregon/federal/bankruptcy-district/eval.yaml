@@ -1,0 +1,4 @@
+# ORB-FORM-003 (LBR 9004-1(a)(2), ORB-LBR): side margins at least three-quarters inch (top and bottom one inch).
+# The checker takes one margin for all four sides, so it uses the smallest side margin the rule allows.
+params:
+  margin_pt: 54
