@@ -426,10 +426,10 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 28 |
 | Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 42 |
 | Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 46 |
-| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 35 |
+| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 36 |
 | Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 45 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 431 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 432 |
 
 ## Typst per doc type
 
@@ -853,7 +853,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | okeb | [adversary-complaint](courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/adversary-complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | okeb | [motion-brief](courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/motion-brief) | yes | 2 | yes | 2 | in progress | **complete** |
 | oknb | [adversary-complaint](courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/adversary-complaint) | yes | 1 | yes | 1 | up for review | **complete** |
-| oknb | [motion-brief](courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/motion-brief) | yes | 1 | yes | 1 | in progress | **complete** |
+| oknb | [motion-brief](courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | okwb | [adversary-complaint](courts/tenth-circuit/oklahoma/federal/bankruptcy-western-district/adversary-complaint) | yes | 1 | yes | 1 | up for review | **complete** |
 | okd | [complaint](courts/tenth-circuit/oklahoma/federal/district/complaint) | yes | 1 | yes | 1 | up for review | **complete** |
 | okd | [motion-brief](courts/tenth-circuit/oklahoma/federal/district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |

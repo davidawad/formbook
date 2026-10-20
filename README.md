@@ -868,8 +868,8 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 28 |
 | Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 42 |
 | Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 46 |
-| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 35 |
+| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 36 |
 | Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 45 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 431 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 432 |
 <!-- tracker:end -->
