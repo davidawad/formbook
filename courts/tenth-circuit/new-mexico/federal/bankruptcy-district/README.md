@@ -25,11 +25,11 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 ## Doc folders
 
-0 of 2 doc folders with an INPUT pass the typst eval.
+1 of 2 doc folders with an INPUT pass the typst eval.
 
 | Doc folder | Status | Eval |
 |---|---|---|
-| [adversary-complaint](adversary-complaint) | in progress | not passing |
+| [adversary-complaint](adversary-complaint) | up for review | pass |
 | [motion-brief](motion-brief) | in progress | not passing |
 
 ## Folders

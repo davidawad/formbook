@@ -5,7 +5,7 @@ Courts under `courts/fifth-circuit` (30).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Fifth Circuit](court-of-appeals) | `ca5` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Fifth Circuit](court-of-appeals) | `ca5` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Louisiana](louisiana/federal/bankruptcy-eastern-district) | `laeb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, M.D. Louisiana](louisiana/federal/bankruptcy-middle-district) | `lamb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Louisiana](louisiana/federal/bankruptcy-western-district) | `lawb` | in progress | — | — | — | 0 |

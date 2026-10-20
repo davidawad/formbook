@@ -1,2 +1,2 @@
 PASS
-d213d49ce9ec6530fc5f89f494a652f5cf04bc62b052f87476944bfcebb1b66d  usage/OUTPUT-complaint.typst.pdf
+700aa27506548117b777229287d886304359e8eb8bd34086a24659703ec74730  usage/OUTPUT-complaint.typst.pdf
