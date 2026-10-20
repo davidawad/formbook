@@ -3,23 +3,6 @@ use crate::{fail, repo_root, Res};
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-fn pinned_tnr_dir() -> Res<PathBuf> {
-    let p = if cfg!(target_os = "macos") {
-        "/System/Library/Fonts/Supplemental"
-    } else if cfg!(target_os = "linux") {
-        "/usr/share/fonts/truetype/msttcorefonts"
-    } else {
-        return Err(fail(
-            2,
-            "fb render: Times New Roman font directory is pinned only for macOS and Linux",
-        ));
-    };
-    if !Path::new(p).is_dir() {
-        return Err(fail(2, format!("fb render: pinned Times New Roman font directory is missing: {p}; install ttf-mscorefonts-installer on Linux")));
-    }
-    Ok(PathBuf::from(p))
-}
-
 /// usage/OUTPUT-<id>.<engine>.pdf for usage/INPUT-<id>.md (the same id).
 fn default_out(doc: &Path, sample: &Path, engine: &str) -> Res<PathBuf> {
     let d = crate::layout::Doc::open(doc)?;
@@ -94,6 +77,7 @@ fn absolute(root: &Path, p: &str) -> PathBuf {
 
 /// Compile with typst; with `Warnings::Deny`, any typst warning on stderr is a failure.
 fn typst(root: &Path, court: &Path, sample_rel: &Path, out: &Path, warnings: Warnings) -> Res<()> {
+    crate::pin::check_typst(root)?;
     let mut command = Command::new("typst");
     command
         .current_dir(root)
@@ -103,7 +87,7 @@ fn typst(root: &Path, court: &Path, sample_rel: &Path, out: &Path, warnings: War
         .arg(root.join("fonts"));
     // A Times exemplar requires the pinned directory; otherwise it is added when present so scratch
     // copies (check-selftest mutants) that declare Times New Roman still find it.
-    match pinned_tnr_dir() {
+    match crate::pin::tnr_dir(root) {
         Ok(dir) => {
             command.arg("--font-path").arg(dir);
         }

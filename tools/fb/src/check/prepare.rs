@@ -29,10 +29,11 @@ pub fn calibrate(c: &Ctx) -> Res<String> {
     );
     std::fs::write(&ctyp, typ).map_err(|e| io_fail(&ctyp, e))?;
     let fonts = format!("{}/fonts", c.root);
-    let tnr_fonts = if cfg!(target_os = "macos") {
-        "/System/Library/Fonts/Supplemental"
-    } else {
-        "/usr/share/fonts/truetype/msttcorefonts"
+    crate::pin::check_typst(std::path::Path::new(&c.root))?;
+    let tnr_fonts = match crate::pin::tnr_dir(std::path::Path::new(&c.root)) {
+        Ok(d) => d.to_string_lossy().into_owned(),
+        Err(e) if fam == "Times New Roman" => return Err(e),
+        Err(_) => fonts.clone(),
     };
     let mut t = cmd(
         &c.env,
@@ -42,7 +43,7 @@ pub fn calibrate(c: &Ctx) -> Res<String> {
             "--font-path",
             &fonts,
             "--font-path",
-            tnr_fonts,
+            &tnr_fonts,
             "--ignore-system-fonts",
             &ctyp,
             &cpdf,

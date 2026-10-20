@@ -1,0 +1,11 @@
+{
+  "typst": "0.15.1",
+  "typst_source": "infrastructure/workflows/jeffrey/Containerfile in ~/.dotfiles pins typst v0.15.1 for the box image",
+  "tnr_source": "Debian ttf-mscorefonts-installer (Times New Roman 2.82, 2000); the box image installs exactly these files. macOS /System/Library/Fonts/Supplemental ships Times New Roman 5.01 (different outlines and metrics) and must not be used.",
+  "tnr_sha256": {
+    "Times_New_Roman.ttf": "4e98adeff8ccc8ef4e3ece8d4547e288ff85fdc9c7ca711a4599c234874bbe86",
+    "Times_New_Roman_Bold.ttf": "4357b63cef20c01661a53c5dae70ffd20cb4765503aaed6d38b17a57c5a90bff",
+    "Times_New_Roman_Italic.ttf": "c25ae529b4cecdbca148b6ccb862ee0abad770af8b1fd29c8dba619d1b8da78a",
+    "Times_New_Roman_Bold_Italic.ttf": "192e1b0d18e90334e999a99f8c32808d6a2e74b3698b8cd90c943c2249a46549"
+  }
+}
