@@ -1,6 +1,6 @@
 # pdf-runs.awk: `pdftohtml -xml` output -> one record per text run, in points.
 #
-# Usage: pdftohtml -xml -zoom 2 -i -q -stdout file.pdf | gawk -f pdf-runs.awk > runs.tsv
+# Usage: pdftohtml -xml -zoom 2 -i -q -stdout file.pdf | gawk [-v zoom=2] -f pdf-runs.awk > runs.tsv   (zoom = the -zoom given to pdftohtml)
 #
 # Record: PAGE TOP LEFT WIDTH HEIGHT ITALIC TEXT        (ITALIC is 1 when poppler wrapped the run in <i>)
 # A run is a stretch of text in one font on one line, so a change of italic/roman starts a new run.
@@ -15,8 +15,10 @@ function unescape(s) {
 
 /^<page / {
   page = $0; sub(/^.*number="/, "", page); sub(/".*$/, "", page)
-  w = $0; sub(/^.*width="/, "", w); sub(/".*$/, "", w)
-  scale = w / 612
+  # poppler scales every page by the -zoom factor, whatever its size (a 441 x 666 booklet page is 882 x 1332
+  # at zoom 2), so the factor is the zoom itself. Deriving it from page width / 612 assumed letter pages and
+  # inflated the y of every run on a smaller page.
+  scale = (zoom == "" ? 2 : zoom + 0)
   next
 }
 
