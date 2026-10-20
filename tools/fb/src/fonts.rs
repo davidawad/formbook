@@ -393,9 +393,13 @@ mod tests {
     #[test]
     fn adobe_times_mapped_to_termes_does_not_want_tnr() {
         let j = |s: &str| serde_json::from_str::<Value>(s).unwrap();
-        assert!(wants_tnr(&j(r#"{"body":"timesnewroman","face":"Times New Roman"}"#)));
+        assert!(wants_tnr(&j(
+            r#"{"body":"timesnewroman","face":"Times New Roman"}"#
+        )));
         assert!(wants_tnr(&j(r#"{"body":"times","face":"Times"}"#)));
-        assert!(!wants_tnr(&j(r#"{"body":"times","face":"TeX Gyre Termes"}"#)));
+        assert!(!wants_tnr(&j(
+            r#"{"body":"times","face":"TeX Gyre Termes"}"#
+        )));
         assert!(!wants_tnr(&j(r#"{"body":"garamond","face":""}"#)));
     }
 }
