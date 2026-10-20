@@ -58,7 +58,7 @@ Body:
 
 - `# Heading` is level 1 (centered bold). `## Heading` is level 2 (bold). `### Heading` is level 3 (bold italic). Type the heading as the filing does, including any "A." label; the template does not number headings.
 - A paragraph is numbered by the template. Do not type the number.
-- A paragraph starting with `! ` is not numbered (`! Pursuant to Federal Rule ...`).
+- A paragraph starting with `<!-- unnumbered -->` is not numbered; the comment is not printed (`<!-- unnumbered -->Pursuant to Federal Rule ...`). The `! ` marker was replaced by this comment so that the printed text matches the markdown.
 - A paragraph starting `A. ` or `(a) ` is a lettered item (hanging indent); the author types the label.
 - A paragraph starting `> ` is an unnumbered, single-spaced, indented block quotation.
 - Case names and other emphasis: `*Horne v. Flores*`. Lists (`-`, `1.`) are not used by this template.

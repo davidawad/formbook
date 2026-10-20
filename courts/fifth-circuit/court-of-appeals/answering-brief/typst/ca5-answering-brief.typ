@@ -481,14 +481,15 @@
     gap: 0.5em, clearance: 0.9em, indent: 0pt,
     separator: line(length: 30%, stroke: 0.5pt),
   )
-  show footnote.entry: it => {
+  // each footnote is unbreakable, so its text is never split across a page break
+  show footnote.entry: it => block(breakable: false, {
     set text(size: type-size)   // typst's default is 0.85em; FRAP 32(a)(5)(A) allows nothing under 14 pt
     set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em)
     // marker, a thin space, then the note (typst's default runs them together)
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
     [#super(num)#h(0.25em)#note.body]
-  }
+  })
   show quote.where(block: true): it => block(above: 1em, below: 1em, pad(left: para-indent, right: para-indent, {
     set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
     it.body

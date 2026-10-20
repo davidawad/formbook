@@ -123,6 +123,9 @@
   )
 }
 
+// Markdown marker for an unnumbered paragraph; an HTML comment, so it is never printed.
+#let unnumbered-marker = "<!-- unnumbered -->"
+
 #let body-flow(body) = {
   let para-counter = counter("allegation")
   for chunk in body-chunks(body) {
@@ -132,11 +135,11 @@
       heading-block(m.captures.at(0).len(), m.captures.at(1))
     } else if t.match(regex("^([A-Za-z]\\.|\\([A-Za-z]\\))[ \\t]")) != none {
       block(width: 100%, lettered-item(t))
-    } else if t.starts-with("! ") {
-      // An unnumbered paragraph ("!" in the sample): a lead-in, or the jury demand (FRCP 10(b) numbers allegations only).
+    } else if t.starts-with(unnumbered-marker) {
+      // An unnumbered paragraph (the marker comment in the markdown, not printed): a lead-in, or the jury demand (FRCP 10(b) numbers allegations only).
       block(width: 100%, {
         h(para-indent)
-        inl(t.slice(2))
+        inl(t.slice(unnumbered-marker.len()).trim())
       })
     } else if t.starts-with(">") {
       // An indented, single-spaced quotation (unnumbered): the class definitions, for example.

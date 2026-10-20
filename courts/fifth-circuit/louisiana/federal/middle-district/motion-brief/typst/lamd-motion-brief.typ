@@ -46,7 +46,7 @@
   block(width: width, height: single-pitch, above: 0pt, below: 0pt, text(i))))
 
 /// The markdown line that marks where the signature block goes (after the conclusion, before the certificate).
-#let signature-marker = "[[signature]]"
+#let signature-marker = "<!-- signature -->"
 
 // ---------------------------------------------------------------------------
 // Page furniture

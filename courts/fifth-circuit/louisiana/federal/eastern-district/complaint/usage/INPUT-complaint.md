@@ -24,7 +24,7 @@ signature:
   - names: ["Counsel for Plaintiff and the Class"]
 ---
 
-! Plaintiff Charles Eddie Buckles (“Plaintiff”), individually and on behalf of all others similarly situated, asserts the following against Defendant IDScan.net, Inc. based on personal knowledge, where applicable, information and belief, and the investigation of counsel.
+<!-- unnumbered -->Plaintiff Charles Eddie Buckles (“Plaintiff”), individually and on behalf of all others similarly situated, asserts the following against Defendant IDScan.net, Inc. based on personal knowledge, where applicable, information and belief, and the investigation of counsel.
 
 # INTRODUCTION
 
@@ -156,7 +156,7 @@ Defendant's violation of the identified governing statute constitutes negligence
 
 # PRAYER FOR RELIEF
 
-! WHEREFORE, Plaintiff, individually and on behalf of all others similarly situated, respectfully requests that the Court:
+<!-- unnumbered -->WHEREFORE, Plaintiff, individually and on behalf of all others similarly situated, respectfully requests that the Court:
 
 A. Certify this case as a class action, and appoint Plaintiff as Class Representatives and the undersigned attorneys as Class Counsel;
 
@@ -178,4 +178,4 @@ I. Award such other and further relief as the Court deems necessary and appropri
 
 # DEMAND FOR JURY TRIAL
 
-! Pursuant to Federal Rule of Civil Procedure 38(b), Plaintiff demands a trial by jury of all issues triable as of right.
+<!-- unnumbered -->Pursuant to Federal Rule of Civil Procedure 38(b), Plaintiff demands a trial by jury of all issues triable as of right.
