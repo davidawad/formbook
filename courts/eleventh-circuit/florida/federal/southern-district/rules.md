@@ -2,6 +2,8 @@
 
 Alias `flsd`. Scope: civil complaints and motion memoranda. Verified against the Local Rules of the United States District Court for the Southern District of Florida (PDF "Local Rules effective 120125", revised December 1, 2025) and the Federal Rules of Civil Procedure (as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Scope note: Local Rule 5.1(a) states the paper form for papers exempt from CM/ECF and tendered for conventional filing. Electronically filed papers follow the CM/ECF administrative procedures, which were not retrieved in full; the paper-form rows below are the only mandated form rules located.
 
 ## Sources
