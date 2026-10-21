@@ -1,2 +1,3 @@
 PASS
+7012c04d19395b083d940531eda9243106e249d77c95a2942e1c29f6d2f7996e  usage/OUTPUT-reply-brief-2.typst.pdf
 54893e1c753221031f456eaabcaf438498b78ccae9b2e9e2887ee8b476cd9183  usage/OUTPUT-reply-brief.typst.pdf
