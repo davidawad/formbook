@@ -25,7 +25,7 @@ fn default_out(doc: &Path, sample: &Path, engine: &str) -> Res<PathBuf> {
 }
 
 /// The creation date every engine stamps into its PDF (SOURCE_DATE_EPOCH for latex and docx).
-const REPRO_EPOCH: &str = "1767225600";
+pub(crate) const REPRO_EPOCH: &str = "1767225600";
 
 /// Whether a typst warning is tolerated or fails the render.
 #[derive(Debug, Clone, Copy, PartialEq)]

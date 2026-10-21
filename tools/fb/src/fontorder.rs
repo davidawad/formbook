@@ -6,20 +6,23 @@
 //! objects' cross-reference entries are rewritten, so no other byte moves. A PDF of any other shape is left alone.
 use std::collections::{BTreeMap, BTreeSet};
 
-fn find(hay: &[u8], needle: &[u8], from: usize) -> Option<usize> {
+pub(crate) fn find(hay: &[u8], needle: &[u8], from: usize) -> Option<usize> {
     hay.get(from..)?
         .windows(needle.len())
         .position(|w| w == needle)
         .map(|p| p + from)
 }
 
-fn number(bytes: &[u8]) -> Option<usize> {
+pub(crate) fn number(bytes: &[u8]) -> Option<usize> {
     std::str::from_utf8(bytes).ok()?.trim().parse().ok()
 }
 
+/// The cross-reference table's offset, and per in-use object (offset, where its 10-digit offset field starts).
+pub(crate) type Xref = (usize, BTreeMap<usize, (usize, usize)>);
+
 /// Offsets of the in-use objects from the classic cross-reference table (one `0 N` subsection), and where
 /// each entry's 10-digit offset field starts.
-fn xref(pdf: &[u8]) -> Option<(usize, BTreeMap<usize, (usize, usize)>)> {
+pub(crate) fn xref(pdf: &[u8]) -> Option<Xref> {
     let sx = pdf.windows(9).rposition(|w| w == b"startxref")?;
     let rest = &pdf[sx + 9..];
     let digits: Vec<u8> = rest
@@ -55,7 +58,7 @@ fn xref(pdf: &[u8]) -> Option<(usize, BTreeMap<usize, (usize, usize)>)> {
 }
 
 /// The dictionary part of an object (everything before its stream data, if any).
-fn dict_part(obj: &[u8]) -> &[u8] {
+pub(crate) fn dict_part(obj: &[u8]) -> &[u8] {
     match find(obj, b"stream", 0) {
         Some(s) if !obj[..s].ends_with(b"end") => &obj[..s],
         _ => obj,

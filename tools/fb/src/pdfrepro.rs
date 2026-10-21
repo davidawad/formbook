@@ -1,8 +1,9 @@
 //! Reproducible LibreOffice PDFs (the docx engine). LibreOffice writes the wall-clock time into the Info
 //! dictionary's `/CreationDate` and derives the trailer `/ID` from it, although its XMP metadata already follows
 //! SOURCE_DATE_EPOCH. Both are rewritten in place, each byte string the same length as before, so the
-//! cross-reference offsets stay valid. Two renders of the same markdown are then the same bytes, and a Gate 2
-//! review names a sha256 that the next `fb check` (which renders again) reproduces.
+//! cross-reference offsets stay valid (t1ids.rs, which runs first, lays the file out again around the Type 1 font
+//! programs). Two renders of the same markdown are then the same bytes, and a Gate 2 review names a sha256 that the
+//! next `fb check` (which renders again) reproduces.
 
 /// `YYYYMMDDHHMMSS` of a Unix time, UTC (days to civil date: H. Hinnant's algorithm).
 fn stamp(epoch: i64) -> String {
@@ -72,10 +73,12 @@ fn fnv1a(bytes: &[u8], seed: u64) -> u64 {
     })
 }
 
-/// Put the font runs in a fixed order (fontorder.rs), then rewrite the creation and modification dates (to `epoch`), the file identifier and the document checksum (to a
+/// Put the font runs in a fixed order (fontorder.rs) and the Type 1 UniqueIDs in /FontName order (t1ids.rs), then
+/// rewrite the creation and modification dates (to `epoch`), the file identifier and the document checksum (to a
 /// hash of the rest of the file) in place.
-pub fn normalize(pdf: &mut [u8], epoch: i64) {
+pub fn normalize(pdf: &mut Vec<u8>, epoch: i64) {
     crate::fontorder::canonical(pdf);
+    crate::t1ids::canonical(pdf);
     let date = stamp(epoch);
     for key in [&b"/CreationDate(D:"[..], &b"/ModDate(D:"[..]] {
         for p in positions(pdf, key) {

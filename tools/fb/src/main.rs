@@ -30,6 +30,7 @@ mod readmes;
 mod render;
 mod selftest;
 mod showcase;
+mod t1ids;
 mod texlive;
 mod track;
 mod tracker;
