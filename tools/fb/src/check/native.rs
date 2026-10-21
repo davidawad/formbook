@@ -92,6 +92,19 @@ pub fn evaluate(c: &Ctx, s: &Sample, method: &str) -> Res<Option<Verdict>> {
                 "",
             )
         }
+        "toc_layout" => {
+            let runs = super::toclayout::parse_runs(&file(&format!("{}/runs.tsv", s.w))?);
+            let (pages, found) = super::toclayout::analyze(&s.pdf, &runs, c.ftop as f64)?;
+            let meas = match pages.len() {
+                0 => "no TABLE OF CONTENTS or TABLE OF AUTHORITIES page".to_string(),
+                n => format!("{n} table pages, {} layout defects", found.len()),
+            };
+            result(
+                found.is_empty(),
+                meas,
+                found.iter().take(8).cloned().collect::<Vec<_>>().join("\n"),
+            )
+        }
         "page_limit" => {
             let limit = super::sh::cfg(&c.env, &c.checks, ".params.page_limit")?;
             let pages: usize = s.npages.parse().unwrap_or(0);

@@ -72,9 +72,15 @@
 \newcommand{\toacite}[2]{#2\protected@write\@auxout{}{\string\toaref{#1}{\thepage}}}
 \newcommand{\toapages}[1]{\@ifundefined{toan@#1}{}{%
   \ifnum\csname toan@#1\endcsname>6 \emph{passim}\else\csname toa@#1\endcsname\fi}}
-\newcommand{\brtoagroup}[3]{\par\vspace{#2}\noindent\textbf{#1}\hfill\textbf{\underline{#3}}\par\nopagebreak}
-\newcommand{\brtoaentry}[2]{\par\begingroup\sglspace\noindent\hangindent=0.35in\hangafter=1
-  #1\ \dotfill\ \toapages{#2}\par\endgroup\vspace{0.7em}}
+\newcommand{\brtoagroup}[3]{\par\vspace{#2}\noindent\textbf{#1}\hfill\textbf{\underline{#3}}\par\nopagebreak\vspace{0.5em}\nopagebreak}
+% An entry is set like \@dottedtocline: the title lines stop short of a right margin as wide as the page
+% reference, and the reference hangs into it on the entry's last line after at least 2em of dot leaders,
+% so it never wraps onto a line of its own.
+\newcommand{\brtoaentry}[2]{\par\begingroup\sglspace\setbox0=\hbox{\toapages{#2}}%
+  \dimen0=\wd0 \advance\dimen0 by 2.8em
+  \noindent\hangindent=0.35in\hangafter=1 \rightskip=\dimen0 plus 1fil \parfillskip=-\rightskip
+  #1\nobreak\leaders\hbox to .44em{\hss.\hss}\hskip 2em plus 1fill\nobreak\hskip .3em\hbox to \wd0{\hfil\toapages{#2}}\par
+  \endgroup\vspace{0.7em}}
 \makeatother
 
 \pagestyle{plain}

@@ -117,11 +117,16 @@
   \ifnum#2=1 \addvspace{1em}\else \addvspace{1.4em}\fi
   \noindent\textbf{#1}\ifnum#2=1 \hfill\textbf{\underline{Page(s)}}\fi\par\addvspace{0.2em}\endgroup
   \nopagebreak}
+% Dot leaders and the page list that end a TOA entry (fb-595.53): the citation lines stop short of a right
+% margin as wide as the list, which hangs into it on the last line after at least 1.5em of leaders, so it
+% never wraps onto a line of its own.
+\newcommand{\caleaderpage}[1]{{\setbox0=\hbox{#1}\rightskip=\dimexpr\wd0+2.6em\relax plus 1fil\parfillskip=-\rightskip
+  \unskip\nobreak\hspace{0.8em}\nobreak\leaders\hbox to 0.16em{\hss.\hss}\hskip 1.5em plus 1fill\nobreak\hspace{0.3em}\box0\par}}
 % One authority: #1 name (may be empty; a case name is italic), #2 citation, #3 key.
 \newcommand{\catoarow}[3]{%
   \par\begingroup\casingle\addvspace{0.7em}\hangindent=0.35in\hangafter=1\relax\noindent
   \ifx\relax#1\relax\else #1,\\\fi
-  #2\hspace{0.8em}\cadots\hspace{0.3em}\catoapages{#3}\par\endgroup}
+  #2\caleaderpage{\catoapages{#3}}\endgroup}
 
 % ---------------------------------------------------------------------------
 % Forms (FRAP 32(a)(2); Form 17, Form 8, Form 15; typst: certificate-of-compliance and friends)

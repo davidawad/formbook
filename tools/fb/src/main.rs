@@ -44,6 +44,7 @@ fn main() -> ExitCode {
         .map_or(("", &[][..]), |(c, r)| (c.as_str(), r));
     let result = match cmd {
         "check" => check::main(rest),
+        "toc-layout" => check::toclayout::main(rest),
         "eval" => eval::main(rest),
         "manifest" => manifest::main(rest),
         "tracker" => track::main(rest),

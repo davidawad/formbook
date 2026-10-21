@@ -1,2 +1,2 @@
 PASS
-72e1fc9b52b00e2e780bac3e3bed52ee607aedcea20c4bddb0cd6d26b7cafd90  usage/OUTPUT-merits-brief.latex.pdf
+3dba47b35c830123b99a4eaf5e16f5656987cc673389c56fa562b9b199116b83  usage/OUTPUT-merits-brief.latex.pdf

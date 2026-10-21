@@ -1,2 +1,2 @@
 PASS
-dac48050f848af5d2fbf396fb9731ce9c4be2ba30b4f92374dd047622d73c32a  usage/OUTPUT-answering-brief.latex.pdf
+09b7d71c0cf9796f23da8236ecf0405cf05605c7aa7d767f2843103cf7b276f6  usage/OUTPUT-answering-brief.latex.pdf

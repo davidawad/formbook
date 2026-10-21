@@ -9,6 +9,7 @@ mod prepare;
 mod rows;
 mod sh;
 pub(crate) mod stamp;
+pub mod toclayout;
 
 use crate::{fail, Res};
 use sh::{cfg, io_fail, out, strip_nl, Env};

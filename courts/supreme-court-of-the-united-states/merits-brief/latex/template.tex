@@ -58,15 +58,20 @@
   {\leftskip=#1\relax\hangindent=0.4in\hangafter=1\relax
    \ifstrempty{#2}{}{\makebox[0.4in][l]{\textbf{#2}}}\textbf{#3}\par}\nopagebreak\addvspace{0.3em}\nopagebreak\noindent}
 
+% Dot leaders and the page reference that end a TOC or TOA entry (fb-595.53): the title lines stop short of a
+% right margin as wide as the reference, which hangs into it on the last line after at least 1.5em of leaders,
+% so it never wraps onto a line of its own.
+\newcommand{\leaderpage}[1]{{\setbox0=\hbox{#1}\rightskip=\dimexpr\wd0+2.3em\relax plus 1fil\parfillskip=-\rightskip
+  \unskip\nobreak\hskip 0.3em\leaders\hbox to .44em{\hss.\hss}\hskip 1.5em plus 1fill\nobreak\hskip 0.5em\box0\par}}
 % Table of contents lines (Rule 34.2). #1 indent, #2 label, #3 title, #4 page.
 \newcommand{\tocsection}[2]{%
-  \noindent\hangindent=0.4in\hangafter=1\relax\MakeUppercase{#1}\ \dotfill\ #2\par\vspace{0.5em}}
+  \noindent\hangindent=0.4in\hangafter=1\relax\MakeUppercase{#1}\leaderpage{#2}\vspace{0.5em}}
 \newcommand{\tocpoint}[4]{%
   \noindent{\leftskip=#1\relax\hangindent=0.4in\hangafter=1\relax
-   \ifstrempty{#2}{}{\makebox[0.4in][l]{#2}}#3\ \dotfill\ #4\par}\vspace{0.5em}}
+   \ifstrempty{#2}{}{\makebox[0.4in][l]{#2}}#3\leaderpage{#4}}\vspace{0.5em}}
 % Table of authorities lines: #1 entry, #2 pages.
 \newcommand{\toaline}[2]{%
-  \noindent\hangindent=0.4in\hangafter=1\relax #1\ \dotfill\ #2\par\vspace{0.6em}}
+  \noindent\hangindent=0.4in\hangafter=1\relax #1\leaderpage{#2}\vspace{0.6em}}
 \newcommand{\toaheading}[1]{\par\addvspace{1.1em}\needspace{3\baselineskip}\noindent\textbf{#1}\par\vspace{0.7em}}
 
 % Pages of one authority: #1 its citation labels (comma list, in document order, so the pages come out in
