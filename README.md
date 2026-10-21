@@ -35,7 +35,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Court of International Trade](courts/federal-circuit/court-of-international-trade) | `cit` | todo | — | — | — | 0 |
 | [United States Court of Veteran Appeals](courts/federal-circuit/court-of-veteran-appeals) | `cavc` | todo | — | — | — | 0 |
 | [Patent Trial and Appeal Board](courts/federal-circuit/patent-trial-and-appeal-board) | `ptab` | todo | — | — | — | 0 |
-| [Trademark Trial and Appeal Board](courts/federal-circuit/trademark-trial-and-appeal-board) | `ttab` | todo | — | — | — | 0 |
+| [Trademark Trial and Appeal Board](courts/federal-circuit/trademark-trial-and-appeal-board) | `ttab` | in progress | built | — | built | 50 |
 
 ## Military courts
 
@@ -777,7 +777,7 @@ Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://gi
 | Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Supreme Court of the United States | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Federal Circuit and feeder courts | 6 | 0 | 0 | 0 | 6 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Federal Circuit and feeder courts | 6 | 0 | 0 | 1 | 5 | 0.0% | 0.0% | 0 | 0 | 0 | 8.3% |
 | Military courts | 6 | 0 | 0 | 0 | 6 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | National courts and tribunals | 5 | 0 | 0 | 0 | 5 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | First Circuit | 23 | 0 | 0 | 0 | 23 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
@@ -792,5 +792,5 @@ Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://gi
 | Tenth Circuit | 34 | 0 | 0 | 0 | 34 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | Eleventh Circuit | 32 | 0 | 0 | 0 | 32 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | D.C. Circuit | 4 | 0 | 0 | 0 | 4 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| **Total** | 375 | 0 | 1 | 3 | 371 | 0.0% | 0.2% | 1 | 0 | 0 | 0.1% |
+| **Total** | 375 | 0 | 1 | 4 | 370 | 0.0% | 0.2% | 1 | 0 | 0 | 0.3% |
 <!-- tracker:end -->

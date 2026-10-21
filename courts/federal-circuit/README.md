@@ -9,6 +9,6 @@ Courts under `courts/federal-circuit` (6).
 | [United States Court of International Trade](court-of-international-trade) | `cit` | todo | — | — | — | 0 |
 | [United States Court of Veteran Appeals](court-of-veteran-appeals) | `cavc` | todo | — | — | — | 0 |
 | [Patent Trial and Appeal Board](patent-trial-and-appeal-board) | `ptab` | todo | — | — | — | 0 |
-| [Trademark Trial and Appeal Board](trademark-trial-and-appeal-board) | `ttab` | todo | — | — | — | 0 |
+| [Trademark Trial and Appeal Board](trademark-trial-and-appeal-board) | `ttab` | in progress | built | — | built | 50 |
 
 [Formbook index](../../README.md)

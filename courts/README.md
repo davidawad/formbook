@@ -10,7 +10,7 @@ Courts under `courts` (375).
 | [United States Court of International Trade](federal-circuit/court-of-international-trade) | `cit` | todo | — | — | — | 0 |
 | [United States Court of Veteran Appeals](federal-circuit/court-of-veteran-appeals) | `cavc` | todo | — | — | — | 0 |
 | [Patent Trial and Appeal Board](federal-circuit/patent-trial-and-appeal-board) | `ptab` | todo | — | — | — | 0 |
-| [Trademark Trial and Appeal Board](federal-circuit/trademark-trial-and-appeal-board) | `ttab` | todo | — | — | — | 0 |
+| [Trademark Trial and Appeal Board](federal-circuit/trademark-trial-and-appeal-board) | `ttab` | in progress | built | — | built | 50 |
 | [U S Air Force Court of Criminal Appeals](military/air-force-court-of-criminal-appeals) | `afcca` | todo | — | — | — | 0 |
 | [U S Army Court of Criminal Appeals](military/army-court-of-criminal-appeals) | `acca` | todo | — | — | — | 0 |
 | [U S Coast Guard Court of Criminal Appeals](military/coast-guard-court-of-criminal-appeals) | `uscgcoca` | todo | — | — | — | 0 |
