@@ -9,6 +9,7 @@
 // YAML frontmatter of the sample (fields listed in ../usage/INPUT-opening-brief.md).
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../../../lib/typst/tables.typ": leader-page as shared-leader-page
 
 // ---------------------------------------------------------------------------
 // Parameters
@@ -123,7 +124,7 @@
     block(above: 1.2em, below: 0.8em, sticky: true, strong(group.heading))
     for e in group.entries {
       block(above: 0.9em, below: 0.9em, breakable: false)[
-        #inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)]) #h(4pt) #if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+        #inl(e.cite)#shared-leader-page(if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }, 2pt, gap: 4pt)
       ]
     }
   }
