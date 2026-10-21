@@ -1,6 +1,7 @@
 # Northern District of Oklahoma: complaints and motion briefs
 
 Alias `oknd`. Scope: civil complaints and motion briefs. Verified against the Local Rules of the Northern District of Oklahoma, Effective Date: 7/31/2026, and Federal Rules of Civil Procedure, December 1, 2025 edition, on 2026-10-20.
+Re-check cadence: check the court rules page for amendments before use and after each local-rule revision; re-check the applicable federal rules after each annual amendment cycle and at least annually (next routine review by 2027-10-20).
 
 ## Sources
 
