@@ -8,7 +8,7 @@
 // This file is identical in the opening-brief and answering-brief folders except for `doc-kind`.
 
 #import "@preview/cmarker:0.1.10"
-#import "../../../../../lib/typst/tables.typ": leader-page as shared-leader-page
+#import "../../../../../lib/typst/tables.typ": leader-row
 
 // ---------------------------------------------------------------------------
 // Doc-type parameters (the only part that differs between the two copies)
@@ -190,12 +190,12 @@
   let lab = heading-label(hd)
   let ind = if hd.level >= 2 { (hd.level - 2) * heading-tab } else { 0pt }
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(ind + heading-tab, {
+    leader-row({
       h(ind)
       if lab != none { box(width: heading-tab, lab) }
       hd.body
-      shared-leader-page(box(width: 2.6em, align(right, it.page())), 0.16em, before: 0.8em, gap: 0pt)
-    })))
+    }, it.page(),
+      hang: ind + heading-tab, leading: single-leading, dot-gap: 0.16em, lead-gap: 0.8em, gutter: 0pt, page-width: 2.6em, min-leader: 1em)))
 }
 
 #let toc-section() = {
@@ -248,15 +248,15 @@
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
+        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, leader-row({
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
             linebreak()
           }
           inl(a.cite)
-          shared-leader-page(page-text, 0.16em, before: 0.8em)
-        }))
+        }, page-text,
+          hang: 0.35in, leading: single-leading, dot-gap: 0.16em, lead-gap: 0.8em, gutter: 0.3em, min-leader: 1em))
       }
     }
   }
