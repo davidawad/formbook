@@ -95,7 +95,8 @@
     block(above: 1.2em, below: 0.8em, sticky: true, strong(group.heading))
     for e in group.entries {
       block(above: 0.9em, below: 0.9em, breakable: false)[
-        #inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)]) #h(4pt) #if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+        // Word joiners hold the page reference to the leaders, so it never wraps alone (DEF-TOC-001).
+        #inl(e.cite)#h(0.3em)#box(width: 1fr, repeat[.#h(2pt)])#sym.wj#h(4pt)#sym.wj#box(if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") })
       ]
     }
   }
