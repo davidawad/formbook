@@ -25,6 +25,9 @@
 %                                 LibreOffice's superscript): defines \xe@mark{<text>} and \@makefnmark;
 %   \xe@lists{<width>}            list labels in a box of <width> at the margin, the text hanging after it, no space
 %                                 of their own (needs enumitem);
+%   \xe@natural                   a line that holds boxes (columns of minipages, as on a cover) keeps its natural
+%                                 height: \pdfeachlineheight and \pdfeachlinedepth unset; the boxes set their own
+%                                 lines (call \xe@lines inside them again);
 %   \xe@row{<above>}{<hang>}{<text>}{<page>}   one row of a table of contents or authorities: the text wraps before
 %                                 a column of width \xe@col kept for the page, a dot leader (\xe@leader, at least
 %                                 three spaces, tied to the text) runs to the page on the last line; not split.
@@ -71,6 +74,10 @@
 
 \newcommand\xe@lines[2]{%
   \fontsize{#1bp}{0bp}\selectfont\pdfeachlineheight=\fpeval{0.8*(#2)}bp\relax\pdfeachlinedepth=\fpeval{0.2*(#2)}bp\relax}
+
+% pdfTeX's "unset" is -2^30 sp, which no dimension can spell: it is kept from the start, before \xe@lines sets any.
+\newdimen\xe@unset \xe@unset=\pdfeachlineheight
+\newcommand\xe@natural{\pdfeachlineheight=\xe@unset\pdfeachlinedepth=\xe@unset}
 
 \newcommand\xe@footnotemarks[1]{%
   \edef\xe@mark##1{\noexpand\raisebox{\fpeval{0.29*(#1)}bp}{\noexpand\fontsize{\fpeval{0.58*(#1)}bp}{0bp}%
