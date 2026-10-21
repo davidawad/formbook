@@ -285,7 +285,11 @@
   let authorities = meta.at("authorities", default: none)
 
   // ---- required sections (BAP-CONTENT-001) ----
-  for titles in doc.required {
+  // Optional key `section_check: false` turns the check off for a transcription of a filed brief that predates or
+  // departs from FRBP 8014 as amended Dec. 1, 2014 (e.g. a brief with no summary of argument); the panic would
+  // otherwise drop the whole filed body. New briefs leave it unset.
+  let required = if meta.at("section_check", default: true) == false { () } else { doc.required }
+  for titles in required {
     // a title matches with or without an enumerator ("V. Discussion") and in any case ("CONCLUSION").
     let found = titles.any(h => md.match(regex("(?mi)^#[ \t]+(?:[IVXLC]+\\.[ \t]+)?" + h + "[ \t]*$")) != none)
     if not found {

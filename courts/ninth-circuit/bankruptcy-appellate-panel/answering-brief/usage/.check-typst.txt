@@ -1,3 +1,4 @@
 PASS
 6903a8ce926770fc9b4a8cb9e209bc948e683ef7a8d2aeaaed48c47ad86c798e  usage/OUTPUT-answering-brief-2.typst.pdf
+7597a1f4b86298b92cafd43f6762c5ea7112ac30e87b735b47fd7ba29fe4d7b9  usage/OUTPUT-answering-brief-3.typst.pdf
 9bf86731123ad58c3be7f4987384d9ed2d5a8af188975ba1691969239e741bd0  usage/OUTPUT-answering-brief.typst.pdf
