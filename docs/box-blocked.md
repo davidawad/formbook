@@ -620,7 +620,6 @@ BLOCKED nebctapp/motion-brief, neb/petition-for-review, neb/motion-brief, neb/pe
 RESOLVED minnctapp/answering-brief: FILED-EXAMPLE-state-ag-chauvin-a21-1228-answering-brief.pdf (Wayback copy of mncourts.gov high-profile-case file)
 RESOLVED minnctapp/motion-brief: FILED-EXAMPLE-halberg-chauvin-a21-0201-motion-brief.pdf (Wayback; district-court e-filing stamp on the served copy)
 RESOLVED minnctapp/petition-for-writ: FILED-EXAMPLE-anfinson-mail-media-chauvin-petition-for-writ.pdf (Wayback; Rule 120 prohibition petition, district-court stamp on served copy)
-BLOCKED minnctapp/petition-for-discretionary-review: no Court of Appeals Rule 105 petition in Wayback CDX of mncourts.gov high-profile cases (3,412 files) or web search; the only Rule 105 petition found was filed in the Supreme Court (fb-l129.1, 2026-10-17)
 BLOCKED minn/petition-for-rehearing: no Rule 140 petition in Wayback CDX of mncourts.gov or web search; only a 1981 administrative-file petition and a copy retyped in a SCOTUS cert appendix (fb-l129.1, 2026-10-17)
 NOTE minnesota: mncourts.gov is Cloudflare-gated, but web.archive.org (back online 2026-10-17) serves its high-profile-case PDFs via /web/<ts>id_/ URLs (fb-l129.1)
 BLOCKED wvactapp/petition-for-discretionary-review, petition-for-writ: not filings this court receives; cites verified (W. Va. Code 51-11-4(a) no original jurisdiction; 51-11-5 direct-review motion and 51-11-10 petition are Supreme Court of Appeals filings; W. Va. R. App. P. 16); PDR cite corrected from 51-11-11 (judicial compensation) to 51-11-10, same correction in the wva/petition-for-discretionary-review COLLECTED row (fb-l129.1, 2026-10-17)
@@ -683,7 +682,6 @@ BLOCKED nyappdiv/petition-for-review: no public EDPL 207 or CPLR 7804(g) transfe
 BLOCKED dc/petition-for-discretionary-review: no filed application for allowance of appeal public; web search finds only Form 3, guide, rules and an opinion; dccourts.gov 403 (fb-l129.1 pass 2, 2026-10-18)
 BLOCKED dc/petition-for-writ: no public DCCA Rule 21 petition; disb.dc.gov (587 publications) has only 20-OA-8 orders and status reports; web search finds only orders and federal petitions (fb-l129.1 pass 2, 2026-10-18)
 BLOCKED me/petition-for-discretionary-review: no sentence-review application, CPC memorandum or WCB petition in courts.maine.gov archives (17.7k PDFs incl. /news/ and sjc/briefs) or web search; only SCOTUS-appendix orders (fb-l129.1 pass 2, 2026-10-18)
-BLOCKED minnctapp/petition-for-discretionary-review: only public copy found (MARA v. Simon, A24-1134, Secretary of State petition 2024-07-15, democracydocket.com) is a 26.7 MB 76-page OCR'd scan, over the 8 MB limit; pp. 1-19 alone are still 15.6 MB; left out (fb-l129.1 pass 2, 2026-10-18)
 BLOCKED minn/petition-for-rehearing: no public Rule 140 petition in Wayback mncourts.gov (47k PDFs), archived Supreme Court case folders, Democracy Docket or web search (fb-l129.1 pass 2, 2026-10-18)
 RESOLVED oklacrimapp/brief-on-the-merits: FILED-EXAMPLE-brief-on-the-merits.pdf (fb-l129.1 pass 2, 2026-10-18)
 RESOLVED oklacrimapp/petition-for-rehearing: FILED-EXAMPLE-petition-for-rehearing.pdf (fb-l129.1 pass 2, 2026-10-18)
@@ -773,3 +771,4 @@ BLOCKED gamd/complaint: A second public complaint from a different filer was not
 BLOCKED gamd/motion-brief: A second public motion brief from a different filer was not collected in this batch.
 BLOCKED gasd/complaint: A second public complaint from a different filer was not collected in this batch.
 BLOCKED gasd/motion-brief: A second public motion brief from a different filer was not collected in this batch.
+RESOLVED minnctapp/petition-for-discretionary-review: FILED-EXAMPLE-petition-for-discretionary-review.pdf (State v. Guertin, A24-0780; actual 21-page Rule 105 petition extracted from public D. Minn. ECF 13, Exhibit F; 3.2 MB text-layer PDF)
