@@ -2,6 +2,8 @@
 
 Alias `gasd`. Scope: civil complaints and motion briefs. Verified against the Local Rules of the United States District Court for the Southern District of Georgia (PDF "SDGA_Local_Rules_Effective_10-07-2026") and the Federal Rules of Civil Procedure (as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Note: the local rules state no typeface, point size, margin, or paper-size rule that was located. The repo default eval (1 in margins, 12 pt) applies. Length is set by word count for typed filings, which the default eval does not check; it is recorded as a row for the template and the PR.
 
 ## Sources
