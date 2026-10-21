@@ -1,6 +1,6 @@
 #!/bin/sh
 # Builds docx/reference.docx from pandoc's default reference document (see docs/DOCX.md and this folder's README,
-# "Engines"). The court form it sets (typst/prd-motion-brief.typ, PRD-FORM-002 to -005): EB Garamond 12 pt (vendored);
+# "Engines"). The court form it sets (typst/prd-motion-brief.typ, PRD-FORM-002 to -005): Times New Roman 12 pt (pinned);
 # body double-spaced at 24 pt exact; 1-inch margins on US Letter; headings at body size, level 1 centred capitals;
 # footnotes and block quotations single-spaced; a centred PAGE number at 12 pt in the footer.
 # Styles are the ones in parts/styles-prd.xml (replacing pandoc's); the footer is parts/footer1.xml.

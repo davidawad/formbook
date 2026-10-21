@@ -88,3 +88,7 @@ sh tools/render.sh --engine docx courts/first-circuit/puerto-rico/federal/distri
 - *Pages reviewed:* all 10 pages of `OUTPUT-motion-brief.docx.pdf` were rendered at 60 dpi and set beside the typst pages (cover, TOC, body 1 to 7 against the docx pages 1 to 9, and the docx page 10).
 - *BLOCKED:* `BLOCKED: no check ID (no checks.yaml in this folder): table of authorities`: the TOA is not built. Word TA/TOA fields are not honored by LibreOffice (docs/DOCX.md), and a text TOA needs the page of every citation from a first pass, which this build does not do for the TOA (only for the TOC). The `toa:` links are shown as plain text. The typst TOA (`ii`) therefore has no docx counterpart.
 - *Not opened in Word:* the `.docx` is a valid zip with well-formed XML parts and LibreOffice opens and converts it; Word has not been run, so the no-repair check in Word is not done. Word may paginate the TOC differently; its cached numbers come from LibreOffice.
+
+## DOCX font and layout fixes (2026-10-21, fb-595.59)
+
+The docx engine moves from EB Garamond to Times New Roman, the face the typst template declares (DEF-FONT-002). `check.sh --engine docx` is green.
