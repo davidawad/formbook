@@ -155,8 +155,11 @@
           inl(a.cite)
           h(0.8em)
           dot-leader
+          // Word joiners hold the page reference to the leaders, so it never wraps alone (DEF-TOC-001).
+          sym.wj
           h(0.3em)
-          page-text
+          sym.wj
+          box(page-text)
         }))
       }
     }
