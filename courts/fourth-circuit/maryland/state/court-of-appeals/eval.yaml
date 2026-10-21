@@ -1,0 +1,5 @@
+# Numbers the Court's rules state (rules.md). Rule 8-112 (SCM "Filing Briefs" page): type size not less than 13 points for
+# proportionally spaced fonts (MD-FORM-004). The default margin check (1 in on all sides) is kept: Rule 1-301(c) and Rule 8-112
+# require at least 1 in, and the templates set 1 1/2 in at top and left (MD-FORM-001).
+font:
+  size_pt: 13

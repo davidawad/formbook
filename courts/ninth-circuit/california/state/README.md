@@ -5,17 +5,17 @@ Courts under `courts/ninth-circuit/california/state` (11).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [California Court of Appeal, Fifth Appellate District](court-of-appeal-fifth-district) | `calctapp5d` | in progress | — | — | — | 14 |
+| [California Court of Appeal, Fifth Appellate District](court-of-appeal-fifth-district) | `calctapp5d` | in progress | — | — | — | 29 |
 | [California Court of Appeal, First Appellate District](court-of-appeal-first-district) | `calctapp1d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Fourth Appellate District](court-of-appeal-fourth-district) | `calctapp4d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Second Appellate District](court-of-appeal-second-district) | `calctapp2d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Sixth Appellate District](court-of-appeal-sixth-district) | `calctapp6d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Third Appellate District](court-of-appeal-third-district) | `calctapp3d` | in progress | — | — | — | 14 |
-| [California Courts of Appeal](courts-of-appeal) | `calctapp` | in progress | — | — | — | 14 |
-| [California Superior Court](superior-court) | `calsuperct` | in progress | — | — | — | 0 |
-| [California Superior Court, San Diego County](superior-court/san-diego-county) | `calsuperct-sandiego` | in progress | — | — | — | 0 |
+| [California Courts of Appeal](courts-of-appeal) | `calctapp` | up for review | — | — | — | 29 |
+| [California Superior Court](superior-court) | `calsuperct` | up for review | — | — | — | 14 |
+| [California Superior Court, San Diego County](superior-court/san-diego-county) | `calsuperct-sandiego` | up for review | — | — | — | 14 |
 | [California Superior Court, Appellate Division](superior-court-appellate-division) | `calappdeptsuper` | todo | — | — | — | 0 |
-| [California Supreme Court](supreme-court) | `cal` | in progress | — | — | — | 14 |
+| [California Supreme Court](supreme-court) | `cal` | up for review | — | — | — | 29 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->

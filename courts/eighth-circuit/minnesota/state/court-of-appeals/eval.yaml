@@ -1,0 +1,5 @@
+# Minn. R. Civ. App. P. 132.01 subd. 1 (Revisor of Statutes, fetched 2026-10-21):
+# "if a proportional font is used, printed or typed material (including headings and footnotes)
+# must appear in at least 13-point font". Margins are the default one inch.
+font:
+  size_pt: 13

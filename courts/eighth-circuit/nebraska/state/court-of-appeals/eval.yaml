@@ -1,0 +1,4 @@
+# Neb. Ct. R. App. P. § 2-103(A)(3) (https://supremecourt.nebraska.gov/supreme-court-rules/chapter-2-appeals/article-1-nebraska-court-rules-appellate-practice/%C2%A7-2-103):
+# "Margins shall be set to 1.5 inches on all sides" = 108 pt. Type size 12 to 13 point (§ 2-103(A)(4)); 12 is the default.
+params:
+  margin_pt: 108

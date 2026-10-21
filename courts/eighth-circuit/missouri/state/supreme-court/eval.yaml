@@ -1,0 +1,4 @@
+# Missouri Supreme Court Rule 84.03(b)(3) (effective January 1, 2024): "The font, including footnotes, shall not be smaller than 13 point, Times New Roman."
+# Margins are the default one inch (Rule 84.03(b)(2)).
+font:
+  size_pt: 13

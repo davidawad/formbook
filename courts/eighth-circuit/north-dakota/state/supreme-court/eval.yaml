@@ -1,0 +1,6 @@
+# North Dakota Rules of Appellate Procedure, Rule 32(a)(4) (effective 4/1/2024, read at
+# https://www.ndcourts.gov/legal-resources/rules/ndrappp/32 on 2026-10-21): "Margins must be at
+# least one and one-half inch at the left and at least one inch on all other sides."
+# Rule 32(a)(5): "The typeface must be 12 point or larger", so the 12 pt default applies.
+params:
+  margin_left_pt: 108

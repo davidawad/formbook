@@ -11,9 +11,9 @@ Courts under `courts/third-circuit/pennsylvania` (9).
 | [District Court, E.D. Pennsylvania](federal/eastern-district) | `paed` | up for review | — | — | — | 14 |
 | [District Court, M.D. Pennsylvania](federal/middle-district) | `pamd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Pennsylvania](federal/western-district) | `pawd` | up for review | — | — | — | 14 |
-| [Commonwealth Court of Pennsylvania](state/commonwealth-court) | `pacommwct` | in progress | — | — | — | 14 |
-| [Superior Court of Pennsylvania](state/superior-court) | `pasuperct` | in progress | — | — | — | 14 |
-| [Supreme Court of Pennsylvania](state/supreme-court) | `pa` | in progress | — | — | — | 14 |
+| [Commonwealth Court of Pennsylvania](state/commonwealth-court) | `pacommwct` | in progress | — | — | — | 29 |
+| [Superior Court of Pennsylvania](state/superior-court) | `pasuperct` | in progress | — | — | — | 29 |
+| [Supreme Court of Pennsylvania](state/supreme-court) | `pa` | in progress | — | — | — | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

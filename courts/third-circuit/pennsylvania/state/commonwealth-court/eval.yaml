@@ -1,0 +1,5 @@
+# Numbers the Court's rules state (rules.md). The default checks (data/checks-default.yaml) assume a 12 pt body.
+# Pa.R.A.P. 124(a)(4), 210 Pa. Code (text current through 56 Pa.B. 5370, Aug. 8, 2026): text no smaller than 14 point
+# (PACOMMWCT-FORM-003); footnotes 12 point. Margins of one inch (PACOMMWCT-FORM-002) are the default and need no entry.
+font:
+  size_pt: 14

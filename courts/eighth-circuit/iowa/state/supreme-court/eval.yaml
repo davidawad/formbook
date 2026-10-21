@@ -1,0 +1,5 @@
+# Iowa Rules of Appellate Procedure 6.903(1)(g)(1) (Feb. 2026 edition): a proportionally spaced typeface
+# "must be 14-point or larger for all text, including footnotes". Margins are the default one inch
+# (Rule 6.903(1)(e)).
+font:
+  size_pt: 14

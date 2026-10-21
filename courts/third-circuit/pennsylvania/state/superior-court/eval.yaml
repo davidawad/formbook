@@ -1,0 +1,4 @@
+# Numbers Pa.R.A.P. 124 states (rules.md, PASUPERCT-FORM-005): text at least 14 point (footnotes may be 12 point).
+# The default check takes the body size from font.size_pt. Margins stay at the default 1 in (PASUPERCT-FORM-004).
+font:
+  size_pt: 14

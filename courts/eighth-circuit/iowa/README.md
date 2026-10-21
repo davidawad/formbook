@@ -5,7 +5,7 @@ Courts under `courts/eighth-circuit/iowa` (6).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, N.D. Iowa](federal/bankruptcy-northern-district) | `ianb` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, N.D. Iowa](federal/bankruptcy-northern-district) | `ianb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. Iowa](federal/bankruptcy-southern-district) | `iasb` | up for review | — | — | — | 14 |
 | [District Court, N.D. Iowa](federal/northern-district) | `iand` | up for review | — | — | — | 14 |
 | [District Court, S.D. Iowa](federal/southern-district) | `iasd` | up for review | — | — | — | 14 |

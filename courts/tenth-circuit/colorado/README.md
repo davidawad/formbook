@@ -7,8 +7,8 @@ Courts under `courts/tenth-circuit/colorado` (4).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Colorado](federal/bankruptcy-district) | `cob` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Colorado](federal/district) | `cod` | up for review | — | — | — | 14 |
-| [Colorado Court of Appeals](state/court-of-appeals) | `coloctapp` | in progress | — | — | — | 14 |
-| [Colorado Supreme Court](state/supreme-court) | `colo` | in progress | — | — | — | 14 |
+| [Colorado Court of Appeals](state/court-of-appeals) | `coloctapp` | in progress | — | — | — | 29 |
+| [Colorado Supreme Court](state/supreme-court) | `colo` | in progress | — | — | — | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

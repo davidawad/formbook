@@ -1,0 +1,5 @@
+# Supreme Court Rule 13(a)(i) (rules.md, DEL-FORM-001): all text, footnotes included, is Times New Roman 14-point.
+# Margins stay at the default 1 in (Rule 13(a)(ii), DEL-FORM-003). No page limit: the limits are word limits
+# (Rule 14(d)(i), 30(d), 28(d)), enforced by the template against the word count.
+font:
+  size_pt: 14

@@ -1,0 +1,4 @@
+# TRAP 9.4(e): a document produced on a computer is printed in a conventional typeface no smaller than 14-point
+# (TEXCRIMAPP-FORM-004); footnotes at least 12-point.
+font:
+  size_pt: 14

@@ -11,8 +11,8 @@ Courts under `courts/eleventh-circuit/georgia` (8).
 | [United States District Court for the Middle District of Georgia](federal/middle-district) | `gamd` | up for review | — | — | — | 14 |
 | [United States District Court for the Northern District of Georgia](federal/northern-district) | `gand` | up for review | — | — | — | 14 |
 | [United States District Court for the Southern District of Georgia](federal/southern-district) | `gasd` | up for review | — | — | — | 14 |
-| [Georgia Court of Appeals](state/court-of-appeals) | `gactapp` | in progress | — | — | — | 14 |
-| [Georgia Supreme Court](state/supreme-court) | `ga` | in progress | — | — | — | 14 |
+| [Georgia Court of Appeals](state/court-of-appeals) | `gactapp` | up for review | — | — | — | 29 |
+| [Georgia Supreme Court](state/supreme-court) | `ga` | up for review | — | — | — | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

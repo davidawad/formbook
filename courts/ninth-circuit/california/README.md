@@ -13,17 +13,17 @@ Courts under `courts/ninth-circuit/california` (19).
 | [United States District Court for the Eastern District of California](federal/eastern-district) | `caed` | up for review | — | — | — | 14 |
 | [United States District Court for the Northern District of California](federal/northern-district) | `cand` | up for review | — | — | — | 14 |
 | [United States District Court for the Southern District of California](federal/southern-district) | `casd` | up for review | — | — | — | 14 |
-| [California Court of Appeal, Fifth Appellate District](state/court-of-appeal-fifth-district) | `calctapp5d` | in progress | — | — | — | 14 |
+| [California Court of Appeal, Fifth Appellate District](state/court-of-appeal-fifth-district) | `calctapp5d` | in progress | — | — | — | 29 |
 | [California Court of Appeal, First Appellate District](state/court-of-appeal-first-district) | `calctapp1d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Fourth Appellate District](state/court-of-appeal-fourth-district) | `calctapp4d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Second Appellate District](state/court-of-appeal-second-district) | `calctapp2d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Sixth Appellate District](state/court-of-appeal-sixth-district) | `calctapp6d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Third Appellate District](state/court-of-appeal-third-district) | `calctapp3d` | in progress | — | — | — | 14 |
-| [California Courts of Appeal](state/courts-of-appeal) | `calctapp` | in progress | — | — | — | 14 |
-| [California Superior Court](state/superior-court) | `calsuperct` | in progress | — | — | — | 0 |
-| [California Superior Court, San Diego County](state/superior-court/san-diego-county) | `calsuperct-sandiego` | in progress | — | — | — | 0 |
+| [California Courts of Appeal](state/courts-of-appeal) | `calctapp` | up for review | — | — | — | 29 |
+| [California Superior Court](state/superior-court) | `calsuperct` | up for review | — | — | — | 14 |
+| [California Superior Court, San Diego County](state/superior-court/san-diego-county) | `calsuperct-sandiego` | up for review | — | — | — | 14 |
 | [California Superior Court, Appellate Division](state/superior-court-appellate-division) | `calappdeptsuper` | todo | — | — | — | 0 |
-| [California Supreme Court](state/supreme-court) | `cal` | in progress | — | — | — | 14 |
+| [California Supreme Court](state/supreme-court) | `cal` | up for review | — | — | — | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

@@ -1,0 +1,5 @@
+# Numbers the Court's rules state (rules.md). The default checks (data/checks-default.yaml) assume 12 pt text.
+# Pa.R.A.P. 124(a)(4): lettering no smaller than 14 point in the text (PA-FORM-004); footnotes 12 point.
+# Pa.R.A.P. 2135(a)(1): word limits (14,000 principal, 7,000 reply) are enforced by the templates, not by page count.
+font:
+  size_pt: 14

@@ -1,0 +1,6 @@
+# Numbers the Court's rules state (rules.md). Rule 5A:4(a): briefs and motions must be in at least 14-point font, including footnotes.
+# Margins are at least one inch (Rule 5A:4(a)), which is the default. No page limit is set here: Rule 5A:19(a) allows the
+# longer of 50 pages or 12,300 words, and the cover, TOC, TOA, signature and certificate are excluded, so a page count
+# over the whole PDF is not the rule. Word counts are certified in each INPUT (Rule 5A:4(d)).
+font:
+  size_pt: 14

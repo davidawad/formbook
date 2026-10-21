@@ -1,0 +1,5 @@
+# Numbers stated by the Maryland rules for this court (rules.md). Stricter than the default eval (12 pt).
+# font.size_pt: Md. Rule 8-112(c)(1): proportionally spaced type in the text and footnotes "shall not be smaller than 13 point".
+# params.margin_pt is left at the default 72 pt (1 in): Md. Rule 1-301(c) and Rule 8-112 require at least one inch.
+font:
+  size_pt: 13

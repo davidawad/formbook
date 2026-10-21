@@ -1,0 +1,5 @@
+# Minn. R. Civ. App. P. 132.01 subd. 1 and 132.02 subd. 1 (https://www.revisor.mn.gov/court_rules/ap/subtype/rcap/id/132/):
+# "if a proportional font is used, printed or typed material (including headings and footnotes) must appear in at least 13-point font."
+# Margins: written matter not exceeding 6-1/2 by 9-1/2 inches on 8-1/2 by 11 paper; the default one-inch margins satisfy it.
+font:
+  size_pt: 13

@@ -1,0 +1,4 @@
+# Missouri Supreme Court Rule 84.03(b)(3) (incorporated by Rule 84.06(a)), as read at rulesofcivilprocedure.com/mo/rule-84-03/ on 2026-10-21:
+# "no smaller than 13-point Times New Roman". Margins are the default one inch (Rule 84.03(b)(2)).
+font:
+  size_pt: 13

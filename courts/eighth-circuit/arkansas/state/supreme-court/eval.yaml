@@ -1,0 +1,4 @@
+# Arkansas Rules of the Supreme Court and Court of Appeals, Rule 4-1(d) (current through December 15, 2025):
+# "Typeface ... shall not be less than 14 points". Margins are the default one inch (Rule 4-1(c)).
+font:
+  size_pt: 14

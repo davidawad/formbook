@@ -1,0 +1,3 @@
+# SCt R 16(2): body text and headings no smaller than 13-point Century Schoolbook (footnotes 11-point, not a default check).
+font:
+  size_pt: 13

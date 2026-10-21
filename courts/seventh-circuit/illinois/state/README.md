@@ -5,7 +5,7 @@ Courts under `courts/seventh-circuit/illinois/state` (2).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Appellate Court of Illinois](appellate-court) | `illappct` | in progress | — | — | — | 14 |
+| [Appellate Court of Illinois](appellate-court) | `illappct` | in progress | — | — | — | 29 |
 | [Illinois Supreme Court](supreme-court) | `ill` | in progress | — | — | — | 14 |
 
 [Formbook index](../../../../README.md)
