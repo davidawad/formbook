@@ -1,6 +1,7 @@
 # Bankruptcy Court, Eastern District of Oklahoma: adversary complaints and motion briefs
 
 Alias `okeb`. Scope: adversary complaints and motion briefs. Verified against the Local Rules of the United States Bankruptcy Court for the Eastern District of Oklahoma (effective December 1, 2009, revised through 10/22/2019), the Federal Rules of Bankruptcy Procedure, December 1, 2025 edition, on 2026-10-20.
+Re-check cadence: check the court rules page for amendments before use and after each local-rule revision; re-check the applicable federal rules after each annual amendment cycle and at least annually (next routine review by 2027-10-20).
 
 ## Sources
 
