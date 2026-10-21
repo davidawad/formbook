@@ -206,6 +206,7 @@
       title
       h(0.8em)
       dot-leader
+      sym.wj  // holds the page to the leaders (DEF-TOC-001)
       box(width: 2.6em, align(right, it.page()))
     })))
 }
@@ -274,8 +275,11 @@
           inl(a.cite)
           h(0.8em)
           dot-leader
+          // Word joiners hold the page reference to the leaders, so it never wraps alone (DEF-TOC-001).
+          sym.wj
           h(0.3em)
-          page-text
+          sym.wj
+          box(page-text)
         }))
       }
     }
