@@ -10,6 +10,8 @@
 //! shape), signed (ours minus exemplar) and names the template parameter it points at; the first
 //! divergence is printed first. Tolerance: `tools/fb/tolerance.json`, measured by `fb diff-selftest`
 //! from rebuilding the same PDF twice (never below the 0.01 pt measurement resolution).
+mod align;
+mod breaks;
 mod content;
 mod geom;
 
@@ -225,16 +227,33 @@ fn content_main(ex: &Path, us: &Path) -> Res<ExitCode> {
     })
 }
 
+/// `--breaks`: identical line breaks over the shared words (breaks.rs), whatever G0 to G2 say. Exit 0
+/// only when every compared line is identical.
+fn breaks_main(ex: &Path, us: &Path) -> Res<ExitCode> {
+    let (ex, mut us) = (measure::load(ex)?, measure::load(us)?);
+    mask_render(&ex, &mut us);
+    let b = breaks::count(&content::tokens(&ex), &content::tokens(&us), LIST);
+    print!("{}", breaks::render(&b));
+    Ok(if b.identical == b.compared {
+        ExitCode::SUCCESS
+    } else {
+        ExitCode::from(1)
+    })
+}
+
 pub fn main(args: &[String]) -> Res<ExitCode> {
     if let [flag, ex, us] = args {
         if flag == "--content" {
             return content_main(Path::new(ex), Path::new(us));
         }
+        if flag == "--breaks" {
+            return breaks_main(Path::new(ex), Path::new(us));
+        }
     }
     let [ex, us] = args else {
         return Err(fail(
             2,
-            "usage: fb diff [--content] <exemplar.pdf|measured.json> <render.pdf|measured.json>",
+            "usage: fb diff [--content|--breaks] <exemplar.pdf|measured.json> <render.pdf|measured.json>",
         ));
     };
     let r = diff_paths(Path::new(ex), Path::new(us))?;
