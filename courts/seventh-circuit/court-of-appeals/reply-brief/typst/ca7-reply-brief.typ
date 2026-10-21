@@ -10,6 +10,7 @@
 // the cover, the certificate of compliance (Form 6) and the point-heading layout.
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../lib/typst/tables.typ": leader-page
 #import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
@@ -183,8 +184,7 @@
       if numbered { box(width: heading-tab, lab) }
       title
       h(0.8em)
-      dot-leader
-      box(width: 2.6em, align(right, it.page()))
+      leader-page(0.16em, it.page())
     })))
 }
 
@@ -246,9 +246,7 @@
           }
           inl(a.cite)
           h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
+          leader-page(0.16em, page-text)
         }))
       }
     }
