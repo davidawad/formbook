@@ -6,7 +6,7 @@
 // Fed. R. Civ. P. 7(b), 12(b)(6), 12(e). See ../README.md for each choice and what the exemplar shows instead.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
-#import "../../../../../../../lib/typst/tables.typ": leader-page as shared-leader-page
+#import "../../../../../../../lib/typst/tables.typ": leader-row
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
@@ -201,9 +201,8 @@
     on-grid(text(weight: "bold", group.category))
     for e in group.entries {
       block(width: text-width, above: 0pt, below: 0pt, {
-        set par(leading: single-leading, spacing: 0pt, hanging-indent: 0.4in)
-        inl(e.cite)
-        shared-leader-page([#e.pages], 0.25em, before: 0pt, gap: 0pt)
+        set par(leading: single-leading, spacing: 0pt)
+        leader-row(inl(e.cite), [#e.pages], hang: 0.4in, dot-gap: 0.25em, lead-gap: 0pt, gutter: 0pt, min-leader: 1em)
       })
       v(single-leading * 2)
     }
