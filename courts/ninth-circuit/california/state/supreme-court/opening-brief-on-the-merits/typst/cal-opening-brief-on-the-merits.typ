@@ -6,6 +6,7 @@
 // the metadata comes from the YAML frontmatter of the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../../../lib/typst/tables.typ": leader-page
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -158,6 +159,9 @@
 // ---------------------------------------------------------------------------
 
 #let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
+/// The rule under the "Page" and "Page(s)" column headings, set below the descenders so no letter
+/// of the heading hangs beneath it toward the first entry.
+#let page-rule = underline.with(offset: 0.3em, evade: false)
 #let page-col = 2em   // the TOC's page-number column; wrapped title lines stop short of it
 
 /// One table-of-contents row, built from a heading element. The label sits where the heading's
@@ -186,7 +190,7 @@
 /// `<body-end>`. The certificates and proof of service have headings too; they are not listed.
 #let toc-section() = {
   heading(level: 1, numbering: none)[Table of Contents]
-  align(right, block(above: 0.3em, below: 0pt, strong(underline[Page])))
+  align(right, block(above: 0.3em, below: 0pt, strong(page-rule[Page])))
   show outline.entry: toc-entry
   outline(
     title: none,
@@ -226,7 +230,7 @@
       block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
         set par(first-line-indent: 0pt)
         strong(title)
-        if first { h(1fr); strong(underline[Page(s)]) }
+        if first { h(1fr); strong(page-rule[Page(s)]) }
       })
       first = false
       for (key, a) in members {
@@ -246,9 +250,7 @@
           }
           inl(a.cite)
           h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
+          leader-page(0.16em, page-text)
         }))
       }
     }
