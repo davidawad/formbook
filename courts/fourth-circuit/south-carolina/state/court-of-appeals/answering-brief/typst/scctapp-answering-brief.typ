@@ -8,7 +8,7 @@
 // The markdown body is rendered by cmarker; the metadata is the YAML frontmatter of the INPUT.
 
 #import "@preview/cmarker:0.1.10"
-#import "../../../../../../../lib/typst/tables.typ": leader-page as shared-leader-page
+#import "../../../../../../../lib/typst/tables.typ": leader-row
 
 // ---------------------------------------------------------------------------
 // Parameters
@@ -123,9 +123,9 @@
   for group in meta.authorities {
     block(above: 1.2em, below: 0.8em, sticky: true, text(weight: "bold", upper(group.heading)))
     for e in group.entries {
-      block(above: 0.9em, below: 0.9em, breakable: false)[
-        #inl(e.cite)#shared-leader-page(if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }, 2pt, gap: 4pt)
-      ]
+      block(above: 0.9em, below: 0.9em, breakable: false,
+        leader-row(inl(e.cite), if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") },
+          hang: 0.5in, dot-gap: 2pt, lead-gap: 0.4em, gutter: 4pt, min-leader: 1em))
     }
   }
 }
