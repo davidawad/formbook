@@ -11,7 +11,8 @@
 //   - kerning off (Word's "Kerning for fonts" is off by default),
 //   - hyphenation off (Word's automatic hyphenation is off by default),
 //   - greedy line breaking (Word fills a line, then moves on; typst "simple"),
-//   - no letter-spacing adjustment in justified lines (Word changes only the spaces).
+//   - no letter-spacing adjustment in justified lines (Word changes only the spaces),
+//   - no hanging punctuation (typst lets line-final punctuation protrude into the margin; Word does not).
 // Two choices belong to the filed document, not the court, so they come from the INPUT's frontmatter
 // map `word:` (absent keys keep the template's own setting):
 //   justify: true | false   body paragraphs justified (Word "Justify") or ragged right (Word "Left");
@@ -23,7 +24,7 @@
 #let word-compat(opts, body) = {
   let shrink = opts.at("shrink", default: 100%)
   if type(shrink) in (int, float) { shrink = shrink * 100% }
-  set text(kerning: false, hyphenate: false)
+  set text(kerning: false, hyphenate: false, overhang: false)
   set par(
     linebreaks: "simple",
     justification-limits: (

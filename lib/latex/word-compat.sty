@@ -1,6 +1,11 @@
-%% Shared Word-like paragraph composition for LuaLaTeX.
-%% Load with \usepackage{word-compat}; invoke \WordCompatSetup{<size>}{<pitch>}
-%% after selecting the template's Times New Roman face.
+%% Shared Word-like paragraph composition for LuaLaTeX (fb-w0vj): the LaTeX side of
+%% lib/typst/word-compat.typ. Load with \usepackage{word-compat} and, after selecting the template's
+%% Times New Roman face (fontspec with Kerning=Off: Word does not kern by default), invoke
+%%   \WordCompatSetup[<shrink>]{<size>}{<pitch>}
+%% <shrink> is the narrowest inter-word space of a justified line, as a fraction of the natural
+%% space: 0.76 for Word 2013+ documents, 1.0 (the default) for older compatibility modes; it is the
+%% INPUT's `word: shrink` value. Calibration and residuals: docs/EVAL-LOOP.md, "Word compatibility".
+%% NOT YET COMPILED: the calibration box has no lualatex (see EVAL-LOOP.md).
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{word-compat}[2026/10/21 Word paragraph compatibility]
 \RequirePackage{iftex}
@@ -8,11 +13,12 @@
   \PackageError{word-compat}{LuaLaTeX is required}{Compile with lualatex.}
 \fi
 
-\newcommand{\WordCompatSetup}[2]{%
-  \fontsize{#1}{#2}\selectfont
+\newcommand{\WordCompatSetup}[3][1.0]{%
+  \fontsize{#2}{#3}\selectfont
   \parindent=0pt
   \parskip=0pt
-  \pretolerance=10000
+  % the Lua filter chooses every break; TeX only sets the glue, so it must accept any badness
+  \pretolerance=-1
   \tolerance=10000
   \emergencystretch=0pt
   \hyphenpenalty=10000
@@ -20,11 +26,11 @@
   \lefthyphenmin=64
   \righthyphenmin=64
   \uchyph=0
-  \WordCompatGreedyOn
+  % Word stretches spaces without limit and shrinks them to <shrink> x natural
+  \spaceskip=\fontdimen2\font plus 1fil minus \directlua{tex.sprint(string.format("\%.4f", 1 - #1))}\fontdimen2\font
+  \xspaceskip=\spaceskip
+  \directlua{formbook_word_compat.enable(#1)}%
 }
-
-\newcommand{\WordCompatGreedyOn}{%
-  \directlua{formbook_word_compat.enable()}}
 
 \newcommand{\WordCompatGreedyOff}{%
   \directlua{formbook_word_compat.disable()}}
