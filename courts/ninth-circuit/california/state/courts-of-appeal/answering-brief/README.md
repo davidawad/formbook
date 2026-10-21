@@ -92,15 +92,11 @@ Open, accepted:
 
 ## Engines
 
-Docx engine (`docx/`), built 2026-10-15. `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/calctapp.lua` writes the cover (from the frontmatter) and the signature block; pandoc writes the body. Set in `styles.xml` and `sectPr`, not rendered: EB Garamond 13 pt everywhere, footnotes included; body lines exact 467 twips (23.35 pt, the typst body pitch measured on `/work/artifacts/calctapp/answering-brief.pdf`); first-line indent 0.5 in; headings single-spaced, bold, black; block quotations single-spaced, indented 0.5 in each side; US Letter; 1.5 in left and right, 1 in top and bottom; centered footer PAGE field, none on the cover (`titlePg`). Not set: line numbers (the typst template sets none).
+Docx engine (`docx/`), rebuilt 2026-10-21 (fb-595.63). `docx/reference.xml` holds the Word styles and the page; fb render builds `reference.docx` from it and pandoc's default reference (`tools/fb/src/docxref.rs`). `docx/calctapp.lua` writes, in the typst order: the cover (rules between the parts, the lead counsel centered and the others in two columns, bar numbers kept whole), the certificate of interested entities or persons (drawn check boxes), the table of contents and the table of authorities with dot leaders and page numbers (`passim` from 7 pages), the body (pandoc; heading labels as typst: I./A./1./a. in the Argument, A./1./a./(1) elsewhere), the signature block kept with the last paragraph, the certificate of compliance (its word count, 2,560, is typst's) and the certificate of service. The table pages come from fb render's multi-pass docx engine (`tools/fb/src/docxpass.rs`, as ca9): the filter writes a needle for every heading and citation, fb render finds them in the LibreOffice PDF and renders again until they settle. Form: TeX Gyre Schola 13 pt everywhere, the typst face (vendored; it named EB Garamond before, so DEF-FONT-002 failed), footnotes included; body lines exact 467 twips (23.35 pt, the typst body pitch); first-line indent 0.5 in; headings single-spaced, bold, black, level 1 in capitals; block quotations single-spaced, indented 0.5 in each side; US Letter; 1.5 in left and right, 1 in bottom and 1.1 in top (Schola's ascent sets the first line of a cover or heading page above a 1 in top margin in LibreOffice, DEF-FORM-002; typst sets it on the margin); one section, page numbers from the cover on, the cover's not shown (`titlePg`); footnotes numbered through the brief (pandoc's `eachSect` restart was read by LibreOffice as a restart on every page, so the second footnote printed as 1 and DEF-CONT-001 failed). Not set: line numbers (the typst template sets none).
 
-Differs from typst: no certificate of interested entities, table of contents, table of authorities, certificate of compliance or certificate of service; the cover is paragraphs (no rules, no caption grid); the signature block is paragraphs (no "Respectfully submitted" or signature line).
+Differs from typst: LibreOffice's pagination (17 pages, typst 15), so the table page numbers differ from typst's; Word may paginate slightly differently again from the LibreOffice PDF the numbers come from.
 
-BLOCKED (docx engine, `usage/OUTPUT-answering-brief.docx`):
-- `docx.pdf` gates 0-3: BLOCKED, reason: `soffice` is not installed on the build box, so `tools/render-docx.sh` stops at the conversion step and no `.docx.pdf` exists. Pages reviewed for docx: 0.
-- Certificate of interested entities: not generated. Reason: not yet written.
-- TOC and TOA: not generated (typst builds both with page numbers). Reason: no TOC/TOA filter yet; LibreOffice does not honor TA/TOA fields (docs/DOCX.md).
-- Certificate of compliance and certificate of service: not generated. Reason: not yet written.
+`sh tools/check.sh courts/ninth-circuit/california/state/courts-of-appeal/answering-brief --engine docx`: RESULT 7 checks passed, 0 failed. Every page of the 17-page `.docx.pdf` was viewed.
 
 ## Verification pass 2026-10-16 (fb-595.26.16)
 
@@ -114,4 +110,4 @@ BLOCKED (docx engine, `usage/OUTPUT-answering-brief.docx`):
   - Certificate of service (page 16): the declarant's name, the same defect and fix.
   - The no-break rule for a section sign and its number now covers "§§" (`[§¶]+ \S+`).
 - Accepted, not changed (tier 3): "else / —discuss" (page 9), an em dash at the start of a line, which is a legal break.
-- Remaining gaps: one exemplar (one filer), so tier 2 cannot be finished; no `checks.yaml`, so Gates 0 and 1 have not run; latex not rendered (no `latex/` in this folder); docx not converted (no `soffice`).
+- Remaining gaps: one exemplar (one filer), so tier 2 cannot be finished; no `checks.yaml`, so Gates 0 and 1 have not run; latex not rendered (no `latex/` in this folder).

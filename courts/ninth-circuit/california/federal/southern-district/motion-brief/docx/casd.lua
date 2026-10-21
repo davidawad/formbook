@@ -118,9 +118,10 @@ local NEEDLE_MAX = 60  -- a needle is a prefix of the text (letters and digits o
 local TAB_R = 8620     -- the right tab of the tables: 1 pt inside the 6 in text width (a glyph may overhang)
 
 -- The page setup of every section (reference.xml has the same): letter, the pleading margins, the rules beside the
--- text, Word line numbering restarting on each page (27 lines of 24 pt, as typst); the footer sits 6 pt above the
+-- text, Word line numbering restarting on each page (27 lines of 24 pt, as typst), footnotes numbered through the
+-- brief (LibreOffice reads eachSect as a restart on every page); the footer sits 6 pt above the
 -- page edge, below the last line.
-local SECT = '<w:footnotePr><w:numRestart w:val="eachSect"/></w:footnotePr><w:type w:val="nextPage"/>'
+local SECT = '<w:footnotePr><w:numRestart w:val="continuous"/></w:footnotePr><w:type w:val="nextPage"/>'
   .. '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="2160" w:header="720"'
   .. ' w:footer="120" w:gutter="0"/><w:pgBorders w:offsetFrom="text"><w:left w:val="double" w:sz="4" w:space="14"'
   .. ' w:color="auto"/><w:right w:val="single" w:sz="4" w:space="7" w:color="auto"/></w:pgBorders>'
