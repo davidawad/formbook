@@ -1,0 +1,6 @@
+# AZD-FORM-003 (AZD-LCR 7.1(b)(1)): left margin at least 1.5 inches and right margin at least 0.5 inch.
+params:
+  margin_top_pt: 72
+  margin_bottom_pt: 72
+  margin_left_pt: 108
+  margin_right_pt: 36

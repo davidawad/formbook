@@ -179,7 +179,12 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     };
     c.calib = prepare::calibrate(&c)?;
     c.ph = int(&cfg(&c.env, &c.checks, ".params.page_height_pt")?)?;
-    c.ftop = c.ph - int(&cfg(&c.env, &c.checks, ".params.margin_pt")?)?;
+    c.ftop = c.ph
+        - int(&cfg(
+            &c.env,
+            &c.checks,
+            ".params.margin_bottom_pt // .params.margin_pt",
+        )?)?;
     c.second = cfg(&c.env, &c.checks, ".generalization.second_sample")?;
     run(&c, &alias, &o.only)
 }

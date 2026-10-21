@@ -142,12 +142,12 @@ chk_fonts_all_embedded() {
 # default checks: the four edges of body text (a word centred inside the top or bottom margin is a running header or
 # footer and is not judged; digit-only words left of the margin are line numbers); vertical tolerance covers glyph boxes
 chk_margins_body() {
-  eval "$(cfg '.params | "M=\(.margin_pt) E=\(.eps_pt) EV=\(.eps_v_pt) PW=\(.page_width_pt) PH=\(.page_height_pt)"')"
-  out=$(awk -F'\t' -v M="$M" -v E="$E" -v EV="$EV" -v PW="$PW" -v PH="$PH" '
+  eval "$(cfg '.params | "ML=\(.margin_left_pt // .margin_pt) MR=\(.margin_right_pt // .margin_pt) MT=\(.margin_top_pt // .margin_pt) MB=\(.margin_bottom_pt // .margin_pt) E=\(.eps_pt) EV=\(.eps_v_pt) PW=\(.page_width_pt) PH=\(.page_height_pt)"')"
+  out=$(awk -F'\t' -v ML="$ML" -v MR="$MR" -v MT="$MT" -v MB="$MB" -v E="$E" -v EV="$EV" -v PW="$PW" -v PH="$PH" '
     { left = $2; top = $3; right = $4; bot = $5
       c = (top + bot) / 2
-      if (c < M || c > PH - M) next                  # running header or footer: not judged
-      if ($7 ~ /^[0-9]+$/ && left < M) next          # pleading-paper line numbers sit in the left margin by design
+      if (c < MT || c > PH - MB) next                # running header or footer: not judged
+      if ($7 ~ /^[0-9]+$/ && left < ML) next         # pleading-paper line numbers sit in the left margin by design
       b++
       if (left < minl || b == 1) { minl = left; wl = $1 ": \"" $7 "\"" }
       if (right > maxr) { maxr = right; wr = $1 ": \"" $7 "\"" }
@@ -155,10 +155,10 @@ chk_margins_body() {
       if (bot > maxb) { maxb = bot; wb = $1 ": \"" $7 "\"" } }
     END {
       printf "body left %.2f right %.2f top %.2f bottom %.2f\n", minl, maxr, mint, maxb
-      if (minl < M - E) { bad++; msg[bad] = "left edge " minl " < " M " at page " wl }
-      if (maxr > PW - M + E) { bad++; msg[bad] = "right edge " maxr " > " PW - M " at page " wr }
-      if (mint < M - EV) { bad++; msg[bad] = "body top edge " mint " < " M " at page " wt }
-      if (maxb > PH - M + EV) { bad++; msg[bad] = "body bottom edge " maxb " > " PH - M " at page " wb }
+      if (minl < ML - E) { bad++; msg[bad] = "left edge " minl " < " ML " at page " wl }
+      if (maxr > PW - MR + E) { bad++; msg[bad] = "right edge " maxr " > " PW - MR " at page " wr }
+      if (mint < MT - EV) { bad++; msg[bad] = "body top edge " mint " < " MT " at page " wt }
+      if (maxb > PH - MB + EV) { bad++; msg[bad] = "body bottom edge " maxb " > " PH - MB " at page " wb }
       for (i = 1; i <= bad; i++) print "!" msg[i]
       exit (bad > 0) }' "$W/words.tsv") && ST=PASS || ST=FAIL
   MEAS=$(printf '%s\n' "$out" | head -1)

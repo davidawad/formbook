@@ -1,0 +1,6 @@
+# ARB-FORM-003 (ARB-LBR 9004-1(g)): left margin at least 1.5 inches and right margin at least 0.5 inch.
+params:
+  margin_top_pt: 72
+  margin_bottom_pt: 72
+  margin_left_pt: 108
+  margin_right_pt: 36

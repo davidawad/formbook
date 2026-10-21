@@ -1,3 +1,6 @@
 # CRC 2.107 (cited in the templates): right margin at least 1/2 inch; the templates set 1/2 in on the right.
 params:
-  margin_pt: 36
+  margin_top_pt: 72
+  margin_bottom_pt: 72
+  margin_left_pt: 72
+  margin_right_pt: 36

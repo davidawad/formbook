@@ -1,4 +1,6 @@
-# NMID-FORM-002 (LR 5.2(a)): margins top 1.5 in, bottom 1 in, right 0.5 in, left 1 in. The checker takes one margin for all four sides (bead fb-o14j),
-# so this uses the smallest side, the 0.5 in right margin. The footer sits in the bottom margin, below the 1 in line.
+# NMID-FORM-002 (LR 5.2(a)): margins top 1.5 in, bottom 1 in, right 0.5 in, left 1 in. The footer sits in the bottom margin, below the 1 in line.
 params:
-  margin_pt: 36
+  margin_top_pt: 108
+  margin_bottom_pt: 72
+  margin_left_pt: 72
+  margin_right_pt: 36
