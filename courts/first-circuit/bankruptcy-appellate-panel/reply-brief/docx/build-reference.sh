@@ -1,12 +1,12 @@
 #!/bin/sh
 # Builds docx/reference.docx for bap1 (the same for all three doc types). It mirrors bap1-opening.typ:
-# EB Garamond 14 pt, body lines at an exact 22.25 pt pitch (the typst template's line pitch, measured on
+# Liberation Serif 14 pt, body lines at an exact 22.25 pt pitch (the typst template's line pitch, measured on
 # its output), first-line indent 0.5 in on body paragraphs (not on the first paragraph after a heading),
 # 1 in margins on US Letter, centered caps level-1 headings, centered bold level-2 headings, bold left
 # level-3/4 headings, footnotes at 14 pt, and a centered PAGE footer that starts at 1 after the cover
 # (the cover is its own section with no footer).
 # Usage: sh docx/build-reference.sh <out.docx>   (needs pandoc, perl, unzip, zip, xmllint on PATH)
-# Every font is named explicitly (no theme fonts); the theme's latin faces are set to EB Garamond too.
+# Every font is named explicitly (no theme fonts); the theme's latin faces are set to Liberation Serif too.
 set -eu
 OUT=$1
 case $OUT in /*) ;; *) OUT=$(pwd)/$OUT ;; esac
@@ -14,9 +14,9 @@ W=$(mktemp -d)
 trap 'rm -rf "$W"' EXIT
 pandoc -o "$W/ref.docx" --print-default-data-file reference.docx
 cd "$W" && mkdir pkg && cd pkg && unzip -q ../ref.docx
-F='w:ascii="EB Garamond" w:hAnsi="EB Garamond" w:eastAsia="EB Garamond" w:cs="EB Garamond"'
-# theme: the major and minor latin faces are EB Garamond (so no theme font can resolve to another face)
-perl -0pi -e 's{(<a:(?:major|minor)Font>\s*<a:latin typeface=")[^"]*"}{$1EB Garamond"}g' word/theme/theme1.xml
+F='w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:eastAsia="Liberation Serif" w:cs="Liberation Serif"'
+# theme: the major and minor latin faces are Liberation Serif (so no theme font can resolve to another face)
+perl -0pi -e 's{(<a:(?:major|minor)Font>\s*<a:latin typeface=")[^"]*"}{$1Liberation Serif"}g' word/theme/theme1.xml
 # styles: written whole, so no pandoc default (theme fonts, blue headings) survives
 cat > word/styles.xml <<XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>

@@ -127,3 +127,7 @@ The first render left one Rules entry by itself on page 4 of the TOA. Both filed
 | 11 | Rules / Official Form 2 | Interested-parties statement, caption, checkboxes and counsel block render on one page under L.R. 8014-1. The filed reply ends with its certificates and has no matching page. | PASS |
 
 No OPEN findings. Current output SHA-256: `fdb45c858cef3e98ab39f0b8ef763261749bd87eea7b568db920aa59dfaa09d9`.
+
+## DOCX font and layout fixes (2026-10-21, fb-595.59)
+
+The docx engine moves from EB Garamond to Liberation Serif, the face the typst template declares (DEF-FONT-002). The related-cases boxes are bordered runs in the body face, not DejaVu Sans glyphs. `check.sh --engine docx` is green, but the BLOCKED items above still stand: the docx contents and authorities carry no page numbers (a Word TOC field), and the body pitch is still the old 22.25 pt.

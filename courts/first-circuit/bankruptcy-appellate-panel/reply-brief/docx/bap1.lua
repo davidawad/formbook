@@ -20,7 +20,7 @@ local KINDS = {
     required = { "Argument", "Conclusion" } },
 }
 local CFG = KINDS[KIND]
-local FONT_NAME, FONT_SIZE = "EB Garamond", 14
+local FONT_NAME, FONT_SIZE = "Liberation Serif", 14
 
 local TOA_GROUPS = {
   { "case", "Cases" }, { "constitution", "Constitutional Provisions" }, { "statute", "Statutes" },
@@ -108,9 +108,11 @@ local function roman(n)
   return out
 end
 
+-- A bordered run, "X" or three no-break spaces inside, in the body face (as ca9.lua draws Form 8's boxes), so no
+-- symbol font can fall back to another face (DEF-FONT-002).
 local function box(checked)
-  local ch = checked and "\u{2612}" or "\u{2610}"   -- ballot box with / without X
-  return pandoc.RawInline("openxml", '<w:r><w:rPr><w:rFonts w:ascii="DejaVu Sans" w:hAnsi="DejaVu Sans" w:eastAsia="DejaVu Sans" w:cs="DejaVu Sans"/></w:rPr><w:t xml:space="preserve">' .. ch .. '</w:t></w:r>')
+  local ch = checked and "X" or "\u{00A0}\u{00A0}\u{00A0}"
+  return pandoc.RawInline("openxml", '<w:r><w:rPr><w:bdr w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:rPr><w:t xml:space="preserve">' .. ch .. '</w:t></w:r>')
 end
 
 local function count_words(blocks)
