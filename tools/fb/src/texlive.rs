@@ -19,8 +19,9 @@ const INSTALLER_SHA512: &str = "a307d7d11bcbd1f054ad0b0d476f7f12bc1a40d07445020e
 /// Packages beyond scheme-basic, each with a file that proves it is installed. newtx and its dependencies give
 /// the Times faces (newtxtext, newtxmath); tex-gyre gives TeX Gyre Schola (tgschola, the Century face of the scotus
 /// and cadc templates, and the TS1 symbols of newtx such as the pilcrow); ebgaramond and gelasio give the faces of
-/// the two ca8 briefs that declare those families; the rest are what the latex templates load (fb-595.45, fb-595.47,
-/// fb-595.48, fb-595.49).
+/// the two ca8 briefs that declare those families; lm gives Latin Modern (lmodern.sty), which the latex-not-times
+/// mutant of check-selftest loads in place of newtx, so a stock bootstrap must prove it is there (fb-595.71); the rest
+/// are what the latex templates load (fb-595.45, fb-595.47, fb-595.48, fb-595.49).
 pub const PACKAGES: &[(&str, &str)] = &[
     ("newtx", "newtxtext.sty"),
     ("fontaxes", "fontaxes.sty"),
@@ -45,6 +46,7 @@ pub const PACKAGES: &[(&str, &str)] = &[
     ("ebgaramond", "ebgaramond.sty"),
     ("gelasio", "gelasio.sty"),
     ("fp", "fp.sty"),
+    ("lm", "lmodern.sty"),
 ];
 
 /// $FORMBOOK_HOME, default $HOME/.local/share/formbook.
@@ -221,6 +223,15 @@ mod tests {
     fn repo_is_the_frozen_2025_archive() {
         assert!(REPO.ends_with("/2025/tlnet-final") && REPO.contains("/historic/"));
         assert!(PACKAGES.iter().any(|(p, _)| *p == "newtx"));
+    }
+
+    #[test]
+    fn selftest_fonts_are_pinned() {
+        // the latex-not-times mutant swaps newtx for lmodern; without lm a stock bootstrap selftests 24/25 (fb-595.71)
+        assert!(PACKAGES.contains(&("lm", "lmodern.sty")));
+        assert!(crate::selftest::mutants::MUTANTS
+            .iter()
+            .any(|m| m.expr.contains(r"\usepackage{lmodern}")));
     }
 
     #[test]

@@ -20,7 +20,7 @@ const SAMPLE: &str = "generic";
 const TEMPLATE: &str = "ca9-brief.typ";
 const LATEX_TEMPLATE: &str = "template.tex";
 
-mod mutants;
+pub(crate) mod mutants;
 use mutants::{Kind, Mutant, MUTANTS};
 
 /// Which of the wanted requirement ids did not FAIL in the checker output.
