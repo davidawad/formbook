@@ -6,6 +6,13 @@
 // the YAML frontmatter of the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../lib/typst/ca9-cover.typ": cover-body as shared-cover-body, ca9-cover as shared-ca9-cover
+#import "../../../../lib/typst/tables.typ": dot-leader as shared-dot-leader, outline-row as shared-outline-row
+#import "../../../../lib/typst/typography.typ": hanging-paragraph as shared-hanging-paragraph
+#import "../../../../lib/typst/headings.typ": section-heading as shared-section-heading
+#import "../../../../lib/typst/typography.typ": footnote-body as shared-footnote-body
+#import "../../../../lib/typst/certificates.typ": ca9-compliance as shared-ca9-compliance, ca9-service as shared-ca9-service
+#import "../../../../lib/typst/toa.typ": linked-authorities as shared-linked-authorities, cited-authorities as shared-cited-authorities, authority-page-labels as shared-authority-page-labels
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -153,9 +160,7 @@
 
 /// A single-spaced paragraph whose continuation lines are indented by `indent`.
 /// (Must be an explicit `par`: a `set par(hanging-indent)` inside a block is ignored by typst 0.15.)
-#let hang(indent, body) = par(
-  hanging-indent: indent, first-line-indent: 0pt, leading: single-leading, justify: false, body,
-)
+#let hang(indent, body) = shared-hanging-paragraph(indent, single-leading, body)
 
 /// Left edge of a heading's label. Labels sit half an inch in from the margin; each further
 /// level steps in half an inch more. In the Argument the level-2 point heading is centered, so
@@ -170,8 +175,7 @@
   set text(size: type-size)   // typst's built-in heading sizes are not used; every heading is body size or larger
   if it.level == 1 {
     // Section headings: bold, capitals, centered, a little larger than the body.
-    block(width: 100%, sticky: true, above: 1.5em, below: 1.1em,
-      align(center, text(size: 1.15em, strong(upper(it.body)))))
+    shared-section-heading(it.body, type-size, single-leading, above: 1.5em, below: 1.1em)
   } else if it.numbering == none {
     // Unnumbered sub-headings (addendum entries): bold, left.
     block(width: 100%, sticky: true, above: 1.2em, below: 0.9em, strong(it.body))
@@ -195,8 +199,6 @@
 // Tables of contents and authorities
 // ---------------------------------------------------------------------------
 
-#let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
-
 /// One table-of-contents row, built from a heading element. The label sits where the
 /// heading's own label sits in the body, and wrapped lines hang under the title text.
 #let toc-entry(it) = {
@@ -207,16 +209,8 @@
   if numbered and in-argument(hd.location()) and hd.level == 2 { ind = 0pt }
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
-  let hang-by = ind + heading-tab
-  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(hang-by, {
-      h(ind)
-      if numbered { box(width: heading-tab, lab) }
-      title
-      h(0.8em)
-      dot-leader
-      box(width: 2.6em, align(right, it.page()))
-    })))
+  shared-outline-row(hd.location(), title, lab, ind, heading-tab,
+    it.page(), single-leading, 0.16em, above: if hd.level == 1 { 0.6em } else { 0.35em })
 }
 
 #let toc-section(has-addendum) = {
@@ -247,17 +241,10 @@
 #let toa-section(authorities) = {
   heading(level: 1, numbering: none)[Table of Authorities]
   context {
-    let hits = query(<toa-hit>)
-    for h in hits {
-      if h.value not in authorities {
-        panic("ca9-brief: link `toa:" + h.value + "` has no entry under `authorities:` in the frontmatter")
-      }
-    }
+    let hits = shared-linked-authorities(authorities, error-prefix: "ca9-brief")
     let first = true
     for (kind, title) in toa-groups {
-      let members = authorities.pairs()
-        .filter(p => p.last().kind == kind and hits.any(h => h.value == p.first()))
-        .sorted(key: p => sort-key(p.last()))
+      let members = shared-cited-authorities(authorities, hits, kind, sort-key)
       if members.len() == 0 { continue }
       block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
         set par(first-line-indent: 0pt)
@@ -267,13 +254,7 @@
       first = false
       for (key, a) in members {
         // Distinct printed page labels, in document order.
-        let pages = ()
-        for h in hits.filter(h => h.value == key) {
-          let loc = h.location()
-          let label = numbering(loc.page-numbering(), ..counter(page).at(loc))
-          if label not in pages { pages.push(label) }
-        }
-        let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
+        let page-text = shared-authority-page-labels(hits, key, passim-threshold)
         block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
@@ -282,7 +263,7 @@
           }
           inl(a.cite)
           h(0.8em)
-          dot-leader
+          shared-dot-leader(0.16em)
           h(0.3em)
           page-text
         }))
@@ -295,72 +276,8 @@
 // Cover (FRAP 32(a)(2); CA9-COVER-001 to -007)
 // ---------------------------------------------------------------------------
 
-#let double-rule = {
-  line(length: 100%, stroke: 1.6pt)
-  v(2.5pt)
-  line(length: 100%, stroke: 0.5pt)
-}
-#let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
-
-#let cover-body(meta, gap) = {
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
-  set align(center)
-  v(gap * 0.6)
-  strong[No. #need(meta, "case_number")]
-  v(gap)
-  double-rule
-  v(gap)
-  strong[IN THE UNITED STATES COURT OF APPEALS\ FOR THE NINTH CIRCUIT]
-  v(gap)
-  short-rule
-  v(gap)
-  let sides = need(meta, "caption")
-  for (i, side) in sides.enumerate() {
-    for name in side.names { inl(name); parbreak() }
-    align(left, pad(left: 50%, inl(side.designation)))
-    if i < sides.len() - 1 { v(gap * 0.3); [v.]; v(gap * 0.3) }
-  }
-  v(gap)
-  short-rule
-  v(gap)
-  inl(need(meta, "proceeding"))
-  if "district_court_case" in meta or "judge" in meta {
-    parbreak()
-    [#if "district_court_case" in meta [D.C. No. #meta.district_court_case]#if "district_court_case" in meta and "judge" in meta [; ]#if "judge" in meta [#inl(meta.judge)]]
-  }
-  v(gap)
-  short-rule
-  v(gap)
-  strong(upper(inl(need(meta, "brief_title"))))
-  v(gap)
-  short-rule
-  v(gap)
-  // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number).
-  align(left, pad(left: 50%, {
-    set par(hanging-indent: 0pt, spacing: 0.5em)
-    let groups = need(meta, "counsel")
-    for (gi, g) in groups.enumerate() {
-      block(breakable: false, {
-        for n in g.names { n; linebreak() }
-        let lines = g.at("lines", default: ())
-        if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
-        for l in lines { h(0.5em); emph(inl(l)); linebreak() }
-      })
-    }
-  }))
-  v(gap)
-  double-rule
-}
-
-/// The cover is one page. The spacing between its parts is the only thing that gives:
-/// the largest spacing at which the whole cover fits the page is used (the type size never shrinks).
-#let cover(meta) = page(numbering: none, footer: none, layout(size => {
-  let fits(g) = measure(block(width: size.width, cover-body(meta, g * 1em))).height <= size.height
-  let g = (1.0, 0.8, 0.6, 0.45, 0.3, 0.2, 0.1, 0.0).find(fits)
-  if g == none { panic("ca9-brief: the cover does not fit on one page; shorten the counsel or party lines") }
-  cover-body(meta, g * 1em)
-}))
-
+#let cover-body(meta, gap) = shared-cover-body(meta, gap, single-leading, need, inl)
+#let cover(meta) = shared-ca9-cover(meta, single-leading, need, inl, error-prefix: "ca9-brief")
 // ---------------------------------------------------------------------------
 // Signature, related cases, certificates (Forms 17, 8, 15)
 // ---------------------------------------------------------------------------
@@ -428,48 +345,12 @@
 
 /// Certificate of Compliance, Form 8 wording (Circuit Rule 32-1(e); CA9-CERT-001, -002).
 #let certificate-of-compliance(meta, words) = {
-  let basis = meta.at("word_limit_basis", default: "standard")
-  let longer = ("longer-joint", "longer-multiple", "longer-response-to-joint")
-  heading(level: 1, numbering: none)[Certificate of Compliance]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
-  [9th Cir. Case Number(s) #need(meta, "case_number")]
-  parbreak()
-  [I am the attorney or self-represented party.]
-  parbreak()
-  [This brief contains #group-digits(words) words, including #meta.at("manual_image_words", default: 0) words manually counted in any visual images, and excluding the items exempted by FRAP 32(f). The brief’s type size and typeface comply with FRAP 32(a)(5) and (6).]
-  parbreak()
-  [I certify that this brief (select only one):]
-  for (key, body) in limit-options { option-row(basis == key, body) }
-  option-row(basis in longer, [complies with the longer length limit permitted by Cir. R. 32-2(b) because (select only one):])
-  option-row(basis == "longer-joint", [it is a joint brief submitted by separately represented parties.], indent: 1.6em)
-  option-row(basis == "longer-multiple", [a party or parties are filing a single brief in response to multiple briefs.], indent: 1.6em)
-  option-row(basis == "longer-response-to-joint", [a party or parties are filing a single brief in response to a longer joint brief.], indent: 1.6em)
-  option-row(basis == "court-order", [complies with the length limit designated by court order dated #meta.at("court_order_date", default: "__________").])
-  option-row(basis == "motion-to-exceed", [is accompanied by a motion to file a longer brief pursuant to Cir. R. 32-2(a).])
-  form-sig-line(meta)
+  shared-ca9-compliance(meta, words, heading, single-leading, need, group-digits, limit-options, option-row, form-sig-line)
 }
 
 /// Certificate of Service, Form 15 wording. Only when `service.certificate: true` (CA9-CERT-004).
 #let certificate-of-service(meta) = {
-  let svc = meta.service
-  heading(level: 1, numbering: none)[Certificate of Service]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
-  [9th Cir. Case Number(s) #need(meta, "case_number")]
-  parbreak()
-  [I hereby certify that I electronically filed the foregoing/attached document(s) on this date with the Clerk of the Court for the United States Court of Appeals for the Ninth Circuit using the Appellate Electronic Filing system.]
-  let unreg = svc.at("unregistered", default: ())
-  if unreg.len() > 0 {
-    parbreak()
-    strong[Service on Case Participants Who Are NOT Registered for Electronic Filing:]
-    parbreak()
-    [I certify that I served the foregoing/attached document(s) on this date by hand delivery, mail, third party commercial carrier for delivery within 3 calendar days, or, having obtained prior consent, by email to the following unregistered case participants (list each name and mailing/email address):]
-    for u in unreg { block(above: 0.7em, breakable: false, pad(left: 0.5in, [#u.name, #u.address])) }
-  }
-  parbreak()
-  strong[Description of Document(s) (required for all documents):]
-  parbreak()
-  inl(need(meta, "brief_title"))
-  form-sig-line(meta)
+  shared-ca9-service(meta, heading, single-leading, need, inl, form-sig-line)
 }
 
 #let toc-addendum() = {
@@ -518,12 +399,10 @@
     separator: line(length: 30%, stroke: 0.5pt),
   )
   show footnote.entry: it => {
-    set text(size: type-size)   // typst's default is 0.85em; FRAP 32(a)(5) allows nothing under 14 pt
-    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em)
     // marker, a thin space, then the note (typst's default runs them together)
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
-    [#super(num)#h(0.25em)#note.body]
+    shared-footnote-body(note.body, num, type-size, single-leading, 0.5em)
   }
   show quote.where(block: true): it => block(above: 1em, below: 1em, pad(left: para-indent, right: para-indent, {
     set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)

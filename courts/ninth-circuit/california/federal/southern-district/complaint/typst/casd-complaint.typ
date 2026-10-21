@@ -3,6 +3,7 @@
 // Fed. R. Civ. P. 10(a) (caption) and 10(b) (numbered paragraphs). See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../../../lib/typst/pleading-paper.typ": line-numbers as shared-line-numbers, pleading-rules as shared-pleading-rules
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
@@ -56,20 +57,10 @@
 // ---------------------------------------------------------------------------
 
 /// Numbers 1 to 28 down the left margin, one per numbered line.
-#let line-numbers() = {
-  for i in range(1, lines-per-page + 1) {
-    place(top + left, dx: 0pt, dy: top-margin + (i - 1) * pitch,
-      block(width: left-margin - 0.5in, height: pitch,
-        align(right, text(size: type-size, str(i)))))
-  }
-}
+#let line-numbers() = shared-line-numbers(left-margin, top-margin, pitch, lines-per-page, type-size)
 
 /// The pleading rules: a double rule at the text's left edge, a single rule at its right.
-#let pleading-rules() = {
-  place(top + left, dx: left-margin - 0.2in, line(start: (0pt, 0pt), end: (0pt, page-h), stroke: 0.75pt))
-  place(top + left, dx: left-margin - 0.16in, line(start: (0pt, 0pt), end: (0pt, page-h), stroke: 0.75pt))
-  place(top + left, dx: page-w - right-margin + 0.1in, line(start: (0pt, 0pt), end: (0pt, page-h), stroke: 0.75pt))
-}
+#let pleading-rules() = shared-pleading-rules(page-w, page-h, left-margin, right-margin)
 
 #let footer-block(title, case-number) = place(
   top + left,

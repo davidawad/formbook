@@ -81,8 +81,10 @@ fn typst(root: &Path, court: &Path, sample_rel: &Path, out: &Path, warnings: War
     let mut command = Command::new("typst");
     command
         .current_dir(root)
+        // Templates may import shared repository libraries (lib/typst). Keep the project root
+        // at the repository while passing the sample path relative to that root.
         .args(["compile", "--root"])
-        .arg(court)
+        .arg(root)
         .arg("--font-path")
         .arg(root.join("fonts"));
     // A Times exemplar requires the pinned directory; otherwise it is added when present so scratch
@@ -101,7 +103,14 @@ fn typst(root: &Path, court: &Path, sample_rel: &Path, out: &Path, warnings: War
         .arg("--package-cache-path")
         .arg(root.join("vendor/typst-packages"))
         .arg("--input")
-        .arg(format!("sample={}", sample_rel.display()))
+        .arg(format!(
+            "sample={}",
+            court
+                .join(sample_rel)
+                .strip_prefix(root)
+                .unwrap_or(sample_rel)
+                .display()
+        ))
         .arg(court.join("typst/main.typ"))
         .arg(out);
     let spawn = |e: std::io::Error| fail(2, format!("fb render: cannot run typst: {e}"));

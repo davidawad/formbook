@@ -8,6 +8,10 @@
 // is rendered by cmarker; the metadata comes from the YAML frontmatter of the same file (schema: ../README.md).
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../../../lib/typst/pleading-paper.typ": background as shared-pleading-background
+#import "../../../../../../../lib/typst/tables.typ": dot-leader as shared-dot-leader
+#import "../../../../../../../lib/typst/typography.typ": footnote-style as shared-footnote-style
+#import "../../../../../../../lib/typst/toa.typ": linked-authorities as shared-linked-authorities, cited-authorities as shared-cited-authorities, authority-page-labels as shared-authority-page-labels
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
@@ -74,14 +78,8 @@
 
 /// Numbers 1 to 28 down the left margin, one per numbered line; the page background of every page.
 #let pleading-background() = {
-  for i in range(1, lines-per-page + 1) {
-    place(top + left, dx: 0pt, dy: top-margin + (i - 1) * line-pitch,
-      block(width: left-margin - 0.5in, height: line-pitch,
-        align(right, text(size: type-size, top-edge: "cap-height", bottom-edge: "baseline", str(i)))))
-  }
-  place(top + left, dx: left-margin - 0.2in, line(start: (0pt, 0pt), end: (0pt, page-h), stroke: 0.75pt))
-  place(top + left, dx: left-margin - 0.16in, line(start: (0pt, 0pt), end: (0pt, page-h), stroke: 0.75pt))
-  place(top + left, dx: page-w - right-margin + 0.1in, line(start: (0pt, 0pt), end: (0pt, page-h), stroke: 0.75pt))
+  shared-pleading-background(page-w, page-h, left-margin, right-margin, top-margin, line-pitch, lines-per-page, type-size,
+    top-edge: "cap-height", bottom-edge: "baseline")
 }
 
 /// Footer below line 28: the page number (when `numbered`, in the page's own numbering style), the paper's
@@ -125,8 +123,6 @@
 // Tables of contents and authorities (Civil L.R. 7-4(a)(2))
 // ---------------------------------------------------------------------------
 
-#let dot-leader = box(width: 1fr, repeat[.#h(0.25em)])
-
 /// One table-of-contents row from a heading element; wrapped lines hang under the title.
 #let toc-entry(hd) = {
   let nums = counter(heading).at(hd.location()).slice(0, hd.level)
@@ -141,7 +137,7 @@
       if lab != "" { box(width: heading-tab, lab) }
       if hd.level == 1 { upper(hd.body) } else { hd.body }
       h(0.2em)
-      dot-leader
+      shared-dot-leader(0.25em)
     }),
     align(right + bottom, box(width: 2em, align(right, pg))),
   )))
@@ -172,17 +168,10 @@
   heading(level: 1, numbering: none, outlined: false)[Table of Authorities]
   align(right, block(above: 0.3em, below: 0pt, strong[Page(s)]))
   context {
-    let hits = query(<toa-hit>)
-    for h in hits {
-      if h.value not in authorities {
-        panic("casd-motion-brief: link `toa:" + h.value + "` has no entry under `authorities:` in the frontmatter")
-      }
-    }
+    let hits = shared-linked-authorities(authorities, error-prefix: "casd-motion-brief")
     let first = true
     for (kind, title) in toa-groups {
-      let members = authorities.pairs()
-        .filter(p => p.last().kind == kind and hits.any(h => h.value == p.first()))
-        .sorted(key: p => sort-key(p.last()))
+      let members = shared-cited-authorities(authorities, hits, kind, sort-key)
       if members.len() == 0 { continue }
       block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
         set par(first-line-indent: 0pt, leading: single-leading)
@@ -191,13 +180,7 @@
       first = false
       for (key, a) in members {
         // Distinct printed page labels, in document order.
-        let pages = ()
-        for h in hits.filter(h => h.value == key) {
-          let loc = h.location()
-          let label = numbering(loc.page-numbering(), ..counter(page).at(loc))
-          if label not in pages { pages.push(label) }
-        }
-        let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
+        let page-text = shared-authority-page-labels(hits, key, passim-threshold)
         block(breakable: false, above: 0.6em, below: 0pt, width: 100%, hang(0.35in, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
@@ -205,7 +188,7 @@
           }
           inl(a.cite)
           h(0.8em)
-          dot-leader
+          shared-dot-leader(0.25em)
           h(0.3em)
           page-text
         }))
@@ -322,9 +305,8 @@
   )
   // The numbering function is what steps the heading counter; the labels are drawn by the show rule below.
   set heading(numbering: heading-num)
-  set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
-  show footnote.entry: set text(size: type-size)
-  show footnote.entry: set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em)
+  shared-footnote-style(type-size, single-leading, spacing: 0.4em,
+    gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
 
   // Authority links: a link whose target is `toa:KEY` is recorded with the page it starts on.
   show link: it => {
