@@ -5,7 +5,7 @@
 # centred bold (level 1), bold with a 0.4 in hanging indent (level 2), bold italic (level 3); footnotes 10 pt on 12 pt lines;
 # block quotations indented 0.5 in on both sides. Page: 6 1/8 x 9 1/4 in, text field 4 1/8 x 7 1/8 in.
 # The cover, caption, counsel, front pages, tables of contents and authorities, signature and certificate are written
-# by scotus.lua with the custom styles defined here. Page geometry is set by scotus.lua, the footers by fb render.
+# by scotus.lua with the custom styles defined here. Page geometry and footers are set by render.sh.
 # Usage: sh docx/build-reference.sh <out.docx>   (needs pandoc, sed, unzip, zip, xmllint, perl on PATH)
 set -eu
 OUT=$1
