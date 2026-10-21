@@ -1,5 +1,5 @@
 {
-  "_comment": "Scope for the formbook tree. tools/gen_tree.py reads this plus data/courts-db.json and data/circuits.json; rerunning it reproduces the tree. A court is ACTIVE if any `dates` entry in courts-db has end == null. Ids are CourtListener court ids; never invent ids for courts that exist in courts-db.",
+  "_comment": "Scope for the formbook tree. The generated data/index.json maps CourtListener court ids to the checked-in folder tree. A court is ACTIVE if any `dates` entry in courts-db has end == null. Ids are CourtListener court ids; never invent ids for courts that exist in courts-db.",
   "active_rule": "any dates[].end == null",
   "allow": {
     "scotus": [
@@ -245,7 +245,7 @@
     ]
   },
   "slug_overrides": {
-    "_comment": "Folder slugs are derived deterministically from names (tools/gen_tree.py slugify). Overrides only where derivation is ugly.",
+    "_comment": "Folder slugs are derived deterministically from names. Overrides only where derivation is ugly.",
     "nmi": "supreme-court",
     "scotus": "supreme-court-of-the-united-states",
     "cafc": "court-of-appeals",
