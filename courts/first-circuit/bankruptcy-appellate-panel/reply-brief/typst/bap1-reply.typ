@@ -264,7 +264,9 @@
           else if pages.len() >= passim-threshold { "passim" }
           else { pages.join(", ") }
         (sort: a.at("sort", default: a.at("name", default: a.cite)), name: a.at("name", default: none), cite: a.cite, refs: refs)
-      }).sorted(key: e => lower(e.sort))
+      }).filter(e => e.refs != "").sorted(key: e => lower(e.sort))
+      // An authority the body never cites has no page to point to: it is left out, as is an empty group.
+      if entries.len() == 0 { continue }
       text(weight: "bold", g.title)
       v(0.4em)
       for e in entries {
