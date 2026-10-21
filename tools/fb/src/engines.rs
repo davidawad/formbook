@@ -292,6 +292,7 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
         )? {
             return Err(fail(1, "fb render: docx/render.sh failed"));
         }
+        crate::docxdedupe::package(&temp_docx, work.path())?;
     } else if d.join("reference.docx").is_file() {
         let mut args = vec![
             "--to".to_string(),
