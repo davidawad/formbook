@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `FILED-EXAMPLE-motion-brief-4.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, District of Puerto Rico (`prb`)
 - Case: *Tamara Perez Cruz v. Oriental Bank, et al.*, Adv. No. 20-00126, in Case No. 11-03499 (MCF), Chapter 13
 - Document: "Amended Motion for Summary Judgment and Memorandum of Law in Support Thereof" (10 pages; ECF Doc. 30 of the adversary)
@@ -31,4 +31,4 @@ Second filer: not collected. The brief asks for one exemplar per doc type; the o
 
 ## Replacement for the audited non-redistributable-font exemplar
 
-The audited `FILED-EXAMPLE-motion-brief-4.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-motion-brief-3.pdf` from a different filer. See the second-filer record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+The audited `FILED-EXAMPLE-motion-brief.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-motion-brief-3.pdf` from a different filer. See the second-filer record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

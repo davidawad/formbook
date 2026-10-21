@@ -1,6 +1,6 @@
 # Exemplar source
 
-Exemplar: `FILED-EXAMPLE-motion-brief-4.pdf` (19 pages, text-based, public).
+Exemplar: `FILED-EXAMPLE-motion-brief-2.pdf` (19 pages, text-based, public).
 
 It is two RECAP documents from one filing, concatenated in ECF order: ECF Doc. 8 (the motion, pages 1-3) then ECF Doc. 8-1 (the memorandum in support, pages 4-19).
 
