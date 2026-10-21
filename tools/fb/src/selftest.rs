@@ -1,4 +1,4 @@
-//! `fb check-selftest <court-dir>`: does the checker actually catch defects? A mutation test for `fb check`.
+//! `fb selftest <court-dir>`: does the checker actually catch defects? A mutation test for `fb check`.
 //!
 //! Each mutant breaks ONE thing, rebuilds the PDF, and runs the checker against the ORIGINAL markdown. The named
 //! requirement IDs must FAIL. A mutant the checker lets through means a check is blind, which is the failure mode
@@ -7,7 +7,7 @@
 //!
 //! Content mutants change the markdown that is rendered (but not the markdown the checks compare against). Layout
 //! mutants change the template in a scratch copy of the court folder. The mutations are `sed` programs, applied
-//! with the system sed exactly as the shell version did.
+//! with the system sed, with the mutation definitions kept here as data.
 use crate::proc::capture;
 use crate::{fail, repo_root, Res};
 use serde_json::Value;
@@ -97,7 +97,8 @@ const MUTANTS: &[Mutant] = &[
         name: r"wrong-font",
         want: r"CA9-FORM-007",
         kind: Kind::Layout,
-        expr: r#"s/^#let font-family = ("Times New Roman", "Liberation Serif")/#let font-family = "DejaVu Sans Mono"/"#,
+        // ca9 declares Liberation Serif as its vendored serif face; mutate that declaration explicitly.
+        expr: r#"s|^#let font-family = .*"Liberation Serif".*$|#let font-family = "DejaVu Sans Mono"|"#,
     },
     Mutant {
         name: r"footnotes-small",
@@ -176,7 +177,7 @@ fn copy_into(from: &[PathBuf], to: &Path) -> Res<()> {
         fail(
             2,
             format!(
-                "fb check-selftest: cp into {} failed: {}",
+                "fb selftest: cp into {} failed: {}",
                 to.display(),
                 String::from_utf8_lossy(&o.stderr).trim()
             ),
@@ -191,7 +192,7 @@ fn sed(expr: &str, file: &Path) -> Res<Vec<u8>> {
         fail(
             2,
             format!(
-                "fb check-selftest: sed failed on {}: {}",
+                "fb selftest: sed failed on {}: {}",
                 file.display(),
                 String::from_utf8_lossy(&o.stderr).trim()
             ),
@@ -210,7 +211,7 @@ fn sample_field(checks: &serde_yaml::Value, key: &str) -> Res<String> {
         .ok_or_else(|| {
             fail(
                 2,
-                format!("fb check-selftest: checks.yaml has no sample {SAMPLE} with .{key}"),
+                format!("fb selftest: checks.yaml has no sample {SAMPLE} with .{key}"),
             )
         })
 }
@@ -228,14 +229,14 @@ impl Run<'_> {
     fn fresh_copy(&self, name: &str) -> Res<PathBuf> {
         let d = self.scratch.join(name);
         std::fs::create_dir_all(&d)
-            .map_err(|e| fail(2, format!("fb check-selftest: {}: {e}", d.display())))?;
+            .map_err(|e| fail(2, format!("fb selftest: {}: {e}", d.display())))?;
         let from: Vec<PathBuf> = ["typst", "usage", "checks.yaml", "court.json"]
             .iter()
             .map(|f| self.court.join(f))
             .collect();
         copy_into(&from, &d)?;
         std::fs::create_dir_all(d.join("reviews"))
-            .map_err(|e| fail(2, format!("fb check-selftest: {e}")))?;
+            .map_err(|e| fail(2, format!("fb selftest: {e}")))?;
         Ok(d)
     }
 
@@ -271,7 +272,7 @@ impl Run<'_> {
                     d.join("mutated.md"),
                     sed(m.expr, &self.court.join(&self.md))?,
                 )
-                .map_err(|e| fail(2, format!("fb check-selftest: {e}")))?;
+                .map_err(|e| fail(2, format!("fb selftest: {e}")))?;
                 self.render(&d, "mutated.md")?
             }
             Kind::Layout => {
@@ -284,7 +285,7 @@ impl Run<'_> {
                     ));
                 }
                 std::fs::write(d.join("typst").join(TEMPLATE), changed)
-                    .map_err(|e| fail(2, format!("fb check-selftest: {e}")))?;
+                    .map_err(|e| fail(2, format!("fb selftest: {e}")))?;
                 self.render(&d, &self.md)?
             }
         };
@@ -311,41 +312,35 @@ impl Run<'_> {
 
 pub fn main(args: &[String]) -> Res<ExitCode> {
     let [dir] = args else {
-        return Err(fail(2, "usage: fb check-selftest <court-dir>"));
+        return Err(fail(2, "usage: fb selftest <court-dir>"));
     };
     let root = repo_root()?;
-    let court = std::fs::canonicalize(dir)
-        .map_err(|e| fail(2, format!("fb check-selftest: {dir}: {e}")))?;
+    let court =
+        std::fs::canonicalize(dir).map_err(|e| fail(2, format!("fb selftest: {dir}: {e}")))?;
     let cj: Value = std::fs::read(court.join("court.json"))
         .ok()
         .and_then(|b| serde_json::from_slice(&b).ok())
         .ok_or_else(|| {
             fail(
                 2,
-                format!(
-                    "fb check-selftest: {}/court.json unreadable",
-                    court.display()
-                ),
+                format!("fb selftest: {}/court.json unreadable", court.display()),
             )
         })?;
     let alias = cj["alias"].as_str().unwrap_or("null").to_string();
     let scratch = root.join("out/selftest").join(&alias);
     std::fs::create_dir_all(&scratch)
-        .map_err(|e| fail(2, format!("fb check-selftest: {}: {e}", scratch.display())))?;
+        .map_err(|e| fail(2, format!("fb selftest: {}: {e}", scratch.display())))?;
     let checks: serde_yaml::Value = std::fs::read_to_string(court.join("checks.yaml"))
         .ok()
         .and_then(|t| serde_yaml::from_str(&t).ok())
         .ok_or_else(|| {
             fail(
                 2,
-                format!(
-                    "fb check-selftest: {}/checks.yaml unreadable",
-                    court.display()
-                ),
+                format!("fb selftest: {}/checks.yaml unreadable", court.display()),
             )
         })?;
     let run = Run {
-        exe: std::env::current_exe().map_err(|e| fail(2, format!("fb check-selftest: {e}")))?,
+        exe: std::env::current_exe().map_err(|e| fail(2, format!("fb selftest: {e}")))?,
         root: &root,
         court: &court,
         scratch: &scratch,

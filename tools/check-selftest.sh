@@ -5,4 +5,4 @@
 set -euo pipefail
 FB_ROOT="$(dirname "$0")/.."
 export FB_ROOT
-exec cargo run -q --release --manifest-path "$FB_ROOT/tools/fb/Cargo.toml" -- check-selftest "$@"
+exec cargo run -q --release --manifest-path "$FB_ROOT/tools/fb/Cargo.toml" -- selftest "$@"

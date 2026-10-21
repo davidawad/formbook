@@ -171,6 +171,26 @@ pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
     Ok(std::process::ExitCode::SUCCESS)
 }
 
+/// `fb render-latex <doc-dir> <usage/INPUT-<id>.md> [out.pdf]`, the focused LaTeX renderer entry point.
+pub fn latex_main(args: &[String]) -> Res<std::process::ExitCode> {
+    let mut full = vec!["--engine".to_string(), "latex".to_string()];
+    full.extend_from_slice(args);
+    let o = parse_args(&full)?;
+    if o.engine != "latex" {
+        return Err(fail(2, "fb render-latex: engine is fixed to latex"));
+    }
+    let root = repo_root()?;
+    let court = absolute(&root, &o.pos[0]);
+    let sample = Path::new(&o.pos[1]);
+    let out = match o.pos.get(2) {
+        Some(p) => absolute(&root, p),
+        None => default_out(&court, sample, "latex")?,
+    };
+    render_one(&root, "latex", &court, sample, &out, Warnings::Allow)?;
+    println!("{}", out.display());
+    Ok(std::process::ExitCode::SUCCESS)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
