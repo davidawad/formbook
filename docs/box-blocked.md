@@ -717,3 +717,59 @@ RESOLVED conn/petition-for-rehearing: courts/second-circuit/connecticut/state/su
 RESOLVED conn/petition-for-discretionary-review: courts/second-circuit/connecticut/state/supreme-court/usage/FILED-EXAMPLE-petition-for-discretionary-review.pdf (fb-l129.1 pass 2, 2026-10-18)
 BLOCKED conn/petition-for-review: only the State's opposition to a bail/appeal-bond petition (State v. Hurdle, SC 20827) is archived; the petition itself is not on Wayback, and appellateinquiry.jud.ct.gov times out from this box (fb-l129.1 pass 2, 2026-10-18)
 BLOCKED conn/petition-for-writ: writs of error now go to the Appellate Court (P.B. s. 72-1, 2026 ed.; the Supreme Court gets them by transfer, P.B. ss. 65-1/65-2); no archived Supreme Court writ of error or original-proceeding filing found among 1,146 documents (fb-l129.1 pass 2, 2026-10-18)
+
+## fb-595.21.4 — Tenth and Eleventh Circuit research batch (2026-10-21)
+
+BLOCKED cod/complaint: A second public complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED cod/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED cob/adversary-complaint: Two usage PDFs are from only one established filer; a distinct-filer exemplar is still needed.
+BLOCKED ksb/adversary-complaint: A second public adversary complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED ksb/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED ksd/complaint: A second public complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED ksd/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED nmb/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED nmd/complaint: A second public complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED nmd/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED oknb/adversary-complaint: A second public adversary complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED oknb/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED okwb/adversary-complaint: A second public adversary complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED okd/complaint: A second public complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED okd/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED okeb/adversary-complaint: Two usage PDFs are from the same trustee/filer; a distinct-filer exemplar is still needed.
+BLOCKED oked/complaint: A second public complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED oked/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED oknd/complaint: A second public complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED oknd/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED okwd/complaint: A second public complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED okwd/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED utb/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED utd/complaint: A second public complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED wyb/adversary-complaint: A second public adversary complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED wyb/motion-brief: A second public motion brief from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+BLOCKED wyd/complaint: A second public complaint from a different filer was not collected in this batch; the primary-source rules audit also remains to be independently confirmed.
+
+BLOCKED alsb/adversary-complaint: A second filer exemplar remains outstanding; the July 2026 Local Bankruptcy Rules PDF is image-only and could not be verified from its text.
+BLOCKED alnd/complaint: A second public complaint from a different filer was not collected in this batch.
+BLOCKED alnd/motion-brief: A second public motion brief from a different filer was not collected in this batch.
+BLOCKED ca11/answering-brief: A second public answering brief from a different filer was not collected in this batch.
+BLOCKED ca11/reply-brief: A second public reply brief from a different filer was not collected in this batch.
+BLOCKED flmb/adversary-complaint: The local-rule URLs returned 404; only national rules could be verified for this document type.
+BLOCKED flmb/motion-brief: A second public motion brief from a different filer was not collected; current local-rule URLs returned 404.
+BLOCKED flsb/adversary-complaint: A second public adversary complaint from a different filer was not collected in this batch.
+BLOCKED flsb/motion-brief: A second public motion brief from a different filer was not collected in this batch.
+BLOCKED flmd/complaint: A second public complaint from a different filer was not collected in this batch.
+BLOCKED flmd/motion-brief: A second public motion brief from a different filer was not collected in this batch.
+BLOCKED flnd/complaint: A second public complaint from a different filer was not collected in this batch.
+BLOCKED flnd/motion-brief: A second public motion brief from a different filer was not collected in this batch.
+BLOCKED flsd/complaint: A second public complaint from a different filer was not collected in this batch.
+BLOCKED flsd/motion-brief: A second public motion brief from a different filer was not collected in this batch.
+BLOCKED gamb/adversary-complaint: A second public adversary complaint from a different filer was not collected in this batch.
+BLOCKED gamb/motion-brief: A second public motion brief from a different filer was not collected in this batch.
+BLOCKED ganb/adversary-complaint: A second filer exemplar remains outstanding; the current local rules could not be retrieved from the court site.
+BLOCKED ganb/motion-brief: A second filer exemplar remains outstanding; the current local rules could not be retrieved from the court site.
+BLOCKED gasb/adversary-complaint: A second filer exemplar remains outstanding; the operative local rule text announced effective 2026-10-07 was not located.
+BLOCKED gasb/motion-brief: The operative local rule text announced effective 2026-10-07 was not located.
+BLOCKED gamd/complaint: A second public complaint from a different filer was not collected in this batch.
+BLOCKED gamd/motion-brief: A second public motion brief from a different filer was not collected in this batch.
+BLOCKED gasd/complaint: A second public complaint from a different filer was not collected in this batch.
+BLOCKED gasd/motion-brief: A second public motion brief from a different filer was not collected in this batch.
