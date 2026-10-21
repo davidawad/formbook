@@ -1,15 +1,22 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx from pandoc's default reference document (docs/DOCX.md). Matches the typst template
 # (typst/iasd-motion-brief.typ): Times New Roman 12 pt; body double-spaced (24 pt exact) with a half-inch first-line
 # indent; headings double-spaced: level 1 centered bold capitals, levels 2 to 4 bold with a hanging label (I., A., 1.);
 # block quotations and footnotes single-spaced; letter page with 1-inch margins; page number centered at the bottom.
 # The front matter's roman section and the body's arabic section are set by the filter and docx/render.sh.
-# Usage: sh docx/make-reference.sh [out.docx]   (needs pandoc, perl, unzip, zip, xmllint)
-set -eu
+# Usage: bash docx/make-reference.sh [out.docx]   (needs pandoc, perl, unzip, zip, xmllint)
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 OUT=${1:-$D/reference.docx}
-T=$(mktemp -d)
-trap 'rm -rf "$T"' EXIT
+T="$(mktemp -d)" || exit 1
+safe_rmdir() {
+  local target=${1:?} tmp=${TMPDIR:-/tmp}
+  case "$target" in
+    "${tmp%/}"/tmp.* | /tmp/tmp.*) find "$target" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$T"' EXIT
 pandoc --print-default-data-file reference.docx > "$T/default.docx"
 mkdir "$T/x"
 (cd "$T/x" && unzip -q "$T/default.docx")
@@ -31,8 +38,7 @@ cat > "$T/styles-new.xml" <<'XML'
 XML
 DEFAULTS='<w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/><w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
 SECT='<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1" /><w:pgSz w:w="12240" w:h="15840" /><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0" /><w:pgNumType w:fmt="decimal" w:start="1" /></w:sectPr>'
-export NEWSTYLES="$T/styles-new.xml" DEFAULTS SECT
-perl -0pi -e '
+NEWSTYLES="$T/styles-new.xml" DEFAULTS="$DEFAULTS" perl -0pi -e '
   my $new = do { local $/; open my $f, "<", $ENV{NEWSTYLES} or die; <$f> };
   for my $id (qw(Normal BodyText FirstParagraph Compact BlockText FootnoteText Heading1 Heading2 Heading3 Heading4)) {
     s{<w:style [^>]*w:styleId="$id"[^>]*>.*?</w:style>\s*}{}s;
@@ -40,7 +46,7 @@ perl -0pi -e '
   s{<w:docDefaults>.*?</w:docDefaults>}{$ENV{DEFAULTS}}s;
   s{</w:styles>}{$new</w:styles>}s;
 ' "$W/word/styles.xml"
-perl -0pi -e 's{<w:sectPr>.*?</w:sectPr>}{$ENV{SECT}}s' "$W/word/document.xml"
+SECT="$SECT" perl -0pi -e 's{<w:sectPr>.*?</w:sectPr>}{$ENV{SECT}}s' "$W/word/document.xml"
 cat > "$W/word/footer1.xml" <<'XML'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:ftr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto" /><w:jc w:val="center" /></w:pPr><w:r><w:fldChar w:fldCharType="begin" /></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate" /></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end" /></w:r></w:p></w:ftr>

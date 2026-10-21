@@ -1,14 +1,21 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx from pandoc's default reference for the BAP 8th Cir. brief (FRBP 8015).
 # Body: Times New Roman 14 pt (FRBP 8015(a)(5)(A)), exact 31 pt line pitch (double spacing, FRBP 8015(a)(4)),
 # first-line indent 0.5 in, widow control, 1 in margins on US Letter. Footnotes and block quotations are
 # single-spaced at 14 pt. Every font name is explicit (no theme fonts), so LibreOffice and Word both use Times New Roman.
-# Usage: sh docx/build-reference.sh <out.docx>   (needs pandoc, unzip, zip, perl, xmllint on PATH)
-set -eu
+# Usage: bash docx/build-reference.sh <out.docx>   (needs pandoc, unzip, zip, perl, xmllint on PATH)
+set -euo pipefail
 OUT=$(cd "$(dirname "$1")" && pwd)/$(basename "$1")
 FONT="Times New Roman"
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
+W="$(mktemp -d)" || exit 1
+safe_rmdir() {
+  local target=${1:?} tmp=${TMPDIR:-/tmp}
+  case "$target" in
+    "${tmp%/}"/tmp.* | /tmp/tmp.*) find "$target" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 pandoc -o "$W/ref.docx" --print-default-data-file reference.docx
 mkdir "$W/pkg"
 cd "$W/pkg" && unzip -q ../ref.docx
