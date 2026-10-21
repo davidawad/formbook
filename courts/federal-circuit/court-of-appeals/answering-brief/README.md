@@ -108,3 +108,7 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 - Verified at the primary source (Rules of Practice, Oct. 6, 2026, fetched 2026-10-16 from cafc.uscourts.gov): Fed. Cir. R. 32(b)(1), 14,000 words for a principal brief (p. 145); Fed. Cir. R. 47.4(b), the United States and its officers or agencies are exempt from the certificate of interest (p. 199). The "Not verified" notes on these two rows above are superseded.
 - LaTeX re-rendered: 15 pages (the claim page added; the body still runs one page longer than typst). docx not re-rendered (no LibreOffice): the committed `.docx`/`.docx.pdf` predate the claim page and still print "as calculated by Microsoft Word"; `docx/cafc-docx.lua` keeps an "Is/" signature prefix in a code path this sample does not reach (the committed docx PDF has no "Is/").
 - Remaining gaps: as under Known gaps; the latex cover still wraps the long counsel line flush left.
+
+## DOCX font and layout fixes (2026-10-21, fb-595.59)
+
+The docx engine moves from EB Garamond to Times New Roman, the face the typst template declares (DEF-FONT-002). The type-volume certificate's boxes are bordered runs ("X" or three no-break spaces) in the body face, as ca9.lua draws them, not DejaVu Sans ballot-box glyphs. `check.sh --engine docx` is green.

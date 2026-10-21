@@ -99,10 +99,11 @@ local function tab()
   return pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>")
 end
 
--- A box for the type-volume certificate (drawn with a glyph from the vendored DejaVu Sans).
+-- A box for the type-volume certificate: a run with a border, "X" or three no-break spaces inside, in the body face
+-- (as ca9.lua draws Form 8's boxes), so no symbol font can fall back to another face (DEF-FONT-002).
 local function checkbox(checked)
-  local ch = checked and "\226\152\146" or "\226\152\144" -- U+2612 BALLOT BOX WITH X, U+2610 BALLOT BOX
-  return pandoc.RawInline("openxml", '<w:r><w:rPr><w:rFonts w:ascii="DejaVu Sans" w:hAnsi="DejaVu Sans"/></w:rPr><w:t>' .. ch .. "</w:t></w:r>")
+  local ch = checked and "X" or "\u{00A0}\u{00A0}\u{00A0}"
+  return pandoc.RawInline("openxml", '<w:r><w:rPr><w:bdr w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:rPr><w:t xml:space="preserve">' .. ch .. "</w:t></w:r>")
 end
 
 -- Vertical space: one empty line of exact height, in twentieths of a point.

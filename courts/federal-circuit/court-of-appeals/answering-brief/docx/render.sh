@@ -26,8 +26,8 @@ package() { # $1 unpacked dir, $2 start page of the certificates, $3 output .doc
   X=$1
   footer "$X/word/footer-arabic.xml" ""
   footer "$X/word/footer-add.xml" "Add-"
-  # bullets: pandoc's Symbol bullet (U+F0B7) becomes EB Garamond's bullet; LibreOffice would draw Symbol with OpenSymbol
-  perl -0pi -e 's/w:ascii="Symbol" w:hAnsi="Symbol" w:cs="Symbol"/w:ascii="EB Garamond" w:hAnsi="EB Garamond" w:cs="EB Garamond"/g; s/\xEF\x82\xB7/\xE2\x80\xA2/g' "$X/word/numbering.xml"
+  # bullets: pandoc's Symbol bullet (U+F0B7) becomes Times New Roman's bullet; LibreOffice would draw Symbol with OpenSymbol
+  perl -0pi -e 's/w:ascii="Symbol" w:hAnsi="Symbol" w:cs="Symbol"/w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/g; s/\xEF\x82\xB7/\xE2\x80\xA2/g' "$X/word/numbering.xml"
   perl -0pi -e 's#</Relationships>#<Relationship Id="rIdFooterArabic" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer-arabic.xml"/><Relationship Id="rIdFooterAdd" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer-add.xml"/></Relationships>#' "$X/word/_rels/document.xml.rels"
   perl -0pi -e 's#</Types>#<Override PartName="/word/footer-arabic.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/><Override PartName="/word/footer-add.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/></Types>#' "$X/[Content_Types].xml"
   # the last section (the certificates) is the reference's body section: it gets the arabic footer and continues the

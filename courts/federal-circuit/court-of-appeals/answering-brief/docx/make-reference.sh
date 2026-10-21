@@ -11,8 +11,8 @@ pandoc -o "$W/base.docx" --print-default-data-file reference.docx
 mkdir "$W/x"
 (cd "$W/x" && unzip -q "$W/base.docx")
 sed -e "s/@BODY@/$1/g" -e "s/@SINGLE@/399/g" "$D/styles.xml.in" > "$W/x/word/styles.xml"
-# bullets in EB Garamond: pandoc's default bullet font is Symbol, which LibreOffice draws with its own OpenSymbol
-sed -i -e 's/w:ascii="Symbol" w:hAnsi="Symbol"/w:ascii="EB Garamond" w:hAnsi="EB Garamond"/g' "$W/x/word/numbering.xml"
+# bullets in Times New Roman: pandoc's default bullet font is Symbol, which LibreOffice draws with its own OpenSymbol
+sed -i -e 's/w:ascii="Symbol" w:hAnsi="Symbol"/w:ascii="Times New Roman" w:hAnsi="Times New Roman"/g' "$W/x/word/numbering.xml"
 perl -CSD -pi -e 's/\x{F0B7}/\x{2022}/g' "$W/x/word/numbering.xml"
 cat > "$W/x/word/document.xml" <<'XML'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>

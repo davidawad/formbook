@@ -5,7 +5,7 @@
        template: body @BODY@ twips (the baseline pitch of the typst brief), single @SINGLE@ twips (19.95 pt). -->
   <w:docDefaults>
     <w:rPrDefault><w:rPr>
-      <w:rFonts w:ascii="EB Garamond" w:hAnsi="EB Garamond" w:eastAsia="EB Garamond" w:cs="EB Garamond"/>
+      <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
       <w:sz w:val="28"/><w:szCs w:val="28"/><w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/>
     </w:rPr></w:rPrDefault>
     <w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="@SINGLE@" w:lineRule="exact"/></w:pPr></w:pPrDefault>

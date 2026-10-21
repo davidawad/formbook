@@ -136,3 +136,7 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 - Remaining gaps: as under Known gaps (excerpted sample, addendum placeholder, Form 30 layout not reproduced).
 
 [Formbook index](../../../../README.md)
+
+## DOCX font and layout fixes (2026-10-21, fb-595.59)
+
+The docx engine moves from EB Garamond to Times New Roman, the face the typst template declares (DEF-FONT-002). The type-volume certificate's boxes are bordered runs ("X" or three no-break spaces) in the body face, as ca9.lua draws them, not DejaVu Sans ballot-box glyphs. `check.sh --engine docx` is green.
