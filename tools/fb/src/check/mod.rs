@@ -3,9 +3,9 @@
 mod bridge;
 mod calibtex;
 mod declared;
+mod docxgate;
 #[cfg(test)]
 mod gate0_tests;
-mod docxgate;
 mod native;
 mod opts;
 mod prepare;

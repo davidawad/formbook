@@ -12,7 +12,7 @@
 //!                               the filters need page numbers (docxpass.rs)
 //! Every docx is then packed again as a reproducible archive (docxzip.rs), checked (valid zip, well-formed XML
 //! parts) and converted to PDF with LibreOffice.
-use crate::proc::{capture, have, tail, which, TempDir};
+use crate::proc::{capture, tail, which, TempDir};
 use crate::{fail, Res};
 use std::path::{Path, PathBuf};
 use std::process::Command;
