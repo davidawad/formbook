@@ -1,6 +1,13 @@
 ---
-civil_action_no: "3:25-cv-01162"
-judges: ["SDD", "EWD"]
+# Complete transcription of usage/FILED-EXAMPLE-complaint.pdf (Doc 1, 5 pages): every paragraph 1-30, the
+# unnumbered jurisdiction statement, sub-headings, counts, damages bullets, prayer and signature block.
+# Caption values as the filer typed them: "25-1162" (the template prints its own "CIVIL ACTION NO." label
+# where the filer typed "CASE NUMBER:"), and the blank "JUDGE:" / "MAGISTRATE:" lines; the judge initials
+# SDD/EWD appear only in the CM/ECF banner, so `judges` is left out. Left out (no template field): the
+# row of asterisks under the caption, the bold on the signature lines, the handwritten signature image.
+civil_action_no: "25-1162"
+judge: "JUDGE:"
+magistrate: "MAGISTRATE:"
 caption:
   - "BEATRICE M. PARKER"
   - ""
@@ -15,9 +22,10 @@ signature:
   lines:
     - "RESPECTFULLY SUBMITTED:"
     - ""
-    - "BY: ______________________________"
+    - ""
+    - "BY: ____________________________"
     - "JANICE MONTAGUE-MYLES"
-    - "Bar Roll No. 18356"
+    - "Bar Roll#: 18356"
     - "23445 Railroad Avenue"
     - "Plaquemine, Louisiana 70764"
     - "Phone: (225) 382-5222"
