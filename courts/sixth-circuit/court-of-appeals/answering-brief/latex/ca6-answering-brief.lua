@@ -263,7 +263,7 @@ local function certificate_of_compliance(m, words, basis)
     '\\begin{caSingle}I certify that this brief complies with the type-volume limitation of Fed. R. App. P. '
       .. rule .. '. Exclusive of the items exempted by Fed. R. App. P. 32(f), the brief contains '
       .. group_digits(words) .. ' words.\\par',
-    'The brief has been prepared in a proportionally spaced typeface, Liberation Serif in 14-point type, '
+    'The brief has been prepared in a proportionally spaced typeface, TeX Gyre Schola in 14-point type, '
       .. 'which complies with Fed. R. App. P. 32(a)(5) and (6).\\end{caSingle}',
     '\\caKeep{240bp}', -- the unbreakable signature block (typst cert-block)
     '\\begin{caSingle}' .. signature_compact(m) .. '\\end{caSingle}',

@@ -1,14 +1,16 @@
 % Fifth Circuit principal brief, LaTeX engine (tools/render-latex.sh, pandoc --template).
-% Form (CA5-FORM-*, CA5-LEN-*): 8.5 x 11 in, 1 in margins, Liberation Serif (Times New Roman substitute, docs/FONTS.md) 14 pt text, 12 pt footnotes,
+% Form (CA5-FORM-*, CA5-LEN-*): 8.5 x 11 in, 1 in margins, Times (newtx, metric-compatible with Times New Roman) 14 pt text, 12 pt footnotes,
 % double spacing for text, single spacing for headings, quotations, footnotes, tables and certificates.
 % The body is produced by ca5-brief.lua (cover, front statements, TOC, TOA, body, certificates); this file
 % holds the page setup, the fonts, and the macros those blocks call. No case-specific text lives here.
 \documentclass[letterpaper,14pt]{extarticle}
-\usepackage[margin=1in]{geometry}
-\usepackage{fontspec}
-% Vendored fonts only (no system fonts): the renderer passes the pandoc variable fontdir.
-\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}[Path=$fontdir$liberation-serif/, Extension=.ttf, BoldFont=LiberationSerif-Bold,
-  ItalicFont=LiberationSerif-Italic, BoldItalicFont=LiberationSerif-BoldItalic]}
+% CA5-FORM-003: 1 in margins. The text block ends 4 bp above the bottom margin so the descent of its last line stays
+% inside it (DEF-FORM-002); footskip grows by the same 4 bp so the page number stays where it was.
+\usepackage[margin=1in,bottom=76bp,footskip=\dimexpr30pt+4bp\relax]{geometry}
+\usepackage[T1]{fontenc}
+% CA5-FORM-005: Times. newtxtext/newtxmath ship with every TeX Live, so the generated .tex compiles with stock pdflatex
+% and no repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman.
+\usepackage{newtxtext,newtxmath}
 \usepackage[hidelinks,bookmarks=false]{hyperref}
 \usepackage{xcolor}
 
@@ -36,8 +38,9 @@
 % Level 1: centered, bold capitals, in the TOC without a label.
 \newcommand{\brone}[1]{\par\vspace{1.1em}\begingroup\sglspace\begin{center}\bfseries\MakeUppercase{#1}\end{center}\par\endgroup
   \addcontentsline{toc}{brone}{\protect\MakeUppercase{#1}}\nopagebreak\vspace{0.6em}\par\noindent}
-% Argument point heading (level 2 in the Argument): centered, bold small capitals, roman label.
-\newcommand{\brargtwo}[2]{\par\vspace{1.1em}\begingroup\sglspace\begin{center}\bfseries\scshape #1\ #2\end{center}\par\endgroup
+% Argument point heading (level 2 in the Argument): centered, bold, roman label. Not small capitals: Times New Roman has
+% none (typst and docx set these bold), and newtx bold small capitals would shrink the bold font descriptor.
+\newcommand{\brargtwo}[2]{\par\vspace{1.1em}\begingroup\sglspace\begin{center}\bfseries #1\ #2\end{center}\par\endgroup
   \addcontentsline{toc}{brargtwo}{\protect\numberline{#1}#2}\nopagebreak\vspace{0.6em}\par\noindent}
 % Sub-headings: label in a 0.5 in box at indent #1, title hangs under itself. #2 label, #3 title, #4 font switch.
 \newcommand{\brsubgen}[4]{\par\vspace{1em}\begingroup\sglspace\noindent

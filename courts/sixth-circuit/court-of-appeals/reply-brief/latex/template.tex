@@ -3,17 +3,15 @@
 % and body; this file holds the page setup, the fonts and the macros those parts call.
 % Same rules and the same numbers as ../typst/ca6-reply-brief.typ (see ../README.md, "Engines").
 \documentclass[14pt,letterpaper]{extarticle}
-\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{fancyhdr,needspace,titletoc,longtable,array}
 \makeatletter
 
-% FRAP 32(a)(5)(A): proportionally spaced serif; Liberation Serif, the Times New Roman substitute per docs/FONTS.md, from the vendored fonts directory only (no system fonts).
-\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
-% Liberation Serif has no small capitals (no smcp feature), so point headings are plain bold, as in the typst template.
-\newfontfamily\scfam[Path=$fontdir$liberation-serif/]{LiberationSerif-Regular.ttf}
-\newfontfamily\scbfam[Path=$fontdir$liberation-serif/]{LiberationSerif-Bold.ttf}
-\defaultfontfeatures{Path=$fontdir$liberation-serif/}
+% FRAP 32(a)(5)(A): proportionally spaced serif; Times from newtxtext/newtxmath (loaded above), which ship with every
+% TeX Live, so the generated .tex compiles with stock pdflatex and no repo-local file; the faces (TeXGyreTermesX, NewTX)
+% are metric-compatible with Times New Roman. Point headings are plain bold, not small capitals, as in the typst template.
 
 % Metrics measured from the typst render (14-point Liberation Serif): body lines 31.43 pt apart (FRAP 32(a)(4)
 % double spacing), single-spaced blocks 19.95 pt apart. Paragraphs are ragged right, first line indented 0.5 in.

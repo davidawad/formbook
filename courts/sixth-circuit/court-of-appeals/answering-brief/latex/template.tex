@@ -3,19 +3,17 @@
 % and body; this file holds the page setup, the fonts and the macros those parts call.
 % Same rules and the same numbers as ../typst/ca6-answering-brief.typ (see ../README.md, "Engines").
 \documentclass[14pt,letterpaper]{extarticle}
-\usepackage{fontspec}
-\usepackage[letterpaper,margin=1in,textheight=641.7bp,footskip=37.7bp,voffset=2.3bp]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{tgschola}
+% CA6 1 in margins (FRAP 32(a)(4)). The block starts 2.3 bp below the top margin and holds 21 body lines (topskip 14 bp
+% plus 20 x 31.43 bp = 642.6 bp), so its bottom is at 716.9 bp and the descent of the last line stays above the bottom
+% margin (DEF-FORM-002). The page number sits where it was (footskip measured from the block bottom).
+\usepackage[letterpaper,hmargin=1in,top=74.3bp,textheight=642.6bp,footskip=43.1bp]{geometry}
 \usepackage{fancyhdr,needspace,titletoc,longtable,array}
 \makeatletter
 
-% TeX Gyre Schola is the audited Century Schoolbook substitute per docs/FONTS.md.
-\setmainfont[Path=$fontdir$tex-gyre-schola/, Extension=.otf, UprightFont=texgyreschola-regular,
-  BoldFont=texgyreschola-bold, ItalicFont=texgyreschola-italic,
-  BoldItalicFont=texgyreschola-bolditalic, Ligatures=TeX]{texgyreschola-regular}
-% TeX Gyre Schola has no small capitals, so point headings are plain bold, as in the typst template.
-\newfontfamily\scfam[Path=$fontdir$tex-gyre-schola/, Extension=.otf]{texgyreschola-regular}
-\newfontfamily\scbfam[Path=$fontdir$tex-gyre-schola/, Extension=.otf]{texgyreschola-bold}
-\defaultfontfeatures{Path=$fontdir$tex-gyre-schola/, Extension=.otf}
+% TeX Gyre Schola is the audited Century Schoolbook substitute per docs/FONTS.md; tgschola (loaded above, TeX Live
+% tex-gyre) gives it to stock pdflatex with no repo-local file. Point headings are plain bold, as in the typst template.
 
 % Metrics measured from the typst render (14-point Liberation Serif): body lines 31.43 pt apart (FRAP 32(a)(4)
 % double spacing), single-spaced blocks 19.95 pt apart. Paragraphs are ragged right, first line indented 0.5 in.
@@ -66,7 +64,7 @@
   \nopagebreak\nointerlineskip\vspace{24.1bp}}
 \newcommand{\caHeadPoint}[2]{%
   \Needspace{4\baselineskip}\par\nopagebreak\nointerlineskip\vspace{16.8bp}%
-  {\singlespacing\centering\textbf{\scbfam #1\ #2}\par}%
+  {\singlespacing\centering\textbf{#1\ #2}\par}%
   \addcontentsline{toc}{capoint}{\protect\caTocLine{#1}{#2}}%
   \nopagebreak\nointerlineskip\vspace{22.7bp}}
 % d: steps from the margin (1..4); level: 2..5 (levels 4 and up are bold italic); label; title

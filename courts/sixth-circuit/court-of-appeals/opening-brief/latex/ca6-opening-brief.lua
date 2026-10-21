@@ -188,7 +188,7 @@ local function certificate_of_compliance(m, words)
   return table.concat({
     '\\caHeadOne{Certificate of Compliance}',
     '\\begin{caSingle}This brief complies with: (1) the type-volume limitation of Federal Rule of Appellate Procedure 32(a)(7)(B) because it contains '
-      .. group_digits(words) .. ' words, excluding the parts of the brief exempted by Rule 32(f); and (2) the typeface requirements of Rule 32(a)(5) and the type style requirements of Rule 32(a)(6) because it has been prepared in a proportionally spaced typeface (14-point Liberation Serif) using LaTeX (XeTeX via Tectonic 0.17.0). The word count is computed from the markdown source of this brief.\\end{caSingle}',
+      .. group_digits(words) .. ' words, excluding the parts of the brief exempted by Rule 32(f); and (2) the typeface requirements of Rule 32(a)(5) and the type style requirements of Rule 32(a)(6) because it has been prepared in a proportionally spaced typeface (14-point Times) using LaTeX (pdfLaTeX, TeX Live 2025). The word count is computed from the markdown source of this brief.\\end{caSingle}',
     form_sig_line(m),
   }, '\n')
 end
@@ -210,7 +210,8 @@ local function designation_section(m)
     '\\caHeadOne{Designation of District Court Record}',
     '\\begin{caSingle}' .. tex(m.designation_intro or
       'The appellant designates the following filings from the District Court\'s electronic records under Sixth Circuit Rules 28(b)(1)(A)(i) and 30(g)(1):') .. '\\end{caSingle}',
-    '\\begin{caSingle}\\begin{longtable}{@{}>{\\raggedright\\arraybackslash}p{1.5in}@{\\hspace{0.15in}}>{\\raggedright\\arraybackslash}p{2.3in}@{\\hspace{0.15in}}>{\\raggedright\\arraybackslash}p{\\dimexpr\\linewidth-3.95in\\relax}@{}}',
+    -- three columns and two 0.15 in gaps that together fill the line: 1.5 + 0.15 + 2.3 + 0.15 + (linewidth - 4.1) in
+    '\\begin{caSingle}\\begin{longtable}{@{}>{\\raggedright\\arraybackslash}p{1.5in}@{\\hspace{0.15in}}>{\\raggedright\\arraybackslash}p{2.3in}@{\\hspace{0.15in}}>{\\raggedright\\arraybackslash}p{\\dimexpr\\linewidth-4.1in\\relax}@{}}',
     '\\textbf{Date Filed} & \\textbf{R.No.; Page ID \\#} & \\textbf{Description of Document}\\\\[0.6em]',
     table.concat(rows, '\n'),
     '\\end{longtable}\\end{caSingle}',

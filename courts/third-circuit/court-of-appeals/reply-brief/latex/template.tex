@@ -1,12 +1,14 @@
 % U.S. Court of Appeals for the Third Circuit: brief (LaTeX engine), one template for each doc type.
 % The same form as typst/ca3-*.typ (FRAP 32(a); L.A.R. 32.1, 32.2). pandoc writes the markdown body;
 % ca3.lua turns the frontmatter and every heading into the cover, the tables, the certificates and
-% raw LaTeX calls to the macros below. Built by tools/render-latex.sh (tectonic; two passes, because
-% the tables of contents and authorities are read from the aux file of the previous pass).
-% Fonts: the vendored Liberation Serif only (fontdir), the Times New Roman substitute per docs/FONTS.md
-% (FRAP 32(a)(5)(A): proportionally spaced serif); nothing from the system.
+% raw LaTeX calls to the macros below. Built by tools/render-latex.sh (stock pdflatex, run until the aux file
+% settles, because the tables of contents and authorities are read from the aux file of the previous pass).
+% Fonts: Times (FRAP 32(a)(5)(A): proportionally spaced serif) from newtxtext/newtxmath, which ship with every TeX Live,
+% so the generated .tex compiles with stock pdflatex and no repo-local file; the faces (TeXGyreTermesX, NewTX) are
+% metric-compatible with Times New Roman.
 \documentclass[14pt,letterpaper]{extarticle}
-\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{hyperref}
 \usepackage{etoolbox}
@@ -14,8 +16,6 @@
 \usepackage{enumitem}
 \usepackage{longtable,booktabs,array}
 \usepackage{xcolor}
-
-\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 
 \hypersetup{colorlinks=false,pdfborder={0 0 0}}
 \setlength{\parindent}{0.5in}
@@ -68,9 +68,11 @@
   \fi
   \protected@write\@auxout{}{\string\tocentry{#1}{#2}{#3}{#4}{\thepage}}%
 }
+% Point heading: bold, not small capitals (Times New Roman has none, as the typst and docx engines render; newtx bold
+% small capitals would shrink the bold font descriptor the word-height check measures).
 \newcommand{\capoint}[2]{%
   \par\addvspace{1.2em}\needspace{4\baselineskip}%
-  \begingroup\casingle\centering\textbf{\textsc{#1\ #2}}\par\endgroup
+  \begingroup\casingle\centering\textbf{#1\ #2}\par\endgroup
   \addvspace{1em}%
   \protected@write\@auxout{}{\string\tocentry{2}{0}{#1}{#2}{\thepage}}%
 }

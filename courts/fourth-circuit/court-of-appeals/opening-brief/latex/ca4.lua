@@ -169,8 +169,9 @@ local function header(h)
   end
   local label = heading_label(lvl, counters[lvl])
   if lvl == 2 and CFG.point_centered and in_argument then
-    -- centred point heading: "I. TITLE" in small capitals; its toc entry has no indent
-    return pandoc.RawBlock('latex', '\\brfpoint{\\textsc{' .. esc(label) .. '\\ }' .. style(title) .. '}\n'
+    -- centred point heading: "I. TITLE" in bold, not small capitals (Times New Roman has none, as typst and docx
+    -- render, and newtx bold small capitals would shrink the bold font descriptor); its toc entry has no indent
+    return pandoc.RawBlock('latex', '\\brfpoint{' .. esc(label) .. '\\ ' .. style(title) .. '}\n'
       .. '\\addcontentsline{toc}{brfpoint}{\\protect\\numberline{' .. esc(label) .. '}' .. title .. '}')
   end
   local toc_type = ({ 'brftwo', 'brfthree', 'brffour' })[lvl - 1]
@@ -349,7 +350,7 @@ local function certificate_compliance(m, words)
       .. ' words, excluding the parts of the brief exempted by Rule 32(f).\\par\\vskip 1em\\noindent'
       .. '2.\\hspace{0.5em}This brief complies with the typeface requirements of Federal Rule of Appellate Procedure 32(a)(5) '
       .. 'and the type style requirements of Rule 32(a)(6) because this brief has been prepared in a proportionally spaced '
-      .. 'typeface, TeX Gyre Schola, in fourteen-point type.\\par}' .. signature_only(m)
+      .. 'typeface, Times, in fourteen-point type.\\par}' .. signature_only(m)
   else
     body = '{\\singlespacing\\noindent I, ' .. ltx(m.signature.signer) .. ', counsel for ' .. ltx(COUNSEL_FOR or 'the party')
       .. ' and a member of the bar of this Court, certify that the attached reply brief is proportionally spaced, has a typeface of 14 points, and contains '

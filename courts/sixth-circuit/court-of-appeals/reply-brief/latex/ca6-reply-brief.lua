@@ -126,7 +126,7 @@ local function caption_tex(m)
 end
 
 local function counsel_tex(m)
-  local s = { '\\begin{caLeft}\\singlespacing\\hspace*{0.4\\textwidth}\\begin{minipage}[t]{0.62\\textwidth}\\raggedright' }
+  local s = { '\\begin{caLeft}\\singlespacing\\noindent\\hspace*{0.4\\textwidth}\\begin{minipage}[t]{0.6\\textwidth}\\raggedright' }
   for gi, g in ipairs(m.counsel) do
     local lines = {}
     for _, n in ipairs(g.names) do lines[#lines + 1] = tex(n) end
@@ -159,8 +159,8 @@ end
 local function sig_block(signer, lines)
   local items = { 's/ ' .. tex(signer) }
   for _, l in ipairs(lines or {}) do items[#items + 1] = tex(l) end
-  return '{\\singlespacing\\noindent\\hspace*{0.4\\textwidth}\\begin{minipage}[t]{0.62\\textwidth}\\raggedright\n' ..
-    table.concat(items, '\\\\[4.2pt]\n') .. '\n\\end{minipage}}'
+  return '{\\singlespacing\\noindent\\hspace*{0.4\\textwidth}\\begin{minipage}[t]{0.6\\textwidth}\\raggedright\n' ..
+    table.concat(items, '\\\\[4.2pt]\n') .. '\n\\end{minipage}\\par}'
 end
 
 -- The signature block after the Conclusion (6 Cir. R. 25(d)(1): s/Name). The last paragraph is kept
@@ -185,10 +185,10 @@ end
 local function certificate_of_compliance(m, words)
   return table.concat({
     '\\caHeadOne{Certificate of Compliance}',
-    '\\begin{minipage}{\\textwidth}',
+    '\\noindent\\begin{minipage}{\\textwidth}',
     '\\begin{caSingle}This reply brief complies with the type-volume limitation of Fed.~R.~App.~P.~32(a)(7)(B) because it contains '
       .. group_digits(words) .. ' words, excluding the parts of the brief exempted by Fed.~R.~App.~P.~32(f).\\end{caSingle}',
-    '\\begin{caSingle}This reply brief complies with the typeface requirements of Fed.~R.~App.~P.~32(a)(5) and the type-style requirements of Fed.~R.~App.~P.~32(a)(6) because it has been prepared in a proportionally spaced typeface, 14-point Liberation Serif.\\end{caSingle}',
+    '\\begin{caSingle}This reply brief complies with the typeface requirements of Fed.~R.~App.~P.~32(a)(5) and the type-style requirements of Fed.~R.~App.~P.~32(a)(6) because it has been prepared in a proportionally spaced typeface, 14-point Times.\\end{caSingle}',
     cert_signature(m),
     '\\end{minipage}',
   }, '\n')
@@ -198,7 +198,7 @@ local function certificate_of_service(m)
   local svc = m.service
   return table.concat({
     '\\caHeadOne{Certificate of Service}',
-    '\\begin{minipage}{\\textwidth}',
+    '\\noindent\\begin{minipage}{\\textwidth}',
     '\\begin{caSingle}I certify that I electronically filed and served this ' .. tex(m.brief_title)
       .. ' using the Court\'s CM/ECF system upon ' .. tex(svc.upon) .. ' on ' .. tex(m.date) .. '.\\end{caSingle}',
     cert_signature(m),
@@ -273,7 +273,8 @@ function Pandoc(doc)
   for _, b in ipairs(toa_blocks(auth)) do out:insert(b) end
 
   -- ---- body (arabic from 1) ----
-  out:insert(R('\\clearpage\\pagenumbering{arabic}\\setcounter{page}{1}'))
+  -- the cover switched to single spacing; the body is double-spaced (FRAP 32(a)(4))
+  out:insert(R('\\clearpage\\pagenumbering{arabic}\\setcounter{page}{1}\\doublespacing'))
   local st = { counters = { 0, 0, 0, 0, 0, 0 }, in_arg = false }
   local body = pandoc.List()
   for _, b in ipairs(blocks) do

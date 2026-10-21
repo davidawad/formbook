@@ -39,6 +39,7 @@ pub const PACKAGES: &[(&str, &str)] = &[
     ("microtype", "microtype.sty"),
     ("ragged2e", "ragged2e.sty"),
     ("setspace", "setspace.sty"),
+    ("titlesec", "titletoc.sty"),
 ];
 
 /// $FORMBOOK_HOME, default $HOME/.local/share/formbook.

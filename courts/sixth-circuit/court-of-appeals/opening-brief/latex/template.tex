@@ -3,18 +3,15 @@
 % and body; this file holds the page setup, the fonts and the macros those parts call.
 % Same rules and the same numbers as ../typst/ca6-opening-brief.typ (see ../README.md, "Engines").
 \documentclass[14bp,letterpaper]{extarticle}
-\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{fancyhdr,needspace,titletoc,longtable,array}
 \makeatletter
 
-% FRAP 32(a)(5)(A): proportionally spaced serif; Liberation Serif, the Times New Roman substitute per docs/FONTS.md, from the vendored fonts directory only (no system fonts).
-\setmainfont[Path=$fontdir$liberation-serif/, BoldFont=LiberationSerif-Bold.ttf, ItalicFont=LiberationSerif-Italic.ttf,
-  BoldItalicFont=LiberationSerif-BoldItalic.ttf, Ligatures=TeX]{LiberationSerif-Regular.ttf}
-% Liberation Serif has no small capitals (no smcp feature), so point headings are plain bold, as in the typst template.
-\newfontfamily\scfam[Path=$fontdir$liberation-serif/]{LiberationSerif-Regular.ttf}
-\newfontfamily\scbfam[Path=$fontdir$liberation-serif/]{LiberationSerif-Bold.ttf}
-\defaultfontfeatures{Path=$fontdir$liberation-serif/}
+% FRAP 32(a)(5)(A): proportionally spaced serif; Times from newtxtext/newtxmath (loaded above), which ship with every
+% TeX Live, so the generated .tex compiles with stock pdflatex and no repo-local file; the faces (TeXGyreTermesX, NewTX)
+% are metric-compatible with Times New Roman. Point headings are plain bold, not small capitals, as in the typst template.
 
 % Metrics measured from the typst render (14-point Liberation Serif): body lines 31.43 pt apart (FRAP 32(a)(4)
 % double spacing), single-spaced blocks 19.95 pt apart. Paragraphs are ragged right, first line indented 0.5 in.
@@ -62,7 +59,7 @@
   \nopagebreak\vspace{15.4bp}}
 \newcommand{\caHeadPoint}[2]{%
   \Needspace{4\baselineskip}\par\nopagebreak\vspace{16.8bp}%
-  {\singlespacing\centering\textbf{\scbfam #1\ #2}\par}%
+  {\singlespacing\centering\textbf{#1\ #2}\par}%
   \addcontentsline{toc}{capoint}{\protect\caTocLine{#1}{#2}}%
   \nopagebreak\vspace{14bp}}
 % d: steps from the margin (1..4); level: 2..5 (levels 4 and up are bold italic); label; title

@@ -11,6 +11,8 @@ local LIMIT = ({ opening = 13000, answering = 13000, reply = 6500 })[TYPE]
 -- point heading); elsewhere A. 1. a. (1).
 local SCHEME = (TYPE == "opening") and "opening" or "argument"
 local PREPARED_WITH = "LaTeX"
+-- The face template.tex loads (named in the certificate of compliance).
+local FACE = "TeX Gyre Schola"
 
 -- Authority groups, in the order the table prints them (same as the typst templates).
 local TOA_GROUPS = {
@@ -245,7 +247,7 @@ local function certificates(meta, words)
       ind .. "This brief complies with the type-volume limitation of Fed. R. App. P. 32(a)(7)(B) because it contains "
       .. group_digits(words) .. " words, excluding the parts of the brief exempted by Fed. R. App. P. 32(f).\\par\n"
       .. ind .. "This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because it has been prepared in a proportionally spaced typeface using "
-      .. prepared .. " in font size 14, font style Liberation Serif.\\par\n"
+      .. prepared .. " in font size 14, font style " .. FACE .. ".\\par\n"
       .. sigblock(meta, false, true))
     cert("Certification of Bar Membership",
       ind .. "I certify that at least one of the attorneys whose names appear on this brief is a member of the bar of this Court, or has filed an application for admission under 3d Cir. L.A.R. 46.1.\\par\n"
@@ -278,7 +280,7 @@ local function certificates(meta, words)
       .. group_digits(words) .. " words, excluding the parts of the brief exempted by Fed. R. App. P. 32(f). The count includes "
       .. tostring(meta.manual_image_words or 0) .. " words counted by hand in any visual images.\\par\n"
       .. ind .. "2.\\ This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because it has been prepared in a proportionally spaced typeface using "
-      .. PREPARED_WITH .. " in 14-point, Liberation Serif.\\par\n"
+      .. PREPARED_WITH .. " in 14-point, " .. FACE .. ".\\par\n"
       .. sigblock(meta, false, false))
     if meta.service then
       local svc = meta.service

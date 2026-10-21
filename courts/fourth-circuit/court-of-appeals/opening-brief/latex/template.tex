@@ -1,11 +1,11 @@
 % Fourth Circuit brief, LaTeX engine. Matches typst/ca4-opening-brief.typ (the reference): TeX Gyre Schola 14 pt,
 % double spacing (baseline 31.43 pt), 1-inch margins, left-aligned, 0.5-inch paragraph indent, roman folios for the
 % front matter and arabic from the body. Everything that depends on the frontmatter is written by ca4.lua as raw LaTeX.
-% Fonts come only from the vendored directory (the fontdir variable); fontspec does not fall back to a system font.
+% Fonts: Times from newtxtext/newtxmath, which ship with every TeX Live, so the generated .tex compiles with stock
+% pdflatex and no repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman.
 \documentclass[12pt,letterpaper]{article}
-\usepackage{fontspec}
-\defaultfontfeatures{Ligatures=TeX}
-\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{indentfirst}
 \usepackage{needspace}
