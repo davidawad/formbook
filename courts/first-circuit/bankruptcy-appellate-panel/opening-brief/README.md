@@ -91,7 +91,7 @@ DOCX and LaTeX: this was a typst-only pass. `docx/` was not touched, so the docx
 
 Page map (ours → filed, word overlap): 1→1 (77%), 2→2 (72%), 3→3 (35%), 4→4 (19%), 5→6 (46%), 6→7 (48%), 7→8 (56%), 8→9 (59%), 9→10 (79%), 10→11 (86%), 11→12 (65%), 12→13 (62%), 13→14 (47%), 14→24 (30%), 15→25 (69%), 16→30 (68%), 17→33 (75%), 18→34 (86%), 19→39 (57%), 20→35 (21%), 21→36 (75%), 22→37 (63%). The filer's body is Courier New at about 12 pt, so its lines hold more words than ours; the pairing is by shared words, and pages 14→24 and 19→39 (our signature against the filer's certificate-of-service signature) are nearest matches, not page-for-page claims.
 
-## Gate 2 review (2026-10-16, every page rendered at 60 dpi and viewed with its paired exemplar page and overlay page)
+## Gate 2 review (2026-10-21, refreshed after TOA spacing adjustment; every page at 60 dpi viewed against its paired exemplar)
 
 Sample `blumsack-opening-brief`, `usage/OUTPUT-opening-brief.typst.pdf` (22 pages). Tier 2 compared against two filers (this filer and the U.S. Trustee's answering brief); see "Exemplar search".
 
@@ -140,3 +140,7 @@ BLOCKED (DOCX):
 - FRBP 8014(a)(2), contents page numbers (BAP-FORM-001 contents): the contents is a Word TOC field with cached entries and no page numbers. Word fills them in when fields are updated; the PDF shows no numbers. Measuring them needs a two-pass build (as the eighth circuit does) and is not done here.
 - FRBP 8014(a)(3), table of authorities page numbers: the authorities are listed without pages, and "passim" is not produced. Same cause (TA fields are not honored by LibreOffice; see docs/DOCX.md).
 - `tools/check.sh --engine docx` could not run on this folder: no `checks.yaml` at the court or doc-type level, and `court.json` is looked up in the doc-type folder. No gate result is claimed.
+
+## Refresh 2026-10-21
+
+Rendered `usage/INPUT-opening-brief.md` with `sh tools/render.sh` and regenerated `OVERLAY-opening-brief.pdf`/`.txt` with `sh tools/overlay.sh`. Re-rasterized all 22 rendered pages and all 39 filed-example pages at 60 dpi; every page was viewed. The per-page Gate 2 findings above still apply: no new defect; the TOA entries now use the compact spacing visible across the two filed briefs. The output remains 22 pages. Current output SHA-256: `0db5d8a4b12c08e40fff06629f2dc70d0493df3be01f94c89d550ef11b3f1147`.

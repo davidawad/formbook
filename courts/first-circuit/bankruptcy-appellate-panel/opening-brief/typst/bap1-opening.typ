@@ -272,7 +272,7 @@
         // exemplars, different filers, set their tables this way; the rules leave it open).
         let name = if e.name != none and g.kind == "case" { [#emph(e.name), #e.cite] } else if e.name != none { [#e.name, #e.cite] } else { [#e.cite] }
         // The pages sit in their own column, level with the entry's last line.
-        block(below: 0.8em, grid(columns: (1fr, auto), column-gutter: 0.3em, align: (left, bottom),
+        block(below: 0.25em, grid(columns: (1fr, auto), column-gutter: 0.3em, align: (left, bottom),
           par(leading: single-leading, first-line-indent: 0pt, hanging-indent: 1em,
             [#name #box(width: 1fr, repeat(gap: 0.2em)[.])]),
           e.refs))

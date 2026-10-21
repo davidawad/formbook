@@ -105,3 +105,25 @@ BLOCKED (DOCX):
 - FRBP 8014(a)(2), contents page numbers (BAP-FORM-001 contents): the contents is a Word TOC field with cached entries and no page numbers. Word fills them in when fields are updated; the PDF shows no numbers. Measuring them needs a two-pass build (as the eighth circuit does) and is not done here.
 - FRBP 8014(a)(3), table of authorities page numbers: the authorities are listed without pages, and "passim" is not produced. Same cause (TA fields are not honored by LibreOffice; see docs/DOCX.md).
 - `tools/check.sh --engine docx` could not run on this folder: no `checks.yaml` at the court or doc-type level, and `court.json` is looked up in the doc-type folder. No gate result is claimed.
+
+## Filed exemplar and review 2026-10-21
+
+Found and downloaded the public Reply Brief of Appellant Christine Marie Ansin, BAP No. NH 23-025, filed March 7, 2024 by counsel Darlene M. Daniele. The docket URL, public file URL, filer, case and date fetched are recorded in `usage/SOURCE.md`. Replaced the fictional sample with an abridged transcription of the filed structure in `usage/INPUT-reply-brief.md`. The exemplar is nine pages. `sh tools/render.sh` produced an 11-page output; `sh tools/overlay.sh` produced the overlay PDF and text under `.overlay/courts/first-circuit/bankruptcy-appellate-panel/reply-brief/`.
+
+The first render left one Rules entry by itself on page 4 of the TOA. Both filed BAP1 briefs show compact TOA entry spacing and keep the table together, so reduced the entry gap from 0.8em to 0.25em in the three copied BAP1 templates. The new reply render keeps all authorities on page 3; answering and opening remain 19 and 22 pages. Regenerated all three outputs and overlays. Rasterized and viewed every page of the 9-page filing and 11-page output at 60 dpi.
+
+| Output page | Compared with | Finding | Status |
+|---:|---|---|---|
+| 1 | Filed p. 1 | BAP No., panel name, debtor and party caption, proceeding, reply title, counsel and date; single-page cover. The source uses “Reply Brief of Appellant”; the template identifies the party as “Reply Brief for Appellant, Christine Marie Ansin.” | ACCEPTED (title wording convention) |
+| 2 | Filed p. 2 | Contents entries, hierarchy and page numbers are readable and track the output. | PASS |
+| 3 | Filed p. 3 | Complete table of authorities with cases, statutes and rules on one page after spacing fix. | FIXED |
+| 4 | Filed p. 4 | Argument begins after front matter; section I and subsection A, list and citations render cleanly. | PASS |
+| 5 | Filed p. 5 | Subsection B and section II with subsection A; body is double spaced and headings are distinct. | PASS |
+| 6 | Filed p. 6 | Subsection A continues, followed by subsection B and subsection C; no clipped or overlapping text. | PASS |
+| 7 | Filed p. 7 | Subsection C continues and subsection D begins; footnotes and body remain legible. | PASS |
+| 8 | Filed p. 8 | Subsection D concludes, followed by conclusion and signature block. | PASS |
+| 9 | Filed p. 9 | Certificate of compliance is readable and stands on its own page. | PASS |
+| 10 | Rules / Official Form 1 | Related-cases statement, caption, checkboxes and counsel block render on one page under L.R. 8014-1. The filed reply ends with its certificates and has no matching page. | PASS |
+| 11 | Rules / Official Form 2 | Interested-parties statement, caption, checkboxes and counsel block render on one page under L.R. 8014-1. The filed reply ends with its certificates and has no matching page. | PASS |
+
+No OPEN findings. Current output SHA-256: `fdb45c858cef3e98ab39f0b8ef763261749bd87eea7b568db920aa59dfaa09d9`.

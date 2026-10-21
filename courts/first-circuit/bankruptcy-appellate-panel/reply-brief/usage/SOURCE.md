@@ -1,5 +1,5 @@
 # Exemplar source: bap1 reply brief
-
+**Status: exemplar found (2026-10-21).** Reply brief of appellant Christine Marie Ansin, BAP No. NH 23-025, filed March 7, 2024; details below. Earlier blocked searches are retained as search history.
 **Status: BLOCKED: no exemplar** (re-searched 2026-10-16, see the end of this file). No public, filed bap1 reply brief was found after the searches below. No PDF is saved here; the `usage/` markdown is a fictional, rule-structured sample, not a transcription.
 
 ## Searches tried (2026-10-14 and 2026-10-15)
@@ -32,3 +32,18 @@ Result: no public bap1 reply brief. The reply template shares the opening and an
 - CourtListener RECAP search API (`court=ca1`, query `"Statement Regarding Interested Parties" "Bankruptcy Appellate Panel"`, the Official Form 2 title that only BAP briefs carry): not answered; the anonymous quota was exhausted by the box (HTTP 429, "50/hour", then "125/day").
 - Web searches (standard and extended) for First Circuit BAP appellant, appellee and reply briefs and for U.S. Trustee Program BAP briefs on justice.gov: only BAP forms, local rules, opinions, and a redacted sample brief (nlrg.com "Peter Rabbit" sample, no real filer; not used).
 - Result: no new public filed bap1 brief from a different filer. Recorded in `docs/box-blocked.md`.
+
+## Resolved 2026-10-21: FILED-EXAMPLE-reply-brief.pdf
+
+- Court: United States Bankruptcy Appellate Panel for the First Circuit (docket filed under First Circuit case 23-25).
+- Case: *Christine Marie Ansin v. Robert Ansin* (BAP No. NH 23-025; bankruptcy case no. 23-10366-BAH).
+- Document: Reply Brief of Appellant, 9 pages, with cover, contents, authorities, reply argument, conclusion, certificate of compliance and certificate of service.
+- Filer: Appellant Christine Marie Ansin, through counsel Darlene M. Daniele, Esq. (signature and filing counsel).
+- Date filed: March 7, 2024 (ECF header: Case 23-25, Document 001149021, Entry ID 2187664).
+- Docket URL: https://ecf.ca1.uscourts.gov/n/beam/servlet/TransportRoom?servlet=CaseSummary.jsp&caseNum=23-25&incOrigDkt=Y&incDktEntries=Y
+- Public document URL: https://www.ncbrc.org/wp-content/uploads/Ansin-Reply-Brief.pdf
+- Date fetched: October 21, 2026. Downloaded from the public NCBRC-hosted filing; original ECF header and text layer retained.
+- Text layer and fonts: born-digital; judiciary iText ECF header. The certificate identifies Times New Roman 12 point. The source is legible and extracts with `pdftotext`.
+- Transcribed to `usage/INPUT-reply-brief.md`; output `usage/OUTPUT-reply-brief.typst.pdf`; overlay `.overlay/courts/first-circuit/bankruptcy-appellate-panel/reply-brief/OVERLAY-reply-brief.pdf` and `.txt`.
+
+This resolves the earlier searches recorded above. The 2026-10-16/17 search conclusions predate discovery of the publicly hosted Ansin brief.
