@@ -263,11 +263,12 @@ local function cover(meta)
   return table.concat(o, "\n")
 end
 
--- Signature block (typst signature-block): left half of the page; date at the margin.
+-- Signature block (typst signature-block): left half of the page; date at the margin. One minipage, so the
+-- date never parts from the signature at a page break.
 local function signature(meta)
   local sig = meta.signature
   local o = {}
-  o[#o + 1] = "\\vspace{1.4em}\\begingroup\\caonesingle"
+  o[#o + 1] = "\\vspace{1.4em}\\par\\noindent\\begin{minipage}{\\textwidth}\\caonesingle"
   o[#o + 1] = "\\begin{flushleft}\\hspace*{0.5\\textwidth}\\begin{minipage}[t]{0.5\\textwidth}\\raggedright"
   o[#o + 1] = "Respectfully submitted,\\\\[1.2em]"
   o[#o + 1] = "/s/ " .. tex(sig.signer) .. "\\\\"
@@ -275,7 +276,7 @@ local function signature(meta)
   for _, l in ipairs(sig.lines or {}) do o[#o + 1] = "\\\\\\hspace*{0.5em}\\emph{" .. tex(l) .. "}" end
   o[#o + 1] = "\\end{minipage}\\end{flushleft}"
   if meta.date then o[#o + 1] = "\\vspace{0.45em}" .. tex(meta.date) end
-  o[#o + 1] = "\\endgroup"
+  o[#o + 1] = "\\end{minipage}\\par"
   return table.concat(o, "\n")
 end
 
