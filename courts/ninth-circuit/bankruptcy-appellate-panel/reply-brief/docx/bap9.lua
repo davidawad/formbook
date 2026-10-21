@@ -4,9 +4,11 @@
 -- certificates are built here from the frontmatter, in the custom styles of reference.docx; the body keeps its
 -- markdown structure. Sections: cover (no footer), front matter (lower roman, from i), body and certificates
 -- (arabic, from 1), as in the typst form.
--- Known limits (BLOCKED, see ../README.md "Engines"): the table of contents is a TOC field whose cached result lists
--- the headings without page numbers (Word fills them in on a field update); the table of authorities lists the
--- cited authorities without page numbers.
+-- The pages in the contents and the table of authorities: fb render (tools/fb/src/docxpass.rs) renders the
+-- document once, finds the page of every heading and citation in that PDF (the needles this filter writes to
+-- FORMBOOK_NEEDLES), and renders again with those pages (FORMBOOK_PAGES) until they settle; this filter writes the
+-- last section (FORMBOOK_FINAL, the body's: reference.docx's rId101 footer, arabic from 1). Word may paginate
+-- slightly differently from the LibreOffice PDF the page numbers come from (docs/DOCX.md).
 
 -- The only part that differs between the three copies (CFG).
 local CFG = {
@@ -53,14 +55,63 @@ end
 
 local function raw(xml) return pandoc.RawBlock("openxml", xml) end
 
+local PASSIM = 7       -- an authority cited on this many pages or more is "passim" (typst: passim-threshold)
+local NEEDLE_MAX = 60  -- a needle is a prefix of the text (letters and digits only)
+local PAGE_SETUP = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"'
+  .. ' w:header="720" w:footer="720" w:gutter="0"/>'
+
+-- Letters and digits only, lower case: fb render (docxpages.rs) normalizes the PDF text the same way.
+local function norm(s)
+  return (s:lower():gsub("[^a-z0-9]", ""))
+end
+
+-- A needle: { id, kind, needle, fallback }. Kind B (body, in document order: moves the search on), N (inside a
+-- footnote: searched from the page the body has reached, moves nothing).
+local needles = {}
+local function need(id, kind, text, context)
+  local short = norm(text):sub(1, NEEDLE_MAX)
+  local long = norm(text .. " " .. (context or "")):sub(1, NEEDLE_MAX)
+  if short == "" then short = long end
+  needles[#needles + 1] = { id = id, kind = kind, needle = long, fallback = short }
+end
+
+-- The pages of the previous pass: id -> { page, label }. Empty on the first pass.
+local labels = {}
+local function load_pages()
+  local path = os.getenv("FORMBOOK_PAGES")
+  if not path or path == "" then return end
+  local f = io.open(path, "r")
+  if not f then return end
+  for line in f:lines() do
+    local id, page, lab = line:match("^([^\t]+)\t([^\t]*)\t(.*)$")
+    if id then labels[id] = { page = tonumber(page) or 0, label = lab } end
+  end
+  f:close()
+end
+
+local function label_of(id)
+  local l = labels[id]
+  if l then return l.label end
+  return "00" -- the first pass: a placeholder of the final width
+end
+
+local function write_file(env, text)
+  local path = os.getenv(env)
+  if not path or path == "" then return end
+  local f = assert(io.open(path, "w"))
+  f:write(text)
+  f:close()
+end
+
+local TAB = pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>")
+
 local PAGE_BREAK = raw('<w:p><w:r><w:br w:type="page"/></w:r></w:p>')
 
 -- the paragraph that ends a section; the next section starts on a new page
 local function section_end(footer_rid, fmt)
   local pg = fmt and ('<w:pgNumType w:fmt="' .. fmt .. '" w:start="1"/>') or ""
   return raw('<w:p><w:pPr><w:sectPr><w:footerReference w:type="default" r:id="' .. footer_rid
-    .. '"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"'
-    .. ' w:header="720" w:footer="720" w:gutter="0"/>' .. pg .. '</w:sectPr></w:pPr></w:p>')
+    .. '"/>' .. PAGE_SETUP .. pg .. '</w:sectPr></w:pPr></w:p>')
 end
 
 local function group_digits(n)
@@ -86,6 +137,7 @@ local function body_words()
 end
 
 function Pandoc(doc)
+  load_pages()
   local meta = doc.meta
   local function bail(msg) error("bap9: " .. msg, 0) end
 
@@ -113,16 +165,82 @@ function Pandoc(doc)
       sort = (a.sort and plain(a.sort) or (name .. " " .. cite)):lower(),
     }
   end
-  local used = {}
+  -- Citations and headings, in document order: each `toa:` link is an occurrence and a needle (kind N inside a
+  -- footnote), each heading a needle and, at levels 1 and 2, a contents entry (typst: outline depth 2).
+  local used, occurrences, entries = {}, {}, {}
+  local scan_blocks
+  local function scan_inlines(list, in_note)
+    for i, el in ipairs(list) do
+      if el.t == "Link" and el.target:match("^toa:") then
+        local key = el.target:sub(5)
+        if not auth[key] then bail("link `toa:" .. key .. "` has no entry under `authorities:`") end
+        used[key] = true
+        occurrences[#occurrences + 1] = { key = key, id = "T:" .. (#occurrences + 1) }
+        local rest = {}
+        for j = i + 1, #list do rest[#rest + 1] = list[j] end
+        need(occurrences[#occurrences].id, in_note and "N" or "B", plain(el.content), pandoc.utils.stringify(rest))
+      elseif el.t == "Note" then
+        scan_blocks(el.content, true)
+      elseif el.content and type(el.content) ~= "string" then
+        scan_inlines(el.content, in_note)
+      end
+    end
+  end
+  scan_blocks = function(list, in_note)
+    for _, b in ipairs(list) do
+      if b.t == "Para" or b.t == "Plain" then
+        scan_inlines(b.content, in_note)
+      elseif b.t == "BlockQuote" or b.t == "Div" then
+        scan_blocks(b.content, in_note)
+      elseif b.t == "BulletList" or b.t == "OrderedList" then
+        for _, item in ipairs(b.content) do scan_blocks(item, in_note) end
+      end
+    end
+  end
+  local blocks = doc.blocks
+  local body_id = "S:body"
+  if blocks[1] and blocks[1].t == "Header" then
+    body_id = "H:1"
+  elseif blocks[1] then
+    need(body_id, "B", pandoc.utils.stringify(blocks[1]):sub(1, NEEDLE_MAX), "")
+  end
+  local h_n = 0
+  for i, b in ipairs(blocks) do
+    if b.t == "Header" then
+      h_n = h_n + 1
+      local id = "H:" .. h_n
+      local nxt = blocks[i + 1] and pandoc.utils.stringify(blocks[i + 1]):sub(1, 40) or ""
+      need(id, "B", plain(b.content), nxt)
+      if b.level <= 2 then entries[#entries + 1] = { id = id, level = b.level, text = plain(b.content) } end
+    else
+      scan_blocks({ b }, false)
+    end
+  end
   doc = doc:walk({
     Link = function(el)
-      local key = el.target:match("^toa:(.+)$")
-      if not key then return nil end
-      if not auth[key] then bail("link `toa:" .. key .. "` has no entry under `authorities:`") end
-      used[key] = true
-      return el.content
+      if el.target:match("^toa:") then return el.content end
+      return nil
     end,
   })
+
+  -- the needles of the two tables come first (they precede the body), then the body's
+  local first_group = ""
+  for _, g in ipairs(TOA_GROUPS) do
+    for _, a in pairs(auth) do if first_group == "" and a.kind == g[1] then first_group = g[2] end end
+  end
+  table.insert(needles, 1, { id = "S:toc", kind = "B",
+    needle = norm("TABLE OF CONTENTS " .. (entries[1] and entries[1].text or "")):sub(1, NEEDLE_MAX), fallback = norm("TABLE OF CONTENTS") })
+  if next(auth) ~= nil then
+    table.insert(needles, 2, { id = "S:toa", kind = "B", needle = norm("TABLE OF AUTHORITIES " .. first_group), fallback = norm("TABLE OF AUTHORITIES") })
+  end
+  local nl = {}
+  for _, n in ipairs(needles) do nl[#nl + 1] = table.concat({ n.id, n.kind, n.needle, n.fallback }, "\t") end
+  -- how fb render labels pages: the front matter from the contents (i, ii ...), the body from its first block
+  nl[#nl + 1] = "#section\tS:toc\tlower-roman\t"
+  nl[#nl + 1] = "#section\t" .. body_id .. "\tdecimal\t"
+  write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
+  write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rId101"/>' .. PAGE_SETUP
+    .. '<w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>')
 
   local out = {}
   local function add(b) out[#out + 1] = b end
@@ -148,15 +266,12 @@ function Pandoc(doc)
 
   -- front matter (section 2, lower roman): table of contents, table of authorities
   add(styled("SectionTitle", { pandoc.Strong({ pandoc.Str("TABLE OF CONTENTS") }) }))
-  add(raw('<w:p><w:pPr><w:pStyle w:val="Single"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r>'
-    .. '<w:r><w:instrText xml:space="preserve"> TOC \\o "1-2" \\h \\z \\u </w:instrText></w:r>'
-    .. '<w:r><w:fldChar w:fldCharType="separate"/></w:r></w:p>'))
-  for _, b in ipairs(doc.blocks) do
-    if b.t == "Header" and b.level <= 2 then
-      add(styled(b.level == 1 and "Single" or "TOCLevel2", { pandoc.Str(plain(b.content)) }))
-    end
+  -- each entry: the title, the dot leader and its page (TOCEntry1/2: a right tab inside the margin, past the page
+  -- column's right indent; level 2 indented under its section, as typst's outline indent)
+  for _, e in ipairs(entries) do
+    add(styled(e.level == 1 and "TOCEntry1" or "TOCEntry2",
+      { pandoc.Str(e.text), pandoc.Space(), TAB, pandoc.Str(label_of(e.id)) }))
   end
-  add(raw('<w:p><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p>'))
   add(PAGE_BREAK)
 
   -- the table of authorities is printed when the frontmatter has a registry (typst: `if authorities != none`)
@@ -174,7 +289,28 @@ function Pandoc(doc)
         local line = pandoc.List()
         if a.name and not a.same then line = cat({ a.name, ", " }) end
         line:extend(a.cite)
-        add(styled("Hanging", line))
+        -- the distinct pages of the authority, in page order (typst: passim from PASSIM pages)
+        local pages, seen = {}, {}
+        for oi, o in ipairs(occurrences) do
+          if o.key == k then
+            local l = labels[o.id]
+            local p = l and l.page or -oi
+            if not seen[p] then
+              seen[p] = true
+              pages[#pages + 1] = { page = l and l.page or 0, label = l and l.label or "00" }
+            end
+          end
+        end
+        table.sort(pages, function(x, y) return x.page < y.page end)
+        line:extend({ pandoc.Space(), TAB })
+        if #pages >= PASSIM then
+          line:insert(pandoc.Str("passim"))
+        else
+          local l = {}
+          for _, p in ipairs(pages) do l[#l + 1] = p.label end
+          line:insert(pandoc.Str(table.concat(l, ", ")))
+        end
+        add(styled("TOAEntry", line))
       end
     end
   end
@@ -229,7 +365,7 @@ function Pandoc(doc)
   if has("compliance") then
     cert("CERTIFICATE OF COMPLIANCE", {
       styled("Single", { pandoc.Str("This brief complies with the type-volume limitation of Fed. R. Bankr. P. 8015(a)(7) because it contains " .. group_digits(words) .. " words, excluding the parts of the brief exempted by Fed. R. Bankr. P. 8015(g).") }),
-      styled("Single", { pandoc.Str("This brief complies with the typeface and type-style requirements of Fed. R. Bankr. P. 8015(a)(5) and (6) because it has been prepared in a proportionally spaced typeface, 14-point EB Garamond, with plain roman type and italics for emphasis.") }),
+      styled("Single", { pandoc.Str("This brief complies with the typeface and type-style requirements of Fed. R. Bankr. P. 8015(a)(5) and (6) because it has been prepared in a proportionally spaced typeface, 14-point Times New Roman, with plain roman type and italics for emphasis.") }),
       sigline(),
     })
   end
