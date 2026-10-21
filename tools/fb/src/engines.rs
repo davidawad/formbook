@@ -470,7 +470,9 @@ mod tests {
     #[test]
     fn read_back_holds_the_lists_but_not_the_output() {
         let t = TempDir::new("readback-test").unwrap();
-        for f in ["doc.aux", "doc.toc", "doc.adt", "doc.tex", "doc.pdf", "doc.log", "x.aux"] {
+        for f in [
+            "doc.aux", "doc.toc", "doc.adt", "doc.tex", "doc.pdf", "doc.log", "x.aux",
+        ] {
             std::fs::write(t.path().join(f), f).unwrap();
         }
         let names: Vec<_> = read_back(t.path()).into_iter().map(|(n, _)| n).collect();

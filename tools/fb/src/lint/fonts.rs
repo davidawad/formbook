@@ -29,7 +29,11 @@ fn family(face: &str) -> Option<&'static str> {
 fn family_markers(f: &str) -> &'static [&'static str] {
     match f {
         "times" => &["Times New Roman", "Liberation Serif"],
-        "schola" => &["TeX Gyre Schola", "tex-gyre-schola", "\\usepackage{tgschola}"],
+        "schola" => &[
+            "TeX Gyre Schola",
+            "tex-gyre-schola",
+            "\\usepackage{tgschola}",
+        ],
         "bonum" => &["TeX Gyre Bonum", "tex-gyre-bonum"],
         "pagella" => &["TeX Gyre Pagella", "tex-gyre-pagella"],
         "termes" => &["TeX Gyre Termes", "tex-gyre-termes"],
