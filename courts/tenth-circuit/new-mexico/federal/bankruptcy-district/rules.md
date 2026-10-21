@@ -1,6 +1,7 @@
 # District of New Mexico Bankruptcy Court: adversary complaints and motion memoranda
 
 Alias `nmb`. Scope: adversary complaints and motion memoranda. Verified against the New Mexico Local Bankruptcy Rules (NM LBR), adopted November 15, 2014, amended December 1, 2025, and Federal Rules of Bankruptcy Procedure, December 1, 2025, on 2026-10-20.
+Re-check cadence: check the court rules page for amendments before use and after each local-rule revision; re-check the applicable federal rules after each annual amendment cycle and at least annually (next routine review by 2027-10-20).
 
 ## Sources
 
