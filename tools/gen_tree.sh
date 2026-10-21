@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Refresh the court folder metadata and template directories from data/index.json.
 # Manual fields in existing court.json files are retained. This script never
 # removes court content and never writes status "done".
-set -eu
+set -euo pipefail
 
-script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-root=$(CDPATH= cd -- "$script_dir/.." && pwd)
+script_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
+root=$(CDPATH='' cd -- "$script_dir/.." && pwd)
 index=$root/data/index.json
 tmp_suffix=$$
 
