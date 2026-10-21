@@ -2,6 +2,8 @@
 
 Alias `gamb`. Scope: adversary-proceeding complaints and motion briefs. Verified against the Local Rules of the United States Bankruptcy Court for the Middle District of Georgia (PDF "Local_Rules_Oct_2026", as of October 1, 2026) and the Federal Rules of Bankruptcy Procedure (Dec. 1, 2024 edition as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Note: the local rules state no typeface, point size, or margin rule for complaints or motions that was located. The repo default eval (1 in margins, 12 pt) applies. The page limit in LBR 9013-1(d) is set below.
 
 ## Sources
