@@ -1,0 +1,3 @@
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `reply-brief` — Reply brief | COLLECTED: 14 pp., text layer verified 2026-10-17; via Internet Archive copy of UIdaho Law Digital Commons (Idaho Supreme Court Records & Briefs); PDF includes repository cover page | `FILED-EXAMPLE-reply-brief.pdf` | Aspen Park, Inc. (appellant; Hopkins Roden Crockett Hansen & Hoopes, PLLC) | Aspen Park, Inc. v. Bonneville County, No. 45679 | 2018-07-11 | https://web.archive.org/web/20240909083524id_/https://digitalcommons.law.uidaho.edu/cgi/viewcontent.cgi?article=8426&amp;context=idaho_supreme_court_record_briefs | `08e017bc045c9859911691db233525bc113ebeafb85f2046f9415e39c6a8dfb2` |

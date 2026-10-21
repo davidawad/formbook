@@ -11,7 +11,7 @@ Courts under `courts/eleventh-circuit/florida` (14).
 | [United States District Court for the Middle District of Florida](federal/middle-district) | `flmd` | up for review | — | — | — | 14 |
 | [United States District Court for the Northern District of Florida](federal/northern-district) | `flnd` | up for review | — | — | — | 14 |
 | [United States District Court for the Southern District of Florida](federal/southern-district) | `flsd` | up for review | — | — | — | 14 |
-| [Florida District Courts of Appeal](state/district-courts-of-appeal) | `fladistctapp` | in progress | — | — | — | 14 |
+| [Florida District Courts of Appeal](state/district-courts-of-appeal) | `fladistctapp` | in progress | — | — | — | 29 |
 | [Florida Fifth District Court of Appeal](state/fifth-district-court-of-appeal) | `fladistctapp5` | in progress | — | — | — | 14 |
 | [Florida First District Court of Appeal](state/first-district-court-of-appeal) | `fladistctapp1` | in progress | — | — | — | 14 |
 | [Florida Fourth District Court of Appeal](state/fourth-district-court-of-appeal) | `fladistctapp4` | in progress | — | — | — | 14 |

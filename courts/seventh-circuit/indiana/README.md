@@ -9,7 +9,7 @@ Courts under `courts/seventh-circuit/indiana` (6).
 | [United States Bankruptcy Court, S.D. Indiana](federal/bankruptcy-southern-district) | `insb` | up for review | — | — | — | 14 |
 | [District Court, N.D. Indiana](federal/northern-district) | `innd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Indiana](federal/southern-district) | `insd` | up for review | — | — | — | 14 |
-| [Indiana Court of Appeals](state/court-of-appeals) | `indctapp` | in progress | — | — | — | 14 |
+| [Indiana Court of Appeals](state/court-of-appeals) | `indctapp` | in progress | — | — | — | 29 |
 | [Indiana Supreme Court](state/supreme-court) | `ind` | in progress | — | — | — | 14 |
 
 [Formbook index](../../../README.md)

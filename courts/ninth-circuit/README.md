@@ -42,7 +42,7 @@ Courts under `courts/ninth-circuit` (61).
 | [High Court of American Samoa](american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |
 | [Arizona Court of Appeals](arizona/state/court-of-appeals) | `arizctapp` | in progress | — | — | — | 14 |
 | [Arizona Supreme Court](arizona/state/supreme-court) | `ariz` | in progress | — | — | — | 14 |
-| [California Court of Appeal, Fifth Appellate District](california/state/court-of-appeal-fifth-district) | `calctapp5d` | in progress | — | — | — | 29 |
+| [California Court of Appeal, Fifth Appellate District](california/state/court-of-appeal-fifth-district) | `calctapp5d` | up for review | — | — | — | 29 |
 | [California Court of Appeal, First Appellate District](california/state/court-of-appeal-first-district) | `calctapp1d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Fourth Appellate District](california/state/court-of-appeal-fourth-district) | `calctapp4d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Second Appellate District](california/state/court-of-appeal-second-district) | `calctapp2d` | in progress | — | — | — | 14 |
@@ -57,7 +57,7 @@ Courts under `courts/ninth-circuit` (61).
 | [Hawaii Intermediate Court of Appeals](hawaii/state/intermediate-court-of-appeals) | `hawapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Hawaii](hawaii/state/supreme-court) | `haw` | in progress | — | — | — | 14 |
 | [Idaho Court of Appeals](idaho/state/court-of-appeals) | `idahoctapp` | up for review | — | — | — | 29 |
-| [Idaho Supreme Court](idaho/state/supreme-court) | `idaho` | in progress | — | — | — | 14 |
+| [Idaho Supreme Court](idaho/state/supreme-court) | `idaho` | up for review | — | — | — | 29 |
 | [Montana Supreme Court](montana/state/supreme-court) | `mont` | in progress | — | — | — | 14 |
 | [Court of Appeals of Nevada](nevada/state/court-of-appeals) | `nevapp` | in progress | — | — | — | 14 |
 | [Nevada Supreme Court](nevada/state/supreme-court) | `nev` | in progress | — | — | — | 14 |

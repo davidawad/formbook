@@ -1,0 +1,5 @@
+# Kentucky RAP 31 (A) (1) (e) (via RAP 34 (B) (4) for amicus briefs): briefs have a 1 1/2 inch left margin and 1 inch on the
+# other sides. Text and footnotes are 12 pt (default). No page limit: RAP 31 (G) limits are words, with pages as the
+# alternative figure (RAP 15 (C)); see ../rules.md.
+params:
+  margin_left_pt: 108

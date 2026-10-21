@@ -9,9 +9,9 @@ Courts under `courts/eighth-circuit/missouri` (9).
 | [United States Bankruptcy Court, W.D. Missouri](federal/bankruptcy-western-district) | `mowb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Missouri](federal/eastern-district) | `moed` | up for review | — | — | — | 14 |
 | [District Court, W.D. Missouri](federal/western-district) | `mowd` | up for review | — | — | — | 14 |
-| [Missouri Court of Appeals](state/court-of-appeals) | `moctapp` | in progress | — | — | — | 14 |
-| [Missouri Court of Appeals, Eastern District](state/court-of-appeals-eastern-district) | `moctapped` | in progress | — | — | — | 14 |
-| [Missouri Court of Appeals, Southern District](state/court-of-appeals-southern-district) | `moctappsd` | in progress | — | — | — | 14 |
+| [Missouri Court of Appeals](state/court-of-appeals) | `moctapp` | up for review | — | — | — | 29 |
+| [Missouri Court of Appeals, Eastern District](state/court-of-appeals-eastern-district) | `moctapped` | up for review | — | — | — | 29 |
+| [Missouri Court of Appeals, Southern District](state/court-of-appeals-southern-district) | `moctappsd` | up for review | — | — | — | 29 |
 | [Missouri Court of Appeals, Western District](state/court-of-appeals-western-district) | `moctappwd` | up for review | — | — | — | 29 |
 | [Supreme Court of Missouri](state/supreme-court) | `mo` | up for review | — | — | — | 29 |
 

@@ -11,8 +11,8 @@ Courts under `courts/fourth-circuit/north-carolina` (8).
 | [District Court, E.D. North Carolina](federal/eastern-district) | `nced` | up for review | — | — | — | 14 |
 | [District Court, M.D. North Carolina](federal/middle-district) | `ncmd` | up for review | — | — | — | 14 |
 | [District Court, W.D. North Carolina](federal/western-district) | `ncwd` | up for review | — | — | — | 14 |
-| [Court of Appeals of North Carolina](state/court-of-appeals) | `ncctapp` | in progress | — | — | — | 14 |
-| [Supreme Court of North Carolina](state/supreme-court) | `nc` | in progress | — | — | — | 14 |
+| [Court of Appeals of North Carolina](state/court-of-appeals) | `ncctapp` | up for review | — | — | — | 29 |
+| [Supreme Court of North Carolina](state/supreme-court) | `nc` | up for review | — | — | — | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

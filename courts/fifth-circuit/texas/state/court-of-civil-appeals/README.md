@@ -6,11 +6,11 @@
 - Level: state-appellate
 - Circuit: `ca5`
 - State / territory: Texas
-- Status: **in progress** (14%); manual status in `court.json`: `todo`
+- Status: **up for review** (29%); manual status in `court.json`: `todo`
 
 ## Checklist
 
-- [ ] `rules.md` present
+- [x] `rules.md` present
 - [x] `usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)
 - [ ] `usage/` has at least 2 INPUT .md samples
 - [ ] typst engine passes (`usage/.check-typst.txt` valid)
@@ -25,11 +25,13 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 ## Doc folders
 
-3 of 3 doc folders with an INPUT pass the typst eval.
+5 of 5 doc folders with an INPUT pass the typst eval.
 
 | Doc folder | Status | Eval |
 |---|---|---|
+| [amicus-brief](amicus-brief) | up for review | pass |
 | [answering-brief](answering-brief) | up for review | pass |
+| [motion-brief](motion-brief) | up for review | pass |
 | [opening-brief](opening-brief) | up for review | pass |
 | [reply-brief](reply-brief) | up for review | pass |
 

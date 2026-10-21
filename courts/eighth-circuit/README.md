@@ -33,9 +33,9 @@ Courts under `courts/eighth-circuit` (38).
 | [Supreme Court of Iowa](iowa/state/supreme-court) | `iowa` | up for review | — | — | — | 29 |
 | [Court of Appeals of Minnesota](minnesota/state/court-of-appeals) | `minnctapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Minnesota](minnesota/state/supreme-court) | `minn` | up for review | — | — | — | 29 |
-| [Missouri Court of Appeals](missouri/state/court-of-appeals) | `moctapp` | in progress | — | — | — | 14 |
-| [Missouri Court of Appeals, Eastern District](missouri/state/court-of-appeals-eastern-district) | `moctapped` | in progress | — | — | — | 14 |
-| [Missouri Court of Appeals, Southern District](missouri/state/court-of-appeals-southern-district) | `moctappsd` | in progress | — | — | — | 14 |
+| [Missouri Court of Appeals](missouri/state/court-of-appeals) | `moctapp` | up for review | — | — | — | 29 |
+| [Missouri Court of Appeals, Eastern District](missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | — | — | — | 29 |
+| [Missouri Court of Appeals, Southern District](missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | — | — | — | 29 |
 | [Missouri Court of Appeals, Western District](missouri/state/court-of-appeals-western-district) | `moctappwd` | up for review | — | — | — | 29 |
 | [Supreme Court of Missouri](missouri/state/supreme-court) | `mo` | up for review | — | — | — | 29 |
 | [Nebraska Court of Appeals](nebraska/state/court-of-appeals) | `nebctapp` | up for review | — | — | — | 29 |

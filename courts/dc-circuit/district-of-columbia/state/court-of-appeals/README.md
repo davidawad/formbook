@@ -6,11 +6,11 @@
 - Level: state-supreme
 - Circuit: `cadc`
 - State / territory: District of Columbia
-- Status: **in progress** (14%); manual status in `court.json`: `todo`
+- Status: **up for review** (29%); manual status in `court.json`: `todo`
 
 ## Checklist
 
-- [ ] `rules.md` present
+- [x] `rules.md` present
 - [x] `usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)
 - [ ] `usage/` has at least 2 INPUT .md samples
 - [ ] typst engine passes (`usage/.check-typst.txt` valid)
@@ -23,6 +23,14 @@ Engines: typst `—`, latex `—`, docx `—`.
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and every doc folder under it with a `usage/INPUT-*.md` has a valid `usage/.check-typst.txt` stamp (`just eval` writes them; the default checks are `data/checks-default.yaml`).
 
+## Doc folders
+
+2 of 2 doc folders with an INPUT pass the typst eval.
+
+| Doc folder | Status | Eval |
+|---|---|---|
+| [motion-brief](motion-brief) | up for review | pass |
+| [petition-for-rehearing](petition-for-rehearing) | up for review | pass |
 
 ## Folders
 

@@ -1,0 +1,5 @@
+# RAP 31(A)(1)(e): 1.5-inch left margin for briefs, 1 inch on other sides (margin_left_pt 108).
+# RAP 31(G)(3)(a): 40 pages if computer generated (page_limit counts every page of the PDF, so it is a stricter bound).
+params:
+  margin_left_pt: 108
+  page_limit: 40

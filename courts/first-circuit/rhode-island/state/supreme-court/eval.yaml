@@ -1,0 +1,4 @@
+# Rule 18(b): all papers in Times New Roman, at least 14-point (footnotes also 14-point). The default check
+# assumes 12 pt, so this court's size is set here.
+font:
+  size_pt: 14

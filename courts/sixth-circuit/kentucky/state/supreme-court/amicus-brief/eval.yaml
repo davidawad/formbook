@@ -1,0 +1,4 @@
+# RAP 31(A)(1)(e): 1.5-inch left margin for briefs, 1 inch on other sides (margin_left_pt 108).
+# RAP 34(B)(4): 5,250 words; word-controlled, so no page_limit is set.
+params:
+  margin_left_pt: 108

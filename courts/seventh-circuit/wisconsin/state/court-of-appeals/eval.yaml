@@ -1,0 +1,8 @@
+# Wis. Stat. 809.19(8)(b)3.c: proportional serif body text at least 13 point (applies to briefs; 809.81 sets no size for other papers, so 13 point is used for all). Wis. Stat. 809.19(8)(b)3.e and 809.81(4): margins at least 1.25 inch right and left, at least 1 inch top and bottom.
+font:
+  size_pt: 13
+params:
+  margin_left_pt: 90
+  margin_right_pt: 90
+  margin_top_pt: 72
+  margin_bottom_pt: 72

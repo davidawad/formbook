@@ -24,10 +24,10 @@ Courts under `courts/eleventh-circuit` (32).
 | [United States District Court for the Middle District of Georgia](georgia/federal/middle-district) | `gamd` | up for review | — | — | — | 14 |
 | [United States District Court for the Northern District of Georgia](georgia/federal/northern-district) | `gand` | up for review | — | — | — | 14 |
 | [United States District Court for the Southern District of Georgia](georgia/federal/southern-district) | `gasd` | up for review | — | — | — | 14 |
-| [Alabama Court of Civil Appeals](alabama/state/court-of-civil-appeals) | `alacivapp` | in progress | — | — | — | 14 |
-| [Alabama Court of Criminal Appeals](alabama/state/court-of-criminal-appeals) | `alacrimapp` | in progress | — | — | — | 14 |
-| [Supreme Court of Alabama](alabama/state/supreme-court) | `ala` | in progress | — | — | — | 14 |
-| [Florida District Courts of Appeal](florida/state/district-courts-of-appeal) | `fladistctapp` | in progress | — | — | — | 14 |
+| [Alabama Court of Civil Appeals](alabama/state/court-of-civil-appeals) | `alacivapp` | in progress | — | — | — | 29 |
+| [Alabama Court of Criminal Appeals](alabama/state/court-of-criminal-appeals) | `alacrimapp` | up for review | — | — | — | 29 |
+| [Supreme Court of Alabama](alabama/state/supreme-court) | `ala` | up for review | — | — | — | 29 |
+| [Florida District Courts of Appeal](florida/state/district-courts-of-appeal) | `fladistctapp` | in progress | — | — | — | 29 |
 | [Florida Fifth District Court of Appeal](florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | in progress | — | — | — | 14 |
 | [Florida First District Court of Appeal](florida/state/first-district-court-of-appeal) | `fladistctapp1` | in progress | — | — | — | 14 |
 | [Florida Fourth District Court of Appeal](florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | in progress | — | — | — | 14 |

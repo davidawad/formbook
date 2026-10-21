@@ -13,7 +13,7 @@ Courts under `courts/ninth-circuit/california` (19).
 | [United States District Court for the Eastern District of California](federal/eastern-district) | `caed` | up for review | — | — | — | 14 |
 | [United States District Court for the Northern District of California](federal/northern-district) | `cand` | up for review | — | — | — | 14 |
 | [United States District Court for the Southern District of California](federal/southern-district) | `casd` | up for review | — | — | — | 14 |
-| [California Court of Appeal, Fifth Appellate District](state/court-of-appeal-fifth-district) | `calctapp5d` | in progress | — | — | — | 29 |
+| [California Court of Appeal, Fifth Appellate District](state/court-of-appeal-fifth-district) | `calctapp5d` | up for review | — | — | — | 29 |
 | [California Court of Appeal, First Appellate District](state/court-of-appeal-first-district) | `calctapp1d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Fourth Appellate District](state/court-of-appeal-fourth-district) | `calctapp4d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Second Appellate District](state/court-of-appeal-second-district) | `calctapp2d` | in progress | — | — | — | 14 |

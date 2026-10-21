@@ -1,0 +1,3 @@
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | COLLECTED: 10 pp., text layer verified 2026-10-17; verified complaint for mandamus, original action MCR 7.306 | `FILED-EXAMPLE-petition-for-writ.pdf` | Raise the Wage MI (plaintiff; Goodman Acker, P.C.) | Raise the Wage MI v Board of State Canvassers, MSC No. 166312 | 2023-10-30 | https://www.courts.michigan.gov/siteassets/case-documents/briefs/msc/2023-2024/166312/166312_01_01_complaint.pdf | `7f94075cb4f71e20ccaac1180133057110011753b9d8e93fdcff7f97a332139d` |

@@ -1,0 +1,3 @@
+# MRAP 7(g)(2) and 1D(d): printed matter at least 14-point (footnotes may be 11-point, not a default check).
+font:
+  size_pt: 14

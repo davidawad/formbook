@@ -1,0 +1,4 @@
+# Illinois Supreme Court Rule 341(a) (Illinois Supreme Court Rules compiled October 21, 2026): margins "must be at least 1½ inch
+# on the left side and 1 inch on the other three sides". 1½ inch = 108 pt. The other sides keep the default 72 pt (1 in).
+params:
+  margin_left_pt: 108

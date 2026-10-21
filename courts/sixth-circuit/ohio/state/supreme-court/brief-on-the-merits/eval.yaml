@@ -1,0 +1,5 @@
+# RoP 16.02(C)(1) and 16.03(C)(1): merit brief not over 50 numbered pages, excluding the table of
+# contents, table of authorities, certificate of service, signature block and appendix. Applied
+# to the whole PDF (cover included), which is stricter.
+params:
+  page_limit: 50

@@ -1,0 +1,4 @@
+# Illinois Supreme Court Rule 341(b)(1) (compiled October 21, 2026): the reply brief is limited to 20 pages or 6,000 words.
+# The check counts every rendered page, front matter included, so it is stricter than the rule.
+params:
+  page_limit: 20

@@ -25,9 +25,9 @@ Courts under `courts/fourth-circuit` (29).
 | [District Court, N.D. West Virginia](west-virginia/federal/northern-district) | `wvnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. West Virginia](west-virginia/federal/southern-district) | `wvsd` | up for review | — | — | — | 14 |
 | [Court of Appeals of Maryland](maryland/state/court-of-appeals) | `md` | up for review | — | — | — | 29 |
-| [Court of Special Appeals of Maryland](maryland/state/court-of-special-appeals) | `mdctspecapp` | in progress | — | — | — | 14 |
-| [Court of Appeals of North Carolina](north-carolina/state/court-of-appeals) | `ncctapp` | in progress | — | — | — | 14 |
-| [Supreme Court of North Carolina](north-carolina/state/supreme-court) | `nc` | in progress | — | — | — | 14 |
+| [Court of Special Appeals of Maryland](maryland/state/court-of-special-appeals) | `mdctspecapp` | up for review | — | — | — | 29 |
+| [Court of Appeals of North Carolina](north-carolina/state/court-of-appeals) | `ncctapp` | up for review | — | — | — | 29 |
+| [Supreme Court of North Carolina](north-carolina/state/supreme-court) | `nc` | up for review | — | — | — | 29 |
 | [Court of Appeals of South Carolina](south-carolina/state/court-of-appeals) | `scctapp` | up for review | — | — | — | 29 |
 | [Supreme Court of South Carolina](south-carolina/state/supreme-court) | `sc` | up for review | — | — | — | 29 |
 | [Court of Appeals of Virginia](virginia/state/court-of-appeals) | `vactapp` | up for review | — | — | — | 29 |

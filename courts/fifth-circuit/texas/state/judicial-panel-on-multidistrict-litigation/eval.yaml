@@ -1,0 +1,4 @@
+# TRAP 9.4(e), applied by convention (rules.md TEXJPML-FORM-006): a document produced on a computer is
+# printed in a conventional typeface no smaller than 14-point; footnotes at least 12-point.
+font:
+  size_pt: 14

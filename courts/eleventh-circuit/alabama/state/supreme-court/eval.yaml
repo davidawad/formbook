@@ -1,0 +1,4 @@
+# Alabama Rules of Appellate Procedure 32(a)(7) (https://web.archive.org/web/2026id_/https://judicial.alabama.gov/docs/library/rules/ap32.pdf):
+# the font of all documents, including footnotes, is Century Schoolbook 14 point.
+font:
+  size_pt: 14

@@ -1,0 +1,6 @@
+# Rule 40(b): legal paper, 8 1/2 x 14 in (612 x 1008 pt), not the letter default.
+# No page_limit: TSPR R 43(e) allows 20 pages excluding the indice and appendix, which the default
+# check (counting every page) cannot exclude. The limit is a Gate 2 review item (rules.md).
+params:
+  page_width_pt: 612
+  page_height_pt: 1008

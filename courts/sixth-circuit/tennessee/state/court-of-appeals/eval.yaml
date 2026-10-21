@@ -1,0 +1,4 @@
+# Tenn. Sup. Ct. R. 46, section 3.02 (3) (b) (Font size - 14-point font size) for e-filed documents, which governs
+# over the paper rule (Tenn. R. App. P. 30 (a), 12-point) where they conflict (section 3.02 (a)). Stricter than the default 12 pt.
+font:
+  size_pt: 14

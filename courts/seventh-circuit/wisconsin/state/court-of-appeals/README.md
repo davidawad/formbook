@@ -23,6 +23,16 @@ Engines: typst `—`, latex `—`, docx `—`.
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and every doc folder under it with a `usage/INPUT-*.md` has a valid `usage/.check-typst.txt` stamp (`just eval` writes them; the default checks are `data/checks-default.yaml`).
 
+## Doc folders
+
+4 of 4 doc folders with an INPUT pass the typst eval.
+
+| Doc folder | Status | Eval |
+|---|---|---|
+| [answering-brief](answering-brief) | up for review | pass |
+| [motion-brief](motion-brief) | up for review | pass |
+| [petition-for-discretionary-review](petition-for-discretionary-review) | up for review | pass |
+| [petition-for-writ](petition-for-writ) | up for review | pass |
 
 ## Folders
 

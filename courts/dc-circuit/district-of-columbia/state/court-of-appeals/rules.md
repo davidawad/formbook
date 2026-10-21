@@ -1,0 +1,97 @@
+# District of Columbia Court of Appeals: briefs, petitions, motions and amicus briefs
+
+Alias `dc`. Scope: briefs (principal, appellee, reply, brief on the merits), petitions for review of agency orders, petitions for division rehearing or rehearing en banc, motions, and amicus curiae briefs filed in the District of Columbia Court of Appeals. Verified against the Rules of the District of Columbia Court of Appeals (revised effective December 1, 2021) on 2026-10-21.
+
+Local rules not retrieved: https://www.dccourts.gov/sites/default/files/2025-01/DCCA-Rules.pdf returned HTTP 403 on 2026-10-21 (on every attempt, including one after a wait). The text below is the Internet Archive capture of that same court-posted PDF (its title page reads "Revised effective December 1, 2021"). Confirm against the court-posted PDF before relying on a number. The Rule 6 application and Rule 21 writ forms are outside these templates.
+
+Rule 32 (a) (4) names Times New Roman, Arial, or a similarly readable typeface for briefs, at 14 point or larger, footnotes included. Rule 27 (d) (1) (C) sets 12 point or larger for motions, preferably Times New Roman or Courier New. Every template declares Times New Roman, the face Rule 32 (a) (4) and Rule 27 (d) (1) (C) name. Rule 15 sets no page limit for a petition for review; Rule 32 (a) (5) limits principal briefs only.
+
+## Sources
+
+| Tag | Source | URL |
+|---|---|---|
+| DCCA-RULES | Rules of the District of Columbia Court of Appeals, revised effective December 1, 2021 (Internet Archive capture of the court-posted PDF, 132 pp.) | https://web.archive.org/web/2025/https://www.dccourts.gov/sites/default/files/2025-01/DCCA-Rules.pdf |
+
+## Form of every paper (all doc types)
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| DC-FORM-001 | Documents are in an 8-1/2 by 11 inch page format. Text is clearly set forth in black (motions) or in back (briefs) on a white background. | DCCA-RULES Rule 32 (a) (1), (a) (3); Rule 27 (d) (1) (A), (C). | M |
+| DC-FORM-002 | Text is double spaced. Quotations more than two lines long may be indented and single-spaced. Headings and footnotes may be single-spaced. | DCCA-RULES Rule 32 (a) (3); Rule 27 (d) (1) (C). | M |
+| DC-FORM-003 | Margins are at least one inch on all four sides. Page numbers may be placed in the margins, but no text may appear there. | DCCA-RULES Rule 32 (a) (3); Rule 27 (d) (1) (C). | M |
+| DC-FORM-004 | Briefs, petitions and amicus briefs: font size, including footnotes, is 14 point or larger, in Times New Roman, Arial, or similarly readable typeface. Italics or boldface for emphasis; case names italicized or underlined. | DCCA-RULES Rule 32 (a) (4); Rule 32 (c) (2). | M |
+| DC-FORM-005 | Motions and responses: font size, including footnotes, is 12 point or larger, preferably Times New Roman or Courier New. | DCCA-RULES Rule 27 (d) (1) (C). | M |
+| DC-FORM-006 | Every document is signed by the filing party or by one of the party's attorneys. The signature is typographic ("s/" and the attorney's name) or a scanned handwritten signature. | DCCA-RULES Rule 32 (d); Rule 25 (a) (2) (F). | M |
+| DC-ELEC-001 | Attorneys file electronically through the court's efiling system; documents are in an approved format (PDF, RTF, TIFF, DOC, or DOCX). The court prefers files originating from word-processing software over scans. | DCCA-RULES Rule 25 (a) (2) (A)-(B), (E). | M |
+| DC-ELEC-002 | Personal identifiers: no redaction rule appears in the retrieved text. | DCCA-RULES Rule 25 (a) (2). | A |
+| DC-SVC-001 | A party serves a copy of each document on the other parties at or before filing; service on a represented party is made on counsel. Electronic service through the efiling system is service when the party is registered or has consented in writing. | DCCA-RULES Rule 25 (b), (c) (1), (a) (2) (H). | M |
+| DC-SVC-002 | Proof of service is a statement by the person who made service, certifying the manner of service and the persons served. | DCCA-RULES Rule 25 (d) (1) (B). | M |
+
+## Briefs (principal, appellee, reply, brief on the merits)
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| DC-LEN-001 | A principal brief may not exceed 50 pages; a reply brief may not exceed 20 pages. Headings, footnotes and quotations count; the statements, tables and addenda required by Rule 28 (a) (1)-(4) and Rule 28 (f) do not. | DCCA-RULES Rule 32 (a) (5). | M |
+| DC-CONT-001 | Title page: case number centered at the top; name of the court; the case title as it appears on the docket; the nature of the proceeding and the court or agency below; the title of the brief identifying the party for whom it is filed; name, office address, email address and telephone of counsel (an asterisk marks counsel who will argue). | DCCA-RULES Rule 28 (a) (1); Rule 32 (a) (2). | M |
+| DC-CONT-002 | For a non-governmental party: a list of all parties, intervenors, amici curiae and their counsel in the trial or agency proceeding and in the appeal, and a disclosure statement if Rule 26.1 requires one. | DCCA-RULES Rule 28 (a) (2); Rule 26.1. | M (conditional on a non-governmental party) |
+| DC-CONT-003 | Table of contents with page references, placed before the body. | DCCA-RULES Rule 28 (a) (3); Rule 28 (c). | M |
+| DC-CONT-004 | Table of authorities with page references: cases alphabetically arranged, then statutes and other authorities; an asterisk marks the cases chiefly relied upon. | DCCA-RULES Rule 28 (a) (4); Rule 28 (c). | M |
+| DC-CONT-005 | Jurisdictional assertion (final order or judgment, or other basis for this court's jurisdiction); statement of the issues presented; statement of the case with the course of proceedings and disposition below; statement of facts with record references, in that order. An appellee may omit the issues, case and facts statements unless dissatisfied with the appellant's, and must then state its own. | DCCA-RULES Rule 28 (a) (5)-(8), (b); Rule 28 (e). | M |
+| DC-CONT-006 | Summary of the argument, not a repeat of the argument headings; argument with the appellant's contentions, reasons and citations to authority and record; a concise statement of the standard of review for each issue; a short conclusion stating the precise relief sought. | DCCA-RULES Rule 28 (a) (9)-(11). | M |
+| DC-CONT-007 | Record citations are to the pages of the appendix; a reference to a part of the record not in the appendix uses the PDF pagination of the record and the original page (for example, R. 153 (PDF) (Order p. 5)). | DCCA-RULES Rule 28 (e). | M |
+| DC-CONT-008 | Statutes, rules or regulations that the determination requires are set out in the brief or in an addendum at the end. | DCCA-RULES Rule 28 (f). | A |
+| DC-CITE-001 | Published opinions and orders of this court may be cited. Unpublished opinions or orders may not be cited except under law of the case, res judicata or collateral estoppel, or in the criminal and disciplinary cases described in Rule 28 (g). | DCCA-RULES Rule 28 (g). | M |
+| DC-CITE-002 | Agency decisions cited from a public electronic database give its web address, or the decision is furnished in an addendum or appendix. | DCCA-RULES Rule 28 (h). | A |
+| DC-CONT-009 | Counsel minimize the terms "appellant," "petitioner," "respondent" and "appellee" and use parties' names or the trial or agency designation. | DCCA-RULES Rule 28 (d). | A |
+
+## Motions
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| DC-MOT-001 | Caption with the case number, the title of the case, and a brief descriptive title that states the purpose of the motion and the party or parties for whom it is filed. | DCCA-RULES Rule 27 (d) (1) (B). | M |
+| DC-MOT-002 | A motion or response to a motion does not exceed 20 pages, exclusive of accompanying documents, unless the court permits; a reply to a response does not exceed 10 pages. | DCCA-RULES Rule 27 (d) (2). | M |
+| DC-MOT-003 | A motion includes a disclosure statement if Rule 26.1 requires one. | DCCA-RULES Rule 27 (d) (4). | M (conditional) |
+| DC-MOT-004 | Once a case is calendared for a merits division, a motion, response or reply notes on the front page, in bold print directly under the appeal number, that the matter has been calendared, argued or submitted and the date. | DCCA-RULES Rule 27 (d) (5). | M (conditional) |
+| DC-MOT-005 | Citations in motions follow Rule 28 (g). | DCCA-RULES Rule 27 (d) (3). | M |
+
+## Petitions for division rehearing and rehearing en banc
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| DC-REH-001 | A petition for division rehearing states with particularity each point of law or fact the petitioner believes the court overlooked or misapprehended, and argues in support. | DCCA-RULES Rule 40 (b) (1). | M |
+| DC-REH-002 | A petition for rehearing en banc begins with a statement that the division decision conflicts with a decision of this court (with citation), conflicts with a decision of the United States Supreme Court (with citation), or involves questions of exceptional importance, each concisely stated. | DCCA-RULES Rule 40 (b) (2). | M (conditional on en banc) |
+| DC-REH-003 | A petition for both forms of rehearing is filed as a single document. | DCCA-RULES Rule 40 (a). | M (conditional) |
+| DC-REH-004 | The petition complies in form with Rule 32, and does not exceed 15 pages. | DCCA-RULES Rule 40 (d) (2)-(3); Rule 32 (c) (2). | M |
+| DC-REH-005 | A petition is filed within 14 days after judgment is entered, or after an amended decision is entered. | DCCA-RULES Rule 40 (d) (1). | M |
+
+## Petitions for review of agency orders
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| DC-PET-001 | The petition names each party seeking review, in the caption or the body (terms such as "et al." or "petitioners" do not name the parties), names the agency as respondent, and specifies the order or decision, or part of it, to be reviewed. | DCCA-RULES Rule 15 (a) (3) (A)-(C). | M |
+| DC-PET-002 | For a decision of the Office of Administrative Hearings, the petition does not name the Office or its Administrative Law Judge as respondent. | DCCA-RULES Rule 15 (a) (4). | M (conditional) |
+| DC-PET-003 | The petition is filed within 30 days after notice of the order, unless a statute provides otherwise; a petition for rehearing or reconsideration filed under the agency's rules suspends the time as Rule 15 (b) states. | DCCA-RULES Rule 15 (a) (2), (b). | M |
+| DC-PET-004 | A petition by a corporation or other entity is signed by counsel. | DCCA-RULES Rule 15 (a) (6). | M (conditional) |
+| DC-PET-005 | The petitioner serves a copy on each party admitted to the agency proceeding (except the agency respondent) and files a list of those served. | DCCA-RULES Rule 15 (c) (1)-(2). | M |
+| DC-PET-006 | The petition complies in form with Rule 32 (a). Form 5 is a suggested form. | DCCA-RULES Rule 32 (c) (2); Rule 15 (a) (8). | C |
+
+## Amicus curiae briefs
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| DC-AMC-001 | An amicus brief is filed without consent or leave only if the United States, the District of Columbia, a state or political subdivision, or an officer or agency of one, files it, or if the brief states that all parties consented. Any other amicus files by leave of court, with a motion stating its interest and why the brief is desirable and relevant. | DCCA-RULES Rule 29 (a) (2)-(3). | M |
+| DC-AMC-002 | Title page under Rule 28 (a) (1), identifying the party or parties supported and stating whether the brief supports affirmance or reversal. | DCCA-RULES Rule 29 (a) (4). | M |
+| DC-AMC-003 | A corporate amicus gives a disclosure statement like that required of parties by Rule 26.1. | DCCA-RULES Rule 29 (a) (4) (A). | M (conditional) |
+| DC-AMC-004 | Table of contents with page references, and a table of authorities with page references (cases alphabetical, asterisk on the cases chiefly relied upon). | DCCA-RULES Rule 29 (a) (4) (B)-(C). | M |
+| DC-AMC-005 | A concise statement of the amicus's identity, its interest in the case and the source of its authority to file, followed by the argument; a summary may precede the argument and a standard of review is not required. | DCCA-RULES Rule 29 (a) (4) (D)-(E). | M |
+| DC-AMC-006 | An amicus brief supporting a party does not exceed 25 pages, except by the court's permission. | DCCA-RULES Rule 29 (a) (5). | M |
+| DC-AMC-007 | An amicus brief supporting a party is filed no later than 7 days after the principal brief of the party it supports. | DCCA-RULES Rule 29 (a) (6). | M |
+| DC-AMC-008 | An amicus curiae may not file a reply brief except by permission. | DCCA-RULES Rule 29 (a) (7). | A |
+
+## Template-only requirement
+
+| ID | Requirement | Kind |
+|---|---|---|
+| DC-TPL-001 | A reusable template contains no case-specific text, measured coordinates, or forced line breaks. | T |
+
+Verified against Rules of the District of Columbia Court of Appeals (revised effective December 1, 2021; Internet Archive copy of the court-posted PDF) on 2026-10-21.

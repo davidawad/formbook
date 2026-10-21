@@ -1,0 +1,6 @@
+# SCR 16(11), 21(1), 26(1): body text in standard typewriter characters or 13-point font (not less than 12-point default).
+# SCR 16(1): briefs carry a minimum margin of one and one-half inches on all sides; applied to every filing type.
+font:
+  size_pt: 13
+params:
+  margin_pt: 108

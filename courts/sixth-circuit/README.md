@@ -25,15 +25,15 @@ Courts under `courts/sixth-circuit` (29).
 | [District Court, E.D. Tennessee](tennessee/federal/eastern-district) | `tned` | up for review | — | — | — | 14 |
 | [District Court, M.D. Tennessee](tennessee/federal/middle-district) | `tnmd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Tennessee](tennessee/federal/western-district) | `tnwd` | up for review | — | — | — | 14 |
-| [Court of Appeals of Kentucky](kentucky/state/court-of-appeals) | `kyctapp` | in progress | — | — | — | 14 |
-| [Kentucky Supreme Court](kentucky/state/supreme-court) | `ky` | in progress | — | — | — | 14 |
-| [Michigan Court of Appeals](michigan/state/court-of-appeals) | `michctapp` | in progress | — | — | — | 14 |
-| [Michigan Supreme Court](michigan/state/supreme-court) | `mich` | in progress | — | — | — | 14 |
-| [Ohio Court of Appeals](ohio/state/court-of-appeals) | `ohioctapp` | in progress | — | — | — | 14 |
-| [Ohio Supreme Court](ohio/state/supreme-court) | `ohio` | in progress | — | — | — | 14 |
-| [Court of Appeals of Tennessee](tennessee/state/court-of-appeals) | `tennctapp` | in progress | — | — | — | 14 |
-| [Court of Criminal Appeals of Tennessee](tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | in progress | — | — | — | 14 |
-| [Tennessee Supreme Court](tennessee/state/supreme-court) | `tenn` | in progress | — | — | — | 14 |
+| [Court of Appeals of Kentucky](kentucky/state/court-of-appeals) | `kyctapp` | up for review | — | — | — | 29 |
+| [Kentucky Supreme Court](kentucky/state/supreme-court) | `ky` | up for review | — | — | — | 29 |
+| [Michigan Court of Appeals](michigan/state/court-of-appeals) | `michctapp` | up for review | — | — | — | 29 |
+| [Michigan Supreme Court](michigan/state/supreme-court) | `mich` | up for review | — | — | — | 29 |
+| [Ohio Court of Appeals](ohio/state/court-of-appeals) | `ohioctapp` | up for review | — | — | — | 29 |
+| [Ohio Supreme Court](ohio/state/supreme-court) | `ohio` | up for review | — | — | — | 29 |
+| [Court of Appeals of Tennessee](tennessee/state/court-of-appeals) | `tennctapp` | up for review | — | — | — | 29 |
+| [Court of Criminal Appeals of Tennessee](tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | in progress | — | — | — | 29 |
+| [Tennessee Supreme Court](tennessee/state/supreme-court) | `tenn` | up for review | — | — | — | 29 |
 
 [Formbook index](../../README.md)
 <!-- fb:generated:end -->

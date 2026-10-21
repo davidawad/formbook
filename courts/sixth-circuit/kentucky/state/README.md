@@ -5,8 +5,8 @@ Courts under `courts/sixth-circuit/kentucky/state` (2).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals of Kentucky](court-of-appeals) | `kyctapp` | in progress | — | — | — | 14 |
-| [Kentucky Supreme Court](supreme-court) | `ky` | in progress | — | — | — | 14 |
+| [Court of Appeals of Kentucky](court-of-appeals) | `kyctapp` | up for review | — | — | — | 29 |
+| [Kentucky Supreme Court](supreme-court) | `ky` | up for review | — | — | — | 29 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->

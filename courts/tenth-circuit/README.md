@@ -26,7 +26,7 @@ Courts under `courts/tenth-circuit` (31).
 | [District Court, D. Wyoming](wyoming/federal/district) | `wyd` | up for review | — | — | — | 14 |
 | [Colorado Court of Appeals](colorado/state/court-of-appeals) | `coloctapp` | up for review | — | — | — | 29 |
 | [Colorado Supreme Court](colorado/state/supreme-court) | `colo` | up for review | — | — | — | 29 |
-| [Court of Appeals of Kansas](kansas/state/court-of-appeals) | `kanctapp` | in progress | — | — | — | 14 |
+| [Court of Appeals of Kansas](kansas/state/court-of-appeals) | `kanctapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Kansas](kansas/state/supreme-court) | `kan` | in progress | — | — | — | 14 |
 | [New Mexico Court of Appeals](new-mexico/state/court-of-appeals) | `nmctapp` | up for review | — | — | — | 29 |
 | [New Mexico Supreme Court](new-mexico/state/supreme-court) | `nm` | in progress | — | — | — | 14 |

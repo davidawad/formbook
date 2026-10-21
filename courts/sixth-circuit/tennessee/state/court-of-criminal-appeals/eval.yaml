@@ -1,0 +1,4 @@
+# Tenn. Sup. Ct. R. 46, section 3.02(3)(b)-(c): 14-point font for text and footnotes (stricter than the 12-point default).
+# The 1-inch margins (section 3.02(2)(b)) are the default margin_pt 72. No page_limit: the limits are word counts (rules.md).
+font:
+  size_pt: 14

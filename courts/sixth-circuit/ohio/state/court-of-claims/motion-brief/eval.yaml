@@ -1,0 +1,7 @@
+# Ohio Court of Claims motions (rules.md OHIOCTCL-FORM-001, OHIOCTCL-LEN-001).
+# L.C.C.R. 4 (A) (1): the top one and one-half inches of every page are left blank (stricter than the 1 in default).
+# L.C.C.R. 4 (E): supporting, opposing, or memorandum briefs do not exceed fifteen pages, exclusive of attachments;
+# the check counts every page of the rendered document (the certificate of service included), the stricter reading.
+params:
+  margin_top_pt: 108
+  page_limit: 15

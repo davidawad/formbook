@@ -1,0 +1,87 @@
+---
+transcription: "Real filing, transcribed: District of Columbia v. Walker, No. 14-CV-249, District of Columbia Court of Appeals, emergency motion for an administrative stay (D.C. App. R. 8 (a) (2)), dated March 10, 2014, by the Office of the Attorney General for the District of Columbia. All 10 pages are transcribed (cover, motion, certificate of service). Case names the filing italicizes are italicized here. Source: ../usage/SOURCE.md."
+court: "District of Columbia Court of Appeals"
+case_number: "14-CV-249"
+parties:
+  - name: "DISTRICT OF COLUMBIA,"
+    role: "Appellant,"
+  - name: "v."
+    role: ""
+  - name: "MARY OATES WALKER, et al.,"
+    role: "Appellees."
+lower_court_case: "On Appeal from an Order of the Superior Court of the District of Columbia"
+title: "THE DISTRICT OF COLUMBIA’S EMERGENCY MOTION FOR AN ADMINISTRATIVE STAY OF THE SUPERIOR COURT’S PRELIMINARY INJUNCTION AGAINST THE BOARD OF ETHICS AND GOVERNMENT ACCOUNTABILITY AND THE MAYOR"
+cover_page: true
+toc: false
+signature:
+  lines: ["Respectfully submitted,"]
+  signer_line: ""
+  name: "IRVIN B. NATHAN"
+  signer:
+    - "Attorney General for the District of Columbia"
+    - ""
+    - "TODD S. KIM"
+    - "Solicitor General"
+    - ""
+    - "LOREN L. ALIKHAN"
+    - "Deputy Solicitor General"
+    - "Office of the Solicitor General"
+    - ""
+    - "Office of the Attorney General"
+    - "441 4th Street, NW, Suite 630S"
+    - "Washington, D.C. 20001"
+    - "(202) 727-6287"
+service:
+  paragraphs:
+    - "I certify that on March 10, 2014, this motion and the accompanying exhibits were served by email (with the consent of the parties) to:"
+  recipients:
+    - ["Anthony M. Conti (tony@lawcfl.com)", "Daniel J. McCartin (dan@lawcfl.com)", "Anwar L. Graves (anwar@lawcfl.com)", "CONTI FENN & LAWRENCE LLC", "36 South Charles Street, Suite 2501", "Baltimore, MD 21201", "(410) 837-6999"]
+    - ["James F. Hibey (jhibey@steptoe.com)", "Steptoe & Johnson LLP", "1330 Connecticut Avenue, NW", "Washington, DC 20036", "(202) 429-6407"]
+    - ["William R. Martin (billy.martin@martingitnerlaw.com)", "Martin & Gitner PLLC", "2121 K Street, NW, Suite 850", "Washington, DC 20037", "(202) 331-2121"]
+  signature:
+    signer_line: ""
+    name: "LOREN L. ALIKHAN"
+    signer: []
+---
+
+Pursuant to D.C. App. R. 8(a)(2), the District of Columbia moves on an emergency basis for an immediate administrative stay of the Superior Court’s order issued earlier today, which enjoined the Board of Ethics and Government Accountability (“BEGA”) from proceeding with its enforcement action against appellees Mary Oates Walker and Kiyo Oden Tyson and also enjoined the Mayor from proceeding with additional employment action against Walker. The BEGA enforcement action against appellees is scheduled for a hearing on March 25, 2014, and, under the Superior Court’s injunction, the parties are barred from proceeding with discovery and preparations for that hearing as contemplated by BEGA’s scheduling order. This Court should grant a brief administrative stay now to allow that process to continue while the Court considers the motion for a full stay pending appeal that the District will file by 4:00 p.m. tomorrow, Tuesday, March 11 (in which the District will request a full stay to issue by the morning of Friday, March 14). Issuing a brief administrative stay immediately is appropriate because the Superior Court plainly lacked jurisdiction to issue any injunction and the stay will prevent irreparable injury to the District while causing none to Walker and Tyson. Counsel for the District contacted counsel for appellees for their position on this motion, and they do not consent to the relief sought.
+
+# BACKGROUND
+
+The facts underlying this action are set forth in greater detail in the papers that were filed in the Superior Court, particularly the Notice of Violation that is attached as Exhibit A to the District’s opposition to plaintiffs’ motion for a preliminary injunction. (For the Court’s convenience, the District attaches the order, notice of appeal, complaint, the motion and the opposition, and their accompanying exhibits.) The facts may be briefly summarized as follows.
+
+## 1. The BEGA Proceedings.
+
+Appellees Walker and Tyson were employed by the District of Columbia Office of Administrative Hearings (“OAH”) beginning in January 2010 and September 2010, respectively. Compl. ¶¶ 8, 9 (attached as Exhibit 3 to this motion). During that time, Walker served as the OAH Chief Administrative Law Judge and Tyson served as General Counsel to OAH. Compl. ¶¶ 8, 9. By letters dated August 19, 2013, BEGA notified Walker and Tyson of its intent to initiate a “preliminary investigation” into concerns that each had violated the District’s Code of Conduct. Compl. ¶ 13.1. Specifically, the letters inquired into alleged contract-steering and unethical hiring practices by Walker and Tyson during the course of their employment at OAH. Opp. to Mot. for Preliminary Injunction (“Opp.”), Exhibit (“Exh.”) A (attached as Exhibit 5 to this motion). Upon finding reason to believe that ethics violations occurred, BEGA initiated a formal investigation into those violations on November 7, 2013, resulting in a Notice of Violation (“NOV”). Opp. Exh. A. The NOV was served on both Walker and Tyson on February 6, 2014. Compl. ¶¶ 13, 14; *see also* Opp. Exh. A. The NOV charged them with numerous counts of ethical misconduct in violation of D.C. Code § 1-1162.23(a) and Chapter 18 of Title 6B of the District of Columbia Municipal Regulations. Opp. Exh. A.
+
+Walker and Tyson filed responses to the NOV on February 20, 2014, moving to dismiss the enforcement action against them. Opp. Exhs. B, C. As grounds for dismissal, they argued, *inter alia*, that BEGA lacked jurisdiction to proceed against them. Opp. Exhs. B, C. On February 27, 2014, the Director of Government Ethics opposed their motions to dismiss. Opp. Exhs. D, E. The motions are currently pending before BEGA and ripe for decision. The initial hearing is scheduled for March 25, 2014, following a brief period of formal discovery and motions practice as set forth in BEGA’s scheduling order. Opp. Exh. F at 2.
+
+## 2. The Personnel Actions.
+
+On February 7, 2014, Walker was provided with advance notice of the Mayor’s proposal to remove her “for good cause” from her position as Chief Administrative Law Judge at OAH. Compl. ¶ 15. The letter serving as the notice permitted Walker six business days to respond or otherwise tender her resignation and placed her on administrative leave with pay until further notice. Compl. ¶ 15. Walker timely responded and remains on administrative leave with pay pending a final decision regarding her termination. Opp. Exh. H. Subsequently, on February 12, 2014, Interim Chief Administrative Law Judge Wanda Tucker placed Tyson on administrative leave with pay and notified her that her appointment as OAH General Counsel would terminate effective February 27, 2014. Compl. ¶ 16.
+
+## 3. The Superior Court Proceedings.
+
+On February 18, 2014, two days before they had moved BEGA to dismiss the administrative proceedings, Walker and Tyson filed a complaint in Superior Court, alleging that BEGA lacks jurisdiction to pursue charges against them. Compl. ¶¶ 18-28. The complaint seeks an order (1) enjoining BEGA’s ongoing enforcement action against Walker and Tyson and (2) fully reinstating them to their positions at OAH. Compl. 11-12. Walker and Tyson also filed motions for a temporary restraining order and a preliminary injunction on the same day, seeking the same relief. Judge John Bayly denied the motion for a temporary restraining order on February 20, 2014.
+
+On March 7, 2014, Judge Brian Holeman held a hearing on the motion for a preliminary injunction and indicated that he would grant the motion, explaining that an order would follow thereafter. He also denied the District’s oral motion for a stay of his order pending appeal. Judge Holeman issued his order today, ordering (1) “that [BEGA] shall take no further action and is hereby enjoined from proceeding in any manner with the matter captioned In Re: Mary Oates Walker and Kiyo Oden Tyson, Case No. 1060-001”; and (2) “that Mayor Vincent C. Gray is hereby enjoined from taking any further action to remove or terminate Mary Oates Walker as the District of Columbia Office of Administrative Hearings Chief Administrative Law Judge or in any way altering her current employment status and receipt of pay and benefits.” Order (attached as Exhibit 1 to this motion). The District immediately noted an appeal, *see* Exh. 2, and filed this emergency motion for a brief administrative stay. The District will file a full motion for a stay by 4:00 p.m. on Tuesday, March 11, 2014, but a brief administrative stay is necessary now so that the parties may continue preparing for the March 25 hearing in accordance with the scheduling order currently in place, *see* Opp. Exh. F, while this Court contemplates whether to issue a longer stay.
+
+# ARGUMENT
+
+There is good cause for a brief administrative stay while this Court considers whether to stay Judge Holeman’s order pending disposition of this appeal. A stay is warranted where the movant can “show that he or she is likely to succeed on the merits, that irreparable injury will result if the stay is denied, that opposing parties will not be harmed by a stay, and that the public interest favors the granting of a stay.” *Akassay v. William Penn Apartments Ltd. P’ship*, 891 A.2d 291, 309 (D.C. 2006) (internal quotation marks omitted). “A stay may be granted with either a high probability of success and some injury, or vice versa.” *Cuomo v. U.S. Nuclear Regulatory Comm’n*, 772 F.2d 972, 974 (D.C. Cir. 1985) (per curiam). The District plainly satisfies this standard.
+
+First, the District is likely to prevail on the merits because the Superior Court did not have jurisdiction to enter the preliminary injunction. Appellees sought, and Judge Holeman granted, a preliminary injunction on the theory that BEGA did not have jurisdiction to proceed with an enforcement action against Walker and Tyson. But under the District of Columbia Administrative Procedure Act, Walker and Tyson must raise jurisdictional challenges in the course of the BEGA proceeding, and judicial review is not available unless and until BEGA rejects their claim. *See* D.C. Code § 2-510(a) (“If the jurisdiction of . . . an agency is challenged at any time in any proceeding and . . . the agency . . . takes jurisdiction, the person challenging jurisdiction shall be entitled to an immediate judicial review of that action, unless the Court shall otherwise hold.”). Appellees improperly filed suit before they ever “challenged” BEGA’s jurisdiction “in any proceeding.” *Id.*; *see also Brown v. Hines-Williams*, 2 A.3d 1077, 1080 (D.C. 2010) (“Whether a court acquires subject-matter jurisdiction over a case depends on the facts relevant to such jurisdiction as of the time the court’s jurisdiction is invoked, *e.g.*, the date on which suit is filed.”). And even if they had properly asked BEGA to rule first, the motions they later filed are still pending with BEGA, so the “agency” has not “take[n] jurisdiction” within the meaning of D.C. Code § 2-510(a).
+
+Further, as this Court has held, interlocutory appellate review under D.C. Code § 2-510(a) is available only if “‘the challenged agency action [was] in clear excess or plain contravention of its statutory mandate.’” *Abadie v. D.C. Contract Appeals Bd.*, 843 A.2d 738, 742-43 (D.C. 2004) (quoting *Bender v. D.C. Dep’t of Emp’t Servs.*, 562 A.2d 1205, 1210 (D.C. 1989)); *see also id.* (“For the court to take the matter immediately ‘a party must be able to show that the agency action is plainly in excess of its delegated powers; the error must involve more than a mere error of fact or law, there must be action in the absence of statutory authority.’” (quoting *Bender*, 562 A.2d at 1209)). For the reasons in the District’s opposition to preliminary injunction, Opp. 12-21, as well as the motion for a full stay pending appeal to be filed tomorrow, that stringent showing cannot be made here. To the contrary, BEGA is fully authorized to assert jurisdiction to investigate plaintiffs’ alleged unethical conduct committed while serving as District officials and, if BEGA concludes it justified, to issue certain civil sanctions against plaintiffs for that conduct.
+
+Still further, the Superior Court lacked jurisdiction to enjoin the Mayor from proceeding with the ongoing personnel action against Walker. The remedies in the Comprehensive Merit Personnel Act are exclusive, and courts are not to provide relief to District employees who file freestanding suits regarding personnel actions without exhausting those remedies. *See* Opp. 9-10. Because the Superior Court did not have jurisdiction to enter the injunction against BEGA (with regard to both appellees) or the Mayor (with regard to Walker), the District should plainly prevail on the merits on appeal.
+
+Second, the District will be irreparably harmed if a stay is denied. Judge Holeman enjoined BEGA’s March 25 hearing on the enforcement proceedings against Walker and Tyson and also halted critical preparations for that hearing. In doing so, he thwarted the clear mandate of the Council of the District of Columbia in enacting the Board of Ethics and Government Accountability Establishment and Comprehensive Ethics Reform Amendment Act of 2011. This is especially so because under the reasoning of Judge Holeman’s injunction, BEGA cannot proceed with approximately 20% of its current cases and will not be able to initiate new investigations for the employees of approximately 30 independent agencies and hundreds of excepted service employees. *See, e.g.*, 61 D.C. Reg. 919 (Jan. 30, 2014) (listing Excepted Service employees); 58 D.C. Reg. 7640 (Aug. 26, 2011) (same); D.C. Code § 1-609.03 (listing number of Excepted Service employees). Judge Holeman also enjoined the Mayor from proceeding with a personnel action against Walker that he has full authority to pursue, especially where a high-ranking government official is charged with serious misdeeds. “[A]ny time a State is enjoined by a court from effectuating statutes enacted by representatives of its people, it suffers a form of irreparable injury.” *Maryland v. King*, 133 S. Ct. 1, 3 (2012) (Roberts, C.J., in chambers) (quoting *New Motor Vehicle Bd. of Cal. v. Orrin W. Fox Co.*, 434 U.S. 1345, 1351 (1977) (Rehnquist, J., in chambers)). Moreover, given the District’s strong likelihood of success on the merits, it would be entitled to a stay even if this Court does not find a strong showing of irreparable harm. *See Cuomo*, 772 F.2d at 974.
+
+Third, appellees will not be harmed by the stay. In granting the injunction, Judge Holeman was concerned that an order finding Walker and/or Tyson liable for ethics violations would harm their future employment prospects and found that sufficient to justify an injunction. But BEGA has not yet issued any findings that Walker or Tyson violated District law, and no order would issue until at least April 22 under the scheduling order currently in place. *See* Opp. Exh. F. And appellees have not pointed to any non-speculative employment-related or reputational harm that they are currently suffering while they await BEGA’s order. As such, appellees would not suffer any undue hardship by a brief administrative stay while the Court contemplates whether a longer stay is appropriate.
+
+Finally, the public interest favors staying the injunction and allowing BEGA’s enforcement proceedings to go forward. When the Council established BEGA in 2012, it charged BEGA with “vigorously” administering and enforcing “the new and enhanced [ethics] laws and code of conduct.” Opp. Exh. K (Committee Report); *see also* Board of Ethics and Government Accountability Establishment and Comprehensive Ethics Reform Amendment Act of 2011, D.C. Law 19-124, D.C. Code § 1-1161.01 *et seq.* To this end, the Council authorized BEGA to conduct ethics investigations and related enforcement proceedings like the one Judge Holeman enjoined here. Walker and Tyson have been charged with serious ethical violations in direct dereliction of their important duties to the District and its residents. The public has a concerted interest in BEGA’s conducting a public hearing on the notice of violation and ensuring that the District’s employees conduct themselves ethically and with integrity, and in the Mayor’s having the separate ability to pursue personnel actions as he deems appropriate.
+
+# CONCLUSION
+
+This Court should immediately grant a brief administrative stay while it considers the District’s full motion for a stay, to be filed on Tuesday, March 11.
