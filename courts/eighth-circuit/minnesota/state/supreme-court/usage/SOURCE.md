@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 29 pp., text layer verified 2026-10-17; amicus brief accepted for filing | `FILED-EXAMPLE-amicus-brief.pdf` | ACLU of Minnesota and Minnesota Association of Criminal Defense Lawyers (amici curiae) | In re Welfare of C.T.B., No. A23-0459 | 2024-03-15 | https://www.aclu-mn.org/app/uploads/2024/03/2024.03.15_ctbamicus_brief_acluandmacdl_accepted.pdf | `d8663f5d83329799fe95686ea7bb1df90f51641233b1df61d848f2c5a45c401d` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search — fb-l129.1 pass 3 (2026-10-21)
+
+Rechecked the current official Minnesota Rules of Civil Appellate Procedure (Rule 140), official public case material, and indexed Minnesota Supreme Court party-filing searches for petitions for rehearing. Results included published decisions/orders discussing rehearing (including State v. Davis, A15-1401, and the Borg order) and blank rule text, but no standalone public text-layer copy of a filed petition. The `petition-for-rehearing` row remains BLOCKED.
