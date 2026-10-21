@@ -105,7 +105,7 @@
     for e in group.entries {
       block(above: 0.5em, below: 0.5em, breakable: false)[
         #set par(first-line-indent: 0pt, hanging-indent: 0.5in, spacing: 0pt)
-        #inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)]) #h(4pt) #if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+        #inl(e.cite)#sym.wj#h(0.5em)#sym.wj#box(width: 1fr, repeat[.#h(2pt)])#sym.wj#h(4pt)#sym.wj#box(if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") })
       ]
     }
   }
