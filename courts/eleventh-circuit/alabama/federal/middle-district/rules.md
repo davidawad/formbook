@@ -2,6 +2,8 @@
 
 Alias `almd`. Scope: civil complaints and motion briefs. Verified against the Local Rules for the United States District Court, Middle District of Alabama (PDF as posted; header reads "Effective December 1, 2010, amended October 1, 2011") and the Federal Rules of Civil Procedure (as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Note: the local rules state no typeface, point size, or brief page limit. The repo default eval (1 in margins, 12 pt) applies, and no page limit is set.
 
 ## Sources
