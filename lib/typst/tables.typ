@@ -60,3 +60,28 @@
   sym.wj
   page
 }
+
+/// One table-of-contents or table-of-authorities entry whose page reference can never wrap alone (DEF-TOC-001).
+/// The title wraps under `hang`, dot leaders fill the rest of its last line, and the page reference sits in its
+/// own column, level with that last line. `page-width` (auto: the reference's own width) also narrows every
+/// line of the title, as LaTeX's \@tocrmarg does. `leading: auto` inherits the paragraph leading. A
+/// `min-leader` above 0pt keeps at least that much leader, glued to the title's last word (which moves down
+/// with it when the line is full), so the entry always prints some dots.
+#let leader-row(title, page, hang: 0pt, dot-gap: 0.16em, lead-gap: 0.6em, gutter: 0.3em, page-width: auto,
+  leading: auto, min-leader: 0pt) = grid(
+  columns: (1fr, page-width), column-gutter: gutter, align: (left, right + bottom),
+  {
+    set par(leading: leading) if leading != auto
+    par(hanging-indent: hang, first-line-indent: 0pt, justify: false, {
+      title
+      if min-leader > 0pt {
+        sym.wj
+        box({ h(lead-gap); box(width: min-leader, repeat[.#h(dot-gap)]) })
+      } else {
+        h(lead-gap)
+      }
+      dot-leader(dot-gap)
+    })
+  },
+  page,
+)

@@ -334,6 +334,17 @@ mod tests {
         assert_ne!(g0_missing(md, &runs), "0");
     }
 
+    #[test]
+    fn a_dot_leader_matches_whatever_its_length() {
+        let md = "Factual Overview ........................ 7\n\nInc. ..... 12\n";
+        // the template sets its own leader, split over runs, longer or shorter than the markdown's
+        let runs = ["Factual Overview . . . .", ". . . . . . . . . . . . . . . . . 7", "Inc. . . . . 12"];
+        assert_eq!(g0_missing(md, &runs), "0");
+        // a leader is still four dots or more: three are not one, and the page reference still counts
+        assert_eq!(g0_missing(md, &["Factual Overview ... 7", "Inc. . . . . 12"]), "1");
+        assert_eq!(g0_missing(md, &["Factual Overview ........ 8", "Inc. . . . . 12"]), "1");
+    }
+
     /// pdf-runs.awk on a page of the given point size, as `pdftohtml -zoom 2` prints it.
     fn runs_tsv(w_pt: u32, h_pt: u32, top_pt: u32) -> String {
         use std::io::Write;

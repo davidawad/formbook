@@ -5,8 +5,9 @@
 #   blocks.tsv  from md-blocks.awk  (the markdown, one block per record)
 #
 # Method. Both sides are reduced to the same normal form (norm.awk: lower case, straight quotes,
-# ligatures expanded, ALL whitespace removed) so line breaks and spacing can never matter, but a missing
-# or altered character always does. Footer page numbers are dropped by position. Each footnote is first
+# ligatures expanded, ALL whitespace removed, a dot leader of four or more dots cut to four: leader()) so line
+# breaks, spacing and leader lengths can never matter, but a missing or altered character always does.
+# Footer page numbers are dropped by position. Each footnote is first
 # found in the PDF on its own (its marker number plus its text) and then cut out of the stream: it sits at
 # the page foot, in the middle of a paragraph that continues on the next page. Every remaining non-heading
 # block must then occur, whole and contiguous, after the previous one: "in order, nothing dropped".
@@ -38,6 +39,7 @@ function prep(raw,    i, n, c, ital, t, nc, k, key, wl) {
       continue
     }
     if (c ~ /[ \t]/) { wl = 0; continue }
+    if (c == "." && T ~ /\.\.\.\.$/) continue   # a dot leader's length is layout, not content (leader())
     nc = norm1(c)
     if (wl == 0) WS[++nw] = length(T) + 1
     wl++; WT[nw] = WT[nw] c
@@ -203,6 +205,19 @@ function table_row(b,    full, cells, n, i, j, k, w, q, L, tt, total, wd, wl, W,
   cursor = maxend
 }
 
+# A dot leader (four or more dots, whitespace already gone) is reduced to exactly four dots on both sides:
+# its length depends on the line it ends, so a markdown entry transcribed with its leader matches the PDF
+# whatever the leader's width. t is the next run's text, s the stream it extends.
+function leader(s, t,    out, k, c) {
+  out = ""
+  for (k = 1; k <= length(t); k++) {
+    c = substr(t, k, 1)
+    if (c == "." && (substr(s, length(s) - 3) out) ~ /\.\.\.\.$/) continue
+    out = out c
+  }
+  return out
+}
+
 BEGIN { FS = "\t"; nruns = 0; S = ""; fncount = 0 }
 
 # ---- file 1: PDF runs -------------------------------------------------------
@@ -210,7 +225,7 @@ FILENAME == ARGV[1] {
   rr++
   page[rr] = $1
   if ($2 + $5 / 2 >= footer_top) next              # page numbers live in the bottom margin (judged by the run's middle: a footer box may start a few points above the margin line)
-  t = norm1($7)
+  t = leader(S, norm1($7))
   if (t == "") next
   nruns++
   RBEG[nruns] = length(S) + 1; RROW[nruns] = rr
