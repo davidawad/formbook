@@ -2,6 +2,8 @@
 
 Alias `gand`. Scope: civil complaints and motion briefs. Verified against the Local Rules of the United States District Court for the Northern District of Georgia (PDF "NDGARulesCV", the civil rules as posted) and the Federal Rules of Civil Procedure (as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Typeface note: LR 5.1(C) approves four typefaces with minimum sizes: Times New Roman at least 14 point, Courier New at least 12 point, Century Schoolbook at least 13 point, or Book Antiqua at least 13 point. The repo default eval (12 pt) is weaker than the Times New Roman rule, so the eval must state the size for the typeface chosen.
 
 ## Sources
