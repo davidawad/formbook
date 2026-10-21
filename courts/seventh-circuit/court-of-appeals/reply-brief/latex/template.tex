@@ -1,14 +1,16 @@
 % U.S. Court of Appeals for the Seventh Circuit: appellant's opening brief (LaTeX engine).
 %
-% Matches the typst template (../typst/ca7-opening-brief.typ) in the mandated form: Liberation Serif 12 pt
+% Matches the typst template (../typst/ca7-opening-brief.typ) in the mandated form: Times (newtx) 12 pt
 % text, 11 pt footnotes, double spacing (27.7 pt baseline pitch), one-inch margins, no hyphenation, left
 % alignment. The cover, tables, certificates and the signature block are built by ca7-opening-brief.lua
 % from the YAML frontmatter; this file holds the page setup and the macros that filter emits.
-% Fonts come only from the vendored directory (pandoc variable fontdir): no system fonts.
+% Compiled with stock pdflatex: the fonts are TeX Live packages (no repo-local file, no system font).
 \documentclass[12pt,letterpaper]{extarticle}
-\usepackage{fontspec}
 % FRAP 32(a)(5)(A) and Cir. R. 32(b): proportionally spaced serif; Times New Roman substitute per docs/FONTS.md.
-\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
+\usepackage[T1]{fontenc}
+% Times: newtxtext/newtxmath ship with every TeX Live, so the generated .tex compiles with stock pdflatex and no
+% repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman.
+\usepackage{newtxtext,newtxmath}
 \usepackage[letterpaper,margin=1in,footskip=0.45in]{geometry}
 \usepackage{needspace}
 \usepackage{booktabs,longtable}

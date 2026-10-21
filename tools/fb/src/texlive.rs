@@ -18,7 +18,9 @@ const INSTALLER_SHA512: &str = "a307d7d11bcbd1f054ad0b0d476f7f12bc1a40d07445020e
 
 /// Packages beyond scheme-basic, each with a file that proves it is installed. newtx and its dependencies give
 /// the Times faces (newtxtext, newtxmath); tex-gyre gives TeX Gyre Schola (tgschola, the Century face of the scotus
-/// and cadc templates); the rest are what the latex templates load (fb-595.45, fb-595.47).
+/// and cadc templates, and the TS1 symbols of newtx such as the pilcrow); ebgaramond and gelasio give the faces of
+/// the two ca8 briefs that declare those families; the rest are what the latex templates load (fb-595.45, fb-595.47,
+/// fb-595.48, fb-595.49).
 pub const PACKAGES: &[(&str, &str)] = &[
     ("newtx", "newtxtext.sty"),
     ("fontaxes", "fontaxes.sty"),
@@ -40,6 +42,9 @@ pub const PACKAGES: &[(&str, &str)] = &[
     ("ragged2e", "ragged2e.sty"),
     ("setspace", "setspace.sty"),
     ("titlesec", "titletoc.sty"),
+    ("ebgaramond", "ebgaramond.sty"),
+    ("gelasio", "gelasio.sty"),
+    ("fp", "fp.sty"),
 ];
 
 /// $FORMBOOK_HOME, default $HOME/.local/share/formbook.

@@ -303,7 +303,7 @@ function Pandoc(doc)
     '\\par\\addvspace{1em}' ..
     'I further certify that this brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and ' ..
     'the type-style requirements of Fed. R. App. P. 32(a)(6), as modified by Cir. R. 32(b). This brief has been ' ..
-    'prepared in a proportionally spaced typeface using LaTeX in Liberation Serif ' .. CONFIG.cert_sizes ..
+    'prepared in a proportionally spaced typeface using LaTeX in Times New Roman ' .. CONFIG.cert_sizes ..
     ' font for the body text and 11-point font for the footnotes.\\endgroup')
   back[#back + 1] = raw(form_sig_line(meta))
   if svc ~= nil and svc.certificate then

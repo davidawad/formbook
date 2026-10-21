@@ -57,8 +57,22 @@ local function trim(s)
   return t
 end
 
+-- A word holding a URL may break after / . ? = & _ - (typst breaks URLs too); unbroken, LaTeX would run a long URL
+-- into the right margin. The breaks are \allowbreak, so the text is unchanged.
+local function url_breaks(el)
+  if not el.text:match("https?://") then return nil end
+  local out = pandoc.List()
+  for seg in el.text:gmatch("[^/.?=&_%-]*[/.?=&_%-]*") do
+    if seg ~= "" then
+      if #out > 0 then out:insert(pandoc.RawInline("latex", "\\allowbreak{}")) end
+      out:insert(pandoc.Str(seg))
+    end
+  end
+  return out
+end
+
 local function latex_of(blocks)
-  return trim(pandoc.write(pandoc.Pandoc(blocks), "latex"))
+  return trim(pandoc.write(pandoc.Pandoc(blocks):walk({ Str = url_breaks }), "latex"))
 end
 
 -- A metadata value (markdown inlines or blocks, or a plain string) as LaTeX.
@@ -444,6 +458,6 @@ function Pandoc(doc)
     for _, b in ipairs(cites(addendum)) do result[#result + 1] = b end
   end
 
-  doc.blocks = result
+  doc.blocks = pandoc.Pandoc(result):walk({ Str = url_breaks }).blocks
   return doc
 end
