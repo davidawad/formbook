@@ -2,6 +2,8 @@
 
 Alias `alsb`. Scope: adversary-proceeding complaints (`adversary-complaint`). Verified against the Federal Rules of Bankruptcy Procedure (Dec. 1, 2024 edition as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Local rules not retrieved: https://www.alsb.uscourts.gov/sites/alsb/files/ALSB%20Local%20Rules%207-1-2026.pdf returned HTTP 200 but has no text layer, and OCR is not available on this box. The older local-rules PDFs on the same site (effective 2009, 2020, and 2023 editions) are superseded and were not used. Rows below cover the national rules only; the local rules must be read before any SOUTHERN-DISTRICT-specific row is added.
 
 ## Sources
