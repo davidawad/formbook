@@ -1,9 +1,8 @@
 ---
-# Sample 1 of 1. Transcribed from the filed exemplar (usage/FILED-EXAMPLE-complaint.pdf).
-# Full text of the 8-page complaint: caption, title, the allegations under their headings (paragraph numbers are
-# not transcribed: the template numbers the allegations, Fed. R. Civ. P. 10(b)), the prayer for relief as lettered
-# items, the jury demand and the signature block. Italics and the ’-style apostrophes of the filing are kept as in
-# the text layer. Footnote 1 is kept. See ../README.md for the meaning of every field.
+# Complete transcription of usage/FILED-EXAMPLE-complaint.pdf (8 pages): caption, title, lead-in, all 21
+# allegations under their headings (paragraph numbers come from the template, Fed. R. Civ. P. 10(b)), footnote 1,
+# the prayer as lettered items, the jury demand and the full signature block. Italics and bold as filed.
+# Left out: the CM/ECF header line (masked by fb); the heading underlines (template draws bold caps only).
 case_number: ""
 caption:
   parties:
@@ -12,7 +11,7 @@ caption:
         - "BOSTON SCIENTIFIC MEDICAL DEVICE LIMITED,"
       designation: "Plaintiffs,"
     - names:
-        - "ATRAVERSE MEDICAL, INC.,"
+        - "ATRAVERSE MEDICAL, INC."
       designation: "Defendant."
 title: "COMPLAINT FOR PATENT INFRINGEMENT"
 jury_demand: true
@@ -20,9 +19,9 @@ lead_in: "Plaintiffs Boston Scientific Corporation (“BSC”) and Boston Scient
 date: "October 7, 2026"
 signature:
   firm:
-    - "FISH & RICHARDSON P.C."
+    - "**FISH & RICHARDSON P.C.**"
   lines:
-    - "/s/ Nitika Gupta Fiorella"
+    - "*/s/ Nitika Gupta Fiorella*"
     - "Martina Tyreus Hufnal (No. 4771)"
     - "Douglas E. McCann (No. 3852)"
     - "Nitika Gupta Fiorella (No. 5898)"
@@ -35,7 +34,7 @@ signature:
     - ""
     - "Todd Miller (*pro hac vice* forthcoming)"
     - "Tyler Train (*pro hac vice* forthcoming)"
-    - "FISH & RICHARDSON P.C."
+    - "**FISH & RICHARDSON P.C.**"
     - "12860 El Camino Real, Suite 400"
     - "San Diego, CA 92130"
     - "(858) 678-4342"
@@ -44,7 +43,7 @@ signature:
     - "Sarah Jack (*pro hac vice* forthcoming)"
     - "Alexander Rafferty (*pro hac vice* forthcoming)"
     - "Kellie C. Van Beck (*pro hac vice* forthcoming)"
-    - "FISH & RICHARDSON P.C."
+    - "**FISH & RICHARDSON P.C.**"
     - "60 South 6th Street, Suite 3200"
     - "Minneapolis, MN 55402"
     - "(612) 638-5747"
@@ -52,15 +51,15 @@ signature:
     - "vanbeck@fr.com"
     - ""
     - "Meghana Thadani (*pro hac vice* forthcoming)"
-    - "FISH & RICHARDSON P.C."
+    - "**FISH & RICHARDSON P.C.**"
     - "7 Times Square, 20th Floor"
     - "New York, NY 10036"
     - "(212) 641-2215"
     - "thadani@fr.com"
 attorneys_for:
   - "*Attorneys for Plaintiffs*"
-  - "Boston Scientific Corporation and"
-  - "Boston Scientific Medical Device Limited"
+  - "*Boston Scientific Corporation and*"
+  - "*Boston Scientific Medical Device Limited*"
 ---
 
 
@@ -82,7 +81,7 @@ Defendant Atraverse is an entity incorporated in the state of Delaware and havin
 
 # JURISDICTION AND VENUE
 
-This is an action for patent infringement arising under the patent laws of the United States, 35 U.S.C. §§ 100 et seq. This Court has subject matter jurisdiction pursuant to 28 U.S.C. §§ 1331 and 1338(a).
+This is an action for patent infringement arising under the patent laws of the United States, 35 U.S.C. §§ 100 *et seq.* This Court has subject matter jurisdiction pursuant to 28 U.S.C. §§ 1331 and 1338(a).
 
 This Court has personal jurisdiction over Atraverse because Atraverse is incorporated in the state of Delaware.
 
@@ -106,9 +105,9 @@ Boston Scientific re-alleges each of the foregoing paragraphs as if fully set fo
 
 Upon information and belief, Atraverse has directly infringed one or more claims of the ’955 Patent, including at least claims 1 and 22, literally and/or under the doctrine of equivalents, by or through making, using, importing, offering for sale, and/or selling its HOTWIRE™. Attached to this Complaint as Exhibit B is a detailed claim chart, the entirety of which is incorporated herein by reference, explaining how the HOTWIRE™ meets each claim limitation of at least claims 1 and 22 of the ’955 Patent.
 
-Upon information and belief, Atraverse has indirectly infringed at least claims 1 and 22 of the ’955 Patent by, among other things, actively inducing the direct infringement of others, such as physicians using the HOTWIRE™. For example, Atraverse instructs and encourages physicians on the use of the HOTWIRE™ for transseptal procedures. See Ex. B at 12 (Mr. Slump explaining, “instead of mechanically advancing your way across the septum, you just press the button, use a little blast of radiofrequency energy and/or electrocautery if you will, denature the tissue and gently advance across.”). Upon information and belief, Atraverse knew that the acts it induced constitute patent infringement.
+Upon information and belief, Atraverse has indirectly infringed at least claims 1 and 22 of the ’955 Patent by, among other things, actively inducing the direct infringement of others, such as physicians using the HOTWIRE™. For example, Atraverse instructs and encourages physicians on the use of the HOTWIRE™ for transseptal procedures. *See* Ex. B at 12 (Mr. Slump explaining, “instead of mechanically advancing your way across the septum, you just press the button, use a little blast of radiofrequency energy and/or electrocautery if you will, denature the tissue and gently advance across.”). Upon information and belief, Atraverse knew that the acts it induced constitute patent infringement.
 
-Upon information and belief, Atraverse has been aware of the ’955 Patent since at least its issuance on September 15, 2026. On August 18, 2025, Boston Scientific filed its initial complaint against Atraverse asserting U.S. Patent No. 11,998,238 (the “’238 Patent”), which is the great-great-grandparent of the ’955 Patent. Complaint, Aug. 18, 2025, Boston Scientific Corp. v. Atraverse Medical, Inc., C.A. No. 25-cv-01035-JLH (D. Del.); see also Third Amended Complaint, June 18, 2026, Boston Scientific Corp. v. Atraverse Medical, Inc., C.A. No. 25-cv-01035-JLH (D. Del.) (including allegations of infringement of patents within the same family as the ’955 Patent: the ’238 Patent, U.S. Patent No. 12,433,639 (the “’639 Patent”), U.S. Patent No. 12,599,406 (the “’406 Patent”), U.S. Patent No. 12,636,040 (the “’040 Patent”), and U.S. Patent No. 12,653,576 (the “’576 Patent”)). Boston Scientific followed its initial complaint by sending Mr. Slump a cease and desist letter on August 20, 2025, charging Atraverse with infringement of the ’238 Patent and informing Atraverse that the HOTWIRE™ “will also infringe Boston Scientific’s forthcoming patent based on the currently allowed claims of the ’196 application.”[^ap196] The ’196 application later issued as the ’639 Patent, which is the grandparent of the ’955 Patent. Additionally, Mr. Slump explained during his LSI Europe presentation in September 2024: “Importantly, it’s worth noting that there was a first mover in this space, Baylis Medical.” The accompanying slide from Atraverse’s presentation also acknowledged: “Baylis acquired by Boston Scientific.” Further, Atraverse cited U.S. Patent No. 10,368,911, to which the ’955 Patent claims priority through a chain of continuation applications, during prosecution of its own U.S. Patent No. 12,343,074 in March 2024. In addition, Boston Scientific noted during the January 12, 2026, Scheduling Conference in C.A. No. 25-cv-01035-JLH that it anticipated asserting additional patents against Atraverse that could issue from pending applications in the patent family.
+Upon information and belief, Atraverse has been aware of the ’955 Patent since at least its issuance on September 15, 2026. On August 18, 2025, Boston Scientific filed its initial complaint against Atraverse asserting U.S. Patent No. 11,998,238 (the “’238 Patent”), which is the great-great-grandparent of the ’955 Patent. Complaint, Aug. 18, 2025, *Boston Scientific Corp. v. Atraverse Medical, Inc.*, C.A. No. 25-cv-01035-JLH (D. Del.); *see also* Third Amended Complaint, June 18, 2026, *Boston Scientific Corp. v. Atraverse Medical, Inc.*, C.A. No. 25-cv-01035-JLH (D. Del.) (including allegations of infringement of patents within the same family as the ’955 Patent: the ’238 Patent, U.S. Patent No. 12,433,639 (the “’639 Patent”), U.S. Patent No. 12,599,406 (the “’406 Patent”), U.S. Patent No. 12,636,040 (the “’040 Patent”), and U.S. Patent No. 12,653,576 (the “’576 Patent”)). Boston Scientific followed its initial complaint by sending Mr. Slump a cease and desist letter on August 20, 2025, charging Atraverse with infringement of the ’238 Patent and informing Atraverse that the HOTWIRE™ “will also infringe Boston Scientific’s forthcoming patent based on the currently allowed claims of the ’196 application.”[^ap196] The ’196 application later issued as the ’639 Patent, which is the grandparent of the ’955 Patent. Additionally, Mr. Slump explained during his LSI Europe presentation in September 2024: “Importantly, it’s worth noting that there was a first mover in this space, Baylis Medical.” The accompanying slide from Atraverse’s presentation also acknowledged: “Baylis acquired by Boston Scientific.” Further, Atraverse cited U.S. Patent No. 10,368,911, to which the ’955 Patent claims priority through a chain of continuation applications, during prosecution of its own U.S. Patent No. 12,343,074 in March 2024. In addition, Boston Scientific noted during the January 12, 2026, Scheduling Conference in C.A. No. 25-cv-01035-JLH that it anticipated asserting additional patents against Atraverse that could issue from pending applications in the patent family.
 
 On September 17, 2026, counsel for Boston Scientific notified counsel for Atraverse that the ’955 Patent had issued on September 15, 2026, and provided a copy of the issued patent. At least as of the time of trial, Atraverse will have known and intended that its continued actions would actively induce and contribute to actual infringement of at least claims 1 and 22 of the ’955 Patent.
 
