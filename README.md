@@ -8,8 +8,10 @@ formbook is an open collection of court-filing templates, one folder per court a
 
 Every template is checked against public record: each folder's `usage/` carries a real filed exemplar PDF (`FILED-EXAMPLE-*.pdf`, with its source URL in `SOURCE.md`), a markdown input (`INPUT-*.md`) and our rendered output PDF (`OUTPUT-*.typst.pdf`). `just overlay <folder>` lays our render over the filed exemplar as a red/blue overlay PDF (generated on demand into the gitignored `.overlay/`, not committed). As of this checkout:
 
-- 479 folders have a Typst template (`typst/main.typ`), across 233 courts (federal, state, bankruptcy, and the U.S. Supreme Court).
-- 453 folders have at least one filed exemplar PDF (558 PDFs in all).
+- 492 folders have a Typst template (`typst/main.typ`), across 376 courts (federal, state, bankruptcy, and the U.S. Supreme Court).
+- 614 folders have at least one filed exemplar PDF (1,528 PDFs in all).
+- **v0.2.0 status.** All 224 federal courts (including bankruptcy and the Supreme Court) are *up for review*: each has a `rules.md` written from fetched primary sources, and every doc folder under it passes the default eval in `data/checks-default.yaml`. Renders are pinned (typst 0.15.1, Times New Roman 2.82). The 152 state courts are in progress; none is up for review yet. 4 California superior-court folders currently fail the default content check.
+- **"Up for review" means machine-checked, not human-reviewed.** No court is marked `done`; that status is set by hand, and no court has been human-verified yet.
 - More pictures, and the command that regenerates each: [docs/showcase.md](docs/showcase.md). Per-court progress is in the [index](#index) at the bottom.
 
 These templates are not legal advice and do not check your arguments or citations. Verify every output against the court's current rules before you file; the court index below marks what is finished and what is still in progress.
@@ -119,7 +121,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The First Circuit](courts/first-circuit/bankruptcy-appellate-panel) | `bap1` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The First Circuit](courts/first-circuit/bankruptcy-appellate-panel) | `bap1` | up for review | — | — | — | 14 |
 | [Court of Appeals for the First Circuit](courts/first-circuit/court-of-appeals) | `ca1` | up for review | — | — | — | 14 |
 
 ### Maine
@@ -451,7 +453,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The Eighth Circuit](courts/eighth-circuit/bankruptcy-appellate-panel) | `bap8` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The Eighth Circuit](courts/eighth-circuit/bankruptcy-appellate-panel) | `bap8` | up for review | — | — | — | 14 |
 | [Court of Appeals for the Eighth Circuit](courts/eighth-circuit/court-of-appeals) | `ca8` | up for review | — | — | — | 14 |
 
 ### Arkansas
@@ -530,7 +532,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](courts/ninth-circuit/bankruptcy-appellate-panel) | `bap9` | up for review | — | — | — | 14 |
-| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | pass | built | 86 |
+| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | pass | pass | 100 |
 
 ### Alaska
 
@@ -809,19 +811,19 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 16.5% |
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
-| First Circuit | 20 | 0 | 11 | 8 | 1 | 0.0% | 55.0% | 0 | 0 | 0 | 13.3% |
+| First Circuit | 20 | 0 | 12 | 7 | 1 | 0.0% | 60.0% | 0 | 0 | 0 | 13.3% |
 | Second Circuit | 19 | 0 | 13 | 6 | 0 | 0.0% | 68.4% | 0 | 0 | 0 | 14.0% |
 | Third Circuit | 18 | 0 | 13 | 5 | 0 | 0.0% | 72.2% | 0 | 0 | 0 | 14.0% |
 | Fourth Circuit | 29 | 0 | 19 | 10 | 0 | 0.0% | 65.5% | 0 | 0 | 0 | 14.0% |
 | Fifth Circuit | 26 | 0 | 19 | 7 | 0 | 0.0% | 73.0% | 0 | 0 | 0 | 14.0% |
 | Sixth Circuit | 29 | 0 | 20 | 9 | 0 | 0.0% | 68.9% | 0 | 0 | 0 | 14.0% |
 | Seventh Circuit | 21 | 0 | 15 | 6 | 0 | 0.0% | 71.4% | 0 | 0 | 0 | 14.0% |
-| Eighth Circuit | 38 | 0 | 21 | 17 | 0 | 0.0% | 55.2% | 0 | 0 | 0 | 14.0% |
-| Ninth Circuit | 61 | 0 | 32 | 27 | 2 | 0.0% | 52.4% | 1 | 1 | 0 | 13.8% |
+| Eighth Circuit | 38 | 0 | 22 | 16 | 0 | 0.0% | 57.8% | 0 | 0 | 0 | 14.0% |
+| Ninth Circuit | 61 | 0 | 32 | 27 | 2 | 0.0% | 52.4% | 1 | 1 | 1 | 14.0% |
 | Tenth Circuit | 31 | 0 | 19 | 12 | 0 | 0.0% | 61.2% | 0 | 0 | 0 | 13.5% |
 | Eleventh Circuit | 32 | 0 | 19 | 13 | 0 | 0.0% | 59.3% | 0 | 0 | 0 | 14.0% |
 | D.C. Circuit | 4 | 0 | 3 | 1 | 0 | 0.0% | 75.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 222 | 130 | 24 | 0.0% | 59.0% | 1 | 1 | 0 | 12.9% |
+| **Total** | 376 | 0 | 224 | 128 | 24 | 0.0% | 59.5% | 1 | 1 | 1 | 13.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -832,17 +834,17 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Federal Circuit and feeder courts | 14 | 14 | 14 | 14 | 14 | 14 | 100.0% | 14 |
 | Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 12 |
 | National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 6 |
-| First Circuit | 26 | 26 | 26 | 26 | 26 | 26 | 100.0% | 23 |
+| First Circuit | 26 | 26 | 26 | 26 | 26 | 26 | 100.0% | 26 |
 | Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 32 |
 | Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 27 |
 | Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 39 |
 | Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 46 |
 | Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 42 |
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 31 |
-| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 44 |
-| Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 72 |
+| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 46 |
+| Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 68 |
 | Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 39 |
 | Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 48 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| **Total** | 492 | 492 | 492 | 492 | 484 | 484 | 98.3% | 487 |
+| **Total** | 492 | 492 | 492 | 492 | 484 | 484 | 98.3% | 488 |
 <!-- tracker:end -->

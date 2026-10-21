@@ -23,7 +23,7 @@ Courts under `courts` (346).
 | [United States Foreign Intelligence Surveillance Court of Review](national/foreign-intelligence-surveillance-court-of-review) | `fiscr` | up for review | — | — | — | 14 |
 | [United States Judicial Panel on Multidistrict Litigation](national/judicial-panel-on-multidistrict-litigation) | `jpml` | up for review | — | — | — | 14 |
 | [United States Tax Court](national/tax-court) | `tax` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Appellate Panel of The First Circuit](first-circuit/bankruptcy-appellate-panel) | `bap1` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The First Circuit](first-circuit/bankruptcy-appellate-panel) | `bap1` | up for review | — | — | — | 14 |
 | [Court of Appeals for the First Circuit](first-circuit/court-of-appeals) | `ca1` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Maine](first-circuit/maine/federal/bankruptcy-district) | `meb` | up for review | — | — | — | 14 |
 | [District Court, D. Maine](first-circuit/maine/federal/district) | `med` | up for review | — | — | — | 14 |
@@ -185,7 +185,7 @@ Courts under `courts` (346).
 | [Indiana Supreme Court](seventh-circuit/indiana/state/supreme-court) | `ind` | in progress | — | — | — | 14 |
 | [Court of Appeals of Wisconsin](seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | in progress | — | — | — | 14 |
 | [Wisconsin Supreme Court](seventh-circuit/wisconsin/state/supreme-court) | `wis` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Appellate Panel of The Eighth Circuit](eighth-circuit/bankruptcy-appellate-panel) | `bap8` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The Eighth Circuit](eighth-circuit/bankruptcy-appellate-panel) | `bap8` | up for review | — | — | — | 14 |
 | [Court of Appeals for the Eighth Circuit](eighth-circuit/court-of-appeals) | `ca8` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Arkansas](eighth-circuit/arkansas/federal/bankruptcy-eastern-district) | `areb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Arkansas](eighth-circuit/arkansas/federal/bankruptcy-western-district) | `arwb` | up for review | — | — | — | 14 |
@@ -224,7 +224,7 @@ Courts under `courts` (346).
 | [North Dakota Supreme Court](eighth-circuit/north-dakota/state/supreme-court) | `nd` | in progress | — | — | — | 14 |
 | [Supreme Court of South Dakota](eighth-circuit/south-dakota/state/supreme-court) | `sd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](ninth-circuit/bankruptcy-appellate-panel) | `bap9` | up for review | — | — | — | 14 |
-| [Court of Appeals for the Ninth Circuit](ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | pass | built | 86 |
+| [Court of Appeals for the Ninth Circuit](ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | pass | pass | 100 |
 | [United States Bankruptcy Court, D. Alaska](ninth-circuit/alaska/federal/bankruptcy-district) | `akb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Alaska](ninth-circuit/alaska/federal/district) | `akd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Arizona](ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | up for review | — | — | — | 14 |
