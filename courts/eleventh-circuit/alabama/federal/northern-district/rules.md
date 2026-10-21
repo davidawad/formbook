@@ -2,6 +2,8 @@
 
 Alias `alnd`. Scope: civil complaints and motion briefs. Verified against the Local Rules of the United States District Court for the Northern District of Alabama (effective December 4, 2019, "Revised 12-04-2019" PDF) and the Federal Rules of Civil Procedure (as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Note: the local rules state no typeface, point size, margin, or brief page limit. The repo default eval (1 in margins, 12 pt) applies, and no page limit is set. The local rules list no general order on paper format that was retrieved; check the court's general orders before finalizing a template.
 
 ## Sources
