@@ -2,6 +2,8 @@
 
 Alias `gasb`. Scope: adversary-proceeding complaints and motion briefs. Verified against the Federal Rules of Bankruptcy Procedure (Dec. 1, 2024 edition as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Edition caveat: the local rules PDF on the court's site (https://www.gasb.uscourts.gov/sites/gasb/files/GASB-localRules.pdf, HTTP 200) is headed "Local Bankruptcy Rules, Southern District of Georgia – current as of May 2017". The court's news page (https://www.gasb.uscourts.gov/news/revised-local-rules-effective-october-7-2026, HTTP 200) announces revised local rules effective October 7, 2026, but no PDF of them was linked there or located. The 2017 text is therefore not treated as current, and this file records no local-rule row. Locate the October 7, 2026 edition before adding any court-specific row.
 
 ## Sources
