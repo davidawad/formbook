@@ -52,12 +52,12 @@ fn judge(x: &Cross, method: &str) -> Option<Verdict> {
         "cross_engine_breaks" => verdict(
             x.breaks_equal(),
             format!(
-                "{}/{} typst lines break after the same word ({:.1}%), first differing {}; largest edge drift of an identical line {:.2} pt",
+                "{}/{} typst lines break after the same word ({:.1}%), first differing {}; largest width drift of an identical line {:.2} pt",
                 x.same,
                 x.lines,
                 x.pct(),
                 x.first_text(),
-                x.drift
+                x.width_drift()
             ),
             &x.first,
         ),

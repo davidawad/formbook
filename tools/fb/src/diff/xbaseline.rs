@@ -33,7 +33,8 @@ pub struct Row {
     pub lines_same: usize,
     pub pct_same: f64,
     pub first_differing: String,
-    pub drift_max_pt: f64,
+    /// Largest width difference of a line both engines break alike (glyph-advance drift).
+    pub width_drift_pt: f64,
     /// Where the other engine's PDF came from: "committed", "converted" (from the committed .docx), or why
     /// it was not measured.
     pub source: String,
@@ -119,7 +120,7 @@ fn row(j: &Job, c: Option<&Cross>, source: &str) -> Row {
         lines_same: c0.same,
         pct_same: (c0.pct() * 10.0).round() / 10.0,
         first_differing: c.map_or("-".into(), Cross::first_text),
-        drift_max_pt: (c0.drift * 100.0).round() / 100.0,
+        width_drift_pt: (c0.width_drift() * 100.0).round() / 100.0,
         source: source.into(),
     }
 }

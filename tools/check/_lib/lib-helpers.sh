@@ -83,8 +83,9 @@ toa_run() {
     -v footer_top="$FTOP" -f "$CHK/leader-entries.awk" "$W/runs.tsv" > "$W/toa.got"
   # shellcheck disable=SC2016
   TOA_OUT=$($AWKU -F'\t' -f "$CHK/norm.awk" -v expf="$W/toa.expect" -e '
-    BEGIN { while ((getline l < expf) > 0) { split(l, a, "\t"); want[a[1]] = a[5]; keyof[a[1]] = a[2]; kind[a[1]] = a[3]; srt[a[1]] = a[4]; nexp++ } }
-    { k = norm1($1); pg = $2; gsub(/ /, "", pg)
+    # trailing periods of a title are not compared: a leader set right after "2020)." swallows the period
+    BEGIN { while ((getline l < expf) > 0) { split(l, a, "\t"); sub(/[.]+$/, "", a[1]); want[a[1]] = a[5]; keyof[a[1]] = a[2]; kind[a[1]] = a[3]; srt[a[1]] = a[4]; nexp++ } }
+    { k = norm1($1); sub(/[.]+$/, "", k); pg = $2; gsub(/ /, "", pg)
       if (!(k in want)) { print "STRAY\t" $1; next }
       got[k] = 1
       if (pg != want[k]) print "PAGES\t" keyof[k] "\tTOA says " pg "\tthe citations are on " want[k]

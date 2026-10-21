@@ -17,7 +17,7 @@ local TOC_DEPTH = 4    -- heading levels listed in the table of contents (typst:
 local PASSIM = 7       -- an authority cited on this many pages or more is "passim" (typst: passim-threshold)
 local TAB = 720        -- half an inch (para-indent, label width), in twips
 local TEXT_W = 9360    -- the text width, 6.5 in
-local TAB_R = 9340     -- the right tab of the tables: 1 pt inside the margin (a glyph may overhang its advance)
+local TAB_R = 9360     -- the right tab of the tables: at the margin (typst sets the page numbers flush with it)
 local PNUM_TOC = 720   -- the column the contents' page numbers keep to themselves (latex: \ca@rtoc, 36 bp)
 local PNUM_TOA = 1120  -- the column of the authorities' page lists (latex: \ca@rtoa, 56 bp)
 local HALF_W = 4680    -- the middle of the text: designations, counsel and signature blocks start here
@@ -179,6 +179,9 @@ local LINES = "<w:keepLines/>"
 local BREAK = "<w:pageBreakBefore/>"
 -- A line break inside a paragraph: only the table of authorities uses one, after a case name (typst: linebreak()).
 local BR = "<w:r><w:br/></w:r>"
+-- Before the leader tab of a table row: three no-break spaces, so the leader is never shorter than that and the
+-- last word takes them along when it wraps (typst: h(0.75em), latex: \nobreak\hskip0.75em).
+local LEAD = "\u{00A0}\u{00A0}\u{00A0}\t"
 
 local function style(id)
   return '<w:pStyle w:val="' .. id .. '"/>'
@@ -222,7 +225,7 @@ local function sect_pr(footer, fmt, start)
   if fmt then pg = '<w:pgNumType w:fmt="' .. fmt .. '" w:start="' .. (start or 1) .. '"/>' end
   return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/>'
     .. '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" '
-    .. 'w:header="720" w:footer="576" w:gutter="0"/>' .. pg .. "</w:sectPr>"
+    .. 'w:header="720" w:footer="676" w:gutter="0"/>' .. pg .. "</w:sectPr>"
 end
 
 -- The paragraph that ends a section and carries its properties.
@@ -372,7 +375,7 @@ local function toc_row(item)
     lead = runs(item.label .. "\t", {})
   end
   return para({ LINES, dot_tabs(), spacing(item.level == 1 and 168 or 98, 0), ind(left, hanging, nil, PNUM_TOC) },
-    lead .. runs(title .. "\t" .. label_of(item.id), {}))
+    lead .. runs(title .. LEAD .. label_of(item.id), {}))
 end
 
 -- ---------------------------------------------------------------------------
@@ -449,7 +452,7 @@ local function toa_rows(authorities)
           name = inl(m.a.name, { i = g[1] == "case" }) .. runs(",", {}) .. BR
         end
         out[#out + 1] = para({ LINES, dot_tabs(), spacing(196, 0), ind(504, 504, nil, math.max(PNUM_TOA, list_w)) },
-          name .. inl(m.a.cite, {}) .. runs("\t", {}) .. list)
+          name .. inl(m.a.cite, {}) .. runs(LEAD, {}) .. list)
       end
     end
   end
@@ -522,15 +525,15 @@ local function cover(meta)
   -- counsel (FRAP 32(a)(2)(F)): name, office address and telephone number
   for gi, g in ipairs(counsel) do
     local first = true
-    local function cl(body)
-      add(para({ LINES, spacing(first and (gi == 1 and gap or 100) or 0, 0), ind(HALF_W) }, body))
+    local function cl(body, first_ind)
+      add(para({ LINES, spacing(first and (gi == 1 and gap or 100) or 0, 0), ind(HALF_W, nil, first_ind) }, body))
       first = false
     end
     for _, n in ipairs(g.names or {}) do cl(inl(n, {})) end
     local ls = {}
     for _, l in ipairs(g.lines or {}) do ls[#ls + 1] = l end
     if g.phone then ls[#ls + 1] = g.phone elseif gi == #counsel then ls[#ls + 1] = need_meta(meta, "phone") end
-    for _, l in ipairs(ls) do cl(inl(l, { i = true })) end
+    for _, l in ipairs(ls) do cl(inl(l, { i = true }), 140) end -- typst: half an em in
   end
   add(rule("double", gap))
   local blocks = {}
@@ -822,7 +825,10 @@ function Pandoc(doc)
         headings[#headings + 1] = { id = id, level = b.level, label = b.level > 1 and lab or nil,
           title = stringify(b.content), step = point and 0 or step(b.level, in_arg) }
       end
-      body[#body + 1] = raw(heading_xml(b.level, b.content, lab, in_arg))
+      local x = heading_xml(b.level, b.content, lab, in_arg)
+      -- the body opens a section (a new page): Word keeps space above there, typst drops it at the top of a page
+      if #body == 0 then x = x:gsub('w:before="%d+"', 'w:before="0"', 1) end
+      body[#body + 1] = raw(x)
     else
       scan_blocks({ b }, false)
       for _, x in ipairs(list_items(b)) do body[#body + 1] = x end
@@ -871,8 +877,13 @@ function Pandoc(doc)
           add_items[#add_items + 1] = { id = id, level = 2, title = stringify(b.content) }
           need(id, "B", stringify(b.content), next_text(add_in, i))
         end
-        add_body[#add_body + 1] = raw(para({ hstyle(math.min(b.level, 5)), KEEP, spacing(440, 360), ind(0, nil, 0) },
-          inl(b.content, { b = true })))
+        -- typst: the addendum's headings are unnumbered: a section heading at level 1, a plain one below
+        if b.level == 1 then
+          add_body[#add_body + 1] = raw(section_heading(stringify(b.content), false))
+        else
+          add_body[#add_body + 1] = raw(para({ hstyle(math.min(b.level, 5)), KEEP,
+            spacing(SPACE.plain[1], SPACE.plain[2]), ind(0, nil, 0) }, inl(b.content, { b = true })))
+        end
       else
         scan_blocks({ b }, false)
         for _, x in ipairs(list_items(b)) do add_body[#add_body + 1] = x end
@@ -900,7 +911,7 @@ function Pandoc(doc)
   -- Section 2: the front matter (i, ii ...): the table of contents, the table of authorities
   -- typst toc-section: the title (a section heading that is not itself listed) and "Page" over the page column
   add(raw(section_heading("Table of Contents", true, false, true)))
-  add(raw(para({ KEEP, spacing(84, 0), ind(0, nil, nil, 20), jc("right") }, runs("Page", { b = true, u = true }))))
+  add(raw(para({ KEEP, spacing(84, 0), jc("right") }, runs("Page", { b = true, u = true }))))
   local items = { { id = "S:toa", level = 1, title = "Table of Authorities" } }
   for _, h in ipairs(headings) do items[#items + 1] = h end
   items[#items + 1] = { id = "H:related", level = 1, title = "Statement of Related Cases" }
@@ -925,11 +936,13 @@ function Pandoc(doc)
     add(raw(section_heading("Addendum", true)))
     add(raw(section_heading("Table of Contents", false, false, true)))
     for _, it in ipairs(add_items) do
-      add(raw(para({ LINES, dot_tabs(), spacing(98, 0), ind(0, nil, nil, PNUM_TOC) }, runs(it.title .. "\t" .. label_of(it.id), {}))))
+      add(raw(para({ LINES, dot_tabs(), spacing(98, 0), ind(0, nil, nil, PNUM_TOC) }, runs(it.title .. LEAD .. label_of(it.id), {}))))
     end
     -- the items start on the page after the addendum's contents (typst and latex do the same)
     if add_body[1] and add_body[1].t == "RawBlock" then
-      add_body[1] = raw((add_body[1].text:gsub("<w:keepLines/>", "<w:keepLines/>" .. BREAK, 1)))
+      -- Word keeps the space above a paragraph that breaks the page; typst drops it at the top of a page
+      local x = add_body[1].text:gsub("<w:keepLines/>", "<w:keepLines/>" .. BREAK, 1):gsub('w:before="%d+"', 'w:before="0"', 1)
+      add_body[1] = raw(x)
     else
       add(raw(para({ BREAK, spacing(0, 0, 20) }, "")))
     end

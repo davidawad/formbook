@@ -4,7 +4,7 @@
 //! A break that differs is a failure, never a tolerance; the only tolerance is the glyph-advance drift of
 //! a line whose breaks agree (docs/EVAL-LOOP.md, "Cross-engine gate"). Line breaks are counted by
 //! breaks.rs with the typst render in the exemplar's seat.
-use super::breaks;
+use super::breaks::{self, Pos};
 use super::content::{tokens, Tok};
 use crate::measure::Measured;
 
@@ -28,12 +28,9 @@ pub struct Cross {
     pub first_at: Option<(usize, usize)>,
     /// The first differing lines, in reference order.
     pub first: Vec<String>,
-    /// Largest left- or right-edge drift of a line that breaks identically (pt).
-    pub drift: f64,
-    /// Diagnostic, not gated: the largest baseline difference of an identical line (pt) and the first
-    /// identical line whose baseline differs by more than VSLACK.
-    pub vdrift: f64,
-    pub vfirst: Option<String>,
+    /// Where every identical line sits in the other engine against typst (breaks.rs): the width and
+    /// position drift once the breaks agree. Diagnostic: the gate compares breaks, not positions.
+    pub pos: Vec<Pos>,
 }
 
 impl Cross {
@@ -49,6 +46,19 @@ impl Cross {
             0 => 100.0,
             n => 100.0 * self.same as f64 / n as f64,
         }
+    }
+    /// Largest width difference of an identical line holding only its own words (pt): the glyph-advance
+    /// drift between the engines.
+    pub fn width_drift(&self) -> f64 {
+        self.worst(|p| p.dr - p.dl)
+            .first()
+            .map_or(0.0, |p| (p.dr - p.dl).abs())
+    }
+    /// Identical whole lines, largest |f| first.
+    pub fn worst(&self, f: impl Fn(&Pos) -> f64) -> Vec<&Pos> {
+        let mut v: Vec<&Pos> = self.pos.iter().filter(|p| p.whole).collect();
+        v.sort_by(|a, b| f(b).abs().total_cmp(&f(a).abs()));
+        v
     }
     pub fn first_text(&self) -> String {
         self.first_at
@@ -166,13 +176,7 @@ pub fn compare(reference: &Measured, other: &Measured) -> Cross {
         .take(LIST)
         .map(|(_, _, f)| f.replace("exemplar", "typst"))
         .collect();
-    c.drift = b.drift.iter().copied().fold(0.0, f64::max);
-    c.vdrift = b.vdrift.iter().map(|v| v.2.abs()).fold(0.0, f64::max);
-    c.vfirst = b
-        .vdrift
-        .iter()
-        .find(|v| v.2.abs() > VSLACK)
-        .map(|(p, l, d)| format!("p{p} line {l}: baseline {d:+.2} pt"));
+    c.pos = b.pos;
     c
 }
 
@@ -211,15 +215,29 @@ pub fn render(c: &Cross) -> String {
     for f in &c.first {
         s.push_str(&format!("  {f}\n"));
     }
-    s.push_str(&format!(
-        "drift: largest edge difference of an identical line {:.2} pt\n",
-        c.drift
-    ));
-    s.push_str(&format!(
-        "baselines (diagnostic): largest difference of an identical line {:.2} pt; first over {VSLACK} pt: {}\n",
-        c.vdrift,
-        c.vfirst.as_deref().unwrap_or("none")
-    ));
+    // diagnostics: how far the identical lines sit from typst's (the gate compares breaks only)
+    for (what, f) in [
+        ("width", (|p: &Pos| p.dr - p.dl) as fn(&Pos) -> f64),
+        ("left edge", |p: &Pos| p.dl),
+        ("baseline", |p: &Pos| p.dy),
+    ] {
+        let w = c.worst(f);
+        let over = w.iter().filter(|p| f(p).abs() > VSLACK).count();
+        s.push_str(&format!(
+            "{what} (diagnostic): largest difference {:.2} pt over {} identical lines, {over} over {VSLACK} pt\n",
+            w.first().map_or(0.0, |p| f(p).abs()),
+            w.len()
+        ));
+        for p in w.iter().take(3).filter(|p| f(p).abs() > VSLACK) {
+            let t: String = p.text.chars().take(50).collect();
+            s.push_str(&format!(
+                "  p{} line {}: {:+.2} pt  '{t}'\n",
+                p.page,
+                p.line,
+                f(p)
+            ));
+        }
+    }
     let ok = c.pages_equal() && c.ends_bad == 0 && c.breaks_equal();
     s.push_str(&format!(
         "RESULT: CROSS-ENGINE {}\n",

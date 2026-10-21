@@ -25,8 +25,9 @@
 % CA9-FORM-004 (font-family): Times. newtxtext/newtxmath ship with every TeX Live, so the generated .tex compiles
 % with stock pdflatex and no repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman.
 \usepackage{newtxtext,newtxmath}
-% CA9-FORM-001, -002: letter; 1 in margins; the page number sits in the bottom margin.
-\usepackage[letterpaper,margin=1in,headheight=0pt,headsep=0pt,footskip=0.5in]{geometry}
+% CA9-FORM-001, -002: letter; 1 in margins; the page number sits in the bottom margin, its baseline 35.2 bp below the
+% text block (where typst sets it; the Word footer is placed to match).
+\usepackage[letterpaper,margin=1in,headheight=0pt,headsep=0pt,footskip=35.2bp]{geometry}
 \usepackage{enumitem}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref} % bookmarks are written by \ca@bookmark
@@ -77,6 +78,10 @@
 \setlength{\parindent}{0.5in}
 \setlength{\parskip}{0pt}
 \pagestyle{plain}
+% The page number in the 14 bp type, single-spaced (the footer is not \normalsize, which is 14 TeX points).
+\def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
+  \def\@oddfoot{\reset@font\ca@single\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}
+\pagestyle{plain}
 
 % Lists the pandoc writer may emit, and [list-item]: the number or bullet in a half-inch box at the margin, the text
 % hanging after it, no space of its own.
@@ -87,12 +92,20 @@
   align=left, listparindent=0pt, itemindent=0pt}
 \setlist[itemize]{label=\textbullet}
 
-% Footnotes [footnote.entry]: 14 pt, single-spaced, the mark then a space (CA9-FORM-004); a 30 % rule.
+% Footnotes [footnote.entry]: 14 pt, single-spaced, the mark then a space (CA9-FORM-004), at the foot of the page:
+% 12.6 bp clear of the text, a 30 % rule, and 7 bp above each note (and between the paragraphs of one). LaTeX resets
+% \lineskip, \baselineskip and the right skip inside a footnote (\@parboxrestore): they are set back here.
 \renewcommand\footnotesize{\ca@single}
 \setlength{\footnotesep}{0pt}
 \setlength{\skip\footins}{12.6bp}
-\renewcommand\footnoterule{\kern-3pt\hrule width 0.3\textwidth height 0.5pt\kern 2.6pt}
-\renewcommand\@makefntext[1]{\noindent\textsuperscript{\@thefnmark}\hskip 0.25em #1}
+\normallineskip=0pt
+\normalbaselineskip=0pt
+\renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
+% Marks at 58 % of the type size (typst super, LibreOffice's superscript).
+\newcommand\ca@mark[1]{\raisebox{4.06bp}{\fontsize{8.12bp}{0bp}\selectfont #1}}
+\renewcommand\@makefnmark{\hbox{\normalfont\ca@mark{\@thefnmark}}}
+\renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
+  \vskip 0pt\noindent\ca@mark{\@thefnmark}\hskip 0.25em #1}
 \interfootnotelinepenalty=10000
 
 % Block quotations [quote]: indented 0.5 in both sides, single-spaced, 14 bp above, below and between their
@@ -156,7 +169,7 @@
 % has none, so the typst and docx engines set these bold. -----
 \newcommand\ca@pointhead[3]{% #1 label, #2 title, #3 the contents entry
   \par\addvspace{16.8bp}%
-  \begingroup\centering\ca@single\bfseries\leavevmode#3#1 #2\par\endgroup
+  \begingroup\centering\ca@single\bfseries\leavevmode#3#1#2\par\endgroup % the label ends in its space
   \nobreak\addvspace{14bp}}
 
 % ---- sub-headings: label in a box of width #2 at indent #1; the title hangs under the text ----------
@@ -248,7 +261,7 @@
 % \parfillskip lets the number into it). Rows are not split across pages.
 \newlength\ca@col
 \newlength\ca@w
-\newcommand\ca@leader{\nobreak\leaders\hbox{.}\hskip 0pt plus 1fill}
+\newcommand\ca@leader{\nobreak\hskip0.75em\leaders\hbox{.}\hskip 0pt plus 1fill} % at least three spaces, tied to the text
 \newcommand\ca@row[4]{% #1 space above, #2 hanging indent, #3 text, #4 page
   \par\addvspace{#1}%
   \begingroup\interlinepenalty=10000\relax
@@ -317,7 +330,7 @@
 \newcommand\ca@shortrule{\par\begingroup\centering\rule{2in}{0.7pt}\par\endgroup}
 
 % Checkbox of Form 8 / Form 17 [checkbox]: a ruled box around an X when selected, around three spaces' width when not.
-\newcommand\ca@box[1]{{\fboxsep=1bp\fboxrule=0.6bp\fbox{\ifx\relax#1\relax\hbox to 0.75em{}\else#1\fi}}}
+\newcommand\ca@box[1]{{\fboxsep=0.4bp\fboxrule=0.6bp\fbox{\ifx\relax#1\relax\hbox to 0.75em{}\else#1\fi}}}
 % [option-row]: the box in a 1.6 em column at indent \ca@optind, the text hanging after it; 11.2 bp above.
 \newlength\ca@optind \setlength{\ca@optind}{0pt}
 \newcommand\ca@optionrow[2]{% #1 checked (X or empty), #2 text

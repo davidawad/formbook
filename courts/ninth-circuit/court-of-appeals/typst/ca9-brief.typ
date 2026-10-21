@@ -216,12 +216,13 @@
 
 /// One row of the table of contents or of authorities: the text wraps before a column of width `col` kept for the
 /// page number, and a dot leader runs from the end of the text to the number on the last line (Word's layout: a
-/// right indent and a right tab beyond it). Rows are not split across pages.
+/// right indent and a right tab beyond it), at least three spaces after it. Rows are not split across pages.
 #let listing-row(target, body, page, col, hang-by, above) = {
   let row = block(width: 100%, above: above, below: 0pt, breakable: false, grid(
     columns: (1fr, col), column-gutter: 0pt,
     par(hanging-indent: hang-by, first-line-indent: 0pt, leading: 0pt, justify: false, {
       body
+      h(0.75em)   // the leader is never shorter than three spaces, and it does not leave the last word
       box(width: 1fr, repeat[.])
     }),
     align(right + bottom, page),
@@ -319,7 +320,7 @@
   block(breakable: false, above: 19.6pt, {
     set text(..edges(pitch-single))
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    align(left, pad(left: 50%, {
+    align(left, pad(left: 3.25in, {   // the right half of the 6.5 in text block
       [Respectfully submitted,]
       v(1.2em)
       signature-line(meta)
@@ -414,7 +415,10 @@
     title: plain(inl(need(meta, "brief_title"))) + ", No. " + need(meta, "case_number"),
     author: need(meta, "signature").signer,
   )
-  set page(paper: "us-letter", margin: page-margin, number-align: center, footer-descent: 30%)
+  // The page number: centered in a single-spaced line box whatever the text around it (Word's footer, LaTeX's
+  // plain page style), so it sits at the same place on every page.
+  set page(paper: "us-letter", margin: page-margin, footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
@@ -430,6 +434,8 @@
   )
   // A superscript (a footnote mark) does not make its line taller: its box is the line's own.
   show super: set text(top-edge: "baseline", bottom-edge: "baseline")
+  // Footnote marks at 58 % of the type size: LibreOffice's superscript, which the LaTeX engine sets too.
+  set super(size: 0.58em)
   set heading(numbering: none)
   set footnote.entry(
     gap: 7pt, clearance: 12.6pt, indent: 0pt,

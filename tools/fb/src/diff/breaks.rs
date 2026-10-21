@@ -7,6 +7,20 @@ use super::align;
 use super::content::{tokens, Brk, Tok};
 use crate::measure::{Line, Measured};
 
+/// An identical line's position in ours against the exemplar's (ours minus exemplar, pt).
+#[derive(Debug, Clone, PartialEq)]
+pub struct Pos {
+    pub page: usize,
+    pub line: usize,
+    /// Left edge, right edge and baseline differences.
+    pub dl: f64,
+    pub dr: f64,
+    pub dy: f64,
+    /// Both lines hold exactly the paired words (no other word on the visual line).
+    pub whole: bool,
+    pub text: String,
+}
+
 #[derive(Debug, Default, Clone, PartialEq)]
 pub struct Breaks {
     /// Exemplar lines.
@@ -31,11 +45,8 @@ pub struct Breaks {
     pub first_at: Option<(usize, usize)>,
     /// First exemplar lines whose words are not all matched in one run, in exemplar order.
     pub unmatched: Vec<String>,
-    /// Per identical line whose words map one to one: the larger of its left- and right-edge
-    /// differences (pt), the glyph-advance drift once the breaks agree.
-    pub drift: Vec<f64>,
-    /// Per identical line: its page, line and baseline difference (ours minus exemplar, pt).
-    pub vdrift: Vec<(usize, usize, f64)>,
+    /// Per identical line: where it is and how far ours sits from the exemplar's (fb diff --engines).
+    pub pos: Vec<Pos>,
 }
 
 /// Break before token `k` (a break inside a word counts as before the next one: Word does not
@@ -101,14 +112,15 @@ pub fn count(exm: &Measured, usm: &Measured, max: usize) -> Breaks {
             if same {
                 b.identical += 1;
                 if let (Some(a), Some(u)) = (line_of(exm, &ex[s]), line_of(usm, &us[js])) {
-                    b.vdrift
-                        .push((ex[s].page, ex[s].line, u.baseline - a.baseline));
-                }
-                if let (Some(a), Some(u)) = (line_of(exm, &ex[s]), line_of(usm, &us[js])) {
-                    if a.words.len() == e - s && u.words.len() == je - js {
-                        b.drift
-                            .push((a.left - u.left).abs().max((a.right - u.right).abs()));
-                    }
+                    b.pos.push(Pos {
+                        page: ex[s].page,
+                        line: ex[s].line,
+                        dl: u.left - a.left,
+                        dr: u.right - a.right,
+                        dy: u.baseline - a.baseline,
+                        whole: a.words.len() == e - s && u.words.len() == je - js,
+                        text: a.text.clone(),
+                    });
                 }
             } else if b.first.len() < max {
                 let last = ex[e - 1].t.as_str();
