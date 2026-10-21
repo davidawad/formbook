@@ -24,8 +24,8 @@ Not verified in this session: FRBP 9013 (form of a motion) and FRBP 7012(b) text
 - `typst/main.typ`: entry point; reads `usage/<id>.md`.
 - `typst/ohnb-motion-brief.typ`: template `ohnb-motion-brief(meta, body)`. The body must contain one `# MEMORANDUM` heading: the motion goes before it and the memorandum after; each part is signed.
 - `usage/`: two filed motions with memoranda: Templar (Swearingen v. Templar, adversary 21-6017) and Meddings (Harrison v. Meddings, A.P. 21-3021). Sources in `usage/SOURCE.md`.
-- `usage/INPUT-motion-brief.md`: Templar's motion and memorandum, transcribed in full (5 pages in the exemplar).
-- `usage/OUTPUT-motion-brief.typst.pdf`: our render (4 pages).
+- `usage/INPUT-motion-brief.md`: Meddings' motion, memorandum and certificate, transcribed in full from `FILED-EXAMPLE-motion-brief.pdf` (7 pages; calibration set, `data/calibration-set.json`).
+- `usage/INPUT-motion-brief-2.md`: Templar's motion and memorandum, transcribed in full from `FILED-EXAMPLE-motion-brief-2.pdf` (5 pages in the exemplar).
 - `usage/OVERLAY-motion-brief.pdf` and `.txt`: overlay against the Templar exemplar (passed explicitly; the tool's default would pick the Meddings file alphabetically).
 
 Build and check:
