@@ -34,7 +34,7 @@ signature:
     - "[counsel@example.invalid]"
 date: "[Date]"
 word_processor: "Typst 0.15.0"
-typeface: "EB Garamond"
+typeface: "Times New Roman"
 interested_parties: |
   - [Appellant name], Appellant
   - [Appellee name], Appellee

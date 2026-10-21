@@ -2,13 +2,13 @@
 
 - Court: `bap8`, United States Bankruptcy Appellate Panel for the Eighth Circuit (`courts/eighth-circuit/bankruptcy-appellate-panel/`). Court-root `typst/` and `usage/` are untouched.
 - Doc type: `reply-brief`. Appellant's reply brief, FRBP 8014(c).
-- **Exemplar: BLOCKED: no exemplar.** No public filed reply brief from this court was found after four passes (about 40 searches and probes; pass 4 on 2026-10-16 used the new route that found the answering-brief exemplar: BAP dockets are in RECAP under court id `ca8`). The searches are listed in `usage/SOURCE.md`. Nothing is stored in `usage/`.
+- **Exemplar: BLOCKED: no qualifying text PDF found.** Five search passes are recorded in `usage/SOURCE.md`. A public appellate filing confirms a reply brief was filed in BAP No. 22-6009, but the accessible copy found is a scanned, non-searchable Eighth Circuit filing, not the BAP reply PDF. Nothing is stored in `usage/`.
 - Sample: still the synthetic rule-check sample `usage/INPUT-reply-brief.md` (placeholder text, not a filing). Its first caption side now sets `v: false` (see Template changes).
-- Render: ok, `usage/OUTPUT-reply-brief.typst.pdf`, 9 pages, typst with no warnings (2026-10-16). `pdffonts`: EB Garamond only.
-- Overlay: fail. `sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief synthetic-reply-brief` exits 1, "no exemplar pdf" (2026-10-16).
-- Pages reviewed: 9 of 9 (2026-10-16).
+- Render: ok, `usage/OUTPUT-reply-brief.typst.pdf`, 9 pages, Typst 0.15.1 with no warnings (2026-10-21). `pdffonts`: Times New Roman (regular, bold, and italic; embedded).
+- Overlay: fail as expected because there is no filed exemplar. `sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief reply-brief` reports `no FILED-EXAMPLE-reply-brief.pdf` (2026-10-21).
+- Pages reviewed: all 9 output pages rasterized at 60 dpi and inspected (2026-10-21). They are synthetic, so there is no filed page comparison.
 - Status: rule-driven template plus a synthetic sample. `court.json` untouched; `status` not set.
-- Typeface: rule names no face (FRBP 8015(a)(5)(A)); kept **EB Garamond**, 14 pt.
+- Typeface: the rules require a 14-point or larger serif face but do not name one; the template uses **Times New Roman**, 14 pt, matching the filed brief's typeface.
 
 ## Template changes this run (2026-10-16)
 
@@ -47,7 +47,7 @@ Primary sources, read on 2026-10-14:
 
 ## Gate 2: page review
 
-Render of 2026-10-16, every page rasterized at 60 dpi (`pdftoppm -r 60`) and viewed. Typst printed no warnings. No reply exemplar to compare; pages were checked against the rules and against the answering-brief render.
+Render rechecked 2026-10-21 with Typst 0.15.1, every page rasterized at 60 dpi (`pdftoppm -r 60`) and inspected. Typst printed no warnings. No filed reply exemplar was available for comparison; these rows record only the synthetic sample's visible structure.
 
 | Page | Content | Result |
 |---|---|---|
@@ -61,11 +61,11 @@ Render of 2026-10-16, every page rasterized at 60 dpi (`pdftoppm -r 60`) and vie
 | 8 | Certificate of Compliance (3); 127 words | OK. |
 | 9 | Certificate of Service (4) | OK. |
 
-Pages reviewed: 9 of 9.
+Pages reviewed: 9 of 9 output pages.
 
 ## Overlay
 
-Run 2026-10-16: exits 1 ("no exemplar pdf"). No `OVERLAY-` file is written. Status: fail.
+Run 2026-10-21: exits 1 (`no FILED-EXAMPLE-reply-brief.pdf`). No overlay is written. Status: fail because the exemplar is blocked.
 
 ## Known gaps
 

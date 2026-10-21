@@ -39,7 +39,7 @@ signature:
     - "Attorneys for Appellees Steven L. & Michelle M. Swackhammer"
 date: "December 23, 2022"
 word_processor: "Microsoft Word 2019"
-typeface: "EB Garamond"
+typeface: "Times New Roman"
 preliminary: |
   # Summary of the Case
 

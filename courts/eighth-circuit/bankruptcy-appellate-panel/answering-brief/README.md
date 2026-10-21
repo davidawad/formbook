@@ -4,9 +4,9 @@
 - Doc type: `answering-brief`. Appellee's brief, FRBP 8014(b).
 - **Exemplar: yes.** `usage/FILED-EXAMPLE-answering-brief.pdf`: Appellees' Brief, *Farm Credit Services of America, PCA v. Swackhammer*, BAP No. 22-6006, filed 2022-12-23 by Robert C. Gainer (Cutler Law Firm, P.C.) for the debtor-appellees (22 pages, text PDF, Word 2021). Found 2026-10-16 in CourtListener RECAP, where BAP dockets sit under court id `ca8` (not `bap8`). Source details in `usage/SOURCE.md`.
 - **Sample: transcription.** `usage/INPUT-answering-brief.md` transcribes the whole filing: cover, summary of the case, oral-argument statement, both certifications, the full body (filing pp. 1-13, all six footnotes and the four block quotations), signature, certificates. The tables are rebuilt by the template from the headings and `toa:` links.
-- Render: ok, `usage/OUTPUT-answering-brief.typst.pdf`, 22 pages (the filing is also 22), typst with no warnings (2026-10-16). `pdffonts`: EB Garamond only.
-- Overlay: ok, `usage/OVERLAY-swackhammer-22-6006.pdf` and `.txt` (2026-10-16). Diagnostic only, see below.
-- Pages reviewed: 22 of 22 as PNG at 60 dpi (2026-10-16), compared with filing pages 1, 2, 5, 8 and 13 rendered at 50 dpi.
+- Render: ok, `usage/OUTPUT-answering-brief.typst.pdf`, 20 pages, Typst 0.15.1 with no warnings (2026-10-21). `pdffonts`: Times New Roman (regular, bold, and italic; embedded).
+- Overlay: ok, `sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/answering-brief answering-brief` (2026-10-21); writes `.overlay/courts/eighth-circuit/bankruptcy-appellate-panel/answering-brief/OVERLAY-answering-brief.pdf` and `.txt` (gitignored).
+- Pages reviewed: all 22 filed pages and all 20 rendered pages rasterized at 60 dpi and inspected (2026-10-21). The output is two pages shorter because its authorities table and body pagination are more compact; no content or layout defect was visible. See Gate 2 below.
 - Superseded: the synthetic sample (`INPUT-synthetic-answering-brief.md`) and its `OUTPUT-` `.pdf`, `.docx`, `.docx.pdf` were removed. The docx outputs for the new sample were **not** made: LibreOffice (`soffice`) is not installed on this box, so `docx/render.sh` cannot run. See Engines.
 - Status: `court.json` untouched; `status` not set.
 
@@ -66,38 +66,36 @@ Primary sources, read on 2026-10-14:
 
 ## Gate 2: page review
 
-Render of 2026-10-16, every page rasterized at 60 dpi (`pdftoppm -r 60`) and viewed. Typst printed no warnings. Fonts embedded: EB Garamond only. Exemplar pages compared: 1 (cover), 2 (summary of the case), 5 (contents), 8 (body page 1), 13 (body page 6, Argument heading).
+Render rechecked 2026-10-21 with Typst 0.15.1. Every page of the 22-page filing and 20-page output was rasterized at 60 dpi (`pdftoppm -r 60`) and inspected. Typst printed no warnings. The embedded font is Times New Roman (regular, bold, and italic). The output's more compact pagination is consistent throughout; its cover, certifications, tables, body headings and quotations, signature, and certificates are legible and orderly. The output differs from the filing in line justification, which is not fixed by the rules.
 
 | Page | Content | Result |
 |---|---|---|
-| 1 | Cover: BAP No., court (two lines, break before "for the Eighth Circuit"), In re line, appellant, v., appellees, trustee, proceeding, title, counsel | OK after fixes 1 and 2. Same parts in the same order as filing p. 1. |
-| 2 | Summary of the Case; Oral Argument Unnecessary (i) | OK. Double-spaced, as filing p. 2. |
-| 3 | Certification of Interested Parties (ii) | OK after fix 3: number and title, then the rule's lead sentence; 11 parties; signature. |
-| 4 | Certification of Related Cases (iii) | OK. |
-| 5 | Table of Contents (iv) | OK after fix 5. Lists the two preliminary statements at "i", like the filing. The filing also lists the certifications and the tables; ours does not (tier 3). |
-| 6 | Table of Authorities (v): cases, statutes, rules, other | OK after fix 5 (*Jellings* entry wraps with its pages on the last line). |
-| 7 | Jurisdictional Statement; Issues; Statement of the Case, A. Background, B. Procedural History (1) | OK. |
-| 8 | Statement of the Case (2); footnote 1 | OK. |
-| 9 | Statement of the Case (3); footnote 2 (single-spaced) | OK. |
-| 10 | Statement of the Case end; Summary of the Argument (4); footnote 3 | OK. |
-| 11 | Summary of the Argument with the bulleted list (5); footnote 4 | OK. |
-| 12 | Summary end; Argument; point heading I; A. Legal Standards (6) | OK. Point heading is centered bold small caps; the filing's is left, bold, with a hanging "I." (tier 3, not chased). |
-| 13 | § 1229 block quotation (7) | OK. Single-spaced, indented both sides. |
-| 14 | Quotation end; Jellings, Dittmer; legislative-history quotation (8) | OK. |
-| 15 | Jellings quotation; Wruck; Cockhren (9) | OK. |
-| 16 | Acceptance; sub-heading B; Jellings quotation (10) | OK. |
-| 17 | Argument I.B continued; Schnakenberg quotation begins (11) | OK. |
-| 18 | Quotation end; point heading II; footnote 5 (12) | OK. |
-| 19 | Argument II end; footnote 6 (13) | ACCEPTED: bottom half of the page is blank because the Conclusion heading and paragraph are kept with the signature block on the next page (template rule: the signature never stands alone). |
-| 20 | Conclusion; signature block (14) | OK. |
-| 21 | Certificate of Compliance (15): 3,228 words (the filing states 3,326) | OK. The count is the template's count of the transcription. |
-| 22 | Certificate of Service (16) | OK. |
+| 1 | Cover | PASS: case number, court, caption, proceeding, title, and counsel appear in a clear hierarchy. The display type differs from the filed cover. |
+| 2 | Summary of the Case and oral-argument statement | PASS: both preliminary sections are easy to distinguish. |
+| 3 | Interested-parties certification | PASS: required lead, party list, and signature fit cleanly. |
+| 4 | Related-cases certification | PASS: text and signature are legible. |
+| 5 | Table of Contents | PASS: hierarchy and page references are clear. |
+| 6 | Table of Authorities | PASS: groups and page references are aligned and readable. |
+| 7 | Jurisdiction, issues, Statement of the Case | PASS: headings and body text are distinct. |
+| 8 | Procedural history | PASS: paragraphs and footnote are legible. |
+| 9 | Procedural history; Summary of the Argument begins | PASS: section transition is clear. |
+| 10 | Summary of the Argument; Argument begins | PASS: list and heading hierarchy are clear. |
+| 11 | Argument I; Legal Standards; statutory quotation | PASS: heading and quotation are distinguishable. |
+| 12 | Statutory quotation and argument | PASS: quotation indentation and body text are readable. |
+| 13 | Argument I; legal authorities and quotation | PASS: paragraphs and citation links are legible. |
+| 14 | Argument I.B; block quotation | PASS: subsection heading and quotation are readable. |
+| 15 | Argument I.B continuation | PASS: paragraphs and quotations remain distinct. |
+| 16 | Argument I.B continuation | PASS: text is legible and consistently spaced. |
+| 17 | Argument II | PASS: point heading and footnotes are legible. |
+| 18 | Argument II; conclusion and signature | PASS: conclusion stays with the signature block. |
+| 19 | Certificate of Compliance | PASS: numbered statements and certification signature are clear. |
+| 20 | Certificate of Service | PASS: service statement and signature are clear. |
 
-Pages reviewed: 22 of 22.
+Pages reviewed: 20 of 20 output pages and 22 of 22 filed pages.
 
 ## Overlay
 
-`sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/answering-brief swackhammer-22-6006`, exit 0, 2026-10-16. Page pairing by shared words: ours 1-6 pair with filed 1-6 at 49-90%; body pages 7-18 pair with filed 8-19 at 52-88% (one page behind, because the filing has a sixth front page, vi, for statutes); ours 19-21 with filed 19-21 at 42-69%; ours 22 (service) pairs with filed 4 at 24% (no real match: the filing's service certificate lists counsel, ours uses the CM/ECF sentence). The lines do not coincide: the filing is Times New Roman with full justification; ours is EB Garamond 14 pt ragged right. Tier 3, not chased.
+`sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/answering-brief answering-brief`, exit 0, 2026-10-21. The output has 20 pages and the filed PDF has 22, so the overlay pairs by shared text rather than page number. Their typography and line justification differ; those choices are not fixed by the rules. The filed certificate of service lists counsel, while the template uses the local-rule CM/ECF wording. These open-choice differences are accepted.
 
 ## Known gaps
 

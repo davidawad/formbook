@@ -75,4 +75,12 @@ Anonymous CourtListener API: 5 requests/min, no API key on this box, so queries 
 
 Still not searched: PACER (login); a CourtListener API token (needed for full bap8 docket and document lookups).
 
-If a filer later supplies a public BAP reply brief, add it here as `usage/SAMPLE-<short-case>-<docket>-reply-brief.pdf` with the URL, case name, docket, filer, date filed, and date fetched.
+## Pass 5, 2026-10-21
+
+| # | Tool / query | Result |
+|---|---|---|
+| 1 | Web search: `Goetz 2023 Eighth Circuit BAP debtor reply brief March 14 2023 appeal bankruptcy court filed`; `"22-6009" "Reply Brief" Goetz BAP`; `"22-6009" "REPLY BRIEF OF APPELLANT"` | Confirmed that Machele L. Goetz filed a reply on 2023-03-14 in BAP No. 22-6009. The BAP opinion is public at <https://ecf.ca8.uscourts.gov/opndir/23/06/226009P.pdf>. No reply brief PDF surfaced. |
+| 2 | Public brief-bank search result: NCBRC, `Appellant-Goetz-Brief.pdf` | The Eighth Circuit appellate brief says the BAP reply was included at App. 134. Retrieved PDF is a scanned, 58-page appellate filing with no extractable text, not a text PDF of the reply. It does not meet the exemplar requirement. |
+| 3 | CourtListener API availability check | Anonymous API access is denied on this host; no API token is configured. |
+
+The brief itself was found to have been filed, but no qualifying text PDF of that BAP filing was publicly accessible in this search. Keep the sample synthetic and blocked until a text PDF is available. If one is supplied, save it as `usage/FILED-EXAMPLE-reply-brief.pdf` and record the URL, case, docket, filer, filing date, and fetch date here.
