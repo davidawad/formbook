@@ -45,3 +45,18 @@
   sym.wj
   box[#h(gap)#page]
 }
+
+/// Dot leader and page reference glued so the reference always ends the entry's last line
+/// after the leaders, never alone on a line. A short fixed run of dots keeps the leader from
+/// shrinking to nothing; word joiners forbid a break around the fill; the page list's own
+/// spaces are made non-breaking. `page` is a string or text content.
+#let leader-page-glued(dot-gap, page, min-leader: 1.5em, page-gap: 0.3em) = {
+  let page = if type(page) == str { page.replace(" ", "\u{a0}") } else { page }
+  box(width: min-leader, repeat[.#h(dot-gap)])
+  sym.wj
+  dot-leader(dot-gap)
+  sym.wj
+  h(page-gap)
+  sym.wj
+  page
+}
