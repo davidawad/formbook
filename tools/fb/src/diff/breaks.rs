@@ -34,6 +34,8 @@ pub struct Breaks {
     /// Per identical line whose words map one to one: the larger of its left- and right-edge
     /// differences (pt), the glyph-advance drift once the breaks agree.
     pub drift: Vec<f64>,
+    /// Per identical line: its page, line and baseline difference (ours minus exemplar, pt).
+    pub vdrift: Vec<(usize, usize, f64)>,
 }
 
 /// Break before token `k` (a break inside a word counts as before the next one: Word does not
@@ -98,6 +100,10 @@ pub fn count(exm: &Measured, usm: &Measured, max: usize) -> Breaks {
             }
             if same {
                 b.identical += 1;
+                if let (Some(a), Some(u)) = (line_of(exm, &ex[s]), line_of(usm, &us[js])) {
+                    b.vdrift
+                        .push((ex[s].page, ex[s].line, u.baseline - a.baseline));
+                }
                 if let (Some(a), Some(u)) = (line_of(exm, &ex[s]), line_of(usm, &us[js])) {
                     if a.words.len() == e - s && u.words.len() == je - js {
                         b.drift

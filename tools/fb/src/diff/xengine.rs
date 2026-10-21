@@ -10,6 +10,8 @@ use crate::measure::Measured;
 
 /// How many differing pages or lines are listed.
 pub const LIST: usize = 8;
+/// Baseline difference reported as the first vertical divergence (diagnostic only).
+pub const VSLACK: f64 = 0.5;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct Cross {
@@ -28,6 +30,10 @@ pub struct Cross {
     pub first: Vec<String>,
     /// Largest left- or right-edge drift of a line that breaks identically (pt).
     pub drift: f64,
+    /// Diagnostic, not gated: the largest baseline difference of an identical line (pt) and the first
+    /// identical line whose baseline differs by more than VSLACK.
+    pub vdrift: f64,
+    pub vfirst: Option<String>,
 }
 
 impl Cross {
@@ -70,7 +76,47 @@ fn word_of(e: &[(usize, &str, &str)], page: usize) -> (String, String) {
         })
 }
 
+/// The word without dot leaders: runs of three or more dots go (Word's tab leader is one word of dots,
+/// typst's and latex's are dots set apart), and a word of dots alone is dropped.
+fn unleader(w: &str) -> String {
+    let mut out = String::new();
+    let mut dots = 0;
+    for c in w.chars().chain(std::iter::once(' ')) {
+        if c == '.' {
+            dots += 1;
+            continue;
+        }
+        if dots > 0 && dots < 3 {
+            out.push_str(&".".repeat(dots));
+        }
+        dots = 0;
+        if c != ' ' {
+            out.push(c);
+        }
+    }
+    match out.chars().all(|c| c == '.') {
+        true => String::new(),
+        false => out,
+    }
+}
+
+/// `m` with leader dots taken out of its words (unleader), empty words and lines dropped.
+fn without_leaders(m: &Measured) -> Measured {
+    let mut m = m.clone();
+    for p in &mut m.pages {
+        for l in &mut p.lines {
+            for w in &mut l.words {
+                w.t = unleader(&w.t);
+            }
+            l.words.retain(|w| !w.t.is_empty());
+        }
+        p.lines.retain(|l| !l.words.is_empty());
+    }
+    m
+}
+
 pub fn compare(reference: &Measured, other: &Measured) -> Cross {
+    let (reference, other) = (&without_leaders(reference), &without_leaders(other));
     let (tr, to) = (tokens(reference), tokens(other));
     let (er, eo) = (ends(&tr), ends(&to));
     let mut c = Cross {
@@ -107,6 +153,12 @@ pub fn compare(reference: &Measured, other: &Measured) -> Cross {
         .map(|(_, _, f)| f.replace("exemplar", "typst"))
         .collect();
     c.drift = b.drift.iter().copied().fold(0.0, f64::max);
+    c.vdrift = b.vdrift.iter().map(|v| v.2.abs()).fold(0.0, f64::max);
+    c.vfirst = b
+        .vdrift
+        .iter()
+        .find(|v| v.2.abs() > VSLACK)
+        .map(|(p, l, d)| format!("p{p} line {l}: baseline {d:+.2} pt"));
     c
 }
 
@@ -148,6 +200,11 @@ pub fn render(c: &Cross) -> String {
     s.push_str(&format!(
         "drift: largest edge difference of an identical line {:.2} pt\n",
         c.drift
+    ));
+    s.push_str(&format!(
+        "baselines (diagnostic): largest difference of an identical line {:.2} pt; first over {VSLACK} pt: {}\n",
+        c.vdrift,
+        c.vfirst.as_deref().unwrap_or("none")
     ));
     let ok = c.pages_equal() && c.ends_bad == 0 && c.breaks_equal();
     s.push_str(&format!(
@@ -196,5 +253,18 @@ mod tests {
         assert_eq!((c.lines, c.same), (2, 1));
         assert!(c.first[0].contains("word for word"), "{:?}", c.first);
         assert_eq!(at("p12 line 3: x 4"), (12, 3));
+    }
+
+    #[test]
+    fn leaders_are_not_words() {
+        assert_eq!(unleader("........15"), "15");
+        assert_eq!(unleader("Background......"), "Background");
+        assert_eq!(unleader("."), "");
+        assert_eq!(unleader("U.S."), "U.S.");
+        assert_eq!(unleader("Inc.."), "Inc..");
+        let a = doc(&[&["INTRODUCTION . . . . . 1", "Body text here"]]);
+        let b = doc(&[&["INTRODUCTION ..........1", "Body text here"]]);
+        let c = compare(&a, &b);
+        assert!(c.breaks_equal() && c.ends_bad == 0, "{c:?}");
     }
 }
