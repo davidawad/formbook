@@ -10,7 +10,8 @@
 //!   <court>/docx/render.sh      if present it owns the .docx: sh render.sh <court-dir> <sample.md> <out.docx>
 //!   <court>/docx/reference.docx otherwise pandoc --reference-doc plus every docx/*.lua filter, in passes when
 //!                               the filters need page numbers (docxpass.rs)
-//! The docx is then checked (valid zip, well-formed XML parts) and converted to PDF with LibreOffice.
+//! Every docx is then packed again as a reproducible archive (docxzip.rs), checked (valid zip, well-formed XML
+//! parts) and converted to PDF with LibreOffice.
 use crate::proc::{capture, have, tail, which, TempDir};
 use crate::{fail, Res};
 use std::path::{Path, PathBuf};
@@ -301,6 +302,7 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
             format!("fb render: {} was not written", temp_docx.display()),
         ));
     }
+    crate::docxzip::repack(&temp_docx, work.path())?;
     check_docx(&temp_docx, work.path())?;
     std::fs::rename(&temp_docx, &docx).map_err(|e| {
         fail(

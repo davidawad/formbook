@@ -232,7 +232,7 @@ mod tests {
         assert!(a == b && b == c);
     }
 
-    /// Two docx renders (the SCOTUS cert-petition docx/render.sh, which repackages the zip) are byte-identical,
+    /// Two docx renders (the SCOTUS cert-petition, multi-pass, packed again by docxzip.rs) are byte-identical,
     /// across a zip time tick (2 s); skipped, and logged to TEST_SKIP_LOG, without pandoc, zip or LibreOffice.
     #[test]
     fn docx_render_is_reproducible() {
@@ -252,8 +252,8 @@ mod tests {
             return skip("no repo root");
         };
         let court = root.join("courts/supreme-court-of-the-united-states/cert-petition");
-        if !court.join("docx/render.sh").is_file() {
-            return skip("no cert-petition docx/render.sh");
+        if !court.join("docx/reference.docx").is_file() {
+            return skip("no cert-petition docx/reference.docx");
         }
         for tool in ["pandoc", "zip", "xmllint", "pdftotext"] {
             if !crate::proc::have(tool) {

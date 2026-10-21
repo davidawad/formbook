@@ -8,16 +8,15 @@
 //!   * the footers its sections name: `rIdFtrNone` (empty), `rIdFtrPage` (PAGE field) and `rIdFtrAdd`
 //!     ("Add-" and the PAGE field), all centered; the document's last sectPr is replaced by the XML the filter
 //!     wrote to `$FORMBOOK_FINAL` (pandoc would copy the reference document's);
-//!   * a reproducible archive: parts dated SOURCE_DATE_EPOCH, in byte order, no directory entries;
+//!   * a reproducible archive (docxzip.rs);
 //!   * the LibreOffice PDF, and the page of every needle in it.
 //!
 //! The passes go on until the pages stop changing (a page list longer than its placeholder can move text).
 //! Word may paginate slightly differently from LibreOffice (docs/DOCX.md).
 use crate::proc::capture;
 use crate::{fail, Res};
-use std::io::Write;
-use std::path::{Path, PathBuf};
-use std::process::{Command, Stdio};
+use std::path::Path;
+use std::process::Command;
 
 const MAX_PASSES: usize = 5;
 
@@ -77,32 +76,10 @@ fn replace_final_sect(doc: &str, last: &str) -> Option<String> {
     Some(format!("{}{}{}", &doc[..start], last, &doc[end..]))
 }
 
-/// Every file under `dir`, relative, in byte order.
-fn files(dir: &Path) -> Vec<PathBuf> {
-    let mut stack = vec![dir.to_path_buf()];
-    let mut out = vec![];
-    while let Some(d) = stack.pop() {
-        for e in std::fs::read_dir(&d).into_iter().flatten().flatten() {
-            let p = e.path();
-            if p.is_dir() {
-                stack.push(p);
-            } else if let Ok(rel) = p.strip_prefix(dir) {
-                out.push(rel.to_path_buf());
-            }
-        }
-    }
-    out.sort();
-    out
-}
-
 /// Footers, the last section and a reproducible archive, in place.
 fn finish(docx: &Path, work: &Path) -> Res<()> {
     let x = work.join("parts");
-    let _ = std::fs::remove_dir_all(&x);
-    run(
-        Command::new("unzip").arg("-q").arg(docx).arg("-d").arg(&x),
-        "unzip",
-    )?;
+    crate::docxzip::unpack(docx, &x)?;
     let footers = [
         ("rIdFtrNone", "ftr-none.xml", String::new()),
         ("rIdFtrPage", "ftr-page.xml", PAGE_FIELD.to_string()),
@@ -139,43 +116,7 @@ fn finish(docx: &Path, work: &Path) -> Res<()> {
     let doc = replace_final_sect(&read(&dp)?, last.trim())
         .ok_or_else(|| fail(1, "fb render: the document has no final sectPr"))?;
     write(&dp, &doc)?;
-
-    let epoch = std::env::var("SOURCE_DATE_EPOCH")
-        .ok()
-        .and_then(|s| s.parse::<u64>().ok())
-        .unwrap_or(0);
-    let when = std::time::UNIX_EPOCH + std::time::Duration::from_secs(epoch);
-    let list = files(&x);
-    for f in &list {
-        let p = x.join(f);
-        std::fs::File::options()
-            .write(true)
-            .open(&p)
-            .and_then(|h| h.set_modified(when))
-            .map_err(|e| io(&p, e))?;
-    }
-    let _ = std::fs::remove_file(docx);
-    let mut zip = Command::new("zip")
-        .current_dir(&x)
-        .env("TZ", "UTC")
-        .args(["-X", "-D", "-q"])
-        .arg(docx)
-        .arg("-@")
-        .stdin(Stdio::piped())
-        .spawn()
-        .map_err(|e| fail(2, format!("fb render: cannot run zip: {e}")))?;
-    let names: String = list.iter().map(|f| format!("{}\n", f.display())).collect();
-    zip.stdin
-        .take()
-        .map(|mut s| s.write_all(names.as_bytes()))
-        .transpose()
-        .map_err(|e| fail(2, format!("fb render: zip: {e}")))?;
-    let st = zip
-        .wait()
-        .map_err(|e| fail(2, format!("fb render: zip: {e}")))?;
-    st.success()
-        .then_some(())
-        .ok_or_else(|| fail(1, "fb render: zip failed"))
+    crate::docxzip::pack(&x, docx)
 }
 
 /// The pages file of the LibreOffice PDF of `docx`.
@@ -232,30 +173,5 @@ mod tests {
             r#"<w:body><w:p><w:pPr><w:sectPr><a/></w:sectPr></w:pPr></w:p><w:sectPr><c/></w:sectPr></w:body>"#
         );
         assert!(replace_final_sect("<w:body></w:body>", "x").is_none());
-    }
-
-    #[test]
-    fn lists_files_in_byte_order() {
-        let t = crate::proc::TempDir::new("docxpass-test").unwrap();
-        std::fs::create_dir_all(t.path().join("word/_rels")).unwrap();
-        for f in [
-            "word/document.xml",
-            "[Content_Types].xml",
-            "word/_rels/document.xml.rels",
-        ] {
-            std::fs::write(t.path().join(f), "").unwrap();
-        }
-        let got: Vec<String> = files(t.path())
-            .iter()
-            .map(|p| p.display().to_string())
-            .collect();
-        assert_eq!(
-            got,
-            [
-                "[Content_Types].xml",
-                "word/_rels/document.xml.rels",
-                "word/document.xml"
-            ]
-        );
     }
 }

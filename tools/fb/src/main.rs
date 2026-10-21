@@ -9,6 +9,7 @@ mod diff;
 mod diffselftest;
 mod docxpages;
 mod docxpass;
+mod docxzip;
 mod engines;
 mod eval;
 mod fetch;
