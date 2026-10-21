@@ -1,25 +1,30 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds one sample with the SCOTUS cert-petition Word template (docs/EVAL-LOOP.md, "Engines").
 # Pandoc writes the document with reference.docx and scotus.lua. Pass 1 is rendered by LibreOffice; the PDF gives the
 # page of every heading and every cited authority (the needles scotus.lua wrote; the front matter is numbered i, ii ...,
 # the body 1, 2 ...). Pass 2 writes the document again with those page labels in the tables of contents and authorities,
 # and the footers of the sections (roman, arabic, none) are added to the package. Word may paginate slightly differently.
 # Usage: sh docx/render.sh <court-dir> <sample.md, relative to the court dir> <out.docx>
-set -eu
+set -euo pipefail
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
 OUT=$3
 case $OUT in /*) ;; *) OUT=$(pwd)/$OUT ;; esac
 D="$COURT/docx"
 SOFFICE=${SOFFICE:-$(command -v soffice || echo /opt/homebrew/bin/soffice)}
-WORK=$(mktemp -d)
-if [ -n "${FORMBOOK_KEEP:-}" ]; then echo "work: $WORK" >&2; else trap 'rm -rf "$WORK"' EXIT; fi
+WORK=$(mktemp -d) || exit 1
+safe_rmdir() { # removes a mktemp directory, nothing else
+  local target=${1:?} tmp=${TMPDIR:-/tmp}
+  case "$target" in
+    "${tmp%/}"/tmp.* | /tmp/tmp.*) find "$target" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+if [ -n "${FORMBOOK_KEEP:-}" ]; then echo "work: $WORK" >&2; else trap 'safe_rmdir "$WORK"' EXIT; fi
 
 # add_parts <docx>: the footers the sections use (rIds of scotus.lua), and the final section, in place
 add_parts() {
-  X="$WORK/unz"
-  rm -rf "$X"
-  mkdir "$X"
+  X=$(mktemp -d "$WORK/unz.XXXXXX") || exit 1
   (cd "$X" && unzip -q "$1")
   page_footer() { # $1 = file, $2 = page number field (or none)
     if [ -n "$2" ]; then
@@ -56,10 +61,10 @@ XML
   # a reproducible archive (as fb render's docxpass.rs): parts dated SOURCE_DATE_EPOCH (fb render sets it), in byte
   # order, no directory entries, times in UTC
   rm -f "$1"
+  # shellcheck disable=SC2016 # the perl program is single-quoted on purpose
   (cd "$X" && find . -type f | sed 's|^\./||' | LC_ALL=C sort > "$WORK/parts" &&
     xargs perl -e '$t = shift; utime $t, $t, @ARGV or die "utime: $!\n"' "${SOURCE_DATE_EPOCH:-315532800}" < "$WORK/parts" &&
     TZ=UTC zip -X -D -q "$1" -@ < "$WORK/parts")
-  rm -rf "$X"
 }
 
 # build <out.docx> <pages.tsv or empty>: pandoc with the reference and the filter, then the footers
