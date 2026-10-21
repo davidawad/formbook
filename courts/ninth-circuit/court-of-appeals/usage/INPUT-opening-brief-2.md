@@ -238,7 +238,7 @@ The District asked the court to take judicial notice of its operating procedures
 
 #### The Treatises Agree
 
-Commentators likewise treat priority as a rule enforceable against the manager. [Eleanor Whitfield, *The Law of Prior Appropriation* § 7.12 (4th ed. 2020)](toa:treatise); [Dara Mehta, *Curtailment Without Compensation*, 112 Fict. L. Rev. 45, 61 (2022)](toa:article). The district court cited neither.
+Commentators likewise treat priority as a rule enforceable against the manager and against each official who administers curtailment for the District. [Eleanor Whitfield, *The Law of Prior Appropriation* § 7.12 (4th ed. 2020)](toa:treatise); [Dara Mehta, *Curtailment Without Compensation*, 112 Fict. L. Rev. 45, 61 (2022)](toa:article). The district court cited neither.
 
 \+ A short note on the remedy: even if the Court concludes that some factual development is needed, the proper course is to vacate the dismissal and remand, not to affirm on a ground the district court did not reach. *See* [*Marlowe*, 999 F.3d at 136](toa:marlowe).
 

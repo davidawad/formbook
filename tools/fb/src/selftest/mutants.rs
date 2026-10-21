@@ -63,7 +63,7 @@ pub const MUTANTS: &[Mutant] = &[
         name: r"single-spaced",
         want: r"CA9-FORM-003",
         kind: Kind::Layout,
-        expr: r"s/^#let body-leading = 0.94em/#let body-leading = 0.2em/",
+        expr: r"s/^#let pitch-double = 29.4pt/#let pitch-double = 17pt/",
     },
     Mutant {
         name: r"small-type",
@@ -81,7 +81,7 @@ pub const MUTANTS: &[Mutant] = &[
         name: r"left-aligned-headings",
         want: r"CA9-FORM-009",
         kind: Kind::Layout,
-        expr: r"s/shared-section-heading(it.body, type-size, single-leading, above: 1.5em, below: 1.1em)/block(width: 100%, above: 1.5em, below: 1.1em, align(left, strong(upper(it.body))))/",
+        expr: r"s/      align(center, text(size: heading-size, ..edges(pitch-heading), strong(upper(it.body)))))/      align(left, text(size: heading-size, ..edges(pitch-heading), strong(upper(it.body)))))/",
     },
     Mutant {
         name: r"wrong-font",
@@ -101,7 +101,7 @@ pub const MUTANTS: &[Mutant] = &[
         want: r"CA9-FORM-004",
         kind: Kind::Layout,
         // typst's own footnote entry (0.85 em) instead of the template's 14 pt one
-        expr: r"s/^    shared-footnote-body(note.body, num, type-size, single-leading, 0.5em)$/    it/",
+        expr: r"s/^    shared-footnote-body(note.body, num, type-size, single-leading, 7pt)$/    it/",
     },
     Mutant {
         name: r"wrong-word-count",
@@ -159,6 +159,14 @@ pub const MUTANTS: &[Mutant] = &[
         want: r"CA9-FORM-007",
         kind: Kind::Latex,
         expr: r"s/^\\usepackage{newtxtext,newtxmath}$/\\usepackage{lmodern}/",
+    },
+    Mutant {
+        name: r"latex-kerning",
+        want: r"XENG-003",
+        kind: Kind::Latex,
+        // kerning and ligatures back on: newtx's kerns shift words, and lines no longer break where typst breaks them
+        // (Gate 4 CROSS-ENGINE, fb-595.54)
+        expr: r"s/\\pdfnoligatures\\font//",
     },
     Mutant {
         name: r"latex-repo-local-file",

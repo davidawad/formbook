@@ -29,8 +29,9 @@ samples:
     exemplar: usage/FILED-EXAMPLE-opening-brief.pdf
     # CA9-TOOL-006 can only see a misplaced TOA tag when an authority citation begins a wrapped line that is the
     # first line of a page (typst files a tag before the first word under the previous line). The paragraph
-    # "The Act states its rule in mandatory terms" is padded so "Dara Mehta" opens page 12 that way. If the
-    # selftest mutant toa-tag-before-citation is ever missed, re-pad that paragraph (any 88 to 100 padding words).
+    # "Commentators likewise treat priority" is padded ("against the manager and against each official ...") so
+    # "Eleanor Whitfield" opens page 13 that way (cross-engine layout, fb-595.54). If the selftest mutant
+    # toa-tag-before-citation is ever missed, re-pad that paragraph until a citation opens a page.
 
 # Numbers the checks use. Each is a rule or a stated tolerance, never a measurement off the exemplar.
 params:

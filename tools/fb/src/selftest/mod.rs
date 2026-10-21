@@ -344,7 +344,7 @@ mod tests {
 
     #[test]
     fn table_matches_the_shell_script() {
-        assert_eq!(MUTANTS.len(), 24);
+        assert_eq!(MUTANTS.len(), 25);
         assert_eq!(
             MUTANTS.iter().filter(|m| m.kind == Kind::Content).count(),
             6
