@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Build one sample as a .docx (docs/EVAL-LOOP.md, "Engines"; tools/render-docx.sh calls this and converts the result).
 #   sh docx/render.sh <court-dir> <sample.md> <out.docx>
 # pandoc writes the body with cafc-docx.lua on docx/reference.docx. The package then gets its footers (arabic
 # pages, Add- pages) and the section numbering. The contents and the table of authorities need page numbers, which
 # only the rendered pages have: LibreOffice renders the .docx, pages.sh reads the page labels, and the document is
 # written again with them until they stop changing (at most 5 runs). The last run's .docx is the output.
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 ROOT=$(cd "$D/../../../../.." && pwd)
 COURT=$(cd "$1" && pwd)
@@ -13,8 +13,16 @@ SAMPLE=$2
 OUT=$(cd "$(dirname "$3")" && pwd)/$(basename "$3")
 SCHEME=answering
 SOFFICE=${SOFFICE:-soffice}
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 NS='xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"'
 footer() { # $1 file, $2 label prefix ("" or "Add-")
   printf '%s\n' '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' \
@@ -39,7 +47,6 @@ package() { # $1 unpacked dir, $2 start page of the certificates, $3 output .doc
 }
 PAGES=$W/pages.tsv
 : > "$PAGES"
-prev=""
 n=0
 while :
 do
@@ -50,16 +57,17 @@ do
       --lua-filter="$D/cafc-docx.lua" -M label_scheme=$SCHEME \
       -M "fontdir=$ROOT/fonts/" \
       --resource-path="$COURT" "$COURT/$SAMPLE" -o "$W/build.docx" || exit 1
-  rm -rf "$W/x" && mkdir "$W/x" && (cd "$W/x" && unzip -q "$W/build.docx")
+  X=$(mktemp -d "$W/x.XXXXXX") || exit 1
+  (cd "$X" && unzip -q "$W/build.docx")
   START=$(awk -F'\t' '$1 == "_cert_start" { print $2 }' "$PAGES")
-  package "$W/x" "${START:-1}" "$W/pass.docx"
-  rm -rf "$W/pdf" && mkdir "$W/pdf"
-  "$SOFFICE" "-env:UserInstallation=file://$W/profile" --headless --convert-to pdf --outdir "$W/pdf" "$W/pass.docx" > "$W/soffice.log" 2>&1 || {
+  package "$X" "${START:-1}" "$W/pass.docx"
+  P=$(mktemp -d "$W/pdf.XXXXXX") || exit 1
+  "$SOFFICE" "-env:UserInstallation=file://$W/profile" --headless --convert-to pdf --outdir "$P" "$W/pass.docx" > "$W/soffice.log" 2>&1 || {
     cat "$W/soffice.log" >&2
     echo "render.sh: LibreOffice did not convert $W/pass.docx" >&2
     exit 1
   }
-  sh "$D/pages.sh" "$W/pdf/pass.pdf" "$PATS" > "$W/pages.new"
+  sh "$D/pages.sh" "$P/pass.pdf" "$PATS" > "$W/pages.new"
   if [ "$(cat "$W/pages.new")" = "$(cat "$PAGES")" ]; then
     break
   fi
@@ -68,7 +76,6 @@ do
     exit 1
   fi
   cp "$W/pages.new" "$PAGES"
-  prev=$n
 done
 cp "$W/pass.docx" "$OUT"
 echo "$OUT"

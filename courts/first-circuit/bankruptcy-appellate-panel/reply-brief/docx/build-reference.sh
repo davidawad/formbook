@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx for bap1 (the same for all three doc types). It mirrors bap1-opening.typ:
 # Liberation Serif 14 pt, body lines at an exact 22.25 pt pitch (the typst template's line pitch, measured on
 # its output), first-line indent 0.5 in on body paragraphs (not on the first paragraph after a heading),
@@ -7,11 +7,19 @@
 # (the cover is its own section with no footer).
 # Usage: sh docx/build-reference.sh <out.docx>   (needs pandoc, perl, unzip, zip, xmllint on PATH)
 # Every font is named explicitly (no theme fonts); the theme's latin faces are set to Liberation Serif too.
-set -eu
+set -euo pipefail
 OUT=$1
 case $OUT in /*) ;; *) OUT=$(pwd)/$OUT ;; esac
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 pandoc -o "$W/ref.docx" --print-default-data-file reference.docx
 cd "$W" && mkdir pkg && cd pkg && unzip -q ../ref.docx
 F='w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:eastAsia="Liberation Serif" w:cs="Liberation Serif"'

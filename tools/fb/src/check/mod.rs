@@ -3,6 +3,8 @@
 mod bridge;
 mod calibtex;
 mod declared;
+#[cfg(test)]
+mod gate0_tests;
 mod native;
 mod opts;
 mod prepare;

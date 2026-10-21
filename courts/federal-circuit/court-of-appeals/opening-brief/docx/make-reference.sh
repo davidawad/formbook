@@ -1,12 +1,20 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Build docx/reference.docx: pandoc's default reference (numbering, settings, theme) with this court's styles
 # (styles.xml.in) and the brief's page setup: letter, one inch margins, footer 0.4 in from the page edge.
 # Usage: sh docx/make-reference.sh <body-line-twips> <out.docx>
 #   body line pitch: 629 twips (31.43 pt, 0.94em leading) for the opening and reply briefs, 643 (32.13 pt) for the answering brief.
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 pandoc -o "$W/base.docx" --print-default-data-file reference.docx
 mkdir "$W/x"
 (cd "$W/x" && unzip -q "$W/base.docx")

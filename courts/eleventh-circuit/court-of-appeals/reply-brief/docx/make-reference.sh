@@ -1,26 +1,32 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx from pandoc's default reference document (see ../../docs/DOCX.md): Times New Roman 14 pt
 # everywhere; the body double-spaced (31.43 pt exact) with a half-inch first-line indent; block quotations and
 # footnotes single-spaced; headings single-spaced, bold, black; letter page with 1-inch margins; a centered page
 # number in the footer. The cover, the tables and the certificates are written by docx/ca11.lua as paragraphs with
 # their own formatting; the footers of the sections are added by docx/render.sh.
 # Usage: sh docx/make-reference.sh [out.docx]   (needs pandoc, perl, unzip, zip, xmllint)
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 OUT=${1:-$D/reference.docx}
-T=$(mktemp -d)
-trap 'rm -rf "$T"' EXIT
+T=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$T"' EXIT
 pandoc --print-default-data-file reference.docx > "$T/default.docx"
 mkdir "$T/x"
 (cd "$T/x" && unzip -q "$T/default.docx")
 W="$T/w"
 mkdir "$W"
 cp -R "$T/x/." "$W/"
-FONT='<w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman" />'
-export FONT
 # Each style the court uses is replaced whole, so no inherited spacing from pandoc's defaults survives.
 perl -0pi -e '
-  my $f = $ENV{FONT};
+  my $f = q{<w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman" />};
   s{<w:rFonts w:asciiTheme="minorHAnsi".*?/>}{$f}s;
   s{<w:sz w:val="24" />\s*<w:szCs w:val="24" />}{<w:sz w:val="28" /><w:szCs w:val="28" />}s;
   my %style = (

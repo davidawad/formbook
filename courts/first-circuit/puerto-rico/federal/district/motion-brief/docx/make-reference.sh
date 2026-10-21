@@ -1,15 +1,23 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx from pandoc's default reference document (see docs/DOCX.md and this folder's README,
 # "Engines"). The court form it sets (typst/prd-motion-brief.typ, PRD-FORM-002 to -005): Times New Roman 12 pt (pinned);
 # body double-spaced at 24 pt exact; 1-inch margins on US Letter; headings at body size, level 1 centred capitals;
 # footnotes and block quotations single-spaced; a centred PAGE number at 12 pt in the footer.
 # Styles are the ones in parts/styles-prd.xml (replacing pandoc's); the footer is parts/footer1.xml.
 # Usage: sh docx/make-reference.sh [out.docx]   (needs pandoc, perl, unzip, zip, xmllint)
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 OUT=${1:-$D/reference.docx}
-T=$(mktemp -d)
-trap 'rm -rf "$T"' EXIT
+T=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$T"' EXIT
 pandoc --print-default-data-file reference.docx > "$T/default.docx"
 mkdir "$T/x"
 (cd "$T/x" && unzip -q "$T/default.docx")

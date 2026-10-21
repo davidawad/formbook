@@ -1,14 +1,22 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx from pandoc's default reference document (see ../../docs/DOCX.md):
 # TeX Gyre Schola 14 pt (the face the typst template names); body double-spaced at the typst pitch (32.3 pt exact; single-spaced parts 20 pt exact),
 # first-line indent 0.5 in; headings, block quotations, footnotes single-spaced; Letter with 1-inch margins;
 # footer with a PAGE field (the cover has no footer). Usage: sh docx/make-reference.sh [out.docx]
 # Needs: pandoc, perl, unzip, zip, xmllint.
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 OUT=${1:-$D/reference.docx}
-T=$(mktemp -d)
-trap 'rm -rf "$T"' EXIT
+T=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$T"' EXIT
 pandoc --print-default-data-file reference.docx > "$T/default.docx"
 W="$T/w"
 mkdir "$W"

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # docx/render.sh <court-dir> <sample.md> <out.docx>
 # Called by tools/render-docx.sh, which validates the .docx and makes the .docx.pdf (LibreOffice).
 # pandoc with reference.docx and the Lua filters of this folder, in two passes:
@@ -9,14 +9,22 @@
 # The filter writes the placeholder rId "rIdFooterPage" for the footer of its raw section breaks; pandoc
 # renames relationship IDs, so the real ID (the relationship whose Target is footer-page.xml) is put in here.
 # Needs: pandoc, soffice (LibreOffice), pdfinfo, pdftotext, awk, unzip, zip, perl, xmllint.
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
 OUT=$3
 SOFFICE=${SOFFICE:-$(command -v soffice || echo /opt/homebrew/bin/soffice)}
-T=$(mktemp -d)
-trap 'rm -rf "$T"' EXIT
+T=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$T"' EXIT
 FILTERS=""
 for f in "$D"/*.lua; do [ -e "$f" ] && FILTERS="$FILTERS --lua-filter=$f"; done
 
@@ -24,9 +32,7 @@ for f in "$D"/*.lua; do [ -e "$f" ] && FILTERS="$FILTERS --lua-filter=$f"; done
 to_docx() {
   # shellcheck disable=SC2086
   (cd "$COURT" && pandoc --from markdown+smart --to docx --reference-doc="$D/reference.docx" $FILTERS "$SAMPLE" -o "$1") || return 1
-  W="$T/fix.$$"
-  rm -rf "$W"
-  mkdir "$W"
+  W=$(mktemp -d "$T/fix.XXXXXX") || return 1
   (cd "$W" && unzip -q "$1") || return 1
   RID=$(perl -0ne 'while (/<Relationship\b[^>]*>/g) { my $r = $&; if ($r =~ /Target="footer-page\.xml"/ && $r =~ /Id="([^"]+)"/) { print $1; last } }' "$W/word/_rels/document.xml.rels")
   [ -n "$RID" ] || {
@@ -35,13 +41,11 @@ to_docx() {
   }
   perl -pi -e "s/rIdFooterPage/$RID/g" "$W/word/document.xml"
   # bullets in the body face: pandoc's Symbol bullet (U+F0B7) would be drawn by LibreOffice with OpenSymbol
-  if [ -f "$W/word/numbering.xml" ]; then
-    perl -CSD -0pi -e 's/w:ascii="Symbol" w:hAnsi="Symbol"( w:cs="Symbol")?/w:ascii="TeX Gyre Schola" w:hAnsi="TeX Gyre Schola" w:cs="TeX Gyre Schola"/g; s/\x{F0B7}/\x{2022}/g' "$W/word/numbering.xml"
-  fi
+  find "$W/word" -name numbering.xml -exec perl -CSD -0pi -e 's/w:ascii="Symbol" w:hAnsi="Symbol"( w:cs="Symbol")?/w:ascii="TeX Gyre Schola" w:hAnsi="TeX Gyre Schola" w:cs="TeX Gyre Schola"/g; s/\x{F0B7}/\x{2022}/g' {} +
   xmllint --noout "$W/word/document.xml" || return 1
   rm -f "$1"
   (cd "$W" && zip -X -q -r "$1" '[Content_Types].xml' _rels docProps word)
-  rm -rf "$W"
+  safe_rmdir "$W"
 }
 
 GACTAPP_HEADINGS="$T/heads.txt" to_docx "$T/pass1.docx" || exit 1

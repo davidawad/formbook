@@ -1,13 +1,21 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx from pandoc's default reference for a Texas Court of Criminal Appeals filing.
 # Form (from typst/texcrimapp-*.typ, TRAP 9.4): TeX Gyre Pagella 14 pt body, double spaced (exact 32.2 pt pitch),
 # 0.5 in first-line indent; single-spaced headings, cover, identity, contents and index; footnotes 12 pt;
 # letter page with 1 in margins; centered PAGE number in the footer (the cover has none, see the filter).
 # Usage: sh docx/build-reference.sh <out.docx>   (needs pandoc, unzip, zip, perl, xmllint on PATH)
-set -eu
+set -euo pipefail
 OUT=$1
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 pandoc -o "$W/ref.docx" --print-default-data-file reference.docx
 mkdir "$W/pkg" && cd "$W/pkg" && unzip -q ../ref.docx
 # style definitions by styleId (replace the whole element, or append if absent)
