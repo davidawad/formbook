@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 50 pp., text layer verified 2026-10-17; Cuyahoga clerk e-filing cover page precedes brief | `FILED-EXAMPLE-amicus-brief.pdf` | Amici ACLU of Ohio, ACLU, and NACDL | State v. Tolbert, 8th Dist. Cuyahoga No. CA-25-114748 | 2025-04-04 | https://www.acluohio.org/app/uploads/2025/03/2025.04.04-ACLU-NACDL-Amicus.pdf | `f3e7619da4b48bd2ab23461abdbf762aa239b0a81ca2cd9b7148c4b1f735801f` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search — fb-l129.1 pass 3 (2026-10-21)
+
+The `petition-for-discretionary-review` row remains BLOCKED. Searched the official Supreme Court of Ohio Clerk's docket attachment for State v. Jones (Elwood Jones, No. 2023-0772), which returned a text-layer jurisdictional memorandum at the Supreme Court level, and searched the Ohio App.R. 5(A)/5(C) procedure and public indexed results for filed motions for leave to appeal. These are not filed petitions of discretionary review in a court of appeals; no qualifying public motion PDF surfaced. The `petition-for-review` row remains BLOCKED because this court takes appeals by notice under App.R. 3-4; no change to the primary-source-verified jurisdictional analysis.
