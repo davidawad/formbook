@@ -232,6 +232,52 @@ mod tests {
         assert!(a == b && b == c);
     }
 
+    /// Two docx renders (the SCOTUS cert-petition docx/render.sh, which repackages the zip) are byte-identical,
+    /// across a zip time tick (2 s); skipped, and logged to TEST_SKIP_LOG, without pandoc, zip or LibreOffice.
+    #[test]
+    fn docx_render_is_reproducible() {
+        let skip = |why: &str| {
+            eprintln!("SKIP docx_render_is_reproducible: {why}");
+            if let Some(log) = std::env::var_os("TEST_SKIP_LOG") {
+                use std::io::Write;
+                let mut f = std::fs::OpenOptions::new()
+                    .create(true)
+                    .append(true)
+                    .open(log)
+                    .unwrap();
+                writeln!(f, "render::tests::docx_render_is_reproducible: {why}").unwrap();
+            }
+        };
+        let Ok(root) = repo_root() else {
+            return skip("no repo root");
+        };
+        let court = root.join("courts/supreme-court-of-the-united-states/cert-petition");
+        if !court.join("docx/render.sh").is_file() {
+            return skip("no cert-petition docx/render.sh");
+        }
+        for tool in ["pandoc", "zip", "xmllint", "pdftotext"] {
+            if !crate::proc::have(tool) {
+                return skip(&format!("{tool} not installed"));
+            }
+        }
+        if !crate::proc::have("soffice") && std::env::var_os("SOFFICE").is_none() {
+            return skip("soffice not installed");
+        }
+        let tmp = std::env::temp_dir().join(format!("fb-docx-repro-{}", std::process::id()));
+        std::fs::create_dir_all(&tmp).unwrap();
+        let sample = Path::new("usage/INPUT-cert-petition.md");
+        let go = |n: &str| {
+            let out = tmp.join(format!("{n}.docx.pdf"));
+            render_one(&root, "docx", &court, sample, &out, Warnings::Allow).unwrap();
+            std::fs::read(tmp.join(format!("{n}.docx"))).unwrap()
+        };
+        let a = go("a");
+        std::thread::sleep(std::time::Duration::from_millis(2100));
+        let b = go("b");
+        let _ = std::fs::remove_dir_all(&tmp);
+        assert!(a == b, "two docx renders differ");
+    }
+
     #[test]
     fn engine_and_flags_come_before_positionals() {
         let o = parse_args(&v(&["--engine", "docx", "--deny-warnings", "d", "s.md"])).unwrap();

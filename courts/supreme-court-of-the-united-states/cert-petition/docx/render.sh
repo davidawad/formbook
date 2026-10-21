@@ -53,8 +53,12 @@ XML
   for f in "$X/word/_rels/document.xml.rels" "$X/[Content_Types].xml" "$X/word/document.xml" "$X/word/ftr-front.xml" "$X/word/ftr-body.xml" "$X/word/ftr-empty.xml"; do
     xmllint --noout "$f"
   done
+  # a reproducible archive (as fb render's docxpass.rs): parts dated SOURCE_DATE_EPOCH (fb render sets it), in byte
+  # order, no directory entries, times in UTC
   rm -f "$1"
-  (cd "$X" && zip -X -q -r "$1" '[Content_Types].xml' _rels docProps word)
+  (cd "$X" && find . -type f | sed 's|^\./||' | LC_ALL=C sort > "$WORK/parts" &&
+    xargs perl -e '$t = shift; utime $t, $t, @ARGV or die "utime: $!\n"' "${SOURCE_DATE_EPOCH:-315532800}" < "$WORK/parts" &&
+    TZ=UTC zip -X -D -q "$1" -@ < "$WORK/parts")
   rm -rf "$X"
 }
 
