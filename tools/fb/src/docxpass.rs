@@ -10,7 +10,9 @@
 //!   * pandoc with the reference document and the filters;
 //!   * the footers its sections name: `rIdFtrNone` (empty), `rIdFtrPage` (PAGE field) and `rIdFtrAdd`
 //!     ("Add-" and the PAGE field), all centered; the document's last sectPr is replaced by the XML the filter
-//!     wrote to `$FORMBOOK_FINAL` (pandoc would copy the reference document's);
+//!     wrote to `$FORMBOOK_FINAL` (pandoc would copy the reference document's); a filter may add footers of its
+//!     own (text from the sample, such as a paper's title) in `$FORMBOOK_FOOTERS`, one per line:
+//!     `ID <TAB> paragraphs` (the footer's `w:p` elements; the PAGE field is the filter's to write);
 //!   * a reproducible archive (docxzip.rs);
 //!   * the LibreOffice PDF, and the page of every needle in it.
 //!
@@ -61,6 +63,7 @@ fn pandoc(
             .current_dir(court)
             .env("FORMBOOK_NEEDLES", work.join("needles.tsv"))
             .env("FORMBOOK_FINAL", work.join("final.xml"))
+            .env("FORMBOOK_FOOTERS", work.join("footers.tsv"))
             .env("FORMBOOK_PAGES", pages)
             .args(["--from", "markdown+smart", "--to", "docx"])
             .args(args)
@@ -79,26 +82,55 @@ pub(crate) fn replace_final_sect(doc: &str, last: &str) -> Option<String> {
     Some(format!("{}{}{}", &doc[..start], last, &doc[end..]))
 }
 
+/// The footers a filter wrote to `$FORMBOOK_FOOTERS`: one per line, `ID <TAB> paragraphs` (the `w:p` elements of
+/// the footer), as `(id, file, paragraphs)`; the file names follow the line order.
+fn filter_footers(text: &str) -> Vec<(String, String, String)> {
+    text.lines()
+        .filter_map(|l| l.split_once('\t'))
+        .enumerate()
+        .map(|(n, (id, paras))| {
+            (
+                id.to_string(),
+                format!("ftr-own{}.xml", n + 1),
+                paras.to_string(),
+            )
+        })
+        .collect()
+}
+
 /// Footers, the last section and a reproducible archive, in place.
 fn finish(docx: &Path, work: &Path) -> Res<()> {
     let x = work.join("parts");
     crate::docxzip::unpack(docx, &x)?;
-    let footers = [
-        ("rIdFtrNone", "ftr-none.xml", String::new()),
-        ("rIdFtrPage", "ftr-page.xml", PAGE_FIELD.to_string()),
+    let centered = |runs: &str| {
+        format!(
+            r#"<w:p><w:pPr><w:spacing w:before="0" w:after="0"/><w:jc w:val="center"/></w:pPr>{runs}</w:p>"#
+        )
+    };
+    let mut footers = vec![
+        ("rIdFtrNone".into(), "ftr-none.xml".into(), centered("")),
         (
-            "rIdFtrAdd",
-            "ftr-add.xml",
-            format!("<w:r><w:t>Add-</w:t></w:r>{PAGE_FIELD}"),
+            "rIdFtrPage".into(),
+            "ftr-page.xml".into(),
+            centered(PAGE_FIELD),
+        ),
+        (
+            "rIdFtrAdd".into(),
+            "ftr-add.xml".into(),
+            centered(&format!("<w:r><w:t>Add-</w:t></w:r>{PAGE_FIELD}")),
         ),
     ];
+    let own = work.join("footers.tsv");
+    if own.is_file() {
+        footers.extend(filter_footers(&read(&own)?));
+    }
     let mut rels = String::new();
     let mut types = String::new();
-    for (id, file, runs) in &footers {
+    for (id, file, paras) in &footers {
         write(
             &x.join("word").join(file),
             &format!(
-                r#"<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:ftr {FOOTER_NS}><w:p><w:pPr><w:spacing w:before="0" w:after="0"/><w:jc w:val="center"/></w:pPr>{runs}</w:p></w:ftr>"#
+                r#"<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:ftr {FOOTER_NS}>{paras}</w:ftr>"#
             ),
         )?;
         rels.push_str(&format!(r#"<Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Id="{id}" Target="{file}"/>"#));
@@ -179,5 +211,25 @@ mod tests {
             r#"<w:body><w:p><w:pPr><w:sectPr><a/></w:sectPr></w:pPr></w:p><w:sectPr><c/></w:sectPr></w:body>"#
         );
         assert!(replace_final_sect("<w:body></w:body>", "x").is_none());
+    }
+
+    #[test]
+    fn reads_the_filter_footers() {
+        let got = filter_footers("rIdA\t<w:p/>\nbad line\nrIdB\t<w:p><w:r/></w:p>\n");
+        assert_eq!(
+            got,
+            [
+                (
+                    "rIdA".to_string(),
+                    "ftr-own1.xml".to_string(),
+                    "<w:p/>".to_string()
+                ),
+                (
+                    "rIdB".to_string(),
+                    "ftr-own2.xml".to_string(),
+                    "<w:p><w:r/></w:p>".to_string()
+                )
+            ]
+        );
     }
 }

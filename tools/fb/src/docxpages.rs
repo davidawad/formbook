@@ -29,7 +29,24 @@ fn is_page_label(line: &str) -> bool {
             .all(|c| c.is_ascii_digit() || "ivxlcdm".contains(c))
 }
 
-/// The normalized text of each page of `pdftotext` output (pages split at form feeds).
+/// The pleading-paper line numbers of a page: N when lines holding only the numbers 1, 2, ... N (N >= 10) are on it,
+/// else 0. Word line numbering (`w:lnNumType`) prints them in the text flow, one line each, where they would break a
+/// needle that runs over a line.
+fn pleading_lines(lines: &[&str]) -> usize {
+    let nums: std::collections::BTreeSet<usize> = lines
+        .iter()
+        .filter_map(|l| l.trim().parse::<usize>().ok())
+        .collect();
+    let n = (1..).take_while(|i| nums.contains(i)).count();
+    if n >= 10 {
+        n
+    } else {
+        0
+    }
+}
+
+/// The normalized text of each page of `pdftotext` output (pages split at form feeds), without its page-number line
+/// and its pleading line numbers.
 pub fn page_texts(text: &str) -> Vec<String> {
     let mut pages: Vec<&str> = text.split('\u{c}').collect();
     if pages.last().is_some_and(|p| p.trim().is_empty()) {
@@ -45,6 +62,8 @@ pub fn page_texts(text: &str) -> Vec<String> {
             if lines.last().is_some_and(|l| is_page_label(l)) {
                 lines.pop();
             }
+            let n = pleading_lines(&lines);
+            lines.retain(|l| !l.trim().parse::<usize>().is_ok_and(|v| v >= 1 && v <= n));
             norm(&lines.join("\n"))
         })
         .collect()
@@ -226,6 +245,17 @@ mod tests {
         assert_eq!(p.len(), 5);
         assert_eq!(p[1], "tableofcontentspage");
         assert_eq!(p[4], "addendumtableofcontents");
+    }
+
+    #[test]
+    fn drops_pleading_line_numbers_only_on_pleading_pages() {
+        let numbered: String = (1..=12)
+            .map(|i| format!("{i}\nline {i} of Twombly, 550\n"))
+            .collect();
+        let p = page_texts(&format!("{numbered}3\n\u{c}See 2\nnotes\n7\n\u{c}"));
+        let want: String = (1..=12).map(|i| format!("line{i}oftwombly550")).collect();
+        assert_eq!(p[0], want);
+        assert_eq!(p[1], "see2notes");
     }
 
     #[test]
