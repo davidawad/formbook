@@ -370,8 +370,17 @@
 /// Fails the build when a level-1 section required by Rule 28(a) is missing or out of order.
 #let check-sections(md) = {
   let h1s = md.matches(regex("(?m)^#[ \t]+(.+?)[ \t]*$")).map(m => lower(m.captures.at(0)).trim())
+  // Rule 28(a)(5): the argument begins with a summary. A summary that opens the Argument section
+  // (its first line is a sub-heading or a bold line starting with "Summary") meets the rule as well
+  // as a level-1 "Summary of the Argument" section placed before the Argument.
+  let arg = md.match(regex("(?mi)^#[ \t]+argument[ \t]*\r?\n\s*([^\n]*)"))
+  let summary-opens-argument = arg != none and lower(
+    arg.captures.at(0).trim(regex("[#*_ \t]"), at: start)).starts-with("summary")
+  let required = if summary-opens-argument {
+    required-sections.filter(s => s != "summary of the argument")
+  } else { required-sections }
   let i = 0
-  for want in required-sections {
+  for want in required {
     let found = false
     while i < h1s.len() and not found {
       found = h1s.at(i).starts-with(want)
