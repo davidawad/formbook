@@ -1,6 +1,7 @@
 # Bankruptcy Court, Western District of Oklahoma: adversary complaints
 
 Alias `okwb`. Scope: adversary complaints. Verified against the Local Rules of the United States Bankruptcy Court for the Western District of Oklahoma, dated January 15, 2026, effective January 15, 2026, and Federal Rules of Bankruptcy Procedure, December 1, 2025 edition, on 2026-10-20.
+Re-check cadence: check the court rules page for amendments before use and after each local-rule revision; re-check the applicable federal rules after each annual amendment cycle and at least annually (next routine review by 2027-10-20).
 
 ## Sources
 
