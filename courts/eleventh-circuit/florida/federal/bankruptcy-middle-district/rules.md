@@ -2,6 +2,8 @@
 
 Alias `flmb`. Scope: adversary-proceeding complaints and motion briefs. Verified against the Federal Rules of Bankruptcy Procedure (Dec. 1, 2024 edition as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Local rules not retrieved: https://www.flmb.uscourts.gov/local-rules returned HTTP 404 and https://www.flmb.uscourts.gov/local-rules-and-orders returned HTTP 404. The court homepage (https://www.flmb.uscourts.gov/) returned HTTP 200 and links only to "localrules/LocalRulesCommittee.pdf", which is the Local Rules Lawyers' Advisory Committee roster, not the rules. Rows below cover the national rules only.
 
 ## Sources
