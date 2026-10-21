@@ -101,5 +101,5 @@ Built by `latex/` (`template.tex` + `ca2.lua`, the same template as the other do
 - Fixed (tier 1): the cover printed the docket number at 14 pt; Local Rule 32.1(a)(1) requires type at least one inch high. Now `docket-size = 72pt` (typst) and `\fontsize{72}{80}` (latex `ca2.lua`). The cover still fits one page.
 - Fixed (tier 1): the word limit was 13,000 (FRAP); Local Rule 32.1(a)(4)(A), now fetched, sets 14,000 for a principal brief. Limit and certificate wording (FRAP 32(a)(7)(B) and LR 32.1(a)(4)(A)) updated in typst and latex.
 - Fixed (tier 2): the table of authorities sorted numbers as text ("10 U.S.C." before "9 U.S.C."); the sort key now compares digit runs by value. No visible change in this sample's order.
-- Latex re-rendered (13 pages) and every page viewed. Open latex defects, not fixed: the "Counterstatement of the Case" heading stands alone at the foot of page 2 and the Point I heading at the foot of page 6 (headings not kept with the next paragraph); the counsel block wraps "PLLC" and the role line.
+- Latex re-rendered (13 pages) and every page viewed. Open latex defects, not fixed: the counsel block wraps "PLLC" and the role line.
 - Still open: gaps 1-4, 6, 7, 9 above; the counsel role line still prints before the telephone (it is in the sample's `lines`).

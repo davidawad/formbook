@@ -139,5 +139,5 @@ Built by `latex/` (`template.tex` + `ca2.lua`, `DOC = "reply"`) and `docx/` (`re
 - Re-rendered `INPUT-reply-brief.md` with `tools/render.sh`: exit 0, no warnings, 14 pages (the committed PDF was not stale: same text and page count). Overlay rerun against the Lowe exemplar; the page map is unchanged.
 - Viewed all 14 pages at 60 dpi, the exemplar's page 1, and all 14 overlay pages at 40 dpi. The cover's 72 pt docket number already met Local Rule 32.1(a)(1).
 - Fixed (tier 2): the table of authorities listed "10 U.S.C. § 987(f)(4)" before the "9 U.S.C." entries (text sort). The sort key now compares digit runs by value; statutes read 9 U.S.C. § 2, § 16(a), § 402(a), then 10 U.S.C. § 987(f)(4).
-- Latex re-rendered (14 pages) and every page viewed. Open latex defects, not fixed: the contents entry for II.A puts its page number past the right margin; statutes still sort as text; the certificate of service's "Date" line is blank; the footnote on page 5 is set close below the text.
+- Latex re-rendered (14 pages) and every page viewed. Open latex defects, not fixed: statutes still sort as text; the certificate of service's "Date" line is blank; the footnote on page 5 is set close below the text.
 - Still open: the known gaps above (authorities page iii holds one entry; the signature lists the signer only; portion of the brief).

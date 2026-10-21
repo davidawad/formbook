@@ -94,10 +94,10 @@ The typst template is the reference. The same sample is rendered in two more eng
 | Engine | Folder | Output | Status |
 |---|---|---|---|
 | typst (primary) | `typst/` | `usage/OUTPUT-opening-brief.typst.pdf` (14 pages) | unchanged |
-| latex | `latex/` (`template.tex` + `ca1.lua`, tectonic) | `usage/OUTPUT-opening-brief.latex.pdf` (13 pages) | renders; checked by eye, see below |
+| latex | `latex/` (`template.tex` + `ca1.lua`, pdflatex) | `usage/OUTPUT-opening-brief.latex.pdf` (13 pages) | renders; checked by eye, see below |
 | docx | `docx/` (`reference.docx` + `ca1.lua`, pandoc) | `usage/OUTPUT-opening-brief.docx` | builds and validates; `.docx.pdf` BLOCKED (no LibreOffice) |
 
-**LaTeX matches** (tier 1): EB Garamond 14 pt from `fonts/` only (`fontdir`), body double-spaced at the typst pitch (31.5 pt), 1 inch margins, footnotes 14 pt, roman front matter, arabic body, the cover (FRAP 32(a)(2)), the TOC and TOA with page numbers from the aux file, the certificates (Form 6 wording and the word count, 1159 words, equal to typst), the signature and the addendum with `Add-N` pages. The addendum is required (1st Cir. R. 28.0(a)(1)) and is present in the sample.
+**LaTeX matches** (tier 1): Times 14 pt (newtx, stock TeX Live), body double-spaced at the typst pitch (31.5 pt), 1 inch margins, footnotes 14 pt, roman front matter, arabic body, the cover (FRAP 32(a)(2)), the TOC and TOA with page numbers from the aux file, the certificates (Form 6 wording and the word count, 1159 words, equal to typst), the signature and the addendum with `Add-N` pages. The addendum is required (1st Cir. R. 28.0(a)(1)) and is present in the sample.
 
 **LaTeX differs** (tier 2): the body breaks lines and pages a little differently, so the sample is 13 pages against typst's 14. The sub-heading paragraphs keep with the text below them by `\nobreak` only (`needspace` misfired in this box). The signature block is not kept with the last paragraph. Tectonic fetches TeX packages on its first run (cached afterwards).
 

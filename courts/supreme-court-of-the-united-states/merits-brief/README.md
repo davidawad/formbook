@@ -117,7 +117,7 @@ Every page of `OUTPUT-merits-brief.typst.pdf` (16 pages, TeX Gyre Schola) was ra
 
 Engine status (this box, after the font change): typst `ok`, 16 pages; latex `ok`: `usage/OUTPUT-merits-brief.latex.pdf`, 17 pages, embedded fonts TeX Gyre Schola only (not page-reviewed; the review above is the typst render). docx: `usage/OUTPUT-merits-brief.docx` regenerated with TeX Gyre Schola; `.docx.pdf` NOT rendered, because `soffice` is not installed on this box.
 
-- **latex/** (`template.tex`, `brief.lua`): same booklet geometry and type as the amicus latex. The cover, questions presented and parties pages, TOC, TOA, headings and certificate are built in `brief.lua`. Citations are the body's `toa:<key>` links; each gets a label, and the TOA lists its pages once each. Fonts: TeX Gyre Schola via `fontdir` (`\setmainfont{texgyreschola}`).
+- **latex/** (`template.tex`, `brief.lua`): same booklet geometry and type as the amicus latex. The cover, questions presented and parties pages, TOC, TOA, headings and certificate are built in `brief.lua`. Citations are the body's `toa:<key>` links; each gets a label, and the TOA lists its pages once each. Fonts: TeX Gyre Schola from `tgschola` (stock TeX Live, pdflatex).
 - **What differs from typst:** the LaTeX render is 17 pages to typst's 16; the front matter runs longer. Point headings keep the numerals written in the sample.
 - **docx/** (`reference.docx`, `brief.lua`): page setup and styles as in the amicus docx; the styles, including the headings, name TeX Gyre Schola. The cover, front pages, headings and certificate are raw WordprocessingML.
 - **docx BLOCKED items** (see `docs/DOCX.md`):

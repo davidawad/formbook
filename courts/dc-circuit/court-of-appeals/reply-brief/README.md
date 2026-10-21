@@ -107,8 +107,8 @@ The typst template is the reference. The LaTeX and DOCX engines are built from t
 
 Build commands, from the repo root:
 
-- LaTeX (tectonic; reruns until the contents and authorities settle):
-  `sh courts/dc-circuit/court-of-appeals/reply-brief/latex/render.sh courts/dc-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md courts/dc-circuit/court-of-appeals/reply-brief/usage/OUTPUT-reply-brief.latex.pdf`
+- LaTeX (pdflatex, Times from newtx; reruns until the contents and authorities settle):
+  `sh tools/render.sh --engine latex courts/dc-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md`
 - DOCX (run from the court folder):
   `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/cadc.lua usage/INPUT-reply-brief.md -o usage/OUTPUT-reply-brief.docx`
 
