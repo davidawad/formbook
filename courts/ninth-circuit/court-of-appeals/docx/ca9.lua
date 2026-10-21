@@ -911,7 +911,7 @@ function Pandoc(doc)
   -- Section 2: the front matter (i, ii ...): the table of contents, the table of authorities
   -- typst toc-section: the title (a section heading that is not itself listed) and "Page" over the page column
   add(raw(section_heading("Table of Contents", true, false, true)))
-  add(raw(para({ KEEP, spacing(84, 0), jc("right") }, runs("Page", { b = true, u = true }))))
+  add(raw(para({ KEEP, spacing(84, 0), ind(0, nil, nil, 20), jc("right") }, runs("Page", { b = true, u = true })))) -- 1 pt in: LibreOffice lets the underlined word overhang its advance
   local items = { { id = "S:toa", level = 1, title = "Table of Authorities" } }
   for _, h in ipairs(headings) do items[#items + 1] = h end
   items[#items + 1] = { id = "H:related", level = 1, title = "Statement of Related Cases" }

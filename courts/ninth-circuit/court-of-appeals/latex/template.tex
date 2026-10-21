@@ -330,7 +330,7 @@
 \newcommand\ca@shortrule{\par\begingroup\centering\rule{2in}{0.7pt}\par\endgroup}
 
 % Checkbox of Form 8 / Form 17 [checkbox]: a ruled box around an X when selected, around three spaces' width when not.
-\newcommand\ca@box[1]{{\fboxsep=0.4bp\fboxrule=0.6bp\fbox{\ifx\relax#1\relax\hbox to 0.75em{}\else#1\fi}}}
+\newcommand\ca@box[1]{{\fboxsep=0.4bp\fboxrule=0.6bp\fbox{\vrule height 13.2bp depth 2.8bp width 0pt\ifx\relax#1\relax\hbox to 0.75em{\hfil}\else#1\fi}}}
 % [option-row]: the box in a 1.6 em column at indent \ca@optind, the text hanging after it; 11.2 bp above.
 \newlength\ca@optind \setlength{\ca@optind}{0pt}
 \newcommand\ca@optionrow[2]{% #1 checked (X or empty), #2 text

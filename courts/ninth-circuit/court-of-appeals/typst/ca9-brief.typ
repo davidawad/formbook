@@ -63,8 +63,8 @@
 /// A check box: a ruled box around an "X" when checked, around three spaces' width when not (Word's bordered run,
 /// so every engine sets the same text in it).
 #let checkbox(checked) = box(
-  stroke: 0.6pt, inset: (x: 1pt), outset: (y: 1.5pt),
-  if checked [X] else { h(0.75em) },
+  stroke: 0.6pt, inset: (x: 1pt), outset: (y: 0.6pt),
+  if checked [X] else { hide("\u{a0}\u{a0}\u{a0}") },
 )
 
 /// Split "---\nyaml\n---\nbody" into (meta, body).

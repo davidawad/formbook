@@ -1,3 +1,5 @@
 PASS
-26b5d337c31589aac9a02b74ce87b4b0f44db15683288371807377e00c14dfaa  usage/OUTPUT-opening-brief-2.latex.pdf
-9770a6513d750d9def7eee51198345ae7170021dee2be1b7b3a7ce12385b8f91  usage/OUTPUT-opening-brief.latex.pdf
+3cff8a990e320f735b8d728afac71e9ef199c73c636087501a69f133e233f196  usage/OUTPUT-opening-brief-2.latex.pdf
+4c3bc4caf67dfca4791dbea899b6037bec3a1ec7808f4cd2c94a0f40e76ebdbe  usage/OUTPUT-opening-brief-2.typst.pdf
+db4f3a21229725119fdfdafa2bf3550fc05d3f8970af1a98efc5b80cb6cca3eb  usage/OUTPUT-opening-brief.latex.pdf
+049d2c8eca0300f07f203c59a5908b559a6810fe6ae1b1eecd19a4fa84a832e2  usage/OUTPUT-opening-brief.typst.pdf
