@@ -6,6 +6,7 @@
 // same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../lib/typst/tables.typ": leader-page as shared-leader-page
 
 // ---------------------------------------------------------------------------
 // Doc-type parameters (rule-driven; the only part that differs between doc types)
@@ -211,8 +212,6 @@
 // Tables of contents and authorities
 // ---------------------------------------------------------------------------
 
-#let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
-
 /// One table-of-contents row, built from a heading element. The label sits where the
 /// heading's own label sits in the body, and wrapped lines hang under the title text.
 #let toc-entry(it) = {
@@ -229,9 +228,7 @@
       h(ind)
       if numbered { box(width: heading-tab, lab) }
       title
-      h(0.4em)
-      dot-leader
-      box(width: 1.6em, align(right, it.page()))
+      shared-leader-page(box(width: 1.6em, align(right, it.page())), 0.16em, gap: 0pt)
     })))
 }
 
@@ -297,10 +294,7 @@
             linebreak()
           }
           inl(a.cite)
-          h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
+          shared-leader-page(page-text, 0.16em, before: 0.8em)
         }))
       }
     }
