@@ -95,6 +95,20 @@
   if pages.len() == 0 { [--] } else if pages.len() > 5 { [_passim_] } else { pages.map(str).join(", ") }
 }
 
+// A TOA entry: the page reference follows the leaders on the entry's last line, never alone on a line. The
+// pages sit in their own column, bottom-aligned; a list wider than `toa-page-col` runs on after a leader of at
+// least `toa-min-leader` and wraps after a comma.
+#let toa-page-col = 2.25in
+#let toa-min-leader = 0.75in
+#let toa-entry(cite, pages) = context {
+  let leader(width) = box(width: width, repeat[.#h(2pt)])
+  if measure([#pages]).width <= toa-page-col {
+    grid(columns: (1fr, auto), column-gutter: 4pt, par[#cite#h(4pt)#leader(1fr)], align(bottom, [#pages]))
+  } else {
+    par[#cite#h(4pt)#leader(1fr)#leader(toa-min-leader)#h(4pt)#pages]
+  }
+}
+
 #let authorities-table(meta) = {
   heading(level: 1)[Table of Authorities]
   set par(leading: single-leading, first-line-indent: 0pt, hanging-indent: 0.25in, justify: false)
@@ -102,7 +116,7 @@
     block(above: 1.1em, below: 0.7em, sticky: true, strong(group.heading))
     for e in group.entries {
       block(above: 0.6em, below: 0.6em, breakable: false)[
-        #inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)]) #h(4pt) #if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+        #toa-entry(inl(e.cite), if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") })
       ]
     }
   }
