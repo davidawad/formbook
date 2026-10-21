@@ -45,3 +45,15 @@ The Miller exemplar is flagged for Charter. The saved Adams memorandum is a same
 - Text layer: yes; Times New Roman embedded
 - SHA-256: `cab018690b3ef824c3623c5cd90dc2fd26e923b6bb3109fd4995f8bbddbf3411`
 - Retrieved: 2026-10-17
+
+## `FILED-EXAMPLE-motion-brief-3.pdf`
+
+
+- File: `FILED-EXAMPLE-motion-brief-3.pdf`
+- Filer: Federal Trade Commission, by Byron, Hoffman, Zuver & Moore, LLC
+- Case: *Xlear, Inc. v. Federal Trade Commission*, No. 2:25-cv-00484-DBB
+- Document: Motion to dismiss first amended complaint, Doc. 26
+- Date filed: 2025-08-25 (docket listing; Doc. 26 was filed on the same date as the dismissal motions)
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.utd.157357/gov.uscourts.utd.157357.26.0.pdf (CourtListener RECAP)
+- Date retrieved: 2026-10-21
+- SHA-256: `919da08c7f70a59d7e86840c361fdc66fc332685041c634dca5b8ecea6298113`

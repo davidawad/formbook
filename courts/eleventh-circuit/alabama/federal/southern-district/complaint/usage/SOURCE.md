@@ -13,3 +13,12 @@
 - Public court record (RECAP). Used only as a visual and structural reference; the transcription in `usage/` is ours.
 
 Second filer: not collected. The brief asks for one exemplar per doc type. Candidate second complaint from another filer, if wanted for tier 2: *Chapa v. City of Saraland, Alabama*, No. 1:26-cv-00211 (Times New Roman, 44 pages, counsel-filed; RECAP `gov.uscourts.alsd.78031.1.0.pdf`). Not downloaded into this folder.
+
+## `FILED-EXAMPLE-complaint-2.pdf`
+
+
+| File | Filer | Case / docket | Date filed | URL | Date retrieved | SHA-256 |
+|---|---|---|---|---|---|---|
+| `FILED-EXAMPLE-complaint-2.pdf` | Joel Chapa, Dalila Elizabeth Chapa, and co-plaintiffs, by counsel | *Chapa v. City of Saraland, Alabama*, No. 1:26-cv-00211 (S.D. Ala.), Doc. 1 | 2026-06-10 (ECF header) | https://storage.courtlistener.com/recap/gov.uscourts.alsd.78031/gov.uscourts.alsd.78031.1.0.pdf | 2026-10-21 | `7f6bf4a4ad4c0d30f0155801f63d714bd1731b74bd71071b01d8ca573b60873b` |
+
+Public CourtListener RECAP copy. Different filer from the existing Frankenmuth complaint.

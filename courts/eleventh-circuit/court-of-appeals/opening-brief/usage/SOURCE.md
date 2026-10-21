@@ -18,3 +18,12 @@ Why this one: a counsel-filed opening brief in this court, public RECAP record, 
 Other candidates found by search and not used: *United States v. Lozman*, No. 24-11477 (appellant's brief, RECAP `gov.uscourts.ca11.86980.18.0.pdf`, 31 pp., criminal, pro se); *United States v. Popoca*, No. 22-10994 (RECAP `gov.uscourts.ca11.77789.9.0_2.pdf`, 54 pp., premature brief filing). Clearinghouse listings were blocked from this environment.
 
 Tier-2 note: `usage/` should carry two or three exemplars from different filers before tier 2 can be judged. Only one exemplar is in hand for this doc type, so tier-2 comparison is against this one filer only (see README.md).
+
+## `FILED-EXAMPLE-opening-brief-2.pdf`
+
+
+| File | Filer | Case / docket | Date filed | URL | Date retrieved | SHA-256 |
+|---|---|---|---|---|---|---|
+| `FILED-EXAMPLE-opening-brief-2.pdf` | Appellant Fane Lozman, pro se | *United States v. Fane Lozman*, No. 24-11477 (11th Cir.), Doc. 18, appellant's brief | 2024-08-07 (CourtListener RECAP docket entry) | https://storage.courtlistener.com/recap/gov.uscourts.ca11.86980/gov.uscourts.ca11.86980.18.0.pdf | 2026-10-21 | `257bc76e0a2bb0f364158f23c4a221c617605d395f7f2eec965e4e56c2cff2a7` |
+
+Public CourtListener RECAP copy. Different filer from the existing Hill opening brief. The brief is pro se and criminal, so compare only the cover, pagination, typography and other features common to opening briefs.
