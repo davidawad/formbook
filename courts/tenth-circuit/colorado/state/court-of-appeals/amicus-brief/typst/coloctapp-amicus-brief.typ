@@ -9,6 +9,7 @@
 // sample (schema: README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../../../lib/typst/tables.typ": leader-page
 
 // ---------------------------------------------------------------------------
 // Parameters
@@ -85,7 +86,7 @@
     .filter(m => m.value == key)
     .map(m => counter(page).at(m.location()).first())
     .dedup()
-  if pages.len() == 0 { [--] } else { pages.map(str).join(", ") }
+  if pages.len() == 0 { [--] } else { pages.map(str).join(",\u{a0}") }
 }
 
 #let authorities-table(meta) = {
@@ -95,7 +96,7 @@
     block(above: 1.2em, below: 0.8em, sticky: true, strong(group.heading))
     for e in group.entries {
       block(above: 0.9em, below: 0.9em, breakable: false)[
-        #inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)]) #h(4pt) #if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+        #inl(e.cite) #leader-page(2pt, page-gap: 4pt, if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") })
       ]
     }
   }
