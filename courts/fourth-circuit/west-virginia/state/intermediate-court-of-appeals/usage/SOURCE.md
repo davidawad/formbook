@@ -19,3 +19,7 @@ Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a
 ## Follow-up search (2026-10-21, fb-l129.1)
 
 Re-searched the blocked `motion-brief` row on the official Intermediate Court current and archived docket pages. The court directs users to case pages for filed briefs; sampled docket pages publish petitioner's, respondent's, and reply briefs, while the order-list page reports rulings but does not supply motion papers. Targeted searches for ICA motion memoranda returned rules, opinions, and secondary commentary, not a public motion with supporting argument. No qualifying motion-brief PDF was found; the row remains blocked.
+
+## Follow-up search — fb-l129.1 pass 3 (2026-10-21)
+
+Rechecked the official West Virginia appellate rules and the ICA current docket/order-list pages. The ICA site links case briefs from the archived docket, but its public docket/order pages expose no filed motion-with-memorandum PDF; the motion searches continued to return orders and rules only. Official W. Va. Code § 51-11-10 and Rule 16 continue to place discretionary review and original writ applications in the Supreme Court of Appeals, not the ICA. All three current BLOCKED rows remain so.
