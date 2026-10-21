@@ -475,8 +475,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, S.D. Iowa](courts/eighth-circuit/iowa/federal/bankruptcy-southern-district) | `iasb` | up for review | — | — | — | 14 |
 | [District Court, N.D. Iowa](courts/eighth-circuit/iowa/federal/northern-district) | `iand` | up for review | — | — | — | 14 |
 | [District Court, S.D. Iowa](courts/eighth-circuit/iowa/federal/southern-district) | `iasd` | up for review | — | — | — | 14 |
-| [Court of Appeals of Iowa](courts/eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | in progress | — | — | — | 14 |
-| [Supreme Court of Iowa](courts/eighth-circuit/iowa/state/supreme-court) | `iowa` | in progress | — | — | — | 14 |
+| [Court of Appeals of Iowa](courts/eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | up for review | — | — | — | 29 |
+| [Supreme Court of Iowa](courts/eighth-circuit/iowa/state/supreme-court) | `iowa` | up for review | — | — | — | 29 |
 
 ### Minnesota
 
@@ -818,12 +818,12 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Fifth Circuit | 26 | 0 | 21 | 5 | 0 | 0.0% | 80.7% | 0 | 0 | 0 | 15.1% |
 | Sixth Circuit | 29 | 0 | 20 | 9 | 0 | 0.0% | 68.9% | 0 | 0 | 0 | 14.0% |
 | Seventh Circuit | 21 | 0 | 16 | 5 | 0 | 0.0% | 76.1% | 0 | 0 | 0 | 14.7% |
-| Eighth Circuit | 38 | 0 | 33 | 5 | 0 | 0.0% | 86.8% | 0 | 0 | 0 | 18.3% |
+| Eighth Circuit | 38 | 0 | 35 | 3 | 0 | 0.0% | 92.1% | 0 | 0 | 0 | 19.1% |
 | Ninth Circuit | 61 | 0 | 37 | 22 | 2 | 0.0% | 60.6% | 1 | 1 | 1 | 15.4% |
 | Tenth Circuit | 31 | 0 | 24 | 7 | 0 | 0.0% | 77.4% | 0 | 0 | 0 | 15.9% |
 | Eleventh Circuit | 32 | 0 | 21 | 11 | 0 | 0.0% | 65.6% | 0 | 0 | 0 | 14.9% |
 | D.C. Circuit | 4 | 0 | 3 | 1 | 0 | 0.0% | 75.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 262 | 97 | 17 | 0.0% | 69.6% | 1 | 1 | 1 | 14.8% |
+| **Total** | 376 | 0 | 264 | 95 | 17 | 0.0% | 70.2% | 1 | 1 | 1 | 14.8% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 

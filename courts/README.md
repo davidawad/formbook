@@ -209,8 +209,8 @@ Courts under `courts` (346).
 | [District Court, D. South Dakota](eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | — | — | — | 14 |
 | [Arkansas Court of Appeals](eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | up for review | — | — | — | 29 |
 | [Arkansas Supreme Court](eighth-circuit/arkansas/state/supreme-court) | `ark` | up for review | — | — | — | 29 |
-| [Court of Appeals of Iowa](eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | in progress | — | — | — | 14 |
-| [Supreme Court of Iowa](eighth-circuit/iowa/state/supreme-court) | `iowa` | in progress | — | — | — | 14 |
+| [Court of Appeals of Iowa](eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | up for review | — | — | — | 29 |
+| [Supreme Court of Iowa](eighth-circuit/iowa/state/supreme-court) | `iowa` | up for review | — | — | — | 29 |
 | [Court of Appeals of Minnesota](eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Minnesota](eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | — | — | — | 29 |
 | [Missouri Court of Appeals](eighth-circuit/missouri/state/court-of-appeals) | `moctapp` | in progress | — | — | — | 14 |
