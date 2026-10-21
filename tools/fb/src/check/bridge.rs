@@ -12,7 +12,7 @@ shift
 ST=FAIL
 MEAS="(check did not run)"
 DETAIL=""
-"chk_$fb_method" "$@"
+if "chk_$fb_method" "$@"; then :; else :; fi
 printf '\000fb-check-verdict\000%s\000%s\000%s' "$ST" "$MEAS" "$DETAIL"
 "#;
 
@@ -47,7 +47,7 @@ pub fn parse(out: &[u8]) -> (&[u8], Verdict) {
 
 /// Run `chk_<method> args...` with the per-sample variables of check.sh in the environment.
 pub fn run(env: &Env, vars: &[(&str, &str)], method: &str, args: &[String]) -> Res<Verdict> {
-    let mut c = cmd(env, "sh", &["-c", SCRIPT, "fb-check", method]);
+    let mut c = cmd(env, "bash", &["-c", SCRIPT, "fb-check", method]);
     c.args(args)
         .envs(vars.iter().copied())
         .stdin(Stdio::null())
