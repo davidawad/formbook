@@ -1,6 +1,7 @@
 # Bankruptcy Court, District of Colorado: adversary complaints and motion briefs
 
 Alias `cob`. Scope: adversary complaints and motion briefs. Verified against the Local Bankruptcy Rules, effective December 1, 2021 (court page), and Federal Rules of Bankruptcy Procedure (current edition, last amended in 2025) on 2026-10-20.
+Re-check cadence: check the court rules page for amendments before use and after each local-rule revision; re-check the applicable federal rules after each annual amendment cycle and at least annually (next routine review by 2027-10-20).
 
 ## Sources
 
