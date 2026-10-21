@@ -1,8 +1,10 @@
 ---
-# Transcription of Doc 21 (ECF, 5 pages) of Adv. Proc. No. 26-03009-thp, from the exemplar in ../usage/.
-# The notice paragraph is NOT in the exemplar: it is added from LBR 9013-1(b)(2) (see ../README.md), so the
-# overlay shows it in red only. The exemplar has no LBR 7007-1(a)(1) prefiling certification; none is added,
-# because its wording depends on facts (conferral) that the exemplar does not state.
+# Complete transcription of Doc 21 (ECF, 5 pages) of Adv. Proc. No. 26-03009-thp, from FILED-EXAMPLE-motion-brief.pdf.
+# Every word of the filing is here, in its order, with its typos (the title reads "200209966" where the body reads
+# "200200966"). Left out: the CM/ECF banner, and the filer's footer address block (Elevate Law Group, address, phone,
+# fax), which the template has no place for. Counsel and signature lines are plain text in the template (no markdown), so the
+# exemplar's bold counsel name and italic signature are not marked. The exemplar has no LBR 9013-1(b)(2) notice and no LBR 7007-1(a)(1)
+# prefiling certification, so neither is in this transcription (the template renders `notice` when a sample sets it).
 counsel:
   - "Nicholas J. Henderson, OSB No. 074027"
   - "Elevate Law Group"
@@ -24,9 +26,8 @@ caption:
       designation: "Defendant."
 case_number: "25-33351-thp7"
 adv_number: "26-03009-thp"
-brief_title: "MOTION TO VACATE ORDER DISMISSING CLAIMS BY PLAINTIFF EQUITY TRUST COMPANY JAMES DIRKSEN IRA 200200966 [ECF 9]"
-footer_title: "Motion to vacate order dismissing claims"
-notice: "**Notice.** If you oppose the relief sought in this motion, you must file a written objection with the bankruptcy court no later than 14 days after the date listed in the certificate of service below. If you do not file an objection, the court may grant the motion without further notice. Your objection must set forth the specific grounds for objection and your relation to the case. The objection must be received by the clerk of court at 1050 SW 6th Ave #700, Portland, OR 97204 or 405 E 8th Ave #2600, Eugene, OR 97401 by the deadline specified above."
+brief_title: "MOTION TO VACATE ORDER DISMISSING CLAIMS BY PLAINTIFF EQUITY TRUST COMPANY JAMES DIRKSEN IRA 200209966 [ECF 9]"
+footer_title: "MOTION TO VACATE [ECF 9] ORDER DISMISSING CLAIMS BY PLAINTIFF EQUITY TRUST COMPANY JAMES DIRKSEN IRA 200209966"
 date: "DATED April 22, 2026"
 signature:
   - "ELEVATE LAW GROUP"
@@ -38,9 +39,10 @@ signature:
   - "Email: Nick@elevatelawpdx.com"
 certificate: |
   # CERTIFICATE OF SERVICE
-  I hereby certify that on the date below I served the foregoing MOTION TO VACATE [ECF 9] ORDER DISMISSING CLAIMS BY PLAINTIFF EQUITY TRUST COMPANY JAMES DIRKSEN IRA 200200966 on the parties listed below by electronic means through the Court’s Case Management/Electronic Case File system on the date set forth below.
 
-  ~ NATALIE C SCOTT, ecf@scott-law-group.com
+  I hereby certify that on the date below I served the foregoing **MOTION TO VACATE [ECF 9] ORDER DISMISSING CLAIMS BY PLAINTIFF EQUITY TRUST COMPANY JAMES DIRKSEN IRA 200209966** on the parties listed below by electronic means through the Court\'s Case Management/Electronic Case File system on the date set forth below.
+
+  ~ • **NATALIE C SCOTT** **ecf@scott-law-group.com**
 
   Dated: April 22, 2026.
 
@@ -49,9 +51,11 @@ certificate: |
   ~ Nicholas J. Henderson, OSB No. 074027
 
   ~ Attorney for Plaintiffs
+
+  ~ 4907-9980-1764, v. 1
 ---
 
-Plaintiff James Dirksen (“Dirksen”), individually and in his capacity as Authorized Representative of the Equity Trust Company James Dirksen IRA 200200966 (“ETC”), by and through counsel, respectfully moves this Court for an order vacating the Court’s Order dismissing the claims of Equity Trust Company [ECF 9] (the “Order”). This motion is made pursuant to Federal Rule of Civil Procedure 60(b).
+Plaintiff James Dirksen ("***Dirksen***"), individually and in his capacity as Authorized Representative of the Equity Trust Company James Dirksen IRA 200200966 ("***ETC***"), by and through counsel, respectfully moves this Court for an order vacating the Court's Order dismissing the claims of Equity Trust Company [ECF 9] (the "***Order***"). This motion is made pursuant to Federal Rule of Civil Procedure 60(b).
 
 # BACKGROUND
 
@@ -79,7 +83,7 @@ Courts within the Ninth Circuit strongly favor resolving cases on the merits and
 
 ## 1. The Failure to Retain Counsel and Appear Was the Result of Excusable Neglect
 
-At the time of the Court’s order, Mr. Dirksen was proceeding pro se and did not fully understand the procedural requirement that a business entity must appear through counsel. His failure to timely retain counsel and to appear at the show cause hearing was not willful, but the result of confusion and lack of legal training. Upon recognizing the seriousness of the issue, he promptly retained undersigned counsel. This constitutes excusable neglect under Rule 60(b)(1).
+At the time of the Court's order, Mr. Dirksen was proceeding pro se and did not fully understand the procedural requirement that a business entity must appear through counsel. His failure to timely retain counsel and to appear at the show cause hearing was not willful, but the result of confusion and lack of legal training. Upon recognizing the seriousness of the issue, he promptly retained undersigned counsel. This constitutes excusable neglect under Rule 60(b)(1).
 
 ## 2. Plaintiffs Acted Promptly to Cure the Defect
 
@@ -87,11 +91,15 @@ Following entry of the dismissal order, Mr. Dirksen diligently sought legal repr
 
 ## 3. No Prejudice Will Result to Defendant
 
-Vacating the dismissal will not prejudice Defendant. This case remains in its early stages, and no substantive rulings on the merits of ETC’s claims have been made. Any minimal delay is outweighed by the strong policy favoring resolution on the merits.
+Vacating the dismissal will not prejudice Defendant. This case remains in its early stages, and no substantive rulings on the merits of ETC's claims have been made. Any minimal delay is outweighed by the strong policy favoring resolution on the merits.
 
 ## 4. Equity Trust Company Has Potentially Meritorious Claims
 
-ETC’s claims arise out of the same operative facts as those asserted by Mr. Dirksen individually and are viable causes of action under applicable law. While the merits are not before the Court at this stage, Plaintiffs submit that the claims are sufficiently substantial to warrant adjudication.
+ETC's claims arise out of the same operative facts as those asserted by Mr. Dirksen individually and are viable causes of action under applicable law. While the merits are not before the Court at this stage, Plaintiffs submit that the claims are sufficiently substantial to warrant adjudication.
+
+/ / /
+
+/ / /
 
 ## 5. Relief Is Also Appropriate Under Rule 60(b)(6)
 
@@ -99,7 +107,7 @@ Alternatively, relief is appropriate under Rule 60(b)(6) to prevent manifest inj
 
 # CONCLUSION
 
-For the foregoing reasons, Plaintiffs respectfully request that the Court:
+~ For the foregoing reasons, Plaintiffs respectfully request that the Court:
 
 1. Vacate the Order dismissing the claims of ETC;
 
