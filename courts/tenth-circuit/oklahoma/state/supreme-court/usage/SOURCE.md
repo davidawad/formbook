@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 31 pp., text layer verified 2026-10-17; Amici brief; scan with OCR text layer | `FILED-EXAMPLE-amicus-brief.pdf` | Amici curiae Choctaw Nation and Chickasaw Nation | Cossey v. Cherokee Nation Enterprises, LLC, No. 105,300 (Okla.) | 2008 | https://turtletalk.blog/wp-content/uploads/2009/01/tribal-amicus-brief-cossey.pdf | `be856aa7642496fb6d8bd690e37c93052f2a1bc7d476680e8bf3cebd7cf23fee` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search — fb-l129.1 pass 3 (2026-10-21)
+
+Re-ran public indexed searches for Oklahoma appellate filings by case caption and filing name, including OCCA motions, certiorari/review petitions and rehearing petitions; checked public OSCN appellate case-detail pages (including cases 7903, 120849, 122480, 122827, 122991, 123068 and D-2021-867) and Turtle Talk reposts. OSCN lists filings but the linked records sampled in this source use image-only PDFsharp scans. Turtle Talk surfaced Wadkins v. State's filed Motion to Vacate (F-2018-790), but it is not a better qualifying text-layer exemplar for any remaining blocked doc type; the available posts otherwise yielded opinions/orders or image-only copies. Existing COLLECTED rows stand; remaining BLOCKED rows remain as documented.
