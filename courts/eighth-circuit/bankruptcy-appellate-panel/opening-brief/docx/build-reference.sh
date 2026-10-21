@@ -1,12 +1,12 @@
 #!/bin/sh
 # Builds docx/reference.docx from pandoc's default reference for the BAP 8th Cir. brief (FRBP 8015).
-# Body: EB Garamond 14 pt (FRBP 8015(a)(5)(A)), exact 31 pt line pitch (double spacing, FRBP 8015(a)(4)),
+# Body: Times New Roman 14 pt (FRBP 8015(a)(5)(A)), exact 31 pt line pitch (double spacing, FRBP 8015(a)(4)),
 # first-line indent 0.5 in, widow control, 1 in margins on US Letter. Footnotes and block quotations are
-# single-spaced at 14 pt. Every font name is explicit (no theme fonts), so LibreOffice and Word both use EB Garamond.
+# single-spaced at 14 pt. Every font name is explicit (no theme fonts), so LibreOffice and Word both use Times New Roman.
 # Usage: sh docx/build-reference.sh <out.docx>   (needs pandoc, unzip, zip, perl, xmllint on PATH)
 set -eu
 OUT=$(cd "$(dirname "$1")" && pwd)/$(basename "$1")
-FONT="EB Garamond"
+FONT="Times New Roman"
 W=$(mktemp -d)
 trap 'rm -rf "$W"' EXIT
 pandoc -o "$W/ref.docx" --print-default-data-file reference.docx
@@ -75,7 +75,7 @@ perl -0pi -e '
     s{<w:style [^>]*w:styleId="\Q$id\E"[^>]*>.*?</w:style>}{}s;
   }
   s{</w:styles>}{join("\n", @blocks) . "\n</w:styles>"}e;
-  # document defaults: EB Garamond 14 pt, widow control, single spacing
+  # document defaults: Times New Roman 14 pt, widow control, single spacing
   s{<w:docDefaults>.*?</w:docDefaults>}{<w:docDefaults><w:rPrDefault><w:rPr>'"$F"'<w:kern w:val="2"/><w:sz w:val="28"/><w:szCs w:val="28"/><w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>}s;
   s{ w:(ascii|hAnsi|eastAsia|cs)Theme="[^"]*"}{}g;
 ' word/styles.xml

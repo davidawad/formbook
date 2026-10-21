@@ -213,6 +213,19 @@
 
 #let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
 
+/// A table row whose page reference follows the leaders on the last line of `body`, never alone on a line:
+/// the pages sit in their own column, bottom-aligned, `page-col` wide (as wide as the pages with `fit`).
+/// A page list wider than `page-col` runs on after a leader of at least `min-leader` and wraps after a comma.
+#let leader-row(indent, body, pages, page-col: 2.6em, min-leader: 0.75in, fit: false) = context {
+  if measure([#pages]).width <= page-col.to-absolute() {
+    grid(columns: (1fr, if fit { auto } else { page-col }), column-gutter: 0.3em,
+      hang(indent, { body; h(0.8em); dot-leader }),
+      align(right + bottom, pages))
+  } else {
+    hang(indent, { body; h(0.8em); dot-leader; box(width: min-leader, repeat[.#h(0.16em)]); h(0.3em); pages })
+  }
+}
+
 /// One table-of-contents row, built from a heading element. The label sits where the
 /// heading's own label sits in the body, and wrapped lines hang under the title text.
 #let toc-entry(it) = {
@@ -225,14 +238,11 @@
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(hang-by, {
+    leader-row(hang-by, {
       h(ind)
       if numbered { box(width: heading-tab, lab) }
       title
-      h(0.8em)
-      dot-leader
-      box(width: 2.6em, align(right, it.page()))
-    })))
+    }, it.page())))
 }
 
 // Certificates, certifications and the disclosure statement are `outlined: false`, so they stay out of the TOC.
@@ -286,18 +296,14 @@
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
+        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, leader-row(0.35in, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
             linebreak()
           }
           inl(a.cite)
-          h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
-        }))
+        }, page-text, page-col: 2.25in, fit: true))
       }
     }
   }
