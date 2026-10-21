@@ -4,7 +4,7 @@
 //! Contract (docs/EVAL-LOOP.md, "Engines"):
 //!   <court>/latex/render.sh     if present it owns the build: sh render.sh <court-dir> <sample.md> <out.pdf>
 //!   <court>/latex/template.tex  otherwise pandoc --template plus every latex/*.lua filter, then tectonic
-//!                               (default), xelatex (LATEX_ENGINE=xelatex), or LuaLaTeX (LATEX_ENGINE=lualatex)
+//!                               (default) or xelatex (LATEX_ENGINE=xelatex)
 //!   <court>/docx/render.sh      if present it owns the .docx: sh render.sh <court-dir> <sample.md> <out.docx>
 //!   <court>/docx/reference.docx otherwise pandoc --reference-doc plus every docx/*.lua filter, in passes when
 //!                               the filters need page numbers (docxpass.rs)
@@ -117,16 +117,6 @@ pub fn latex(root: &Path, court: &Path, sample: &str, out: &Path) -> Res<()> {
             ];
             build(work.path(), &[&pass, &pass], 40)?
         }
-        "lualatex" => {
-            let pass = [
-                "lualatex",
-                "-interaction=nonstopmode",
-                "-halt-on-error",
-                "doc.tex",
-            ];
-            let latex_lib = root.join("lib/latex");
-            build_with_tex_path(work.path(), &[&pass, &pass], 40, &latex_lib)?
-        }
         _ => return Err(fail(2, "fb render: unknown LATEX_ENGINE")),
     }
     std::fs::copy(work.path().join("doc.pdf"), out)
@@ -136,18 +126,10 @@ pub fn latex(root: &Path, court: &Path, sample: &str, out: &Path) -> Res<()> {
 
 /// Run each command in `dir`, logging to build.log; on failure print the last `keep` log lines.
 fn build(dir: &Path, passes: &[&[&str]], keep: usize) -> Res<()> {
-    build_with_tex_path(dir, passes, keep, Path::new(""))
-}
-
-fn build_with_tex_path(dir: &Path, passes: &[&[&str]], keep: usize, tex_lib: &Path) -> Res<()> {
     let mut log = String::new();
     for p in passes {
         let mut cmd = Command::new(p[0]);
         cmd.args(&p[1..]).current_dir(dir);
-        if !tex_lib.as_os_str().is_empty() {
-            let tex_path = format!("{}//:", tex_lib.display());
-            cmd.env("TEXINPUTS", &tex_path).env("LUAINPUTS", tex_path);
-        }
         let o = capture(&mut cmd)?;
         log.push_str(&String::from_utf8_lossy(&o.stdout));
         log.push_str(&String::from_utf8_lossy(&o.stderr));

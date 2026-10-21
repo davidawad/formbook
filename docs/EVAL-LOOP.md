@@ -164,7 +164,7 @@ All gates green on every sample, for an engine, writes that engine's stamp. A co
 
 ## Word compatibility (fb-w0vj)
 
-Most filed exemplars are Microsoft Word output. Word's paragraph composer is solved once, in `lib/typst/word-compat.typ` (and `lib/latex/word-compat.{sty,lua}` for LuaLaTeX), not per court. A template applies it after its own `set text`/`set par` rules:
+Most filed exemplars are Microsoft Word output. Word's paragraph composer is solved once, in `lib/typst/word-compat.typ`, not per court. A template applies it after its own `set text`/`set par` rules:
 
 ```typst
 #import "/lib/typst/word-compat.typ": word-compat
@@ -229,10 +229,10 @@ Tolerances: `tools/fb/tolerance.json` stays at 0.01 pt (two builds of the same s
 **No-go with typst 0.15.** The ceiling measured here: about 90% of lines that start alike end alike (composition only); 61.8% of comparable lines identical end to end; on lines that do break identically, word edges within 0.25 pt on 41%. Three causes, in order of weight:
 
 1. Word's line-fit decision is not a reproducible threshold (88% to 100% per document at best). A miss changes every later line of the paragraph, so the chance that a whole multi-page brief breaks identically is near zero even at 90% per line.
-2. Typst cannot test a line with compressed spaces and still set the last line of a paragraph with natural spaces: its greedy breaker only looks at natural width, so word-compat narrows the space itself, and every last line (and single-line paragraph) of a justified Word 2013+ document is set with spaces at 0.76 of normal (0.72 pt short per gap at 12 pt). LuaLaTeX does not have this limit (shrinkable glue plus the greedy `pre_linebreak_filter` in `lib/latex/word-compat.lua`).
+2. Typst cannot test a line with compressed spaces and still set the last line of a paragraph with natural spaces: its greedy breaker only looks at natural width, so word-compat narrows the space itself, and every last line (and single-line paragraph) of a justified Word 2013+ document is set with spaces at 0.76 of normal (0.72 pt short per gap at 12 pt).
 3. Template geometry chosen from other filers (indents, type size, margins, counsel blocks) and exemplars that are scaled or carry CM/ECF stamps: per template, not per engine; fixed here only where the template contradicted both of its own exemplars (idb).
 
-**LaTeX**: not calibrated. The bootstrap toolchain has no `lualatex` (tectonic/XeTeX only), and only 1 of the 21 calibration folders has a `latex/` engine. `lib/latex/word-compat.{sty,lua}` carry the calibrated rule (`\WordCompatSetup[0.76]{12pt}{24pt}`: greedy breaks with spaces at 0.76, the break forced before the space, natural spaces kept on last lines) but have not been compiled.
+**LaTeX**: not calibrated. Only 1 of the 21 calibration folders has a `latex/` engine, and the LaTeX engine has no Word-composition layer (the LuaLaTeX one was retired, fb-595.44).
 
 ## Tools
 
