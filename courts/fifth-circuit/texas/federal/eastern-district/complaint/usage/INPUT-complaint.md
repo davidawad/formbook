@@ -1,6 +1,6 @@
 ---
 court:
-  - UNITED STATES DISTRICT COURT
+  - IN THE UNITED STATES DISTRICT COURT
   - FOR THE EASTERN DISTRICT OF TEXAS
   - MARSHALL DIVISION
 caption:
@@ -10,7 +10,7 @@ caption:
     designation: "Defendant."
 case_number: "Civil Action No. 2:25-cv-00668"
 jury_demand: "JURY TRIAL DEMANDED"
-brief_title: "PLAINTIFF'S ORIGINAL COMPLAINT"
+brief_title: "PLAINTIFF’S ORIGINAL COMPLAINT"
 signature:
   firm: ["Ramey LLP"]
   signer: "William P. Ramey, III"
@@ -21,21 +21,21 @@ signature:
     - "Houston, Texas 77006"
     - "(713) 426-3923 (telephone)"
     - "(832) 900-4941 (fax)"
-  role: "Attorneys for PacSec3, LLC"
-footer_title: "PLAINTIFF'S ORIGINAL COMPLAINT"
+  role: "***Attorneys for PacSec3, LLC***"
+footer_title: "PLAINTIFF’S ORIGINAL COMPLAINT"
 ---
 
-Plaintiff, PacSec3, LLC, ("PacSec3") files this Original Complaint and demand for jury trial seeking relief from patent infringement of the claims of US Patent No. 7,523,497 ("the '497 Patent" or the "Patent-in-Suit") by Defendant, Lumen Technologies, Inc.
+Plaintiff, PacSec3, LLC, ("PacSec3") files this Original Complaint and demand for jury trial seeking relief from patent infringement of the claims of US Patent No. 7,523,497 ("the ’497 Patent" or the "Patent-in-Suit") by Defendant, Lumen Technologies, Inc.
 
 # THE PARTIES
 
 1. Plaintiff PacSec3, LLC is a Texas Limited Liability Company with its principal place of business located at 5900 Balcones Dr. Ste. 100, Austin, Texas 78731-4298.
-2. On information and belief, Defendant is a Corporation organized and existing under the laws of Louisiana. Defendant has a regular and established business in this district at 6801 Gaylord Parkway, Frisco, TX 75034. Defendant can be served through its registered agent, C T Corporation System, 3867 Plaza Tower Drive, Baton Rouge, Louisiana 70816, at its place of business, or anywhere else it may be found.
+2. On information and belief, Defendant is a Corporation organized and existing under the laws of Louisiana. Defendant has a regular and established business in this district at 6801 Gaylord Parkway, Frisco, TX 75034.[^1] Defendant can be served through its registered agent, C T Corporation System, 3867 Plaza Tower Drive, Baton Rouge, Louisiana 70816, at its place of business, or anywhere else it may be found.
 3. On information and belief, Defendant sells and offers to sell products and services throughout the United States, including in this judicial district, and introduces products and services that perform infringing methods or processes into the stream of commerce knowing that they would be sold in this judicial district.
 
 # JURISDICTION AND VENUE
 
-4. This civil action arises under the Patent Laws of the United States, 35 U.S.C. § 1 et seq., including without limitation 35 U.S.C. §§ 271, 281, 283, 284, and 285 based on Defendant's unauthorized commercial manufacture, use, importation, offer for sale, and sale of the Accused Products in the United States. This is a patent infringement lawsuit over which this Court has subject matter jurisdiction under, inter alia, 28 U.S.C. §§ 1331, 1332, and 1338(a).
+4. This civil action arises under the Patent Laws of the United States, 35 U.S.C. § 1 et seq., including without limitation 35 U.S.C. §§ 271, 281, 283, 284, and 285 based on Defendant\'s unauthorized commercial manufacture, use, importation, offer for sale, and sale of the Accused Products in the United States. This is a patent infringement lawsuit over which this Court has subject matter jurisdiction under, inter alia, 28 U.S.C. §§ 1331, 1332, and 1338(a).
 5. This United States District Court for the Eastern District of Texas has general and specific personal jurisdiction over Defendant because, directly or through intermediaries, Defendant has committed acts within the District giving rise to this action and are present in and transact and conduct business in and with residents of this District and other Districts through out the United States.
 6. Plaintiff's cause of action arises, at least in part, from Defendant's contacts with, and activities in, this District.
 7. Defendant has committed acts of infringing the patent-in-suit within this District by making, using, selling, offering for sale, and/or importing in or into this District and elsewhere, products claimed by the patent-in-suit, including without limitation products made by practicing the claimed methods of the patent-in-suit. Defendant, directly and through intermediaries, makes, uses, sells, offers for sale, imports, ships, distributes, advertises, promotes, and/or otherwise commercializes such infringing products into this District others. Defendant regularly conducts and solicits business in, engages in other persistent courses of conduct in, and/or derives substantial revenue from goods and services provided to residents of this District and others.
@@ -44,19 +44,19 @@ Plaintiff, PacSec3, LLC, ("PacSec3") files this Original Complaint and demand fo
 10. The amount in controversy exceeds $75,000 exclusive of interests and costs.
 11. Venue is proper in this Court under 28 U.S.C. § 1400(b) based on information set forth herein, which is hereby repeated and incorporated by reference. Further, upon information and belief, Defendant has committed or induced acts of infringement, and/or advertise, market, sell, and/or offer to sell products, including infringing products, in this District. In addition, and without limitation, Defendant has regular and established places of business throughout this District, including at least its regular and established place of business Texas.
 
-# INFRINGEMENT OF THE '497 PATENT
+# INFRINGEMENT OF THE ’497 PATENT
 
 12. Plaintiff incorporates by reference paragraphs 1-11 as if fully presented herein.
-13. On 2009, U.S. Patent No. 7,523,497 ("the '497 patent," included as EXHIBIT A) entitled "PACKET FLOODING DEFENSE SYSTEM," was duly and legally issued by the U.S. Patent and Trademark Office. PacSec3, LLC owns the '497 Patent by assignment.
-14. The '497 patent relates to a novel and improved manner and system of defense to a data packet flood attack.
-15. Defendant offered for sale, sold and manufactured one or more firewall systems that infringes one or more claims of the '497 Patent, including claim 10, literally or under the doctrine of equivalents. Defendant put the inventions claimed by the '497 Patent into service, i.e., used them, and; but for Defendant's actions, the claimed-inventions embodiments involving Defendant's products and services would never have been put into service. Defendant's acts complained of herein caused those claimed-invention embodiments as a whole to perform, and Defendant's procurement of monetary and commercial benefit from it.
-16. Support for the allegations of infringement may be found in Exhibit B.
-17. On information and belief, Defendant has made no attempt to design around the claims of the '497 Patent.
-18. On information and belief, Defendant did not have a reasonable basis for believing that the claims of the '497 Patent were invalid.
+13. On 2009, U.S. Patent No. 7,523,497 ("the ’497 patent," included as **EXHIBIT A**) entitled "PACKET FLOODING DEFENSE SYSTEM," was duly and legally issued by the U.S. Patent and Trademark Office. PacSec3, LLC owns the ’497 Patent by assignment.
+14. The ’497 patent relates to a novel and improved manner and system of defense to a data packet flood attack.
+15. Defendant offered for sale, sold and manufactured one or more firewall systems that infringes one or more claims of the ’497 Patent, including claim 10, literally or under the doctrine of equivalents. Defendant put the inventions claimed by the ’497 Patent into service, i.e., used them, and; but for Defendant's actions, the claimed-inventions embodiments involving Defendant's products and services would never have been put into service. Defendant's acts complained of herein caused those claimed-invention embodiments as a whole to perform, and Defendant's procurement of monetary and commercial benefit from it.
+16. Support for the allegations of infringement may be found in **Exhibit B**.
+17. On information and belief, Defendant has made no attempt to design around the claims of the ’497 Patent.
+18. On information and belief, Defendant did not have a reasonable basis for believing that the claims of the ’497 Patent were invalid.
 19. On information and belief, Defendant's Accused Instrumentality is available to businesses and individuals throughout the United States and including in this District.
 20. Plaintiff has been damaged as the result of Defendant's infringement.
-21. The claim chart attached hereto as Exhibit B describes how the elements claims 7 and 10 of the '497 Patent are infringed by the Accused Instrumentality. These allegations of infringement are preliminary and are therefore subject to change.
-22. Defendant has caused PacSec3 damage by direct infringement of the claims of the '497 Patent.
+21. The claim chart attached hereto as **Exhibit B** describes how the elements claims 7 and 10 of the ’497 Patent are infringed by the Accused Instrumentality. These allegations of infringement are preliminary and are therefore subject to change.
+22. Defendant has caused PacSec3 damage by direct infringement of the claims of the ’497 Patent.
 
 # CONDITIONS PRECEDENT
 
@@ -75,9 +75,11 @@ Plaintiff, PacSec3, LLC, ("PacSec3") files this Original Complaint and demand fo
 
 WHEREFORE, PacSec3 prays for relief as follows:
 
-- enter judgment that Defendant has infringed the claims of the '497 patent through selling, offering for sale, manufacturing, and inducing others to infringe by using and instructing to use Defendant's products;
+- enter judgment that Defendant has infringed the claims of the ’497 patent through selling, offering for sale, manufacturing, and inducing others to infringe by using and instructing to use Defendant's products;
 - award PacSec3 damages in an amount sufficient to compensate it for Defendant's infringement of the Patent-in-Suit in an amount no less than a reasonable royalty or lost profits, together with pre-judgment and post-judgment interest and costs under 35 U.S.C. § 284;
 - award PacSec3 an accounting for acts of infringement not presented at trial and an award by the Court of additional damage for any such acts of infringement;
 - declare this case to be "exceptional" under 35 U.S.C. § 285 and award PacSec3 its attorneys' fees, expenses, and costs incurred in this action;
 - provided discovery reveals that Defendant knew (1) knew of the patent-in-suit prior to the filing date of the lawsuit; (2) after acquiring that knowledge, it infringed the patent; and (3) in doing so, it knew, or should have known, that its conduct amounted to infringement of the patent, declare Defendants' infringement to be willful and treble the damages, including attorneys' fees, expenses, and costs incurred in this action and an increase in the damage award pursuant to 35 U.S.C. § 284; and,
 - award PacSec3 such other and further relief as this Court deems just and proper.
+
+[^1]: https://www.lumen.com/en-us/contact-us/office-locations.html
