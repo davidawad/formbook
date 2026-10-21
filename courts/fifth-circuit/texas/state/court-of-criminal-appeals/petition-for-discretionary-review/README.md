@@ -71,3 +71,7 @@ BLOCKED: docx page count: body 11 pages vs typst 10; last page is an orphaned si
 BLOCKED: contents page numbers do not match the footers (sample text; the same in typst; not fixed here).
 
 [Formbook index](../../../../../../README.md)
+
+## DOCX font and layout fixes (2026-10-21, fb-595.59)
+
+The docx engine moves from EB Garamond to TeX Gyre Pagella, the face the typst template declares (DEF-FONT-002). A markdown entry `title ..... page` becomes a "Leader Entry" paragraph (a right-aligned dot-leader tab, with a hanging indent), so the page reference stays on the title's last line (DEF-TOC-001). Headings and single-spaced blocks use exact line heights (22 pt and 20 pt): Pagella's auto line is taller than its type, so at a page head it rose into the top margin (DEF-FORM-002). `check.sh --engine docx` is green.

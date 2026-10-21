@@ -26,10 +26,35 @@ local function is_single(b)
   return body_text(b):find("....", 1, true) ~= nil
 end
 
+-- A table-of-contents or index entry, "title ..... page": the typed dots only mark it. It becomes the title, a tab
+-- and the page reference in the "Leader Entry" style, whose right tab draws the leader, so the reference stays on
+-- the title's last line and a long title wraps under a hanging indent (DEF-TOC-001). nil when b is not one.
+local function leader_entry(b)
+  if b.t ~= "Para" then return nil end
+  local inl = b.content
+  local at
+  for i = #inl, 1, -1 do
+    if inl[i].t == "Str" and inl[i].text:match("^%.%.%.%.+$") then at = i; break end
+  end
+  if not at or at == 1 or at == #inl then return nil end
+  local title, page = pandoc.Inlines {}, pandoc.Inlines {}
+  for i = 1, at - 1 do title:insert(inl[i]) end
+  for i = at + 1, #inl do page:insert(inl[i]) end
+  while #title > 0 and title[#title].t == "Space" do title:remove(#title) end
+  while #page > 0 and page[1].t == "Space" do page:remove(1) end
+  if #title == 0 or #page == 0 then return nil end
+  title:insert(pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>"))
+  title:extend(page)
+  return pandoc.Div({ pandoc.Para(title) }, pandoc.Attr("", {}, { ["custom-style"] = "Leader Entry" }))
+end
+
 local function styled(blocks)
   local out = {}
   for _, b in ipairs(blocks) do
-    if is_single(b) then
+    local entry = leader_entry(b)
+    if entry then
+      out[#out + 1] = entry
+    elseif is_single(b) then
       out[#out + 1] = pandoc.Div({ b }, pandoc.Attr("", {}, { ["custom-style"] = "Single" }))
     else
       out[#out + 1] = b
