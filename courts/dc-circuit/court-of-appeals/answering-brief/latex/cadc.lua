@@ -1,4 +1,4 @@
--- cadc.lua: pandoc filter for the D.C. Circuit answering-brief LaTeX template (latex/template.tex). Run by latex/render.sh.
+-- cadc.lua: pandoc filter for the D.C. Circuit answering-brief LaTeX template (latex/template.tex). Run by fb render.
 --
 -- What it does, and nothing more (layout lives in template.tex). Same rules as typst/cadc-answering-brief.typ:
 --   1. Splits the brief at `# Addendum` (the heading is dropped): the rest goes to meta `addendum`.

@@ -1,4 +1,4 @@
--- cadc.lua: pandoc filter for the D.C. Circuit LaTeX template (latex/template.tex). Run by latex/render.sh.
+-- cadc.lua: pandoc filter for the D.C. Circuit LaTeX template (latex/template.tex). Run by fb render.
 --
 -- What it does, and nothing more (layout lives in template.tex):
 --   1. Splits the brief at `# Addendum` (the heading is dropped): the rest goes to meta `addendum`.

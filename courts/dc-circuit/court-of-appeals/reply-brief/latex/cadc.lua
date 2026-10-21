@@ -1,8 +1,8 @@
--- cadc.lua: pandoc filter for the D.C. Circuit reply-brief LaTeX template (latex/template.tex). Run by latex/render.sh.
+-- cadc.lua: pandoc filter for the D.C. Circuit reply-brief LaTeX template (latex/template.tex). Run by fb render.
 --
 -- What it does, and nothing more (layout lives in template.tex):
---   1. Takes the word count from meta `words` (render.sh computes it as typst does, from the source) and stops the
---      build over the reply limit, FRAP 28.1(e)(2)(C). Meta `words_fmt` is the count with commas.
+--   1. Counts the words of the source as the typst template does (count_source) and stops the build over the reply
+--      limit, FRAP 28.1(e)(2)(C). Meta `words_fmt` is the count with commas.
 --   2. Turns every link whose target is `toa:KEY` into \dc@toacite{KEY}{text}: the text is set as written and the
 --      page where the citation starts goes to the aux file (template.tex). A key not in `authorities:` stops the build.
 --   3. Builds the table of authorities in the six groups of the typst template (cases first, cited keys only,
@@ -13,6 +13,44 @@
 --   6. Adds the telephone number to the last counsel group (typst: the phone is the last line of the counsel block).
 
 local WORD_LIMIT = 6500
+
+-- The word count of typst/cadc-reply-brief.typ (count-words): the markdown source after its frontmatter, with the
+-- markup removed line by line (comments, footnote markers and labels, link targets, heading hashes, quote and list
+-- markers, backslash escapes, emphasis), then the whitespace-delimited words. Read from the input file, not the AST.
+local function count_source(path)
+  local f = assert(io.open(path, "r"))
+  local n, fm, first = 0, false, true
+  for line in f:lines() do
+    local fence = line:match("^%-%-%-[ \t]*$")
+    if first and fence then
+      fm = true
+    elseif fm then
+      fm = not fence
+    else
+      line = line:gsub("<!%-%-[^>]*%-%->", ""):gsub("^%[%^[^%]]*%]:", ""):gsub("%[%^[^%]]*%]", "")
+      line = line:gsub("%[([^%]]*)%]%([^%)]*%)", "%1")
+      local hashes = line:match("^(#+)%s")
+      if hashes and #hashes <= 6 then
+        line = line:gsub("^#+%s+", "", 1)
+      end
+      line = line:gsub("^>%s?", "", 1)
+      if line:find("^%s*[%-%*%+]%s") then
+        line = line:gsub("^%s*[%-%*%+]%s+", "", 1)
+      else
+        line = line:gsub("^%s*%d+[%.%)]%s+", "", 1)
+      end
+      line = line:gsub("\\(.)", "%1"):gsub("%*", "")
+      line = line:gsub("^_", "", 1):gsub("([%s%(%[\"])_", "%1"):gsub("(\226\128\156)_", "%1")
+      line = line:gsub("_([%]%[%s%.,;:%)\"!%?])", "%1"):gsub("_(\226\128\157)", "%1"):gsub("_$", "")
+      for _ in line:gmatch("%S+") do
+        n = n + 1
+      end
+    end
+    first = false
+  end
+  f:close()
+  return n
+end
 
 local function stringify(x)
   return pandoc.utils.stringify(x)
@@ -134,10 +172,7 @@ function Pandoc(doc)
     body[#body + 1] = b
   end
 
-  local words = tonumber(stringify(doc.meta.words or ""))
-  if not words then
-    error("cadc.lua: no word count; render.sh passes it as meta `words`")
-  end
+  local words = count_source(PANDOC_STATE.input_files[1])
   if words > WORD_LIMIT then
     error("cadc.lua: the brief is " .. words .. " words; FRAP 28.1(e)(2)(C) allows " .. WORD_LIMIT .. " for a reply")
   end
