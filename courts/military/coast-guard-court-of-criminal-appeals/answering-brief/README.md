@@ -5,7 +5,7 @@
 - Exemplar: `usage/FILED-EXAMPLE-answering-brief.pdf`, an 8-page extract of *United States v. Steen*, Docket No. 1464, Answer to Appellant's Assignments of Error on Behalf of the United States, filed 6 May 2019 by Appellate Government Counsel (Commandant (CG-LMJ)); published by the court (source, page map: `usage/SOURCE.md`). Found on the fourth pass (2026-10-16, bead fb-595.20.21).
 - Samples: `usage/INPUT-answering-brief.md` (transcription); `usage/INPUT-answering-brief-2.md` (placeholder, kept).
 - Template: `typst/uscgcoca-answering-brief.typ`; identical to `../opening-brief/typst/uscgcoca-opening-brief.typ` except the default title ("ANSWER TO APPELLANT'S ASSIGNMENTS OF ERROR ON BEHALF OF THE UNITED STATES", as filed).
-- Status (2026-10-16): render ok (8 pages); overlay ok; every page reviewed. No `checks.yaml`; `tools/check.sh` not run. `court.json` untouched.
+- Status (2026-10-21): render ok (8 pages); overlay ok; all 8 output pages and all 8 overlay pages rasterized at 60 dpi and reviewed. Rendered with Typst 0.15.1; no warnings. No `checks.yaml`; `tools/check.sh` not run. `court.json` untouched.
 
 ## Governing rules
 
@@ -13,22 +13,22 @@ The same rules and the same parameter mapping as `../opening-brief/README.md` ("
 
 ## Overlay
 
-`sh tools/overlay.sh courts/military/coast-guard-court-of-criminal-appeals/answering-brief steen-answering-brief` exit 0:
+`sh tools/overlay.sh courts/military/coast-guard-court-of-criminal-appeals/answering-brief answering-brief` exit 0; overlay at `.overlay/courts/military/coast-guard-court-of-criminal-appeals/answering-brief/OVERLAY-answering-brief.pdf` (gitignored):
 
 | Ours | Filed (extract) | Overlap | Note |
 |---|---|---|---|
 | 1 | 1 | 83.7% | Caption, introduction, Statement of the Case |
 | 2 | 2 | 59.5% | |
-| 3 | 3 | 60.8% | |
-| 4 | 4 | 61.6% | |
-| 5 | 5 | 60.7% | Issue I, Standard of Review, Discussion |
-| 6 | 6 | 44.4% | End of the p. 6 extract, then the p. 18 text and Conclusion |
-| 7 | 8 | 46.6% | Mispaired: ours p. 7 holds the Prayer for Relief and both signature blocks (filed extract p. 7); the filed certificate page repeats Godsey's address block, so it scores higher. |
+| 3 | 3 | 63.2% | |
+| 4 | 4 | 69.7% | |
+| 5 | 5 | 75.3% | Issue I, Standard of Review, Discussion |
+| 6 | 6 | 58.7% | End of the p. 6 extract, then the p. 18 text and Conclusion |
+| 7 | 7 | 57.8% | Conclusion continues, then Prayer for Relief and both signature blocks |
 | 8 | 8 | 67.4% | Certificates (Compliance, Service) |
 
-## Page review (Gate 2), 2026-10-16
+## Page review (Gate 2), 2026-10-21
 
-All 8 pages of `OUTPUT-answering-brief.typst.pdf` and all 8 of `OVERLAY-steen-answering-brief.pdf` rasterized at 60 dpi and viewed. Fonts: Liberation Serif Regular, Bold, Italic only; no typst warnings.
+All 8 pages of `OUTPUT-answering-brief.typst.pdf` and all 8 of `.overlay/.../OVERLAY-answering-brief.pdf` rasterized at 60 dpi and viewed. Output SHA-256: `7438edf98bd3d0de4f9f34c05357dba14eb428fb552890cc748b52680c972936`. Fonts: Liberation Serif Regular, Bold, Italic only; no typst warnings.
 
 | Page | Result |
 |---|---|
@@ -36,7 +36,7 @@ All 8 pages of `OUTPUT-answering-brief.typst.pdf` and all 8 of `OVERLAY-steen-an
 | 2-4 | OK. Facts with the long footnote 2 single-spaced at the foot of p. 2. |
 | 5 | OK. Issue I heading in bold capitals; centered Standard of Review / Discussion; lettered heading A. |
 | 6 | OK. The excerpt jumps from source p. 6 to p. 18 mid-page (transcription boundary, documented in the sample header). |
-| 7 | OPEN (tier 2): PRAYER FOR RELIEF starts a new page with the two side-by-side signature blocks; the filer kept Conclusion, Prayer and signatures on one page (p. 18). Caused by the sticky heading plus the unbreakable signature row not fitting under the Conclusion. |
+| 7 | ACCEPTED (open choice): the conclusion continues from page 6, followed by Prayer for Relief and both signature blocks. The filed extract has this material on source page 18; the pagination differs because the input excerpt joins source pages 6 and 18 and omits pages 7-17. The page remains professionally grouped, and the rules do not prescribe pagination. |
 | 8 | OK. Certificate of Compliance (R. 17.3; not in the 2019 filing) and Certificate of Service, signed by the last signer (Godsey, as filed). |
 
 ## Known gaps

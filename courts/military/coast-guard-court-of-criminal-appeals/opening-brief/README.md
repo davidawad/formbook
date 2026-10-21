@@ -5,7 +5,7 @@
 - Exemplar: `usage/FILED-EXAMPLE-opening-brief.pdf`, an 8-page extract of *United States v. Steen*, Dkt. 1464, Appellant's Assignment of Error and Brief, dated 4 April 2019, published by the court (source and page map: `usage/SOURCE.md`). Found on the fourth pass (2026-10-16, bead fb-595.20.21) via the Internet Archive.
 - Samples: `usage/INPUT-opening-brief.md` (transcription of the extract); `usage/INPUT-opening-brief-2.md` (placeholder, kept).
 - Template: `typst/uscgcoca-opening-brief.typ` (entry `typst/main.typ`).
-- Status (2026-10-16): rule text read and applied; render ok (8 pages); overlay ok; every page reviewed. No `checks.yaml`, so `tools/check.sh` was not run and no stamp is claimed. `court.json` untouched.
+- Status (2026-10-21): rule text read and applied; render ok (8 pages); overlay ok; all 8 output pages and all 8 overlay pages rasterized at 60 dpi and reviewed. Rendered with Typst 0.15.1; no warnings. No `checks.yaml`, so `tools/check.sh` was not run and no stamp is claimed. `court.json` untouched.
 
 ## Governing rules
 
@@ -30,24 +30,24 @@ Body: `#` centered bold section headings; `##` bold flush-left error/issue headi
 
 ## Overlay
 
-`sh tools/overlay.sh courts/military/coast-guard-court-of-criminal-appeals/opening-brief steen-opening-brief` exit 0 (`usage/OVERLAY-steen-opening-brief.pdf`, `.txt`):
+`sh tools/overlay.sh courts/military/coast-guard-court-of-criminal-appeals/opening-brief opening-brief` exit 0; overlay at `.overlay/courts/military/coast-guard-court-of-criminal-appeals/opening-brief/OVERLAY-opening-brief.pdf` (gitignored):
 
 | Ours | Filed (extract) | Overlap | Note |
 |---|---|---|---|
 | 1 | 1 | 97.9% | Caption and Statement of the Case |
 | 2 | 2 | 73.1% | |
-| 3 | 3 | 74.8% | |
-| 4 | 4 | 60.3% | Summary of Argument |
+| 3 | 3 | 77.7% | |
+| 4 | 4 | 64.3% | Summary of Argument |
 | 5 | 6 | 72.0% | Issues Presented and Argument I start on one page in ours (filed: pp. 11 and 12) |
-| 6 | 7 | 62.4% | |
-| 7 | 8 | 78.7% | Conclusion |
+| 6 | 7 | 59.8% | |
+| 7 | 8 | 74.6% | Conclusion |
 | 8 | 1 | 4.2% | Our Certificates of Compliance and Service: the published copy has no certificate page (no counterpart; the low score is noise). |
 
 The text block, margins and line pitch coincide closely: the filer used Times New Roman 12 pt double-spaced, which Liberation Serif matches metrically.
 
-## Page review (Gate 2), 2026-10-16
+## Page review (Gate 2), 2026-10-21
 
-All 8 pages of `OUTPUT-opening-brief.typst.pdf` and all 8 of `OVERLAY-steen-opening-brief.pdf` rasterized at 60 dpi and viewed. Fonts: Liberation Serif Regular, Bold, Italic, BoldItalic only; no typst warnings.
+All 8 pages of `OUTPUT-opening-brief.typst.pdf` and all 8 of `.overlay/.../OVERLAY-opening-brief.pdf` rasterized at 60 dpi and viewed. Output SHA-256: `e910fdf3f9b57e96158db7500cde23dad055b26601bd15d057dc6fc08f957354`. Fonts: Liberation Serif Regular, Bold, Italic, BoldItalic only; no typst warnings.
 
 | Page | Result |
 |---|---|
