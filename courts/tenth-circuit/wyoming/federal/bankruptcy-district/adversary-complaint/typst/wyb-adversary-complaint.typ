@@ -2,6 +2,7 @@
 // Rules: LBR 9004-1 (form), FRBP 9004(b) (caption), FRBP 7010 and Fed. R. Civ. P. 10(b) (numbered
 // paragraphs), FRBP 7008(a) (consent to final orders). Sources and dates: ../README.md.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---- rule parameters (every number traces to a rule; see README.md) ----
 #let font-family = ("Times New Roman", "Liberation Serif")     // Times New Roman substitute, the default per docs/FONTS.md
@@ -158,6 +159,8 @@
   set text(font: font-family, size: body-size, lang: "en", hyphenate: false)
   // paragraph spacing equals the leading: between paragraphs the next line sits one double-spaced pitch below
   set par(justify: false, leading: body-leading, first-line-indent: 0pt, spacing: body-leading)
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
 
   counsel-block(meta)
   court-title()

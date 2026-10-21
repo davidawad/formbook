@@ -5,6 +5,7 @@
 // caption), LBR 9014-1 (witness testimony notice). See ./README.md for every parameter.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Parameters
@@ -204,6 +205,8 @@
   )
   set text(font: font-family, size: type-size, lang: "en")
   set par(leading: body-leading, justify: true, spacing: body-leading)   // both filers justify; no extra space between paragraphs
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
   set table(stroke: none)
   set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt,
     separator: line(length: 30%, stroke: 0.5pt))

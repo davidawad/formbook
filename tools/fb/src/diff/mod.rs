@@ -232,7 +232,7 @@ fn content_main(ex: &Path, us: &Path) -> Res<ExitCode> {
 fn breaks_main(ex: &Path, us: &Path) -> Res<ExitCode> {
     let (ex, mut us) = (measure::load(ex)?, measure::load(us)?);
     mask_render(&ex, &mut us);
-    let b = breaks::count(&content::tokens(&ex), &content::tokens(&us), LIST);
+    let b = breaks::count(&ex, &us, usize::MAX);
     print!("{}", breaks::render(&b));
     Ok(if b.identical == b.compared {
         ExitCode::SUCCESS

@@ -8,6 +8,7 @@
 // same sample file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -196,6 +197,8 @@
     first-line-indent: (amount: para-indent, all: true),
     justify: false,
   )
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
 
   // LBR 9004-1(A): footnotes are 12 point too, and single spaced.
   show footnote.entry: set text(size: type-size)

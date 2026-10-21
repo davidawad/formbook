@@ -5,6 +5,7 @@
 // page), LBR 7010-1 (caption), LBR 9004-1 (caption, title), LBR 9013-1 (certificate of service, proposed order,
 // redaction). See ../README.md.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a layout choice; see README.md)
@@ -175,6 +176,8 @@
   )
   set text(font: font-family, size: type-size, lang: "en")
   set par(justify: false, leading: single, spacing: 0pt, first-line-indent: 0pt)
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
 
   court-title(meta)
   v(24pt)

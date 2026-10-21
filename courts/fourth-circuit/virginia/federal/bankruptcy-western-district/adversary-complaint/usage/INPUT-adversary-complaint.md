@@ -1,4 +1,6 @@
 ---
+word:
+  justify: false
 # Complete transcription of usage/FILED-EXAMPLE-adversary-complaint.pdf (4 pages): caption, salutation, the
 # opening paragraph, allegations 1-21, the heading, the WHEREFORE paragraph, signature, counsel and service blocks.
 # Left out (no template field): the court-title wording "IN THE ... / FOR THE ..." (the template prints its own two

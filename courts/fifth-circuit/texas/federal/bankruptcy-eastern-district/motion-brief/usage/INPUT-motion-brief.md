@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 0.76
 # Complete transcription of usage/FILED-EXAMPLE-motion-brief.pdf (8 pages): the lead-in, the numbered paragraphs (the
 # template numbers them), the argument and authorities, the prayer, the signature and the certificate of service, with
 # the filer's typos, italics and bold. Left out: the CM/ECF banner; the filer's underlining (Count 1-9, the Rule 15

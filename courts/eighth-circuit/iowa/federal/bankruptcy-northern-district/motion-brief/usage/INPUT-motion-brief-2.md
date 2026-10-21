@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 0.76
 # Complete transcription of Doc. 13, Adv. No. 19-09015 (FILED-EXAMPLE-motion-brief-2.pdf, 6 pages): every word of the
 # body, footnote, signature and certificate of service. Left out or template-driven: the caption designations
 # "Debtor(s).", "Plaintiff(s).", "Defendant(s).", "vs." (the template prints its own); the template has one signer, so the

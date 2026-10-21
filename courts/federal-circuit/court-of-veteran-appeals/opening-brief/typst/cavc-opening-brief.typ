@@ -6,6 +6,7 @@
 // same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -415,6 +416,8 @@
     leading: body-leading, spacing: body-leading,
     first-line-indent: (amount: para-indent, all: true), justify: false,
   )
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
   set heading(numbering: none)
   set footnote.entry(
     gap: 0.5em, clearance: 0.9em, indent: 0pt,

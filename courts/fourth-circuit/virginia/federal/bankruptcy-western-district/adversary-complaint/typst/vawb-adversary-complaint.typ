@@ -7,6 +7,7 @@
 // signature page), LR 7001-1(D) (filing fee and Form B-104 cover sheet, not generated here). See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter or body, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or is a stated convention; see README.md)
@@ -141,6 +142,8 @@
   )
   set text(font: font-family, size: type-size, lang: "en")
   set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
 
   // Headings: level 1 is a centered section; level 2 and 3 are bold sub-headings.
   show heading.where(level: 1): it => block(width: 100%, above: body-leading, below: body-leading, sticky: true,

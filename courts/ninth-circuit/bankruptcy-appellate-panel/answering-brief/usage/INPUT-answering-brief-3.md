@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 0.76
 # TRANSCRIPTION of a filed document: usage/FILED-EXAMPLE-answering-brief-3.pdf (Hujazi v. Wirum, BAP No. NC-14-1030,
 # filed October 21, 2014). Complete transcription of the body: sections I-VII with the filer's numbering and titles,
 # the four argument sub-headings, the numbered statement of issues, the three block quotations, the six "///" filler

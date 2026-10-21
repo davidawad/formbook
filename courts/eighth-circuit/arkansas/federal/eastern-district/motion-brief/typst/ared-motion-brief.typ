@@ -4,6 +4,7 @@
 // block); Fed. R. Civ. P. 7(b), 11(a), 12(b)(6). See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
@@ -207,6 +208,8 @@
   )
   set text(font: font-family, size: type-size, lang: "en")
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
 
   cover(meta)
 

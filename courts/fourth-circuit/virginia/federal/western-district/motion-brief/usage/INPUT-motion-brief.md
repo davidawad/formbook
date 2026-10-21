@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 0.76
 # Sample transcribed from usage/FILED-EXAMPLE-motion-brief.pdf (Document 10, filed 02/10/26).
 # The whole memorandum: caption, introduction, argument (four parts), conclusion, signature block and certificate
 # of service. The filing's own "X Division" placeholder is kept as filed. The ECF header line is not transcribed.

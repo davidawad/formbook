@@ -3,6 +3,7 @@
 // (contents; 35 double-spaced pages for an initial brief). Content-agnostic: everything case-specific
 // comes from the sample's frontmatter and body.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---- rule parameters ----
 // L.R. 1.05(B) requires Times New Roman, Arial or Courier New. Times New Roman is the face used here;
@@ -63,6 +64,8 @@
   set page(paper: "us-letter", margin: margin, numbering: "1", number-align: center + bottom)
   set text(font: font-family, size: type-size, lang: "en")
   set par(justify: false, leading: double-leading, first-line-indent: (amount: para-indent, all: true))
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
 
   // headings: level 1 and 2 centered bold capitals (sections); level 3 left bold (subsections, as in the exemplar)
   show heading.where(level: 1): it => {

@@ -6,6 +6,7 @@
 // the values below are the convention both filed exemplars show (see ../README.md). Content-agnostic: every
 // case word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the exemplars; see README.md)
@@ -230,6 +231,8 @@
     leading: body-leading, spacing: 0pt,
     first-line-indent: (amount: para-indent, all: true), justify: false,
   )
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
   set heading(numbering: heading-num)
   set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
   // each footnote is unbreakable, so its text is never split across a page break

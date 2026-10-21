@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 1.0
 case_number: "3:26cv00213"
 caption:
   - names:

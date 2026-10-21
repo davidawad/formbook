@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 1.0
 note: "Complete transcription of usage/FILED-EXAMPLE-motion-brief-2.pdf (Doc 68, 9 pages): counsel block (the filer's two side-by-side columns, Cooper & Larsen then Nossaman, set one after the other because the template has one column), caption, title, lead-in, numbered paragraphs 1-9 (the template numbers them; the filed numbers match), footnote 1, the bullet list of paragraph 4, the block quote and its Id. cite, the WHEREFORE clause, the dated line and signature block, the certificate of service (the e-mail list and the mailing list, set in one column where the filer used two) and its signature. Left out: the CM/ECF banner and the running footer 'Objection to Debtor’s Motion to Convert / Page - n' (the template has no running footer field). The filer's typos are kept (under11U.S.C., B.R, Cir, Scott James)."
 case_number: "20-40042-JMM"
 chapter: "7"

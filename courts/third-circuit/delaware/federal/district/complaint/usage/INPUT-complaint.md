@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 0.76
 # Complete transcription of usage/FILED-EXAMPLE-complaint.pdf (8 pages): caption, title, lead-in, all 21
 # allegations under their headings (paragraph numbers come from the template, Fed. R. Civ. P. 10(b)), footnote 1,
 # the prayer as lettered items, the jury demand and the full signature block. Italics and bold as filed.

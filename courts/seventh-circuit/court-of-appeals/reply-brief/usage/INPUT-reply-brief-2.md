@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 0.76
 # TRANSCRIPTION of a filed document: usage/FILED-EXAMPLE-reply-brief-2.pdf (D'Ambrosio v. Rajala, No. 25-2231,
 # Document 42, filed November 13, 2025), PDF pages 4-17: the Reply Brief of Plaintiff-Appellant. Complete transcription
 # of the body: I. Summary of the Argument, II. Argument with points I-VIII and their sub-headings A-C, and the

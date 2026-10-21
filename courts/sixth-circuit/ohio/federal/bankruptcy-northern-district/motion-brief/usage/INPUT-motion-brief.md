@@ -1,4 +1,6 @@
 ---
+word:
+  justify: false
 # Complete transcription of FILED-EXAMPLE-motion-brief.pdf (Harrison v. Meddings, A.P. No. 21-3021, ECF Doc. 12,
 # 7 pages): the motion, its signature, the memorandum, its signature and the certificate of service, every word in the
 # filer's order and spelling. Template-driven, not transcribed as filed: the caption labels ("Case No.", "Chapter",

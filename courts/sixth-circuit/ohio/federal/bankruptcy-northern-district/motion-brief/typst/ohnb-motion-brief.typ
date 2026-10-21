@@ -3,6 +3,7 @@
 // Content-agnostic: case facts come from the frontmatter (`meta`) and the markdown body. Sizes that the
 // rules do not set are conventions, cited in README.md.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---- page and type ----
 #let page-margin = 1in          // convention: no N.D. Ohio margin rule (LBR 5005-1 sets paper size only)
@@ -108,6 +109,8 @@
   )
   set text(font: serif, size: type-size, lang: "en")
   set par(justify: false, leading: leading, first-line-indent: (amount: 0.5in, all: true), spacing: 0.9em)
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
 
   // Headings: centered, bold, capitals at levels 1 and 2 (section and memorandum headings).
   show heading: set par(first-line-indent: 0pt)

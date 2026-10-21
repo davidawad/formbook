@@ -6,6 +6,7 @@
 // See ../README.md for the rule text, the verification date and the open choices.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a named layout choice; see README.md)
@@ -179,6 +180,8 @@
   // Paragraph spacing equals the body leading: typst adds leading only between the lines of one paragraph,
   // so without it the next paragraph starts a natural line height below the last one (overlap, measured).
   set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
 
   cover(meta)
 

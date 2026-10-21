@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 0.76
 # Sample 1 of 1. Transcribed from usage/FILED-EXAMPLE-motion-brief.pdf
 # (Walker v. AmeriGas Propane, L.P., E.D. La. No. 2:26-cv-00726, Document 18-1, filed 09/28/26; 9 pages).
 # A complete transcription of the whole memorandum (every word, filer typos kept: heading "C." twice, "Ltd. V.", "2016)(internal"). Left out: the CM/ECF banner, the "CIVIL ACTION NO.:" colon and the certificate's typed name under the /s/ line (the template has no field), and the template prints a SECTION blank the filer did not. The filed motion (Document 18-0) and the notice of

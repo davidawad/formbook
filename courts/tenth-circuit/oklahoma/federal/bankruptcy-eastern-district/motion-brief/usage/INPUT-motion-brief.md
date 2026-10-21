@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 0.76
 title: "Trustee’s Brief in Support of Objection to Claim"
 debtor:
   - "RUSSELL A. BROOKS"

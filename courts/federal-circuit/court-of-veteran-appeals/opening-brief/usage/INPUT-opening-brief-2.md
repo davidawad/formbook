@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 0.76
 # Complete transcription of usage/FILED-EXAMPLE-opening-brief-2.pdf (Appellant's Brief, Butler v.
 # McDonough, Vet. App. No. 20-7621, filed 2021-04-14, Ashley C. Gautreau for the appellant). Every word
 # of the body is transcribed in the filer's order and wording. Template-generated: the caption page, the

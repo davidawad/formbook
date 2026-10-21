@@ -1,4 +1,6 @@
 ---
+word:
+  justify: false
 # Complete transcription of Doc 21 (ECF, 5 pages) of Adv. Proc. No. 26-03009-thp, from FILED-EXAMPLE-motion-brief.pdf.
 # Every word of the filing is here, in its order, with its typos (the title reads "200209966" where the body reads
 # "200200966"). Left out: the CM/ECF banner, and the filer's footer address block (Elevate Law Group, address, phone,

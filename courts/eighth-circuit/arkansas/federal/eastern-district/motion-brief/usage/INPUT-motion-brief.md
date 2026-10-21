@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 0.76
 case_number: "4:26-CV-387-LPR"
 division: "CENTRAL DIVISION"
 caption:

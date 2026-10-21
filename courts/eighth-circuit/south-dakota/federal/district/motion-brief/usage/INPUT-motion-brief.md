@@ -1,4 +1,6 @@
 ---
+word:
+  justify: false
 case_number: "5:26-CV-05068"
 division: "WESTERN DIVISION"
 caption:

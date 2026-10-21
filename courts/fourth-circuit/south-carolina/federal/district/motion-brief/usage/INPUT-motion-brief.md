@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 0.76
 court:
   - IN THE UNITED STATES DISTRICT COURT
   - FOR THE DISTRICT OF SOUTH CAROLINA

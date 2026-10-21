@@ -4,6 +4,7 @@
 // 10(a)(2) (judge initials in the caption), 11(a)(3) (counsel block under the signature). See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
@@ -148,6 +149,8 @@
   // Paragraph and block spacing equal the double-space pitch: a line of text is about 0.655em tall, so
   // with spacing 0 consecutive paragraphs and blocks overprint (measured; see README.md).
   set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
   set block(spacing: body-leading)
 
   // Headings: level 1 is a centered section; level 2 a centered bold heading (COUNT ...); level 3 bold, left.

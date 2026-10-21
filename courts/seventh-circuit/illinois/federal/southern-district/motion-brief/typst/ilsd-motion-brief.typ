@@ -7,6 +7,7 @@
 // the same sample file (schema: ../README.md).
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
@@ -151,6 +152,8 @@
   )
   set text(font: font-family, size: type-size, lang: "en", hyphenate: false)
   set par(justify: false, leading: body-leading, first-line-indent: (amount: para-indent, all: true))
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
   set block(spacing: 0pt)
   set heading(numbering: (..n) => heading-num(..n))
   show footnote.entry: set text(size: type-size)

@@ -1,4 +1,6 @@
 ---
+word:
+  justify: false
 # Complete transcription of usage/FILED-EXAMPLE-complaint.pdf (Doc 1, 5 pages): every paragraph 1-30, the
 # unnumbered jurisdiction statement, sub-headings, counts, damages bullets, prayer and signature block.
 # Caption values as the filer typed them: "25-1162" (the template prints its own "CIVIL ACTION NO." label

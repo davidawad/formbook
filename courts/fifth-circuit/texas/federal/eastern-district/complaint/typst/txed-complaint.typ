@@ -4,6 +4,7 @@
 // names in the caption); Fed. R. Civ. P. 10(a) (caption) and 10(b) (numbered paragraphs). See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
@@ -137,6 +138,8 @@
   )
   set text(font: font-family, size: type-size, lang: "en", region: "us", hyphenate: false)
   set par(justify: false, leading: body-leading, spacing: body-gap, first-line-indent: indent)
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
   set heading(numbering: none)
   show heading.where(level: 1): it => section-heading(it)
   show enum: it => numbered(it.children)

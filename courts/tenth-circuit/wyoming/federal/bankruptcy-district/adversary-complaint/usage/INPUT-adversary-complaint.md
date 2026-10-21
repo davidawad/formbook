@@ -1,4 +1,7 @@
 ---
+word:
+  justify: true
+  shrink: 1.0
 # Complete transcription of usage/FILED-EXAMPLE-adversary-complaint.pdf (6 pages): counsel block, caption, title,
 # lead-in, paragraphs 1-28 under their headings, WHEREFORE and prayer A-C, date and signature.
 # Left out (no template field): "FILED ELECTRONICALLY" under the judge line; the filer's "vs." (template prints "v.");

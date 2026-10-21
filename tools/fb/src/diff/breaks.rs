@@ -4,7 +4,8 @@
 //! when every word of it is paired by align.rs, in one run, and ours breaks before its first word,
 //! after its last, and nowhere in between. Page and line breaks count alike here (pagination is G0/G3).
 use super::align;
-use super::content::{Brk, Tok};
+use super::content::{tokens, Brk, Tok};
+use crate::measure::{Line, Measured};
 
 #[derive(Debug, Default, Clone, PartialEq)]
 pub struct Breaks {
@@ -14,6 +15,13 @@ pub struct Breaks {
     pub compared: usize,
     /// Compared lines that ours breaks identically.
     pub identical: usize,
+    /// Compared lines that ours starts at the same word and left edge (within `GEOM` pt): with the
+    /// same text width, only paragraph composition decides where such a line ends.
+    pub same_start: usize,
+    /// Of those, the ones ours ends at the same word; the rest fit more or fit less than Word.
+    pub same_start_identical: usize,
+    pub same_start_more: usize,
+    pub same_start_less: usize,
     /// First divergent compared lines, in exemplar order.
     pub first: Vec<String>,
 }
@@ -24,7 +32,18 @@ fn brk(t: &[Tok], k: usize) -> bool {
     k == 0 || t[k].start != Brk::None || t[k - 1].split != Brk::None
 }
 
-pub fn count(ex: &[Tok], us: &[Tok], max: usize) -> Breaks {
+/// Left-edge agreement for a same-start line.
+const GEOM: f64 = 0.5;
+
+fn line_of<'a>(m: &'a Measured, t: &Tok) -> Option<&'a Line> {
+    m.pages
+        .get(t.page.checked_sub(1)?)?
+        .lines
+        .get(t.line.checked_sub(1)?)
+}
+
+pub fn count(exm: &Measured, usm: &Measured, max: usize) -> Breaks {
+    let (ex, us) = (&tokens(exm)[..], &tokens(usm)[..]);
     // pair[i] = the render token paired with exemplar token i
     let pair = align::align(ex, us);
     let mut b = Breaks::default();
@@ -45,6 +64,18 @@ pub fn count(ex: &[Tok], us: &[Tok], max: usize) -> Breaks {
                 && (je == us.len() || brk(us, je))
                 && (js + 1..je).all(|k| !brk(us, k))
                 && (ex[e - 1].split == Brk::None) == (us[je - 1].split == Brk::None);
+            let geom = match (line_of(exm, &ex[s]), line_of(usm, &us[js])) {
+                (Some(a), Some(u)) => (a.left - u.left).abs() <= GEOM,
+                _ => false,
+            };
+            if brk(us, js) && geom {
+                b.same_start += 1;
+                match (same, (js + 1..je).any(|k| brk(us, k))) {
+                    (true, _) => b.same_start_identical += 1,
+                    (false, true) => b.same_start_less += 1,
+                    (false, false) => b.same_start_more += 1,
+                }
+            }
             if same {
                 b.identical += 1;
             } else if b.first.len() < max {
@@ -85,20 +116,34 @@ pub fn render(b: &Breaks) -> String {
         b.lines,
         b.lines - b.compared
     ));
+    s.push_str(&format!(
+        "SAME-START: {}/{} lines that start alike end alike (ours fits more on {}, less on {})\n",
+        b.same_start_identical, b.same_start, b.same_start_more, b.same_start_less
+    ));
     s
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::diff::{content::tokens, tests::doc};
+    use crate::diff::tests::doc;
 
     #[test]
     fn identical_and_divergent_lines() {
-        let a = tokens(&doc(&[&["a b c", "d e f", "g h"]]));
-        let b = tokens(&doc(&[&["a b c", "d e f g", "h"]]));
+        let a = doc(&[&["a b c", "d e f", "g h"], &["long common line here"]]);
+        let b = doc(&[&["a b c", "d e f g", "h"], &["long common line here"]]);
         let r = count(&a, &b, 5);
-        assert_eq!((r.lines, r.compared, r.identical), (3, 3, 1), "{r:?}");
+        assert_eq!((r.lines, r.compared, r.identical), (4, 4, 2), "{r:?}");
+        assert_eq!(
+            (
+                r.same_start,
+                r.same_start_identical,
+                r.same_start_more,
+                r.same_start_less
+            ),
+            (3, 2, 1, 0),
+            "{r:?}"
+        );
         assert!(
             r.first[0].contains("ours breaks later, after 'g'"),
             "{:?}",
@@ -115,26 +160,18 @@ mod tests {
             "{:?}",
             r.first
         );
-        assert_eq!(count(&a, &a, 5).identical, 3);
+        assert_eq!(count(&a, &a, 5).identical, 4);
     }
 
     #[test]
     fn unmatched_words_are_not_compared() {
-        let a = tokens(&doc(&[&[
-            "CAPTION ONLY HERE",
-            "one two three",
-            "four five six",
-        ]]));
-        let b = tokens(&doc(&[&[
-            "other caption text",
-            "one two three",
-            "four five six",
-        ]]));
+        let a = doc(&[&["CAPTION ONLY HERE", "one two three", "four five six"]]);
+        let b = doc(&[&["other caption text", "one two three", "four five six"]]);
         let r = count(&a, &b, 5);
         assert_eq!((r.lines, r.compared, r.identical), (3, 2, 2), "{r:?}");
         // page breaks count as line breaks
-        let c = tokens(&doc(&[&["one two three"], &["four five six"]]));
-        let d = tokens(&doc(&[&["one two three", "four five six"]]));
+        let c = doc(&[&["one two three"], &["four five six"]]);
+        let d = doc(&[&["one two three", "four five six"]]);
         assert_eq!(count(&c, &d, 5).identical, 2);
     }
 }

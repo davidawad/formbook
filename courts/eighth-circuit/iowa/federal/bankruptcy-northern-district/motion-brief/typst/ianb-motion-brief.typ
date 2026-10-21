@@ -3,6 +3,7 @@
 // The markdown body (usage/<id>.md) is rendered by cmarker; the metadata comes from the
 // YAML frontmatter of the same file (fields listed in ../README.md).
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 #let font-family = ("Times New Roman", "Liberation Serif")   // vendored in fonts/. No N.D. Iowa rule names a font (README, gap 1).
 #let type-size = 13pt              // EB Garamond at 13 pt sets close to Times 12 pt (README, gap 2).
@@ -208,6 +209,8 @@
   )
   set text(font: font-family, size: type-size, lang: "en")
   set par(leading: body-leading, justify: false, linebreaks: "optimized")
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
   // FRBP 9013(b): a motion must set out the relief requested. The check is a keyword test
   // only (README, gap 6).
   assert(md.contains("relief") or md.contains("requests") or md.contains("request"), message: "FRBP 9013(b): the motion must set out the relief requested")

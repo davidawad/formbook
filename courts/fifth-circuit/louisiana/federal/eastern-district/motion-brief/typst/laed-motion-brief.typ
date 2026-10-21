@@ -7,6 +7,7 @@
 //   FRCP 5(b)(2)(E) (electronic service, for the certificate), FRCP 10(a) (caption).
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/word-compat.typ": word-compat
 
 // ---------------------------------------------------------------------------
 // Rule-driven parameters
@@ -194,6 +195,8 @@
   )
   set text(font: font-family, size: type-size, lang: "en")
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
+  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
+  show: word-compat.with(meta.at("word", default: (:)))
   // Blocks are spaced by one double-spaced line, so the gap between paragraphs is the same as the gap between lines.
   // Single-spaced stacks (caption, counsel, signature) set their own spacing.
   set block(spacing: body-leading)
