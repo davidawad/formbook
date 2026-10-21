@@ -4,7 +4,7 @@
 //!   G1 text frame of every page (left, right, first and last baseline)
 //!   G2 content and order: the same words in the same order (masked regions out)
 //!   G3 identical line and page breaks, then every line's baseline gap, left edge and width
-//!   G4 rules, boxes, other vectors; per-line weight, slant, size and font
+//!   G4 rules, rectangles, other vectors; per-line weight, slant, size and font
 //!
 //! A gate runs only when every earlier gate passed. No scores: each finding is one place (page, line,
 //! shape), signed (ours minus exemplar) and names the template parameter it points at; the first
@@ -12,6 +12,7 @@
 //! from rebuilding the same PDF twice (never below the 0.01 pt measurement resolution).
 mod align;
 mod breaks;
+pub mod calibrate;
 mod content;
 mod geom;
 
@@ -152,7 +153,7 @@ const GATES: [(&str, &str); 5] = [
     ("G1", "text frame per page"),
     ("G2", "content and order"),
     ("G3", "line breaks and line positions"),
-    ("G4", "rules, boxes, vectors, line styles"),
+    ("G4", "rules, rectangles, vectors, line styles"),
 ];
 
 /// The printed report: one status line per gate (later gates NOT RUN after a failure), the findings,
