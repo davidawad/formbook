@@ -1,0 +1,4 @@
+# Massachusetts Appeals Court, principal brief (Mass. R.A.P. 16(a), 20(a)(4)(B)): a proportionally spaced font of 14 point
+# or larger, footnotes included. Margins of 1 inch (the default) are the minimum under Rule 20(a)(4)(A).
+font:
+  size_pt: 14

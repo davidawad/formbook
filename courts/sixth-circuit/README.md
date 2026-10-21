@@ -32,7 +32,7 @@ Courts under `courts/sixth-circuit` (29).
 | [Ohio Court of Appeals](ohio/state/court-of-appeals) | `ohioctapp` | up for review | — | — | — | 29 |
 | [Ohio Supreme Court](ohio/state/supreme-court) | `ohio` | up for review | — | — | — | 29 |
 | [Court of Appeals of Tennessee](tennessee/state/court-of-appeals) | `tennctapp` | up for review | — | — | — | 29 |
-| [Court of Criminal Appeals of Tennessee](tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | in progress | — | — | — | 29 |
+| [Court of Criminal Appeals of Tennessee](tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | up for review | — | — | — | 29 |
 | [Tennessee Supreme Court](tennessee/state/supreme-court) | `tenn` | up for review | — | — | — | 29 |
 
 [Formbook index](../../README.md)

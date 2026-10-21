@@ -24,7 +24,7 @@ Courts under `courts/eleventh-circuit` (32).
 | [United States District Court for the Middle District of Georgia](georgia/federal/middle-district) | `gamd` | up for review | — | — | — | 14 |
 | [United States District Court for the Northern District of Georgia](georgia/federal/northern-district) | `gand` | up for review | — | — | — | 14 |
 | [United States District Court for the Southern District of Georgia](georgia/federal/southern-district) | `gasd` | up for review | — | — | — | 14 |
-| [Alabama Court of Civil Appeals](alabama/state/court-of-civil-appeals) | `alacivapp` | in progress | — | — | — | 29 |
+| [Alabama Court of Civil Appeals](alabama/state/court-of-civil-appeals) | `alacivapp` | up for review | — | — | — | 29 |
 | [Alabama Court of Criminal Appeals](alabama/state/court-of-criminal-appeals) | `alacrimapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Alabama](alabama/state/supreme-court) | `ala` | up for review | — | — | — | 29 |
 | [Florida District Courts of Appeal](florida/state/district-courts-of-appeal) | `fladistctapp` | in progress | — | — | — | 29 |

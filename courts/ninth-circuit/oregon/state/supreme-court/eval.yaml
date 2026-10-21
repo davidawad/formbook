@@ -1,0 +1,3 @@
+# ORAP 5.05(3)(b)(ii): proportionally spaced type not smaller than 14 point, text and footnotes (OR-FORM-003). Applies to every doc type under this court.
+font:
+  size_pt: 14

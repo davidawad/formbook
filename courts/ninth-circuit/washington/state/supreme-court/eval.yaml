@@ -1,0 +1,8 @@
+# RAP 18.17(a)(2) and RAP 18.17(a)(1): 14-point type for all text and footnotes (WASH-FORM-004); margins at least 2 in left and 1.5 in right, top and bottom (WASH-FORM-002). Stricter than the default, so the check measures the rule's margins.
+font:
+  size_pt: 14
+params:
+  margin_left_pt: 144
+  margin_right_pt: 108
+  margin_top_pt: 108
+  margin_bottom_pt: 108

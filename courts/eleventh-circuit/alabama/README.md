@@ -11,7 +11,7 @@ Courts under `courts/eleventh-circuit/alabama` (9).
 | [United States District Court for the Middle District of Alabama](federal/middle-district) | `almd` | up for review | — | — | — | 14 |
 | [United States District Court for the Northern District of Alabama](federal/northern-district) | `alnd` | up for review | — | — | — | 14 |
 | [United States District Court for the Southern District of Alabama](federal/southern-district) | `alsd` | up for review | — | — | — | 14 |
-| [Alabama Court of Civil Appeals](state/court-of-civil-appeals) | `alacivapp` | in progress | — | — | — | 29 |
+| [Alabama Court of Civil Appeals](state/court-of-civil-appeals) | `alacivapp` | up for review | — | — | — | 29 |
 | [Alabama Court of Criminal Appeals](state/court-of-criminal-appeals) | `alacrimapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Alabama](state/supreme-court) | `ala` | up for review | — | — | — | 29 |
 

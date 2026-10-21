@@ -1,0 +1,3 @@
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `motion-brief` — Motion and supporting memorandum | COLLECTED: 54 pp., text layer verified 2026-10-17; verified response in opposition to request to file successive post-conviction petition (motion practice, Ind. P-C.R. 1(12)); copy filed as Exhibit 10, N.D. Ind. 3:25-cv-798, ECF 1-10 (federal ECF header) | `FILED-EXAMPLE-motion-brief.pdf` | Appellee State of Indiana (Indiana Attorney General) | Ward v. State, Ind. Supreme Court No. 25S-SD-167 | 2025-08-11 | https://storage.courtlistener.com/recap/gov.uscourts.innd.124301/gov.uscourts.innd.124301.1.10.pdf | `78ed9bfed67aa5452709604a472b81e7940bcfc8915f193812516f510ef51a17` |

@@ -9,8 +9,8 @@ Courts under `courts/ninth-circuit/washington` (6).
 | [United States Bankruptcy Court, W.D. Washington](federal/bankruptcy-western-district) | `wawb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Washington](federal/eastern-district) | `waed` | up for review | — | — | — | 14 |
 | [District Court, W.D. Washington](federal/western-district) | `wawd` | up for review | — | — | — | 14 |
-| [Court of Appeals of Washington](state/court-of-appeals) | `washctapp` | in progress | — | — | — | 14 |
-| [Washington Supreme Court](state/supreme-court) | `wash` | in progress | — | — | — | 14 |
+| [Court of Appeals of Washington](state/court-of-appeals) | `washctapp` | in progress | — | — | — | 29 |
+| [Washington Supreme Court](state/supreme-court) | `wash` | in progress | — | — | — | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

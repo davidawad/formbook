@@ -405,7 +405,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, M.D. Tennessee](courts/sixth-circuit/tennessee/federal/middle-district) | `tnmd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Tennessee](courts/sixth-circuit/tennessee/federal/western-district) | `tnwd` | up for review | — | — | — | 14 |
 | [Court of Appeals of Tennessee](courts/sixth-circuit/tennessee/state/court-of-appeals) | `tennctapp` | up for review | — | — | — | 29 |
-| [Court of Criminal Appeals of Tennessee](courts/sixth-circuit/tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | in progress | — | — | — | 29 |
+| [Court of Criminal Appeals of Tennessee](courts/sixth-circuit/tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | up for review | — | — | — | 29 |
 | [Tennessee Supreme Court](courts/sixth-circuit/tennessee/state/supreme-court) | `tenn` | up for review | — | — | — | 29 |
 
 ## Seventh Circuit
@@ -436,7 +436,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, N.D. Indiana](courts/seventh-circuit/indiana/federal/northern-district) | `innd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Indiana](courts/seventh-circuit/indiana/federal/southern-district) | `insd` | up for review | — | — | — | 14 |
 | [Indiana Court of Appeals](courts/seventh-circuit/indiana/state/court-of-appeals) | `indctapp` | in progress | — | — | — | 29 |
-| [Indiana Supreme Court](courts/seventh-circuit/indiana/state/supreme-court) | `ind` | in progress | — | — | — | 14 |
+| [Indiana Supreme Court](courts/seventh-circuit/indiana/state/supreme-court) | `ind` | up for review | — | — | — | 29 |
 
 ### Wisconsin
 
@@ -446,7 +446,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, W.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district) | `wiwb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/eastern-district) | `wied` | up for review | — | — | — | 14 |
 | [District Court, W.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/western-district) | `wiwd` | up for review | — | — | — | 14 |
-| [Court of Appeals of Wisconsin](courts/seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | in progress | — | — | — | 14 |
+| [Court of Appeals of Wisconsin](courts/seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | up for review | — | — | — | 29 |
 | [Wisconsin Supreme Court](courts/seventh-circuit/wisconsin/state/supreme-court) | `wis` | up for review | — | — | — | 29 |
 
 ## Eighth Circuit
@@ -540,7 +540,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Alaska](courts/ninth-circuit/alaska/federal/bankruptcy-district) | `akb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Alaska](courts/ninth-circuit/alaska/federal/district) | `akd` | up for review | — | — | — | 14 |
-| [Alaska Court of Appeals](courts/ninth-circuit/alaska/state/court-of-appeals) | `alaskactapp` | in progress | — | — | — | 0 |
+| [Alaska Court of Appeals](courts/ninth-circuit/alaska/state/court-of-appeals) | `alaskactapp` | up for review | — | — | — | 14 |
 | [Alaska Supreme Court](courts/ninth-circuit/alaska/state/supreme-court) | `alaska` | in progress | — | — | — | 14 |
 
 ### Arizona
@@ -608,7 +608,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Montana](courts/ninth-circuit/montana/federal/bankruptcy-district) | `mtb` | up for review | — | — | — | 14 |
 | [District Court, D. Montana](courts/ninth-circuit/montana/federal/district) | `mtd` | up for review | — | — | — | 14 |
-| [Montana Supreme Court](courts/ninth-circuit/montana/state/supreme-court) | `mont` | in progress | — | — | — | 14 |
+| [Montana Supreme Court](courts/ninth-circuit/montana/state/supreme-court) | `mont` | up for review | — | — | — | 29 |
 
 ### Nevada
 
@@ -625,7 +625,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, Northern Mariana Islands](courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district) | `nmib` | up for review | — | — | — | 14 |
 | [District Court, Northern Mariana Islands](courts/ninth-circuit/northern-mariana-islands/federal/district) | `nmid` | up for review | — | — | — | 14 |
-| [Supreme Court of The Commonwealth of The Northern Mariana Islands](courts/ninth-circuit/northern-mariana-islands/state/supreme-court) | `nmi` | in progress | — | — | — | 0 |
+| [Supreme Court of The Commonwealth of The Northern Mariana Islands](courts/ninth-circuit/northern-mariana-islands/state/supreme-court) | `nmi` | up for review | — | — | — | 14 |
 
 ### Oregon
 
@@ -633,8 +633,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Oregon](courts/ninth-circuit/oregon/federal/bankruptcy-district) | `orb` | up for review | — | — | — | 14 |
 | [District Court, D. Oregon](courts/ninth-circuit/oregon/federal/district) | `ord` | up for review | — | — | — | 14 |
-| [Court of Appeals of Oregon](courts/ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | in progress | — | — | — | 14 |
-| [Oregon Supreme Court](courts/ninth-circuit/oregon/state/supreme-court) | `or` | in progress | — | — | — | 14 |
+| [Court of Appeals of Oregon](courts/ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | in progress | — | — | — | 29 |
+| [Oregon Supreme Court](courts/ninth-circuit/oregon/state/supreme-court) | `or` | in progress | — | — | — | 29 |
 
 ### Washington
 
@@ -644,8 +644,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, W.D. Washington](courts/ninth-circuit/washington/federal/bankruptcy-western-district) | `wawb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Washington](courts/ninth-circuit/washington/federal/eastern-district) | `waed` | up for review | — | — | — | 14 |
 | [District Court, W.D. Washington](courts/ninth-circuit/washington/federal/western-district) | `wawd` | up for review | — | — | — | 14 |
-| [Court of Appeals of Washington](courts/ninth-circuit/washington/state/court-of-appeals) | `washctapp` | in progress | — | — | — | 14 |
-| [Washington Supreme Court](courts/ninth-circuit/washington/state/supreme-court) | `wash` | in progress | — | — | — | 14 |
+| [Court of Appeals of Washington](courts/ninth-circuit/washington/state/court-of-appeals) | `washctapp` | in progress | — | — | — | 29 |
+| [Washington Supreme Court](courts/ninth-circuit/washington/state/supreme-court) | `wash` | in progress | — | — | — | 29 |
 
 ### American Samoa
 
@@ -735,7 +735,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court for the Middle District of Alabama](courts/eleventh-circuit/alabama/federal/middle-district) | `almd` | up for review | — | — | — | 14 |
 | [United States District Court for the Northern District of Alabama](courts/eleventh-circuit/alabama/federal/northern-district) | `alnd` | up for review | — | — | — | 14 |
 | [United States District Court for the Southern District of Alabama](courts/eleventh-circuit/alabama/federal/southern-district) | `alsd` | up for review | — | — | — | 14 |
-| [Alabama Court of Civil Appeals](courts/eleventh-circuit/alabama/state/court-of-civil-appeals) | `alacivapp` | in progress | — | — | — | 29 |
+| [Alabama Court of Civil Appeals](courts/eleventh-circuit/alabama/state/court-of-civil-appeals) | `alacivapp` | up for review | — | — | — | 29 |
 | [Alabama Court of Criminal Appeals](courts/eleventh-circuit/alabama/state/court-of-criminal-appeals) | `alacrimapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Alabama](courts/eleventh-circuit/alabama/state/supreme-court) | `ala` | up for review | — | — | — | 29 |
 
@@ -807,7 +807,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Supreme Court of the United States | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
-|  | 30 | 0 | 4 | 17 | 9 | 0.0% | 13.3% | 0 | 0 | 0 | 9.8% |
+|  | 30 | 0 | 5 | 18 | 7 | 0.0% | 16.6% | 0 | 0 | 0 | 11.2% |
 | Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 16.5% |
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
@@ -816,14 +816,14 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 19.1% |
 | Fifth Circuit | 26 | 0 | 22 | 4 | 0 | 0.0% | 84.6% | 0 | 0 | 0 | 15.7% |
-| Sixth Circuit | 29 | 0 | 28 | 1 | 0 | 0.0% | 96.5% | 0 | 0 | 0 | 18.6% |
-| Seventh Circuit | 21 | 0 | 18 | 3 | 0 | 0.0% | 85.7% | 0 | 0 | 0 | 16.8% |
+| Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 18.6% |
+| Seventh Circuit | 21 | 0 | 20 | 1 | 0 | 0.0% | 95.2% | 0 | 0 | 0 | 18.2% |
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 20.3% |
-| Ninth Circuit | 61 | 0 | 39 | 20 | 2 | 0.0% | 63.9% | 1 | 1 | 1 | 15.7% |
+| Ninth Circuit | 61 | 0 | 42 | 17 | 2 | 0.0% | 68.8% | 1 | 1 | 1 | 17.4% |
 | Tenth Circuit | 31 | 0 | 25 | 6 | 0 | 0.0% | 80.6% | 0 | 0 | 0 | 16.4% |
-| Eleventh Circuit | 32 | 0 | 23 | 9 | 0 | 0.0% | 71.8% | 0 | 0 | 0 | 16.8% |
+| Eleventh Circuit | 32 | 0 | 24 | 8 | 0 | 0.0% | 75.0% | 0 | 0 | 0 | 16.8% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 17.7% |
-| **Total** | 376 | 0 | 296 | 68 | 12 | 0.0% | 78.7% | 1 | 1 | 1 | 16.5% |
+| **Total** | 376 | 0 | 304 | 62 | 10 | 0.0% | 80.8% | 1 | 1 | 1 | 17.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -835,17 +835,17 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Federal Circuit and feeder courts | 14 | 14 | 14 | 14 | 14 | 14 | 100.0% | 14 |
 | Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 12 |
 | National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 6 |
-| First Circuit | 48 | 48 | 48 | 48 | 47 | 47 | 97.9% | 48 |
+| First Circuit | 53 | 53 | 52 | 52 | 51 | 51 | 96.2% | 52 |
 | Second Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 42 |
 | Third Circuit | 58 | 58 | 58 | 58 | 58 | 58 | 100.0% | 58 |
 | Fourth Circuit | 103 | 103 | 103 | 103 | 103 | 103 | 100.0% | 103 |
 | Fifth Circuit | 52 | 52 | 52 | 52 | 52 | 52 | 100.0% | 52 |
-| Sixth Circuit | 83 | 83 | 83 | 83 | 79 | 79 | 95.1% | 83 |
-| Seventh Circuit | 52 | 52 | 52 | 52 | 52 | 52 | 100.0% | 52 |
+| Sixth Circuit | 87 | 87 | 87 | 87 | 83 | 83 | 95.4% | 87 |
+| Seventh Circuit | 56 | 56 | 56 | 56 | 56 | 56 | 100.0% | 56 |
 | Eighth Circuit | 134 | 134 | 134 | 134 | 133 | 133 | 99.2% | 134 |
-| Ninth Circuit | 88 | 88 | 88 | 88 | 86 | 86 | 97.7% | 88 |
-| Tenth Circuit | 71 | 71 | 71 | 71 | 68 | 68 | 95.7% | 71 |
-| Eleventh Circuit | 56 | 56 | 56 | 56 | 55 | 55 | 98.2% | 56 |
+| Ninth Circuit | 113 | 113 | 111 | 111 | 110 | 109 | 96.4% | 111 |
+| Tenth Circuit | 72 | 72 | 72 | 72 | 69 | 69 | 95.8% | 72 |
+| Eleventh Circuit | 57 | 57 | 57 | 57 | 56 | 56 | 98.2% | 57 |
 | D.C. Circuit | 9 | 9 | 9 | 9 | 9 | 9 | 100.0% | 9 |
-| **Total** | 849 | 849 | 849 | 849 | 835 | 835 | 98.3% | 849 |
+| **Total** | 889 | 889 | 886 | 886 | 873 | 872 | 98.0% | 886 |
 <!-- tracker:end -->
