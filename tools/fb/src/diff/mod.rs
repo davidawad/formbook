@@ -198,13 +198,22 @@ pub fn diff_content(ex: &Measured, us: &Measured, tol: &Tol) -> (Vec<String>, Ve
 fn content_main(ex: &Path, us: &Path) -> Res<ExitCode> {
     let tol = Tol::load();
     let (g0, g2) = diff_content(&measure::load(ex)?, &measure::load(us)?, &tol);
-    for (g, what, f) in [("G0", "page count and size", &g0), ("G2", "content and order", &g2)] {
-        println!("{g} {:<7} {what}", if f.is_empty() { "PASS" } else { "FAIL" });
+    for (g, what, f) in [
+        ("G0", "page count and size", &g0),
+        ("G2", "content and order", &g2),
+    ] {
+        println!(
+            "{g} {:<7} {what}",
+            if f.is_empty() { "PASS" } else { "FAIL" }
+        );
         for x in f {
             println!("  {x}");
         }
     }
-    let first = g0.first().map(|f| ("G0", f)).or(g2.first().map(|f| ("G2", f)));
+    let first = g0
+        .first()
+        .map(|f| ("G0", f))
+        .or(g2.first().map(|f| ("G2", f)));
     match first {
         None => println!("RESULT: CONTENT PASS (G0, G2)"),
         Some((g, f)) => println!("RESULT: CONTENT FAIL at {g}: {f}"),
