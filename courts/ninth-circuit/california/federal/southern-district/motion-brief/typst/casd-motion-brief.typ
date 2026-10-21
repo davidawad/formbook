@@ -9,7 +9,7 @@
 
 #import "@preview/cmarker:0.1.10"
 #import "../../../../../../../lib/typst/pleading-paper.typ": background as shared-pleading-background
-#import "../../../../../../../lib/typst/tables.typ": leader-page as shared-leader-page, grid-outline-row as shared-grid-outline-row
+#import "../../../../../../../lib/typst/tables.typ": leader-row, grid-outline-row as shared-grid-outline-row
 #import "../../../../../../../lib/typst/typography.typ": footnote-style as shared-footnote-style
 #import "../../../../../../../lib/typst/toa.typ": linked-authorities as shared-linked-authorities, cited-authorities as shared-cited-authorities, authority-page-labels as shared-authority-page-labels
 
@@ -173,14 +173,14 @@
       for (key, a) in members {
         // Distinct printed page labels, in document order.
         let page-text = shared-authority-page-labels(hits, key, passim-threshold)
-        block(breakable: false, above: 0.6em, below: 0pt, width: 100%, hang(0.35in, {
+        block(breakable: false, above: 0.6em, below: 0pt, width: 100%, leader-row({
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             if a.cite != "" { [, ] }
           }
           inl(a.cite)
-          shared-leader-page(page-text, 0.25em, before: 0.8em)
-        }))
+        }, page-text,
+          hang: 0.35in, leading: single-leading, dot-gap: 0.25em, lead-gap: 0.8em, gutter: 0.3em, min-leader: 1em))
       }
     }
   }
