@@ -11,7 +11,7 @@ local SGL = 276 -- single-spaced line, 13.8 pt (typst single-leading 0.5em on a 
 local ROW = 480 -- one numbered line, 24 pt
 local MIN_COUNSEL_ROWS = 7 -- L.R. 131(a)
 
-local SECT = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1080" w:bottom="960" w:left="2160" w:header="720" w:footer="600" w:gutter="0"/>'
+local SECT = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="960" w:left="2160" w:header="720" w:footer="600" w:gutter="0"/>'
   .. '<w:pgBorders w:offsetFrom="text"><w:left w:val="double" w:sz="4" w:space="12" w:color="000000"/><w:right w:val="single" w:sz="4" w:space="7" w:color="000000"/></w:pgBorders>'
 
 local function esc(s)
@@ -77,15 +77,15 @@ local function caption(meta)
   end
   if meta.action_filed then right = right .. xpara("Single", gap, run("Action Filed: " .. plain(meta.action_filed))) end
   local rule = '<w:tcBorders><w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:tcBorders>'
-  return raw('<w:tbl><w:tblPr><w:tblW w:w="9000" w:type="dxa"/>'
+  return raw('<w:tbl><w:tblPr><w:tblW w:w="8640" w:type="dxa"/>'
     .. '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>'
     .. '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
     .. '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="1" w:noVBand="1"/></w:tblPr>'
-    .. '<w:tblGrid><w:gridCol w:w="4608"/><w:gridCol w:w="288"/><w:gridCol w:w="4104"/></w:tblGrid>'
+    .. '<w:tblGrid><w:gridCol w:w="4608"/><w:gridCol w:w="288"/><w:gridCol w:w="3744"/></w:tblGrid>'
     .. '<w:tr>'
     .. '<w:tc><w:tcPr><w:tcW w:w="4608" w:type="dxa"/>' .. rule .. '<w:tcMar><w:right w:w="200" w:type="dxa"/><w:bottom w:w="160" w:type="dxa"/></w:tcMar></w:tcPr>' .. left .. '</w:tc>'
     .. '<w:tc><w:tcPr><w:tcW w:w="288" w:type="dxa"/></w:tcPr>' .. xpara("Single", "") .. '</w:tc>'
-    .. '<w:tc><w:tcPr><w:tcW w:w="4104" w:type="dxa"/></w:tcPr>' .. right .. '</w:tc>'
+    .. '<w:tc><w:tcPr><w:tcW w:w="3744" w:type="dxa"/></w:tcPr>' .. right .. '</w:tc>'
     .. '</w:tr></w:tbl>')
 end
 
@@ -124,15 +124,15 @@ local function signature(sig, date)
   right = right .. xpara("SingleKeep", "", run("By: /s/ " .. plain(sig.signer)))
   right = right .. xpara("SingleKeep", "", run(plain(sig.signer)))
   right = right .. lines(sig.lines)
-  return raw('<w:tbl><w:tblPr><w:tblW w:w="9000" w:type="dxa"/>'
+  return raw('<w:tbl><w:tblPr><w:tblW w:w="8640" w:type="dxa"/>'
     .. '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>'
     .. '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
     .. '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="1" w:noVBand="1"/></w:tblPr>'
-    .. '<w:tblGrid><w:gridCol w:w="3744"/><w:gridCol w:w="288"/><w:gridCol w:w="4968"/></w:tblGrid>'
+    .. '<w:tblGrid><w:gridCol w:w="3744"/><w:gridCol w:w="288"/><w:gridCol w:w="4608"/></w:tblGrid>'
     .. '<w:tr><w:trPr><w:cantSplit/></w:trPr>'
     .. '<w:tc><w:tcPr><w:tcW w:w="3744" w:type="dxa"/></w:tcPr>' .. xpara("SingleKeep", "", run("Dated: " .. plain(date))) .. '</w:tc>'
     .. '<w:tc><w:tcPr><w:tcW w:w="288" w:type="dxa"/></w:tcPr>' .. xpara("SingleKeep", "") .. '</w:tc>'
-    .. '<w:tc><w:tcPr><w:tcW w:w="4968" w:type="dxa"/></w:tcPr>' .. right .. '</w:tc>'
+    .. '<w:tc><w:tcPr><w:tcW w:w="4608" w:type="dxa"/></w:tcPr>' .. right .. '</w:tc>'
     .. '</w:tr></w:tbl>')
 end
 

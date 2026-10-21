@@ -11,6 +11,7 @@
 //!                                          replace: the styles part holds only these (and the defaults and
 //!                                          a <w:latentStyles>, when given)
 //!   <footer id="rIdX"><w:p>..</w:p></footer>  a footer part (word/footerN.xml) under relationship id rIdX
+//!   <header id="rIdY"><w:p>..</w:p></header>  a header part (word/headerN.xml), the same way
 //!   <w:sectPr>..</w:sectPr>                the document's last section properties (optional)
 //! </reference>
 //! ```
@@ -35,6 +36,7 @@ struct Spec {
     latent: Option<String>,
     styles: Vec<String>,
     footers: Vec<(String, String)>,
+    headers: Vec<(String, String)>,
     sect: Option<String>,
 }
 
@@ -99,14 +101,15 @@ fn parse(text: &str) -> Res<Spec> {
         Some("replace") => true,
         Some(v) => return Err(bad(&format!("styles=\"{v}\" (merge or replace)"))),
     };
-    let footer_els = elements(text, "footer");
     let mut rest = text.to_string();
-    let mut footers = vec![];
-    for f in &footer_els {
-        let id = attr(&f[..f.find('>').unwrap_or(0)], "id")
-            .ok_or_else(|| bad("a <footer> has no id"))?;
-        footers.push((id, inner(f).trim().to_string()));
-        rest = rest.replacen(f, "", 1);
+    let (mut footers, mut headers) = (vec![], vec![]);
+    for (kind, list) in [("footer", &mut footers), ("header", &mut headers)] {
+        for f in elements(text, kind) {
+            let id = attr(&f[..f.find('>').unwrap_or(0)], "id")
+                .ok_or_else(|| bad(&format!("a <{kind}> has no id")))?;
+            list.push((id, inner(f).trim().to_string()));
+            rest = rest.replacen(f, "", 1);
+        }
     }
     Ok(Spec {
         replace_styles,
@@ -123,6 +126,7 @@ fn parse(text: &str) -> Res<Spec> {
             .map(|s| s.to_string())
             .collect(),
         footers,
+        headers,
         sect: elements(&rest, "w:sectPr").last().map(|s| s.to_string()),
     })
 }
@@ -248,14 +252,17 @@ pub fn build(spec_path: &Path, work: &Path) -> Res<PathBuf> {
     }
     let mut rels = String::new();
     let mut types = String::new();
-    for (n, (id, body)) in spec.footers.iter().enumerate() {
-        let file = format!("footer{}.xml", n + 1);
-        write(
-            &x.join("word").join(&file),
-            &format!("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<w:ftr {STYLES_NS}>{body}</w:ftr>\n"),
-        )?;
-        rels.push_str(&format!(r#"<Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Id="{id}" Target="{file}" />"#));
-        types.push_str(&format!(r#"<Override PartName="/word/{file}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml" />"#));
+    for (kind, list) in [("footer", &spec.footers), ("header", &spec.headers)] {
+        let root = if kind == "footer" { "w:ftr" } else { "w:hdr" };
+        for (n, (id, body)) in list.iter().enumerate() {
+            let file = format!("{kind}{}.xml", n + 1);
+            write(
+                &x.join("word").join(&file),
+                &format!("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<{root} {STYLES_NS}>{body}</{root}>\n"),
+            )?;
+            rels.push_str(&format!(r#"<Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/{kind}" Id="{id}" Target="{file}" />"#));
+            types.push_str(&format!(r#"<Override PartName="/word/{file}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml" />"#));
+        }
     }
     let rp = x.join("word/_rels/document.xml.rels");
     write(
@@ -347,6 +354,7 @@ mod tests {
 <w:style w:type="paragraph" w:styleId="Normal"><w:name w:val="Normal"/></w:style>
 <w:style w:type="paragraph" w:styleId="New"><w:name w:val="New"/></w:style>
 <footer id="rIdF"><w:p><w:r><w:t>1</w:t></w:r></w:p></footer>
+<header id="rIdH"><w:p/></header>
 <w:sectPr><w:footerReference r:id="rIdF"/></w:sectPr>
 </reference>
 "#;
@@ -361,6 +369,7 @@ mod tests {
             Some("<w:docDefaults><w:rPrDefault/></w:docDefaults>")
         );
         assert_eq!(s.styles.len(), 2);
+        assert_eq!(s.headers, vec![("rIdH".to_string(), "<w:p/>".to_string())]);
         assert_eq!(
             s.footers,
             vec![(
