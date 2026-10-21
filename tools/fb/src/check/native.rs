@@ -87,9 +87,7 @@ pub fn evaluate(c: &Ctx, s: &Sample, method: &str) -> Res<Option<Verdict>> {
             let width = super::sh::cfg(&c.env, &c.checks, ".params.page_width_pt")?;
             let height = super::sh::cfg(&c.env, &c.checks, ".params.page_height_pt")?;
             result(
-                sizes.len() == 1
-                    && sizes.get(&format!("{width} x {height}"))
-                        == Some(&s.npages.parse().unwrap_or(0)),
+                size_matches(&sizes, &width, &height, s.npages.parse().unwrap_or(0)),
                 measured,
                 "",
             )
@@ -107,6 +105,33 @@ pub fn evaluate(c: &Ctx, s: &Sample, method: &str) -> Res<Option<Verdict>> {
         _ => return Ok(None),
     };
     Ok(Some(verdict))
+}
+
+/// LibreOffice keeps page sizes in whole 1/100 mm (0.0283 pt), so a 6 1/8 in page (15557.5) comes out
+/// 441.014 pt; a size within one such unit of the expected one is that size.
+const PAGE_SIZE_TOL_PT: f64 = 72.0 / 2540.0;
+
+/// All `npages` pages have one size, `width` x `height` pt within PAGE_SIZE_TOL_PT.
+fn size_matches(
+    sizes: &std::collections::BTreeMap<String, usize>,
+    width: &str,
+    height: &str,
+    npages: usize,
+) -> bool {
+    let near = |a: &str, b: &str| match (a.parse::<f64>(), b.parse::<f64>()) {
+        (Ok(a), Ok(b)) => (a - b).abs() <= PAGE_SIZE_TOL_PT,
+        _ => false,
+    };
+    let mut it = sizes.iter();
+    match (it.next(), it.next()) {
+        (Some((size, n)), None) => {
+            *n == npages
+                && size
+                    .split_once(" x ")
+                    .is_some_and(|(w, h)| near(w, width) && near(h, height))
+        }
+        _ => false,
+    }
 }
 
 fn report_lines(w: &str, pattern: &str) -> Res<String> {
@@ -137,7 +162,21 @@ fn simple_match(line: &str, pattern: &str) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use super::simple_match;
+    use super::{simple_match, size_matches};
+
+    #[test]
+    fn page_size_allows_libreoffice_rounding_only() {
+        let one = |size: &str, n| std::collections::BTreeMap::from([(size.to_string(), n)]);
+        assert!(size_matches(&one("441 x 666", 12), "441", "666", 12));
+        // LibreOffice: 8820 twips (441 pt) -> 15558/100 mm -> 441.014 pt
+        assert!(size_matches(&one("441.014 x 666", 12), "441", "666", 12));
+        assert!(!size_matches(&one("441.043 x 666", 12), "441", "666", 12));
+        assert!(!size_matches(&one("612 x 792", 12), "441", "666", 12));
+        assert!(!size_matches(&one("441 x 666", 11), "441", "666", 12));
+        let mut two = one("441 x 666", 11);
+        two.insert("612 x 792".into(), 1);
+        assert!(!size_matches(&two, "441", "666", 12));
+    }
 
     #[test]
     fn selectors_match_the_shell_check_report_prefixes() {

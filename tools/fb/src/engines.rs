@@ -384,15 +384,20 @@ pub(crate) fn convert(docx: &Path, out_pdf: &Path, work: &Path) -> Res<()> {
         .map(PathBuf::from)
         .or_else(|| which("soffice"))
         .unwrap_or_else(|| PathBuf::from("/opt/homebrew/bin/soffice"));
+    let mut cmd = Command::new(&soffice);
+    if let Ok(root) = crate::repo_root() {
+        let conf = crate::lofonts::fontconfig(&root, work)
+            .map_err(|e| fail(2, format!("fb render: {}: {e}", work.display())))?;
+        cmd.env("FONTCONFIG_FILE", conf);
+    }
     let o = capture(
-        Command::new(&soffice)
-            .arg(format!(
-                "-env:UserInstallation=file://{}/profile",
-                work.display()
-            ))
-            .args(["--headless", "--convert-to", "pdf", "--outdir"])
-            .arg(work)
-            .arg(docx),
+        cmd.arg(format!(
+            "-env:UserInstallation=file://{}/profile",
+            work.display()
+        ))
+        .args(["--headless", "--convert-to", "pdf", "--outdir"])
+        .arg(work)
+        .arg(docx),
     )?;
     if !o.status.success() {
         eprint!("{}", String::from_utf8_lossy(&o.stdout));

@@ -16,6 +16,7 @@ mod filing;
 mod fonts;
 mod layout;
 mod lint;
+mod lofonts;
 mod manifest;
 mod matchstamp;
 mod measure;

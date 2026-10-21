@@ -58,9 +58,12 @@ chk_g0_footnotes() {
 # ---------------------------------------------------------------- Gate 1: page form
 chk_page_size() {
   sizes=$(awk '/^Page +[0-9]+ size:/ { s[$4 " x " $6]++ } END { for (k in s) printf "%s (%d pages) ", k, s[k] }' "$W/info.txt")
-  want="$(cfg .params.page_width_pt) x $(cfg .params.page_height_pt)"
   MEAS="$sizes"
-  if [ "$sizes" = "$want ($NPAGES pages) " ]; then ST=PASS; else ST=FAIL; fi
+  # within one LibreOffice unit (1/100 mm = 72/2540 pt) of the expected size, as check/native.rs
+  if awk -v W="$(cfg .params.page_width_pt)" -v H="$(cfg .params.page_height_pt)" -v N="$NPAGES" -v T=0.028347 '
+    function abs(x) { return x < 0 ? -x : x }
+    /^Page +[0-9]+ size:/ { n++; if (abs($4 - W) > T || abs($6 - H) > T) bad++ }
+    END { exit !(n == N && !bad) }' "$W/info.txt"; then ST=PASS; else ST=FAIL; fi
 }
 
 chk_margins() {
