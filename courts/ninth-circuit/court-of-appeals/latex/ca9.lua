@@ -26,12 +26,84 @@ local function bind_signs(inlines)
   return inlines
 end
 
+-- Cross-engine line breaking (docs/EVAL-LOOP.md, "Cross-engine gate"): the template turns ligatures off, so the
+-- characters the writer would spell as ligatures (``, --, ---) are written as commands, and the places where
+-- typst and Word may break a line inside a word (Unicode line breaking) are the places TeX may break it:
+--   * pandoc's smart reading puts a no-break space after an abbreviation ("v. Jones"); typst's does not: a space;
+--   * a hyphen before a digit does not end a line ("ER-178-82"), any other may (the template makes that free);
+--   * a line may end before or after an em dash, and after an en dash.
+local RAW = {
+  ["\u{201C}"] = "\\textquotedblleft{}",
+  ["\u{201D}"] = "\\textquotedblright{}",
+  ["\u{2018}"] = "\\textquoteleft{}",
+  ["\u{2014}"] = "\\allowbreak\\textemdash\\allowbreak{}",
+  ["\u{2013}"] = "\\textendash\\allowbreak{}",
+}
+
+local function raw(s)
+  return pandoc.RawInline("latex", s)
+end
+
+local function texify(inlines)
+  local out = pandoc.Inlines({})
+  for _, el in ipairs(inlines) do
+    if el.t == "Quoted" then
+      local q = el.quotetype == "DoubleQuote" and { "\u{201C}", "\u{201D}" } or { "\u{2018}", "\u{2019}" }
+      out:insert(pandoc.Str(q[1]))
+      out:extend(el.content)
+      out:insert(pandoc.Str(q[2]))
+    else
+      out:insert(el)
+    end
+  end
+  local res = pandoc.Inlines({})
+  local last = "" -- the last character of the previous Str (pandoc may keep the no-break space apart)
+  for _, el in ipairs(out) do
+    if el.t ~= "Str" then last = "" end
+    if el.t == "Str" then
+      local buf = ""
+      local function flush()
+        if buf ~= "" then res:insert(pandoc.Str(buf)) end
+        buf = ""
+      end
+      local chars = { last }
+      for _, c in utf8.codes(el.text) do chars[#chars + 1] = utf8.char(c) end
+      for i, c in ipairs(chars) do
+        if i == 1 then goto continue end
+        if RAW[c] then
+          flush()
+          res:insert(raw(RAW[c]))
+        elseif c == "\u{00A0}" and i > 1 and chars[i - 1] == "." then
+          flush()
+          res:insert(pandoc.Space())
+        elseif c == "-" and chars[i + 1] and chars[i + 1]:match("^%d$") then
+          flush()
+          res:insert(raw("\\mbox{-}"))
+        else
+          buf = buf .. c
+        end
+        ::continue::
+      end
+      flush()
+      last = chars[#chars]
+    else
+      res:insert(el)
+    end
+  end
+  return res
+end
+
+-- The inline filter of the body and of every metadata value the template sets.
+local function inlines_filter(l)
+  return texify(bind_signs(l))
+end
+
 -- LaTeX for inline content (a meta value or a list of inlines), trimmed.
 local function latex(x)
   if x == nil then
     return ""
   end
-  local s = pandoc.write(pandoc.Pandoc({ pandoc.Plain(bind_signs(x)) }), "latex")
+  local s = pandoc.write(pandoc.Pandoc({ pandoc.Plain(inlines_filter(x)) }), "latex")
   return (s:gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
@@ -94,10 +166,11 @@ local function toa_block(authorities)
         local name = ""
         if a.name then
           name = latex(a.name)
+          -- [toa-section]: the name, a comma, and the citation on the next line
           if g.kind == "case" then
-            name = "\\emph{" .. name .. "}, "
+            name = "\\emph{" .. name .. "},\\newline "
           else
-            name = name .. ", "
+            name = name .. ",\\newline "
           end
         end
         out[#out + 1] = "\\ca@toaline{" .. m.key .. "}{" .. name .. latex(a.cite) .. "}"
@@ -190,6 +263,8 @@ function Pandoc(doc)
     end
   end
 
+  -- metadata the template sets (cover, signature, certificates) breaks like the body
+  doc.meta = pandoc.Pandoc({}, doc.meta):walk({ Inlines = inlines_filter }).meta
   local words = count_words(body)
   doc.meta.words_fmt = pandoc.MetaInlines({ pandoc.Str(group_digits(words)) })
   derive_flags(doc.meta)
@@ -212,8 +287,8 @@ function Pandoc(doc)
   end
 
   -- Link conversion runs over the body first, then the addendum, so `cited` keeps document order.
-  local bodyd = pandoc.Pandoc(body):walk({ Link = link_filter, Inlines = bind_signs })
-  local addd = pandoc.Pandoc(add):walk({ Link = link_filter, Inlines = bind_signs })
+  local bodyd = pandoc.Pandoc(body):walk({ Link = link_filter, Inlines = inlines_filter })
+  local addd = pandoc.Pandoc(add):walk({ Link = link_filter, Inlines = inlines_filter })
 
   local authorities = doc.meta.authorities or {}
   for _, key in ipairs(cited) do
@@ -222,41 +297,30 @@ function Pandoc(doc)
     end
   end
 
-  -- A heading that is followed directly by another heading (`# Argument` and its first point heading, say) is set
-  -- in one minipage with it, so the two never part at a page end. (Headings followed by text keep their
-  -- no-break penalties in template.tex.)
-  local keep = {}
-  for i = 1, #bodyd.blocks - 1 do
-    local a, b = bodyd.blocks[i], bodyd.blocks[i + 1]
-    if a.t == "Header" and b.t == "Header" then
-      keep[i] = true
-    end
+  -- Block quotations: 14 bp between their paragraphs (typst: the quote's paragraph spacing), as the template's
+  -- quote environment sets above and below them.
+  local function quote_seps(d)
+    return d:walk({
+      BlockQuote = function(q)
+        local out = {}
+        for i, b in ipairs(q.content) do
+          if i > 1 then out[#out + 1] = pandoc.RawBlock("latex", "\\ca@qsep") end
+          out[#out + 1] = b
+        end
+        q.content = out
+        return q
+      end,
+    })
   end
-  local joined = {}
-  for i, b in ipairs(bodyd.blocks) do
-    if keep[i] and not keep[i - 1] then
-      joined[#joined + 1] = pandoc.RawBlock("latex", "\\noindent\\begin{minipage}[t]{\\linewidth}")
-    end
-    joined[#joined + 1] = b
-    if keep[i - 1] and not keep[i] then
-      joined[#joined + 1] = pandoc.RawBlock("latex", "\\end{minipage}")
-    end
-  end
-  bodyd.blocks = joined
-  -- The signature never stands alone: the last section (the conclusion) and the signature block (added by the
-  -- template) share one minipage, which is never split; the template closes it (meta keep_signature).
-  local start
-  for i, b in ipairs(bodyd.blocks) do
-    if b.t == "Header" and b.level == 1 then
-      start = i
-    end
-  end
-  if start == nil and #bodyd.blocks > 0 and bodyd.blocks[#bodyd.blocks].t == "Para" then
-    start = #bodyd.blocks
-  end
-  if start ~= nil then
-    table.insert(bodyd.blocks, start, pandoc.RawBlock("latex", "\\noindent\\begin{minipage}[t]{\\linewidth}"))
-    doc.meta.keep_signature = pandoc.MetaBool(true)
+  bodyd = quote_seps(bodyd)
+  addd = quote_seps(addd)
+  -- The signature never stands alone: the brief's last paragraph cannot be broken across pages and is kept with
+  -- the signature block (typst: the last paragraph and the signature in one unbreakable block; Word: keep with
+  -- next). Headings keep with what follows by their own penalties (template.tex).
+  local n = #bodyd.blocks
+  if n > 0 and bodyd.blocks[n].t == "Para" then
+    table.insert(bodyd.blocks, n, pandoc.RawBlock("latex", "\\begingroup\\interlinepenalty=10000\\relax"))
+    table.insert(bodyd.blocks, pandoc.RawBlock("latex", "\\par\\endgroup"))
   end
   doc.blocks = mark_arguments(bodyd.blocks)
   doc.meta.addendum = pandoc.MetaBlocks(addd.blocks)
