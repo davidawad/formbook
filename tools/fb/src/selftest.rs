@@ -91,7 +91,7 @@ const MUTANTS: &[Mutant] = &[
         name: r"left-aligned-headings",
         want: r"CA9-FORM-009",
         kind: Kind::Layout,
-        expr: r"s/align(center, text(size: 1.15em, strong(upper(it.body))))/align(left, text(size: 1.15em, strong(upper(it.body))))/",
+        expr: r"s/shared-section-heading(it.body, type-size, single-leading, above: 1.5em, below: 1.1em)/block(width: 100%, above: 1.5em, below: 1.1em, align(left, strong(upper(it.body))))/",
     },
     Mutant {
         name: r"wrong-font",
@@ -104,19 +104,20 @@ const MUTANTS: &[Mutant] = &[
         name: r"footnotes-small",
         want: r"CA9-FORM-004",
         kind: Kind::Layout,
-        expr: r"s/set text(size: type-size)   \/\/ typst/set text(size: 11pt)   \/\/ typst/",
+        expr: r"s/shared-footnote-body(note.body, num, type-size,/shared-footnote-body(note.body, num, 11pt,/",
     },
     Mutant {
         name: r"no-footnote-size",
         want: r"CA9-FORM-004",
         kind: Kind::Layout,
-        expr: r"s/^    set text(size: type-size).*$//",
+        // typst's own footnote entry (0.85 em) instead of the template's 14 pt one
+        expr: r"s/^    shared-footnote-body(note.body, num, type-size, single-leading, 0.5em)$/    it/",
     },
     Mutant {
         name: r"wrong-word-count",
         want: r"CA9-CERT-002",
         kind: Kind::Layout,
-        expr: r"s/This brief contains #group-digits(words) words/This brief contains #group-digits(words + 7) words/",
+        expr: r"s/^  certificate-of-compliance(meta, words)$/  certificate-of-compliance(meta, words + 7)/",
     },
     Mutant {
         name: r"argument-numbering",
@@ -140,7 +141,7 @@ const MUTANTS: &[Mutant] = &[
         name: r"toa-wrong-page",
         want: r"CA9-TOOL-006",
         kind: Kind::Layout,
-        expr: r#"s/let page-text = if pages.len() >= passim-threshold { emph\[passim\] } else { pages.join(", ") }/let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.map(p => str(int(p) + 1)).join(", ") }/"#,
+        expr: r#"s/let page-text = shared-authority-page-labels(hits, key, passim-threshold)/let page-text = hits.filter(h => h.value == key).map(h => str(counter(page).at(h.location()).first() + 1)).dedup().join(", ")/"#,
     },
 ];
 
@@ -169,6 +170,22 @@ fn verdict(m: &Mutant, out: &str) -> (String, bool) {
             false,
         )
     }
+}
+
+/// The folder the mutant copies go in. A mutant copy (scratch/<mutant>) sits as deep below the repo root as the
+/// court itself, so a template's relative imports of shared files (`../../../../lib/typst/...`) resolve the same
+/// way: out/selftest-<alias>/<mutant> for a court three levels down, padded for a deeper one.
+fn scratch_dir(root: &Path, court: &Path, alias: &str) -> PathBuf {
+    let canon = std::fs::canonicalize(root).unwrap_or_else(|_| root.to_path_buf());
+    let depth = court
+        .strip_prefix(&canon)
+        .or_else(|_| court.strip_prefix(root))
+        .map_or(0, |r| r.components().count());
+    let mut d = root.join("out").join(format!("selftest-{alias}"));
+    for _ in 3..depth {
+        d.push("d");
+    }
+    d
 }
 
 fn copy_into(from: &[PathBuf], to: &Path) -> Res<()> {
@@ -327,7 +344,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             )
         })?;
     let alias = cj["alias"].as_str().unwrap_or("null").to_string();
-    let scratch = root.join("out/selftest").join(&alias);
+    let scratch = scratch_dir(&root, &court, &alias);
     std::fs::create_dir_all(&scratch)
         .map_err(|e| fail(2, format!("fb selftest: {}: {e}", scratch.display())))?;
     let checks: serde_yaml::Value = std::fs::read_to_string(court.join("checks.yaml"))
@@ -366,6 +383,22 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn mutant_copies_sit_as_deep_as_the_court() {
+        let root = Path::new("/nonexistent-root");
+        let d = scratch_dir(
+            root,
+            &root.join("courts/ninth-circuit/court-of-appeals"),
+            "ca9",
+        );
+        assert_eq!(d, root.join("out/selftest-ca9"));
+        let d = scratch_dir(root, &root.join("courts/a/b/opening-brief"), "x");
+        assert_eq!(
+            d.join("m").components().count(),
+            root.join("courts/a/b/opening-brief").components().count()
+        );
+    }
 
     fn m(want: &'static str) -> Mutant {
         Mutant {

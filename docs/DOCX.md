@@ -36,3 +36,12 @@ A court PR may deliver docx as BLOCKED or partial if it lists the exact failing 
 2. `sh tools/check.sh <doc-dir> --engine docx` runs Gates 0 to 3 on the `.docx.pdf` and writes `usage/.check-docx.txt` only when everything passes.
 3. Open the `.docx` in LibreOffice (and Word if you have it) and confirm there is no repair prompt. Record that, and every page you looked at, in the review file under `## sample <id> docx`.
 4. Anything that cannot pass goes in the PR as `BLOCKED: <check ID>: <why>` lines.
+
+## Lessons from ca9 (fb-595.43)
+
+- **Dot leaders**: a Word dot-leader tab comes out of the LibreOffice PDF as contiguous dots ("....."), not the spaced " . . ." typst and latex draw; `tools/check/leader-entries.awk` reads both.
+- **Page-number column**: give contents/authorities rows a right indent (the number column) and put the right tab beyond it, inside the margin; LibreOffice honours a tab past the right indent for Word documents, so a long title wraps before the numbers instead of pushing them to the next line.
+- **Footer first**: LibreOffice draws the footer before the body, so the page number is the first run of a page in `pdftohtml` order; the checker's "page N starts with" (`first_run`) takes the topmost run above the footer.
+- **Reproducible output**: `fb render` re-runs on every check, so the docx must be byte-reproducible for a Gate 2 review to stay current. Write the archive with fixed part dates and a fixed order (`docx/render.sh` in ca9); `fb render` rewrites LibreOffice's wall-clock `/CreationDate`, `/ID` and `/DocChecksum` (tools/fb/src/pdfrepro.rs).
+- **Small capitals**: LibreOffice synthesizes them at about 80 % size; under a 14 pt minimum use bold or full capitals instead.
+- **Check boxes**: a bordered run (`w:bdr`) holding "X" or non-breaking spaces needs no symbol font, so no fallback face appears in the PDF.

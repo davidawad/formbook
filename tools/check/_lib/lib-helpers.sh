@@ -8,7 +8,7 @@ chk_toc_present() {
   tp=$(toa_page)
   ST=PASS
   DETAIL=""
-  first=$(awk -F'\t' '$1 == 2 { print $7; exit }' "$W/runs.tsv")
+  first=$(first_run 2)
   [ "$first" = "TABLE OF CONTENTS" ] || {
     ST=FAIL
     DETAIL="page 2 starts with \"$first\", not TABLE OF CONTENTS"
@@ -111,7 +111,7 @@ chk_toa_pages() {
 p1norm() { page_text 1 | norm; }
 contains() { case "$1" in *"$2"*) return 0 ;; *) return 1 ;; esac }
 chk_cover_one_page() {
-  first=$(awk -F'\t' '$1 == 2 { print $7; exit }' "$W/runs.tsv")
+  first=$(first_run 2)
   MEAS="page 2 starts with \"$first\""
   if [ "$first" = "TABLE OF CONTENTS" ]; then ST=PASS; else
     ST=FAIL
@@ -249,7 +249,7 @@ chk_addendum() {
     ST=FAIL
     DETAIL="the addendum's first page prints \"$l\", not Add-1"
   }
-  first=$(awk -F'\t' -v p="$ap" '$1 == p { print $7; exit }' "$W/runs.tsv")
+  first=$(first_run "$ap")
   [ "$first" = "ADDENDUM" ] || {
     ST=FAIL
     DETAIL="$DETAIL

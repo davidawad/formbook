@@ -309,12 +309,15 @@ fn convert(docx: &Path, out_pdf: &Path, work: &Path) -> Res<()> {
     }
     let stem = docx.file_stem().map(|s| s.to_string_lossy().into_owned());
     let made = work.join(format!("{}.pdf", stem.unwrap_or_default()));
-    std::fs::copy(&made, out_pdf).map(|_| ()).map_err(|e| {
+    std::fs::copy(&made, out_pdf).map_err(|e| {
         fail(
             1,
             format!("fb render: no PDF from soffice ({}): {e}", made.display()),
         )
-    })
+    })?;
+    // LibreOffice stamps the wall-clock time into the Info dictionary and the file identifier
+    crate::pdfrepro::normalize_file(out_pdf)
+        .map_err(|e| fail(2, format!("fb render: {}: {e}", out_pdf.display())))
 }
 
 #[cfg(test)]

@@ -31,6 +31,9 @@ heading_page() { awk -F'\t' -v t="$1" -v from="${2:-1}" '$1 >= from && $2 < 110 
 body_first() { sort -t"$(printf '\t')" -k4,4n "$W/g0.heads" | head -1 | cut -f4; } # page of the first body heading
 add_page() { awk -F'\t' '$1 ~ /^1/ && tolower($5) == "addendum" { print $4; exit }' "$W/g0.heads"; }
 label_of() { awk -F'\t' -v p="$1" '$1 == p { print $2 }' "$W/labels.tsv"; }
+# the first run of page $1 in reading order: the topmost (then leftmost) run above the footer. pdftohtml keeps the
+# order of the content stream, and Word/LibreOffice PDFs draw the footer (the page number) before the body text.
+first_run() { awk -F'\t' -v p="$1" -v ft="${FTOP:-1e9}" '$1 == p && $2 < ft && (!n++ || $2 < t - 0.5 || ($2 < t + 0.5 && $3 < l)) { t = $2; l = $3; x = $7 } END { print x }' "$W/runs.tsv"; }
 
 # ---------------------------------------------------------------- Gate 0
 chk_g0_content() {

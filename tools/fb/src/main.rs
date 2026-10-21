@@ -18,6 +18,7 @@ mod manifest;
 mod matchstamp;
 mod measure;
 mod overlay;
+mod pdfrepro;
 mod pin;
 mod proc;
 mod readmes;
