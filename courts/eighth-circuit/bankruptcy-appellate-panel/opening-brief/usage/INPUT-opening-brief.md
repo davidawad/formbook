@@ -31,7 +31,7 @@ signature:
     - "Email not stated in the filed brief"
 date: "April 7, 2011"
 word_processor: "Microsoft Word 2010"
-typeface: "EB Garamond"
+typeface: "Times New Roman"
 interested_parties: |
   - Bank of America Home Loans, First Mortgage Holder, PO Box 5170, Simi Valley, CA 93062-5170
   - BAC Home Loans Servicing, LP, Third Mortgage Holder, Mail Stop: CA6-919-01-23, 400 National Way, Simi Valley, CA 93065

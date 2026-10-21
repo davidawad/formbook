@@ -30,8 +30,10 @@
 #let court-name = "United States Bankruptcy Appellate Panel for the Eighth Circuit"   // FRBP 8015(a)(2)(B)
 #let font-family = ("Times New Roman", "Liberation Serif")          // FRBP 8015(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
 #let type-size = 14pt                      // FRBP 8015(a)(5)(A): 14-point or larger, everywhere, footnotes included.
-#let body-leading = 0.94em                 // with the metric-aligned line box, a baseline pitch of about
-                                           // 2.2 x type size: double spacing (FRBP 8015(a)(4)).
+#let line-pitch = 2 * 1.15 * type-size     // FRBP 8015(a)(4): double-spaced. 32.2 pt, a word processor's "double" for 14 pt
+                                           // Times New Roman (2 x its 1.15 em line); the rule's floor is 2 x type size = 28 pt.
+#let body-leading = line-pitch - 0.909em   // gap between body lines: the ascender-to-descender line box set below
+                                           // is 0.909 em in Times New Roman, so baselines are line-pitch apart.
 #let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced (FRBP 8015(a)(4)).
 #let page-margin = 1in                     // FRBP 8015(a)(4): at least one inch on all four sides.
 #let para-indent = 0.5in

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Builds docx/reference.docx from pandoc's default reference for the BAP 8th Cir. brief (FRBP 8015).
-# Body: Times New Roman 14 pt (FRBP 8015(a)(5)(A)), exact 31 pt line pitch (double spacing, FRBP 8015(a)(4)),
+# Body: Times New Roman 14 pt (FRBP 8015(a)(5)(A)), exact 32.2 pt line pitch (double spacing, FRBP 8015(a)(4); the typst line-pitch),
 # first-line indent 0.5 in, widow control, 1 in margins on US Letter. Footnotes and block quotations are
 # single-spaced at 14 pt. Every font name is explicit (no theme fonts), so LibreOffice and Word both use Times New Roman.
 # Usage: bash docx/build-reference.sh <out.docx>   (needs pandoc, unzip, zip, perl, xmllint on PATH)
@@ -25,9 +25,9 @@ F="<w:rFonts w:ascii=\"$FONT\" w:hAnsi=\"$FONT\" w:eastAsia=\"$FONT\" w:cs=\"$FO
 {
 cat <<XML
 <w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/><w:jc w:val="left"/></w:pPr><w:rPr>$F<w:sz w:val="28"/><w:szCs w:val="28"/></w:rPr></w:style>
-<w:style w:type="paragraph" w:styleId="BodyText"><w:name w:val="Body Text"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="0" w:line="629" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:styleId="FirstParagraph"><w:name w:val="First Paragraph"/><w:basedOn w:val="BodyText"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="0" w:line="629" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:styleId="Compact"><w:name w:val="Compact"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="0" w:line="629" w:lineRule="exact"/><w:ind w:firstLine="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="BodyText"><w:name w:val="Body Text"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="0" w:line="644" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="FirstParagraph"><w:name w:val="First Paragraph"/><w:basedOn w:val="BodyText"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="0" w:line="644" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="Compact"><w:name w:val="Compact"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="0" w:line="644" w:lineRule="exact"/><w:ind w:firstLine="0"/></w:pPr></w:style>
 <w:style w:type="paragraph" w:styleId="BlockText"><w:name w:val="Block Text"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:keepLines/><w:spacing w:before="280" w:after="280" w:line="240" w:lineRule="auto"/><w:ind w:left="720" w:right="720" w:firstLine="0"/></w:pPr></w:style>
 <w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:before="0" w:after="140" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/></w:pPr><w:rPr><w:sz w:val="28"/><w:szCs w:val="28"/></w:rPr></w:style>
 <w:style w:type="character" w:styleId="FootnoteReference"><w:name w:val="footnote reference"/><w:rPr><w:vertAlign w:val="superscript"/></w:rPr></w:style>

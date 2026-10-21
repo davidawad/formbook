@@ -1,0 +1,77 @@
+# Numbers FRBP 8015 states (../rules.md). fb check merges this file over data/checks-default.yaml; a list replaces
+# the default list, so `checks:` below repeats the default checks and adds BAP8-FORM-003.
+# BAP8-FORM-004, FRBP 8015(a)(5)(A): 14 point or larger. BAP8-FORM-003, FRBP 8015(a)(4): double-spaced, read as a
+# baseline pitch of at least 2 x 14 pt between body-paragraph lines (the template sets 32.2 pt, typst/ line-pitch).
+font:
+  size_pt: 14
+
+params:
+  min_body_pitch_pt: 28
+
+checks:
+  - id: DEF-CONT-001
+    gate: 0
+    kind: T
+    name: every INPUT block (section, paragraph, quote, list item) appears in the PDF, in order, unaltered
+    method: g0_content
+    expect: "0 blocks missing or altered"
+    fix: {anchor: "set page("}
+  - id: DEF-FORM-001
+    gate: 1
+    kind: M
+    name: every page is US letter, 612 x 792 pt
+    method: page_size
+    expect: "all pages 612 x 792"
+    fix: {anchor: "set page("}
+  - id: DEF-FORM-002
+    gate: 1
+    kind: M
+    name: no body text in the 1 in margins (running headers and footers and pleading line numbers excepted)
+    method: margins_body
+    expect: "body text stays within the configured left, right, top and bottom margins"
+    fix: {anchor: "margin"}
+  - id: DEF-FORM-003
+    gate: 1
+    kind: M
+    name: body text is at least the stated size (12 pt unless the folder's eval.yaml says otherwise)
+    method: body_size
+    expect: "the most common word height is >= the height of the stated size in this font"
+    fix: {anchor: "size"}
+  - id: DEF-FONT-001
+    gate: 1
+    kind: M
+    name: every font in the PDF is embedded
+    method: fonts_all_embedded
+    expect: "all fonts emb=yes"
+    fix: {anchor: "font"}
+  - id: DEF-FONT-002
+    gate: 1
+    kind: T
+    name: every font is the family the template declares (Times New Roman or its metric twin unless it declares otherwise)
+    method: fonts_embedded
+    expect: "all embedded font names start with a declared family (no fallback)"
+    fix: {anchor: "font-family"}
+  - id: DEF-LEN-001
+    gate: 1
+    kind: M
+    name: the page count is within the court's page limit
+    method: page_limit
+    requires: ".params.page_limit"
+    engines_reason: "no rules.md states a page limit in machine-readable form; set params.page_limit in eval.yaml"
+    expect: "<= params.page_limit pages"
+    fix: {anchor: "set page("}
+  - id: DEF-TOC-001
+    gate: 1
+    kind: M
+    name: a table of contents or authorities, when there is one, never wraps a page reference alone onto a line or sets an entry against the Page(s) rule
+    method: toc_layout
+    expect: "every page reference ends its entry's last line after dot leaders; >= 2 pt clear below the column heading's rule (passes with no table)"
+    fix: {anchor: "outline"}
+
+  - id: BAP8-FORM-003
+    gate: 1
+    kind: M
+    name: body paragraphs are double-spaced (baseline pitch >= 2 x type size)
+    method: double_space
+    expect: "every consecutive pair of body-paragraph lines >= 28 pt apart"
+    fix: {anchor: "line-pitch"}
