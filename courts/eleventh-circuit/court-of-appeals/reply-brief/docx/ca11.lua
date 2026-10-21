@@ -527,7 +527,7 @@ function Pandoc(doc)
     runs("1. This document complies with the word limit of Fed. R. App. P. 32(a)(7)(B) because, excluding the parts of the document exempted by Fed. R. App. P. 32(f) and 11th Cir. R. 32-4, this document contains "
       .. group_digits(words) .. " words. This word count was computed from the source text of this document.", {}))))
   add(raw(para({ spacing(0, 0, 629), ind(TAB, nil, nil) },
-    runs("2. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced typeface using LaTeX in EB Garamond, 14-point font.", {}))))
+    runs("2. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced typeface, Times New Roman, in 14-point font.", {}))))
   add(raw(signature(meta)))
 
   add(raw(para({ KEEP_BREAK, spacing(0, 240, 399), jc("center") }, runs("Certificate of Service", { b = true }))))

@@ -129,3 +129,7 @@ outputs are `usage/OUTPUT-reply-brief.latex.pdf`, `.docx` and `.docx.pdf`.
   on the pages where a `toa-primary:` link is found. Differs: 15 pages against typst's 14 (the body text breaks
   earlier in Word's layout).
   BLOCKED: none for the build; checked on the LibreOffice PDF only.
+
+## DOCX font and layout fixes (2026-10-21, fb-595.59)
+
+The docx engine moves from EB Garamond to Times New Roman, the face the typst template declares (DEF-FONT-002); the typeface certificate no longer names LaTeX or EB Garamond. `check.sh --engine docx` is green. Where a TOC title fills its line, Word's dot-leader tab wraps the leader and page to the next line (allowed by DEF-TOC-001).
