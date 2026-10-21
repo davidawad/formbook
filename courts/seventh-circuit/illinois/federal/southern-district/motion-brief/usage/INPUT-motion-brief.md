@@ -7,12 +7,12 @@ caption:
   - names:
       - "LINCOLN FINANCIAL GROUP,"
     designation: "Defendant."
-title: "DEFENDANT'S MOTION TO DISMISS PLAINTIFF'S COMPLAINT AND BRIEF IN SUPPORT"
+title: "DEFENDANT’S MOTION TO DISMISS PLAINTIFF’S COMPLAINT AND BRIEF IN SUPPORT"
 date_line: "Dated this 4th day of March 2026."
 signature:
   signer: "Iwana Rademaekers"
   lines:
-    - "Attorney in Charge"
+    - "Iwana Rademaekers, Attorney in Charge"
     - "State Bar of Texas No. 16452560"
     - "S.D. of Texas No. 22781"
     - "LAW OFFICES OF IWANA RADEMAEKERS, P.C."
@@ -56,7 +56,7 @@ It is evident from the Plaintiff's Complaint and from the Policy and SPD that th
 
 Indeed, both the Supreme Court and the Seventh Circuit have held that ERISA preempts the state law causes of action asserted by Plaintiff. *See, e.g., Pilot Life Ins. Co. v. Dedeaux*, 481 U.S. 41, 47-48 (1987) (breach of contract and fraud causes of action preempted in disability benefits context); *Di Joseph v. Std. Ins. Co.*, 776 F. App'x 343, 347 (7th Cir. 2019) (finding ERISA preempted state law claims of bad faith, promissory estoppel, equitable estoppel, breach of fiduciary duty, common law fraud, unjust enrichment, and negligence as the "underlying theory for all of these claims is that defendants improperly denied [plaintiff] her long-term disability benefits, which are governed by ERISA.")
 
-Additionally, as reflected by the Complaint, Plaintiff's state law causes of action are in the nature of a complaint "asserting improper processing of a claim for benefits under an ERISA-regulated plan" and this cause of action is clearly preempted by ERISA. *Pilot Life Ins. Co. v. Dedeaux*, 481 U.S. at 55-56 ("all suits brought by beneficiaries asserting improper processing of claims under ERISA-regulated plans [will] be treated as federal questions governed by [ERISA's civil enforcement mechanisms].") ERISA regulates employee benefit plans that "through the purchase of insurance or otherwise," provide medical, surgical, or hospital care, or benefits in the event of sickness, accident, disability, or death." *Pilot Life Ins. Co.*, 481 U.S. at 44. Accordingly, all of Plaintiff's state law causes of action in the Complaint are clearly preempted by ERISA, and this Motion to Dismiss should be granted.
+Additionally, as reflected by the Complaint, Plaintiff's state law causes of action are in the nature of a complaint "asserting improper processing of a claim for benefits under an ERISA-regulated plan" and this cause of action is clearly preempted by ERISA. *Pilot Life Ins. Co. v. Dedeaux*, 481 U.S. at 55-56 ("all suits brought by beneficiaries asserting improper processing of claims under ERISA-regulated plans [will] be treated as federal questions governed by [ERISA's civil enforcement mechanisms].") ERISA regulates employee benefit plans that "through the purchase of insurance or otherwise," provide medical, surgical, or hospital care, or benefits in the event of sickness, accident, disability, or death.” *Pilot Life Ins. Co.*, 481 U.S. at 44. Accordingly, all of Plaintiff's state law causes of action in the Complaint are clearly preempted by ERISA, and this Motion to Dismiss should be granted.
 
 ## COMPENSATORY, STATUTORY EXEMPLARY, AND PENALTY DAMAGES ARE NOT AVAILABLE IN THIS ACTION
 
@@ -72,13 +72,13 @@ Lincoln requests the Court dismiss Plaintiff's Complaint against it with prejudi
 
 [^1]: The correct name of the Defendant in this action is The Lincoln National Life Insurance Company. There is no entity named "Lincoln Financial Group" as that is the marketing name for Lincoln National Corporation and its affiliates. The Lincoln National Life Insurance Company was previously a parent corporation of Lincoln Life Assurance Company of Boston, and Lincoln Life Assurance Company of Boston (f/k/a Liberty Life Assurance Company of Boston) was the issuer of the relevant disability policy. However, Lincoln Life Assurance Company of Boston has now merged with, and is now known as, The Lincoln National Life Insurance Company. Accordingly, "The Lincoln National Life Insurance Company" is the correct name of the Defendant in this action.
 
-[^2]: See Complaint at ¶ 17 and the WHEREFORE paragraph.
+[^2]: *See* Complaint at ¶ 17 and the WHEREFORE paragraph.
 
-[^3]: See Complaint, WHEREFORE Paragraph.
+[^3]: *See* Complaint, WHEREFORE Paragraph.
 
 [^4]: For the purposes of the Motion to Dismiss, the Court must assume the facts alleged by Plaintiff in the Complaint to be true. However, Defendant does not admit the truthfulness or accuracy of any factual allegation contained in the Complaint by filing this Motion and Brief or by any statement contained therein.
 
-[^5]: See the Caption of the Complaint.
+[^5]: *See* the Caption of the Complaint.
 
 [^6]: Fed. R. Civ. P. 12(b)(6).
 
@@ -90,6 +90,6 @@ Lincoln requests the Court dismiss Plaintiff's Complaint against it with prejudi
 
 [^10]: Complaint at ¶¶ 1, 3, 12, 15, 16, and the WHEREFORE paragraph; see also Exhibit A of the Complaint.
 
-[^11]: See Complaint at ¶ 1 and Exhibit A thereto; Plan Documents, Exhibits "A" and "B" hereto; Plaintiff's allegations in the Complaint and the Policy clearly establish that the disability benefits sought by Plaintiff are sought from a benefit plan "established or maintained by an employer . . . for the purpose of providing for its participants or their beneficiaries, through the purchase of insurance or otherwise, (A) medical, surgical, or hospital care or benefits, or benefits in the event of sickness, accident, disability, . . ." 29 U.S.C. § 1002(1).
+[^11]: *See* Complaint at ¶ 1 and Exhibit A thereto; Plan Documents, Exhibits "A" and "B" hereto; Plaintiff's allegations in the Complaint and the Policy clearly establish that the disability benefits sought by Plaintiff are sought from a benefit plan "established or maintained by an employer . . . for the purpose of providing for its participants or their beneficiaries, through the purchase of insurance or otherwise, (A) medical, surgical, or hospital care or benefits, or benefits in the event of sickness, accident, disability, . . ." 29 U.S.C. § 1002(1).
 
-[^12]: See Complaint at ¶¶ 4, 11, 14, and 16-17.
+[^12]: *See* Complaint at ¶¶ 4, 11, 14, and 16-17.
