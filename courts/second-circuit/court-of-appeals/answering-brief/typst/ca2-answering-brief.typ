@@ -6,7 +6,7 @@
 // the YAML frontmatter of the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
-#import "../../../../../lib/typst/tables.typ": leader-page-glued
+#import "../../../../../lib/typst/tables.typ": leader-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -213,13 +213,12 @@
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(hang-by, {
+    leader-row({
       h(ind)
       if numbered { box(width: heading-tab, lab) }
       title
-      h(0.5em)
-      leader-page-glued(0.16em, it.page())
-    })))
+    }, it.page(),
+      hang: hang-by, leading: single-leading, dot-gap: 0.16em, lead-gap: 0.5em, gutter: 0.3em, min-leader: 1.5em)))
 }
 
 #let toc-section(has-addendum) = {
@@ -278,16 +277,15 @@
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
+        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, leader-row({
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
             linebreak()
           }
           inl(a.cite)
-          h(0.8em)
-          leader-page-glued(0.16em, page-text)
-        }))
+        }, page-text,
+          hang: 0.35in, leading: single-leading, dot-gap: 0.16em, lead-gap: 0.8em, gutter: 0.3em, min-leader: 1.5em))
       }
     }
   }
