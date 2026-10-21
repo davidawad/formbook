@@ -9,7 +9,7 @@
 
 #import "@preview/cmarker:0.1.10"
 #import "../../../../../../../lib/typst/pleading-paper.typ": background as shared-pleading-background
-#import "../../../../../../../lib/typst/tables.typ": dot-leader as shared-dot-leader
+#import "../../../../../../../lib/typst/tables.typ": dot-leader as shared-dot-leader, grid-outline-row as shared-grid-outline-row
 #import "../../../../../../../lib/typst/typography.typ": footnote-style as shared-footnote-style
 #import "../../../../../../../lib/typst/toa.typ": linked-authorities as shared-linked-authorities, cited-authorities as shared-cited-authorities, authority-page-labels as shared-authority-page-labels
 
@@ -130,17 +130,9 @@
   let ind = if hd.level == 1 { 0pt } else { label-indent(hd.level) }
   let pg = numbering(hd.location().page-numbering(), ..counter(page).at(hd.location()))
   // The page number sits in its own column so a wrapped title can never push it onto a new line.
-  link(hd.location(), block(width: 100%, above: 0.45em, below: 0pt, grid(
-    columns: (1fr, auto), column-gutter: 0.4em,
-    hang(ind + heading-tab, {
-      h(ind)
-      if lab != "" { box(width: heading-tab, lab) }
-      if hd.level == 1 { upper(hd.body) } else { hd.body }
-      h(0.2em)
-      shared-dot-leader(0.25em)
-    }),
-    align(right + bottom, box(width: 2em, align(right, pg))),
-  )))
+  shared-grid-outline-row(hd.location(), if hd.level == 1 { upper(hd.body) } else { hd.body },
+    if lab == "" { none } else { lab }, ind, heading-tab, pg, single-leading, 0.25em,
+    above: 0.45em, page-gap: 0.4em, page-width: 2em)
 }
 
 #let toc-section() = {
