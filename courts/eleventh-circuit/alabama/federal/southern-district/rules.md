@@ -2,6 +2,8 @@
 
 Alias `alsd`. Scope: civil complaints and motion briefs. Verified against the Local Rules and Standing Orders of the United States District Court for the Southern District of Alabama (PDF "local-rules.pdf" as posted; header reads "Effective August 1, 2015") and the Federal Rules of Civil Procedure (as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 ## Sources
 
 | Tag | Source | URL |
