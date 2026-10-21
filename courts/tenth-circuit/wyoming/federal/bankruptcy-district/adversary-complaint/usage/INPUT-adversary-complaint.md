@@ -1,8 +1,12 @@
 ---
+# Complete transcription of usage/FILED-EXAMPLE-adversary-complaint.pdf (6 pages): counsel block, caption, title,
+# lead-in, paragraphs 1-28 under their headings, WHEREFORE and prayer A-C, date and signature.
+# Left out (no template field): "FILED ELECTRONICALLY" under the judge line; the filer's "vs." (template prints "v.");
+# small caps of the firm name; heading underlines; bold "WHEREFORE" (the template detects the WHEREFORE paragraph by its plain first word).
 counsel:
   - "David L. Miller, WY #7-5951"
   - "Brian J. Porter, WY #7-6035"
-  - "MCKAY, BURTON & THURMAN, P.C."
+  - "**MCKAY, BURTON & THURMAN, P.C.**"
   - "Gateway Tower West"
   - "15 West South Temple, Suite 1000"
   - "Salt Lake City, Utah 84101"
@@ -16,7 +20,7 @@ debtor:
   - "DYNAMIC CUSTOM HOMES, LLC."
   - "Debtor."
 bankruptcy_case: "Bankruptcy Case 20-20086 CDP"
-chapter: "Chapter 7"
+chapter: "(Chapter 7)"
 adversary: "Adversary Proceeding 20-__________"
 judge: "Judge Cathleen D. Parker"
 parties:
@@ -29,7 +33,7 @@ parties:
 title: "COMPLAINT"
 date: "DATED this 11th day of September, 2020."
 signature:
-  firm: "MCKAY, BURTON & THURMAN, P.C."
+  firm: "**MCKAY, BURTON & THURMAN, P.C.**"
   signer: "Brian J. Porter"
   lines:
     - "Attorneys for Plaintiff David L. Miller, Trustee of the Chapter 7 Bankruptcy Estate of Dynamic Custom Homes, LLC"
@@ -79,7 +83,7 @@ Water Works did not respond to Plaintiff's April 28, 2020 letter.
 
 # FIRST CAUSE OF ACTION
 
-## (Preference – 11 U.S.C. §547(b))
+## ***(Preference – 11 U.S.C. §547(b))***
 
 Pursuant to Federal Rule of Civil Procedure 10(c), as made applicable in this adversary proceeding by Federal Rule of Bankruptcy Procedure 7010, Plaintiff incorporates by reference paragraphs one (1) through seventeen (17) of this complaint as if fully set forth herein.
 
@@ -99,7 +103,7 @@ By reason of the foregoing, the Transfers should be avoided as preferential tran
 
 # SECOND CAUSE OF ACTION
 
-## (Recovery of Avoided Preferential Transfer – 11 U.S.C. §§ 550 and 551)
+## ***(Recovery of Avoided Preferential Transfer – 11 U.S.C. §§ 550 and 551)***
 
 Pursuant to Federal Rule of Civil Procedure 10(c), as made applicable in this adversary proceeding by Federal Rule of Bankruptcy Procedure 7010, Plaintiff incorporates by reference paragraphs one (1) through twenty-five (25) of this complaint as if fully set forth herein.
 
