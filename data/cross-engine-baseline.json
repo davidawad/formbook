@@ -1,7 +1,7 @@
 {
   "about": "fb-595.54 cross-engine baseline: typst render (reference) vs latex and docx renders of the same INPUT; regenerate with `fb cross-engine --write` (docs/EVAL-LOOP.md, Cross-engine gate)",
   "pairs": 548,
-  "pairs_pass": 4,
+  "pairs_pass": 6,
   "rows": [
     {
       "folder": "courts/dc-circuit/court-of-appeals/answering-brief",
@@ -333,16 +333,16 @@
       "engine": "docx",
       "mode": "report",
       "pages": [
-        18,
-        19
+        20,
+        20
       ],
-      "pages_equal": false,
-      "page_ends_differ": 11,
-      "lines": 365,
-      "lines_same": 92,
-      "pct_same": 25.2,
-      "first_differing": "p1 line 2",
-      "width_drift_pt": 28.08,
+      "pages_equal": true,
+      "page_ends_differ": 4,
+      "lines": 367,
+      "lines_same": 334,
+      "pct_same": 91.0,
+      "first_differing": "p2 line 9",
+      "width_drift_pt": 6.09,
       "source": "committed"
     },
     {
@@ -643,13 +643,13 @@
         8
       ],
       "pages_equal": true,
-      "page_ends_differ": 4,
+      "page_ends_differ": 3,
       "lines": 181,
-      "lines_same": 44,
-      "pct_same": 24.3,
-      "first_differing": "p1 line 4",
-      "width_drift_pt": 61.12,
-      "source": "converted"
+      "lines_same": 151,
+      "pct_same": 83.4,
+      "first_differing": "p1 line 6",
+      "width_drift_pt": 57.54,
+      "source": "committed"
     },
     {
       "folder": "courts/eighth-circuit/minnesota/federal/bankruptcy-district/adversary-complaint",
@@ -2230,7 +2230,7 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.0,
-      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/tmp/fb-xengine-114050-1792616720496597243/OUTPUT-answering-brief.pdf): No such file or directory (os error 2)"
+      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620275050007051/OUTPUT-answering-brief.pdf): No such file or directory (os error 2)"
     },
     {
       "folder": "courts/federal-circuit/court-of-veteran-appeals/opening-brief",
@@ -2245,7 +2245,7 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.0,
-      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/tmp/fb-xengine-114050-1792616720378584219/OUTPUT-opening-brief.pdf): No such file or directory (os error 2)"
+      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620275106806624/OUTPUT-opening-brief.pdf): No such file or directory (os error 2)"
     },
     {
       "folder": "courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response",
@@ -3844,7 +3844,7 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.0,
-      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/tmp/fb-xengine-114050-1792616726859825463/OUTPUT-answering-brief.pdf): No such file or directory (os error 2)"
+      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620290093452789/OUTPUT-answering-brief.pdf): No such file or directory (os error 2)"
     },
     {
       "folder": "courts/fourth-circuit/court-of-appeals/opening-brief",
@@ -3877,7 +3877,7 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.0,
-      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/tmp/fb-xengine-114050-1792616726802775820/OUTPUT-opening-brief.pdf): No such file or directory (os error 2)"
+      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620290055809657/OUTPUT-opening-brief.pdf): No such file or directory (os error 2)"
     },
     {
       "folder": "courts/fourth-circuit/court-of-appeals/reply-brief",
@@ -3910,7 +3910,7 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.0,
-      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/tmp/fb-xengine-114050-1792616726810021271/OUTPUT-reply-brief.pdf): No such file or directory (os error 2)"
+      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620290167189070/OUTPUT-reply-brief.pdf): No such file or directory (os error 2)"
     },
     {
       "folder": "courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-complaint",
@@ -6444,10 +6444,10 @@
       "pages_equal": false,
       "page_ends_differ": 7,
       "lines": 221,
-      "lines_same": 88,
-      "pct_same": 39.8,
+      "lines_same": 75,
+      "pct_same": 33.9,
       "first_differing": "p1 line 11",
-      "width_drift_pt": 25.2,
+      "width_drift_pt": 6.94,
       "source": "committed"
     },
     {
@@ -6462,10 +6462,10 @@
       "pages_equal": false,
       "page_ends_differ": 12,
       "lines": 221,
-      "lines_same": 64,
-      "pct_same": 29.0,
+      "lines_same": 63,
+      "pct_same": 28.5,
       "first_differing": "p1 line 1",
-      "width_drift_pt": 37.75,
+      "width_drift_pt": 64.13,
       "source": "committed"
     },
     {
@@ -7048,36 +7048,36 @@
       "folder": "courts/seventh-circuit/court-of-appeals/opening-brief",
       "id": "opening-brief",
       "engine": "latex",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
-        14,
-        16
+        15,
+        15
       ],
-      "pages_equal": false,
-      "page_ends_differ": 12,
-      "lines": 300,
-      "lines_same": 120,
-      "pct_same": 40.0,
-      "first_differing": "p1 line 9",
-      "width_drift_pt": 25.2,
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 301,
+      "lines_same": 301,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.08,
       "source": "committed"
     },
     {
       "folder": "courts/seventh-circuit/court-of-appeals/opening-brief",
       "id": "opening-brief",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
-        14,
-        14
+        15,
+        15
       ],
       "pages_equal": true,
-      "page_ends_differ": 5,
-      "lines": 300,
-      "lines_same": 127,
-      "pct_same": 42.3,
-      "first_differing": "p1 line 9",
-      "width_drift_pt": 24.24,
+      "page_ends_differ": 0,
+      "lines": 301,
+      "lines_same": 301,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.34,
       "source": "committed"
     },
     {
@@ -7653,7 +7653,7 @@
       "lines_same": 73,
       "pct_same": 37.1,
       "first_differing": "p2 line 2",
-      "width_drift_pt": 32.59,
+      "width_drift_pt": 29.09,
       "source": "converted"
     },
     {
@@ -7671,7 +7671,7 @@
       "lines_same": 87,
       "pct_same": 41.2,
       "first_differing": "p3 line 4",
-      "width_drift_pt": 34.54,
+      "width_drift_pt": 31.04,
       "source": "converted"
     },
     {
@@ -7689,7 +7689,7 @@
       "lines_same": 71,
       "pct_same": 39.2,
       "first_differing": "p3 line 2",
-      "width_drift_pt": 30.23,
+      "width_drift_pt": 26.72,
       "source": "converted"
     },
     {
@@ -7704,10 +7704,10 @@
       "pages_equal": false,
       "page_ends_differ": 15,
       "lines": 290,
-      "lines_same": 251,
-      "pct_same": 86.6,
+      "lines_same": 221,
+      "pct_same": 76.2,
       "first_differing": "p2 line 6",
-      "width_drift_pt": 29.14,
+      "width_drift_pt": 12.9,
       "source": "committed"
     },
     {
@@ -7722,8 +7722,8 @@
       "pages_equal": true,
       "page_ends_differ": 12,
       "lines": 290,
-      "lines_same": 82,
-      "pct_same": 28.3,
+      "lines_same": 72,
+      "pct_same": 24.8,
       "first_differing": "p1 line 4",
       "width_drift_pt": 72.16,
       "source": "committed"
@@ -7740,10 +7740,10 @@
       "pages_equal": false,
       "page_ends_differ": 16,
       "lines": 323,
-      "lines_same": 256,
-      "pct_same": 79.3,
+      "lines_same": 226,
+      "pct_same": 70.0,
       "first_differing": "p1 line 13",
-      "width_drift_pt": 13.33,
+      "width_drift_pt": 7.24,
       "source": "committed"
     },
     {
@@ -7758,8 +7758,8 @@
       "pages_equal": false,
       "page_ends_differ": 16,
       "lines": 323,
-      "lines_same": 156,
-      "pct_same": 48.3,
+      "lines_same": 135,
+      "pct_same": 41.8,
       "first_differing": "p1 line 10",
       "width_drift_pt": 30.39,
       "source": "committed"

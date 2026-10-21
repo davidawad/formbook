@@ -263,13 +263,13 @@ Dot leaders are fill, not words (Word sets them as one run of dots touching the 
 
 **Reference breaker each engine follows** (shown on ca9: both samples, typst↔latex and typst↔docx, 100 % of lines and every page alike; `fb check --engine latex|docx` gates it, and the selftest mutant `latex-kerning` turns kerning back on and must fail `XENG-003`): first fit on Unicode break opportunities, no hyphenation, no kerning or ligatures, rigid spaces, Word's exact-line-spacing boxes. The model is shared code since fb-595.54.1 (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; the checklist at the end of this section); ca9 (`courts/ninth-circuit/court-of-appeals`: `typst/ca9-brief.typ`, `latex/template.tex`, `latex/ca9.lua`, `docx/ca9.lua`, `docx/make-reference.sh`) is the worked example.
 
-**Baseline** (`fb cross-engine --write` writes `data/cross-engine-baseline.json`; committed renders, a `.docx` without its committed PDF converted with LibreOffice into `out/cross-engine/`). 548 engine pairs in 490 folders (41 latex, 507 docx); 4 pass, all ca9; 5 not measured (their committed `.docx` does not load in LibreOffice: `federal-circuit/court-of-veteran-appeals` answering and opening briefs, `fourth-circuit/court-of-appeals` answering, opening and reply briefs). Every other folder fails the gate and is REPORTED until the fan-out fixes it. Measured on master 97737ac6 (2026-10-21): LibreOffice now converts with the vendored fonts in view (fb-595.52), which moved the docx rows from a mean of 27.7 % to 34.2 % of lines alike and from 139 to 222 of 502 page counts equal; latex is unchanged at 58.1 %, with 16 of 41 page counts equal. By circuit (pairs; not measured; page count equal; mean % of lines with the same break; passing):
+**Baseline** (`fb cross-engine --write` writes `data/cross-engine-baseline.json`; committed renders, a `.docx` without its committed PDF converted with LibreOffice into `out/cross-engine/`). 548 engine pairs in 490 folders (41 latex, 507 docx); 6 pass: ca9 (4) and, since fb-595.54.1, `seventh-circuit/court-of-appeals/opening-brief` (latex and docx, the first folder ported onto the shared libraries; it gates); 5 not measured (their committed `.docx` does not load in LibreOffice: `federal-circuit/court-of-veteran-appeals` answering and opening briefs, `fourth-circuit/court-of-appeals` answering, opening and reply briefs). Every other folder fails the gate and is REPORTED until the fan-out fixes it. Measured on master 97737ac6 (2026-10-21): LibreOffice now converts with the vendored fonts in view (fb-595.52), which moved the docx rows from a mean of 27.7 % to 34.2 % of lines alike and from 139 to 222 of 502 page counts equal; latex is unchanged at 58.1 %, with 16 of 41 page counts equal. Re-measured for fb-595.54.1 (2026-10-21, on this tree): besides the ca7 opening brief (latex 40.0 % to 100 %, docx 42.3 % to 100 %), five rows moved with renders committed on master since that measurement (fb-595.57, .61, .65: `eighth-circuit/bankruptcy-appellate-panel/opening-brief` and `iowa/federal/southern-district/motion-brief` docx, `second-circuit/court-of-appeals/answering-brief`, `sixth-circuit/court-of-appeals` answering and opening briefs). By circuit (pairs; not measured; page count equal; mean % of lines with the same break; passing):
 
 | circuit | engine | pairs | not measured | pages equal | % lines same break (mean) | pass |
 |---|---|---|---|---|---|---|
 | dc-circuit | docx | 7 | 0 | 3 | 35.0 | 0 |
 | dc-circuit | latex | 3 | 0 | 2 | 59.2 | 0 |
-| eighth-circuit | docx | 48 | 0 | 27 | 35.4 | 0 |
+| eighth-circuit | docx | 48 | 0 | 28 | 38.0 | 0 |
 | eighth-circuit | latex | 3 | 0 | 1 | 61.9 | 0 |
 | eleventh-circuit | docx | 49 | 0 | 21 | 41.3 | 0 |
 | eleventh-circuit | latex | 3 | 0 | 2 | 69.1 | 0 |
@@ -286,11 +286,11 @@ Dot leaders are fill, not words (Word sets them as one run of dots touching the 
 | ninth-circuit | docx | 73 | 0 | 18 | 24.3 | 2 |
 | ninth-circuit | latex | 4 | 0 | 2 | 80.0 | 2 |
 | second-circuit | docx | 33 | 0 | 14 | 30.0 | 0 |
-| second-circuit | latex | 3 | 0 | 0 | 40.9 | 0 |
-| seventh-circuit | docx | 31 | 0 | 12 | 31.3 | 0 |
-| seventh-circuit | latex | 4 | 0 | 1 | 35.4 | 0 |
-| sixth-circuit | docx | 43 | 0 | 30 | 39.4 | 0 |
-| sixth-circuit | latex | 3 | 0 | 0 | 79.4 | 0 |
+| second-circuit | latex | 3 | 0 | 0 | 38.9 | 0 |
+| seventh-circuit | docx | 31 | 0 | 12 | 33.2 | 1 |
+| seventh-circuit | latex | 4 | 0 | 2 | 50.4 | 1 |
+| sixth-circuit | docx | 43 | 0 | 30 | 39.2 | 0 |
+| sixth-circuit | latex | 3 | 0 | 0 | 72.8 | 0 |
 | supreme-court-of-the-united-states | docx | 3 | 0 | 2 | 38.2 | 0 |
 | supreme-court-of-the-united-states | latex | 2 | 0 | 1 | 32.0 | 0 |
 | tenth-circuit | docx | 40 | 0 | 18 | 36.2 | 0 |
@@ -298,7 +298,7 @@ Dot leaders are fill, not words (Word sets them as one run of dots touching the 
 | third-circuit | docx | 28 | 0 | 14 | 34.8 | 0 |
 | third-circuit | latex | 3 | 0 | 2 | 46.6 | 0 |
 
-Folders that fail the gate, by circuit: every folder in the table below except `courts/ninth-circuit/court-of-appeals` (both samples, both engines PASS). Per pair: folder | id | engine | mode | pages equal | % lines same break | first differing page/line.
+Folders that fail the gate, by circuit: every folder in the table below except `courts/ninth-circuit/court-of-appeals` (both samples, both engines PASS) and `courts/seventh-circuit/court-of-appeals/opening-brief` (both engines PASS; fb-595.54.1). Per pair: folder | id | engine | mode | pages equal | % lines same break | first differing page/line.
 
 <details><summary>Full baseline table (548 rows)</summary>
 
@@ -322,7 +322,7 @@ Folders that fail the gate, by circuit: every folder in the table below except `
 | courts/eighth-circuit/arkansas/federal/eastern-district/motion-brief | motion-brief | docx | report | no (7 vs 9) | 11.4 | p1 line 4 |
 | courts/eighth-circuit/arkansas/federal/western-district/complaint | complaint | docx | report | no (11 vs 10) | 16.5 | p1 line 8 |
 | courts/eighth-circuit/arkansas/federal/western-district/motion-brief | motion-brief | docx | report | yes (11) | 19.1 | p1 line 10 |
-| courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | report | no (18 vs 19) | 25.2 | p1 line 2 |
+| courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | report | yes (20) | 91.0 | p2 line 9 |
 | courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief | docx | report | yes (9) | 83.3 | p1 line 1 |
 | courts/eighth-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (13 vs 14) | 55.8 | p2 line 4 |
 | courts/eighth-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (13 vs 11) | 13.3 | p1 line 2 |
@@ -339,7 +339,7 @@ Folders that fail the gate, by circuit: every folder in the table below except `
 | courts/eighth-circuit/iowa/federal/northern-district/complaint | complaint | docx | report | yes (8) | 32.1 | p1 line 6 |
 | courts/eighth-circuit/iowa/federal/northern-district/motion-brief | motion-brief | docx | report | no (16 vs 12) | 78.3 | p1 line 6 |
 | courts/eighth-circuit/iowa/federal/southern-district/complaint | complaint | docx | report | no (10 vs 11) | 31.3 | p1 line 6 |
-| courts/eighth-circuit/iowa/federal/southern-district/motion-brief | motion-brief | docx | report | yes (8) | 24.3 | p1 line 4 |
+| courts/eighth-circuit/iowa/federal/southern-district/motion-brief | motion-brief | docx | report | yes (8) | 83.4 | p1 line 6 |
 | courts/eighth-circuit/minnesota/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (11 vs 10) | 25.0 | p1 line 15 |
 | courts/eighth-circuit/minnesota/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (12 vs 11) | 24.2 | p1 line 6 |
 | courts/eighth-circuit/minnesota/federal/district/complaint | complaint | docx | report | yes (14) | 37.8 | p1 line 3 |
@@ -427,8 +427,8 @@ Folders that fail the gate, by circuit: every folder in the table below except `
 | courts/federal-circuit/court-of-federal-claims/motion-brief | motion-brief | docx | report | no (12 vs 13) | 26.7 | p1 line 5 |
 | courts/federal-circuit/court-of-international-trade/complaint | complaint | docx | report | no (7 vs 10) | 28.0 | p1 line 10 |
 | courts/federal-circuit/court-of-international-trade/motion-brief | motion-brief | docx | report | no (10 vs 12) | 38.2 | p1 line 13 |
-| courts/federal-circuit/court-of-veteran-appeals/answering-brief | answering-brief | docx | report | not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/tmp/fb-xengine-114050-1792616720496597243/OUTPUT-answering-brief.pdf): No such file or directory (os error 2) | - | - |
-| courts/federal-circuit/court-of-veteran-appeals/opening-brief | opening-brief | docx | report | not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/tmp/fb-xengine-114050-1792616720378584219/OUTPUT-opening-brief.pdf): No such file or directory (os error 2) | - | - |
+| courts/federal-circuit/court-of-veteran-appeals/answering-brief | answering-brief | docx | report | not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620275050007051/OUTPUT-answering-brief.pdf): No such file or directory (os error 2) | - | - |
+| courts/federal-circuit/court-of-veteran-appeals/opening-brief | opening-brief | docx | report | not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620275106806624/OUTPUT-opening-brief.pdf): No such file or directory (os error 2) | - | - |
 | courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response | patent-owner-response | docx | report | yes (13) | 64.2 | p2 line 2 |
 | courts/federal-circuit/patent-trial-and-appeal-board/petition | petition | docx | report | no (14 vs 15) | 53.0 | p1 line 13 |
 | courts/federal-circuit/trademark-trial-and-appeal-board/answer | answer-3 | docx | report | yes (4) | 88.2 | p1 line 6 |
@@ -517,11 +517,11 @@ Folders that fail the gate, by circuit: every folder in the table below except `
 | courts/first-circuit/rhode-island/federal/district/complaint | complaint | docx | report | no (12 vs 11) | 25.2 | p1 line 5 |
 | courts/first-circuit/rhode-island/federal/district/motion-brief | motion-brief | docx | report | yes (15) | 16.5 | p1 line 6 |
 | courts/fourth-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (13 vs 14) | 61.0 | p1 line 2 |
-| courts/fourth-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/tmp/fb-xengine-114050-1792616726859825463/OUTPUT-answering-brief.pdf): No such file or directory (os error 2) | - | - |
+| courts/fourth-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620290093452789/OUTPUT-answering-brief.pdf): No such file or directory (os error 2) | - | - |
 | courts/fourth-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | no (12 vs 14) | 71.2 | p1 line 11 |
-| courts/fourth-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/tmp/fb-xengine-114050-1792616726802775820/OUTPUT-opening-brief.pdf): No such file or directory (os error 2) | - | - |
+| courts/fourth-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620290055809657/OUTPUT-opening-brief.pdf): No such file or directory (os error 2) | - | - |
 | courts/fourth-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | no (10 vs 11) | 61.7 | p1 line 2 |
-| courts/fourth-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/tmp/fb-xengine-114050-1792616726810021271/OUTPUT-reply-brief.pdf): No such file or directory (os error 2) | - | - |
+| courts/fourth-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620290167189070/OUTPUT-reply-brief.pdf): No such file or directory (os error 2) | - | - |
 | courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (14 vs 13) | 28.5 | p1 line 6 |
 | courts/fourth-circuit/maryland/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (12) | 32.2 | p1 line 21 |
 | courts/fourth-circuit/maryland/federal/district/complaint | complaint | docx | report | no (11 vs 12) | 86.5 | p1 line 22 |
@@ -662,8 +662,8 @@ Folders that fail the gate, by circuit: every folder in the table below except `
 | courts/second-circuit/connecticut/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (9) | 27.7 | p2 line 3 |
 | courts/second-circuit/connecticut/federal/district/complaint | complaint | docx | report | no (12 vs 11) | 31.6 | p1 line 6 |
 | courts/second-circuit/connecticut/federal/district/motion-brief | motion-brief | docx | report | yes (11) | 39.5 | p1 line 4 |
-| courts/second-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (12 vs 13) | 39.8 | p1 line 11 |
-| courts/second-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (12 vs 13) | 29.0 | p1 line 1 |
+| courts/second-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (12 vs 13) | 33.9 | p1 line 11 |
+| courts/second-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (12 vs 13) | 28.5 | p1 line 1 |
 | courts/second-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | no (18 vs 20) | 41.6 | p2 line 6 |
 | courts/second-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | no (18 vs 19) | 28.4 | p1 line 1 |
 | courts/second-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | no (13 vs 14) | 41.2 | p1 line 2 |
@@ -696,8 +696,8 @@ Folders that fail the gate, by circuit: every folder in the table below except `
 | courts/second-circuit/vermont/federal/district/motion-brief | motion-brief | docx | report | no (8 vs 10) | 25.8 | p1 line 3 |
 | courts/seventh-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (15 vs 14) | 30.9 | p1 line 2 |
 | courts/seventh-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (15 vs 14) | 43.2 | p2 line 8 |
-| courts/seventh-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | no (14 vs 16) | 40.0 | p1 line 9 |
-| courts/seventh-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | yes (14) | 42.3 | p1 line 9 |
+| courts/seventh-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (15) | 100.0 | - |
+| courts/seventh-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (15) | 100.0 | - |
 | courts/seventh-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | yes (12) | 33.9 | p1 line 1 |
 | courts/seventh-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | yes (12) | 29.6 | p1 line 21 |
 | courts/seventh-circuit/court-of-appeals/reply-brief | reply-brief-2 | latex | report | no (14 vs 16) | 36.8 | p1 line 1 |
@@ -732,10 +732,10 @@ Folders that fail the gate, by circuit: every folder in the table below except `
 | courts/sixth-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief | docx | report | yes (13) | 37.1 | p2 line 2 |
 | courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | report | no (14 vs 15) | 41.2 | p3 line 4 |
 | courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief | docx | report | yes (12) | 39.2 | p3 line 2 |
-| courts/sixth-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (15 vs 17) | 86.6 | p2 line 6 |
-| courts/sixth-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | yes (15) | 28.3 | p1 line 4 |
-| courts/sixth-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | no (18 vs 19) | 79.3 | p1 line 13 |
-| courts/sixth-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | no (18 vs 19) | 48.3 | p1 line 10 |
+| courts/sixth-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (15 vs 17) | 76.2 | p2 line 6 |
+| courts/sixth-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | yes (15) | 24.8 | p1 line 4 |
+| courts/sixth-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | no (18 vs 19) | 70.0 | p1 line 13 |
+| courts/sixth-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | no (18 vs 19) | 41.8 | p1 line 10 |
 | courts/sixth-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | no (11 vs 12) | 72.2 | p2 line 5 |
 | courts/sixth-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | no (11 vs 12) | 32.5 | p1 line 9 |
 | courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | no (13 vs 15) | 37.9 | p1 line 5 |
@@ -885,6 +885,13 @@ The layout model is shared code, not a recipe to copy: `lib/typst/xengine.typ`, 
 - [ ] `fb check --engine latex|docx <dir>`: Gate 4 prints `XENG-001..003` (REPORTED until the folder gates); `fb diff --engines OUTPUT-<id>.typst.pdf OUTPUT-<id>.<engine>.pdf` names each differing line, its break word and the width drift.
 - [ ] When latex and docx pass on every INPUT: `params.cross_engine: gate` in the folder's `eval.yaml` (or `checks.yaml`), every tier-1 check still green on all three engines, the Gate 2 review re-done on the new renders, and (a folder with a selftest) a kerning mutant like ca9's `latex-kerning` (`\RemoveFromHook{selectfont}[xengine]` must fail `XENG-003`).
 - [ ] A port of a template that already passes changes no pixel: `pdftoppm -r 100` before and after, every page.
+
+**What the first adoption found** (`courts/seventh-circuit/court-of-appeals/opening-brief`, fb-595.54.1; before: latex 14 vs 16 pages and 40.0 % of lines alike, docx 42.3 % and a tier-1 font failure (EB Garamond for a Times template); after: XENG-001..003 PASS on both engines, `params.cross_engine: gate` in its `eval.yaml`). The pitfalls, each a line or page the gate caught:
+- A line that holds boxes (two columns of counsel as minipages) must keep its natural height: `\xe@natural` before it (pdfTeX's unset `\pdfeachlineheight` is −2³⁰ sp, which `-\maxdimen` is not; the package keeps it from load time), and `\xe@lines` again inside each box.
+- Word keeps the space above a paragraph that opens a section or follows a page break; typst drops it at the top of a page: a heading that opens a page carries `before="0"`. The empty paragraph that ends a Word section gets a 1 pt exact line, or it pushes a full page's last line on.
+- A `\par` inside a `\noindent` group starts an indented paragraph: a form's second paragraph needs its own `\noindent`. `\emph{…}\fi,` puts an italic correction before the comma (`\emph{…},` does not): the PDF text then has "Meyerhoff ,".
+- Every engine certifies the same number: count words block by block (stringify of the whole document runs words together), before the headings become raw output. A certificate that names the program ("using Typst …", "using LaTeX …") differs between engines; the wording names the typeface only.
+- Word's table page numbers come from a page map of the LibreOffice PDF; search it as ca9's needles do (docxpages.rs): a heading by its label and title at the start of a line, each citation as its link text and the words after it, in document order, with its first words as the fallback when it runs over a page end. A search for the link text alone takes unlinked mentions and a body sentence that begins like a heading (three wrong page numbers in the ca7 docx before the port).
 
 ## Tools
 
