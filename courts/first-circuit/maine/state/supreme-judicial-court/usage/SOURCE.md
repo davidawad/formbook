@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 43 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-amicus-brief.pdf` | Amicus curiae Surfrider Foundation | Masucci v. Judy's Moody, LLC, Law Court Dkt. Cum-24-82 | undated | https://www.courts.maine.gov/news/masucci/24-82_amicus_surfrider_foundation_brief.pdf | `b103276eb23aa367ecd4f1d01b4f694da82c37b74f169a25cc0a7070c3ae486f` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search (2026-10-21, fb-l129.1)
+
+Re-searched the blocked discretionary-review row against the official current Maine appellate rules, the official statutes on sentence review and workers' compensation appellate review, and the Workers' Compensation Board appeal information. Rule 20 sentence-review applications are made through the trial-court clerk; Rule 23 petitions for review are filed with the Law Court after a Board decision. The official sources provide procedure but no filed party PDF, and web searches returned rules/forms rather than qualifying filings. The row remains blocked.

@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 28 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-amicus-brief.pdf` | Empower DC (amicus curiae supporting appellants) | Staley v. District of Columbia, No. 22-CV-303 | 2022-09-27 | https://www.dccourts.gov/sites/default/files/oral-arguments/22-CV-303%20Amicus%20Curiae%20Brief.pdf | `963ffb103d4c61c83864560772ffff385c7c9eebc7abfdf5b8271ca6a1c938fd` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search (2026-10-21, fb-l129.1)
+
+Re-searched the Rule 6 application and Rule 21 writ rows against the official DCCA rules and its public C-Track e-filing case search. C-Track lists an actual Rule 21 mandamus case, In re Andrew Johnson, 26-OA-0013 (filed 2026-03-24), including its petition event and later rehearing motion, but the public case view exposes no PDF link or document download for the party filings. Rule 6/21 pages, published orders, and web searches yielded no downloadable text-layer petition. The rows remain blocked until a public filed PDF can be retrieved.
