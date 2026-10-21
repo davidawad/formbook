@@ -8,7 +8,7 @@
 // YAML frontmatter of the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
-#import "../../../../../lib/typst/tables.typ": leader-page
+#import "../../../../../lib/typst/tables.typ": leader-page-glued
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or is a style choice)
@@ -205,7 +205,7 @@
         else { a.cite }
       block(width: 100%, above: 0.5em, below: 0.5em)[
         #set par(leading: single-leading, first-line-indent: 0pt, hanging-indent: 0.5in)
-        #inl(cited) #leader-page(0pt, shown)
+        #inl(cited) #leader-page-glued(0pt, shown)
       ]
     }
   }

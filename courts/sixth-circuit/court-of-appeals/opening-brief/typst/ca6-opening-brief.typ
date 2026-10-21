@@ -7,7 +7,7 @@
 // of the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
-#import "../../../../../lib/typst/tables.typ": leader-page
+#import "../../../../../lib/typst/tables.typ": leader-page-glued
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -210,7 +210,7 @@
       if numbered { box(width: heading-tab, lab) }
       title
       h(0.8em)
-      leader-page(0.16em, it.page())
+      leader-page-glued(0.16em, it.page())
     })))
 }
 
@@ -274,7 +274,7 @@
           }
           inl(a.cite)
           h(0.8em)
-          leader-page(0.16em, page-text)
+          leader-page-glued(0.16em, page-text)
         }))
       }
     }
