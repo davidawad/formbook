@@ -19,6 +19,7 @@
 #let para-indent = 0.5in
 #let sig-indent = 3.2in                    // signature block sits right of centre (style; exemplar does the same).
 #let toc-depth = 2                         // Rule 84.04(a)(1): detailed table of contents with page references.
+#let toa-page-room = 4in                   // style: a TOA page list wider than this cannot share a line with leaders; it is set as *passim* (Bluebook R. 3.2(a)).
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -92,7 +93,9 @@
     .filter(m => m.value == key)
     .map(m => counter(page).at(m.location()).first())
     .dedup()
-  if pages.len() == 0 { [--] } else { pages.map(str).join(", ") }
+  if pages.len() == 0 { return [--] }
+  let label = pages.map(str).join(", ")
+  if measure(label).width > toa-page-room { emph[passim] } else { label }
 }
 
 #let authorities-table(meta) = {
@@ -102,7 +105,7 @@
     block(above: 1.1em, below: 0.7em, sticky: true, strong(group.heading))
     for e in group.entries {
       block(above: 0.7em, below: 0.7em, breakable: false)[
-        #inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)]) #h(4pt) #if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+        #inl(e.cite)#sym.wj#h(0.5em)#sym.wj#box(width: 1fr, repeat[.#h(2pt)])#sym.wj#h(4pt)#sym.wj#box(if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") })
       ]
     }
   }

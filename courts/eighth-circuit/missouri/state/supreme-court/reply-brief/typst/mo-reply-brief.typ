@@ -103,7 +103,7 @@
     block(above: 1.1em, below: 0.7em, sticky: true, strong(group.heading))
     for e in group.entries {
       block(above: 0.7em, below: 0.7em, breakable: false)[
-        #inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)]) #h(4pt) #if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+        #inl(e.cite)#sym.wj#h(0.5em)#sym.wj#box(width: 1fr, repeat[.#h(2pt)])#sym.wj#h(4pt)#sym.wj#box(if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") })
       ]
     }
   }
