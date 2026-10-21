@@ -1,0 +1,4 @@
+# NMRA 12-305(D)(1) (see ../rules.md): a proportionally-spaced typeface with serifs, such as Times New Roman, must be 14-point or larger
+# (the cover page may be 11-point only if needed to fit the cover on one page; the cover here is set at 12 pt by the template).
+font:
+  size_pt: 14

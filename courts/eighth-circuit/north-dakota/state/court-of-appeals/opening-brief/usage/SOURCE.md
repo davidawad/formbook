@@ -1,0 +1,8 @@
+# Public filed exemplars — North Dakota Court of Appeals
+
+Index alias: `ndctapp`  
+Indexed level: `state-appellate`
+
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `opening-brief` — Opening brief (appellant's principal brief) | COLLECTED: 12 pp., text layer verified 2026-10-17; brief in a case assigned to and decided by the temporary Court of Appeals (opinion 2005-05-25); under N.D.Sup.Ct.Admin.R. 27 sec. 9(a) every brief in an assigned case is filed with the Clerk of the Supreme Court under the Supreme Court number, so it is captioned In the Supreme Court; clerk's 'Filed 02/14/05' notation; from the court's C-Track docket; verified https://www.ndcourts.gov/legal-resources/rules/ndsupctadminr/27 (eff. 8/11/2021, read via r.jina.ai) 2026-10-17. Searched 2026-10-17 (fb-l129.2): CourtListener lists 81 Court of Appeals opinions (court ndctapp), the last on 2007-08-22, so the court has been dormant since 2007; the court's public C-Track API (portal-api.ctrack.ndcourts.gov, no login, documents downloadable) was read for all 33 assigned dockets decided 1998-2007 (59+38 brief, petition and motion documents downloaded and checked): every document from 1998-2001 and 2006-2007 is an image-only ScanSnap scan; text layers exist only in some 2005 e-filed briefs | `FILED-EXAMPLE-opening-brief.pdf` | Clifford Smith, appellant (Vinje Law Firm, Chad R. McCabe) | State v. Smith, No. 20050004 (decided by the Court of Appeals) | 2005-02-14 | https://portal-api.ctrack.ndcourts.gov/courts/68f021c4-6a44-4735-9a76-5360b2e8af13/cms/case/fc0084d1-e786-4b64-9d2f-5a18eb2319aa/docketentrydocuments/65c5315e-3a54-4888-a6d0-b7ef5e141ddb | `74df0fbc84a38ebd6187186b4e49b123531190b45242d2d764dc7c5c94e0886a` |

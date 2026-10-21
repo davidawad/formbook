@@ -1,0 +1,4 @@
+# SCACR Rule 208(b)(5): principal briefs shall not exceed fifty (50) pages, except in death-sentence
+# cases (https://www.sccourts.org/resources/judicial-community/court-rules/appellate/rule-208/).
+params:
+  page_limit: 50

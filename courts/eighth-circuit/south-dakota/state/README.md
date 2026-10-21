@@ -5,7 +5,7 @@ Courts under `courts/eighth-circuit/south-dakota/state` (1).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Supreme Court of South Dakota](supreme-court) | `sd` | in progress | — | — | — | 14 |
+| [Supreme Court of South Dakota](supreme-court) | `sd` | up for review | — | — | — | 29 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->

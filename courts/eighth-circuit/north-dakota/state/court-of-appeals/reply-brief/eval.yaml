@@ -1,0 +1,4 @@
+# N.D.R.App.P. 32(a)(8)(A) (effective 4/1/2024): "a reply brief may not exceed 12 pages,
+# excluding any addendum." Pages are counted including the cover (32(a)(4)).
+params:
+  page_limit: 12

@@ -1,0 +1,4 @@
+# West Virginia original-jurisdiction petition (rules.md WVA-WRIT-004): 40 pages, excluding the cover, tables,
+# verification and certificate of service (RAP 38(c)). The total page count checked here is a stricter count.
+params:
+  page_limit: 40

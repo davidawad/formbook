@@ -1,0 +1,3 @@
+# West Virginia Rule 25 petition for rehearing (rules.md WVA-REH-002): the 15-page limit excludes the cover, tables and
+# certificate of service (RAP 38(c)). DEF-LEN-001 counts every page of the PDF, so no page_limit is set here: a total
+# count cannot express a body-only limit, and a total limit of 15 would reject a compliant filing.

@@ -1,0 +1,3 @@
+# C.A.R. 32(a)(1) (Rule Change 2005(6), see ../rules.md): non-typewriter briefs use a typeface 14-point or larger, footnotes included.
+font:
+  size_pt: 14

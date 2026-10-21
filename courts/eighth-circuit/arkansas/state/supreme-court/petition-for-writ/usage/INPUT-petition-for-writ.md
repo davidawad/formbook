@@ -1,0 +1,78 @@
+---
+# Transcription of FILED-EXAMPLE-petition-for-writ.pdf (Emergency Petition for Writ, CV-20-529), 12 pages. Caption, body, signature block and certificate of service; e-filing stamp and page numbers removed. Line-end hyphenation rejoined ("background-check"). The filed case number is blank after "CV-20-" and is kept blank. The filed signature block has no "/s/" line; the template adds one over the last signer.
+cover: false
+toc: false
+case_number: "CV-20-_____"
+court_line: "In the Arkansas Supreme Court"
+caption:
+  - names: ["JOHN THURSTON, in his Official Capacity as Secretary of State, and LESLIE RUTLEDGE, in her Official Capacity as Attorney General"]
+    designation: "PETITIONERS"
+  - names: ["SAFE SURGERY ARKANSAS, a Ballot Question Committee; and DR. LAURIE BARBER, Individually and on behalf of SAFE SURGERY ARKANSAS"]
+    designation: "RESPONDENTS"
+brief_title: "Emergency Petition for Writ of Mandamus, Writ of Prohibition, Writ of Certiorari, or Supervisory Writ, and Request for Expedited Consideration"
+signature:
+  firm: ["Respectfully submitted,", "LESLIE RUTLEDGE", "Attorney General"]
+  signer: "Dylan L. Jacobs"
+  lines: ["Nicholas J. Bronni (2016097)", "Solicitor General", "Vincent M. Wagner (2019071)", "Deputy Solicitor General", "Dylan L. Jacobs (2016167)", "Assistant Solicitor General", "OFFICE OF THE ARKANSAS ATTORNEY GENERAL", "323 Center Street, Suite 200", "Little Rock, AR 72201", "Ph: (501) 682-2007", "Fax: (501) 682-2591", "Dylan.Jacobs@ArkansasAG.gov"]
+---
+
+Petitioners John Thurston and Leslie Rutledge state as follows for their Emergency Petition for Writ of Prohibition, Writ of Mandamus, Writ of Certiorari, or Supervisory Writ and Request for Expedited Consideration:
+
+The circuit court below issued an unlawful ex parte TRO enjoining portions of Arkansas's election laws relating to initiatives and referendums. The particular statutory sections at issue—requiring initiative sponsors to certify that their paid canvassers have passed a criminal background check—will be familiar because they are currently at issue before this Court in *Arkansans for Health Eyes v. Thurston*, Case No. CV-20-136. Indeed, even the litigants are the same.
+
+The circuit court's TRO fails to comply with even the basic provisions of Ark. R. Civ. P. 65. It was issued without notice or a hearing even though Rule 65(b)(1)(A)'s requirement of "specific facts in an affidavit or verified complaint" was not met. It fails to order Respondents to give security despite the requirement in Rule 65(c). And, because the circuit court had no evidence before it—no verified complaint, affidavit, documentary evidence, or testimony—it could not have validly concluded that Respondents would suffer irreparable harm absent a TRO. Finally, the circuit court had no jurisdiction to consider the validity of Ark. Code Ann. 7-9-601(b)(1) and (b)(3) because that issue is currently pending before this Court in a case to which Respondents are parties.
+
+Given the urgency of this matter, Petitioners respectfully requests that this Court consider this Petition on an emergency basis and require Respondents to respond to the Petition by 10:00am on September 10, 2020, so that this Court may resolve the Petition expeditiously. Given the patent unlawfulness of the circuit court's TRO, Petitioners submit with this Petition a motion requesting that the Court immediately stay the TRO before receiving full briefing on a stay pending disposition of the Petition.
+
+# I. Background
+
+This case is the latest in a line of challenges to Arkansas's statutory requirements for placing an initiative or referendum on the ballot. *See, e.g.*, *Miller v. Thurston*, 2020 Ark. 267 (rejecting challenge to Secretary of State's determination of insufficiency of ballot petitions); *Arkansans for Health Eyes v. Thurston*, Case No. CV-20-136 (pending case considering the statutory provisions at issue here); *see also Miller v. Thurston*, 967 F.3d 727 (8th Cir. 2020) (rejecting federal challenge by *Miller* petitioners); *Miller v. Thurston*, Case No. 5:20-CV-05163-TLB (W.D. Ark. Sept. 2, 2020) (challenging in a successive federal lawsuit the statutory provisions at issue here and in *Healthy Eyes*).
+
+This case involves statutory provisions designed to protect against fraud in the initiative and referendum process. Amendment 7, the purported basis for the unlawful ex parte TRO, requires—not merely authorizes—the General Assembly to enact laws "prohibiting and penalizing perjury, forgery, and all other felonies or other fraudulent practices, in the securing of signatures or filing of petitions." Ark. Const. Art. 5, Sec. 1. As this Court has confirmed, the State has an interest in ensuring that paid canvassers "do not have a criminal history that calls into question their ability to interact with the public." *McDaniel v. Spencer*, 2015 Ark. 94, at 6, 457 S.W.3d 641, 648. In view of that, Ark. Code Ann. 7-9-601(b)(3) requires sponsors employing paid canvassers to "certify to the Secretary of State that each paid canvasser in its employ has passed a criminal background check in accordance with this section." Section (b)(1) requires sponsors to obtain, "at the sponsor's cost, from the Division of Arkansas State Police, a current state and federal criminal record search on every paid canvasser to be registered with the Secretary of State."
+
+Respondents are currently litigating an original action before this Court fielding a challenge to their compliance with the background-check requirement and in turn challenging that requirement's constitutionality. *See Arkansans for Health Eyes v. Thurston*, Case No. CV-20-136. Indeed, Respondents have raised the same claim at issue in this case: that the background-check requirement violates Article 5, Section 1 of the Constitution because the federal background-check requirement is impossible to comply with. *See Healthy Eyes*, Interv. Br. on Counts 2, 3, & 4, at pp. 23-24 (arguing that the background-check requirement is unconstitutional). That issue remains pending before this Court.
+
+On Friday, September 4, 2020, Respondents filed this action in the Pulaski County Circuit Court, though the filing was not accepted by the Circuit Clerk until Tuesday, September 8. Though the Complaint mentions a request for a TRO and preliminary injunction, Respondents never filed a motion seeking injunctive relief, nor did they file a verified complaint or affidavit containing facts supporting their request for injunctive relief. Instead, on the morning of September 8—the day after Labor Day weekend—Respondents wrote to the circuit court, attaching a proposed TRO. R. 20. The letter contained no legal argument, but simply "ask[ed] [the circuit court] to enter the order at its earliest possible convenience." R. 20.
+
+Less than three hours later, the circuit court entered the TRO on an ex parte basis[^1] with no substantive changes. R. 22. The order states that Respondents demonstrated irreparable harm in the absence of a TRO because Respondents "intend to sponsor an initiative to appear on the November 2022 ballot but are presently unable to collect signatures for that initiative because they cannot comply with the statutory framework governing that process . . . ." R. 22. However, the circuit court had no evidentiary basis from which to make that finding. No evidence, whether in a verified complaint or affidavit, documentary evidence, or testimony, was presented to the circuit court. Indeed, outside of the TRO, the only mention of Respondents' desire to collect signatures for an unidentified initiative to be placed on the ballot over two years from now is the allegations in the Complaint. *See* R. 3.
+
+Neither the TRO nor the Complaint makes mention of the fact that Respondents sponsored an initiative that was certified by the Secretary of State to be placed on the ballot for the November 2020 election with Section 601(b) in full force. *See generally Healthy Eyes*, Case No. CV-20-136. Nor does the TRO state, as required by Ark. R. Civ. P. 65(b)(2), why being "presently unable to collect signatures" for a 2022 ballot initiative constitutes irreparable harm.
+
+As to likelihood of success, the circuit court intruded upon the jurisdiction of this Court by holding that Ark. Code Ann. 7-9-601(b)(1) and (b)(3) are unconstitutional because they cannot be complied with. Moreover, just two weeks ago, this Court rejected two sponsors' claims centered on the background-check requirement. *See Ark. Voters First v. Thurston*, 2020 Ark. 265; *Miller v. Thurston*, 2020 Ark. 267. And if this Court believed the background-check requirements were unconstitutional, it could have so held. But the Court upheld the Secretary of State's determinations of insufficiency based on that requirement.
+
+Finally, the TRO fails to comply with Rule 65(c) because it does not require Respondents to give security.
+
+# II. Standard of Review
+
+A writ of certiorari lies to correct proceedings erroneous on the face of the record where there is no other adequate remedy; it is available to the appellate court in its exercise of superintending control over a lower court that is proceeding illegally where no other mode of review has been provided. *Parker v. Crowe*, 2010 Ark. 371, at 6-7. "A demonstration of a plain, manifest, clear, and gross abuse of discretion is essential before this court will grant a petition for writ of certiorari." *Id.* at 7. Certiorari lies when the judge has acted in excess of his or her authority. *Id.* When considering a petition for a writ of certiorari, the Court "will not look beyond the face of the record to ascertain the actual merits of a controversy, or to control discretion, or to review findings of facts, or to reverse a trial court's discretionary authority." *Ark. Dep't of Human Services v. Collier*, 351 Ark. 506, 516 (2003).
+
+A writ of prohibition is issued to prevent or prohibit the lower court from acting wholly without jurisdiction. *See Parker v. Crow*, 2010 Ark. 371, at 6. The purpose of the writ of prohibition is to prevent a court from exercising a power not authorized by law when there is no adequate remedy by appeal or otherwise. *Id.* A writ of prohibition will not issue for something which has already been done. *See Pike v. Benton Circuit Court*, 340 Ark. 311 (2000).
+
+The purpose of a writ of mandamus is to enforce an established right or to enforce the performance of a duty. *See Parker v. Crowe*, 2010 Ark. 371, at 6. A writ of mandamus is an appropriate remedy when a public officer is called upon to do a plain and specific duty, which is required by law and which requires no exercise of discretion or official judgment. *Id.* A writ of mandamus is appropriate if three factors are established: (1) the duty to be compelled is ministerial and not discretionary; (2) the petitioner has shown a clear and certain right to the relief sought; and (3) the absence of any other adequate remedy. *Id.*
+
+Further, Amendment 80 provides that this Court exercises superintending control over all the courts of Arkansas. Ark. Const. amend. 80, § 4. This Court has defined superintending jurisdiction as one of three types of jurisdiction held by the courts of last resort; the other types are appellate and original jurisdiction. *Foster v. Hill*, 372 Ark. 263 (2008). Superintending jurisdiction is an extraordinary power hampered by no specific rules or means. *Id.* By virtue of that jurisdiction, the court may "invent, frame, and formulate new and additional means, writs, and processes." *Id.* In *Hill*, this Court exercised superintending jurisdiction and said that the Court is bound only by the exigencies that call for its exercise. *Id.* at 268.
+
+# III. Argument
+
+"[I]njunction[s] must be dissolved" if they "fail[] to comply with Rule 65." *Ark. Game & Fish Comm'n. v. Heslep*, 2019 Ark. 226, at 11. The TRO entered by the circuit court fails to meet numerous requirements of Rule 65 and must be dissolved.
+
+First, Rule 65(b)(1)(A) requires that a TRO be issued on an ex parte basis only if "specific facts in an affidavit or a verified complaint clearly show that immediate and irreparable injury . . . will result to the movant before the adverse party can be heard in opposition." The Complaint is not verified, nor did Respondents submit any affidavits from which the circuit court could make a finding of irreparable harm. Indeed, the circuit court record is entirely devoid of evidence, and that court purported to find irreparable harm apparently based on erroneously crediting bare allegations in an unverified complaint. The TRO should be dissolved on that basis alone.
+
+Second, the TRO fails to comply with Rule 65(b)(2). That rule requires that an ex parte TRO "describe the injury and state why it was irreparable" and "why the order was issued without notice." Though the TRO describes Respondents' purported injury as being "presently unable to collect signatures" for some 2022 ballot initiative, it fails to state why that injury is irreparable as required by Rule 65(b)(2). Nor does the TRO, despite its admittedly ex parte status, explain why it was issued without notice and an opportunity to be heard by Petitioners. Indeed, it defies logic to suggest that absent immediate relief, Respondents would suffer irreparable harm in the next 14 days.
+
+Third, the TRO violates Rule 65(c)'s requirement that a court may issue a TRO "only if the movant gives security in an amount that the court considers proper to pay the costs and damages sustained by any party found to have been wrongfully enjoined or restrained." The TRO does not require Respondents to provide security, nor does it offer an explanation for deviating from Rule 65(c).
+
+Each of these deficiencies in the circuit court's TRO is a clear and independent abuse of discretion. *See Heslep*, 2019 Ark. at 12 ("In the absence of an evidentiary hearing and specific findings by the circuit court, we cannot overlook its failure to comply with the requirements of Rule 65."). For these reasons, the TRO must be dissolved.
+
+Petitioners have no other adequate remedy but an extraordinary writ from this Court. By the TRO's terms, it is effective "until Plaintiffs can be heard at a preliminary injunction hearing." R. 23. The circuit court has set a hearing for September 18, 2020, though the order does not describe it as a "preliminary injunction hearing" upon which the TRO will expire. R. 24. Without an order from this Court, either immediately dissolving the TRO or issuing a stay until it can rule on this Petition, the circuit court's patently illegal TRO will prevent the State from enforcing its requirements that paid canvassers pass a background check. Because of the limited time frame before it expires or is superseded by a preliminary injunction, emergency treatment of this matter is warranted.
+
+# Certificate of Service
+
+I certify that on September 9, 2020, a copy of the foregoing was electronically served on counsel for Respondents at the following address:
+
+Alec Gaines\
+againes@capitollaw.com
+
+/s/ Dylan L. Jacobs
+
+[^1]: The proposed TRO entered by the circuit court recites that Respondents' "counsel provided notice of the Complaint to counsel for Defendants," but recognizes that the Respondents "ha[d] not effected service of process upon Defendants." R. 21. Though Respondents may argue that emailing their pre-filed Complaint to an attorney employed by each of the Petitioners on a Saturday over a holiday weekend constitutes "notice" under Ark. R. Civ. P. 65(b)(1), the circuit court left no room for doubt that it considered its entry of the TRO to be ex parte because it hand wrote "ex parte" into the title of the order. R. 21.

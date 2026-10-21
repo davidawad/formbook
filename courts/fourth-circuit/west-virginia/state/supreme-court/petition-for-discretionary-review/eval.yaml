@@ -1,0 +1,5 @@
+# West Virginia Rule 10 brief form for a petition for discretionary review of an ICA decision (rules.md WVA-BRIEF rows).
+# The default checks assume 12 pt type and 1 in margins, which RAP 38(a) and 38(a) state. The page limit is 40 pages
+# excluding the cover, tables and certificate of service (RAP 38(c)); total pages here are a stricter count.
+params:
+  page_limit: 40

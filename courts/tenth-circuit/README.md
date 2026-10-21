@@ -24,17 +24,17 @@ Courts under `courts/tenth-circuit` (31).
 | [District Court, D. Utah](utah/federal/district) | `utd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Wyoming](wyoming/federal/bankruptcy-district) | `wyb` | up for review | — | — | — | 14 |
 | [District Court, D. Wyoming](wyoming/federal/district) | `wyd` | up for review | — | — | — | 14 |
-| [Colorado Court of Appeals](colorado/state/court-of-appeals) | `coloctapp` | in progress | — | — | — | 29 |
-| [Colorado Supreme Court](colorado/state/supreme-court) | `colo` | in progress | — | — | — | 29 |
+| [Colorado Court of Appeals](colorado/state/court-of-appeals) | `coloctapp` | up for review | — | — | — | 29 |
+| [Colorado Supreme Court](colorado/state/supreme-court) | `colo` | up for review | — | — | — | 29 |
 | [Court of Appeals of Kansas](kansas/state/court-of-appeals) | `kanctapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Kansas](kansas/state/supreme-court) | `kan` | in progress | — | — | — | 14 |
-| [New Mexico Court of Appeals](new-mexico/state/court-of-appeals) | `nmctapp` | in progress | — | — | — | 29 |
+| [New Mexico Court of Appeals](new-mexico/state/court-of-appeals) | `nmctapp` | up for review | — | — | — | 29 |
 | [New Mexico Supreme Court](new-mexico/state/supreme-court) | `nm` | in progress | — | — | — | 14 |
 | [Court of Civil Appeals of Oklahoma](oklahoma/state/court-of-civil-appeals) | `oklacivapp` | in progress | — | — | — | 0 |
 | [Court of Criminal Appeals of Oklahoma](oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Oklahoma](oklahoma/state/supreme-court) | `okla` | in progress | — | — | — | 14 |
-| [Court of Appeals of Utah](utah/state/court-of-appeals) | `utahctapp` | in progress | — | — | — | 29 |
-| [Utah Supreme Court](utah/state/supreme-court) | `utah` | in progress | — | — | — | 29 |
+| [Court of Appeals of Utah](utah/state/court-of-appeals) | `utahctapp` | up for review | — | — | — | 29 |
+| [Utah Supreme Court](utah/state/supreme-court) | `utah` | up for review | — | — | — | 29 |
 | [Wyoming Supreme Court](wyoming/state/supreme-court) | `wyo` | in progress | — | — | — | 14 |
 
 [Formbook index](../../README.md)

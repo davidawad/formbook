@@ -1,0 +1,5 @@
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `petition-for-discretionary-review` — Petition for discretionary review | COLLECTED: 18 pp., text layer verified 2026-10-17; conditional application for leave to cross-appeal post-conviction order (Md. Rules 8-202, 8-204); per Rule 8-204 it is filed with the circuit court clerk and so carries the circuit court caption, then transmitted to and decided by the Court of Special Appeals; posted by counsel | `FILED-EXAMPLE-petition-for-discretionary-review.pdf` | Adnan Syed (respondent/cross-applicant; C. Justin Brown counsel) | State v. Syed, Application for Leave to Appeal No. 1396, Sept. Term 2016 (Md. Ct. Spec. App.) | undated (Aug. 2016) | https://cjbrownlaw.com/wp-content/uploads/2016/08/Cross-ALA-FINAL.pdf | `1088e80b61b5cbf306dc97d51867a7d4d9b3611732d6d36c718e84258b61609b` |
+
+Copied from the court-root `usage/SOURCE.md` (row `petition-for-discretionary-review`); the FILED-EXAMPLE in this folder is a copy of `usage/FILED-EXAMPLE-petition-for-discretionary-review.pdf`.

@@ -81,11 +81,11 @@ service:
 ---
 # Argument and Citations of Authorities
 
-## III. The Court Improperly Failed to Inform Appellant of Its Intention to Take Judicial Notice. Because Final Judgment Had Been Entered No Stage of the Proceeding Remained and Appellant Had No Opportunity to Challenge the Court's Decision
+## III. The Court Improperly Failed to Inform Appellant of Its Intention to Take Judicial Notice. Because Final Judgment Had Been Entered No Stage of the Proceeding Remained and Appellant Had No Opportunity to Challenge the Court’s Decision
 
-Appellants' brief gives little or no weight to due process requirements guaranteed to every litigant.[^1]
+Appellants’ brief gives little or no weight to due process requirements guaranteed to every litigant.[^1]
 
-[^1]: There is no decision of this Court or this Supreme Court treating due process so miserly. While *Hunter v. Will*, 352 Ga. App. 479 (2019), and *Zayac v. State*, 372 Ga. App. 239 (2024), may be read that way, the Court has often time stated that "Issues merely lurking in the record, neither brought to the court's attention nor expressly ruled upon, have not been decided so as to constitute precedent." *Wallace v. Chandler*, 360 Ga. App. 541 (2021). The Supreme Court has agreed. *See Durham v. Durham*, 291 Ga. 231 (2012). In neither *Hunter* or *Zayac*, does this Court discuss due process.
+[^1]: There is no decision of this Court or this Supreme Court treating due process so miserly. While *Hunter v. Will*, 352 Ga. App. 479 (2019), and *Zayac v. State*, 372 Ga. App. 239 (2024), may be read that way, the Court has often time stated that “Issues merely lurking in the record, neither brought to the court’s attention nor expressly ruled upon, have not been decided so as to constitute precedent.” *Wallace v. Chandler*, 360 Ga. App. 541 (2021). The Supreme Court has agreed. *See Durham v. Durham*, 291 Ga. 231 (2012). In neither *Hunter* or *Zayac*, does this Court discuss due process.
 
 In *Graves v. State*, 269 Ga. 772 (1998), the Court explained:
 
@@ -101,27 +101,27 @@ In *Graves v. State*, 269 Ga. 772 (1998), the Court explained:
 
 *See Mann v. State*, 285 Ga. App. 39 (2007), recognizing that this holding still remains controlling precedent. *Compare Gaddis v. State*, 310 Ga. App. 189 (2011).
 
-As Wright & Miller, Federal Practice and Procedures, § 5109 notes, there are no cases that interpret FRE 201(e), as providing a "chance" to be heard, instead of a "right" to a hearing, citing *1-800-411-Pain Referral Service, LLC v. Otto*, 744 F.3d 1045 (8th. Cir. 2014); *In re Graves*, 217 S.W.3d 744 (Tex. App. 2007). *See Lussier v. Runyon*, 50 F.3d 1103 (1st Cir. 1995).
+As Wright & Miller, Federal Practice and Procedures, § 5109 notes, there are no cases that interpret FRE 201(e), as providing a “chance” to be heard, instead of a “right” to a hearing, citing *1-800-411-Pain Referral Service, LLC v. Otto*, 744 F.3d 1045 (8th. Cir. 2014); *In re Graves*, 217 S.W.3d 744 (Tex. App. 2007). *See Lussier v. Runyon*, 50 F.3d 1103 (1st Cir. 1995).
 
 As the Treatise concluded at § 5109
 
-> One instance where the opponent of judicial notice may occupy a different procedural posture than the proponent is when the court takes judicial notice sua sponte. In such cases, the proponent does not need to be heard. But the opponent may not learn that notice has been taken until the judge instructs the jury or makes findings of fact---which may be too late to convince the judge to change her mind. Hence, the sine qua non of the due process right to a hearing is notice to a party that action is being contemplated that affects her interests.
+> One instance where the opponent of judicial notice may occupy a different procedural posture than the proponent is when the court takes judicial notice sua sponte. In such cases, the proponent does not need to be heard. But the opponent may not learn that notice has been taken until the judge instructs the jury or makes findings of fact—which may be too late to convince the judge to change her mind. Hence, the sine qua non of the due process right to a hearing is notice to a party that action is being contemplated that affects her interests.
 >
 > The Model Code of Evidence required the court to tell the parties it was thinking of taking judicial notice of a fact so that they could exercise their constitutional right to be heard on the question. The original Uniform Rules of Evidence implied some advance notice in requiring the court to afford each party an opportunity to be heard on the propriety of taking notice.
 
 (footnotes omitted).
 
-As Justice Peterson has stated "Notice and an opportunity to be heard is the sine qua non of due process." *Georgia Department Of Human Services v. Steiner*, 303 Ga. 890, 908 (2018). Appellant did not receive due process.
+As Justice Peterson has stated “Notice and an opportunity to be heard is the sine qua non of due process.” *Georgia Department Of Human Services v. Steiner*, 303 Ga. 890, 908 (2018). Appellant did not receive due process.
 
 O.C.G.A. § 24-2-201(f) says:
 
 > Judicial notice may be taken at any stage of the proceeding.
 
-According to Black's Law Dictionary (6th ed. 1990), defining a "proceeding":
+According to Black’s Law Dictionary (6th ed. 1990), defining a “proceeding”:
 
-> This word may be used synonymously with "action" or "suit" to describe the entire course of an "action" or "suit" from . . the filing of the complaint until the entry of a final judgment.
+> This word may be used synonymously with “action” or “suit” to describe the entire course of an “action” or “suit” from . . the filing of the complaint until the entry of a final judgment.
 
-In this case, it was only after final judgment that appellant learned of the taking of judicial notice. (V2-124-123) This Court has adopted a similar standard. "It is clear that proceedings in the trial court are "terminated" by the entry of a final judgment, after which time "the cause is no longer pending in the court below." *Scott v. Liberty Mut. Ins. Co.*, 168 Ga. App. 815 (1983), *Nairon v. Land*, 242 Ga. App. 259 (2000).
+In this case, it was only after final judgment that appellant learned of the taking of judicial notice. (V2-124-123) This Court has adopted a similar standard. “It is clear that proceedings in the trial court are “terminated” by the entry of a final judgment, after which time “the cause is no longer pending in the court below.” *Scott v. Liberty Mut. Ins. Co.*, 168 Ga. App. 815 (1983), *Nairon v. Land*, 242 Ga. App. 259 (2000).
 
 In other words, the rule set out in O.C.G.A. § 24-2-201(e), quite simply did not apply because the proceeding was over, even though in any other situation where the case is still pending, such taking of judicial notice may still be made under O.C.G.A. § 24-2-201(e).
 
@@ -129,16 +129,16 @@ As Wright & Miller, Federal Practice and Procedures, § 5109 notes:
 
 > Though no court has held Rule 201(e) unconstitutional, it seems dubious due process to allow a party to be heard only after the judge has already made up her mind.
 
-It seems even more dubious not to provide for a retrospective hearing after the decision made even if there were some mechanism. *Compare* 1 Weinstein & Berger, Weinstein's Evidence, 2d ed. 1996. P. 201-64.
+It seems even more dubious not to provide for a retrospective hearing after the decision made even if there were some mechanism. *Compare* 1 Weinstein & Berger, Weinstein’s Evidence, 2d ed. 1996. P. 201-64.
 
-The whole idea of due process depends upon pre-deprivation process -- notice before the taking.
+The whole idea of due process depends upon pre-deprivation process – notice before the taking.
 
-When appellees discuss due process at pages 12-14, their idea of due process is thin gruel indeed. Essentially, Plaintiff was supposed to object to the taking of judicial notice when she has no notice when judicial notice was to be taken. This is *Alice in Wonderland*. There is no discussion of *Graves v. State*, 269 Ga. 772 (1998). The best appellee can do is to wash away *Garner v. State of La.*, 368 U.S. 157 (1961), with the following sentence "judicial notice of racial tensions were mentioned, but not central to the outcome of the case." A reading of *Garner* makes it clear that the State's argument about judicial notice was the linchpin of its case. *See* Wright & Miller, Federal Practice and Procedures, § 5107.
+When appellees discuss due process at pages 12-14, their idea of due process is thin gruel indeed. Essentially, Plaintiff was supposed to object to the taking of judicial notice when she has no notice when judicial notice was to be taken. This is *Alice in Wonderland*. There is no discussion of *Graves v. State*, 269 Ga. 772 (1998). The best appellee can do is to wash away *Garner v. State of La.*, 368 U.S. 157 (1961), with the following sentence “judicial notice of racial tensions were mentioned, but not central to the outcome of the case.” A reading of *Garner* makes it clear that the State’s argument about judicial notice was the linchpin of its case. *See* Wright & Miller, Federal Practice and Procedures, § 5107.
 
 Appellant has been denied due process.
 
 # Conclusion
 
-The Court's decision below should be reversed. Alternatively, the Court's decision should be vacated so that the Court can apply both § 24-2-201 and the local rules of Fulton County correctly.[^2]
+The Court’s decision below should be reversed. Alternatively, the Court’s decision should be vacated so that the Court can apply both § 24-2-201 and the local rules of Fulton County correctly.[^2]
 
-[^2]: In appellant's original brief, there arise a number of typos. At fn. 2, the first sentence should read "The standard is abuse of discretion." At page 14, the sentence in the third paragraph should read "Nor did the Court refer to the Plaintiff's request except to say the documentation was not authenticated." At page 17, the citation at the end of the first paragraph under III, the last sentence should read ". . . the Court erred in holding that the original filing was untimely, see pages 13-16." Counsel acknowledges these sentence and regrets the same.
+[^2]: In appellant’s original brief, there arise a number of typos. At fn. 2, the first sentence should read “The standard is abuse of discretion.” At page 14, the sentence in the third paragraph should read “Nor did the Court refer to the Plaintiff’s request except to say the documentation was not authenticated.” At page 17, the citation at the end of the first paragraph under III, the last sentence should read “. . . the Court erred in holding that the original filing was untimely, see pages 13-16.” Counsel acknowledges these sentence and regrets the same.

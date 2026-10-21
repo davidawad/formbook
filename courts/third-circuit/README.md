@@ -18,11 +18,11 @@ Courts under `courts/third-circuit` (18).
 | [District Court, W.D. Pennsylvania](pennsylvania/federal/western-district) | `pawd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Virgin Islands](virgin-islands/federal/bankruptcy-district) | `vib` | up for review | — | — | — | 14 |
 | [District Court, Virgin Islands](virgin-islands/federal/district) | `vid` | up for review | — | — | — | 14 |
-| [Delaware Supreme Court](delaware/state/supreme-court) | `del` | in progress | — | — | — | 29 |
+| [Delaware Supreme Court](delaware/state/supreme-court) | `del` | up for review | — | — | — | 29 |
 | [Supreme Court of New Jersey](new-jersey/state/supreme-court) | `nj` | in progress | — | — | — | 14 |
-| [Commonwealth Court of Pennsylvania](pennsylvania/state/commonwealth-court) | `pacommwct` | in progress | — | — | — | 29 |
-| [Superior Court of Pennsylvania](pennsylvania/state/superior-court) | `pasuperct` | in progress | — | — | — | 29 |
-| [Supreme Court of Pennsylvania](pennsylvania/state/supreme-court) | `pa` | in progress | — | — | — | 29 |
+| [Commonwealth Court of Pennsylvania](pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | — | — | — | 29 |
+| [Superior Court of Pennsylvania](pennsylvania/state/superior-court) | `pasuperct` | up for review | — | — | — | 29 |
+| [Supreme Court of Pennsylvania](pennsylvania/state/supreme-court) | `pa` | up for review | — | — | — | 29 |
 
 [Formbook index](../../README.md)
 <!-- fb:generated:end -->

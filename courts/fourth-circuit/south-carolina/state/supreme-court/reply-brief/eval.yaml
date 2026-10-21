@@ -1,0 +1,3 @@
+# SC-ANS-002 is for principal briefs; reply briefs are limited to 25 pages (SC-REP-002, SCACR 208(b)(5)).
+params:
+  page_limit: 25

@@ -1,0 +1,6 @@
+# RAP 38(c) (courtswv.gov Rules of Appellate Procedure, fetched 2026-10-21): amicus brief 25 pages maximum, excluding the
+# cover page, table of contents, table of authorities and certificate of service (rules.md WVACTAPP-LEN-005). DEF-LEN-001
+# counts every page of the PDF, front matter included, so 25 is conservative: it can fail a compliant filing, never pass a
+# non-compliant one.
+params:
+  page_limit: 25

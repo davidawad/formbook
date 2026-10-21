@@ -1,0 +1,3 @@
+# SCACR 208(b)(5): a principal brief (SC-MER-003) does not exceed fifty (50) pages.
+params:
+  page_limit: 50

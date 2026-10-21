@@ -218,7 +218,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Delaware](courts/third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Delaware](courts/third-circuit/delaware/federal/district) | `ded` | up for review | — | — | — | 14 |
-| [Delaware Supreme Court](courts/third-circuit/delaware/state/supreme-court) | `del` | in progress | — | — | — | 29 |
+| [Delaware Supreme Court](courts/third-circuit/delaware/state/supreme-court) | `del` | up for review | — | — | — | 29 |
 
 ### New Jersey
 
@@ -238,9 +238,9 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/eastern-district) | `paed` | up for review | — | — | — | 14 |
 | [District Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/middle-district) | `pamd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/western-district) | `pawd` | up for review | — | — | — | 14 |
-| [Commonwealth Court of Pennsylvania](courts/third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | in progress | — | — | — | 29 |
-| [Superior Court of Pennsylvania](courts/third-circuit/pennsylvania/state/superior-court) | `pasuperct` | in progress | — | — | — | 29 |
-| [Supreme Court of Pennsylvania](courts/third-circuit/pennsylvania/state/supreme-court) | `pa` | in progress | — | — | — | 29 |
+| [Commonwealth Court of Pennsylvania](courts/third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | — | — | — | 29 |
+| [Superior Court of Pennsylvania](courts/third-circuit/pennsylvania/state/superior-court) | `pasuperct` | up for review | — | — | — | 29 |
+| [Supreme Court of Pennsylvania](courts/third-circuit/pennsylvania/state/supreme-court) | `pa` | up for review | — | — | — | 29 |
 
 ### Virgin Islands
 
@@ -261,7 +261,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Maryland](courts/fourth-circuit/maryland/federal/bankruptcy-district) | `mdb` | up for review | — | — | — | 14 |
 | [District Court, D. Maryland](courts/fourth-circuit/maryland/federal/district) | `mdd` | up for review | — | — | — | 14 |
-| [Court of Appeals of Maryland](courts/fourth-circuit/maryland/state/court-of-appeals) | `md` | in progress | — | — | — | 29 |
+| [Court of Appeals of Maryland](courts/fourth-circuit/maryland/state/court-of-appeals) | `md` | up for review | — | — | — | 29 |
 | [Court of Special Appeals of Maryland](courts/fourth-circuit/maryland/state/court-of-special-appeals) | `mdctspecapp` | in progress | — | — | — | 14 |
 
 ### North Carolina
@@ -283,8 +283,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. South Carolina](courts/fourth-circuit/south-carolina/federal/bankruptcy-district) | `scb` | up for review | — | — | — | 14 |
 | [District Court, D. South Carolina](courts/fourth-circuit/south-carolina/federal/district) | `scd` | up for review | — | — | — | 14 |
-| [Court of Appeals of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-appeals) | `scctapp` | in progress | — | — | — | 29 |
-| [Supreme Court of South Carolina](courts/fourth-circuit/south-carolina/state/supreme-court) | `sc` | in progress | — | — | — | 29 |
+| [Court of Appeals of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-appeals) | `scctapp` | up for review | — | — | — | 29 |
+| [Supreme Court of South Carolina](courts/fourth-circuit/south-carolina/state/supreme-court) | `sc` | up for review | — | — | — | 29 |
 
 ### Virginia
 
@@ -294,8 +294,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, W.D. Virginia](courts/fourth-circuit/virginia/federal/bankruptcy-western-district) | `vawb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Virginia](courts/fourth-circuit/virginia/federal/eastern-district) | `vaed` | up for review | — | — | — | 14 |
 | [District Court, W.D. Virginia](courts/fourth-circuit/virginia/federal/western-district) | `vawd` | up for review | — | — | — | 14 |
-| [Court of Appeals of Virginia](courts/fourth-circuit/virginia/state/court-of-appeals) | `vactapp` | in progress | — | — | — | 29 |
-| [Supreme Court of Virginia](courts/fourth-circuit/virginia/state/supreme-court) | `va` | in progress | — | — | — | 29 |
+| [Court of Appeals of Virginia](courts/fourth-circuit/virginia/state/court-of-appeals) | `vactapp` | up for review | — | — | — | 29 |
+| [Supreme Court of Virginia](courts/fourth-circuit/virginia/state/supreme-court) | `va` | up for review | — | — | — | 29 |
 
 ### West Virginia
 
@@ -305,8 +305,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, S.D. West Virginia](courts/fourth-circuit/west-virginia/federal/bankruptcy-southern-district) | `wvsb` | up for review | — | — | — | 14 |
 | [District Court, N.D. West Virginia](courts/fourth-circuit/west-virginia/federal/northern-district) | `wvnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. West Virginia](courts/fourth-circuit/west-virginia/federal/southern-district) | `wvsd` | up for review | — | — | — | 14 |
-| [Intermediate Court of Appeals of West Virginia](courts/fourth-circuit/west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | in progress | — | — | — | 29 |
-| [West Virginia Supreme Court](courts/fourth-circuit/west-virginia/state/supreme-court) | `wva` | in progress | — | — | — | 29 |
+| [Intermediate Court of Appeals of West Virginia](courts/fourth-circuit/west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | up for review | — | — | — | 29 |
+| [West Virginia Supreme Court](courts/fourth-circuit/west-virginia/state/supreme-court) | `wva` | up for review | — | — | — | 29 |
 
 ## Fifth Circuit
 
@@ -424,7 +424,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, C.D. Illinois](courts/seventh-circuit/illinois/federal/central-district) | `ilcd` | up for review | — | — | — | 14 |
 | [District Court, N.D. Illinois](courts/seventh-circuit/illinois/federal/northern-district) | `ilnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Illinois](courts/seventh-circuit/illinois/federal/southern-district) | `ilsd` | up for review | — | — | — | 14 |
-| [Appellate Court of Illinois](courts/seventh-circuit/illinois/state/appellate-court) | `illappct` | in progress | — | — | — | 29 |
+| [Appellate Court of Illinois](courts/seventh-circuit/illinois/state/appellate-court) | `illappct` | up for review | — | — | — | 29 |
 | [Illinois Supreme Court](courts/seventh-circuit/illinois/state/supreme-court) | `ill` | in progress | — | — | — | 14 |
 
 ### Indiana
@@ -464,8 +464,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, W.D. Arkansas](courts/eighth-circuit/arkansas/federal/bankruptcy-western-district) | `arwb` | up for review | — | — | — | 14 |
 | [United States District Court for the Eastern District of Arkansas](courts/eighth-circuit/arkansas/federal/eastern-district) | `ared` | up for review | — | — | — | 14 |
 | [United States District Court for the Western District of Arkansas](courts/eighth-circuit/arkansas/federal/western-district) | `arwd` | up for review | — | — | — | 14 |
-| [Arkansas Court of Appeals](courts/eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 29 |
-| [Arkansas Supreme Court](courts/eighth-circuit/arkansas/state/supreme-court) | `ark` | in progress | — | — | — | 29 |
+| [Arkansas Court of Appeals](courts/eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | up for review | — | — | — | 29 |
+| [Arkansas Supreme Court](courts/eighth-circuit/arkansas/state/supreme-court) | `ark` | up for review | — | — | — | 29 |
 
 ### Iowa
 
@@ -484,8 +484,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | up for review | — | — | — | 14 |
 | [District Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/district) | `mnd` | up for review | — | — | — | 14 |
-| [Court of Appeals of Minnesota](courts/eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | in progress | — | — | — | 29 |
-| [Supreme Court of Minnesota](courts/eighth-circuit/minnesota/state/supreme-court) | `minn` | in progress | — | — | — | 29 |
+| [Court of Appeals of Minnesota](courts/eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | up for review | — | — | — | 29 |
+| [Supreme Court of Minnesota](courts/eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | — | — | — | 29 |
 
 ### Missouri
 
@@ -498,8 +498,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [Missouri Court of Appeals](courts/eighth-circuit/missouri/state/court-of-appeals) | `moctapp` | in progress | — | — | — | 14 |
 | [Missouri Court of Appeals, Eastern District](courts/eighth-circuit/missouri/state/court-of-appeals-eastern-district) | `moctapped` | in progress | — | — | — | 14 |
 | [Missouri Court of Appeals, Southern District](courts/eighth-circuit/missouri/state/court-of-appeals-southern-district) | `moctappsd` | in progress | — | — | — | 14 |
-| [Missouri Court of Appeals, Western District](courts/eighth-circuit/missouri/state/court-of-appeals-western-district) | `moctappwd` | in progress | — | — | — | 29 |
-| [Supreme Court of Missouri](courts/eighth-circuit/missouri/state/supreme-court) | `mo` | in progress | — | — | — | 29 |
+| [Missouri Court of Appeals, Western District](courts/eighth-circuit/missouri/state/court-of-appeals-western-district) | `moctappwd` | up for review | — | — | — | 29 |
+| [Supreme Court of Missouri](courts/eighth-circuit/missouri/state/supreme-court) | `mo` | up for review | — | — | — | 29 |
 
 ### Nebraska
 
@@ -507,8 +507,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Nebraska](courts/eighth-circuit/nebraska/federal/bankruptcy-district) | `nebraskab` | up for review | — | — | — | 14 |
 | [United States District Court, Nebraska](courts/eighth-circuit/nebraska/federal/district) | `ned` | up for review | — | — | — | 14 |
-| [Nebraska Court of Appeals](courts/eighth-circuit/nebraska/state/court-of-appeals) | `nebctapp` | in progress | — | — | — | 29 |
-| [Nebraska Supreme Court](courts/eighth-circuit/nebraska/state/supreme-court) | `neb` | in progress | — | — | — | 29 |
+| [Nebraska Court of Appeals](courts/eighth-circuit/nebraska/state/court-of-appeals) | `nebctapp` | up for review | — | — | — | 29 |
+| [Nebraska Supreme Court](courts/eighth-circuit/nebraska/state/supreme-court) | `neb` | up for review | — | — | — | 29 |
 
 ### North Dakota
 
@@ -516,8 +516,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/bankruptcy-district) | `ndb` | up for review | — | — | — | 14 |
 | [District Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/district) | `ndd` | up for review | — | — | — | 14 |
-| [North Dakota Court of Appeals](courts/eighth-circuit/north-dakota/state/court-of-appeals) | `ndctapp` | in progress | — | — | — | 29 |
-| [North Dakota Supreme Court](courts/eighth-circuit/north-dakota/state/supreme-court) | `nd` | in progress | — | — | — | 29 |
+| [North Dakota Court of Appeals](courts/eighth-circuit/north-dakota/state/court-of-appeals) | `ndctapp` | up for review | — | — | — | 29 |
+| [North Dakota Supreme Court](courts/eighth-circuit/north-dakota/state/supreme-court) | `nd` | up for review | — | — | — | 29 |
 
 ### South Dakota
 
@@ -525,7 +525,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | up for review | — | — | — | 14 |
 | [District Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | — | — | — | 14 |
-| [Supreme Court of South Dakota](courts/eighth-circuit/south-dakota/state/supreme-court) | `sd` | in progress | — | — | — | 14 |
+| [Supreme Court of South Dakota](courts/eighth-circuit/south-dakota/state/supreme-court) | `sd` | up for review | — | — | — | 29 |
 
 ## Ninth Circuit
 
@@ -599,7 +599,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Idaho](courts/ninth-circuit/idaho/federal/bankruptcy-district) | `idb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Idaho](courts/ninth-circuit/idaho/federal/district) | `idd` | up for review | — | — | — | 14 |
-| [Idaho Court of Appeals](courts/ninth-circuit/idaho/state/court-of-appeals) | `idahoctapp` | in progress | — | — | — | 29 |
+| [Idaho Court of Appeals](courts/ninth-circuit/idaho/state/court-of-appeals) | `idahoctapp` | up for review | — | — | — | 29 |
 | [Idaho Supreme Court](courts/ninth-circuit/idaho/state/supreme-court) | `idaho` | in progress | — | — | — | 14 |
 
 ### Montana
@@ -666,8 +666,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Colorado](courts/tenth-circuit/colorado/federal/bankruptcy-district) | `cob` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Colorado](courts/tenth-circuit/colorado/federal/district) | `cod` | up for review | — | — | — | 14 |
-| [Colorado Court of Appeals](courts/tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | in progress | — | — | — | 29 |
-| [Colorado Supreme Court](courts/tenth-circuit/colorado/state/supreme-court) | `colo` | in progress | — | — | — | 29 |
+| [Colorado Court of Appeals](courts/tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | up for review | — | — | — | 29 |
+| [Colorado Supreme Court](courts/tenth-circuit/colorado/state/supreme-court) | `colo` | up for review | — | — | — | 29 |
 
 ### Kansas
 
@@ -684,7 +684,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. New Mexico](courts/tenth-circuit/new-mexico/federal/bankruptcy-district) | `nmb` | up for review | — | — | — | 14 |
 | [District Court, D. New Mexico](courts/tenth-circuit/new-mexico/federal/district) | `nmd` | up for review | — | — | — | 14 |
-| [New Mexico Court of Appeals](courts/tenth-circuit/new-mexico/state/court-of-appeals) | `nmctapp` | in progress | — | — | — | 29 |
+| [New Mexico Court of Appeals](courts/tenth-circuit/new-mexico/state/court-of-appeals) | `nmctapp` | up for review | — | — | — | 29 |
 | [New Mexico Supreme Court](courts/tenth-circuit/new-mexico/state/supreme-court) | `nm` | in progress | — | — | — | 14 |
 
 ### Oklahoma
@@ -708,8 +708,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Utah](courts/tenth-circuit/utah/federal/bankruptcy-district) | `utb` | up for review | — | — | — | 14 |
 | [District Court, D. Utah](courts/tenth-circuit/utah/federal/district) | `utd` | up for review | — | — | — | 14 |
-| [Court of Appeals of Utah](courts/tenth-circuit/utah/state/court-of-appeals) | `utahctapp` | in progress | — | — | — | 29 |
-| [Utah Supreme Court](courts/tenth-circuit/utah/state/supreme-court) | `utah` | in progress | — | — | — | 29 |
+| [Court of Appeals of Utah](courts/tenth-circuit/utah/state/court-of-appeals) | `utahctapp` | up for review | — | — | — | 29 |
+| [Utah Supreme Court](courts/tenth-circuit/utah/state/supreme-court) | `utah` | up for review | — | — | — | 29 |
 
 ### Wyoming
 
@@ -813,17 +813,17 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
 | First Circuit | 20 | 0 | 12 | 7 | 1 | 0.0% | 60.0% | 0 | 0 | 0 | 13.3% |
 | Second Circuit | 19 | 0 | 14 | 5 | 0 | 0.0% | 73.6% | 0 | 0 | 0 | 14.7% |
-| Third Circuit | 18 | 0 | 13 | 5 | 0 | 0.0% | 72.2% | 0 | 0 | 0 | 17.3% |
-| Fourth Circuit | 29 | 0 | 19 | 10 | 0 | 0.0% | 65.5% | 0 | 0 | 0 | 17.6% |
+| Third Circuit | 18 | 0 | 17 | 1 | 0 | 0.0% | 94.4% | 0 | 0 | 0 | 17.3% |
+| Fourth Circuit | 29 | 0 | 26 | 3 | 0 | 0.0% | 89.6% | 0 | 0 | 0 | 17.6% |
 | Fifth Circuit | 26 | 0 | 21 | 5 | 0 | 0.0% | 80.7% | 0 | 0 | 0 | 15.1% |
 | Sixth Circuit | 29 | 0 | 20 | 9 | 0 | 0.0% | 68.9% | 0 | 0 | 0 | 14.0% |
-| Seventh Circuit | 21 | 0 | 15 | 6 | 0 | 0.0% | 71.4% | 0 | 0 | 0 | 14.7% |
-| Eighth Circuit | 38 | 0 | 22 | 16 | 0 | 0.0% | 57.8% | 0 | 0 | 0 | 17.9% |
-| Ninth Circuit | 61 | 0 | 36 | 23 | 2 | 0.0% | 59.0% | 1 | 1 | 1 | 15.4% |
-| Tenth Circuit | 31 | 0 | 19 | 12 | 0 | 0.0% | 61.2% | 0 | 0 | 0 | 15.9% |
+| Seventh Circuit | 21 | 0 | 16 | 5 | 0 | 0.0% | 76.1% | 0 | 0 | 0 | 14.7% |
+| Eighth Circuit | 38 | 0 | 33 | 5 | 0 | 0.0% | 86.8% | 0 | 0 | 0 | 18.3% |
+| Ninth Circuit | 61 | 0 | 37 | 22 | 2 | 0.0% | 60.6% | 1 | 1 | 1 | 15.4% |
+| Tenth Circuit | 31 | 0 | 24 | 7 | 0 | 0.0% | 77.4% | 0 | 0 | 0 | 15.9% |
 | Eleventh Circuit | 32 | 0 | 21 | 11 | 0 | 0.0% | 65.6% | 0 | 0 | 0 | 14.9% |
 | D.C. Circuit | 4 | 0 | 3 | 1 | 0 | 0.0% | 75.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 233 | 126 | 17 | 0.0% | 61.9% | 1 | 1 | 1 | 14.7% |
+| **Total** | 376 | 0 | 262 | 97 | 17 | 0.0% | 69.6% | 1 | 1 | 1 | 14.8% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -835,16 +835,16 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 12 |
 | National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 6 |
 | First Circuit | 26 | 26 | 26 | 26 | 26 | 26 | 100.0% | 26 |
-| Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 32 |
-| Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 27 |
-| Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 39 |
-| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 46 |
+| Second Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 39 |
+| Third Circuit | 51 | 51 | 51 | 51 | 51 | 51 | 100.0% | 51 |
+| Fourth Circuit | 85 | 85 | 85 | 85 | 85 | 85 | 100.0% | 85 |
+| Fifth Circuit | 49 | 49 | 49 | 49 | 49 | 49 | 100.0% | 49 |
 | Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 42 |
-| Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 31 |
-| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 46 |
-| Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 72 |
-| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 39 |
-| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 48 |
+| Seventh Circuit | 37 | 37 | 37 | 37 | 37 | 37 | 100.0% | 37 |
+| Eighth Circuit | 134 | 134 | 134 | 134 | 133 | 133 | 99.2% | 134 |
+| Ninth Circuit | 80 | 80 | 80 | 80 | 78 | 78 | 97.5% | 80 |
+| Tenth Circuit | 67 | 67 | 67 | 67 | 64 | 64 | 95.5% | 67 |
+| Eleventh Circuit | 52 | 52 | 52 | 52 | 51 | 51 | 98.0% | 52 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| **Total** | 492 | 492 | 492 | 492 | 484 | 484 | 98.3% | 492 |
+| **Total** | 706 | 706 | 706 | 706 | 697 | 697 | 98.7% | 706 |
 <!-- tracker:end -->

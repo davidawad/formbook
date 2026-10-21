@@ -1,0 +1,4 @@
+# SCACR Rule 208(b)(5): reply briefs shall not exceed twenty-five (25) pages
+# (https://www.sccourts.org/resources/judicial-community/court-rules/appellate/rule-208/).
+params:
+  page_limit: 25

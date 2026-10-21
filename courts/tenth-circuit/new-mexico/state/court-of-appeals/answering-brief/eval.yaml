@@ -1,0 +1,3 @@
+# NMRA 12-305(D)(1) (see ../rules.md): a proportionally-spaced typeface with serifs, such as Times New Roman, must be 14-point or larger.
+font:
+  size_pt: 14
