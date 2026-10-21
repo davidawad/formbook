@@ -139,11 +139,24 @@ local function frag(v, props)
   return table.concat(out)
 end
 
--- Section properties: the cover (no folio), the front matter (lowercase roman), and the body (arabic from 1)
+-- Section properties: the cover (no folio), the front matter (lowercase roman), and the body (arabic from 1).
+-- The footers are the ones fb render adds (docxpass.rs: rIdFtrNone empty, rIdFtrPage the centered page number),
+-- not the reference document's: pandoc may renumber those ids, and a sectPr naming a missing one stops the .docx
+-- from opening. The body is the last section, written to $FORMBOOK_FINAL for fb render to put in place.
 local PG = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>'
-local SECT_COVER = raw(para({ sect = '<w:sectPr>' .. PG .. '<w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>' }))
-local SECT_FRONT = raw(para({ sect = '<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/>' .. PG
+local SECT_COVER = raw(para({ sect = '<w:sectPr><w:footerReference w:type="default" r:id="rIdFtrNone"/>' .. PG .. '<w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>' }))
+local SECT_FRONT = raw(para({ sect = '<w:sectPr><w:footerReference w:type="default" r:id="rIdFtrPage"/>' .. PG
   .. '<w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>' }))
+local SECT_BODY = '<w:sectPr><w:footerReference w:type="default" r:id="rIdFtrPage"/>' .. PG
+  .. '<w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>'
+
+local function write_final()
+  local path = os.getenv('FORMBOOK_FINAL')
+  if path == nil then return end
+  local f = assert(io.open(path, 'w'))
+  f:write(SECT_BODY)
+  f:close()
+end
 
 -- ---- headings ----
 
@@ -583,6 +596,7 @@ function Pandoc(doc)
   local all = {}
   for _, b in ipairs(front) do all[#all + 1] = b end
   for _, b in ipairs(main) do all[#all + 1] = b end
+  write_final()
   doc.blocks = pandoc.Blocks(all)
   return doc
 end

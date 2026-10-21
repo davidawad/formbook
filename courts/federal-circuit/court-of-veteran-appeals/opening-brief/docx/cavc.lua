@@ -21,8 +21,10 @@ local TOA_GROUPS = {
   { "rba", "Citations to the Record Before the Agency:" },
 }
 
-local FOOTER_PAGE = "rIdFooter1"   -- PAGE field, centered
-local FOOTER_BLANK = "rIdFooter2"  -- the caption page
+-- The footers fb render adds (docxpass.rs), not the reference document's: pandoc may renumber those ids, and a
+-- sectPr naming a missing one stops the .docx from opening.
+local FOOTER_PAGE = "rIdFtrPage"   -- PAGE field, centered
+local FOOTER_BLANK = "rIdFtrNone"  -- the caption page
 
 local function fail(msg) error(CFG.kind .. ": " .. msg, 0) end
 
@@ -68,14 +70,28 @@ local function page_break()
 end
 
 -- the paragraph that ends a section carries the section properties (Word: the section ends here)
-local function section_break(footer, fmt)
+-- extra: XML after the footer reference (the last section keeps the reference document's footnote restart)
+local function sect_pr(footer, fmt, extra)
   local pg = fmt and ('<w:pgNumType w:fmt="' .. fmt .. '" w:start="1"/>') or ""
-  return pandoc.RawBlock("openxml",
-    '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/><w:sectPr>'
-    .. '<w:footerReference w:type="default" r:id="' .. footer .. '"/>'
+  return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/>'
+    .. (extra or "")
     .. '<w:pgSz w:w="12240" w:h="15840"/>'
     .. '<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="432" w:gutter="0"/>'
-    .. pg .. '</w:sectPr></w:pPr></w:p>')
+    .. pg .. '</w:sectPr>'
+end
+
+local function section_break(footer, fmt)
+  return pandoc.RawBlock("openxml",
+    '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>' .. sect_pr(footer, fmt) .. "</w:pPr></w:p>")
+end
+
+-- the last section: fb render puts it in place of the reference document's ($FORMBOOK_FINAL)
+local function write_final(footer, fmt)
+  local path = os.getenv("FORMBOOK_FINAL")
+  if path == nil then return end
+  local f = assert(io.open(path, "w"))
+  f:write(sect_pr(footer, fmt, '<w:footnotePr><w:numRestart w:val="eachSect"/></w:footnotePr>'))
+  f:close()
 end
 
 local function xml_escape(s)
@@ -316,7 +332,8 @@ function Pandoc(doc)
   addall(signature(meta))
   add(section_break(FOOTER_PAGE, "decimal"))
 
-  -- certificate of service (Rule 25(a)): the last section, lower roman from i (the reference's sectPr)
+  -- certificate of service (Rule 25(a)): the last section, lower roman from i
+  write_final(FOOTER_PAGE, "lowerRoman")
   local s = need(meta, "service")
   add(styled("FrontHeading", S("Certificate of Service")))
   add(pandoc.Para(cat(S("I certify that on "), inl(s.date), S(", I filed the foregoing "),

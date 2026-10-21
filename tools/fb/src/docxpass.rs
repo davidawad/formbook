@@ -2,8 +2,11 @@
 //!
 //! A filter that needs page numbers (tables of contents and authorities) cannot know them: it writes needles to
 //! `$FORMBOOK_NEEDLES` (format: docxpages.rs) and reads the pages of the previous pass from `$FORMBOOK_PAGES`
-//! (`id <TAB> page <TAB> label`; empty on the first pass, when it prints placeholders). A filter that writes no
-//! needles gets one plain pandoc pass, as before. For a needle-writing filter each pass is:
+//! (`id <TAB> page <TAB> label`; empty on the first pass, when it prints placeholders). A filter that writes neither
+//! needles nor `$FORMBOOK_FINAL` gets one plain pandoc pass, as before; one that writes only `$FORMBOOK_FINAL` gets
+//! one pass with the footers and last section below. Sections should name those footers: pandoc may renumber the
+//! reference document's relationship ids (`rIdFooter1` becomes `rId9`), so a raw sectPr naming one can dangle and
+//! the .docx will not open. For a needle-writing filter each pass is:
 //!   * pandoc with the reference document and the filters;
 //!   * the footers its sections name: `rIdFtrNone` (empty), `rIdFtrPage` (PAGE field) and `rIdFtrAdd`
 //!     ("Add-" and the PAGE field), all centered; the document's last sectPr is replaced by the XML the filter
@@ -137,6 +140,9 @@ pub fn render(court: &Path, args: &[String], sample: &str, out: &Path, work: &Pa
     let pass = |n: usize| work.join(format!("pass{n}.docx"));
     pandoc(court, args, sample, "", work, &pass(1))?;
     if !work.join("needles.tsv").is_file() {
+        if work.join("final.xml").is_file() {
+            finish(&pass(1), work)?;
+        }
         return crate::proc::move_file(&pass(1), out).map_err(|e| io(out, e));
     }
     finish(&pass(1), work)?;
