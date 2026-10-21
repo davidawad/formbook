@@ -15,7 +15,7 @@
 | `typst/acca-opening-brief.typ` | Template. Parameter block at the top: `brief-title`, `court-line`, `address-line`, `font-family`, `type-size`, `body-leading`, `page-margin`. |
 | `usage/INPUT-opening-brief.md` | Transcription of the exemplar extract (brief pp. 1, 17-22, 481-483 and the certificate). |
 | `usage/OUTPUT-opening-brief.typst.pdf` | `sh tools/render.sh courts/military/army-court-of-criminal-appeals/opening-brief usage/INPUT-opening-brief.md` (10 pages). |
-| `usage/OVERLAY-akbar-opening-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/opening-brief akbar-opening-brief`. |
+| `usage/OVERLAY-opening-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/opening-brief akbar-opening-brief`. |
 | `usage/INPUT-opening-brief-2.md`, `OUTPUT-opening-brief-2.typst.pdf` | FICTIONAL fixture and its render (5 pages). No overlay (it is not a transcription). |
 | `usage/SOURCE.md` | Exemplar record, page map, and every search pass. |
 
@@ -50,7 +50,7 @@ Superseded: the earlier stand-ins (32 CFR 150.15 and App. B, AFCCA Rule 17.1, EB
 
 ## Overlay
 
-`sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/opening-brief akbar-opening-brief` exit 0. Page map (`usage/OVERLAY-akbar-opening-brief.txt`):
+`sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/opening-brief akbar-opening-brief` exit 0. Page map (`usage/OVERLAY-opening-brief.txt`):
 
 | Ours | Filed (extract) | Word overlap | Note |
 |---|---|---|---|
@@ -69,7 +69,7 @@ The filed brief is Courier 12 pt (pre-2019 rules); ours is Times-metric 14 pt pe
 
 ## Page review (Gate 2), 2026-10-16
 
-Every page of `OUTPUT-opening-brief.typst.pdf` (10) and `OVERLAY-akbar-opening-brief.pdf` (10) rasterized at 60 dpi and viewed; the filed extract's 11 pages viewed too. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only. Typst printed no warnings.
+Every page of `OUTPUT-opening-brief.typst.pdf` (10) and `OVERLAY-opening-brief.pdf` (10) rasterized at 60 dpi and viewed; the filed extract's 11 pages viewed too. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only. Typst printed no warnings.
 
 | Page | Content | Result |
 |---|---|---|
@@ -98,3 +98,24 @@ Every page of `OUTPUT-opening-brief.typst.pdf` (10) and `OVERLAY-akbar-opening-b
 ## Engines
 
 **docx** (`docx/`), unchanged since the earlier pass and now out of step with the typst form (Known gaps 5): `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, double-spaced body, letter with 1 in margins). `docx/acca-brief.lua` builds the cover, counsel block, signature block, certificate and appendix from the frontmatter. BLOCKED: `tools/check.sh --engine docx` cannot run (no LibreOffice on the earlier box; no `checks.yaml`).
+
+## Refreshed exemplar run (2026-10-21)
+
+The filed exhibit is a public ACCA-hosted filing recovered from the Internet Archive; its source URL, case, Army docket, filer, filed date, and retrieval date are recorded in `usage/SOURCE.md`. The transcription remains paired with `FILED-EXAMPLE-opening-brief.pdf` as `INPUT-opening-brief.md`. No template change was needed: Appendix A controls the caption and the exemplar predates those current rules.
+
+Rendered with `sh tools/render.sh` and compared with `sh tools/overlay.sh`; both completed successfully. Rasterized every page of the render, filed exhibit, and overlay at 60 dpi and visually reviewed every page. The overlay is `.overlay/courts/military/army-court-of-criminal-appeals/opening-brief/OVERLAY-opening-brief.pdf` (generated, not committed). Render SHA-256: `f8220f78ac2edff373b4255e6d2726a1f6a2f50b58ed0b153a7ee452225a4257`.
+
+| Render page | Filed page | Finding | Status |
+|---:|---:|---|---|
+| 1 | 1 (caption viewed directly; overlay text pairing is inaccurate because the filed caption has no OCR layer) | Caption and body start follow Appendix A; filed form is the earlier Courier form. | ACCEPTED |
+| 2 | 2 | Assignment summary and body structure render cleanly. | PASS |
+| 3 | 3 | Assignment heading is distinct and readable. | PASS |
+| 4 | 4 | Argument text and citations render cleanly. | PASS |
+| 5 | 6 | Argument text and citations render cleanly; current 14 pt rule changes pagination. | ACCEPTED |
+| 6 | 7 | Argument text and citations render cleanly. | PASS |
+| 7 | 8 | Argument and assignment heading render cleanly. | PASS |
+| 8 | 8 | Closing prayer and assignment heading render cleanly. | PASS |
+| 9 | 10 | Signature block is kept together and lands on its own page, matching this long exemplar. | ACCEPTED |
+| 10 | 11 | Certificate of service is on its own page and legible. | PASS |
+
+This is one filer and a pre-2019 filing; it supports only open-choice diagnostics. The remaining known issues are unchanged: no TOC/TOA or length-limit check, no `checks.yaml`, and the DOCX template is outside this pass.

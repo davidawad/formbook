@@ -14,7 +14,7 @@
 | `typst/main.typ`, `typst/acca-answering-brief.typ` | Entry point and template. |
 | `usage/INPUT-answering-brief.md` | Transcription of the extract (caption page, brief pp. 1-7, 216-218). Names the filer blacked out are written `[redacted]`. |
 | `usage/OUTPUT-answering-brief.typst.pdf` | `sh tools/render.sh courts/military/army-court-of-criminal-appeals/answering-brief usage/INPUT-answering-brief.md` (11 pages). |
-| `usage/OVERLAY-akbar-answering-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/answering-brief akbar-answering-brief`. |
+| `usage/OVERLAY-answering-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/answering-brief akbar-answering-brief`. |
 | `usage/INPUT-answering-brief-2.md`, `OUTPUT-answering-brief-2.typst.pdf` | FICTIONAL fixture and render (4 pages). No overlay. |
 | `usage/SOURCE.md` | Exemplar record, page map, search passes. |
 
@@ -46,7 +46,7 @@ The filer is Courier 12 pt with smaller footnotes (pre-2019); ours is 14 pt Time
 
 ## Page review (Gate 2), 2026-10-16
 
-Every page of `OUTPUT-answering-brief.typst.pdf` (11) and `OVERLAY-akbar-answering-brief.pdf` (11) rasterized at 60 dpi and viewed. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only. No typst warnings.
+Every page of `OUTPUT-answering-brief.typst.pdf` (11) and `OVERLAY-answering-brief.pdf` (11) rasterized at 60 dpi and viewed. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only. No typst warnings.
 
 | Page | Content | Result |
 |---|---|---|
@@ -71,3 +71,25 @@ Every page of `OUTPUT-answering-brief.typst.pdf` (11) and `OVERLAY-akbar-answeri
 ## Engines
 
 **docx** (`docx/`), unchanged and out of step with the typst form (Known gaps 4). BLOCKED: `tools/check.sh --engine docx` cannot run (no LibreOffice on the earlier box; no `checks.yaml`).
+
+## Refreshed exemplar run (2026-10-21)
+
+The filed exhibit is a public ACCA-hosted filing recovered from the Internet Archive; its source URL, case, Army docket, filer, filed date, and retrieval date are recorded in `usage/SOURCE.md`. The transcription remains paired with `FILED-EXAMPLE-answering-brief.pdf` as `INPUT-answering-brief.md`. No template change was needed: Appendix A controls the caption and the exemplar predates those current rules.
+
+Rendered with `sh tools/render.sh` and compared with `sh tools/overlay.sh`; both completed successfully. Rasterized every page of the render, filed exhibit, and overlay at 60 dpi and visually reviewed every page. The overlay is `.overlay/courts/military/army-court-of-criminal-appeals/answering-brief/OVERLAY-answering-brief.pdf` (generated, not committed). Render SHA-256: `44c526812116225b61134de737cce1229da484e694dce580d4c25a366ba46b55`.
+
+| Render page | Filed page | Finding | Status |
+|---:|---:|---|---|
+| 1 | 1 | Appendix A caption and body start follow current rule; old filing uses separate caption and older Courier form. | ACCEPTED |
+| 2 | 3 | Body text and footnotes render cleanly; source page numbering differs in the excerpt. | PASS |
+| 3 | 3 | Body and footnote placement look consistent with the sample. | PASS |
+| 4 | 5 | Dense facts and footnotes remain legible; current 14 pt rule changes pagination. | ACCEPTED |
+| 5 | 5 | Dense facts and footnotes remain legible. | PASS |
+| 6 | 6 | Body, citations, and footnotes render cleanly. | PASS |
+| 7 | 7 | Body and footnotes render cleanly. | PASS |
+| 8 | 8 | End of facts excerpt renders cleanly. | PASS |
+| 9 | 9 | Assignment, argument, and conclusion hierarchy is clear. | PASS |
+| 10 | 10 | Signature block moves to a separate page; current template keeps the block together. | OPEN (tier 2) |
+| 11 | 11 | Certificate of service renders on its own page. | PASS |
+
+This is one filer and a pre-2019 filing; it supports only open-choice diagnostics. The remaining known issues are unchanged: no TOC/TOA or length-limit check, no `checks.yaml`, and the DOCX template is outside this pass.
