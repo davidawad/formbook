@@ -164,6 +164,12 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     env.push(("ENGINE".into(), o.engine.clone()));
     let prefix = cfg(&env, &checks, ".font.pdf_prefix // \"\"")?;
     let alt = crate::fonts::latex_alt_prefix(&o.engine, strip_nl(&prefix));
+    let accepted = [strip_nl(&prefix), alt.as_str()]
+        .into_iter()
+        .filter(|p| !p.is_empty())
+        .collect::<Vec<_>>()
+        .join("|");
+    env.push(("FONT_PREFIX".into(), accepted));
     env.push(("FONT_ALT".into(), alt));
     let mut c = Ctx {
         root,

@@ -124,9 +124,8 @@ chk_italic_face() {
 }
 
 chk_fonts_embedded() {
-  pre=$(cfg .font.pdf_prefix)
-  # latex only: a declared Times New Roman may be a metric-compatible Times (FONT_ALT, set by fb check; fb-595.45)
-  if [ -n "${FONT_ALT:-}" ]; then pre="$pre|$FONT_ALT"; fi
+  # the declared pdf_prefix, plus on latex a metric-compatible Times for a declared Times New Roman (fb check sets it)
+  pre=$FONT_PREFIX
   out=$(awk -v pre="$pre" 'NR > 2 { n++
       name = $1; emb = ""; for (i = 1; i <= NF; i++) if ($i == "yes" || $i == "no") { emb = $i; break }
       sub(/^[A-Z]+\+/, "", name)

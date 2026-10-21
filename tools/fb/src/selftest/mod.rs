@@ -136,13 +136,13 @@ impl Run<'_> {
     }
 
     /// Render `sample` of the scratch court `d` with `engine` into `d/<pdf>` (the engine's OUTPUT for latex);
-    /// Err carries the render's whole stderr. `texinputs`: run with TEXINPUTS at the scratch latex/ folder.
+    /// Err carries the render's whole stderr. `texinputs`: the TEXINPUTS value to run with, if any.
     fn render(
         &self,
         d: &Path,
         sample: &str,
         engine: &str,
-        texinputs: bool,
+        texinputs: Option<String>,
     ) -> Res<Result<(), String>> {
         let mut cmd = Command::new(&self.exe);
         cmd.current_dir(self.root)
@@ -151,8 +151,8 @@ impl Run<'_> {
             .arg(d)
             .arg(sample)
             .arg(d.join(self.out(engine)));
-        if texinputs {
-            cmd.env("TEXINPUTS", format!("{}:", d.join("latex").display()));
+        if let Some(t) = texinputs {
+            cmd.env("TEXINPUTS", t);
         }
         let o = capture(&mut cmd)?;
         Ok(match o.status.success() {
@@ -204,7 +204,8 @@ impl Run<'_> {
                 self.md.clone()
             }
         };
-        let built = self.render(&d, &sample, engine, texinputs)?;
+        let path = texinputs.then(|| format!("{}:", d.join("latex").display()));
+        let built = self.render(&d, &sample, engine, path)?;
         if let Kind::LatexBuild { .. } = m.kind {
             return Ok(build_verdict(m, built));
         }
