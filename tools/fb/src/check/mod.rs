@@ -1,7 +1,8 @@
 //! `fb check`: the eval loop's mechanical gates for one court or doc-type folder (was tools/check.sh).
-//! The checks themselves stay in tools/check/lib.sh; see bridge.rs.
+//! Verdicts are native where migrated; bridge.rs is the compatibility path for remaining methods.
 mod bridge;
 mod declared;
+mod native;
 mod opts;
 mod prepare;
 mod rows;
@@ -348,6 +349,9 @@ fn verdict(c: &Ctx, s: &Sample, r: &rows::Row, fails: u64) -> Res<(bool, String,
             ),
         }),
         m => {
+            if let Some(v) = native::evaluate(c, s, m)? {
+                return Ok((v.pass, v.meas, v.detail));
+            }
             let (calib, ftop, ph) = (c.calib.as_str(), c.ftop.to_string(), c.ph.to_string());
             let vars = [
                 ("ROOT", c.root.as_str()),

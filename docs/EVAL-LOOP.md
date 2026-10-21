@@ -177,7 +177,7 @@ All gates green on every sample, for an engine, writes that engine's stamp. A co
 
 ## Replacing the shell checker with a Rust validator
 
-The driver (`tools/check.sh`, a thin wrapper around `fb check` in `tools/fb`) is already Rust: argument parsing, calibration, the per-sample poppler/awk preparation, the check list, SKIP/PASS/FAIL output and stamps. The checks themselves are still `tools/check/lib.sh` and the awk files, which `fb check` runs one `chk_<method>` at a time. They are deliberately simple and readable so their behavior can be reimplemented exactly. The contract the Rust validator must honor:
+The driver (`tools/check.sh`, a thin wrapper around `fb check` in `tools/fb`) is Rust: argument parsing, calibration, per-sample preparation, check ordering, SKIP/PASS/FAIL output and stamps. Verdicts for `g0_content`, `g0_italics`, `g0_footnotes`, `page_size` and `page_limit` are evaluated natively in Rust. Other `chk_<method>` verdicts still use the compatibility bridge into `tools/check/lib.sh`; remove that bridge only after every method is native and parity passes. The contract the Rust validator must honor:
 
 - **Input**: `<court-dir>/checks.yaml` (samples, parameters, form wording, the check list), the sample markdown with its YAML frontmatter, the rendered PDF, `court.json`, and `reviews/*.md`. Nothing else.
 - **Output**: for each check, in the order listed, `PASS`/`FAIL` with the requirement ID, the measured value, the expected value, the failing instances, and `template-file:line` found by searching `fix.anchor` in `template`. Exit status 0 iff no check fails.
