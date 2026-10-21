@@ -322,7 +322,8 @@ chk_generalization_features() {
   gmd="$COURT/$(cfg ".samples[] | select(.id == \"$g\") | .md")"
   body=$(sed '1,/^---$/d' "$gmd")
   miss=""
-  has() { printf '%s\n' "$body" | grep -Eq "$1"; }
+  # a here-string, not printf | grep -q: under pipefail grep's early exit can SIGPIPE printf (fb lint pipefail)
+  has() { grep -Eq "$1" <<< "$body"; }
   for f in $(cfg '.generalization.require_features[]'); do
     case $f in
       footnote) has '^\[\^[^]]+\]:' ;;

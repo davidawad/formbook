@@ -51,11 +51,12 @@ check-selftest DIR:
 diff DIR:
     {{fb}} usage pairs {{DIR}} | xargs -n2 {{fb}} diff
 
-# repo-wide lints: audited font faces, usage/ path validity, rules.md format
+# repo-wide lints: audited font faces, usage/ path validity, rules.md format, no pipe into grep -q under pipefail
 lint:
     {{fb}} lint fonts
     {{fb}} lint paths
     {{fb}} lint rules
+    {{fb}} lint pipefail
 
 lint-metadata sample:
     {{fb}} lint metadata "{{sample}}"
