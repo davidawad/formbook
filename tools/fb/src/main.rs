@@ -26,6 +26,7 @@ mod selftest;
 mod showcase;
 mod track;
 mod tracker;
+mod unicode;
 mod worklist;
 
 use std::process::ExitCode;

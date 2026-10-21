@@ -268,7 +268,10 @@ fn sample(c: &Ctx, sid: &str, t: &mut Tally) -> Res<()> {
     let (md, pdf) = sample_paths(c, sid)?;
     out(&format!("\n=== sample {sid}\n"));
     let w = format!("{}/{sid}", c.out);
-    let Some(p) = prepare::prepare(c, sid, &md, &pdf, &w)? else {
+    std::fs::create_dir_all(&w).map_err(|e| io_fail(&w, e))?;
+    let normalized_md = format!("{w}/input.nfc.md");
+    prepare::normalized_markdown(&md, &normalized_md)?;
+    let Some(p) = prepare::prepare(c, sid, &normalized_md, &pdf, &w)? else {
         match c.default {
             true => out(&format!(
                 "  FAIL  {} render succeeds with no typst warnings\n          measured: fb render --deny-warnings failed or produced no PDF for {md}\n",
@@ -281,7 +284,7 @@ fn sample(c: &Ctx, sid: &str, t: &mut Tally) -> Res<()> {
     };
     let s = Sample {
         sid: sid.to_string(),
-        md,
+        md: normalized_md,
         pdf: pdf.clone(),
         w,
         npages: p.npages,

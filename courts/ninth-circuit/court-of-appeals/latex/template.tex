@@ -30,12 +30,6 @@
 % Sizes are in big points (bp, the unit of the PDF's coordinates): 14 bp = 14 TeX pt is not the same length.
 \newcommand\ca@type{\fontsize{14bp}{28.1bp}\selectfont}  % type-size: 14 pt, body-leading: double (at least 28 pt)
 \newcommand\ca@single{\fontsize{14bp}{16bp}\selectfont} % headings, quotations, footnotes, TOC/TOA: single
-% The pinned Times New Roman cmap maps U+003B to U+037E in XeTeX's ToUnicode map. Use the matching
-% semicolon glyph from the vendored TeX Gyre Termes family so Gate 0 and TOA parsing see U+003B.
-\newfontfamily\ca@semicolonfont[Path=$fontdir$tex-gyre-termes/,Extension=.otf,UprightFont=texgyretermes-regular,
-  BoldFont=texgyretermes-bold,BoldItalicFont=texgyretermes-bolditalic,ItalicFont=texgyretermes-italic]{TeX Gyre Termes}
-\newcommand\ca@semicolon{{\ca@semicolonfont;}}
-\begingroup\catcode`;=\active\gdef;{\ca@semicolon}\endgroup
 \newlength\ca@half \setlength{\ca@half}{0.5in}          % para-indent and heading tab (0.5 in)
 
 % Hyphenation off: a word must come out of the PDF whole (Gate 0 compares words, not line ends).
@@ -286,7 +280,6 @@
 % The cover's gaps are stretchable and shrink when the counsel and party lines need the room (one page).
 \newcommand\ca@cgap{\vskip 0pt plus 1fill minus 14bp}
 \begin{document}
-\catcode`;=\active
 \thispagestyle{empty}
 \ca@single
 \begingroup\centering\bfseries No. $case_number$\par\endgroup

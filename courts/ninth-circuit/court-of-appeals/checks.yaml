@@ -15,7 +15,7 @@ templates:                          # the file a failure points at, per engine (
 
 font:
   typst_family: "Times New Roman"    # what the template asks typst for (first of its font-family list)
-  pdf_prefix: "TimesNewRoman|TeXGyreTermes" # TNR body text; TeX Gyre Termes supplies its U+003B glyph
+  pdf_prefix: "TimesNewRoman"
   size_pt: 14                        # CA9-FORM-004
 
 samples:

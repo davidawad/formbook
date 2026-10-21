@@ -4,6 +4,28 @@ use super::Ctx;
 use crate::Res;
 use std::process::Stdio;
 
+/// NFC-normalize text in a tab-separated extraction while preserving its record structure.
+fn normalize_tsv(path: &str) -> Res<()> {
+    let text = std::fs::read_to_string(path).map_err(|e| io_fail(path, e))?;
+    let normalized = text
+        .lines()
+        .map(|line| {
+            line.split('\t')
+                .map(crate::unicode::nfc)
+                .collect::<Vec<_>>()
+                .join("\t")
+        })
+        .collect::<Vec<_>>()
+        .join("\n");
+    std::fs::write(path, format!("{normalized}\n")).map_err(|e| io_fail(path, e))
+}
+
+/// Make an NFC-normalized markdown copy for all source-side text comparisons.
+pub fn normalized_markdown(source: &str, dest: &str) -> Res<()> {
+    let text = std::fs::read_to_string(source).map_err(|e| io_fail(source, e))?;
+    std::fs::write(dest, crate::unicode::nfc(&text)).map_err(|e| io_fail(dest, e))
+}
+
 /// The smallest word height per point among the level-5 rows of pdftotext -tsv: the calibration text is set in
 /// regular, bold and italic, and a bold or italic face can report a shorter line box than the regular one.
 pub fn calib_of(tsv: &str) -> String {
@@ -142,12 +164,14 @@ pub fn prepare(c: &Ctx, sid: &str, md: &str, pdf: &str, w: &str) -> Res<Option<P
         gawk(&["-f", &words_awk]),
         &f("words.tsv"),
     )?;
+    normalize_tsv(&f("words.tsv"))?;
     let runs_awk = format!("{chk}/pdf-runs.awk");
     let html = quiet(
         "pdftohtml",
         &["-xml", "-zoom", "2", "-i", "-q", "-stdout", pdf],
     );
     pipe_to_file(html, gawk(&["-f", &runs_awk]), &f("runs.tsv"))?;
+    normalize_tsv(&f("runs.tsv"))?;
     if c.default {
         // pleading-paper line numbers (digit-only runs left of the 1 in margin) are decoration, not content
         let (raw, kept) = (f("runs-all.tsv"), f("runs.tsv"));
@@ -172,6 +196,7 @@ pub fn prepare(c: &Ctx, sid: &str, md: &str, pdf: &str, w: &str) -> Res<Option<P
         gawk(&["-v", &dehyphen, "-f", &format!("{chk}/md-blocks.awk"), md]),
         &f("blocks.tsv"),
     )?;
+    normalize_tsv(&f("blocks.tsv"))?;
     let (g0, ft) = (format!("out={}", f("g0")), format!("footer_top={}", c.ftop));
     let (norm, gate0) = (format!("{chk}/norm.awk"), format!("{chk}/gate0.awk"));
     let mut g = gawk(&[

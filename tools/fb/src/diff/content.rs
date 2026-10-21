@@ -44,6 +44,7 @@ impl Tok {
 /// Text normal form of one word: ligatures expanded, soft hyphens and invisible spaces dropped, hyphen
 /// variants made ASCII.
 pub fn norm(w: &str) -> String {
+    let w = crate::unicode::nfc(w);
     let mut s = String::with_capacity(w.len());
     for c in w.chars() {
         match c {
