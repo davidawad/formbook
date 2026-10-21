@@ -33,180 +33,24 @@ local NEEDLE_MAX = 60  -- a needle is a prefix of the text (letters and digits o
 local stringify = pandoc.utils.stringify
 
 -- ---------------------------------------------------------------------------
--- XML helpers
+-- XML helpers: the shared ones of the cross-engine layout model (lib/docx/xengine.lua: runs with the break rules
+-- of typst, paragraph properties in the schema's order, exact line spacing, the leader rows, the list items)
 -- ---------------------------------------------------------------------------
 
-local function esc(s)
-  return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
-end
+local xe = require("docx.xengine")
+local runs, inl = xe.runs, xe.inl
+local para, raw, style, ind, jc = xe.para, xe.raw, xe.style, xe.ind, xe.jc
+local KEEP, LINES, BREAK, BR, LEAD = xe.KEEP, xe.LINES, xe.BREAK, xe.BR, xe.LEAD
+local list_items = xe.list_items
 
-local function merge(a, b)
-  local out = {}
-  for k, v in pairs(a or {}) do out[k] = v end
-  for k, v in pairs(b or {}) do out[k] = v end
-  return out
-end
-
-local function rpr(o)
-  local x = ""
-  if o.b then x = x .. "<w:b/><w:bCs/>" end
-  if o.i then x = x .. "<w:i/><w:iCs/>" end
-  if o.caps then x = x .. "<w:caps/>" end
-  if o.sz then x = x .. '<w:sz w:val="' .. o.sz .. '"/><w:szCs w:val="' .. o.sz .. '"/>' end
-  if o.u then x = x .. '<w:u w:val="single"/>' end
-  if o.box then x = x .. '<w:bdr w:val="single" w:sz="6" w:space="0" w:color="000000"/>' end
-  if x == "" then return "" end
-  return "<w:rPr>" .. x .. "</w:rPr>"
-end
-
--- Text with tabs (\t) as Word runs. No line breaks are ever written: lines wrap where they wrap.
-local function runs(text, o)
-  local x = rpr(o or {})
-  local out = {}
-  local pos = 1
-  while pos <= #text do
-    if text:sub(pos, pos) == "\t" then
-      out[#out + 1] = "<w:r>" .. x .. "<w:tab/></w:r>"
-      pos = pos + 1
-    else
-      local e = text:find("\t", pos, true) or (#text + 1)
-      -- a hyphen before a digit does not end a line ("ER-178-82"; Unicode line breaking, as typst breaks)
-      local t = esc(text:sub(pos, e - 1)):gsub("%-(%d)", '</w:t><w:noBreakHyphen/><w:t xml:space="preserve">%1')
-      out[#out + 1] = "<w:r>" .. x .. '<w:t xml:space="preserve">' .. t .. "</w:t></w:r>"
-      pos = e
-    end
-  end
-  return table.concat(out)
-end
-
--- pandoc's smart reading puts a no-break space after an abbreviation ("v. Jones", "ed. 2020"); typst's markdown
--- reader does not, so the space after a period is an ordinary one again (the engines must break lines alike).
-local function unabbrev(inlines)
-  local out = pandoc.Inlines({})
-  for _, el in ipairs(inlines) do
-    if el.t == "Str" and el.text:find(".\u{00A0}", 1, true) then
-      local rest = el.text
-      while true do
-        local s = rest:find(".\u{00A0}", 1, true)
-        if not s then break end
-        out:insert(pandoc.Str(rest:sub(1, s)))
-        out:insert(pandoc.Space())
-        rest = rest:sub(s + 3)
-      end
-      if rest ~= "" then out:insert(pandoc.Str(rest)) end
-    else
-      out:insert(el)
-    end
-  end
-  return out
-end
-
--- A section or pilcrow sign stays with the number after it, as in the typst template ("§ 1331" is not split).
-local function bind_signs(inlines)
-  for i = 1, #inlines - 1 do
-    local a, b = inlines[i], inlines[i + 1]
-    if a.t == "Str" and (a.text == "\u{00A7}" or a.text == "\u{00B6}") and b.t == "Space" then
-      inlines[i + 1] = pandoc.Str("\u{00A0}")
-    end
-  end
-  return inlines
-end
-
--- A hyphen before a digit does not end a line ("ER-178-82"): Word's non-breaking hyphen, as typst breaks (Unicode
--- line breaking keeps a hyphen with the number after it) and LibreOffice would not. The hyphen is its own run.
-local NBH = pandoc.RawInline("openxml", "<w:r><w:noBreakHyphen/></w:r>")
-local function nobreak_hyphens(inlines)
-  local out = pandoc.Inlines({})
-  for _, el in ipairs(inlines) do
-    if el.t == "Str" and el.text:find("%-%d") then
-      local rest = el.text
-      while true do
-        local s = rest:find("%-%d")
-        if not s then break end
-        if s > 1 then out:insert(pandoc.Str(rest:sub(1, s - 1))) end
-        out:insert(NBH)
-        rest = rest:sub(s + 1)
-      end
-      if rest ~= "" then out:insert(pandoc.Str(rest)) end
-    else
-      out:insert(el)
-    end
-  end
-  return out
-end
-
--- Pandoc inlines (or a metadata value) as Word runs; links keep their text.
-local function inl(x, o)
-  o = o or {}
-  if x == nil then return "" end
-  if type(x) == "string" then return runs(x, o) end
-  x = bind_signs(unabbrev(x))
-  local out = {}
-  for _, el in ipairs(x) do
-    local t = el.t
-    if t == "Str" then
-      out[#out + 1] = runs(el.text, o)
-    elseif t == "Space" or t == "SoftBreak" or t == "LineBreak" then
-      out[#out + 1] = runs(" ", o)
-    elseif t == "Emph" then
-      out[#out + 1] = inl(el.content, merge(o, { i = true }))
-    elseif t == "Strong" then
-      out[#out + 1] = inl(el.content, merge(o, { b = true }))
-    elseif t == "Quoted" then
-      local q = el.quotetype == "DoubleQuote" and { "\u{201C}", "\u{201D}" } or { "\u{2018}", "\u{2019}" }
-      out[#out + 1] = runs(q[1], o) .. inl(el.content, o) .. runs(q[2], o)
-    elseif t == "Link" or t == "Span" or t == "SmallCaps" or t == "Underline" then
-      out[#out + 1] = inl(el.content, o)
-    else
-      out[#out + 1] = runs(stringify(el), o)
-    end
-  end
-  return table.concat(out)
-end
-
--- Paragraph properties are given in the schema's order: style, keep, page break, border, tabs, spacing, indent,
--- justification, outline level. Word refuses a file whose paragraph properties are out of order or repeated.
-local function para(props, body)
-  return "<w:p><w:pPr>" .. table.concat(props) .. "</w:pPr>" .. body .. "</w:p>"
-end
-
-local function raw(xml)
-  return pandoc.RawBlock("openxml", xml)
-end
-
-local KEEP = "<w:keepNext/><w:keepLines/>"
-local LINES = "<w:keepLines/>"
-local BREAK = "<w:pageBreakBefore/>"
--- A line break inside a paragraph: only the table of authorities uses one, after a case name (typst: linebreak()).
-local BR = "<w:r><w:br/></w:r>"
--- Before the leader tab of a table row: three no-break spaces, so the leader is never shorter than that and the
--- last word takes them along when it wraps (typst: h(0.75em), latex: \nobreak\hskip0.75em).
-local LEAD = "\u{00A0}\u{00A0}\u{00A0}\t"
-
-local function style(id)
-  return '<w:pStyle w:val="' .. id .. '"/>'
-end
-
+-- Exact line spacing; single-spaced unless another pitch is given.
 local function spacing(before, after, line)
-  return string.format('<w:spacing w:before="%d" w:after="%d" w:line="%d" w:lineRule="exact"/>', before, after,
-    line or SINGLE)
-end
-
-local function ind(left, hanging, first, right)
-  local x = '<w:ind w:left="' .. (left or 0) .. '"'
-  if right then x = x .. ' w:right="' .. right .. '"' end
-  if hanging then x = x .. ' w:hanging="' .. hanging .. '"' end
-  if first then x = x .. ' w:firstLine="' .. first .. '"' end
-  return x .. "/>"
-end
-
-local function jc(v)
-  return '<w:jc w:val="' .. v .. '"/>'
+  return xe.spacing(before, after, line or SINGLE)
 end
 
 -- A dot leader to the right margin (the page number follows the last tab).
 local function dot_tabs()
-  return '<w:tabs><w:tab w:val="right" w:leader="dot" w:pos="' .. TAB_R .. '"/></w:tabs>'
+  return xe.leader_tab(TAB_R)
 end
 
 -- A horizontal rule: an empty paragraph with a bottom border. `left`/`right` narrow it (the 2 in rules).
@@ -738,29 +582,8 @@ local function strip_links(blocks)
       if el.target:match("^toa:") then return el.content end
       return nil
     end,
-    Inlines = function(l) return nobreak_hyphens(bind_signs(unabbrev(l))) end,
+    Inlines = xe.inlines,
   }).blocks
-end
-
--- A list as paragraphs of the style "List Item" (typst list-item): the number or bullet, a tab to the half inch, the
--- text hanging there, double-spaced like the body. Items of more than one paragraph stay a Word list.
-local function list_items(b)
-  if b.t ~= "OrderedList" and b.t ~= "BulletList" then return { b } end
-  local out = {}
-  local n = b.t == "OrderedList" and b.listAttributes.start or 1
-  local delim = b.t == "OrderedList" and b.listAttributes.delimiter or "Period"
-  for _, item in ipairs(b.content) do
-    if #item ~= 1 or (item[1].t ~= "Plain" and item[1].t ~= "Para") then return { b } end
-    local lab = "\u{2022}"
-    if b.t == "OrderedList" then
-      lab = delim == "OneParen" and (n .. ")") or delim == "TwoParens" and ("(" .. n .. ")") or (n .. ".")
-    end
-    local inlines = pandoc.Inlines({ pandoc.Str(lab), pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>") })
-    inlines:extend(item[1].content)
-    out[#out + 1] = pandoc.Div({ pandoc.Para(inlines) }, { ["custom-style"] = "List Item" })
-    n = n + 1
-  end
-  return out
 end
 
 local function has_note(el)

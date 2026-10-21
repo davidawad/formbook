@@ -1,0 +1,92 @@
+% lib/latex/xengine.sty: the cross-engine layout model for pdfLaTeX (docs/EVAL-LOOP.md, "Cross-engine gate";
+% fb-595.54, fb-595.54.1). The typst render (lib/typst/xengine.typ) is the reference; with this preamble a LaTeX
+% template breaks every line and page where typst and Word (lib/docx/xengine.lua) break them.
+%
+% A template loads it with `\usepackage{xengine}` after its font and other packages. fb render (tools/fb,
+% engines.rs) inlines this file into the generated doc.tex in place of that line, so the .tex still compiles alone
+% with stock pdflatex (the interop rule: no repo-local file). Stock pdfTeX and LaTeX kernel commands only.
+%
+% What it sets:
+%   * the same glyph widths: no kerning and no ligatures (\pdfnoligatures turns both off; typst and Word set
+%     neither); give every size in bp (14 bp = typst's 14 pt: \xe@lines does);
+%   * first-fit line breaking: a fil right skip makes every line equally good, interword spaces neither stretch nor
+%     shrink, and every break costs nothing, so TeX's optimum is the greedy one (of the breakings with the fewest
+%     lines it keeps the one whose lines come latest); no hyphenation; a break after an explicit hyphen is free
+%     (lib/latex/xengine.lua keeps a hyphen before a digit unbreakable, as Unicode line breaking does);
+%   * fixed line boxes: every line is \pdfeachlineheight + \pdfeachlinedepth high, the baseline at 0.8 of its pitch
+%     (Word's exact line spacing); boxes touch (\lineskip 0, \baselineskip 0); the first box of a page starts at the
+%     top of the text block and the last must end inside it (\topskip 0, \maxdepth 0); the template spaces blocks
+%     with \addvspace (the larger of the space below one and above the next, dropped at the top of a page);
+%   * no widows or orphans, in the text and in footnotes (LaTeX resets the line-box settings inside a footnote,
+%     \@parboxrestore: they are set back here).
+% What it provides:
+%   \xe@lines{<size>}{<pitch>}   select the type size and the line box of a pitch, both numbers in bp;
+%   \xe@footnotemarks{<size>}     footnote marks at 58 % of type size <size> (bp), raised 29 % (typst super,
+%                                 LibreOffice's superscript): defines \xe@mark{<text>} and \@makefnmark;
+%   \xe@lists{<width>}            list labels in a box of <width> at the margin, the text hanging after it, no space
+%                                 of their own (needs enumitem);
+%   \xe@row{<above>}{<hang>}{<text>}{<page>}   one row of a table of contents or authorities: the text wraps before
+%                                 a column of width \xe@col kept for the page, a dot leader (\xe@leader, at least
+%                                 three spaces, tied to the text) runs to the page on the last line; not split.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{xengine}[2026/10/21 cross-engine layout model]
+
+% No kerning, no ligatures, interword spaces of fixed width in every font as it is selected.
+\AddToHook{selectfont}[xengine]{\pdfnoligatures\font\fontdimen3\font=0pt\fontdimen4\font=0pt\fontdimen7\font=0pt}
+\frenchspacing
+% First-fit breaking: no hyphenation; a break after an explicit hyphen costs nothing; no demerits that would make one
+% breaking better than another.
+\lefthyphenmin=100
+\righthyphenmin=100
+\hyphenpenalty=10000
+\exhyphenpenalty=0
+\pretolerance=10000
+\tolerance=10000
+\adjdemerits=0
+\doublehyphendemerits=0
+\finalhyphendemerits=0
+\hbadness=10000
+\vbadness=10000
+\emergencystretch=0pt
+% Fixed line boxes, touching.
+\baselineskip=0pt
+\lineskip=0pt
+\lineskiplimit=\maxdimen
+\setlength{\topskip}{0pt}
+\setlength{\maxdepth}{0pt}
+\raggedbottom
+% No widows or orphans (Word's widow control; typst's default).
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\interlinepenalty=0
+\brokenpenalty=0
+\raggedright
+\setlength{\parskip}{0pt}
+% Footnotes: the same line boxes (\@parboxrestore sets \lineskip and \baselineskip from these), no widows.
+\setlength{\footnotesep}{0pt}
+\normallineskip=0pt
+\normalbaselineskip=0pt
+\interfootnotelinepenalty=10000
+
+\newcommand\xe@lines[2]{%
+  \fontsize{#1bp}{0bp}\selectfont\pdfeachlineheight=\fpeval{0.8*(#2)}bp\relax\pdfeachlinedepth=\fpeval{0.2*(#2)}bp\relax}
+
+\newcommand\xe@footnotemarks[1]{%
+  \edef\xe@mark##1{\noexpand\raisebox{\fpeval{0.29*(#1)}bp}{\noexpand\fontsize{\fpeval{0.58*(#1)}bp}{0bp}%
+    \noexpand\selectfont ##1}}%
+  \renewcommand\@makefnmark{\hbox{\normalfont\xe@mark{\@thefnmark}}}}
+
+\newcommand\xe@lists[1]{%
+  \setlist{itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, leftmargin=#1, labelwidth=#1, labelsep=0pt,
+    align=left, listparindent=0pt, itemindent=0pt}%
+  \setlist[itemize]{label=\textbullet}}
+
+\newlength\xe@col
+\newcommand\xe@leader{\nobreak\hskip0.75em\leaders\hbox{.}\hskip 0pt plus 1fill}
+\newcommand\xe@row[4]{%
+  \par\addvspace{#1}%
+  \begingroup\interlinepenalty=10000\relax
+  \noindent\hangindent=#2\relax\hangafter=1\relax
+  \rightskip=\dimexpr\xe@col\relax plus 1fil\relax\parfillskip=-\dimexpr\xe@col\relax\relax
+  #3\xe@leader\hbox to \xe@col{\hss#4}\par\endgroup}

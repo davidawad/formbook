@@ -15,88 +15,10 @@ local function text(x)
   return pandoc.utils.stringify(x)
 end
 
--- A section or pilcrow sign stays with the number after it, as in the typst template ("§ 1331" is not split).
-local function bind_signs(inlines)
-  for i = 1, #inlines - 1 do
-    local a, b = inlines[i], inlines[i + 1]
-    if a.t == "Str" and (a.text == "\u{00A7}" or a.text == "\u{00B6}") and b.t == "Space" then
-      inlines[i + 1] = pandoc.Str("\u{00A0}")
-    end
-  end
-  return inlines
-end
-
--- Cross-engine line breaking (docs/EVAL-LOOP.md, "Cross-engine gate"): the template turns ligatures off, so the
--- characters the writer would spell as ligatures (``, --, ---) are written as commands, and the places where
--- typst and Word may break a line inside a word (Unicode line breaking) are the places TeX may break it:
---   * pandoc's smart reading puts a no-break space after an abbreviation ("v. Jones"); typst's does not: a space;
---   * a hyphen before a digit does not end a line ("ER-178-82"), any other may (the template makes that free);
---   * a line may end before or after an em dash, and after an en dash.
-local RAW = {
-  ["\u{201C}"] = "\\textquotedblleft{}",
-  ["\u{201D}"] = "\\textquotedblright{}",
-  ["\u{2018}"] = "\\textquoteleft{}",
-  ["\u{2014}"] = "\\allowbreak\\textemdash\\allowbreak{}",
-  ["\u{2013}"] = "\\textendash\\allowbreak{}",
-}
-
-local function raw(s)
-  return pandoc.RawInline("latex", s)
-end
-
-local function texify(inlines)
-  local out = pandoc.Inlines({})
-  for _, el in ipairs(inlines) do
-    if el.t == "Quoted" then
-      local q = el.quotetype == "DoubleQuote" and { "\u{201C}", "\u{201D}" } or { "\u{2018}", "\u{2019}" }
-      out:insert(pandoc.Str(q[1]))
-      out:extend(el.content)
-      out:insert(pandoc.Str(q[2]))
-    else
-      out:insert(el)
-    end
-  end
-  local res = pandoc.Inlines({})
-  local last = "" -- the last character of the previous Str (pandoc may keep the no-break space apart)
-  for _, el in ipairs(out) do
-    if el.t ~= "Str" then last = "" end
-    if el.t == "Str" then
-      local buf = ""
-      local function flush()
-        if buf ~= "" then res:insert(pandoc.Str(buf)) end
-        buf = ""
-      end
-      local chars = { last }
-      for _, c in utf8.codes(el.text) do chars[#chars + 1] = utf8.char(c) end
-      for i, c in ipairs(chars) do
-        if i == 1 then goto continue end
-        if RAW[c] then
-          flush()
-          res:insert(raw(RAW[c]))
-        elseif c == "\u{00A0}" and i > 1 and chars[i - 1] == "." then
-          flush()
-          res:insert(pandoc.Space())
-        elseif c == "-" and chars[i + 1] and chars[i + 1]:match("^%d$") then
-          flush()
-          res:insert(raw("\\mbox{-}"))
-        else
-          buf = buf .. c
-        end
-        ::continue::
-      end
-      flush()
-      last = chars[#chars]
-    else
-      res:insert(el)
-    end
-  end
-  return res
-end
-
--- The inline filter of the body and of every metadata value the template sets.
-local function inlines_filter(l)
-  return texify(bind_signs(l))
-end
+-- Cross-engine line breaking (docs/EVAL-LOOP.md, "Cross-engine gate"): the shared inline rules of the layout model
+-- (lib/latex/xengine.lua: ligature characters as commands, break opportunities as typst and Word have them, a section
+-- sign bound to its number), run over the body and over every metadata value the template sets.
+local inlines_filter = require("latex.xengine").inlines
 
 -- LaTeX for inline content (a meta value or a list of inlines), trimmed.
 local function latex(x)

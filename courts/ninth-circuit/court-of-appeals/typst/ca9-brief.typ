@@ -13,6 +13,7 @@
 #import "../../../../lib/typst/typography.typ": footnote-body as shared-footnote-body
 #import "../../../../lib/typst/certificates.typ": ca9-compliance as shared-ca9-compliance, ca9-service as shared-ca9-service
 #import "../../../../lib/typst/toa.typ": linked-authorities as shared-linked-authorities, cited-authorities as shared-cited-authorities, authority-page-labels as shared-authority-page-labels
+#import "../../../../lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -28,7 +29,6 @@
 #let pitch-double = 29.4pt                 // CA9-FORM-003: body text, 2.1 x type size (double spacing)
 #let pitch-single = 17pt                   // headings, quotations, footnotes, TOC/TOA, certificates: single-spaced
 #let pitch-heading = 20pt                  // section headings (16 pt)
-#let edges(pitch) = (top-edge: 0.8 * pitch, bottom-edge: -0.2 * pitch)
 #let single-leading = 0pt                  // the line boxes carry the spacing: no leading between them
 #let page-margin = 1in                     // CA9-FORM-002
 #let para-indent = 0.5in
@@ -213,22 +213,6 @@
 // ---------------------------------------------------------------------------
 // Tables of contents and authorities
 // ---------------------------------------------------------------------------
-
-/// One row of the table of contents or of authorities: the text wraps before a column of width `col` kept for the
-/// page number, and a dot leader runs from the end of the text to the number on the last line (Word's layout: a
-/// right indent and a right tab beyond it), at least three spaces after it. Rows are not split across pages.
-#let listing-row(target, body, page, col, hang-by, above) = {
-  let row = block(width: 100%, above: above, below: 0pt, breakable: false, grid(
-    columns: (1fr, col), column-gutter: 0pt,
-    par(hanging-indent: hang-by, first-line-indent: 0pt, leading: 0pt, justify: false, {
-      body
-      h(0.75em)   // the leader is never shorter than three spaces, and it does not leave the last word
-      box(width: 1fr, repeat[.])
-    }),
-    align(right + bottom, page),
-  ))
-  if target == none { row } else { link(target, row) }
-}
 
 /// One table-of-contents row, built from a heading element. The label sits where the
 /// heading's own label sits in the body, and wrapped lines hang under the title text.
@@ -419,23 +403,11 @@
   // plain page style), so it sits at the same place on every page.
   set page(paper: "us-letter", margin: page-margin, footer-descent: 30%,
     footer: context align(center, text(..edges(pitch-single), counter(page).display())))
-  set text(
-    font: font-family, size: type-size, lang: "en", region: "us",
-    hyphenate: false, fallback: false,
-    // No kerning and no ligatures: Word sets neither by default, and the LaTeX engine turns both off (the three
-    // engines must give every word the same width, docs/EVAL-LOOP.md, "Cross-engine gate").
-    kerning: false, ligatures: false,
-    ..edges(pitch-double),
-  )
-  // Greedy line breaking (first fit), as Word and LibreOffice break lines; LaTeX is set up to break the same way.
-  set par(
-    leading: 0pt, spacing: 0pt, linebreaks: "simple",
-    first-line-indent: (amount: para-indent, all: true), justify: false,
-  )
-  // A superscript (a footnote mark) does not make its line taller: its box is the line's own.
-  show super: set text(top-edge: "baseline", bottom-edge: "baseline")
-  // Footnote marks at 58 % of the type size: LibreOffice's superscript, which the LaTeX engine sets too.
-  set super(size: 0.58em)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model (lib/typst/xengine.typ): first fit, no kerning or ligatures, no hyphenation, line
+  // boxes of the body pitch, footnote marks at 58 %, lists with the number in a half-inch box.
+  show: xengine.with(pitch: pitch-double, list-indent: para-indent)
   set heading(numbering: none)
   set footnote.entry(
     gap: 7pt, clearance: 12.6pt, indent: 0pt,
@@ -448,29 +420,11 @@
     set text(..edges(pitch-single))
     shared-footnote-body(note.body, num, type-size, single-leading, 7pt)
   }
-  // Lists: the number (or bullet) in a half-inch box at the margin, the text hanging after it, double-spaced like
-  // the body and with no space of their own (Word and LaTeX set the same paragraphs).
-  let list-item(lab, body) = block(above: 0pt, below: 0pt,
-    par(hanging-indent: para-indent, first-line-indent: 0pt, { box(width: para-indent, lab); body }))
-  show enum: it => {
-    let n = if it.start == auto { 1 } else { it.start }
-    for item in it.children {
-      if item.has("number") and item.number != none { n = item.number }
-      list-item(numbering(it.numbering, n), item.body)
-      n += 1
-    }
-  }
-  show list: it => for item in it.children { list-item([•], item.body) }
   show quote.where(block: true): it => block(above: 14pt, below: 14pt, pad(left: para-indent, right: para-indent, {
     set text(..edges(pitch-single))
     set par(first-line-indent: 0pt, leading: single-leading, spacing: 14pt)
     it.body
   }))
-  // Typography that holds for any text: never break inside a token of adjacent parentheses
-  // ("60(b)(5)"), and never between a section sign / pilcrow and its number. Done with
-  // unbreakable boxes so the extracted text stays exactly the author's characters.
-  show regex("\\S*\\)\\(\\S*"): it => box(it)
-  show regex("[§¶] \\S+"): it => box(it)
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {

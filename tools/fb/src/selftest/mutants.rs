@@ -143,8 +143,8 @@ pub const MUTANTS: &[Mutant] = &[
         want: r"CA9-TOOL-007",
         kind: Kind::Layout,
         // the page list drops below its entry's last line, onto a line of its own (fb-595.53, the ca5 reply-brief
-        // latex TOA)
-        expr: r"s/^    align(right + bottom, page),$/    align(right + bottom, pad(top: 2em, page)),/",
+        // latex TOA); the row is listing-row of lib/typst/xengine.typ, so the page list is padded where ca9 passes it
+        expr: r"s/^        }, page-text, calc.max(toa-page-col/        }, pad(top: 2em, page-text), calc.max(toa-page-col/",
     },
     Mutant {
         name: r"toa-entry-on-heading-rule",
@@ -170,9 +170,10 @@ pub const MUTANTS: &[Mutant] = &[
         name: r"latex-kerning",
         want: r"XENG-003",
         kind: Kind::Latex,
-        // kerning and ligatures back on: newtx's kerns shift words, and lines no longer break where typst breaks them
-        // (Gate 4 CROSS-ENGINE, fb-595.54)
-        expr: r"s/\\pdfnoligatures\\font//",
+        // kerning and ligatures back on (spaces stretch again too): the template takes the selectfont code of the
+        // shared lib/latex/xengine.sty out; newtx's kerns shift words, and lines no longer break where typst breaks
+        // them (Gate 4 CROSS-ENGINE, fb-595.54; the package is shared since fb-595.54.1)
+        expr: r"s/^\\makeatletter$/\\RemoveFromHook{selectfont}[xengine]\\makeatletter/",
     },
     Mutant {
         name: r"latex-repo-local-file",

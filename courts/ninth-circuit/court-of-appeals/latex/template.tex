@@ -8,18 +8,14 @@
 % Pandoc variables used: the frontmatter fields, and the booleans and counts
 % that ca9.lua derives from them (basis_*, rc_*, words, words_fmt, toa, addendum).
 %
-% Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.54). This template sets every line and page
-% break where the typst template (the reference) and the Word template set them:
-%   * the same glyph widths: newtx is Times metrics in TeX points, so sizes are given in bp (14 bp = typst's 14 pt);
-%     no kerning and no ligatures (\pdfnoligatures turns both off in pdfTeX; typst and Word set neither);
-%   * first-fit line breaking, as Word and typst break ragged text: a fil right skip makes every line equally good,
-%     interword spaces neither stretch nor shrink, and every break costs nothing, so TeX's optimum is the
-%     greedy one (of the breakings with the fewest lines it keeps the one whose lines come latest);
-%   * fixed line boxes: every line is \pdfeachlineheight + \pdfeachlinedepth high, the baseline at 0.8 of its
-%     pitch (Word's exact line spacing); boxes touch (\lineskip 0, \baselineskip 0); the first box of a page
-%     starts at the top of the text block and the last must end inside it (\topskip 0, \maxdepth 0);
-%   * spacing between blocks in bp, the larger of the space below one and above the next (\addvspace), dropped at
-%     the top of a page; no widows or orphans.
+% Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.54): this template sets every line and page
+% break where the typst template (the reference) and the Word template set them. The model itself (no kerning or
+% ligatures, first-fit breaking, fixed line boxes, no widows, footnote marks, list labels, contents rows) is the
+% shared package lib/latex/xengine.sty, which fb render inlines into the generated .tex in place of
+% \usepackage{xengine}; the inline rules (break opportunities, ligature characters) are lib/latex/xengine.lua, run
+% by ca9.lua. Every size and space here is in bp (newtx is Times metrics in TeX points: 14 bp = typst's 14 pt), and
+% blocks are spaced with \addvspace (the larger of the space below one and above the next, dropped at the top of a
+% page).
 \documentclass[14pt,letterpaper]{extarticle}
 \usepackage[T1]{fontenc}
 % CA9-FORM-004 (font-family): Times. newtxtext/newtxmath ship with every TeX Live, so the generated .tex compiles
@@ -31,6 +27,7 @@
 \usepackage{enumitem}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref} % bookmarks are written by \ca@bookmark
+\usepackage{xengine} % lib/latex/xengine.sty, inlined by fb render
 \makeatletter
 
 % ---------------------------------------------------------------------------
@@ -39,44 +36,12 @@
 
 % Line boxes: [pitch-double] 29.4 bp body (CA9-FORM-003), [pitch-single] 17 bp, [pitch-heading] 20 bp for the 16 bp
 % section headings; the baseline at 0.8 of the pitch.
-\newcommand\ca@type{\fontsize{14bp}{0bp}\selectfont\pdfeachlineheight=23.52bp\pdfeachlinedepth=5.88bp}
-\newcommand\ca@single{\fontsize{14bp}{0bp}\selectfont\pdfeachlineheight=13.6bp\pdfeachlinedepth=3.4bp}
-\newcommand\ca@headtype{\fontsize{16bp}{0bp}\selectfont\pdfeachlineheight=16bp\pdfeachlinedepth=4bp}
+\newcommand\ca@type{\xe@lines{14}{29.4}}
+\newcommand\ca@single{\xe@lines{14}{17}}
+\newcommand\ca@headtype{\xe@lines{16}{20}}
 \newlength\ca@half \setlength{\ca@half}{0.5in}          % para-indent and heading tab (0.5 in)
 
-% No kerning, no ligatures, interword spaces of fixed width (Times: 0.25 em) in every font as it is selected.
-\AddToHook{selectfont}{\pdfnoligatures\font\fontdimen3\font=0pt\fontdimen4\font=0pt\fontdimen7\font=0pt}
-\frenchspacing
-% First-fit breaking: no hyphenation; a break after an explicit hyphen costs nothing (ca9.lua keeps a hyphen before a
-% digit unbreakable, as Unicode line breaking does); no demerits that would make one breaking better than another.
-\lefthyphenmin=100
-\righthyphenmin=100
-\hyphenpenalty=10000
-\exhyphenpenalty=0
-\pretolerance=10000
-\tolerance=10000
-\adjdemerits=0
-\doublehyphendemerits=0
-\finalhyphendemerits=0
-\hbadness=10000
-\vbadness=10000
-\emergencystretch=0pt
-% Fixed line boxes, touching.
-\baselineskip=0pt
-\lineskip=0pt
-\lineskiplimit=\maxdimen
-\setlength{\topskip}{0pt}
-\setlength{\maxdepth}{0pt}
-\raggedbottom
-% No widows or orphans (Word's widow control; typst's default).
-\clubpenalty=10000
-\widowpenalty=10000
-\displaywidowpenalty=10000
-\interlinepenalty=0
-\brokenpenalty=0
-\raggedright
-\setlength{\parindent}{0.5in}
-\setlength{\parskip}{0pt}
+\setlength{\parindent}{0.5in} % after xengine.sty's \raggedright, which sets it to zero
 \pagestyle{plain}
 % The page number in the 14 bp type, single-spaced (the footer is not \normalsize, which is 14 TeX points).
 \def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
@@ -88,25 +53,18 @@
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \providecommand{\passthrough}[1]{#1}
 \providecommand{\pandocbounded}[1]{#1}
-\setlist{itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt, leftmargin=0.5in, labelwidth=0.5in, labelsep=0pt,
-  align=left, listparindent=0pt, itemindent=0pt}
-\setlist[itemize]{label=\textbullet}
+\xe@lists{0.5in}
 
 % Footnotes [footnote.entry]: 14 pt, single-spaced, the mark then a space (CA9-FORM-004), at the foot of the page:
 % 12.6 bp clear of the text, a 30 % rule, and 7 bp above each note (and between the paragraphs of one). LaTeX resets
-% \lineskip, \baselineskip and the right skip inside a footnote (\@parboxrestore): they are set back here.
+% the right skip inside a footnote (\@parboxrestore): it is set back here; xengine.sty keeps the line boxes.
 \renewcommand\footnotesize{\ca@single}
-\setlength{\footnotesep}{0pt}
 \setlength{\skip\footins}{12.6bp}
-\normallineskip=0pt
-\normalbaselineskip=0pt
 \renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
 % Marks at 58 % of the type size (typst super, LibreOffice's superscript).
-\newcommand\ca@mark[1]{\raisebox{4.06bp}{\fontsize{8.12bp}{0bp}\selectfont #1}}
-\renewcommand\@makefnmark{\hbox{\normalfont\ca@mark{\@thefnmark}}}
+\xe@footnotemarks{14}
 \renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
-  \vskip 0pt\noindent\ca@mark{\@thefnmark}\hskip 0.25em #1}
-\interfootnotelinepenalty=10000
+  \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25em #1}
 
 % Block quotations [quote]: indented 0.5 in both sides, single-spaced, 14 bp above, below and between their
 % paragraphs (ca9.lua puts \ca@qsep between the paragraphs).
@@ -256,22 +214,12 @@
 \expandafter\def\csname ca@items@toc\endcsname{}
 \expandafter\def\csname ca@items@add\endcsname{}
 
-% ---- [listing-row]: the text wraps before a column of width \ca@col kept for the page number; a dot leader runs from
-% the end of the text to the number on the last line (the right skip keeps the column free, the negative
-% \parfillskip lets the number into it). Rows are not split across pages.
-\newlength\ca@col
+% ---- [listing-row]: \xe@row of xengine.sty, the page column \xe@col set per table.
 \newlength\ca@w
-\newcommand\ca@leader{\nobreak\hskip0.75em\leaders\hbox{.}\hskip 0pt plus 1fill} % at least three spaces, tied to the text
-\newcommand\ca@row[4]{% #1 space above, #2 hanging indent, #3 text, #4 page
-  \par\addvspace{#1}%
-  \begingroup\interlinepenalty=10000\relax
-  \noindent\hangindent=#2\relax\hangafter=1\relax
-  \rightskip=\dimexpr\ca@col\relax plus 1fil\relax\parfillskip=-\dimexpr\ca@col\relax\relax
-  #3\ca@leader\hbox to \ca@col{\hss#4}\par\endgroup}
 % #1 space above, #2 indent of the entry, #3 width of the label box, #4 label, #5 title, #6 page.
 \newcommand\ca@tocline[6]{%
-  \setlength{\ca@col}{36bp}%
-  \ca@row{#1}{\dimexpr#2+#3\relax}{\hskip#2\relax\makebox[#3][l]{#4}#5}{#6}}
+  \setlength{\xe@col}{36bp}%
+  \xe@row{#1}{\dimexpr#2+#3\relax}{\hskip#2\relax\makebox[#3][l]{#4}#5}{#6}}
 % The entry's text is "label\ca@sep title" and its page follows: split it, then set the line.
 \def\ca@tocsplit#1#2#3#4\ca@sep#5\ca@end#6{\ca@tocline{#1}{#2}{#3}{#4}{#5}{#6}}
 \def\ca@tocsplitU#1#2#3#4\ca@sep#5\ca@end#6{\ca@tocline{#1}{#2}{#3}{#4}{\MakeUppercase{#5}}{#6}}
@@ -320,8 +268,8 @@
 % An entry: #2 is "name,\\ cite" or "cite"; the pages' column is 56 bp, or the width of a longer list.
 \newcommand\ca@toaline[2]{%
   \settowidth{\ca@w}{\ca@toapages{#1}}%
-  \setlength{\ca@col}{56bp}\ifdim\ca@w>\ca@col\setlength{\ca@col}{\ca@w}\fi
-  \ca@row{9.8bp}{0.35in}{#2}{\ca@toapages{#1}}}
+  \setlength{\xe@col}{56bp}\ifdim\ca@w>\xe@col\setlength{\xe@col}{\ca@w}\fi
+  \xe@row{9.8bp}{0.35in}{#2}{\ca@toapages{#1}}}
 
 % ---------------------------------------------------------------------------
 % Cover (FRAP 32(a)(2); CA9-COVER-001 to -007), lib/typst/ca9-cover.typ

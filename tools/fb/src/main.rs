@@ -31,6 +31,7 @@ mod proc;
 mod readmes;
 mod render;
 mod selftest;
+mod sharedlib;
 mod showcase;
 mod t1ids;
 mod texlive;

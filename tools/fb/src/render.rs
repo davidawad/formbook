@@ -151,6 +151,9 @@ pub fn render_one(
 ) -> Res<()> {
     std::env::set_var("SOURCE_DATE_EPOCH", REPRO_EPOCH);
     std::env::set_var("FORCE_SOURCE_DATE", "1");
+    // court filters load the shared Lua modules of lib/ (lib/docx/xengine.lua: `require("docx.xengine")`)
+    let lua = crate::sharedlib::lua_path(root, std::env::var("LUA_PATH").ok().as_deref());
+    std::env::set_var("LUA_PATH", lua);
     let sample_arg = if sample.is_absolute() {
         sample.to_path_buf()
     } else {

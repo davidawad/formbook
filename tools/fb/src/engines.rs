@@ -112,6 +112,10 @@ pub fn latex(root: &Path, court: &Path, sample: &str, out: &Path) -> Res<()> {
     pandoc(court, &args)?;
     let src = std::fs::read_to_string(&tex)
         .map_err(|e| fail(2, format!("fb render: {}: {e}", tex.display())))?;
+    // shared packages (lib/latex/*.sty) go into the .tex itself: it must compile alone (sharedlib.rs)
+    let src = crate::sharedlib::inline_packages(&root.join("lib/latex"), &src)?;
+    std::fs::write(&tex, &src)
+        .map_err(|e| fail(2, format!("fb render: {}: {e}", tex.display())))?;
     let set = std::env::var("LATEX_ENGINE").ok();
     match latex_engine(set.as_deref(), &src) {
         "pdflatex" => {
