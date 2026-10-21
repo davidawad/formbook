@@ -1,5 +1,5 @@
 ---
-title: "Trustee's Brief in Support of Objection to Claim"
+title: "Trustee’s Brief in Support of Objection to Claim"
 debtor:
   - "RUSSELL A. BROOKS"
   - "ALISHA D. BROOKS"
@@ -20,11 +20,18 @@ signature:
     - "trustee@edok13.com"
 certificate:
   title: "CERTIFICATE OF MAILING"
-  body: "I, William M. Bonney, do hereby certify that on the February 2, 2017, true and correct copies of the Trustee's Brief in Support of Objection, was mailed, with proper postage prepaid thereon, to the party or parties not receiving electronic notice as set forth on the attached notice of electronic filing, and to the interested parties listed below:\n\nRussell and Alisha Brooks, 1011 Mattox Lane, Sallisaw, OK 74955"
+  body: "I, William M. Bonney, do hereby certify that on the February 2, 2017, true and correct copies of the Trustee's Brief in Support of Objection, was mailed, with proper postage prepaid thereon, to the party or parties not receiving electronic notice as set forth on the attached notice of electronic filing, and to the interested parties listed below:\n\nRussell and Alisha Brooks\\\n1011 Mattox Lane\\\nSallisaw, OK 74955"
   electronic: "William Mark Bonney"
   lines:
     - "William Mark Bonney, Trustee OBA #12221"
-excerpt: "Complete transcription of the 4-page brief (Doc 68). The debtors' Social Security number fragments are not transcribed (the template has no field for them); the mailing list is set as one paragraph, not as a list of addresses. The ECF header and footer are not transcribed."
+    - "Jacob R. Parker, OBA #32848"
+    - "Office of the Standing Chapter 13 Trustee"
+    - "P.O. Box 1548"
+    - "Muskogee, OK 74402-1548"
+    - "Tele: (918)683-3840"
+    - "Fax: (918)683-3302"
+    - "trustee@edok13.com"
+excerpt: "Complete transcription of the 4-page brief (Doc 68), body, signature and certificate of mailing. Not transcribed, because the template has no field for them: the debtors' partial Social Security numbers and street address in the caption. The ECF header and footer are not transcribed."
 ---
 
 COMES NOW, the Trustee, William Mark Bonney, and for his brief in support of his objection to proof of claim states:
