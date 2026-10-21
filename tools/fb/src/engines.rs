@@ -8,6 +8,8 @@
 //!                               compiles in an empty directory with TEXINPUTS unset), or LATEX_ENGINE=tectonic or
 //!                               xelatex; a template that loads fontspec stays on tectonic until it migrates
 //!   <court>/docx/render.sh      if present it owns the .docx: sh render.sh <court-dir> <sample.md> <out.docx>
+//!   <court>/docx/reference.xml  built into reference.docx (docxref.rs) in a staged copy of docx/, which the
+//!                               two rows below then use
 //!   <court>/docx/reference.docx otherwise pandoc --reference-doc plus every docx/*.lua filter, in passes when
 //!                               the filters need page numbers (docxpass.rs)
 //! Every docx is then packed again as a reproducible archive (docxzip.rs), checked (valid zip, well-formed XML
@@ -276,7 +278,6 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
         .filter(|d| d.ends_with(".docx"))
         .map(PathBuf::from)
         .ok_or_else(|| fail(2, "fb render: docx output must end in .docx.pdf"))?;
-    let d = court.join("docx");
     let parent = docx.parent().unwrap_or_else(|| Path::new("."));
     std::fs::create_dir_all(parent)
         .map_err(|e| fail(2, format!("fb render: {}: {e}", parent.display())))?;
@@ -286,6 +287,8 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
     let temp_docx = docx.with_file_name(format!(".fb-docx-{}-{nanos}.docx", std::process::id()));
     let _cleanup = RemoveOnDrop(temp_docx.clone());
     let work = TempDir::new("docx")?;
+    // a reference.xml is built into reference.docx in a staged copy of docx/ (docxref.rs)
+    let d = crate::docxref::stage(&court.join("docx"), work.path())?;
     if d.join("render.sh").is_file() {
         if !run_owner(
             &d.join("render.sh"),

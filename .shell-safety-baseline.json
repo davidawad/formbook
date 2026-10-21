@@ -1,8 +1,6 @@
 {
   "array_expansions": {},
   "branches": {
-    "courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief/docx/build-reference.sh": 8,
-    "courts/eighth-circuit/iowa/federal/southern-district/motion-brief/docx/make-reference.sh": 7,
     "courts/eleventh-circuit/court-of-appeals/reply-brief/docx/make-reference.sh": 8,
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/make-reference.sh": 6,
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/render.sh": 31,

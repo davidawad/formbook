@@ -72,7 +72,7 @@ fn pandoc(
 }
 
 /// The document's last sectPr (just before `</w:body>`) replaced by `last`.
-fn replace_final_sect(doc: &str, last: &str) -> Option<String> {
+pub(crate) fn replace_final_sect(doc: &str, last: &str) -> Option<String> {
     let body_end = doc.rfind("</w:body>")?;
     let start = doc[..body_end].rfind("<w:sectPr")?;
     let end = doc[start..body_end].rfind("</w:sectPr>")? + start + "</w:sectPr>".len();

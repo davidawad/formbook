@@ -11,6 +11,7 @@ mod docxdedupe;
 mod docxopen;
 mod docxpages;
 mod docxpass;
+mod docxref;
 mod docxzip;
 mod engines;
 mod eval;
@@ -56,6 +57,7 @@ fn main() -> ExitCode {
         "readmes" => readmes::main(rest),
         "render" => render::main(rest),
         "render-latex" => render::latex_main(rest),
+        "docx-reference" => docxref::main(rest),
         "diff" => diff::main(rest),
         "calibrate" => diff::calibrate::main(rest),
         "cross-engine" => diff::xbaseline::main(rest),
@@ -79,7 +81,7 @@ fn main() -> ExitCode {
         "build" => filing::build(rest),
         "new-filing" => filing::new_filing(rest),
         "render-filing" => filing::render_filing(rest),
-        _ => Err(fail(2, "usage: fb check|eval|selftest|check-selftest|bootstrap|showcase|render|render-latex|build|new|render-filing|overlay|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|measure|diff|calibrate|cross-engine|fetch|lint|match-stamp|diff-selftest|usage ...")),
+        _ => Err(fail(2, "usage: fb check|eval|selftest|check-selftest|bootstrap|showcase|render|render-latex|docx-reference|build|new|render-filing|overlay|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|measure|diff|calibrate|cross-engine|fetch|lint|match-stamp|diff-selftest|usage ...")),
     };
     result.unwrap_or_else(|e| {
         eprintln!("{}", e.msg);
