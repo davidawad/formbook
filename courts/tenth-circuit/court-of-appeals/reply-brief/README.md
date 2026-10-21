@@ -86,14 +86,13 @@ The sample is one `.md` file: a YAML frontmatter block followed by the body. The
 
 ## Engines
 
-DOCX (`docx/`): `build-reference.sh` makes `reference.docx` (the same styles as the opening brief: EB Garamond 14 pt, exact 31.4 pt double spacing, 0.5 in first-line indent, letter, 1 in margins). `ca10.lua` writes the cover (one page, no number), the front matter in lower roman, the body in arabic from 1, the signature block, and the certificates (compliance, digital submission when `digital_submission: true`, service).
+DOCX (`docx/`): `reference.xml` holds the Word styles, from which fb render builds `reference.docx` (`tools/fb/src/docxref.rs`; Times New Roman 14 pt, as the typst template, exact 31.4 pt double spacing, 0.5 in first-line indent, letter, 1 in margins). `ca10.lua` writes the cover (one page, no number), the front matter in lower roman, the body in arabic from 1, the signature block, and the certificates (compliance, digital submission when `digital_submission: true`, service). The contents and authorities pages come from fb render's multi-pass docx engine (`tools/fb/src/docxpass.rs`, as ca9): the filter writes a needle for every heading and citation, fb render finds them in the LibreOffice PDF and renders again until the pages settle (fb-595.63).
 
-- Matches the typst output: 13 pages (typst: 13); footer numbers i to iii, then 1 to 9; cover layout (case number, court, caption with "v." except before a `no-v` side, proceeding, D.C. number and judge, brief title, counsel with the telephone on the last group); the body; the certificate of compliance word count (1,641, same as typst); the certificate of service and the signature grid.
-- Differs (tier 2, not chased): headings sit lower at the top of a page; cover rules and spacing are fixed, not fitted; line breaks differ in places; the contents and authorities have no dot leaders.
-- BLOCKED `TOC` (contents, page column): page numbers need a field update in Word or LibreOffice, which this pipeline does not do.
-- BLOCKED `TOA` (table of authorities, "Page(s)" column): same reason.
-- Certificate of compliance, item 2: the typst output prints the typesetting program ("using Typst 0.15.0"). The docx prints no program name ("a proportionally spaced typeface, EB Garamond"); the filer must name the word processor it used. Not a page-count item, but the certificate is incomplete until the filer fills it in.
-- `sh tools/check.sh <court-dir> --engine docx` fails: the court folder has no `checks.yaml` (Gate 1 cannot run). Nothing was edited to pass it.
+- Matches the typst output: 14 pages (typst: 14); footer numbers i to iii, then 1 to 10; cover layout (case number, court, caption with "v." except before a `no-v` side, proceeding, D.C. number and judge, brief title, counsel with the telephone on the last group); the body; the certificate of compliance word count (1,641, same as typst); the certificate of service and the signature grid.
+- Differs (tier 2, not chased): headings sit lower at the top of a page; cover rules and spacing are fixed, not fitted; line breaks differ in places.
+- `TOC`, `TOA`: page numbers and dot leaders, held in a page column (right indent) with the dot tab inside the margin (docs/DOCX.md, lessons from ca9). Word may paginate slightly differently from the LibreOffice PDF the numbers come from.
+- Certificate of compliance, item 2: the typst output prints the typesetting program ("using Typst 0.15.0"). The docx prints no program name ("a proportionally spaced typeface, Times New Roman"); the filer must name the word processor it used. Not a page-count item, but the certificate is incomplete until the filer fills it in.
+- `sh tools/check.sh courts/tenth-circuit/court-of-appeals/reply-brief --engine docx`: RESULT 16 checks passed, 0 failed (fb-595.63, 2026-10-21; TNR-EMBEDDED, DEF-FONT-002 and DEF-TOC-001 failed before). Every page of both `.docx.pdf` samples (14 pages each) was viewed; the signature block is kept together (Gap Sig keeps with the next line).
 
 ## Verification pass 2026-10-16 (fb-595.26.10)
 
