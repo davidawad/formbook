@@ -254,3 +254,20 @@ fn region_masks_apply_to_the_render() {
     refresh(&mut us);
     assert!(diff_measured(&ex, &us, &tol()).pass);
 }
+
+#[test]
+fn content_mode_ignores_the_frame_and_reports_g0_and_g2() {
+    let ex = doc(&[&["one two three", "four five"]]);
+    // Same words, different line breaks and a shifted frame: content passes.
+    let mut us = doc(&[&["one two", "three four five"]]);
+    if let Some(f) = us.pages[0].frame.as_mut() {
+        f.left += 5.0;
+    }
+    let (g0, g2) = diff_content(&ex, &us, &Tol::default());
+    assert!(g0.is_empty() && g2.is_empty(), "{g0:?} {g2:?}");
+    // A dropped word and an extra page are both reported, independently.
+    let us = doc(&[&["one two three", "five"], &[]]);
+    let (g0, g2) = diff_content(&ex, &us, &Tol::default());
+    assert_eq!(g0[0], "page count: exemplar 1, ours 2 (+1)");
+    assert!(g2[0].contains("missing 'four'"), "{g2:?}");
+}

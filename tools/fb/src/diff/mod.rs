@@ -184,11 +184,48 @@ pub fn render_report(r: &Report, tol: &Tol) -> String {
     s
 }
 
+/// `--content`: G0 and G2 only, each run whatever the other says (G1, G3, G4 are not run). This checks
+/// a transcription (every word, in order, page count and size) before the layout can match.
+pub fn diff_content(ex: &Measured, us: &Measured, tol: &Tol) -> (Vec<String>, Vec<String>) {
+    let mut us = us.clone();
+    mask_render(ex, &mut us);
+    let mut g0 = geom::g0(ex, &us, tol);
+    g0.truncate(LIST);
+    let g2 = content::g2(&content::tokens(ex), &content::tokens(&us), LIST);
+    (g0, g2)
+}
+
+fn content_main(ex: &Path, us: &Path) -> Res<ExitCode> {
+    let tol = Tol::load();
+    let (g0, g2) = diff_content(&measure::load(ex)?, &measure::load(us)?, &tol);
+    for (g, what, f) in [("G0", "page count and size", &g0), ("G2", "content and order", &g2)] {
+        println!("{g} {:<7} {what}", if f.is_empty() { "PASS" } else { "FAIL" });
+        for x in f {
+            println!("  {x}");
+        }
+    }
+    let first = g0.first().map(|f| ("G0", f)).or(g2.first().map(|f| ("G2", f)));
+    match first {
+        None => println!("RESULT: CONTENT PASS (G0, G2)"),
+        Some((g, f)) => println!("RESULT: CONTENT FAIL at {g}: {f}"),
+    }
+    Ok(if first.is_none() {
+        ExitCode::SUCCESS
+    } else {
+        ExitCode::from(1)
+    })
+}
+
 pub fn main(args: &[String]) -> Res<ExitCode> {
+    if let [flag, ex, us] = args {
+        if flag == "--content" {
+            return content_main(Path::new(ex), Path::new(us));
+        }
+    }
     let [ex, us] = args else {
         return Err(fail(
             2,
-            "usage: fb diff <exemplar.pdf|measured.json> <render.pdf|measured.json>",
+            "usage: fb diff [--content] <exemplar.pdf|measured.json> <render.pdf|measured.json>",
         ));
     };
     let r = diff_paths(Path::new(ex), Path::new(us))?;
