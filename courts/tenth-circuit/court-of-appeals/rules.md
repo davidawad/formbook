@@ -1,6 +1,6 @@
 # Tenth Circuit Court of Appeals: opening, answering and reply briefs
 
-Alias `ca10`. Scope: appellant's opening briefs, appellee's answering briefs and reply briefs. Verified against Federal Rules of Appellate Procedure (effective December 1, 2025) and Tenth Circuit Rules (effective January 1, 2026), court-posted PDF, on 2026-10-20.
+Alias `ca10`. Scope: appellant's opening briefs, appellee's answering briefs and reply briefs. Verified against Federal Rules of Appellate Procedure (effective December 1, 2025) and Tenth Circuit Rules (effective January 1, 2026), court-posted PDF, on 2026-10-21. Re-check after each annual rules update and at least annually.
 
 ## Sources
 
@@ -17,7 +17,7 @@ Appellant's principal brief. Rules marked FRAP 32 apply to every brief in this c
 |---|---|---|---|
 | CA10-FORM-001 | 8½ × 11 inch paper; text double-spaced; quotations over two lines may be indented and single-spaced; headings and footnotes may be single-spaced. | FRAP 32(a)(4). | M |
 | CA10-FORM-002 | Margins at least 1 inch on all four sides; page numbers may sit in the margins and no other text may. | FRAP 32(a)(4). | M |
-| CA10-FORM-003 | Proportionally spaced serif face, 14-point or larger (sans-serif allowed in headings and captions). Deviates from the 12-point default: the national floor is 14 point. 10th Cir. R. 32(A) prefers 14 and accepts 13; footnotes match body size. | FRAP 32(a)(5)(A); 10th Cir. R. 32(A). | M |
+| CA10-FORM-003 | Proportionally spaced serif face, 14-point or larger; sans-serif is allowed in headings and captions. The local rule says the court prefers 14-point type as required by FRAP 32(a)(5)(A), but accepts 13-point type; footnotes should match body size. | FRAP 32(a)(5)(A); 10th Cir. R. 32(A). | M |
 | CA10-FORM-004 | If monospaced, no more than 10½ characters per inch. | FRAP 32(a)(5)(B). | M |
 | CA10-FORM-005 | Plain roman type; italics or boldface for emphasis only; case names italicized or underlined. | FRAP 32(a)(6). | M |
 | CA10-FORM-006 | Front cover is blue. Shows case number centered at top, court name, case title, nature of proceeding and court or agency below, brief title naming the party, counsel's name, office address and telephone. | FRAP 32(a)(2)(A)-(F). | M |
