@@ -1,6 +1,8 @@
 //! Starting a filing from the library: `fb find`, `fb new-filing`, `fb render-filing` (were
 //! skills/formbook/scripts/find.sh, new-filing.sh and render-filing.sh).
 //!   fb find <alias|text> [doctype]               court folders and the doc types that have a typst template
+//!   fb new <alias> <doctype> <brief.md>          copy the contract sample to a new markdown file
+//!   fb build <alias> <doctype> <brief.md> [pdf]  render an external markdown filing with repo fonts
 //!   fb new-filing <alias> <doctype> <out-dir>    copy a doc type's first sample input to <out-dir>/filing.md
 //!   fb render-filing <doctype-dir> <filing.md> [out.pdf]   render a markdown file that lives outside the court folder
 use crate::{fail, repo_root, Res};
@@ -178,6 +180,117 @@ pub fn find(args: &[String]) -> Res<ExitCode> {
     Ok(ExitCode::SUCCESS)
 }
 
+/// Resolve an exact alias and doc type to its template folder.
+fn template_dir(root: &Path, alias: &str, dt: &str) -> Res<String> {
+    let index = load_index(root)?;
+    let lines = find_lines(root, &index, alias, "");
+    let canonical_alias = index["legacy_aliases"][alias].as_str().unwrap_or(alias);
+    if lines
+        .first()
+        .and_then(|line| line.split('\t').next())
+        .is_none_or(|found| !found.eq_ignore_ascii_case(canonical_alias))
+    {
+        return Err(fail(
+            1,
+            format!("fb: no exact court alias '{alias}' (run: just find {alias})"),
+        ));
+    }
+    let sel: Vec<String> = lines
+        .iter()
+        .filter(|line| line.starts_with("  doctype:"))
+        .filter_map(|line| {
+            let mut columns = line.split('\t');
+            let rel = columns.next()?.strip_prefix("  doctype: ")?;
+            let folder = columns.nth(1)?;
+            let folder_path = root.join(folder);
+            let is_named_folder = rel == dt || rel.ends_with(&format!("/{dt}"));
+            let is_root_sample = rel == "."
+                && inputs(&folder_path).iter().any(|sample| {
+                    let Some(name) = sample.file_name() else {
+                        return false;
+                    };
+                    let name = name.to_string_lossy();
+                    crate::layout::id_of(crate::layout::INPUT, &name)
+                        .and_then(crate::layout::split_id)
+                        .is_some_and(|(doctype, _)| doctype == dt)
+                });
+            (is_named_folder || is_root_sample).then(|| folder.to_string())
+        })
+        .collect();
+    match sel.as_slice() {
+        [one] => Ok(one.clone()),
+        [] => Err(fail(
+            1,
+            format!("fb: no doc type '{dt}' for '{alias}' (run: just find {alias})"),
+        )),
+        many => Err(fail(
+            1,
+            format!(
+                "fb: '{dt}' matches several doc types for '{alias}'; pass the exact name:\n{}",
+                many.join("\n")
+            ),
+        )),
+    }
+}
+
+/// `fb new <alias> <doctype> <brief.md>`: copy the doc type's contract sample to a new file.
+/// Refuse to overwrite an existing file so a user's draft cannot be lost.
+pub fn new(args: &[String]) -> Res<ExitCode> {
+    let [alias, dt, output] = args else {
+        return Err(fail(2, "usage: fb new <alias> <doctype> <brief.md>"));
+    };
+    let root = repo_root()?;
+    let folder = template_dir(&root, alias, dt)?;
+    let out = Path::new(output);
+    let src = copy_contract_sample(&root, &folder, out)?;
+    println!("template : {folder}");
+    println!("starting : {} -> {}", src.display(), out.display());
+    println!("build    : just build {alias} {dt} {}", out.display());
+    println!("note     : replace every party, fact, and citation; read {folder}/README.md for the contract");
+    Ok(ExitCode::SUCCESS)
+}
+
+fn copy_contract_sample(root: &Path, folder: &str, out: &Path) -> Res<PathBuf> {
+    let src = inputs(&root.join(folder))
+        .into_iter()
+        .next()
+        .ok_or_else(|| {
+            fail(
+                1,
+                format!("fb new: {folder} has no usage/INPUT-*.md contract sample"),
+            )
+        })?;
+    if out.exists() {
+        return Err(fail(
+            1,
+            format!("fb new: refusing to overwrite {}", out.display()),
+        ));
+    }
+    if let Some(parent) = out.parent().filter(|p| !p.as_os_str().is_empty()) {
+        std::fs::create_dir_all(parent)
+            .map_err(|e| fail(2, format!("fb new: {}: {e}", parent.display())))?;
+    }
+    std::fs::copy(&src, out).map_err(|e| fail(2, format!("fb new: {}: {e}", out.display())))?;
+    Ok(src)
+}
+
+/// `fb build <alias> <doctype> <brief.md> [out.pdf]`: render via the pinned engine configuration.
+pub fn build(args: &[String]) -> Res<ExitCode> {
+    if args.len() < 3 || args.len() > 4 {
+        return Err(fail(
+            2,
+            "usage: fb build <alias> <doctype> <brief.md> [out.pdf]",
+        ));
+    }
+    let root = repo_root()?;
+    let folder = template_dir(&root, &args[0], &args[1])?;
+    let mut render_args = vec![folder, args[2].clone()];
+    if let Some(out) = args.get(3) {
+        render_args.push(out.clone());
+    }
+    render_filing(&render_args)
+}
+
 /// The template folders in `fb find` output lines.
 pub fn folders(lines: &[String]) -> Vec<String> {
     lines
@@ -304,6 +417,8 @@ mod tests {
             "courts/c1/typst",
             "courts/c1/usage",
             "courts/c2/x/typst",
+            "courts/c3/typst",
+            "courts/c3/usage",
         ] {
             std::fs::create_dir_all(r.join(d)).unwrap();
         }
@@ -313,11 +428,14 @@ mod tests {
             "courts/c1/opening-brief/usage/INPUT-opening-brief.md",
             "courts/c1/opening-brief/usage/INPUT-opening-brief-2.md",
             "courts/c1/usage/INPUT-a.md",
+            "courts/c3/typst/main.typ",
+            "courts/c3/usage/INPUT-opening-brief.md",
         ] {
             std::fs::write(r.join(f), "x").unwrap();
         }
         let idx = json!({"courts": {"ca1": {"path": "courts/c1", "name": "Court of Appeals One"},
-                                    "ca2": {"path": "courts/c2", "name": "Two"}},
+                                    "ca2": {"path": "courts/c2", "name": "Two"},
+                                    "ca3": {"path": "courts/c3", "name": "Three"}},
                          "legacy_aliases": {"old1": "ca1"}});
         (t, idx)
     }
@@ -374,6 +492,31 @@ mod tests {
         let (t, idx) = tree();
         let l = find_lines(t.path(), &idx, "ca1", "opening-brief");
         assert_eq!(folders(&l), ["courts/c1/opening-brief"]);
+    }
+
+    #[test]
+    fn new_resolves_alias_and_copies_the_contract_without_overwriting() {
+        let (t, idx) = tree();
+        let data = t.path().join("data");
+        std::fs::create_dir_all(&data).unwrap();
+        std::fs::write(data.join("index.json"), idx.to_string()).unwrap();
+        assert_eq!(
+            template_dir(t.path(), "ca1", "opening-brief").unwrap(),
+            "courts/c1/opening-brief"
+        );
+        assert_eq!(
+            template_dir(t.path(), "ca3", "opening-brief").unwrap(),
+            "courts/c3"
+        );
+        assert!(template_dir(t.path(), "ca", "opening-brief").is_err());
+
+        let out = t.path().join("out/brief.md");
+        let src = copy_contract_sample(t.path(), "courts/c1/opening-brief", &out).unwrap();
+        assert_eq!(
+            std::fs::read_to_string(src).unwrap(),
+            std::fs::read_to_string(&out).unwrap()
+        );
+        assert!(copy_contract_sample(t.path(), "courts/c1/opening-brief", &out).is_err());
     }
 
     #[test]

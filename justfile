@@ -76,6 +76,14 @@ contribute *ARGS:
 find *ARGS:
     {{fb}} find {{ARGS}}
 
+# start a filing from the selected doc type's contract sample
+new ALIAS DOCTYPE MD:
+    {{fb}} new {{ALIAS}} {{DOCTYPE}} {{MD}}
+
+# build an external markdown filing with the selected court template
+build ALIAS DOCTYPE MD *OUT:
+    {{fb}} build {{ALIAS}} {{DOCTYPE}} {{MD}} {{OUT}}
+
 # start a filing from a doc type's sample input
 new-filing ALIAS DOCTYPE OUT:
     {{fb}} new-filing {{ALIAS}} {{DOCTYPE}} {{OUT}}

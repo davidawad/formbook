@@ -46,6 +46,8 @@ Needs `typst`, poppler, `jq`, `just` and `cargo` (it builds `tools/fb`, which ru
 ```sh
 export PATH="$HOME/.local/share/formbook/env/bin:$PATH"                 # if you used bootstrap.sh
 just find ca1                                   # court folder and the doc types that have a template
+just new ca1 opening-brief ./brief.md            # start from that doc type's markdown contract sample
+just build ca1 opening-brief ./brief.md          # render with the court template and pinned font flags
 just new-filing ca1 opening-brief ./my-filing   # copies the sample markdown to ./my-filing/filing.md
 # edit ./my-filing/filing.md: replace every party, fact and cite
 just render-filing courts/first-circuit/court-of-appeals/opening-brief ./my-filing/filing.md ./my-filing/filing.pdf

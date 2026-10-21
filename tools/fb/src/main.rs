@@ -60,9 +60,11 @@ fn main() -> ExitCode {
         "check-selftest" => selftest::main(rest),
         "selftest" => selftest::main(rest),
         "find" => filing::find(rest),
+        "new" => filing::new(rest),
+        "build" => filing::build(rest),
         "new-filing" => filing::new_filing(rest),
         "render-filing" => filing::render_filing(rest),
-        _ => Err(fail(2, "usage: fb check|eval|selftest|check-selftest|bootstrap|showcase|render|render-latex|render-filing|overlay|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|measure|diff|fetch|lint|match-stamp|diff-selftest|usage ...")),
+        _ => Err(fail(2, "usage: fb check|eval|selftest|check-selftest|bootstrap|showcase|render|render-latex|build|new|render-filing|overlay|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|measure|diff|fetch|lint|match-stamp|diff-selftest|usage ...")),
     };
     result.unwrap_or_else(|e| {
         eprintln!("{}", e.msg);
