@@ -2,6 +2,8 @@
 
 Alias `almb`. Scope: adversary-proceeding complaints and motion briefs. Verified against the Local Rules of the United States Bankruptcy Court for the Middle District of Alabama (PDF "ALMB Local Rules, April 1, 2024") and the Federal Rules of Bankruptcy Procedure (Dec. 1, 2024 edition as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Note: the local rules state no typeface, point size, margin, or page limit for motions or complaints that was located. FRBP 9004 requires legibility and a caption, and nothing more on form.
 
 ## Sources
