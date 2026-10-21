@@ -2,6 +2,8 @@
 
 Alias `flsb`. Scope: adversary-proceeding complaints and motion briefs. Verified against the Local Rules of the United States Bankruptcy Court for the Southern District of Florida (PDF "2026 Local Rules", effective June 1, 2026) and the Federal Rules of Bankruptcy Procedure (Dec. 1, 2024 edition as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 ## Sources
 
 | Tag | Source | URL |
