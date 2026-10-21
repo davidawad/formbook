@@ -13,7 +13,7 @@ Rules checked October 14, 2026. The official [Texas Rules of Appellate Procedure
 
 The markdown file begins with YAML frontmatter: `case_number`, `style_petitioner`, `style_respondent`, `filing_party`, `brief_title`, `appeal_from`, `lead_counsel`, `counsel_lines`, and optional `filed_date`. The body supplies the document-specific required sections and text, including tables, signature, certificate of compliance, and proof of service.
 
-The template builds the cover and renders markdown with vendored cmarker. Body text is 14-point, double-spaced (leading calibrated to a 32.2 pt baseline pitch in EB Garamond). Headings, signature and address blocks (hard line breaks), and table-of-contents or index entries (dot leaders) are single-spaced; short single-spaced blocks do not break across pages. Footnotes are written `[^1]` with a `[^1]: text` definition, rendered at 12 point. The template does not create a table of contents or authorities.
+The template builds the cover and renders markdown with vendored cmarker. Body text is 14-point, double-spaced (leading calibrated to a 32.2 pt baseline pitch in EB Garamond). Headings, signature and address blocks (hard line breaks), and table-of-contents or index entries (dot leaders) are single-spaced; short single-spaced blocks do not break across pages. A one-line entry written `title ..... page` is set as a table row: the template draws its own dot leader (the typed dots only mark the entry; Gate 0 reads any leader of four or more dots as one) and keeps the page reference on the title's last line, wrapped titles hanging. Footnotes are written `[^1]` with a `[^1]: text` definition, rendered at 12 point. The template does not create a table of contents or authorities.
 
 Build from the repository root:
 

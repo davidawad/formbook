@@ -1,4 +1,5 @@
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../../../lib/typst/tables.typ": leader-row
 
 // Texas Rules of Appellate Procedure 9.4 (form), 9.5 (service), 68.3-68.4 (petition contents).
 // Text is 14-point and double-spaced (9.4(d)-(e)); headings, the cover, and the identity block
@@ -12,6 +13,13 @@
 // blocks) or a table-of-contents or index dot leader. Consecutive blocks of the same kind are
 // rendered together so that numbered lists keep their numbers.
 #let single-block(chunk) = chunk.contains("\\\n") or chunk.contains("....")
+
+// A table-of-contents or index entry: one line, "title ..... page". The dots typed in the markdown only mark
+// the entry; the template sets its own leader and keeps the page reference level with the title's last line
+// (DEF-TOC-001), so a long title wraps under a hanging indent and the page never wraps alone.
+#let leader-entry = regex("^([^\\n]*?[^\\s.]\\S*)\\s*\\.{4,}\\s*([^\\s.][^\\n]*?)\\s*$")
+#let entry-hang = 0.5in
+#let entry-min-leader = 1.5em   // at least four dots: a Gate 0 leader is four or more dots
 
 // Footnotes: each definition line "[^n]: text" is removed from the body, and each reference
 // "[^n]" becomes a token that the show rule below turns into a footnote with the rendered text.
@@ -109,7 +117,18 @@
       let keep = text.len() < 700
       block(breakable: not keep, {
         set par(leading: single-leading, first-line-indent: 0pt)
-        cmarker.render(text, smart-punctuation: false, raw-typst: false)
+        // runs of ordinary blocks are rendered together (list numbering); each leader entry on its own
+        let pending = ()
+        for chunk in chunks {
+          let m = chunk.trim().match(leader-entry)
+          if m == none { pending.push(chunk); continue }
+          if pending.len() > 0 { cmarker.render(pending.join("\n\n"), smart-punctuation: false, raw-typst: false) }
+          pending = ()
+          let inline(s) = cmarker.render(s, smart-punctuation: false, raw-typst: false)
+          block(leader-row(inline(m.captures.at(0)), inline(m.captures.at(1)), hang: entry-hang,
+            dot-gap: 0pt, lead-gap: 0.25em, min-leader: entry-min-leader))
+        }
+        if pending.len() > 0 { cmarker.render(pending.join("\n\n"), smart-punctuation: false, raw-typst: false) }
       })
     } else {
       cmarker.render(text, smart-punctuation: false, raw-typst: false)
