@@ -7,7 +7,7 @@ Courts under `courts/third-circuit` (18).
 |---|---|---|---|---|---|---:|
 | [Court of Appeals for the Third Circuit](court-of-appeals) | `ca3` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Delaware](delaware/federal/bankruptcy-district) | `deb` | up for review | — | — | — | 14 |
-| [United States District Court for the District of Delaware](delaware/federal/district) | `ded` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Delaware](delaware/federal/district) | `ded` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. New Jersey](new-jersey/federal/bankruptcy-district) | `njb` | up for review | — | — | — | 14 |
 | [District Court, D. New Jersey](new-jersey/federal/district) | `njd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Pennsylvania](pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | — | — | — | 14 |

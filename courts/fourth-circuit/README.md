@@ -15,11 +15,11 @@ Courts under `courts/fourth-circuit` (29).
 | [District Court, M.D. North Carolina](north-carolina/federal/middle-district) | `ncmd` | up for review | — | — | — | 14 |
 | [District Court, W.D. North Carolina](north-carolina/federal/western-district) | `ncwd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. South Carolina](south-carolina/federal/bankruptcy-district) | `scb` | up for review | — | — | — | 14 |
-| [District Court, D. South Carolina](south-carolina/federal/district) | `scd` | in progress | — | — | — | 14 |
+| [District Court, D. South Carolina](south-carolina/federal/district) | `scd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Virginia](virginia/federal/bankruptcy-eastern-district) | `vaeb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Virginia](virginia/federal/bankruptcy-western-district) | `vawb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Virginia](virginia/federal/eastern-district) | `vaed` | up for review | — | — | — | 14 |
-| [District Court, W.D. Virginia](virginia/federal/western-district) | `vawd` | in progress | — | — | — | 14 |
+| [District Court, W.D. Virginia](virginia/federal/western-district) | `vawd` | up for review | — | — | — | 14 |
 | [United States District Court, N.D. West Virginia](west-virginia/federal/bankruptcy-northern-district) | `wvnb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. West Virginia](west-virginia/federal/bankruptcy-southern-district) | `wvsb` | up for review | — | — | — | 14 |
 | [District Court, N.D. West Virginia](west-virginia/federal/northern-district) | `wvnd` | up for review | — | — | — | 14 |

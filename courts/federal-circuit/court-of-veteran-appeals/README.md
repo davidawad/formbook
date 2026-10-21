@@ -5,7 +5,7 @@
 - CourtListener: [cavc](https://www.courtlistener.com/?court=cavc)
 - Level: national
 - Circuit: `cafc`
-- Status: **in progress** (14%); manual status in `court.json`: `todo`
+- Status: **up for review** (14%); manual status in `court.json`: `todo`
 
 ## Checklist
 
@@ -24,12 +24,12 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 ## Doc folders
 
-1 of 2 doc folders with an INPUT pass the typst eval.
+2 of 2 doc folders with an INPUT pass the typst eval.
 
 | Doc folder | Status | Eval |
 |---|---|---|
 | [answering-brief](answering-brief) | up for review | pass |
-| [opening-brief](opening-brief) | in progress | not passing |
+| [opening-brief](opening-brief) | up for review | pass |
 
 ## Folders
 

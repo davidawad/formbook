@@ -7,7 +7,7 @@ Courts under `courts/eighth-circuit/arkansas` (6).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, E.D. Arkansas](federal/bankruptcy-eastern-district) | `areb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Arkansas](federal/bankruptcy-western-district) | `arwb` | up for review | — | — | — | 14 |
-| [United States District Court for the Eastern District of Arkansas](federal/eastern-district) | `ared` | in progress | — | — | — | 14 |
+| [United States District Court for the Eastern District of Arkansas](federal/eastern-district) | `ared` | up for review | — | — | — | 14 |
 | [United States District Court for the Western District of Arkansas](federal/western-district) | `arwd` | up for review | — | — | — | 14 |
 | [Arkansas Court of Appeals](state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 29 |
 | [Arkansas Supreme Court](state/supreme-court) | `ark` | in progress | — | — | — | 29 |
