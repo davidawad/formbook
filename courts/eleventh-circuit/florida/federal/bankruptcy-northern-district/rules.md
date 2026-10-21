@@ -2,6 +2,8 @@
 
 Alias `flnb`. Scope: adversary-proceeding complaints and motion briefs. Verified against the Local Rules of the United States Bankruptcy Court for the Northern District of Florida (PDF "local_rules_02-26-2024", effective February 26, 2024), the district Local Rules of the Northern District of Florida that the bankruptcy rules incorporate (LBR 1(C)), and the Federal Rules of Bankruptcy Procedure (Dec. 1, 2024 edition as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Typeface note: the bankruptcy local rules incorporate the district's Local Rule 5.1(C), which requires at least 14-point font, double spacing, and one-inch margins. The repo default eval (12 pt) is weaker, so the eval must state 14 pt for this court's adversary complaints and motions, subject to LBR 1(C)'s "to the extent applicable" limit.
 
 ## Sources
