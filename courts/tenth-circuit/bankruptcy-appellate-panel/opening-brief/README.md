@@ -3,7 +3,7 @@
 - Court: `bap10`, United States Bankruptcy Appellate Panel of the Tenth Circuit (`courts/tenth-circuit/bankruptcy-appellate-panel/`)
 - Doc type: `opening-brief`. Rule basis: Fed. R. Bankr. P. Part VIII and 10th Cir. BAP Local Rules (see Governing rules).
 - Exemplar: **none**. BLOCKED: no exemplar. Searched WebSearch (standard and extended), the CourtListener API (`court=bap10` RECAP: 0 documents; opinions only), Tenth Circuit RECAP (BAP-origin appeals are ca10 filings, not BAP filings), Justia dockets; only the court's own pro se guide sample brief was found (not a filing). Searches are recorded in usage/SOURCE.md.
-- Render: `usage/OUTPUT-opening-brief.typst.pdf` (typst, vendored EB Garamond only). Overlay: **fail**, no exemplar PDF (`tools/overlay.sh` exits 1: "no exemplar pdf in exemplars").
+- Render: `usage/OUTPUT-opening-brief.typst.pdf` (typst, vendored EB Garamond only). Overlay: **fail**, no exemplar PDF (`tools/overlay.sh` exits 1: "no FILED-EXAMPLE-opening-brief.pdf in usage").
 - Sample: `usage/INPUT-opening-brief.md`. Fictional parties, real rule citations. It is a generic sample built to exercise the template, not a transcription of any filing.
 - Status: template built and rendered; every page reviewed (see Page review). Not reviewed by a human; `court.json` untouched (status not set).
 
@@ -15,10 +15,10 @@
 | `typst/bap10-opening-brief.typ` | Template. Parameter block at the top (`doc-kind`, `word-limit`, `required-sections`, `needs-standard-of-review`); the rest is the shared body, identical in the three doc-type copies. |
 | `usage/INPUT-opening-brief.md` | Markdown contract sample (frontmatter + body). |
 | `usage/OUTPUT-opening-brief.typst.pdf` | `sh tools/render.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-opening-brief.md` |
-| `usage/OVERLAY-generic-opening-brief.*` | not produced: no exemplar (see Overlay). |
+| `.overlay/<doc path>/OVERLAY-opening-brief.pdf/.txt` | generated on demand; unavailable until a filed exemplar is stored. |
 | `usage/SOURCE.md` | The search record. No exemplar file. |
 
-File names follow the tools' convention (`INPUT-`/`OUTPUT-`/`OVERLAY-` plus the sample id), so `tools/render.sh` and `tools/overlay.sh` find them without extra arguments.
+Inputs and outputs follow the `usage/` naming convention. Overlays are written to the gitignored `.overlay/` tree and are not stored in `usage/`.
 
 ## Governing rules
 
@@ -50,7 +50,7 @@ Primary source: *Bankruptcy Rule and BAP Local Rules (eff. 1.1.2026)*, the combi
 
 ## Overlay
 
-Not produced. `sh tools/overlay.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief generic-opening-brief` exits 1 with "no exemplar pdf in `exemplars`", because there is no filed document to overlay. The red/blue test cannot run until an exemplar is stored. Nothing else in this folder stands in for it.
+Not produced. `sh tools/overlay.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief opening-brief` exits 1 with "no FILED-EXAMPLE-opening-brief.pdf in usage", because there is no filed document to overlay. The red/blue test cannot run until an exemplar is stored. Nothing else in this folder stands in for it.
 
 ## Page review (Gate 2)
 
@@ -95,12 +95,12 @@ On the first render the TOC repeated the heading numbers ("I. I. ...") and a lon
 ## Build and check
 
     sh tools/render.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-opening-brief.md
-    sh tools/overlay.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief generic-opening-brief   # fails until an exemplar exists
+    sh tools/overlay.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief opening-brief   # fails until an exemplar exists
 
 ## Re-check 2026-10-15
 
 - Exemplar: still **none** (BLOCKED: no exemplar). The searches of 2026-10-15 are logged at the end of `usage/SOURCE.md`. The BAP's own Briefs page posts no filed brief, only court-authored samples and forms.
-- Render: `sh tools/render.sh` exit 0, no typst warnings, 11 pages. The output is `/work/artifacts/bap10/OUTPUT-generic-opening-brief.pdf`, not `usage/`: the snapshot carries no PDFs, so the existing `usage/` names were not regenerated.
+- Render: `sh tools/render.sh` exit 0, no typst warnings, 11 pages. The output is `/work/artifacts/bap10/OUTPUT-opening-brief.pdf`, not `usage/`: the snapshot carries no PDFs, so the existing `usage/` names were not regenerated.
 - Overlay: `sh tools/overlay.sh` exit 1. It finds no OUTPUT in `usage/`, and there is no exemplar to overlay even if there were. Not produced.
 - Pages reviewed: 11 of 11. Every page was rasterised at 60 dpi and viewed on 2026-10-15. The Page review table above matches that render. No template change was made: with no exemplar, no open choice can be settled.
 ## Engines
@@ -109,7 +109,14 @@ On the first render the TOC repeated the heading numbers ("I. I. ...") and a lon
 
 - Matches the typst form: letter, 1 in margins; EB Garamond 14 pt body, footnotes and headings; double-spaced body (Word "double", auto 480) with a 0.5 in first-line indent; single-spaced headings, quotations and footnotes; cover with no page number; front matter in lowercase roman; body in arabic from 1 (three sections); Argument point headings centered; heading labels (I. A. 1. a. in the Argument, A. 1. a. (1) elsewhere); word count and length check on the same markdown rule as typst (limit: 13,000 words); certificate of compliance; statement of related cases as the last page.
 - Differs from typst: heading labels are typed text, not list numbering; the certificate checkbox is "[X]", not a drawn box; the front matter and body are separate Word sections, and a cover that fills the page may push its empty section-break paragraph onto a new page in Word or LibreOffice; the required-section order check runs in typst only (not repeated in the Lua filter); no keep-with-signature rule.
-- BLOCKED, docx.pdf gates (Gates 0 and 1 on `OUTPUT-bap10-opening-brief-generic.docx.pdf`): LibreOffice (`soffice`) is not installed on this box, so no `.docx.pdf` was made and no page was rendered or viewed (pages reviewed: 0).
+- BLOCKED, docx.pdf gates (Gates 0 and 1 on `OUTPUT-opening-brief.docx.pdf`): LibreOffice (`soffice`) is not installed on this box, so no `.docx.pdf` was made and no page was rendered or viewed (pages reviewed: 0).
 - BLOCKED, table of contents page numbers: the TOC is a TOC field whose cached entries have no page numbers; Word or LibreOffice fills them only after a field update. LibreOffice needs an update on load (see docs/DOCX.md).
 - BLOCKED, table of authorities page references: no page numbers are written (a TOA field is not honored by LibreOffice, and no first-pass page numbers are generated). The authorities list itself is complete.
 - Not checked here: no Word open test (no repair prompt), font embedding (EB Garamond must be installed on the reader's machine; the file names it), and Word vs LibreOffice pagination of the cover (one page is typst-checked only).
+
+## Exemplar batch re-check 2026-10-21
+
+- **BLOCKED: no exemplar.** Searched exact-phrase web queries for opening briefs, the BAP's official briefs page, CourtListener, and opinions/dockets for CO-19-043, 24-19, and 25-15. The found Rusk opening brief was filed in the Tenth Circuit Court of Appeals, not the BAP; the other results were opinions or court-authored material. Details are in `usage/SOURCE.md`.
+- Render: **ok**. `sh tools/render.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-opening-brief.md` exited 0 and produced `usage/OUTPUT-opening-brief.typst.pdf` (11 pages; SHA-256 `6a5b1d8a7ab866f39d44fea062ee19384c89a50299ba8fd9ccdf95d942452e72`).
+- Overlay: **fail / unavailable**. `sh tools/overlay.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief opening-brief` exited 1 because `FILED-EXAMPLE-opening-brief.pdf` is absent.
+- Pages reviewed: **11/11**. All pages were rasterized with `pdftoppm -r 60` and viewed: cover; contents; authorities; oral-argument/jurisdiction/issues; case statement and summary; argument pages 1–3; conclusion/signature; compliance certificate; related-cases statement. Page 1's caption block appears crowded in this render; left unchanged because no filed exemplar was found to establish a convention or guide a permitted adjustment.

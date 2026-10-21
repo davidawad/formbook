@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| Exemplar file | none (`usage/SAMPLE-*.pdf` does not exist) |
+| Exemplar file | none (`usage/FILED-EXAMPLE-*.pdf` does not exist) |
 | Searches (2026-10-14, WebSearch) | Standard and extended modes, five queries: "Appellee's Brief" with "Bankruptcy Appellate Panel of the Tenth Circuit" and "BAP No."; "Reply Brief" with BAP No. prefixes (CO, KS, NM, UT, WY); CourtListener RECAP with "BAP" and "Appellant's Opening Brief"; BAP 10th Cir. appellant briefs by state. Results: BAP opinions, the BAP pro se guide, the BAP local rules, and Tenth Circuit orders. No BAP brief. |
 | CourtListener API (2026-10-14, curl) | `courts/bap10` exists. RECAP search `type=r&court=bap10` returns **0 documents** for an empty query and for "opening brief", "reply brief" and "brief" (dockets, `type=d`, also 0). Opinion search `type=o&court=bap10` returns BAP opinions only (e.g. BAP Nos. CO-24-009, UT-99-036), not briefs. Queries for "appellant" and "appellee" were rate-limited (HTTP 429) and were retried without success on the first attempt. |
 | Tenth Circuit RECAP (same API, `court=ca10`) | Dockets for BAP-origin appeals exist (e.g. 24-4 McGann, 25-4 Darger, 26-4021 Lopez; BAP notices of appeal and orders). These are Tenth Circuit filings under FRAP 28, not BAP filings under FRBP 8014, so they are **not used** as exemplars for this court. |
@@ -14,7 +14,7 @@
 | Court-published material (not a filed brief) | https://www.bap10.uscourts.gov/sites/bap10/files/Pro%20Se%20Guide%20Sample%20Brief%20and%20Appendix_0.pdf : "Tenth Circuit Bankruptcy Appellate Panel (BAP) Pro Se Guide", 12 pages, with a sample opening brief and appendix. Its caption ("United States Bankruptcy Appellate Panel of the Tenth Circuit", "BAP No.", "Bankr. No.", "Chapter") and its section order were used for the template. It is a court-authored template, not a filing, so it is NOT an exemplar and is NOT stored here. |
 | Rules source | https://www.bap10.uscourts.gov/sites/bap10/files/clerk/Bankruptcy%20Rule%20and%20BAP%20Local%20Rules%20%28eff.%201.1.2026%29.pdf (BAP Local Rules, Part VIII, eff. 1.1.2026). Fetched 2026-10-14; text extracted with `pdftotext`. |
 
-Next step for a human: a BAP appellate brief can be requested from the BAP Clerk, or found in a PACER/CM-ECF docket for a known BAP number if the appellee filed one there. When one is found, store it as `usage/SAMPLE-<short-case>-<bap-no>-answering-brief.pdf`, fill in this table, and re-run the overlay.
+Next step for a human: a BAP appellate brief can be requested from the BAP Clerk, or found in a PACER/CM-ECF docket for a known BAP number if the appellee filed one there. When one is found, store it as `usage/FILED-EXAMPLE-answering-brief.pdf`, fill in this table, and re-run the overlay.
 
 ## Re-check 2026-10-15 (answering brief, same search)
 
@@ -36,3 +36,15 @@ Render and overlay on the same date: `tools/render.sh` exit 0, no typst warnings
 Still blocked: no public filed answering brief located. Fresh web searches for an appellee/answering brief with Tenth Circuit BAP case identifiers surfaced only BAP opinions, appellate opinions, the court's sample, and a public pro se appellant brief in *Rusk v. Beutler* (BAP No. UT-25-10). The Rusk filing is an appellant's brief and does not establish answering-brief conventions, so it is not stored or used as an answering-brief exemplar. The BAP's publicly hosted decision in that case is an opinion, not a brief.
 
 A direct anonymous CourtListener RECAP API request for `type=r&court=bap10&q=answering brief` and a docket request returned `Anonymous users don't have permission to access the API` on 2026-10-17. The web searches did not surface a public filed answering brief from another accessible source. With no filing to compare, no exemplar-derived transcription or overlay can be made without substituting a different document type.
+
+## Re-check 2026-10-21
+
+Still **BLOCKED: no public filed exemplar**. New searches targeted the court's own docket identifiers and brief titles:
+
+| Source | Result |
+|---|---|
+| Web search: `"Bankruptcy Appellate Panel of the Tenth Circuit" "Appellant's Opening Brief" PDF`, `"BAP No." "Tenth Circuit" "Reply Brief" bankruptcy PDF`, and related exact-phrase queries | Results were BAP opinions and the court's briefs-rules page. No filed answering brief. |
+| BAP briefs page, https://www.bap10.uscourts.gov/filing/briefs | Lists required brief contents, links the rules and forms, and hosts court-authored guidance; no filed briefs are offered. |
+| CourtListener and search results for cited BAP appeals (including CO-19-043, 24-19, and 25-15) | Found opinions discussing briefs, not the briefs themselves. No publicly downloadable answering brief. |
+
+The court-authored sample and opinions are not filed answering briefs and were not substituted. No `FILED-EXAMPLE` file or transcription was created.

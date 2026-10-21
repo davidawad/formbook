@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| Exemplar file | none (`usage/SAMPLE-*.pdf` does not exist) |
+| Exemplar file | none (`usage/FILED-EXAMPLE-*.pdf` does not exist) |
 | Searches (2026-10-14, WebSearch) | Standard and extended modes, five queries: "Appellee's Brief" with "Bankruptcy Appellate Panel of the Tenth Circuit" and "BAP No."; "Reply Brief" with BAP No. prefixes (CO, KS, NM, UT, WY); CourtListener RECAP with "BAP" and "Appellant's Opening Brief"; BAP 10th Cir. appellant briefs by state. Results: BAP opinions, the BAP pro se guide, the BAP local rules, and Tenth Circuit orders. No BAP brief. |
 | CourtListener API (2026-10-14, curl) | `courts/bap10` exists. RECAP search `type=r&court=bap10` returns **0 documents** for an empty query and for "opening brief", "reply brief" and "brief" (dockets, `type=d`, also 0). Opinion search `type=o&court=bap10` returns BAP opinions only (e.g. BAP Nos. CO-24-009, UT-99-036), not briefs. Queries for "appellant" and "appellee" were rate-limited (HTTP 429) and were retried without success on the first attempt. |
 | Tenth Circuit RECAP (same API, `court=ca10`) | Dockets for BAP-origin appeals exist (e.g. 24-4 McGann, 25-4 Darger, 26-4021 Lopez; BAP notices of appeal and orders). These are Tenth Circuit filings under FRAP 28, not BAP filings under FRBP 8014, so they are **not used** as exemplars for this court. |
@@ -14,7 +14,7 @@
 | Court-published material (not a filed brief) | https://www.bap10.uscourts.gov/sites/bap10/files/Pro%20Se%20Guide%20Sample%20Brief%20and%20Appendix_0.pdf : "Tenth Circuit Bankruptcy Appellate Panel (BAP) Pro Se Guide", 12 pages, with a sample opening brief and appendix. Its caption ("United States Bankruptcy Appellate Panel of the Tenth Circuit", "BAP No.", "Bankr. No.", "Chapter") and its section order were used for the template. It is a court-authored template, not a filing, and it has no reply brief, so it is NOT an exemplar and is NOT stored here. |
 | Rules source | https://www.bap10.uscourts.gov/sites/bap10/files/clerk/Bankruptcy%20Rule%20and%20BAP%20Local%20Rules%20%28eff.%201.1.2026%29.pdf (BAP Local Rules, Part VIII, eff. 1.1.2026). Fetched 2026-10-14; text extracted with `pdftotext`. |
 
-Next step for a human: a BAP appellate brief can be requested from the BAP Clerk, or found in a PACER/CM-ECF docket for a known BAP number if the appellant filed one there. When one is found, store it as `usage/SAMPLE-<short-case>-<bap-no>-reply-brief.pdf`, fill in this table, and re-run the overlay.
+Next step for a human: a BAP appellate brief can be requested from the BAP Clerk, or found in a PACER/CM-ECF docket for a known BAP number if the appellant filed one there. When one is found, store it as `usage/FILED-EXAMPLE-reply-brief.pdf`, fill in this table, and re-run the overlay.
 
 ## Re-check 2026-10-15 (reply brief, same search)
 
@@ -30,3 +30,15 @@ Still **BLOCKED: no public exemplar**. Each row below was run on 2026-10-15 from
 The court-authored sample is still **not** an exemplar: it is a template, not a filing.
 
 Render and overlay on the same date: `tools/render.sh` exit 0, no typst warnings, 7 pages. Output in `/work/artifacts/bap10/`, not `usage/`. The snapshot has no PDFs, so no existing `usage/` PDF was regenerated. `tools/overlay.sh` exit 1 (no OUTPUT in `usage/`; no exemplar exists either).
+
+## Re-check 2026-10-21
+
+Still **BLOCKED: no public filed exemplar**. New searches targeted the court's own docket identifiers and brief titles:
+
+| Source | Result |
+|---|---|
+| Web search: `"BAP No." "Tenth Circuit" "Reply Brief" bankruptcy PDF`, `"Reply Brief" "BAP No." "B.A.P. 10th Cir."`, and related exact-phrase queries | Results were BAP opinions and the court's briefs-rules page. No filed reply brief. |
+| BAP briefs page, https://www.bap10.uscourts.gov/filing/briefs | Describes reply briefs and cross-appeal schedules, and links the rules and forms; no filed briefs are offered. |
+| CourtListener and search results for cited BAP appeals (including CO-19-043, 24-19, and 25-15) | Found opinions discussing briefs, not the briefs themselves. No publicly downloadable reply brief. |
+
+The court-authored sample and opinions are not filed reply briefs and were not substituted. No `FILED-EXAMPLE` file or transcription was created.
