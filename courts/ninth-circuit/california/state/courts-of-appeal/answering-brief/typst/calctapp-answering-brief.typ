@@ -215,7 +215,8 @@
 
 #let toc-section() = {
   heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  align(right, block(above: 0.3em, below: 0pt, strong(underline[Page])))
+  // The rule sits below the descender of "g", so no part of the heading hangs under it into the first entry.
+  align(right, block(above: 0.3em, below: 0.75em, strong(underline(offset: 0.3em)[Page])))
   show outline.entry: toc-entry
   outline(title: none, target: selector(heading.where(outlined: true)), depth: toc-depth, indent: 0pt)
 }
@@ -251,7 +252,7 @@
       block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
         set par(first-line-indent: 0pt)
         strong(title)
-        if first { h(1fr); strong(underline[Page(s)]) }
+        if first { h(1fr); strong(underline(offset: 0.3em)[Page(s)]) }
       })
       first = false
       for (key, a) in members {
