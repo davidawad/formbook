@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 45 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-amicus-brief.pdf` | ACLU, NYCLU, EFF and Public Citizen (amici curiae) | People v. Harris (Twitter, Inc., non-party movant-appellant), App. Term 1st Dept, N.Y. Co. Crim. Ct. No. 2011NY080152 | 2012-08-27 | https://www.nyclu.org/uploads/2017/01/2012-08-27-amicus-brief.pdf | `0abbf9d88d1a4fa0e07faa24ee988efa6cb9b67ed6e1aced2ad3a0285e62794c` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search (2026-10-21, fb-l129.1)
+
+Re-searched the blocked `answering-brief`, `motion-brief`, and `petition-for-discretionary-review` rows. The official Second Department Appellate Term forms page exposes blank Form 4 respondent's brief, Forms 17–20 motion papers, and filing instructions, but no filed examples. Searches for filed Appellate Term respondent briefs and motion papers returned official instructions, decisions, and generic practice materials rather than party PDFs. No qualifying public filed exemplars were found; the three rows remain blocked.
