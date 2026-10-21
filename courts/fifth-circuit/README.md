@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # Fifth Circuit
 
-Courts under `courts/fifth-circuit` (30).
+Courts under `courts/fifth-circuit` (26).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -26,14 +26,10 @@ Courts under `courts/fifth-circuit` (30).
 | [District Court, W.D. Texas](texas/federal/western-district) | `txwd` | up for review | — | — | — | 14 |
 | [Louisiana Court of Appeal](louisiana/state/court-of-appeal) | `lactapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Louisiana](louisiana/state/supreme-court) | `la` | in progress | — | — | — | 14 |
-| [Mississippi Chancery Courts](mississippi/state/chancery-courts) | `misschanceryct` | in progress | — | — | — | 0 |
 | [Court of Appeals of Mississippi](mississippi/state/court-of-appeals) | `missctapp` | in progress | — | — | — | 14 |
 | [Mississippi Supreme Court](mississippi/state/supreme-court) | `miss` | in progress | — | — | — | 14 |
 | [Court of Civil Appeals of Texas](texas/state/court-of-civil-appeals) | `texapp` | in progress | — | — | — | 14 |
 | [Court of Criminal Appeals of Texas](texas/state/court-of-criminal-appeals) | `texcrimapp` | in progress | — | — | — | 14 |
-| [Texas Court of Review Tribunal](texas/state/court-of-review-tribunal) | `texrevtrib` | todo | — | — | — | 0 |
-| [Texas Judicial Panel on Multidistrict Litigation](texas/state/judicial-panel-on-multidistrict-litigation) | `texjpml` | in progress | — | — | — | 14 |
-| [Texas Special Court of Review](texas/state/special-court-of-review) | `texreview` | in progress | — | — | — | 14 |
 | [Texas Supreme Court](texas/state/supreme-court) | `tex` | in progress | — | — | — | 14 |
 
 [Formbook index](../../README.md)

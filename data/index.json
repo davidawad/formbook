@@ -385,30 +385,6 @@
    "kind": "state",
    "parent_alias": null
   },
-  "masstaxbd": {
-   "path": "courts/first-circuit/massachusetts/state/appellate-tax-board",
-   "name": "Massachusetts Appellate Tax Board",
-   "level": "state-appellate",
-   "courtlistener_id": "masstaxbd",
-   "circuit": "ca1",
-   "state": "Massachusetts",
-   "group": "First Circuit",
-   "group_key": "ca1",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "maworkcompcom": {
-   "path": "courts/first-circuit/massachusetts/state/department-of-industrial-accidents",
-   "name": "Massachusetts Department of Industrial Accidents",
-   "level": "state-appellate",
-   "courtlistener_id": "maworkcompcom",
-   "circuit": "ca1",
-   "state": "Massachusetts",
-   "group": "First Circuit",
-   "group_key": "ca1",
-   "kind": "state",
-   "parent_alias": null
-  },
   "massdistctapp": {
    "path": "courts/first-circuit/massachusetts/state/district-court-appellate-division",
    "name": "Massachusetts District Court, Appellate Division",
@@ -464,18 +440,6 @@
    "courtlistener_id": "prsupreme",
    "circuit": "ca1",
    "state": "Puerto Rico",
-   "group": "First Circuit",
-   "group_key": "ca1",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "risuperct": {
-   "path": "courts/first-circuit/rhode-island/state/superior-court",
-   "name": "Superior Court of Rhode Island",
-   "level": "state-appellate",
-   "courtlistener_id": "risuperct",
-   "circuit": "ca1",
-   "state": "Rhode Island",
    "group": "First Circuit",
    "group_key": "ca1",
    "kind": "state",
@@ -649,18 +613,6 @@
    "kind": "federal",
    "parent_alias": null
   },
-  "connworkcompcom": {
-   "path": "courts/second-circuit/connecticut/state/compensation-review-board",
-   "name": "Connecticut Compensation Review Board",
-   "level": "state-appellate",
-   "courtlistener_id": "connworkcompcom",
-   "circuit": "ca2",
-   "state": "Connecticut",
-   "group": "Second Circuit",
-   "group_key": "ca2",
-   "kind": "state",
-   "parent_alias": null
-  },
   "connappct": {
    "path": "courts/second-circuit/connecticut/state/court-of-appeals",
    "name": "Connecticut Court of Appeals",
@@ -697,30 +649,6 @@
    "kind": "state",
    "parent_alias": null
   },
-  "nycommnapp": {
-   "path": "courts/second-circuit/new-york/state/commission-of-appeals",
-   "name": "New York Commission of Appeals",
-   "level": "state-appellate",
-   "courtlistener_id": "nycommnapp",
-   "circuit": "ca2",
-   "state": "New York",
-   "group": "Second Circuit",
-   "group_key": "ca2",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "nyimpct": {
-   "path": "courts/second-circuit/new-york/state/court-for-the-trial-of-impeachments",
-   "name": "Court for the Trial of Impeachments",
-   "level": "state-appellate",
-   "courtlistener_id": "nyimpct",
-   "circuit": "ca2",
-   "state": "New York",
-   "group": "Second Circuit",
-   "group_key": "ca2",
-   "kind": "state",
-   "parent_alias": null
-  },
   "ny": {
    "path": "courts/second-circuit/new-york/state/court-of-appeals",
    "name": "New York Court of Appeals",
@@ -738,18 +666,6 @@
    "name": "The Four Departments of the Appellate Division",
    "level": "state-appellate",
    "courtlistener_id": "nyappdiv",
-   "circuit": "ca2",
-   "state": "New York",
-   "group": "Second Circuit",
-   "group_key": "ca2",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "nychanctsara": {
-   "path": "courts/second-circuit/new-york/state/saratoga-chancery-court",
-   "name": "Saratoga Chancery Court",
-   "level": "state-appellate",
-   "courtlistener_id": "nychanctsara",
    "circuit": "ca2",
    "state": "New York",
    "group": "Second Circuit",
@@ -925,42 +841,6 @@
    "kind": "federal",
    "parent_alias": null
   },
-  "delch": {
-   "path": "courts/third-circuit/delaware/state/court-of-chancery",
-   "name": "Delaware Court of Chancery",
-   "level": "state-appellate",
-   "courtlistener_id": "delch",
-   "circuit": "ca3",
-   "state": "Delaware",
-   "group": "Third Circuit",
-   "group_key": "ca3",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "deljudct": {
-   "path": "courts/third-circuit/delaware/state/court-on-the-judiciary",
-   "name": "Court on the Judiciary of Delaware",
-   "level": "state-appellate",
-   "courtlistener_id": "deljudct",
-   "circuit": "ca3",
-   "state": "Delaware",
-   "group": "Third Circuit",
-   "group_key": "ca3",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "delfamct": {
-   "path": "courts/third-circuit/delaware/state/family-court",
-   "name": "Delaware Family Court",
-   "level": "state-appellate",
-   "courtlistener_id": "delfamct",
-   "circuit": "ca3",
-   "state": "Delaware",
-   "group": "Third Circuit",
-   "group_key": "ca3",
-   "kind": "state",
-   "parent_alias": null
-  },
   "del": {
    "path": "courts/third-circuit/delaware/state/supreme-court",
    "name": "Delaware Supreme Court",
@@ -985,35 +865,11 @@
    "kind": "state",
    "parent_alias": null
   },
-  "njtaxct": {
-   "path": "courts/third-circuit/new-jersey/state/tax-court",
-   "name": "New Jersey Tax Court",
-   "level": "state-appellate",
-   "courtlistener_id": "njtaxct",
-   "circuit": "ca3",
-   "state": "New Jersey",
-   "group": "Third Circuit",
-   "group_key": "ca3",
-   "kind": "state",
-   "parent_alias": null
-  },
   "pacommwct": {
    "path": "courts/third-circuit/pennsylvania/state/commonwealth-court",
    "name": "Commonwealth Court of Pennsylvania",
    "level": "state-appellate",
    "courtlistener_id": "pacommwct",
-   "circuit": "ca3",
-   "state": "Pennsylvania",
-   "group": "Third Circuit",
-   "group_key": "ca3",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "cjdpa": {
-   "path": "courts/third-circuit/pennsylvania/state/court-of-judicial-discipline",
-   "name": "Court of Judicial Discipline of Pennsylvania",
-   "level": "state-appellate",
-   "courtlistener_id": "cjdpa",
    "circuit": "ca3",
    "state": "Pennsylvania",
    "group": "Third Circuit",
@@ -1309,30 +1165,6 @@
    "kind": "state",
    "parent_alias": null
   },
-  "ncworkcompcom": {
-   "path": "courts/fourth-circuit/north-carolina/state/industrial-commission",
-   "name": "North Carolina Industrial Commission",
-   "level": "state-appellate",
-   "courtlistener_id": "ncworkcompcom",
-   "circuit": "ca4",
-   "state": "North Carolina",
-   "group": "Fourth Circuit",
-   "group_key": "ca4",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "ncsuperct": {
-   "path": "courts/fourth-circuit/north-carolina/state/superior-court",
-   "name": "Superior Court of North Carolina",
-   "level": "state-appellate",
-   "courtlistener_id": "ncsuperct",
-   "circuit": "ca4",
-   "state": "North Carolina",
-   "group": "Fourth Circuit",
-   "group_key": "ca4",
-   "kind": "state",
-   "parent_alias": null
-  },
   "nc": {
    "path": "courts/fourth-circuit/north-carolina/state/supreme-court",
    "name": "Supreme Court of North Carolina",
@@ -1350,18 +1182,6 @@
    "name": "Court of Appeals of South Carolina",
    "level": "state-appellate",
    "courtlistener_id": "scctapp",
-   "circuit": "ca4",
-   "state": "South Carolina",
-   "group": "Fourth Circuit",
-   "group_key": "ca4",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "ctchansc": {
-   "path": "courts/fourth-circuit/south-carolina/state/court-of-chancery",
-   "name": "Court of Chancery of South Carolina",
-   "level": "state-appellate",
-   "courtlistener_id": "ctchansc",
    "circuit": "ca4",
    "state": "South Carolina",
    "group": "Fourth Circuit",
@@ -1681,18 +1501,6 @@
    "kind": "state",
    "parent_alias": null
   },
-  "misschanceryct": {
-   "path": "courts/fifth-circuit/mississippi/state/chancery-courts",
-   "name": "Mississippi Chancery Courts",
-   "level": "state-appellate",
-   "courtlistener_id": "misschanceryct",
-   "circuit": "ca5",
-   "state": "Mississippi",
-   "group": "Fifth Circuit",
-   "group_key": "ca5",
-   "kind": "state",
-   "parent_alias": null
-  },
   "missctapp": {
    "path": "courts/fifth-circuit/mississippi/state/court-of-appeals",
    "name": "Court of Appeals of Mississippi",
@@ -1734,42 +1542,6 @@
    "name": "Court of Criminal Appeals of Texas",
    "level": "state-supreme",
    "courtlistener_id": "texcrimapp",
-   "circuit": "ca5",
-   "state": "Texas",
-   "group": "Fifth Circuit",
-   "group_key": "ca5",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "texrevtrib": {
-   "path": "courts/fifth-circuit/texas/state/court-of-review-tribunal",
-   "name": "Texas Court of Review Tribunal",
-   "level": "state-appellate",
-   "courtlistener_id": "texrevtrib",
-   "circuit": "ca5",
-   "state": "Texas",
-   "group": "Fifth Circuit",
-   "group_key": "ca5",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "texjpml": {
-   "path": "courts/fifth-circuit/texas/state/judicial-panel-on-multidistrict-litigation",
-   "name": "Texas Judicial Panel on Multidistrict Litigation",
-   "level": "state-appellate",
-   "courtlistener_id": "texjpml",
-   "circuit": "ca5",
-   "state": "Texas",
-   "group": "Fifth Circuit",
-   "group_key": "ca5",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "texreview": {
-   "path": "courts/fifth-circuit/texas/state/special-court-of-review",
-   "name": "Texas Special Court of Review",
-   "level": "state-appellate",
-   "courtlistener_id": "texreview",
    "circuit": "ca5",
    "state": "Texas",
    "group": "Fifth Circuit",
@@ -2089,18 +1861,6 @@
    "kind": "state",
    "parent_alias": null
   },
-  "ohioctcl": {
-   "path": "courts/sixth-circuit/ohio/state/court-of-claims",
-   "name": "Ohio Court of Claims",
-   "level": "state-appellate",
-   "courtlistener_id": "ohioctcl",
-   "circuit": "ca6",
-   "state": "Ohio",
-   "group": "Sixth Circuit",
-   "group_key": "ca6",
-   "kind": "state",
-   "parent_alias": null
-  },
   "ohio": {
    "path": "courts/sixth-circuit/ohio/state/supreme-court",
    "name": "Ohio Supreme Court",
@@ -2370,18 +2130,6 @@
    "name": "Indiana Supreme Court",
    "level": "state-supreme",
    "courtlistener_id": "ind",
-   "circuit": "ca7",
-   "state": "Indiana",
-   "group": "Seventh Circuit",
-   "group_key": "ca7",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "indtc": {
-   "path": "courts/seventh-circuit/indiana/state/tax-court",
-   "name": "Indiana Tax Court",
-   "level": "state-appellate",
-   "courtlistener_id": "indtc",
    "circuit": "ca7",
    "state": "Indiana",
    "group": "Seventh Circuit",
@@ -2694,18 +2442,6 @@
    "name": "Arkansas Supreme Court",
    "level": "state-supreme",
    "courtlistener_id": "ark",
-   "circuit": "ca8",
-   "state": "Arkansas",
-   "group": "Eighth Circuit",
-   "group_key": "ca8",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "arkworkcompcom": {
-   "path": "courts/eighth-circuit/arkansas/state/workers-compensation-commission",
-   "name": "Arkansas Workers' Compensation Commission",
-   "level": "state-appellate",
-   "courtlistener_id": "arkworkcompcom",
    "circuit": "ca8",
    "state": "Arkansas",
    "group": "Eighth Circuit",
@@ -3325,18 +3061,6 @@
    "kind": "state",
    "parent_alias": null
   },
-  "ariztaxct": {
-   "path": "courts/ninth-circuit/arizona/state/tax-court",
-   "name": "Arizona Tax Court",
-   "level": "state-appellate",
-   "courtlistener_id": "ariztaxct",
-   "circuit": "ca9",
-   "state": "Arizona",
-   "group": "Ninth Circuit",
-   "group_key": "ca9",
-   "kind": "state",
-   "parent_alias": null
-  },
   "calctapp5d": {
    "path": "courts/ninth-circuit/california/state/court-of-appeal-fifth-district",
    "name": "California Court of Appeal, Fifth Appellate District",
@@ -3493,18 +3217,6 @@
    "kind": "state",
    "parent_alias": null
   },
-  "hawtax": {
-   "path": "courts/ninth-circuit/hawaii/state/state-tax-appeal-court",
-   "name": "Hawaii State Tax Appeal Court",
-   "level": "state-appellate",
-   "courtlistener_id": "hawtax",
-   "circuit": "ca9",
-   "state": "Hawaii",
-   "group": "Ninth Circuit",
-   "group_key": "ca9",
-   "kind": "state",
-   "parent_alias": null
-  },
   "haw": {
    "path": "courts/ninth-circuit/hawaii/state/supreme-court",
    "name": "Supreme Court of Hawaii",
@@ -3546,18 +3258,6 @@
    "name": "Montana Supreme Court",
    "level": "state-supreme",
    "courtlistener_id": "mont",
-   "circuit": "ca9",
-   "state": "Montana",
-   "group": "Ninth Circuit",
-   "group_key": "ca9",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "monttc": {
-   "path": "courts/ninth-circuit/montana/state/tax-appeal-board",
-   "name": "Montana Tax Appeal Board",
-   "level": "state-appellate",
-   "courtlistener_id": "monttc",
    "circuit": "ca9",
    "state": "Montana",
    "group": "Ninth Circuit",
@@ -3618,18 +3318,6 @@
    "name": "Oregon Supreme Court",
    "level": "state-supreme",
    "courtlistener_id": "or",
-   "circuit": "ca9",
-   "state": "Oregon",
-   "group": "Ninth Circuit",
-   "group_key": "ca9",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "ortc": {
-   "path": "courts/ninth-circuit/oregon/state/tax-court",
-   "name": "Oregon Tax Court",
-   "level": "state-appellate",
-   "courtlistener_id": "ortc",
    "circuit": "ca9",
    "state": "Oregon",
    "group": "Ninth Circuit",
@@ -3901,18 +3589,6 @@
    "kind": "state",
    "parent_alias": null
   },
-  "coloworkcompcom": {
-   "path": "courts/tenth-circuit/colorado/state/industrial-claim-appeals-office",
-   "name": "Colorado Industrial Claim Appeals office",
-   "level": "state-appellate",
-   "courtlistener_id": "coloworkcompcom",
-   "circuit": "ca10",
-   "state": "Colorado",
-   "group": "Tenth Circuit",
-   "group_key": "ca10",
-   "kind": "state",
-   "parent_alias": null
-  },
   "colo": {
    "path": "courts/tenth-circuit/colorado/state/supreme-court",
    "name": "Colorado Supreme Court",
@@ -3990,30 +3666,6 @@
    "name": "Court of Criminal Appeals of Oklahoma",
    "level": "state-supreme",
    "courtlistener_id": "oklacrimapp",
-   "circuit": "ca10",
-   "state": "Oklahoma",
-   "group": "Tenth Circuit",
-   "group_key": "ca10",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "oklacoj": {
-   "path": "courts/tenth-circuit/oklahoma/state/court-on-the-judiciary",
-   "name": "Court on the Judiciary of Oklahoma",
-   "level": "state-appellate",
-   "courtlistener_id": "oklacoj",
-   "circuit": "ca10",
-   "state": "Oklahoma",
-   "group": "Tenth Circuit",
-   "group_key": "ca10",
-   "kind": "state",
-   "parent_alias": null
-  },
-  "oklajeap": {
-   "path": "courts/tenth-circuit/oklahoma/state/judicial-ethics-advisory-panel",
-   "name": "Oklahoma Judicial Ethics Advisory Panel",
-   "level": "state-appellate",
-   "courtlistener_id": "oklajeap",
    "circuit": "ca10",
    "state": "Oklahoma",
    "group": "Tenth Circuit",

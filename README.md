@@ -135,8 +135,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/bankruptcy-district) | `mab` | up for review | — | — | — | 14 |
 | [District Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/district) | `mad` | up for review | — | — | — | 14 |
 | [Massachusetts Appeals Court](courts/first-circuit/massachusetts/state/appeals-court) | `massappct` | in progress | — | — | — | 14 |
-| [Massachusetts Appellate Tax Board](courts/first-circuit/massachusetts/state/appellate-tax-board) | `masstaxbd` | todo | — | — | — | 0 |
-| [Massachusetts Department of Industrial Accidents](courts/first-circuit/massachusetts/state/department-of-industrial-accidents) | `maworkcompcom` | todo | — | — | — | 0 |
 | [Massachusetts District Court, Appellate Division](courts/first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` | todo | — | — | — | 0 |
 | [Massachusetts Supreme Judicial Court](courts/first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | in progress | — | — | — | 14 |
 
@@ -163,7 +161,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Rhode Island](courts/first-circuit/rhode-island/federal/bankruptcy-district) | `rib` | up for review | — | — | — | 14 |
 | [District Court, D. Rhode Island](courts/first-circuit/rhode-island/federal/district) | `rid` | up for review | — | — | — | 14 |
-| [Superior Court of Rhode Island](courts/first-circuit/rhode-island/state/superior-court) | `risuperct` | todo | — | — | — | 0 |
 | [Supreme Court of Rhode Island](courts/first-circuit/rhode-island/state/supreme-court) | `ri` | in progress | — | — | — | 14 |
 
 ## Second Circuit
@@ -178,7 +175,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Connecticut](courts/second-circuit/connecticut/federal/bankruptcy-district) | `ctb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Connecticut](courts/second-circuit/connecticut/federal/district) | `ctd` | up for review | — | — | — | 14 |
-| [Connecticut Compensation Review Board](courts/second-circuit/connecticut/state/compensation-review-board) | `connworkcompcom` | todo | — | — | — | 0 |
 | [Connecticut Court of Appeals](courts/second-circuit/connecticut/state/court-of-appeals) | `connappct` | in progress | — | — | — | 14 |
 | [Connecticut Supreme Court](courts/second-circuit/connecticut/state/supreme-court) | `conn` | in progress | — | — | — | 14 |
 
@@ -195,11 +191,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, S.D. New York](courts/second-circuit/new-york/federal/southern-district) | `nysd` | up for review | — | — | — | 14 |
 | [District Court, W.D. New York](courts/second-circuit/new-york/federal/western-district) | `nywd` | up for review | — | — | — | 14 |
 | [Appellate Terms of the Supreme Court of New York](courts/second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | in progress | — | — | — | 14 |
-| [New York Commission of Appeals](courts/second-circuit/new-york/state/commission-of-appeals) | `nycommnapp` | todo | — | — | — | 0 |
-| [Court for the Trial of Impeachments](courts/second-circuit/new-york/state/court-for-the-trial-of-impeachments) | `nyimpct` | todo | — | — | — | 0 |
 | [New York Court of Appeals](courts/second-circuit/new-york/state/court-of-appeals) | `ny` | in progress | — | — | — | 14 |
 | [The Four Departments of the Appellate Division](courts/second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | in progress | — | — | — | 14 |
-| [Saratoga Chancery Court](courts/second-circuit/new-york/state/saratoga-chancery-court) | `nychanctsara` | todo | — | — | — | 0 |
 
 ### Vermont
 
@@ -221,9 +214,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Delaware](courts/third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Delaware](courts/third-circuit/delaware/federal/district) | `ded` | up for review | — | — | — | 14 |
-| [Delaware Court of Chancery](courts/third-circuit/delaware/state/court-of-chancery) | `delch` | todo | — | — | — | 0 |
-| [Court on the Judiciary of Delaware](courts/third-circuit/delaware/state/court-on-the-judiciary) | `deljudct` | todo | — | — | — | 0 |
-| [Delaware Family Court](courts/third-circuit/delaware/state/family-court) | `delfamct` | todo | — | — | — | 0 |
 | [Delaware Supreme Court](courts/third-circuit/delaware/state/supreme-court) | `del` | in progress | — | — | — | 14 |
 
 ### New Jersey
@@ -233,7 +223,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. New Jersey](courts/third-circuit/new-jersey/federal/bankruptcy-district) | `njb` | up for review | — | — | — | 14 |
 | [District Court, D. New Jersey](courts/third-circuit/new-jersey/federal/district) | `njd` | up for review | — | — | — | 14 |
 | [Supreme Court of New Jersey](courts/third-circuit/new-jersey/state/supreme-court) | `nj` | in progress | — | — | — | 14 |
-| [New Jersey Tax Court](courts/third-circuit/new-jersey/state/tax-court) | `njtaxct` | todo | — | — | — | 0 |
 
 ### Pennsylvania
 
@@ -246,7 +235,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/middle-district) | `pamd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/western-district) | `pawd` | up for review | — | — | — | 14 |
 | [Commonwealth Court of Pennsylvania](courts/third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | in progress | — | — | — | 14 |
-| [Court of Judicial Discipline of Pennsylvania](courts/third-circuit/pennsylvania/state/court-of-judicial-discipline) | `cjdpa` | in progress | — | — | — | 0 |
 | [Superior Court of Pennsylvania](courts/third-circuit/pennsylvania/state/superior-court) | `pasuperct` | in progress | — | — | — | 14 |
 | [Supreme Court of Pennsylvania](courts/third-circuit/pennsylvania/state/supreme-court) | `pa` | in progress | — | — | — | 14 |
 
@@ -283,8 +271,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, M.D. North Carolina](courts/fourth-circuit/north-carolina/federal/middle-district) | `ncmd` | up for review | — | — | — | 14 |
 | [District Court, W.D. North Carolina](courts/fourth-circuit/north-carolina/federal/western-district) | `ncwd` | up for review | — | — | — | 14 |
 | [Court of Appeals of North Carolina](courts/fourth-circuit/north-carolina/state/court-of-appeals) | `ncctapp` | in progress | — | — | — | 14 |
-| [North Carolina Industrial Commission](courts/fourth-circuit/north-carolina/state/industrial-commission) | `ncworkcompcom` | todo | — | — | — | 0 |
-| [Superior Court of North Carolina](courts/fourth-circuit/north-carolina/state/superior-court) | `ncsuperct` | in progress | — | — | — | 14 |
 | [Supreme Court of North Carolina](courts/fourth-circuit/north-carolina/state/supreme-court) | `nc` | in progress | — | — | — | 14 |
 
 ### South Carolina
@@ -294,7 +280,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. South Carolina](courts/fourth-circuit/south-carolina/federal/bankruptcy-district) | `scb` | up for review | — | — | — | 14 |
 | [District Court, D. South Carolina](courts/fourth-circuit/south-carolina/federal/district) | `scd` | up for review | — | — | — | 14 |
 | [Court of Appeals of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-appeals) | `scctapp` | in progress | — | — | — | 14 |
-| [Court of Chancery of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-chancery) | `ctchansc` | todo | — | — | — | 0 |
 | [Supreme Court of South Carolina](courts/fourth-circuit/south-carolina/state/supreme-court) | `sc` | in progress | — | — | — | 14 |
 
 ### Virginia
@@ -346,7 +331,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, S.D. Mississippi](courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district) | `mssb` | up for review | — | — | — | 14 |
 | [District Court, N.D. Mississippi](courts/fifth-circuit/mississippi/federal/northern-district) | `msnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Mississippi](courts/fifth-circuit/mississippi/federal/southern-district) | `mssd` | up for review | — | — | — | 14 |
-| [Mississippi Chancery Courts](courts/fifth-circuit/mississippi/state/chancery-courts) | `misschanceryct` | in progress | — | — | — | 0 |
 | [Court of Appeals of Mississippi](courts/fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | in progress | — | — | — | 14 |
 | [Mississippi Supreme Court](courts/fifth-circuit/mississippi/state/supreme-court) | `miss` | in progress | — | — | — | 14 |
 
@@ -364,9 +348,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, W.D. Texas](courts/fifth-circuit/texas/federal/western-district) | `txwd` | up for review | — | — | — | 14 |
 | [Court of Civil Appeals of Texas](courts/fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | in progress | — | — | — | 14 |
 | [Court of Criminal Appeals of Texas](courts/fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | in progress | — | — | — | 14 |
-| [Texas Court of Review Tribunal](courts/fifth-circuit/texas/state/court-of-review-tribunal) | `texrevtrib` | todo | — | — | — | 0 |
-| [Texas Judicial Panel on Multidistrict Litigation](courts/fifth-circuit/texas/state/judicial-panel-on-multidistrict-litigation) | `texjpml` | in progress | — | — | — | 14 |
-| [Texas Special Court of Review](courts/fifth-circuit/texas/state/special-court-of-review) | `texreview` | in progress | — | — | — | 14 |
 | [Texas Supreme Court](courts/fifth-circuit/texas/state/supreme-court) | `tex` | in progress | — | — | — | 14 |
 
 ## Sixth Circuit
@@ -407,7 +388,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/northern-district) | `ohnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Ohio](courts/sixth-circuit/ohio/federal/southern-district) | `ohsd` | up for review | — | — | — | 14 |
 | [Ohio Court of Appeals](courts/sixth-circuit/ohio/state/court-of-appeals) | `ohioctapp` | in progress | — | — | — | 14 |
-| [Ohio Court of Claims](courts/sixth-circuit/ohio/state/court-of-claims) | `ohioctcl` | in progress | — | — | — | 0 |
 | [Ohio Supreme Court](courts/sixth-circuit/ohio/state/supreme-court) | `ohio` | in progress | — | — | — | 14 |
 
 ### Tennessee
@@ -453,7 +433,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, S.D. Indiana](courts/seventh-circuit/indiana/federal/southern-district) | `insd` | up for review | — | — | — | 14 |
 | [Indiana Court of Appeals](courts/seventh-circuit/indiana/state/court-of-appeals) | `indctapp` | in progress | — | — | — | 14 |
 | [Indiana Supreme Court](courts/seventh-circuit/indiana/state/supreme-court) | `ind` | in progress | — | — | — | 14 |
-| [Indiana Tax Court](courts/seventh-circuit/indiana/state/tax-court) | `indtc` | todo | — | — | — | 0 |
 
 ### Wisconsin
 
@@ -483,7 +462,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court for the Western District of Arkansas](courts/eighth-circuit/arkansas/federal/western-district) | `arwd` | up for review | — | — | — | 14 |
 | [Arkansas Court of Appeals](courts/eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 14 |
 | [Arkansas Supreme Court](courts/eighth-circuit/arkansas/state/supreme-court) | `ark` | in progress | — | — | — | 14 |
-| [Arkansas Workers' Compensation Commission](courts/eighth-circuit/arkansas/state/workers-compensation-commission) | `arkworkcompcom` | todo | — | — | — | 0 |
 
 ### Iowa
 
@@ -569,7 +547,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court for the District of Arizona](courts/ninth-circuit/arizona/federal/district) | `azd` | up for review | — | — | — | 14 |
 | [Arizona Court of Appeals](courts/ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | in progress | — | — | — | 14 |
 | [Arizona Supreme Court](courts/ninth-circuit/arizona/state/supreme-court) | `ariz` | in progress | — | — | — | 14 |
-| [Arizona Tax Court](courts/ninth-circuit/arizona/state/tax-court) | `ariztaxct` | in progress | — | — | — | 0 |
 
 ### California
 
@@ -610,7 +587,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Hawaii](courts/ninth-circuit/hawaii/federal/bankruptcy-district) | `hib` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Hawaii](courts/ninth-circuit/hawaii/federal/district) | `hid` | up for review | — | — | — | 14 |
 | [Hawaii Intermediate Court of Appeals](courts/ninth-circuit/hawaii/state/intermediate-court-of-appeals) | `hawapp` | in progress | — | — | — | 14 |
-| [Hawaii State Tax Appeal Court](courts/ninth-circuit/hawaii/state/state-tax-appeal-court) | `hawtax` | in progress | — | — | — | 14 |
 | [Supreme Court of Hawaii](courts/ninth-circuit/hawaii/state/supreme-court) | `haw` | in progress | — | — | — | 14 |
 
 ### Idaho
@@ -629,7 +605,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Montana](courts/ninth-circuit/montana/federal/bankruptcy-district) | `mtb` | up for review | — | — | — | 14 |
 | [District Court, D. Montana](courts/ninth-circuit/montana/federal/district) | `mtd` | up for review | — | — | — | 14 |
 | [Montana Supreme Court](courts/ninth-circuit/montana/state/supreme-court) | `mont` | in progress | — | — | — | 14 |
-| [Montana Tax Appeal Board](courts/ninth-circuit/montana/state/tax-appeal-board) | `monttc` | todo | — | — | — | 0 |
 
 ### Nevada
 
@@ -656,7 +631,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, D. Oregon](courts/ninth-circuit/oregon/federal/district) | `ord` | up for review | — | — | — | 14 |
 | [Court of Appeals of Oregon](courts/ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | in progress | — | — | — | 14 |
 | [Oregon Supreme Court](courts/ninth-circuit/oregon/state/supreme-court) | `or` | in progress | — | — | — | 14 |
-| [Oregon Tax Court](courts/ninth-circuit/oregon/state/tax-court) | `ortc` | todo | — | — | — | 0 |
 
 ### Washington
 
@@ -689,7 +663,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Colorado](courts/tenth-circuit/colorado/federal/bankruptcy-district) | `cob` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Colorado](courts/tenth-circuit/colorado/federal/district) | `cod` | up for review | — | — | — | 14 |
 | [Colorado Court of Appeals](courts/tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | in progress | — | — | — | 14 |
-| [Colorado Industrial Claim Appeals office](courts/tenth-circuit/colorado/state/industrial-claim-appeals-office) | `coloworkcompcom` | todo | — | — | — | 0 |
 | [Colorado Supreme Court](courts/tenth-circuit/colorado/state/supreme-court) | `colo` | in progress | — | — | — | 14 |
 
 ### Kansas
@@ -723,8 +696,6 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court, Oklahoma Western](courts/tenth-circuit/oklahoma/federal/western-district) | `okwd` | up for review | — | — | — | 14 |
 | [Court of Civil Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | in progress | — | — | — | 0 |
 | [Court of Criminal Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | in progress | — | — | — | 14 |
-| [Court on the Judiciary of Oklahoma](courts/tenth-circuit/oklahoma/state/court-on-the-judiciary) | `oklacoj` | todo | — | — | — | 0 |
-| [Oklahoma Judicial Ethics Advisory Panel](courts/tenth-circuit/oklahoma/state/judicial-ethics-advisory-panel) | `oklajeap` | todo | — | — | — | 0 |
 | [Supreme Court of Oklahoma](courts/tenth-circuit/oklahoma/state/supreme-court) | `okla` | in progress | — | — | — | 14 |
 
 ### Utah
@@ -832,20 +803,20 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Supreme Court of the United States | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
-|  | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+|  | 30 | 0 | 0 | 9 | 21 | 0.0% | 0.0% | 0 | 0 | 0 | 1.8% |
 | Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 16.5% |
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
-| First Circuit | 23 | 0 | 12 | 7 | 4 | 0.0% | 52.1% | 0 | 0 | 0 | 11.5% |
-| Second Circuit | 23 | 0 | 13 | 6 | 4 | 0.0% | 56.5% | 0 | 0 | 0 | 11.5% |
-| Third Circuit | 23 | 0 | 13 | 6 | 4 | 0.0% | 56.5% | 0 | 0 | 0 | 10.9% |
-| Fourth Circuit | 32 | 0 | 19 | 11 | 2 | 0.0% | 59.3% | 0 | 0 | 0 | 13.1% |
-| Fifth Circuit | 30 | 0 | 19 | 10 | 1 | 0.0% | 63.3% | 0 | 0 | 0 | 13.0% |
-| Sixth Circuit | 30 | 0 | 20 | 10 | 0 | 0.0% | 66.6% | 0 | 0 | 0 | 13.5% |
-| Seventh Circuit | 22 | 0 | 15 | 6 | 1 | 0.0% | 68.1% | 0 | 0 | 0 | 13.3% |
-| Eighth Circuit | 39 | 0 | 22 | 16 | 1 | 0.0% | 56.4% | 0 | 0 | 0 | 13.6% |
-| Ninth Circuit | 65 | 0 | 32 | 29 | 4 | 0.0% | 49.2% | 1 | 0 | 0 | 12.9% |
-| Tenth Circuit | 34 | 0 | 19 | 12 | 3 | 0.0% | 55.8% | 0 | 0 | 0 | 12.3% |
+| First Circuit | 20 | 0 | 12 | 7 | 1 | 0.0% | 60.0% | 0 | 0 | 0 | 13.3% |
+| Second Circuit | 19 | 0 | 13 | 6 | 0 | 0.0% | 68.4% | 0 | 0 | 0 | 14.0% |
+| Third Circuit | 18 | 0 | 13 | 5 | 0 | 0.0% | 72.2% | 0 | 0 | 0 | 14.0% |
+| Fourth Circuit | 29 | 0 | 19 | 10 | 0 | 0.0% | 65.5% | 0 | 0 | 0 | 14.0% |
+| Fifth Circuit | 26 | 0 | 19 | 7 | 0 | 0.0% | 73.0% | 0 | 0 | 0 | 14.0% |
+| Sixth Circuit | 29 | 0 | 20 | 9 | 0 | 0.0% | 68.9% | 0 | 0 | 0 | 14.0% |
+| Seventh Circuit | 21 | 0 | 15 | 6 | 0 | 0.0% | 71.4% | 0 | 0 | 0 | 14.0% |
+| Eighth Circuit | 38 | 0 | 22 | 16 | 0 | 0.0% | 57.8% | 0 | 0 | 0 | 14.0% |
+| Ninth Circuit | 61 | 0 | 32 | 27 | 2 | 0.0% | 52.4% | 1 | 0 | 0 | 13.5% |
+| Tenth Circuit | 31 | 0 | 19 | 12 | 0 | 0.0% | 61.2% | 0 | 0 | 0 | 13.5% |
 | Eleventh Circuit | 32 | 0 | 19 | 13 | 0 | 0.0% | 59.3% | 0 | 0 | 0 | 14.0% |
 | D.C. Circuit | 4 | 0 | 3 | 1 | 0 | 0.0% | 75.0% | 0 | 0 | 0 | 14.0% |
 | **Total** | 376 | 0 | 224 | 128 | 24 | 0.0% | 59.5% | 1 | 0 | 0 | 12.9% |

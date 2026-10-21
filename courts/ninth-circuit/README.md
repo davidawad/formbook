@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # Ninth Circuit
 
-Courts under `courts/ninth-circuit` (65).
+Courts under `courts/ninth-circuit` (61).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -42,7 +42,6 @@ Courts under `courts/ninth-circuit` (65).
 | [High Court of American Samoa](american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |
 | [Arizona Court of Appeals](arizona/state/court-of-appeals) | `arizctapp` | in progress | — | — | — | 14 |
 | [Arizona Supreme Court](arizona/state/supreme-court) | `ariz` | in progress | — | — | — | 14 |
-| [Arizona Tax Court](arizona/state/tax-court) | `ariztaxct` | in progress | — | — | — | 0 |
 | [California Court of Appeal, Fifth Appellate District](california/state/court-of-appeal-fifth-district) | `calctapp5d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, First Appellate District](california/state/court-of-appeal-first-district) | `calctapp1d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Fourth Appellate District](california/state/court-of-appeal-fourth-district) | `calctapp4d` | in progress | — | — | — | 14 |
@@ -56,18 +55,15 @@ Courts under `courts/ninth-circuit` (65).
 | [California Supreme Court](california/state/supreme-court) | `cal` | in progress | — | — | — | 14 |
 | [Supreme Court of Guam](guam/state/supreme-court) | `guam` | in progress | — | — | — | 14 |
 | [Hawaii Intermediate Court of Appeals](hawaii/state/intermediate-court-of-appeals) | `hawapp` | in progress | — | — | — | 14 |
-| [Hawaii State Tax Appeal Court](hawaii/state/state-tax-appeal-court) | `hawtax` | in progress | — | — | — | 14 |
 | [Supreme Court of Hawaii](hawaii/state/supreme-court) | `haw` | in progress | — | — | — | 14 |
 | [Idaho Court of Appeals](idaho/state/court-of-appeals) | `idahoctapp` | in progress | — | — | — | 14 |
 | [Idaho Supreme Court](idaho/state/supreme-court) | `idaho` | in progress | — | — | — | 14 |
 | [Montana Supreme Court](montana/state/supreme-court) | `mont` | in progress | — | — | — | 14 |
-| [Montana Tax Appeal Board](montana/state/tax-appeal-board) | `monttc` | todo | — | — | — | 0 |
 | [Court of Appeals of Nevada](nevada/state/court-of-appeals) | `nevapp` | in progress | — | — | — | 14 |
 | [Nevada Supreme Court](nevada/state/supreme-court) | `nev` | in progress | — | — | — | 14 |
 | [Supreme Court of The Commonwealth of The Northern Mariana Islands](northern-mariana-islands/state/supreme-court) | `nmi` | in progress | — | — | — | 0 |
 | [Court of Appeals of Oregon](oregon/state/court-of-appeals) | `orctapp` | in progress | — | — | — | 14 |
 | [Oregon Supreme Court](oregon/state/supreme-court) | `or` | in progress | — | — | — | 14 |
-| [Oregon Tax Court](oregon/state/tax-court) | `ortc` | todo | — | — | — | 0 |
 | [Court of Appeals of Washington](washington/state/court-of-appeals) | `washctapp` | in progress | — | — | — | 14 |
 | [Washington Supreme Court](washington/state/supreme-court) | `wash` | in progress | — | — | — | 14 |
 

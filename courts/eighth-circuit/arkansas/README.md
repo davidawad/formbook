@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # Arkansas
 
-Courts under `courts/eighth-circuit/arkansas` (7).
+Courts under `courts/eighth-circuit/arkansas` (6).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -11,7 +11,6 @@ Courts under `courts/eighth-circuit/arkansas` (7).
 | [United States District Court for the Western District of Arkansas](federal/western-district) | `arwd` | up for review | — | — | — | 14 |
 | [Arkansas Court of Appeals](state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 14 |
 | [Arkansas Supreme Court](state/supreme-court) | `ark` | in progress | — | — | — | 14 |
-| [Arkansas Workers' Compensation Commission](state/workers-compensation-commission) | `arkworkcompcom` | todo | — | — | — | 0 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

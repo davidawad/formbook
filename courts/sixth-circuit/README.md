@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # Sixth Circuit
 
-Courts under `courts/sixth-circuit` (30).
+Courts under `courts/sixth-circuit` (29).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -30,7 +30,6 @@ Courts under `courts/sixth-circuit` (30).
 | [Michigan Court of Appeals](michigan/state/court-of-appeals) | `michctapp` | in progress | — | — | — | 14 |
 | [Michigan Supreme Court](michigan/state/supreme-court) | `mich` | in progress | — | — | — | 14 |
 | [Ohio Court of Appeals](ohio/state/court-of-appeals) | `ohioctapp` | in progress | — | — | — | 14 |
-| [Ohio Court of Claims](ohio/state/court-of-claims) | `ohioctcl` | in progress | — | — | — | 0 |
 | [Ohio Supreme Court](ohio/state/supreme-court) | `ohio` | in progress | — | — | — | 14 |
 | [Court of Appeals of Tennessee](tennessee/state/court-of-appeals) | `tennctapp` | in progress | — | — | — | 14 |
 | [Court of Criminal Appeals of Tennessee](tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | in progress | — | — | — | 14 |

@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # Oklahoma
 
-Courts under `courts/tenth-circuit/oklahoma` (12).
+Courts under `courts/tenth-circuit/oklahoma` (10).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -14,8 +14,6 @@ Courts under `courts/tenth-circuit/oklahoma` (12).
 | [United States District Court, Oklahoma Western](federal/western-district) | `okwd` | up for review | — | — | — | 14 |
 | [Court of Civil Appeals of Oklahoma](state/court-of-civil-appeals) | `oklacivapp` | in progress | — | — | — | 0 |
 | [Court of Criminal Appeals of Oklahoma](state/court-of-criminal-appeals) | `oklacrimapp` | in progress | — | — | — | 14 |
-| [Court on the Judiciary of Oklahoma](state/court-on-the-judiciary) | `oklacoj` | todo | — | — | — | 0 |
-| [Oklahoma Judicial Ethics Advisory Panel](state/judicial-ethics-advisory-panel) | `oklajeap` | todo | — | — | — | 0 |
 | [Supreme Court of Oklahoma](state/supreme-court) | `okla` | in progress | — | — | — | 14 |
 
 [Formbook index](../../../README.md)

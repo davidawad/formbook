@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # Eighth Circuit
 
-Courts under `courts/eighth-circuit` (39).
+Courts under `courts/eighth-circuit` (38).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -29,7 +29,6 @@ Courts under `courts/eighth-circuit` (39).
 | [District Court, D. South Dakota](south-dakota/federal/district) | `sdd` | up for review | — | — | — | 14 |
 | [Arkansas Court of Appeals](arkansas/state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 14 |
 | [Arkansas Supreme Court](arkansas/state/supreme-court) | `ark` | in progress | — | — | — | 14 |
-| [Arkansas Workers' Compensation Commission](arkansas/state/workers-compensation-commission) | `arkworkcompcom` | todo | — | — | — | 0 |
 | [Court of Appeals of Iowa](iowa/state/court-of-appeals) | `iowactapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Iowa](iowa/state/supreme-court) | `iowa` | in progress | — | — | — | 14 |
 | [Court of Appeals of Minnesota](minnesota/state/court-of-appeals) | `minnctapp` | in progress | — | — | — | 14 |

@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # Indiana
 
-Courts under `courts/seventh-circuit/indiana` (7).
+Courts under `courts/seventh-circuit/indiana` (6).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -11,7 +11,6 @@ Courts under `courts/seventh-circuit/indiana` (7).
 | [District Court, S.D. Indiana](federal/southern-district) | `insd` | up for review | — | — | — | 14 |
 | [Indiana Court of Appeals](state/court-of-appeals) | `indctapp` | in progress | — | — | — | 14 |
 | [Indiana Supreme Court](state/supreme-court) | `ind` | in progress | — | — | — | 14 |
-| [Indiana Tax Court](state/tax-court) | `indtc` | todo | — | — | — | 0 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

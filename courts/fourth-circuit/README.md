@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # Fourth Circuit
 
-Courts under `courts/fourth-circuit` (32).
+Courts under `courts/fourth-circuit` (29).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -27,11 +27,8 @@ Courts under `courts/fourth-circuit` (32).
 | [Court of Appeals of Maryland](maryland/state/court-of-appeals) | `md` | in progress | — | — | — | 14 |
 | [Court of Special Appeals of Maryland](maryland/state/court-of-special-appeals) | `mdctspecapp` | in progress | — | — | — | 14 |
 | [Court of Appeals of North Carolina](north-carolina/state/court-of-appeals) | `ncctapp` | in progress | — | — | — | 14 |
-| [North Carolina Industrial Commission](north-carolina/state/industrial-commission) | `ncworkcompcom` | todo | — | — | — | 0 |
-| [Superior Court of North Carolina](north-carolina/state/superior-court) | `ncsuperct` | in progress | — | — | — | 14 |
 | [Supreme Court of North Carolina](north-carolina/state/supreme-court) | `nc` | in progress | — | — | — | 14 |
 | [Court of Appeals of South Carolina](south-carolina/state/court-of-appeals) | `scctapp` | in progress | — | — | — | 14 |
-| [Court of Chancery of South Carolina](south-carolina/state/court-of-chancery) | `ctchansc` | todo | — | — | — | 0 |
 | [Supreme Court of South Carolina](south-carolina/state/supreme-court) | `sc` | in progress | — | — | — | 14 |
 | [Court of Appeals of Virginia](virginia/state/court-of-appeals) | `vactapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Virginia](virginia/state/supreme-court) | `va` | in progress | — | — | — | 14 |

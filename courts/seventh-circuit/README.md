@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # Seventh Circuit
 
-Courts under `courts/seventh-circuit` (22).
+Courts under `courts/seventh-circuit` (21).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -24,7 +24,6 @@ Courts under `courts/seventh-circuit` (22).
 | [Illinois Supreme Court](illinois/state/supreme-court) | `ill` | in progress | — | — | — | 14 |
 | [Indiana Court of Appeals](indiana/state/court-of-appeals) | `indctapp` | in progress | — | — | — | 14 |
 | [Indiana Supreme Court](indiana/state/supreme-court) | `ind` | in progress | — | — | — | 14 |
-| [Indiana Tax Court](indiana/state/tax-court) | `indtc` | todo | — | — | — | 0 |
 | [Court of Appeals of Wisconsin](wisconsin/state/court-of-appeals) | `wisctapp` | in progress | — | — | — | 14 |
 | [Wisconsin Supreme Court](wisconsin/state/supreme-court) | `wis` | in progress | — | — | — | 14 |
 

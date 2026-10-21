@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # Mississippi
 
-Courts under `courts/fifth-circuit/mississippi` (7).
+Courts under `courts/fifth-circuit/mississippi` (6).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -9,7 +9,6 @@ Courts under `courts/fifth-circuit/mississippi` (7).
 | [United States Bankruptcy Court, S.D. Mississippi](federal/bankruptcy-southern-district) | `mssb` | up for review | — | — | — | 14 |
 | [District Court, N.D. Mississippi](federal/northern-district) | `msnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Mississippi](federal/southern-district) | `mssd` | up for review | — | — | — | 14 |
-| [Mississippi Chancery Courts](state/chancery-courts) | `misschanceryct` | in progress | — | — | — | 0 |
 | [Court of Appeals of Mississippi](state/court-of-appeals) | `missctapp` | in progress | — | — | — | 14 |
 | [Mississippi Supreme Court](state/supreme-court) | `miss` | in progress | — | — | — | 14 |
 

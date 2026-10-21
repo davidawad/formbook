@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # First Circuit
 
-Courts under `courts/first-circuit` (23).
+Courts under `courts/first-circuit` (20).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -19,14 +19,11 @@ Courts under `courts/first-circuit` (23).
 | [District Court, D. Rhode Island](rhode-island/federal/district) | `rid` | up for review | — | — | — | 14 |
 | [Supreme Judicial Court of Maine](maine/state/supreme-judicial-court) | `me` | in progress | — | — | — | 14 |
 | [Massachusetts Appeals Court](massachusetts/state/appeals-court) | `massappct` | in progress | — | — | — | 14 |
-| [Massachusetts Appellate Tax Board](massachusetts/state/appellate-tax-board) | `masstaxbd` | todo | — | — | — | 0 |
-| [Massachusetts Department of Industrial Accidents](massachusetts/state/department-of-industrial-accidents) | `maworkcompcom` | todo | — | — | — | 0 |
 | [Massachusetts District Court, Appellate Division](massachusetts/state/district-court-appellate-division) | `massdistctapp` | todo | — | — | — | 0 |
 | [Massachusetts Supreme Judicial Court](massachusetts/state/supreme-judicial-court) | `mass` | in progress | — | — | — | 14 |
 | [Supreme Court of New Hampshire](new-hampshire/state/supreme-court) | `nh` | in progress | — | — | — | 14 |
 | [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](puerto-rico/state/court-of-appeals) | `prapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Puerto Rico](puerto-rico/state/supreme-court) | `prsupreme` | in progress | — | — | — | 14 |
-| [Superior Court of Rhode Island](rhode-island/state/superior-court) | `risuperct` | todo | — | — | — | 0 |
 | [Supreme Court of Rhode Island](rhode-island/state/supreme-court) | `ri` | in progress | — | — | — | 14 |
 
 [Formbook index](../../README.md)
