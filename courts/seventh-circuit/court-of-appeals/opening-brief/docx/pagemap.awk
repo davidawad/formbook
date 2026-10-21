@@ -1,7 +1,7 @@
 # pagemap.awk: the TOC and TOA page numbers, read from the LibreOffice PDF of a first pass (docx/render.sh).
 # Usage: awk -v man=<manifest> -f pagemap.awk page-1.txt page-2.txt ...   (pdftotext -layout, one file per page)
 # Output: H<TAB>idx<TAB>folio (headings), S<TAB>name<TAB>folio (table of authorities, certificates),
-#         T<TAB>key<TAB>pages (authorities; "passim" from 7 pages), and MISSING<TAB>... where a search failed.
+#         T<TAB>key<TAB>pages (authorities, from the C needles of the manifest; "passim" from 7 pages), and MISSING<TAB>... where a search failed.
 # A page belongs to the body when its last text line is an arabic folio; the front matter has roman folios.
 # true when text t occurs in s starting at or before position last (so it begins on this page)
 function starts_here(s, t, last,    start, pos, abs) {
@@ -22,10 +22,7 @@ BEGIN {
     n = split(line, f, "\t")
     if (f[1] == "H") { nh++; hid[nh] = f[2]; hkey[nh] = f[4] }
     else if (f[1] == "S") { ns++; sname[ns] = f[2]; smode[ns] = f[3]; skey[ns] = f[4] }
-    else if (f[1] == "T") {
-      if (!(f[2] in tcount)) { tkeys++; tkey[tkeys] = f[2]; tcount[f[2]] = 0 }
-      tcount[f[2]]++; ttext[f[2], tcount[f[2]]] = f[3]
-    }
+    else if (f[1] == "C") { nc++; ckey[nc] = f[2]; ckind[nc] = f[3]; ctext[nc] = f[4] }
   }
   close(man); pno = 0
 }
@@ -47,7 +44,7 @@ END {
         if (!body[p]) continue
         for (k = 1; k <= nl[p]; k++) {
           t = norm(L[p, k]); pos = index(t, hkey[h])
-          if (pos > 0 && pos <= 12) { found = 1; hf = folio[p]; cur = p; break }
+          if (pos == 1) { found = 1; hf = folio[p]; cur = p; break }
         }
       }
     }
@@ -72,16 +69,38 @@ END {
     joined2[p] = joined[p]
     if (p < pno) joined2[p] = joined[p] substr(joined[p + 1], 1, 400)   # a citation may run over the page end
   }
-  for (t = 1; t <= tkeys; t++) {
-    key = tkey[t]; np = 0
-    for (p = 1; p <= pno; p++) {
+  # citations, in document order: a body needle (B) is searched from where the last one was found and moves the
+  # search on; a footnote needle (N) is searched from the start of the page the body has reached
+  cp = 1; cpos = 1
+  # (a needle that runs over a page end is not found whole: the folio and the footnotes come between its halves;
+  # then its first two words are searched instead)
+  for (c = 1; c <= nc; c++) {
+    found = 0
+    for (try = 1; try <= 2 && !found; try++) {
+    needle = ctext[c]
+    if (try == 2) { split(ctext[c], w, " "); needle = w[1] " " w[2] }
+    for (p = cp; p <= pno && !found; p++) {
       if (!body[p]) continue
-      hit = 0
-      for (x = 1; x <= tcount[key]; x++) if (ttext[key, x] != "" && starts_here(joined2[p], ttext[key, x], length(joined[p]))) hit = 1
-      if (hit) { np++; pl2[np] = folio[p] }
+      start = (ckind[c] == "B" && p == cp) ? cpos : 1
+      pos = index(substr(joined2[p], start), needle)
+      if (pos == 0) continue
+      abs = start + pos - 1
+      if (abs > length(joined[p])) continue   # it begins on the next page
+      found = 1; cf = folio[p]
+      if (ckind[c] == "B") { cp = p; cpos = abs + 1 }
     }
-    if (np == 0) print "MISSING\tauthority\t" key
-    else if (np >= 7) print "T\t" key "\tpassim"
-    else { s = pl2[1]; for (i = 2; i <= np; i++) s = s ", " pl2[i]; print "T\t" key "\t" s }
+    }
+    key = ckey[c]
+    if (!found) { print "MISSING\tcitation\t" key "\t" ctext[c]; continue }
+    if (!(key in npg)) { nk++; korder[nk] = key; npg[key] = 0 }
+    dup = 0
+    for (i = 1; i <= npg[key]; i++) if (pg[key, i] == cf) dup = 1
+    if (!dup) { npg[key]++; pg[key, npg[key]] = cf }
+  }
+  for (k = 1; k <= nk; k++) {
+    key = korder[k]
+    if (npg[key] >= 7) { print "T\t" key "\tpassim"; continue }
+    s = pg[key, 1]; for (i = 2; i <= npg[key]; i++) s = s ", " pg[key, i]
+    print "T\t" key "\t" s
   }
 }
