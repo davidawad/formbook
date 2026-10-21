@@ -6,6 +6,7 @@
 // same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../lib/typst/tables.typ": leader-page
 
 // ---------------------------------------------------------------------------
 // Doc-type parameters (the only part that differs between the three copies)
@@ -224,9 +225,7 @@
       if numbered { box(width: heading-tab, lab) }
       title
       h(0.8em)
-      dot-leader
-      h(0.35em)
-      box(it.page())
+      leader-page(0.16em, it.page())
     })))
 }
 
@@ -288,9 +287,7 @@
           }
           inl(a.cite)
           h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
+          leader-page(0.16em, page-text)
         }))
       }
     }
