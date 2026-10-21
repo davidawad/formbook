@@ -5,7 +5,7 @@
 - CourtListener: [ttab](https://www.courtlistener.com/?court=ttab)
 - Level: agency
 - Circuit: `cafc`
-- Status: **up for review** (14%); manual status in `court.json`: `todo`
+- Status: **up for review** (29%); manual status in `court.json`: `todo`
 
 ## Checklist
 
@@ -15,7 +15,7 @@
 - [ ] typst engine passes (`usage/.check-typst.txt` valid)
 - [ ] latex engine passes (`usage/.check-latex.txt` valid)
 - [ ] docx engine passes (`usage/.check-docx.txt` valid)
-- [ ] a review file in `reviews/`
+- [x] a review file in `reviews/`
 
 Engines: typst `—`, latex `—`, docx `—`.
 
@@ -24,10 +24,11 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 ## Doc folders
 
-2 of 2 doc folders with an INPUT pass the typst eval.
+3 of 3 doc folders with an INPUT pass the typst eval.
 
 | Doc folder | Status | Eval |
 |---|---|---|
+| [answer](answer) | up for review | pass |
 | [notice-of-opposition](notice-of-opposition) | up for review | pass |
 | [trial-brief](trial-brief) | up for review | pass |
 

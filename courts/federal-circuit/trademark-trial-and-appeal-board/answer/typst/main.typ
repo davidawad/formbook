@@ -1,0 +1,9 @@
+// Entrypoint. Compile with the court-doc folder as --root; tools/render.sh does it:
+//   typst compile --root <doc-dir> --font-path <repo>/fonts --ignore-system-fonts \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
+//     typst/main.typ out.pdf
+#import "ttab-answer.typ": ttab-answer, split-frontmatter
+
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answer-3.md"))
+#let (meta, body) = split-frontmatter(src)
+#ttab-answer(meta, body)

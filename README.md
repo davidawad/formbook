@@ -90,7 +90,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Court of International Trade](courts/federal-circuit/court-of-international-trade) | `cit` | up for review | — | — | — | 14 |
 | [United States Court of Veteran Appeals](courts/federal-circuit/court-of-veteran-appeals) | `cavc` | up for review | — | — | — | 14 |
 | [Patent Trial and Appeal Board](courts/federal-circuit/patent-trial-and-appeal-board) | `ptab` | up for review | — | — | — | 14 |
-| [Trademark Trial and Appeal Board](courts/federal-circuit/trademark-trial-and-appeal-board) | `ttab` | up for review | — | — | — | 14 |
+| [Trademark Trial and Appeal Board](courts/federal-circuit/trademark-trial-and-appeal-board) | `ttab` | up for review | — | — | — | 29 |
 
 ## Military courts
 
@@ -833,7 +833,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Supreme Court of the United States | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
 |  | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
+| Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 16.5% |
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
 | First Circuit | 23 | 0 | 12 | 7 | 4 | 0.0% | 52.1% | 0 | 0 | 0 | 11.5% |
@@ -848,7 +848,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Tenth Circuit | 34 | 0 | 19 | 12 | 3 | 0.0% | 55.8% | 0 | 0 | 0 | 12.3% |
 | Eleventh Circuit | 32 | 0 | 19 | 13 | 0 | 0.0% | 59.3% | 0 | 0 | 0 | 14.0% |
 | D.C. Circuit | 4 | 0 | 3 | 1 | 0 | 0.0% | 75.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 224 | 128 | 24 | 0.0% | 59.5% | 1 | 0 | 0 | 12.8% |
+| **Total** | 376 | 0 | 224 | 128 | 24 | 0.0% | 59.5% | 1 | 0 | 0 | 12.9% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -856,7 +856,7 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 |  | 2 | 2 | 2 | 2 | 2 | 2 | 100.0% | 2 |
 | Supreme Court of the United States | 3 | 3 | 3 | 3 | 3 | 3 | 100.0% | 3 |
-| Federal Circuit and feeder courts | 13 | 13 | 13 | 13 | 13 | 13 | 100.0% | 13 |
+| Federal Circuit and feeder courts | 14 | 14 | 14 | 14 | 14 | 14 | 100.0% | 14 |
 | Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 12 |
 | National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 6 |
 | First Circuit | 26 | 26 | 26 | 26 | 25 | 25 | 96.1% | 26 |
@@ -871,5 +871,5 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 39 |
 | Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 48 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 491 |
+| **Total** | 492 | 492 | 492 | 492 | 483 | 483 | 98.1% | 492 |
 <!-- tracker:end -->
