@@ -27,7 +27,7 @@ signature:
     - "lkdonohue@law.georgetown.edu"
 date: "February 23, 2018"
 word_processor: "Typst 0.15.0"
-typeface: "EB Garamond"
+typeface: "Times New Roman"
 court_appointed: true
 service:
   certificate: true
