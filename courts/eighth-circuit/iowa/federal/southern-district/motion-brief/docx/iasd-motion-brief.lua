@@ -1,14 +1,14 @@
 -- iasd motion brief, docx engine (docs/DOCX.md). Mirrors typst/iasd-motion-brief.typ:
---   * front matter in its own section, numbered i, ii, ... (the footer reference is a placeholder that
---     docx/render.sh replaces with pandoc's footer part): cover (caption, title, ORAL ARGUMENT REQUESTED),
---     table of contents, table of authorities; the body starts again at 1;
+--   * front matter in its own section, numbered i, ii, ... (fb render writes the footer, rIdFtrPage): cover
+--     (caption, title, ORAL ARGUMENT REQUESTED), table of contents, table of authorities; the body starts again at 1;
 --   * headings: level 1 centered bold capitals; levels 2 to 4 labelled I., A., 1. with a hanging indent
 --     (the labels are typed here; the template numbers them);
 --   * table of authorities built from the toa: links, grouped as in the template; authority links are shown as text;
 --   * signature block (LR 11): date on the left, signature lines at the caption's party column.
--- BLOCKED (docs/DOCX.md, "Fields"): the table of contents and table of authorities have no page numbers: the
--- page of each heading and authority is not computed here (no layout engine), so the entries end in an empty
--- page column. See the README, Engines.
+--   * table of contents and table of authorities with measured pages: fb render runs this filter in passes
+--     (tools/fb/src/docxpass.rs); each pass writes a needle for every heading and citation to $FORMBOOK_NEEDLES
+--     and reads the pages LibreOffice gave them in the previous pass from $FORMBOOK_PAGES (the first pass prints
+--     placeholders). Word may paginate slightly differently (docs/DOCX.md).
 -- Content-agnostic: every case word comes from the sample's frontmatter.
 local SIG_INDENT = 4968 -- twips: 3.25 in caption column + 0.2 in gutter, as the typst signature block
 local GROUPS = { { "case", "Cases" }, { "statute", "Statutes" }, { "rule", "Rules" }, { "other", "Other Authorities" } }
@@ -27,6 +27,54 @@ end
 local function need(meta, k)
   if meta[k] == nil then error("iasd-motion-brief.lua: frontmatter field `" .. k .. "` is required") end
   return meta[k]
+end
+
+-- ---------------------------------------------------------------------------
+-- Needles and pages (fb render's multi-pass docx engine, tools/fb/src/docxpass.rs and docxpages.rs)
+-- ---------------------------------------------------------------------------
+
+local NEEDLE_MAX = 60 -- a needle is a prefix of the text (letters and digits only)
+local PASSIM = 5      -- an authority on this many pages or more reads "passim" (typst passim-threshold)
+
+-- Letters and digits only, lower case: fb render normalizes the PDF text the same way.
+local function norm(s)
+  return (s:lower():gsub("[^a-z0-9]", ""))
+end
+
+-- A needle: { id, kind, needle, fallback }. Kind B (body, in document order: moves the search on), N (inside a
+-- footnote: searched from the page the body has reached, moves nothing).
+local needles = {}
+local function needle(id, kind, s, context)
+  local short = norm(s):sub(1, NEEDLE_MAX)
+  local long = norm(s .. " " .. (context or "")):sub(1, NEEDLE_MAX)
+  if short == "" then short = long end
+  needles[#needles + 1] = { id = id, kind = kind, needle = long, fallback = short }
+end
+
+-- The pages of the previous pass: id -> label. Absent on the first pass.
+local labels = {}
+local function load_pages()
+  local path = os.getenv("FORMBOOK_PAGES")
+  if not path or path == "" then return end
+  local f = io.open(path, "r")
+  if not f then return end
+  for line in f:lines() do
+    local id, _, label = line:match("^([^\t]+)\t([^\t]*)\t(.*)$")
+    if id then labels[id] = label end
+  end
+  f:close()
+end
+
+local function label_of(id)
+  return labels[id] or "00" -- the first pass: a placeholder of the final width
+end
+
+local function write_file(env, s)
+  local path = os.getenv(env)
+  if not path or path == "" then return end
+  local f = assert(io.open(path, "w"))
+  f:write(s)
+  f:close()
 end
 
 local function rb(xml)
@@ -137,23 +185,83 @@ local function toa_keys(doc)
   return keys, seen
 end
 
+-- The body in document order: a needle for each heading (its text and the start of the block after it) and for
+-- each citation (its text and the rest of its paragraph, footnotes left out). Returns the key of each citation.
+local function scan_body(blocks)
+  local cites = {}
+  local scan_blocks
+  local function scan_inlines(list, in_note)
+    for i, el in ipairs(list) do
+      if el.t == "Link" and el.target:sub(1, 4) == "toa:" then
+        cites[#cites + 1] = el.target:sub(5)
+        local rest = {}
+        for j = i + 1, #list do
+          if list[j].t ~= "Note" then rest[#rest + 1] = list[j] end
+        end
+        needle("T:" .. #cites, in_note and "N" or "B", text(el.content), text(pandoc.Inlines(rest)))
+      elseif el.t == "Note" then
+        scan_blocks(el.content, true)
+      elseif el.content and type(el.content) ~= "string" then
+        scan_inlines(el.content, in_note)
+      end
+    end
+  end
+  scan_blocks = function(list, in_note)
+    for _, b in ipairs(list) do
+      if b.t == "Para" or b.t == "Plain" then
+        scan_inlines(b.content, in_note)
+      elseif b.t == "BlockQuote" then
+        scan_blocks(b.content, in_note)
+      elseif b.t == "BulletList" or b.t == "OrderedList" then
+        for _, item in ipairs(b.content) do scan_blocks(item, in_note) end
+      end
+    end
+  end
+  local h = 0
+  for i, b in ipairs(blocks) do
+    if b.t == "Header" then
+      h = h + 1
+      needle("H:" .. h, "B", text(b.content), blocks[i + 1] and text(blocks[i + 1]):sub(1, 40) or "")
+    else
+      scan_blocks({ b }, false)
+    end
+  end
+  return cites
+end
+
+-- Each entry ends in a right tab with dot leaders and its page, from the previous pass.
 local function toc_section(heads)
   local out = { p("TABLE OF CONTENTS", { bold = true, jc = "center", line = 480, keep = true }) }
   out[#out + 1] = p("Page", { bold = true, jc = "right", after = 240, keep = true })
-  for _, h in ipairs(heads) do
+  for i, h in ipairs(heads) do
+    local page = run(label_of("H:" .. i))
     if h.level == 1 then
       out[#out + 1] = p("", { dot = true, after = 120, line = 480,
-        xml = run(string.upper(h.text)) .. TAB .. "" })
+        xml = run(string.upper(h.text)) .. TAB .. page })
     else
       local left = (h.level - 2) * 720 + 720
       out[#out + 1] = p("", { dot = true, after = 120, left = left, hanging = 720,
-        xml = run(h.label) .. TAB .. run(h.text) .. TAB })
+        xml = run(h.label) .. TAB .. run(h.text) .. TAB .. page })
     end
   end
   return table.concat(out)
 end
 
-local function toa_section(meta, keys, seen)
+-- An authority's pages: the distinct page labels of its citations in document order, or "passim".
+local function toa_pages(key, cites)
+  local pages, seen = {}, {}
+  for n, k in ipairs(cites) do
+    local l = label_of("T:" .. n)
+    if k == key and not seen[l] then
+      seen[l] = true
+      pages[#pages + 1] = l
+    end
+  end
+  if #pages >= PASSIM then return run("passim", { italic = true }) end
+  return run(table.concat(pages, ", "))
+end
+
+local function toa_section(meta, keys, cites)
   local authorities = meta.authorities or {}
   for _, k in ipairs(keys) do
     if authorities[k] == nil then
@@ -182,18 +290,26 @@ local function toa_section(meta, keys, seen)
           xml = run(text(a.name), { italic = kind == "case" }) .. run(", ")
         end
         xml = xml .. run(text(a.cite))
-        out[#out + 1] = p("", { dot = true, after = 120, left = 504, hanging = 504, xml = xml .. TAB })
+        out[#out + 1] = p("", { dot = true, after = 120, left = 504, hanging = 504,
+          xml = xml .. TAB .. toa_pages(k, cites) })
       end
     end
   end
   return table.concat(out)
 end
 
--- The section break ending the front matter: roman numbers, footer part as pandoc wrote it (placeholder).
-local function front_section_break()
-  return '<w:p><w:pPr><w:sectPr><w:footerReference w:type="default" r:id="rIdFooterFront" />'
+-- A section's properties: the centered PAGE footer fb render writes (rIdFtrPage), the page number format and
+-- start, letter paper with 1 in margins.
+local function sect_pr(fmt)
+  return '<w:sectPr><w:footerReference w:type="default" r:id="rIdFtrPage" />'
     .. '<w:pgSz w:w="12240" w:h="15840" /><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0" />'
-    .. '<w:pgNumType w:fmt="lowerRoman" w:start="1" /></w:sectPr></w:pPr></w:p>'
+    .. '<w:pgNumType w:fmt="' .. fmt .. '" w:start="1" /></w:sectPr>'
+end
+
+-- The section break ending the front matter: roman numbers. The body's section (arabic from 1) is the
+-- document's last, which fb render takes from $FORMBOOK_FINAL.
+local function front_section_break()
+  return "<w:p><w:pPr>" .. sect_pr("lowerRoman") .. "</w:pPr></w:p>"
 end
 
 -- A non-breaking space after a section or paragraph sign, so the sign stays with its number.
@@ -211,16 +327,26 @@ local function nbsp_signs(inlines)
 end
 
 function Pandoc(doc)
+  load_pages()
   local meta = doc.meta
   local heads = heading_list(doc)
-  local keys, seen = toa_keys(doc)
+  local keys = toa_keys(doc)
+  needle("S:cover", "B", "IN THE UNITED STATES DISTRICT COURT", "FOR THE SOUTHERN DISTRICT OF IOWA")
+  local cites = scan_body(doc.blocks)
+  local nl = {}
+  for _, n in ipairs(needles) do nl[#nl + 1] = table.concat({ n.id, n.kind, n.needle, n.fallback }, "\t") end
+  -- how fb render labels pages: the front matter from the cover (i, ii ...), the body from its first heading
+  nl[#nl + 1] = "#section\tS:cover\tlower-roman\t"
+  if #heads > 0 then nl[#nl + 1] = "#section\tH:1\tdecimal\t" end
+  write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
+  write_file("FORMBOOK_FINAL", sect_pr("decimal"))
 
   local out = {}
   -- Cover (roman i)
   out[#out + 1] = rb(court_title(meta) .. caption_table(meta) .. page_break())
-  -- Table of contents and table of authorities (roman ii, iii, ...). BLOCKED: no page numbers (see the header).
+  -- Table of contents and table of authorities (roman ii, iii, ...), with the pages of the previous pass.
   out[#out + 1] = rb(toc_section(heads) .. page_break())
-  out[#out + 1] = rb(toa_section(meta, keys, seen))
+  out[#out + 1] = rb(toa_section(meta, keys, cites))
   out[#out + 1] = rb(front_section_break())
 
   -- Body (arabic from 1): headings get their labels, the rest is pandoc's.

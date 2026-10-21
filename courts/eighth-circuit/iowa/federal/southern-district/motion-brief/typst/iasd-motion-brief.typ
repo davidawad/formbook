@@ -77,6 +77,9 @@
 )
 
 #let dot-leader = box(width: 1fr, repeat[.#h(0.25em)])
+// Table of authorities: the page column, and the least leader before a page list too wide for it.
+#let toa-page-col = 0.9in
+#let toa-min-leader = 0.75in
 
 // ---------------------------------------------------------------------------
 // Cover: court title, caption, title of the paper, oral argument (LR 10(d), 7(c))
@@ -196,19 +199,26 @@
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        // The page numbers sit in their own column, so a long citation can never push them onto a new line.
-        grid(columns: (1fr, 0.9in), column-gutter: 0.2em,
-          block(breakable: false, above: 0.6em, below: 0pt, hang(0.35in, {
-            set par(leading: single-leading, first-line-indent: 0pt)
-            if "name" in a {
-              if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
-              [, ]
-            }
-            inl(a.cite)
-            h(0.4em)
-            dot-leader
-          })),
-          block(breakable: false, above: 0.6em, below: 0pt, align(right, page-text)))
+        let entry = {
+          if "name" in a {
+            if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
+            [, ]
+          }
+          inl(a.cite)
+          h(0.4em)
+          dot-leader
+        }
+        // The page numbers sit in their own column, bottom-aligned, so they follow the leaders on the entry's
+        // last line and a long citation can never push them onto a new line. A list wider than the column
+        // runs on after a leader of at least `toa-min-leader` and wraps after a comma.
+        block(breakable: false, above: 0.6em, below: 0pt,
+          if measure(page-text).width <= toa-page-col {
+            grid(columns: (1fr, toa-page-col), column-gutter: 0.2em,
+              hang(0.35in, entry),
+              align(right + bottom, page-text))
+          } else {
+            hang(0.35in, { entry; box(width: toa-min-leader, repeat[.#h(0.25em)]); h(0.2em); page-text })
+          })
       }
     }
   }
