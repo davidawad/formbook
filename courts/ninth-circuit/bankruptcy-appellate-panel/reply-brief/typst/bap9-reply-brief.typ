@@ -6,7 +6,7 @@
 // the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
-#import "../../../../../lib/typst/tables.typ": leader-page as shared-leader-page
+#import "../../../../../lib/typst/tables.typ": leader-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -172,10 +172,8 @@
       let shown = if uniq.len() >= passim-threshold { "passim" } else { uniq.map(str).join(", ") }
       // the name is printed before the cite only when it adds something (a case name; a rule's name is its cite)
       let display = if "name" in a and a.name != a.cite { inl(a.name) + [, ] } else { [] }
-      block(above: 0.5em, below: 0.4em, breakable: false, par(
-        first-line-indent: 0pt, hanging-indent: 0.4in, leading: single-leading, justify: false,
-        [#display#inl(a.cite)#shared-leader-page(shown, 0.2em, before: 0pt, gap: 0.25em)],
-      ))
+      block(above: 0.5em, below: 0.4em, breakable: false, leader-row([#display#inl(a.cite)], shown,
+        hang: 0.4in, leading: single-leading, dot-gap: 0.2em, lead-gap: 0pt, gutter: 0.25em, min-leader: 1em))
     }
   }
 }
