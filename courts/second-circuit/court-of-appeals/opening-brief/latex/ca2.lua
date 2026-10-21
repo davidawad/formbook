@@ -301,7 +301,7 @@ local function signature(m)
   local out = {}
   -- answering and reply: the date and city come above the signature (their typst templates)
   if DOC ~= "opening" and m.date then
-    table.insert(out, "\\par\\noindent Dated: " .. tex(m.date) .. (m.city and (", " .. tex(m.city)) or "") .. "\\par")
+    table.insert(out, "\\par\\noindent Dated: " .. tex(m.date) .. (m.city and (", " .. tex(m.city)) or "") .. "\\par\\nopagebreak")
   end
   local sigline = DOC == "opening" and "s/ " or "/s/ "
   local name = DOC == "opening" and ("\\MakeUppercase{" .. tex(sig.signer) .. "}") or tex(sig.signer)
@@ -310,7 +310,7 @@ local function signature(m)
   if DOC == "reply" and m.counsel_for then table.insert(block, "\\\\[0.6em]\\emph{" .. tex(m.counsel_for) .. "}") end
   table.insert(block, "\\end{briefsig}")
   table.insert(out, table.concat(block))
-  if DOC == "opening" and m.date then table.insert(out, "\\par\\vspace{0.8em}" .. tex(m.date) .. "\\par") end
+  if DOC == "opening" and m.date then table.insert(out, "\\par\\nopagebreak\\vspace{0.8em}" .. tex(m.date) .. "\\par") end
   return table.concat(out, "")
 end
 local function words_of(blocks)

@@ -54,25 +54,32 @@
 % Headings (CA2-CONV-004). The labels come from ca2.lua; the layout is here.
 % ---------------------------------------------------------------------------
 \newlength{\briefheadtab}\setlength{\briefheadtab}{0.5in}
+% Room for a heading and its first lines (\needspace), unless the heading follows another: that one ended in
+% \nopagebreak, and asking for room again would break the page between the two.
+\newcommand\brief@need[1]{\ifnum\lastpenalty<10000 \needspace{#1}\fi}
+% The end of a heading: ca2.lua writes the contents entry right after the heading, so the entry is taken in here and
+% the \nopagebreak follows it (after the entry, a whatsit, the page could otherwise break below the heading).
+\newcommand\brief@endhead{\@ifnextchar\addcontentsline{\brief@endtoc}{\nopagebreak}}
+\def\brief@endtoc\addcontentsline#1#2#3{\addcontentsline{#1}{#2}{#3}\nopagebreak}
 % Section headings: bold capitals, centered (typst: 1.15 em, above 1.5 em, below 1.1 em).
 \newcommand\briefhead[1]{%
-  \par\needspace{2\baselineskip}\addvspace{1.5em}%
+  \par\brief@need{2\baselineskip}\addvspace{1.5em}%
   {\centering\briefsingle\bfseries\fontsize{16.1}{19.9}\selectfont\MakeUppercase{#1}\par}%
-  \nopagebreak\addvspace{1.1em}\nopagebreak}
+  \nopagebreak\addvspace{1.1em}\brief@endhead}
 % Point headings of the Argument: bold, centered, the label in front. Not small capitals: Times New Roman has none,
 % and newtx bold small capitals share a font descriptor with the upright bold whose ascent and descent they would
 % shrink (the word heights the type-size check measures).
 \newcommand\briefpoint[2]{%
-  \par\needspace{2\baselineskip}\addvspace{1.2em}%
+  \par\brief@need{2\baselineskip}\addvspace{1.2em}%
   {\centering\briefsingle\bfseries #1\ #2\par}%
-  \nopagebreak\addvspace{1.1em}\nopagebreak}
+  \nopagebreak\addvspace{1.1em}\brief@endhead}
 % Sub-headings: the label at indent #1 in a half-inch box, the text hanging under it.
 % #2 label, #3 style (bold; bold italic from level 4), #4 text.
 \newcommand\briefsub[4]{%
-  \par\needspace{2\baselineskip}\addvspace{1.1em}%
+  \par\brief@need{2\baselineskip}\addvspace{1.1em}%
   \noindent\hspace*{#1}\makebox[\briefheadtab][l]{#3{#2}}%
   \begingroup\parbox[t]{\dimexpr\linewidth-#1-\briefheadtab\relax}{\raggedright #3{#4}}\endgroup
-  \par\nopagebreak\addvspace{0.9em}\nopagebreak}
+  \par\nopagebreak\addvspace{0.9em}\brief@endhead}
 
 % ---------------------------------------------------------------------------
 % Tables of contents and authorities (FRAP 28(a)(2)-(3))
