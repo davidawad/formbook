@@ -6,6 +6,7 @@
 // the metadata comes from the YAML frontmatter of the same file (schema: README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../../../lib/typst/tables.typ": leader-page
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -247,9 +248,7 @@
           }
           inl(a.cite)
           h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
+          leader-page(0.16em, page-text)
         }))
       }
     }
