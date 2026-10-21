@@ -32,9 +32,13 @@
     ),
   )
   // typst's greedy breaker tests a line at its natural width and never counts on shrinking spaces,
-  // so Word's compression is applied as a narrower natural space in justified paragraphs; the
-  // justification then stretches every full line back to the measure.
-  set text(spacing: shrink) if opts.at("justify", default: false) and shrink < 100%
+  // so Word's compression is applied as a narrower natural space wherever text is justified (a show
+  // rule on text, not on par: typst 0.15 lays out inline content of a block without a par element);
+  // the justification then stretches every full line back to the measure.
+  show text: it => context if par.justify and shrink < 100% {
+    set text(spacing: shrink)
+    it
+  } else { it }
   if "justify" in opts {
     set par(justify: opts.justify)
     body

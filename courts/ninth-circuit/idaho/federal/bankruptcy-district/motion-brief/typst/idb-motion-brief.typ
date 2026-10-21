@@ -11,10 +11,10 @@
 // Parameters
 // ---------------------------------------------------------------------------
 #let font-family = ("Times New Roman", "Liberation Serif")   // LBR 5005-1(c)(2): 12 to 14 point type, no face named; kept per docs/FONTS.md (README)
-#let type-size = 13pt              // inside the 12-14 point range; EB Garamond at 13 pt reads like Times 12 pt
+#let type-size = 12pt              // inside the 12-14 point range; both filers set Times New Roman at 12 pt (fb-w0vj)
 #let note-size = 12pt              // footnotes: LBR 5005-1(c)(2) sets 12 pt as the floor for all type
-#let body-leading = 1.45em         // double spacing (both filers; no rule sets it): about 2.1 em, 27.5 pt, baseline to baseline
-#let single-leading = 0.45em       // single spacing: counsel, caption, signature, block quotes, notice, footnotes
+#let body-leading = 1.607em        // double spacing (both filers; no rule sets it): 27.6 pt baseline to baseline at 12 pt
+#let single-leading = 0.457em      // single spacing (13.8 pt pitch at 12 pt): counsel, caption, signature, block quotes, notice, footnotes
 #let para-indent = 0.5in           // first-line indent of paragraphs (both filers)
 #let num-width = 0.5in             // paragraph number box: text after "1." and "10." starts at the same tab (both filers)
 #let margin-x = 1in
