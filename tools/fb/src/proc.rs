@@ -76,6 +76,33 @@ pub fn pdf_pages(pdf: &Path) -> u32 {
         .unwrap_or(0)
 }
 
+/// Move `src` to `dst` like `std::fs::rename`, but across filesystems too: when the rename fails with EXDEV
+/// (scratch space under a TMPDIR on another mount than the repo, fb-595.51), copy to a hidden sibling of `dst`,
+/// rename that into place, and remove `src`.
+pub fn move_file(src: &Path, dst: &Path) -> std::io::Result<()> {
+    move_with(src, dst, |a, b| std::fs::rename(a, b))
+}
+
+fn move_with(
+    src: &Path,
+    dst: &Path,
+    rename: impl Fn(&Path, &Path) -> std::io::Result<()>,
+) -> std::io::Result<()> {
+    match rename(src, dst) {
+        Err(e) if e.kind() == std::io::ErrorKind::CrossesDevices => {
+            let name = dst.file_name().unwrap_or_default().to_string_lossy();
+            let part = dst.with_file_name(format!(".{name}.fb-move-{}", std::process::id()));
+            let copied = std::fs::copy(src, &part).and_then(|_| std::fs::rename(&part, dst));
+            if copied.is_err() {
+                let _ = std::fs::remove_file(&part);
+            }
+            copied?;
+            std::fs::remove_file(src)
+        }
+        r => r,
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -100,5 +127,76 @@ mod tests {
     fn missing_tool_is_absent() {
         assert!(!have("fb-no-such-tool-xyz"));
         assert_eq!(pdf_pages(Path::new("/nonexistent.pdf")), 0);
+    }
+
+    fn scratch(label: &str) -> PathBuf {
+        let d = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("target")
+            .join(format!("move-{label}-{}", std::process::id()));
+        std::fs::create_dir_all(&d).unwrap();
+        d
+    }
+
+    #[test]
+    fn move_falls_back_to_copy_on_exdev() {
+        let d = scratch("exdev");
+        let (src, dst) = (d.join("a.docx"), d.join("b.docx"));
+        std::fs::write(&src, b"docx").unwrap();
+        std::fs::write(&dst, b"old").unwrap();
+        let exdev =
+            |_: &Path, _: &Path| Err(std::io::Error::from(std::io::ErrorKind::CrossesDevices));
+        move_with(&src, &dst, exdev).unwrap();
+        assert_eq!(std::fs::read(&dst).unwrap(), b"docx");
+        assert!(!src.exists());
+        assert_eq!(
+            std::fs::read_dir(&d).unwrap().count(),
+            1,
+            "no .fb-move part left behind"
+        );
+        let other =
+            |_: &Path, _: &Path| Err(std::io::Error::from(std::io::ErrorKind::PermissionDenied));
+        std::fs::write(&src, b"x").unwrap();
+        assert!(move_with(&src, &dst, other).is_err());
+        assert!(src.exists(), "other rename errors are not swallowed");
+        std::fs::remove_dir_all(&d).unwrap();
+    }
+
+    #[test]
+    fn move_crosses_a_real_tmpfs() {
+        use std::os::unix::fs::MetadataExt;
+        let shm = Path::new("/dev/shm");
+        let d = scratch("tmpfs");
+        let skip = |why: &str| {
+            let _ = std::fs::remove_dir_all(&d);
+            eprintln!("SKIP move_crosses_a_real_tmpfs: {why}");
+            if let Some(log) = std::env::var_os("TEST_SKIP_LOG") {
+                use std::io::Write;
+                let mut f = std::fs::OpenOptions::new()
+                    .create(true)
+                    .append(true)
+                    .open(log)
+                    .unwrap();
+                writeln!(f, "proc::tests::move_crosses_a_real_tmpfs: {why}").unwrap();
+            }
+        };
+        let (Ok(a), Ok(b)) = (shm.metadata(), d.metadata()) else {
+            return skip("/dev/shm absent");
+        };
+        if a.dev() == b.dev() {
+            return skip("/dev/shm is on the same filesystem as target/");
+        }
+        let src = shm.join(format!("fb-move-test-{}.docx", std::process::id()));
+        std::fs::write(&src, b"docx").unwrap();
+        let dst = d.join("out.docx");
+        let raw = std::fs::rename(&src, &dst).unwrap_err();
+        assert_eq!(
+            raw.kind(),
+            std::io::ErrorKind::CrossesDevices,
+            "plain rename reproduces EXDEV"
+        );
+        move_file(&src, &dst).unwrap();
+        assert_eq!(std::fs::read(&dst).unwrap(), b"docx");
+        assert!(!src.exists());
+        std::fs::remove_dir_all(&d).unwrap();
     }
 }

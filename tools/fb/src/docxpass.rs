@@ -196,7 +196,7 @@ pub fn render(court: &Path, args: &[String], sample: &str, out: &Path, work: &Pa
     let pass = |n: usize| work.join(format!("pass{n}.docx"));
     pandoc(court, args, sample, "", work, &pass(1))?;
     if !work.join("needles.tsv").is_file() {
-        return std::fs::rename(pass(1), out).map_err(|e| io(out, e));
+        return crate::proc::move_file(&pass(1), out).map_err(|e| io(out, e));
     }
     finish(&pass(1), work)?;
     let mut prev = pages_of(&pass(1), 1, work)?;
