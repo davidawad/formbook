@@ -1,6 +1,7 @@
 # Bankruptcy Court, District of Wyoming: adversary complaints and motion memoranda
 
 Alias `wyb`. Scope: adversary complaints and motion memoranda. Verified against the court-posted Local Bankruptcy Rules and Forms, effective July 1, 2012, and Federal Rules of Bankruptcy Procedure as amended to December 1, 2025, on 2026-10-20.
+Re-check cadence: check the court rules page for amendments before use and after each local-rule revision; re-check the applicable federal rules after each annual amendment cycle and at least annually (next routine review by 2027-10-20).
 
 ## Sources
 
