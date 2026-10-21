@@ -6,11 +6,11 @@
 --     (Form 15) and the addendum (Circuit Rule 28-2.7), as paragraphs with explicit spacing, indents and tabs;
 --   * the heading labels (I., A., 1., a. in the Argument; A., 1., a., (1) elsewhere) and each heading's outline
 --     level (Heading 1-5 styles, so the PDF has bookmarks);
---   * the pages in the two tables. render.sh renders the document once, finds the page of every heading and
+--   * the pages in the two tables. fb render (tools/fb/src/docxpass.rs) renders the document once, finds the page of every heading and
 --     citation in that PDF (the needles this filter writes), and renders again with those pages (the pages file
 --     this filter reads);
 --   * the sections whose footers number the pages: cover (none), front matter (i, ii ...), body and
---     certificates (1, 2 ...), addendum (Add-1 ...). render.sh writes the footers and the last section.
+--     certificates (1, 2 ...), addendum (Add-1 ...). fb render writes the footers; this filter writes the last section (FORMBOOK_FINAL).
 -- Word may paginate slightly differently from the LibreOffice PDF the page numbers come from (docs/DOCX.md).
 
 local TOC_DEPTH = 4    -- heading levels listed in the table of contents (typst: toc-depth)
@@ -159,13 +159,20 @@ local function rule(kind, before, left_right)
 end
 
 -- The paragraph that ends a section: its sectPr is the section's (footer, page number format and start).
-local function section(footer, fmt, start)
+-- A section's properties: its footer (rIdFtrNone, rIdFtrPage or rIdFtrAdd, written by fb render), page number
+-- format and start, letter paper with 1 in margins.
+local function sect_pr(footer, fmt, start)
   local pg = ""
   if fmt then pg = '<w:pgNumType w:fmt="' .. fmt .. '" w:start="' .. (start or 1) .. '"/>' end
-  return raw('<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/><w:sectPr>'
-    .. '<w:footerReference w:type="default" r:id="' .. footer .. '"/>'
+  return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/>'
     .. '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" '
-    .. 'w:header="720" w:footer="576" w:gutter="0"/>' .. pg .. "</w:sectPr></w:pPr></w:p>")
+    .. 'w:header="720" w:footer="576" w:gutter="0"/>' .. pg .. "</w:sectPr>"
+end
+
+-- The paragraph that ends a section and carries its properties.
+local function section(footer, fmt, start)
+  return raw('<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>'
+    .. sect_pr(footer, fmt, start) .. "</w:pPr></w:p>")
 end
 
 local function group_digits(n)
@@ -189,7 +196,7 @@ local function roman(n)
   return out
 end
 
--- Letters and digits only, lower case: render.sh normalizes the PDF text the same way.
+-- Letters and digits only, lower case: fb render (docxpages.rs) normalizes the PDF text the same way.
 local function norm(s)
   return (s:lower():gsub("[^a-z0-9]", ""))
 end
@@ -744,8 +751,13 @@ function Pandoc(doc)
   end
   local nl = {}
   for _, n in ipairs(needles) do nl[#nl + 1] = table.concat({ n.id, n.kind, n.needle, n.fallback }, "\t") end
+  -- how fb render labels pages: each section starts at the page of a needle (format, prefix)
+  nl[#nl + 1] = "#section\tS:toc\tlower-roman\t"
+  nl[#nl + 1] = "#section\tH:1\tdecimal\t"
+  if #add_in > 0 then nl[#nl + 1] = "#section\tS:add\tdecimal\tAdd-" end
   write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
-  write_file("FORMBOOK_FINAL", #add_in > 0 and "addendum\n" or "body\n")
+  -- the last section is the document's own sectPr: arabic from 1, or Add-1 when the addendum ends the brief
+  write_file("FORMBOOK_FINAL", sect_pr(#add_in > 0 and "rIdFtrAdd" or "rIdFtrPage", "decimal", 1))
 
   local out = {}
   local function add(x) out[#out + 1] = x end
@@ -776,7 +788,7 @@ function Pandoc(doc)
   add(raw(compliance(meta, words)))
   if with_service then add(raw(service(meta))) end
 
-  -- Section 4: the addendum (Add-1 ...), with its own contents; render.sh closes it with the last section's footer
+  -- Section 4: the addendum (Add-1 ...), with its own contents; FORMBOOK_FINAL closes it with the last section's footer
   if #add_in > 0 then
     add(section("rIdFtrPage", "decimal", 1))
     add(raw(section_heading("Addendum", true)))

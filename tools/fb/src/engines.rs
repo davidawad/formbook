@@ -6,7 +6,8 @@
 //!   <court>/latex/template.tex  otherwise pandoc --template plus every latex/*.lua filter, then tectonic
 //!                               (default), xelatex (LATEX_ENGINE=xelatex), or LuaLaTeX (LATEX_ENGINE=lualatex)
 //!   <court>/docx/render.sh      if present it owns the .docx: sh render.sh <court-dir> <sample.md> <out.docx>
-//!   <court>/docx/reference.docx otherwise pandoc --reference-doc plus every docx/*.lua filter
+//!   <court>/docx/reference.docx otherwise pandoc --reference-doc plus every docx/*.lua filter, in passes when
+//!                               the filters need page numbers (docxpass.rs)
 //! The docx is then checked (valid zip, well-formed XML parts) and converted to PDF with LibreOffice.
 use crate::proc::{capture, have, tail, which, TempDir};
 use crate::{fail, Res};
@@ -175,6 +176,7 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
         .map_or(0, |d| d.as_nanos());
     let temp_docx = docx.with_file_name(format!(".fb-docx-{}-{nanos}.docx", std::process::id()));
     let _cleanup = RemoveOnDrop(temp_docx.clone());
+    let work = TempDir::new("docx")?;
     if d.join("render.sh").is_file() {
         if !run_owner(&d.join("render.sh"), court, sample, &temp_docx)? {
             return Err(fail(1, "fb render: docx/render.sh failed"));
@@ -186,12 +188,7 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
             format!("--reference-doc={}", d.join("reference.docx").display()),
         ];
         args.extend(lua_filters(&d));
-        args.extend([
-            sample.to_string(),
-            "-o".into(),
-            temp_docx.display().to_string(),
-        ]);
-        pandoc(court, &args)?;
+        crate::docxpass::render(court, &args[2..], sample, &temp_docx, work.path())?;
     } else {
         return Err(fail(
             1,
@@ -208,7 +205,6 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
             format!("fb render: {} was not written", temp_docx.display()),
         ));
     }
-    let work = TempDir::new("docx")?;
     check_docx(&temp_docx, work.path())?;
     std::fs::rename(&temp_docx, &docx).map_err(|e| {
         fail(
@@ -287,7 +283,7 @@ fn check_docx(docx: &Path, work: &Path) -> Res<()> {
 }
 
 /// LibreOffice headless conversion of the docx to `out_pdf`.
-fn convert(docx: &Path, out_pdf: &Path, work: &Path) -> Res<()> {
+pub(crate) fn convert(docx: &Path, out_pdf: &Path, work: &Path) -> Res<()> {
     let soffice = std::env::var_os("SOFFICE")
         .map(PathBuf::from)
         .or_else(|| which("soffice"))

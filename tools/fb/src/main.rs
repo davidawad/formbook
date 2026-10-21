@@ -7,6 +7,8 @@ mod claim;
 mod contribute;
 mod diff;
 mod diffselftest;
+mod docxpages;
+mod docxpass;
 mod engines;
 mod eval;
 mod fetch;

@@ -88,7 +88,7 @@ The word count in the certificate is computed from the markdown (everything befo
 
 ## DOCX engine (court root)
 
-`docx/render.sh` owns the build (docs/DOCX.md): pandoc writes the markdown with `docx/reference.docx` and the filter `docx/ca9.lua`; LibreOffice renders it; the page of every heading and citation is looked up in that PDF; the document is written again with those pages until they stop changing (two passes for both samples); the sections get their footers. Build and check:
+`fb render` builds it (docs/DOCX.md; tools/fb/src/docxpass.rs, generic for any filter that writes page needles): pandoc writes the markdown with `docx/reference.docx` and the filter `docx/ca9.lua`; LibreOffice renders it; the page of every heading and citation is looked up in that PDF; the document is written again with those pages until they stop changing (two passes for both samples); the sections get their footers. Build and check:
 
 ```sh
 sh tools/render.sh --engine docx courts/ninth-circuit/court-of-appeals usage/INPUT-opening-brief.md    # -> usage/OUTPUT-opening-brief.docx, .docx.pdf
@@ -99,7 +99,7 @@ What the Word document contains, all from the same markdown contract as the typs
 
 - `reference.docx`: Times New Roman 14 pt everywhere (CA9-FORM-004; the font must be installed where the file is opened or converted: on Linux the `ttf-mscorefonts-installer` files in `/usr/share/fonts/truetype/msttcorefonts`, which fontconfig gives LibreOffice), Body Text at an exact 31.45 pt line (CA9-FORM-003), letter paper with 1 in margins, single-spaced 14 pt footnotes kept whole (`keepLines`), block quotations indented 0.5 in both sides, black hyperlinks, footnotes numbered through the whole brief.
 - `ca9.lua`: the cover (case number, double rules, the court's name, caption with designations, proceeding and district-court line, title, counsel block with telephone), the table of contents and table of authorities with Word dot-leader tabs and a reserved page-number column, heading labels and Heading 1-5 styles (PDF bookmarks), the signature block, Form 17, Form 8 (word count computed as the latex filter computes it), Form 15 when `service.certificate` is true, and the addendum with its own contents. Check boxes are bordered runs holding "X" or spaces, so no symbol font is ever needed.
-- Sections and footers: cover (no number), front matter `i, ii ...`, body and certificates `1, 2 ...`, addendum `Add-1 ...` (`render.sh` writes the footers and the last section).
+- Sections and footers: cover (no number), front matter `i, ii ...`, body and certificates `1, 2 ...`, addendum `Add-1 ...` (`fb render` writes the footers; the filter writes the last section).
 - The `.docx` is a reproducible archive (fixed part dates and order), and `fb render` normalizes the LibreOffice PDF's time-stamped `/CreationDate`, `/ID` and `/DocChecksum` (tools/fb/src/pdfrepro.rs), so the reviewed sha256 survives a re-render.
 
 Result (2026-10-21): `tools/check.sh ... --engine docx` RESULT 96 passed, 0 failed, on both samples (stamp `usage/.check-docx.txt`). Nothing is BLOCKED. Differences from the typst template, judged in `reviews/2026-10-21.md` and ACCEPTED as tier 2:
