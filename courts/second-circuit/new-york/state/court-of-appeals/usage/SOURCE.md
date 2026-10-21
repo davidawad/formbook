@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 19 pp., text layer verified 2026-10-17; signed amicus brief | `FILED-EXAMPLE-amicus-brief.pdf` | NYCLU (amicus curiae) | Matter of Karlin v. Stanford (Court of Appeals) | 2024 | https://www.nyclu.org/uploads/2024/03/karlin_nyclu_amicus_brief_signed.pdf | `e031f2ea12748eab00c2f5492aff64c3dd08a3273fae81e2edc43424364e1592` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search — fb-l129.1 pass 3 (2026-10-21)
+
+Rechecked the official NYS Court of Appeals Court-PASS public-access description and its searchable appellate materials, which exclude motions from public viewing, and searched indexed New York appellate docket and filing-name results for agency-review petitions, writs, and Appellate Term party briefs/motions. Official results exposed practice aids, forms, decisions, and opinions, but no qualifying public text-layer filed party copy for the remaining BLOCKED rows. The Court-PASS motion visibility restriction also means a nonpublic docket entry is not evidence of a retrievable exemplar.

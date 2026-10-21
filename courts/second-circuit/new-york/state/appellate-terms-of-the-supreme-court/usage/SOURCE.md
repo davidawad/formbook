@@ -19,3 +19,7 @@ Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a
 ## Follow-up search (2026-10-21, fb-l129.1)
 
 Re-searched the blocked `answering-brief`, `motion-brief`, and `petition-for-discretionary-review` rows. The official Second Department Appellate Term forms page exposes blank Form 4 respondent's brief, Forms 17–20 motion papers, and filing instructions, but no filed examples. Searches for filed Appellate Term respondent briefs and motion papers returned official instructions, decisions, and generic practice materials rather than party PDFs. No qualifying public filed exemplars were found; the three rows remain blocked.
+
+## Follow-up search — fb-l129.1 pass 3 (2026-10-21)
+
+Rechecked the official NYS Court of Appeals Court-PASS public-access description and its searchable appellate materials, which exclude motions from public viewing, and searched indexed New York appellate docket and filing-name results for agency-review petitions, writs, and Appellate Term party briefs/motions. Official results exposed practice aids, forms, decisions, and opinions, but no qualifying public text-layer filed party copy for the remaining BLOCKED rows. The Court-PASS motion visibility restriction also means a nonpublic docket entry is not evidence of a retrievable exemplar.
