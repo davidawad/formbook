@@ -1,14 +1,18 @@
 ---
+# Complete transcription of usage/FILED-EXAMPLE-adversary-complaint.pdf (4 pages): caption, salutation, the
+# opening paragraph, allegations 1-21, the heading, the WHEREFORE paragraph, signature, counsel and service blocks.
+# Left out (no template field): the court-title wording "IN THE ... / FOR THE ..." (the template prints its own two
+# lines), and the title line, which the typst template does not print (the docx engine prints `title`).
 caption:
   in_re:
-    - names: ["James Alan Rosen", "Robin Leslie Rosen"]
+    - names: ["JAMES ALAN ROSEN,", "ROBIN LESLIE ROSEN"]
       designation: "Debtors."
       chapter: "7"
       case_number: "23-61235"
   parties:
-    - names: ["James Alan Rosen,"]
+    - names: ["JAMES ALAN ROSEN,"]
       designation: "Plaintiff,"
-    - names: ["Texas Guaranteed Student Loan Corporation (n/k/a Trellis),"]
+    - names: ["TEXAS GUARANTEED STUDENT LOAN CORPORATION (n/k/a TRELLIS),"]
       designation: "Defendant."
   number:
     label: "Adversary Pro No:"
@@ -21,7 +25,7 @@ counsel:
     - "Tucker Griffin Barnes, PC"
     - "307 Rio Road West"
     - "Charlottesville, Virginia 22901"
-    - "Telephone: (434) 951-0857"
+    - "(434) 951-0857"
     - "lbradley@tgblaw.com"
 signature:
   party: "James Alan Rosen"
@@ -45,7 +49,7 @@ Comes now James Alan Rosen, Plaintiff herein, by counsel, and moves the Court fo
 
 5. Plaintiff filed a Chapter 7 bankruptcy petition on November 8, 2023.
 
-6. Debtor was granted a discharge on February 20, 2024 and the case was closed.
+6. Debtor was granted a discharge on February 20, 2024and the case was closed.
 
 7. The case was on reopened April 9, 2024.
 
@@ -53,7 +57,7 @@ Comes now James Alan Rosen, Plaintiff herein, by counsel, and moves the Court fo
 
 9. This complaint seeks discharge of all amounts owed to the Texas Guaranteed Student Loan Corporation (Trellis Company) as an undue hardship under 11 USC § 523(a)(8).
 
-# Facts and Request for Relief
+# FACTS AND REQUEST FOR RELIEF
 
 10. The male debtor is 78 years old and lives in the City of Charlottesville, Virginia.
 
@@ -78,7 +82,5 @@ Comes now James Alan Rosen, Plaintiff herein, by counsel, and moves the Court fo
 20. The Plaintiff's current financial condition is likely to continue indefinitely as he and his wife are retired and live on a fixed income. This will last for the remainder of repayment period of the loan.
 
 21. The Plaintiff has made a good-faith effort to repay his debt owed to Texas Guaranteed Student Loan Corporation as he has sought forbearances, deferments and made payments.
-
-22. [Statement under FRBP 7008(a) whether Plaintiff does or does not consent to entry of final orders or judgment by the bankruptcy court. Not in the filed complaint; counsel to state.]
 
 Wherefore, plaintiff prays this court enter an order declaring the total debt owed by the plaintiff-debtor to the Texas Guaranteed Student Loan Corporation for the student loan(s) presents an undue hardship on the plaintiff, is therefore dischargeable, and for such further relief as may be just.
