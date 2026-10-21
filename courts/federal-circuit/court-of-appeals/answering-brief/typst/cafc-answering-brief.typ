@@ -7,6 +7,7 @@
 // Structure copied from courts/ninth-circuit/court-of-appeals/typst/ca9-brief.typ.
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../lib/typst/tables.typ": leader-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -166,8 +167,6 @@
 // Tables of contents and authorities
 // ---------------------------------------------------------------------------
 
-#let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
-
 /// One table-of-contents row, built from a heading element. The label sits where the
 /// heading's own label sits in the body, and wrapped lines hang under the title text.
 #let toc-entry(it) = {
@@ -176,14 +175,11 @@
   let ind = if numbered { label-indent(hd) } else { 0pt }
   let lab = if numbered { heading-label(hd) } else { none }
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(ind + heading-tab, {
+    leader-row({
       h(ind)
       if numbered { box(width: heading-tab, lab) }
       hd.body
-      h(0.8em)
-      dot-leader
-      box(width: 2.6em, align(right, it.page()))
-    })))
+    }, it.page(), hang: ind + heading-tab, leading: single-leading, lead-gap: 0.8em, page-width: 2.6em, gutter: 0pt)))
 }
 
 #let toc-section() = {
@@ -236,18 +232,14 @@
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
+        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, leader-row({
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
             linebreak()
           }
           inl(a.cite)
-          h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
-        }))
+        }, page-text, hang: 0.35in, leading: single-leading, lead-gap: 0.8em, dot-gap: 0.16em))
       }
     }
   }
