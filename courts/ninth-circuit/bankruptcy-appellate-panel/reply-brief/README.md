@@ -3,15 +3,15 @@
 - Court: `bap9` (United States Bankruptcy Appellate Panel of the Ninth Circuit), folder `courts/ninth-circuit/bankruptcy-appellate-panel/reply-brief/`
 - Template: `typst/bap9-reply-brief.typ` (entry `typst/main.typ`)
 - Exemplar: `usage/FILED-EXAMPLE-reply-brief.pdf` (see `usage/SOURCE.md`)
-- Samples: `usage/INPUT-reply-brief.md`, a transcription of the exemplar (abridged), rendered to `usage/OUTPUT-reply-brief.typst.pdf`, overlay `usage/OVERLAY-beavor-reply-brief.pdf` and `.txt`; and `usage/INPUT-reply-brief-2.md` (fictional), rendered to `usage/OUTPUT-reply-brief-2.typst.pdf`
+- Samples: `usage/INPUT-reply-brief.md`, a transcription of the exemplar (abridged), rendered to `usage/OUTPUT-reply-brief.typst.pdf`, overlay `.overlay/courts/ninth-circuit/bankruptcy-appellate-panel/reply-brief/OVERLAY-reply-brief.pdf` and `.txt`; and `usage/INPUT-reply-brief-2.md` (fictional), rendered to `usage/OUTPUT-reply-brief-2.typst.pdf`
 - Status of this doc type:
   - **Exemplar found (2026-10-16).** *Beavor v. Reno City Center Owner, LLC*, BAP case 25-1050, "Appellants' Reply to Brief of Appellee Reno City Center Owner, LLC", filed August 29, 2025 by Greenberg Glusker Fields Claman & Machtinger LLP for the appellants. Born-digital, complete. Alternates from different filers: *Moehling v. Select Portfolio Servicing* (BAP No. SC-26-1081, pro se) and, for the cover caption, the answering-brief alternate *Hujazi v. Wirum* (BAP No. NC-14-1030); compared, not saved.
-  - The Beavor sample is abridged: 15 rendered pages against the filer's 23 (see the sample's header comment). The fictional sample is kept as it was.
+  - The Beavor sample is abridged: the current render has 14 pages against the filer's 23 (see the sample's header comment). The fictional sample is kept as it was.
   - The former "no reply content rules" gap is closed: FRBP 8014(c) was read (see "Gap" below).
 
-Summary line for the PM: `exemplar=yes render=ok overlay=ok pages_reviewed=15`
+Summary line for the PM: `exemplar=yes render=ok overlay=ok pages_reviewed=14`
 
-(pages_reviewed counts the transcription's 15 pages, each viewed next to its exemplar page and its overlay page. The fictional sample's 6 pages were also viewed after the template changes.)
+(pages_reviewed counts the transcription's current 14 pages, each viewed next to its exemplar page and its overlay page. The fictional sample's 6 pages were also viewed after the template changes.)
 
 ## Governing rules
 
@@ -57,7 +57,7 @@ The same seven changes as in `../answering-brief/README.md` ("Template changes f
 7. Certificate of service with unregistered parties: the BAP sample certificate's sentence on CM/ECF service of registered parties was missing; now printed before the mailing sentence (Beavor has one non-CM/ECF participant).
 8. Reply only: `authorities` is required (FRBP 8014(c), see "Gap").
 
-Re-rendered after the changes: `OUTPUT-reply-brief.typst.pdf` (15 pages) and `OUTPUT-reply-brief-2.typst.pdf` (6 pages, unchanged page count).
+Re-rendered after the changes: `OUTPUT-reply-brief.typst.pdf` (current render: 14 pages) and `OUTPUT-reply-brief-2.typst.pdf` (6 pages, unchanged page count).
 
 ## Sample (`usage/INPUT-reply-brief.md`)
 
@@ -139,3 +139,26 @@ docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's defau
 ## Render check 2026-10-15
 
 Re-rendered `usage/OUTPUT-fictional-*.pdf` with `sh tools/render.sh` (exit 0, no typst warnings). `sh tools/overlay.sh` exits 1 again: no exemplar pdf. Every page rendered at 60 dpi and viewed: answering-brief 10 of 10, reply-brief 6 of 6. No template changes in this pass. Still BLOCKED on the exemplar; search log appended to `usage/SOURCE.md`.
+
+## Render and overlay review 2026-10-21
+
+Re-rendered `usage/INPUT-reply-brief.md` with `sh tools/render.sh` (exit 0). `sh tools/overlay.sh courts/ninth-circuit/bankruptcy-appellate-panel/reply-brief reply-brief` produced a 14-page overlay in `.overlay/`. Rendered all 14 output pages and all 14 overlay pages to PNG at 60 dpi and viewed each page. Current output SHA-256: `686868a9d6f5822cd145083c4afd874f4a45622406fbe619fd5e2d558f3089ca`.
+
+| PDF page | Finding | Status |
+|---|---|---|
+| 1 | Cover fields and brief title present; centered and legible. | PASS |
+| 2 | TOC entries and page references align with body. | PASS |
+| 3 | TOA groups and citations fit on page. | PASS |
+| 4 | Standard of review heading and body render cleanly. | PASS |
+| 5 | Argument headings, indentation and body are distinct. | PASS |
+| 6 | Body text and footnotes remain legible. | PASS |
+| 7 | Argument continues; footnote remains on reference page. | PASS |
+| 8 | Subheadings and body text remain distinct. | PASS |
+| 9 | Block quotation and surrounding argument fit cleanly. | PASS |
+| 10 | Argument continues with consistent spacing. | PASS |
+| 11 | Argument continues with citations and headings legible. | PASS |
+| 12 | Conclusion begins and continues without clipping. | PASS |
+| 13 | Conclusion and signature block fit cleanly. | PASS |
+| 14 | Compliance and service certificates fit without clipping. | PASS |
+
+Current status: `exemplar=yes render=ok overlay=ok pages_reviewed=14`.

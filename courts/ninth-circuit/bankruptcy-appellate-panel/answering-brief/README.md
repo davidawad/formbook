@@ -3,15 +3,15 @@
 - Court: `bap9` (United States Bankruptcy Appellate Panel of the Ninth Circuit), folder `courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief/`
 - Template: `typst/bap9-answering-brief.typ` (entry `typst/main.typ`)
 - Exemplar: `usage/FILED-EXAMPLE-answering-brief.pdf` (see `usage/SOURCE.md`)
-- Samples: `usage/INPUT-answering-brief.md`, a transcription of the exemplar, rendered to `usage/OUTPUT-answering-brief.typst.pdf`, overlay `usage/OVERLAY-klein-answering-brief.pdf` and `.txt`; and `usage/INPUT-answering-brief-2.md` (fictional), rendered to `usage/OUTPUT-answering-brief-2.typst.pdf`
+- Samples: `usage/INPUT-answering-brief.md`, a transcription of the exemplar, rendered to `usage/OUTPUT-answering-brief.typst.pdf`, overlay `.overlay/courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief/OVERLAY-answering-brief.pdf` and `.txt`; and `usage/INPUT-answering-brief-2.md` (fictional), rendered to `usage/OUTPUT-answering-brief-2.typst.pdf`
 - Status of this doc type:
   - **Exemplar found (2026-10-16).** *Klein v. Sharp*, BAP No. CC-25-1042, Appellee's Answering Brief filed May 2, 2025 by Pachulski Stang Ziehl & Jones LLP for the chapter 11 trustee. Born-digital, complete. Alternate from a different filer: *Hujazi v. Wirum*, BAP No. NC-14-1030 (McKenna Long & Aldridge LLP), compared for tier 2, not saved.
   - The Klein sample transcribes the whole body (the brief is short: 1,598 words by the filer's count). The fictional sample is kept as it was.
   - Template built from the rules, then tested against the exemplar; see "Template changes from the overlay".
 
-Summary line for the PM: `exemplar=yes render=ok overlay=ok pages_reviewed=14`
+Summary line for the PM: `exemplar=yes render=ok overlay=ok pages_reviewed=12`
 
-(pages_reviewed counts the transcription's 14 pages, each viewed next to its exemplar page and its overlay page. The fictional sample's 11 pages were also viewed after the template changes.)
+(pages_reviewed counts the transcription's current 12 pages, each viewed next to its exemplar page and its overlay page. The fictional sample's 11 pages were also viewed after the template changes.)
 
 ## Governing rules
 
@@ -55,7 +55,7 @@ Each change is rule-driven or a tier-2 convention seen across filers; none copie
 6. **Table of authorities sorted numbers digit by digit** ("28 U.S.C. § 1334" before "§ 157"). Digit runs now compare by value. Klein's own table has the digit-by-digit order; the Beavor reply table has numeric order; numeric is the professional choice.
 7. **Certificate of service with unregistered parties** dropped the BAP sample certificate's middle sentence (registered parties served through CM/ECF). Both sentences are now printed (Litigants Manual Rev'd 01/26, sample certificate, manual p. 60). Klein has no unregistered parties, so it is not affected; shown on the Beavor reply sample.
 
-Re-rendered after the changes: `OUTPUT-answering-brief.typst.pdf` (14 pages) and `OUTPUT-answering-brief-2.typst.pdf` (now 11 pages; was 10, from the heading spacing).
+Re-rendered after the changes: `OUTPUT-answering-brief.typst.pdf` (current render: 12 pages) and `OUTPUT-answering-brief-2.typst.pdf` (now 11 pages; was 10, from the heading spacing).
 
 ## Sample (`usage/INPUT-answering-brief.md`)
 
@@ -146,3 +146,24 @@ docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's defau
 ## Render check 2026-10-15
 
 Re-rendered `usage/OUTPUT-fictional-*.pdf` with `sh tools/render.sh` (exit 0, no typst warnings). `sh tools/overlay.sh` exits 1 again: no exemplar pdf. Every page rendered at 60 dpi and viewed: answering-brief 10 of 10, reply-brief 6 of 6. No template changes in this pass. Still BLOCKED on the exemplar; search log appended to `usage/SOURCE.md`.
+
+## Render and overlay review 2026-10-21
+
+Re-rendered `usage/INPUT-answering-brief.md` with `sh tools/render.sh` (exit 0). `sh tools/overlay.sh courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief answering-brief` produced a 12-page overlay in `.overlay/`. Rendered all 12 output pages and all 12 overlay pages to PNG at 60 dpi and viewed each page. Current output SHA-256: `9bf86731123ad58c3be7f4987384d9ed2d5a8af188975ba1691969239e741bd0`.
+
+| PDF page | Finding | Status |
+|---|---|---|
+| 1 | Cover fields and counsel block present; centered and legible. | PASS |
+| 2 | TOC entries and page references align with body. | PASS |
+| 3 | TOA groups and citations fit on page. | PASS |
+| 4 | Jurisdiction heading and body begin cleanly. | PASS |
+| 5 | Summary and next section heading flow correctly. | PASS |
+| 6 | Statement of case begins after summary without collision. | PASS |
+| 7 | Subheadings and body text remain distinct. | PASS |
+| 8 | Statement of case continues into standard of review cleanly. | PASS |
+| 9 | Discussion heading, paragraph flow and citations remain legible. | PASS |
+| 10 | Discussion continues with consistent body spacing. | PASS |
+| 11 | Conclusion and signature block fit without clipping. | PASS |
+| 12 | Interested-parties, compliance and service certificates fit without clipping. | PASS |
+
+Current status: `exemplar=yes render=ok overlay=ok pages_reviewed=12`.
