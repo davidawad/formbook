@@ -137,15 +137,16 @@ pub const MUTANTS: &[Mutant] = &[
         name: r"toa-page-wraps-alone",
         want: r"CA9-TOOL-007",
         kind: Kind::Layout,
-        // the page list breaks off its entry onto a line of its own (fb-595.53, the ca5 reply-brief latex TOA)
-        expr: r"s/^          h(0\.3em)$/          h(0.3em); linebreak()/",
+        // the page list drops below its entry's last line, onto a line of its own (fb-595.53, the ca5 reply-brief
+        // latex TOA)
+        expr: r"s/^    align(right + bottom, page),$/    align(right + bottom, pad(top: 2em, page)),/",
     },
     Mutant {
         name: r"toa-entry-on-heading-rule",
         want: r"CA9-TOOL-007",
         kind: Kind::Layout,
-        // the first entry rises against the Page(s) underline: one-line entries, no space between them and the heading
-        expr: r"s/^            linebreak()$/            [ ]/;s/block(breakable: false, above: 0\.7em,/block(breakable: false, above: 0em,/;s/below: 0\.2em, sticky: true/below: 0em, sticky: true/",
+        // the first entry rises against the Page(s) underline: one-line entries, a group heading shorter than its line
+        expr: r"s/^            linebreak()$/            [ ]/;s/below: 2\.8pt, sticky: true, {/below: 0pt, sticky: true, height: 12pt, {/;s/0\.35in, 9\.8pt)$/0.35in, 0pt)/",
     },
     Mutant {
         name: r"typst-metric-times",
