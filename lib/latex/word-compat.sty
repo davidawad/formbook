@@ -1,0 +1,36 @@
+%% Shared Word-like paragraph composition for LuaLaTeX.
+%% Load with \usepackage{word-compat}; invoke \WordCompatSetup{<size>}{<pitch>}
+%% after selecting the template's Times New Roman face.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{word-compat}[2026/10/21 Word paragraph compatibility]
+\RequirePackage{iftex}
+\ifLuaTeX\else
+  \PackageError{word-compat}{LuaLaTeX is required}{Compile with lualatex.}
+\fi
+
+\newcommand{\WordCompatSetup}[2]{%
+  \fontsize{#1}{#2}\selectfont
+  \parindent=0pt
+  \parskip=0pt
+  \pretolerance=10000
+  \tolerance=10000
+  \emergencystretch=0pt
+  \hyphenpenalty=10000
+  \exhyphenpenalty=10000
+  \lefthyphenmin=64
+  \righthyphenmin=64
+  \uchyph=0
+  \WordCompatGreedyOn
+}
+
+\newcommand{\WordCompatGreedyOn}{%
+  \directlua{formbook_word_compat.enable()}}
+
+\newcommand{\WordCompatGreedyOff}{%
+  \directlua{formbook_word_compat.disable()}}
+
+\directlua{local p=kpse.find_file("word-compat.lua");
+  if not p then error("word-compat.lua not found on LUAINPUTS") end;
+  formbook_word_compat=dofile(p)}
+
+\endinput
