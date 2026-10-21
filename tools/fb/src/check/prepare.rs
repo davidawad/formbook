@@ -269,7 +269,7 @@ mod tests {
         std::fs::write(&blocks, b.stdout).unwrap();
         let out = format!("out={}", dir.join("g0").display());
         let ok = std::process::Command::new("gawk")
-            .env("LC_ALL", "en_US.UTF-8")
+            .env("LC_ALL", "C.UTF-8")
             .args(["-v", "DEHYPHEN=1", "-v", &out, "-v", "footer_top=720"])
             .args([
                 "-f",

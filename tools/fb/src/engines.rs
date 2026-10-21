@@ -147,8 +147,16 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
         .map(PathBuf::from)
         .ok_or_else(|| fail(2, "fb render: docx output must end in .docx.pdf"))?;
     let d = court.join("docx");
+    let parent = docx.parent().unwrap_or_else(|| Path::new("."));
+    std::fs::create_dir_all(parent)
+        .map_err(|e| fail(2, format!("fb render: {}: {e}", parent.display())))?;
+    let nanos = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_or(0, |d| d.as_nanos());
+    let temp_docx = docx.with_file_name(format!(".fb-docx-{}-{nanos}.docx", std::process::id()));
+    let _cleanup = RemoveOnDrop(temp_docx.clone());
     if d.join("render.sh").is_file() {
-        if !run_owner(&d.join("render.sh"), court, sample, &docx)? {
+        if !run_owner(&d.join("render.sh"), court, sample, &temp_docx)? {
             return Err(fail(1, "fb render: docx/render.sh failed"));
         }
     } else if d.join("reference.docx").is_file() {
@@ -158,7 +166,11 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
             format!("--reference-doc={}", d.join("reference.docx").display()),
         ];
         args.extend(lua_filters(&d));
-        args.extend([sample.to_string(), "-o".into(), docx.display().to_string()]);
+        args.extend([
+            sample.to_string(),
+            "-o".into(),
+            temp_docx.display().to_string(),
+        ]);
         pandoc(court, &args)?;
     } else {
         return Err(fail(
@@ -170,15 +182,30 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
             ),
         ));
     }
-    if !docx.is_file() {
+    if !temp_docx.is_file() {
         return Err(fail(
             1,
-            format!("fb render: {} was not written", docx.display()),
+            format!("fb render: {} was not written", temp_docx.display()),
         ));
     }
     let work = TempDir::new("docx")?;
-    check_docx(&docx, work.path())?;
+    check_docx(&temp_docx, work.path())?;
+    std::fs::rename(&temp_docx, &docx).map_err(|e| {
+        fail(
+            2,
+            format!("fb render: cannot replace {}: {e}", docx.display()),
+        )
+    })?;
     convert(&docx, out_pdf, work.path())
+}
+
+/// Remove an incomplete sibling render while preserving any previous completed DOCX.
+struct RemoveOnDrop(PathBuf);
+
+impl Drop for RemoveOnDrop {
+    fn drop(&mut self) {
+        let _ = std::fs::remove_file(&self.0);
+    }
 }
 
 /// Integrity: a valid zip whose XML parts are well-formed (the XML check needs xmllint).

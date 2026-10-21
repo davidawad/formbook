@@ -142,7 +142,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             "fb check: usage/ layout violations; run `fb lint paths`",
         ));
     }
-    let mut env: Env = vec![("LC_ALL".into(), "en_US.UTF-8".into())];
+    let mut env: Env = vec![("LC_ALL".into(), "C.UTF-8".into())];
     let alias = court_field(&court, "alias")?;
     let out_dir = format!("{root}/out/check/{alias}/{}", opts::doc_key(&doc, &root));
     std::fs::create_dir_all(&out_dir).map_err(|e| io_fail(&out_dir, e))?;

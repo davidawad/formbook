@@ -16,7 +16,7 @@ const MAMBA_SHA256: &str = "8761c382127e6363bd9e0a2451aa3ef90d071a79133f736e2f75
 fn specs() -> Vec<String> {
     let mut s = vec![format!("typst=={TYPST_VERSION}")];
     s.extend(
-        "poppler imagemagick gawk jq go-yq pandoc tectonic just"
+        "poppler imagemagick gawk jq go-yq pandoc tectonic just zip unzip libxml2"
             .split(' ')
             .map(String::from),
     );
@@ -113,6 +113,27 @@ impl Env {
                 self.fails += 1;
             }
         }
+    }
+
+    /// The check bridge needs a UTF-8 locale for gawk's character and case operations.
+    fn utf8_locale(&mut self, locale: &str) -> Res<()> {
+        let Some(gawk) = self.find("gawk") else {
+            // The missing gawk probe already explains why the locale check cannot run.
+            return Ok(());
+        };
+        let out = capture(
+            Command::new(gawk)
+                .args(["BEGIN { exit (length(\"“\") == 1 ? 0 : 1) }"])
+                .env("LC_ALL", locale)
+                .env("PATH", &self.path),
+        )?;
+        if out.status.success() {
+            println!("ok       locale {locale} (gawk recognizes UTF-8 characters)");
+        } else {
+            println!("MISSING  locale {locale} (required by gawk checks)");
+            self.fails += 1;
+        }
+        Ok(())
     }
 }
 
@@ -241,7 +262,11 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     env.probe("pandoc", &["--version"])?;
     env.probe("tectonic", &["--version"])?;
     env.probe("just", &["--version"])?;
+    env.probe("zip", &["-v"])?;
+    env.probe("unzip", &["-v"])?;
+    env.probe("xmllint", &["--version"])?;
     env.probe("soffice", &["--version"])?;
+    env.utf8_locale("C.UTF-8")?;
     env.presence("bend");
     env.presence("br");
     println!();
@@ -281,7 +306,7 @@ mod tests {
     fn typst_is_pinned_in_the_specs() {
         let s = specs();
         assert_eq!(s[0], "typst==0.15.1");
-        assert!(["go-yq", "tectonic", "just"]
+        assert!(["go-yq", "tectonic", "just", "zip", "unzip", "libxml2"]
             .iter()
             .all(|t| s.contains(&t.to_string())));
     }

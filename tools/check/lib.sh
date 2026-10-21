@@ -14,7 +14,7 @@ set -euo pipefail
 #   words.tsv runs.tsv blocks.tsv lines.tsv labels.tsv g0.{report,metrics,tags,heads,links} fonts.txt info.txt
 # Needs: gawk, yq (mikefarah), jq, poppler (pdfinfo pdffonts pdftotext pdftohtml pdfimages), shasum.
 
-AWKU="env LC_ALL=en_US.UTF-8 gawk"
+AWKU="env LC_ALL=C.UTF-8 gawk"
 CHK="$ROOT/tools/check"
 
 cfg() { yq e "$1" "${CHECKS:-$COURT/checks.yaml}"; }

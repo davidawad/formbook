@@ -1,6 +1,6 @@
 # norm.awk: the one normal form both sides of every text comparison are reduced to.
 # Lower case, straight quotes, ligatures expanded, every kind of whitespace removed.
-# Included with `gawk -f norm.awk -f other.awk`. Needs a UTF-8 locale (LC_ALL=en_US.UTF-8).
+# Included with `gawk -f norm.awk -f other.awk`. Needs a UTF-8 locale (LC_ALL=C.UTF-8).
 
 function norm1(s) {
   if (WS_RE == "") {      # invisible characters are built from code points so the file stays readable

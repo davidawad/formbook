@@ -1,6 +1,6 @@
 # gate0.awk: Gate 0 CONTENT. Does every block of the markdown appear in the PDF, in order, intact?
 #
-# Usage: LC_ALL=en_US.UTF-8 gawk -v out=PREFIX -v footer_top=720 -f norm.awk -f gate0.awk runs.tsv blocks.tsv
+# Usage: LC_ALL=C.UTF-8 gawk -v out=PREFIX -v footer_top=720 -f norm.awk -f gate0.awk runs.tsv blocks.tsv
 #   runs.tsv    from pdf-runs.awk   (PDF text runs: page, geometry, italic flag, text)
 #   blocks.tsv  from md-blocks.awk  (the markdown, one block per record)
 #
