@@ -17,7 +17,7 @@ while [ $# -gt 0 ]; do
 done
 cargo build -q --release --manifest-path "$FB_ROOT/tools/fb/Cargo.toml"
 fb="$FB_ROOT/tools/fb/target/release/fb"
-tc=0 ti=0 tl=0 g0p=0 n=0 ts=0 tsi=0 tsm=0 tsl=0
+tc=0 ti=0 tl=0 g0p=0 n=0 ts=0 tsi=0 tsm=0 tsl=0 pn=0 p05=0 p25=0 p1=0
 printf '%-70s %-5s %-5s %-22s %s\n' "entry" "G0" "G2" "identical/compared(ex)" "same-start: identical/n (more, less)"
 while IFS=$'\t' read -r dir id exemplar; do
   case "$dir" in *"$only"*) ;; *) continue ;; esac
@@ -33,11 +33,14 @@ while IFS=$'\t' read -r dir id exemplar; do
   b=$("$fb" diff --breaks "$d/$exemplar" "$out" || true)
   r=$(printf '%s\n' "$b" | awk '/^RESULT: BREAKS/{print $3, $7}')
   ss=$(printf '%s\n' "$b" | awk '/^SAME-START:/{print $2, $13, $16}' | tr -d '),')
+  pos=$(printf '%s\n' "$b" | awk '/^POSITIONS:/{print $2, $13, $17, $21}' | tr -d ',')
   set -- $r
   i=${1%/*} cmp=${1#*/} lines=${2#(}
   set -- $ss
   si=${1%/*} sn=${1#*/} sm=$2 sl=$3
   ts=$((ts+sn)) tsi=$((tsi+si)) tsm=$((tsm+sm)) tsl=$((tsl+sl))
+  set -- $pos
+  pn=$((pn+$1)) p05=$((p05+$2)) p25=$((p25+$3)) p1=$((p1+$4))
   ti=$((ti+i)) tc=$((tc+cmp)) tl=$((tl+lines)) n=$((n+1))
   [ "$g0" = PASS ] && g0p=$((g0p+1))
   printf '%-70s %-5s %-5s %-22s %s/%s (%s, %s)\n' "$dir:$id" "$g0" "$g2" "$i/$cmp ($lines)" "$si" "$sn" "$sm" "$sl"
@@ -45,3 +48,4 @@ done < <(jq -r '.entries[] | [.dir, .id, .exemplar] | @tsv' "$FB_ROOT/data/calib
 printf 'TOTAL %s entries, engine %s: G0 pass %s/%s; identical line breaks %s/%s compared lines (%s exemplar lines)\n' \
   "$n" "$engine" "$g0p" "$n" "$ti" "$tc" "$tl"
 printf 'TOTAL same-start lines (composition only): %s/%s end alike; ours fits more on %s, less on %s\n' "$tsi" "$ts" "$tsm" "$tsl"
+printf 'TOTAL positions on identical same-start lines: %s lines; largest word-edge difference <= 0.05 pt on %s, <= 0.25 pt on %s, <= 1 pt on %s\n' "$pn" "$p05" "$p25" "$p1"

@@ -162,6 +162,78 @@ All gates green on every sample, for an engine, writes that engine's stamp. A co
 6. Run `tools/check-selftest.sh <court-dir>`, adding mutants for any new check.
 7. Run `just lint` (font audit and `usage/` path validity), then `tools/tracker.sh`, and commit the regenerated files.
 
+## Word compatibility (fb-w0vj)
+
+Most filed exemplars are Microsoft Word output. Word's paragraph composer is solved once, in `lib/typst/word-compat.typ` (and `lib/latex/word-compat.{sty,lua}` for LuaLaTeX), not per court. A template applies it after its own `set text`/`set par` rules:
+
+```typst
+#import "/lib/typst/word-compat.typ": word-compat
+show: word-compat.with(meta.at("word", default: (:)))
+```
+
+It always sets what Word does for ordinary prose: kerning off, hyphenation off, greedy line breaking (`linebreaks: "simple"`), no tracking adjustment, no hanging punctuation. Two settings belong to the filed document, not the court, and come from the INPUT's frontmatter:
+
+```yaml
+word:
+  justify: true    # the Word document's body is justified (false: ragged right)
+  shrink: 0.76     # Word 2013+ compresses inter-word spaces to 0.76 of normal before moving a word down;
+                   # 1.0 (or absent) for documents in an older compatibility mode, which never compress
+```
+
+How to tell from the exemplar: `justify` when most lines of eight or more words end at the right margin; `shrink: 0.76` when some of those lines have inter-word gaps below the normal space (0.25 em), `1.0` when none do (`fb measure` gives the word boxes).
+
+### Calibration (21 Times New Roman exemplars, `data/calibration-set.json`)
+
+`tools/calibrate.sh [--engine typst|latex] [--no-render] [dir-substring]` renders every entry and prints, per entry and in total, G0 and G2 (`fb diff --content`) and three line-break measures from `fb diff --breaks`, which pairs the two word streams globally (unique 4-word anchors, longest increasing run, LCS in the gaps) so it runs even when G0 to G2 fail on template residuals:
+
+- **identical lines**: exemplar lines all of whose words are paired, in one run, that ours breaks before the first word, after the last and nowhere between (page and line breaks count alike). End to end: template geometry, composition and cascades.
+- **same-start lines**: the subset ours starts at the same word and the same left edge (0.5 pt). On these only composition decides where the line ends, so this is the word-compat measure. Misses are split into "ours fits more" and "ours fits less".
+- **positions**: on same-start identical lines with a one-to-one word mapping, the largest left- or right-edge difference of any word.
+
+Results, typst 0.15.1, pinned Times New Roman 2.82 (run 2026-10-21; raw output in the PR artifacts):
+
+| Step | Identical lines | Same-start lines (more / less) | G0 pass |
+|---|---|---|---|
+| Baseline (templates as merged, no word-compat) | 1552/3235 (48.0%) | 936/1145 (81.7%) (57 / 152) | 13/21 |
+| word-compat defaults (kerning, hyphenation, greedy) | 1568/3258 (48.1%) | 983/1193 (82.4%) (48 / 162) | 13/21 |
+| + `word: justify` (typst's greedy breaker ignores `justification-limits` shrink: no break changed) | 1568/3258 | 983/1193 | 13/21 |
+| + narrow natural space in justified text, shrink 0.76 | 1924/3275 (58.7%) | 1285/1450 (88.6%) (91 / 74) | 12/21 |
+| + idb-motion-brief at the filers' 12 pt (the 13 pt was an EB Garamond leftover) and 27.6/13.8 pt pitch | 2028/3282 (61.8%) | 1390/1549 (89.7%) (99 / 60) | 13/21 |
+| + no hanging punctuation (final) | 2028/3282 (61.8%) | 1391/1550 (89.7%) (99 / 60) | 13/21 |
+
+Final positions: 1387 same-start identical lines; largest word-edge difference within 0.05 pt on 57, within 0.25 pt on 573, within 1 pt on 868.
+
+Shrink sweep (same-start identical / compared): 0.72 1247/1422, 0.74 1277/1444, **0.76 1299/1464**, 0.78 1256/1422, 0.80 1242/1410, 0.84 1169/1347, 0.88 1120/1309 (sweep run before the idb fix, with the narrow space set document-wide). A per-document sweep moved individual entries by 0 to 14 lines (35 on the scaled bap9 exemplar, where a smaller shrink only compensates the scale), so one value is kept for every Word 2013+ document.
+
+### What the exemplars say about Word
+
+- Inter-word compression has a floor: the narrowest gap on a justified line is 0.757 to 0.770 of the normal space in 8 of the 12 compressing documents (0.742, 0.80 and 0.833 in three more; 0.686 in the scaled bap9 exemplar). Three justified exemplars (idb, ilsd, wyb) never compress (an older compatibility mode). Six are ragged right.
+- Word's keep-or-push decision is **not** a single threshold on space compression. Fitted per document on the true advance widths, the best threshold explains 88% to 100% of the decisions (arkansas 192/210, txed 169/182, delaware 161/182, ilsd 154/156); globally 2455/2746 at 0.90. Counterexample in one document (ared p2): a line was kept that needs its spaces at 0.794, while another line pushed down a word that needed only 0.907.
+- Hinted widths do not explain it: the same test on the `hdmx` advances of the pinned Times New Roman at every recorded ppem (11 to 100; 16 ppem is 12 pt at 96 dpi) is never more consistent than the true advances (16 ppem: 1789/2746).
+- Word's PDF export puts the left margin at 72.00 or 72.02 pt (7 exemplars each) and ends justified lines 0.09 to 0.23 pt past the right margin.
+
+### Per-gate residuals (typst, final)
+
+| Gate | Result on the 21 | Residual |
+|---|---|---|
+| G0 page count/size | 13/21 pass | the 8 failures are template pagination (signature or a heading pushed over a page, a 3-page motion bound in front of the ca7 brief, a scaled bap9 exemplar), recorded per entry in `data/calibration-set.json` (`g0.why`, from fb-w0vj.1). Changed here: idb now passes (12 pt); txed now fails (exemplar 8 pages, ours 7: with compressed spaces its text, under a template that indents paragraph numbers 0.5 in where the filer used 0.25 in, fits on 7) |
+| G1 text frame | 0/21 pass | every entry: left 72.00 vs 72.02 or right 540.00 vs 540.09 to 540.23 (Word export, above the 0.01 pt tolerance); plus unmasked CM/ECF header stamps (no `MASKS.json` yet) and template margins/indents (vawd, orb, ca10, cavc) |
+| G2 content | 0/21 pass | template-generated text only (captions, page numbers, doc-ID footers, /s/ lines); body divergences 0 (fb-w0vj.1) |
+| G3 breaks | 2028/3282 identical lines; composition 1391/1550 | see "Go/no-go" |
+| G4 | not reached | |
+
+Tolerances: `tools/fb/tolerance.json` stays at 0.01 pt (two builds of the same sample agree exactly). Against a Word exemplar the floor is measured, not tolerated: 0.02 pt on left edges, 0.23 pt on justified right edges. A G1/G3 tolerance below 0.25 pt cannot pass on Word exemplars even when composition is identical.
+
+### Go/no-go for "identical"
+
+**No-go with typst 0.15.** The ceiling measured here: about 90% of lines that start alike end alike (composition only); 61.8% of comparable lines identical end to end; on lines that do break identically, word edges within 0.25 pt on 41%. Three causes, in order of weight:
+
+1. Word's line-fit decision is not a reproducible threshold (88% to 100% per document at best). A miss changes every later line of the paragraph, so the chance that a whole multi-page brief breaks identically is near zero even at 90% per line.
+2. Typst cannot test a line with compressed spaces and still set the last line of a paragraph with natural spaces: its greedy breaker only looks at natural width, so word-compat narrows the space itself, and every last line (and single-line paragraph) of a justified Word 2013+ document is set with spaces at 0.76 of normal (0.72 pt short per gap at 12 pt). LuaLaTeX does not have this limit (shrinkable glue plus the greedy `pre_linebreak_filter` in `lib/latex/word-compat.lua`).
+3. Template geometry chosen from other filers (indents, type size, margins, counsel blocks) and exemplars that are scaled or carry CM/ECF stamps: per template, not per engine; fixed here only where the template contradicted both of its own exemplars (idb).
+
+**LaTeX**: not calibrated. The bootstrap toolchain has no `lualatex` (tectonic/XeTeX only), and only 1 of the 21 calibration folders has a `latex/` engine. `lib/latex/word-compat.{sty,lua}` carry the calibrated rule (`\WordCompatSetup[0.76]{12pt}{24pt}`: greedy breaks with spaces at 0.76, the break forced before the space, natural spaces kept on last lines) but have not been compiled.
+
 ## Tools
 
 | Tool | Role |
@@ -170,6 +242,7 @@ All gates green on every sample, for an engine, writes that engine's stamp. A co
 | `tools/render.sh [--engine typst\|latex\|docx] <doc-dir> usage/INPUT-<id>.md` | Compile one sample with vendored fonts only; any typst warning fails. Dispatches to `tools/render-latex.sh` / `tools/render-docx.sh`. |
 | `tools/check.sh <court-dir> [--engine E] [--no-render] [--only ID]` | Gates 0 to 3 as far as they can be mechanical, on that engine's PDF. Exit 0 only if every check passes; writes/removes `usage/.check-<engine>.txt`. |
 | `tools/overlay.sh <doc-dir> <id> [FILED-EXAMPLE.pdf]` | Red/blue overlay of `OUTPUT-<id>.typst.pdf` on `FILED-EXAMPLE-<id>.pdf`, into the gitignored `.overlay/`. A diagnostic (tier 3), not a score. |
+| `tools/calibrate.sh [--engine E] [--no-render] [dir]` | The word-compat calibration run over `data/calibration-set.json`: G0, G2, identical and same-start line breaks, word positions (`fb diff --content`, `fb diff --breaks`). |
 | `justfile` | `just render\|overlay\|check\|diff <doc-dir>`, `just render-all\|overlay-all\|check-all`, `just lint` (`fb lint fonts`, `fb lint paths`, `fb lint rules`). Straight pipelines into `fb` and the scripts above. |
 | `fb usage doctype\|dir\|inputs\|examples\|pairs\|input\|example\|pair\|output\|overlay <doc-dir> ...` | Prints the `usage/` and `.overlay/` names of a doc folder, so no script parses file names. |
 | `tools/check-selftest.sh <court-dir>` | Mutation test of the checker. |

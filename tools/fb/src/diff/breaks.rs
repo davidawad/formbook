@@ -22,6 +22,9 @@ pub struct Breaks {
     pub same_start_identical: usize,
     pub same_start_more: usize,
     pub same_start_less: usize,
+    /// Per same-start identical line whose words map one to one: the largest left- or right-edge
+    /// difference of any word (pt), the G3 position residual once the breaks agree.
+    pub dev: Vec<f64>,
     /// First divergent compared lines, in exemplar order.
     pub first: Vec<String>,
 }
@@ -71,7 +74,17 @@ pub fn count(exm: &Measured, usm: &Measured, max: usize) -> Breaks {
             if brk(us, js) && geom {
                 b.same_start += 1;
                 match (same, (js + 1..je).any(|k| brk(us, k))) {
-                    (true, _) => b.same_start_identical += 1,
+                    (true, _) => {
+                        b.same_start_identical += 1;
+                        if let (Some(a), Some(u)) = (line_of(exm, &ex[s]), line_of(usm, &us[js])) {
+                            if a.words.len() == e - s && u.words.len() == je - js {
+                                let d = a.words.iter().zip(&u.words).fold(0.0f64, |m, (p, q)| {
+                                    m.max((p.x0 - q.x0).abs()).max((p.x1 - q.x1).abs())
+                                });
+                                b.dev.push(d);
+                            }
+                        }
+                    }
                     (false, true) => b.same_start_less += 1,
                     (false, false) => b.same_start_more += 1,
                 }
@@ -119,6 +132,17 @@ pub fn render(b: &Breaks) -> String {
     s.push_str(&format!(
         "SAME-START: {}/{} lines that start alike end alike (ours fits more on {}, less on {})\n",
         b.same_start_identical, b.same_start, b.same_start_more, b.same_start_less
+    ));
+    let mut d = b.dev.clone();
+    d.sort_by(f64::total_cmp);
+    let le = |x: f64| d.iter().filter(|&&v| v <= x + 1e-9).count();
+    s.push_str(&format!(
+        "POSITIONS: {} identical same-start lines; largest word-edge difference <= 0.05 pt on {}, <= 0.25 on {}, <= 1 on {}, median {:.2} pt\n",
+        d.len(),
+        le(0.05),
+        le(0.25),
+        le(1.0),
+        d.get(d.len() / 2).copied().unwrap_or(0.0)
     ));
     s
 }

@@ -43,7 +43,17 @@
       "notes": "Existing INPUT had every word but almost no italics. Added: italics for every case name, signal and Id. (as filed, incl. 'See, e.g. Margulis ...' and 'See Golan ...' in one italic run), 'id.', 'facts', 'if any', 'i.e.', 'Bank', 'multiple'; bold party names in the caption and bold firm name; italic two-line 'Attorneys for ...' line; curly apostrophe in the title. Fixed a stray extra ')' in '(cleaned up))' (exemplar: '(cleaned up).'). Signer set to 'Niki T. Cung, Ark. Bar No. 96153' (one line, as filed).",
       "font": "Times New Roman",
       "body_share": 0.965,
-      "g0_pass": false
+      "g0_pass": false,
+      "word_compat_typst": {
+        "g0": "FAIL",
+        "identical_lines": "96/168",
+        "same_start_lines": "70/83",
+        "same_start_more_less": "13, 0"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     },
     {
       "dir": "courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief",
@@ -83,7 +93,17 @@
       "notes": "Existing INPUT was a near-complete transcription of FILED-EXAMPLE-motion-brief-2; completed in place: removed invented trailing commas on debtor/plaintiff, case_no 'Bankruptcy No: 18-01297' and chapter 'Chapter 11' as filed, restored the '.\";' ending of ground 2, italic *Bank of Vermont v. Lyndonville Sav. Bank & Trust Co.* and *See* (footnote, with the filer's double space), added the second signer and second e-mail, and the filer's own certificate sentence as `manner`. INPUT-motion-brief.md (the other id) not touched.",
       "font": "Times New Roman",
       "body_share": 0.999,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "15/90",
+        "same_start_lines": "1/4",
+        "same_start_more_less": "1, 2"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     },
     {
       "dir": "courts/eighth-circuit/south-dakota/federal/district/motion-brief",
@@ -124,7 +144,16 @@
       "notes": "The existing INPUT was a complete transcription with small errors; corrected in place: footnote 1 reference moved to the start of the Conclusion paragraph (where the filer put it, '1For the reasons above'); heading IV now 'Under *Younger*' with no period; Younger italic in body (4 places); the filer's straight quotes/apostrophes kept with escapes (Enf\\'t, Gov\\'t, defendant\\'s, the \\\"For Younger ... sovereign.\\\" quote and State\\'s); 'As such, this matter must be dismissed.' is a hard line break inside the preceding paragraph (unindented, as filed), not a new paragraph; date 'June 12, 2026.' with the period; 'Attorneys for Clean Nuclear Energy Corp.,' with the comma; the certificate's 'Attorneys for Mike Lees and  David McVey' italic with the filer's double space. QUESTION for the coordinator: the brief says every word, but the earlier author redacted the pro se plaintiff's home address, e-mail and phone (SOURCE.md); I kept the redaction (privacy of a private individual) rather than add them. The docx.pdf is new (render.sh writes it).",
       "font": "Times New Roman",
       "body_share": 0.956,
-      "g0_pass": false
+      "g0_pass": false,
+      "word_compat_typst": {
+        "g0": "FAIL",
+        "identical_lines": "186/211",
+        "same_start_lines": "155/158",
+        "same_start_more_less": "3, 0"
+      },
+      "word": {
+        "justify": false
+      }
     },
     {
       "dir": "courts/federal-circuit/court-of-veteran-appeals/opening-brief",
@@ -168,7 +197,17 @@
       "notes": "The filer's 'Summary' (bold underlined, centered) is a bold paragraph in the INPUT so it gets no point label and point I keeps its numeral. The issue line 'I: WHETHER ...' is a bold paragraph (the filer's text layer is upper case; visually small caps). 'BRIEF OF THE APPELLANT' is a level-1 heading. R. at 1156 is not linked to the TOA because the filer's TOA does not list it. Own word diff (pdftotext, one word per line) shows no body differences beyond the residuals above.",
       "font": "Times New Roman",
       "body_share": 0.955,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "34/136",
+        "same_start_lines": "10/26",
+        "same_start_more_less": "0, 16"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     },
     {
       "dir": "courts/fifth-circuit/louisiana/federal/eastern-district/motion-brief",
@@ -209,7 +248,17 @@
       "notes": "The existing INPUT was a complete transcription with small errors; corrected in place: the paragraph 'The Court cited to Cicalese...' is its own paragraph (was merged); the 'Id.' after 'to the extent he is able.' is roman as filed; italics added (after x2, because of a protected characteristic, identity as a person with a disability, Plaintiff in 'put Plaintiff on notice', /s/ Sara Grace Sirera, the Attorneys for line) and bold for 'to amend his Complaint to clarify this detail'; filer typos restored (second heading 'C.' for D, '2000) Amendment' without period, '2016)(internal', 'Ltd. V. Aetna', straight apostrophe in complaint's, '2023).' single paren). Signature: the 'Attorneys for' line is its own group (blank line above, as filed). Certificate signer changed from 'SARA GRACE SIRERA' to 'Sara Grace Sirera' so the /s/ line matches the filed one. The docx.pdf is new (render.sh writes it).",
       "font": "Times New Roman",
       "body_share": 0.962,
-      "g0_pass": false
+      "g0_pass": false,
+      "word_compat_typst": {
+        "g0": "FAIL",
+        "identical_lines": "145/197",
+        "same_start_lines": "140/150",
+        "same_start_more_less": "6, 4"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     },
     {
       "dir": "courts/fifth-circuit/louisiana/federal/middle-district/complaint",
@@ -250,7 +299,16 @@
       "notes": "The existing INPUT body was already a complete, word-exact transcription (paragraphs 1-30 match the filed numbering). Front matter changed to the exemplar's values: civil_action_no '25-1162' (as typed in the caption) and `judges` removed (SDD/EWD are only in the CM/ECF banner; README.md 'Judge initials' note 5 and line 25 still describe the old SDD/EWD sample, left unedited); judge 'JUDGE:' and magistrate 'MAGISTRATE:' added as the filer's blank caption lines; signature 'Bar Roll#: 18356' (was 'Bar Roll No.'), a 28-underscore 'BY:' line, two blank lines under RESPECTFULLY SUBMITTED:. Comment block updated to say it is complete and what is left out.",
       "font": "Times New Roman",
       "body_share": 0.951,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "85/112",
+        "same_start_lines": "6/6",
+        "same_start_more_less": "0, 0"
+      },
+      "word": {
+        "justify": false
+      }
     },
     {
       "dir": "courts/fifth-circuit/texas/federal/bankruptcy-eastern-district/motion-brief",
@@ -290,7 +348,17 @@
       "notes": "Existing INPUT was a near-complete transcription; completed in place: 'Notice of Chapter 7 Bankruptcy Case' (word 'Case' was missing), the trailing '_' after para 9's quote, debtor 'GREG N. WISNER and' and designation 'DEBTORS' as filed, straight quotes and apostrophes where the filer has them (\\\"Defendants\\\", Ass'n, court's, Comm'cns, escaped), the Rule 15 (A) clause as its own quoted line, and the filer's bold/italic (COMES NOW, (\"Defendants\"), the motion title in the lead-in, Plaintiff, BNC, docket cites, November 1, 2021, case names, For the foregoing reasons). 'In re Rhodes' is roman as filed. Header comment updated to 'complete transcription' with what is left out.",
       "font": "Times New Roman",
       "body_share": 0.950,
-      "g0_pass": false
+      "g0_pass": false,
+      "word_compat_typst": {
+        "g0": "FAIL",
+        "identical_lines": "136/195",
+        "same_start_lines": "106/119",
+        "same_start_more_less": "7, 6"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     },
     {
       "dir": "courts/fifth-circuit/texas/federal/eastern-district/complaint",
@@ -328,7 +396,17 @@
       "notes": "Existing INPUT was a near-complete transcription; completed in place: added footnote 1 (URL) via [^1] (cmarker renders it although README's contract says footnotes are unsupported), court line 1 now 'IN THE UNITED STATES DISTRICT COURT', ’497 with typographic apostrophe (smart punctuation would have made '497 an opening quote), straight apostrophe kept in para 4 'Defendant's' as filed (escaped \\'), bold EXHIBIT A / Exhibit B, bold-italic role line. Exhibits A/B are not part of the filed 8-page PDF.",
       "font": "Times New Roman",
       "body_share": 0.951,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "FAIL",
+        "identical_lines": "55/158",
+        "same_start_lines": "35/37",
+        "same_start_more_less": "2, 0"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     },
     {
       "dir": "courts/fourth-circuit/south-carolina/federal/district/motion-brief",
@@ -369,7 +447,17 @@
       "notes": "Existing INPUT was a near-complete transcription. Fixed: court line 'IN THE UNITED STATES DISTRICT COURT'; removed a closing quote after 'and the court.' (the exemplar has none); 'ex rel.' in the caption is roman in the exemplar; italic 'Iqbal,' and 'claim.'; bold-italic 'denied'; only 'Sols.' italic in the Savannah River cite (', LLC' roman); footnote mark attached without a space.",
       "font": "Times New Roman",
       "body_share": 0.961,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "99/151",
+        "same_start_lines": "83/94",
+        "same_start_more_less": "10, 1"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     },
     {
       "dir": "courts/fourth-circuit/virginia/federal/bankruptcy-western-district/adversary-complaint",
@@ -409,7 +497,16 @@
       "notes": "Existing INPUT was a transcription of this exemplar with an invented paragraph 22 (bracketed FRBP 7008(a) consent placeholder) and normalized values; completed in place: removed paragraph 22 (not in the filing), caption names in capitals as filed ('TEXAS GUARANTEED STUDENT LOAN CORPORATION (n/k/a TRELLIS),'), counsel phone without 'Telephone:', the filer's typo '2024and', heading in capitals; added a header comment saying it is complete and what is left out. README.md (Governing rules table, FRBP 7008(a) row) still says 'the sample's paragraph 22 is a bracketed placeholder' -- now stale; not rewritten.",
       "font": "Times New Roman",
       "body_share": 0.921,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "23/68",
+        "same_start_lines": "12/16",
+        "same_start_more_less": "4, 0"
+      },
+      "word": {
+        "justify": false
+      }
     },
     {
       "dir": "courts/fourth-circuit/virginia/federal/western-district/motion-brief",
@@ -451,7 +548,17 @@
       "notes": "Existing INPUT was near complete. Fixed: 'the-defendant-unlawfully-harmed-me-accusations' (hyphen as filed); merged 'By Plaintiff's own exhibits ...' back into the preceding paragraph (one paragraph in the filing); straight quotes/apostrophes the filer typed are now backslash-escaped so smart punctuation keeps them straight (G2 counted them); italics for every case name, Id., See, 'Commonwealth's Attorney', designations 'Plaintiff'/'Defendants', the e-signature; bold period after '(Compl. ECF No. 1 ¶ 28)'; counsel names and VSB numbers on separate lines and the 'Attorneys for Defendants Platania and Antony' line moved before the firm (as filed; the role field is now unused); 'Timberlake**Smith**'. Updated the frontmatter comment to say it is a complete transcription. INPUT-motion-brief-2 (other exemplar) not touched.",
       "font": "Times New Roman",
       "body_share": 0.952,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "87/196",
+        "same_start_lines": "0/0",
+        "same_start_more_less": "0, 0"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     },
     {
       "dir": "courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief",
@@ -500,7 +607,17 @@
       "notes": "Body transcribed completely (sections I-VII, A-D, the numbered issues 1-4, three block quotes, the six '///' lines). Authorities linked with toa: keys for every mention of the eleven authorities in the filer's TOA. Body diff (one word per line, exemplar pp. 6-15 vs ours) shows only page numbers, banners, pdftotext artifacts and the signature block. fb diff G2 cannot resync after the cover because the filer's certifications come before the TOC, so the body was compared by hand. Existing INPUT-answering-brief.md (Klein) and -2 (fictional) untouched.",
       "font": "Times New Roman",
       "body_share": 0.961,
-      "g0_pass": false
+      "g0_pass": false,
+      "word_compat_typst": {
+        "g0": "FAIL",
+        "identical_lines": "162/265",
+        "same_start_lines": "132/158",
+        "same_start_more_less": "2, 24"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     },
     {
       "dir": "courts/ninth-circuit/idaho/federal/bankruptcy-district/motion-brief",
@@ -545,7 +662,17 @@
       "notes": "The existing INPUT was a near-complete transcription; completed in place: the Nossaman counsel column (address, phone, fax, e-mail) was missing; caption name/designation commas ('PAULA LYNNE ZIEGLER,', 'Debtor,'); signature lines_above now 'Scott James Morrow' as filed (typo kept) with bold/italic; italics added for case names, See, See also, Id., sua sponte (first instance only, the second is roman as filed); filer typos restored (under11U.S.C., 580 B.R, 291, 11 U.S.C. 1112(b)(4)(A) without §, 9th Cir, B.A.P.); straight apostrophe in the block quote's debtor's (escaped \\'); 'Id. at 300.' split out of the block quote into its own indented line; certificate lists rewritten as name/e-mail and name/address lines (hard breaks) without invented commas, and the missing '(List names and mailing addresses):' restored. Counsel line '*Attorneys for ...*' split in two lines as filed, with a blank counsel line before it. The docx.pdf is new (render.sh writes it).",
       "font": "Times New Roman",
       "body_share": 0.948,
-      "g0_pass": false
+      "g0_pass": false,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "128/188",
+        "same_start_lines": "114/122",
+        "same_start_more_less": "8, 0"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 1.0
+      }
     },
     {
       "dir": "courts/ninth-circuit/oregon/federal/bankruptcy-district/motion-brief",
@@ -586,7 +713,16 @@
       "notes": "Existing INPUT was a near-complete transcription with an added LBR 9013-1(b)(2) notice that is not in the exemplar; the notice was removed (README 'Known gaps' 2 and reviews/2026-10-15-docx.md page 2 row still describe it). Fixed: title/footer typo '200209966' as filed, footer_title as filed, bold-italic defined terms (Dirksen, ETC, Order), bold title and service-list line in the certificate, removed an invented comma in the service list, added the two '/ / /' lines, the unindented Conclusion lead-in, the certificate's straight apostrophe in Court's (escaped \\'), and the document id '4907-9980-1764, v. 1'. Counsel and signature lines are not markdown-rendered by the template, so the exemplar's bold counsel name and italic /s/ signature are not marked. Visual: the long footer title wraps to two lines and its second line touches 'Page N of 5' (template layout, next bead). Note for the coordinator: tools/render.sh --engine docx deletes the old .docx before zipping, so on a host without zip it leaves the .docx missing.",
       "font": "Times New Roman",
       "body_share": 0.959,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "43/91",
+        "same_start_lines": "3/5",
+        "same_start_more_less": "2, 0"
+      },
+      "word": {
+        "justify": false
+      }
     },
     {
       "dir": "courts/seventh-circuit/court-of-appeals/reply-brief",
@@ -631,7 +767,17 @@
       "notes": "Body transcribed completely, with italics from the PDF font runs (case names, signals, 'Meta Br.' where italic, 'legal', 'content', 'conduct'). Only the authorities in the filer's TOA are linked (Huston, Kolegas, Anderson are cited but not in the filer's TOA, so left unlinked). The ca7 court folder has no checks.yaml or reviews/ for this doc type; fb check passed with the new sample (DEF-CONT-001: 44 blocks, 0 missing), so no Gate 2 rows were needed or written. The 'Appellate Case No:25 -2231' value keeps the filer's spacing.",
       "font": "Times New Roman",
       "body_share": 0.967,
-      "g0_pass": false
+      "g0_pass": false,
+      "word_compat_typst": {
+        "g0": "FAIL",
+        "identical_lines": "149/205",
+        "same_start_lines": "133/150",
+        "same_start_more_less": "12, 5"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     },
     {
       "dir": "courts/seventh-circuit/illinois/federal/southern-district/motion-brief",
@@ -674,7 +820,17 @@
       "notes": "Existing INPUT was a complete transcription. Fixed: curly apostrophes in the title; first signature line is 'Iwana Rademaekers, Attorney in Charge' (one line, as filed); italic 'See' in footnotes 2, 3, 5, 11, 12; literal closing quote after 'or death.' (smart punctuation had turned the filer's stray quote into an opening one). The certificate of service text is hard-coded in the template and matches the exemplar word for word.",
       "font": "Times New Roman",
       "body_share": 1.000,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "112/157",
+        "same_start_lines": "92/96",
+        "same_start_more_less": "4, 0"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 1.0
+      }
     },
     {
       "dir": "courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/motion-brief",
@@ -714,7 +870,16 @@
       "notes": "New INPUT-motion-brief.md is a complete transcription of the Meddings motion + memorandum + certificate (7 pages). Body keeps the filer's double spaces after periods, typos ('et. al.', 'decent principals', 'Lancaster, Ohio 431030', 'Mr. And Mrs.') and italic *Rooker-Feldman*. Case names the filer underlined are plain (no markdown underline; cmarker has raw-typst off). The template splits motion/memorandum at '# MEMORANDUM' and signs each part, matching the exemplar.",
       "font": "Times New Roman",
       "body_share": 0.954,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "50/135",
+        "same_start_lines": "1/2",
+        "same_start_more_less": "1, 0"
+      },
+      "word": {
+        "justify": false
+      }
     },
     {
       "dir": "courts/tenth-circuit/court-of-appeals/reply-brief",
@@ -759,7 +924,16 @@
       "notes": "Small-caps text ('THE STATE OF UTAH', 'PUBLIC INTEREST LEGAL FOUNDATION', 'FED. R. EVID. 201') is transcribed in capitals as the exemplar's text layer has it. The filer's typos are kept ('524 U.S. 11(1988)' in the TOA, 'Nago, 174 at 672', 'Sherriff’s'). The filer's TOA lists only full cites' pages; links follow that registry. Own word diff (pdftotext, one word per line) shows no body differences beyond page-flow and the residuals above.",
       "font": "Times New Roman",
       "body_share": 0.946,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "174/187",
+        "same_start_lines": "144/144",
+        "same_start_more_less": "0, 0"
+      },
+      "word": {
+        "justify": false
+      }
     },
     {
       "dir": "courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/motion-brief",
@@ -797,7 +971,17 @@
       "notes": "The existing INPUT was already near complete; added the certificate's signature lines and the mailing list line breaks, and the typographic apostrophe in the title. The exemplar starts the certificate of mailing on its own page; ours reaches 4 pages without a forced break.",
       "font": "Times New Roman",
       "body_share": 0.921,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "44/73",
+        "same_start_lines": "7/8",
+        "same_start_more_less": "1, 0"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     },
     {
       "dir": "courts/tenth-circuit/wyoming/federal/bankruptcy-district/adversary-complaint",
@@ -838,7 +1022,17 @@
       "notes": "Existing INPUT was already a full word-for-word transcription; completed in place: '(Chapter 7)' with parentheses as filed, bold-italic cause-of-action subheadings, bold firm name in counsel block and signature, header comment saying it is complete and what is left out.",
       "font": "Times New Roman",
       "body_share": 0.921,
-      "g0_pass": false
+      "g0_pass": false,
+      "word_compat_typst": {
+        "g0": "FAIL",
+        "identical_lines": "80/112",
+        "same_start_lines": "74/87",
+        "same_start_more_less": "13, 0"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 1.0
+      }
     },
     {
       "dir": "courts/third-circuit/delaware/federal/district/complaint",
@@ -879,7 +1073,23 @@
       "notes": "Existing INPUT was already a full transcription; completed in place: removed the stray comma after 'ATRAVERSE MEDICAL, INC.' in the caption, added italics (et seq., See, case names, see also, /s/ line, attorneys_for lines) and bold firm names in the counsel lines; rewrote the YAML header comment to say complete transcription and what is left out.",
       "font": "Times New Roman",
       "body_share": 0.955,
-      "g0_pass": true
+      "g0_pass": true,
+      "word_compat_typst": {
+        "g0": "PASS",
+        "identical_lines": "125/187",
+        "same_start_lines": "73/85",
+        "same_start_more_less": "10, 2"
+      },
+      "word": {
+        "justify": true,
+        "shrink": 0.76
+      }
     }
-  ]
+  ],
+  "word_compat": {
+    "bead": "fb-w0vj",
+    "engine": "typst 0.15.1",
+    "tool": "tools/calibrate.sh (fb diff --content, fb diff --breaks)",
+    "summary": "docs/EVAL-LOOP.md, Word compatibility"
+  }
 }

@@ -18,7 +18,7 @@
 //   justify: true | false   body paragraphs justified (Word "Justify") or ragged right (Word "Left");
 //   shrink:  ratio          the narrowest an inter-word space may be set in a justified line. Word
 //                           2013+ documents compress spaces to about 76% of normal before moving the
-//                           next word down (measured floor 0.757 to 0.763 on 12 calibration
+//                           next word down (measured floor 0.757 to 0.770 in 8 of the 12 compressing
 //                           exemplars); documents in an older compatibility mode never compress
 //                           (shrink: 100%). Default 100%.
 #let word-compat(opts, body) = {
@@ -35,7 +35,8 @@
   // typst's greedy breaker tests a line at its natural width and never counts on shrinking spaces,
   // so Word's compression is applied as a narrower natural space wherever text is justified (a show
   // rule on text, not on par: typst 0.15 lays out inline content of a block without a par element);
-  // the justification then stretches every full line back to the measure.
+  // the justification then stretches every full line back to the measure. Limitation: the last line
+  // of a paragraph keeps the narrow space (Word sets it natural); docs/EVAL-LOOP.md, "Go/no-go".
   show text: it => context if par.justify and shrink < 100% {
     set text(spacing: shrink)
     it
