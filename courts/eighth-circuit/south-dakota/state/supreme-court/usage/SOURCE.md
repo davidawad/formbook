@@ -20,3 +20,7 @@ Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a
 ## Follow-up search (2026-10-21, fb-l129.1)
 
 Re-searched the blocked petition rows against the official UJS eCourts site, official South Dakota statutes, and public search results for state Supreme Court rehearing, review, and writ petitions. eCourts states that public case documents are images available for purchase, and no free text-layer court filing appeared. A South Dakota Supreme Court rehearing petition in State v. Tuopeh, No. 30365 (filed 2025-03-27), is attached as a scanned exhibit in a public SCOTUS petition appendix; the filed petition itself has no extractable text layer in that copy, so it does not qualify. The blocked petition rows remain blocked.
+
+## Follow-up search — fb-l129.1 pass 3 (2026-10-21)
+
+Expanded the official eCourts/public-search pass to the remaining `amicus-brief` row as well as petition types. Public documents for the relevant appellate cases are image-only and require purchase; the Tuopeh #30365 petition located in a SCOTUS appendix is also a scan without extractable text. No standalone qualifying public text-layer amicus brief was found. All current BLOCKED rows remain as described above.
