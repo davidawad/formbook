@@ -115,13 +115,12 @@ Every page of `OUTPUT-merits-brief.typst.pdf` (16 pages, TeX Gyre Schola) was ra
 
 ## Engines
 
-Engine status (this box, after the font change): typst `ok`, 16 pages; latex `ok`: `usage/OUTPUT-merits-brief.latex.pdf`, 17 pages, embedded fonts TeX Gyre Schola only (not page-reviewed; the review above is the typst render). docx: `usage/OUTPUT-merits-brief.docx` regenerated with TeX Gyre Schola; `.docx.pdf` NOT rendered, because `soffice` is not installed on this box.
+Engine status (this box, after the font change): typst `ok`, 16 pages; latex `ok`: `usage/OUTPUT-merits-brief.latex.pdf`, 17 pages, embedded fonts TeX Gyre Schola only (not page-reviewed; the review above is the typst render). docx `ok` (see below).
 
 - **latex/** (`template.tex`, `brief.lua`): same booklet geometry and type as the amicus latex. The cover, questions presented and parties pages, TOC, TOA, headings and certificate are built in `brief.lua`. Citations are the body's `toa:<key>` links; each gets a label, and the TOA lists its pages once each. Fonts: TeX Gyre Schola from `tgschola` (stock TeX Live, pdflatex).
 - **What differs from typst:** the LaTeX render is 17 pages to typst's 16; the front matter runs longer. Point headings keep the numerals written in the sample.
-- **docx/** (`reference.docx`, `brief.lua`): page setup and styles as in the amicus docx; the styles, including the headings, name TeX Gyre Schola. The cover, front pages, headings and certificate are raw WordprocessingML.
-- **docx BLOCKED items** (see `docs/DOCX.md`):
-  - TOC and TOA: BLOCKED. No page numbers (no field results).
-  - Footer page numbers: BLOCKED. No PAGE field in the reference.
-  - Typeface: set in `reference.docx`, but not embedded; a reader without TeX Gyre Schola installed gets a substitute in Word. The LibreOffice PDF is still to be rendered where `soffice` exists.
-  - Certificate word count: a count of the sample body, not Word's.
+- **docx/** (`reference.docx`, `brief.lua`): page setup and styles as in the amicus docx; the styles, including the headings, name TeX Gyre Schola. `brief.lua` writes the cover, the Question Presented and Parties pages, the tables, the headings, the signature block and the certificate as raw WordprocessingML, and list items as paragraphs with a Schola bullet (pandoc's list numbering made LibreOffice draw the bullet in OpenSymbol, DEF-FONT-002). A paragraph that opens with its own letter ("b. The ...") stays a body paragraph with the letter as written. Sections: cover (no number), front matter (i, ii ...), body and signature (1, 2 ...), certificate (no number); the signature block is never split. The TOC and TOA page numbers come from `fb render`'s multi-pass build (needles: each heading and each `toa:` citation), written as text, so no field needs an update. `check.sh --engine docx`: 6 passed, 0 failed (fb-595.55); 17 pages.
+- **docx open items** (see `docs/DOCX.md`):
+  - Typeface: set in `reference.docx`, but not embedded; a reader without TeX Gyre Schola installed gets a substitute in Word. The LibreOffice PDF is the checked form.
+  - Page numbers in the tables are LibreOffice's pagination; Word may paginate slightly differently.
+  - Certificate word count: computed from the sample's markdown (typst count-words), not from Word.

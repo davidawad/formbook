@@ -13,7 +13,7 @@ One doc type only. Self-contained: `usage/`, `usage/`, `typst/`, this README.
 | Render | ok: `sh tools/render.sh courts/supreme-court-of-the-united-states/amicus-brief usage/INPUT-amicus-brief.md` writes `usage/OUTPUT-amicus-brief.typst.pdf` (14 pages, TeX Gyre Schola only, no typst warnings; was 11 pages in EB Garamond) |
 | Overlay | ok: `sh tools/overlay.sh courts/supreme-court-of-the-united-states/amicus-brief nssf-amicus-brief` writes `usage/OVERLAY-nssf-amicus-brief.pdf` and `.txt` |
 | Pages reviewed | 14 of 14 (final render, rasterized with `pdftoppm -r 80` and viewed) |
-| Open | No tier-1 typeface gap. The docx BLOCKED items stay (see Engines). Not BLOCKED: the exemplar exists. |
+| Open | No tier-1 typeface gap. No docx BLOCKED item (see Engines). Not BLOCKED: the exemplar exists. |
 
 ## Governing rules
 
@@ -112,14 +112,12 @@ Defects found and fixed in review:
 
 ## Engines
 
-Engine status (this box, after the font change): typst `ok`; latex `ok`: `usage/OUTPUT-amicus-brief.latex.pdf`, 14 pages, embedded fonts TeX Gyre Schola only (not page-reviewed; the review above is the typst render). docx: `usage/OUTPUT-amicus-brief.docx` regenerated with TeX Gyre Schola; `.docx.pdf` NOT rendered, because `soffice` is not installed on this box (`tools/render-docx.sh` stops at its conversion step). Neither engine has a checks.yaml gate run yet.
+Engine status (this box, after the font change): typst `ok`; latex `ok`: `usage/OUTPUT-amicus-brief.latex.pdf`, 14 pages, embedded fonts TeX Gyre Schola only (not page-reviewed; the review above is the typst render). docx `ok` (see below).
 
 - **latex/** (`template.tex`, `brief.lua`): booklet page 6 1/8 by 9 1/4 in., text field 4 1/8 by 7 1/8 in., 12-point type on 14-point baselines, 10/12-point notes, cover, roman TOC and TOA, arabic body, signature, certificate. The TOA page list is generated from `\label`s on each citation (Lua filter), with each page printed once and "passim" at six or more pages. Fonts: TeX Gyre Schola from `tgschola` (stock TeX Live, pdflatex).
 - **What differs from typst:** the LaTeX render is 14 pages, the same as typst. The docx cover and certificate are plainer than the typst cover.
-- **docx/** (`reference.docx`, `brief.lua`): page setup, 12-point type, 14-point exact leading, 0.4-in first-line indent and 10-point footnotes are in `reference.docx`. Its styles name TeX Gyre Schola directly, including the heading styles, which had taken the theme's Aptos Display. The cover, headings, lists, signature and certificate are raw WordprocessingML from `brief.lua`.
-- **docx BLOCKED items** (see `docs/DOCX.md`):
-  - TOC and TOA: BLOCKED. The lists give headings and authorities without page numbers; there is no TOC/TOA field result, so the page-number checks cannot pass.
-  - Footer page numbers: BLOCKED. The reference has no footer with a PAGE field, so the roman and arabic numbering is not built.
-  - Typeface: set in `reference.docx`, but not embedded. A reader without TeX Gyre Schola installed gets a substitute font in Word. The PDF from the LibreOffice conversion is the reliable form, and it is still to be rendered where `soffice` exists.
-  - Certificate word count: computed from the sample body, not from Word.
-  - Word and LibreOffice may paginate differently; the PDF is the LibreOffice conversion.
+- **docx/** (`reference.docx`, `brief.lua`): page setup, 12-point type, 14-point exact leading, 0.4-in first-line indent and 10-point footnotes are in `reference.docx`. Its styles name TeX Gyre Schola directly, including the heading styles. `brief.lua` writes the cover, the tables, the headings with their labels (I., A., 1., a.), the signature block and the certificate as raw WordprocessingML, and list items as paragraphs with a Schola bullet (pandoc's list numbering made LibreOffice draw the bullet in OpenSymbol). Sections: cover (no number), tables (i, ii ...), body and signature (1, 2 ...), certificate (no number); the table of authorities opens its own page and the signature block is never split (keep-with-next). The TOC and TOA page numbers come from `fb render`'s multi-pass build (needles: each heading, and each place the body text contains an authority's `match` text; "passim" at six or more pages), written as text, so no field needs an update. `check.sh --engine docx`: 6 passed, 0 failed (fb-595.55); 14 pages, the same page breaks as typst.
+- **docx open items** (see `docs/DOCX.md`):
+  - Typeface: set in `reference.docx`, but not embedded. A reader without TeX Gyre Schola installed gets a substitute font in Word; the LibreOffice PDF is the checked form.
+  - Page numbers in the tables are LibreOffice's pagination; Word may paginate slightly differently.
+  - Certificate word count: computed from the sample's markdown (typst count-words), not from Word.
