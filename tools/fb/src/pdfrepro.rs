@@ -72,9 +72,10 @@ fn fnv1a(bytes: &[u8], seed: u64) -> u64 {
     })
 }
 
-/// Rewrite the creation and modification dates (to `epoch`), the file identifier and the document checksum (to a
+/// Put the font runs in a fixed order (fontorder.rs), then rewrite the creation and modification dates (to `epoch`), the file identifier and the document checksum (to a
 /// hash of the rest of the file) in place.
 pub fn normalize(pdf: &mut [u8], epoch: i64) {
+    crate::fontorder::canonical(pdf);
     let date = stamp(epoch);
     for key in [&b"/CreationDate(D:"[..], &b"/ModDate(D:"[..]] {
         for p in positions(pdf, key) {

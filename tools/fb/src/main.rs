@@ -13,6 +13,7 @@ mod engines;
 mod eval;
 mod fetch;
 mod filing;
+mod fontorder;
 mod fonts;
 mod layout;
 mod lint;
