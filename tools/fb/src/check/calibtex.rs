@@ -9,7 +9,10 @@ use crate::Res;
 /// The stock font packages a latex template may load, each with the line the calibration document loads it by:
 /// newtx (Times), and the Type 1 EB Garamond and Gelasio of the templates that declare those families.
 const FONT_PACKAGES: [(&str, &str); 3] = [
-    ("\\usepackage{newtxtext", "\\usepackage{newtxtext,newtxmath}"),
+    (
+        "\\usepackage{newtxtext",
+        "\\usepackage{newtxtext,newtxmath}",
+    ),
     ("\\usepackage{ebgaramond}", "\\usepackage{ebgaramond}"),
     ("\\usepackage{gelasio}", "\\usepackage{gelasio}"),
 ];
