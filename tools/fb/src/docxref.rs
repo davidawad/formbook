@@ -8,7 +8,8 @@
 //! <reference xmlns:w=".." xmlns:r=".." styles="merge|replace" theme-font="Times New Roman" strip-theme-fonts="true">
 //!   <w:docDefaults>..</w:docDefaults>      replaces pandoc's document defaults (optional)
 //!   <w:style w:styleId="X">..</w:style>    merge: replaces pandoc's style X, or is added;
-//!                                          replace: the styles part holds only these (and the defaults)
+//!                                          replace: the styles part holds only these (and the defaults and
+//!                                          a <w:latentStyles>, when given)
 //!   <footer id="rIdX"><w:p>..</w:p></footer>  a footer part (word/footerN.xml) under relationship id rIdX
 //!   <w:sectPr>..</w:sectPr>                the document's last section properties (optional)
 //! </reference>
@@ -31,6 +32,7 @@ struct Spec {
     theme_font: Option<String>,
     strip_theme_fonts: bool,
     defaults: Option<String>,
+    latent: Option<String>,
     styles: Vec<String>,
     footers: Vec<(String, String)>,
     sect: Option<String>,
@@ -48,8 +50,8 @@ fn attr(tag: &str, name: &str) -> Option<String> {
     Some(tag[at..at + end].to_string())
 }
 
-/// Every `<name ...>...</name>` element of `text` (not nested in itself), in order; `<name` must be followed
-/// by a space or `>` so `w:style` does not match `w:styles`.
+/// Every `<name ...>...</name>` or `<name .../>` element of `text` (not nested in itself), in order; `<name`
+/// must be followed by a space, `/` or `>` so `w:style` does not match `w:styles`.
 fn elements<'a>(text: &'a str, name: &str) -> Vec<&'a str> {
     let open = format!("<{name}");
     let close = format!("</{name}>");
@@ -57,8 +59,16 @@ fn elements<'a>(text: &'a str, name: &str) -> Vec<&'a str> {
     let mut from = 0;
     while let Some(i) = text[from..].find(&open).map(|i| i + from) {
         let next = text[i + open.len()..].chars().next();
-        if !matches!(next, Some(' ' | '>' | '\n' | '\t' | '\r')) {
+        if !matches!(next, Some(' ' | '>' | '/' | '\n' | '\t' | '\r')) {
             from = i + open.len();
+            continue;
+        }
+        let Some(tag_end) = text[i..].find('>').map(|j| j + i + 1) else {
+            break;
+        };
+        if text[..tag_end].ends_with("/>") {
+            out.push(&text[i..tag_end]);
+            from = tag_end;
             continue;
         }
         let Some(j) = text[i..].find(&close).map(|j| j + i + close.len()) else {
@@ -105,6 +115,9 @@ fn parse(text: &str) -> Res<Spec> {
         defaults: elements(&rest, "w:docDefaults")
             .first()
             .map(|s| s.to_string()),
+        latent: elements(&rest, "w:latentStyles")
+            .first()
+            .map(|s| s.to_string()),
         styles: elements(&rest, "w:style")
             .iter()
             .map(|s| s.to_string())
@@ -129,8 +142,9 @@ fn well_formed(text: &str) -> Res<()> {
 fn styles(base: &str, s: &Spec) -> Res<String> {
     let mut out = if s.replace_styles {
         let defaults = s.defaults.as_deref().unwrap_or_default();
+        let latent = s.latent.as_deref().unwrap_or_default();
         format!(
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<w:styles {STYLES_NS}>\n{defaults}\n{}\n</w:styles>\n",
+            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<w:styles {STYLES_NS}>\n{defaults}\n{latent}\n{}\n</w:styles>\n",
             s.styles.join("\n")
         )
     } else {
@@ -393,6 +407,13 @@ mod tests {
 
     #[test]
     fn elements_do_not_confuse_style_and_styles() {
+        assert_eq!(
+            elements(
+                "<w:latentStyles w:count=\"1\"/><w:style a=\"2\"/>",
+                "w:latentStyles"
+            ),
+            ["<w:latentStyles w:count=\"1\"/>"]
+        );
         assert_eq!(
             elements(
                 "<w:styles><w:style a=\"1\">x</w:style></w:styles>",
