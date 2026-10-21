@@ -9,7 +9,7 @@ use sha2::{Digest, Sha256};
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
-const TYPST_VERSION: &str = "0.15.0";
+const TYPST_VERSION: &str = "0.15.1";
 const MAMBA_VERSION: &str = "2.9.0";
 const MAMBA_SHA256: &str = "8761c382127e6363bd9e0a2451aa3ef90d071a79133f736e2f759a3bf13040dd";
 /// typst is pinned exactly: the court templates are written and checked against this release.
@@ -280,7 +280,7 @@ mod tests {
     #[test]
     fn typst_is_pinned_in_the_specs() {
         let s = specs();
-        assert_eq!(s[0], "typst==0.15.0");
+        assert_eq!(s[0], "typst==0.15.1");
         assert!(["go-yq", "tectonic", "just"]
             .iter()
             .all(|t| s.contains(&t.to_string())));
@@ -301,7 +301,7 @@ mod tests {
 
     #[test]
     fn version_and_yq_flavour() {
-        assert_eq!(typst_version("typst 0.15.0 (abc123)"), "0.15.0");
+        assert_eq!(typst_version("typst 0.15.1 (abc123)"), "0.15.1");
         assert_eq!(typst_version(""), "");
         assert!(is_mikefarah(
             "yq (https://github.com/mikefarah/yq/) version v4.44"
