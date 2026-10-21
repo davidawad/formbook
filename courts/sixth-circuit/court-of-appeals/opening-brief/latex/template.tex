@@ -79,12 +79,18 @@
 % Table of contents: one line per heading, label in a 0.5 in box, dot leader, page number at right.
 \newcommand{\caTocLine}[2]{\ifx\relax#1\relax\else\makebox[\caTab][l]{#1}\fi#2}
 \newcommand{\caTocList}{\@starttoc{toc}}
-\titlecontents{caone}[0bp]{\addvspace{6.3bp}\singlespacing}{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
-\titlecontents{capoint}[0bp]{\addvspace{6.3bp}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
-\titlecontents{catoc1}[0.5in]{\addvspace{2.8bp}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
-\titlecontents{catoc2}[1.0in]{\addvspace{2.8bp}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
-\titlecontents{catoc3}[1.5in]{\addvspace{2.8bp}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
-\titlecontents{catoc4}[2.0in]{\addvspace{2.8bp}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
+% The gap, the dot leaders (at least 1.5em of them) and the page reference are glued: no break may fall
+% between them, so the reference ends the entry's last line after its leaders and never wraps alone.
+\newcommand{\caTocFill}{\nobreak\hspace{0.8em}\nobreak\xleaders\hbox to 0.16em{\hss.}\hskip 1.5em plus 1fill\nobreak\hspace{0.3em}\nobreak}
+% Entry lines are set ragged right, as in the typst template, so a title line never has to stretch or overrun to
+% leave room for the glued leaders and page on the last line.
+\newcommand{\caTocRag}{\advance\rightskip 0pt plus 3em\relax}
+\titlecontents{caone}[0bp]{\addvspace{6.3bp}\singlespacing\caTocRag}{}{}{\caTocFill\contentspage}
+\titlecontents{capoint}[0bp]{\addvspace{6.3bp}\singlespacing\caTocRag\hangindent=0.5in\hangafter=1 }{}{}{\caTocFill\contentspage}
+\titlecontents{catoc1}[0.5in]{\addvspace{2.8bp}\singlespacing\caTocRag\hangindent=0.5in\hangafter=1 }{}{}{\caTocFill\contentspage}
+\titlecontents{catoc2}[1.0in]{\addvspace{2.8bp}\singlespacing\caTocRag\hangindent=0.5in\hangafter=1 }{}{}{\caTocFill\contentspage}
+\titlecontents{catoc3}[1.5in]{\addvspace{2.8bp}\singlespacing\caTocRag\hangindent=0.5in\hangafter=1 }{}{}{\caTocFill\contentspage}
+\titlecontents{catoc4}[2.0in]{\addvspace{2.8bp}\singlespacing\caTocRag\hangindent=0.5in\hangafter=1 }{}{}{\caTocFill\contentspage}
 
 % Table of authorities. \toahit records each citation's printed page (written at shipout, so the page is the
 % page the citation sits on). \toaref keeps one entry per page; \toapages lists them; "passim" from 7 pages.
@@ -105,8 +111,8 @@
   \Needspace{3\baselineskip}\par\vspace{1em}%
   {\singlespacing\noindent\textbf{#1}\ifnum#2=1\hfill\textbf{\underline{Page(s)}}\fi\par}\vspace{0.2em}}
 \newcommand{\caToaEntry}[2]{%
-  \par\vspace{0.7em}{\singlespacing\noindent\hangindent=0.35in\hangafter=1 #1\hspace{0.8em}%
-  \leaders\hbox to 0.16em{.\hss}\hfill\hspace{0.3em}\caToaPages{#2}\par}}
+  \par\vspace{0.7em}{\singlespacing\noindent\hangindent=0.35in\hangafter=1 #1\nobreak\hspace{0.8em}%
+  \nobreak\leaders\hbox to 0.16em{.\hss}\hskip 1.5em plus 1fill\nobreak\hspace{0.3em}\mbox{\caToaPages{#2}}\par}}
 
 % Certificates and designation: single-spaced, one blank line between paragraphs.
 \newenvironment{caSingle}{\singlespacing\setlength{\parindent}{0bp}\setlength{\parskip}{14bp}}{\par}

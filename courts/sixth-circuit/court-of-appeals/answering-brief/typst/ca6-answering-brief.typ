@@ -6,6 +6,7 @@
 // the YAML frontmatter of the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../lib/typst/tables.typ": leader-page
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -222,8 +223,7 @@
       if numbered { box(width: heading-tab, lab) }
       title
       h(0.8em)
-      dot-leader
-      box(width: 2.6em, align(right, it.page()))
+      leader-page(0.16em, it.page())
     })))
 }
 
@@ -290,9 +290,7 @@
           }
           inl(a.cite)
           h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
+          leader-page(0.16em, page-text)
         }))
       }
     }
