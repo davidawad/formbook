@@ -1,6 +1,7 @@
 # District of New Mexico: complaints and motion memoranda
 
 Alias `nmd`. Scope: civil complaints and motion memoranda. Verified against the court-posted Local Rules of Civil Procedure for the District of New Mexico, adopted October 1, 2020 (amended effective October 1, 2020), and Federal Rules of Civil Procedure as amended to December 1, 2025, on 2026-10-20.
+Re-check cadence: check the court rules page for amendments before use and after each local-rule revision; re-check the applicable federal rules after each annual amendment cycle and at least annually (next routine review by 2027-10-20).
 
 ## Sources
 
