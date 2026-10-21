@@ -223,6 +223,13 @@ checks:
     method: toa_pages
     expect: "page lists equal the pages of the citations"
     fix: {anchor: "toa-section"}
+  - id: CA9-TOOL-007
+    gate: 1
+    kind: T
+    name: table of contents and authorities layout, read back from the PDF; no page reference wraps alone onto a line, no leaders end without one, no entry touches the Page(s) rule
+    method: toc_layout
+    expect: "every page reference ends its entry's last line after dot leaders; >= 2 pt clear below the column heading's rule"
+    fix: {anchor: "toa-section"}
   - id: CA9-CONT-003
     gate: 1
     kind: M

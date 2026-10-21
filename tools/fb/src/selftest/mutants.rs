@@ -134,6 +134,20 @@ pub const MUTANTS: &[Mutant] = &[
         expr: r#"s/let page-text = shared-authority-page-labels(hits, key, passim-threshold)/let page-text = hits.filter(h => h.value == key).map(h => str(counter(page).at(h.location()).first() + 1)).dedup().join(", ")/"#,
     },
     Mutant {
+        name: r"toa-page-wraps-alone",
+        want: r"CA9-TOOL-007",
+        kind: Kind::Layout,
+        // the page list breaks off its entry onto a line of its own (fb-595.53, the ca5 reply-brief latex TOA)
+        expr: r"s/^          h(0\.3em)$/          h(0.3em); linebreak()/",
+    },
+    Mutant {
+        name: r"toa-entry-on-heading-rule",
+        want: r"CA9-TOOL-007",
+        kind: Kind::Layout,
+        // the first entry rises against the Page(s) underline: one-line entries, no space between them and the heading
+        expr: r"s/^            linebreak()$/            [ ]/;s/block(breakable: false, above: 0\.7em,/block(breakable: false, above: 0em,/;s/below: 0\.2em, sticky: true/below: 0em, sticky: true/",
+    },
+    Mutant {
         name: r"typst-metric-times",
         want: r"CA9-FORM-007",
         kind: Kind::Layout,

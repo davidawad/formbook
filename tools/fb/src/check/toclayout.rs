@@ -8,12 +8,12 @@
 //!   - an entry whose ink comes within `MIN_CLEAR_PT` of the rule under the column heading ("Page(s)").
 //! A short leader, even one dot, is accepted: \@dottedtocline sets one when a title nearly fills its line.
 //!
-//! `fb toc-layout [--footer-top PT] <pdf>...` runs the same analysis on any PDF (the sweep over all folders).
+//! `fb toc-layout [--footer-top PT] <pdf>...` (toclayout_cli.rs) runs the same analysis on any PDF.
 use super::sh::io_fail;
-use crate::{fail, repo_root, Res};
+use crate::{fail, Res};
 use std::collections::BTreeSet;
 use std::path::Path;
-use std::process::{Command, ExitCode, Stdio};
+use std::process::{Command, Stdio};
 
 /// Clear space required between the column heading's rule and the ink of the first entry below it.
 pub const MIN_CLEAR_PT: f64 = 2.0;
@@ -56,6 +56,8 @@ pub fn parse_runs(tsv: &str) -> Vec<Run> {
 #[derive(Debug)]
 struct Line {
     page: u32,
+    /// horizontal centre of the line
+    mid: f64,
     text: String,
 }
 
@@ -81,6 +83,7 @@ fn lines(runs: &[&Run]) -> Vec<Line> {
             g.sort_by(|a, b| a.left.partial_cmp(&b.left).unwrap());
             let mut text = String::new();
             let mut right = f64::MIN;
+            let left = g[0].left;
             for r in &g {
                 if !text.is_empty() && r.left > right + 1.0 {
                     text.push(' ');
@@ -90,6 +93,7 @@ fn lines(runs: &[&Run]) -> Vec<Line> {
             }
             Line {
                 page: g[0].page,
+                mid: (left + right) / 2.0,
                 text,
             }
         })
@@ -231,14 +235,30 @@ pub fn text_findings(runs: &[Run], ftop: f64) -> (BTreeSet<u32>, Vec<String>) {
     let ls = lines(&body_runs(runs, ftop));
     let pages = table_pages(&ls);
     let mut out = Vec::new();
+    // The folio: a page number centred under a table's title, on the last line of the page. Templates with
+    // margins wider than the footer line `ftop` assumes put it above that line (`fb toc-layout` guesses `ftop`).
+    let title_mid: Vec<f64> = ls
+        .iter()
+        .filter(|l| is_title(&l.text))
+        .map(|l| l.mid)
+        .collect();
+    let folio = |i: usize| {
+        let l = &ls[i];
+        ls.get(i + 1).is_none_or(|n| n.page != l.page)
+            && title_mid.iter().any(|m| (l.mid - m).abs() < 12.0)
+    };
     let mut list_open = false; // the previous line ended in a page list that continues ("11, 12,")
-    for l in ls.iter().filter(|l| pages.contains(&l.page)) {
+    for (i, l) in ls
+        .iter()
+        .enumerate()
+        .filter(|(_, l)| pages.contains(&l.page))
+    {
         let t = clean(&l.text);
         let p = l.page;
         let continues = list_open;
         list_open = false;
         if is_page_ref(&t) {
-            if !continues {
+            if !continues && !folio(i) {
                 out.push(format!(
                     "p.{p}: page reference \"{t}\" alone on a line (wrapped off its entry, no leaders)"
                 ));
@@ -290,6 +310,33 @@ impl Gray {
     fn dark(&self, x: usize, y: usize) -> bool {
         x < self.w && y < self.h && self.px[y * self.w + x] < 128
     }
+    /// Whether the ink at (x, y) is the end of a stroke that runs unbroken up to row `top - 1`, above a rule
+    /// that starts at `top`: a descender of the heading crossing an underline that evades it ("g", "(s)"),
+    /// followed row by row as it slants. A run wider than 3 pt is the rule itself: ink that touches the rule
+    /// from below is not a stroke from above.
+    fn stroke_from_above(&self, x: usize, y: usize, top: usize) -> bool {
+        let (mut lo, mut hi) = (x, x);
+        for yy in (top.saturating_sub(1)..y).rev() {
+            let Some(l) = (lo.saturating_sub(1)..=hi + 1).find(|&xx| self.dark(xx, yy)) else {
+                return false;
+            };
+            let h = (l..=hi + 1)
+                .rev()
+                .find(|&xx| self.dark(xx, yy))
+                .unwrap_or(l);
+            (lo, hi) = (l, h);
+            while lo > 0 && self.dark(lo - 1, yy) {
+                lo -= 1;
+            }
+            while self.dark(hi + 1, yy) {
+                hi += 1;
+            }
+            if hi - lo > (3.0 * PX) as usize {
+                return false;
+            }
+        }
+        top > 0
+    }
 }
 
 /// Clearance, in points, between the rule under heading run `r` and the first ink below it, when that ink is
@@ -297,15 +344,23 @@ impl Gray {
 pub fn rule_clearance(img: &Gray, r: &Run) -> Option<f64> {
     let px = |v: f64| (v * PX).round().max(0.0) as usize;
     let (xa, xb) = (px(r.left), px(r.left + r.width));
-    let (x0, x1) = (px(r.left + 0.1 * r.width), px(r.left + 0.9 * r.width));
-    let full =
-        |y: usize| x1 > x0 && (x0..x1).filter(|&x| img.dark(x, y)).count() * 100 >= (x1 - x0) * 95;
-    let first = (px(r.top + 0.5 * r.height)..px(r.top + r.height + 6.0)).find(|&y| full(y))?;
-    let last = (first..).take_while(|&y| full(y)).last()?;
+    // A rule row holds a dark run of a quarter of the heading's width or more (an underline may skip descenders,
+    // as typst's does around the "g" of "Page(s)"); a row of letters holds only glyph-wide runs.
+    let rule = |y: usize| {
+        let (mut best, mut cur) = (0, 0);
+        for x in xa..xb {
+            cur = if img.dark(x, y) { cur + 1 } else { 0 };
+            best = best.max(cur);
+        }
+        xb > xa && best * 4 >= xb - xa
+    };
+    let first = (px(r.top + 0.5 * r.height)..px(r.top + r.height + 6.0)).find(|&y| rule(y))?;
+    let last = (first..).take_while(|&y| rule(y)).last()?;
     let reach = px(MIN_CLEAR_PT);
-    (1..=reach)
-        .find(|d| (xa..xb).any(|x| img.dark(x, last + d)))
-        .map(|d| (d - 1) as f64 / PX)
+    let from = (last + 1).max(px(r.top + r.height));
+    (from..=last + reach)
+        .find(|&y| (xa..xb).any(|x| img.dark(x, y) && !img.stroke_from_above(x, y, first)))
+        .map(|y| (y - last - 1) as f64 / PX)
 }
 
 fn is_column_heading(t: &str) -> bool {
@@ -361,91 +416,9 @@ pub fn analyze(pdf: &str, runs: &[Run], ftop: f64) -> Res<(BTreeSet<u32>, Vec<St
     Ok((pages, out))
 }
 
-/// runs.tsv of a PDF, as `fb check` prepares it (pdftohtml -xml -zoom 2 | pdf-runs.awk).
-fn runs_of(pdf: &str) -> Res<Vec<Run>> {
-    let awk = repo_root()?.join("tools/check/pdf-runs.awk");
-    let tmp = crate::proc::TempDir::new("toc-runs")?;
-    let xml = tmp.path().join("runs.xml");
-    let run = |c: &mut Command, what: &str| {
-        c.stdin(Stdio::null())
-            .output()
-            .map_err(|e| fail(2, format!("fb: cannot run {what}: {e}")))
-    };
-    let html = run(
-        Command::new("pdftohtml").args(["-xml", "-zoom", "2", "-i", "-q", "-stdout", pdf]),
-        "pdftohtml",
-    )?;
-    std::fs::write(&xml, &html.stdout).map_err(|e| io_fail(&xml.display().to_string(), e))?;
-    let o = run(Command::new("gawk").arg("-f").arg(&awk).arg(&xml), "gawk")?;
-    Ok(parse_runs(&String::from_utf8_lossy(&o.stdout)))
-}
-
-/// The default footer line of `fb toc-layout`: 720 pt on a letter page (1 in bottom margin), in proportion on
-/// any other page height (pdfinfo's first page).
-fn footer_top(pdf: &str) -> f64 {
-    let info = Command::new("pdfinfo")
-        .arg(pdf)
-        .stdin(Stdio::null())
-        .output();
-    let height = info.ok().and_then(|o| {
-        let text = String::from_utf8_lossy(&o.stdout).into_owned();
-        let size = text
-            .lines()
-            .find_map(|l| l.strip_prefix("Page size:"))?
-            .to_string();
-        size.split_whitespace().nth(2)?.parse::<f64>().ok()
-    });
-    height.unwrap_or(792.0) * 720.0 / 792.0
-}
-
-/// `fb toc-layout [--footer-top PT] <pdf>...`: one line per PDF (OK, FAIL or NONE when it has no table), then
-/// the findings. Exit 1 when any PDF fails.
-pub fn main(args: &[String]) -> Res<ExitCode> {
-    let mut ftop: Option<f64> = None;
-    let mut pdfs = Vec::new();
-    let mut it = args.iter();
-    while let Some(a) = it.next() {
-        match a.as_str() {
-            "--footer-top" => {
-                ftop = it
-                    .next()
-                    .and_then(|v| v.parse().ok())
-                    .map(Some)
-                    .ok_or_else(|| fail(2, "fb toc-layout: --footer-top PT"))?
-            }
-            _ => pdfs.push(a.clone()),
-        }
-    }
-    if pdfs.is_empty() {
-        return Err(fail(2, "usage: fb toc-layout [--footer-top PT] <pdf>..."));
-    }
-    let mut bad = false;
-    for pdf in &pdfs {
-        let ftop = ftop.unwrap_or_else(|| footer_top(pdf));
-        let (pages, found) = analyze(pdf, &runs_of(pdf)?, ftop)?;
-        let st = if pages.is_empty() {
-            "NONE"
-        } else if found.is_empty() {
-            "OK"
-        } else {
-            "FAIL"
-        };
-        println!(
-            "{st}\t{pdf}\t{} table pages, {} findings",
-            pages.len(),
-            found.len()
-        );
-        for f in &found {
-            println!("\t{f}");
-        }
-        bad |= !found.is_empty();
-    }
-    Ok(if bad {
-        ExitCode::from(1)
-    } else {
-        ExitCode::SUCCESS
-    })
-}
+#[path = "toclayout_cli.rs"]
+mod cli;
+pub use cli::main;
 
 #[cfg(test)]
 #[path = "toclayout_tests.rs"]

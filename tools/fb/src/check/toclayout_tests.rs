@@ -138,7 +138,7 @@ fn continuation_pages_count() {
     runs.extend([
         run(5, 100.0, 72.0, 468.0, "A v. B . . . . . 3"),
         run(5, 120.0, 72.0, 468.0, "C v. D . . . . . 4"),
-        run(5, 140.0, 300.0, 7.0, "9"),
+        run(5, 140.0, 97.0, 7.0, "9"),
     ]);
     let (pages, found) = text_findings(&runs, 720.0);
     assert_eq!(pages.into_iter().collect::<Vec<_>>(), [4, 5]);
@@ -222,4 +222,43 @@ fn dot_runs() {
     assert_eq!(last_dots("w.o.j.) .  .  .  .  4"), Some((4, 18)));
     assert_eq!(last_dots("case law. . . ."), Some((3, 15)));
     assert_eq!(last_dots("U.S. 123 (1908)"), None);
+}
+
+#[test]
+fn an_underline_that_evades_descenders_is_still_a_rule() {
+    // typst's underline breaks around the "g" of "Page(s)", whose descender reaches below the rule but stays
+    // inside the heading's own box (top 8 + height 14.5 = 22.5 pt)
+    let head = Run {
+        page: 1,
+        top: 8.0,
+        left: 10.0,
+        width: 40.0,
+        height: 14.5,
+        text: "Page(s)".into(),
+    };
+    let mut g = page(29.0); // the next entry's ink starts well clear, at 29 pt
+    let w = g.w;
+    for y in (20.0 * PX) as usize..(21.0 * PX) as usize {
+        for x in (24.0 * PX) as usize..(28.0 * PX) as usize {
+            g.px[y * w + x] = 255; // the gap around the descender
+        }
+    }
+    for y in (18.0 * PX) as usize..(22.0 * PX) as usize {
+        g.px[y * w + (26.0 * PX) as usize] = 0; // the descender itself
+    }
+    assert_eq!(rule_clearance(&g, &head), None);
+    assert_eq!(rule_clearance(&page(22.6), &head), Some(1.5));
+}
+
+#[test]
+fn a_folio_above_the_footer_line_is_not_an_entry() {
+    // 1.5 in margins: the page number sits at 713.5, above the default 720 pt footer line
+    let mut runs = broken_toa();
+    runs.retain(|r| r.text != "ii" && r.text != "1");
+    runs.push(run(4, 713.5, 302.0, 8.0, "4"));
+    let (_, found) = text_findings(&runs, 720.0);
+    assert!(found.is_empty(), "{found:?}");
+    runs.push(run(4, 700.0, 97.0, 7.0, "9")); // a wrapped reference is still one, even near the bottom
+    let (_, found) = text_findings(&runs, 720.0);
+    assert_eq!(found.len(), 1, "{found:?}");
 }

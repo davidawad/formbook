@@ -3,7 +3,8 @@
 # template. Only properties that hold for essentially any US court filing are here. Numbers a court's rules.md fixes can be
 # supplied (not guessed) in an `eval.yaml` beside rules.md or in the doc folder: its keys are merged over this file.
 #
-# Not in this file on purpose: pleading-paper line numbers, 14 pt rules, cover contents, section order, certificates, TOC/TOA.
+# Not in this file on purpose: pleading-paper line numbers, 14 pt rules, cover contents, section order, certificates, TOC/TOA
+# contents (DEF-TOC-001 checks only the layout of a table that is there, which needs no court data).
 # Those need court data; they belong in a court-level checks.yaml (see courts/ninth-circuit/court-of-appeals/).
 
 template: typst/main.typ
@@ -76,6 +77,13 @@ checks:
     engines_reason: "no rules.md states a page limit in machine-readable form; set params.page_limit in eval.yaml"
     expect: "<= params.page_limit pages"
     fix: {anchor: "set page("}
+  - id: DEF-TOC-001
+    gate: 1
+    kind: M
+    name: a table of contents or authorities, when there is one, never wraps a page reference alone onto a line or sets an entry against the Page(s) rule
+    method: toc_layout
+    expect: "every page reference ends its entry's last line after dot leaders; >= 2 pt clear below the column heading's rule (passes with no table)"
+    fix: {anchor: "outline"}
 
 # Reported as SKIP by `fb check` (no rule data to test against). DEF-RENDER-001, render succeeds with no typst warnings,
 # is run by the driver itself (`fb render --deny-warnings`) before any of the above.

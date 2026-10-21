@@ -344,7 +344,7 @@ mod tests {
 
     #[test]
     fn table_matches_the_shell_script() {
-        assert_eq!(MUTANTS.len(), 22);
+        assert_eq!(MUTANTS.len(), 24);
         assert_eq!(
             MUTANTS.iter().filter(|m| m.kind == Kind::Content).count(),
             6
@@ -352,6 +352,10 @@ mod tests {
         assert!(MUTANTS
             .iter()
             .any(|m| m.name == "toa-tag-before-citation" && m.want == "CA9-TOOL-006"));
+        assert_eq!(
+            MUTANTS.iter().filter(|m| m.want == "CA9-TOOL-007").count(),
+            2
+        );
     }
 
     #[test]
