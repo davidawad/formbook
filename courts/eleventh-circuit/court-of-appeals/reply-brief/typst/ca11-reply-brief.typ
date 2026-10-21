@@ -6,6 +6,7 @@
 // same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../lib/typst/tables.typ": leader-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -174,8 +175,6 @@
 // Tables of contents and authorities
 // ---------------------------------------------------------------------------
 
-#let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
-
 /// One table-of-contents row, built from a heading element. Entries are double-spaced (11th Cir. R. 32-3).
 #let toc-entry(it) = {
   let hd = it.element
@@ -186,14 +185,11 @@
   let hang-by = ind + heading-tab
   // The gap between entries equals the leading inside an entry, so the whole table is double-spaced.
   link(hd.location(), block(width: 100%, above: body-leading, below: 0pt,
-    hang(hang-by, leading: body-leading, {
+    leader-row({
       h(ind)
       if numbered { box(width: heading-tab, lab) }
       title
-      h(0.6em)
-      dot-leader
-      box(width: 1.2em, align(right, it.page()))
-    })))
+    }, it.page(), hang: hang-by, leading: body-leading, page-width: 1.2em, gutter: 0pt)))
 }
 
 #let toc-section() = {
@@ -250,18 +246,14 @@
           if h.value.at("primary", default: false) and label not in starred { starred.push(label) }
         }
         let page-text = labels.map(l => if l in starred { l + "*" } else { l }).join(", ")
-        block(breakable: false, above: body-leading, below: 0pt, width: 100%, hang(0.35in, leading: body-leading, {
+        block(breakable: false, above: body-leading, below: 0pt, width: 100%, leader-row({
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
             linebreak()
           }
           inl(a.cite)
-          h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
-        }))
+        }, page-text, hang: 0.35in, leading: body-leading, lead-gap: 0.8em))
       }
     }
   }
