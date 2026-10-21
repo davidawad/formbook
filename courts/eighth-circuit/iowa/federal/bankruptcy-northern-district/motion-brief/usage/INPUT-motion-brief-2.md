@@ -1,9 +1,14 @@
 ---
-debtor: "VeroBlue Farms USA, Inc.,"
-chapter: "Chapter 11 Bankruptcy"
-case_no: "Bankruptcy No. 18-01297"
+# Complete transcription of Doc. 13, Adv. No. 19-09015 (FILED-EXAMPLE-motion-brief-2.pdf, 6 pages): every word of the
+# body, footnote, signature and certificate of service. Left out or template-driven: the caption designations
+# "Debtor(s).", "Plaintiff(s).", "Defendant(s).", "vs." (the template prints its own); the template has one signer, so the
+# second signer line goes in `address` and the second e-mail in `email`; the filing has no fax number and no service
+# date, so those two fields say so; the certificate sentence is the template's, with the filing's manner of service.
+debtor: "VeroBlue Farms USA, Inc."
+chapter: "Chapter 11"
+case_no: "Bankruptcy No: 18-01297"
 adversary_no: "Adversary No. 19-09015"
-plaintiff: "VeroBlue Farms USA, Inc.,"
+plaintiff: "VeroBlue Farms USA, Inc."
 defendant: "Cassels Brock & Blackwell LLP"
 title: "MOTION TO STRIKE AND TO SEAL PORTIONS OF DOC. NO. 1 PURSUANT TO FED. BANK. R. 7012 AND FED. R. CIV. P. 12 (f)"
 signature:
@@ -11,17 +16,18 @@ signature:
   bar: "AT0013972"
   firm: "SCHWARTZ LAW FIRM"
   address:
+    - "Brandon M. Schwartz, AT0011248"
     - "600 Inwood Avenue N."
     - "Suite 130"
     - "Oakdale, MN 55128"
   phone: "(651) 528-6800"
   fax: "[not on the filed copy]"
-  email: "Mschwartz@mdspalaw.com"
+  email: "Mschwartz@mdspalaw.com Bschwartz@mdspalaw.com"
   role: "Local Counsel for Cassels Brock & Blackwell LLP"
   date: "July 15, 2019"
 service:
   date: "[not on the filed copy]"
-  manner: "electronically on parties who receive electronic notice through CM/ECF as listed on CM/ECF's notice of electronic filing"
+  manner: "This document was served electronically on parties who receive electronic notice through CM/ECF as listed on CM/ECF’s notice of electronic filing"
   by: "Katherine Grenell"
 ---
 
@@ -29,9 +35,9 @@ PLEASE TAKE NOTICE that Cassels Brock & Blackwell LLP, a Canadian limited liabil
 
 1. Fed. Bank. R. 7012(b) provides that Fed. R. Civ. P. 12(b) to (i) apply in adversary proceedings;
 
-1. Fed. R. Civ. P. 12(f) provides, in pertinent part, that "[t]he court may strike from a pleading…any…immaterial, impertinent, or scandalous matter."
+1. Fed. R. Civ. P. 12(f) provides, in pertinent part, that "[t]he court may strike from a pleading…any…immaterial, impertinent, or scandalous matter.";
 
-1. Motions to Strike such as this should be granted when it is "shown that the allegations being challenged are so unrelated to plaintiff's claims as to be unworthy of any consideration as a defense and that their presence in the pleading through the proceeding will be prejudicial to the moving party." 51 Wright & Miller, Federal Practice and Procedure § 1380 (2d ed. 1990); Bank of Vermont v. Lyndonville Sav. Bank & Trust Co., 906 F.Supp.221, 228 (D. Vt. 1995) (same);
+1. Motions to Strike such as this should be granted when it is "shown that the allegations being challenged are so unrelated to plaintiff's claims as to be unworthy of any consideration as a defense and that their presence in the pleading through the proceeding will be prejudicial to the moving party." 51 Wright & Miller, Federal Practice and Procedure § 1380 (2d ed. 1990); *Bank of Vermont v. Lyndonville Sav. Bank & Trust Co.*, 906 F.Supp.221, 228 (D. Vt. 1995) (same);
 
 1. Multiple paragraphs of Doc. No. 1 are "immaterial, impertinent, or scandalous matter" as more fully set forth below and should be stricken and sealed as the allegations in Doc. No. 1 will have a prejudicial impact on Cassels Brock & Blackwell LLP and its clients who are not the Debtors and who are not parties to this proceeding.
 
@@ -89,4 +95,4 @@ Movant Cassels Brock & Blackwell LLP ("Cassels") state the following facts in su
 
 Based on the foregoing, Cassels Brock & Blackwell LLP respectfully requests that the Court strike and seal paragraphs 17, 18, 19, 20, 21, 22, 28, 29, 30, 31, 32, 39, 40, 41, 42, 43, 44, 45, 46, 47 and Exhibits A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A16, A17, A18, A19, A20, A21.
 
-[^1]: As acknowledged in the Adversary Complaint, Cassels Brock & Blackwell LLP is a Canadian limited liability partnership. See (Doc. No. 3, ¶ 8).
+[^1]: As acknowledged in the Adversary Complaint, Cassels Brock & Blackwell LLP is a Canadian limited liability partnership.  *See* (Doc. No. 3, ¶ 8).
