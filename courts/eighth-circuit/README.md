@@ -5,7 +5,7 @@ Courts under `courts/eighth-circuit` (38).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The Eighth Circuit](bankruptcy-appellate-panel) | `bap8` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The Eighth Circuit](bankruptcy-appellate-panel) | `bap8` | in progress | — | — | — | 14 |
 | [Court of Appeals for the Eighth Circuit](court-of-appeals) | `ca8` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Arkansas](arkansas/federal/bankruptcy-eastern-district) | `areb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Arkansas](arkansas/federal/bankruptcy-western-district) | `arwb` | up for review | — | — | — | 14 |

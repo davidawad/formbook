@@ -5,7 +5,7 @@
 - CourtListener: [ca9](https://www.courtlistener.com/?court=ca9)
 - Level: appellate
 - Circuit: `ca9`
-- Status: **up for review** (71%); manual status in `court.json`: `todo`
+- Status: **up for review** (86%); manual status in `court.json`: `todo`
 
 ## Checklist
 
@@ -13,11 +13,11 @@
 - [x] `usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)
 - [x] `usage/` has at least 2 INPUT .md samples
 - [x] typst engine passes (`usage/.check-typst.txt` valid)
-- [ ] latex engine passes (`usage/.check-latex.txt` valid)
+- [x] latex engine passes (`usage/.check-latex.txt` valid)
 - [ ] docx engine passes (`usage/.check-docx.txt` valid)
 - [x] a review file in `reviews/`
 
-Engines: typst `pass`, latex `built`, docx `—`.
+Engines: typst `pass`, latex `pass`, docx `built`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and every doc folder under it with a `usage/INPUT-*.md` has a valid `usage/.check-typst.txt` stamp (`just eval` writes them; the default checks are `data/checks-default.yaml`).
@@ -126,6 +126,20 @@ The word count in the certificate is computed from the markdown (everything befo
 - A citation that begins at the end of one page and ends on the next is listed on the page it begins on.
 - Cover color, paper-copy binding, and the colored addendum separator page apply to paper copies only and are not produced (rules.md, CA9-COVER-008).
 - Gate 2 (visual review) is recorded in `reviews/`; open-choice differences from the exemplar that were accepted are listed there with the reason.
+
+## DOCX engine (court root)
+
+The root brief folder now has a DOCX reference document and a Pandoc Lua filter. The reference applies EB Garamond 14 pt, exact double spacing, letter paper with one-inch margins, heading styles, native footnotes, and a centered page-number field. The filter adds the brief's automatic heading labels and removes the `toa:` link targets from citation text. Build it with:
+
+```sh
+sh tools/render.sh --engine docx courts/ninth-circuit/court-of-appeals usage/INPUT-opening-brief.md
+sh tools/render.sh --engine docx courts/ninth-circuit/court-of-appeals usage/INPUT-opening-brief-2.md
+sh tools/check.sh courts/ninth-circuit/court-of-appeals --engine docx
+```
+
+The DOCX files and their LibreOffice PDFs are valid outputs, but this engine is **BLOCKED** on the following checks (2026-10-21). `CA9-COVER-001` through `CA9-COVER-006` and `CA9-COVER-009`: the filter does not yet generate the court cover. `CA9-CONT-001` and `CA9-TOOL-005`: no contents table is generated. `CA9-CERT-001`, `CA9-CERT-002`, `CA9-CERT-003`, and `CA9-ELEC-003`: the Form 8, Form 17 and signature blocks are not generated. `CA9-FORM-008`: the reference document has one continuous page-number field and cannot switch from unnumbered cover to roman front matter, arabic body and Add-n numbering without separate sections. `CA9-FORM-009`: some heading paragraphs do not use centered Word heading styles. `CA9-FORM-007`: LibreOffice uses a fallback face for some glyphs despite EB Garamond being installed and named in the reference document. The generic sample also fails `CA9-TOOL-001` and `CA9-TOOL-004` because LibreOffice's native footnote layout changes one footnote marker/text sequence, and `CA9-FORM-002` because one word falls 1.46 pt below the bottom text margin. `CA9-COVER-007`, `CA9-CERT-004` and `CA9-ADD-001` are also blocked on the generic sample: its optional district court fields, requested Form 15 certificate and addendum are not laid out by the filter. The exemplar-specific `TNR-EMBEDDED` diagnostic expects Times New Roman from the filed exemplar, while these court rules/template use EB Garamond; it is not a DOCX form requirement.
+
+These are implementation gaps or LibreOffice rendering differences, not claims that Word itself cannot express all of these features. In particular, TOC page numbers need a populated field or a two-pass render; page numbering needs section breaks; and the certificates and cover need a metadata-aware Lua filter. Gate 2 records the pages reviewed and the visible open defects in `reviews/2026-10-21.md`. No `.check-docx.txt` pass stamp was written.
 
 [Formbook index](../../../README.md) | [Status table](../../../STATUS.md)
 <!-- fb:generated:end -->
