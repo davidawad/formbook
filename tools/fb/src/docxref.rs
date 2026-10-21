@@ -7,7 +7,7 @@
 //! ```text
 //! <reference xmlns:w=".." xmlns:r=".." styles="merge|replace" theme-font="Times New Roman" strip-theme-fonts="true">
 //!   <w:docDefaults>..</w:docDefaults>      replaces pandoc's document defaults (optional)
-//!   <w:style w:styleId="X">..</w:style>    merge: replaces pandoc's style X, or is added;
+//!   <w:style w:styleId="X">..</w:style>    merge: replaces pandoc's style X in place, or is added at the end;
 //!                                          replace: the styles part holds only these (and the defaults and
 //!                                          a <w:latentStyles>, when given)
 //!   <footer id="rIdX"><w:p>..</w:p></footer>  a footer part (word/footerN.xml) under relationship id rIdX
@@ -141,14 +141,18 @@ fn well_formed(text: &str) -> Res<()> {
 /// The styles part of pandoc's reference with the spec applied.
 fn styles(base: &str, s: &Spec) -> Res<String> {
     let mut out = if s.replace_styles {
-        let defaults = s.defaults.as_deref().unwrap_or_default();
-        let latent = s.latent.as_deref().unwrap_or_default();
+        let parts: Vec<&str> = [s.defaults.as_deref(), s.latent.as_deref()]
+            .into_iter()
+            .flatten()
+            .chain(s.styles.iter().map(String::as_str))
+            .collect();
         format!(
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<w:styles {STYLES_NS}>\n{defaults}\n{latent}\n{}\n</w:styles>\n",
-            s.styles.join("\n")
+            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<w:styles {STYLES_NS}>\n{}\n</w:styles>\n",
+            parts.join("\n")
         )
     } else {
         let mut out = base.to_string();
+        let mut added = vec![];
         for st in &s.styles {
             let id = attr(&st[..st.find('>').unwrap_or(0)], "w:styleId")
                 .ok_or_else(|| bad("a <w:style> has no w:styleId"))?;
@@ -157,7 +161,9 @@ fn styles(base: &str, s: &Spec) -> Res<String> {
                 .into_iter()
                 .find(|e| e[..e.find('>').unwrap_or(0)].contains(&key))
             {
-                out = out.replacen(old, "", 1);
+                out = out.replacen(old, st, 1);
+            } else {
+                added.push(st.as_str());
             }
         }
         if let Some(d) = &s.defaults {
@@ -170,7 +176,7 @@ fn styles(base: &str, s: &Spec) -> Res<String> {
         let at = out
             .rfind("</w:styles>")
             .ok_or_else(|| bad("pandoc's styles part has no </w:styles>"))?;
-        format!("{}{}\n{}", &out[..at], s.styles.join("\n"), &out[at..])
+        format!("{}{}\n{}", &out[..at], added.join("\n"), &out[at..])
     };
     if s.strip_theme_fonts {
         for a in ["asciiTheme", "hAnsiTheme", "eastAsiaTheme", "csTheme"] {
@@ -379,6 +385,7 @@ mod tests {
         assert!(got.contains("<w:name w:val=\"Normal\"/>") && got.contains("w:styleId=\"New\""));
         assert!(got.contains("w:styleId=\"Keep\"><w:rFonts/>"));
         assert!(got.find("w:styleId=\"New\"") < got.find("</w:styles>"));
+        assert!(got.find("<w:name w:val=\"Normal\"/>") < got.find("w:styleId=\"Keep\""));
     }
 
     #[test]
