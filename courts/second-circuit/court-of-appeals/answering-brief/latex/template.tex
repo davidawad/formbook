@@ -2,21 +2,21 @@
 %
 % The layout rules are those of typst/ca2-opening-brief.typ (see ../README.md, "Engines"). The body is
 % pandoc's LaTeX output; ca2.lua (in this folder) builds the cover, tables and certificates from the
-% frontmatter and numbers the headings. Fonts come from the vendored directory only ($fontdir$).
+% frontmatter and numbers the headings.
 % The tables of contents and authorities are two-pass: each entry writes its page to the .aux or .toc
-% file, and the next run prints the pages. tectonic reruns until the references are stable.
+% file, and the next run prints the pages. pdflatex reruns until the references are stable.
 \documentclass[14pt,letterpaper]{extarticle}
-\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+% CA2-FORM-004 (FRAP 32(a)(5)(A)): a proportional serif at 14 point or larger, Times. newtxtext/newtxmath ship with
+% every TeX Live, so the generated .tex compiles with stock pdflatex and no repo-local file; the faces
+% (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman.
+\usepackage{newtxtext,newtxmath}
 \usepackage[letterpaper,margin=1in,footskip=0.6in]{geometry}
 \usepackage{indentfirst}
 \usepackage{changepage}
 \usepackage{needspace}
 \usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
-
-% Liberation Serif, vendored: CA2-FORM-004 (FRAP 32(a)(5)(A)), a proportional serif at 14 point or larger;
-% Times New Roman substitute per docs/FONTS.md.
-\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 
 \makeatletter
 % ---------------------------------------------------------------------------
@@ -35,11 +35,12 @@
 \renewcommand\small{\briefsingle}
 \renewcommand\large{\fontsize{14}{31.4}\selectfont}
 
-% Footnotes: 14 point, single spaced, the number then the note, no indent, a rule of 30% width.
+% Footnotes: 14 point, single spaced, the number then the note, no indent, a rule of 30% width. \noprotrusion keeps
+% the number at the margin (microtype would protrude it, and a digit left of the margin reads as a line number).
 \setlength{\footnotesep}{0.5em}
 \setlength{\skip\footins}{0.9em}
 \renewcommand\footnoterule{\kern-0.3em\noindent{\rule{0.3\linewidth}{0.5pt}}\kern0.4em}
-\renewcommand\@makefntext[1]{\noindent\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
+\renewcommand\@makefntext[1]{\noindent\noprotrusion\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
 
 % Quotations: single spaced, half an inch in on both sides.
 \renewenvironment{quote}{%
@@ -58,10 +59,12 @@
   \par\needspace{2\baselineskip}\addvspace{1.5em}%
   {\centering\briefsingle\bfseries\fontsize{16.1}{19.9}\selectfont\MakeUppercase{#1}\par}%
   \nopagebreak\addvspace{1.1em}\nopagebreak}
-% Point headings of the Argument: bold small capitals, centered, the label in front.
+% Point headings of the Argument: bold, centered, the label in front. Not small capitals: Times New Roman has none,
+% and newtx bold small capitals share a font descriptor with the upright bold whose ascent and descent they would
+% shrink (the word heights the type-size check measures).
 \newcommand\briefpoint[2]{%
   \par\needspace{2\baselineskip}\addvspace{1.2em}%
-  {\centering\briefsingle\bfseries\scshape #1\ #2\par}%
+  {\centering\briefsingle\bfseries #1\ #2\par}%
   \nopagebreak\addvspace{1.1em}\nopagebreak}
 % Sub-headings: the label at indent #1 in a half-inch box, the text hanging under it.
 % #2 label, #3 style (bold; bold italic from level 4), #4 text.

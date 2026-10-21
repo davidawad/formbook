@@ -154,8 +154,9 @@ const PDFLATEX_ARGS: [&str; 4] = [
     "doc.tex",
 ];
 
-/// pdflatex passes in `dir` until doc.aux stops changing (the contents and authorities read their pages back
-/// from it), at most 5.
+/// pdflatex passes in `dir` until doc.aux and the other files read back (doc.toc, a template's own lists such as
+/// doc.adt: every doc.* but the .tex, .pdf and .log) stop changing (the contents and authorities read their pages
+/// back from them), at most 5.
 fn settle(dir: &Path, pdflatex: &Path) -> Res<()> {
     let mut prev = None;
     for _ in 0..5 {
@@ -164,7 +165,7 @@ fn settle(dir: &Path, pdflatex: &Path) -> Res<()> {
             eprintln!("{}", tail(&String::from_utf8_lossy(&o.stdout), 40));
             return Err(fail(1, "fb render: pdflatex failed"));
         }
-        let aux = std::fs::read(dir.join("doc.aux")).unwrap_or_default();
+        let aux = read_back(dir);
         if prev.as_ref() == Some(&aux) {
             return Ok(());
         }
@@ -174,6 +175,24 @@ fn settle(dir: &Path, pdflatex: &Path) -> Res<()> {
         1,
         "fb render: doc.aux did not settle in 5 pdflatex passes",
     ))
+}
+
+/// The files of `dir` a pdflatex pass writes and the next one reads: every doc.* but the .tex, .pdf and .log,
+/// by name.
+fn read_back(dir: &Path) -> Vec<(String, Vec<u8>)> {
+    let mut files: Vec<_> = std::fs::read_dir(dir)
+        .into_iter()
+        .flatten()
+        .flatten()
+        .filter_map(|e| {
+            let name = e.file_name().to_string_lossy().into_owned();
+            let ext = name.strip_prefix("doc.")?;
+            (!["tex", "pdf", "log"].contains(&ext))
+                .then(|| (name.clone(), std::fs::read(e.path()).unwrap_or_default()))
+        })
+        .collect();
+    files.sort();
+    files
 }
 
 /// Search-path variables a build could use to reach repo-local files; the stock check runs without them.
@@ -446,6 +465,16 @@ mod tests {
         )
         .unwrap_err();
         assert!(e.msg.contains("names a repo path"));
+    }
+
+    #[test]
+    fn read_back_holds_the_lists_but_not_the_output() {
+        let t = TempDir::new("readback-test").unwrap();
+        for f in ["doc.aux", "doc.toc", "doc.adt", "doc.tex", "doc.pdf", "doc.log", "x.aux"] {
+            std::fs::write(t.path().join(f), f).unwrap();
+        }
+        let names: Vec<_> = read_back(t.path()).into_iter().map(|(n, _)| n).collect();
+        assert_eq!(names, ["doc.adt", "doc.aux", "doc.toc"]);
     }
 
     #[test]

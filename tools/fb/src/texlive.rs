@@ -17,7 +17,8 @@ pub const REPO: &str =
 const INSTALLER_SHA512: &str = "a307d7d11bcbd1f054ad0b0d476f7f12bc1a40d07445020edef8713b44453831d18a2f1722c3d2b0ea2e4fe6c06183a79d1c4049495113f412a9f5a570a8614d";
 
 /// Packages beyond scheme-basic, each with a file that proves it is installed. newtx and its dependencies give
-/// the Times faces (newtxtext, newtxmath); the rest are what the ca9 latex template loads.
+/// the Times faces (newtxtext, newtxmath); tex-gyre gives TeX Gyre Schola (tgschola, the Century face of the scotus
+/// and cadc templates); the rest are what the latex templates load (fb-595.45, fb-595.47).
 pub const PACKAGES: &[(&str, &str)] = &[
     ("newtx", "newtxtext.sty"),
     ("fontaxes", "fontaxes.sty"),
@@ -32,6 +33,12 @@ pub const PACKAGES: &[(&str, &str)] = &[
     ("needspace", "needspace.sty"),
     ("changepage", "changepage.sty"),
     ("enumitem", "enumitem.sty"),
+    ("tex-gyre", "tgschola.sty"),
+    ("pgf", "tikz.sty"),
+    ("booktabs", "booktabs.sty"),
+    ("microtype", "microtype.sty"),
+    ("ragged2e", "ragged2e.sty"),
+    ("setspace", "setspace.sty"),
 ];
 
 /// $FORMBOOK_HOME, default $HOME/.local/share/formbook.

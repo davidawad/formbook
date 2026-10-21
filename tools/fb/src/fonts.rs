@@ -235,9 +235,11 @@ pub fn times_embedded<'a>(fonts_txt: &'a str, engine: &str) -> Option<&'a str> {
 }
 
 /// The extra pdf_prefix alternatives (`a|b`) the engine accepts for a declared `prefix`: on latex, a template
-/// that declares Times New Roman may embed a metric-compatible Times; nothing otherwise.
+/// that declares Times New Roman, or Liberation Serif (its metric twin, absent from stock TeX Live), may embed a
+/// metric-compatible Times; nothing otherwise.
 pub fn latex_alt_prefix(engine: &str, prefix: &str) -> String {
-    match engine == "latex" && prefix.split('|').any(|p| p == "TimesNewRoman") {
+    let times = |p: &str| p == "TimesNewRoman" || p == "LiberationSerif";
+    match engine == "latex" && prefix.split('|').any(times) {
         true => LATEX_TIMES.join("|"),
         false => String::new(),
     }
@@ -433,6 +435,10 @@ mod tests {
         );
         assert_eq!(
             latex_alt_prefix("latex", "TimesNewRoman|LiberationSerif"),
+            "TeXGyreTermesX|TeXGyreTermes|NewTX"
+        );
+        assert_eq!(
+            latex_alt_prefix("latex", "LiberationSerif"),
             "TeXGyreTermesX|TeXGyreTermes|NewTX"
         );
         assert_eq!(latex_alt_prefix("typst", "TimesNewRoman"), "");

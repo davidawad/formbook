@@ -1,12 +1,13 @@
 % LaTeX template for the First Circuit brief (engine "latex"). Mirrors ../typst/ca1-opening-brief.typ:
-% the same form (FRAP 32(a)): Liberation Serif 14 pt, double-spaced body, 1 inch margins, roman front matter,
+% the same form (FRAP 32(a)): Times (newtx) 14 pt, double-spaced body, 1 inch margins, roman front matter,
 % arabic body, Add-N addendum. The content (cover, TOC, TOA, certificates, headings) is built by ca1.lua
 % from the markdown and its frontmatter; this file only holds the page layout and the macros it calls.
 \documentclass[14pt,letterpaper]{extarticle}
-\usepackage{fontspec}
-% FRAP 32(a)(5)(A): proportionally spaced serif. Vendored Liberation Serif only, the Times New Roman substitute
-% per docs/FONTS.md (fontdir is passed by tools/render-latex.sh). No system fonts.
-\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
+\usepackage[T1]{fontenc}
+% FRAP 32(a)(5)(A): proportionally spaced serif, Times. newtxtext/newtxmath ship with every TeX Live, so the generated
+% .tex compiles with stock pdflatex and no repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible
+% with Times New Roman.
+\usepackage{newtxtext,newtxmath}
 \usepackage[letterpaper,margin=1in,footskip=0.5in]{geometry}   % FRAP 32(a)(4)
 \usepackage{indentfirst}     % every paragraph is indented, including the first after a heading
 \usepackage{needspace}
@@ -52,11 +53,13 @@
   \par\addvspace{21pt}%
   \begingroup\centering\fontsize{16.1pt}{19pt}\selectfont\bfseries\MakeUppercase{#1}\par\endgroup
   \nobreak\vspace{15pt}\par\nobreak}
-% Point heading in the Argument (level 2): centered, bold small capitals, with its numeral.
+% Point heading in the Argument (level 2): centered, bold, with its numeral. Not small capitals: Times New Roman has
+% none, and newtx bold small capitals share a font descriptor with the upright bold whose ascent and descent they
+% would shrink (the word heights the type-size check measures).
 \newcommand{\caonepoint}[2]{%
   \par\addvspace{16.8pt}%
   \addcontentsline{toc}{caonetoc}{\caonetocentry{0pt}{#1}{#2}}%
-  \begingroup\caonesingle\centering\bfseries\addfontfeature{Letters=SmallCaps}#1\ #2\par\endgroup
+  \begingroup\caonesingle\centering\bfseries#1\ #2\par\endgroup
   \nobreak\vspace{14pt}\par\nobreak}
 % Sub-heading (levels 2-5 outside the point headings): label in a 0.5 in box, text hangs under it.
 % Args: indent, label, title, level. Levels 4 and 5 are bold italic; levels 4-5 are not in the TOC.
