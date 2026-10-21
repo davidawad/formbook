@@ -2,6 +2,8 @@
 
 Alias `alnb`. Scope: adversary-proceeding complaints and motion briefs. Verified against the Local Rules of the United States Bankruptcy Court for the Northern District of Alabama (PDF "Local Rules Mar 1 2023", effective March 1, 2023) and the Federal Rules of Bankruptcy Procedure (Dec. 1, 2024 edition as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Note: the local rules state no typeface, point size, margin, or page limit for complaints or motions that was located. FRBP 9004 governs legibility and caption.
 
 ## Sources
