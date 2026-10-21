@@ -8,9 +8,9 @@ In Georgia this is the "Brief of Appellee" (Rule 25 (b)). Exemplar: **yes** (`us
 |---|---|
 | `usage/` | 1 filed brief, text PDF, 11 pages (Century Schoolbook, court e-filing stamp on every page) |
 | `usage/INPUT-answering-brief.md` | transcription of the whole filed brief, both footnotes included. Id kept for the existing docx outputs |
-| render | ok: `usage/OUTPUT-answering-brief.typst.pdf`, 10 pages, exit 0, no warnings, Liberation Serif embedded |
-| overlay | ok: `usage/OVERLAY-fictional-answering-brief.pdf` / `.txt` |
-| pages reviewed | 10 of 10 at 60 dpi, plus the 11 exemplar pages |
+| render | ok: `usage/OUTPUT-answering-brief.typst.pdf`, 11 pages, exit 0, no warnings, Liberation Serif embedded |
+| overlay | ok: `.overlay/courts/eleventh-circuit/georgia/state/court-of-appeals/answering-brief/OVERLAY-answering-brief.pdf` / `.txt` |
+| pages reviewed | all 11 output pages and all 11 exemplar pages rendered at 60 dpi and inspected |
 
 ## Governing rules
 
@@ -18,9 +18,9 @@ Same rules and template as `../opening-brief/README.md` (Rules 2, 6, 24, 25, eff
 
 ## Overlay page map
 
-Ours 1-4 with filed 1-4 (cover 91%, contents 87%, statement 89%, argument 75%); ours 5-10 with filed 6-11 (58-86%). Our text runs about a page short because Liberation Serif at 14 pt sets narrower than the filer's Century Schoolbook (a face Rule 2 (c) (3) also allows; the court-named substitute here stays Liberation Serif).
+The regenerated same-id overlay pairs ours pages 1-11 with filed pages 1-11. Text flow and pagination now match page for page; Liberation Serif at 14 pt is narrower than the filer's Century Schoolbook (also named in Rule 2 (c) (3)).
 
-## Gate 2 review (10 of 10 pages)
+## Gate 2 review (11 of 11 pages)
 
 | Page | Finding |
 |---|---|
@@ -28,10 +28,9 @@ Ours 1-4 with filed 1-4 (cover 91%, contents 87%, statement 89%, argument 75%); 
 | 2 | Contents with two argument headings and Certificate of Service. OK |
 | 3 | Statement of the Case, footnote 1 at 14 pt single spaced. OK |
 | 4-6 | Argument, heading I, footnote 2. OK |
-| 7-8 | Heading II, deposition Q/A block quote. OK (the filer sets "V2-109" flush after the quote; ours indents it: tier 3) |
-| 8 | Conclusion; rest of page empty because the certification and signature are kept together (ACCEPTED) |
-| 9 | Rule 24 certification, date, underlined /s/ signature, counsel lines. OK |
-| 10 | Certificate of service (prior-agreement e-mail certification, Rule 6 (b) (2)), recipients, signature. OK; our certificate signature repeats the counsel lines (the filer lists only the signer): tier 3 |
+| 7-9 | Heading II, deposition Q/A block quote. OK (the filer sets "V2-109" flush after the quote; ours indents it: tier 3) |
+| 10 | Conclusion, Rule 24 certification, date and underlined /s/ signature with counsel lines. OK |
+| 11 | Certificate of service (prior-agreement e-mail certification, Rule 6 (b) (2)), recipients, signature. OK; our certificate signature repeats the counsel lines (the filer lists only the signer): tier 3 |
 
 ## What changed
 

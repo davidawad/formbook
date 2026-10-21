@@ -8,9 +8,9 @@ Doc type: Georgia has no petition for rehearing; the closest real type is the **
 |---|---|
 | `usage/` | 1 filing, text PDF, 15 pages: the motion (pages 1-2), its certificate of service (3), then the brief in support (4-15), each with its own cover; court e-filing stamp "Case A21A1129 Filed 11/03/2021" on every page |
 | `usage/INPUT-petition-for-rehearing.md` | transcription of the whole brief in support (filed pages 4-15). The two-page motion itself is not transcribed: it is a short request that refers to the brief. Id kept for the existing docx outputs |
-| render | ok: `usage/OUTPUT-petition-for-rehearing.typst.pdf`, 11 pages, exit 0, no warnings, Liberation Serif embedded |
-| overlay | ok: `usage/OVERLAY-rehearing-sample.pdf` / `.txt` |
-| pages reviewed | 11 of 11 at 60 dpi, plus the 15 exemplar pages |
+| render | ok: `usage/OUTPUT-petition-for-rehearing.typst.pdf`, 12 pages, exit 0, no warnings, Liberation Serif embedded |
+| overlay | ok: `.overlay/courts/eleventh-circuit/georgia/state/court-of-appeals/petition-for-rehearing/OVERLAY-petition-for-rehearing.pdf` / `.txt` |
+| pages reviewed | all 12 output pages and all 15 exemplar pages rendered at 60 dpi and inspected |
 
 ## Governing rules (primary source, read 2026-10-16)
 
@@ -18,9 +18,9 @@ Rules effective March 26, 2026 (URL and archive copy as in `../motion-brief/READ
 
 ## Overlay page map
 
-Ours 1-8 with filed 4-11 (cover 93%, body 45-86%), ours 9-10 with filed 13 (conclusion), ours 11 with filed 15 (certificate of service, 89%). The filed brief's signature page (14) pairs with none of ours because our signature sits under the conclusion on page 10.
+The regenerated same-id overlay pairs ours pages 1-8 with filed pages 4-11, pages 9-10 with filed page 13, page 11 with filed page 14, and page 12 with filed page 15. The template places the signature under the conclusion; the filed brief uses a separate signature page.
 
-## Gate 2 review (11 of 11 pages)
+## Gate 2 review (12 of 12 pages)
 
 | Page | Finding |
 |---|---|
@@ -29,8 +29,9 @@ Ours 1-8 with filed 4-11 (cover 93%, body 45-86%), ours 9-10 with filed 13 (conc
 | 4-6 | Argument text, heading I (bold, single spaced), the filer's bold passage kept bold. OK |
 | 7 | *Stein* block quotation. OK |
 | 8-9 | Heading II, numbered list "1)" / "2)", Conclusion. OK |
-| 10 | Conclusion end, Rule 24 certification, date, underlined "/s/ Robert Jackson" with the name below and both counsel's lines. OK; the second counsel's "/s/ Dorothy Jaffe" is a plain line, not underlined (contract limit, see Gaps) |
-| 11 | Certificate of service (Rule 6 (b) (2) prior-agreement wording), two recipient blocks, "SO CERTIFIED", signature. OK |
+| 10 | Conclusion and end of argument. OK |
+| 11 | Rule 24 certification, date, underlined "/s/ Robert Jackson" with the name below and both counsel's lines. OK; the second counsel's "/s/ Dorothy Jaffe" is a plain line, not underlined (contract limit, see Gaps) |
+| 12 | Certificate of service (Rule 6 (b) (2) prior-agreement wording), two recipient blocks, "SO CERTIFIED", signature. OK |
 
 ## What changed
 

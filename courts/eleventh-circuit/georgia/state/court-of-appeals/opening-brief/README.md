@@ -9,8 +9,8 @@ Exemplar: **yes** (`usage/FILED-EXAMPLE-opening-brief.pdf`, Appellant's Brief in
 | `usage/` | 1 filed brief, text PDF, 18 pages, court e-filing stamp "Case A26A1103 Filed 01/26/2026" on every page |
 | `usage/INPUT-opening-brief.md` | transcription of the whole filed brief (cover, table of authorities, all sections, signature, certificate of service). The id still says "fictional": it was kept so the existing docx outputs keep their names (see Engines) |
 | render (`tools/render.sh`) | ok: `usage/OUTPUT-opening-brief.typst.pdf`, 17 pages, exit 0, zero typst warnings, Liberation Serif (regular, bold, italic, bold italic) embedded |
-| overlay (`tools/overlay.sh`) | ok: `usage/OVERLAY-fictional-opening-brief.pdf` and `.txt` |
-| pages reviewed | 17 of 17 (every page rendered at 60 dpi and looked at), plus the 18 exemplar pages |
+| overlay (`tools/overlay.sh`) | ok: `.overlay/courts/eleventh-circuit/georgia/state/court-of-appeals/opening-brief/OVERLAY-opening-brief.pdf` and `.txt` |
+| pages reviewed | all 17 output pages and all 18 exemplar pages rendered at 60 dpi and inspected |
 
 ## Governing rules (primary source, read 2026-10-16)
 
@@ -32,7 +32,7 @@ Court of Appeals of Georgia Rules, effective March 26, 2026: `https://www.gaappe
 
 ## Exemplar, overlay page map
 
-`usage/OVERLAY-fictional-opening-brief.txt`: ours 1-10 pair with filed 1-10 (cover 90%, contents 74%, authorities 90%, body 44-67%), ours 11-15 with filed 12-15 (our page breaks run about one page ahead: 17 pages against 18), ours 16 with filed 16 (signature, 71%), ours 17 with filed 17 (certificate of service, 66%). Body lines sit on the same pitch (black where they agree in the overlay); the drift is word wrap (Liberation Serif vs. the filer's Times New Roman, and their justified text).
+The regenerated same-id overlay pairs ours pages 1-10 with filed pages 1-10, ours pages 11-15 with filed pages 12-15, ours page 16 with filed page 16, and ours page 17 with filed page 17. Body line pitch matches; remaining drift is word wrap (Liberation Serif vs. the filer's Times New Roman and justified text).
 
 ## Gate 2 review (all 17 pages, 60 dpi)
 

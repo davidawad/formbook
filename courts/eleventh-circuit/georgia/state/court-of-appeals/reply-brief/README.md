@@ -6,11 +6,11 @@ Exemplar: **yes** (`usage/FILED-EXAMPLE-reply-brief.pdf`, Appellant's Reply Brie
 
 | Item | Result |
 |---|---|
-| `usage/` | 1 filed brief, text PDF, 10 pages, court e-filing stamp on every page |
+| `usage/` | 1 filed brief, text PDF, 10 pages, court e-filing stamp on every page; its PDF pages are 612 x 1008 pt (legal size), although Rule 2 (c) (1) requires letter paper |
 | `usage/INPUT-reply-brief.md` | transcription: cover, table of cited authorities (cases and other authority), argument III with the nested *Graves*/*Garner* quotation, conclusion, both footnotes, certificate of service. Id kept for the existing docx outputs |
 | render | ok: `usage/OUTPUT-reply-brief.typst.pdf`, 9 pages, exit 0, no warnings, Liberation Serif embedded |
-| overlay | ok: `usage/OVERLAY-fictional-reply-brief.pdf` / `.txt` |
-| pages reviewed | 9 of 9 at 60 dpi, plus the 10 exemplar pages |
+| overlay | ok: `.overlay/courts/eleventh-circuit/georgia/state/court-of-appeals/reply-brief/OVERLAY-reply-brief.pdf` / `.txt` |
+| pages reviewed | all 9 output pages and all 10 exemplar pages rendered at 60 dpi and inspected |
 
 ## Governing rules
 
@@ -19,6 +19,8 @@ Same as `../opening-brief/README.md`. Specific: Rule 24 (a): one reply brief as 
 ## Overlay page map
 
 Ours 1-3 with filed 1-3 (cover 91%, contents 78%, authorities 64%: the filer's table runs to two pages), ours 4-6 with filed 5-7 (68-89%), ours 7-8 with filed 8 (conclusion and footnote 2), ours 9 with filed 10 (certificate of service, 91%).
+
+The filed exemplar's 8.5 x 14 in page size is inconsistent with Rule 2 (c) (1); the template follows the rule's letter size.
 
 ## Gate 2 review (9 of 9 pages)
 

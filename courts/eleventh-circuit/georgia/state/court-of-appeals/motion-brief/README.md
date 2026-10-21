@@ -8,9 +8,9 @@ Doc type: any motion filed in the Court of Appeals (Rule 41; emergency motions R
 |---|---|
 | `usage/` | 1 filed motion, text PDF, 29 pages (Century Schoolbook; Democracy Docket's diagonal "retrieved from" watermark is in the text layer, so `pdftotext` shows stray letters) |
 | `usage/INPUT-motion-brief.md` | transcription of filed pages i-11 and 19-24: cover, tables, Introduction, Jurisdiction, Background, Argument I.A, II, Conclusion, signature, certificate of service. Argument I.B (filed pages 12-19) is omitted. Id kept for the existing docx outputs |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 15 pages, exit 0, no warnings, Liberation Serif embedded |
-| overlay | ok: `usage/OVERLAY-motion-sample.pdf` / `.txt` |
-| pages reviewed | 15 of 15 at 60 dpi, plus the 29 exemplar pages |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 18 pages, exit 0, no warnings, Liberation Serif embedded |
+| overlay | ok: `.overlay/courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/OVERLAY-motion-brief.pdf` / `.txt` |
+| pages reviewed | all 18 output pages and all 29 exemplar pages rendered at 60 dpi and inspected |
 
 ## Governing rules (primary source, read 2026-10-16)
 
@@ -28,9 +28,9 @@ Court of Appeals of Georgia Rules, effective March 26, 2026, `https://www.gaappe
 
 ## Overlay page map
 
-Ours 1-3 with filed i-iii (cover 94%, contents 78%, authorities 59%), ours 4-11 with filed 1-10 (50-89%), ours 12-14 with filed 19-23 (argument II and conclusion, 47-58%), ours 15 with filed 25 (certificate, 75%).
+Ours pages 1-3 pair with filed pages i-iii; pages 4-13 pair with filed pages 5-14; page 14 pairs with filed page 24; pages 15-16 pair with filed pages 25-26; page 17 pairs with filed page 28; page 18 pairs with filed page 27. These are the pairs from the regenerated same-id overlay. The filed motion has 29 pages; the input transcribes pages i-11 and 19-24 as described above.
 
-## Gate 2 review (15 of 15 pages)
+## Gate 2 review (18 of 18 pages)
 
 | Page | Finding |
 |---|---|
@@ -40,8 +40,10 @@ Ours 1-3 with filed i-iii (cover 94%, contents 78%, authorities 59%), ours 4-11 
 | 4-6 | Introduction with footnotes 1-2 (14 pt, single spaced). OK |
 | 6-9 | Jurisdiction, Background (bullet list), footnote 3. OK |
 | 9-12 | Argument, headings I, A (bold italic), II. OK |
-| 13-14 | Conclusion, Rule 24 certification, date line, underlined /s/ signature. OK |
-| 15 | Certificate of service with three recipient groups; signature: /s/ line, name, bar number. OK |
+| 14-15 | Final argument and conclusion. OK |
+| 16 | Rule 24 certification, date line and signature block. OK |
+| 17 | Certificate of service with three recipient groups. The conformed signature moves to the next page. OPEN |
+| 18 | Orphaned certificate signature (`/s/ Vincent Russo`, name and bar number) without certificate text. OPEN; requires layout adjustment |
 
 Fixed in review: signature block width (`100% - 3.25in` inside a padded block collapsed to a one-word column); case number with markdown escapes printed backslashes (the cover prints `case_number` as plain text); the certificate's signature repeated every counsel line and broke across pages (now /s/ line, name and first line, unbreakable).
 
