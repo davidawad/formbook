@@ -27,6 +27,7 @@ mod readmes;
 mod render;
 mod selftest;
 mod showcase;
+mod texlive;
 mod track;
 mod tracker;
 mod unicode;

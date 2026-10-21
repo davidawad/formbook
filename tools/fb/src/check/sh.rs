@@ -4,7 +4,7 @@ use std::fs::File;
 use std::io::Write;
 use std::process::{Command, Stdio};
 
-/// Environment every child gets (check sets LC_ALL=C.UTF-8, then TEMPLATE and ENGINE).
+/// Environment every child gets (check sets LC_ALL=C.UTF-8, then TEMPLATE, ENGINE and FONT_ALT).
 pub type Env = Vec<(String, String)>;
 
 pub fn io_fail(what: &str, e: std::io::Error) -> Fail {

@@ -16,7 +16,7 @@ Times New Roman Typst renders go through the Rust renderer so it can add the pin
 cargo run -q --manifest-path tools/fb/Cargo.toml -- render <doc-type-dir> usage/INPUT-<id>.md
 ```
 
-`tools/check.sh` routes its Typst render through the same Rust path. For LaTeX, templates select Times New Roman when fontspec finds the installed family and fall back to Liberation Serif otherwise; the Gate 1 font assertion rejects a fallback render for a Times exemplar.
+`tools/check.sh` routes its Typst render through the same Rust path. For LaTeX the target is stock pdflatex on stock TeX Live (fb-595.45): a Times template loads `\usepackage{newtxtext,newtxmath}` (TeXGyreTermesX, NewTX: metric-compatible with Times New Roman, in every TeX Live), and for the latex engine only Gate 1 accepts TeXGyreTermesX, TeX Gyre Termes or NewTX where the template declares Times New Roman (`TNR-EMBEDDED`, the declared-family check); any other face still fails. Templates not yet migrated select Times New Roman through fontspec (falling back to Liberation Serif) and build with tectonic.
 
 ## Vendored families
 

@@ -12,7 +12,7 @@ That is the whole loop. The rest of this file explains it.
 
 ## Toolchain
 
-`sh tools/bootstrap.sh` installs the pinned toolchain (typst, poppler, imagemagick, gawk, jq, yq, pandoc, tectonic, just) into `~/.local/share/formbook/env` without root, then `export PATH="$HOME/.local/share/formbook/env/bin:$PATH"`. Fonts and typst packages are vendored. You also need `git`; `gh` is optional but makes claiming and submitting automatic. The contribution commands are `just` recipes over `fb`, the Rust tool in `tools/fb` (cargo builds it on first use). No Python.
+`sh tools/bootstrap.sh` installs the pinned toolchain (typst, poppler, imagemagick, gawk, jq, yq, pandoc, tectonic, just) into `~/.local/share/formbook/env` and a pinned TeX Live 2025 (pdflatex) into `~/.local/share/formbook/texlive` without root, then `export PATH="$HOME/.local/share/formbook/env/bin:$HOME/.local/share/formbook/texlive/bin/x86_64-linux:$PATH"` (the bootstrap prints the exact line). Fonts and typst packages are vendored. You also need `git`; `gh` is optional but makes claiming and submitting automatic. The contribution commands are `just` recipes over `fb`, the Rust tool in `tools/fb` (cargo builds it on first use). No Python.
 
 ## The loop
 

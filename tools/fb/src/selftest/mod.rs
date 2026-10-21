@@ -6,7 +6,9 @@
 //! any check.
 //!
 //! Content mutants change the markdown that is rendered (but not the markdown the checks compare against). Layout
-//! mutants change the template in a scratch copy of the court folder. The mutations are `sed` programs, applied
+//! mutants change the template in a scratch copy of the court folder. Latex mutants change latex/template.tex and are
+//! checked with `--engine latex`; latex build mutants must make the render itself refuse (the stock pdflatex check:
+//! the .tex alone compiles in an empty directory with TEXINPUTS unset). The mutations are `sed` programs, applied
 //! with the system sed, with the mutation definitions kept here as data.
 use crate::proc::capture;
 use crate::{fail, repo_root, Res};
@@ -16,134 +18,10 @@ use std::process::{Command, ExitCode};
 
 const SAMPLE: &str = "generic";
 const TEMPLATE: &str = "ca9-brief.typ";
+const LATEX_TEMPLATE: &str = "template.tex";
 
-#[derive(Debug, Clone, Copy, PartialEq)]
-enum Kind {
-    Content,
-    Layout,
-}
-
-struct Mutant {
-    name: &'static str,
-    want: &'static str,
-    kind: Kind,
-    expr: &'static str,
-}
-
-/// content mutants: PDF built from changed markdown, compared with the original; layout mutants: template
-/// changed, markdown unchanged.
-const MUTANTS: &[Mutant] = &[
-    Mutant {
-        name: r"drop-paragraph",
-        want: r"CA9-TOOL-001",
-        kind: Kind::Content,
-        expr: r"/^90\\\. The administrative record/d",
-    },
-    Mutant {
-        name: r"drop-dash-paragraph",
-        want: r"CA9-TOOL-001",
-        kind: Kind::Content,
-        expr: r"/^\\- The District has never explained/d",
-    },
-    Mutant {
-        name: r"alter-word",
-        want: r"CA9-TOOL-001",
-        kind: Kind::Content,
-        expr: r"s/The word “shall” forecloses/The word “may” forecloses/",
-    },
-    Mutant {
-        name: r"lose-italics",
-        want: r"CA9-TOOL-003",
-        kind: Kind::Content,
-        expr: r"s/\*Brightwater\* held that/Brightwater held that/",
-    },
-    Mutant {
-        name: r"alter-footnote",
-        want: r"CA9-TOOL-004",
-        kind: Kind::Content,
-        expr: r"s/The order was not preceded by notice/The order was preceded by notice/",
-    },
-    Mutant {
-        name: r"lose-footnote-text",
-        want: r"CA9-TOOL-004",
-        kind: Kind::Content,
-        expr: r"s/ The point is reserved for any remand\.//",
-    },
-    Mutant {
-        name: r"single-spaced",
-        want: r"CA9-FORM-003",
-        kind: Kind::Layout,
-        expr: r"s/^#let body-leading = 0.94em/#let body-leading = 0.2em/",
-    },
-    Mutant {
-        name: r"small-type",
-        want: r"CA9-FORM-004",
-        kind: Kind::Layout,
-        expr: r"s/^#let type-size = 14pt/#let type-size = 12pt/",
-    },
-    Mutant {
-        name: r"narrow-margins",
-        want: r"CA9-FORM-002",
-        kind: Kind::Layout,
-        expr: r"s/^#let page-margin = 1in/#let page-margin = 0.8in/",
-    },
-    Mutant {
-        name: r"left-aligned-headings",
-        want: r"CA9-FORM-009",
-        kind: Kind::Layout,
-        expr: r"s/shared-section-heading(it.body, type-size, single-leading, above: 1.5em, below: 1.1em)/block(width: 100%, above: 1.5em, below: 1.1em, align(left, strong(upper(it.body))))/",
-    },
-    Mutant {
-        name: r"wrong-font",
-        want: r"CA9-FORM-007",
-        kind: Kind::Layout,
-        // ca9 declares Liberation Serif as its vendored serif face; mutate that declaration explicitly.
-        expr: r#"s|^#let font-family = .*"Liberation Serif".*$|#let font-family = "DejaVu Sans Mono"|"#,
-    },
-    Mutant {
-        name: r"footnotes-small",
-        want: r"CA9-FORM-004",
-        kind: Kind::Layout,
-        expr: r"s/shared-footnote-body(note.body, num, type-size,/shared-footnote-body(note.body, num, 11pt,/",
-    },
-    Mutant {
-        name: r"no-footnote-size",
-        want: r"CA9-FORM-004",
-        kind: Kind::Layout,
-        // typst's own footnote entry (0.85 em) instead of the template's 14 pt one
-        expr: r"s/^    shared-footnote-body(note.body, num, type-size, single-leading, 0.5em)$/    it/",
-    },
-    Mutant {
-        name: r"wrong-word-count",
-        want: r"CA9-CERT-002",
-        kind: Kind::Layout,
-        expr: r"s/^  certificate-of-compliance(meta, words)$/  certificate-of-compliance(meta, words + 7)/",
-    },
-    Mutant {
-        name: r"argument-numbering",
-        want: r"CA9-CONT-012",
-        kind: Kind::Layout,
-        expr: r#"s/if h.level == 2 { numbering("I.", n) }/if h.level == 2 { numbering("A.", n) }/"#,
-    },
-    Mutant {
-        name: r"case-text-in-template",
-        want: r"CA9-TOOL-002",
-        kind: Kind::Layout,
-        expr: r"s|^// U.S. Court of Appeals for the Ninth Circuit: principal (opening) brief\.|& Theresa Sweet, et al.,|",
-    },
-    Mutant {
-        name: r"toa-tag-before-citation",
-        want: r"CA9-TOOL-006",
-        kind: Kind::Layout,
-        expr: r"s/tag-after-first-word(it.body, \[#metadata(it.dest.slice(4))<toa-hit>\]).first()/{ [#metadata(it.dest.slice(4))<toa-hit>]; it.body }/",
-    },
-    Mutant {
-        name: r"toa-wrong-page",
-        want: r"CA9-TOOL-006",
-        kind: Kind::Layout,
-        expr: r#"s/let page-text = shared-authority-page-labels(hits, key, passim-threshold)/let page-text = hits.filter(h => h.value == key).map(h => str(counter(page).at(h.location()).first() + 1)).dedup().join(", ")/"#,
-    },
-];
+mod mutants;
+use mutants::{Kind, Mutant, MUTANTS};
 
 /// Which of the wanted requirement ids did not FAIL in the checker output.
 fn missed<'a>(out: &str, want: &'a str) -> Vec<&'a str> {
@@ -247,7 +125,7 @@ impl Run<'_> {
         let d = self.scratch.join(name);
         std::fs::create_dir_all(&d)
             .map_err(|e| fail(2, format!("fb selftest: {}: {e}", d.display())))?;
-        let from: Vec<PathBuf> = ["typst", "usage", "checks.yaml", "court.json"]
+        let from: Vec<PathBuf> = ["typst", "latex", "usage", "checks.yaml", "court.json"]
             .iter()
             .map(|f| self.court.join(f))
             .collect();
@@ -257,43 +135,63 @@ impl Run<'_> {
         Ok(d)
     }
 
-    /// Render `sample` of the scratch court `d` into `d/<pdf>`; Err carries the first 3 lines of the log.
-    fn render(&self, d: &Path, sample: &str) -> Res<Result<(), String>> {
-        let o = capture(
-            Command::new(&self.exe)
-                .current_dir(self.root)
-                .env("FB_ROOT", self.root)
-                .args(["render", "--deny-warnings"])
-                .arg(d)
-                .arg(sample)
-                .arg(d.join(&self.pdf)),
-        )?;
-        let head: Vec<String> = String::from_utf8_lossy(&o.stderr)
-            .lines()
-            .take(3)
-            .map(str::to_string)
-            .collect();
-        Ok(if o.status.success() {
-            Ok(())
-        } else {
-            Err(head.join("\n"))
+    /// Render `sample` of the scratch court `d` with `engine` into `d/<pdf>` (the engine's OUTPUT for latex);
+    /// Err carries the render's whole stderr. `texinputs`: run with TEXINPUTS at the scratch latex/ folder.
+    fn render(
+        &self,
+        d: &Path,
+        sample: &str,
+        engine: &str,
+        texinputs: bool,
+    ) -> Res<Result<(), String>> {
+        let mut cmd = Command::new(&self.exe);
+        cmd.current_dir(self.root)
+            .env("FB_ROOT", self.root)
+            .args(["render", "--engine", engine, "--deny-warnings"])
+            .arg(d)
+            .arg(sample)
+            .arg(d.join(self.out(engine)));
+        if texinputs {
+            cmd.env("TEXINPUTS", format!("{}:", d.join("latex").display()));
+        }
+        let o = capture(&mut cmd)?;
+        Ok(match o.status.success() {
+            true => Ok(()),
+            false => Err(String::from_utf8_lossy(&o.stderr).into_owned()),
         })
+    }
+
+    /// Where the checker looks for `engine`'s render of the sample (usage/OUTPUT-<id>.<engine>.pdf).
+    fn out(&self, engine: &str) -> String {
+        match engine {
+            "typst" => self.pdf.clone(),
+            e => self.pdf.replace(".typst.pdf", &format!(".{e}.pdf")),
+        }
     }
 
     /// Run one mutant; the line to print and whether it counts as handled.
     fn mutant(&self, m: &Mutant) -> Res<(String, bool)> {
         let d = self.fresh_copy(m.name)?;
-        let built = match m.kind {
+        let (engine, texinputs) = match m.kind {
+            Kind::Content | Kind::Layout => ("typst", false),
+            Kind::Latex => ("latex", false),
+            Kind::LatexBuild { texinputs } => ("latex", texinputs),
+        };
+        let sample = match m.kind {
             Kind::Content => {
                 std::fs::write(
                     d.join("mutated.md"),
                     sed(m.expr, &self.court.join(&self.md))?,
                 )
                 .map_err(|e| fail(2, format!("fb selftest: {e}")))?;
-                self.render(&d, "mutated.md")?
+                "mutated.md".to_string()
             }
-            Kind::Layout => {
-                let orig = self.court.join("typst").join(TEMPLATE);
+            _ => {
+                let rel = match engine {
+                    "typst" => Path::new("typst").join(TEMPLATE),
+                    _ => Path::new("latex").join(LATEX_TEMPLATE),
+                };
+                let orig = self.court.join(&rel);
                 let changed = sed(m.expr, &orig)?;
                 if changed == std::fs::read(&orig).unwrap_or_default() {
                     return Ok((
@@ -301,13 +199,21 @@ impl Run<'_> {
                         false,
                     ));
                 }
-                std::fs::write(d.join("typst").join(TEMPLATE), changed)
+                std::fs::write(d.join(&rel), changed)
                     .map_err(|e| fail(2, format!("fb selftest: {e}")))?;
-                self.render(&d, &self.md)?
+                self.md.clone()
             }
         };
+        let built = self.render(&d, &sample, engine, texinputs)?;
+        if let Kind::LatexBuild { .. } = m.kind {
+            return Ok(build_verdict(m, built));
+        }
         if let Err(log) = built {
-            return Ok((format!("MUTANT {}: render failed: {log}", m.name), false));
+            let head: Vec<&str> = log.lines().take(3).collect();
+            return Ok((
+                format!("MUTANT {}: render failed: {}", m.name, head.join("\n")),
+                false,
+            ));
         }
         // a mutant is meant to fail the checker, so its exit status is ignored
         let o = capture(
@@ -316,7 +222,7 @@ impl Run<'_> {
                 .env("FB_ROOT", self.root)
                 .arg("check")
                 .arg(&d)
-                .args(["--no-render", "--only", SAMPLE]),
+                .args(["--engine", engine, "--no-render", "--only", SAMPLE]),
         )?;
         let out = format!(
             "{}{}",
@@ -324,6 +230,32 @@ impl Run<'_> {
             String::from_utf8_lossy(&o.stderr)
         );
         Ok(verdict(m, &out))
+    }
+}
+
+/// The verdict for a mutant whose render must fail with `want` in its message.
+fn build_verdict(m: &Mutant, built: Result<(), String>) -> (String, bool) {
+    match built {
+        Err(log) if log.contains(m.want) => (
+            format!("caught   {}  (render refused: {})", m.name, m.want),
+            true,
+        ),
+        Err(log) => (
+            format!(
+                "MISSED   {}  (render failed without \"{}\": {})",
+                m.name,
+                m.want,
+                log.lines().last().unwrap_or("")
+            ),
+            false,
+        ),
+        Ok(()) => (
+            format!(
+                "MISSED   {}  (render should have failed: {})",
+                m.name, m.want
+            ),
+            false,
+        ),
     }
 }
 
@@ -411,7 +343,7 @@ mod tests {
 
     #[test]
     fn table_matches_the_shell_script() {
-        assert_eq!(MUTANTS.len(), 18);
+        assert_eq!(MUTANTS.len(), 22);
         assert_eq!(
             MUTANTS.iter().filter(|m| m.kind == Kind::Content).count(),
             6
@@ -419,6 +351,15 @@ mod tests {
         assert!(MUTANTS
             .iter()
             .any(|m| m.name == "toa-tag-before-citation" && m.want == "CA9-TOOL-006"));
+    }
+
+    #[test]
+    fn a_build_mutant_is_caught_only_by_the_named_refusal() {
+        let mut b = m("stock pdflatex check");
+        b.kind = Kind::LatexBuild { texinputs: false };
+        assert!(build_verdict(&b, Err("x\nfb render: stock pdflatex check: y".into())).1);
+        assert!(!build_verdict(&b, Err("fb render: pdflatex failed".into())).1);
+        assert!(!build_verdict(&b, Ok(())).1);
     }
 
     #[test]

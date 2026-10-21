@@ -212,6 +212,37 @@ fn wants_tnr(record: &Value) -> bool {
         || (body == "times" && matches!(text("face"), "Times New Roman" | "Times" | "Times-Roman"))
 }
 
+/// Metric-compatible Times faces the latex engine may embed instead of Times New Roman (fb-595.45): newtxtext
+/// and newtxmath (TeXGyreTermesX, NewTX) and TeX Gyre Termes, all in stock TeX Live, so the .tex compiles with
+/// stock pdflatex. Scoped to latex; typst and docx stay Times New Roman.
+pub const LATEX_TIMES: [&str; 3] = ["TeXGyreTermesX", "TeXGyreTermes", "NewTX"];
+
+/// The `pdffonts` names (subset tag removed) of `fonts_txt`, its two header lines skipped.
+fn pdffonts_names(fonts_txt: &str) -> impl Iterator<Item = &str> {
+    fonts_txt.lines().skip(2).map(|line| {
+        let name = line.split_whitespace().next().unwrap_or("");
+        name.rsplit_once('+').map_or(name, |(_, n)| n)
+    })
+}
+
+/// The first embedded font that satisfies the Times New Roman requirement of a Times exemplar on `engine`:
+/// TimesNewRomanPSMT, or on latex also a metric-compatible Times (LATEX_TIMES).
+pub fn times_embedded<'a>(fonts_txt: &'a str, engine: &str) -> Option<&'a str> {
+    pdffonts_names(fonts_txt).find(|n| {
+        *n == "TimesNewRomanPSMT"
+            || (engine == "latex" && LATEX_TIMES.iter().any(|t| n.starts_with(t)))
+    })
+}
+
+/// The extra pdf_prefix alternatives (`a|b`) the engine accepts for a declared `prefix`: on latex, a template
+/// that declares Times New Roman may embed a metric-compatible Times; nothing otherwise.
+pub fn latex_alt_prefix(engine: &str, prefix: &str) -> String {
+    match engine == "latex" && prefix.split('|').any(|p| p == "TimesNewRoman") {
+        true => LATEX_TIMES.join("|"),
+        false => String::new(),
+    }
+}
+
 /// The doc folder of a font-audit key `<doc>/usage/FILED-EXAMPLE-<id>.pdf`.
 pub fn audit_doc(key: &str) -> Option<&str> {
     let (doc, file) = key.rsplit_once(&format!("/{}/", crate::layout::USAGE_DIR))?;
@@ -379,6 +410,34 @@ fn audit_additions() -> Res<std::process::ExitCode> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    const HEAD: &str = "name type\n---- ----\n";
+
+    #[test]
+    fn metric_times_counts_only_on_latex() {
+        let f = format!("{HEAD}ABCDEF+TeXGyreTermesX-Regular Type 1 Custom yes yes yes 49 0\n");
+        assert_eq!(times_embedded(&f, "latex"), Some("TeXGyreTermesX-Regular"));
+        assert_eq!(times_embedded(&f, "typst"), None);
+        assert_eq!(times_embedded(&f, "docx"), None);
+        let t = format!("{HEAD}XYZ+TimesNewRomanPSMT TrueType WinAnsi yes yes yes 9 0\n");
+        assert_eq!(times_embedded(&t, "typst"), Some("TimesNewRomanPSMT"));
+        let cm = format!("{HEAD}XYZ+LMRoman12-Regular Type 1 Custom yes yes yes 9 0\n");
+        assert_eq!(times_embedded(&cm, "latex"), None);
+    }
+
+    #[test]
+    fn latex_alternatives_only_for_a_declared_times() {
+        assert_eq!(
+            latex_alt_prefix("latex", "TimesNewRoman"),
+            "TeXGyreTermesX|TeXGyreTermes|NewTX"
+        );
+        assert_eq!(
+            latex_alt_prefix("latex", "TimesNewRoman|LiberationSerif"),
+            "TeXGyreTermesX|TeXGyreTermes|NewTX"
+        );
+        assert_eq!(latex_alt_prefix("typst", "TimesNewRoman"), "");
+        assert_eq!(latex_alt_prefix("latex", "EBGaramond"), "");
+    }
 
     #[test]
     fn audit_keys() {

@@ -3,8 +3,10 @@
 //!
 //! Contract (docs/EVAL-LOOP.md, "Engines"):
 //!   <court>/latex/render.sh     if present it owns the build: sh render.sh <court-dir> <sample.md> <out.pdf>
-//!   <court>/latex/template.tex  otherwise pandoc --template plus every latex/*.lua filter, then tectonic
-//!                               (default) or xelatex (LATEX_ENGINE=xelatex)
+//!   <court>/latex/template.tex  otherwise pandoc --template plus every latex/*.lua filter, then pdflatex
+//!                               (default; passes until doc.aux settles, then the stock check: the .tex alone
+//!                               compiles in an empty directory with TEXINPUTS unset), or LATEX_ENGINE=tectonic or
+//!                               xelatex; a template that loads fontspec stays on tectonic until it migrates
 //!   <court>/docx/render.sh      if present it owns the .docx: sh render.sh <court-dir> <sample.md> <out.docx>
 //!   <court>/docx/reference.docx otherwise pandoc --reference-doc plus every docx/*.lua filter, in passes when
 //!                               the filters need page numbers (docxpass.rs)
@@ -99,10 +101,15 @@ pub fn latex(root: &Path, court: &Path, sample: &str, out: &Path) -> Res<()> {
     args.extend(lua_filters(&l));
     args.extend([sample.to_string(), "-o".into(), tex.display().to_string()]);
     pandoc(court, &args)?;
-    match std::env::var("LATEX_ENGINE")
-        .as_deref()
-        .unwrap_or("tectonic")
-    {
+    let src = std::fs::read_to_string(&tex)
+        .map_err(|e| fail(2, format!("fb render: {}: {e}", tex.display())))?;
+    let set = std::env::var("LATEX_ENGINE").ok();
+    match latex_engine(set.as_deref(), &src) {
+        "pdflatex" => {
+            let pdflatex = crate::texlive::pdflatex();
+            settle(work.path(), &pdflatex)?;
+            stock_check(root, &tex, &src, &pdflatex)?
+        }
         "tectonic" => build(
             work.path(),
             &[&["tectonic", "-X", "compile", "--keep-logs", "doc.tex"]],
@@ -117,11 +124,99 @@ pub fn latex(root: &Path, court: &Path, sample: &str, out: &Path) -> Res<()> {
             ];
             build(work.path(), &[&pass, &pass], 40)?
         }
-        _ => return Err(fail(2, "fb render: unknown LATEX_ENGINE")),
+        _ => {
+            return Err(fail(
+                2,
+                "fb render: unknown LATEX_ENGINE (pdflatex, tectonic, xelatex)",
+            ))
+        }
     }
     std::fs::copy(work.path().join("doc.pdf"), out)
         .map(|_| ())
         .map_err(|e| fail(2, format!("fb render: cannot write {}: {e}", out.display())))
+}
+
+/// The TeX engine for a generated `src`: LATEX_ENGINE when set; otherwise pdflatex, the formbook LaTeX target
+/// (fb-595.45), except that a template still loading fontspec (XeTeX or LuaTeX only) stays on tectonic until it
+/// migrates to stock-pdflatex fonts.
+fn latex_engine<'a>(set: Option<&'a str>, src: &str) -> &'a str {
+    match set {
+        Some(e) if !e.is_empty() => e,
+        _ if src.contains("{fontspec}") => "tectonic",
+        _ => "pdflatex",
+    }
+}
+
+const PDFLATEX_ARGS: [&str; 4] = [
+    "-interaction=nonstopmode",
+    "-halt-on-error",
+    "-no-shell-escape",
+    "doc.tex",
+];
+
+/// pdflatex passes in `dir` until doc.aux stops changing (the contents and authorities read their pages back
+/// from it), at most 5.
+fn settle(dir: &Path, pdflatex: &Path) -> Res<()> {
+    let mut prev = None;
+    for _ in 0..5 {
+        let o = capture(Command::new(pdflatex).args(PDFLATEX_ARGS).current_dir(dir))?;
+        if !o.status.success() {
+            eprintln!("{}", tail(&String::from_utf8_lossy(&o.stdout), 40));
+            return Err(fail(1, "fb render: pdflatex failed"));
+        }
+        let aux = std::fs::read(dir.join("doc.aux")).unwrap_or_default();
+        if prev.as_ref() == Some(&aux) {
+            return Ok(());
+        }
+        prev = Some(aux);
+    }
+    Err(fail(
+        1,
+        "fb render: doc.aux did not settle in 5 pdflatex passes",
+    ))
+}
+
+/// Search-path variables a build could use to reach repo-local files; the stock check runs without them.
+const LOCAL_PATH_VARS: [&str; 9] = [
+    "TEXINPUTS",
+    "TEXMFHOME",
+    "TEXFONTMAPS",
+    "TFMFONTS",
+    "T1FONTS",
+    "ENCFONTS",
+    "VFFONTS",
+    "TTFONTS",
+    "OPENTYPEFONTS",
+];
+
+/// The interop promise of the latex engine: a stranger compiles our .tex with stock pdflatex on stock TeX Live.
+/// `src` (the generated doc.tex) must not name the repo, and must compile alone in an empty directory with
+/// TEXINPUTS (and the other search-path variables) unset.
+fn stock_check(root: &Path, tex: &Path, src: &str, pdflatex: &Path) -> Res<()> {
+    let r = root.display().to_string();
+    if !r.is_empty() && r != "/" && src.contains(&r) {
+        return Err(fail(
+            1,
+            format!("fb render: stock pdflatex check: the .tex names a repo path ({r})"),
+        ));
+    }
+    let dir = TempDir::new("stock-tex")?;
+    std::fs::copy(tex, dir.path().join("doc.tex"))
+        .map_err(|e| fail(2, format!("fb render: stock pdflatex check: {e}")))?;
+    let mut cmd = Command::new(pdflatex);
+    cmd.args(PDFLATEX_ARGS).current_dir(dir.path());
+    for v in LOCAL_PATH_VARS {
+        cmd.env_remove(v);
+    }
+    let o = capture(&mut cmd)?;
+    if o.status.success() && dir.path().join("doc.pdf").is_file() {
+        return Ok(());
+    }
+    eprintln!("{}", tail(&String::from_utf8_lossy(&o.stdout), 20));
+    Err(fail(
+        1,
+        "fb render: stock pdflatex check: doc.tex does not compile alone in an empty directory with TEXINPUTS unset",
+    ))
 }
 
 /// Run each command in `dir`, logging to build.log; on failure print the last `keep` log lines.
@@ -325,6 +420,32 @@ mod tests {
         let t = TempDir::new("latex-test").unwrap();
         let e = latex(t.path(), t.path(), "x.md", &t.path().join("o.pdf")).unwrap_err();
         assert!(e.msg.contains("no latex template"));
+    }
+
+    #[test]
+    fn pdflatex_is_the_default_and_fontspec_templates_stay_on_tectonic() {
+        assert_eq!(latex_engine(None, "\\usepackage{newtxtext}"), "pdflatex");
+        assert_eq!(latex_engine(Some(""), "x"), "pdflatex");
+        assert_eq!(latex_engine(None, "\\usepackage{fontspec}"), "tectonic");
+        assert_eq!(latex_engine(Some("xelatex"), "x"), "xelatex");
+        assert_eq!(
+            latex_engine(Some("pdflatex"), "\\usepackage{fontspec}"),
+            "pdflatex"
+        );
+    }
+
+    #[test]
+    fn stock_check_rejects_a_tex_that_names_the_repo() {
+        let t = TempDir::new("stock-test").unwrap();
+        let src = format!("\\input{{{}/lib/x.tex}}", t.path().display());
+        let e = stock_check(
+            t.path(),
+            &t.path().join("doc.tex"),
+            &src,
+            Path::new("pdflatex"),
+        )
+        .unwrap_err();
+        assert!(e.msg.contains("names a repo path"));
     }
 
     #[test]

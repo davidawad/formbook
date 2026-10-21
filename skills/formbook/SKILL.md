@@ -15,8 +15,8 @@ Do not use it for: contracts, letters, memos (not court filings); a court/doc ty
 
 ```sh
 git clone <formbook-repo-url> formbook && cd formbook      # or use the checkout you are in
-sh tools/bootstrap.sh                                        # installs typst 0.15.0, poppler, jq, yq, pandoc, tectonic
-export PATH="$HOME/.local/share/formbook/env/bin:$PATH"
+sh tools/bootstrap.sh                                        # installs typst 0.15.0, poppler, jq, yq, pandoc, tectonic, TeX Live 2025 (pdflatex)
+export PATH="$HOME/.local/share/formbook/env/bin:$HOME/.local/share/formbook/texlive/bin/x86_64-linux:$PATH"
 sh tools/bootstrap.sh --check                                # lists any missing tool
 ```
 

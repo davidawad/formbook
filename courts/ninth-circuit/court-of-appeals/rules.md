@@ -43,7 +43,7 @@ IDs are stable. `checks.yaml` references them. Never renumber; retire an ID by m
 | CA9-FORM-006 | Reproduced clearly, one side of the page; text, not images of text. Covered by CA9-ELEC-001. | FRAP 32(a)(1), HB p. 138 | M |
 | CA9-FORM-007 | Every font used is embedded, and every embedded font is the template's declared family (no silent fallback to a system font). | project; supports FRAP 32(a)(5) and Circuit Rule 25-5(e) | T |
 | CA9-FORM-008 | Page numbering: front matter after the cover in lowercase roman numerals (cover unnumbered); the body starts at Arabic 1 on the first page of the first body section; numbers centered at the foot, inside the bottom margin. Numbers are consecutive within each run. | EX; FRAP says only that numbers may sit in the margin | C |
-| CA9-FORM-009 | Exemplar-derived open choices: top-level section headings and Argument point headings are centered (checked mechanically on every line); the rest is checked by visual review (Gate 2) only: point headings bold small capitals, sub-point headings bold with a hanging label, first-line indent on body paragraphs, cover layout with rules, TOC and TOA styling. | EX | C |
+| CA9-FORM-009 | Exemplar-derived open choices: top-level section headings and Argument point headings are centered (checked mechanically on every line); the rest is checked by visual review (Gate 2) only: point headings bold (Times New Roman has no small capitals), sub-point headings bold with a hanging label, first-line indent on body paragraphs, cover layout with rules, TOC and TOA styling. | EX | C |
 
 ### Length (FRAP 32(a)(7), Circuit Rule 32-1)
 

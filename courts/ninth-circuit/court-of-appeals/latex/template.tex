@@ -2,13 +2,16 @@
 %
 % Rule-driven and content-agnostic. Requirement IDs (CA9-...) refer to ../rules.md. No case-specific text, no
 % coordinates measured off any filed brief, no forced line breaks. Built by tools/render-latex.sh: pandoc reads
-% the markdown with the filter ca9.lua (the same directory), then this template is compiled with tectonic.
+% the markdown with the filter ca9.lua (the same directory), then this template is compiled with pdflatex.
 % The frontmatter fields are the ones documented in ../README.extra.md, "Markdown contract".
 %
-% Pandoc variables used: fontdir (set by the renderer), the frontmatter fields, and the booleans and counts
+% Pandoc variables used: the frontmatter fields, and the booleans and counts
 % that ca9.lua derives from them (basis_*, rc_*, words, words_fmt, toa, addendum).
 \documentclass[14pt,letterpaper]{extarticle}
-\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+% CA9-FORM-004 (font-family): Times. newtxtext/newtxmath ship with every TeX Live, so the generated .tex compiles
+% with stock pdflatex and no repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman.
+\usepackage{newtxtext,newtxmath}
 % CA9-FORM-001, -002: letter; margins of at least 1 in. The bottom margin is a little deeper than 1 in so that a line
 % of text never reaches into it (the last line's descent is part of the line); the page number sits in it.
 \usepackage[letterpaper,left=1in,right=1in,top=74bp,bottom=80bp,headheight=0pt,headsep=0pt,footskip=36bp]{geometry}
@@ -22,10 +25,6 @@
 % ---------------------------------------------------------------------------
 % Parameters (the only numbers in this file; each traces to a rule or a style choice)
 % ---------------------------------------------------------------------------
-
-% CA9-FORM-004: a proportionally spaced serif face, 14 pt or larger. Vendored in fonts/eb-garamond/.
-% font-family: EB Garamond. The renderer passes fontdir (the vendored fonts/ directory, trailing slash).
-\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 
 % Sizes are in big points (bp, the unit of the PDF's coordinates): 14 bp = 14 TeX pt is not the same length.
 \newcommand\ca@type{\fontsize{14bp}{28.1bp}\selectfont}  % type-size: 14 pt, body-leading: double (at least 28 pt)
@@ -114,10 +113,13 @@
   \begingroup\centering\ca@single\bfseries\leavevmode#2\MakeUppercase{#1}\par\endgroup%
   \nopagebreak\addvspace{0.9\baselineskip}\nobreak}
 
-% ---- level 2 in the Argument: centered point heading, bold small capitals (CA9-FORM-009) -----
+% ---- level 2 in the Argument: centered point heading, bold (CA9-FORM-009). Not small capitals: Times New Roman
+% has none, so the typst and docx engines set these bold, and newtx bold small capitals share a font descriptor with
+% the upright bold whose ascent and descent they would shrink (the word heights CA9-FORM-004 measures).
+% -----
 \newcommand\ca@pointhead[3]{% #1 label, #2 title, #3 the contents entry
   \par\vspace{1.2\baselineskip}%
-  \begingroup\centering\ca@single\bfseries\addfontfeature{Letters=SmallCaps}\leavevmode#3#1 #2\par\endgroup%
+  \begingroup\centering\ca@single\bfseries\leavevmode#3#1 #2\par\endgroup%
   \nopagebreak\addvspace{0.9\baselineskip}\nobreak}
 
 % ---- sub-headings: label in a box of width #2 at indent #1; the title hangs under the text ----------

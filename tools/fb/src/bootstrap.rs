@@ -2,7 +2,8 @@
 //! conda-forge into a private prefix, then verify every tool and print its version (was tools/bootstrap.sh).
 //! `--check` verifies only and installs nothing. Idempotent: rerun to repair or re-pin. Exits non-zero if any
 //! tool is missing or has the wrong version. Install root: $FORMBOOK_HOME (default
-//! $HOME/.local/share/formbook). Needs cargo (to build fb) and, to install, curl, tar and bzip2.
+//! $HOME/.local/share/formbook). The latex engine's pinned TeX Live 2025 goes to <root>/texlive (texlive.rs). Needs cargo
+//! (to build fb) and, to install, curl, tar, bzip2 and perl (install-tl).
 use crate::proc::{capture, TempDir};
 use crate::{fail, Res};
 use sha2::{Digest, Sha256};
@@ -211,17 +212,16 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         [a] if a == "--check" => true,
         _ => return Err(fail(2, "usage: fb bootstrap [--check]")),
     };
-    let home = std::env::var("HOME").unwrap_or_default();
-    let base = std::env::var_os("FORMBOOK_HOME").map_or_else(
-        || PathBuf::from(&home).join(".local/share/formbook"),
-        PathBuf::from,
-    );
+    let base = crate::texlive::home();
     let prefix = base.join("env");
     if !check_only {
         install(&base, &prefix)?;
+        crate::texlive::install(&base)?;
     }
     // The env wins over any system copy (the host has /usr/bin/pandoc and /usr/bin/jq).
     let mut paths = vec![prefix.join("bin")];
+    // the pinned TeX Live (texlive.rs) sits next to the conda env
+    paths.extend(crate::texlive::bin_dir(&base));
     paths.extend(std::env::split_paths(
         &std::env::var_os("PATH").unwrap_or_default(),
     ));
@@ -261,6 +261,16 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     }
     env.probe("pandoc", &["--version"])?;
     env.probe("tectonic", &["--version"])?;
+    if let Some(out) = env.probe("pdflatex", &["--version"])? {
+        if !out.contains(&format!("TeX Live {}", crate::texlive::YEAR)) {
+            println!(
+                "WRONG    pdflatex is not TeX Live {} (install-tl, see texlive.rs)",
+                crate::texlive::YEAR
+            );
+            env.fails += 1;
+        }
+    }
+    env.probe("kpsewhich", &["newtxtext.sty"])?;
     env.probe("just", &["--version"])?;
     env.probe("zip", &["-v"])?;
     env.probe("unzip", &["-v"])?;
@@ -284,8 +294,9 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     }
     println!("bootstrap: all tools present");
     println!(
-        "bootstrap: put them on PATH with: export PATH=\"{}/bin:$PATH\"",
-        prefix.display()
+        "bootstrap: put them on PATH with: export PATH=\"{}/bin:{}:$PATH\"",
+        prefix.display(),
+        crate::texlive::bin_dir(&base).unwrap_or_default().display()
     );
     Ok(ExitCode::SUCCESS)
 }

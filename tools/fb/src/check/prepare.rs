@@ -42,6 +42,9 @@ pub fn calib_of(tsv: &str) -> String {
 pub fn calibrate(c: &Ctx) -> Res<String> {
     let d = format!("{}/calib", c.out);
     std::fs::create_dir_all(&d).map_err(|e| io_fail(&d, e))?;
+    if super::calibtex::applies(c) {
+        return super::calibtex::calibrate(c, &d);
+    }
     let fam = cfg(&c.env, &c.checks, ".font.typst_family")?;
     let typ = format!("#set page(width: 1000pt, height: 220pt, margin: 20pt)\n#set text(font: \"{fam}\", size: 100pt, top-edge: \"ascender\", bottom-edge: \"descender\")\nHxg #strong[Hxg] #emph[Hxg]\n");
     let (ctyp, cpdf, err) = (

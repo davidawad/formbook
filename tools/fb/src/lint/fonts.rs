@@ -72,9 +72,11 @@ fn declaration(path: &Path, text: &str, family: &str) -> bool {
             .any(|marker| declaration.contains(marker));
     }
     if family == "times" {
-        return text.contains("Times New Roman")
-            && text.contains("Liberation Serif")
-            && text.contains("IfFontExistsTF");
+        // stock pdflatex (fb-595.45): newtxtext, a metric-compatible Times in every TeX Live
+        return text.contains("\\usepackage{newtxtext")
+            || (text.contains("Times New Roman")
+                && text.contains("Liberation Serif")
+                && text.contains("IfFontExistsTF"));
     }
     family_markers(family)
         .iter()
@@ -248,5 +250,17 @@ mod tests {
             "schola"
         ));
         assert!(!declaration(p, "\\setmainfont{Liberation Serif}", "schola"));
+    }
+
+    #[test]
+    fn latex_times_is_newtx_or_the_fontspec_pair() {
+        let p = Path::new("template.tex");
+        assert!(declaration(p, "\\usepackage{newtxtext,newtxmath}", "times"));
+        assert!(declaration(
+            p,
+            "\\IfFontExistsTF{Times New Roman}{\\setmainfont{Times New Roman}}{\\setmainfont{Liberation Serif}}",
+            "times"
+        ));
+        assert!(!declaration(p, "\\usepackage{lmodern}", "times"));
     }
 }

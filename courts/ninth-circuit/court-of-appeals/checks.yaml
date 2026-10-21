@@ -165,7 +165,7 @@ checks:
     kind: T
     name: every font is embedded and is the declared family (no fallback)
     method: fonts_embedded
-    expect: "all fonts emb=yes and named EBGaramond-*"
+    expect: "all fonts emb=yes and named TimesNewRoman* (latex: or a metric-compatible Times, TeXGyreTermesX*, TeXGyreTermes*, NewTX*)"
     fix: {anchor: "font-family"}
   - id: CA9-FORM-008
     gate: 1

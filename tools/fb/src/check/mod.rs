@@ -1,6 +1,7 @@
 //! `fb check`: the eval loop's mechanical gates for one court or doc-type folder (was tools/check.sh).
 //! Verdicts are native where migrated; bridge.rs is the compatibility path for remaining methods.
 mod bridge;
+mod calibtex;
 mod declared;
 mod native;
 mod opts;
@@ -10,7 +11,7 @@ mod sh;
 pub(crate) mod stamp;
 
 use crate::{fail, Res};
-use sh::{cfg, io_fail, out, Env};
+use sh::{cfg, io_fail, out, strip_nl, Env};
 use std::fs::OpenOptions;
 use std::io::Write;
 use std::process::ExitCode;
@@ -161,6 +162,9 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         .unwrap_or_else(|| o.engine.clone());
     env.push(("TEMPLATE".into(), template.clone()));
     env.push(("ENGINE".into(), o.engine.clone()));
+    let prefix = cfg(&env, &checks, ".font.pdf_prefix // \"\"")?;
+    let alt = crate::fonts::latex_alt_prefix(&o.engine, strip_nl(&prefix));
+    env.push(("FONT_ALT".into(), alt));
     let mut c = Ctx {
         root,
         doc,
@@ -311,16 +315,23 @@ fn sample(c: &Ctx, sid: &str, t: &mut Tally) -> Res<()> {
         if g == "1" && times_exemplar(c)? {
             let fonts = std::fs::read_to_string(format!("{}/fonts.txt", s.w))
                 .map_err(|e| io_fail(&format!("{}/fonts.txt", s.w), e))?;
-            let found = fonts.lines().skip(2).any(|line| {
-                let name = line.split_whitespace().next().unwrap_or("");
-                name.rsplit_once('+').map_or(name, |(_, n)| n) == "TimesNewRomanPSMT"
-            });
-            if found {
-                out("  PASS TNR-EMBEDDED: TimesNewRomanPSMT is embedded\n");
+            let found = crate::fonts::times_embedded(&fonts, &c.engine);
+            if let Some(name) = found {
+                let how = match name {
+                    "TimesNewRomanPSMT" => String::new(),
+                    _ => " (metric-compatible Times, latex engine)".into(),
+                };
+                out(&format!("  PASS TNR-EMBEDDED: {name} is embedded{how}\n"));
                 t.pass += 1;
                 append(&f(".tally"), "P\n")?;
             } else {
-                out("  FAIL TNR-EMBEDDED: TimesNewRomanPSMT is not embedded\n");
+                let alt = match c.engine.as_str() {
+                    "latex" => " (nor a metric-compatible Times)",
+                    _ => "",
+                };
+                out(&format!(
+                    "  FAIL TNR-EMBEDDED: TimesNewRomanPSMT is not embedded{alt}\n"
+                ));
                 t.fail += 1;
                 t.fails_sample += 1;
                 append(&f(".tally"), "F\n")?;
