@@ -6,6 +6,7 @@
 // the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../lib/typst/tables.typ": leader-page as shared-leader-page
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -60,9 +61,6 @@
   let t = md.replace(regex("\\]\\([^)]*\\)"), "]").replace("\n", " ").replace("\t", " ")
   t.split(" ").filter(w => w.find(regex("[A-Za-z0-9]")) != none).len()
 }
-
-/// A dot leader for the tables.
-#let dot-leader = box(width: 1fr, repeat[.#h(0.2em)])
 
 /// Thousands separator for printed counts.
 #let group-digits(n) = {
@@ -176,7 +174,7 @@
       let display = if "name" in a and a.name != a.cite { inl(a.name) + [, ] } else { [] }
       block(above: 0.5em, below: 0.4em, breakable: false, par(
         first-line-indent: 0pt, hanging-indent: 0.4in, leading: single-leading, justify: false,
-        [#display#inl(a.cite)#dot-leader #shown],
+        [#display#inl(a.cite)#shared-leader-page(shown, 0.2em, before: 0pt, gap: 0.25em)],
       ))
     }
   }
