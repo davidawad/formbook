@@ -1,0 +1,885 @@
+{
+  "bead": "fb-w0vj.1",
+  "what": "Calibration set for the word-compat layer (fb-w0vj): short Word-origin Times New Roman FILED-EXAMPLEs whose same-id INPUT is a complete transcription. Check a pair with `fb diff --content <dir>/<exemplar> <dir>/usage/OUTPUT-<id>.typst.pdf` (G0 page count/size, G2 words in order). g2.residuals are template-generated differences (caption, cover, certificates, page numbers), not transcription gaps; body_divergences is the count of body differences left (0 for every entry).",
+  "count": 21,
+  "g0_pass": 13,
+  "entries": [
+    {
+      "dir": "courts/eighth-circuit/arkansas/federal/eastern-district/motion-brief",
+      "id": "motion-brief",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief.pdf",
+      "input": "usage/INPUT-motion-brief.md",
+      "doctype": "motion-brief",
+      "pages": 8,
+      "producer": "Microsoft Word for Microsoft 365; modified using iText Core 7.2.3",
+      "filer": "Defendant Ensurety Ventures, LLC, by counsel Niki T. Cung, Kutak Rock LLP (Fayetteville, AR)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "FAIL: exemplar 8, ours 7",
+        "why": "The exemplar's signature block stands alone on page 8 (its page 7 ends with the CONCLUSION paragraph); ours fits more text per page (24 pt grid, single-spaced caption, no doc-ID footer) and gets the conclusion and the signature onto page 7. The previous render was also 7 pages; not fixed by adding breaks."
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption is a ruled box; the exemplar uses a ':' column and 'Case No.:' (ours 'Case No.'), with blank caption lines between the rows",
+          "template: no field for the filer's document-ID footer '4931-6131-1157.2' on every page; ours prints a centered page number the exemplar does not have",
+          "template: signature prints '/s/ ' before the signer; the exemplar has no /s/ line (it prints 'Niki T. Cung, Ark. Bar No. 96153' plain)",
+          "template: section headings bold and numbered 'I.<tab>' centered; the exemplar's level-1 headings are underlined, not bold, flush at the indent ('I. RELEVANT PLED FACTS'); CONCLUSION is bold underlined",
+          "template: the paragraph after the block quote ('Warciak v. Subway ...') gets the first-line indent and sits directly under the quote with no blank line; the exemplar starts it flush left after a blank line",
+          "table: cell line breaks differ ('p.m. (¶22)', 'a.m.', '(¶24)', 'None' order in the word stream) because ours sets the table in 11 pt with different column widths",
+          "line-break: typst hyphenates in the justified block quote ('plau-sible', 'T-Mo-bile', 'con-tractual'); the exemplar does not",
+          "underline: 'facts' (p2) is italic underlined in the exemplar; ours italic only (no underline markup)"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [],
+      "notes": "Existing INPUT had every word but almost no italics. Added: italics for every case name, signal and Id. (as filed, incl. 'See, e.g. Margulis ...' and 'See Golan ...' in one italic run), 'id.', 'facts', 'if any', 'i.e.', 'Bank', 'multiple'; bold party names in the caption and bold firm name; italic two-line 'Attorneys for ...' line; curly apostrophe in the title. Fixed a stray extra ')' in '(cleaned up))' (exemplar: '(cleaned up).'). Signer set to 'Niki T. Cung, Ark. Bar No. 96153' (one line, as filed).",
+      "font": "Times New Roman",
+      "body_share": 0.965,
+      "g0_pass": false
+    },
+    {
+      "dir": "courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief",
+      "id": "motion-brief-2",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief-2.pdf",
+      "input": "usage/INPUT-motion-brief-2.md",
+      "doctype": "motion-brief",
+      "pages": 6,
+      "producer": "Microsoft Word 2016",
+      "filer": "Cassels Brock & Blackwell LLP (defendant), by local counsel Michael D. Schwartz, AT0013972, Schwartz Law Firm, Oakdale, MN",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 6, ours 6",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: court title 'FOR THE NORTHERN DISTRICT OF IOWA' (exemplar 'NORTHERN DISTRICT OF IOWA'); 'In re:' (filer 'In Re:')",
+          "template: caption designations 'Debtor.', 'Plaintiff,', 'v.', 'Defendant.' (filer 'Debtor(s).', 'Plaintiff(s).', 'vs.', 'Defendant(s).'); right column prints chapter before case number (filer: 'Bankruptcy No: 18-01297', then 'Chapter 11'); caption box rules instead of the filer's full-width underscore rules around the title",
+          "template: numbered paragraphs print '1' without the period (filer '1.'); numbering restarts under the heading as in the exemplar",
+          "template: adds 'Page N of 6' footers (exemplar has bare page numbers 2-6, none on page 1)",
+          "template: signature block adds 'Respectfully submitted,', 'Telephone:', 'Fax: [not on the filed copy]', 'E-mail:' labels and puts the firm name after the address (filer: firm name above the date line, no labels, no fax, '_/s/ ..._____' underscores)",
+          "template: one signer only; the second signer line 'Brandon M. Schwartz, AT0011248' is carried in `address`, the second e-mail in `email`",
+          "template: certificate of service is a separate centered heading plus 'The undersigned certifies that on <date>, <manner>.' and '/s/ name' + name; the filer wrote one run-in paragraph 'Certificate of Service: This document was served ... /s/ Katherine Grenell' with no date ('[not on the filed copy]' fills the required date field)"
+        ]
+      },
+      "check": "RESULT: 14 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered (needed `zip` on PATH: conda-forge zip in /tmp/zipenv)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [],
+      "notes": "Existing INPUT was a near-complete transcription of FILED-EXAMPLE-motion-brief-2; completed in place: removed invented trailing commas on debtor/plaintiff, case_no 'Bankruptcy No: 18-01297' and chapter 'Chapter 11' as filed, restored the '.\";' ending of ground 2, italic *Bank of Vermont v. Lyndonville Sav. Bank & Trust Co.* and *See* (footnote, with the filer's double space), added the second signer and second e-mail, and the filer's own certificate sentence as `manner`. INPUT-motion-brief.md (the other id) not touched.",
+      "font": "Times New Roman",
+      "body_share": 0.999,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/eighth-circuit/south-dakota/federal/district/motion-brief",
+      "id": "motion-brief",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief.pdf",
+      "input": "usage/INPUT-motion-brief.md",
+      "doctype": "motion-brief",
+      "pages": 10,
+      "producer": "Acrobat PDFMaker 26 for Word / Adobe PDF Library 26.1.235; modified using iText Core 7.2.3",
+      "filer": "Defendant Clean Nuclear Energy Corporation, by Matthew E. Naasz, Gunderson, Palmer, Nelson & Ashmore, LLP (Rapid City)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "FAIL: exemplar 10, ours 9",
+        "why": "ours fits more per page (the caption party column is narrower and has no ')' column, so the caption is shorter; the body reaches the Conclusion on page 8 instead of 9). The certificate is on its own last page in both. Not hacked."
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption has no ')' column and sets the title 'BRIEF IN SUPPORT OF MOTION TO DISMISS' on a wider line; the template's party name has no trailing comma (filer: 'Elizabeth Lone Eagle,') and the designation sits under the names without the blank lines",
+          "template: plain page numbers 1-9 on every page; the exemplar prints '-2-' to '-10-' (none on page 1); numbers fall on different pages",
+          "template: cmarker's smart punctuation lets the line break after '…' (prosecutions… certain) where the exemplar's pdftotext glues it",
+          "template: the certificate text is plain (no markdown), so the filer's bold 'BRIEF IN SUPPORT OF MOTION TO DISMISS' cannot be marked",
+          "template: footnote entry sets its number on its own line above the text (visible on our page 8)",
+          "INPUT: the pro se plaintiff's street address, e-mail and telephone in the certificate are kept redacted ('[address redacted]', '[e-mail redacted]', '[telephone redacted]'), as recorded in usage/SOURCE.md by the earlier author; this is 4 exemplar lines vs our 3"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered (OUTPUT-motion-brief.docx and .docx.pdf)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [
+        "CM/ECF banner (with PageID)"
+      ],
+      "notes": "The existing INPUT was a complete transcription with small errors; corrected in place: footnote 1 reference moved to the start of the Conclusion paragraph (where the filer put it, '1For the reasons above'); heading IV now 'Under *Younger*' with no period; Younger italic in body (4 places); the filer's straight quotes/apostrophes kept with escapes (Enf\\'t, Gov\\'t, defendant\\'s, the \\\"For Younger ... sovereign.\\\" quote and State\\'s); 'As such, this matter must be dismissed.' is a hard line break inside the preceding paragraph (unindented, as filed), not a new paragraph; date 'June 12, 2026.' with the period; 'Attorneys for Clean Nuclear Energy Corp.,' with the comma; the certificate's 'Attorneys for Mike Lees and  David McVey' italic with the filer's double space. QUESTION for the coordinator: the brief says every word, but the earlier author redacted the pro se plaintiff's home address, e-mail and phone (SOURCE.md); I kept the redaction (privacy of a private individual) rather than add them. The docx.pdf is new (render.sh writes it).",
+      "font": "Times New Roman",
+      "body_share": 0.956,
+      "g0_pass": false
+    },
+    {
+      "dir": "courts/federal-circuit/court-of-veteran-appeals/opening-brief",
+      "id": "opening-brief-2",
+      "exemplar": "usage/FILED-EXAMPLE-opening-brief-2.pdf",
+      "input": "usage/INPUT-opening-brief-2.md",
+      "doctype": "opening-brief",
+      "pages": 11,
+      "producer": "Microsoft Word for Microsoft 365; modified using iText 2.1.7 by 1T3XT",
+      "filer": "Ashley C. Gautreau, Oak Park, MI, private counsel for appellant Monte D. Butler",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 11, ours 11",
+        "why": "Equal by coincidence: ours has a 2-page TOA and 6 body pages plus a template certificate of service page; the exemplar has a 2-page TOA and 7 body pages and no certificate."
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: cover prints 'Vet. App. No. 20-7621' first and the brief title after the caption; the filer's cover starts with 'APPELLANT’S BRIEF', then the court, then 'No. 20-7621'",
+          "template: cover counsel block puts the phone after 'Attorney for Appellant' (one phone field; the filer typed '800-461-9746' on the cover and '(800) 461-9746' in the signature; the INPUT uses the signature form)",
+          "template: TOC is generated from the headings (lists 'BRIEF OF THE APPELLANT', the Statement of the Case sub-headings and point I; the filer's TOC lists the issue 'I: WHETHER ...' under Statement of the Issue and no sub-headings); TOA layout and page numbers are generated",
+          "template: no body caption on the first body page (the filer repeats the court, parties, ')' column and 'Vet. App. No. 20-7621' above 'BRIEF OF THE APPELLANT'); left out",
+          "template: Statement of the Case sub-headings are labelled 'A.', 'B.', 'C.'; the filer typed 'I.', 'II.', 'III.' (underlined, not bold)",
+          "template: the filer starts Statement of the Issue on a new page after the introduction; the template has no page-break construct",
+          "template: signature line 's/ Ashley C. Gautreau' (no leading '/') and the signer name upper-cased; date printed below the block (the filer prints it to the left)",
+          "template: adds a certificate of service page (roman i); the exemplar has none (the service: values exist only because the template requires them)",
+          "pdftotext joins the filer's line-end hyphens ('serviceconnected', '(15791580)'); the INPUT has 'service-connected' and '(1579-1580)'"
+        ]
+      },
+      "check": "RESULT: 14 checks passed, 0 failed",
+      "engines": {
+        "docx": "not present (no OUTPUT-opening-brief-2.docx existed; not rendered)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "typst/cavc-opening-brief.typ check-sections: Rule 28(a)(5) summary requirement is also met when the Argument section opens with a line (sub-heading or bold line) starting with 'Summary'; before, the build panicked unless a level-1 '# Summary of the Argument' preceded '# Argument', so this exemplar (summary inside the Argument) could not render. Generic, content-agnostic. docx/cavc.lua has the same required list and was not changed.",
+      "excluded": [
+        "body caption on PDF page 5 (court, parties, ')' column, Vet. App. No.)"
+      ],
+      "notes": "The filer's 'Summary' (bold underlined, centered) is a bold paragraph in the INPUT so it gets no point label and point I keeps its numeral. The issue line 'I: WHETHER ...' is a bold paragraph (the filer's text layer is upper case; visually small caps). 'BRIEF OF THE APPELLANT' is a level-1 heading. R. at 1156 is not linked to the TOA because the filer's TOA does not list it. Own word diff (pdftotext, one word per line) shows no body differences beyond the residuals above.",
+      "font": "Times New Roman",
+      "body_share": 0.955,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/fifth-circuit/louisiana/federal/eastern-district/motion-brief",
+      "id": "motion-brief",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief.pdf",
+      "input": "usage/INPUT-motion-brief.md",
+      "doctype": "motion-brief",
+      "pages": 9,
+      "producer": "Acrobat PDFMaker 26 for Word / Adobe PDF Library 26.2.171; modified using iText Core 7.2.3",
+      "filer": "Defendant AmeriGas Propane, L.P., by Ogletree, Deakins, Nash, Smoak & Stewart, P.C. (Hal D. Ungar; Sara Grace Sirera)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "FAIL: exemplar 9, ours 8",
+        "why": "the exemplar's page 8 is full to the Conclusion and the signature block, certificate and certificate signature start a new page 9; ours sets a denser page (caption fields stacked, smaller line count per page differences) and the signature and certificate fit at the foot of page 8 with no page break. The template has no page-break marker; not hacked."
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption right column stacks label over value ('CIVIL ACTION NO.' / number, 'JUDGE' / name) where the filer put them on one line; the filer typed 'CIVIL ACTION NO.:' with a colon",
+          "template: prints 'SECTION:' with a '______________' blank; the exemplar has no SECTION field",
+          "template: caption order differs (VERSUS / second party read before the right column by pdftotext)",
+          "template: page 1 has no page number; page numbers shift by one page from p2 on because pages break at different places",
+          "template: certificate signature prints one line '/s/ Sara Grace Sirera'; the filer added a typed 'SARA GRACE SIRERA' line under it, for which the template has no field (left out)"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered (OUTPUT-motion-brief.docx and .docx.pdf)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [
+        "CM/ECF banner",
+        "the motion (Doc 18-0) and notice of submission (Doc 18-2) are separate filings, not in this PDF"
+      ],
+      "notes": "The existing INPUT was a complete transcription with small errors; corrected in place: the paragraph 'The Court cited to Cicalese...' is its own paragraph (was merged); the 'Id.' after 'to the extent he is able.' is roman as filed; italics added (after x2, because of a protected characteristic, identity as a person with a disability, Plaintiff in 'put Plaintiff on notice', /s/ Sara Grace Sirera, the Attorneys for line) and bold for 'to amend his Complaint to clarify this detail'; filer typos restored (second heading 'C.' for D, '2000) Amendment' without period, '2016)(internal', 'Ltd. V. Aetna', straight apostrophe in complaint's, '2023).' single paren). Signature: the 'Attorneys for' line is its own group (blank line above, as filed). Certificate signer changed from 'SARA GRACE SIRERA' to 'Sara Grace Sirera' so the /s/ line matches the filed one. The docx.pdf is new (render.sh writes it).",
+      "font": "Times New Roman",
+      "body_share": 0.962,
+      "g0_pass": false
+    },
+    {
+      "dir": "courts/fifth-circuit/louisiana/federal/middle-district/complaint",
+      "id": "complaint",
+      "exemplar": "usage/FILED-EXAMPLE-complaint.pdf",
+      "input": "usage/INPUT-complaint.md",
+      "doctype": "complaint",
+      "pages": 5,
+      "producer": "Microsoft Word for Microsoft 365; modified using iText Core 7.2.3",
+      "filer": "Plaintiff Beatrice M. Parker, by counsel Janice Montague-Myles (Plaquemine, Louisiana)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 5, ours 5",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption label 'CIVIL ACTION NO.' where the filer typed 'CASE NUMBER:'",
+          "template: no field for the row of 37 asterisks under the caption (left out)",
+          "template: page-number positions in the word stream differ (pdftotext order only)",
+          "template: bolds the title, headings and sub-headings and centers the COUNT headings; the filer set them roman and the COUNTs flush left (layout, not words)",
+          "template: signature lines are plain text (no markdown), so the filer's bold 'RESPECTFULLY SUBMITTED:' and 'JANICE MONTAGUE-MYLES' cannot be marked; the handwritten signature image is not reproduced",
+          "cmarker: the filer's bold comma/period in paragraphs 5 and 11 ('years,', '1996.', '1996,') cannot be marked (** next to punctuation inside a word is not parsed as strong); left roman"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered (OUTPUT-complaint.docx and .docx.pdf)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [
+        "CM/ECF banner"
+      ],
+      "notes": "The existing INPUT body was already a complete, word-exact transcription (paragraphs 1-30 match the filed numbering). Front matter changed to the exemplar's values: civil_action_no '25-1162' (as typed in the caption) and `judges` removed (SDD/EWD are only in the CM/ECF banner; README.md 'Judge initials' note 5 and line 25 still describe the old SDD/EWD sample, left unedited); judge 'JUDGE:' and magistrate 'MAGISTRATE:' added as the filer's blank caption lines; signature 'Bar Roll#: 18356' (was 'Bar Roll No.'), a 28-underscore 'BY:' line, two blank lines under RESPECTFULLY SUBMITTED:. Comment block updated to say it is complete and what is left out.",
+      "font": "Times New Roman",
+      "body_share": 0.951,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/fifth-circuit/texas/federal/bankruptcy-eastern-district/motion-brief",
+      "id": "motion-brief",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief.pdf",
+      "input": "usage/INPUT-motion-brief.md",
+      "doctype": "motion-brief",
+      "pages": 8,
+      "producer": "Microsoft Word for Microsoft 365; modified using iText 7.1.6",
+      "filer": "John Paul Stanford, Quilling, Selander, Lownds, Winslett & Moser, P.C., for Defendants Greg N. Wisner and Dana P. Wisner",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "FAIL: exemplar 8, ours 7",
+        "why": "layout, not content: ours sets the negative notice and caption tighter and the block quotes (Plaintiff's request, the relief list, Rule 4007(c), Rule 15) with less space around them, so by page 6 ours runs about 100 words ahead; the signature block and certificate then fit on page 7, where the exemplar breaks the signature block to page 8. Signature-block blank lines collapse in our render."
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption prints 'Chapter 7', 'Case No.', 'Adv. Proc. No.' and 'v.' (filer: no chapter line, 'CASE NO.', 'ADV. NO.', 'vs.'); appends ',' to each debtor name ('DANA P. WISNER,'); adds 'Address: ____' and 'Last four digits of TIN: ____' rows (LBR 7010-1) the filing does not have; prints the defendants' names from frontmatter without the filer's 'and,' comma",
+          "template: § column drawn on every caption row (counts differ); page numbers 1-8 vs 1-7",
+          "template: negative-notice heading on its own line, not bold body (wording identical)",
+          "pdftotext: exemplar small caps split ('R ELATION B ACK OF A MENDMENTS .', 'Q UILLING , S ELANDER , L OWNDS'); superscript ordinals split ('9 th', '8 th', '25 th'); our line break splits '12(b)(1)' into '12(b) (1)'"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered (needed `zip` on PATH: conda-forge zip in /tmp/zipenv)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [
+        "CM/ECF banner",
+        "the filer's underlining (Count 1-9 in para 5; the Rule 15 citation in para 23) has no markdown form"
+      ],
+      "notes": "Existing INPUT was a near-complete transcription; completed in place: 'Notice of Chapter 7 Bankruptcy Case' (word 'Case' was missing), the trailing '_' after para 9's quote, debtor 'GREG N. WISNER and' and designation 'DEBTORS' as filed, straight quotes and apostrophes where the filer has them (\\\"Defendants\\\", Ass'n, court's, Comm'cns, escaped), the Rule 15 (A) clause as its own quoted line, and the filer's bold/italic (COMES NOW, (\"Defendants\"), the motion title in the lead-in, Plaintiff, BNC, docket cites, November 1, 2021, case names, For the foregoing reasons). 'In re Rhodes' is roman as filed. Header comment updated to 'complete transcription' with what is left out.",
+      "font": "Times New Roman",
+      "body_share": 0.950,
+      "g0_pass": false
+    },
+    {
+      "dir": "courts/fifth-circuit/texas/federal/eastern-district/complaint",
+      "id": "complaint",
+      "exemplar": "usage/FILED-EXAMPLE-complaint.pdf",
+      "input": "usage/INPUT-complaint.md",
+      "doctype": "complaint",
+      "pages": 8,
+      "producer": "Microsoft Word for Microsoft 365; modified using iText Core 7.2.3",
+      "filer": "Plaintiff PacSec3, LLC (Ramey LLP, William P. Ramey, III)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 8, ours 8",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption puts 'Plaintiff,' and 'Defendant.' on their own indented lines and the case number/jury demand at the foot of the right column; the exemplar sets 'Civil Action No.' beside 'Plaintiff,' and 'JURY TRIAL DEMANDED' beside the defendant (word order differs around 'v.')",
+          "template: page numbers '1'..'8'; the exemplar prints '1/8'..'8/8'",
+          "layout: footnote 1 sits on p1 in both, but its position relative to the page-1 body tail differs (ours ends p1 with para 3 complete)",
+          "pdftotext: exemplar 'predecessor-in-' line-end hyphen joins to 'predecessor-ininterest'",
+          "template: signature firm line 'Ramey LLP' is not bold (template prints firm lines plain; exemplar bold) and '/s/' line not italic/underlined"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered (OUTPUT-complaint.docx and .docx.pdf; the docx.pdf runs to 12 pages)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [],
+      "notes": "Existing INPUT was a near-complete transcription; completed in place: added footnote 1 (URL) via [^1] (cmarker renders it although README's contract says footnotes are unsupported), court line 1 now 'IN THE UNITED STATES DISTRICT COURT', ’497 with typographic apostrophe (smart punctuation would have made '497 an opening quote), straight apostrophe kept in para 4 'Defendant's' as filed (escaped \\'), bold EXHIBIT A / Exhibit B, bold-italic role line. Exhibits A/B are not part of the filed 8-page PDF.",
+      "font": "Times New Roman",
+      "body_share": 0.951,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/fourth-circuit/south-carolina/federal/district/motion-brief",
+      "id": "motion-brief",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief.pdf",
+      "input": "usage/INPUT-motion-brief.md",
+      "doctype": "motion-brief",
+      "pages": 7,
+      "producer": "Acrobat PDFMaker 26 for Word / Adobe PDF Library 26.1.11; modified using iText Core 7.2.3",
+      "filer": "Defendant Charleston County School District, by counsel Saxton & Stump, LLC",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 7, ours 7",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption draws a ')' column and prints 'CASE NO.: <n>' on the first party row; the exemplar has a vertical rule and 'Case No. <n>' with the title in the right column",
+          "template: document title is printed centered below the caption (upper-cased), not in the caption's right column",
+          "template: signature place/date ('Charleston, SC / August 10, 2026') sits left of the signer block; the exemplar prints it after the block on page 7",
+          "template: signer line 'By: /s/ Elizabeth Palmer' is plain; the exemplar underlines and italicises it (no field for that)",
+          "template: line after the block quote ('Nathan, 707 F.3d at 456 ...') gets the first-line indent; the exemplar starts it flush left",
+          "line-break: typst breaks after the ellipsis in 'dots…between' (text identical in the INPUT)",
+          "pdftotext puts a space before the exemplar's superscript footnote mark '(“Plaintiff”) 1'",
+          "pagination: the last intro line and the page break points differ by a line or two (Word vs typst line pitch)"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [],
+      "notes": "Existing INPUT was a near-complete transcription. Fixed: court line 'IN THE UNITED STATES DISTRICT COURT'; removed a closing quote after 'and the court.' (the exemplar has none); 'ex rel.' in the caption is roman in the exemplar; italic 'Iqbal,' and 'claim.'; bold-italic 'denied'; only 'Sols.' italic in the Savannah River cite (', LLC' roman); footnote mark attached without a space.",
+      "font": "Times New Roman",
+      "body_share": 0.961,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/fourth-circuit/virginia/federal/bankruptcy-western-district/adversary-complaint",
+      "id": "adversary-complaint",
+      "exemplar": "usage/FILED-EXAMPLE-adversary-complaint.pdf",
+      "input": "usage/INPUT-adversary-complaint.md",
+      "doctype": "adversary-complaint",
+      "pages": 4,
+      "producer": "Microsoft Word for Microsoft 365; modified using iText Core 7.2.6",
+      "filer": "Plaintiff James Alan Rosen, by counsel Lynn A. Bradley (Tucker Griffin Barnes, PC)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 4, ours 4",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: court title hard-coded 'UNITED STATES BANKRUPTCY COURT' / 'WESTERN DISTRICT OF VIRGINIA' (bold); the filer typed 'IN THE ...' / 'FOR THE ...' (not bold); no field",
+          "template: caption right column prints 'Chapter 7', 'Case No. 23-61235', 'Adversary Pro No: ________' stacked at the top; the exemplar has 'Case No: 23-61235' beside the first debtor, 'Chapter 7' beside 'Debtors.', and the adversary number beside 'v.' (9 underscores vs our 8); designations not indented",
+          "template: typst prints no title; 'COMPLAINT SEEKING STUDENT LOAN DISCHARGE' (bold underlined in the exemplar) is missing from the typst render (frontmatter `title` kept; the docx engine prints it)",
+          "template: salutation is plain (exemplar bold); salutation is a plain string, no markdown",
+          "template: 'Respectfully submitted,' vs filer's 'Respectfully Submitted:'; signature/counsel grid sits side by side on p3 (exemplar: signature on p4 above counsel, counsel lower left), so the word order differs; no '/s/' underline",
+          "template: page numbers '1'..'4' vs exemplar 'Page 1 of 4'",
+          "pdftotext: line-end hyphen artifacts ('plaintiff-debtor', '09/04/01 -', '523(a)(8)' split at a line end in ours)"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered (OUTPUT-adversary-complaint.docx and .docx.pdf, 4 pages)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [],
+      "notes": "Existing INPUT was a transcription of this exemplar with an invented paragraph 22 (bracketed FRBP 7008(a) consent placeholder) and normalized values; completed in place: removed paragraph 22 (not in the filing), caption names in capitals as filed ('TEXAS GUARANTEED STUDENT LOAN CORPORATION (n/k/a TRELLIS),'), counsel phone without 'Telephone:', the filer's typo '2024and', heading in capitals; added a header comment saying it is complete and what is left out. README.md (Governing rules table, FRBP 7008(a) row) still says 'the sample's paragraph 22 is a bracketed placeholder' -- now stale; not rewritten.",
+      "font": "Times New Roman",
+      "body_share": 0.921,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/fourth-circuit/virginia/federal/western-district/motion-brief",
+      "id": "motion-brief",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief.pdf",
+      "input": "usage/INPUT-motion-brief.md",
+      "doctype": "motion-brief",
+      "pages": 9,
+      "producer": "Microsoft Word for Microsoft 365; modified using iText Core 7.2.3",
+      "filer": "Defendants Joseph D. Platania and Nina-Alice Antony; counsel Rosalie Pemberton Fessier, Brittany E. Shipley, Kelly C. MacCluen, TimberlakeSmith",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 9, ours 9",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: division line upper-cased ('X DIVISION'); the filer typed 'X Division'",
+          "template: ')' caption puts one mark per text row with no blank rows, and prints 'Civil Action No.: 3:26-CV-1' below the caption; the exemplar has blank rows with ')' and the number to the right of the 'v.' row",
+          "template: heading labels '1.'-'4.' where the filing has 'I.'-'IV.', and it adds 'a.'/'b.' to the '12(b)(1) standard.' / '12(b)(6) standard.' subheadings, which the filing sets centered, italic and unlabeled",
+          "template: certificate of service repeats the signed_by line with 'By:'; the exemplar's certificate signature is '/s/ Kelly C. MacCluen' with no 'By:'",
+          "template: signature 'By:' is set at the left margin in the exemplar with the names hanging; ours puts the whole block at 3.25in",
+          "pagination: page breaks differ by a line or two; the exemplar's signature starts page 8 and the certificate signature runs onto page 9, ours puts the conclusion and signature on page 8 and the certificate on page 9",
+          "underline: '/s/ Kelly C. MacCluen' is underlined italic and the e-mail addresses are underlined links in the exemplar; ours italic / plain"
+        ]
+      },
+      "check": "RESULT: 14 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [
+        "the firm's TimberlakeSmith logo in the left margin of every page (artwork, not text)"
+      ],
+      "notes": "Existing INPUT was near complete. Fixed: 'the-defendant-unlawfully-harmed-me-accusations' (hyphen as filed); merged 'By Plaintiff's own exhibits ...' back into the preceding paragraph (one paragraph in the filing); straight quotes/apostrophes the filer typed are now backslash-escaped so smart punctuation keeps them straight (G2 counted them); italics for every case name, Id., See, 'Commonwealth's Attorney', designations 'Plaintiff'/'Defendants', the e-signature; bold period after '(Compl. ECF No. 1 ¶ 28)'; counsel names and VSB numbers on separate lines and the 'Attorneys for Defendants Platania and Antony' line moved before the firm (as filed; the role field is now unused); 'Timberlake**Smith**'. Updated the frontmatter comment to say it is a complete transcription. INPUT-motion-brief-2 (other exemplar) not touched.",
+      "font": "Times New Roman",
+      "body_share": 0.952,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief",
+      "id": "answering-brief-3",
+      "exemplar": "usage/FILED-EXAMPLE-answering-brief-3.pdf",
+      "input": "usage/INPUT-answering-brief-3.md",
+      "doctype": "answering-brief",
+      "pages": 16,
+      "producer": "Microsoft Word (Nuance PDF Create 8); modified using iText Core 7.2.3 (AO US Courts)",
+      "filer": "Charles P. Maher, McKenna Long & Aldridge LLP, for appellee Andrea A. Wirum, former Chapter 7 trustee",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "FAIL: exemplar 16, ours 17",
+        "why": "The filer's body (pp. 6-15, numbered 1-10) packs about 27 double-spaced lines per page with tight single-spaced block quotes; ours sets fewer lines per page and the body runs 13 numbered pages. The filer puts its two certifications (pp. 2-3) before the TOC and has no compliance certificate; ours prints interested-parties, compliance and service certificates on one page after the body. Six '///' filler lines that end the filer's page 9 now sit mid-page."
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: cover prints the BAP No. and 'Bankr. No. 11-33749, Chapter 7' centered at the top above the court name; the filer has the court name first and the numbers in a right-hand caption column, with rules ('_') between blocks",
+          "template: cover prints 'v.' between the parties; the filer has none",
+          "template: cover prints the telephone line last (after 'Counsel for ... Former Chapter 7 Trustee'); the filer has it before Fax",
+          "template: counsel lines are italic; 'proceeding' is required by the template but the cover has none, so it is set to an empty string",
+          "template: the filer's 'CERTIFICATION REQUIRED BY BAP RULE 8010(a)-(1)(b)' (p2) and '(1)(c)' related-cases certification (p3) come before the TOC; ours prints 'Certification of Interested Parties' with the template's standard sentence after the body, and no related-cases certification (template does not print one for an appellee)",
+          "template: TOC/TOA dot leaders and page numbers are ours; the filer's TOA ('TABLE OF CASES AND AUTHORITIES') has no group headings and lists Collier first",
+          "template: level-1 headings centered bold, level-2 bold; the filer sets them plain, left-aligned",
+          "template: signature block '/s/ Charles P. Maher' then lines and date; the filer has 'DATED: October 21, 2014  MCKENNA LONG & ALDRIDGE LLP  By: /s/ Charles P. Maher'",
+          "template: certificate of compliance printed; the filing has none",
+          "template: certificate of service uses the BAP sample CM/ECF + mailed-party wording; the filer's is a declaration by Nelly M. Quintanilla (BY MAIL) to Bradley Kass, Esq.",
+          "template: the 'In re Koza' citation paragraph after the block quote gets a first-line indent; the filer sets it flush left",
+          "template: no place for the 'USW 804703155.2' document-number footer on every page (left out)",
+          "pdftotext: superscript ordinals in the exemplar split ('24 th', '16 th' merged as 'isthnot'); the INPUT has '24th', '16th'; line-end 'AA0015-'/'0016' joined"
+        ]
+      },
+      "check": "RESULT: 21 checks passed, 0 failed",
+      "engines": {
+        "docx": "not present (no OUTPUT-answering-brief-3.docx existed; not rendered; the docx filter does not read the new section_check key)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "typst/bap9-answering-brief.typ: optional frontmatter key `section_check: false` skips the required-heading check (Summary of Argument / Argument / Conclusion). The 2014 filing predates FRBP 8014 as amended Dec. 1, 2014 and has no summary of argument, so the panic dropped the whole body. Default unchanged; other samples unaffected.",
+      "excluded": [
+        "CM/ECF banner on every page",
+        "'USW 804703155.2' footer on every page"
+      ],
+      "notes": "Body transcribed completely (sections I-VII, A-D, the numbered issues 1-4, three block quotes, the six '///' lines). Authorities linked with toa: keys for every mention of the eleven authorities in the filer's TOA. Body diff (one word per line, exemplar pp. 6-15 vs ours) shows only page numbers, banners, pdftotext artifacts and the signature block. fb diff G2 cannot resync after the cover because the filer's certifications come before the TOC, so the body was compared by hand. Existing INPUT-answering-brief.md (Klein) and -2 (fictional) untouched.",
+      "font": "Times New Roman",
+      "body_share": 0.961,
+      "g0_pass": false
+    },
+    {
+      "dir": "courts/ninth-circuit/idaho/federal/bankruptcy-district/motion-brief",
+      "id": "motion-brief-2",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief-2.pdf",
+      "input": "usage/INPUT-motion-brief-2.md",
+      "doctype": "motion-brief",
+      "pages": 9,
+      "producer": "Microsoft Word 2010; modified using iText 7.0.5",
+      "filer": "Objecting creditors (James Scott Morrow, Danielle Morrow, Morrow Ranch La Quinta, LLC), by Ron Kerl (Cooper & Larsen, Chtd., and Nossaman LLP)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "FAIL: exemplar 9, ours 10",
+        "why": "the template stacks the filer's two side-by-side counsel columns into one (8 more lines on page 1), sets 13 pt type, and adds 'FOR THE' to the court name; the exemplar also starts DATED/signature on a fresh page 9 (page 8 is two-thirds empty) and sets the certificate's e-mail list in two columns, ours in one. Not hacked."
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: counsel block is one column; the filer's two columns (Cooper & Larsen | Nossaman) are read row by row by pdftotext, ours column by column",
+          "template: court name prints 'FOR THE DISTRICT OF IDAHO'; the filer typed 'DISTRICT OF IDAHO'",
+          "template: caption prints 'Chapter 7'; the filer typed 'CHAPTER 7'",
+          "template: no running footer field; the exemplar's 'Objection to Debtor’s Motion to Convert / Page - n' footer is left out, the template adds centered page numbers 1-10",
+          "template: hyphenates words (exer-cising, proceed-ings, Auto-matic, Objec-tion); the exemplar does not",
+          "template: bullets are '•' glyphs pdftotext reads; the exemplar's bullets are a symbol font pdftotext reads as empty",
+          "template: signature '/s/ Ron Kerl' (space); the filer typed '/s/Ron Kerl'",
+          "template: certificate e-mail list set in one column (name over e-mail, one pair after another); the filer used two columns",
+          "pdftotext: superscript ordinals (34th, 20th, 9th, 5th) and the footnote marker 'debtor.1' split differently; page-break order differs because ours breaks pages elsewhere (para 4 lead-in moves to p4)"
+        ]
+      },
+      "check": "RESULT: 14 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered (OUTPUT-motion-brief-2.docx and .docx.pdf; the docx template follows an older contract per README: no footnotes, letters bullets, signature at end)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [
+        "CM/ECF banner",
+        "running footer 'Objection to Debtor’s Motion to Convert / Page - n' (no template field)"
+      ],
+      "notes": "The existing INPUT was a near-complete transcription; completed in place: the Nossaman counsel column (address, phone, fax, e-mail) was missing; caption name/designation commas ('PAULA LYNNE ZIEGLER,', 'Debtor,'); signature lines_above now 'Scott James Morrow' as filed (typo kept) with bold/italic; italics added for case names, See, See also, Id., sua sponte (first instance only, the second is roman as filed); filer typos restored (under11U.S.C., 580 B.R, 291, 11 U.S.C. 1112(b)(4)(A) without §, 9th Cir, B.A.P.); straight apostrophe in the block quote's debtor's (escaped \\'); 'Id. at 300.' split out of the block quote into its own indented line; certificate lists rewritten as name/e-mail and name/address lines (hard breaks) without invented commas, and the missing '(List names and mailing addresses):' restored. Counsel line '*Attorneys for ...*' split in two lines as filed, with a blank counsel line before it. The docx.pdf is new (render.sh writes it).",
+      "font": "Times New Roman",
+      "body_share": 0.948,
+      "g0_pass": false
+    },
+    {
+      "dir": "courts/ninth-circuit/oregon/federal/bankruptcy-district/motion-brief",
+      "id": "motion-brief",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief.pdf",
+      "input": "usage/INPUT-motion-brief.md",
+      "doctype": "motion-brief",
+      "pages": 5,
+      "producer": "Microsoft Word for Microsoft 365; modified using iText Core 7.2.3",
+      "filer": "James Dirksen, individually and as authorized representative of Equity Trust Company James Dirksen IRA 200200966 (counsel: Elevate Law Group, Nicholas J. Henderson, OSB No. 074027)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 5, ours 5",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: court title prints 'FOR THE DISTRICT OF OREGON' (exemplar 'DISTRICT OF OREGON')",
+          "template: caption prints 'Case No.' and 'Adv. Proc. No.' where the filer typed 'Originating Case No.' and 'Adversary Proceeding No.'; draws a ')' column where the filer drew rules (and a '____' separator line under 'Debtor.')",
+          "template: page break after the caption; the exemplar starts the opening paragraph on page 1 (ours puts it on page 2, so pages 1-4 shift, page count still 5)",
+          "template: footer prints title then 'Page N of 5' on every page (exemplar 'Page N of 4' before the title, 'Page 1 of 1  CERTIFICATE OF SERVICE' on the certificate page) and has no firm address/phone/fax block (Elevate Law Group, 6000 Meadows Road, Ste 450, Lake Oswego, OR 97035, Phone (503) 417-0500, Fax (503) 417-0501)",
+          "pdftotext: our line-end hyphen in '28-day' is joined to '28day'"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered (6 pages in LibreOffice; needed `zip` on PATH, which the formbook env lacks: installed conda-forge zip into /tmp/zipenv for the run)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [
+        "CM/ECF banner",
+        "footer firm address block (no template field)"
+      ],
+      "notes": "Existing INPUT was a near-complete transcription with an added LBR 9013-1(b)(2) notice that is not in the exemplar; the notice was removed (README 'Known gaps' 2 and reviews/2026-10-15-docx.md page 2 row still describe it). Fixed: title/footer typo '200209966' as filed, footer_title as filed, bold-italic defined terms (Dirksen, ETC, Order), bold title and service-list line in the certificate, removed an invented comma in the service list, added the two '/ / /' lines, the unindented Conclusion lead-in, the certificate's straight apostrophe in Court's (escaped \\'), and the document id '4907-9980-1764, v. 1'. Counsel and signature lines are not markdown-rendered by the template, so the exemplar's bold counsel name and italic /s/ signature are not marked. Visual: the long footer title wraps to two lines and its second line touches 'Page N of 5' (template layout, next bead). Note for the coordinator: tools/render.sh --engine docx deletes the old .docx before zipping, so on a host without zip it leaves the .docx missing.",
+      "font": "Times New Roman",
+      "body_share": 0.959,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/seventh-circuit/court-of-appeals/reply-brief",
+      "id": "reply-brief-2",
+      "exemplar": "usage/FILED-EXAMPLE-reply-brief-2.pdf",
+      "input": "usage/INPUT-reply-brief-2.md",
+      "doctype": "reply-brief",
+      "pages": 17,
+      "producer": "Microsoft Word / Adobe Acrobat 25.1.20756; modified using iText Core 7.2.3 (AO US Courts)",
+      "filer": "Plaintiff-Appellant Nikko D'Ambrosio; counsel Aaron Walner, Trent Law Firm, P.C.",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "FAIL: exemplar 17, ours 14",
+        "why": "PDF pages 1-3 of the exemplar are the motion for leave to file the reply brief instanter, a separate document, not transcribed. The brief itself (pp. 4-17) is 14 pages, the same as ours."
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "excluded: exemplar pp. 1-3 (motion for leave) come first, so fb diff cannot resync; the body (exemplar pp. 7-15 vs ours body pp. 1-8) was compared word by word by hand",
+          "template: cover prints the case number at the top and 'In the United States Court of Appeals / FOR THE SEVENTH CIRCUIT'; the filer has 'UNITED STATES COURT OF APPEALS FOR THE SEVENTH CIRCUIT' and a ')' caption column with the proceeding, 'Case No. 1:24-cv-00678', 'Appellate Case No:25 -2231', 'Hon. Sunil R. Harjani, District Judge' on the right",
+          "template: cover prints 'No. 1:24-cv-00678 (Hon. Sunil R. Harjani, District Judge)' where the filer has 'Case No.' and no parentheses; rules between cover parts",
+          "template: TOC upper-cases level-1 entries ('I. SUMMARY OF THE ARGUMENT', 'CONCLUSION'); the filer's TOC has 'I. Summary of the Argument', 'II. Argument', 'III. Conclusion' with page ranges, lists no A-C sub-headings, and lists the certificates",
+          "template: TOA groups 'Statutes:' separately with 'Page(s)'; the filer has 'Cases' and 'Statutes and Rules'; names on their own line",
+          "template: adds a signature block ('Respectfully submitted, /s/ Aaron Walner AARON WALNER Counsel for Plaintiff–Appellant Dated: November 6, 2025') after the conclusion; the filing has none",
+          "template: Form 6 certificate of compliance (computed word count, Typst/Times New Roman wording) and CM/ECF certificate of service with Signature/Date grid; the filer's certificates say 'fewer than 6,500 words' and 'I certify that on November 6, 2025, I filed the foregoing Reply Brief of Plaintiff–Appellant via the CM/ECF system, which will serve all registered counsel of record.'",
+          "template: point headings numbered automatically and bold; the filer's level-1 'I.' and 'II.' are typed into the level-1 heading text",
+          "pdftotext: line-end hyphens in our render dropped ('subscriptionbased', 'Spillthe-Tea', 'speechregulation', 'designdefect'); exemplar line-end en dashes split ('1220– 21', '519– 20')"
+        ]
+      },
+      "check": "RESULT: 14 checks passed, 0 failed",
+      "engines": {
+        "docx": "not present (no OUTPUT-reply-brief-2.docx existed; not rendered)",
+        "latex": "not present (no OUTPUT-reply-brief-2.latex.pdf existed; not rendered)"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [
+        "exemplar PDF pages 1-3: motion for leave to file reply brief instanter (3 pages, part of the filed PDF's page count)",
+        "CM/ECF banner"
+      ],
+      "notes": "Body transcribed completely, with italics from the PDF font runs (case names, signals, 'Meta Br.' where italic, 'legal', 'content', 'conduct'). Only the authorities in the filer's TOA are linked (Huston, Kolegas, Anderson are cited but not in the filer's TOA, so left unlinked). The ca7 court folder has no checks.yaml or reviews/ for this doc type; fb check passed with the new sample (DEF-CONT-001: 44 blocks, 0 missing), so no Gate 2 rows were needed or written. The 'Appellate Case No:25 -2231' value keeps the filer's spacing.",
+      "font": "Times New Roman",
+      "body_share": 0.967,
+      "g0_pass": false
+    },
+    {
+      "dir": "courts/seventh-circuit/illinois/federal/southern-district/motion-brief",
+      "id": "motion-brief",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief.pdf",
+      "input": "usage/INPUT-motion-brief.md",
+      "doctype": "motion-brief",
+      "pages": 7,
+      "producer": "Microsoft Word for Microsoft 365; modified using iText Core 7.2.3",
+      "filer": "Defendant (The Lincoln National Life Insurance Company), by counsel Iwana Rademaekers, Law Offices of Iwana Rademaekers, P.C.",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 7, ours 7",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption column is ')' marks; the exemplar uses a column of '§'",
+          "template: no running footer; the exemplar prints 'DEFENDANT’S MOTION TO DISMISS PLAINTIFF’S COMPLAINT AND BRIEF IN SUPPORT  PAGE n' on every page, ours prints a centered page number",
+          "template: level-2 headings are bold capitals; the exemplar sets them in underlined small caps (pdftotext splits them as 'T HE S TANDARD'); 'LAW OFFICES OF ...' signature line likewise small caps in the exemplar",
+          "template: 'By: /s/ ' with a space; the exemplar has 'By:_/s/' (an underline field)",
+          "template: certificate of service has no 'Date' label under the date and no printed signer name under '/s/ Iwana Rademaekers'",
+          "pdftotext splits the exemplar's superscript ordinal '4 th'; the INPUT has '4th'",
+          "line-break: exemplar hyphen-breaks 'ERISA-regulated' at a line end (pdftotext joins it as 'ERISAregulated'); ours breaks after 'ERISA-'",
+          "pagination: footnote 10 and a few paragraphs fall on different pages; underlines in the exemplar ('a portion' p2, 'disability' in fn 11) have no markdown equivalent in the template and are not reproduced"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [
+        "ECF attachments Exhibit A (policy) and Exhibit B (SPD) are separate documents, not in the exemplar PDF"
+      ],
+      "notes": "Existing INPUT was a complete transcription. Fixed: curly apostrophes in the title; first signature line is 'Iwana Rademaekers, Attorney in Charge' (one line, as filed); italic 'See' in footnotes 2, 3, 5, 11, 12; literal closing quote after 'or death.' (smart punctuation had turned the filer's stray quote into an opening one). The certificate of service text is hard-coded in the template and matches the exemplar word for word.",
+      "font": "Times New Roman",
+      "body_share": 1.000,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/motion-brief",
+      "id": "motion-brief",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief.pdf",
+      "input": "usage/INPUT-motion-brief.md",
+      "doctype": "motion-brief",
+      "pages": 7,
+      "producer": "Microsoft Word 2016; modified using iText 7.1.6",
+      "filer": "David L. and Michelle L. Meddings, debtor-defendants (counsel: M. Elizabeth Martindell)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 7, ours 7",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption right column labels 'Case No.', 'Chapter', 'Judge', 'Adv. Pro. No.' (filer 'BANKRUPTCY NO.', 'CHAPTER', 'JUDGE', 'A.P. No.'), a ')' column and a '____' separator the filer does not have",
+          "template: caption appends 'Debtor.' (filer 'Debtor,'), prints 'v.' (filer 'vs.') and upper-cases party names (filer 'James Harrison,', 'David L. Meddings and Michelle L. Meddings.'); the template orders all left-column lines before the right column, the filer interleaves them",
+          "template: signatures print 's/ Name' (filer '/s/M. Elizabeth Martindell' and '/s/ M. Elizabeth Martindell')",
+          "template: always adds a NOTICE OF MOTION paragraph (LBR 9013-1(a)(2)) before the certificate; the exemplar has none",
+          "template: certificate sentence 'I hereby certify that on <date>, a true copy of the foregoing <document> was served <ecf> <mail>' (filer 'This is to certify that a copy of this application was sent electronically this 16th of September, 2021 to:'); service list in one column (filer two columns); certificate signature prints the bar number and has no 'Attorney for Debtor' line",
+          "template: bare page numbers match the exemplar's; CM/ECF banner masked",
+          "pdftotext: line-end hyphen 'Rooker-Feldman' split/joined differently on each side; superscript '6 th' / '16 th' split in the exemplar"
+        ]
+      },
+      "check": "RESULT: 14 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered for motion-brief and motion-brief-3 (.docx and .docx.pdf; needed `zip` on PATH: conda-forge zip in /tmp/zipenv)",
+        "latex": "not present"
+      },
+      "moved_input": "old INPUT-motion-brief.md (a transcription of FILED-EXAMPLE-motion-brief-2, Templar) moved to INPUT-motion-brief-2.md, its correct pair",
+      "template_edits": "none",
+      "excluded": [],
+      "notes": "New INPUT-motion-brief.md is a complete transcription of the Meddings motion + memorandum + certificate (7 pages). Body keeps the filer's double spaces after periods, typos ('et. al.', 'decent principals', 'Lancaster, Ohio 431030', 'Mr. And Mrs.') and italic *Rooker-Feldman*. Case names the filer underlined are plain (no markdown underline; cmarker has raw-typst off). The template splits motion/memorandum at '# MEMORANDUM' and signs each part, matching the exemplar.",
+      "font": "Times New Roman",
+      "body_share": 0.954,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/tenth-circuit/court-of-appeals/reply-brief",
+      "id": "reply-brief-2",
+      "exemplar": "usage/FILED-EXAMPLE-reply-brief-2.pdf",
+      "input": "usage/INPUT-reply-brief-2.md",
+      "doctype": "reply-brief",
+      "pages": 14,
+      "producer": "Acrobat PDFMaker 26 for Word / Adobe PDF Library 26.1.187; modified using iText Core 7.2.3",
+      "filer": "Phil Lyman, appellant (counsel: Kaylan Phillips, Public Interest Legal Foundation; Goud P. Maragani, Maragani Law Group)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 14, ours 14",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: cover has no underscore rules as text (draws lines), prints 'D.C. No. 4:25-CV-00069-DN-PK; Honorable David Nuffer, District Judge' on one line where the filer typed 'Honorable David Nuffer, District Judge' then 'Case No. 4:25-CV-00069-DN-PK', and puts the brief title after the court-below lines (filer: before them)",
+          "template: cover counsel block appends the phone after the last line, so the email precedes the phone; 'ORAL ARGUMENT REQUESTED' has no field (left out)",
+          "template: TOC and TOA layout (dot leaders as spaced dots, 'Page' column head, 'Cases:'/'Other Authorities:' with colons, certificate titles in the TOC use the template's wording); TOA page numbers are computed",
+          "template: sub-headings under point II are labelled 'A.', 'B.' (level 3 in the Argument); the filer typed 'a.', 'b.'",
+          "template: signature line 's/ Kaylan Phillips' (no leading '/'), signer upper-cased, date printed under the block without 'Dated:' (the filer prints 'Dated: July 27, 2026' above 'Respectfully submitted,'); the second counsel (Maragani) is carried as signature lines after a blank line",
+          "template: Certificate of Compliance uses Form 6 wording and computes 1,573 words (the filer states 1579) and 'Typst 0.15.0' (typeset_with left at default; the filer used Microsoft Word); certificate signature grid adds 'Signature'/'Date' labels and the date",
+          "template: Certificate of Digital Submission wording omits the filer's 'that' in (2) and (3), says 'that document' (filer: 'those documents'), and prints ', and' after the scanner (filer: '; and')",
+          "template: Certificate of Service omits the filer's 'and 10th Cir. R. 25.4'",
+          "pdftotext joins line-end hyphens in the exemplar ('eventstreaming', 'Primary06232026?par ty'); the INPUT has 'event-streaming' and the unbroken URL",
+          "page flow: ours puts footnotes and the signature block on different pages from the filer's (signature block alone on body page 8 because the last markdown block is a footnote definition, so the keep-with-last-paragraph rule does not apply)"
+        ]
+      },
+      "check": "RESULT: 14 checks passed, 0 failed",
+      "engines": {
+        "docx": "not present (no OUTPUT-reply-brief-2.docx existed; not rendered)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [
+        "'ORAL ARGUMENT REQUESTED' on the cover (no template field)"
+      ],
+      "notes": "Small-caps text ('THE STATE OF UTAH', 'PUBLIC INTEREST LEGAL FOUNDATION', 'FED. R. EVID. 201') is transcribed in capitals as the exemplar's text layer has it. The filer's typos are kept ('524 U.S. 11(1988)' in the TOA, 'Nago, 174 at 672', 'Sherriff’s'). The filer's TOA lists only full cites' pages; links follow that registry. Own word diff (pdftotext, one word per line) shows no body differences beyond page-flow and the residuals above.",
+      "font": "Times New Roman",
+      "body_share": 0.946,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/motion-brief",
+      "id": "motion-brief",
+      "exemplar": "usage/FILED-EXAMPLE-motion-brief.pdf",
+      "input": "usage/INPUT-motion-brief.md",
+      "doctype": "motion-brief",
+      "pages": 4,
+      "producer": "Microsoft Word 2016; modified using iText 5.4.2",
+      "filer": "William Mark Bonney, Chapter 13 standing trustee",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 4, ours 4",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption prints 'In re:' where the filer typed 'IN RE:', and draws a rule where the filer typed a ')' column",
+          "template: caption has no field for the debtors' partial SSNs and street address (left out)",
+          "template: adds page numbers 1-4; the exemplar has none",
+          "template: 'Respectfully submitted,' and '/s/ ' (with comma and space); the filer typed 'Respectfully submitted' and '/s/William'",
+          "pdftotext splits the exemplar's superscript ordinal '7 th'; the INPUT has '7th'"
+        ]
+      },
+      "check": "RESULT: 14 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [],
+      "notes": "The existing INPUT was already near complete; added the certificate's signature lines and the mailing list line breaks, and the typographic apostrophe in the title. The exemplar starts the certificate of mailing on its own page; ours reaches 4 pages without a forced break.",
+      "font": "Times New Roman",
+      "body_share": 0.921,
+      "g0_pass": true
+    },
+    {
+      "dir": "courts/tenth-circuit/wyoming/federal/bankruptcy-district/adversary-complaint",
+      "id": "adversary-complaint",
+      "exemplar": "usage/FILED-EXAMPLE-adversary-complaint.pdf",
+      "input": "usage/INPUT-adversary-complaint.md",
+      "doctype": "adversary-complaint",
+      "pages": 6,
+      "producer": "Microsoft Word for Microsoft 365; modified using iText 7.0.5",
+      "filer": "Plaintiff David L. Miller, Chapter 7 trustee of Dynamic Custom Homes, LLC (McKay, Burton & Thurman, P.C.; David L. Miller, Brian J. Porter)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "FAIL: exemplar 6, ours 5",
+        "why": "the exemplar puts the counsel block, caption and title alone on page 1 and starts the lead-in on page 2; the template has no page break after the title (and no raw typst in the body), so our body starts on page 1 and the filing fits on 5 pages"
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption right column stacks 'Bankruptcy Case ...', '(Chapter 7)', 'Adversary Proceeding 20-__________', 'Judge Cathleen D. Parker' at the top; the exemplar puts the adversary/judge lines beside the plaintiff, so word order around 'DYNAMIC CUSTOM HOMES, LLC. Debtor.' differs",
+          "template: no field for 'FILED ELECTRONICALLY' (bold, under the judge line); left out",
+          "template: prints 'v.' where the filer typed 'vs.'",
+          "template: firm name in bold small caps in the exemplar (pdftotext 'M C K AY , B URTON'); ours bold caps",
+          "template: level-1 headings without underline; 'WHEREFORE' not bold (bolding it in markdown would make the template number the paragraph)",
+          "template: page numbers 1-5 added; the exemplar has none",
+          "pdftotext: superscript ordinal '11 th' in the exemplar; INPUT has '11th'",
+          "template: signature lines and caption names wrap differently (filer typed line breaks in 'DAVID L. MILLER, Trustee of / the Chapter 7 ...' and in the attorneys-for lines)"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered (OUTPUT-adversary-complaint.docx and .docx.pdf, 6 pages)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [],
+      "notes": "Existing INPUT was already a full word-for-word transcription; completed in place: '(Chapter 7)' with parentheses as filed, bold-italic cause-of-action subheadings, bold firm name in counsel block and signature, header comment saying it is complete and what is left out.",
+      "font": "Times New Roman",
+      "body_share": 0.921,
+      "g0_pass": false
+    },
+    {
+      "dir": "courts/third-circuit/delaware/federal/district/complaint",
+      "id": "complaint",
+      "exemplar": "usage/FILED-EXAMPLE-complaint.pdf",
+      "input": "usage/INPUT-complaint.md",
+      "doctype": "complaint",
+      "pages": 8,
+      "producer": "Acrobat PDFMaker 26 for Word / Adobe PDF Library 26.2.171; modified using iText Core 7.2.6",
+      "filer": "Plaintiffs Boston Scientific Corporation and Boston Scientific Medical Device Limited (Fish & Richardson P.C.)",
+      "g0": {
+        "page_size": "PASS",
+        "page_count": "PASS: exemplar 8, ours 8",
+        "why": null
+      },
+      "g2": {
+        "result": "FAIL",
+        "body_divergences": 0,
+        "residuals": [
+          "template: caption right column ('C.A. No.', 'JURY TRIAL DEMANDED') sits higher than in the exemplar, so pdftotext reads it before 'LIMITED,'; 'JURY TRIAL DEMANDED' not bold; no ')' rule column (exemplar draws a vertical rule and bottom rule)",
+          "template: headings bold caps without the exemplar's underline",
+          "template: signature block is unbreakable, so it moves whole to p8 (exemplar splits it p7/p8); the date/firm grid reads 'Dated:' then the counsel column; '/s/' line has no signature rule",
+          "layout: page breaks differ by a line or two (e.g. 'despite' ends p5 in the exemplar, starts p6 in ours), page-number positions in the word stream",
+          "pdftotext: line-end hyphens in the exemplar/ours join differently ('25-cv-01035-JLH', 'post-judgment'); footnote marker '1' attaches to 'application.”1' in ours, spaced in exemplar",
+          "template: 'Alexander Rafferty (pro hac vice forthcoming)' and 'Kellie C. Van Beck ...' fit on one line in ours; the exemplar wraps them"
+        ]
+      },
+      "check": "RESULT: 7 checks passed, 0 failed",
+      "engines": {
+        "docx": "rendered (OUTPUT-complaint.docx and .docx.pdf; docx.pdf is 11 pages)",
+        "latex": "not present"
+      },
+      "moved_input": null,
+      "template_edits": "none",
+      "excluded": [
+        "Exhibits A and B and the civil cover sheet are separate docket attachments, not in the filed 8-page PDF"
+      ],
+      "notes": "Existing INPUT was already a full transcription; completed in place: removed the stray comma after 'ATRAVERSE MEDICAL, INC.' in the caption, added italics (et seq., See, case names, see also, /s/ line, attorneys_for lines) and bold firm names in the counsel lines; rewrote the YAML header comment to say complete transcription and what is left out.",
+      "font": "Times New Roman",
+      "body_share": 0.955,
+      "g0_pass": true
+    }
+  ]
+}
