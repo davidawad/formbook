@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 22 pp., text layer verified 2026-10-17; court e-filing stamp | `FILED-EXAMPLE-amicus-brief.pdf` | Amicus curiae ACLU of Rhode Island | Champlin's Realty Associates v. Coastal Resources Management Council, No. SU-2020-0168-MP | 2022-02-01 | https://www.riaclu.org/app/uploads/2022/02/champlins_v_crmc_amicus_brief-final_filed.pdf | `292d7f1303aa9b579ab3ee028d0d1f06fd9fd90a272bda12388ed9e9dce0ce3f` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search (2026-10-21, fb-l129.1)
+
+Re-searched the blocked petition, motion, and rehearing rows against Rhode Island's official Supreme Court pages, its appellate procedural rules, the official statute for review of agency decisions, and public web results for filed Supreme Court papers. Court pages and rules describe procedure but do not expose party filings; the statute confirms agency decisions are reviewed by certiorari but yielded no petition PDF. No new qualifying public text-layer filing was found; the affected rows remain blocked.
