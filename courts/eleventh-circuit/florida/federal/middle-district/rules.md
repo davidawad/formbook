@@ -2,6 +2,8 @@
 
 Alias `flmd`. Scope: civil complaints and motion briefs. Verified against the Local Rules of the United States District Court for the Middle District of Florida (PDF "amended local rules effective November 01, 2025") and the Federal Rules of Civil Procedure (as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Typeface note: Rule 1.08 requires 13-point main text for the listed typefaces (Book Antiqua, Calisto MT, Century Schoolbook, Georgia, Palatino), or 14-point main text if Times New Roman is used. The repo default eval (12 pt) is weaker than this rule, so the eval must state 13 pt (or 14 pt for Times New Roman) for this court.
 
 ## Sources
