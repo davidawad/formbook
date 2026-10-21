@@ -15,6 +15,8 @@ mod breaks;
 pub mod calibrate;
 mod content;
 mod geom;
+pub mod xbaseline;
+pub mod xengine;
 
 use crate::measure::{self, Measured};
 use crate::{fail, Res};
@@ -250,11 +252,24 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         if flag == "--breaks" {
             return breaks_main(Path::new(ex), Path::new(us));
         }
+        if flag == "--engines" {
+            let c = xengine::compare(
+                &measure::load(Path::new(ex))?,
+                &measure::load(Path::new(us))?,
+            );
+            print!("{}", xengine::render(&c));
+            let ok = c.pages_equal() && c.ends_bad == 0 && c.breaks_equal();
+            return Ok(if ok {
+                ExitCode::SUCCESS
+            } else {
+                ExitCode::from(1)
+            });
+        }
     }
     let [ex, us] = args else {
         return Err(fail(
             2,
-            "usage: fb diff [--content|--breaks] <exemplar.pdf|measured.json> <render.pdf|measured.json>",
+            "usage: fb diff [--content|--breaks|--engines] <exemplar.pdf|typst.pdf|measured.json> <render.pdf|measured.json>",
         ));
     };
     let r = diff_paths(Path::new(ex), Path::new(us))?;

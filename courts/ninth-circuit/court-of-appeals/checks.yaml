@@ -44,6 +44,7 @@ params:
   wordcount_tolerance: 0.015         # CA9-CERT-002: PDF-derived count vs certificate (automatic labels)
   passim_threshold: 7                # template convention: a TOA entry cited on this many pages is "passim"
   max_attachment_mb: 100             # CA9-ELEC-002
+  cross_engine: gate                 # Gate 4: latex and docx break every line like typst (docs/EVAL-LOOP.md, fb-595.54)
 
 # Wording each court form must carry (checked after removing case and spacing; see tools/check/lib.sh norm).
 forms:
@@ -437,6 +438,38 @@ checks:
     method: review
     expect: "reviews/*.md names the PDF's sha256, has a row for every page, and no row is OPEN"
     fix: {anchor: "// ---- cover ----"}
+
+
+  # ------------------------------------------------------------------ Gate 4: cross-engine (fb-595.54)
+  # The latex and docx renders of a sample against its typst render (the reference): docs/EVAL-LOOP.md,
+  # "Cross-engine gate". params.cross_engine decides whether a difference fails (gate) or is REPORTED.
+  - id: XENG-001
+    gate: 4
+    kind: T
+    name: same page count as the typst render
+    method: cross_engine_pages
+    engines: [latex, docx]
+    engines_reason: "typst is the reference the other engines are compared with"
+    expect: "page count equal to OUTPUT-<id>.typst.pdf"
+    fix: {anchor: "raggedright"}
+  - id: XENG-002
+    gate: 4
+    kind: T
+    name: every page starts and ends on the same word as the typst render
+    method: cross_engine_ends
+    engines: [latex, docx]
+    engines_reason: "typst is the reference the other engines are compared with"
+    expect: "0 pages with another first or last word"
+    fix: {anchor: "raggedright"}
+  - id: XENG-003
+    gate: 4
+    kind: T
+    name: every typst line breaks after the same word in this engine
+    method: cross_engine_breaks
+    engines: [latex, docx]
+    engines_reason: "typst is the reference the other engines are compared with"
+    expect: "100% of typst lines broken after the same word (no break-word tolerance)"
+    fix: {anchor: "raggedright"}
 
   # ------------------------------------------------------------------ Gate 3: generalization
   - id: CA9-GEN-001

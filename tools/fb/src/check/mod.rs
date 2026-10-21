@@ -10,6 +10,7 @@ mod rows;
 mod sh;
 pub(crate) mod stamp;
 pub mod toclayout;
+mod xengine;
 
 use crate::{fail, Res};
 use sh::{cfg, io_fail, out, strip_nl, Env};
@@ -313,10 +314,24 @@ fn sample(c: &Ctx, sid: &str, t: &mut Tally) -> Res<()> {
         let l = format!("{}  {docx}", stamp::sha256(docx));
         lines.push(l.replacen(&format!("  {}/", c.doc), "  ", 1));
     }
+    // a gated cross-engine verdict holds only for the typst reference it was measured against
+    let reference = xengine::reference(&pdf, &c.engine);
+    if c.engine != "typst" && xengine::gated(c)? && std::path::Path::new(&reference).is_file() {
+        lines.push(format!(
+            "{}  {}",
+            stamp::sha256(&reference),
+            rel(&reference)
+        ));
+    }
     let shas: String = lines.iter().map(|l| format!("{l}\n")).collect();
     append(&f(".shas"), &shas)?;
     t.shas.extend(lines);
-    let gates = [("0", "CONTENT"), ("1", "RULES"), ("2", "VISUAL REVIEW")];
+    let gates = [
+        ("0", "CONTENT"),
+        ("1", "RULES"),
+        ("2", "VISUAL REVIEW"),
+        ("4", "CROSS-ENGINE"),
+    ];
     for (g, title) in gates {
         out(&format!(" GATE {g} {title}\n"));
         if g == "1" && times_exemplar(c)? {
@@ -375,6 +390,9 @@ fn verdict(c: &Ctx, s: &Sample, r: &rows::Row, fails: u64) -> Res<(bool, String,
             ),
         }),
         m => {
+            if let Some(v) = xengine::evaluate(c, s, m)? {
+                return Ok((v.pass, v.meas, v.detail));
+            }
             if let Some(v) = native::evaluate(c, s, m)? {
                 return Ok((v.pass, v.meas, v.detail));
             }
@@ -424,6 +442,10 @@ fn run_checks(c: &Ctx, s: &Sample, gates: &str, t: &mut Tally) -> Res<()> {
             out(&rows::pass_text(r, &meas));
             t.pass += 1;
             append(&tally, "P\n")?;
+            continue;
+        }
+        if xengine::is_method(&r.method) && !xengine::gated(c)? {
+            out(&xengine::reported_text(&r.id, &r.name, &meas, &detail));
             continue;
         }
         let target = format!("{}/{}", c.doc, c.template);

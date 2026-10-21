@@ -27,6 +27,13 @@ pub struct Breaks {
     pub dev: Vec<f64>,
     /// First divergent compared lines, in exemplar order.
     pub first: Vec<String>,
+    /// Page and line of the first exemplar line that is not identical (compared or not).
+    pub first_at: Option<(usize, usize)>,
+    /// First exemplar lines whose words are not all matched in one run, in exemplar order.
+    pub unmatched: Vec<String>,
+    /// Per identical line whose words map one to one: the larger of its left- and right-edge
+    /// differences (pt), the glyph-advance drift once the breaks agree.
+    pub drift: Vec<f64>,
 }
 
 /// Break before token `k` (a break inside a word counts as before the next one: Word does not
@@ -91,6 +98,12 @@ pub fn count(exm: &Measured, usm: &Measured, max: usize) -> Breaks {
             }
             if same {
                 b.identical += 1;
+                if let (Some(a), Some(u)) = (line_of(exm, &ex[s]), line_of(usm, &us[js])) {
+                    if a.words.len() == e - s && u.words.len() == je - js {
+                        b.drift
+                            .push((a.left - u.left).abs().max((a.right - u.right).abs()));
+                    }
+                }
             } else if b.first.len() < max {
                 let last = ex[e - 1].t.as_str();
                 let inner = (js + 1..je).find(|&k| brk(us, k));
@@ -109,6 +122,20 @@ pub fn count(exm: &Measured, usm: &Measured, max: usize) -> Breaks {
                 b.first.push(format!(
                     "p{} line {}: exemplar ends the line after '{last}', {what}",
                     ex[s].page, ex[s].line
+                ));
+            }
+            if !same {
+                b.first_at.get_or_insert((ex[s].page, ex[s].line));
+            }
+        } else {
+            b.first_at.get_or_insert((ex[s].page, ex[s].line));
+            if b.unmatched.len() < max {
+                let words: Vec<&str> = ex[s..e].iter().map(|t| t.t.as_str()).collect();
+                b.unmatched.push(format!(
+                    "p{} line {}: ours does not carry the line '{}' word for word",
+                    ex[s].page,
+                    ex[s].line,
+                    words.join(" ")
                 ));
             }
         }

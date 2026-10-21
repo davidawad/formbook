@@ -83,7 +83,10 @@ pub fn read(pdf: &Path) -> Res<Raw> {
 
 /// `pdftocairo -svg` one page at a time (it writes one page per file), on all cores.
 fn svg_pages(pdf: &str, n: usize) -> Res<Vec<svg::SvgPage>> {
-    let dir = std::env::temp_dir().join(format!("fb-measure-{}", std::process::id()));
+    // one folder per call: callers may measure several PDFs at once (fb cross-engine)
+    static CALLS: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
+    let call = CALLS.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+    let dir = std::env::temp_dir().join(format!("fb-measure-{}-{call}", std::process::id()));
     std::fs::create_dir_all(&dir).map_err(|e| fail(2, format!("fb: {e}")))?;
     let workers = std::thread::available_parallelism().map_or(4, |c| c.get());
     let pages: Vec<usize> = (1..=n).collect();
