@@ -1,18 +1,18 @@
 % U.S. Court of Appeals for the Tenth Circuit: appellant's opening brief (LaTeX engine).
 % Matches typst/ca10-opening-brief.typ. Built by tools/render-latex.sh: pandoc --template with the
-% variable fontdir, the filter ca10-opening-brief.lua, then tectonic (two passes resolve the TOC and TOA).
+% filter ca10-opening-brief.lua, then stock pdflatex (passes until the aux file settles resolve the TOC and TOA).
 % Rule IDs (CA10-...) are in ../README.md, "Governing rules".
 \documentclass[12pt,letterpaper]{article}
 \makeatletter
 \usepackage[letterpaper,margin=1in]{geometry}
-\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+% Times: newtxtext/newtxmath ship with every TeX Live, so the generated .tex compiles with stock pdflatex and no
+% repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman (docs/FONTS.md).
+\usepackage{newtxtext,newtxmath}
 \usepackage{fancyhdr}
 \usepackage{xcolor}
 \usepackage{needspace}
 \usepackage{enumitem}
-
-% ---- type: Liberation Serif, the Times New Roman substitute per docs/FONTS.md, from the vendored fonts only (CA10-FORM-002) ----
-\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 
 % 14-point everywhere, double spaced (CA10-FORM-001); the line pitch matches the typst template.
 \renewcommand\normalsize{\@setfontsize\normalsize{14pt}{31.43pt}}

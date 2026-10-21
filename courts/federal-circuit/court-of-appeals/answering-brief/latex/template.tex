@@ -2,15 +2,20 @@
 %
 % Rule-driven and content-agnostic, the same layout as ../typst/cafc-opening-brief.typ (the reference for this
 % court). No case-specific text, no coordinates measured off any filed brief, no forced line breaks. Built by
-% latex/render.sh: pandoc reads the markdown with cafc.lua (the same directory), this template is compiled with
-% tectonic, and the contents and authorities are written to the aux file and read back on the next pass.
+% tools/render.sh --engine latex: pandoc reads the markdown with cafc.lua (the same directory), this template is
+% compiled with stock pdflatex, and the contents and authorities are written to the aux file and read back until it settles.
 %
-% Pandoc variables: fontdir and body_pitch (set by render.sh), the frontmatter fields, words_fmt, toa, addendum,
+% Pandoc variables: the frontmatter fields, words_fmt, toa, addendum,
 % keep_signature (set by cafc.lua).
 \documentclass[letterpaper,12pt]{article}
-\usepackage{fontspec}
-% FRAP 32(a)(4): at least one inch on all four sides. The page number sits in the footer below the margin.
-\usepackage[letterpaper,left=1in,right=1in,top=1in,bottom=1in,headheight=0pt,headsep=0pt,footskip=33bp]{geometry}
+\usepackage[T1]{fontenc}
+% Times: newtxtext/newtxmath ship with every TeX Live, so the generated .tex compiles with stock pdflatex and no
+% repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman (docs/FONTS.md).
+\usepackage{newtxtext,newtxmath}
+% FRAP 32(a)(4): at least one inch on all four sides. The bottom margin is a little deeper than 1 in (76 bp) so that
+% the descenders of the last line never reach into it; the page number sits in the footer below the margin, where
+% footskip (37 bp) keeps it.
+\usepackage[letterpaper,left=1in,right=1in,top=1in,bottom=76bp,headheight=0pt,headsep=0pt,footskip=37bp]{geometry}
 \usepackage{needspace}
 \usepackage{changepage}
 \usepackage{enumitem}
@@ -22,13 +27,10 @@
 % Parameters: the only numbers in this file, each traces to the typst template's parameters
 % ---------------------------------------------------------------------------
 
-% FRAP 32(a)(5)(A): a proportionally spaced serif face, 14 point or larger. Vendored in fonts/eb-garamond/.
-\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
-
 % Sizes are in big points (bp, the unit of the PDF's coordinates; typst's pt is the same unit).
-% Body: 14 pt with double spacing (FRAP 32(a)(4)): the baseline pitch is body_pitch (31.43 bp for 0.94em).
+% Body: 14 pt with double spacing (FRAP 32(a)(4)): the baseline pitch is 32.13 bp (the typst template's 0.99em leading).
 % Single spacing (headings, quotations, footnotes, contents, authorities, certificates): 19.95 bp pitch.
-\newcommand\ca@type{\fontsize{14bp}{$body_pitch$}\selectfont}
+\newcommand\ca@type{\fontsize{14bp}{32.13bp}\selectfont}
 \newcommand\ca@single{\fontsize{14bp}{19.95bp}\selectfont}
 \newlength\ca@half \setlength{\ca@half}{0.5in}          % para-indent and heading tab (0.5 in)
 
@@ -109,10 +111,13 @@
   \begingroup\interlinepenalty=10000\centering\fontsize{16.1bp}{19.95bp}\selectfont\bfseries\leavevmode#2\MakeUppercase{#1}\par\endgroup%
   \nopagebreak\addvspace{15.4bp}\nobreak}
 
-% ---- level 2 in the Argument: centered point heading, bold small capitals -----
+% ---- level 2 in the Argument: centered point heading, bold. Not small capitals: Times New Roman has none (the typst
+% and docx engines set these bold), and newtx bold small capitals share a font descriptor with the upright bold whose
+% ascent and descent they would shrink (the word heights DEF-FORM-003 measures).
+% -----
 \newcommand\ca@pointhead[3]{% #1 label, #2 title, #3 the contents entry
   \needspace{50bp}\par\vspace{16.8bp}%
-  \begingroup\interlinepenalty=10000\centering\ca@single\bfseries\addfontfeature{Letters=SmallCaps}\leavevmode#3#1 #2\par\endgroup%
+  \begingroup\interlinepenalty=10000\centering\ca@single\bfseries\leavevmode#3#1 #2\par\endgroup%
   \nopagebreak\addvspace{14bp}\nobreak}
 
 % ---- sub-headings: label in a box at indent #1; the title hangs under the text ------------------

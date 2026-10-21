@@ -119,7 +119,7 @@ sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-
 The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
 outputs are `usage/OUTPUT-opening-brief.latex.pdf`, `.docx` and `.docx.pdf`.
 
-- **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt from `fonts/`,
+- **latex** (`latex/template.tex`, `latex/ca11.lua`; stock pdflatex, newtx Times). Matches: Times 14 pt,
   double spacing, one-inch margins, the cover, the C-1 and C-2 pages of the certificate of interested persons,
   roman front matter, arabic body, the table of contents and table of citations with their pages (from a second
   LaTeX pass), the asterisks on primary citations, the signature kept with the last paragraph, both certificates.

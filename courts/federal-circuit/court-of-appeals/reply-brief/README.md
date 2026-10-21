@@ -91,7 +91,7 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 | Engine | Files | Output (`usage/`) | Pages |
 |---|---|---|---|
 | typst (reference) | `typst/` | `OUTPUT-reply-brief.typst.pdf` | 13 |
-| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic; the counsel block is a two-column table, `-M counsel_columns=true`) | `OUTPUT-reply-brief.latex.pdf` | 13 |
+| latex | `latex/template.tex`, `latex/cafc.lua` (stock pdflatex, newtx Times; the counsel block is a two-column table) | `OUTPUT-reply-brief.latex.pdf` | 13 |
 | docx | `docx/reference.docx` (`docx/make-reference.sh`, `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-reply-brief.docx` and `.docx.pdf` | 13 |
 
 **Matches the typst layout:** 14 pt EB Garamond, double spacing at the typst pitch (31.43 pt); 1 in margins; the cover with the counsel in two columns; the contents and authorities with page numbers; the Roman section headings (I. ARGUMENT, II. CONCLUSION) and the A./i./1. sub-headings; the certificate of compliance (Form 19 wording, box checked) and the certificate of service; the footers.

@@ -1,10 +1,12 @@
 % U.S. Court of Appeals for the Eleventh Circuit: appellant's opening brief (FRAP 28, 32; 11th Cir. R. 28-1, 32-3).
 % LaTeX engine. The same form as typst/ca11-opening-brief.typ: rule-driven and content-agnostic. Everything printed
 % comes from the markdown frontmatter, the body, or latex/ca11.lua (heading labels, table of citations, word count).
-% Fonts: only the vendored Liberation Serif (Times New Roman substitute, docs/FONTS.md), through the pandoc variable fontdir (no system fonts). See ../README.md.
+% Built by tools/render.sh --engine latex with stock pdflatex; Times from newtx (below). See ../README.md.
 \documentclass[14pt,letterpaper]{extarticle}
-\usepackage{fontspec}
-\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
+\usepackage[T1]{fontenc}
+% Times: newtxtext/newtxmath ship with every TeX Live, so the generated .tex compiles with stock pdflatex and no
+% repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman (docs/FONTS.md).
+\usepackage{newtxtext,newtxmath}
 \usepackage[letterpaper,margin=1in,footskip=0.3in]{geometry}
 \usepackage{etoolbox}      % table-of-citations page lists
 \usepackage[hidelinks,unicode,bookmarks=false]{hyperref}
@@ -31,8 +33,9 @@
 \renewcommand{\@makefntext}[1]{\parindent=0pt\noindent\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
 \setlength{\skip\footins}{1.2em}
 
-% Block quotations: inset half an inch on each side, single spaced.
-\renewenvironment{quote}{\par\addvspace{1em}\begingroup\casingle\leftskip=0.5in\rightskip=0.5in
+% Block quotations: inset half an inch on each side, single spaced, ragged right like the body (a rigid \rightskip
+% would justify them, and with hyphenation off a line that cannot be justified runs into the margin).
+\renewenvironment{quote}{\par\addvspace{1em}\begingroup\casingle\leftskip=0.5in\rightskip=0.5in plus 2em
   \parindent=0pt\parskip=0.9em\relax}{\par\endgroup\addvspace{1em}}
 
 % ---------------------------------------------------------------------------

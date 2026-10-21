@@ -118,7 +118,7 @@ pdftoppm -r 60 -png courts/eleventh-circuit/court-of-appeals/reply-brief/usage/O
 The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
 outputs are `usage/OUTPUT-reply-brief.latex.pdf`, `.docx` and `.docx.pdf`.
 
-- **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt, double spacing,
+- **latex** (`latex/template.tex`, `latex/ca11.lua`; stock pdflatex, newtx Times). Matches: Times 14 pt, double spacing,
   one-inch margins, the centered cover, the table of contents (with the Table of Authorities and the certificates
   listed, as typst lists them) and the table of authorities with the primary citations starred, the two numbered
   certificates of counsel with the signature blocks. Differs: line breaks and some heading spacing (14 pages both);

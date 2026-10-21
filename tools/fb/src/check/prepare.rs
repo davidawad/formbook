@@ -428,6 +428,20 @@ mod tests {
     }
 
     #[test]
+    fn blank_underscores_are_literal_text() {
+        // "Br. __" is a fill-in blank, not emphasis: pandoc prints the underscores and so must the markdown side
+        let md = "Body one.[^1] More body.\n\n[^1]: “Appx__” is the appendix; “Br. __” is the brief.\n";
+        let runs = [
+            (1, "Body one.1 More body."),
+            (1, "1 “Appx__” is the appendix; “Br. __” is the brief."),
+        ];
+        assert_eq!(g0_metric(md, &runs, "footnotes_bad"), "0");
+        assert_eq!(g0_metric(md, &runs, "blocks_missing"), "0");
+        // emphasis with underscores still opens and closes
+        assert_eq!(g0_missing("A _word_ here.\n", &["A word here."]), "0");
+    }
+
+    #[test]
     fn frontmatter_footnote_is_checked_by_its_key() {
         let md = "---\nlead: Intro.[^1]\nfootnotes:\n  \"1\": >-\n    Note text that wraps\n    over two lines.\nother: x\n---\n\nBody.\n";
         let ok = [

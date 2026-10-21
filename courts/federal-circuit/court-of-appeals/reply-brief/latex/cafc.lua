@@ -222,8 +222,8 @@ function Pandoc(doc)
   -- reply: the signature block (about 25 lines with three signers) is kept whole by the template (\needspace, minipage);
   -- the last paragraph is not joined to it, because the two do not fit on one page at 14 pt (see README).
 
-  -- counsel_columns (reply brief, set by render.sh): the counsel groups two to a row, as the typst grid sets them
-  if doc.meta.counsel_columns then
+  -- reply brief: the counsel groups two to a row, as the typst grid sets them
+  do
     local cells = {}
     for _, g in ipairs(doc.meta.counsel or {}) do
       local lines = {}

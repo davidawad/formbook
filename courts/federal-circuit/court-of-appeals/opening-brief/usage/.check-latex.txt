@@ -1,0 +1,2 @@
+PASS
+97756411efe1a3112936dabc9ca6d7ae43182b2abc45aee383dcaa63c743b90b  usage/OUTPUT-opening-brief.latex.pdf

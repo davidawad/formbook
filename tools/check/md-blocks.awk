@@ -49,6 +49,11 @@ function resolve(s,    out, i, c, n, d, j, depth, txt, url, k, ital) {
       if (substr(s, i + 1, 1) == "*") { i += 2; continue }     # bold: no text effect
       ital = !ital; out = out (ital ? "\002" : "\003"); i++; continue
     }
+    # default checks: a blank ("Br. __", "Appx__") is literal text: a run of underscores with nothing to emphasize
+    # after it opens nothing (CommonMark finds no closer, and pandoc prints the underscores)
+    if (DEHYPHEN != "" && c == "_" && !ital && match(substr(s, i), /^__+/) && substr(s, i + RLENGTH, 1) !~ /[[:alnum:]*]/) {
+      out = out substr(s, i, RLENGTH); i += RLENGTH; continue
+    }
     if (c == "_" && (i == 1 || substr(s, i - 1, 1) ~ /[ \t(\[“"]/) && substr(s, i + 1, 1) !~ /[ \t]/) {
       ital = 1; out = out "\002"; i++; continue
     }

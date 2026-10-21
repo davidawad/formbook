@@ -131,7 +131,7 @@ The overlay is a diagnostic. Red is our render, blue is the filed page, black is
 ## Engines
 
 - **typst** (primary): `typst/`, output `usage/OUTPUT-opening-brief.typst.pdf`.
-- **latex** (`latex/template.tex` + `latex/ca10-opening-brief.lua`): output `usage/OUTPUT-opening-brief.latex.pdf`, 19 pages against typst's 13. Matches the 14-pt EB Garamond type, 31.43-pt double spacing, 1-inch margins, roman front matter and arabic body, cover on one page, TOC and TOA with page references, and the certificates. Known differences: pagination is longer; footnote text on some pages runs wide (not yet fixed); the TOC wrap indent is not hung; the signature block is not kept with the last paragraph.
+- **latex** (`latex/template.tex` + `latex/ca10-opening-brief.lua`): output `usage/OUTPUT-opening-brief.latex.pdf`, 20 pages against typst's 13. Matches the 14-pt Times type (newtx under stock pdflatex), 31.43-pt double spacing, 1-inch margins, roman front matter and arabic body, cover on one page, TOC and TOA with page references, and the certificates. Known differences: pagination is longer; footnote text on some pages runs wide (not yet fixed); the TOC wrap indent is not hung; the signature block is not kept with the last paragraph.
 - **docx**: not built yet (see the court-level PR notes). LibreOffice is not installed on this box; a Debian-package extraction was started but not verified.
 
 ## Typeface (fonts pass, 2026-10-15)

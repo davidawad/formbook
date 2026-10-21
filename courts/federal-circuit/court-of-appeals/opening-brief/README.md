@@ -105,7 +105,7 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 | Engine | Files | Output (`usage/`) | Pages |
 |---|---|---|---|
 | typst (reference) | `typst/` | `OUTPUT-opening-brief.typst.pdf` | 21 |
-| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic, EB Garamond from `fonts/eb-garamond`) | `OUTPUT-opening-brief.latex.pdf` | 21 |
+| latex | `latex/template.tex`, `latex/cafc.lua` (stock pdflatex, newtx Times) | `OUTPUT-opening-brief.latex.pdf` | 23 |
 | docx | `docx/reference.docx` (made by `docx/make-reference.sh` from `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-opening-brief.docx` and `.docx.pdf` (LibreOffice 26.8, vendored fonts only) | 21 |
 
 **Matches the typst layout (latex and docx):** 14 pt EB Garamond throughout, footnotes included; double spacing at the typst baseline pitch (31.43 pt); 1 in margins; the clerk's caption, certificate of interest, contents and authorities with page numbers; Argument labels (I. / A. / 1. / a.); the addendum with its own contents and `Add-` pages; the certificate of compliance (Form 19 wording, box checked) and the certificate of service; page numbers in the footer (roman, arabic, `Add-`).

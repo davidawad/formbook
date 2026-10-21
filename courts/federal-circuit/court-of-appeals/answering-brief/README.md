@@ -78,7 +78,7 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 | Engine | Files | Output (`usage/`) | Pages |
 |---|---|---|---|
 | typst (reference) | `typst/` | `OUTPUT-answering-brief.typst.pdf` | 14 |
-| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic) | `OUTPUT-answering-brief.latex.pdf` | 15 |
+| latex | `latex/template.tex`, `latex/cafc.lua` (stock pdflatex, newtx Times) | `OUTPUT-answering-brief.latex.pdf` | 15 |
 | docx | `docx/reference.docx` (`docx/make-reference.sh`, `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-answering-brief.docx` and `.docx.pdf` | 14 |
 
 **Matches the typst layout:** 14 pt EB Garamond, double spacing at the typst pitch (32.13 pt, 0.99em leading); 1 in margins; the cover; contents and authorities with page numbers; the Roman section headings (I. to V.) hanging at the margin with the A./1. sub-headings; the statement of related cases; the certificate of compliance with the signature under it; the certificate of service; the footers (roman then arabic).

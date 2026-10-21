@@ -173,7 +173,7 @@ Nothing is marked OK without a render and a look.
 The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
 outputs are `usage/OUTPUT-answering-brief.latex.pdf`, `.docx` and `.docx.pdf`.
 
-- **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt, double spacing,
+- **latex** (`latex/template.tex`, `latex/ca11.lua`; stock pdflatex, newtx Times). Matches: Times 14 pt, double spacing,
   one-inch margins, the cover with its double rules, the statement regarding oral argument, the table of contents
   (single spaced; typst now double-spaces it, see "Verification pass 2026-10-16") and the table of authorities with the capitalised group titles, the Form 6
   certificate of compliance, the certificate of service when `service.certificate` is set. Differs: line breaks and
