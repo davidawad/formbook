@@ -8,6 +8,7 @@
 // sample (INPUT-answering-brief.md).
 
 #import "@preview/cmarker:0.1.10"
+#import "../../../../../../../lib/typst/tables.typ": leader-row
 
 // ---------------------------------------------------------------------------
 // Parameters
@@ -124,9 +125,10 @@
   for group in meta.authorities {
     block(above: 1.2em, below: 0.8em, sticky: true, strong(group.heading))
     for e in group.entries {
-      block(above: 0.9em, below: 0.9em, breakable: false)[
-        #inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)]) #h(4pt) #if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
-      ]
+      block(above: 0.9em, below: 0.9em, breakable: false,
+        // The page reference keeps level with the entry's last line, after the leaders (DEF-TOC-001).
+        leader-row(inl(e.cite), if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") },
+          hang: 1.5em, dot-gap: 2pt, lead-gap: 0.25em, gutter: 4pt))
     }
   }
 }
