@@ -21,8 +21,13 @@ local TAB_R = 9340     -- the right tab of the tables: 1 pt inside the margin (a
 local PNUM_TOC = 720   -- the column the contents' page numbers keep to themselves (latex: \ca@rtoc, 36 bp)
 local PNUM_TOA = 1120  -- the column of the authorities' page lists (latex: \ca@rtoa, 56 bp)
 local HALF_W = 4680    -- the middle of the text: designations, counsel and signature blocks start here
-local SINGLE = 340     -- single-spaced material (headings, cover, tables, certificates): 17 pt baseline pitch
-local DOUBLE = 629     -- body text (reference.docx Body Text): 31.45 pt, more than 2 x 14 pt (CA9-FORM-003)
+local SINGLE = 340     -- single-spaced material (headings, cover, tables, certificates): 17 pt line (typst pitch-single)
+local DOUBLE = 588     -- body text (reference.docx Body Text): 29.4 pt, 2.1 x 14 pt (CA9-FORM-003; typst pitch-double)
+local HEAD = 400       -- section headings: 20 pt line (typst pitch-heading)
+local HEAD_SZ = 32     -- section headings: 16 pt (half points; typst heading-size)
+-- Exact line spacing throughout: Word sets each line in a box of that height, the baseline at 0.8 of it, which is
+-- the layout the typst and LaTeX engines reproduce (docs/EVAL-LOOP.md, "Cross-engine gate"). Spacing between
+-- paragraphs is the larger of the one's after and the next one's before, and is dropped at the top of a page.
 local NEEDLE_MAX = 60  -- a needle is a prefix of the text (letters and digits only)
 
 local stringify = pandoc.utils.stringify
@@ -47,6 +52,7 @@ local function rpr(o)
   if o.b then x = x .. "<w:b/><w:bCs/>" end
   if o.i then x = x .. "<w:i/><w:iCs/>" end
   if o.caps then x = x .. "<w:caps/>" end
+  if o.sz then x = x .. '<w:sz w:val="' .. o.sz .. '"/><w:szCs w:val="' .. o.sz .. '"/>' end
   if o.u then x = x .. '<w:u w:val="single"/>' end
   if o.box then x = x .. '<w:bdr w:val="single" w:sz="6" w:space="0" w:color="000000"/>' end
   if x == "" then return "" end
@@ -64,11 +70,35 @@ local function runs(text, o)
       pos = pos + 1
     else
       local e = text:find("\t", pos, true) or (#text + 1)
-      out[#out + 1] = "<w:r>" .. x .. '<w:t xml:space="preserve">' .. esc(text:sub(pos, e - 1)) .. "</w:t></w:r>"
+      -- a hyphen before a digit does not end a line ("ER-178-82"; Unicode line breaking, as typst breaks)
+      local t = esc(text:sub(pos, e - 1)):gsub("%-(%d)", '</w:t><w:noBreakHyphen/><w:t xml:space="preserve">%1')
+      out[#out + 1] = "<w:r>" .. x .. '<w:t xml:space="preserve">' .. t .. "</w:t></w:r>"
       pos = e
     end
   end
   return table.concat(out)
+end
+
+-- pandoc's smart reading puts a no-break space after an abbreviation ("v. Jones", "ed. 2020"); typst's markdown
+-- reader does not, so the space after a period is an ordinary one again (the engines must break lines alike).
+local function unabbrev(inlines)
+  local out = pandoc.Inlines({})
+  for _, el in ipairs(inlines) do
+    if el.t == "Str" and el.text:find(".\u{00A0}", 1, true) then
+      local rest = el.text
+      while true do
+        local s = rest:find(".\u{00A0}", 1, true)
+        if not s then break end
+        out:insert(pandoc.Str(rest:sub(1, s)))
+        out:insert(pandoc.Space())
+        rest = rest:sub(s + 3)
+      end
+      if rest ~= "" then out:insert(pandoc.Str(rest)) end
+    else
+      out:insert(el)
+    end
+  end
+  return out
 end
 
 -- A section or pilcrow sign stays with the number after it, as in the typst template ("§ 1331" is not split).
@@ -82,11 +112,35 @@ local function bind_signs(inlines)
   return inlines
 end
 
+-- A hyphen before a digit does not end a line ("ER-178-82"): Word's non-breaking hyphen, as typst breaks (Unicode
+-- line breaking keeps a hyphen with the number after it) and LibreOffice would not. The hyphen is its own run.
+local NBH = pandoc.RawInline("openxml", "<w:r><w:noBreakHyphen/></w:r>")
+local function nobreak_hyphens(inlines)
+  local out = pandoc.Inlines({})
+  for _, el in ipairs(inlines) do
+    if el.t == "Str" and el.text:find("%-%d") then
+      local rest = el.text
+      while true do
+        local s = rest:find("%-%d")
+        if not s then break end
+        if s > 1 then out:insert(pandoc.Str(rest:sub(1, s - 1))) end
+        out:insert(NBH)
+        rest = rest:sub(s + 1)
+      end
+      if rest ~= "" then out:insert(pandoc.Str(rest)) end
+    else
+      out:insert(el)
+    end
+  end
+  return out
+end
+
 -- Pandoc inlines (or a metadata value) as Word runs; links keep their text.
 local function inl(x, o)
   o = o or {}
   if x == nil then return "" end
   if type(x) == "string" then return runs(x, o) end
+  x = bind_signs(unabbrev(x))
   local out = {}
   for _, el in ipairs(x) do
     local t = el.t
@@ -123,6 +177,8 @@ end
 local KEEP = "<w:keepNext/><w:keepLines/>"
 local LINES = "<w:keepLines/>"
 local BREAK = "<w:pageBreakBefore/>"
+-- A line break inside a paragraph: only the table of authorities uses one, after a case name (typst: linebreak()).
+local BR = "<w:r><w:br/></w:r>"
 
 local function style(id)
   return '<w:pStyle w:val="' .. id .. '"/>'
@@ -204,8 +260,19 @@ end
 -- A needle: { id, kind, needle, fallback }. Kind B (body, in document order: moves the search on), N (inside a
 -- footnote: searched from the page the body has reached, moves nothing).
 local needles = {}
+-- The fallback is the text's first words (at least 8 letters and digits): a needle that runs over a page break
+-- is not found whole, because the page's footnotes come between its two halves in the PDF text.
+local function opening(text)
+  local out = ""
+  for w in text:gmatch("%S+") do
+    out = out .. norm(w)
+    if #out >= 8 then break end
+  end
+  return out:sub(1, NEEDLE_MAX)
+end
+
 local function need(id, kind, text, context)
-  local short = norm(text):sub(1, NEEDLE_MAX)
+  local short = opening(text)
   local long = norm(text .. " " .. (context or "")):sub(1, NEEDLE_MAX)
   if short == "" then short = long end
   needles[#needles + 1] = { id = id, kind = kind, needle = long, fallback = short }
@@ -269,25 +336,34 @@ end
 
 -- A section heading (level 1, the tables, the certificates): bold capitals, centered (CA9-FORM-009).
 -- `top`: the heading opens a page (no space above); `brk`: it also breaks the page (not after a section break).
-local function section_heading(text, top, brk)
-  return para({ hstyle(1), KEEP, brk and BREAK or "", spacing(top and 0 or 560, 360),
-    ind(0, nil, 0), jc("center") }, runs(text:upper(), { b = true }))
+-- typst `space`: the spacing above and below each kind of heading, in twips (21 / 15.4, 16.8 / 14, 15.4 / 12.6 pt).
+local SPACE = {
+  section = { 420, 308 },
+  point = { 336, 280 },
+  sub = { 308, 252 },
+  plain = { 336, 252 },
+}
+
+local function section_heading(text, top, brk, plain)
+  return para({ plain and "" or hstyle(1), KEEP, brk and BREAK or "", spacing(top and 0 or SPACE.section[1], SPACE.section[2], HEAD),
+    ind(0, nil, 0), jc("center") }, runs(text:upper(), { b = true, sz = HEAD_SZ }))
 end
 
 -- A body heading (latex: \ca@hone .. \ca@hfive).
 local function heading_xml(level, content, lab, arg)
   if level == 1 then return section_heading(stringify(content), false) end
   if arg and level == 2 then
-    return para({ hstyle(2), KEEP, spacing(480, 360), ind(0, nil, 0), jc("center") },
+    return para({ hstyle(2), KEEP, spacing(SPACE.point[1], SPACE.point[2]), ind(0, nil, 0), jc("center") },
       runs(lab .. " ", { b = true }) .. inl(content, { b = true }))
   end
   local k = step(level, arg)
   local o = { b = true, i = level >= 4 }
-  return para({ hstyle(level), KEEP, spacing(440, 360), ind(TAB * (k + 1), TAB) },
-    runs(lab .. "\t", { b = true }) .. inl(content, o))
+  return para({ hstyle(level), KEEP, spacing(SPACE.sub[1], SPACE.sub[2]), ind(TAB * (k + 1), TAB) },
+    runs(lab .. "\t", o) .. inl(content, o))
 end
 
--- One row of a table of contents (latex: \ca@tocline): label, title, a dot leader and the page.
+-- One row of a table of contents (typst listing-row): label, title, a dot leader from the end of the title and the
+-- page. The title wraps before the page column (the right indent); the right tab sits beyond it.
 local function toc_row(item)
   local title = item.level == 1 and item.title:upper() or item.title
   local left, hanging, lead = 0, nil, ""
@@ -295,8 +371,8 @@ local function toc_row(item)
     left, hanging = TAB * item.step + TAB, TAB
     lead = runs(item.label .. "\t", {})
   end
-  return para({ LINES, dot_tabs(), spacing(100, 0), ind(left, hanging, nil, PNUM_TOC) },
-    lead .. runs(title .. " \t" .. label_of(item.id), {}))
+  return para({ LINES, dot_tabs(), spacing(item.level == 1 and 168 or 98, 0), ind(left, hanging, nil, PNUM_TOC) },
+    lead .. runs(title .. "\t" .. label_of(item.id), {}))
 end
 
 -- ---------------------------------------------------------------------------
@@ -335,7 +411,11 @@ local function toa_rows(authorities)
         if x.sort ~= y.sort then return x.sort < y.sort end
         return x.key < y.key
       end)
-      out[#out + 1] = para({ KEEP, spacing(400, 0) }, runs(g[2], { b = true }))
+      -- the group title; the first one carries the column heading "Page(s)" at the right margin (typst toa-section)
+      local head = runs(g[2], { b = true })
+      if #out == 0 then head = head .. runs("\t", {}) .. runs("Page(s)", { b = true, u = true }) end
+      out[#out + 1] = para({ KEEP, '<w:tabs><w:tab w:val="right" w:pos="' .. TAB_R .. '"/></w:tabs>',
+        spacing(#out == 0 and 280 or 392, 56) }, head)
       for _, m in ipairs(members) do
         -- the distinct pages of the authority, in page order
         local pages, seen = {}, {}
@@ -351,19 +431,25 @@ local function toa_rows(authorities)
         end
         table.sort(pages, function(x, y) return x.page < y.page end)
         local list
+        local list_w = 0
         if #pages >= PASSIM then
           list = runs("passim", { i = true })
         else
           local l = {}
           for _, p in ipairs(pages) do l[#l + 1] = p.label end
           list = runs(table.concat(l, ", "), {})
+          -- a list wider than the column widens the column (typst: the larger of 56 pt and the list): Times New
+          -- Roman digits are 0.5 em (140 twips at 14 pt), a comma and a space 0.25 em each
+          local s = table.concat(l, ", ")
+          list_w = 0
+          for c in s:gmatch(".") do list_w = list_w + (c:match("%d") and 140 or 70) end
         end
         local name = ""
         if m.a.name then
-          name = inl(m.a.name, { i = g[1] == "case" }) .. runs(", ", {})
+          name = inl(m.a.name, { i = g[1] == "case" }) .. runs(",", {}) .. BR
         end
-        out[#out + 1] = para({ LINES, dot_tabs(), spacing(200, 0), ind(504, 504, nil, PNUM_TOA) },
-          name .. inl(m.a.cite, {}) .. runs(" \t", {}) .. list)
+        out[#out + 1] = para({ LINES, dot_tabs(), spacing(196, 0), ind(504, 504, nil, math.max(PNUM_TOA, list_w)) },
+          name .. inl(m.a.cite, {}) .. runs("\t", {}) .. list)
       end
     end
   end
@@ -408,9 +494,9 @@ local function cover(meta)
   local function add(x) out[#out + 1] = x end
   add(para({ KEEP, spacing(0, 0), jc("center") }, runs("No. ", { b = true }) .. inl(meta.case_number, { b = true })))
   add(rule("double", math.floor(gap * 0.6)))
-  -- the court's name in a centered column 4.2 in wide, so it wraps after APPEALS without a written break
-  add(para({ spacing(gap, 0), ind(1656, nil, nil, 1656), jc("center") },
-    runs("IN THE UNITED STATES COURT OF APPEALS FOR THE NINTH CIRCUIT", { b = true })))
+  -- the court's name on two lines, broken after APPEALS (lib/typst/ca9-cover.typ)
+  add(para({ spacing(gap, 0), jc("center") },
+    runs("IN THE UNITED STATES COURT OF APPEALS", { b = true }) .. BR .. runs("FOR THE NINTH CIRCUIT", { b = true })))
   add(rule("short", gap, 3240))
   for i, side in ipairs(sides) do
     for k, n in ipairs(side.names) do
@@ -460,27 +546,29 @@ local function signature(meta)
   local sig = need_meta(meta, "signature")
   local signer = stringify(need_meta(sig, "signer"))
   local out = {}
-  out[#out + 1] = para({ KEEP, spacing(560, 0), ind(HALF_W) }, runs("Respectfully submitted,", {}))
-  out[#out + 1] = para({ KEEP, spacing(400, 0), ind(HALF_W) }, runs("s/ " .. signer, {}))
+  -- typst signature-block: "Respectfully submitted," then 16.8 pt, the signature and the signer's lines in the right
+  -- half (each further line 0.5 em in), then 11.2 pt and the date at the margin
+  out[#out + 1] = para({ KEEP, spacing(392, 0), ind(HALF_W) }, runs("Respectfully submitted,", {}))
+  out[#out + 1] = para({ KEEP, spacing(336, 0), ind(HALF_W) }, runs("s/ " .. signer, {}))
   out[#out + 1] = para({ KEEP, spacing(0, 0), ind(HALF_W) }, runs(signer:upper(), {}))
   for _, l in ipairs(sig.lines or {}) do
-    out[#out + 1] = para({ KEEP, spacing(0, 0), ind(HALF_W + 140) }, inl(l, { i = true }))
+    out[#out + 1] = para({ KEEP, spacing(0, 0), ind(HALF_W, nil, 140) }, inl(l, { i = true }))
   end
   if meta.date then
-    out[#out + 1] = para({ LINES, spacing(280, 0), ind(0) }, inl(meta.date, {}))
+    out[#out + 1] = para({ LINES, spacing(224, 0), ind(0) }, inl(meta.date, {}))
   end
   return table.concat(out)
 end
 
--- The signature under a court form: "s/ Name", "Signature", the date.
+-- The signature under a court form (typst form-sig-line): two columns, "s/ Name" over "Signature" at the margin and
+-- the date over "Date" in the right one (the columns are 1fr with a 1 em gutter: the right one starts 241 pt in).
+local FORM_COL = 4820
 local function form_signature(meta)
   local signer = stringify(meta.signature.signer)
-  local out = {
-    para({ KEEP, spacing(560, 0), ind(HALF_W) }, runs("s/ " .. signer, {})),
-    para({ KEEP, spacing(0, 0), ind(HALF_W) }, runs("Signature", {})),
-  }
-  if meta.date then out[#out + 1] = para({ LINES, spacing(280, 0), ind(HALF_W) }, inl(meta.date, {})) end
-  return table.concat(out)
+  local tab = '<w:tabs><w:tab w:val="left" w:pos="' .. FORM_COL .. '"/></w:tabs>'
+  local date = meta.date and inl(meta.date, {}) or ""
+  return para({ KEEP, tab, spacing(448, 0), ind(0) }, runs("s/ " .. signer .. "\t", {}) .. date)
+    .. para({ LINES, tab, spacing(0, 0), ind(0) }, runs("Signature\tDate", {}))
 end
 
 local function case_line(meta)
@@ -491,10 +579,18 @@ local function text_para(body, after)
   return para({ spacing(0, after or 280), ind(0) }, body)
 end
 
--- A row of a form: a drawn box (a bordered run: no symbol font, so no fallback face), X when selected.
-local function option(checked, body, keep)
+-- A row of a form (typst option-row): a drawn box (a bordered run: no symbol font, so no fallback face), X when
+-- selected, in a 1.6 em column; the text hangs under the text.
+local function option(checked, body, keep, indent)
+  indent = indent or 0
   local box = runs(checked and "X" or "\u{00A0}\u{00A0}\u{00A0}", { box = true })
-  return para({ keep and KEEP or LINES, spacing(160, 0), ind(540, 540) }, box .. runs("\t", {}) .. body)
+  local left = indent + 448
+  local tabs, lead = "", ""
+  if indent > 0 then
+    tabs = '<w:tabs><w:tab w:val="left" w:pos="' .. indent .. '"/></w:tabs>'
+    lead = runs("\t", {})
+  end
+  return para({ keep and KEEP or LINES, tabs, spacing(224, 0), ind(left, left) }, lead .. box .. runs("\t", {}) .. body)
 end
 
 local function related_cases(meta)
@@ -509,7 +605,7 @@ local function related_cases(meta)
     .. "this court. The case number and name of each related case and its relationship to this case are:", {}), true)
   if status == "pending" then
     for _, c in ipairs(rc.cases or {}) do
-      out[#out + 1] = para({ KEEP, spacing(200, 0), ind(1080, 540) }, runs("No. ", {}) .. inl(c.number, {})
+      out[#out + 1] = para({ KEEP, spacing(196, 0), ind(896, 448) }, runs("No. ", {}) .. inl(c.number, {})
         .. runs(", ", {}) .. inl(c.name, { i = true }) .. runs(" (", {}) .. inl(c.relationship, {}) .. runs(").", {}))
     end
   end
@@ -545,7 +641,7 @@ local function compliance(meta, words)
     if b[1] == "court-order" then
       text = text .. (meta.court_order_date and stringify(meta.court_order_date) or "__________") .. "."
     end
-    out[#out + 1] = option(on, runs(text, {}), i == #BASES)
+    out[#out + 1] = option(on, runs(text, {}), i == #BASES, b[1]:match("^longer%-") and 448 or 0)
   end
   out[#out + 1] = form_signature(meta)
   return table.concat(out)
@@ -639,8 +735,29 @@ local function strip_links(blocks)
       if el.target:match("^toa:") then return el.content end
       return nil
     end,
-    Inlines = bind_signs,
+    Inlines = function(l) return nobreak_hyphens(bind_signs(unabbrev(l))) end,
   }).blocks
+end
+
+-- A list as paragraphs of the style "List Item" (typst list-item): the number or bullet, a tab to the half inch, the
+-- text hanging there, double-spaced like the body. Items of more than one paragraph stay a Word list.
+local function list_items(b)
+  if b.t ~= "OrderedList" and b.t ~= "BulletList" then return { b } end
+  local out = {}
+  local n = b.t == "OrderedList" and b.listAttributes.start or 1
+  local delim = b.t == "OrderedList" and b.listAttributes.delimiter or "Period"
+  for _, item in ipairs(b.content) do
+    if #item ~= 1 or (item[1].t ~= "Plain" and item[1].t ~= "Para") then return { b } end
+    local lab = "\u{2022}"
+    if b.t == "OrderedList" then
+      lab = delim == "OneParen" and (n .. ")") or delim == "TwoParens" and ("(" .. n .. ")") or (n .. ".")
+    end
+    local inlines = pandoc.Inlines({ pandoc.Str(lab), pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>") })
+    inlines:extend(item[1].content)
+    out[#out + 1] = pandoc.Div({ pandoc.Para(inlines) }, { ["custom-style"] = "List Item" })
+    n = n + 1
+  end
+  return out
 end
 
 local function has_note(el)
@@ -708,12 +825,26 @@ function Pandoc(doc)
       body[#body + 1] = raw(heading_xml(b.level, b.content, lab, in_arg))
     else
       scan_blocks({ b }, false)
-      body[#body + 1] = b
+      for _, x in ipairs(list_items(b)) do body[#body + 1] = x end
     end
   end
   for _, o in ipairs(occurrences) do
     if not authorities[o.key] then
       error("ca9.lua: link `toa:" .. o.key .. "` has no entry under `authorities:` in the frontmatter")
+    end
+  end
+  -- the table of authorities' needle goes on with its first group title (the contents list the same title)
+  for _, g in ipairs(GROUPS) do
+    local used = false
+    for _, o in ipairs(occurrences) do
+      local a = authorities[o.key]
+      if a and a.kind and stringify(a.kind) == g[1] then used = true end
+    end
+    if used then
+      for _, n in ipairs(needles) do
+        if n.id == "S:toa" then n.needle = norm("Table of Authorities " .. g[2]):sub(1, NEEDLE_MAX) end
+      end
+      break
     end
   end
   body = strip_links(body)
@@ -744,7 +875,7 @@ function Pandoc(doc)
           inl(b.content, { b = true })))
       else
         scan_blocks({ b }, false)
-        add_body[#add_body + 1] = b
+        for _, x in ipairs(list_items(b)) do add_body[#add_body + 1] = x end
       end
     end
     add_body = strip_links(add_body)
@@ -767,8 +898,9 @@ function Pandoc(doc)
   add(section("rIdFtrNone"))
 
   -- Section 2: the front matter (i, ii ...): the table of contents, the table of authorities
-  add(raw(para({ KEEP, spacing(0, 0), jc("center") }, runs("TABLE OF CONTENTS", { b = true }))))
-  add(raw(para({ KEEP, spacing(120, 60), ind(0, nil, nil, 20), jc("right") }, runs("Page", { b = true, u = true }))))
+  -- typst toc-section: the title (a section heading that is not itself listed) and "Page" over the page column
+  add(raw(section_heading("Table of Contents", true, false, true)))
+  add(raw(para({ KEEP, spacing(84, 0), ind(0, nil, nil, 20), jc("right") }, runs("Page", { b = true, u = true }))))
   local items = { { id = "S:toa", level = 1, title = "Table of Authorities" } }
   for _, h in ipairs(headings) do items[#items + 1] = h end
   items[#items + 1] = { id = "H:related", level = 1, title = "Statement of Related Cases" }
@@ -776,8 +908,7 @@ function Pandoc(doc)
   if with_service then items[#items + 1] = { id = "H:service", level = 1, title = "Certificate of Service" } end
   if #add_in > 0 then items[#items + 1] = { id = "S:add", level = 1, title = "Addendum" } end
   for _, it in ipairs(items) do add(raw(toc_row(it))) end
-  add(raw(para({ KEEP, BREAK, spacing(0, 0), jc("center") }, runs("TABLE OF AUTHORITIES", { b = true }))))
-  add(raw(para({ KEEP, spacing(120, 0), ind(0, nil, nil, 20), jc("right") }, runs("Page(s)", { b = true, u = true }))))
+  add(raw(section_heading("Table of Authorities", true, true)))
   add(raw(toa_rows(authorities)))
   add(section("rIdFtrPage", "lowerRoman", 1))
 
@@ -792,9 +923,9 @@ function Pandoc(doc)
   if #add_in > 0 then
     add(section("rIdFtrPage", "decimal", 1))
     add(raw(section_heading("Addendum", true)))
-    add(raw(para({ KEEP, spacing(240, 120), jc("center") }, runs("TABLE OF CONTENTS", { b = true }))))
+    add(raw(section_heading("Table of Contents", false, false, true)))
     for _, it in ipairs(add_items) do
-      add(raw(para({ LINES, dot_tabs(), spacing(100, 0), ind(0, nil, nil, PNUM_TOC) }, runs(it.title .. " \t" .. label_of(it.id), {}))))
+      add(raw(para({ LINES, dot_tabs(), spacing(98, 0), ind(0, nil, nil, PNUM_TOC) }, runs(it.title .. "\t" .. label_of(it.id), {}))))
     end
     -- the items start on the page after the addendum's contents (typst and latex do the same)
     if add_body[1] and add_body[1].t == "RawBlock" then

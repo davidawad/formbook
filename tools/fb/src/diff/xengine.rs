@@ -76,39 +76,53 @@ fn word_of(e: &[(usize, &str, &str)], page: usize) -> (String, String) {
         })
 }
 
-/// The word without dot leaders: runs of three or more dots go (Word's tab leader is one word of dots,
-/// typst's and latex's are dots set apart), and a word of dots alone is dropped.
-fn unleader(w: &str) -> String {
-    let mut out = String::new();
-    let mut dots = 0;
+/// The parts of a word around its dot leaders: a run of three or more dots separates parts (Word's tab leader
+/// is one word of dots that may touch the title or the page number; typst's and latex's dots are set apart),
+/// and a part of dots alone is dropped.
+fn unleader(w: &str) -> Vec<String> {
+    let (mut parts, mut cur, mut dots) = (Vec::new(), String::new(), 0);
     for c in w.chars().chain(std::iter::once(' ')) {
         if c == '.' {
             dots += 1;
             continue;
         }
-        if dots > 0 && dots < 3 {
-            out.push_str(&".".repeat(dots));
+        match dots {
+            0 => {}
+            1 | 2 => cur.push_str(&".".repeat(dots)),
+            _ => parts.push(std::mem::take(&mut cur)),
         }
         dots = 0;
         if c != ' ' {
-            out.push(c);
+            cur.push(c);
         }
     }
-    match out.chars().all(|c| c == '.') {
-        true => String::new(),
-        false => out,
-    }
+    parts.push(cur);
+    parts
+        .into_iter()
+        .filter(|p| !p.chars().all(|c| c == '.'))
+        .collect()
 }
 
-/// `m` with leader dots taken out of its words (unleader), empty words and lines dropped.
+/// `m` with leader dots taken out of its words (unleader) and empty words and lines dropped. Every word also
+/// loses its trailing dots: pdftotext glues "2020)." to Word's leader and keeps it apart from typst's, so a
+/// sentence period cannot be told from a leader's first dot (Gate 0 checks the text itself).
 fn without_leaders(m: &Measured) -> Measured {
     let mut m = m.clone();
     for p in &mut m.pages {
         for l in &mut p.lines {
-            for w in &mut l.words {
-                w.t = unleader(&w.t);
-            }
-            l.words.retain(|w| !w.t.is_empty());
+            l.words = l
+                .words
+                .iter()
+                .flat_map(|w| {
+                    // a no-break space is a space: Word's keeps "§ 1331" in one pdftotext word
+                    w.t.split('\u{a0}')
+                        .flat_map(unleader)
+                        .map(|t| t.trim_end_matches('.').to_string())
+                        .filter(|t| !t.is_empty())
+                        .map(|t| crate::measure::Word { t, ..w.clone() })
+                        .collect::<Vec<_>>()
+                })
+                .collect();
         }
         p.lines.retain(|l| !l.words.is_empty());
     }
@@ -257,11 +271,15 @@ mod tests {
 
     #[test]
     fn leaders_are_not_words() {
-        assert_eq!(unleader("........15"), "15");
-        assert_eq!(unleader("Background......"), "Background");
-        assert_eq!(unleader("."), "");
-        assert_eq!(unleader("U.S."), "U.S.");
-        assert_eq!(unleader("Inc.."), "Inc..");
+        assert_eq!(unleader("........15"), ["15"]);
+        assert_eq!(unleader("Background......"), ["Background"]);
+        assert_eq!(unleader("AUTHORITIES.......ii"), ["AUTHORITIES", "ii"]);
+        assert!(unleader(".").is_empty());
+        assert_eq!(unleader("U.S."), ["U.S."]);
+        assert_eq!(unleader("Inc.."), ["Inc.."]);
+        let a = doc(&[&["Treatise (4th ed. 2020). . . . . 8"]]);
+        let b = doc(&[&["Treatise (4th ed. 2020)..........8"]]);
+        assert!(compare(&a, &b).breaks_equal());
         let a = doc(&[&["INTRODUCTION . . . . . 1", "Body text here"]]);
         let b = doc(&[&["INTRODUCTION ..........1", "Body text here"]]);
         let c = compare(&a, &b);

@@ -20,14 +20,21 @@
 
 #let font-family = ("Times New Roman", "Liberation Serif")          // CA9-FORM-004: serif, proportional. Vendored in /fonts.
 #let type-size = 14pt                      // CA9-FORM-004: 14-point or larger, everywhere.
-#let body-leading = 0.94em                 // CA9-FORM-003: with the metric-aligned line box below this
-                                           // gives a baseline pitch of about 2.2 x type size (double spacing).
-#let line-box-pad = 0.25em                 // CA9-FORM-003: Times New Roman's ascender-to-descender line box is only 0.909 em; this
-                                           // pads each body line so the baseline pitch is 2.1 x type size (29.4 pt), still double.
-#let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced.
+#let heading-size = 16pt                   // section headings: a little larger than the body (a whole half point, as Word sizes go)
+// Cross-engine layout model (docs/EVAL-LOOP.md, "Cross-engine gate"): the typst, LaTeX and Word renders break every
+// line and page alike. Every line is a box of a fixed height (its pitch) with the baseline at 0.8 of it, the boxes
+// stack with no leading, and the space between blocks is the larger of the space below the one and above the other
+// (dropped at the top of a page). That is Word's exact line spacing; LaTeX sets the same boxes with \pdfeachlineheight.
+#let pitch-double = 29.4pt                 // CA9-FORM-003: body text, 2.1 x type size (double spacing)
+#let pitch-single = 17pt                   // headings, quotations, footnotes, TOC/TOA, certificates: single-spaced
+#let pitch-heading = 20pt                  // section headings (16 pt)
+#let edges(pitch) = (top-edge: 0.8 * pitch, bottom-edge: -0.2 * pitch)
+#let single-leading = 0pt                  // the line boxes carry the spacing: no leading between them
 #let page-margin = 1in                     // CA9-FORM-002
 #let para-indent = 0.5in
 #let toc-depth = 4
+#let toc-page-col = 36pt                   // TOC: the page numbers keep the last 36 pt of the line to themselves
+#let toa-page-col = 56pt                   // TOA: page lists such as 1, 4, 6, 8 (a longer list widens its own row's column)
 #let passim-threshold = 7                  // authority cited on this many pages or more: "passim"
 
 // ---------------------------------------------------------------------------
@@ -53,13 +60,11 @@
   meta.at(key)
 }
 
-/// A drawn check box (no font glyph needed, so no fallback can occur).
+/// A check box: a ruled box around an "X" when checked, around three spaces' width when not (Word's bordered run,
+/// so every engine sets the same text in it).
 #let checkbox(checked) = box(
-  width: 0.72em, height: 0.72em, baseline: 0.05em, stroke: 0.7pt, inset: 0pt,
-  if checked {
-    place(top + left, line(start: (0pt, 0pt), end: (100%, 100%), stroke: 0.9pt))
-    place(top + left, line(start: (0pt, 100%), end: (100%, 0pt), stroke: 0.9pt))
-  },
+  stroke: 0.6pt, inset: (x: 1pt), outset: (y: 1.5pt),
+  if checked [X] else { h(0.75em) },
 )
 
 /// Split "---\nyaml\n---\nbody" into (meta, body).
@@ -170,24 +175,34 @@
   (h.level - first + 1) * heading-tab
 }
 
+// Spacing above and below each kind of block, in points (the larger of below/above applies between two blocks).
+#let space = (
+  section: (above: 21pt, below: 15.4pt),
+  point: (above: 16.8pt, below: 14pt),
+  sub: (above: 15.4pt, below: 12.6pt),
+  plain: (above: 16.8pt, below: 12.6pt),
+)
+
 #let style-heading(it) = {
-  set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
-  set text(size: type-size)   // typst's built-in heading sizes are not used; every heading is body size or larger
+  set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt, justify: false)
+  set text(size: type-size, ..edges(pitch-single))   // typst's built-in heading sizes are not used
   if it.level == 1 {
     // Section headings: bold, capitals, centered, a little larger than the body.
-    shared-section-heading(it.body, type-size, single-leading, above: 1.5em, below: 1.1em)
+    block(width: 100%, sticky: true, ..space.section,
+      align(center, text(size: heading-size, ..edges(pitch-heading), strong(upper(it.body)))))
   } else if it.numbering == none {
     // Unnumbered sub-headings (addendum entries): bold, left.
-    block(width: 100%, sticky: true, above: 1.2em, below: 0.9em, strong(it.body))
+    block(width: 100%, sticky: true, ..space.plain, strong(it.body))
   } else if in-argument(it.location()) and it.level == 2 {
-    // Point headings: bold small capitals, centered, with the roman numeral.
-    block(width: 100%, sticky: true, above: 1.2em, below: 1em,
-      align(center, strong(smallcaps(heading-label(it) + [ ] + it.body))))
+    // Point headings: bold, centered, with the roman numeral. Not small capitals: Times New Roman has none, and Word
+    // and LaTeX would synthesize different ones (the engines must set the same glyphs).
+    block(width: 100%, sticky: true, ..space.point,
+      align(center, strong(heading-label(it) + [ ] + it.body)))
   } else {
     // Sub-headings: label in a fixed box, text hangs under the text, bold (italic below level 3).
     let ind = label-indent(it)
     let lab = heading-label(it)
-    block(width: 100%, sticky: true, above: 1.1em, below: 0.9em, hang(ind + heading-tab, {
+    block(width: 100%, sticky: true, ..space.sub, hang(ind + heading-tab, {
       h(ind)
       box(width: heading-tab, if it.level >= 4 { strong(emph(lab)) } else { strong(lab) })
       if it.level >= 4 { strong(emph(it.body)) } else { strong(it.body) }
@@ -199,6 +214,21 @@
 // Tables of contents and authorities
 // ---------------------------------------------------------------------------
 
+/// One row of the table of contents or of authorities: the text wraps before a column of width `col` kept for the
+/// page number, and a dot leader runs from the end of the text to the number on the last line (Word's layout: a
+/// right indent and a right tab beyond it). Rows are not split across pages.
+#let listing-row(target, body, page, col, hang-by, above) = {
+  let row = block(width: 100%, above: above, below: 0pt, breakable: false, grid(
+    columns: (1fr, col), column-gutter: 0pt,
+    par(hanging-indent: hang-by, first-line-indent: 0pt, leading: 0pt, justify: false, {
+      body
+      box(width: 1fr, repeat[.])
+    }),
+    align(right + bottom, page),
+  ))
+  if target == none { row } else { link(target, row) }
+}
+
 /// One table-of-contents row, built from a heading element. The label sits where the
 /// heading's own label sits in the body, and wrapped lines hang under the title text.
 #let toc-entry(it) = {
@@ -209,13 +239,17 @@
   if numbered and in-argument(hd.location()) and hd.level == 2 { ind = 0pt }
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
-  shared-outline-row(hd.location(), title, lab, ind, heading-tab,
-    it.page(), single-leading, 0.16em, above: if hd.level == 1 { 0.6em } else { 0.35em })
+  let lw = if lab == none { 0pt } else { heading-tab }
+  listing-row(hd.location(), {
+    h(ind)
+    if lab != none { box(width: heading-tab, lab) }
+    title
+  }, it.page(), toc-page-col, ind + lw, if hd.level == 1 { 8.4pt } else { 4.9pt })
 }
 
 #let toc-section(has-addendum) = {
   heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  align(right, block(above: 0.3em, below: 0pt, strong(underline[Page])))
+  align(right, block(above: 4.2pt, below: 0pt, strong(underline[Page])))
   let target = if has-addendum {
     selector(heading.where(outlined: true)).before(<add-start>, inclusive: true)
   } else {
@@ -246,7 +280,7 @@
     for (kind, title) in toa-groups {
       let members = shared-cited-authorities(authorities, hits, kind, sort-key)
       if members.len() == 0 { continue }
-      block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
+      block(above: if first { 14pt } else { 19.6pt }, below: 2.8pt, sticky: true, {
         set par(first-line-indent: 0pt)
         strong(title)
         if first { h(1fr); strong(underline[Page(s)]) }
@@ -255,18 +289,14 @@
       for (key, a) in members {
         // Distinct printed page labels, in document order.
         let page-text = shared-authority-page-labels(hits, key, passim-threshold)
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
+        listing-row(none, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
             linebreak()
           }
           inl(a.cite)
-          h(0.8em)
-          shared-dot-leader(0.16em)
-          h(0.3em)
-          page-text
-        }))
+        }, page-text, calc.max(toa-page-col, measure(page-text).width), 0.35in, 9.8pt)
       }
     }
   }
@@ -286,7 +316,8 @@
 
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  block(breakable: false, above: 1.4em, {
+  block(breakable: false, above: 19.6pt, {
+    set text(..edges(pitch-single))
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
     align(left, pad(left: 50%, {
       [Respectfully submitted,]
@@ -387,25 +418,46 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    // No kerning and no ligatures: Word sets neither by default, and the LaTeX engine turns both off (the three
+    // engines must give every word the same width, docs/EVAL-LOOP.md, "Cross-engine gate").
+    kerning: false, ligatures: false,
+    ..edges(pitch-double),
   )
+  // Greedy line breaking (first fit), as Word and LibreOffice break lines; LaTeX is set up to break the same way.
   set par(
-    leading: body-leading + line-box-pad, spacing: body-leading + line-box-pad,
+    leading: 0pt, spacing: 0pt, linebreaks: "simple",
     first-line-indent: (amount: para-indent, all: true), justify: false,
   )
+  // A superscript (a footnote mark) does not make its line taller: its box is the line's own.
+  show super: set text(top-edge: "baseline", bottom-edge: "baseline")
   set heading(numbering: none)
   set footnote.entry(
-    gap: 0.5em, clearance: 0.9em, indent: 0pt,
+    gap: 7pt, clearance: 12.6pt, indent: 0pt,
     separator: line(length: 30%, stroke: 0.5pt),
   )
   show footnote.entry: it => {
     // marker, a thin space, then the note (typst's default runs them together)
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
-    shared-footnote-body(note.body, num, type-size, single-leading, 0.5em)
+    set text(..edges(pitch-single))
+    shared-footnote-body(note.body, num, type-size, single-leading, 7pt)
   }
-  show quote.where(block: true): it => block(above: 1em, below: 1em, pad(left: para-indent, right: para-indent, {
-    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
+  // Lists: the number (or bullet) in a half-inch box at the margin, the text hanging after it, double-spaced like
+  // the body and with no space of their own (Word and LaTeX set the same paragraphs).
+  let list-item(lab, body) = block(above: 0pt, below: 0pt,
+    par(hanging-indent: para-indent, first-line-indent: 0pt, { box(width: para-indent, lab); body }))
+  show enum: it => {
+    let n = if it.start == auto { 1 } else { it.start }
+    for item in it.children {
+      if item.has("number") and item.number != none { n = item.number }
+      list-item(numbering(it.numbering, n), item.body)
+      n += 1
+    }
+  }
+  show list: it => for item in it.children { list-item([•], item.body) }
+  show quote.where(block: true): it => block(above: 14pt, below: 14pt, pad(left: para-indent, right: para-indent, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: 14pt)
     it.body
   }))
   // Typography that holds for any text: never break inside a token of adjacent parentheses
@@ -421,14 +473,17 @@
   }
 
   // ---- cover ----
-  cover(meta)
+  { set text(..edges(pitch-single)); cover(meta) }
 
   // ---- front matter (lowercase roman) ----
   set page(numbering: "i")
   counter(page).update(1)
-  toc-section(add != none)
-  pagebreak()
-  toa-section(authorities)
+  {
+    set text(..edges(pitch-single))
+    toc-section(add != none)
+    pagebreak()
+    toa-section(authorities)
+  }
 
   // ---- body (arabic from 1) ----
   set page(numbering: "1")
@@ -453,6 +508,7 @@
   }
 
   // ---- certificates of counsel ----
+  set text(..edges(pitch-single))
   pagebreak(weak: true)
   related-cases(meta)
   pagebreak(weak: true)
@@ -467,8 +523,9 @@
     set page(numbering: (..n) => "Add-" + str(n.pos().first()))
     counter(page).update(1)
     [#heading(level: 1, numbering: none)[Addendum] <add-start>]
-    toc-addendum()
+    { set text(..edges(pitch-single)); toc-addendum() }
     pagebreak()
+    set text(..edges(pitch-double))
     cmarker.render(add-md, raw-typst: false, smart-punctuation: true, h1-level: 1)
   }
 }
