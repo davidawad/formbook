@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 25 pp., text layer verified 2026-10-17; Brief of amici curiae | `FILED-EXAMPLE-amicus-brief.pdf` | ACLU Foundation and ACLU of Alaska (amici curiae) | Smith v. State, Court of Appeals No. A-14529 | undated | https://www.acluak.org/app/uploads/2025/06/signed_a-14529_brief_of_amici_curiae_aclu_and_aclu-ak_1.pdf | `52d0a2df2628fe377a99f5ab2fede3e48eb86f88a948aee8bb3572ead140b47f` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search (2026-10-21, fb-l129.1)
+
+Re-searched the Court of Appeals blocked brief and petition rows against the official Alaska Appellate Courts site and public search results for filings. The court site provides appellate forms, case-related orders, and opinions, but no party-filed briefs or petitions; search results for Alaska-court petition documents returned forms or federal court filings. No new qualifying text-layer example was obtained; the previously listed rows remain blocked.

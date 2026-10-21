@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 22 pp., text layer verified 2026-10-17; captioned In the Nebraska Court of Appeals; copy has no file stamp (2016 appeal); hosted by ACLU of Nebraska | `FILED-EXAMPLE-amicus-brief.pdf` | Child-welfare organizations (amici curiae), Nebraska Appleseed / WilmerHale / Bartle & Geier | Stewart v. Heineman, No. A-16-18 | undated | https://www.aclunebraska.org/app/uploads/2017/01/amicus_brief_for_child_welfare_stewart_ricketts.pdf | `8f2aa5e46fa8a8e71ed831bf50e7ce6f308a47a1c5393b29cf72ffb691cb8453` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search (2026-10-21, fb-l129.1)
+
+Re-searched the blocked Court of Appeals motion and petition rows against Nebraska's official appellate publication service, its PFR list, and court web materials. Those public services publish opinions, case lists, and procedural information, not motion briefs or PFR submissions; the statute search confirms petitions for review of agency decisions go to district court. No new qualifying public text-layer filing was found. The motion-brief row remains blocked; the petition-for-discretionary-review, petition-for-review, and petition-for-writ rows remain blocked as not filings this court receives.

@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 16 pp., text layer verified 2026-10-17; hosted by ACLU | `FILED-EXAMPLE-amicus-brief.pdf` | League of Women Voters of Nebraska (amicus curiae) | Planned Parenthood of the Heartland, Inc. v. Hilgers, No. S-23-644 | 2023-12-04 | https://assets.aclu.org/live/uploads/2023/05/23.12.04-Brief-for-Amicus-Curiae-League-of-Women-Voters-of-Nebraska.pdf | `6d180672d71ac3c5ab992a3c6c481be2e652d15615c3260e031fd97d52693e2a` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search (2026-10-21, fb-l129.1)
+
+Re-searched the blocked petition-for-further-review and motion rows against Nebraska's official appellate publication service and judicial branch sources. The public PFR service lists cases and outcomes (including current cases), but does not publish the petitions; official Supreme Court pages describe jurisdiction and filing procedures only. Rule/statute searches for agency review confirm that APA review is filed in district court, not this court. The remaining petition-for-review, petition-for-discretionary-review, motion-brief, and petition-for-rehearing rows remain blocked for lack of a qualifying public text-layer filing.

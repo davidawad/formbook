@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 43 pp., text layer verified 2026-10-17; Amicus curiae brief of the ACLU of Alaska Foundation | `FILED-EXAMPLE-amicus-brief.pdf` | ACLU of Alaska Foundation (amicus curiae) | Olson v. City of Hooper Bay, No. S-14920 | undated | https://www.acluak.org/app/uploads/2016/04/olson_v._hooper_bay_amicus_curiae_brief.pdf | `2961c6e76443088d861ff3784d85d4cb1ce2fd803001d2048037584371fd31fd` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up search (2026-10-21, fb-l129.1)
+
+Re-searched the blocked petition rows against the official Alaska Appellate Courts forms and public web results for filed petitions for review, hearing, original application, and rehearing. The official site exposes Docketing Statement B and other forms, case-related orders, and published opinions; search results were forms or federal filings, not Alaska Supreme Court party petitions. No new qualifying public text-layer filing was obtained; the petition-for-discretionary-review, petition-for-writ, and petition-for-rehearing rows remain blocked.
