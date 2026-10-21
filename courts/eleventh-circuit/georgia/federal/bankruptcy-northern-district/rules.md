@@ -2,6 +2,8 @@
 
 Alias `ganb`. Scope: adversary-proceeding complaints and motion briefs. Verified against the Federal Rules of Bankruptcy Procedure (Dec. 1, 2024 edition as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Local rules not retrieved: https://www.ganb.uscourts.gov/ returned HTTP 404 and https://www.ganb.uscourts.gov/local-rules returned HTTP 404. The rows below cover the national rules only. The district's local rules must be located before any court-specific row is added.
 
 ## Sources
