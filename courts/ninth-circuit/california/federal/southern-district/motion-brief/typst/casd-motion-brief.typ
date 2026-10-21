@@ -9,7 +9,7 @@
 
 #import "@preview/cmarker:0.1.10"
 #import "../../../../../../../lib/typst/pleading-paper.typ": background as shared-pleading-background
-#import "../../../../../../../lib/typst/tables.typ": dot-leader as shared-dot-leader, grid-outline-row as shared-grid-outline-row
+#import "../../../../../../../lib/typst/tables.typ": leader-page as shared-leader-page, grid-outline-row as shared-grid-outline-row
 #import "../../../../../../../lib/typst/typography.typ": footnote-style as shared-footnote-style
 #import "../../../../../../../lib/typst/toa.typ": linked-authorities as shared-linked-authorities, cited-authorities as shared-cited-authorities, authority-page-labels as shared-authority-page-labels
 
@@ -179,10 +179,7 @@
             if a.cite != "" { [, ] }
           }
           inl(a.cite)
-          h(0.8em)
-          shared-dot-leader(0.25em)
-          h(0.3em)
-          page-text
+          shared-leader-page(page-text, 0.25em, before: 0.8em)
         }))
       }
     }
