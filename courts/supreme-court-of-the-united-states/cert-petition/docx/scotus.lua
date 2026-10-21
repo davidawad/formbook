@@ -2,9 +2,11 @@
 -- Mirrors typst/scotus-cert-petition-cert-petition.typ. The cover, caption, counsel, front pages, tables of contents and
 -- authorities, signature and certificate are written here as paragraphs in the custom styles of reference.docx; the
 -- body keeps its markdown structure. Sections (cover | Questions Presented | Parties | front matter | body | certificate)
--- carry their own footers (render.sh writes the footer parts; the page numbers are i, ii ... then 1, 2 ...).
--- Two passes (render.sh): pass 1 writes the needles (headings and citations) for the LibreOffice PDF; pass 2 writes the
--- page numbers the PDF gave (FORMBOOK_PAGES). Page labels are then cached text (no field needs an update).
+-- carry their own footers (rIdFtrNone, rIdFtrPage: fb render writes the footer parts; the page numbers are i, ii ...
+-- then 1, 2 ...); this filter writes the last section, the certificate's (FORMBOOK_FINAL).
+-- Passes (fb render, tools/fb/src/docxpass.rs): each writes the needles (headings and citations, in document order) for
+-- the LibreOffice PDF (FORMBOOK_NEEDLES, format: tools/fb/src/docxpages.rs) and the page labels of the pass before
+-- (FORMBOOK_PAGES), until they settle. Page labels are then cached text (no field needs an update).
 
 local CFG = {
   word_limit = 9000,          -- Rule 33.1(g)(i)
@@ -16,21 +18,21 @@ local CFG = {
   counsel_gap = 2500,         -- twips of blank space above the counsel block (the typst v(1fr) gap; tuned against typst)
 }
 
--- ---- page labels from pass 1 (render.sh) ----
-local PAGES = { H = {}, A = {} }
+-- ---- the pages of the pass before (fb render): needle id -> { page, label }; empty on the first pass ----
+local PAGES = {}
 do
   local pf = os.getenv("FORMBOOK_PAGES")
   if pf and pf ~= "" then
     local h = assert(io.open(pf, "r"))
     for line in h:lines() do
-      local k, key, val = line:match("^(%u)\t([^\t]*)\t(.*)$")
-      if k == "H" then PAGES.H[tonumber(key)] = val
-      elseif k == "A" then PAGES.A[key] = val end
+      local id, page, label = line:match("^([^\t]+)\t([^\t]*)\t(.*)$")
+      if id then PAGES[id] = { page = tonumber(page) or 0, label = label } end
     end
     h:close()
   end
 end
-local NEEDLES = {}
+local FIRST_PASS = next(PAGES) == nil
+local NEEDLE_MAX = 60       -- letters and digits of a heading's needle (its text and what follows it)
 
 local function norm(s) return (s:lower():gsub("[^a-z0-9]", "")) end
 local function esc(s) return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;")) end
@@ -128,10 +130,20 @@ end
 
 -- section end: the paragraph that carries the sectPr of the section it ends
 local PG = '<w:pgSz w:w="8820" w:h="13320"/><w:pgMar w:top="1530" w:right="1440" w:bottom="1530" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>'
-local function section_end(footer_rid, fmt, start)
+local function sect_pr(footer_rid, fmt, start)
   local pn = '<w:pgNumType w:fmt="' .. fmt .. '"' .. (start and (' w:start="' .. start .. '"') or "") .. "/>"
-  return raw('<w:p><w:pPr><w:pStyle w:val="SectionEnd"/><w:sectPr><w:footerReference w:type="default" r:id="'
-    .. footer_rid .. '"/>' .. PG .. pn .. "</w:sectPr></w:pPr></w:p>")
+  return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer_rid .. '"/>' .. PG .. pn .. "</w:sectPr>"
+end
+local function section_end(footer_rid, fmt, start)
+  return raw('<w:p><w:pPr><w:pStyle w:val="SectionEnd"/>' .. sect_pr(footer_rid, fmt, start) .. "</w:pPr></w:p>")
+end
+
+local function write_env(env, text)
+  local path = os.getenv(env)
+  if not path or path == "" then return end
+  local h = assert(io.open(path, "w"))
+  h:write(text)
+  h:close()
 end
 
 -- ---- the document ----
@@ -216,35 +228,63 @@ function Pandoc(doc)
       sort = a.sort and str(a.sort) or nil }
   end
 
-  -- 1. links to authorities: the text stays, the entry goes to the table; needles for each occurrence
-  local hits, toa_needles = {}, {}
-  local walked = doc:walk({
-    Link = function(el)
-      local key = el.target:match("^toa:(.+)$")
-      if not key then return nil end
-      if not auth[key] then error("scotus: link `toa:" .. key .. "` has no entry under `authorities:`", 0) end
-      hits[key] = true
-      toa_needles[#toa_needles + 1] = { key, norm(str(el.content)) }
-      return el.content
-    end,
-  })
-
-  -- 2. split the sections (Questions Presented, Parties, body); index the headings of the front matter and the body
+  -- 1. split the sections (Questions Presented, Parties, body); index the headings of the front matter and the body.
+  -- Links to authorities: the text stays, the entry goes to the table. Needles, in the order of the output (Questions
+  -- Presented, Parties, the Table of Authorities heading, the body): every heading (its text and what follows it), and
+  -- every citation in the body (kind N inside a footnote), so a heading is not found in the table of contents nor a
+  -- citation in the table of authorities.
+  local hits, cites = {}, {}
   local qp, parties, body = {}, {}, {}
+  local needles = { [qp] = {}, [parties] = {}, [body] = {} }
   local current = body
-  local sect_of = {}
   local heads = {}
-  for _, b in ipairs(walked.blocks) do
+  local nt = 0
+  local pending -- the needle of the last heading, waiting for the text that follows it
+  local function unlink(b)
+    local list = needles[current]
+    local function link(kind)
+      return function(el)
+        local key = el.target:match("^toa:(.+)$")
+        if not key then return nil end
+        if not auth[key] then error("scotus: link `toa:" .. key .. "` has no entry under `authorities:`", 0) end
+        hits[key] = true
+        if current == body then
+          nt = nt + 1
+          local id = "T:" .. nt
+          local t = norm(str(el.content))
+          list[#list + 1] = { id = id, kind = kind, needle = t, fallback = t }
+          cites[key] = cites[key] or {}
+          table.insert(cites[key], id)
+        end
+        return el.content
+      end
+    end
+    return b:walk({
+      traverse = "topdown",
+      Note = function(n) return n:walk({ Link = link("N") }), false end,
+      Link = link("B"),
+    })
+  end
+  for _, b in ipairs(doc.blocks) do
     if b.t == "Header" and b.level == 1 then
       local t = str(b.content):lower()
       if t:match("^questions presented") then current = qp
       elseif t:match("^parties to the proceeding") then current = parties
       elseif current ~= body then current = body end
     end
+    if pending then
+      pending.needle = norm(pending.text .. " " .. str(b)):sub(1, NEEDLE_MAX)
+      pending = nil
+    end
+    b = unlink(b)
     current[#current + 1] = b
     if b.t == "Header" and b.level <= 2 then
-      heads[#heads + 1] = { idx = #heads + 1, level = b.level, text = str(b.content),
-        front = (current ~= body) }
+      local hd = { idx = #heads + 1, level = b.level, text = str(b.content), front = (current ~= body) }
+      heads[#heads + 1] = hd
+      local list = needles[current]
+      local t = norm(hd.text)
+      pending = { id = "H:" .. hd.idx, kind = "B", text = hd.text, needle = t, fallback = t }
+      list[#list + 1] = pending
     end
   end
   if #body == 0 then error("scotus: the sample has no body section", 0) end
@@ -252,28 +292,48 @@ function Pandoc(doc)
   if words > CFG.word_limit then
     error("scotus: body is " .. words .. " words; Rule 33.1(g)(i) allows " .. CFG.word_limit, 0)
   end
-  -- the body's section: from its first non-heading paragraph (for the page search)
-  local first_para
-  for _, b in ipairs(body) do
-    if b.t == "Para" or b.t == "Plain" then first_para = str(b); break end
-  end
 
-  -- 3. needles (pass 1 writes them; render.sh searches the PDF for each)
-  local nf = os.getenv("FORMBOOK_NEEDLES")
-  if nf and nf ~= "" then
-    local h = assert(io.open(nf, "w"))
-    h:write("B\t-\t-\t", norm(first_para or ""):sub(1, 40), "\n")
-    h:write("C\t-\t-\tcertificateofcompliance\n")
-    for _, hd in ipairs(heads) do
-      h:write("H\t", hd.idx, "\t", hd.front and "F" or "B", "\t", norm(hd.text), "\n")
+  -- 2. needles (fb render finds each in the LibreOffice PDF) and the numbering: lower-case roman from the first front
+  -- page (after the cover), arabic from the start of the body
+  local nl, all = {}, {}
+  for _, s in ipairs({ qp, parties }) do
+    for _, n in ipairs(needles[s]) do all[#all + 1] = n end
+  end
+  local toa = { id = "S:toa", kind = "B", needle = "tableofauthorities", fallback = "tableofauthorities" }
+  local front_start = (all[1] or toa).id
+  all[#all + 1] = toa
+  local body_needles = needles[body]
+  if not (body[1].t == "Header" and body[1].level <= 2) then
+    local t = norm(str(body[1])):sub(1, 40)
+    table.insert(body_needles, 1, { id = "S:body", kind = "B", needle = t, fallback = t })
+  end
+  local body_start = body_needles[1].id
+  for _, n in ipairs(body_needles) do all[#all + 1] = n end
+  for _, n in ipairs(all) do nl[#nl + 1] = n.id .. "\t" .. n.kind .. "\t" .. n.needle .. "\t" .. n.fallback end
+  nl[#nl + 1] = "#section\t" .. front_start .. "\tlower-roman\t"
+  nl[#nl + 1] = "#section\t" .. body_start .. "\tdecimal\t"
+  write_env("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
+  -- the certificate of compliance (Rule 33.1(h)): the last section, on its own page, no number
+  write_env("FORMBOOK_FINAL", sect_pr("rIdFtrNone", "decimal", nil))
+
+  -- 3. the page label of each heading and authority (the pass before; placeholders of the final width on the first)
+  local function hlabel(i)
+    local p = PAGES["H:" .. i]
+    return p and p.label or "00"
+  end
+  local function alabel(key)
+    if FIRST_PASS then return "00" end
+    local ps = {}
+    for _, id in ipairs(cites[key] or {}) do
+      if PAGES[id] then ps[#ps + 1] = PAGES[id] end
     end
-    for _, t in ipairs(toa_needles) do h:write("A\t", t[1], "\t-\t", t[2], "\n") end
-    h:close()
+    table.sort(ps, function(x, y) return x.page < y.page end)
+    local out, seen = {}, {}
+    for _, p in ipairs(ps) do
+      if not seen[p.label] then seen[p.label] = true; out[#out + 1] = p.label end
+    end
+    return table.concat(out, ", ")
   end
-
-  -- 4. the page label of each heading and authority (pass 2)
-  local function hlabel(i) return PAGES.H[i] or "00" end
-  local function alabel(key) return PAGES.A[key] or "00" end
 
   local out = {}
   local function add(x) out[#out + 1] = x end
@@ -299,13 +359,13 @@ function Pandoc(doc)
   cov[#cov + 1] = raw(gap(CFG.counsel_gap))
   cov[#cov + 1] = raw(counsel_table(counsel.columns or {}, nil, false))
   for _, b in ipairs(cov) do add(b) end
-  add(section_end("rIdFtrEmpty", "decimal", nil))
+  add(section_end("rIdFtrNone", "decimal", nil))
 
   -- ---- front pages (lowercase roman): Questions Presented, Parties (each on its own page, Rule 14.1(a)) ----
   for _, b in ipairs(qp) do add(b) end
-  add(section_end("rIdFtrFront", "lowerRoman", 1))
+  add(section_end("rIdFtrPage", "lowerRoman", 1))
   for _, b in ipairs(parties) do add(b) end
-  add(section_end("rIdFtrFront", "lowerRoman", nil))
+  add(section_end("rIdFtrPage", "lowerRoman", nil))
 
   -- ---- table of contents (Rule 34.2, depth 2, as typst's outline) and table of authorities (Rule 34.2) ----
   add(raw(para("FrontHeading", nil, nil, run("Table of Contents", true, false, 24))))
@@ -333,7 +393,7 @@ function Pandoc(doc)
       end
     end
   end
-  add(section_end("rIdFtrFront", "lowerRoman", nil))
+  add(section_end("rIdFtrPage", "lowerRoman", nil))
 
   -- ---- body (arabic from 1) and the signature block (Rule 34.3) ----
   for _, b in ipairs(body) do add(b) end
@@ -343,9 +403,9 @@ function Pandoc(doc)
   sig[#sig + 1] = raw(para("SigLine", nil, spacer(180), table.concat(inl_runs(ils_of(counsel["attorneys-for"]), 24))
     .. BR .. run(str(counsel.date), false, false, 24)))
   for _, b in ipairs(sig) do add(b) end
-  add(section_end("rIdFtrBody", "decimal", 1))
+  add(section_end("rIdFtrPage", "decimal", 1))
 
-  -- ---- certificate of compliance (Rule 33.1(h)): on its own page, no number ----
+  -- ---- certificate of compliance (Rule 33.1(h)): on its own page, no number (its sectPr: FORMBOOK_FINAL) ----
   add(raw(para("CenterLine", nil, nil, run("CERTIFICATE OF COMPLIANCE", true, false, 24))))
   add(raw(para("CertBody", nil, '<w:spacing w:before="0" w:after="240" w:line="280" w:lineRule="exact"/>',
     run("I certify that this petition complies with the word limitation of Supreme Court Rule 33.1(g)(i), "
@@ -359,7 +419,7 @@ function Pandoc(doc)
     .. run("Counsel of Record", true, false, 24) .. BR
     .. run(str(counsel.date), false, false, 24))))
 
-  walked.blocks = out
-  walked.meta.title = nil   -- the cover is ours; pandoc would print the title above it
-  return walked
+  doc.blocks = out
+  doc.meta.title = nil   -- the cover is ours; pandoc would print the title above it
+  return doc
 end
