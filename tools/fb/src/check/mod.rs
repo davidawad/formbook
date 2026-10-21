@@ -5,6 +5,7 @@ mod calibtex;
 mod declared;
 #[cfg(test)]
 mod gate0_tests;
+mod docxgate;
 mod native;
 mod opts;
 mod prepare;
@@ -359,6 +360,19 @@ fn sample(c: &Ctx, sid: &str, t: &mut Tally) -> Res<()> {
                 t.fail += 1;
                 t.fails_sample += 1;
                 append(&f(".tally"), "F\n")?;
+                append(&f(".fails_sample"), "F\n")?;
+            }
+        }
+        if g == "1" && c.engine == "docx" {
+            let (pass, text) = docxgate::run(&s)?;
+            out(&text);
+            let mark = if pass { "P\n" } else { "F\n" };
+            append(&f(".tally"), mark)?;
+            if pass {
+                t.pass += 1;
+            } else {
+                t.fail += 1;
+                t.fails_sample += 1;
                 append(&f(".fails_sample"), "F\n")?;
             }
         }

@@ -51,12 +51,14 @@ check-selftest DIR:
 diff DIR:
     {{fb}} usage pairs {{DIR}} | xargs -n2 {{fb}} diff
 
-# repo-wide lints: audited font faces, usage/ path validity, rules.md format, no pipe into grep -q under pipefail
+# repo-wide lints: audited font faces, usage/ path validity, rules.md format, no pipe into grep -q under pipefail,
+# every committed OUTPUT .docx opens (DEF-DOCX-OPEN; needs soffice)
 lint:
     {{fb}} lint fonts
     {{fb}} lint paths
     {{fb}} lint rules
     {{fb}} lint pipefail
+    {{fb}} lint docx
 
 lint-metadata sample:
     {{fb}} lint metadata "{{sample}}"

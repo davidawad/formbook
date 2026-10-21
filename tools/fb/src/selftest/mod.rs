@@ -8,7 +8,8 @@
 //! Content mutants change the markdown that is rendered (but not the markdown the checks compare against). Layout
 //! mutants change the template in a scratch copy of the court folder. Latex mutants change latex/template.tex and are
 //! checked with `--engine latex`; latex build mutants must make the render itself refuse (the stock pdflatex check:
-//! the .tex alone compiles in an empty directory with TEXINPUTS unset). The mutations are `sed` programs, applied
+//! the .tex alone compiles in an empty directory with TEXINPUTS unset). Docx mutants render with the docx engine and
+//! then break the .docx package itself (selftest/docx.rs); DEF-DOCX-OPEN must FAIL. The mutations are `sed` programs, applied
 //! with the system sed, with the mutation definitions kept here as data.
 use crate::proc::capture;
 use crate::{fail, repo_root, Res};
@@ -20,6 +21,7 @@ const SAMPLE: &str = "generic";
 const TEMPLATE: &str = "ca9-brief.typ";
 const LATEX_TEMPLATE: &str = "template.tex";
 
+mod docx;
 pub(crate) mod mutants;
 use mutants::{Kind, Mutant, MUTANTS};
 
@@ -125,10 +127,17 @@ impl Run<'_> {
         let d = self.scratch.join(name);
         std::fs::create_dir_all(&d)
             .map_err(|e| fail(2, format!("fb selftest: {}: {e}", d.display())))?;
-        let from: Vec<PathBuf> = ["typst", "latex", "usage", "checks.yaml", "court.json"]
-            .iter()
-            .map(|f| self.court.join(f))
-            .collect();
+        let from: Vec<PathBuf> = [
+            "typst",
+            "latex",
+            "docx",
+            "usage",
+            "checks.yaml",
+            "court.json",
+        ]
+        .iter()
+        .map(|f| self.court.join(f))
+        .collect();
         copy_into(&from, &d)?;
         std::fs::create_dir_all(d.join("reviews"))
             .map_err(|e| fail(2, format!("fb selftest: {e}")))?;
@@ -176,8 +185,10 @@ impl Run<'_> {
             Kind::Content | Kind::Layout => ("typst", false),
             Kind::Latex => ("latex", false),
             Kind::LatexBuild { texinputs } => ("latex", texinputs),
+            Kind::Docx { .. } => ("docx", false),
         };
         let sample = match m.kind {
+            Kind::Docx { .. } => self.md.clone(),
             Kind::Content => {
                 std::fs::write(
                     d.join("mutated.md"),
@@ -215,6 +226,13 @@ impl Run<'_> {
                 format!("MUTANT {}: render failed: {}", m.name, head.join("\n")),
                 false,
             ));
+        }
+        if let Kind::Docx { part } = m.kind {
+            let pdf = d.join(self.out(engine));
+            let docx = pdf.with_extension("");
+            if let Err(e) = docx::mutate(&docx, part, m.expr) {
+                return Ok((format!("MUTANT {}: {}", m.name, e.msg), false));
+            }
         }
         // a mutant is meant to fail the checker, so its exit status is ignored
         let o = capture(
@@ -344,7 +362,7 @@ mod tests {
 
     #[test]
     fn table_matches_the_shell_script() {
-        assert_eq!(MUTANTS.len(), 25);
+        assert_eq!(MUTANTS.len(), 27);
         assert_eq!(
             MUTANTS.iter().filter(|m| m.kind == Kind::Content).count(),
             6

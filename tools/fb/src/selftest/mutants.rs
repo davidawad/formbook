@@ -11,6 +11,11 @@ pub enum Kind {
     LatexBuild {
         texinputs: bool,
     },
+    /// rendered with the docx engine, then the .docx itself is broken (selftest/docx.rs): `part` None cuts the
+    /// archive in half, Some(part) applies `expr` to that part; checked with `--engine docx`
+    Docx {
+        part: Option<&'static str>,
+    },
 }
 
 pub struct Mutant {
@@ -181,5 +186,21 @@ pub const MUTANTS: &[Mutant] = &[
         want: r"stock pdflatex check",
         kind: Kind::LatexBuild { texinputs: false },
         expr: r"s/^\\makeatletter$/\\makeatletter % fonts: $fontdir$/",
+    },
+    Mutant {
+        name: r"docx-corrupt-zip",
+        want: r"DEF-DOCX-OPEN",
+        kind: Kind::Docx { part: None },
+        expr: r"",
+    },
+    Mutant {
+        name: r"docx-dangling-footer",
+        want: r"DEF-DOCX-OPEN",
+        kind: Kind::Docx {
+            part: Some("word/document.xml"),
+        },
+        // fb-595.64: a section names a footer id the package does not declare (there, pandoc had renumbered the
+        // reference document's rIdFooter1; ca9's reference declares that id, so the mutant names one nobody does)
+        expr: r#"s/r:id="rIdFtrPage"/r:id="rIdFtrUndeclared"/g"#,
     },
 ];

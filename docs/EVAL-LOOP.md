@@ -864,7 +864,7 @@ Folders that fail the gate, by circuit: every folder in the table below except `
 | `tools/check.sh <court-dir> [--engine E] [--no-render] [--only ID]` | Gates 0 to 3 as far as they can be mechanical, on that engine's PDF. Exit 0 only if every check passes; writes/removes `usage/.check-<engine>.txt`. |
 | `tools/overlay.sh <doc-dir> <id> [FILED-EXAMPLE.pdf]` | Red/blue overlay of `OUTPUT-<id>.typst.pdf` on `FILED-EXAMPLE-<id>.pdf`, into the gitignored `.overlay/`. A diagnostic (tier 3), not a score. |
 | `tools/calibrate.sh [--engine E] [--no-render] [dir]` | The word-compat calibration run over `data/calibration-set.json`: G0, G2, identical and same-start line breaks, word positions (`fb diff --content`, `fb diff --breaks`). |
-| `justfile` | `just render\|overlay\|check\|diff <doc-dir>`, `just render-all\|overlay-all\|check-all`, `just lint` (`fb lint fonts`, `fb lint paths`, `fb lint rules`). Straight pipelines into `fb` and the scripts above. |
+| `justfile` | `just render\|overlay\|check\|diff <doc-dir>`, `just render-all\|overlay-all\|check-all`, `just lint` (`fb lint fonts`, `fb lint paths`, `fb lint rules`, `fb lint docx`). Straight pipelines into `fb` and the scripts above. |
 | `fb usage doctype\|dir\|inputs\|examples\|pairs\|input\|example\|pair\|output\|overlay <doc-dir> ...` | Prints the `usage/` and `.overlay/` names of a doc folder, so no script parses file names. |
 | `tools/check-selftest.sh <court-dir>` | Mutation test of the checker. |
 | `tools/check/*.awk`, `tools/check/lib.sh` | The checks. Dependencies: gawk, yq (mikefarah), jq, typst, poppler (`pdfinfo pdffonts pdftotext pdftohtml pdfimages`), `shasum`; latex: pandoc, pdflatex (TeX Live 2025), or tectonic or xelatex; docx: pandoc, LibreOffice (`soffice`), unzip, xmllint. |

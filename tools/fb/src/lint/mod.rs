@@ -2,7 +2,8 @@
 //! validates brief frontmatter; `fb lint fonts` checks audited faces globally; `fb lint paths`
 //! checks the usage/ layout under courts/ (see paths.rs); `fb lint rules` checks the format of every
 //! courts/**/rules.md (see rules.rs); `fb lint pipefail`
-//! rejects a pipe into an early-exiting grep in shell under tools/ (see pipefail.rs).
+//! rejects a pipe into an early-exiting grep in shell under tools/ (see pipefail.rs); `fb lint docx` checks that
+//! every committed usage/OUTPUT-*.docx opens (DEF-DOCX-OPEN, see docx.rs).
 //!   (a) ngram      a template file shares a run of 5+ words with a FILED-EXAMPLE's text, and the run
 //!                  is not rule text (rules.md of the doc dir or an enclosing court folder);
 //!   (b) break/vspace  forced line breaks or literal vertical space outside the parameter block
@@ -11,6 +12,7 @@
 //!   (d) path       the layout rule of `fb lint paths`, for the doc dir and the folders under it.
 //! Output: `LINT <kind> <file>:<line>: <detail>` per finding, then `RESULT: LINT PASS` or
 //! `RESULT: LINT FAIL (<n> findings)`; exit 1 on findings.
+mod docx;
 pub(crate) mod fonts;
 mod input;
 mod metadata;
@@ -27,7 +29,7 @@ use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
 const USAGE: &str =
-    "usage: fb lint <doc-dir> [--engine typst|latex|all] | fb lint metadata <input.md> | fb lint fonts|paths|pipefail|rules";
+    "usage: fb lint <doc-dir> [--engine typst|latex|all] | fb lint metadata <input.md> | fb lint fonts|paths|pipefail|rules | fb lint docx [file.docx ...]";
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Finding {
@@ -137,6 +139,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         [a] if a == "paths" => return paths::main(),
         [a] if a == "pipefail" => return pipefail::main(),
         [a] if a == "rules" => return rules::main(),
+        [a, files @ ..] if a == "docx" => return docx::main(files),
         [a, path] if a == "metadata" => return metadata::main(Path::new(path)),
         _ => {}
     }

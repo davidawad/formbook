@@ -20,8 +20,9 @@ unzip -q -o "$D/reference.docx" -d "$W/ref"
 P=$W/pkg
 cp "$W/ref/word/styles.xml" "$P/word/styles.xml"
 cp "$W/ref/word/footer1.xml" "$P/word/footer1.xml"
-perl -0pi -e 's{</Relationships>}{<Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Id="rId100" Target="footer1.xml" /></Relationships>}' "$P/word/_rels/document.xml.rels"
-perl -0pi -e 's{</Types>}{<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml" /></Types>}' "$P/[Content_Types].xml"
+# pandoc may already carry the reference's footer relationship over: add it (and its content type) only once
+perl -0pi -e 's{</Relationships>}{<Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Id="rId100" Target="footer1.xml" /></Relationships>} unless m{Id="rId100"}' "$P/word/_rels/document.xml.rels"
+perl -0pi -e 's{</Types>}{<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml" /></Types>} unless m{PartName="/word/footer1.xml"}' "$P/[Content_Types].xml"
 perl -0pi -e 's{<w:sectPr\b.*?</w:sectPr>}{<w:sectPr><w:footerReference w:type="default" r:id="rId100"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>}s' "$P/word/document.xml"
 for part in word/styles.xml word/document.xml word/footer1.xml; do xmllint --noout "$P/$part"; done
 rm -f "$OUT"

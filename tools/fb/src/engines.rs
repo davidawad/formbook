@@ -15,7 +15,7 @@
 use crate::proc::{capture, have, tail, which, TempDir};
 use crate::{fail, Res};
 use std::path::{Path, PathBuf};
-use std::process::{Command, Stdio};
+use std::process::Command;
 
 /// Every `*.lua` file directly in `dir`, sorted, as `--lua-filter=` arguments.
 fn lua_filters(dir: &Path) -> Vec<String> {
@@ -33,15 +33,23 @@ fn lua_filters(dir: &Path) -> Vec<String> {
         .collect()
 }
 
-/// Run `sh <script> <court> <sample> <out>` with its stdout sent to our stderr; false on failure.
-fn run_owner(script: &Path, court: &Path, sample: &str, out: &Path) -> Res<bool> {
-    let o = capture(
-        Command::new("sh")
-            .arg(script)
-            .arg(court)
-            .arg(sample)
-            .arg(out),
-    )?;
+/// Run `sh <script> <court> <sample> <out>` with its stdout sent to our stderr; false on failure. With `lo_work`
+/// (a docx script) the script sees the vendored fonts as LibreOffice will (FONTCONFIG_FILE, as `convert` sets it),
+/// so a page it measures with its own soffice pass is the page of the final PDF.
+fn run_owner(
+    script: &Path,
+    court: &Path,
+    sample: &str,
+    out: &Path,
+    lo_work: Option<&Path>,
+) -> Res<bool> {
+    let mut cmd = Command::new("sh");
+    if let (Some(work), Ok(root)) = (lo_work, crate::repo_root()) {
+        let conf = crate::lofonts::fontconfig(&root, work)
+            .map_err(|e| fail(2, format!("fb render: {}: {e}", work.display())))?;
+        cmd.env("FONTCONFIG_FILE", conf);
+    }
+    let o = capture(cmd.arg(script).arg(court).arg(sample).arg(out))?;
     eprint!("{}", String::from_utf8_lossy(&o.stdout));
     eprint!("{}", String::from_utf8_lossy(&o.stderr));
     Ok(o.status.success())
@@ -64,7 +72,7 @@ fn pandoc(court: &Path, args: &[String]) -> Res<()> {
 pub fn latex(root: &Path, court: &Path, sample: &str, out: &Path) -> Res<()> {
     let l = court.join("latex");
     if l.join("render.sh").is_file() {
-        if !run_owner(&l.join("render.sh"), court, sample, out)? {
+        if !run_owner(&l.join("render.sh"), court, sample, out, None)? {
             return Err(fail(1, "fb render: latex/render.sh failed"));
         }
         return out.is_file().then_some(()).ok_or_else(|| {
@@ -275,7 +283,13 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
     let _cleanup = RemoveOnDrop(temp_docx.clone());
     let work = TempDir::new("docx")?;
     if d.join("render.sh").is_file() {
-        if !run_owner(&d.join("render.sh"), court, sample, &temp_docx)? {
+        if !run_owner(
+            &d.join("render.sh"),
+            court,
+            sample,
+            &temp_docx,
+            Some(work.path()),
+        )? {
             return Err(fail(1, "fb render: docx/render.sh failed"));
         }
     } else if d.join("reference.docx").is_file() {
@@ -322,62 +336,21 @@ impl Drop for RemoveOnDrop {
     }
 }
 
-/// Integrity: a valid zip whose XML parts are well-formed (the XML check needs xmllint).
+/// Integrity: the package checks of DEF-DOCX-OPEN (docxopen.rs); the conversion follows.
 fn check_docx(docx: &Path, work: &Path) -> Res<()> {
-    let zip = Command::new("unzip")
-        .arg("-tq")
-        .arg(docx)
-        .stdout(Stdio::null())
-        .stderr(Stdio::null())
-        .status()
-        .map_err(|e| fail(2, format!("fb render: cannot run unzip: {e}")))?;
-    if !zip.success() {
-        return Err(fail(
-            1,
-            format!("fb render: {} is not a valid zip", docx.display()),
-        ));
-    }
-    if !have("xmllint") {
+    let found = crate::docxopen::package(docx, work)?;
+    if found.is_empty() {
         return Ok(());
     }
-    let parts = work.join("docx-parts");
-    capture(
-        Command::new("unzip")
-            .arg("-q")
-            .arg(docx)
-            .arg("-d")
-            .arg(&parts),
-    )?;
-    let mut stack = vec![parts.clone()];
-    let mut files = vec![];
-    while let Some(dir) = stack.pop() {
-        for e in std::fs::read_dir(&dir).into_iter().flatten().flatten() {
-            let p = e.path();
-            if p.is_dir() {
-                stack.push(p);
-            } else if p.extension().is_some_and(|x| x == "xml" || x == "rels") {
-                files.push(p);
-            }
-        }
-    }
-    files.sort();
-    for part in files {
-        let ok = Command::new("xmllint")
-            .arg("--noout")
-            .arg(&part)
-            .stderr(Stdio::null())
-            .status()
-            .map_err(|e| fail(2, format!("fb render: cannot run xmllint: {e}")))?
-            .success();
-        if !ok {
-            let rel = part.strip_prefix(&parts).unwrap_or(&part);
-            return Err(fail(
-                1,
-                format!("fb render: {} is not well-formed XML", rel.display()),
-            ));
-        }
-    }
-    Ok(())
+    found.iter().for_each(|f| eprintln!("  {f}"));
+    Err(fail(
+        1,
+        format!(
+            "fb render: {} would not open ({})",
+            docx.display(),
+            crate::docxopen::ID
+        ),
+    ))
 }
 
 /// LibreOffice headless conversion of the docx to `out_pdf`.
