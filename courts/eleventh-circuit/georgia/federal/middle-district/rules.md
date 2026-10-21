@@ -2,6 +2,8 @@
 
 Alias `gamd`. Scope: civil complaints and motion briefs. Verified against the Local Rules of the United States District Court for the Middle District of Georgia (PDF "Local_Rules-12_1_2022", amended March 7, 2022 per the file's header) and the Federal Rules of Civil Procedure (as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Note: the local rules state no typeface, point size, margin, or paper-size rule that was located. The repo default eval (1 in margins, 12 pt) applies to this court, and only the brief page limit is set below.
 
 ## Sources
