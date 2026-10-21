@@ -2,6 +2,8 @@
 
 Alias `flnd`. Scope: civil complaints and motion briefs. Verified against the Local Rules of the United States District Court for the Northern District of Florida (PDF "local_rules_0.pdf"; header reads "Effective November 24, 2015", with amendments as printed) and the Federal Rules of Civil Procedure (as posted) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Typeface note: Local Rule 5.1(C) requires at least 14-point font, double spacing, and at least one-inch margins. The repo default eval (12 pt) is weaker than this rule, so the eval must state 14 pt for this court.
 
 ## Sources
