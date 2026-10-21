@@ -430,7 +430,8 @@ mod tests {
     #[test]
     fn blank_underscores_are_literal_text() {
         // "Br. __" is a fill-in blank, not emphasis: pandoc prints the underscores and so must the markdown side
-        let md = "Body one.[^1] More body.\n\n[^1]: “Appx__” is the appendix; “Br. __” is the brief.\n";
+        let md =
+            "Body one.[^1] More body.\n\n[^1]: “Appx__” is the appendix; “Br. __” is the brief.\n";
         let runs = [
             (1, "Body one.1 More body."),
             (1, "1 “Appx__” is the appendix; “Br. __” is the brief."),
