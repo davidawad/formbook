@@ -35,8 +35,12 @@ local function str(v)
   return pandoc.utils.stringify(v)
 end
 
+-- Lines are exact, at the reference's pitches: single (240) is 20 pt, double (480) the typst body pitch of 32.3 pt.
+-- An auto line in TeX Gyre Schola is taller than its type and would rise into the top margin at a page head.
+local EXACT = { [240] = 400, [480] = 646 }
 local function spacing(before, after, line)
-  return string.format('<w:spacing w:before="%d" w:after="%d" w:line="%d" w:lineRule="auto" />', before, after, line or 240)
+  line = line or 240
+  return string.format('<w:spacing w:before="%d" w:after="%d" w:line="%d" w:lineRule="exact" />', before, after, EXACT[line] or line)
 end
 
 -- Single-spaced paragraph, no first-line indent. left/right: twips; jc: alignment.

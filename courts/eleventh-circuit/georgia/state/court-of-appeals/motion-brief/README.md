@@ -61,3 +61,7 @@ Separate cover page by default (`cover_page`, default true; both filed exemplars
 2. The exemplar's counsel are set in two columns on the cover and signature page; ours stack them (tier 3).
 3. Only one conformed signature is underlined; extra signers in `signer` lines are plain text.
 4. docx: **not regenerated** (no `soffice` on this box). `OUTPUT-motion-brief.docx` / `.docx.pdf` are renders of the old synthetic sample and the docx form still prints the old word-count certificate and starts the body on the cover. Open docx items: Rule 24 (f) (1) wording, underlined signature, cover page, `toc` / `authorities`, `service.paragraphs`.
+
+## DOCX font and layout fixes (2026-10-21, fb-595.59)
+
+The docx engine moves from Liberation Serif to TeX Gyre Schola, the face the typst template declares (DEF-FONT-002). Footnotes number continuously (pandoc's reference restarted them in each section, so the third footnote printed as 1). Bullets are set in the body face, not OpenSymbol. Lines are exact: the body is at the typst pitch (32.3 pt) and single-spaced parts are 20 pt, because Schola's auto line rose into the top margin at a page head. `check.sh --engine docx` is green. Still open in the docx: it has no table of authorities (the typst output has one), and the word-count certificate prints "not stated".

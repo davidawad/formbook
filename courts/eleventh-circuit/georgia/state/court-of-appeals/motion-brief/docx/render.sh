@@ -34,6 +34,10 @@ to_docx() {
     return 1
   }
   perl -pi -e "s/rIdFooterPage/$RID/g" "$W/word/document.xml"
+  # bullets in the body face: pandoc's Symbol bullet (U+F0B7) would be drawn by LibreOffice with OpenSymbol
+  if [ -f "$W/word/numbering.xml" ]; then
+    perl -CSD -0pi -e 's/w:ascii="Symbol" w:hAnsi="Symbol"( w:cs="Symbol")?/w:ascii="TeX Gyre Schola" w:hAnsi="TeX Gyre Schola" w:cs="TeX Gyre Schola"/g; s/\x{F0B7}/\x{2022}/g' "$W/word/numbering.xml"
+  fi
   xmllint --noout "$W/word/document.xml" || return 1
   rm -f "$1"
   (cd "$W" && zip -X -q -r "$1" '[Content_Types].xml' _rels docProps word)
