@@ -2,6 +2,8 @@
 
 Alias `ca11`. Scope: appellant's opening brief, appellee's answering brief, and reply brief (`opening-brief`, `answering-brief`, `reply-brief`). Verified against the Rules of the United States Court of Appeals for the Eleventh Circuit (Clerk's bookmarked edition, memorandum dated August 1, 2026) and the Federal Rules of Appellate Procedure (as bundled in that PDF) on 2026-10-20.
 
+Re-check cadence: annually and within 30 days after a published amendment or new standing order affecting this document type.
+
 Typeface note: FRAP 32(a)(5)(A) requires a proportionally spaced face of 14-point or larger. That is stricter than the repo default (12 pt), so the court's rule governs and the eval must be set to 14 pt for this court.
 
 ## Sources
