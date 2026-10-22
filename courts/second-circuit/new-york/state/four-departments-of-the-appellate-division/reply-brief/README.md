@@ -19,7 +19,7 @@ sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-
 sh tools/overlay.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/reply-brief integratenyc-reply
 ```
 
-Toolchain used: typst 0.15.0, poppler (pdftoppm 26.09.0), ImageMagick 7.1.2, gawk, jq, from conda-forge via micromamba. Renders use only the vendored fonts (`--ignore-system-fonts`); any typst warning is a failure. The render succeeded with no warnings. `pdffonts` shows EB Garamond Regular, Bold and Italic embedded.
+Toolchain used: typst 0.15.0, poppler (pdftoppm 26.09.0), ImageMagick 7.1.2, gawk, jq, from conda-forge via micromamba. Renders use only the vendored fonts (`--ignore-system-fonts`); any typst warning is a failure. The render succeeded with no warnings. `pdffonts` shows Times New Roman Regular, Bold and Italic embedded (2026-10-22).
 
 ## Governing rules
 
@@ -29,11 +29,11 @@ Part 1250 (Practice Rules of the Appellate Division) applies to all four departm
 |---|---|---|---|
 | 22 NYCRR 1250.8(d) | Reply brief: "shall conform to the requirements of subdivision (b), without repetition"; a cross-appellant's reply answers the cross-appeal | Section structure. The template enforces no section list; the sample follows the exemplar (Preliminary Statement, Argument, Conclusion) | https://www.law.cornell.edu/regulations/new-york/22-NYCRR-1250.8 |
 | 22 NYCRR 1250.8(b) | Cover: title; upper right, argued or submitted, time requested and the argument's presenter; lower right, the filing attorney's name, address, telephone, email, and whom they represent. Contents: table of contents (point headings), table of cases and authorities | `cover-body` (upper right: `argument`; lower right: `counsel`); `toc-section`; `toa-section` | same |
-| 22 NYCRR 1250.8(f)(1) | Serifed, proportionally spaced typeface; capitals and bold only in headings and quotations; no narrow or condensed face | `font-family` (EB Garamond, vendored); no bold or caps in body text | same |
+| 22 NYCRR 1250.8(f)(1) | Serifed, proportionally spaced typeface; capitals and bold only in headings and quotations; no narrow or condensed face | `font-family` (Times New Roman, vendored); no bold or caps in body text | same |
 | 22 NYCRR 1250.8(f)(1)(i) | Body of a proportionally spaced brief in 14-point type; footnotes at least 12 point | `type-size = 14pt`; footnotes set at body size (the exemplar's footnotes are at body size too) | same |
 | 22 NYCRR 1250.8(f)(2) | Computer-generated reply briefs: not more than 7,000 words, inclusive of point headings and footnotes, exclusive of signature blocks and of pages with the contents, table of citations, proof of service, certificate of compliance, or addendum | `word-limit = 7000`; `count-words` over the body; the template panics above it | same |
 | 22 NYCRR 1250.8(h) | One-inch margins on all sides; text double spaced; quotations over two lines may be indented and single spaced; headings and footnotes may be single spaced; pages numbered consecutively | `page-margin`, `body-leading`, `single-leading`, the `quote` show rule, the footer | same |
-| 22 NYCRR 1250.8(j) | Printing specifications statement at the end of the brief: the means of preparation, the typeface name, point size, line spacing, and the word count (the signer's representation covers it) | `printing-statement(words)`: the typeface is the one this file sets (EB Garamond), the word count is the one computed from the sample | same |
+| 22 NYCRR 1250.8(j) | Printing specifications statement at the end of the brief: the means of preparation, the typeface name, point size, line spacing, and the word count (the signer's representation covers it) | `printing-statement(words)`: the typeface is the one this file sets (Times New Roman), the word count is the one computed from the sample | same |
 | 22 NYCRR 1250.8(g)(2) | Typewritten reply briefs: 25 pages. Not used here: this brief is computer-generated and the (f)(2) word limit applies | none | same |
 
 Not verified in this run: the Appellate Division's own department rules (First Department, 22 NYCRR Part 600; Second, Part 670; Third, Part 800; Fourth, Part 1000). They may add requirements that apply in one department only. Also not verified: the proof-of-service rule (where and how the proof is made). The affidavit page is a blank form (see below).
@@ -71,11 +71,11 @@ Read it as a diagnostic. The high-overlap pages are the body text the sample tra
 - Defects found and fixed along the way:
   1. The cover did not fit one page at any spacing. The body's text edges (`top-edge`/`bottom-edge` at ascender and descender) make each line box taller, and the cover has about 35 lines. The cover now uses glyph bounds for its own line boxes (`cover-body`), and the counsel telephone numbers share a line with their email addresses. The cover fits on one page at the largest spacing in the ladder.
   2. The signature block printed "Dated" and the place in the wrong order (the sibling's order). It now reads "Dated: August 18, 2023" then "New York, New York", as the exemplar does. The "By:" line sits in the Sidley block (the block marked `by: true`), not the first block.
-  3. The printing statement names the typeface the PDF uses (EB Garamond), not the exemplar's Times New Roman. Stated as it is.
+  3. The printing statement names the typeface the PDF uses (Times New Roman since 2026-10-22; was EB Garamond).
 
 ## Known gaps (not fixed here; for David)
 
-1. **Typeface.** The rule asks for a serifed, proportionally spaced face "such as Times Roman" at 14 point. "Such as" is an example, not a named face, so the template keeps EB Garamond (`fonts/eb-garamond`), which the rule allows; no court-named substitute applies. EB Garamond has a smaller x-height than Times New Roman, so its 14 pt looks smaller on the page than the exemplar's Times 14 pt. The point size is the rule's; the visual match is not. Checked 2026-10-15 against the LII copy of 1250.8(f)(1).
+1. **Typeface.** The rule asks for a serifed, proportionally spaced face "such as Times Roman" at 14 point; the template sets Times New Roman, the house standard and the exemplar's face (2026-10-22, fb-595.68.37; was EB Garamond). Checked 2026-10-15 against the LII copy of 1250.8(f)(1).
 2. **Sample is an excerpt.** The exemplar is 38 pages; the body is pages 1 to 30. The sample transcribes: the Preliminary Statement (complete); Argument I's opening and PDE paragraphs; I.A's first part and its Klostermann paragraph; Point II, II.A's first four paragraphs (the cross-appeal and *N.Y. State Inspection* points) and the start of the B & H paragraph; the conclusion; and the signature block. It does not transcribe: I.A's remaining paragraphs; I.B; II.A's last paragraphs; II.B and its subparts; the footnotes (their numerals are dropped from the text, and footnote text is not transcribed); the cover's inside page (counsel continuation, Public Counsel and the other Sidley attorneys, and the PDE intervenor caption). The render therefore jumps from the middle of II.A to the Conclusion. The sample is for layout comparison, not a copy of the brief.
 3. **Word count and the printing statement.** The count printed in the sample's printing statement is 1,652: the sample's own count, not the filed brief's (6,915). The template computes the count from the markdown body, as 1250.8(f)(2) and (j) intend for the full brief.
 4. **Proof of service.** The exemplar copy has none. The affidavit page is a blank form (STATE OF NEW YORK / COUNTY OF / deposes and says ... ); its placement and content are not verified against Part 1250 and should be checked before use.
@@ -112,16 +112,10 @@ Searches run on 2026-10-14:
 
 ## Engines
 
-**docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/nyappdiv-reply-brief.lua`; output `usage/OUTPUT-<id>.docx`).
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.68.37): Times New Roman 14 pt (1250.8(f)(1)), footnotes at the same size, the body in exact 28 pt line boxes (double spacing, 1250.8(h)), single lines (cover, headings, quotations, tables, footnotes, signature, page number) in 16.1 pt boxes, first-fit ragged-right breaking with no kerning, ligatures or hyphenation.
 
-- Matches the typst form: letter, 1 in margins, EB Garamond 14 pt body, double-spaced body with a 0.5 in first-line indent, single-spaced headings, block quotations, signature block and printing statement; centered page number in the footer, none on the cover.
-- Differs: "double" is Word's double spacing (`w:line="480"`), not the typst leading, so line breaks and page counts differ. Word and LibreOffice also paginate differently from each other.
-- Differs: the contents is a TOC field with cached entries and no page numbers; Word or LibreOffice must update fields. The authorities list has no page references (a TOA field needs the same update, and LibreOffice does not honor TA/TOA fields).
-- The cover is a centered layout, not the typst cover with its rules and counsel column. The affidavit of service is a blank form with underscores. The word limit (7,000) is a hard stop in the filter, as in typst.
-- The word count and the word limit are computed by the filter from the markdown source, not by Word.
-- Validated: `tools/render.sh --engine docx` writes the `.docx`; `unzip -tq` and `xmllint --noout` pass on every XML part of the output and of `reference.docx`.
+**docx** (`docx/reference.xml`, `docx/nyappdiv-reply-brief.lua`; outputs `usage/OUTPUT-<id>.docx` and `.docx.pdf`, built by `fb render`, no shell).
 
-BLOCKED (docx engine, not passable on this box):
-
-- **docx.pdf gates (Gates 0 and 1, `tools/check.sh --engine docx`): BLOCKED.** LibreOffice (`soffice`) is not installed on this box, so no `usage/OUTPUT-<id>.docx.pdf` exists and the check cannot run. Stamp `usage/.check-docx.txt` not written.
-- **Pages reviewed: 0.** No `.docx` page was rendered or looked at, and the file was not opened in Word or LibreOffice, so no "no repair prompt" result is recorded.
+- The filter writes every paragraph with the typst template's spacing in twips: the cover (docket and argument notice in a two-column row, court, double rules, caption, title, counsel, whom they represent), the contents and authorities with page numbers from `fb render`'s needles (front matter i, ii; body from 1; cover unnumbered), the headings, block quotations, a paragraph pandoc would read as a list ("(1) ...") kept a paragraph as in typst, the last paragraph kept with the signature block, the printing specifications statement with the word count (counted from the markdown rule for rule as typst counts) and the affidavit of service (blanks as underscores). A paragraph that anchors a footnote is left to pandoc (Body Text), which writes the note in Footnote Text.
+- Gate 4 CROSS-ENGINE is gated (`eval.yaml`, `params.cross_engine: gate`): the docx breaks every line and page where typst does (XENG-001..003 PASS).
+- Word may paginate slightly differently from LibreOffice (docs/DOCX.md); the checked PDF is LibreOffice's.

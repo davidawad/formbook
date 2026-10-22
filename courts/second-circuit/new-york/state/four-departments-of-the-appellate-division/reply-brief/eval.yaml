@@ -1,0 +1,7 @@
+# 22 NYCRR 1250.8(f)(1)(i) (../rules.md NYAPPDIV-FORM-002): the body of a proportionally spaced brief is in 14-point type.
+font:
+  size_pt: 14
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (fb-595.68.37, on the shared layout model lib/*/xengine*), so a difference fails.
+params:
+  cross_engine: gate
