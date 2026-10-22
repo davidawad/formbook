@@ -1,5 +1,10 @@
-# Gate 4 CROSS-ENGINE: reported, not gated. This folder is not yet on the shared document model (fb-595.54.12): its
-# template needs features the model lacks (docs/open-items/fb-595.54.34.md, "shared-model requests"; the serial lane
-# fb-595.54.82), so it has no latex or docx engine to compare. Overrides the court folder's `gate`.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LibreOffice sets a footnote that does not fit under its anchor's line on the next page and keeps the line (typst
+  # and LaTeX move the line on with its note): INPUT-petition-for-rehearing, body page 6 ("the basis of her unlawful
+  # imprisonment.4", a long note), and every page after it shifts (XENG-002, XENG-003). No docx setting moves the line
+  # (as fb-595.54.13's Pennsylvania amicus brief); reported, not gated.
+  cross_engine_docx: report
