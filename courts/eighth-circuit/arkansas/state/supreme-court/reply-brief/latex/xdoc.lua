@@ -164,6 +164,7 @@ return require("latex.xdoc")({
           ["text"] = "{signature.firm}",
           ["left"] = 230.4,
           ["above"] = 16.1,
+          ["optional"] = true,
         },
         {
           ["text"] = "/s/ {signature.signer}",
