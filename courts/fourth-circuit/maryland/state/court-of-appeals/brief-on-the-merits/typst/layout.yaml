@@ -1,0 +1,89 @@
+# Court of Appeals of Maryland (Supreme Court of Maryland, md): brief on the merits (a principal brief after the writ
+# of certiorari). The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are
+# generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to Md. Rules 1-301(c), 8-112, 8-503 and
+# 8-504 (../rules.md, MD-*); lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant.
+size: 13                  # MD-FORM-004: not less than 13 points for proportionally spaced fonts, footnotes too
+pitch:
+  body: 29.9              # MD-FORM-002: double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # MD-FORM-002: headings, indented quotations and footnotes single spaced (1.15 x 13 pt)
+margin: {top: 108, bottom: 72, left: 108, right: 72}   # MD-FORM-001: top and left 1 1/2 in, bottom and right 1 in
+indent: 36
+# MD-FORM-005: pages consecutively numbered; the cover counts as page 1 and prints no number (the filed brief's
+# table of contents is page 2)
+page_number: {align: center, from: 2}
+footnote: {size: 13, gap: 7}            # MD-FORM-004, -002: 13 points, single spaced
+quote: {left: 36, right: 36, above: 13, below: 13}     # MD-FORM-002: indented quotations, single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 15.6, below: 13}
+  - {bold: true, above: 15.6, below: 10.4}
+  - {bold: true, italic: true, above: 13, below: 7.8}
+# The cover (MD-CONV-001): the court, the docket number and term, the parties (each side's names, its designation
+# indented; "v." between them), the proceedings below, the title, then counsel.
+cover:
+  - {text: "IN THE", align: center, bold: true}
+  - {text: "SUPREME COURT OF MARYLAND", align: center, bold: true}
+  - {text: "{record_number}", align: center, bold: true, above: 15.6, optional: true}
+  - {text: "{term}", align: center, optional: true}
+  - each: caption
+    above: 20.8
+    between:
+      - {text: "v.", indent: 36, above: 10.4, below: 10.4}
+    blocks:
+      - {text: "{names}"}
+      - {text: "{designation}", indent: 36, optional: true}
+  - {text: "{proceeding}", align: center, above: 15.6, optional: true}
+  - {fill: 1}
+  - {text: "{doc_title}", align: center, bold: true}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - {text: "{names}", above: 15.6}
+      - {text: "{lines}"}
+# Rule 8-504(a): the table of contents and the table of citations, each on its own page; the citations grouped by
+# kind, a list of seven pages or more "passim".
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 19.5, step: 19.5, above: 11.7}
+authorities:
+  title: "Table of Citations"
+  col: 56
+  hang: 28.8
+  above: 7.8
+  passim: 7
+  group: {bold: true, above: 15.6, below: 2.6}
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: other, title: "Other Authorities"}
+    - {kind: rule, title: "Rules"}
+    - {kind: constitution, title: "Constitutional Provisions"}
+# Rule 8-504(a)(9): the date line and the signature block after the conclusion, never split; then the certification
+# of word count and compliance (MD-CERT-001, the official form) on its own page.
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "{submitted}", pitch: body, optional: true}
+      - each: signature
+        blocks:
+          - {text: "{lines}", left: 216, above: 10.4}
+    above: 15.6
+  - {break: true}
+  - when: word_count
+    blocks:
+      - {text: "CERTIFICATION OF WORD COUNT AND COMPLIANCE WITH RULE 8-112", heading: 1}
+      - {text: "1. This brief contains {word_count} words, excluding the parts of the brief exempted from the word count by Rule 8-503.", pitch: body, indent: 36}
+      - {text: "2. This brief complies with the font, spacing, and type size requirements stated in Rule 8-112.", pitch: body, indent: 36}
+      - each: certificate_signature
+        blocks:
+          - {text: "{lines}", left: 216, above: 15.6}
+# The body's pertinent-law part (Rule 8-504(a)(8)) after the certification, on its own page, as the Court's order of
+# parts has it; then the certificate of service (Md. Rule 1-321) on its own page.
+tail: {at: "CITATION AND VERBATIM", break: true, pitch: 29.9, indent: 36}
+after_tail:
+  - {break: true}
+  - {text: "CERTIFICATE OF SERVICE", heading: 1}
+  - {text: "{service.text|____________}", pitch: body, indent: 36}
+  - each: service.recipients
+    blocks:
+      - {text: "{names}", left: 36, above: 13}
+      - {text: "{lines}", left: 36}
+  - {text: "{service.signature}", left: 216, above: 15.6}
