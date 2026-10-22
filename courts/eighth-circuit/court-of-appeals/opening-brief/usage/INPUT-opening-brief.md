@@ -47,7 +47,7 @@ signature:
     - "Aaron.VanOort@FaegreDrinker.com"
 date: "September 10, 2026"
 word_processor: "Typst 0.15.0"
-typeface: "EB Garamond"
+typeface: "Times New Roman"
 disclosure: "Appellant Sweepsteaks Limited has a parent corporation, Well Done STK Limited. No publicly held corporation owns 10 percent or more of Sweepsteaks Limited’s or Well Done STK’s stock. See Fed. R. App. P. 26.1(a); 8th Cir. R. 26.1A."
 service:
   certificate: true
