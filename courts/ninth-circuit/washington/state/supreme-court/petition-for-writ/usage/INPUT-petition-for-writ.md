@@ -21,23 +21,23 @@ signature:
   firm: "SPOKANE COUNTY PROSECUTOR"
   lines: ["Prosecuting Attorney", "Deputy Prosecuting Attorney", "*Attorneys for Petitioner Spokane County*"]
 authorities:
-  a0_0: {kind: case, cite: "*Baker v. McCollan*, 443 U.S. 137, 99 S. Ct. 2689, 61 L. Ed. 2d 433 (1979)"}
-  a0_1: {kind: case, cite: "*Berger v. United States*, 295 U.S. 78, 55 S. Ct. 629, 79 L. Ed. 1314 (1935)"}
-  a0_2: {kind: case, cite: "*Ohlinger v. Watson*, 652 F.2d 775 (9th Cir. 1980)"}
-  a0_3: {kind: case, cite: "*Oviatt By & Through Waugh v. Pearce*, 954 F.2d 1470 (9th Cir. 1992)"}
-  a0_4: {kind: case, cite: "*Trueblood v. Wash. State Dept. of Soc. & Health Servs.*, 101 F. Supp. 3d 1010 (W.D. Wash. 2015)"}
-  a1_0: {kind: case, cite: "*Burrowes v. Killian*, 195 Wn.2d 350, 459 P.3d 1082 (2020)"}
-  a1_1: {kind: case, cite: "*City of Tacoma v. O’Brien*, 85 Wn.2d 266, 534 P.2d 114 (1975)"}
-  a1_2: {kind: case, cite: "*Eugster v. City of Spokane*, 118 Wn. App. 383, 76 P.3d 741 (2003)"}
-  a1_3: {kind: case, cite: "*Kanekoa v. Wash. State Dept. of Soc. & Health Servs.*, 95 Wn.2d 445, 626 P.2d 6 (1981)"}
-  a1_4: {kind: case, cite: "*Pierce County Office of Involuntary Commitment v. Western State Hospital*, 97 Wn.2d 264, 644 P.2d 131 (1982)"}
-  a1_5: {kind: case, cite: "*State v. Coley*, 180 Wn.2d 543, 326 P.3d 702 (2014)"}
-  a1_6: {kind: case, cite: "*State v. Hand*, 192 Wn.2d 289, 429 P.3d 502 (2018)"}
-  a1_7: {kind: case, cite: "*State v. Luvert*, 20 Wn. App. 2d 133, 499 P.3d 211 (2021)"}
-  a1_8: {kind: case, cite: "*State v. Monday*, 171 Wn.2d 667, 257 P.3d 551 (2011)"}
-  a1_9: {kind: case, cite: "*State v. Striker*, 87 Wn.2d 870, 557 P.2d 847 (1976)"}
-  a1_10: {kind: case, cite: "*Walker v. Munro*, 124 Wn.2d 402, 879 P.2d 920 (1994)"}
-  a1_11: {kind: case, cite: "*Washington State Labor Council v. Reed*, 149 Wn.2d 48, 65 P.3d 1203 (2003)"}
+  a0_0: {kind: case, cite: "*Baker v. McCollan*, 443 U.S. 137, 99 S. Ct. 2689, 61 L. Ed. 2d 433 (1979)", sort: "0001"}
+  a0_1: {kind: case, cite: "*Berger v. United States*, 295 U.S. 78, 55 S. Ct. 629, 79 L. Ed. 1314 (1935)", sort: "0002"}
+  a0_2: {kind: case, cite: "*Ohlinger v. Watson*, 652 F.2d 775 (9th Cir. 1980)", sort: "0007"}
+  a0_3: {kind: case, cite: "*Oviatt By & Through Waugh v. Pearce*, 954 F.2d 1470 (9th Cir. 1992)", sort: "0008"}
+  a0_4: {kind: case, cite: "*Trueblood v. Wash. State Dept. of Soc. & Health Servs.*, 101 F. Supp. 3d 1010 (W.D. Wash. 2015)", sort: "0015"}
+  a1_0: {kind: case, cite: "*Burrowes v. Killian*, 195 Wn.2d 350, 459 P.3d 1082 (2020)", sort: "0003"}
+  a1_1: {kind: case, cite: "*City of Tacoma v. O’Brien*, 85 Wn.2d 266, 534 P.2d 114 (1975)", sort: "0004"}
+  a1_2: {kind: case, cite: "*Eugster v. City of Spokane*, 118 Wn. App. 383, 76 P.3d 741 (2003)", sort: "0005"}
+  a1_3: {kind: case, cite: "*Kanekoa v. Wash. State Dept. of Soc. & Health Servs.*, 95 Wn.2d 445, 626 P.2d 6 (1981)", sort: "0006"}
+  a1_4: {kind: case, cite: "*Pierce County Office of Involuntary Commitment v. Western State Hospital*, 97 Wn.2d 264, 644 P.2d 131 (1982)", sort: "0009"}
+  a1_5: {kind: case, cite: "*State v. Coley*, 180 Wn.2d 543, 326 P.3d 702 (2014)", sort: "0010"}
+  a1_6: {kind: case, cite: "*State v. Hand*, 192 Wn.2d 289, 429 P.3d 502 (2018)", sort: "0011"}
+  a1_7: {kind: case, cite: "*State v. Luvert*, 20 Wn. App. 2d 133, 499 P.3d 211 (2021)", sort: "0012"}
+  a1_8: {kind: case, cite: "*State v. Monday*, 171 Wn.2d 667, 257 P.3d 551 (2011)", sort: "0013"}
+  a1_9: {kind: case, cite: "*State v. Striker*, 87 Wn.2d 870, 557 P.2d 847 (1976)", sort: "0014"}
+  a1_10: {kind: case, cite: "*Walker v. Munro*, 124 Wn.2d 402, 879 P.2d 920 (1994)", sort: "0016"}
+  a1_11: {kind: case, cite: "*Washington State Labor Council v. Reed*, 149 Wn.2d 48, 65 P.3d 1203 (2003)", sort: "0017"}
   a2_0: {kind: statute, cite: "RCW 7.16.160", sort: "02000"}
   a2_1: {kind: statute, cite: "RCW 7.16.170", sort: "02001"}
   a2_2: {kind: statute, cite: "RCW 7.69", sort: "02002"}
@@ -216,7 +216,7 @@ RCW [10.77.060](toa:a2_7)(c) (emphasis added).
 
 34\. Remedial sanctions for defendants awaiting competency restoration services may compensate the individual defendants and compel the Department to perform in an individual case. *See State v. [Luvert](toa:a1_7)*, 20 Wn. App. 2d 133, 499 P.3d 211 (2021). Even if the superior court holds the Department in contempt in individual cases as suggested by [*Luvert*](toa:a1_7), this does not address the State’s interests in having the appropriate services performed in a timely manner before the Department is out of compliance. These sanctions cannot address the ever increasing delays that impede the State’s and defendants’ legitimate interests to bring criminal cases to trial or work to further the State’s interest in an effective, organized competency evaluation and restoration system.
 
-35\. While the federal [*Trueblood*](toa:a0_4) court established a permanent injunction against the Department to ensure timely competency restoration services, the injunction is demonstrably insufficient to prevent the ongoing delays as evidenced in the Department’s competency evaluation and restoration system. *[Trueblood](toa:a0_4) v. Wash. State Dept. of Soc. & Health Servs.*, 101 F. Supp. 3d 1010, (W.D. Wn. 2015), *partially remanded and* *vacated by* *[Trueblood](toa:a0_4) v. Wash. State Dept. of Soc. & Health* *Servs* ., 822 F.3d 1037, 1043 (9th Cir. 2016). [*Trueblood*](toa:a0_4) also applies only to defendants in pre-trial custody. Out-of-custody defendants are not protected by [*Trueblood*](toa:a0_4) to ensure their timely evaluation and competency restoration. The lack of a viable remedy risks continued dismissal of criminal charges for defendants awaiting treatment as identified in Attachments A and E.
+35\. While the federal [*Trueblood*](toa:a0_4) court established a permanent injunction against the Department to ensure timely competency restoration services, the injunction is demonstrably insufficient to prevent the ongoing delays as evidenced in the Department’s competency evaluation and restoration system. *[Trueblood](toa:a0_4) v. Wash. State Dept. of Soc. & Health Servs.*, 101 F. Supp. 3d 1010, (W.D. Wn. 2015), *partially remanded and* *vacated by* *[Trueblood](toa:a0_4) v. Wash. State Dept. of Soc. & Health* *Servs.*, 822 F.3d 1037, 1043 (9th Cir. 2016). [*Trueblood*](toa:a0_4) also applies only to defendants in pre-trial custody. Out-of-custody defendants are not protected by [*Trueblood*](toa:a0_4) to ensure their timely evaluation and competency restoration. The lack of a viable remedy risks continued dismissal of criminal charges for defendants awaiting treatment as identified in Attachments A and E.
 
 36\. In analogous situations where no alternative remedies have existed, this Court has issued or affirmed writs of mandamus to address the Department’s nonfeasance. For example, this Court upheld a superior court writ of mandamus when the Department did not fulfill its statutory duties to accept inmates sentenced to prison into its reception and classification center. [*Kanekoa*](toa:a1_3), 95 Wn.2d at 450. In doing so, this Court recognized the legislature creates a duty for the Department to act when the statutory language specifies the Department “shall” perform a given action, and the conditions to act are met. *Id.* at 448. Likewise, mandamus is appropriate to compel a state actor to perform ongoing actions in recurring cases, so long as the commanded actions are precisely defined. *Id*. at 450.
 

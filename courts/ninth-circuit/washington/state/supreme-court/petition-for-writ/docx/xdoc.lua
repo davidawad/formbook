@@ -77,7 +77,7 @@ return require("docx.xdoc")({
                 {
                   ["text"] = "{designation}",
                   ["italic"] = true,
-                  ["left"] = 100.8,
+                  ["left"] = 36,
                 },
               },
             },

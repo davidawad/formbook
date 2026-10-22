@@ -31,7 +31,7 @@ cover:
               - {text: "vs.", align: center, above: 4.2, below: 4.2}
             blocks:
               - {text: "{names}"}
-              - {text: "{designation}", italic: true, left: 100.8}
+              - {text: "{designation}", italic: true, left: 36}   # a two-party designation fits unbroken
       - valign: center
         blocks:
           - {text: "{case_number}"}
