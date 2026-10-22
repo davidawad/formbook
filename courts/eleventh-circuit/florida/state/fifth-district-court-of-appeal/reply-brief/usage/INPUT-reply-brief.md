@@ -140,7 +140,7 @@ The Dunham court found that "[l]ike the nonresident trustee in *Hanson*, DTC is 
 
 As noted above, *Dunham* also relied on *Walden v. Fiore*, 571 U.S. 277 (2014), which controls this matter. In *Walden*, the United States Supreme Court stated:
 
-> "[o]ur "minimum contacts" analysis looks to the defendant's contacts with the forum State itself, not the defendant's contacts with persons who reside there. *See, e.g., International Shoe, supra*, at 319, 66 S.Ct. 154 (Due process "does not contemplate that a state may make binding a judgment in personam against an individual ... with which the state has no contacts, ties, or relations")."
+> “[o]ur “minimum contacts” analysis looks to the defendant's contacts with the forum State itself, not the defendant's contacts with persons who reside there. *See, e.g., International Shoe, supra*, at 319, 66 S.Ct. 154 (Due process "does not contemplate that a state may make binding a judgment in personam against an individual ... with which the state has no contacts, ties, or relations”).”
 
 *Id.* at 285. (emphasis added).
 

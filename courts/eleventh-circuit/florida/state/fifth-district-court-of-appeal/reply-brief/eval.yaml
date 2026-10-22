@@ -3,3 +3,10 @@
 font:
   size_pt: 14
   pdf_prefix: "TeXGyreBonum"
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex/ and docx/ are generated from typst/layout.yaml.
+# LaTeX is gated (536/536 lines). Word is reported (529/536; pages and page ends equal): typst fills two lines to
+# within 0.12 pt of the measure and LibreOffice, which sets Bonum up to 0.77 pt wider over a line, ends each a word
+# early (a contents row on page 2, a body line on page 19); the model's line-fit tolerance, docs/open-items/fb-595.54.41.md.
+params:
+  cross_engine: gate
+  cross_engine_docx: report

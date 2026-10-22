@@ -1,0 +1,85 @@
+# Florida Fifth District Court of Appeal (fladistctapp5): reply brief. The whole layout, as data for the shared document
+# model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to Fla. R. App. P. 9.045 and 9.210 (../../rules.md, FLADISTCTAPP5-*); lengths in points. No case text here:
+# every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # FLADISTCTAPP5-FORM-005: Bookman Old Style 14 point; footnotes and quotations too (-FORM-006)
+pitch:
+  body: 32.9              # FLADISTCTAPP5-FORM-004: double spaced (Word's double for Bookman Old Style 14 pt, 2 x 16.45)
+  single: 16.45           # cover, headings, tables, quotations, footnotes, signature: single (-FORM-006)
+# FLADISTCTAPP5-FORM-003: no less than one inch; top and bottom 4 pt deeper keep a note mark or descender inside it
+margin: {top: 76, bottom: 76, left: 72, right: 72}
+indent: 36                # style: half-inch first-line indent
+page_number: {align: center, from: 1}   # style (Rule 9.045 sets none; the filed briefs): the cover is page 1
+footnote: {size: 14, gap: 7}             # FLADISTCTAPP5-FORM-006: 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # FLADISTCTAPP5-FORM-006: quotations single spaced, 14 point
+heading:                                 # FLADISTCTAPP5-FORM-006: at the text size, single spaced
+  - {align: center, bold: true, upper: true, above: 19.6, below: 14}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, hang: 36, above: 14, below: 11.2}
+# FLADISTCTAPP5-BRIEF-001: the cover: the court, the case number, the caption with each party's designation closed by
+# a rule, the proceeding and the lower tribunal's number; the title halfway between the caption and counsel, counsel at
+# the foot of the cover.
+cover:
+  - {text: "{court}", align: center, bold: true, upper: true}
+  - {text: "Case No. {case_number}", align: center, bold: true, above: 8.4}
+  - each: caption
+    above: 16.8
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true, above: 5.6}
+  - {text: "_______________________________/", align: center}
+  - {text: "{proceeding}", align: center, above: 21.6, optional: true}
+  - {text: "{lower_court_case}", align: center, optional: true}
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true, upper: true}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - {text: "{names}", bold: true, left: 126, above: 8.4}
+      - {text: "{lines}", left: 126, optional: true}
+# FLADISTCTAPP5-BRIEF-001: the table of contents and the table of authorities, each on its own page; an authority the
+# filer lists as passim carries its `pages` text.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 21, step: 21, above: 12.6}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 4.2}
+# Rule 9.045 sets no signature form: the date, the closing, then 2.25 in from the margin the firm and its lines, each
+# signer's "/s/" and typed name with the bar number and e-mail, the role, never split; then the certificate of service
+# (Rule 2.516) signed by the signers, and the certificate of compliance (Rule 9.045(e)) right after it, never split.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, pitch: body, optional: true}
+      - {text: "{signature_intro}", optional: true}
+      - when: signature.firm
+        blocks:
+          - {text: "{signature.firm}", bold: true, left: 162, above: 5.6}
+          - {text: "{signature.firm_lines}", left: 162, optional: true}
+      - each: signature.signers
+        blocks:
+          - {text: "/s/ {name}", left: 162, above: 11.2}
+          - {text: "{lines}", left: 162, optional: true}
+      - {text: "{signature.lines}", left: 162, above: 8.4, optional: true}
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", heading: 1}
+      - {text: "{service.paragraphs}", indent: 36, pitch: body}
+      - {text: "{service.closing}", indent: 36, pitch: body, optional: true}
+      - &signers
+        each: signature.signers
+        blocks:
+          - group:
+              - {text: "/s/ {name}", left: 162}
+              - {text: "{lines}", left: 162, optional: true}
+            above: 11.2
+      - group:
+          - {text: "CERTIFICATE OF COMPLIANCE", heading: 1}
+          # Rule 9.045(e) and 9.210(a)(2)(B): the certificate's wording as the court's filers give it (a constant).
+          - {text: "I CERTIFY that pursuant to Florida Rules of Appellate Procedure 9.045(b) and 9.210(a)(2)(B), as amended, this pleading was prepared using proportionately spaced Bookman Old Style 14-point font and complies with the applicable font and word count limit requirements.", indent: 36, pitch: body}
+          - *signers
