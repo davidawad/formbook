@@ -150,8 +150,8 @@
 
 #let nevapp-brief(meta, body) = {
   set document(title: need(meta, "brief_title"))
-  // NRAP 32(a)(4): pages numbered at the bottom. The cover and disclosure page are unnumbered; the table of
-  // contents and table of authorities take lowercase Roman numerals; the body starts at 1 (set in the body page below).
+  // NRAP 32(a)(4): pages numbered at the bottom. The cover is unnumbered; the disclosure page, the table of
+  // contents and the table of authorities take lowercase Roman numerals; the body starts at 1 (set in the body page below).
   set page(paper: "us-letter", margin: page-margin, numbering: none, number-align: center + bottom)
   set text(font: font-family, size: type-size, lang: "en", hyphenate: false)
   set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: false)
@@ -221,10 +221,14 @@
     }
   ]
 
-  // ---- NRAP 26.1 disclosure statement (NRAP 28(a)(1), applied to the reply by NRAP 28(c)); unnumbered ----
+  // The Roman count starts with the first page after the cover (as in the opening brief).
+  counter(page).update(1)
+
+  // ---- NRAP 26.1 disclosure statement (NRAP 28(a)(1), applied to the reply by NRAP 28(c)) ----
+  // DEF-COVER-001: it prints "i" like the opening brief's disclosure; unnumbered, it read as a second cover page.
   if "disclosure" in meta {
     let d = meta.disclosure
-    page[
+    page(numbering: "i")[
       #align(center, text(weight: "bold")[NRAP 26.1 DISCLOSURE])
       #v(0.3in)
       #for p in d.at("paragraphs", default: ()) { par(inl(p)) }
@@ -233,10 +237,9 @@
     ]
   }
 
-  // ---- Table of contents (NRAP 28(a)(2)): lowercase Roman numerals; the counter restarts here ----
+  // ---- Table of contents (NRAP 28(a)(2)): lowercase Roman numerals, continuing from the disclosure ----
   if meta.at("toc", default: true) {
     page(numbering: "i")[
-      #counter(page).update(1)
       #set par(leading: single-leading, first-line-indent: 0pt)
       #align(center, text(weight: "bold")[TABLE OF CONTENTS])
       #v(0.5em)
