@@ -1,0 +1,49 @@
+# Supreme Court of Guam (guam): petition for rehearing (GRAP 30, GRAP 16(b)(2)). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to GRAP 16(a) (../../rules.md, GUAM-*); lengths in points. No case text here: every string printed comes
+# from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # GUAM-FORM-003: a proportionally spaced serif face, 14-point or larger
+pitch:
+  body: 32.2              # GUAM-FORM-001: double-spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # headings, quotations, footnotes, cover and signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # GUAM-FORM-002: at least one inch on all four sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # GUAM-FORM-002: numbers in the margin; the cover none, the
+                                                   # contents i, the brief from 1 (as filed)
+footnote: {size: 14, gap: 7}            # GUAM-FORM-001, -003: 14 point, single spaced
+quote: {left: 36, right: 36, above: 14, below: 14}   # GUAM-FORM-001: long quotations indented and single spaced
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, above: 16.8, below: 11.2}
+  - {bold: true, above: 15.4, below: 8.4}
+# The cover (GUAM-COVER-001, GRAP 16(a)(2)): the case number centered at top, the court, the case title, the brief's
+# title, counsel.
+cover:
+  - {text: "SUPREME COURT CASE NO. {case_number}", align: center, bold: true}
+  - {text: "{court_lines}", align: center, bold: true, above: 33.6}
+  - {text: "{caption}", align: center, left: 28.1, right: 28.1, above: 30.8}
+  - {text: "{brief_title}", align: center, bold: true, left: 28.1, right: 28.1, above: 36.4}
+  - {text: "{counsel}", align: center, above: 47.6}
+# The table of contents on its own page (as filed).
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 36, step: 18, above: 7.2}
+# The date and the signature (GUAM-SIG-001), never split; then each certificate (GUAM-CERT-001, -003, -004) on a page
+# of its own: its title, its text in the body's form, the recipients one under another, what follows them, the date
+# (when given) and the signature (the certificate's own, else the brief's).
+closing:
+  - group:
+      - {text: "Respectfully submitted this {date}.", pitch: body}
+      - {text: "{signature}", right: 224.65, above: 14}
+    above: 14
+  - each: certificates
+    blocks:
+      - {break: true}
+      - {text: "{title}", align: center, bold: true, below: 16.8}
+      - {text: "{text}", pitch: body, indent: 36}
+      - when: recipients
+        blocks:
+          - each: recipients
+            above: 16.8
+            blocks: [{text: "{lines}", above: 11.2}]
+      - {text: "{after}", pitch: body, indent: 36, optional: true, above: 19.6}
+      - {text: "Dated this {dated}.", pitch: body, optional: true}
+      - {text: "{signature}", right: 224.65, above: 14}

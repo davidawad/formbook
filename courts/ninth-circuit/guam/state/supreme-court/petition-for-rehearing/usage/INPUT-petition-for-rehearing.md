@@ -20,7 +20,7 @@ counsel:
 date: 14th day of June, 2024
 signature:
   - OFFICE OF THE ATTORNEY GENERAL
-  - ______________________________
+  - \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
   - Douglas B. Moylan
   - Attorney General of Guam
 certificates:
