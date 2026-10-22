@@ -5,7 +5,7 @@ Governs a motion in an adversary proceeding or contested matter, with a memorand
 ## Exemplar
 
 - `usage/FILED-EXAMPLE-motion-brief.pdf`: Gray & Associates, L.L.P. for the defendants, "Motion ... to Dismiss Adversary Complaint" with notice of motion and "Brief in Support of Motion to Dismiss Adversary Complaint", Adv. No. 22-02024-rmb, filed 04/08/2022 (38 pp. including Exhibits A-G). Provenance and checksum in `usage/SOURCE.md`.
-- Sample: `usage/INPUT-motion-brief.md` (portion transcription; citations not checked against reporters; see the header of the sample). Render: `usage/OUTPUT-motion-brief.typst.pdf` (11 pp.). Overlay: `usage/OVERLAY-vongermeten-motion.pdf` and `.txt`.
+- Sample: `usage/INPUT-motion-brief.md` (portion transcription; citations not checked against reporters; see the header of the sample). Render: `usage/OUTPUT-motion-brief.typst.pdf` (12 pp.; docx `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`, 12 pp.). Overlay: `usage/OVERLAY-vongermeten-motion.pdf` and `.txt`.
 
 ## Governing rules (verified 2026-10-14)
 
@@ -27,33 +27,32 @@ Checked and not found: a page limit for motions or briefs in the 2026 Local Rule
 
 ## Markdown contract
 
-Frontmatter: `debtor`, `plaintiff`, `defendant`, `adversary_number` (as in the complaint); `movants` and `notice_verb` (for the notice); `objection_days` (integer, at least 14); `title` (the motion's title) and `brief_title`; `dated`; `signers` (`signer`, `lines`); `certificate` (`ecf` list, `non_ecf` list of `name`, `lines`). The body is one markdown file split into the motion and the brief by a line reading exactly `%%BRIEF%%`. Headings: level 1 is a centered bold section (INTRODUCTION, I. BACKGROUND, ...); level 2 is a bold subhead (A., B., ...). Subheads and paragraph numbers are typed by the drafter.
+Frontmatter: `debtor`, `plaintiff`, `defendant`, `adversary_number` (as in the complaint); `movants` and `notice_verb` (for the notice); `objection_days` (integer, at least 14); `title` (the motion's title) and `brief_title`; `dated`; `signers` (`signer`, `lines`); `certificate` (`ecf` list, `non_ecf` list of `name`, `lines`). The body is one markdown file split into the motion and the brief by a line reading exactly `<!-- BRIEF -->`. A markdown numbered list is set as numbered paragraphs (the number at the 0.5 in indent, the text from 1 in); a `>` quotation single-spaced, indented 0.5 in on both sides. Headings: level 1 is a centered bold section (INTRODUCTION, I. BACKGROUND, ...); level 2 is a bold subhead (A., B., ...). Subheads and paragraph numbers are typed by the drafter.
 
 ## What the overlay shows
 
 `usage/OVERLAY-vongermeten-motion.pdf`: red is our render, blue is the filed exemplar, black is agreement. Pages pair by word overlap (`OVERLAY-vongermeten-motion.txt`). Our page 1 (the generated notice) overlaps the filed page 1 at 22.6%, which is expected: the notice text is rule-driven and not the filed notice. Our page 4 (signature alone) pairs weakly (8.8%) with the filed page 2. Other pages overlap 46-70%, which reflects the font and line breaks.
 
-## Page review (Gate 2, every page rendered at 60 dpi and viewed)
+## Page review (Gate 2, every page of the typst and docx renders viewed at 50 dpi; fb-595.68.28)
 
-Pages reviewed: 11 of 11.
+Pages reviewed: 12 of 12 on both engines; the docx breaks every line and page as typst does (XENG-001..003).
 
 - p.1 (notice of motion and signature): clean; objection period from frontmatter.
-- p.2 (caption and motion start): clean; caption lines single-spaced; motion title centered.
+- p.2 (caption and motion start, numbered grounds 1-2): clean; caption single-spaced, the parties' row ruled above and below, the adversary number beside "v."; motion title centered bold.
 - p.3 (motion grounds 3-4 and WHEREFORE): clean.
 - p.4 (signature block alone): OPEN, see gaps.
-- p.5 (brief caption and INTRODUCTION): clean; first-line indents applied.
-- p.6-7 (background, standard of review): clean.
-- p.8 (argument A and B start): clean.
-- p.9 (argument B end, D, block quote): clean; block quote is indented and single-spaced.
-- p.10 (argument E, conclusion, signature): clean.
-- p.11 (certificate of service): clean; ECF and non-ECF service with date and person.
-
-Fixed during review: first-line indents were missing from the motion and brief body paragraphs, so the paragraphs ran together. Caption and signature line overlap was fixed by single-spacing the stacked lines.
+- p.5 (brief caption, INTRODUCTION, I. BACKGROUND): clean; headings centered bold, kept with the text.
+- p.6-7 (background, II. STANDARD OF REVIEW): clean.
+- p.8 (standard of review end, III. ARGUMENT, A.): clean; level-2 heading bold at the margin.
+- p.9 (A end, B, the bracketed omission note): clean.
+- p.10 (D, block quotation, E): clean; quotation single-spaced, 0.5 in in on both sides.
+- p.11 (E end, CONCLUSION, signature): clean.
+- p.12 (certificate of service): clean; ECF and non-ECF service with date and person.
 
 ## Known gaps / OPEN and ACCEPTED findings
 
-- OPEN: the motion's final WHEREFORE paragraph and its signature block split across pages 3-4; page 4 holds the signature block alone. The signature block is kept whole, but the template does not keep it with the preceding paragraph (needs keep-with-next across cmarker output). Clerks accept it, but a tier-2 pass would fix it.
-- ACCEPTED: font is EB Garamond 12 pt (the only vendored font); it looks smaller than the filed Times-like face at the same size. The rule sets the size, not the face.
+- OPEN: the motion's final WHEREFORE paragraph and its signature block split across pages 3-4; page 4 holds the signature block alone. (Still so after fb-595.68.28, in both engines.) The signature block is kept whole, but the template does not keep it with the preceding paragraph (needs keep-with-next across cmarker output). Clerks accept it, but a tier-2 pass would fix it.
+- ACCEPTED: font is Times New Roman 12 pt (vendored), the house standard; LR 9004-1(a) allows any proportional face at 12 pt or more.
 - OPEN: the notice text is rule-driven and does not follow the Official Form notice (LR 9014-1(a)(1)(A) asks for a notice that "substantially complies" and conforms with the appropriate Official Form). The Official Form was not fetched or compared. Before filing, check it against the form.
 - OPEN: the exemplar's footnotes (footnotes 1-3 in the brief) and its Exhibits A-G are not transcribed.
 - OPEN: argument C (claim preclusion under Wisconsin law) of the exemplar is omitted from the transcription and marked in the sample.
@@ -73,8 +72,7 @@ The overlay step is run on a temporary `OUTPUT-motion-brief.typst.pdf` copy, and
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference for the court's form.
-- **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/wieb.lua`): pandoc on a reference.docx built from pandoc's default (EB Garamond 12 pt, exact 24 pt line pitch, 1 in margins on letter paper, centered PAGE footer, bold centered level-1 headings, bold level-2, italic level-3, body paragraphs with a 0.5 in first-line indent, numbered paragraphs typed by the drafter). The filter lays out the notice of motion (page 1), the motion and the brief in support (each with its own caption), and the certificate of service, split at the `%%BRIEF%%` line. The captions and signature blocks are styled paragraphs with tab stops; no tables; the only raw openxml is the page breaks. Every case word comes from the frontmatter. Built to `usage/OUTPUT-motion-brief.docx`; the zip and XML parts were checked (`unzip -tq`, `xmllint --noout`).
-  - Matches the typst form: font and size, double spacing, margins, page order (notice, motion, brief, certificate), the caption order, the notice text and objection period from frontmatter, the "Respectfully submitted" and "/s/" signature blocks, the certificate text.
-  - Differs or unverified: the typst caption is a two-column grid with a vertically centred right column; the docx approximates it with tab stops and puts the adversary number on the "v." row. Its rules are paragraph borders, not checked against typst's lines. The numbered-paragraph layout is a pleading convention, not the typst enum layout. The motion's signature block is kept together but not with the preceding paragraph (the typst template does not do this either; see the Known gaps above). Word's line breaks may differ from typst's.
-  - BLOCKED on this box: `soffice` (LibreOffice) is not installed, so `usage/OUTPUT-vongermeten-motion.docx.pdf` was not produced and the docx Gates 0 to 3 cannot run. No page was rendered or reviewed (0 pages). Not opened in Word. The typst template has no table of contents or table of authorities, so the TOC/TOA field caveat does not apply to this doc type.
+- **typst** (primary, `typst/`): the reference for the court's form, on the shared cross-engine layout model (`lib/typst/xengine.typ`): 24 pt double pitch, 13.8 pt single lines, no extra space between paragraphs.
+- **docx** (`docx/reference.xml`, `docx/wieb.lua`): `reference.xml` holds the Word styles (`base="xengine"` in the typst face `{font}`, Times New Roman 12 pt, 480-twip body and 276-twip single line boxes, the 12 pt page-number footer 0.5 in above the page edge); `fb render` builds the reference document from it. The filter writes every paragraph as WordprocessingML on `lib/docx/xengine.lua`: the notice of motion, the motion and the brief in support (each with its caption, a table whose parties' row is ruled above and below), and the certificate of service, each starting a page, split at the `<!-- BRIEF -->` line; the frontmatter strings come from fb render's `$FORMBOOK_META`. No script: `fb render` runs pandoc with the filter and packs the archive (fb-595.68.28; were `build-reference.sh` and a committed `reference.docx` naming EB Garamond).
+  - Cross-engine (fb-595.68.28): `sh tools/check.sh <this folder> --engine docx`: XENG-001..003 PASS (286/286 lines, 12 = 12 pages); `params.cross_engine: gate` in `eval.yaml`. typst 9 and docx 13 checks passed, 0 failed.
+  - The `.docx` converts in LibreOffice without error (the check's conversion); not opened in Word. No table of contents or of authorities.
