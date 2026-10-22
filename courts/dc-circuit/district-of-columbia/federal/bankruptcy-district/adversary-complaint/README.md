@@ -7,10 +7,10 @@ Folder: `courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/adve
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md`: the whole 13-page complaint transcribed, plus the consent statement the rules require and the exemplar lacks (gap 3) |
-| typeface | face required: none (LBR and FRBP checked, see gap 2). Font: EB Garamond (`docs/FONTS.md`: "no face named" row) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Bold, Italic, all embedded), no warnings; re-rendered 2026-10-15 |
+| typeface | face required: none (LBR and FRBP checked, see gap 2). Font: Times New Roman (the house standard, fb-9fyu; the exemplar's face) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 13 pages, typst 0.15.0, vendored Times New Roman only, no warnings; re-rendered 2026-10-22 (fb-595.68.6) |
 | overlay | ok: `usage/OVERLAY-square-funding.pdf` and `OVERLAY-square-funding.txt` (re-run 2026-10-15 against `usage/FILED-EXAMPLE-adversary-complaint-2.pdf`) |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi to PNG and viewed, 2026-10-15) |
+| pages reviewed | 13 of 13 on typst and docx (every page viewed side by side, 2026-10-22) |
 | check gates | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this is a doc-type folder, and `tools/` is out of scope for this box |
 
 File names: the brief asks for `<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, and `overlay.sh` reads `OUTPUT-<id>.pdf`, so the tools' names are used. The sample is `INPUT-<id>.md`, following the file-role names in `CLAUDE.md`.
@@ -46,67 +46,41 @@ Not produced by this template: the adversary cover sheet (Official Form 104), th
 
 - Letter paper, one-inch margins on all sides, page number centred at the foot of each page.
 - Counsel block single-spaced in the upper left (LBR 5005-1(c)); the court name in bold capitals; the caption as a three-column grid (party names, a column of ")" marks, the case numbers); the title of the paper in bold capitals centred.
-- Body double-spaced: a 27.6 pt baseline pitch at 12 pt (measured on the exemplar with `pdftotext -bbox-layout`: body lines on its page 3 are 27.6 pt apart). Each paragraph is rounded to whole lines (`on-grid`), so consecutive paragraphs do not overprint.
+- Body double-spaced: a 27.6 pt baseline pitch at 12 pt (measured on the exemplar with `pdftotext -bbox-layout`: body lines on its page 3 are 27.6 pt apart). Every line is a box of its pitch (27.6 pt body, 13.8 pt single lines: the cross-engine layout model, `lib/typst/xengine.typ`); spaces between blocks are explicit.
 - Headings: level 1 is a centred bold line; level 2 (the statute line under a count heading) is a centred line.
-- Paragraphs after the first heading are numbered 1, 2, ... by the template; the lead-in and WHEREFORE paragraphs are not.
-- The consent statement follows the last count, then the signature block: "Dated", "Respectfully submitted", "By: /s/", the signer's name, bar number, address, phone, facsimile (when given), email and role.
+- Paragraphs are first-line indented 0.5 inch; after the first heading they are numbered 1, 2, ... by the template (the number in a 0.5-inch box after the indent); the lead-in and WHEREFORE paragraphs are not.
+- The consent statement follows the last count and stays on one page with the signature block: "Dated", "Respectfully submitted", "By: /s/", the signer's name, bar number, address, phone, facsimile (when given), email and role.
 - The template contains no case-specific text. Every name, number, date and paragraph comes from the sample.
 
 ## Known gaps and open choices
 
 1. **One exemplar only.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers; this doc type has 1. Searches: CourtListener API (`type=r&court=dcb`, query "complaint adversary", ordered by date; the HTML search page returns 403 to WebFetch, the API works). Of the results with PDFs, Akers (17-10012, entry 1, 2017) and Elliot (26-10013, entry 1, 2026) are scans with no body text and were not used. Webster v. CFG Merchant Solutions (25-10055) is the same filer, the same day, the same counsel, so it is not a second filer. Webster v. Jaycee Development (25-10052) is text-based but a different layout (Calibri), and was not saved. A second filer is needed for tier 2.
-2. **Typeface and size.** Checked 2026-10-15 against the court's LBR PDF (text layer, searched for font, typeface, point and format terms): no rule names a typeface or a point size. The only format rule is LBR 5005-1(b), which covers pro se papers (letter size, 1-inch margins, "plainly and legibly" typed) and names no face. A court that names no face keeps EB Garamond (`docs/FONTS.md`), so the template stays on EB Garamond at 12 pt. The exemplar is Times New Roman 12 pt. EB Garamond sets visibly smaller at the same point size. Switching to Liberation Serif (metric-compatible with Times New Roman) would be a choice, not a rule requirement; it is left for David.
+2. **Typeface and size.** Checked 2026-10-15 against the court's LBR PDF (text layer, searched for font, typeface, point and format terms): no rule names a typeface or a point size. The only format rule is LBR 5005-1(b), which covers pro se papers (letter size, 1-inch margins, "plainly and legibly" typed) and names no face. The template sets Times New Roman 12 pt, the house standard (fb-9fyu) and the exemplar's face, on typst and docx alike.
 3. **Consent statement (assumed value).** The exemplar states no position on final orders, and the rules require one. The sample's `final_orders.consent: consents` is an assumption made to test the template, not a fact from the exemplar. The trustee's actual choice is unknown. The template prints the sentence for either value and refuses any other.
 4. **Exemplar as filed.** The transcription keeps what the filer wrote: the blank adversary number ("Adv. Case No. ____________"), two typographical slips ("time he December 2022 Agreement"; the WHEREFORE paragraph of Count II ends without a period), . The "[Signature on Following Page]" line is a layout note and is not transcribed.
-5. **Page count.** The render is 12 pages; the filed PDF is 13. Both are double-spaced at the same 27.6 pt pitch (measured on the render, page 4: 27.6 pt between body lines). The page difference is not analysed further; the text is complete (all 71 paragraphs are present, numbered 1 to 71 as filed).
+5. **Page count.** The render is 13 pages, as the filed PDF; both are double-spaced at the same 27.6 pt pitch. The text is complete (all 71 paragraphs, numbered 1 to 71 as filed).
 6. **Italics.** The exemplar's case names and "Id." are probably italic, but the text layer carries no italic markup, so the sample is roman. The template italicises `*...*` markup where the sample uses it.
 7. **Overlay.** The sample is the whole complaint, so the overlay map pairs most pages one-to-one (page 6 with filed page 8 and page 9 with filed page 10 show the pagination drift). The overlay is a diagnostic, not a score.
 
-## Review of the rendered pages (re-rendered and viewed 2026-10-15, all 12 pages at 60 dpi)
+## Review of the rendered pages (fb-595.68.6, 13 pages per engine)
 
-| Page | Content | Finding |
-|---|---|---|
-| 1 | Counsel block (lines 1 to 8), court name, caption (debtor, plaintiff, defendant, case number, chapter, "Adv. Case No."), COMPLAINT, lead-in | Pass. The court name lines are one stack; no overprint. |
-| 2 | Introduction, paragraphs 1 to 6; Parties starts at 7 | Pass. Paragraphs on the grid; no overprint. |
-| 3 | Paragraphs 8 to 9 (Parties); Jurisdiction and Venue, 10 to 13 | Pass. |
-| 4 | General Allegations, 14 to 19 | Pass. |
-| 5 | 20 to 25; Count I heading and statute line; 26 | Pass. The heading stays with paragraph 26. |
-| 6 | 27 to 36 | Pass. |
-| 7 | WHEREFORE (Count I); Count II heading; 37 to 42 | Pass. |
-| 8 | 43 to 48; WHEREFORE (Count II) | Pass. |
-| 9 | Count III heading; 49 to 59 | Pass. |
-| 10 | WHEREFORE (Count III); Count IV heading; 60 to 64 | Pass. |
-| 11 | 65 to 66; WHEREFORE (Count IV); Count V heading; 67 to 71 | Pass. |
-| 12 | WHEREFORE (Count V); Statement on Final Orders and Judgments; Dated, Respectfully submitted, signature block | Pass after the fix: the bar number now prints under the signer's name, as in the exemplar. |
+Rendered with `pdftoppm -r 40`; every page of the typst render and of the docx render viewed side by side after the
+last template change. Gate 2 rows for these pages are recorded here: this doc type has no `reviews/` folder.
 
-Gate 2 rows for these pages are recorded here, not in `reviews/`: this doc type has no `reviews/` folder.
+- Page 1: counsel block (single-spaced, upper left), the court name in two bold centered lines, the ")" caption (one row per line: "In re:", the case number and chapter at the debtor, the adversary number at the plaintiff), "COMPLAINT", the lead-in. Pass on both engines.
+- Pages 2 to 12: headings centered (count headings bold, the statute line under each regular), numbered paragraphs 1 to 71 at the double pitch, the WHEREFORE paragraphs unnumbered; no heading at a page foot. Pass on both.
+- Page 13: the statement on final orders and judgments (FRBP 7008(a), LBR 7012-1) with the signature block ("Dated", "Respectfully submitted,", "By: /s/", the signer's lines). Pass on both.
 
 ## Engines
 
-Typst is the primary engine (`typst/`). The docx engine (`docx/`) is built here; there is no latex engine for this doc type.
+Typst is the primary engine (`typst/`); the docx engine is `docx/`: `reference.xml` (the cross-engine style recipe,
+`base="xengine"`, in the typst face) and `dcb-adversary-complaint.lua`; `fb render` builds the reference document and
+runs pandoc (no shell script, fb-595.68). There is no latex engine for this doc type. Both engines sit on the
+cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): every line in a box of its pitch,
+first-fit ragged-right line breaking, no kerning, ligatures or hyphenation; the caption is a table of one row per
+line in Word as in typst; the docx filter adds typst's break rules that LibreOffice lacks (a word joiner in ")(", a
+zero-width space after a slash before a letter).
 
-| Engine | Folder | `usage/` output | Status |
-|---|---|---|---|
-| typst | `typst/` | `OUTPUT-adversary-complaint.typst.pdf` (rendered, not committed) | primary; not changed by the docx work |
-| docx | `docx/` | `OUTPUT-adversary-complaint.docx` (committed); `.docx.pdf` is a LibreOffice render, kept out of the tree | built; 12 pages; see below |
-| latex | none | none | not built |
-
-**docx.** `docx/reference.docx` is generated by `docx/make-reference.sh` (pandoc's default reference, restyled: EB Garamond 12 pt; body double-spaced at 27.6 pt; single lines at 13.2 pt; 1-inch margins; a centred PAGE field in the footer). `docx/dcb-adversary-complaint.lua` writes the cover (counsel block, court title, the caption as a borderless table, the title), the final-orders statement and the signature block from the frontmatter, and numbers the allegations: paragraphs after the first heading, except WHEREFORE, use the Word custom style "Numbered Paragraph". Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md <out>.docx.pdf` (the `.docx` is written beside the PDF path).
-
-What matches the typst render (every page of the docx PDF rendered at 60 dpi and viewed beside the typst page, 2026-10-15):
-
-- 12 pages, the same words in the same order (a word-list diff of the two PDFs differs only at line-break hyphens);
-- EB Garamond 12 pt, embedded (`pdffonts`); letter paper, 1-inch margins;
-- the caption columns (party names, the ")" column, the case numbers), the counsel block, the court title and the bold title;
-- allegations numbered 1 to 71, with the lead-in and WHEREFORE paragraphs unnumbered; centred bold level-1 headings; bold level-2 statute lines; the final-orders statement; the signature block.
-
-What differs:
-
-- **Level-1 headings.** Typst renders them larger than 12 pt (the cmarker heading inside `heading-line()`). The docx uses 12 pt bold, the size the template's own comments describe. `typst/` is not changed here.
-- **Baselines.** LibreOffice puts double-spaced baselines 2 to 3 pt lower than Typst does. The cover gaps are set from measured baselines (comments in `cover()`); the rest of the page follows the 27.6 pt grid.
-- **Number to text.** Typst leaves a 0.3 in gap after the number; the docx uses a tab stop at 1.0 in, so the text of numbered paragraphs starts a few points differently.
-- **Word.** Not run. The file was opened in LibreOffice 26.8.1 without a repair prompt. Word may paginate slightly differently (`docs/DOCX.md`).
-
-Not run and BLOCKED: `tools/check.sh --engine docx` (Gates 0 to 3). It needs a court folder with `checks.yaml`, `reviews/` and `rules.md`; this doc-type folder has none, and the change does not create them. No check ID was run. Nothing is stamped (`usage/.check-docx.txt` is not written).
-
-Toolchain used for the LibreOffice render: the official LibreOffice 26.8.1 Linux build (documentfoundation.org), with X11 and pango libraries from conda-forge, and the vendored `fonts/eb-garamond` installed in the user's font directory so that LibreOffice finds it.
+- **Gate 4:** `params.cross_engine: gate` (`eval.yaml`): XENG-001..003 pass, the docx breaks every line and page as the typst render (13 pages).
+- **docx BLOCKED items:** none.
+- **Not verified:** the `.docx` has not been opened in Microsoft Word (none here); it converts without error in LibreOffice (DEF-DOCX-OPEN).
