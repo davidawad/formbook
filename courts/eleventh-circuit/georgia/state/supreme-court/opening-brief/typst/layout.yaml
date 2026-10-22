@@ -1,0 +1,93 @@
+# Supreme Court of Georgia (ga): appellant's opening brief (SCt R 16-22). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to the Rules of the Supreme Court of Georgia (../../rules.md, GA-SC-*) and are those of
+# the folder's earlier template; lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant. The answering, reply, amicus and merits briefs share this layout.
+size: 13                  # GA-SC-FONT-002, SCt R 16(2): body text and headings no smaller than 13-point Century Schoolbook
+pitch:
+  body: 31.2              # GA-SC-SPACE-001, SCt R 16(4): double spacing (2 x 1.2 x 13 pt), the rule's ceiling
+  single: 15.6            # 1.2 x 13 pt, the rule's floor: cover, headings, quotations, tables, signature
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # GA-SC-MARGIN-001, SCt R 16(5), 17(2): at least one inch
+indent: 36                # a half-inch first-line indent (style choice); a quotation's margins
+# GA-SC-ELEC-001, SCt R 17(3): no hyperlinks to other documents or external websites; a link prints its text.
+links: false
+# GA-SC-PAGE-001, SCt R 21: the counted pages in Arabic numerals from 1. The cover is unnumbered and counts as page i,
+# so the tables (not counted, R 20(6)) start at ii (the exemplars' practice).
+page_number: {align: center, front: lower-roman, cover: counted}
+# GA-SC-FONT-002: notes no smaller than 11 point, single-spaced (R 16(4)): 1.2 x 11 pt, half a note line between notes
+footnote: {size: 11, pitch: 13.2, gap: 6.6}
+# GA-SC-SPACE-001: quotations single-spaced, a half inch in on both sides, half a single line around and between
+quote: {left: 36, right: 36, above: 7.8, below: 7.8, gap: 7.8, pitch: 15.6}
+# Headings at the body size (R 16(2)), single-spaced (R 16(4)): level 1 centered bold, level 2 bold, level 3 bold italic.
+heading:
+  - {align: center, bold: true, above: 15.6, below: 7.8}
+  - {bold: true, above: 7.8}
+  - {bold: true, italic: true, above: 7.8}
+  - {bold: true, above: 7.8}
+# The cover (the rules prescribe none for a brief; the exemplar's arrangement): the court, the caption beside the case
+# numbers, the title, counsel side by side.
+cover:
+  - {text: "IN THE SUPREME COURT", align: center, bold: true}
+  - {text: "STATE OF GEORGIA", align: center, bold: true}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 36, above: 15.6, below: 15.6}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36}
+      - blocks:
+          - {text: "Case No. {case_number}"}
+          - {text: "Lower Court Case No. {lower_court_case}", optional: true, above: 15.6}
+    gutter: 28.8
+    above: 31.2
+  - {text: "{brief_title}", align: center, bold: true, above: 31.2}
+  - columns: {each: counsel, per_row: 2, blocks: [{text: "{names}"}, {text: "{lines}", italic: true}]}
+    gutter: 21.6
+    above: 46.8
+# SCt R 19(1)(a): a table of contents (levels 1 and 2, level 2 a half inch in) and of authorities, a single line
+# between rows.
+contents: {title: "TABLE OF CONTENTS", style: {below: 15.6}, depth: 2, col: 36, step: 36, above: 15.6, pitch: single}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  style: {below: 15.6}
+  col: 72
+  hang: 28.8
+  above: 7.8
+  pitch: single
+  passim: 7
+  group: {bold: true, above: 15.6, below: 7.8}
+  kinds:
+    - {kind: case, title: "CASES"}
+    - {kind: statute, title: "STATUTES"}
+    - {kind: constitution, title: "CONSTITUTIONAL PROVISIONS"}
+    - {kind: rule, title: "RULES"}
+    - {kind: other, title: "OTHER AUTHORITIES"}
+# GA-SC-CERT-001, SCt R 20(7): the word-count statement immediately above the signature block; the statement, the
+# date and the signatures never split. Then GA-SC-SERVE-001, SCt R 14: the certificate of service on its own page,
+# naming the manner of service; service by e-mail carries the prior-agreement certification.
+closing:
+  - group:
+      - {text: "This submission does not exceed the word-count limit imposed by Rule 20.", pitch: body}
+      - {text: "Respectfully submitted, this {date}.", pitch: body}
+      - columns: {each: signature, per_row: 2, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 15.6
+  - {break: true}
+  - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 15.6}
+  - when: service.email
+    blocks:
+      - {text: "I certify that there is a prior agreement with counsel to allow documents in a PDF format sent via e-mail to suffice for service under Supreme Court Rule 14. I further certify that I have on this day served true and correct copies of the foregoing upon the following counsel of record via e-mail:", pitch: body}
+  - unless: service.email
+    blocks:
+      - {text: "I certify that I have on this day served true and correct copies of the foregoing upon the following counsel of record by {service.method}:", pitch: body}
+  - columns: {each: service.recipients, per_row: 2, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 15.6
+  - group:
+      - {text: "Respectfully submitted, this {date}.", pitch: body}
+      - columns: {each: signature, per_row: 2, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 15.6
+    above: 15.6

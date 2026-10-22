@@ -82,47 +82,47 @@ service:
 authorities:
   nestlehutt:
     kind: case
-    name: "Atlanta Oculoplastic Surgery, P.C. v. Nestlehutt"
+    name: "*Atlanta Oculoplastic Surgery, P.C. v. Nestlehutt*"
     cite: "286 Ga. 731 (2010)"
   bibbs:
     kind: case
-    name: "Bibbs v. Toyota Motor Corp."
+    name: "*Bibbs v. Toyota Motor Corp.*"
     cite: "304 Ga. 68 (2018)"
   phillips:
     kind: case
-    name: "Ga. Dep't of Human Res. v. Phillips"
+    name: "*Ga. Dep't of Human Res. v. Phillips*"
     cite: "268 Ga. 316 (1997)"
   turner:
     kind: case
-    name: "Med. Ctr. of Cent. Ga., Inc. v. Turner"
+    name: "*Med. Ctr. of Cent. Ga., Inc. v. Turner*"
     cite: "322 Ga. 129 (2025)"
   watson:
     kind: case
-    name: "City of Atlanta v. Watson"
+    name: "*City of Atlanta v. Watson*"
     cite: "267 Ga. 185 (1996)"
   s5-6-34:
     kind: statute
-    name: "O.C.G.A. § 5-6-34"
-    sort: "5-6-34"
+    cite: "O.C.G.A. § 5-6-34"
+    sort: "5 6 34"
   s5-6-38:
     kind: statute
-    name: "O.C.G.A. § 5-6-38"
-    sort: "5-6-38"
+    cite: "O.C.G.A. § 5-6-38"
+    sort: "5 6 38"
   s51-4-1:
     kind: statute
-    name: "O.C.G.A. § 51-4-1"
-    sort: "51-4-1"
+    cite: "O.C.G.A. § 51-4-1"
+    sort: "51 4 1"
   s51-13-1:
     kind: statute
-    name: "O.C.G.A. § 51-13-1"
-    sort: "51-13-1"
+    cite: "O.C.G.A. § 51-13-1"
+    sort: "51 13 1"
   const-1983-vi:
     kind: constitution
-    name: "Ga. Const. of 1983, Art. VI, Sec. VI, Par. II(1)"
+    cite: "Ga. Const. of 1983, Art. VI, Sec. VI, Par. II(1)"
     sort: "a"
   const-art-i:
     kind: constitution
-    name: "Ga. Const. art. I, § I, ¶ II"
+    cite: "Ga. Const. art. I, § I, ¶ II"
     sort: "b"
 ---
 
