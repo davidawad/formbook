@@ -18,7 +18,7 @@ Local rules text is from the court's "Local Bankruptcy Rules" compilation (PRLBR
 | LBR 5005-4(b)(2)(C)(ii) | An electronic signature is the filer's name preceded by "/s/". | `signature-block()`: prints `/s/ ` before the signer's name. |
 | LBR 7003-1 | With the complaint, counsel files the AO Form B 1040 cover sheet. | Not templated (a separate filing; see gap 5). |
 | LBR 7004-2 | The clerk issues a summons on the LBF D form; it is not part of the complaint. | Not templated (a separate filing). |
-| Typeface (fonts pass, 2026-10-14) | Face required: **none named** in the PR bankruptcy LBRs (2013 compilation, PRLBRs-2013, and the LBR 1005-1 text checked by search; no typeface or size clause found). LBR 1001-1(b) falls back to the District Court's local civil rules for matters not covered; their Local Rule 10 text was not retrieved, so this is OPEN. Vendored substitute: **none needed**; keeps **EB Garamond** (`docs/FONTS.md`, "No face named"). Metric fit: n/a. | `font-family` in `prb-adversary-complaint.typ`. |
+| Typeface (fonts pass, 2026-10-14) | Face required: **none named** in the PR bankruptcy LBRs (2013 compilation, PRLBRs-2013, and the LBR 1005-1 text checked by search; no typeface or size clause found). LBR 1001-1(b) falls back to the District Court's local civil rules for matters not covered; their Local Rule 10 text was not retrieved, so this is OPEN. L.Cv.R. 7(e) (via LBR 1001-1(b), `../rules.md` Finding 2) asks 12 points for a proportional face or 10 characters per inch. The template takes the audited exemplar face (`data/exemplar-fonts.json`: the Organic Power complaint body is Courier New) through its metric twin **Liberation Mono** at 12 pt (10 cpi), on typst and docx alike (fb-595.68.17). Moving it to Times New Roman, the house standard, needs a `template_face` ruling on that audit entry (`fb lint fonts` otherwise rejects the template); OPEN for David. | `font-family` in `prb-adversary-complaint.typ`. |
 
 ## What the overlay shows
 
@@ -34,27 +34,23 @@ The filed pages between 11 and 24 (the body that holds Counts II and III) are no
 1. **Transcription is condensed.** `usage/INPUT-adversary-complaint.md` jumps from "V. Count I" to "VIII. Count IV" (the Roman numerals skip VI and VII), so Counts II and III and their headings are missing. It is a partial transcription, not the full complaint. Completing it would add about 12 exemplar pages. Not done in this pass: the sample was kept as the brief asked (not broken, renders, all required structure present).
 2. **Signature block (LBR 1005-1(c)).** The rule asks for the client's name and the filer's facsimile number. The sample's block reads "Counsel for Plaintiff" (client not named) and has no fax number. The filed exemplar's block is the same, so the sample reproduces it. Whether to add "Organic Power, LLC" and a fax line is for David to decide; the template prints the lines it is given.
 3. **Second exemplar not collected.** `usage/SOURCE.md` records that the only other bankruptcy-court adversary complaints found were scanned images (20-00027) or a pro se upload (23-03241, entry 115). Tier 2 (conventions) is therefore judged against one filer only. This is OPEN.
-4. **Typeface.** No PR bankruptcy rule sets a typeface or size. The template uses EB Garamond 12 pt (the only serif in `fonts/`, and the convention both exemplars follow at 12 pt). The exemplar's text is Times New Roman (embedded, per `usage/SOURCE.md`); EB Garamond at the same point size reads smaller, so the render is not a face match.
+4. **Typeface.** No PR bankruptcy rule names a typeface. The template is set in Liberation Mono 12 pt, the metric twin of the Courier New the Organic Power complaint is set in (the font audit); the second filer sets Leelawadee UI. Times New Roman would need a `template_face` ruling in `data/exemplar-fonts.json` (OPEN).
 5. **Cover sheet and summons** (LBR 7003-1, 7004-2) are separate documents and are not generated.
 6. **Paragraph numbering** restarts for each complaint and is continuous across headings (as in the exemplar); a complaint with amendments is a separate document under LBR 1005-1(d), which requires the word "AMENDMENT" in bold. Not templated; the title field is the place to put it.
 
 ## Gate 2 review
 
-- Page 1: caption (court, debtor, parties, case number, chapter, adversary blank), title, "COME NOW" lead-in, paragraphs 1-3 start. Pass.
-- Pages 2-8 (our render): headings, numbered paragraphs, Count I and Count IV headings, prayer letters A-F, signature block on page 8 with "Respectfully submitted" and the date. Pass as layout. OPEN on content: the missing Counts II and III (gap 1), and the signature-block lines (gap 2).
-- All 8 pages were rasterized and viewed (render and overlay).
+Re-done 2026-10-22 on the cross-engine renders (fb-595.68.17), typst and docx, all 11 pages of each rasterized and viewed:
+
+- Page 1: court lines, the caption (parties ruled at the right and below, a rule under the debtor; case number, chapter and the blank adversary number at the right), the title, "TO THE HONORABLE COURT:", the "COME NOW" lead-in, paragraphs 1-2. Pass.
+- Pages 2-10: headings at the margin in bold capitals, numbered paragraphs 3-48 (the number in a half-inch box after the indent), the unnumbered WHEREFORE lead-in, prayer letters A-F at half an inch with the text hanging. Pass as layout. OPEN on content: the missing Counts II and III (gap 1).
+- Page 11: prayer F, "Respectfully submitted,", the date, the `/s/` block at 3 in. Pass; OPEN: the signature-block lines (gap 2).
+- The docx PDF breaks every line and page as typst (XENG-001..003 pass).
 
 ## Engines
 
-docx: `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt double pitch, 13.8 pt single lines, 0.5 in first-line indent, 1 in margins, PAGE field in the footer); `docx/prb-complaint.lua` builds the caption table, the numbered paragraphs, the lettered prayer and the signature block from the frontmatter. Checked on `usage/OUTPUT-adversary-complaint.docx.pdf` (LibreOffice). Opened with LibreOffice only; Word was not checked.
+Both engines are on the shared cross-engine layout model (lib/typst/xengine.typ, lib/docx/xengine.lua; docs/EVAL-LOOP.md): Liberation Mono 12 pt, exact 24 pt double pitch for the body and headings, 13.8 pt single lines for the court lines, caption, title and signature, ragged right, no hyphenation; `eval.yaml` sets `params.cross_engine: gate`.
 
-Matches the typst form (measured on the PDFs): US Letter, one-inch margins, EB Garamond 12 pt, body line pitch 24.0 pt and single-line pitch 13.8 pt in both, 8 pages in both, caption, title and lead-in positions within about 1 pt, numbers then a tab at 1 in, lettered prayer, footer page number, `/s/` signature block.
-
-Differs:
-- LibreOffice breaks some lines at other words than typst (glyph advance and no justification), so the same text falls on a different line on most pages; the page count is the same.
-- The typst signature block stands alone on page 8; the docx keeps "Respectfully submitted" with prayer items E and F on page 8 (keep-with-next), so page 8 is laid out differently on purpose.
-- Prayer items have a 16 pt gap after each item in both; the docx spacing reads slightly looser.
+docx: `docx/reference.xml` (base="xengine", the face only as `{font}`; Numbered Paragraph and Lettered Item styles; the page number centered in the footer) replaces `build-reference.sh` and the committed `reference.docx`; `docx/prb-complaint.lua` writes the court lines, the caption table, the title, the lead-in, the numbered paragraphs (the WHEREFORE lead-in and a "(unnumbered) " paragraph unnumbered, as in typst), the lettered prayer and the signature block. LibreOffice adds a paragraph border's width to its line, so the line after the rule under the debtor has 0.75 pt less space above it than in typst. Checked on `usage/OUTPUT-adversary-complaint.docx.pdf` (LibreOffice); Word was not checked.
 
 BLOCKED: none.
-
-Markers (default-eval fix): the INPUT no longer carries an `(unnumbered) ` prefix. The WHEREFORE prayer lead-in (`**WHEREFORE**, ...`) is unnumbered by rule in `prb-adversary-complaint.typ` (a `(unnumbered) ` prefix, if present, is still honored and stripped), so the printed text matches the INPUT. The docx filter (`docx/prb-complaint.lua`) still keys on the old prefix, so its WHEREFORE paragraph is numbered in docx output until that filter is updated (not done here).
