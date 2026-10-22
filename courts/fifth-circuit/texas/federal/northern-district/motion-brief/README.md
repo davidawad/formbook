@@ -7,10 +7,10 @@ Folder: `courts/fifth-circuit/texas/federal/northern-district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (Defendants' brief in support of a renewed Rule 12(b)(1), (4), (5), (6) motion, with table of contents and index of authorities); second filer `usage/FILED-EXAMPLE-motion-brief-2.pdf` (Plaintiff's combined motion and brief). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md` (a portion of the 32-page filing: caption, introduction, issues, background, argument A (1 to 3), B (1 to 3), C, conclusion, certificate of service, signature blocks; the argument after section C is omitted) |
-| typeface | face required: none (LR 7.2 sets the size, 12 pt or larger; LR 10.1 names no face) -> vendored substitute: EB Garamond (the default, `fonts/eb-garamond/`) -> fit: n/a, no court-named face to match. The filed exemplars use Times New Roman; see Known gaps 4. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages (cover, table of contents, index of authorities, body pages 1 to 8), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; `pdffonts` shows EBGaramond-Regular and EBGaramond-Bold embedded) |
+| typeface | face required: none (LR 7.2 sets the size, 12 pt or larger; LR 10.1 names no face) -> template face: Times New Roman (pinned install; `docs/FONTS.md` rule 6, the house standard; EB Garamond before fb-595.68) -> fit: n/a, no court-named face to match. The filed exemplars use Times New Roman; see Known gaps 4. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages (cover, table of contents, index of authorities, body pages 1 to 8), typst 0.15.0, pinned Times New Roman only (`pdffonts`: Regular and Bold embedded), no warnings (the 2026-10-14 render, before fb-595.68, was EBGaramond-Regular and EBGaramond-Bold) |
 | overlay | ok: `usage/OVERLAY-coney-motion-brief.pdf` and `usage/OVERLAY-coney-motion-brief.txt` (page map; regenerated 2026-10-14 against the Coney exemplar fetched from the URL in `usage/SOURCE.md`; the exemplar PDF is not committed) |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed on 2026-10-14 after the re-render) |
+| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed on 2026-10-14 after the re-render; the EB Garamond render, before fb-595.68) |
 | file names | the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the names `tools/render.sh` and `tools/overlay.sh` use); see the complaint README |
 
 ## Governing rules
@@ -31,20 +31,20 @@ Judge-specific requirements (individual judges' standing orders, including the p
 
 - Cover (no page number): court title on three centered lines; caption with § column; `CIVIL ACTION NO.` on the middle row; title of the brief, centered, bold, caps.
 - Front matter, roman numerals: `TABLE OF CONTENTS` (generated from the body's headings, levels 1 to 3, with dot leaders); `INDEX OF AUTHORITIES` (generated from the frontmatter list, grouped Cases, Statutes, Rules, each entry with the pages on which its key appears in the body; "passim" beyond five pages).
-- Body, arabic numerals from 1: double-spaced (24 pt pitch), 12 pt EB Garamond, 1 inch margins, 0.5 inch first-line indent; headings: level 1 centered bold, level 2 bold with hanging indent, level 3 bold with hanging indent; quotations single-spaced and indented 0.5 inch on both sides; bullets for the issues.
+- Body, arabic numerals from 1: double-spaced (24 pt pitch), 12 pt Times New Roman, 1 inch margins, 0.5 inch first-line indent; headings: level 1 centered bold, level 2 bold with hanging indent, level 3 bold with hanging indent; quotations single-spaced and indented 0.5 inch on both sides; bullets for the issues.
 - Signature block at the right half: `Respectfully submitted,`; one block per signer (`/s/`, name, bar number, firm, address, telephone, email, role).
 - Page numbers centered at the foot of each body and front-matter page.
 
 ## Overlay (`usage/OVERLAY-coney-motion-brief.pdf`)
 
-Red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by word overlap (`tools/overlay.sh`). The overlay is a diagnostic, not a score: the sample is a portion of the filing, our page breaks do not follow the filing's, and our table pages (cover, contents, authorities) have no counterpart in the sample. The overlay's table-of-authorities page (our page 3) pairs with a filed page that shares few words, which is expected. Read the page map in `usage/OVERLAY-coney-motion-brief.txt`.
+Red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by word overlap (`tools/overlay.sh`). The overlay is a diagnostic, not a score: the sample is a portion of the filing, our page breaks do not follow the filing's, and our table pages (cover, contents, authorities) have no counterpart in the sample. The overlay's table-of-authorities page (our page 3) pairs with a filed page that shares few words, which is expected. Read the page map in `usage/OVERLAY-coney-motion-brief.txt` (from the earlier EB Garamond render, before fb-595.68).
 
 ## Known gaps and open choices
 
 1. **A portion, not the whole brief.** The sample transcribes pages 1 to 9 and 21 to 24 of the filing, in part: introduction, issues, background, the Rule 12(b)(1) and limitations argument, the service argument, the individual-liability section (the filing's section D; the sample calls it C), the conclusion, the certificate of service and the signature blocks. The filing's pleading-standards sections and its claim-by-claim discussion (pages 10 to 21) are omitted. The sample's body is therefore eight pages; a full 25-page brief has more.
 2. **The index of authorities is hand-maintained.** The page numbers are computed by typst, but the list of authorities is the frontmatter `authorities` list. An authority that is cited in the body and not listed is not indexed. An authority whose `key` does not occur in the body shows no page. The keys are literal text (escaped for the regex), so a key must match the body's wording exactly.
 3. **"Passim" threshold.** An authority on more than five pages is listed as `passim` (`toa-passim-after`). This is a choice; the rule does not say.
-4. **Typeface (tier 2, open choice).** N.D. Tex. LR 7.2 names a size and no face (found by search, not read from the court's full text), so the rules do not require Times New Roman and the template keeps EB Garamond, per `docs/FONTS.md`. The filed exemplars use Times New Roman (system font). EB Garamond has a smaller x-height than Times at 12 pt. Switching to `Liberation Serif` (the Times New Roman substitute in `fonts/liberation-serif/`) would close the gap; that is a choice for the court's convention, not for the rules, and is left to the reviewer.
+4. **Typeface (tier 2).** N.D. Tex. LR 7.2 names a size and no face (found by search, not read from the court's full text), so the rules do not require Times New Roman. The filed exemplars use Times New Roman (system font), and so does the template now (`docs/FONTS.md` rule 6, the house standard). Before fb-595.68 the template was EB Garamond, whose x-height is smaller than Times at 12 pt.
 5. **Signature block alone on the last page.** The conclusion and the certificate of service sit on body page 7; the signature blocks fall alone on body page 8. The filed exemplar does the same (its signature runs onto page 24 with the certificate of service on it). Recorded as ACCEPTED.
 6. **Certificate of service.** It follows the conclusion with no page break. The filed exemplar starts its certificate on a new page. Tier 2; open.
 7. **Combined motion and brief.** The Legacy exemplar combines the motion and the brief in one filing; the template is the brief only. A combined filing would need its motion paragraph (grounds, relief requested) ahead of the brief's introduction.
@@ -53,7 +53,7 @@ Red is our render, blue is the filed exemplar, black is where they agree. Pages 
 10. **Indent of the first paragraph** after the lead-in "COME NOW" is not reproduced; the template indents every body paragraph.
 11. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape. The brief forbids editing `tools/`, so the gates were not run. The page review below is the Gate 2 equivalent.
 
-## Review of the rendered pages (`usage/OUTPUT-motion-brief.typst.pdf`, 11 pages)
+## Review of the rendered pages (`usage/OUTPUT-motion-brief.typst.pdf`, 11 pages; the EB Garamond render, before fb-595.68)
 
 Each page was rendered at 60 dpi and viewed after the last template change.
 
@@ -76,33 +76,31 @@ Earlier review rounds found and fixed the same defects the complaint had (see th
 | Engine | Folder | Output in `usage/` | State |
 |---|---|---|---|
 | typst (primary) | `typst/` | `OUTPUT-motion-brief.typst.pdf` | the reference (see the review above) |
-| docx | `docx/` | `OUTPUT-motion-brief.docx`, `OUTPUT-txnd-motion-brief-coney.docx.pdf` | `.docx` built and valid (zip and XML checks pass); `.docx.pdf` BLOCKED; table page numbers BLOCKED |
+| docx | `docx/` | `OUTPUT-motion-brief.docx`, `OUTPUT-motion-brief.docx.pdf` | `.docx` and `.docx.pdf` (11 pages, as the typst render) built by `fb render --engine docx`; the BLOCKED items below were recorded before fb-595.68 |
 
-The docx is built by pandoc (3.6.4) from `docx/reference.docx` and `docx/txnd-motion-brief.lua`. `docx/render.sh` owns the build: it runs pandoc, then writes the footer's relationship id into the section breaks. `reference.docx` is made by `sh docx/make-reference.sh` from `docx/styles.xml`. Command: `sh tools/render.sh --engine docx <court>/motion-brief usage/INPUT-motion-brief.md`.
+The docx is built by `fb render --engine docx`: the reference document from `docx/reference.xml` (`base="xengine"`, the shared cross-engine recipe in the typst template's face), then pandoc with `docx/txnd-motion-brief.lua`, in passes: the filter writes needles, fb render finds their pages in the LibreOffice PDF and renders again with them (the contents' and the index's page numbers), and writes the sections (`FORMBOOK_FINAL`). (Before fb-595.68, `docx/render.sh` ran pandoc and wrote the footer's relationship id into the section breaks, and `sh docx/make-reference.sh` made a committed `reference.docx` from `docx/styles.xml`.) Command: `sh tools/render.sh --engine docx <court>/motion-brief usage/INPUT-motion-brief.md`.
 
 Sections: the cover has no page number; the table of contents and the index of authorities are numbered in lower roman from `ii` (as in typst, where the cover is page `i`); the body starts at `1`.
 
-What follows the typst template, by construction (no docx page has been seen, so none of this is a visual claim):
+What follows the typst template, by construction (no docx page had been seen when this was written, so none of this is a visual claim):
 
-- EB Garamond 12 pt; body double-spaced at an exact 24 pt pitch; 0.5 in first-line indent; letter paper with 1 in margins.
+- Times New Roman 12 pt; body double-spaced at an exact 24 pt pitch; 0.5 in first-line indent; letter paper with 1 in margins.
 - Cover: court title on three lines, caption with section marks, title of the brief centered and bold.
 - Headings: level 1 centered bold; level 2 bold with a hanging indent; level 3 bold with a hanging indent. Block quotations single-spaced, indented 0.5 in on both sides. Issues as bullets.
 - Signature blocks at the right half: `Respectfully submitted,` then one block per signer (`/s/`, name, bar number, firm, address, telephone, email, role).
-- Table of contents: a TOC field over the headings, levels 1 to 3.
-- Index of authorities: the frontmatter's list, grouped (Cases, Statutes, Rules), each entry in its own paragraph.
+- Table of contents: listing rows over the headings, levels 1 to 3, with their page numbers from fb render's needles (a TOC field before fb-595.68).
+- Index of authorities: the frontmatter's list, grouped (Cases, Statutes, Rules), each entry with the pages on which its key appears (found by fb render as typst finds them), `passim` beyond five pages.
 
 What differs or is not checked:
 
 - The caption wraps a long party name onto two lines; the section mark then sits on the first line only. This is the same in the typst output (checked on page 1 of the typst render), so it is a shared defect of the caption, not a docx one. Not changed here (`typst/` is not in this change).
-- Page numbers in the table of contents and in the index of authorities are not written: BLOCKED (see below). Typst computes them.
-- No "passim" logic in the docx index (typst lists an authority on more than five pages as `passim`).
 - No docx page has been rendered or reviewed; Gate 2 for docx is open.
 
-docx BLOCKED items (`check.sh --engine docx` runs its gates on the `.docx.pdf`):
+docx BLOCKED items, as recorded before fb-595.68 (`check.sh --engine docx` runs its gates on the `.docx.pdf`; `usage/OUTPUT-motion-brief.docx.pdf` is now committed, and fb render now writes the contents' and the index's page numbers):
 
 - `docx.pdf` (LibreOffice render, Gates 0 to 3): BLOCKED. LibreOffice 25.2 could not run on the build box (see the complaint README for the cause). No `.docx.pdf` exists.
 - Gate 2 for docx (every page rendered and reviewed): BLOCKED on the same cause. No docx page was rendered or reviewed (the docx page count is not known).
 - Table of contents page numbers: BLOCKED. The TOC is a field; its cached result lists the headings without numbers. Word and LibreOffice write the numbers only when the field is updated (F9 in Word); the page numbers cannot be computed here without a renderer.
 - Index of authorities page references: BLOCKED. The index lists the authorities without pages; a TOA field would need the same update, and LibreOffice does not honor TA/TOA fields (`docs/DOCX.md`).
 - Opens in Word and LibreOffice without a repair prompt: not checked (no Word here, LibreOffice does not run).
-- Fonts: EB Garamond must be installed on the machine that opens the file, or Word substitutes a face silently (`docs/DOCX.md`).
+- Fonts: Times New Roman (EB Garamond when this was recorded) must be installed on the machine that opens the file, or Word substitutes a face silently (`docs/DOCX.md`).

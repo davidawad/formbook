@@ -7,9 +7,9 @@ Folder: `courts/fifth-circuit/mississippi/federal/northern-district/motion-brief
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, 12 pp; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (transcription of the brief: caption, the introduction, facts, standard, the argument with its three headings, conclusion, footnotes 1–3, the signature block and the OF COUNSEL block) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-motion-brief.md`) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 13 pages (11 on the earlier EB Garamond render, before fb-595.68), typst 0.15.0, pinned Times New Roman only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-motion-brief.md`) |
 | overlay | ok: `usage/OVERLAY-stokes-motion-brief.pdf` and `OVERLAY-stokes-motion-brief.txt` (`sh tools/overlay.sh <this dir> stokes-motion-brief`) |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 11 of 11 on the earlier EB Garamond render, before fb-595.68 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`), so the sample is `INPUT-<id>.md` and the id is `stokes-motion-brief`.
 
@@ -20,7 +20,7 @@ Primary sources: the joint 2024 Local Civil Rules for the Southern and Northern 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | L.U.Civ.R. 7(b)(5)(A) | 8½ × 11 inch paper; text double-spaced (quotations may be indented and single-spaced; headings and footnotes may be single-spaced); margins at least 1 inch on all four sides; page numbers may be placed in the margins, but no text may appear there. | `margin = 1in`, `pitch = 24pt` and `on-grid` for body text, a footer page number only (`page-number()`). Headings and quotations are kept double-spaced (permitted, not required). |
-| L.U.Civ.R. 7(b)(5)(B) | A proportionally spaced or monospaced face; a proportional face must have serifs (sans-serif is allowed in headings and captions); text 12-point or larger; footnotes 11-point or larger. | `font-family = "EB Garamond"` (serif, vendored), `type-size = 12pt`, `footnote-size = 11pt` (`show footnote.entry`). |
+| L.U.Civ.R. 7(b)(5)(B) | A proportionally spaced or monospaced face; a proportional face must have serifs (sans-serif is allowed in headings and captions); text 12-point or larger; footnotes 11-point or larger. | `font-family = ("Times New Roman", "Liberation Serif")` (serif, vendored), `type-size = 12pt`, `footnote-size = 11pt` (`show footnote.entry`). |
 | L.U.Civ.R. 7(b)(5)(C) | Plain roman type; case names italicized or underlined. | The template italicizes `*...*` markup; the sample italicizes case names, *Id.* and signals (see Known gaps). |
 | L.U.Civ.R. 7(b)(5) | Movant's original and rebuttal memoranda together may not exceed 35 pages; the respondent's memorandum may not exceed 35 pages. | Not enforced by the template (it is a length rule, not a format rule). The exemplar is 12 pages. |
 | L.U.Civ.R. 7(b)(2) | The memorandum brief is a separate docket item from the motion; it may not be made an exhibit to the motion. | Not a format element of the brief; the template produces the brief only. |
@@ -35,7 +35,7 @@ Primary sources: the joint 2024 Local Civil Rules for the Southern and Northern 
 - Court title (three lines, bold, centered): "IN THE UNITED STATES DISTRICT COURT / FOR THE NORTHERN DISTRICT OF MISSISSIPPI / <DIVISION> DIVISION".
 - Caption: parties in the left column (names, designation, "v." between parties), a rule closing the column at right and bottom; "CIVIL ACTION NO.:" with the case number at right.
 - Title of the paper, centered bold caps.
-- Body double-spaced (24 pt pitch at 12 pt), first-line indent 0.5 in, paragraphs not numbered.
+- Body double-spaced (27.6 pt pitch at 12 pt, Word's double), first-line indent 0.5 in, paragraphs not numbered.
 - Headings: level 1 centered bold caps (FACTS, STANDARD, ARGUMENT, CONCLUSION); level 2 bold, left (argument headings "1. …", "2. …"); level 3 bold italic left (not used in the sample).
 - Block quotations: indented 0.5 in on both sides, kept double-spaced.
 - Footnotes: a `[^key]` mark becomes a typst footnote at 11 pt.
@@ -52,16 +52,16 @@ Primary sources: the joint 2024 Local Civil Rules for the Southern and Northern 
 ## Known gaps and open choices
 
 1. **One exemplar.** Tier 2 is not yet judged against two or three filers. *Haley v. X.AI Corp.*, 3:26-cv-00148-DMB-RP, ECF 51 (27 pp; a defendant's memorandum in support of a motion to dismiss, text layer present) is the next candidate; it is longer than the 8–14 page target and was not used. See `usage/SOURCE.md`.
-2. **Font.** L.U.Civ.R. 7(b)(5)(B) names no face (only "a proportionally spaced or monospaced face" with serifs for a proportional one), so `docs/FONTS.md` keeps EB Garamond here; no Times-family substitute is required. The exemplar is Times New Roman, which the rule does not require. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the filed page. The 12-point size and the footnote size are kept.
+2. **Font.** L.U.Civ.R. 7(b)(5)(B) names no face (only "a proportionally spaced or monospaced face" with serifs for a proportional one), so the template, EB Garamond until fb-595.68, is now Times New Roman, the house standard (`docs/FONTS.md` rule 6); the exemplar is set in it too, which the rule does not require. The 12-point size and the footnote size are kept.
 3. **Case names.** The exemplar's text layer has no italic markup, so the italics in the sample (case names, *Id.*, signals such as *See*, *see also*, *Compare* … *with*) are a transcription choice following Rule 7(b)(5)(C), not a reading of the filed PDF.
 4. **Paragraph split at a page break.** A paragraph that continues onto the next page can leave one blank line at the top of that page (page 6 of the render). Paragraphs are set in fixed-height blocks (`on-grid`), and a block that breaks across a page keeps the height of its leftover lines. The alternative, plain flow, lays out paragraphs in a loop incorrectly in typst 0.15 (lines of one paragraph overlapped the next), so the fixed-height form was kept. The gap is cosmetic and is recorded here rather than fixed.
-5. **Overlay pairing.** Pages pair by shared words: pages 1–10 pair at 51–91%; page 11 (the signature block) pairs with exemplar page 12 at 30%, because the signature is short. The overlay is a diagnostic, not a score.
+5. **Overlay pairing** (on the earlier EB Garamond render, before fb-595.68)**.** Pages pair by shared words: pages 1–10 pair at 51–91%; page 11 (the signature block) pairs with exemplar page 12 at 30%, because the signature is short. The overlay is a diagnostic, not a score.
 6. **Not produced:** a table of contents or table of authorities (none in the exemplar), a certificate of service (Rule 5(d)(1)(B): none needed for e-filed papers), a proposed order (L.U.Civ.R. 7(b)(2)(F): needed only for ex parte or consent motions), the motion itself (L.U.Civ.R. 7(b)(2)(B): a motion may not exceed four pages), and the ECF header the exemplar carries.
 7. **Page limit.** The 35-page limit (L.U.Civ.R. 7(b)(5)) is a length rule; the template does not check it. The exemplar is 12 pages, within it.
 8. **Gates.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids touching `tools/`. The gates were not run. Render, overlay and the page review above are the checks for this doc type.
 9. **Footnote 1 is long** (a judicial-notice cite and a parenthetical). It is set at 11 pt, as the rule allows.
 
-## Review of the rendered pages (`OUTPUT-motion-brief.typst.pdf`, 11 pages)
+## Review of the rendered pages (`OUTPUT-motion-brief.typst.pdf`, 11 pages, the earlier EB Garamond render, before fb-595.68)
 
 - Page 1: court title, caption (party column closed by a rule; the right column with "CIVIL ACTION NO.: 3:25-cv-307-GHD-RP"), the title, and the introduction. Pass.
 - Page 2: FACTS heading and the first two fact paragraphs with footnotes 1 and 2 at the foot of the page. Pass.
@@ -85,24 +85,24 @@ The page review checks the layout of the render. Text fidelity to the exemplar r
 
 Two engines are built from the same sample: typst (primary, `typst/`) and docx (`docx/`). This doc type has no latex template yet.
 
-**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-motion-brief.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md`; it writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
+**docx** (`docx/`): `docx/reference.xml` (`base="xengine"`: `fb render --engine docx` builds the reference document from it, the shared cross-engine recipe in the typst template's face) and the Lua filter `docx/msnd-motion-brief.lua` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md`; it writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`). Its 13 pages match the typst render's 13. The lists below were checked on the earlier EB Garamond build (`docx/make-reference.sh` and `docx/render.sh`, since retired into fb render), except the face, sizes, pitch and quotation spacing, which are read from the current files.
 
 What matches typst, checked on the LibreOffice PDF:
 
-- EB Garamond only (`pdffonts`); text 12 pt; footnotes 11 pt.
-- Body double-spaced at an exact 24 pt; first-line indent 0.5 in; block quotations indented half an inch on both sides and double-spaced; letter paper with 1-inch margins; page number centered at the foot of each page.
+- Times New Roman only (`pdffonts`); text 12 pt; footnotes 11 pt.
+- Body double-spaced at an exact 27.6 pt (24 pt before fb-595.68); first-line indent 0.5 in; block quotations indented half an inch on both sides and single-spaced in 13.8 pt lines (double-spaced before fb-595.68); letter paper with 1-inch margins; page number centered at the foot of each page.
 - Court title, caption, title, body, footnotes at the foot of their pages, argument headings (level 2 bold at the left, level 3 bold italic), level 1 headings centered in capitals, and the signature block with the OF COUNSEL block.
 - The signature block (date line, "Respectfully submitted," the signing party and counsel, OF COUNSEL) is kept together with keep-with-next, as typst's signature block is unbreakable.
 - A space before a footnote mark is dropped, as typst does, so a mark never wraps onto a line of its own.
 
 What differs:
 
-- Page count matches (11), but the page breaks do not. The title sits lower under the caption than in typst, and heading keep-with-next moves a few lines; the block quotation falls on a different page. No page break is forced.
+- Page count matched (11, on the earlier build), but the page breaks do not. The title sits lower under the caption than in typst, and heading keep-with-next moves a few lines; the block quotation falls on a different page. No page break is forced.
 
 docx BLOCKED items:
 
 - No check IDs: this doc type has no `rules.md` or `checks.yaml` (Known gaps, item 8), so `tools/check.sh --engine docx` has nothing to run here. The docx was reviewed by page, not by gate.
-- Font: EB Garamond is vendored as OpenType CFF (`.otf`), which Word cannot embed. A reader without EB Garamond installed sees a substitute (`docs/DOCX.md`, "Fonts"). Not verified in Word.
+- Font (before fb-595.68): EB Garamond was vendored as OpenType CFF (`.otf`), which Word cannot embed; the docx is now Times New Roman. Not verified in Word.
 - Word: the file was converted by LibreOffice without error but was not opened in Word, so the "no repair prompt" check is not done.
 
-Review of the docx PDF: all 11 pages rendered at 60 dpi and viewed after the last change. Typst pages compared: 1 (caption and first paragraphs) and 11 (signature block).
+Review of the docx PDF (the earlier EB Garamond build, before fb-595.68): all 11 pages rendered at 60 dpi and viewed after the last change. Typst pages compared: 1 (caption and first paragraphs) and 11 (signature block).

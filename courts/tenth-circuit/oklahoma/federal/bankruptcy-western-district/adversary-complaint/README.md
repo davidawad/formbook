@@ -11,9 +11,9 @@
 | Path | What |
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `okwb-adversary-complaint`. |
-| `typst/okwb-adversary-complaint.typ` | Template. Parameter block at the top: `font-family`, `type-size` (12 pt), `page-margin` (1 in), `body-leading` (0.695 em, so the 24 pt double-spaced pitch), caption columns. |
+| `typst/okwb-adversary-complaint.typ` | Template. Parameter block at the top: `font-family`, `type-size` (12 pt), `page-margin` (1 in), `body-leading` (0.893 em, so the 24 pt double-spaced pitch), caption columns. |
 | `usage/INPUT-adversary-complaint.md` | Markdown contract sample (frontmatter: caption rows, lead-in, signature lines, approval line; body: numbered paragraphs, `#` headings, `- ` lettered items, `> ` unnumbered paragraphs). |
-| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md` (10 pages, EB Garamond only). |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md` (10 pages, EB Garamond only, measured on the earlier EB Garamond render). |
 | `usage/OVERLAY-ruzycki-adversary-complaint.pdf`, `.txt` | `sh tools/overlay.sh <doc-type dir> ruzycki-adversary-complaint` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -32,7 +32,7 @@ Each rule was read from the text linked below. The local rules were downloaded a
 | Fed. R. Bankr. P. 7008(a) (<https://www.law.cornell.edu/rules/frbp/rule_7008>, checked 2026-10-14; as amended eff. 2024-12-01) | Fed. R. Civ. P. 8 applies. The complaint must state whether the pleader does or does not consent to entry of final orders or judgment by the bankruptcy court; the jurisdiction allegation refers to the case's name, number and chapter, and the district and division | paragraphs 3 to 5 of the sample (the filer's words, as filed; see Known gaps) |
 | Fed. R. Bankr. P. 7010 (<https://www.law.cornell.edu/rules/frbp/rule_7010>, checked 2026-10-14) | Fed. R. Civ. P. 10 applies in an adversary proceeding, except the caption must substantially conform to Official Form 416 | `caption` (the party column, the `)` column, the case number and adversary number rows) |
 | Fed. R. Bankr. P. 9004(a)-(b) (<https://www.law.cornell.edu/rules/frbp/rule_9004>, checked 2026-10-14) | Legible; caption with the court's name, the case title, the case number and adversary number, and a brief designation of the document | the cover (court name, caption, title in capitals) |
-| Typeface (fonts pass, checked 2026-10-15 against the LR 9004-1.A text in the W.D. Okla. Local Bankruptcy Rules, General Order 26-01, printed p. 49, and Fed. R. Bankr. P. 9004, 7010) | No face is named. The rules require only "no less than 12-point font (including footnotes)". The court's local rules name no typeface anywhere in the form-of-papers provisions. Per `docs/FONTS.md`, no face named means EB Garamond stays (no substitute needed; metric compatibility does not apply) | `font-family = "EB Garamond"` kept; `pdffonts` on `OUTPUT-adversary-complaint.typst.pdf` shows only EB Garamond embedded. The filed exemplar is Times New Roman (tier 2 choice, not a rule; Liberation Serif is the vendored Times substitute if a clerk expects it) |
+| Typeface (fonts pass, checked 2026-10-15 against the LR 9004-1.A text in the W.D. Okla. Local Bankruptcy Rules, General Order 26-01, printed p. 49, and Fed. R. Bankr. P. 9004, 7010) | No face is named. The rules require only "no less than 12-point font (including footnotes)". The court's local rules name no typeface anywhere in the form-of-papers provisions. Per `docs/FONTS.md` rule 6, no face named means the house standard, Times New Roman (it was EB Garamond in this fonts pass) | `font-family = ("Times New Roman", "Liberation Serif")`; the docx names the same face. The filed exemplar is Times New Roman too |
 | Fed. R. Civ. P. 10(b) (applies through 7010; not separately fetched) | Claims in numbered paragraphs | `allegations`: the template numbers each plain paragraph; `> ` paragraphs and headings are unnumbered |
 
 ## Overlay
@@ -47,9 +47,9 @@ Each rule was read from the text linked below. The local rules were downloaded a
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only (this review was on the earlier EB Garamond render).
 
-Re-check on 2026-10-15 (fonts pass): the typeface stays EB Garamond (see the typeface row above), so the template is unchanged. Re-rendered with `tools/render.sh` (10 pages, no warnings), overlay re-run against the exemplar (`usage/FILED-EXAMPLE-adversary-complaint.pdf`, fetched from the URL in `usage/SOURCE.md`, MD5 `2881deddc83eb547d6dabcaff51dedf3` matches), and all 10 pages viewed again. Same result as above: p.10 is accepted as mostly blank, and the lettered lists on pp.5-7 keep the accepted spacing.
+Re-check on 2026-10-15 (fonts pass): the typeface then stayed EB Garamond, so the template was unchanged. Re-rendered with `tools/render.sh` (10 pages, no warnings), overlay re-run against the exemplar (`usage/FILED-EXAMPLE-adversary-complaint.pdf`, fetched from the URL in `usage/SOURCE.md`, MD5 `2881deddc83eb547d6dabcaff51dedf3` matches), and all 10 pages viewed again. Same result as above: p.10 is accepted as mostly blank, and the lettered lists on pp.5-7 keep the accepted spacing.
 
 | Page | Content | Result |
 |---|---|---|
@@ -69,7 +69,7 @@ Fixes made in this pass, found on page review, before the final render: (1) the 
 ## Known gaps
 
 1. One exemplar, one filer (Blackwood Law Firm, for the plaintiff). A second filed complaint from a different filer is needed to judge the conventions a clerk expects (tier 2) against more than one filing. Not yet found.
-2. The filed complaint's body is Times New Roman (embedded); our render is EB Garamond. The local rules require only 12-point type (LR 9004-1.A), so the face is a tier-2 choice, not a rule. EB Garamond is the vendored serif; Times New Roman is not vendored.
+2. The filed complaint's body is Times New Roman (embedded); the template now sets Times New Roman too (the house standard, `docs/FONTS.md` rule 6; it was EB Garamond). The local rules require only 12-point type (LR 9004-1.A), so the face is a choice, not a rule.
 3. The filed complaint is 12 pages; ours renders 10. The difference is line breaking and list layout, not omitted text: the sample is a full transcription.
 4. The caption follows Official Form 416 only in general shape (Fed. R. Bankr. P. 7010). The text of the form itself has not been checked against the template.
 5. The filed jurisdiction paragraph (¶ 3, "28 U.S.C. § 1334 and 28 U.S.C. § 157") does not state the case name, number and chapter that Fed. R. Bankr. P. 7008(a) requires. That is the filer's text, transcribed as filed; the template does not check for it. Flagged for the reviewer, not corrected.
@@ -82,7 +82,7 @@ Fixes made in this pass, found on page review, before the final render: (1) the 
 
 DOCX (`docx/reference.docx`, `docx/okwb-adversary-complaint.lua`; `sh tools/render.sh --engine docx`):
 
-- Matches the typst form in its styles: letter, 1 in margins, EB Garamond 12 pt throughout (footnotes included), exact 24 pt double spacing, 0.5 in first-line indent on numbered and unnumbered paragraphs, centered bold capitals for headings (text after "§" keeps its case), lettered items with a hanging indent, the caption with the ")" column on every row, a centered PAGE number in the footer, and the signature and "Approved by:" blocks flush right and left as in typst.
-- Differs: paragraph numbers are typed text with a tab, not Word list numbering; the caption is a borderless table (Word and LibreOffice draw it alike, but a reviewer should look); line breaks and page breaks are Word's and may differ from the typst pages (the typst overlay is not comparable page for page); the .docx needs EB Garamond installed on the machine that opens it, or Word substitutes a face silently.
+- Matches the typst form in its styles: letter, 1 in margins, Times New Roman 12 pt throughout (footnotes included; the typst face), exact 24 pt double spacing, 0.5 in first-line indent on numbered and unnumbered paragraphs, centered bold capitals for headings (text after "§" keeps its case), lettered items with a hanging indent, the caption with the ")" column on every row, a centered PAGE number in the footer, and the signature and "Approved by:" blocks flush right and left as in typst.
+- Differs: paragraph numbers are typed text with a tab, not Word list numbering; the caption is a borderless table (Word and LibreOffice draw it alike, but a reviewer should look); line breaks and page breaks are Word's and may differ from the typst pages (the typst overlay is not comparable page for page); the .docx needs Times New Roman installed on the machine that opens it, or Word substitutes a face silently.
 - BLOCKED, not verified: the `.docx.pdf` conversion (`soffice` is not installed on this box, and it cannot be installed here); the render command's zip check (`unzip` is not installed, so `tools/render-docx.sh` exits 1 after writing `usage/OUTPUT-adversary-complaint.docx`); the visual review of the .docx pages (pages reviewed: 0); opening the .docx in Word or LibreOffice without a repair prompt. The XML parts of the written .docx were checked with `xmllint` (well-formed), and the style IDs used by the body are all defined in the .docx.
 - The reference was made from pandoc's default reference with its styles, section and footer parts edited directly; no build script is kept in `docx/`.

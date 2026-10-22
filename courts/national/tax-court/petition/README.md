@@ -130,7 +130,7 @@ Unchanged from 2026-10-14 (the earlier pass above, sha256 `89edd40d...` of the o
 
 ## Engines
 
-**docx** (`docx/reference.docx` from `docx/build-reference.sh`, and `docx/tax-petition.lua`). Output: `usage/OUTPUT-petition-2.docx` and `usage/OUTPUT-petition-2.docx.pdf` (LibreOffice conversion, 3 pages).
+**docx** (`docx/reference.xml`, the styles first built by `docx/build-reference.sh` and extracted when it was retired in fb-595.68, from which fb render builds the reference document in the typst face, Liberation Serif; and `docx/tax-petition.lua`). Output: `usage/OUTPUT-petition-2.docx` and `usage/OUTPUT-petition-2.docx.pdf` (LibreOffice conversion, 3 pages).
 
 - Matches the typst output: Liberation Serif 14 pt throughout; letter, 1 in side margins, 1 in top and bottom; double spacing as exact 24.1 pt lines and single as exact 14.7 pt; 0.5 in first-line indent; caption with the ")" column and "Docket No."; centered bold headings; signature block with the rule above the name; centered page number. Page breaks are the same as the typst render (6(d) ends page 2, 6(e) starts page 3). Word text of both renders matches.
 - Differs: the caption, title and signature block are built by the filter as borderless tables, so their positions differ from typst by a few points. The page number sits at the footer distance (0.75 in), not at typst's exact 55.8 pt from the edge.

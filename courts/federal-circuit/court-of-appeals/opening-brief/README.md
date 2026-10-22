@@ -13,11 +13,11 @@
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `cafc-brief`. |
 | `typst/cafc-opening-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit` (14,000), `required-sections` (Fed. Cir. R. 28(a)(5)-(10) order), `needs-standard-of-review`, `addendum = "required"`. |
 | `usage/INPUT-opening-brief.md` | Markdown contract sample (frontmatter + body). |
-| `usage/OUTPUT-opening-brief.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md` (21 pages). |
+| `usage/OUTPUT-opening-brief.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md` (22 pages). |
 | `usage/OVERLAY-delfasco-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-appeals/opening-brief delfasco-opening-brief` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
-Typst is run by `tools/render.sh` with vendored fonts only (`--ignore-system-fonts`); the sample's embedded fonts are EB Garamond Regular, Italic, Bold, BoldItalic, and nothing else. The build emitted no warnings.
+Typst is run by `tools/render.sh` with vendored fonts and the pinned Times New Roman install only (`--ignore-system-fonts`, `docs/FONTS.md` rule 1); the sample's embedded fonts are Times New Roman Regular, Italic, Bold, BoldItalic, and nothing else. The build emitted no warnings.
 
 ## Governing rules
 
@@ -47,7 +47,7 @@ FRAP text is taken from the same compilation (its Federal Rules of Appellate Pro
 
 ## Overlay
 
-`usage/OVERLAY-delfasco-opening-brief.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
+`usage/OVERLAY-delfasco-opening-brief.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (on the earlier 21-page EB Garamond render; word overlap in parentheses):
 
 - p.1 ↔ filed p.27 (64%): the filed addendum cover repeats the caption and proceeding lines.
 - p.2 ↔ p.2 (91%), p.3 ↔ p.3 (61%), p.4 ↔ p.4 (46%): certificate of interest, contents, authorities.
@@ -60,7 +60,7 @@ FRAP text is taken from the same compilation (its Federal Rules of Appellate Pro
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-opening-brief.typst.pdf` was rendered at 60 dpi (`pdftoppm -r 60`) and viewed (21 of 21). Pages 2 and 20 were fixed after the first review (duplicate periods in the certificate of interest; missing paragraph break in the Form 19 certificate) and viewed again.
+Every page of `OUTPUT-opening-brief.typst.pdf` was rendered at 60 dpi (`pdftoppm -r 60`) and viewed (21 of 21, on the earlier EB Garamond render; the 22-page cross-engine review is at the end of this file). Pages 2 and 20 were fixed after the first review (duplicate periods in the certificate of interest; missing paragraph break in the Form 19 certificate) and viewed again.
 
 | Page | Content | Result |
 |---|---|---|
@@ -89,12 +89,12 @@ Every page of `OUTPUT-opening-brief.typst.pdf` was rendered at 60 dpi (`pdftoppm
 ## Known gaps and decisions
 
 - **Sample is an excerpt.** Argument II stops after the agency-website passage and Argument III is not transcribed. The filed addendum (the ASBCA decision) is a placeholder. The sample covers cover, certificate of interest, contents, authorities, related cases, jurisdiction through Argument II, conclusion, signature, and both certificates. Case names, citations and APPX references are transcribed as printed; OCR errors in the exemplar's text layer were corrected from context (e.g. "M117-76" printed as "Ml(-76" is set as "MK-76"; "Contel" for "Conte!"; "Arkansas Natural Gas Corp." for the OCR "Arkansas Gas Cmp.").
-- **Length above the target.** The render is 21 pages: front matter 6 (cover, certificate of interest, contents, two pages of authorities, related cases), body 11, addendum 2 (the sample's placeholder), certificates 2. The brief's own 8-14 target is exceeded by the front matter and the certificates, which the rules require or the exemplar carries. The body alone is 11 pages.
+- **Length above the target.** The render was 21 pages on the earlier EB Garamond render (22 now): front matter 6 (cover, certificate of interest, contents, two pages of authorities, related cases), body 11, addendum 2 (the sample's placeholder), certificates 2. The brief's own 8-14 target is exceeded by the front matter and the certificates, which the rules require or the exemplar carries. The body alone is 11 pages.
 - **Cover color.** FRAP 32(a)(2): blue for the appellant's paper copies only; not produced here.
 - **Certificate of compliance included although not required.** Fed. Cir. R. 32(b)(3) requires it only for a brief over the page limit. The template generates it to match the exemplar; the Form 19 wording is reproduced, the word count is computed from the markdown, and the other two Form 19 options are left blank for the filer.
 - **Certificate of service.** Fed. Cir. R. 25(e) requires proof of service only for service outside CM/ECF (Form 30). The template prints ECF-service wording (as the exemplar does) when `service.certificate: true`. For paper or other service, the `unregistered` list prints U.S. Mail wording; Form 30's full layout is not reproduced.
 - **Addendum placement.** Fed. Cir. R. 28(a)(11)-(12) puts the addendum before the certificate of compliance. The exemplar does the same. The certificates continue the body's arabic pagination.
-- **Typeface.** The exemplar is set in Times; the template uses EB Garamond at 14 pt, a proportionally spaced serif face (FRAP 32(a)(5)(A)). This is a choice of face, not a rule difference.
+- **Typeface.** The exemplar is set in Times; the template uses Times New Roman at 14 pt, a proportionally spaced serif face (FRAP 32(a)(5)(A)).
 - **Oral argument statement.** Not in the sample. If a brief includes one, the template removes it from the word count (FRAP 32(f)).
 - **Not verified.** The cover's exact placement of counsel block and phone for the Federal Circuit is taken from the exemplar and FRAP 32(a)(2)(F); the Federal Circuit's own cover form is not in the compilation.
 
@@ -104,11 +104,13 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 
 | Engine | Files | Output (`usage/`) | Pages |
 |---|---|---|---|
-| typst (reference) | `typst/` | `OUTPUT-opening-brief.typst.pdf` | 21 |
-| latex | `latex/template.tex`, `latex/cafc.lua` (stock pdflatex, newtx Times) | `OUTPUT-opening-brief.latex.pdf` | 23 |
-| docx | `docx/reference.docx` (made by `docx/make-reference.sh` from `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-opening-brief.docx` and `.docx.pdf` (LibreOffice 26.8, vendored fonts only) | 21 |
+| typst (reference) | `typst/` | `OUTPUT-opening-brief.typst.pdf` | 22 |
+| latex | `latex/template.tex`, `latex/cafc.lua` (stock pdflatex, newtx Times) | `OUTPUT-opening-brief.latex.pdf` | 22 |
+| docx | `docx/reference.xml` (the court's styles, extracted from the former `make-reference.sh` output; `fb render --engine docx` builds the reference document from it), `docx/cafc-docx.lua` (writes the sections and footers, `FORMBOOK_FOOTERS`, `FORMBOOK_FINAL`) | `OUTPUT-opening-brief.docx` and `.docx.pdf` (LibreOffice) | 22 |
 
-**Matches the typst layout (latex and docx):** 14 pt EB Garamond throughout, footnotes included; double spacing at the typst baseline pitch (31.43 pt); 1 in margins; the clerk's caption, certificate of interest, contents and authorities with page numbers; Argument labels (I. / A. / 1. / a.); the addendum with its own contents and `Add-` pages; the certificate of compliance (Form 19 wording, box checked) and the certificate of service; page numbers in the footer (roman, arabic, `Add-`).
+The paragraphs below, down to "Pages viewed", describe the engines before the Times New Roman switch and the cross-engine port and are kept as history; "Cross-engine layout model" at the end of this file is the current state.
+
+**Matches the typst layout (latex and docx):** 14 pt Times New Roman throughout (TeX Gyre TermesX, newtx, in latex; EB Garamond before the rule-6 switch), footnotes included; double spacing at the typst baseline pitch (31.43 pt); 1 in margins; the clerk's caption, certificate of interest, contents and authorities with page numbers; Argument labels (I. / A. / 1. / a.); the addendum with its own contents and `Add-` pages; the certificate of compliance (Form 19 wording, box checked) and the certificate of service; page numbers in the footer (roman, arabic, `Add-`).
 
 **Differs from the typst layout:**
 

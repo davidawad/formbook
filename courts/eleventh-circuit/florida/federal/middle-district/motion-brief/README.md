@@ -7,17 +7,17 @@ Folder: `courts/eleventh-circuit/florida/federal/middle-district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (a portion of the 19-page filing; see "Excerpt") |
-| typeface | Face required: **Book Antiqua** (LR 1.08(a); the filed exemplar is set in Book Antiqua for the body). Vendored substitute: **TeX Gyre Pagella** (visual only, `docs/FONTS.md`). See "Typeface" below. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages (13 with EB Garamond; the wider substitute adds a page), typst 0.15.0, no warnings, `pdffonts`: TeX Gyre Pagella embedded |
-| overlay | ok: `usage/OVERLAY-phillip-motion-to-dismiss.pdf` and `OVERLAY-phillip-motion-to-dismiss.txt` |
-| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the font change) |
+| typeface | Faces allowed: LR 1.08(a) names Book Antiqua (the filed exemplar's body face) among five; 1.08(b) permits Times New Roman at 14 point. Template: **Times New Roman** 14 pt (FLMD-FORM-004; the house standard, `docs/FONTS.md` rule 6), in typst and docx; earlier renders used TeX Gyre Pagella, a visual stand-in for Book Antiqua. See "Typeface" below. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 15 pages (13 with EB Garamond, 14 with TeX Gyre Pagella), typst 0.15.0, no warnings, `pdffonts`: Times New Roman embedded |
+| overlay | ok: `usage/OVERLAY-phillip-motion-to-dismiss.pdf` and `OVERLAY-phillip-motion-to-dismiss.txt` (measured on an earlier render) |
+| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the change to TeX Gyre Pagella; the earlier 14-page render) |
 
 ## Governing rules
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| M.D. Fla. Local Rule 1.08(a) | 8½ × 11 paper; 1-inch margins; bottom-center page numbers (none needed on page one); main text at least 13-point, 2.0 double-spaced; indented quotations at least 12-point single-spaced; footnotes at least 11-point single-spaced; permitted typefaces (Book Antiqua, Calisto MT, Century Schoolbook, Georgia, Palatino). | `page-margin`, footer in `flmd-motion-brief()`, `type-size`, `body-leading`, `show quote`. Typeface: Book Antiqua, substituted by TeX Gyre Pagella (see "Typeface"). |
-| M.D. Fla. Local Rule 1.08(b) | Times New Roman at 14-point main text, 13-point indented quotations, 12-point footnotes. | `type-size = 14pt`. |
+| M.D. Fla. Local Rule 1.08(a) | 8½ × 11 paper; 1-inch margins; bottom-center page numbers (none needed on page one); main text at least 13-point, 2.0 double-spaced; indented quotations at least 12-point single-spaced; footnotes at least 11-point single-spaced; permitted typefaces (Book Antiqua, Calisto MT, Century Schoolbook, Georgia, Palatino). | `page-margin`, footer in `flmd-motion-brief()`, `type-size`, `pitch-double`, `show quote`. Typeface: Times New Roman under 1.08(b) (see "Typeface"). |
+| M.D. Fla. Local Rule 1.08(b) | Times New Roman at 14-point main text, 13-point indented quotations, 12-point footnotes. | `font-family = ("Times New Roman", "Liberation Serif")`, `type-size = 14pt` (all text at 14 pt). |
 | M.D. Fla. Local Rule 3.01(b) | A motion includes, in a single document no longer than twenty-five pages, a concise statement of the precise relief requested, the basis, and a legal memorandum. | Not checked by the template (see gap 3). |
 | M.D. Fla. Local Rule 3.01(a) | Page limits exclude the caption, the signature block, any certificate of conferral or service, and any verification or attachment. | Relevant to the 25-page count; not computed. |
 | M.D. Fla. Local Rule 3.01(g) | Duty to confer before filing a motion, except for a Rule 11 sanction, injunctive relief, judgment on the pleadings, summary judgment, or class certification. A Rule 12(b)(6) motion to dismiss is **not** exempt. The certificate goes under the heading "Local Rule 3.01(g) Certificate" at the end of the motion. | Sample body: the certificate precedes the signature block. |
@@ -31,7 +31,7 @@ Sources: Local Rule 1.08 and 3.01 text from the court's amended local rules effe
 ## Layout
 
 - Court title single-spaced; caption (parties with closing rule; `CASE NO.:` with judge initials on the right); title centered bold; the Rule 12 lead-in paragraph with indent.
-- Body double-spaced (2.0 em baseline pitch), 14-point TeX Gyre Pagella, 1-inch margins, first-line indent on paragraphs. Body paragraphs are **not** numbered (memoranda are not pleadings under Rule 10(b)).
+- Body double-spaced (32.2 pt baseline pitch, `pitch-double`), 14-point Times New Roman, 1-inch margins, first-line indent on paragraphs. Body paragraphs are **not** numbered (memoranda are not pleadings under Rule 10(b)).
 - Headings: level 1 centered bold (write caps in the sample); level 2 centered bold; level 3 bold, left; level 4 bold italic, left.
 - Signature block (after the 3.01(g) certificate): "Respectfully submitted," firm, each counsel's `s/` line and details, address, "Attorneys for Defendants". Kept as one unbreakable block.
 - Certificate of service: the sample's `# CERTIFICATE OF SERVICE` and everything after it are printed after the signature block as one unbreakable block.
@@ -45,12 +45,12 @@ Sources: Local Rule 1.08 and 3.01 text from the court's amended local rules effe
 
 ## Typeface
 
-- Face required: Book Antiqua (LR 1.08(a) names it; the filed exemplar's body is `BookAntiqua`, with Times New Roman in some places).
-- Vendored substitute: **TeX Gyre Pagella** (`fonts/tex-gyre-pagella/`, GUST Font License), Typst family name `TeX Gyre Pagella`, set in `typst/flmd-motion-brief.typ` as `font-family`. `docs/FONTS.md` marks it **visual only**: it is a Palatino clone, and Book Antiqua is not metric-compatible with it.
-- Size: 14-point main text (1.08(a) minimum 13-point).
-- Leading: `body-leading` is 1.31 em (was 1.35 em with EB Garamond). This keeps the measured baseline pitch at 2.0 em (28.1 pt at 14 pt). Leading is the only spacing unit changed.
-- Pagination: 14 pages, one more than with EB Garamond (13). The substitute is wider, so paragraphs wrap to more lines. The page-count change is recorded here; the signature block and the certificate of service still sit as unbreakable blocks.
-- Because the substitute is only visual, line breaks and the page count will differ from a filing set in Book Antiqua. The length check against the 25-page limit (LR 3.01(b)) must not rely on this render.
+- Faces allowed: LR 1.08(a) names Book Antiqua (the filed exemplar's body is `BookAntiqua`, with Times New Roman in some places) among five; 1.08(b) permits Times New Roman at 14 point. The template sets Times New Roman (FLMD-FORM-004), the pinned install (`docs/FONTS.md` rule 1), as the house standard (rule 6), in typst and docx.
+- Earlier renders: **TeX Gyre Pagella** (`fonts/tex-gyre-pagella/`, GUST Font License) as a visual stand-in for Book Antiqua (`docs/FONTS.md` marks it **visual only**: a Palatino clone, not metric-compatible with Book Antiqua). The notes below on leading and pagination are from that render.
+- Size: 14-point main text (1.08(b) for Times New Roman; 1.08(a) minimum 13-point).
+- Leading (the Pagella render): `body-leading` was 1.31 em (was 1.35 em with EB Garamond). This keeps the measured baseline pitch at 2.0 em (28.1 pt at 14 pt). Leading is the only spacing unit changed.
+- Pagination (the Pagella render): 14 pages, one more than with EB Garamond (13); the committed Times New Roman render is 15. The substitute is wider, so paragraphs wrap to more lines. The page-count change is recorded here; the signature block and the certificate of service still sit as unbreakable blocks.
+- Line breaks and the page count differ from a filing set in Book Antiqua. The length check against the 25-page limit (LR 3.01(b)) must not rely on this render.
 
 ## Known gaps and open choices
 
@@ -63,9 +63,9 @@ Sources: Local Rule 1.08 and 3.01 text from the court's amended local rules effe
 7. **Overlay file names.** See the complaint README, gap 6.
 8. **Gates not run.** See the complaint README, gap 7.
 9. **Exemplar typos preserved.** The sample reproduces the filing's text, including its "Per to Local Rule 3.01(g)", "Section III. CONCLUSION" after "IV. ARGUMENT", and "failed to identified". They are the filer's, not ours; the sample is a transcription.
-10. **Overlay pairing.** Pages are paired by shared words, and the excerpt skips filed pages, so pairs are loose: word overlap is 39 to 47 percent on sample pages 4, 9 and 12 (paired with filed pages 7, 16 and 19). Read the overlay as a diagnostic; the cause of each low pairing was not traced further.
+10. **Overlay pairing** (measured on an earlier render). Pages are paired by shared words, and the excerpt skips filed pages, so pairs are loose: word overlap is 39 to 47 percent on sample pages 4, 9 and 12 (paired with filed pages 7, 16 and 19). Read the overlay as a diagnostic; the cause of each low pairing was not traced further.
 
-## Review of the rendered pages (current PDF, 60 dpi, after the Pagella change)
+## Review of the rendered pages (the earlier 14-page Pagella PDF, 60 dpi)
 
 Every page was rendered with `pdftoppm -r 60`, montaged two per image, and viewed. Result below.
 
@@ -89,18 +89,18 @@ Every page was rendered with `pdftoppm -r 60`, montaged two per image, and viewe
 | Engine | Status |
 |---|---|
 | typst | primary; unchanged by this section |
-| docx | built: `docx/reference.docx` (made by `sh ../complaint/docx/make-reference.sh docx/reference.docx motion`), `docx/flmd-motion-brief.lua`, `docx/render.sh`. Output `usage/OUTPUT-motion-brief.docx` (valid zip, well-formed XML, text check below). `OUTPUT-flmd-motion-brief-phillipmotiontodismiss.docx.pdf`: **BLOCKED** (no LibreOffice on this box; see the complaint README, "Engines"). |
+| docx | built: `docx/reference.xml`, from which `fb render --engine docx` builds the reference document (the cross-engine recipe, `base="xengine"`, in the typst template's face; the complaint's `make-reference.sh` and `docx/render.sh` are retired), and `docx/flmd-motion-brief.lua`. Output `usage/OUTPUT-motion-brief.docx` and the LibreOffice `usage/OUTPUT-motion-brief.docx.pdf` (15 pages); the BLOCKED item below was recorded before fb-595.68, when no LibreOffice ran here. |
 | latex | not built |
 
 What matches the typst template (by rule): Letter, 1-inch margins; main text 14-point, double-spaced; indented body paragraphs, not numbered; headings levels 1 to 4 (level 1 and 2 centered bold, level 3 bold left, level 4 bold italic left); lettered lists; the caption and cover; the signature block at 3 inches, kept as one block; the Local Rule 3.01(g) certificate before the signature; the certificate of service after it, kept together; page numbers bottom center from page two.
 
-What differs from typst:
+What differs from typst (recorded before fb-595.68):
 
-- **Typeface.** The typst template sets TeX Gyre Pagella, a visual stand-in for Book Antiqua (LR 1.08(a)). The docx names **Times New Roman 14-point** instead, which LR 1.08(b) also permits. Reason: a clerk's Word must have the named face, and Book Antiqua has no metric-compatible free substitute on this box (`fc-match` falls back to a mono face). This is a choice for David to confirm; if Book Antiqua is required, the docx needs a font that renders with the same metrics before the PDF gates mean anything.
+- **Typeface** (since settled: typst and docx both set Times New Roman 14-point now). The typst template then set TeX Gyre Pagella, a visual stand-in for Book Antiqua (LR 1.08(a)). The docx named **Times New Roman 14-point** instead, which LR 1.08(b) also permits. Reason: a clerk's Word must have the named face, and Book Antiqua has no metric-compatible free substitute on this box (`fc-match` falls back to a mono face). This is a choice for David to confirm; if Book Antiqua is required, the docx needs a font that renders with the same metrics before the PDF gates mean anything.
 - **Line spacing and length.** Word's native double (auto 2.0), as in the complaint: the docx page count may differ from the typst render (14 pages); not measured here.
 - **Quotations** are 13-point single-spaced (LR 1.08(b)); the typst template sets no quotation size. Footnotes are not in the markdown contract (as in the typst template).
 - **Numbers.** Lettered items are typed `(a)`, `(b)`; the body paragraphs are unnumbered, as in the typst template.
 
 Checks run on the `.docx` (not a PDF gate): every word of the markdown body is in the docx text in order (2804 of 2804 words, including the certificate of service after the signature; `pandoc -t plain`, with smart-punctuation no-break spaces and ellipses normalized).
 
-BLOCKED (docx tier 1 gates, `docs/DOCX.md`): `OUTPUT-flmd-motion-brief-phillipmotiontodismiss.docx.pdf` could not be made (LibreOffice not runnable here, see the complaint README). Gates 0 and 1 and the Gate 2 page review were not run on a docx PDF; pages reviewed: 0. The sample is an excerpt (see gap 2 above), so the 25-page limit (LR 3.01(b)) is not tested by any engine.
+BLOCKED (docx tier 1 gates, `docs/DOCX.md`; recorded before fb-595.68): `OUTPUT-flmd-motion-brief-phillipmotiontodismiss.docx.pdf` could not be made (LibreOffice not runnable here, see the complaint README). Gates 0 and 1 and the Gate 2 page review were not run on a docx PDF; pages reviewed: 0. The sample is an excerpt (see gap 2 above), so the 25-page limit (LR 3.01(b)) is not tested by any engine.

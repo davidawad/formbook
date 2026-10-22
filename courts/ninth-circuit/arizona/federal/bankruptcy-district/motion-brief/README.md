@@ -8,10 +8,10 @@ Doc type: **motion** (FRBP 9013) with the memorandum of points and authorities t
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (Doc 762, filed 10/23/25, 11 pages, one filer; `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (transcription of pp. 1–9 of the exemplar: caption, numbered factual paragraphs, two tables, footnotes 1–10, memorandum argument, prayer, joinder and signature blocks; Exhibit A not transcribed) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings. Command: `sh tools/render.sh … usage/INPUT-motion-brief.md` exit 0 |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings (the earlier EB Garamond render, before fb-595.68.21; the committed render is 11 pages in Times New Roman). Command: `sh tools/render.sh … usage/INPUT-motion-brief.md` exit 0 |
 | overlay | ok: `usage/OVERLAY-titan-motion.pdf` and `.txt` (page map: ours p.1–4 pair with filed p.1–4, word overlap 74%–89%; ours p.5–8 pair with filed p.5, 7, 8, 9, overlap 44%–65%; filed p.6 is unpaired, the page holding the table sits between them). Command: `sh tools/overlay.sh … titan-motion` exit 0. Re-run 2026-10-15: exit 1, "no exemplar pdf": `usage/FILED-EXAMPLE-motion-brief.pdf` is not in this checkout (git tracks only `usage/SOURCE.md`), so the overlay could not be regenerated; the committed `OVERLAY-titan-motion.txt` is from an earlier run |
-| typeface | face required: none. LRBP 9004-1(g) (checked on azb.uscourts.gov, 2026-10-15) says "a proportional font size no smaller than 13 point" and names no face. EB Garamond kept; no vendored substitute needed. The filed exemplar is Times New Roman, but the rule does not require it, so the template is not changed to it |
-| pages reviewed | 8 of 8 (every page of the OUTPUT rasterised at 110 dpi and viewed in its final state; re-reviewed 2026-10-15 at 60 dpi, 8 of 8, after the re-render) |
+| typeface | face required: none. LRBP 9004-1(g) (checked on azb.uscourts.gov, 2026-10-15) says "a proportional font size no smaller than 13 point" and names no face. The template sets vendored Times New Roman 13 pt, the house standard (`docs/FONTS.md` rule 6), which is also the filed exemplar's face; the docx uses the same face |
+| pages reviewed | 8 of 8 (every page of the OUTPUT rasterised at 110 dpi and viewed in its final state; re-reviewed 2026-10-15 at 60 dpi, 8 of 8, after the re-render; both on the earlier EB Garamond render) |
 
 Note on file names: the tools default to `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf`/`.txt`, and `overlay.sh` reads `OUTPUT-<id>.pdf`. The sample id changed from `generic-motion` to `titan-motion`, and the fictional `usage/INPUT-generic-motion.md` was replaced by the transcription. The shared tools were not changed.
 
@@ -64,7 +64,7 @@ Not produced: certificate of service (LRBP 9013-1(k); author-written when needed
 ## Known gaps and open choices
 
 1. **One exemplar, one filer.** The bar for tier 2 is two or three filed exemplars from different filers. Only one motion was found (the Titan trustees' Doc 762, from Nach, Rodgers, Hilkert & Santilli and its co-trustee counsel). A motion from another Arizona filer is still open. Tier 2 is judged here against this one filing.
-2. **Font size.** The rule names no typeface, so EB Garamond is kept (see the typeface row above). The filed exemplar is Times New Roman. EB Garamond sets smaller at the same size. The 13-point minimum is met; the apparent size is smaller than the exemplar's.
+2. **Font size.** The rule names no typeface; the template sets Times New Roman 13 pt (see the typeface row above), the filed exemplar's face. The 13-point minimum is met.
 3. **Exhibit A not transcribed.** The exemplar's pp. 10–11 are the allocation table (Exhibit A, 23 rows). The sample transcribes the body, including the two summary tables (Shared Assets, Shared Costs), and stops at the signature page. The overlay therefore shows the exemplar's pp. 10–11 with no match.
 4. **No table of contents or table of authorities.** The rules read here do not require them for a motion in this court. A longer memorandum may need them by the judge's practice; the template does not generate them.
 5. **Notice of hearing and certificate of service are not generated.** LRBP 9013-1(k) (summarised from the court's rule page, not quoted) requires notice of the hearing and a certificate or affidavit of service; the author writes them in the body.
@@ -86,6 +86,8 @@ sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/moti
 sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief titan-motion
 ```
 
+Recorded on the earlier EB Garamond render (before fb-595.68.21 moved the template to Times New Roman, 11 pages); not re-measured:
+
 - Render: exit 0, no typst warnings, 8 pages (letter). Fonts embedded: EBGaramond-Regular, -Italic, -Bold.
 - Overlay: exit 0; `usage/OVERLAY-titan-motion.pdf`. Pairing by word overlap, from `OVERLAY-titan-motion.txt`: sample pp. 1–4 to filed pp. 1–4 (74–89%); sample pp. 5–8 to filed pp. 5, 7, 8, 9 (44–65%). The lower overlap from p.5 is the pagination difference, not a missing passage: the sample reaches the signature page one page before the filing does.
 - Page-limit mutation test (from the earlier fictional-sample review, template unchanged in this respect): a temporary 27-page sample fails the build with "27 pages; LRBP 9013-1(b) allows 15". The 8-page sample passes.
@@ -102,17 +104,17 @@ sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/mot
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `arb-motion.lua` builds the filer block, the caption (one caption in the main case, a dual caption in an adversary), the headings with their labels, lists and tables; `render.sh` runs pandoc with `-fancy_lists` (the sample's `a.` and `i.` labels stay as typed text, as in typst) and fills the footer). Rendered: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.2 conversion, 9 pages). `pdffonts`: EB Garamond Regular, Bold and Italic only.
+DOCX (`docx/`: `reference.xml` holds the Word styles, from which `fb render --engine docx` builds the reference document on the shared cross-engine recipe (`base="xengine"`, the typst face); `arb-motion.lua` builds the filer block, the caption (one caption in the main case, a dual caption in an adversary), the headings with their labels, lists and tables, and writes the footer and the section (`FORMBOOK_FOOTERS`, `FORMBOOK_FINAL`); pandoc reads the sample with `-fancy_lists` (the sample's `a.` and `i.` labels stay as typed text, as in typst). No shell script: `build-reference.sh` and `render.sh` were retired into fb render in fb-595.68.21). Rendered with `sh tools/render.sh --engine docx`: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (11 pages, as the typst render). `pdffonts`: Times New Roman Regular, Bold and Italic only.
 
-Matches the typst form (every page of the `.docx.pdf` rendered at 60 dpi and viewed: pages 1 to 9 of 9):
-- Letter paper; margins and the 28 pleading lines as in `arb-motion.typ`, with the numbers in one header text box and the rules from `pgBorders`.
-- EB Garamond 13 pt, 24 pt line pitch. Filer block on lines 1 to 7, court title on line 8, caption with the rules, the title and relief beside the case number.
+Matches the typst form (recorded on the earlier EB Garamond build, 9 pages, every page of the `.docx.pdf` rendered at 60 dpi and viewed: pages 1 to 9 of 9; face, line count and frame updated to the current files):
+- Letter paper; margins and the 27 pleading lines as in `arb-motion-brief.typ`, with the numbers in a page-anchored frame in the footer the filter writes and the rules from `pgBorders`.
+- Times New Roman 13 pt, 24 pt line pitch. Filer block on lines 1 to 7, court title on line 8, caption with the rules, the title and relief beside the case number.
 - Headings: level 1 centred capitals at 18 pt; level 2 with the label hung at the margin ("I.") at 15.5 pt; level 3 with the label at 0.5 in ("A.").
 - Lists keep the sample's labels (bullets; `a.`, `i.`, `1.`) with hanging indents. Markdown tables have a full grid at 12 pt, their columns sized to their content, so figures do not wrap.
 - Footnotes 12 pt single. Footer: page number, the title in capitals, `CASE NO.` and the number. The last body paragraph is kept with the signature block.
 
 Differs from the typst form:
-- Pagination: 9 pages here against 8 in typst (the extra page is the prayer and joinder, which the renderer lays out with the signature on page 9).
+- Pagination (earlier EB Garamond build; both engines now give 11 pages): 9 pages here against 8 in typst (the extra page is the prayer and joinder, which the renderer lays out with the signature on page 9).
 - Block quotations: the spacing above and below is approximate (typst's quote is set on its own lines with a different leading).
 - The table column widths come from a per-character model measured on the typst render; a font metric that differs in Word can still wrap a figure.
 - Not opened in Word (no Word here). The header text box and page borders are verified in LibreOffice only.

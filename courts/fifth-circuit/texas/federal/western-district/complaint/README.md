@@ -7,10 +7,10 @@ Folder: `courts/fifth-circuit/texas/federal/western-district/complaint/`.
 |---|---|
 | exemplar | yes, two filers: `usage/FILED-EXAMPLE-complaint.pdf` (counsel-drafted, used for the sample) and `usage/FILED-EXAMPLE-complaint-2.pdf` (self-represented, not transcribed). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-complaint.md` (an excerpt of the 35-page filing: caption, parties, jurisdiction, opening general allegations, the first count, prayer in part, jury demand, signature). |
-| typeface | face required: none (CV-10(a) names no face). Substitute: none needed; **EB Garamond** kept (`docs/FONTS.md`, "No face named"). Embedded: EB Garamond Regular and Bold only (`pdffonts`, 2026-10-14). |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14). |
+| typeface | face required: none (CV-10(a) names no face). Substitute: none needed; **Times New Roman** 12 pt (`docs/FONTS.md` rule 6, the house standard; EB Garamond 13 pt before fb-595.68). Embedded: Times New Roman Regular and Bold only (`pdffonts` on the committed render). |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages (9 on the 2026-10-14 EB Garamond render, before fb-595.68), typst 0.15.0, pinned Times New Roman only, no warnings. |
 | overlay | ok: `usage/OVERLAY-lilly-first-amended-complaint.pdf` and `.txt` (see "Overlay" below), regenerated 2026-10-14 against `usage/FILED-EXAMPLE-complaint.pdf`. That PDF was missing from the checkout and was fetched from the URL in `usage/SOURCE.md`. |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; all 9 viewed again on the 2026-10-14 re-render). |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; all 9 viewed again on the 2026-10-14 re-render; the EB Garamond render, before fb-595.68). |
 | gates | `tools/check.sh` not run: it expects a court folder with `court.json` and `rules.md`, which this doc-type folder does not have, and the brief forbids editing `tools/`. |
 
 ## Governing rules
@@ -19,7 +19,7 @@ Primary sources, fetched 2026-10-14:
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| W.D. Tex. Local Rule CV-10(a) | Typed or printed in 12-point or larger font (including footnotes), double-spaced, on 8½ × 11 paper, one-inch margins on all sides; endorsed with the style of the case and the descriptive name of the document. Headings, footnotes and quotations more than two lines long may be single-spaced. | `page` (us-letter, `margin: 1in`), `type-size = 13pt`, `body-leading` (2.0 em pitch), `title`, `caption`. |
+| W.D. Tex. Local Rule CV-10(a) | Typed or printed in 12-point or larger font (including footnotes), double-spaced, on 8½ × 11 paper, one-inch margins on all sides; endorsed with the style of the case and the descriptive name of the document. Headings, footnotes and quotations more than two lines long may be single-spaced. | `page` (us-letter, `margin: 1in`), `type-size = 12pt`, `pitch-double` (24 pt, 2 x the size), `title`, `caption`. |
 | W.D. Tex. Local Rule CV-10(b) | Represented party: attorney's mailing address, e-mail, signature, state bar card number, telephone and fax numbers, including area code. | `signature-block` (from the frontmatter `signature`). |
 | W.D. Tex. Local Rule CV-10(c) | Unrepresented party: address, e-mail, signature, telephone and fax. | Not separately templated; the same block serves (a self-represented filer uses the party's own details). |
 | Fed. R. Civ. P. 10(a) | Caption: court name, title of the action, file number, and the Rule 7(a) designation of parties. | `court-title`, `caption` (a § column, the W.D. Tex. convention seen in both exemplars), `title`. |
@@ -32,8 +32,8 @@ Not produced by this template (separate filings): the civil cover sheet, the fil
 ## Layout
 
 - 8½ × 11, one-inch margins on all sides (CV-10(a)). No pleading-paper numbered lines: W.D. Tex. does not require them (the cand complaint does, and it is a different court).
-- EB Garamond at 13 pt. CV-10 says 12 pt or larger; 13 pt gives the same apparent size as the 12-pt Times in the exemplar (Garamond sets smaller at the same point size). Footnotes would be 13 pt too. This is a choice inside the rule, not a deviation.
-- Double spacing: 2.0 em pitch (26 pt at 13 pt), with paragraph spacing equal to the leading so paragraphs sit one pitch apart.
+- Times New Roman at 12 pt (`docs/FONTS.md` rule 6), the exemplar's face and size. CV-10 says 12 pt or larger. (Before fb-595.68 the template was EB Garamond at 13 pt, to match the apparent size of the exemplar's 12-pt Times.)
+- Double spacing: 24 pt pitch (2 x 12 pt), with paragraph spacing equal to the leading so paragraphs sit one pitch apart.
 - Caption: party column (3.7 in), § column, case-number column; each row one line; empty rows get a fixed one-line height so they do not collapse. The party column is wide enough that no party line wraps.
 - Caption and signature block single-spaced (CV-10(a) allows single spacing for headings and quotations; the caption and signature are the same convention in both exemplars).
 - Headings: centred bold capitals for level 1 and 2 (`# THE PARTIES`, `## FIRST CAUSE OF ACTION`); left bold for level 3 (`### I. FDA's ...`); count sub-headings are centred single-spaced lines (`> ...`).
@@ -54,9 +54,9 @@ Not produced by this template (separate filings): the civil cover sheet, the fil
 `sh tools/overlay.sh <court-dir> lilly-first-amended-complaint <exemplar.pdf>`. The exemplar is passed explicitly: the tool otherwise takes the alphabetically first PDF in `usage/`, which is the Callier file.
 
 - The tool writes `usage/OVERLAY-<id>.pdf` and `OVERLAY-<id>.txt`, not the `<id>-overlay.*` names in the brief. The tool was not changed (the brief forbids editing `tools/`); file roles follow CLAUDE.md (`OVERLAY-<id>`).
-- Page map (word-overlap pairing): ours p.1-7 ↔ filed p.1-8; ours p.8 ↔ filed p.32 (prayer); ours p.9 ↔ filed p.35 (signature). The overlay is a diagnostic, not a score: the filing has footnotes and romanette lists the sample does not reproduce, and the exemplar's line spacing differs.
+- Page map (word-overlap pairing, on the earlier EB Garamond render, before fb-595.68): ours p.1-7 ↔ filed p.1-8; ours p.8 ↔ filed p.32 (prayer); ours p.9 ↔ filed p.35 (signature). The overlay is a diagnostic, not a score: the filing has footnotes and romanette lists the sample does not reproduce, and the exemplar's line spacing differs.
 
-## Review of the rendered pages (Gate 2 record; every page viewed at 60 dpi)
+## Review of the rendered pages (Gate 2 record; every page viewed at 60 dpi; the earlier EB Garamond render, before fb-595.68)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -77,9 +77,9 @@ Reviewed pages: 9 of 9.
 1. **Two filers, one transcribed.** EVAL-LOOP tier 2 asks for two or three filers. The Callier complaint is saved as a second exemplar but not transcribed, and the overlay is against Lilly only. The two filings differ (counsel-drafted vs self-represented), so the tier-2 comparison is not done.
 2. **Sample is an excerpt.** Paragraph 17 is cut after its first sentence, paragraphs 18–24 and the first count are transcribed, the remaining counts and most of the prayer are omitted. The sample is 9 pages; the filing is 35.
 3. **Prayer sub-items.** Item 1 of the prayer lists four of the eight declarations, with bullets where the exemplar has romanettes (i to viii). Romanette lists are not supported by the markdown contract.
-4. **Footnotes.** The exemplar has eight footnotes; the sample omits them. The template has no footnote rule; CV-10(a) requires 12 pt or larger for footnotes, which the 13 pt setting satisfies, but the layout is untested.
+4. **Footnotes.** The exemplar has eight footnotes; the sample omits them. The template has no footnote rule; CV-10(a) requires 12 pt or larger for footnotes, which the 12 pt type size meets, but the layout is untested.
 5. **Signature block on its own page.** Page 9 holds only the signature block because the block is unbreakable. A breakable block would let the last paragraphs and the block share page 8; left as is because the convention is to keep the signature with the text, which here means a page break.
-6. **Font.** EB Garamond (vendored, OFL), 13 pt. The exemplar is Times New Roman 12 pt, but CV-10(a) names no face (it requires only "12-point or larger"), so no court-named substitute applies and EB Garamond is kept (`docs/FONTS.md`, "No face named"). Visual-only comparison with the exemplar's Times; not metric-compatible with it, so line breaks differ.
+6. **Font.** Times New Roman, 12 pt, as the exemplar. CV-10(a) names no face (it requires only "12-point or larger"); Times New Roman is the house standard (`docs/FONTS.md` rule 6). Before fb-595.68 the template was EB Garamond 13 pt, not metric-compatible with the exemplar's Times.
 7. **Justification.** Body text is left-aligned (ragged right). The exemplar's justification could not be read from the text layer; not asserted.
 8. **Paragraph numbers differ from the filing.** Numbering is by the template; the filed numbers are not carried over.
 9. **Characters per line.** Not measured; CV-10 does not set a characters-per-inch limit.
@@ -89,10 +89,10 @@ Reviewed pages: 9 of 9.
 
 ## Engines
 
-docx (`docx/`): `render.sh` runs pandoc with `reference.docx` (built by `build-reference.sh`) and `txwd-complaint.lua`, then patches the list definitions pandoc writes. Output: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice). Opened and checked in LibreOffice only; Word was not checked.
+docx (`docx/`): `fb render --engine docx` builds the reference document from `docx/reference.xml` (`base="xengine"`, the shared cross-engine recipe in the typst template's face) and runs pandoc with `txwd-complaint.lua`. (Before fb-595.68, `docx/render.sh` ran pandoc with a `reference.docx` from `build-reference.sh` and patched the list definitions; both are retired into fb render.) Output: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice). Opened and checked in LibreOffice only; Word was not checked.
 
-- Matches the typst form: EB Garamond 13 pt (embedded: EB Garamond Regular and Bold only), letter with 1 in margins, double spacing as exact 26 pt lines and single as exact 15.6 pt, caption as a borderless table (party column, § column, case column), numbered paragraphs (Word list numbering, numbers at 0.5 in), headings centred bold (level 1 and 2) and left bold (level 3), centred count lines, unnumbered prayer lead-in, signature table kept on one page, centred PAGE number.
-- Differs: LibreOffice draws the glyphs at the bottom of each exact 26 pt line, so the first line of each page sits about 12 pt lower than in typst and a page holds 24 lines (typst 25 to 26). The sample is 10 pages as docx and 9 as typst. Margins are unchanged. Not a tier-1 difference (CV-10 fixes double spacing, not lines per page).
-- Footnote text is 13 pt, single spaced (CV-10(a) minimum). The sample has no footnotes, so this is not exercised.
+- Matches the typst form: Times New Roman 12 pt (embedded: Times New Roman Regular and Bold only), letter with 1 in margins, double spacing as exact 24 pt lines and single as exact 14.4 pt, caption as a borderless table (party column, § column, case column), numbered paragraphs (Word list numbering, numbers at 0.5 in), headings centred bold (level 1 and 2) and left bold (level 3), centred count lines, unnumbered prayer lead-in, signature table kept on one page, centred PAGE number.
+- Differs (on the earlier EB Garamond 13 pt render, before fb-595.68): LibreOffice draws the glyphs at the bottom of each exact 26 pt line, so the first line of each page sits about 12 pt lower than in typst and a page holds 24 lines (typst 25 to 26). The sample is 10 pages as docx and 9 as typst. Margins are unchanged. Not a tier-1 difference (CV-10 fixes double spacing, not lines per page).
+- Footnote text was 13 pt, single spaced, on the earlier EB Garamond build (CV-10(a) minimum: 12 pt). The sample has no footnotes, so this is not exercised.
 - `tools/check.sh` cannot run on a doc-type folder (no `checks.yaml`, `rules.md` or `court.json` here); no gate stamp.
-- BLOCKED: page count (tier 1): docx 10 pages (LibreOffice) vs typst 9. LibreOffice fits 24 double-spaced lines per page where typst fits 25 to 26; not reproduced.
+- BLOCKED (as recorded before fb-595.68): page count (tier 1): docx 10 pages (LibreOffice) vs typst 9. LibreOffice fits 24 double-spaced lines per page where typst fits 25 to 26; not reproduced. The committed `OUTPUT-complaint.docx.pdf` and `OUTPUT-complaint.typst.pdf` are now 8 pages each.

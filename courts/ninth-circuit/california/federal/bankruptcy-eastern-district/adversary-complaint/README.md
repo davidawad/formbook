@@ -13,7 +13,7 @@ Doc-type folder of [caeb](../README.md). Typst is the template; the court's loca
 | Letter paper, black ink | LBR 9004-2(a)(1) | same PDF | M |
 | Consecutively numbered lines in the left margin, double spaced | LBR 9004-2(a)(2), (b)(1) | same PDF | M |
 | Font 12 to 14 point; Arial, Courier, Times, Times New Roman, Helvetica "or their equivalent" | LBR 9004-2(a)(4) | same PDF | M |
-| Typeface: face required Times New Roman (named in the list above) → vendored substitute `Liberation Serif` (docs/FONTS.md; metric-compatible) | LBR 9004-2(a)(4) | same PDF | M |
+| Typeface: face required Times New Roman (named in the list above) → vendored Times New Roman (Liberation Serif, its metric-compatible substitute, as fallback; docs/FONTS.md) | LBR 9004-2(a)(4) | same PDF | M |
 | Caption: court, case number, adversary number, title of document | LBR 9004-2(a)(6), (b)(5) | same PDF | M |
 | Margins at least one-half inch on all four sides | LBR 9004-2(b)(2) | same PDF | M |
 | Upper-right blank space for the clerk's stamp, at least 2 1/2 in. from the right edge and 3 in. from the top | LBR 9004-2(b)(3) | same PDF | M |
@@ -25,7 +25,7 @@ The local rules text was read from the Feb. 2025 PDF on 2026-10-14. The court al
 ## What the template does
 
 - `typst/main.typ` is the entry point; `typst/caeb-adversary-complaint.typ` holds the parameters, page furniture and body.
-- Layout: 28 numbered lines on a 24 pt pitch, 13 pt Liberation Serif (Times New Roman substitute), pleading rules, 1.5 in left margin, 0.75 in right, 0.5 in top, page number at the bottom center, page total at the top left of page 1.
+- Layout: 27 numbered lines on a 24 pt pitch, 13 pt Times New Roman, pleading rules, 1.5 in left margin, 1 in right, 1 in top, page number at the bottom center, page total at the top left of page 1.
 - Counsel block, court title and caption fill page 1; the body is numbered paragraphs (FRCP 10(b)) generated from the markdown, one per paragraph chunk; markdown lists become (a), (b), ...; a lead-in marked `^` is an unnumbered paragraph (for example "WHEREFORE").
 - Signature blocks render `/s/` and the typed name (LBR 9004-1(c)(1)(A) for electronic filing).
 - A section sign is joined to its number with a no-break space, so "§ 9-406" never splits across lines.
@@ -34,7 +34,7 @@ The local rules text was read from the Feb. 2025 PDF on 2026-10-14. The court al
 ## Samples and exemplars
 
 - `usage/INPUT-adversary-complaint.md`: transcription of the DLP Funding complaint (Doc 1, 10 pages) in `usage/FILED-EXAMPLE-adversary-complaint.pdf`. Caption, headings, 33 numbered paragraphs, prayer, signature blocks.
-- `usage/OUTPUT-adversary-complaint.typst.pdf`: our render. 9 pages, Liberation Serif only (`pdffonts`: LiberationSerif Regular, Italic, Bold embedded), no typst warnings. The pre-change EB Garamond render was also 9 pages, so the substitute did not change the length.
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: our render. 10 pages, Times New Roman only (`pdffonts`: TimesNewRomanPSMT, -ItalicMT, -BoldMT embedded). An earlier Liberation Serif render was 9 pages, as was the EB Garamond render before it; the overlay pairing below and the 9-page review were recorded on that earlier render.
 - `usage/OVERLAY-dlp-hronis-complaint.pdf` and `.txt`: red = ours, blue = filed, black = both. Pages are paired by word overlap; the `.txt` lists the pairs (ours p.1 to p.9 against filed p.1, p.3 to p.10). Page 1 pairs with filed page 1 (67.8%). Later pages pair at 80 to 90% word overlap, and our page 9 (signatures only) pairs with filed p.10 at 46.8%. The overlay is a diagnostic, not a score.
 - `usage/FILED-EXAMPLE-adversary-complaint-3.pdf` (second filer, 6 pages): checked for convention only. It shares the footer title with the DLP filing (see gaps).
 
@@ -42,7 +42,7 @@ Every page of the render (9 of 9) was rendered to PNG and viewed. The rows are n
 
 ## Gaps
 
-1. **Font (resolved).** LBR 9004-2(a)(4) names Times New Roman among the faces allowed "or their equivalent". The template now sets `Liberation Serif`, the metric-compatible Times New Roman substitute in `docs/FONTS.md`, instead of EB Garamond. Both filed exemplars set their body in Times New Roman (`pdffonts`: `TimesNewRomanPSMT` in the DLP filing, `Times-Roman` in the Kaur filing), so the substitute matches the filed practice. Visual check: every page of the new render was viewed (9 of 9). Remaining risk: the rule allows "equivalent" faces, so a clerk is not bound to Times New Roman, but the Times-metric choice is the conservative one.
+1. **Font (resolved).** LBR 9004-2(a)(4) names Times New Roman among the faces allowed "or their equivalent". The template now sets Times New Roman (vendored; Liberation Serif, its metric-compatible substitute in `docs/FONTS.md`, as fallback), instead of EB Garamond; the docx names the same face. Both filed exemplars set their body in Times New Roman (`pdffonts`: `TimesNewRomanPSMT` in the DLP filing, `Times-Roman` in the Kaur filing), so the substitute matches the filed practice. Visual check: every page of the Liberation Serif render was viewed (9 of 9). Remaining risk: the rule allows "equivalent" faces, so a clerk is not bound to Times New Roman, but the Times-metric choice is the conservative one.
 2. **Footer title (tier 2).** Both exemplars carry the document title in the footer; the LBR requires only the page number. A footer title would sit inside the one-half-inch bottom margin, which LBR 9004-2(b)(2) reserves, and no short form of the title fits beside the number. Not added; recorded as an open tier-2 item.
 3. **Sub-paragraph numbering.** The DLP filing numbers its sub-paragraphs 29.1 to 29.4; the template renders markdown lists as (a) to (d) and bullets. One filer's style, so tier 3, not chased.
 4. **No certificate of service.** Neither exemplar has one, so the template has none. Add one if a filed sample needs it.
@@ -53,11 +53,11 @@ Every page of the render (9 of 9) was rendered to PNG and viewed. The rows are n
 
 ## Engines
 
-**typst** is the primary engine (unchanged). No typst render exists for the sample (`usage/` has no `OUTPUT-adversary-complaint.typst.pdf`), so the docx below was compared with the template's parameters and the rules, not with a typst page.
+**typst** is the primary engine. Both engines now render the sample to 10 pages (`usage/OUTPUT-adversary-complaint.typst.pdf` and `.docx.pdf`). The notes below were recorded on an earlier docx build, when no typst render existed, so it was compared with the template's parameters and the rules, not with a typst page.
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf`. Lua filter: `docx/caeb.lua`.
+**docx** (`docx/`): `docx/reference.xml` holds the Word styles and the pleading paper (the shared cross-engine recipe, `base="xengine"`, in the typst face: Times New Roman 13 pt, 27 numbered lines), from which `fb render --engine docx` builds the reference (`build-reference.sh` was retired into fb render; no shell script is left in `docx/`); `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf`. Lua filter: `docx/caeb.lua`.
 
-- Matches typst: Liberation Serif 13 pt; exact 24 pt lines on a 28-line grid; numbers 1 to 28 in a page-anchored text box in the header (not a line-numbering field, so the numbers stay on blank lines too); letter paper; margins 1 in top, 0.667 in bottom, 1.5 in left, 0.75 in right; the pleading rules; caption table with the party box ruled right and bottom; page number bottom center; "Page total" (NUMPAGES) upper left of page 1; page 1 ends at the caption; numbered paragraphs; (a), (b) lists; unnumbered WHEREFORE; headings kept with the next paragraph; signature blocks kept together.
+- Matches typst: Times New Roman 13 pt; exact 24 pt lines on a 27-line grid; numbers 1 to 27 in a page-anchored text box in the header (not a line-numbering field, so the numbers stay on blank lines too); letter paper; margins 1 in top, 1 in bottom, 1.5 in left, 1 in right; the pleading rules; caption table with the party box ruled right and bottom; page number bottom center; "Page total" (NUMPAGES) upper left of page 1; page 1 ends at the caption; numbered paragraphs; (a), (b) lists; unnumbered WHEREFORE; headings kept with the next paragraph; signature blocks kept together.
 - Differs: single-spaced lines (counsel, caption, signature) are exact 14 pt, not typst's looser leading, so after a single-spaced block the text can sit between two numbers (visible on page 9). Pleading rules are page borders over the text area, not full-height lines. Lettered items indent slightly differently. Quotations are single spaced at 14 pt.
-- Checked with LibreOffice only (headless PDF conversion, 9 pages, `pdffonts`: Liberation Serif only). Word was not available; the file has not been opened in Word.
+- Checked with LibreOffice only (headless PDF conversion; the earlier build was 9 pages in Liberation Serif, the committed `.docx.pdf` is 10 pages, Times New Roman only). Word was not available; the file has not been opened in Word.
 - BLOCKED: `sh tools/check.sh <this folder> --engine docx` cannot run. It exits 2 before any gate: this doc type has no `checks.yaml`, and `check.sh` reads `court.json` from the folder it is given. No stamp is written. Gates 0 to 3 are therefore not measured for docx.

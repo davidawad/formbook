@@ -6,9 +6,9 @@ Doc type: **motion with memorandum**, one filed document: the motion (FRBP 9013)
 |---|---|
 | exemplar | yes, two filers: `usage/FILED-EXAMPLE-motion-brief.pdf` (complete: motion, memorandum, certificate; U.S. Attorney for the Commissioner of Social Security; 9 pages) and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (memorandum only, creditor's counsel; 13 pages; the motion itself was not retrievable). Provenance in `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md`: full transcription of the Hidalgo filing (motion, memorandum with its two footnotes, conclusion, signature, "Of Counsel", certificate). Case-name italics are added; the text layer does not carry the typeface. Quotation marks are restored where the text layer garbled them. Spelling "Judgement" is kept as filed. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages. typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages. typst 0.15.0, Times New Roman 12 pt only (`pdffonts`; `docs/FONTS.md` rule 6, the house standard; EB Garamond before 2026-10-17, the docx until fb-595.68.17), no warnings. |
 | overlay | ok: `usage/OVERLAY-hidalgo-astrue.pdf` and `.txt`. The Donovan memorandum is not overlaid (it is a memorandum alone, not a complete motion-brief). |
-| pages reviewed | 9 of 9, each rendered at 60 dpi and viewed after the last template change |
+| pages reviewed | 9 of 9 on the earlier EB Garamond render, before fb-595.68, each rendered at 60 dpi and viewed |
 
 File names: the brief asked for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.*`. The repo's file-role convention and the tools fix the names instead: `INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`. `tools/overlay.sh` reads `OUTPUT-<id>.pdf`, so the tool's names were kept.
 
@@ -20,7 +20,7 @@ Primary sources. Local rules: the District of Rhode Island Bankruptcy Court's Lo
 |---|---|---|
 | FRBP 9013 | A request for a court order is made by written motion, stating the grounds with particularity and the relief sought. Paraphrased; verify wording. | Structure: a motion section, then the memorandum. |
 | LBR 9013-1(a) [Amended 9/9/13] | Points and authorities with or within the paper; specific reference to the Code, the FRBP, R.I. General Laws or other controlling authority. Excepted motions in 9013-1(d). | The memorandum is part of the same document. Authorities are the author's; the template does not check them. |
-| LBR 9013-1(b) [Amended 9/9/13] | Initial motions, responses, briefs and memoranda limited to 20 pages (reply 10), absent leave. Full caption with bankruptcy case number, adversary number and chapter. Double spaced, 8 1/2 x 11, body at least 11 point, footnotes at least 10 point, no body text in footnotes. | `type-size = 12pt`, `footnote-size = 10pt`, `body-leading = 1.35em` (24 pt pitch, measured). The memorandum runs pages 3 to 8 (about six pages), well under 20. |
+| LBR 9013-1(b) [Amended 9/9/13] | Initial motions, responses, briefs and memoranda limited to 20 pages (reply 10), absent leave. Full caption with bankruptcy case number, adversary number and chapter. Double spaced, 8 1/2 x 11, body at least 11 point, footnotes at least 10 point, no body text in footnotes. | `type-size = 12pt`, `note-size = 10pt`, `pitch-double = 24pt`. The memorandum runs pages 3 to 8 (about six pages), well under 20. |
 | LBR 1005-1(a) [Amended 12/1/22] | Case name, number and chapter on every paper and on the signature page. | Caption grid, and the "In re ..." line on each signature block. |
 | LBR 1005-1(b) | As LBR 9013-1(b): 8 1/2 x 11, 11 point, double spaced, footnotes 10 point, quotations single spaced. | As above; block quotations are single spaced. |
 | LBR 1005-1(c) | Signer's name, original signature, address, telephone, e-mail, firm, state bar identification number, client. | `signature` frontmatter; `bar_id` is required and printed as "RI Bar No.". |
@@ -65,7 +65,7 @@ Searches and what they settled: CourtListener RECAP search (`court=rib`, `type=r
 | 8 | 8 | 74.6% | Conclusion, signature, "Of Counsel". |
 | 9 | 9 | 76.5% | Certificate of service. |
 
-The overlay is a diagnostic, not a score. The exemplar is in Times with pitch and page breaks of its own, so text lines will not coincide.
+The overlay is a diagnostic, not a score. The exemplar is in Times with pitch and page breaks of its own, so text lines will not coincide. The page map above was made on the earlier EB Garamond render, before fb-595.68.
 
 ## Known gaps and open choices
 
@@ -77,11 +77,11 @@ The overlay is a diagnostic, not a score. The exemplar is in Times with pitch an
 6. **Motion versus memorandum in one document.** The template prints the motion and the memorandum as parts of one filing, as the Hidalgo filing does. Some filers file them separately (the Donovan filing is a separate memorandum); the template does not split them.
 7. **Spelling kept as filed.** "Judgement" appears in the title of both the motion and the memorandum, as in the exemplar. A filing should use the correct spelling.
 8. **Rule texts not verified verbatim:** FRBP 9013 (paraphrase), the certificate-of-service rule, and LBR 9013-2 (not used).
-9. **Font.** EB Garamond at 12 point (vendored), not Times; the exemplars are Times.
+9. **Font.** Times New Roman at 12 point (`docs/FONTS.md` rule 6, the house standard; EB Garamond before 2026-10-17, the docx until fb-595.68.17); the exemplars are Times too.
 
 ## Review of the rendered pages (Gate 2 record)
 
-Every page of the sample was rendered at 60 dpi and viewed after the last template change.
+Every page of the sample was rendered at 60 dpi and viewed, on the earlier EB Garamond render, before fb-595.68 (9 pages then and now).
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -97,11 +97,11 @@ Every page of the sample was rendered at 60 dpi and viewed after the last templa
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, which names every font so no theme font falls back to Aptos or Calibri) and `docx/rib-motion-brief.lua` (caption, unnumbered paragraphs, "1." lists, response language, signature blocks, memorandum part, certificate of service, all from the frontmatter and the `---` separator). Render: `sh tools/render.sh --engine docx motion-brief usage/INPUT-<id>.md`.
+**docx** (`docx/`): `reference.xml`, from which `fb render --engine docx` builds the reference document (the shared cross-engine recipe in the typst face, with a Body Text Note style and the 11 pt page-number footer), and `docx/rib-motion-brief.lua` (caption, unnumbered paragraphs, "1." lists, response language, signature blocks, memorandum part, certificate of service, all from the frontmatter and the `---` separator). Render: `sh tools/render.sh --engine docx motion-brief usage/INPUT-<id>.md`.
 
-Matches the typst output (every page of `usage/OUTPUT-motion-brief.docx.pdf` was viewed, side by side with `usage/OUTPUT-motion-brief.typst.pdf`):
+Matches the typst output (every page of `usage/OUTPUT-motion-brief.docx.pdf` was viewed side by side with `usage/OUTPUT-motion-brief.typst.pdf` on the earlier EB Garamond docx; the current docx passes XENG-001..003, 240/240 lines, fb-595.68.17):
 
-- EB Garamond 12 pt, footnotes 10 pt (single spaced, at the foot of the page), page number 11 pt centered; letter paper, 1 in margins. `pdffonts` shows only EB Garamond, embedded.
+- Times New Roman 12 pt, footnotes 10 pt (single spaced, at the foot of the page), page number 11 pt centered; letter paper, 1 in margins. `pdffonts` shows only Times New Roman, embedded.
 - Double spacing is exact 24 pt lines; single spacing (caption, response language, quotations, signature, certificate) is exact 13.8 pt, the pitch measured on the typst output.
 - The motion is unnumbered; "1." lists hang with the text at 1.05 in; block quotations are single spaced and indented.
 - Caption and title repeated at the start of the memorandum, which starts on a new page; the certificate of service starts on a new page.
@@ -109,7 +109,7 @@ Matches the typst output (every page of `usage/OUTPUT-motion-brief.docx.pdf` was
 - Signature blocks: the case line, "Respectfully submitted", signer, firm, RI Bar No., address; the memorandum's block also carries the "Of Counsel" lines. The certificate's signer lines are right-aligned, as in typst.
 - Page count: 9 pages (typst 9).
 
-Differs from the typst output (not fixed):
+Differs from the typst output (seen on the earlier EB Garamond docx, then built by `docx/build-reference.sh`, since retired into fb render; not re-checked here):
 
 - The first line of each page sits about 10 pt lower in the docx (exact-height lines place text lower than typst); the line pitch is the same.
 - A single-line heading is about 7 pt further above the next paragraph than in typst.

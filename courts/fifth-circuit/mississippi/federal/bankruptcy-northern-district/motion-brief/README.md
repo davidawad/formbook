@@ -7,9 +7,9 @@ Folder: `courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district/m
 |---|---|
 | exemplar | **yes**: `usage/FILED-EXAMPLE-motion-brief.pdf` (Fairport Asset Management REO 2, LLC, Doc. 39, 14 pages, filed 2026-07-14). Source and URL in `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md`: transcription of the filed motion (caption, headings, numbered paragraphs, lettered grounds and relief, signature, certificate of service). The synthetic sample `usage/INPUT-motion-brief-2.md` is kept as a second input. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`). |
-| overlay | ok: `usage/OVERLAY-clanton.pdf` and `usage/OVERLAY-clanton.txt` (`sh tools/overlay.sh`, 13 pages). |
-| pages reviewed | 13 of 13 (OUTPUT rendered at 60 dpi and viewed page by page; overlay pages 1 to 4 viewed). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 16 pages (13 on the earlier EB Garamond render, before fb-595.68), typst 0.15.0, pinned Times New Roman only, no warnings (`sh tools/render.sh`). |
+| overlay | ok: `usage/OVERLAY-clanton.pdf` and `usage/OVERLAY-clanton.txt` (`sh tools/overlay.sh`, 13 pages, on the earlier EB Garamond render). |
+| pages reviewed | 13 of 13 on the earlier EB Garamond render, before fb-595.68 (OUTPUT rendered at 60 dpi and viewed page by page; overlay pages 1 to 4 viewed). |
 
 ## Governing rules
 
@@ -27,20 +27,20 @@ Not verified (not fetched on 2026-10-14; the template does not depend on them ye
 - **Fed. R. Bankr. P. 4001(a)(3)**, cited in the sample's relief (the fourteen-day stay). Cited from the exemplar text only; not fetched.
 
 Because the local rules were unreadable, the format is a **standard-letter default**, not a court requirement:
-- US Letter, 1-inch margins, 12-point EB Garamond (no face named by any rule read; see Typeface below), double spaced, page number centered in the footer.
+- US Letter, 1-inch margins, 12-point Times New Roman (no face named by any rule read; see Typeface below), double spaced, page number centered in the footer.
 
 ## Typeface
 
 | Item | Value |
 |---|---|
 | Face required | none found. Fed. R. Bankr. P. 9004(a) requires legibility only. The msnb local rule on form (Rule 9004-1, General Requirements of Form) could not be read: courtrules.net returned HTTP 403, and the msnb standing order adopting the amended local rules (eff. 3-1-26) is a scanned image with no text layer. |
-| Vendored substitute | `EB Garamond` (no court-named face to substitute; `docs/FONTS.md` "No face named") |
-| Fit | visual only, and the template's default |
-| Filer convention (not a rule) | the filed exemplar sets Times New Roman (embedded `TimesNewRomanPSMT`); the substitute for that would be `Liberation Serif` (metric-compatible). Not switched: a filer's choice does not make a rule. |
-| Open | If Rule 9004-1 or a local motion rule names Times New Roman, switch the font list to `Liberation Serif` and re-render; line counts should not change. |
+| Vendored substitute | `Times New Roman` (no court-named face; the house standard, `docs/FONTS.md` rule 6, and the exemplar's face as `data/exemplar-fonts.json` audits it; was EB Garamond before fb-595.68) |
+| Fit | n/a (the exemplar's own face) |
+| Filer convention (not a rule) | the filed exemplar sets Times New Roman (embedded `TimesNewRomanPSMT`); the template sets the same face (see above). |
+| Open | If Rule 9004-1 or a local motion rule names another face, set that face and re-render. |
 - The caption, paragraph layout and headings are the template's own choices.
 
-The filed exemplar is 14 pages, double spaced, with an ECF header line at the top of each page. The render is 13 pages and has no ECF header, which is why the overlay does not line up on the page edges.
+The filed exemplar is 14 pages, double spaced, with an ECF header line at the top of each page. The render is 16 pages (13 on the earlier EB Garamond render) and has no ECF header, which is why the overlay does not line up on the page edges.
 
 ## Layout
 
@@ -63,20 +63,20 @@ The filed exemplar is 14 pages, double spaced, with an ECF header line at the to
 
 ## Overlay
 
-`usage/OVERLAY-clanton.pdf`: red is our render, blue is the filed exemplar, black where both agree. The pages are paired by text (`usage/OVERLAY-clanton.txt`): ours p.1 to p.13 map to filed p.1, 2, 4, 5, 6, 6, 7, 8, 9, 11, 12, 13, 14. Word overlap per page is 37% to 80%. The overlay is a diagnostic: the text layers match, but the lines do not register, because the filed paper has an ECF header and a different line spacing and margin set.
+Measured on the earlier EB Garamond render, before fb-595.68. `usage/OVERLAY-clanton.pdf`: red is our render, blue is the filed exemplar, black where both agree. The pages are paired by text (`usage/OVERLAY-clanton.txt`): ours p.1 to p.13 map to filed p.1, 2, 4, 5, 6, 6, 7, 8, 9, 11, 12, 13, 14. Word overlap per page is 37% to 80%. The overlay is a diagnostic: the text layers match, but the lines do not register, because the filed paper has an ECF header and a different line spacing and margin set.
 
 ## Known gaps and open choices
 
 1. **Local rules unread.** Font, margins, spacing, page limits and the memorandum form are defaults (see above). This is the biggest tier-1 risk.
 2. **ECF header missing.** The filed paper carries the ECF header on every page; the template does not generate it. This is a visible tier-2 difference.
-3. **Pagination.** The render is 13 pages; the filed paper is 14. The transcription pages do not align one-to-one (see the map in the overlay .txt).
+3. **Pagination.** The render is 16 pages (13 on the earlier EB Garamond render, when the overlay map was made); the filed paper is 14. The transcription pages do not align one-to-one (see the map in the overlay .txt).
 4. **Caption.** The caption omits the movant/respondent row; a contested matter may need one, and that is not built.
 5. **Certificate of service** is free text in the body; the date and the method of service are the author's words, not generated.
 6. **Memorandum section** is not shown by the exemplar; the synthetic sample is the only example of it.
 
 ## Review of the rendered pages
 
-Every page of `usage/OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed.
+Every page of `usage/OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed (the 13-page EB Garamond render, before fb-595.68; the page contents below are from that render).
 
 - Pages 1 to 3: counsel block, court title, caption, title, introduction, background, paragraphs 1 to 6, the Calhoun and Webster property descriptions begin. Pass.
 - Pages 4 to 6: legal descriptions of the TRACT 1 to 3 parcels with LESS AND EXCEPT paragraphs and the tracts list. Pass.
@@ -86,19 +86,21 @@ Every page of `usage/OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and v
 
 ## Engines
 
-Docx engine (`docx/`): `reference.docx` (built by `docx/make-reference.sh`), `motion-brief.lua` (caption, signature and OF COUNSEL blocks, numbered and lettered paragraphs, footnote notes), and `render.sh` (the pandoc call; `tools/render-docx.sh` uses it). Renders: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (13 pages, LibreOffice 26.8), and `usage/OUTPUT-motion-brief-2.docx` and `.docx.pdf` (3 pages).
+Docx engine (`docx/`): `reference.xml` (`base="xengine"`: `fb render --engine docx` builds the reference document from it, the shared cross-engine recipe in the typst template's face) and `motion-brief.lua` (caption, signature and OF COUNSEL blocks, numbered and lettered paragraphs, footnotes); `sh tools/render.sh --engine docx` (a wrapper of `fb render --engine docx`) runs pandoc with the filter. Renders: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (16 pages; 13 pages, LibreOffice 26.8, on the earlier EB Garamond build by `docx/render.sh`, since retired into fb render), and `usage/OUTPUT-motion-brief-2.docx` and `.docx.pdf` (3 pages).
+
+The table and the differences below were recorded on that earlier build, except the font, spacing and page rows, read from the current files.
 
 | Item | Typst (primary) | Docx | Note |
 |---|---|---|---|
-| Font, size | EB Garamond 12 pt | EB Garamond 12 pt (embedded, the only font in the PDF) | |
+| Font, size | Times New Roman 12 pt | Times New Roman 12 pt (embedded, the only font in the PDF) | |
 | Page, margins | US Letter, 1 in | US Letter, 1 in | |
-| Body spacing | double, 24 pt baseline | exact 24 pt (`w:line=480 exact`) | no extra gap between paragraphs in either |
+| Body spacing | double, 27.6 pt (Word's double) | exact 27.6 pt (`body="552"` in `reference.xml`) | no extra gap between paragraphs in either |
 | Footnote notes | 10 pt, written in place after the paragraph | 10 pt, written in place | |
 | Page number | centered, 10 pt | centered, 10 pt (`PAGE` field in the footer) | |
 | Headings | level 1 centered bold underlined caps; level 2 bold; level 3 bold italic | same (level 1 caps by `w:caps`) | |
 | Caption | IN RE, names, CASE NO. right; DEBTORS. and CHAPTER right | same, on a right tab stop | |
 | Signature and OF COUNSEL | right column, OF COUNSEL flush left | same | |
-| Pages (clanton) | 13 | 13 (LibreOffice) | line breaks differ in places; paragraphs fall on different pages |
+| Pages (clanton) | 16 (13 before fb-595.68) | 16 (LibreOffice; 13 before fb-595.68) | line breaks differ in places; paragraphs fall on different pages |
 
 Differences, by design:
 - **Certificate of service placement.** The typst template holds back the chunk headed `# CERTIFICATE OF SERVICE` to print it after OF COUNSEL, but its match is case-sensitive and the sample heading is `# Certificate of Service`, so typst prints the certificate before the signature. The docx matches the heading case-insensitively and prints it after OF COUNSEL, as the typst comment intends. This is a typst defect; `typst/` is not changed here.
@@ -108,4 +110,4 @@ BLOCKED / not verified for docx:
 - Gates 0 to 3 (`tools/check.sh --engine docx`) cannot run: this court has no `rules.md` or `checks.yaml` yet, and `yq` is not on the box.
 - The `.docx` was opened in LibreOffice (the PDF conversion succeeded) but not in Microsoft Word; "opens without a repair prompt in Word" is not verified.
 - Local rules are unread (see above), so tier-1 form is the same standard-letter default as the typst template.
-- `usage/INPUT-motion-brief-2.md` does not render in typst (`signature.title` is missing from its frontmatter, so `typst/msnb-motion-brief.typ` fails). The docx renders it with a blank title line under the signature.
+- (Before fb-595.68; `usage/OUTPUT-motion-brief-2.typst.pdf` is now committed.) `usage/INPUT-motion-brief-2.md` did not render in typst (`signature.title` is missing from its frontmatter, so `typst/msnb-motion-brief.typ` fails). The docx renders it with a blank title line under the signature.

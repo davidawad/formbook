@@ -14,7 +14,7 @@
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `vawb-adversary-complaint`. |
 | `typst/vawb-adversary-complaint.typ` | Template. Parameter block at the top, each line tied to a rule or marked as a convention. |
 | `usage/INPUT-adversary-complaint.md` | Sample: YAML frontmatter (caption, counsel, signature, service) and the body. |
-| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/fourth-circuit/virginia/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md` (3 pages, no typst warnings). |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/fourth-circuit/virginia/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md` (3 pages, no typst warnings, on the earlier EB Garamond render; the committed render is now 4 pages). |
 | `usage/OVERLAY-rosen-adversary-complaint.pdf`, `.txt` | `sh tools/overlay.sh courts/fourth-circuit/virginia/federal/bankruptcy-western-district/adversary-complaint rosen-adversary-complaint` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -39,7 +39,7 @@ Primary sources, verified 2026-10-14. Local rules: W.D. Va. Local Rules, effecti
 | FRBP 9004(a) | Legibility; abbreviations | text output |
 | Fed. R. Civ. P. 10(b) (through FRBP 7010) | Numbered paragraphs, each limited to a single set of circumstances | markdown ordered lists render as `1.`, `2.` ... |
 
-Conventions the template follows that no rule in the sources above fixes (tier 2): 12 pt EB Garamond (vendored), double spacing (24 pt pitch), one-inch side and bottom margins, page number centered in the footer, numbered paragraphs with the number at 0.5 in.
+Conventions the template follows that no rule in the sources above fixes (tier 2): 12 pt Times New Roman (the pinned install, docs/FONTS.md rule 1; Liberation Serif from `fonts/` as fallback), double spacing (24 pt pitch), one-inch side and bottom margins, page number centered in the footer, numbered paragraphs with the number at 0.5 in.
 
 ## Overlay
 
@@ -53,6 +53,8 @@ Diagnostic only, not a score.
 
 ## Page review (Gate 2)
 
+The review below was made on the earlier EB Garamond render (3 pages), before fb-595.68.
+
 Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and viewed (3 of 3). The first pass showed two defects; both were fixed and the pages re-rendered and re-viewed.
 
 | Page | Content | Result |
@@ -61,7 +63,7 @@ Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and 
 | 2 | Paragraphs 7–18; heading "Facts and Request for Relief" | OK after fix: the section heading was set at the heading size (larger than body) and is now body size, bold, centered. |
 | 3 | Paragraphs 19–22; prayer; counsel block lower left; signature block; service address | OK. Paragraph 22 is the bracketed placeholder (see Known gaps). |
 
-Typst printed no warnings. Fonts embedded: EB Garamond Regular and Bold only.
+Typst printed no warnings. Fonts embedded (that render): EB Garamond Regular and Bold only. The committed render embeds Times New Roman.
 
 ## Known gaps
 
@@ -72,13 +74,13 @@ Typst printed no warnings. Fonts embedded: EB Garamond Regular and Bold only.
 5. **Caption layout.** The filed caption has no division line and uses "IN THE ... COURT / FOR THE ... DISTRICT" wording; the template uses the LR 9013-1(I) layout (court name on two lines, division when given). Tier-2 difference, accepted: the local rule's example caption is the template's reference.
 6. **Electronic filing.** LR 5005-4 incorporates the court's Administrative Procedures for electronic filing (ECF, PDF requirements). Those procedures were not fetched in this box, so no PDF-format check is claimed.
 7. **Rules not fetched.** The local rules and the FRBP texts above were read; FRBP 7001 (the categories of adversary proceedings) and 7004 (service and summons) were not, and the template does not depend on them.
-8. **Typeface.** Face required: none. The W.D. Va. Local Rules (2025 text, read again 2026-10-14) name no typeface; the only font rule is LR 1007-2(F), a 12-point minimum for a pro se debtor's creditor list, which this template does not produce. FRBP 9004(a) requires only that a paper be "clearly legible". The filed complaint embeds Times New Roman, but a filer's choice is not a rule. Vendored substitute: none needed; `EB Garamond` stays (`docs/FONTS.md`: a court that names no face keeps EB Garamond), set at 12 pt, which meets the LR 1007-2(F) minimum. Fit: n/a. Fonts pass (fb-595.7.5): template unchanged, so the render is still 3 pages.
+8. **Typeface.** Face required: none. The W.D. Va. Local Rules (2025 text, read again 2026-10-14) name no typeface; the only font rule is LR 1007-2(F), a 12-point minimum for a pro se debtor's creditor list, which this template does not produce. FRBP 9004(a) requires only that a paper be "clearly legible". The filed complaint embeds Times New Roman, but a filer's choice is not a rule. The template sets Times New Roman (docs/FONTS.md rule 6, the house standard where no rule names a face; the pinned install, Liberation Serif as fallback) at 12 pt, which meets the LR 1007-2(F) minimum. (Until fb-595.68 it kept EB Garamond; the fonts pass of fb-595.7.5 left that render at 3 pages.)
 
 ## Engines
 
 - **typst** (primary): as above.
-- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` (pandoc's default reference, its styles replaced, PAGE footer, letter page with a 1.5 in top margin); `docx/vawb-adversary-complaint.lua` writes the court title, caption, salutation, signature block and service addresses as Word paragraphs and tables, and the numbered allegations as text with a hanging indent. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md` (LibreOffice PDF).
-- docx matches the typst form: EB Garamond 12 pt (embedded as EBGaramond in the PDF); body double spaced at an exact 24 pt pitch; one-inch sides and bottom; caption with the bordered party column and the chapter, case and adversary number on the right; numbers at 0.5 in; page number centered 10 pt; counsel block lower left.
-- docx differs from typst in two places. (1) The title (`COMPLAINT SEEKING STUDENT LOAN DISCHARGE`, from the sample's frontmatter) is printed under the caption; the typst template prints no title, so this is a typst gap for the lead to decide, not a docx choice. (2) The last body paragraph is kept with the signature block (keepNext), and the docx runs to 4 pages where typst runs to 3 (title, and the paragraph and signature block moved to page 4 together).
-- docx BLOCKED: none for the form. `tools/check.sh --engine docx` cannot run on this folder: it needs `court.json` and `checks.yaml` in the court directory, and neither exists yet for `vawb` (the Gate 1 rules are not written). So no check ID is measured for docx; the visual review was done by hand on all 4 docx pages and all 3 typst pages.
+- **docx**: fb render builds the reference document from `docx/reference.xml` (`base="xengine"`, the shared cross-engine recipe in the typst face: styles, PAGE footer, letter page with a 1.5 in top margin); `docx/vawb-adversary-complaint.lua` writes the court title, caption, salutation, signature block and service addresses as Word paragraphs and tables, and the numbered allegations as text with a hanging indent. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md` (LibreOffice PDF).
+- docx matches the typst form: Times New Roman 12 pt (embedded as TimesNewRomanPSMT in the PDF); body double spaced at an exact 24 pt pitch; one-inch sides and bottom; caption with the bordered party column and the chapter, case and adversary number on the right; numbers at 0.5 in; page number centered 10 pt; counsel block lower left.
+- docx differs from typst in two places (recorded on the earlier build by `docx/build-reference.sh`, before fb-595.68; `eval.yaml` now gates the docx on typst's line and page breaks, and both committed renders are 4 pages). (1) The title (`COMPLAINT SEEKING STUDENT LOAN DISCHARGE`, from the sample's frontmatter) is printed under the caption; the typst template prints no title, so this is a typst gap for the lead to decide, not a docx choice. (2) The last body paragraph is kept with the signature block (keepNext), and the docx runs to 4 pages where typst runs to 3 (title, and the paragraph and signature block moved to page 4 together).
+- docx BLOCKED: none for the form. `tools/check.sh --engine docx` cannot run on this folder: it needs `court.json` and `checks.yaml` in the court directory, and neither exists yet for `vawb` (the Gate 1 rules are not written). So no check ID is measured for docx; the visual review was done by hand on all 4 docx pages and all 3 typst pages (of the earlier build).
 - Word was not available: the .docx was opened and converted by LibreOffice only.

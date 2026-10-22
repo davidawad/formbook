@@ -19,7 +19,7 @@ Primary rule: **22 NYCRR 1250.8**, "Form and Content of Briefs," Part 1250 (Rule
 | NYAD-ORDER-001 | (c) respondent's brief conforms to (b): table of contents (point headings and appendix contents), table of cases and authorities with pages cited, questions involved (counterstatement only if the respondent disagrees), nature of the case and facts, argument in points, printing statement (j). | LII copy |
 | NYAD-TYPE-001 | (f)(1) serifed proportional or serifed monospaced face; no narrow or condensed faces; no bold and no all-capital words except in headings and in quotations of language set that way in the source. | LII copy |
 | NYAD-TYPE-002 | (f)(1)(i) proportional face: body 14-point; footnotes no less than 12-point. | LII copy |
-| NYAD-FACE-001 | Typeface row. Face required: **none named**. 1250.8(f)(1) says "a serifed, proportionally spaced typeface such as Times Roman" (or a serifed monospaced face such as Courier); "such as" is an example. Substitute: none; **EB Garamond kept** (any serifed proportional face is allowed). Fit: not applicable. Checked 2026-10-15 against LII. | LII copy, 2026-10-15 |
+| NYAD-FACE-001 | Typeface row. Face required: **none named**. 1250.8(f)(1) says "a serifed, proportionally spaced typeface such as Times Roman" (or a serifed monospaced face such as Courier); "such as" is an example. Substitute: none; the template sets **Times New Roman** (vendored; the rule's example and the house face, `docs/FONTS.md` rule 6; Liberation Serif, its metric twin, as fallback; any serifed proportional face is allowed). Fit: not applicable. Checked 2026-10-15 against LII. | LII copy, 2026-10-15 |
 | NYAD-WORD-001 | (f)(2) appellants' and respondents' computer-generated briefs: not more than 14,000 words, inclusive of point headings and footnotes, exclusive of signature blocks and the pages with the table of contents, table of citations, proof of service, certificate of compliance, and any addendum under (k). | LII copy |
 | NYAD-FORM-001 | (h) one-inch margins on all sides. | LII copy |
 | NYAD-FORM-002 | (h) text double-spaced; quotations of more than two lines may be indented and single-spaced; headings and footnotes may be single-spaced; pages numbered consecutively. | LII copy |
@@ -36,7 +36,7 @@ Rule dates: 1250.8 as read is dated 9/17/2018 (LII). No later amendment was seen
 - `typst/main.typ`: entry point; reads `sample=` from `--input` (default `usage/INPUT-answering-brief.md`).
 - `typst/nyappdiv-answering-brief.typ`: the template, `nyappdiv-answering-brief(meta, md)`. Copied from `../reply-brief/typst/nyappdiv-reply-brief.typ` (cover, TOC, TOA with page references, signature, printing statement, blank affidavit of service) with these changes: word limit 14,000 (1250.8(f)(2)); headings outside the Argument are lettered A., 1. (the exemplar's Counterstatement of Facts) while Argument points stay I., A.; point headings in capitals only under the Argument; the docket is printed as written; a caption side may carry its own `joiner` ("– and –"); an optional `closing` line in the signature block.
 - `usage/INPUT-answering-brief.md`: partial transcription of the exemplar (see "Sample").
-- `usage/OUTPUT-answering-brief.typst.pdf`: render output (19 pages).
+- `usage/OUTPUT-answering-brief.typst.pdf`: render output (17 pages).
 - `usage/OVERLAY-nycla-2022-03908-answering.pdf`, `.txt`: overlay on the exemplar and its page map.
 - `usage/FILED-EXAMPLE-answering-brief.pdf`, `usage/SOURCE.md`: the exemplar, its source and the search record.
 

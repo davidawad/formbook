@@ -61,7 +61,7 @@ Convention (tier 2; from the exemplar, not a rule): page number centered in the 
 4. **JS 44 civil cover sheet, Certification of Interested Entities, summons.** Separate filings (LR 3.1 for the cover sheet). Not produced.
 5. **Counsel block size and layout.** Counsel is 11 pt in three columns so that the caption begins on page 1 (as the exemplar's does). The exemplar uses two columns at a larger size. This is a layout choice (tier 2), not a rule.
 6. **Only one exemplar.** The brief asks for one exemplar per doc type. EVAL-LOOP's tier-2 rule asks for 2 or 3 filers; that is not met here.
-7. **Sample is partial.** The sample is paragraphs 1 to 24 and the prayer and signature of the 56-page filing; the paragraph numbers match the filing. The overlay pairs pages 1 to 7 with the filing's pages 1 to 7 (word overlap 73 to 95%); the prayer pages pair with the filing's pages 55 and 1 because the sample omits the rest of the body. The overlay is a diagnostic, not a score.
+7. **Sample is partial.** The sample is paragraphs 1 to 24 and the prayer and signature of the 56-page filing; the paragraph numbers match the filing. The overlay (recorded on the earlier EB Garamond render, before fb-595.68.22) pairs pages 1 to 7 with the filing's pages 1 to 7 (word overlap 73 to 95%); the prayer pages pair with the filing's pages 55 and 1 because the sample omits the rest of the body. The overlay is a diagnostic, not a score.
 8. **Italics.** The exemplar's italics are transcribed from its text layer and the visible italic words (case names, *Id.*, *Doe I*). The overlay compares words, not styles.
 
 ## Searches for the exemplar (for the record)

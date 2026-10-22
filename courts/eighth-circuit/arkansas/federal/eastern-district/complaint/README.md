@@ -6,10 +6,10 @@ Doc type: **complaint** in the United States District Court for the Eastern Dist
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (the whole complaint, 89 numbered paragraphs, prayer, signature; OCR typos corrected, see gap 9) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| typeface | face required: **none** (E.D. Ark. LR 5.5(a) sets a type-size minimum, "elite", and names no face) → **EB Garamond** kept (no substitute needed; visual-only for any Times expectation) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages (9 on the earlier EB Garamond render), typst 0.15.0, Times New Roman (pinned; vendored Liberation Serif fallback), no system fonts, no warnings |
+| typeface | face required: **none** (E.D. Ark. LR 5.5(a) sets a type-size minimum, "elite", and names no face) → **Times New Roman** 12 pt, the house standard (`docs/FONTS.md`, rule 6; EB Garamond until then) |
 | overlay | not regenerated on 2026-10-14: the filed exemplar PDF is absent from this snapshot (only `usage/SOURCE.md` is tracked), so `overlay.sh` exits 1. `usage/OVERLAY-hess-equifax.txt` is from the earlier run. |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed; pages 1 to 8 before the signature-block fix, page 9 after it) |
+| pages reviewed | 9 of 9, on the earlier EB Garamond render (every page rendered at 60 dpi and viewed; pages 1 to 8 before the signature-block fix, page 9 after it) |
 
 ## Governing rules
 
@@ -66,7 +66,7 @@ The tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`. This doc type's
 
 The overlay is a diagnostic, not a score. Its page map (`OVERLAY-hess-equifax.txt`) pairs pages by word overlap: ours 1 and 2 with filed 1 and 2 (79% and 78%); ours 3 with filed 3 (48%); ours 4 with filed 5; ours 8 with filed 10. The filed pages paginate differently (the exemplar runs 11 pages with the same text), so the page numbers do not line up one to one; the text layers do not coincide line by line either.
 
-## Visual review (every page rendered at 60 dpi and viewed)
+## Visual review (every page rendered at 60 dpi and viewed; the earlier EB Garamond render, 9 pages)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -82,9 +82,11 @@ The overlay is a diagnostic, not a score. Its page map (`OVERLAY-hess-equifax.tx
 
 ## Engines
 
-**typst** (primary): the section above; `usage/OUTPUT-complaint.typst.pdf`, 9 pages, reviewed page by page.
+**typst** (primary): the section above; `usage/OUTPUT-complaint.typst.pdf`, 10 pages (reviewed page by page as the 9-page EB Garamond render).
 
-**docx**: `docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt; 24 pt exact double spacing; 0.5 in first-line indent; headings on the same 24 pt grid, level 1 centered bold capitals, level 2 centered bold, level 3 bold italic; 1-inch margins; a centered page-number footer at 11 pt). `docx/complaint.lua` adds what pandoc does not: the court title, the caption table (rules at right and bottom of the party column), the case number and title, numbered paragraphs (1 to 89, a `~ ` paragraph is unnumbered), lettered lists "(a)", the lead-in, and the signature block. Built with `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`, which writes `usage/OUTPUT-complaint.docx`.
+**docx**: `docx/reference.xml` holds the styles, from which `fb render` builds the reference document on the shared cross-engine recipe (Times New Roman 12 pt; 24 pt exact double spacing; 0.5 in first-line indent; headings on the same 24 pt grid, level 1 centered bold capitals, level 2 centered bold, level 3 bold italic; 1-inch margins; a centered page-number footer; `docx/make-reference.sh` built a committed `reference.docx` until fb-595.68). `docx/complaint.lua` adds what pandoc does not: the court title, the caption table (rules at right and bottom of the party column), the case number and title, numbered paragraphs (1 to 89, a `~ ` paragraph is unnumbered), lettered lists "(a)", the lead-in, and the signature block. Built with `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`, which writes `usage/OUTPUT-complaint.docx`.
+
+Written before LibreOffice was on the box (the committed `usage/.check-docx.txt` now reads PASS, with a `.docx.pdf`):
 
 | Item | Result |
 |---|---|
@@ -92,13 +94,13 @@ The overlay is a diagnostic, not a score. Its page map (`OVERLAY-hess-equifax.tx
 | Built to the typst values | Font face and size, double spacing, margins, caption rules, numbering, lettered list, signature block, page number: set in the reference and filter as above. Not compared with the typst pages. |
 | Visual review (Gate 2) | Not done. No page of the docx has been rendered or looked at. |
 | BLOCKED: `docx.pdf` checks | `soffice` could not be installed in the build box (conda-forge has no `libreoffice` package on 2026-10-15), so `usage/OUTPUT-hess-equifax.docx.pdf` was not produced. Gates 0 and 1 and the Gate 2 page review, which docs/DOCX.md measures on the LibreOffice PDF, cannot run. The docx is delivered without them. |
-| Word substitution | The font is EB Garamond (vendored in `fonts/`). Word substitutes silently when the font is not installed on the machine that opens the file. |
+| Word substitution | The font is Times New Roman. Word substitutes silently when the font is not installed on the machine that opens the file. |
 | Caption and signature | Built as tables, so table-border rendering differs between Word and LibreOffice (docs/DOCX.md). Not judged. |
 
 ## Known gaps and open choices
 
 1. **Only one exemplar.** The brief asks for one per doc type; EVAL-LOOP's tier-2 rule asks for two or three filers. Tier 2 is therefore **not** judged against two filers. The second E.D. Ark. complaint is the next pick (see `usage/SOURCE.md` for the candidates and the rejected state-court removal attachments).
-2. **Font.** EB Garamond (vendored, OFL) at 12 pt, the only font vendored in `fonts/`. The exemplar is a scan with a Times-like text layer. Garamond sets smaller than Times at the same point size. The 12-point size is the working equivalent of the rule's "elite" minimum (LR 5.5(a)). Whether the court wants a Times-metric font is a question for David.
+2. **Font.** Times New Roman at 12 pt, the house standard (`docs/FONTS.md`, rule 6); the template was EB Garamond before. The exemplar is a scan with a Times-like text layer. The 12-point size is the working equivalent of the rule's "elite" minimum (LR 5.5(a)).
 3. **Arkansas bar number (LR 5.5(c)(1)).** The rule requires the Arkansas Supreme Court identification number, "or other Supreme Court identification number, if applicable". The exemplar's counsel is an out-of-state lawyer and gives no bar number, so the sample carries none. The template does not assert the number: a sample for an Arkansas-admitted filer must add `Ark. Bar No. ...` to `signature.lines`. Recorded as an open question.
 4. **"Elite" (LR 5.5(a)).** Elite is a fixed-pitch measure (12 characters per inch). The rule's text applies to typewritten papers; a proportional font at 12 pt is the working equivalent here, not measured. Recorded as an interpretation.
 5. **Divisions.** The exemplar's caption has no division line. ED Ark has divisions (Central, Eastern, Jonesboro, and others), and the caption can carry one through the optional `division` frontmatter field. Not checked against the Local Rules' division list.

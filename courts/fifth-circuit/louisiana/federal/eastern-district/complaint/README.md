@@ -7,10 +7,10 @@ Folder: `courts/fifth-circuit/louisiana/federal/eastern-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (a portion of the 21-page filing; see known gap 7) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages (the committed render), typst 0.15.0, pinned Times New Roman only, no warnings |
 | overlay | ok: `usage/OVERLAY-buckles-complaint.pdf` and `OVERLAY-buckles-complaint.txt` (page map; re-run 2026-10-14 against a copy of the exemplar fetched from the URL in `usage/SOURCE.md`, not committed) |
-| typeface | Rule names no face (LR 10.1 "standard font"). EB Garamond kept, per `docs/FONTS.md` ("No face named"). Not metric-compatible with the exemplar's Times New Roman; see known gap 1. |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed in its final state; re-checked 2026-10-14 after the fonts pass, no change to the template) |
+| typeface | Rule names no face (LR 10.1 "standard font"). Times New Roman 12 pt (the pinned install, `docs/FONTS.md` rule 1; Liberation Serif fallback), the house standard (`docs/FONTS.md` rule 6) and the exemplar's face; see known gap 1. |
+| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed in its final state; re-checked 2026-10-14 after the fonts pass, no change to the template; the earlier 10-page EB Garamond render, before fb-595.68) |
 
 ## Governing rules
 
@@ -66,7 +66,7 @@ Body:
 
 ## Overlay (`usage/OVERLAY-buckles-complaint.pdf`)
 
-Red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by word overlap, not by index (`tools/overlay.sh`). The page map in `OVERLAY-buckles-complaint.txt`:
+Red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by word overlap, not by index (`tools/overlay.sh`). The page map in `OVERLAY-buckles-complaint.txt` (measured on the earlier EB Garamond render, before fb-595.68):
 
 ```
 ours p.1  filed p.1   ours p.6  filed p.10
@@ -80,7 +80,7 @@ The pairing is loose after page 3 because the sample skips filed pages (the brea
 
 ## Known gaps and open choices
 
-1. **Font.** LR 10.1 requires a "standard font" and names no face. Under `docs/FONTS.md` ("No face named"), the template keeps EB Garamond. The filed exemplar is Times New Roman 12 pt, a filer's choice the rule does not require. Liberation Serif (metric-compatible with Times New Roman) is vendored, so the switch is available. EB Garamond at 12 pt has a smaller x-height than Times, so the text looks smaller than the exemplar. The 12 pt size satisfies the rules' "standard font" requirement as far as the rule goes. **Question for David:** keep EB Garamond (current), or switch this doc type to Liberation Serif to match the exemplar's look? Until then this is a tier-2 difference.
+1. **Font.** LR 10.1 requires a "standard font" and names no face. The template is set in Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6) and the filed exemplar's face. Until fb-595.68 it kept EB Garamond, whose smaller x-height made the text look smaller than the exemplar. The 12 pt size satisfies the rules' "standard font" requirement as far as the rule goes.
 2. **Point size.** LR 10.1 sets no point size. 12 pt is used, as in the exemplar.
 3. **One exemplar.** The brief asks for one exemplar per doc type. A second E.D. La. complaint, *Rivers-Roberts v. Hurricane Message, LLC*, No. 2:26-cv-01259 (Doc. 1, filed 2026-06-11, 26 pages, text layer present), was checked and not saved: the file is 67 MB, over the snapshot size limit. Tier 2 is therefore judged against one filer. The Rivers-Roberts caption has no Section or magistrate line, which is one more data point on the caption (gap 4).
 4. **Caption fields.** LR 10.1 requires the Section and the judge and magistrate. The exemplar shows neither a Section line nor a magistrate line. The template draws labelled blanks for an unassigned case, as LR 10.1 asks, so the tier-2 difference from the exemplar is a deliberate choice.
@@ -92,7 +92,7 @@ The pairing is loose after page 3 because the sample skips filed pages (the brea
 10. **Caption rule box.** The party column is closed by a right and a bottom rule, not by a column of ")" marks as in some filings. This is a convention (both forms are seen), recorded as accepted.
 11. **Headings are typed by the author** (no automatic "A.", "B."). This keeps the sample faithful to the filing; it means a sample must type its own letters.
 
-## Review of the rendered pages (final state)
+## Review of the rendered pages (final state of the earlier 10-page EB Garamond render, before fb-595.68)
 
 | Page | What was checked | Result |
 |---|---|---|
@@ -109,7 +109,7 @@ The pairing is loose after page 3 because the sample skips filed pages (the brea
 
 ## Engines
 
-Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default, `laed-complaint.lua` is the filter, and `render.sh` runs pandoc (`tools/render-docx.sh` calls it). Output: `usage/OUTPUT-complaint.docx`. The LibreOffice PDF, `usage/OUTPUT-buckles-complaint.docx.pdf`, was not produced (see BLOCKED).
+Typst is the primary engine. The DOCX engine is `docx/`: `fb render --engine docx` (`tools/render-docx.sh` and `sh tools/render.sh --engine docx` call it) builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst template's face) and runs pandoc with the filter `laed-complaint.lua`. Output: `usage/OUTPUT-complaint.docx`. The LibreOffice PDF, `usage/OUTPUT-buckles-complaint.docx.pdf`, was not produced (see BLOCKED).
 
 | Engine | Status |
 |---|---|
@@ -117,7 +117,7 @@ Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` ma
 | latex | not built |
 | docx | `.docx` built; read back with pandoc and every XML part well-formed. `.docx.pdf` BLOCKED. Not viewed. |
 
-**What the DOCX form sets** (from the reference and the filter; no page has been looked at): letter page, 1 in margins; EB Garamond 12 pt, the same vendored face as typst; 24 pt exact line pitch (double spacing); 0.5 in first-line indent; page number centered 0.6 in from the bottom edge, none on page 1; the caption as a borderless table, the party column closed by a right and a bottom rule, the case fields on the right; title bold and centered; headings centered bold, bold and bold italic; numbered paragraphs, with the number typed as text as typst does; unnumbered `!` paragraphs; lettered items with a hanging indent; single-spaced block quotations indented 0.5 in on each side; the signature block with "Dated" on the left and "Respectfully submitted," at 3 in.
+**What the DOCX form sets** (from the reference and the filter; no page has been looked at): letter page, 1 in margins; Times New Roman 12 pt, the same face as typst; 24 pt exact line pitch (double spacing); 0.5 in first-line indent; page number centered 0.6 in from the bottom edge, none on page 1; the caption as a borderless table, the party column closed by a right and a bottom rule, the case fields on the right; title bold and centered; headings centered bold, bold and bold italic; numbered paragraphs, with the number typed as text as typst does; unnumbered `!` paragraphs; lettered items with a hanging indent; single-spaced block quotations indented 0.5 in on each side; the signature block with "Dated" on the left and "Respectfully submitted," at 3 in.
 
 **Differences and open checks**
 
@@ -129,6 +129,6 @@ Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` ma
 
 - `docx.pdf`, Gates 0 and 1 and the page review: BLOCKED. The LibreOffice 25.2 build unpacked from Debian trixie debs (no root here) aborts at startup with `com::sun::star::uno::DeploymentException`: the extracted packages have no `libdeploymentlo.so`. No PDF was produced, so no check ran. Unblock: install LibreOffice so it runs on this box, then `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`.
 - `tools/check.sh --engine docx`: not run. It needs `court.json` and `rules.md` in the folder (known gap 9). The check stamp `usage/.check-docx.txt` was not written.
-- The LibreOffice conversion needs EB Garamond visible to fontconfig. `fonts/eb-garamond/` is vendored for typst; install it for the user running the check (DOCX.md, "Fonts").
+- The LibreOffice conversion needs the pinned Times New Roman visible to LibreOffice (`docs/FONTS.md` rule 1; DOCX.md, "Fonts").
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)

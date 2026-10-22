@@ -13,7 +13,7 @@
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `fiscr-brief`. |
 | `typst/fiscr-amicus-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit-appointed` (13,000), `word-limit-other` (6,500), `required-sections`, `needs-standard-of-review = false`, `addendum = "optional"`. |
 | `usage/INPUT-amicus-brief.md` | Markdown contract sample (frontmatter + body). |
-| `usage/OUTPUT-amicus-brief.typst.pdf` | `sh tools/render.sh courts/national/foreign-intelligence-surveillance-court-of-review/amicus-brief usage/INPUT-amicus-brief.md` (13 pages). |
+| `usage/OUTPUT-amicus-brief.typst.pdf` | `sh tools/render.sh courts/national/foreign-intelligence-surveillance-court-of-review/amicus-brief usage/INPUT-amicus-brief.md` (13 pages on the earlier EB Garamond render; the committed Times New Roman render is 12). |
 | `usage/OVERLAY-donohue-amicus-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/national/foreign-intelligence-surveillance-court-of-review/amicus-brief donohue-amicus-brief` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -30,11 +30,11 @@ FRAP text is incorporated by FISCR R. 14(d) and 15(d)(2). Checked against <https
 | Item | Value |
 |---|---|
 | Face required by the court | None. FISCR R. 9(c) (paper, double spacing, one-inch margins, page numbers) names no face; R. 15(d)(2) defers to FRAP 32(a)(5), which requires a proportionally spaced serif face at 14 point or larger and names no face. Rechecked against the posted rules text on 2026-10-14. |
-| Vendored substitute | None needed. No court-named face, so the template keeps the default. |
-| Typst family in `typst/fiscr-amicus-brief.typ` | `EB Garamond` (`font-family`) |
+| Vendored substitute | None needed. No court-named face, so the template sets the house standard, Times New Roman (`docs/FONTS.md` rule 6; the pinned install, Liberation Serif as fallback). |
+| Typst family in `typst/fiscr-amicus-brief.typ` | `("Times New Roman", "Liberation Serif")` (`font-family`) |
 | Fit | n/a (no court-named face to substitute) |
 
-The filed exemplar's embedded font list names Times New Roman (non-embedded) for body text. That is one filer's choice, not a rule, and the exemplar is the only filer available for this doc type; it is a tier-3 style and is not chased. The 14-point size comes from FRAP 32(a)(5)(A) and is kept.
+The filed exemplar's embedded font list names Times New Roman (non-embedded) for body text. That is one filer's choice, not a rule, and the exemplar is the only filer available for this doc type; it is a tier-3 style and is not chased. The template sets Times New Roman anyway, under `docs/FONTS.md` rule 6. The 14-point size comes from FRAP 32(a)(5)(A) and is kept.
 
 | Rule | Requirement | Where the template uses it |
 |---|---|---|
@@ -42,7 +42,7 @@ The filed exemplar's embedded font list names Times New Roman (non-embedded) for
 | FISCR R. 9(c)(2) | Typed double-spaced; quotations over two lines may be indented and single-spaced | `body-leading`, `single-leading`, quotation style |
 | FISCR R. 9(c)(3) | Margins of at least one inch on all four sides | `page-margin = 1in` |
 | FISCR R. 9(c)(4) | Page numbered in the lower margin | footer, centered |
-| FISCR R. 9(c), 15(d)(2); FRAP 32(a)(5)(A) | Proportionally spaced serif face, 14-point or larger | `font-family` (EB Garamond; no face named, see Typeface), `type-size = 14pt`, footnotes 14 pt |
+| FISCR R. 9(c), 15(d)(2); FRAP 32(a)(5)(A) | Proportionally spaced serif face, 14-point or larger | `font-family` (Times New Roman; no face named, see Typeface), `type-size = 14pt`, footnotes 14 pt |
 | FRAP 32(a)(6) | Plain roman; italics or bold for emphasis; case names italic | markdown emphasis; the template does not guess case names |
 | FISCR R. 15(d)(1); 14(a)(2) | Amicus brief must conform to R. 14(a)(2)-(8) and (10); (A) jurisdictional statement, (B) statement of the issues and (C) standard of review need not appear | `required-sections` (no jurisdiction or issues section), `needs-standard-of-review = false` |
 | FISCR R. 14(a)(2) | Table of contents, with page references | `toc-section` (generated) |
@@ -79,7 +79,7 @@ Cover (page 1, unnumbered); then, in roman numerals from ii: Statement Regarding
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-amicus-brief.typst.pdf` was rendered at 60 dpi and viewed (13 of 13), after the last template change and again on 2026-10-14 in the fonts pass (no font change; the court names no face). Typst printed no warnings. Fonts embedded (`pdffonts`): EB Garamond only.
+Every page of `OUTPUT-amicus-brief.typst.pdf` was rendered at 60 dpi and viewed (13 of 13), after the last template change and again on 2026-10-14 in the fonts pass (no font change; the court names no face). Typst printed no warnings. Fonts embedded (`pdffonts`): EB Garamond only. (This review is of the earlier EB Garamond render, before fb-595.68; the committed render embeds TimesNewRomanPSMT and is 12 pages.)
 
 | PDF page | Printed page | Content | Result |
 |---|---|---|---|
@@ -100,7 +100,7 @@ Every page of `OUTPUT-amicus-brief.typst.pdf` was rendered at 60 dpi and viewed 
 Tier-2 findings (OPEN or ACCEPTED):
 
 - ACCEPTED: the sample has two point headings (I. and II. in the template's numbering), while the filed brief numbers its points I to V; the template numbers points in order, and the sample omits Parts I.A-III.
-- ACCEPTED: typeface. The filed brief sets 14-point Times New Roman (its certificate says so; its font list is Times New Roman, non-embedded); the template uses EB Garamond. FRAP 32(a)(5)(A) requires a proportional serif at 14 pt, and neither FISCR R. 9(c) nor R. 15(d)(2) names a face, so EB Garamond is kept (see Typeface). Single filer, tier 3.
+- Resolved (was ACCEPTED): typeface. The filed brief sets 14-point Times New Roman (its certificate says so; its font list is Times New Roman, non-embedded); the template used EB Garamond, which FRAP 32(a)(5)(A) and FISCR R. 9(c) and 15(d)(2) allow, and now sets Times New Roman (`docs/FONTS.md` rule 6, see Typeface).
 - ACCEPTED: the page-numbering and point-numbering differences above are the excerpt's, not the template's. The cover's exact layout is not reproduced (Known gaps 4); the template's cover is the ca1 cover adapted to FISCR's caption.
 
 ## Known gaps
@@ -121,7 +121,7 @@ Tier-2 findings (OPEN or ACCEPTED):
 
 ## Engines
 
-**docx** (checked with LibreOffice only; Word is not available here). Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-amicus-brief.md`, which runs `docx/render.sh`. Files: `docx/reference.xml` (the Word styles; fb render builds `reference.docx` from it, `tools/fb/src/docxref.rs`: Times New Roman 14 pt, the typst face, exact double spacing, the front-matter and heading styles, a PAGE footer and an empty cover footer); `docx/fiscr-amicus.lua` (cover, sections, front matter, body, signature, certificates); `docx/pages.sh` and `docx/pages.awk` (find the page of each heading and authority in the LibreOffice PDF). `docx/render.sh` renders pass 1, finds the pages, and writes pass 2 (a third pass only if the page map changed). The table of contents and table of authorities are static text with those page numbers, not TOC/TOA fields. Output: `usage/OUTPUT-amicus-brief.docx` and `.docx.pdf` (13 pages, every page viewed as PNG at 60 dpi against the typst render). Fonts in the PDF: Times New Roman only.
+**docx** (checked with LibreOffice only; Word is not available here). Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-amicus-brief.md`, which runs fb render (`tools/fb`). Files: `docx/reference.xml` (the Word styles; fb render builds `reference.docx` from it, `tools/fb/src/docxref.rs`: Times New Roman 14 pt, the typst face, exact double spacing, the front-matter and heading styles, a PAGE footer and an empty cover footer); `docx/fiscr-amicus.lua` (cover, sections, front matter, body, signature, certificates). fb render renders pass 1, finds the page of each heading and authority in the LibreOffice PDF (the needles the filter writes), and renders again with those pages until they settle (`docx/render.sh`, `pages.sh` and `pages.awk` did this until fb-595.68.4). The table of contents and table of authorities are static text with those page numbers, not TOC/TOA fields. Output: `usage/OUTPUT-amicus-brief.docx` and `.docx.pdf` (13 pages, every page viewed as PNG at 60 dpi against the typst render). Fonts in the PDF: Times New Roman only.
 
 What matches typst: page size, one-inch margins, 14 pt body and footnotes, double spacing, single-spaced headings, quotations and front matter; cover lines and their order; roman numbers from ii, arabic from 1 in the body; the same section order; TOC and TOA entries and page numbers (for this render); the word count (1,170, the same as the typst count) and certificate wording.
 
@@ -132,6 +132,5 @@ What differs, and why:
 - Spacing above headings and the cover's gaps are close but not identical; the cover's court name wraps after "COURT" in the docx and after "COURT OF" in typst.
 - Not built: an addendum and a corporate disclosure statement. The filter stops with an error if the markdown has either; the typst template builds both.
 - Line breaks (w:br) appear only between the lines of the counsel block and inside each table-of-authorities entry (name, then citation), as typst's template does; none is used to fix pagination.
-- `docx/pages.sh` needs GNU awk.
 
 docx check (fb-595.63, 2026-10-21): `sh tools/check.sh courts/national/foreign-intelligence-surveillance-court-of-review/amicus-brief --engine docx`: RESULT 8 checks passed, 0 failed (TNR-EMBEDDED and DEF-FONT-002 failed before, when the reference named EB Garamond). The sample's frontmatter `typeface` now says Times New Roman, the face both engines set (it said EB Garamond, so both certificates misstated the face); typst rechecked: 8 passed, 0 failed. Every page of the 13-page `.docx.pdf` was viewed.

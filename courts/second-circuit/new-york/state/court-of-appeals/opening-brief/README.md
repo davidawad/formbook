@@ -44,7 +44,7 @@ Rules not ruled by the sources above, decided by the template (convention, not r
 
 ## What the overlay shows
 
-`usage/OVERLAY-tei-opening-brief.txt` pairs each of our 14 pages with the filed page of most shared words:
+`usage/OVERLAY-tei-opening-brief.txt` pairs each of our 14 pages with the filed page of most shared words (measured on the earlier EB Garamond render, before fb-595.68):
 
 | Ours | Filed page | Word overlap |
 |---|---|---|
@@ -69,7 +69,7 @@ Read it as a diagnostic. The high-overlap pages are the body text the sample tra
 
 - Render: ok (exit 0, no typst warnings), 14 pages.
 - Overlay: ok (`overlay.sh` wrote the PDF and the map from the final render).
-- Pages reviewed: 14 of 14. Each page was rendered at 60 dpi with `pdftoppm -r 60` and looked at. Defects found and fixed in the template along the way:
+- Pages reviewed: 14 of 14 (the earlier EB Garamond render, before fb-595.68). Each page was rendered at 60 dpi with `pdftoppm -r 60` and looked at. Defects found and fixed in the template along the way:
   1. The cover was taller than the page at any spacing. The counsel blocks now sit side by side and the argument request shares a row with the docket.
   2. Two counsel addresses were on separate lines. Tel. and Fax now share a line.
   3. The related-litigation statement took a page of its own. It now shares the disclosure page.
@@ -82,7 +82,7 @@ Read it as a diagnostic. The high-overlap pages are the body text the sample tra
 
 ## Known gaps (not fixed here; for David)
 
-1. **Typeface (kept EB Garamond; not a gap in the rule).** Typeface row: face required = none. 500.1(j) requires "a serifed, proportionally spaced typeface, such as Times Roman": Times is an example, so any serifed proportional face complies. Vendored substitute = none needed; the template keeps **EB Garamond** (`fonts/eb-garamond`, the court-named-face exception in `docs/FONTS.md` does not apply). Fit: n/a. The point size is the rule's 14 pt. EB Garamond has a smaller x-height than Times New Roman, so 14 pt looks smaller than the exemplar's Times 14 pt; the visual match is not the rule's. If David reads the "such as Times Roman" example as the court's face, set `font-family` to `"Liberation Serif"` (vendored, Times-metric, `docs/FONTS.md`) and re-render; the certificate prints the name from `font-family`.
+1. **Typeface (Times New Roman; not a gap in the rule).** Typeface row: face required = none. 500.1(j) requires "a serifed, proportionally spaced typeface, such as Times Roman": Times is an example, so any serifed proportional face complies. Vendored substitute = none needed; the template sets **Times New Roman** (vendored; the rule's example, the exemplar's face and the house face, `docs/FONTS.md` rule 6; Liberation Serif, its metric twin, as fallback). Fit: n/a. The point size is the rule's 14 pt. The certificate prints the name from `font-family`.
 2. **Sample is a portion.** The sample transcribes the cover, disclosure, questions presented, the early preliminary statement, jurisdiction, part of the statement of the case, Point I and its A., the conclusion, and the signature. The exemplar's full 156 pages are not transcribed. The word count on the sample's certificate (1,471) is the sample's count, not the filed brief's.
 3. **Statement of related litigation** is not in the exemplar (the copy shows none). The template generates it from `related_litigation:`. The sample's text ("None. (Placeholder: …)") is a placeholder and says so.
 4. **Affidavit of service** is not in the exemplar copy. The template prints blank form lines only. The rule puts the proof on the inside of the back cover; a PDF cannot show that placement, so the page is the last page of the render.
@@ -107,7 +107,7 @@ Used: the AG-posted Trump Entrepreneur Initiative opening brief (see `usage/SOUR
 
 ## Verification pass 2026-10-16 (fb-595.26.21)
 
-- Render: `sh tools/render.sh … usage/INPUT-opening-brief.md` exit 0, no typst warnings, 14 pages (the same count as the committed PDF; the committed PDF was not stale in page count). `pdffonts`: EB Garamond only.
+- Render: `sh tools/render.sh … usage/INPUT-opening-brief.md` exit 0, no typst warnings, 14 pages (the same count as the committed PDF; the committed PDF was not stale in page count). `pdffonts`: EB Garamond only (the face then set; Times New Roman since).
 - Pages viewed: 14 of 14 at 60 dpi (`pdftoppm -r 60`), and page 3 (contents) again after the fix. The 14 overlay pages were viewed at 40 dpi, and the exemplar's page 1 against our cover.
 - Overlay: rerun after the fix; the page map is unchanged (table above, page labels corrected to what the pages now hold). Body pages 5, 6, 10 and 12 overlap 81 to 98% with the filed pages; the low pages are the tables, certificates and the blank affidavit, as before.
 - Defect fixed: in the table of contents, a wrapped entry printed its page number on the first line while the dot leader ended on the last line, so the leader pointed at nothing (Point I and Point I.A). The page-number column is now bottom-aligned, so the number sits at the end of the leader.

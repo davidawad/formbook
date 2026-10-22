@@ -91,7 +91,7 @@ Gate 2 equivalent, recorded here (this doc type has no `reviews/` folder). Every
 
 The docx PDF breaks every line and page where the typst PDF does (XENG-001..003: 258/258 lines, 13/13 pages).
 
-Tier 2 is compared against two filed exemplars (Dillow page by page through the overlay; Anderson page 1 only, by eye). The render matches the filed exemplars in: type size (14 pt), line pitch (32 pt), margins, caption structure, the numbered-paragraph indent, the centred bold headings, the prayer's lettered items, and the single-spaced signature block. It differs in: the face (EB Garamond, gap 1) and the caption-column style (gap 2).
+Tier 2 is compared against two filed exemplars (Dillow page by page through the overlay; Anderson page 1 only, by eye). The render matches the filed exemplars in: type size (14 pt), line pitch (32 pt), margins, caption structure, the numbered-paragraph indent, the centred bold headings, the prayer's lettered items, and the single-spaced signature block. It differs in the caption-column style (gap 2); it also differed in the face while the template was EB Garamond, now Times New Roman like the exemplars (gap 1).
 
 ## Changes made during review
 

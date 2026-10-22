@@ -7,7 +7,7 @@ Folder: `courts/tenth-circuit/wyoming/federal/bankruptcy-district/motion-brief/`
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (caption, the Nature of the Case, the undisputed facts, the Applicable Law through the Maverick paragraph, the Attorney Fees and Conclusion, the relief list, the signature and the certificate; pages 10 to 12 of the filed memorandum are omitted and marked in the sample) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (embedded as EBGaramond-Regular/Italic/Bold), no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (embedded as EBGaramond-Regular/Italic/Bold), no warnings (measured on the earlier EB Garamond render; the template is now Times New Roman) |
 | overlay | ok: `usage/OVERLAY-tear-drop-memo.pdf` and `usage/OVERLAY-tear-drop-memo.txt` (every page paired with a filed page, 40% to 87% word overlap; pages 8 and 9 of the render pair with exemplar pages 13 and 14 because the sample omits exemplar pages 10 to 12) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change) |
 | BLOCKED | none. Tier 2 is not judged against two or three filers yet (see Known gaps). |
@@ -20,7 +20,7 @@ Primary sources, all fetched 2026-10-14:
 |---|---|---|
 | Local Bankruptcy Rules, D. Wyo., LBR 9004-1(A), as posted at https://www.wyb.uscourts.gov/sites/wyb/files/local-rules.pdf (rules marked "Effective July 1, 2012"; LBR 9004-1 is printed p. 59 of the 108-page PDF) | Letter-size paper, typewritten or printed on one side; **not less than 13 point** type (footnotes too); counsel headings not smaller than 10 point; double spaced; top margin one inch. | `body-size = 13pt`, `small-size = 11pt` (counsel block and signature lines), `body-leading` (double spacing), `margin-top = 1in`, `us-letter`. |
 | LBR 9004-1(B) | First page, top left: the client, and the name, address, telephone, fax and bar license number of the signing attorney. | `counsel` and `client` frontmatter, single spaced at top left. |
-| Typeface: no face named. Searched the whole posted local-rules PDF (checked 2026-10-15) for typeface, font and proportional, and for each face in `docs/FONTS.md`: none is named. LBR 9004-1(A) sets only the size (13 point). The Times New Roman in the exemplar is the filer's choice, not a rule. | Court names no face, so the template keeps **EB Garamond** (`docs/FONTS.md`, "No face named"). Typeface row: face required = none; substitute = EB Garamond (vendored); visual only. | `font-family = "EB Garamond"`. |
+| Typeface: no face named. Searched the whole posted local-rules PDF (checked 2026-10-15) for typeface, font and proportional, and for each face in `docs/FONTS.md`: none is named. LBR 9004-1(A) sets only the size (13 point). The Times New Roman in the exemplar is the filer's choice, not a rule. | Court names no face, so the template sets the house standard, **Times New Roman** (`docs/FONTS.md` rule 6; it was EB Garamond), and the docx names the same face. Typeface row: face required = none; face = Times New Roman, Liberation Serif fallback. | `font-family = ("Times New Roman", "Liberation Serif")`. |
 | LBR 9004-1(A), last sentence | Names typed or printed under the signature line. | `signature.signatures` and `signature.lines`; the names are in the sample. |
 | LBR 9013-1(A)(1), (A)(2) (printed p. 65) | Every request is a separate motion; a dispositive motion in an adversary proceeding must be accompanied by a separate memorandum (LBR 9013-2). | Scope of the template: the memorandum only. |
 | LBR 9013-2 (printed p. 67) | Memorandum required with dispositive motions in an adversary proceeding; filed and served at least seven days before the hearing; **no memorandum may exceed 20 pages**, exclusive of the table of contents and exhibits, without the court's permission; responses due 14 days after service. | Not checked by the template (see Known gaps). |
@@ -31,7 +31,7 @@ Not produced by this template: the motion itself and its notice of hearing (LBR 
 
 ## Layout
 
-- Letter paper, 1 inch margins, 13 point EB Garamond, double spaced (2.0 em line pitch; EB Garamond's line box is 0.65 em, so `body-leading` is 1.35 em).
+- Letter paper, 1 inch margins, 13 point Times New Roman, double spaced (2.0 em line pitch; Liberation Serif's line box is 0.655 em, so `body-leading` is 1.345 em).
 - Counsel block single spaced at top left (11 point).
 - Court title centered and bold (two lines), then the caption: the parties in the left column with `v.` between sides, a rule, the third-party parties in the same column, closed by a right rule and a bottom rule; the right column holds the lead bankruptcy case and the adversary proceeding number.
 - The title centered and bold, then the body.
@@ -89,7 +89,7 @@ sh tools/overlay.sh courts/tenth-circuit/wyoming/federal/bankruptcy-district/mot
 
 **docx** (`docx/reference.docx` + `docx/wyb-motion-brief.lua`; output `usage/OUTPUT-motion-brief.docx`).
 
-- Matches: EB Garamond 13 pt body, 1 in margins, letter paper, exact 26 pt (double) line pitch, 0.5 in first-line indent, bold centered court title, caption table with the party rule and bottom rule and case information on the right, counsel block 11 pt single spaced, page number footer 11 pt centered, footnote text 13 pt.
+- Matches: Times New Roman 13 pt body (the typst face), 1 in margins, letter paper, exact 26 pt (double) line pitch, 0.5 in first-line indent, bold centered court title, caption table with the party rule and bottom rule and case information on the right, counsel block 11 pt single spaced, page number footer 11 pt centered, footnote text 13 pt.
 - Differs: the filter lays out the cover in a table with plain-text caption values (no inline markdown in caption parties), and the pleading-paper paragraph numbers and lettered prayer items are typed text, not Word list numbering. Heading and signature keep-together uses keepNext, so Word and LibreOffice may break pages differently.
 - BLOCKED: docx.pdf (`soffice` not installed on this box, no root and no conda-forge package), so Gate 0 and Gate 1 are not run on the docx.
 - BLOCKED: `tools/render-docx.sh` zip integrity step: `unzip` is not installed, so `unzip -tq` fails and the command exits 1 after writing the .docx. The XML parts were checked by hand with `xmllint --noout` after unpacking with libzip's `ziptool`; all well-formed.

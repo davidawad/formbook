@@ -7,10 +7,10 @@ Folder: `courts/fifth-circuit/texas/federal/eastern-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (plaintiff's original complaint, Marshall Division, 8 pages, filed 2025-06-30). A second filer, `usage/FILED-EXAMPLE-complaint-2.pdf` (2015, 5 pages), is kept for conventions; see `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-complaint.md`: the whole filing transcribed (caption, 29 numbered paragraphs in 6 headings, prayer, signature block). |
-| typeface | Rule names no face: E.D. Tex. CV-10(a)(5) (text read 2026-10-15 from the 2018 copy, the only one retrievable) requires double spacing and "a font no smaller than 12-point type". Vendored substitute: none needed; **EB Garamond kept** (`fonts/eb-garamond/`, the court-agnostic default in `docs/FONTS.md`). Metric compatibility: n/a. The exemplars' Times New Roman is a filer's choice, not a rule. |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only, no typst warnings; re-rendered 2026-10-15, `pdffonts` shows EB Garamond Regular and Bold embedded. |
+| typeface | Rule names no face: E.D. Tex. CV-10(a)(5) (text read 2026-10-15 from the 2018 copy, the only one retrievable) requires double spacing and "a font no smaller than 12-point type". Vendored substitute: none needed; **Times New Roman** 12 pt, the house standard (`docs/FONTS.md` rule 6) and the exemplars' face (EB Garamond 13 pt before fb-595.68). Metric compatibility: n/a. The exemplars' Times New Roman is a filer's choice, not a rule. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0 via `tools/render.sh`, pinned Times New Roman only (`pdffonts`: Regular, Bold, Italic and Bold Italic embedded), no typst warnings. (The 2026-10-15 render, before fb-595.68, was EB Garamond Regular and Bold.) |
 | overlay | **fail**: `tools/overlay.sh` exits 1 with "no exemplar pdf" because `usage/` holds only `SOURCE.md` in this snapshot (the `SAMPLE-*.pdf` files are not tracked). No `OVERLAY-pacsec3-complaint.pdf` is produced. The `.txt` on disk is from an earlier run and was not rewritten. |
-| pages reviewed | 8 of 8 of `OUTPUT-complaint.typst.pdf` rasterized at 60 dpi and viewed on 2026-10-15 after the typeface check. |
+| pages reviewed | 8 of 8 of `OUTPUT-complaint.typst.pdf` rasterized at 60 dpi and viewed on 2026-10-15 after the typeface check (the EB Garamond 13 pt render, before fb-595.68). |
 
 The file names follow the tools' defaults (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief, because `tools/render.sh` and `tools/overlay.sh` write and read those names.
 
@@ -24,7 +24,7 @@ Primary sources. Verified 2026-10-14.
 | CV-10(a)(2) | A caption with the name and party designation of the filer, and a statement of the document's character (example: "Defendant John Doe's Motion to Dismiss under Rule 12(b)(6)"). | `caption` (designations), `brief_title`. |
 | CV-10(a)(3) | Signed by the lead attorney, or with his or her permission. | `signature` block. |
 | CV-10(a)(4) | Plainly written, typed or printed, double-spaced, on 8 1/2 by 11 inch white paper (the paper rule is for paper filings; the template follows it for the PDF). | `page-w`, `page-h`. |
-| CV-10(a)(5) | Double spaced and in a font no smaller than 12-point type. | `body-leading` (1.47 em, a 27.6 pt baseline pitch at 13 pt); `type-size = 13pt`. |
+| CV-10(a)(5) | Double spaced and in a font no smaller than 12-point type. | `pitch-double` (a 27.6 pt baseline pitch); `type-size = 12pt`, footnotes and page number too. |
 | CV-10(c) | No "blue backs" or covers with paper filings. | Not produced. |
 | CV-7(a) | Each pleading or motion is a separate document; the proposed order is a separate searchable PDF; no security settings that block copying. | Not produced by this template (the complaint is one document; the proposed order is a separate file). |
 | CV-4(b) | Attorneys file the complaint electronically upon opening the case. | Not a template matter. |
@@ -41,7 +41,7 @@ Not produced by this template (separate filings, not part of the complaint): civ
 
 ## Layout
 
-- Letter size, 1 inch margins on all sides, page numbers centered in the footer (11 pt).
+- Letter size, 1 inch margins on all sides, page numbers centered in the footer (12 pt, CV-10(a)(5); 11 pt before fb-595.68).
 - Court title, bold and centered, single spaced, lines 1 onward (no pleading-paper line numbers: the rules do not require them).
 - Caption as a two-column grid: parties on the left, with "v." between the parties and each designation indented; case number and the jury demand on the right.
 - Title of the paper, bold and centered, in capitals.
@@ -61,16 +61,16 @@ Not produced by this template (separate filings, not part of the complaint): civ
 
 ## Decisions and deviations
 
-1. **Type: 13 pt EB Garamond.** The rule sets a 12-point floor. EB Garamond's x-height is small, so 12 pt reads smaller than the exemplar's Times at 12 pt. 13 pt meets the floor and reads closer to the exemplar. This is a judgment, recorded as a choice.
-2. **Pitch measured, not guessed.** `body-leading` was set from the measured exemplar pitch (27.6 pt). EB Garamond's line box is 0.65 em (measured), so the leading is 1.47 em.
+1. **Type: 12 pt Times New Roman** (the house standard, `docs/FONTS.md` rule 6, and the exemplar's face), at the rule's 12-point floor. Before fb-595.68 the template was 13 pt EB Garamond: EB Garamond's x-height is small, so 12 pt read smaller than the exemplar's Times at 12 pt, and 13 pt was chosen to read closer to it.
+2. **Pitch measured, not guessed.** The body pitch is the measured exemplar pitch, 27.6 pt (`pitch-double`, twice the 13.8 pt single line). (Before fb-595.68 it was set as a `body-leading` of 1.47 em on EB Garamond's measured 0.65 em line box.)
 3. **Caption.** The exemplar has no ")" column and no rules; the template follows that (ACCEPTED tier-2 choice; Wetro's 2015 caption is similar).
-4. **Page count.** 8 pages, matching the exemplar's 8. (An earlier 6-page render came from 12-point EB Garamond's narrower lines; the 13 pt choice made the count match.)
+4. **Page count.** 8 pages, matching the exemplar's 8. (An earlier 6-page render came from 12-point EB Garamond's narrower lines; the 13 pt choice made the count match. The current Times New Roman 12 pt render is also 8 pages.)
 5. **No measured coordinates.** Every size and spacing value is a rule value or a grid measured from the exemplar's line pitch; no coordinates were copied from the PDF.
 
 ## Known gaps
 
 1. **Only one filer is fully checked.** The tier-2 comparison uses the PacSec3 filing; Wetro (2015) was used only for conventions (caption, numbering, prayer, signature). A second 2025-2026 filer was not found.
-2. **Font.** EB Garamond is the only font vendored in `fonts/`. The exemplar is Times New Roman (Word default). The template cannot use Times; the look differs, though the size is set to match the apparent size.
+2. **Font.** The exemplar is Times New Roman (Word default), and so is the template now (`docs/FONTS.md` rule 6). Before fb-595.68 the template was EB Garamond, the only font then vendored, and the look differed.
 3. **Local-rule version.** See the version caveat above. The rule numbers and quoted limits are from the December 2018 copy.
 4. **Pleading format.** Not required by CV-10 and not used (the CAND template's pleading paper is not carried over).
 5. **No proposed order.** CV-7(a) requires a separate proposed order; it is not part of this template.
@@ -78,14 +78,14 @@ Not produced by this template (separate filings, not part of the complaint): civ
 
 ## Review record
 
-- Pages 1-8 of `usage/OUTPUT-complaint.typst.pdf` were rendered at 60 dpi and viewed after the last template change. Page 1: caption and title clean; no overlap after the block-height fix. Pages 2-6: body grid even, numbering 1-29 continuous, headings I-VI in order. Page 7: prayer items lettered a-f, WHEREFORE line clear of item (a). Page 8: signature block complete.
+- Pages 1-8 of `usage/OUTPUT-complaint.typst.pdf` were rendered at 60 dpi and viewed after the last template change (the EB Garamond 13 pt render, before fb-595.68). Page 1: caption and title clean; no overlap after the block-height fix. Pages 2-6: body grid even, numbering 1-29 continuous, headings I-VI in order. Page 7: prayer items lettered a-f, WHEREFORE line clear of item (a). Page 8: signature block complete.
 - Defects found and fixed during review: (a) court-title and caption lines overlapped (single-spaced lines had no leading; fixed with fixed-height single-spaced lines); (b) section headings took the surrounding size (now set explicitly to the body size); (c) the first numbered paragraph after each heading overlapped the heading (block gap moved above each block); (d) the WHEREFORE line overlapped prayer item (a) (same cause as c); (e) "§ 1" split across a line (NBSP in the sample).
 
 ## Engines
 
-The docx engine is `docx/`: `reference.docx` (built by `docx/make-reference.sh` from pandoc's default, the same styles as the typst form) and `docx/txed-complaint.lua` (the cover, caption table, numbered paragraphs, prayer letters, signature block). Run: `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`.
+The docx engine is `docx/`: `reference.xml` (`base="xengine"`: `fb render --engine docx` builds the reference document from it, the shared cross-engine recipe in the typst template's face) and `docx/txed-complaint.lua` (the cover, caption table, numbered paragraphs, prayer letters, signature block). Run: `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` (a wrapper of `fb render --engine docx`); it writes `usage/OUTPUT-complaint.docx` and `.docx.pdf` (8 pages, as the typst render).
 
-- **Matches the typst form:** EB Garamond 13 pt (the font must be installed on the machine that opens the file, or Word substitutes silently); double spacing at an exact 27.6 pt pitch; half-inch first-line indent; letter page, 1-inch margins; headings `I.`, `II.` ...; paragraphs numbered 1 to 29 continuously across the pleading; prayer lettered `a.` to `f.` with a hanging indent; signature block at the right half, kept together; 11 pt page number centered in the footer; caption as a borderless two-column table with the case number and jury demand at the foot of the right column.
-- **Differs:** a table cell cannot be bottom-aligned, so the case number is placed at the foot of the caption by padding the right column with empty lines (correct while the party names do not wrap); footnotes and paragraph breaks are Word's, so line breaks and the page count are not the typst render's (8 pages); no PDF bookmarks.
+- **Matches the typst form:** Times New Roman 12 pt (the font must be installed on the machine that opens the file, or Word substitutes silently); double spacing at an exact 27.6 pt pitch; half-inch first-line indent; letter page, 1-inch margins; headings `I.`, `II.` ...; paragraphs numbered 1 to 29 continuously across the pleading; prayer lettered `a.` to `f.` with a hanging indent; signature block at the right half, kept together; 12 pt page number centered in the footer; caption as a borderless two-column table with the case number and jury demand at the foot of the right column (a bottom-aligned cell).
+- **Differs:** footnotes and paragraph breaks are Word's, so line breaks and the page count are not the typst render's (8 pages); no PDF bookmarks.
 - **Checked:** the markdown body is all in the `.docx`, in order, with footnotes present (character-order check run outside the gates); the `.docx` reads back in pandoc.
-- **BLOCKED (docx.pdf):** Gates 0 to 3 on `usage/OUTPUT-pacsec3-complaint.docx.pdf` cannot run: LibreOffice (`soffice`) is not installable in this environment (not on conda-forge; no root for apt). The `.docx` is delivered; no page of it has been rendered or reviewed, and `usage/.check-docx.txt` is not written. Re-run `sh tools/render.sh --engine docx` and `sh tools/check.sh <folder> --engine docx` where LibreOffice is installed, then review every page (`## sample pacsec3-complaint docx` in `reviews/`).
+- **BLOCKED (docx.pdf), as recorded before fb-595.68 (when `docx/make-reference.sh` built the reference and no LibreOffice was available; `usage/OUTPUT-complaint.docx.pdf` is now committed):** Gates 0 to 3 on `usage/OUTPUT-pacsec3-complaint.docx.pdf` cannot run: LibreOffice (`soffice`) is not installable in this environment (not on conda-forge; no root for apt). The `.docx` is delivered; no page of it has been rendered or reviewed, and `usage/.check-docx.txt` is not written. Re-run `sh tools/render.sh --engine docx` and `sh tools/check.sh <folder> --engine docx` where LibreOffice is installed, then review every page (`## sample pacsec3-complaint docx` in `reviews/`).

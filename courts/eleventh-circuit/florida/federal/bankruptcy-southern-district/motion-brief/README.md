@@ -13,7 +13,7 @@ Verified 2026-10-14.
 | Fed. R. Bankr. P. 9013 | A request for an order must be made by written motion; a motion must state its grounds with particularity and set forth the relief requested | https://www.law.cornell.edu/rules/frbp/rule_9013 (Dec. 1, 2024 text) | Body and the relief stated in the Conclusion (no code check) |
 | Fed. R. Bankr. P. 9004(b) | Caption: court name, case title, case number and adversary number, and a designation of the document | https://www.law.cornell.edu/rules/frbp/rule_9004 | Caption |
 | Fed. R. Bankr. P. 7010 | Adversary pleadings follow Civil Rule 10 and the Form 416 caption | https://www.law.cornell.edu/rules/frbp/rule_7010 | Adversary caption |
-| S.D. Fla. Bankr. L.R. 9004-1(a)(2)–(4) | 1-inch margins; 12-point font (footnotes 10-point); double spacing except captions, titles, headings, quotations over 50 words, footnotes, signature blocks and certificates | 2026 Local Rules, https://www.flsb.uscourts.gov/sites/flsb/files/local_rules/2026_Local_Rules.pdf, Rule 9004-1, pp. 39–40 | Margins, type size, `body-leading` (24 pt), single-spaced block quotations, signature, certificate |
+| S.D. Fla. Bankr. L.R. 9004-1(a)(2)–(4) | 1-inch margins; 12-point font (footnotes 10-point); double spacing except captions, titles, headings, quotations over 50 words, footnotes, signature blocks and certificates | 2026 Local Rules, https://www.flsb.uscourts.gov/sites/flsb/files/local_rules/2026_Local_Rules.pdf, Rule 9004-1, pp. 39–40 | Margins, type size, `pitch-double` (24 pt), single-spaced block quotations, signature, certificate |
 | L.R. 9004-1(d) | No incorporation by reference of facts or arguments made in another filed document | same | Not enforced by the template; the sample incorporates nothing (checked by reading) |
 | L.R. 9004-1(e)(2) | Adversary caption: "In re:" block, division line, plaintiff v. defendant, Adv. No. | same | Caption |
 | L.R. 9013-1(a) | A motion seeking relief against an entity that has appeared through counsel must include a certification that the movant's counsel conferred (or tried to) in good faith | same, Rule 9013-1, p. 45 | `conferral:` frontmatter renders a "Certificate of Conferral" when given; see known gaps |
@@ -42,11 +42,11 @@ File-name note: as in the complaint README, the tools write `OUTPUT-<id>.pdf` an
 
 ## Overlay (red/blue test)
 
-Pairings from `usage/OVERLAY-alinia-memorandum.txt` (word overlap, a diagnostic, not a score): ours p.1 → filed p.1 (76.0%), p.2 → p.2 (63.6%), p.3 → p.4 (55.7%), p.4 → p.5 (83.1%), p.5 → p.6 (77.2%), p.6 → p.8 (53.5%), p.7 → p.9 (62.9%), p.8 → p.10 (82.3%), p.9 → p.11 (76.8%), p.10 → p.12 (77.8%). From page 3 on our page numbers differ from the exemplar's, so compare the overlay by content, not by page number. The filed pages 14 and 15 have no text layer, so the overlay cannot pair against them.
+Pairings from `usage/OVERLAY-alinia-memorandum.txt` (word overlap, a diagnostic, not a score; measured on the earlier EB Garamond render, before fb-595.68): ours p.1 → filed p.1 (76.0%), p.2 → p.2 (63.6%), p.3 → p.4 (55.7%), p.4 → p.5 (83.1%), p.5 → p.6 (77.2%), p.6 → p.8 (53.5%), p.7 → p.9 (62.9%), p.8 → p.10 (82.3%), p.9 → p.11 (76.8%), p.10 → p.12 (77.8%). From page 3 on our page numbers differ from the exemplar's, so compare the overlay by content, not by page number. The filed pages 14 and 15 have no text layer, so the overlay cannot pair against them.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-motion-brief.typst.pdf` (10 pages) was rendered at 60 dpi and looked at. `pages_reviewed=10`.
+Every page of `OUTPUT-motion-brief.typst.pdf` (10 pages; the earlier EB Garamond render, before fb-595.68) was rendered at 60 dpi and looked at. `pages_reviewed=10`.
 
 | Page | Result |
 |---|---|
@@ -80,13 +80,13 @@ Defects found and fixed while reviewing:
 
 ## Engines
 
-Word (`docx/`): pandoc with `docx/reference.docx` (built by `docx/make-reference.sh`, from pandoc's default) and `docx/flsb-motion-brief.lua`; `docx/render.sh` writes `usage/OUTPUT-motion-brief.docx`. Run `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md`.
+Word (`docx/`): `fb render --engine docx` builds the reference document from `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst template's face; `docx/make-reference.sh` and `docx/render.sh` are retired) and runs pandoc with `docx/flsb-motion-brief.lua`; it writes `usage/OUTPUT-motion-brief.docx` and the LibreOffice `usage/OUTPUT-motion-brief.docx.pdf`. Run `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md`.
 
-What matches the typst output: EB Garamond 12 pt; 1-inch margins on letter paper; double spacing (24 pt exact) for body paragraphs with a half-inch first-line indent; single-spaced caption, block quotations, signature block (indented three inches) and certificates; 10-point footnotes; centered page number; the caption as a borderless table with "Case No.", "Chapter" and "Adv. Case No." labels; centered bold section headings (level 1 in capitals) and kept with the next paragraph; lettered and roman parentheticals at a half-inch left indent; the Certificate of Conferral when `conferral:` is given; the Certificate of Service with its service list.
+What matches the typst output (recorded before fb-595.68; the face is now that of `docx/reference.xml`): Times New Roman 12 pt; 1-inch margins on letter paper; double spacing (24 pt exact) for body paragraphs with a half-inch first-line indent; single-spaced caption, block quotations, signature block (indented three inches) and certificates; 10-point footnotes; centered page number; the caption as a borderless table with "Case No.", "Chapter" and "Adv. Case No." labels; centered bold section headings (level 1 in capitals) and kept with the next paragraph; lettered and roman parentheticals at a half-inch left indent; the Certificate of Conferral when `conferral:` is given; the Certificate of Service with its service list.
 
-What differs: the last body paragraph is not kept with the signature block (the typst template does, so a signature never stands alone); the Heading 2 style is left-aligned as in the typst template, but page breaks may differ from the typst PDF; the footnote and block-quote spacing follows the reference styles and may differ by a line from the typst output. The EB Garamond font must be installed on the machine that opens the file.
+What differs: the last body paragraph is not kept with the signature block (the typst template does, so a signature never stands alone); the Heading 2 style is left-aligned as in the typst template, but page breaks may differ from the typst PDF; the footnote and block-quote spacing follows the reference styles and may differ by a line from the typst output. The Times New Roman font must be installed on the machine that opens the file.
 
-docx BLOCKED (not verified; see docs/DOCX.md):
+docx BLOCKED (not verified; see docs/DOCX.md; recorded before fb-595.68, when `soffice` was not available here):
 - `docx.pdf` gates (all of `tools/check.sh --engine docx`, which measure the LibreOffice PDF): BLOCKED: LibreOffice (`soffice`) is not installed in this environment and is not in conda-forge, so `usage/OUTPUT-alinia-memorandum.docx.pdf` was not produced and no page was rendered or reviewed. `tools/check.sh` also cannot run here yet (it needs `yq`, `checks.yaml` and `court.json` for this doc type).
 - The `.docx` itself was written and its XML parts are well-formed (`unzip -t`, `xmllint`). It has not been opened in Word or LibreOffice, so "opens without a repair prompt" is unchecked.
 

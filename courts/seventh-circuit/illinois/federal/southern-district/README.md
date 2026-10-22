@@ -36,13 +36,13 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
 <!-- fb:generated:end -->
 
-- Typeface: none named by the local rules (LR 5.1(a), 7.1(a)(3): 12-point type, double-spaced). EB Garamond in every doc type, per `docs/FONTS.md`; see each doc-type README.
+- Typeface: none named by the local rules (LR 5.1(a), 7.1(a)(3): 12-point type, double-spaced). Times New Roman 12 pt in every doc type, the house standard (`docs/FONTS.md` rule 6; it was EB Garamond before), in typst and docx alike; see each doc-type README.
 
 - [ ] `usage/` has at least 2 filed PDFs (different filers)
 - [ ] `usage/` has at least 2 .md samples

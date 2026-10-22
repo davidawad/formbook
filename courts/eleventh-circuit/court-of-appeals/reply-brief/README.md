@@ -6,7 +6,7 @@ Status of this doc type: **exemplar found, template built, render and overlay ru
 |---|---|
 | `usage/FILED-EXAMPLE-reply-brief.pdf` | The filed reply (ECF Doc. 23, 14 pp., text layer present). Provenance in `usage/SOURCE.md`. |
 | `usage/INPUT-reply-brief.md` | Transcription of the whole reply: cover, every heading, all argument, conclusion, signature, certificates. Frontmatter holds the cover, counsel, authorities. |
-| `usage/OUTPUT-reply-brief.typst.pdf` | `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md` (14 pp.) |
+| `usage/OUTPUT-reply-brief.typst.pdf` | `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md` (15 pp.; the overlay and the review below were on the earlier 14-page render) |
 | `usage/OVERLAY-jg-v-northfield-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/reply-brief jg-v-northfield-reply-brief` (red = ours, blue = filed, black = agree). |
 | `typst/main.typ` | Entry point: reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca11-reply-brief.typ` | The template `ca11-reply-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
@@ -47,7 +47,7 @@ A sample is one `.md` file: a YAML frontmatter block (metadata), then the body. 
 
 ## Overlay (the red/blue test)
 
-`usage/OVERLAY-jg-v-northfield-reply-brief.pdf`, 14 pages, pages paired by word overlap with the filed exemplar (`-overlay.txt`):
+`usage/OVERLAY-jg-v-northfield-reply-brief.pdf`, 14 pages (measured on the earlier 14-page render), pages paired by word overlap with the filed exemplar (`-overlay.txt`):
 
 | ours | filed | word-overlap |
 |---|---|---|
@@ -62,7 +62,7 @@ The overlap is a pairing aid, not a score (the overlay itself is a diagnostic). 
 
 ## Visual review (Gate 2)
 
-All 14 pages rendered at 60 dpi (`pdftoppm -r 60`) and viewed one by one. Findings:
+All 14 pages (the earlier 14-page render) rendered at 60 dpi (`pdftoppm -r 60`) and viewed one by one. Findings:
 
 | Page | Content | Result |
 |---|---|---|
@@ -129,8 +129,8 @@ engine certifies 2,132 words and names Times New Roman (no program name).
   `\addvspace` for every space, `\xe@row` table rows; a heading keeps the next block with it; the last paragraph and
   the signature are one unbreakable box; the table of authorities takes the page of a citation's first word (as typst
   does), with the asterisk after a primary page.
-- **docx** (`docx/reference.docx` from `docx/make-reference.sh` = `lib/docx/xengine-reference.sh`, `docx/ca11.lua`,
-  `docx/render.sh`): exact line spacing at the typst pitches and spaces; the cover, tables, signature and certificates
+- **docx** (`docx/reference.xml`, from which `fb render --engine docx` builds the reference document with the cross-engine recipe, `base="xengine"`; `docx/ca11.lua`;
+  `docx/make-reference.sh`, `docx/render.sh` and the committed `reference.docx` were retired in fb-595.68.2): exact line spacing at the typst pitches and spaces; the cover, tables, signature and certificates
   as paragraphs written by the filter; a word joiner between ")" and "(" in the filter's own text (typst never breaks
   "32(a)(7)(B)", LibreOffice would); sections carry the roman and arabic footers. The page numbers in the tables are
   written text from a first LibreOffice render: each heading is found by its label and title at the start of a line,

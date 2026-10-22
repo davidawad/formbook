@@ -36,7 +36,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
@@ -47,7 +47,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - [ ] overlay PDF present (`usage/*-overlay.pdf`)
 
-Typeface: no face is named by the rules read (2026-10-14), so both doc types keep EB Garamond; see the typeface row in each doc-type README.
+Typeface: no face is named by the rules read (2026-10-14), so both doc types are set in Times New Roman, the house standard (`docs/FONTS.md`, rule 6); see the typeface row in each doc-type README.
 
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`

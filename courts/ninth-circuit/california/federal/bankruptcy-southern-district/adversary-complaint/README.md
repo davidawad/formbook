@@ -7,7 +7,7 @@ Folder: `courts/ninth-circuit/california/federal/bankruptcy-southern-district/ad
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md`: the complaint in full (caption, paragraphs 1 to 38, the claim headings, the prayer and the signature block) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (the earlier EB Garamond render, before fb-595.68; the committed render is Times New Roman, 12 pages) |
 | overlay | ok: `usage/OVERLAY-steakhouse-partners-complaint.pdf` and `.txt` (pages paired by word overlap; 61 to 97%) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change; see the review table) |
 
@@ -27,7 +27,7 @@ Primary and secondary sources, with how each was checked. The casb local rules a
 | CASB-FORM-002 | S.D. Cal. Admin. Proc. (line spacing, same note) | Double-spaced, except the counsel block, title of the action, category headings, footnotes, quotations, exhibits and real-property descriptions. | Same note. The font size is not stated in the note. | body at 24 pt pitch; counsel and caption single-spaced |
 | CASB-FORM-003 | Convention (both exemplars) | Pleading paper: 28 numbered lines down the left margin, double rules, footer under the lines. | Read from the text layers of both casb exemplars (line numbers 1 to 28 on each page extracted: Kennedy pp. 3 to 13, Stika pp. 1 to 5 of the motion). Not a rule text; a tier-2 convention. | `line-numbers()`, `pleading-rules()`, `lines-per-page = 28` |
 
-Not verified against primary text, so not asserted as a rule by this template: the font (EB Garamond is used; the exemplar's font is not part of this check), the 12-point size (the CAND templates use it; no casb rule text was read), and any requirement for a footer title.
+Not verified against primary text, so not asserted as a rule by this template: the font (Times New Roman is used, the house standard of docs/FONTS.md rule 6; the exemplar's font is not part of this check), the 12-point size (the CAND templates use it; no casb rule text was read), and any requirement for a footer title.
 
 ## Layout
 
@@ -58,7 +58,7 @@ File names: the render and overlay are written as `OUTPUT-<id>.pdf`, `OVERLAY-<i
 
 ## Review of the rendered pages (Gate 2 record)
 
-Every page rendered at 60 dpi and looked at. Findings from the first render are in the "fixed" column.
+Every page rendered at 60 dpi and looked at (on the earlier EB Garamond render, before fb-595.68). Findings from the first render are in the "fixed" column.
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -81,7 +81,7 @@ Pages 2 to 10 were rendered and looked at before the footer change; the footer c
 1. **One filer only.** The brief asks for one exemplar per doc type; EVAL-LOOP tier 2 asks for two or three filers. Searched CourtListener (search API, 2026-10-14) for casb adversary complaints: Stika v. Alegria (25-90036, Doc 1) is a 3-page scan with no text layer, so it was not used. Kennedy (this exemplar) is the only text-based casb complaint that the search returned with a PDF.
 2. **Local rules not verified.** LBR 7003-1 and the casb administrative procedures are cited through a search excerpt and a 2021 practice note; the primary text was not reachable (403). The template's pleading paper and footer follow the exemplars, not a fetched rule. A reviewer with the current administrative procedures should check the caption wording and the line-spacing exceptions.
 3. **Cover sheet not produced.** Form B 104 (the adversary proceeding cover sheet) and the summons (Form B 1040 / CSD 3007) are separate filings and are not generated.
-4. **Font.** EB Garamond at 12 pt, vendored in `fonts/`. The exemplar is Times-like, so the text looks slightly smaller on the page. This is a font choice, not a rule.
+4. **Font.** Times New Roman at 12 pt (the pinned install, Liberation Serif fallback; docs/FONTS.md rule 6), as the exemplar is Times-like. This is a font choice, not a rule.
 5. **Paragraph numbers.** The sample numbers its allegations from 1 to 38, matching the filed paragraph numbers; the template numbers them, so any change to the text changes the numbers.
 6. **Headings must fit the grid.** Headings are whole numbered lines (multi-line allowed). A heading is kept with the paragraph after it.
 7. **Left column of the caption.** The party column is closed by a rule (right and bottom), the convention seen on the exemplar. Recorded as ACCEPTED.
@@ -91,9 +91,9 @@ Pages 2 to 10 were rendered and looked at before the footer change; the footer c
 
 ## Engines
 
-**docx** (`docx/`): `sh tools/render.sh --engine docx courts/ninth-circuit/california/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice PDF, 11 pages, EB Garamond embedded). Built by `docx/build-reference.sh` (reference.docx), `docx/render.sh` (sets the footer from the frontmatter) and `docx/casb-adversary-complaint.lua`.
+**docx** (`docx/`): `sh tools/render.sh --engine docx courts/ninth-circuit/california/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice PDF, Times New Roman embedded). `fb render --engine docx` builds it: the reference document from `docx/reference.xml` (the shared cross-engine recipe, `base="xengine"`, in the typst face), then pandoc with `docx/casb-adversary-complaint.lua` (and `docx/lib/lines.lua`), which writes the page, the footer from the frontmatter and the line numbers (`FORMBOOK_FINAL`, `FORMBOOK_FOOTERS`).
 
-- Matches the typst output in the mandated form: EB Garamond 12 pt, 24 pt line pitch on the body and the numbered lines, 28 line numbers on the grid, double and single pleading rules, the three-line footer (page, title, case number), the counsel block from line 1, the caption, numbered allegations, lettered lists, the signature block.
+- Matches the typst output in the mandated form: Times New Roman 12 pt, 24 pt line pitch on the body and the numbered lines, 28 line numbers on the grid, double and single pleading rules, the three-line footer (page, title, case number), the counsel block from line 1, the caption, numbered allegations, lettered lists, the signature block.
 - Differs: the numbers are a framed header block and the rules are page borders (double rule 14 pt from the text, single 7 pt from it), not the typst background; the footer and rules are placed by Word/LibreOffice layout, not by coordinates. Checked with LibreOffice only (Word is not available here).
 - No typst `OUTPUT-adversary-complaint.typst.pdf` exists in `usage/` in this snapshot, so there is no typst page to compare against; the pages were judged against the typst template.
 - BLOCKED: `tools/check.sh <this folder> --engine docx` exits 2 (`court.json` and `checks.yaml` are missing from this doc-type folder; they are court-level files and were not created). No gate result is claimed. Gate 0 was checked by hand for word presence only (every body word is in the PDF text; only frontmatter keys are absent, as expected).

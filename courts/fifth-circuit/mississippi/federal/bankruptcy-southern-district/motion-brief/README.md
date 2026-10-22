@@ -6,9 +6,9 @@ Doc type: **motion-brief**: the memorandum brief that supports a motion, in the 
 |---|---|
 | exemplar | yes, one filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (Dkt 48, "Memorandum in Support of Motion for Summary Judgment", 15 pp., defendant's counsel). The motion itself is not in the exemplar, and the memorandum states no docket reference. See `usage/SOURCE.md` and Known gaps. |
 | sample md | `usage/INPUT-motion-brief.md`: the whole memorandum, transcribed, with the signature block and the certificate of service |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages (10 on the earlier EB Garamond render, before fb-595.68), typst 0.15.0, pinned Times New Roman only, no warnings (`sh tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-lentz-motion-brief.pdf` and `.txt` (`sh tools/overlay.sh`) |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed, final template) |
+| pages reviewed | 10 of 10 on the earlier EB Garamond render, before fb-595.68 (every page rendered at 60 dpi and viewed, final template then) |
 | tier 1 | rules-driven template; asserts that stop the build if the title, the docket reference (`related_docket`), the caption case data, or counsel's e-mail, Bar number, telephone or street address is missing (checked: a sample with no docket reference fails with the rule cited). |
 
 `court.json` and the court-root `typst/`, `usage/` are untouched. `tools/check.sh` and `tools/check-selftest.sh` were not run, for the same reason as the complaint folder (they expect `court.json` and `rules.md`).
@@ -64,14 +64,14 @@ Three engines run from one markdown contract. `typst/` is the primary template a
 | Engine | Output in `usage/` | Result |
 |---|---|---|
 | typst | `OUTPUT-motion-brief.typst.pdf` | unchanged |
-| docx | `OUTPUT-motion-brief.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
+| docx | `OUTPUT-motion-brief.docx`, `.docx.pdf` | both written (12 pages); the BLOCKED record below is from before fb-595.68 |
 
-Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx`), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`. The filter is `docx/mssb-motion-brief.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
+Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` (a wrapper of `fb render --engine docx`), which builds the reference document from `docx/reference.xml` (`base="xengine"`, the shared cross-engine recipe in the typst template's face) and runs pandoc with the filter `docx/mssb-motion-brief.lua`, then LibreOffice for the `.docx.pdf`. (Until fb-595.68 `docx/make-reference.sh` wrote a `docx/reference.docx`, and LibreOffice failed on the box used then.)
 
-What the docx build sets to the typst form (from the same frontmatter). These are settings in the XML and the filter, not a rendered comparison: no page has been rendered (see below).
+What the docx build sets to the typst form (from the same frontmatter). These lists were written on the earlier EB Garamond build, before fb-595.68, when no page had been rendered; the face and the body pitch are updated to the current `docx/reference.xml`.
 
-- US Letter, 1 in margins. EB Garamond 12 pt for the body, caption, quotations, footnotes and footer (5005-1(a)(2)(G)).
-- Double spacing as exact 24 pt lines, the same pitch as the typst template. Single spacing for caption, quotations, address blocks, counsel and signature lines, and footnotes (5005-1(a)(2)(G) allows this).
+- US Letter, 1 in margins. Times New Roman 12 pt for the body, caption, quotations, footnotes and footer (5005-1(a)(2)(G)).
+- Double spacing as exact 27.6 pt lines (`body="552"`, Word's double), the same pitch as the typst template (24 pt on both before fb-595.68). Single spacing for caption, quotations, address blocks, counsel and signature lines, and footnotes (5005-1(a)(2)(G) allows this).
 - Cover: court name, division, caption table with a 3.6 in party column, title in bold capitals, and the docket line `(Dkt. # ...)`.
 - Body paragraphs are unnumbered, with a 0.5 in first-line indent. Level-1 headings are centred capitals (I., II., ...), level-2 bold at the left (A., B., ...), level-3 bold italic.
 - Block quotations are single spaced, indented 0.75 in on the left and 0.5 in on the right.
@@ -87,14 +87,14 @@ What differs, by design or by Word:
 - The sample has no pipe tables. A table in another memorandum would fall back to pandoc's table style, which is not the typst layout, and is not checked.
 - Pagination differs between Word and LibreOffice; page counts are not measured for the docx.
 
-docx BLOCKED (not verified by a render):
+docx BLOCKED (record from before fb-595.68; `usage/OUTPUT-motion-brief.docx.pdf` is now committed):
 
 - `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF, `tools/check.sh --engine docx`): BLOCKED. LibreOffice cannot start on the box used here. The Debian LibreOffice 25.2 packages (extracted without root, all shared libraries resolved) exit at bootstrap with a `DeploymentException`. No `.docx.pdf` exists, so no page was rendered or viewed (pages reviewed: 0), and `usage/.check-docx.txt` is not written. `tools/check.sh` also needs `yq` and a court folder with `court.json` and `rules.md`, which a doc-type folder does not have.
 - The `.docx` has not been opened in Word or LibreOffice. Its package parts are well-formed XML and the zip is valid, which is necessary, not sufficient.
 
 ## Overlay
 
-`usage/OVERLAY-lentz-motion-brief.pdf` puts our render (red) over the best-matching page of the filed memorandum (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run:
+`usage/OVERLAY-lentz-motion-brief.pdf` puts our render (red) over the best-matching page of the filed memorandum (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run on the earlier EB Garamond render, before fb-595.68:
 
 - p.1 ↔ p.1 (58%): caption, title, the start of the introduction and of Part II.
 - p.2 ↔ p.3 (80%): the DNA and DAA quotations. The filed quotations sit on different pages.
@@ -106,7 +106,7 @@ docx BLOCKED (not verified by a render):
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed in its final form.
+Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed in its final form (the 10-page EB Garamond render, before fb-595.68; the page contents below are from that render).
 
 | Page | Content | Result |
 |---|---|---|
@@ -123,7 +123,7 @@ Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed 
 
 Tier-2 findings (OPEN or ACCEPTED):
 
-- Body typeface: EB Garamond, the only serif vendored in `fonts/`. The filing's face is not confirmed here: `pdffonts` reports the exemplar's text as Liberation Sans-named subsets, but the page image reads as a Times-style serif. At 12 pt, EB Garamond has a smaller x-height than Times, so the text looks smaller, and the filed memorandum runs 15 pages to our 10. The rule's 12 point minimum is met. ACCEPTED pending David's decision on the size (see Known gaps).
+- Body typeface: Times New Roman, the house standard (`docs/FONTS.md` rule 6) and the exemplar's face as `data/exemplar-fonts.json` audits it. Until fb-595.68 the template was EB Garamond, then the only serif vendored; this row then read the filing's face as unconfirmed (`pdffonts` reported Liberation Sans-named subsets, the page image a Times-style serif) and EB Garamond's smaller x-height as making the text look smaller (15 filed pages to our 10). The rule's 12 point minimum is met. ACCEPTED.
 - Page 8 white space above the conclusion: ACCEPTED (see the page review).
 - Heading and footnote styling were checked against the rule and the filing's text layer only, not against the filed page images, beyond the one page (p. 5) viewed. Not a tier-2 finding; recorded so the gap is visible.
 
@@ -136,6 +136,6 @@ Tier-2 findings (OPEN or ACCEPTED):
 5. **Bank-statement table (exemplar p. 5).** The table in the Lentz memorandum is an image (a screenshot of six "Customer Fee" entries) with no text layer. The sample shows a bracketed description of it, not its contents. The total ($73.55) is in the text and is transcribed.
 6. **Word-level check.** Every word of the sample appears in the filing's text layer, except the placeholders, the frontmatter keys, and the template's fixed words. The filing's ECF header and footer (Dkt number, "Filed", "Entered", "Page", the filer's document number on each page) are not transcribed.
 7. **Margins.** The uniform rules set none; the template uses one inch on each side. The filing's margins are not measured.
-8. **Length.** The sample renders at 10 pages against the filing's 15 (see the typeface finding).
+8. **Length.** The sample renders at 12 pages against the filing's 15 (10 on the earlier EB Garamond render; see the typeface finding).
 9. **Single exemplar, one filer.** The RECAP searches run in this box found no second filer's memorandum in support of a motion with a text layer in storage. Lentz Dkt 40 (a memorandum on a motion to reconsider) is the same filer (NDR). The On-Site Fuel memorandum (Dkt 10) is not in storage. The Park Energy / First Service Bank motion to dismiss (26-06008-JAW, Dkt 13) is a motion, and its memorandum is a separate entry not in storage. Tier 2 is judged against the one filing. A search beyond these is not done.
 10. **Federal rule not checked.** Fed. R. Bankr. P. 9013 was not fetched in this box (see Governing rules).

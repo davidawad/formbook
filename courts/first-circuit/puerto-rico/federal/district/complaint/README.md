@@ -8,8 +8,8 @@ Doc type folder for a complaint in this court. One self-contained folder per doc
 | Sample | `usage/INPUT-complaint.md`: a portion of the filing. Caption, lead-in, all section headings in order; filed ¶¶ 1–4 and 8–10 (introduction), 11–15 (jurisdiction), 16 (plaintiffs), 47–50 (facts), 72–81 (first claim), 82–83 (second claim, incorporation and capacity only), the prayer (A–F, see gaps), and the signature block |
 | Render | `usage/OUTPUT-complaint.typst.pdf`, **9 pages**, no typst warnings (`sh tools/render.sh courts/first-circuit/puerto-rico/federal/district/complaint usage/INPUT-complaint.md`) |
 | Overlay | `usage/OVERLAY-conde-vidal-complaint.pdf` and `.txt` (`sh tools/overlay.sh courts/first-circuit/puerto-rico/federal/district/complaint conde-vidal-complaint`) |
-| Pages reviewed | 9 of 9 (rendered at 60 dpi and looked at, final render) |
-| Typeface | face required by the rules: **none named** (L.Civ.R. 7 sets a point size, 12 pt for a proportional font; secondary read, see below) → substitute: **EB Garamond** (no face named, `docs/FONTS.md`) → metric-compatible: n/a, visual only. The exemplar is set in Times New Roman, but an exemplar does not set a rule. Font list unchanged in `typst/prd-complaint.typ`. |
+| Pages reviewed | 9 of 9 (rendered at 60 dpi and looked at, on the earlier EB Garamond render, before fb-595.68; 9 pages then and now) |
+| Typeface | face required by the rules: **none named** (L.Civ.R. 7 sets a point size, 12 pt for a proportional font; secondary read, see below) → template face: **Times New Roman** 12 pt, the house standard where no face is named (`docs/FONTS.md` rule 6; Liberation Serif as fallback; EB Garamond before 2026-10-17, the docx until fb-595.68.17), on typst and docx. The exemplar is set in Times New Roman too. |
 
 Names: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the names `tools/render.sh` and `tools/overlay.sh` read and write). The brief's `<id>.pdf` and `<id>-overlay.pdf` are the same files under those names.
 
@@ -24,7 +24,7 @@ Names: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the names 
 
 Requirement IDs used in `typst/prd-complaint.typ`:
 
-- **PRD-FORM-002**: 12-point proportional font (EB Garamond, vendored). L.Civ.R. 7 (secondary).
+- **PRD-FORM-002**: 12-point proportional font (Times New Roman, `docs/FONTS.md` rule 6). L.Civ.R. 7 (secondary).
 - **PRD-FORM-003**: double spacing, 24 pt pitch. L.Civ.R. 7 (secondary).
 - **PRD-FORM-004**: 1-inch margins. Not stated in the rule text read; set from the exemplar (a convention, tier 2).
 - **PRD-FORM-005**: page number at bottom centre, same size as the text. L.Civ.R. 7 (secondary: "preferably at the bottom center").
@@ -35,7 +35,7 @@ Requirement IDs used in `typst/prd-complaint.typ`:
 
 ## What the overlay shows
 
-Red = our render; blue = the filed exemplar; black = both (see `OVERLAY-conde-vidal-complaint.txt` for the page pairing). Pages pair by word overlap, not by index, so a partial transcription still lines up.
+Measured on the earlier EB Garamond render, before fb-595.68. Red = our render; blue = the filed exemplar; black = both (see `OVERLAY-conde-vidal-complaint.txt` for the page pairing). Pages pair by word overlap, not by index, so a partial transcription still lines up.
 
 | Our page | Filed page | Word overlap |
 |---|---|---|
@@ -55,7 +55,7 @@ Reading the overlay: the caption, the lead-in and the first body page line up (p
 
 - **Exemplar search**: only one D.P.R. complaint was found as a text-based public PDF. Searched: CourtListener and RECAP (not reachable from the build box, and no storage path could be found); Clearinghouse (403 from the build box); Justia dockets (no documents); the D.P.R. blank civil complaint form (a blank form, not a filing); Democracy Forward, ACLU-PR and Earthjustice filings (the ones found were D.D.C. or D.P.R. amicus filings or a Commonwealth-court *demanda*); Comité Diálogo Ambiental v. FEMA, 3:24-cv-01145 (its complaint was filed in D.D.C. in 2023 before transfer; the PDF was not retrieved). The exemplar's filer is the plaintiffs' counsel in an equal-protection and due-process challenge; it is a 2014 pleading.
 - **Local rules not read at primary**: the court's local-rules PDFs (`20230714-USDCPR-Local-Rules.pdf`, `20220304-...`, `20201221` FAB compilation) are on prd.uscourts.gov, which returned 404 for every path tried. The L.Civ.R. 7 text above is from a third-party copy. No D.P.R. local rule about complaint caption, cover page, civil cover sheet, or length was read, so none is implemented.
-- **Font**: the exemplar is Times New Roman, but no D.P.R. rule read names a face, so EB Garamond stays (`docs/FONTS.md`, "No face named"). It sets visibly smaller than 12-point Times. If the primary L.Civ.R. 7 is found to name Times New Roman, switch the font list to `Liberation Serif` (the substitute in `docs/FONTS.md`) and re-check the page count.
+- **Font**: no D.P.R. rule read names a face; the template is Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6, David 2026-10-17), as is the exemplar (EB Garamond before 2026-10-17, the docx until fb-595.68.17).
 - **Paragraph numbers**: the template numbers the allegations from 1 (FRCP 10(b)); the filed numbers are not carried over, so a numbered paragraph in the sample does not match the number on the same paragraph in the filing.
 - **Prayer item C**: the filed prayer runs A, B, D, E, F, G (no C). The sample transcribes the items as printed (A–F), so the sample shows one fewer item letter than the filing's last letter.
 - **Not transcribed**: filed ¶¶ 5–7, 17–46, 51–71, 84–91, and the body of the second claim after ¶ 83.
@@ -64,22 +64,21 @@ Reading the overlay: the caption, the lead-in and the first body page line up (p
 
 ## Engines
 
-The same markdown renders through typst (`typst/`, the reference) and docx (`docx/`). There is no latex engine here and no `checks.yaml` in this folder, so no gate was run on either output; the docx review is by eye.
+The same markdown renders through typst (`typst/`, the reference) and docx (`docx/`). There is no latex engine here. `tools/check.sh` gates both outputs on `eval.yaml` (`usage/.check-typst.txt` and `usage/.check-docx.txt`: PASS); the docx review below is by eye.
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
 | typst | `OUTPUT-complaint.typst.pdf` (9 pp, reference) | reference |
-| docx | `OUTPUT-complaint.docx`, `OUTPUT-complaint.docx.pdf` (10 pp) | ok: LibreOffice converts it without error; all 10 pages of the `.docx.pdf` were rendered at 60 dpi and set beside the typst pages (pages 1 to 10) |
+| docx | `OUTPUT-complaint.docx`, `OUTPUT-complaint.docx.pdf` (9 pp) | ok: LibreOffice converts it without error; XENG-001..003 pass (253/253 lines, fb-595.68.17). The by-eye review (all 10 pages of the `.docx.pdf` at 60 dpi beside the typst pages) was on the earlier EB Garamond docx |
 
 ```sh
-sh docx/make-reference.sh                                   # docx/reference.docx (needs pandoc, perl, unzip, zip, xmllint)
 sh tools/render.sh --engine docx courts/first-circuit/puerto-rico/federal/district/complaint usage/INPUT-complaint.md
 ```
 
-**docx** (`docx/reference.docx`, `docx/prd-complaint.lua`, `docx/make-reference.sh`, `docx/parts/`).
+**docx** (`docx/reference.xml`, from which `fb render --engine docx` builds the reference document on the shared cross-engine recipe in the typst face, with the `-N-` footer part; `docx/prd-complaint.lua`; `docx/make-reference.sh` and `docx/parts/` were retired into fb render in fb-595.68.17).
 
-- *Matches typst:* EB Garamond 12 pt (EBGaramond Regular and Bold embedded, the vendored face); double spacing at 24 pt exact; 1-inch margins on US Letter; the page number at the bottom centre in the typst form, `-n-` at 12 pt, on every page; the court title; the caption with the rule on the right and the bottom of the party column, the case number and the title in capitals; the lead-in; numbered allegations with the number at 0.5 inch; level-1 headings centred in capitals and level-2 headings in bold; the prayer's lettered items (A., B., ...); the signature block in two columns (date left; "Respectfully submitted," and the counsel groups right, with "By: s/" lines).
-- *Differs:* line breaks fall at different words, so the body runs one page longer than typst (10 against 9) and the signature block sits on page 10 with the last prayer items. Exact-spaced text sits lower in its line than in typst (about 3 pt in the single-spaced caption, about 11 pt in double-spaced body text), because LibreOffice sets exact-height text at the bottom of its line. The first party block of the caption wraps to nine lines where typst uses eight. The prayer's letters and text sit on slightly different tab stops.
+- *Matches typst:* Times New Roman 12 pt (Regular and Bold embedded); 9 pages on both engines; double spacing at 24 pt exact; single lines at 13.8 pt; 1-inch margins on US Letter; the page number at the bottom centre in the typst form, `-n-` at 12 pt, on every page; the court title; the caption with the rule on the right and the bottom of the party column, the case number and the title in capitals; the lead-in; numbered allegations with the number at 0.5 inch; level-1 headings centred in capitals and level-2 headings in bold; the prayer's lettered items (A., B., ...); the signature block in two columns (date left; "Respectfully submitted," and the counsel groups right, with "By: s/" lines).
+- *Differs* (on the earlier EB Garamond docx; not re-checked here): line breaks fell at different words, so the body ran one page longer than typst (10 against 9) and the signature block sat on page 10 with the last prayer items. Exact-spaced text sat lower in its line than in typst (about 3 pt in the single-spaced caption, about 11 pt in double-spaced body text), because LibreOffice set exact-height text at the bottom of its line. The first party block of the caption wrapped to nine lines where typst used eight. The prayer's letters and text sat on slightly different tab stops.
 - *Not built:* the civil cover sheet, summons and Rule 7.1 statement, as for typst (see Known gaps above).
 - *BLOCKED:* none. (No check IDs exist for this folder; the requirement IDs above are the ones the typst template cites.)
 - *Not opened in Word:* the `.docx` is a valid zip with well-formed XML parts and LibreOffice opens it; Word has not been run, so the no-repair check in Word is not done.

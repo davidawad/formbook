@@ -13,7 +13,7 @@ Rules checked October 14, 2026. The official [Texas Rules of Appellate Procedure
 
 The markdown file begins with YAML frontmatter: `case_number`, `style_petitioner`, `style_respondent`, `filing_party`, `brief_title`, `appeal_from`, `lead_counsel`, `counsel_lines`, and optional `filed_date`. The body supplies the document-specific required sections and text, including tables, signature, certificate of compliance, and proof of service.
 
-The template builds the cover and renders markdown with vendored cmarker. Body text is 14-point, double-spaced (leading calibrated to a 32.2 pt baseline pitch in EB Garamond). Headings, signature and address blocks (hard line breaks), and table-of-contents or index entries (dot leaders) are single-spaced; short single-spaced blocks do not break across pages. A one-line entry written `title ..... page` is set as a table row: the template draws its own dot leader (the typed dots only mark the entry; Gate 0 reads any leader of four or more dots as one) and keeps the page reference on the title's last line, wrapped titles hanging. Footnotes are written `[^1]` with a `[^1]: text` definition, rendered at 12 point. The template does not create a table of contents or authorities.
+The template builds the cover and renders markdown with vendored cmarker. Body text is 14-point, double-spaced (TeX Gyre Pagella; leading 1.645em, calibrated to a 32.2 pt baseline pitch in EB Garamond, the template's earlier face). Headings, signature and address blocks (hard line breaks), and table-of-contents or index entries (dot leaders) are single-spaced; short single-spaced blocks do not break across pages. A one-line entry written `title ..... page` is set as a table row: the template draws its own dot leader (the typed dots only mark the entry; Gate 0 reads any leader of four or more dots as one) and keeps the page reference on the title's last line, wrapped titles hanging. Footnotes are written `[^1]` with a `[^1]: text` definition, rendered at 12 point. The template does not create a table of contents or authorities.
 
 Build from the repository root:
 
@@ -30,13 +30,13 @@ This is one filer. Tier 2 calls for two or three filings from different filers, 
 
 ## Sample and overlay
 
-`usage/INPUT-petition-for-discretionary-review.md` is a transcription of an excerpt of the exemplar: the cover, names of parties, table of contents, index of authorities, oral-argument and case statements, grounds, the factual overview, the opening of Issue One, the prayer, and both certificates. Pages 14 to 21 of the argument are omitted. The render is 11 pages (cover unnumbered, then pages 1 to 10).
+`usage/INPUT-petition-for-discretionary-review.md` is a transcription of an excerpt of the exemplar: the cover, names of parties, table of contents, index of authorities, oral-argument and case statements, grounds, the factual overview, the opening of Issue One, the prayer, and both certificates. Pages 14 to 21 of the argument are omitted. The render was 11 pages when reviewed (cover unnumbered, then pages 1 to 10), before the template moved to TeX Gyre Pagella; the committed typst render is 12 pages.
 
 The red/blue overlay is `usage/OVERLAY-ukw-pdr.pdf`; its page map is `usage/OVERLAY-ukw-pdr.txt`.
 
 ## Page review
 
-Every page of `usage/OUTPUT-petition-for-discretionary-review.typst.pdf` (11 pages) was rendered at 100 dpi and viewed on October 14, 2026, after the final render. Footer numbers are shown; the cover has none.
+Every page of `usage/OUTPUT-petition-for-discretionary-review.typst.pdf` (then 11 pages, before the template moved to TeX Gyre Pagella) was rendered at 100 dpi and viewed on October 14, 2026, after the final render. Footer numbers are shown; the cover has none.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -63,11 +63,11 @@ Every page of `usage/OUTPUT-petition-for-discretionary-review.typst.pdf` (11 pag
 
 ## Engines
 
-docx (`docx/render.sh`, `docx/reference.docx` built by `docx/build-reference.sh`, filter `docx/pdr.lua`): `usage/OUTPUT-petition-for-discretionary-review.docx` and `OUTPUT-petition-for-discretionary-review.docx.pdf` were built. The LibreOffice conversion succeeded and the zip and XML checks passed. The template matches the typst form in its settings: EB Garamond 14 pt; exact 32.2 pt double spacing; 0.5 in first-line indent; 1 in margins on letter; 12 pt footnotes; single-spaced headings, cover, signature and address blocks and contents entries; cover unnumbered and body numbered from 1 as a separate Word section. Dot leaders and contents and index page numbers are literal text, as in typst. The exemplar is single-spaced; the template follows TRAP 9.4 as typst does.
+docx (`docx/reference.xml`, from which `fb render --engine docx` builds the reference document in the typst template's face; filter `docx/pdr.lua`; until fb-595.68 `docx/render.sh` and a `reference.docx` from `docx/build-reference.sh`, since retired into fb render): `usage/OUTPUT-petition-for-discretionary-review.docx` and `OUTPUT-petition-for-discretionary-review.docx.pdf` are built. The template matches the typst form in its settings: TeX Gyre Pagella 14 pt (EB Garamond until fb-595.59, below); exact 32.2 pt double spacing; 0.5 in first-line indent; 1 in margins on letter; 12 pt footnotes; single-spaced headings, cover, signature and address blocks and contents entries; cover unnumbered and body numbered from 1 as a separate Word section. Dot leaders and contents and index page numbers are literal text, as in typst. The exemplar is single-spaced; the template follows TRAP 9.4 as typst does.
 
-Page review (all 12 docx pages against the 11 typst pages, side by side): the sections and order match typst. Differences: the body runs to 11 pages against typst's 10; the last docx page holds only the orphaned "/s/ Sterling Harmon" signature block of the certificate of service, separated from its heading. The table of contents' page numbers are typed text from the sample and do not match the footers in either engine (for example Statement Regarding Oral Argument is listed at 5 and falls on page 3). The font names in the docx PDF were not checked. Word was not available; the file was checked with LibreOffice only.
+Page review (on the earlier EB Garamond docx, before fb-595.59; all 12 docx pages against the 11 typst pages, side by side; the committed renders are 13 docx and 12 typst pages): the sections and order match typst. Differences: the body runs to 11 pages against typst's 10; the last docx page holds only the orphaned "/s/ Sterling Harmon" signature block of the certificate of service, separated from its heading. The table of contents' page numbers are typed text from the sample and do not match the footers in either engine (for example Statement Regarding Oral Argument is listed at 5 and falls on page 3). The font names in the docx PDF were not checked. Word was not available; the file was checked with LibreOffice only.
 
-BLOCKED: docx page count: body 11 pages vs typst 10; last page is an orphaned signature block.
+BLOCKED (as recorded on that review): docx page count: body 11 pages vs typst 10; last page is an orphaned signature block.
 BLOCKED: contents page numbers do not match the footers (sample text; the same in typst; not fixed here).
 
 [Formbook index](../../../../../../README.md)

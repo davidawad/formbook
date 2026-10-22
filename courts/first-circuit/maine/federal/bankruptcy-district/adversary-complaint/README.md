@@ -6,9 +6,9 @@ Doc type: **adversary complaint** (commencing an adversary proceeding) in the Un
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md` (the whole 5-page complaint, transcribed) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 4 pages (4 also on the earlier EB Garamond render, before fb-595.68), typst 0.15.0, pinned Times New Roman only, no warnings |
 | overlay | ok: `usage/OVERLAY-manhart-adversary-complaint.pdf` and `.txt` (page map below) |
-| pages reviewed | 4 of 4 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 4 of 4 (every page rendered at 60 dpi and viewed after the last template change; the EB Garamond render, before fb-595.68) |
 
 File names: the tools read and write `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, so the sample uses those names (not `<id>.md` and `<id>-overlay.pdf` as the brief's layout listed). `<id>` is `manhart-adversary-complaint`.
 
@@ -32,7 +32,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Layout
 
-- US Letter, one-inch margins on all sides; EB Garamond 12 pt (vendored, the only font in `fonts/`).
+- US Letter, one-inch margins on all sides; Times New Roman 12 pt (the pinned install; `docs/FONTS.md` rule 6, the house standard; EB Garamond, then the only vendored font, before fb-595.68).
 - Court name centered and bold on two lines, then a bordered caption: left column with the debtor (`In re:`) and the parties ("v."), right column with `Chapter N`, `Case No.` and `Adv. Proc. No.`. The adversary row is omitted when the sample has no `parties`.
 - Title of the paper centered, bold, capitals. Opening paragraph (`lead_in`) unnumbered.
 - Body double-spaced (24 pt pitch). Level-1 headings centered bold capitals; level-2 bold run-in; level-3 bold italic. Headings are set by the template from the markdown `#` prefix (cmarker's own heading output ignores the template's show rules).
@@ -48,7 +48,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## What the overlay shows
 
-`usage/OVERLAY-manhart-adversary-complaint.pdf`: red is our render, blue is the filed exemplar, and black is where they agree. The page map (`.txt`):
+`usage/OVERLAY-manhart-adversary-complaint.pdf`: red is our render, blue is the filed exemplar, and black is where they agree. The page map (`.txt`), measured on the earlier EB Garamond render, before fb-595.68:
 
 ```
 ours p.1  filed p.1  word-overlap 67.9%
@@ -57,9 +57,9 @@ ours p.3  filed p.4  word-overlap 48.2%
 ours p.4  filed p.4  word-overlap 41.9%
 ```
 
-The filed exemplar is 5 pages (its page 1 carries the ECF header, which we do not reproduce). The pairing is by shared words per page, so pages 3 and 4 both match exemplar page 4; this shows which filed page the words came from, not a page-for-page match. Word overlap below 70 percent reflects the different line and page breaks (our EB Garamond against the filer's Times) and the ECF header text, not a text difference. The overlay is a diagnostic, not a score.
+The filed exemplar is 5 pages (its page 1 carries the ECF header, which we do not reproduce). The pairing is by shared words per page, so pages 3 and 4 both match exemplar page 4; this shows which filed page the words came from, not a page-for-page match. Word overlap below 70 percent reflects the different line and page breaks (our EB Garamond, at the time, against the filer's Times) and the ECF header text, not a text difference. The overlay is a diagnostic, not a score.
 
-## Gate 2: page review (rendered at 60 dpi, every page viewed)
+## Gate 2: page review (rendered at 60 dpi, every page viewed; the earlier EB Garamond render, before fb-595.68)
 
 | Page | Content | Result |
 |---|---|---|
@@ -73,7 +73,7 @@ Defects found and fixed during review: (1) paragraphs drawn over each other (a b
 ## Known gaps and open choices
 
 1. **One exemplar only.** The brief asks for one exemplar per doc type; EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. Other Bankruptcy Court (Maine) complaints seen in the same CourtListener search and not saved: *Walsh, Jr. v. U.S. Department of Education*, Adv. Proc. 25-01004 (19 pages; B1040 cover sheet attached, which suggests an unrepresented filer, not checked); *Dostie v. U.S. Bank*, Adv. Proc. 26-02002 (30 pages; its text layer yields only the ECF header on page 1, so the body was not usable for transcription). Tier 2 is therefore **not** judged against two filers.
-2. **Typeface.** No Maine local rule on typeface was found in the December 2025 rules (the rules are silent on form of papers; FRBP 9004(a) requires legibility only). The exemplar is Times-style 12 pt. EB Garamond 12 pt is used because it is the only vendored font; it looks smaller than Times at the same size (same as the N.D. Cal. complaint template). Whether the court wants a Times-metric font is a question for David.
+2. **Typeface.** No Maine local rule on typeface was found in the December 2025 rules (the rules are silent on form of papers; FRBP 9004(a) requires legibility only). The exemplar is Times-style 12 pt. The template is Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6). (Before fb-595.68 it was EB Garamond 12 pt, then the only vendored font, which looked smaller than Times at the same size.)
 3. **Margins and paper size.** FRBP 9004(c) (paper size and margins) was not verified: the Cornell page for 9004 showed only subdivisions (a) and (b). The template uses 8½ × 11 with one-inch margins, which matches the exemplar and the usual form; this is unverified against the rule text.
 4. **Caption.** The party column is closed by rules (right and bottom) rather than the ")" column of the exemplar's *in re* box. Recorded as ACCEPTED (a convention choice the rules leave open).
 5. **Paragraph numbering.** The filed exemplar restarts its numbering at PARTIES (1, 2, 3 again after ¶ 6); the template numbers continuously, as Fed. R. Civ. P. 10(b) and the court's own template suggest. ACCEPTED.
@@ -85,22 +85,22 @@ Defects found and fixed during review: (1) paragraphs drawn over each other (a b
 
 ## Engines
 
-Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-adversary-complaint.lua` (the cover, caption, numbered paragraphs, relief and signature). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`.
+Typst is the primary engine. This section covers the docx engine (`docx/`): `fb render --engine docx` builds the reference document from `docx/reference.xml` (`base="xengine"`: the page setup and styles in the typst template's face, and the "- n -" footer part), then runs pandoc with the Lua filter `docx/meb-adversary-complaint.lua` (the cover, caption, numbered paragraphs, relief and signature). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md` (a wrapper of `fb render --engine docx`). (Until fb-595.68, pandoc 3.6.4 ran with a committed EB Garamond `docx/reference.docx` built by `sh docx/make-reference.sh`.) The "pages reviewed" row and the BLOCKED items below were recorded before fb-595.68.
 
 | Output | Result |
 |---|---|
 | `usage/OUTPUT-adversary-complaint.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
-| `usage/OUTPUT-manhart-adversary-complaint.docx.pdf` | **not produced**: LibreOffice does not start in the build environment (see BLOCKED below) |
+| `usage/OUTPUT-adversary-complaint.docx.pdf` | now committed (4 pages, as the typst render). Before fb-595.68 **not produced**: LibreOffice did not start in the build environment (see BLOCKED below) |
 | pages reviewed in the docx PDF | 0 of 4 (there is no PDF to render; the typst pages are the reference) |
 
-**What matches typst** (the same values, set in the reference styles): US Letter with 1 in margins; EB Garamond 12 pt; body lines exactly 24 pt (double spacing); first-line indent 0.5 in; paragraphs numbered 1, 2, ... as typed text with a tab (the typst template numbers them the same way, not as an automatic list); the caption as a table with the right and bottom rules of the typst box; the title in capitals; level-1 headings centred in capitals; the WHEREFORE paragraph and the signature block kept together; the footer "- n -" from a PAGE field.
+**What matches typst** (the same values, set in the reference styles): US Letter with 1 in margins; Times New Roman 12 pt; body lines exactly 24 pt (double spacing); first-line indent 0.5 in; paragraphs numbered 1, 2, ... as typed text with a tab (the typst template numbers them the same way, not as an automatic list); the caption as a table with the right and bottom rules of the typst box; the title in capitals; level-1 headings centred in capitals; the WHEREFORE paragraph and the signature block kept together; the footer "- n -" from a PAGE field.
 
 **What differs, or is not verified:**
 
 - Line and page breaks are Word's, not measured, so the page count may not be typst's 4.
 - Heading spacing is approximated: typst rounds each heading block to whole 24 pt lines, Word uses 12 pt before and after.
 - The caption and signature fields are set as plain text, so markdown emphasis in them is dropped (the body keeps it).
-- The docx names "EB Garamond" and does not embed it. The font must be installed on the machine that opens the file, or Word substitutes silently.
+- The docx names "Times New Roman" (EB Garamond before fb-595.68) and does not embed it. The font must be installed on the machine that opens the file, or Word substitutes silently.
 - Footnote text (not in this sample) inherits 12 pt single spacing from Normal; not checked.
 
 **docx BLOCKED items** (the docx checks run on `usage/OUTPUT-manhart-adversary-complaint.docx.pdf`):

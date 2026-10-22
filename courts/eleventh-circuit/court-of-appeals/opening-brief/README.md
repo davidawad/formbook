@@ -9,7 +9,7 @@ Doc-type folder for the Eleventh Circuit, `opening-brief` (one self-contained fo
 | Render | ok: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md` gives 16 pages, no typst warnings |
 | Overlay | ok (2026-10-16): `sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-opening-brief` writes `usage/OVERLAY-hill-opening-brief.pdf` and `.txt` (16 pages paired) |
 | Typeface | face required: none named (FRAP 32(a)(5)(A)); Times New Roman (vendored; newtx in latex) in all three engines since fb-595.54.5 (the docx had stayed on EB Garamond and failed DEF-FONT-002) |
-| Pages reviewed | 16 of 16 re-rendered 2026-10-16 and viewed one by one at 60 dpi (see "Verification pass 2026-10-16") |
+| Pages reviewed | 16 of 16 re-rendered 2026-10-16 (the earlier EB Garamond render) and viewed one by one at 60 dpi (see "Verification pass 2026-10-16") |
 | Tier 1 gates | not built (no `checks.yaml` for this doc type); the form rules below are implemented in the template and checked by review only |
 | Status | not set. `court.json` is not used here |
 
@@ -56,15 +56,15 @@ The body: `#` sections (Statement Regarding Adoption, Jurisdictional Statement, 
 
 ## Overlay (`usage/OVERLAY-hill-opening-brief.txt`)
 
-The overlay pairs each of our pages with the filed page sharing the most words. Pages 1-5 (cover, CIP, oral argument, TOC) pair with the same-numbered exemplar pages, with 58-86% word overlap; pages 6-7 (the rest of the TOC) pair with exemplar pages 5-6 at 31-33%. Body pages (ours 9-16) pair with exemplar pages 15-43 at 32-77% overlap, because the sample is a partial transcription that starts at the Jurisdictional Statement. Overlay page 8 (our TOA) pairs with exemplar page 2 at 1.4%; that is a pairing artifact, because the Table of Citations has no counterpart in the exemplar's first pages, not a content match. The overlay is a diagnostic, not a score.
+The overlay (measured on the earlier EB Garamond render) pairs each of our pages with the filed page sharing the most words. Pages 1-5 (cover, CIP, oral argument, TOC) pair with the same-numbered exemplar pages, with 58-86% word overlap; pages 6-7 (the rest of the TOC) pair with exemplar pages 5-6 at 31-33%. Body pages (ours 9-16) pair with exemplar pages 15-43 at 32-77% overlap, because the sample is a partial transcription that starts at the Jurisdictional Statement. Overlay page 8 (our TOA) pairs with exemplar page 2 at 1.4%; that is a pairing artifact, because the Table of Citations has no counterpart in the exemplar's first pages, not a content match. The overlay is a diagnostic, not a score.
 
 Visible differences from the exemplar that are tier 3 (one filer's choice) and are left alone:
 
-- Face: EB Garamond (vendored) against the exemplar's Times New Roman. Both are proportional serif faces at 14 pt, which FRAP 32(a)(5)(A) allows.
+- Face: the overlay's render was EB Garamond against the exemplar's Times New Roman, both proportional serif faces at 14 pt, which FRAP 32(a)(5)(A) allows. The template is now Times New Roman 14 pt too (CA11-FORM-004).
 - Heading style: the exemplar's point headings are in small capitals and bold; the template uses bold capitals for point headings and bold for A./B. headings.
 - Front matter: the exemplar's Statement of the Case uses roman I/II/III; the template uses the ca9-style A./B. convention for the non-argument sections.
 
-## Page review (16 pages, final render)
+## Page review (16 pages, final render; the earlier EB Garamond render)
 
 | Page | Reviewed | Result |
 |---|---|---|
@@ -87,7 +87,7 @@ Defects found during review and fixed in this pass: the signature block stood al
 ## Known gaps and open questions
 
 1. **Tier 1 gates not built.** There is no `checks.yaml` for this doc type yet, so the rules above are verified by review only. Gate 0 (content) and Gate 1 (rules) need to be added before this is marked green.
-2. **Typeface.** Decided 2026-10-14: the face required is none. FRAP 32(a)(5)(A) requires a proportionally spaced face with serifs, 14 pt or larger, and names no family (checked at Cornell LII). The Eleventh Circuit local-rule text (R. 32-3, 32-4) could not be read here, so a local face cannot be ruled out. No substitute is needed and EB Garamond stays. The exemplar's Times New Roman is one filer's choice (tier 3).
+2. **Typeface.** Decided 2026-10-14: the face required is none. FRAP 32(a)(5)(A) requires a proportionally spaced face with serifs, 14 pt or larger, and names no family (checked at Cornell LII). The Eleventh Circuit local-rule text (R. 32-3, 32-4) could not be read here, so a local face cannot be ruled out. No substitute is needed; the template, which kept EB Garamond at first, is Times New Roman 14 pt in all three engines (CA11-FORM-004; the house standard, `docs/FONTS.md` rule 6), the exemplar's face too.
 3. **TOC and TOA spacing.** 11th Cir. R. 32-3 reads "All other typed matter must be double-spaced, including the Table of Contents and the Table of Citations." The exemplar single-spaces its TOC lines with space between entries. The template double-spaces wrapped lines and the space between single-line entries stays at the template default. Confirm the intended reading.
 4. **CIP placement.** 11th Cir. R. 26.1-1 may require the CIP to be filed separately (through the web-based form) rather than inside the brief. The exemplar includes it inside the brief as C-1; the template follows the exemplar. Confirm.
 5. **Primary-citation asterisks** (11th Cir. R. 28-1(d)) are implemented as a `toa*:` marker, with the asterisk on the page. The rule does not say exactly where the asterisk goes; the template puts it next to the page number in the Table of Citations.
@@ -131,8 +131,8 @@ with a leader of at least three spaces. The latex and docx renders break every l
   `\addvspace` for every space, `\xe@row` table rows; a heading keeps the next block (a list too) with it; the last
   paragraph and the signature, and the service list and the signature, are one unbreakable box; the table of
   citations takes the page of a citation's first word (as typst does) and its page lists keep their spaces.
-- **docx** (`docx/reference.docx` from `docx/make-reference.sh` = `lib/docx/xengine-reference.sh`, `docx/ca11.lua`,
-  `docx/render.sh`): exact line spacing at the typst pitches and spaces; the cover, CIP, tables and certificates as
+- **docx** (`docx/reference.xml`, from which `fb render --engine docx` builds the reference document with the cross-engine recipe, `base="xengine"`; `docx/ca11.lua`;
+  `docx/make-reference.sh`, `docx/render.sh` and the committed `reference.docx` were retired in fb-595.68.2): exact line spacing at the typst pitches and spaces; the cover, CIP, tables and certificates as
   paragraphs written by the filter; sections carry the C-, roman and arabic footers. The page numbers in the tables
   are written text from a first LibreOffice render: each heading is found by its label and title at the start of a
   line, each citation by its link text and the words after it, in document order (no TOC or TOA fields), so Word may

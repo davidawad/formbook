@@ -7,8 +7,8 @@ Folder: `courts/tenth-circuit/oklahoma/federal/district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (a portion of the 15-page filing; see below) |
-| typeface | rule: LCvR7.1(d) names no face (13-point minimum and margins only; read from the rules PDF 2026-10-15). Substitute: none; EB Garamond kept, the no-face case in `docs/FONTS.md`. Fit: n/a (the rules name no face); see gap 3 |
-| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-complaint.typst.pdf`, 10 pages (unchanged), typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold only, embedded; no warnings |
+| typeface | rule: LCvR7.1(d) names no face (13-point minimum and margins only; read from the rules PDF 2026-10-15). Substitute: none; Times New Roman 13 pt, the house standard (`docs/FONTS.md` rule 6; was EB Garamond), typst and docx alike. Fit: n/a (the rules name no face); see gap 3 |
+| render | ok (re-rendered 2026-10-15, on the earlier EB Garamond template): `usage/OUTPUT-complaint.typst.pdf`, 10 pages (unchanged), typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold only, embedded; no warnings |
 | overlay | **fail**: not regenerated. `usage/` holds only `SOURCE.md` (the filed PDF named there is not in the repo), so `tools/overlay.sh` cannot run. `OVERLAY-pilf-ziriax-complaint.pdf` is absent and the `.txt` is from an earlier render, so it does not match the current OUTPUT |
 | pages reviewed | 10 of 10 on the 2026-10-15 render (every page rasterized at 60 dpi and viewed; no layout change) |
 | tools/check.sh, check-selftest.sh | not run: they expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither shape (the brief forbids editing `tools/`) |
@@ -39,7 +39,7 @@ Not produced by this template (separate filings): the civil cover sheet (JS-44, 
 
 ### Measured line pitch
 
-The filed exemplar's double-spaced baseline pitch is 27.5 pt (measured on page 3 of the exemplar with `pdftotext -bbox`). The template uses the same pitch (`pitch = 27.5pt`, `body-leading = 1.465em`, EB Garamond's 0.65 em line box at 13 pt); the render measures 27.5 pt on every body line. LCvR5.2(a) says only "double-spaced", so the exemplar settles the number.
+The filed exemplar's double-spaced baseline pitch is 27.5 pt (measured on page 3 of the exemplar with `pdftotext -bbox`). The template uses the same pitch (`pitch = 27.5pt`, `body-leading = 1.46em`, with Liberation Serif's 0.655 em line box at 13 pt); the render measured 27.5 pt (on the earlier EB Garamond render) on every body line. LCvR5.2(a) says only "double-spaced", so the exemplar settles the number.
 
 ## Markdown contract (for samples)
 
@@ -59,7 +59,7 @@ File names: `tools/overlay.sh` and `tools/render.sh` write `OVERLAY-<id>.pdf`/`.
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search (CourtListener RECAP, `okwd`, complaints filed in 2026) found complaint entries with no stored PDF; the one stored complaint found is this one. The second search route (Justia, Clearinghouse) returned 403 to the fetch tool. Tier 2 is therefore **not** judged against two filers yet. A PI motion in the same district (Polston, 5:26-cv-02265-G) was downloaded and checked but is a motion, not a complaint, and was not saved.
 2. **The "okd" folder.** CourtListener lists `okd` as not in use. The live Oklahoma federal courts are `okwd`, `oknd` and `oked`. The templates follow the Western District's local rules (the rules set the folder is built from), and the exemplar is from the Western District. If the folder should be a different district, the rules, the exemplar and the `court:` line change; the template does not. This is a question for David.
-3. **Font.** LCvR7.1(d) sets a 13-point minimum and margins; it names no face (checked against the rules PDF, 2026-10-15). Under `docs/FONTS.md` a court that names no face keeps EB Garamond, so this template is unchanged. EB Garamond at 13 pt has a smaller x-height than the exemplar's Times New Roman at 12 pt, so the text looks smaller on the page. The 13-point minimum is met. The exemplar's face is a filer's choice, not a rule: switching to a Times-metric face (`Liberation Serif`, metric-compatible with Times New Roman) would be a change the rules do not require, and is a repo decision, not this folder's.
+3. **Font.** LCvR7.1(d) sets a 13-point minimum and margins; it names no face (checked against the rules PDF, 2026-10-15). Under `docs/FONTS.md` rule 6 a court that names no face gets the house standard, so the template sets Times New Roman 13 pt (Liberation Serif fallback), the exemplar's face too; it was EB Garamond. The 13-point minimum is met.
 4. **Signature block.** It sits with the prayer on page 10 in the final render. If a filer's prayer runs over a page, the signature can stand alone on the next page; the template does not keep the last prayer item with it.
 5. **Paragraph numbers differ.** The sample numbers its allegations from 1 (the template numbers them). The filed numbers are not transcribed for paragraphs 31 to 55, which are not in the sample.
 6. **Portion transcribed.** Pages 8 to 12 of the filing (paragraphs 31 to 55, and the heading of the second count) are not transcribed. The sample goes from filed paragraph 30 straight to filed paragraphs 56 to 59 (sample numbers 31 to 34), so its numbering and the filing's diverge after paragraph 30.
@@ -87,8 +87,8 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ### docx (`docx/reference.docx`, `docx/okd-complaint.lua`, 2026-10-15)
 
-- Matches the typst form: Letter, 1 in margins; EB Garamond 13 pt throughout; double spacing as one exact 27.5 pt pitch with one blank pitch after each paragraph; 0.5 in first-line indent; centered bold capitals for level-1 headings, bold for level 2, bold italic for level 3; court name lines; caption as a borderless table with the ")" column; allegations numbered by the filter (Rule 10(b)), not by Word's list numbering; prayer items with the number at the margin and the text at 0.5 in; signature block with "Dated:" at left and the signer at 3.8 in; centered page number in the footer at 13 pt.
-- Differs: the cover and signature are tables and the caption rows are single-spaced exact lines, so line positions can sit a few points off the typst grid (typst rounds each block to whole pitches; Word does not). The numbered paragraph gap is a tab stop at 1.0 in, not typst's 0.3 in after the number. The font is named (EB Garamond) but not embedded: Word substitutes a face if it is not installed.
+- Matches the typst form: Letter, 1 in margins; Times New Roman 13 pt throughout (the typst face); double spacing as one exact 27.5 pt pitch with one blank pitch after each paragraph; 0.5 in first-line indent; centered bold capitals for level-1 headings, bold for level 2, bold italic for level 3; court name lines; caption as a borderless table with the ")" column; allegations numbered by the filter (Rule 10(b)), not by Word's list numbering; prayer items with the number at the margin and the text at 0.5 in; signature block with "Dated:" at left and the signer at 3.8 in; centered page number in the footer at 13 pt.
+- Differs: the cover and signature are tables and the caption rows are single-spaced exact lines, so line positions can sit a few points off the typst grid (typst rounds each block to whole pitches; Word does not). The numbered paragraph gap is a tab stop at 1.0 in, not typst's 0.3 in after the number. The font is named (Times New Roman) but not embedded: Word substitutes a face if it is not installed.
 - BLOCKED (not done):
   - `docx.pdf` (LibreOffice conversion, Gates 0 and 1): `soffice` is not installed on this box and cannot be installed here (no conda-forge package, no root).
   - Visual review of the docx pages: pages_reviewed=0 (needs the LibreOffice PDF).

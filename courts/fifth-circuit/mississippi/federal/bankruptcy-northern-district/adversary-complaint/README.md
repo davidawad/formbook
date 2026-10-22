@@ -7,9 +7,9 @@ Folder: `courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district/a
 |---|---|
 | exemplar | **no**: `BLOCKED: no exemplar`. See `usage/SOURCE.md` for the searches tried. |
 | sample md | `usage/INPUT-synthetic-adversary-complaint.md`. Synthetic content; not a transcription. |
-| render | ok: `usage/OUTPUT-msnb-adversary-complaint-synthetic.typst.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-msnb-adversary-complaint-synthetic.typst.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only, no warnings (recorded on the earlier EB Garamond render, before fb-595.68; the current `usage/OUTPUT-adversary-complaint.typst.pdf` is 4 pages in TeX Gyre Termes) |
 | overlay | ok: `usage/OVERLAY-community-bank-loancare.pdf` and `.txt` (`sh tools/overlay.sh`, 3 pages). The filed PDF was re-downloaded into `usage/` from the URL in `usage/SOURCE.md` (the saved copy was missing from this snapshot). |
-| pages reviewed | 3 of 3 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 3 of 3 on the earlier EB Garamond render (every page rendered at 60 dpi and viewed after the last template change) |
 
 ## Governing rules
 
@@ -27,17 +27,17 @@ Not verified (not fetched on 2026-10-14; the template does not depend on them ye
 - **N.D. Miss. local bankruptcy rules.** The local rules page (msnb.uscourts.gov/local-rules) lists only "Summary of Local Rules" with no rule text in the reader's copy, and the courtrules.net copy of L.U.Bankr.R. 9013-1 returned HTTP 403. No local rule on font, margins, page limits, line spacing, cover contents or certificates was read.
 
 Because the local rules were unreadable, the format below is a **standard-letter default**, not a court requirement:
-- US Letter, 1-inch margins, 12-point EB Garamond (no face named by any rule read; see Typeface below), double spaced, page number centered in the footer.
+- US Letter, 1-inch margins, 12-point TeX Gyre Termes (no face named by any rule read; see Typeface below), double spaced, page number centered in the footer.
 
 ## Typeface
 
 | Item | Value |
 |---|---|
 | Face required | none found. Fed. R. Bankr. P. 7010 incorporates Fed. R. Civ. P. 10 (caption, numbered paragraphs), which names no face. The msnb local rule on form (Rule 9004-1) could not be read: courtrules.net returned HTTP 403, and the msnb standing order (eff. 3-1-26) is a scanned image with no text layer. |
-| Vendored substitute | `EB Garamond` (no court-named face to substitute; `docs/FONTS.md` "No face named") |
-| Fit | visual only, and the template's default |
-| Filer convention (not a rule) | the filed exemplar sets Times New Roman (embedded `TimesNewRomanPSMT`); the substitute would be `Liberation Serif` (metric-compatible). Not switched: a filer's choice does not make a rule. |
-| Open | If Rule 9004-1 or a local rule names Times New Roman, switch the font list to `Liberation Serif` and re-render. |
+| Vendored substitute | `TeX Gyre Termes` (no court-named face; `data/exemplar-fonts.json` audits the filed exemplar as Type 1 Times, metric-exact Termes; was EB Garamond before fb-595.68) |
+| Fit | metric-exact Times substitute (Termes) |
+| Filer convention (not a rule) | the filed exemplar sets Times New Roman (embedded `TimesNewRomanPSMT`); the template now sets TeX Gyre Termes (see above). |
+| Open | If Rule 9004-1 or a local rule names a face, set that face and re-render. |
 - The caption, paragraph numbering and prayer layout are the template's own choices.
 
 A local-rule text, or a filed complaint from this court, would settle each of these.
@@ -66,10 +66,12 @@ A local-rule text, or a filed complaint from this court, would settle each of th
 1. **No exemplar.** Tier 2 cannot be judged against filed complaints. Overlay not run.
 2. **Local rules unread.** Font, margins, line spacing and the caption form are defaults (see above). This is the biggest tier-1 risk.
 3. **Synthetic sample only.** The sample is 3 pages of invented content; the depth target (8 to 14 pages) was not met because there is no exemplar to transcribe.
-4. **Font.** EB Garamond stays because no rule read names a face (see Typeface). The filed exemplar uses Times New Roman; that would only change if Rule 9004-1 names it.
+4. **Font.** No rule read names a face (see Typeface). EB Garamond stayed until fb-595.68; the template is now TeX Gyre Termes, the metric-exact match of the exemplar's Times as `data/exemplar-fonts.json` audits it.
 5. **Caption.** The party column is closed by a rule (right and bottom). The adversary number is shown on the right of the party block, not in a separate row.
 
 ## Review of the rendered pages
+
+Recorded on the 3-page EB Garamond render, before fb-595.68.
 
 - Page 1: counsel block, court title, two-row caption, title, paragraphs 1 to 5 (preliminary statement, jurisdiction and venue, parties). No overlap. Pass.
 - Page 2: paragraphs 6 to 17, FACTUAL BACKGROUND, COUNT I heading, paragraphs 14 to 17 on the page. No overlap, no heading at foot. Pass.
@@ -77,18 +79,20 @@ A local-rule text, or a filed complaint from this court, would settle each of th
 
 ## Engines
 
-Docx engine (`docx/`): `reference.docx` (built by `docx/make-reference.sh`), `msnb-adversary-complaint.lua` (counsel block, court title, caption rows, numbered allegations, lettered and prayer items, signature block), and `render.sh` (the pandoc call; `tools/render-docx.sh` uses it). Renders: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (3 pages, LibreOffice 26.8).
+Docx engine (`docx/`): `reference.xml` (`base="xengine"`: `fb render --engine docx` builds the reference document from it, the shared cross-engine recipe in the typst template's face) and `msnb-adversary-complaint.lua` (counsel block, court title, caption rows, numbered allegations, lettered and prayer items, signature block); `sh tools/render.sh --engine docx` (a wrapper of `fb render --engine docx`) runs pandoc with the filter. Renders: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (4 pages; 3 pages, LibreOffice 26.8, on the earlier EB Garamond build by `docx/render.sh`, since retired into fb render).
+
+The table and the differences below were recorded on that earlier build, except the font, spacing and page rows, read from the current files.
 
 | Item | Typst (primary) | Docx | Note |
 |---|---|---|---|
-| Font, size | EB Garamond 12 pt | EB Garamond 12 pt (embedded, the only font in the PDF) | |
+| Font, size | TeX Gyre Termes 12 pt | TeX Gyre Termes 12 pt (embedded, the only font in the PDF) | |
 | Page, margins | US Letter, 1 in | US Letter, 1 in | |
-| Body spacing | double, 24 pt baseline | exact 24 pt | |
+| Body spacing | double, 27.6 pt (Word's double) | exact 27.6 pt | was 24 pt on both before fb-595.68 |
 | Caption | IN RE and case number on one row, rule, PLAINTIFF, VS. and ADVERSARY NO., DEFENDANTS | same, as borderless two-column table rows with a rule under the debtor row | line breaks in the party column differ slightly |
 | Title | centered bold caps | same | |
 | Signature | DATED line, firm, `By: /s/ name` right column, title, counsel block flush left | same | |
 | Page number | centered, 10 pt | centered, 10 pt (`PAGE` field) | |
-| Pages (sample) | 3 | 3 | |
+| Pages (sample) | 4 | 4 | 3 and 3 before fb-595.68 |
 
 Differences, by design:
 - **Allegation numbering.** The typst template numbers the markdown's plain paragraphs from its own counter, which starts again at 1 after the `1. The parties are:` item, so the sample's typst output shows two paragraphs numbered 1. The docx numbers every allegation consecutively (Fed. R. Civ. P. 10(b)). This is a typst defect; `typst/` is not changed here.

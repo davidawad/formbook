@@ -7,10 +7,10 @@ Folder: `courts/eighth-circuit/south-dakota/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (the full filed text of the exemplar; see below) |
-| typeface | face required: **none** (D.S.D. Civ. LR 83.4 says only "Fonts must be at least 12-point"; checked in the official PDF 2026-10-14). Substitute: none; **EB Garamond** kept, as `docs/FONTS.md` says for a court that names no face. Fit: n/a. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond-Regular, -Bold and -Italic embedded |
+| typeface | face required: **none** (D.S.D. Civ. LR 83.4 says only "Fonts must be at least 12-point"; checked in the official PDF 2026-10-14). Substitute: none; **Times New Roman**, the house standard (`docs/FONTS.md` rule 6), in typst and docx (EB Garamond until fb-595.68). Fit: n/a. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, pinned Times New Roman only, no warnings; `pdffonts`: TimesNewRomanPSMT, -BoldMT, -ItalicMT and -BoldItalicMT embedded |
 | overlay | ok: `usage/OVERLAY-lone-eagle-motion-to-dismiss.pdf` and `OVERLAY-lone-eagle-motion-to-dismiss.txt`, built against the filed exemplar fetched from the RECAP URL in `usage/SOURCE.md` (the PDF is not in `usage/` in this snapshot; pass it as the third argument to `tools/overlay.sh`) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed again on 2026-10-14 after the fonts-pass re-render) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed again on 2026-10-14 after the fonts-pass re-render; the earlier 8-page EB Garamond render, before fb-595.68) |
 | tier 2 | not met to the eval-loop standard: one filer so far (see Known gaps) |
 
 File names follow the repo convention used by `tools/render.sh` and `tools/overlay.sh` (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf` and `.txt`), not the `<id>.pdf` and `<id>-overlay.pdf` names in the brief.
@@ -24,8 +24,8 @@ Federal rules: Fed. R. Civ. P. 12(b), from https://www.law.cornell.edu/rules/frc
 | Rule | Requirement (quoted or closely paraphrased from the source) | Where it is in the template |
 |---|---|---|
 | D.S.D. Civ. LR 7.1(B) | "With every motion raising a question of law … the movant must serve and file a brief containing the movant's legal arguments, the authorities in support thereof, and the Federal Rule of Civil Procedure on which the movant relies." | Content of the sample (the brief names Rules 12(b)(1), 12(b)(5) and 12(b)(6) in its Introduction and Conclusion). The template does not check the content. |
-| D.S.D. Civ. LR 7.1(B)(1) | Briefs "must not exceed 25 pages or 12,000 words unless prior approval has been obtained"; a brief over 25 pages "must be accompanied by a certificate by the attorney … that the brief complies with the type-volume limitation". | Not printed: the sample is 8 pages (see Known gaps 5). |
-| D.S.D. Civ. LR 83.4 | "All documents must be on 8 1/2 x 11 inch paper. The text must be double-spaced, but quotations more than two lines long must be indented and single-spaced. Headings and footnotes must be single-spaced. Margins must be at least one inch on all four sides. Fonts must be at least 12-point." | `margin = 1in`; `pitch = 24pt` (double spacing); `type-size = 12pt`; headings and footnotes single-spaced; footnote text at 12 pt. |
+| D.S.D. Civ. LR 7.1(B)(1) | Briefs "must not exceed 25 pages or 12,000 words unless prior approval has been obtained"; a brief over 25 pages "must be accompanied by a certificate by the attorney … that the brief complies with the type-volume limitation". | Not printed: the sample is 10 pages (see Known gaps 5). |
+| D.S.D. Civ. LR 83.4 | "All documents must be on 8 1/2 x 11 inch paper. The text must be double-spaced, but quotations more than two lines long must be indented and single-spaced. Headings and footnotes must be single-spaced. Margins must be at least one inch on all four sides. Fonts must be at least 12-point." | `margin = 1in`; `pitch-double` (27.6 pt, Word's double spacing); `type-size = 12pt`; headings and footnotes single-spaced (`pitch-single`, 13.8 pt); footnote text at 12 pt. |
 | D.S.D. Civ. LR 10.1(A) | "A pleading or other paper presented for filing must begin with the caption of the case, the title of the document, and the name of the party filing the document." | `cover(meta)`: court title, caption, case number, brief title. |
 | D.S.D. Civ. LR 10.1(B) | Signature, with typed name, address, telephone number and e-mail of the signer "beneath the signature"; not in a header, footer or caption. | `signature-block(meta)`: firm, "By: /s/" and the signer's details below. |
 | D.S.D. Civ. LR 5.1(A)(3) | "In all other instances a certificate of service must be attached to the document identifying the persons served and the manner in which service was accomplished." (CM/ECF notice to the persons served is the exception.) | `certificate-block(meta.certificate_of_service)`: on its own page, with the persons served and the manner (CM/ECF). |
@@ -38,7 +38,7 @@ Not produced by this template: a table of contents or table of authorities (not 
 
 - Court title (three centered lines: "IN THE UNITED STATES DISTRICT COURT", "FOR THE DISTRICT OF SOUTH DAKOTA", and the division), then the caption: parties on the left, closed by a right and bottom rule; the case number and the brief title on the right.
 - No pleading paper or line numbers (LR 83.4 does not require them; the exemplar has none).
-- Body double-spaced (24 pt pitch), first-line indent 0.5 in, unnumbered paragraphs. Headings: centered caps (level 1, for INTRODUCTION, BACKGROUND, ARGUMENT, CONCLUSION), bold (level 2, for the argument headings I, II, ...), bold italic (level 3). Each heading is kept with the paragraph after it.
+- Body double-spaced (27.6 pt pitch, `pitch-double`), first-line indent 0.5 in, unnumbered paragraphs. Headings: centered caps (level 1, for INTRODUCTION, BACKGROUND, ARGUMENT, CONCLUSION), bold (level 2, for the argument headings I, II, ...), bold italic (level 3). Each heading is kept with the paragraph after it.
 - Footnotes: single-spaced, 12 pt, separated from the text by a short rule.
 - The signature block is kept on the same page as the last paragraph (the conclusion), so it is never alone on a page.
 - Certificate of service on its own page, after the signature block, with the recipients and the CM/ECF signature.
@@ -53,7 +53,7 @@ Not produced by this template: a table of contents or table of authorities (not 
 
 ## Overlay (red/blue test)
 
-`usage/OVERLAY-lone-eagle-motion-to-dismiss.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (see `usage/OVERLAY-lone-eagle-motion-to-dismiss.txt`):
+`usage/OVERLAY-lone-eagle-motion-to-dismiss.pdf` (measured on the earlier EB Garamond render, before fb-595.68): red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (see `usage/OVERLAY-lone-eagle-motion-to-dismiss.txt`):
 
 - our p.1 over filed p.1 (82.5% word overlap)
 - our p.2 over filed p.2 (67.5%)
@@ -69,16 +69,16 @@ Filed pages 3 and 8 are not paired with any of our pages, because our pages brea
 ## Known gaps and open choices
 
 1. **One filer so far.** The brief asks for one exemplar per doc type; EVAL-LOOP's tier 2 asks for two or three filers. Two other available memoranda in support of a motion to dismiss in this court were found and are not downloaded: *Mayday Health v. Rhoden*, 4:26-cv-04096, Doc. 15 (filed by Marty Jackley and Larry Rhoden, 5 pages, RECAP docket 73412271) and *Cura Industries, LLC v. Sunny Makhijani, DPM*, 4:26-cv-04079, Doc. 5 (filed by Sunny Makhijani and My Foot Podiatry PLLC, 5 pages, RECAP docket 73286298). Tier 2 is therefore **not** judged against two or three filers yet. Both are short, and either would be the second filer; the next step is to download one and run the overlay on it.
-2. **Length.** The sample renders to 8 pages; the exemplar is 10 pages. The sample carries the full filed text, so the difference is most likely the typeface and the line spacing (see gap 4); this was not measured line by line.
+2. **Length.** The sample renders to 10 pages (typst and docx), as the exemplar is. The earlier EB Garamond render (before fb-595.68) ran 8 pages; the sample carries the full filed text, so that difference was most likely the typeface and the line spacing (see gap 4), not measured line by line.
 3. **Page limit: which version?** LR 7.1(B)(1) on the official PDF (12/01/2015) says 25 pages or 12,000 words. A third-party copy of the rule on courtrules.net says 30 pages. The template follows the official PDF and prints no certificate; if the rule was amended after 2015, the limit needs to be checked against the court's current rules. Not resolved here.
-4. **Font.** LR 83.4 names no typeface, so EB Garamond stays (see the typeface row above). The filed exemplar is Times New Roman. That is a filer's convention, not a rule, so no Times substitute (Liberation Serif) is used. EB Garamond's x-height is smaller, so the text looks smaller at the same 12 pt. The 12-point minimum is met.
+4. **Font.** LR 83.4 names no typeface, so the template is set in the house standard, Times New Roman (`docs/FONTS.md` rule 6; see the typeface row above), the filed exemplar's face too. The 12-point minimum is met.
 5. **Certificate of compliance (LR 7.1(B)(1)).** Not printed; it is needed only over 25 pages. A longer brief would need it added to the template.
 6. **Caption.** The party column is closed by a right and bottom rule, not the ")" column of the filing. Both are seen in filings; recorded as a tier-2 choice.
 7. **Footnote reference only in paragraphs.** The template's footnote support covers a reference inside a body paragraph. A reference in a heading, list or table is not supported and would render as literal text.
 8. **Redactions.** The plaintiff's street address, telephone and e-mail in the certificate of service are `[redacted]`. Counsel's and the Deputy Attorney General's contact details are kept as filed (public, and they are the filing's signature details). No SSN, birth date or financial-account number appears (LR 5.2).
 9. **Signature date.** The sample uses "June 12, 2026", the filing date in the header and the certificate of service.
 
-## Review of the rendered pages (current PDF)
+## Review of the rendered pages (the earlier EB Garamond render, before fb-595.68)
 
 - Page 1: court title (three lines), the caption with the long party list and the case number and title on the right, the first paragraph, INTRODUCTION heading and the start of its paragraph. Pass.
 - Page 2: the rest of the introduction, BACKGROUND heading, two background paragraphs, the Lakota-language paragraph and the TRO paragraph. No paragraph overlaps another (after the paragraph-spacing fix, below). Pass.
@@ -93,18 +93,18 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Layout defect found and fixed during review
 
-The first render had every paragraph's last line overlapped by the next paragraph's first line. The cause was the paragraph spacing: `spacing: 0pt` in the page setup, so the gap after a paragraph was the bare line box, not a double-spaced line. The fix is `spacing: body-leading` (1.35 em) in `sdd-motion-brief.typ` and `sdd-complaint.typ`. The same defect is in any template that sets `spacing: 0pt` on body text with `leading` set; the caption and signature lines keep `spacing: 0pt` on purpose, because they are single-spaced.
+(On the earlier EB Garamond template, before fb-595.68; it now sets `pitch-double` and `pitch-single`.) The first render had every paragraph's last line overlapped by the next paragraph's first line. The cause was the paragraph spacing: `spacing: 0pt` in the page setup, so the gap after a paragraph was the bare line box, not a double-spaced line. The fix is `spacing: body-leading` (1.35 em) in `sdd-motion-brief.typ` and `sdd-complaint.typ`. The same defect is in any template that sets `spacing: 0pt` on body text with `leading` set; the caption and signature lines keep `spacing: 0pt` on purpose, because they are single-spaced.
 
 ## Engines
 
-Typst is the primary engine (`typst/`). The DOCX engine is `docx/`: pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`) and the filter `docx/sdd-motion-brief.lua`. Its output is `usage/OUTPUT-motion-brief.docx`; the LibreOffice PDF of it (`OUTPUT-sdd-motion-brief-loneeaglemotiontodismiss.docx.pdf`) was not produced (see BLOCKED).
+Typst is the primary engine (`typst/`). The DOCX engine is `docx/`: `fb render --engine docx` builds the reference document from `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst template's face; `docx/build-reference.sh` is retired) and runs pandoc with the filter `docx/sdd-motion-brief.lua`. Its outputs are `usage/OUTPUT-motion-brief.docx` and the LibreOffice PDF `usage/OUTPUT-motion-brief.docx.pdf` (10 pages). The BLOCKED items below were recorded before fb-595.68, when no `.docx.pdf` could be made here.
 
-What the docx follows from the same rules as the typst template (checked in the style and section XML, not on a render):
+What the docx follows from the same rules as the typst template (checked in the style and section XML of the earlier `build-reference.sh` reference document, not on a render; the face, pitch and footer rows are updated from `docx/reference.xml`):
 
 | Form item (LR 83.4 and the typst template) | DOCX |
 |---|---|
-| EB Garamond 12 pt, every style | `reference.docx`: every style sets EB Garamond, 12 pt |
-| Double spacing, 24 pt pitch | body text: exact 24 pt line (`BodyText`, `FirstParagraph`) |
+| Times New Roman 12 pt, every style | `reference.xml`: the typst template's face (`{font}`), 12 pt (`size="24"` half points) |
+| Double spacing, 27.6 pt pitch | body text: exact 27.6 pt line (`body="552"` twips) |
 | Headings, tables, footnotes, caption, signature: single | `Heading1`-`3`, `Table`, `FootnoteText`, `Single`, `Compact` at single spacing |
 | Margins 1 in, US Letter | `w:pgMar` 1440 twips on all four sides; `w:pgSz` letter |
 | 0.5 in first-line indent | `BodyText` first-line indent 720 twips; body paragraphs unnumbered (as typst) |
@@ -112,11 +112,11 @@ What the docx follows from the same rules as the typst template (checked in the 
 | Footnotes at 12 pt, single | native pandoc footnotes in `FootnoteText` (12 pt, single); the separator differs (see below) |
 | Signature block (firm, "By: /s/", details) | a borderless table; the last paragraph in `BodyKeep` (keep with next) |
 | Certificate of service on its own page | `Heading1` with page-break-before, the recipients, and the "By: /s/" block |
-| Page number, centered, in the bottom margin | PAGE field in the footer (`w:footer` 60 pt from the bottom edge) |
+| Page number, centered, in the bottom margin | PAGE field in the footer, its line 36.75 pt above the page foot (`footer="735"` twips) |
 
 Differences and open items:
 
-- **Pagination is not checked.** The docx was never rendered or viewed, so no line break, page break or page number of the docx is verified. Word and LibreOffice may paginate it differently from the typst PDF.
+- **Pagination is not checked** (recorded before fb-595.68; the committed typst and LibreOffice renders are now 10 pages each). The docx was never rendered or viewed then, so no line break, page break or page number of the docx is verified. Word and LibreOffice may paginate it differently from the typst PDF.
 - **Footnote separator**: pandoc's default separator, not the typst 1.5 in rule.
 - **Page number position** is set in the footer distance, not copied from the typst PDF; it sits in the bottom margin, as in typst.
 - **Title block**: the docx omits pandoc's title block (`doc.meta` is cleared).

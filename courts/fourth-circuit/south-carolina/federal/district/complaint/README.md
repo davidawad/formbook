@@ -6,17 +6,17 @@ Doc type **complaint**, folder `courts/fourth-circuit/south-carolina/federal/dis
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer: plaintiff's counsel; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (the full 10-page filing transcribed: caption, all numbered paragraphs, headings, the three causes of action, prayer, jury demand, signature block) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored Liberation Serif only (embedded per `pdffonts`), no warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, Times New Roman only (embedded per `pdffonts`), no warnings |
 | overlay | ok: `usage/OVERLAY-miller-complaint.pdf` and `usage/OVERLAY-miller-complaint.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
-| tier-1 font (L.R. 1.05(B)) | Met: Times New Roman (one of the three faces the rule names) set as its metric-compatible substitute **Liberation Serif** (see Known gaps) |
+| pages reviewed | 8 of 8 on the earlier Liberation Serif render (every page rendered at 60 dpi and viewed) |
+| tier-1 font (L.R. 1.05(B)) | Met: **Times New Roman** (one of the three faces the rule names), set in the face itself (the pinned files of `docs/FONTS.md` rule 1; Liberation Serif only as fallback) on typst and docx (see Known gaps) |
 
 ## Governing rules
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | D.S.C. Local Civ. Rule 1.05(A) | Minimum one-inch margins on all sides. | `margin` in `typst/scd-complaint.typ` |
-| D.S.C. Local Civ. Rule 1.05(B) | Times New Roman, Arial or Courier New. | `font-family` = `"Liberation Serif"` (Times New Roman substitute, `docs/FONTS.md`) |
+| D.S.C. Local Civ. Rule 1.05(B) | Times New Roman, Arial or Courier New. | `font-family` = `("Times New Roman", "Liberation Serif")` |
 | D.S.C. Local Civ. Rule 1.05(C) | Minimum 12-point type for caption, text and footnotes. | `type-size` |
 | D.S.C. Local Civ. Rule 1.05(D) | Only page numbers and document identification may be in margins or smaller than 12 pt. | page number only, centered at the foot |
 | D.S.C. Local Civ. Rule 1.05(E) | Double space text, except indented quotations and footnotes. | `double-leading` (calibrated to about 27 pt baseline pitch at 12 pt) |
@@ -46,11 +46,11 @@ File names follow the tools (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.pdf
 
 ## What the overlay shows
 
-Red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words, not by index: the map in `OVERLAY-miller-complaint.txt` pairs our pages 1 to 8 with filed pages 1, 2, 3, 5, 6, 7, 8 and 9. Word overlap is 45% to 91% per page. That is expected: the filed exemplar is 10 pages and our sample is 8, and the sample's line breaks differ from the filing's. The filed complaint embeds Times New Roman (`pdffonts`), the face Liberation Serif substitutes for, so the two are now the same face in different files. The overlay is a diagnostic for layout and structure, not a score.
+Red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words, not by index: the map in `OVERLAY-miller-complaint.txt` pairs our pages 1 to 8 with filed pages 1, 2, 3, 5, 6, 7, 8 and 9. Word overlap is 45% to 91% per page. That is expected: the filed exemplar is 10 pages and our sample is 8, and the sample's line breaks differ from the filing's. The filed complaint embeds Times New Roman (`pdffonts`), the face Liberation Serif substitutes for; the map above was made on the earlier Liberation Serif render, and the template now sets Times New Roman itself. The overlay is a diagnostic for layout and structure, not a score.
 
 ## Visual review (Gate 2)
 
-Pages 1 through 8 were rendered at 60 dpi and viewed. Findings during review, all fixed:
+Pages 1 through 8 of the earlier render (EB Garamond, then Liberation Serif; before fb-595.68) were rendered at 60 dpi and viewed. Findings during review, all fixed:
 
 | Page | Finding | Fix |
 |---|---|---|
@@ -65,9 +65,9 @@ Open findings: none for layout. The caption's single-spaced block uses stacked l
 
 ## Known gaps
 
-1. **Font (L.R. 1.05(B)): resolved.** The rule names Times New Roman, Arial or Courier New. This template sets Times New Roman, using `Liberation Serif` (SIL OFL 1.1, vendored in `fonts/liberation-serif/`, metric-compatible per `docs/FONTS.md`). Arial and Courier New were not chosen. The page count is unchanged by the switch (8 pages, from the EB Garamond baseline). The render uses `--ignore-system-fonts`, so no system font can stand in for it.
+1. **Font (L.R. 1.05(B)): resolved.** The rule names Times New Roman, Arial or Courier New. This template sets Times New Roman itself (the pinned files of `docs/FONTS.md` rule 1), with `Liberation Serif` (SIL OFL 1.1, vendored in `fonts/liberation-serif/`) only as fallback; it used Liberation Serif as the substitute before. Arial and Courier New were not chosen. The page count stayed at 8 pages through both switches (from the EB Garamond baseline). The render uses `--ignore-system-fonts`, so no system font can stand in for it.
 2. **One exemplar, one filer.** Tier 2 is judged against one filed complaint (plaintiff's counsel, Ehman Law, Charleston Division), not the 2 or 3 the eval loop asks for. The brief asks for one exemplar per doc type; a second complaint filer would tighten tier 2.
-3. **Not checked by the court tools.** This folder has no `checks.yaml`, so `tools/check.sh` has not been run here. The render has no typst warnings (`tools/render.sh` fails on warnings).
+3. **Default checks only.** This folder has no `eval.yaml` or `checks.yaml`; `tools/check.sh` runs the default checks (`data/checks-default.yaml`) and its stamps pass (`usage/.check-typst.txt`, `usage/.check-docx.txt`: PASS). The render has no typst warnings (`tools/render.sh` fails on warnings).
 4. **Page-count and format checks are manual.** The template does not enforce a page limit (none applies to a complaint) or the one-inch margin beyond setting it.
 
 ## Exemplar search (for the record)
@@ -85,15 +85,14 @@ typst (`typst/`) is the reference. The docx engine (`docx/`) was built to its fo
 
 ```sh
 sh tools/render.sh --engine docx courts/fourth-circuit/south-carolina/federal/district/complaint usage/INPUT-complaint.md
-sh docx/make-reference.sh     # rebuilds docx/reference.docx (run from the doc-type folder)
 ```
 
-- *Build:* `docx/reference.docx` (styles, US Letter, 1-inch margins, centered PAGE field in the footer; from pandoc's default reference document) and `docx/scd-complaint.lua`, which writes the court heading, caption table, document title and signature table from the frontmatter. No `render.sh`, no `checks.yaml`.
-- *Font:* declared as Times New Roman (the face L.R. 1.05(B) names; the typst template sets its metric-compatible substitute). In this box's LibreOffice, `fc-match` maps Times New Roman to Liberation Serif, and `pdffonts` shows only LiberationSerif.
+- *Build:* `fb render --engine docx` builds the reference document from `docx/reference.xml` (styles, US Letter, 1-inch margins, centered PAGE field in the footer; extracted from the former `make-reference.sh` output by `fb docx-reference --extract`, which retired that script, and set in the typst face as `{font}`), then runs pandoc with `docx/scd-complaint.lua`, which writes the court heading, caption table, document title and signature table from the frontmatter. No `eval.yaml` or `checks.yaml`.
+- *Font:* declared as Times New Roman (`{font}`, the typst template's face, which L.R. 1.05(B) names); `pdffonts` on `usage/OUTPUT-complaint.docx.pdf` shows only Times New Roman. (The earlier docx PDF, made where LibreOffice mapped Times New Roman to Liberation Serif, showed only LiberationSerif.)
 - *Matches typst:* 12 pt type; 1-inch margins; page number centered at the foot; court heading in capitals; the caption (parties with their indents, the column of ")" marks, CASE NO.) at the typst row pitch (about 18.7 pt); the title; headings (levels 1 and 2 bold, centered, capitals; level 3 bold, centered); half-inch first-line indent on body paragraphs; the signature block.
 - *Differs:*
   - Body pitch: Word's double (2.0 times the 13.8 pt single line, 27.6 pt) against typst's 27.06 pt. The difference adds up to about a line a page, so the docx runs to 9 pages against typst's 8 and page breaks differ from page 2 on. The complaint has no page limit. Double spacing is kept at Word's definition rather than set to an exact 27.06 pt.
   - Single lines (court heading, signature block) are Word's 13.8 pt; typst's are tighter (about 10 pt for the court heading). The docx reads more openly.
   - Page 2 of the docx keeps "STATEMENT OF FACTS" with paragraph 9 and moves them to page 3; typst keeps the heading at the foot of page 2.
 - *Not verified:* opening in Microsoft Word (no Word on this box). The `.docx` is a valid zip with well-formed XML parts (`unzip -tq`, `xmllint --noout`), and LibreOffice converts it without a conversion error.
-- *BLOCKED:* none. This court has no `checks.yaml`, so no check ID was run against the docx; the review is by eye.
+- *BLOCKED:* none. Only the default checks run on the docx (gap 3); the review below the build is by eye.

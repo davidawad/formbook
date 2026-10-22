@@ -7,9 +7,9 @@ Folder: `courts/eleventh-circuit/florida/federal/southern-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (the full text of the exemplar's 7 text pages; exhibit slip pages 8 to 11 are scans and not transcribed) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh ... usage/INPUT-complaint.md`) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 7 pages, typst 0.15.0, the pinned Times New Roman only (`docs/FONTS.md`, rule 1), no warnings (`sh tools/render.sh ... usage/INPUT-complaint.md`) |
 | overlay | ok: `usage/OVERLAY-castellanos-complaint.pdf` and `usage/OVERLAY-castellanos-complaint.txt` (`sh tools/overlay.sh ... castellanos-complaint`) |
-| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass re-render; template unchanged) |
+| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass re-render; template unchanged; the earlier EB Garamond render, before fb-595.68) |
 
 File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and `.txt`. The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools produce, so the tools' names are used.
 
@@ -23,7 +23,7 @@ Primary source: S.D. Fla. Local Rules, revised effective 1 December 2025, from h
 | L.R. 5.1(a)(4) | 1 inch margins on top, bottom and each side. | `margin = 1in`. |
 | L.R. 5.1(a)(4) | Not less than 1½ spaces between lines (quotations of 50 words or more and footnotes may be single-spaced). | `body-leading = 1.65em`: 27.6 pt pitch at 12 pt (double). The rule sets a floor of 1½; the exemplar is double-spaced, which the rule leaves open. Measured: `pdftotext -bbox`, body lines 27.6 pt apart. |
 | L.R. 5.1(a)(4) | Fonts no smaller than 12 point, footnotes and quotations included. | `type-size = 12pt`. |
-| L.R. 5.1(a)(4) (typeface) | No typeface is named. The rule text (read 2026-10-14) sets only the 12-point minimum, so no court-named face applies: face required = none. | `font-family = "EB Garamond"`, the "No face named" row of `docs/FONTS.md`. Visual only against the exemplar's Times New Roman; no metric-compatible substitute is needed. |
+| L.R. 5.1(a)(4) (typeface) | No typeface is named. The rule text (read 2026-10-14) sets only the 12-point minimum, so no court-named face applies: face required = none. | `font-family = ("Times New Roman", "Liberation Serif")`: Times New Roman, the house standard (`docs/FONTS.md`, rule 6), as in the exemplar. |
 | L.R. 5.1(a)(4) | Paginated consecutively at the bottom center of each page. | `footer-page-number()`, bottom center, numbered from page 1. |
 | L.R. 5.1(a)(5)(A) | Name of the court centered across the page. | `court-title()`, centered bold capitals. |
 | L.R. 5.1(a)(5)(B) | Docket number, category (civil or criminal), and last names of the assigned District Judge and Magistrate Judge, centered across the page. | `CIVIL CASE NO. ` + `case_number`, centered. The judges' names are not in the sample (see Known gaps). |
@@ -55,14 +55,14 @@ Not produced by this template (separate papers): the civil cover sheet (L.R. 3.3
 2. **Judges' names in the caption (L.R. 5.1(a)(5)(B)).** The exemplar's caption has no judge names (complaints are captioned before a judge is assigned in the first filing). The sample has `CIVIL CASE NO. 1:26-cv-27012` only. A filed complaint that has a judge assigned should carry the judges' last names in `case_number` (as the S.D. Fla. motion exemplar does: `26-cv-25201-BLOOM/Elfenbein`). The template prints `case_number` exactly as given.
 3. **Category word.** The rule requires a category (civil or criminal); the template prints `CIVIL CASE NO.`, which is the usual S.D. Fla. form. The exemplar prints `Case No.`; the rule is followed here.
 4. **Caption layout.** The exemplar puts the case number in a right-hand column with a `|` column for the style. L.R. 5.1(a)(5)(B) requires the docket line to be centered across the page, so the template centers it. The style is on the left (L.R. 5.1(a)(5)(C)), closed with "/" as in the motion exemplar.
-5. **Font.** L.R. 5.1(a)(4) names no typeface; only the 12-point minimum applies (checked against the rule text on 2026-10-14). EB Garamond stays, per `docs/FONTS.md`. EB Garamond at 12 pt has a smaller x-height than the exemplar's Times New Roman, so the text looks smaller. Switching to a Times-metric face (Liberation Serif) would remove the difference, but the rule does not ask for it: a choice for David, not a rule point.
+5. **Font.** L.R. 5.1(a)(4) names no typeface; only the 12-point minimum applies (checked against the rule text on 2026-10-14). The template was set in EB Garamond until the house standard (`docs/FONTS.md`, rule 6, 2026-10-17) put it in Times New Roman, the exemplar's face, on typst and docx alike.
 6. **Exhibits.** Pages 8 to 11 of the exemplar are exhibit scans with no text layer. They are not transcribed or rendered.
 7. **Paragraph spacing.** Double-spaced (27.6 pt), following the exemplar. The rule's 1½ floor is met.
 8. **Overlay pairing.** The overlay pairs pages by text. Page 1 pairs with the exemplar's page 1 at 54% word overlap, because the caption layout differs. The overlay is a diagnostic, not a score.
 
 ## Review of the rendered pages (7 of 7)
 
-Each page was rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass re-render (no template change).
+Each page was rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass re-render (no template change), on the earlier EB Garamond render, before fb-595.68.
 
 - Page 1: court title, docket line centered, style on the left with "/", title centered, lead-in, heading PARTIES, paragraphs 1 and 2, with the same first-line indent as the rest. Footer page number. Pass.
 - Page 2: JURISDICTION AND VENUE, paragraphs 3 and 4, FACTS, the subheading in bold, paragraphs 5 to 9. Pass.
@@ -81,10 +81,10 @@ Each page was rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass 
 ## Engines
 
 - typst (primary): `typst/`, `usage/OUTPUT-complaint.typst.pdf`, 7 pages.
-- docx: `docx/make-reference.sh` builds `docx/reference.docx` (pandoc's default reference, with the court's styles and footer); `docx/flsd.lua` builds the caption, the numbered paragraphs and the signature block. Written by `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.1, headless). 7 pages. Pandoc 3.12.1.
+- docx: `fb render --engine docx` builds the reference document from `docx/reference.xml` (the shared cross-engine recipe, `base="xengine"`, in the typst face, Times New Roman 12 pt; the earlier `docx/make-reference.sh` is retired into fb render); `docx/flsd.lua` builds the caption, the numbered paragraphs and the signature block. Written by `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.1, headless). 7 pages. Pandoc 3.12.1.
 - latex: not built for this doc type.
 
-What matches typst (every page of the `.docx.pdf` rendered at 60 dpi and compared with the typst page, 2026-10-15): letter paper; 1 in margins; EB Garamond 12 pt throughout (embedded as EB Garamond); body text double-spaced at an exact 27.6 pt pitch with a 0.5 in first-line indent; the caption (court name, centered docket line, style at the left in a 3.25 in column, the "/" closer, centered bold title); numbered paragraphs 1 to 45 with the WHEREFORE and jury-demand paragraphs unnumbered; level-1 headings centered bold capitals, level-2 centered bold, level-3 bold at the left; the signature block single-spaced at 3.5 in; the page number centered at the bottom from page 1.
+What matches typst (every page of the `.docx.pdf` rendered at 60 dpi and compared with the typst page, 2026-10-15, on the earlier EB Garamond render, before fb-595.68; the face is now Times New Roman 12 pt on both): letter paper; 1 in margins; EB Garamond 12 pt throughout (embedded as EB Garamond); body text double-spaced at an exact 27.6 pt pitch with a 0.5 in first-line indent; the caption (court name, centered docket line, style at the left in a 3.25 in column, the "/" closer, centered bold title); numbered paragraphs 1 to 45 with the WHEREFORE and jury-demand paragraphs unnumbered; level-1 headings centered bold capitals, level-2 centered bold, level-3 bold at the left; the signature block single-spaced at 3.5 in; the page number centered at the bottom from page 1.
 
 What differs from typst:
 
@@ -92,7 +92,7 @@ What differs from typst:
 - Signature block: typst indents the first line of "Dated", "Respectfully submitted," and the counsel lines by 0.5 in (the paragraph's first-line indent carries into the block). The docx sets those lines flush. The counsel block sits at 3.5 in in both.
 - Paragraph numbers are typed text (number, period, tab, tab stop at 0.92 in), not Word list numbering. Typst numbers them itself. In Word, inserting a paragraph means retyping the numbers after it.
 - Pagination: both renders are 7 pages. Individual lines can break differently between LibreOffice and typst; the vertical pitch is the same.
-- Font: EB Garamond must be installed on the machine that opens or renders the `.docx`. Without it Word substitutes silently. The render here used a copy of `fonts/eb-garamond` in `~/.local/share/fonts`.
+- Font: the `.docx` names Times New Roman, the typst face; where it is not installed, Word substitutes silently.
 
 docx BLOCKED items:
 

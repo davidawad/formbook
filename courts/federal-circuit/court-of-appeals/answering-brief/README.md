@@ -10,7 +10,7 @@ Not a court-level `court.json` status change: this folder does not set `status` 
 |---|---|
 | `usage/FILED-EXAMPLE-answering-brief.pdf` | Brief for Appellee, Director of the USPTO, *In re Ablynx N.V., Sanofi*, No. 26-1333, filed 2026-08-14 (38 pp.). Provenance in `usage/SOURCE.md`. |
 | `usage/INPUT-answering-brief.md` | Markdown transcription (front matter + a portion of the body, Statement of the Issue through Conclusion, with the signature and both certificates). |
-| `usage/OUTPUT-answering-brief.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md` (14 pages). |
+| `usage/OUTPUT-answering-brief.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md` (15 pages). |
 | `usage/OVERLAY-ablynx-answering-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-appeals/answering-brief ablynx-answering-brief` (red = our render, blue = exemplar). |
 | `typst/main.typ` | Entry point; reads `--input sample=...`, splits the frontmatter, calls the template. |
 | `typst/cafc-answering-brief.typ` | Template `cafc-brief(meta, md)`. Structure copied from `courts/ninth-circuit/court-of-appeals/typst/ca9-brief.typ`; numbers and forms are the Federal Circuit's. |
@@ -21,7 +21,7 @@ Each entry: the rule, the primary text I could read, and what is and is not veri
 
 | Rule | What it requires here | Source read | Verified |
 |---|---|---|---|
-| FRAP 32(a)(5)(A) | Proportionally spaced serif face, 14-point or larger. Template: EB Garamond 14 pt everywhere. | Cornell LII, `law.cornell.edu/rules/frap/rule_32`, fetched 2026-10-14 | Text yes; not checked against the current official FRAP PDF |
+| FRAP 32(a)(5)(A) | Proportionally spaced serif face, 14-point or larger. Template: Times New Roman 14 pt everywhere. | Cornell LII, `law.cornell.edu/rules/frap/rule_32`, fetched 2026-10-14 | Text yes; not checked against the current official FRAP PDF |
 | FRAP 32(a)(6) | Plain roman style; case names italicized. | same | same |
 | FRAP 32(a)(4) | Margins of at least one inch (template: 1 in). Double spacing for text, single for headings, quotations, footnotes. | same (the LII text of (a)(4) was not captured; the margin and spacing are from the exemplar and standard practice) | Partial: spacing matched to exemplar, margin from exemplar |
 | Fed. Cir. R. 32(b) | Principal brief type-volume limit: 14,000 words (30-page safe harbor). Template: `word-limit = 14000`. The certificate of compliance cites "Fed. Cir. R. 32(b)". | The exemplar's own certificate cites Fed. Cir. R. 32(b). The 14,000 figure comes from a third-party mirror (courtrules.net, Rule 32). | Citation: yes (exemplar). Number: **not verified** at cafc.uscourts.gov, which returned HTTP 404 and a bot challenge to my requests. |
@@ -35,11 +35,11 @@ Not verified: whether any Federal Circuit rule amendments after the mirror's tex
 
 The overlay pairs each sample page with the exemplar page sharing the most words. The sample is a portion of a 38-page brief, so most pages overlap only partly (word-overlap 33–92%, see `OVERLAY-ablynx-answering-brief.txt`). The cover (92%), the representative-claim page (88%) and the Statement of the Issue (84%) line up closely. Red-only text is the sample's transcription beyond the exemplar's words; blue-only text is exemplar content the sample does not reproduce (the omitted Statement of the Case, Argument B.2–B.3, the chart and figures).
 
-Measured line pitch on a body page: exemplar 32.2 pt, sample 32.1 pt (body leading `0.99em` with 14 pt type). The first render used `0.94em` and gave 31.4 pt; I changed it to match the exemplar.
+Measured line pitch on a body page (on the earlier EB Garamond render): exemplar 32.2 pt, sample 32.1 pt (body leading `0.99em` with 14 pt type). The first render used `0.94em` and gave 31.4 pt; I changed it to match the exemplar.
 
 ## Pages reviewed (Gate 2 record)
 
-All 14 rendered pages were rendered at 60 dpi and looked at, in their final state (2026-10-16).
+All 14 rendered pages were rendered at 60 dpi and looked at, in their final state (2026-10-16, on the earlier EB Garamond render; the current 15-page review is under "Cross-engine layout").
 
 | Page | Content | Result |
 |---|---|---|
@@ -69,7 +69,7 @@ All 14 rendered pages were rendered at 60 dpi and looked at, in their final stat
 
 ## Rendering
 
-Typst 0.15.0, EB Garamond (vendored in `fonts/eb-garamond/`), cmarker 0.1.10 (vendored in `vendor/typst-packages/`). `tools/render.sh` runs with `--ignore-system-fonts`; the build emitted no warnings.
+Typst 0.15.0, Times New Roman (the pinned install, `docs/FONTS.md` rule 1; Liberation Serif, vendored in `fonts/liberation-serif/`, the fallback), cmarker 0.1.10 (vendored in `vendor/typst-packages/`). `tools/render.sh` runs with `--ignore-system-fonts`; the build emitted no warnings.
 
 ## Engines
 
@@ -79,11 +79,11 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 |---|---|---|---|
 | typst (reference) | `typst/` | `OUTPUT-answering-brief.typst.pdf` | 15 |
 | latex | `latex/template.tex`, `latex/cafc.lua` (stock pdflatex, newtx Times) | `OUTPUT-answering-brief.latex.pdf` | 15 |
-| docx | `docx/reference.docx` (`docx/build-reference.sh`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pagemap.awk`, `docx/footer.xml` | `OUTPUT-answering-brief.docx` and `.docx.pdf` | 15 |
+| docx | `docx/reference.xml` (`fb render --engine docx` builds the reference document from it, `base="xengine"`, in the typst face), `docx/cafc-docx.lua` (writes the sections and footers, `FORMBOOK_FOOTERS`, `FORMBOOK_FINAL`) | `OUTPUT-answering-brief.docx` and `.docx.pdf` | 15 |
 
 The paragraphs below, down to "Pages viewed", describe the engines before the cross-engine port and are kept as history; "Cross-engine layout" at the end of this file is the current state.
 
-**Matches the typst layout:** 14 pt EB Garamond, double spacing at the typst pitch (32.13 pt, 0.99em leading); 1 in margins; the cover; contents and authorities with page numbers; the Roman section headings (I. to V.) hanging at the margin with the A./1. sub-headings; the statement of related cases; the certificate of compliance with the signature under it; the certificate of service; the footers (roman then arabic).
+**Matches the typst layout:** 14 pt Times New Roman (TeX Gyre TermesX, newtx, in latex; EB Garamond before the rule-6 switch), double spacing at the typst pitch (32.13 pt, 0.99em leading); 1 in margins; the cover; contents and authorities with page numbers; the Roman section headings (I. to V.) hanging at the margin with the A./1. sub-headings; the statement of related cases; the certificate of compliance with the signature under it; the certificate of service; the footers (roman then arabic).
 
 **Differs from the typst layout:**
 
@@ -123,5 +123,5 @@ The three engines now run on the shared layout model (`lib/typst/xengine.typ`, `
 - Spaces between blocks in pt (the em values before, at 14 pt); contents and authorities as `listing-row` rows with a 36 pt / 56 pt page column; footnote marks at 58 %; the list bullet in a half-inch box; the right half of the cover and the signature blocks starts at the middle of the text width (before, typst's `pad(left: 50%)` inside `align` measured half of the block's own width, so the signature block moved with its longest line).
 - A paragraph that anchors a footnote has no widow or orphan control in latex (`\widowpenalty`, `\clubpenalty` 0) and docx (style "Body Text Note", `w:widowControl` off): typst's widow and orphan rules do not see the note, so when the line that carries it does not fit with its note, typst moves that line on and leaves the paragraph's first line alone at the foot of the page (body p. 5 ends with "Appellants concede that, if the ’019 application’s"); the other engines do the same (as `opening-brief`, fb-595.54.6). Tier 2: one orphan line, accepted.
 - Break rules this folder adds in latex and docx (as `../reply-brief`): a line may end after a slash before a letter ("CM/ECF": latex `\allowbreak`, docx a zero-width space), and an ellipsis is the one 1 em glyph (latex `\caellipsis`).
-- latex and docx are rewritten on the model: `latex/cafc.lua` builds the cover, tables, signature and certificates as the typst template does, `latex/template.tex` holds the macros (`\xe@lines`, `\addvspace`, `\xe@row`); the docx is built by `docx/render.sh` in two passes (pass 1 with placeholders, the page map of its LibreOffice PDF read by `docx/pagemap.awk`, pass 2 must give the same map), on a reference from `lib/docx/xengine-reference.sh`. Word count block by block in every engine (1,330).
+- latex and docx are rewritten on the model: `latex/cafc.lua` builds the cover, tables, signature and certificates as the typst template does, `latex/template.tex` holds the macros (`\xe@lines`, `\addvspace`, `\xe@row`); the docx was then built by `docx/render.sh` in two passes (pass 1 with placeholders, the page map of its LibreOffice PDF read by `docx/pagemap.awk`, pass 2 must give the same map), on a reference from `lib/docx/xengine-reference.sh` (`docx/render.sh` and `docx/pagemap.awk` since retired into `fb render`, fb-595.68). Word count block by block in every engine (1,330).
 - Pages viewed (60 dpi, all 15 of the typst render, all 15 of latex and docx side by side against it, 2026-10-22): no defect found. Positions differ only on the cover (the gaps between its parts: typst 14 pt plus block spacing, latex and docx 14 pt) and by under 2.5 pt elsewhere (footnote marks, bullets).

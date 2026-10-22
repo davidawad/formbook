@@ -2,15 +2,15 @@
 
 Doc type: **motion-brief**: a motion to dismiss under Fed. R. Civ. P. 12(b)(6) with the supporting memorandum of law, in one document (the form of the primary exemplar). Court: United States District Court for the Northern District of Georgia (`gand`). Folder: `courts/eleventh-circuit/georgia/federal/northern-district/motion-brief/`.
 
-**Typeface (tier 1): resolved.** LR 5.1(C) permits Times New Roman (at least 14 point), Courier New (at least 12), Century Schoolbook (at least 13) or Book Antiqua (at least 13). The template uses the first listed face, Times New Roman 14 pt, and renders it with its substitute **Liberation Serif** (metric-compatible, per `docs/FONTS.md`; vendored, SIL OFL). The font is `font-name` in `typst/gand-motion-brief.typ`. The leading is 1.645em so the baseline pitch stays at 32.2 pt, as before. The page count stays at 10 pages on this sample.
+**Typeface (tier 1): resolved.** LR 5.1(C) permits Times New Roman (at least 14 point), Courier New (at least 12), Century Schoolbook (at least 13) or Book Antiqua (at least 13). The template uses the first listed face, Times New Roman 14 pt, rendered in **Times New Roman** itself (the pinned install, `docs/FONTS.md` rule 1), with Liberation Serif (metric-compatible, vendored) as the fallback. The font is `font-name` in `typst/gand-motion-brief.typ`. The leading is 1.645em so the baseline pitch stays at 32.2 pt, as before. The page count stays at 10 pages on this sample.
 
-The LR 7.1(D) certificate names **Times New Roman** (`rule-font-name`), not the substitute: the filer certifies the face it prepares the brief in, and the substitute has the same metrics. The rendered PDF uses Liberation Serif, so the certificate describes the filing, not the PDF's embedded font. Whether that reading is right is for David to confirm (see Known gaps 1).
+The LR 7.1(D) certificate names **Times New Roman** (`rule-font-name`), the face the filer certifies; the rendered PDF embeds Times New Roman too (earlier renders embedded the Liberation Serif substitute).
 
 | Item | Status |
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (primary: motion with memorandum, 18 pages, counsel for the State); second filer `usage/FILED-EXAMPLE-motion-brief-2.pdf` (separate memorandum, 16 pages). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md` (a portion of the Durand motion; see Sample below) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored fonts only (`pdffonts`: LiberationSerif and LiberationSerif-Bold embedded), no typst warnings. sha256 `3b681a99945dc4a3340124577be62b572068892b16b5db8624d5c1ddde0d684b`. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored and pinned fonts only (`pdffonts`: TimesNewRomanPSMT and TimesNewRomanPS-BoldMT embedded), no typst warnings. The sha256 the Gate 2 rows were checked against, `3b681a99945dc4a3340124577be62b572068892b16b5db8624d5c1ddde0d684b`, is of the earlier Liberation Serif render. |
 | overlay | ok: `usage/OVERLAY-durand-motion-brief.pdf` and `OVERLAY-durand-motion-brief.txt` (run 2026-10-14 on the Liberation Serif render) |
 | pages reviewed | 10 of 10, each rendered at 60 dpi and viewed in the final PDF |
 
@@ -24,7 +24,7 @@ M = mandated by a rule (tier 1). C = convention (tier 2). A = author responsibil
 
 | ID | Rule | Requirement (quoted or closely paraphrased) | M/C/A | Where in the template |
 |---|---|---|---|---|
-| GAND-FORM-001 | LR 5.1(C) | "Computer documents must be prepared in one of the following fonts: Times New Roman (at least 14 point), Courier New (at least 12 point), Century Schoolbook (at least 13 point), or Book Antiqua (at least 13 point)." | M | `font-name` = "Liberation Serif" (substitute for Times New Roman), `type-size` = 14pt. |
+| GAND-FORM-001 | LR 5.1(C) | "Computer documents must be prepared in one of the following fonts: Times New Roman (at least 14 point), Courier New (at least 12 point), Century Schoolbook (at least 13 point), or Book Antiqua (at least 13 point)." | M | `font-name` = ("Times New Roman", "Liberation Serif") (Liberation Serif the fallback), `type-size` = 14pt. |
 | GAND-FORM-002 | LR 5.1(C) | "be double-spaced between lines"; "Footnotes, headings, and indented citations may be single-spaced." | M | `body-leading` = 1.65em (32.2 pt baseline pitch, matched to the filed exemplar's body text, Durand p.2). Headings, footnotes, block quotations single-spaced. |
 | GAND-FORM-003 | LR 5.1(D) | "The top, bottom, left, and right margins ... must be at least one inch." | M | `margin` = 1in on all four sides. |
 | GAND-FORM-004 | LR 5.1(E) | "All pages shall be numbered consecutively at the bottom center of the page." | M | `page-footer()`. |
@@ -34,7 +34,7 @@ M = mandated by a rule (tier 1). C = convention (tier 2). A = author responsibil
 | GAND-CAP-001 | Fed. R. Civ. P. 10(a) | "a caption with the court's name, a title, a file number, and a Rule 7(a) designation." | M | `court-title()`, `caption()`, `title`. |
 | GAND-MEM-001 | LR 7.1(A)(1) | "Every motion presented to the clerk for filing shall be accompanied by a memorandum of law which cites supporting authority." | M | The template produces one document containing the motion and the memorandum (the primary exemplar's form). A separate memorandum (the second exemplar) is equally compliant; the template does not generate a separate one. |
 | GAND-LIM-001 | LR 7.1(D) | "briefs filed in support of a motion ... are limited in length to twenty-five (25) pages." | M | Not enforced (no page counter). The sample is 10 pages; the author must keep the brief within 25. |
-| GAND-CERT-001 | LR 7.1(D) | "At the end of the brief, counsel must certify that the brief has been prepared with one of the font and point selections approved by the Court in LR 5.1(B) [sic; the font rule is LR 5.1(C)]." | M | `font-certificate()`: "I certify that the foregoing brief conforms to the requirements of LR 5.1(C). The brief is prepared in 14-point Times New Roman font." The face is `rule-font-name`, the rule's face; the PDF embeds the metric-compatible Liberation Serif (see the top of this file). |
+| GAND-CERT-001 | LR 7.1(D) | "At the end of the brief, counsel must certify that the brief has been prepared with one of the font and point selections approved by the Court in LR 5.1(B) [sic; the font rule is LR 5.1(C)]." | M | `font-certificate()`: "I certify that the foregoing brief conforms to the requirements of LR 5.1(C). The brief is prepared in 14-point Times New Roman font." The face is `rule-font-name`, the rule's face, which the PDF embeds (see the top of this file). |
 | GAND-SVC-001 | Fed. R. Civ. P. 5(b)(2)(E), 5(d)(1)(B) | Service through the court's electronic filing system; a certificate of service is not required for ECF service. | C | `service-certificate()`: included because both the primary and second exemplar carry one; the date text comes from frontmatter (`service_text`). |
 | GAND-FIL-001 | Fed. R. Civ. P. 11(a) | The paper states the signer's address, email and telephone. | M | `signature-block()`. |
 | GAND-SEP-001 | LR 3.3 | Certificate of Interested Persons and Corporate Disclosure Statement at first appearance. | A | Not generated (separate filing). |
@@ -81,7 +81,7 @@ The overlay pairs our pages with the exemplar by word overlap, which is coarse: 
 
 ## Known gaps and open choices
 
-1. **Font (tier 1): resolved, see the top of this file.** The certificate names Times New Roman, the face LR 5.1(C) lists, while the PDF embeds the metric-compatible Liberation Serif. David should confirm that a certificate naming the rule's face, over a Times-metric render, is the intended reading.
+1. **Font (tier 1): resolved, see the top of this file.** The certificate names Times New Roman, the face LR 5.1(C) lists, and the PDF embeds Times New Roman.
 2. **LR 7.1(D) cross-reference.** The rule's own text says the font selections are "approved by the Court in LR 5.1(B)"; the font selections are in LR 5.1(C) (5.1(B) is paper). The template cites LR 5.1(C), as the exemplar's certificate does. David should confirm the reading.
 3. **Page limit.** LR 7.1(D) limits the brief to 25 pages. Not checked by the template; the sample is 10 pages.
 4. **Second exemplar.** The separate memorandum (First Horizon, 16 pages) is on file. It was checked on page 1 only; its layout was not compared, so tier 2 is judged against the primary exemplar's layout plus the LR rules.
@@ -94,13 +94,13 @@ The overlay pairs our pages with the exemplar by word overlap, which is coarse: 
 
 ### docx (`docx/`)
 
-Files: `docx/reference.docx` (built once by `docx/make-reference.sh` from pandoc's default reference) and `docx/gand-motion-brief.lua` (the filter: the cover, the caption table, the signature block, the LR 7.1(D) font certificate and the certificate of service). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and, when LibreOffice is available, `OUTPUT-gand-motion-brief-durand.docx.pdf`.
+Files: `docx/reference.xml` (the styles: `fb render --engine docx` builds the reference document from it on the shared cross-engine recipe, `base="xengine"`, in the typst face) and `docx/gand-motion-brief.lua` (the filter: the cover, the caption table, the signature block, the LR 7.1(D) font certificate and the certificate of service). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf`.
 
-**Checked so far:** the `.docx` builds with pandoc 3.12.1, every part is well-formed XML (`render-docx.sh` checks this), every paragraph style it uses exists in the reference, and the section carries US Letter with 1 in margins and the PAGE footer. The text reads back in the same order as the markdown, with the certificates after the signature block. **No page of the `.docx` has been rendered or looked at**, so no visual claim is made for it.
+**Checked so far** (recorded when the reference was built by the retired `docx/make-reference.sh`, before LibreOffice ran here)**:** the `.docx` builds with pandoc 3.12.1, every part is well-formed XML (`render-docx.sh` checks this), every paragraph style it uses exists in the reference, and the section carries US Letter with 1 in margins and the PAGE footer. The text reads back in the same order as the markdown, with the certificates after the signature block. **No page of the `.docx` has been rendered or looked at**, so no visual claim is made for it.
 
 What is meant to match the typst template (set in the styles, not yet seen on a page):
 
-- Times New Roman 14 pt in every style, including footnotes and the block quotation (LR 5.1(C)). The typst render uses its metric-compatible substitute, Liberation Serif. The LR 7.1(D) certificate names Times New Roman, and so does the `.docx`.
+- Times New Roman 14 pt in every style, including footnotes and the block quotation (LR 5.1(C); `reference.xml` size 28 half points), the typst face. The LR 7.1(D) certificate names Times New Roman, and so does the `.docx`.
 - Double spacing: exact 644 twips (32.2 pt). Headings, footnotes, the caption, the block quotation (single-spaced, indented 0.5 in on both sides) and the signature block are single-spaced.
 - 1 in margins on US Letter; page number bottom centre (LR 5.1(D), (E)).
 - Caption and cover as in the complaint: the court title, a caption with the ")" column, `Civil Action No.` on the right, the title in bold capitals.
@@ -113,7 +113,7 @@ What differs from the typst output, and why:
 - Blank-line gaps (the typst `v(body-leading)`) are paragraph spacing of one double line. The typst geometry differs by a few points at each gap.
 - Pagination is Word's or LibreOffice's, not typst's (`docs/DOCX.md`, Known limits). The page count of the typst render (10 pages) is not a docx result.
 
-docx BLOCKED (`docs/DOCX.md`: the `.docx` is delivered, the checks that need its PDF are not run):
+docx BLOCKED (`docs/DOCX.md`: the `.docx` is delivered, the checks that need its PDF are not run; recorded before LibreOffice ran here: `usage/OUTPUT-motion-brief.docx.pdf` now exists):
 
 - `BLOCKED: docx Gates 0-3 on the .docx.pdf (tools/check.sh --engine docx): LibreOffice cannot start in the build box.` conda-forge has no LibreOffice package. The Debian 25.2.3 packages were extracted without installing and the binary still stops at the UNO bootstrap (`DeploymentException`) with the ICU and program paths set, so `soffice --headless --convert-to pdf` does not run and no `.docx.pdf` exists. Gates 0-1 are not run mechanically for this folder either (no `checks.yaml`; see Known gaps 7).
 - `BLOCKED: docx page review: 0 of the pages of the .docx were rendered and viewed, because there is no PDF to render.`

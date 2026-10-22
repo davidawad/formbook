@@ -6,9 +6,9 @@ Doc type: **motion with memorandum** (FRBP 9013; LBR 7007-1 to 7007-3 as applied
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`). A joinder in a receiver's motion, with its memorandum in the same filing. |
 | sample md | `usage/INPUT-motion-brief.md` (the whole filed document, 8 pages, transcribed, nine footnotes) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, typst 0.15.0, pinned Times New Roman only, no warnings |
 | overlay | ok: `usage/OVERLAY-new-century-motion-brief.pdf` and `.txt` |
-| pages reviewed | 8 of 8 (every page rendered and looked at after the last template change) |
+| pages reviewed | 8 of 8 (every page rendered and looked at after the last template change; the earlier EB Garamond render, before fb-595.68) |
 
 File names: `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the tools hard-code these names), so the sample PDF and overlay carry those names rather than `<id>.pdf` and `<id>-overlay.pdf`.
 
@@ -18,7 +18,7 @@ Verified 2026-10-14.
 
 | Rule | Requirement | Where it lives in the template |
 |---|---|---|
-| Fed. R. Bankr. P. 9004(a) | Papers must be clearly legible; common English abbreviations are acceptable. Source: https://www.law.cornell.edu/rules/frbp/rule_9004 (as amended Apr. 2, 2024, eff. Dec. 1, 2024). | whole template: 12–13 pt, black on white |
+| Fed. R. Bankr. P. 9004(a) | Papers must be clearly legible; common English abbreviations are acceptable. Source: https://www.law.cornell.edu/rules/frbp/rule_9004 (as amended Apr. 2, 2024, eff. Dec. 1, 2024). | whole template: 12 pt, black on white |
 | Fed. R. Bankr. P. 9004(b) | A document presented for filing must have a caption: the court's name, the case's title, the case number, the adversary-proceeding number if any, and a brief designation of the document's character. Same source. | `cover`: court name (fixed in the template), `caption.left` (parties), `caption.right` (case number, chapter, judge), `title` (the document's character) |
 | Fed. R. Bankr. P. 9013 | A motion must be made in writing, state its grounds with particularity, and set forth the relief requested. Source: https://www.law.cornell.edu/rules/frbp/rule_9013 (as amended Apr. 2, 2024, eff. Dec. 1, 2024). | the body (author text; the template does not check the grounds) |
 | LBR 9013-1(a) | LBR 7007-1 through 7007-3 apply to motion practice. Source: W.D. La. Local Bankruptcy Rules, revised as of April 1, 2026, https://www.lawb.uscourts.gov/sites/lawb/files/Local%20Bankruptcy%20Rules%20Revised%20as%20of%201%20April%202026%20with%20Appendices.pdf (fetched and read 2026-10-14). | the rules below |
@@ -30,7 +30,7 @@ Verified 2026-10-14.
 | LBR 9013-1(d) | A certificate of service on registered and non-registered users, stating the manner of service for each party. Same source. | `certificate` frontmatter: rendered when present. The exemplar has none, so no sample exercises it (see gaps). |
 | LBR 5005-1(b) | The signature block includes name, state bar number, address, telephone and email (if applicable) of the signing attorney. Same source. | `signature` frontmatter: lead-in, firm, "By:" line, names with bar numbers, address, telephone, fax, email, `counsel_for` |
 
-Font, margins and spacing: neither the LBRs nor FRBP 9004 sets them (`grep` of the full LBR text finds no typeface, margin or line-spacing rule). The layout follows the exemplar: 1-inch margins, double-spaced body, centered bold caps for the main headings, a boxed caption, EB Garamond (the only typeface vendored in `fonts/`).
+Font, margins and spacing: neither the LBRs nor FRBP 9004 sets them (`grep` of the full LBR text finds no typeface, margin or line-spacing rule). The layout follows the exemplar: 1-inch margins, double-spaced body, centered bold caps for the main headings, a boxed caption, Times New Roman (the pinned install; the house standard where no face is named, `docs/FONTS.md` rule 6).
 
 The exemplar was filed in 2014 and the rules above are the 2026 text; the sample is a transcription of the 2014 filing, rendered in the 2026-rule template.
 
@@ -54,10 +54,10 @@ sh tools/render.sh courts/fifth-circuit/louisiana/federal/bankruptcy-western-dis
 sh tools/overlay.sh courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief new-century-motion-brief
 ```
 
-- Render: typst compiled with `--ignore-system-fonts` and no warnings. `pdffonts` shows EBGaramond-Regular, -Bold and -Italic only.
+- Render: typst compiled with `--ignore-system-fonts` and no warnings. `pdffonts` showed EBGaramond-Regular, -Bold and -Italic only (the earlier EB Garamond render, before fb-595.68; the committed render embeds Times New Roman only).
 - Overlay: red = our render, blue = exemplar, black = both. Pages pair one-to-one by word overlap: ours p.1–8 ↔ filed p.1–8. The overlay is a diagnostic, not a score: the filed copy has a different caption box and a different footer, so text lines will not coincide.
 
-## Visual review (Gate 2 record, 8 of 8 pages, rendered at 50 dpi and looked at)
+## Visual review (Gate 2 record, 8 of 8 pages, rendered at 50 dpi and looked at; the earlier EB Garamond render, before fb-595.68)
 
 | Page | Content | Finding |
 |---|---|---|
@@ -78,20 +78,20 @@ Engines for this doc type: typst (primary, `typst/`) and docx (`docx/`). `latex/
 
 ### docx
 
-- Build: `sh docx/make-reference.sh` writes `docx/reference.docx` (pandoc's default styles, patched to the typst values: EB Garamond 13 pt, body at 26 pt exact, 0.5 in first-line indent, letter page with 1-inch margins, "- n -" page-number footer). `docx/lawb-motion-brief.lua` builds the cover (court name, caption box, title, rule under the title), the signature block and the certificate (when the frontmatter has one), and letters the lists "a.", "b.". Render: `sh tools/render.sh --engine docx courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx`.
-- Matches the typst template, in the markup: EB Garamond 13 pt throughout; body double-spaced (26 pt lines) with a 0.5 in first-line indent on every body paragraph; caption, signature block and footnotes single-spaced (15 pt); 1-inch margins; letter page; centered bold level-1 headings and bold, underlined level-2 headings at the left, each with a blank double line above and below; the caption box with its rules; the signature block at 2.75 in, kept together; the "- n -" page number centered in the footer.
+- Build: `fb render --engine docx` (via `sh tools/render.sh --engine docx courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief usage/INPUT-motion-brief.md`) builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst template's face: Times New Roman 12 pt, body at 24 pt exact, 0.5 in first-line indent, letter page with 1-inch margins, "- n -" page-number footer), then runs pandoc with `docx/lawb-motion-brief.lua`, which builds the cover (court name, caption box, title, rule under the title), the signature block and the certificate (when the frontmatter has one), letters the lists, and writes `usage/OUTPUT-motion-brief.docx`.
+- Matches the typst template, in the markup: Times New Roman 12 pt throughout; body double-spaced (24 pt lines) with a 0.5 in first-line indent on every body paragraph; caption, signature block and footnotes single-spaced (14 pt); 1-inch margins; letter page; centered bold level-1 headings and bold, underlined level-2 headings at the left, each with 12 pt above and below; the caption box with its rules; the signature block at 2.75 in, kept together; the "- n -" page number centered in the footer.
 - Differs, by design or not checked: the list letters are typed text ("a." and a tab), not Word list numbering. The tab stop is fixed at 0.9 in from the margin. The caption box is a Word table with borders, which Word and LibreOffice draw slightly differently. Line and page breaks are the renderer's, so the page count is not known until the PDF is made. The "signature alone on page 8" open item (Known gaps, 2) may or may not reproduce in the docx.
 - **BLOCKED: `.docx.pdf` checks (Gates 0 to 3 on the LibreOffice PDF, and the Gate 2 page review).** `soffice` is not installed on the box that built this: conda-forge has no LibreOffice package and there is no root for apt. `tools/render.sh --engine docx` therefore writes the `.docx` and then fails at `soffice`, so `usage/OUTPUT-new-century-motion-brief.docx.pdf` is not produced. Checked so far: the `.docx` is a valid zip, its XML parts are well-formed, and pandoc reads it back with every word of the sample body in order (the typed list letters and the signature block come from the template). Pages reviewed: 0 of the docx's pages, so no visual claim is made for the docx.
-- Open for Word: the opening machine needs EB Garamond installed, or Word substitutes a font. The vendored `fonts/` copy is for typst only.
+- Open for Word: the docx names Times New Roman, the typst template's face; Times New Roman is not in `fonts/` (a licensed install, `docs/FONTS.md` rule 1).
 
 ## Known gaps and open choices
 
 1. **One exemplar, and it is a joinder.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers; the brief asks for one per doc type. The filing joins a receiver's motion rather than being a stand-alone motion. Two other W.D. La. memoranda were found: *Global Gaming Legends*, No. 13-01007, doc #116 (a 2013 support brief, 40 pages, only 782 words of text layer) and *Keaty*, No. 05-51007, doc #137 (a 2005 motion with memorandum attached, a scanned image with no text). Neither was used.
-2. **Signature block alone on page 8 (open).** The prayer is on page 7; the block needs about 3 inches and page 7 has about 2.8 inches free. Keeping the prayer with its signature is not implemented: it would need a markup for "keep with next" on the prayer paragraph. Open for the reviewer: whether the template should carry that rule, or the sample should be trimmed.
+2. **Signature block alone on page 8 (open; measured on the earlier 8-page EB Garamond render, before fb-595.68; the committed render is 7 pages).** The prayer is on page 7; the block needs about 3 inches and page 7 has about 2.8 inches free. Keeping the prayer with its signature is not implemented: it would need a markup for "keep with next" on the prayer paragraph. Open for the reviewer: whether the template should carry that rule, or the sample should be trimmed.
 3. **No notice of hearing; no certificate of service.** LBR 9013-1(b) (Official Form 420A) and LBR 9013-1(d) apply to motions. The filing has neither in its 8 pages, so the sample has neither. The template renders a `certificate` block when the frontmatter supplies one; no notice-of-hearing support is built.
 4. **No tables of contents or authorities.** LBR 7007-2(d) requires them for a brief of more than 10 pages. This filing is 8 pages. A longer brief would need a generated TOC and TOA; the template does not produce them.
 5. **Page and word limits not checked.** LBR 7007-2(c) (30 pages or 13,000 words for a principal brief) is not measured.
-6. **Type size.** The filed copy is Times 12 and this render is EB Garamond 13 pt, to match apparent size (the same choice cand's templates make). No LBR or FRBP rule sets a type size; 13 pt is a tier-2 judgment.
+6. **Type size.** The filed copy is Times 12 and this render is Times New Roman 12 pt. No LBR or FRBP rule sets a type size; 12 pt is the convention. Until fb-595.68 the template used EB Garamond at 13 pt, to match apparent size.
 7. **Footer and ECF stamp.** The filed copy has a "- n -" page number and an ECF stamp in the footer. The template prints the page number; the ECF stamp is not document text and is not reproduced.
 8. **Alignment.** Body text is left-aligned, not justified. The exemplar's justification is not asserted.
 9. **Heading styles.** The exemplar's heading styles are read from a text layer that carries no bold or underline markup. The choices here (centered bold caps for the main headings; bold, underlined, left-aligned for sub-headings) are a reading of the page image, not a transcription of markup.

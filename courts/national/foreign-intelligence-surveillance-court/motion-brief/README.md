@@ -137,11 +137,10 @@ As above: `typst/fisc-motion-brief.typ`, rendered with `sh tools/render.sh`. Pag
 Build and render:
 
 ```sh
-sh docx/build-reference.sh docx/reference.docx    # pandoc default reference, edited (EB Garamond 12 pt, 24 pt body, 15.6 pt single blocks, footer PAGE field)
 sh tools/render.sh --engine docx courts/national/foreign-intelligence-surveillance-court/motion-brief usage/INPUT-<id>.md
 ```
 
-Files: `docx/build-reference.sh` (writes `reference.docx`; zips with `ziptool`, since `zip` is not installed here), `docx/reference.docx`, `docx/fisc.lua` (the frontmatter becomes the court heading, caption table, title, signature, clearance, verification and certificate; the body keeps its markdown structure).
+fb render (behind `tools/render.sh --engine docx`) builds the reference document from `docx/reference.xml` (pandoc's default reference with the styles replaced: the typst face, Liberation Serif, at 12 pt, 24 pt body, 15.6 pt single blocks, footer PAGE field; `docx/build-reference.sh` did this until fb-595.68), then runs pandoc with the filter. Files: `docx/reference.xml`, `docx/fisc.lua` (the frontmatter becomes the court heading, caption table, title, signature, clearance, verification and certificate; the body keeps its markdown structure).
 
 Matches the typst output (both samples, every page of both renders viewed at 60 dpi): Liberation Serif only (embedded, no system fonts); letter with 1 in margins; body double spaced (exact 24 pt pitch) with a 0.5 in first-line indent, and no indent on the paragraph after a heading or after a block; single blocks at 15.6 pt; caption box with right and bottom rules; bold capitals title; headings bold, numbered I., A., 1.; centered page number; verification and certificate of service each on its own page; 9 pt footnotes. Government sample 4 pages and Yahoo sample 5 pages, as in typst.
 

@@ -6,10 +6,10 @@ Doc type: **motion-brief**: the memorandum of law in support of a motion to dism
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (complete: caption, text, conclusion, signature block, certificate of service) |
-| typeface | Rule names Times New Roman (LR-102.2.b, "Times New Roman or larger typeface"). Substitute: **Liberation Serif** (vendored; metric-compatible per `docs/FONTS.md`, not checked against a Times New Roman file on this box). Text 12 pt, footnotes 10 pt. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: `LiberationSerif`, `-Bold`, `-Italic`), no warnings |
+| typeface | Rule names Times New Roman (LR-102.2.b, "Times New Roman or larger typeface"). Set in **Times New Roman** itself (the pinned files of `docs/FONTS.md` rule 1; Liberation Serif only as fallback), on typst and docx. Text 12 pt, footnotes 10 pt. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, Times New Roman only (`pdffonts`: `TimesNewRomanPSMT`, `-BoldMT`, `-ItalicMT`), no warnings |
 | overlay | ok: `usage/OVERLAY-hylton-motion-brief.pdf` and `usage/OVERLAY-hylton-motion-brief.txt`, against the filed exemplar fetched from the RECAP URL in `usage/SOURCE.md` and checked against its SHA-256 (the exemplar PDF is not committed in this snapshot; it is passed to `tools/overlay.sh` as the third argument) |
-| pages reviewed | 11 of 11 (every page rendered at 70 dpi and viewed after the last template change) |
+| pages reviewed | 11 of 11 on the earlier Liberation Serif render, before fb-595.68 (every page rendered at 70 dpi and viewed) |
 | render command | `sh tools/render.sh courts/fourth-circuit/maryland/federal/district/motion-brief usage/INPUT-motion-brief.md` |
 | overlay command | `sh tools/overlay.sh courts/fourth-circuit/maryland/federal/district/motion-brief hylton-motion-brief` |
 
@@ -25,7 +25,7 @@ Primary sources, fetched 2026-10-14:
 | ID | Rule | Requirement (quoted or closely paraphrased) | Where it lives |
 |---|---|---|---|
 | LR-102.2.a | D. Md. L.R. 102.2.a | "The case caption on all court documents shall contain only a short title, consisting of the names of the first plaintiff and the first defendant only, and the civil action number." | `caption()`: exactly two parties (panics otherwise), then `case_number` |
-| LR-102.2.b | D. Md. L.R. 102.2.b | 8½ × 11 inch paper, one-inch margin on all sides; lines double-spaced except quotations and footnotes; "Pages shall be numbered at the bottom of every page after the first page"; at least 12-point text and 10-point footnotes "in Times New Roman or larger typeface." | `margins`, `line-pitch` (27.6 pt), `page-footer` (no number on physical page 1), `font-family` Liberation Serif, `type-size` 12 pt, `footnote-size` 10 pt, `body-leading` set so double-spaced lines are 27.6 pt (Known gaps 1) |
+| LR-102.2.b | D. Md. L.R. 102.2.b | 8½ × 11 inch paper, one-inch margin on all sides; lines double-spaced except quotations and footnotes; "Pages shall be numbered at the bottom of every page after the first page"; at least 12-point text and 10-point footnotes "in Times New Roman or larger typeface." | `margins`, `pitch-double` (27.6 pt, 2 x the 13.8 pt single line), `page-footer` (no number on physical page 1), `font-family` Times New Roman, `type-size` 12 pt, `footnote-size` 10 pt (Known gaps 1) |
 | LR-102.1.b.i | D. Md. L.R. 102.1.b.i | "At the bottom of all court documents, counsel … shall state their name, address, telephone number, email and fax number. Counsel shall also state their bar number." | `signature-block()` (panics if a field is missing; the fax value is printed as given, so "None" is a valid entry) |
 | LR-102.1.c | D. Md. L.R. 102.1.c | "all court documents other than the original complaint must bear a signed certificate … If a document is filed electronically, the notice of electronic filing constitutes a certificate of service." | `certificate-block()` (optional; the sample carries one because the exemplar has one) |
 | LR-105.1 | D. Md. L.R. 105.1 | "Any motion and opposition to a motion shall be filed with the Clerk and be accompanied by a memorandum setting forth the reasoning and authorities in support of it and a proposed order." | This doc type is the memorandum; the motion, the proposed order and the notice are separate filings (not produced) |
@@ -54,17 +54,17 @@ Not produced by this template: the motion itself (LR 105.1), the proposed order 
 
 ## Overlay
 
-`usage/OVERLAY-hylton-motion-brief.pdf`: red = our render, blue = the filed exemplar, black = both. Pages pair one-to-one here (ours p.n with filed p.n, 38-89% word overlap), because the sample is the whole memorandum. The visible differences are the page-1 page number (the exemplar prints "1"; LR-102.2.b does not), the signature block (the exemplar's "/S/" line and its missing fax line),. The page breaks differ from the exemplar, because the template's spacing is set from the rule rather than from the exemplar. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-hylton-motion-brief.pdf` (measured on the earlier 11-page Liberation Serif render, before fb-595.68): red = our render, blue = the filed exemplar, black = both. Pages pair one-to-one here (ours p.n with filed p.n, 38-89% word overlap), because the sample is the whole memorandum. The visible differences are the page-1 page number (the exemplar prints "1"; LR-102.2.b does not), the signature block (the exemplar's "/S/" line and its missing fax line),. The page breaks differ from the exemplar, because the template's spacing is set from the rule rather than from the exemplar. The overlay is a diagnostic, not a score.
 
 ## Known gaps and open choices
 
-1. **Font and size (LR-102.2.b).** Same as the complaint folder: Liberation Serif (the `docs/FONTS.md` substitute for the Times New Roman the rule names) at 12 pt, footnotes 10 pt. The earlier 13 pt EB Garamond is retired. Double-spaced pitch re-measured at 27.6 pt; single 13.9 pt. The render stays at 11 pages.
+1. **Font and size (LR-102.2.b).** Same as the complaint folder: Times New Roman itself, the face the rule names, at 12 pt, footnotes 10 pt (fb-595.68.18); 27.6 pt double pitch and 13.8 pt single lines set directly. The render is 12 pages. History: a 13 pt EB Garamond stand-in, then Liberation Serif at 12 pt (pitch re-measured at 27.6 pt, single 13.9 pt; 11 pages), then Times New Roman.
 2. **Fax number (LR-102.1.b.i).** The filed signature block has no fax line. The rule asks for one. The sample states "None" so the template's required field is filled; the exemplar itself does not comply on this point, and the README records it rather than inventing a number.
 3. **Page 1 number.** The exemplar prints "1" on page 1. LR-102.2.b says pages are numbered "after the first page"; the template follows the rule and leaves page 1 unnumbered.
 4. **Footnote 3.** The exemplar's footnote 3 marker appears in the text layer with no footnote text, so the sample does not transcribe it.
 5. **Italics.** The text layer has no italic markup. The sample italicises case names and signals (Bluebook style) as the transcriber's choice; the filed document was not checked for italics.
 6. **Certificate of service.** The rule does not require one for an electronically filed paper (the notice of electronic filing is the certificate). The template prints one when `certificate:` is set; the sample carries the exemplar's certificate.
-7. **TOC not exercised by a sample.** The memorandum is 11 pages, so `toc` is off in the sample. The TOC path was tested on a temporary copy of the sample (`toc: true`, 13 pages in total, TOC on one page with roman numbering, body restarting at 1); the temporary file was deleted and no TOC sample is kept.
+7. **TOC not exercised by a sample.** The memorandum is 12 pages, so `toc` is off in the sample. The TOC path was tested on a temporary copy of the sample (`toc: true`, on the earlier Liberation Serif template: 13 pages in total, TOC on one page with roman numbering, body restarting at 1); the temporary file was deleted and no TOC sample is kept.
 7a. **Table of authorities.** Not required by D. Md. L.R. 105.4 (which asks for a table of contents only); not produced.
 8. **One exemplar only.** EVAL-LOOP tier 2 asks for two or three filers. Candidates not saved (Carroll v. Mayor and City Council of Baltimore, 14 pages, and Bland v. Clearone Advantage LLC, 16 pages) are in `usage/SOURCE.md`.
 9. **Gates not run.** As in the complaint folder: `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and the brief forbids editing `tools/`.
@@ -72,7 +72,7 @@ Not produced by this template: the motion itself (LR 105.1), the proposed order 
 11. **Signature line.** The template prints "/s/" where the exemplar prints "/S/" (case only).
 12. **Sample typo (open).** The CONCLUSION in `usage/INPUT-motion-brief.md` (line 124) reads "Educaiton", so the render prints it. It is the sample's transcription, not a template rule, and was left for the transcriber to fix against the filed exemplar.
 
-## Review of the rendered pages (Gate 2 record; all 11 pages at 60 dpi, after the last template change)
+## Review of the rendered pages (Gate 2 record; all 11 pages at 60 dpi, on the earlier Liberation Serif render, before fb-595.68)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -88,16 +88,16 @@ Not produced by this template: the motion itself (LR 105.1), the proposed order 
 | 10 | Third allegation (continued); new defendants; end of Argument B | OK. |
 | 11 | CONCLUSION (A., B.), signature block (right half), CERTIFICATE OF SERVICE with signature line | OK. Transcription typo in the sample text, not the template: "Educaiton" (see Known gaps 12). |
 
-Reviewed pages: 11 of 11 (rendered at 70 dpi, viewed as 2×2 montages after the last template change; the montages are in `/work/artifacts/review`, outside the repo).
+Reviewed pages: 11 of 11 of the earlier Liberation Serif render (rendered at 70 dpi, viewed as 2×2 montages; the montages are in `/work/artifacts/review`, outside the repo).
 
 ## Engines
 
-**typst** is the reference (`typst/`, `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages). **latex**: not built for this doc type. **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/mdd-motion-brief.lua`): built and rendered with LibreOffice (`usage/OUTPUT-motion-brief.docx`, `usage/OUTPUT-motion-brief.docx.pdf`, 12 pages).
+**typst** is the reference (`typst/`, `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages). **latex**: not built for this doc type. **docx** (`docx/reference.xml`, from which `fb render --engine docx` builds the reference document on the shared cross-engine recipe in the typst face; `docx/mdd-motion-brief.lua`; `docx/make-reference.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.18): built and rendered with LibreOffice (`usage/OUTPUT-motion-brief.docx`, `usage/OUTPUT-motion-brief.docx.pdf`, 12 pages, as typst). XENG-001..003 pass (fb-595.68.18).
 
-- *Reviewed:* all 12 pages of the docx PDF at 60 dpi (4 per montage, after the last change), and all 11 typst pages paired beside the docx page at 60 dpi. Pages reviewed: 12 of 12 (docx).
-- *Matches typst (seen on the pages):* the embedded fonts are Liberation Serif regular, bold and italic, as in typst; double spacing at 27.6 pt; 1-inch margins; the cover (court lines, short caption with the first plaintiff and first defendant and the case number, the centered bold title); no page number on page 1, a centered page number from page 2; headings as the template sets them (level 1 centered bold caps, level 2 bold with a hanging indent); footnotes at 10 pt with the rule above them; numbered lists 1., 2., 3. with hanging indent; the signature block in the right half, kept on one page; the certificate of service heading centered and bold.
-- *Differs (tier 2):* pagination. The docx is 12 pages, the typst output 11. The certificate of service sits alone on page 12 because the signature block fills page 11; typst puts the block and the certificate on page 11. Page breaks fall one or two lines apart from typst on most pages (for example, page 7 starts in the middle of Argument B in the docx).
+- *Reviewed (the earlier Liberation Serif docx):* all 12 pages of the docx PDF at 60 dpi (4 per montage), and all 11 typst pages paired beside the docx page at 60 dpi. Pages reviewed: 12 of 12 (docx).
+- *Matches typst (seen on the pages of that docx; the face is now Times New Roman on both, regular, bold and italic):* double spacing at 27.6 pt; 1-inch margins; the cover (court lines, short caption with the first plaintiff and first defendant and the case number, the centered bold title); no page number on page 1, a centered page number from page 2; headings as the template sets them (level 1 centered bold caps, level 2 bold with a hanging indent); footnotes at 10 pt with the rule above them; numbered lists 1., 2., 3. with hanging indent; the signature block in the right half, kept on one page; the certificate of service heading centered and bold.
+- *Differs (tier 2; seen on that earlier docx, not re-checked here; both engines are 12 pages now):* pagination. The docx was 12 pages, the typst output 11. The certificate of service sat alone on page 12 because the signature block filled page 11; typst put the block and the certificate on page 11. Page breaks fell one or two lines apart from typst on most pages (for example, page 7 starts in the middle of Argument B in the docx).
 - *Not verified:* the .docx has not been opened in Word. LibreOffice converted it without error. The zip and XML parts were checked.
-- *Gates:* `tools/check.sh` does not run on this folder (no `court.json`/`rules.md`); the tier-1 items above were checked by eye on the pages.
-- BLOCKED: LR-105.4: the table of contents is not built for docx; `toc: true` makes the build fail with a message. The sample (11 pages in typst) does not need one; a memorandum over fifteen pages cannot be delivered as docx until a TOC is built.
-- *Rebuild:* `sh docx/make-reference.sh`, then `sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/district/motion-brief usage/INPUT-motion-brief.md`.
+- *Gates:* `tools/check.sh` gates both engines on `eval.yaml` (`usage/.check-typst.txt`, `usage/.check-docx.txt`: PASS; typst 9 and docx 13 checks passed, fb-595.68.18).
+- BLOCKED: LR-105.4: the table of contents is not built for docx; `toc: true` makes the build fail with a message. The sample (12 pages) does not need one; a memorandum over fifteen pages cannot be delivered as docx until a TOC is built.
+- *Rebuild:* `sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/district/motion-brief usage/INPUT-motion-brief.md`.

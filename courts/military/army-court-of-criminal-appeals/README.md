@@ -34,7 +34,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../README.md) | [Status table](../../../STATUS.md)
@@ -49,7 +49,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 | Requirement | Rule read | Template face | Status |
 |---|---|---|---|
-| Face named by the rules | ACCA Rules of Appellate Procedure (eff. 15 Jan 2019) R. 13.2 and 17.1(b): "Times New Roman 14-point", double-spaced, 1-inch margins. Read 2026-10-16 from `https://www.jagcnet.army.mil/Home/assets/pdf/court/RulesofCourt.pdf` (Wayback capture 20250729125903). | Liberation Serif 14 pt (`font-family`, `type-size` in each doc type's typst template) | Applied 2026-10-16 (bead fb-595.20.20), typst only. The docx engine still uses EB Garamond 12 pt and must be updated in a docx pass. |
+| Face named by the rules | ACCA Rules of Appellate Procedure (eff. 15 Jan 2019) R. 13.2 and 17.1(b): "Times New Roman 14-point", double-spaced, 1-inch margins. Read 2026-10-16 from `https://www.jagcnet.army.mil/Home/assets/pdf/court/RulesofCourt.pdf` (Wayback capture 20250729125903). | Times New Roman 14 pt, Liberation Serif fallback (`font-family`, `type-size` in each doc type's typst template; the docx `reference.xml` sets the same face and size) | Applied 2026-10-16 (bead fb-595.20.20) in typst as Liberation Serif; now Times New Roman in typst and docx alike (the docx was EB Garamond 12 pt until the fb-595.68 docx pass). |
 
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`

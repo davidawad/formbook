@@ -36,7 +36,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
@@ -51,10 +51,10 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 | Doc type | Face required by the rule | Vendored substitute | Fit |
 |---|---|---|---|
-| complaint | none named (N.D. Ind. L.R. 5-4(a) sets 12-pt body, 10-pt footnotes) | EB Garamond (the no-face default, `docs/FONTS.md`) | n/a |
-| motion-brief | none named (same rule) | EB Garamond (the no-face default, `docs/FONTS.md`) | n/a |
+| complaint | none named (N.D. Ind. L.R. 5-4(a) sets 12-pt body, 10-pt footnotes) | Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6; Liberation Serif fallback), typst and docx alike | n/a |
+| motion-brief | none named (same rule) | Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6; Liberation Serif fallback), typst and docx alike | n/a |
 
-The rule text checked on 2026-10-15 (2016 compilation, the most recent I could retrieve) names no face, so neither template switches font. The filers use Times New Roman; that is a tier-2 difference recorded in each doc type's Known gaps. Checked and recorded: the L.R. 5-4 text is unverified against the current revision.
+The rule text checked on 2026-10-15 (2016 compilation, the most recent I could retrieve) names no face, so both templates use the house standard, Times New Roman (they were EB Garamond before); the filers use Times New Roman too. Checked and recorded: the L.R. 5-4 text is unverified against the current revision.
 
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`

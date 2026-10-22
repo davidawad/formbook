@@ -16,8 +16,8 @@ Verified 2026-10-14.
 | Fed. R. Civ. P. 10(b) (via 7010) | Allegations in numbered paragraphs | Fed. R. Civ. P. 10 | Automatic numbering of body paragraphs |
 | Fed. R. Bankr. P. 9004(b) | Caption: court name, case title, case number and adversary number, designation of the document | https://www.law.cornell.edu/rules/frbp/rule_9004 (Dec. 1, 2024 text) | Caption |
 | S.D. Fla. Bankr. L.R. 9004-1(a)(2) | Margins of at least one inch on top, bottom and both sides | 2026 Local Rules, https://www.flsb.uscourts.gov/sites/flsb/files/local_rules/2026_Local_Rules.pdf, Rule 9004-1, pp. 39–40 | `margin: 1in` |
-| L.R. 9004-1(a)(3) | 12-point font; footnotes may be 10-point | same | `type-size: 12pt` in EB Garamond (vendored) |
-| L.R. 9004-1(a)(4) | Double spacing, except captions, titles, headings, quotations over 50 words, footnotes, signature blocks and certificates of service | same | `body-leading` (24 pt pitch), single spacing for caption and signature |
+| L.R. 9004-1(a)(3) | 12-point font; footnotes may be 10-point | same | `type-size: 12pt` in Times New Roman (the house standard, `docs/FONTS.md` rule 6) |
+| L.R. 9004-1(a)(4) | Double spacing, except captions, titles, headings, quotations over 50 words, footnotes, signature blocks and certificates of service | same | `pitch-double` (24 pt pitch), `pitch-single` (13.8 pt) for caption and signature |
 | L.R. 9004-1(e)(2) | Adversary caption: court name, division line, "In re:" block, plaintiff v. defendant, Adv. No. | same | Caption; the division is a blank line when the sample names none |
 
 PDF text layer: L.R. 9004-1(a)(1) requires text-searchable PDF. Typst output has a text layer (pdftotext returns it; checked).
@@ -44,16 +44,16 @@ File-name note: the brief asked for `usage/<id>.pdf` and `usage/<id>-overlay.pdf
 
 ## Overlay (red/blue test)
 
-`sh tools/overlay.sh` pairs each of our pages with the filed page sharing the most words (`usage/OVERLAY-slott-complaint.txt`). Pairings: ours p.1 → filed p.1 (83.3%), p.2 → p.2 (70.7%), p.3 → p.3 (65.2%), p.4 → p.5 (54.3%), p.5 → p.6 (57.1%). Our pages 4 and 5 pair with later filed pages because our page breaks fall in different places from the exemplar's; the overlay is a word-match diagnostic, not a score, and was not used to set any value.
+`sh tools/overlay.sh` (run on the earlier EB Garamond render, before fb-595.68) pairs each of our pages with the filed page sharing the most words (`usage/OVERLAY-slott-complaint.txt`). Pairings: ours p.1 → filed p.1 (83.3%), p.2 → p.2 (70.7%), p.3 → p.3 (65.2%), p.4 → p.5 (54.3%), p.5 → p.6 (57.1%). Our pages 4 and 5 pair with later filed pages because our page breaks fall in different places from the exemplar's; the overlay is a word-match diagnostic, not a score, and was not used to set any value.
 
 What the rules drive, and the exemplar does not:
 
 - The exemplar has no division line; our caption prints a blank `___________ DIVISION` line, as L.R. 9004-1(e)(2) requires.
-- Body type is 12-point EB Garamond, double-spaced, with 1-inch margins (L.R. 9004-1(a)); the exemplar's own type size and margins were not measured, so the overlay is not evidence for or against them.
+- Body type is 12-point Times New Roman, double-spaced, with 1-inch margins (L.R. 9004-1(a)); the exemplar's own type size and margins were not measured, so the overlay is not evidence for or against them.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and looked at. `pages_reviewed=5`.
+Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and looked at (the earlier 5-page EB Garamond render, before fb-595.68). `pages_reviewed=5`.
 
 | Page | Result |
 |---|---|
@@ -71,7 +71,7 @@ Defects found and fixed while reviewing:
 
 ## Known gaps
 
-- **Length.** The sample renders to 5 pages. The exemplar is 9 pages with two exhibits; its body is 6 pages. The brief's 8–14-page target is not reached because the exemplar is not that long. The sample transcribes the whole body.
+- **Length.** The sample renders to 6 pages (5 on the earlier EB Garamond render). The exemplar is 9 pages with two exhibits; its body is 6 pages. The brief's 8–14-page target is not reached because the exemplar is not that long. The sample transcribes the whole body.
 - **Exhibits A and B** are separate attachments and are not transcribed.
 - **§363(h) quotation** is set as one paragraph, so the exemplar's line structure inside the statute is lost.
 - **Jurisdiction and consent** (FRBP 7008(a)) are in the sample body as text; the template does not check that they are present.
@@ -81,13 +81,13 @@ Defects found and fixed while reviewing:
 
 ## Engines
 
-Word (`docx/`): pandoc with `docx/reference.docx` (built by `docx/make-reference.sh`, from pandoc's default) and `docx/flsb-adversary-complaint.lua`; `docx/render.sh` writes `usage/OUTPUT-adversary-complaint.docx`. Run `sh tools/render.sh --engine docx <this dir> usage/INPUT-adversary-complaint.md`.
+Word (`docx/`): `fb render --engine docx` builds the reference document from `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst template's face; `docx/make-reference.sh` and `docx/render.sh` are retired) and runs pandoc with `docx/flsb-adversary-complaint.lua`; it writes `usage/OUTPUT-adversary-complaint.docx` and the LibreOffice `usage/OUTPUT-adversary-complaint.docx.pdf`. Run `sh tools/render.sh --engine docx <this dir> usage/INPUT-adversary-complaint.md`.
 
-What matches the typst output: EB Garamond 12 pt; 1-inch margins on letter paper; double spacing (24 pt exact) for body paragraphs with a half-inch first-line indent; single-spaced caption, title, signature block and block quotations; 10-point footnotes; centered page number; the caption (court, division or blank line, debtor, parties, case and adversary numbers) as a borderless table; paragraph numbers 1 to 28 with the opening paragraph and WHEREFORE unnumbered; lettered items (a)–(f) at a half-inch left indent; headings kept with the next paragraph.
+What matches the typst output (recorded before fb-595.68; the face is now that of `docx/reference.xml`): Times New Roman 12 pt; 1-inch margins on letter paper; double spacing (24 pt exact) for body paragraphs with a half-inch first-line indent; single-spaced caption, title, signature block and block quotations; 10-point footnotes; centered page number; the caption (court, division or blank line, debtor, parties, case and adversary numbers) as a borderless table; paragraph numbers 1 to 28 with the opening paragraph and WHEREFORE unnumbered; lettered items (a)–(f) at a half-inch left indent; headings kept with the next paragraph.
 
-What differs: paragraph numbers and lettered markers are typed text, not Word list numbering; Word's line breaking may differ from the LibreOffice PDF. The EB Garamond font must be installed on the machine that opens the file, or Word substitutes another face.
+What differs: paragraph numbers and lettered markers are typed text, not Word list numbering; Word's line breaking may differ from the LibreOffice PDF. The Times New Roman font must be installed on the machine that opens the file, or Word substitutes another face.
 
-docx BLOCKED (not verified; see docs/DOCX.md):
+docx BLOCKED (not verified; see docs/DOCX.md; recorded before fb-595.68, when `soffice` was not available here):
 - `docx.pdf` gates (all of `tools/check.sh --engine docx`, which measure the LibreOffice PDF): BLOCKED: LibreOffice (`soffice`) is not installed in this environment and is not in conda-forge, so `usage/OUTPUT-slott-complaint.docx.pdf` was not produced and no page was rendered or reviewed. `tools/check.sh` also cannot run here yet (it needs `yq`, `checks.yaml` and `court.json` for this doc type).
 - The `.docx` itself was written and its XML parts are well-formed (`unzip -t`, `xmllint`). It has not been opened in Word or LibreOffice, so "opens without a repair prompt" is unchecked.
 

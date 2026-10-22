@@ -13,7 +13,7 @@
 | `typst/main.typ` | Entry point; reads `--input sample=...`, splits frontmatter from body, calls `mab-adversary-complaint`. |
 | `typst/mab-adversary-complaint.typ` | Template. Parameters at the top, each tied to a rule. Caption, numbered paragraphs, tables, lists, signature, date. |
 | `usage/INPUT-adversary-complaint.md` | Markdown sample: YAML frontmatter (division, debtor, chapter, case number, parties, title, date, signature groups) and the body. |
-| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/first-circuit/massachusetts/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md` (4 pages). |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/first-circuit/massachusetts/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md` (5 pages; 4 on the earlier EB Garamond render, before fb-595.68). |
 | `usage/OVERLAY-lassman-adversary-complaint.pdf`, `.txt` | `sh tools/overlay.sh courts/first-circuit/massachusetts/federal/bankruptcy-district/adversary-complaint lassman-adversary-complaint` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -37,18 +37,18 @@ Verification date: 2026-10-14. Each rule was read from the source named.
 | MLBR Appendix 8, (c) | Body at least 12-point; footnotes at least 10-point; plain roman type (italics or bold for emphasis) | `type-size = 12pt`, `footnote-size = 10pt` (no footnotes in this complaint) | Same. |
 | Division names | Eastern, Central and Western divisions | `division` frontmatter, printed in the caption | The three divisions are listed in the front matter of the MLBR PDF (same source as above). Rule 5001-1 itself was not read. |
 
-Typeface (checked 2026-10-14): face required: none. MLBR Appendix 8(c) says "a plain, Roman Type" at 12 pt body and 10 pt footnotes, and names no face. The May 1, 2025 MLBR text and Appendix 8 were searched for Times, Helvetica, Arial, Garamond, Century, Georgia, Courier and "font"; none names a face. Standing orders were not checked. Vendored substitute: none needed; the template keeps **EB Garamond** (`fonts/eb-garamond/`), the "No face named" row of `docs/FONTS.md`. Fit: n/a. The filed exemplar is set in Times New Roman (`pdffonts`), and the template does not reproduce it, since the rules leave the face open.
+Typeface (checked 2026-10-14): face required: none. MLBR Appendix 8(c) says "a plain, Roman Type" at 12 pt body and 10 pt footnotes, and names no face. The May 1, 2025 MLBR text and Appendix 8 were searched for Times, Helvetica, Arial, Garamond, Century, Georgia, Courier and "font"; none names a face. Standing orders were not checked. Vendored substitute: none needed; the template is set in **Times New Roman**, the house standard (`docs/FONTS.md` rule 6; before fb-595.68 it kept EB Garamond, the "No face named" default). Fit: n/a. The filed exemplar is set in Times New Roman (`pdffonts`) too; the rules leave the face open.
 
 ## Overlay
 
-`usage/OVERLAY-lassman-adversary-complaint.pdf` puts our render (red) over the best-matching exemplar page (blue). Pages are paired by word overlap. Diagnostic only, not a score. Pairings from the last run:
+`usage/OVERLAY-lassman-adversary-complaint.pdf` puts our render (red) over the best-matching exemplar page (blue). Pages are paired by word overlap. Diagnostic only, not a score. Pairings from the last run (on the earlier EB Garamond render, before fb-595.68):
 
-- ours p.1 ↔ filed p.1 (69%): caption, title, Parties. The filed caption is set in Times and has the ECF header; ours is in EB Garamond with the same layout.
+- ours p.1 ↔ filed p.1 (69%): caption, title, Parties. The filed caption is set in Times and has the ECF header; ours was then in EB Garamond with the same layout.
 - ours p.2 ↔ filed p.2 (61%): Jurisdiction and Venue, General Allegations, the transfer table.
 - ours p.3 ↔ filed p.3 (44%): paragraphs 13-23 and Count I against the same passages in the filing, with different line breaks. Our numbering is one higher than the filing from paragraph 5 onward because of the added consent paragraph (Gaps, 1).
 - ours p.4 ↔ filed p.4 (41%): WHEREFORE, signature, date. The filed signature block is on p. 5 (the filed p.4 holds the prayer and the last count paragraphs), so the pairing is one page off, as expected from a 4-page render of a 5-page filing.
 
-## Page review (Gate 2)
+## Page review (Gate 2; the earlier EB Garamond render, before fb-595.68)
 
 Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and viewed (4 of 4). Typst printed no warnings. Fonts embedded: EB Garamond Regular and Bold only.
 
@@ -66,7 +66,7 @@ No OPEN findings on this doc type. The filed document's ECF stamp and the Times 
 1. **Consent paragraph added to the sample.** The filed complaint (Doc. 1) has no FRBP 7008(a) consent statement. The template requires one, so the sample has the sentence "The Trustee does not consent to the entry of final orders or judgment by the bankruptcy court." as paragraph 5. The position it takes is a placeholder chosen for the test sample, not a decision for the filer; the filer must choose. Because the paragraph is added, numbering from paragraph 5 on is one higher than the exemplar.
 2. **Adversary cover sheet (MLBR 7003-1, Director's Form B1040) is not produced.** The filer attaches it. The RECAP entry for Doc. 1 lists "Adversary Proceeding Cover Sheet" as Attachment 1; it is not in the exemplar file and not transcribed.
 3. **ECF header and footer** ("Case 26-01083 Doc 1 Filed ... Desc Main") are system stamps and are not reproduced.
-4. **Typeface** is EB Garamond (the only vendored face), not Times New Roman as in the exemplar. Appendix 8(c) allows any plain roman at 12 pt or larger.
+4. **Typeface** is Times New Roman, as in the exemplar (`docs/FONTS.md` rule 6; EB Garamond, then the only vendored face, before fb-595.68). Appendix 8(c) allows any plain roman at 12 pt or larger.
 5. **Signature** uses the `/s/` form and the typed name, as the exemplar does. A search summary said Standing Order 2024-04 requires an imaged signature under "Appendix 8, Rule 7". The Appendix 8 copy read here has only subsections (a) to (c), so that point is unverified and the template does not check it.
 6. **Footnotes** are supported (footnote definitions are passed to the chunk that cites them) but the complaint sample has none; the footnote path is exercised only by the motion sample.
 7. **Jury demand** is not supported. The exemplar has none; a demand would need a heading and the MLBR 9015-1 timing.
@@ -76,8 +76,8 @@ No OPEN findings on this doc type. The filed document's ECF stamp and the Times 
 
 ## Engines
 
-Typst is the primary engine. The DOCX engine (`docx/`: `reference.docx` from `build-reference.sh`, `mab.lua` for the cover, caption, signature and numbering, `render.sh` for the section, footers and numbering part) is checked on the LibreOffice PDF of the `.docx`, as `docs/DOCX.md` describes.
+Typst is the primary engine. The DOCX engine (`docx/`: `reference.xml`, from which `fb render --engine docx` builds the reference document on the shared cross-engine recipe in the typst template's face, with the footer parts (page numbers from page 2); `mab.lua` for the cover, caption, signature and numbering; until fb-595.68 a committed EB Garamond `reference.docx` from `build-reference.sh` and a `render.sh` for the section, footers and numbering part, since retired into fb render) is checked on the LibreOffice PDF of the `.docx`, as `docs/DOCX.md` describes.
 
-- **Matches the typst output:** EB Garamond 12 pt body (embedded in the docx PDF); exact 24 pt line pitch; 0.5 in first-line indent; 1 in margins on Letter; caption with the right and bottom rules; numbered allegations from 1 with the prayer and the "Respectfully Submitted" block unnumbered; the signature block at 3.1 in, kept on one page; page numbers from page 2 with an empty first-page footer; headings centered and bold; the transfer table.
-- **Differs (tier 2, not tier 1):** the docx runs to 5 pages where the typst render runs to 4, because the docx signature block moves whole to page 5. The transfer table has Word's default grid rules and sits flush left, where typst has no rules and indents it to the paragraph text. The prayer list uses Word's default list indent. Word may paginate differently from LibreOffice.
+- **Matches the typst output:** Times New Roman 12 pt body (embedded in the docx PDF); exact 24 pt line pitch; 0.5 in first-line indent; 1 in margins on Letter; caption with the right and bottom rules; numbered allegations from 1 with the prayer and the "Respectfully Submitted" block unnumbered; the signature block at 3.1 in, kept on one page; page numbers from page 2 with an empty first-page footer; headings centered and bold; the transfer table.
+- **Differs (tier 2, not tier 1; recorded on the earlier EB Garamond build, before fb-595.68; the committed typst and docx renders are now 5 pages each):** the docx runs to 5 pages where the typst render runs to 4, because the docx signature block moves whole to page 5. The transfer table has Word's default grid rules and sits flush left, where typst has no rules and indents it to the paragraph text. The prayer list uses Word's default list indent. Word may paginate differently from LibreOffice.
 - **DOCX BLOCKED items:** none for this doc type. Not run in this box: `sh tools/check.sh <dir> --engine docx` (the gates were not executed here), and opening the `.docx` in Microsoft Word (only LibreOffice 26.8.1 was available).

@@ -7,10 +7,10 @@ Folder: `courts/first-circuit/new-hampshire/federal/district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md`: the whole 14-page complaint, transcribed from the text layer |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 14 pages, typst 0.15.0, Times New Roman only (`pdffonts`), no warnings |
 | overlay | ok: `usage/OVERLAY-nicholas-complaint.pdf` and `OVERLAY-nicholas-complaint.txt` |
-| typeface | Rule names no face (LR 5.1(a): "a proportionately spaced font ... no less than twelve (12) point"; no typeface named in the section). Vendored substitute: none needed. Kept **EB Garamond** (`fonts/eb-garamond/`). Not metric-compatible with the filing's Times New Roman; not chased (tier 3). |
-| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-14 with no template change) |
+| typeface | Rule names no face (LR 5.1(a): "a proportionately spaced font ... no less than twelve (12) point"; no typeface named in the section). Set in **Times New Roman** 12 pt, the house standard (`docs/FONTS.md` rule 6; Liberation Serif as fallback), the filing's face too; EB Garamond before 2026-10-17 (the docx until fb-595.68.17). |
+| pages reviewed | 14 of 14 on the earlier EB Garamond render, before fb-595.68 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-14 with no template change) |
 
 ## Governing rules
 
@@ -18,7 +18,7 @@ Primary sources, verified 2026-10-14:
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| D.N.H. LR 5.1(a) (2025 Local Rules, as amended through 2025-12-01; https://www.nhd.uscourts.gov/pdf/2025%20Local%20Rules%20-%20District%20of%20New%20Hampshire.pdf, linked from https://www.nhd.uscourts.gov/local-rules-0) | 8 1/2 x 11 paper; typewritten or clearly legible; 12-point type or larger if proportionally spaced; one-inch margins; consecutively numbered at the bottom center; double spaced except quoted material; footnotes sparingly. | `paper: "us-letter"`, `margin: 1in`, `type-size = 12pt`, `body-leading = 1.65em` (27.6 pt pitch: 2 x the 13.8 pt single line), footer page number centered. |
+| D.N.H. LR 5.1(a) (2025 Local Rules, as amended through 2025-12-01; https://www.nhd.uscourts.gov/pdf/2025%20Local%20Rules%20-%20District%20of%20New%20Hampshire.pdf, linked from https://www.nhd.uscourts.gov/local-rules-0) | 8 1/2 x 11 paper; typewritten or clearly legible; 12-point type or larger if proportionally spaced; one-inch margins; consecutively numbered at the bottom center; double spaced except quoted material; footnotes sparingly. | `paper: "us-letter"`, `margin: 1in`, `type-size = 12pt`, `pitch-double = 27.6pt` (2 x the 13.8 pt single line), footer page number centered. |
 | LR 5.1(b) | Attorney name, address, primary telephone, e-mail and NH bar number on all filings; bar number immediately after the typed name in the signature section. | `signature` frontmatter (`blocks`), `signature-block()`. |
 | LR 5.1(c) | Caption, description of the contents, and the party filing; the docket number with the judge's initials suffix on filings after the initial one. | `caption` (court title, party block, `case_number`), `title`. The suffix is not added by the template (see Known gaps). |
 | LR 3.1(b) | Initial filing accompanied by a civil cover sheet (JS-44). | Not produced: separate form (see Known gaps). |
@@ -46,13 +46,13 @@ Not produced (separate filings): the civil cover sheet (LR 3.1(b)); the summons 
 
 ## What the overlay shows
 
-`OVERLAY-nicholas-complaint.pdf` is red (our render) on blue (the filed PDF), black where both agree. The sample is the whole filing. Pages 1 to 6 pair one to one. From page 7 our pages pair with the filed page one earlier (ours p.7 with filed p.6, ours p.13 with filed p.12): our pagination runs a little longer, so the text pairs with the page that shares most words. Page 14 pairs with 14. The `.txt` lists the pairing and word overlap. Overlap percentages are word-level and are not a score.
+`OVERLAY-nicholas-complaint.pdf` (measured on the earlier EB Garamond render, before fb-595.68) is red (our render) on blue (the filed PDF), black where both agree. The sample is the whole filing. Pages 1 to 6 pair one to one. From page 7 our pages pair with the filed page one earlier (ours p.7 with filed p.6, ours p.13 with filed p.12): our pagination runs a little longer, so the text pairs with the page that shares most words. Page 14 pairs with 14. The `.txt` lists the pairing and word overlap. Overlap percentages are word-level and are not a score.
 
 ## Known gaps and open choices
 
 1. **One exemplar, not 2 or 3 filers.** EVAL-LOOP's tier-2 rule asks for two or three filers. The search (CourtListener RECAP, `type=rd`, `court=nhd`, `q=complaint`, newest first, 2026-10-14) returned 20 hits on its first page; only this one had a stored PDF, with a text layer and attorney counsel. The other hits had no stored PDF. Later pages were not checked. Tier 2 is therefore **not** judged against two filers.
-2. **Font.** The filing is Times New Roman, but the rule does not require it: LR 5.1(a) names no typeface, so the fonts policy (`docs/FONTS.md`, rule 3) keeps EB Garamond. At 12 pt EB Garamond has a smaller x-height, so the text looks smaller than the exemplar. The 12-point minimum is met. Matching the filer's Times would be tier 3 and is not chased.
-3. **Double spacing.** Measured in EB Garamond: its line box is 0.65 em, and `1.65em` leading gives a 27.6 pt pitch, the same as Times 12 pt double spaced (2 x 13.8 pt). The render is 14 pages, the same page count as the filing.
+2. **Font.** LR 5.1(a) names no typeface. The template is Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6, David 2026-10-17), as is the filing; it was EB Garamond before 2026-10-17 (the docx until fb-595.68.17). The 12-point minimum is met.
+3. **Double spacing.** The template sets the 27.6 pt pitch directly (`pitch-double`, 2 x the 13.8 pt single line, Times 12 pt double spaced); on the earlier EB Garamond template it came from `1.65em` leading. The render is 14 pages, the same page count as the filing.
 4. **Footnotes are not transcribed.** The filing has footnotes 1 and 2 (pp. 1 and 4). The markdown contract has no footnotes, so their text is absent from the sample and the overlay shows the difference.
 5. **Lettering of the prayer items.** The filing letters the prayer A to D; the template letters every list (a), (b), .... Tier 2, minor; recorded as ACCEPTED.
 6. **Caption style.** The party block is not closed by ")" marks; the filing's caption is as transcribed (no rules). Recorded as ACCEPTED.
@@ -65,6 +65,8 @@ Not produced (separate filings): the civil cover sheet (LR 3.1(b)); the summons 
 
 ## Review of the rendered pages (`OUTPUT-complaint.typst.pdf`, 60 dpi)
 
+On the earlier EB Garamond render, before fb-595.68 (14 pages then and now).
+
 - Page 1: court title, caption (party block; `C.A. No.`, `JURY TRIAL DEMANDED`), title, lead-in, procedural background (paragraph 1), page number. No spill. Pass.
 - Pages 2 to 4: jurisdiction and venue, parties (paragraphs 2 to 15), facts with Part I (`I. FEDEX CONTRACTS ...`) heading on page 4 with its paragraph (kept together). Pass.
 - Pages 5 to 7: lettered lists under paragraphs 25 to 27 (a)–(t) wrap with hanging indent; no overlap. Pass.
@@ -76,9 +78,9 @@ Defects found in review and fixed (kept here so the template does not regress): 
 
 ## Engines
 
-docx (`docx/build-reference.sh` builds `docx/reference.docx`; filter `docx/nhd-complaint.lua`): `usage/OUTPUT-complaint.docx` and `OUTPUT-complaint.docx.pdf` (LibreOffice conversion). Matches typst: EB Garamond 12 pt; exact 27.6 pt body pitch; 0.5 in first-line indent; the caption; numbered allegations; lettered lists; the signature block at the 3.25 in indent; centered page number. Page count matches (14 and 14). Word was not available; the file was checked with LibreOffice only.
+docx (`fb render --engine docx`, via `sh tools/render.sh --engine docx <dir> usage/INPUT-complaint.md`, builds the reference document from `docx/reference.xml`, the shared cross-engine recipe in the typst face; filter `docx/nhd-complaint.lua`): `usage/OUTPUT-complaint.docx` and `OUTPUT-complaint.docx.pdf` (LibreOffice conversion). Matches typst: Times New Roman 12 pt; exact 27.6 pt body pitch; 13.8 pt single lines; 0.5 in first-line indent; the caption; numbered allegations; lettered lists; the signature block at the 3.25 in indent; centered page number. Page count matches (14 and 14); XENG-001..003 pass (333/333 lines, fb-595.68.17). Word was not available; the file was checked with LibreOffice only.
 
-- BLOCKED: prayer lead-in split from its items. In the docx, "WHEREFORE, Plaintiff ... seeks the following relief:" ends page 13 and items (a) to (d) start page 14; typst keeps the lead-in with its items on page 13. Keep-with-next is not applied to this lead-in.
-- Line wraps differ slightly from typst on most pages, and so do some page breaks; the page count is the same.
+- BLOCKED on the earlier EB Garamond docx (then built by `docx/build-reference.sh`, since retired into fb render; not re-checked here): prayer lead-in split from its items. In the docx, "WHEREFORE, Plaintiff ... seeks the following relief:" ends page 13 and items (a) to (d) start page 14; typst keeps the lead-in with its items on page 13. Keep-with-next is not applied to this lead-in.
+- On that earlier docx, line wraps differed slightly from typst on most pages, and so did some page breaks; the page count was the same.
 
 [Formbook index](../../../../../../README.md)

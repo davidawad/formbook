@@ -7,10 +7,10 @@ Folder: `courts/fourth-circuit/south-carolina/federal/bankruptcy-district/motion
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: the whole 8-page filing transcribed (SC LBR 7012-1 notice, caption, motion, facts, argument with A./B. and 1./2. sub-headings, footnote 1, conclusion, signature) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> usage/INPUT-motion-brief.md`) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, Times New Roman only (`pdffonts`), no warnings (`sh tools/render.sh <this-dir> usage/INPUT-motion-brief.md`) |
 | overlay | ok: `usage/OVERLAY-ard-zeidmans.pdf` and `usage/OVERLAY-ard-zeidmans.txt` (`sh tools/overlay.sh <this-dir> ard-zeidmans`) |
-| typeface | face required: **none** (the FRBP and the SC LBR cited below name no typeface; the exemplar's Times New Roman is a filer's choice, which the rules do not require). Vendored substitute: **EB Garamond** (kept, no court face). Fit: n/a. Re-checked 2026-10-14 in the fonts pass: `pdffonts` shows only EB Garamond embedded. The SC LBR PDF could not be read through WebFetch that day, so its no-typeface reading rests on the 2026-10-14 fetch recorded below, not on a re-read. |
-| pages reviewed | 8 of 8 (every page rasterized at 60 dpi and viewed after the last template change; re-viewed 2026-10-14 in the fonts pass) |
+| typeface | face required: **none** (the FRBP and the SC LBR cited below name no typeface; the exemplar's Times New Roman is a filer's choice, which the rules do not require). Template face: **Times New Roman** 12 pt, the house standard where no face is named (`docs/FONTS.md` rule 6; Liberation Serif as fallback), on typst and docx; EB Garamond before 2026-10-17 (the docx until fb-595.68.19). Fit: n/a. The fonts pass of 2026-10-14 (`pdffonts`: only EB Garamond embedded) was on the earlier render. The SC LBR PDF could not be read through WebFetch that day, so its no-typeface reading rests on the 2026-10-14 fetch recorded below, not on a re-read. |
+| pages reviewed | 8 of 8 on the earlier EB Garamond render, before fb-595.68 (every page rasterized at 60 dpi and viewed; re-viewed 2026-10-14 in the fonts pass) |
 
 File names: as in `adversary-complaint/README.md` (the sample is `<id>.md` as the brief asked; the render and overlay use `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, which `tools/overlay.sh` requires).
 
@@ -36,7 +36,7 @@ Not generated: a proposed order (SC LBR 9013-1(a) asks for one with non-adversar
 - Page: US Letter, 1-inch margins, page number centered at the foot. No pleading-paper line numbers (no SC bankruptcy rule requires them).
 - Caption: a ")" column, one row per line. Left: party names; right-aligned designations ("Debtors.", "Plaintiff,", "Defendant.") and an indented "v." (a left entry starting with `~` or `>`). Middle: a ")" on every row. Right: chapter, case number, adversary number. The caption is repeated on the notice page and on the motion's first page, as in the exemplar.
 - Title: bold, centered, caps, under the caption.
-- Body: double spacing at a 24 pt line pitch (`body-leading` 0.54em at 13 pt). Paragraphs have a 0.5 inch first-line indent.
+- Body: double spacing at a 24 pt line pitch (`pitch-body`); single lines 16.2 pt (`pitch-single`). Paragraphs have a 0.5 inch first-line indent.
 - Facts: a `##` heading whose text starts with the frontmatter value of `numbered_section` ("FACTS") opens numbered paragraphs (1., 2., ...), which the template numbers. Argument prose is not numbered.
 - Headings: `##` centered bold caps. `###` is a bold hanging sub-heading labelled A., B., ...; `####` is labelled 1., 2., ... Labels are drawn by the template.
 - Lists: lettered a), b), ... (the exemplar's form).
@@ -54,17 +54,17 @@ Not generated: a proposed order (SC LBR 9013-1(a) asks for one with non-adversar
 ## Known gaps and open choices
 
 1. **One exemplar only.** The second filer found (*Milledge v. Carolina Acceptance*, Adv. No. 22-80001-jw, Doc 23, 7 pp., 2022, Moore Bradley Myers) is recorded in `usage/SOURCE.md`, not saved. Tier-2 comparison against two or three filers is **not** done.
-2. **Typeface and size.** As in the complaint: the rules name none; EB Garamond at 13 pt; the exemplar is Times New Roman. A choice for David.
+2. **Typeface and size.** As in the complaint: the rules name none; the template is Times New Roman 12 pt (`docs/FONTS.md` rule 6), as is the exemplar; it was EB Garamond 13 pt before 2026-10-17 (the docx until fb-595.68.19).
 3. **Certificate of service (SC LBR 9013-3(a)) is not generated.** The rule requires one with every motion. The exemplar as filed (8 pages) has no certificate, so the filing either carried it as a separate docket entry or missed it. The template does not produce one; a filing needs its certificate added as a separate document or a template section. This is an open item for David: whether the template should produce a certificate by default.
 4. **Notice page signature.** The notice's signature block falls alone on page 2, as in the exemplar (its page 2 also opens with the BEST LAW signature block). Kept as the filed layout.
 5. **Paragraph numbers differ from the filing.** The filed facts are numbered 1 to 7, then the list, then 2, 3, 4 again (a restart in the filing). The template numbers the facts 1 to 12 in sequence. The sample's text is the filing's text; only the numbers differ.
-6. **Title line.** The filed title fits one line at Times 12 pt; the template's bold caps at 13 pt wrap to two lines.
+6. **Title line.** The filed title fits one line at Times 12 pt; the template's bold caps at 13 pt wrapped to two lines on the earlier EB Garamond render (not re-checked at 12 pt Times New Roman).
 7. **Page numbers.** The filed copy shows only the CM/ECF header ("Case 25-80005-jd Doc 9 Filed ... Page N of 8"), which is not reproduced. The template prints a centered page number, a convention rather than a rule.
 8. **Page limit.** SC LBR 9013-2 sets no page limit for an adversary motion in the 2026 text read. Not checked.
 9. **Judge's standing orders** can change the form. Not reflected.
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and `tools/` was not to be edited. Render and overlay were run; the review above is the page-by-page check.
 
-## Review of the rendered pages (current PDF, 60 dpi)
+## Review of the rendered pages (60 dpi; the earlier EB Garamond render, before fb-595.68)
 
 - Page 1: SC LBR 7012-1 notice. Caption (")" style), notice title, "TO:" line, notice text. Pass.
 - Page 2: notice signature block alone (as the filed copy). Pass, see gap 4.
@@ -81,11 +81,11 @@ Gate 2 rows: the review above. There is no `reviews/` folder for this doc type.
 
 ## Engines
 
-**docx** (`docx/`; `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf`, 8 pages in LibreOffice). `sh docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt; body at a 24 pt exact pitch; single lines at 19.56 pt exact; 1-inch margins; centered PAGE footer at 12 pt). `docx/scb-motion-brief.lua` builds the caption (")" column), the title line, the SC LBR 7012-1 notice page, the facts numbered inside the `numbered_section`, the A./1. headings, the lettered lists, footnotes (native), and the signature block kept with the last two blocks. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-motion-brief.md`.
+**docx** (`docx/`; `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf`, 8 pages in LibreOffice, as typst). `fb render --engine docx` builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst face: Times New Roman 12 pt; body at a 24 pt exact pitch; single lines at 16.2 pt; 1-inch margins; the centered page number where typst sets it); `docx/make-reference.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.19. XENG-001..003 pass, and `tools/check.sh --engine docx` passes on `eval.yaml` (`usage/.check-docx.txt`: PASS). `docx/scb-motion-brief.lua` builds the caption (")" column), the title line, the SC LBR 7012-1 notice page, the facts numbered inside the `numbered_section`, the A./1. headings, the lettered lists, footnotes (native), and the signature block kept with the last two blocks. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-motion-brief.md`.
 
-Matches typst: typeface and size, margins, the 24 pt body pitch, the ")" caption and its rows (17 pt), the title line, the notice page (the notice text runs onto page 2 in the docx, with its signature block there; typst leaves the signature block alone on page 2, as its gap 4 records), facts numbering, A./1. heading labels, the lettered lists, the footnote, block quotations, the centered page number.
+Matches typst (seen on the earlier EB Garamond docx): typeface and size, margins, the 24 pt body pitch, the ")" caption and its rows (17 pt), the title line, the notice page (the notice text runs onto page 2 in the docx, with its signature block there; typst leaves the signature block alone on page 2, as its gap 4 records), facts numbering, A./1. heading labels, the lettered lists, the footnote, block quotations, the centered page number.
 
-Differs:
+Differed on that earlier docx (recorded then; not re-checked here, except that fb-595.68.19 put the court's name above the caption in typst too):
 - Court title: the docx prints the court name above the caption on the notice page and on the motion (Fed. R. Bankr. P. 9004(b)(1) requires the court's name in the caption). The typst render does not: `motion-part` and `notice-part` in `typst/scb-motion-brief.typ` call only `caption(meta)`, and `court-title` is defined but never called. This is a typst defect for David to decide; `typst/` was not edited.
 - Page breaks: 8 pages in both, but the breaks fall in different places, for the same paragraph-spacing reason as the complaint (typst's paragraph-to-paragraph pitch is about 17 pt; the docx keeps 24 pt).
 - Numbered facts: typst puts the number at 0.5 in and the text 0.93 in from the margin for a one-digit number (measured); the docx uses a 1.00 in tab stop, so one-digit facts sit 0.07 in further right.
@@ -93,9 +93,9 @@ Differs:
 - Certificate of service (SC LBR 9013-3(a)): not generated in either engine (typst gap 3).
 - Word: not opened (no Word on this machine). LibreOffice converted the file without error, and `unzip -tq` and `xmllint --noout` pass on every XML part.
 
-No BLOCKED items. The court folder has no check IDs for this doc type, and no docx-only limit fails a requirement of the form.
+No BLOCKED items. No docx-only limit fails a requirement of the form.
 
-Pages reviewed: 8 of 8 of `usage/OUTPUT-motion-brief.docx.pdf`, each viewed at 60 dpi beside the typst render (`/tmp/scb-motion-brief/typst.pdf`, not in the repo), and line positions checked with `pdftotext -bbox-layout`.
+Pages reviewed: 8 of 8 of the earlier EB Garamond `usage/OUTPUT-motion-brief.docx.pdf`, each viewed at 60 dpi beside the typst render (`/tmp/scb-motion-brief/typst.pdf`, not in the repo), and line positions checked with `pdftotext -bbox-layout`.
 
 ## Reproduce
 

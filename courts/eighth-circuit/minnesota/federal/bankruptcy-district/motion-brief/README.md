@@ -13,7 +13,7 @@
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `mnb-motion-brief`. |
 | `typst/mnb-motion-brief.typ` | Template. Caption, notice and motion (numbered paragraphs), memorandum part split at `<!-- memorandum -->`, verification, signature block from frontmatter. |
 | `usage/INPUT-motion-brief.md` | Markdown contract sample: YAML frontmatter (notice title, memorandum title, lead-in, caption, date, signature) plus the body. |
-| `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh courts/eighth-circuit/minnesota/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md` (11 pages, typst 0.15.0, no warnings). |
+| `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh courts/eighth-circuit/minnesota/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md` (14 pages; 11 on the earlier EB Garamond render; typst 0.15.0, no warnings). |
 | `usage/OVERLAY-mend-motion-to-convert.pdf`, `.txt` | `sh tools/overlay.sh <this folder> mend-motion-to-convert`. Red = our render, blue = filed exemplar, black = both agree. |
 | `usage/` | The filed motion and `SOURCE.md`. |
 
@@ -51,7 +51,7 @@ The exemplar's proposed order (filed p.17) has no counterpart in the sample.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 70 dpi and viewed (11 of 11) as PNG. Pages 5 and 10 were also rendered at 150 dpi and the foot of each viewed. The overlay sheet was viewed as a contact sheet (all 11 pages present). The comparison against the filed pages is the overlay pairing above; no separate side-by-side images were made in this pass.
+Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 70 dpi and viewed (11 of 11, on the earlier EB Garamond render) as PNG. Pages 5 and 10 were also rendered at 150 dpi and the foot of each viewed. The overlay sheet was viewed as a contact sheet (all 11 pages present). The comparison against the filed pages is the overlay pairing above; no separate side-by-side images were made in this pass.
 
 | Page | Content | Result |
 |---|---|---|
@@ -88,19 +88,19 @@ Tier-2 findings (OPEN or ACCEPTED): pages 5 and 10 (OPEN). The bottom margin is 
 | latex | `latex/` | none | not built |
 | docx | `docx/` | `OUTPUT-motion-brief.docx`, `OUTPUT-motion-brief.docx.pdf` | built (below) |
 
-The docx build: `sh tools/render.sh --engine docx motion-brief usage/INPUT-motion-brief.md`. It runs `docx/render.sh` (pandoc, the Lua filter `docx/mnb-motion-brief.lua`, and `docx/reference.docx`). `docx/make-reference.sh` rebuilds the reference. The PDF is LibreOffice 26.8.1 with the vendored fonts only.
+The docx build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`. `fb render` builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst face) and runs pandoc with the Lua filter `docx/mnb-motion-brief.lua` (until fb-595.68, `docx/render.sh` and `docx/make-reference.sh` with a committed `reference.docx`). The PDF is LibreOffice's; the committed `usage/.check-docx.txt` reads PASS.
 
-What matches the typst output: letter paper with 1 in margins; EB Garamond 12 pt, embedded and the only font; body double-spaced at a 24 pt line pitch with a half-inch first-line indent; numbered notice paragraphs and unnumbered memorandum paragraphs; the caption (court title, debtor box with 0.75 pt rules, indented "Debtor.", the centred bold title); the notice's signature block with its firm lines and "By: /s/"; the verification and its signature; the memorandum on a new page with its own caption; block quotations single-spaced and indented; lettered lists; centred bold section headings; a centred page number in the footer. The notice runs 8 pages and the memorandum 3, as in typst (11 in both).
+What matches the typst output: letter paper with 1 in margins; Times New Roman 12 pt, embedded and the only font; body double-spaced at a 27.6 pt line pitch with a half-inch first-line indent; numbered notice paragraphs and unnumbered memorandum paragraphs; the caption (court title, debtor box with 0.75 pt rules, indented "Debtor.", the centred bold title); the notice's signature block with its firm lines and "By: /s/"; the verification and its signature; the memorandum on a new page with its own caption; block quotations single-spaced and indented; lettered lists; centred bold section headings; a centred page number in the footer. Both engines are 14 pages (on the earlier EB Garamond build the notice ran 8 pages and the memorandum 3, as in typst, 11 in both).
 
-What differs:
+What differs (measured on the earlier EB Garamond build, before fb-595.68):
 - Heading sizes: Word takes half-points, so 17 pt and 14.5 pt where typst uses 16.8 pt and 14.4 pt.
 - Position: the first body line on a page sits about 11 pt lower than typst's, and the first caption line about 3 to 4 pt lower (LibreOffice places exact-spaced lines lower). The top margin is 1 in in both.
 - Typst's folio collisions on pages 5 and 10 (OPEN above) do not occur here: the folio sits below the last line of each page.
 - Block quotations use the spacing measured on typst's render: 13.8 pt lines, 18 pt before the first quoted paragraph, 1.2 pt between quoted paragraphs. The quoted text is indented 0.67 in on each side (typst: 0.5 in plus the quote's own indent).
 - Footnotes: none in this template or sample. Footnote text is set to 10 pt (typst's default measured 10.2 pt); its line spacing is not checked.
 
-docx BLOCKED items:
+docx BLOCKED items (then; the docx check passes now):
 - The docx gates do not run yet: this court has no `rules.md` or `checks.yaml`, so `tools/check.sh --engine docx` has no checks to run. Nothing is stamped.
 - Word: not opened (no Word on this box). The renderer checks the zip and the XML parts; LibreOffice converts the file without a repair step.
 
-Page review (docx): all 11 pages of `OUTPUT-motion-brief.docx.pdf` were rendered at 60 dpi and viewed against the typst render. No page has an open defect that is not in the list above.
+Page review (docx, on the earlier EB Garamond build): all 11 pages of `OUTPUT-motion-brief.docx.pdf` were rendered at 60 dpi and viewed against the typst render. No page has an open defect that is not in the list above.

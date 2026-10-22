@@ -7,9 +7,9 @@ Folder: `courts/eighth-circuit/north-dakota/federal/bankruptcy-district/adversar
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md` (full transcription of the 9-page filing, plus the consent statement in the frontmatter; see "Sample") |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, pinned Times New Roman only (`pdffonts`), no warnings |
 | overlay | ok: `usage/OVERLAY-bourbon-street.pdf` and `usage/OVERLAY-bourbon-street.txt` (page map) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; pages 1-7 viewed on the render before the consent change, page 8 viewed after the final change) |
+| pages reviewed | 8 of 8 (on the earlier 8-page EB Garamond render, before fb-595.68: every page rendered at 60 dpi and viewed; pages 1-7 viewed on the render before the consent change, page 8 viewed after the final change) |
 
 Commands (run from /work/repo with the toolchain on PATH):
 
@@ -40,8 +40,8 @@ Nothing in the rules sets a font, a size beyond legibility, or a line spacing fo
 
 ## Layout choices (not set by a rule we could read)
 
-- **Type:** EB Garamond 12 pt (vendored). Typeface row (fonts pass, 2026-10-14): face required by the rules = none (FRBP 7010, FRCP 10, FRBP 9004 and the 2023 bankruptcy local rules name no face); substitute = none, so EB Garamond is kept by policy (`docs/FONTS.md` "No face named"). The exemplar is Times New Roman 12 pt; a filer's choice is not a rule, so it is not chased (tier 2 at most). Court site not reachable on 2026-10-14 (HTTP 500), so the District general rules remain unverified.
-- **Spacing:** body pitch 27.6 pt, which is Word's double spacing for 12 pt Times New Roman (2 x 13.8 pt). The template sets `pitch = 27.6pt` and `body-leading = pitch - 0.65em`, so the line box of EB Garamond plus the leading gives 27.6 pt. Measured on the render: 27.6 pt between successive lines. Caption, counsel-style lines, quotations and signature are single spaced (13.8 pt).
+- **Type:** Times New Roman 12 pt (the pinned install, `docs/FONTS.md` rule 1), in typst and docx. Typeface row: face required by the rules = none (FRBP 7010, FRCP 10, FRBP 9004 and the 2023 bankruptcy local rules name no face; fonts pass, 2026-10-14); substitute = none, so the house standard, Times New Roman, is used (`docs/FONTS.md` rule 6). The exemplar is Times New Roman 12 pt too. Court site not reachable on 2026-10-14 (HTTP 500), so the District general rules remain unverified.
+- **Spacing:** body pitch 27.6 pt, which is Word's double spacing for 12 pt Times New Roman (2 x 13.8 pt). The template sets `pitch-double = 2 * pitch-single` (13.8 pt, Word's single line in this face). Measured on the earlier EB Garamond render: 27.6 pt between successive lines. Caption, counsel-style lines, quotations and signature are single spaced (13.8 pt).
 - **Margins:** 1 inch on all sides; page number centered at the foot of each page (as in the exemplar).
 - **Caption:** court name centered and bold on two lines; debtor block ("In re:"), then the parties with "v." between them; a column of ")" marks (as in the exemplar); case number, chapter and adversary number at the right, centered vertically against the parties. The title is centered and bold below the caption.
 - **Paragraphs:** numbered from 1, first line indented 0.5 inch, number then text. WHEREFORE paragraphs are not numbered (exemplar convention).
@@ -62,7 +62,7 @@ Paragraph numbers in the render match the exemplar's numbering (1 to 39).
 
 ## Overlay
 
-`usage/OVERLAY-bourbon-street.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (see `OVERLAY-bourbon-street.txt`):
+`usage/OVERLAY-bourbon-street.pdf` (measured on the earlier EB Garamond render, before fb-595.68): red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (see `OVERLAY-bourbon-street.txt`):
 
 | Our page | Filed page | Word overlap |
 |---|---|---|
@@ -79,7 +79,7 @@ The overlay is a diagnostic, not a score. Differences in the lower-overlap pages
 
 ## Known gaps and open choices
 
-1. **Typeface.** The exemplar is Times New Roman. EB Garamond is the only vendored font, and the tools forbid system fonts. EB Garamond sets slightly smaller at the same point size, so the render looks lighter than the exemplar. A vendored Times-metric substitute exists (`Liberation Serif`, `docs/FONTS.md`), but no rule we could read names Times, so switching is a filer-convention choice, not a rule fix; EB Garamond is kept (fonts pass, 2026-10-14).
+1. **Typeface.** The exemplar is Times New Roman, and so is the template (typst and docx): no rule we could read names a face, and `docs/FONTS.md` rule 6 makes Times New Roman the house standard. Until fb-595.68 the template kept EB Garamond, which set slightly smaller and lighter than the exemplar at the same point size.
 2. **One filer only.** Tier 2 asks for 2 or 3 filers. Other ND bankruptcy adversary complaints in CourtListener RECAP were checked: Doeling v. Wasness, 24-07004 (2 pages); Doeling v. Werner, 24-07009 (4 pages, a 727 objection); Doeling v. O'Keeffe O'Brien Lyson, 26-07005 (3 pages). They are too short to test the 8-14 page depth bar and are not saved. Tier 2 is therefore **not** judged against two filers.
 3. **Exemplar lacks FRBP 7008(a) content.** The filed complaint has no consent statement, and its jurisdiction paragraph does not restate the case name, number, and chapter (they appear only in the caption). The template requires the consent statement; the sample supplies one. This is a case where the rule outranks the exemplar.
 4. **District general rules not checked.** D.N.D. Gen. L.R. (the District's general local rules, which the bankruptcy rules incorporate in part under L.R. 1001-1(D)) were not retrievable on 2026-10-14; the District's site has no rules text linked from its local-rules page. Any form-of-papers rule there is unverified.
@@ -89,7 +89,7 @@ The overlay is a diagnostic, not a score. Differences in the lower-overlap pages
 
 ## Review of the rendered pages (Gate 2 rows)
 
-Every page of `usage/OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and viewed. Defects found during the review and fixed in the template are listed first.
+Every page of `usage/OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and viewed (the earlier EB Garamond render, before fb-595.68). Defects found during the review and fixed in the template are listed first.
 
 Fixed during review:
 - Paragraph spacing: blocks did not add the leading after their last line, so paragraphs collided and headings overlapped the text before them. Fixed by `below: body-leading` on every body block.
@@ -110,17 +110,17 @@ Page rows (as of the final render):
 | 7 | WHEREFORE (Count II) continued; "Count III"; paragraphs 35-39; WHEREFORE (Count III) starts | Pass |
 | 8 | WHEREFORE (Count III) end; consent statement (unnumbered); signature block | Pass: signature block complete on the page; nothing below it |
 
-Open tier-2 items for David (not defects of the template as built): the consent statement's position (before the signature, not in the jurisdiction section); single exemplar; the EB Garamond substitution.
+Open tier-2 items for David (not defects of the template as built): the consent statement's position (before the signature, not in the jurisdiction section); single exemplar. (The EB Garamond substitution listed here before is settled: the template is now Times New Roman, `docs/FONTS.md` rule 6.)
 
 ## Engines
 
 ### docx (pandoc, `docx/`)
 
-Built with pandoc from `docx/reference.docx` and the Lua filter `docx/ndb-court-form.lua`, which lays out the cover, numbering, signature and certificate from the same frontmatter as the typst template. `docx/make-reference.sh` regenerates `reference.docx`. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-<id>.md` (writes `usage/OUTPUT-<id>.docx`).
+Built by `fb render --engine docx`: it builds the reference document from `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst template's face), then runs pandoc with the Lua filter `docx/ndb-court-form.lua`, which lays out the cover, numbering, signature and certificate from the same frontmatter as the typst template. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-<id>.md` (writes `usage/OUTPUT-<id>.docx`).
 
 What matches the typst form (same values, set as Word styles):
 
-- EB Garamond 12 pt throughout (style `rFonts`); letter page, 1-inch margins; centered page number in the footer.
+- Times New Roman 12 pt throughout (style `rFonts`, the typst template's face); letter page, 1-inch margins; centered page number in the footer.
 - Body paragraphs double-spaced at exact 27.6 pt; caption, counsel block, quotations and signature single-spaced at exact 13.8 pt.
 - Caption as a borderless table: party column 3.4 in, ")" column 0.3 in, case block at right, vertically centered.
 - Numbered paragraphs (text numbers, 0.5 in first-line indent); "~" continuations and WHEREFORE paragraphs unnumbered; quotations indented 0.5 in both sides.
@@ -130,10 +130,10 @@ What differs or is not checked:
 
 - The number-to-text gap is a tab to the next default tab stop (1.0 in), not the typst 0.25 in gap.
 - Caption and signature lines are plain text (typst reads them as markdown inline).
-- Pagination is not compared with the typst render: no LibreOffice PDF exists yet (see below), so the page breaks in Word are unverified.
+- Pagination: the committed renders are 9 pages each (`OUTPUT-adversary-complaint.typst.pdf` and the LibreOffice `OUTPUT-adversary-complaint.docx.pdf`); page breaks in Word itself are unverified.
 - The font must be installed on the machine that opens the file; Word substitutes silently otherwise.
 
-docx BLOCKED items (`docs/DOCX.md`):
+docx BLOCKED items (`docs/DOCX.md`; recorded before fb-595.68, when `soffice` could not run here):
 
 - BLOCKED: Gates 0 to 3 on `usage/OUTPUT-<id>.docx.pdf` (`tools/check.sh --engine docx`): `soffice` cannot be run here. LibreOffice is not on conda-forge; the Debian trixie LibreOffice 25.2.3 packages were unpacked without root, but `soffice.bin` aborts at startup with an uncaught `com::sun::star::uno::RuntimeException`. Consequently no `.docx.pdf` was made, no page was rendered or viewed, and `pages_reviewed=0`. The `.docx` is valid (zip test and well-formed XML parts pass) and pandoc reads its text back in order, but nothing visual is claimed for it.
 - BLOCKED: the "opens in Word and LibreOffice without a repair prompt" check: not done (no Word here; LibreOffice unavailable).

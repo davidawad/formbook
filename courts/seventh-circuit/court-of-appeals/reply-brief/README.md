@@ -95,7 +95,7 @@ signature-block fix.
 | 11 | 8 | Certificate of compliance | Form 6 content; word count computed (2,160 since 2026-10-16). OK. |
 | 12 | 9 | Certificate of service | CM/ECF statement; Cir. R. 31(b) paper copies. OK. |
 
-Pages reviewed: 12 of 12. Fonts pass, 2026-10-15: re-rendered (12 pages; `pdffonts`: EB Garamond only, embedded), and all 12 pages rasterized at `pdftoppm -r 70` and viewed again. Nothing changed on the pages.
+Pages reviewed: 12 of 12. Fonts pass, 2026-10-15 (historical: the template was then EB Garamond): re-rendered (12 pages; `pdffonts`: EB Garamond only, embedded), and all 12 pages rasterized at `pdftoppm -r 70` and viewed again. Nothing changed on the pages.
 
 ## Overlay (diagnostic, not a score)
 
@@ -116,7 +116,7 @@ in the word processor the brief was typed in.
 
 - Rendered: `sh tools/render.sh ... usage/INPUT-reply-brief.md`, exit 0, no typst warnings, 12 pages (the committed OUTPUT was also 12 pages). Re-rendered after each fix.
 - Viewed: all 12 pages at `pdftoppm -r 60`, one PNG at a time; pages 1, 2 and 9–12 again after the fixes (pages 3–8 are text-identical to the first render, checked page by page with `pdftotext -layout`). Exemplar page 1 compared with our cover. All 12 overlay pages viewed at `-r 40`.
-- Overlay: regenerated against the ACT NOW exemplar. Cover 94%, TOC 88% (was 63%), TOA 36%, body pages 59–92%, conclusion page 39%, certificates 46% and 63%. Margins and text block coincide; differences are the face (EB Garamond vs Times New Roman) and omitted text.
+- Overlay: regenerated against the ACT NOW exemplar. Cover 94%, TOC 88% (was 63%), TOA 36%, body pages 59–92%, conclusion page 39%, certificates 46% and 63%. Margins and text block coincide; differences are the face (EB Garamond vs Times New Roman; measured on the earlier EB Garamond render) and omitted text.
 - Fixed:
   - Template: cover counsel lines and signature lines were forced italic; the exemplar sets them roman, with only the admission parentheticals and the "Attorneys for" note italic. Lines and names are now set as given; markdown `*...*` is honoured (the sample marks the two parentheticals).
   - Sample: the TOC numbered the conclusion "III." because Points II.B, II.C and III were left out of the transcription; the filed TOC has "IV. Conclusion". Their headings are now transcribed (text from the filed TOC), each followed by a bracketed transcription note, so the TOC has the filed structure. The certificate word count moves from 2,085 to 2,160.
@@ -128,10 +128,9 @@ in the word processor the brief was typed in.
    white cover, as the exemplar does. The rule text does not limit the color to paper, but whether the court's e-filing PDFs
    carry the gray cover was not verified here. **Open question for David: does the e-filing PDF need the gray cover?**
 2. **Body typeface.** The exemplar is Times New Roman 12 pt. The rules name no face (FRAP 32(a)(5)(A) requires a proportional serif;
-   Cir. R. 32(b) sets 12 pt body and 11 pt footnotes; read from the rules PDF 2026-10-15), so EB Garamond is kept, as the court
-   `README.md` "Typeface" records. EB Garamond at 12 pt is rule-compliant but looks smaller on the page than TNR 12. Liberation
-   Serif (metric-compatible with Times New Roman) is vendored, but it is not used: the rule does not name Times. Matching the
-   filer's face is tier 3, not chased.
+   Cir. R. 32(b) sets 12 pt body and 11 pt footnotes; read from the rules PDF 2026-10-15), so the house standard applies: Times New
+   Roman 12 pt (`docs/FONTS.md` rule 6; Liberation Serif fallback), the exemplar's face too, as the court `README.md`
+   "Typeface" records. The template was earlier set in EB Garamond.
 3. **Court's e-filing header.** The exemplar's top line ("Case: 26-2473 Document: 29 Filed ... Pages: 19") is added by the
    court's system at filing, not by the brief. The template does not reproduce it.
 4. **Disclosure statement.** Not generated: it is a separate attorney filing (Cir. R. 26.1), and the exemplar has none.
@@ -153,7 +152,7 @@ in the word processor the brief was typed in.
 ## Engines
 
 - **typst** (`typst/`): primary. Roman counsel and signature lines changed 2026-10-16 (see "Verification pass").
-- **latex** (`latex/template.tex`, `latex/ca7-reply-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 27.7 pt double spacing, one-inch margins, no hyphenation. TOC lists point headings down to level 3 (`toc_depth` 3). Counsel groups with `column: right` and `counsel_note` are handled; the certificates include the paper-copy and unregistered-participant paragraphs. Output `usage/OUTPUT-reply-brief.latex.pdf`, 12 pages (typst: 12; re-rendered 2026-10-16 from the sample with the added headings, pages not viewed). Differences: the cover spacing is hand-set; the certificate of compliance wording is written for LaTeX rather than copied from the typst text. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
+- **latex** (`latex/template.tex`, `latex/ca7-reply-brief.lua`; as first built, now Times via newtx, see "Cross-engine layout"): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 27.7 pt double spacing, one-inch margins, no hyphenation. TOC lists point headings down to level 3 (`toc_depth` 3). Counsel groups with `column: right` and `counsel_note` are handled; the certificates include the paper-copy and unregistered-participant paragraphs. Output `usage/OUTPUT-reply-brief.latex.pdf`, 12 pages (typst: 12; re-rendered 2026-10-16 from the sample with the added headings, pages not viewed). Differences: the cover spacing is hand-set; the certificate of compliance wording is written for LaTeX rather than copied from the typst text. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
 - **docx** (`docx/`): `reference.xml` (the Word styles; `fb render` builds `reference.docx` from it: Times New Roman 12 pt body and 11 pt footnotes (Cir. R. 32(b)), exact 27.65 pt double spacing with a 0.5 in first-line indent, single-spaced headings, footnotes, quotations, cover and tables; were `build-reference.sh`'s, with EB Garamond) and `ca7-reply-brief.lua` (cover with the counsel in two columns and the closing double rule, TOC of the body headings, TOA, signature and certificates; the sections name `fb render`'s footers `rIdFtrNone`/`rIdFtrPage` and the filter writes the last one to `FORMBOOK_FINAL`). The TOC and TOA page numbers come from `fb render`'s multi-pass engine (needles for every heading and `toa:` citation, footnote citations searched on their page; tools/fb/src/docxpass.rs), which replaces the folder's own `render.sh`, `pagemap.awk` and `footer.xml`. Outputs `usage/OUTPUT-reply-brief.docx`/`.docx.pdf` (12 pages; typst 12) and `usage/OUTPUT-reply-brief-2.docx`/`.docx.pdf` (14 pages; typst 14); certificate word counts 2,160 and 2,155, the same as typst. Fonts embedded: Times New Roman Regular, Bold, Italic (the typst face). The certificate of compliance names the face actually used: "using Microsoft Word in 12-point Times New Roman for the body text and 11-point Times New Roman for the footnotes" (typst: "using Typst ..."). Matches typst: face and sizes, spacing, margins, cover and its numbering (the cover counts as i), TOC (body headings only, as typst), TOA with page numbers (checked against the pages of both samples), certificates and the service page break. Differs: single-spaced parts use Word's auto single spacing (13.8 pt at 12 pt), tighter than typst's 17.1 pt pitch; the cover is spaced by hand; Word may paginate slightly differently from the LibreOffice PDF (docs/DOCX.md). `check.sh --engine docx`: 20 passed, 0 failed. BLOCKED: none (the addendum is not rendered by the docx engine; the filter stops with an error if a sample has one).
 
 

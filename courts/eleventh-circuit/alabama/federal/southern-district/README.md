@@ -36,7 +36,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
@@ -47,7 +47,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - [ ] overlay PDF present (`usage/*-overlay.pdf`)
 
-Typeface: S.D. Ala. Gen. L.R. 5(a)(2) requires "a plain, Roman style (or similar) font" and names no face, so both doc types keep the vendored EB Garamond (no court-named substitute applies; see `docs/FONTS.md`). The filed exemplars are set in Times New Roman; Liberation Serif is the substitute if that look is wanted.
+Typeface: S.D. Ala. Gen. L.R. 5(a)(2) requires "a plain, Roman style (or similar) font" and names no face, so both doc types are set in the house standard, Times New Roman (`docs/FONTS.md` rule 6), in typst and docx alike, as the filed exemplars are.
 
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`

@@ -6,9 +6,9 @@ Doc type: **adversary-complaint** in the United States Bankruptcy Court for the 
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (primary; Trustee's complaint, 16 pp.). Second filer, for tier 2: `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (Debtor's complaint, 3 pp.). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-adversary-complaint.md`: the whole filed complaint, transcribed (see Known gaps for the two additions) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 19 pages (15 on the earlier EB Garamond render, before fb-595.68), typst 0.15.0, pinned Times New Roman only, no warnings (`sh tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-griffin-adversary-complaint.pdf` and `.txt` (`sh tools/overlay.sh`) |
-| pages reviewed | 15 of 15 (every page rendered at 60 dpi and viewed, final template) |
+| pages reviewed | 15 of 15 on the earlier EB Garamond render, before fb-595.68 (every page rendered at 60 dpi and viewed, final template then) |
 | tier 1 | rules-driven template; asserts that stop the build if counsel e-mail, bar number, telephone or street address, the consent statement, the caption case data, or the title is missing (checked: a sample with no e-mail fails with the rule cited). |
 
 `court.json` and the court-root `typst/`, `usage/` are untouched. Gates `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, which this doc-type folder is not, so they were not run.
@@ -60,14 +60,14 @@ Three engines run from one markdown contract. `typst/` is the primary template a
 | Engine | Output in `usage/` | Result |
 |---|---|---|
 | typst | `OUTPUT-adversary-complaint.typst.pdf` | unchanged |
-| docx | `OUTPUT-adversary-complaint.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
+| docx | `OUTPUT-adversary-complaint.docx`, `.docx.pdf` | both written (19 pages); the BLOCKED record below is from before fb-595.68 |
 
-Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx` from pandoc's default, with the court's styles and footer), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`. The filter is `docx/mssb-adversary-complaint.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
+Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md` (a wrapper of `fb render --engine docx`), which builds the reference document from `docx/reference.xml` (`base="xengine"`, the shared cross-engine recipe in the typst template's face) and runs pandoc with the filter `docx/mssb-adversary-complaint.lua`, then LibreOffice for the `.docx.pdf`. (Until fb-595.68 `docx/make-reference.sh` wrote a `docx/reference.docx`, and LibreOffice failed on the box used then.)
 
-What the docx build sets to the typst form (from the same frontmatter). These are settings in the XML and the filter, not a rendered comparison: no page has been rendered (see below).
+What the docx build sets to the typst form (from the same frontmatter). These lists were written on the earlier EB Garamond build, before fb-595.68, when no page had been rendered; the face and the body pitch are updated to the current `docx/reference.xml`.
 
-- US Letter, 1 in margins. EB Garamond 12 pt for the body, caption, footnotes and footer (5005-1(a)(2)(G)).
-- Double spacing as exact 24 pt lines (`w:line="480" w:lineRule="exact"`), the same pitch as the typst template. Single spacing for caption, counsel and signature lines.
+- US Letter, 1 in margins. Times New Roman 12 pt for the body, caption, footnotes and footer (5005-1(a)(2)(G)).
+- Double spacing as exact 27.6 pt lines (`body="552"`, Word's double), the same pitch as the typst template (24 pt on both before fb-595.68). Single spacing for caption, counsel and signature lines.
 - Cover: court name and division in bold; a borderless caption table with a 3.6 in party column; title in bold capitals.
 - Lead-in, then the consent statement, then numbered paragraphs (1, 2, ...) with a 0.5 in first-line indent. Level-1 headings centred capitals, level-2 centred bold, level-3 bold italic.
 - Lettered sub-items (a), (b), ... hang from 0.5 in; the signature block sits in the right half (3.25 in indent).
@@ -82,14 +82,14 @@ What differs, by design or by Word:
 - The fee table (¶ 49) is built by the filter as a borderless table, 5.5 in wide and indented 1 in, as typst lays it out. Its cells keep italic and bold; other inline markup in a cell is flattened to plain text (the fee table has none).
 - Pagination differs between Word and LibreOffice; page counts are not measured for the docx.
 
-docx BLOCKED (not verified by a render):
+docx BLOCKED (record from before fb-595.68; `usage/OUTPUT-adversary-complaint.docx.pdf` is now committed):
 
 - `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF, `tools/check.sh --engine docx`): BLOCKED. LibreOffice cannot start on the box used here. The Debian LibreOffice 25.2 packages (extracted without root, all shared libraries resolved) exit at bootstrap with a `DeploymentException`. No `.docx.pdf` exists, so no page was rendered or viewed (pages reviewed: 0), and `usage/.check-docx.txt` is not written. `tools/check.sh` also needs `yq` and a court folder with `court.json` and `rules.md`, which a doc-type folder does not have.
 - The `.docx` has not been opened in Word or LibreOffice. Its package parts are well-formed XML and the zip is valid, which is necessary, not sufficient.
 
 ## Overlay
 
-`usage/OVERLAY-griffin-adversary-complaint.pdf` puts our render (red) over the best-matching page of the filed Griffin complaint (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run:
+`usage/OVERLAY-griffin-adversary-complaint.pdf` puts our render (red) over the best-matching page of the filed Griffin complaint (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run on the earlier EB Garamond render, before fb-595.68:
 
 - p.1 ↔ p.1 (69%), p.2–p.5 ↔ same numbers (74–87%): caption and the first numbered paragraphs line up.
 - p.6 ↔ p.6, p.7 ↔ p.7 (60%, 54%): ¶¶ 36–53, which carry the fee table and footnotes.
@@ -99,7 +99,7 @@ docx BLOCKED (not verified by a render):
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and viewed in its final form.
+Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and viewed in its final form (the 15-page EB Garamond render, before fb-595.68; the page contents below are from that render).
 
 | Page | Content | Result |
 |---|---|---|
@@ -122,8 +122,8 @@ Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and 
 Tier-2 findings (OPEN or ACCEPTED):
 
 - Prayer and sub-items are lettered (a), (b), ... in the template. The filing letters the prayer A., B., ... and the sub-items (a), (b). One list style is used. ACCEPTED.
-- Body typeface: EB Garamond, the only serif vendored in `fonts/`. The filing's face is not confirmed here: `pdffonts` reports the exemplar's text as Liberation Sans-named subsets, but the page image of the Lentz memorandum (the second exemplar in the motion folder) reads as a Times-style serif. At 12 pt, EB Garamond has a smaller x-height than Times, so the text looks smaller. The rule's 12 point minimum is met. ACCEPTED pending David's decision on whether to bump the size (see Known gaps).
-- Length: 15 pages against the filing's 16. The sample is complete, so the difference is the face.
+- Body typeface: Times New Roman, the house standard (`docs/FONTS.md` rule 6) and the exemplars' face as `data/exemplar-fonts.json` audits them. Until fb-595.68 the template was EB Garamond, then the only serif vendored; this row then read the filing's face as unconfirmed (`pdffonts` reported Liberation Sans-named subsets, the Lentz page image a Times-style serif) and EB Garamond's smaller x-height as making the text look smaller. The rule's 12 point minimum is met. ACCEPTED.
+- Length: 15 pages against the filing's 16 on the earlier EB Garamond render (the sample is complete, so the difference was the face); the current render is 19 pages.
 - Paragraph numbering matches the filing: 1 to 108, the same numbers.
 
 ## Known gaps

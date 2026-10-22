@@ -12,7 +12,7 @@ Doc type `trial-brief` under the Trademark Trial and Appeal Board (court `ttab`)
 | Overlay | ok: `sh tools/overlay.sh <dir> treefrog-rebuttal-brief <dir>/usage/FILED-EXAMPLE-trial-brief.pdf` writes `usage/OVERLAY-treefrog-rebuttal-brief.pdf` and `.txt` |
 | Pages reviewed | 9 of 9 of each engine (typst and docx, after the cross-engine port; see "Page review") |
 | Check gates (`tools/check.sh`) | typst and docx: 0 failed (`data/checks-default.yaml` with `eval.yaml`) |
-| Cross-engine (Gate 4) | gated (`eval.yaml` `params.cross_engine: gate`): the docx breaks every line and page as typst does (XENG-001..003 PASS), on the shared layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `lib/docx/xengine-reference.sh`; fb-595.54.6) |
+| Cross-engine (Gate 4) | gated (`eval.yaml` `params.cross_engine: gate`): the docx breaks every line and page as typst does (XENG-001..003 PASS), on the shared layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `tools/fb/src/docxxengine.rs`; fb-595.54.6) |
 
 File names: as for the notice of opposition, the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt`.
 
@@ -97,7 +97,7 @@ Note: the rendered body has 7 pages (body 1-7 are PDF pages 3-9); the certificat
 
 ## Engines
 
-The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`, from the shared recipe `lib/docx/xengine-reference.sh`: Times New Roman 12 pt, the body in 24 pt exact line boxes with a half-inch first-line indent, single-spaced 13.8 pt block quotations and footnotes), `docx/ttab-trial-brief.lua` (the caption page with the counsel block and date at the foot of the page, the table of authorities, the headings, the signature block kept with the last paragraph, the certificate of service; every paragraph with the typst pitch and spaces), and `docx/render.sh`, which runs the conversion twice or more: pandoc cannot know the pages of the authorities, so each pass converts to PDF with LibreOffice, `docx/toa-pages.sh` finds the body page of every citation, and the next pass lists them. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-trial-brief.md` writes `usage/OUTPUT-trial-brief.docx` and `.docx.pdf`.
+The docx engine (`docx/`, see `docs/DOCX.md`) is built by `fb render --engine docx` from `docx/reference.xml` (the Word styles, on the shared cross-engine recipe, `base="xengine"`: Times New Roman 12 pt, the body in 24 pt exact line boxes with a half-inch first-line indent, single-spaced 13.8 pt block quotations and footnotes), `docx/ttab-trial-brief.lua` (the caption page with the counsel block and date at the foot of the page, the table of authorities, the headings, the signature block kept with the last paragraph, the certificate of service; every paragraph with the typst pitch and spaces). `fb render` runs the conversion twice or more: pandoc cannot know the pages of the authorities, so each pass converts to PDF with LibreOffice, `fb render` (`tools/fb/src/docxpass.rs`) finds the body page of every citation from the filter's needles, and the next pass lists them. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-trial-brief.md` writes `usage/OUTPUT-trial-brief.docx` and `.docx.pdf`.
 
 Sections: the caption page and the table of authorities are roman (i, ii); the body is arabic from 1 and the certificate continues it.
 

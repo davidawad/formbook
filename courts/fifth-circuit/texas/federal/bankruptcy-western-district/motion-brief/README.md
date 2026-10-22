@@ -7,9 +7,9 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-western-district/motion-b
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (a portion of the 21-page filing, see Known gaps) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages (8 on the earlier EB Garamond render, before fb-595.68), typst 0.15.0, pinned Times New Roman only (`pdffonts`), no warnings |
 | overlay | ok: `usage/OVERLAY-oakes-motion.pdf` and `OVERLAY-oakes-motion.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and all 8 pages viewed again on 2026-10-14, font unchanged) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and all 8 pages viewed again on 2026-10-14, font unchanged; both on the earlier EB Garamond render, before fb-595.68) |
 
 File names follow the tools, not the brief's `<id>.md` shorthand: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf`, and the overlay `OVERLAY-<id>.pdf/.txt` (see `tools/overlay.sh`).
 
@@ -20,8 +20,8 @@ File names follow the tools, not the brief's `<id>.md` shorthand: the sample is 
 | Fed. R. Bankr. P. 9013 | A request for an order must be made by written motion that states with particularity the grounds for the relief. | Author content (the motion's paragraphs and argument). Not checked by the template. | Rule number from the task brief. Text not fetched in this run. |
 | W.D. Tex. L.R. 9014-1(a) | Negative-notice form language, conspicuous, bold, at least 12 pt, placed immediately below the caption and before the body of the pleading. The six sentences are: "This pleading requests relief that may be adverse to your interests."; "If no timely response is filed within 21 days from the date of service, the relief requested herein may be granted without a hearing being held."; "A timely filed response is necessary for a hearing to be held."; "Any response must be timely filed with the United States Bankruptcy Clerk, Western District of Texas, [Clerk's office mailing address]."; "If a timely response is filed, the Court will then set a hearing on the Motion, and you will be provided with notice of the date, time, and place of the hearing."; "If you do not attend the hearing, the Court may decide that you do not oppose the Motion." | `negative-notice(meta)` and `negative-notice-block()`: bold, 12 pt, directly below the caption; the Clerk's address comes from the sample's `clerk_address`. | Fetched from https://www.txwb.uscourts.gov/l-rule-9014-1-contested-matters on 2026-10-14 (WebFetch; six sentences quoted separately). The page carries no revision date. |
 | W.D. Tex. L.R. 9014-1 (other) | Responses must admit or deny each allegation; a reply is due 7 days after the response; motions for expedited hearing are separate pleadings with a proposed order; exclusions from the negative notice (matters without a hearing, matters under the Code, shortened timeframe). | Not generated. | Summarized from the same page (WebFetch). |
-| Fed. R. Bankr. P. 9004(a) | A petition, pleading, schedule or other document must be clearly legible; common abbreviations are acceptable. | Typography: 12 pt EB Garamond, one-inch margins, double spacing. | Fetched from https://www.law.cornell.edu/rules/frbp/rule_9004 on 2026-10-14. The rule sets no point size, margin or spacing. |
-| Typeface (court-named face) | None named. FRBP 9004(a) and W.D. Tex. L.R. 9004 set no typeface, size, margin or spacing. The one face list in the local rules (Courier, Times Roman, Helvetica, Orator) governs the mailing matrix in complex Chapter 11 cases, not pleadings. L.R. 9014-1(a) sets bold, at least 12 pt, for the negative notice only. | EB Garamond kept (docs/FONTS.md, "No face named"). Typeface row: no face required, no substitute. | Local rules text read from the 2014 redline on txwb.uscourts.gov, fetched 2026-10-14 (see Known gaps 12). |
+| Fed. R. Bankr. P. 9004(a) | A petition, pleading, schedule or other document must be clearly legible; common abbreviations are acceptable. | Typography: 12 pt Times New Roman, one-inch margins, double spacing. | Fetched from https://www.law.cornell.edu/rules/frbp/rule_9004 on 2026-10-14. The rule sets no point size, margin or spacing. |
+| Typeface (court-named face) | None named. FRBP 9004(a) and W.D. Tex. L.R. 9004 set no typeface, size, margin or spacing. The one face list in the local rules (Courier, Times Roman, Helvetica, Orator) governs the mailing matrix in complex Chapter 11 cases, not pleadings. L.R. 9014-1(a) sets bold, at least 12 pt, for the negative notice only. | Times New Roman, the house standard (docs/FONTS.md rule 6; EB Garamond before fb-595.68). Typeface row: no face required, no substitute. | Local rules text read from the 2014 redline on txwb.uscourts.gov, fetched 2026-10-14 (see Known gaps 12). |
 
 Not produced by this template: a separate memorandum of points and authorities (the exemplar's argument is incorporated in the motion's numbered paragraphs, and no txwb rule requiring a separate memorandum was found; see Known gaps); a proposed order (a separate filing); the notice of hearing (a separate filing, set by the Court after a timely response).
 
@@ -43,7 +43,7 @@ Not produced by this template: a separate memorandum of points and authorities (
 - Body: `#` / `##` / `###` headings (not numbered by the author), paragraphs (numbered by the template), lists (lettered by the template).
 - The certificate's text is written with "the undersigned", not a pronoun for the signer (the filing's pronoun is not recorded).
 
-## Visual review (Gate 2 record, all 8 pages, rendered at 60 dpi and looked at)
+## Visual review (Gate 2 record, all 8 pages of the earlier EB Garamond render, before fb-595.68, rendered at 60 dpi and looked at)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -73,7 +73,7 @@ Not produced by this template: a separate memorandum of points and authorities (
 5. **Separate memorandum not produced.** The brief names "motion with memorandum", but the exemplar is a motion with incorporated argument (numbered paragraphs, no separate memorandum). No W.D. Tex. rule requiring a separate memorandum was located (not searched exhaustively). If the court requires one, the template needs a second document type.
 6. **FRBP 9013 text not fetched.** The rule number is from the task brief; the rule's text was not read in this run.
 7. **Italics.** The text layer has no italic markup, so the case names and "Id." are roman. The template italicizes `*...*`.
-8. **Font.** EB Garamond (vendored; `docs/FONTS.md` "No face named"), not Times New Roman. The rules name no face (see Governing rules, Typeface), so no substitute is used. At 12 pt EB Garamond sets smaller than Times; that is a visual difference from the filed copy, not a rule requirement.
+8. **Font.** Times New Roman, the house standard (`docs/FONTS.md` rule 6). The rules name no face (see Governing rules, Typeface), so no substitute is used. Before fb-595.68 the template was EB Garamond, which set smaller at 12 pt than the filed copy's Times.
 9. **Spacing and margins are conventions.** Rule 9004(a) sets none; the layout follows the exemplar (double spacing, one-inch margins).
 10. **One exemplar.** Tier-2 comparison needs two or three filers; only this one is saved. Other txwb motions are listed in `usage/SOURCE.md`.
 11. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape. Render and overlay were run; the visual review above is the Gate 2 equivalent.
@@ -90,11 +90,11 @@ Not produced by this template: a separate memorandum of points and authorities (
 
 ## Engines
 
-**docx** (`docx/`): `sh tools/render.sh --engine docx motion-brief usage/INPUT-motion-brief.md` runs pandoc with `docx/txwb-motion-brief.lua` on `docx/reference.docx`, then LibreOffice (`soffice --headless --convert-to pdf`). `docx/reference.docx` is rebuilt from `docx/reference-parts/` by `sh docx/build-reference.sh`. EB Garamond must be installed for LibreOffice (`fonts/eb-garamond`). Checked on `usage/OUTPUT-motion-brief.docx.pdf`, 8 of 8 pages rendered at 60 dpi and viewed beside the typst pages.
+**docx** (`docx/`): `sh tools/render.sh --engine docx motion-brief usage/INPUT-motion-brief.md` (a wrapper of `fb render --engine docx`) builds the reference document from `docx/reference.xml` (`base="xengine"`: the shared cross-engine recipe in the typst template's face), runs pandoc with `docx/txwb-motion-brief.lua`, then LibreOffice (`soffice --headless --convert-to pdf`). Times New Roman must be installed for LibreOffice (the pinned install, `docs/FONTS.md` rule 1). Checked on `usage/OUTPUT-motion-brief.docx.pdf`, 8 of 8 pages rendered at 60 dpi and viewed beside the typst pages, on the earlier EB Garamond render (then built from `docx/reference-parts/` by `docx/build-reference.sh`, since retired into fb render); the table and notes below are that review. The current `.docx.pdf` and typst PDF are 9 pages each.
 
 | Layout | Matches typst | Differs (docx against typst, same sample) |
 |---|---|---|
-| Page count, Letter, 1 in margins, EB Garamond 12 pt (embedded) | 8 pages | none |
+| Page count, Letter, 1 in margins, EB Garamond 12 pt (embedded; now Times New Roman) | 8 pages | none |
 | Line pitch: 24 pt body, 13.8 pt single (exact spacing) | yes, to 0.1 pt in the caption, the negative notice and the signature | none |
 | Caption, negative notice (six bold single-spaced lines, L.R. 9014-1(a)), title, addressee, lead-in | yes | none |
 | Level 1 headings (centred bold), level 2 (centred bold italic, as the typst PDF renders them), level 3 | yes | heading to the paragraph below is about 5 pt larger |

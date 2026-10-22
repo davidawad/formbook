@@ -6,18 +6,18 @@ Doc type: **motion with a memorandum of law**, filed in an adversary proceeding 
 |---|---|
 | exemplar | yes, 1 filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`, the whole filing (motion, memorandum, certificate) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, the pinned Times New Roman only (embedded; `docs/FONTS.md`, rule 1), no warnings (7 pages on the earlier EB Garamond 13 pt render) |
 | overlay | ok: `usage/OVERLAY-kapitus-23-02003.pdf` and `OVERLAY-kapitus-23-02003.txt`, made 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not committed; see gaps 11) |
-| pages reviewed | 7 of 7 re-rendered and viewed 2026-10-14 (fonts pass; the face did not change, see Typeface below) |
+| pages reviewed | 7 of 7 re-rendered and viewed 2026-10-14 (fonts pass; the face did not change then; the earlier EB Garamond render, before fb-595.68) |
 
 ## Typeface
 
 | Item | Result |
 |---|---|
 | Face required by the rules | None named. The BLR 5005-1 and 7007-1 text read (search excerpts of courtrules.net) names no typeface; FRBP 9004(a) says "clearly legible" with no face. Subsection (f) of BLR 5005-1 (caption style) was not seen (see gaps 1). |
-| Substitute (`docs/FONTS.md`) | None needed: the "No face named" row, so **EB Garamond** stays. |
+| Substitute (`docs/FONTS.md`) | None needed: the rules name no face, so the template is set in **Times New Roman**, the house standard (`docs/FONTS.md`, rule 6). |
 | Fit | n/a (the rules name no face to be metric-compatible with) |
-| Embedded (`pdffonts`) | `EBGaramond-Regular`, `EBGaramond-Bold`, `EBGaramond-Italic` (all embedded, CID Type 0C) |
+| Embedded (`pdffonts`) | `TimesNewRomanPSMT`, `TimesNewRomanPS-BoldMT`, `TimesNewRomanPS-ItalicMT` (all embedded, CID TrueType) |
 
 Not a `court.json` status; nothing here sets `status`. The court-root `README.md` and `court.json` are not touched.
 
@@ -34,8 +34,8 @@ Verification date for everything below: 2026-10-14.
 | GANB-RULE-001 | Fed. R. Bankr. P. 9013 (as amended eff. Dec. 1, 2024; text from https://www.law.cornell.edu/rules/frbp/rule_9013, fetched 2026-10-14) | "A motion must state its grounds with particularity and set forth the relief or order requested." | Author content (the sample's "Global moves..." and "WHEREFORE" paragraphs). The template does not check it. |
 | GANB-RULE-002 | Fed. R. Bankr. P. 9004(a)-(b) (as amended eff. Dec. 1, 2024; https://www.law.cornell.edu/rules/frbp/rule_9004) | (a) "clearly legible". (b) caption: court name; case title; case number and, if appropriate, adversary-proceeding number; a brief designation of the document's character. | `court_title`, `caption` (rows with the case and adversary numbers), `title`. |
 | GANB-FORM-001 | Bankr. N.D. Ga. BLR 5005-1 (*secondary*: courtrules.net text, see "Known gaps" 1) | Paper 8½ × 11 inch; first page leaves a clear space 2 in × 2 in in the upper right corner for the filing stamp. | `page1-caption-gap` (0.4 in after the court title, so the caption starts below 2 in; no text in the stamp area on page 1, measured on the render). Paper: `us-letter`. |
-| GANB-FORM-003 | Bankr. N.D. Ga. BLR 5005-1 (*secondary*) | Adversary and contested-matter papers: "at least one and one-half spaces between lines". | `body-leading = 1.075em`: 1.5 × the 1.15em single pitch. Measured on the render: 22.4 pt pitch at 13 pt (single 14.95 pt). |
-| GANB-FORM-002 | Bankr. N.D. Ga. BLR 5005-1 (*secondary*, no font named); FRBP 9004(a) (legible) | Legible, proportional serif. No size set by the rules I could read. | `font-family = "EB Garamond"` (vendored), `type-size = 13pt` (see gaps). |
+| GANB-FORM-003 | Bankr. N.D. Ga. BLR 5005-1 (*secondary*) | Adversary and contested-matter papers: "at least one and one-half spaces between lines". | `pitch-body = 20.7pt`: 1.5 × the 13.8 pt single pitch at 12 pt (22.4 pt at 13 pt, single 14.95 pt, was measured on the earlier EB Garamond render). |
+| GANB-FORM-002 | Bankr. N.D. Ga. BLR 5005-1 (*secondary*, no font named); FRBP 9004(a) (legible) | Legible, proportional serif. No size set by the rules I could read. | `font-family = ("Times New Roman", "Liberation Serif")`, `type-size = 12pt` (see gaps). |
 | GANB-FORM-004 | Bankr. N.D. Ga. BLR 5005-1 (*secondary*) | 1 inch left margin; the rest is the template's choice. | `margins` (1 in all sides). |
 | GANB-FORM-005 | Bankr. N.D. Ga. BLR 5005-1 (*secondary*) | "All pages must be numbered consecutively at the bottom center of the page." | `footer`: page number, centered, 11 pt. |
 | GANB-SIG-001 | Bankr. N.D. Ga. BLR 5005-1 (*secondary*) | Attorney name, complete address, telephone, e-mail and Georgia bar number on every paper an attorney files. | `signature.lines` (firm, "/s/" line, name, bar number, address, phone, e-mail, "Attorney for ..."). |
@@ -83,14 +83,14 @@ sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-d
 sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief kapitus-23-02003
 ```
 
-- `usage/OVERLAY-kapitus-23-02003.pdf`: red = our render, blue = filed exemplar, black = both. Page pairing by word overlap (from `OVERLAY-kapitus-23-02003.txt`): ours p.1 ↔ filed p.1 (86.2%), p.2 ↔ p.2 (78.8%), p.3 ↔ p.3 (60.5%), p.4 ↔ p.5 (50.5%), p.5 ↔ p.6 (75.5%), p.6 ↔ p.7 (74.1%), p.7 ↔ p.8 (52.2%). The filed copy has 10 pages and its later pages (9-10, the certificate) are not paired. The exemplar's caption uses ")" and ours does too, so page 1 lines up closely. The overlay is a diagnostic, not a score.
+- `usage/OVERLAY-kapitus-23-02003.pdf`: red = our render, blue = filed exemplar, black = both. Page pairing by word overlap (from `OVERLAY-kapitus-23-02003.txt`, on the earlier EB Garamond 7-page render): ours p.1 ↔ filed p.1 (86.2%), p.2 ↔ p.2 (78.8%), p.3 ↔ p.3 (60.5%), p.4 ↔ p.5 (50.5%), p.5 ↔ p.6 (75.5%), p.6 ↔ p.7 (74.1%), p.7 ↔ p.8 (52.2%). The filed copy has 10 pages and its later pages (9-10, the certificate) are not paired. The exemplar's caption uses ")" and ours does too, so page 1 lines up closely. The overlay is a diagnostic, not a score.
 
 ## Defects found and fixed (Gate 2 record)
 
 1. First render: each paragraph's first line overlapped the last line of the paragraph before it. Cause: `spacing: 0pt` on `set par`. Removed; paragraphs now separate by the normal gap (measured on the render: pitch 22.4 pt inside a paragraph, a few points more at a break).
 2. Page 1 leaves a long blank at the bottom: the `#` heading and the `##` heading keep with the first paragraph of the Introduction, which does not fit. Accepted; keeping a heading with its text is the rule the template follows.
 
-## Visual review (all 7 pages rendered at 60 dpi and viewed after the last template change)
+## Visual review (all 7 pages rendered at 60 dpi and viewed after the last template change; on the earlier EB Garamond render, before fb-595.68)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -109,13 +109,13 @@ Reviewed pages: 7 of 7.
 | Engine | Result here | Output |
 |---|---|---|
 | typst (primary, `typst/`) | unchanged by this work | `usage/OUTPUT-motion-brief.typst.pdf` |
-| docx (`docx/`) | `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in this box), so no page was rendered or reviewed | `usage/OUTPUT-motion-brief.docx` |
+| docx (`docx/`) | when this was written: `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in that box), so no page was rendered or reviewed. Both are now committed and `usage/.check-docx.txt` records PASS | `usage/OUTPUT-motion-brief.docx` |
 
-`docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference: EB Garamond 13 pt; body text 1.5 spaced (exact 22.4 pt); half-inch first-line indent; block quotations single-spaced and indented ½ in on each side; footnotes 11 pt; letter page, 1-inch margins; centered 11 pt page number. `docx/ganb-motion-brief.lua` builds the first page (caption as a borderless table: 3.4 in, 0.3 in ")" column, the rest; 0.4 in gap for the filing stamp; rule; title), passes the body through as written (no paragraph numbers, as the typst template), and builds the signature and certificate blocks in the right half of the page. Certificate text keeps the body first-line indent, as the typst template does.
+`fb render --engine docx` builds the reference document from `docx/reference.xml` (the shared cross-engine recipe, `base="xengine"`; `docx/make-reference.sh` is retired into fb render): Times New Roman 12 pt, the typst face; body text 1.5 spaced (exact 20.7 pt); half-inch first-line indent; block quotations single-spaced and indented ½ in on each side; footnotes 11 pt; letter page, 1-inch margins; centered 11 pt page number. `docx/ganb-motion-brief.lua` builds the first page (caption as a borderless table: 3.4 in, 0.3 in ")" column, the rest; 0.4 in gap for the filing stamp; rule; title), passes the body through as written (no paragraph numbers, as the typst template), and builds the signature and certificate blocks in the right half of the page. Certificate text keeps the body first-line indent, as the typst template does.
 
 - **Matches (by construction, from the typst parameters):** font, size, line pitch, margins, indent, caption columns, stamp gap, page-number footer, block quotations, certificate placement.
-- **Differs:** the docx has not been paginated or viewed, so page count and line breaks are unknown; Word and LibreOffice may break lines differently. The sample has no footnotes or block quotations, so those styles are set from the template but not exercised. The title is set with the All Caps property, so "523(a)" stays in the source text; the typst template's `upper()` would turn it into "523(A)".
-- **docx BLOCKED** (Gate 0 and Gate 1 are measured on the `.docx.pdf`; `docs/DOCX.md`). The `.docx.pdf` cannot be made in this box (conda-forge has no `libreoffice`; no root), so every row below is BLOCKED until a box with LibreOffice runs the check:
+- **Differs:** when this was written the docx had not been paginated or viewed (the committed `.docx.pdf` is 8 pages, as typst; its line breaks are not reviewed here); Word and LibreOffice may break lines differently. The sample has no footnotes or block quotations, so those styles are set from the template but not exercised. The title is set with the All Caps property, so "523(a)" stays in the source text; the typst template's `upper()` would turn it into "523(A)".
+- **docx BLOCKED** (recorded when no LibreOffice was available, before fb-595.68; `usage/.check-docx.txt` now records PASS. Gate 0 and Gate 1 are measured on the `.docx.pdf`; `docs/DOCX.md`). The `.docx.pdf` cannot be made in this box (conda-forge has no `libreoffice`; no root), so every row below is BLOCKED until a box with LibreOffice runs the check:
   - BLOCKED: GANB-FORM-001: stamp-area measurement on the PDF cannot run.
   - BLOCKED: GANB-FORM-002: font and size on the PDF cannot be checked.
   - BLOCKED: GANB-FORM-003: line pitch on the PDF cannot be checked.
@@ -130,11 +130,11 @@ Reviewed pages: 7 of 7.
 ## Known gaps and open choices
 
 1. **Local rule text is secondary, not verified against the court's PDF.** BLR 5005-1 and 7007-1 were read through search-result excerpts of courtrules.net. Fetching courtrules.net (both the tool and curl with browser headers) returns HTTP 403, and the court's own 2019 local rules PDF (`ganb.uscourts.gov/sites/default/files/local_rules_effective_9-1-2019.pdf`) returns an error page. The court's current rules may differ from the 2019 text. **Needs someone to check the current BLR 5005-1, 7007-1 and 9013-1 against the court's PDF before this template is called complete.**
-2. **Font.** EB Garamond at 13 pt (vendored; the only serif in `fonts/`). The exemplar is Liberation Sans/Helvetica body text with Times headers. The rules I could read do not name a font. 13 pt is a style choice so EB Garamond reads at the size of 12 pt Times.
+2. **Font.** Times New Roman 12 pt, the house standard (`docs/FONTS.md`, rule 6; EB Garamond 13 pt before fb-595.68). The exemplar is Liberation Sans/Helvetica body text with Times headers. The rules I could read do not name a font.
 3. **Tier 2: one exemplar only.** EVAL-LOOP asks for two or three filers. Searches: CourtListener RECAP `court=ganb` for motions with a memorandum. Kapitus Doc 29 (same docket, motion with embedded argument, no memorandum section) and Palmer v. Nasir 23-02020 Doc 4 (motion to dismiss, no RECAP PDF) were checked; a search for Bargar v. Wells Fargo 25-05040 Doc 7 (memorandum supporting default judgment) returned no hits. Not saved.
 4. **Certificate page does not repeat the caption.** The exemplar's certificate page repeats the full caption; this template does not. Tier-2 finding, OPEN. Not required by any rule I could read.
 5. **Filing stamp area.** Kept (2 in × 2 in clear area on page 1) because BLR 5005-1 asks for it. The exemplar is an ECF copy and has no stamp space; the template keeps the area for paper filing.
-6. **Page limit (BLR 7007-1, 25 pages).** Not counted. The sample is 7 pages.
+6. **Page limit (BLR 7007-1, 25 pages).** Not counted. The sample is 8 pages.
 7. **No table of contents or table of authorities.** The exemplar has none.
 8. **Exemplar typos kept.** "CITIATIONS", "Similary", "Vigil", "brough", "Global., and", a Rule 12(b)(6) cite under the bankruptcy rules. The transcription is verbatim, so the sample matches the filing.
 9. **The sample is the whole filing** (the motion, memorandum, WHEREFORE, signature and certificate), so the overlay covers all of it.

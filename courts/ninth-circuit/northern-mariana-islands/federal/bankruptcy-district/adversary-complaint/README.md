@@ -80,7 +80,7 @@ sh tools/render.sh courts/ninth-circuit/northern-mariana-islands/federal/bankrup
 
 The overlay command (`sh tools/overlay.sh <court-dir>`) exits 2 here with `tools/overlay.sh: 16: 2: parameter not set` (2026-10-14, run for real): it needs `usage/*.pdf`. Nothing was produced.
 
-## Visual review (Gate 2 record, all 3 pages, rendered at 60 dpi and viewed)
+## Visual review (Gate 2 record, all 3 pages of the earlier EB Garamond render, rendered at 60 dpi and viewed; before fb-595.68.23)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -137,7 +137,7 @@ The required batch task prompted another search for a public filed complaint:
 
 Result: no public filed adversary complaint found. The missing artifact is still a blocker for sample transcription, a valid exemplar overlay, and a comparison-based all-page review. The existing synthetic output was rasterized at 100 dpi and all three pages were inspected on 2026-10-17 for its own layout only; that inspection is not a substitute for comparison to a filed exemplar. No overlay was produced.
 
-Re-verified this session: `sh tools/render.sh` exit 0, `usage/OUTPUT-adversary-complaint.typst.pdf`, 3 pages, EB Garamond only (`pdffonts`). All 3 pages rasterized at 60 dpi (`pdftoppm -r 60`) and viewed: page 1 caption and title, page 2 paragraphs 1 to 11 and sub-heading, page 3 claim, prayer, jury demand and signature. No template change. `sh tools/overlay.sh <dir>` exit 2 (`parameter not set`, no exemplar PDF). The overlay stays not produced.
+Re-verified in that session (2026-10-17, before fb-595.68.23 moved the template to Times New Roman): `sh tools/render.sh` exit 0, `usage/OUTPUT-adversary-complaint.typst.pdf`, 3 pages, EB Garamond only (`pdffonts`). All 3 pages rasterized at 60 dpi (`pdftoppm -r 60`) and viewed: page 1 caption and title, page 2 paragraphs 1 to 11 and sub-heading, page 3 claim, prayer, jury demand and signature. No template change. `sh tools/overlay.sh <dir>` exit 2 (`parameter not set`, no exemplar PDF). The overlay stays not produced.
 ## Engines
 
 - **typst** (primary): `typst/`, as above, on the shared cross-engine layout model (`lib/typst/xengine.typ`).

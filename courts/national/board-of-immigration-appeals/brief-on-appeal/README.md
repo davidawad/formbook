@@ -7,10 +7,10 @@ A respondent's brief on appeal to the Board. The template was built from the rul
 | Item | Result |
 |---|---|
 | Exemplar | yes: `usage/FILED-EXAMPLE-brief-on-appeal.pdf` (*Matter of A-B-*, respondent's brief filed 2019-12-16; public copy, docket redacted). Source and rejected candidates in [`usage/SOURCE.md`](usage/SOURCE.md). |
-| Typeface | Times New Roman (preferred, ch. 3.3(c)(7)) → **Liberation Serif** (vendored, metric-compatible; `docs/FONTS.md`). Embedded per `pdffonts`: LiberationSerif Regular, Bold, Italic. No EB Garamond. |
+| Typeface | **Times New Roman** (preferred, ch. 3.3(c)(7)): the pinned install, `docs/FONTS.md` rule 1, with Liberation Serif (vendored, metric-compatible) as fallback. Embedded per `pdffonts` in the committed renders: TimesNewRomanPSMT Regular, Bold, Italic. No EB Garamond. |
 | Render | ok: `usage/OUTPUT-brief-on-appeal.typst.pdf`, 13 pages (was 12 in EB Garamond: the body grew from 9 to 10 pages, certificate now p. 13). `sh tools/render.sh` exited 0 with no typst warnings. |
 | Overlay | ok: `usage/OVERLAY-AB-2019-12-16.pdf` and `.txt`. `sh tools/overlay.sh` wrote both. Pairs: our pp. 1–12 with filed pp. 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 52. Our p. 13 (certificate) has no filed counterpart. |
-| Pages reviewed | 13 of 13, each page rendered to PNG at 60 dpi and looked at after the font change. |
+| Pages reviewed | 13 of 13, each page rendered to PNG at 60 dpi and looked at after the font change (the Liberation Serif render, before fb-595.68). |
 
 ## What the overlay found, and what changed
 
@@ -33,7 +33,7 @@ Verified 2026-10-14. Sources:
 | Paginated | Manual ch. 4.6(b) | footer, page number centred, A-number at right, on every page after the cover; table of contents numbered i (PM 4.6(b), 4.6(c)(2)); body numbering starts at 1 at the Introduction (as in the filed exemplar) |
 | A-number on the cover and at bottom right of each later page | Manual ch. 4.6(c)(2) | footer right, `A#<a_number>`. The filed public copy shows no A-number on its body pages (redacted), so this is not checked against the exemplar. |
 | Cover page with caption: filer name and address, title, respondent name as on charging document, A-number, type of proceeding; special circumstances (e.g. DETAINED) prominent, top right | Manual ch. 3.3(c)(6), App. E; ch. 4.6(c)(3) | cover block, `custody` box top right |
-| Fonts: "Times New Roman 12 point" preferred; proportionally spaced and monospaced both acceptable; double-spaced text preferred; single-spaced footnotes preferred | Manual ch. 3.3(c)(7) | `body-font = "Liberation Serif"` (substitute, `docs/FONTS.md`); `body-size = 12pt`; `body-leading = 1.74em` (double-spaced). Times is the preferred face, not a required one, so the substitute is a faithful match, not a deviation. |
+| Fonts: "Times New Roman 12 point" preferred; proportionally spaced and monospaced both acceptable; double-spaced text preferred; single-spaced footnotes preferred | Manual ch. 3.3(c)(7) | `body-font = ("Times New Roman", "Liberation Serif")` (the preferred face; Liberation Serif fallback, `docs/FONTS.md`); `body-size = 12pt`; `body-leading = 1.74em` (double-spaced). |
 | Paper: standard 8½ × 11 | Manual ch. 3.3(c)(4) | `paper: "us-letter"` |
 | Contents: facts and procedural history, issues, standard of review, summary of argument, argument, conclusion | Manual ch. 4.6(c)(4) | sample uses these headings, in the filed order |
 | Party names: "respondent" for the noncitizen in removal proceedings | Manual ch. 4.6(c)(5) | sample uses "Respondent" |
@@ -44,7 +44,7 @@ Verified 2026-10-14. Sources:
 
 1. **One exemplar.** The task asked for one. A second filer's brief would help tier-2 judgment. Not searched beyond the queries in `usage/SOURCE.md`.
 2. **Transcription is partial.** The sample transcribes the Introduction through the Request for Oral Argument (filed pp. 1–9) and the Conclusion and signature (filed pp. 48–49). The Argument (filed pp. 10–47) is marked as omitted. The overlay pairs the transcribed pages only.
-3. **Font.** The Manual prefers Times New Roman 12 point. The template uses its vendored substitute, Liberation Serif (`fonts/liberation-serif`), which is metric-compatible with Times New Roman per `docs/FONTS.md`. It is not checked against a Times New Roman file, since none is on this box. The switch from EB Garamond lengthened the body by one page (9 → 10 body pages), so line and page breaks now track the filed copy more closely (overlay word overlap on body pages rose, e.g. filed p. 4 vs. ours p. 3: 79.8% → 90.7%).
+3. **Font.** The Manual prefers Times New Roman 12 point, and the template sets it (the pinned install, `docs/FONTS.md` rules 1 and 6; Liberation Serif, `fonts/liberation-serif`, as fallback). Before fb-595.68 the template used Liberation Serif alone, and before that EB Garamond. The switch from EB Garamond lengthened the body by one page (9 → 10 body pages), so line and page breaks now track the filed copy more closely (overlay word overlap on body pages rose, e.g. filed p. 4 vs. ours p. 3: 79.8% → 90.7%).
 4. **Margins.** The Manual sets no margin figure. 1-inch margins are a convention, not a rule.
 5. **Table of citations.** Not generated. Only the table of contents is built (from the headings). A brief with citations needs a table of authorities; the Manual excludes it from the page count.
 6. **Two-hole punch.** Manual ch. 3.3(c)(8) asks for paper briefs pre-punched at the top, centred, 2¾ in apart. The template does not add punch holes. This matters only for paper filing.
@@ -64,13 +64,13 @@ Verified 2026-10-14. Sources:
 
 ## Engines
 
-**docx** (`docx/`: `reference.docx` from `build-reference.sh`, `bia.lua`, `render.sh`). Render: `sh tools/render.sh --engine docx <folder> usage/INPUT-brief-on-appeal.md`. Output: `usage/OUTPUT-brief-on-appeal.docx` and `.docx.pdf` (LibreOffice). Pages checked: 13 of 13, each rendered at 60 dpi and compared with the typst copy.
+**docx** (`docx/`: `reference.xml`, from which fb render builds the reference document in the typst face, and `bia.lua`; fb render runs pandoc with the filter). Render: `sh tools/render.sh --engine docx <folder> usage/INPUT-brief-on-appeal.md`. Output: `usage/OUTPUT-brief-on-appeal.docx` and `.docx.pdf` (LibreOffice). Pages checked: 13 of 13, each rendered at 60 dpi and compared with the typst copy.
 
-- **Matches typst:** Liberation Serif 12 pt; double spacing at an exact 28.75 pt pitch (measured from the typst render); 1 in margins on US letter; first-line indent on body paragraphs, none on the first paragraph after a heading; H1 bold caps, left, 17 pt (typst 1.4 em); footnotes 12 pt, single spaced; footer with the page number centred and `A#` at the right; cover unnumbered, contents numbered i; body numbered from the Introduction as page 1; certificate of service on its own page; signature block and counsel block as in typst.
+- **Matches typst:** Times New Roman 12 pt; double spacing at an exact 28.75 pt pitch (measured from the typst render); 1 in margins on US letter; first-line indent on body paragraphs, none on the first paragraph after a heading; H1 bold caps, left, 17 pt (typst 1.4 em); footnotes 12 pt, single spaced; footer with the page number centred and `A#` at the right; cover unnumbered, contents numbered i; body numbered from the Introduction as page 1; certificate of service on its own page; signature block and counsel block as in typst.
 - **Differs:** the counsel block sits in a frame at the foot of the cover, and its role line ("Counsel for Respondent") sits under it, not beside it at the top right. The custody box is in the top-right table cell, about 0.4 in lower than in typst. Lists are double spaced (typst's list pitch is tighter; the Manual prefers double spacing). Page breaks differ in places (Word and LibreOffice keep-with-next and widow rules), so the body runs to 13 pages in both, with different breaks.
-- **Contents:** a TOC field whose cached result holds the page numbers, filled by `render.sh` in a first pass. Word can refresh it; the numbers shown are those of the LibreOffice PDF.
-- **Footer A-number:** `render.sh` fills the `A#` placeholder from the frontmatter at render time (the same field the typst footer reads).
+- **Contents:** a TOC field whose cached result holds the page numbers, filled by fb render's page-number passes (the filter's needles, `FORMBOOK_PAGES`; it renders again until the pages settle). Word can refresh it; the numbers shown are those of the LibreOffice PDF.
+- **Footer A-number:** the filter writes the footer with the `A#` from the frontmatter (`FORMBOOK_META`, `FORMBOOK_FOOTERS`) (the same field the typst footer reads).
 - **Not checked:** the `.docx` in Word (no Word here). LibreOffice converts it with no repair prompt.
-- **BLOCKED (2026-10-22):** `sh tools/check.sh <folder> --engine docx` runs: 9 passed, 2 failed. DEF-CONT-001 (three paragraphs whose footnote markers LibreOffice moves, so the extracted text differs from the INPUT) and TNR-EMBEDDED (the docx PDF embeds Liberation Serif, the declared Times New Roman substitute) fail, as before fb-595.73.1; DEF-COVER-001 passes.
+- **BLOCKED (2026-10-22):** `sh tools/check.sh <folder> --engine docx` runs: 9 passed, 2 failed. DEF-CONT-001 (three paragraphs whose footnote markers LibreOffice moves, so the extracted text differs from the INPUT) and TNR-EMBEDDED (the docx PDF embeds Liberation Serif, the declared Times New Roman substitute) fail, as before fb-595.73.1; DEF-COVER-001 passes. (Recorded before fb-595.68 step 2: the committed docx PDF now embeds TimesNewRomanPSMT; not re-checked here.)
 
 [Board of Immigration Appeals](../README.md)

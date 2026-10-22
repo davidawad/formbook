@@ -36,7 +36,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
@@ -49,14 +49,14 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 ## Typeface
 
-Checked 2026-10-15 against the court's Local Bankruptcy Rules (General Order 2025-01, text layer): no rule names a typeface or point size. Both doc types keep EB Garamond (`docs/FONTS.md`, "no face named" row), at 12 pt.
+Checked 2026-10-15 against the court's Local Bankruptcy Rules (General Order 2025-01, text layer): no rule names a typeface or point size. Both doc types are set in Times New Roman 12 pt, the house standard (`docs/FONTS.md`, rule 6; they were EB Garamond on that date).
 
 | Doc type | Face required | Font in template | Notes |
 |---|---|---|---|
-| `adversary-complaint/` | none | EB Garamond | see that folder's README, gap 2 |
-| `motion-brief/` | none | EB Garamond | see that folder's README, gap 2 |
+| `adversary-complaint/` | none | Times New Roman | see that folder's README, gap 2 |
+| `motion-brief/` | none | Times New Roman | see that folder's README, gap 2 |
 
-No `latex/` or `docx/` engine exists for this court.
+No `latex/` engine exists for this court. Each doc type has a `docx/` engine (`reference.xml` and a filter; `fb render --engine docx` builds it).
 
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`

@@ -7,10 +7,10 @@ Folder: `courts/eleventh-circuit/georgia/federal/middle-district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (the whole 9-page brief, transcribed; see Known gaps) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, Times New Roman (the pinned install, `docs/FONTS.md` rule 1) only, no warnings |
 | overlay | ok: `usage/OVERLAY-brooks-motion-brief.pdf` and `OVERLAY-brooks-motion-brief.txt` |
-| typeface | face required: **none** (M.D. Ga. Local Rules name no typeface); font: **EB Garamond** (vendored, kept per `docs/FONTS.md`, "No face named"); not a substitution, so no metric question arises |
-| pages reviewed | 9 of 9 (re-rendered 2026-10-14 with no template change; every page rendered at 60 dpi and viewed) |
+| typeface | face required: **none** (M.D. Ga. Local Rules name no typeface); font: **Times New Roman** 12 pt (the house face where no rule names one, `docs/FONTS.md` rule 6) |
+| pages reviewed | 9 of 9 (re-rendered 2026-10-14 with no template change; every page rendered at 60 dpi and viewed; on the earlier EB Garamond 13 pt render) |
 
 ## Governing rules
 
@@ -22,7 +22,7 @@ Each rule was read from its source on 2026-10-14.
 | M.D. Ga. L.R. 7.2 | Response within 21 days after service of the movant's motion and brief. Same source. | Not a layout rule; not templated. |
 | M.D. Ga. L.R. 7.3 | Reply within 14 days after service of the response. Same source. | Not templated. |
 | M.D. Ga. L.R. 7.4 | Briefs in support of or in response to a motion are limited to **20 pages**; the movant's reply to 10 pages; an extension must be requested by written motion at least five days before the deadline. Same source. | **Not enforced:** the template has no page counter (the exemplar is 9 pages). |
-| M.D. Ga. Local Rules (typeface) | No typeface, point size or spacing rule in the consolidated text (PDF dated 3-7-22, read 2026-10-14; LR 7.1 is not a formatting rule). Face required: **none**. | Font: **EB Garamond** (`docs/FONTS.md`, "No face named"), 13 pt. The exemplar's Times New Roman is a filer's choice, not a rule. |
+| M.D. Ga. Local Rules (typeface) | No typeface, point size or spacing rule in the consolidated text (PDF dated 3-7-22, read 2026-10-14; LR 7.1 is not a formatting rule). Face required: **none**. | Font: **Times New Roman**, 12 pt (`docs/FONTS.md` rule 6, the house face where no rule names one), the exemplar's face and size. |
 | M.D. Ga. L.R. 83.1.2(B) | State Bar of Georgia number on the signature page of each pleading. Same source. | `signature.signers` (each attorney's Georgia Bar No. line). |
 | M.D. Ga. L.R. 83.1.2(A) | Lead counsel's name, address and telephone on the signature page of the **first pleading**. Same source. | Optional `signature.lead_counsel` line. A brief is not the first pleading, so the exemplar and the sample omit it. |
 | M.D. Ga. L.R. 5.4(A) | Redaction of SSNs, taxpayer IDs, birth dates, minors' names, financial account numbers (filer's duty). Same source. | **Not checked by the template.** |
@@ -62,7 +62,7 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/moti
 - The render writes `usage/OUTPUT-motion-brief.typst.pdf` (the default name in `tools/render.sh`); the overlay writes `OVERLAY-brooks-motion-brief.pdf` and `.txt` (the tool's names; the brief's `<id>-overlay` names were not used, because the tool reads and writes these).
 - Red = our render, blue = exemplar, black = both. The page map pairs pages by word overlap: ours 1-7 pair with filed 1-7; ours 8 pairs with filed 9 and ours 9 with filed 8, because the exemplar's certificate page and signature page are split in the filing and our signature block falls on page 8 (see Known gaps). The overlay is a diagnostic, not a score.
 
-## Visual review (Gate 2 record, all 9 pages, rendered at 60 dpi and looked at)
+## Visual review (Gate 2 record, all 9 pages, rendered at 60 dpi and looked at; on the earlier EB Garamond 13 pt render)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -79,7 +79,7 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/moti
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers from different sources. Not collected for this doc type. The M.D. Ga. search (CourtListener RECAP, `court=gamd`, `type=r`, "motion to dismiss memorandum", filed 2015-2021, filtered to stored PDFs) also found Sims v. Evans (5:15-cv-285, brief in Calibri, 8 pages), Zavala v. Ward (5:19-cv-383, memorandum 4 pages), and Thrower v. Matrix Warranty (3:19-cv-66, motion 4 pages; memorandum not separately saved). **Tier 2 is therefore not judged against two filers.**
-2. **Font.** The court names no face, so the template keeps **EB Garamond at 13 pt** (`docs/FONTS.md`, "No face named"). The exemplar is 12-pt Times New Roman, a filer's choice. EB Garamond sets smaller at the same size, so 13 pt is a judgment call for David. Liberation Serif (Times New Roman's metric-compatible substitute) is vendored; switching is a template change not made here.
+2. **Font.** The court names no face, so the template sets the house face, **Times New Roman at 12 pt** (`docs/FONTS.md` rule 6), which is also the exemplar's face and size (until 2026-10-17 the template set EB Garamond at 13 pt).
 3. **M.D. Ga. typeface and margin rule.** None found in the consolidated Local Rules text (PDF dated 3-7-22, fetched and text-extracted 2026-10-14). The layout follows the exemplar, as the brief says. The current text was not confirmed beyond that version.
 4. **Page limit (L.R. 7.4, 20 pages).** Not enforced by the template (no page counter). The sample is 9 pages.
 5. **Judge's standing orders** were not checked.
@@ -94,11 +94,11 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/moti
 
 ## Engines
 
-`typst/` is the reference. The docx engine is `docx/` (`reference.docx` for the styles, page setup and footers; `gamd-motion-brief.lua` for the cover, caption, `[[signature]]` blocks and the body). Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/middle-district/motion-brief usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8 converts; EB Garamond from `fonts/` must be installed for LibreOffice, see `docs/FONTS.md`).
+`typst/` is the reference. The docx engine is `docx/` (the committed `reference.docx` for the styles, page setup and footers, used as-is by `fb render --engine docx`; `gamd-motion-brief.lua` for the cover, caption, `[[signature]]` blocks and the body). Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/middle-district/motion-brief usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice converts, with the pinned Times New Roman install, `docs/FONTS.md` rule 1).
 
 | Layout | docx | Note |
 |---|---|---|
-| Face and size | EB Garamond 13 pt body, 11 pt single-spaced footnotes, 12 pt page number | As typst. Named in the styles; Word substitutes silently if the face is not installed. |
+| Face and size | Times New Roman: 13 pt body (the `reference.docx` default, 26 half points), 11 pt single-spaced footnotes, 12 pt page number | Face as typst; the body size is not (typst sets 12 pt). Named in the styles; Word substitutes silently if the face is not installed. |
 | Line pitch | Exact 27.6 pt on body and headings | Same pitch as typst. |
 | Margins, paper | Letter, 1 in on every side | |
 | Body | First-line indent 0.5 in on every paragraph, no numbering | |
@@ -108,6 +108,6 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/moti
 | Signature block | "Respectfully submitted," at 3 in, firm and signers, address and "Attorneys for" flush left | At each `[[signature]]` line and at the end if there is no marker. |
 | Page number | Centred 12 pt from page 2; page 1 has none | `titlePg` with an empty first-page footer. |
 
-- **Pages reviewed:** all 9 pages of `OUTPUT-motion-brief.docx.pdf` were rendered at 60 dpi and compared with the typst output page by page (side-by-side). Pages 1 and 2 match in form. From page 3 the page breaks differ (a line or two per page adds up): Argument III starts on page 4 in the docx and on page 3 in typst. LibreOffice also splits footnote 4 across pages 5 and 6 (typst keeps it on page 5), and the certificate of service starts on page 9 (typst: page 8). The page count is the same, 9.
+- **Pages reviewed** (on the earlier EB Garamond render)**:** all 9 pages of `OUTPUT-motion-brief.docx.pdf` were rendered at 60 dpi and compared with the typst output page by page (side-by-side). Pages 1 and 2 match in form. From page 3 the page breaks differ (a line or two per page adds up): Argument III starts on page 4 in the docx and on page 3 in typst. LibreOffice also splits footnote 4 across pages 5 and 6 (typst keeps it on page 5), and the certificate of service starts on page 9 (typst: page 8). The page count is the same, 9.
 - **Checks:** `tools/check.sh --engine docx` was not run (same reason as the complaint, gap 10). The docx is not BLOCKED on any tier-1 point in this list. Not verified: opening the `.docx` in Microsoft Word (no Word here); LibreOffice converts it without error, but no GUI repair prompt was checked.
 - **Pagination:** Word and LibreOffice may break lines and footnotes differently from each other and from typst (`docs/DOCX.md`). Do not force page breaks to match.

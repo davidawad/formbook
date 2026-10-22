@@ -24,7 +24,7 @@ Not used, and why: LBR 7007.1-1 (corporate ownership statement) applies to a cor
 
 ## Typeface
 
-LBR 9004-1(A) (court's local rules, "Updated March 21, 2025"; the rule text as quoted on courtrules.net, checked 2026-10-15) requires no less than 12-point font, footnotes included. It names no typeface. Under `docs/FONTS.md` ("No face named"), the template keeps **EB Garamond** (vendored, OFL 1.1). Face required: none. Substitute: none needed (EB Garamond is the default). The 2009 exemplar sets LiberationSans (embedded) with Helvetica and Courier base-14 names (per `pdffonts`); that is the filer's choice, not a rule.
+LBR 9004-1(A) (court's local rules, "Updated March 21, 2025"; the rule text as quoted on courtrules.net, checked 2026-10-15) requires no less than 12-point font, footnotes included. It names no typeface. Under `docs/FONTS.md` rule 6 (the house standard where no face is named), the template sets **Times New Roman** 12 pt (Liberation Serif fallback; it was EB Garamond 13 pt before), and the docx names the same face. Face required: none. The 2009 exemplar sets LiberationSans (embedded) with Helvetica and Courier base-14 names (per `pdffonts`); that is the filer's choice, not a rule.
 
 ## Exemplar
 
@@ -53,7 +53,7 @@ sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-dis
 sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/adversary-complaint adversary-complaint
 ```
 
-- render: **ok**. `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular and -Bold only, embedded.
+- render: **ok**. `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular and -Bold only, embedded (that render, on the earlier EB Garamond template).
 - overlay: **ok**. The filed PDF is not in this checkout; it was fetched from the RECAP URL in `usage/SOURCE.md` to a scratch directory (8 pages, matching the record) and passed to `tools/overlay.sh` as its third argument. `usage/OVERLAY-adversary-complaint.pdf` and `.txt` written. Word overlap per page, as the tool reports it: p.1 58.5%, p.2 85.3%, p.3 90.2%, p.4 82.4%, p.5 70.9%, p.6 52.9%, p.7 35.6%, p.8 60.7%. The overlay is a diagnostic, not a score. The lowest pages are 7 (35.6%) and 6 (52.9%); I did not chase the cause in this pass, and I do not claim it is line breaks.
 
 ## Visual review (Gate 2, all 8 pages rendered at 70 dpi and looked at)
@@ -79,7 +79,7 @@ Defects the overlay and the review found during the build: none in the template 
 4. **Adversary cover sheet** (LBR 7003-1) is not generated; it is an Official Form filed with the complaint when the complaint is not filed through ECF.
 5. **Summons** (LBR 7004-2) is issued by the clerk; not generated.
 6. **Certificate of service:** none. A complaint is served with the summons under FRBP 7004; no certificate is in the rules this template reads.
-7. **Font:** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. 13 pt because EB Garamond sets small at 12; both meet the LBR 9004-1(A) floor. This is a choice; the court's rule names no font (see Typeface). The exemplar is in LiberationSans/Helvetica, 2009.
+7. **Font:** Times New Roman 12 pt, the house standard (was EB Garamond 13 pt, because EB Garamond sets small at 12); it meets the LBR 9004-1(A) floor. This is a choice; the court's rule names no font (see Typeface). The committed `docx/reference.docx` names Times New Roman but still sets 13 pt on a 26 pt line. The exemplar is in LiberationSans/Helvetica, 2009.
 8. **Caption layout:** the In re block and party block sit in one left column with a rule, and the case-number column on the right. LBR 9004-2(A) fixes what the caption contains, not its layout. The exemplar's layout is similar.
 9. **Electronic filing:** the court's May 2024 how-to says to print the finished complaint to PDF rather than save the Word file as a PDF, so the document is flattened. The typst output is a flattened PDF.
 10. **Core / non-core and consent** (FRBP 7008(a)): generated from `core`. The sample says core under § 157(b)(2)(I) and no consent. The author must choose these per complaint; the template does not decide them.
@@ -90,7 +90,7 @@ Defects the overlay and the review found during the build: none in the template 
 
 **docx** (`docx/reference.docx`, no Lua filter; built from pandoc's default reference by a scratch script).
 
-- Matches the typst form: US Letter, 1 in margins on all sides, EB Garamond 13 pt body, footnote text 13 pt, body and headings on an exact 26 pt (double) line, block quotes and footnotes single spaced, level-1 headings bold capitals, level-2 bold centred, level-3 bold italic, page number centred in the footer. No line numbers or rules (the template has none).
+- Matches the typst form (as built; the reference sizes are the earlier 13 pt ones, the typst template now sets 12 pt on a 24 pt line): US Letter, 1 in margins on all sides, Times New Roman 13 pt body (the typst face), footnote text 13 pt, body and headings on an exact 26 pt (double) line, block quotes and footnotes single spaced, level-1 headings bold capitals, level-2 bold centred, level-3 bold italic, page number centred in the footer. No line numbers or rules (the template has none).
 - Differs: pandoc writes only the markdown body. The caption, the court title block, the generated jurisdiction and venue paragraphs (FRBP 7008(a)), the consent sentence and the signature block are produced by the typst template from the frontmatter and are **not** in the docx. Paragraph numbers follow the markdown (pandoc's own numbering), not the typst counter. The frontmatter `title` appears as pandoc's Title paragraph. This docx is therefore not a filable complaint yet.
 - BLOCKED: `docx.pdf` and Gates 0-1 on the LibreOffice PDF: `soffice` is not installed on this box and cannot be installed here.
 - BLOCKED: visual review of the docx pages: 0 docx pages viewed (only the typst pages were rendered and reviewed).

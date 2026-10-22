@@ -7,10 +7,10 @@ Folder: `courts/eighth-circuit/arkansas/federal/western-district/complaint/` (se
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (the whole 10-page filing, transcribed; paragraph numbers are the template's) |
-| typeface | face required: **none**. LR 5.5(a) says "type not less than elite" and names no face (searched the consolidated local rules, 66 pp., 2026-10-14). Vendored substitute: **not needed**; kept **EB Garamond** (`fonts/eb-garamond/`), as the fonts policy allows for a court that names no face. Metric class: n/a. The filed exemplar is Times New Roman with Century Schoolbook headings (tier 2, not chased; see gap 1). |
-| render | ok (re-rendered 2026-10-14): `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: EBGaramond Regular/Bold/Italic only |
+| typeface | face required: **none**. LR 5.5(a) says "type not less than elite" and names no face (searched the consolidated local rules, 66 pp., 2026-10-14). Font: **TeX Gyre Schola** 12 pt (vendored), the audited exemplar face (`data/exemplar-fonts.json`: the exemplar's body is Century Schoolbook; `docs/FONTS.md`); the template was EB Garamond before. Metric class: approximate (see gap 1). |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: TeXGyreSchola Regular/Bold/Italic only (the 2026-10-14 render was 9 pages in EB Garamond) |
 | overlay | ok (regenerated 2026-10-14): `usage/OVERLAY-little-complaint.pdf` and `OVERLAY-little-complaint.txt`, against the filed exemplar re-fetched from the URL in `usage/SOURCE.md` (the PDF is not committed in this tree; see gap 10) |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on 2026-10-14) |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on 2026-10-14, on the earlier EB Garamond render) |
 
 File names follow the repo's roles (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names.
 
@@ -33,7 +33,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 - US letter, 1-inch margins on all four sides (the exemplar's margins measured with `pdftotext -bbox`: 72 pt left and right, first line at 72 pt).
 - No pleading paper and no line numbers: LR 5.5 does not call for them, and the exemplar has none.
-- Double spacing: 12 pt EB Garamond, baseline pitch 27.6 pt (`pitch` = 0.65 em line + `body-leading` 1.65 em). The exemplar's pitch is 28.9 pt; this is a tier-2 difference, not a rule.
+- Double spacing: 12 pt TeX Gyre Schola, baseline pitch 27.6 pt (`pitch-body`, 2.3 em). The exemplar's pitch is 28.9 pt; this is a tier-2 difference, not a rule.
 - Court title single-spaced and centered (one line per `court` entry, then `division`). Caption: party names on the left with the designation right-aligned on the first name line; "v." and `CASE NO. ...` share the row between the parties.
 - Title centered and bold, in capitals. A `subtitle` line is optional.
 - Headings: level 1 centered bold capitals; level 2 centered bold as typed; level 3 bold, left. A heading is set off by one blank double-spaced line above and below and is kept with the paragraph after it.
@@ -52,9 +52,9 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 The typst template above is the primary engine. The docx engine is in `docx/`; it has no latex engine.
 
-- `docx/build-reference.sh` builds `docx/reference.docx`: EB Garamond 12 pt, double spacing as an exact 27.6 pt line, 0.5 in first-line indent, letter page with 1 in margins, the page number centered 0.4 in from the bottom, and single-spaced styles for the caption, court title and signature. Run `sh docx/build-reference.sh docx/reference.docx` (needs pandoc, zip, unzip and xmllint).
+- `docx/reference.xml` holds the styles, from which `fb render` builds the reference document on the shared cross-engine recipe (`base="xengine"`, the typst face): TeX Gyre Schola 12 pt, double spacing as an exact 27.6 pt line, 0.5 in first-line indent, letter page with 1 in margins, the page number centered 0.4 in from the bottom, and 13.8 pt single lines for the caption, court title and signature. (`docx/build-reference.sh` built a committed `reference.docx` until fb-595.68.)
 - `docx/arwd-complaint.lua` turns the same markdown into Word: the court title and caption as borderless tables of exact width, the title in bold capitals, numbered paragraphs (the filter numbers them, as typst does), lettered lists, `^ ` unnumbered paragraphs, headings, and the signature block.
-- `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx`. The `.docx.pdf` step did not run (see BLOCKED below).
+- `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` and its `.docx.pdf` (the committed `usage/.check-docx.txt` reads PASS). The notes below, through BLOCKED, were written before LibreOffice ran on the box.
 
 **What matches** (checked on the .docx XML and its text, not by eye): font and size, the 27.6 pt line pitch, margins, the first-line indent, the caption and signature table widths, the page-number footer, and the word sequence: every word of `INPUT-complaint.md` appears in the .docx in the same order.
 
@@ -87,7 +87,7 @@ Bugs found and fixed during review (kept here so the next change does not reintr
 
 ## Known gaps and open choices
 
-1. **Font and "elite".** LR 5.5(a) says "type not less than elite" and names no typeface, so the fonts policy (`docs/FONTS.md`) keeps EB Garamond here; no substitute is substituted. Elite is a 12-characters-per-inch typewriter pitch; for a proportional face the usual reading is a 12-point type size. The template uses EB Garamond at 12 pt. EB Garamond sets smaller than Times New Roman at the same size; the filed exemplar is Times New Roman (body) with Century Schoolbook (headings). Choosing Liberation Serif or TeX Gyre Schola would be a tier-2 convention choice, not a rule requirement, so it is not made here. **Needs David's call** if the clerk reads "elite" as a pitch limit for proportional type, or if the court wants the exemplar's faces.
+1. **Font and "elite".** LR 5.5(a) says "type not less than elite" and names no typeface. Elite is a 12-characters-per-inch typewriter pitch; for a proportional face the usual reading is a 12-point type size. The template uses TeX Gyre Schola at 12 pt, the face the font audit matched to the exemplar's Century Schoolbook (`data/exemplar-fonts.json`); it was EB Garamond before. **Needs David's call** if the clerk reads "elite" as a pitch limit for proportional type.
 2. **One exemplar.** Tier 2 asks for 2 or 3 filers; only Little v. Church & Dwight is saved. Other complaints found (Sullivan v. Goodyear, Kiefer Sage v. Pro-Gard, Saeidi) are listed in `usage/SOURCE.md`. Tier 2 is therefore judged against one filer.
 3. **Class actions.** LR 23.1 requires the caption legend "Complaint - Class Action" and a "Class Action Allegations" paragraph. Not implemented: no `legend` field exists yet. Add it to the template before using it for a class complaint.
 4. **Jury demand.** The exemplar demands a jury inside the prayer (item d). The template adds no separate jury-demand caption line. Fed. R. Civ. P. 38(b) requires only a demand in a pleading, which the prayer provides; no W.D. Ark. local rule was found that sets a separate form (LR 5.5 and the consolidated rules were read).

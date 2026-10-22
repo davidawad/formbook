@@ -7,10 +7,10 @@ Folder: `courts/eleventh-circuit/georgia/federal/middle-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (a portion of the 21-page filing, see Known gaps) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, the pinned Times New Roman only (`docs/FONTS.md`, rule 1), no warnings |
 | overlay | ok: `usage/OVERLAY-solen-complaint.pdf` and `OVERLAY-solen-complaint.txt` |
-| typeface | face required: **none** (M.D. Ga. Local Rules name no typeface); font: **EB Garamond** (vendored, kept per `docs/FONTS.md`, "No face named"); not a substitution, so no metric question arises |
-| pages reviewed | 10 of 10 (re-rendered 2026-10-14 with no template change; every page rendered at 60 dpi and viewed) |
+| typeface | face required: **none** (M.D. Ga. Local Rules name no typeface); font: **Times New Roman** 14 pt, the house standard (`docs/FONTS.md`, rule 6) and the exemplar's face |
+| pages reviewed | 10 of 10 (re-rendered 2026-10-14 with no template change; every page rendered at 60 dpi and viewed; the earlier EB Garamond render, before fb-595.68) |
 
 ## Governing rules
 
@@ -24,7 +24,7 @@ Each rule was read from its source on 2026-10-14. Sources and the text relied on
 | Fed. R. Civ. P. 10(c) | Exhibits are part of the pleading. Same source. | Not templated (no exhibit section). |
 | Fed. R. Civ. P. 5(d)(1)(B) | No certificate of service is required for a paper served through the court's e-filing system. https://www.law.cornell.edu/rules/frcp/rule_5, fetched 2026-10-14. | No certificate is generated. The exemplar has none. |
 | M.D. Ga. L.R. 83.1.2(A) | Lead counsel's name, address and telephone number on the signature page of the first pleading. Local Rules, consolidated text (PDF dated 3-7-22), https://www.gamd.uscourts.gov/sites/gamd/files/Local_Rules_3-7-22.pdf, read 2026-10-14. | Signature block: "Lead Counsel:" line, with the address block under it. **The exemplar has no lead-counsel label**; the template follows the rule, so this differs from the exemplar on purpose. |
-| M.D. Ga. Local Rules (typeface) | No typeface, point size or spacing rule in the consolidated text (PDF dated 3-7-22, read 2026-10-14; LR 5.1 and 7.1 are not formatting rules). Face required: **none**. | Font: **EB Garamond** (`docs/FONTS.md`, "No face named"), 14 pt. The exemplar's Times New Roman is a filer's choice, not a rule. |
+| M.D. Ga. Local Rules (typeface) | No typeface, point size or spacing rule in the consolidated text (PDF dated 3-7-22, read 2026-10-14; LR 5.1 and 7.1 are not formatting rules). Face required: **none**. | Font: **Times New Roman** (`docs/FONTS.md`, rule 6, the house standard), 14 pt, as in the exemplar. |
 | M.D. Ga. L.R. 83.1.2(B) | State Bar of Georgia number on the signature page of each pleading. Same source. | `signature.signers` (each attorney's Georgia Bar No. line). |
 | M.D. Ga. L.R. 87.1-87.3 | A nongovernmental corporate party files a corporate disclosure statement with its initial pleading; a party asserting diversity files a jurisdictional statement (state of incorporation and principal place of business; LLC members' citizenship). Same source. | **Not templated.** A separate filing; flagged for any corporate plaintiff. |
 | M.D. Ga. L.R. 5.4(A) | Redaction: SSN and taxpayer ID to last four digits, birth year only, minors' initials, financial account numbers to last four digits (the filer's duty). Same source. | **Not checked by the template.** Author's responsibility. |
@@ -62,7 +62,7 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/comp
 - The render writes `usage/OUTPUT-complaint.typst.pdf` (the default name in `tools/render.sh`); the overlay reads it and writes `OVERLAY-solen-complaint.pdf` and `.txt` (the tool's names; the brief's `<id>-overlay` names were not used, because the tool reads and writes these).
 - Red = our render, blue = exemplar, black = both. The page map pairs pages by word overlap: ours 1-10 pair with filed 1-4, 6-9, 20 and 21, since the sample skips pages. The overlay is a diagnostic, not a score.
 
-## Visual review (Gate 2 record, all 10 pages, rendered at 60 dpi and looked at)
+## Visual review (Gate 2 record, all 10 pages, rendered at 60 dpi and looked at; on the earlier EB Garamond render, before fb-595.68)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -80,7 +80,7 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/comp
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers from different sources. Other M.D. Ga. complaints with stored RECAP PDFs were found (Nulph v. Houston Healthcare System, 5:21-cv-00423, 26 pages, Times New Roman, counsel filing; Mack v. Old Dominion Freight Lines, 5:21-cv-00118, 9 pages) but not saved, because the brief asks for one exemplar per doc type. **Tier 2 is therefore not judged against two filers.**
-2. **Font.** The court names no face, so the template keeps **EB Garamond at 14 pt** (`docs/FONTS.md`, "No face named"). The exemplar is 14-pt Times New Roman; that is the filer's choice, not a rule. EB Garamond has a smaller x-height, so the text looks smaller than the exemplar. Liberation Serif (Times New Roman's metric-compatible substitute) is vendored; David may choose it for the tier-2 look, which is a template change not made here.
+2. **Font.** The court names no face, so the template is set in **Times New Roman at 14 pt**, the house standard (`docs/FONTS.md`, rule 6, 2026-10-17; EB Garamond 14 pt before), the exemplar's face and size.
 3. **M.D. Ga. typeface and margin rule.** None found in the consolidated Local Rules text (PDF dated 3-7-22, fetched and text-extracted 2026-10-14; it contains no typeface, font-size, margin or spacing requirement). The layout therefore follows the exemplar, as the brief says. An amending order (3.8.22) exists and the current text was not confirmed. A later rule would override this layout.
 4. **Judge's standing orders** (Judge Self in the exemplar; any judge may impose form rules) were not checked.
 5. **Sample is a portion of the filing.** The sample carries ¶ 1-35, the prayer and the signature. Counts II and III (filed ¶ 36-86) are not transcribed, and the sample's paragraph numbers run from 1 (the template numbers them). The filed cross-reference "paragraphs 9-33" is kept as filed, so it does not match the sample's numbering.
@@ -95,11 +95,11 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/comp
 
 ## Engines
 
-`typst/` is the reference. The docx engine is `docx/` (`reference.docx` for the styles, page setup and footers; `gamd-complaint.lua` for the cover, caption, allegations, prayer and signature block). Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/middle-district/complaint usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8 converts; EB Garamond from `fonts/` must be installed for LibreOffice, see `docs/FONTS.md`).
+`typst/` is the reference. The docx engine is `docx/` (`reference.docx` for the styles, page setup and footers; `gamd-complaint.lua` for the cover, caption, allegations, prayer and signature block). Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/middle-district/complaint usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8 converts). `fb render --engine docx` uses the committed `docx/reference.docx` as it is (Times New Roman 14 pt, the typst face); no script builds it.
 
 | Layout | docx | Note |
 |---|---|---|
-| Face and size | EB Garamond 14 pt, as typst | Named in the styles; Word substitutes silently if the face is not installed. |
+| Face and size | Times New Roman 14 pt, as typst | Named in the styles; Word substitutes silently if the face is not installed. |
 | Line pitch | Exact 32 pt on body, numbers, prayer and signature lead | Same pitch as typst on every page. |
 | Margins, paper | Letter, 1 in on every side | |
 | Numbered allegations | Number on its own centred line, text with a 0.5 in first-line indent | Number is a Word `SEQ` field, so Word renumbers when a paragraph is added. |
@@ -109,6 +109,6 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/comp
 | Signature block | "Respectfully submitted the ..." at left, firm and signers at 3 in, lead counsel and address flush left | Matches typst on page 10. |
 | Page number | Centred 12 pt on every page, page 1 included | `PAGE` field. |
 
-- **Pages reviewed:** all 10 pages of `OUTPUT-complaint.docx.pdf` were rendered at 60 dpi and compared with the typst output page by page (side-by-side). Page breaks fall where the typst output's do on all 10 pages.
+- **Pages reviewed:** all 10 pages of `OUTPUT-complaint.docx.pdf` were rendered at 60 dpi and compared with the typst output page by page (side-by-side; on the earlier EB Garamond render, before fb-595.68). Page breaks fall where the typst output's do on all 10 pages.
 - **Checks:** `tools/check.sh --engine docx` was not run; the folder is a doc-type folder without `court.json` (see gap 10). The docx is not BLOCKED on any tier-1 point in this list. Not verified: opening the `.docx` in Microsoft Word (no Word here). LibreOffice converts it without error; no GUI repair prompt was checked.
 - **Pagination:** Word may still break lines differently (`docs/DOCX.md`).

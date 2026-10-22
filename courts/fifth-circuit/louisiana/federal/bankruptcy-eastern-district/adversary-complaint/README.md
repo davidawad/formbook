@@ -7,10 +7,10 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/adve
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md` (a portion of the complaint: caption, lead-in, jurisdiction, parties, background, Counts I, II and X, prayer, signature; see gap 9) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages (the committed render), typst 0.15.0, pinned Times New Roman only, no warnings |
 | overlay | ok: `usage/OVERLAY-babin-crescent-complaint.pdf` and `usage/OVERLAY-babin-crescent-complaint.txt` |
-| typeface | EB Garamond, 12 pt. No rule names a face, so `docs/FONTS.md` "No face named" applies and the template keeps EB Garamond (gap 2) |
-| pages reviewed | 8 of 8 (re-rendered and every page viewed at 60 dpi on 2026-10-14, fonts pass; output unchanged) |
+| typeface | Times New Roman, 12 pt (the pinned install, `docs/FONTS.md` rule 1; Liberation Serif fallback). No rule names a face, so the house standard applies (`docs/FONTS.md` rule 6; gap 2) |
+| pages reviewed | 8 of 8 (re-rendered and every page viewed at 60 dpi on 2026-10-14, fonts pass; output unchanged; the earlier EB Garamond render, before fb-595.68) |
 | BLOCKED | none |
 
 File names: the brief's `usage/<id>.md` and `usage/<id>-overlay.pdf` are written as `INPUT-<id>.md` and `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (CLAUDE.md, "File roles are in the name").
@@ -25,11 +25,11 @@ Primary sources, fetched 2026-10-14 (LII text for the federal rules; the court's
 | Fed. R. Bankr. P. 7010 | "Fed. R. Civ. P. 10 applies in an adversary proceeding—except that a pleading's caption must substantially conform to the appropriate version of Form 416." https://www.law.cornell.edu/rules/frbp/rule_7010 (as amended Dec. 1, 2024) | `caption()`: court title, parties, case information; `title` frontmatter ("COMPLAINT"). |
 | Fed. R. Civ. P. 10(a), via 7010 | "Every pleading must have a caption with the court's name, a title, a file number, and a Rule 7(a) designation." Title names all parties. https://www.law.cornell.edu/rules/frcp/rule_10 (as amended Dec. 1, 2007) | Court title (`court-lines`), `caption.parties` (all parties, designations), `case_info` (case number, chapter, section, adversary number). |
 | Fed. R. Civ. P. 10(b), via 7010 | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | `allegations()`: each body paragraph is numbered by the template; headings, lists and quotations are not. |
-| Fed. R. Bankr. P. 9004(a) | "A petition, pleading, schedule, or other document must be clearly legible." https://www.law.cornell.edu/rules/frbp/rule_9004 (as amended Dec. 1, 2024) | Vendored EB Garamond at 12 pt, black on white; no compressed type. |
+| Fed. R. Bankr. P. 9004(a) | "A petition, pleading, schedule, or other document must be clearly legible." https://www.law.cornell.edu/rules/frbp/rule_9004 (as amended Dec. 1, 2024) | Pinned Times New Roman at 12 pt, black on white; no compressed type. |
 | Fed. R. Bankr. P. 9004(b) | Caption: court name, case title, case number (and adversary number), and a brief designation of the document. | As 10(a) above. |
 | E.D. La. Local Rules, Part VII (adversary proceedings), 7004-1 | Summons issued under the Administrative Procedures Manual; plaintiff serves the summons and complaint. Rule 7004-1 concerns service, not the complaint's form. https://www.laeb.uscourts.gov/sites/laeb/files/local_rules/LocalRules050113.pdf (rules adopted May 1, 2013) | Not template text. |
 | E.D. La. Local Rules, general | No rule on paper size, typeface, margins, line spacing or cover pages for pleadings was found in the 2013 Local Rules (text searched for "pleading", "paper", "font", "point", "margin", "spac", "caption"; only Local Forms, Rule G, bear on form: a deviation from a Local Form is set in bold 12-point type). | Typography is a convention, see gap 2. |
-| E.D. La. Clerk's Notes, "Font Size" (copy retrieved 2026-10-14: https://www.laeb.uscourts.gov/sites/laeb/files/ClerksNotes704.pdf; undated), citing LBR 5005-3 | Motions, applications, memoranda and judgments/orders "must be typed or written in a size format that is sufficient to read without difficulty." Names no face. LBR 5005-3 is not in the 2013 Local Rules copy, so its current text was not read. | Vendored EB Garamond at 12 pt (gap 2). |
+| E.D. La. Clerk's Notes, "Font Size" (copy retrieved 2026-10-14: https://www.laeb.uscourts.gov/sites/laeb/files/ClerksNotes704.pdf; undated), citing LBR 5005-3 | Motions, applications, memoranda and judgments/orders "must be typed or written in a size format that is sufficient to read without difficulty." Names no face. LBR 5005-3 is not in the 2013 Local Rules copy, so its current text was not read. | Pinned Times New Roman at 12 pt (gap 2). |
 
 Not produced by this template (separate filings or court-generated, not part of the complaint body):
 - Adversary Proceeding Cover Sheet, Official Form 1040 (the exemplar's pp. 1-2; CM/ECF captures it at e-filing). Filed with the complaint; not generated.
@@ -50,7 +50,7 @@ Not produced by this template (separate filings or court-generated, not part of 
 
 ## Overlay (`usage/OVERLAY-babin-crescent-complaint.pdf`)
 
-`tools/overlay.sh` pairs our pages with the best-matching exemplar pages by shared words (`OVERLAY-babin-crescent-complaint.txt`):
+`tools/overlay.sh` pairs our pages with the best-matching exemplar pages by shared words (`OVERLAY-babin-crescent-complaint.txt`; measured on the earlier EB Garamond render, before fb-595.68):
 
 | ours | filed | word overlap |
 |---|---|---|
@@ -67,9 +67,9 @@ What the overlay shows, as a diagnostic (not a score):
 - Page 1: the court title and the caption fall in about the same area as the exemplar's. The blue line across the top is the exemplar's CM/ECF header (not generated, see Governing rules).
 - The sample is a portion of the complaint and skips paragraphs, so a sample page can pair with a later exemplar page (our p.7 pairs with filed p.17). The exemplar's pp. 1-2 are the cover sheet, so our p.1 pairs with filed p.3.
 - Paragraph numbers differ: the template numbers allegations 1, 2, ... in order, and the filed numbers are not transcribed (the sample omits ¶¶ 21-25 and Counts III-IX), so the numbers do not line up with the exemplar's.
-- Typeface: EB Garamond in the template, Times New Roman in the exemplar. The overlaid text looks smaller in ours (gap 2).
+- Typeface (then): EB Garamond in the template, Times New Roman in the exemplar, so the overlaid text looked smaller in ours. The template is now Times New Roman (gap 2).
 
-## Gate 2 review (pages rendered at 60 dpi and viewed)
+## Gate 2 review (pages rendered at 60 dpi and viewed; the earlier 8-page EB Garamond render, before fb-595.68)
 
 - Page 1: court title, caption (debtor, plaintiff, defendants, case information), "COMPLAINT", lead-in, "JURISDICTION AND VENUE", paragraphs 1-6, footnote 1. Pass. (Fixed in this pass: court title lines overlapped; the caption had no blank line between the debtor and the plaintiff.)
 - Page 2: "FACTUAL & PROCEDURAL BACKGROUND", ¶¶ 7-10, "The Crescent/Martin Relationship". Pass.
@@ -83,22 +83,22 @@ What the overlay shows, as a diagnostic (not a score):
 ## Known gaps and open choices
 
 1. **One exemplar; tier 2 needs 2 or 3 filers.** The brief asks for one exemplar per doc type. A second adversary complaint was found and checked for text (Crosby Tugs v. Pelican Marine, Adv. 26-01083, 6 pages, filed 2026-10-12; RECAP `gov.uscourts.laeb.211046.1.0.pdf`), and a third (Brown v. Burmaster, Adv. 23-01032, 5 pages, `gov.uscourts.laeb.202033.1.0.pdf`). Neither is saved. Tier 2 is therefore **not** judged against 2 or 3 filers yet.
-2. **Font: no face required; EB Garamond kept.** The 2013 Local Rules and the Clerk's Notes (LBR 5005-3, a size-and-legibility rule) name no typeface, so `docs/FONTS.md` "No face named" applies and the template keeps EB Garamond. The filed exemplar is Times New Roman, but the exemplar only settles what the rules leave open. EB Garamond at 12 pt reads smaller than Times at 12 pt, so the overlay text looks smaller. Whether tier 2 wants a Times-metric face (`Liberation Serif`, metric-compatible) is a question for David. If the current LBR 5005-3 text names a face, switch the font list to the `docs/FONTS.md` substitute.
+2. **Font: no face required; Times New Roman.** The 2013 Local Rules and the Clerk's Notes (LBR 5005-3, a size-and-legibility rule) name no typeface, so the house standard applies (`docs/FONTS.md` rule 6): Times New Roman, the filed exemplar's face too. The template once kept EB Garamond (until fb-595.68), which read smaller in the overlay. If the current LBR 5005-3 text names a face, switch the font list to the `docs/FONTS.md` substitute.
 3. **Caption column.** The exemplar closes its party column with asterisks; the template uses a rule at the column's right edge (the form used in cand). Both are seen in practice; recorded as a convention.
 4. **Signature block alone on a page** (page 8 of the sample). The signature block does not break and moves whole to the next page when the prayer ends near the foot of page 7. The real filing keeps the signature with the prayer; a template fix would keep the last prayer item with the signature. Not fixed in this pass.
 5. **Not generated:** Official Form 1040 cover sheet, CM/ECF header, summons, civil cover sheet, Rule 7.1 statement, exhibits (see Governing rules).
 6. **The joint-administration footnote** in the Crosby caption is not supported in the caption block (footnotes work in body text only). Not used by this sample.
 7. **Local Rules currency.** The only E.D. La. Local Rules copy retrieved is the 2013 version (adopted May 1, 2013, `LocalRules050113.pdf`). The court's current rules and its Administrative Procedures Manual (which governs summonses and filing format) could not be retrieved: the court's site returned only navigation for those pages. Before this doc type is marked done, check the current rules for a pleading-format rule.
 8. **Paragraph numbering** is automatic and does not match the filed numbers (the sample numbers from 1).
-9. **Sample is a portion.** The sample transcribes the caption, lead-in, ¶¶ 1-20 (the first sections), Counts I, II and X, and the prayer and signature; it omits ¶¶ 21-25 of the background/H&D section and Counts III-IX, which are not needed to test the form. The rendered length (8 pages) is at the low end of the 8-14 target because the exemplar's complaint is 17 pages with a long factual section.
+9. **Sample is a portion.** The sample transcribes the caption, lead-in, ¶¶ 1-20 (the first sections), Counts I, II and X, and the prayer and signature; it omits ¶¶ 21-25 of the background/H&D section and Counts III-IX, which are not needed to test the form. The rendered length (8 pages on the earlier EB Garamond render; the committed render is 9) was at the low end of the 8-14 target because the exemplar's complaint is 17 pages with a long factual section.
 10. **Check scripts not run.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
 
 ## Engines
 
-docx: `docx/build-reference.sh` writes `docx/reference.docx`; `docx/laeb-complaint.lua` builds the caption, court title, title, signature block, numbered allegations and lettered lists. Rendered with `tools/render.sh --engine docx`.
+docx: `fb render --engine docx` (via `sh tools/render.sh --engine docx`) builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst template's face) and runs `docx/laeb-complaint.lua`, which builds the caption, court title, title, signature block, numbered allegations and lettered lists.
 
-- Matches the typst form: EB Garamond 12 pt (vendored, embedded), 24 pt exact double spacing with no extra space between paragraphs (measured against the typst line grid), 1 in margins on letter paper, caption with a rule at the party column's right edge, centered bold headings, numbered allegations (number at 0.5 in, text from a tab stop at 0.8 in), lettered lists (a), (b) with a hanging indent, block quotations single spaced and indented 0.5 in on both sides, single-spaced signature block at 3 in, footnotes 10 pt, footer "Page X of Y" at 11 pt (PAGE and NUMPAGES fields).
-- Differs: 8 pages in both. Pages 1 to 3 break a few lines differently (LibreOffice moves the paragraph that carries footnote 1 to page 2; typst keeps two of its lines on page 1), so later pages start at different lines. LibreOffice places exact-spaced lines about 11 pt lower than typst on each page. The numbers and letters are literal text written by the filter, not Word list numbering, so they do not renumber if a paragraph is moved by hand.
+- Matches the typst form: Times New Roman 12 pt (the pinned install, embedded), 24 pt exact double spacing with no extra space between paragraphs (measured against the typst line grid), 1 in margins on letter paper, caption with a rule at the party column's right edge, centered bold headings, numbered allegations (number at 0.5 in, text from a tab stop at 0.8 in), lettered lists (a), (b) with a hanging indent, block quotations single spaced and indented 0.5 in on both sides, single-spaced signature block at 3 in, footnotes 10 pt, footer "Page X of Y" at 11 pt (PAGE and NUMPAGES fields).
+- Differs (measured on the earlier EB Garamond render, before fb-595.68; the committed renders are 9 pages each): 8 pages in both. Pages 1 to 3 break a few lines differently (LibreOffice moves the paragraph that carries footnote 1 to page 2; typst keeps two of its lines on page 1), so later pages start at different lines. LibreOffice places exact-spaced lines about 11 pt lower than typst on each page. The numbers and letters are literal text written by the filter, not Word list numbering, so they do not renumber if a paragraph is moved by hand.
 - Checked in LibreOffice only: the .docx converted without error. Word was not available and was not checked.
 
 BLOCKED: none

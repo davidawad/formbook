@@ -7,10 +7,10 @@ Folder: `courts/eighth-circuit/missouri/federal/western-district/motion-brief/` 
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (an excerpt: cover, introduction, Sections I.A to I.C and VIII, certificate; see Known gaps) |
-| typeface | face required by the rules: none (see Governing rules). Substitute: none; EB Garamond kept (`docs/FONTS.md`, "No face named"). Metric note: n/a. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`; re-rendered 2026-10-14, `pdffonts`: EB Garamond Regular, Bold and Italic embedded) |
+| typeface | face required by the rules: none (see Governing rules). Font: Times New Roman 13 pt, the house standard (`docs/FONTS.md`, rule 6) and the exemplar's face; EB Garamond 13 pt until then. Metric note: n/a. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages (9 on the 2026-10-14 EB Garamond render), typst 0.15.0, Times New Roman (pinned; vendored Liberation Serif fallback), no system fonts, no warnings (`tools/render.sh`) |
 | overlay | fail: `usage/OVERLAY-mannon-suggestions.pdf` not regenerated. `usage/` holds only `SOURCE.md` in this snapshot (no `SAMPLE-*.pdf`), so `tools/overlay.sh` exits 1. The `.txt` page map is from an earlier run. |
-| pages reviewed | 9 of 9 (re-rendered 2026-10-14 and every page viewed at 60 dpi; the template did not change) |
+| pages reviewed | 9 of 9 (re-rendered 2026-10-14 and every page viewed at 60 dpi, on the earlier EB Garamond render; the template did not change then) |
 
 File names: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf` and the overlay `OVERLAY-<id>.{pdf,txt}`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (the brief's `<id>.pdf` / `<id>-overlay.pdf` would not be found by the overlay tool).
 
@@ -37,16 +37,16 @@ Primary source: W.D. Mo. Local Civil Rules, effective Dec. 1, 2022 (`https://www
 
 - Cover (unnumbered): court title, division, caption (parties left; "Case No." right), title of the paper centred and bold.
 - Table of contents (roman i) and table of authorities (roman ii), both generated (see below).
-- Body (arabic from 1): EB Garamond 13 pt, double spaced (`body-leading` = 1.35 em), first-line indent 0.5 inch, letter paper, 1 inch margins. Headings bold: level 1 "I.", level 2 "A.", level 3 "1.", level 4 "a." Headings are kept with the text after them.
+- Body (arabic from 1): Times New Roman 13 pt, double spaced (29.9 pt, typst `pitch-double`), first-line indent 0.5 inch, letter paper, 1 inch margins. Headings bold: level 1 "I.", level 2 "A.", level 3 "1.", level 4 "a." Headings are kept with the text after them.
 - Signature block at the end of the body: "Respectfully submitted," and the `/s/` signer at the right half, with the firm, address and e-mail lines and "ATTORNEYS FOR DEFENDANTS".
 - Certificate of service on its own page: the template's wording with the date and recipients from frontmatter.
 - Table of authorities: cases alphabetized, then statutes (and other kinds if present), each with the pages where it is cited, "passim" at seven pages or more (`passim-at`).
 - Table of contents: every heading, with its page.
 - Page numbers centred at the foot.
 
-Why EB Garamond: the same reason as the complaint folder. The local rules name no face, so the court-named-face rows of `docs/FONTS.md` do not apply and the template keeps EB Garamond. The exemplar is set in Times New Roman; the rules do not require Times, and a metric-compatible Times substitute ("Liberation Serif") is vendored but not used.
+Why Times New Roman: the same reason as the complaint folder. The local rules name no face, so the court-named-face rows of `docs/FONTS.md` do not apply and the template sets the house standard, Times New Roman (rule 6), which is also the exemplar's face.
 
-Why 13 pt: at 13 pt the EB Garamond x-height is close to the Mannon exemplar's Times New Roman at 12 to 14 pt (the exemplar's body measures about 14 pt Times by text-box height). Not a rule.
+Why 13 pt: chosen when the template was EB Garamond, whose x-height at 13 pt is close to the Mannon exemplar's Times New Roman at 12 to 14 pt (the exemplar's body measures about 14 pt Times by text-box height); the template keeps 13 pt. Not a rule.
 
 ## Markdown contract (for samples)
 
@@ -61,7 +61,7 @@ Why 13 pt: at 13 pt the EB Garamond x-height is close to the Mannon exemplar's T
 ## Known gaps and open choices
 
 1. **Local rules text is from December 2022.** The 2026 revision PDF (`DC-Local_Rules-072026.pdf`) returned HTTP 404 to WebFetch from this box, and courtrules.net returned 403. A later amendment would not be seen here (in particular any change to the 15-page limit in L.R. 7.0(d)). **Needs a check of the current local rules before this is treated as complete.**
-2. **No typeface, size or spacing rule** in the local rules; the exemplar is Times New Roman at about 14 pt (text-box measure); this template is EB Garamond 13 pt, double spaced. If a judge's standing order requires Times New Roman, the face would change to "Liberation Serif" (`docs/FONTS.md`), and the page count and line breaks would need a re-render and check.
+2. **No typeface, size or spacing rule** in the local rules; the exemplar is Times New Roman at about 14 pt (text-box measure); this template is Times New Roman 13 pt (EB Garamond 13 pt before), double spaced.
 3. **Excerpt.** The sample transcribes the cover, the COME NOW paragraph, Section I (the typed heading and the first paragraph), I.A (standing), I.B (Folsom and Pope), I.C (Laclede County, through the failure-to-train paragraph), VIII (statute of limitations, in full) and the WHEREFORE paragraph, the signature and the certificate. Omitted: I.D, Sections II to VII. The 22-page exemplar is therefore not reproduced in full; the render is 9 pages (within the 8 to 14 target for an excerpt).
 4. **The motion itself is not generated.** The exemplar's motion (Doc. 24, 3 pages) is a separate document, and L.R. 7.0(c)(1) requires it to accompany the suggestions. A motion-only template is not part of this doc type.
 5. **Table of contents and authorities have no dot leaders and no hanging indent.** The exemplar's TOC and TOA use dot leaders. Typst's dot leaders did not lay out inside grid cells, so the rows use plain columns. Wrapped TOA entries start at the left margin (the Bartis entry in the sample shows this).
@@ -72,7 +72,7 @@ Why 13 pt: at 13 pt the EB Garamond x-height is close to the Mannon exemplar's T
 10. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape. The render and overlay were run; the page review below is the Gate 2 equivalent.
 11. **Overlay pairing is coarse.** The overlay pairs pages by word overlap, so the excerpt's pages are matched to exemplar pages that share words, not to the pages they came from. The overlay is a diagnostic, not a score.
 
-## Review of the rendered pages (current PDF, 60 dpi, every page viewed)
+## Review of the rendered pages (the earlier EB Garamond PDF, 60 dpi, every page viewed)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -90,22 +90,22 @@ Page numbers: the cover is unnumbered, the contents and authorities are i and ii
 
 ## Engines
 
-- **typst** (`typst/`, primary): `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages.
-- **docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh reference.docx`), `mowd-motion-brief.lua` (cover, contents, authorities, headings, body, signature, certificate) and `render.sh`, which owns the build. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.1; 10 pages). LibreOffice must see `fonts/` (EB Garamond) through fontconfig.
+- **typst** (`typst/`, primary): `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages (9 in EB Garamond).
+- **docx** (`docx/`): `reference.xml` (`fb render` builds the reference document from it on the shared cross-engine recipe) and `mowd-motion-brief.lua` (cover, contents, authorities, headings, body, signature, certificate); `fb render --engine docx` owns the build (until fb-595.68 `docx/render.sh` did, with `build-reference.sh` and a committed `reference.docx`). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (10 pages; the committed `usage/.check-docx.txt` reads PASS).
 - **latex**: not built for this doc type (`latex/` is empty).
 
 Sections (the docx has three, as the typst output has three page-number sequences): the cover with no number; the contents and the authorities in lower-case roman; the body from 1, with the signature block and the certificate of service.
 
-Page numbers in the contents and the authorities are written as text, not as TOC or TOA fields (Word and LibreOffice do not compute TA/TOA fields from a plain docx; see docs/DOCX.md). `render.sh` lays the document out in LibreOffice, finds the page of each heading and of each authority link on the body pages, and writes those numbers. It runs until the numbers do not change, and it fails if a heading or a link is not found on a body page. The contents numbers were also checked by hand against the PDF (I, A, B, C, VIII, certificate: 1, 1, 2, 3, 4, 7). Word does not update them: if Word paginates differently, re-render in LibreOffice rather than editing the numbers.
+Page numbers in the contents and the authorities are written as text, not as TOC or TOA fields (Word and LibreOffice do not compute TA/TOA fields from a plain docx; see docs/DOCX.md). fb render (`tools/fb/src/docxpass.rs`; `render.sh` until fb-595.68) lays the document out in LibreOffice, finds the page of each needle the filter writes for a heading or an authority link, and passes those numbers back to the filter. It runs until the numbers do not change. The contents numbers were also checked by hand against the PDF of the earlier EB Garamond build (I, A, B, C, VIII, certificate: 1, 1, 2, 3, 4, 7). Word does not update them: if Word paginates differently, re-render in LibreOffice rather than editing the numbers.
 
-What matches the typst form (every page of the docx PDF viewed at 60 dpi, next to the typst page):
-- US Letter, 1 in margins; EB Garamond 13 pt, bold and italic faces only (`pdffonts`); double spacing; 0.5 in first-line indent.
+What matches the typst form (every page of the docx PDF viewed at 60 dpi, next to the typst page, on the earlier EB Garamond build):
+- US Letter, 1 in margins; Times New Roman 13 pt (EB Garamond when viewed), regular, bold and italic faces only (`pdffonts`); double spacing; 0.5 in first-line indent.
 - Cover: court title, division, caption ("vs." between the sides), case number, title centered in bold.
 - Contents and authorities on their own pages, with the same entries, indents, page columns and "passim" rule (seven or more pages).
 - Headings: I., A., 1., a. (the filing's own numbers kept), introduction and certificate unnumbered, centered caps where the typst has them.
 - Italic case names and *Id.*; the signature block and the certificate of service on their own page, the signature kept with the last paragraph of the body.
 
-What differs:
+What differs (measured on the earlier EB Garamond build, before fb-595.68; both engines are 10 pages now):
 - Pagination: 10 pages in docx against 9 in typst. The first line of each page sits about 12 pt lower in Word-style exact spacing, so the body has about a line less per page. The numbers above are the LibreOffice layout.
 - Authorities: the docx lists the cited authorities only; the typst template lists every entry of the registry (all sixteen in this sample are cited, so the lists are the same here).
 - Lists (none in this sample): the markdown's numbers are written as text, not Word list numbering.

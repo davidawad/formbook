@@ -7,9 +7,9 @@ Folder: `courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-co
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md` (an abridged transcription, see "Transcription") |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `usage/OVERLAY-kapitus-complaint.pdf` and `usage/OVERLAY-kapitus-complaint.txt` (13 sample pages paired with 19 exemplar pages) |
-| pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed after the last template change) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 14 pages, typst 0.15.0, Times New Roman only (`pdffonts`), no warnings |
+| overlay | ok: `usage/OVERLAY-kapitus-complaint.pdf` and `usage/OVERLAY-kapitus-complaint.txt` (13 sample pages paired with 19 exemplar pages, on the earlier EB Garamond render) |
+| pages reviewed | 13 of 13 on the earlier EB Garamond render, before fb-595.68 (every page rendered at 60 dpi and viewed) |
 
 File names follow the repo's role convention (`INPUT-` for markdown, `OUTPUT-` for our render, `OVERLAY-` for the comparison), because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf/.txt` by name.
 
@@ -18,7 +18,7 @@ File names follow the repo's role convention (`INPUT-` for markdown, `OUTPUT-` f
 | Source | Requirement | Where it is in the template |
 |---|---|---|
 | Local Bankruptcy Rule 9004-1 (Ver. 25.01, Dec. 1, 2025, printed p. 66), https://www.mdb.uscourts.gov/files/localrules.pdf, fetched 2026-10-14 | Papers filed by an attorney: legible; at least a one-inch margin on each side; 12-point or larger type for text, 10-point or larger for footnotes. | `page-margin = 1in`, `type-size = 12pt`; footer also 12 pt (no footnotes in the template). |
-| Local Bankruptcy Rule 9004-1, text checked 2026-10-14 in the PDF of the same URL (p. 66) | Typeface: none named. The rule requires "12 point or larger font for text", and names no face. | `font-family = "EB Garamond"` kept (see Known gaps, item 2). |
+| Local Bankruptcy Rule 9004-1, text checked 2026-10-14 in the PDF of the same URL (p. 66) | Typeface: none named. The rule requires "12 point or larger font for text", and names no face. | `font-family = ("Times New Roman", "Liberation Serif")`, the house standard (see Known gaps, item 2). |
 | Fed. R. Bankr. P. 9004(a), (b), https://www.law.cornell.edu/rules/frbp/rule_9004, fetched 2026-10-14 | (a) clearly legible. (b) caption: court's name; the case's title; case number and, if appropriate, adversary-proceeding number; a brief designation of the document's character. | `caption` (court lines, party block, case number, adversary number) and the title line. |
 | Local Rule 9013-1(a) (p. 76) | Caption with the court's name, the case name, the case number, the chapter, and a descriptive title; in an adversary, the names of the plaintiff and the defendant. | `caption.in_re`, `caption.parties`, `chapter`, `title`. |
 | Fed. R. Civ. P. 10(a), (b) (made applicable to adversary pleadings by Fed. R. Bankr. P. 7010), https://www.law.cornell.edu/rules/frcp/rule_10, fetched 2026-10-14 | (a) caption with the court's name, a title, a file number and a Rule 7(a) designation. (b) claims in numbered paragraphs. | Allegations numbered by the template (`allegations()`); the caption as above. |
@@ -31,7 +31,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Layout
 
-- Letter size; 1-inch margins; EB Garamond 12 pt; double spacing on a 24 pt pitch (`pitch`), every block rounded up to the pitch so headings and paragraphs stay on the same grid.
+- Letter size; 1-inch margins; Times New Roman 12 pt; double spacing on a 24 pt pitch (`pitch-double`), single lines on 14 pt (`pitch-single`).
 - Court name lines and the division (from the frontmatter), centered and bold, then the caption: a party column closed by a ")" column, and a right column with the case number, chapter and adversary number.
 - Title in bold caps between two rules, the lead-in paragraph, then the body.
 - Numbered allegations (`1.`, `2.`, ...) with a first-line indent; section headings centered and bold, with underlined caps for the first level.
@@ -48,7 +48,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Transcription (what the sample contains)
 
-The sample is an abridged transcription of Doc 1 (19 pages) and renders to 13 pages:
+The sample is an abridged transcription of Doc 1 (19 pages) and renders to 14 pages (13 on the earlier EB Garamond render):
 
 - Caption, title, lead-in, and the signature block, transcribed from the exemplar.
 - Jurisdiction and Venue (exemplar ¶¶ 1-6) and Parties (¶¶ 7-10), with the Debtor's street address removed. The exemplar gives it as the debtor's residence; the sample keeps "a resident of the State of Maryland" only.
@@ -62,7 +62,7 @@ Paragraph numbers are not transcribed: the template numbers the allegations. The
 ## Known gaps and open choices
 
 1. **Only one exemplar; tier 2 is not met.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search (CourtListener RECAP, `court=mdb`, `type=r`, adversary complaints) also found Roman Catholic Archbishop of Baltimore (Adv. 26-00041, Official Committee of Unsecured Creditors, 16 pp., counsel Richard L. Costella) and Hughes Construction Management, Inc. v. Marrero Astacio (Adv. 26-00115, 18 pp.). Neither was saved, because the brief asks for one exemplar per doc type. A second filer should be collected before this doc type is judged against tier 2.
-2. **Typeface: no court-named face; EB Garamond kept.** Local Rule 9004-1 requires 12-point or larger font and names no typeface, and Fed. R. Bankr. P. 9004 names none either. Per `docs/FONTS.md` ("No face named" row), the template keeps EB Garamond. The exemplar is in Times New Roman, which is the filer's choice, not a rule. The difference is visual only: EB Garamond has a smaller x-height at 12 pt, so the text looks smaller than the exemplar. Substitute: none (`EB Garamond` is the vendored face).
+2. **Typeface: no court-named face; Times New Roman.** Local Rule 9004-1 requires 12-point or larger font and names no typeface, and Fed. R. Bankr. P. 9004 names none either. Per `docs/FONTS.md` rule 6 (the house standard, David 2026-10-17) the template is Times New Roman 12 pt, the exemplar's face too; it was EB Garamond before 2026-10-17 (the docx until fb-595.68.18).
 3. **Caption style.** The exemplar uses a ")" column, and the template follows it. The motion-brief exemplar in the same court uses an asterisk column; both are seen in this court. Recorded as ACCEPTED.
 4. **Double spacing is a convention, not a rule.** Local Rule 9004-1 sets no line spacing; the exemplar is double-spaced, and the template follows it.
 5. **Certificate of service.** None is required for the complaint itself; service is by summons (see the table above). None is produced.
@@ -70,11 +70,11 @@ Paragraph numbers are not transcribed: the template numbers the allegations. The
 
 ## Overlay
 
-`usage/OVERLAY-kapitus-complaint.pdf` is the red/blue comparison: red is our render, blue is the filed exemplar. Pages are paired by shared words (`tools/overlay.sh`); the word overlap per page is 57%-94%, and the page map is in `OVERLAY-kapitus-complaint.txt`. The overlay was built against the filed exemplar fetched from the SOURCE.md URL (the PDF is not in this snapshot). Because the sample is abridged and the template is in EB Garamond, the overlay shows the difference in font and in the omitted Count III. It is a diagnostic, not a score.
+`usage/OVERLAY-kapitus-complaint.pdf` is the red/blue comparison: red is our render, blue is the filed exemplar. Pages are paired by shared words (`tools/overlay.sh`); the word overlap per page is 57%-94%, and the page map is in `OVERLAY-kapitus-complaint.txt`. The overlay was built against the filed exemplar fetched from the SOURCE.md URL (the PDF is not in this snapshot). The overlay was made on the earlier EB Garamond render, before fb-595.68; because the sample is abridged and the template was then in EB Garamond, it shows the difference in font and in the omitted Count III. It is a diagnostic, not a score.
 
 ## Review of the rendered pages (Gate 2 rows)
 
-Every page was rendered at 60 dpi and viewed. Defects found on the first renders and fixed:
+Every page was rendered at 60 dpi and viewed, on the earlier 13-page EB Garamond render, before fb-595.68. Defects found on the first renders and fixed:
 
 - Every paragraph and heading overprinted the last line of the block before it. Typst does not count a paragraph's trailing leading in its height. Fixed by rounding each block up to the line pitch (`on-grid`), the same approach as the ca9 complaint template.
 - Section headings rendered at the default heading size. Fixed: 12 pt, bold.
@@ -101,26 +101,24 @@ Open layout item: none on the complaint's pages.
 
 ## Engines
 
-The same markdown renders through three engines. Typst (`typst/`) is the reference. Only the docx engine is built in this pass; the latex engine is not built for this doc type.
+The same markdown renders through three engines. Typst (`typst/`) is the reference. Only the docx engine is built; the latex engine is not built for this doc type.
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-adversary-complaint.typst.pdf` (13 pp) | reference |
-| docx | `OUTPUT-adversary-complaint.docx` and `OUTPUT-adversary-complaint.docx.pdf` (13 pp, LibreOffice) | rendered; BLOCKED lines below |
+| typst | `OUTPUT-adversary-complaint.typst.pdf` (14 pp) | reference |
+| docx | `OUTPUT-adversary-complaint.docx` and `OUTPUT-adversary-complaint.docx.pdf` (14 pp, LibreOffice) | passes `tools/check.sh --engine docx` (`usage/.check-docx.txt`); XENG-001..003 pass (372/372 lines, fb-595.68.18); BLOCKED line below |
 
 ```sh
-sh docx/make-reference.sh     # rebuilds docx/reference.docx from pandoc's default reference document
 sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md
 ```
 
-**docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/mdb-adversary-complaint.lua`).
+**docx** (`docx/reference.xml`, from which `fb render --engine docx` builds the reference document on the shared cross-engine recipe in the typst face; `docx/mdb-adversary-complaint.lua`; `docx/make-reference.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.18).
 
-- *Matches typst:* EB Garamond 12 pt (the PDF embeds Regular, Bold and BoldItalic only); body double-spaced on a 24 pt exact pitch with a 0.5 in first-line indent; letter page with 1-inch margins; the cover (court lines, division, the caption with its ")" column and the rule under the debtor line, the case number, chapter and adversary line on the right, the title in capitals between two rules, the lead-in paragraph); numbered allegations 1., 2., ...; level-1 headings centered, bold, underlined, in capitals; level-2 headings centered and bold; level-3 headings bold italic at the margin; the block quotation single-spaced and indented, with its I. and II. labels typed as text; the prayer lettered A. to E.; the signature block at 3 in, kept together; a centered page number on every page, the cover included.
-- *Differs (tier 2):* body lines break at other words, so some pages carry a line more or less than typst and a few page breaks move (page 4 onward, most visibly at pp. 4, 12 and 13). Prayer item C is split between pp. 12 and 13 in the docx; typst keeps it whole on p. 12. The caption rule sits closer to the next party line than in typst.
+- *Matches typst:* Times New Roman 12 pt (the PDF embeds Regular, Bold and BoldItalic only); 14 pages on both engines; body double-spaced on a 24 pt exact pitch with a 0.5 in first-line indent; letter page with 1-inch margins; the cover (court lines, division, the caption with its ")" column and the rule under the debtor line, the case number, chapter and adversary line on the right, the title in capitals between two rules, the lead-in paragraph); numbered allegations 1., 2., ...; level-1 headings centered, bold, underlined, in capitals; level-2 headings centered and bold; level-3 headings bold italic at the margin; the block quotation single-spaced and indented, with its I. and II. labels typed as text; the prayer lettered A. to E.; the signature block at 3 in, kept together; a centered page number on every page, the cover included.
+- *Differs (tier 2; seen on the earlier EB Garamond docx, not re-checked here):* body lines break at other words, so some pages carry a line more or less than typst and a few page breaks move (page 4 onward, most visibly at pp. 4, 12 and 13). Prayer item C is split between pp. 12 and 13 in the docx; typst keeps it whole on p. 12. The caption rule sits closer to the next party line than in typst.
 - *Not verified:* the `.docx` has not been opened in Microsoft Word (no Word on this box). LibreOffice converts it without error, and it is a valid zip with well-formed XML parts (`unzip -t`, `xmllint` on every `.xml` and `.rels` part). Word may paginate slightly differently (docs/DOCX.md).
-- *Gate status:* this court folder has no `checks.yaml`, so `tools/check.sh --engine docx` was not run and no pass stamp was written. The review is by eye.
-- *Pages reviewed:* 13 of 13. Every page of `usage/OUTPUT-adversary-complaint.docx.pdf` was rendered at 60 dpi and viewed beside the same page of the typst render, on the final build.
-- *Build notes:* this box has no `unzip` or `zip`, so the reference build and the zip check used stand-ins outside the repo, built on the toolchain's `ziptool`. The first `soffice` run with a fresh profile exits 81; a wrapper retried it once.
+- *Gate status:* `tools/check.sh --engine docx` passes on `eval.yaml` and wrote its stamp (`usage/.check-docx.txt`: PASS; typst 9 and docx 13 checks passed, fb-595.68.18). The by-eye review below was on the earlier EB Garamond docx.
+- *Pages reviewed:* 13 of 13 on the earlier EB Garamond docx. Every page of `usage/OUTPUT-adversary-complaint.docx.pdf` was rendered at 60 dpi and viewed beside the same page of the typst render.
+- *Build notes (the earlier `make-reference.sh` build):* that box had no `unzip` or `zip`, so the reference build and the zip check used stand-ins outside the repo, built on the toolchain's `ziptool`. The first `soffice` run with a fresh profile exits 81; a wrapper retried it once.
 
 BLOCKED: docx-word-open: not opened in Microsoft Word (not installed on this box); LibreOffice opens and converts the file without error.
-BLOCKED: gates-0-3: no `checks.yaml` in this court folder, so the docx gates (`tools/check.sh --engine docx`) were not run; the Gate 2 review above is by eye.

@@ -7,15 +7,15 @@ Folder: `courts/fourth-circuit/west-virginia/federal/southern-district/complaint
 |---|---|
 | exemplar | yes, with limits: `usage/FILED-EXAMPLE-complaint.pdf` (35 pages, **image-only**, filed **pro se**; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (a portion: caption, opening, Sections I and II, Injunctive Relief, signature, verification; see Known gaps) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages (caption page, table of contents, body numbered 1 to 6 with the signature, verification), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages (caption page, table of contents, body numbered 1 to 6 with the signature, verification), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; the earlier EB Garamond render, before fb-595.68: the template now sets Times New Roman) |
 | overlay | ran 2026-10-14, produced `usage/OVERLAY-castro-complaint.pdf` and `.txt`; **not a meaningful comparison**: the exemplar has no text layer, so every page pairs at 0 to 2.6% word overlap (see Overlay). The exemplar was restored from the URL in `usage/SOURCE.md` (35 pages, sha256 `a84eea9daf59bafce0ed8d23b8bb33771f6f79f0bee02deccaf1de4c95ee62f0`) because it was missing from the snapshot |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on 2026-10-14) |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on 2026-10-14, on the earlier EB Garamond render) |
 
 File names: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt`, so those names are used (see the motion-brief README for the same note).
 
 ## Governing rules
 
-The local rules set no layout rule for a complaint: LR Civ P 7.1(a)(3) and (4) (paper, spacing, margins, typeface) apply to *memoranda*. The complaint's form therefore comes from the Federal Rules, and the layout is the memorandum template's (EB Garamond 12 pt, double-spaced, 1-inch margins) so that every doc type of this court has one look. That is a choice, recorded here, not a rule.
+The local rules set no layout rule for a complaint: LR Civ P 7.1(a)(3) and (4) (paper, spacing, margins, typeface) apply to *memoranda*. The complaint's form therefore comes from the Federal Rules, and the layout is the memorandum template's (Times New Roman 12 pt, double-spaced, 1-inch margins) so that every doc type of this court has one look. That is a choice, recorded here, not a rule.
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
@@ -43,7 +43,7 @@ Sources and dates:
 - Body: `#` through `######` for the headings (no numbers typed); a paragraph is an allegation and is numbered; list items, enumerations and block quotations are not numbered; footnotes `text[^1]` with `[^1]: ...` definitions.
 - Not supported: tables, raw typst.
 
-## Gate 2 review (every page, 60 dpi, final template)
+## Gate 2 review (every page, 60 dpi; the 9-page EB Garamond render, before fb-595.68)
 
 - p.1 (caption): court title, caption with the addresses on one line each (the party column is 3.7 inches wide so no address wraps), the ")" column aligned with each caption line, the case number at right, the title. Pass.
 - p.2 (table of contents): the generated entries and page numbers for the sample's headings; page numbered "i". Pass.
@@ -69,7 +69,7 @@ The first render showed the heading text and numbers larger than the body and th
 4. **Table of contents is generated.** The filed table of contents runs to the depth of its headings (about 4 pages); the template's TOC is generated from the sample's headings only.
 5. **Caption addresses.** The filed caption gives the parties' addresses; the template prints whatever `names` lines the sample gives. A filing without addresses prints none.
 6. **Not produced:** the civil docket cover sheet (LR Civ P 3.4(a)); a summons; a disclosure statement. The verification is included because the filed complaint has one; a complaint need not be verified.
-7. **Typeface.** EB Garamond, as in the memorandum template (see that README). No local rule names a face for a complaint, so no substitute is used; the memorandum's rule (LR Civ P 7.1(a)(4)) requires no particular face either, so EB Garamond is kept as a choice, not a court requirement.
+7. **Typeface.** Times New Roman, as in the memorandum template (see that README): the house standard (`docs/FONTS.md` rule 6) and on LR Civ P 7.1(a)(4)'s presumed-legible list. No local rule names a face for a complaint, and the memorandum's rule requires no particular face either, so Times New Roman is a choice, not a court requirement. (EB Garamond until fb-595.68.)
 8. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at the court root, and this doc-type folder is not that shape. The brief forbids editing `tools/`, so the gates were not run.
 
 ## Searches tried (exemplar)
@@ -82,8 +82,8 @@ The first render showed the heading text and numbers larger than the body and th
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` makes `reference.docx` from pandoc's default reference; `complaint.lua` builds the cover, caption table, numbered allegations, table of contents and verification; `render.sh` runs two passes so the table of contents carries real page numbers as cached `PAGEREF` results (LibreOffice also computes them on layout).
+**docx** (`docx/`): fb render builds the reference document from `reference.xml` (`base="xengine"`, the shared cross-engine recipe in the typst face); `complaint.lua` builds the cover, caption table, numbered allegations, table of contents, verification, and the sections with their footers; fb render renders in passes, finding the headings the filter lists (`FORMBOOK_NEEDLES`) in the LibreOffice PDF until the contents' page numbers settle.
 
-- Matches the typst form: EB Garamond 12 pt; body lines exact 24 pt (double); caption, quotations, footnotes and signature lines exact 13.8 pt (single); 1 in margins on letter paper; cover without a page number; table of contents numbered i; body numbered from 1; heading numbers I. / A. / 1. / (i) / (1) / (A) on the template's indents; allegations numbered without a period; lead-in flush left; the date at the left of the signature block, bottom-aligned with the signature lines; verification on its own page.
-- Differs: the docx body is one page longer than typst (10 PDF pages against 9). LibreOffice places exact-spaced text about 11 pt lower on each page, so fewer lines fit. The sample's last body paragraph and signature block fall on a page of their own (the signature block is kept together, as in Word). The allegation number tab is 0.85 in, typst spaces the text 0.25 in after the number. The table of contents is a list of paragraphs with `PAGEREF` fields, not a TOC field, so it needs no update in Word.
+- Matches the typst form: Times New Roman 12 pt; body lines exact 24 pt (double); caption, quotations, footnotes and signature lines exact 13.8 pt (single); 1 in margins on letter paper; cover without a page number; table of contents numbered i; body numbered from 1; heading numbers I. / A. / 1. / (i) / (1) / (A) on the template's indents; allegations numbered without a period; lead-in flush left; the date at the left of the signature block, bottom-aligned with the signature lines; verification on its own page.
+- Differs (the earlier build by `build-reference.sh` and `render.sh`, before the fb-595.68 cross-engine port; `eval.yaml` now gates the docx on typst's line and page breaks): the docx body was one page longer than typst (10 PDF pages against 9). LibreOffice places exact-spaced text about 11 pt lower on each page, so fewer lines fit. The sample's last body paragraph and signature block fall on a page of their own (the signature block is kept together, as in Word). The allegation number tab is 0.85 in, typst spaces the text 0.25 in after the number. The table of contents is a list of paragraphs with `PAGEREF` fields, not a TOC field, so it needs no update in Word.
 - Gates: `sh tools/check.sh <this folder> --engine docx` exits 2 (`Error: open .../checks.yaml: no such file or directory`; this snapshot has no `checks.yaml` for this court). No check ID is BLOCKED for a content reason.

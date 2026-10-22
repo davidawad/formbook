@@ -4,14 +4,14 @@
 - Doc type: `complaint`. Original complaint, Southern Division; numbered paragraphs, caption, counts, prayer, signature block.
 - Exemplar: `usage/FILED-EXAMPLE-complaint.pdf` (*The Southeastern Conference v. Louisiana State University, et al.*, No. 2:26-cv-01586-ACA, Doc. 1, filed 2026-09-03, 29 pages; provenance in `usage/SOURCE.md`). Re-downloaded from CourtListener RECAP on 2026-10-14.
 - Sample: `usage/INPUT-complaint.md` (transcription of selected pages; see Known gaps).
-- Status: template present, render and overlay re-run on 2026-10-14 (fonts pass: no face named by the court's rules, so EB Garamond stays; see Typeface); every page of the render reviewed (10 of 10). Not reviewed by a human; `court.json` untouched.
+- Status: template present, render and overlay re-run on 2026-10-14 (fonts pass: no face named by the court's rules; the template is now Times New Roman, the house standard, `docs/FONTS.md` rule 6; see Typeface); every page of the render reviewed (10 of 10, on the earlier EB Garamond render, before fb-595.68). Not reviewed by a human; `court.json` untouched.
 
 ## Files
 
 | Path | What |
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `alnd-complaint`. |
-| `typst/alnd-complaint.typ` | Template. Parameter block at the top: typeface (EB Garamond 13 pt), double spacing (24 pt pitch), margins, paragraph indent, caption column width. |
+| `typst/alnd-complaint.typ` | Template. Parameter block at the top: typeface (Times New Roman 12 pt), double spacing (24 pt pitch), margins, paragraph indent, caption column width. |
 | `usage/INPUT-complaint.md` | Markdown contract sample: YAML frontmatter (court, caption, title, lead-in, date line, signature) plus the numbered body. |
 | `usage/OUTPUT-complaint.typst.pdf` | `sh tools/render.sh courts/eleventh-circuit/alabama/federal/northern-district/complaint usage/INPUT-complaint.md` (10 pages). |
 | `usage/OVERLAY-sec-complaint.pdf`, `OVERLAY-sec-complaint.txt` | `sh tools/overlay.sh courts/eleventh-circuit/alabama/federal/northern-district/complaint sec-complaint` (red = ours, blue = filed, black = agree). |
@@ -36,13 +36,13 @@ The court's Local Rules are at <https://www.alnd.uscourts.gov/local-rules>. The 
 
 Judge's standing orders are not part of the local rules and were not checked for this template (see Typeface below).
 
-Because the local rules set no layout rule, the layout follows the filed exemplar: 13 pt (the template's stated choice against the exemplar's Times 12 pt; not re-measured this session), double spacing with a 24 pt pitch, 1-inch margins, a caption with a party column and a case-number column, and page numbers at the foot.
+Because the local rules set no layout rule, the layout follows the filed exemplar: 12 pt, the exemplar's size (the template was 13 pt EB Garamond until fb-595.68), double spacing with a 24 pt pitch, 1-inch margins, a caption with a party column and a case-number column, and page numbers at the foot.
 
 ## Typeface
 
 | Face required | Vendored substitute | Fit |
 |---|---|---|
-| None. The court's Local Rules (2019) name no typeface, so the template keeps EB Garamond (the court's rules name no face; `docs/FONTS.md` "No face named"). | EB Garamond (`fonts/eb-garamond/`) | n/a |
+| None. The court's Local Rules (2019) name no typeface, so the template (typst and docx) uses the house standard, Times New Roman (`docs/FONTS.md` rule 6; EB Garamond until fb-595.68). | Times New Roman (the pinned install, `docs/FONTS.md` rule 1) | n/a |
 
 A single judge's standing order can set a face for that judge's cases. Judge Johnson's Initial Order (Huntsville, `https://www.alnd.uscourts.gov/sites/alnd/files/HNJ%20Initial%20Order%20without%20Rule%2026%20Language.docx`, read 2026-10-14) says "The parties motions and briefs shall be in Times New Roman font and 14-point type", double-spaced. It binds only that judge's cases and is not a court rule, so this template does not follow it. A per-judge variant (Liberation Serif, 14 pt; `docs/FONTS.md` "Times New Roman") would be a separate template and is not built here.
 
@@ -50,7 +50,7 @@ The filed exemplar's body text is Times New Roman (`pdffonts` on the exemplar, 2
 
 ## Overlay
 
-`usage/OVERLAY-sec-complaint.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run:
+`usage/OVERLAY-sec-complaint.pdf` (measured on the earlier EB Garamond render, before fb-595.68) puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run:
 
 ```
 ours p.1  filed p.1   71.2%   caption and opening paragraphs
@@ -69,7 +69,7 @@ Pairing is by word overlap; low scores (below 40%) on pages 4 to 6 and 9 are the
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-complaint.typst.pdf` was rasterized (`pdftoppm -r 60`) and viewed: 10 of 10. Typst printed no warnings. Only EB Garamond is embedded. A scan of the text positions of every page (`pdftotext -bbox`) found no line pair closer than 12 pt.
+Every page of `OUTPUT-complaint.typst.pdf` was rasterized (`pdftoppm -r 60`) and viewed: 10 of 10 (the earlier EB Garamond render, before fb-595.68). Typst printed no warnings. Only EB Garamond was embedded then. A scan of the text positions of every page (`pdftotext -bbox`) found no line pair closer than 12 pt.
 
 | Page | Content | Result |
 |---|---|---|
@@ -92,13 +92,13 @@ Tier-2 findings (OPEN or ACCEPTED):
 
 ## Engines
 
-The docx engine (`docx/`: `make-reference.sh` builds `reference.docx`, `alnd-complaint.lua` builds the cover, the numbered paragraphs and the signature block) renders `usage/OUTPUT-complaint.docx` and `.docx.pdf` (the LibreOffice conversion). Every page of the `.docx.pdf` (10 of 10) was rasterized (`pdftoppm -r 60`) and compared with the typst render of the same sample.
+The docx engine (`docx/`: `fb render --engine docx` builds the reference document from `reference.xml`, the cross-engine recipe, `base="xengine"`, in the typst template's face; `alnd-complaint.lua` builds the cover, the numbered paragraphs and the signature block) renders `usage/OUTPUT-complaint.docx` and `.docx.pdf` (the LibreOffice conversion). Every page of the `.docx.pdf` (10 of 10) was rasterized (`pdftoppm -r 60`) and compared with the typst render of the same sample (on the earlier EB Garamond renders, before fb-595.68).
 
 | Item | typst (primary) | docx |
 |---|---|---|
-| Typeface and size | EB Garamond 13 pt | same; EB Garamond is embedded in the PDF |
+| Typeface and size | Times New Roman 12 pt | same; Times New Roman is embedded in the PDF (`pdffonts`) |
 | Body spacing | 24 pt pitch | 24 pt exact |
-| Caption, title, signature block | 15 pt pitch, caption rules | same; the gaps around the caption were measured against the typst render and agree within 4 pt |
+| Caption, title, signature block | 13.8 pt pitch (`pitch-single`), caption rules | same; the gaps around the caption were measured against the typst render (before fb-595.68) and agreed within 4 pt |
 | Numbered paragraphs | number at 0.5 in, text after it, wrapped lines at the margin | same, with tab stops |
 | Lettered prayer items | label at 0.5 in, text at 0.9 in | same, hanging indent |
 | Headings | level 1 bold capitals; levels 2 and 3 bold, centered | same |
@@ -106,7 +106,7 @@ The docx engine (`docx/`: `make-reference.sh` builds `reference.docx`, `alnd-com
 
 What differs:
 
-- Pagination: LibreOffice and typst break lines at different points, so a few paragraphs move. Both render 10 pages. The heading "FACTUAL BACKGROUND" moves to page 5 in the docx (it keeps with the next paragraph) where typst keeps it on page 4, and the prayer items start on page 10 where typst keeps them on page 9.
+- Pagination (on the earlier EB Garamond renders, before fb-595.68; the committed renders are still 10 pages each): LibreOffice and typst break lines at different points, so a few paragraphs move. Both render 10 pages. The heading "FACTUAL BACKGROUND" moves to page 5 in the docx (it keeps with the next paragraph) where typst keeps it on page 4, and the prayer items start on page 10 where typst keeps them on page 9.
 - The caption and the two-firm signature block are Word tables built from the plain text of their entries, so italics inside them are not kept. The sample has none there.
 - The `.docx` was not opened interactively in Word or LibreOffice (Word is not available here; the LibreOffice check was headless, which cannot show a repair prompt). The file is a well-formed zip with well-formed XML parts (`tools/render-docx.sh`).
 - The docx gates (`tools/check.sh --engine docx`) were not run: this court folder has no `checks.yaml` or `rules.md` yet.
@@ -121,5 +121,5 @@ docx BLOCKED items:
 2. The sample has no certificate of service. A complaint is served with the summons under Rule 4, so the template has no certificate block; the template does not render one.
 3. The class-action legend (LR 23.1) is supported but not exercised: the sample is not a class action, so the legend is absent from its caption.
 4. Italics of case names are not in the exemplar's text layer and are not transcribed; the sample's case names are plain text.
-5. The typeface is EB Garamond because the court's rules name no face, not because a Times New Roman substitute is missing: `fonts/liberation-serif/` is vendored. The 14-point Times New Roman rule in Judge Johnson's standing order is not applied (see Typeface).
+5. The typeface is Times New Roman, the house standard (`docs/FONTS.md` rule 6), because the court's rules name no face. The 14-point Times New Roman rule in Judge Johnson's standing order is not applied (see Typeface).
 6. The 2019 local rules are read (see Governing rules); the Rule 8(a) and 11(a) text is still not re-read this session.

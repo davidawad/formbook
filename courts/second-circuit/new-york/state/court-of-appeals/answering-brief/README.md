@@ -5,10 +5,10 @@ Status: **exemplar found (2026-10-15); not `done`.** The exemplar is `usage/FILE
 | Gate | Result |
 |---|---|
 | exemplar | yes: *People v. Watkins*, APL-2023-00099, Brief for Respondent (Manhattan DA), dated January 12, 2024; text layer present; see `usage/SOURCE.md` |
-| typeface | face required: none (NY-TYPE-001 / 500.1(j): "serifed, proportionally spaced typeface, such as Times Roman"; Times is an example). Vendored substitute: none needed; **EB Garamond kept** (`fonts/eb-garamond`). Fit: n/a. Liberation Serif (Times-metric) is vendored if David wants the Times example applied: set `font-family` and re-render |
-| render | ok (`sh tools/render.sh … usage/INPUT-answering-brief.md`, 13 pages, vendored EB Garamond only, no typst warnings; re-rendered 2026-10-16 after the fixes below, pdffonts: EB Garamond Regular/Italic/Bold embedded) |
+| typeface | face required: none (NY-TYPE-001 / 500.1(j): "serifed, proportionally spaced typeface, such as Times Roman"; Times is an example). Vendored substitute: none needed; the template sets **Times New Roman** (vendored; the rule's own example and the house face, `docs/FONTS.md` rule 6; Liberation Serif, its metric twin, as fallback). Fit: n/a |
+| render | ok (`sh tools/render.sh … usage/INPUT-answering-brief.md`; `usage/OUTPUT-answering-brief.typst.pdf` is 14 pages, pdffonts: Times New Roman Regular/Italic/Bold embedded; the 2026-10-16 render after the fixes below was 13 pages in EB Garamond) |
 | overlay | ok (`sh tools/overlay.sh <court-dir> ny-answering-brief-sample` wrote `usage/OVERLAY-ny-answering-brief-sample.pdf` and `.txt`; page map below) |
-| pages reviewed | 13 of 13 of the final render (2026-10-16): every page rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the last template change |
+| pages reviewed | 13 of 13 of the 2026-10-16 render (the earlier EB Garamond render, before fb-595.68): every page rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the last template change |
 
 Tier 1 (the court's mandated form) is **not claimed as met**: the rules are still only checked against search excerpts (see "Governing rules"). Tier 2 findings are in "Tier 2 review" below.
 
@@ -38,7 +38,7 @@ Rule dates: none verified. The Justia copy is current only through September 202
 - `typst/main.typ`: entrypoint (reads `sample=` from `--input`).
 - `typst/ny-answering-brief.typ`: template. Structure copied from `courts/ninth-circuit/court-of-appeals/typst/`; the numbers, rules and certificate wording are New York's (not the ca9 ones).
 - `usage/INPUT-answering-brief.md`: transcription of part of the exemplar (see the header comment in the file). Frontmatter schema below.
-- `usage/OUTPUT-answering-brief.typst.pdf`: render output (13 pages, EB Garamond only).
+- `usage/OUTPUT-answering-brief.typst.pdf`: render output (14 pages, Times New Roman only).
 - `usage/OVERLAY-ny-answering-brief-sample.pdf` and `.txt`: overlay on the exemplar and page map.
 - `usage/FILED-EXAMPLE-answering-brief-2.pdf`: the exemplar (52 pages).
 - `usage/SOURCE.md`: exemplar record (URL, case, docket, filer, dates) and the search log.
@@ -73,7 +73,7 @@ Template changes made from the exemplar (the rules are silent on each; the exemp
 - Page numbers: cover unnumbered, front matter in lower-case roman (`ii`, `iii`), body restarts at 1. The first render counted from the cover, which the exemplar does not do.
 - Cover overflow risk: in the first render, a long counsel block pushed the date onto a blank page 2. The sample's counsel block was shortened to fit. The template has no guard for this; a longer counsel block will overflow again. (2026-10-16: the cover is full again with the `fax` line; still no guard.)
 
-## Tier 2 review (13-page render against the exemplar, 2026-10-16)
+## Tier 2 review (13-page render against the exemplar, 2026-10-16; the earlier EB Garamond render, before fb-595.68)
 
 Each row is a convention the exemplar shows that the template does not match, or a choice the exemplar leaves open. `ACCEPTED` = matches a clerk's expectation for this filing; `OPEN` = unresolved. Page numbers are PDF pages.
 
@@ -91,7 +91,7 @@ Each row is a convention the exemplar shows that the template does not match, or
 
 ## What the overlay shows
 
-`tools/overlay.sh` pairs each rendered page with the best-matching exemplar page by word overlap (`usage/OVERLAY-ny-answering-brief-sample.txt`). The page map of the 2026-10-16 render:
+`tools/overlay.sh` pairs each rendered page with the best-matching exemplar page by word overlap (`usage/OVERLAY-ny-answering-brief-sample.txt`). The page map of the 2026-10-16 render (measured on the earlier EB Garamond render, before fb-595.68):
 
 | Our PDF page | Filed PDF page | Word overlap |
 |---|---|---|
@@ -124,7 +124,7 @@ The pairing is by word-set overlap, so it is a diagnostic, not a score. Our page
 
 ## Verification pass 2026-10-16 (fb-595.26.21)
 
-- Render: `sh tools/render.sh … usage/INPUT-answering-brief.md` exit 0, no typst warnings. The committed PDF had 12 pages and re-rendered to 12 before any change; after the fixes below it is 13 pages (cover, contents ii, authorities iii, body 1 to 10). `pdffonts`: EB Garamond only.
+- Render: `sh tools/render.sh … usage/INPUT-answering-brief.md` exit 0, no typst warnings. The committed PDF had 12 pages and re-rendered to 12 before any change; after the fixes below it is 13 pages (cover, contents ii, authorities iii, body 1 to 10). `pdffonts`: EB Garamond only (the face then set; Times New Roman since).
 - Pages viewed: all 13 pages of the final render at 60 dpi, plus the pages each intermediate fix touched. The 13 overlay pages were viewed at 40 dpi, and the exemplar's page 1 against our cover.
 - Overlay: rerun on the final render; map in "What the overlay shows".
 - Defects fixed (template `typst/ny-answering-brief.typ`):

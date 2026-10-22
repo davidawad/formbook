@@ -7,10 +7,10 @@ Folder: `courts/eleventh-circuit/alabama/federal/southern-district/motion-brief/
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (caption, title, introduction, factual background, argument I to IV, V (partly), VI, conclusion, signature, certificate of service added by us; several passages elided, see Known gaps) |
-| typeface | face required: none (S.D. Ala. Gen. L.R. 5(a)(2) asks for "a plain, Roman style (or similar) font"; no face is named). Substitute: **EB Garamond** (kept, as the brief's rule for courts that name no face). Fit: n/a. See Known gaps 1. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings; re-rendered 2026-10-14, `pdffonts` shows `EBGaramond-Regular`, `-Bold`, `-Italic` embedded (no other face) |
+| typeface | face required: none (S.D. Ala. Gen. L.R. 5(a)(2) asks for "a plain, Roman style (or similar) font"; no face is named). Substitute: **Times New Roman**, the house standard (`docs/FONTS.md` rule 6; EB Garamond until fb-595.68). Fit: n/a. See Known gaps 1. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, pinned Times New Roman only, no warnings; `pdffonts` shows `TimesNewRomanPSMT`, `-BoldMT`, `-ItalicMT` embedded (no other face; EB Garamond on the 2026-10-14 re-render, before fb-595.68) |
 | overlay | ok: `usage/OVERLAY-shell-motion-brief.pdf` and `OVERLAY-shell-motion-brief.txt` (`tools/overlay.sh`), re-run 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not stored in the folder; see `usage/SOURCE.md`) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed on 2026-10-14, after the typeface check) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed on 2026-10-14, after the typeface check; the earlier EB Garamond render, before fb-595.68) |
 
 File names follow the repo's tools (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`); `<id>` is `shell-motion-brief`.
 
@@ -20,8 +20,8 @@ Primary source: S.D. Ala. Local Rules (Order Promulgating Local Rules, "Effectiv
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| S.D. Ala. Gen. L.R. 5(a)(1) | 8½ × 11 paper; double-spaced text (quotations of more than two lines may be single-spaced); headings and footnotes may be single-spaced; margins of at least 1 inch on all four sides; page numbers only in the margins. | `margin = 1in`, `body-leading`, `single-leading` for block quotes, headings, signature and certificate; footer page number in the bottom margin. |
-| S.D. Ala. Gen. L.R. 5(a)(2) | "A plain, Roman style (or similar) font"; case names italic or underlined; 12 point or larger, footnotes included. Names no typeface. | `font-family = "EB Garamond"` (kept: any plain roman face satisfies the rule), `type-size = 12pt`; case names italic from `*...*`. See Known gaps 1. |
+| S.D. Ala. Gen. L.R. 5(a)(1) | 8½ × 11 paper; double-spaced text (quotations of more than two lines may be single-spaced); headings and footnotes may be single-spaced; margins of at least 1 inch on all four sides; page numbers only in the margins. | `margin = 1in`, `pitch-double` (24 pt), `pitch-single` (13.8 pt) for block quotes, headings, signature and certificate; footer page number in the bottom margin. |
+| S.D. Ala. Gen. L.R. 5(a)(2) | "A plain, Roman style (or similar) font"; case names italic or underlined; 12 point or larger, footnotes included. Names no typeface. | `font-family` = Times New Roman (the house standard, `docs/FONTS.md` rule 6: any plain roman face satisfies the rule), `type-size = 12pt`; case names italic from `*...*`. See Known gaps 1. |
 | S.D. Ala. Gen. L.R. 5(a)(3) | Signature line, with the typed name, address and telephone of every attorney of record directly beneath. | `signature-block()`. |
 | S.D. Ala. Civ. L.R. 7(a) | Every motion must state the statute, rule, or legal or equitable principle under which it is made. | Not checked by the template. The sample states the rule in its introduction and in section VI (Rule 12(e)); the Rule 12(b)(6) basis appears in the argument, not in a separate statement. |
 | S.D. Ala. Civ. L.R. 7(b) | A Rule 12(b) motion must be supported by a brief; the brief may be included within the body of the motion. | The document is the brief; the title says "Memorandum of Law in Support of Its Motion". |
@@ -34,7 +34,7 @@ Primary source: S.D. Ala. Local Rules (Order Promulgating Local Rules, "Effectiv
 
 - Court title on the first page, centered and bold (three lines, single-spaced); caption as in the complaint (party column, ")" column, "Civil Action No." on the middle line).
 - Title of the paper centered and bold under the caption.
-- Body double-spaced (24 pt pitch). Paragraphs are unnumbered with a 0.5 inch first-line indent.
+- Body double-spaced (24 pt pitch, `pitch-double`). Paragraphs are unnumbered with a 0.5 inch first-line indent.
 - Headings: level 1 centered bold caps (INTRODUCTION, FACTUAL BACKGROUND, LEGAL ARGUMENT, CONCLUSION); level 2 bold at the left with a hanging indent for the roman numeral; level 3 bold, indented, for the lettered sub-heading. Headings are single-spaced and stay with the text after them.
 - Lists: bulleted in the sample (the exemplar's claim list); lettered if the markdown is numbered.
 - Block quotes single-spaced, indented 0.5 inch on both sides.
@@ -49,7 +49,7 @@ Primary source: S.D. Ala. Local Rules (Order Promulgating Local Rules, "Effectiv
 
 ## Overlay (red/blue)
 
-`usage/OVERLAY-shell-motion-brief.pdf` pairs our eight pages with the filed pages by shared words. The map in `OVERLAY-shell-motion-brief.txt`:
+`usage/OVERLAY-shell-motion-brief.pdf` (measured on the earlier EB Garamond render, before fb-595.68) pairs our eight pages with the filed pages by shared words. The map in `OVERLAY-shell-motion-brief.txt`:
 
 ```
 ours p.1 filed p.1   ours p.2 filed p.3   ours p.3 filed p.4   ours p.4 filed p.6
@@ -58,7 +58,7 @@ ours p.5 filed p.7   ours p.6 filed p.20  ours p.7 filed p.21  ours p.8 filed p.
 
 The pairing is not in order because the sample elides the exemplar's pages 8 to 19, and the sample's pages 6 to 8 are the filed pages 20 to 22. The word-overlap figures are 40 to 79 percent; they reflect elided text and line-break differences, not a different text. The overlay is a diagnostic, not a score.
 
-## Review of the rendered pages (every page, last render)
+## Review of the rendered pages (every page, last render; the earlier EB Garamond render, before fb-595.68)
 
 - Page 1: court title, caption (party column, ")" column, "Civil Action No. 22-004478-CG-N" on the middle line), title, INTRODUCTION, the first paragraphs and the start of the claims list. Pass.
 - Page 2: the claims list finished, the pleading-standard paragraph, FACTUAL BACKGROUND and the first two background paragraphs. Pass.
@@ -71,7 +71,7 @@ The pairing is not in order because the sample elides the exemplar's pages 8 to 
 
 ## Known gaps and open choices
 
-1. **Font.** Same as the complaint: the rule names no typeface, so EB Garamond stays (see `../complaint/README.md`, gap 1). The exemplar is set in Times New Roman; Liberation Serif would be its substitute if David wants the filed look.
+1. **Font.** Same as the complaint: the rule names no typeface, so the template uses the house standard, Times New Roman (`docs/FONTS.md` rule 6; see `../complaint/README.md`, gap 1), the exemplar's face too. It kept EB Garamond until fb-595.68.
 2. **One exemplar.** A second motion from a different filer (e.g. *Geovera v. DNB Investments*, 1:24-cv-00003-JB-M, see `usage/SOURCE.md`) would be needed for a tier-2 judgment against 2 or 3 filers.
 3. **Footnotes.** The filed memorandum has footnotes (markers 1, 2, 4 and 5 appear in the pages we read; 3 was not read). The sample omits the markers and footnote text. Footnote numbering and sizing were not tested; a footnote in a new sample would need a template check.
 4. **Elided text.** The sample transcribes the introduction, the factual background through the transfer and Facebook allegations, argument I, the opening paragraphs of II (with sub-heading A and its first paragraph), III and IV, the opening and closing of V, all of VI, the conclusion and the signature. Everything else in the filed memorandum is not transcribed, including sub-sections IV.A to IV.E and most of V. Each elision inside a transcribed section is marked with "…". Nothing in the sample is a paraphrase of the filed text, but the sample is not a full copy of the memorandum.
@@ -84,11 +84,11 @@ The pairing is not in order because the sample elides the exemplar's pages 8 to 
 
 ## Engines
 
-The typst template is the reference. The docx engine is `docx/reference.docx` (built by `docx/make-reference.sh`) with the Lua filter `docx/alsd-motion-brief.lua`; it renders with `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.0.3 converts the file; 8 pages, the same count as the typst render). The fonts must be installed for LibreOffice: EB Garamond from `fonts/eb-garamond/`; `pdffonts` shows only the EB Garamond faces.
+The typst template is the reference. The docx engine is `docx/reference.xml` (from which `fb render --engine docx` builds the reference document: the cross-engine recipe, `base="xengine"`, in the typst template's face; `docx/make-reference.sh` is retired) with the Lua filter `docx/alsd-motion-brief.lua`; it renders with `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice converts the file; 8 pages, the same count as the typst render). Times New Roman must be installed for LibreOffice (the pinned install, `docs/FONTS.md` rule 1); `pdffonts` shows only Times New Roman faces. The table below was written before fb-595.68; its paper, font and spacing rows are current.
 
 | Element | Typst | DOCX |
 |---|---|---|
-| Paper, margins, font, size | Letter, 1 in, EB Garamond 12 pt | same (in `reference.docx`) |
+| Paper, margins, font, size | Letter, 1 in, Times New Roman 12 pt | same (in `reference.xml`) |
 | Body spacing | 24 pt pitch, paragraphs indented 0.5 in | exact 24 pt, first line indented 0.5 in |
 | Caption and cover | a grid with a ")" column; "Civil Action No." on the middle row | a borderless table with the same rows and columns |
 | Headings | level 1 centered caps, 1.4 em; level 2 bold with a hanging indent, 1.2 em; level 3 bold, 1 em | level 1 centered caps, 17 pt; level 2 bold with the same hanging indent, 14.5 pt; level 3 bold, 12 pt (rounded to half points) |
@@ -97,10 +97,10 @@ The typst template is the reference. The docx engine is `docx/reference.docx` (b
 | Signature block and certificate of service | signature at 3.0 in; certificate kept together | the same measures; certificate kept together |
 | Page numbers | centered, bottom margin | centered, bottom margin (a PAGE field) |
 
-What differs:
+What differs (on the earlier EB Garamond renders, before fb-595.68):
 
 - Line breaks: some lines break a word earlier or later than the typst render (the second line of the brief title, for one), so text is not in the same place on every line.
 - The CONCLUSION heading and its paragraph move to page 8 in the DOCX, with the signature block and the certificate of service; the typst render keeps them on page 7. The signature block and certificate are on the last page in both engines (open item 6 above).
 - The space between the title of the paper and the first heading is set by measurement of the typst render (a blank line of 16.2 pt in `alsd-motion-brief.lua`), not by a rule.
 
-DOCX BLOCKED items: none. This folder has no `checks.yaml`, so `tools/check.sh --engine docx` does not run here; the docx PDF was reviewed page by page instead (every page of `OUTPUT-motion-brief.docx.pdf`, against the typst render). The `.docx` was converted by LibreOffice without error but was not opened in Microsoft Word, so the Word repair check is not done.
+DOCX BLOCKED items: none. This folder has no `checks.yaml`, so `tools/check.sh --engine docx` does not run here; the docx PDF was reviewed page by page instead (before fb-595.68) (every page of `OUTPUT-motion-brief.docx.pdf`, against the typst render). The `.docx` was converted by LibreOffice without error but was not opened in Microsoft Word, so the Word repair check is not done.

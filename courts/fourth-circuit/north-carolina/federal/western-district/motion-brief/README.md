@@ -8,10 +8,10 @@ Folder: `courts/fourth-circuit/north-carolina/federal/western-district/motion-br
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (25 pages, one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: a portion of the memorandum (caption, opening, statement of the case, part of the facts, standard of review, arguments I to IV in part, conclusion, signature, AI certification, certificate of service) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, Times New Roman only (`pdffonts`), no warnings (`tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-noble-motion-brief.pdf` and `usage/OVERLAY-noble-motion-brief.txt` (`tools/overlay.sh`) |
-| typeface | face required: none named (LCvR 7.1(d) sets a 12-point minimum only; a judge's standing order may set a face). Substitute: none; **EB Garamond kept** per `docs/FONTS.md` ("No face named"). Metric-compatible: n/a. |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-checked 2026-10-14 with the font pass, no template change) |
+| typeface | face required: none named (LCvR 7.1(d) sets a 12-point minimum only; a judge's standing order may set a face). Template face: **Times New Roman** 12 pt, the house standard where no face is named (`docs/FONTS.md` rule 6; Liberation Serif as fallback), on typst and docx; EB Garamond before 2026-10-17 (the docx until fb-595.68.19). |
+| pages reviewed | 9 of 9 on the earlier EB Garamond render, before fb-595.68 (every page rendered at 60 dpi and viewed; re-checked 2026-10-14 with the font pass) |
 
 File names follow the tools' defaults (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`) rather than the
 `<id>.md` / `<id>-overlay.pdf` names in the task brief, because `tools/render.sh` and `tools/overlay.sh` read and write
@@ -35,13 +35,12 @@ certification's two parts. They do not quote the order.
 
 ## Layout
 
-- US Letter, one-inch margins on all four sides, 12 pt EB Garamond (vendored in `fonts/`; no face is named by the rules, so it stays per `docs/FONTS.md`).
+- US Letter, one-inch margins on all four sides, 12 pt Times New Roman (no face is named by the rules; the house standard, `docs/FONTS.md` rule 6).
 - First page: the court title (UNITED STATES DISTRICT COURT / FOR THE WESTERN DISTRICT OF NORTH CAROLINA / the division),
   then a caption: the party column with one line per row, a ")" column the same height, and the right column with
   "Civil Action No." and the title lines.
-- Double spacing is a 27.6 pt pitch (single line 13.8 pt, body leading 1.65em), the same as the filed exemplar
-  (`pdftotext -bbox`: baselines 27.6 pt apart in both). Paragraph spacing equals the leading, because a paragraph's
-  last line takes no leading of its own.
+- Double spacing is a 27.6 pt pitch (`pitch-body`, twice the 13.8 pt single line), the same as the filed exemplar
+  (`pdftotext -bbox` on the earlier EB Garamond render: baselines 27.6 pt apart in both).
 - Body paragraphs: unnumbered (a brief is not a pleading), first-line indent 0.5 in.
 - Headings: level 1 centered bold caps (the sections: STATEMENT OF THE CASE, ARGUMENT, CONCLUSION); level 2 bold, left
   (argument headings such as "I. ..."); level 3 bold italic, left. Headings are single-spaced, each with a 24 pt space
@@ -69,7 +68,7 @@ certification's two parts. They do not quote the order.
 
 ## Overlay
 
-`usage/OVERLAY-noble-motion-brief.pdf` shows the render in red and the filed page in blue; black where they agree.
+`usage/OVERLAY-noble-motion-brief.pdf` (made on the earlier 9-page EB Garamond render, before fb-595.68) shows the render in red and the filed page in blue; black where they agree.
 The text map (`OVERLAY-noble-motion-brief.txt`) pairs each rendered page with the filed page that shares the most
 words. The sample is an excerpt: rendered pages 7 to 9 (conclusion, AI certification, certificate of service) pair with
 filed pages 23 to 25, and the middle of the filed memorandum (filed pages 9 to 22) is not transcribed. Overlap numbers
@@ -88,8 +87,8 @@ do not measure quality.
 3. **Page limit.** LCvR 7.1(d) sets 25 pages for "any brief" and does not say which pages count. The template does not
    count pages; the filed exemplar is 25 pages including the signature and the certificate of service. Per-judge
    standing orders can change the limit.
-4. **Font.** Same as the complaint: no face is named (LCvR 7.1(d)), so EB Garamond at 12 pt stays per `docs/FONTS.md`; the exemplar uses Times New Roman,
-   which looks larger at 12 pt. A Times-metric font would remove the difference; a decision for David.
+4. **Font.** Same as the complaint: no face is named (LCvR 7.1(d)), so the template is Times New Roman 12 pt, the house
+   standard (`docs/FONTS.md` rule 6, David 2026-10-17), the exemplar's face too; EB Garamond before 2026-10-17 (the docx until fb-595.68.19).
 5. **Footnotes.** The exemplar has footnote 1 (exhibits). The markdown contract has no footnotes, so the sample omits
    it and the template cannot print one.
 6. **Argument headings.** The filed text layer puts the roman numeral ("I.") on its own line above the heading text. The
@@ -101,9 +100,9 @@ do not measure quality.
    by the court's system and are not reproduced.
 9. **Sample is an excerpt.** Arguments V and VI, most of the facts and part of argument IV are not transcribed.
 
-## Review of the rendered pages (`usage/OUTPUT-motion-brief.typst.pdf`, 9 pages)
+## Review of the rendered pages (`usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, the earlier EB Garamond render)
 
-Each page was rendered at 60 dpi and viewed after the last template change.
+Each page was rendered at 60 dpi and viewed, before fb-595.68; the current render is 10 pages.
 
 - Page 1: court title (three lines), caption with ")" column, "Civil Action No. 5:26-CV-6", title and rule line at the
   right, opening paragraph, STATEMENT OF THE CASE. Pass.
@@ -123,9 +122,9 @@ Gate 2 rows for these pages are recorded here (this doc type has no `reviews/` f
 
 ## Engines
 
-**docx** (`docx/reference.docx` built by `docx/make-reference.sh`; `docx/motion-brief.lua` builds the caption, the signature blocks, the AI certification and the certificate of service). Output: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice, 9 pages, the same page count as typst). Checked by eye, not by `tools/check.sh` (this court has no `checks.yaml` yet). Not opened in Word; `unzip -tq` and `xmllint` pass on every XML part, and LibreOffice converted it without error.
+**docx** (`docx/reference.xml`, from which `fb render --engine docx` builds the reference document on the shared cross-engine recipe in the typst face; `docx/motion-brief.lua` builds the caption, the signature blocks, the AI certification and the certificate of service; `docx/make-reference.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.19). Output: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice, 10 pages, the same page count as typst). XENG-001..003 pass and `tools/check.sh --engine docx` passes on `eval.yaml` (`usage/.check-docx.txt`: PASS). Not opened in Word; `unzip -tq` and `xmllint` pass on every XML part, and LibreOffice converted it without error.
 
-- *Matches typst:* EB Garamond 12 pt (the PDF embeds EB Garamond Regular, Bold and Italic only); US Letter with one-inch margins; double-spaced body at the 27.6 pt pitch and single lines at 13.8 pt; the court title with the division; the caption with the ")" column at 3.0 in and the right column at 3.5 in, with "Civil Action No. 5:26-CV-6", the bold title lines wrapping as in typst; the first paragraph 24 pt below the caption; unnumbered body paragraphs with a half-inch first-line indent; the centered section headings and left argument headings (I., II., ... with the bold and bold italic levels); the date line and the firm blocks at 3.0 in, with "By: /s/" for the signer; the AI certification with the standing order's wording; the certificate of service with each counsel block; a centered page number on every page.
-- *Differs (tier 2):* line breaks differ from typst's in places, so the page breaks fall at other lines: the heading "II." moves from page 4 (typst) to page 5 (docx), and the certificate of service starts at the foot of page 8 in both but breaks differently across pages 8 and 9. Section headings are 17 pt and argument headings 14.5 pt to approximate typst's default heading sizes; the space around a heading is within a few points of typst's. Typst sets the AI certification heading on two lines; the docx sets it on one. Word may substitute a font if EB Garamond is not installed on the reader's machine.
-- *Pages reviewed:* docx pages 1 to 9 of `OUTPUT-motion-brief.docx.pdf` (all 9), and typst pages 1 to 9 of the typst render (all 9), at 60 dpi.
+- *Matches typst* (checked by eye on the earlier 9-page EB Garamond docx; the face is now Times New Roman 12 pt on both, Regular, Bold and Italic embedded): US Letter with one-inch margins; double-spaced body at the 27.6 pt pitch and single lines at 13.8 pt; the court title with the division; the caption with the ")" column at 3.0 in and the right column at 3.5 in, with "Civil Action No. 5:26-CV-6", the bold title lines wrapping as in typst; the first paragraph 24 pt below the caption; unnumbered body paragraphs with a half-inch first-line indent; the centered section headings and left argument headings (I., II., ... with the bold and bold italic levels); the date line and the firm blocks at 3.0 in, with "By: /s/" for the signer; the AI certification with the standing order's wording; the certificate of service with each counsel block; a centered page number on every page.
+- *Differs (tier 2; on that earlier docx, not re-checked here):* line breaks differ from typst's in places, so the page breaks fall at other lines: the heading "II." moves from page 4 (typst) to page 5 (docx), and the certificate of service starts at the foot of page 8 in both but breaks differently across pages 8 and 9. Section headings are 17 pt and argument headings 14.5 pt to approximate typst's default heading sizes; the space around a heading is within a few points of typst's. Typst sets the AI certification heading on two lines; the docx sets it on one.
+- *Pages reviewed:* docx pages 1 to 9 of the earlier EB Garamond `OUTPUT-motion-brief.docx.pdf` (all 9), and typst pages 1 to 9 of the typst render (all 9), at 60 dpi.
 - *BLOCKED:* none. The memorandum has no footnotes, table of contents or table of authorities in the template, so no field or footnote is needed.

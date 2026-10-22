@@ -7,10 +7,10 @@ Folder: `courts/eighth-circuit/nebraska/federal/bankruptcy-district/adversary-co
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (1 filer, 9 pages; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md` (the whole complaint body and the caption, the signature block, the prayer; the exemplar's footnote 1 is not transcribed, see Known gaps) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, Times New Roman (pinned; vendored Liberation Serif fallback), no system fonts, no warnings |
 | overlay | ok: `usage/OVERLAY-interbake-adversary-complaint.pdf` and `OVERLAY-interbake-adversary-complaint.txt` (page map) |
-| typeface | no face required by the rules (checked 2026-10-14, see Decisions); EB Garamond kept, no substitute from `docs/FONTS.md` applies |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last change; see the review section) |
+| typeface | no face required by the rules (checked 2026-10-14, see Decisions); Times New Roman 12 pt, the house standard (`docs/FONTS.md`, rule 6; EB Garamond 13 pt until then) |
+| pages reviewed | 9 of 9, on the earlier EB Garamond render (every page rendered at 60 dpi and viewed after the last change; see the review section) |
 | tier 1 (rule-mandated) | see the rules table: each row is in the template, and the one the exemplar misses (FRBP 7008(a) consent statement) is asserted by the template |
 
 ## Governing rules
@@ -23,7 +23,7 @@ Primary sources. Dates in the table are when each text was fetched (2026-10-14).
 | FRBP 7003 (applies FRCP 3) | Commencing an adversary proceeding is by complaint, filed with the clerk. Fetched text: "Fed. R. Civ. P. 3 applies in an adversary proceeding." | Not a template element. |
 | FRBP 7008(a) | Allegation of jurisdiction must reference the name, number and Code chapter of the case the adversary relates to, and the district and division where it is pending. The complaint must state whether the pleader does or does not consent to the entry of final orders or judgment by the bankruptcy court. (Fetched 2026-10-14.) | Jurisdiction section of the sample: name and number of the main case, the District of Nebraska, and the consent sentence (`body.find("consent to the entry of final orders")`, asserted by the template). The exemplar does **not** state consent (see Decisions). |
 | FRBP 7010 (applies Official Form 416) | The caption of a pleading in an adversary proceeding must substantially conform to the appropriate version of Official Form 416. (Fetched text: "Fed. R. Civ. P. 10 applies in an adversary proceeding — except that a pleading's caption must substantially conform to the appropriate version of Form 416.") | `caption()`: court name, *In re* block with chapter and case lines, parties with designations, adversary number line, title. The text of Form 416A itself was **not retrieved** (the uscourts.gov page returned 404); the caption follows the exemplar and FRBP 9004(b) rather than the form's exact layout. |
-| FRBP 9004(a) | Papers must be clearly legible; common English abbreviations are acceptable. | Vendored EB Garamond, 13 pt, black on white. |
+| FRBP 9004(a) | Papers must be clearly legible; common English abbreviations are acceptable. | Times New Roman, 12 pt, black on white. |
 | FRBP 9004(b) | Caption: (1) court name; (2) case title; (3) case number and, if appropriate, the adversary-proceeding number; (4) a brief designation of the document's character. | `caption()` (court, parties, Case No., Adv. Pro. No.) and the title line. |
 | FRCP 10(b) (applies via FRBP 7010) | Numbered paragraphs, each limited as far as practicable to a single set of circumstances. | `body-chunks()`: allegations numbered from the first heading to the prayer; intro and prayer unnumbered. |
 | FRBP 9011(a) | Every pleading must be signed by at least one attorney of record in the attorney's own name, and must state the signer's address and telephone number. (Fetched text.) | `signature-block()`: name, address, telephone for each signer. |
@@ -37,7 +37,7 @@ Not in this template (separate filings, not part of the complaint): the adversar
 - Court name, centered and bold, on two lines (constant for this court, not from the sample).
 - Caption in two columns: the *In re* block with a rule under it, then the parties; the right column holds the chapter, the case lines and the adversary number line. "v." between the parties.
 - Title in capitals, bold, centered.
-- Body: double spaced (26 pt pitch at 13 pt), 1-inch margins, letter paper, left-aligned (the exemplar's justification is not readable from its text layer, so none is asserted). Headings are sticky: a heading never ends a page.
+- Body: double spaced (27.6 pt pitch at 12 pt, typst `pitch-double`), 1-inch margins, letter paper, left-aligned (the exemplar's justification is not readable from its text layer, so none is asserted). Headings are sticky: a heading never ends a page.
 - Level-1 headings (`#`) are centered bold capitals; level-2 headings (`##`) are centered bold (COUNT subheadings). Paragraph numbers are 1, 2, 3 ... typed by the template.
 - Prayer items are lettered (a), (b) ... with a hanging indent. The prayer paragraph is unnumbered.
 - Footnotes: `text[^key]` with a `[^key]: ...` definition line (rendered at 11 pt).
@@ -69,17 +69,17 @@ Three engines, one markdown sample (`usage/INPUT-adversary-complaint.md`). The t
 |---|---|---|
 | typst (primary) | `typst/`, `usage/OUTPUT-adversary-complaint.typst.pdf` | rendered (see above) |
 | latex | none in this folder | not built |
-| docx | `docx/` (`reference.docx`, `nebraskab-adversary-complaint.lua`, `build-reference.sh`, `render.sh`), `usage/OUTPUT-adversary-complaint.docx` | `.docx` written; `.docx.pdf` BLOCKED (below) |
+| docx | `docx/` (`reference.xml`, from which `fb render` builds the reference document on the shared cross-engine recipe, and `nebraskab-adversary-complaint.lua`; until fb-595.68 `build-reference.sh` and `render.sh` with a committed `reference.docx`), `usage/OUTPUT-adversary-complaint.docx`, `.docx.pdf` | `usage/.check-docx.txt`: PASS (the BLOCKED notes below are from before LibreOffice) |
 
-**docx, what matches the typst template** (the same values, set as Word styles in `reference.docx`): US Letter, 1 in margins; EB Garamond 13 pt; body double spaced (26 pt exact) with a 0.5 in first-line indent; caption, signature and footnotes single spaced (14.3 pt exact); footnotes 11 pt; page number centered in the footer, 11 pt. Caption: the court name, the *In re* block with a rule under it, the parties with "v.", and the chapter, case and adversary lines on the right, in a borderless three-column table (3.4 in, 0.25 in gutter, 2.85 in). Level-1 headings centered bold capitals; level-2 headings centered bold. Allegations numbered 1, 2, ... from the first heading to the prayer; the intro and the prayer unnumbered. Prayer items lettered (a), (b), ... with a hanging indent. The signature block (Dated; Respectfully submitted; each signer) is kept on one page. The FRBP 7008(a) consent check and the § no-break spacing are the same as in the typst template.
+**docx, what matches the typst template** (the same values, set as Word styles in `docx/reference.xml` and by the filter): US Letter, 1 in margins; Times New Roman 12 pt; body double spaced (27.6 pt exact) with a 0.5 in first-line indent; caption and signature single spaced (13.8 pt exact); footnotes 11 pt in 12.65 pt lines; page number centered in the footer. Caption: the court name, the *In re* block with a rule under it, the parties with "v.", and the chapter, case and adversary lines on the right, in a borderless three-column table (3.4 in, 0.25 in gutter, 2.85 in). Level-1 headings centered bold capitals; level-2 headings centered bold. Allegations numbered 1, 2, ... from the first heading to the prayer; the intro and the prayer unnumbered. Prayer items lettered (a), (b), ... with a hanging indent. The signature block (Dated; Respectfully submitted; each signer) is kept on one page. The FRBP 7008(a) consent check and the § no-break spacing are the same as in the typst template.
 
-**docx, what differs**:
+**docx, what differs** (written for the earlier build, before fb-595.68):
 - Paragraph numbers and prayer letters are typed text (a tab after them), not Word list numbering. They read the same; they do not renumber when a paragraph is added in Word.
 - The caption rule is a paragraph border under the debtor block, not a drawn line.
-- `render.sh` widens the caption and signature tables to the 6.5 in text width after pandoc (pandoc writes a 5.5 in grid). Word may still paginate differently from the LibreOffice PDF.
-- The font is named as EB Garamond. A reader without it installed sees a substitute.
+- `render.sh` (since retired into fb render) widened the caption and signature tables to the 6.5 in text width after pandoc (pandoc writes a 5.5 in grid). Word may still paginate differently from the LibreOffice PDF.
+- The font is named as Times New Roman. A reader without it installed sees a substitute.
 
-**docx BLOCKED**:
+**docx BLOCKED** (then; the committed `usage/.check-docx.txt` now reads PASS):
 - Every `.docx.pdf` check (Gates 0 to 3, measured on the LibreOffice PDF from `soffice --headless --convert-to pdf`): BLOCKED. LibreOffice is not on conda-forge and could not be installed on the build box (no root). No page of the `.docx` has been rendered or viewed, so no visual claim is made for the docx.
 - The `.docx` is a valid zip (`unzip -t`) and its `word/document.xml` is well-formed (`xmllint`, in `render.sh`). Other parts are not schema-checked, and a Word or LibreOffice open without a repair prompt is not checked.
 - `tools/check.sh` needs a court root (`court.json`, `rules.md`, `checks.yaml`); this doc-type folder has none, so the repo gates do not run on it.
@@ -87,7 +87,7 @@ Three engines, one markdown sample (`usage/INPUT-adversary-complaint.md`). The t
 ## Decisions
 
 - **Consent sentence (FRBP 7008(a)).** The exemplar does not state whether the plaintiff consents to final orders, and the rule requires it. The sample adds one sentence in the jurisdiction section, right after the core-proceeding paragraph: "Plaintiff [does / does not] consent to the entry of final orders or judgment by the Court." The bracket is an unfilled choice for the filer, not a legal position; the template refuses to build a complaint that lacks the statement. This is the only sentence in the sample that is not in the exemplar, and it adds one numbered paragraph, so paragraphs 6 to 39 of the sample are one number higher than the exemplar's (5 to 38).
-- **Font: EB Garamond at 13 pt.** The exemplar is Times New Roman, 12 pt. Only EB Garamond is vendored, and at 12 pt it reads smaller than Times, so 13 pt matches the apparent size. No rule sets a face or a size: on 2026-10-14 the 2026 FINAL AMENDED local rules (35 pages, text extracted with poppler: no typeface, font or point-size term), NECivR 7.1 (no font term) and FRBP 9004(a) (legibility only) were checked. The exemplar's Times New Roman is the filer's choice, not a rule, so `docs/FONTS.md` ("No face named" → EB Garamond) applies and the face stays EB Garamond.
+- **Font: Times New Roman at 12 pt**, the house standard (`docs/FONTS.md`, rule 6) and the exemplar's face and size. It was EB Garamond at 13 pt before (at 12 pt it read smaller than Times). No rule sets a face or a size: on 2026-10-14 the 2026 FINAL AMENDED local rules (35 pages, text extracted with poppler: no typeface, font or point-size term), NECivR 7.1 (no font term) and FRBP 9004(a) (legibility only) were checked. The exemplar's Times New Roman is the filer's choice, not a rule.
 - **Margins and spacing: 1 inch, double.** No rule in the fetched local rules sets margins or line spacing for adversary complaints. The exemplar is double spaced with 1-inch margins; the template matches that.
 - **No pleading paper.** The N.D. Cal. complaint template uses numbered lines (a California rule, Civil L.R. 3-4). Nebraska has no such rule, and the exemplar has none.
 - **Counsel block at the signature, not at the top.** The exemplar puts counsel at the signature. Nebraska has no upper-left counsel rule in the fetched text.
@@ -104,7 +104,7 @@ Three engines, one markdown sample (`usage/INPUT-adversary-complaint.md`). The t
 8. **Check scripts not run.** `tools/check.sh` expects a court root with `court.json` and `rules.md`, and this folder is not that shape. The brief forbids touching `tools/`. Render and overlay were run; the review below is the Gate 2 equivalent for this doc type.
 9. **No `reviews/` folder** for this doc type; the review is recorded here.
 
-## Review of the rendered pages (final build, 9 pages)
+## Review of the rendered pages (final EB Garamond build, 9 pages)
 
 Each page was rendered at 60 dpi and viewed after the last change. Paragraph ranges were read from the PDF text layer.
 

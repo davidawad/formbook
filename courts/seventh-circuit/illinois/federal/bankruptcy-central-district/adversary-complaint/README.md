@@ -56,7 +56,7 @@ Body: `#` is a centered bold section heading (INTRODUCTION, COUNTS, REQUEST FOR 
 
 ## Overlay
 
-`usage/OVERLAY-i80-adversary-complaint.pdf`: red is our render, blue is the filed I80 complaint, black is where they agree. The page map (`.txt`) pairs our pages to the filed pages by shared words: our pages 1 to 4 pair with filed pages 1 to 4; our page 5 pairs with filed page 4 by word overlap (the pairing is the tool's rule; the page-by-page review did not find a content gap there); our pages 6 to 10 pair with filed pages 5 to 9. Word overlap runs from 30.5% (our page 4) to 83.9% (our page 7). The differences the overlay shows are tier 2 or tier 3, not tier 1: the typeface (EB Garamond against Helvetica and Liberation in the filed copy), the sub-paragraph layout (ours first-line indented, theirs hanging), the footnote text size, and the `Dated:` line wording. The filed copy also carries the CM/ECF header ("Case 18-08003 Doc 1 Filed ...") that the court system adds on filing, which the template does not generate.
+`usage/OVERLAY-i80-adversary-complaint.pdf`: red is our render, blue is the filed I80 complaint, black is where they agree. The page map (`.txt`) pairs our pages to the filed pages by shared words: our pages 1 to 4 pair with filed pages 1 to 4; our page 5 pairs with filed page 4 by word overlap (the pairing is the tool's rule; the page-by-page review did not find a content gap there); our pages 6 to 10 pair with filed pages 5 to 9. Word overlap runs from 30.5% (our page 4) to 83.9% (our page 7). The differences the overlay shows are tier 2 or tier 3, not tier 1: the typeface (measured on the earlier EB Garamond render: EB Garamond against Helvetica and Liberation in the filed copy), the sub-paragraph layout (ours first-line indented, theirs hanging), the footnote text size, and the `Dated:` line wording. The filed copy also carries the CM/ECF header ("Case 18-08003 Doc 1 Filed ...") that the court system adds on filing, which the template does not generate.
 
 ## Pages reviewed
 
@@ -71,7 +71,7 @@ Defects found and fixed during review:
 
 Pages reviewed: 10 of 10.
 
-Fonts pass, 2026-10-15: no court rule names a face, so the face stays EB Garamond (`pdffonts` on the new render: EBGaramond Regular, Bold, Italic). Re-rendered with zero typst warnings and the overlay regenerated. Every page (1 to 10) was viewed at 60 dpi on the render made before the comment-only template edit; the final render has the same 10 pages and fonts.
+Fonts pass, 2026-10-15 (historical; the face is now Times New Roman, see ILCB-TYPE-1): no court rule names a face, so the face then stayed EB Garamond (`pdffonts` on the new render: EBGaramond Regular, Bold, Italic). Re-rendered with zero typst warnings and the overlay regenerated. Every page (1 to 10) was viewed at 60 dpi on the render made before the comment-only template edit; the final render has the same 10 pages and fonts.
 
 ## Gaps
 

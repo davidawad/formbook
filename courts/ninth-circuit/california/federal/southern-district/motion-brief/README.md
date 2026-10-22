@@ -7,9 +7,9 @@ Folder: `courts/ninth-circuit/california/federal/southern-district/motion-brief/
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (a portion of the 42-page attachment: cover, TOC, TOA, introduction, factual background, standard of review, arguments I, II and III, conclusion, signature) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (the earlier EB Garamond render, before fb-595.68; the committed render is Times New Roman, 9 pages) |
 | overlay | ok: `usage/OVERLAY-sager-motion-brief.pdf` and `OVERLAY-sager-motion-brief.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; the cover was re-checked after the last change; all 8 re-viewed on 2026-10-15 in the typeface pass, no template change) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; the cover was re-checked after the last change; all 8 re-viewed on 2026-10-15 in the typeface pass, no template change; all on the earlier EB Garamond render) |
 
 ## Governing rules
 
@@ -17,7 +17,7 @@ Folder: `courts/ninth-circuit/california/federal/southern-district/motion-brief/
 |---|---|---|
 | S.D. Cal. Civil L.R. 5.1 | Papers typed double-spaced on one side, line-numbered in the left margin, not more than 28 lines per page, letter size. | `lines-per-page = 28`, `line-pitch = 24pt`, `page-w = 8.5in`, `pleading-background()`. |
 | S.D. Cal. Civil L.R. 5.1 | Proportional font such as Times New Roman at 14-point; no smaller type for text, footnotes or quotations. | `type-size = 14pt` for body, headings, caption and counsel. Footer 10 pt (gap 3). |
-| S.D. Cal. Civil L.R. 5.1 (typeface) | No face is required. "Such as Times New Roman" is an example, not a requirement, so the court-named-face substitution does not apply. | Face required: none. Font: **EB Garamond** (kept; `font-family` in `casd-motion-brief.typ`). Substitute not used, so the fit column is n/a. |
+| S.D. Cal. Civil L.R. 5.1 (typeface) | No face is required. "Such as Times New Roman" is an example, not a requirement, so the court-named-face substitution does not apply. | Face required: none. Font: **Times New Roman** (the house standard, docs/FONTS.md rule 6; Liberation Serif fallback; `font-family` in `casd-motion-brief.typ`). |
 | S.D. Cal. Civil L.R. 7.1 | Memorandum length and form for motions. | **Not verified** (see below). The template enforces no page limit. |
 | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number and a Rule 7(a) designation. | `court`, `caption`, `case_number` on the cover. |
 | Fed. R. Civ. P. 12(b)(6), 8 | Rule text used by the memorandum; not a formatting rule. | Body text only. |
@@ -32,7 +32,7 @@ Not produced by this template, and not checked: a table of authorities listing e
 
 - Pleading paper as the complaint (`../complaint/`): numbered lines 1 to 28, double rule at the text's left edge and a single rule at its right, footer below line 28.
 - Top margin 72 pt, so line 1 sits on the top margin and line 28 ends at 10.33 inches. The footer (page number, title, case number) sits in the bottom margin.
-- Line pitch 24 pt. Body leading `14.9pt` gives that pitch at 14 pt EB Garamond with the cap-height / baseline text edges (measured: 24.00 pt on every body line; counsel and caption single-spaced at 12.6 pt).
+- Line pitch 24 pt. Body leading `14.9pt` gives that pitch with the cap-height / baseline text edges (measured on the earlier 14 pt EB Garamond render, before fb-595.68: 24.00 pt on every body line; counsel and caption single-spaced at 12.6 pt).
 - Paragraphs have paragraph spacing equal to the leading (`pleading-par`), so a paragraph of n lines is n × 24 pt less 14.9 pt, and the spacing restores the grid. A heading block has `above: body-leading` and is sized to whole lines (`on-grid`), so the text after it stays on the grid.
 - Front matter: cover (no number), table of contents (roman `i`), table of authorities (roman `ii`), body (arabic from 1). The page number is drawn once, by the pleading footer (`footer-block`); the default page-number footer is turned off (`footer: none`).
 - Headings: level 1 centered caps (INTRODUCTION, CONCLUSION); level 2 `I.`, `II.` with a hanging indent; level 3 `A.`, `B.` (not used in the sample). The table of contents is built from the heading elements; the table of authorities from `toa:` links in the body.
@@ -46,19 +46,19 @@ Not produced by this template, and not checked: a table of authorities listing e
 ## Known gaps and open choices
 
 1. **Only one exemplar.** Tier 2 asks for 2 or 3 filers. The CourtListener search found other S.D. Cal. motions to dismiss in 2026 (e.g. Wright v. Last Brand, Inc., 3:26-cv-04009, Davis Wright Tremaine LLP, doc 9; Nietz v. LPL Financial LLC, 3:26-cv-03383, Bursor & Fisher, doc 20), not downloaded. Tier 2 is therefore **not** judged against two filers yet.
-2. **Font.** CivLR 5.1 names Times New Roman only as an example ("a proportional font such as Times New Roman"), so the rule names no face and this template keeps EB Garamond at 14 pt. `fonts/liberation-serif/` (the Times New Roman substitute, metric-compatible per `docs/FONTS.md`) is vendored, so switching is a one-line change in `font-family` if David reads the exemplar's Times as the clerk's convention. EB Garamond has a smaller x-height than Times, so the sample reads smaller than the exemplar at the same nominal size. Question for David: should the S.D. Cal. templates keep EB Garamond (the rule's text allows any proportional font) or use Liberation Serif (the exemplar's face)?
+2. **Font.** CivLR 5.1 names Times New Roman only as an example ("a proportional font such as Times New Roman"), so the rule names no face. The template sets Times New Roman 14 pt (Liberation Serif fallback), the house standard of docs/FONTS.md rule 6 (David, 2026-10-17), which settles the earlier question whether to keep EB Garamond; the exemplar is Times too.
 3. **Footer type size.** 10 pt (title and case number). Logged as an interpretation, as in the complaint template.
-4. **Length.** The sample is 8 pages: cover, two front-matter pages, five body pages. The brief's target was 8 to 14 pages; the filed memorandum is 42 pages and the transcription covers its introduction, factual background, standard of review, three argument sections and the conclusion. Transcribing more body text would bring the sample into the target range. The template handles longer bodies (the TOC and TOA are generated).
+4. **Length.** The sample was 8 pages on the earlier EB Garamond render (the committed Times New Roman render is 9): cover, two front-matter pages, five body pages. The brief's target was 8 to 14 pages; the filed memorandum is 42 pages and the transcription covers its introduction, factual background, standard of review, three argument sections and the conclusion. Transcribing more body text would bring the sample into the target range. The template handles longer bodies (the TOC and TOA are generated).
 5. **Cover contents.** The cover follows the exemplar: counsel at the upper left, court title, caption, title, hearing block. The exemplar's "[Filed concurrently with ...]" line and the chambers note on oral argument are omitted from the sample's hearing block (the "Time" entry is "Under Submission").
 6. **Table of authorities is partial.** It lists only the authorities the sample links with `toa:` keys. The filed TOA lists every authority; the sample's authorities are the ones it cites with a link (about ten). Cites in the sample that are not linked (for example Gilead, Barzen, Graff) do not appear in the TOA.
 7. **TOA wrap.** A long TOA entry (ServiceMaster) wraps its page number onto a second line. Cosmetic; the entry is in the TOA but the layout could use a grid like the TOC.
 8. **Signature block.** The template prints "Respectfully submitted," and the firm name (from `signature.preamble`); the exemplar has the date, the firm and the "By: /s/" line without "Respectfully submitted". Convention, not a rule; logged.
 9. **Heading placement.** The grid rule adds `body-leading` of space above each heading, so a heading at the top of a page is 15 pt below the grid line; accepted.
 10. **Overlay names.** `tools/overlay.sh` reads `usage/OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt`; these are the names the tools use, not `<id>.pdf` and `<id>-overlay.pdf`.
-11. **Overlay pairing.** Pages are paired by shared words: sample p.1 (cover) with filed p.1; p.2 (TOC) with filed p.2; p.3 (TOA) with filed p.5 (the TOA page); p.4 and p.5 (body) with filed pp.12 and 13; p.6 with filed p.15; p.7 and p.8 (unjust enrichment and conclusion) with filed pp.40 and 41. The pairings are a diagnostic, not a score.
+11. **Overlay pairing.** Pages are paired by shared words (on the earlier 8-page EB Garamond render): sample p.1 (cover) with filed p.1; p.2 (TOC) with filed p.2; p.3 (TOA) with filed p.5 (the TOA page); p.4 and p.5 (body) with filed pp.12 and 13; p.6 with filed p.15; p.7 and p.8 (unjust enrichment and conclusion) with filed pp.40 and 41. The pairings are a diagnostic, not a score.
 12. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court directory with `court.json` and `rules.md`, and this doc-type folder does not have that shape. The gates were not run; render and overlay were run, and the review below is the Gate 2 equivalent for this doc type.
 
-## Review of the rendered pages (current PDF)
+## Review of the rendered pages (the 8-page EB Garamond render, before fb-595.68; the committed render is 9 pages)
 
 - Page 1 (cover): counsel block lines 1 to 12 (single-spaced, the role line in italics), court title, caption with the party column closed by a rule, the title in bold caps at the right, the hearing block (date, time, place, judge). Footer: title and case number. The caption fits on page 1 (an earlier version spilled two lines onto page 2; the cover spacing was reduced). Pass.
 - Page 2 (table of contents, roman `i`): TOC entries with dot leaders and page numbers that match the body (INTRODUCTION 1, FACTUAL BACKGROUND 1, STANDARD OF REVIEW 2, ARGUMENT 3, I. 3, II. 3, III. 4, CONCLUSION 5). Pass.

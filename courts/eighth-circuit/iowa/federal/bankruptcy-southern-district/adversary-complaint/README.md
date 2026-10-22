@@ -7,9 +7,9 @@ Folder: `courts/eighth-circuit/iowa/federal/bankruptcy-southern-district/adversa
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md`: caption, all 20 numbered allegations of the filing (plus the two paragraphs the template generates for FRBP 7008), all four headings, the table after ¶ 18, prayer (A to D), signature block. The cover sheet (Form 1040) is not transcribed. |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <dir> usage/INPUT-adversary-complaint.md`) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 6 pages (5 on the earlier EB Garamond render), typst 0.15.0, Times New Roman (pinned; vendored Liberation Serif fallback), no system fonts, no warnings (`sh tools/render.sh <dir> usage/INPUT-adversary-complaint.md`) |
 | overlay | ok: `usage/OVERLAY-sturm-complaint.pdf` and `usage/OVERLAY-sturm-complaint.txt` (`sh tools/overlay.sh <dir> sturm-complaint`) |
-| pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 5 of 5, on the earlier EB Garamond render (every page rendered at 60 dpi and viewed after the last template change) |
 | BLOCKED | none for this doc type. A second filer was not found (see Known gaps 1). |
 
 File names: the brief lists `usage/<id>.pdf` and `usage/<id>-overlay.pdf`. The shared tools write and read `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, and the tools are not to be edited, so the render and overlay follow the tools' names.
@@ -22,7 +22,7 @@ There is **no local rule** for this court's typography, page limits or pleading 
 |---|---|---|---|---|
 | Fed. R. Bankr. P. 7010 | Fed. R. Civ. P. 10 applies in an adversary proceeding; the caption must substantially conform to Official Form 416D. | M | `caption()` (court name, debtor, plaintiff, defendant, Case No., Chapter, Adv. Proc. No.) | https://www.law.cornell.edu/rules/frbp/rule_7010 (as amended eff. 2024-12-01), verified 2026-10-14 |
 | Fed. R. Bankr. P. 7008 | The allegation of jurisdiction names the case (name, number, Code chapter), the district and the division; a complaint must state whether the pleader consents to final orders or judgment by the bankruptcy court. | M | Numbered ¶¶ 1 and 2 are generated from `chapter`, `debtors`, `case_number`, `division` and `final_orders_consent`; the template asserts the two fields exist. | https://www.law.cornell.edu/rules/frbp/rule_7008 (eff. 2024-12-01), verified 2026-10-14 |
-| Fed. R. Bankr. P. 9004(a) | Documents must be legible; commonly used abbreviations are acceptable. | M | Text is EB Garamond, 12 pt, black (`type-size`); no typeface is required (see Typeface below). | https://www.law.cornell.edu/rules/frbp/rule_9004 (eff. 2024-12-01), verified 2026-10-14 |
+| Fed. R. Bankr. P. 9004(a) | Documents must be legible; commonly used abbreviations are acceptable. | M | Text is Times New Roman, 12 pt, black (`type-size`); no typeface is required (see Typeface below). | https://www.law.cornell.edu/rules/frbp/rule_9004 (eff. 2024-12-01), verified 2026-10-14 |
 | Fed. R. Bankr. P. 9004(b) | Caption: court name, case title, case number and adversary number if any, and a brief designation of the document. | M | `caption()`, `brief_title`. | same |
 | Fed. R. Civ. P. 10(a) (via 7010) | Caption with the court's name, a title, a file number, and a Rule 7(a) designation. | M | `caption()`; the title line is `brief_title`. | https://www.law.cornell.edu/rules/frcp/rule_10 (as amended eff. 2007-12-01), verified 2026-10-14 |
 | Fed. R. Civ. P. 10(b) (via 7010) | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | M | Each paragraph of the body is numbered by the template (`body-content()`); headings, the WHEREFORE paragraph, tables, quotations and the list are not. | same |
@@ -38,8 +38,8 @@ Not produced here: the summons (Official Form 287 or the court's summons form), 
 | Item | Value |
 |---|---|
 | Face required | none. No local rule (abolished 2003-08-04, General Order 2003-1) and no FRBP or FRCP text names a typeface; FRBP 9004(a) asks only for legibility. |
-| Vendored substitute | not applicable: no face is named, so the template keeps **EB Garamond** (`fonts/eb-garamond/`, SIL OFL 1.1), per `docs/FONTS.md` ("No face named"). |
-| Metric fit | n/a (not a substitute). Page count (5) and line breaks are EB Garamond's, not Times New Roman's as in the exemplar. |
+| Font | no face is named, so the template sets **Times New Roman** 12 pt, the house standard (`docs/FONTS.md`, rule 6) and the exemplar's face; it was EB Garamond before. |
+| Metric fit | n/a (not a substitute). The render is 6 pages (5 in EB Garamond). |
 
 ## Markdown contract (for samples)
 
@@ -53,18 +53,18 @@ A sample is one `.md` file.
 ## Layout and convention choices (tier 2)
 
 - Letter paper, one-inch margins, page number centered at the foot of each page.
-- EB Garamond 12 pt, body double-spaced (`body-leading` = 1.35em), block quotations and the table single-spaced, numbered paragraphs with a half-inch first-line indent.
+- Times New Roman 12 pt, body double-spaced (`pitch-body`, 24 pt), block quotations and the table single-spaced, numbered paragraphs with a half-inch first-line indent.
 - Caption: court name centered in bold capitals; the parties in a left column with a rule on the right and the bottom; the case number, chapter and adversary number in the right column; the title centered in bold below.
 - Headings: section headings centered and bold in capitals, as in the exemplar.
 - Signature block: date on the left; "Respectfully submitted," the firm, "By: /s/" the signer and the counsel lines on the right.
 
 ## What the overlay shows
 
-`usage/OVERLAY-sturm-complaint.pdf`: red is our render, blue is the filed exemplar pages (complaint pages 3 to 8, paired by shared words), black where both agree. Pairing (from `OVERLAY-sturm-complaint.txt`): our p.1 to exemplar p.3, p.2 to p.4, p.3 to p.6, p.4 to p.7, p.5 to p.8. Word overlap is per page as listed in the txt file. The overlay is a diagnostic, not a score: the differences are the typeface (EB Garamond vs Times New Roman; the exemplar's x-height is larger), the line pitch, the numbered-paragraph indent and the caption rule. Our render is 5 pages against the exemplar's 6 for the same content; the difference is the font and the pitch, not omitted text.
+`usage/OVERLAY-sturm-complaint.pdf`: red is our render, blue is the filed exemplar pages (complaint pages 3 to 8, paired by shared words), black where both agree. Pairing (from `OVERLAY-sturm-complaint.txt`): our p.1 to exemplar p.3, p.2 to p.4, p.3 to p.6, p.4 to p.7, p.5 to p.8. Word overlap is per page as listed in the txt file. The overlay is a diagnostic, not a score (run on the earlier EB Garamond render): the differences are the typeface (EB Garamond vs Times New Roman; the exemplar's x-height is larger), the line pitch, the numbered-paragraph indent and the caption rule. Our render is 5 pages against the exemplar's 6 for the same content; the difference is the font and the pitch, not omitted text.
 
 ## Gate 2 review (every page of the current PDF)
 
-Current PDF: `usage/OUTPUT-adversary-complaint.typst.pdf`, 5 pages, rendered after the last template change (division and consent paragraphs added to ¶¶ 1 and 2). Compared with exemplar p.3 (caption and first allegations) to p.8 (prayer and signature).
+PDF reviewed: `usage/OUTPUT-adversary-complaint.typst.pdf`, 5 pages in EB Garamond (6 in Times New Roman now), rendered after the last template change of that review (division and consent paragraphs added to ¶¶ 1 and 2). Compared with exemplar p.3 (caption and first allegations) to p.8 (prayer and signature).
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -78,7 +78,7 @@ Current PDF: `usage/OUTPUT-adversary-complaint.typst.pdf`, 5 pages, rendered aft
 ## Known gaps and open choices
 
 1. **One exemplar.** EVAL-LOOP asks for 2 or 3 filers for tier 2. The CourtListener search (`court=iasb`, `type=r`, 2026-10-14) found several adversary complaints (e.g. Taylor Builders v. DeBoth, 26-30006; Christenson Revocable Living Trust v. DeBoth, 26-30007; Smith v. Schappert, 25-30006; Smith v. Neely, 26-30017) with no downloadable document 1 (`is_available: false`), and Lindsay Sturm adversary 25-30032 (scanned, no text layer). Tier 2 is therefore **not** judged against two filers. It is judged against one.
-2. **Typeface and size.** No rule mandates either. No rule names a face, so EB Garamond at 12 pt stays (see Typeface); the exemplar is Times New Roman. Recorded as a choice, not a defect. A Times-metric substitute (`Liberation Serif`) is vendored and could be used if David prefers the exemplar's metrics; not switched here, because the rules do not call for it.
+2. **Typeface and size.** No rule mandates either. No rule names a face, so the template sets Times New Roman at 12 pt, the house standard (`docs/FONTS.md`, rule 6) and the exemplar's face (see Typeface); it was EB Garamond before. Recorded as a choice, not a defect.
 3. **Consent sentence (FRBP 7008).** The exemplar complaint has no consent statement; the rule requires one. The template takes it from the frontmatter and the sample's sentence is a placeholder: the author chooses the wording. This is a finding about the exemplar (a tier-1 gap in the filed document), not something the template can decide.
 4. **Division (FRBP 7008).** The exemplar's jurisdiction paragraphs do not name the case number or the division; the division (Central) is on the cover sheet only. The template generates a case-reference paragraph from the case fields, so the rule's content is present in every render. The sample's `division` value comes from the cover sheet, not the complaint text.
 5. **Adversary number.** The filed copy's "Adversary Case No." is blank (the clerk assigns the number on filing). The template prints a blank line when `adv_number` is empty, and the sample leaves it blank.
@@ -90,12 +90,12 @@ Current PDF: `usage/OUTPUT-adversary-complaint.typst.pdf`, 5 pages, rendered aft
 
 ## Engines
 
-The typst template is the primary engine. This section covers the **docx** engine (`docx/`, built 2026-10-15): `docx/reference.docx` (regenerated by `docx/make-reference.sh`) and the filter `docx/iasb-adversary-complaint.lua`. Build with pandoc 3.12.1 (the bootstrap toolchain): `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx`, then LibreOffice converts it to `usage/OUTPUT-sturm-complaint.docx.pdf` (not run here: see BLOCKED).
+The typst template is the primary engine. This section covers the **docx** engine (`docx/`, built 2026-10-15): `docx/reference.xml`, from which `fb render` builds the reference document (`base="xengine"`, the shared cross-engine recipe; `docx/make-reference.sh` built a committed `reference.docx` until fb-595.68), and the filter `docx/iasb-adversary-complaint.lua`. `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx`, then LibreOffice converts it to `usage/OUTPUT-adversary-complaint.docx.pdf` (the committed `usage/.check-docx.txt` reads PASS). The notes below, through BLOCKED, were written on 2026-10-15, before LibreOffice was on the box.
 
 What matches the typst render (same settings, written as styles and section properties):
 
 - Letter paper, one-inch margins, page number centered in the footer (a `PAGE` field).
-- EB Garamond 12 pt, named in the styles. The font must be installed on the machine that opens the file, or Word substitutes silently.
+- Times New Roman 12 pt, named in the styles. The font must be installed on the machine that opens the file, or Word substitutes silently.
 - Body double-spaced at exact 24 pt, the pitch measured on the typst render (`OUTPUT-adversary-complaint.typst.pdf` from `typst/`); numbered paragraphs with a half-inch first line and a tab after the number.
 - Caption: court name centered in bold capitals; a borderless two-column table whose party column has a rule on its right and bottom; Case No., Chapter and Adv. Proc. No. (a blank line when `adv_number` is empty) on the right; the title centered and bold below.
 - The two paragraphs generated for FRBP 7008 (¶¶ 1 and 2), then the 20 allegations (¶¶ 3 to 22); section headings centered in capitals; the WHEREFORE paragraph unnumbered; prayer items A. to D. with a hanging indent; the signature block (date left; firm, `/s/` signature and counsel lines right).
@@ -107,7 +107,7 @@ What differs, or is not checked:
 - The table takes pandoc's automatic column widths and the `Table` style of `reference.docx` (single rules, half-inch indent). It is not measured against the exemplar.
 - Single-spaced blocks use Word's single line spacing, not typst's 0.5 em leading.
 
-docx BLOCKED (this run):
+docx BLOCKED (the 2026-10-15 run):
 
 - `docx.pdf` checks (Gates 0 to 3 on `usage/OUTPUT-sturm-complaint.docx.pdf`): **BLOCKED**. LibreOffice (`soffice`) is not installable here: it has no conda-forge package, and there is no root for a system install. No PDF was produced, so no page was rendered or reviewed.
 - `.docx` opens in LibreOffice and Word without a repair prompt: **NOT VERIFIED**. Checked only: a valid zip, well-formed XML parts, and a pandoc read-back (text, numbering, table, caption).

@@ -2,7 +2,7 @@
 
 - Court: `alnb`, United States Bankruptcy Court for the Northern District of Alabama (`courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/`)
 - Doc type: `motion-brief` (a motion in an adversary proceeding, with the argument set out in the motion; Fed. R. Bankr. P. 9013, 9014, 7012(b))
-- Engine: typst (primary). `latex/` and `docx/` are not built for this doc type.
+- Engine: typst (primary). `docx/` is built (see Engines); `latex/` is not built for this doc type.
 - Exemplars: `usage/` holds two public filings from different filers (see `usage/SOURCE.md`). The overlay uses the first one (`FILED-EXAMPLE-motion-brief.pdf`, the United States' motion to dismiss, 11 pp.), which is the tier-2 primary. The second is Wright (defendant NCS's Rule 12(b)(6) motion, 8 pp.).
 
 ## Files
@@ -12,7 +12,7 @@
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls `alnb-motion-brief`. |
 | `typst/alnb-motion-brief.typ` | Template. Court title, caption, title, Roman-numeral and lettered section headings, unnumbered body paragraphs, footnotes, signature block, certificate of service. Parameter block at the top. |
 | `usage/INPUT-motion-brief.md` | Transcription of the Dombrowski motion, all 11 pages of text (frontmatter + body). Frontmatter fields: `court`, `caption` (list of `left`/`right` line blocks), `title`, `signature` (`date`, `lead`, `signer`, `lines`, `of_counsel`), `certificate` (`text`, `served` as a list of party line-lists, `signer`, `signer_lines`). |
-| `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh <dir> usage/INPUT-motion-brief.md`, where `<dir>` is this folder. 9 pages. |
+| `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh <dir> usage/INPUT-motion-brief.md`, where `<dir>` is this folder. 11 pages. |
 | `usage/OVERLAY-dombrowski-motion-brief.pdf`, `.txt` | `sh tools/overlay.sh <dir> dombrowski-motion-brief`. Red = our render, blue = filed exemplar, black = both. `.txt` is the page map. |
 | `usage/` | Two filed motions (Dombrowski 11 pp.; Wright 8 pp.) and `SOURCE.md`. |
 
@@ -35,7 +35,7 @@ Gap: the 2023 local-rules PDF that `usage/SOURCE.md` cites as read in full was n
 
 ## Overlay
 
-`usage/OVERLAY-dombrowski-motion-brief.pdf` pairs our nine pages with the Dombrowski motion (page pairs in `usage/OVERLAY-dombrowski-motion-brief.txt`). Word overlap per page runs from 37% to 91%. The pages that disagree most are our pages 7 and 8, which carry the end of the argument, the signature block, and the certificate; the filed certificate is on page 11 and the filed signature on page 10.
+`usage/OVERLAY-dombrowski-motion-brief.pdf` (measured on the earlier nine-page EB Garamond render, before fb-595.68) pairs our nine pages with the Dombrowski motion (page pairs in `usage/OVERLAY-dombrowski-motion-brief.txt`). Word overlap per page runs from 37% to 91%. The pages that disagree most are our pages 7 and 8, which carry the end of the argument, the signature block, and the certificate; the filed certificate is on page 11 and the filed signature on page 10.
 
 Expected differences, by page:
 
@@ -63,18 +63,18 @@ Known differences that are not template faults:
 
 ## Engines
 
-- **typst** (primary): `typst/`, `usage/OUTPUT-motion-brief.typst.pdf` (9 pages).
-- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, title, signature block and certificate of service with the served parties). Output `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion, 10 pages, every page rendered and looked at).
+- **typst** (primary): `typst/`, `usage/OUTPUT-motion-brief.typst.pdf` (11 pages).
+- **docx**: `docx/` (`fb render --engine docx` builds the reference document from `reference.xml`: the cross-engine recipe, `base="xengine"`, in the typst template's face; `alnb.lua` adds the court title, caption table, title, signature block and certificate of service with the served parties). Output `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion, 11 pages; every page was rendered and looked at on the earlier 10-page EB Garamond render, before fb-595.68).
 - **latex**: not built for this doc type.
 
-What matches the typst form (12 pt EB Garamond, 1-inch margins, letter, 24 pt exact body leading, half-inch first-line indent, unnumbered paragraphs, centered Roman-numeral headings and flush-left lettered headings with a 0.5-inch indent, footnotes, single-spaced caption and signature block, the certificate of service heading, centered page-number footer).
+What matches the typst form (12 pt Times New Roman, 1-inch margins, letter, 27.6 pt exact body leading, half-inch first-line indent, unnumbered paragraphs, centered Roman-numeral headings and flush-left lettered headings with a 0.5-inch indent, footnotes, single-spaced caption and signature block, the certificate of service heading, centered page-number footer).
 
 What differs:
-- Pagination: 10 pages in the docx PDF against 9 in typst; the certificate's served-party list breaks across a page in the docx PDF. Measured on the LibreOffice PDF (`docs/DOCX.md`).
-- Footnote text is 10 pt single-spaced; the typst footnote size is not set in the template, so it is not compared exactly.
+- Pagination (on the earlier EB Garamond render, before fb-595.68; the committed renders are now 11 pages each): 10 pages in the docx PDF against 9 in typst; the certificate's served-party list breaks across a page in the docx PDF. Measured on the LibreOffice PDF (`docs/DOCX.md`).
+- Footnote text is 10 pt single-spaced, as typst's `note-size`.
 - Italics from the body markdown are carried by pandoc; the caption and signature are plain text.
 
 docx BLOCKED (not run; no fake PASS):
 - Gate 0-3 (`sh tools/check.sh <court> --engine docx`): BLOCKED. This court has no `checks.yaml` (Gate 1) and no `reviews/` file (Gate 2), so `check.sh` exits 2 before measuring anything.
 - Word: the `.docx` is not opened in Word; only the LibreOffice PDF was checked.
-- Tooling: `tools/render-docx.sh` runs LibreOffice on a fresh profile per call, and LibreOffice exits 81 on the first conversion of a fresh profile. Rendering here used a retrying wrapper (outside the repo). Not a template fault.
+- Tooling (recorded before fb-595.68; `tools/render-docx.sh` is now a wrapper around `fb render --engine docx`): `tools/render-docx.sh` ran LibreOffice on a fresh profile per call, and LibreOffice exits 81 on the first conversion of a fresh profile. Rendering here used a retrying wrapper (outside the repo). Not a template fault.

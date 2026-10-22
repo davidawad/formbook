@@ -85,7 +85,7 @@ Overlay: not produced. `sh tools/overlay.sh` exits 1 ("no exemplar pdf"): no fil
 - **Table of authorities** is not generated (NMCCA-CONT-002). Not needed for a sample this size; a real answer over 10,000 words needs one.
 - **Word count** is not computed or checked against the 15,000-word limit (NMCCA-FORM-005; applicability to answers in NMCCA-ANS-003).
 - **Standard of Review** under the Argument is styled bold italic, not bare bold (see page 5).
-- **Font.** See "Typeface" above: EB Garamond at 14 pt. (The opening-brief template now declares Liberation Mono, the face the font audit records for its 2013 exemplar; see its README.)
+- **Font.** See "Typeface" above: EB Garamond at 14 pt. (The opening-brief template now sets Times New Roman: Rule 17(c) bars the Courier face of its 2013 exemplar; see its README.)
 
 ## Open choices (for David)
 

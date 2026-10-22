@@ -46,7 +46,7 @@ The filer is Courier 12 pt with smaller footnotes (pre-2019); ours is 14 pt Time
 
 ## Page review (Gate 2), 2026-10-16
 
-Every page of `OUTPUT-answering-brief.typst.pdf` (11) and `OVERLAY-answering-brief.pdf` (11) rasterized at 60 dpi and viewed. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only. No typst warnings.
+Every page of `OUTPUT-answering-brief.typst.pdf` (11) and `OVERLAY-answering-brief.pdf` (11) rasterized at 60 dpi and viewed. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only (the 2026-10-16 render; the committed render now embeds Times New Roman). No typst warnings.
 
 | Page | Content | Result |
 |---|---|---|

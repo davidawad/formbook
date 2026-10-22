@@ -40,7 +40,7 @@ Source: U.S. Army Court of Criminal Appeals, *Rules of Appellate Procedure*, eff
 
 | Rule | Requirement (quoted or close paraphrase) | Template |
 |---|---|---|
-| ACCA R. 13.2 | Electronic filing: a single PDF, "without scanning, if practical", "typed, and double-spaced", "Times New Roman 14-point", 8.5 x 11 in, "margins shall be set to 1-inch on all four sides". | `font-family = "Liberation Serif"` (Times New Roman substitute, `docs/FONTS.md`), `type-size = 14pt` (body, headings and footnotes), `pitch-body = 32.8pt` (double-spaced; Word exact line spacing at the same pitch), `page-margin = 1in`, `us-letter`. |
+| ACCA R. 13.2 | Electronic filing: a single PDF, "without scanning, if practical", "typed, and double-spaced", "Times New Roman 14-point", 8.5 x 11 in, "margins shall be set to 1-inch on all four sides". | `font-family = ("Times New Roman", "Liberation Serif")` (the pinned Times New Roman, Liberation Serif fallback, `docs/FONTS.md`), `type-size = 14pt` (body, headings and footnotes), `pitch-body = 32.8pt` (double-spaced; Word exact line spacing at the same pitch), `page-margin = 1in`, `us-letter`. |
 | ACCA R. 17.1(a) | Pleadings raising or addressing an assignment of error follow Rule 13 and Appendix A. | Caption and order below. |
 | ACCA R. 17.1(b) | Paper: body double-spaced, 14-point Times New Roman, 1-inch margins. | Same values. |
 | ACCA R. 17.3(a)-(b) | Over 30 pages: table of contents and table of authorities; 50-page limit excluding tables and appendices. | Not generated or checked (Known gaps). |
@@ -69,7 +69,7 @@ The filed brief is Courier 12 pt (pre-2019 rules); ours is Times-metric 14 pt pe
 
 ## Page review (Gate 2), 2026-10-16
 
-Every page of `OUTPUT-opening-brief.typst.pdf` (10) and `OVERLAY-opening-brief.pdf` (10) rasterized at 60 dpi and viewed; the filed extract's 11 pages viewed too. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only. Typst printed no warnings.
+Every page of `OUTPUT-opening-brief.typst.pdf` (10) and `OVERLAY-opening-brief.pdf` (10) rasterized at 60 dpi and viewed; the filed extract's 11 pages viewed too. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only (the 2026-10-16 render; the committed render now embeds Times New Roman). Typst printed no warnings.
 
 | Page | Content | Result |
 |---|---|---|

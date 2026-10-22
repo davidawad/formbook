@@ -9,7 +9,7 @@ Folder: `courts/ninth-circuit/guam/federal/bankruptcy-district/motion-brief/`. E
 | sample md | `usage/INPUT-motion-brief.md`: the whole filed document (caption, notice of motion, procedural history, legal standard, argument I to III, conclusion, two footnotes, signature) |
 | render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored Times New Roman only, no warnings (fb-595.68.22) |
 | typeface | face required: none (GNLR 5.1 and the Bankr. L.R. text, read 2026-10-15, name no face or point size) → **Times New Roman** 12 pt, vendored, the house standard and the exemplar's face, in typst and docx alike (fb-595.68.22) |
-| overlay | ok: `usage/OVERLAY-campos-motion-to-dismiss.pdf` and `.txt` (each sample page paired with the same-numbered filed page, all 11); the filed exemplar was re-fetched from the RECAP URL in `usage/SOURCE.md` and matches its SHA-256; the PDF is kept outside the repo, since no court tracks exemplar PDFs in git |
+| overlay | ok: `usage/OVERLAY-campos-motion-to-dismiss.pdf` and `.txt` (each sample page paired with the same-numbered filed page, all 11; recorded on the earlier 11-page EB Garamond render, before fb-595.68.22); the filed exemplar was re-fetched from the RECAP URL in `usage/SOURCE.md` and matches its SHA-256; the PDF is kept outside the repo, since no court tracks exemplar PDFs in git |
 | pages reviewed | 11 of 11 of the EB Garamond render (re-rendered 2026-10-15 and every page rasterised at 60 dpi and viewed); the 12-page Times New Roman render is not re-reviewed page by page (fb-595.68.22) |
 
 ## Governing rules
@@ -58,7 +58,7 @@ Not generated, on purpose: the notice of hearing (GUB 9073-1), the proposed orde
 8. **Headings are double-spaced** (the 27.6 pt body pitch; fb-595.68.22). GNLR 5.1(a) exempts only counsel, the title of the case, footnotes, quotations and exhibits from double spacing; headings are not in that list, so double spacing is the reading used here.
 9. **Only one exemplar.** Tier 2 is not judged against a second filer; the RECAP search found no other Guam motion in the same docket series.
 10. **Certificate of service.** None is in the exemplar copy on RECAP, and none is generated. Whether one is required for this motion must be checked with the filing.
-11. **Overlay pairing.** The filed pages 1 to 11 pair with our pages 1 to 11 by word overlap, as the page map shows (word overlap 75% to 95%). The overlay is a diagnostic, not a score.
+11. **Overlay pairing.** The filed pages 1 to 11 pair with our pages 1 to 11 by word overlap, as the page map shows (word overlap 75% to 95%; measured on the earlier 11-page EB Garamond render, before fb-595.68.22). The overlay is a diagnostic, not a score.
 12. **File names.** The brief names the overlay files `<id>-overlay.pdf` and `.txt`; `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and `.txt` and reads `OUTPUT-<id>.pdf`. The repo tools were not edited, so the tool's names are used.
 
 ## Visual review (Gate 2 record, all 11 pages of the EB Garamond render, rendered at 60 dpi and looked at; before fb-595.68.22, not re-verified against the 12-page Times New Roman render)

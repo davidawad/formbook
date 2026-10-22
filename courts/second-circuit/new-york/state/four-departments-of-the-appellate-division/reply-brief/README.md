@@ -104,7 +104,7 @@ Searches run on 2026-10-14:
 
 ## Verification pass 2026-10-16 (fb-595.26.22)
 
-- Render: `sh tools/render.sh …/reply-brief usage/INPUT-reply-brief.md`, exit 0, no typst warnings, 13 pages (same as the committed PDF), EB Garamond Regular/Bold/Italic only.
+- Render: `sh tools/render.sh …/reply-brief usage/INPUT-reply-brief.md`, exit 0, no typst warnings, 13 pages (same as the committed PDF), EB Garamond Regular/Bold/Italic only (the face then set; Times New Roman since 2026-10-22).
 - Pages viewed: 13 of 13 at 60 dpi; page 2 (the TOC) viewed again after the fix below. The text of pages 3–13 is identical to the committed render (`pdftotext` diff). Overlay pages viewed as a 40 dpi contact sheet, with page 4 (body) at 100 dpi.
 - Overlay: `sh tools/overlay.sh …/reply-brief integratenyc-reply`, exit 0; the page map is unchanged (table above). On body pages our lines run close to the filed ones; the drift over a page is under a line.
 - Defect fixed: **TOC page numbers on wrapped entries** sat on the first line of the title while the dot leader ended on the last line (Points I and II, and both A. sub-points). The page-number column is now bottom-aligned (`toc-entry`), so the number ends the leader. Tier 2.

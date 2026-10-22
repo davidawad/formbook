@@ -7,7 +7,7 @@ Folder: `courts/ninth-circuit/california/federal/bankruptcy-southern-district/mo
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: the motion in full (caption, motion paragraph, POINTS AND AUTHORITIES with sections I and II, CONCLUSION, signature). 5 pages, the same length as the exemplar. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only, no warnings (the earlier EB Garamond render, before fb-595.68; the committed render is Times New Roman, 5 pages) |
 | overlay | ok: `usage/OVERLAY-stika-alegria-motion-to-dismiss.pdf` and `.txt` (pages paired one to one; 34 to 95% word overlap, the last page is the signature alone) |
 | pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed after the last template change; see the review table) |
 
@@ -27,7 +27,7 @@ Primary and secondary sources, with how each was checked. The casb local rules a
 | CASB-FORM-004 | Fed. R. Bankr. P. 9004(a), (b) | Legible; caption with the court, title, case number and adversary number, and a brief designation of the paper. | Fetched from https://www.law.cornell.edu/rules/frbp/rule_9004 on 2026-10-14 (subdivision (a) quoted; (b) summarized). | caption; footer |
 | CASB-FORM-003 | Convention (both casb exemplars) | Pleading paper: 28 numbered lines, double rules, footer under the lines. | Read from the text layer of the exemplar (line numbers 1 to 28 on each of the five pages). Not a rule text; a tier-2 convention. | `line-numbers()`, `pleading-rules()`, `lines-per-page = 28` |
 
-Not verified against primary text, so not asserted as a rule: the font (EB Garamond is used), the 12-point size (the CAND templates use it; no casb rule text was read), and the hearing-line placement beyond the secondary note.
+Not verified against primary text, so not asserted as a rule: the font (Times New Roman is used, the house standard of docs/FONTS.md rule 6), the 12-point size (the CAND templates use it; no casb rule text was read), and the hearing-line placement beyond the secondary note.
 
 ## Layout
 
@@ -62,7 +62,7 @@ The TOC and TOA branch (`toc: true`) is not exercised by the committed sample (t
 
 ## Review of the rendered pages (Gate 2 record)
 
-Every page rendered at 60 dpi and looked at.
+Every page rendered at 60 dpi and looked at (on the earlier EB Garamond render, before fb-595.68).
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -78,15 +78,15 @@ Every page rendered at 60 dpi and looked at.
 2. **Local rules not verified.** LBR 9013-7 and the casb administrative procedures are cited through a 2021 practice note and a search excerpt; the primary text was not reachable (403). A reviewer with the current rules should check the caption and the TOC/TOA trigger (more than 10 pages).
 3. **Page limit not enforced.** The template does not count pages (25-page limit, LBR 9013-7(d)(1)).
 4. **Notice of motion not in the sample.** The Stika motion has no separate notice of hearing (the exemplar is the motion itself). A notice of motion with a hearing date and time, if the court requires one for this motion, is a separate filing; the template's `hearing` field supports it.
-5. **Font.** EB Garamond at 12 pt, vendored in `fonts/`. A font choice, not a rule.
+5. **Font.** Times New Roman at 12 pt (the pinned install, Liberation Serif fallback; docs/FONTS.md rule 6). A font choice, not a rule.
 6. **Case names are roman.** The text layer has no italic markup; the template italicizes `*...*` if a sample carries it (not used).
 7. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. Render, overlay and page review were run instead.
 
 ## Engines
 
-**docx** (`docx/`): `sh tools/render.sh --engine docx courts/ninth-circuit/california/federal/bankruptcy-southern-district/motion-brief usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice PDF, 5 pages, EB Garamond embedded). Built by `docx/build-reference.sh` (reference.docx), `docx/render.sh` (sets the footer from the frontmatter) and `docx/casb-motion-brief.lua`.
+**docx** (`docx/`): `sh tools/render.sh --engine docx courts/ninth-circuit/california/federal/bankruptcy-southern-district/motion-brief usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice PDF, 5 pages, Times New Roman embedded). `fb render --engine docx` builds it: the reference document from `docx/reference.xml` (the shared cross-engine recipe, `base="xengine"`, in the typst face), then pandoc with `docx/casb-motion-brief.lua` (and `docx/lib/lines.lua`), which writes the page, the footer from the frontmatter and the line numbers (`FORMBOOK_FINAL`, `FORMBOOK_FOOTERS`).
 
-- Matches the typst output in the mandated form: EB Garamond 12 pt, 24 pt line pitch, 28 line numbers on the grid, pleading rules, the three-line footer, the counsel block, the caption, first-line indents, headings numbered I., A. as in the typst template, the signature block.
+- Matches the typst output in the mandated form: Times New Roman 12 pt, 24 pt line pitch, 28 line numbers on the grid, pleading rules, the three-line footer, the counsel block, the caption, first-line indents, headings numbered I., A. as in the typst template, the signature block.
 - Differs: (1) the numbers and rules are built as in the adversary folder (framed header, page borders). (2) A single-spaced block quotation has no grid rounding (typst rounds it to whole numbered lines); the text after a quotation can sit half a line off the numbers (seen on page 4). (3) The heading chain (POINTS AND AUTHORITIES, then the first heading, then its paragraph) moves to page 2 as a unit, leaving lines 22 to 28 of page 1 blank, as in typst. Checked with LibreOffice only.
 - `toc: true` is not built by this engine: the filter stops with an error. BLOCKED: TOC and TOA checks (no table of contents or authorities is produced; the sample has `toc: false`).
 - No typst `OUTPUT-motion-brief.typst.pdf` exists in `usage/` in this snapshot, so there is no typst page to compare against.

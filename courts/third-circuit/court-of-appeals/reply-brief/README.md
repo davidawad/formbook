@@ -18,7 +18,7 @@ sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief usage/INPUT
 sh tools/overlay.sh courts/third-circuit/court-of-appeals/reply-brief afp-reply-brief
 ```
 
-Typeface: no face is named by the rule (FRAP 32(a)(5)-(6); L.A.R. 32.1(c), 2011 text, checked 2026-10-15), so the template keeps EB Garamond, the "no face named" substitute in `docs/FONTS.md`. Typst is run with the vendored EB Garamond only (`--ignore-system-fonts`); any typst warning fails the render.
+Typeface: no face is named by the rule (FRAP 32(a)(5)-(6); L.A.R. 32.1(c), 2011 text, checked 2026-10-15), so the template sets the house standard of `docs/FONTS.md` (rule 6), Times New Roman (Liberation Serif fallback; EB Garamond earlier). Typst is run with no unpinned system font (`--ignore-system-fonts`); any typst warning fails the render.
 
 ## Governing rules
 
@@ -27,7 +27,7 @@ Each row: the requirement, the primary source, and where the template implements
 | ID | Requirement | Source (verified) | Template |
 |---|---|---|---|
 | CA3-LEN-001 | Reply brief: no more than half of the principal-brief type volume, i.e. **6,500 words** (or 650 monospaced lines). Panics above the cap. | FRAP 32(a)(7)(B)(ii) (https://www.law.cornell.edu/rules/frap/rule_32), verified. Third Circuit chart: "Reply & Amicus briefs – 15 pages / 6,500 words / 650 lines" (https://www.ca3.uscourts.gov/sites/ca3/files/chart%20of%20requirements%20for%20briefs.pdf), fetched 2026-10-14 via the saved PDF. | `word-limit`, checked in `ca3-reply-brief` |
-| CA3-FORM-004 | Proportionally spaced face with serifs, **14-point or larger**; plain roman, italics for case names. | FRAP 32(a)(5)(A), 32(a)(6), verified. Chart item 5a: "Proportional (14 pt. with serifs)". | `type-size`, `font-family`; the PDF embeds only EBGaramond |
+| CA3-FORM-004 | Proportionally spaced face with serifs, **14-point or larger**; plain roman, italics for case names. | FRAP 32(a)(5)(A), 32(a)(6), verified. Chart item 5a: "Proportional (14 pt. with serifs)". | `type-size`, `font-family`; the PDF embedded only EBGaramond on the earlier EB Garamond render (now Times New Roman) |
 | CA3-FORM-003 | Double spacing for text; single spacing for headings, block quotations, footnotes, TOC and TOA. | FRAP 32(a)(4) (not fetched; the exemplar is double-spaced, and the rule text is the same as FRAP 32(a)(4)). | `body-leading`, `single-leading` |
 | CA3-FORM-002 | Margins 1 inch. | FRAP 32(a)(1) (not fetched). | `page-margin` |
 | CA3-COVER-001 | Cover: court name, docket number, caption, nature of the proceeding and court below, title of the document, counsel with address and telephone. | Chart item 2 "Content of Front Cover" (fetched 2026-10-14); FRAP 32(a)(2) (not fetched). Exemplar p.1 follows this order. | `cover-body` |
@@ -80,7 +80,7 @@ Pages reviewed: 9 of 9.
 
 - **typst** (`typst/`): primary, unchanged.
 - **latex** (`latex/template.tex`, `latex/ca3.lua`; fb render, stock pdflatex until the aux file settles): Times 14 pt (newtx, the metric twin of the typst template's Times New Roman) in the typst line boxes, roman front matter and arabic body; the Argument's point headings centered with roman numerals; the certificates each on their own page. The word limit is 6,500 words (FRAP 32(a)(7)(B)(ii)), checked from the markdown source. 10 pages, every line and page broken where typst breaks them (see "Cross-engine" below).
-- **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`; `.docx.pdf` from LibreOffice): Times New Roman 14 pt; sections and footers; the contents and authorities carry their page numbers (fb render's two-pass page map); the earlier gaps (no page numbers, footers, first-line indents or centered point headings) are fixed. Opened in LibreOffice only, not in Word.
+- **docx** (`docx/reference.xml`, from which `fb render` builds the reference document, replacing `docx/make-reference.sh`; `docx/ca3.lua`; `.docx.pdf` from LibreOffice): Times New Roman 14 pt; sections and footers; the contents and authorities carry their page numbers (fb render's two-pass page map); the earlier gaps (no page numbers, footers, first-line indents or centered point headings) are fixed. Opened in LibreOffice only, not in Word.
 
 ## Verification pass 2026-10-16 (fb-595.26.3)
 
@@ -98,6 +98,6 @@ All three engines on the shared cross-engine layout model (`lib/typst/xengine.ty
 
 - typst: `show: xengine.with(pitch: 31.4pt, list-indent: 0.5in)`; line boxes of 31.4 pt (body, certificates' text) and 20 pt (headings, quotations, footnotes, tables, cover, signatures); section headings 16 pt (were 1.15 em); every space in pt; `listing-row` contents and authorities; point headings bold (no small capitals: Times New Roman has none); the cover's two counsel columns 14 pt apart (were 1 em); the signature at the middle of the text width as a length.
 - latex: as the opening brief; the two counsel columns as minipages in a line of natural height (`\xe@natural`).
-- docx: `make-reference.sh` calls `lib/docx/xengine-reference.sh` (Times New Roman, 28 half points, body 628, single 400 twips) and adds Body Text Noted; the filter as in the opening brief, the counsel columns as a borderless table, the certificate's signature line as two tab columns (typst `form-sig-line`).
+- docx: `docx/reference.xml` (`base="xengine"`, from which `fb render` builds the reference: Times New Roman, 28 half points, body 628, single 400 twips; it replaced `make-reference.sh`) adds Body Text Noted; the filter as in the opening brief, the counsel columns as a borderless table, the certificate's signature line as two tab columns (typst `form-sig-line`).
 - The findings of the opening brief apply here too and are handled by the same shared filters; the third (the lead before a right tab) was found on this brief's contents row "1. An unbounded information interest ... disclosure.", which LibreOffice wrapped one word early with three 14 pt no-break spaces.
 - Before (baseline): latex 10 = 10 pages, 42.4 % of lines with typst's break (first difference p1 line 4); docx 10 vs 11 pages, 17.6 %. After: typst 10 pages; latex and docx 10 pages, 166/166 lines, every page starting and ending on typst's words (XENG-001..003 PASS); tier 1: typst 8 passed, latex 11 passed, docx 12 passed, 0 failed. Every page of the typst, latex and docx PDFs viewed.

@@ -2,7 +2,7 @@
 
 - Court: `alnb`, United States Bankruptcy Court for the Northern District of Alabama (`courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/`)
 - Doc type: `adversary-complaint` (commencing an adversary proceeding, Fed. R. Bankr. P. 7001 and 7003)
-- Engine: typst (primary). `latex/` and `docx/` are not built for this doc type.
+- Engine: typst (primary). `docx/` is built (see Engines); `latex/` is not built for this doc type.
 - Exemplars: `usage/` holds two public filings from different filers (see `usage/SOURCE.md`). The overlay uses the first one (`FILED-EXAMPLE-adversary-complaint.pdf`), which is the tier-2 primary.
 
 ## Files
@@ -12,7 +12,7 @@
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls `alnb-adversary-complaint`. |
 | `typst/alnb-adversary-complaint.typ` | Template. Caption, title, numbered allegations, headings, WHEREFORE prayers, signature block. Parameter block at the top. |
 | `usage/INPUT-adversary-complaint.md` | Transcription of the BCI complaint (frontmatter + body). Frontmatter fields: `court`, `caption` (list of `left`/`right` line blocks), `title`, `lead_in`, `consent`, `signature` (`date`, `signers`, `firm`, `address`, `contact`, `role`). |
-| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh <dir> usage/INPUT-adversary-complaint.md`, where `<dir>` is this folder. 6 pages. |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh <dir> usage/INPUT-adversary-complaint.md`, where `<dir>` is this folder. 7 pages. |
 | `usage/OVERLAY-bci-capital-montalbano.pdf`, `.txt` | `sh tools/overlay.sh <dir> bci-capital-montalbano`. Red = our render, blue = filed exemplar, black = both. `.txt` is the page map. |
 | `usage/` | Two filed complaints (BCI 7 pp.; Garner 3 pp.) and `SOURCE.md`. |
 
@@ -34,7 +34,7 @@ Gap: the 2023 local-rules PDF that `usage/SOURCE.md` cites as read in full was n
 
 ## Overlay
 
-`usage/OVERLAY-bci-capital-montalbano.pdf` pairs our six pages with the BCI complaint's seven pages (page pairs in `usage/OVERLAY-bci-capital-montalbano.txt`: ours p.1-3 with filed p.1-3, ours p.4 with filed p.5, ours p.5 with filed p.6, ours p.6 with filed p.7). Word overlap per page runs from 59% to 89%. Expected differences, by page:
+`usage/OVERLAY-bci-capital-montalbano.pdf` (measured on the earlier six-page EB Garamond render, before fb-595.68) pairs our six pages with the BCI complaint's seven pages (page pairs in `usage/OVERLAY-bci-capital-montalbano.txt`: ours p.1-3 with filed p.1-3, ours p.4 with filed p.5, ours p.5 with filed p.6, ours p.6 with filed p.7). Word overlap per page runs from 59% to 89%. Expected differences, by page:
 
 - Page 1: caption, title and court lines agree. The consent allegation (1) is red only: it is rule-required and absent from the filed BCI text.
 - Pages 2-5: numbered allegations, the `Facts` and `Count One`/`Count Two` headings, the WHEREFORE prayers and footnotes agree in text. Paragraph numbers are shifted by +1 from the filed text because of the consent allegation. The realleges references were adjusted to match (`paragraphs 1 through 26` and `1 through 30` in the sample; the filed text says `1 through 25` and `1 through 29`).
@@ -45,7 +45,7 @@ Known differences that are not template faults:
 - The ECF header ("Case 21-00015-TOM Doc 1 Filed ...") is the court's stamp and is not reproduced.
 - The sample reproduces the filed text as transcribed, including the filed typos ("These representations and were made", "Plaintiff or about May 12, 2020"). They are the filer's, not ours.
 
-## Template changes (this pass)
+## Template changes (this pass, on the earlier EB Garamond template, before fb-595.68)
 
 The template was present on master, but its render was broken, so it was changed. Three fixes, all in `typst/alnb-adversary-complaint.typ`:
 
@@ -65,18 +65,18 @@ The template was present on master, but its render was broken, so it was changed
 
 ## Engines
 
-- **typst** (primary): `typst/`, `usage/OUTPUT-adversary-complaint.typst.pdf` (6 pages).
-- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, numbered allegations, consent statement and signature block). Output `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice conversion, 7 pages, every page rendered and looked at).
+- **typst** (primary): `typst/`, `usage/OUTPUT-adversary-complaint.typst.pdf` (7 pages).
+- **docx**: `docx/` (`fb render --engine docx` builds the reference document from `reference.xml`: the cross-engine recipe, `base="xengine"`, in the typst template's face; `alnb.lua` adds the court title, caption table, numbered allegations, consent statement and signature block). Output `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice conversion, 7 pages; every page was rendered and looked at on the earlier EB Garamond render, before fb-595.68).
 - **latex**: not built for this doc type.
 
-What matches the typst form (12 pt EB Garamond, 1-inch margins, letter, 24 pt exact body leading, half-inch first-line indent, numbered allegations with the consent statement as paragraph 1, centered headings, centered page-number footer, single-spaced caption/court title/signature block, the ")" column of the caption, footnotes).
+What matches the typst form (12 pt Times New Roman, 1-inch margins, letter, 27.6 pt exact body leading, half-inch first-line indent, numbered allegations with the consent statement as paragraph 1, centered headings, centered page-number footer, single-spaced caption/court title/signature block, the ")" column of the caption, footnotes).
 
 What differs:
-- Pagination: 7 pages in the docx PDF against 6 in typst. Caption rows and the signature block take more space in Word-native tables and paragraphs; the page count is measured on the LibreOffice PDF (`docs/DOCX.md`).
-- Footnote text is 10 pt single-spaced; the typst footnote size is not set in the template, so it is not compared exactly.
+- Pagination (on the earlier EB Garamond render, before fb-595.68; the committed renders are now 7 pages each): 7 pages in the docx PDF against 6 in typst. Caption rows and the signature block take more space in Word-native tables and paragraphs; the page count is measured on the LibreOffice PDF (`docs/DOCX.md`).
+- Footnote text is 10 pt single-spaced, as typst's `note-size`.
 - The caption ")" column is a table column, so a wrapped party line repeats the ")" on each of its rows, as in typst; the table border is off by the reference's Table style.
 
 docx BLOCKED (not run; no fake PASS):
 - Gate 0-3 (`sh tools/check.sh <court> --engine docx`): BLOCKED. This court has no `checks.yaml` (Gate 1) and no `reviews/` file (Gate 2), so `check.sh` exits 2 before measuring anything. These belong to the court's eval-loop work, not to this engine.
 - Word: the `.docx` is not opened in Word; only the LibreOffice PDF was checked.
-- Tooling: `tools/render-docx.sh` runs LibreOffice on a fresh profile per call, and LibreOffice exits 81 on the first conversion of a fresh profile. Rendering here used a retrying wrapper (outside the repo). Not a template fault.
+- Tooling (recorded before fb-595.68; `tools/render-docx.sh` is now a wrapper around `fb render --engine docx`): `tools/render-docx.sh` ran LibreOffice on a fresh profile per call, and LibreOffice exits 81 on the first conversion of a fresh profile. Rendering here used a retrying wrapper (outside the repo). Not a template fault.

@@ -22,7 +22,7 @@ Dates: the local rules were read from the PDF on the court's site (cover: "Updat
 
 ## Typeface
 
-LBR 9004-1(A) (court's local rules, "Updated March 21, 2025"; the rule text as quoted on courtrules.net, checked 2026-10-15) requires no less than 12-point font, footnotes included. It names no typeface. Under `docs/FONTS.md` ("No face named"), the template keeps **EB Garamond** (vendored, OFL 1.1). Face required: none. Substitute: none needed (EB Garamond is the default). The exemplar (docket 409, 2025) names Times-Roman (base-14, not embedded, per `pdffonts`); that is the filer's choice, not a rule, and it is not a reason to switch.
+LBR 9004-1(A) (court's local rules, "Updated March 21, 2025"; the rule text as quoted on courtrules.net, checked 2026-10-15) requires no less than 12-point font, footnotes included. It names no typeface. Under `docs/FONTS.md` rule 6 (the house standard where no face is named), the template sets **Times New Roman** 12 pt (Liberation Serif fallback; it was EB Garamond 13 pt before), and the docx names the same face. Face required: none. The exemplar (docket 409, 2025) names Times-Roman (base-14, not embedded, per `pdffonts`); that is the filer's choice, not a rule, and it is not a reason to switch.
 
 ## Exemplar
 
@@ -53,7 +53,7 @@ sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-dis
 sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/motion-brief motion-brief
 ```
 
-- render: **ok**. `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular, -Bold and -Italic, embedded. No system or fallback font after the backtick fix (a stray backtick had pulled in DejaVu Sans Mono).
+- render: **ok**. `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular, -Bold and -Italic, embedded (that render, on the earlier EB Garamond template). No system or fallback font after the backtick fix (a stray backtick had pulled in DejaVu Sans Mono).
 - overlay: **ok**. The filed PDF is not in this checkout; it was fetched from the RECAP URL in `usage/SOURCE.md` to a scratch directory (15 pages, matching the record) and passed to `tools/overlay.sh` as its third argument. `usage/OVERLAY-motion-brief.pdf` and `.txt` written. Word overlap per page as the tool reports it: ours p.1 vs filed p.13 51.6%; p.2 65.4%; p.3 54.1%; p.4 51.8%; p.5 53.9%; p.6 vs filed p.10 39.7%; p.7 vs filed p.11 46.7%; p.8 vs filed p.12 43.2%; p.9 vs filed p.12 40.9%; p.10 vs filed p.15 25.0%. The overlay is a diagnostic, not a score. The pairing of pages is the tool's, and the page numbers do not line up one to one because of the omission.
 
 ## Visual review (Gate 2, all 10 pages rendered at 70 dpi and looked at)
@@ -93,14 +93,14 @@ sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-di
 9. **Certificate method:** the template states CM/ECF service in its certificate sentence. The author confirms that every party is registered before using an ECF-only certificate.
 10. **Response period:** `response_days` is the author's calculation (LBR 9013-1(B): 14 days where no period is prescribed, including FRBP 9006(f)'s 3 mailing days; add to a prescribed period unless hand-delivered). The template does not compute it.
 11. **Bracketed text in the notice:** "[and others who are required to be served]" is reproduced from the local rule's form with its brackets, as the rule prints it. The author deletes the brackets and the words, or keeps them, per the notice's filing.
-12. **Font:** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. 13 pt because EB Garamond sets small at 12; both meet the LBR 9004-1(A) floor. A choice; the court's rule names no font (see Typeface).
+12. **Font:** Times New Roman 12 pt, the house standard (was EB Garamond 13 pt, because EB Garamond sets small at 12); it meets the LBR 9004-1(A) floor. A choice; the court's rule names no font (see Typeface). The committed `docx/reference.docx` names Times New Roman but still sets 13 pt on a 26 pt line.
 13. **Statute and rule text** not re-fetched (see governing rules): § 522(f)(1)(A), (f)(2)(A), § 101(36), FRBP 4003(d), 9006(f), 9014. Check before this folder is treated as complete.
 
 ## Engines
 
 **docx** (`docx/reference.docx`, no Lua filter; built from pandoc's default reference by a scratch script).
 
-- Matches the typst form: US Letter, 1 in margins on all sides, EB Garamond 13 pt body, footnote text 13 pt, body and headings on an exact 26 pt (double) line, block quotes and footnotes single spaced, level-1 headings bold and centred in the case written (not capitals), level-2 bold with a 0.5 in hanging indent, level-3 bold italic with a 0.5 in hanging indent, page number centred in the footer, table cells with a full single-rule grid, single spaced. No line numbers or rules.
+- Matches the typst form (as built; the reference sizes are the earlier 13 pt ones, the typst template now sets 12 pt on a 24 pt line): US Letter, 1 in margins on all sides, Times New Roman 13 pt body (the typst face), footnote text 13 pt, body and headings on an exact 26 pt (double) line, block quotes and footnotes single spaced, level-1 headings bold and centred in the case written (not capitals), level-2 bold with a 0.5 in hanging indent, level-3 bold italic with a 0.5 in hanging indent, page number centred in the footer, table cells with a full single-rule grid, single spaced. No line numbers or rules.
 - Differs: pandoc writes only the markdown body. The caption, the court title block, the notice of opportunity for hearing box (LBR 9013-1(B)), the generated response-time paragraph, the signature block and the certificate of service are produced by the typst template from the frontmatter and are **not** in the docx. Tables are pandoc tables, so column widths and cell padding follow pandoc, not the typst grid. Lists use pandoc's numbering, not the typst `(a)` form. This docx is therefore not a filable motion yet.
 - BLOCKED: `docx.pdf` and Gates 0-1 on the LibreOffice PDF: `soffice` is not installed on this box and cannot be installed here.
 - BLOCKED: visual review of the docx pages: 0 docx pages viewed (only the typst pages were rendered and reviewed).

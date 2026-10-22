@@ -23,7 +23,7 @@ sh tools/render.sh courts/federal-circuit/court-of-appeals/reply-brief usage/INP
 sh tools/overlay.sh courts/federal-circuit/court-of-appeals/reply-brief gem-reply-brief
 ```
 
-Typst runs with `--ignore-system-fonts` and the vendored EB Garamond; any warning fails the render (`tools/render.sh` enforces it). The render was verified to exit 0 with no warnings.
+Typst runs with `--ignore-system-fonts` and Times New Roman (the pinned install, `docs/FONTS.md` rule 1; vendored Liberation Serif the fallback); any warning fails the render (`tools/render.sh` enforces it). The render was verified to exit 0 with no warnings.
 
 ## Governing rules
 
@@ -36,7 +36,7 @@ Verified 2026-10-14. Each row gives the rule, what the template takes from it, a
 | FCR 32(b)(2) | Items exempt from the count (cover, TOC, TOA, signature block, certificates). The count is the markdown body only, so those are excluded by construction. | Cited in the Form 19 instructions and the filing guide. |
 | FCR 32(b)(3) | A certificate of compliance is required; the form is Form 19. | Filing guide, same source as FCR 32(a)(1). |
 | FRAP 32(a)(4) | Margins at least one inch on all four sides. | Cornell LII, https://www.law.cornell.edu/rules/frap/rule_32 (page amended through the 2024 note; rule text dated Dec. 1, 2019 amendment). Fetched 2026-10-14. |
-| FRAP 32(a)(5)(A) | Proportionally spaced serif face, 14-point or larger, everywhere (footnotes and headings included). | Same. Checked with `pdffonts`: only EB Garamond is embedded. |
+| FRAP 32(a)(5)(A) | Proportionally spaced serif face, 14-point or larger, everywhere (footnotes and headings included). | Same. Checked with `pdffonts`: only Times New Roman is embedded. |
 | FRAP 32(a)(6) | Plain roman with italics or bold for emphasis; case names italicized. | Same. |
 | FRAP 32(f) | Headings, footnotes and quotations count toward the limit; the cover, TOC, TOA, signature block and certificates do not. | Same. |
 | FRAP 32(a)(7)(B)(ii) | Reply half of the principal limit (6,500). **Overridden** by FCR 32(b)(1) (7,000). | Same. |
@@ -57,7 +57,7 @@ Court sections not in the brief: reply briefs have no jurisdiction, issues, or s
 
 ## Page review
 
-Every page of `usage/OUTPUT-reply-brief.typst.pdf` (13 pages) was rendered at 60 dpi (`pdftoppm -r 60`) and viewed, PDF pages 1–13. Page numbers below are PDF page numbers.
+Every page of `usage/OUTPUT-reply-brief.typst.pdf` (13 pages) was rendered at 60 dpi (`pdftoppm -r 60`) and viewed, PDF pages 1–13 (on the earlier EB Garamond render; the cross-engine review is at the end of this file). Page numbers below are PDF page numbers.
 
 | PDF page | Finding | Action |
 |---|---|---|
@@ -71,7 +71,7 @@ Every page of `usage/OUTPUT-reply-brief.typst.pdf` (13 pages) was rendered at 60
 | 12 Form 19 | Word count computed as 1,455. Proportional box drawn; the other two options blank. | Fixed: blank lines escaped (typst treats underscores as markup and warned). |
 | 13 service | Date, `/s/` line and counsel block correct. | None. |
 
-Overlay (`usage/OVERLAY-gem-reply-brief.txt`): pages pair with the exemplar's pages by word overlap. Body PDF pages 4–8 pair with exemplar pages 5–9 (the Argument, 100%, 82%, 75%, 55%, 50%). The Conclusion (PDF page 9) pairs with exemplar page 36 (the Conclusion), the signature (page 11) with exemplar page 37 (the signature block), Form 19 (page 12) with exemplar page 38, and the service certificate (page 13) with exemplar page 39. PDF pages 2 and 3 (TOC, TOA) show low overlap, as expected: the exemplar's own TOC and TOA list different entries. PDF page 10 pairs weakly (27%) because the sample's last paragraph falls on a page of its own in our layout.
+Overlay (`usage/OVERLAY-gem-reply-brief.txt`), on the earlier EB Garamond render: pages pair with the exemplar's pages by word overlap. Body PDF pages 4–8 pair with exemplar pages 5–9 (the Argument, 100%, 82%, 75%, 55%, 50%). The Conclusion (PDF page 9) pairs with exemplar page 36 (the Conclusion), the signature (page 11) with exemplar page 37 (the signature block), Form 19 (page 12) with exemplar page 38, and the service certificate (page 13) with exemplar page 39. PDF pages 2 and 3 (TOC, TOA) show low overlap, as expected: the exemplar's own TOC and TOA list different entries. PDF page 10 pairs weakly (27%) because the sample's last paragraph falls on a page of its own in our layout.
 
 ## Known gaps
 
@@ -82,7 +82,7 @@ Overlay (`usage/OVERLAY-gem-reply-brief.txt`): pages pair with the exemplar's pa
 - **Cover colour not verified** (see Governing rules).
 - **FCR 32(b)(1) reply limit** rests on a third-party mirror (see Governing rules). Confirm against the official rules before relying on the 7,000 limit.
 - **FCR 32(j) passim ban** is proposed, not in force. The template avoids passim, which satisfies both versions.
-- **No `tools/check.sh` gates for this folder.** The folder has no `checks.yaml`; its validation is the render (no warnings), the font check (only EB Garamond embedded, from `pdffonts`), the page review above, and the overlay.
+- **No `tools/check.sh` gates for this folder.** The folder has no `checks.yaml`; its validation is the render (no warnings), the font check (only the template face embedded, from `pdffonts`), the page review above, and the overlay.
 
 ## Engines
 
@@ -92,11 +92,11 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 |---|---|---|---|
 | typst (reference) | `typst/` | `OUTPUT-reply-brief.typst.pdf` | 13 |
 | latex | `latex/template.tex`, `latex/cafc.lua` (stock pdflatex, newtx Times) | `OUTPUT-reply-brief.latex.pdf` | 13 |
-| docx | `docx/reference.docx` (`docx/build-reference.sh`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pagemap.awk`, `docx/footer.xml` | `OUTPUT-reply-brief.docx` and `.docx.pdf` | 13 |
+| docx | `docx/reference.xml` (`fb render --engine docx` builds the reference document from it, `base="xengine"`, in the typst face), `docx/cafc-docx.lua` (writes the sections and footers, `FORMBOOK_FOOTERS`, `FORMBOOK_FINAL`) | `OUTPUT-reply-brief.docx` and `.docx.pdf` | 13 |
 
-The paragraphs below, down to "docx items not verified", describe the engines before the cross-engine port and are kept as history; "Cross-engine layout" at the end of this file is the current state.
+The paragraphs below, down to "docx items not verified", describe the engines before the Times New Roman switch and the cross-engine port and are kept as history; "Cross-engine layout" at the end of this file is the current state.
 
-**Matches the typst layout:** 14 pt EB Garamond, double spacing at the typst pitch (31.43 pt); 1 in margins; the cover with the counsel in two columns; the contents and authorities with page numbers; the Roman section headings (I. ARGUMENT, II. CONCLUSION) and the A./i./1. sub-headings; the certificate of compliance (Form 19 wording, box checked) and the certificate of service; the footers.
+**Matches the typst layout:** 14 pt Times New Roman (TeX Gyre TermesX, newtx, in latex; EB Garamond before the rule-6 switch), double spacing at the typst pitch (31.43 pt); 1 in margins; the cover with the counsel in two columns; the contents and authorities with page numbers; the Roman section headings (I. ARGUMENT, II. CONCLUSION) and the A./i./1. sub-headings; the certificate of compliance (Form 19 wording, box checked) and the certificate of service; the footers.
 
 **Differs from the typst layout:**
 
@@ -128,5 +128,5 @@ The three engines now run on the shared layout model (`lib/typst/xengine.typ`, `
 - Spaces between blocks in pt; contents and authorities as `listing-row` rows (36 pt / 56 pt page column; every page listed, no "passim"); footnote marks at 58 %; the cover designations start at the middle of the text width (typst's `pad(left: 50%)` inside `align` measured half the line's own width); the Form 19 check boxes are ruled boxes around a literal X (or three spaces' width), as ca9's.
 - Break rules this folder adds in latex and docx, where typst (Unicode line breaking) allows a break the shared libraries do not give: after a slash before a letter ("CM/ECF": latex `\allowbreak`, docx a zero-width space); an ellipsis is the one 1 em glyph (latex `\caellipsis`, three periods over 1 em read as U+2026 through ActualText, not `\ldots`).
 - A paragraph that anchors a footnote has no widow or orphan control in latex and docx (typst's rules do not see the note), as in `../answering-brief` and `../opening-brief`.
-- latex and docx rewritten on the model: `latex/cafc.lua` builds the cover (counsel in two minipage columns), tables, signature (the 3.9 in column), Form 19 and the service certificate as the typst template does; the docx is built by `docx/render.sh` in two passes with `docx/pagemap.awk` (copied from `../answering-brief`, no "passim").
+- latex and docx rewritten on the model: `latex/cafc.lua` builds the cover (counsel in two minipage columns), tables, signature (the 3.9 in column), Form 19 and the service certificate as the typst template does; the docx was then built by `docx/render.sh` in two passes with `docx/pagemap.awk` (copied from `../answering-brief`, no "passim"; both since retired into `fb render`, fb-595.68).
 - Pages viewed (2026-10-22): all 13 pages of each engine at 40 dpi side by side, the cover and pp. 8 to 10 at 60 dpi, the Form 19 boxes at 110 dpi: no defect found. Positions differ only on the cover (the gaps between its parts) and by under 2.5 pt elsewhere (footnote marks).

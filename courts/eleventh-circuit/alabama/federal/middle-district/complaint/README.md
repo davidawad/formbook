@@ -7,9 +7,9 @@ Folder: `courts/eleventh-circuit/alabama/federal/middle-district/complaint/`.
 |---|---|
 | exemplar | yes: two filed complaints from different filers, `usage/FILED-EXAMPLE-complaint.pdf` and `usage/FILED-EXAMPLE-complaint-2.pdf` (see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md`: the whole Allstate complaint (caption, paragraphs 1 to 44, jury demand, signature block, service note), transcribed from the text layer |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 14 pages, `tools/render.sh` exit 0, no typst warnings, embedded fonts EB Garamond only |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 14 pages, `tools/render.sh` exit 0, no typst warnings, embedded fonts Times New Roman only |
 | overlay | ok: `usage/OVERLAY-allstate-complaint.pdf` and `usage/OVERLAY-allstate-complaint.txt` (against the Allstate exemplar) |
-| pages reviewed | 14 of 14: every page rendered at 60 dpi and viewed after the last template change |
+| pages reviewed | 14 of 14: every page rendered at 60 dpi and viewed after the last template change (the earlier EB Garamond render, before fb-595.68) |
 
 File names follow the repo's tools and `CLAUDE.md` file roles (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.md` names in the brief, because `tools/render.sh` and `tools/overlay.sh` read and write those names.
 
@@ -47,13 +47,13 @@ Mechanical checks: none in this folder. The brief did not ask for a `checks.yaml
 |---|---|---|---|---|
 | Caption: names left, ")" column, "Civil Action No." and "JURY DEMAND" right | yes | yes (")" column, case number right) | yes | matched |
 | Court title centered and bold, three lines | centered, bold | not checked page by page | centered, bold | matched to Allstate |
-| Body type size | 14 pt (32.2 pt pitch) | 12 pt (27.6 pt pitch) | 14 pt EB Garamond | ACCEPTED: the two filers differ; 14 pt is the Garamond size that reads like 12 pt Times |
+| Body type size | 14 pt (32.2 pt pitch) | 12 pt (27.6 pt pitch) | 14 pt Times New Roman | ACCEPTED: the two filers differ; 14 pt as Allstate (chosen when the template was EB Garamond, as the Garamond size that reads like 12 pt Times; the size stayed when the face became Times New Roman, fb-595.68) |
 | Body double-spaced, first-line indent | yes, yes | double-spaced (measured); indent not checked | yes, 0.5 in indent | matched to Allstate |
 | Section headings centered, bold | bold and underlined | not checked page by page | centered, bold, no underline | ACCEPTED: underlining seen in one filer only |
 | "/s/" signature with ASB number, firm, address, phone, e-mail | yes | not checked (last page not read) | yes | matched to Allstate |
 | "Defendants to be served" block after the signature | yes | not checked | yes | matched to Allstate |
 
-Overlay (`usage/OVERLAY-allstate-complaint.pdf`): pages are paired by text, and the page-to-page word overlap runs from 46% to 94%. The differences are paragraph flow, the type size and the leading, which put 14 pages in our render against 13 in the filed copy. That is tier 3. Page 1 (the caption and title) and the last page (the signature block) line up with the exemplar in order and position.
+Overlay (`usage/OVERLAY-allstate-complaint.pdf`; measured on the earlier EB Garamond render, before fb-595.68): pages are paired by text, and the page-to-page word overlap runs from 46% to 94%. The differences are paragraph flow, the type size and the leading, which put 14 pages in our render against 13 in the filed copy. That is tier 3. Page 1 (the caption and title) and the last page (the signature block) line up with the exemplar in order and position.
 
 Accepted differences in the Gate-2 sense (one line each, no further action):
 
@@ -63,11 +63,11 @@ Accepted differences in the Gate-2 sense (one line each, no further action):
 ## Engines
 
 - **typst** (primary): `typst/`, unchanged. Renders `usage/OUTPUT-complaint.typst.pdf` (14 pages).
-- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`), `docx/almd.lua`. Writes `usage/OUTPUT-complaint.docx` from `usage/INPUT-complaint.md`. Needs pandoc, unzip, zip, xmllint and perl on PATH, and EB Garamond installed where the file is opened.
-  - Matches the typst values, set in the reference and the filter: EB Garamond 14 pt; US Letter with 1-inch margins; body lines double-spaced at 32.2 pt exact, 0.5 in first-line indent, 23.1 pt between paragraphs; section heads centered and bold, single-spaced at 16.1 pt; the FRCP 10(a) caption as a borderless three-column table (3.4 in, 0.15 in, 2.95 in); the signature block with "/s/", the service note; a centered page number in the footer. Lettered items ("a.") are kept as typed text, as the typst template prints them.
-  - Differs or unknown: none checked on a rendered page yet (see BLOCKED). Word and LibreOffice may break lines and pages differently from typst; the docx has no line numbers, pleading rules or cover page, because the complaint template has none.
-  - Checked so far: the package unzips, every XML part is well formed, and the text reads back in order (`pandoc -f docx -t plain`).
-  - BLOCKED: `BLOCKED: docx.pdf checks (Gates 0 to 3 on usage/OUTPUT-allstate-complaint.docx.pdf): LibreOffice (soffice) cannot be installed on this box. conda-forge has no LibreOffice package, and apt needs root. So no .docx.pdf was made, no page was rendered to PNG, and tools/check.sh --engine docx cannot run. Pages reviewed: 0 of 14.` The .docx must still be opened in LibreOffice and Word, with the result recorded under `## sample allstate-complaint docx` in a review file (none exists in this folder yet).
+- **docx**: `docx/reference.xml` (from which `fb render --engine docx` builds the reference document: the cross-engine recipe, `base="xengine"`, in the typst template's face; `docx/make-reference.sh` is retired), `docx/almd.lua`. Writes `usage/OUTPUT-complaint.docx` and the LibreOffice `usage/OUTPUT-complaint.docx.pdf` from `usage/INPUT-complaint.md`. Needs Times New Roman installed where the file is opened.
+  - Matches the typst values, set in the reference and the filter (the face from `docx/reference.xml`; the other values were checked before fb-595.68): Times New Roman 14 pt; US Letter with 1-inch margins; body lines double-spaced at 32.2 pt exact, 0.5 in first-line indent, 23.1 pt between paragraphs; section heads centered and bold, single-spaced at 16.1 pt; the FRCP 10(a) caption as a borderless three-column table (3.4 in, 0.15 in, 2.95 in); the signature block with "/s/", the service note; a centered page number in the footer. Lettered items ("a.") are kept as typed text, as the typst template prints them.
+  - Differs or unknown (recorded before fb-595.68): none checked on a rendered page yet (see BLOCKED). Word and LibreOffice may break lines and pages differently from typst; the docx has no line numbers, pleading rules or cover page, because the complaint template has none.
+  - Checked so far (before fb-595.68): the package unzips, every XML part is well formed, and the text reads back in order (`pandoc -f docx -t plain`).
+  - BLOCKED (recorded before fb-595.68, when this box had no LibreOffice): `BLOCKED: docx.pdf checks (Gates 0 to 3 on usage/OUTPUT-allstate-complaint.docx.pdf): LibreOffice (soffice) cannot be installed on this box. conda-forge has no LibreOffice package, and apt needs root. So no .docx.pdf was made, no page was rendered to PNG, and tools/check.sh --engine docx cannot run. Pages reviewed: 0 of 14.` The .docx must still be opened in LibreOffice and Word, with the result recorded under `## sample allstate-complaint docx` in a review file (none exists in this folder yet).
 
 ## Known gaps
 

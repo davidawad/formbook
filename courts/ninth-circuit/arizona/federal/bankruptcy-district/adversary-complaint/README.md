@@ -10,10 +10,10 @@ This is one filer, so the review records visible differences as accepted open ch
 |---|---|
 | exemplar | yes: Woodnick Law, PLLC, Doc. 28 (Jan. 9, 2026); one filer only |
 | sample md | `usage/INPUT-adversary-complaint.md` (transcribed; 7 rendered pages); `usage/INPUT-adversary-complaint-2.md` (fictional; 5 pages) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings |
-| typeface | face required: none. LRBP 9004-1(g) (checked on azb.uscourts.gov, 2026-10-15) says "a proportional font size no smaller than 13 point" and names no face. EB Garamond kept; no vendored substitute needed. Not metric-compatible with Times New Roman, and not changed to it |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings (the earlier EB Garamond render, before fb-595.68; the committed Times New Roman render is 8 pages) |
+| typeface | face required: none. LRBP 9004-1(g) (checked on azb.uscourts.gov, 2026-10-15) says "a proportional font size no smaller than 13 point" and names no face. The template sets Times New Roman, the house standard (`docs/FONTS.md` rule 6; the pinned install, Liberation Serif as fallback); it used EB Garamond until fb-595.68 |
 | overlay | generated: `usage/OVERLAY-woodnick-complaint.pdf` and `.txt` |
-| pages reviewed | filed exemplar: 9 of 9; Typst output: 7 of 7 (rasterised at 100 dpi and viewed); see `reviews/2026-10-17.md` |
+| pages reviewed | filed exemplar: 9 of 9; Typst output: 7 of 7 (rasterised at 100 dpi and viewed, on the earlier EB Garamond render); see `reviews/2026-10-17.md` |
 
 Note on file names: the brief asked for `usage/<id>.pdf` and `usage/<id>-overlay.pdf`. The shared tools write `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf`/`.txt` (the repo's naming for file roles), and `overlay.sh` reads `OUTPUT-<id>.pdf`. The tools were not changed, so this folder follows the tools' names.
 
@@ -59,7 +59,7 @@ Not generated, and why: the adversary cover sheet (Official Form 104 with the ci
 ## Known gaps and open choices
 
 1. **One exemplar.** Tier 2 (conventions a clerk expects) cannot be distinguished from one filer's style. The Woodnick Law complaint provides a filed comparison, but a second filer is needed to establish shared conventions (see `usage/SOURCE.md`).
-2. **Font size.** The rule names no typeface, so EB Garamond is kept (see the typeface row above). Times New Roman is the usual Arizona choice; EB Garamond sets smaller at the same size. The 13-point minimum is met; the apparent size is smaller than Times 13.
+2. **Font size.** The rule names no typeface; the template sets Times New Roman 13 pt, the usual Arizona choice (see the typeface row above), so the 13-point minimum is met at the apparent size of a Times filing. Until fb-595.68 it used EB Garamond, which sets smaller at the same size.
 3. **Court title on line 8.** Convention. LRBP 9004-1(a) fixes line 1 for the filer block and says nothing about the title's line.
 4. **Prayer lead-in can be separated from its list.** When a list starts near the foot of a page, its introduction ("WHEREFORE … judgment:") can stay on the page while the list moves to the next, because the list and signature are kept together. The sample shows this on page 4 and 5. Not fixed.
 5. **Footer size.** 11 point. The 13-point minimum is written for text; the footer is identification (convention, flagged).
@@ -79,24 +79,24 @@ sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adve
 sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint woodnick-complaint
 ```
 
-- Render: exit 0, no typst warnings, 5 pages (letter). Fonts embedded: EBGaramond-Regular, -Italic, -Bold.
+- Render: exit 0, no typst warnings, 5 pages (letter). Fonts embedded: EBGaramond-Regular, -Italic, -Bold (the earlier EB Garamond render, before fb-595.68; the committed renders embed TimesNewRomanPSMT, -ItalicMT, -BoldMT).
 - Baseline pitch on body pages measured with `pdftotext -bbox` at 24.0 pt.
 - Page review (60 dpi, every page): p.1 filer block, court title, dual caption, first paragraphs: pass (after moving the lead-in out of the numbered paragraphs and separating the debtor and party rows). p.2 jurisdiction, parties, paragraphs 2–8, ends with blank lines before a heading group: pass. p.3 factual background and the first claim heading kept with its paragraph: pass. p.4 claims, prayer heading and "WHEREFORE" with the list on p.5: pass with gap 4 above. p.5 list (a)–(e) and the signature block: pass.
 - The generic sample render above is the earlier fictional sample; it has no overlay.
-- The filed Woodnick sample render is 7 pages (letter), with no Typst warnings and only vendored EB Garamond Regular, Italic, and Bold embedded. Its overlay was generated; the script's page pairing diagnostics are in `usage/OVERLAY-woodnick-complaint.txt`.
+- The filed Woodnick sample render is 7 pages (letter), with no Typst warnings and only vendored EB Garamond Regular, Italic, and Bold embedded (on the earlier EB Garamond render; the committed render is 8 pages). Its overlay was generated; the script's page pairing diagnostics are in `usage/OVERLAY-woodnick-complaint.txt`.
 - The Woodnick exemplar was rasterized at 100 dpi and all 9 pages were viewed. The final Typst output was rasterized at 100 dpi and all 7 pages were viewed. Page findings and the final PDF hash are in `reviews/2026-10-17.md`.
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `arb-complaint.lua` builds the caption, numbered allegations, lettered prayer and signature; `render.sh` runs pandoc and fills the footer). Rendered: `usage/OUTPUT-adversary-complaint-2.docx` and `usage/OUTPUT-adversary-complaint-2.docx.pdf` (LibreOffice 26.2 conversion, 4 pages). `pdffonts`: EB Garamond Regular, Bold and Italic only.
+DOCX (`docx/`: fb render builds the reference document from `reference.xml` on the shared cross-engine recipe in the typst face, Times New Roman 13 pt; `arb-complaint.lua` builds the caption, numbered allegations, lettered prayer and signature, and writes the footer and the section for fb render; until fb-595.68 `build-reference.sh` and `render.sh` did the reference and the footer). Rendered: `usage/OUTPUT-adversary-complaint-2.docx` and `usage/OUTPUT-adversary-complaint-2.docx.pdf` (LibreOffice 26.2 conversion, 4 pages, `pdffonts`: EB Garamond Regular, Bold and Italic only, on the earlier build; the committed `.docx.pdf` is 5 pages and embeds TimesNewRomanPSMT, -BoldMT, -ItalicMT).
 
-Matches the typst form (every page of the `.docx.pdf` rendered at 60 dpi and viewed: pages 1 to 4 of 4):
+Matches the typst form (recorded on the earlier build, before the fb-595.68 cross-engine port; `eval.yaml` now gates the docx on typst's line and page breaks. Every page of the `.docx.pdf` rendered at 60 dpi and viewed: pages 1 to 4 of 4):
 - Letter paper; margins top 1 in, left 1.5 in, right 0.75 in, bottom 0.67 in; line numbers 1 to 28 on the 24 pt grid (one page-anchored text box in the header, so the body keeps its 28 lines); double rule at the left text edge and single rule at the right (`pgBorders`).
-- EB Garamond 13 pt, 24 pt line pitch. Filer block on lines 1 to 7, court title on line 8, dual caption with the rules under the debtor and party blocks, the title and relief beside the adversary number.
+- EB Garamond 13 pt (now Times New Roman 13 pt, the typst face), 24 pt line pitch. Filer block on lines 1 to 7, court title on line 8, dual caption with the rules under the debtor and party blocks, the title and relief beside the adversary number.
 - Headings at the typst sizes (level 1 18 pt, level 2 15.5 pt), footnotes 12 pt single (none in this sample).
 - Footer: page number, the title in capitals, and, when supplied, `ADV. NO.` and the number. Signature block set with the last prayer item.
 
-Differs from the typst form:
+Differs from the typst form (recorded on the same earlier build):
 - Pagination: 4 pages here against 5 in typst. The prayer list and signature fit on page 4; typst moves the list to page 5.
 - Numbered paragraphs: the number is followed by a tab (to 1 in), typst leaves 0.3 in after the number, so the text starts up to 6 pt later.
 - Caption: the box rules are paragraph borders on the party cells, and the caption's row heights are estimated from the text. A different line break in Word can move the body off the pleading numbers by a line.

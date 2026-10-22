@@ -7,10 +7,10 @@ Folder: `courts/fourth-circuit/south-carolina/federal/bankruptcy-district/advers
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md`: the whole 9-page filing transcribed (caption, jurisdiction, 50 numbered allegations, three causes of action, prayer, signature) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> usage/INPUT-adversary-complaint.md`) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, Times New Roman only (`pdffonts`), no warnings (`sh tools/render.sh <this-dir> usage/INPUT-adversary-complaint.md`) |
 | overlay | ok: `usage/OVERLAY-haigler-joye.pdf` and `usage/OVERLAY-haigler-joye.txt` (`sh tools/overlay.sh <this-dir> haigler-joye`) |
-| typeface | face required: **none** (the FRBP cited below and the SC LBR name no typeface; the exemplar's Times New Roman is a filer's choice, which the rules do not require). Vendored substitute: **EB Garamond** (kept, no court face). Fit: n/a. Re-checked 2026-10-14 in the fonts pass: `pdffonts` shows only EB Garamond embedded. The SC LBR PDF could not be read through WebFetch that day, so its no-typeface reading rests on the earlier 2026-10-14 fetch recorded in the Governing rules table below, not on a re-read. |
-| pages reviewed | 8 of 8 (every page rasterized at 60 dpi and viewed after the last template change; re-viewed 2026-10-14 in the fonts pass) |
+| typeface | face required: **none** (the FRBP cited below and the SC LBR name no typeface; the exemplar's Times New Roman is a filer's choice, which the rules do not require). Template face: **Times New Roman** 12 pt, the house standard where no face is named (`docs/FONTS.md` rule 6; Liberation Serif as fallback), on typst and docx; EB Garamond before 2026-10-17 (the docx until fb-595.68.19). Fit: n/a. The fonts pass of 2026-10-14 (`pdffonts`: only EB Garamond embedded) was on the earlier render. The SC LBR PDF could not be read through WebFetch that day, so its no-typeface reading rests on the earlier 2026-10-14 fetch recorded in the Governing rules table below, not on a re-read. |
+| pages reviewed | 8 of 8 on the earlier EB Garamond render, before fb-595.68 (every page rasterized at 60 dpi and viewed; re-viewed 2026-10-14 in the fonts pass) |
 
 File names: the brief asked for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. The sample is `<id>.md` as asked. The render and overlay use the names `tools/render.sh` and `tools/overlay.sh` write (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`); `overlay.sh` reads `OUTPUT-<id>.pdf` by name and cannot be pointed elsewhere.
 
@@ -35,8 +35,8 @@ Not generated (separate filings, outside this template): the Adversary Proceedin
 - Page: US Letter, 1-inch margins on all sides, page number centered at the foot. No pleading-paper line numbers: no SC bankruptcy rule requires them (the exemplar has none).
 - Court title centered, two lines (the second bold), as the exemplar.
 - Caption (Official Form 416 layout as the exemplar uses it): left column with "In re:", debtor, "Debtor." (right-aligned) and a closing rule; the adversary parties ("Plaintiff," / "v." / "Defendant.") in the same column, closed by a rule. Right column: case number, chapter, adversary number, and the title in bold.
-- Body: double spacing. Body lines sit 24.0 pt apart (`body-leading` 0.54em at 13 pt; checked with `pdftotext -bbox-layout`, where a number and its text are separate boxes on one baseline). Headings and the quotation are spaced on their own.
-- Allegations: number at the margin, a 0.5 inch gap, wrapped lines flush left (as the exemplar). Headings `##` are centered and bold. Block quotations (`>`) are single-spaced and indented 0.5 inch on both sides.
+- Body: double spacing. Body lines sit 24 pt apart (`pitch-body`); single lines 16.2 pt (`pitch-single`). Headings and the quotation are spaced on their own.
+- Allegations: the number in a 0.5 inch box at the margin, wrapped lines flush left (as the exemplar). Headings `##` are centered and bold. Block quotations (`>`) are single-spaced and indented 0.5 inch on both sides.
 - Continuation paragraphs after a quotation or list, and a lead-in paragraph before a list ("WHEREFORE ... for:"), are not numbered.
 - The prayer list is lettered (a.), (b.), ...; the last two chunks (the prayer's lead-in and list) stay on one page with the signature block.
 
@@ -50,7 +50,7 @@ Not generated (separate filings, outside this template): the Adversary Proceedin
 ## Known gaps and open choices
 
 1. **One exemplar only.** The second filer found (*Fort, Trustee v. Kauffman Precast, LLC*, Adv. No. 18-80024-hb, 6 pp., 2018, Roe Cassidy) is recorded in `usage/SOURCE.md`, not saved. Tier-2 comparison against two or three filers is therefore **not** done.
-2. **Typeface and size.** Neither the FRBP nor the SC LBR names a typeface or size. The exemplar is Times New Roman. The template uses EB Garamond (the only vendored font) at 13 pt, because EB Garamond sets smaller than Times at the same size (the same choice as the CAND motion template). Whether the court's judges want a larger apparent size is a choice for David.
+2. **Typeface and size.** Neither the FRBP nor the SC LBR names a typeface or size. The exemplar is Times New Roman. The template is Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6, David 2026-10-17); it was EB Garamond 13 pt before 2026-10-17 (the docx until fb-595.68.19).
 3. **ECF header not reproduced.** The "Case 25-80012-eg Doc 1 Filed ... Page N of 9" line is added by CM/ECF on filing and is not part of the document.
 4. **Email address missing from the signature (SC LBR 9011-4).** The exemplar's signature block has no email address, and the rule requires one. The template prints only the lines given in the frontmatter, so the transcription keeps the exemplar's omission. A filing needs the email added to `signature.lines`.
 5. **Signature date.** The exemplar prints "Dated: March 4, 2025" under the block. The template does the same.
@@ -60,7 +60,7 @@ Not generated (separate filings, outside this template): the Adversary Proceedin
 9. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and `tools/` was not to be edited. Render and overlay were run; the review above is the page-by-page check for this doc type.
 10. **Typos in the filed text are kept**, for example "FOR A FOUTH CAUSE OF ACTION". The transcription keeps the filing's words.
 
-## Review of the rendered pages (current PDF, 60 dpi)
+## Review of the rendered pages (60 dpi; the earlier EB Garamond render, before fb-595.68)
 
 - Page 1: court title, caption (both blocks, rules closing each), lead-in, heading "JURISDICTION AND VENUE", paragraphs 1-3. Pass.
 - Page 2: "FACTUAL ALLEGATIONS", paragraphs 4-16, heading "FOR A FIRST CAUSE OF ACTION" with its parenthetical. Pass.
@@ -77,19 +77,19 @@ Gate 2 rows: the review above. There is no `reviews/` folder for this doc type.
 
 ## Engines
 
-**docx** (`docx/`; `usage/OUTPUT-adversary-complaint.docx` and `usage/OUTPUT-adversary-complaint.docx.pdf`, 9 pages in LibreOffice). `sh docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt; body at a 24 pt exact pitch; single lines at 19.56 pt exact; 1-inch margins; centered PAGE footer at 12 pt). `docx/scb-adversary-complaint.lua` builds the caption (a table with the rules), the court title, the numbered allegations, the lettered prayer and the signature block, which is kept with the last two blocks. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-adversary-complaint.md`.
+**docx** (`docx/`; `usage/OUTPUT-adversary-complaint.docx` and `usage/OUTPUT-adversary-complaint.docx.pdf`, 8 pages in LibreOffice, as typst). `fb render --engine docx` builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst face: Times New Roman 12 pt; body at a 24 pt exact pitch; single lines at 16.2 pt; 1-inch margins; the centered page number where typst sets it); `docx/make-reference.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.19. XENG-001..003 pass, and `tools/check.sh --engine docx` passes on `eval.yaml` (`usage/.check-docx.txt`: PASS). `docx/scb-adversary-complaint.lua` builds the caption (a table with the rules), the court title, the numbered allegations, the lettered prayer and the signature block, which is kept with the last two blocks. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-adversary-complaint.md`.
 
-Matches typst: typeface and size, margins, the 24 pt body pitch, caption layout and text, allegation numbers with wrapped lines flush left, block quotations, headings, the lettered prayer, the signature block and "Dated" line, the centered page number.
+Matches typst (seen on the earlier EB Garamond docx): typeface and size, margins, the 24 pt body pitch, caption layout and text, allegation numbers with wrapped lines flush left, block quotations, headings, the lettered prayer, the signature block and "Dated" line, the centered page number.
 
-Differs:
+Differed on that earlier docx (recorded then; fb-595.68.19 set the paragraphs evenly double-spaced and the allegation numbers in a 0.5 in box on both engines, and both are 8 pages now):
 - Length: 9 pages in the docx, 8 in typst. Typst applies the leading only between the lines of one paragraph, so paragraph-to-paragraph spacing is about 17 pt there, not the 24 pt pitch the template states. The docx keeps the 24 pt pitch throughout. The typst behaviour is a defect in `typst/` (not edited here); the docx was not made to copy it.
 - Allegation text starts 0.70 in from the margin in the docx (a tab stop). Typst sets it the number plus a 0.5 in gap, so 0.63 in from the margin for one digit and 0.72 in for two (measured with `pdftotext -bbox-layout`).
 - LibreOffice places the extra leading of exact line spacing above each line, so caption and body glyphs sit about 2.5 pt lower than in typst.
 - Word: not opened (no Word on this machine). LibreOffice converted the file without error, and `unzip -tq` and `xmllint --noout` pass on every XML part.
 
-No BLOCKED items. The court folder has no check IDs for this doc type, and no docx-only limit fails a requirement of the form.
+No BLOCKED items. No docx-only limit fails a requirement of the form.
 
-Pages reviewed: 9 of 9 of `usage/OUTPUT-adversary-complaint.docx.pdf`, each viewed at 60 dpi beside the typst render (`/tmp/scb-adversary-complaint/typst.pdf`, not in the repo), and line positions checked with `pdftotext -bbox-layout`.
+Pages reviewed: 9 of 9 of the earlier EB Garamond `usage/OUTPUT-adversary-complaint.docx.pdf`, each viewed at 60 dpi beside the typst render (`/tmp/scb-adversary-complaint/typst.pdf`, not in the repo), and line positions checked with `pdftotext -bbox-layout`.
 
 ## Reproduce
 

@@ -7,10 +7,10 @@ Folder: `courts/eighth-circuit/nebraska/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes, 1 filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (the whole 16-page brief's text, from the introduction through the certificates) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 16 pages, typst 0.15.0, pinned Times New Roman only (`pdffonts`), no warnings |
 | overlay | ok: `usage/OVERLAY-sandoval-motion-brief.pdf` and `OVERLAY-sandoval-motion-brief.txt` (page map) |
-| pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed in the final state) |
-| typeface | face required: none (NECivR names no typeface). Substitute: none; EB Garamond kept (no-face default, `docs/FONTS.md`). Fit: n/a. Exemplar is Times New Roman, a filer's choice (see Known gaps, 1). |
+| pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed; on the earlier 13-page EB Garamond render, before fb-595.68) |
+| typeface | face required: none (NECivR names no typeface). Substitute: none; Times New Roman, the house standard (`docs/FONTS.md` rule 6), in typst and docx. Fit: n/a. The exemplar is Times New Roman too (see Known gaps, 1). |
 | tier 2 | not yet judged against 2 or 3 filers: one exemplar only (see Known gaps, 2) |
 
 ## Governing rules
@@ -32,8 +32,8 @@ Checked on 2026-10-14. NECivR 12.1 (a motion to dismiss suspends the time to ans
 
 ## Layout
 
-- US Letter, 1-inch margins. EB Garamond 12 pt (vendored; see Known gaps, 1).
-- Double spacing: 24 pt baseline pitch. Single spacing (14.4 pt): caption, block quotations (indented 0.5 inch on both sides), signature block, certificates, multi-line headings.
+- US Letter, 1-inch margins. Times New Roman 12 pt (the pinned install, `docs/FONTS.md` rule 1; see Known gaps, 1).
+- Double spacing: 27.6 pt baseline pitch (`pitch-double`, Word's double in this face). Single spacing (13.8 pt, `pitch-single`): caption, block quotations (indented 0.5 inch on both sides), signature block, certificates, multi-line headings.
 - Court title on two centered lines at the top of page 1 (no counsel block: the exemplar has none, and no District rule requires one for a brief).
 - Caption: a two-column box (party column with right and bottom rules, "v." between the parties, designations indented); case number and the bold title on the right.
 - Lead-in ("COME NOW ...") as an unnumbered paragraph, first line indented.
@@ -54,11 +54,11 @@ Checked on 2026-10-14. NECivR 12.1 (a motion to dismiss suspends the time to ans
 
 ## What the overlay shows
 
-`OVERLAY-sandoval-motion-brief.pdf`: red is our render, blue is the filed exemplar, black is where both agree. Pages are paired by shared words, not by index. Sample pages pair with exemplar pages at 46–79% word overlap. The gap is the exemplar's line and page breaks in Times New Roman against ours in EB Garamond, and the 2-to-3-line differences that follow. The overlay is a diagnostic, not a score; the map (`.txt`) lists each pairing.
+`OVERLAY-sandoval-motion-brief.pdf` (measured on the earlier EB Garamond render, before fb-595.68): red is our render, blue is the filed exemplar, black is where both agree. Pages are paired by shared words, not by index. Sample pages pair with exemplar pages at 46–79% word overlap. The gap is the exemplar's line and page breaks in Times New Roman against ours in EB Garamond, and the 2-to-3-line differences that follow. The overlay is a diagnostic, not a score; the map (`.txt`) lists each pairing.
 
 ## Known gaps and open choices
 
-1. **Font.** The District's rules name no font: NECivR 7.1 and 10.1 in the 2022 text (`NECivR.2022.pdf`, read 2026-10-14) contain no typeface, type-size or spacing rule beyond 10.1(b)(1)'s paper size and top margin. `docs/FONTS.md` says a court that names no face keeps EB Garamond, so the template does. The exemplar is Times New Roman, which is the filer's choice, not a rule; Liberation Serif (metric-compatible with Times New Roman) is vendored but is not used, because no rule calls for it. The text looks smaller than the exemplar at 12 pt because of EB Garamond's smaller x-height.
+1. **Font.** The District's rules name no font: NECivR 7.1 and 10.1 in the 2022 text (`NECivR.2022.pdf`, read 2026-10-14) contain no typeface, type-size or spacing rule beyond 10.1(b)(1)'s paper size and top margin. `docs/FONTS.md` rule 6 makes Times New Roman the house standard where the rules name no face, so the template (typst and docx) is set in it, as the exemplar is. The template's EB Garamond, used until fb-595.68, looked smaller than the exemplar at 12 pt (a smaller x-height).
 2. **One exemplar.** Tier 2 asks for 2 or 3 filers. Hingorani v. Board of Regents, No. 4:26-cv-03157 (27 pp., Century Schoolbook, table of contents) is the likely second filer; it is listed in `usage/SOURCE.md` but not saved, per the one-exemplar rule.
 3. **Second signer.** The exemplar has two signers (Justin P. Smith, #28283, and Matthew G. Dunning, #20057). The template takes one signer; Dunning is omitted from the sample's signature blocks.
 4. **Case names are roman.** The exemplar's text layer has italic runs for case names (its PDF embeds an italic face), but the transcription does not mark them. The template supports `*...*`.
@@ -69,7 +69,7 @@ Checked on 2026-10-14. NECivR 12.1 (a motion to dismiss suspends the time to ans
 9. **No "Dated" line.** The exemplar has none; the template has none.
 10. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder has neither. The brief forbids editing `tools/`, so the gates were not run; render, overlay and the page review above are this doc type's record.
 
-## Review of the rendered pages (final render)
+## Review of the rendered pages (the earlier EB Garamond render, before fb-595.68)
 
 - Page 1: court title, caption box with the plaintiff and the three defendants, the bold title, the "COME NOW" lead-in, INTRODUCTION, the first two paragraphs. No footer. Pass.
 - Page 2: the introduction's last paragraph; STANDARD OF REVIEW; two paragraphs. Footer shows page 2, title, case number. Pass.
@@ -93,15 +93,15 @@ File names follow `tools/render.sh` and `tools/overlay.sh` (and CLAUDE.md's role
 
 | Engine | Folder | Output in `usage/` | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-motion-brief.typst.pdf` (13 pages; not in the snapshot, rendered for comparison only) | the reference |
-| docx | `docx/` (`reference.docx` from `make-reference.sh`, and `ned-motion-brief.lua`) | `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (14 pages, LibreOffice 26.8.1 headless) | rendered; every page of the `.docx.pdf` viewed against the typst render |
+| typst (primary) | `typst/` | `OUTPUT-motion-brief.typst.pdf` (16 pages) | the reference |
+| docx | `docx/` (`reference.xml`, from which `fb render --engine docx` builds the reference document: the cross-engine recipe, `base="xengine"`, in the typst template's face; and `ned-motion-brief.lua`) | `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (16 pages, LibreOffice headless) | rendered; every page of the `.docx.pdf` viewed against the typst render (on the earlier EB Garamond render) |
 
-**Matches typst** (checked on the LibreOffice PDF): EB Garamond 12 pt (embedded, `pdffonts`); double spacing at 24 pt; 1-inch margins on US Letter; the two court-title lines; the caption as a table with a right and a bottom rule on the party column, "v." between the parties, the case number and the bold title; the lead-in paragraph; unnumbered body paragraphs with a half-inch first-line indent; the facts list numbered 1., 2., ... with a hanging indent; level-1 headings centered in bold capitals, level-2 bold and level-3 bold italic, both with a hanging indent; block quotations single-spaced and indented a half inch on both sides; the signature block at 3.25 in, kept with the conclusion; the certificate of compliance (the word count and software, from the frontmatter) and the certificate of service (recipients at a half-inch indent); the footer from page 2 on (page number, title in capitals, "Case No.") and no footer on page 1.
+**Matches typst** (checked on the LibreOffice PDF of the earlier EB Garamond render, before fb-595.68; the face is now Times New Roman 12 pt in both, embedded per `pdffonts`): double spacing at 24 pt; 1-inch margins on US Letter; the two court-title lines; the caption as a table with a right and a bottom rule on the party column, "v." between the parties, the case number and the bold title; the lead-in paragraph; unnumbered body paragraphs with a half-inch first-line indent; the facts list numbered 1., 2., ... with a hanging indent; level-1 headings centered in bold capitals, level-2 bold and level-3 bold italic, both with a hanging indent; block quotations single-spaced and indented a half inch on both sides; the signature block at 3.25 in, kept with the conclusion; the certificate of compliance (the word count and software, from the frontmatter) and the certificate of service (recipients at a half-inch indent); the footer from page 2 on (page number, title in capitals, "Case No.") and no footer on page 1.
 
 The text matches typst word for word (the same comparison as in the complaint's Engines section; one character differs at a page boundary). Some line breaks fall one word differently.
 
 **Differs from typst:**
-- Pagination. The docx runs 14 pages against typst's 13, for the reason given in the complaint's Engines section (LibreOffice's baseline placement in exact-height lines). Page breaks are not forced.
+- Pagination (on the earlier EB Garamond render, before fb-595.68; the committed renders are 16 pages each). The docx ran 14 pages against typst's 13, for the reason given in the complaint's Engines section (LibreOffice's baseline placement in exact-height lines). Page breaks are not forced.
 - The footer title and case number are document properties (`subject`, `description`), shown by the `SUBJECT` and `COMMENTS` fields.
 - The word count is the filer's (as in the typst template): the build stops if the stated count is over 13,000 words or the `compliance` block is missing, as the typst template does. The template does not count words.
 - Word was not available. The `.docx` was converted and checked in LibreOffice only.

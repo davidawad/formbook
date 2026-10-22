@@ -2,7 +2,7 @@
 
 Status for this doc type: exemplar=yes, render=ok, overlay=ok, pages_reviewed=11 (every page of `usage/OUTPUT-answering-brief.typst.pdf` and `.docx.pdf`, viewed after the cross-engine port, fb-595.54.7; the "Page review" table below is of the earlier render).
 
-**Tier 1 (the rules' mandated form) is NOT verified.** The governing rules text could not be read (see "Rule basis"), and the typeface the rules call for is not vendored (see "Typeface"). Do not treat this template as passing tier 1.
+**Tier 1 (the rules' mandated form) is NOT verified.** The governing rules text could not be read (see "Rule basis"), and the "Typeface" section below describes an earlier Liberation Serif render (the template now sets Times New Roman; see "Known gaps"). Do not treat this template as passing tier 1.
 
 ## What is here
 
@@ -36,7 +36,7 @@ Same as the opening brief (`../opening-brief/README.md`, "Rule basis"). Summary:
 | Requirement used by the template | Value | Status |
 |---|---|---|
 | Type-volume (word) limit | Not enforced; the certificate prints the word count from the frontmatter (13879, the government's figure) | Unverified. Rule number: the 2013 government certificate cites Rule 14(i); a 2016 search summary places the 14,000-word limit in Rule 15(g). |
-| Typeface and point size | 12 pt; Liberation Serif stands in for Times New Roman (see "Typeface") | Face: rule text unverified. The government certificate says "monospaced typeface with 12 characters per inch, Times New Roman font" (Rule 14(e)). The substitute is metric-compatible (`docs/FONTS.md`). |
+| Typeface and point size | 12 pt Times New Roman (the pinned install, `docs/FONTS.md` rule 1; Liberation Serif fallback; see "Engines") | Face: rule text unverified. The government certificate says "monospaced typeface with 12 characters per inch, Times New Roman font" (Rule 14(e)). |
 | Spacing, margins, paper | Double-spaced; 1 in; US Letter | Unverified. |
 | Certificates | Compliance and service, generated | Form taken from the exemplar. |
 
@@ -96,7 +96,7 @@ Fixes made during this review: the same paragraph-spacing and caption-gutter and
 
 ## Known gaps
 
-- **Typeface**: Times New Roman (vendored; the PDFs embed TimesNewRomanPSMT), as Rule 15(e) names it (`../../rules.md`, MC-FORM-001). The "Typeface" section above describes an earlier Liberation Serif render.
+- **Typeface**: Times New Roman (the pinned install, `docs/FONTS.md` rule 1; the PDFs embed TimesNewRomanPSMT), as Rule 15(e) names it (`../../rules.md`, MC-FORM-001). The "Typeface" section above describes an earlier Liberation Serif render.
 - **Rules unverified** (above).
 - **Word count** is a frontmatter value (13879), not computed from the body.
 - **Table of authorities** is not produced; the table of contents is generated.
@@ -106,7 +106,7 @@ Fixes made during this review: the same paragraph-spacing and caption-gutter and
 
 ## Engines
 
-**Shared cross-engine layout model (fb-595.54.7).** The typst template (`typst/mc-answering-brief.typ`) imports `lib/typst/xengine.typ`, and the docx filter (`docx/mc.lua`) uses `lib/docx/xengine.lua` on `docx/reference.xml` (`fb render` builds the reference document; `build-reference.sh` and `reference.docx` are retired). Both engines set Times New Roman 12 pt (Rule 15(e); the vendored face, so `TNR-EMBEDDED` and `DEF-FONT-002` pass on both), footnotes included, in exact line boxes: body 27.6 pt (Rule 15(e) double spacing: twice Times New Roman's 13.8 pt single line), single-spaced material (cover, caption, contents, signature, certificates, footnotes) 13.8 pt, section headings 17 pt bold on 19.6 pt, argument headings 14.5 pt bold on 16.7 pt; first-fit breaks, no kerning, ligatures or hyphenation. The contents rows are `listing-row` (page column 36 pt, dot leader) in typst and right-indented leader-tab paragraphs in Word; the Word page numbers come from `fb render`'s multi-pass engine (needles per heading, `FORMBOOK_PAGES`, footers `rIdFtrNone`/`rIdFtrPage`, `FORMBOOK_FINAL`). pandoc reads "(a) ..." / "(1) ..." paragraphs as fancy lists; the filter writes them back as paragraphs, as CommonMark (typst) reads them. Both certificates print the word count with a thousands separator. The docx render breaks every line and page where the typst render does (`fb diff --engines`: XENG-001..003 PASS, 100 % of lines), so `eval.yaml` sets `params.cross_engine: gate`.
+**Shared cross-engine layout model (fb-595.54.7).** The typst template (`typst/mc-answering-brief.typ`) imports `lib/typst/xengine.typ`, and the docx filter (`docx/mc.lua`) uses `lib/docx/xengine.lua` on `docx/reference.xml` (`fb render` builds the reference document; `build-reference.sh` and `reference.docx` are retired). Both engines set Times New Roman 12 pt (Rule 15(e); the pinned face, so `TNR-EMBEDDED` and `DEF-FONT-002` pass on both), footnotes included, in exact line boxes: body 27.6 pt (Rule 15(e) double spacing: twice Times New Roman's 13.8 pt single line), single-spaced material (cover, caption, contents, signature, certificates, footnotes) 13.8 pt, section headings 17 pt bold on 19.6 pt, argument headings 14.5 pt bold on 16.7 pt; first-fit breaks, no kerning, ligatures or hyphenation. The contents rows are `listing-row` (page column 36 pt, dot leader) in typst and right-indented leader-tab paragraphs in Word; the Word page numbers come from `fb render`'s multi-pass engine (needles per heading, `FORMBOOK_PAGES`, footers `rIdFtrNone`/`rIdFtrPage`, `FORMBOOK_FINAL`). pandoc reads "(a) ..." / "(1) ..." paragraphs as fancy lists; the filter writes them back as paragraphs, as CommonMark (typst) reads them. Both certificates print the word count with a thousands separator. The docx render breaks every line and page where the typst render does (`fb diff --engines`: XENG-001..003 PASS, 100 % of lines), so `eval.yaml` sets `params.cross_engine: gate`.
 
 Render: `sh tools/render.sh <folder> usage/INPUT-answering-brief.md` (typst) and `sh tools/render.sh --engine docx <folder> usage/INPUT-answering-brief.md` (`usage/OUTPUT-answering-brief.docx` and `.docx.pdf`, LibreOffice). Check: `sh tools/check.sh <folder>` and `sh tools/check.sh <folder> --engine docx` (both 0 failed). Pages reviewed after the port: all 11 pages of the typst and of the docx PDF, at 60 dpi, side by side (no visible difference beyond the footnote rule's weight and the contents' page numbers set flush with the margin in Word).
 

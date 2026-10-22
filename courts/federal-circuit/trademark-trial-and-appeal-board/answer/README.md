@@ -11,12 +11,12 @@ Doc type `answer` under the Trademark Trial and Appeal Board (`court` ttab): the
 | Render (typst) | `just render courts/federal-circuit/trademark-trial-and-appeal-board/answer` writes `usage/OUTPUT-answer-3.typst.pdf` (Times New Roman, or the vendored Liberation Serif with the same metrics) |
 | Render (docx) | `sh tools/render.sh --engine docx <this dir> usage/INPUT-answer-3.md` writes `usage/OUTPUT-answer-3.docx` and `.docx.pdf` |
 | Check gates (`tools/check.sh`) | typst and docx: 0 failed (`data/checks-default.yaml` with `eval.yaml`) |
-| Cross-engine (Gate 4) | gated (`eval.yaml` `params.cross_engine: gate`): the docx breaks every line and page as typst does (XENG-001..003 PASS), on the shared layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `lib/docx/xengine-reference.sh`; fb-595.54.6) |
+| Cross-engine (Gate 4) | gated (`eval.yaml` `params.cross_engine: gate`): the docx breaks every line and page as typst does (XENG-001..003 PASS), on the shared layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `tools/fb/src/docxxengine.rs`; fb-595.54.6) |
 | LaTeX engine | not built |
 
 Both engines name Times New Roman; typst falls back to the vendored Liberation Serif (the same metrics), LibreOffice uses Times New Roman where installed. Pitches: body 27.6 pt (Word double for Times New Roman at 12 pt), single 13.8 pt, exact line boxes in both engines.
 
-`docx/reference.docx` is built by `docx/make-reference.sh` (the shared recipe `lib/docx/xengine-reference.sh`); `docx/ttab-answer.lua` builds the caption, title, signature block and certificate from the frontmatter and numbers the paragraphs.
+`fb render --engine docx` builds the reference document from `docx/reference.xml` (the shared cross-engine recipe, `base="xengine"`); `docx/ttab-answer.lua` builds the caption, title, signature block and certificate from the frontmatter and numbers the paragraphs.
 
 ## Markdown contract
 
@@ -62,8 +62,8 @@ Body: CommonMark.
 
 ## Decisions
 
-- **Layout follows the sibling doc types.** `typst/ttab-answer.typ`, `docx/ttab-answer.lua`, `docx/make-reference.sh`, `usage/` with `FILED-EXAMPLE-answer[-n].pdf`, `INPUT-answer-<n>.md`, `OUTPUT-answer-<n>.*`, as in `notice-of-opposition/` and `trial-brief/`.
-- **Typeface.** Times New Roman (Liberation Serif in typst where it is not installed); the rule names no typeface (TTAB-FORM-006). The notice of opposition template uses EB Garamond; each doc type picks its own, as the exemplars do.
+- **Layout follows the sibling doc types.** `typst/ttab-answer.typ`, `docx/ttab-answer.lua`, `docx/reference.xml`, `usage/` with `FILED-EXAMPLE-answer[-n].pdf`, `INPUT-answer-<n>.md`, `OUTPUT-answer-<n>.*`, as in `notice-of-opposition/` and `trial-brief/`.
+- **Typeface.** Times New Roman (Liberation Serif in typst where it is not installed); the rule names no typeface (TTAB-FORM-006). The notice of opposition template uses TeX Gyre Termes (the vendored match for its exemplar's Adobe Times); each doc type picks its own, as the exemplars do.
 - **Caption.** Shaped on the *Sage* exemplar ("In the matter of Application Serial No. ...", mark, filing and publication dates, parties with roles, number at right), with a rule down the right edge and along the foot of the left block in place of the exemplar's column of parentheses; the proceeding number on the line of the "v." between the parties.
 - **No page headers, no table of contents.** An answer needs neither; the Board states no length limit for a pleading.
 - **Certificate of service on its own page** without a repeated caption: TBMP § 113.03's suggested form carries none; the *Sage* exemplar repeats the caption, which is optional.

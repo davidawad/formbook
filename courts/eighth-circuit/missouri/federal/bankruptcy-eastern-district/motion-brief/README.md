@@ -7,9 +7,9 @@ Doc type: **motion** (a motion with numbered paragraphs, WHEREFORE clause, signa
 | template | `typst/main.typ` (entry) and `typst/moeb-motion-brief.typ` (template). Built from the court's rules, structured like `../adversary-complaint/typst/`. |
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief-2.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief-2.md` (the whole motion, all 11 paragraphs, the five footnotes, the WHEREFORE clause, the signature block and the certificate of service, transcribed from the 5-page exemplar) |
-| render | ok: `usage/OUTPUT-motion-brief-2.typst.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`, exit 0) |
+| render | ok: `usage/OUTPUT-motion-brief-2.typst.pdf`, 6 pages, typst 0.15.0, Times New Roman (pinned; vendored Liberation Serif fallback), no system fonts, no warnings (`tools/render.sh`, exit 0) |
 | overlay | ok: `usage/OVERLAY-qmaxx-abstain.pdf` and `usage/OVERLAY-qmaxx-abstain.txt` (page map) |
-| pages reviewed | 6 of 6 (every page rendered at 60 dpi and viewed; pages 5 and 6 viewed again after the layout fix; see the review table) |
+| pages reviewed | 6 of 6, on the earlier EB Garamond render (every page rendered at 60 dpi and viewed; pages 5 and 6 viewed again after the layout fix; see the review table) |
 
 The sample is `INPUT-motion-brief-2.md`, so `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-motion-brief-2.typst.pdf` and `OVERLAY-qmaxx-abstain.{pdf,txt}`. These are the repo's file-role names (CLAUDE.md), not the `<id>.pdf` names in the brief; the tools fix them.
 
@@ -36,7 +36,7 @@ Not produced (separate filings, or the court's own forms): the proposed order (r
 
 ## Layout choices (not rule-fixed)
 
-- **Font**: EB Garamond 12 pt, the only vendored face (`fonts/`). L.R. 9004(C) names no typeface. The exemplar uses Times.
+- **Font**: Times New Roman 12 pt, the house standard (`docs/FONTS.md`, rule 6; EB Garamond until then). L.R. 9004(C) names no typeface. The exemplar uses Times.
 - **Spacing**: double (27.6 pt baseline pitch, 2 × the 13.8 pt single line), as in the exemplar. Caption, signature and certificate lines are single-spaced.
 - **Footer**: arabic page number, centered, bottom. The exemplar's ECF header (`Case 20-41063 Doc 17 Filed … Pg n of 5`) and the `#2445144v3` document number at the foot of each page are court or word-processor output; not reproduced.
 - **Caption**: the debtor block, the movant and respondent block (rule-required), and a rule on the right and bottom of the left column; the case block sits in the right column.
@@ -69,7 +69,7 @@ Toolchain: `micromamba create -p ~/tb -c conda-forge typst=0.15.0 poppler imagem
 
 The pairing is by word overlap (coarse). The overlay is a diagnostic, not a score. Pages 1–4 pair with their exemplar pages at 71–90% word overlap. The lower overlap on pages 5 and 6 comes from the layout at the end: the exemplar's page 5 carries ¶¶ 10–11, the WHEREFORE, the signature and the certificate; ours puts the WHEREFORE and signature on page 5 and the certificate on page 6. The movant and respondent lines in the caption are the rule-required addition (gap 3), so they differ from the exemplar's caption. The overlay file was checked by viewing page 1 and page 6 as images; the colour split was not measured.
 
-## Gate 2: visual review (every page, rendered at 60 dpi and viewed)
+## Gate 2: visual review (every page, rendered at 60 dpi and viewed; the earlier EB Garamond render)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -110,22 +110,22 @@ Three engines from one markdown contract. typst is the primary template and is u
 | Engine | Folder | Output for `qmaxx-abstain` | Status |
 |---|---|---|---|
 | typst (primary) | `typst/` | `usage/OUTPUT-motion-brief-2.typst.pdf` (not in the snapshot; `tools/render.sh`) | unchanged |
-| docx | `docx/` | `usage/OUTPUT-motion-brief-2.docx`, `usage/OUTPUT-motion-brief-2.docx.pdf` | rendered by LibreOffice; all 6 pages rendered at 60 dpi and viewed |
+| docx | `docx/` | `usage/OUTPUT-motion-brief-2.docx`, `usage/OUTPUT-motion-brief-2.docx.pdf` | rendered by LibreOffice; all 6 pages rendered at 60 dpi and viewed (on the earlier EB Garamond build); `usage/.check-docx.txt`: PASS |
 
-Build: `sh docx/make-reference.sh <absolute path>/docx/reference.docx` rebuilds the reference. `sh tools/render.sh --engine docx <court-dir> usage/INPUT-motion-brief-2.md` writes the `.docx` and the LibreOffice PDF. `docx/moeb-motion-brief.lua` builds the caption table, the numbered paragraphs, the signature block and the certificate of service. Footnotes are pandoc's own.
+Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief-2.md` writes the `.docx` and the LibreOffice PDF; `fb render` builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst face; `docx/make-reference.sh` built a committed `reference.docx` until fb-595.68). `docx/moeb-motion-brief.lua` builds the caption table, the numbered paragraphs, the signature block and the certificate of service. Footnotes are pandoc's own.
 
-LibreOffice here is 26.8.1, unpacked from the document-foundation Linux tarball (conda-forge has no LibreOffice). The vendored EB Garamond is installed for the user running LibreOffice (`docs/DOCX.md`).
+LibreOffice here is 26.8.1, unpacked from the document-foundation Linux tarball (conda-forge has no LibreOffice). On that build the vendored EB Garamond was installed for the user running LibreOffice (`docs/DOCX.md`); the committed `.docx.pdf` files embed Times New Roman.
 
-**Matches typst** (measured on page 1 of both PDFs with `pdftotext -bbox`, and read on every page):
+**Matches typst** (measured on page 1 of both PDFs with `pdftotext -bbox`, and read on every page; on the earlier EB Garamond build, the face since changed):
 
 - US Letter, 1 in margins, arabic page number centred at the foot, 12 pt including the footer.
-- EB Garamond 12 pt throughout. Body at 27.6 pt (double), caption, signature block and served entries at 13.8 pt (single).
+- Times New Roman 12 pt throughout (EB Garamond when measured). Body at 27.6 pt (double), caption, signature block and served entries at 13.8 pt (single).
 - Caption: the movant and respondent block left with a rule on the right and bottom; case block right; court name centred and bold; title centred bold caps.
 - Numbered paragraphs, `%` (unnumbered) and `%%` (centred) paragraphs, as in the adversary complaint.
 - Signature block: "Date" at the left, "Respectfully Submitted," and the firm from 3.2 in. The signature stays with the last paragraph; the certificate moves as one block, as in typst.
 - Footer page number; six pages in both, with the certificate on page 6 in both.
 
-**Differs from typst** (not tier-1):
+**Differs from typst** (not tier-1; measured on the earlier EB Garamond build, before fb-595.68):
 
 - Two-digit paragraph numbers: typst's text starts about 6 pt further right than the docx, which uses one tab stop for every number (see the adversary complaint README).
 - Footnotes: 10 pt in the docx, about 10.2 pt in typst (typst's footnote size is 0.85 em). Line pitch 11.75 pt against 11.73 pt.
@@ -134,7 +134,7 @@ LibreOffice here is 26.8.1, unpacked from the document-foundation Linux tarball 
 - Not opened in Microsoft Word. LibreOffice opens and converts the file; the renderer checks the parts are well-formed XML.
 - The sample has no italics, so the EB Garamond italic face is installed but not exercised by this sample.
 
-**docx BLOCKED items:**
+**docx BLOCKED items** (then; both samples now render on both engines, 6 and 16 pages, and the committed `usage/.check-docx.txt` reads PASS):
 
 - `usage/INPUT-motion-brief.md`: BLOCKED for typst and docx alike. The sample writes footnote markers `[^1]` to `[^n]` but no definitions (no `[^n]: …` lines), so `typst/main.typ` stops with "footnote [^1] has no definition". No `.docx` is produced for it. The sample is not changed here; its footnote text has to come from the filed memorandum.
 - Gate runner (`tools/check.sh --engine docx`): not run, because this court folder has no `rules.md`, `checks.yaml` or `reviews/` yet. BLOCKED: gates 0 to 3 on docx, until those files exist.

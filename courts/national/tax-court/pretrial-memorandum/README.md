@@ -116,7 +116,7 @@ Unchanged from 2026-10-14 (the pass above, sha256 `bb43d4cc...` of the old `OUTP
 
 ## Engines
 
-**docx** (`docx/reference.docx` from `docx/build-reference.sh`, and `docx/tax-pretrial-memorandum.lua`). Output: `usage/OUTPUT-pretrial-memorandum-2.docx` and `usage/OUTPUT-pretrial-memorandum-2.docx.pdf` (LibreOffice conversion, 3 pages).
+**docx** (`docx/reference.xml`, the styles first built by `docx/build-reference.sh` and extracted when it was retired in fb-595.68, from which fb render builds the reference document in the typst face, Liberation Serif; and `docx/tax-pretrial-memorandum.lua`). Output: `usage/OUTPUT-pretrial-memorandum-2.docx` and `usage/OUTPUT-pretrial-memorandum-2.docx.pdf` (LibreOffice conversion, 3 pages).
 
 - Matches the typst output: Liberation Serif 14 pt throughout; letter, 1 in side margins, 1 in top and bottom; double spacing as exact 24.1 pt lines and single as exact 14.7 pt; 0.5 in first-line indent; caption; the form fields single-spaced with the values at 3.6 in; the attorney block side by side; the amounts table ruled; the status boxes drawn as bordered boxes with an X when checked; flush-left bold section headings; the witness table ruled; the signature block with the rule.
 - Differs: (1) the "NAME OF CASE" value wraps to three lines in LibreOffice, two in typst (about 1 pt of width); (2) the checkboxes are text boxes, so they are taller than they are wide; (3) the "SUMMARY OF FACTS" heading moves to page 3 (typst keeps the heading and three lines on page 2), so later pages shift by a few lines; (4) the caption, form and signature block are tables built by the filter, so positions differ by a few points.

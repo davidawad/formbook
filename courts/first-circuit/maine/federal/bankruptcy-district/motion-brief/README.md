@@ -6,9 +6,9 @@ Doc type: **motion with incorporated memorandum** (a contested-matter motion und
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: a portion of the 38-page filing (caption, introduction, facts ¶¶ 1–46, Section F, Sections IV and V, WHEREFORE, signature, certificate). Pages 10 to 33 of the filing are not transcribed; footnotes are not transcribed. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages (11 also on the earlier EB Garamond render, before fb-595.68), typst 0.15.0, pinned Times New Roman only, no warnings |
 | overlay | ok: `usage/OVERLAY-mattson-motion-brief.pdf` and `.txt` (page map below) |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; pages 1–2 and 9–10 after their last fix) |
+| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; pages 1–2 and 9–10 after their last fix; the EB Garamond render, before fb-595.68) |
 
 File names: the tools read and write `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt`, so the sample uses those names (not `<id>.md` and `<id>-overlay.pdf` as the brief's layout listed). `<id>` is `mattson-motion-brief`.
 
@@ -31,7 +31,7 @@ Also referenced by the sample, not enforced by the template: D. Me. LBR 9013-4(a
 
 ## Layout
 
-- US Letter, one-inch margins; EB Garamond 12 pt (vendored, the only font in `fonts/`).
+- US Letter, one-inch margins; Times New Roman 12 pt (the pinned install; `docs/FONTS.md` rule 6, the house standard; EB Garamond, then the only vendored font, before fb-595.68).
 - Court name centered and bold on two lines; a bordered caption with the debtor (`In re:`, `Chapter N`, `Case No.`) in the first row. Title of the paper centered, bold, capitals.
 - Opening paragraphs (`lead_in`, blank-line-separated) unnumbered, indented.
 - Body double-spaced (24 pt pitch). Level-1 headings centered bold, as typed (roman numerals: I., II., ...), matching the exemplar's title case. Level-2 bold run-in (e.g. "F. Beliveau Does not Request..."); level-3 bold italic.
@@ -47,7 +47,7 @@ Also referenced by the sample, not enforced by the template: D. Me. LBR 9013-4(a
 
 ## What the overlay shows
 
-`usage/OVERLAY-mattson-motion-brief.pdf`: red is our render, blue is the filed exemplar, black is agreement. The page map (`.txt`):
+`usage/OVERLAY-mattson-motion-brief.pdf`: red is our render, blue is the filed exemplar, black is agreement. The page map (`.txt`), measured on the earlier EB Garamond render, before fb-595.68:
 
 ```
 ours p.1   filed p.1   word-overlap 93.6%
@@ -65,7 +65,7 @@ ours p.11  filed p.38  word-overlap 86.3%
 
 Pages 1 to 7 pair with the filed pages that carry the same facts. Pages 8 to 11 pair with the exemplar's closing pages (35 to 38), which we transcribed. The pairing is by shared words per page, so it shows which filed page the words came from, not a page-for-page match. Our paragraph numbers run 1 to 56 where the filing's run to 147, because the omitted pages 10 to 33 removed their paragraphs (the template numbers sequentially). The overlay is a diagnostic, not a score.
 
-## Gate 2: page review (rendered at 60 dpi, every page viewed)
+## Gate 2: page review (rendered at 60 dpi, every page viewed; the earlier EB Garamond render, before fb-595.68)
 
 | Page | Content | Result |
 |---|---|---|
@@ -86,7 +86,7 @@ Defects found and fixed during review: (1) paragraphs in the opening block drawn
 ## Known gaps and open choices
 
 1. **One exemplar, and it is a motion with an incorporated memorandum, not a separate memorandum.** The filing has its own statement of facts and argument (Sections I to V). A separate memorandum in support, with a motion of its own, is a different layout that this template does not cover; that exemplar was not found in the search. Tier 2 is **not** judged against two filers.
-2. **Typeface.** As in the complaint: no Maine local rule on typeface was found; EB Garamond 12 pt is used because it is the only vendored font. Question for David.
+2. **Typeface.** As in the complaint: no Maine local rule on typeface was found; the template is Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6). (Before fb-595.68 it was EB Garamond 12 pt, then the only vendored font.)
 3. **Partial transcription.** The sample omits the filing's pages 10 to 33 (Sections III.A to III.E) and every footnote (the exemplar has four). The sample's paragraph numbers therefore do not match the filing's after ¶ 46. The render is the review of this sample only.
 4. **Proposed order.** D. Me. LBR 9013-1(a) requires a proposed form of order with the motion; the exemplar's certificate lists a "proposed Order" among the papers served. The template does not produce an order. Separate document.
 5. **Certificate of service.** The template produces the page the exemplar has, but the service rule it certifies (Fed. R. Bankr. P. 9014 and 7004/7005 service) was not verified against the rule text in this pass; the certificate's wording is the exemplar's. Open.
@@ -97,22 +97,22 @@ Defects found and fixed during review: (1) paragraphs in the opening block drawn
 
 ## Engines
 
-Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-motion-brief.lua` (the cover, caption, numbered paragraphs, relief, signature and certificate of service). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`.
+Typst is the primary engine. This section covers the docx engine (`docx/`): `fb render --engine docx` builds the reference document from `docx/reference.xml` (`base="xengine"`: the page setup and styles in the typst template's face, and the "- n -" footer part), then runs pandoc with the Lua filter `docx/meb-motion-brief.lua` (the cover, caption, numbered paragraphs, relief, signature and certificate of service). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` (a wrapper of `fb render --engine docx`). (Until fb-595.68, pandoc 3.6.4 ran with a committed EB Garamond `docx/reference.docx` built by `sh docx/make-reference.sh`.) The "pages reviewed" row and the BLOCKED items below were recorded before fb-595.68.
 
 | Output | Result |
 |---|---|
 | `usage/OUTPUT-motion-brief.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
-| `usage/OUTPUT-mattson-motion-brief.docx.pdf` | **not produced**: LibreOffice does not start in the build environment (see BLOCKED below) |
+| `usage/OUTPUT-motion-brief.docx.pdf` | now committed (11 pages, as the typst render). Before fb-595.68 **not produced**: LibreOffice did not start in the build environment (see BLOCKED below) |
 | pages reviewed in the docx PDF | 0 of 11 (there is no PDF to render; the typst pages are the reference) |
 
-**What matches typst** (the same values, set in the reference styles): US Letter with 1 in margins; EB Garamond 12 pt; body lines exactly 24 pt (double spacing); first-line indent 0.5 in; paragraphs numbered 1 to 56 as typed text with a tab (as the typst template does); a list lettered (a), (b) with a hanging indent; the caption as a table with the right and bottom rules of the typst box; the "Relief Requested Without a Hearing" legend when the sample sets it; the title in capitals; level-1 headings centred and kept as typed; the WHEREFORE paragraph and the signature block kept together; the certificate of service on its own page with its service list; the footer "- n -" from a PAGE field.
+**What matches typst** (the same values, set in the reference styles): US Letter with 1 in margins; Times New Roman 12 pt; body lines exactly 24 pt (double spacing); first-line indent 0.5 in; paragraphs numbered 1 to 56 as typed text with a tab (as the typst template does); a list lettered (a), (b) with a hanging indent; the caption as a table with the right and bottom rules of the typst box; the "Relief Requested Without a Hearing" legend when the sample sets it; the title in capitals; level-1 headings centred and kept as typed; the WHEREFORE paragraph and the signature block kept together; the certificate of service on its own page with its service list; the footer "- n -" from a PAGE field.
 
 **What differs, or is not verified:**
 
 - Line and page breaks are Word's, not measured, so the page count may not be typst's 11.
 - Heading spacing is approximated: typst rounds each heading block to whole 24 pt lines, Word uses 12 pt before and after.
 - The caption, signature and certificate fields are set as plain text, so markdown emphasis in them is dropped (the body keeps it).
-- The docx names "EB Garamond" and does not embed it. The font must be installed on the machine that opens the file, or Word substitutes silently.
+- The docx names "Times New Roman" (EB Garamond before fb-595.68) and does not embed it. The font must be installed on the machine that opens the file, or Word substitutes silently.
 - Footnotes are not transcribed in the sample; footnote text inherits 12 pt single spacing from Normal, not checked.
 
 **docx BLOCKED items** (the docx checks run on `usage/OUTPUT-mattson-motion-brief.docx.pdf`):

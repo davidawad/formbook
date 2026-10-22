@@ -36,7 +36,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
@@ -44,12 +44,12 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 ## Typeface
 
-Checked against D. Minn. LR 7.1(h)(1) (complete set, PDF dated June 10, 2026; text read 2026-10-14). The rule sets a 13-point size and names no typeface, so no court-named substitute applies (`docs/FONTS.md`, rule 3). Both doc types keep EB Garamond.
+Checked against D. Minn. LR 7.1(h)(1) (complete set, PDF dated June 10, 2026; text read 2026-10-14). The rule sets a 13-point size and names no typeface, so no court-named substitute applies (`docs/FONTS.md`, rule 3). Both doc types are set in Times New Roman 13 pt, the house standard (`docs/FONTS.md`, rule 6; EB Garamond until then).
 
 | Doc type | Face required by rule | Font in template | Substitute status |
 |---|---|---|---|
-| `complaint/` | none (size only: LR 7.1(h)(1)) | EB Garamond | n/a: no court-named face |
-| `motion-brief/` | none (size only: LR 7.1(h)(1)) | EB Garamond | n/a: no court-named face |
+| `complaint/` | none (size only: LR 7.1(h)(1)) | Times New Roman | n/a: no court-named face |
+| `motion-brief/` | none (size only: LR 7.1(h)(1)) | Times New Roman | n/a: no court-named face |
 
 - [ ] `usage/` has at least 2 filed PDFs (different filers)
 - [ ] `usage/` has at least 2 .md samples

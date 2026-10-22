@@ -3,17 +3,17 @@
 Doc-type folder for the adversary complaint in the United States Bankruptcy Court for the Middle District of Alabama. Engine: typst (`typst/`). Parent court: [`../README.md`](../README.md).
 
 - Exemplar: `usage/FILED-EXAMPLE-adversary-complaint-3.pdf` (1 filer; see `usage/SOURCE.md`).
-- Sample: `usage/INPUT-adversary-complaint.md` (transcribed from the exemplar), rendered to `usage/OUTPUT-adversary-complaint.typst.pdf` (12 pages).
+- Sample: `usage/INPUT-adversary-complaint.md` (transcribed from the exemplar), rendered to `usage/OUTPUT-adversary-complaint.typst.pdf` (10 pages, Times New Roman 12 pt).
 - Overlay: `usage/OVERLAY-southeastern-stud.pdf` and `usage/OVERLAY-southeastern-stud.txt`.
 - Render: `sh tools/render.sh <this-dir> usage/INPUT-adversary-complaint.md`. Overlay: `sh tools/overlay.sh <this-dir> southeastern-stud`.
 
 ## Engines
 
 - **typst** (primary): `typst/`, as above.
-- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`) and `docx/almb-adversary-complaint.lua` (the court title, caption, title, consent block and signature block; the body stays pandoc's). `sh tools/render.sh --engine docx <this-dir> usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx`, then stops: `soffice` is not on the build box, so no `usage/OUTPUT-southeastern-stud.docx.pdf` exists.
-- **Matches the typst form** (the reference styles and filter, checked in the `.docx` XML and its text, not by eye): letter with 1-inch margins; EB Garamond 13 pt in every style; body double-spaced at exactly 24 pt with a 0.5 in first-line indent; the caption as a table with a boxed left column and the case number and blank adversary number at right; centered bold level-1 headings in caps; the consent block under the caption; numbered allegations 1 to 33 keep the numbers the markdown gives; the prayer kept with the signature block; the signature block single-spaced and unbreakable; a centered "-N-" page number at 11 pt in the footer.
-- **Differs or is unverified**: (a) no page of the docx has been rendered or viewed, so line breaks, page count, caption box spacing and footer position are not checked against the typst pages; Word and LibreOffice may paginate differently. (b) The blank adversary number is underlined non-breaking spaces, not a drawn line. (c) The numbered allegations are literal numbers in ordinary paragraphs, not Word list numbering. (d) The core document title is empty: the frontmatter is cleared so pandoc does not print a Title paragraph above the caption.
-- **docx BLOCKED** (see `docs/DOCX.md`):
+- **docx**: `docx/reference.xml` (from which `fb render --engine docx` builds the reference document: the cross-engine recipe, `base="xengine"`, in the typst template's face; `docx/make-reference.sh` is retired) and `docx/almb-adversary-complaint.lua` (the court title, caption, title, consent block and signature block; the body stays pandoc's). `sh tools/render.sh --engine docx <this-dir> usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and the LibreOffice PDF `usage/OUTPUT-adversary-complaint.docx.pdf` (10 pages).
+- **Matches the typst form** (the reference styles and filter, checked in the `.docx` XML and its text, not by eye, before fb-595.68; the face and size are now those of `docx/reference.xml`): letter with 1-inch margins; Times New Roman 12 pt in every style; body double-spaced at exactly 24 pt with a 0.5 in first-line indent; the caption as a table with a boxed left column and the case number and blank adversary number at right; centered bold level-1 headings in caps; the consent block under the caption; numbered allegations 1 to 33 keep the numbers the markdown gives; the prayer kept with the signature block; the signature block single-spaced and unbreakable; a centered "-N-" page number at 11 pt in the footer.
+- **Differs or is unverified** (recorded before fb-595.68): (a) no page of the docx had been rendered or viewed (the committed typst and LibreOffice renders are now 10 pages each), so line breaks, page count, caption box spacing and footer position are not checked against the typst pages; Word and LibreOffice may paginate differently. (b) The blank adversary number is underlined non-breaking spaces, not a drawn line. (c) The numbered allegations are literal numbers in ordinary paragraphs, not Word list numbering. (d) The core document title is empty: the frontmatter is cleared so pandoc does not print a Title paragraph above the caption.
+- **docx BLOCKED** (see `docs/DOCX.md`; recorded before fb-595.68, when `soffice` was not available):
   - `tools/check.sh --engine docx`, Gates 0 and 1 on the `.docx.pdf`: BLOCKED. `soffice` is not installed and conda-forge has no LibreOffice package. The `.docx` passes the render step's zip and XML checks; the PDF conversion does not run.
   - Gate 2 on the docx: BLOCKED, same cause. `pages_reviewed=0`.
   - Opening in LibreOffice and Word without a repair prompt: not performed (neither is installed).
@@ -56,7 +56,7 @@ Verified 2026-10-14 from the primary text. Kind: **M** mandated by a rule, **C**
 | p.11 | p.12 | 37% |
 | p.12 | p.13 | 65% |
 
-The page pairing is a diagnostic. The offsets come from pagination: our rendering uses EB Garamond at 13 pt, the filed copy is a 12 pt Times-style serif on a 13-page scan, so the same text breaks onto different pages. Page 2 pairs with filed page 2 at 47% because our page 2 opens with the consent block, which the filed copy does not have. Visible differences, all tier 2 or 3:
+The page pairing (measured on the earlier 12-page EB Garamond render, before fb-595.68) is a diagnostic. The offsets come from pagination: that rendering used EB Garamond at 13 pt, the filed copy is a 12 pt Times-style serif on a 13-page scan, so the same text breaks onto different pages. Page 2 pairs with filed page 2 at 47% because our page 2 opens with the consent block, which the filed copy does not have. Visible differences, all tier 2 or 3:
 
 - The filed caption has a boxed left column with the case number and adversary blank at the right; ours matches that structure. The filed copy prints the "v." between the sides; ours does too.
 - Filed paragraphs are numbered 1 to 33 with a space after the number; ours matches.
@@ -65,7 +65,7 @@ The page pairing is a diagnostic. The offsets come from pagination: our renderin
 
 ## Gate 2 review
 
-Every page of `usage/OUTPUT-adversary-complaint.typst.pdf` (12 pages) was rendered at 80 dpi and viewed in its final state, both singly and as contact sheets. Findings:
+Every page of `usage/OUTPUT-adversary-complaint.typst.pdf` (12 pages; the earlier EB Garamond render, before fb-595.68) was rendered at 80 dpi and viewed in its final state, both singly and as contact sheets. Findings:
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|

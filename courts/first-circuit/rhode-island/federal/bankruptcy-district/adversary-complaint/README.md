@@ -6,9 +6,9 @@ Doc type: **adversary complaint** (FRBP 7001 adversary proceeding; FRBP 7008 ple
 |---|---|
 | exemplar | yes, two filers: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (Chapter 7 trustee, 11 pages) and `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (U.S. Trustee, 9 pages). Provenance in `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-adversary-complaint.md` (full transcription, 66 paragraphs, both counts, prayer, signature); `usage/INPUT-adversary-complaint-2.md` (full transcription, 71 paragraphs, one count, prayer, signature; deposition excerpts absent from the exemplar's text layer are placeholders) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf` (9 pages), `usage/OUTPUT-adversary-complaint-2.typst.pdf` (7 pages). typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings. |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf` (10 pages), `usage/OUTPUT-adversary-complaint-2.typst.pdf` (8 pages). typst 0.15.0, Times New Roman 12 pt only (`pdffonts`; `docs/FONTS.md` rule 6, the house standard; EB Garamond before 2026-10-17, the docx until fb-595.68.17), no warnings. |
 | overlay | ok: `usage/OVERLAY-pisaturo-sunflower.pdf` and `.txt`; `usage/OVERLAY-ustrustee-ziegelmayer.pdf` and `.txt` |
-| pages reviewed | 16 of 16 (9 + 7), each rendered at 50-60 dpi and viewed after the last template change |
+| pages reviewed | 16 of 16 (9 + 7) on the earlier EB Garamond render, before fb-595.68, each rendered at 50-60 dpi and viewed |
 
 File names: the brief asked for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.*`. The repo's file-role convention and the tools fix the names instead: `INPUT-<id>.md` (input), `OUTPUT-<id>.pdf` (our render), `OVERLAY-<id>.pdf`/`.txt` (overlay). `tools/overlay.sh` reads `OUTPUT-<id>.pdf`, so the tool's names were kept.
 
@@ -19,7 +19,7 @@ Primary sources. Local rules: the District of Rhode Island Bankruptcy Court's Lo
 | Rule | Requirement | Where in the template |
 |---|---|---|
 | LBR 1005-1(a) [Amended 12/1/22] | Bankruptcy case name, number and chapter on every paper, and on the signature page. | Caption (`in_re`, `chapter`, `case_number`, `adversary_number`); signature block "In re ..." line. |
-| LBR 1005-1(b) | 8 1/2 x 11; text at least 11 point; footnotes at least 10 point; double spaced, except quotations and footnotes. | `type-size = 12pt`, `footnote-size = 10pt`, `body-leading = 1.35em` (24 pt pitch, measured on page 2), single-spaced quotations. |
+| LBR 1005-1(b) | 8 1/2 x 11; text at least 11 point; footnotes at least 10 point; double spaced, except quotations and footnotes. | `type-size = 12pt`, `pitch-double = 24pt`, single-spaced quotations (13.8 pt). The samples have no footnotes. |
 | LBR 1005-1(c) | Filer's name, original signature, address, telephone, e-mail, firm, state bar identification number, client name. | `signature` frontmatter: `client`, `signer`, `bar_id` (required: the template prints "RI Bar No."), `firm`, `lines`. |
 | LBR 1005-1(d)(1) | Response-time language on every motion. | Not applicable: a complaint is not a motion. |
 | LBR 7003-1(b) and 5005-1(b) | Cover sheet in the required form (Official Form B1040) with every non-electronically filed adversary complaint. | Not generated; a separate filing (see gaps). |
@@ -45,7 +45,7 @@ Searches and what they settled: CourtListener RECAP search (`court=rib`, `type=r
 
 ## Overlay: what it shows
 
-`usage/OVERLAY-<id>.pdf`: red = our render, blue = the filed exemplar, black = both. `OVERLAY-<id>.txt` is the page map (our page to the exemplar page sharing the most words). The overlay is a diagnostic, not a score. The exemplars use Times, with no line numbers; our render uses EB Garamond at 24 pt pitch, so text lines will not coincide. The page map pairs pages by word overlap; a page with a low overlap (for example Pisaturo `ours p.8` to `filed p.10`) means the text pages differ in where the page breaks fall, not that text is missing.
+`usage/OVERLAY-<id>.pdf`: red = our render, blue = the filed exemplar, black = both. `OVERLAY-<id>.txt` is the page map (our page to the exemplar page sharing the most words). The overlay is a diagnostic, not a score. The exemplars use Times, with no line numbers; the overlays and page maps were made on the earlier EB Garamond render (before fb-595.68), so text lines will not coincide. The page map pairs pages by word overlap; a page with a low overlap (for example Pisaturo `ours p.8` to `filed p.10`) means the text pages differ in where the page breaks fall, not that text is missing.
 
 ## Known gaps and open choices
 
@@ -55,7 +55,7 @@ Searches and what they settled: CourtListener RECAP search (`court=rib`, `type=r
 4. **Chapter on the caption.** The U.S. Trustee exemplar's caption omits the chapter, and its adversary number is blank in the caption (the docket supplies it). The template prints the chapter and the adversary number, because LBR 1005-1(a) requires them. This is a rule-driven departure from that exemplar.
 5. **Deposition excerpts.** The U.S. Trustee exemplar's testimony excerpts (¶¶ 40-42) are not in its text layer. The sample carries bracketed placeholders, marked as such.
 6. **Date.** The Pisaturo exemplar has no dated line. The sample's `date` is the filing date from the docket (May 21, 2019).
-7. **Font and page count.** EB Garamond at 12 point (vendored); the exemplars are Times. The Pisaturo render is 9 pages against the exemplar's 11. The sample transcribes every paragraph, so the difference is layout (the exemplar's own line pitch and face), not missing text. The 8 to 14 page target is met.
+7. **Font and page count.** Times New Roman at 12 point (`docs/FONTS.md` rule 6; EB Garamond before 2026-10-17, the docx until fb-595.68.17); the exemplars are Times. The Pisaturo render is 10 pages against the exemplar's 11 (9 on the earlier EB Garamond render). The sample transcribes every paragraph, so the difference is layout (the exemplar's own line pitch and face), not missing text. The 8 to 14 page target is met.
 8. **Numbering convention.** The WHEREFORE prayer lists are lettered (a), (b); the U.S. Trustee exemplar letters them A., B. (tier-2 difference, not a rule requirement).
 9. **Tier-2 review against two exemplars.** Both are complaints from different filers, and both are used for the caption, the numbered paragraphs and the signature block. The template's signature-page case line follows LBR 1005-1(a) and is not in either exemplar.
 10. **No table of contents or authorities.** Not required for a complaint under the rules above, and neither exemplar has one.
@@ -63,7 +63,7 @@ Searches and what they settled: CourtListener RECAP search (`court=rib`, `type=r
 
 ## Review of the rendered pages (Gate 2 record)
 
-Every page of both samples was rendered at 50-60 dpi and viewed after the last template change.
+Every page of both samples was rendered at 50-60 dpi and viewed, on the earlier EB Garamond render (9 + 7 pages), before fb-595.68; the current renders are 10 + 8 pages.
 
 | Sample | Page | Finding |
 |---|---|---|
@@ -86,17 +86,17 @@ Every page of both samples was rendered at 50-60 dpi and viewed after the last t
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, which names every font, so no theme font falls back to Aptos or Calibri) and `docx/rib-adversary-complaint.lua` (caption table, numbered paragraphs, lettered lists, signature block, built from the frontmatter). Render: `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-<id>.md`.
+**docx** (`docx/`): `reference.xml`, from which `fb render --engine docx` builds the reference document (the shared cross-engine recipe in the typst face, with the 11 pt page-number footer), and `docx/rib-adversary-complaint.lua` (caption table, numbered paragraphs, lettered lists, signature block, built from the frontmatter). Render: `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-<id>.md`.
 
-Matches the typst output (every page of both samples was viewed, side by side with `usage/OUTPUT-<id>.pdf`):
+Matches the typst output (every page of both samples was viewed side by side with the typst render on the earlier EB Garamond docx; the current docx passes XENG-001..003 on both samples, 263/263 and 200/200 lines, fb-595.68.17):
 
-- EB Garamond 12 pt, footnotes 10 pt, page number 11 pt centered; letter paper, 1 in margins. `pdffonts` shows only EB Garamond, embedded.
+- Times New Roman 12 pt, page number 11 pt centered; letter paper, 1 in margins. `pdffonts` shows only Times New Roman, embedded.
 - Double spacing is exact 24 pt lines and single spacing is exact 13.8 pt, the pitch measured on the typst output. Numbered paragraphs (1., 2., ...) have a 0.5 in first-line indent and text at 0.92 in; WHEREFORE paragraphs are unnumbered; lettered lists (a), (b) hang; block quotations are single spaced, indented 0.75 in left and 0.5 in right.
 - Court title, caption (rule under and to the right of the party block; chapter and case numbers on the right), title in bold capitals. Headings: level 1 centered bold capitals, level 2 centered bold, level 3 centered bold italic.
 - Signature block (case line, date, "Respectfully submitted", signer, firm, RI Bar No., address) is kept together.
-- Page counts: `pisaturo-sunflower` 9 pages (typst 9), `ustrustee-ziegelmayer` 7 pages (typst 7).
+- Page counts: `adversary-complaint` 10 pages (typst 10), `adversary-complaint-2` 8 pages (typst 8).
 
-Differs from the typst output (not fixed):
+Differs from the typst output (seen on the earlier EB Garamond docx, then built by `docx/build-reference.sh`, since retired into fb render; not re-checked here):
 
 - The first line of each page sits about 10 pt lower in the docx. An exact-height line places its text lower than typst does; the line pitch is the same.
 - A single-line heading is about 7 pt further above the next paragraph than in typst.

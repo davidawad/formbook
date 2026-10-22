@@ -6,9 +6,9 @@ Doc type: **motion-brief** (a written motion under FRBP 9013 with its memorandum
 |---|---|
 | exemplar | yes, partial: `usage/FILED-EXAMPLE-motion-brief.pdf` is the supporting **memorandum** (not the motion itself; see gaps). 1 filer; see `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md` (caption, title, Statement of the Case, Statement of the Facts with footnote, Issues, Argument IV.A and IV.B, Conclusion, signature block, certificate of service with placeholders) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, the pinned Times New Roman only (`docs/FONTS.md`, rule 1), no warnings |
 | overlay | ok: `usage/OVERLAY-gordon-memorandum.pdf` and `OVERLAY-gordon-memorandum.txt` |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; page 1 viewed again after the caption fix; all 10 re-rendered and viewed again 2026-10-14 in the fonts pass, no change) |
+| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; page 1 viewed again after the caption fix; all 10 re-rendered and viewed again 2026-10-14 in the fonts pass, no change; the earlier EB Garamond render, before fb-595.68) |
 
 This folder is self-contained. It does not touch the court-root `typst/` or `usage/`.
 
@@ -25,8 +25,8 @@ Primary sources, fetched 2026-10-14. Rule text was read from the LII copies (FRB
 | GAMB-CAP-001 | FRBP 9004(b) (LII copy) | Caption: court's name, case title, case number and adversary-proceeding number, and a brief designation of the document. | court lines, `caption()`, `title` |
 | GAMB-CAP-002 | Clerk's Instructions, "Form and Caption of Complaint" (p. 37), Form 416D; LBR 9004-2(a) (Local Rules p. 36) | Caption shows the chapter; the case number includes the judge's initials. | `chapter` and `case_number` ("12-70482", which in the exemplar carries no judge initials, see gaps) |
 | GAMB-CAP-003 | LBR 9004-2(b) (Local Rules p. 36) | The title designates the relief sought; "motion" alone is not enough. | `title` |
-| GAMB-FORM-001 | FRBP 9004(a) (LII copy) | "A petition, pleading, schedule, or other document must be clearly legible." | Whole template: EB Garamond 13 pt, 1-inch margins, us-letter, body double-spaced (24 pt) |
-| GAMB-FORM-002 | No face named for motions. Checked 2026-10-14: the only face rule in the Clerk's Instructions ("Courier or Times New Roman", item f of the section on proposed **orders**) does not reach motions or briefs, and the Local Rules (Apr. 2025) name no typeface. Required face: none. Vendored substitute: none (EB Garamond kept). Fit: n/a. | Stays EB Garamond (no face required). See gaps. | `font-family` |
+| GAMB-FORM-001 | FRBP 9004(a) (LII copy) | "A petition, pleading, schedule, or other document must be clearly legible." | Whole template: Times New Roman 12 pt, 1-inch margins, us-letter, body double-spaced (24 pt) |
+| GAMB-FORM-002 | No face named for motions. Checked 2026-10-14: the only face rule in the Clerk's Instructions ("Courier or Times New Roman", item f of the section on proposed **orders**) does not reach motions or briefs, and the Local Rules (Apr. 2025) name no typeface. Required face: none. Template face: Times New Roman, the house standard (`docs/FONTS.md`, rule 6). | Times New Roman 12 pt (no face required). See gaps. | `font-family` |
 | GAMB-SIG-001 | LBR 9011-1(b) (Local Rules p. 37) | Attorney's name, State Bar number, office address, telephone and e-mail (the CM/ECF registration address) in immediate proximity to the signature. | `signature-block()` and `attorney-block()` |
 | GAMB-SERV-001 | LBR 9013-3(a) (amended April 7, 2021, Local Rules p. 38) | Every motion, brief and other document that requires notice to parties in interest contains a certificate of service specifying the parties served (with addresses, except those served through CM/ECF under LBR 2002-1(e)), the method of service, the date of service, and an attorney's signature. | `certificate-of-service()`. The wording of the statement is the template's (not from the exemplar, which has no certificate). |
 | GAMB-PAGE-001 | Proposed amendment, Clerk's memo of Aug. 13, 2026 (`Memo LBR 9013-1 Brief Page Limit`, https://www.gamb.uscourts.gov/USCourts/sites/default/files/pdf/Memo%20LBR%209013-1%20Brief%20Page%20Limit%20Public%20Commentary.pdf) | **Proposed:** new LBR 9013-1(d) would limit motions, responses and briefs to 20 pages (replies 10), exhibits excluded, unless the court grants leave. Comments were due Sept. 18, 2026. | Not enforced. The sample is 10 pages. Check the court's site for whether the amendment took effect before filing. |
@@ -63,7 +63,7 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-di
 - `usage/OUTPUT-motion-brief.typst.pdf` is the render. The names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-` and `OVERLAY-`), not the brief's `<id>.pdf` and `<id>-overlay.pdf`, because those tools are shared and fix the names.
 - `usage/OVERLAY-gordon-memorandum.pdf` (red = our render, blue = exemplar, black = both) and `.txt`. The page map pairs pages by word overlap. Our pages 1-3 pair with filed pages 1-3, and our page 10 (certificate) pairs with filed page 16 at 17%, which is low because the certificate is not in the exemplar. The overlay is a diagnostic, not a score.
 
-## Visual review (Gate 2 record, all 10 pages, rendered at 60 dpi and viewed)
+## Visual review (Gate 2 record, all 10 pages, rendered at 60 dpi and viewed; on the earlier EB Garamond 13 pt render, before fb-595.68)
 
 | Page | Content | Finding |
 |---|---|---|
@@ -87,7 +87,7 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-di
 5. **Case number and judge initials (GAMB-CAP-002).** The exemplar's case number "12-70482" has no judge initials in the printed caption (it is a Chapter 7 case). LBR 9004-2(a) requires them. The sample follows the exemplar. The template prints `case_number` as given; put the initials in the frontmatter before filing.
 6. **Case names are roman in the sample.** The exemplar's text layer has no italic markup. The template italicizes `*...*`, so a future sample can italicize case names and signals (*Id.*, *See*).
 7. **Page limit.** No current page limit applies to motions in this court (see GAMB-PAGE-001). A proposed 20-page limit is out for comment. Not enforced.
-8. **Font and size.** No face, font size or spacing rule for motions in this court (GAMB-FORM-002, checked 2026-10-14; see `../adversary-complaint/README.md`, gap 2). EB Garamond at 13 pt, with footnotes at 12 pt, per the fonts pass for a court that names no face.
+8. **Font and size.** No face, font size or spacing rule for motions in this court (GAMB-FORM-002, checked 2026-10-14; see `../adversary-complaint/README.md`, gap 2). Times New Roman 12 pt, footnotes 12 pt, the house standard (`docs/FONTS.md`, rule 6, 2026-10-17; the template was EB Garamond 13 pt before).
 9. **Signature not kept with the last paragraph.** The conclusion ends on p. 9 and the signature block (unbreakable) starts p. 10. A signature alone on a page is discouraged in practice. The template keeps the signature block whole but does not keep it with the preceding paragraph (cmarker output is not a single block to attach a `sticky` to). Fixing this needs a change to how the body is rendered; not done.
 10. **Signature twice.** The memorandum signature and the certificate of service signature both appear (the convention in the template; the exemplar has only the first).
 11. **Notice of motion and proposed order** are not produced (GAMB-MOT-003, GAMB-MOT-004). Both are separate documents that must be filed with the motion.
@@ -95,16 +95,16 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-di
 
 ## Engines
 
-The typst template above is the primary engine. The docx engine is in `docx/`: `reference.docx` (built by `docx/make-reference.sh`), `gamb.lua` (the caption, the title, the date line, the signature blocks and the certificate of service) and `render.sh` (pandoc with `--from markdown+smart-fancy_lists`, so the typed "(A)", "(i)" labels of the block quotations stay text). Build and check:
+The typst template above is the primary engine. The docx engine is in `docx/`: `reference.xml`, from which `fb render --engine docx` builds the reference document (the shared cross-engine recipe, `base="xengine"`, in the typst face, Times New Roman 12 pt; its `pandoc-from="markdown+smart-fancy_lists"` keeps the typed "(A)", "(i)" labels of the block quotations as text), and `gamb.lua` (the caption, the title, the date line, the signature blocks and the certificate of service). `docx/make-reference.sh` and `docx/render.sh` are retired into fb render. Build and check:
 
 ```sh
 sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief usage/INPUT-motion-brief.md
 ```
 
-This writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8, EB Garamond from `fonts/eb-garamond`).
+This writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8, headless).
 
-- **Matches the typst render:** EB Garamond 13 pt, footnotes 12 pt single-spaced; letter; 1-inch margins; body double-spaced (24 pt exact) with a half-inch first-line indent; headings centered bold (level 1, 18 pt), bold (level 2, 16 pt), bold italic (level 3); block quotations indented 0.75 in on both sides and single-spaced; the Form 416D caption as a table with a rule on the right and bottom of the party column; the court lines and title; the signature blocks after the date line; the certificate of service after them; a centered page number on every page. Footnotes are Word footnotes.
-- **Differs:** the docx PDF is 10 pages, the same as typst. Pagination and line breaks are LibreOffice's, not typst's, so individual page breaks differ (see the page starts in the review above). Quotation paragraphs have a 6 pt space before each (typst: 12 pt above and below the whole quotation, none between its paragraphs). The docx PDF page 10 starts with the end of the conclusion, and the date line, signature and certificate follow on it; the typst page 10 starts with the date line. Word may paginate differently again (docs/DOCX.md).
+- **Matches the typst render:** Times New Roman 12 pt, footnotes 12 pt single-spaced; letter; 1-inch margins; body double-spaced (24 pt exact) with a half-inch first-line indent; headings at the text size, centered bold (level 1), bold (level 2), bold italic (level 3); block quotations indented 0.75 in on both sides and single-spaced; the Form 416D caption as a table with a rule on the right and bottom of the party column; the court lines and title; the signature blocks after the date line; the certificate of service after them; a centered page number on every page. Footnotes are Word footnotes.
+- **Differs** (the page and spacing notes measured on the earlier EB Garamond 13 pt render, before fb-595.68): the docx PDF is 10 pages, the same as typst. Pagination and line breaks are LibreOffice's, not typst's, so individual page breaks differ (see the page starts in the review above). Quotation paragraphs have a 6 pt space before each (typst: 12 pt above and below the whole quotation, none between its paragraphs). The docx PDF page 10 starts with the end of the conclusion, and the date line, signature and certificate follow on it; the typst page 10 starts with the date line. Word may paginate differently again (docs/DOCX.md).
 - **Not opened in Word.** The `.docx` was checked for well-formed XML parts and unique style IDs; it was opened only in LibreOffice.
 - **Gates:** `tools/check.sh --engine docx` was not run for this folder, for the same reason as the adversary complaint (no `checks.yaml`, `reviews/`, `court.json` or `yq` in this snapshot). Every page of the `.docx.pdf` was rendered at 60 dpi and viewed against the typst pages (pages 1-10).
 - **docx BLOCKED:** none recorded. Gates 0-3 have not been run, so no check ID is cleared for docx yet.

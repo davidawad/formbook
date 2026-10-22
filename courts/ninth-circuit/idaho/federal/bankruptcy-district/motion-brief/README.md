@@ -51,7 +51,7 @@ Placement: the dated line and signature follow the body and come before `# CERTI
 
 ## What the overlays show
 
-Red is our render, blue the filed exemplar, black where they agree. Pages are paired by word overlap (`.txt`).
+Red is our render, blue the filed exemplar, black where they agree. Pages are paired by word overlap (`.txt`). Both overlays were recorded on the earlier EB Garamond 13 pt render (2026-10-16), before the template moved to Times New Roman 12 pt; their page counts and overlaps are not re-measured.
 
 `usage/OVERLAY-ziegler-motion-brief.pdf`:
 
@@ -82,7 +82,7 @@ Both are 9 pages. Pages 1-3 run in step (counsel block, caption, title, paragrap
 
 Page 1 aligns on the counsel block, caption with the judge line, title and the boxed notice. The filer starts the body on a new page after the notice; ours runs the lead-in on under the box (the rule asks only that the legend come before the substantive allegations). Ours is 6 pages against the filed motion's 7, because the filer set the dated line and signature alone on page 7 and ours keeps the conclusion with the signature on page 6.
 
-## Gate 2 review (pages rendered at 60 dpi and looked at, 2026-10-16)
+## Gate 2 review (pages rendered at 60 dpi and looked at, 2026-10-16; the earlier EB Garamond render)
 
 Pages reviewed: ziegler OUTPUT 9/9 and OVERLAY 9/9; redline OUTPUT 6/6 and OVERLAY 6/6 (30 pages).
 

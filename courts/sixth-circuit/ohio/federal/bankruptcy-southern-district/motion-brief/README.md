@@ -61,7 +61,7 @@ ours p.6  filed p.6  word-overlap 50.0%
 ours p.7  filed p.7  word-overlap 38.7%
 ```
 
-The page map above is from the 2026-10-15 EB Garamond render; `just overlay <this folder>` writes a fresh one to `.overlay/`. Red = our render, blue = the filed exemplar, black = both. The exemplar is a Times New Roman document with no line numbers; the render is EB Garamond, so glyph outlines do not coincide, but the page-level pairing is right: the first seven pages of the exemplar are the motion and memorandum, and the render's seven pages are the same content. The overlay is a diagnostic, not a score. The word-overlap figures fall as the render's text moves across page breaks differently from the exemplar's (the typeface and line length differ), not because of missing text.
+The page map above is from the 2026-10-15 EB Garamond render; `just overlay <this folder>` writes a fresh one to `.overlay/`. Red = our render, blue = the filed exemplar, black = both. The exemplar is a Times New Roman document with no line numbers; that render was EB Garamond (the template is now Times New Roman), so its glyph outlines did not coincide, but the page-level pairing is right: the first seven pages of the exemplar are the motion and memorandum, and the render's seven pages are the same content. The overlay is a diagnostic, not a score. The word-overlap figures fall as the render's text moves across page breaks differently from the exemplar's (the typeface and line length differ), not because of missing text.
 
 ## Visual review (Gate 2 record, all 7 pages on each engine, rendered at 60 dpi and looked at, 2026-10-22)
 

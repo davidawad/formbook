@@ -36,7 +36,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
@@ -53,10 +53,10 @@ Substitutes come from `docs/FONTS.md`. "Metric-compatible" means the substitute 
 
 | Doc type | Face the rule names | Vendored substitute (typst family) | Fit | Status |
 |---|---|---|---|---|
-| complaint | Civil L.R. 3-4(c)(2)(A): standard proportional font, e.g. Times New Roman or Century Schoolbook | Liberation Serif (12 pt) | Metric-compatible | Switched from EB Garamond; `pdffonts` confirms embedding |
-| motion-brief | Civil L.R. 3-4(c)(2)(A)-(B): same wording, 12 pt or larger | Liberation Serif (12 pt) | Metric-compatible | Switched from EB Garamond (13 pt); page count 12 to 10 |
+| complaint | Civil L.R. 3-4(c)(2)(A): standard proportional font, e.g. Times New Roman or Century Schoolbook | Times New Roman (12 pt; Liberation Serif fallback) | Exact (the pinned Times New Roman install) | Switched from EB Garamond, then from Liberation Serif to Times New Roman (docs/FONTS.md rule 6); `pdffonts` confirms embedding |
+| motion-brief | Civil L.R. 3-4(c)(2)(A)-(B): same wording, 12 pt or larger | Times New Roman (12 pt; Liberation Serif fallback) | Exact (the pinned Times New Roman install) | Switched from EB Garamond (13 pt; page count 12 to 10 on Liberation Serif), then to Times New Roman (docs/FONTS.md rule 6) |
 
-No N.D. Cal. rule names a face as a requirement; the examples are "e.g." Reading: the rule's examples name Times New Roman, so the Times substitute is used. Keeping EB Garamond would also satisfy the rule's text (see each doc type's README, Known gaps).
+No N.D. Cal. rule names a face as a requirement; the examples are "e.g." Reading: the rule's examples name Times New Roman, so Times New Roman is used (the house standard, docs/FONTS.md rule 6). Keeping EB Garamond would also satisfy the rule's text (see each doc type's README, Known gaps).
 
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`

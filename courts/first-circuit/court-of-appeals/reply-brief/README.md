@@ -26,7 +26,7 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 | FRAP 28(c) | A reply brief must contain a table of contents with page references and a table of authorities with the pages where cited. No other section is required (p. 57) | TOC; TOA; `required-sections = ()` |
 | FRAP 32(a)(2)(A)-(F) | Cover contents (rulebook pp. 67-68) | `cover-body` |
 | FRAP 32(a)(4)-(6) | 8½ × 11; double-spaced, quotations single-spaced; margins at least 1 inch; 14-point or larger proportional serif; plain roman, case names italic (p. 68) | page, text, quotation, and footnote styles |
-| FRAP 32(a)(5) (typeface) | Rule names no face: a proportionally spaced serif face, 14 pt or larger. No 1st Cir. local rule names a face (rulebook text read 2026-10-14). Court-named face: none | `font-family = "EB Garamond"` (kept, per `docs/FONTS.md` "No face named"); no substitute needed |
+| FRAP 32(a)(5) (typeface) | Rule names no face: a proportionally spaced serif face, 14 pt or larger. No 1st Cir. local rule names a face (rulebook text read 2026-10-14). Court-named face: none | `font-family = ("Times New Roman", "Liberation Serif")` (the house standard, `docs/FONTS.md` rule 6; EB Garamond in the earlier template); no substitute needed |
 | FRAP 32(a)(7)(B)(ii) | A reply brief is acceptable if it has no more than half the type volume of a principal brief (p. 69), so 6,500 words | `word-limit = 6500` |
 | FRAP 32(f) | Excluded from the count: cover, disclosure, TOC, TOA, oral-argument statement, addendum with statutes, certificate, signature block (pp. 69-70) | `strip-oral-argument`; markdown body only |
 | FRAP 32(g)(1)-(2); Form 6 | Certificate of compliance, Form 6 wording (rulebook p. 113) | `certificate-of-compliance` |
@@ -64,7 +64,7 @@ Every page of `OUTPUT-reply-brief.typst.pdf` was rendered at 60 dpi and viewed (
 | 9 | Certificate of compliance (Form 6 wording). Word count from the markdown (901). | OK. |
 | 10 | Certificate of service (comma fixed on re-render) | OK. |
 
-Tier-2 findings (OPEN or ACCEPTED): the page-7 lead-in finding above (OPEN); the typeface is EB Garamond where the filed brief uses Times New Roman (ACCEPTED: the rule names no face, so EB Garamond stays; see `docs/FONTS.md`).
+Tier-2 findings (OPEN or ACCEPTED; recorded on the earlier EB Garamond template): the page-7 lead-in finding above (OPEN); the typeface is EB Garamond where the filed brief uses Times New Roman (ACCEPTED: the rule names no face, so EB Garamond stays; see `docs/FONTS.md`).
 
 ## Known gaps
 
@@ -73,7 +73,7 @@ Tier-2 findings (OPEN or ACCEPTED): the page-7 lead-in finding above (OPEN); the
 3. The table of authorities is built only from `toa:` links. Every citation the filer wants listed must be linked; a link inside a heading is refused.
 4. The word count is computed from the markdown body (`count-words`). It has not been cross-checked against the PDF text in this box. The 6,500 limit is the half of 13,000 that FRAP 32(a)(7)(B)(ii) allows; the template does not check a reply's page count (FRAP 32(a)(7)(A) page limit of 15 pages is not enforced).
 5. The page-7 lead-in finding (OPEN) is not fixed: keeping a colon-introduced list with its first item would need a rule the template does not have.
-6. Typeface: EB Garamond is kept because the rulebook names no face. A filer who wants Times New Roman would use Liberation Serif (`docs/FONTS.md`); that would be a style choice, not a rule requirement.
+6. Typeface: Times New Roman, the house standard (`docs/FONTS.md` rule 6), because the rulebook names no face; the filed brief's face too. (EB Garamond in the earlier template.)
 
 ## Engines
 
@@ -85,16 +85,16 @@ the face EB Garamond are superseded (the docx engine set EB Garamond until fb-59
 |---|---|---|---|
 | typst (primary) | `typst/` | `usage/OUTPUT-reply-brief.typst.pdf` (10 pages) | tier 1 green |
 | latex | `latex/` (`template.tex` + `ca1.lua`, pdflatex) | `usage/OUTPUT-reply-brief.latex.pdf` (10 pages) | tier 1 green; XENG-001..003 PASS |
-| docx | `docx/` (`reference.docx` + `ca1.lua`, pandoc, LibreOffice) | `usage/OUTPUT-reply-brief.docx`, `.docx.pdf` (10 pages) | tier 1 green; XENG-001..003 PASS |
+| docx | `docx/` (`reference.xml` + `ca1.lua`, `fb render`: pandoc, LibreOffice) | `usage/OUTPUT-reply-brief.docx`, `.docx.pdf` (10 pages) | tier 1 green; XENG-001..003 PASS |
 
-Build: `sh docx/make-reference.sh` once (the output is committed), then `sh tools/check.sh <doc-dir> --engine typst|latex|docx`.
+Build: `sh tools/check.sh <doc-dir> --engine typst|latex|docx`; `fb render --engine docx` builds the reference document from `docx/reference.xml` (`base="xengine"`, the typst face as `{font}`). (Until fb-595.68, `sh docx/make-reference.sh` built a committed `reference.docx`.)
 The docx contents and authorities carry page numbers from a first LibreOffice pass (`fb render`, docxpass.rs: the
 needles `ca1.lua` writes).
 
 ### Cross-engine (fb-595.54.2)
 
 The three engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and
-`xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Cross-engine gate"), and
+`xengine.lua`, `lib/docx/xengine.lua` and fb render's `base="xengine"` reference, `tools/fb/src/docxxengine.rs`; docs/EVAL-LOOP.md, "Cross-engine gate"), and
 `eval.yaml` sets `params.cross_engine: gate`.
 
 - typst: pitches 31.4 pt (body) and 20 pt (headings, quotations, footnotes, tables, cover, certificates) instead of
@@ -105,7 +105,7 @@ The three engines are on the shared cross-engine layout model (`lib/typst/xengin
 - latex: `\usepackage{xengine}`, `\xe@lines`, `\addvspace`, `\xe@row`, `\xe@footnotemarks`, `\xe@lists`; the
   contents from `\label`/`\pageref`; an ellipsis (U+2026) one em wide with its own text (T1 has no ellipsis glyph);
   no break before a closing mark after a space (". . .,", UAX #14 LB13/LB15d, as typst).
-- docx: `reference.docx` from `xengine-reference.sh` (Times New Roman, exact 31.4/20 pt lines); every paragraph with
+- docx: the `base="xengine"` reference from `docx/reference.xml` (Times New Roman, exact 31.4/20 pt lines; a committed `reference.docx` from `xengine-reference.sh` until fb-595.68); every paragraph with
   exact spacing; contents and authorities rows with a right indent and a leader tab; page numbers by needles; a word
   joiner between ")(" ("32(a)(7)(B)": LibreOffice would break there, typst does not); the closing-mark rule above.
 - Before (fresh render on master, /work/artifacts/baseline): latex 10 pages, 124/159 typst lines with the same break (78.0 %); docx 9 pages against typst's 10, 56/159 lines (35.2 %), tier 1 2 failed (TNR-EMBEDDED, DEF-FONT-002: EB Garamond).

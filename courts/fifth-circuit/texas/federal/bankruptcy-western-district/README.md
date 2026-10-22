@@ -36,7 +36,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
@@ -49,12 +49,12 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 ## Typeface
 
-Checked 2026-10-14 against FRBP 9004(a) and the W.D. Tex. local rules (2014 redline on txwb.uscourts.gov; see the doc-type READMEs). No rule names a face for pleadings, so no substitute is used and each template keeps EB Garamond (`docs/FONTS.md`, "No face named").
+Checked 2026-10-14 against FRBP 9004(a) and the W.D. Tex. local rules (2014 redline on txwb.uscourts.gov; see the doc-type READMEs). No rule names a face for pleadings, so no substitute is used and each template is set in Times New Roman, the house standard (`docs/FONTS.md` rule 6; both templates were EB Garamond before fb-595.68).
 
 | Doc type | Face required by rule | Vendored substitute | Typeface used |
 |---|---|---|---|
-| `adversary-complaint` | none | none needed | EB Garamond |
-| `motion-brief` | none | none needed | EB Garamond |
+| `adversary-complaint` | none | none needed | Times New Roman |
+| `motion-brief` | none | none needed | Times New Roman |
 
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`

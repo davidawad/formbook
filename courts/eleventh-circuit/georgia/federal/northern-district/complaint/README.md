@@ -3,13 +3,13 @@
 Doc type: **complaint** in the United States District Court for the Northern District of Georgia (`gand`).
 Folder: `courts/eleventh-circuit/georgia/federal/northern-district/complaint/`.
 
-**Typeface (tier 1): resolved.** LR 5.1(C) permits Times New Roman (at least 14 point), Courier New (at least 12), Century Schoolbook (at least 13) or Book Antiqua (at least 13). The template uses the first listed face, Times New Roman 14 pt, and renders it with its substitute **Liberation Serif** (metric-compatible, per `docs/FONTS.md`; vendored, SIL OFL). The font is one parameter (`font-name` / `font-family` in `typst/gand-complaint.typ`). The leading is set to 1.645em so the baseline pitch stays at 32.2 pt, the pitch the EB Garamond build had. The earlier EB Garamond build was not Times-metric, so the page count moved from 12 to 13 pages on the same sample; the page count is now a Times-metric result.
+**Typeface (tier 1): resolved.** LR 5.1(C) permits Times New Roman (at least 14 point), Courier New (at least 12), Century Schoolbook (at least 13) or Book Antiqua (at least 13). The template uses the first listed face, Times New Roman 14 pt, rendered in **Times New Roman** itself (the pinned install, `docs/FONTS.md` rule 1), with Liberation Serif (metric-compatible, vendored) as the fallback. The font is one parameter (`font-name` / `font-family` in `typst/gand-complaint.typ`). The leading is set to 1.645em so the baseline pitch stays at 32.2 pt, the pitch the EB Garamond build had. The earlier EB Garamond build was not Times-metric, so the page count moved from 12 to 13 pages on the same sample; the page count is now a Times-metric result.
 
 | Item | Status |
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (primary, 30 pages, counsel-filed); second filer `usage/FILED-EXAMPLE-complaint-2.pdf` (22 pages, counsel-filed). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-complaint.md` (a portion of the Serveco complaint; see Sample below) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 13 pages, typst 0.15.0, vendored fonts only (`pdffonts`: LiberationSerif and LiberationSerif-Bold embedded), no typst warnings. sha256 `685b8a7ee217f80058a3bcd9705e7f0684a0c53ae3226e2da4e75642b45604fb`. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 13 pages, typst 0.15.0, vendored and pinned fonts only (`pdffonts`: TimesNewRomanPSMT and TimesNewRomanPS-BoldMT embedded), no typst warnings. The sha256 the Gate 2 rows were checked against, `685b8a7ee217f80058a3bcd9705e7f0684a0c53ae3226e2da4e75642b45604fb`, is of the earlier Liberation Serif render. |
 | overlay | ok: `usage/OVERLAY-serveco-complaint.pdf` and `OVERLAY-serveco-complaint.txt` |
 | pages reviewed | 12 of 12, each rendered at 60 dpi and viewed in the final PDF |
 
@@ -23,7 +23,7 @@ M = mandated by a rule (tier 1). C = convention (tier 2). A = author responsibil
 
 | ID | Rule | Requirement | M/C/A | Where in the template |
 |---|---|---|---|---|
-| GAND-FORM-001 | LR 5.1(C) | Computer documents in Times New Roman at least 14 point (or the other listed fonts and sizes). | M | `font-name` = "Liberation Serif" (substitute for Times New Roman), `type-size` = 14pt. |
+| GAND-FORM-001 | LR 5.1(C) | Computer documents in Times New Roman at least 14 point (or the other listed fonts and sizes). | M | `font-name` = ("Times New Roman", "Liberation Serif") (Liberation Serif the fallback), `type-size` = 14pt. |
 | GAND-FORM-002 | LR 5.1(C) | Double-spaced between lines; footnotes, headings and indented citations may be single-spaced. | M | `body-leading` = 1.65em (32.2 pt baseline pitch, matched to the filed exemplar, Serveco p.2). Headings and the caption are single-spaced. |
 | GAND-FORM-003 | LR 5.1(D) | Top, bottom, left and right margins at least one inch. | M | `margin` = 1in on all four sides. |
 | GAND-FORM-004 | LR 5.1(E) | Pages numbered consecutively at the bottom center. | M | `page-footer()`: arabic numbers, centered in the footer. |
@@ -73,7 +73,7 @@ Rows are per the final PDF (sha256 above). The tier-2 comparison is against one 
 
 ## Known gaps and open choices
 
-1. **Font (tier 1): resolved, see the top of this file.** The render uses Liberation Serif 14 pt as the Times New Roman substitute. Whether a Times-metric render is accepted as the filed face is for David to confirm, since the filer prepares the brief in Times New Roman itself.
+1. **Font (tier 1): resolved, see the top of this file.** The render is set in Times New Roman 14 pt itself (the pinned install), the face the rule names.
    - **Orphan signature page (tier 2, OPEN).** Page 13 carries only the "Dated" line and the signature block. A clerk would expect the signature to share a page with the last text of the demand; not fixed here, because that needs a keep-with-next rule in the template.
 2. **Caption line breaks.** The court title is three fixed lines of the court's name, not wrapped text. The party names are split by the sample's frontmatter, not by the template.
 3. **Case number.** Before assignment the template prints a blank number. After assignment, `case_number` must carry the judge suffix (LR 5.1(K)); the template does not check the suffix format.
@@ -87,13 +87,13 @@ Rows are per the final PDF (sha256 above). The tier-2 comparison is against one 
 
 ### docx (`docx/`)
 
-Files: `docx/reference.docx` (built once by `docx/make-reference.sh` from pandoc's default reference, so the styles are reproducible) and `docx/gand-complaint.lua` (the filter: the cover, the caption table, the numbered allegations, the lettered prayer items, the signature block). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` and, when LibreOffice is available, `OUTPUT-gand-complaint-serveco.docx.pdf`.
+Files: `docx/reference.xml` (the styles: `fb render --engine docx` builds the reference document from it on the shared cross-engine recipe, `base="xengine"`, in the typst face) and `docx/gand-complaint.lua` (the filter: the cover, the caption table, the numbered allegations, the lettered prayer items, the signature block). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf`.
 
-**Checked so far:** the `.docx` builds with pandoc 3.12.1, every part is well-formed XML (`render-docx.sh` checks this), every paragraph style it uses exists in the reference, and the section carries US Letter with 1 in margins and the PAGE footer. The text reads back in the same order as the markdown (`pandoc -f docx -t plain`). **No page of the `.docx` has been rendered or looked at**, so no visual claim is made for it.
+**Checked so far** (recorded when the reference was built by the retired `docx/make-reference.sh`, before LibreOffice ran here)**:** the `.docx` builds with pandoc 3.12.1, every part is well-formed XML (`render-docx.sh` checks this), every paragraph style it uses exists in the reference, and the section carries US Letter with 1 in margins and the PAGE footer. The text reads back in the same order as the markdown (`pandoc -f docx -t plain`). **No page of the `.docx` has been rendered or looked at**, so no visual claim is made for it.
 
 What is meant to match the typst template (set in the styles, not yet seen on a page):
 
-- Times New Roman 14 pt in every style (LR 5.1(C)). The typst render uses its metric-compatible substitute, Liberation Serif; the `.docx` names Times New Roman, so Word shows the face the rule names.
+- Times New Roman 14 pt in every style (LR 5.1(C); `reference.xml` size 28 half points), the typst face.
 - Double spacing: exact 644 twips (32.2 pt), the typst body pitch. Headings, footnotes, the caption and the signature block are single-spaced.
 - 1 in margins on US Letter; page number bottom centre (LR 5.1(D), (E)).
 - Caption: 3.2 in party column, a ")" column, the case number on the right and centred vertically, the parties on exact 19.6 pt lines so the ")" marks line up.
@@ -108,7 +108,7 @@ What differs from the typst output, and why:
 - Pagination is Word's or LibreOffice's, not typst's (`docs/DOCX.md`, Known limits). The page count of the typst render (13 pages) is not a docx result.
 - The orphan signature page (Gate 2 row 13, OPEN above) is not fixed here either: the signature block is kept together but is not kept with the last paragraph.
 
-docx BLOCKED (`docs/DOCX.md`: the `.docx` is delivered, the checks that need its PDF are not run):
+docx BLOCKED (`docs/DOCX.md`: the `.docx` is delivered, the checks that need its PDF are not run; recorded before LibreOffice ran here: `usage/OUTPUT-complaint.docx.pdf` now exists):
 
 - `BLOCKED: docx Gates 0-3 on the .docx.pdf (tools/check.sh --engine docx): LibreOffice cannot start in the build box.` conda-forge has no LibreOffice package. The Debian 25.2.3 packages were extracted without installing and the binary still stops at the UNO bootstrap (`DeploymentException`) with the ICU and program paths set, so `soffice --headless --convert-to pdf` does not run and no `.docx.pdf` exists. Gates 0-1 are not run mechanically for this folder either (no `checks.yaml`; see Known gaps 7).
 - `BLOCKED: docx page review: 0 of the pages of the .docx were rendered and viewed, because there is no PDF to render.`

@@ -126,7 +126,7 @@ Searches tried for the exemplar: the FCC library (appellee briefs in D.C. Circui
 
 ## Engines
 
-The typst template is the primary engine (`typst/`) and the reference; LaTeX (`latex/`: `template.tex` + `cadc.lua`) and DOCX (`docx/`: `reference.docx` from `make-reference.sh` + `cadc.lua`) build the same sample and break every line and page where typst breaks them (see "Cross-engine"). From the repo root:
+The typst template is the primary engine (`typst/`) and the reference; LaTeX (`latex/`: `template.tex` + `cadc.lua`) and DOCX (`docx/`: `reference.xml`, from which `fb render` builds the reference document, + `cadc.lua`) build the same sample and break every line and page where typst breaks them (see "Cross-engine"). From the repo root:
 
 ```sh
 A=courts/dc-circuit/court-of-appeals/answering-brief
@@ -153,7 +153,7 @@ Word limits that apply here: the body count (13,000 words, FRAP 32(a)(7)(B)(i)) 
 
 ## Cross-engine (fb-595.54.2)
 
-All three engines on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, the adoption checklist); `params.cross_engine: gate` in `eval.yaml`.
+All three engines on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`, whose recipe fb render has since taken over from `docx/reference.xml`; docs/EVAL-LOOP.md, the adoption checklist); `params.cross_engine: gate` in `eval.yaml`.
 
 - typst: `show: xengine.with(pitch: 26.4pt, list-indent: 0.5in)`; line boxes of 26.4 pt (body, as before), 17.5 pt (single; was about 14.9 pt) and 21 pt (section headings, 16 pt type; were 1.15 em); spaces in pt; `listing-row` contents and authorities (the contents' page column 36 pt, 56 pt for an addendum page; the authorities' 56 pt or the page list's width: a long list no longer wraps inside a 1.5 in column); point headings bold, not small capitals; the cover's designations and counsel and the signatures at the middle of the text width as a length (a relative pad was relative to the padded block: the signature sat 17 pt left of the middle, the designations at the width of the word); the Conclusion kept with the signature block (the keep rule reads the text before the footnote definitions; before, the signature block followed the last footnote definition's rule and the Conclusion was not kept).
 - Three findings particular to TeX Gyre Schola, each a break or page the gate caught:

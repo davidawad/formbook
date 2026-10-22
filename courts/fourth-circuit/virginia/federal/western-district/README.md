@@ -36,7 +36,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
@@ -47,7 +47,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - [ ] overlay PDF present (`usage/*-overlay.pdf`)
 
-Typeface (both doc types, checked 2026-10-14): face required: none (the W.D. Va. Local Civil Rules name no typeface, font size or spacing). Font: EB Garamond, unchanged. No vendored substitute is needed. Exemplars are Times New Roman by habit only.
+Typeface (both doc types, checked 2026-10-14): face required: none (the W.D. Va. Local Civil Rules name no typeface, font size or spacing). Font: Times New Roman 12 pt (docs/FONTS.md rule 6, the house standard; the pinned install, Liberation Serif from `fonts/` as fallback); until fb-595.68 the templates kept EB Garamond 13 pt. The exemplars are Times New Roman by habit only.
 
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`

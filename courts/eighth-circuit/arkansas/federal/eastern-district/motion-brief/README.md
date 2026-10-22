@@ -6,10 +6,10 @@ Doc type: **motion-brief**, the brief in support of a Rule 12(b)(6) motion to di
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (the whole brief: caption, introduction, facts with a table, standard of review, argument A to C with a block quotation, conclusion, signature) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages (the exemplar is 8), typst 0.15.0, vendored EB Garamond only, no warnings |
-| typeface | face required: **none** (E.D. Ark. LR 5.5(a) sets a type-size minimum, "elite", and names no face) → **EB Garamond** kept (no substitute needed; visual-only for any Times expectation) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages (the exemplar is 8), typst 0.15.0, Times New Roman (pinned; vendored Liberation Serif fallback), no system fonts, no warnings |
+| typeface | face required: **none** (E.D. Ark. LR 5.5(a) sets a type-size minimum, "elite", and names no face) → **Times New Roman** 12 pt, the house standard (`docs/FONTS.md`, rule 6; EB Garamond until then) |
 | overlay | not regenerated on 2026-10-14: the filed exemplar PDF is absent from this snapshot (only `usage/SOURCE.md` is tracked), so `overlay.sh` exits 1. `usage/OVERLAY-campbell-motion-brief.txt` is from the earlier run. |
-| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed in its final state) |
+| pages reviewed | 7 of 7, on the earlier EB Garamond render (every page rendered at 60 dpi and viewed in its final state) |
 
 ## Governing rules
 
@@ -63,9 +63,9 @@ sh tools/overlay.sh $D campbell-motion-brief $D/usage/SAMPLE-campbell-ensurety-4
 
 The tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`. This doc type's file names follow the brief (`<id>.pdf`, `<id>-overlay.pdf`, `<id>-overlay.txt`), so the outputs were renamed after the overlay ran. `tools/` was not edited.
 
-The overlay is a diagnostic, not a score. Its page map pairs pages by word overlap: ours 1 to 3 with filed 1 to 3 (78%, 75%, 59%); ours 4 with filed 5 (54%); ours 5 with filed 6; ours 6 with filed 7; ours 7 with filed 8 (43%). The exemplar has no pleading line numbers and is Times, so the two layers do not coincide line by line.
+The overlay is a diagnostic, not a score. Its page map pairs pages by word overlap: ours 1 to 3 with filed 1 to 3 (78%, 75%, 59%); ours 4 with filed 5 (54%); ours 5 with filed 6; ours 6 with filed 7; ours 7 with filed 8 (43%). The exemplar has no pleading line numbers and is Times (our render was then EB Garamond), so the two layers do not coincide line by line.
 
-## Visual review (every page rendered at 60 dpi and viewed in its final state)
+## Visual review (every page rendered at 60 dpi and viewed in its final state; the earlier EB Garamond render)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -83,7 +83,9 @@ Earlier renders had two defects, both fixed in the template and re-viewed: parag
 
 **typst** (primary): the section above; `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages.
 
-**docx**: `docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt; 24 pt exact double spacing; 0.5 in first-line indent on body paragraphs; headings on the same 24 pt grid: level 1 centered bold capitals, level 2 bold and level 3 bold italic with a 0.5 in hanging indent; table cells single-spaced at 11 pt with a full rule grid; block quotes single-spaced, indented 1 in each side; 1-inch margins; a centered page-number footer at 11 pt). `docx/brief.lua` adds what pandoc does not: the three-line court title, the caption table (rules at right and bottom of the party column), the centered bold title, the roman, lettered and numbered headings (I., A., 1.; a `# ~ ` heading is unnumbered), lists "(1)", and the signature block. Built with `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx`.
+**docx**: `docx/reference.xml` holds the styles, from which `fb render` builds the reference document on the shared cross-engine recipe (Times New Roman 12 pt; 24 pt exact double spacing; 0.5 in first-line indent on body paragraphs; headings on the same 24 pt grid: level 1 centered bold capitals, level 2 bold and level 3 italic with a 0.5 in hanging indent; table cells at 11 pt in 12.65 pt lines; block quotes single-spaced, indented 1 in each side; 1-inch margins; a centered page-number footer; `docx/make-reference.sh` built a committed `reference.docx` until fb-595.68). `docx/brief.lua` adds what pandoc does not: the three-line court title, the caption table (rules at right and bottom of the party column), the centered bold title, the roman, lettered and numbered headings (I., A., 1.; a `# ~ ` heading is unnumbered), lists "(1)", and the signature block. Built with `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx`.
+
+Written before LibreOffice was on the box (the committed `usage/.check-docx.txt` now reads PASS, with a `.docx.pdf`):
 
 | Item | Result |
 |---|---|
@@ -92,12 +94,12 @@ Earlier renders had two defects, both fixed in the template and re-viewed: parag
 | Visual review (Gate 2) | Not done. No page of the docx has been rendered or looked at. |
 | BLOCKED: `docx.pdf` checks | `soffice` could not be installed in the build box (conda-forge has no `libreoffice` package on 2026-10-15), so `usage/OUTPUT-campbell-motion-brief.docx.pdf` was not produced. Gates 0 and 1 and the Gate 2 page review, which docs/DOCX.md measures on the LibreOffice PDF, cannot run. The docx is delivered without them. |
 | Last paragraph with the signature | The typst template keeps the last paragraph on the signature's page. The docx does not set keep-with-next on that paragraph, so the signature can start a page alone. Not fixed: it is a placement rule, and it can only be judged on the LibreOffice PDF, which is BLOCKED. |
-| Word substitution | The font is EB Garamond (vendored in `fonts/`). Word substitutes silently when the font is not installed on the machine that opens the file. |
+| Word substitution | The font is Times New Roman. Word substitutes silently when the font is not installed on the machine that opens the file. |
 
 ## Known gaps and open choices
 
 1. **Only one exemplar.** The brief asks for one per doc type; EVAL-LOOP's tier-2 rule asks for two or three filers. Tier 2 is therefore **not** judged against two filers. The natural second pick is *Leflar v. HP Inc*, No. 4:22-cv-00690, Doc. 11 (22 pages, HP's memorandum brief), noted in `usage/SOURCE.md`.
-2. **Font and length.** EB Garamond (vendored, OFL) at 12 pt, the only font vendored in `fonts/`. The exemplar is Times New Roman, which sets wider than Garamond at the same size, so the render is 7 pages against the exemplar's 8. The brief's target was 8 to 14 pages; 7 is the result of the font, not of omitted text (the whole brief is transcribed). Whether the court wants a Times-metric font is a question for David.
+2. **Font and length.** Times New Roman at 12 pt, the house standard (`docs/FONTS.md`, rule 6) and the exemplar's face; the template was EB Garamond before. The render is 7 pages against the exemplar's 8 (it was 7 in EB Garamond too); no text is omitted (the whole brief is transcribed). The brief's target was 8 to 14 pages.
 3. **Single-spaced block quotation and table.** LR 5.5(a) says papers are filed "in double space". The exemplar's block quotation and table are single-spaced, so the template follows the exemplar. A strict reading would require double spacing for quotations; this is an open question for David (recorded as ACCEPTED by convention, not as a rule finding). The table is 11 pt, a convention choice.
 4. **No certificate of service.** Rule 5(d)(1)(B) excuses it for ECF service, and the exemplar has none. A paper served on a non-ECF party would need one; the template does not generate it.
 5. **Page limit.** The text of Local Rule 7.2 sets none; the template has no page counter, and the assigned judge's practices may set one. Not checked.

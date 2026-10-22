@@ -4,14 +4,14 @@
 - Doc type: `motion-brief`. The memorandum that accompanies a Rule 12(b) motion, with a table of contents and a table of authorities, the body, the signature block and a certificate of service.
 - Exemplar: `usage/FILED-EXAMPLE-motion-brief.pdf` (*The Southeastern Conference v. Rousse, et al.*, No. 2:26-cv-01586-ACA, Doc. 27-1, filed 2026-09-25, 33 pages; provenance in `usage/SOURCE.md`). Re-downloaded from CourtListener RECAP on 2026-10-14. The companion motion (Doc. 27) is a separate filing and is not part of this exemplar.
 - Sample: `usage/INPUT-motion-brief.md` (excerpt of the memorandum; see Known gaps).
-- Status: template present, render and overlay re-run on 2026-10-14 (fonts pass: no face named by the court's rules, so EB Garamond stays; see Typeface), one layout defect fixed (below); every page of the render reviewed (10 of 10). Not reviewed by a human; `court.json` untouched.
+- Status: template present, render and overlay re-run on 2026-10-14 (fonts pass: no face named by the court's rules; the template is now Times New Roman, the house standard, `docs/FONTS.md` rule 6; see Typeface), one layout defect fixed (below); every page of the render reviewed (10 of 10, on the earlier EB Garamond render, before fb-595.68). Not reviewed by a human; `court.json` untouched.
 
 ## Files
 
 | Path | What |
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `alnd-motion-brief`. |
-| `typst/alnd-motion-brief.typ` | Template. Parameter block at the top: typeface (EB Garamond 13 pt), double spacing (24 pt pitch), paragraph spacing, margins, headings, table of contents and table of authorities built from the body's links. |
+| `typst/alnd-motion-brief.typ` | Template. Parameter block at the top: typeface (Times New Roman 12 pt), double spacing (24 pt pitch), paragraph spacing, margins, headings, table of contents and table of authorities built from the body's links. |
 | `usage/INPUT-motion-brief.md` | Markdown contract sample: YAML frontmatter (court, caption, case number, title, date line, signature, certificate, authorities) plus the body in markdown. Citations to authorities are links of the form `[text](toa:key)`. |
 | `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh courts/eleventh-circuit/alabama/federal/northern-district/motion-brief usage/INPUT-motion-brief.md` (10 pages: cover, TOC `i`, TOA `ii`, body 1 to 7). |
 | `usage/OVERLAY-sec-motion-brief.pdf`, `OVERLAY-sec-motion-brief.txt` | `sh tools/overlay.sh courts/eleventh-circuit/alabama/federal/northern-district/motion-brief sec-motion-brief` (red = ours, blue = filed, black = agree). |
@@ -45,19 +45,19 @@ Judge's standing orders are not local rules and are not applied here (see Typefa
 
 | Face required | Vendored substitute | Fit |
 |---|---|---|
-| None. The court's Local Rules (2019) name no typeface, so the template keeps EB Garamond (`docs/FONTS.md` "No face named"). | EB Garamond (`fonts/eb-garamond/`) | n/a |
+| None. The court's Local Rules (2019) name no typeface, so the template (typst and docx) uses the house standard, Times New Roman (`docs/FONTS.md` rule 6; EB Garamond until fb-595.68). | Times New Roman (the pinned install, `docs/FONTS.md` rule 1) | n/a |
 
 A single judge's standing order can set a face for that judge's cases. Judge Johnson's Initial Order (Huntsville, `https://www.alnd.uscourts.gov/sites/alnd/files/HNJ%20Initial%20Order%20without%20Rule%2026%20Language.docx`, read 2026-10-14) says "The parties motions and briefs shall be in Times New Roman font and 14-point type", double-spaced, with footnotes in 12 pt. It binds only that judge's cases and is not a court rule, so this template does not follow it. A per-judge variant (Liberation Serif, 14 pt; `docs/FONTS.md` "Times New Roman") would be a separate template and is not built here.
 
 The filed exemplar's body text is Times New Roman (`pdffonts` on the exemplar, 2026-10-14). The overlay compares against it as a visual reference only; that is not a rule, and the layout is not changed to match it.
 
-## Layout defect found and fixed in this pass
+## Layout defect found and fixed in this pass (on the earlier EB Garamond template, before fb-595.68)
 
 The first render had overprinted lines at every paragraph break in the body: the last line of one paragraph and the first line of the next sat 8.4 pt apart instead of 24 pt, so the two lines printed on top of each other (at the paragraph breaks on body pages 1 to 4, PDF pages 4 to 7). Cause: the body's paragraph `spacing` was 0 pt, and the leading was dropped between paragraphs (the 24 pt pitch is the 15.6 pt leading plus the 8.4 pt line box). Fix in `typst/alnd-motion-brief.typ`: the paragraph spacing is now `body-leading`, which restores the pitch. Measured on the render: the first line of the paragraph after "...(2013)." moved from 8.5 pt to 24 pt below the line before. A scan of every page for line gaps under 12 pt (`pdftotext -bbox`) finds none. The body grew from 6 to 7 pages as a result (the render is 10 pages in total).
 
 ## Overlay
 
-`usage/OVERLAY-sec-motion-brief.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run:
+`usage/OVERLAY-sec-motion-brief.pdf` (measured on the earlier EB Garamond render, before fb-595.68) puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run:
 
 ```
 ours p.1  filed p.1   87.1%   cover
@@ -76,7 +76,7 @@ Pairing is by word overlap, not by layout: the low score for p.3 (table of autho
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-motion-brief.typst.pdf` was rasterized (`pdftoppm -r 60`) and viewed: 10 of 10. Typst printed no warnings. Only EB Garamond is embedded. The page numbers in the table of contents and the table of authorities come from the live layout, so they were read off the final render.
+Every page of `OUTPUT-motion-brief.typst.pdf` was rasterized (`pdftoppm -r 60`) and viewed: 10 of 10 (the earlier EB Garamond render, before fb-595.68). Typst printed no warnings. Only EB Garamond was embedded then. The page numbers in the table of contents and the table of authorities come from the live layout, so they were read off the final render.
 
 | Page | Content | Result |
 |---|---|---|
@@ -98,13 +98,13 @@ Tier-2 findings (OPEN or ACCEPTED):
 
 ## Engines
 
-The docx engine (`docx/`: `make-reference.sh` builds `reference.docx`; `alnd-motion-brief.lua` builds the cover, the contents, the authorities, the body's heading labels, the signature block and the certificate; `render.sh` runs two passes, see below) renders `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (the LibreOffice conversion). Every page of the `.docx.pdf` (10 of 10) was rasterized (`pdftoppm -r 60`) and compared with the typst render of the same sample.
+The docx engine (`docx/`: `fb render --engine docx` builds the reference document from `reference.xml`, the cross-engine recipe, `base="xengine"`, in the typst template's face, and runs the passes, see below; `alnd-motion-brief.lua` builds the cover, the contents, the authorities, the body's heading labels, the signature block and the certificate) renders `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (the LibreOffice conversion). Every page of the `.docx.pdf` (10 of 10) was rasterized (`pdftoppm -r 60`) and compared with the typst render of the same sample (on the earlier EB Garamond renders, before fb-595.68).
 
-Two passes for the contents and the authorities: pass 1 writes the heading texts and the citation texts; LibreOffice renders it; `pdftotext` finds the body page of each (`pages.awk`: a heading or citation is found on the page where it starts, also when it runs on into the next page); pass 2 writes the page numbers into the contents and the authorities. The body pages are the same in both passes, which the contents page numbers were checked against.
+Two passes for the contents and the authorities (as recorded before fb-595.68, when `docx/render.sh` and `pages.awk` ran them; `fb render` runs the passes now, `docs/DOCX.md`): pass 1 writes the heading texts and the citation texts; LibreOffice renders it; `pdftotext` finds the body page of each (`pages.awk`: a heading or citation is found on the page where it starts, also when it runs on into the next page); pass 2 writes the page numbers into the contents and the authorities. The body pages are the same in both passes, which the contents page numbers were checked against.
 
 | Item | typst (primary) | docx |
 |---|---|---|
-| Typeface, spacing, margins | EB Garamond 13 pt, 24 pt pitch, 1 in margins | same |
+| Typeface, spacing, margins | Times New Roman 12 pt, 24 pt pitch, 1 in margins | same |
 | Cover | court, caption with the civil action number, title; no page number | same |
 | Contents and authorities | roman i, ii; dot leaders; `passim` from 7 pages | same; the contents page numbers match the headings' pages in the PDF |
 | Body | arabic from 1; heading labels I., A., 1., a. | same, labels as text with a hanging indent |
@@ -113,14 +113,14 @@ Two passes for the contents and the authorities: pass 1 writes the heading texts
 
 What differs:
 
-- Headings: the typst template sets no size for its headings, so they take typst's default heading size: the level 1 glyph box measures 23.8 pt against 17.0 pt for body text (about 1.4 times, `pdftotext -bbox`). The docx keeps 13 pt bold for every heading. If the larger size is wanted, the typst template needs a size and the docx reference needs the same value.
+- Headings (recorded before fb-595.68, on EB Garamond 13 pt): the typst template set no size for its headings, so they take typst's default heading size: the level 1 glyph box measures 23.8 pt against 17.0 pt for body text (about 1.4 times, `pdftotext -bbox`). The docx keeps 13 pt bold for every heading. If the larger size is wanted, the typst template needs a size and the docx reference needs the same value.
 - Certificate: the typst template places the date and signature on the right (`h(1fr)`), but the typst render has them at the left margin. The docx follows the render, not the intent; the right-hand placement is a question for the typst template.
-- Pagination: LibreOffice breaks lines at different points, so some headings move a page (for example "II. The SEC Turns to Federal Court." is on body page 3 in the docx and page 2 in typst). The docx contents gives the docx page, which is the one a reader of the docx sees.
+- Pagination (on the earlier EB Garamond renders, before fb-595.68): LibreOffice breaks lines at different points, so some headings move a page (for example "II. The SEC Turns to Federal Court." is on body page 3 in the docx and page 2 in typst). The docx contents gives the docx page, which is the one a reader of the docx sees.
 - Word was not available. The `.docx` was not opened interactively; a headless LibreOffice conversion cannot show a repair prompt.
 
 docx BLOCKED items:
 
-- `BLOCKED: TA/TOA fields (docs/DOCX.md, "Use the Word-native feature"): the authorities are typed entries with the page numbers of the first pass, not TOA fields. LibreOffice does not evaluate TA/TOA fields; Word would not update them either. A body edit needs a re-render (sh docx/render.sh) for the numbers to follow.`
+- `BLOCKED: TA/TOA fields (docs/DOCX.md, "Use the Word-native feature"): the authorities are typed entries with the page numbers of the first pass, not TOA fields. LibreOffice does not evaluate TA/TOA fields; Word would not update them either. A body edit needs a re-render (`sh tools/render.sh --engine docx`, i.e. `fb render --engine docx`) for the numbers to follow.`
 - `BLOCKED: TOC field update: the contents is a TOC field whose cached result holds the first-pass page numbers. LibreOffice does not update it on load, so the numbers are right only for the LibreOffice layout (docs/DOCX.md, "Known limits"); Word may paginate slightly differently.`
 - `BLOCKED: tools/check.sh --engine docx: not run, because the court folder has no checks.yaml yet.`
 
@@ -131,5 +131,5 @@ docx BLOCKED items:
 3. The page references in the TOA are computed by the template from the body's pages, not copied from the filed exemplar.
 4. The judge's standing order, which may set page, typeface or word limits for briefs, was not checked. The template sets no length limit.
 5. The certificate of service is the CM/ECF wording of the sample; it does not list unregistered recipients.
-6. The typeface is EB Garamond because the court's rules name no face, not because a Times New Roman substitute is missing: `fonts/liberation-serif/` is vendored. The 14-point Times New Roman rule in Judge Johnson's standing order is not applied (see Typeface).
+6. The typeface is Times New Roman, the house standard (`docs/FONTS.md` rule 6), because the court's rules name no face. The 14-point Times New Roman rule in Judge Johnson's standing order is not applied (see Typeface).
 7. The 2019 local rules are read (see Governing rules).

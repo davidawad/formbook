@@ -7,7 +7,7 @@ Folder: `courts/fourth-circuit/virginia/federal/bankruptcy-eastern-district/moti
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, defendant's counsel; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: caption, opening, the full Statement of Undisputed Material Facts (28 numbered paragraphs), the Standard of Review, the Visa prepaid card and family support sections, the Conclusion and the signature. The asset-sale, means-test, gambling and garnishment sections are omitted (the exemplar is 19 pages; the sample is 12). |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (the earlier EB Garamond render, before fb-595.68; the template now sets Times New Roman) |
 | overlay | ok: `usage/OVERLAY-amiri-motion-for-summary-judgment.pdf` and `.txt` (page map below) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; pages 8 to 12 on the final build, pages 1 to 7 on a build that differs only from page 8 onward in heading levels) |
 
@@ -33,7 +33,7 @@ Not produced by this template (separate papers that the rules require with the m
 ## Layout
 
 - Letter size, 1.5 inch top margin, 1 inch other margins, page numbers centered at the foot.
-- Font: EB Garamond 12 pt, vendored in `fonts/`. No E.D. Va. rule names a typeface (see Known gaps).
+- Font: Times New Roman 12 pt (the pinned install, docs/FONTS.md rule 1; Liberation Serif from `fonts/` as fallback). No E.D. Va. rule names a typeface (see Known gaps).
 - Double spacing (1.35 em leading, 24 pt pitch at 12 pt); single spacing for the counsel block, caption, table, signature block and service list.
 - Counsel block at the top left of page 1; court name and division centered; caption as a three-column grid; title centered in capitals.
 - Level 1 headings: centered bold capitals (LEGAL ARGUMENT, STATEMENT OF UNDISPUTED MATERIAL FACTS, the lettered sections are level 2). Level 2: bold, left (A. Standard of Review; B. Factual Analysis; C. Conclusion). Level 3: bold italic (1) Summary Judgment). Headings are typed by the author; the template does not number them.
@@ -67,7 +67,7 @@ The overlay is a diagnostic, not a score. Page 12 pairs with the exemplar's sign
 ## Known gaps and open choices
 
 1. **One exemplar.** The brief asks for one exemplar per doc type; EVAL-LOOP's tier-2 rule asks for two or three filers, so tier 2 is not judged against two filers here. Other candidates checked: *King v. Park* (25-01025, Doc 10, Defendant's Motion and Memorandum to Dismiss, 3 pages, Scott J. Newton for Jong Kim) is usable but too short to show a full memorandum; *Elisium Dubai Perfume v. Patrick's Holdings* (25-01041) memoranda are listed in the CourtListener docket search without a storage path, so they were not downloaded.
-2. **Typeface.** The exemplar's body is an embedded CID TrueType face (name not in the text layer), with non-embedded Times-Bold and Times-Italic elsewhere, so it is taken to be a Times-style serif. No Times face is vendored and the brief forbids system fonts, so the template uses EB Garamond, which has a smaller x-height at 12 pt. The 12 pt minimum is met.
+2. **Typeface.** The exemplar's body is an embedded CID TrueType face (name not in the text layer), with non-embedded Times-Bold and Times-Italic elsewhere, so it is taken to be a Times-style serif. The template uses Times New Roman (docs/FONTS.md rule 6, the house standard; the pinned install of rule 1), so the face now matches the exemplar's Times-style serif. (Until fb-595.68 it used EB Garamond, which has a smaller x-height at 12 pt.) The 12 pt minimum is met.
 3. **Top margin.** The rule requires 1.5 inches (LBR 5005-1(C)(3)). The exemplar's body text starts about 1 inch from the top (measured from the text layer's positions). The template follows the rule. Recorded as OPEN for David: confirm whether the 1.5-inch rule applies to the body text or to the whole page with the court's ECF header in it.
 4. **Caption contents.** The exemplar's caption gives the bankruptcy case number in the "In re" block and no chapter. The template prints "Chapter 7" and "Case No." in the right column, because LBR 5005-1(C)(2) requires the debtor's name, case number, chapter and adversary number on each document. A rule-driven difference, not a style one.
 5. **Counsel position.** The exemplar puts the counsel block at the foot of page 1; the template puts it at the top left (LBR 5005-1(C)(5) requires it on the first page; either place complies). Recorded as ACCEPTED.
@@ -76,7 +76,7 @@ The overlay is a diagnostic, not a score. Page 12 pairs with the exemplar's sign
 8. **Notice of hearing.** Not produced (see Governing rules). A summary judgment motion in this court needs its own notice; the exemplar's notice is not part of this doc type.
 9. **Summary judgment checks.** The "Statement of Undisputed Material Facts" check asserts the heading and that the section is numbered. It does not check that each fact cites evidence (LBR 7056-1(C) requires it); that is the author's responsibility.
 
-## Review of the rendered pages (12 pages)
+## Review of the rendered pages (12 pages; the earlier EB Garamond render, before fb-595.68)
 
 - Page 1: counsel block (top left), court and division, caption with the "In re" block (Chapter 7, Case No. 25-12110-BFK) and the adversary block (Case No. 26-1002-BFK), the title, the opening paragraph and the first body paragraph. Pass.
 - Page 2: STATEMENT OF UNDISPUTED MATERIAL FACTS heading (centered), paragraphs 1 to 5, and the start of the (a)-(e) list. Pass.
@@ -96,8 +96,8 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` from pandoc's default reference, and `docx/vaeb.lua` (counsel block, court title, caption, numbered Statement of Undisputed Material Facts, lettered lists, "Respectfully submitted," signature block).
-- Matches typst: EB Garamond 12 pt (the PDF embeds EB Garamond only); exact 24 pt double and 13.8 pt single lines; 0.5 in first-line indent; letter size, 1.5 in top margin, 1 in other margins; centered page number; level 1 headings 17 pt centered bold capitals, level 2 bold 14.5 pt left, level 3 bold italic; caption as three columns (3.4 in, 0.3 in, 2.8 in); the signature block and the list spacing; 5 pt table insets and 0.5 pt rules.
-- Differs: (1) Word-native widow and orphan control moves one or two lines to the next page, so the sample runs to 13 pages in the docx and 12 in typst; (2) the closing WHEREFORE paragraph is kept with the signature block (keep-with-next), so the signature is not left alone on a page; (3) LibreOffice places exact-height lines about 3 pt lower than typst; (4) the caption and signature blocks are borderless tables.
+- **docx** (`docx/`): `docx/reference.xml` (`base="xengine"`: fb render builds the reference document from the shared cross-engine recipe in the typst face) and `docx/vaeb.lua` (counsel block, court title, caption, numbered Statement of Undisputed Material Facts, lettered lists, "Respectfully submitted," signature block).
+- Matches typst: Times New Roman 12 pt (the PDF embeds TimesNewRomanPSMT); exact 24 pt double and 13.8 pt single lines; 0.5 in first-line indent; letter size, 1.5 in top margin, 1 in other margins; centered page number; headings at 12 pt on the 24 pt body pitch, level 1 centered bold capitals, level 2 bold left, level 3 bold italic; caption as three columns (3.4 in, 0.3 in, 2.8 in); the signature block and the list spacing; 5 pt table insets and 0.5 pt rules.
+- Differs (recorded on the earlier build by `docx/build-reference.sh`, before the fb-595.68 cross-engine port; `eval.yaml` now gates the docx on typst's line and page breaks): (1) Word-native widow and orphan control moves one or two lines to the next page, so the sample runs to 13 pages in the docx and 12 in typst; (2) the closing WHEREFORE paragraph is kept with the signature block (keep-with-next), so the signature is not left alone on a page; (3) LibreOffice places exact-height lines about 3 pt lower than typst; (4) the caption and signature blocks are borderless tables.
 - No TOC or TOA, no pleading-paper line numbers (this court does not use them).
 - BLOCKED: none recorded. `sh tools/check.sh <court> --engine docx` exits 2 before any gate runs: the court folder has no `checks.yaml` (Gate 1) and no `reviews/`, so the gates cannot pass yet. That is a court-level prerequisite, not a docx limit.

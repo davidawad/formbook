@@ -7,10 +7,10 @@ Folder: `courts/fourth-circuit/north-carolina/federal/bankruptcy-eastern-distric
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: the whole 12-page memorandum transcribed (caption, headings, body, quotations, signature, certificate of service) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| typeface | rules name no face: EB Garamond kept (`docs/FONTS.md`, "No face named"); no substitute needed. Checked 2026-10-14 against the NCEB Local Rules and Administrative Guide (see Typography). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, Times New Roman only (`pdffonts`), no warnings |
+| typeface | rules name no face: Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6; Liberation Serif as fallback), on typst and docx (fb-595.68.18). Checked 2026-10-14 against the NCEB Local Rules and Administrative Guide (see Typography). |
 | overlay | ok: `usage/OVERLAY-barnhill-memo.pdf` and `usage/OVERLAY-barnhill-memo.txt` (page map; exemplar copy fetched from CourtListener RECAP on 2026-10-14, 12 pages, matching `usage/SOURCE.md`) |
-| pages reviewed | 10 of 10 (fonts pass, 2026-10-14: every page rendered at 70 dpi and viewed after the re-render) |
+| pages reviewed | 10 of 10 on the earlier EB Garamond render, before fb-595.68 (fonts pass, 2026-10-14: every page rendered at 70 dpi and viewed after the re-render) |
 
 ## Governing rules
 
@@ -31,7 +31,7 @@ Rules were read from the primary sources on 2026-10-14. The local rules are the 
 
 Typography: none of the local rules, the Administrative Guide or FRBP 9004 sets a typeface, point size, margin or line spacing for a memorandum (checked: the NCEB local rules and the Administrative Guide were searched for "font", "point", "margin", "spacing", "8 1/2"; the only paper-size text is the 8½ × 11 inch scanning rule in the Administrative Guide's electronic-filing section). The template therefore uses the exemplar's settings, which are a 12-point serif, double-spaced, 1-inch margins, page numbers at the foot, and italic case names.
 
-Fonts pass (2026-10-14): the NCEB Administrative Guide's only face wording is in the creditor-matrix instructions (Rule 1007-2, "Twelve (12) pitch Times New Roman and Courier New fonts create good print quality"). That applies to the mailing matrix, not to a memorandum. The Local Rules and the Administrative Guide were fetched in full from the court's "Newest" PDFs and searched for font, typeface, point, margin and spacing terms. No rule names a face for this doc type, so `docs/FONTS.md` ("No face named") keeps EB Garamond. The Liberation Serif substitute is not used.
+Fonts pass (2026-10-14): the NCEB Administrative Guide's only face wording is in the creditor-matrix instructions (Rule 1007-2, "Twelve (12) pitch Times New Roman and Courier New fonts create good print quality"). That applies to the mailing matrix, not to a memorandum. The Local Rules and the Administrative Guide were fetched in full from the court's "Newest" PDFs and searched for font, typeface, point, margin and spacing terms. No rule names a face for this doc type. That pass kept EB Garamond; the template is now Times New Roman, the house standard where no face is named (`docs/FONTS.md` rule 6, David 2026-10-17; fb-595.68.18).
 
 ## Layout
 
@@ -55,9 +55,9 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 
 ## Overlay
 
-`sh tools/overlay.sh <doc-type-dir> barnhill-memo` writes `usage/OVERLAY-barnhill-memo.pdf` (red = our render, blue = the filed page, black = both) and `OVERLAY-barnhill-memo.txt`. The page map pairs each of our 10 pages with the filed page sharing most words (word-overlap 55% to 83%). Our page 1 is the caption page; the exemplar's page 1 is its caption too. The overlay is a diagnostic, not a score. The 10 rendered pages against the exemplar's 12 are not analyzed further; the page map is the only comparison made.
+`sh tools/overlay.sh <doc-type-dir> barnhill-memo` writes `usage/OVERLAY-barnhill-memo.pdf` (red = our render, blue = the filed page, black = both) and `OVERLAY-barnhill-memo.txt`. The page map (made on the earlier 10-page EB Garamond render, before fb-595.68) pairs each of our 10 pages with the filed page sharing most words (word-overlap 55% to 83%). Our page 1 is the caption page; the exemplar's page 1 is its caption too. The overlay is a diagnostic, not a score. The 10 rendered pages against the exemplar's 12 are not analyzed further; the page map is the only comparison made.
 
-## Page review (Gate 2 equivalent; every page rendered at 60 dpi and viewed)
+## Page review (Gate 2 equivalent; every page rendered at 60 dpi and viewed, on the earlier 10-page EB Garamond render, before fb-595.68)
 
 - Page 1: caption, title, start of the Introduction. Pass.
 - Page 2: Introduction end, Legal Standard, start of the Argument; the first block quotation. Pass.
@@ -72,7 +72,7 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 
 ## Known gaps and open choices
 
-1. **Typography is not in the rules.** The 12-point EB Garamond, double spacing and 1-inch margins follow the exemplar (a Times-style serif). EB Garamond has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. No rule names a face, so the template keeps EB Garamond. Liberation Serif (metric-compatible with Times New Roman) is vendored if David wants the exemplar's look as a tier-2 choice; switching is not required by any rule.
+1. **Typography is not in the rules.** The 12-point Times New Roman (`docs/FONTS.md` rule 6, the house standard; EB Garamond before 2026-10-17, the docx until fb-595.68.18), double spacing and 1-inch margins follow the exemplar (a Times-style serif).
 2. **Only one exemplar** (one filer). The tier-2 bar (2 or 3 filers) is not met. Search: the CourtListener API (`/api/rest/v4/search/`, `court=nceb`, `type=rd`, query "motion to dismiss" memorandum). It returned several memoranda; this one has a text layer. Not collected: a second memorandum from a different filer.
 3. **Not generated:** the motion itself (LBR 7007-1(a) requires one with the memorandum), the notice of motion and the proposed order (LBR 9014-1(a)), and any summons. The template produces the memorandum only.
 4. **Transcription is complete.** The whole 12-page memorandum is in the sample, including the caption, the signature block and the certificate of service. The exemplar's own citation errors (for example "*Id* (citing") are kept as printed.
@@ -83,17 +83,17 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 
 ## Engines
 
-**docx** (`docx/`: `make-reference.sh` builds `reference.docx`; `nceb-motion-brief.lua` adds the caption with "In re:", the signature block and the certificate of service, and turns a numbered list inside a block quotation into labelled paragraphs). Outputs: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (the LibreOffice PDF, the file checked).
+**docx** (`docx/`: `fb render --engine docx` builds the reference document from `reference.xml`, the shared cross-engine recipe in the typst face; `nceb-motion-brief.lua` adds the caption with "In re:", the signature block and the certificate of service, and turns a numbered list inside a block quotation into labelled paragraphs). Outputs: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (the LibreOffice PDF, the file checked; 11 pages, as typst). `docx/make-reference.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.18; XENG-001..003 pass.
 
-What matches the typst output: letter page, 1-inch margins; EB Garamond 12 pt (embedded as EBGaramond Regular, Bold and Italic); body double-spaced at 24 pt exact with a 0.5-inch first-line indent; level 1 headings centered bold caps; level 2 headings bold, flush left, with a 0.5-inch hanging indent; block quotations indented 1 inch both sides and single-spaced, including the numbered list inside the quotation; caption with the rule on its right and bottom edges and the case, chapter and adversary lines; signature block with the date, "Respectfully submitted," at 3 inches, the `/s/` signers and the role line, kept together; certificate of service on its own page with the served lines indented 1 inch and the signer at 3 inches; centered page-number footer.
+What matches the typst output (seen on the earlier EB Garamond docx; the face is now Times New Roman 12 pt on both, Regular, Bold and Italic embedded): letter page, 1-inch margins; body double-spaced at 24 pt exact with a 0.5-inch first-line indent; level 1 headings centered bold caps; level 2 headings bold, flush left, with a 0.5-inch hanging indent; block quotations indented 1 inch both sides and single-spaced, including the numbered list inside the quotation; caption with the rule on its right and bottom edges and the case, chapter and adversary lines; signature block with the date, "Respectfully submitted," at 3 inches, the `/s/` signers and the role line, kept together; certificate of service on its own page with the served lines indented 1 inch and the signer at 3 inches; centered page-number footer.
 
-What differs (tier 2, recorded, not changed):
+What differed on that earlier docx (tier 2, recorded then; not re-checked here):
 - The court and division lines and the caption party lines are single-spaced (13.8 pt). The typst render leaves about 22 pt between them.
-- Typst keeps the conclusion and the signature block on page 9. In the docx the signature block moves to page 10 as one unit. The docx runs 11 pages against 10 in typst.
+- Typst keeps the conclusion and the signature block on page 9. In the docx the signature block moves to page 10 as one unit. The docx ran 11 pages against 10 in typst (both engines are 11 pages now).
 - Numbers in the quotation list are typed labels (not Word numbering), so they stay inside the quotation's indent.
 - The certificate's space before the signer is a little smaller than in typst.
 - Word is not available here, so the `.docx` was not opened in Word. LibreOffice converted it without error. `unzip -t` passes and all 17 XML parts pass `xmllint --noout`.
 
-Pages reviewed: all 11 pages of `usage/OUTPUT-motion-brief.docx.pdf`, each rendered at 60 dpi and viewed after the last change; typst comparison pages 1 to 10 of the typst render (rendered to /tmp, not to `usage/`).
+Pages reviewed: all 11 pages of the earlier EB Garamond `usage/OUTPUT-motion-brief.docx.pdf`, each rendered at 60 dpi and viewed; typst comparison pages 1 to 10 of the typst render (rendered to /tmp, not to `usage/`).
 
-No docx item is BLOCKED. The court folder has no `checks.yaml`, so no check IDs apply to this doc type yet; the page review above is the only check.
+No docx item is BLOCKED. `tools/check.sh` gates both engines on `eval.yaml` (`usage/.check-typst.txt`, `usage/.check-docx.txt`: PASS, fb-595.68.18).

@@ -96,7 +96,7 @@ Built by `latex/` (`template.tex` + `ca2.lua`, the same template as the other do
 
 ## Verification pass 2026-10-16 (fb-595.26.2)
 
-- Re-rendered `INPUT-answering-brief.md` with `tools/render.sh`: exit 0, no warnings, 12 pages (the committed PDF was not stale: same text and page count). Fonts: EB Garamond Regular/Bold/Italic only.
+- Re-rendered `INPUT-answering-brief.md` with `tools/render.sh`: exit 0, no warnings, 12 pages (the committed PDF was not stale: same text and page count). Fonts: EB Garamond Regular/Bold/Italic only (the face the template then set; Times New Roman since).
 - Viewed all 12 pages at 60 dpi, the exemplar's page 1, and all 12 overlay pages at 40 dpi. The overlay pairing is unchanged (cover 91.8%, body 73-91%, TOC/TOA 35%/18%, certificates 45-49%).
 - Fixed (tier 1): the cover printed the docket number at 14 pt; Local Rule 32.1(a)(1) requires type at least one inch high. Now `docket-size = 72pt` (typst) and `\fontsize{72}{80}` (latex `ca2.lua`). The cover still fits one page.
 - Fixed (tier 1): the word limit was 13,000 (FRAP); Local Rule 32.1(a)(4)(A), now fetched, sets 14,000 for a principal brief. Limit and certificate wording (FRAP 32(a)(7)(B) and LR 32.1(a)(4)(A)) updated in typst and latex.

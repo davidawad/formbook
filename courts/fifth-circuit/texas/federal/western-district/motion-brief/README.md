@@ -7,10 +7,10 @@ Folder: `courts/fifth-circuit/texas/federal/western-district/motion-brief/`.
 |---|---|
 | exemplar | yes, one filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (Dallas County Election Administrator's Rule 12 motion and brief, 22 pages). See `usage/SOURCE.md`. The second-filer check is not met: see gap 1. |
 | sample md | `usage/INPUT-motion-brief.md` (an excerpt: cover, table of contents, introduction, grounds, argument A, B.1 to B.3, part of C, prayer, signature block, certificate of service). |
-| typeface | face required: none (CV-10(a) names no face). Substitute: none needed; **EB Garamond** kept (`docs/FONTS.md`, "No face named"). Embedded: EB Garamond Regular and Bold only (`pdffonts`, 2026-10-14). |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14). |
+| typeface | face required: none (CV-10(a) names no face). Substitute: none needed; **Times New Roman** 12 pt (`docs/FONTS.md` rule 6, the house standard; EB Garamond 13 pt before fb-595.68). Embedded: Times New Roman Regular and Bold only (`pdffonts` on the committed render). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages (also 14 on the 2026-10-14 EB Garamond render, before fb-595.68), typst 0.15.0, pinned Times New Roman only, no warnings. |
 | overlay | ok: `usage/OVERLAY-lulac-rule-12-motion-to-dismiss.pdf` and `.txt` (see "Overlay"), regenerated 2026-10-14 against `usage/FILED-EXAMPLE-motion-brief.pdf`. That PDF was missing from the checkout and was fetched from the URL in `usage/SOURCE.md`. |
-| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed on the final build; all 14 viewed again on the 2026-10-14 re-render). |
+| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed on the final build; all 14 viewed again on the 2026-10-14 re-render; the EB Garamond render, before fb-595.68). |
 | gates | `tools/check.sh` not run: it expects a court folder with `court.json` and `rules.md`, which this doc-type folder does not have, and the brief forbids editing `tools/`. |
 
 ## Governing rules
@@ -19,7 +19,7 @@ Primary sources, fetched 2026-10-14:
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| W.D. Tex. Local Rule CV-10(a) | Typed or printed in 12-point or larger font (including footnotes), double-spaced, on 8½ × 11 paper, one-inch margins on all sides; endorsed with the style of the case and the descriptive name of the document. Headings, footnotes and quotations more than two lines long may be single-spaced. | `page` (us-letter, 1 in margins), `type-size = 13pt`, `body-leading` (2.0 em pitch), `title`, `caption`. |
+| W.D. Tex. Local Rule CV-10(a) | Typed or printed in 12-point or larger font (including footnotes), double-spaced, on 8½ × 11 paper, one-inch margins on all sides; endorsed with the style of the case and the descriptive name of the document. Headings, footnotes and quotations more than two lines long may be single-spaced. | `page` (us-letter, 1 in margins), `type-size = 12pt`, `pitch-double` (24 pt, 2 x the size), `title`, `caption`. |
 | W.D. Tex. Local Rule CV-10(b) | Represented party: attorney's mailing address, e-mail, signature, state bar card number, telephone and fax numbers, including area code. | `signature-block` (`firm`, `signer`, `lines`). |
 | W.D. Tex. Local Rule CV-7(a) | A motion must meet CV-10. | As CV-10 above. |
 | W.D. Tex. Local Rule CV-7(c)(1) | Legal authority in support of a motion is cited in the motion, not a separate brief; the motion states its grounds and cites the rule or statute justifying the relief. | Author content: the sample has the brief inside the motion (one document). |
@@ -34,7 +34,7 @@ Not produced by this template: a proposed order (required for discovery and case
 
 - Cover page: court title (centred bold, three lines), caption with the § column on every row, the case number on its own row, and the document title (centred bold).
 - Table of contents on page 2: generated from the headings by typst's `outline` (levels 1 to 3, dot leaders). The author types the numbers ("I.", "A.", "1.") in the headings, as the exemplar does; the template does not number headings.
-- Body from page 3: double spacing (2.0 em pitch, 26 pt at 13 pt), paragraph spacing equal to the leading, first-line indent 0.5 in, body paragraphs not numbered.
+- Body from page 3: double spacing (24 pt pitch, 2 x 12 pt), paragraph spacing equal to the leading, first-line indent 0.5 in, body paragraphs not numbered.
 - Headings: level 1 centred bold capitals; level 2 and level 3 left bold, single-spaced, kept with the text after them.
 - Block quotations (`> `): single-spaced, indented 0.5 in on both sides.
 - Lists: numbered grounds with bullet sub-items; bullets for the "La Union" and "Plaintiffs aver" lists.
@@ -53,10 +53,10 @@ Not produced by this template: a proposed order (required for discovery and case
 `sh tools/overlay.sh <court-dir> lulac-rule-12-motion-to-dismiss <exemplar.pdf>`. The exemplar is passed explicitly, as for the complaint folder, although this folder has one exemplar.
 
 - The tool writes `usage/OVERLAY-<id>.pdf` and `.txt`, not the `<id>-overlay.*` names in the brief (the tool was not changed; file roles follow CLAUDE.md).
-- Page map (word-overlap pairing): ours p.1-2 ↔ filed p.1-2; ours p.3-4 ↔ filed p.7 and p.9; ours p.5-12 ↔ filed p.10-18; ours p.14 ↔ filed p.22 (the certificate). Ours p.13 is paired with filed p.1 by word overlap; that is an artifact (the prayer and signature page shares words with the cover block) and not a layout match.
+- Page map (word-overlap pairing, on the earlier EB Garamond render, before fb-595.68): ours p.1-2 ↔ filed p.1-2; ours p.3-4 ↔ filed p.7 and p.9; ours p.5-12 ↔ filed p.10-18; ours p.14 ↔ filed p.22 (the certificate). Ours p.13 is paired with filed p.1 by word overlap; that is an artifact (the prayer and signature page shares words with the cover block) and not a layout match.
 - The overlay is a diagnostic, not a score: the filing has footnotes, Roman-numeral front matter and a TOA the sample does not reproduce.
 
-## Review of the rendered pages (Gate 2 record; every page viewed at 60 dpi on the final build)
+## Review of the rendered pages (Gate 2 record; every page viewed at 60 dpi on the final build; the earlier EB Garamond render, before fb-595.68)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -82,10 +82,10 @@ Reviewed pages: 14 of 14.
 1. **One filer.** EVAL-LOOP tier 2 asks for two or three filers. The search found other txwd motions (see `usage/SOURCE.md`), but none was downloaded and checked for structure in this pass. The tier-2 comparison is against one filing only.
 2. **No table of authorities.** The exemplar has a TOA (pages iii to iv). The template does not generate one: it would need page numbers per authority, which the markdown does not carry (the ca9 template's `toa:` links are not used here). The TOA is not required by W.D. Tex. CV-7 or CV-10.
 3. **Sample is an excerpt.** The Baker-factors passage ends with an ellipsis ("U.S. Const. art. I, § 4 …"): the exemplar's text continues past what was transcribed. Argument C's remainder, D and E, and the footnotes are not transcribed. The sample is 14 pages with the cover and contents; the filing is 22.
-4. **Footnotes.** The exemplar has footnotes (for example, the note on Administrator Adams's title and the note on Secretary Nelson's resignation). They are omitted from the sample. The template has no footnote rule; CV-10(a) requires 12 pt or larger for footnotes, which 13 pt satisfies, but the footnote layout is untested.
+4. **Footnotes.** The exemplar has footnotes (for example, the note on Administrator Adams's title and the note on Secretary Nelson's resignation). They are omitted from the sample. The template has no footnote rule; CV-10(a) requires 12 pt or larger for footnotes, which the 12 pt type size meets, but the footnote layout is untested.
 5. **Front matter numbering.** The exemplar numbers the cover and contents with Roman numerals (the TOC is page iii onward in the filing); the render numbers every page in Arabic. No rule requires either.
 6. **Justification.** Body text is left-aligned (ragged right). The exemplar's justification could not be read from the text layer; not asserted.
-7. **Font.** EB Garamond (vendored, OFL), 13 pt. The exemplar is Times New Roman 12 pt, but CV-10(a) names no face (it requires only "12-point or larger"), so no court-named substitute applies and EB Garamond is kept (`docs/FONTS.md`, "No face named"). Visual-only comparison with the exemplar's Times; not metric-compatible with it, so line breaks differ.
+7. **Font.** Times New Roman, 12 pt, as the exemplar. CV-10(a) names no face (it requires only "12-point or larger"); Times New Roman is the house standard (`docs/FONTS.md` rule 6). Before fb-595.68 the template was EB Garamond 13 pt, not metric-compatible with the exemplar's Times.
 8. **Headings.** Level 2 and 3 headings are single-spaced and kept with the text after them, which CV-10(a) allows for headings.
 9. **Page limit not counted.** CV-7(c)(2) sets 20 pages for this motion, excluding caption, signature and certificate. The template does not count; the sample's body is 11 pages.
 10. **Dated line.** The exemplar has no "Dated" line; its certificate carries the filing date ("on 12 June 2026"). The template prints a "Dated" line only if the frontmatter has a `date`, which this sample omits.
@@ -93,12 +93,12 @@ Reviewed pages: 14 of 14.
 
 ## Engines
 
-docx (`docx/`): `render.sh` runs pandoc in two passes with `reference.docx` (built by `build-reference.sh`) and `txwd-motion-brief.lua`, then patches the list definitions pandoc writes. Pass 1 renders the document with LibreOffice and finds each heading's page; pass 2 writes the table of contents with those page numbers. Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice). Opened and checked in LibreOffice only; Word was not checked.
+docx (`docx/`): `fb render --engine docx` builds the reference document from `docx/reference.xml` (`base="xengine"`, the shared cross-engine recipe in the typst template's face) and runs pandoc with `txwd-motion-brief.lua` in passes: the filter writes needles, fb render finds each heading's page in the LibreOffice PDF and renders again with the contents' page numbers. (Before fb-595.68, a two-pass `docx/render.sh` did this with a `reference.docx` from `build-reference.sh`; both are retired into fb render.) Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice). Opened and checked in LibreOffice only; Word was not checked.
 
-- Matches the typst form: EB Garamond 13 pt (embedded: EB Garamond Regular and Bold only), letter with 1 in margins, double spacing (exact 26 pt) and single (exact 15.6 pt) for the caption, headings, block quotations, signature and certificate, the cover title double-spaced, the caption as a borderless table, level 1 headings centred bold and levels 2 and 3 left bold, 0.5 in first-line indent, block quotation indented 0.5 in each side, signature table kept on one page, certificate of service after the signature, centred PAGE number, table of contents on its own page with dot leaders.
-- Differs: LibreOffice draws the glyphs at the bottom of each exact 26 pt line, so a page holds 24 lines (typst 25 to 26); both are 14 pages, with different breaks: in docx the signature block follows the prayer on page 13 and the certificate is on page 14; in typst the prayer is on page 13 and the signature block and certificate are on page 14. Margins are unchanged.
-- Table of contents: page numbers are the LibreOffice pagination from pass 1. Word may paginate a line differently, so a page number may be off by one in Word until the field is updated (`TOC \o "1-3"`, Update Field). The TOC has no hyperlinks.
-- Footnote text is 13 pt, single spaced. The sample has no footnotes, so this is not exercised.
+- Matches the typst form: Times New Roman 12 pt (embedded: Times New Roman Regular and Bold only), letter with 1 in margins, double spacing (exact 24 pt) and single (exact 14.4 pt) for the caption, headings, block quotations, signature and certificate, the cover title double-spaced, the caption as a borderless table, level 1 headings centred bold and levels 2 and 3 left bold, 0.5 in first-line indent, block quotation indented 0.5 in each side, signature table kept on one page, certificate of service after the signature, centred PAGE number, table of contents on its own page with dot leaders.
+- Differs (on the earlier EB Garamond 13 pt render, before fb-595.68): LibreOffice draws the glyphs at the bottom of each exact 26 pt line, so a page holds 24 lines (typst 25 to 26); both are 14 pages, with different breaks: in docx the signature block follows the prayer on page 13 and the certificate is on page 14; in typst the prayer is on page 13 and the signature block and certificate are on page 14. Margins are unchanged.
+- Table of contents: page numbers are the LibreOffice pagination fb render reads from its needles. Word may paginate a line differently, so a page number may be off by one in Word until the field is updated (`TOC \o "1-3"`, Update Field). The TOC has no hyperlinks.
+- Footnote text was 13 pt, single spaced, on the earlier EB Garamond build. The sample has no footnotes, so this is not exercised.
 - No table of authorities in the typst form, so none here.
 - `tools/check.sh` cannot run on a doc-type folder (no `checks.yaml`, `rules.md` or `court.json` here); no gate stamp.
 - BLOCKED: none.

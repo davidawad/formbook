@@ -34,7 +34,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../README.md) | [Status table](../../../STATUS.md)
@@ -49,10 +49,10 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 | Doc type | Face required by rule | Typst family | Substitute fit |
 |---|---|---|---|
-| `opening-brief` | None: NMCCA Rule 17(c) allows any 14-point proportional type (Times New Roman and Century Schoolbook are examples) | `EB Garamond` | n/a (no court-named face) |
+| `opening-brief` | None: NMCCA Rule 17(c) allows any 14-point proportional type (Times New Roman and Century Schoolbook are examples) | `Times New Roman` (Liberation Serif fallback; the house standard, `docs/FONTS.md` rule 6) | n/a (no court-named face) |
 | `answering-brief` | None (same rule, applies through Rule 18.4(a)) | `EB Garamond` | n/a |
 
-Details and the rule text: `opening-brief/README.md`, "Typeface". No LaTeX or DOCX engine exists in this court's folders yet.
+Details and the rule text: `opening-brief/README.md`, "Typeface". Both doc types have a typst and a docx engine (the docx in the typst face); no LaTeX engine exists yet.
 
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`

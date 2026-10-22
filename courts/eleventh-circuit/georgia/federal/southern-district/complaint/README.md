@@ -7,10 +7,10 @@ Folder: `courts/eleventh-circuit/georgia/federal/southern-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md`: full text of the 15-page complaint (caption, paragraphs 1 to 47, prayer, signature). Exhibits A to E are not transcribed. |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, `tools/render.sh`, Times New Roman (the pinned install, `docs/FONTS.md` rule 1), no typst warnings |
 | overlay | ok: `usage/OVERLAY-atlantic-casualty-complaint.pdf` and `usage/OVERLAY-atlantic-casualty-complaint.txt` (page map) |
-| typeface | face required: none named by the S.D. Ga. rules (LR 5.4, LR 10.1, LR 83.6; text checked 2026-10-14). Substitute: none; EB Garamond kept, since the court names no face (`docs/FONTS.md`). Fit: n/a |
-| pages reviewed | 8 of 8 (re-rendered and every page rasterized at 70 dpi and viewed on 2026-10-14) |
+| typeface | face required: none named by the S.D. Ga. rules (LR 5.4, LR 10.1, LR 83.6; text checked 2026-10-14). Times New Roman, the house face where no rule names one (`docs/FONTS.md` rule 6). Fit: n/a |
+| pages reviewed | 8 of 8 (re-rendered and every page rasterized at 70 dpi and viewed on 2026-10-14, on the earlier 8-page EB Garamond render) |
 
 File names: the brief asked for `usage/<id>.md`, `usage/<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` read and write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, so the tool names are used. `tools/` was not edited.
 
@@ -34,11 +34,11 @@ Not verified in this pass: FRCP 8(a) (the template does not check its content); 
 ### Currency of the local rules (for David to confirm)
 
 - The text above is the **June 2016** printable local rules. The court's website publishes a Notice of Opportunity for Comment (dated 2026-03-23) on proposed amendments with a comment period ending 2026-04-22. The proposed text (`SDGA_2026_Local_Rule_Proposed.pdf`) has a blank effective date. It was read but not confirmed as adopted. Its LR Civ. 3A (civil cover sheet) and LR Civ. 7 (brief length: 25 pages handwritten, 6,500 words typed) differ from the 2016 text; nothing in the complaint template depends on those.
-- No S.D. Ga. rule sets a typeface, type size, or margins. Checked 2026-10-14 against the 2016 text (extracted with `pdftotext`): LR 5.4 sets paper size only, LR 10.1 says "double-spaced, be numbered on each page", and LR 83.6 concerns attorney appearance. The proposed text has none in the parts read. The template uses EB Garamond at 12 pt and 1-inch margins, the usual practice and what the exemplar's filer uses: the exemplar is set in Times New Roman (`pdffonts`), which EB Garamond approximates; EB Garamond has a smaller x-height at 12 pt, so the text looks smaller than the exemplar. These values are choices, not rule-driven, and they are recorded as such in `typst/gasd-complaint.typ`.
+- No S.D. Ga. rule sets a typeface, type size, or margins. Checked 2026-10-14 against the 2016 text (extracted with `pdftotext`): LR 5.4 sets paper size only, LR 10.1 says "double-spaced, be numbered on each page", and LR 83.6 concerns attorney appearance. The proposed text has none in the parts read. The template uses Times New Roman at 12 pt (`docs/FONTS.md` rule 6) and 1-inch margins, the usual practice and what the exemplar's filer uses: the exemplar is set in Times New Roman (`pdffonts`). These values are choices, not rule-driven, and they are recorded as such in `typst/gasd-complaint.typ`.
 
 ## Layout
 
-- Letter paper, 1-inch margins, EB Garamond 12 pt, double-spaced (24 pt baseline pitch, from `body-leading = 1.35em`; single-spaced caption, quotations and signature).
+- Letter paper, 1-inch margins, Times New Roman 12 pt, double-spaced (24 pt baseline pitch, `pitch-body`; 13.8 pt lines, single-spaced caption, quotations and signature).
 - Court title in bold capitals (court name is a constant in the template; the division is from frontmatter). Caption: party column, a ")" column, and the file number on the right. Title in bold capitals, centered.
 - No counsel block on page 1 (the exemplar has none; LR 11.1 is met in the signature block).
 - Section headings (level 1) are centered bold capitals; count headings (level 2) are centered bold.
@@ -47,32 +47,32 @@ Not verified in this pass: FRCP 8(a) (the template does not check its content); 
 
 ## What the overlay shows
 
-`usage/OVERLAY-atlantic-casualty-complaint.pdf`: each page of our render in red, paired with the exemplar page sharing the most words (blue), multiplied, so text that agrees is black. The pairing is by word overlap, not by page index, and the page map is in the `.txt`. The overlay is a diagnostic, not a score: the exemplar's own page breaks differ from ours, so a red-only or blue-only line is often a line that moved, not a missing line. Word overlap per page is 48% to 79%.
+`usage/OVERLAY-atlantic-casualty-complaint.pdf` (run 2026-10-14 on the earlier EB Garamond render): each page of our render in red, paired with the exemplar page sharing the most words (blue), multiplied, so text that agrees is black. The pairing is by word overlap, not by page index, and the page map is in the `.txt`. The overlay is a diagnostic, not a score: the exemplar's own page breaks differ from ours, so a red-only or blue-only line is often a line that moved, not a missing line. Word overlap per page is 48% to 79%.
 
 ## Known gaps and open choices
 
 1. **One filer.** Tier 2 (conventions a clerk expects) was not judged against 2 or 3 filers. The S.D. Ga. search found other complaints with available PDFs (Byrd v. Bryan County Jail, 4:26-cv-00259, 8 pages; Davis v. Marta, 2:26-cv-00093, 39 pages); they were not saved, because the brief asks for one exemplar per doc type.
 2. **Typeface and margins are not rule-driven** (see Currency above).
 3. **Paragraph number position.** The exemplar centers each number on its own line; the template puts the number at the start of the first line (a common convention; the rules leave it open).
-4. **Layout at the end.** The WHEREFORE paragraph (¶ 47) stays at the foot of page 7 and the prayer and signature move to page 8, so the paragraph and its prayer are split across a page break. The prayer and signature are kept together (a signature never stands alone).
+4. **Layout at the end** (on the earlier 8-page EB Garamond render)**.** The WHEREFORE paragraph (¶ 47) stays at the foot of page 7 and the prayer and signature move to page 8, so the paragraph and its prayer are split across a page break. The prayer and signature are kept together (a signature never stands alone).
 5. **Exhibits** (A to E) are not transcribed or generated.
 6. **Italics.** The exemplar uses an italic face (`TimesNewRomanPS-ItalicMT`, `pdffonts`), so case names and signals are italic in the filing. The text layer does not say which words are italic, and no per-word font data was extracted, so the sample is roman. The template italicizes `*...*` if a sample uses it.
 7. **Search for a second filer** (done): CourtListener RECAP, `court=gasd`, `order_by=dateFiled desc`, complaints filed 2026-08 to 2026-10. The S.D. Ga. court site refuses non-browser downloads (HTTP 403 to curl), so the local rules were read from the copy retrieved through the fetch tool.
 
 ## Engines
 
-Typst (`typst/`) is the reference. The docx engine is `docx/`: `reference.docx` (rebuilt by `sh docx/make-reference.sh`) and `docx/gasd-complaint.lua`, which builds the cover, caption, lead-in, numbered paragraphs, lettered prayer and signature from the sample's frontmatter. Output: `usage/OUTPUT-complaint.docx`.
+Typst (`typst/`) is the reference. The docx engine is `docx/`: `reference.xml` (`fb render --engine docx` builds the reference document from it on the shared cross-engine recipe, `base="xengine"`, in the typst face, with its own "- N -" footer) and `docx/gasd-complaint.lua`, which builds the cover, caption, lead-in, numbered paragraphs, lettered prayer and signature from the sample's frontmatter. Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf`.
 
-- **Matches typst** (same settings in both templates): US Letter, 1-inch margins, EB Garamond 12 pt; double spacing as an exact 24 pt line pitch, 16.2 pt between paragraphs; single-spaced caption, quotations and signature; the caption as a borderless three-column table (3.1 in, 0.3 in, 3.1 in); "- N -" centered in the footer on every page, page 1 included; numbered paragraphs with a 0.5 in first-line indent; lettered prayer items "(a)" at 0.5 in with text at 0.9 in.
+- **Matches typst** (same settings in both templates): US Letter, 1-inch margins, Times New Roman 12 pt; double spacing as an exact 24 pt line pitch, 16.2 pt between paragraphs; single-spaced (13.8 pt) caption, quotations and signature; the caption as a borderless three-column table (3.1 in, 0.3 in, 3.1 in); "- N -" centered in the footer on every page, page 1 included; numbered paragraphs with a 0.5 in first-line indent; lettered prayer items "(a)" at 0.5 in with text at 0.9 in.
 - **Differs from typst**:
-  - Layout is **not verified**. This box has no LibreOffice, so no `.docx.pdf` was rendered and no page was looked at. Word and LibreOffice may paginate differently from the typst PDF.
+  - (Recorded before LibreOffice ran here; `usage/OUTPUT-complaint.docx.pdf` now exists.) Layout is **not verified**. This box had no LibreOffice, so no `.docx.pdf` was rendered and no page was looked at. Word and LibreOffice may paginate differently from the typst PDF.
   - The paragraph numbers ("1.", "2.") and the lettered items are typed text with a tab, not Word numbering, so they do not renumber when a paragraph is added.
   - Each paragraph of a quotation stays its own paragraph; typst runs a quotation into one paragraph.
   - A quotation's own lists keep Word's numbers ("1. Covered Property").
   - The signature block is kept together, but not with the last numbered paragraph before it (typst keeps the two together).
   - Headings are capitalized by the style (`w:caps`), so the text is as written in the sample.
-  - Word and LibreOffice need EB Garamond installed (vendored in `fonts/eb-garamond`); it is not embedded.
-- **docx BLOCKED**: the `.docx.pdf` gates (Gate 0 content, Gate 1 rules, Gate 2 page review, Gate 3 generalization, all measured on the LibreOffice PDF) cannot run. `soffice` is not installable here (no conda-forge package, no root), so `tools/render.sh --engine docx` stops after writing the `.docx`, and `tools/check.sh --engine docx` also needs the court's `checks.yaml`, which this court does not have yet. Word or LibreOffice opening the `.docx` without a repair prompt has not been checked. Pages reviewed for docx: 0.
+  - Word and LibreOffice need Times New Roman installed (`docs/FONTS.md` rule 1); it is not embedded.
+- **docx BLOCKED** (recorded before LibreOffice ran here; `usage/OUTPUT-complaint.docx.pdf` now exists, and `usage/.check-docx.txt` records a PASS): the `.docx.pdf` gates (Gate 0 content, Gate 1 rules, Gate 2 page review, Gate 3 generalization, all measured on the LibreOffice PDF) cannot run. `soffice` is not installable here (no conda-forge package, no root), so `tools/render.sh --engine docx` stops after writing the `.docx`, and `tools/check.sh --engine docx` also needs the court's `checks.yaml`, which this court does not have yet. Word or LibreOffice opening the `.docx` without a repair prompt has not been checked. Pages reviewed for docx: 0.
 
 [Formbook index](../../../../../../README.md) | [Federal courts in Georgia](../../README.md)
 

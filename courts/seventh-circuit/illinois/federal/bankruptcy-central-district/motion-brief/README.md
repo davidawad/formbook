@@ -56,7 +56,7 @@ Body: `#` is a centered bold section heading (I. INTRODUCTION, IV. CONCLUSION). 
 
 ## Overlay
 
-`usage/OVERLAY-reinbold-menard-motion-brief.pdf`: red is our render, blue is the filed Menard memorandum, black is where they agree. The page map (`.txt`) pairs our pages with the filed pages by shared words: our pages 1 to 10 pair with filed pages 1 to 10 (word overlap 44.5% to 86.2%); our page 11 pairs with filed page 12, our 12 with 13, 13 with 14, 14 with 15. So from page 11 on our pagination runs one page ahead of the filed copy in the overlay's reckoning. The differences that the overlay shows are tier 2 or tier 3: the typeface (EB Garamond against the filed copy's Arial), the page breaks (the filer's line and page breaks differ from ours), and the filed copy's own footer, "Page X of 15", where the template prints a centered page number. The filed copy also carries the CM/ECF header ("Case 19-08110 Doc 21 Filed ...") that the court system adds on filing, which the template does not generate.
+`usage/OVERLAY-reinbold-menard-motion-brief.pdf`: red is our render, blue is the filed Menard memorandum, black is where they agree. The page map (`.txt`) pairs our pages with the filed pages by shared words: our pages 1 to 10 pair with filed pages 1 to 10 (word overlap 44.5% to 86.2%); our page 11 pairs with filed page 12, our 12 with 13, 13 with 14, 14 with 15. So from page 11 on our pagination runs one page ahead of the filed copy in the overlay's reckoning. The differences that the overlay shows are tier 2 or tier 3: the typeface (measured on the earlier EB Garamond render: EB Garamond against the filed copy's Arial), the page breaks (the filer's line and page breaks differ from ours), and the filed copy's own footer, "Page X of 15", where the template prints a centered page number. The filed copy also carries the CM/ECF header ("Case 19-08110 Doc 21 Filed ...") that the court system adds on filing, which the template does not generate.
 
 ## Pages reviewed
 
@@ -70,7 +70,7 @@ Defects found and fixed during review:
 
 Pages reviewed: 14 of 14.
 
-Fonts pass, 2026-10-15: no court rule names a face, so the face stays EB Garamond (`pdffonts` on the new render: EBGaramond Regular, Bold, Italic, BoldItalic). Re-rendered with zero typst warnings and the overlay regenerated. Every page (1 to 14) was viewed at 60 dpi on the render made before the comment-only template edit; the final render has the same 14 pages and fonts.
+Fonts pass, 2026-10-15 (historical; the face is now Times New Roman, see ILCB-TYPE-1): no court rule names a face, so the face then stayed EB Garamond (`pdffonts` on the new render: EBGaramond Regular, Bold, Italic, BoldItalic). Re-rendered with zero typst warnings and the overlay regenerated. Every page (1 to 14) was viewed at 60 dpi on the render made before the comment-only template edit; the final render has the same 14 pages and fonts.
 
 ## Gaps
 

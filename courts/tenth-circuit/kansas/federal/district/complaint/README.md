@@ -7,7 +7,7 @@ Folder: `courts/tenth-circuit/kansas/federal/district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md`: the whole filing, 14 pages, transcribed (no paragraph numbers; the template numbers them) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 14 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Bold, -Italic), no warnings (`tools/render.sh`) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 14 pages, typst 0.15.0, vendored Liberation Serif only (on the earlier Liberation Serif template; now Times New Roman) (`pdffonts`: LiberationSerif, -Bold, -Italic), no warnings (`tools/render.sh`) |
 | overlay | fail: `tools/overlay.sh` exits 1, "no exemplar pdf": `usage/` holds no `SAMPLE-*.pdf` in this snapshot. `usage/OVERLAY-jenkins-complaint.txt` is left from the EB Garamond render and is stale; no `.pdf` overlay exists |
 | pages reviewed | 14 of 14: every page rendered at 70 dpi and viewed after the Liberation Serif change (fonts pass) |
 
@@ -17,7 +17,7 @@ Folder: `courts/tenth-circuit/kansas/federal/district/complaint/`.
 |---|---|---|
 | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number and the Rule 7(a) designation; the title of a complaint names all the parties. Source: https://www.law.cornell.edu/rules/frcp/rule_10 (text checked 2026-10-14). | `court-title()`, `caption()`, `cover()`. The file number is `case_number`; when it is empty the caption prints a blank line, as the filed copy does. |
 | Fed. R. Civ. P. 10(b) | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. Same source. | `allegations()`: each body paragraph is numbered from 1; headings and lists are not. |
-| D. Kan. R. 5.1(a) | Papers are letter-size, double-spaced, in no less than 12-point (10-point for footnotes), "Times New Roman or similar," uncompressed font. Source: https://www.ksd.uscourts.gov/sites/ksd/files/MASTER%20COPY%20updated%204%2027%2026.pdf (the Rules of Practice, "As amended 4/1/26"; text checked 2026-10-14). | `page` (US Letter), `double-leading` (27.6 pt pitch, measured on page 2 of the render with `pdftotext -bbox`), `type-size` 12 pt, `footnote-size` 12 pt, `font-family` "Liberation Serif" (the docs/FONTS.md substitute for Times New Roman; metric-compatible). |
+| D. Kan. R. 5.1(a) | Papers are letter-size, double-spaced, in no less than 12-point (10-point for footnotes), "Times New Roman or similar," uncompressed font. Source: https://www.ksd.uscourts.gov/sites/ksd/files/MASTER%20COPY%20updated%204%2027%2026.pdf (the Rules of Practice, "As amended 4/1/26"; text checked 2026-10-14). | `page` (US Letter), `double-leading` (27.6 pt pitch, measured on page 2 of the render with `pdftotext -bbox`), `type-size` 12 pt, `footnote-size` 12 pt, `font-family` ("Times New Roman", "Liberation Serif") (the named face; Liberation Serif, metric-compatible, the fallback per docs/FONTS.md). |
 | D. Kan. R. 5.1(b)(1) | Signature block gives the signer's name, address, telephone, facsimile and email. | `signature-block()` prints every line the sample gives. The facsimile line is not asserted (see Known gaps). |
 | D. Kan. R. 5.1(b)(2) | Attorneys include their state supreme court registration number (or the equivalent outside Kansas). | Author content in the signature lines (the filed copy shows "KS Bar No."). |
 | D. Kan. R. 3.1 | A civil cover sheet must accompany a complaint. | Not produced here: a separate filing (see Known gaps). |
@@ -33,7 +33,7 @@ Not produced by this template: the civil cover sheet (D. Kan. R. 3.1), the summo
 - Headings: level 1 centered bold capitals (unnumbered); level 2 bold, Roman numerals I., II., ... with a hanging number; level 3 centered bold (a count subtitle).
 - Lists: lettered (a), (b), ... (the markdown `1.` items become letters).
 - A level 1 heading starting with PRAYER or JURY stops the paragraph numbering: the prayer, the WHEREFORE paragraph and the jury demand are not allegations and are not numbered.
-- Typeface: Liberation Serif, 12 pt. D. Kan. R. 5.1(a) names "Times New Roman or similar"; `docs/FONTS.md` maps Times New Roman to Liberation Serif (metric-compatible). EB Garamond is not used here.
+- Typeface: Times New Roman, 12 pt (Liberation Serif, metric-compatible, the declared fallback), typst and docx alike. D. Kan. R. 5.1(a) names "Times New Roman or similar". EB Garamond is not used here.
 - Footnotes: 12 pt, single-spaced, with a short rule above them.
 - Signature block: "DATED:" on the left; "Respectfully submitted," and the party line; "/s/" signer; the lines given in the frontmatter, single-spaced, kept on one page.
 - Page number centered at the foot of every page, including the first.
@@ -61,7 +61,7 @@ A sample is one `.md` file: YAML frontmatter, then the body.
 ## Known gaps and open choices
 
 1. **One exemplar.** The search found two more complaints in the same court (Douglas, 21 pages; Worthington, 56 pages), not saved. Tier 2 would be judged against 2 or 3 filers; with one exemplar the tier-2 judgment is single-filer.
-2. **Font (resolved by the fonts pass).** D. Kan. R. 5.1(a) names "Times New Roman or similar", so the template uses Liberation Serif, the `docs/FONTS.md` substitute (metric-compatible), in place of EB Garamond. The render is still 14 pages, the same count as the filed copy. The filed copy is not in this snapshot, so the visual match to it was not re-checked.
+2. **Font (resolved by the fonts pass).** D. Kan. R. 5.1(a) names "Times New Roman or similar", so the template then used Liberation Serif, the `docs/FONTS.md` substitute (metric-compatible), in place of EB Garamond; it now sets Times New Roman first, Liberation Serif as the fallback (the page counts below were measured on the Liberation Serif render). The render is still 14 pages, the same count as the filed copy. The filed copy is not in this snapshot, so the visual match to it was not re-checked.
 3. **Margins.** The D. Kan. rules set no margin. One inch was chosen; the exemplar's margins were not measured (measuring them would be a coordinate-based template, which the rules forbid).
 4. **Prayer lettering.** The filed copy letters the prayer A., B., C.; the template letters every list a., b., c. (one lettering style for all lists). Tier-2 difference, not a rule.
 5. **Facsimile number.** D. Kan. R. 5.1(b)(1)(D) lists the facsimile number as a required part of the signature block. The filed copy has none, and the sample has none, so the template does not assert it. A sample for a filer who has a fax line puts it in `signature.lines`.
@@ -100,7 +100,7 @@ Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/
 
 ## Engines
 
-**docx** (`docx/reference.docx`, `docx/ksd-complaint.lua`): pandoc with the reference and the filter; the caption, numbered paragraphs, lettered lists, headings, signature block and footer page number are Word paragraphs in `Ksd ...` styles. Matches the typst template: Liberation Serif 12 pt, exact 27.6 pt double spacing, letter paper, 1 in margins, 0.5 in first-line indent, centered page number, PRAYER/JURY headings unnumbered.
+**docx** (`docx/reference.docx`, `docx/ksd-complaint.lua`): pandoc with the reference and the filter; the caption, numbered paragraphs, lettered lists, headings, signature block and footer page number are Word paragraphs in `Ksd ...` styles. Matches the typst template: Times New Roman 12 pt (the typst face), exact 27.6 pt double spacing, letter paper, 1 in margins, 0.5 in first-line indent, centered page number, PRAYER/JURY headings unnumbered.
 
 Differs from typst: no ")" column in the caption (the party lines are stacked and the case number sits below them); no pagination guarantee (Word and LibreOffice may break lines differently); the lead-in and body are the same text as typst.
 

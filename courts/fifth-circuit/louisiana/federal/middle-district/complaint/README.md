@@ -7,10 +7,10 @@ Folder: `courts/fifth-circuit/louisiana/federal/middle-district/complaint/`. Cou
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one counsel-filed complaint; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (the whole 5-page filing, transcribed) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 5 pages, `tools/render.sh`, typst 0.15.0, vendored EB Garamond only, no typst warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 5 pages, `tools/render.sh`, typst 0.15.0, pinned Times New Roman only, no typst warnings |
 | overlay | ok: `usage/OVERLAY-parker-complaint.pdf` and `usage/OVERLAY-parker-complaint.txt` (`tools/overlay.sh`, page map below). The exemplar PDF is not in this snapshot; the overlay ran against a fresh copy from the CourtListener URL in `usage/SOURCE.md` (5 pages, Document 1, 12/31/25 stamp, checked) |
-| typeface | face required: **none** (LR 10(a)(1): "standard 12-point typeface"). Font kept: **EB Garamond** (no substitute: the rule names no face). Fit: n/a. See Known gaps 2 |
-| pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed after the last template change; re-checked on the fonts pass, 2026-10-14, no change to the template) |
+| typeface | face required: **none** (LR 10(a)(1): "standard 12-point typeface"). Font: **Times New Roman** 12 pt (the pinned install, `docs/FONTS.md` rule 1; Liberation Serif fallback), the house standard (`docs/FONTS.md` rule 6). Fit: n/a. See Known gaps 2 |
+| pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed after the last template change; re-checked on the fonts pass, 2026-10-14, no change to the template; the earlier EB Garamond render, before fb-595.68) |
 | gates | `tools/check.sh` and `tools/check-selftest.sh` not run: they expect a court folder with `court.json` and `rules.md`, and the brief forbids touching `tools/`. No `court.json` or stamp written. |
 
 File names: the brief names `usage/<id>.md` and `usage/<id>-overlay.pdf`. The tools use `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (CLAUDE.md: "The tools read and write these names by default"), so the tool names are used.
@@ -21,7 +21,7 @@ Primary source: M.D. La. Local Civil Rules, "2022 Local Rules" (effective 2022-0
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| LR 10(a)(1) | 8½ × 11 paper, numbered sequentially, typeface no smaller than standard 12-point, double spaced, margins no less than 1 inch, nothing printed in the margins except page numbers, page numbers no less than ½ inch from the bottom. Footnotes may be 10-point; quotations and footnotes may be single spaced. | `page-w`/`page-h`, `type-size = 12pt`, `margin = 1in`, `body-leading = 1.35em` (24 pt pitch), `footer-descent = 0.6in`, `page-footer()`. No block quotations in this doc type; a `>` line in the markdown is an unnumbered paragraph (the jurisdiction statement, the WHEREFORE lead-in). |
+| LR 10(a)(1) | 8½ × 11 paper, numbered sequentially, typeface no smaller than standard 12-point, double spaced, margins no less than 1 inch, nothing printed in the margins except page numbers, page numbers no less than ½ inch from the bottom. Footnotes may be 10-point; quotations and footnotes may be single spaced. | `page-w`/`page-h`, `type-size = 12pt`, `margin = 1in`, `pitch-body = 24pt`, `footer-descent = 15pt`, `page-footer()`. No block quotations in this doc type; a `>` line in the markdown is an unnumbered paragraph (the jurisdiction statement, the WHEREFORE lead-in). |
 | LR 10(a)(2) | After allotment, the caption shows the initials of the district judge and the magistrate judge (example `10-CV-292-JVP-SCR`). | `civil_action_no` + `judges` in the frontmatter build the file number; `judge`/`magistrate` lines are optional. |
 | LR 10(a)(3) | Civil Cover Sheet accompanies the initial pleading. | Not produced here (separate filing). |
 | LR 10(a)(4) | Civil complaints are accompanied by a separately filed, signed certificate of interested persons. | Not produced here (separate filing). The complaint itself is not required to carry it. |
@@ -44,13 +44,13 @@ Not checked by the template: the wording of counts, whether a jury demand is mad
 - Page numbers: centered, in the bottom margin, ½ inch or more from the bottom edge.
 - Ragged right (no justification). The exemplar's justification could not be read from its text layer.
 
-## Measured (render)
+## Measured (render; the earlier EB Garamond render, before fb-595.68)
 
 - Body baseline pitch: 24.0 pt (measured from `pdftotext -bbox` on page 2; line pitch of double-spaced body text). Paragraph spacing is set equal to the pitch: with spacing 0 consecutive paragraphs overprinted (found on the first render, fixed).
 - Page 1: court name at top margin; caption rows single spaced; file number `CIVIL ACTION NO. 3:25-cv-01162-SDD-EWD` on one line (the first render wrapped it; the party column is 2.7 in; checked with `pdftotext -bbox`, pages 2 to 5 unchanged by that edit).
 - Text area 6.5 × 9 in; 27 double-spaced lines per full page.
 
-## Overlay (red = ours, blue = filed; pages paired by word overlap)
+## Overlay (red = ours, blue = filed; pages paired by word overlap; the earlier EB Garamond render, before fb-595.68)
 
 From `usage/OVERLAY-parker-complaint.txt`:
 
@@ -62,9 +62,9 @@ ours p.4  filed p.4  word-overlap 36.6%
 ours p.5  filed p.5  word-overlap 56.6%
 ```
 
-The overlay is a diagnostic, not a score. Differences seen: the filed caption and body are Times New Roman, ours is EB Garamond, so glyph shapes and widths differ on every page. Page breaks differ: the filed page 4 ends in paragraph 22 and filed page 5 starts with the damages bullets; ours page 4 ends after the WHEREFORE paragraph and page 5 starts with the prayer list (kept with the signature). That is why page 4 pairs at only 36.6%.
+The overlay is a diagnostic, not a score. Differences seen: the filed caption and body are Times New Roman, ours was then EB Garamond (Times New Roman since fb-595.68), so glyph shapes and widths differed on every page. Page breaks differ: the filed page 4 ends in paragraph 22 and filed page 5 starts with the damages bullets; ours page 4 ends after the WHEREFORE paragraph and page 5 starts with the prayer list (kept with the signature). That is why page 4 pairs at only 36.6%.
 
-## Gate 2 review (every page of the current PDF, viewed at 60 dpi)
+## Gate 2 review (every page of the earlier EB Garamond PDF, before fb-595.68, viewed at 60 dpi)
 
 | Page | Exemplar page | Finding | Status |
 |---|---|---|---|
@@ -79,7 +79,7 @@ Tier-2 conventions (judged against the one exemplar available; see Known gaps): 
 ## Known gaps and open choices
 
 1. **One exemplar only.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The RECAP search (`court=lamd`, document search for "COMPLAINT", many queries) found one counsel-filed complaint with a PDF: Parker (this exemplar). `Verdin` (3:25-cv-00658, amended complaint, Document 43, 12 pages, Arial) has no counsel named on the docket entry; it was not saved. The CourtListener API rate limit (5 requests/minute) cut the search short. Tier 2 is therefore **not** judged against two filers for this doc type. A second counsel-filed MDLA complaint should be sought before the doc type is called done.
-2. **Font (resolved on the fonts pass, 2026-10-14).** LR 10(a)(1) requires "standard 12-point typeface" (checked in the 2022 Local Rules PDF with `pdftotext -layout`, LR 10(a)(1)); it names no face, so `docs/FONTS.md` gives no substitute and the template keeps EB Garamond. The filed exemplar is Times New Roman, a filer's choice that the rule does not require; that difference is tier 3 and is not chased. EB Garamond at 12 pt has a smaller x-height than Times, so the text looks smaller than the exemplar; the point size meets the rule. `pdffonts` on the render: EB Garamond Regular and Bold only, embedded.
+2. **Font.** LR 10(a)(1) requires "standard 12-point typeface" (checked in the 2022 Local Rules PDF with `pdftotext -layout`, LR 10(a)(1)); it names no face, so the house standard applies (`docs/FONTS.md` rule 6): Times New Roman 12 pt, the filed exemplar's face too. The fonts pass of 2026-10-14 had kept EB Garamond, whose smaller x-height made the text look smaller than the exemplar; it gave way to Times New Roman in fb-595.68. `pdffonts` on the committed render: Times New Roman Regular and Bold only, embedded.
 3. **Second structurally different sample not made.** EVAL-LOOP Gate 3 asks for a second, fictional sample. The brief asks for one transcription per doc type; not done.
 4. **Certificate of interested persons (LR 7.1, LR 10(a)(4)).** Required with the complaint; not produced by this template (separate filing).
 5. **Judge initials.** The sample carries `SDD`/`EWD` as the allotted initials. The exemplar header shows them; the caption in the exemplar leaves the JUDGE lines blank. The template prints the judge lines only when the frontmatter gives them.
@@ -91,9 +91,9 @@ Tier-2 conventions (judged against the one exemplar available; see Known gaps): 
 
 ### docx (`docx/`)
 
-Files: `docx/reference.docx` (built by `sh docx/build-reference.sh <out.docx>`) and `docx/lamd-complaint.lua` (the cover, caption table, numbered paragraphs, prayer list and signature block, built from the sample's frontmatter as `typst/lamd-complaint.typ` does). `tools/render.sh --engine docx` writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.2, headless). Word was not run here.
+Files: `docx/reference.xml` (the shared cross-engine recipe in the typst template's face, from which `fb render --engine docx` builds the reference document) and `docx/lamd-complaint.lua` (the cover, caption table, numbered paragraphs, prayer list and signature block, built from the sample's frontmatter as `typst/lamd-complaint.typ` does). `sh tools/render.sh --engine docx` writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice, headless). Word was not run here.
 
-- Matches the typst form: EB Garamond 12 pt in every body, heading and caption style (`pdffonts` on the `.docx.pdf`: EB Garamond Regular and Bold, embedded; no theme or system face in the Latin text), exact 24 pt line pitch, 1 in margins, letter, centered PAGE number 0.6 in from the bottom edge, court name, caption (party column, `CIVIL ACTION NO.` with judge initials), bold centered title, centered caps section headings, centered bold count headings, bold left sub-headings, first-line indent, numbered paragraphs, the prayer list kept with the signature block. 5 pages, as the typst render.
-- Differs from typst: the paragraph numbers and bullets are typed text (`1.` then a tab), not Word auto-numbering, so Word does not renumber them if paragraphs are inserted; the caption is a borderless table; in LibreOffice an exact 24 pt line places the extra leading above the glyphs, so the first line of each page sits lower than in the typst render (about 11 pt by `pdftotext -bbox`). Pagination of the 5-page sample matches; Word may paginate differently (`docs/DOCX.md`).
+- Matches the typst form: Times New Roman 12 pt in every body, heading and caption style (`pdffonts` on the committed `.docx.pdf`: Times New Roman Regular and Bold, embedded, no other face), exact 24 pt line pitch, 1 in margins, letter, centered PAGE number 0.6 in from the bottom edge, court name, caption (party column, `CIVIL ACTION NO.` with judge initials), bold centered title, centered caps section headings, centered bold count headings, bold left sub-headings, first-line indent, numbered paragraphs, the prayer list kept with the signature block. 5 pages, as the typst render.
+- Differs from typst: the paragraph numbers and bullets are typed text (`1.` then a tab), not Word auto-numbering, so Word does not renumber them if paragraphs are inserted; the caption is a borderless table; in LibreOffice an exact 24 pt line places the extra leading above the glyphs, so the first line of each page sits lower than in the typst render (about 11 pt by `pdftotext -bbox`, measured on the earlier EB Garamond render). Pagination of the 5-page sample matches; Word may paginate differently (`docs/DOCX.md`).
 - BLOCKED: none known for tier 1 (font, size, spacing, margins, page numbers, caption, headings).
 - Gates: `tools/check.sh <court-dir> --engine docx` could not run on this folder: it reads `court.json` and `checks.yaml` at the court root, and this snapshot has no `checks.yaml`. Gate results are therefore not recorded here; the page review is in the PR description.

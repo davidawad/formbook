@@ -7,10 +7,10 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/adver
 |---|---|
 | exemplar | **yes, 2 filed exemplars from 2 filers**, both text-based RECAP copies of Doc. 1: `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (Murrell Law Firm for Pull-A-Part, LLC; filed 08/13/2019; 5 pp) and `usage/FILED-EXAMPLE-adversary-complaint.pdf` (Grand Law Firm for Sinarta Criss; filed 03/16/2018; 2 pp). Sources, searches and rejected candidates (two scanned PDFs, several unavailable) are in `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-adversary-complaint.md`: **fictitious**. Mirrors the two exemplars' structure (unnumbered opening paragraph, numbered allegations, unnumbered WHEREFORE, counsel signature). No text is taken from either filing. |
-| typeface | Rule names **no face**: LR 5005-2(b) requires "12-point font and be double-spaced" (2022 local rules, read from the court's PDF 2026-10-14). Keeps **EB Garamond** (vendored, OFL). Not a substitute case: no court-named face in `docs/FONTS.md`. Both exemplars are in Times (Word export); the choice stays EB Garamond per `docs/FONTS.md` ("no face named"). |
-| render | ok (2026-10-15): `sh tools/render.sh` exit 0, no warnings, `usage/OUTPUT-adversary-complaint.typst.pdf`, **4 pages**, letter, typst 0.15.0; `pdffonts`: EBGaramond-Regular, -Bold, -Italic, all embedded. Body pitch 31.32 pt (see LAMB-FORM-003). |
+| typeface | Rule names **no face**: LR 5005-2(b) requires "12-point font and be double-spaced" (2022 local rules, read from the court's PDF 2026-10-14). Set in **Times New Roman** 12 pt (the pinned install, `docs/FONTS.md` rule 1; Liberation Serif fallback), the house standard where no face is named (`docs/FONTS.md` rule 6); both exemplars are in Times (Word export) too. Until fb-595.68 the template kept EB Garamond. |
+| render | ok (2026-10-15, the earlier EB Garamond render, before fb-595.68; the committed render is 5 pages, Times New Roman): `sh tools/render.sh` exit 0, no warnings, `usage/OUTPUT-adversary-complaint.typst.pdf`, **4 pages**, letter, typst 0.15.0; `pdffonts`: EBGaramond-Regular, -Bold, -Italic, all embedded. Body pitch 31.32 pt (see LAMB-FORM-003). |
 | overlay | ok (2026-10-15): `sh tools/overlay.sh $D adversary-complaint-sample $D/usage/SAMPLE-hoven-19-01027-adversary-complaint.pdf` exit 0; `usage/OVERLAY-adversary-complaint-sample.pdf` (4 pages) and `.txt`. Compared against Hoven (the longer exemplar). The default (no third argument) picks the first file in `usage/` by name, which is Criss. |
-| pages reviewed | **4 of 4** of `OUTPUT-adversary-complaint.typst.pdf` rasterised with `pdftoppm -r 60` and viewed on 2026-10-15; **4 of 4** of `OVERLAY-adversary-complaint-sample.pdf` viewed at the same resolution. Findings in the visual review table below. |
+| pages reviewed | **4 of 4** of `OUTPUT-adversary-complaint.typst.pdf` rasterised with `pdftoppm -r 60` and viewed on 2026-10-15 (the earlier EB Garamond render, before fb-595.68); **4 of 4** of `OVERLAY-adversary-complaint-sample.pdf` viewed at the same resolution. Findings in the visual review table below. |
 
 File names. The brief asks for `usage/<id>.md`, `usage/<id>.pdf` and `<id>-overlay.pdf`. The repo tools read and write `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf/.txt`, and `tools/` is not to be edited, so the tool names are used.
 
@@ -22,8 +22,8 @@ Primary sources, verified 2026-10-14. Text was read from the court's own PDF or 
 |---|---|---|---|
 | LAMB-FORM-001 | LR 5005-2(a) (2022 Local Rules, amended Jan. 1, 2022: https://www.lamb.uscourts.gov/sites/lamb/files/2022_Local_Rules.pdf) | Documents are sized 8½ × 11 inches for filing. | `page` in `typst/lamb-adversary-complaint.typ`. |
 | LAMB-FORM-002 | LR 5005-2(b) | 12-point font, double-spaced, for all documents except pro se parties. | `type-size = 12pt`; all text, headings, caption and footer at 12 pt. |
-| LAMB-FORM-003 | LR 5005-2(b) | Double-spaced. | `body-leading = 1.305em`: double = twice the single line pitch of EB Garamond at 12 pt. The natural single pitch is 1.305 em (measured with zero leading: 15.66 pt), so the extra leading equals one natural line and the baseline pitch is 31.32 pt (checked with `pdftotext -bbox-layout`). The earlier value (0.7 em, 24.06 pt pitch) was a calibration to a number, not to double spacing; a page rendered at that pitch looked like about 1.7 spacing next to the exemplar. |
-| LAMB-FORM-004 | Fed. R. Bankr. P. 9004(a) (legibility; https://www.law.cornell.edu/rules/frbp/rule_9004) | Clearly legible. | Vendored EB Garamond, 12 pt; no font fallback (`fallback: false`). |
+| LAMB-FORM-003 | LR 5005-2(b) | Double-spaced. | `pitch-body = 31.3pt` (and the docx Body Text, 626 twips): the pitch was set, on the earlier EB Garamond template, as twice EB Garamond's natural single pitch at 12 pt (15.66 pt, measured with zero leading; 31.32 pt checked with `pdftotext -bbox-layout`), and kept when the face became Times New Roman. The earlier value (0.7 em, 24.06 pt pitch) was a calibration to a number, not to double spacing; a page rendered at that pitch looked like about 1.7 spacing next to the exemplar. |
+| LAMB-FORM-004 | Fed. R. Bankr. P. 9004(a) (legibility; https://www.law.cornell.edu/rules/frbp/rule_9004) | Clearly legible. | Pinned Times New Roman, 12 pt; no font fallback (`fallback: false`). |
 | LAMB-CAP-001 | Fed. R. Bankr. P. 7010 (applies Fed. R. Civ. P. 10; caption must substantially conform to Official Form 416) (https://www.law.cornell.edu/rules/frbp/rule_7010) | Caption with court, title, parties, case and adversary numbers. | `caption(meta)`: court name, debtor "In re:", plaintiff and defendants, case no., chapter, adversary no. |
 | LAMB-CONT-001 | Fed. R. Bankr. P. 7008(a) (https://www.law.cornell.edu/rules/frbp/rule_7008) | The jurisdiction allegation names the case, its number and Code chapter, and the district and division; the complaint states whether the pleader does or does not consent to final orders by the bankruptcy court. | The template panics unless the body contains the word "consent". Author writes the statement (see sample ¶¶ 3-5). |
 | LAMB-CONT-002 | Fed. R. Civ. P. 10(b), applied by FRBP 7010 | Claims in numbered paragraphs, each limited as far as practicable to one set of circumstances. | Every body paragraph is numbered by the template (`numbered()`); headings and the `WHEREFORE` lead-in are not. |
@@ -65,13 +65,13 @@ sh tools/render.sh $D usage/INPUT-adversary-complaint.md        # -> usage/OUTPU
 sh tools/overlay.sh $D adversary-complaint-sample $D/usage/SAMPLE-hoven-19-01027-adversary-complaint.pdf
 ```
 
-Render (2026-10-15): `pdfinfo` reports 4 pages, us-letter. `pdffonts` lists EBGaramond-Regular, -Bold and -Italic only, all embedded. `render.sh` exits 0 with no typst output.
+Render (2026-10-15, the earlier EB Garamond render, before fb-595.68): `pdfinfo` reports 4 pages, us-letter. `pdffonts` lists EBGaramond-Regular, -Bold and -Italic only, all embedded. `render.sh` exits 0 with no typst output.
 
-Body-line pitch on page 2: 31.32 pt between every pair of body lines (`pdftotext -bbox-layout`).
+Body-line pitch on page 2 (same render): 31.32 pt between every pair of body lines (`pdftotext -bbox-layout`).
 
 The overlay PDF's page size is 240.9 × 311.8 pt, not letter. That comes from `tools/overlay.sh` rasterising at 100 dpi and writing the PNGs back out with `magick -density`; it is a property of the diagnostic, not of the sample, and the OUTPUT PDF is letter.
 
-## Visual review (Gate 2 record, 2026-10-15, 60 dpi, every page viewed)
+## Visual review (Gate 2 record, 2026-10-15, 60 dpi, every page viewed; the earlier EB Garamond render, before fb-595.68)
 
 Sample (`OUTPUT-adversary-complaint.typst.pdf`, 4 pages):
 
@@ -104,15 +104,15 @@ Exemplar layout checked on the same pages (60 dpi): both exemplars use an unnumb
 | Dated line: `Dated: [date]` vs "... this __ day of __" | Hoven has the sentence form; Criss has no date | **Kept** the template's `Dated:` line. One exemplar each way. |
 | Number placement (indent vs centred) | Hoven centred above the text; Criss indented | **Kept** the indent. Tier 3 (one filer's style). |
 | Section headings | Neither exemplar uses headings | **Kept** the template's heading support (rules do not forbid headings); the sample uses none, to match the exemplars. |
-| Length | Exemplars are 5 and 2 pages | Sample is 4 pages; not padded. |
+| Length | Exemplars are 5 and 2 pages | Sample is 4 pages (the earlier EB Garamond render; the committed render is 5); not padded. |
 | Caption bounding rules | Hoven: a full-width rule under the caption; Criss: rules under both columns | **Kept**: the rule at the left column's right and bottom, as in Form 416. |
 
 ## Known gaps and open choices
 
 1. **Exemplars are short and old.** Two filings (5 pp, 2 pp; 2018 and 2019), from two filers, both text. They settle the opening-paragraph convention, the numbering, the caption and the signature block. They do not show the 2022 rules' consent statement or the B1040 cover sheet (both predate them).
-2. **Length.** 4 pages, not the 8-14 pages of the brief's length rule. The brief sets that range only when the exemplar is that long; these exemplars are 5 and 2 pages. The sample is as long as its structure needs and is not padded.
+2. **Length.** 4 pages on the earlier EB Garamond render (the committed render is 5), not the 8-14 pages of the brief's length rule. The brief sets that range only when the exemplar is that long; these exemplars are 5 and 2 pages. The sample is as long as its structure needs and is not padded.
 3. **Opening paragraph.** Unnumbered (changed 2026-10-15 to match both exemplars; see the tier-2 table).
-4. **Font.** EB Garamond at 12 pt (vendored, OFL), not Times New Roman. LR 5005-2(b) names a size only, no typeface (read from the court's 2022 PDF on 2026-10-14); the Administrative Procedures Manual was not read. The 12-point size is met; the x-height is smaller than Times at 12 pt, so the text looks smaller than a Times filing.
+4. **Font.** Times New Roman at 12 pt (the pinned install; Liberation Serif fallback), the house standard (`docs/FONTS.md` rule 6). LR 5005-2(b) names a size only, no typeface (read from the court's 2022 PDF on 2026-10-14); the Administrative Procedures Manual was not read. The 12-point size is met. Until fb-595.68 the template kept EB Garamond, whose smaller x-height made the text look smaller than a Times filing.
 5. **Consent and jurisdiction wording.** The template only checks the word "consent". The wording of the FRBP 7008(a) statement and the core/non-core designation are not verified against any filing and are the author's responsibility.
 6. **Standing Order 2026-1 cover sheet (B1040)** is not generated; see LAMB-FILE-001. It is needed with every original complaint on or after March 1, 2026.
 7. **Caveat on the source.** The local rules were read from the court's 2022 PDF (amended January 1, 2022). A search result mentions Standing Order 2024-2, which amends LR 4001-1(f) and points to LR 9013-5 for proposed orders. Other amendments after 2022 were not checked against the court's current posting, because the court site is blocked from this box. Check the current rules before relying on this template.
@@ -121,9 +121,9 @@ Exemplar layout checked on the same pages (60 dpi): both exemplars use an unnumb
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh`, `reference.docx`, `lamb-adversary-complaint.lua`; `usage/OUTPUT-adversary-complaint.docx` is written by `sh tools/render.sh --engine docx`).
+DOCX (`docx/`: `reference.xml`, `lamb-adversary-complaint.lua`): `fb render --engine docx` (via `sh tools/render.sh --engine docx`) builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst template's face), then runs pandoc with the filter and writes `usage/OUTPUT-adversary-complaint.docx`.
 
-- Matches the typst form: EB Garamond 12 pt, exact 24 pt (double) line pitch, 1 in margins on letter, centred PAGE number in the footer, Form 416 caption with a rule at the right and bottom of the left cell, centred court name and title, `(a)` lettered prayer, signature block with `Dated:` on the left.
+- Matches the typst form: Times New Roman 12 pt, exact 31.3 pt (double) line pitch, 1 in margins on letter, centred PAGE number in the footer, Form 416 caption with a rule at the right and bottom of the left cell, centred court name and title, `(a)` lettered prayer, signature block with `Dated:` on the left.
 - Differs: paragraph numbers ("1.", "2.") and "(a)" letters are typed text generated by the filter, not Word list numbering, so they do not renumber if a paragraph is inserted by hand in Word. Pagination follows the renderer (Word and LibreOffice can break lines differently).
 - Frontmatter fields are checked by the filter (same list as typst); the `consent` check (LAMB-CONT-001) is the same.
 - Not run here: no LibreOffice on this box, so no `.docx.pdf` and no page was viewed. `OUTPUT-adversary-complaint.docx` was validated only as a zip with well-formed XML parts (see the render output).

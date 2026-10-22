@@ -89,7 +89,7 @@ Typst is the primary engine (`typst/`). The docx engine is in `docx/`. There is 
 
 | Path | What |
 |---|---|
-| `docx/make-reference.sh` | Builds `docx/reference.docx` with the shared recipe `lib/docx/xengine-reference.sh`: Times New Roman 12 pt, 24 pt exact body pitch, 14 pt single lines, letter paper, 1 in margins, a centered PAGE field in a 14 pt line. |
+| `docx/reference.xml` | The Word styles; `fb render --engine docx` builds the reference document from it on the shared cross-engine recipe (`base="xengine"`, `tools/fb/src/docxxengine.rs`): Times New Roman 12 pt, 24 pt exact body pitch, 14 pt single lines, letter paper, 1 in margins, a centered PAGE field in a 14 pt line. |
 | `docx/cit-complaint.lua` | Pandoc filter: the cover and caption (a borderless table with the ")" column), numbered allegations, lettered list items (a), (b), ..., the signature block. |
 | `usage/OUTPUT-complaint.docx` | `sh tools/render.sh --engine docx courts/federal-circuit/court-of-international-trade/complaint usage/INPUT-complaint.md` (writes the `.docx` and the `.docx.pdf`). |
 | `usage/OUTPUT-complaint.docx.pdf` | LibreOffice 26.8.1 conversion (10 pages). Fonts embedded: Times New Roman only (`pdffonts`). |

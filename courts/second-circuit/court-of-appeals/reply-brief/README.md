@@ -27,7 +27,7 @@ Verified 2026-10-14. The Second Circuit's own rule text is from its rules page; 
 | CA2-COVER-002 | FRAP 32(a)(2)(A)-(F) | Cover: docket number at top; court name; title of the case; nature of the proceeding and the court below; brief title identifying the party; counsel's name, office address, telephone. | `cover-body` | https://www.law.cornell.edu/rules/frap/rule_32 |
 | CA2-FORM-002 | FRAP 32(a)(4) | Margins at least one inch on all four sides. | `page-margin = 1in` | same |
 | CA2-FORM-004 | FRAP 32(a)(5)(A) | Proportionally spaced face, **14-point or larger** (text, headings, footnotes, cover, certificates). | `type-size = 14pt`, footnotes at `type-size` | same |
-| CA2-FACE-001 | FRAP 32(a)(5)(A); 2d Cir. LR 32.1(a) | **No face named.** The rules name none; the court's brief page gives "Times New Roman" only as an example ("such as"). Substitute: none; the template keeps **EB Garamond** (`docs/FONTS.md`: no face named). Latex and docx match. | `font-family = "EB Garamond"` | https://www.law.cornell.edu/rules/frap/rule_32 ; https://www.ca2.uscourts.gov/clerk/case_filing/appealing_a_case/civil_case/brief_and_appendix.html (verified 2026-10-15) |
+| CA2-FACE-001 | FRAP 32(a)(5)(A); 2d Cir. LR 32.1(a) | **No face named.** The rules name none; the court's brief page gives "Times New Roman" only as an example ("such as"). Substitute: none; the template sets **Liberation Serif**, the vendored metric twin of Times New Roman (`docs/FONTS.md`). Latex (newtx Times) and docx (Liberation Serif) match. | `font-family = "Liberation Serif"` | https://www.law.cornell.edu/rules/frap/rule_32 ; https://www.ca2.uscourts.gov/clerk/case_filing/appealing_a_case/civil_case/brief_and_appendix.html (verified 2026-10-15) |
 | CA2-FORM-005 | FRAP 32(a)(6) | Case names italicized or underlined. The template italicizes what the author marks; it does not guess case names. | markdown | same |
 | CA2-CONT-001 | FRAP 28(c) | Reply brief has a table of contents with page references and a table of authorities (cases alphabetized, then statutes and other authorities) with the pages where cited. | `toc-section`, `toa-section` | https://www.law.cornell.edu/rules/frap/rule_28 |
 | CA2-CERT-001 | FRAP 32(g)(1), Form 6 | Certificate of compliance stating the word count (FRAP 32(f) exclusions) and the typeface and type-style statements of FRAP 32(a)(5)-(6). | `certificate-of-compliance` | https://www.law.cornell.edu/rules/frap/rule_32 |
@@ -60,7 +60,7 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body. The c
 | `counsel` | yes | Groups of `names`, `lines` (italic: firm, address), and **`phone` (required per group)**. Two columns on the cover. |
 | `signature` | yes | `signer` (printed "/s/ Name" and in capitals) and `lines`. |
 | `date` | yes | "Dated:" line and the dates on the certificates. |
-| `typeface_software`, `typeface` | yes | The certificate's statement: "prepared in a proportionally spaced typeface using X in Y 14-point font". State the truth: `Typst` and `EB Garamond` for these renders. |
+| `typeface_software`, `typeface` | yes | The certificate's statement: "prepared in a proportionally spaced typeface using X in Y 14-point font". State the truth: `Typst` and `Liberation Serif` for these renders. |
 | `service` | no | `certificate: true` adds the certificate of service (default off in the template; the sample sets it on, as the exemplar does). |
 | `authorities` | yes if the body cites any | As in ca9. Citations link as `[text](toa:key)`; an unknown key stops the build. |
 
@@ -78,7 +78,7 @@ sh tools/overlay.sh courts/second-circuit/court-of-appeals/reply-brief lowe-repl
 
 The overlay is given the Lowe exemplar explicitly: `overlay.sh` with no third argument takes the first PDF in `usage/` alphabetically, which here would be the Alisigwe brief.
 
-Render result: `typst compile` with vendored EB Garamond and vendored cmarker 0.1.10, `--ignore-system-fonts`, no warnings, exit 0. `pdffonts` shows only `EBGaramond-Regular`, `-Bold`, `-Italic`, all embedded.
+Render result: `typst compile` with vendored Liberation Serif and vendored cmarker 0.1.10, `--ignore-system-fonts`, no warnings, exit 0. `pdffonts` shows only `LiberationSerif`, `-Bold`, `-Italic`, all embedded.
 
 `tools/check.sh` and `tools/check-selftest.sh` are not wired for this doc type; the checks in this folder are the render, the overlay and the page review below.
 
@@ -129,7 +129,7 @@ All 14 pages of `usage/OUTPUT-reply-brief.typst.pdf` were rendered at `pdftoppm 
 
 ## Engines (latex, docx)
 
-Built by `latex/` (`template.tex` + `ca2.lua`, `DOC = "reply"`) and `docx/` (`reference.docx` from `make-reference.sh`, + `ca2.lua`).
+Built by `latex/` (`template.tex` + `ca2.lua`, `DOC = "reply"`) and `docx/` (`reference.xml`, from which `fb render` builds `reference.docx`, + `ca2.lua`).
 
 - **latex** (`usage/OUTPUT-reply-brief.latex.pdf`, 14 pages; typst: 14). The cover with counsel in two columns, the contents and authorities (computed page numbers), the Introduction and Argument headings, the signature block with the date, the certificates of compliance and service (reply wording). Word count 1,634, the typst template's count (the filter now counts the markdown source as typst does; it printed 1,635 before). Every line and page breaks where typst breaks it (see "Cross-engine").
 - **docx** (`usage/OUTPUT-reply-brief.docx`, `.docx.pdf` 14 pages). The cover on one page (counsel in two columns), sections and numbering, the certificates, word count 1,634; the contents and authorities carry their page numbers (fb render's two-pass page map). The earlier BLOCKED items (`DOCX-TOC-PAGES`, `DOCX-TOA-PAGES`) and tier-1 failures (`DEF-FONT-002`: EB Garamond for a Liberation Serif template; `DEF-TOC-001`) are fixed.
@@ -144,7 +144,7 @@ Built by `latex/` (`template.tex` + `ca2.lua`, `DOC = "reply"`) and `docx/` (`re
 
 ## Cross-engine (fb-595.54.2)
 
-All three engines on the shared cross-engine layout model, as the opening brief (its README, "Cross-engine", lists the libraries and the latex and docx techniques); `params.cross_engine: gate` in `eval.yaml`. The latex and docx filters are the opening brief's with `DOC = "reply"`; the docx names Liberation Serif, the face this template sets (`make-reference.sh`).
+All three engines on the shared cross-engine layout model, as the opening brief (its README, "Cross-engine", lists the libraries and the latex and docx techniques); `params.cross_engine: gate` in `eval.yaml`. The latex and docx filters are the opening brief's with `DOC = "reply"`; the docx names Liberation Serif, the face this template sets (fb render builds the reference document from `docx/reference.xml`, `base="xengine"`, in the typst face; it was `make-reference.sh`).
 
 - typst: `show: xengine.with(pitch: 31.4pt, list-indent: 0.5in)` and the same line boxes, spaces and `listing-row` tables as the opening brief; section headings stay at 14 pt. The cover's lines are 17 pt boxes (`pitch-cover`): the template had set them on the baseline to keep four counsel groups on one page, which no other engine can reproduce; the counsel columns are now left-aligned in their grid cells (each group had been centered in its column, 11 to 30 pt in). The template's own rule that kept a volume with its reporter ("9 U.S.C.") is not applied: it is not part of the model the LaTeX and Word engines share. Signature block at the middle of the text width (3.25 in), every space in pt. Kept: Liberation Serif 14 pt, 31.4 pt double spacing, 1 in margins, the cover's parts and order, the certificate wording.
 - Before (baseline): latex 14 pages against typst's 13, 107/260 lines with typst's break (41.2 %); docx 14 pages, 78/260 (30.0 %), and docx tier 1 failing `DEF-FONT-002`, `DEF-TOC-001`. After: typst 14 pages; latex and docx 14 pages, 262/262 lines, every page starting and ending on typst's words (XENG-001..003 PASS); tier 1: typst 7 passed, latex 10 passed, docx 11 passed, 0 failed.

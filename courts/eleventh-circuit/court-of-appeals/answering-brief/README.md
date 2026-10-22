@@ -85,13 +85,13 @@ sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief usag
 sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/answering-brief naacp-v-byrd-25-12813
 ```
 
-Render result: `usage/OUTPUT-answering-brief.typst.pdf`, 14 pages, no typst warnings, embedded fonts only EB Garamond Regular, Italic and Bold.
+Render result: `usage/OUTPUT-answering-brief.typst.pdf`, 15 pages, no typst warnings, embedded fonts only Times New Roman Regular, Italic and Bold (`pdffonts`; 14 pages in EB Garamond before the face changed).
 
 Word count: 1,428 by the template; 1,428 by an independent `awk` count of the markdown body (same exclusions).
 
 ## Overlay (the red/blue test)
 
-`usage/OVERLAY-naacp-v-byrd-25-12813.pdf`: red = our render only, blue = the exemplar only, black = both agree. Pages are paired by word overlap (`usage/OVERLAY-naacp-v-byrd-25-12813.txt`):
+`usage/OVERLAY-naacp-v-byrd-25-12813.pdf` (measured on the earlier 14-page EB Garamond render): red = our render only, blue = the exemplar only, black = both agree. Pages are paired by word overlap (`usage/OVERLAY-naacp-v-byrd-25-12813.txt`):
 
 | ours | filed | word overlap |
 |---|---|---|
@@ -114,7 +114,7 @@ The overlay is a diagnostic, not a score. Low overlap on the contents and the ce
 
 ## Gate 2: visual review
 
-Pages reviewed: **14 of 14**, each rendered at 60 dpi with `pdftoppm -r 60` and looked at.
+Pages reviewed: **14 of 14** (the earlier EB Garamond render), each rendered at 60 dpi with `pdftoppm -r 60` and looked at.
 
 Defects found and fixed during review:
 
@@ -146,7 +146,7 @@ Nothing is marked OK without a render and a look.
 
 ## Known gaps
 
-1. **Typeface.** Decided 2026-10-14: the face required is none. FRAP 32(a)(5)(A) requires a proportionally spaced face with serifs, 14 pt or larger, and names no family (checked at Cornell LII). The Eleventh Circuit local-rule text could not be read here, so a local face cannot be ruled out. No substitute is needed and EB Garamond stays. The exemplar is set in Times New Roman 14 pt, one filer's choice (tier 3).
+1. **Typeface.** Decided 2026-10-14: the face required is none. FRAP 32(a)(5)(A) requires a proportionally spaced face with serifs, 14 pt or larger, and names no family (checked at Cornell LII). The Eleventh Circuit local-rule text could not be read here, so a local face cannot be ruled out. No substitute is needed; the template, which kept EB Garamond at first, is Times New Roman 14 pt in all three engines (CA11-FORM-004; the house standard, `docs/FONTS.md` rule 6), as the exemplar is set.
 2. **CIP.** The exemplar includes its Certificate of Interested Persons inside the brief (pp. C-1 to C-12). 11th Cir. R. 26.1-1 requires it as a separate filing; the template does not produce one.
 3. **Excerpt.** The sample is a transcription of part of the brief: the cover, oral-argument statement, contents, authorities, introduction, the statement of the case (I and II.A only), standard of review, summary, Argument I.A (first part), conclusion, signature, certificates. The exemplar's body runs from page 1 to page 28, with certificates on page 29 of its own numbering. Statement II.B–C and Argument I.B–C and II are not transcribed.
 4. **Exemplar inconsistency.** The exemplar's Table of Citations gives *In re Griffiths* as 413 U.S. 719; its text gives 413 U.S. 717. The sample uses 717, the cite in the body.
@@ -191,8 +191,8 @@ and LaTeX moved a line LibreOffice kept). The latex and docx renders break every
   `ca11.lua`); the table of authorities takes the page of a citation's first word (as typst does) and its page lists
   keep their spaces. The addendum (`Add-n` pages with its own table) is written but this sample has none, so it is
   untested here.
-- **docx** (`docx/reference.docx` from `docx/make-reference.sh` = `lib/docx/xengine-reference.sh`, `docx/ca11.lua`,
-  `docx/render.sh`): exact line spacing at the typst pitches and spaces; the cover counsel and the form signature as
+- **docx** (`docx/reference.xml`, from which `fb render --engine docx` builds the reference document with the cross-engine recipe, `base="xengine"`; `docx/ca11.lua`;
+  `docx/make-reference.sh`, `docx/render.sh` and the committed `reference.docx` were retired in fb-595.68.2): exact line spacing at the typst pitches and spaces; the cover counsel and the form signature as
   borderless tables; sections carry the roman and arabic footers. Page numbers in the tables are written text from a
   first LibreOffice render: each heading found by its label and title at the start of a line, each citation by its
   link text and the words after it in document order (a citation in a footnote from the page the body has reached).

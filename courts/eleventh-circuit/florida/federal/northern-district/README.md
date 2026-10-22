@@ -36,7 +36,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
 - `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
@@ -49,7 +49,7 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 ## Typeface
 
-N.D. Fla. Loc. R. 5.1(C) requires "at least 14-point font" and names no face (text read 2026-10-14 from the court's local rules PDF, `https://flnd.uscourts.gov/sites/flnd/files/local_rules/local_rules_0.pdf`). Under `docs/FONTS.md` ("No face named") both doc types keep the vendored **EB Garamond** at 14 pt. The filed exemplars are Times New Roman; that is the filer's choice, not a court requirement, so no Liberation Serif substitute is used. Each doc-type README carries its own typeface row.
+N.D. Fla. Loc. R. 5.1(C) requires "at least 14-point font" and names no face (text read 2026-10-14 from the court's local rules PDF, `https://flnd.uscourts.gov/sites/flnd/files/local_rules/local_rules_0.pdf`). Under `docs/FONTS.md` rule 6 (Times New Roman is the house standard where no face is named) both doc types are set in **Times New Roman** at 14 pt, in typst and docx alike; the filed exemplars are Times New Roman too. Each doc-type README carries its own typeface row.
 
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`

@@ -13,7 +13,7 @@
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `mnb-adversary-complaint`. |
 | `typst/mnb-adversary-complaint.typ` | Template. Caption (debtor and adversary boxes), numbered paragraphs, lettered lists, signature block from frontmatter. |
 | `usage/INPUT-adversary-complaint.md` | Markdown contract sample: YAML frontmatter (title, lead-in, caption, date, signature) plus the body. |
-| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/eighth-circuit/minnesota/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md` (11 pages, typst 0.15.0, no warnings). |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/eighth-circuit/minnesota/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md` (13 pages; 11 on the earlier EB Garamond render; typst 0.15.0, no warnings). |
 | `usage/OVERLAY-magnetation-complaint.pdf`, `.txt` | `sh tools/overlay.sh <this folder> magnetation-complaint`. Red = our render, blue = filed exemplar, black = both agree. |
 | `usage/` | The filed complaint and `SOURCE.md`. |
 
@@ -26,7 +26,7 @@ Primary sources are the D. Minn. local rules and the Federal Rules of Bankruptcy
 | Fed. R. Bankr. P. 7010 (as restyled, eff. Dec. 1, 2024) | Pleading in an adversary proceeding: Fed. R. Civ. P. 10 applies, except the caption must substantially conform to Form 416 | `caption()`: court title, debtor box, adversary box; Official Form 416A layout as the template comment states |
 | Fed. R. Civ. P. 10(b) (through Rule 7010) | Numbered paragraphs, each limited as far as practicable to a single set of circumstances | `allegations()`: each blank-line-separated chunk is one numbered paragraph |
 | Fed. R. Bankr. P. 7008(a) | The complaint states whether the proceeding is core or non-core (Advisory Committee Note, 1987) | Paragraph 5 of the sample. The template does not check it. |
-| Fed. R. Bankr. P. 9004(a) | Legibility; commonly used abbreviations acceptable | Type size 12 pt, EB Garamond, no colour |
+| Fed. R. Bankr. P. 9004(a) | Legibility; commonly used abbreviations acceptable | Type size 12 pt, Times New Roman, no colour |
 | Fed. R. Bankr. P. 9004(b) | Caption: court name, case title, case number and adversary number, brief designation of the document | Caption block |
 | Fed. R. Bankr. P. 9011(a) | Signature by the attorney | `signature-block()`, with the `/s/` signature from frontmatter |
 | D. Minn. LBR 9004-1(a) | All documents presented for filing, except trial exhibits, print on 8½ × 11 letter paper | `page-w`, `page-h` = 8.5 × 11 in |
@@ -50,7 +50,7 @@ The exemplar has no Exhibit A (the statement of account); see Known gaps.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 70 dpi and viewed (11 of 11) as PNG; the overlay sheets were viewed as contact sheets (all 11 pages present). The comparison against the filed pages is the overlay pairing above; no separate side-by-side images were made in this pass.
+Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 70 dpi and viewed (11 of 11, on the earlier EB Garamond render) as PNG; the overlay sheets were viewed as contact sheets (all 11 pages present). The comparison against the filed pages is the overlay pairing above; no separate side-by-side images were made in this pass.
 
 | Page | Content | Result |
 |---|---|---|
@@ -84,18 +84,18 @@ Tier-2 findings (OPEN or ACCEPTED): the page-3 gap above (OPEN); the page-10 gap
 | latex | `latex/` | none | not built |
 | docx | `docx/` | `OUTPUT-adversary-complaint.docx`, `OUTPUT-adversary-complaint.docx.pdf` | built (below) |
 
-The docx build: `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-adversary-complaint.md`. It runs `docx/render.sh` (pandoc, the Lua filter `docx/mnb-adversary-complaint.lua`, and `docx/reference.docx`). `docx/make-reference.sh` rebuilds the reference. The PDF is LibreOffice 26.8.1 with the vendored fonts only.
+The docx build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`. `fb render` builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst face) and runs pandoc with the Lua filter `docx/mnb-adversary-complaint.lua` (until fb-595.68, `docx/render.sh` and `docx/make-reference.sh` with a committed `reference.docx`). The PDF is LibreOffice's; the committed `usage/.check-docx.txt` reads PASS.
 
-What matches the typst output: letter paper with 1 in margins; EB Garamond 12 pt, embedded and the only font; body double-spaced at a 24 pt line pitch with a half-inch first-line indent; numbered paragraphs (numbers typed into the text, as the typst template does) and an unnumbered WHEREFORE; the caption (court title, debtor and adversary boxes with 0.75 pt rules, indented designations, the title in the adversary column, an 18 pt gap); the spacing between its rows matches typst's to about 1 pt; centred bold caps headings; lettered lists (A., B., ...) at the typst indents; the signature block; a centred page number in the footer.
+What matches the typst output: letter paper with 1 in margins; Times New Roman 12 pt, embedded and the only font; body double-spaced at a 27.6 pt line pitch with a half-inch first-line indent; numbered paragraphs (numbers typed into the text, as the typst template does) and an unnumbered WHEREFORE; the caption (court title, debtor and adversary boxes with 0.75 pt rules, indented designations, the title in the adversary column, an 18 pt gap); the spacing between its rows matches typst's to about 1 pt; centred bold caps headings; lettered lists (A., B., ...) at the typst indents; the signature block; a centred page number in the footer.
 
-What differs:
+What differs (measured on the earlier EB Garamond build, before fb-595.68; both engines are 13 pages now):
 - Heading sizes: Word takes half-points, so 17 pt and 14.5 pt where typst uses 16.8 pt and 14.4 pt.
 - Pagination: 10 pages in docx, 11 in typst. The gap on typst's page 3 is not reproduced: ¶14 flows onto page 3. No page break is forced.
 - Position: the first body line on a page sits about 11 pt lower than typst's, and the first caption line about 4 pt lower (LibreOffice places exact-spaced lines lower). The top margin is 1 in in both.
 - Footnotes: none in this template or sample. Footnote text is set to 10 pt (typst's default measured 10.2 pt); its line spacing is not checked.
 
-docx BLOCKED items:
+docx BLOCKED items (then; the docx check passes now):
 - The docx gates do not run yet: this court has no `rules.md` or `checks.yaml`, so `tools/check.sh --engine docx` has no checks to run. Nothing is stamped.
 - Word: not opened (no Word on this box). The renderer checks the zip and the XML parts; LibreOffice converts the file without a repair step.
 
-Page review (docx): all 10 pages of `OUTPUT-adversary-complaint.docx.pdf` were rendered at 60 dpi and viewed against the typst render. No page has an open defect that is not in the list above.
+Page review (docx, on the earlier EB Garamond build): all 10 pages of `OUTPUT-adversary-complaint.docx.pdf` were rendered at 60 dpi and viewed against the typst render. No page has an open defect that is not in the list above.

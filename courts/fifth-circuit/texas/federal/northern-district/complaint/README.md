@@ -7,10 +7,10 @@ Folder: `courts/fifth-circuit/texas/federal/northern-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (Eli Lilly, non-class complaint); second filer `usage/FILED-EXAMPLE-complaint-2.pdf` (Burkes, class complaint). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-complaint.md` (a portion of the 35-page filing: caption, sections I to III of the general allegations, cause of action 1, prayer, jury demand, signature) |
-| typeface | face required: none (LR 7.2 sets the size, 12 pt or larger; LR 10.1 names no face) -> vendored substitute: EB Garamond (the default, `fonts/eb-garamond/`) -> fit: n/a, no court-named face to match. The filed exemplars use Times New Roman; see Known gaps 2. |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; `pdffonts` shows EBGaramond-Regular and EBGaramond-Bold embedded) |
+| typeface | face required: none (LR 7.2 sets the size, 12 pt or larger; LR 10.1 names no face) -> template face: Times New Roman (pinned install; `docs/FONTS.md` rule 6, the house standard; EB Garamond before fb-595.68) -> fit: n/a, no court-named face to match. The filed exemplars use Times New Roman; see Known gaps 2. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, pinned Times New Roman only (`pdffonts`: Regular and Bold embedded), no warnings (the 2026-10-14 render, before fb-595.68, was EBGaramond-Regular and EBGaramond-Bold) |
 | overlay | ok: `usage/OVERLAY-lilly-complaint.pdf` and `usage/OVERLAY-lilly-complaint.txt` (page map; regenerated 2026-10-14 against the Lilly exemplar fetched from the URL in `usage/SOURCE.md`; the exemplar PDF is not committed) |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-14 after the re-render) |
+| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-14 after the re-render; the EB Garamond render, before fb-595.68) |
 | file names | the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the names `tools/render.sh` and `tools/overlay.sh` use); the brief's `<id>.pdf` and `<id>-overlay.pdf` were not used, to keep the tools unchanged |
 
 ## Governing rules
@@ -33,7 +33,7 @@ Judge-specific requirements (individual judges' standing orders) are not checked
 - Court title on three centered lines: `IN THE UNITED STATES DISTRICT COURT` / `FOR THE NORTHERN DISTRICT OF TEXAS` / division.
 - Caption: each party name is one row with a section mark (§) beside it, the case number (`CIVIL ACTION NO.`) and the jury legend on the right. This is the N.D. Tex. convention in the Legacy and Coney filings. Lilly's exemplar uses a `)` column and Burkes's uses none; both are seen in the court's filings.
 - Title of the paper, centered, bold, caps.
-- Body double-spaced (24 pt pitch), 12 pt EB Garamond, 1 inch margins, 0.5 inch first-line indent, numbered paragraphs.
+- Body double-spaced (24 pt pitch), 12 pt Times New Roman, 1 inch margins, 0.5 inch first-line indent, numbered paragraphs.
 - Headings: level 1 centered bold caps; level 2 bold, left, hanging indent; level 3 centered bold.
 - Prayer items numbered `1.`, `2.`, ...; the jury demand is a heading and a paragraph.
 - Signature block single-spaced at the right half: `Dated`, `Respectfully submitted`, firm, `/s/`, name, bar number, address, telephone, fax, email, role.
@@ -41,12 +41,12 @@ Judge-specific requirements (individual judges' standing orders) are not checked
 
 ## Overlay (`usage/OVERLAY-lilly-complaint.pdf`)
 
-Red is our render, blue is the filed exemplar, black is where they agree. The pages are paired by word overlap (`tools/overlay.sh`), so a partial transcription still lines up with the pages it came from. The overlay is a diagnostic, not a score: the sample is a portion of the filing, paragraph numbers are not transcribed, and our page breaks do not follow the filing's. The overlay pairs our pages 1 to 7 with filed pages 1, 3, 6, 8, 9, 10 and 11 (in that order), and our pages 8 to 10 with filed pages 25, 34 and 35. Read the page map in `usage/OVERLAY-lilly-complaint.txt`.
+Red is our render, blue is the filed exemplar, black is where they agree. The pages are paired by word overlap (`tools/overlay.sh`), so a partial transcription still lines up with the pages it came from. The overlay is a diagnostic, not a score: the sample is a portion of the filing, paragraph numbers are not transcribed, and our page breaks do not follow the filing's. The overlay pairs our pages 1 to 7 with filed pages 1, 3, 6, 8, 9, 10 and 11 (in that order), and our pages 8 to 10 with filed pages 25, 34 and 35. Read the page map in `usage/OVERLAY-lilly-complaint.txt` (from the earlier EB Garamond render, before fb-595.68).
 
 ## Known gaps and open choices
 
 1. **Rules not read from primary source.** See the table above. The FRCP and LR 10.1 text came from search excerpts, not the court's site. A reading of the full rules is needed.
-2. **Typeface (tier 2, open choice).** N.D. Tex. LR 7.2 and LR 10.1 name a size and no face (found by search, not read from the court's full text), so the rules do not require Times New Roman and the template keeps EB Garamond, per `docs/FONTS.md`. The filed exemplars use Times New Roman (system font). EB Garamond has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. Switching to `Liberation Serif` (the Times New Roman substitute in `fonts/liberation-serif/`) would close the gap; that is a choice for the court's convention, not for the rules, and is left to the reviewer.
+2. **Typeface (tier 2).** N.D. Tex. LR 7.2 and LR 10.1 name a size and no face (found by search, not read from the court's full text), so the rules do not require Times New Roman. The filed exemplars use Times New Roman (system font), and so does the template now (`docs/FONTS.md` rule 6, the house standard). Before fb-595.68 the template was EB Garamond, whose smaller x-height made the text look smaller than the exemplar's; that gap is closed.
 3. **Certificate of interested persons and cover sheet (LR 3.1).** Not produced by this template. A complaint filed without them is deficient under LR 3.1; they must be filed with the complaint.
 4. **Jury demand is numbered.** In the filed exemplar the jury demand is an unnumbered paragraph under its heading. The template numbers every body paragraph, so the jury demand comes out as paragraph 44. Tier 2; open.
 5. **Prayer items** are numbered `1.` to `7.`. The filed exemplar letters the sub-items of item 1 (i, ii, iii, ...); the sample omits them, and the template has no sub-item form. Tier 2; open.
@@ -56,7 +56,7 @@ Red is our render, blue is the filed exemplar, black is where they agree. The pa
 9. **Case-name italics.** The text layer carries no italic markup, so case names are not italicized in the sample. The template italicizes `*...*` markdown, so future samples can carry italics.
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape. The brief forbids editing `tools/`, so the gates were not run. The page review above is the Gate 2 equivalent.
 
-## Review of the rendered pages (`usage/OUTPUT-complaint.typst.pdf`, 10 pages)
+## Review of the rendered pages (`usage/OUTPUT-complaint.typst.pdf`, 10 pages; the EB Garamond render, before fb-595.68)
 
 Each page was rendered at 60 dpi and viewed after the last template change.
 
@@ -78,13 +78,13 @@ Earlier review rounds found and fixed: court-title and caption lines overlapping
 | Engine | Folder | Output in `usage/` | State |
 |---|---|---|---|
 | typst (primary) | `typst/` | `OUTPUT-complaint.typst.pdf` | the reference (see the review above) |
-| docx | `docx/` | `OUTPUT-complaint.docx`, `OUTPUT-txnd-complaint-lilly.docx.pdf` | `.docx` built and valid (zip and XML checks pass); `.docx.pdf` BLOCKED |
+| docx | `docx/` | `OUTPUT-complaint.docx`, `OUTPUT-complaint.docx.pdf` | `.docx` and `.docx.pdf` (10 pages, as the typst render) built by `fb render --engine docx`; the BLOCKED items below were recorded before fb-595.68 |
 
-The docx is built by pandoc (3.6.4) from `docx/reference.docx` and `docx/txnd-complaint.lua`. `reference.docx` is made by `sh docx/make-reference.sh` from `docx/styles.xml`. The cover, the caption, the title, the numbered paragraphs and the signature block are built by the filter from the frontmatter. Command: `sh tools/render.sh --engine docx <court>/complaint usage/INPUT-complaint.md`.
+The docx is built by `fb render --engine docx`: the reference document from `docx/reference.xml` (`base="xengine"`, the shared cross-engine recipe in the typst template's face), then pandoc with `docx/txnd-complaint.lua`. (Before fb-595.68, `sh docx/make-reference.sh` made a committed `reference.docx` from `docx/styles.xml`.) The cover, the caption, the title, the numbered paragraphs and the signature block are built by the filter from the frontmatter. Command: `sh tools/render.sh --engine docx <court>/complaint usage/INPUT-complaint.md`.
 
-What follows the typst template, by construction (the styles and the filter carry the typst parameters; no docx page has been seen, so none of this is a visual claim):
+What follows the typst template, by construction (the styles and the filter carry the typst parameters; no docx page had been seen when this was written, so none of this is a visual claim):
 
-- EB Garamond 12 pt; body double-spaced at an exact 24 pt pitch; 0.5 in first-line indent; letter paper with 1 in margins.
+- Times New Roman 12 pt; body double-spaced at an exact 24 pt pitch; 0.5 in first-line indent; letter paper with 1 in margins.
 - Caption: one row per party name with a section mark (§) beside it; `CIVIL ACTION NO.` on the middle row; `JURY TRIAL DEMANDED` below it. Court title and title of the paper centered, bold.
 - Body paragraphs numbered `1.`, `2.`, ... (the jury demand is numbered, as in typst); headings level 1 centered bold, level 2 bold with a hanging indent, level 3 centered bold.
 - Signature block at the right: `Dated:` on the left; firm, `/s/`, name, bar number, address and role on the right.
@@ -93,13 +93,13 @@ What follows the typst template, by construction (the styles and the filter carr
 What differs or is not checked:
 
 - Prayer items use Word's list indent, not the typst enum indent (0.5 in number, 0.4 in body).
-- Lines in a stack (caption rows, signature lines) are spaced as typst spaces them (6 pt between lines), but the line breaks are Word's, not typst's.
+- Lines in a stack (caption rows, signature lines) are spaced as typst spaces them (13.8 pt single lines), but the line breaks are Word's, not typst's.
 - No footnotes: the sample has none.
 - No docx page has been rendered or reviewed; Gate 2 for docx is open.
 
-docx BLOCKED items (`check.sh --engine docx` runs its gates on the `.docx.pdf`):
+docx BLOCKED items, as recorded before fb-595.68 (`check.sh --engine docx` runs its gates on the `.docx.pdf`; `usage/OUTPUT-complaint.docx.pdf` is now committed):
 
 - `docx.pdf` (LibreOffice render, Gates 0 to 3): BLOCKED. LibreOffice 25.2 could not run on the build box: the Debian packages were unpacked into a user directory and `soffice.bin` throws a UNO `RuntimeException` during bootstrap. The cause was not found, so no `.docx.pdf` exists and no gate has run on it.
 - Gate 2 for docx (every page rendered and reviewed): BLOCKED on the same cause. No docx page was rendered or reviewed (the docx page count is not known).
 - Opens in Word and LibreOffice without a repair prompt: not checked (no Word here, LibreOffice does not run).
-- Fonts: EB Garamond must be installed on the machine that opens the file, or Word substitutes a face silently (`docs/DOCX.md`).
+- Fonts: Times New Roman (EB Garamond when this was recorded) must be installed on the machine that opens the file, or Word substitutes a face silently (`docs/DOCX.md`).

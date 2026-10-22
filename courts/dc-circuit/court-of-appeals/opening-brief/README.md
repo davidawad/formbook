@@ -139,7 +139,7 @@ Three engines per doc type (`docs/EVAL-LOOP.md`, "Engines"). The typst template 
 |---|---|---|---|
 | typst (primary) | `typst/` | `usage/OUTPUT-opening-brief.typst.pdf` | 15 pages, reviewed |
 | latex | `latex/` (`template.tex`, `cadc.lua`) | `usage/OUTPUT-opening-brief.latex.pdf` | 15 pages, XENG-001..003 PASS |
-| docx | `docx/` (`reference.docx` from `make-reference.sh`, `cadc.lua`) | `usage/OUTPUT-opening-brief.docx`, `.docx.pdf` | 15 pages (LibreOffice PDF), XENG-001..003 PASS |
+| docx | `docx/` (`reference.xml`, from which `fb render` builds the reference document; `cadc.lua`) | `usage/OUTPUT-opening-brief.docx`, `.docx.pdf` | 15 pages (LibreOffice PDF), XENG-001..003 PASS |
 
 Build (`fb render` reruns pdflatex until the aux and toc files settle, and renders the docx in passes until the page map of its LibreOffice PDF settles):
 
@@ -153,11 +153,11 @@ sh tools/render.sh --engine docx courts/dc-circuit/court-of-appeals/opening-brie
 
 ## Cross-engine (fb-595.54.2)
 
-All three engines on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Adopting the reference breaker"), `params.cross_engine: gate` in `eval.yaml`.
+All three engines on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`, whose recipe fb render has since taken over from `docx/reference.xml`; docs/EVAL-LOOP.md, "Adopting the reference breaker"), `params.cross_engine: gate` in `eval.yaml`.
 
 - typst: `show: xengine.with(pitch: 25pt, list-indent: 0.5in)`; line boxes of 25 pt (body), 21 pt (quotations, footnotes, tables, signature and certificate blocks, level-3 headings), 29 pt (level-1 headings, 19.5 pt bold) and 25 pt (level-2, 17 pt bold), 16.4 pt (the cover); every space in pt; `listing-row` contents and authorities (36 pt page column, or the page list's width); the glossary's abbreviations in a 1 in column. Changed from the earlier template: the body pitch is 25 pt (was 1.07 em leading, 25.09 pt); single spacing is 21 pt (was 16.4 pt; see the LibreOffice finding below); headings 19.5 / 17 pt (were 1.4 / 1.2 em, 19.6 / 16.8 pt: Word has only half points); the cover's spacing is fixed (was the largest of six that fits; the sample used 0.45 of the old gaps, which are now the gaps) and the date follows the counsel (was pushed to the foot of the page: Word has no fill); the signature's right column is a length (241 pt); each citation's page is taken after its first word (a citation that opens a line was filed under the line before). Kept: TeX Gyre Schola 14 pt, 1 in margins, the half-inch indents, the parts and their order.
 - latex: `\usepackage{xengine}`, `\xe@lines`, `\addvspace`, `\xe@row`, `\xe@footnotemarks{14}`, `\xe@lists{0.5in}`; `cadc.lua` writes the whole brief, through `require("latex.xengine")` over the body and every metadata value.
-- docx: `make-reference.sh` calls `lib/docx/xengine-reference.sh` (TeX Gyre Schola, 28 half points, body 500, single 420 twips; `reference.docx` committed); `cadc.lua` (rewritten on `require("docx.xengine")`) writes every paragraph with exact spacing, the table rows with the page column as right indent and a leader tab, and a word joiner between ")(" so LibreOffice does not break "6103(i)(2)".
+- docx: `docx/reference.xml` (`base="xengine"`: fb render builds the reference document on the shared recipe; TeX Gyre Schola, 28 half points, body 500, single 420 twips; until fb-595.68 `make-reference.sh` built a committed `reference.docx` with `lib/docx/xengine-reference.sh`); `cadc.lua` (rewritten on `require("docx.xengine")`) writes every paragraph with exact spacing, the table rows with the page column as right indent and a leader tab, and a word joiner between ")(" so LibreOffice does not break "6103(i)(2)".
 - Every engine certifies the same word count: the latex and docx filters count the markdown source as the typst template does (1,312).
 
 What the first TeX Gyre Schola adoption found (each a line or a tier-1 check the gate caught):

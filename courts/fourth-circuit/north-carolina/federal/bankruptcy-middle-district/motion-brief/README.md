@@ -6,10 +6,10 @@ Doc type: **motion brief**: a brief or memorandum of law in support of a written
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`). It is a brief in support of a summary judgment motion, not a 9013-1 motion memorandum; see gap 1. |
 | sample md | `usage/INPUT-motion-brief.md`: caption, title, introduction, Nature of the Matter, the Statement of Undisputed Facts I to VII with footnotes 1 and 2, the Conclusion, the signature block and the certificate of service. The Argument is not transcribed (gap 2). |
-| typeface | face required: none. The 2022 local rules, the 2025 comment draft and the 2026 rules (`Local Rules 1.1.26.pdf`) name no typeface, point size or spacing (read 2026-10-14). Substitute: none needed; the template keeps EB Garamond, the "No face named" row of `docs/FONTS.md`. See gap 6. |
-| render | ok (re-rendered 2026-10-14): `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, `tools/render.sh` (vendored fonts only, zero typst warnings); `pdffonts`: EB Garamond Regular, Bold and Italic embedded |
+| typeface | face required: none. The 2022 local rules, the 2025 comment draft and the 2026 rules (`Local Rules 1.1.26.pdf`) name no typeface, point size or spacing (read 2026-10-14). The template is set in Times New Roman 12 pt, the house standard where no face is named (`docs/FONTS.md` rule 6; Liberation Serif as fallback), on typst and docx (fb-595.68.18). See gap 6. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, `tools/render.sh` (zero typst warnings); `pdffonts`: Times New Roman Regular, Bold and Italic embedded |
 | overlay | ok (re-run 2026-10-14): `usage/OVERLAY-eastwood-msj-brief.pdf` and `usage/OVERLAY-eastwood-msj-brief.txt`. The filed exemplar is not committed, so it is passed as the third argument (see Render and overlay) |
-| pages reviewed | 11 of 11 (2026-10-14: every page rendered at 80 dpi with `pdftoppm` and viewed) |
+| pages reviewed | 11 of 11 on the earlier EB Garamond render, before fb-595.68 (2026-10-14: every page rendered at 80 dpi with `pdftoppm` and viewed) |
 
 File names: the shared `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so those names are used rather than `<id>.pdf` and `<id>-overlay.pdf`. `tools/` was not edited.
 
@@ -55,12 +55,12 @@ Not used and why: Fed. R. Bankr. P. 7056 (summary judgment in an adversary proce
 3. **Page and word limits are not enforced.** LR 7007-1(c) (2022 text) limits the brief to 20 pages. The filed brief is 27 pages including the caption, the signature block and the certificate of service. Either leave of court was given or the limit does not count those pages; the docket was not checked. The 2025 draft's 6,250-word limit for electronically prepared briefs would be counted by word, not page, and is not enforced by the template. **For David:** which limit governs (the 2022 text, the 2025 draft, or the January 2026 text) needs to be decided before the template is treated as complete.
 4. **Effective January 2026 local rules: read in part.** The court's news archive lists "Local Rules Effective January 1, 2026". Earlier fetches of the court's site found no PDF link for it. On 2026-10-14 a search found the posted PDF, `Local Rules 1.1.26.pdf` (45 pages), and its text was extracted with `pdftotext`. Its LR 7007-1(c)(2) matches the 2025 draft: a 6,250-word limit for electronically prepared briefs and a 20-page limit for handwritten ones. It contains no typeface, point-size or spacing rule. Its LR 7056-1 was not compared in full, so gap 5 is still open against the 2026 text.
 5. **Separate statement of undisputed facts.** The 2025 draft's LR 7056-1(b) requires a separate "Statement of Undisputed Material Facts" in numbered paragraphs. The exemplar's facts are inside the brief, in sections I to VII, not numbered paragraphs. If the draft text takes effect, a motion for summary judgment needs that separate statement, which this template does not produce. The 2022 text's LR 7056-1 was not read at this level.
-6. **Typeface and size.** No rule names a typeface, so `docs/FONTS.md` ("No face named") keeps EB Garamond (vendored; no substitute to switch to). The 2022 text, the 2025 draft and the 2026 text were searched for font, typeface, point and spacing terms and none was found. The exemplar embeds Times New Roman (`pdffonts`; its point size was not measured); that is the filer's choice, not a rule. This template uses EB Garamond at 13 pt, because EB Garamond sets smaller at the same size. Visual comparison is in the overlay. The 13 pt is a style choice, not a rule.
+6. **Typeface and size.** No rule names a typeface, so the template is Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6, David 2026-10-17; EB Garamond 13 pt before 2026-10-17, the docx until fb-595.68.18). The 2022 text, the 2025 draft and the 2026 text were searched for font, typeface, point and spacing terms and none was found. The exemplar embeds Times New Roman too (`pdffonts`; its point size was not measured).
 7. **One exemplar.** EVAL-LOOP's tier-2 rule asks for two or three filers. Other NCMB motions found and not used: Eastwood's motion to disqualify (25-02009 Doc 49, 8 pages, pro se, image-only); Cournoyer v. Schamens (24-02010 Doc 10, motion to dismiss, image-only); Freeland v. U.S. Bank (26-02001) and Reid v. Assurant (25-02023), whose motions are only in RECAP as orders. No OCR tool is installed on this box. Tier 2 is judged against one filer.
 8. **Certificate of service is produced in full.** The exemplar's certificate lists recipients by name and address, with the method of delivery. LR 9004-1 requires the same items.
 9. **Overlay pairing.** The overlay pairs pages by word overlap. Pages 1 to 3 pair with their filed pages; later pairs can be one page off because the sample has no argument pages and the filed brief has different page breaks. The overlay is a diagnostic, not a score.
 
-## Gate 2 review (all 11 pages, rendered at 80 dpi and looked at, 2026-10-14)
+## Gate 2 review (all 11 pages, rendered at 80 dpi and looked at, 2026-10-14, on the earlier EB Garamond render)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -88,28 +88,28 @@ sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-midd
 
 `usage/` holds `SOURCE.md` only: the filed PDF is not committed. Fetch it from the URL in `usage/SOURCE.md` into a directory outside the repo and pass it as the third argument, because `overlay.sh` otherwise takes the first PDF in `usage/`.
 
-The overlay's page map (`usage/OVERLAY-eastwood-msj-brief.txt`) pairs sample pages 1 to 9 with filed pages 1 to 10 (word overlap 32% to 89%), and sample pages 10 and 11 with filed pages 26 and 27 (79% and 96%): the conclusion, signature and certificate are the same text in both. The gap in the middle (filed pages 11 to 25) is the Argument, which is not transcribed.
+The overlay's page map (`usage/OVERLAY-eastwood-msj-brief.txt`, made on the earlier 11-page EB Garamond render) pairs sample pages 1 to 9 with filed pages 1 to 10 (word overlap 32% to 89%), and sample pages 10 and 11 with filed pages 26 and 27 (79% and 96%): the conclusion, signature and certificate are the same text in both. The gap in the middle (filed pages 11 to 25) is the Argument, which is not transcribed.
 
 ## Engines
 
-Typst (`typst/`) is the reference. The docx engine (`docx/`) is checked page by page against it, on the LibreOffice PDF of the `.docx`. This court has no `checks.yaml`, so no gate check IDs apply and there are no BLOCKED docx items.
+Typst (`typst/`) is the reference. The docx engine (`docx/`) is checked page by page against it, on the LibreOffice PDF of the `.docx`. `tools/check.sh` gates both engines on `eval.yaml` (`usage/.check-typst.txt`, `usage/.check-docx.txt`: PASS; typst 9 and docx 13 checks passed, fb-595.68.18); there are no BLOCKED docx items.
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-motion-brief.typst.pdf` (11 pp) | reference |
-| docx | `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (11 pp) | ok: rendered with `tools/render.sh --engine docx`; the LibreOffice PDF converted without error; all 11 pages viewed beside the typst pages |
+| typst | `OUTPUT-motion-brief.typst.pdf` (10 pp) | reference |
+| docx | `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (10 pp) | ok: rendered with `tools/render.sh --engine docx`; the LibreOffice PDF converted without error; XENG-001..003 pass (fb-595.68.18); the by-eye review below was on the earlier 11-page EB Garamond docx |
 
 ```sh
 sh tools/render.sh --engine docx courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief usage/INPUT-motion-brief.md
 ```
 
-**docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/ncmb-motion-brief.lua`). `make-reference.sh` builds the reference from pandoc's default: EB Garamond 13 pt; body at an exact 24 pt line pitch with a 0.5 in first-line indent; headings (level 1 centered capitals; levels 2 to 5 bold with a 0.5 in hanging label); single-spaced block quotations and footnotes; letter page with 1-inch margins; a centered page number on every page but the first (`w:titlePg` with an empty first-page footer). The Lua filter builds the caption page (court lines, caption table, title, body on the same page), the heading labels (I., A., 1., a.), the numbered lists (label at 0.5 in, text at 1.125 in), the signature block, and the certificate of service on a new page. Footnotes are pandoc's native footnotes.
+**docx** (`docx/reference.xml`, `docx/ncmb-motion-brief.lua`; `docx/make-reference.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.18). `fb render --engine docx` builds the reference document from `reference.xml` on the shared cross-engine recipe in the typst face: Times New Roman 12 pt; body at an exact 24 pt line pitch with a 0.5 in first-line indent; headings (level 1 centered capitals; levels 2 to 5 bold with a 0.5 in hanging label); single-spaced block quotations and footnotes; letter page with 1-inch margins; a centered page number on every page but the first (`w:titlePg` with an empty first-page footer). The Lua filter builds the caption page (court lines, caption table, title, body on the same page), the heading labels (I., A., 1., a.), the numbered lists, the signature block, and the certificate of service on a new page. Footnotes are pandoc's native footnotes.
 
-- *Matches typst:* typeface and size; line pitch (24.0 pt in both PDFs); the caption; heading labels and their hanging indents; list layout; the signature block at 3.25 in; the certificate of service with recipients and italic methods; no page number on page 1; page numbers centered.
-- *Differs:* line and page breaks. Both PDFs have 11 pages, but the breaks fall at different words, so a page can start at a different heading or sentence (docx page 3 starts at heading II; typst page 3 starts mid-paragraph). The signature block is alone on page 10 in both. Word counts agree within 2 words (2,881 against 2,879).
+- *Matches typst* (seen on the earlier EB Garamond docx; both engines are now Times New Roman 12 pt, 10 pages): typeface and size; line pitch (24.0 pt in both PDFs); the caption; heading labels and their hanging indents; list layout; the signature block at 3.25 in; the certificate of service with recipients and italic methods; no page number on page 1; page numbers centered.
+- *Differs* (on that earlier docx; not re-checked here): line and page breaks. Both PDFs had 11 pages, but the breaks fell at different words, so a page could start at a different heading or sentence (docx page 3 starts at heading II; typst page 3 starts mid-paragraph). The signature block was alone on page 10 in both. Word counts agree within 2 words (2,881 against 2,879).
 - *Not built:* no table of contents or table of authorities (neither the rules nor the exemplar calls for them).
 - *Word:* not opened in Word. `unzip -t` and xmllint pass on every XML part and every style used in the body is defined; LibreOffice converted it without error.
-- *Pages reviewed:* 11 of 11 pages of `OUTPUT-motion-brief.docx.pdf`, each viewed beside typst pages 1 to 11.
+- *Pages reviewed:* 11 of 11 pages of the earlier EB Garamond `OUTPUT-motion-brief.docx.pdf`, each viewed beside typst pages 1 to 11.
 
 
 See also: [[adversary-complaint]] (the other doc type in this court).

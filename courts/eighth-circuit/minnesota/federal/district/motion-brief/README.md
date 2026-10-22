@@ -13,7 +13,7 @@ Status: template built and rendered; overlay built; every page of the current PD
 | `typst/mnd-motion-brief.typ` | The template: caption, body, headings, footnotes, signature, certificate of compliance. Every case word comes from the sample. |
 | `usage/FILED-EXAMPLE-motion-brief.pdf` | Real filed memorandum (Dkt. 37, filed 2026-09-22), public RECAP copy. Source record: `usage/SOURCE.md`. |
 | `usage/INPUT-motion-brief.md` | Markdown transcription of the exemplar, in the frontmatter contract below (caption, all headings, body, two footnotes, signature block). |
-| `usage/OUTPUT-motion-brief.typst.pdf` | Our render of the sample (13 pages). |
+| `usage/OUTPUT-motion-brief.typst.pdf` | Our render of the sample (15 pages; 13 on the earlier EB Garamond render). |
 | `usage/OVERLAY-adams-motion-brief.pdf` and `.txt` | Red/blue overlay of our render against the exemplar, and its page map. |
 
 ## Rules (primary sources)
@@ -39,8 +39,8 @@ Not verified: the ECF Electronic Case Filing Procedures Guide (the PDF requireme
 
 ## Layout choices (tier 2, from the rules' gaps and the exemplar)
 
-- Typeface: EB Garamond. D. Minn. LR 7.1(h)(1) (complete set, PDF dated June 10, 2026, text checked 2026-10-14) names no face: it sets the size (13 point), and LR 7.1(f)(1)(A) distinguishes only proportional from monospaced fonts. No court-named substitute applies, so EB Garamond is kept (`docs/FONTS.md`, rule 3). The exemplar is Times New Roman (not embedded in the RECAP copy); that is one filer's choice, not a rule.
-- Double spacing is 2.3 em in EB Garamond: 0.65 em natural line plus 1.65 em leading (two 1.15 em lines, the usual Word "double" for a 13-point face). Measured pitch in our render: 29.9 pt, the same pitch the exemplar shows at 13 pt.
+- Typeface: Times New Roman. D. Minn. LR 7.1(h)(1) (complete set, PDF dated June 10, 2026, text checked 2026-10-14) names no face: it sets the size (13 point), and LR 7.1(f)(1)(A) distinguishes only proportional from monospaced fonts. No court-named substitute applies, so the template uses the house standard, Times New Roman (`docs/FONTS.md`, rule 6; EB Garamond until then). The exemplar is Times New Roman too (not embedded in the RECAP copy).
+- Double spacing is 2.3 em: two 1.15 em lines, the usual Word "double" for a 13-point face, 29.9 pt (typst `pitch-double`), the same pitch the exemplar shows at 13 pt.
 - Margins: 1 inch on all sides (the 6 1/2 by 9 inch area of LR 7.1(h)(1)). Page numbers sit in the bottom margin, centred.
 - Caption: court name centred and bold; party box with rules above and below the party column; right column: file number, bold title in capitals, "Fed. R. Civ. P. 12(b)(6)" right-aligned. The exemplar's ECF header (the "CASE ... Doc. 37 Filed ... Page x of y" line) is added by the court's system and is not reproduced.
 - Headings: level 1 centred bold (INTRODUCTION, CONCLUSION); level 2 bold with a hanging indent; level 3 bold, indented, hanging. Headings are single-spaced and kept with the text after them.
@@ -88,13 +88,13 @@ mv $D/usage/OVERLAY-adams-motion-brief.txt  $D/usage/OVERLAY-adams-motion-brief.
 rm $D/usage/OUTPUT-adams-motion-brief.pdf
 ```
 
-`tools/render.sh` resolves an output path relative to the repository root, so pass an absolute output path (above). The render uses the vendored fonts only (`--ignore-system-fonts`); a typst warning fails the render. Last render: no warnings, 13 pages, EB Garamond embedded (three faces), exit 0.
+`tools/render.sh` resolves an output path relative to the repository root, so pass an absolute output path (above). The render uses the vendored fonts only (`--ignore-system-fonts`); a typst warning fails the render. Last render recorded here (before the change to Times New Roman): no warnings, 13 pages, EB Garamond embedded (three faces), exit 0.
 
 ## What the overlay shows
 
 `usage/OVERLAY-adams-motion-brief.pdf` is page by page: red is our render, blue is the filed memorandum, black is where both agree. The map (`.txt`) pairs each of our pages with the exemplar page sharing most words. Pages 1 to 8 pair in order; from page 9 our pagination runs one page behind the exemplar's (our pages break at different lines, so each page carries a different block of text). The word-overlap figure is a diagnostic only, not a score.
 
-Expected differences (tier 3, not chased): typeface (Garamond vs Times, so every glyph is red and blue), line breaks, the ECF header, and the absence of a certificate in the exemplar.
+Expected differences (tier 3, not chased; on the earlier EB Garamond render): typeface (Garamond vs Times, so every glyph is red and blue), line breaks, the ECF header, and the absence of a certificate in the exemplar.
 
 ## Review log
 
@@ -107,7 +107,7 @@ Every page of the current PDF was rendered at 60 dpi and viewed. Pages were comp
 - Round 2 (final render): pages 1 to 13 reviewed again. Page 1 (caption, title, first paragraphs): PASS. Pages 2 to 11 (body, headings A to E, footnotes 1 and 2 at 13 point): PASS. Page 12 (conclusion, signature block): PASS. Page 13 (certificate of compliance): PASS.
 - Level-3 headings ("A.", "D.", ...) use a hanging indent (the exemplar has a tab at the same place): ACCEPTED, tier 2 choice.
 
-- Fonts pass (fb-595.7.5.13): font list checked against LR 7.1(h)(1), no face named, so EB Garamond kept (no change to the template). Re-rendered with `tools/render.sh` (exit 0, no warnings, 13 pages); `pdffonts`: EB Garamond Regular, Bold and Italic embedded only. Overlay re-run against the exemplar (`usage/FILED-EXAMPLE-motion-brief.pdf`, 13 pages, fetched from the URL in `usage/SOURCE.md`). Every page of the new render viewed again: PASS.
+- Fonts pass (fb-595.7.5.13): font list checked against LR 7.1(h)(1), no face named, so EB Garamond kept then (no change to the template). Re-rendered with `tools/render.sh` (exit 0, no warnings, 13 pages); `pdffonts`: EB Garamond Regular, Bold and Italic embedded only. Overlay re-run against the exemplar (`usage/FILED-EXAMPLE-motion-brief.pdf`, 13 pages, fetched from the URL in `usage/SOURCE.md`). Every page of the new render viewed again: PASS.
 
 Pages reviewed: 13 of 13.
 
@@ -124,10 +124,10 @@ Pages reviewed: 13 of 13.
 
 ## Engines
 
-The docx engine (`docx/`) is built from `docx/make-reference.sh` (pandoc's default reference document, restyled) and `docx/mnd-motion-brief.lua` (front page, caption table, signature block, certificate of compliance with the 12,000-word check). Outputs: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 25.2 conversion). Typst stays the primary engine; the latex engine is not built for this folder.
+The docx engine (`docx/`) is built from `docx/reference.xml` (`fb render` builds the reference document from it on the shared cross-engine recipe; `docx/make-reference.sh` did until fb-595.68) and `docx/mnd-motion-brief.lua` (front page, caption table, signature block, certificate of compliance with the 12,000-word check). Outputs: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 25.2 conversion). Typst stays the primary engine; the latex engine is not built for this folder.
 
-- **Matches the typst form:** EB Garamond 13 pt throughout, footnotes included (native footnotes, 13 pt single-spaced); 1-inch margins on letter paper; double spacing at the typst pitch (29.9 pt exact); first-line indent 0.5 inch, with the first paragraph after a heading unindented, as typst does; level 1 headings centred and bold; level 2 and 3 headings single-spaced, bold and hanging; caption with the court file number, bold title and rule line; signature block; certificate of compliance on its own page with the word count and software from the frontmatter; page number centred in the bottom margin.
-- **Differs:** pagination. Word's exact line spacing gives each line its full 29.9 pt box, while typst adds leading only between lines, so a page holds 21 lines in docx and 22 in typst. The memorandum runs 14 pages in docx against 13 in typst; the signature block moves to its own page 13 with the body ending on page 12. The word limit is a word count, not a page count, so this does not affect compliance.
+- **Matches the typst form:** Times New Roman 13 pt throughout, footnotes included (native footnotes, 13 pt single-spaced); 1-inch margins on letter paper; double spacing at the typst pitch (29.9 pt exact); first-line indent 0.5 inch, with the first paragraph after a heading unindented, as typst does; level 1 headings centred and bold; level 2 and 3 headings single-spaced, bold and hanging; caption with the court file number, bold title and rule line; signature block; certificate of compliance on its own page with the word count and software from the frontmatter; page number centred in the bottom margin.
+- **Differs** (measured on the earlier EB Garamond build; both engines are 15 pages now): pagination. Word's exact line spacing gives each line its full 29.9 pt box, while typst adds leading only between lines, so a page holds 21 lines in docx and 22 in typst. The memorandum runs 14 pages in docx against 13 in typst; the signature block moves to its own page 13 with the body ending on page 12. The word limit is a word count, not a page count, so this does not affect compliance.
 - **docx BLOCKED items:** none for the mandated form. No check IDs exist yet for this folder (no `checks.yaml`), so `tools/check.sh --engine docx` has nothing to run; the Gate 2 review of the docx PDF is recorded below.
 
-Review log (docx): every page of `usage/OUTPUT-motion-brief.docx.pdf` (14 pages) was rendered at 60 dpi and viewed against the typst pages: pages 1 to 14 PASS on form (caption, headings, footnotes, signature block, certificate). The `.docx` opens in LibreOffice without a repair prompt; Word was not available to check.
+Review log (docx, on the earlier EB Garamond build): every page of `usage/OUTPUT-motion-brief.docx.pdf` (14 pages) was rendered at 60 dpi and viewed against the typst pages: pages 1 to 14 PASS on form (caption, headings, footnotes, signature block, certificate). The `.docx` opens in LibreOffice without a repair prompt; Word was not available to check.

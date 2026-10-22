@@ -2,7 +2,7 @@
 
 Doc type: **motion-brief**: a motion under FRBP 9013 with its memorandum in one filing, plus the notice of hearing and certificate of service that the local rules require with it. Court: United States Bankruptcy Court, Western District of North Carolina (Charlotte Division in the exemplar). Folder: `courts/fourth-circuit/north-carolina/federal/bankruptcy-western-district/motion-brief/`.
 
-Status: exemplar=yes (one filing; tier-2 needs two or three, see gaps), render=ok, overlay=ok, pages reviewed 10 of 10 (every page rendered at 60 dpi and looked at). Nothing here sets `status` in `court.json`.
+Status: exemplar=yes (one filing; tier-2 needs two or three, see gaps), render=ok, overlay=ok, pages reviewed 10 of 10 on the earlier EB Garamond render, before fb-595.68 (every page rendered at 60 dpi and looked at; the current render is 11 pages). Nothing here sets `status` in `court.json`.
 
 ## Governing rules
 
@@ -20,7 +20,7 @@ All text read 2026-10-14. Federal rules: Legal Information Institute (LII) pages
 
 Paper size: the local rules are silent (checked). Letter is used. Not a rule.
 
-Typeface: face required by the rules: **none**. LR 9013-2(a) says only "the font size is a minimum of 12 point"; no face name appears anywhere in the Sept 2021 local rules text (checked 2026-10-14). Substitute: none needed, so the template keeps **EB Garamond** (`docs/FONTS.md`: a court that names no face keeps EB Garamond). Fit: n/a. The faces in the filed exemplar (Helvetica and Courier-Bold, not embedded) are exemplar evidence, not a rule.
+Typeface: face required by the rules: **none**. LR 9013-2(a) says only "the font size is a minimum of 12 point"; no face name appears anywhere in the Sept 2021 local rules text (checked 2026-10-14). The template is set in **Times New Roman** 12 pt, the house standard where no face is named (`docs/FONTS.md` rule 6; Liberation Serif as fallback), on typst and docx; EB Garamond before 2026-10-17 (the docx until fb-595.68.18). Fit: n/a. The faces in the filed exemplar (Helvetica and Courier-Bold, not embedded) are exemplar evidence, not a rule.
 
 ## Exemplar
 
@@ -43,11 +43,11 @@ sh tools/render.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-weste
 sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-western-district/motion-brief applied-machinery-25-03091
 ```
 
-- `usage/OUTPUT-motion-brief.typst.pdf`: 10 pages, letter. Compiled with no typst warnings. `pdffonts`: EBGaramond-Regular, -Italic, -Bold, all embedded. No system fonts.
-- `usage/OVERLAY-applied-machinery-25-03091.pdf` and `.txt`: red = our render, blue = filed exemplar, black = both. Page map from the tool (word overlap): ours p.1-3 pair with filed p.1-3 (87.0%, 72.0%, 54.2%); ours p.4-6 pair with filed p.5-7 (51.1%, 65.2%, 76.4%); ours p.7 pairs with filed p.11 (65.3%; our conclusion and memorandum signature against the notice signature); ours p.8-9 pair with filed p.10-11 (89.6%, 80.6%; the notice of hearing); ours p.10 (certificate of service, not in the exemplar) pairs with filed p.1 at 24.0%, which is not a real match. The overlay is a diagnostic, not a score.
+- `usage/OUTPUT-motion-brief.typst.pdf`: 11 pages, letter. Compiled with no typst warnings. `pdffonts`: Times New Roman Regular, Italic and Bold, all embedded (the pinned files of `docs/FONTS.md` rule 1).
+- `usage/OVERLAY-applied-machinery-25-03091.pdf` and `.txt` (made on the earlier 10-page EB Garamond render, before fb-595.68): red = our render, blue = filed exemplar, black = both. Page map from the tool (word overlap): ours p.1-3 pair with filed p.1-3 (87.0%, 72.0%, 54.2%); ours p.4-6 pair with filed p.5-7 (51.1%, 65.2%, 76.4%); ours p.7 pairs with filed p.11 (65.3%; our conclusion and memorandum signature against the notice signature); ours p.8-9 pair with filed p.10-11 (89.6%, 80.6%; the notice of hearing); ours p.10 (certificate of service, not in the exemplar) pairs with filed p.1 at 24.0%, which is not a real match. The overlay is a diagnostic, not a score.
 - File names: as in the complaint README (`OUTPUT-`, `OVERLAY-`, `INPUT-`), not the brief's `<id>.pdf`.
 
-## Visual review (Gate 2 record; all 10 pages, rendered at 60 dpi and looked at)
+## Visual review (Gate 2 record; all 10 pages, rendered at 60 dpi and looked at, on the earlier EB Garamond render, before fb-595.68)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -68,26 +68,26 @@ sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-west
 2. **The memorandum is inline.** The exemplar's motion contains its memorandum, with no separate memorandum. LR 7007-1(a) says a memorandum "shall be filed in accordance with Local Rule 9013-2", which is the same brief rule. The template renders the memorandum inside the motion, as the exemplar does. A separately filed memorandum would need its own doc type; not decided.
 3. **LR 9013-2(a) contents (2) and (4).** The sample has (1) the facts (Relevant Background) and (3) the points of law with authorities. It has no admissions-and-stipulations paragraph (2) and no anticipated-evidentiary-problems paragraph (4). Both are "if applicable"; the exemplar does not say whether they apply. The motion relies on the Theis declaration, which may raise an evidentiary point. Open for counsel or David.
 4. **Certificate of service has placeholders.** LR 9013-1(c) requires names and addresses. The exemplar has no certificate, and the trustee and Bankruptcy Administrator addresses are not in it. The sample says "[address to be added by counsel]". The certificate does not meet LR 9013-1(c) until those addresses are supplied; the template enforces nothing here, so the frontmatter must be completed before filing.
-5. **Page limit (LR 9013-2(a), 25 pages)** is not counted by the template. The sample's memorandum runs pp. 1-7.
+5. **Page limit (LR 9013-2(a), 25 pages)** is not counted by the template. The sample's memorandum ran pp. 1-7 on the earlier EB Garamond render.
 6. **Notice of hearing wording.** Transcribed as filed; it refers to the "Complaint" (the original), while the motion is directed to the First Amended Complaint. The template does not check this.
-7. **Typeface and spacing.** The rules name no face (see Governing rules), so the template keeps EB Garamond (vendored, OFL) at 12 point, double-spaced, one-inch margins, per LR 9013-2(a). The exemplar's faces (Helvetica and Courier-Bold, per `pdffonts`, not embedded) are not the body face, so they are not a rule. EB Garamond sets smaller than Times at the same size, so the page can look smaller than a Times-style exemplar; the rule's floor is point size. A typeface choice for David.
+7. **Typeface and spacing.** The rules name no face (see Governing rules), so the template is Times New Roman (`docs/FONTS.md` rule 6, the house standard, David 2026-10-17; EB Garamond before 2026-10-17, the docx until fb-595.68.18) at 12 point, double-spaced, one-inch margins, per LR 9013-2(a). The exemplar's faces (Helvetica and Courier-Bold, per `pdffonts`, not embedded) are not the body face, so they are not a rule.
 8. **ECF header** ("Case 25-03091 Doc 28 Filed ...") is added by CM/ECF and not reproduced.
 9. **Exemplar slips** are transcribed as filed (see the Sample section).
 10. **Local rules currency.** The Sept 2021 PDF is the latest I could find; not checked for a later version.
 
 ## Engines
 
-Typst (`typst/`) is the reference. The docx engine is built here (`docx/`: `reference.docx` from `make-reference.sh`, and `ncwb.lua` for the caption, notice of hearing, signature blocks and certificate). The latex engine is not built for this folder.
+Typst (`typst/`) is the reference. The docx engine is built here (`docx/`: `reference.xml`, from which `fb render --engine docx` builds the reference document on the shared cross-engine recipe in the typst face, and `ncwb.lua` for the caption, notice of hearing, signature blocks and certificate; `make-reference.sh` and `reference.docx` were retired into fb render in fb-595.68.18). The latex engine is not built for this folder.
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-motion-brief.typst.pdf` (10 pp) | reference |
-| docx | `OUTPUT-motion-brief.docx` (18 KB) and `OUTPUT-motion-brief.docx.pdf` (LibreOffice, 11 pp) | ok: converted without error; all 11 pages of the `.docx.pdf` rendered at 60 dpi and looked at, and typst pages 1 to 10 looked at beside them |
+| typst | `OUTPUT-motion-brief.typst.pdf` (11 pp) | reference |
+| docx | `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (LibreOffice, 11 pp) | ok: converted without error; XENG-001..003 pass, `usage/.check-docx.txt` PASS (typst 9 and docx 13 checks passed, fb-595.68.18). The by-eye review (all 11 pages of the earlier EB Garamond `.docx.pdf` at 60 dpi, beside typst pages 1 to 10) predates the port |
 
-Rebuild and render: `sh docx/make-reference.sh`, then `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`.
+Rebuild and render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`.
 
-- *Matches typst:* US Letter; one-inch margins; EB Garamond 12 pt only (`pdffonts`: EBGaramond Regular, Bold and Italic, all embedded); body double-spaced at exact 24 pt, half-inch first-line indent, 16 pt after each paragraph; section headings centered (level 1), flush left bold (level 2), bold italic (level 3); block quotations single-spaced, indented 0.5 in both sides. The statute and rule quotations keep their markers as written ("(a) (1) The trustee", "(A) made", "a. Was engaged"): pandoc reads those as lists, and a filter turns them back into paragraphs. The court title, caption, title, the memorandum's signature block, the notice of hearing on a new page with the caption repeated, its own signature, and the certificate of service on its own page with the parties listed. A centered page number on every page.
-- *Differs (tier 2, not chased):* body line breaks fall at other words in LibreOffice, so page breaks fall at other paragraphs: 11 pages against typst's 10. The memorandum's "V. CONCLUSION" moves to page 8 with its WHEREFORE and signature (the docx keeps them together, so page 7 ends with white space; typst keeps the conclusion on page 7). The notice runs pages 9 and 10 (typst 8 and 9), and the bracketed "[Remainder of Page Intentionally Blank ...]" line sits with the notice signature on page 10. The certificate is on page 11 (typst 10). The signature blocks are paragraphs with a tab stop, not a table, so that "WHEREFORE" stays with its signature in LibreOffice; Word may paginate differently.
+- *Matches typst* (seen on the earlier EB Garamond docx; the face is now Times New Roman 12 pt on both, Regular, Bold and Italic embedded): US Letter; one-inch margins; body double-spaced at exact 24 pt, half-inch first-line indent, 16 pt after each paragraph; section headings centered (level 1), flush left bold (level 2), bold italic (level 3); block quotations single-spaced, indented 0.5 in both sides. The statute and rule quotations keep their markers as written ("(a) (1) The trustee", "(A) made", "a. Was engaged"): pandoc now reads the sample without `fancy_lists`, so they stay text (the earlier docx turned them back into paragraphs with a filter). The court title, caption, title, the memorandum's signature block, the notice of hearing on a new page with the caption repeated, its own signature, and the certificate of service on its own page with the parties listed. A centered page number on every page.
+- *Differs (tier 2, not chased; on that earlier docx, not re-checked here; both engines are 11 pages now):* body line breaks fell at other words in LibreOffice, so page breaks fell at other paragraphs: 11 pages against typst's 10. The memorandum's "V. CONCLUSION" moves to page 8 with its WHEREFORE and signature (the docx keeps them together, so page 7 ends with white space; typst keeps the conclusion on page 7). The notice runs pages 9 and 10 (typst 8 and 9), and the bracketed "[Remainder of Page Intentionally Blank ...]" line sits with the notice signature on page 10. The certificate is on page 11 (typst 10). The signature blocks are paragraphs with a tab stop, not a table, so that "WHEREFORE" stays with its signature in LibreOffice; Word may paginate differently.
 - *Not built:* nothing the typst form has. Addresses in the certificate are placeholders, as in the sample (gap 4 above).
 - *Word:* not opened in Word (not installed on this box). Checked: `unzip -tq` is clean, every XML part passes `xmllint --noout`, no style ID is defined twice, and LibreOffice converts the file without error. The no-repair check in Word is not done.
 - *Exemplars:* the filed exemplar this README cites is not in `usage/` in this checkout (only `SOURCE.md` is there), so the docx is judged against the typst render only, not against a filed exemplar.

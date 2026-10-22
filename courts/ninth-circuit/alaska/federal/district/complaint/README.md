@@ -6,9 +6,9 @@ Doc type: **complaint** (verified complaint for injunctive relief, a pleading un
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md`: an excerpt of the 18-page filing (see Sample) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (the earlier EB Garamond render, before fb-595.68; the committed Times New Roman render is 10 pages) |
 | overlay | ok: `usage/OVERLAY-launch-alaska-complaint.pdf` and `OVERLAY-launch-alaska-complaint.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change, on the earlier EB Garamond render) |
 
 Build and check (from the repo root, with the toolchain on PATH):
 
@@ -26,7 +26,7 @@ Primary source: the District of Alaska Local Civil Rules, "Effective October 15,
 | D. Alaska L.Civ.R. 7.5(a)(1)(A) | Documents double-spaced (quotations over 50 words or 5 lines single-spaced and indented). | `body-leading = 1.35em` (double; see Measured spacing). |
 | L.Civ.R. 7.5(a)(1)(B) | Margins of at least 1 inch around all text, including footers. | `margins = 1in`; footer inside the bottom margin. |
 | L.Civ.R. 7.5(a)(1)(C) | If more than 1 page: a page number and a footer including the case name and number, at the bottom of each page. | `running-footer`: page number, then `footer_title` and `Case No.`. |
-| L.Civ.R. 7.5(a)(1)(D) | "use at least 13-point, proportionally-spaced font, or the equivalent". No face is named. Text re-read 2026-10-15 from the fetched PDF (`pdftotext`, `Local_Civil_Rules_10-2025.pdf`, page 15). | `type-size = 13pt`, EB Garamond (proportional). See Typeface and Known gaps 2. |
+| L.Civ.R. 7.5(a)(1)(D) | "use at least 13-point, proportionally-spaced font, or the equivalent". No face is named. Text re-read 2026-10-15 from the fetched PDF (`pdftotext`, `Local_Civil_Rules_10-2025.pdf`, page 15). | `type-size = 13pt`, Times New Roman (proportional). See Typeface and Known gaps 2. |
 | L.Civ.R. 7.5(a)(1)(E) | No interlineation; one side of the paper. | Not applicable to the generated PDF. |
 | L.Civ.R. 7.5(a)(2)(A) | Letter size, white paper (conventional filing). | `paper: "us-letter"`. |
 | L.Civ.R. 7.5(a)(3) | Electronic filings: PDF, word searchable. | Typst PDF with embedded text (pdftotext reads it). |
@@ -50,9 +50,9 @@ Not produced by this template (separate filings or the civil cover sheet): the c
 | Item | Value |
 |---|---|
 | Face required | None named. L.Civ.R. 7.5(a)(1)(D) asks for a 13-point, proportionally-spaced font "or the equivalent". `docs/FONTS.md` applies only where the rule names a face. |
-| Vendored substitute | Not needed. EB Garamond is kept: `font-family = "EB Garamond"` (`fonts/eb-garamond/`). |
+| Vendored substitute | Not needed. Times New Roman, the house standard (`docs/FONTS.md` rule 6): `font-family = ("Times New Roman", "Liberation Serif")` (the pinned install; Liberation Serif from `fonts/liberation-serif/` as fallback). EB Garamond until fb-595.68. |
 | Metric fit | Not applicable (no court-named face). |
-| Verified | `pdffonts usage/OUTPUT-complaint.typst.pdf` lists EB Garamond Regular, Bold and Italic only, all embedded (2026-10-15). |
+| Verified | `pdffonts usage/OUTPUT-complaint.typst.pdf` listed EB Garamond Regular, Bold and Italic only, all embedded (2026-10-15, the earlier EB Garamond render). The committed render embeds TimesNewRomanPSMT, -BoldMT and -ItalicMT. |
 
 ## Layout
 
@@ -64,7 +64,7 @@ Not produced by this template (separate filings or the civil cover sheet): the c
 
 ## Measured spacing
 
-Measured from `pdftotext -bbox` on page 2 of the render: consecutive lines of one paragraph are 34.5 pt apart; a single-spaced line (leading 0) is 17.0 pt. The double-spacing ratio is therefore 2.0 on EB Garamond's own line height (which is taller than Times's, so 34.5 pt at 13 pt is the double-spaced pitch for this face). The earlier template comment in `typst/akd-complaint.typ` that gave a 0.65em line box was wrong and is corrected.
+Measured from `pdftotext -bbox` on page 2 of the render (the earlier EB Garamond render, before fb-595.68; the template now sets a 30 pt double and a 15 pt single pitch, `pitch-double`, `pitch-single`): consecutive lines of one paragraph are 34.5 pt apart; a single-spaced line (leading 0) is 17.0 pt. The double-spacing ratio is therefore 2.0 on EB Garamond's own line height (which is taller than Times's, so 34.5 pt at 13 pt is the double-spaced pitch for this face). The earlier template comment in `typst/akd-complaint.typ` that gave a 0.65em line box was wrong and is corrected.
 
 ## Sample
 
@@ -91,7 +91,7 @@ Measured from `pdftotext -bbox` on page 2 of the render: consecutive lines of on
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. Other D. Alaska complaints were found (Native Village of Hooper Bay v. Burgum, 3:25-cv-00316; Sovereign Inupiat for a Living Arctic v. Burgum, 3:25-cv-00356; NAEC v. Trump, 3:25-cv-00038, doc 1, 46 pages) but not compared. Tier 2 is therefore **not** judged against two filers.
-2. **Font.** D. Alaska requires "13-point, proportionally-spaced font, or the equivalent" and names no face, so EB Garamond stays (see Typeface). EB Garamond at 13 pt meets the size and proportional-spacing wording, but its x-height is smaller than Times New Roman, so the text looks smaller than a Times filing at the same point size. Whether a smaller-looking face counts as "the equivalent" is a question for David. If the answer is no, the vendored Times-metric substitute is Liberation Serif (`fonts/liberation-serif/`): a choice of the filer, not a rule requirement.
+2. **Font.** D. Alaska requires "13-point, proportionally-spaced font, or the equivalent" and names no face. The template sets Times New Roman 13 pt (`docs/FONTS.md` rule 6; see Typeface), which meets the size and proportional-spacing wording. Until fb-595.68 it used EB Garamond, whose smaller x-height raised the question whether it counted as "the equivalent"; with Times New Roman that question does not arise.
 3. **Footer size.** 13 pt, the same as the text, because 7.5(a)(1)(D) does not exempt footers.
 4. **Caption.** The party column is closed by a rule rather than the ")" column used in the exemplar. A convention choice; ACCEPTED.
 5. **Heading level 2 and 3** are centered bold rather than the exemplar's mixed styles. ACCEPTED.
@@ -102,9 +102,9 @@ Measured from `pdftotext -bbox` on page 2 of the render: consecutive lines of on
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` (EB Garamond 13 pt, exact 34.5 pt double spacing, letter, 1 in margins); `akd-complaint.lua` builds the cover, numbered paragraphs, Roman-numeral headings, lettered prayer, signature block and verification; `render.sh` runs pandoc and fills the footer (page number, footer title, case number) from the frontmatter. Build: `sh tools/render.sh --engine docx courts/ninth-circuit/alaska/federal/district/complaint usage/INPUT-complaint.md`, which writes `usage/OUTPUT-complaint.docx` and `.docx.pdf` (11 pages, LibreOffice 26.8.1.1; the PDF embeds EB Garamond Regular, Bold and Italic only).
+**docx** (`docx/`): fb render builds the reference document from `docx/reference.xml` on the shared cross-engine recipe (the typst face, Times New Roman, 13 pt, exact 30 pt double and 15 pt single lines, letter, 1 in margins); `akd-complaint.lua` builds the cover, numbered paragraphs, Roman-numeral headings, lettered prayer, signature block and verification, and writes the footer (page number, footer title, case number) from the frontmatter (`FORMBOOK_FOOTERS`). Until fb-595.68 `build-reference.sh` and `render.sh` did the reference and the footer, in EB Garamond at a 34.5 pt pitch. Build: `sh tools/render.sh --engine docx courts/ninth-circuit/alaska/federal/district/complaint usage/INPUT-complaint.md`, which writes `usage/OUTPUT-complaint.docx` and `.docx.pdf` (11 pages on the earlier build, LibreOffice 26.8.1.1, embedding EB Garamond Regular, Bold and Italic only; the committed `.docx.pdf` is 10 pages and embeds TimesNewRomanPSMT, -BoldMT and -ItalicMT).
 
-- Checked with LibreOffice only (Word is not available here). Every page of the `.docx.pdf` was rendered at 60 dpi and viewed (11 of 11, after the last change).
+- Checked with LibreOffice only (Word is not available here). Every page of the `.docx.pdf` was rendered at 60 dpi and viewed (11 of 11, after the last change, on the earlier build).
 - Matches the typst template: font and size, double spacing, 1 in margins, the cover order (counsel, court, caption, title, statute), numbered paragraphs, Roman-numeral level-1 headings, lettered prayer items, signature block at 2.5 in, verification on its own page, footer with page number, footer title and case number.
-- Differs: the typst OUTPUT PDF is not in this folder, so the typst pagination could not be compared; the page count of the docx (11) therefore has no typst figure to match. The footer sits 0.25 in from the bottom edge, inside the margin. The caption rule and the verification signature line are a table border and a paragraph border (Word-native, drawn as LibreOffice draws them). Footnotes are single-spaced 13 pt.
+- Differs (recorded on the earlier build, before the fb-595.68 cross-engine port; `eval.yaml` now gates the docx on typst's line and page breaks, and the typst OUTPUT is in `usage/`): the typst OUTPUT PDF was not in this folder, so the typst pagination could not be compared; the page count of the docx (11) therefore has no typst figure to match. The footer sits 0.25 in from the bottom edge, inside the margin. The caption rule and the verification signature line are a table border and a paragraph border (Word-native, drawn as LibreOffice draws them). Footnotes are single-spaced 13 pt.
 - BLOCKED: `tools/check.sh --engine docx` cannot run in this folder (it needs `court.json` and `checks.yaml` beside `typst/`, which the doc-type folder does not have). No Gate 0 to 3 result exists for the docx engine; the review above is the only record.

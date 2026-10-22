@@ -7,10 +7,10 @@ Folder: `courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/adve
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (1 filer; see `usage/SOURCE.md`; SHA-256 checked against `SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md`: the full text of the 12-page filing (every paragraph, both footnotes, the transfer table, the prayers, the signature block) |
-| typeface | required: Times New Roman, 12 point (Style Guide II.A). Template: **Liberation Serif**, the metric-compatible substitute in `docs/FONTS.md`. Embedded: `LiberationSerif` family only (`pdffonts`). |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored Liberation Serif only, no typst warnings |
-| overlay | ok: `usage/OVERLAY-budgen-complaint.pdf` and `usage/OVERLAY-budgen-complaint.txt` (page map: 10 of 10 sample pages paired) |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; see the table at the end) |
+| typeface | required: Times New Roman, 12 point (Style Guide II.A). Template: **Times New Roman** 12 pt, the Style Guide's face (the pinned install, `docs/FONTS.md` rule 1; earlier renders used Liberation Serif, its metric-compatible substitute), in typst and docx. Embedded: Times New Roman family only (`pdffonts`). |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 12 pages, typst 0.15.0, pinned Times New Roman only, no typst warnings |
+| overlay | ok: `usage/OVERLAY-budgen-complaint.pdf` and `usage/OVERLAY-budgen-complaint.txt` (measured on the earlier Liberation Serif render; page map: 10 of 10 sample pages paired) |
+| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on the earlier Liberation Serif render; see the table at the end) |
 | status in `court.json` | not set (the brief does not ask for it) |
 
 ## Governing rules
@@ -29,8 +29,8 @@ Verified 2026-10-14 from the sources in the Source column. Local rules are the C
 | Local Rule 7001-1(b), 9004-1(c) | Injunctive relief: the title includes "Injunctive Relief Sought". | `full-title()` adds it when `injunctive_relief: true`. Not used by this sample. |
 | Local Rule 7001-1(c)-(f) | Service of the summons, complaint and a copy of the rule within seven days; service on all defendants within 28 days; default by 60 days. Source: flmb `localrules/rules/7001-1.pdf`. | Not a form requirement; not produced here. |
 | Local Rule 5005-1(d) | Paper: typewritten, single-sided, 8 1/2 by 11 inches, one-inch margins. Source: flmb `localrules/rules/5005-1.pdf`. | `#set page(paper: "us-letter", margin: 1in)`. |
-| Court Style Guide, Part II.A (Whole Document) | Times New Roman, 12-point font; one-inch margins on 8 1/2 by 11 inch paper; page numbers centered in the footer on every page except the first. Source: flmb `cmecf/documents/styleguide.pdf` (updated 2/3/2014). The Style Guide states this under its order format. Local Rule 7001-1(k)(2) applies the Style Guide to motions; this template applies the same whole-document format to the complaint, which is the reading taken here (the Style Guide does not say whether it covers complaints). | `font-family` (Liberation Serif, the substitute for Times New Roman; `docs/FONTS.md`), `type-size`, `margin`, `footer-page()`. |
-| Style (exemplar, convention) | Double spaced body; justified text; numbered paragraphs at a half-inch indent; lettered sub-items and prayers. | `body-leading = 1.35em` (24 pt pitch at 12 pt, measured in the render); `set par(justify: true)`; `set enum(numbering: "a.")`. |
+| Court Style Guide, Part II.A (Whole Document) | Times New Roman, 12-point font; one-inch margins on 8 1/2 by 11 inch paper; page numbers centered in the footer on every page except the first. Source: flmb `cmecf/documents/styleguide.pdf` (updated 2/3/2014). The Style Guide states this under its order format. Local Rule 7001-1(k)(2) applies the Style Guide to motions; this template applies the same whole-document format to the complaint, which is the reading taken here (the Style Guide does not say whether it covers complaints). | `font-family` (Times New Roman, the pinned install, `docs/FONTS.md` rule 1), `type-size`, `margin`, `footer-page()`. |
+| Style (exemplar, convention) | Double spaced body; justified text; numbered paragraphs at a half-inch indent; lettered sub-items and prayers. | `pitch-double` (27.6 pt, Word's double at 12 pt; 24 pt in the earlier `body-leading = 1.35em` render); `set par(justify: true)`; `set enum(numbering: "a.")`. |
 
 Not produced by this template (separate filings, not part of the pleading): the adversary cover sheet, the summons, the proof of service required by Local Rule 7001-1(d), the corporate ownership statement, and the filing fee receipt. Not verified whether each is required with this complaint; the Court's filing checklist should be checked.
 
@@ -51,7 +51,7 @@ Not produced by this template (separate filings, not part of the pleading): the 
 
 ## Known gaps and open choices
 
-1. **Font (closed; metric-compatible substitute).** The Style Guide names Times New Roman, 12 point. The template now sets Liberation Serif at 12 point (`fonts/liberation-serif/`, SIL OFL 1.1), the substitute `docs/FONTS.md` gives for Times New Roman; the page count is 10 here against 12 in the filing. Liberation Serif is designed to be metric-compatible with Times New Roman; it has not been checked against a Times New Roman file, since none is on this box (`docs/FONTS.md`).
+1. **Font (closed).** The Style Guide names Times New Roman, 12 point, and the template (typst and docx) sets it: the pinned Times New Roman install (`docs/FONTS.md` rule 1). The committed render is 12 pages, as the filing is. Earlier renders used Liberation Serif, the metric-compatible substitute, and ran 10 pages.
 2. **Title and party designation (open question for the filer).** Local Rule 9004-1(a) asks that the title "state in the title the name and designation of the party" submitting the paper. The filed title ("Complaint to Avoid and Recover Fraudulent Transfers") does not name the Trustee; the designation appears in the first paragraph and the caption. The sample keeps the filed title. Whether the title must carry the designation is a reading question, not settled here.
 3. **Numbering of the filing (exemplar defect, not a template defect).** The filed complaint numbers its jurisdiction paragraphs "1" and "1", so every later paragraph of the filing is one lower than the template's continuous numbering. The filing's own cross-references ("paragraphs 1 through 25") therefore point one paragraph short of the template's numbers. The template numbers continuously (Rule 10(b)).
 4. **Italics.** Case names and "In re" are italic in the sample by transcriber's judgement; the exemplar's text layer does not carry italic markup. Defined terms are underlined in the motion exemplar, not in the complaint; the template does not reproduce underlining.
@@ -63,7 +63,7 @@ Not produced by this template (separate filings, not part of the pleading): the 
 
 ## Review of the rendered pages (`usage/OUTPUT-adversary-complaint.typst.pdf`, 60 dpi, every page viewed)
 
-Viewed on the Liberation Serif render (the current `OUTPUT`).
+Viewed on the earlier Liberation Serif render (then the current `OUTPUT`).
 
 | Page | Result |
 |---|---|
@@ -78,7 +78,7 @@ Viewed on the Liberation Serif render (the current `OUTPUT`).
 | 9 | Paragraphs 62 to 67; the WHEREFORE with lettered items a to e. Pass. |
 | 10 | Reservation of rights (unnumbered), the signature block at right, page number 10. No heading is left at a page foot. Pass. |
 
-Overlay (`usage/OVERLAY-budgen-complaint.txt`): the word-overlap pairing matches each sample page to the filed page with the most shared words (47% to 82%); pages 4 to 10 pair with a later filed page, as expected because the filing's cover and counts take more room in Times. The overlay is a diagnostic, not a score.
+Overlay (`usage/OVERLAY-budgen-complaint.txt`; measured on the earlier Liberation Serif render): the word-overlap pairing matches each sample page to the filed page with the most shared words (47% to 82%); pages 4 to 10 pair with a later filed page, as expected because the filing's cover and counts take more room in Times. The overlay is a diagnostic, not a score.
 
 ## How to build
 
@@ -93,7 +93,7 @@ sh tools/overlay.sh courts/eleventh-circuit/florida/federal/bankruptcy-middle-di
 ## Engines
 
 - **typst** (primary): unchanged; see the sections above.
-- **docx** (`docx/`): pandoc, `docx/reference.docx` (built by `sh docx/build-reference.sh` from `docx/parts/`: styles, numbering, footer) and `docx/flmb-pleading.lua`. Output: `usage/OUTPUT-adversary-complaint.docx`.
-  - Matches typst: Letter, one-inch margins; 12 point body with exact 24 pt double spacing; numbered paragraphs (bare numbers) and `^` unnumbered paragraphs; court title, caption (slash rule), and signature block built from the frontmatter; level 1 to 3 headings centred (as the complaint template sets them); lists lettered `a.`; footnotes at 12 point, single spaced; page numbers centered from page 2 (first-page footer empty).
-  - Differs: the declared font is Times New Roman (the Style Guide's face); typst uses the Liberation Serif substitute. Caption and signature are two-column tables whose widths are fractions (pandoc writes them against its own base width; Word scales them, not verified). The caption rule is a paragraph border with a tab for the slash, not a drawn line. Lists take one of ten `Pleading List n` styles, so an eleventh ordered list in one sample fails the build. The signature block is not kept with a preceding list (the complaint's body ends in a paragraph, as in typst).
-  - docx BLOCKED: `docx.pdf` gates (Gate 0 and 1 on `usage/OUTPUT-budgen-complaint.docx.pdf`, and the page review). LibreOffice is not installable from conda-forge; Debian packages extracted without root segfault at startup on this box. Pages reviewed: 0 of 0 (no `.docx.pdf` exists). The font-name proof cannot pass as written: the LibreOffice PDF would show the metric substitute, not Times New Roman. `tools/check.sh --engine docx` expects a court folder (`court.json`, `rules.md`) and was not run.
+- **docx** (`docx/`): `fb render --engine docx` builds the reference document from `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst template's face; `docx/build-reference.sh` and `docx/parts/` are retired), then runs pandoc with `docx/flmb-pleading.lua`. Output: `usage/OUTPUT-adversary-complaint.docx` and the LibreOffice `usage/OUTPUT-adversary-complaint.docx.pdf`.
+  - Matches typst (recorded before fb-595.68; face and pitch now from `docx/reference.xml`): Letter, one-inch margins; Times New Roman 12 point body with exact 27.6 pt double spacing; numbered paragraphs (bare numbers) and `^` unnumbered paragraphs; court title, caption (slash rule), and signature block built from the frontmatter; level 1 to 3 headings centred (as the complaint template sets them); lists lettered `a.`; footnotes at 12 point, single spaced; page numbers centered from page 2 (first-page footer empty).
+  - Differs (recorded before fb-595.68): the declared font is Times New Roman (the Style Guide's face), as typst's now is (it used the Liberation Serif substitute then). Caption and signature are two-column tables whose widths are fractions (pandoc writes them against its own base width; Word scales them, not verified). The caption rule is a paragraph border with a tab for the slash, not a drawn line. Lists take one of ten `Pleading List n` styles, so an eleventh ordered list in one sample fails the build. The signature block is not kept with a preceding list (the complaint's body ends in a paragraph, as in typst).
+  - docx BLOCKED (recorded before fb-595.68, when no `.docx.pdf` could be made here): `docx.pdf` gates (Gate 0 and 1 on `usage/OUTPUT-budgen-complaint.docx.pdf`, and the page review). LibreOffice is not installable from conda-forge; Debian packages extracted without root segfault at startup on this box. Pages reviewed: 0 of 0 (no `.docx.pdf` exists). The font-name proof cannot pass as written: the LibreOffice PDF would show the metric substitute, not Times New Roman. `tools/check.sh --engine docx` expects a court folder (`court.json`, `rules.md`) and was not run.

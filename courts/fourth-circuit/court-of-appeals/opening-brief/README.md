@@ -37,15 +37,15 @@ Local Rule 32 (https://www.ca4.uscourts.gov/rules/Rule32.html) was fetched on 20
 
 | Face the court names | Vendored substitute (Typst name) | Fit | Used by |
 |---|---|---|---|
-| Century Schoolbook (court's notice of preferred typefaces, Dec. 9, 2024; the filed exemplar is set in it) | TeX Gyre Schola (`TeX Gyre Schola`) | Metric-compatible with the Adobe base-35 New Century Schoolbook AFMs (`docs/FONTS.md`) | typst, LaTeX, docx |
+| Times New Roman, Century Schoolbook or Georgia (court's notice of preferred typefaces, Dec. 9, 2024; the filed exemplar is set in Century Schoolbook) | Times New Roman (`Times New Roman`, Liberation Serif as fallback; newtx in latex) | The face itself (pinned Times New Roman, `docs/FONTS.md` rule 1) | typst, LaTeX, docx |
 
-The FRAP names no face, only a proportional serif, which EB Garamond also meets. The notice is not a rule, but it names Times New Roman, Century Schoolbook or Georgia and "discourages the use of Garamond", so the template follows it. Century Schoolbook is chosen over Times New Roman (answering and reply briefs) because it is the face of this court's filed exemplar. The page count moved from 14 to 13 pages with the change (EB Garamond to Schola).
+The FRAP names no face, only a proportional serif, which EB Garamond also meets. The notice is not a rule, but it names Times New Roman, Century Schoolbook or Georgia and "discourages the use of Garamond", so the template follows it. The template is set in Times New Roman, a face the notice prefers and the house standard (`docs/FONTS.md` rule 6), as are the answering and reply briefs; the exemplar's Century Schoolbook is one filer's choice. History: EB Garamond at first, then TeX Gyre Schola in the fonts pass (the page count moved from 14 to 13 pages with that change), then Times New Roman (13 pages in each engine).
 
 ## What the template does
 
 `typst/ca4-opening-brief.typ` (entry point `typst/main.typ`) is driven by the FRAP numbers above and by the parameters at its head:
 
-- Font: TeX Gyre Schola (see Typeface), 14 pt everywhere, double-spaced with a 0.94 em body leading, 1-inch margins.
+- Font: Times New Roman (see Typeface), 14 pt everywhere, double-spaced at a 25.9 pt pitch (`pitch-double`), 1-inch margins.
 - Cover: one page; the spacing between its parts shrinks to fit, the type size never does. A cover that cannot fit is an error.
 - Front matter: TOC and TOA with lower-roman folios; the TOA is built from `toa:` links in the body. TOA entry spacing is 0.5 em.
 - Body: arabic folios from 1. Headings are numbered by the template (I./A./1./a. in the Argument; A./1./a./(1) elsewhere). The signature block follows the last section and stays with the last paragraph.
@@ -63,7 +63,7 @@ Same shape as the Ninth Circuit's contract (see `courts/ninth-circuit/court-of-a
 
 ## Known gaps
 
-1. **Typeface: closed in the fonts pass.** Set in TeX Gyre Schola (Century Schoolbook), per the court's notice and the exemplar. Before, EB Garamond was used, which FRAP accepts but the notice discourages. Not a tier-1 item.
+1. **Typeface: closed.** Set in Times New Roman, a face the court's notice prefers (`docs/FONTS.md` rule 6). The fonts pass had set TeX Gyre Schola (Century Schoolbook, the exemplar's face); before that, EB Garamond was used, which FRAP accepts but the notice discourages. Not a tier-1 item.
 2. **Cover colour.** Not produced: the template is paper-agnostic. The appellant's paper cover is blue under FRAP 32(a)(2); the electronic cover may be white.
 3. **Disclosure statement.** Not generated. The exemplar (a government party) has none. A private appellant would need one, filed under FRAP 26.1 / Local Rule 26.1 and included in the brief (the court's requirements page).
 4. **Excerpt only.** The sample is 13 pages of a 66-page filed brief. It omits brief pages 7–17 (Statement Parts B–G), 22–52 (Argument II.A.2 to II.C.3), and some of the Summary and Introduction paragraphs (each marked in the sample). The TOA lists only the authorities cited in the excerpt. The 1,523-word certificate count is the excerpt's, not the filed brief's 10,452.
@@ -73,11 +73,11 @@ Same shape as the Ninth Circuit's contract (see `courts/ninth-circuit/court-of-a
 
 ## Overlay map
 
-From `usage/OVERLAY-netchoice-opening-brief.txt`: our pages 1–13 paired with the filed pages named there (after the font change: ours p.4 with filed p.10, ours p.5 with filed p.13, ours p.10 with filed p.62; the excerpt pairs weakly, as before). Red is our render, blue the filed page, black where both agree. The overlay is a diagnostic: it shows where the layout diverges, not a score.
+From `usage/OVERLAY-netchoice-opening-brief.txt`: our pages 1–13 paired with the filed pages named there (on the TeX Gyre Schola render, after the change from EB Garamond: ours p.4 with filed p.10, ours p.5 with filed p.13, ours p.10 with filed p.62; the excerpt pairs weakly, as before). Red is our render, blue the filed page, black where both agree. The overlay is a diagnostic: it shows where the layout diverges, not a score.
 
 ## Page review (Gate 2 input)
 
-Every page of `usage/OUTPUT-opening-brief.typst.pdf` was rendered at 60 dpi and viewed after the font change. Folios are the printed ones.
+Every page of `usage/OUTPUT-opening-brief.typst.pdf` was rendered at 60 dpi and viewed after the change from EB Garamond to TeX Gyre Schola (the review after the port to Times New Roman and the cross-engine model is in the status table). Folios are the printed ones.
 
 | PDF page | Folio | Content | Finding |
 |---|---|---|---|
@@ -105,7 +105,7 @@ Three renderings of the same markdown (`usage/INPUT-opening-brief.md`). The typs
 
 - **typst** (`typst/ca4-opening-brief.typ`): pitches and block spaces in pt; contents and authorities rows with `listing-row` (36 pt page column; authorities 56 pt or the page list's width); the designation on the cover and the signature in a true right half of the text width (a `pad(left: 50%)` was relative to the padded content and moved with its width). A loose list (blank lines between items) has its paragraph breaks dropped before xengine's list rule (one paragraph per item). Every page viewed at 50 dpi after the port.
 - **LaTeX** (`latex/template.tex`, `latex/ca4.lua`): `\usepackage{xengine}`, `\xe@lines{14}{25.9}` and `{14}{16}`, `\addvspace` spacing, `\xe@row` contents and authorities; the text block is 0.05 bp wider than 6.5 in (newtx advances run about 0.05 pt a full line wider than Times New Roman's: a line that just fits in typst broke a word early here). Every page viewed at 40 dpi.
-- **docx** (`docx/build-reference.sh` -> `docx/reference.docx`, `docx/ca4.lua`, `docx/render.sh`, `docx/pagemap.awk`, `docx/footer.xml`; ca7's opening-brief machinery): exact line spacing at the typst pitches, the "CA ..." styles with typst's spaces in twips; sections (cover: no folio, front matter lower roman, body arabic from 1) and PAGE footers written by `render.sh`; the contents and authorities page numbers are static text read from the LibreOffice PDF of a first pass (two passes must agree). Every page of `usage/OUTPUT-opening-brief.docx.pdf` viewed at 40 dpi. Differs from typst only in vertical spacing on the cover and in the cover's double rules (one paragraph border). Not opened in Word. Headings carry no keep-with-next and the leader's three spaces are 8 pt: two LibreOffice behaviours, see the answering brief's README, Engines.
+- **docx** (`docx/reference.xml`, `docx/ca4.lua`; `fb render --engine docx` builds it since fb-595.68.4, which retired `docx/build-reference.sh`, `render.sh`, `pagemap.awk` and `footer.xml`): the reference document from `reference.xml` (the shared cross-engine recipe in the typst face, and the "CA ..." styles with typst's spaces in twips), exact line spacing at the typst pitches; `ca4.lua` writes the sections (cover: no folio, front matter lower roman, body arabic from 1) and the PAGE footers; the contents and authorities page numbers are static text from fb render's needles over its passes (typst's sticky headings kept across passes in ``). Every page of `usage/OUTPUT-opening-brief.docx.pdf` viewed at 40 dpi. Differs from typst only in vertical spacing on the cover and in the cover's double rules (one paragraph border). Not opened in Word. Headings carry no keep-with-next and the leader's three spaces are 8 pt: two LibreOffice behaviours, see the answering brief's README, Engines.
 
 ## Verification pass 2026-10-16 (fb-595.26.4)
 

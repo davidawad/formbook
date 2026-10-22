@@ -7,9 +7,9 @@ Folder: `courts/fifth-circuit/mississippi/federal/northern-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer, 20 pp; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (transcription of the complaint's caption, parties, jurisdiction, background, Counts I–III, prayer, jury demand and signature; the figures are noted, not reproduced) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-complaint.md`) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 13 pages (11 on the earlier EB Garamond render, before fb-595.68), typst 0.15.0, pinned Times New Roman only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-complaint.md`) |
 | overlay | ok: `usage/OVERLAY-haas-complaint.pdf` and `OVERLAY-haas-complaint.txt` (`sh tools/overlay.sh <this dir> haas-complaint`) |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 11 of 11 on the earlier EB Garamond render, before fb-595.68 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`), so the sample is `INPUT-<id>.md` and the id is `haas-complaint`.
 
@@ -33,7 +33,7 @@ The court's own local rules are the N.D. and S.D. Mississippi Local Uniform Civi
 - Court title (three lines, bold, centered): "IN THE UNITED STATES DISTRICT COURT / FOR THE NORTHERN DISTRICT OF MISSISSIPPI / <DIVISION> DIVISION".
 - Caption: parties in the left column (names, designation, "v." between parties), a rule closing the column at right and bottom; the right column has "CIVIL ACTION NO.:" with the case number, and "JURY TRIAL DEMANDED" when `jury_demand` is set.
 - Title of the pleading, centered bold caps.
-- Body double-spaced (24 pt pitch at 12 pt), first-line indent 0.5 in; numbered paragraphs with the number at the indent; headings centered bold caps (level 1) or centered bold (level 2); the lead-in paragraph is unnumbered.
+- Body double-spaced (27.6 pt pitch at 12 pt, Word's double), first-line indent 0.5 in; numbered paragraphs with the number at the indent; headings centered bold caps (level 1) or centered bold (level 2); the lead-in paragraph is unnumbered.
 - A paragraph that starts with "WHEREFORE" is unnumbered (the prayer's lead-in); the prayer is a numbered list (1., 2., …). Sub-items within a list item are separated by hard line breaks.
 - Footnotes: a `[^key]` mark in a paragraph becomes a typst footnote, set at 11 pt.
 - Signature block: "Dated:" at left, "Respectfully submitted," and the signing counsel at right. Jury demand: a "JURY DEMAND" heading and paragraph after the prayer, before the signature.
@@ -49,7 +49,7 @@ The court's own local rules are the N.D. and S.D. Mississippi Local Uniform Civi
 ## Known gaps and open choices
 
 1. **One exemplar.** Tier 2 is not yet judged against two or three filers. The search (CourtListener RECAP, `court=msnd`, complaints filed 2025-08 to 2026-07) also found *Fulmer v. EZ Auto, Inc.* (3:26-cv-00121, 11 pp), whose text layer stops after page 1, and *Smith v. Southern Bancorp Bank* (3:26-cv-00038, 15 pp), not downloaded further. See `usage/SOURCE.md`.
-2. **Font.** The rule names no complaint typeface, so `docs/FONTS.md` keeps EB Garamond (no court-named face, no substitute). The exemplar is Times New Roman. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the filed page. The 12-point size is kept; a Times-metric font would remove the difference.
+2. **Font.** The rule names no complaint typeface. The template kept EB Garamond until fb-595.68; it is now Times New Roman 12 pt, the house standard where no face is named (`docs/FONTS.md` rule 6), which is also the exemplar's face.
 3. **Figures.** The exemplar's comparison figures (paragraphs 15 and 17) are noted in the sample, not reproduced. The overlay therefore pairs sample page 4 with exemplar page 11, a figure page with little text.
 4. **Paragraph numbers.** The sample's numbers are the template's (1 to 40), which match the exemplar's numbering. The exhibits are not reproduced.
 5. **Caption style.** The party column is closed by a rule at right and bottom, not the ")" column some filers use. Recorded as a layout choice; both styles appear in this district's filings.
@@ -57,7 +57,7 @@ The court's own local rules are the N.D. and S.D. Mississippi Local Uniform Civi
 7. **Not produced:** civil cover sheet, corporate disclosure statement (L.U.Civ.R. 7(c)), summons, and the filing fee.
 8. **Gates.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids touching `tools/`. The gates were not run. Render, overlay and the page review above are the checks for this doc type.
 
-## Review of the rendered pages (`OUTPUT-complaint.typst.pdf`, 11 pages)
+## Review of the rendered pages (`OUTPUT-complaint.typst.pdf`, 11 pages, the earlier EB Garamond render, before fb-595.68)
 
 - Page 1: court title lines 1–3, caption with the party column closed by a rule and the right column (case number, jury demand), title centered, lead-in, paragraphs 1–5 on the double-spaced grid. Pass.
 - Page 2: BACKGROUND and Haas' Intellectual Property headings, paragraphs 6–7 with footnote 1 at the foot of the page, "Defendant's Infringing Products" heading with paragraph 8. Pass.
@@ -81,24 +81,24 @@ The page review checks the layout of the render. Text fidelity to the exemplar r
 
 Two engines are built from the same sample: typst (primary, `typst/`) and docx (`docx/`). This doc type has no latex template yet.
 
-**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-complaint.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> usage/INPUT-complaint.md`; it writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
+**docx** (`docx/`): `docx/reference.xml` (`base="xengine"`: `fb render --engine docx` builds the reference document from it, the shared cross-engine recipe in the typst template's face) and the Lua filter `docx/msnd-complaint.lua` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> usage/INPUT-complaint.md`; it writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`). Its 13 pages match the typst render's 13. The lists below were checked on the earlier EB Garamond build (`docx/make-reference.sh` and `docx/render.sh`, since retired into fb render), except the face, sizes and pitch, which are read from the current files.
 
 What matches typst, checked on the LibreOffice PDF:
 
-- EB Garamond only (`pdffonts`); body 12 pt; footnotes 11 pt.
-- Body double-spaced at an exact 24 pt; first-line indent 0.5 in; letter paper with 1-inch margins; page number centered at the foot of each page.
+- Times New Roman only (`pdffonts`); body 12 pt; footnotes 11 pt.
+- Body double-spaced at an exact 27.6 pt (24 pt before fb-595.68); first-line indent 0.5 in; letter paper with 1-inch margins; page number centered at the foot of each page.
 - Court title, caption (party column closed by a rule at right and bottom), title, lead-in, numbered paragraphs 1–40 (numbered by the filter), prayer items 1–11 with sub-items a–d on their own lines, JURY DEMAND, and the signature block.
 
 What differs:
 
-- Pagination: 12 pages against typst's 11. The single-spaced lines (caption, signature) are an exact 14 pt, close to typst but not identical, and a heading stays with its next paragraph, so page 1 ends after paragraph 2 with room for about three lines. No page break is forced.
+- Pagination (earlier build): 12 pages against typst's 11. The single-spaced lines (caption, signature) are an exact 14 pt, close to typst but not identical, and a heading stays with its next paragraph, so page 1 ends after paragraph 2 with room for about three lines. No page break is forced.
 - Numbered paragraphs: the text starts at a 0.9 in tab stop. Typst places it 0.3 in after the number, which is about 0.92 in for "1." and about 0.99 in for "10.".
 - The title sits lower under the caption than in typst.
 
 docx BLOCKED items:
 
 - No check IDs: this doc type has no `rules.md` or `checks.yaml` (Known gaps, item 8), so `tools/check.sh --engine docx` has nothing to run here. The docx was reviewed by page, not by gate.
-- Font: EB Garamond is vendored as OpenType CFF (`.otf`), which Word cannot embed. A reader without EB Garamond installed sees a substitute (`docs/DOCX.md`, "Fonts"). Not verified in Word.
+- Font (before fb-595.68): EB Garamond was vendored as OpenType CFF (`.otf`), which Word cannot embed; the docx is now Times New Roman. Not verified in Word.
 - Word: the file was converted by LibreOffice without error but was not opened in Word, so the "no repair prompt" check is not done.
 
-Review of the docx PDF: all 12 pages rendered at 60 dpi and viewed after the last change. Typst pages compared: 1 (caption), 9 (prayer) and 11 (signature).
+Review of the docx PDF (the earlier EB Garamond build, before fb-595.68): all 12 pages rendered at 60 dpi and viewed after the last change. Typst pages compared: 1 (caption), 9 (prayer) and 11 (signature).

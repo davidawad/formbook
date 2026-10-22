@@ -7,9 +7,9 @@ Folder: `courts/ninth-circuit/california/federal/central-district/complaint/` (s
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer: Plaintiffs' counsel, Kuzyk Law LLP; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (a portion of the 33-page filing; see below) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -BoldItalic, all embedded), no typst warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -BoldItalic, all embedded), no typst warnings (the earlier EB Garamond render, before fb-595.68; the committed render is Times New Roman, 9 pages) |
 | overlay | ok: `usage/OVERLAY-alarcon-complaint.pdf` and `usage/OVERLAY-alarcon-complaint.txt` (page map below) |
-| pages reviewed | 8 of 8: every page rendered at 60 dpi and viewed at the final template state |
+| pages reviewed | 8 of 8: every page rendered at 60 dpi and viewed at the final template state (of the earlier EB Garamond render) |
 
 File names: the repo tools (`tools/render.sh`, `tools/overlay.sh`) write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.{pdf,txt}`, and `INPUT-<id>.md` is the sample. The `<id>` is `alarcon-complaint`. This follows CLAUDE.md's file-role naming rather than `<id>.pdf`/`<id>-overlay.pdf`.
 
@@ -45,11 +45,11 @@ Not produced (separate filings): the civil cover sheet, the summons, and any cer
 - Counsel block single-spaced from line 1; court title below it (line 11 in the sample, because the counsel block has 15 lines).
 - Text is on the 24-pt grid: `on-grid` rounds each block to whole lines, so paragraphs, headings and the signature block land on the numbers.
 - Paragraphs are numbered 1, 2, ... by the template. Headings stay with the paragraph after them. The signature block is unbreakable (`block(breakable: false)`), so "Dated / Respectfully submitted" never stands alone at the foot of a page.
-- Body leading is `1.064em` at 14 pt: the EB Garamond line box is 0.65 em, so 24 pt of pitch needs 14.9 pt of leading. Measured on the render: text baselines fall on the numbered lines.
+- Body lines are exact 24 pt line boxes (`xengine` and `edges(pitch)`, the cross-engine layout model of `lib/typst/xengine.typ`), so text baselines fall on the numbered lines. (The earlier EB Garamond template set `1.064em` of leading for the same pitch.)
 
 ## Overlay (red/blue)
 
-`tools/overlay.sh` pairs each render page with the exemplar page sharing the most words:
+`tools/overlay.sh` pairs each render page with the exemplar page sharing the most words (map measured on the earlier 8-page EB Garamond render, before fb-595.68):
 
 ```
 ours p.1  filed p.1  word-overlap 89.5%
@@ -73,7 +73,7 @@ Red is our render, blue is the filed page, black is where they agree. The overla
 ## Known gaps and open choices
 
 1. **Rules version.** The copy of the CACD Local Rules that was reachable is the 6/1/2020 edition of Chapter I. The December 2025 edition named in the search index (`.../2025%20December%20LRs%20Chap%201.pdf`) returned 404; courtrules.net returned 403. The 11-3 format rules have been stable for years, but **the current text has not been confirmed**. Confirm before the PR.
-2. **Typeface.** L.R. 11-3.1.1 requires a standard proportional font at 14 pt or larger. The template uses EB Garamond (the only vendored font, `fonts/`). EB Garamond is smaller on the page than Times at the same point size, so the text looks smaller than a Times 14-pt filing. The 14-pt minimum is met as written. A Times-metric font would remove the difference; no such font is vendored, and fonts are not added from this box.
+2. **Typeface.** L.R. 11-3.1.1 requires a standard proportional font at 14 pt or larger. The template uses Times New Roman 14 pt (the pinned install, Liberation Serif fallback; docs/FONTS.md rule 6), a standard proportional face. The 14-pt minimum is met as written.
 3. **TOC and TOA line spacing (motion-brief only).** See that README.
 4. **One exemplar.** EVAL-LOOP's tier 2 asks for two or three filers. Two more cacd complaints were found and not saved: Greenberg v. Creative Artists Agency (2:26-cv-11882, Dkt. 1, 10 pp., Harmon Seidman & Bruss) and Huemen, Inc. v. Ludo Fact USA (5:23-cv-00516, Dkt. 1, 10 pp.). Tier 2 is therefore not judged against a second filer.
 5. **Caption style.** The party column is closed by a rule on its right and bottom edges. Recorded as a convention choice; not checked against a second filer.
@@ -85,8 +85,8 @@ Red is our render, blue is the filed page, black is where they agree. The overla
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx`, `cacd-complaint.lua` is the filter, `render.sh` fills the footer from the sample). Checked with LibreOffice only; Word was not available. Render: `sh tools/render.sh --engine docx complaint usage/INPUT-complaint.md`, which gives `OUTPUT-complaint.docx` and `.docx.pdf` (8 pages, all viewed).
+**docx** (`docx/`: `fb render --engine docx` builds the reference document from `reference.xml`, the shared cross-engine recipe in the typst face, then runs pandoc with `cacd-complaint.lua` (and `lib/lines.lua`), which writes the footer from the sample and the section, `FORMBOOK_FOOTERS` and `FORMBOOK_FINAL`). Checked with LibreOffice only; Word was not available. Render: `sh tools/render.sh --engine docx complaint usage/INPUT-complaint.md`, which gives `OUTPUT-complaint.docx` and `.docx.pdf` (8 pages, all viewed, on the earlier EB Garamond build; the committed `.docx.pdf` is 9 pages).
 
-- Matches the typst output: EB Garamond 14 pt; exact 24 pt line pitch on the 28-line grid; letter size, 1 in top margin; 28 line numbers 1 to 28 on every page (a page-anchored text box in the header); pleading rules (page borders); counsel block single spaced from line 1 with the court title on line 11 in the sample; caption with the party column's right and bottom rules; numbered allegations; headings centered or bold italic; signature block kept together on one page; footer with page number, title and case number.
+- Matches the typst output: Times New Roman 14 pt; exact 24 pt line pitch on the 27-line grid; letter size, 1 in top margin; 27 line numbers on every page (a frame in the footer, anchored to the page at the top margin); pleading rules (page borders); counsel block single spaced from line 1 with the court title on line 11 in the sample; caption with the party column's right and bottom rules; numbered allegations; headings centered or bold italic; signature block kept together on one page; footer with page number, title and case number.
 - Differs: the pleading rules are page borders around the text area, not full-height lines. The caption and signature block are tables. A title too long for its footer cell wraps to two lines. `-` list items render as bullets, which is what the typst template's `list` produces; the contract text above says lettered (a), (b), which the typst code does not do for `-` items.
 - BLOCKED: `sh tools/check.sh <court-dir> --engine docx` cannot run in this folder: it needs `court.json` and `checks.yaml` beside `typst/`, and neither exists (not created here). No check IDs exist yet, so no check result is claimed.

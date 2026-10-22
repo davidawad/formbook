@@ -7,9 +7,9 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-southern-district/adversa
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md`: the full body of the complaint (paragraphs 1 to 52, all three counts, the conclusion) and the caption, signature block and debtor footnote. Exemplar footnotes 2 to 4 and Appendix A are not transcribed. |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 13 pages, typst 0.15.0, pinned Times New Roman only (`pdffonts`; EB Garamond before fb-595.68), no warnings, exit 0 |
 | overlay | **not regenerated (fail)**: `tools/overlay.sh` exits 1 because `usage/` holds only `SOURCE.md` in this snapshot (the filed PDF is not in the tree or in git). `usage/OVERLAY-camp-mystic.txt` is the page map from the earlier run; no `OVERLAY-camp-mystic.pdf` is present. |
-| pages reviewed | 13 of 13 (fonts pass, 2026-10-14: every page rendered at 60 dpi and viewed on the final layout) |
+| pages reviewed | 13 of 13 (fonts pass, 2026-10-14: every page of the then EB Garamond render viewed at 60 dpi, before fb-595.68) |
 
 ## Governing rules
 
@@ -31,9 +31,9 @@ Not produced by this template (separate filings that may be required with the fi
 ## Layout
 
 - Page: US Letter, 1 inch margins on all sides (a convention; the rules set no margins), page numbers centered in the footer (LR10.2 "paginated").
-- Type: EB Garamond 12 pt, the only font vendored in `fonts/`. No point size or typeface is set by the S.D. Tex. rules (see Known gaps).
-- Typeface row (fonts pass, 2026-10-14): face required = none (the text of the Bankruptcy Local Rules, March 3, 2026, and the LR Sept. 2025 reprint was extracted with `pdftotext` and searched for font, typeface, type size and margin: none) → vendored substitute = EB Garamond (kept; the rules allow any face) → fit = n/a.
-- Spacing: double spaced (1.35 em leading on a 12 pt face, 24 pt baseline pitch, as in the CAND template). Caption, counsel and signature blocks are single spaced.
+- Type: Times New Roman 12 pt (the house standard, `docs/FONTS.md` rule 6, and the exemplar's face; EB Garamond before fb-595.68). No point size or typeface is set by the S.D. Tex. rules (see Known gaps).
+- Typeface row (fonts pass, 2026-10-14): face required = none (the text of the Bankruptcy Local Rules, March 3, 2026, and the LR Sept. 2025 reprint was extracted with `pdftotext` and searched for font, typeface, type size and margin: none) → vendored substitute = EB Garamond (kept then; the rules allow any face; the template is now Times New Roman, `docs/FONTS.md` rule 6) → fit = n/a.
+- Spacing: double spaced (24 pt line pitch, twice the 12 pt type size; LR10.2). Caption, counsel and signature blocks are single spaced.
 - Caption: court name block (centered, bold), division, then a two-column caption: the left column has `In re:`, debtor names and footnote, the debtor designation, plaintiffs, `v.`, defendants, and the designation; it is closed by a rule at its right and bottom. The right column has chapter, case number, joint administration and adversary number.
 - Title: centered, bold, all caps.
 - Body: paragraphs numbered from 1 with a 0.5 inch first-line indent; level 1 headings centered bold; level 2 centered bold (count headings); level 3 bold, left (A., B., ...). A heading and the paragraph after it are kept together, and the last paragraph is kept with the signature block, so a signature never stands alone.
@@ -48,7 +48,7 @@ Not produced by this template (separate filings that may be required with the fi
 
 ## Known gaps and open choices
 
-1. **No typeface, point size or margin in the rules.** The S.D. Tex. bankruptcy local rules (read by their rule headings; there is no BLR 9004 formatting rule, and BLR 9013-1 covers notices and service) and the district LR10 set no typeface, no point size and no margins; LR10.2 sets paper size, double spacing, pagination and binding. EB Garamond 12 pt and 1 inch margins are choices. The exemplar is Times New Roman (embedded), so EB Garamond looks smaller at the same point size. A Times-metric font is not vendored (the brief forbids adding one here).
+1. **No typeface, point size or margin in the rules.** The S.D. Tex. bankruptcy local rules (read by their rule headings; there is no BLR 9004 formatting rule, and BLR 9013-1 covers notices and service) and the district LR10 set no typeface, no point size and no margins; LR10.2 sets paper size, double spacing, pagination and binding. Times New Roman 12 pt and 1 inch margins are choices. The exemplar is Times New Roman (embedded), the face the template now uses (`docs/FONTS.md` rule 6; it was EB Garamond, which looked smaller at the same point size, before fb-595.68).
 2. **Judges' individual procedures** (BLR 1001-1(c)(4), (d)) were not checked. A judge may impose format rules; this template does not reflect any judge's procedures.
 3. **Only one exemplar.** The brief asks for one filed document per doc type. The Camp Mystic complaint is the only one saved. Tier 2 is therefore not judged against two or three filers. Other adversary complaints found on CourtListener (for example Blouse v. Nine Energy Service, Adv. 26-03630, 35 pages, scanned) were not saved.
 4. **Numbering across the sample.** The sample transcribes the whole complaint, so its paragraph numbers match the filing (1 to 52). The overlay page map pairs our pages with the exemplar by word overlap, not by number.
@@ -57,7 +57,7 @@ Not produced by this template (separate filings that may be required with the fi
 7. **Attorney-in-charge designation** (LR11.1 designates the attorney in charge by signing the pleading) is not printed as a separate line. The exemplar does not print one.
 8. **Overlay.** Red = our render, blue = the matched exemplar page, black = both. The overlay was generated and checked as a page map; in thumbnails the caption and title sit at different heights from the exemplar, and the blue ECF header appears (gap 5). The overlay is a diagnostic, not a score.
 
-## Review of the rendered pages (13 pages, final layout)
+## Review of the rendered pages (13 pages of the earlier EB Garamond render, before fb-595.68)
 
 - Page 1: court name and division centered; caption with debtor, plaintiffs, defendants, chapter, case number and adversary number; title; lead-in; ¶ 1; footnote 1 (debtor). No spill.
 - Pages 2 to 5: ¶¶ 2 to 23 (Introduction, Jurisdiction and Venue, Parties, Background, A. General Background), centered bold or left bold headings. Pass.
@@ -71,9 +71,9 @@ Not produced by this template (separate filings that may be required with the fi
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` writes `reference.docx` (styles, footer page number); `complaint.lua` builds the caption, numbered paragraphs, lettered lists and signature block from the sample; `render.sh` runs pandoc, then writes the caption rules and keeps table rows whole. Output: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice, 13 pages; typst is 13 pages).
+docx (`docx/`): `reference.xml` (`base="xengine"`: `fb render --engine docx` builds the reference document from it, the shared cross-engine recipe in the typst template's face); `complaint.lua` builds the caption with its rules, numbered paragraphs, lettered lists, the debtors note and signature block from the sample; `sh tools/render.sh --engine docx <dir> usage/INPUT-adversary-complaint.md` (a wrapper of `fb render --engine docx`) runs pandoc with it. Output: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice, 13 pages; typst is 13 pages).
 
-- Matches the typst form: EB Garamond 12 pt; body double spaced as an exact 24 pt line; 1 in margins, letter; 0.5 in first-line indent; numbered paragraphs; headings (centered bold for levels 1 and 2, bold left for level 3); the two-column caption with the right and bottom rules and the case numbers at right; centered page number; footnote text 10 pt (typst measures about 10.2 pt); single-spaced lines at the typst pitch (13.8 pt); signature block kept whole.
-- Differs, and why: the paragraph numbers are typed with a tab, not Word auto-numbering (the numbers are the sample's own); the caption rules are cell borders added by `docx/render.sh`, because pandoc cannot write cell borders and LibreOffice does not draw paragraph borders in a table cell; LibreOffice places exact-line text about 3 pt lower than typst, so a page can hold one line less and a break can fall differently (page counts match on this sample).
+- Matches the typst form: Times New Roman 12 pt; body double spaced as an exact 24 pt line; 1 in margins, letter; 0.5 in first-line indent; numbered paragraphs; headings (centered bold for levels 1 and 2, bold left for level 3); the two-column caption with the right and bottom rules and the case numbers at right; centered page number; the debtors note under the caption at 10 pt in 11.5 pt lines; single-spaced lines at the typst pitch (13.8 pt); signature block kept whole.
+- Differs, and why: the paragraph numbers are typed with a tab, not Word auto-numbering (the numbers are the sample's own); the caption rules are cell borders written by the filter (`docx/render.sh` added them before fb-595.68), because pandoc cannot write cell borders and LibreOffice does not draw paragraph borders in a table cell; LibreOffice places exact-line text about 3 pt lower than typst, so a page can hold one line less and a break can fall differently (page counts match on this sample; measured on the earlier EB Garamond render).
 - Opened and converted with LibreOffice only; Word was not checked.
 - BLOCKED: none.

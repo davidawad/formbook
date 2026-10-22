@@ -8,10 +8,10 @@ The exemplars are *separate* memoranda filed with a motion to dismiss (the motio
 |---|---|
 | exemplar | yes, 2 filers: `usage/FILED-EXAMPLE-motion-brief.pdf` (4 pp, MOHELA, 2014) and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (5 pp, Green Tree Servicing and U.S. Bank, 2005). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md` (the whole memorandum, 4 pages) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 4 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
-| typeface | no face named by the court's rules (checked 2026-10-14); EB Garamond kept, per `docs/FONTS.md` rule 3 |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 4 pages, typst 0.15.0, Times New Roman only (pinned; vendored Liberation Serif fallback), no warnings |
+| typeface | no face named by the court's rules (checked 2026-10-14); Times New Roman 12 pt, the house standard (`docs/FONTS.md`, rule 6; EB Garamond 13 pt until then) |
 | overlay | fail (2026-10-14): `tools/overlay.sh` cannot run, because `usage/` holds only `SOURCE.md` and the filed PDF is not in this snapshot. The `OVERLAY-barnhart-mohela-memorandum.txt` shown is from the earlier run; no `.pdf` overlay exists. |
-| pages reviewed | 4 of 4 (every page of the 2026-10-14 render rasterized at 60 dpi and viewed) |
+| pages reviewed | 4 of 4 (every page of the 2026-10-14 render, EB Garamond, rasterized at 60 dpi and viewed) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`INPUT-`, `OUTPUT-`, `OVERLAY-`). The overlay tool writes `OVERLAY-<id>.pdf`; it does not write `<id>-overlay.pdf`.
 
@@ -58,7 +58,7 @@ Not produced by this template (separate filings, not part of the memorandum): th
 
 `sh tools/overlay.sh courts/eighth-circuit/missouri/federal/bankruptcy-western-district/motion-brief barnhart-mohela-memorandum`. The first exemplar in `usage/` is Barnhart. The page map from the final run (`usage/OVERLAY-barnhart-mohela-memorandum.txt`): ours p.1 to p.4 pair with filed pp. 1 to 4 (word overlap 64.4%, 70.1%, 60.4%, 28.4%). Page 4 is low (28%) because our page 4 holds the certificate of service, which the filed memorandum does not have, and the filed page 4 is short. The overlay is a diagnostic, not a score. The visible differences are tier-3: the filed document is in Calibri/Arial and has a different caption spacing.
 
-## Gate 2 review (current PDF, every page rendered at 60 dpi and viewed)
+## Gate 2 review (the 2026-10-14 EB Garamond PDF, every page rendered at 60 dpi and viewed)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -70,7 +70,7 @@ Not produced by this template (separate filings, not part of the memorandum): th
 ## Known gaps and open choices
 
 1. **Rule text is not the current one.** The W.D. Mo. bankruptcy local rules I could read are the 2012 text ("Adopted November 30, 2012, effective January 1, 2013", `mow.uscourts.gov/sites/mow/files/BK_Archive_bk_rules.pdf`). The 2003 text (`BK_Archive_local_rules_of_practice.pdf`) has the same 9011-4, 9013-1 and 9013-3 wording, but 9013-1(C) gives 20 days there and 21 days in 2012. The 2019 proposed amendments (`2019-BK-Proposed-LR-Amendments.pdf`) redirect and were not read. Whether the rules were amended after 2013 is **not verified**. The court's current local rules page could not be fetched (403/404 to the fetch tool). **David or the PM should check the current W.D. Mo. bankruptcy local rules before this template is treated as final**, especially any page limit or format rule added after 2013.
-2. **Type face and size.** No W.D. Mo. or FRBP rule sets a font or type size for a memorandum that I could read. The exemplars use Times New Roman (Lewallen) or Calibri/Arial (Barnhart; the text layer shows embedded Calibri). The only vendored face is EB Garamond, so the template uses it at 13 pt, which is about Times 12 pt by apparent size. Re-checked 2026-10-14: the W.D. Mo. bankruptcy rules page on courtrules.net returned 403 and a web search did not reach the court's own text, so no typeface rule was found for this court. Under `docs/FONTS.md` rule 3 a court that names no face keeps EB Garamond, so the template stays on it. Liberation Serif (metric-compatible with Times) is vendored, but it is not required here, so it is not used. This is a tier-2 choice.
+2. **Type face and size.** No W.D. Mo. or FRBP rule sets a font or type size for a memorandum that I could read. The exemplars use Times New Roman (Lewallen) or Calibri/Arial (Barnhart; the text layer shows embedded Calibri). Re-checked 2026-10-14: the W.D. Mo. bankruptcy rules page on courtrules.net returned 403 and a web search did not reach the court's own text, so no typeface rule was found for this court. The template sets Times New Roman 12 pt, the house standard (`docs/FONTS.md`, rule 6); it was EB Garamond at 13 pt (about Times 12 pt by apparent size) before. This is a tier-2 choice.
 3. **Single spacing and the blank line between paragraphs** follow both exemplars (tier 2). Carlson, the complaint, is double-spaced; memoranda in W.D. Mo. are not, in the two exemplars shown.
 4. **Certificate of service.** L.R. 9013-3 requires one. Lewallen has one (ECF notice and first-class mail to the persons listed). Barnhart has none in its text layer; its CM/ECF notice is not printed. The sample's certificate is therefore an addition, with the date taken from the ECF stamp ("Filed 03/10/14"). The template makes it mandatory because the rule does.
 5. **Judge.** The sample's judge, Honorable Cynthia A. Norton, is printed on the Barnhart caption. Case number 13-04184 carries the "-can" suffix.
@@ -83,8 +83,8 @@ Not produced by this template (separate filings, not part of the memorandum): th
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for this doc type. Unchanged by the docx work.
-- **docx** (`docx/`): `reference.docx` (built by `sh docx/make-reference.sh`: styles, US Letter, 1 inch margins, centred PAGE footer) and `mowb.lua` (caption, roman and lettered headings, numbered lists, signature block and certificate). Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (`sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`).
-  - **Matches typst:** US Letter, 1 inch margins, EB Garamond 13 pt (declared; install it to open as designed), the caption and court title, the title, single spacing with a blank line between paragraphs, first-line indents, roman (I., II.) and lettered (A., B.) headings, numbered lists, signature block and certificate of service, page-number footer.
-  - **Differs from typst:** 5 pages in docx against 4 in typst. The body line spacing is looser, so the Conclusion and signature run over, and the certificate of service falls alone on page 5. Nothing is forced with page breaks.
-  - **Checked:** the `.docx.pdf` is the LibreOffice 26.8.1 conversion (fonts embedded: EB Garamond only). Every page (1-5) was rendered at 60 dpi and viewed beside the typst pages. The `.docx` was not opened in Word.
-  - **BLOCKED:** `tools/check.sh --engine docx` has not been run (no `court.json` or `rules.md` in this folder), so no `.check-docx.txt` stamp is written.
+- **docx** (`docx/`): `reference.xml` (from which `fb render` builds the reference document on the shared cross-engine recipe: styles, US Letter, 1 inch margins, centred PAGE footer; `docx/make-reference.sh` built a committed `reference.docx` until fb-595.68) and `mowb.lua` (caption, roman and lettered headings, numbered lists, signature block and certificate). Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (`sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`).
+  - **Matches typst:** US Letter, 1 inch margins, Times New Roman 12 pt (declared; a machine without it substitutes silently), the caption and court title, the title, single spacing with a blank line between paragraphs, first-line indents, roman (I., II.) and lettered (A., B.) headings, numbered lists, signature block and certificate of service, page-number footer.
+  - **Differs from typst** (measured on the earlier EB Garamond build, before fb-595.68; both engines are 4 pages now): 5 pages in docx against 4 in typst. The body line spacing is looser, so the Conclusion and signature run over, and the certificate of service falls alone on page 5. Nothing is forced with page breaks.
+  - **Checked** (on the earlier EB Garamond build): the `.docx.pdf` is the LibreOffice 26.8.1 conversion (fonts embedded: EB Garamond only). Every page (1-5) was rendered at 60 dpi and viewed beside the typst pages. The `.docx` was not opened in Word.
+  - **BLOCKED** (then; the committed `usage/.check-docx.txt` now reads PASS): `tools/check.sh --engine docx` had not been run (no `court.json` or `rules.md` in this folder), so no `.check-docx.txt` stamp is written.

@@ -7,10 +7,10 @@ Folder: `courts/fourth-circuit/north-carolina/federal/bankruptcy-eastern-distric
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md`: an excerpt of the 38-page complaint (caption, introduction, jurisdiction, parties, factual allegations, part of the First Claim, prayer, signature); see Known gaps |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| typeface | rules name no face: EB Garamond kept (`docs/FONTS.md`, "No face named"); no substitute needed. Checked 2026-10-14 against the NCEB Local Rules and Administrative Guide (see Typography). |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, Times New Roman only (`pdffonts`), no warnings |
+| typeface | rules name no face: Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6; Liberation Serif as fallback), on typst and docx (fb-595.68.18). Checked 2026-10-14 against the NCEB Local Rules and Administrative Guide (see Typography). |
 | overlay | ok: `usage/OVERLAY-jsmith-complaint.pdf` and `usage/OVERLAY-jsmith-complaint.txt` (page map; exemplar copy fetched from CourtListener RECAP on 2026-10-14, 38 pages, matching `usage/SOURCE.md`) |
-| pages reviewed | 8 of 8 (fonts pass, 2026-10-14: every page rendered at 70 dpi and viewed after the re-render) |
+| pages reviewed | 8 of 8 on the earlier EB Garamond render, before fb-595.68 (fonts pass, 2026-10-14: every page rendered at 70 dpi and viewed after the re-render) |
 
 ## Governing rules
 
@@ -29,7 +29,7 @@ Rules were read from the primary sources on 2026-10-14.
 
 Typography: no local rule or Admin Guide provision sets a typeface, size, margin or spacing for a complaint (the same search as the motion-brief README). The template uses the exemplar's settings: a 12-point serif, double-spaced, 1-inch margins, page numbers at the foot.
 
-Fonts pass (2026-10-14): the Administrative Guide's only face wording is in the creditor-matrix instructions (Rule 1007-2, "Twelve (12) pitch Times New Roman and Courier New fonts create good print quality"). That applies to the mailing matrix, not to a complaint. The Local Rules and the Administrative Guide were fetched in full from the court's "Newest" PDFs and searched for font, typeface, point, margin and spacing terms. No rule names a face for this doc type, so `docs/FONTS.md` ("No face named") keeps EB Garamond. The TeX Gyre Schola substitute is not used.
+Fonts pass (2026-10-14): the Administrative Guide's only face wording is in the creditor-matrix instructions (Rule 1007-2, "Twelve (12) pitch Times New Roman and Courier New fonts create good print quality"). That applies to the mailing matrix, not to a complaint. The Local Rules and the Administrative Guide were fetched in full from the court's "Newest" PDFs and searched for font, typeface, point, margin and spacing terms. No rule names a face for this doc type. That pass kept EB Garamond; the template is now Times New Roman, the house standard where no face is named (`docs/FONTS.md` rule 6, David 2026-10-17; fb-595.68.18).
 
 Not produced by this template (separate filings): the Adversary Proceeding Cover Sheet, the summons, and the civil-procedure disclosure statement, if any. The template does not produce a certificate of service for the complaint (service is by summons).
 
@@ -62,9 +62,9 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 
 ## Overlay
 
-`sh tools/overlay.sh <doc-type-dir> jsmith-complaint` writes `usage/OVERLAY-jsmith-complaint.pdf` (red = our render, blue = the filed page, black = both) and `OVERLAY-jsmith-complaint.txt`. The page map pairs our 8 pages with exemplar pages by shared words: ours 1 and 2 with exemplar 1 and 2, ours 3 with 4, ours 4 with 5, ours 5 with 6, ours 6 with 14, ours 7 with 36, ours 8 with 37. Word overlap runs from 35% to 70%. Page 7 has the lowest overlap (34%): it holds the first omitted-pages note and the start of the prayer, and its exemplar page is 36. The overlay is a diagnostic, not a score.
+`sh tools/overlay.sh <doc-type-dir> jsmith-complaint` writes `usage/OVERLAY-jsmith-complaint.pdf` (red = our render, blue = the filed page, black = both) and `OVERLAY-jsmith-complaint.txt`. The page map (made on the earlier 8-page EB Garamond render, before fb-595.68) pairs our 8 pages with exemplar pages by shared words: ours 1 and 2 with exemplar 1 and 2, ours 3 with 4, ours 4 with 5, ours 5 with 6, ours 6 with 14, ours 7 with 36, ours 8 with 37. Word overlap runs from 35% to 70%. Page 7 has the lowest overlap (34%): it holds the first omitted-pages note and the start of the prayer, and its exemplar page is 36. The overlay is a diagnostic, not a score.
 
-## Page review (Gate 2 equivalent; every page rendered at 60 dpi and viewed)
+## Page review (Gate 2 equivalent; every page rendered at 60 dpi and viewed, on the earlier 8-page EB Garamond render, before fb-595.68)
 
 - Page 1: caption (court lines, division, debtor and parties, case, chapter, adversary number wrapping onto a second line), title, lead-in, Introduction, lettered items A to C. Pass; the adversary number wraps at the hyphen, a cosmetic point (see Known gaps).
 - Page 2: Jurisdiction and Authority, paragraphs 2 to 8, Identification of the Parties heading at the foot. Pass.
@@ -81,7 +81,7 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 2. **Numbering.** The template numbers the allegations from 1 in the sample. The filed numbers differ after the first omission: filed paragraph 62 (the First Claim's incorporation paragraph) renders as paragraph 34. The filed numbers are not transcribed.
 3. **The exemplar's own numbers disagree.** The caption reads "CASE NO. 23-02734-5-JNC," but paragraph 9 says "BK Case No. 23-02437-5-JNC." The transcription keeps both as printed. A template cannot resolve the discrepancy; it is a question about the filing.
 4. **Only one exemplar** (one filer). The tier-2 bar (2 or 3 filers) is not met. The search: the CourtListener API for `court=nceb` with `type=r` and the query "complaint adversary" returned many adversary-complaint dockets; the one downloaded and checked is JSmith Civil v. Second Wind (this one, which has a text layer and a 12-point Century Schoolbook body). Other results seen in the search (Hussein v. L&W Supply, 25-00050; Wayne Bailey v. Nationwide, 20-00026) were not downloaded.
-5. **Typography is not in the rules.** EB Garamond at 12 pt is used; the exemplar body is Century Schoolbook, which has a larger x-height. No rule names a face, so the template keeps EB Garamond. TeX Gyre Schola (Century Schoolbook substitute) is vendored if David wants the exemplar's look as a tier-2 choice; switching is not required by any rule.
+5. **Typography is not in the rules.** Times New Roman at 12 pt is used (`docs/FONTS.md` rule 6, the house standard; recorded as `template_face` in `data/exemplar-fonts.json`); the exemplar body is Century Schoolbook, one filer's choice. Until fb-595.68.18 the template was EB Garamond, then TeX Gyre Schola.
 6. **The adversary-number line wraps** ("25-________-5-JNC" breaks at the hyphen on page 1). The caption column is 3.2 inches; widening it squeezes the party column. Not changed.
 7. **Not generated:** the Adversary Proceeding Cover Sheet, the summons, any disclosure statement, and the exhibits (EXHIBIT 1 to 4 are referred to but not included).
 8. **File names differ from the brief's naming.** The tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, not `<id>.pdf` and `<id>-overlay.pdf`; the names follow the tools (which the brief forbids editing).
@@ -89,17 +89,17 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 
 ## Engines
 
-**docx** (`docx/`: `make-reference.sh` builds `reference.docx`; `nceb-adversary-complaint.lua` adds the caption, the numbered allegations and the signature block). Outputs: `usage/OUTPUT-adversary-complaint.docx` and `usage/OUTPUT-adversary-complaint.docx.pdf` (the LibreOffice PDF, the file checked).
+**docx** (`docx/`: `fb render --engine docx` builds the reference document from `reference.xml`, the shared cross-engine recipe in the typst face; `nceb-adversary-complaint.lua` adds the caption, the numbered allegations and the signature block). Outputs: `usage/OUTPUT-adversary-complaint.docx` and `usage/OUTPUT-adversary-complaint.docx.pdf` (the LibreOffice PDF, the file checked; 9 pages, as typst). `docx/make-reference.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.18; XENG-001..003 pass.
 
-What matches the typst output: letter page, 1-inch margins; EB Garamond 12 pt (embedded as EBGaramond Regular, Bold and Italic); body double-spaced at 24 pt exact; allegations numbered 1 to N at the margin, lettered items indented 0.5 inch; centered court lines, division, caption table with a rule on its right and bottom edges, the case, chapter and adversary lines, centered title; block quotations indented 1 inch both sides and single-spaced, with their lettered list inside the indent; tables single-spaced; signature block at 3 inches with the `s/` signature and the role line kept together; centered page-number footer.
+What matches the typst output (seen on the earlier EB Garamond docx; the face is now Times New Roman 12 pt on both, Regular, Bold and Italic embedded): letter page, 1-inch margins; body double-spaced at 24 pt exact; allegations numbered 1 to N at the margin, lettered items indented 0.5 inch; centered court lines, division, caption table with a rule on its right and bottom edges, the case, chapter and adversary lines, centered title; block quotations indented 1 inch both sides and single-spaced, with their lettered list inside the indent; tables single-spaced; signature block at 3 inches with the `s/` signature and the role line kept together; centered page-number footer.
 
-What differs (tier 2, recorded, not changed):
+What differed on that earlier docx (tier 2, recorded then; not re-checked here):
 - The court and division lines and the caption lines are single-spaced (13.8 pt). The typst render leaves about 22 pt between them.
 - Tables: the docx tables have no rules, as the template's `stroke: none` intends. The typst render shows ruled tables, so the template's table override does not reach the tables that cmarker builds. This is a typst-side question for David.
-- Pagination: 9 pages in the docx against 8 in typst. The last prayer item moves to page 9 with the signature block, so the signature is not alone on its page.
+- Pagination: 9 pages in the docx against 8 in typst (both engines are 9 pages now). The last prayer item moved to page 9 with the signature block, so the signature is not alone on its page.
 - Heading spacing differs by a few points; table header rows repeat when a table breaks across pages (Word's convention for header rows).
 - Word is not available here, so the `.docx` was not opened in Word. LibreOffice converted it without error. `unzip -t` passes and all 17 XML parts pass `xmllint --noout`.
 
-Pages reviewed: all 9 pages of `usage/OUTPUT-adversary-complaint.docx.pdf`, each rendered at 60 dpi and viewed after the last change; typst comparison pages 1 to 8 of the typst render (rendered to /tmp, not to `usage/`).
+Pages reviewed: all 9 pages of the earlier EB Garamond `usage/OUTPUT-adversary-complaint.docx.pdf`, each rendered at 60 dpi and viewed; typst comparison pages 1 to 8 of the typst render (rendered to /tmp, not to `usage/`).
 
-No docx item is BLOCKED. The court folder has no `checks.yaml`, so no check IDs apply to this doc type yet; the page review above is the only check.
+No docx item is BLOCKED. `tools/check.sh` gates both engines on `eval.yaml` (`usage/.check-typst.txt`, `usage/.check-docx.txt`: PASS, fb-595.68.18).

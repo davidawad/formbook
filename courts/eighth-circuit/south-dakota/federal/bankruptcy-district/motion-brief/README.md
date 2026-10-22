@@ -8,11 +8,11 @@ Exemplar: one real, text-layer filed memorandum in support of a motion, from thi
 | Item | Status |
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (15 pages, one filer), sourced in `usage/SOURCE.md` |
-| typeface | **No face required; EB Garamond kept.** Bankr. D.S.D. R. 9004-1(a)(1) (June 2024 local rules, text checked with `pdftotext`) requires "one simple font" and names no face. The only face named in the local rules is Appendix 1F's creditor-mailing-list bullet ("Universal, Times New Roman, or Courier"), which governs the mailing list, not this document. So no substitute from `docs/FONTS.md` is needed: the template keeps EB Garamond (the "No face named" row). Fit: n/a. Re-checked 2026-10-14 (fonts pass, `fb-595.7.5.21`). |
+| typeface | **No face required; TeX Gyre Termes, the exemplar's face.** Bankr. D.S.D. R. 9004-1(a)(1) (June 2024 local rules, text checked with `pdftotext`) requires "one simple font" and names no face. The only face named in the local rules is Appendix 1F's creditor-mailing-list bullet ("Universal, Times New Roman, or Courier"), which governs the mailing list, not this document. So no court-named face applies: the template (typst and docx) is set in TeX Gyre Termes, the face the exemplar-font audit finds in the filing (Adobe Times metrics, `data/exemplar-fonts.json`; it kept EB Garamond until fb-595.68). Fit: n/a. Rule text re-checked 2026-10-14 (fonts pass, `fb-595.7.5.21`). |
 | sample md | `usage/INPUT-motion-brief.md`: transcription of the whole filing (caption, title, body, footnotes 1 to 3, conclusion, signature). TIN shown as last four digits. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` (9 pages), `tools/render.sh`, vendored EB Garamond only, zero typst warnings. |
-| overlay | ok: `usage/OVERLAY-northern-beef-packers.pdf` and `.txt` (`tools/overlay.sh`); page pairing by text: ours 1-9 with filed 1, 2, 5, 7, 8, 10, 12, 14, 15. |
-| pages reviewed | 9 of 9 of `OUTPUT-motion-brief.typst.pdf`, each rasterized at 70 dpi and viewed in its final state. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` (10 pages), `tools/render.sh`, vendored TeX Gyre Termes only (`pdffonts`), zero typst warnings. |
+| overlay | ok: `usage/OVERLAY-northern-beef-packers.pdf` and `.txt` (`tools/overlay.sh`; measured on the earlier EB Garamond render, before fb-595.68); page pairing by text: ours 1-9 with filed 1, 2, 5, 7, 8, 10, 12, 14, 15. |
+| pages reviewed | 9 of 9 of `OUTPUT-motion-brief.typst.pdf`, each rasterized at 70 dpi and viewed (the earlier 9-page EB Garamond render, before fb-595.68). |
 
 ## Governing rules
 
@@ -65,12 +65,12 @@ Markdown contract (frontmatter; the body is blank-line-separated chunks):
 
 ## Layout
 
-- Letter size; margins 1 inch on every side; body 12 pt EB Garamond, single spaced (0.5 em leading), 12 pt between paragraphs, first-line indent 0.5 inch.
+- Letter size; margins 1 inch on every side; body 12 pt TeX Gyre Termes, single spaced (`pitch-single`, 13.8 pt lines), 12 pt between paragraphs, first-line indent 0.5 inch.
 - Caption: three-column grid, as in the adversary-complaint folder.
 - Signature: a final body paragraph is kept in the same unbreakable block as the signature block, so the signature never stands alone on a page (convention; found by the overlay review of the transcription).
 - Footer: page number, 10 pt, centered.
 
-## Gate 2 review (current PDF)
+## Gate 2 review (the earlier EB Garamond render, before fb-595.68)
 
 sha256 of `usage/OUTPUT-motion-brief.typst.pdf`: `d865e31d3bec85be518f1c573fe183b5533201b8fcb915c54e69b5c77afd922b` (re-rendered and re-reviewed 2026-10-15; 9 pages, all 9 viewed as PNG at 60 dpi; same content as the 2026-10-14 render)
 
@@ -98,7 +98,7 @@ OPEN (tier 2, decision for David): **line spacing.** The filing is double spaced
 2. **Memorandum, not motion.** The filing is a memorandum in support of the debtor's motion (Doc 45); the motion itself is not on RECAP. The template's opening sentence is generated from the frontmatter and does not appear in the filing.
 3. **No local Rule 9013 exists.** The brief says "per this court's local bankruptcy rules" for FRBP 9013. The court's June 2024 rules have no Rule 9013. The template follows the rules that do exist (9004-1, 9004-2, 7010-2, 7007-1, 9014-4, 7056-1).
 4. **Brief not required.** Bankr. D.S.D. R. 9004-1(f) says a party need not submit a brief with a motion unless a rule or order directs one. Summary judgment (R. 7056-1(b)) is the directed case. The template does not know the motion type; the author decides whether to attach a separate brief.
-5. **Font size and spacing.** No local rule sets a size or spacing. 12 pt single-spaced EB Garamond (the only font vendored) is a choice, not a rule. See the OPEN spacing row above.
+5. **Font size and spacing.** No local rule sets a size or spacing. 12 pt single-spaced TeX Gyre Termes (the exemplar's face) is a choice, not a rule. See the OPEN spacing row above.
 6. **Caption for an adversary motion** shares its code with `../adversary-complaint/`; the adversary branch is exercised by the code path but not by a sample (the only sample is a main-case motion). A second sample with `adversary_no` would be the test.
 7. **Certificate of service.** Its wording is conventional text, not a rule. The filing's certificate is docket Attachment 1, not in the PDF, so this transcription has none.
 8. **Check tooling not run.** As in the adversary folder, `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this folder is a doc-type folder.

@@ -6,10 +6,10 @@ Doc type: **complaint** in the United States District Court for the District of 
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md`: the whole complaint (all 96 numbered paragraphs, counts I to VII, prayers, jury demand, signature) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh` exit 0) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, pinned Times New Roman only (`pdffonts`), no warnings (`tools/render.sh` exit 0) |
 | overlay | ok: `usage/OVERLAY-bitcanary-complaint.pdf` and `OVERLAY-bitcanary-complaint.txt` |
-| pages reviewed | 9 of 9 (fonts pass 2026-10-14: every page rendered at 50 dpi and viewed again after the font check) |
-| depth | 9 rendered pages against a 10-page exemplar |
+| pages reviewed | 9 of 9 (on the earlier 9-page EB Garamond render, before fb-595.68; fonts pass 2026-10-14: every page rendered at 50 dpi and viewed again after the font check) |
+| depth | 11 rendered pages against a 10-page exemplar |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` defaults (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.pdf` / `<id>-overlay.pdf` form in the brief, because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`.
 
@@ -20,7 +20,7 @@ Primary source: D.N.D. Civil Rules (local rules), "Effective October 6, 2025", h
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | D.N.D. Civ. R. 5.1(B)(1) | Standard size (8½ × 11) paper; page numbers at the bottom of each page. | `page` (us-letter, numbering in the footer, centred). |
-| D.N.D. Civ. R. 5.1(B)(2) | One side of the page; minimum one-inch margin; **12-point font or larger**; **double-spaced**, except the title of the case and quoted material may be single-spaced. | `margin = 1in`, `type-size = 12pt`, `body-leading = 1.35em` (24.0 pt baseline pitch, measured), `single-leading` for the caption and signature block. |
+| D.N.D. Civ. R. 5.1(B)(2) | One side of the page; minimum one-inch margin; **12-point font or larger**; **double-spaced**, except the title of the case and quoted material may be single-spaced. | `margin = 1in`, `type-size = 12pt`, `pitch-double` (27.6 pt, Word's double), `pitch-single` (13.8 pt) for the caption and signature block. |
 | D.N.D. Civ. R. 3.1(A) | A civil case is assigned to the division where the action arose or the defendant resides; "The plaintiff must designate the appropriate division in the caption of the complaint." | `division` frontmatter line; the template fails the build if it is missing (`assert`). The sample: "EASTERN DIVISION". |
 | D.N.D. Civ. R. 5.1(B)(3) | Papers after the initial pleading (exhibits excepted) are in pleading format, each with the venue, case title and file number. | Not applied to the complaint (it is the initial pleading); the caption carries venue, title and case number. |
 | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number and a Rule 7(a) designation. | `court-title`, `caption` ("Case No." and the title). |
@@ -45,28 +45,28 @@ Not produced by this template (separate filings, not part of the complaint, and 
 
 ## Spacing (measured)
 
-`pdftotext -bbox` on page 2 of the render: lines inside a paragraph are 24.0 pt apart (the baseline pitch), and paragraphs are 24.0 pt apart (each paragraph block carries `below: body-leading`; without it the gap between paragraphs was 7.8 pt). The caption and signature block are single-spaced at about 13.8 pt.
+`pdftotext -bbox` on page 2 of the earlier EB Garamond render (before fb-595.68; the template now sets `pitch-double`, 27.6 pt): lines inside a paragraph are 24.0 pt apart (the baseline pitch), and paragraphs are 24.0 pt apart (each paragraph block carries `below: body-leading`; without it the gap between paragraphs was 7.8 pt). The caption and signature block are single-spaced at about 13.8 pt.
 
 ## Engines
 
 | Engine | Status | What matches the typst form | What differs / BLOCKED |
 |---|---|---|---|
 | typst (primary) | as above | the reference | none |
-| docx | `usage/OUTPUT-complaint.docx` and `.docx.pdf` (9 pages, LibreOffice 26.8.1 PDF, EB Garamond embedded per `pdffonts`) | Letter, 1 in margins, EB Garamond 12 pt, body and headings at 24 pt exact (double), caption as a borderless table with the ")" column, numbered allegations, lettered (a), (b) lists, centred PAGE number, signature block kept whole (one unsplittable table row). Checked by rendering all 9 pages to PNG at 60 dpi against the typst pages. | Paragraph flow is LibreOffice's, so page breaks differ from typst (for example, BACKGROUND starts on page 3 in docx, page 2 in typst). Word is not available here: the `.docx` was not opened in Word, so no Word repair-prompt check was run. No gate stamp: `tools/check.sh --engine docx` was not run, because this doc-type folder has no `checks.yaml` or `rules.md` and the gates cannot run here. |
+| docx | `usage/OUTPUT-complaint.docx` and `.docx.pdf` (11 pages, LibreOffice PDF, Times New Roman embedded per `pdffonts`) | Letter, 1 in margins, Times New Roman 12 pt, body and headings at 27.6 pt exact (double), caption as a borderless table with the ")" column, numbered allegations, lettered (a), (b) lists, centred PAGE number, signature block kept whole (one unsplittable table row). Checked by rendering all 9 pages to PNG at 60 dpi against the typst pages (on the earlier EB Garamond render, before fb-595.68; the findings in the next column are from then too). | Paragraph flow is LibreOffice's, so page breaks differ from typst (for example, BACKGROUND starts on page 3 in docx, page 2 in typst). Word is not available here: the `.docx` was not opened in Word, so no Word repair-prompt check was run. No gate stamp: `tools/check.sh --engine docx` was not run, because this doc-type folder has no `checks.yaml` or `rules.md` and the gates cannot run here. |
 
-`docx/reference.docx` is built by `docx/make-reference.sh` (pandoc's package, with styles, Letter page setup and footer replaced). The conversion is `docx/ndd-complaint.lua`, applied by `tools/render-docx.sh` with `SOFFICE` pointing at a LibreOffice that can see the vendored fonts (`FONTCONFIG_FILE` naming `fonts/` only). Commands: `sh tools/render.sh --engine docx <complaint-dir> usage/INPUT-complaint.md`.
+`fb render --engine docx` builds the reference document from `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst template's face; `docx/make-reference.sh` and the committed `reference.docx` are retired) and runs pandoc with `docx/ndd-complaint.lua` (wrapped by `tools/render-docx.sh`), with `SOFFICE` pointing at a LibreOffice that can see the vendored fonts (`FONTCONFIG_FILE` naming `fonts/` only). Commands: `sh tools/render.sh --engine docx <complaint-dir> usage/INPUT-complaint.md`.
 
 ## Known gaps and open choices
 
 1. **One exemplar.** Tier 2 asks for two or three filers. The second filer was not collected: the RECAP search turned up Lipps v. City of Fargo (3:26-cv-00294, 35 pages, RECAP PDF found, not downloaded) and Hoefer v. Teigen (1:25-cv-00207, 244 pages, too long). Tier 2 is therefore **not** judged against two filers.
 2. **Division line.** The exemplar's caption reads "EASTERN DISTRICT OF NORTH DAKOTA" with no division line. Civil Rule 3.1(A) requires the division to be designated in the complaint's caption, so the template prints "EASTERN DIVISION" from frontmatter. This departs from the exemplar on purpose (tier 1 over tier 2).
-3. **Font.** Typeface check (fonts pass, 2026-10-14): face required = none. D.N.D. Civ. R. 5.1(B)(2) sets a size ("12-point font or larger"), not a typeface, and the rest of the local rules text (`local_rules.pdf`, effective October 6, 2025) names no face. Per `docs/FONTS.md` ("No face named" → EB Garamond), the template keeps EB Garamond at 12 pt; vendored substitute = none needed, font = `EB Garamond`. The filed exemplar is set in Times New Roman, which the rule does not require, and EB Garamond's x-height is smaller at 12 pt, so the text looks smaller than the exemplar. The Times-metric substitute, `Liberation Serif`, is vendored if a court rule ever names Times.
+3. **Font.** Typeface check (fonts pass, 2026-10-14): face required = none. D.N.D. Civ. R. 5.1(B)(2) sets a size ("12-point font or larger"), not a typeface, and the rest of the local rules text (`local_rules.pdf`, effective October 6, 2025) names no face. Per `docs/FONTS.md` rule 6 (Times New Roman, the house standard, where no face is named), the template (typst and docx) is Times New Roman 12 pt, as the filed exemplar is. Until fb-595.68 it kept EB Garamond, which looked smaller than the exemplar at the same size.
 4. **Signature.** The exemplar has no "/s/" or "Respectfully submitted" line in its text layer; the template prints the firm and signer lines the exemplar shows, with no "/s/" and no date.
 5. **Lines per page.** No line numbering or 28-line limit: D.N.D. Civ. R. 5.1 does not require pleading paper. This is a reading of the rule, not a choice of style; the exemplar is also unnumbered.
-6. **Overlay pairing.** The overlay pairs our pages with the nearest exemplar pages by word overlap: ours p.1 ↔ p.1, p.2 ↔ p.2, p.3 ↔ p.4, p.4 ↔ p.5, p.5 ↔ p.6, p.6 ↔ p.7, p.7 ↔ p.8, p.8 ↔ p.9, p.9 ↔ p.10. The offsets follow the exemplar's own pagination, not an error in the render. The overlay is a diagnostic, not a score.
+6. **Overlay pairing.** (Measured on the earlier EB Garamond render, before fb-595.68.) The overlay pairs our pages with the nearest exemplar pages by word overlap: ours p.1 ↔ p.1, p.2 ↔ p.2, p.3 ↔ p.4, p.4 ↔ p.5, p.5 ↔ p.6, p.6 ↔ p.7, p.7 ↔ p.8, p.8 ↔ p.9, p.9 ↔ p.10. The offsets follow the exemplar's own pagination, not an error in the render. The overlay is a diagnostic, not a score.
 7. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief does not require them. Render and overlay were run; the page review below is the Gate 2 record for this doc type.
 
-## Review of the rendered pages (9 of 9, 60 dpi, viewed after the last template change)
+## Review of the rendered pages (9 of 9, 60 dpi, viewed after the last template change; the earlier EB Garamond render, before fb-595.68)
 
 | Page | What it is | Finding |
 |---|---|---|

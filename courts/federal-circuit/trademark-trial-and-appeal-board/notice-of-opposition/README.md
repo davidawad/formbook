@@ -12,7 +12,7 @@ Doc type `notice-of-opposition` under the Trademark Trial and Appeal Board (`cou
 | Overlay | ok: `sh tools/overlay.sh <dir> brink-notice-of-opposition <dir>/usage/FILED-EXAMPLE-notice-of-opposition.pdf` writes `usage/OVERLAY-brink-notice-of-opposition.pdf` and `.txt` |
 | Pages reviewed | 9 of 9 of each engine (typst and docx renders at 50-80 dpi, after the cross-engine port; see "Page review") |
 | Check gates (`tools/check.sh`) | typst and docx: 0 failed (`data/checks-default.yaml` with `eval.yaml`) |
-| Cross-engine (Gate 4) | gated (`eval.yaml` `params.cross_engine: gate`): the docx breaks every line and page as typst does (XENG-001..003 PASS), on the shared layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `lib/docx/xengine-reference.sh`; fb-595.54.6) |
+| Cross-engine (Gate 4) | gated (`eval.yaml` `params.cross_engine: gate`): the docx breaks every line and page as typst does (XENG-001..003 PASS), on the shared layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `tools/fb/src/docxxengine.rs`; fb-595.54.6) |
 
 File names: `tools/render.sh` and `tools/overlay.sh` write and read `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the repo's naming: the role is in the name). The brief named `<id>.pdf` and `<id>-overlay.pdf`; the tools' names are used instead so that the tools run unchanged.
 
@@ -93,7 +93,7 @@ Defects found and fixed earlier: overlapping lines from the default line box; fi
 
 ## Engines
 
-The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`, from the shared recipe `lib/docx/xengine-reference.sh`: TeX Gyre Termes 12 pt, the body in 24 pt exact line boxes with a half-inch first-line indent) and `docx/ttab-notice.lua` (the USPTO heading, the applications block, the caption table, the title, the count headings, the signature block kept with the last paragraph, one slip sheet per exhibit; every paragraph with the typst pitch and spaces). Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-notice-of-opposition.md` writes `usage/OUTPUT-notice-of-opposition.docx` and `.docx.pdf`.
+The docx engine (`docx/`, see `docs/DOCX.md`) is built by `fb render --engine docx` from `docx/reference.xml` (the Word styles, on the shared cross-engine recipe, `base="xengine"`: TeX Gyre Termes 12 pt, the body in 24 pt exact line boxes with a half-inch first-line indent) and `docx/ttab-notice.lua` (the USPTO heading, the applications block, the caption table, the title, the count headings, the signature block kept with the last paragraph, one slip sheet per exhibit; every paragraph with the typst pitch and spaces). Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-notice-of-opposition.md` writes `usage/OUTPUT-notice-of-opposition.docx` and `.docx.pdf`.
 
 | Item | docx vs typst |
 |---|---|

@@ -2,7 +2,7 @@
 
 A motion for judgment on the administrative record (RCFC 52.1(c)) with its memorandum of law, the form used in bid protests. This folder is one self-contained doc type under the court (`uscfc`). The court-root `typst/` and `usage/` are not touched.
 
-Status: **exemplar = yes** (in `usage/`), **typeface = Times New Roman 12 pt** (the rules name no face; the exemplar's face; Liberation Serif in typst), **render = ok** (typst and docx, 14 pages each, re-rendered 2026-10-22, all pages viewed at 60 dpi; docx cross-engine gated, see Engines), **overlay = ok** (rerun 2026-10-16 against a rebuilt OCR text-layer copy; see "Verification pass 2026-10-16"). The brief is a full-depth form; the sample is an excerpt of a 72-page memorandum (13 rendered pages). Not a complete reproduction of the filing.
+Status: **exemplar = yes** (in `usage/`), **typeface = Times New Roman 12 pt** (the rules name no face; `docs/FONTS.md` rule 6 and the exemplar's face; in typst and docx, Liberation Serif the typst fallback), **render = ok** (typst and docx, 14 pages each, re-rendered 2026-10-22, all pages viewed at 60 dpi; docx cross-engine gated, see Engines), **overlay = ok** (rerun 2026-10-16 against a rebuilt OCR text-layer copy; see "Verification pass 2026-10-16"). The brief is a full-depth form; the sample is an excerpt of a 72-page memorandum (14 rendered pages). Not a complete reproduction of the filing.
 
 ## Layout
 
@@ -78,9 +78,9 @@ Body:
 
 ## Decisions
 
-**Font: EB Garamond at 12 point.** RCFC 5.5(c)(2) sets only the minimum type size (12 point) and names no typeface; the whole rules PDF (as amended July 27, 2026) was searched and names none. Per `docs/FONTS.md`, a court that names no face keeps EB Garamond. The filed exemplar is set in Times New Roman, which the rules do not require. `fonts/liberation-serif/` (the Times New Roman substitute) is vendored, but using it would be a convention choice, not a rule requirement, so it is not applied. 12 point EB Garamond looks smaller than 12 point Times; the difference is visible in the overlay.
+**Font: Times New Roman at 12 point.** RCFC 5.5(c)(2) sets only the minimum type size (12 point) and names no typeface; the whole rules PDF (as amended July 27, 2026) was searched and names none. Per `docs/FONTS.md` rule 6, a court that names no face gets the house face, Times New Roman, which is also the filed exemplar's face (the template set EB Garamond until 2026-10-17).
 
-**Double spacing.** `body-leading = 0.9em` was chosen by eye for a double-spaced look at 12 point. Measured 2026-10-16 on the render (`pdftotext -bbox`, body p. 1): 26.46 pt baseline pitch (2.2 em). The complaint template uses 27.6 pt (2 × 1.15 em); both are double spaced, but the two doc types differ slightly.
+**Double spacing** (before the cross-engine port of 2026-10-22, on the EB Garamond render; the body pitch is now 27.6 pt, see Engines)**.** `body-leading = 0.9em` was chosen by eye for a double-spaced look at 12 point. Measured 2026-10-16 on the render (`pdftotext -bbox`, body p. 1): 26.46 pt baseline pitch (2.2 em). The complaint template uses 27.6 pt (2 × 1.15 em); both are double spaced, but the two doc types differ slightly.
 
 **Email under the signature.** The exemplar's signature block gives telephone and fax but not the email; the email is on the cover only. RCFC 5.5(f) requires the email "directly below the signature line of every filing", so the template prints it there. This is a rule-driven deviation from the exemplar.
 
@@ -100,7 +100,7 @@ Body:
 
 ## Overlay
 
-Pages paired by word overlap (the map is in `OVERLAY-oracle-memorandum.txt`):
+Pages paired by word overlap (the map is in `OVERLAY-oracle-memorandum.txt`; measured on the earlier 13-page EB Garamond render):
 
 | Ours | Filed | Overlap | Note |
 |---|---|---|---|
@@ -122,7 +122,7 @@ Red is ours, blue is filed; black is agreement. The pairing is by text, so a low
 
 ## Gate review (pages reviewed)
 
-All 13 rendered pages were rasterized at 60 dpi and viewed in montage (`pdftoppm -r 60`). Defects found and fixed:
+All 13 rendered pages (the earlier EB Garamond render) were rasterized at 60 dpi and viewed in montage (`pdftoppm -r 60`). Defects found and fixed:
 
 1. Typed heading numbers in the sample ("A. A. The Single Award...") — numbers removed from the markdown; the template generates them.
 2. Counsel names printed with literal asterisks ("*Of Counsel:*") — names now go through inline markdown.
@@ -137,14 +137,14 @@ After fixes 2-4 the re-render was checked by text extraction (pp. 1, 10, and the
 - **The sample is an excerpt.** It covers the Introduction, Questions Presented, parts of the Statement of Facts (A-B), the jurisdiction section, part of Argument A, and the conclusion. The TOC and TOA list only what the excerpt contains. The exemplar's Argument (Parts V-VI), its Argument headings, and its full TOA are not reproduced.
 - **Overlay pairing for scanned exemplar pages** depends on the OCR text-layer copy outside the repo. If that copy is regenerated, the overlay must be regenerated.
 - **The page limit** is enforced on our render, but the sample is short, so the check is not exercised near the limit.
-- **Font.** See Decisions: 12 point EB Garamond, kept because the rules name no face; Liberation Serif is vendored but not applied.
+- **Font.** See Decisions: 12 point Times New Roman, the house face, because the rules name no face.
 - **Single exemplar.** One filing from one filer. The brief asks for one exemplar per doc type; for tier-2 conventions the usual practice is two or three filers, which this box did not find (CourtListener's motion PDFs for uscfc are mostly opinions; docket pages and docket-entry API need auth).
 
 ## Engines
 
-Engines: typst (the reference) and docx; no latex folder for this doc type. Both run on the shared cross-engine layout model (fb-595.54.6; `lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `lib/docx/xengine-reference.sh`; docs/EVAL-LOOP.md, "Cross-engine gate"): Times New Roman 12 pt (Liberation Serif in typst, the same metrics), first-fit ragged-right lines, no kerning, ligatures or hyphenation, exact line boxes of 27.6 pt (double-spaced text) and 13.8 pt (cover, headings, quotations, footnotes, tables, signature), the typst spaces between blocks in twips; contents and authorities as `listing-row` (the text wraps before a 36 pt / 56 pt page column, a dot leader to the number). **Cross-engine gated** (`eval.yaml`: `params.cross_engine: gate`): the docx breaks every line and page where the typst render does (XENG-001..003 PASS, 319 of 319 lines), the TOC and TOA page numbers included.
+Engines: typst (the reference) and docx; no latex folder for this doc type. Both run on the shared cross-engine layout model (fb-595.54.6; `lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `lib/docx/xengine-reference.sh`; docs/EVAL-LOOP.md, "Cross-engine gate"): Times New Roman 12 pt in both (Liberation Serif, the same metrics, the typst fallback), first-fit ragged-right lines, no kerning, ligatures or hyphenation, exact line boxes of 27.6 pt (double-spaced text) and 13.8 pt (cover, headings, quotations, footnotes, tables, signature), the typst spaces between blocks in twips; contents and authorities as `listing-row` (the text wraps before a 36 pt / 56 pt page column, a dot leader to the number). **Cross-engine gated** (`eval.yaml`: `params.cross_engine: gate`): the docx breaks every line and page where the typst render does (XENG-001..003 PASS, 319 of 319 lines), the TOC and TOA page numbers included.
 
-`docx/make-reference.sh` builds `reference.docx` from the shared recipe, plus the "Keep With Next" style and the body's arabic numbering from 1. `docx/uscfc-motion-brief.lua` writes the cover (caption one table row per line), the TOC and TOA, the numbered headings, the signature block and the certificate, and sets two break rules typst has and LibreOffice does not: no break inside "2304a(d)(4)" (a word joiner between ")" and "("), and a break opportunity after a slash before a letter in a URL (a zero-width space). `docx/render.sh` owns the build: it measures the page of each heading and of each authority link on a first build (a link by its text and the words after it, so a heading that names the same statute without a link is not counted, as typst counts only links) and builds again with those numbers.
+`fb render --engine docx` builds the reference document from `docx/reference.xml`: the shared recipe (`base="xengine"`), plus the "Keep With Next" style (the body's arabic numbering from 1 is in the sections the filter writes). `docx/uscfc-motion-brief.lua` writes the cover (caption one table row per line), the TOC and TOA, the numbered headings, the signature block and the certificate, and sets two break rules typst has and LibreOffice does not: no break inside "2304a(d)(4)" (a word joiner between ")" and "("), and a break opportunity after a slash before a letter in a URL (a zero-width space). `fb render --engine docx` owns the build (`docx/render.sh` did until fb-595.68): it measures the page of each heading and of each authority link on a first build (a link by its text and the words after it, so a heading that names the same statute without a link is not counted, as typst counts only links) and builds again with those numbers.
 
 Visible change of the port in the typst render (2026-10-22, all 14 pages viewed at 60 dpi): Times New Roman instead of EB Garamond in the docx; the cover is laid out with fixed spaces (a double line between its parts) instead of the largest spacing that fits, and its caption rows now line up (they overlapped before); single-spaced material on a 13.8 pt pitch (was 15.6 pt); the body on a 27.6 pt pitch (was 26.5 pt), so the brief runs 14 pages (was 12; the body and certificate 11, was 9). The TOC and TOA page numbers follow.
 

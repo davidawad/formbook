@@ -7,7 +7,7 @@ Folder: `courts/fourth-circuit/virginia/federal/bankruptcy-eastern-district/adve
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer, counsel for creditors; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md`: caption, jurisdiction, parties, background, Count I (with the payments table), the first three paragraphs of Count II, the prayer, the signature block and the certificate of service. Paragraphs 36 to 55 of Count II are omitted (the exemplar is 16 pages; the sample is 9). |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (the earlier EB Garamond render, before fb-595.68; the template now sets Times New Roman) |
 | overlay | ok: `usage/OVERLAY-deboer-adversary-complaint.pdf` and `.txt` (page map below) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on the final build; the caption was also checked at 110 dpi) |
 
@@ -38,7 +38,7 @@ Not produced by this template (separate filings that may be required with the co
 ## Layout
 
 - Letter size, 1.5 inch top margin, 1 inch other margins, page numbers centered at the foot.
-- Font: EB Garamond 12 pt, vendored in `fonts/`. No E.D. Va. rule names a typeface (see Known gaps).
+- Font: Times New Roman 12 pt (the pinned install, docs/FONTS.md rule 1; Liberation Serif from `fonts/` as fallback). No E.D. Va. rule names a typeface (see Known gaps).
 - Double spacing: 1.35 em leading (24 pt pitch at 12 pt), single spacing for the counsel block, caption, table, signature block and service list.
 - Counsel block at the top left of page 1, single spaced; court name and division centered; caption as a three-column grid (parties, a column of ")" marks, bankruptcy and adversary numbers); title centered in capitals.
 - Paragraphs: first-line indent 0.5 in. Numbered paragraphs (under the named sections) carry their number at the left of the indent.
@@ -68,7 +68,7 @@ The overlay is a diagnostic, not a score. The page offset is expected: the sampl
 ## Known gaps and open choices
 
 1. **One exemplar.** The brief asks for one exemplar per doc type. EVAL-LOOP's tier-2 rule asks for two or three filers, so tier 2 is not judged against two filers here. Other candidates found in the CourtListener RECAP search (E.D. Va. bankruptcy, 2026): *David Jung v. Nelnet* (26-03013, Doc 1, counsel Krumbein) is only 3 pages and is a short-form complaint; *Amaryllis, Inc. v. Adler* (26-01015) and *Keuthan v. Keuthan* (26-01010) were listed but not downloaded.
-2. **Typeface.** The exemplar's body is an embedded CID TrueType face (name not in the text layer), with non-embedded Times-Bold and Times-Italic elsewhere, so it is taken to be a Times-style serif. No Times face is vendored, and the brief forbids system fonts, so the template uses EB Garamond. EB Garamond at 12 pt has a smaller x-height than Times at 12 pt; the text looks smaller than the exemplar. The 12 pt minimum is met.
+2. **Typeface.** The exemplar's body is an embedded CID TrueType face (name not in the text layer), with non-embedded Times-Bold and Times-Italic elsewhere, so it is taken to be a Times-style serif. The template uses Times New Roman (docs/FONTS.md rule 6, the house standard; the pinned install of rule 1), so the face now matches the exemplar's Times-style serif. (Until fb-595.68 it used EB Garamond, whose smaller x-height made the text look smaller than the exemplar's.)
 3. **Counsel position.** Both exemplars put the counsel block at the foot of page 1. The template puts it at the top left, which LBR 5005-1(C)(5) allows ("on the first page"). Recorded as ACCEPTED (tier-2 convention, both are common in E.D. Va. filings).
 4. **Top margin.** The rule requires 1.5 inches (LBR 5005-1(C)(3)). The exemplar's body text starts about 1 inch from the top, so the exemplar does not meet the rule as written, or the court's ECF header is read as part of the top margin. The template follows the rule. Recorded as OPEN for David: confirm whether the 1.5-inch rule applies to the body text or the whole page.
 5. **Caption.** The Form 416 layout is reproduced from the exemplar's arrangement and the rule's content, not from the text of Official Form 416A/B (not fetched in this pass). The blank adversary number is printed as a line (the exemplar has "Case No. ____").
@@ -77,7 +77,7 @@ The overlay is a diagnostic, not a score. The page offset is expected: the sampl
 8. **Paragraph numbers.** The template numbers paragraphs 1 to 35 in the sample; the exemplar's numbers are the same for these paragraphs.
 9. **Page 4.** The page ends with white space of about three lines because paragraph 19 moves to the next page as a whole. This is typesetting, not a rule. Not changed.
 
-## Review of the rendered pages (final build, 9 pages)
+## Review of the rendered pages (final build, 9 pages; the earlier EB Garamond render, before fb-595.68)
 
 - Page 1: counsel block (top left, single spaced), court name and division, caption grid with the ")" column and the adversary "Case No." line, title, the first paragraph and paragraph 1. Pass.
 - Page 2: paragraphs 2 to 8; JURISDICTION AND VENUE, PARTIES and BACKGROUND headings centered; the paragraph numbers sit at the indent. Pass.
@@ -94,8 +94,8 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` from pandoc's default reference, and `docx/vaeb.lua` (counsel block, court title, caption, numbered paragraphs, lettered lists, signature block, certificate of service).
-- Matches typst: EB Garamond 12 pt (the PDF embeds EB Garamond only); exact 24 pt double and 13.8 pt single lines; 0.5 in first-line indent; letter size, 1.5 in top margin, 1 in other margins; centered page number; level 1 headings 17 pt centered bold capitals (typst's default 1.4 em), level 2 centered bold 14.5 pt (1.2 em), level 3 bold italic; caption as three columns (3.4 in, 0.3 in, 2.8 in) with the ")" column; the signature block and the service list with the typst spacing; 5 pt table insets and 0.5 pt rules.
-- Differs: (1) Word-native widow and orphan control moves one or two lines to the next page, so page breaks fall on different lines (9 pages in both); (2) LibreOffice places exact-height lines about 3 pt lower than typst; (3) the certificate heading and the paragraph before the service list are within about 6 pt of typst, not identical; (4) the caption and signature blocks are borderless tables (Word and LibreOffice draw "none" alike).
+- **docx** (`docx/`): `docx/reference.xml` (`base="xengine"`: fb render builds the reference document from the shared cross-engine recipe in the typst face) and `docx/vaeb.lua` (counsel block, court title, caption, numbered paragraphs, lettered lists, signature block, certificate of service).
+- Matches typst: Times New Roman 12 pt (the PDF embeds TimesNewRomanPSMT); exact 24 pt double and 13.8 pt single lines; 0.5 in first-line indent; letter size, 1.5 in top margin, 1 in other margins; centered page number; headings at 12 pt on the 24 pt body pitch, level 1 centered bold capitals, level 2 centered bold, level 3 bold italic; caption as three columns (3.4 in, 0.3 in, 2.8 in) with the ")" column; the signature block and the service list with the typst spacing; 5 pt table insets and 0.5 pt rules.
+- Differs (recorded on the earlier build by `docx/build-reference.sh`, before the fb-595.68 cross-engine port; `eval.yaml` now gates the docx on typst's line and page breaks): (1) Word-native widow and orphan control moves one or two lines to the next page, so page breaks fall on different lines (9 pages in both); (2) LibreOffice places exact-height lines about 3 pt lower than typst; (3) the certificate heading and the paragraph before the service list are within about 6 pt of typst, not identical; (4) the caption and signature blocks are borderless tables (Word and LibreOffice draw "none" alike).
 - No TOC or TOA (none in this doc type), so no fields to update. No pleading-paper line numbers (this court does not use them).
 - BLOCKED: none recorded. `sh tools/check.sh <court> --engine docx` exits 2 before any gate runs: the court folder has no `checks.yaml` (Gate 1) and no `reviews/`, so the gates cannot pass yet. That is a court-level prerequisite, not a docx limit.

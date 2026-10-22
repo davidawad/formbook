@@ -36,11 +36,11 @@ Verification date: 2026-10-14.
 | MLBR 9004-1 and Appendix 8 | Documents conform to Appendix 8: 8.5 x 11 in; double-spaced, except counsel identification, titles, footnotes (and block quotations, certificates, exhibits); margins at least 1 in; consecutive page numbers, first page need not show; 12-point body, 10-point footnotes; plain roman type | `page(margin: 1in)`, `body-leading` (1.35em, a 24 pt pitch at 12 pt: measured in the render), `type-size = 12pt`, `footnote-size = 10pt`, footer numbering from page 2 | Rule 9004-1 in the PDF above, p. 58. Appendix 8 is a separate PDF, <https://www.mab.uscourts.gov/sites/mab/files/APPENDIX%208%20GENERAL%20REQUIREMENTS%20OF%20FORM.pdf>, read with `pdftotext` 2026-10-14; it has subsections (a) to (c). |
 | MLBR 9029-2 | Lists the D. Mass. Local Rules that apply in bankruptcy (26.5, 83.5.1, 83.5.4, 83.5.6, 83.6.1-83.6.3) | Not used | Same PDF, p. 73. D. Mass. Local Rule 7.1 is not in the list. No page limit for memoranda was found in the MLBR text (searched for "pages" and "page limit"). |
 
-Typeface (checked 2026-10-14): face required: none. MLBR Appendix 8(c) asks for "a plain, Roman Type" at 12 pt body and 10 pt footnotes, and names no face. The May 1, 2025 MLBR text and Appendix 8 were searched for Times, Helvetica, Arial, Garamond, Century, Georgia, Courier and "font"; none names a face. Standing orders were not checked. Vendored substitute: none needed; the template keeps **EB Garamond** (`fonts/eb-garamond/`), the "No face named" row of `docs/FONTS.md`. Fit: n/a. The filed exemplar's body is Times New Roman, with Liberation Sans and Arial also embedded (`pdffonts`); the template does not reproduce it, since the rules leave the face open. Embedded in our render: EB Garamond Regular, Bold and Italic only.
+Typeface (checked 2026-10-14): face required: none. MLBR Appendix 8(c) asks for "a plain, Roman Type" at 12 pt body and 10 pt footnotes, and names no face. The May 1, 2025 MLBR text and Appendix 8 were searched for Times, Helvetica, Arial, Garamond, Century, Georgia, Courier and "font"; none names a face. Standing orders were not checked. The template is set in **Times New Roman** (Liberation Serif as fallback), the house standard where no face is required (`docs/FONTS.md` rule 6). Fit: n/a. The filed exemplar's body is Times New Roman too, with Liberation Sans and Arial also embedded (`pdffonts`). Embedded in our renders (typst and docx): Times New Roman Regular, Bold and Italic only.
 
 ## Overlay
 
-`usage/OVERLAY-saint-ann-motion-to-dismiss.pdf` puts our render (red) over the best-matching exemplar page (blue). Pages are paired by word overlap. Diagnostic only, not a score. Pairings from the last run:
+`usage/OVERLAY-saint-ann-motion-to-dismiss.pdf` puts our render (red) over the best-matching exemplar page (blue). Pages are paired by word overlap. Diagnostic only, not a score. Pairings from the last run (on the earlier EB Garamond render, before fb-595.68):
 
 - ours p.1 ↔ filed p.1 (76%): caption and title.
 - ours p.2 ↔ filed p.2 (53%): introduction and Jurisdiction. Our footnote 1 is on this page; in the filing it is on p.3.
@@ -53,7 +53,7 @@ Typeface (checked 2026-10-14): face required: none. MLBR Appendix 8(c) asks for 
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed (12 of 12). Typst printed no warnings. Fonts embedded: EB Garamond Regular, Bold and Italic only.
+Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed (12 of 12), on the earlier EB Garamond render (before fb-595.68). Typst printed no warnings. Fonts embedded then: EB Garamond Regular, Bold and Italic only.
 
 | Page | Content | Result |
 |---|---|---|
@@ -79,15 +79,15 @@ Tier-2 findings (OPEN or ACCEPTED): the two ACCEPTED rows above (footnote split 
 3. **No separate memorandum document type.** MLBR 9013-1(a) allows a separate supporting memorandum filed concurrently; the template handles a body with no argument, but a memorandum-only sample was not built or tested.
 4. **Service list layout.** The filing sets the service list in two columns; ours is one column, single-spaced, flush left.
 5. **ECF header and footer** ("Case 26-04027 Doc 6 Filed ... Desc Main") are system stamps and are not reproduced.
-6. **Typeface** is EB Garamond, not the Times New Roman body of the filing. No face is required by the rules. See the note under Governing rules.
+6. **Typeface** is Times New Roman, as in the filing (EB Garamond before 2026-10-17). No face is required by the rules. See the note under Governing rules.
 7. **The 9013(b) check is a stand-in.** The `assert` looks for the phrase "respectfully requests". A motion that states the relief another way fails the build even though the rule is met. The check should be replaced when a better test exists.
 8. **Certificate of service text** is the filer's, not the template's. MLBR 9013-3(c) lists what the certificate must state; the template does not check those elements.
 9. **Searches tried (for the record):** CourtListener RECAP search (`type=rd`, `court=mab`, "memorandum of law" "motion", available only), which returned Adv. 26-04027 Doc. 6 (this motion), its Doc. 8 notice of hearing and the Doc. 6 proposed-order attachment, among others. This motion was chosen because it is a full motion with argument in one document, has a text layer, and is in the same court.
 
 ## Engines
 
-Typst is the primary engine. The DOCX engine (`docx/`: `reference.docx` from `build-reference.sh`, `mab.lua` for the cover, caption, "Dated" signature table, single-spaced service list and numbering, `render.sh` for the section, footers and numbering part) is checked on the LibreOffice PDF of the `.docx`, as `docs/DOCX.md` describes.
+Typst is the primary engine. The DOCX engine (`docx/`: `reference.xml`, from which `fb render --engine docx` builds the reference document on the shared cross-engine recipe in the typst face, with the page, the footers and the page number from page 2; `mab.lua` for the cover, caption, "Dated" signature table, single-spaced service list and numbering; built by `sh tools/render.sh --engine docx <dir> usage/INPUT-motion-brief.md`) is checked on the LibreOffice PDF of the `.docx`, as `docs/DOCX.md` describes.
 
-- **Matches the typst output:** 12 pages in both; EB Garamond 12 pt body (embedded in the docx PDF); exact 24 pt line pitch; 0.5 in first-line indent; 1 in margins on Letter; 10 pt footnotes; the caption with the right and bottom rules; numbered paragraphs 1 to 27 with the certificate and service list unnumbered; "Dated" at the left and the signature groups at 3.0 in, kept together; the service list single-spaced, flush left, in one column; page numbers from page 2.
-- **Differs (tier 2, not tier 1):** the bullet markers use Word's default symbol font (OpenSymbol, embedded) where typst uses a plain bullet; the tables carry Word's default rules; a footnote's break across pages can fall elsewhere than in typst. Word may paginate differently from LibreOffice.
+- **Matches the typst output:** 12 pages in both; Times New Roman 12 pt body (embedded in the docx PDF); exact 24 pt line pitch; 0.5 in first-line indent; 1 in margins on Letter; 10 pt footnotes; the caption with the right and bottom rules; numbered paragraphs 1 to 27 with the certificate and service list unnumbered; "Dated" at the left and the signature groups at 3.0 in, kept together; the service list single-spaced, flush left, in one column; page numbers from page 2.
+- **Differs (tier 2, not tier 1):** the tables carry Word's default rules; a footnote's break across pages can fall elsewhere than in typst. Word may paginate differently from LibreOffice.
 - **DOCX BLOCKED items:** none for this doc type. Not run in this box: `sh tools/check.sh <dir> --engine docx` (the gates were not executed here), and opening the `.docx` in Microsoft Word (only LibreOffice 26.8.1 was available).

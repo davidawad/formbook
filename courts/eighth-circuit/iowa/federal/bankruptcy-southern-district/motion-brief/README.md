@@ -7,9 +7,9 @@ Folder: `courts/eighth-circuit/iowa/federal/bankruptcy-southern-district/motion-
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, 2014; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: caption, lead-in, all four headings and the sub-headings in the order filed, all 34 numbered paragraphs, two footnotes, conclusion, signature, both verifications, certificate of service |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <dir> usage/INPUT-motion-brief.md`) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages (10 on the earlier EB Garamond render), typst 0.15.0, Times New Roman (pinned; vendored Liberation Serif fallback), no system fonts, no warnings (`sh tools/render.sh <dir> usage/INPUT-motion-brief.md`) |
 | overlay | ok: `usage/OVERLAY-foods-motion.pdf` and `usage/OVERLAY-foods-motion.txt` (`sh tools/overlay.sh <dir> foods-motion`) |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 10 of 10, on the earlier EB Garamond render (every page rendered at 60 dpi and viewed after the last template change) |
 | BLOCKED | none. The local-rules premise of the brief does not hold (see Governing rules), which is recorded, not blocked. |
 
 File names: the brief lists `usage/<id>.pdf` and `usage/<id>-overlay.pdf`. The shared tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, and the tools are not to be edited, so the render and overlay follow the tools' names.
@@ -23,7 +23,7 @@ File names: the brief lists `usage/<id>.pdf` and `usage/<id>-overlay.pdf`. The s
 | Fed. R. Bankr. P. 9013 | A request for an order is made by written motion (unless made in a hearing or an exempt application). The motion states its grounds with particularity and sets forth the relief requested. It is served on the parties the rules specify. | M | Heading "III. Relief Requested" (author content; the template does not assert headings); lead-in paragraph; the motion's grounds are the numbered paragraphs. | https://www.law.cornell.edu/rules/frbp/rule_9013 (eff. 2024-12-01; restyled, stylistic only per the committee note), verified 2026-10-14 |
 | Fed. R. Bankr. P. 9014(a) | Relief in a contested matter by motion; reasonable notice and an opportunity to be heard. | M | Not asserted by the template (notice is a matter of the case, not form). | https://www.law.cornell.edu/rules/frbp/rule_9014 (eff. 2024-12-01), verified 2026-10-14 |
 | Fed. R. Bankr. P. 9014(b)(1) | The motion is served within the time prescribed by Rule 9006(d) and **in the manner for serving a summons and complaint under Rule 7004**. | M | `certificate-block()` prints the certificate. The template does not assert the method: the exemplar's certificate describes CM/ECF service only (see Known gaps 3). | same |
-| Fed. R. Bankr. P. 9004(a) | Documents must be legible; commonly used abbreviations are acceptable. | M | Text is EB Garamond, 12 pt, black (`type-size`); no typeface is required (see Typeface below). | https://www.law.cornell.edu/rules/frbp/rule_9004 (eff. 2024-12-01), verified 2026-10-14 |
+| Fed. R. Bankr. P. 9004(a) | Documents must be legible; commonly used abbreviations are acceptable. | M | Text is Times New Roman, 12 pt, black (`type-size`); no typeface is required (see Typeface below). | https://www.law.cornell.edu/rules/frbp/rule_9004 (eff. 2024-12-01), verified 2026-10-14 |
 | Fed. R. Bankr. P. 9004(b) | Caption: the court's name, the case title, the case number (and adversary number if any), and a brief designation of the document. | M | `caption()`: court name; "In re" debtor block; Case No.; Chapter; title. | same |
 | Fed. R. Bankr. P. 9011(a) | Signed by at least one attorney of record in the attorney's individual name; the document states the signer's address and telephone number. | M | `signature-block()` and the verifications: "/s/" signature, counsel lines. | https://www.law.cornell.edu/rules/frbp/rule_9011 (eff. 2024-12-01), verified 2026-10-14 |
 | Fed. R. Bankr. P. 9037 | Redaction of taxpayer identification numbers to the last four digits (the exemplar prints a full EIN on its caption). | A | The sample does not transcribe the EIN. The template has no EIN field. | not re-verified this pass |
@@ -35,8 +35,8 @@ Convention (C), not rule: the caption's Form 416A-style debtor address and EIN l
 | Item | Value |
 |---|---|
 | Face required | none. No local rule (abolished 2003-08-04, General Order 2003-1) and no FRBP text names a typeface; FRBP 9004(a) asks only for legibility. |
-| Vendored substitute | not applicable: no face is named, so the template keeps **EB Garamond** (`fonts/eb-garamond/`, SIL OFL 1.1), per `docs/FONTS.md` ("No face named"). |
-| Metric fit | n/a (not a substitute). Page count (10) and line breaks are EB Garamond's; the exemplar is set in a Times-type face. |
+| Font | no face is named, so the template sets **Times New Roman** 12 pt, the house standard (`docs/FONTS.md`, rule 6); it was EB Garamond before. |
+| Metric fit | n/a (not a substitute). The render is 12 pages (10 in EB Garamond); the exemplar is set in a Times-type face. |
 
 ## Markdown contract (for samples)
 
@@ -50,18 +50,18 @@ A sample is one `.md` file.
 ## Layout and convention choices (tier 2)
 
 - Letter paper, one-inch margins, page number centered at the foot of each page.
-- EB Garamond 12 pt; body double-spaced (`body-leading` = 1.35em); footnotes 10 pt; numbered paragraphs with a half-inch first-line indent; sub-headings bold with a hanging indent.
+- Times New Roman 12 pt; body double-spaced (`pitch-body`, 24 pt); footnotes 10 pt; numbered paragraphs with a half-inch first-line indent; sub-headings bold with a hanging indent.
 - Caption: court name centered in bold capitals; the debtor block in the left column with a rule on the right and bottom; Case No., Chapter, and a bold label (e.g. FIRST DAY MOTION) in the right column above the bold title; "No Hearing Set" under the title.
 - Signature block: "Dated" on the left; "/s/" signer and counsel lines on the right.
 - Verifications and the certificate of service follow the signature, each with a centered bold title.
 
 ## What the overlay shows
 
-`usage/OVERLAY-foods-motion.pdf`: red is our render, blue is the filed exemplar pages (paired by shared words), black where both agree. Pairing (from `OVERLAY-foods-motion.txt`): our p.1 to exemplar p.1; p.2 to p.2; p.3 to p.4; p.4 to p.5; p.5 to p.6; p.6 to p.7; p.7 to p.9; p.8 to p.10; p.9 to p.11; p.10 to p.13. Word overlap is 50 to 88 per cent per page. The overlay is a diagnostic: the differences are the typeface, the line pitch, the caption (the exemplar's EIN and address lines and its "FIRST DAY MOTION" box are not reproduced), and the exemplar's own page breaks. The exemplar's typing error in ¶ 11 ("Program and. Dahl's") is transcribed as filed.
+`usage/OVERLAY-foods-motion.pdf`: red is our render, blue is the filed exemplar pages (paired by shared words), black where both agree. Pairing (from `OVERLAY-foods-motion.txt`): our p.1 to exemplar p.1; p.2 to p.2; p.3 to p.4; p.4 to p.5; p.5 to p.6; p.6 to p.7; p.7 to p.9; p.8 to p.10; p.9 to p.11; p.10 to p.13. Word overlap is 50 to 88 per cent per page. The overlay is a diagnostic (run on the earlier EB Garamond render): the differences are the typeface, the line pitch, the caption (the exemplar's EIN and address lines and its "FIRST DAY MOTION" box are not reproduced), and the exemplar's own page breaks. The exemplar's typing error in ¶ 11 ("Program and. Dahl's") is transcribed as filed.
 
 ## Gate 2 review (every page of the current PDF)
 
-Current PDF: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, after the last template change (the conclusion made sticky to the signature block; pages 1 to 6 are unchanged by that change). Compared with exemplar pages in the right-hand column.
+PDF reviewed: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages in EB Garamond (12 in Times New Roman now), after the last template change of that review (the conclusion made sticky to the signature block; pages 1 to 6 are unchanged by that change). Compared with exemplar pages in the right-hand column.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -91,12 +91,12 @@ Current PDF: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, after the last tem
 
 ## Engines
 
-The typst template is the primary engine. This section covers the **docx** engine (`docx/`, built 2026-10-15): `docx/reference.docx` (regenerated by `docx/make-reference.sh`) and the filter `docx/iasb-motion-brief.lua`. Build with pandoc 3.12.1 (the bootstrap toolchain): `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx`, then LibreOffice converts it to `usage/OUTPUT-foods-motion.docx.pdf` (not run here: see BLOCKED).
+The typst template is the primary engine. This section covers the **docx** engine (`docx/`, built 2026-10-15): `docx/reference.xml`, from which `fb render` builds the reference document (`base="xengine"`, the shared cross-engine recipe; `docx/make-reference.sh` built a committed `reference.docx` until fb-595.68), and the filter `docx/iasb-motion-brief.lua`. `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx`, then LibreOffice converts it to `usage/OUTPUT-motion-brief.docx.pdf` (the committed `usage/.check-docx.txt` reads PASS). The notes below, through BLOCKED, were written on 2026-10-15, before LibreOffice was on the box.
 
 What matches the typst render (same settings, written as styles and section properties):
 
 - Letter paper, one-inch margins, page number centered in the footer (a `PAGE` field).
-- EB Garamond 12 pt, named in the styles. The font must be installed on the machine that opens the file, or Word substitutes silently.
+- Times New Roman 12 pt, named in the styles. The font must be installed on the machine that opens the file, or Word substitutes silently.
 - Body double-spaced at exact 24 pt (the pitch measured on the typst render), numbered paragraphs with a half-inch first line and a tab after the number; footnotes are native footnotes in 10 pt.
 - Caption: court name centered in bold capitals; a borderless two-column table: the debtor on the left with a rule on its right and bottom; Case No., Chapter, the label (FIRST DAY MOTION), the title in bold and the hearing line on the right.
 - Numbered paragraphs 1 to 34; the WHEREFORE paragraph unnumbered; section headings centered in capitals (level 1), and sub-headings bold with a hanging indent (level 2); the signature block (date left; `/s/` signature and counsel lines right).
@@ -109,7 +109,7 @@ What differs, or is not checked:
 - The certificate's signature is set at a fixed indent instead of the typst block's right alignment; the typst block is not measured.
 - Single-spaced blocks use Word's single line spacing, not typst's 0.5 em leading.
 
-docx BLOCKED (this run):
+docx BLOCKED (the 2026-10-15 run):
 
 - `docx.pdf` checks (Gates 0 to 3 on `usage/OUTPUT-foods-motion.docx.pdf`): **BLOCKED**. LibreOffice (`soffice`) is not installable here: it has no conda-forge package, and there is no root for a system install. No PDF was produced, so no page was rendered or reviewed.
 - `.docx` opens in LibreOffice and Word without a repair prompt: **NOT VERIFIED**. Checked only: a valid zip, well-formed XML parts, and a pandoc read-back (text, numbering, footnotes, verifications, certificate).

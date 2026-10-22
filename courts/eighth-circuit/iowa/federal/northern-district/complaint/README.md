@@ -7,16 +7,16 @@ Folder: `courts/eighth-circuit/iowa/federal/northern-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md`: the complete complaint (caption, 49 paragraphs, three counts, prayer, jury demand, signature block) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| typeface | no face required by the court's rules (LR 10 names none; checked 2026-10-14). EB Garamond 12 pt stays; no vendored substitute applies. See the Governing rules table. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored TeX Gyre Termes only, no warnings (`tools/render.sh`) |
+| typeface | no face required by the court's rules (LR 10 names none; checked 2026-10-14). TeX Gyre Termes 12 pt, the face the font audit matched to the exemplar's Times (`data/exemplar-fonts.json`, `docs/FONTS.md`); EB Garamond until then. See the Governing rules table. |
 | overlay | ok: `usage/OVERLAY-iowa-rotocast-complaint.pdf` and `.txt` (`tools/overlay.sh`, exemplar passed explicitly). The exemplar PDF is not committed in this snapshot; the overlay used the RECAP copy at the URL in `usage/SOURCE.md` (9 pages). |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in the typeface pass, 2026-10-14) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in the typeface pass, 2026-10-14, on the earlier EB Garamond render) |
 
 ## Engines
 
 - **typst** (primary): `typst/`; the output and review above.
-- **docx**: `docx/` (`make-reference.sh` builds `reference.docx` from pandoc's default; `complaint.lua` writes the court title, caption, numbered paragraphs, lettered prayer and signature; `render.sh` runs pandoc). Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.1 conversion, `tools/render.sh --engine docx`). Pages reviewed: 8 of 8, every page rendered at 60 dpi and viewed (2026-10-15).
-  - Matches typst: letter paper with 1-inch margins; EB Garamond 12 pt (embedded in the PDF, no fallback face); double spacing at 24 pt exact; single spacing at 13.8 pt for the court title, caption, counsel and signature; half-inch first-line indent; paragraphs numbered 1 to 48 across the headings; centered caps and bold headings; the caption with a column of `)` marks; prayer items lettered A to G at 0.5 in; WHEREFORE and the jury demand unnumbered; the date in the signature block; a centered page number at the foot. Page count is the same as typst (8).
+- **docx**: `docx/` (`reference.xml`, from which `fb render` builds the reference document on the shared cross-engine recipe; `complaint.lua` writes the court title, caption, numbered paragraphs, lettered prayer and signature; `fb render --engine docx` runs pandoc with it. `make-reference.sh` and `render.sh` did this until fb-595.68). Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.1 conversion, `tools/render.sh --engine docx`). Pages reviewed: 8 of 8, every page rendered at 60 dpi and viewed (2026-10-15, on the earlier EB Garamond render).
+  - Matches typst: letter paper with 1-inch margins; TeX Gyre Termes 12 pt (embedded in the PDF, no fallback face); double spacing at 24 pt exact; single spacing at 13.8 pt for the court title, caption, counsel and signature; half-inch first-line indent; paragraphs numbered 1 to 48 across the headings; centered caps and bold headings; the caption with a column of `)` marks; prayer items lettered A to G at 0.5 in; WHEREFORE and the jury demand unnumbered; the date in the signature block; a centered page number at the foot. Page count is the same as typst (8).
   - Differs: paragraph numbers and the lettered prayer are typed text, as in typst, not Word auto-numbering, so an inserted paragraph does not renumber itself.   - Differs: pagination moves by one or two lines in places. The docx starts page 2 with JURISDICTION AND VENUE (typst starts it with paragraph 7), because the heading and its paragraph are kept together and the lines above them run a little longer in LibreOffice. Caption marks are one per party line in both engines, so a wrapped party name is short one mark in both.
   - docx BLOCKED items: none for this sample. Not run: Word (not installed here, so the file is checked in LibreOffice and by a pandoc read-back, not in Word); the repo gate scripts (see gap 7).
 
@@ -27,7 +27,7 @@ Primary sources, fetched 2026-10-14:
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | N.D. Iowa LR 10(a) | 8 1/2 x 11 inch paper. Source: https://www.iand.uscourts.gov/sites/iand/files/Local%20Rules%208.1.2020%20edits.%20clean.pdf (Local Rules, "Revised August 1, 2020", effective December 1, 2020; the posted copy is the version checked). | `page-w`, `page-h`. |
-| N.D. Iowa LR 10 (typeface, point size) | Names no typeface and no point size. Checked against the full text of the same Local Rules copy (2026-10-14): no provision mentions a font, typeface or type size. | `font-family = "EB Garamond"`, `type-size = 12pt`: the "No face named" row of `docs/FONTS.md`. |
+| N.D. Iowa LR 10 (typeface, point size) | Names no typeface and no point size. Checked against the full text of the same Local Rules copy (2026-10-14): no provision mentions a font, typeface or type size. | `font-family = "TeX Gyre Termes"` (the audited exemplar face, `data/exemplar-fonts.json`), `type-size = 12pt`. |
 | N.D. Iowa LR 10(b)(1) | Double spaced. | `pitch = 24pt`, `body-leading = 1.35em`; every paragraph and heading is rounded to whole 24 pt lines (`on-grid`). |
 | N.D. Iowa LR 10(b)(2) | Printed on one side only. | Single-sided PDF. |
 | N.D. Iowa LR 10(b)(3) | Top margin of at least 1 inch. | `margin = 1in` on all sides. |
@@ -60,16 +60,16 @@ Not produced by this template (separate filings): the civil cover sheet (JS-44);
 ## Known gaps and open choices
 
 1. **Only one exemplar.** Tier 2 asks for 2 or 3 filers. The search (CourtListener RECAP, `court=iand`, complaints filed 2026-04 to 2026-10) also found Kinetiq, Inc. v. CCR Media, LLC (1:26-cv-00162, 29 pages, verified complaint with exhibits, RECAP doc gov.uscourts.iand.71680.1.0.pdf) and Vohs v. Canpotex (1:26-cv-00101, complaint with jury demand; text not checked). Those were not saved, because the brief asks for one exemplar per doc type. Tier 2 is therefore **not** judged against two filers yet.
-2. **Typeface and size.** The N.D. Iowa Local Rules text names no typeface and no point size (re-checked 2026-10-14 against the full text, not only LR 10), so the template uses EB Garamond 12 pt under the "No face named" row of `docs/FONTS.md`; no substitute was switched in. The exemplar is Times-metric (Times Roman embedded), so EB Garamond looks smaller at 12 pt. Whether the court wants a larger apparent size is a question for David; a vendored Times-metric font would remove the difference.
+2. **Typeface and size.** The N.D. Iowa Local Rules text names no typeface and no point size (re-checked 2026-10-14 against the full text, not only LR 10), so the template uses TeX Gyre Termes 12 pt, the Times-metric face the font audit matched to the exemplar (Times Roman embedded; `data/exemplar-fonts.json`). It was EB Garamond 12 pt before, which looked smaller than the exemplar at the same size.
 3. **Caption.** The party column is closed by a column of `)` marks, as in the exemplar. The exemplar's caption has the party names in the left column and the case number on the right; the template reproduces that structure without measuring coordinates.
 4. **Sub-items inside a paragraph.** The exemplar's paragraph 31 lists prior-art items (a) to (f) as separate indented lines inside one numbered paragraph. The sample runs them on as one paragraph, so the paragraph numbers match the exemplar (1 to 49) but the indentation of the sub-items does not.
 5. **Exhibits and attachments** are referred to by letter in the text but not included in the sample (they are not part of the complaint's text layer).
-6. **Overlay pairing.** The sample is the full complaint (9 pages in the exemplar, 8 in our render). Pages pair by shared words; the page overlap is 36% to 87%, which reflects the typeface and the double spacing applied by the rule, not a transcription gap. The overlay is a diagnostic, not a score.
+6. **Overlay pairing.** The sample is the full complaint (9 pages in the exemplar, 8 in our render). Pages pair by shared words; the page overlap is 36% to 87%, which reflects the typeface (then EB Garamond) and the double spacing applied by the rule, not a transcription gap. The overlay is a diagnostic, not a score.
 7. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape. Render and overlay were run; the review below is the Gate 2 equivalent.
 8. **Output names.** `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name, so the sample is `INPUT-<id>.md` and the outputs are `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt` (the file-role naming of CLAUDE.md, not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief).
 9. **Version of the local rules.** The copy checked is dated "Revised August 1, 2020". No later revision was found in the search; the current posting should be confirmed before the template is treated as final.
 
-## Review of the rendered pages (usage/OUTPUT-complaint.typst.pdf)
+## Review of the rendered pages (usage/OUTPUT-complaint.typst.pdf, the earlier EB Garamond render)
 
 - Page 1: court title (3 lines), caption with `)` column, `No. 2:26-cv-1019`, COMPLAINT, JURY DEMAND; lead-in paragraph; PRELIMINARY STATEMENT; paragraphs 1 to 6. Pass.
 - Page 2: paragraphs 7 to 14, FACTS heading. No heading at the foot of a page. Pass.

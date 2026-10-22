@@ -6,22 +6,22 @@ Doc type **motion-brief**: the memorandum in support of a Rule 12(b) motion to d
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer: defendant's counsel; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (the full 7-page memorandum transcribed: caption, cover title, Introduction, Legal Standard, Argument with block quotation, Conclusion, footnote 1, signature block) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 6 pages, typst 0.15.0, vendored Liberation Serif only (embedded per `pdffonts`), no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, typst 0.15.0, Times New Roman only (embedded per `pdffonts`), no warnings |
 | overlay | ok: `usage/OVERLAY-cobb-motion-brief.pdf` and `usage/OVERLAY-cobb-motion-brief.txt` |
-| pages reviewed | 6 of 6 (every page rendered at 60 dpi and viewed after the last template change) |
-| tier-1 font (L.R. 1.05(B)) | Met: Times New Roman (one of the three faces the rule names) set as its metric-compatible substitute **Liberation Serif** (see Known gaps) |
+| pages reviewed | 6 of 6 on the earlier 6-page Liberation Serif render, before fb-595.68 (every page rendered at 60 dpi and viewed) |
+| tier-1 font (L.R. 1.05(B)) | Met: **Times New Roman** (one of the three faces the rule names), set in the face itself (the pinned files of `docs/FONTS.md` rule 1; Liberation Serif only as fallback) on typst and docx (see Known gaps) |
 
 ## Governing rules
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | D.S.C. Local Civ. Rule 1.05(A) | Minimum one-inch margins on all sides. | `margin` in `typst/scd-motion-brief.typ` |
-| D.S.C. Local Civ. Rule 1.05(B) | Times New Roman, Arial or Courier New. | `font-family` = `"Liberation Serif"` (Times New Roman substitute, `docs/FONTS.md`) |
-| D.S.C. Local Civ. Rule 1.05(C) | Minimum 12-point type for caption, text and footnotes. | `type-size` (footnote is set in the same size) |
+| D.S.C. Local Civ. Rule 1.05(B) | Times New Roman, Arial or Courier New. | `font-family` = `("Times New Roman", "Liberation Serif")` |
+| D.S.C. Local Civ. Rule 1.05(C) | Minimum 12-point type for caption, text and footnotes. | `type-size` (footnotes are set in the same size, 12 pt, since fb-595.68.19) |
 | D.S.C. Local Civ. Rule 1.05(D) | Only page numbers and document identification may be in margins or smaller than 12 pt. | page number only, centered at the foot |
-| D.S.C. Local Civ. Rule 1.05(E) | Double space text, except indented quotations and footnotes. | `double-leading` (about 27 pt pitch at 12 pt); block quotation single-spaced and indented |
+| D.S.C. Local Civ. Rule 1.05(E) | Double space text, except indented quotations and footnotes. | `pitch-body` (27.6 pt, Word's double of 12 pt Times); block quotation single-spaced (13.8 pt lines) and indented |
 | D.S.C. Local Civ. Rule 7.05(A) | A memorandum contains a concise summary of the case, a statement of facts with record references, the argument with citations, and any special content the rule for the motion requires. | Sample content (the exemplar's order: Introduction, Legal Standard, Argument, Conclusion); the template does not enforce it |
-| D.S.C. Local Civ. Rule 7.05(B)(1) | An initial brief may not exceed 35 double-spaced pages, unless the court grants an exception. | Not enforced by the template. This sample is 6 pages. |
+| D.S.C. Local Civ. Rule 7.05(B)(1) | An initial brief may not exceed 35 double-spaced pages, unless the court grants an exception. | Not enforced by the template. This sample is 7 pages. |
 | FRCP 7(b), 10(a), 11(a) | A motion and its grounds are stated in writing; caption; attorney signature. | `caption`, `signature` (signers and firm lines from frontmatter) |
 | FRCP 12(b)(6) | The motion (and so the memorandum) asserts failure to state a claim. | Sample content only |
 
@@ -46,11 +46,11 @@ File names follow the tools (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.pdf
 
 ## What the overlay shows
 
-Red is our render, blue is the filed exemplar, black is where they agree. The page map in `OVERLAY-cobb-motion-brief.txt` pairs our pages 1 to 6 one-to-one with filed pages 1 to 6. Word overlap is 62% to 95% per page. Pages 1 and 2 match most closely (95% and 87%). Pages 4 to 6 match least (67%, 62% and 64%): the filed memorandum runs to 7 pages and our render runs to 6, so the page breaks do not line up after page 3. The filed exemplar is set in Times New Roman (`pdffonts`), the face Liberation Serif substitutes for. The overlay is a diagnostic for layout and structure, not a score.
+Made on the earlier 6-page Liberation Serif render, before fb-595.68. Red is our render, blue is the filed exemplar, black is where they agree. The page map in `OVERLAY-cobb-motion-brief.txt` pairs our pages 1 to 6 one-to-one with filed pages 1 to 6. Word overlap is 62% to 95% per page. Pages 1 and 2 match most closely (95% and 87%). Pages 4 to 6 match least (67%, 62% and 64%): the filed memorandum runs to 7 pages and our render runs to 6, so the page breaks do not line up after page 3. The filed exemplar is set in Times New Roman (`pdffonts`), the face Liberation Serif substitutes for. The overlay is a diagnostic for layout and structure, not a score.
 
 ## Visual review (Gate 2)
 
-Pages 1 through 6 were rendered at 60 dpi and viewed. Findings during review, all fixed unless noted:
+Pages 1 through 6 of the earlier render (EB Garamond, then Liberation Serif; before fb-595.68) were rendered at 60 dpi and viewed. Findings during review, all fixed unless noted:
 
 | Page | Finding | Fix |
 |---|---|---|
@@ -66,10 +66,10 @@ Open findings: none for layout. The exemplar's own typographical quirks are repr
 
 ## Known gaps
 
-1. **Font (L.R. 1.05(B)): resolved.** The rule names Times New Roman, Arial or Courier New. This template sets Times New Roman, using `Liberation Serif` (SIL OFL 1.1, vendored in `fonts/liberation-serif/`, metric-compatible per `docs/FONTS.md`). Arial and Courier New were not chosen. The page count is unchanged by the switch (6 pages, from the EB Garamond baseline). The render uses `--ignore-system-fonts`, so no system font can stand in for it.
+1. **Font (L.R. 1.05(B)): resolved.** The rule names Times New Roman, Arial or Courier New. This template sets Times New Roman itself (the pinned files of `docs/FONTS.md` rule 1), with `Liberation Serif` (SIL OFL 1.1, vendored in `fonts/liberation-serif/`) only as fallback; it used Liberation Serif as the substitute before. Arial and Courier New were not chosen. The page count was unchanged by the EB Garamond to Liberation Serif switch (6 pages); the render is 7 pages since fb-595.68.19 (27.6 pt double pitch). The render uses `--ignore-system-fonts`, so no system font can stand in for it.
 2. **One exemplar, one filer.** Tier 2 is judged against one filed memorandum (defendant's counsel, Saxton & Stump, Charleston Division), not the 2 or 3 the eval loop asks for.
 3. **Page limit not enforced.** L.R. 7.05(B)(1) caps an initial brief at 35 double-spaced pages; the template does not count pages. The sample is far under the cap.
-4. **Not checked by the court tools.** This folder has no `checks.yaml`, so `tools/check.sh` has not been run here. The render has no typst warnings (`tools/render.sh` fails on warnings).
+4. **Checked by the court tools.** `tools/check.sh` gates both engines on `eval.yaml` (`usage/.check-typst.txt`, `usage/.check-docx.txt`: PASS). The render has no typst warnings (`tools/render.sh` fails on warnings).
 5. **Exemplar motion not transcribed.** The filing is the memorandum (ECF 24-1); the motion (ECF 24) is a separate document and is not in this folder.
 
 ## Exemplar search (for the record)
@@ -78,26 +78,25 @@ CourtListener search API, `court=scd`, `type=rd`, query `"MOTION to Dismiss" "12
 
 ## Engines
 
-typst (`typst/`) is the reference. The docx engine (`docx/`) was built to its form and every page was compared with the typst page.
+typst (`typst/`) is the reference. The docx engine (`docx/`) was built to its form; since fb-595.68.19 both are on the shared cross-engine layout model and XENG-001..003 pass (166/166 lines). The page comparison below was made on the earlier Liberation Serif renders.
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-motion-brief.typst.pdf` (6 pp.) | reference |
-| docx | `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (7 pp.) | ok: LibreOffice converts it without error; all 7 pages of the `.docx.pdf` viewed at 60 dpi, set beside the typst pages 1 to 6 |
+| typst | `OUTPUT-motion-brief.typst.pdf` (7 pp.) | reference |
+| docx | `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (7 pp.) | ok: LibreOffice converts it without error; on the earlier render all 7 pages of the `.docx.pdf` were viewed at 60 dpi, set beside the typst pages 1 to 6 |
 
 ```sh
 sh tools/render.sh --engine docx courts/fourth-circuit/south-carolina/federal/district/motion-brief usage/INPUT-motion-brief.md
-sh docx/make-reference.sh     # rebuilds docx/reference.docx (run from the doc-type folder)
 ```
 
-- *Build:* `docx/reference.docx` (styles, US Letter, 1-inch margins, centered PAGE field in the footer; from pandoc's default reference document) and `docx/scd-motion-brief.lua`, which writes the court heading, caption table, document title and signature table (location and date; the signing attorneys; the firm) from the frontmatter. Footnotes and the block quotation are pandoc's, styled in the reference. No `render.sh`, no `checks.yaml`.
-- *Font:* declared as Times New Roman (see the complaint's Engines section); LibreOffice here shows LiberationSerif only.
+- *Build:* `fb render --engine docx` builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst face, Times New Roman 12 pt: US Letter, 1-inch margins, the centered page number in a 13.8 pt line; `docx/make-reference.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.19), then runs pandoc with `docx/scd-motion-brief.lua`, which writes the court heading, caption table, document title and signature table (location and date; the signing attorneys; the firm) from the frontmatter. Footnotes and the block quotation are pandoc's, styled in the reference.
+- *Font:* declared as Times New Roman (`{font}`, the typst template's face); `pdffonts` on `usage/OUTPUT-motion-brief.docx.pdf` shows only Times New Roman.
 - *Matches typst:* 12 pt type, footnotes 12 pt; 1-inch margins; page number centered at the foot; the court heading; the caption; the title; headings (levels 1 and 2 bold, centered, capitals; level 3 bold, flush left); half-inch first-line indent; footnote numbering and placement; the signature block.
-- *Differs:*
+- *Differs* (on the earlier Liberation Serif renders, recorded then; fb-595.68.19 set typst to the 27.6 pt pitch, 13.8 pt single lines and 12 pt footnotes, and both engines are 7 pages now):
   - Body pitch: Word's double (27.6 pt) against typst's 27.06 pt. The memorandum runs to 7 pages against typst's 6. The conclusion and the signature block move together to page 7 (page 6 of the docx ends after the last argument paragraph); typst keeps them on page 6.
   - The block quotation is single-spaced and indented a half inch on both sides. Typst sets it double-spaced. L.R. 1.05(E) allows indented quotations to be single-spaced, so the docx follows the rule text; the typst form is not wrong, but the two differ here.
   - The title is centered on two lines. Typst's title wraps with its first line running to the full measure.
   - Signature block lines are Word's 13.8 pt single; typst's are tighter.
   - **Typst footnotes are below the rule minimum.** Measured on `OUTPUT-motion-brief.typst.pdf`, footnote text is about 9 pt tall (glyph box 9.3 pt), against 13.3 pt for the 12-pt docx footnote. L.R. 1.05(C) sets 12 pt for footnotes. The typst template needs its footnote size fixed; it was not changed here.
 - *Not verified:* opening in Microsoft Word (no Word on this box). The `.docx` is a valid zip with well-formed XML parts, and LibreOffice converts it without a conversion error.
-- *BLOCKED:* none. This court has no `checks.yaml`, so no check ID was run against the docx; the review is by eye.
+- *BLOCKED:* none. `tools/check.sh --engine docx` passes on `eval.yaml` (`usage/.check-docx.txt`: PASS).

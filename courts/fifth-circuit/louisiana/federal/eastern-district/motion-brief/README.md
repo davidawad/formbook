@@ -7,11 +7,11 @@ Folder: `courts/fifth-circuit/louisiana/federal/eastern-district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (the whole memorandum, 9 pages in the filing) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, pinned Times New Roman only, no warnings |
 | overlay | ok: `usage/OVERLAY-walker-motion-brief.pdf` and `OVERLAY-walker-motion-brief.txt` (page map; re-run 2026-10-14 against a copy of the exemplar fetched from the URL in `usage/SOURCE.md`, not committed) |
 | page limit | LR 7.7 (25 pages) is enforced by the build: a 27-page test memorandum fails with the rule's message (checked 2026-10-14) |
-| typeface | Rule names no face (LR 10.1 "standard font"). EB Garamond kept, per `docs/FONTS.md` ("No face named"). Not metric-compatible with the exemplar's Times New Roman; see known gap 1. |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in its final state; re-checked 2026-10-14 after the fonts pass, no change to the template) |
+| typeface | Rule names no face (LR 10.1 "standard font"). Times New Roman 12 pt (the pinned install, `docs/FONTS.md` rule 1; Liberation Serif fallback), the house standard (`docs/FONTS.md` rule 6) and the exemplar's face; see known gap 1. |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in its final state; re-checked 2026-10-14 after the fonts pass, no change to the template; the earlier EB Garamond render, before fb-595.68) |
 
 ## Governing rules
 
@@ -67,7 +67,7 @@ Body:
 
 ## Overlay (`usage/OVERLAY-walker-motion-brief.pdf`)
 
-Red is our render, blue is the filed memorandum, black is where they agree. Pages are paired by word overlap. The page map in `OVERLAY-walker-motion-brief.txt`:
+Red is our render, blue is the filed memorandum, black is where they agree. Pages are paired by word overlap. The page map in `OVERLAY-walker-motion-brief.txt` (measured on the earlier EB Garamond render, before fb-595.68):
 
 ```
 ours p.1  filed p.1   ours p.5  filed p.6
@@ -80,7 +80,7 @@ Our pages 4 to 8 pair with filed pages 5 to 9, so filed page 4 is not paired wit
 
 ## Known gaps and open choices
 
-1. **Font.** Same as the complaint: LR 10.1 requires a "standard font" and names no face, so `docs/FONTS.md` ("No face named") keeps EB Garamond. The filed exemplar is Times New Roman 12 pt. Liberation Serif is vendored and metric-compatible with Times New Roman, so the switch is available. **Question for David:** keep EB Garamond (current), or switch this doc type to Liberation Serif?
+1. **Font.** Same as the complaint: LR 10.1 requires a "standard font" and names no face. The template is set in Times New Roman 12 pt, the house standard (`docs/FONTS.md` rule 6) and the filed exemplar's face; until fb-595.68 it kept EB Garamond.
 2. **Point size.** LR 10.1 sets none; 12 pt, as in the exemplar.
 3. **One exemplar; no second filer found.** A second text-based E.D. La. Rule 12(b) memorandum with a downloadable PDF was not found in the RECAP search (`type=rd`, `court=laed`, filed from 2026-01-01, "memorandum in support of motion to dismiss"). The Lycee Francais memorandum (2:26-cv-00946, Doc. 5-1) was seen but is marked "FILED IN ERROR SEE DOC. 6" on the docket, so it was not used. Tier 2 is judged against one filer. Options: a second search for an E.D. La. memorandum, or accept the single filer.
 4. **"VERSUS".** The filed memorandum joins the parties with "VERSUS"; the complaint exemplar uses "v.". Neither LR 10.1 nor FRCP 10(a) sets the word. Each doc type follows its exemplar; recorded as accepted.
@@ -91,7 +91,7 @@ Our pages 4 to 8 pair with filed pages 5 to 9, so filed page 4 is not paired wit
 9. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`. This doc-type folder has neither, and `tools/` is shared. Render, overlay and the page-limit test ran.
 10. **Headings are typed by the author.** The template does not number them.
 
-## Review of the rendered pages (final state)
+## Review of the rendered pages (final state of the earlier EB Garamond render, before fb-595.68)
 
 | Page | What was checked | Result |
 |---|---|---|
@@ -106,7 +106,7 @@ Our pages 4 to 8 pair with filed pages 5 to 9, so filed page 4 is not paired wit
 
 ## Engines
 
-Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default, `laed-motion-brief.lua` is the filter, and `render.sh` runs pandoc (`tools/render-docx.sh` calls it). Output: `usage/OUTPUT-motion-brief.docx`. The LibreOffice PDF, `usage/OUTPUT-walker-motion-brief.docx.pdf`, was not produced (see BLOCKED).
+Typst is the primary engine. The DOCX engine is `docx/`: `fb render --engine docx` (`tools/render-docx.sh` and `sh tools/render.sh --engine docx` call it) builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst template's face) and runs pandoc with the filter `laed-motion-brief.lua`. Output: `usage/OUTPUT-motion-brief.docx`. The LibreOffice PDF, `usage/OUTPUT-walker-motion-brief.docx.pdf`, was not produced (see BLOCKED).
 
 | Engine | Status |
 |---|---|
@@ -114,7 +114,7 @@ Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` ma
 | latex | not built |
 | docx | `.docx` built; read back with pandoc and every XML part well-formed. `.docx.pdf` BLOCKED. Not viewed. |
 
-**What the DOCX form sets** (from the reference and the filter; no page has been looked at): letter page, 1 in margins; EB Garamond 12 pt, the same vendored face as typst; 24 pt exact line pitch (double spacing); 0.5 in first-line indent; page number centered 0.6 in from the bottom edge, none on page 1; the caption as a borderless table, the party column closed by a right and a bottom rule, VERSUS between the sides, the case fields as label-over-value on the right; title bold and centered; headings centered bold, bold and bold italic; body paragraphs not numbered; lettered items with a hanging indent; single-spaced block quotations indented 0.5 in on each side; the signature block with "Dated" (when the sample gives a date) on the left and "Respectfully submitted," at 3 in; the certificate of service when `service` is given.
+**What the DOCX form sets** (from the reference and the filter; no page has been looked at): letter page, 1 in margins; Times New Roman 12 pt, the same face as typst; 24 pt exact line pitch (double spacing); 0.5 in first-line indent; page number centered 0.6 in from the bottom edge, none on page 1; the caption as a borderless table, the party column closed by a right and a bottom rule, VERSUS between the sides, the case fields as label-over-value on the right; title bold and centered; headings centered bold, bold and bold italic; body paragraphs not numbered; lettered items with a hanging indent; single-spaced block quotations indented 0.5 in on each side; the signature block with "Dated" (when the sample gives a date) on the left and "Respectfully submitted," at 3 in; the certificate of service when `service` is given.
 
 **Differences and open checks**
 
@@ -126,6 +126,6 @@ Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` ma
 
 - `docx.pdf`, Gates 0 and 1, the LR 7.7 page count and the page review: BLOCKED. The LibreOffice 25.2 build unpacked from Debian trixie debs (no root here) aborts at startup with `com::sun::star::uno::DeploymentException`: the extracted packages have no `libdeploymentlo.so`. No PDF was produced, so no check ran. Unblock: install LibreOffice so it runs on this box, then `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`.
 - `tools/check.sh --engine docx`: not run. It needs `court.json` and `rules.md` in the folder (known gap 9). The check stamp `usage/.check-docx.txt` was not written.
-- The LibreOffice conversion needs EB Garamond visible to fontconfig (DOCX.md, "Fonts").
+- The LibreOffice conversion needs the pinned Times New Roman visible to LibreOffice (`docs/FONTS.md` rule 1; DOCX.md, "Fonts").
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
