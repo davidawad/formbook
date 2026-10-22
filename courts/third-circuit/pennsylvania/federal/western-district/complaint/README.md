@@ -7,11 +7,10 @@ Folder: `courts/third-circuit/pennsylvania/federal/western-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (primary, transcribed) and `usage/FILED-EXAMPLE-complaint-2.pdf` (second filer, saved for comparison, not transcribed). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-complaint.md` (the whole filing: caption, 46 numbered paragraphs, four counts, prayers, jury demands, signature) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings (`tools/render.sh` exit 0) |
-| overlay | ok: `usage/OVERLAY-cragle-complaint.pdf` and `usage/OVERLAY-cragle-complaint.txt` (`tools/overlay.sh` exit 0) |
-| pages reviewed | 12 of 12: every page rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the last template change |
-
-File names: the brief asked for `usage/<id>.md`, `usage/<id>.pdf` and `usage/<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` (not edited, per the brief) write and read `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so those names are used. The sample is `INPUT-complaint.md`, so its id is `cragle-complaint`.
+| typeface | LCvR 5.1.B names no face and asks at least 12 point. Font: **Times New Roman** 12 pt (vendored, docs/FONTS.md), the exemplar's face and the house standard, in the typst PDF, the docx and its LibreOffice PDF (`fb lint fonts` does not report the folder) |
+| render | ok (2026-10-22): `usage/OUTPUT-complaint.typst.pdf`, 11 pages, and `usage/OUTPUT-complaint.docx` with its LibreOffice PDF, 11 pages; `fb render`, vendored fonts only, no warnings |
+| overlay | `just overlay` writes `.overlay/<doc path>/OVERLAY-complaint.pdf` (not committed); a diagnostic, not a score |
+| pages reviewed | 11 of 11, both engines, side by side at 50 dpi (2026-10-22, the renders of fb-595.68.35) |
 
 ## Governing rules
 
@@ -20,7 +19,7 @@ Checked 2026-10-14.
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LCvR 5.1.A (W.D. Pa. Local Rules, manual at https://www.pawd.uscourts.gov/sites/pawd/files/lrmanual20181101.pdf, the text headed "November 1, 2016") | 8½ × 11 inch white paper. | `paper: "us-letter"`. |
-| LCvR 5.1.B (same) | Lettering not smaller than 12 point; text double-spaced; quotations over two lines may be indented and single-spaced; headings and footnotes may be single-spaced; margins at least one inch on all four sides; page numbers may be in the margins, no text in them. | `type-size = 13pt` (see Known gaps 1); `leading: 1.35em` with a 0.65 em line gives a 26 pt baseline pitch (measured: 67.36 → 93.36 pt on page 2); `margin: 1in`; page number centered in the footer, in the bottom margin. |
+| LCvR 5.1.B (same) | Lettering not smaller than 12 point; text double-spaced; quotations over two lines may be indented and single-spaced; headings and footnotes may be single-spaced; margins at least one inch on all four sides; page numbers may be in the margins, no text in them. | `type-size = 12pt`; `pitch-body = 24pt` (double spacing: every body line a 24 pt box); single lines (court title, caption, signature) 13.8 pt; `margin = 1in`; the page number centred in the bottom margin. |
 | LCvR 5.1.C, 5.1.D | One side of a page; securely fastened. | Not a template property (print). |
 | LCvR 5.1.E | Exhibits accompany but are not bound to the filing; separator pages; top-right identification. | Not produced (no exhibits in the sample). |
 | LCvR 5.2.B | Under the signature line: name, address, telephone, fax, email (if applicable), and Pennsylvania bar number, with the state's postal abbreviation as prefix ("PA 12345"). | `signature` block: `lines` in the sample include "PA ID No." for each attorney; the template prints the lines as given. Fax is not in the Cragle filing, so none is printed. |
@@ -35,12 +34,14 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Layout
 
-- Court title centered in capitals on two lines; the caption is a grid: parties in the left column, a ")" column, and the case number, jury demand and "Electronically Filed" in the right column, which spans the rows.
-- The title is centered in bold capitals below the caption; the lead-in paragraph follows, indented.
-- Section headings (`#`) are centered bold capitals; count headings (`##`) are centered bold; each source line of a heading is its own line.
-- Numbered paragraphs: first-line indent 0.5 in, the number followed by a 0.5 in tab, then the text. Lettered sub-paragraphs (a., b., ...) are indented with a hanging number.
-- WHEREFORE paragraphs are unnumbered; the prayer items that follow them are lettered.
-- Signature block: "Dated:" line, then "Respectfully submitted," and the firm, the signer's "s/" line and the attorney lines, all single-spaced in the right half of the page.
+- The cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): every line a box of its pitch, 24 pt for the body and the headings, 13.8 pt for single lines; the spaces between blocks explicit. Times New Roman 12 pt.
+- Court title: two centred bold single lines; 24 pt below, the caption: the parties in the left column (single lines), a ")" per line, and on the right "Civil Action No.", then (when the sample asks) "JURY TRIAL DEMANDED" in bold and "Electronically Filed.", a blank single line apart.
+- The title centred in bold capitals 24 pt below the caption; the lead-in paragraph 24 pt below it, indented.
+- Headings at the type size on the body pitch with no space of their own, kept with the next block: section headings (`#`) centred bold capitals; count headings (`##`) centred bold, each source line of the heading its own line; `###` bold at the margin.
+- Numbered paragraphs: the number at the half-inch indent in a 0.5 in box (the text starts 1 in from the margin; a tab in the docx). Lettered items (a., b., ...): the letter half an inch in, the text hanging at 1 in.
+- WHEREFORE paragraphs and the "JURY TRIAL DEMANDED" lines (centred bold) are unnumbered.
+- Signature block, kept with the last block: "Dated:" at the margin, then from 3.0 in "Respectfully submitted,", the firm, the signer's "s/" line and the attorney lines, single-spaced, 24 pt between the groups.
+- Footer: the page number centred in a single line ending 0.5 in above the page edge.
 
 ## Markdown contract (for samples)
 
@@ -51,42 +52,45 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## What the overlay shows
 
-`usage/OVERLAY-cragle-complaint.pdf`: each page is red (our render) multiplied over blue (the filed exemplar's page with the most shared words). Black is where both agree. The page pairing is by word overlap, not index (`usage/OVERLAY-cragle-complaint.txt` lists the pairs). Final map: ours p.1 to filed p.1 (95%), p.2 to p.2 (83%), p.3 to p.3 (75%), p.4 to p.4 (76%), p.5 to p.5 (74%), p.6 to p.6 (60%), p.7 to p.7 (73%), p.8 to p.9 (74%), p.9 to p.10 (54%), p.10 to p.8 (56%), p.11 to p.9 (68%), p.12 to p.11 (53%). The overlay is a diagnostic, not a score. Pages 8 to 12 pair with a later or earlier filed page because the sample's count breaks fall on different pages from the filing's.
+`just overlay <this folder>` writes `.overlay/<doc path>/OVERLAY-complaint.pdf` and `.txt` (not committed): each page red (our render) multiplied over blue (the filed exemplar's page with the most shared words), black where both agree, the pages paired by word overlap. The overlay is a diagnostic, not a score; the sample's count breaks fall on other pages than the filing's.
 
 ## Known gaps and open choices
 
-1. **Font size and face.** The only vendored font is EB Garamond (`fonts/eb-garamond/`). The rule sets a 12-point minimum, not a face. The template uses 13 pt, because EB Garamond's x-height is smaller than Times 12 pt; the exemplar is Times, so the sample looks slightly smaller in its text than the exemplar at 12 pt. This is within the rule. A Times-metric vendored face would remove the choice (`fonts/` is not touched by this unit).
+1. **Font size and face.** LCvR 5.1.B sets a 12-point minimum, not a face. Times New Roman 12 pt, the exemplar's face and the house standard, in every engine (the template set EB Garamond 13 pt before fb-595.68.35).
 2. **Exemplar caption error (Snee).** The second exemplar's printed heading says "DISTRICT OF MASSACHUSETTS" over a W.D. Pa. docket. The template follows the W.D. Pa. caption (Cragle, which is correct). Recorded here, not followed.
 3. **Only one exemplar transcribed.** The brief asks for one primary exemplar per doc type; the second filer (Snee) is saved but not compared page by page. Tier-2 comparison against two filers is therefore partial (structure only: numbered paragraphs, counts, prayers, jury demand, signature block).
 4. **Count heading.** The Cragle heading for Count III runs over three lines in the filing ("COUNT III: FAMILY AND MEDICAL LEAVE ACT / 29 USCS §§ 2611 et seq. / RETALIATION"); the sample keeps those lines, and the template renders each source line on its own line.
-5. **Page gaps.** Several pages end with two or three blank lines where the next numbered paragraph or sub-heading moved to the next page (block-level layout, sticky headings). The filing also leaves gaps. Not a rule issue.
+5. **Page gaps.** Some pages end a few lines short: page 1 (paragraph 5 and its items move on whole, typst's widow and orphan rule), page 5 and 7 (a count heading stays with its paragraph), page 10 (the last jury demand stays with the signature). The filing also leaves gaps. Not a rule issue.
 6. **Judge practices not checked.** LCvR 7.A makes each judge's practices (posted on the court's chambers pages) apply to motions; the chambers pages were not retrieved, so any judge-specific complaint format is not covered.
 7. **Caption box.** The caption closes with a ")" column (as the Cragle exemplar does). No rule text requires a particular caption style; this is a convention choice, recorded as accepted.
 8. **No numbered pleading lines.** The W.D. Pa. rules do not require numbered lines, and neither exemplar has them; the template does not draw them.
 9. **Overlay pairing.** Pages are paired by word overlap; the lowest pairings (p.9 to 54%, p.12 to 53%) are the count pages, where the sample and the filing break differently. Not a text defect; the rendered text was checked page by page.
 
-## Review of the rendered pages (Gate 2 rows, final PDF, 60 dpi)
+## Review of the rendered pages (Gate 2 rows; all 11 pages, typst and docx side by side at 50 dpi, 2026-10-22)
 
-Each page was rendered and viewed after the last template change (the count-heading line split and the signature offset).
+| Page | What it is | Finding |
+|---|---|---|
+| 1 | Court title, caption (parties, ")" column, "Civil Action No. 2:26-cv-2200", JURY TRIAL DEMANDED, Electronically Filed.), title, lead-in, JURISDICTION AND VENUE, paragraphs 1 to 4 | OK, both engines alike. Ends short: paragraph 5 and its items move on whole. |
+| 2 | Paragraph 5 with items a to c, PARTIES, paragraphs 6 to 8, FACTUAL ALLEGATIONS, 9 and 10 | OK. |
+| 3 | Paragraphs 11 to 23 | OK. |
+| 4 | Paragraphs 24 to 28, COUNT I, paragraphs 29 to 32 | OK. |
+| 5 | Paragraphs 32 (end) and 33, WHEREFORE, items a to g, JURY TRIAL DEMANDED | OK; the item text hangs at 1 in. Ends short: COUNT II stays with paragraph 34. |
+| 6 | COUNT II, paragraphs 34 to 38 | OK. |
+| 7 | Paragraph 38 (end), WHEREFORE, items a to h, JURY TRIAL DEMANDED | OK. |
+| 8 | COUNT III (three centred lines), paragraphs 39 to 42, WHEREFORE, items a to e | OK. |
+| 9 | Item e (end) to h, JURY TRIAL DEMANDED, COUNT IV, paragraphs 43 to 46, WHEREFORE | OK. |
+| 10 | Items a to h | OK. Ends short: the last JURY TRIAL DEMANDED stays with the signature. |
+| 11 | JURY TRIAL DEMANDED, "Dated:", signature block (Respectfully submitted, firm, s/ line, attorneys with PA ID numbers, counsel line, address, telephone) | OK; the signature never stands alone. |
 
-- p.1: court title, caption (plaintiff and defendant, ")" column, "Civil Action No. 2:26-cv-2200", JURY TRIAL DEMANDED, Electronically Filed), title, lead-in, JURISDICTION AND VENUE, paragraphs 1 to 3 (paragraph 3 ends the page area). PASS.
-- p.2: paragraphs 4 to 5 with sub-paragraphs a, b, c; PARTIES; paragraphs 6 to 8. Sub-paragraph and heading spacing correct. PASS.
-- p.3: FACTUAL ALLEGATIONS, paragraphs 9 to 18, left-aligned, double-spaced. PASS.
-- p.4: paragraphs 19 to 28; COUNT I heading; paragraph 29. PASS.
-- p.5: paragraphs 30 to 33; WHEREFORE with items a to c. PASS.
-- p.6: items c (cont.) to g; JURY TRIAL DEMANDED; COUNT II heading; paragraphs 34 to 35. PASS.
-- p.7: paragraphs 35 (cont.) to 38; WHEREFORE with item a. PASS.
-- p.8: items b to h; JURY TRIAL DEMANDED; COUNT III heading (three lines); paragraph 39. PASS.
-- p.9: paragraphs 40 to 43; WHEREFORE with items a to d. PASS.
-- p.10: items e to h; JURY TRIAL DEMANDED; COUNT IV heading; paragraphs 43 to 45. PASS.
-- p.11: paragraph 45 (cont.) and 46; WHEREFORE with items a to f. PASS.
-- p.12: items g and h; JURY TRIAL DEMANDED; "Dated: October 7, 2026"; signature block (Respectfully submitted, firm, s/ line, attorneys with PA ID numbers, counsel line, address, telephone). PASS.
+The docx PDF breaks every line and page where the typst PDF does (XENG-001..003: 291/291 lines, 11/11 pages).
 
-Earlier review passes found and fixed: paragraphs running into one another (blocks were inline), headings overlapping text (block spacing equal to text height rather than the 26 pt pitch), caption rows overlapping, and a statute line that had been numbered as paragraph 39. Those are fixed in the current render.
+Defects of the earlier template (fixed by the cross-engine port, fb-595.68.35): em leadings and `set block(spacing)` instead of line boxes, the number followed by a 0.5 in space (the docx used a tab), the caption's right column centred on the rows, and a docx in EB Garamond 13 pt on a 26 pt pitch.
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference for the court's form.
-- **docx** (`docx/reference.docx`, `docx/pawd.lua`, `docx/build-reference.sh`; sample `usage/OUTPUT-complaint.docx`): built with pandoc 3.6.4 on the reference. Matches the typst template: EB Garamond 13 pt, exact 26 pt (double) line pitch, 1 in margins on US Letter, 0.5 in first-line indent, paragraphs numbered 1 to 46 by the filter (number, tab, text), counts and sections centered in bold, sub-heads flush left, lettered prayer items with a hanging letter, the court heading, the caption (a borderless table: parties, ")" column, case number and jury demand in the right column), the title, the "Dated:" line and the signature block at 3 in, page number centered in the footer.
-- Differences from typst: the caption rows are spaced by the table, not the typst grid (a few points per row differ); paragraph numbers and lettered items are typed text, not Word lists; the page number is the PAGE field, which needs no update.
-- **BLOCKED** (docx): no `checks.yaml` exists for this court, so no gate check ID can be listed. Every check measured on `usage/OUTPUT-cragle-complaint.docx.pdf` is BLOCKED with the reason "LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked". The `.docx` passes the package checks run here (ziptool reads every entry, xmllint on every XML part, no duplicate style ids); it was not opened in Word or LibreOffice.
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and every page where the typst render does, and `eval.yaml` gates it (`params.cross_engine: gate`, fb-595.68.35).
+
+- **typst** (primary, `typst/pawd-complaint.typ`): the reference for the court's form.
+- **docx** (`docx/`): `docx/reference.xml` (`base="xengine"`, the typst face `{font}` = Times New Roman, 12 pt; Body Text in exact 24 pt line boxes with a 0.5 in first-line indent, single lines 13.8 pt; the heading levels at the type size on the body pitch; "Numbered Paragraph" with a tab 1 in from the margin; "Lettered" hanging at 1 in; letter page, 1 in margins, the footer 0.5 in above the edge) and `docx/pawd-complaint.lua` on `lib/docx/xengine.lua`, which cuts the sample's body into chunks as the typst template does (a count heading's further source lines stay heading lines) and writes the court title, the caption table, the title, the lead-in, the numbered paragraphs and lettered items (typed, as typst types them), the signature kept with the last block, the footer (`$FORMBOOK_FOOTERS`) and the last section (`$FORMBOOK_FINAL`). `fb render` builds the reference and runs the passes; no shell script (fb-595.68).
+- Checks (2026-10-22): typst 9 passed, 0 failed; docx 13 passed, 0 failed, XENG-001..003 PASS (291/291 lines, 11/11 pages).
+- Word: not available here. The file converts in LibreOffice with no error; Word may paginate slightly differently (docs/DOCX.md).
