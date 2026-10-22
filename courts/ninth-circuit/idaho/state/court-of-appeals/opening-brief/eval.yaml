@@ -2,9 +2,6 @@
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
 # the typst render does, so a difference fails.
 params:
+  # Heading C of the argument (seven lines) now moves whole to page 12 in LaTeX too (the model's heading keep,
+  # fb-595.54.82); XENG-001..003 pass on latex and docx.
   cross_engine: gate
-  # LaTeX breaks a heading of seven lines at a page foot (two lines on page 11) where typst and Word move it whole
-  # to page 12 with the quotation it is kept with: INPUT-opening-brief, heading C of the argument, and pages 12 to 18
-  # shift (XENG-002, XENG-003). lib/latex/xdoc.lua keeps only the heading's last line with the next block (filed as
-  # fb-595.54.35 request 5, fb-595.54.47 request 3); reported, not gated (fb-595.54.76).
-  cross_engine_latex: report
