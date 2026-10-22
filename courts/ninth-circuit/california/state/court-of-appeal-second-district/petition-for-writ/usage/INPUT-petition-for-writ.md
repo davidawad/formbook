@@ -98,8 +98,8 @@ authorities:
   civilcode: {kind: statute, name: "Civil Code § 124", cite: "Civ. Code § 124"}
   ccpsittings: {kind: statute, name: "Code of Civil Procedure § 124", cite: "Code Civ. Proc. § 124"}
   ccpwrit: {kind: statute, name: "Code of Civil Procedure § 1086", cite: "Code Civ. Proc. § 1086"}
-  evidofficial: {kind: statute, name: "Evidence Code §§ 1040, 1042", cite: "Evid. Code §§ 1040, 1042"}
-  evidinformant: {kind: statute, name: "Evidence Code § 1041", cite: "Evid. Code § 1041"}
+  evidofficial: {kind: statute, name: "Evidence Code §§ 1040, 1042", cite: "Evid. Code §§ 1040, 1042", sort: "evidence code 1040 1042"}
+  evidinformant: {kind: statute, name: "Evidence Code § 1041", cite: "Evid. Code § 1041", sort: "evidence code 1041"}
   caconst: {kind: constitution, name: "Article I, § 2(a) of the California Constitution", cite: "Cal. Const., art. I, § 2(a)"}
   rulesealing: {kind: rule, name: "California Rules of Court, rule 2.550", cite: "Cal. Rules of Court, rule 2.550"}
   rulesunseal: {kind: rule, name: "California Rules of Court, rule 2.551", cite: "Cal. Rules of Court, rule 2.551"}
