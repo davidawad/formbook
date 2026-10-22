@@ -2,9 +2,11 @@
 -- front matter and the back matter as WordprocessingML, from the same frontmatter fields that
 -- typst/bia-brief-on-appeal.typ reads: the cover, the contents (a TOC field with its result filled in), the
 -- signature block and the certificate of service. Sections: cover (no footer), contents (footer, roman from i), body
--- (footer with the page number and the A-number; numbering restarts at the Introduction, as in the typst copy).
--- The table of contents page numbers come from docx/render.sh (a first pass renders the PDF and finds each
--- heading), passed as metadata bia_toc=<file>, one page number per line in heading order.
+-- (footer with the page number and the A-number; numbering restarts with the body, as in the typst copy). The
+-- footer (rIdBiaFooter1, the A-number from $FORMBOOK_META) and the last section go to fb render (FORMBOOK_FOOTERS,
+-- FORMBOOK_FINAL). The table of contents page numbers: fb render (tools/fb/src/docxpass.rs) renders the document
+-- once, finds the page of every heading in that PDF (the needles this filter writes to FORMBOOK_NEEDLES), and renders
+-- again with those pages (FORMBOOK_PAGES) until they settle (fb-595.68.4: were docx/render.sh and build-reference.sh).
 
 local function esc(s)
   s = s:gsub("&", "&amp;")
@@ -31,10 +33,14 @@ local function lines_of(v)
 end
 
 local BOLD = "<w:b/><w:bCs/>"
-local SECT = '<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>'
--- the contents section: the body's footer (page number and A-number, docx/build-reference.sh), numbered in roman from i
+-- the cover: no footer (fb render's empty rIdFtrNone; a section naming none takes the next one's in LibreOffice)
+local SECT = '<w:sectPr><w:footerReference w:type="default" r:id="rIdFtrNone"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>'
+-- the contents section: the body's footer (page number and A-number, FOOTER below), numbered in roman from i
 -- (PM ch. 4.6(b) pagination, ch. 4.6(c)(2) A-number on every page after the cover; typst numbers it the same way)
 local TOC_SECT = '<w:sectPr><w:footerReference w:type="default" r:id="rIdBiaFooter1"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/><w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>'
+-- the body section: the same footer, page numbers from 1. Footnotes are numbered through the document (only the body
+-- has any): LibreOffice reads w:numRestart eachSect as a restart on every page
+local BODY_SECT = '<w:sectPr><w:footerReference w:type="default" r:id="rIdBiaFooter1"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/><w:pgNumType w:start="1"/></w:sectPr>'
 local NOBORDERS = '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>'
 
 local function R(text, rpr)
@@ -176,25 +182,108 @@ local function certificate(meta)
   return out
 end
 
+-- ---- page numbers (fb render's multi-pass build; the contract is in tools/fb/src/docxpages.rs) ----
+local NEEDLE_MAX = 60   -- a needle is a prefix of the text (letters and digits only)
+
+-- letters and digits only, lower case: fb render normalizes the PDF text the same way
+local function norm(s)
+  return (s:lower():gsub("[^a-z0-9]", ""))
+end
+
+local function read_file(env)
+  local path = os.getenv(env)
+  if not path or path == "" then return nil end
+  local f = io.open(path, "r")
+  if not f then return nil end
+  local s = f:read("a")
+  f:close()
+  return s
+end
+
+local function write_file(env, text)
+  local path = os.getenv(env)
+  if not path or path == "" then return end
+  local f = assert(io.open(path, "w"))
+  f:write(text)
+  f:close()
+end
+
+-- the printed page of each needle in the previous pass (FORMBOOK_PAGES); empty on the first pass
+local function load_labels()
+  local labels = {}
+  for line in (read_file("FORMBOOK_PAGES") or ""):gmatch("[^\n]+") do
+    local id, _, lab = line:match("^([^\t]+)\t([^\t]*)\t(.*)$")
+    if id then labels[id] = lab end
+  end
+  return labels
+end
+
+-- the text a block starts with, up to its first footnote (the PDF has only the footnote's number there)
+local function lead_text(b)
+  if b == nil then return "" end
+  while (b.t == "BlockQuote" or b.t == "Div") and b.content[1] ~= nil do b = b.content[1] end
+  if (b.t == "BulletList" or b.t == "OrderedList") and b.content[1] ~= nil and b.content[1][1] ~= nil then
+    return lead_text(b.content[1][1])
+  end
+  local s = str(pandoc.Pandoc({ b }):walk({ Note = function() return pandoc.Str("\1") end }).blocks)
+  return s:match("^[^\1]*")
+end
+
+-- the footer of the contents and the body: the page number centred, the A-number (as the frontmatter writes it) at
+-- the right
+local function footer(a_number)
+  return '<w:p><w:pPr><w:pStyle w:val="Footer"/></w:pPr><w:r><w:tab/></w:r><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r><w:r><w:tab/></w:r><w:r><w:t xml:space="preserve">A#'
+    .. esc(a_number) .. '</w:t></w:r></w:p>'
+end
+
+-- the A-number as written in the frontmatter (FORMBOOK_META), not as pandoc reads markdown
+local function a_number_of()
+  local raw = read_file("FORMBOOK_META")
+  local m = raw and pandoc.json.decode(raw, false) or {}
+  local a = m.a_number
+  if a == nil then return "" end
+  if math.type(a) == "float" and a == math.floor(a) then return string.format("%d", a) end
+  return tostring(a)
+end
+
 function Pandoc(doc)
   local meta = doc.meta
+  local labels = load_labels()
 
-  -- contents entries: the level-1 and level-2 headings of the body, in order
-  local entries = {}
-  for _, b in ipairs(doc.blocks) do
+  -- contents entries: the level-1 and level-2 headings of the body, in order; each a needle (its text and the words
+  -- after it, so the contents row is not taken for it) after the contents rows, which the needles walk past first
+  local entries, first_id = {}, nil
+  for bi, b in ipairs(doc.blocks) do
     if b.t == "Header" and b.level <= 2 then
-      entries[#entries + 1] = { level = b.level, text = str(b.content) }
+      local nb = doc.blocks[bi + 1]
+      local after = (nb ~= nil and nb.t == "Header") and str(nb.content) or lead_text(nb)
+      entries[#entries + 1] = { level = b.level, text = str(b.content), id = "H:" .. (#entries + 1), after = after }
+      if bi == 1 then first_id = entries[#entries].id end
     end
   end
+  local needles = { { "S:toc", "B", norm("TABLE OF CONTENTS"), norm("TABLE OF CONTENTS") } }
+  for i, e in ipairs(entries) do
+    needles[#needles + 1] = { "C:" .. i, "B", norm(e.text):sub(1, NEEDLE_MAX), norm(e.text):sub(1, NEEDLE_MAX) }
+  end
+  -- the body is numbered from 1 at its first block
+  local body_id = first_id
+  if body_id == nil and doc.blocks[1] ~= nil then
+    body_id = "S:body"
+    local t = norm(lead_text(doc.blocks[1])):sub(1, NEEDLE_MAX)
+    needles[#needles + 1] = { body_id, "B", t, t }
+  end
+  for _, e in ipairs(entries) do
+    local short = norm(e.text):sub(1, NEEDLE_MAX)
+    needles[#needles + 1] = { e.id, "B", norm(e.text .. " " .. e.after):sub(1, NEEDLE_MAX), short }
+  end
+  local nl = {}
+  for _, n in ipairs(needles) do nl[#nl + 1] = table.concat(n, "\t") end
+  if body_id ~= nil then nl[#nl + 1] = "#section\t" .. body_id .. "\tdecimal\t" end
+  write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
+  write_file("FORMBOOK_FOOTERS", "rIdBiaFooter1\t" .. footer(a_number_of()) .. "\n")
+  write_file("FORMBOOK_FINAL", BODY_SECT)
   local pages = {}
-  local f = str(meta.bia_toc)
-  if f ~= "" then
-    local h = io.open(f, "r")
-    if h then
-      for line in h:lines() do pages[#pages + 1] = line end
-      h:close()
-    end
-  end
+  for i, e in ipairs(entries) do pages[i] = labels[e.id] or "" end
 
   local blocks = {}
   for _, b in ipairs(cover(meta)) do blocks[#blocks + 1] = b end
