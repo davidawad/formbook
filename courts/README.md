@@ -273,7 +273,7 @@ Courts under `courts` (346).
 | [California Supreme Court](ninth-circuit/california/state/supreme-court) | `cal` | up for review | 5/5 | — | 2/2 | 29 |
 | [Supreme Court of Guam](ninth-circuit/guam/state/supreme-court) | `guam` | up for review | 2/2 | 2/2 | 2/2 | 29 |
 | [Hawaii Intermediate Court of Appeals](ninth-circuit/hawaii/state/intermediate-court-of-appeals) | `hawapp` | up for review | 5/5 | — | — | 29 |
-| [Supreme Court of Hawaii](ninth-circuit/hawaii/state/supreme-court) | `haw` | up for review | 9/9 | 2/2 | 3/3 | 29 |
+| [Supreme Court of Hawaii](ninth-circuit/hawaii/state/supreme-court) | `haw` | up for review | 9/9 | 3/3 | 3/3 | 29 |
 | [Idaho Court of Appeals](ninth-circuit/idaho/state/court-of-appeals) | `idahoctapp` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Idaho Supreme Court](ninth-circuit/idaho/state/supreme-court) | `idaho` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Montana Supreme Court](ninth-circuit/montana/state/supreme-court) | `mont` | up for review | 9/9 | 9/9 | 9/9 | 29 |

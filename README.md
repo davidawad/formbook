@@ -591,7 +591,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Hawaii](courts/ninth-circuit/hawaii/federal/bankruptcy-district) | `hib` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Hawaii](courts/ninth-circuit/hawaii/federal/district) | `hid` | up for review | 2/2 | — | 2/2 | 14 |
 | [Hawaii Intermediate Court of Appeals](courts/ninth-circuit/hawaii/state/intermediate-court-of-appeals) | `hawapp` | up for review | 5/5 | — | — | 29 |
-| [Supreme Court of Hawaii](courts/ninth-circuit/hawaii/state/supreme-court) | `haw` | up for review | 9/9 | 2/2 | 3/3 | 29 |
+| [Supreme Court of Hawaii](courts/ninth-circuit/hawaii/state/supreme-court) | `haw` | up for review | 9/9 | 3/3 | 3/3 | 29 |
 
 ### Idaho
 
