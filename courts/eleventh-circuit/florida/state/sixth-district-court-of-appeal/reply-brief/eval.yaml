@@ -1,0 +1,9 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # LaTeX does not break "a/k/a" after its slashes in a cover line (typst and Word do, as the model's slash rule asks
+  # inside a word: "CM/ECF"): INPUT-reply-brief p1 lines 5-6, the caption's names; 477/479 lines identical, pages and
+  # page ends equal. A shared-model request (docs/open-items/fb-595.54.51.md); reported, not gated (fb-595.54.51).
+  cross_engine_latex: report
