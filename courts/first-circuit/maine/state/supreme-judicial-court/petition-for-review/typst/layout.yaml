@@ -1,0 +1,69 @@
+# Maine Supreme Judicial Court: petition to the court on a contested municipal election (21-A M.R.S. § 696; ME-PET-001,
+# -002). The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated
+# from this file by `fb engines gen`, fb-595.54.12). Numbers trace to ../rules.md; lengths in points. No case text
+# here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # ME-FORM-001: printed matter at least 14-point
+pitch:
+  body: 32.2              # ME-FORM-005: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # caption, headings, quotations, footnotes, signature blocks: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # ME-FORM-003, -004: one inch
+indent: 36                # paragraphs indented half an inch
+page_number: {align: center, from: 2}   # ME-FORM-007: Arabic numerals, the cover is page 1 (its number suppressed)
+footnote: {size: 11, pitch: 12.65, gap: 7}   # ME-FORM-001, -005: footnotes may be 11-point, single (1.15 x 11 pt)
+quote: {left: 36, right: 36, above: 14, below: 14}   # ME-FORM-005: block quotations single spaced, indented
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, above: 15.4, below: 8.4}
+# ME-PET-002: the court, the docket number, the title of the action, the descriptive title and counsel, on a page of
+# its own (page 1, unnumbered); the petition has no tables. (Set as the top of the first page and a page break: the
+# model's docx engine sets a `cover` only before tables.)
+front:
+  - {text: "STATE OF MAINE", align: center, bold: true}
+  - {text: "SUPREME JUDICIAL COURT", align: center, bold: true}
+  - {text: "Docket No. {docket}", align: center, above: 22.4}
+  - each: caption
+    above: 22.4
+    between:
+      - {text: "v.", align: center, above: 14, below: 14}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, above: 5.6}
+  - {text: "{proceeding}", align: center, above: 30.8}
+  - {text: "{brief_title}", align: center, bold: true, above: 30.8}
+  - columns: {each: counsel, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 33.6
+  - {break: true}
+# MRCP 10(a), ME-PET-002 (dated), MRAP 1C(b), ME-CERT-001: the place and date, the signature line and block at the
+# right, never split.
+closing:
+  - group:
+      - {text: "Respectfully submitted, dated at {place}, this {date}.", pitch: body, indent: 36}
+      - columns:
+          - blocks:
+              - {text: ""}
+          - width: 244.8
+            blocks:
+              - {rule: 0.5}
+              - {text: "{signature.lines}"}
+        above: 19.6
+    above: 16.8
+# ME-FORM-009, ME-CERT-004: the certificate of service, stating the manner of service, on a page of its own.
+  - {break: true}
+  - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 16.8}
+  - {text: "I certify that I have on this day served a true and correct copy of the foregoing upon the following persons in accordance with {service.method}:", pitch: body, indent: 36}
+  - columns: {each: service.recipients, per_row: 2, row_gap: 12, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 16.8
+  - group:
+      - {text: "Dated: {dated}"}
+      - columns:
+          - blocks:
+              - {text: ""}
+          - width: 244.8
+            blocks:
+              - {rule: 0.5}
+              - {text: "{signature.lines}"}
+        above: 19.6
+    above: 22.4

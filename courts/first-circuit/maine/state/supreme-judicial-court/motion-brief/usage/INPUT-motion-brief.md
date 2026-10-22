@@ -36,7 +36,7 @@ Both MCPDS and the State of Maine separately noticed timely appeals on March 27.
 
 Ordinarily, a party seeking a discretionary stay pending appeal is “subject to the same standards for obtaining injunctive relief that are applied in the trial courts.” *Nat’l Org. for Marriage v. Comm’n on Govt’l Ethics & Elections*, 2015 ME 103, ¶ 14, 121 A.3d 792 (per curiam) (quoting Maine Appellate Practice § 10.1 at 107-98 (4th ed. 2013). Such a party must demonstrate that
 
-> (1) it will suffer irreparable injury if the [stay] is not granted; (2) such injury outweighs any harm which granting the [stay] would inflict on the other party; (3) it has a likelihood of success on the merits (at most, a probability; at least, a substantial possibility); and (4) the public interest will not be adversely affected by granting the [stay].
+> \(1) it will suffer irreparable injury if the [stay] is not granted; (2) such injury outweighs any harm which granting the [stay] would inflict on the other party; (3) it has a likelihood of success on the merits (at most, a probability; at least, a substantial possibility); and (4) the public interest will not be adversely affected by granting the [stay].
 
 *Id.* (alterations in original) (quoting *Bangor Historic Track, Inc. v. Dep’t of Agric., Food & Rural Res.*, 2003 ME 140, ¶ 1, 837 A.2d 129 (per curiam).
 

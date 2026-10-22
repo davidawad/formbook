@@ -1,0 +1,72 @@
+# Maine Supreme Judicial Court sitting as the Law Court: appellee's brief (MRAP 7A(b); ME-ORDER-003). The whole layout,
+# as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to ../rules.md; lengths in points. No case text here: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # ME-FORM-001: printed matter at least 14-point
+pitch:
+  body: 32.2              # ME-FORM-005: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # caption, headings, quotations, footnotes, signature blocks: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # ME-FORM-003, -004: one inch
+indent: 36                # paragraphs indented half an inch
+page_number: {align: center, from: 2}   # ME-FORM-007: Arabic numerals, the cover is page 1 (its number suppressed)
+footnote: {size: 11, pitch: 12.65, gap: 7}   # ME-FORM-001, -005: footnotes may be 11-point, single (1.15 x 11 pt)
+quote: {left: 36, right: 36, above: 14, below: 14}   # ME-FORM-005: block quotations single spaced, indented
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, above: 15.4, below: 8.4}
+# ME-COVER-001 (MRAP 7(g)(5)): the court sitting as the Law Court and the docket number, the title of the case, the
+# proceeding below, the title of the brief, counsel side by side. The cover is page 1 and bears no number.
+cover:
+  - {text: "SUPREME JUDICIAL COURT OF THE STATE OF MAINE", align: center, bold: true}
+  - {text: "SITTING AS THE LAW COURT", align: center, bold: true}
+  - {text: "Law Court Docket No. {docket}", align: center, above: 22.4}
+  - each: caption
+    above: 22.4
+    between:
+      - {text: "v.", align: center, above: 14, below: 14}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, above: 5.6}
+  - {text: "{proceeding}", align: center, above: 30.8}
+  - {text: "{brief_title}", align: center, bold: true, above: 30.8}
+  - columns: {each: counsel, blocks: [{text: "{names}"}, {text: "{lines}", italic: true}]}
+    gutter: 21.6
+    above: 33.6
+# ME-ORDER-001 (MRAP 7A(a)(1)(A)): the table of contents with page references, on its own page.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 18, step: 18, above: 7.2}
+# ME-ORDER-001 (MRAP 7A(a)(1)(B)): the table of authorities, cases, statutes and other authorities apart, each with
+# the pages it is cited on, on its own page.
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 72
+  hang: 28.8
+  above: 7.2
+  group: {bold: true, above: 15.4, below: 7}
+# MRAP 1C(b), ME-CERT-001: the date and "Respectfully submitted.", then each signer's block, two to a row.
+closing:
+  - group:
+      - columns:
+          - blocks:
+              - {text: "{date}", pitch: body}
+          - width: 180
+            blocks:
+              - {text: "Respectfully submitted.", align: right, pitch: body}
+      - columns: {each: signers, per_row: 2, row_gap: 16.8, blocks: [{text: "{lines}"}]}
+        gutter: 28.8
+        above: 8.4
+    above: 16.8
+# ME-FORM-009, ME-CERT-004: the certificate of service, stating the date and manner of service, on a page of its own;
+# the recipients two to a row. (The model cannot name the first signer alone: every signer signs it.)
+  - {break: true}
+  - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 16.8}
+  - {text: "I certify that on {date} I served the foregoing document upon the following counsel of record by {service.method}:", pitch: body, indent: 36}
+  - columns: {each: service.recipients, per_row: 2, row_gap: 16.8, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 28.8
+    above: 16.8
+  - group:
+      - {text: "Dated: {date}"}
+      - columns: {each: signers, per_row: 2, row_gap: 16.8, blocks: [{text: "{lines}"}]}
+        gutter: 28.8
+        above: 16.8
+    above: 22.4
