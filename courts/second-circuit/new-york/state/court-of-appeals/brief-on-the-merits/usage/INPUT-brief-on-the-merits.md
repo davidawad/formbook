@@ -39,107 +39,107 @@ signature:
 authorities:
   cn:
     kind: case
-    name: "*Capital Newspapers Division of the Hearst Corporation v Burns*"
+    name: "Capital Newspapers Division of the Hearst Corporation v Burns"
     cite: "67 NY2d 562 [1986]"
   baton:
     kind: case
-    name: "*City of Baton Rouge/Parish of East Baton Rouge v Capital City Press, L.L.C.*"
+    name: "City of Baton Rouge/Parish of East Baton Rouge v Capital City Press, L.L.C."
     cite: "4 So3d 807 [La Ct App 2008]"
   cowles:
     kind: case
-    name: "*Cowles Publ. Co. v State Patrol*"
+    name: "Cowles Publ. Co. v State Patrol"
     cite: "109 Wash2d 712 [Wash 1988]"
   dg:
     kind: case
-    name: "*Daily Gazette Company v City of Schenectady*"
+    name: "Daily Gazette Company v City of Schenectady"
     cite: "93 NY2d 145 [1999]"
   dt:
     kind: case
-    name: "*Data Tree LLC v Romaine*"
+    name: "Data Tree LLC v Romaine"
     cite: "9 NY3d 454 [2007]"
   rose:
     kind: case
-    name: "*Department of the Air Force v Rose*"
+    name: "Department of the Air Force v Rose"
     cite: "425 US 352 [1976]"
   gallogly:
     kind: case
-    name: "*Gallogly v City of New York*"
+    name: "Gallogly v City of New York"
     cite: "51 Misc 3d 296 [Sup Ct NY County 2016]"
   gannett:
     kind: case
-    name: "*Matter of Gannett Co. v James*"
+    name: "Matter of Gannett Co. v James"
     cite: "86 AD2d 744, lv denied 56 NY2d 502 [1982]"
   gould:
     kind: case
-    name: "*Gould v New York City Police Department*"
+    name: "Gould v New York City Police Department"
     cite: "89 NY2d 267 [1996]"
   karlin:
     kind: case
-    name: "*Karlin v McMahon*"
+    name: "Karlin v McMahon"
     cite: "96 NY2d 842 [2001]"
   ligon:
     kind: case
-    name: "*Ligon v City of New York*"
+    name: "Ligon v City of New York"
     cite: "925 F Supp 2d 478 [SD NY 2013]"
   lino:
     kind: case
-    name: "*Lino v City of New York*"
+    name: "Lino v City of New York"
     cite: "101 AD3d 552 [1st Dept 2012]"
   nyclu:
     kind: case
-    name: "*New York Civil Liberties Union v New York City Police Department*"
+    name: "New York Civil Liberties Union v New York City Police Department"
     cite: "148 AD3d 642 [1st Dept 2017]"
   nyt:
     kind: case
-    name: "*The New York Times Company v City of New York Fire Department*"
+    name: "The New York Times Company v City of New York Fire Department"
     cite: "4 NY3d 477 [2005]"
   peer:
     kind: case
-    name: "*Peer News LLC v City & County of Honolulu*"
+    name: "Peer News LLC v City & County of Honolulu"
     cite: "138 Haw 53 [Haw 2016]"
   pls:
     kind: case
-    name: "*Prisoners’ Legal Services of New York v New York State Department of Correctional Services*"
+    name: "Prisoners’ Legal Services of New York v New York State Department of Correctional Services"
     cite: "73 NY2d 26 [1988]"
   rake:
     kind: case
-    name: "*The Rake v Gorodetsky*"
+    name: "The Rake v Gorodetsky"
     cite: "452 A2d 1144 [RI 1982]"
   russo:
     kind: case
-    name: "*Russo v Nassau County Cmty. Coll.*"
+    name: "Russo v Nassau County Cmty. Coll."
     cite: "81 NY2d 690 [1993]"
   rutland:
     kind: case
-    name: "*Rutland Herald v City of Rutland*"
+    name: "Rutland Herald v City of Rutland"
     cite: "84 A3d 821 [Vt 2013]"
   scs:
     kind: case
-    name: "*Matter of Schenectady County Society for the Prevention of Cruelty to Animals v Mills*"
+    name: "Matter of Schenectady County Society for the Prevention of Cruelty to Animals v Mills"
     cite: "18 NY3d 42 [2011]"
   scott:
     kind: case
-    name: "*Scott, Sardano & Pomerantz v Records Access Officer of City of Syracuse*"
+    name: "Scott, Sardano & Pomerantz v Records Access Officer of City of Syracuse"
     cite: "65 NY2d 294 [1985]"
   short:
     kind: case
-    name: "*Matter of Short v Board of Managers of the Nassau County Medical Center*"
+    name: "Matter of Short v Board of Managers of the Nassau County Medical Center"
     cite: "57 NY2d 399 [1982]"
   tompkins:
     kind: case
-    name: "*Tompkins v Freedom of Information Commn.*"
+    name: "Tompkins v Freedom of Information Commn."
     cite: "46 A3d 291 [Conn App 2012]"
   wp:
     kind: case
-    name: "*Washington Post Co. v New York State Ins. Dept.*"
+    name: "Washington Post Co. v New York State Ins. Dept."
     cite: "61 NY2d 557 [1984]"
   wrn:
     kind: case
-    name: "*Westchester Rockland Newspapers, Inc. v Kimball*"
+    name: "Westchester Rockland Newspapers, Inc. v Kimball"
     cite: "50 NY2d 575 [1980]"
   xerox:
     kind: case
-    name: "*Xerox Corporation v Town of Webster*"
+    name: "Xerox Corporation v Town of Webster"
     cite: "65 NY2d 131 [1985]"
   cr50a:
     kind: statute
