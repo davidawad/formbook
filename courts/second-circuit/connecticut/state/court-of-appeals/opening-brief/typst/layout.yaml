@@ -1,0 +1,70 @@
+# Connecticut Appellate Court (connappct): appellant's brief (opening brief), e-filed under Practice Book Sec. 67-2A.
+# The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from
+# this file by `fb engines gen`, fb-595.54.12). Numbers trace to ../../rules.md (CONNAPPCT-*); lengths in points. No
+# case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # CONNAPPCT-FORM-001: 12 point serif, footnotes included
+pitch:
+  body: 20.7              # CONNAPPCT-FORM-005: 1.5 lines (Word's 1.5 x 1.15 x 12 pt), uniform: body, notes, quotations
+  single: 13.8            # cover, signature and certification address lines (not text of the brief)
+margin: {top: 108, bottom: 108, left: 108, right: 108}   # CONNAPPCT-FORM-003: 1 1/2 inches on all sides
+indent: 36                # first-line indent (style choice)
+# CONNAPPCT-FORM-008, -COVER-003: one pagination scheme from the cover, centered at the foot, "Page X of XX"
+page_number: {align: center, from: 1, text: "Page {page} of {pages}"}
+footnote: {size: 12, pitch: 20.7, gap: 7}             # CONNAPPCT-FORM-001, -005: 12 point, the body's 1.5 lines
+quote: {left: 36, right: 36, above: 6.9, below: 13.8, pitch: 20.7}   # CONNAPPCT-FORM-005: quotations at 1.5 lines
+# CONNAPPCT-FORM-002: headings at 14 point (1.5 lines of 14 pt); CONNAPPCT-FORM-006: bold or italic, never
+# underlined; CONNAPPCT-FORM-007: the filer numbers the sections. Level 1 centered bold, 2 bold, 3 bold italic.
+heading:
+  - {align: center, bold: true, size: 14, pitch: 24.15, above: 20.7, below: 6.9}
+  - {bold: true, size: 14, pitch: 24.15, above: 13.8, below: 6.9}
+  - {bold: true, italic: true, size: 14, pitch: 24.15, above: 13.8, below: 6.9}
+# CONNAPPCT-COVER-001, -002: from the top, the court, the docket number, the case name, the nature of the brief, then
+# counsel and the counsel who argues; 12 point.
+cover:
+  - {text: "{court}", align: center, bold: true}
+  - {text: "{docket}", align: center, above: 16.6}
+  - {text: "{case_title}", align: center, above: 20.7}
+  - {text: "{title}", align: center, bold: true, above: 20.7}
+  - {text: "{counsel}", above: 30.4}
+  - when: argued_by
+    blocks:
+      - {text: "To Be Argued By:", bold: true, above: 24.8}
+      - {text: "{argued_by}", above: 4.8}
+# CONNAPPCT-SEC-001, -002, -003, -004 (Sec. 67-4(i), (a)-(c)): the table of contents, the statement of issues (the
+# body's first section, set between the tables), then the table of authorities with the pages of each citation.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 18, step: 18, when: toc}
+body_before_tables: {count: 1, place: between}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 56
+  hang: 18
+  above: 6.9
+  passim: 6
+  group: {bold: true, above: 13.8, below: 2.4}
+  kinds:
+    - {kind: cases, title: "Cases"}
+    - {kind: statutes, title: "Statutes"}
+    - {kind: rules, title: "Rules"}
+    - {kind: other, title: "Other Authorities"}
+# CONNAPPCT-SIG-001: after the conclusion, the signature of counsel of record; CONNAPPCT-CERT-001, -002 (Sec.
+# 67-2A(f)): then each certification the sample gives, signed by counsel.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "Respectfully submitted,", above: 13.8}
+      - {text: "{signature.party}", above: 13.8}
+      - {text: "By: ______________________________", above: 24.8}
+      - {text: "{signature.signer}"}
+      - {text: "{signature.lines}"}
+    above: 20.7
+  - each: certificates
+    blocks:
+      - {text: "{heading}", align: center, bold: true, size: 14, pitch: 24.15, keep: true, above: 27.6}
+      - {markdown: "{text}", pitch: body, gap: 6.9, above: 6.9}
+      - group:
+          - {text: "{lines}", optional: true}
+          - when: signer
+            blocks:
+              - {text: "By: ______________________________", above: 24.8}
+              - {text: "{signer}"}
+        above: 13.8

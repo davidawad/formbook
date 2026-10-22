@@ -23,33 +23,27 @@ counsel:
 argued_by:
   - "Peter C. White"
 toc: true
-issues: |
-  # STATEMENT OF THE ISSUES ON APPEAL
-
-  1. Whether the Court has subject matter jurisdiction pursuant to the "strong public policy" exception to the exhaustion of administrative remedies requirement recognized in [Upjohn Co v. Zoning Board of Appeals, 224 Conn. 96, 616 A.2d 793 (1992)](toa:upjohn).
-
-  2. Whether the Court has subject matter jurisdiction over this action for declaratory judgment and injunctive relief.
 authorities:
-  - {key: cgs-8-8b, category: statutes, text: "CONN. GEN. STAT. § 8-8(b)"}
-  - {key: cgs-8-11, category: statutes, text: "CONN. GEN. STAT. § 8-11"}
-  - {key: cgs-8-28, category: statutes, text: "CONN. GEN. STAT. § 8-28"}
-  - {key: cgs-52-29, category: statutes, text: "CONN. GEN. STAT. § 52-29"}
-  - {key: pb-10-31a, category: rules, text: "Practice Book § 10-31(a)"}
-  - {key: pb-17-54, category: rules, text: "Practice Book § 17-54"}
-  - {key: bpr-2772, category: cases, text: "*2772 BPR, LLC v. Planning & Zoning Comm'n of the Town of N. Branford*, 207 Conn.App. 377, 262 A.3d 906 (2021)"}
-  - {key: cogswell, category: cases, text: "*Cogswell v. American Transit Ins. Co.*, 282 Conn. 505, 923 A.2d 638 (2007)"}
-  - {key: daly, category: cases, text: "*Daly v. Town Plan and Zoning Commission of Town of Fairfield*, 150 Conn. 495, 191 A.2d 250 (1963)"}
-  - {key: england, category: cases, text: "*England v. Town of Coventry*, 183 Conn. 362, 439 A.2d 372 (1981)"}
-  - {key: gangemi, category: cases, text: "*Gangemi v. Zoning Bd. of Appeals of Town of Fairfield*, 255 Conn. 143, 763 A.2d 1011 (2001)"}
-  - {key: gold, category: cases, text: "*Gold v. Rowland*, 296 Conn. 186, 994 A.2d 106 (2010)"}
-  - {key: josephson, category: cases, text: "*Josephson v. Planning Bd. of City of Stamford*, 151 Conn. 489, 199 A.2d 690 (1964)"}
-  - {key: kovalik, category: cases, text: "*Kovalik v. Planning and Zoning Commission of Town of New Fairfield*, 155 Conn. 497, 234 A.2d 838 (1967)"}
-  - {key: lake-garda, category: cases, text: "*Lake Garda Imp. Ass'n v. Town Plan and Zoning Commission of Town of Farmington*, 151 Conn. 476, 199 A.2d 162 (1964)"}
-  - {key: low, category: cases, text: "*Low v. Madison*, 135 Conn. 1, 60 A.2d 774 (1948)"}
-  - {key: mills, category: cases, text: "*Mills v. Town Plan and Zoning Commission of Town of Windsor*, 144 Conn. 493, 134 A.2d 250 (1957)"}
-  - {key: murach, category: cases, text: "*Murach v. Planning and Zoning Com'n of City of New London*, 196 Conn. 192, 491 A.2d 1058 (1985)"}
-  - {key: nonkin, category: cases, text: "*Nonkin v. Dean Haubrich*, Superior Court, judicial district of Litchfield, Docket No. LLI-cv-07-4006012 S (August 29, 2007, Brunetti, J.)"}
-  - {key: upjohn, category: cases, text: "*Upjohn Co v. Zoning Board of Appeals*, 224 Conn. 96, 616 A.2d 793 (1992)"}
+  cgs-8-8b: {kind: statutes, cite: "CONN. GEN. STAT. § 8-8(b)"}
+  cgs-8-11: {kind: statutes, cite: "CONN. GEN. STAT. § 8-11"}
+  cgs-8-28: {kind: statutes, cite: "CONN. GEN. STAT. § 8-28"}
+  cgs-52-29: {kind: statutes, cite: "CONN. GEN. STAT. § 52-29"}
+  pb-10-31a: {kind: rules, cite: "Practice Book § 10-31(a)"}
+  pb-17-54: {kind: rules, cite: "Practice Book § 17-54"}
+  bpr-2772: {kind: cases, cite: "*2772 BPR, LLC v. Planning & Zoning Comm'n of the Town of N. Branford*, 207 Conn.App. 377, 262 A.3d 906 (2021)"}
+  cogswell: {kind: cases, cite: "*Cogswell v. American Transit Ins. Co.*, 282 Conn. 505, 923 A.2d 638 (2007)"}
+  daly: {kind: cases, cite: "*Daly v. Town Plan and Zoning Commission of Town of Fairfield*, 150 Conn. 495, 191 A.2d 250 (1963)"}
+  england: {kind: cases, cite: "*England v. Town of Coventry*, 183 Conn. 362, 439 A.2d 372 (1981)"}
+  gangemi: {kind: cases, cite: "*Gangemi v. Zoning Bd. of Appeals of Town of Fairfield*, 255 Conn. 143, 763 A.2d 1011 (2001)"}
+  gold: {kind: cases, cite: "*Gold v. Rowland*, 296 Conn. 186, 994 A.2d 106 (2010)"}
+  josephson: {kind: cases, cite: "*Josephson v. Planning Bd. of City of Stamford*, 151 Conn. 489, 199 A.2d 690 (1964)"}
+  kovalik: {kind: cases, cite: "*Kovalik v. Planning and Zoning Commission of Town of New Fairfield*, 155 Conn. 497, 234 A.2d 838 (1967)"}
+  lake-garda: {kind: cases, cite: "*Lake Garda Imp. Ass'n v. Town Plan and Zoning Commission of Town of Farmington*, 151 Conn. 476, 199 A.2d 162 (1964)"}
+  low: {kind: cases, cite: "*Low v. Madison*, 135 Conn. 1, 60 A.2d 774 (1948)"}
+  mills: {kind: cases, cite: "*Mills v. Town Plan and Zoning Commission of Town of Windsor*, 144 Conn. 493, 134 A.2d 250 (1957)"}
+  murach: {kind: cases, cite: "*Murach v. Planning and Zoning Com'n of City of New London*, 196 Conn. 192, 491 A.2d 1058 (1985)"}
+  nonkin: {kind: cases, cite: "*Nonkin v. Dean Haubrich*, Superior Court, judicial district of Litchfield, Docket No. LLI-cv-07-4006012 S (August 29, 2007, Brunetti, J.)"}
+  upjohn: {kind: cases, cite: "*Upjohn Co v. Zoning Board of Appeals*, 224 Conn. 96, 616 A.2d 793 (1992)"}
 signature:
   party:
     - "THE PLAINTIFF,"
@@ -65,10 +59,15 @@ certificates:
       The undersigned attorney hereby certifies, pursuant to Connecticut Rule of Appellate Procedure § 67-2A, that on March 22, 2023:
 
       1. a copy of the brief and party appendix has been sent electronically to each counsel of record listed below in compliance with § 62-7, except for counsel of record exempt from electronic filing pursuant to § 60-8, to whom a paper copy was sent;
+
       2. the brief and party appendix being filed with the appellate clerk is a true copy of the brief and party appendix that was submitted electronically pursuant to subsection (f) of this section;
+
       3. the brief and party appendix has been redacted or does not contain any names or other personal identifying information that is prohibited from disclosure by rule, statute, court order or case law, unless the brief is filed pursuant to § 79a-6;
+
       4. the e-brief contains 3,685 words;
+
       5. the brief complies with all provisions of this rule; and
+
       6. no deviations from this rule were requested/approved.
     lines:
       - "Timothy Lee"
@@ -93,6 +92,12 @@ certificates:
     signer: "Peter C. White (425295)"
 ---
 
+# STATEMENT OF THE ISSUES ON APPEAL
+
+1. Whether the Court has subject matter jurisdiction pursuant to the "strong public policy" exception to the exhaustion of administrative remedies requirement recognized in [Upjohn Co v. Zoning Board of Appeals, 224 Conn. 96, 616 A.2d 793 (1992)](toa:upjohn).
+
+2. Whether the Court has subject matter jurisdiction over this action for declaratory judgment and injunctive relief.
+
 # NATURE OF THE PROCEEDINGS
 
 ## 1. Statement of Facts
@@ -115,19 +120,19 @@ On April 5, 2017, Fucci moved to dismiss the action for lack of subject matter j
 
 # ARGUMENT
 
-## 1. Whether the trial court has subject matter jurisdiction pursuant to the "strong public policy" exception to the exhaustion of administrative remedies requirement as recognized in [Upjohn Co v. Zoning Board of Appeals, 224 Conn. 96, 616 A.2d 793 (1992)](toa:upjohn).
+## 1. Whether the trial court has subject matter jurisdiction pursuant to the "strong public policy" exception to the exhaustion of administrative remedies requirement as recognized in Upjohn Co v. Zoning Board of Appeals, 224 Conn. 96, 616 A.2d 793 (1992).
 
 ### A. Standard of Review
 
 The Court exercises plenary review over a [Practice Book § 10-31(a)](toa:pb-10-31a) pre-trial motion to dismiss for lack of standing. [Gold v. Rowland, 296 Conn. 186, 200–01, 994 A.2d 106 (2010)](toa:gold). The Court takes the facts alleged in the complaint including those facts necessarily implied from the allegations, and construes them in a manner most favorable to the pleader. [Cogswell v. American Transit Ins. Co., 282 Conn. 505, 516 (2007)](toa:cogswell).
 
-### B. The trial court has subject matter jurisdiction over this appeal pursuant to the "strong public policy exception" to the exhaustion requirement as recognized in [Upjohn Co v. Zoning Board of Appeals, 224 Conn. 96, 616 A.2d 793 (1992)](toa:upjohn).
+### B. The trial court has subject matter jurisdiction over this appeal pursuant to the "strong public policy exception" to the exhaustion requirement as recognized in Upjohn Co v. Zoning Board of Appeals, 224 Conn. 96, 616 A.2d 793 (1992).
 
 The "strong public policy exception" to the exhaustion of administrative remedies requirement permits a collateral attack on a zoning decision even after the appeal period has passed. [Upjohn Co v. Zoning Board of Appeals, 224 Conn. 96, 102, 616 A.2d 793 (1992)](toa:upjohn). It is an exception to the general rule that a party generally may not institute an action challenging the decisions of a zoning authority until all administrative remedies have been exhausted. Thus, "[a] collateral attack [of a zoning decision] may be maintained … where the continued maintenance of a previously unchallenged condition would violate some strong public policy." [Id.](toa:upjohn) at 104-05; see also [Gangemi v. Zoning Bd. of Appeals of Town of Fairfield, 255 Conn. 143, 144-45, 763 A.2d 1011 (2001)](toa:gangemi) (holding no rental condition on property "violat[ed] the strong and deeply rooted public policy in favor of the free and unrestricted alienability of property..."); [Nonkin v. Dean Haubrich, Superior Court, judicial district of Litchfield, Docket No. LLI-cv-07-4006012 S (August 29, 2007, Brunetti, J.)](toa:nonkin) (holding strong public policy exception to exhaustion of administrative remedies doctrine permitted town resident to seek equitable relief to enforce zoning regulation).
 
-### C. Upholding the public trust is a strong public policy and a violation of that trust has been grounds to invalidate zoning amendments since [Low v. Madison, 135 Conn. 1, 60 A.2d 774 (1948)](toa:low).
+### C. Upholding the public trust is a strong public policy and a violation of that trust has been grounds to invalidate zoning amendments since Low v. Madison, 135 Conn. 1, 60 A.2d 774 (1948).
 
-[Upjohn](toa:upjohn) allows the Plaintiff to file a collateral attack of a zoning decision with a showing of a violation of a "strong public policy." [Upjohn Co. at 104-05](toa:upjohn). Vindication of a violation of the public trust is such a strong public policy. Indeed, well before [Upjohn](toa:upjohn) was decided the Connecticut courts had frequent occasion to invalidate zoning amendments that were enacted in violation of the public trust. Closely analogous to the facts alleged in the Complaint, these violations involved zoning amendments enacted when a governmental official participated in zoning decisions in which they had a personal or pecuniary interest. See e.g., [Low v. Madison, 135 Conn. 1, 60 A.2d 774 (1948)](toa:low) (invalidating amendments based on P&Z member's personal interest); [Mills v. Town Plan and Zoning Commission of Town of Windsor, 144 Conn. 493, 499, 134 A.2d 250 (1957)](toa:mills) (invalidating zoning amendments based on violation of public trust); [Daly v. Town Plan and Zoning Commission of Town of Fairfield, 150 Conn. 495, 500, 191 A.2d 250 (1963)](toa:daly) ("[planning and zoning member's] participation in [amending zoning regulation] renders the attempted amendment invalid."); [Lake Garda Imp. Ass'n v. Town Plan and Zoning Commission of Town of Farmington, 151 Conn. 476, 199 A.2d 162 (1964)](toa:lake-garda) (holding commissioner disqualified from voting on amendments affecting his property); [Josephson v. Planning Bd. of City of Stamford, 151 Conn. 489, 199 A.2d 690 (1964)](toa:josephson); [Kovalik v. Planning and Zoning Commission of Town of New Fairfield, 155 Conn. 497, 498-99, 234 A.2d 838 (1967)](toa:kovalik) (holding zoning revision invalid when chairman refused to disqualify himself despite ownership of substantial land affected by the proposed zoning change); [Murach v. Planning and Zoning Com'n of City of New London, 196 Conn. 192, 202, 491 A.2d 1058 (1985)](toa:murach) ("our statutes expressly preclude the participation of any member of a municipal planning and zoning commission in 'any matter in which he is directly or indirectly interested in a personal or financial sense.'"); [Nonkin v. Dean Haubrich, Superior Court, judicial district of Litchfield, Docket No. LLI-cv-07-4006012 S (August 29, 2007, Brunetti, J.)](toa:nonkin) (holding strong public policy exception permitted resident to obtain equitable relief to enforce zoning regulations).
+[Upjohn](toa:upjohn) allows the Plaintiff to file a collateral attack of a zoning decision with a showing of a violation of a "strong public policy." [Upjohn Co. at 104-05](toa:upjohn). Vindication of a violation of the public trust is such a strong public policy. Indeed, well before [Upjohn](toa:upjohn) was decided the Connecticut courts had frequent occasion to invalidate zoning amendments that were enacted in violation of the public trust. Closely analogous to the facts alleged in the Complaint, these violations involved zoning amendments enacted when a governmental official participated in zoning decisions in which they had a personal or pecuniary interest. See e.g., [Low v. Madison, 135 Conn. 1, 60 A.2d 774 (1948)](toa:low) (invalidating amendments based on P&Z member's personal interest); [Mills v. Town Plan and Zoning Commission of Town of Windsor, 144 Conn. 493, 499, 134 A.2d 250 (1957)](toa:mills) (invalidating zoning amendments based on violation of public trust); [Daly v. Town Plan and Zoning Commission of Town of Fairfield, 150 Conn. 495, 500, 191 A.2d 250 (1963)](toa:daly) ("[planning and zoning member's] participation in [amending zoning regulation] renders the attempted amendment invalid."); [Lake Garda Imp. Ass'n v. Town Plan and Zoning Commission of Town of Farmington, 151 Conn. 476, 199 A.2d 162 (1964)](toa:lake-garda) (holding commissioner disqualified from voting on amendments affecting his property); [Josephson v. Planning Bd. of City of Stamford, 151 Conn. 489, 199 A.2d 690 (1964)](toa:josephson); [Kovalik v. Planning and Zoning Commission of Town of New Fairfield, 155 Conn. 497, 498-99, 234 A.2d 838 (1967)](toa:kovalik) (holding zoning revision invalid when chairman refused to disqualify himself despite ownership of substantial land affected by the proposed zoning change); [Murach v. Planning and Zoning Com'n of City of New London, 196 Conn. 192, 202, 491 A.2d 1058 (1985)](toa:murach) ("our statutes expressly preclude the participation of any member of a municipal planning and zoning commission in ‘any matter in which he is directly or indirectly interested in a personal or financial sense.'"); [Nonkin v. Dean Haubrich, Superior Court, judicial district of Litchfield, Docket No. LLI-cv-07-4006012 S (August 29, 2007, Brunetti, J.)](toa:nonkin) (holding strong public policy exception permitted resident to obtain equitable relief to enforce zoning regulations).
 
 [Low v. Madison, 135 Conn. 1, 60 A.2d 774 (1948)](toa:low) is a seminal case and its holding is relevant today, and the facts are similar to this action. [Low](toa:low) concerned a Madison resident who had applied to re-zone property she owned, amending the zoning from residential to allow for commercial activities. The applicant's husband, George Fischer, was a member of the planning and zoning commission. Despite the conflict of interest, Fischer voted to approve the amendments. His vote made the P&Z's decision unanimous, thus overruling a protest filed by abutting property owners. [Id.](toa:low) at 2-3.
 
@@ -143,7 +148,7 @@ The property owners appealed. The Court decided whether to invalidate the amendm
 
 [^2]: Following Low the General Assembly enacted what is now [§ 8-11](toa:cgs-8-11) of the General Statutes which expressly provides: "No member of any zoning commission or board and no member of any zoning board of appeals shall participate in the hearing or decision of the board or commission of which he is a member upon any matter in which he is directly or indirectly interested in a personal or financial sense."
 
-Low's holding is relevant today. "We have recently reaffirmed the vitality of the principle declared in [Low v. Madison](toa:low) … 'that the appearance of impropriety created by a public official's participation in a matter in which he has a pecuniary or personal interest is alone sufficient to require disqualification.' … And, of course, our statutes expressly preclude the participation of any member of a municipal planning and zoning commission in 'any matter in which he is directly or indirectly interested in a personal or financial sense…. We have often stated that the test for disqualification 'is not whether personal interest does, in fact, conflict, but whether it reasonably might conflict.' [Murach v. Planning and Zoning Com'n of City of New London, 196 Conn. 192, 202-03, 491 A.2d 1058, (1985)](toa:murach) (quoting [Low](toa:low))."
+Low's holding is relevant today. "We have recently reaffirmed the vitality of the principle declared in [Low v. Madison](toa:low) … 'that the appearance of impropriety created by a public official's participation in a matter in which he has a pecuniary or personal interest is alone sufficient to require disqualification.' … And, of course, our statutes expressly preclude the participation of any member of a municipal planning and zoning commission in ‘any matter in which he is directly or indirectly interested in a personal or financial sense…. We have often stated that the test for disqualification ‘is not whether personal interest does, in fact, conflict, but whether it reasonably might conflict.’ [Murach v. Planning and Zoning Com'n of City of New London, 196 Conn. 192, 202-03, 491 A.2d 1058, (1985)](toa:murach) (quoting [Low](toa:low))."
 
 As demonstrated by the above-cited cases, courts have applied [Low](toa:low) to invalidated zoning amendments under the public trust doctrine. For example, in [Kovalik v. Planning and Zoning Commission of Town of New Fairfield, 155 Conn. 497, 498, 234 A.2d 838, (1967)](toa:kovalik) the invalidated zoning amendments after the Commissioner had voted, based on a violation of the public trust: the commission owned 8% of the land that was subject to the amendments. [Id.](toa:kovalik) "This court has had repeated occasion to reaffirm the principle that public policy requires that members of zoning boards and commissions cannot be permitted to place themselves in a position in which personal interest may conflict with public duty." [Id.](toa:kovalik) at 498-99 (emphasis added).
 
@@ -177,13 +182,13 @@ The inclusion of the allegations of malfeasance on the party of the Town Council
 
 [England v. Town of Coventry](toa:england) is instructive why the Court has subject matter jurisdiction over this action. In that case, plaintiffs applied to the town P&Z for a subdivision of their property. The P&Z Commission required that plan to show certain improvements to the facilities of the town, which included construction of a storm water drainage system (2) reconstruction of a road, and (3) installation of berms on the side facing the land of the plaintiffs. By way of relief, the plaintiffs sought a declaratory judgment which would hold the defendant town or alternatively the plaintiffs responsible for the cost of installing the improvements to the town's facilities which the commission required. [Id.](toa:england) at 363.
 
-The issue was whether the trial court erred in ordering the dismissal of the plaintiffs' complaint seeking a declaratory judgment. The defendants had alleged that the trial court lacked subject matter jurisdiction because the plaintiffs failed to appeal, and the trial court granted the motion to dismiss for lack of subject matter jurisdiction. However, the Supreme Court reversed. "….[the Practice Book] allows the trial court wide discretion to render a declaratory judgment unless another form of action clearly affords a speedy remedy as effective, convenient, appropriate and complete." [Id.](toa:england) at 365. "The present action for a declaratory judgment is more effective, convenient, and complete than an appeal under General Statutes [§ 8-28](toa:cgs-8-28) because the town of Coventry is a defendant in this action whereas such an appeal would not have included the town. Therefore an appeal would not have bound the town, had the commission decided that the town, not the plaintiffs, must pay for the disputed improvements." [Id.](toa:england) at 365-66. (emphasis added). The Court continued:
+The issue was whether the trial court erred in ordering the dismissal of the plaintiffs' complaint seeking a declaratory judgment. The defendants had alleged that the trial court lacked subject matter jurisdiction because the plaintiffs failed to appeal, and the trial court granted the motion to dismiss for lack of subject matter jurisdiction. However, the Supreme Court reversed. "….[the Practice Book] allows the trial court wide discretion to render a declaratory judgment unless another form of action clearly affords a speedy remedy as effective, convenient, appropriate and complete.” [Id.](toa:england) at 365. “The present action for a declaratory judgment is more effective, convenient, and complete than an appeal under General Statutes [§ 8-28](toa:cgs-8-28) because the town of Coventry is a defendant in this action whereas such an appeal would not have included the town. Therefore an appeal would not have bound the town, had the commission decided that the town, not the plaintiffs, must pay for the disputed improvements." [Id.](toa:england) at 365-66. (emphasis added). The Court continued:
 
 > The Superior Court has subject matter jurisdiction in any action or proceeding to declare rights and other legal relations on request for such a declaration whether or not further relief is or could be claimed. We have consistently construed this broad statutory grant of jurisdiction and the related Practice Book provisions liberally to serve their sound social purpose. Thus, the Superior Court has subject matter jurisdiction over suits for declaratory relief despite the adequacy of other legal remedies. We therefore conclude that the trial court erred in dismissing the action.
 
 [Id.](toa:england) at 364 (internal citations omitted).
 
-The Court should reject the argument that the action is limited by [CONN. GEN. STAT. § 8-8(b)](toa:cgs-8-8b)'s fifteen-day period appeal period. The nature of this action is one for declaratory judgment. The Complaint alleges that Donald Fucci improperly used his influence as a Town Council member to effect the sale/ lease of his property at 40 Ciro Road to 2772 BPR, LLC by manipulating the membership of the town Planning & Zoning Commission and by manipulating the membership of the IWWA to obtain a permit to conduct a regulated activity in an inland wetlands area. He did so with the knowledge of Town officials, including the Mayor. Similar to [England v. Town of Coventry](toa:england), Plaintiff seeks equitable remedies not only against Fucci but also against the Town for its complicity in permitting Fucci to profit from his selfdealing. Declaratory judgment must be liberally construed to serve their sound social purpose.... despite the adequacy of other legal remedies." [Id.](toa:england) at 364. The Plaintiff, citizens of the Town, were rightly outraged by the conduct of the Planning & Zoning Commission, the mayor, Fucci, and the Town Council. The trial court has wide discretion to render a declaratory judgment unless another form of action clearly affords a speedy remedy as effective, convenient, appropriate and complete." [Id.](toa:england) at 365. Accordingly, the Court has subject matter jurisdiction over this action.
+The Court should reject the argument that the action is limited by [CONN. GEN. STAT. § 8-8(b)](toa:cgs-8-8b)'s fifteen-day period appeal period. The nature of this action is one for declaratory judgment. The Complaint alleges that Donald Fucci improperly used his influence as a Town Council member to effect the sale/ lease of his property at 40 Ciro Road to 2772 BPR, LLC by manipulating the membership of the town Planning & Zoning Commission and by manipulating the membership of the IWWA to obtain a permit to conduct a regulated activity in an inland wetlands area. He did so with the knowledge of Town officials, including the Mayor. Similar to [England v. Town of Coventry](toa:england), Plaintiff seeks equitable remedies not only against Fucci but also against the Town for its complicity in permitting Fucci to profit from his selfdealing. Declaratory judgment must be liberally construed to serve their sound social purpose.... despite the adequacy of other legal remedies.” [Id.](toa:england) at 364. The Plaintiff, citizens of the Town, were rightly outraged by the conduct of the Planning & Zoning Commission, the mayor, Fucci, and the Town Council. The trial court has wide discretion to render a declaratory judgment unless another form of action clearly affords a speedy remedy as effective, convenient, appropriate and complete.” [Id.](toa:england) at 365. Accordingly, the Court has subject matter jurisdiction over this action.
 
 [^3]: [Conn. Gen. Stat. § 52-29](toa:cgs-52-29) provides, "any action or proceeding to declare rights and other legal relations on request for such a declaration whether or not further relief is or could be claimed." [Practice Book § 17-54](toa:pb-17-54) provides, "Declaratory Judgment; Scope. The judicial authority will, in cases not herein excepted, render declaratory judgments as to the existence or nonexistence (1) of any right, power, privilege or immunity; or (2) of any fact upon which the existence or nonexistence of such right, power, privilege or immunity does or may depend, whether such right, power, privilege or immunity now exists or will arise in the future."
 

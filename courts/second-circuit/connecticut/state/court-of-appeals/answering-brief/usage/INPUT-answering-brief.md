@@ -25,49 +25,43 @@ argued_by:
   - "Timothy.Costello@ct.gov"
   - "Dcj.Ocsa.Appellate@ct.gov"
 toc: true
-issues: |
-  # COUNTERSTATEMENT OF THE ISSUES
-
-  A. Whether the evidence was sufficient to sustain the defendant's convictions.
-
-  B. Whether the trial court abused its discretion when it denied the defendant's motion for a new trial which alleged that the weight of the evidence was against the jury's guilty verdicts.
 authorities:
-  - {key: jackson, category: cases, text: "*Jackson v. Virginia*, 443 U.S. 307, 99 S. Ct. 2781, 61 L. Ed. 2d 560 (1979)"}
-  - {key: roberto-a, category: cases, text: "*Roberto A. v. Commissioner of Correction*, 229 Conn. App. 104, 325 A.3d 1192, cert. denied, 350 Conn. 935, 327 A.3d 384 (2024)"}
-  - {key: baker, category: cases, text: "*State v. Baker*, 50 Conn. App. 268, 718 A.2d 450, cert. denied, 247 Conn. 937, 722 A.2d 1216 (1998)"}
-  - {key: boykin, category: cases, text: "*State v. Boykin*, 27 Conn. App. 558, 609 A.2d 242, cert. denied, 223 Conn. 905, 610 A.2d 179 (1992)"}
-  - {key: capasso, category: cases, text: "*State v. Capasso*, 203 Conn. App. 333, 248 A.3d 58, cert. denied, 336 Conn. 939, 249 A.3d 352 (2021)"}
-  - {key: carlos-c, category: cases, text: "*State v. Carlos C.*, 165 Conn. App. 195, 138 A.3d 1090, cert. denied, 322 Conn. 906, 140 A.3d 977 (2016)"}
-  - {key: charles-l, category: cases, text: "*State v. Charles L.*, 217 Conn. App. 380, 288 A.3d 664, cert. denied, 346 Conn. 920, 291 A.3d 607 (2023)"}
-  - {key: covington-app, category: cases, text: "*State v. Covington*, 184 Conn. App. 332, 194 A.3d 1224 (2018), aff'd, 335 Conn. 212, 229 A.3d 1036 (2020)"}
-  - {key: covington, category: cases, text: "*State v. Covington*, 335 Conn. 212, 229 A.3d 1036 (2020)"}
-  - {key: crewe, category: cases, text: "*State v. Crewe*, 193 Conn. App. 564, 219 A.3d 886, cert. denied, 334 Conn. 901, 219 A.3d 800 (2019)"}
-  - {key: flores, category: cases, text: "*State v. Flores*, 344 Conn. 713, 281 A.3d 420 (2022)"}
-  - {key: franklin, category: cases, text: "*State v. Franklin*, 162 Conn. App. 78, 129 A.3d 770 (2015), cert. denied, 321 Conn. 905, 138 A.3d 281 (2016)"}
-  - {key: fred-c, category: cases, text: "*State v. Fred C.*, 167 Conn. App. 600, 142 A.3d 1258, cert. denied, 323 Conn. 921, 150 A.3d 1150 (2016)"}
-  - {key: hart, category: cases, text: "*State v. Hart*, 221 Conn. 595, 605 A.2d 1366 (1992)"}
-  - {key: hodge, category: cases, text: "*State v. Hodge*, 153 Conn. 564, 219 A.2d 367 (1966)"}
-  - {key: hughes, category: cases, text: "*State v. Hughes*, 341 Conn. 387, 267 A.3d 81 (2021)"}
-  - {key: jagat, category: cases, text: "*State v. Jagat*, 111 Conn. App. 173, 958 A.2d 206 (2008)"}
-  - {key: juarez, category: cases, text: "*State v. Juarez*, 179 Conn. App. 588, 180 A.3d 1015 (2018), cert. denied, 331 Conn. 910, 203 A.3d 1245 (2019)"}
-  - {key: mcclam, category: cases, text: "*State v. McClam*, 44 Conn. App. 198, 689 A.2d 475, cert. denied, 240 Conn. 912, 690 A.2d 400 (1997)"}
-  - {key: montana, category: cases, text: "*State v. Montana*, 179 Conn. App. 261, 178 A.3d 1119, cert. denied, 328 Conn. 911, 178 A.3d 1042 (2018)"}
-  - {key: montoya, category: cases, text: "*State v. Montoya*, 110 Conn. App. 97, 954 A.2d 193, cert. denied, 289 Conn. 941, 959 A.2d 1008 (2008)"}
-  - {key: mungroo, category: cases, text: "*State v. Mungroo*, 104 Conn. App. 668, 935 A.2d 229 (2007), cert. denied, 285 Conn. 908, 942 A.2d 415 (2008)"}
-  - {key: naim-b, category: cases, text: "*State v. Na'im B.*, 288 Conn. 290, 952 A.2d 755 (2008)"}
-  - {key: nichols, category: cases, text: "*State v. Nichols*, 226 Conn. App. 359, 317 A.3d 861 (2024)"}
-  - {key: niemeyer, category: cases, text: "*State v. Niemeyer*, 258 Conn. 510, 782 A.2d 658 (2001)"}
-  - {key: reynolds, category: cases, text: "*State v. Reynolds*, 264 Conn. 1, 836 A.2d 224 (2003)"}
-  - {key: richard-s, category: cases, text: "*State v. Richard S.*, 143 Conn. App. 596, 70 A.3d 1110, cert. denied, 310 Conn. 912, 76 A.3d 628 (2013)"}
-  - {key: sivri, category: cases, text: "*State v. Sivri*, 231 Conn. 115, 646 A.2d 169 (1994)"}
-  - {key: stellato, category: cases, text: "*State v. Stellato*, 10 Conn. App. 447, 523 A.2d 1345 (1987)"}
-  - {key: whitaker, category: cases, text: "*State v. Whitaker*, 215 Conn. 739, 578 A.2d 1031 (1990)"}
-  - {key: whitnum-baker, category: cases, text: "*State v. Whitnum-Baker*, 169 Conn. App. 523, 150 A.3d 1174 (2016), cert. denied, 324 Conn. 923, 155 A.3d 753 (2017)"}
-  - {key: williams, category: cases, text: "*State v. Williams*, 350 Conn. 363, 324 A.3d 760 (2024)"}
-  - {key: cgs-53-21, category: statutes, text: "General Statutes § 53-21"}
-  - {key: cgs-53a-59, category: statutes, text: "General Statutes § 53a-59"}
-  - {key: cgs-54-86e, category: statutes, text: "General Statutes § 54-86e"}
-  - {key: cgs-54-193, category: statutes, text: "General Statutes § 54-193"}
+  jackson: {kind: cases, cite: "*Jackson v. Virginia*, 443 U.S. 307, 99 S. Ct. 2781, 61 L. Ed. 2d 560 (1979)"}
+  roberto-a: {kind: cases, cite: "*Roberto A. v. Commissioner of Correction*, 229 Conn. App. 104, 325 A.3d 1192, cert. denied, 350 Conn. 935, 327 A.3d 384 (2024)"}
+  baker: {kind: cases, cite: "*State v. Baker*, 50 Conn. App. 268, 718 A.2d 450, cert. denied, 247 Conn. 937, 722 A.2d 1216 (1998)"}
+  boykin: {kind: cases, cite: "*State v. Boykin*, 27 Conn. App. 558, 609 A.2d 242, cert. denied, 223 Conn. 905, 610 A.2d 179 (1992)"}
+  capasso: {kind: cases, cite: "*State v. Capasso*, 203 Conn. App. 333, 248 A.3d 58, cert. denied, 336 Conn. 939, 249 A.3d 352 (2021)"}
+  carlos-c: {kind: cases, cite: "*State v. Carlos C.*, 165 Conn. App. 195, 138 A.3d 1090, cert. denied, 322 Conn. 906, 140 A.3d 977 (2016)"}
+  charles-l: {kind: cases, cite: "*State v. Charles L.*, 217 Conn. App. 380, 288 A.3d 664, cert. denied, 346 Conn. 920, 291 A.3d 607 (2023)"}
+  covington-app: {kind: cases, cite: "*State v. Covington*, 184 Conn. App. 332, 194 A.3d 1224 (2018), aff'd, 335 Conn. 212, 229 A.3d 1036 (2020)"}
+  covington: {kind: cases, cite: "*State v. Covington*, 335 Conn. 212, 229 A.3d 1036 (2020)"}
+  crewe: {kind: cases, cite: "*State v. Crewe*, 193 Conn. App. 564, 219 A.3d 886, cert. denied, 334 Conn. 901, 219 A.3d 800 (2019)"}
+  flores: {kind: cases, cite: "*State v. Flores*, 344 Conn. 713, 281 A.3d 420 (2022)"}
+  franklin: {kind: cases, cite: "*State v. Franklin*, 162 Conn. App. 78, 129 A.3d 770 (2015), cert. denied, 321 Conn. 905, 138 A.3d 281 (2016)"}
+  fred-c: {kind: cases, cite: "*State v. Fred C.*, 167 Conn. App. 600, 142 A.3d 1258, cert. denied, 323 Conn. 921, 150 A.3d 1150 (2016)"}
+  hart: {kind: cases, cite: "*State v. Hart*, 221 Conn. 595, 605 A.2d 1366 (1992)"}
+  hodge: {kind: cases, cite: "*State v. Hodge*, 153 Conn. 564, 219 A.2d 367 (1966)"}
+  hughes: {kind: cases, cite: "*State v. Hughes*, 341 Conn. 387, 267 A.3d 81 (2021)"}
+  jagat: {kind: cases, cite: "*State v. Jagat*, 111 Conn. App. 173, 958 A.2d 206 (2008)"}
+  juarez: {kind: cases, cite: "*State v. Juarez*, 179 Conn. App. 588, 180 A.3d 1015 (2018), cert. denied, 331 Conn. 910, 203 A.3d 1245 (2019)"}
+  mcclam: {kind: cases, cite: "*State v. McClam*, 44 Conn. App. 198, 689 A.2d 475, cert. denied, 240 Conn. 912, 690 A.2d 400 (1997)"}
+  montana: {kind: cases, cite: "*State v. Montana*, 179 Conn. App. 261, 178 A.3d 1119, cert. denied, 328 Conn. 911, 178 A.3d 1042 (2018)"}
+  montoya: {kind: cases, cite: "*State v. Montoya*, 110 Conn. App. 97, 954 A.2d 193, cert. denied, 289 Conn. 941, 959 A.2d 1008 (2008)"}
+  mungroo: {kind: cases, cite: "*State v. Mungroo*, 104 Conn. App. 668, 935 A.2d 229 (2007), cert. denied, 285 Conn. 908, 942 A.2d 415 (2008)"}
+  naim-b: {kind: cases, cite: "*State v. Na'im B.*, 288 Conn. 290, 952 A.2d 755 (2008)"}
+  nichols: {kind: cases, cite: "*State v. Nichols*, 226 Conn. App. 359, 317 A.3d 861 (2024)"}
+  niemeyer: {kind: cases, cite: "*State v. Niemeyer*, 258 Conn. 510, 782 A.2d 658 (2001)"}
+  reynolds: {kind: cases, cite: "*State v. Reynolds*, 264 Conn. 1, 836 A.2d 224 (2003)"}
+  richard-s: {kind: cases, cite: "*State v. Richard S.*, 143 Conn. App. 596, 70 A.3d 1110, cert. denied, 310 Conn. 912, 76 A.3d 628 (2013)"}
+  sivri: {kind: cases, cite: "*State v. Sivri*, 231 Conn. 115, 646 A.2d 169 (1994)"}
+  stellato: {kind: cases, cite: "*State v. Stellato*, 10 Conn. App. 447, 523 A.2d 1345 (1987)"}
+  whitaker: {kind: cases, cite: "*State v. Whitaker*, 215 Conn. 739, 578 A.2d 1031 (1990)"}
+  whitnum-baker: {kind: cases, cite: "*State v. Whitnum-Baker*, 169 Conn. App. 523, 150 A.3d 1174 (2016), cert. denied, 324 Conn. 923, 155 A.3d 753 (2017)"}
+  williams: {kind: cases, cite: "*State v. Williams*, 350 Conn. 363, 324 A.3d 760 (2024)"}
+  cgs-53-21: {kind: statutes, cite: "General Statutes § 53-21"}
+  cgs-53a-59: {kind: statutes, cite: "General Statutes § 53a-59"}
+  cgs-54-86e: {kind: statutes, cite: "General Statutes § 54-86e"}
+  cgs-54-193: {kind: statutes, cite: "General Statutes § 54-193"}
 signature:
   party:
     - "STATE OF CONNECTICUT"
@@ -96,14 +90,26 @@ certificates:
       The undersigned attorney hereby certifies, pursuant to Connecticut Rule of Appellate Procedure § 67-2A, that on February 6, 2025:
 
       1. the electronically submitted e-brief and appendix have been delivered electronically to Barry Barall Taylor & Levesque, LLC, 989 Main Street, Manchester, CT 06040, Tel. (860) 649-4400; Fax. (860) 649-4400, Email: rbarry@bbsattorneys.com;
+
       2. the electronically submitted e-brief and appendix and the filed paper e-brief and appendix have been redacted or do not contain any names or other personal identifying information that is prohibited from disclosure by rule, statue, court order or case law;
+
       3. a copy of the e-brief and appendix have been sent to each counsel of record in compliance with Section 62-7, on February 6, 2025;
+
       4. the e-brief and appendix being filed with the appellate clerk are true copies of the e-brief and appendix that were submitted electronically;
+
       5. the e-brief and appendix are filed in compliance with the e-briefing guidelines and no deviations were requested; and
+
       6. the e-brief contains 9,921 words; and
+
       7. the e-brief and appendix comply with all provisions of this rule.
     signer: "TIMOTHY F. COSTELLO"
 ---
+
+# COUNTERSTATEMENT OF THE ISSUES
+
+A. Whether the evidence was sufficient to sustain the defendant's convictions.
+
+B. Whether the trial court abused its discretion when it denied the defendant's motion for a new trial which alleged that the weight of the evidence was against the jury's guilty verdicts.
 
 # I. Nature of the proceedings
 

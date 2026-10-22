@@ -21,23 +21,23 @@ argued_by:
   - "jlenes@wwblaw.com"
 toc: true
 authorities:
-  - {key: auster, category: cases, text: "*Auster v. Norwalk United Methodist Church*, 286 Conn. 152 (2008)"}
-  - {key: benedict, category: cases, text: "*State v. Benedict*, 313 Conn. 494 (2014)"}
-  - {key: demello, category: cases, text: "*Demello v. Lakeside Club, Inc.*, 2024 WL 1171687 (Conn. Super. Ct. Mar. 12, 2024)"}
-  - {key: fagan, category: cases, text: "*Fagan v. State Dep't of Transp.*, 2013 WL 3215225 (Conn. Super. Ct. June 7, 2013)"}
-  - {key: mcneil, category: cases, text: "*McNeil v. Riccio*, 45 Conn. App. 466 (1997)"}
-  - {key: message-ctr, category: cases, text: "*Message Ctr. Mgmt., Inc. v. Shell Oil Prod. Co.*, 85 Conn. App. 401 (2004)"}
-  - {key: procaccini, category: cases, text: "*Procaccini v. Lawrence & Mem'l Hosp., Inc.*, 175 Conn. App. 692 (2017)"}
-  - {key: seymour, category: cases, text: "*Seymour v. Equinox Greenwich Old Track Rd., Inc.*, 2020 WL 8261624 (Conn. Super. Ct. Dec. 3, 2020)"}
-  - {key: silva, category: cases, text: "*Silva v. Walmart, Inc.*, 2020 WL 3058145 (Conn. Super. Ct. May 8, 2020)"}
-  - {key: sweeney, category: cases, text: "*Sweeney v. Friends of Hammonasset*, 140 Conn. App. 40 (2013)"}
-  - {key: young, category: cases, text: "*Young v. Rutkin*, 79 Conn. App. 355 (2003)"}
-  - {key: ce-4-7, category: rules, text: "Conn. Code Evid. § 4-7"}
-  - {key: ce-4-10, category: rules, text: "Conn. Code Evid. § 4-10"}
-  - {key: ce-8-4, category: rules, text: "Conn. Code Evid. § 8-4"}
-  - {key: pb-4007, category: rules, text: "Practice Book § 4007"}
-  - {key: pb-5-5, category: rules, text: "Practice Book § 5-5"}
-  - {key: pb-61-10, category: rules, text: "Practice Book § 61-10"}
+  auster: {kind: cases, cite: "*Auster v. Norwalk United Methodist Church*, 286 Conn. 152 (2008)"}
+  benedict: {kind: cases, cite: "*State v. Benedict*, 313 Conn. 494 (2014)"}
+  demello: {kind: cases, cite: "*Demello v. Lakeside Club, Inc.*, 2024 WL 1171687 (Conn. Super. Ct. Mar. 12, 2024)"}
+  fagan: {kind: cases, cite: "*Fagan v. State Dep't of Transp.*, 2013 WL 3215225 (Conn. Super. Ct. June 7, 2013)"}
+  mcneil: {kind: cases, cite: "*McNeil v. Riccio*, 45 Conn. App. 466 (1997)"}
+  message-ctr: {kind: cases, cite: "*Message Ctr. Mgmt., Inc. v. Shell Oil Prod. Co.*, 85 Conn. App. 401 (2004)"}
+  procaccini: {kind: cases, cite: "*Procaccini v. Lawrence & Mem'l Hosp., Inc.*, 175 Conn. App. 692 (2017)"}
+  seymour: {kind: cases, cite: "*Seymour v. Equinox Greenwich Old Track Rd., Inc.*, 2020 WL 8261624 (Conn. Super. Ct. Dec. 3, 2020)"}
+  silva: {kind: cases, cite: "*Silva v. Walmart, Inc.*, 2020 WL 3058145 (Conn. Super. Ct. May 8, 2020)"}
+  sweeney: {kind: cases, cite: "*Sweeney v. Friends of Hammonasset*, 140 Conn. App. 40 (2013)"}
+  young: {kind: cases, cite: "*Young v. Rutkin*, 79 Conn. App. 355 (2003)"}
+  ce-4-7: {kind: rules, cite: "Conn. Code Evid. § 4-7"}
+  ce-4-10: {kind: rules, cite: "Conn. Code Evid. § 4-10"}
+  ce-8-4: {kind: rules, cite: "Conn. Code Evid. § 8-4"}
+  pb-4007: {kind: rules, cite: "Practice Book § 4007"}
+  pb-5-5: {kind: rules, cite: "Practice Book § 5-5"}
+  pb-61-10: {kind: rules, cite: "Practice Book § 61-10"}
 signature:
   party:
     - "One Eighty-Five Stagg Associates"
@@ -80,9 +80,13 @@ certificates:
       I further certify that:
 
       1. The brief and party appendix being filed with the appellate clerk are true copies of the electronically-submitted brief and party appendix.
+
       2. The electronically submitted brief and appendix and the filed paper brief and appendix have been redacted or do not contain any names or other personally identifying information that is prohibited from disclosure by rule, state, court order, or case law
+
       3. The brief contains 5,529 words, exclusive of the portions set forth in P.B. § 67-3A.
+
       4. The brief complies with all of the provisions of P.B. § 67-2A.
+
       5. The Plaintiffs did not request any deviations from P.B. § 67-2A.
     signer: "James A. Lenes"
 ---

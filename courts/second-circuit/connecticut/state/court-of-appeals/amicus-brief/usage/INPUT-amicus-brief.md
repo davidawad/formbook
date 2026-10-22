@@ -24,21 +24,21 @@ counsel:
   - "Connecticut Conference of Municipalities"
 toc: true
 authorities:
-  - {key: amaral-bros, category: cases, text: "*Amaral Bros., Inc. v. Dep't of Lab.*, 325 Conn. 72, 155 A.3d 1255 (2017)"}
-  - {key: di-teresi, category: cases, text: "*Di Teresi v. Stamford Health Sys., Inc.*, 142 Conn. App. 72, 63 A.3d 1011 (2013)"}
-  - {key: elliott, category: cases, text: "*Elliott v. City of Waterbury*, 245 Conn. 385, 715 A.2d 27 (1998)"}
-  - {key: jiminez, category: cases, text: "*Jiminez v. American Steak House, LLC*, No. CV-10-6001715-S, 2010 WL 5030129 (Sup. Ct. Nov. 15, 2010)"}
-  - {key: m-l-cons, category: cases, text: "*M & L Cons., Inc. v. Town of Darien*, No. FSTCV136022914S, 2015 WL 671691 (Conn. Super. Ct. Feb. 2, 2015)"}
-  - {key: maselli, category: cases, text: "*Maselli v. Reg'l Sch. Dist. No. 10*, 198 Conn. App. 643, 235 A.3d 599 (2020)"}
-  - {key: northrup, category: cases, text: "*Northrup v. Witkowski*, 175 Conn. App. 223, 167 A.3d (2017)"}
-  - {key: pera, category: cases, text: "*Pera v. Young Men's Christian Association of Greenwich*, No. CV-11-6008362-S, 2011 WL 3891042 (Conn. Sup. Ct. July 29, 2011)"}
-  - {key: right-breen, category: cases, text: "*Right v. Breen*, 277 Conn. 364, 890 A.2d 1287 (2006)"}
-  - {key: williams, category: cases, text: "*Williams v. Housing Auth. of the City of Bridgeport*, 327 Conn. 338, 174 A.3d 137 (2017)"}
-  - {key: cgs-7-101a, category: statutes, text: "Conn. Gen. Stat. § 7-101a"}
-  - {key: cgs-7-465a, category: statutes, text: "Conn. Gen. Stat. § 7-465(a)"}
-  - {key: cgs-10-235a, category: statutes, text: "Conn. Gen. Stat. § 10-235(a)"}
-  - {key: cgs-19a-181a, category: statutes, text: "Conn. Gen. Stat. § 19a-181a"}
-  - {key: cgs-52-557n, category: statutes, text: "Conn. Gen. Stat. § 52-557n"}
+  amaral-bros: {kind: cases, cite: "*Amaral Bros., Inc. v. Dep't of Lab.*, 325 Conn. 72, 155 A.3d 1255 (2017)"}
+  di-teresi: {kind: cases, cite: "*Di Teresi v. Stamford Health Sys., Inc.*, 142 Conn. App. 72, 63 A.3d 1011 (2013)"}
+  elliott: {kind: cases, cite: "*Elliott v. City of Waterbury*, 245 Conn. 385, 715 A.2d 27 (1998)"}
+  jiminez: {kind: cases, cite: "*Jiminez v. American Steak House, LLC*, No. CV-10-6001715-S, 2010 WL 5030129 (Sup. Ct. Nov. 15, 2010)"}
+  m-l-cons: {kind: cases, cite: "*M & L Cons., Inc. v. Town of Darien*, No. FSTCV136022914S, 2015 WL 671691 (Conn. Super. Ct. Feb. 2, 2015)"}
+  maselli: {kind: cases, cite: "*Maselli v. Reg'l Sch. Dist. No. 10*, 198 Conn. App. 643, 235 A.3d 599 (2020)"}
+  northrup: {kind: cases, cite: "*Northrup v. Witkowski*, 175 Conn. App. 223, 167 A.3d (2017)"}
+  pera: {kind: cases, cite: "*Pera v. Young Men's Christian Association of Greenwich*, No. CV-11-6008362-S, 2011 WL 3891042 (Conn. Sup. Ct. July 29, 2011)"}
+  right-breen: {kind: cases, cite: "*Right v. Breen*, 277 Conn. 364, 890 A.2d 1287 (2006)"}
+  williams: {kind: cases, cite: "*Williams v. Housing Auth. of the City of Bridgeport*, 327 Conn. 338, 174 A.3d 137 (2017)"}
+  cgs-7-101a: {kind: statutes, cite: "Conn. Gen. Stat. § 7-101a"}
+  cgs-7-465a: {kind: statutes, cite: "Conn. Gen. Stat. § 7-465(a)"}
+  cgs-10-235a: {kind: statutes, cite: "Conn. Gen. Stat. § 10-235(a)"}
+  cgs-19a-181a: {kind: statutes, cite: "Conn. Gen. Stat. § 19a-181a"}
+  cgs-52-557n: {kind: statutes, cite: "Conn. Gen. Stat. § 52-557n"}
 signature:
   party:
     - "February 7, 2025"
@@ -60,7 +60,9 @@ certificates:
       Pursuant to Practice Book § 67-7A(b), Connecticut Defense Lawyers Association (CDLA), an entity as defined by Practice Book § 60-4, herby certifies that:
 
       1. CCM does not have any parent entities.
+
       2. There are no entities or individuals owning or controlling an interest of 10 percent or more of CCM.
+
       3. CCM does not know of any direct or indirect ownership, controlling or legal interest for CCM that counsel of record thinks could reasonably require a judge to disqualify himself or herself under Rule 2.11 of the Code of Judicial Conduct.
     lines:
       - "By:"
@@ -71,10 +73,15 @@ certificates:
       The undersigned hereby certifies, pursuant to Connecticut Rule of Appellate Procedure § 67-2A, that:
 
       1. A copy of the brief and party appendix has been sent electronically to each counsel of record in compliance with § 62-7, except for counsel of record exempt from electronic filing pursuant to § 60-8, to whom a paper copy of the brief and party appendix has been sent;
+
       2. The brief and party appendix being filed with the appellate clerk are true and correct copies of the brief and party appendix that were submitted electronically pursuant to subsection (f) of this section;
+
       3. The brief and party appendix have been redacted or do not contain any names or other personal identifying information that is prohibited from disclosure by rule, statute, court order, or case law, unless the brief is filed pursuant to § 79a-6;
+
       4. The e-brief contains 2,399 words;
+
       5. The brief complies with all provisions of this rule; and
+
       6. No deviations from this rule were requested/approved.
     lines:
       - "Service List:"
@@ -118,11 +125,11 @@ CCM is the largest nonpartisan organization of municipal leaders in Connecticut.
 
 # II. Argument
 
-## A. The trial court's application of [§ 52-557n(b)](toa:cgs-52-557n) conflicts with the statute's text, context, and purpose.
+## A. The trial court's application of § 52-557n(b) conflicts with the statute's text, context, and purpose.
 
 The trial court interpreted General Statutes §§ 52-557n(b)(7) and (8) to allow direct suit against both a municipalities and their employees for reckless conduct in connection with the issuance of permits and making of property inspections. This reading undercuts Connecticut's statutory tort scheme and conflicts with other statutory provisions.
 
-### 1. The trial court's application of [§ 52-557n](toa:cgs-52-557n) defeats the statute's purpose of codifying governmental immunity with limited exceptions.
+### 1. The trial court's application of § 52-557n defeats the statute's purpose of codifying governmental immunity with limited exceptions.
 
 Section 557n was meant to codify governmental immunity with only certain limited exceptions. Thus, while § 557n(a)(1) generally permits municipal liability for negligence, § 557n(a)(2) specifically provides that municipalities "shall not be liable for damages" caused by "[a]cts or omissions of any employee, officer or agent which constitute criminal conduct, actual malice or wilful [sic] misconduct," or for "negligent acts or omissions which require the exercise of judgment or discretion." Id. Thus, [§ 52-557n(a)](toa:cgs-52-557n) generally precludes municipalities from being held liable for their employees' discretionary conduct or for willful or malicious misconduct. Id.
 
@@ -140,7 +147,7 @@ The facts put before the jury indicated that Plaintiffs designated Michael Horto
 
 Even assuming that city employees made mistakes in this process, it is difficult to comprehend how this pattern of conduct could be deemed reckless as opposed to merely negligent. If affirmed, the judgment in this case would eliminate this important distinction and effectively permit municipalities and municipal employees to be held liable for negligent permitting and inspection, making Connecticut an unfortunate outlier among other states, the vast majority of which do not permit liability for negligent licensing or inspection. See PA27
 
-### 3. The trial court's application effects a silent repeal of §§ [7-465(a)](toa:cgs-7-465a) and [7-101a](toa:cgs-7-101a).
+### 3. The trial court's application effects a silent repeal of §§ 7-465(a) and 7-101a.
 
 The trial court's interpretation of § 52-557n(a) squarely conflicts with the general policy laid out in Conn. Gen. Stat. [§ 7-465(a)](toa:cgs-7-465a)—a policy which is echoed throughout Connecticut's municipal-liability statutes. Section 7-465(a) governs a municipality's "[a]ssumption of liability for damage caused by an employee," and provides that municipalities will assume liability for the actions of their employees only if that conduct is not "wilful or wanton." Id. This limitation is echoed in [§ 7-101a](toa:cgs-7-101a), which requires municipalities to indemnify employees for liability arising out of "alleged negligence," but not for "malicious, wanton or wilful act[s]."
 

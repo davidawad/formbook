@@ -1,0 +1,16 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # CONNAPPCT-FORM-003 (Practice Book Sec. 67-2A(b)): margins of 1 1/2 inches on all sides
+  margin_pt: 108
+  # LaTeX drops footnote 2 (page 13): its mark follows "[Practice Book § 4007](toa:pb-4007)," and lib/latex/xdoc.lua
+  # sets the token after a section sign in an \mbox, where a \footnote is lost; pages 14 on shift (XENG-002, -003).
+  # docx does not render: the Word page lookup (tools/fb/src/docxpages.rs) misses the Demello citation that runs from
+  # page 6 (whose foot holds note 1) to page 7, takes the same citation's second use on page 7 for it, and then finds
+  # none of the authorities cited before it on page 7: docx BLOCKED, its generated docx/ not committed until then.
+  # Both shared-model fixes (docs/open-items/fb-595.54.56.md);
+  # reported, not gated.
+  cross_engine_latex: report
+  cross_engine_docx: report
