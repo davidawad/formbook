@@ -1,0 +1,106 @@
+# California Court of Appeal, Fifth Appellate District (calctapp5d): reply-brief. The whole layout, as
+# data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to CRC 8.204 and 8.74 (../../rules.md, CALCTAPP5D-*); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # CALCTAPP5D-FORM-003: not smaller than 13 point, footnotes included
+pitch:
+  body: 25.35             # CALCTAPP5D-FORM-005: one-and-a-half spaced (1.5 x the single line)
+  single: 16.9            # headings, footnotes, quotations, tables, cover, certificates: single (1.3 x 13 pt, EB Garamond's line)
+margin: {top: 72, bottom: 72, left: 108, right: 108}   # CALCTAPP5D-FORM-006: 1-1/2 in left and right, 1 in top and bottom
+indent: 36
+page_number: {align: center, from: 2}   # CALCTAPP5D-FORM-007: the cover is page 1, its number suppressed
+footnote: {size: 13, gap: 6.5, clearance: 11.7}   # CALCTAPP5D-FORM-003, -005: 13 point, single spaced
+quote: {left: 36, right: 36, above: 13, below: 13, gap: 11.7}   # CALCTAPP5D-FORM-005: block-indented, single spaced
+# CALCTAPP5D-CONT-002: each point under its own heading; the sections centered in capitals, the points numbered by the
+# template (I., A., 1., a.), the label in a half-inch box, the title hung under its first word, a level a half inch in.
+heading:
+  - {align: center, bold: true, upper: true, above: 15.6, below: 13}
+  - {bold: true, number: "I.", label_box: 36, above: 13, below: 10.4}
+  - {bold: true, number: "A.", label_box: 36, left: 36, above: 13, below: 10.4}
+  - {bold: true, italic: true, number: "1.", label_box: 36, left: 72, above: 13, below: 10.4}
+  - {bold: true, italic: true, number: "a.", label_box: 36, left: 108, above: 13, below: 10.4}
+# CALCTAPP5D-LEN-001, -CERT-001 (CRC 8.204(c)(1)): at most 14,000 words, the count stated in the certificate.
+words: {limit: 14000}
+# CALCTAPP5D-COVER-002, -003 (CRC 8.204(b)(10), 8.40(b)): the court, the caption beside the Court of Appeal number,
+# the superior court, its number and the judge, the title, counsel and the party they represent; page 1.
+cover:
+  - {text: "{court_lines}", align: center, bold: true}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 113.4, above: 6.2, below: 6.2}
+            blocks:
+              - {text: "{names}", below: 7.8}
+              - {text: "{designation}", left: 113.4}
+      - width: 126
+        valign: center
+        blocks:
+          - {text: "Court of Appeal Case No. {case_number}"}
+    gutter: 18
+    above: 15.6
+  - {text: "{trial_court}", align: center, above: 15.6}
+  - {text: "Case No. {superior_case_number}", align: center}
+  - {text: "{judge}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 25}
+  - each: counsel
+    above: 25
+    blocks:
+      - {text: "{names}", left: 198, above: 6.5}
+      - {text: "{lines}", left: 198}
+  - {text: "{counsel_for}", italic: true, left: 198, above: 6.5}
+# CALCTAPP5D-CONT-001 (CRC 8.204(a)(1)(A)): a table of contents and a table of authorities, after the cover.
+contents: {title: "Table of Contents", depth: 5, col: 36, step: 18, above: 7.8}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 7.8
+  passim: 7
+  page_heading: "Page(s)"
+  group: {bold: true, above: 15.6, below: 2.6}
+  kinds:
+    - {kind: case, title: "Cases:", italic: true}
+    - {kind: constitution, title: "Constitutional Provisions:"}
+    - {kind: statute, title: "Statutes:"}
+    - {kind: regulation, title: "Regulations:"}
+    - {kind: rule, title: "Rules:"}
+    - {kind: other, title: "Other Authorities:"}
+# The brief's last paragraph kept with the date and signature; then the certificate of word count (CALCTAPP5D-CERT-001)
+# and the proof of service, each on a page of its own.
+keep_with_closing: true
+closing:
+  - columns:
+      - blocks:
+          - {text: "Dated: {date}"}
+      - width: 216
+        blocks:
+          - {text: "{signature.firm}"}
+          - {text: "s/{signature.signer}", above: 15.6}
+          - {text: "{signature.signer}"}
+          - {text: "{signature.role}", italic: true}
+    above: 18.2
+  - {break: true}
+  - {text: "Certificate of Word Count", align: center, bold: true, upper: true, below: 13}
+  - {text: "Under Rule 8.204, subdivision (c)(1), of the California Rules of Court, I certify that the attached *{brief_title}* is 1½-spaced, typed in a proportionally spaced, 13-point font, and the brief contains {xd.words} words of text, including footnotes, as counted by the word-count feature of the word-processing program used to prepare the brief."}
+  - columns:
+      - blocks:
+          - {text: "Dated: {date}"}
+      - width: 216
+        blocks:
+          - {text: "{signature.firm}"}
+          - {text: "s/{signature.signer}", above: 15.6}
+          - {text: "{signature.signer}"}
+          - {text: "{signature.role}", italic: true}
+    above: 18.2
+  - {break: true}
+  - {text: "Proof of Service", align: center, bold: true, upper: true, below: 13}
+  - {text: "Case Name: {case_name}<br>Court of Appeal Case No.: {case_number}<br>Superior Court Case No.: {superior_case_number}"}
+  - {text: "I, {service.declarant}, am employed in {service.employed_in}. I am over the age of eighteen (18) years and am not a party to the within action. My business address is {service.business_address}.", above: 10.4}
+  - {text: "On {date}, I served a copy of the foregoing document described as: {brief_title}, on the following parties, as follows:", above: 10.4}
+  - each: service.served
+    blocks:
+      - {text: "{name}<br>Served {method}.", left: 36, above: 7.8}
+  - {text: "I declare under penalty of perjury under the laws of the State of California that the foregoing is true and correct.", above: 10.4}
+  - {text: "Executed on {service.executed}.", above: 10.4}
+  - {text: "{service.declarant}<br>Declarant", left: 198, above: 18.2}

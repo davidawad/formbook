@@ -45,7 +45,7 @@ This challenge to the resulting regulations fails in all respects. As a threshol
 
 # BACKGROUND
 
-## I. REGISTRATION OF BULLET-BUTTON ASSAULT WEAPONS
+## REGISTRATION OF BULLET-BUTTON ASSAULT WEAPONS
 
 The Assault Weapons Control Act (“assault weapons law”) (Pen. Code, §§ 30500, et seq.) generally restricts the possession, purchase, sale, manufacture, and distribution of assault weapons, excepting only those assault weapons acquired before the law took effect, so long as they were timely registered with the Department of Justice (DOJ). (*Id.*, § 30900.) Under this grandfathering exception, owners of such weapons may lawfully possess and sell registered weapons, notwithstanding the general ban. (See, e.g., *id.*, § 30675, subd. (b)(1).)
 
@@ -61,7 +61,7 @@ Pursuant to this exemption, DOJ submitted registration regulations to the Office
 
 [^3]: Unless otherwise specified, all future references to a code section are to a section within title 11 of the California Code of Regulations.
 
-## II. PROCEDURAL HISTORY
+## PROCEDURAL HISTORY
 
 Appellants are six individuals and one association who allegedly own (or whose members allegedly own) weapons subject to the bullet-button registration requirement and DOJ’s regulations. (Respondents’ Appendix (RA) 5-9 [Initial Compl., ¶¶ 11-17; JA 1478-1482 [First Am. Verified Pet. for Writ of Mandate, ¶¶ 9-15].) Appellants originally filed this action as a complaint for declaratory and injunctive relief challenging nine sets of registration regulations, arguing that the regulations fell outside the scope of the APA exemption for registration regulations, and conflicted with the assault weapons law. (RA 3-64.) The trial court sustained Respondents’ demurrer with leave to amend, finding that DOJ’s decision to promulgate regulations for the registration period using the APA exemption in Penal Code section 30900, subdivision (b)(5), was an administrative decision that could only be challenged through a writ petition. (JA 1474.)
 
@@ -95,11 +95,11 @@ For all of these reasons, this appeal should be dismissed as moot or, if not, th
 
 # ARGUMENT
 
-## I. THIS APPEAL IS MOOT BECAUSE THE REGISTRATION PERIOD HAS CLOSED.
+## THIS APPEAL IS MOOT BECAUSE THE REGISTRATION PERIOD HAS CLOSED.
 
 The last day to register bullet-button assault weapons was June 30, 2018. (Pen. Code, § 30900, subd. (b)(1).) Appellants were required to register (and presumably did register) by this date. Appellants have no need or opportunity to register bullet-button assault weapons at any time past June 30, 2018. Thus, this challenge to DOJ’s regulations governing the registration process is academic, and the Court should dismiss this appeal as moot.
 
-### A. Reversing the Trial Court’s Judgment Would Not Afford Appellants Any Practical Relief Because, If They Have Not Already Registered Their Weapons, It Is Too Late To Do So Now.
+### Reversing the Trial Court’s Judgment Would Not Afford Appellants Any Practical Relief Because, If They Have Not Already Registered Their Weapons, It Is Too Late To Do So Now.
 
 “California courts will decide only justiciable controversies.” (*Wilson & Wilson v. City Council of Redwood City* (2011) 191 Cal.App.4th 1559, 1573, citations omitted (*Wilson*).) Courts “will not render opinions on moot questions or abstract propositions, or declare principles of law which cannot affect the matter at issue on appeal.” (*Daily Journal Corp. v. County of Los Angeles* (2009) 172 Cal.App.4th 1550, 1557). A case becomes moot when “the question addressed was at one time a live issue in the case,” but is no longer live “because of events occurring after the judicial process was initiated.” (*Younger v. Superior Court* (1978) 21 Cal.3d 102, 120; see also *Lincoln Place Tenants Assn. v. City of Los Angeles* (2007) 155 Cal.App.4th 425, 454 [“a case becomes moot when a court ruling can have no practical effect or cannot provide the parties with effective relief”].)
 
@@ -121,7 +121,7 @@ Here, Appellants’ challenge to the regulations used to carry out the registrat
 
 [^4]: As set forth below, the challenge to DOJ’s use of the APA exemption to promulgate the registration regulations was required to be brought as a writ petition, and declaratory relief cannot be joined with a writ of mandate. (See *post*, Argument II.B.) But even if declaratory relief were available, the closing of the registration period still renders any such relief moot. Because “[d]eclaratory relief generally operates prospectively to declare future rights, rather than to redress past wrongs,” a plaintiff must present a justiciable question relating to his rights or obligations. (See *Jolly v. Chase Home Finance LLC* (2013) 213 Cal.App.4th 872, 909.) Thus, “[i]t would be an idle action on the part of a trial court to make a declaration of the rights and duties of the parties where the controversy is or has become moot and no actual controversy exists relating to their legal rights and duties.” (*Pettinger v. Home Savings and Loan Association of Los Angeles* (1958) 166 Cal.App.2d 32, 36.)
 
-### B. Appellants Cannot Obtain a Ruling that Certain Weapons Covered by the Challenged Regulations Need Not Have Been Registered at All.
+### Appellants Cannot Obtain a Ruling that Certain Weapons Covered by the Challenged Regulations Need Not Have Been Registered at All.
 
 There is also no basis for maintaining this appeal on the theory that Appellants could obtain a ruling that certain weapons need not have been registered at all.
 
@@ -133,15 +133,15 @@ DOJ was required to go through regular APA notice-and-comment rulemaking to prom
 
 [^6]: As set forth below, other claims regarding the alleged “repeal” of certain definitions (former § 5469) and the requirement to obtain and apply a serial number to registered homebuilt weapons (§§ 5472, subd. (g), 5474.2), are also moot based on regulations or statutory requirements that took effect after the trial court’s decision denying the writ petition. (See *post*, Argument III.B.1, III.B. 4.)
 
-### C. Mootness Exceptions Do Not Apply.
+### Mootness Exceptions Do Not Apply.
 
 California courts recognize “three discretionary exceptions to the rules regarding mootness allowing a court to review the merits of an issue: (1) when the case presents an issue of broad public interest that is likely to recur; (2) when there may be a recurrence of the controversy between the parties; and (3) when a material question remains for the court’s determination.” (*Santa Monica Baykeeper*, *supra*, 193 Cal.App.4th at p. 1548, internal quotation marks and citation omitted.) None of these exceptions applies here.
 
 The regulations concern a one-time registration period, and a statutory APA exemption that applies only to that registration period. Whether these particular regulations fall within this specific APA exemption is not an issue of broad public interest that is likely to recur. Nor is the applicability of this particular APA exemption likely to become the focus of a future dispute between the parties, for the same reasons discussed above—the registration period has ended and the APA exemption can only be used for regulations governing that registration period. Finally, no material question remains for the Court’s determination. Because the registration period has closed, Appellants should have already registered any covered weapons in compliance with the challenged regulations. And, possession of unregistered weapons is currently prohibited, and would remain so regardless of the outcome of this litigation. (See *Santa Monica Baykeeper*, *supra*, 193 Cal.App.4th at p. 1551 [plaintiff “has not explained how there are recurring [construction-impact] issues now that construction has been complete for months”].) There is therefore no basis for discretionary review of these mooted claims.
 
-## II. THE APPEAL OF THE TRIAL COURT’S ORDER SUSTAINING RESPONDENTS’ DEMURRER FAILS.
+## THE APPEAL OF THE TRIAL COURT’S ORDER SUSTAINING RESPONDENTS’ DEMURRER FAILS.
 
-### A. The Trial Court’s Order Sustaining the Demurrer Is Not Appealable as to Causes of Action that Were Subsequently Amended.
+### The Trial Court’s Order Sustaining the Demurrer Is Not Appealable as to Causes of Action that Were Subsequently Amended.
 
 “When a demurrer is sustained with leave to amend,” and “the plaintiff chooses to amend, any error in the sustaining of the demurrer is ordinarily waived.” (*County of Santa Clara v. Atlantic Richfield Co.* (2006) 137 Cal.App.4th 292, 312, citations omitted.) “If a plaintiff chooses not to amend one cause of action but files an amended complaint containing the remaining causes of action or amended versions of the remaining causes of action, no waiver occurs and the plaintiff may challenge the intermediate ruling on the demurrer on an appeal from a subsequent judgment.” (*Ibid.*) Thus, “[i]t is only where the plaintiff amends the cause of action to which the demurrer was sustained that any error is waived.” (*Ibid.*, citing Code Civ. Proc., § 472c, subd. (b).)
 
@@ -149,7 +149,7 @@ After the trial court sustained Respondents’ demurrer in its entirety, with le
 
 The only cause of action Appellants did not amend was the initial complaint’s Seventh Cause of Action (RA 37-39 [Initial Compl. ¶¶ 157-166]), which challenged regulations providing that applicants registering their assault weapons must undergo a “firearms eligibility check,” and that those who successfully complete this check will receive “an assault weapon registration disposition letter.” (§ 5476, subds. (d), (e).) Thus, the appeal of the trial court’s decision to sustain the demurrer can only extend to the originally pleaded Seventh Cause of Action, challenging the eligibility check regulations. (*National Union Fire Ins. Co. of Pittsburgh, PA v. Cambridge Integrated Services Group, Inc.* (2009) 171 Cal.App.4th 35, 44 [“When a demurrer to a cause of action is sustained with leave to amend, the plaintiff may elect not to amend the cause of action. The order sustaining the demurrer is treated as an intermediate order with respect to that cause of action, appealable at the time of a final judgment . . .”].) The appeal of the decision to sustain the demurrer as to all other causes of action has been waived.
 
-### B. All Nine Causes of Action in the Initial Complaint, Not Just the Seventh, Were Properly Dismissed With Leave to Amend.
+### All Nine Causes of Action in the Initial Complaint, Not Just the Seventh, Were Properly Dismissed With Leave to Amend.
 
 All causes of action in the initial complaint sought declaratory and injunctive relief under Government Code section 11350. (RA 23-44 [Initial Compl. ¶¶ 75-198; *id.*, ¶ 10].) However, all of the causes of action—including the seventh—either directly allege or seek as relief a declaration that the challenged regulations “[are] beyond the scope of the APA exemption in Penal Code section 30900(b)(5).” (RA 23-24, 26-27, 31, 38, 40, 42-43, 44-47 [Initial Compl. ¶¶ 77-78, 95-96, 117, 160, 169-171, 186-189 and Prayer for Relief ¶¶ 1, 4, 8, 11, 15, 17, 20, 23, 26, 29, 32, 36].) As the trial court correctly determined, Appellants’ challenge to DOJ’s decision to invoke the APA exemption in promulgating these regulations was required to be filed as a writ petition. (JA 1474.)
 
@@ -169,17 +169,17 @@ The trial court properly determined that the seventh cause of action (and all ot
 
 [^7]: Although *Pacific Legal* itself involved an action for declaratory relief, the interpretive guidelines at issue there represented “the formulation of a general policy intended to govern future [Coastal Act] permit decisions,” which “adopt a flexible approach” allowing access conditions to be imposed “on a case-by-case basis.” (33 Cal.3d at pp. 168, 174). The decision at issue here—DOJ’s use of the statutory APA exemption to promulgate registration regulations—is not a “general policy,” but rather a discrete administrative determination that is properly required to be reviewed through a writ of mandate.
 
-### C. The Challenge to the Trial Court’s Decision to Sustain the Demurrer as to the Initial Complaint’s Seventh Cause of Action Fails on the Merits.
+### The Challenge to the Trial Court’s Decision to Sustain the Demurrer as to the Initial Complaint’s Seventh Cause of Action Fails on the Merits.
 
 Appellants did not renew their challenge to the eligibility check provisions in their amended pleading, and do not address the claim at all in their opening brief, which does not even cite the relevant regulation (§ 5476). This Court may nevertheless determine as a matter of law that even if this claim could have proceeded under Government Code section 11350, it still fails as a matter of law for the reasons in Respondents’ demurrer. (See *Carman v. Alvord* (1982) 31 Cal.3d 318, 324 [review of judgment sustaining demurrer may be affirmed “on any grounds stated in the demurrer, whether or not the [lower] court acted on that ground”].)
 
 As set forth in Respondents’ demurrer (JA 30), the regulations requiring a firearms eligibility check of all potential bullet-button assault weapon registrants are well within DOJ’s rulemaking authority because the assault weapons law requires DOJ to perform an eligibility check before accepting a registration for an assault weapon. Penal Code section 30950 provides, “No person who is under the age of 18 years, and no person who is prohibited by state or federal law from possessing, receiving, owning, or purchasing a firearm, may register or possess an assault weapon or .50 BMG rifle.” DOJ must confirm that applicants are not prohibited from registering an assault weapon. DOJ’s decision to promulgate a registration regulation is entitled to deference (see *post*, Argument III.A), and its decision to require an eligibility check to ensure that prohibited persons do not register bullet-button assault weapons is well within the scope of its statutory authority, and is reasonably necessary to effectuate the purposes of the registration requirement and the assault weapons law (see *post*, Argument III.B).
 
-## III. THE CHALLENGED REGULATIONS ARE WITHIN DOJ’S STATUTORY RULEMAKING AUTHORITY AND REASONABLY NECESSARY FOR THE BULLET-BUTTON REGISTRATION PROCESS.
+## THE CHALLENGED REGULATIONS ARE WITHIN DOJ’S STATUTORY RULEMAKING AUTHORITY AND REASONABLY NECESSARY FOR THE BULLET-BUTTON REGISTRATION PROCESS.
 
 The trial court properly denied the writ petition filed after the demurrer to the initial complaint was sustained. All of the regulations challenged in the writ petition are directly related to the registration process, consistent with the assault weapons law, and reasonably necessary to effectuate the purposes of the registration requirement and the assault weapons law.
 
-### A. Review of the Challenged Regulations Requires Deference to DOJ’s Interpretation of the Assault Weapons Law.
+### Review of the Challenged Regulations Requires Deference to DOJ’s Interpretation of the Assault Weapons Law.
 
 DOJ promulgated all of the challenged regulations in accordance with Penal Code section 30900, subdivision (b)(5), which states: “The department shall adopt regulations for the purpose of implementing this subdivision. These regulations are exempt from the Administrative Procedure Act . . . .” Subdivision (b) of section 30900 describes, in paragraphs (1) through (4), the requirement to register bullet-button assault weapons by a certain date, “via the Internet,” by providing information about the firearm and the registrant, and with payment of a fee. Thus, subdivision (b)(5) gives DOJ broad authority to adopt regulations “for the purpose of implementing” the registration process. (See, e.g., Gov. Code, § 11342.600 [APA, defining “regulation” as a rule of “general application” adopted to “implement, interpret, or make certain or specific the law enforced or administered by it”]; see also *Western States Petroleum Assn. v. Bd. of Equalization* (2013) 57 Cal.4th 401, 414 (*Western States*); *Ford Dealers Assn. v. Department of Motor Vehicles* (1982) 32 Cal.3d 347, 347 (*Ford Dealers*).)
 
@@ -187,7 +187,7 @@ Judicial review of regulations adopted in accordance with this type of broad gra
 
 Thus, “[w]here an agency’s action is ‘quasi-legislative’ or ‘the substantive product of a delegated legislative power conferred on the agency,’ the scope of [the court’s] review is ‘limited to determining whether the regulation (1) is within the scope of the authority conferred and (2) is reasonably necessary to effectuate the purpose of the statute.’” (*Christensen v. Lightbourne* (Cal., July 8, 2019, No. S245395) 2019 WL 2911068, at \*4, quoting *Yamaha Corp. of America v. State Bd. of Equalization* (1998) 19 Cal.4th 1, 8, 11 (*Yamaha Corp.*), internal quotation marks and citations omitted.)
 
-### B. All of the Challenged Regulations Fall Within the APA Exemption, and Are Reasonably Necessary to Effectuate the Purpose of the Assault Weapons Law and the Registration Requirement.
+### All of the Challenged Regulations Fall Within the APA Exemption, and Are Reasonably Necessary to Effectuate the Purpose of the Assault Weapons Law and the Registration Requirement.
 
 As set forth more fully below regarding each challenged regulation, all of the regulations are directly related to implementation of the registration requirement, and are reasonably necessary to effectuate the purpose of the assault weapons law and the registration requirement. Appellants’ objection is that the regulations “concern themselves not with how to register ‘bullet-button assault weapons,’ but instead with what may be registered, who may register, or the conditions for registration.” (AOB, p. 38.) But Appellants do not explain why regulations implementing a registration process should not address these key topics.
 
@@ -201,7 +201,7 @@ The statutory rulemaking authority conferred on DOJ is broad, and not limited to
 
 This view of DOJ’s rulemaking power is also consistent with the purpose of the assault weapons law, which is to protect the public from “the proliferation and use of assault weapons” that the Legislature found to “pose[] a threat to the health, safety, and security of all citizens of this state.” (Pen. Code, § 30505, subd. (a).) Registration is a key component of the Legislature’s regulation of weapons “designed only to facilitate the maximum destruction of human life.” (See, e.g., JA 1201, 1205, 1238.) It makes no sense to construe DOJ’s rulemaking authority so narrowly as to prevent DOJ from running an efficient registration process with clearly defined requirements and procedures. Rather, consistent with numerous precedents on agency rulemaking, the registration regulations are well within DOJ’s rulemaking authority, and they directly serve the important public safety goals of the registration process and the assault weapons law.
 
-#### 1. Consolidation of Definitions Applicable to the Bullet-Button Registration Process
+#### Consolidation of Definitions Applicable to the Bullet-Button Registration Process
 
 Appellants contend that DOJ improperly used the APA exemption to “repeal” five definitions originally promulgated in 2000, which applied to the “identification of assault weapons pursuant to Penal Code section 30515.” (AOB, pp. 38-39 [citing former § 5469].) However, two of these definitions (“Forward pistol grip” and “Thumbhole stock”) were moved to Section 5471 without change. (§ 5471, subds. (t), (qq).) The remaining three (“Detachable magazine,” “Flash suppressor,” and “Pistol grip that protrudes conspicuously beneath the action of the weapon”) were moved to Section 5471, and specific qualifying examples were added. (§ 5471, subds. (m), (r), (z).)
 
@@ -209,7 +209,7 @@ Thus, the definitions were not “repealed.” As part of Section 5471, they sti
 
 Moreover, the five definitions that now appear in Section 5471, along with the rest of the section 5471 definitions, now also apply “to the identification of assault weapons pursuant to Penal Code section 30515.” (§ 5460.) As explained above, Section 5460 was promulgated with full APA notice-and-comment rulemaking procedures, and is not at issue in this litigation. Its promulgation does moot this claim, however. Even if Appellants were to prevail on this issue, DOJ has already gone through full APA rulemaking to generally apply the five definitions at issue here to the identification of assault weapons.
 
-#### 2. Bullet-Button Shotgun Registration
+#### Bullet-Button Shotgun Registration
 
 Appellants have not identified any statutory provision in conflict with the regulation requiring registration of semiautomatic bullet-button shotguns. (§ 5470, subd. (d).)[^8] Their argument that semiautomatic, bullet-button shotguns are not “assault weapons” under the assault weapons law (AOB, p. 39) fails on several grounds.
 
@@ -243,7 +243,7 @@ In addition, if the statutory text here is deemed unclear, public policy impacts
 
 In sum, the requirement to register semiautomatic bullet-button shotguns is consistent with the plain language of both the registration provision and with the statutory definition of assault weapons required to be registered, and is reasonably necessary to effectuate the Legislature’s intent to register semiautomatic bullet-button assault weapons.
 
-#### 3. Definitions Applicable to the Bullet-Button Registration Process
+#### Definitions Applicable to the Bullet-Button Registration Process
 
 The use of rulemaking authority to define a statutory term is a classic and widely recognized exercise of the legislative power delegated to administrative agencies. (See *Jones*, *supra*, at pp. 393, 398 [regulation defining specific activities as “unfair or deceptive acts or practices,” as used in statute, was within agency’s rulemaking authority].) All of the regulatory definitions challenged here are reasonably necessary to administer the bullet-button registration process, and are consistent with the assault weapons law.
 
@@ -267,7 +267,7 @@ These definitions reflect DOJ’s judgment that this information was necessary t
 
 [^16]: Former Pen. Code, § 12285, subd. (a) (1990) (requiring assault weapon registration by January 1, 1991).
 
-#### 4. Serial Number Requirement for Registered Homebuilt Weapons
+#### Serial Number Requirement for Registered Homebuilt Weapons
 
 The challenge to the regulation requiring owners of homebuilt bullet-button assault weapons to obtain and apply a DOJ-issued serial number as a condition of registration (§§ 5472, subd. (g), 5474.2) is now moot, not only because the registration period has been closed for over a year (see *ante*, Argument, I.A), but also because a separate statutory requirement to obtain and apply a DOJ-issued serial number to homebuilt firearms (bullet-button or not) is now in effect. Penal Code section 29180 requires DOJ-issued serial numbers (1) prior to the manufacture of homemade firearms, as of July 1, 2018, and (2) for all pre-existing homemade firearms, by January 1, 2019. DOJ complied with all APA notice-and-comment rulemaking requirements for its regulations regarding the issuance of serial numbers under Penal Code section 29180, and those regulations took effect on July 1, 2018. (See §§ 5505-5522.)
 
@@ -277,11 +277,11 @@ Even if Appellants’ challenge to the serial number registration requirement we
 
 Appellants contend that because another statute requires serial numbers for homebuilt weapons, and took effect after the bullet-button registration period closed, DOJ could not impose such a requirement in the bullet-button registration process. But DOJ’s authority to promulgate regulations for the bullet-button registration process is not limited by authority given in another statute. (See *Ralphs Grocery Co. v. Reimel* (1968) 69 Cal.2d 172, 182-183 [upholding agency’s regulation of quantity discounts for beer even though separate statute governed quantity discounts on milk and wine].) Rather, DOJ has authority to promulgate any and all regulations that do not conflict with the authorizing statute, and that are reasonably necessary to effectuate the statutory purpose. (*Jones*, *supra*, 2 Cal.5th at p. 398.) The serial number regulations satisfy both requirements.
 
-#### 5. Non-Liability Clause for Terms of Use
+#### Non-Liability Clause for Terms of Use
 
 Appellants challenge the regulation establishing a non-liability clause as part of the terms of use for the mandatory electronic registration system (§ 5473, subd. (b)(1)), arguing that it is unrelated to registration and in conflict with the California Constitution and the Information Practices Act. But Appellants fail to acknowledge that the non-liability clause applies “[e]xcept as may be required by law,” which means that it applies only to the extent possible under other applicable laws. The regulation allows DOJ to provide public access to the statutorily mandated electronic registration system without undue legal risk. It is therefore reasonably necessary for the registration process.
 
-#### 6. Required Registration Information
+#### Required Registration Information
 
 The challenge to the requirement that applicants provide “U.S. citizenship status, place of birth, country of citizenship, and alien registration number” (§ 5474, subd. (a)) fails because there is no merit to the contention that regulations may only repeat the authorizing statute, or that registration regulations cannot specify the information required to be provided during the registration process. (See *Jones*, *supra*, 2 Cal.5th at p. 398.) DOJ must confirm that applicants are not prohibited from possessing a firearm, prior to registration. (Pen. Code, § 30950.) Citizenship is relevant to whether an applicant is eligible to possess a firearm in accordance with federal law. (18 U.S.C. § 922(g).) The regulation is thus reasonably necessary to carry out the registration in accordance with the assault weapons law.
 
@@ -291,7 +291,7 @@ Appellants also challenge the requirement for “clear digital photographs”[^1
 
 [^19]: The fact that DOJ does not have a similar requirement in place for its New Resident Report of Firearm Ownership (AOB, p. 46) has no bearing on whether DOJ has statutory authority to require digital photos as part of the bullet-button assault weapon registration process.
 
-#### 7. Joint Registration Requirements
+#### Joint Registration Requirements
 
 Penal Code section 30955 provides for joint registration of assault weapons “owned by family members residing in the same household.” Appellants challenge the regulation setting forth the family relationships that qualify for joint registration (§ 5474.1, subd. (b)), complaining that DOJ does not permit joint registration based on every conceivable family relationship. But nothing in the assault weapons law requires DOJ to recognize certain or all family relationships for joint registration, and it is well within DOJ’s delegated rulemaking authority to define “family members” for the purposes of this registration process.[^20] Indeed, other state agencies have promulgated various definitions of “family member” in various contexts.[^21]
 
@@ -303,7 +303,7 @@ Appellants have not briefed the challenge to the proof-of-address regulation (§
 
 [^21]: See Cal. Code Regs., tit. 22, § 10005 [Department of Health Services definition applicable to “Displaced Homemakers Program”]; Cal. Code Regs., tit. 23, § 2814.20 [State Water Resources Control Board definition applicable to “Underground Storage Tank Petroleum Contamination Orphan Site Cleanup Fund”]; Cal. Code Regs., tit. 25, § 12002, subd. (o) [California Housing Finance Agency definition in the context of “Restrictions on Agency Public Benefits to Aliens”].
 
-#### 8. Prohibition on Modification of the Registered Weapons
+#### Prohibition on Modification of the Registered Weapons
 
 The challenge to the regulation prohibiting post-registration modification of the magazine release device on registered weapons (§ 5477) is without merit. The regulation helps to prevent the registration process from being used to circumvent longstanding restrictions on the sale, possession, and manufacture of weapons that have previously been classified as assault weapons. Registration of an assault weapon provides an exception to the general prohibition on possession of assault weapons. (Pen. Code, §§ 30605, 30680.) But removal of the bullet button creates a registered weapon that should not have been registered. It also transforms the weapon into a true quick-release weapon, with “the capacity to accept a detachable magazine,” as previously defined under the assault weapons law, placing it into the category of assault weapons originally subject to restrictions on sale and possession as of January 1, 2000.[^22] It cannot be that the Legislature intended to allow the bullet-button assault weapon registration process to be used as a means of manufacturing previously prohibited assault weapons. DOJ’s authority to implement the registration process necessarily includes authority for regulations securing the registration process against this type of abuse, which would undermine assault weapons restrictions that have been on the books for decades. The regulation is thus related to and reasonably necessary for the registration process.
 

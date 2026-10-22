@@ -1,0 +1,10 @@
+# Cal. Rules of Court 8.74(b)(1) and 8.204(b)(4): font size, including footnotes, at least 13-point (CALCTAPP5D-FORM-003).
+font:
+  size_pt: 13
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): typst is on the shared model (typst/layout.yaml) and the
+# docx engine is generated from it (`fb engines gen`). Not gated yet (docs/open-items/fb-595.54.57.md): Word sets more
+# on a line that carries a footnote mark (the mark's width, "Word's footnote area" in docs/open-items/fb-595.54.82.md),
+# so its lines and pages drift from typst's; the latex engine is not delivered (EB Garamond's boxed regular T opens a
+# paragraph on a line of its own, lib/latex/xdoc.sty \xd@glyph in vertical mode).
+params:
+  cross_engine: report

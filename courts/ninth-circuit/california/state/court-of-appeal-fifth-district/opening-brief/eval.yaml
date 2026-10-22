@@ -1,4 +1,11 @@
 # Cal. Rules of Court 8.74(b)(1) and 8.204(b)(4): font size, including footnotes, at least 13-point (CALCTAPP5D-FORM-003).
-# The default margin (1 in) is the top and bottom minimum of rule 8.204(b)(6) and 8.74(b)(3); the 1-1/2 in side margins are in the template.
+# The default margin (1 in) is the top and bottom minimum of rule 8.204(b)(6) and 8.74(b)(3); the 1-1/2 in side margins are in the layout.
 font:
   size_pt: 13
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): typst is on the shared model (typst/layout.yaml). Not
+# gated (docs/open-items/fb-595.54.57.md): the docx engine is not delivered (Word breaks the citation "Cal. Code Regs,
+# tit. 11, § 5471" that ends a paragraph over a page, and fb render's page lookup then finds its needle at a later
+# occurrence: every later heading and authority "not found in the PDF"); the latex engine is not delivered (EB
+# Garamond's boxed regular T opens a paragraph on a line of its own, lib/latex/xdoc.sty \xd@glyph in vertical mode).
+params:
+  cross_engine: report
