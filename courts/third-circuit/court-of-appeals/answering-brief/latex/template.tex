@@ -1,132 +1,194 @@
 % U.S. Court of Appeals for the Third Circuit: brief (LaTeX engine), one template for each doc type.
 % The same form as typst/ca3-*.typ (FRAP 32(a); L.A.R. 32.1, 32.2). pandoc writes the markdown body;
 % ca3.lua turns the frontmatter and every heading into the cover, the tables, the certificates and
-% raw LaTeX calls to the macros below. Built by tools/render-latex.sh (stock pdflatex, run until the aux file
-% settles, because the tables of contents and authorities are read from the aux file of the previous pass).
-% Fonts: TeX Gyre Schola, the Century Schoolbook substitute per docs/FONTS.md, from tgschola (TeX Live tex-gyre), so the
-% generated .tex compiles with stock pdflatex and no repo-local file.
+% raw LaTeX calls to the macros below. Built by fb render (stock pdflatex, run until the aux file settles, because the
+% tables of contents and authorities are read from the previous pass).
+%
+% Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): this template sets every line and page break where
+% the typst template (the reference) sets them. The model itself (no kerning or ligatures, first-fit breaking, fixed
+% line boxes, no widows, footnote marks, list labels, contents rows) is the shared package lib/latex/xengine.sty,
+% which fb render inlines into the generated .tex in place of \usepackage{xengine}; the inline rules are
+% lib/latex/xengine.lua, run by ca3.lua. Every size and space here is in bp (14 bp = typst's 14 pt), and blocks are
+% spaced with \addvspace (the larger of the space below one and above the next).
 \documentclass[14pt,letterpaper]{extarticle}
 \usepackage[T1]{fontenc}
+% Fonts: TeX Gyre Schola (FRAP 32(a)(5): proportional serif; the Century Schoolbook substitute per docs/FONTS.md) from
+% tgschola (TeX Live tex-gyre), so the generated .tex compiles with stock pdflatex and no repo-local file; the same
+% face as the typst template (OpenType there, Type 1 here).
 \usepackage{tgschola}
-\usepackage[letterpaper,margin=1in]{geometry}
-\usepackage{hyperref}
-\usepackage{etoolbox}
-\usepackage{needspace}
+% Letter, 1 in margins (L.A.R. 32.1(b)); the page number in the bottom margin, as typst sets it.
+\usepackage[letterpaper,margin=1in,headheight=0pt,headsep=0pt,footskip=36bp]{geometry}
 \usepackage{enumitem}
-\usepackage{longtable,booktabs,array}
-\usepackage{xcolor}
-
-\hypersetup{colorlinks=false,pdfborder={0 0 0}}
-\setlength{\parindent}{0.5in}
-\setlength{\parskip}{0pt}
-\raggedright
-\sloppy
-\setlist{nosep}
-
-% Double spacing (FRAP 32(a)(4)) at 14 point. Single spacing for headings, quotations, footnotes,
-% the tables and the signature blocks.
-\newcommand{\cadouble}{\fontsize{14}{31}\selectfont}
-\newcommand{\casingle}{\fontsize{14}{17}\selectfont}
-\AtBeginDocument{\cadouble}
-\renewcommand{\normalsize}{\cadouble}
-\renewcommand{\footnotesize}{\casingle}
-
-% Footnotes: 14 point, single spaced (L.A.R. 32.2(a)); a rule of 30% of the line; the number, a space, the note.
-\setlength{\footnotesep}{0.9em}
-\renewcommand{\footnoterule}{\kern -3pt \hrule width 0.3\linewidth height 0.5pt \kern 2.6pt}
-\makeatletter
-\renewcommand{\@makefntext}[1]{\noindent\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
-\makeatother
-
-% Block quotations: single spaced, indented half an inch on each side.
-\renewenvironment{quote}{\begin{list}{}{\leftmargin=0.5in \rightmargin=0.5in \topsep=0.9em \itemsep=0pt \parsep=0pt}\item\relax\casingle\ignorespaces}{\end{list}}
+\usepackage{xengine} % lib/latex/xengine.sty, inlined by fb render
+% Links in the brief are citations (toa:) or none; the fallbacks keep pandoc's output valid.
+\providecommand{\href}[2]{#2}
+\providecommand{\hypertarget}[2]{#2}
+\providecommand{\hyperlink}[2]{#2}
 
 \makeatletter
-% ---- Headings. ca3.lua computes each printed label and indent, and emits:
-%      \cahead{level}{indent}{label}{title}  indent = half inches of the label column from the margin
-%      \capoint{label}{title}                the centered point heading of an Argument (level 2)
-%      \caheadplain{title}                   a heading that is neither numbered nor in the contents
-\newcommand{\cahang}[3]{%
-  \noindent\hspace*{#1}\makebox[0.5in][l]{#2}%
-  \begin{minipage}[t]{\dimexpr\linewidth-#1-0.5in\relax}\raggedright #3\end{minipage}\par}
-\newcommand{\cahead}[4]{%
-  \ifnum#1=1\relax
-    \par\addvspace{1.5em}%
-    \begingroup\casingle\centering\textbf{\MakeUppercase{#4}}\par\endgroup
-    \addvspace{1.1em}\nopagebreak%
-  \else
-    \par\addvspace{1.1em}%
-    \begingroup\casingle
-    \ifnum#1>3\relax
-      \cahang{\dimexpr0.5in*#2\relax}{\textbf{\textit{#3}}}{\textbf{\textit{#4}}}%
-    \else
-      \cahang{\dimexpr0.5in*#2\relax}{\textbf{#3}}{\textbf{#4}}%
-    \fi
-    \endgroup
-    \addvspace{0.9em}\nopagebreak%
-  \fi
-  \protected@write\@auxout{}{\string\tocentry{#1}{#2}{#3}{#4}{\thepage}}%
+% ---------------------------------------------------------------------------
+% Type and spacing: line boxes [typst pitch-double, pitch-single]
+% ---------------------------------------------------------------------------
+% Double spacing (FRAP 32(a)(4)), 31.8 bp boxes, for the body; single spacing, 20.4 bp boxes, for headings, quotations,
+% footnotes, the tables, the cover and the signatures.
+\renewcommand\normalsize{\xe@lines{14}{31.8}}
+\newcommand\briefsingle{\xe@lines{14}{20.4}}
+\renewcommand\footnotesize{\briefsingle}
+\renewcommand\small{\briefsingle}
+\normalsize
+\setlength{\parindent}{0.5in} % after xengine.sty's \raggedright, which sets it to zero
+\setcounter{secnumdepth}{0}
+\xe@lists{0.5in}
+% Section headings: 16 bp in 24 bp line boxes (typst style-heading, pitch-heading).
+\newcommand\briefheadsize{\xe@lines{16}{24}}
+% The page number in the 14 bp type, single-spaced.
+\def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
+  \def\@oddfoot{\reset@font\briefsingle\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}
+\pagestyle{plain}
+
+% An ellipsis (…) as one character, as typst and Word set it: the T1 fonts have no ellipsis glyph, so three periods in
+% the OpenType glyph's 0.86 em, marked in the PDF as the character U+2026 (ActualText, a stock pdfTeX primitive).
+\newcommand\briefellipsis{\pdfliteral direct{/Span<</ActualText<FEFF2026>>>BDC}\makebox[0.86em][s]{.\hfil.\hfil.}\pdfliteral direct{EMC}}
+
+% The vendored OpenType TeX Gyre Schola (2.609, which typst and Word set) differs from TeX Live's Type 1 tgschola
+% (2009) in a few advances: brackets, parentheses, slashes and operators are wider, the bold word space narrower.
+% ca3.lua writes a word that holds such characters as \xgt{<roman>}{<italic>}{<bold>}{<bold italic>}{\hss c\hss c ...}:
+% the word in a box as much wider as its OpenType advances (per mille of the em, in the current style), its characters
+% spread evenly across it, so that no gap is wide enough for the PDF text to read as a space ("60(d)(3)"); the bold word
+% space is set to the OpenType 278 per mille.
+\newlength\xg@w
+\DeclareRobustCommand\xgt[5]{\settowidth\xg@w{#5}\addtolength\xg@w{\dimexpr\fontdimen6\font*%
+  \if b\expandafter\@car\f@series\@nil\if i\expandafter\@car\f@shape\@nil #4\else #3\fi
+  \else\if i\expandafter\@car\f@shape\@nil #2\else #1\fi\fi/1000\relax}\makebox[\xg@w][s]{#5}}
+% A word set with the T1 font's f-ligature glyphs (as typst and LibreOffice set TeX Gyre Schola's), marked with its own
+% text, #1 in UTF-16BE hex (ActualText, a stock pdfTeX primitive), so that the PDF text reads the letters.
+\DeclareRobustCommand\xeat[2]{\pdfliteral direct{/Span<</ActualText<FEFF#1>>>BDC}#2\pdfliteral direct{EMC}}
+\AddToHook{selectfont}[ca3]{\if b\expandafter\@car\f@series\@nil\fontdimen2\font=\dimexpr\fontdimen6\font*278/1000\relax\fi}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\pandocbounded}[1]{#1}
+
+% Footnotes [footnote.entry]: 14 point (L.A.R. 32.2(a)), single spaced, 12.6 bp clear of the text, a 30 % rule, 7 bp
+% above each note; the mark (58 % of 14 pt) and a quarter em before the text. LaTeX resets the right skip inside a
+% footnote: it is set back here.
+\setlength{\skip\footins}{12.6bp}
+\renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
+\xe@footnotemarks{14}
+\renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
+  \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25em #1}
+
+% Quotations [quote]: single spaced, half an inch in on both sides, 14 bp above, below and between paragraphs.
+\renewenvironment{quote}{%
+  \par\addvspace{14bp}%
+  \begingroup\leftskip=0.5in\rightskip=\dimexpr0.5in\relax plus 1fil\relax\briefsingle\parindent=0pt\relax
+  \parskip=14bp\relax\vskip-\parskip % the first paragraph's skip is the 14 bp above, not more
+}{%
+  \par\endgroup\addvspace{14bp}%
 }
-\newcommand{\capoint}[2]{%
-  \par\addvspace{1.2em}\needspace{4\baselineskip}%
-  \begingroup\casingle\centering\textbf{\textsc{#1\ #2}}\par\endgroup
-  \addvspace{1em}%
-  \protected@write\@auxout{}{\string\tocentry{2}{0}{#1}{#2}{\thepage}}%
-}
-\newcommand{\caheadplain}[1]{%
-  \par\addvspace{1.5em}\needspace{4\baselineskip}%
-  \begingroup\casingle\centering\textbf{\MakeUppercase{#1}}\par\endgroup\addvspace{1.1em}}
 
-% ---- Table of contents. Entries are written to the aux file by the headings, read on the next pass.
-\newcommand{\toc@list}{}
-\newcommand{\tocentry}[5]{\g@addto@macro\toc@list{\tocitem{#1}{#2}{#3}{#4}{#5}}}
-\newcommand{\tocitem}[5]{%
-  \ifnum#1=1\relax
-    \par\addvspace{0.6em}\casingle\noindent\MakeUppercase{#4}\ \dotfill\ #5\par
-  \else
-    \par\addvspace{0.35em}\casingle
-    \cahang{\dimexpr0.5in*#2\relax}{#3}{#4\ \dotfill\ #5}%
-  \fi}
-\newcommand{\tocprint}{\toc@list}
+% ---------------------------------------------------------------------------
+% Headings. The labels come from ca3.lua; the layout is here. [style-heading]: 21 / 15.4 bp around a section heading,
+% 16.8 / 14 bp around a point heading, 15.4 / 12.6 bp around a sub-heading; a heading never ends a page (\nobreak, and
+% no orphans after it).
+% ---------------------------------------------------------------------------
+\newlength{\briefheadtab}\setlength{\briefheadtab}{0.5in}
+% The end of a heading: ca3.lua writes the contents entry right after the heading, so the entry is taken in here and
+% the \nobreak follows it (after the entry, a whatsit, the page could otherwise break below the heading).
+% A list right after a heading must not open with a break either (typst: the heading is sticky): LaTeX's \@nobreak
+% flag makes its first item skip the list's break penalty; the next paragraph clears it.
+\newcommand\brief@endhead[1]{\@ifnextchar\addcontentsline{\brief@endtoc{#1}}{\brief@keep{#1}}}
+\def\brief@endtoc#1\addcontentsline#2#3#4{\addcontentsline{#2}{#3}{#4}\brief@keep{#1}}
+\newcommand\brief@keep[1]{\nobreak\addvspace{#1}\global\@nobreaktrue\everypar{\global\@nobreakfalse\everypar{}}}
+% Section headings: bold capitals, centered.
+\newcommand\briefhead[1]{%
+  \par\addvspace{21bp}%
+  \begingroup\centering\briefheadsize\bfseries\MakeUppercase{#1}\par\endgroup
+  \brief@endhead{15.4bp}}
+% Point headings of the Argument: bold, centered, the label in front.
+\newcommand\briefpoint[2]{%
+  \par\addvspace{16.8bp}%
+  \begingroup\centering\briefsingle\bfseries #1\ #2\par\endgroup
+  \brief@endhead{14bp}}
+% Sub-headings: the label at indent #1 in a half-inch box, the text hanging under it.
+% #2 label, #3 style (bold; bold italic from level 4), #4 text.
+\newcommand\briefsub[4]{%
+  \par\addvspace{15.4bp}%
+  \begingroup\briefsingle\noindent\hangindent=\dimexpr#1+\briefheadtab\relax\hangafter=1\relax
+  \hspace*{#1}\makebox[\briefheadtab][l]{#3{#2}}#3{#4}\par\endgroup
+  \brief@endhead{12.6bp}}
+% Unnumbered sub-headings: bold, at the margin.
+\newcommand\briefplain[1]{%
+  \par\addvspace{16.8bp}%
+  \begingroup\briefsingle\noindent\textbf{#1}\par\endgroup
+  \brief@endhead{12.6bp}}
 
-% ---- Table of authorities. \toahit writes one entry per citation; the next pass reads them back.
-\newcommand{\toahit}[1]{\protected@write\@auxout{}{\string\toaentry{#1}{\thepage}}}
-\newcommand{\toaentry}[2]{%
-  \@ifundefined{toa@n@#1}{%
-    \expandafter\gdef\csname toa@n@#1\endcsname{0}%
-    \expandafter\gdef\csname toa@p@#1\endcsname{}%
-    \expandafter\gdef\csname toa@last@#1\endcsname{}}{}%
-  \expandafter\xdef\csname toa@n@#1\endcsname{\the\numexpr\csname toa@n@#1\endcsname+1\relax}%
-  \def\toa@cur{#2}%
-  \expandafter\ifx\csname toa@last@#1\endcsname\toa@cur\relax\else
-    \expandafter\ifx\csname toa@p@#1\endcsname\empty
-      \expandafter\gdef\csname toa@p@#1\endcsname{#2}%
-    \else
-      \expandafter\g@addto@macro\csname toa@p@#1\endcsname{, #2}%
-    \fi
-    \expandafter\gdef\csname toa@last@#1\endcsname{#2}%
-  \fi}
-\newcommand{\toacount}[1]{\@ifundefined{toa@n@#1}{0}{\csname toa@n@#1\endcsname}}
-\newcommand{\toapages}[1]{\ifnum\toacount{#1}>6\relax\emph{passim}\else\csname toa@p@#1\endcsname\fi}
-% A group heading (with "Page(s)" on the first group) prints when one of its authorities was cited.
-\newcommand{\toagroup}[3]{%
-  \gdef\toa@any{0}%
-  \@for\toa@k:=#2\do{\ifnum\toacount{\toa@k}>0\relax\gdef\toa@any{1}\fi}%
-  \ifnum\toa@any=1\relax
-    \par\addvspace{1.4em}\casingle\noindent\textbf{#1}%
-    \ifnum#3=1\relax\hfill\textbf{\underline{Page(s)}}\fi\par
-  \fi}
-% An authority prints when it was cited.
-\newcommand{\toaitem}[3]{%
-  \ifnum\toacount{#1}>0\relax
-    \par\addvspace{0.7em}\casingle
-    \begin{minipage}[t]{\linewidth}\raggedright\hangindent=0.35in\hangafter=1\noindent #2\ \dotfill\ \toapages{#1}\end{minipage}\par
-  \fi}
+% ---------------------------------------------------------------------------
+% Tables of contents and authorities (FRAP 28(a)(2)-(3)) [listing-row]: the text wraps before a page column (36 bp
+% in the contents, 56 bp or the page list's width in the authorities), a dot leader runs to the page.
+% ---------------------------------------------------------------------------
+% A contents row: #1 the label's indent, #2 label (empty: none), #3 title, #4 page, #5 space above.
+\newcommand\brief@tocrow[5]{%
+  \begingroup\briefsingle\setlength{\xe@col}{36bp}%
+  \def\brief@lab{#2}%
+  \xe@row{#5}{\dimexpr#1+\briefheadtab\relax}{%
+    \hspace*{#1}\ifx\brief@lab\empty\else\makebox[\briefheadtab][l]{#2}\fi #3}{#4}%
+  \endgroup}
+% A section heading's row (\addcontentsline{toc}{brieftoc}{TITLE}) and a numbered heading's row
+% (\addcontentsline{toc}{briefn}{{<label indent>}{<label>}{<title>}}).
+\newcommand\l@brieftoc[2]{\brief@tocrow{0in}{}{#1}{#2}{8.4bp}}
+\newcommand\l@briefn[2]{\brief@nrow#1{#2}}
+\def\brief@nrow#1#2#3#4{\brief@tocrow{#1}{#2}{#3}{#4}{4.9bp}}
+% The column head over the page numbers: #1 its text.
+\newcommand\briefTOCpage[1]{\par\addvspace{4.2bp}\begingroup\raggedleft\briefsingle\bfseries #1\par\endgroup}
+\newcommand\briefTOC{\par\begingroup\briefsingle\@starttoc{toc}\endgroup}
 
-% ---- Signature blocks: single spaced, on the right half of the page, kept together.
-\newcommand{\sigblock}[1]{%
-  {\Needspace{6\baselineskip}\par\addvspace{1.4em}\casingle
-  \hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright #1\end{minipage}\par}}
+% Table of authorities. A citation writes its page to the .aux file (\toamark); the next run reads the marks back
+% (\toaref) and keeps the distinct pages in document order. Seven or more pages print as "passim" (typst).
+\newcommand\toamark[1]{\protected@write\@auxout{}{\string\toaref{#1}{\thepage}}}
+\newcommand\toaref[2]{%
+  \@ifundefined{toacnt@#1}{%
+    \expandafter\newcount\csname toacnt@#1\endcsname
+    \expandafter\gdef\csname toapg@#1\endcsname{}}{}%
+  \@ifundefined{toaseen@#1@#2}{%
+    \expandafter\gdef\csname toaseen@#1@#2\endcsname{}%
+    \global\advance\csname toacnt@#1\endcsname 1
+    \ifnum\csname toacnt@#1\endcsname>1 \expandafter\g@addto@macro\csname toapg@#1\endcsname{, }\fi
+    \expandafter\g@addto@macro\csname toapg@#1\endcsname{#2}}{}}
+\newcommand\toapages[1]{%
+  \@ifundefined{toacnt@#1}{}{%
+    \ifnum\csname toacnt@#1\endcsname>6 \emph{passim}\else\csname toapg@#1\endcsname\fi}}
+% One authority [listing-row]: key, the lines before the citation (name and line break, or nothing), citation.
+\newlength\brief@w
+\newcommand\toaprint[3]{%
+  \@ifundefined{toacnt@#1}{}{%
+    \begingroup\briefsingle
+    \settowidth{\brief@w}{\toapages{#1}}%
+    \setlength{\xe@col}{56bp}\ifdim\brief@w>\xe@col\setlength{\xe@col}{\brief@w}\fi
+    \xe@row{9.8bp}{0.35in}{#2#3}{\toapages{#1}}%
+    \endgroup}}
+\newcommand\toaitem[3]{\toaprint{#1}{#2,\newline}{#3}}     % key, name, citation
+\newcommand\toaitemnoname[2]{\toaprint{#1}{}{#2}}          % key, citation
+% A group title; the first one carries the column head "Page(s)" (#2) at the right margin. It stays with its first
+% entry.
+\newcommand\toagroup[1]{%
+  \par\addvspace{19.6bp}\begingroup\briefsingle\noindent\textbf{#1}\par\endgroup\nobreak\addvspace{2.8bp}}
+\newcommand\toagroupfirst[2]{%
+  \par\addvspace{14bp}\begingroup\briefsingle\noindent\textbf{#1}\hskip 0pt plus 1fill\textbf{#2}\par\endgroup
+  \nobreak\addvspace{2.8bp}}
+
+% ---------------------------------------------------------------------------
+% Cover (FRAP 32(a)(2)); ca3.lua writes the cover from the frontmatter
+% ---------------------------------------------------------------------------
+% The gaps between the cover's parts: #1 bp, more to fill the page, none when the page is full (typst: the largest
+% gap at which the cover fits one page). The rules are drawn in vertical mode, outside any line box.
+\newcommand\briefnatural{\xe@natural}
+\newcommand\briefgap[1]{\par\vskip #1bp plus 1fill minus #1bp\relax}
+\newcommand\briefrulesmall{\par\hbox to\linewidth{\hss\vrule width 2in height 0.7bp\hss}}
+\newcommand\briefdouble{\par\hrule height 1.6bp\vskip 2.5bp\hrule height 0.5bp}
+
+% ---------------------------------------------------------------------------
+% Statements and certificates: double-spaced text, first lines indented (FRAP 32(a)(4)).
+% ---------------------------------------------------------------------------
+\newenvironment{briefcert}{\par\begingroup\normalsize\setlength{\parindent}{0.5in}}{\par\endgroup}
 \makeatother
 
 \begin{document}

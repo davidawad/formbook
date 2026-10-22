@@ -6,6 +6,7 @@
 // the YAML frontmatter of the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -13,9 +14,16 @@
 
 #let font-family = ("Times New Roman", "Liberation Serif")          // CA3-FORM-004: serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // CA3-FORM-004: 14-point or larger, everywhere (FRAP 32(a)(5)(A)).
-#let body-leading = 1.336em                // CA3-FORM-003: FRAP 32(a)(4): double-spaced. With the ascender-to-descender line box set below
-                                           // (0.909em in Liberation Serif) the baseline pitch is 2.245em = 31.4 pt at 14 pt.
-#let single-leading = 0.516em              // 0.909em + 0.516em = 1.425em (about 20 pt at 14 pt): headings, quotations, footnotes, TOC/TOA: single-spaced.
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; LaTeX \pdfeachlineheight).
+#let pitch-double = 31.4pt                 // CA3-FORM-003: FRAP 32(a)(4): double-spaced, about 2.24 x type size
+#let pitch-single = 20pt                   // headings, quotations, footnotes, TOC/TOA, cover, signatures: single-spaced
+#let heading-size = 16pt                   // section headings, a little larger than the body (whole points: Word has no others)
+#let single-leading = 0pt                  // the line boxes carry the spacing: no leading between them
+#let toc-page-col = 36pt                   // TOC: the page numbers keep the last 36 pt of the line to themselves
+#let toa-page-col = 56pt                   // TOA: page lists such as 1, 4, 6, 8 (a longer list widens its own row's column)
+#let half-width = 3.25in                   // the right half of the 6.5 in text width: cover counsel, signature
 #let page-margin = 1in                     // CA3-FORM-002
 #let para-indent = 0.5in
 #let toc-depth = 4
@@ -157,23 +165,24 @@
 
 #let style-heading(it) = {
   set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
-  set text(size: type-size)   // typst's built-in heading sizes are not used; every heading is body size or larger
+  set text(size: type-size, ..edges(pitch-single))   // typst's built-in heading sizes are not used; every heading is body size or larger
   if it.level == 1 {
     // Section headings: bold, capitals, centered, a little larger than the body.
-    block(width: 100%, sticky: true, above: 1.5em, below: 1.1em,
-      align(center, text(size: 1.15em, strong(upper(it.body)))))
+    block(width: 100%, sticky: true, above: 21pt, below: 15.4pt,
+      align(center, text(size: heading-size, strong(upper(it.body)))))
   } else if it.numbering == none {
     // Unnumbered sub-headings: bold, left.
-    block(width: 100%, sticky: true, above: 1.2em, below: 0.9em, strong(it.body))
+    block(width: 100%, sticky: true, above: 16.8pt, below: 12.6pt, strong(it.body))
   } else if in-argument(it.location()) and it.level == 2 {
-    // Point headings: bold small capitals, centered, with the roman numeral.
-    block(width: 100%, sticky: true, above: 1.2em, below: 1em,
-      align(center, strong(smallcaps(heading-label(it) + [ ] + it.body))))
+    // Point headings: bold, centered, with the roman numeral. Not small capitals: Times New Roman has none, and
+    // every engine would synthesize them differently.
+    block(width: 100%, sticky: true, above: 16.8pt, below: 14pt,
+      align(center, strong(heading-label(it) + [ ] + it.body)))
   } else {
     // Sub-headings: label in a fixed box, text hangs under the text, bold (italic below level 3).
     let ind = label-indent(it)
     let lab = heading-label(it)
-    block(width: 100%, sticky: true, above: 1.1em, below: 0.9em, hang(ind + heading-tab, {
+    block(width: 100%, sticky: true, above: 15.4pt, below: 12.6pt, hang(ind + heading-tab, {
       h(ind)
       box(width: heading-tab, if it.level >= 4 { strong(emph(lab)) } else { strong(lab) })
       if it.level >= 4 { strong(emph(it.body)) } else { strong(it.body) }
@@ -185,8 +194,6 @@
 // Tables of contents and authorities
 // ---------------------------------------------------------------------------
 
-#let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
-
 /// One table-of-contents row, built from a heading element. The label sits where the
 /// heading's own label sits in the body, and wrapped lines hang under the title text.
 #let toc-entry(it) = {
@@ -197,24 +204,18 @@
   if numbered and in-argument(hd.location()) and hd.level == 2 { ind = 0pt }
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
-  let hang-by = ind + heading-tab
-  // The page number lives in its own column so it never wraps onto a line of its own:
-  // a long title wraps, and the leader and number stay on its last line.
-  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    grid(columns: (1fr, auto), column-gutter: 0.4em,
-      hang(hang-by, {
-        h(ind)
-        if numbered { box(width: heading-tab, lab) }
-        title
-        h(0.8em)
-        dot-leader
-      }),
-      align(bottom + right, it.page()))))
+  // The page number has its own column (listing-row), so a title that fills its last line can never push the number
+  // onto a line of its own; the leader runs from the end of the title to the number.
+  listing-row(hd.location(), {
+    h(ind)
+    if numbered { box(width: heading-tab, lab) }
+    title
+  }, it.page(), toc-page-col, ind + heading-tab, if hd.level == 1 { 8.4pt } else { 4.9pt })
 }
 
 #let toc-section() = {
   heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  align(right, block(above: 0.3em, below: 0pt, strong(underline[Page])))
+  align(right, block(above: 4.2pt, below: 0pt, strong(underline[Page])))
   show outline.entry: toc-entry
   outline(title: none, target: selector(heading.where(outlined: true)), depth: toc-depth, indent: 0pt)
 }
@@ -247,7 +248,7 @@
         .filter(p => p.last().kind == kind and hits.any(h => h.value == p.first()))
         .sorted(key: p => sort-key(p.last()))
       if members.len() == 0 { continue }
-      block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
+      block(above: if first { 14pt } else { 19.6pt }, below: 2.8pt, sticky: true, {
         set par(first-line-indent: 0pt)
         strong(title)
         if first { h(1fr); strong(underline[Page(s)]) }
@@ -262,18 +263,14 @@
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
+        listing-row(none, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
             linebreak()
           }
           inl(a.cite)
-          h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
-        }))
+        }, page-text, calc.max(toa-page-col, measure(page-text).width), 0.35in, 9.8pt)
       }
     }
   }
@@ -291,7 +288,8 @@
 #let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
 
 #let cover-body(meta, gap) = {
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt, leading: single-leading, spacing: 4.9pt, justify: false)
   set align(center)
   v(gap * 0.6)
   strong[No. #need(meta, "case_number")]
@@ -305,7 +303,7 @@
   let sides = need(meta, "caption")
   for (i, side) in sides.enumerate() {
     for name in side.names { inl(name); parbreak() }
-    align(left, pad(left: 50%, inl(side.designation)))
+    align(left, pad(left: half-width, inl(side.designation)))
     if i < sides.len() - 1 { v(gap * 0.3); [v.]; v(gap * 0.3) }
   }
   v(gap)
@@ -332,16 +330,16 @@
   // full width, so a multi-office counsel list does not squeeze the cover's spacing to nothing.
   let groups = need(meta, "counsel")
   let group-block(gi, g) = block(breakable: false, {
-    set par(hanging-indent: 0pt, spacing: 0.5em)
+    set par(hanging-indent: 0pt, spacing: 7pt)
     for n in g.names { n; linebreak() }
     let lines = g.at("lines", default: ())
     if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
     for l in lines { h(0.5em); emph(inl(l)); linebreak() }
   })
   if groups.len() == 1 {
-    align(left, pad(left: 50%, group-block(0, groups.at(0))))
+    align(left, pad(left: half-width, group-block(0, groups.at(0))))
   } else {
-    align(left, grid(columns: (1fr, 1fr), column-gutter: 1em, row-gutter: 1em,
+    align(left, grid(columns: (1fr, 1fr), column-gutter: 14pt, row-gutter: 14pt,
       ..groups.enumerate().map(((gi, g)) => group-block(gi, g))))
   }
   v(gap)
@@ -366,37 +364,48 @@
 
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  block(breakable: false, above: 1.4em, {
+  block(breakable: false, above: 19.6pt, {
+    set text(..edges(pitch-single))
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    align(left, pad(left: 50%, {
+    // the right half of the text width (a relative pad inside this unbreakable block would resolve against less)
+    align(left, pad(left: half-width, {
       [Respectfully submitted,]
-      v(1.2em)
+      v(16.8pt)
       signature-line(meta)
       linebreak()
       upper(sig.signer)
       for l in sig.at("lines", default: ()) { linebreak(); h(0.5em); emph(inl(l)) }
     }))
-    if "date" in meta { v(0.8em); meta.date }
+    if "date" in meta { v(11.2pt); meta.date }
   })
 }
 
-#let form-sig-line(meta) = block(above: 1.6em, breakable: false, {
+#let form-sig-line(meta) = block(above: 22.4pt, breakable: false, {
+  set text(..edges(pitch-single))
   set par(first-line-indent: 0pt, leading: single-leading)
-  grid(columns: (1fr, 1fr), column-gutter: 1em,
-    [#signature-line(meta)\ #text(size: type-size)[Signature]],
+  grid(columns: (1fr, 1fr), column-gutter: 14pt,
+    [#signature-line(meta)\ Signature],
     [#meta.at("date", default: "")\ Date])
 })
+
+/// The double-spaced text of a certificate (FRAP 32(a)(4)), first lines indented.
+#let double-spaced(body) = {
+  set text(..edges(pitch-double))
+  set par(first-line-indent: (amount: para-indent, all: true), leading: 0pt, justify: false)
+  body
+}
 
 /// Certificate of Compliance: bar membership (L.A.R. 46.1(e)), type-volume (FRAP 32(a)(7)(B), 32(g)),
 /// typeface (FRAP 32(a)(5)-(6)), identical copies and virus check (L.A.R. 31.1(c)). CA3-CERT-001..003.
 #let certificate-of-compliance(meta, words) = {
   heading(level: 1, numbering: none)[Certificate of Compliance]
-  set par(first-line-indent: (amount: para-indent, all: true), leading: body-leading, spacing: body-leading, justify: false)   // FRAP 32(a)(4): text double-spaced
-  [The undersigned counsel certifies pursuant to L.A.R. 46.1(e) that counsel is a member in good standing of the bar of this Court.]
-  parbreak()
-  [This brief complies with the type-volume limitation of FRAP 32(a)(7)(B)(ii) because it contains #group-digits(words) words, including headings, footnotes, and quotations, and excluding the items exempted by FRAP 32(f). It is prepared in #meta.at("typeface", default: "14-point, proportionally spaced serif type") and complies with the typeface and type-style requirements of FRAP 32(a)(5) and (6).]
-  parbreak()
-  [The text of the electronic document is identical to the paper copies. Pursuant to L.A.R. 31.1(c), this electronic document was scanned for viruses using #need(meta, "virus_scanner") prior to filing and found to be virus free.]
+  double-spaced({
+    [The undersigned counsel certifies pursuant to L.A.R. 46.1(e) that counsel is a member in good standing of the bar of this Court.]
+    parbreak()
+    [This brief complies with the type-volume limitation of FRAP 32(a)(7)(B)(ii) because it contains #group-digits(words) words, including headings, footnotes, and quotations, and excluding the items exempted by FRAP 32(f). It is prepared in #meta.at("typeface", default: "14-point, proportionally spaced serif type") and complies with the typeface and type-style requirements of FRAP 32(a)(5) and (6).]
+    parbreak()
+    [The text of the electronic document is identical to the paper copies. Pursuant to L.A.R. 31.1(c), this electronic document was scanned for viruses using #need(meta, "virus_scanner") prior to filing and found to be virus free.]
+  })
   form-sig-line(meta)
 }
 
@@ -404,16 +413,19 @@
 #let certificate-of-service(meta) = {
   let svc = meta.service
   heading(level: 1, numbering: none)[Certificate of Service]
-  set par(first-line-indent: (amount: para-indent, all: true), leading: body-leading, spacing: body-leading, justify: false)   // FRAP 32(a)(4): text double-spaced
-  [I hereby certify that the foregoing brief was electronically filed on this date with the Clerk of the Court for the United States Court of Appeals for the Third Circuit by using the appellate CM/ECF system. Participants in the case who are registered CM/ECF users will be served by the appellate CM/ECF system.]
-  let unreg = svc.at("unregistered", default: ())
-  if unreg.len() > 0 {
-    parbreak()
-    strong[Service on Case Participants Who Are NOT Registered for Electronic Filing:]
-    parbreak()
-    [I certify that I served the foregoing document on this date by hand delivery, mail, third party commercial carrier for delivery within 3 calendar days, or, having obtained prior consent, by email to the following unregistered case participants (list each name and mailing/email address):]
-    for u in unreg { block(above: 0.7em, breakable: false, pad(left: 0.5in, [#u.name, #u.address])) }
-  }
+  double-spaced({
+    [I hereby certify that the foregoing brief was electronically filed on this date with the Clerk of the Court for the United States Court of Appeals for the Third Circuit by using the appellate CM/ECF system. Participants in the case who are registered CM/ECF users will be served by the appellate CM/ECF system.]
+    let unreg = svc.at("unregistered", default: ())
+    if unreg.len() > 0 {
+      parbreak()
+      strong[Service on Case Participants Who Are NOT Registered for Electronic Filing:]
+      parbreak()
+      [I certify that I served the foregoing document on this date by hand delivery, mail, third party commercial carrier for delivery within 3 calendar days, or, having obtained prior consent, by email to the following unregistered case participants (list each name and mailing/email address):]
+      for u in unreg {
+        block(above: 9.8pt, breakable: false, pad(left: para-indent, par(first-line-indent: 0pt, [#inl(u.name), #inl(u.address)])))
+      }
+    }
+  })
   form-sig-line(meta)
 }
 
@@ -437,38 +449,34 @@
     title: plain(inl(need(meta, "brief_title"))) + ", No. " + need(meta, "case_number"),
     author: need(meta, "signature").signer,
   )
-  set page(paper: "us-letter", margin: page-margin, number-align: center, footer-descent: 30%)
-  set text(
-    font: font-family, size: type-size, lang: "en", region: "us",
-    hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
-  )
-  set par(
-    leading: body-leading, spacing: body-leading,
-    first-line-indent: (amount: para-indent, all: true), justify: false,
-  )
+  // The page number: centered in a single-spaced line box whatever the text around it (Word's footer, LaTeX's
+  // plain page style), so it sits at the same place on every page.
+  set page(paper: "us-letter", margin: page-margin, footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model (lib/typst/xengine.typ): first fit, no kerning or ligatures, no hyphenation, line
+  // boxes of the body pitch, footnote marks at 58 %, lists with the number in a half-inch box, a section sign kept
+  // with its number, no break inside "60(b)(5)".
+  show: xengine.with(pitch: pitch-double, list-indent: para-indent)
   set heading(numbering: none)
   set footnote.entry(
-    gap: 0.5em, clearance: 0.9em, indent: 0pt,
+    gap: 7pt, clearance: 12.6pt, indent: 0pt,
     separator: line(length: 30%, stroke: 0.5pt),
   )
   show footnote.entry: it => {
-    set text(size: type-size)   // typst's default is 0.85em; FRAP 32(a)(5) allows nothing under 14 pt
-    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em)
+    set text(size: type-size, ..edges(pitch-single))   // typst's default is 0.85em; FRAP 32(a)(5) allows nothing under 14 pt
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 7pt)
     // marker, a thin space, then the note (typst's default runs them together)
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
     [#super(num)#h(0.25em)#note.body]
   }
-  show quote.where(block: true): it => block(above: 1em, below: 1em, pad(left: para-indent, right: para-indent, {
-    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
+  show quote.where(block: true): it => block(above: 14pt, below: 14pt, pad(left: para-indent, right: para-indent, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: 14pt)
     it.body
   }))
-  // Typography that holds for any text: never break inside a token of adjacent parentheses
-  // ("60(b)(5)"), and never between a section sign / pilcrow and its number. Done with
-  // unbreakable boxes so the extracted text stays exactly the author's characters.
-  show regex("\\S*\\)\\(\\S*"): it => box(it)
-  show regex("[§¶] \\S+"): it => box(it)
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {
@@ -477,14 +485,17 @@
   }
 
   // ---- cover ----
-  cover(meta)
+  { set text(..edges(pitch-single)); cover(meta) }
 
   // ---- front matter (lowercase roman) ----
   set page(numbering: "i")
   counter(page).update(1)
-  toc-section()
-  pagebreak()
-  toa-section(authorities)
+  {
+    set text(..edges(pitch-single))
+    toc-section()
+    pagebreak()
+    toa-section(authorities)
+  }
 
   // ---- body (arabic from 1) ----
   set page(numbering: "1")
@@ -509,10 +520,13 @@
   }
 
   // ---- certificates of counsel ----
-  pagebreak(weak: true)
-  certificate-of-compliance(meta, words)
-  if meta.at("service", default: (:)).at("certificate", default: false) {
+  {
+    set text(..edges(pitch-single))
     pagebreak(weak: true)
-    certificate-of-service(meta)
+    certificate-of-compliance(meta, words)
+    if meta.at("service", default: (:)).at("certificate", default: false) {
+      pagebreak(weak: true)
+      certificate-of-service(meta)
+    }
   }
 }

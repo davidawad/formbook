@@ -79,8 +79,8 @@ Pages reviewed: 9 of 9.
 ## Engines
 
 - **typst** (`typst/`): primary, unchanged.
-- **latex** (`latex/template.tex`, `latex/ca3.lua`; built by `tools/render-latex.sh` with tectonic, two passes): 14 pt EB Garamond from the vendored `fonts/`, double spaced, 1 inch margins, roman front matter and arabic body; the Argument's point headings are centered with roman numerals; the certificates each on their own page. The word limit is 6,500 words (FRAP 32(a)(7)(B)(ii)), checked from the markdown source. Differs from typst: 10 pages against typst's 9; the certificate of compliance names LaTeX where typst names Typst; the layout is checked by eye on a contact sheet, not by Gate 2. Tier 1 is not signed off for this engine.
-- **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`): writes `usage/OUTPUT-<id>.docx`. `docx.pdf` checks are **BLOCKED**: LibreOffice (`soffice`) is not installed and has no conda-forge package. Not provided (not checked, not claimed): table of contents and table of authorities page numbers; footer page numbers; the cover's placement; body first-line indents; the Argument's centered point headings.
+- **latex** (`latex/template.tex`, `latex/ca3.lua`; fb render, stock pdflatex until the aux file settles): Times 14 pt (newtx, the metric twin of the typst template's Times New Roman) in the typst line boxes, roman front matter and arabic body; the Argument's point headings centered with roman numerals; the certificates each on their own page. The word limit is 6,500 words (FRAP 32(a)(7)(B)(ii)), checked from the markdown source. 10 pages, every line and page broken where typst breaks them (see "Cross-engine" below).
+- **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`; `.docx.pdf` from LibreOffice): Times New Roman 14 pt; sections and footers; the contents and authorities carry their page numbers (fb render's two-pass page map); the earlier gaps (no page numbers, footers, first-line indents or centered point headings) are fixed. Opened in LibreOffice only, not in Word.
 
 ## Verification pass 2026-10-16 (fb-595.26.3)
 
@@ -91,3 +91,13 @@ Pages reviewed: 9 of 9.
 - After both fixes only PDF pages 1, 8 and 9 changed (every other page is pixel-identical to the pre-fix render); those three pages were viewed again.
 - latex re-rendered (`--engine latex`): exit 0, 10 pages, as recorded. Its pages were not reviewed in this pass. docx not touched (no `soffice`).
 - Gaps unchanged: see Known gaps (portion transcribed, grey cover, 15-page cap not enforced, L.A.R. text not retrieved, one saved exemplar, no monospaced option).
+
+## Cross-engine (fb-595.54.2)
+
+All three engines on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Adopting the reference breaker"), `params.cross_engine: gate` in `eval.yaml`. The face is the one the typst template sets, Times New Roman (Liberation Serif, its metric twin, vendored; newtx in LaTeX); the "EB Garamond" notes above predate it. The latex and docx filters (`latex/ca3.lua`, `docx/ca3.lua`) are one file for the three Third Circuit briefs; only `TYPE` differs between the copies.
+
+- typst: `show: xengine.with(pitch: 31.4pt, list-indent: 0.5in)`; line boxes of 31.4 pt (body, certificates' text) and 20 pt (headings, quotations, footnotes, tables, cover, signatures); section headings 16 pt (were 1.15 em); every space in pt; `listing-row` contents and authorities; point headings bold (no small capitals: Times New Roman has none); the cover's two counsel columns 14 pt apart (were 1 em); the signature at the middle of the text width as a length.
+- latex: as the opening brief; the two counsel columns as minipages in a line of natural height (`\xe@natural`).
+- docx: `make-reference.sh` calls `lib/docx/xengine-reference.sh` (Times New Roman, 28 half points, body 628, single 400 twips) and adds Body Text Noted; the filter as in the opening brief, the counsel columns as a borderless table, the certificate's signature line as two tab columns (typst `form-sig-line`).
+- The findings of the opening brief apply here too and are handled by the same shared filters; the third (the lead before a right tab) was found on this brief's contents row "1. An unbounded information interest ... disclosure.", which LibreOffice wrapped one word early with three 14 pt no-break spaces.
+- Before (baseline): latex 10 = 10 pages, 42.4 % of lines with typst's break (first difference p1 line 4); docx 10 vs 11 pages, 17.6 %. After: typst 10 pages; latex and docx 10 pages, 166/166 lines, every page starting and ending on typst's words (XENG-001..003 PASS); tier 1: typst 8 passed, latex 11 passed, docx 12 passed, 0 failed. Every page of the typst, latex and docx PDFs viewed.
