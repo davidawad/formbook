@@ -2,25 +2,36 @@
 // Rules: Dist. Idaho Loc. Civ. R. 7.1(a)(2) (memorandum at most 20 pages; no small fonts or minimal spacing to
 // comply with the limit), 7.1(a)(3) (the motion's docket number in the caption), 7.1(b)(1) (a separate brief);
 // Loc. Civ. R. 5.2 (8 1/2 x 11, double-spaced, 1-inch margins, 12-point type including footers and footnotes,
-// numbered pages, counsel block, caption four inches down, CM/ECF file number). See ../README.md.
+// numbered pages, counsel block, caption four inches down, CM/ECF file number). See ../README.md and ../../rules.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")        // no face named by LR 5.2(a) or 7.1(a)(2), so EB Garamond (fonts/eb-garamond); see README.md, typeface row
+#let font-family = ("Times New Roman", "Liberation Serif")   // LR 5.2(a) and 7.1(a)(2) name no face; Times New Roman is the house standard (docs/FONTS.md), Liberation Serif its vendored metric twin
 #let type-size = 12pt                   // LR 5.2(a): at least 12 point, footnotes and footer included
-#let page-w = 8.5in
-#let page-h = 11in
 #let margin = 1in                       // LR 5.2(a): top, bottom and side margins at least one inch
-#let pitch = 24pt                       // one double-spaced line at 12 pt (measured, README.md)
-#let body-leading = 1.35em              // LR 5.2(a): double-spaced; 24 pt baseline pitch at 12 pt
-#let single-leading = 0.5em             // counsel, caption, signature block, footnotes: single-spaced
-#let para-indent = 0.5in                // first-line indent of body paragraphs
+#let para-indent = 0.5in                // first-line indent of body paragraphs; the hanging indent of a level-3 heading
+#let item-indent = 0.5in                // bulleted items: the bullet at this indent
+#let item-label = 0.5in                 // the bullet's box; the item's text hangs after it
 #let caption-top = 4in                  // LR 5.2(b): caption commences four inches below the top of the first page
-#let caption-left = 3.25in              // width of the party column of the caption
-#let text-width = page-w - 2 * margin
+#let caption-left = 3.25in              // width of the party column of the caption (ruled right and below)
+#let caption-pad = 10pt                 // the party text stops this far left of the caption's rule
+#let caption-bottom = 8pt               // and this far above its bottom rule
+#let caption-right = 0.35in             // the right column's text starts this far right of the rule
+#let sig-left = 3.1in                   // the signature grid: the date column, then the signature column
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-single = 13.8pt              // a single line: 1.15 x the type size (counsel, caption, signature, footer, footnotes)
+#let pitch-double = 2 * pitch-single    // LR 5.2(a): double-spaced (Times New Roman 12 pt, double in Word)
+#let gap = pitch-single                 // one blank single line: around the caption, inside the signature block
+#let cover-gap = 12pt                   // the least space between the counsel block and the court title
+#let note-gap = 7pt                     // between two footnotes
+#let note-clearance = 3.5pt             // from the last text line to the separator: with note-gap, the 10.5 pt LibreOffice keeps between the text and the first note
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -35,128 +46,119 @@
 
 /// Inline markdown (names with *et al.*, etc.).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// Whole double-spaced line slots: the block is rounded up to a multiple of `pitch`, so whatever follows it starts
-/// on the grid and never overlaps (a block sized to its text leaves the next line too close).
-#let on-grid(c) = context {
-  let h = measure(width: text-width, c).height
-  block(width: text-width, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, c)
-}
-
-/// Single-spaced lines, one per item; the stack keeps the single pitch.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  // An empty item is a line-high gap (between counsel groups, for example).
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => if i.trim() == "" { block(height: 1em) } else { inl(i) }))
-}
+/// One single-spaced line block (a paragraph of its own), with explicit space above and below it.
+#let line-block(above: 0pt, below: 0pt, left: 0pt, right: 0pt, body) = block(width: 100%, above: above, below: below,
+  pad(left: left, right: right, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt)
+    body
+  }))
 
 // ---------------------------------------------------------------------------
 // Page furniture
 // ---------------------------------------------------------------------------
 
-/// Page number and paper title, each page (LR 5.2(a): each page numbered consecutively).
+/// Page number and paper title, each page (LR 5.2(a): each page numbered consecutively; 12 point).
 #let footer-block(title) = context {
-  set text(size: type-size)
-  align(left, [#counter(page).display() - #upper(title)])
+  set text(size: type-size, ..edges(pitch-single))
+  align(left, [#counter(page).display() - #upper(inl(title))])
 }
 
 // ---------------------------------------------------------------------------
 // Cover: counsel (upper left), court title and caption (four inches down), title with the motion's docket number
 // ---------------------------------------------------------------------------
 
-#let counsel-block(meta) = line-stack(meta.counsel)
-
-#let court-title(meta) = stack(dir: ttb, spacing: single-leading, ..meta.caption.court.map(l => align(center, text(weight: "bold", l))))
+#let counsel-block(meta) = for l in meta.counsel {
+  // An empty item is a blank single line (between counsel groups).
+  if l.trim() == "" { block(width: 100%, height: pitch-single, above: 0pt, below: 0pt) } else { line-block(inl(l)) }
+}
 
 #let caption(meta) = grid(
   columns: (caption-left, 1fr),
-  column-gutter: 0.25in,
-  block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt), {
+  stroke: (x, y) => if x == 0 { (right: 0.75pt, bottom: 0.75pt) } else { none },
+  pad(right: caption-pad, bottom: caption-bottom, {
     // Each party: its names, then its designation; "v." between the parties.
-    let rows = ()
     for (k, p) in meta.caption.parties.enumerate() {
-      if k > 0 { rows.push("v.") }
-      rows += p.names + (p.designation,)
+      if k > 0 { line-block[v.] }
+      for n in p.names { line-block(inl(n)) }
+      line-block(inl(p.designation))
     }
-    line-stack(rows)
   }),
-  block(inset: (left: 0.1in), {
-    // LR 5.2(b)(3): the file number as it appears in CM/ECF.
-    line-stack(("Case No. " + meta.case_number,))
-    v(body-leading * 0.5)
-    text(weight: "bold", inl(meta.brief_title))
-    if "motion_docket" in meta and meta.motion_docket != none {
+  {
+    // LR 5.2(b)(3): the file number as it appears in CM/ECF; (5): the title of the paper.
+    line-block(left: caption-right)[Case No. #meta.case_number]
+    line-block(above: gap, left: caption-right, strong(inl(meta.brief_title)))
+    if meta.at("motion_docket", default: none) != none {
       // LR 7.1(a)(3): a paper filed in support of a motion carries that motion's docket number in the caption.
-      v(body-leading * 0.5)
-      text(weight: "bold", "[" + meta.motion_docket + "]")
+      line-block(above: gap, left: caption-right, strong("[" + meta.motion_docket + "]"))
     }
-  }),
+  },
 )
 
-#let cover(meta) = context {
-  counsel-block(meta)
-  // The caption starts four inches below the top of the page; counsel that needs more room pushes it down
-  // (LR 5.2(b): "except where additional space is required for identification").
-  let used = measure(width: text-width, counsel-block(meta)).height
-  v(calc.max(caption-top - margin - used, 12pt))
-  court-title(meta)
-  v(body-leading)
-  caption(meta)
-  v(body-leading)
+/// LR 5.2(b): the caption starts four inches below the top of the page; counsel that needs more room pushes it
+/// down ("except where additional space is required for identification"), at least `cover-gap` below the counsel.
+#let cover(meta) = {
+  block(width: 100%, above: 0pt, below: 0pt, context {
+    let c = counsel-block(meta)
+    let used = measure(width: page.width - 2 * margin, c).height
+    block(width: 100%, height: calc.max(caption-top - margin, used + cover-gap), above: 0pt, below: 0pt, c)
+  })
+  for l in meta.caption.court { line-block(align(center, strong(inl(l)))) }
+  block(width: 100%, above: gap, below: 0pt, caption(meta))
 }
 
 // ---------------------------------------------------------------------------
 // Body, signature and certificate
 // ---------------------------------------------------------------------------
 
-#let signature-block(meta) = block(width: text-width, above: body-leading, breakable: false, {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  grid(
-    columns: (2.9in, 1fr),
-    column-gutter: 0.2in,
-    [Dated: #meta.date],
-    {
-      [Respectfully submitted,]
-      v(single-leading * 2)
-      line-stack(meta.signature.firm)
-      v(single-leading * 2)
-      line-stack(("/s/ " + meta.signature.signer,) + meta.signature.lines)
-    },
-  )
-})
+/// The signature grid: `left` beside the lines of the signature column, one block that never breaks.
+#let sig-grid(left, lines) = block(width: 100%, breakable: false, above: gap, below: 0pt, grid(
+  columns: (sig-left, 1fr),
+  left,
+  for l in lines { line-block(above: l.at(0), inl(l.at(1))) },
+))
 
-/// A level-1 heading: a centered bold caps line on the grid, with a weak space above.
-#let heading-block(c) = {
-  v(body-leading * 0.5, weak: true)
-  on-grid(align(center, text(weight: "bold", upper(c))))
-}
+#let signature-block(meta) = sig-grid(
+  line-block[Dated: #inl(meta.date)],
+  ((0pt, "Respectfully submitted,"),)
+    + meta.signature.firm.enumerate().map(((i, l)) => (if i == 0 { gap } else { 0pt }, l))
+    + ((gap, "/s/ " + meta.signature.signer),)
+    + meta.signature.lines.map(l => (0pt, l)),
+)
+
+/// A level-1 heading's look (bold centered capitals on the body pitch), for the certificate's title too.
+#let head-1(body) = align(center, strong(upper(body)))
+
+/// A body paragraph at the double pitch, first line indented.
+#let body-par(content) = block(width: 100%, above: 0pt, below: 0pt,
+  par(first-line-indent: (amount: para-indent, all: true), content))
 
 /// Certificate of service: its own page (convention; LR 5.2 is silent), signed by the filer.
 #let certificate-block(meta) = {
   pagebreak(weak: true)
-  heading-block[CERTIFICATE OF SERVICE]
-  par(leading: body-leading, first-line-indent: 0pt, h(para-indent) + meta.certificate.text)
-  block(width: text-width, above: body-leading, breakable: false, grid(
-    columns: (2.9in, 1fr),
-    column-gutter: 0.2in,
-    [],
-    line-stack(("/s/ " + meta.certificate.signer,) + meta.certificate.lines),
-  ))
+  block(width: 100%, sticky: true, above: 0pt, below: 0pt, head-1[Certificate of Service])
+  body-par(inl(meta.certificate.text))
+  sig-grid([], ((0pt, "/s/ " + meta.certificate.signer),) + meta.certificate.lines.map(l => (0pt, l)))
 }
 
-/// Markdown to content, with its `[^n]` references turned into typst footnotes (cmarker has no footnotes; the
-/// definitions are `[^n]: text` chunks, collected by `body-text`).
+/// Markdown to content, with its `[^n]` references turned into typst footnotes (the definitions are `[^n]: text`
+/// chunks, collected by `body-text`). The mark stands against the word before it (no space, as Word's filter sets it);
+/// a space after the mark is kept.
 #let with-notes(t, notes) = {
   let out = []
   let pos = 0
   for m in t.matches(regex("\\[\\^(\\d+)\\]")) {
     let key = m.captures.at(0)
     assert(key in notes, message: "idd-motion-brief: footnote [^" + key + "] has no definition in the sample")
-    out += cmarker.render(t.slice(pos, m.start), raw-typst: false, smart-punctuation: true, h1-level: 1)
-    out += footnote(cmarker.render(notes.at(key), raw-typst: false, smart-punctuation: true, h1-level: 1))
+    out += inl(t.slice(pos, m.start).trim(at: end))
+    out += footnote(md(notes.at(key)))
     pos = m.end
   }
-  out + cmarker.render(t.slice(pos), raw-typst: false, smart-punctuation: true, h1-level: 1)
+  let rest = t.slice(pos)
+  if pos > 0 and rest.starts-with(regex("\\s")) { out += [ ] }
+  out + inl(rest.trim(at: start))
 }
 
 /// The items of a markdown bullet list; a line without a bullet continues the item before it.
@@ -174,8 +176,7 @@
 }
 
 /// Body paragraphs are not numbered (a memorandum, not a pleading). Each blank-line-separated chunk of markdown is
-/// one paragraph unless it is a heading, a list or a footnote definition. Chunks are not wrapped in a `show par`
-/// rule (a show rule that re-wraps paragraph content recurses without end in typst 0.15).
+/// one paragraph unless it is a heading, a list, a section break or a footnote definition.
 #let body-text(body) = {
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
   // Footnote definitions, keyed by their number; they are placed where their reference is.
@@ -189,24 +190,19 @@
     if t.match(regex("^\\[\\^(\\d+)\\]:")) != none {
       continue
     } else if t.starts-with("#") {
-      // Headings are sticky through their show rules: they move to the next page with the chunk after them.
-      cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+      md(t)
     } else if t.starts-with(regex("^[-*+][ \t]")) {
-      // A bulleted list may break across pages; each item is spaced by body-leading.
-      set par(leading: body-leading)
-      list(..bullet-items(t).map(i => with-notes(i, notes)))
-      v(body-leading * 0.5)
+      // Bulleted items, each a paragraph of its own at the body pitch (no pad or block around it: typst would set
+      // its footnote where the item starts): the bullet at the item indent in a box, the text hanging after it.
+      for i in bullet-items(t) {
+        par(hanging-indent: item-indent + item-label, first-line-indent: (amount: item-indent, all: true),
+          [#box(width: item-label)[•]#with-notes(i, notes)])
+      }
     } else if t == "\\* \\* \\*" {
-      // A section break is centered on its own line.
-      on-grid(align(center, [\* \* \*]))
+      // A section break, centered on its own line.
+      block(width: 100%, above: 0pt, below: 0pt, align(center, [\* \* \*]))
     } else {
-      // A paragraph flows like any text (it may break across pages). The indent is inline, because typst does not
-      // indent the first paragraph after a block (a list, the caption), and every paragraph here is indented.
-      par(leading: body-leading, first-line-indent: 0pt, {
-        h(para-indent)
-        with-notes(t, notes)
-      })
-      v(body-leading * 0.5)
+      body-par(with-notes(t, notes))
     }
   }
 }
@@ -216,36 +212,41 @@
     paper: "us-letter",
     margin: margin,
     footer: footer-block(meta.footer_title),
-    footer-descent: 0.4in,
+    footer-descent: 30%,
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  set enum(numbering: "(a)", indent: 0.5in, body-indent: 0.4in, spacing: body-leading * 0.5)
-  set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading * 0.5, marker: [•])
-  // Footnotes: 12 point, single-spaced (LR 5.2(a) allows single spacing in footnotes).
-  set footnote.entry(separator: line(length: 1.5in, stroke: 0.5pt), gap: 0.4em)
-  show footnote.entry: set text(size: type-size)
-  show footnote.entry: set par(leading: single-leading)
+  set document(title: meta.brief_title)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch (double-spaced).
+  show: xengine.with(pitch: pitch-double, list-indent: none, footnote-widows: false)
+  // A doubled sign stays with its number too ("§§ 7501"; xengine binds a single one).
+  show regex("[§¶]+ \\S+"): it => box(it)
+  // Footnotes (LR 5.2(a)): 12 point, single-spaced; the mark, a space, the note (Word's footnote).
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 2in, stroke: 0.5pt))
+  show footnote.entry: it => {
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
+    [#super(num)#h(0.25em)#note.body]
+  }
 
-  // Headings: level 1 is a centered section; level 2 a centered bold sub-heading; level 3 an argument heading, bold, left.
-  // Each heading fills whole double-spaced slots, so the paragraph after it starts on the grid.
-  show heading.where(level: 1): it => heading-block(it.body)
-  show heading.where(level: 2): it => {
-    v(body-leading * 0.25, weak: true)
-    on-grid(align(center, text(weight: "bold", it.body)))
-  }
-  show heading.where(level: 3): it => {
-    v(body-leading * 0.25, weak: true)
-    on-grid(par(leading: body-leading, first-line-indent: 0pt, hanging-indent: 0.5in, text(weight: "bold", it.body)))
-  }
+  // Headings at the body pitch, on the line grid, kept with the text after them: level 1 a centered bold section
+  // title in capitals; level 2 a centered bold sub-heading; level 3 an argument heading, bold, hanging.
+  show heading: it => block(sticky: true, width: 100%, above: 0pt, below: 0pt, {
+    set text(size: type-size)
+    set par(first-line-indent: 0pt)
+    if it.level == 1 { head-1(it.body) } else if it.level == 2 { align(center, strong(it.body)) } else {
+      par(hanging-indent: para-indent, strong(it.body))
+    }
+  })
 
   cover(meta)
+  block(width: 100%, above: gap, below: 0pt, [])
 
   body-text(body)
 
   signature-block(meta)
 
-  if "certificate" in meta and meta.certificate != none {
-    certificate-block(meta)
-  }
+  if meta.at("certificate", default: none) != none { certificate-block(meta) }
 }

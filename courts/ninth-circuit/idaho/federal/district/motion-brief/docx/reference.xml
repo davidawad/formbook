@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Idaho memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman; Loc. Civ. R. 5.2(a) names no face and asks at least 12 point, footnotes
+     and footer included; size 24 half points); Body Text in exact 27.6 pt line boxes (typst pitch-double; LR 5.2(a)
+     double-spaced) with a half-inch indent, and the headings in them, with no space of their own; the counsel,
+     caption, signature and footer lines in 13.8 pt boxes (typst pitch-single); footnotes 12 pt (LR 5.2(a)) in 13.8 pt
+     boxes, 7 pt apart. Two styles of their own for a paragraph pandoc writes because it carries a footnote: "Body
+     Text Note" (Body Text, the note's paragraph) and "List Item Indented" (a bulleted item: the bullet at 0.5 in, the
+     text hanging at 1 in). Letter page with 1-inch margins (LR 5.2(a)). docx/idd-motion-brief.lua writes every other
+     paragraph's own spacing, the footer (the page number and the paper's title, LR 5.2(a), its line 36.75 pt above
+     the page foot: 735 twips, where typst sets it, footer-descent 30 %) and the last section. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" note="276" note-size="24" note-after="140" footer="735">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="0" w:line="552" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="ListItemIndented"><w:name w:val="List Item Indented"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="0" w:line="552" w:lineRule="exact"/><w:ind w:left="1440" w:hanging="720"/></w:pPr></w:style>
+</reference>

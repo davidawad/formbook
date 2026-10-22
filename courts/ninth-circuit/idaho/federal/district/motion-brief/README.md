@@ -7,20 +7,19 @@ Folder: `courts/ninth-circuit/idaho/federal/district/motion-brief/` (self-contai
 |---|---|
 | exemplar | yes: three filings, `usage/FILED-EXAMPLE-motion-brief.pdf` (primary; transcribed and used for the overlay), `…-anderson-2-24-cv-00341-motion-brief.pdf`, `…-robinson-1-24-cv-00306-motion-brief.pdf`. See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md` (the full text of the 14-page memorandum, with its footnotes, headings and signature; the certificate of service is in frontmatter; see Known gaps) |
-| typeface | face required: none (LR 5.2(a) sets only a 12-point minimum; LR 7.1(a)(2) names no face; checked on the Court's site 2026-10-15). Substitute: none needed; EB Garamond kept. Fit: n/a. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, letter, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold embedded only, no warnings |
-| overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF (`usage/SAMPLE-tarbell-group-…pdf`), which is not in this snapshot (`usage/` holds only `SOURCE.md`). The `.txt` page map is from the earlier run and is stale against this render; regenerate once the exemplar is restored. |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed on the 2026-10-15 re-render; no template change since the last review) |
+| typeface | face required: none (LR 5.2(a) sets only a 12-point minimum, footnotes and footer included; LR 7.1(a)(2) names no face; checked on the Court's site 2026-10-15). Times New Roman 12 pt, the house standard (`docs/FONTS.md`), as the Robinson and Anderson exemplars (Tarbell is set in Century Schoolbook, one filer's choice); typst names `("Times New Roman", "Liberation Serif")`, the docx the same face through `{font}`. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `usage/OUTPUT-motion-brief.docx` / `.docx.pdf`, 14 pages each (13 and the certificate of service), letter, Times New Roman Regular and Bold embedded only, no warnings |
+| overlay | diagnostic only, not committed: `just overlay` writes `.overlay/<doc path>/OVERLAY-<id>.pdf` from `usage/FILED-EXAMPLE-<id>.pdf` (not re-run for the cross-engine port) |
+| pages reviewed | 14 of 14 on both engines (typst and docx.pdf, every page at 60 dpi, side by side, 2026-10-22, after the cross-engine port) |
 
 ## Commands
 
 ```
 sh tools/render.sh courts/ninth-circuit/idaho/federal/district/motion-brief usage/INPUT-motion-brief.md
-sh tools/overlay.sh courts/ninth-circuit/idaho/federal/district/motion-brief tarbell-motion-brief \
-  courts/ninth-circuit/idaho/federal/district/motion-brief/usage/FILED-EXAMPLE-motion-brief.pdf
+sh tools/render.sh --engine docx courts/ninth-circuit/idaho/federal/district/motion-brief usage/INPUT-motion-brief.md
+sh tools/check.sh courts/ninth-circuit/idaho/federal/district/motion-brief [--engine docx]
+just overlay courts/ninth-circuit/idaho/federal/district/motion-brief
 ```
-
-File names follow the tools, not the brief's shorthand: `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt`. The sample is `INPUT-<id>.md` and the id is `tarbell-motion-brief`. `tools/` is not edited.
 
 ## Governing rules
 
@@ -31,7 +30,7 @@ Primary source: the District of Idaho's Local Civil Rules, the print packet from
 | Dist. Idaho Loc. Civ. R. 7.1(a)(2) | "No memorandum of points and authorities in support of or in opposition to a motion may exceed twenty (20) pages in length … The use of small fonts and/or minimal spacing to comply with the page limitation is not acceptable." | The template sets 12 pt type and double spacing with no shrink option. The 20-page cap is not enforced by the template (see Known gaps). |
 | Dist. Idaho Loc. Civ. R. 7.1(a)(3) | Documents "in support of … other documents must be clearly labeled with the docket number of the motion in the caption." | `motion_docket` frontmatter: the caption shows "[Doc. 26]" under the title. |
 | Dist. Idaho Loc. Civ. R. 7.1(b)(1) | "Each motion … must be accompanied by a separate brief … containing all of the reasons and points and authorities relied upon by the moving party." | Output is a stand-alone memorandum with its own caption; the title says "MEMORANDUM IN SUPPORT OF MOTION TO DISMISS". |
-| Dist. Idaho Loc. Civ. R. 5.2(a) | 8½ × 11; "double-spaced, except for quoted material and footnotes"; "Each page must be numbered consecutively"; margins "at least one inch"; "the font or typeface for all text, including footnotes, must be at least 12 point." | `page-w`/`page-h`, `margin = 1in`, `type-size = 12pt` (footer and footnotes included), `body-leading` (24 pt pitch), footnotes single-spaced, footer `N - TITLE`. |
+| Dist. Idaho Loc. Civ. R. 5.2(a) | 8½ × 11; "double-spaced, except for quoted material and footnotes"; "Each page must be numbered consecutively"; margins "at least one inch"; "the font or typeface for all text, including footnotes, must be at least 12 point." | `margin = 1in`, `type-size = 12pt` (footer and footnotes included), `pitch-double` (27.6 pt, Word double spacing of 12 pt Times New Roman, as the exemplars), footnotes single-spaced (13.8 pt lines), footer `N - TITLE`. |
 | Dist. Idaho Loc. Civ. R. 5.2(b) | Upper-left counsel block; the caption "commencing four inches below the top of the first page, (except where additional space is required for identification)". | `counsel` frontmatter; `cover()` starts the caption at `caption-top = 4in` or directly after a longer counsel block. |
 | Dist. Idaho Loc. Civ. R. 5.2(b)(1)–(3), (5) | The court title; the title of the action; the CM/ECF file number; the title of the paper. | `caption.court`, `caption.parties`, `case_number` (`1:25-cv-00144-DCN`), `brief_title`. |
 
@@ -39,16 +38,19 @@ Not produced by this template: a table of contents or table of authorities (none
 
 ## Layout
 
-- Counsel block single-spaced in the upper left, from the top margin.
-- Court title and caption at four inches from the top, or directly after the counsel block when it is longer (the exemplar's two counsel groups are long, so the caption sits at about 4.3 inches; the rule's exception applies).
-- Caption: party column closed by a right and bottom rule; the right column carries the file number, the title and the "[Doc. N]" docket line.
-- Body double-spaced at a 24 pt baseline pitch. Body paragraphs are unnumbered and indented 0.5 inch on the first line (the indent is inline, because typst does not indent a paragraph that follows a block such as a list or the caption).
-- Headings: level 1 centered bold caps (INTRODUCTION, BACKGROUND, ARGUMENT, CONCLUSION); level 2 centered bold; level 3 bold, left (the argument headings "I.", "II.", "III."). Each fills whole double-spaced slots, so the paragraph after it starts on the grid.
-- Footnotes: `[^n]` references in paragraphs and bullet items become typst footnotes at 12 pt, single-spaced, with a short rule above them. The definitions are `[^n]: text` chunks in the sample.
-- Bulleted lists: a `•` marker, items double-spaced, indented 0.5 inch.
-- Section break `\* \* \*` is centered.
-- Signature block: "Dated: …" at left, "Respectfully submitted," the firm, "/s/" and the signer, with the lines from the frontmatter.
+All of it on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): every line a box of its pitch, first-fit ragged-right breaking, no kerning, ligatures or hyphenation, so the docx breaks every line and page where typst does.
+
+- Counsel block single-spaced (13.8 pt lines) in the upper left, from the top margin.
+- Court title (bold, centered) and caption at four inches from the top, or 12 pt below the counsel block when it is longer (the exemplar's two counsel groups are long, so the caption sits lower; the rule's exception applies). The docx holds the counsel block in a table row at least 3 in high, with 12 pt after its last line.
+- Caption: party column 3.25 in, closed by a right and bottom rule; the right column carries the file number, the title and the "[Doc. N]" docket line, a blank single line apart.
+- Body double-spaced at a 27.6 pt pitch, no space between paragraphs. Body paragraphs are unnumbered and indented 0.5 in on the first line, after a heading or a list too.
+- Headings on the body pitch, kept with the text after them: level 1 centered bold caps (INTRODUCTION, BACKGROUND, ARGUMENT, CONCLUSION); level 2 centered bold; level 3 bold with a 0.5 in hanging indent (the argument headings "I.", "II.", "III.").
+- Footnotes: `[^n]` references in paragraphs and bullet items become footnotes at 12 pt (LR 5.2(a)), single-spaced (13.8 pt lines), 7 pt apart, under a 2 in rule; the mark stands against the word before it.
+- Bulleted lists: a `•` at 0.5 in in a 0.5 in box, the text hanging at 1 in, double-spaced.
+- Section break `\* \* \*` is centered on its own line.
+- Signature block: "Dated: …" at left, "Respectfully submitted," the firm, "/s/" and the signer, with the lines from the frontmatter; one block that never breaks.
 - Certificate of service: its own page (the exemplar does the same), heading, the certificate text, and the filer's signature block at the right-hand column.
+- Footer: "N - TITLE" (the page number and `footer_title` in capitals), 12 pt, flush left, on every page.
 
 ## Markdown contract (for samples)
 
@@ -58,78 +60,49 @@ Not produced by this template: a table of contents or table of authorities (none
 
 ## What the overlay shows
 
-`usage/OVERLAY-tarbell-motion-brief.pdf`: red is our render, blue is the filed exemplar, black is agreement. The page map (`.txt`) pairs each of our pages with the exemplar page sharing the most words:
-
-```
-ours p.1  filed p.1  word-overlap 63.4%
-ours p.2  filed p.2  word-overlap 55.4%
-ours p.3  filed p.3  word-overlap 41.9%
-ours p.4  filed p.5  word-overlap 52.6%
-ours p.5  filed p.6  word-overlap 56.4%
-ours p.6  filed p.7  word-overlap 79.8%
-ours p.7  filed p.8  word-overlap 64.9%
-ours p.8  filed p.10  word-overlap 71.1%
-ours p.9  filed p.12  word-overlap 50.0%
-ours p.10  filed p.13  word-overlap 47.5%
-ours p.11  filed p.14  word-overlap 84.3%
-```
-
-The pairs are close but not aligned page for page: our render is 11 pages and the exemplar is 14, so the same text falls on different pages. The overlay is a diagnostic, not a score. It was regenerated after the last template change.
+The page map that stood here was from the earlier 11-page render (EB Garamond, 24 pt pitch), before the cross-engine port; `just overlay` regenerates it in `.overlay/` (not committed). Our render is 14 pages, as the Tarbell exemplar, but the same text need not fall on the same page. The overlay is a diagnostic, not a score.
 
 ## Page review (Gate 2 equivalent)
 
-Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed after the last template change.
+Every page of `OUTPUT-motion-brief.typst.pdf` and `OUTPUT-motion-brief.docx.pdf` was rendered at 60 dpi and viewed side by side after the last template change (2026-10-22). The two engines break every line and page alike (XENG-001..003 PASS, 328/328 lines).
 
-| Page | Result |
+| Page | Result (typst and docx) |
 |---|---|
-| 1 | Counsel block; court title; caption with the file number and "DEFENDANT'S MEMORANDUM IN SUPPORT OF MOTION TO DISMISS [Doc. 26]"; the first paragraph with footnote 1; INTRODUCTION. Footer "1 - …". Pass. |
+| 1 | Counsel block (two groups); court title; caption with the file number, "DEFENDANT'S MEMORANDUM IN SUPPORT OF MOTION TO DISMISS" and "[Doc. 26]"; the first paragraph with footnote 1; INTRODUCTION. Footer "1 - …". Pass. |
 | 2 | Introduction text; footnote 2 (the list of members). Pass. |
-| 3 | Introduction end; BACKGROUND; first bullets; footnote 3. Pass. |
-| 4 | Bullets (¶ 13 to ¶ 15); paragraph after the bullets indented (defect found and fixed: the first paragraph after a block lost its indent); LEGAL STANDARDS. Pass. |
-| 5 | Legal standards end; ARGUMENT; heading I; footnote 4. Pass. |
-| 6 | Bullets (Doc. 56-1 parts); heading II; footnote 5. Pass. |
-| 7 | Section II text; footnote 6; the audit bullets' lead-in; the bracketed note on the omitted block quotation (see Known gaps). Pass. |
-| 8 | Audit bullets; the original-source paragraphs. Pass. |
-| 9 | Original-source paragraph end; the section break; heading III; footnote 7. Pass. |
-| 10 | Section III text; CONCLUSION; "Dated: June 9, 2026"; "Respectfully submitted," and the signature block ("/s/ Julian R. Ellis, Jr." then the lines). Pass (defect found and fixed: the signer's name printed twice). |
-| 11 | CERTIFICATE OF SERVICE on its own page; the certificate text; the right-hand signature block. Pass (defect found and fixed: the signature block was right-aligned and wrapped). |
+| 3 | Introduction paragraphs (the CARES Act, the amendments, Relator). Pass. |
+| 4 | Introduction end; BACKGROUND; bullets ¶¶6–8 to ¶14; footnote 3 from the ¶10 bullet. Pass. |
+| 5 | Bullet ¶15; two paragraphs; LEGAL STANDARDS. Pass. |
+| 6 | Legal standards; ARGUMENT; heading I. Pass. |
+| 7 | Section I with its bullets (Doc. 56-1 parts); heading II; footnotes 4 and 5. Pass. |
+| 8 | Section II text (the audit prong, the Single Audit Act). Pass. |
+| 9 | The Clearinghouse URL (broken where typst breaks a web address); footnote 6; the audit bullets begin. Pass. |
+| 10 | Audit bullets end; the Kootstra paragraph; the original-source definition. Pass. |
+| 11 | "First" and "Second" paragraphs; the centered section break; "At bottom". Pass. |
+| 12 | Heading III; footnote 7. Pass. |
+| 13 | Section III end; CONCLUSION; "Dated: June 9, 2026" beside the signature block. Pass. |
+| 14 | CERTIFICATE OF SERVICE on its own page; the certificate text; the right-hand signature block. Pass. |
 
 ## Tier-2 findings (against the three filed exemplars, by page)
 
 | Page | Finding | Status |
 |---|---|---|
-| 1 | The exemplars are set in Times New Roman (Robinson, Tarazona, Wilcox and, with a Times-style face, Anderson) or Century Schoolbook (Tarbell, which the rule names as an example). EB Garamond reads smaller than either at 12 pt. The 12-point minimum in LR 5.2(a) is met. The only vendored font is EB Garamond (`fonts/`). | OPEN (font choice for David; see Known gaps). |
+| all | Times New Roman 12 pt, double-spaced at 27.6 pt, as the Robinson and Anderson exemplars (27.4 to 27.6 pt measured on their body pages); Tarbell is set in Century Schoolbook at a 24 pt pitch, one filer's style (tier 3). | ACCEPTED. |
 | 1 | The caption's party column is closed by a rule (the Robinson and Anderson filings, checked on page 1, use the same closed box). | ACCEPTED. |
 | 2 | Anderson (18 pages) has a TABLE OF CONTENTS on page 2 with dot leaders. Tarbell (14 pages) has none in its full text. Robinson's page 1 has none; its inner pages were not checked. The template does not produce a contents page. The fetched rules do not require one. | OPEN (whether a contents page is expected for a 20-page memorandum is a question for David; the template would need a contents page built from the headings). |
-| 11 | The certificate of service is on its own page, as in the Tarbell exemplar (page 14). | ACCEPTED. |
+| 14 | The certificate of service is on its own page, as in the Tarbell exemplar (page 14). | ACCEPTED. |
 
 ## Known gaps and open choices
 
-1. **Font (rule-level answer; visual difference remains).** LR 5.2(a) and LR 7.1(a)(2) name no typeface, so the template keeps EB Garamond, per `docs/FONTS.md`. EB Garamond at 12 pt meets the rule's point size, but it looks smaller than the Times and Century exemplars. Those exemplars are a convention, not a requirement; switching to a Times or Century substitute would be a tier-2 choice for David.
-2. **Block quotation omitted from the transcription.** The Tarbell exemplar quotes the audit's Note N in a block quotation on page 9. The quotation is not in the text layer of the PDF, so the sample carries a bracketed note in its place (`[Block quotation from Note N of the audit is not in the text layer of the filing and is not transcribed.]`). The template does not produce that quotation; the note is in the sample, not the template.
-3. **20-page cap not enforced.** LR 7.1(a)(2) caps the memorandum at twenty pages. The template does not count pages or warn; the sample is 11 pages.
-4. **Footnotes.** Footnote references work in paragraphs and bullet items. They do not work inside headings or block quotations (none used). Footnote text supports the same markdown as the body.
-5. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder does not have that shape. The brief forbids touching `tools/`, so the gates were not run; the render, the overlay and the review above are the checks.
-6. **Footers** are 12 pt, the same size as the text, to satisfy "all text" in LR 5.2(a).
-7. **Caption position.** The caption starts at four inches when the counsel block is short enough; with two long counsel groups it sits lower (the rule's exception).
-8. **Second and third exemplars** (Anderson, Robinson) are saved and checked on page 1 only; their text is not used in the sample.
+1. **Block quotation omitted from the transcription.** The Tarbell exemplar quotes the audit's Note N in a block quotation on page 9. The quotation is not in the text layer of the PDF, so the sample carries a bracketed note in its place (`[Block quotation from Note N of the audit is not in the text layer of the filing and is not transcribed.]`). The template does not produce that quotation; the note is in the sample, not the template.
+2. **20-page cap not enforced.** LR 7.1(a)(2) caps the memorandum at twenty pages. The template does not count pages or warn (whether the certificate of service counts is not settled by the rule); the sample is 14 pages with the certificate.
+3. **Footnotes.** Footnote references work in paragraphs and bullet items. They do not work inside headings or block quotations (none used). Footnote text supports the same markdown as the body.
+4. **Footers** are 12 pt, the same size as the text, to satisfy "all text" in LR 5.2(a).
+5. **Caption position.** The caption starts at four inches when the counsel block is short enough; with two long counsel groups it sits lower (the rule's exception).
+6. **Second and third exemplars** (Anderson, Robinson) are saved and checked on page 1 only; their text is not used in the sample.
 
 ## Engines
 
-Docx engine (`docx/`): `make-reference.sh` builds `docx/reference.docx` (run once; it unpacks in a temp dir), `idd.lua` writes the cover, the signature block and the certificate of service. Output: `usage/OUTPUT-motion-brief.docx`.
+typst (`typst/idd-motion-brief.typ`, the reference) and docx (`docx/reference.xml`, `docx/idd-motion-brief.lua`); no latex. Both pass `tools/check.sh` with 0 failed; the docx passes XENG-001..003 and `eval.yaml` sets `params.cross_engine: gate`.
 
-What the docx sets (in styles.xml, sectPr and footer1.xml; set, not rendered: no LibreOffice on the build box):
-- Page: US Letter, 1 inch margins, footer 0.4 inch from the bottom edge.
-- Font: EB Garamond 12 pt everywhere, footer page number included.
-- Body: exact 24 pt line (double), first-line indent 0.5 inch, no space before or after. Headings: exact 24 pt, bold; level 1 centered caps, level 2 centered bold, level 3 bold left; keep with next.
-- Cover: counsel single-spaced; court title bold, centered; caption as a borderless table whose left cell is ruled on the right and bottom; case number, title and the "[Doc. 26]" docket line in the right cell.
-- Footnotes: native footnotes, 12 pt, single-spaced.
-- Signature: "Dated:" and "Respectfully submitted," in a borderless two-column table.
-- Certificate of service: starts on a new page (page break), heading in the Heading 1 style, text double-spaced, signature in the right column.
-
-What differs from the typst form:
-- Footer: page number only, left-aligned. The typst footer "N - TITLE" needs the case title, which is case-specific, so it is not in the template. Tier 2, OPEN.
-- Caption position and caption rule: as for the complaint; the 4-inch caption position is approximate and not measured.
-- Body: pandoc's paragraphs; no numbering (the memorandum has none).
-
-BLOCKED (docx.pdf gates 0 to 3): `tools/render-docx.sh` writes the `.docx`, then fails at `soffice` because LibreOffice is not installed on the build box. No docx page was rendered or looked at: pages reviewed for docx = 0. The `.docx` was checked only as a valid zip with well-formed XML parts (xmllint); it was not opened in Word or LibreOffice.
+The docx (fb-595.68.23): `docx/reference.xml` is the cross-engine style recipe (`base="xengine"`) in the typst face (`{font}`), 12 pt, 27.6 pt body and heading lines, 13.8 pt single and footnote lines, with "Body Text Note" and "List Item Indented" for the paragraphs that carry a footnote (pandoc writes those, so that it writes the note); `docx/idd-motion-brief.lua` writes every other paragraph with its own exact spacing, the caption as a table (the party text 0.75 pt nearer the rule than in typst, since LibreOffice takes the rule's width from the cell), the counsel block as a table row at least 3 in high, a web address with a zero-width space wherever typst breaks one, and the footer "N - TITLE" with the last section through `fb render` (`$FORMBOOK_FOOTERS`, `$FORMBOOK_FINAL`). Its right margin is 1 twip wider than typst's (1441 twips): LibreOffice sets a line of Times New Roman up to about 0.15 pt narrower than typst, and one body line (p2, "... management and") that typst overflows by 0.02 pt otherwise fits in LibreOffice; 1441 breaks every line of the sample as typst does (1440 and 1443 do not). No shell and no binary reference document. Word may paginate slightly differently from LibreOffice (docs/DOCX.md).

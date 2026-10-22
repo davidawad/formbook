@@ -9,7 +9,7 @@ Folder: `courts/ninth-circuit/idaho/federal/district/complaint/` (self-contained
 | sample md | `usage/INPUT-complaint.md` (excerpts of the 19-page filing; the parties, the facts, Counts I to III, the prayer, the jury demand and the signature; see Known gaps) |
 | typeface | face required: none (LR 5.2(a) sets only a 12-point minimum, footnotes and footer included; checked on the Court's site 2026-10-15). Times New Roman 12 pt, the house standard (`docs/FONTS.md`), as the three Times-style exemplars; typst names `("Times New Roman", "Liberation Serif")`, the docx the same face through `{font}`. |
 | render | ok: `usage/OUTPUT-complaint.typst.pdf` and `usage/OUTPUT-complaint.docx` / `.docx.pdf`, 12 pages each, letter, Times New Roman Regular and Bold embedded only, no warnings |
-| overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF (`usage/SAMPLE-tarazona-castro-…pdf`), which is not in this snapshot (`usage/` holds only `SOURCE.md`). The `.txt` page map and the `.pdf` from the earlier run are stale against this render; regenerate once the exemplar is restored. |
+| overlay | diagnostic only, not committed: `just overlay` writes `.overlay/<doc path>/OVERLAY-<id>.pdf` from `usage/FILED-EXAMPLE-<id>.pdf` (not re-run for the cross-engine port) |
 | pages reviewed | 12 of 12 on both engines (typst and docx.pdf, every page at 60 dpi, side by side, 2026-10-22, after the cross-engine port) |
 
 ## Commands
