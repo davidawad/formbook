@@ -22,49 +22,49 @@ service:
   method: "through the Court’s Electronic Filing System (File and ServeXpress)"
   date: "March 22, 2024"
 authorities:
-  barr: {kind: case, name: "Barr v. NCB Mgmt. Servs.", cite: "227 W. Va. 507, 711 S.E.2d 577 (2011)"}
-  blankenship: {kind: case, name: "Blankenship v. Ethicon, Inc.", cite: "221 W. Va. 700, 656 S.E.2d 451 (2007)"}
-  brooke: {kind: case, name: "Brooke B. v. Ray", cite: "230 W. Va. 355, 738 S.E.2d 21 (2013)"}
-  camden-clark: {kind: case, name: "Camden-Clark Mem’l Hosp. Corp. v. Tuan Nguyen", cite: "240 W. Va. 76, 807 S.E.2d 747 (2017)"}
-  cline: {kind: case, name: "Cline v. Kresa-Reahl", cite: "229 W. Va. 203, 728 S.E.2d 87 (2012)"}
-  courtney: {kind: case, name: "Courtney v. Courtney", cite: "190 W. Va. 126, 437 S.E.2d 436 (1993)"}
-  flannery: {kind: case, name: "Flannery v. U.S.", cite: "171 W. Va. 27, 297 S.E.2d 433 (1982)"}
-  gaither: {kind: case, name: "Gaither v. City Hosp., Inc.", cite: "199 W. Va. 706, 487 S.E.2d 901 (1997)"}
-  hamrick: {kind: case, name: "Hamrick v. Charleston Area Med. Ctr., Inc.", cite: "220 W. Va. 495, 648 S.E.2d 1 (2007)"}
-  hicks: {kind: case, name: "Hicks v. Ghaphery", cite: "212 W. Va. 327, 571 S.E.2d 317 (2002)"}
-  justice: {kind: case, name: "Justice v. W. Va. Office of Ins. Comm’n", cite: "230 W. Va. 80, 736 S.E.2d 80 (2012)"}
-  katrib: {kind: case, name: "Katrib v. Herbert J. Thomas Mem’l Hosp. Ass’n", cite: "247 W. Va. 763, 885 S.E.2d 894 (2023)"}
-  mack-evans: {kind: case, name: "Mack-Evans v. Hilltop Healthcare Ctr.", cite: "226 W. Va. 257, 700 S.E.2d 317 (2010)"}
-  minnich: {kind: case, name: "Minnich v. MedExpress Urgent Care, Inc.—West Virginia", cite: "238 W. Va. 533, 796 S.E.2d 642 (2017)"}
-  nees: {kind: case, name: "Nees v. Julian Goldman Stores", cite: "109 W. Va. 329, 154 S.E. 769 (1930)"}
-  raleigh: {kind: case, name: "Raleigh Gen. Hosp., LLC v. Appalachian Reg’l Healthcare, Inc.", cite: "2024 W. Va. App. LEXIS 14 (ICA)"}
-  sexton: {kind: case, name: "Sexton v. Grieco", cite: "216 W. Va. 714, 613 S.E.2d 81 (2005)"}
-  thompson: {kind: case, name: "State ex rel. Charleston Area Med. Ctr., Inc. v. Thompson", cite: "248 W. Va. 352, 888 S.E.2d 852 (2023)"}
-  ferguson: {kind: case, name: "State ex rel. W. Va. Div. of Corr. & Rehab. v. Ferguson", cite: "889 S.E.2d 44 (W. Va. 2023)"}
-  cramer: {kind: case, name: "State ex rel. ERx, LLC v. Cramer", cite: "247 W. Va. 739, 885 S.E.2d 870 (2023)"}
-  gaujot: {kind: case, name: "State ex rel. Morgantown Operating Co., LLC v. Gaujot", cite: "245 W. Va. 415, 859 S.E.2d 358 (2021)"}
-  scott: {kind: case, name: "State ex rel. West Virginia University Hospitals, Inc. v. Scott", cite: "246 W. Va. 184, 866 S.E.2d 350 (2021)"}
-  stonewall: {kind: case, name: "Stonewall Jackson Mem. Hosp. Co. v. St. Joseph’s Hosp. of Buckhannon, Inc.", cite: "2023 W. Va. App. LEXIS 202, 2023 WL 4197305 (ICA)"}
-  tanner: {kind: case, name: "Tanner v. Rite Aid of W. Va., Inc.", cite: "194 W. Va. 643, 461 S.E.2d 149 (1995)"}
-  travis: {kind: case, name: "Travis v. Alcon Labs.", cite: "202 W. Va. 369, 504 S.E.2d 419 (1998)"}
-  trivett: {kind: case, name: "Trivett v. Summers County Commission", cite: "249 W. Va. 231, 895 S.E.2d 86 (2023)"}
-  zsigray: {kind: case, name: "Zsigray v. Langman", cite: "243 W. Va. 163, 842 S.E.2d 716 (2020)"}
-  s17a-4a-11: {kind: statute, name: "W.Va. Code § 17A-4A-11"}
-  s17c-4-1: {kind: statute, name: "W.Va. Code § 17C-4-1"}
-  s17c-4-2: {kind: statute, name: "W.Va. Code § 17C-4-2"}
-  s19-18-1: {kind: statute, name: "W.Va. Code § 19-18-1"}
-  s46a-6-101: {kind: statute, name: "W.Va. Code § 46A-6-101"}
-  s55-7b-1: {kind: statute, name: "W. Va. Code § 55-7B-1"}
-  s55-7b-2: {kind: statute, name: "W. Va. Code § 55-7B-2"}
-  s55-7b-3: {kind: statute, name: "W. Va. Code § 55-7B-3"}
-  s55-7b-4: {kind: statute, name: "W. Va. Code § 55-7B-4"}
-  s55-7b-6: {kind: statute, name: "W. Va. Code § 55-7B-6"}
-  s55-7b-7: {kind: statute, name: "W. Va. Code § 55-7B-7"}
-  s61-5a-2: {kind: statute, name: "W.Va. Code § 61-5A-2"}
-  rap17: {kind: rule, name: "W.Va. R. App. P. 17"}
-  rap20: {kind: rule, name: "W.Va. R. App. P. 20(a)"}
-  frcp12: {kind: rule, name: "Fed. R. Civ. P. 12(b)(1)"}
-  blacks: {kind: other, name: "Black’s Law Dictionary"}
+  barr: {kind: case, name: "*Barr v. NCB Mgmt. Servs.*", cite: "227 W. Va. 507, 711 S.E.2d 577 (2011)"}
+  blankenship: {kind: case, name: "*Blankenship v. Ethicon, Inc.*", cite: "221 W. Va. 700, 656 S.E.2d 451 (2007)"}
+  brooke: {kind: case, name: "*Brooke B. v. Ray*", cite: "230 W. Va. 355, 738 S.E.2d 21 (2013)"}
+  camden-clark: {kind: case, name: "*Camden-Clark Mem’l Hosp. Corp. v. Tuan Nguyen*", cite: "240 W. Va. 76, 807 S.E.2d 747 (2017)"}
+  cline: {kind: case, name: "*Cline v. Kresa-Reahl*", cite: "229 W. Va. 203, 728 S.E.2d 87 (2012)"}
+  courtney: {kind: case, name: "*Courtney v. Courtney*", cite: "190 W. Va. 126, 437 S.E.2d 436 (1993)"}
+  flannery: {kind: case, name: "*Flannery v. U.S.*", cite: "171 W. Va. 27, 297 S.E.2d 433 (1982)"}
+  gaither: {kind: case, name: "*Gaither v. City Hosp., Inc.*", cite: "199 W. Va. 706, 487 S.E.2d 901 (1997)"}
+  hamrick: {kind: case, name: "*Hamrick v. Charleston Area Med. Ctr., Inc.*", cite: "220 W. Va. 495, 648 S.E.2d 1 (2007)"}
+  hicks: {kind: case, name: "*Hicks v. Ghaphery*", cite: "212 W. Va. 327, 571 S.E.2d 317 (2002)"}
+  justice: {kind: case, name: "*Justice v. W. Va. Office of Ins. Comm’n*", cite: "230 W. Va. 80, 736 S.E.2d 80 (2012)"}
+  katrib: {kind: case, name: "*Katrib v. Herbert J. Thomas Mem’l Hosp. Ass’n*", cite: "247 W. Va. 763, 885 S.E.2d 894 (2023)"}
+  mack-evans: {kind: case, name: "*Mack-Evans v. Hilltop Healthcare Ctr.*", cite: "226 W. Va. 257, 700 S.E.2d 317 (2010)"}
+  minnich: {kind: case, name: "*Minnich v. MedExpress Urgent Care, Inc.—West Virginia*", cite: "238 W. Va. 533, 796 S.E.2d 642 (2017)"}
+  nees: {kind: case, name: "*Nees v. Julian Goldman Stores*", cite: "109 W. Va. 329, 154 S.E. 769 (1930)"}
+  raleigh: {kind: case, name: "*Raleigh Gen. Hosp., LLC v. Appalachian Reg’l Healthcare, Inc.*", cite: "2024 W. Va. App. LEXIS 14 (ICA)"}
+  sexton: {kind: case, name: "*Sexton v. Grieco*", cite: "216 W. Va. 714, 613 S.E.2d 81 (2005)"}
+  thompson: {kind: case, name: "*State ex rel. Charleston Area Med. Ctr., Inc. v. Thompson*", cite: "248 W. Va. 352, 888 S.E.2d 852 (2023)"}
+  ferguson: {kind: case, name: "*State ex rel. W. Va. Div. of Corr. & Rehab. v. Ferguson*", cite: "889 S.E.2d 44 (W. Va. 2023)"}
+  cramer: {kind: case, name: "*State ex rel. ERx, LLC v. Cramer*", cite: "247 W. Va. 739, 885 S.E.2d 870 (2023)"}
+  gaujot: {kind: case, name: "*State ex rel. Morgantown Operating Co., LLC v. Gaujot*", cite: "245 W. Va. 415, 859 S.E.2d 358 (2021)"}
+  scott: {kind: case, name: "*State ex rel. West Virginia University Hospitals, Inc. v. Scott*", cite: "246 W. Va. 184, 866 S.E.2d 350 (2021)"}
+  stonewall: {kind: case, name: "*Stonewall Jackson Mem. Hosp. Co. v. St. Joseph’s Hosp. of Buckhannon, Inc.*", cite: "2023 W. Va. App. LEXIS 202, 2023 WL 4197305 (ICA)"}
+  tanner: {kind: case, name: "*Tanner v. Rite Aid of W. Va., Inc.*", cite: "194 W. Va. 643, 461 S.E.2d 149 (1995)"}
+  travis: {kind: case, name: "*Travis v. Alcon Labs.*", cite: "202 W. Va. 369, 504 S.E.2d 419 (1998)"}
+  trivett: {kind: case, name: "*Trivett v. Summers County Commission*", cite: "249 W. Va. 231, 895 S.E.2d 86 (2023)"}
+  zsigray: {kind: case, name: "*Zsigray v. Langman*", cite: "243 W. Va. 163, 842 S.E.2d 716 (2020)"}
+  s17a-4a-11: {kind: statute, cite: "W.Va. Code § 17A-4A-11"}
+  s17c-4-1: {kind: statute, cite: "W.Va. Code § 17C-4-1"}
+  s17c-4-2: {kind: statute, cite: "W.Va. Code § 17C-4-2"}
+  s19-18-1: {kind: statute, cite: "W.Va. Code § 19-18-1"}
+  s46a-6-101: {kind: statute, cite: "W.Va. Code § 46A-6-101"}
+  s55-7b-1: {kind: statute, cite: "W. Va. Code § 55-7B-1"}
+  s55-7b-2: {kind: statute, cite: "W. Va. Code § 55-7B-2"}
+  s55-7b-3: {kind: statute, cite: "W. Va. Code § 55-7B-3"}
+  s55-7b-4: {kind: statute, cite: "W. Va. Code § 55-7B-4"}
+  s55-7b-6: {kind: statute, cite: "W. Va. Code § 55-7B-6"}
+  s55-7b-7: {kind: statute, cite: "W. Va. Code § 55-7B-7"}
+  s61-5a-2: {kind: statute, cite: "W.Va. Code § 61-5A-2"}
+  rap17: {kind: rule, cite: "W.Va. R. App. P. 17"}
+  rap20: {kind: rule, cite: "W.Va. R. App. P. 20(a)"}
+  frcp12: {kind: rule, cite: "Fed. R. Civ. P. 12(b)(1)"}
+  blacks: {kind: other, cite: "Black’s Law Dictionary"}
 ---
 
 # INTRODUCTION

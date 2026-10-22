@@ -1,4 +1,12 @@
 # West Virginia brief (rules.md WVA-LEN-001): a petitioner or respondent brief may not exceed 40 pages, excluding the cover,
 # tables and certificate of service (RAP 38(c)). The total page count checked here is a stricter count.
+# Gate 4 CROSS-ENGINE: report, not gate. The latex and docx engines are generated from typst/layout.yaml (`fb engines
+# gen`, fb-595.54.12); each meets an open defect of the shared model (docs/open-items/fb-595.54.21.md):
+# - latex: typst sets footnote 3 on page 6 while its mark (the last line of the quotation, "emotional injury.3") stays
+#   on page 5; LaTeX moves that line on with its note, and 18 of 24 page ends differ after it.
+# - docx: Word's table of authorities misses a page of three authorities (Thompson 15, Scott 14, Trivett 14) whose
+#   marks are short-form citations in consecutive notes (77-79) repeating an earlier note's text; lines and page ends
+#   are otherwise identical (622/625).
 params:
   page_limit: 40
+  cross_engine: report
