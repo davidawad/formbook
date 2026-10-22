@@ -7,9 +7,9 @@ Folder: `courts/seventh-circuit/wisconsin/federal/eastern-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (13 pp., counsel-filed); second filer `FILED-EXAMPLE-complaint-2.pdf` (9 pp., pleading paper). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-complaint.md` (the whole filing, transcribed from the text layer) |
-| render | ok (re-run 2026-10-15): `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold only (embedded), no warnings |
+| render | ok (re-run 2026-10-22, fb-595.68.28): `usage/OUTPUT-complaint.typst.pdf` and `.docx.pdf`, 12 pages each, typst 0.15.0, `pdffonts`: Times New Roman regular and bold only (embedded), no warnings |
 | overlay | fail (2026-10-15): `tools/overlay.sh` exits 1, `no exemplar pdf in usage/`. The filed PDFs are not in this snapshot (`usage/` holds `SOURCE.md` only). The earlier `OVERLAY-taylor-complaint.*` files are from a run with the PDFs present and are not regenerated |
-| pages reviewed | 11 of 11 (re-rendered 2026-10-15 and each page viewed at 60 dpi in montage) |
+| pages reviewed | 12 of 12, typst and docx (re-rendered 2026-10-22 and each page viewed at 50 dpi in montage) |
 
 ## Governing rules
 
@@ -19,8 +19,8 @@ Federal Rules of Civil Procedure, from the Legal Information Institute (https://
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| General L.R. 5(a)(5) | 8½ × 11 inch paper; double-spaced text, quotations over two lines may be single-spaced; headings and footnotes may be single-spaced; margins of at least one inch on all four sides; page numbers may go in the margins. | `page-w`, `page-h`, `margin = 1in`, `body-leading` (24 pt baseline pitch, measured), `single-leading` for caption, headings, signature. Page number centered in the bottom margin. |
-| General L.R. 5(a)(6) | A proportionally spaced face must include serifs (sans-serif allowed in headings and captions) and be 12-point or larger. No face is named. | `font-family = "EB Garamond"` (serif), `type-size = 12pt` everywhere, including the page number. Typeface: no face named by the rule, so EB Garamond is kept (`docs/FONTS.md`, "No face named"); no substitute is needed. |
+| General L.R. 5(a)(5) | 8½ × 11 inch paper; double-spaced text, quotations over two lines may be single-spaced; headings and footnotes may be single-spaced; margins of at least one inch on all four sides; page numbers may go in the margins. | `page-w`, `page-h`, `margin = 1in`, `pitch-body` (exact 24 pt line boxes), `pitch-single` (13.8 pt) for the court title, caption and signature. Page number centered in the bottom margin. |
+| General L.R. 5(a)(6) | A proportionally spaced face must include serifs (sans-serif allowed in headings and captions) and be 12-point or larger. No face is named. | `font-family = ("Times New Roman", "Liberation Serif")` (serif), `type-size = 12pt` everywhere, headings and the page number included. Typeface: no face named by the rule, so Times New Roman, the house standard (`docs/FONTS.md`), in typst and docx alike. |
 | General L.R. 5(a)(7) | Plain roman type; italics or boldface for emphasis; case names italicized or underlined. | Body is roman; `*...*` in markdown renders italic (`inl`, `md`). |
 | General L.R. 5(c) | Signature block: `s/ [attorney name]`, attorney name, bar number, attorney for (party), firm, address, telephone, e-mail. | `signature-block()`: "s/ name", name, bar line, role, firm, address lines, "Telephone:", "E-mail:". |
 | Civil L.R. 3(a) | A Civil Cover Sheet (JS 44) must accompany each civil action. | Not produced here (separate filing; see gaps). |
@@ -40,8 +40,8 @@ Not produced by this template (separate filings, not part of the complaint): the
 - Caption: party names left (designation indented under each party, "v." between parties), "Case No." and "JURY TRIAL DEMANDED" right, no ruled box.
 - Document title centered bold caps below the caption; the lead-in ("NOW COMES ...") is unnumbered.
 - Section headings (`#`): centered bold caps. Count headings (`##`): centered bold, one or two lines. Heading blocks are `sticky` so a heading stays with the text after it.
-- Numbered paragraphs: 0.5 in first-line indent, number, then text. Paragraphs are separated by one body pitch (`par(spacing: body-leading)`).
-- Lettered list items (`1.` in markdown, rendered as A., B., ...): the prayer for relief. Paragraphs under a level-1 heading starting "PRAYER" or "DEMAND" are not numbered.
+- Numbered paragraphs: the number at the 0.5 in first-line indent, in a 0.5 in box, the text from 1 in; no extra space between paragraphs (exact 24 pt line boxes on the shared cross-engine model, `lib/typst/xengine.typ`). Headings at 12 pt on the body pitch, a section heading with 12 pt above it.
+- Lettered list items (`1.` in markdown, rendered as A., B., ...): the prayer for relief; the letter at 0.5 in, the lines hanging at 0.9 in. Paragraphs under a level-1 heading starting "PRAYER" or "DEMAND" are not numbered.
 - Signature: "Dated this ... day of ..." (sample field `date`), then the firm, role, signature lines and contact block, in the right half of the page.
 
 ## Markdown contract (for samples)
@@ -54,42 +54,42 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Known gaps and open choices
 
-1. **Font.** General L.R. 5(a)(6) requires a proportional serif face of 12 points or larger and names no face. EB Garamond is kept, per `docs/FONTS.md` ("No face named"). It has a smaller x-height than Times New Roman at 12 pt, so the render looks smaller than the exemplar and runs 11 pages against the exemplar's 13. The 12-point minimum is met. A Times-metric substitute (Liberation Serif) would be used only if a rule named Times; none does.
+1. **Font.** General L.R. 5(a)(6) requires a proportional serif face of 12 points or larger and names no face. Times New Roman 12 pt, the house standard (`docs/FONTS.md`), is used in typst and docx. The render runs 12 pages against the exemplar's 13.
 2. **Pleading paper.** The second exemplar (Testolin) uses numbered pleading lines 1 to 28 and a ruled left margin. E.D. Wis. General L.R. 5(a) requires none of that, and the Taylor exemplar and the Schmidt brief do not use it. The template follows Taylor. This is an accepted variant (ACCEPTED, see review below), not a defect.
 3. **Second filer, not overlaid.** `tools/overlay.sh` compares against the first exemplar only (Taylor). Testolin was checked by reading its layout and page-1 and last-page text, not by overlay.
 4. **Caption layout.** The party block is not in a ruled box. Taylor has no box; Testolin's caption is in two columns with a `Complaint for Damages:` block. Both are accepted; the template does not add a case-type legend (Testolin's "Violation of Fair Credit Reporting Act" block), which the rules do not require.
 5. **No separate jury or prayer page.** The jury demand (Fed. R. Civ. P. 38(b)) is a body paragraph under the prayer, as in the Taylor exemplar. The demand is also in the caption.
 6. **Heading text and count names.** A two-line count heading (Count III) is valid and renders as two single-spaced lines. There is no check on heading length.
-7. **Page 11.** The signature block falls alone on the last page with the closing jury-demand paragraph. The template keeps the block unbreakable (`breakable: false`) so the signature never splits; it does not pull text back from the previous page. Accepted.
+7. **Page 12.** The signature block falls alone on the last page. The template keeps the block unbreakable (`breakable: false`) so the signature never splits; it does not pull text back from the previous page. Accepted.
 8. **Paragraph numbers.** The sample numbers its paragraphs from 1 (as the template does). The filed paragraph numbers match, and so do the cross-references ("paragraphs 1 through 47").
-9. **Overlay pairing.** The Taylor exemplar and the render differ in pagination (the exemplar is 13 pages; ours is 11) because of the font, so the overlay pairs pages by word overlap, not index. The overlay is a diagnostic, not a score.
-10. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and a `rules.md` in the court directory. This doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review below is the Gate 2 equivalent for this doc type.
+9. **Overlay pairing.** The Taylor exemplar and the render differ in pagination (the exemplar is 13 pages; ours is 12), so the overlay pairs pages by word overlap, not index. The overlay is a diagnostic, not a score.
+10. **Gate scripts.** Since fb-595.68.28: `sh tools/check.sh <this folder>` and `--engine docx` both exit 0 (typst 9, docx 13 checks passed, 0 failed).
 
-## Review of the rendered pages (`usage/OUTPUT-complaint.typst.pdf`, 11 pages)
+## Review of the rendered pages (`usage/OUTPUT-complaint.typst.pdf` and `.docx.pdf`, 12 pages each)
 
-Rendered at 60 dpi and viewed page by page after the last template change (paragraph spacing).
+Rendered at 50 dpi and viewed page by page on both engines after the cross-engine port (fb-595.68.28); the docx breaks every line and page as typst does (XENG-001..003).
 
 | Page | Content | Finding |
 |---|---|---|
 | 1 | Court title, caption (parties; Case No. blank; JURY TRIAL DEMANDED), COMPLAINT, lead-in, NATURE OF ACTION, paragraph 1. | Pass. Caption and title fit on the first page. |
-| 2 | PARTIES, paragraphs 2 to 6, JURISDICTION AND VENUE, paragraphs 7 to 10, FACTUAL ALLEGATIONS, paragraph 11. | Pass. Pitch uniform; no heading at page foot. |
-| 3 | Paragraphs 12 to 24. | Pass. |
-| 4 | Paragraphs 25 to 34. | Pass. |
-| 5 | Paragraphs 35 to 42. | Pass. |
-| 6 | Paragraphs 43 to 51, LEGAL CLAIMS, COUNT I (heading and sub-heading). | Pass. The COUNT I heading stays with paragraph 48. |
-| 7 | Paragraphs 52 to 62, COUNT II and COUNT III headings (COUNT III sub-heading wraps to two lines). | Pass. |
-| 8 | Paragraphs 63 to 72. | Pass. |
-| 9 | Paragraphs 73 to 80. | Pass. |
-| 10 | Paragraphs 81 to 86, PRAYER FOR RELIEF, items A to F (lettered). | Pass. Prayer items are lettered; items are not numbered. |
-| 11 | Jury-demand paragraph (unnumbered), "Dated this 13th day of October, 2026.", firm, role, signature, contact block. | Pass. Signature block whole and in the right half of the page. Note 7 above. |
+| 2 | PARTIES, paragraphs 2 to 6, JURISDICTION AND VENUE, paragraphs 7 to 10. | Pass. Pitch uniform; no heading at page foot. |
+| 3 | FACTUAL ALLEGATIONS, paragraphs 11 to 23. | Pass. |
+| 4 | Paragraphs 24 to 32. | Pass. |
+| 5 | Paragraphs 33 to 40. | Pass. |
+| 6 | Paragraphs 41 to 48, LEGAL CLAIMS, COUNT I and its title. | Pass. The headings stay with paragraph 48. |
+| 7 | Paragraphs 49 to 58, COUNT II and its title. | Pass. |
+| 8 | Paragraphs 59 to 68, COUNT III (its title in two lines). | Pass. |
+| 9 | Paragraphs 69 to 75. | Pass. |
+| 10 | Paragraphs 76 to 83. | Pass. |
+| 11 | Paragraphs 83 (end) to 86, PRAYER FOR RELIEF, items A to F, the jury-demand paragraph (unnumbered). | Pass. Prayer items lettered, not numbered. |
+| 12 | "Dated this 13th day of October, 2026.", firm, role, signature, contact block. | Pass. Signature block whole, at 3.0 in. Note 7 above. |
 
-Gate 2 rows, with the overlay: page-level word overlap is 27% (page 11) to 83% (page 5); see `usage/OVERLAY-taylor-complaint.txt`. The lowest pages are the signature page (no body text in the exemplar's matching page) and the mid-pages where the exemplar's pagination differs. Not a score.
 
 ## Engines
 
-### docx (`docx/`: `build-reference.sh`, `reference.docx`, `wied.lua`)
+### docx (`docx/`: `reference.xml`, `wied.lua`)
 
-- **Matches the typst form:** EB Garamond 12 pt body; exact 24 pt (double) line pitch; 0.5 in first-line indent; letter paper, 1 in margins; centered page number in the footer; centered bold caps for the title and section headings; centered bold count headings; caption as a borderless two-column table (3.25 in party column, 0.3 in gutter, case number right); "Dated this ..." and the signature block at a 3.0 in indent; numbered paragraphs from `#` headings, unnumbered under PRAYER and DEMAND; the prayer list lettered A., B., ... ; the lead-in unnumbered. All case text comes from the sample's frontmatter.
-- **Differs or unverified:** the numbers are typed by the filter (not Word list numbering), so a paragraph's number does not renumber if text is inserted in Word. The number-to-text gap is a tab to the next default tab stop, not the typst 0.3 in gap. Line breaks, page breaks and the vertical position of the cover, caption and signature block are not compared with the typst layout. The caption table's borders are set to none; not verified in Word or LibreOffice. Body font EB Garamond is named but not embedded; the machine that opens the file must have it.
+- `docx/reference.xml` holds the Word styles: `base="xengine"` in the typst face (`{font}`, Times New Roman), 12 pt, 480-twip body and 276-twip single line boxes, headings on the body pitch, the 12 pt page-number footer 0.5 in above the page edge; `fb render` builds the reference document from it. `docx/wied.lua` reads the sample's body chunk by chunk, as the typst template does, and writes every paragraph as WordprocessingML on `lib/docx/xengine.lua`: the court title, the borderless caption table (3.25 in party column, 0.3 in gutter), the title, the lead-in, the numbered paragraphs (unnumbered under PRAYER and DEMAND), the headings, the lettered prayer and the signature block. No script: `fb render` runs pandoc with the filter and packs the archive (fb-595.68.28; were `build-reference.sh` and a committed `reference.docx` naming EB Garamond).
+- Cross-engine (fb-595.68.28): `sh tools/check.sh <this folder> --engine docx`: XENG-001..003 PASS (305/305 typst lines break after the same word, 12 = 12 pages); `params.cross_engine: gate` in `eval.yaml`. typst 9 and docx 13 checks passed, 0 failed.
+- The numbers are typed by the filter (not Word list numbering), so a paragraph's number does not renumber if text is inserted in Word. The `.docx` converts in LibreOffice without error; not opened in Word.
 - **No TOC, TOA or certificate:** the typst template has none, so the docx has none.
-- **BLOCKED:** the LibreOffice PDF (`usage/OUTPUT-taylor-complaint.docx.pdf`) was not produced because `soffice` is not installed on this box (no conda package, no root). Gates 0 and 1 for docx cannot run. No page was rendered or reviewed (pages reviewed: 0). The docx was checked only as a zip with well-formed XML parts and by a pandoc text dump of its order.
