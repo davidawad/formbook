@@ -47,7 +47,7 @@ Fender Musical Instruments Corp., is an abusive telemarketer – it continues te
 
 As former Senator Fritz Hollings once stated:
 
-"computerized calls are the scourge of modern civilization. They wake us up in the morning; they interrupt our dinner at night; they force the sick and elderly out of bed; they hound us until we want to rip the telephone right out of the wall."
+> "computerized calls are the scourge of modern civilization. They wake us up in the morning; they interrupt our dinner at night; they force the sick and elderly out of bed; they hound us until we want to rip the telephone right out of the wall."
 
 Because the calls were transmitted using technology capable of generating thousands of similar calls per day, Plaintiff brings this action on behalf of a proposed nationwide class of other persons who were sent the same illegal telemarketing calls.
 
@@ -97,7 +97,7 @@ The following is a non-exhaustive list of text messages the Plaintiff received f
 | 2 | 9/9/2025 | 71642 |
 | 3 | 9/12/2025 | 71642 |
 | 4 | 9/14/2025 | 71642 |
-| … | … | … |
+| … | | |
 | 58 | 2/24/2026 | 71642 |
 | 59 | 2/25/2026 | 71642 |
 
