@@ -78,25 +78,8 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Engines
 
-Docx engine: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/cand.lua` (cover, caption, numbered allegations, lettered prayer items, signature block). Sample build: `usage/OUTPUT-complaint.docx` (valid zip, every XML part well-formed). Not rendered: no LibreOffice on the build box, so **pages reviewed = 0**. `make-reference.sh` needs `unzip` and `zip`, which the build box lacks; it was run with a stand-in built on libzip's `ziptool` (outside the repo). Tell the lead before relying on a rebuild on another box.
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate") and set Times New Roman 12 pt (Civil L.R. 3-4(c)(2)): body text, headings and prayer items in exact 24 pt line boxes on the 27 numbered lines; counsel, caption and signature lines in 12 pt boxes, two to a numbered line, every second baseline a numbered line's. The docx breaks every line and page where typst does (`eval.yaml`: `params.cross_engine: gate`; XENG-001..003 pass, 332 of 332 lines).
 
-What the docx sets (in `styles.xml`, `document.xml` and the footer part; not rendered):
-- Liberation Serif 12 pt in the document defaults, black text; footnotes 12 pt, single spaced.
-- Exact 24 pt line pitch for body, headings and list items, no space before or after; body first-line indent 0.5 in; headings 1 and 2 centred bold, heading 3 bold italic.
-- US Letter; top 1 in, bottom 0.67 in, left 1.5 in, right 0.75 in (28 x 24 pt fills the text area exactly).
-- Pleading form: line numbers 1 to 28 restarting each page (`w:lnNumType`), a double rule at the left and a single rule at the right (`w:pgBorders`). Cover, caption and signature styles are unnumbered (`suppressLineNumbers`).
-- Footer: centred PAGE field, 10 pt.
+Docx engine (fb-595.68.22): `docx/reference.xml` (the cross-engine style recipe, `base="xengine"`, in the typst face) and `docx/cand.lua`, no shell. The filter writes the cover (counsel, court title on line 8, the caption with the parties in a table ruled at its right and bottom), the numbered allegations (the number in a half-inch box after the indent, as typst), the headings, the lettered prayer items and the signature block (one row that does not split, kept with the last paragraph); and through fb render's `$FORMBOOK_FOOTERS` and `$FORMBOOK_FINAL` the page (letter, 1 in top, 1.5 in left, 1 in right) and its footer: the page number, the paper's title and the case number (Civil L.R. 3-4(c)(3)), with the line numbers 1 to 27 in a page-anchored VML text box and the pleading rules as page-high VML boxes behind the text. LibreOffice keeps a VML text box's default inset whatever `inset` says, so the box is moved by the measured difference (`BOX_DX`, `BOX_DY` in the filter); Word may set the numbers a few points off.
 
-What differs from the typst template:
-- The caption is paragraphs, not a bordered box with the closing rule.
-- Word numbers body text lines, so the body lines land on the numbered lines only while every paragraph is exact 24 pt; the typst "on-grid" placement is not checked in Word.
-- Word draws the pleading rules beside the text area, not the full page height as typst does.
-- The footer has the page number only. The paper title and case number are case text; a per-case footer needs a `docx/render.sh` step (not written).
-- Prayer items are lettered (a), (b) ... by the filter; the hanging indent is pandoc's list default.
-- Numbering of allegations is by the filter, one number per body paragraph (as typst).
-
-BLOCKED:
-- docx.pdf gates 0 to 3 (`tools/check.sh --engine docx`): BLOCKED, no `soffice` on the build box (reason: LibreOffice not installed). No `.docx.pdf` was written.
-- Footer title and case number on each page: cannot pass in the reference; needs a per-case step (above).
-- Caption rules (Civil L.R. 3-4(a)(3) layout as drawn by typst): not reproduced; the caption is text.
-- Tier-2 cover form (box, rule spacing on line 8): not verified; no page was viewed.
+Open: the WHEREFORE lead-in and the jury-demand sentence are numbered like every body paragraph (both engines alike).
