@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render is on the shared layout model
+# (lib/*/xengine*, fb-595.68.29) but stays REPORTED, not gated: where a line's footnotes do not fit below it, typst
+# keeps the line and sets the notes on the next page (a note kept whole; split, typst starts it on the page before
+# its reference), while LibreOffice carries the line over with its notes. The sample's p4 line "(citing such cases).
+# Both appellate courts[^3] and trial courts[^4] ..." is such a line, so every page after it ends one line apart.
+params:
+  cross_engine: report

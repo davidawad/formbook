@@ -1,100 +1,214 @@
--- E.D. Ky. memorandum in support of a motion, DOCX engine (docs/DOCX.md). The same markdown contract as the
--- typst template (typst/kyed-motion-brief.typ; contract in ../README.md). Styles come from docx/reference.docx;
--- this filter builds the caption, the keep-together of the conclusion with the signature block, the signature
--- line with its date, and the certificate of service (a new page). No case-specific text and no forced line breaks.
+-- E.D. Ky. memorandum in support of a motion, DOCX engine (docs/DOCX.md): the markdown contract (../README.md) ->
+-- Word on the styles of docx/reference.xml (fb render builds reference.docx from it). Mirrors
+-- typst/kyed-motion-brief.typ: the court title, the case number, the caption (the parties between a top and a bottom
+-- rule), the title, the body (headings, paragraphs, block quotations; footnotes are pandoc's native footnotes, style
+-- Footnote Text), the conclusion kept with the signature block ("Dated:" and "Respectfully submitted," on one line),
+-- and the optional certificate of service on a new page. Requirement IDs (KYED-...) are in ../README.md. Nothing
+-- here is case-specific: every name and number comes from the sample's frontmatter.
 --
--- Word-native parts: the footnotes are pandoc's native footnotes (style "footnote text", 12 pt, single); the
--- headings keep with the next paragraph (keepNext in the heading styles). No table of contents or table of
--- authorities is produced (see ../README.md).
+-- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
+-- exact line boxes of the typst pitch (twips = 20 x pt: 480 the body, 276 a single line), the spaces between blocks
+-- those of the typst template, and the break rules of typst on every run.
 
-local function esc(s)
-  return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
-end
+local xe = require("docx.xengine")
+
+local SINGLE = 276                      -- typst pitch-single 13.8 pt
+local COURT_BELOW = 480                 -- typst court-below 24 pt
+local RULE_SPACE = 240                  -- typst rule-space 12 pt
+local RULE_W = 15                       -- the caption's 0.75 pt rules (w:sz 6): Word and LibreOffice set each rule in a
+                                        -- height of its own (typst draws the strokes over the block's edges), so the
+                                        -- space below each rule is less by it
+local DESIG_ABOVE = 120                 -- typst desig-above 6 pt
+local VERSUS_SPACE = 240                -- typst versus-space 12 pt
+local TITLE_ABOVE, TITLE_BELOW = 480, 240 -- typst title-above 24 pt, title-below 12 pt
+local SIG_ABOVE, SIG_GAP = 480, 240     -- typst sig-above 24 pt, sig-gap 12 pt
+local CERT_TEXT_BELOW = 240             -- typst cert-text-below 12 pt
+local SERVICE_GAP = 180                 -- typst service-gap 9 pt
+local SIG_IND = 4896                    -- typst sig-indent 3.4 in
+local TEXT_W = 9360                     -- 6.5 in: letter, 1 in margins
+local VERSUS_IND = 1728                 -- typst versus-indent 1.2 in
+local DESIG_PAD = 432                   -- typst designation-pad 0.3 in
 
 local function plain(v)
   if v == nil then return "" end
+  if type(v) == "string" then return v end
   return pandoc.utils.stringify(v)
 end
 
-local function px(style, text, ppr)
-  local run = ""
-  if text ~= "" then run = '<w:r><w:t xml:space="preserve">' .. esc(text) .. '</w:t></w:r>' end
-  return '<w:p><w:pPr><w:pStyle w:val="' .. style .. '"/>' .. (ppr or "") .. '</w:pPr>' .. run .. '</w:p>'
+-- The frontmatter as written (typst reads the strings, not markdown: the title's apostrophe stays straight).
+local function raw_meta()
+  local f = io.open(os.getenv("FORMBOOK_META") or "", "r")
+  local s = f and f:read("a") or ""
+  if f then f:close() end
+  return s ~= "" and pandoc.json.decode(s, false) or {}
 end
 
-local function raw(xml) return pandoc.RawBlock("openxml", xml) end
+-- A single-pitch paragraph: o = { before, after, left, right, jc, keep, tab, border }.
+local function p(body, o)
+  o = o or {}
+  local props = {}
+  if o.keep then props[#props + 1] = xe.KEEP end
+  if o.tab then props[#props + 1] = '<w:tabs><w:tab w:val="left" w:pos="' .. o.tab .. '"/></w:tabs>' end
+  props[#props + 1] = xe.spacing(o.before or 0, o.after or 0, SINGLE)
+  props[#props + 1] = xe.ind(o.left or 0, nil, 0, o.right)
+  props[#props + 1] = xe.jc(o.jc or "left")
+  return xe.para(props, body)
+end
 
--- KYED-FIRST-001, KYED-FIRST-002: court title, case number label, caption (party block), title of the paper
-local function caption(m)
-  local out = {}
-  for _, l in ipairs(m.court) do out[#out + 1] = raw(px("CourtTitle", plain(l):upper())) end
-  local label = m.case_label and plain(m.case_label) or "Civil Action No."
-  out[#out + 1] = raw(px("Centered", label .. " " .. plain(m.case_number), '<w:spacing w:before="480"/>'))
-  out[#out + 1] = raw(px("CaptionRule", ""))
-  for i, p in ipairs(m.caption) do
-    if i > 1 then out[#out + 1] = raw(px("PartyV", "v.")) end
-    for _, n in ipairs(p.names) do out[#out + 1] = raw(px("Single", plain(n))) end
-    local d = plain(p.designation)
-    if d ~= "" then out[#out + 1] = raw(px("PartyDesig", d)) end
+-- An empty line of `h` twips (a space of its own, where Word would drop a paragraph's space).
+local function space(h)
+  return xe.para({ xe.spacing(0, 0, h) }, "")
+end
+
+-- A run of paragraphs kept on one page (typst: block(breakable: false)): every one but the last keeps with the next.
+local function kept(ps)
+  for i, x in ipairs(ps) do
+    if i < #ps then ps[i] = x:gsub("^<w:p><w:pPr>", "<w:p><w:pPr>" .. xe.KEEP, 1) end
   end
-  out[#out + 1] = raw(px("CaptionRule", ""))
-  out[#out + 1] = raw(px("CaptionTitle", plain(m.title):upper()))
-  return out
+  return ps
 end
 
--- KYED-SIG-001: "Dated:" at the left margin, "Respectfully submitted," at the right half, single spaced.
--- The tab stop at 3.4 in (the right column of the typst grid) keeps the two on one line.
-local function signature(m)
-  local sig = m.signature
+-- KYED-FIRST-001, KYED-FIRST-002: the court title (one centred bold line per `court` entry, in capitals), the case
+-- number, the caption (the parties in a one-cell table whose top and bottom borders are the rules; the space inside
+-- the rules an empty line of typst rule-space at the top and foot) and the title of the paper.
+local function first_page(meta, raw)
   local out = {}
-  out[#out + 1] = raw('<w:p><w:pPr><w:pStyle w:val="SigDated"/></w:pPr><w:r><w:t xml:space="preserve">Dated: '
-    .. esc(plain(m.date)) .. '</w:t></w:r><w:r><w:tab/></w:r><w:r><w:t>Respectfully submitted,</w:t></w:r></w:p>')
-  local pre = sig.preamble or {}
-  for i, l in ipairs(pre) do out[#out + 1] = raw(px(i == 1 and "SigGap" or "SigKeep", plain(l))) end
-  out[#out + 1] = raw(px("SigGap", plain(sig.sign_line)))
-  local lines = sig.lines or {}
-  for i, l in ipairs(lines) do out[#out + 1] = raw(px(i == #lines and "SigLast" or "SigKeep", plain(l))) end
-  return out
-end
-
--- KYED-SIG-002: optional certificate of service, on a new page; single-spaced service blocks
-local function certificate(m)
-  local c = m.certificate
-  if c == nil then return {} end
-  local out = {}
-  out[#out + 1] = raw(px("CertHeading", "CERTIFICATE OF SERVICE"))
-  out[#out + 1] = pandoc.Div({ pandoc.Para(c.text) }, pandoc.Attr("", {}, { ["custom-style"] = "CertText" }))
-  for _, s in ipairs(c.services) do
-    local n = #s
-    for i, l in ipairs(s) do
-      out[#out + 1] = raw(px(i == n and "ServiceLast" or "ServiceKeep", plain(l)))
+  for _, l in ipairs(meta.court) do
+    out[#out + 1] = p(xe.runs(pandoc.text.upper(plain(l)), { b = true }), { jc = "center" })
+  end
+  local label = meta.case_label and plain(meta.case_label) or "Civil Action No."
+  out[#out + 1] = p(xe.runs(label .. " " .. plain(meta.case_number)), { jc = "center", before = COURT_BELOW })
+  local cell = { space(RULE_SPACE - RULE_W) }
+  for i, side in ipairs(meta.caption) do
+    if i > 1 then cell[#cell + 1] = p(xe.runs("v."), { left = VERSUS_IND, before = VERSUS_SPACE }) end
+    for j, n in ipairs(side.names) do
+      cell[#cell + 1] = p(xe.inl(n), { before = (i > 1 and j == 1) and VERSUS_SPACE or 0 })
+    end
+    if plain(side.designation) ~= "" then
+      cell[#cell + 1] = p(xe.inl(side.designation), { jc = "right", right = DESIG_PAD, before = DESIG_ABOVE })
     end
   end
-  out[#out + 1] = raw(px("SigTop", plain(c.sign_line)))
-  out[#out + 1] = raw(px("SigLast", plain(c.designation)))
+  cell[#cell + 1] = space(RULE_SPACE)
+  local rule = 'w:val="single" w:sz="6" w:space="0" w:color="000000"/>'
+  out[#out + 1] = space(RULE_SPACE)
+    .. '<w:tbl><w:tblPr><w:tblW w:w="' .. TEXT_W .. '" w:type="dxa"/>'
+    .. '<w:tblBorders><w:top ' .. rule .. '<w:left w:val="nil"/><w:bottom ' .. rule .. '<w:right w:val="nil"/>'
+    .. '<w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders><w:tblLayout w:type="fixed"/>'
+    .. '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/>'
+    .. '<w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
+    .. '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="0"/>'
+    .. '</w:tblPr><w:tblGrid><w:gridCol w:w="' .. TEXT_W .. '"/></w:tblGrid><w:tr><w:trPr><w:cantSplit/></w:trPr>'
+    .. '<w:tc><w:tcPr><w:tcW w:w="' .. TEXT_W .. '" w:type="dxa"/></w:tcPr>' .. table.concat(cell) .. '</w:tc>'
+    .. '</w:tr></w:tbl>'
+  -- the title as written, in capitals, centred bold single lines; typst title-above and title-below around it
+  local title = raw.title or plain(meta.title)
+  out[#out + 1] = p(xe.runs(pandoc.text.upper(title), { b = true }),
+    { jc = "center", before = TITLE_ABOVE - RULE_W, after = TITLE_BELOW, keep = true })
+  return table.concat(out)
+end
+
+-- KYED-SIG-001: "Dated:" at the margin, "Respectfully submitted," at the signature indent (a tab), then the preamble,
+-- the signature line (typst sig-gap above each group) and the signer's lines; kept on one page.
+local function signature(meta)
+  local sig = meta.signature
+  local s = { p(xe.runs("Dated: ") .. xe.inl(meta.date) .. xe.runs("\tRespectfully submitted,"),
+    { before = SIG_ABOVE, tab = SIG_IND }) }
+  for i, l in ipairs(sig.preamble or {}) do
+    s[#s + 1] = p(xe.inl(l), { left = SIG_IND, before = i == 1 and SIG_GAP or 0 })
+  end
+  s[#s + 1] = p(xe.inl(sig.sign_line), { left = SIG_IND, before = SIG_GAP })
+  for _, l in ipairs(sig.lines or {}) do s[#s + 1] = p(xe.inl(l), { left = SIG_IND }) end
+  return table.concat(kept(s))
+end
+
+-- KYED-SIG-002: the optional certificate of service on a new page: its heading (Certificate Heading), its text (a
+-- body paragraph), the service blocks (single lines, each kept whole, typst service-gap between them) and the
+-- signature line and designation at the signature indent.
+local function certificate(meta)
+  local c = meta.certificate
+  if c == nil then return {} end
+  local out = {
+    pandoc.Div({ pandoc.Para({ pandoc.Str("CERTIFICATE"), pandoc.Space(), pandoc.Str("OF"), pandoc.Space(),
+      pandoc.Str("SERVICE") }) }, { ["custom-style"] = "Certificate Heading" }),
+    pandoc.Div({ pandoc.Para(c.text) }, { ["custom-style"] = "Body Text" }),
+  }
+  local x = {}
+  for i, s in ipairs(c.services) do
+    local block = {}
+    for j, l in ipairs(s) do
+      block[#block + 1] = p(xe.inl(l), { before = j == 1 and (i == 1 and CERT_TEXT_BELOW or SERVICE_GAP) or 0 })
+    end
+    x[#x + 1] = table.concat(kept(block))
+  end
+  x[#x + 1] = table.concat(kept({ p(xe.inl(c.sign_line), { left = SIG_IND, before = SIG_ABOVE }),
+    p(xe.inl(c.designation), { left = SIG_IND }) }))
+  out[#out + 1] = xe.raw(table.concat(x))
   return out
 end
 
-function Pandoc(doc)
-  local m = doc.meta
-  local out = caption(m)
-  -- the conclusion and the signature block are kept together (KYED-SIG-001): every conclusion paragraph keeps with
-  -- the next, and the signature lines keep with each other
-  local conc = nil
-  for i, b in ipairs(doc.blocks) do
-    if b.t == "Header" and b.level == 1 and plain(b.content):upper() == "CONCLUSION" then conc = i break end
+-- Break opportunities as typst has them (Unicode line breaking, UAX #14): none inside a token of adjacent parentheses
+-- ("12(b)(6)"; lib/typst/xengine.typ boxes it): a word joiner (U+2060) between ")" and "("; one after a slash
+-- followed by a letter, where LibreOffice keeps the word whole: a zero-width space (U+200B) after it. Neither shows
+-- in the PDF text. On the body and the metadata alike (pandoc walks both).
+-- A doubled sign keeps with its number ("¶¶ 133-134", as typst binds it): the space after it a no-break space.
+local function bind_doubled(l)
+  for i = 1, #l - 1 do
+    if l[i].t == "Str" and l[i + 1].t == "Space" and l[i].text:match("^[\u{00A7}\u{00B6}][\u{00A7}\u{00B6}]+$") then
+      l[i + 1] = pandoc.Str("\u{00A0}")
+    end
   end
-  for i, b in ipairs(doc.blocks) do
-    if conc and i > conc and b.t == "Para" then
-      out[#out + 1] = pandoc.Div({ b }, pandoc.Attr("", {}, { ["custom-style"] = "BodyKeep" }))
+  return l
+end
+
+local function break_rules(s)
+  local t = s.text
+  if t:find(")(", 1, true) then t = t:gsub("%)%(", ")\u{2060}(") end
+  if t:find("/", 1, true) then t = t:gsub("/([^/%d%s])", "/\u{200B}%1") end
+  if t ~= s.text then return pandoc.Str(t) end
+end
+
+-- A paragraph that anchors a footnote has no widow control (the "Note" styles, docx/reference.xml).
+local function has_note(inlines)
+  local note = false
+  pandoc.Inlines(inlines):walk({ Note = function() note = true end })
+  return note
+end
+
+local function styled(style, inlines)
+  if has_note(inlines) then style = style .. " Note" end
+  return pandoc.Div({ pandoc.Para(inlines) }, { ["custom-style"] = style })
+end
+
+local function finish(doc)
+  local meta = doc.meta
+  local out = { xe.raw(first_page(meta, raw_meta())) }
+  local in_conclusion = false
+  for _, b in ipairs(doc.blocks) do
+    if b.t == "Header" then
+      local c = b.content
+      if b.level == 1 then
+        -- the conclusion keeps with the signature block (typst sticky); level 1 in capitals, as typst's upper()
+        in_conclusion = pandoc.text.upper(plain(c)) == "CONCLUSION"
+        c = c:walk({ Str = function(s) return pandoc.Str(pandoc.text.upper(s.text)) end })
+      end
+      out[#out + 1] = pandoc.Header(math.min(b.level, 4), c)
+    elseif b.t == "Para" or b.t == "Plain" then
+      out[#out + 1] = styled(in_conclusion and "Conclusion" or "Body Text", b.content)
     else
+      -- the block quotations (Block Text) as pandoc writes them
       out[#out + 1] = b
     end
   end
-  for _, b in ipairs(signature(m)) do out[#out + 1] = b end
-  for _, b in ipairs(certificate(m)) do out[#out + 1] = b end
-  doc.blocks = out
-  doc.meta.title = nil
-  doc.meta.date = nil
-  return doc
+  for _, b in ipairs(certificate(meta)) do out[#out + 1] = b end
+  -- the signature block goes before the certificate
+  local body = pandoc.Blocks(out):walk({ Inlines = xe.inlines })
+  local at = #body + 1
+  for i, b in ipairs(body) do
+    if b.t == "Div" and b.attributes["custom-style"] == "Certificate Heading" then at = i break end
+  end
+  body:insert(at, xe.raw(signature(meta)))
+  -- The frontmatter was consumed above; pandoc would otherwise write its title and date at the top of the document.
+  return pandoc.Pandoc(body, pandoc.Meta({}))
 end
+
+return { { Str = break_rules, Inlines = bind_doubled }, { Pandoc = finish } }
