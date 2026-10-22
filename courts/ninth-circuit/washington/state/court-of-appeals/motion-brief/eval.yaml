@@ -1,7 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). LaTeX passes XENG-001..003. DOCX
-# reports XENG-003: on p24 it keeps a line ending 0.06 pt past the measure; at p33 it keeps the following body line
-# beside a note holding a long URL (docs/open-items/fb-595.54.47.md).
+# reports XENG-003 (pages and page ends equal): on p24 line 6 and p43 line 3 LibreOffice keeps a word on a line
+# typst fills to within hundredths of a point of the measure (the line-fit tolerance; docs/open-items/fb-595.54.47.md).
 params:
   cross_engine: gate
   cross_engine_docx: report

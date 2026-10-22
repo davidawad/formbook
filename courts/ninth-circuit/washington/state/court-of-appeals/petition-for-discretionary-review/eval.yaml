@@ -1,6 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: typst breaks
-# "¶¶ 180-82" between the two pilcrows (lib/typst/xengine.typ binds one sign to its number), LaTeX and Word do not
-# (p17; docs/open-items/fb-595.54.47.md).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). The doubled pilcrow (p17) now breaks
+# alike. Reported, not gated (pages and page ends equal; docs/open-items/fb-595.54.47.md): XENG-003 p31 line 9,
+# "RCW 7.72.030(1)(b)-(c)": LaTeX and Word break after the hyphen before "(", typst does not; LaTeX p22, p29 the
+# separator "* * *" reads as one word ("***"); DOCX p23 line 9 a line LibreOffice fits a word more (line fit).
 params:
   cross_engine: report
