@@ -61,7 +61,19 @@
 #let rule-line() = line(length: 100%, stroke: 0.75pt)
 
 /// One line of a cover or signature block, with inline markdown (emphasis) honored.
-#let md-line(l) = if l.len() > 2 and l.starts-with("*") and l.ends-with("*") { emph(l.slice(1, l.len() - 1)) } else { [#l] }
+/// A markdown-escaped asterisk (`\*`) prints as a plain asterisk.
+#let md-line(l) = if l.len() > 2 and l.starts-with("*") and l.ends-with("*") { emph(l.slice(1, l.len() - 1).replace("\\*", "*")) } else { [#l.replace("\\*", "*")] }
+
+/// Counsel blocks (each `lines:`), one per counsel group, in two columns, each block kept whole.
+#let counsel-grid(blocks) = grid(
+  columns: (1fr, 1fr),
+  column-gutter: 0.3in,
+  row-gutter: 0.22in,
+  ..blocks.map(b => block(breakable: false, align(left, {
+    set par(leading: single-leading, spacing: single-leading, first-line-indent: 0in, justify: false)
+    as-lines(b.at("lines", default: ())).map(md-line).join(linebreak())
+  }))),
+)
 
 // ---------------------------------------------------------------------------
 // Cover (unnumbered page i)
@@ -86,18 +98,11 @@
     v(0.2in)
     for n in meta.notes { text(weight: "bold")[#n]; linebreak() }
   }
-  v(0.25in)
-  // Counsel: one block per counsel group, in two columns, each block kept whole.
-  let blocks = meta.at("counsel", default: ())
-  grid(
-    columns: (1fr, 1fr),
-    column-gutter: 0.3in,
-    row-gutter: 0.12in,
-    ..blocks.map(b => block(breakable: false, align(left, {
-      set par(first-line-indent: 0in)
-      as-lines(b.at("lines", default: ())).map(md-line).join(linebreak())
-    }))),
-  )
+  v(0.5in)
+  // Counsel on the cover: the lead counsel only when the frontmatter names them (`lead_counsel`, TRAP 9.4(g):
+  // the lead counsel's identification), so a long counsel list cannot push the cover onto a second page;
+  // every counsel group then follows the signature. Without `lead_counsel`, the counsel groups go here.
+  counsel-grid(meta.at("lead_counsel", default: meta.at("counsel", default: ())))
   if "date" in meta {
     v(0.25in)
     align(left)[#meta.date]
@@ -306,6 +311,10 @@
   if "signature" in meta {
     if "date" in meta { block(breakable: false, above: 1.2em, [Dated: #meta.date]) }
     signature-block(meta.signature)
+  }
+  // When the cover carries only the lead counsel, every counsel group follows the signature.
+  if "lead_counsel" in meta and "counsel" in meta {
+    block(above: 1.2em, below: 1.2em, counsel-grid(meta.counsel))
   }
   if "service" in meta {
     service-certificate(meta)

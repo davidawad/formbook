@@ -1,11 +1,34 @@
 ---
-# Transcribed from FILED-EXAMPLE-motion-brief.pdf: PDF pages 6-19 (printed pages 1-14, Introduction through Conclusion and prayer). The signature block (printed 14-17) is in the signature key and the certificate of service (printed 18) is in the service key. Left out: cover (counsel blocks kept), tables of contents and authorities, the running title on the first body page, the Certificate of Conference and Certificate of Compliance, Appendices A and B, and the exhibits.
+# Transcribed from FILED-EXAMPLE-motion-brief.pdf: PDF pages 6-19 (printed pages 1-14, Introduction through Conclusion and prayer). The signature (printed 14-17) is the signature key followed by the counsel groups and the certificate of service (printed 18) is in the service key. Left out: cover (counsel blocks kept), tables of contents and authorities, the running title on the first body page, the Certificate of Conference and Certificate of Compliance, Appendices A and B, and the exhibits.
 docket: "NO. 18-0358"
 court:
   - "In the Supreme Court of Texas"
   - "Judicial Panel on Multidistrict Litigation"
 caption: "In re Texas Opioid Litigation"
 brief_title: "DISTRIBUTOR DEFENDANTS’ JOINT MOTION TO TRANSFER AND REQUEST FOR IMMEDIATE STAY AND JOINDER IN MANUFACTURERS’ JOINT MOTION TO TRANSFER"
+# TRAP 9.4(g): the cover names the lead counsel for each filing party (the filed cover marks two "lead attorney");
+# every counsel group, in `counsel`, follows the signature.
+lead_counsel:
+  - lines:
+      - "Robert Scott, lead attorney"
+      - "State Bar No. 17911800"
+      - "rscott@blankrome.com"
+      - "BLANK ROME LLP"
+      - "717 Texas Ave., Suite 1400"
+      - "Houston, Texas 77002"
+      - "Tel: 713.228.6601"
+      - "Fax: 713.228.6605"
+      - "*Counsel for Defendant McKesson Corporation*"
+  - lines:
+      - "Michael W. Mengis, lead attorney"
+      - "State Bar No. 13941040"
+      - "mmengis@bakerlaw.com"
+      - "BAKER & HOSTETLER LLP"
+      - "811 Main Street, Suite 1100"
+      - "Houston, Texas 77002"
+      - "Tel: 713.751.1600"
+      - "Fax: 713.751.1717"
+      - "*Counsel for Defendant Cardinal Health, Inc.*"
 counsel:
   - lines:
       - "Robert Scott, lead attorney"
@@ -91,21 +114,6 @@ signature:
   - "By: BLANK ROME LLP"
   - ""
   - "/s/ Robert Scott"
-  - "Robert Scott, lead attorney"
-  - "State Bar No. 17911800"
-  - "rscott@blankrome.com"
-  - "Marquel S. Jordan"
-  - "State Bar No. 24041870"
-  - "mjordan@blankrome.com"
-  - "Emery G. Richards"
-  - "State Bar No. 24089038"
-  - "erichards@blankrome.com"
-  - "BLANK ROME LLP"
-  - "717 Texas Ave., Suite 1400"
-  - "Houston, Texas 77002"
-  - "Tel: 713.228.6601"
-  - "Fax: 713.228.6605"
-  - "Counsel for Defendant McKesson Corporation"
 service:
   date: "May 1, 2018"
   signer:

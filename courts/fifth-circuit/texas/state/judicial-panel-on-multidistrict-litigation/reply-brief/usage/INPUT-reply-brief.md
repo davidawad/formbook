@@ -1,11 +1,23 @@
 ---
-# Transcribed from FILED-EXAMPLE-reply-brief.pdf: printed pages 1-6 (PDF pages 5-10), with footnotes 1-9. Left out: cover page layout, the repeated body title at the top of page 1, page numbers, running text of the cover footnote on the AmerisourceBergen block, the signature blocks after the lead signer, the certificate of compliance and the certificate of service (service date and signer only).
+# Transcribed from FILED-EXAMPLE-reply-brief.pdf: printed pages 1-6 (PDF pages 5-10), with footnotes 1-9. Left out: cover page layout, the repeated body title at the top of page 1, page numbers, running text of the cover footnote on the AmerisourceBergen block, the signature blocks after the lead signer (the counsel groups, rendered after the signature), the certificate of compliance and the certificate of service (service date and signer only).
 docket: "NO. 18-0358"
 court:
   - "In the Supreme Court of Texas"
   - "Judicial Panel on Multidistrict Litigation"
 caption: "In re Texas Opioid Litigation"
 brief_title: "JOINT REPLY IN SUPPORT OF DEFENDANTS’ MOTIONS TO TRANSFER"
+# TRAP 9.4(g): the cover names the lead counsel only; every counsel group, in `counsel`, follows the signature.
+lead_counsel:
+  - lines:
+      - "Noelle M. Reed"
+      - "State Bar No. 24044211"
+      - "noelle.reed@skadden.com"
+      - "SKADDEN, ARPS, SLATE, MEAGHER & FLOM LLP"
+      - "1000 Louisiana Street, Suite 6800"
+      - "Houston, Texas 77002"
+      - "Tel: (713) 655-5122"
+      - "Fax: (713) 483-9122"
+      - "*Lead Counsel for Defendants*"
 counsel:
   - lines:
       - "Noelle M. Reed\\*"
@@ -171,16 +183,6 @@ signature:
   - "Respectfully submitted,"
   - ""
   - "/s/ Noelle M. Reed"
-  - "Noelle M. Reed"
-  - "State Bar No. 24044211"
-  - "noelle.reed@skadden.com"
-  - "SKADDEN, ARPS, SLATE, MEAGHER & FLOM LLP"
-  - "1000 Louisiana Street, Suite 6800"
-  - "Houston, Texas 77002"
-  - "Tel: (713) 655-5122"
-  - "Fax: (713) 483-9122"
-  - ""
-  - "*Counsel for Purdue Pharma L.P.; Purdue Pharma Inc.; and The Purdue Frederick Company Inc.*"
 service:
   date: "May 21, 2018"
   signer:
