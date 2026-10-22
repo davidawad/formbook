@@ -56,7 +56,7 @@ Not produced by this template (separate papers, not part of the complaint): the 
 4. **Page count.** Our render is 9 pages against the exemplar's 10. The cause has not been determined (font metrics and the exemplar's line breaks are the likely candidates).
 5. **Transcription.** The sample is the filed text from its text layer. Two extraction artifacts are corrected: "Venue isMmm proper" is written "Venue is proper", and the stray "that that" in paragraph 46 is kept as filed. Case names are roman in the transcription (the text layer has no italics). Typographic errors in the filing are kept as filed.
 6. **Paragraph numbering.** The template numbers paragraphs; the transcription has 69 numbered paragraphs, the same count as the filed last paragraph (69). Each filed paragraph number was not compared individually.
-7. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court-root shape (`court.json`, `rules.md`) and are not run for this doc-type folder; the brief forbids editing `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type. No stamp is written.
+7. **Checks.** `sh tools/check.sh <this folder> --engine typst` (9 passed, 0 failed) and `--engine docx` (13 passed, 0 failed, XENG-001..003 gated) write the `usage/.check-<engine>.txt` stamps (2026-10-22, fb-595.68.25). `tools/check-selftest.sh` needs a court root (`court.json`) and is not run for this doc-type folder.
 8. **Rule 9004-1 signature.** Signature under Rule 9011 is shown as the "/s/" line in the sample; the template does not verify it.
 
 ## Review of the rendered pages (final state)
