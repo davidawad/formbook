@@ -1,5 +1,7 @@
 PASS
-2122aa6a51acac3bc22c18d7b86e806c723ed1b2f6c6f53c91a083f6a1a7d238  usage/OUTPUT-reply-brief-2.docx
-fa09b09506654ea0ef2dedac1518ddc85ba8bc02d8f58bcaf70ff5a2315d8d9d  usage/OUTPUT-reply-brief-2.docx.pdf
-188544d2ba33c2f4e0df76c1e77d5563b9c3ce6a36b4420d95022c9b171e6ea8  usage/OUTPUT-reply-brief.docx
-d865597dc5896b2889dddedd2939443575f1f3fe04f091420fa012679deeb34b  usage/OUTPUT-reply-brief.docx.pdf
+35ba57942daf3af5b5237d8e5a9ece95a5215be9db0a193d3e9a9c2cecc44070  usage/OUTPUT-reply-brief-2.docx
+4c3553b3c5c7c16f9f0791658eaef05cdec5acb0894a08d88e1005c14778f905  usage/OUTPUT-reply-brief-2.docx.pdf
+41a55070722e3d1b5b42be18fc2899730eb4de8934ddbaf6ed9a8db503216f63  usage/OUTPUT-reply-brief-2.typst.pdf
+854c365b28780028fc35d36a2329d3e3dc2e148991b1309a032cef02b79ba59e  usage/OUTPUT-reply-brief.docx
+4cf52bbc00365c5912a605049dd175bec70009dcdceabb0c52b59970d92efa59  usage/OUTPUT-reply-brief.docx.pdf
+ca1d05b0e2c2559f4f20dd0fa13fd2e7bfd9f169fb55d0fc12d78f6bfa38b61d  usage/OUTPUT-reply-brief.typst.pdf

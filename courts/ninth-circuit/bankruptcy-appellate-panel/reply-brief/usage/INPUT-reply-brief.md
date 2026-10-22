@@ -6,7 +6,9 @@
 # of B(a) (filed pages 7-13: the Pourteymour quotations, footnotes 5-6, the claim-allowance and structured-dismissal
 # discussion), the service list of CM/ECF participants, and the server's declaration. Text from the PDF's text
 # layer; the filer's wording is kept as filed (including "Appellee" on the cover and "BEAVOR, ET AL" without a
-# period). The table of authorities is generated from the excerpt, so it lists only the authorities cited in it.
+# period). The Kaiser Gypsum quotation nests double quotes as filed (an opening quote inside an opening quote); it is
+# typed with curly quotes, which every engine prints as typed (straight ones are paired differently by each smart-quote
+# reader). The table of authorities is generated from the excerpt, so it lists only the authorities cited in it.
 # Not an input to any rule; the layout is the template's.
 case_number: "Case No. 25-1050"
 bankruptcy_case:
@@ -146,7 +148,7 @@ Appellees contend that Appellants lack standing because, in their view, the Dism
 
 Finally, these injuries are redressable. Remand of the Dismissal Order with instructions as to the treatment of Appellants' Proofs of Claim, would restore Appellants' opportunity to address the treatment of its claims in connection with dismissal of the bankruptcy case. Reversal would address not only the claims issues, but also the Beavor guarantee liability and the management control issues of the Debtor. Because remand or reversal would eliminate identified injuries and restore lost opportunities, the redressability prong of [*Lujan*](toa:lujan) is satisfied.
 
-Appellee's argument is also soundly rejected by the more recent decision of the United States Supreme Court in [*Truck Insurance Exchange v. Kaiser Gypsum Company, Inc.*, 602 U.S. 268 (2024)](toa:kaiser). In *Kaiser Gypsum*, the question was whether certain insurers had standing to appeal confirmation of a chapter 11 plan which the bankruptcy court had adjudged as "insurance neutral." The Court stated that "Section 1109(b) permits any "party in interest" to "appear and be heard on any issue" in a Chapter 11 proceeding." *Kaiser Gypsum*, 602 U.S., at 277.
+Appellee's argument is also soundly rejected by the more recent decision of the United States Supreme Court in [*Truck Insurance Exchange v. Kaiser Gypsum Company, Inc.*, 602 U.S. 268 (2024)](toa:kaiser). In *Kaiser Gypsum*, the question was whether certain insurers had standing to appeal confirmation of a chapter 11 plan which the bankruptcy court had adjudged as "insurance neutral." The Court stated that “Section 1109(b) permits any “party in interest” to “appear and be heard on any issue” in a Chapter 11 proceeding.” *Kaiser Gypsum*, 602 U.S., at 277.
 
 ### b) Appellants Can Prove Prudential "Person Aggrieved" Standing
 

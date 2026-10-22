@@ -35,7 +35,7 @@ BAP R. 8015(a)-1 itself was read on 2026-10-16 (https://cdn.ca9.uscourts.gov/dat
 
 `typst/bap9-answering-brief.typ` is the opening-brief template with its per-type settings block changed (`kind`, `title`, `required`, `certs`). It includes the two fixes made when the opening brief was checked against its exemplar (see `../opening-brief/README.md`, "Template changes from the overlay"). Since 2026-10-16 it also has the changes listed under "Template changes from the overlay" below, which the opening template does not yet have.
 
-- Leading: 1.3em, which gives the 36.5 pt double-spaced line pitch measured on the render.
+- Line pitch: 31 pt body lines (double spacing, BAP-FORM-003) and 17 pt single-spaced elements, as exact line boxes (the cross-engine layout model, see "Engines"; until 2026-10-22: 1.3em leading, about 31 pt with Times New Roman, plus a 1.3em paragraph gap).
 - Table of authorities, signature keep-with-last-paragraph, unbreakable certificates: as in the opening brief.
 
 
@@ -136,13 +136,15 @@ Tier-2 comparison with the alternate (Hujazi, viewed pages 1, 2, 4, 5, 6, 7): Hu
 - Status unchanged: **BLOCKED: no public exemplar.**
 ## Engines
 
-docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/bap9.lua` builds the cover, front matter, signature and certificates from the frontmatter; output `usage/OUTPUT-<id>.docx`).
+typst (the reference) and docx, both on the shared cross-engine layout model (docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.54.4): `typst/bap9-*.typ` applies `lib/typst/xengine.typ`; `docx/build-reference.sh` builds `docx/reference.docx` with `lib/docx/xengine-reference.sh`, and `docx/bap9.lua` (on `lib/docx/xengine.lua`) writes the cover, the tables with their page numbers, the headings, lists, signature and certificates with the typst template's pitches, spaces, indents and columns. The three BAP9 templates (opening, answering, reply) are one text in each engine; only the per-type block (`doc` in typst, `CFG` in the filter) differs. Output `usage/OUTPUT-<id>.docx` and its LibreOffice PDF `usage/OUTPUT-<id>.docx.pdf`.
 
-- Matches the typst form: US Letter with 1 in margins; EB Garamond 14 pt (font name declared; it must be installed where the file is opened); double spacing as exact 36.5 pt lines, the typst 1.3em gap between paragraphs, 0.5 in first-line indent; single-spaced headings, quotations, footnotes, table entries, signature and certificates; centered bold level-1 headings, bold left level-2 and level-3 headings with hanging indent. Three sections: cover with no footer, front matter in lower roman from i, body and certificates in arabic from 1. The filter applies the same word limit and required-heading checks as the typst template and passes the body word count to the compliance certificate (the opening and reply counts, 1,782 and 344, match the figures recorded in those READMEs).
-- Differs from the typst form: (1) the table of contents is a TOC field whose cached result lists the headings without page numbers; Word or LibreOffice shows page numbers after a field update. (2) The table of authorities lists the cited authorities without page numbers in every viewer (LibreOffice does not honor TA/TOA fields), so it has no dot leaders. (3) Line breaks and page breaks follow Word or LibreOffice, not the typst render. (4) The last body paragraph is kept with the signature block (KeepWithNext); certificates are not forced onto one page.
-- BLOCKED, docx.pdf gates (Gates 0 and 1 run on the LibreOffice PDF): no `soffice` on this box, so `tools/render-docx.sh` writes the .docx and fails at the conversion step. No `OUTPUT-<id>.docx.pdf` exists and no page of the .docx has been viewed; pages_reviewed is 0 for the docx engine.
-- BLOCKED, page-number checks: the TOC and TOA page-number checks cannot pass by construction in this engine (no page numbers without a field update and a TOA field that LibreOffice does not honor), until the docx filter writes page numbers from a first pass.
-- The .docx was validated for a valid zip, well-formed XML in every part, three sections with footer references, and every paragraph style defined in styles.xml. It has not been opened in Word or LibreOffice.
+- One face: Times New Roman 14 pt in both engines (typst falls back to Liberation Serif, its metric twin; the docx names Times New Roman). The opening brief was EB Garamond until fb-595.54.4: LibreOffice sets EB Garamond's f-ligatures, which Word and typst do not, so its lines drifted up to 1.96 pt from typst's; the answering and reply templates were already Times New Roman (their docx still named EB Garamond, a DEF-FONT-002 mismatch, now fixed).
+- Line boxes: body 31 pt (double spacing, BAP-FORM-003), everything single-spaced 17 pt (headings, cover, tables, quotations, footnotes, signature, certificates); no space between body paragraphs (the 0.5 in first-line indent marks them); spaces between blocks in whole points, the same in twips in the filter.
+- Tables: each row wraps before its page column (36 pt contents, 56 pt or the page list's width for authorities) and a dot leader runs to the page. The docx filter writes the page numbers from a first LibreOffice pass (fb render, docxpass.rs: a heading is found by its title, a citation by its text and the words after it, or by its first word when it runs over a page end; typst files a citation under the page of its first word too).
+- Footnotes: 14 pt in 17 pt lines, 7 pt apart, a 2 in rule; between the body and the first note the height of Word's separator paragraph (16.1 pt, measured on LibreOffice: typst `clearance` + `gap`), so both engines end a page above the same note.
+- Break rules both engines share: no break inside "362(a)(4)" (typst boxes it; the filter puts a word joiner between ")" and "("), none after a slash inside a word ("CM/ECF"), none after a section sign; footnote marks are the digit at 58 % (typst `super(typographic: false)`).
+- Gate 4 CROSS-ENGINE gates (`params.cross_engine: gate` in `eval.yaml`): XENG-001..003 PASS on every INPUT (pages, page ends and every line break as typst's; width drift of an identical line at most 0.43 pt).
+
 ## Render check 2026-10-15
 
 Re-rendered `usage/OUTPUT-fictional-*.pdf` with `sh tools/render.sh` (exit 0, no typst warnings). `sh tools/overlay.sh` exits 1 again: no exemplar pdf. Every page rendered at 60 dpi and viewed: answering-brief 10 of 10, reply-brief 6 of 6. No template changes in this pass. Still BLOCKED on the exemplar; search log appended to `usage/SOURCE.md`.
@@ -167,3 +169,20 @@ Re-rendered `usage/INPUT-answering-brief.md` with `sh tools/render.sh` (exit 0).
 | 12 | Interested-parties, compliance and service certificates fit without clipping. | PASS |
 
 Current status: `exemplar=yes render=ok overlay=ok pages_reviewed=12`.
+
+## Cross-engine port and review 2026-10-22 (fb-595.54.4)
+
+The template moved onto the shared layout model (see "Engines"): 31 pt body lines with no paragraph gap (was 1.3 em leading plus a 1.3 em gap, about 31 pt lines), single-spaced 17 pt elements, `lib/typst/word-compat.typ` dropped (xengine sets the same composition, ragged right; the `word:` map of `INPUT-answering-brief-3.md`, justified with 76 % spaces, is removed, so that transcription is now ragged right like the others), the tables as rows with a page column, the footnote area as Word's, citations filed under the page of their first word, counsel and signature lines printed as given (no emphasis wrapped around them). Every page of the three typst renders rendered at 45 dpi and viewed; the docx PDFs viewed beside them (XENG-001..003 PASS on all three).
+
+| Sample, PDF page | Finding | Status |
+|---|---|---|
+| answering-brief p1 cover | Case number, court, caption, proceeding, title, the three counsel and telephone; one page. | PASS |
+| answering-brief p2-p3 (i-ii) | Contents with the five Statement-of-the-Case sub-headings indented; authorities (5 cases, 2 statutes, 2 rules) with page lists matching the body. | PASS |
+| answering-brief p4-p12 (1-9) | Body double-spaced; numbered upper-case section headings centered, sub-headings bold and hanging; the conclusion and signature together on page 9. | PASS |
+| answering-brief p13 (10) | Interested parties, compliance (1,801 words), service on one page. | PASS |
+| answering-brief-2 p1-p3 | Cover; contents (Argument's three level-2 headings indented); authorities. | PASS |
+| answering-brief-2 p4-p8 (1-5) | Summary, Argument with its sub-headings, Conclusion and signature on page 5. | PASS |
+| answering-brief-2 p9 (6) | Interested parties, compliance (975 words), service. | PASS |
+| answering-brief-3 p1-p3 | Cover with the bankruptcy case title above the parties; contents (sections I-VII, argument A-D); authorities with "passim" for F.R.B.P. 5009(a). | PASS |
+| answering-brief-3 p4-p17 (1-14) | Body; the numbered statement of issues as a list; three block quotations single-spaced and indented both sides; the six "///" filler lines as filed; the conclusion and signature on page 14. | PASS |
+| answering-brief-3 p18-p19 (15-16) | Interested parties and compliance (2,971 words) on 15; service with the mailed party on 16 ("CM/ECF" kept whole). | PASS |
