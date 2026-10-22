@@ -7,7 +7,7 @@ Folder: `courts/first-circuit/rhode-island/federal/district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer, 11 pages; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md`: the whole filing, converted from the exemplar's text layer and corrected by hand (100 numbered paragraphs, 3 headings per count, prayer, signature). Paragraph numbers are the template's, not transcribed. |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 12 pages, typst 0.15.0, vendored Times New Roman (Liberation Serif metrics) only, no warnings |
 | overlay | ok: `usage/OVERLAY-nightingale-complaint.pdf` and `usage/OVERLAY-nightingale-complaint.txt` |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -23,7 +23,7 @@ Primary sources, fetched 2026-10-14:
 | LR Cv 5(a) | 8 1/2 by 11 inch paper. | `page-w`, `page-h`. |
 | LR Cv 5(a)(1) | Full caption showing the names of all parties. Documents filed after docketing also carry the judge's initials; the complaint is the initial filing, so the case number is blank. | `caption()`, all parties in `caption.parties`; `C.A. No.` blank when `case_number` is empty. |
 | LR Cv 5(a)(2) | Title that states the nature of the document and identifies the filer. | `brief_title` ("COMPLAINT"). |
-| LR Cv 5(a)(3) | Double-spaced, at least 12-point type; footnotes at least 10-point. | `pitch = 27.6pt`, `body-leading = 1.65em`, `type-size = 12pt`. Pitch is the one measured on both filed exemplars (see below). |
+| LR Cv 5(a)(3) | Double-spaced, at least 12-point type; footnotes at least 10-point. | `pitch-double = 27.6pt` (line boxes of the shared cross-engine model), `type-size = 12pt`. Pitch is the one measured on both filed exemplars (see below). |
 | LR Cv 5(a)(3) | Pages of a document longer than one page are numbered at the bottom center. | `set page(numbering: "1")`: every page, centered in the bottom margin. |
 | LR Cv 5(a)(4) | Jury demand to the right of the caption, below the case number. | `jury_demand: true` prints "JURY TRIAL DEMANDED" in the right column under "C.A. No.". |
 | LR Cv 5(a)(5) | Signature with name, address and telephone of the signer; bar number; firm name, address, fax, email. | `signature` (`party`, `signers` with `bar`, `firm` lines). |
@@ -37,14 +37,14 @@ Primary sources, fetched 2026-10-14:
 
 - Court title centered bold (two lines), caption in a two-column grid: parties left (closed by a rule on the right and below), "C.A. No." and the jury demand right.
 - Title centered bold below the caption.
-- Body: 12-point EB Garamond, first-line indent 0.5 inch, paragraphs numbered "1." with a 0.3 inch tab, double spacing (27.6 pt baseline pitch). Headings: level 1 and level 2 centered bold (the sample's "Introduction", "Parties", "Facts" are level 1; "COUNT I" is level 1 and its parenthetical is level 2).
+- Body: 12-point Times New Roman, first-line indent 0.5 inch, paragraphs numbered "1." in a 0.5 inch box (the text of the first line starts 1 inch in), double spacing (27.6 pt baseline pitch). Headings: level 1 and level 2 centered bold (the sample's "Introduction", "Parties", "Facts" are level 1; "COUNT I" is level 1 and its parenthetical is level 2).
 - Every body block has a trailing gap equal to the leading. Without it the next block starts one base line too early and the lines collide (found on the first render and fixed; see LOG below).
 - Signature block: "Dated:" in the left column when given; party line, signers with "/s/" and bar numbers, firm block, all kept on one page.
 - Margins: 1 inch all round. No D.R.I. margin rule was found; 1 inch is a convention (tier 2).
 
 ## Measured line pitch
 
-The template's double-spacing value is not a guess. `pdftotext -bbox-layout` on both filed exemplars gives a baseline pitch of **27.6 pt** at 12 pt (Nightingale, page 3: 65.64, 93.24, 120.84; Tablada, page 3: 72.49, 100.09, 127.69). That is Word's "double" for 12-point Times New Roman (2 x 13.8 pt). The template sets EB Garamond to the same pitch, which takes 11 pages for the 11-page exemplar. An earlier build at 24 pt (a 1.35em leading) was tighter than the filings and was changed.
+The template's double-spacing value is not a guess. `pdftotext -bbox-layout` on both filed exemplars gives a baseline pitch of **27.6 pt** at 12 pt (Nightingale, page 3: 65.64, 93.24, 120.84; Tablada, page 3: 72.49, 100.09, 127.69). That is Word's "double" for 12-point Times New Roman (2 x 13.8 pt). The template sets Times New Roman at the same pitch (12 pages for the 11-page exemplar: the template prints the signature block whole, on page 12). An earlier build at 24 pt (a 1.35em leading) was tighter than the filings and was changed.
 
 ## What the overlay shows
 
@@ -61,6 +61,8 @@ Every page was rendered at 60 dpi and viewed. Findings:
 | 1 | Caption, court title, jury demand and first paragraphs correct. | none |
 | 2-10 | Numbering 1 to 100 in order, count headings centered and kept with the paragraph after them. | none |
 | 11 | Prayer unnumbered, signature block with both signers, firm block complete. | none |
+| 1-12 | (fb-595.68.17) Re-rendered on the shared cross-engine layout model (lib/typst/xengine.typ), Times New Roman: every page of typst and docx viewed at 45-60 dpi side by side; caption, title, headings, numbering 1 to 100, prayer correct; the two engines break every line and page alike. | none |
+| 12 | The signature block does not fit under the prayer on page 11 and is printed whole on page 12 (as before the port). | ACCEPTED (tier 2: the block never splits) |
 
 OPEN: none.
 
@@ -68,7 +70,7 @@ OPEN: none.
 
 1. **One exemplar.** Tier 2 in EVAL-LOOP asks for 2 or 3 filers. The search found Melo v. Lifespan (1:26-cv-00539) and Gifford v. Beacon Mutual (1:26-cv-00340), both complaints in this court. They were not downloaded for layout comparison. Tier-2 conventions here are therefore judged against one filer only.
 2. **Caption rule.** The party column is closed by a rule, not the ")" column the other exemplar uses. Both appear in D.R.I. filings; recorded as a tier-2 choice.
-3. **Font.** LR Cv 5(a)(3) names no typeface (checked 2026-10-14 against the full text of the D.R.I. Local Rules, "Approved Dec 2024 Rules": the only font wording is "at least 12-point font"), so per `docs/FONTS.md` the template keeps EB Garamond (no substitute needed). EB Garamond sets smaller than Times at the same point size, so the text looks lighter than the exemplar. The 12-point minimum is met.
+3. **Font.** LR Cv 5(a)(3) names no typeface (checked 2026-10-14 against the full text of the D.R.I. Local Rules, "Approved Dec 2024 Rules": the only font wording is "at least 12-point font"), so the template sets Times New Roman, the house standard (`docs/FONTS.md`) and the exemplar's face (fb-595.68.17; it was EB Garamond before). The 12-point minimum is met.
 4. **Not produced:** civil cover sheet (LR Cv 5(b)), Rule 7.1 disclosure statement, summons. Separate filings.
 5. **Date line.** The exemplar's text layer has no date for the signature. The template prints "Dated:" only when the sample gives one, so the sample has none.
 6. **File names.** `tools/render.sh` and `tools/overlay.sh` read and write `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (CLAUDE.md "File roles"). The brief's `<id>.md` and `<id>-overlay.pdf` names are not what the tools read, so the repo convention is used.
@@ -79,11 +81,10 @@ LOG:
 
 ## Engines
 
-**typst** is the reference and is unchanged by the docx work.
+**typst** is the reference. Since fb-595.68.17 it is on the shared cross-engine layout model (`lib/typst/xengine.typ`: line boxes of 27.6 pt and 13.8 pt, first fit, ragged right, no kerning or ligatures), and `eval.yaml` sets `params.cross_engine: gate`: the docx must break every line and page as typst does (XENG-001..003).
 
-**docx** (`docx/reference.docx` built by `docx/make-reference.sh`; `docx/rid-complaint.lua` for the cover, the numbered allegations and the signature block). Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice, 11 pages). Status: converts without error; every page of the docx PDF was viewed at 60 dpi beside the typst page of the same sample (pages_reviewed = 11). Not opened in Microsoft Word (not available here); the file is a valid zip with well-formed XML parts.
+**docx** (`docx/reference.xml`: the cross-engine style recipe in the typst face, built by `fb render`; `docx/rid-complaint.lua` writes every paragraph and table on `lib/docx/xengine.lua`). Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice, 12 pages). XENG-001..003 pass: 277/277 typst lines break after the same word, every page starts and ends on the same word. Every page viewed beside the typst page. Not opened in Microsoft Word (not available here).
 
-- *Matches typst (checked on the LibreOffice PDF):* US Letter, 1-inch margins; EB Garamond 12 pt (the only font embedded); double spacing at exact 27.6 pt; single spacing at 13.8 pt for the caption, headings, counsel and signature blocks; the caption (party column with the rule on the right and below, "C.A. No.", JURY TRIAL DEMANDED); the court title and the title of the paper; allegations numbered 1. to 100. with a first-line indent and the number followed by a tab; the WHEREFORE prayer unnumbered; headings (level 1 and 2 centered, level 2 bold italic, level 3 bold at the left); the signature block in the same column, with "/s/" and bar numbers, kept on one page, and the same gaps as typst (measured on the PDF); page number centered at the bottom of every page, arabic from 1. Every body line starts on the same baseline as typst's, offset by a constant 3 pt.
-- *Differs (tier 2, not blocking):* (a) LibreOffice wraps a few body lines one word differently from typst, so some pages end a line or two earlier or later; the docx PDF has 11 pages as typst does, but COUNT VI begins page 11 in the docx and page 10 in typst. (b) Every line sits about 3 pt lower than in the typst PDF (LibreOffice's baseline for exact line spacing), including the top of page 1. (c) The number of a three-digit allegation (paragraph 100) is followed by a tab stop at 1.9 in in Word, so its text starts 11 pt left of typst's (typst sets 0.3 in after the number). (d) The paragraph numbers are typed labels, not Word list numbering (no visible difference; a list would renumber itself if an allegation were inserted).
+- *Differs (tier 2, not blocking):* the signature block on page 12 sits 1 pt lower than typst's (the 1 pt line that carries the space above the block). The paragraph numbers are typed labels, not Word list numbering.
 - *BLOCKED:* none. This folder has no `checks.yaml`, so no check IDs exist for the docx; no Gate 1 check was run on the docx. No tier-1 requirement (paper, font size, spacing, margins, page numbers, caption, jury demand, signature block) is blocked in docx.
 - *Pagination:* Word may paginate slightly differently from LibreOffice (see `docs/DOCX.md`).
