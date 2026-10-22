@@ -8123,6 +8123,8 @@
       "class": "metric-exact",
       "face": "TeX Gyre Termes",
       "why": "Adobe Times metrics (Nimbus Roman lineage)",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.22 under David's 2026-10-17 ruling that Times New Roman is the standard: the template is set in Times New Roman on typst and docx, not in Termes; face stays the audited match. LibreOffice embeds Termes with word boxes 14.5 pt above the baseline (typst 9.1 pt), so a single-spaced cover line 12 pt above a pleading line number fell into that number's line and moved the line order (XENG-003); with Times both engines read every line alike.",
       "fonts": [
         "Arial-BoldMT",
         "ArialMT",

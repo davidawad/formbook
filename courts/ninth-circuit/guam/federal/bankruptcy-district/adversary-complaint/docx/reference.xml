@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The gub adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman: GNLR 5.1 names no face or size; the house standard, recorded as the
+     template_face of the exemplar's audit in data/exemplar-fonts.json) at 12 pt (size 24 half points); Body Text and
+     the headings in exact 24 pt line boxes (typst pitch: GNLR 5.1(a) double-spaced, the numbered lines of the pleading
+     paper) with a half-inch first-line indent. The page (letter, margins 1 in top and bottom, 1.5 in left, 1 in right)
+     and its furniture (the line numbers 1 to 27, the pleading rules, the page number and the paper's title, GNLR
+     5.1(a)) are the section and footer docx/gub-adversary-complaint.lua writes ($FORMBOOK_FINAL, $FORMBOOK_FOOTERS),
+     with every paragraph's own spacing (single-spaced lines in 12 pt boxes, half a numbered line). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="commonmark+smart+yaml_metadata_block" size="24" body="480" single="240" indent="720" heading="480" heading-before="0" heading-after="0" footer="720"/>
