@@ -7,22 +7,35 @@
 // the same sample file (schema: ../README.md).
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = ("Times New Roman", "Liberation Serif")         // vendored in /fonts; the local rules name no typeface
+#let font-family = ("Times New Roman", "Liberation Serif")         // vendored in /fonts; the local rules name no typeface (HIB-FORM-008): the house face
 #let type-size = 14pt                    // HIB-FORM-002: LBR 9004-1(b)(1), all memoranda including footnotes: 14-point type
-#let body-leading = 1em                  // HIB-FORM-003: double spacing. Line pitch is 2.3 em (natural line 1.31 em + this gap),
-                                         // the same pitch as double-spaced Times New Roman, so a page holds the same lines.
-#let single-leading = 0em                // counsel block, caption, headings' tables, footnotes, TOC and TOA entries
-#let blank-line = 1.31em                 // one single-spaced blank line
 #let margin = 1in                        // HIB-FORM-004: LBR 9004-1(b)(3): margins 1 inch from the edge
 #let para-indent = 0.5in
-#let heading-tab = 0.5in
-#let page-number-size = 12pt
+#let heading-tab = 0.5in                 // a heading's label box; each deeper level half an inch further in
+#let caption-inset = 0.2in               // the caption's text stands off the rule between its columns
+#let caption-pad = 12pt                  // the bottom rule stands off the last party line
+#let designation-indent = 1.8in          // a party's designation ("Plaintiff,") under its names
+#let sig-column = 3.2in                  // the signature column, at the right
+#let toc-col = 0.5in                     // the contents' page column
+#let toa-col = 0.75in                    // the authorities' page column
+#let toa-hang = 0.35in                   // an authority's lines after the first
+#let row-gap = 8pt                       // between two rows of a table
+#let note-gap = 7pt                      // between two footnotes (Word: Footnote Text's space after)
+#let note-clearance = 7.5pt              // from the text to the footnote rule: with note-gap, the space LibreOffice keeps above its separator
 #let passim-threshold = 7                // an authority cited on this many pages or more is listed as "passim"
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-double = 32.2pt               // HIB-FORM-003: double spacing, two single lines
+#let pitch-single = 16.1pt               // a single line: 1.15 x the type size (Word's single line in this face); counsel,
+                                         // caption, footnotes, tables, signature (LBR 9004-1(b)(2))
 
 // ---------------------------------------------------------------------------
 // Small helpers
@@ -43,13 +56,17 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// A single-spaced paragraph whose continuation lines are indented by `indent`.
-#let hang(indent, body) = par(
-  hanging-indent: indent, first-line-indent: 0pt, leading: single-leading, justify: false, body,
-)
+/// One single-spaced line block (a paragraph of its own) with explicit space above it; an empty string is a blank
+/// single line.
+#let line-block(above: 0pt, indent: 0pt, body) = block(width: 100%, above: above, below: 0pt,
+  if body == "" { block(height: pitch-single) } else {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    pad(left: indent, if type(body) == str { inl(body) } else { body })
+  })
 
 // ---------------------------------------------------------------------------
-// Headings: numbering and styles
+// Headings: numbering
 // ---------------------------------------------------------------------------
 
 /// Printed label of a numbered heading: level 2 "I.", 3 "A.", 4 "1.", 5 "a.". Level 1 is unnumbered.
@@ -70,36 +87,30 @@
 // Tables of contents and authorities (LBR 9013-2(b))
 // ---------------------------------------------------------------------------
 
-#let dot-leader = box(width: 1fr, repeat[.#h(0.25em)])
+/// A table's title, centered and bold, and its page column's heading at the right.
+#let table-title(title, col) = block(width: 100%, sticky: true, above: 0pt, below: 0pt, {
+  line-block(align(center, strong(title)))
+  line-block(above: pitch-single, align(right, strong(col)))
+})
 
-/// One table-of-contents row from a heading element; wrapped lines hang under the title.
-#let toc-entry(hd) = {
-  let nums = counter(heading).at(hd.location()).slice(0, hd.level)
-  let lab = heading-num(..nums)
-  let ind = label-indent(hd.level)
-  let pg = numbering(hd.location().page-numbering(), ..counter(page).at(hd.location()))
-  // The page number sits in its own column so a wrapped title can never push it onto a new line.
-  link(hd.location(), block(width: 100%, above: 0.45em, below: 0pt, grid(
-    columns: (1fr, auto), column-gutter: 0.4em,
-    hang(ind + heading-tab, {
-      h(ind)
-      if lab != "" { box(width: heading-tab, lab) }
-      hd.body
-      h(0.2em)
-      dot-leader
-    }),
-    align(right + bottom, box(width: 2em, align(right, pg))),
-  )))
-}
+/// The page label of a location.
+#let page-label(loc) = numbering(loc.page-numbering(), ..counter(page).at(loc))
 
-/// Table of contents from the body headings (levels 2 to 4). Level 1 is an unnumbered title and is
-/// not listed.
+/// Table of contents from the body headings (levels 2 to 4). Level 1 is an unnumbered title and is not listed.
 #let toc-section() = {
-  heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  align(right, block(above: 0.3em, below: 0pt, strong[Page]))
+  table-title[TABLE OF CONTENTS][Page]
   context {
+    set text(..edges(pitch-single))
     for hd in query(heading.where(outlined: true)) {
-      if hd.level >= 2 and hd.level <= 4 { toc-entry(hd) }
+      if hd.level < 2 or hd.level > 4 { continue }
+      let lab = heading-num(..counter(heading).at(hd.location()).slice(0, hd.level))
+      let ind = label-indent(hd.level)
+      // the label in its box at the level's indent, the title's lines hanging after it
+      listing-row(hd.location(), {
+        h(ind)
+        box(width: heading-tab, lab)
+        hd.body
+      }, page-label(hd.location()), toc-col, ind + heading-tab, row-gap)
     }
   }
 }
@@ -115,46 +126,36 @@
 
 /// Table of authorities, built from the `toa:` links found in the body.
 #let toa-section(authorities) = {
-  heading(level: 1, numbering: none, outlined: false)[Table of Authorities]
-  align(right, block(above: 0.3em, below: 0pt, strong[Page(s)]))
+  table-title[TABLE OF AUTHORITIES][Page(s)]
   context {
+    set text(..edges(pitch-single))
     let hits = query(<toa-hit>)
     for h in hits {
       if h.value not in authorities {
         panic("hib-motion-brief: link `toa:" + h.value + "` has no entry under `authorities:` in the frontmatter")
       }
     }
-    let first = true
     for (kind, title) in toa-groups {
       let members = authorities.pairs()
         .filter(p => p.last().kind == kind and hits.any(h => h.value == p.first()))
         .sorted(key: p => sort-key(p.last()))
       if members.len() == 0 { continue }
-      block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
-        set par(first-line-indent: 0pt, leading: single-leading)
-        strong(title)
-      })
-      first = false
+      block(width: 100%, sticky: true, above: pitch-single, below: 0pt, line-block(strong(title)))
       for (key, a) in members {
         // Distinct printed page labels, in document order.
         let pages = ()
         for h in hits.filter(h => h.value == key) {
-          let loc = h.location()
-          let label = numbering(loc.page-numbering(), ..counter(page).at(loc))
+          let label = page-label(h.location())
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.6em, below: 0pt, width: 100%, hang(0.35in, {
+        listing-row(none, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [, ]
           }
           inl(a.cite)
-          h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
-        }))
+        }, page-text, toa-col, toa-hang, row-gap)
       }
     }
   }
@@ -166,93 +167,63 @@
 
 /// Counsel block, upper left, single-spaced (identification of counsel is exempt from double spacing).
 #let counsel-block(meta) = {
-  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-  for l in need(meta, "counsel") { inl(l); linebreak() }
-  if "counsel_role" in meta { emph(inl(meta.counsel_role)) }
+  for l in need(meta, "counsel") { line-block(l) }
+  if "counsel_role" in meta { line-block(emph(inl(meta.counsel_role))) }
 }
 
 /// One party: its names, then its designation.
 #let caption-side(side) = {
-  for n in side.names { inl(n); parbreak() }
-  pad(left: 1.8in, inl(side.designation))
+  for n in side.names { line-block(n) }
+  line-block(indent: designation-indent, side.designation)
 }
 
 /// Caption (FRBP 9004(b)(1)-(4)). Row 1: the bankruptcy case lines (if any), the first party, and on
-/// the right the adversary number, the title of the paper and the noticed hearing. Row 2: the
-/// remaining parties ("v."), with the rule closing the party column. The rows are separate unbreakable
-/// blocks, so a row moves whole to the next page and no cell is torn. (The filed exemplar's caption
-/// also runs onto a second page; see README.md.)
+/// the right the adversary number and the title of the paper. Row 2: the remaining parties ("v."), with the rule
+/// closing the party column, and on the right the noticed hearing. Each row is unbreakable, so a row moves whole to
+/// the next page and no cell is torn. (The filed exemplar's caption also runs onto a second page; see README.md.)
 #let caption-table(meta) = {
   let sides = need(meta, "caption")
   let bankruptcy = meta.at("bankruptcy", default: ())
-  let row1-left = {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    for l in bankruptcy { inl(l); linebreak() }
-    if bankruptcy.len() > 0 { v(blank-line) }
+  let row(left, right, last) = block(width: 100%, breakable: false, above: 0pt, below: 0pt, grid(
+    columns: (1fr, 1fr),
+    block(width: 100%, stroke: if last { (right: 0.75pt, bottom: 0.75pt) } else { (right: 0.75pt) },
+      inset: (right: caption-inset, bottom: caption-pad), left),
+    pad(left: caption-inset, right),
+  ))
+  let left1 = {
+    for l in bankruptcy { line-block(l) }
+    if bankruptcy.len() > 0 { line-block("") }
     caption-side(sides.at(0))
   }
-  let row1-right = {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    [#need(meta, "adversary_number")]
-    v(blank-line)
-    strong(upper(inl(need(meta, "brief_title"))))
-  }
-  let row2-left = {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    for side in sides.slice(1) {
-      align(center)[v.]
-      v(blank-line)
-      caption-side(side)
-    }
+  let right1 = {
+    line-block(need(meta, "adversary_number"))
+    line-block("")
+    line-block(strong(upper(inl(need(meta, "brief_title")))))
   }
   // Noticed hearing date, time and judge, opposite the remaining parties (LBR 9013-1(c)(1)).
-  let row2-right = {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    if "hearing" in meta {
-      for (k, lab) in (("date", "Date:"), ("time", "Time:"), ("place", "Place:"), ("judge", "Judge:")) {
-        if k in meta.hearing {
-          [#lab #inl(meta.hearing.at(k))]
-          linebreak()
-        }
-      }
+  let hearing = {
+    let h = meta.at("hearing", default: (:))
+    for (k, lab) in (("date", "Date:"), ("time", "Time:"), ("place", "Place:"), ("judge", "Judge:")) {
+      if k in h { line-block(lab + " " + h.at(k)) }
     }
   }
-  let cols = (1fr, 1fr)
-  stack(
-    dir: ttb, spacing: 0pt,
-    block(breakable: false, table(
-      columns: cols, inset: 0pt,
-      stroke: (x, y) => if x == 0 { (right: 0.7pt) } else { none },
-      pad(right: 1.2em, bottom: 1em, row1-left),
-      pad(left: 1.2em, top: 0.3em, row1-right),
-    )),
-    if sides.len() > 1 {
-      block(breakable: false, table(
-        columns: cols, inset: 0pt,
-        stroke: (x, y) => if x == 0 { (right: 0.7pt, bottom: 0.7pt) } else { none },
-        pad(right: 1.2em, bottom: 1em, row2-left),
-        pad(left: 1.2em, top: 0.3em, row2-right),
-      ))
-    },
-  )
+  row(left1, right1, sides.len() == 1)
+  for (i, side) in sides.slice(1).enumerate() {
+    row({
+      line-block(align(center)[v.])
+      line-block("")
+      caption-side(side)
+    }, if i == 0 { hearing }, i == sides.len() - 2)
+  }
 }
 
-// DEF-COVER-001: a long caption runs onto page 2, which prints its page number "2" (page 1's is suppressed), as the filed example does.
-#let cover(meta) = page(numbering: "1", margin: margin, footer: context {
-  if counter(page).get().first() > 1 {
-    set text(size: page-number-size)
-    align(center, numbering("1", ..counter(page).get()))
-  }
-}, {
+#let cover(meta) = {
   counsel-block(meta)
-  v(blank-line)
-  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-  align(center, strong(upper(
-    need(meta, "court").map(l => [#l]).join(linebreak())
-  )))
-  v(blank-line)
-  caption-table(meta)
-})
+  for (i, l) in need(meta, "court").enumerate() {
+    line-block(above: if i == 0 { pitch-single } else { 0pt }, align(center, strong(upper(inl(l)))))
+  }
+  block(width: 100%, above: pitch-single, below: 0pt, caption-table(meta))
+}
 
 // ---------------------------------------------------------------------------
 // Signature block (HIB-FORM-007: convention; no local rule text on signatures)
@@ -260,24 +231,27 @@
 
 #let signature-block(meta) = {
   let blocks = need(meta, "signature")
-  block(breakable: false, above: blank-line, {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    grid(columns: (1fr, 3.2in), [DATED: #need(meta, "date")], {
+  block(width: 100%, breakable: false, above: pitch-single, below: 0pt, grid(
+    columns: (1fr, sig-column),
+    line-block("DATED: " + need(meta, "date")),
+    {
       for (i, b) in blocks.enumerate() {
-        if i > 0 { v(blank-line) }
-        for l in b { inl(l); linebreak() }
+        if i > 0 { line-block("") }
+        for l in b { line-block(l) }
       }
-    })
-  })
+    },
+  ))
 }
 
 // ---------------------------------------------------------------------------
 // The motion
 // ---------------------------------------------------------------------------
 
+/// The page number, centered in a single line; the first page of the cover carries none (DEF-COVER-001: a long
+/// caption runs onto page 2, which prints its number "2", as the filed example does).
 #let running-footer = context {
-  set text(size: page-number-size)
-  align(center, numbering(here().page-numbering(), ..counter(page).get()))
+  let n = counter(page).get()
+  if here().page() > 1 { align(center, text(..edges(pitch-single), numbering(here().page-numbering(), ..n))) }
 }
 
 #let hib-motion-brief(meta, md) = {
@@ -288,60 +262,81 @@
   let authorities = meta.at("authorities", default: (:))
 
   // ---- document-wide settings ----
-  set page(paper: "us-letter")   // LBR 9004-1(a)(2): 8 1/2 x 11 inch
+  // LBR 9004-1(a)(2): 8 1/2 x 11 inch
+  set page(paper: "us-letter", margin: margin, numbering: "1", footer-descent: 30%, footer: running-footer)
   set document(title: need(meta, "brief_title"))
-  set text(
-    font: font-family, size: type-size, lang: "en", region: "us",
-    hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
-  )
-  set par(
-    leading: body-leading, spacing: 0pt,
-    first-line-indent: (amount: para-indent, all: true), justify: false,
-  )
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch.
+  show: xengine.with(pitch: pitch-double)
+  // A doubled sign stays with its number ("§§ 548"; the docx filter binds it with a no-break space).
+  show regex("[§¶]{2,} \\S+"): it => box(it)
   // The numbering function is what steps the heading counter; the labels are drawn by the show rule below.
   set heading(numbering: heading-num)
-  set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
-  show footnote.entry: set text(size: type-size)
-  show footnote.entry: set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em)
+  // Footnotes at the text size (HIB-FORM-002), single lines, under a 30 % rule, 7 pt between notes; the mark and a
+  // space before the text (Word's footnote).
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
+  show footnote.entry: it => {
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    [#super(num)#h(0.25em)#note.body]
+  }
+
+  // Block quotations: single-spaced, half an inch in on both sides, a single line off the text (HIB-FORM-003).
+  show quote.where(block: true): it => block(width: 100%, above: pitch-single, below: pitch-single, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    pad(x: para-indent, it.body)
+  })
 
   // Authority links: a link whose target is `toa:KEY` is recorded with the page it starts on.
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {
       let key = it.dest.slice(4)
-      [#it.body#metadata(key)<toa-hit>]
+      [#metadata(key)<toa-hit>#it.body]
     } else {
       it
     }
   }
 
-  show heading: it => context {
-    let nums = counter(heading).at(it.location()).slice(0, it.level)
-    let lab = if it.numbering == none { "" } else { numbering(it.numbering, ..nums) }
+  // Headings at the body size and pitch, bold, no space of their own; sticky, so a heading never ends a page.
+  // Level 1 a centered title in capitals; deeper levels their label in a half-inch box at the level's indent, the
+  // title's lines hanging after it.
+  show heading: it => {
+    set text(size: type-size)
+    set par(first-line-indent: 0pt)
     if it.level == 1 {
-      block(width: 100%, above: blank-line, below: blank-line, sticky: true,
-        align(center, strong(upper(it.body))))
+      block(width: 100%, above: 0pt, below: 0pt, sticky: true, align(center, strong(upper(it.body))))
     } else {
+      let lab = numbering(it.numbering, ..counter(heading).at(it.location()).slice(0, it.level))
       let ind = label-indent(it.level)
-      block(width: 100%, above: blank-line, below: blank-line, sticky: true,
-        hang(ind + heading-tab, {
-          h(ind)
-          box(width: heading-tab, lab)
-          strong(it.body)
-        }))
+      block(width: 100%, above: 0pt, below: 0pt, sticky: true,
+        par(hanging-indent: ind + heading-tab, { h(ind); box(width: heading-tab, lab); strong(it.body) }))
     }
   }
 
+  // The cover: the first page has no number; a caption that runs on is numbered from 2.
   cover(meta)
-  page(numbering: "i", footer: running-footer, margin: margin, {
-    counter(page).update(1)
-    toc-section()
-    pagebreak()
-    toa-section(authorities)
-  })
-  page(numbering: "1", footer: running-footer, margin: margin, {
-    counter(page).update(1)
-    cmarker.render(md, raw-typst: false, smart-punctuation: true)
-    signature-block(meta)
-  })
+  // The tables in lower roman from i, each on a page of its own.
+  pagebreak()
+  set page(numbering: "i")
+  counter(page).update(1)
+  toc-section()
+  pagebreak()
+  toa-section(authorities)
+  // The memorandum in arabic from 1; its last paragraph stays whole with the signature block. Footnote definitions
+  // are read with both parts, so a mark in either finds its note.
+  pagebreak()
+  set page(numbering: "1")
+  counter(page).update(1)
+  let chunks = md.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
+  let defs = chunks.filter(c => c.trim().starts-with("[^"))
+  let text-chunks = chunks.filter(c => not c.trim().starts-with("[^"))
+  let render(cs) = cmarker.render((cs + defs).join("\n\n"), raw-typst: false, smart-punctuation: true, h1-level: 1)
+  render(text-chunks.slice(0, -1))
+  block(width: 100%, above: 0pt, below: 0pt, sticky: true, breakable: false, [#render(text-chunks.slice(-1))#parbreak()])
+  signature-block(meta)
 }
