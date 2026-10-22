@@ -57,9 +57,14 @@ fn run_owner(
     Ok(o.status.success())
 }
 
-/// Run a pandoc conversion in the court folder (the sample path is relative to it).
-fn pandoc(court: &Path, args: &[String]) -> Res<()> {
-    let st = Command::new("pandoc")
+/// Run a pandoc conversion in the court folder (the sample path is relative to it); `meta`: the frontmatter as
+/// JSON for $FORMBOOK_META (docxpass.rs), which the latex filters read as the docx filters do.
+fn pandoc(court: &Path, args: &[String], meta: Option<&Path>) -> Res<()> {
+    let mut cmd = Command::new("pandoc");
+    if let Some(m) = meta {
+        cmd.env("FORMBOOK_META", m);
+    }
+    let st = cmd
         .current_dir(court)
         .args(["--from", "markdown+smart"])
         .args(args)
@@ -111,7 +116,8 @@ pub fn latex(root: &Path, court: &Path, sample: &str, out: &Path) -> Res<()> {
     ];
     args.extend(lua_filters(&l));
     args.extend([sample.to_string(), "-o".into(), tex.display().to_string()]);
-    pandoc(court, &args)?;
+    crate::docxpass::write_meta(&court.join(sample), work.path())?;
+    pandoc(court, &args, Some(&work.path().join("meta.json")))?;
     let src = std::fs::read_to_string(&tex)
         .map_err(|e| fail(2, format!("fb render: {}: {e}", tex.display())))?;
     // shared packages (lib/latex/*.sty) go into the .tex itself: it must compile alone (sharedlib.rs)

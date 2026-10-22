@@ -168,7 +168,7 @@ fn finish(docx: &Path, work: &Path) -> Res<()> {
 
 /// The sample's YAML frontmatter as JSON, for `$FORMBOOK_META`: the values as written (pandoc's metadata reads
 /// every string as markdown); `{}` for a sample without one.
-fn write_meta(sample: &Path, work: &Path) -> Res<()> {
+pub(crate) fn write_meta(sample: &Path, work: &Path) -> Res<()> {
     let text = read(sample)?;
     let json = match crate::lint::metadata::frontmatter(&text) {
         Err(_) => "{}".to_string(),

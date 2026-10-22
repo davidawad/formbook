@@ -1,0 +1,52 @@
+# Minnesota Court of Appeals (minnctapp): motion with supporting argument (motion-brief). The whole layout, as data
+# for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to Minn. R. Civ. App. P. 132.02 (documents other than formal
+# briefs), 127 (motions) and 132.04 (signature); see ../../rules.md. Lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # MINNCTAPP-FORM-002/-004: at least 13-point, headings and footnotes included
+pitch:
+  body: 29.9              # MINNCTAPP-FORM-004: double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # caption, headings, quotations, footnotes, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MINNCTAPP-FORM-001: matter within 6-1/2 x 9-1/2 in
+indent: 36                # every paragraph indented half an inch
+page_number: {align: center, from: 1}   # MINNCTAPP-FORM-004: pages numbered at the center of the bottom margin
+footnote: {size: 13, gap: 7}             # MINNCTAPP-FORM-002: footnotes 13-point too
+quote: {left: 36, right: 36, above: 7.8, below: 13}
+heading:
+  - {align: center, bold: true, upper: true, underline: true, pitch: body}
+  - {left: 18, hang: 36, bold: true, upper: true, above: 13, below: 10.4}
+  - {left: 36, hang: 36, bold: true, italic: true, above: 13, below: 10.4}
+# MINNCTAPP-CONT-009 (Rule 132.02 subd. 2): the court, the title of the case, the docket number and a descriptive
+# title, between two rules.
+front:
+  - {text: "{court_line}", align: center, bold: true, pitch: body}
+  - columns:
+      - width: 234
+        blocks:
+          - {rule: 0.5, above: 14.95}
+          - each: caption
+            between:
+              - {text: "v.", left: 43.2, pitch: body}
+            blocks:
+              - {text: "{names}", left: 7.2, pitch: body}
+              - {text: "{designation}", left: 72, pitch: body}
+          - {rule: 0.5, above: 7.8}
+      - blocks:
+          - {text: "{case_number}", align: right, bold: true, above: 29.9}
+          - {text: "{doc_title}", align: right, bold: true, above: 44.85}
+    gutter: 21.6
+    below: 14.95
+# MINNCTAPP-FORM-006 (Rule 132.04): signed, with the signer's name, license number, address and telephone; the
+# closing and the date at the left, the signature block 3.2 in from the margin, never split.
+closing:
+  - group:
+      - {text: "{signature.closing}", left: 230.4}
+      - columns:
+          - width: 230.4
+            blocks:
+              - {text: "{date}"}
+          - blocks:
+              - {text: "/s/ {signature.signer}", underline: true}
+              - {text: "{signature.lines}"}
+        above: 2.6
+    above: 28.8

@@ -17,6 +17,7 @@ mod docxpass;
 mod docxref;
 mod docxxengine;
 mod docxzip;
+mod enginegen;
 mod engines;
 mod eval;
 mod fetch;
@@ -60,6 +61,7 @@ fn main() -> ExitCode {
         "toc-layout" => check::toclayout::main(rest),
         "cover-pages" => check::coverpages::main(rest),
         "eval" => eval::main(rest),
+        "engines" => enginegen::main(rest),
         "manifest" => manifest::main(rest),
         "tracker" => track::main(rest),
         "readmes" => readmes::main(rest),
