@@ -1,0 +1,77 @@
+# Massachusetts Supreme Judicial Court (mass): petition for review (application for direct appellate review, joint
+# petition for transfer and similar; MRAP 11, 27.1, 20(b)). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to Mass. R. A. P. 16 and 20 (../../rules.md, MASS-*); lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}).
+size: 14                  # MASS-FORM-002 (MRAP 20(a)(4)(B)): 14 point or larger, footnotes included
+pitch:
+  body: 32.2              # MASS-FORM-004, MASS-APP-004 (20(a)(4)(C), 20(b)(2)(A)): double spaced, at most 3 lines an inch (Word's double, 2 x 1.15 x 14)
+  single: 16.1            # headings, footnotes, quotations, cover, signature: single (1.15 x 14 pt)
+# MASS-FORM-003 (20(a)(4)(A)): margins at least 1 inch; top and bottom 1 inch + 4 pt keep a raised note mark inside
+margin: {top: 76, bottom: 76, left: 72, right: 72}
+indent: 36                # style: half-inch first-line indent
+page_number: {align: center}   # MASS-FORM-005 (20(a)(4)(A), 20(a)(6)(B)(vii)): the cover is page 1, numbered through
+footnote: {size: 14, pitch: 16.1, gap: 7}   # MASS-FORM-002, -004: notes 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # MASS-FORM-004: indented quotations single spaced
+# Sections centered bold (as typed, the filed petition's title case); level 2 bold, level 3 bold italic, hanging half
+# an inch.
+heading:
+  - {align: center, bold: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# MASS-FORM-006 (20(a)(6)(B)), MASS-APP-004 (20(b)(2)(A)): the court, the docket number, the title of the case, the
+# nature of the proceeding and the lower court, the title of the document, counsel (names, BBO numbers, addresses,
+# telephone) two groups a row. The petition has no tables (the filed petition has none), so the cover is set as the
+# top of page 1 ending in a page break: the docx engine writes `cover` only for a document with tables (lib/docx/xdoc.lua,
+# `paged`), and the page is numbered 1 either way.
+front:
+  - {text: "{court}", align: center, bold: true}
+  - {text: "{docket}", align: center, above: 16.8}
+  - {text: "{case_title}", align: center, above: 16.8}
+  - {text: "{proceeding}", align: center, above: 16.8}
+  - {text: "{title}", align: center, bold: true, above: 22.4}
+  - columns:
+      each: counsel
+      per_row: 2
+      row_gap: 16.8
+      blocks:
+        - {text: "{names}"}
+        - {text: "{lines}"}
+    gutter: 16.8
+    above: 22.4
+  - {text: "{argument}", align: center, optional: true, above: 16.8}
+  - {break: true}
+# MASS-FORM-012 (16(a)(12)): the signature block, never split: the intro, then one column per party block (the party
+# in italics, each signer's signature line, printed name, BBO number and contact lines). MASS-FORM-011 (13(e)): the
+# certificates, each with its date and signature line.
+closing:
+  - group:
+      - {text: "{signature.intro}", optional: true}
+      - columns:
+          each: signature.blocks
+          per_row: 2
+          row_gap: 16.8
+          blocks:
+            - {text: "{party}", italic: true}
+            - each: signers
+              blocks:
+                - {rule: 0.5, above: 19.6}
+                - {text: "{name}"}
+                - {text: "{lines}", optional: true}
+        gutter: 28.8
+        above: 8.4
+    above: 32.2
+  - each: certificates
+    blocks:
+      - group:
+          - {text: "{heading}", align: center, bold: true, below: 2.8}
+          - {text: "{text}", pitch: body, indent: 36}
+          - {text: "DATED: {date}", optional: true, above: 16.1}
+          - columns:
+              - width: 230.4
+                blocks:
+                  - {rule: 0.5}
+                  - {text: "{signer}", optional: true}
+              - {blocks: []}
+            above: 19.6
+        above: 32.2
