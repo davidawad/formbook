@@ -1,0 +1,4 @@
+PASS
+6e4b1d7a514c3d1746ece96eb29f78fde6f7ff528c23666695135003ff6bba4a  usage/OUTPUT-trial-brief.docx
+f2170fd2a03299fb1d4d2d4eb1cfb017f263171c691600669f53277117edce06  usage/OUTPUT-trial-brief.docx.pdf
+35040632d7e7e0cb37e89475e6585dcba0f6459d59687ff7af4d370b204f55a3  usage/OUTPUT-trial-brief.typst.pdf

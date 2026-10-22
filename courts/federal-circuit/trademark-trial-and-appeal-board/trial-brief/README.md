@@ -1,4 +1,4 @@
-# TTAB: brief on the case at final hearing (typst)
+# TTAB: brief on the case at final hearing (typst + docx)
 
 Doc type `trial-brief` under the Trademark Trial and Appeal Board (court `ttab`). Self-contained: exemplar, sample, template and this README live in this folder. The court root's `typst/` and `usage/` are not touched. The template covers the main brief, the reply brief and the rebuttal brief; the page limit differs by stage (see the rule table).
 
@@ -8,10 +8,11 @@ Doc type `trial-brief` under the Trademark Trial and Appeal Board (court `ttab`)
 |---|---|
 | Exemplar | yes, one filer: TreeFrog Development (Opposer's rebuttal brief, 2018). Redacted public version. See `usage/SOURCE.md`. Only one trial brief was found; tier 2 (two or three filers) is not met |
 | Sample | `usage/INPUT-trial-brief.md`: caption, authorities registry, introduction, section II in full, the start of section III with its statutory block quotation, sections IV and V, conclusion, signature block, certificate of service. Images, sections III(B)-(F) and the rest of the body are not transcribed |
-| Render (typst) | ok: `sh tools/render.sh courts/federal-circuit/trademark-trial-and-appeal-board/trial-brief usage/INPUT-trial-brief.md` writes `usage/OUTPUT-trial-brief.typst.pdf`, 9 pages (caption i, table of authorities ii, body 1-7), no typst warnings, EB Garamond only |
+| Render (typst) | ok: `sh tools/render.sh courts/federal-circuit/trademark-trial-and-appeal-board/trial-brief usage/INPUT-trial-brief.md` writes `usage/OUTPUT-trial-brief.typst.pdf`, 9 pages (caption i, table of authorities ii, body 1-7), no typst warnings, Times New Roman (or the vendored Liberation Serif with the same metrics) |
 | Overlay | ok: `sh tools/overlay.sh <dir> treefrog-rebuttal-brief <dir>/usage/FILED-EXAMPLE-trial-brief.pdf` writes `usage/OVERLAY-treefrog-rebuttal-brief.pdf` and `.txt` |
-| Pages reviewed | 9 of 9 (every page of the current `OUTPUT-` PDF rendered at 60 dpi and looked at; see "Page review") |
-| Check gates (`tools/check.sh`) | not run (box task: no tracker, no gates in this unit) |
+| Pages reviewed | 9 of 9 of each engine (typst and docx, after the cross-engine port; see "Page review") |
+| Check gates (`tools/check.sh`) | typst and docx: 0 failed (`data/checks-default.yaml` with `eval.yaml`) |
+| Cross-engine (Gate 4) | gated (`eval.yaml` `params.cross_engine: gate`): the docx breaks every line and page as typst does (XENG-001..003 PASS), on the shared layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `lib/docx/xengine-reference.sh`; fb-595.54.6) |
 
 File names: as for the notice of opposition, the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt`.
 
@@ -21,8 +22,8 @@ Verified 2026-10-14. Primary text: 37 C.F.R. Part 2 from the Cornell LII mirror 
 
 | ID | Kind | Rule | Source | What the template does |
 |---|---|---|---|---|
-| TTAB-TB-FORM-001 | court-mandated (tier 1) | Text in an electronic submission: at least 11-point type, double-spaced. | 37 C.F.R. § 2.126(a)(1) (https://www.law.cornell.edu/cfr/text/37/2.126); TBMP § 801.03 (June 2025) repeats it | 12-point EB Garamond; footnotes 12 pt, single-spaced |
-| TTAB-TB-FORM-002 | court-mandated (tier 1) | Double-spaced text. Block quotations and footnotes are single-spaced: the Board's text says "[e]xtensive single-spaced footnotes may not be used as a subterfuge to avoid the page limit" (TBMP § 801.03), so single-spaced footnotes are the Board's own usage. Block quotations are not addressed by any rule; single spacing is the convention and is flagged here as an interpretation | TBMP § 801.03 | 24 pt pitch in the body (measured, see "Measurements"); single spacing for block quotations, footnotes, caption, signature, authorities |
+| TTAB-TB-FORM-001 | court-mandated (tier 1) | Text in an electronic submission: at least 11-point type, double-spaced. | 37 C.F.R. § 2.126(a)(1) (https://www.law.cornell.edu/cfr/text/37/2.126); TBMP § 801.03 (June 2025) repeats it | 12-point Times New Roman; footnotes 12 pt, single-spaced |
+| TTAB-TB-FORM-002 | court-mandated (tier 1) | Double-spaced text. Block quotations and footnotes are single-spaced: the Board's text says "[e]xtensive single-spaced footnotes may not be used as a subterfuge to avoid the page limit" (TBMP § 801.03), so single-spaced footnotes are the Board's own usage. Block quotations are not addressed by any rule; single spacing is the convention and is flagged here as an interpretation | TBMP § 801.03 | 24 pt pitch in the body (exact line boxes, see "Measurements"); single spacing for block quotations, footnotes, caption, signature, authorities |
 | TTAB-TB-FORM-003 | convention (tier 2) | 1 in. margins; US Letter; centered page number. | 37 C.F.R. § 2.126(b)(2) fixes the paper size for paper filings only | US Letter, 1 in. margins, roman numerals on the caption and the authorities, arabic from 1 at the body (as the exemplar) |
 | TTAB-TB-PAGE-001 | court-mandated (tier 1) | A main brief on the case may not exceed 55 pages in its entirety, and a reply brief 25 pages in its entirety. The limit includes the table of contents, the index of cases, the description of the record, the statement of the issues, the recitation of facts, the argument and the summary. Exhibits and appendices are outside it. | 37 C.F.R. § 2.128(b); TBMP § 801.03. (A secondary source reports a 15-page reply limit; the primary text says 25 pages, and 25 is what is implemented in the review.) | Not enforced by the template. The sample's body is 7 pages, well inside both limits. The page count is the author's responsibility |
 | TTAB-TB-INDEX-001 | court-mandated (tier 1) | Each brief shall contain an alphabetical index of cases cited. | 37 C.F.R. § 2.128(b) | The table of authorities has a "Cases" group sorted alphabetically (by `sort`, else by name with the italics removed). Statutes, regulations, rules and other authorities follow in their own groups. Interpretation: the index of cases and the table of authorities are one list here, as in the exemplar. A brief that wants a separate index of cases can split the group |
@@ -54,7 +55,7 @@ Body: `# I. INTRODUCTION` is a centered bold section heading (write the numerals
 
 ## Measurements
 
-- Line pitch: as for the notice of opposition, `top-edge: "ascender"`, `bottom-edge: "descender"`, `leading: 0.695em` gives a 24 pt pitch at 12 pt (double spacing). The measurement is in the notice README.
+- Line pitch (cross-engine layout model, `lib/typst/xengine.typ`; fb-595.54.6): every line is a box of its pitch with the baseline at 0.8 of it, the boxes touching, as Word's exact line spacing sets them. Body 24 pt (double spacing at 12 pt); single-spaced lines (caption, headings, block quotations, footnotes, authorities, signature) 13.8 pt. The spaces between blocks are explicit, in pt, the same in the docx (twips = 20 x pt).
 - Paragraph spacing 0; first-line indent 0.5 in on every paragraph, including those after a heading (`first-line-indent: (amount, all: true)`).
 
 ## Overlay
@@ -69,18 +70,18 @@ The overlay is a diagnostic. Differences in the table of authorities page number
 
 ## Page review
 
-Every page of `OUTPUT-trial-brief.typst.pdf` (9 pages) was rendered at 60 dpi and looked at. Page 1 was re-rendered after one fix (the caption page's date line had the paragraph indent); pages 2-9 are as rendered before that fix, which changed page 1 only.
+Every page of `OUTPUT-trial-brief.typst.pdf` and `OUTPUT-trial-brief.docx.pdf` (9 pages each) was rendered and looked at after the cross-engine port (fb-595.54.6), side by side with the render before it.
 
 | Page | Content | Finding |
 |---|---|---|
-| i | Caption page: heading, caption with ")" column, proceeding numbers at right, title, "Redacted Version", counsel block, date | OK after fix: the date line was indented (paragraph first-line indent); now flush left |
-| ii | TABLE OF AUTHORITIES: Cases (alphabetical, italic names, dot leaders, page numbers), Statutes | OK. Page numbers checked by hand against the body: Cunningham p.2, Herbaceuticals p.5, the statute p.1, 3, 4; the body places them there |
-| 1 | I. INTRODUCTION, three paragraphs | OK. The section heading is centered and bold; a paragraph indent on every paragraph |
+| i | Caption page: heading, caption with ")" column, proceeding numbers at right (one every other row, centered on the caption), title, "Redacted Version", counsel block, date | OK |
+| ii | TABLE OF AUTHORITIES: Cases (alphabetical, italic names, dot leaders, page numbers in a 56 pt column), Statutes | OK. Page numbers agree with the body: Cunningham p.2, Herbaceuticals p.5, the statute p.1, 3, 4; the heading is now 12 pt (was typst's default 16.8 pt) |
+| 1 | I. INTRODUCTION, three paragraphs | OK. Double spacing now also between paragraphs (before the port the space between two paragraphs was a single line) |
 | 2 | II. heading (three lines, centered, bold), section II paragraphs, footnote 1 | OK. The footnote is 12 pt, single-spaced, at the foot of the page |
 | 3 | III. heading, the statutory block quotation (single-spaced, indented 0.5 in both sides), the Cook and H.D. Vest paragraphs | OK |
-| 4 | A. subheading (hanging, bold), section A paragraph, IV. heading, the start of IV | OK. The subheading's second line hangs under the text |
-| 5 | Rest of IV, V. heading, section V paragraph, VI. CONCLUSION heading | OK |
-| 6 | Conclusion (end), signature block: party line, "By its attorneys," "s/Heather J. Kliebenstein", firm lines | OK |
+| 4 | A. subheading (hanging, bold), section A paragraph, IV. heading, the start of IV | OK |
+| 5 | Rest of IV, V. heading, section V paragraph | OK |
+| 6 | VI. CONCLUSION, its paragraph kept with the signature block: party line, "By its attorneys," "s/Heather J. Kliebenstein", firm lines | OK. Page 5 ends short: the conclusion is one paragraph, kept with the signature block |
 | 7 | CERTIFICATE OF SERVICE on its own page: text, recipients, "s/Abigail Krueger" | OK |
 
 Note: the rendered body has 7 pages (body 1-7 are PDF pages 3-9); the certificate starts a new page, as in the exemplar.
@@ -96,20 +97,17 @@ Note: the rendered body has 7 pages (body 1-7 are PDF pages 3-9); the certificat
 
 ## Engines
 
-The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`: EB Garamond 12 pt, double-spaced body at 24 pt exact, half-inch first-line indent, headings at the typst template's default sizes (16.8, 14.4 and 12 pt), single-spaced block quotations and footnotes), `docx/ttab-trial-brief.lua` (the caption page with the counsel block and date at the foot of the page, the table of authorities, the signature block, the certificate of service), and `docx/render.sh`, which runs the conversion twice or more: pandoc cannot know the pages of the authorities, so each pass converts to PDF with LibreOffice, `docx/toa-pages.sh` finds the body page of every citation, and the next pass lists them. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-trial-brief.md` writes `usage/OUTPUT-trial-brief.docx` and `.docx.pdf`.
+The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`, from the shared recipe `lib/docx/xengine-reference.sh`: Times New Roman 12 pt, the body in 24 pt exact line boxes with a half-inch first-line indent, single-spaced 13.8 pt block quotations and footnotes), `docx/ttab-trial-brief.lua` (the caption page with the counsel block and date at the foot of the page, the table of authorities, the headings, the signature block kept with the last paragraph, the certificate of service; every paragraph with the typst pitch and spaces), and `docx/render.sh`, which runs the conversion twice or more: pandoc cannot know the pages of the authorities, so each pass converts to PDF with LibreOffice, `docx/toa-pages.sh` finds the body page of every citation, and the next pass lists them. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-trial-brief.md` writes `usage/OUTPUT-trial-brief.docx` and `.docx.pdf`.
 
 Sections: the caption page and the table of authorities are roman (i, ii); the body is arabic from 1 and the certificate continues it.
 
 | Item | docx vs typst |
 |---|---|
-| Font, size, double spacing, margins, US Letter, heading sizes, block quotations, footnotes | Matches (TTAB-TB-FORM-001 to 003) |
-| Caption page: heading, caption with the ")" column, proceeding numbers, title, "Redacted Version", counsel block and date at the foot | Matches in position; the counsel block is a frame anchored to the bottom margin |
-| Table of authorities | Matches in form (cases alphabetical, then the other groups; dot leaders; "passim" from 7 pages). Page numbers are text computed from the LibreOffice PDF, not Word TA/TOA fields, so they do not update in Word |
-| Table of authorities page numbers | Differ from the typst pages where the pagination differs: the sample's Warner citation is on body page 3 in docx and on page 4 in typst; the statute is on pages 1 and 3 in docx and 1, 3 and 4 in typst. Both pass computed from their own pages |
-| Certificate of service | Own page, as the typst one; the text is double-spaced and not indented, as the typst paragraph |
-| Pagination | Both 9 pages with the same page labels (i, ii, body 1-6, and the certificate on page 7). Word will paginate slightly differently |
+| Lines and pages | Identical breaks: Gate 4 XENG-001..003 PASS, gated in `eval.yaml` |
+| Table of authorities | The same rows and page numbers. Page numbers are text computed from the LibreOffice PDF, not Word TA/TOA fields, so they do not update in Word |
+| Caption page | The counsel block is a frame anchored to the bottom margin (typst: `v(1fr)` above it) |
 
-BLOCKED (docx): `check.sh --engine docx` cannot run on this folder for the same reason as the notice (no `checks.yaml` or court-root `court.json` for this doc type). The table of authorities page numbers are verified against the LibreOffice PDF only; a Word page can differ by one. Pages reviewed: every page of `OUTPUT-trial-brief.docx.pdf` (9 pages) was rendered at 60 dpi and compared with the typst pages.
+A row of the table of authorities keeps 4 pt more than the three spaces before its leader free on its last line (typst `toa-tab-room`): LibreOffice moves the last word to a new line otherwise (measured here: it needs 3.8 to 4.0 pt beyond the three no-break spaces before the leader tab).
 
 ## Searches
 
