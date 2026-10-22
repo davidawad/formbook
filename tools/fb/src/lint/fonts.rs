@@ -233,7 +233,7 @@ fn docx_report(root: &Path, strict: bool) -> bool {
     let mode = if strict {
         ""
     } else {
-        " (report only until fb-595.68 step 2; --docx-strict fails on them)"
+        " (report only; --docx-strict, as just lint runs it, fails on them)"
     };
     println!(
         "RESULT: DOCX FONTS {} of {seen} docx folders name a face other than their typst template's{mode}",

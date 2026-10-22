@@ -2621,7 +2621,9 @@
         "Times-BoldItalic",
         "Times-Italic",
         "Times-Roman"
-      ]
+      ],
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.39 under David's 2026-10-17 ruling that Times New Roman is the standard: no M.D. Ga. rule names a face (rules.md GAMD-FORM-001: the local rules state no typeface), and the exemplar's Times-clone face is that filer's style (tier 3), so the template is set in Times New Roman on typst and docx (typst had TeX Gyre Termes, the docx EB Garamond); face stays the audited match."
     },
     "courts/eleventh-circuit/georgia/federal/northern-district/complaint/usage/FILED-EXAMPLE-complaint.pdf": {
       "body": "timesnewroman",
@@ -13545,7 +13547,9 @@
         "ArialMT,Italic",
         "LiberationSans",
         "TimesNewRomanPSMT"
-      ]
+      ],
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.39 under David's 2026-10-17 ruling that Times New Roman is the standard: no Bankr. D. Wyo. rule names a face (rules.md WYB-FORM-001: LBR 9004-1(A) sets 13 point, no typeface), and the exemplar's face is that filer's style (tier 3), so the template is set in Times New Roman on typst and docx (typst had Liberation Sans, the docx EB Garamond); face stays the audited match."
     },
     "courts/tenth-circuit/wyoming/federal/district/complaint/usage/FILED-EXAMPLE-complaint.pdf": {
       "body": "palatinolinotype",

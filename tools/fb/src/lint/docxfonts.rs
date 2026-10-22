@@ -2,8 +2,8 @@
 //! (typstface.rs), one source for both. The faces of a docx are the `w:ascii` fonts of its styles (and the theme's
 //! minor latin face where the document defaults name a theme font), read from `docx/reference.xml` (`{font}` and
 //! `base="xengine"` take the typst face by construction) or from a committed `docx/reference.docx`. Code faces are
-//! not body faces and are left out. Report-only until fb-595.68 step 2 (every builder retired): `--docx-strict`
-//! fails on a difference.
+//! not body faces and are left out. Report-only without `--docx-strict`, which `just lint` passes (fb-595.68.39): it
+//! fails on a difference, and on a reference.docx it cannot read.
 use crate::docxref::{attr, elements, FONT};
 use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
@@ -81,7 +81,12 @@ fn docx_faces(d: &Path, typst: Option<&str>) -> Option<BTreeSet<String>> {
     if !docx.is_file() {
         return None;
     }
-    let styles = unzip_part(&docx, "word/styles.xml")?;
+    // an unreadable reference (no unzip on PATH, a broken archive) is a finding, not a folder skipped
+    let Some(styles) = unzip_part(&docx, "word/styles.xml") else {
+        return Some(BTreeSet::from([
+            "unreadable reference.docx (unzip on PATH?)".to_string(),
+        ]));
+    };
     let theme = unzip_part(&docx, "word/theme/theme1.xml").unwrap_or_default();
     let minor = theme
         .find("<a:minorFont>")

@@ -59,7 +59,7 @@ diff DIR:
 # every committed OUTPUT .docx opens (DEF-DOCX-OPEN; needs soffice)
 lint:
     {{fb}} tracker --check
-    {{fb}} lint fonts
+    {{fb}} lint fonts --docx-strict
     {{fb}} lint paths
     {{fb}} lint rules
     {{fb}} lint pipefail
