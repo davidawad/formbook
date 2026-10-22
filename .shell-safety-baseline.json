@@ -3,12 +3,6 @@
   "branches": {
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/make-reference.sh": 6,
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/render.sh": 31,
-    "courts/fifth-circuit/court-of-appeals/answering-brief/docx/build-reference.sh": 7,
-    "courts/fifth-circuit/court-of-appeals/answering-brief/docx/render.sh": 22,
-    "courts/fifth-circuit/court-of-appeals/opening-brief/docx/make-reference.sh": 6,
-    "courts/fifth-circuit/court-of-appeals/opening-brief/docx/render.sh": 22,
-    "courts/fifth-circuit/court-of-appeals/reply-brief/docx/make-reference.sh": 6,
-    "courts/fifth-circuit/court-of-appeals/reply-brief/docx/render.sh": 22,
     "courts/first-circuit/puerto-rico/federal/district/motion-brief/docx/make-reference.sh": 8,
     "tools/check/_lib/lib-helpers.sh": 97,
     "tools/check/lib.sh": 147,
