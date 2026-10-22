@@ -1,0 +1,4 @@
+PASS
+c6fb6bfd0ec545fb622ba2586a8d2d18a7b0d909e5910f5ea904a8bbea1a9f49  usage/OUTPUT-petition-supplement.docx
+32ab8e3c9ed1774d7b4a16c7462f95a8cb9b5691673c0de931730a8e53372ca0  usage/OUTPUT-petition-supplement.docx.pdf
+a621be001c13b39183daa5458c392853e3f6fd101188b3a0bdf397fba545abbd  usage/OUTPUT-petition-supplement.typst.pdf
