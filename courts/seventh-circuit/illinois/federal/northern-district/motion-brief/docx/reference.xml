@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The ilnd memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the typst
+     template ({font}, Times New Roman; N.D. Ill. LR 5.2(e) names no face) at 12 pt (size 24 half points; LR 5.2(e)(1),
+     12-point type); Body Text in exact 27.6 pt line boxes (552 twips, typst pitch-body: LR 5.2(e), line spacing at
+     least 2.0 lines, Word's double line) with a half-inch first-line indent; Block Text (quotations) single-spaced in
+     13.8 pt boxes (276 twips, typst pitch-single), a blank single line above and below, half an inch in on both sides;
+     List Item the label in a half-inch box; footnotes 11 pt (note-size 22 half points; LR 5.2(e)(1): no less than 11
+     points) single-spaced in 12.65 pt boxes (typst pitch-note, 253 twips), 6 pt apart (typst note-gap). Added or
+     replaced here, as the typst template sets them: "Body Text Note" (Body Text without widow control, for a paragraph
+     that anchors a footnote: typst may move such a paragraph's last line on alone), Footnote Text without the recipe's
+     keepLines (typst splits a long note across pages), and the headings "Head 1" to "Head 4" in 13.8 pt lines, a blank
+     single line above (276) and half of one below (138), kept with the next paragraph: level 1 centered, bold,
+     underlined; levels 2 to 4 the label in a half-inch box hung half an inch further in per level (tabs and indents
+     720, 1440, 2160), bold, level 4 also italic; "Head N Top" the same with no space above, for a heading that opens
+     the body's section (Word keeps the space after a section break, typst drops it at the top of a page). Letter page
+     with 1-inch margins (LR 5.2(e)(2)); docx/ilnd-motion-brief.lua writes the cover (its own section, no page number),
+     the signature and the certificate with their own spacing, and the body's page number in a 13.8 pt line 36.75 pt
+     above the page foot (735 twips: where typst sets it, footer-descent 30 %). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" list="720" heading="276" heading-before="276" heading-after="138" quote="276" note="253" note-size="22" note-after="120" footer="735">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="120" w:line="253" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Head1"><w:name w:val="Head 1"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="276" w:after="138" w:line="276" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="0"/></w:pPr><w:rPr><w:b/><w:bCs/><w:u w:val="single"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Head2"><w:name w:val="Head 2"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:tabs><w:tab w:val="left" w:pos="720"/></w:tabs><w:spacing w:before="276" w:after="138" w:line="276" w:lineRule="exact"/><w:ind w:left="720" w:hanging="720"/><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/><w:bCs/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Head3"><w:name w:val="Head 3"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="276" w:after="138" w:line="276" w:lineRule="exact"/><w:ind w:left="1440" w:hanging="720"/><w:outlineLvl w:val="2"/></w:pPr><w:rPr><w:b/><w:bCs/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Head4"><w:name w:val="Head 4"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:tabs><w:tab w:val="left" w:pos="2160"/></w:tabs><w:spacing w:before="276" w:after="138" w:line="276" w:lineRule="exact"/><w:ind w:left="2160" w:hanging="720"/><w:outlineLvl w:val="3"/></w:pPr><w:rPr><w:b/><w:bCs/><w:i/><w:iCs/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Head1Top"><w:name w:val="Head 1 Top"/><w:basedOn w:val="Head1"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="138" w:line="276" w:lineRule="exact"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Head2Top"><w:name w:val="Head 2 Top"/><w:basedOn w:val="Head2"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="138" w:line="276" w:lineRule="exact"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Head3Top"><w:name w:val="Head 3 Top"/><w:basedOn w:val="Head3"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="138" w:line="276" w:lineRule="exact"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Head4Top"><w:name w:val="Head 4 Top"/><w:basedOn w:val="Head4"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="138" w:line="276" w:lineRule="exact"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyKeep"><w:name w:val="Body Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>

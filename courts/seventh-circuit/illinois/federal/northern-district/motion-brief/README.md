@@ -7,20 +7,19 @@ Folder: `courts/seventh-circuit/illinois/federal/northern-district/motion-brief/
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: cover, introduction, factual background, legal standard, Argument I.A and I.B (first part), conclusion, signature, certificate of service, footnotes 1 to 6. Arguments II to IV are omitted (see Known gaps). |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages (cover plus 9), typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `usage/OVERLAY-tahboub-motion-brief.pdf` and `OVERLAY-tahboub-motion-brief.txt` (page map) |
-| typeface | face required: none (N.D. Ill. LR 5.2(e) names no typeface; checked 2026-10-15). Vendored substitute: not needed; stays **EB Garamond**. Metric compatibility: n/a. |
-| pages reviewed | 10 of 10 (re-rendered 2026-10-15 and every page rendered at 60 dpi and viewed) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `usage/OUTPUT-motion-brief.docx` / `.docx.pdf`, 11 pages each (cover plus 10), typst 0.15.0, vendored Times New Roman only, no warnings |
+| checks | `fb check --engine typst`: 9 passed, 0 failed; `--engine docx`: 13 passed, 0 failed, XENG-001..003 PASS (249/249 lines, every page alike); `params.cross_engine: gate` (`eval.yaml`) |
+| typeface | face required: none (N.D. Ill. LR 5.2(e) names no typeface; checked 2026-10-15). **Times New Roman** (vendored; the exemplar's face), the same face in typst and docx. |
+| pages reviewed | 11 of 11, typst and docx (re-rendered 2026-10-22, every page rendered at 60 dpi and viewed side by side) |
 
 Build (from the repo root, with the toolchain on `PATH`):
 
 ```sh
 D=courts/seventh-circuit/illinois/federal/northern-district/motion-brief
-sh tools/render.sh $D usage/INPUT-motion-brief.md         # -> usage/OUTPUT-motion-brief.typst.pdf
-sh tools/overlay.sh $D tahboub-motion-brief                   # -> usage/OVERLAY-tahboub-motion-brief.{pdf,txt}
+just check $D                       # typst: usage/OUTPUT-motion-brief.typst.pdf and the gates
+sh tools/check.sh $D --engine docx  # docx: usage/OUTPUT-motion-brief.docx, .docx.pdf, and Gate 4 against the typst render
+just overlay $D                     # .overlay/<doc path>/OVERLAY-motion-brief.pdf (not committed)
 ```
-
-File names follow the tools (see the complaint README for the reason).
 
 ## Governing rules
 
@@ -29,7 +28,7 @@ Primary sources, fetched 2026-10-14.
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | N.D. Ill. LR 7.1 (https://www.ilnd.uscourts.gov/_assets/_documents/_rules/lrrules.pdf) | A motion or a brief in support of a motion may not exceed 15 pages without prior approval. A brief over 15 pages needs a table of contents with page numbers and a table of cases. A non-compliant brief may be stricken. | Not enforced by the template. The template does **not** generate a table of contents or a table of authorities (see Known gaps). The sample is under 15 pages. |
-| N.D. Ill. LR 5.2(e) | Same as the complaint: 8½ × 11 paper; line spacing at least 2.0 lines; 12-point body; footnotes at least 11 points; margins at least 1 inch. | `margin-*` (1 in), `type-size = 12pt`, `note-size = 11pt` (footnote entries), `body-leading = 1.65em` (27.6 pt pitch). |
+| N.D. Ill. LR 5.2(e) | Same as the complaint: 8½ × 11 paper; line spacing at least 2.0 lines; 12-point body; footnotes at least 11 points; margins at least 1 inch. | `margin` (1 in), `type-size = 12pt`, `note-size = 11pt` (footnote entries), `pitch-body = 27.6pt` (Word's double line at 12 pt); docx: `docx/reference.xml` (size 24, body 552 twips, footnotes 22 half points). |
 | N.D. Ill. LR 5.3(b) | A judge may require a notice of presentment for a motion. | Not produced: the notice of motion is a separate document. |
 | N.D. Ill. LR 5.5(a) to (c) | A certificate of service is required only when service on the filing system is made on a recipient who is not an E-Filer; it must identify the persons served, the date and the manner. | `certificate` frontmatter (optional). The exemplar includes one; the template prints it only when the sample gives one, on its own page. |
 | Fed. R. Civ. P. 7(b)(1) (https://www.law.cornell.edu/rules/frcp/rule_7, fetched 2026-10-14) | A request for a court order must be made by a written motion that states the grounds with particularity and the relief sought. | Content of the notice of motion (not part of this doc type). The memorandum states the grounds in the introduction. |
@@ -38,13 +37,18 @@ Primary sources, fetched 2026-10-14.
 
 ## Layout
 
-- Cover page (no page number): court title (three centered lines, single-spaced), a caption with a column of ")" marks (the parties on the left, the case number and judge on the right, as in the exemplar), the title of the paper centered in bold, and the counsel block at lower right, single-spaced.
-- Body from page 1 (the page numbers start after the cover): double-spaced (27.6 pt pitch), justified, first-line indent 0.5 in on every paragraph. Paragraphs are not numbered.
-- Headings: level 1 is a centered bold capital section (INTRODUCTION, LEGAL STANDARD, ARGUMENT, CONCLUSION); level 2 a bold heading (the points, I., II.); level 3 bold, indented 0.5 in (the sub-points, A., B.); a level-4 heading (1., 2.) is set like level 3. A heading takes one pitch above and below and stays with the next block.
-- Footnotes: 11 pt, single-spaced, with a 1.5 in rule. Definitions are written as `[^key]: ...` anywhere in the body; the template passes every definition to each chunk that refers to it (cmarker resolves a reference only against definitions in the same source).
-- The last paragraph, its heading if any, and the signature block are kept together.
-- Signature block: "Dated", "Respectfully submitted,", the party in capitals, "By: /s/" the signer, "One of Their Attorneys" (or the frontmatter role).
-- Certificate of service (when given): its own page, a centered heading, double-spaced text, a right-column signature.
+Both engines on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): every line a box of its pitch, first-fit ragged-right lines, no kerning, ligatures or hyphenation, the space between blocks the larger of the two.
+
+- Cover page (no page number): court title (three centered bold 13.8 pt single lines), a blank single line, a caption with a column of ")" marks, one single line per row (each party's names, a blank row and the designation, then a blank row, "v." and a blank row between the parties; the case number, a blank row and the judge on the rows at the middle of the caption), the title of the paper centered in bold one body line (27.6 pt) below, and the counsel block 3.3 in from the margin two body lines below the title, single lines, a blank line between groups.
+- Body from page 1 (the page numbers start after the cover): double-spaced at a 27.6 pt pitch (LR 5.2(e), at least 2.0 lines: Word's double line at 12 pt, the exemplar's pitch), ragged right, first-line indent 0.5 in on every paragraph. Paragraphs are not numbered.
+- Headings: single 13.8 pt lines, bold, a blank single line above and half of one (6.9 pt) below, kept with the next block. Level 1 centered, underlined, in capitals (INTRODUCTION, LEGAL STANDARD, ARGUMENT, CONCLUSION, as filed); levels 2 to 4 carry their typed label (I., A., 1.) in a half-inch box, each level half an inch further in, the text hanging after the label (as filed); level 4 also italic.
+- Footnotes: 11 pt (LR 5.2(e)(1)), single-spaced in 12.65 pt lines (Word's single line at 11 pt), 6 pt apart, the mark, a space and the note, under a rule 30 % of the text width 12.6 pt below the text. Definitions are written as `[^key]: ...` anywhere in the body; the template passes each definition to the chunk that refers to it (cmarker resolves a reference only against definitions in the same source).
+- Block quotations: single lines, half an inch in on both sides, a blank single line above and below. Lists: the label in a half-inch box, the text hanging.
+- A web address breaks only after its "://" and after a "/", ".", "-", "_", "?", "=", "&" or "#" inside it (typst left alone splits a long address inside a word).
+- The last paragraph, the headings right before it, and the signature block are kept together.
+- Signature block, a blank single line after the last paragraph: "Dated" at the margin and "Respectfully submitted," at 3 in on the same line; the party; "By: /s/" the signer and the role lines; a blank single line between the groups.
+- Certificate of service (when given): its own page, a centered bold underlined heading, double-spaced text, the signer's lines 3.3 in from the margin one body line below.
+- Footer (body pages): page number, centered, 12 pt, in a 13.8 pt line (typst footer-descent 30 %; Word footer distance 735 twips).
 
 ## Markdown contract (for samples)
 
@@ -59,36 +63,37 @@ Primary sources, fetched 2026-10-14.
 2. **Notice of motion not produced.** The filed motion (ECF 24 in the exemplar's docket) is a separate document: the notice, the motion, and the judge's presentment requirements (LR 5.3(b)) are not in this template.
 3. **Sample is a portion.** Transcribed from pages 1 to 9 and 19 to 21 of the 21-page filing, with Argument I.B cut after its first two paragraphs, and Arguments II to IV omitted (marked in the text). Typos in the source are carried over ("PURSANT", the certificate's "to be served to be filed"). Two extraction artifacts are corrected: the Iqbal pin cite reads "680–81" and the Lubavitch reporter cite reads "806 816" as printed.
 4. **Exemplar is one filer.** Tier 2 is judged against this one filing only; see the complaint README for the other N.D. Ill. filings found.
-5. **Font.** No font is mandated by LR 5.2(e) (verified 2026-10-15; see the complaint README). The template keeps EB Garamond, per `docs/FONTS.md`. The exemplar is Times New Roman; the difference in apparent size is the same as in the complaint, and is visual only.
+5. **Font.** No font is mandated by LR 5.2(e) (verified 2026-10-15; see the complaint README). Both engines set the vendored Times New Roman, the exemplar's face (the docx named EB Garamond before fb-595.68.27).
 6. **Caption style.** This template uses the ")" column (as in the exemplar). The complaint template uses a box; both are seen in N.D. Ill. filings. Recorded as ACCEPTED.
 7. **Counsel block.** The exemplar places the counsel block on the cover and repeats it after the signature; the template prints it on the cover only.
-8. **Untested template features.** Block quotations (`>`), bulleted lists and the level-4 heading are coded but not exercised by a sample; they are not verified.
+8. **Untested template features.** Block quotations (`>`) and lists are coded in both engines but not exercised by the sample; they are not verified.
 9. **Certificate of service.** LR 5.5(a) requires a certificate only for service on a non-E-Filer. The exemplar has one anyway; the template prints one only when the sample gives one.
-10. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape and the brief forbids touching `tools/`. Render and overlay were run; the review below is the Gate 2 equivalent for this doc type.
+10. **No selftest.** `tools/check-selftest.sh` expects a court folder with `court.json`; this doc-type folder has none. `fb check` runs the default gates (typst 9, docx 13 passed, 0 failed); the review below is the Gate 2 review.
+11. **Ragged right.** The exemplar is justified; both engines set ragged-right lines (the cross-engine model: Word and typst justify differently). Recorded as ACCEPTED (tier 2).
+12. **Counsel block position.** The template sets the counsel block two body lines under the title (about where the exemplar has it); it used to push it to the foot of the cover, which Word cannot do the same way. Recorded as ACCEPTED (tier 2).
 
 ## Search for further exemplars
 
 CourtListener RECAP (`type=r`, `court=ilnd`, "memorandum in support of motion to dismiss"): the first page of results held no other motion memorandum with a downloadable PDF beyond the ones listed below. Other candidates seen but not saved: *45 Spirits LLC v. Sultan*, No. 1:26-cv-04902 (memorandum in support of a Rule 12(b)(2) motion, 18 pp, docket 73262099); *Anderson v. American Dental Associates*, No. 1:26-cv-01084 (opposition, not a motion, 24 pp). Only the Tahboub memorandum is saved.
 
-## Review of the rendered pages (current PDF)
+## Review of the rendered pages (current PDFs, typst and docx side by side, 2026-10-22)
 
-- Page 1 (cover, unnumbered): court title, caption with ")" column, case number and judge, title centered, counsel at lower right. No spill. Pass.
-- Page 2 (page "1"): INTRODUCTION heading; body double-spaced with first-line indents; footnote marks. Pass.
-- Page 3 (page "2"): paragraphs; footnotes 1 and 2 at the foot, 11 pt, single-spaced, with a rule. Pass.
-- Page 4 (page "3"): "RELEVANT FACTUAL BACKGROUND" with footnote 3 mark in the heading; footnote 3 at the foot. Pass.
-- Page 5 (page "4"): the end of the background; footnote 4 at the foot; LEGAL STANDARD moves to the next page with its paragraph, so no heading ends a page. Pass.
-- Page 6 (page "5"): LEGAL STANDARD; ARGUMENT; the point heading I (two-line, no hyphenation); "A." heading with its first paragraph on the same page. Footnote 5 at the foot. Pass.
-- Page 7 (page "6"): "B." heading with footnote 6 mark; footnote 6 at the foot. Pass.
-- Page 8 (page "7"): sub-heading "1." (two lines, bold, indented); paragraphs; the page ends mid-paragraph. Pass.
-- Page 9 (page "8"): the end of Argument I.B; the omission note (italic, indented); CONCLUSION; signature block (Dated, Respectfully submitted, party, "By: /s/", "One of Their Attorneys"). Pass.
-- Page 10 (page "9"): CERTIFICATE OF SERVICE on its own page; text double-spaced; signature right column. Pass.
+Every line and page break is the same in both engines (XENG-001..003, 249/249 lines); the pages below hold for both.
+
+- Page 1 (cover, unnumbered): court title, caption with the ")" column, case number and judge at the middle rows, title centered, counsel block. Pass.
+- Page 2 (page "1"): INTRODUCTION (centered, bold, underlined); body double-spaced with first-line indents. Pass.
+- Page 3 (page "2"): paragraphs; footnote marks 1 and 2; footnotes 1 and 2 at the foot, 11 pt, single-spaced, under the rule; the page ends one line short (the next paragraph would leave a single line). Pass.
+- Page 4 (page "3"): "RELEVANT FACTUAL BACKGROUND" with the footnote 3 mark in the heading; footnote 3 at the foot. Pass.
+- Page 5 (page "4"): the background; footnote 4 with its three web addresses broken after "/" and "-". Pass.
+- Page 6 (page "5"): LEGAL STANDARD and its paragraph. Pass.
+- Page 7 (page "6"): ARGUMENT; point I (three lines, label hung); "A." heading; footnote 5 at the foot. Pass.
+- Page 8 (page "7"): "B." heading with the footnote 6 mark; sub-heading "1." (two lines, bold italic, hung an inch in); footnote 6 at the foot. Pass.
+- Page 9 (page "8"): the end of Argument I.B; the omission note (italic); the page ends short: CONCLUSION, its paragraph and the signature block move on together. Pass.
+- Page 10 (page "9"): CONCLUSION; signature block (Dated, Respectfully submitted, party, "By: /s/", "One of Their Attorneys"). Pass.
+- Page 11 (page "10"): CERTIFICATE OF SERVICE on its own page; text double-spaced; the signer's lines at the right. Pass.
 
 ## Engines
 
-**docx** (`docx/build-reference.sh` builds `docx/reference.docx`; `docx/ilnd.lua` is the filter; `usage/OUTPUT-motion-brief.docx` is the output of `tools/render.sh --engine docx`).
+**docx** (`docx/reference.xml`, `docx/ilnd-motion-brief.lua`; `fb render` builds the reference and runs the filter, no shell): `<reference base="xengine" size="24" body="552" single="276" indent="720" list="720" quote="276" note="253" note-size="22" note-after="120" footer="735">` in `{font}` (the typst face, Times New Roman), with "Body Text Note" (no widow control, for a paragraph that anchors a footnote), "Body Keep" (the last paragraph, kept with the signature), Footnote Text without keepLines, and the headings "Head 1" to "Head 4" ("Head N Top" for a heading that opens the body's section). The filter writes the cover as its own section with fb's empty footer (`rIdFtrNone`), then the body as a section numbered from 1 with its own page-number footer in a 13.8 pt line (`$FORMBOOK_FOOTERS`, `$FORMBOOK_FINAL`); the caption as a borderless table, one row per line; headings, body paragraphs, quotations, lists and footnotes through pandoc in those styles (a heading may carry a footnote); the signature and certificate with `xe.spacing`. typst's break rules: no break inside ")(" (word joiner), a break after a slash before a letter and at the web-address break points (zero-width spaces), "§§"/"¶¶" bound to the number. `fb check --engine docx`: 13 passed, 0 failed; XENG-001..003 PASS (249/249 lines; widths within 0.46 pt, baselines within 0.19 pt).
 
-- Matches the typst form: EB Garamond 12 pt body; exact 27.6 pt (double) body lines; first-line indent 0.5 in, justified; headings single-spaced with one double line above and below (level 1 centered capitals, level 2 bold flush left, levels 3 and 4 bold indented 0.5 in); block quotations single-spaced and indented; footnotes 11 pt single; US Letter with 1 in margins.
-- The cover is its own section with no footer; the body starts a new section and numbers its pages from 1, as the typst template does.
-- Differs or unverified: the caption (a table with a column of ")" marks) and the counsel block are not checked against the typst layout; the counsel block follows the title instead of sitting at the foot of the cover (the typst template pushes it down with v(1fr)); the signature block is a borderless table; the certificate of service is on its own page, as in the typst template.
-- The template has no table of contents or table of authorities, as in the typst template (LR 7.1 gap, see Known gaps).
-- BLOCKED: `OUTPUT-ilnd-motion-brief-tahboub.docx.pdf` is not produced because `soffice` is not installed on this box, so `tools/check.sh --engine docx` (Gates 0 to 3 on the .docx.pdf) cannot run. No page has been rendered or reviewed for the docx engine (pages reviewed: 0). The check that the .docx opens in Word and LibreOffice without a repair prompt is not done. What was verified: the .docx is a valid zip and every XML part is well formed; the text reads back in the right order (pandoc readback).
+**latex**: not built for this doc type.
