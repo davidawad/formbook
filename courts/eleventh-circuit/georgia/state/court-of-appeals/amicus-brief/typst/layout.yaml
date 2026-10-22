@@ -47,6 +47,8 @@ authorities:
 # GACTAPP-CERT-001: the Rule 24 (f) (1) sentence just above the signature block, the date, the signature block
 # (GACTAPP-SIG-001, -002: "/s/" and the typed name underlined, the name again below it), never split; then the
 # certificate of service (GACTAPP-SVC-001, -002) on a page of its own.
+# The body's last paragraph kept with the closing (tier 2: a signature page of its own reads as detached).
+keep_with_closing: true
 closing:
   - group:
       - {text: "This submission does not exceed the word count limit imposed by Rule 24.", pitch: body, indent: 36}
