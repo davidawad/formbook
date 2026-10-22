@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The M.D. Ga. bankruptcy motion's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of
+     the typst template ({font}, Times New Roman) at 12 pt (size 24 half points); Body Text in exact 24 pt line boxes
+     (typst pitch-body, the template's double spacing) with a half-inch indent; the headings (half a body line above
+     and below), court lines, caption, quotations, signature and certificate lines in 13.8 pt boxes (typst
+     pitch-single); footnotes 12 pt in 13.8 pt boxes, 7 pt after each (typst note-gap); letter page with 1-inch
+     margins and a centered page number, its line 36.75 pt above the page foot (735 twips: where typst sets it,
+     footer-descent 30 %). docx/gamb.lua writes the caption, quotations, signature and certificate with their own
+     spacing. Pandoc's fancy lists are off, as the template's render always had them. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="240" heading-after="240" note="276" note-size="24" note-after="140" footer="735" pandoc-from="markdown+smart-fancy_lists"/>
