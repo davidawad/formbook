@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # LaTeX reported, not gated: a shared-model limitation outside this folder's layout (fb-595.54.75):
+  # exact tie: INPUT-answering-brief p37 line 2 (Conclusion) is 468.00 pt wide in typst, which breaks before
+  # 'should'; the generated LaTeX text block is 0.05 bp wider for newtx (gen.rs latex_bias) and keeps the word
+  # (XENG-003). docs/open-items/fb-595.54.75.md
+  cross_engine_latex: report

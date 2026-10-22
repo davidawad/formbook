@@ -1,0 +1,56 @@
+# Court of Appeals of Iowa (iowactapp): appellee's brief (IOWACTAPP-ANS-001). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to Iowa R. App. P. 6.903 (../rules.md, IOWACTAPP-*); lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # IOWACTAPP-FORM-004: 14-point or larger for all text, footnotes included
+pitch:
+  body: 32.2              # IOWACTAPP-FORM-003: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # IOWACTAPP-FORM-003: headings, footnotes, quotations single (1.15 x 14 pt); cover, tables
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # IOWACTAPP-FORM-002: 1 inch on all sides
+indent: 36
+page_number: {align: center, from: 1}   # IOWACTAPP-FORM-006: bottom center, Arabic, the cover is page one
+footnote: {size: 14, gap: 7}            # IOWACTAPP-FORM-003, -004: 14 points, single spaced
+quote: {left: 36, right: 36, above: 8.4, below: 14}   # IOWACTAPP-FORM-003: quotations indented, single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 16.8, below: 14}
+  - {bold: true, hang: 36, above: 14, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The cover (IOWACTAPP-COVER-001..005): the court and the appellate number, the caption on appeal, the proceeding and
+# the judge between rules, the title between rules, counsel right of center.
+cover:
+  - {text: "{court_line}", align: center, bold: true}
+  - {text: "{case_number}", align: center}
+  - each: caption
+    above: 14.4
+    between:
+      - {text: "vs.", align: center, above: 11.2, below: 11.2}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center}
+  - {rule: 0.5, above: 16.8}
+  - {text: "{proceeding}", align: center, above: 11.2}
+  - {text: "{judge}", align: center, optional: true}
+  - {rule: 0.5, above: 11.2}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 16.8}
+  - {rule: 0.5, above: 16.8}
+  - each: counsel
+    above: 28.8
+    blocks:
+      - {text: "{names}", left: 216, above: 11.2}
+      - {text: "{lines}", left: 216}
+# IOWACTAPP-APP-001: the table of contents with page references, then the table of authorities with every page.
+contents: {title: "Table of Contents", depth: 1, col: 36, hang: 36, above: 9.8}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 9.8
+  group: {bold: true, above: 15.4, below: 2.8}
+# The signature after the request for oral argument (IOWACTAPP-APP-009): counsel, right of center; never split.
+closing:
+  - group:
+      - {text: "{signature.firm}", left: 216, optional: true}
+      - {text: "{signature.lines}", left: 216}
+    above: 28.8
+# The certificates (IOWACTAPP-FORM-009) open a page after the signature, in the body's form (IOWACTAPP-FORM-003).
+tail: {at: "C[Ee][Rr][Tt][Ii][Ff][Ii][Cc][Aa][Tt][Ee]", break: true, pitch: body, indent: 36}

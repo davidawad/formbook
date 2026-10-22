@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # LaTeX reported, not gated: a shared-model limitation outside this folder's layout (fb-595.54.75):
+  # LaTeX has no break after an ellipsis inside a word ("use of…automobiles", p7 line 14; typst and Word break
+  # there) and a hard line break starts an indented paragraph (p12 "Signature", "Date") (XENG-002, -003).
+  # docs/open-items/fb-595.54.75.md
+  cross_engine_latex: report
