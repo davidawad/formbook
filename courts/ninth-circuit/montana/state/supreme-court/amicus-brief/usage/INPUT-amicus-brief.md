@@ -44,7 +44,7 @@ counsel:
       - "robert.skinner@ropesgray.com"
       - "kaitlin.odonnell@ropesgray.com"
       - "Counsel for Amici Curiae"
-cover_note: "* All attorneys designated with an asterisk have been admitted pro hac vice or are in the process of applying for admission pro hac vice."
+cover_note: "\\* All attorneys designated with an asterisk have been admitted pro hac vice or are in the process of applying for admission pro hac vice."
 date: "March 20, 2024"
 signature:
   - lines:
