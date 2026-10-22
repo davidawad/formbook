@@ -26,8 +26,9 @@ return require("latex.xdoc")({
   ["quote"] = {
     ["left"] = 36,
     ["right"] = 36,
-    ["above"] = 0,
+    ["above"] = 6.9,
     ["below"] = 6.9,
+    ["gap"] = 6.9,
     ["pitch"] = "body",
   },
   ["heading"] = {
@@ -91,6 +92,7 @@ return require("latex.xdoc")({
       ["below"] = 18,
     },
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {
@@ -133,17 +135,26 @@ return require("latex.xdoc")({
       ["heading"] = 1,
     },
     {
-      ["text"] = "The undersigned certifies that a copy of this motion has been delivered electronically on {date} to each counsel of record listed below, in compliance with Practice Book § 62-7.",
-      ["pitch"] = "body",
-    },
-    {
-      ["text"] = "{service}",
-      ["above"] = 6.9,
-    },
-    {
-      ["text"] = "/s/ {signature.signer}",
-      ["right"] = 108,
-      ["above"] = 14.4,
+      ["group"] = {
+        {
+          ["text"] = "The undersigned certifies that a copy of this motion has been delivered electronically on {date} to each counsel of record listed below (on paper where so stated), in compliance with Practice Book § 62-7.",
+          ["pitch"] = "body",
+        },
+        {
+          ["each"] = "service",
+          ["blocks"] = {
+            {
+              ["text"] = "{.}",
+              ["above"] = 6.9,
+            },
+          },
+        },
+        {
+          ["text"] = "/s/ {signature.signer}",
+          ["right"] = 108,
+          ["above"] = 14.4,
+        },
+      },
     },
   },
   ["latex_bias"] = 0.05,

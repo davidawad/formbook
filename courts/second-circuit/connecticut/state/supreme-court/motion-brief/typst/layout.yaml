@@ -15,7 +15,7 @@ page_number: {align: center, from: 1, text: "Page {page} of {pages}"}
 # CONN-MOT-003, CONN-FORM-002, -004: footnotes 12 point at the body's uniform 1.5 spacing.
 footnote: {size: 12, pitch: 20.7, gap: 6.9}
 # CONN-FORM-002, -004: block quotations 12 point at the same uniform spacing, indented on both sides.
-quote: {left: 36, right: 36, above: 0, below: 6.9, pitch: body}
+quote: {left: 36, right: 36, above: 6.9, below: 6.9, gap: 6.9, pitch: body}   # half a line around and between its paragraphs
 # CONN-MOT-003: section captions in 14-point serif (1.5 x 1.15 x 14 pt = 24.15); bold for emphasis (CONN-FORM-005),
 # level 1 centered, levels 2 and 3 flush left (all text left aligned).
 heading:
@@ -38,6 +38,8 @@ front:
 # CONN-SIG-001 (P.B. 62-8): counsel's signature after the text, never split; then the P.B. 66-3 certification
 # (CONN-MOT-004, CONN-CERT-003: the word count under the P.B. 66-2(b) limit; CONN-CERT-001: service under P.B. 62-7,
 # with the names and email addresses of the counsel served).
+# The text's last paragraph stays on the signature's page (no signature block standing alone).
+keep_with_closing: true
 closing:
   - group:
       - {text: "Respectfully submitted,"}
@@ -49,6 +51,10 @@ closing:
   - {text: "CERTIFICATION OF WORD COUNT", heading: 1}
   - {text: "The undersigned certifies that this motion complies with the word limit of Practice Book § 66-2(b) and contains {word_count} words, counted as that section directs.", pitch: body}
   - {text: "CERTIFICATION OF SERVICE", heading: 1}
-  - {text: "The undersigned certifies that a copy of this motion has been delivered electronically on {date} to each counsel of record listed below, in compliance with Practice Book § 62-7.", pitch: body}
-  - {text: "{service}", above: 6.9}
-  - {text: "/s/ {signature.signer}", right: 108, above: 14.4}
+  # the certification, the counsel served and the signature never split (no signature line alone on a page)
+  - group:
+      - {text: "The undersigned certifies that a copy of this motion has been delivered electronically on {date} to each counsel of record listed below (on paper where so stated), in compliance with Practice Book § 62-7.", pitch: body}
+      - each: service
+        blocks:
+          - {text: "{.}", above: 6.9}
+      - {text: "/s/ {signature.signer}", right: 108, above: 14.4}
