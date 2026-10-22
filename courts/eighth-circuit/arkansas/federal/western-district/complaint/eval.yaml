@@ -1,0 +1,9 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (fb-595.68.7, on the shared layout model lib/*/xengine*), so a difference fails.
+# DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent (14.9 pt above the baseline
+# at 12 pt; typst's run to 8.8 pt), so the first line of page 1, whose 13.8 pt line box starts at the 1 in margin
+# (baseline at 83.0 pt), measures 3.9 pt into the margin on docx (box top 68.1 pt; typst 74.2 pt). The vertical
+# tolerance covers that box, not text: Gate 4 puts both engines on the same baselines.
+params:
+  cross_engine: gate
+  eps_v_pt: 4.5
