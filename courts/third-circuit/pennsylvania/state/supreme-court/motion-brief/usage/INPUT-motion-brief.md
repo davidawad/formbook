@@ -66,41 +66,13 @@ At issue here is the Pennsylvania General Assembly’s attempt, and success if t
 
 The current Pennsylvania Constitution sets out the following qualifications for voting: (1) 18 years of age or older; (2) citizen of the United States for at least one month; (3) has residence in Pennsylvania for the 90 days immediately preceding the election; and (4) has residence in the “election district where he or she shall offer to vote at least 60 days immediately preceding the election ….” Pa. Const. Art. VII, § 1 (emphasis added). “For the orderly exercise of the right resulting from these qualifications … the Legislature must prescribe necessary regulations …. But this duty and right inherently imply that such regulations are to be subordinate to the right …. As a corollary of this, no constitutional qualification of an elector can in the least be abridged, added to, or altered by legislation or the pretence of legislation.” In re Contested Election in Fifth Ward of Lancaster City, 126 A. 199, 201 (Pa. 1924).
 
-To “offer to vote” by ballot, is to present oneself, with proper
+> To “offer to vote” by ballot, is to present oneself, with proper qualifications, at the time and place appointed, and to make manual delivery of the ballot to the officers appointed by law to receive it. The ballot cannot be sent by mail or express, nor can it be cast outside of all Pennsylvania election districts and certified into the county where the voter has his domicil. We cannot be persuaded that the constitution ever contemplated any such mode of voting, and we have abundant reason for thinking that to permit it would break down all the safeguards of honest suffrage. The constitution meant, rather, that the voter, in propria persona, should offer his vote in an appropriate election district, in order that his neighbours might be at hand to establish his right to vote if it were challenged, or to challenge if it were doubtful.
+>
+> \*\*\*
+>
+> Our Constitution and laws treat the elective franchise as a sacred trust…. All of which the [1839 act] reverses and disregards, and opens a wide door for most odious frauds, some of which have come under our judicial cognizance.
 
-qualifications, at the time and place appointed, and to make
-
-manual delivery of the ballot to the officers appointed by law to
-
-receive it. The ballot cannot be sent by mail or express, nor can
-
-it be cast outside of all Pennsylvania election districts and
-
-certified into the county where the voter has his domicil. We
-
-cannot be persuaded that the constitution ever contemplated any
-
-such mode of voting, and we have abundant reason for thinking
-
-that to permit it would break down all the safeguards of honest
-
-suffrage. The constitution meant, rather, that the voter, in propria
-
-persona, should offer his vote in an appropriate election district,
-
-in order that his neighbours might be at hand to establish his right
-
-to vote if it were challenged, or to challenge if it were doubtful.
-
-***
-
-Our Constitution and laws treat the elective franchise as a sacred
-
-trust…. All of which the [1839 act] reverses and disregards, and
-
-opens a wide door for most odious frauds, some of which have
-
-come under our judicial cognizance. Chase, 41 Pa. at 418-425 (1862); Lancaster City, 281 Pa. 134-35 (upholding the same).
+Chase, 41 Pa. at 418-425 (1862); Lancaster City, 281 Pa. 134-35 (upholding the same).
 
 Article VII, § 14(a) provides the only such exceptions to the in propria persona voting requirement of the Pennsylvania Constitution, in four specific circumstances. It states: (a) The Legislature shall, by general law, provide a manner in which, and the time and place at which, qualified electors who may, on the occurrence of any election, be absent from the municipality of their residence, because their duties, occupation or business require them to be elsewhere or who, on the occurrence of any election, are unable to attend at their proper polling places because of illness or physical disability or who will not attend a polling place because of the observance of a religious holiday or who cannot vote because of election day duties, in the case of a county employee, may vote, and for the return and canvass of their votes in the election district in which they respectively reside. Pa. Const. Art. VII, § 14(a). Outside of these four enumerated exceptions, the Pennsylvania Constitution prohibits absentee voting. 2.    Act 77 is illegal and void ab initio because the General Assembly does not have the authority to enact legislation in contravention of the powers delegated to it by the Pennsylvania and U.S. Constitutions.
 

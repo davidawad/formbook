@@ -41,6 +41,8 @@ local function ellipses(s)
     if a > 1 then out:insert(pandoc.Str(rest:sub(1, a - 1))) end
     out:insert(pandoc.RawInline("latex", "\\xd@ellipsis{}"))
     rest = rest:sub(b + 1)
+    -- typst and LibreOffice may end a line after an ellipsis that a word follows ("\u{2026}presents"): so may TeX
+    if rest:find("^%w") then out:insert(pandoc.RawInline("latex", "\\hskip0pt\\relax{}")) end
   end
   if rest ~= "" then out:insert(pandoc.Str(rest)) end
   return out
