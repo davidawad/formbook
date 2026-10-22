@@ -3,3 +3,7 @@
 font:
   size_pt: 14
   pdf_prefix: "LiberationSans"
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): gated. latex/ and docx/ are generated from
+# typst/layout.yaml and break every line and page where typst does.
+params:
+  cross_engine: gate

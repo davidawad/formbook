@@ -1,0 +1,78 @@
+# Florida Fifth District Court of Appeal (fladistctapp5): petition for discretionary review (a petition for a writ of
+# certiorari under Fla. R. App. P. 9.100). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to Fla. R. App. P. 9.045, 9.100 and 9.210 (../../rules.md, FLADISTCTAPP5-*); lengths in points. No case text here:
+# every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # FLADISTCTAPP5-FORM-005: Arial 14 point; footnotes and quotations too (-FORM-006)
+pitch:
+  body: 32.2              # FLADISTCTAPP5-FORM-004: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # caption, headings, quotations, footnotes, signature: single (-FORM-006)
+# FLADISTCTAPP5-FORM-003: no less than one inch; top and bottom 4 pt deeper keep a note mark or descender inside it
+margin: {top: 76, bottom: 76, left: 72, right: 72}
+indent: 36                # style: half-inch first-line indent
+page_number: {align: center, from: 1}   # style (Rule 9.045 sets none): every page numbered at the bottom
+footnote: {size: 14, gap: 7}             # FLADISTCTAPP5-FORM-006: 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # FLADISTCTAPP5-FORM-006: quotations single spaced, 14 point
+# FLADISTCTAPP5-FORM-006: headings at the text size, single spaced. Sections unnumbered; the argument's points numbered
+# by the template, "I." and under them "A.", the title hung half an inch after its number.
+heading:
+  - {align: center, bold: true, upper: true, above: 19.6, below: 14}
+  - {bold: true, number: "I.", label_box: 36, above: 16.8, below: 16.8}
+  - {bold: true, number: "A.", label_box: 36, above: 16.8, below: 16.8}
+# FLADISTCTAPP5-PET-001, -BRIEF-001: the court; the parties and their designations beside the proceeding and the case
+# numbers; the title; the petition's text follows on the same page.
+front:
+  - {text: "{court}", align: center, bold: true, upper: true}
+  - columns:
+      - width: 216
+        blocks:
+          - each: parties
+            blocks:
+              - group:
+                  - {text: "{name}"}
+                  - {text: "{role}", left: 54, optional: true}
+                below: 12.6
+          - {text: "{caption_close}", align: right, optional: true}
+      - blocks:
+          - {text: "{proceeding}", optional: true}
+          - {text: "CASE NO.: {case_number}", above: 18.2}
+          - {text: "{lower_court_case}", optional: true}
+    gutter: 14.4
+    above: 16.8
+  - {text: "{title}", align: center, bold: true, upper: true, left: 34, right: 34, above: 16.8, below: 16.8}
+# Rule 9.045 sets no signature form. The certificate of service (Fla. R. Gen. Prac. & Jud. Admin. 2.516) on a page of
+# its own, then "Respectfully submitted," and the "/s/" line, the typed name and the contact lines 3 in from the
+# margin, never split; then, when the filer gives the count, the certificate of compliance (Rule 9.045(e),
+# FLADISTCTAPP5-FORM-008) on a page of its own: the face named as the filer's word processor sets it (Arial).
+closing:
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", heading: 1}
+      - when: service.paragraphs
+        blocks:
+          - {text: "{service.paragraphs}", indent: 36, pitch: body}
+      - unless: service.paragraphs
+        blocks:
+          - {text: "I certify that on {service.date}, I served a copy of this {service.doc_type} on {service.served_on} by {service.method}, addressed as follows:", indent: 36, pitch: body}
+      - each: service.recipients
+        blocks:
+          - group:
+              - {text: "{.}"}
+            above: 14
+      - {text: "{service.closing}", indent: 36, pitch: body, optional: true}
+  - group:
+      - {text: "Respectfully submitted,", left: 216}
+      - {text: "{signature.signer_line}", left: 216, above: 11.2}
+      - {text: "{signature.name}", left: 216}
+      - {text: "{signature.signer}", left: 216, optional: true}
+    above: 16.8
+  - when: word_count
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF COMPLIANCE", heading: 1}
+      - {text: "I HEREBY CERTIFY that this computer-generated document complies with the applicable font requirements of Rule 9.045(b) by production in Arial font, size 14-point, and that it complies with the applicable word count limit and contains {word_count} words.", indent: 36, pitch: body}
+      - group:
+          - {text: "{signature.signer_line}", left: 216}
+          - {text: "{signature.name}", left: 216}
+        above: 11.2
