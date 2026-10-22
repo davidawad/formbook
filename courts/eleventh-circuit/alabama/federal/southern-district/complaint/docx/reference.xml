@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The S.D. Ala. complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman, Gen. L.R. 5(a)(2): plain roman) at 12 pt (size 24 half points); Body
+     Text in exact 24 pt line boxes (typst pitch-double, Gen. L.R. 5(a)(1) double-spaced) with a half-inch indent, and
+     the headings in them; single lines, quotations and the footer in 13.8 pt boxes (typst pitch-single); letter page
+     with 1-inch margins and a centered page number, its line 36.6 pt above the page foot (732 twips: where typst
+     sets it, footer-descent 30 %). docx/alsd-complaint.lua writes every paragraph's own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="480" heading-before="0" heading-after="0" footer="732"/>
