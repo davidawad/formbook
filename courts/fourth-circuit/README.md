@@ -31,7 +31,7 @@ Courts under `courts/fourth-circuit` (29).
 | [Court of Appeals of South Carolina](south-carolina/state/court-of-appeals) | `scctapp` | up for review | 5/5 | 4/4 | 4/4 | 29 |
 | [Supreme Court of South Carolina](south-carolina/state/supreme-court) | `sc` | up for review | 7/7 | 4/4 | 4/4 | 29 |
 | [Court of Appeals of Virginia](virginia/state/court-of-appeals) | `vactapp` | up for review | 5/5 | 3/3 | 3/3 | 29 |
-| [Supreme Court of Virginia](virginia/state/supreme-court) | `va` | up for review | 8/8 | 3/3 | 3/3 | 29 |
+| [Supreme Court of Virginia](virginia/state/supreme-court) | `va` | up for review | 8/8 | 7/7 | 7/7 | 29 |
 | [Intermediate Court of Appeals of West Virginia](west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
 | [West Virginia Supreme Court](west-virginia/state/supreme-court) | `wva` | up for review | 9/9 | 3/3 | 3/3 | 29 |
 
