@@ -47,481 +47,60 @@ service:
 
 Reply1
 
-## The Chancery Court relied on fact-based findings from other cases—
-
-not the facts developed below—when it addressed Glossip’s first
-
-prong, and thereby violated Plaintiffs’ right to due process of law.
+## The Chancery Court relied on fact-based findings from other cases— not the facts developed below—when it addressed Glossip’s first prong, and thereby violated Plaintiffs’ right to due process of law.
 
 The Chancery Court credited Plaintiffs’ experts over Defendants’ experts and
 
-Defendants do not contest the court’s factual findings based on the evidence
-
-presented at the hearing. The contested issue is the lower court’s weighing of the
-
-unrebutted proof of a substantial risk of severe pain against the fact-driven holding
-
-by the United States Supreme Court in Glossip that Oklahoma’s three-drug
-
-midazolam lethal injection protocol did not violate the Eighth Amendment. The
-
-Chancery Court’s weighing of the outcomes of different cases rendered upon
-
-different proof violated Plaintiffs’ Fourteenth Amendment right to have the merits
-
-decided on the strength of the facts presented in their case.
+Defendants do not contest the court’s factual findings based on the evidence presented at the hearing. The contested issue is the lower court’s weighing of the unrebutted proof of a substantial risk of severe pain against the fact-driven holding by the United States Supreme Court in Glossip that Oklahoma’s three-drug midazolam lethal injection protocol did not violate the Eighth Amendment. The Chancery Court’s weighing of the outcomes of different cases rendered upon different proof violated Plaintiffs’ Fourteenth Amendment right to have the merits decided on the strength of the facts presented in their case.
 
 ### The outcome in this case must be based on the evidence presented, not on the outcomes of other cases.
 
-Defendants argue the lower court’s “review and application of other cases
+Defendants argue the lower court’s “review and application of other cases addressing materially similar facts was entirely appropriate[,]” although they minimize Plaintiffs’ claim by characterizing the court’s action as merely a “reference to ‘statements made by other courts about the three drugs in Tennessee’s execution protocol.’”2 (Response brief p.56) (emphasis added). To support their argument, 1 This Reply is submitted seven days after service of Defendants’ Response Brief. It was prepared under an extreme time limitation and likely contains errors. It does not contain an introduction, all relevant facts, legal authority, and record cites, or an exhaustive analysis. 2 Defendants do not support the assertion that the facts presented below are “materially similar” to facts in other cases. To the contrary, as set forth in Plaintiffs’ Defendants offer the novel suggestion that the limitations of 28 U.S.C. § 2254(d) to granting relief on a state prisoner’s habeas corpus claims are relevant to the issue here: whether a court may resolve a case in controversy based upon evidence not before it. (Response brief p.52) (citing Williams v. Taylor, 529 U.S. 362 (2000)). Defendants provide no relevant authority for this unusual theory. The controlling legal principle in this case, i.e., the law to which stare decisis applies, requires a court to rely upon the evidence placed before it, not evidence presented to and evaluated by another tribunal.3 Ohio Bell Tel. Co. v. Pub. Utils. Com., 301 U.S. 292, 300 (1937). See also West v. Ray, No. M2010-02275-SC-R11-CV, Order p.2 (Tenn. Nov. 6, 2010).
 
-addressing materially similar facts was entirely appropriate[,]” although they
-
-minimize Plaintiffs’ claim by characterizing the court’s action as merely a “reference
-
-to ‘statements made by other courts about the three drugs in Tennessee’s execution
-
-protocol.’”2 (Response brief p.56) (emphasis added). To support their argument,
-
-1 This Reply is submitted seven days after service of Defendants’ Response Brief. It was prepared under an extreme time limitation and likely contains errors. It does not contain an introduction, all relevant facts, legal authority, and record cites, or an exhaustive analysis. 2 Defendants do not support the assertion that the facts presented below are “materially similar” to facts in other cases. To the contrary, as set forth in Plaintiffs’
-
-Defendants offer the novel suggestion that the limitations of 28 U.S.C. § 2254(d) to
-
-granting relief on a state prisoner’s habeas corpus claims are relevant to the issue
-
-here: whether a court may resolve a case in controversy based upon evidence not
-
-before it. (Response brief p.52) (citing Williams v. Taylor, 529 U.S. 362 (2000)).
-
-Defendants provide no relevant authority for this unusual theory. The controlling
-
-legal principle in this case, i.e., the law to which stare decisis applies, requires a
-
-court to rely upon the evidence placed before it, not evidence presented to and
-
-evaluated by another tribunal.3 Ohio Bell Tel. Co. v. Pub. Utils. Com., 301 U.S. 292,
-
-300 (1937). See also West v. Ray, No. M2010-02275-SC-R11-CV, Order p.2 (Tenn.
-
-Nov. 6, 2010).
-
-The Eighth Amendment issue in this case is a mixed question of fact and law.
-
-West v. Schofield, 519 S.W.3d 550, 563 (quoting Abdur’Rahman v. Bredesen, 181
-
-S.W.3d 292, 305 (Tenn. 2005)). It is not a purely legal determination to which, as
-
-Defendants suggest, deference to the doctrine of stare decisis requires the outcome
-
-in Glossip to apply to Plaintiffs’ case. The outcome in Glossip was determined upon
-
-brief, the Chancery Court commented it had no way to determine what evidence was presented in those cases or any credibility determinations made by those courts. (Brief pp.26-27). Defendants fail to address inconsistencies between the lower court’s statements and evidentiary holdings and its actions when rendering a final decision. 3 The Supreme Court’s decision in Ohio Bell Tel. Co., has been cited in more than 500 cases and none of those cases have cited Williams v. Taylor. Likewise, Williams v. Taylor has been cited in more than 50,000 cases and undersigned have identified none which apply to the circumstances presented in this case.
-
-the strength of the plaintiffs’ proof in that case, and that is how due process
-
-requires this case to be decided.
+The Eighth Amendment issue in this case is a mixed question of fact and law. West v. Schofield, 519 S.W.3d 550, 563 (quoting Abdur’Rahman v. Bredesen, 181 S.W.3d 292, 305 (Tenn. 2005)). It is not a purely legal determination to which, as Defendants suggest, deference to the doctrine of stare decisis requires the outcome in Glossip to apply to Plaintiffs’ case. The outcome in Glossip was determined upon brief, the Chancery Court commented it had no way to determine what evidence was presented in those cases or any credibility determinations made by those courts. (Brief pp.26-27). Defendants fail to address inconsistencies between the lower court’s statements and evidentiary holdings and its actions when rendering a final decision. 3 The Supreme Court’s decision in Ohio Bell Tel. Co., has been cited in more than 500 cases and none of those cases have cited Williams v. Taylor. Likewise, Williams v. Taylor has been cited in more than 50,000 cases and undersigned have identified none which apply to the circumstances presented in this case. the strength of the plaintiffs’ proof in that case, and that is how due process requires this case to be decided.
 
 ### The Chancery Court did not properly determine the first prong of Glossip but, instead, assigned great weight to court decisions that have denied other method-of-execution challenges.
 
-Defendants also argue the Chancery Court’s analysis should be upheld
+Defendants also argue the Chancery Court’s analysis should be upheld because “the Constitution does not require a painless death, as there is some risk of pain inherent in any method of execution.” (Response brief p.55) (citing Glossip v. Gross, 135 S. Ct. 2726, 2733 (2015); Response brief p.28). Seemingly to connect this remark from Glossip to the lower court’s analysis, Defendants’ brief misrepresents the standard in Glossip as the “Court’s legal conclusion that the risk of harm from the use of a midazolam-based lethal injection protocol is not ‘sure or very likely to result in needless suffering.’” (Response brief pp.55-56) (quoting Glossip, 135 S. Ct. at 2739). The Chancery Court made no such conclusion.
 
-because “the Constitution does not require a painless death, as there is some risk of
+Plaintiffs’ brief pointed out that the lower court did not quantify the risk of pain (other than to find it could last from 10 to 18 minutes) or engage in a comparative analysis. See, e.g., Brief p.25. Instead, the court deferred to the fact- based holding in Glossip and other court decisions. A review of the Chancery Court’s factual findings regarding Glossip’s first prong leads to no other conclusion than a substantial risk of serious pain. The court found: (1) Plaintiffs’ expert witnesses are well-qualified, eminent experts, (R. XVI, 2251);4 (2) Plaintiffs’ “experts established 4 In contrast, the Chancery Court found that Defendants’ experts were “qualified” but “did not have the research knowledge and [e]minent publications that Plaintiffs that midazolam does not elicit strong analgesic effects and the inmate being executed may be able to feel pain from the administration of the second and third drugs[,]” (R. XVI, 2251); (3) during midazolam executions in other states “there were signs such as grimaces, clenched fists, furrowed brows, and moans indicative that the inmates were feeling pain after the midazolam had been injected,” (R. XVI, 2258); (4) after an average of almost 14 minutes and as long as 18 minutes, Plaintiffs will be declared dead under Tennessee’s protocol, (R. XVI, 2255). It is undisputed that the level of pain caused by the second and third drugs is “serious” or “severe.”5 Furthermore, the court received unrebutted evidence that the first drug—midazolam—will cause Plaintiffs to experience “respiratory distress [which] would be extremely painful and alarming,” (Tr. XXXIX, 1467); it causes anxiety and terror, “[a]nd it’s torturous.” (Tr. XLII, 1822). See also Tr. XXVIII, pp.541-42.
 
-pain inherent in any method of execution.” (Response brief p.55) (citing Glossip v.
+With respect to the second enumerated finding, although Defendants emphasize the lower court’s use of the words “strong” and “may,” the court’s experts did.” (R. XVI, 2251 fn.7). Defendants concede the court below ignored the testimony of the defense experts, (Response brief pp.50, 51), and their response brief, likewise, ignores the substance of their experts’ testimony. 5 Awareness of the pain of vecuronium bromide is described as “horrific,” (Tr. XXV, 156); “basically, you’re suffocating and you want to breathe, but you can’t because you can’t work you muscles,” (Tr. XXVIII, 507, 510-11); “Basically, it’s like burying someone alive … you can’t take a breath and your lungs and your brain are screaming.” (Tr. XLII, 1774). Awareness of the pain caused by potassium chloride is “akin to being burnt alive,” (Tr. XLII, 1776); it will cause extreme pain as it “burns throughout the veins,” (Tr. XXV, 159); “it’s terribly painful,” (Tr. XXVIII, 510). findings are defined by the evidence in the record.6 That evidence proved the risk of severe pain will very likely arise. The Chancery Court said midazolam does not elicit “strong” analgesic effects but even Defendants’ expert, Dr. Evans, agreed that midazolam has no analgesic properties. (Tr. XLVI, 2148-54). In any event, Defendants do not dispute the experts’ unequivocal testimony that midazolam itself will cause severe pain and it cannot render a person insensate to the pain of vecuronium bromide and potassium chloride. (Tr. XXIV, 84-86, 122; Tr. XXV, 160- 62, 219-20; Tr. XXVIII, 498-99; Tr. XL, 1531-32, 1538; Tr. XLII, 1755-56). Plaintiffs’ scientific and other evidence proves that the three-drug midazolam protocol poses a substantial risk of serious pain and suffering.
 
-Gross, 135 S. Ct. 2726, 2733 (2015); Response brief p.28). Seemingly to connect this
+Defendants argue instead a point not advanced by Plaintiffs—“that the Constitution does not require a painless death.”7 (Response brief pp.18, 28, 55). In another portion of its responsive brief, Defendants concede that pain equivalent to burning at the stake or being buried alive is “surely” a “form[] of torture,” but then 6 At a minimum, the evidence preponderates against the Chancery Court’s use of the word “strong” (and the word “may” if it is defined as less than a substantial risk). The language used by the Chancery Court is seemingly drawn from the email written by Defendants’ anonymous drug supplier that cautions against the use of midazolam. Compare, R. XVI, 2251, with Exhibit 114, Exh. Vol. 11, 1628. Because midazolam can’t render a person insensate to the pain caused by vecuronium bromide or potassium chloride, the drug supplier suggested Defendants “use … an alternative [drug],” such as a barbiturate, or include an opioid (a pain-killer) in the protocol. Id. 7 Defendants also argue that the lower court’s factual findings related to the risk of harm from midazolam are not dispositive because the court’s decision about the availability of an alternative method “alone resulted in dismissal[.]” (Response brief pp.54-55). nonsensically equate that same pain inflicted by Tennessee’s lethal injection protocol to “incidental physical consequences of an execution” that do not constitute torture. (Response brief p.29). As to whether Tennessee’s method of execution constitutes cruel and unusual punishment, the evidence proves there is a substantial risk that Plaintiffs will suffer severe pain similar to drowning, being buried alive and being burned from the inside-out for 10 to 18 minutes. The protocol violates the Eighth Amendment.
 
-remark from Glossip to the lower court’s analysis, Defendants’ brief misrepresents
+## Plaintiffs were denied notice and an opportunity to be heard on Glossip’s second prong: an alternative method of execution that significantly reduces the risk of pain and suffering.
 
-the standard in Glossip as the “Court’s legal conclusion that the risk of harm from
+During the hearing below, Plaintiffs presented evidence on the availability of pentobarbital and evidence demonstrating that omission of vecuronium bromide from the three-drug midazolam protocol is a readily-implemented alternative that significantly reduces the substantial risk of serious harm caused by the three-drug protocol.8 Plaintiffs were deprived of adequate notice regarding the new July 5th Protocol and were deprived an opportunity to be heard on the July 5th Protocol when: that protocol was issued on the eve of trial; the Chancery Court limited Plaintiffs’ proposed alternative method to the one-drug protocol; and—after the close of proof—the court amended Plaintiffs’ complaint (over objection) to include a challenge to the July 5th Protocol. As a result, Plaintiffs were denied an opportunity to be heard on issues newly-arising from the July 5th Protocol and an opportunity 8 It is uncontested that a one-drug pentobarbital protocol significantly reduces the substantial risk of serious pain caused by the three-drug midazolam protocol. to be heard when the Chancery Court refused to consider as an alternative method a two-drug protocol along with the evidence presented that established it is a readily-implemented method that significantly reduces the substantial risk of severe pain caused by the three-drug midazolam protocol.
 
-the use of a midazolam-based lethal injection protocol is not ‘sure or very likely to
+Plaintiffs were also denied an opportunity to be heard on the one-drug pentobarbital alternative when the Chancery Court faulted Plaintiffs for not presenting in a certain manner evidence of its availability.
 
-result in needless suffering.’” (Response brief pp.55-56) (quoting Glossip, 135 S. Ct.
-
-at 2739). The Chancery Court made no such conclusion.
-
-Plaintiffs’ brief pointed out that the lower court did not quantify the risk of
-
-pain (other than to find it could last from 10 to 18 minutes) or engage in a
-
-comparative analysis. See, e.g., Brief p.25. Instead, the court deferred to the fact-
-
-based holding in Glossip and other court decisions. A review of the Chancery Court’s
-
-factual findings regarding Glossip’s first prong leads to no other conclusion than a
-
-substantial risk of serious pain. The court found: (1) Plaintiffs’ expert witnesses are
-
-well-qualified, eminent experts, (R. XVI, 2251);4 (2) Plaintiffs’ “experts established
-
-4 In contrast, the Chancery Court found that Defendants’ experts were “qualified” but “did not have the research knowledge and [e]minent publications that Plaintiffs
-
-that midazolam does not elicit strong analgesic effects and the inmate being
-
-executed may be able to feel pain from the administration of the second and third
-
-drugs[,]” (R. XVI, 2251); (3) during midazolam executions in other states “there
-
-were signs such as grimaces, clenched fists, furrowed brows, and moans indicative
-
-that the inmates were feeling pain after the midazolam had been injected,” (R. XVI,
-
-2258); (4) after an average of almost 14 minutes and as long as 18 minutes,
-
-Plaintiffs will be declared dead under Tennessee’s protocol, (R. XVI, 2255). It is
-
-undisputed that the level of pain caused by the second and third drugs is “serious”
-
-or “severe.”5 Furthermore, the court received unrebutted evidence that the first
-
-drug—midazolam—will cause Plaintiffs to experience “respiratory distress [which]
-
-would be extremely painful and alarming,” (Tr. XXXIX, 1467); it causes anxiety and
-
-terror, “[a]nd it’s torturous.” (Tr. XLII, 1822). See also Tr. XXVIII, pp.541-42.
-
-With respect to the second enumerated finding, although Defendants
-
-emphasize the lower court’s use of the words “strong” and “may,” the court’s
-
-experts did.” (R. XVI, 2251 fn.7). Defendants concede the court below ignored the testimony of the defense experts, (Response brief pp.50, 51), and their response brief, likewise, ignores the substance of their experts’ testimony. 5 Awareness of the pain of vecuronium bromide is described as “horrific,” (Tr. XXV, 156); “basically, you’re suffocating and you want to breathe, but you can’t because you can’t work you muscles,” (Tr. XXVIII, 507, 510-11); “Basically, it’s like burying someone alive … you can’t take a breath and your lungs and your brain are screaming.” (Tr. XLII, 1774). Awareness of the pain caused by potassium chloride is “akin to being burnt alive,” (Tr. XLII, 1776); it will cause extreme pain as it “burns throughout the veins,” (Tr. XXV, 159); “it’s terribly painful,” (Tr. XXVIII, 510).
-
-findings are defined by the evidence in the record.6 That evidence proved the risk of
-
-severe pain will very likely arise. The Chancery Court said midazolam does not
-
-elicit “strong” analgesic effects but even Defendants’ expert, Dr. Evans, agreed that
-
-midazolam has no analgesic properties. (Tr. XLVI, 2148-54). In any event,
-
-Defendants do not dispute the experts’ unequivocal testimony that midazolam itself
-
-will cause severe pain and it cannot render a person insensate to the pain of
-
-vecuronium bromide and potassium chloride. (Tr. XXIV, 84-86, 122; Tr. XXV, 160-
-
-62, 219-20; Tr. XXVIII, 498-99; Tr. XL, 1531-32, 1538; Tr. XLII, 1755-56). Plaintiffs’
-
-scientific and other evidence proves that the three-drug midazolam protocol poses a
-
-substantial risk of serious pain and suffering.
-
-Defendants argue instead a point not advanced by Plaintiffs—“that the
-
-Constitution does not require a painless death.”7 (Response brief pp.18, 28, 55). In
-
-another portion of its responsive brief, Defendants concede that pain equivalent to
-
-burning at the stake or being buried alive is “surely” a “form[] of torture,” but then
-
-6 At a minimum, the evidence preponderates against the Chancery Court’s use of the word “strong” (and the word “may” if it is defined as less than a substantial risk). The language used by the Chancery Court is seemingly drawn from the email written by Defendants’ anonymous drug supplier that cautions against the use of midazolam. Compare, R. XVI, 2251, with Exhibit 114, Exh. Vol. 11, 1628. Because midazolam can’t render a person insensate to the pain caused by vecuronium bromide or potassium chloride, the drug supplier suggested Defendants “use … an alternative [drug],” such as a barbiturate, or include an opioid (a pain-killer) in the protocol. Id. 7 Defendants also argue that the lower court’s factual findings related to the risk of harm from midazolam are not dispositive because the court’s decision about the availability of an alternative method “alone resulted in dismissal[.]” (Response brief pp.54-55).
-
-nonsensically equate that same pain inflicted by Tennessee’s lethal injection
-
-protocol to “incidental physical consequences of an execution” that do not constitute
-
-torture. (Response brief p.29). As to whether Tennessee’s method of execution
-
-constitutes cruel and unusual punishment, the evidence proves there is a
-
-substantial risk that Plaintiffs will suffer severe pain similar to drowning, being
-
-buried alive and being burned from the inside-out for 10 to 18 minutes. The protocol
-
-violates the Eighth Amendment.
-
-## Plaintiffs were denied notice and an opportunity to be heard on
-
-Glossip’s second prong: an alternative method of execution that
-
-significantly reduces the risk of pain and suffering.
-
-During the hearing below, Plaintiffs presented evidence on the availability of
-
-pentobarbital and evidence demonstrating that omission of vecuronium bromide
-
-from the three-drug midazolam protocol is a readily-implemented alternative that
-
-significantly reduces the substantial risk of serious harm caused by the three-drug
-
-protocol.8 Plaintiffs were deprived of adequate notice regarding the new July 5th
-
-Protocol and were deprived an opportunity to be heard on the July 5th Protocol
-
-when: that protocol was issued on the eve of trial; the Chancery Court limited
-
-Plaintiffs’ proposed alternative method to the one-drug protocol; and—after the
-
-close of proof—the court amended Plaintiffs’ complaint (over objection) to include a
-
-challenge to the July 5th Protocol. As a result, Plaintiffs were denied an opportunity
-
-to be heard on issues newly-arising from the July 5th Protocol and an opportunity
-
-8 It is uncontested that a one-drug pentobarbital protocol significantly reduces the substantial risk of serious pain caused by the three-drug midazolam protocol.
-
-to be heard when the Chancery Court refused to consider as an alternative method
-
-a two-drug protocol along with the evidence presented that established it is a
-
-readily-implemented method that significantly reduces the substantial risk of
-
-severe pain caused by the three-drug midazolam protocol.
-
-Plaintiffs were also denied an opportunity to be heard on the one-drug
-
-pentobarbital alternative when the Chancery Court faulted Plaintiffs for not
-
-presenting in a certain manner evidence of its availability.
-
-Defendants fail to directly address these issues because they mischaracterize
-
-Plaintiffs’ issues in two ways. First, Defendants claim that Plaintiffs’ arguments
-
-“largely mirror those of the Abdur’Rahman Appellants,” and they respond by
-
-referencing Sections I and II of their brief. (Response brief p.57). Second,
-
-Defendants mischaracterize Plaintiffs’ issues as an attempt “to shift fault” to them
-
-for the Chancery Court’s determination that Plaintiffs did not carry the burden of
-
-proof on the availability of pentobarbital, and also an argument that Plaintiffs “did
-
-not know they had to prove that pentobarbital was available ... until Protocol A was
-
-removed from the Department’s execution protocol.”9 (Response brief p.57).
+Defendants fail to directly address these issues because they mischaracterize Plaintiffs’ issues in two ways. First, Defendants claim that Plaintiffs’ arguments “largely mirror those of the Abdur’Rahman Appellants,” and they respond by referencing Sections I and II of their brief. (Response brief p.57). Second, Defendants mischaracterize Plaintiffs’ issues as an attempt “to shift fault” to them for the Chancery Court’s determination that Plaintiffs did not carry the burden of proof on the availability of pentobarbital, and also an argument that Plaintiffs “did not know they had to prove that pentobarbital was available ... until Protocol A was removed from the Department’s execution protocol.”9 (Response brief p.57).
 
 ### The Chancery Court did not consider Plaintiffs’ proof of a two-drug alternative: omitting vecuronium bromide from the three-drug midazolam protocol.
 
-Defendants address Issue Two of Plaintiffs’ brief with the same arguments
+Defendants address Issue Two of Plaintiffs’ brief with the same arguments they make against the Other Plaintiffs’ claims. (Response brief p.57). While the 9 This second argument is baseless. Plaintiffs pled the second prong of Glossip and presented evidence proving that prong. Miller Plaintiffs assert “any right to relief contained in the Other Plaintiffs’ brief[,]” (Brief p.2), they also present different arguments and their positions remain different. First, Plaintiffs maintain, as they did before the Chancery Court (Tr. XXIV, 32-39; R. XV, 2141), that only the constitutionality of the January 8th protocol is properly before this Court. Plaintiffs assert their due process right to raise issues newly-arising from the July 5th Protocol, including the opportunity to allege additional alternatives. (R. XV, 2145, 2148-49 n.7). The Chancery Court denied both opportunities. (R. XVI, 2216-28).10 Second, Plaintiffs challenge the Chancery Court’s failure to adhere to due process principles regarding the evidence before it.
 
-they make against the Other Plaintiffs’ claims. (Response brief p.57). While the
+Plaintiffs’ lawsuit presents a facial challenge to the January 8th Protocol that contains two options for carrying-out an execution by lethal injection. The first option is Protocol A (a retention of the one-drug pentobarbital protocol adopted in 2013). The second option is Protocol B (a new three-drug midazolam protocol). Plaintiffs asserted from the beginning that Protocol A is an alternative method that satisfies the second prong of Glossip. When Plaintiffs responded to circumstances that were changed by the Defendants (namely, they issued a new protocol) and asserted a two-drug protocol as an alternative method, the Chancery Court refused to consider it. 10
 
-9 This second argument is baseless. Plaintiffs pled the second prong of Glossip and presented evidence proving that prong.
+Plaintiffs did not consent to try the July 5th Protocol. A facial challenge to a method of execution presumes the method in the written protocol will be carried-out according to its terms. West v. Schofield, 460 S.W.3d 113, 126 (Tenn. 2015). When the Defendants were asked in court by the Chancellor and in discovery by the Plaintiffs whether the January 8th Execution Protocol on-its-face could be carried out, Defendants answered affirmatively and indicated the executions scheduled in 2018 may be carried out using Protocol A or Protocol B. Throughout this time, Plaintiffs learned facts beyond the written protocol which indicated the availability of pentobarbital for use in Protocol A.11 11 Defendants claim “it simply defies logic to suggest that [Plaintiffs] believed pentobarbital was, in fact, available to the State.” (Response brief p.60). Both Defendants and the court below resort to a proclamation of logic (see Response brief pp.60, 23) when they choose not to, or are unable to, explain facts in the record that demonstrate availability after Tennessee’s pentobarbital protocol was upheld by the Court: (a) in March and April 2017, Defendants’ drug procurer and drug supplier knew of sources to obtain pentobarbital; (b) in April 2017, Defendants’ drug procurer did not procure pentobarbital but instead asked a drug supplier for names of sources it contacted to obtain pentobarbital so he would have the names to show in the future that pentobarbital is unavailable; (c) no later than August 2017, persons “higher up” in the Department of Correction (not the named Defendants) decided to obtain midazolam instead of pentobarbital; (d) on August 31, 2017, the drug procurer explained to high-ranking public officials that the Department was switching to a three-drug midazolam protocol; (e) from October through December 2017, Defendants obtained midazolam (and the other two drugs) even though it is subject to the same manufacturer’s distribution controls as pentobarbital; (f) in the new January 8th Protocol, Defendants retained the one-drug pentobarbital option while adding a three-drug midazolam option; (g) Defendants have a physician willing to write a prescription for pentobarbital; (h) Defendants have a pharmacy and pharmacist at DeBerry Special Needs (adjacent to Riverbend) with the proper licensing to obtain pentobarbital; (i) Defendants have two contracts with two different compounding pharmacists to supply drugs for executions; and, (j) other States have sources of pentobarbital and conduct executions using pentobarbital. Although Defendants claim Plaintiffs “presented no proof that pentobarbital is available[,]” “not one iota of proof,” (Response brief pp.20, 24), the last-listed fact is the only one Defendants address. Defendants argue that Plaintiffs cannot show Defendants’ issuance of a new execution protocol—on the eve of trial—that eliminated Protocol A (Plaintiffs’ proposed alternative method of execution) also substantially affected Plaintiffs’ lawsuit. Plaintiffs had been developing for more than five months their lawsuit against the January 8th Protocol. Plaintiffs acted in accordance with the remarks and representations by the Chancery Court regarding the need for Defendants to decide whether pentobarbital would be available for the scheduled executions. The Chancery Court indicated Plaintiffs would have an opportunity to propose another alternative if Defendants decided they would not have pentobarbital for the scheduled executions. (Tr. XX, 20-21). For example, the court told Defendants: “We’ve got to have the answer to that because then they can’t allege—know what alternative to allege,” (Tr. XX, 20-21), and, “We need to know whether it will be available for that execution for the plaintiffs to be able to fulfill the condition of Glossip.” (Tr. XX, 20-21). See also Brief pp.33-37.
 
-Miller Plaintiffs assert “any right to relief contained in the Other Plaintiffs’ brief[,]”
+At the same time, Defendants gained a litigation advantage because issuance of the new July 5th Protocol signaled their ultimate decision that pentobarbital would be unavailable. Defendants then sat silent as Plaintiffs proposed a second alternative (a two-drug protocol) and as Plaintiffs presented proof, without availability through the fact that other States obtain pentobarbital and use it for executions: “The ability of other States to procure a drug does not mean that the drug is available to all States for use in lethal injection executions.” (Response brief p.21). Defendants assert, however, that they can buttress the Chancery Court’s determination on availability with statements from the Glossip opinion regarding the inability of other States to obtain sodium thiopental and/or pentobarbital. (Response brief p.23). objection, showing how it satisfies Glossip’s second prong.12 Not until Plaintiffs were closing their case, did Defendants object and then the Chancery Court decided to not consider Plaintiffs’ proposed two-drug alternative.
 
-(Brief p.2), they also present different arguments and their positions remain
-
-different. First, Plaintiffs maintain, as they did before the Chancery Court (Tr.
-
-XXIV, 32-39; R. XV, 2141), that only the constitutionality of the January 8th
-
-protocol is properly before this Court. Plaintiffs assert their due process right to
-
-raise issues newly-arising from the July 5th Protocol, including the opportunity to
-
-allege additional alternatives. (R. XV, 2145, 2148-49 n.7). The Chancery Court
-
-denied both opportunities. (R. XVI, 2216-28).10 Second, Plaintiffs challenge the
-
-Chancery Court’s failure to adhere to due process principles regarding the evidence
-
-before it.
-
-Plaintiffs’ lawsuit presents a facial challenge to the January 8th Protocol that
-
-contains two options for carrying-out an execution by lethal injection. The first
-
-option is Protocol A (a retention of the one-drug pentobarbital protocol adopted in
-
-2013). The second option is Protocol B (a new three-drug midazolam protocol).
-
-Plaintiffs asserted from the beginning that Protocol A is an alternative method that
-
-satisfies the second prong of Glossip. When Plaintiffs responded to circumstances
-
-that were changed by the Defendants (namely, they issued a new protocol) and
-
-asserted a two-drug protocol as an alternative method, the Chancery Court refused
-
-to consider it.
-
-10
-
-Plaintiffs did not consent to try the July 5th Protocol.
-
-A facial challenge to a method of execution presumes the method in the
-
-written protocol will be carried-out according to its terms. West v. Schofield, 460
-
-S.W.3d 113, 126 (Tenn. 2015). When the Defendants were asked in court by the
-
-Chancellor and in discovery by the Plaintiffs whether the January 8th Execution
-
-Protocol on-its-face could be carried out, Defendants answered affirmatively and
-
-indicated the executions scheduled in 2018 may be carried out using Protocol A or
-
-Protocol B. Throughout this time, Plaintiffs learned facts beyond the written
-
-protocol which indicated the availability of pentobarbital for use in Protocol A.11
-
-11 Defendants claim “it simply defies logic to suggest that [Plaintiffs] believed pentobarbital was, in fact, available to the State.” (Response brief p.60). Both Defendants and the court below resort to a proclamation of logic (see Response brief pp.60, 23) when they choose not to, or are unable to, explain facts in the record that demonstrate availability after Tennessee’s pentobarbital protocol was upheld by the Court: (a) in March and April 2017, Defendants’ drug procurer and drug supplier knew of sources to obtain pentobarbital; (b) in April 2017, Defendants’ drug procurer did not procure pentobarbital but instead asked a drug supplier for names of sources it contacted to obtain pentobarbital so he would have the names to show in the future that pentobarbital is unavailable; (c) no later than August 2017, persons “higher up” in the Department of Correction (not the named Defendants) decided to obtain midazolam instead of pentobarbital; (d) on August 31, 2017, the drug procurer explained to high-ranking public officials that the Department was switching to a three-drug midazolam protocol; (e) from October through December 2017, Defendants obtained midazolam (and the other two drugs) even though it is subject to the same manufacturer’s distribution controls as pentobarbital; (f) in the new January 8th Protocol, Defendants retained the one-drug pentobarbital option while adding a three-drug midazolam option; (g) Defendants have a physician willing to write a prescription for pentobarbital; (h) Defendants have a pharmacy and pharmacist at DeBerry Special Needs (adjacent to Riverbend) with the proper licensing to obtain pentobarbital; (i) Defendants have two contracts with two different compounding pharmacists to supply drugs for executions; and, (j) other States have sources of pentobarbital and conduct executions using pentobarbital. Although Defendants claim Plaintiffs “presented no proof that pentobarbital is available[,]” “not one iota of proof,” (Response brief pp.20, 24), the last-listed fact is the only one Defendants address. Defendants argue that Plaintiffs cannot show
-
-Defendants’ issuance of a new execution protocol—on the eve of trial—that
-
-eliminated Protocol A (Plaintiffs’ proposed alternative method of execution) also
-
-substantially affected Plaintiffs’ lawsuit. Plaintiffs had been developing for more
-
-than five months their lawsuit against the January 8th Protocol. Plaintiffs acted in
-
-accordance with the remarks and representations by the Chancery Court regarding
-
-the need for Defendants to decide whether pentobarbital would be available for the
-
-scheduled executions. The Chancery Court indicated Plaintiffs would have an
-
-opportunity to propose another alternative if Defendants decided they would not
-
-have pentobarbital for the scheduled executions. (Tr. XX, 20-21). For example, the
-
-court told Defendants: “We’ve got to have the answer to that because then they can’t
-
-allege—know what alternative to allege,” (Tr. XX, 20-21), and, “We need to know
-
-whether it will be available for that execution for the plaintiffs to be able to fulfill
-
-the condition of Glossip.” (Tr. XX, 20-21). See also Brief pp.33-37.
-
-At the same time, Defendants gained a litigation advantage because issuance
-
-of the new July 5th Protocol signaled their ultimate decision that pentobarbital
-
-would be unavailable. Defendants then sat silent as Plaintiffs proposed a second
-
-alternative (a two-drug protocol) and as Plaintiffs presented proof, without
-
-availability through the fact that other States obtain pentobarbital and use it for executions: “The ability of other States to procure a drug does not mean that the drug is available to all States for use in lethal injection executions.” (Response brief p.21). Defendants assert, however, that they can buttress the Chancery Court’s determination on availability with statements from the Glossip opinion regarding the inability of other States to obtain sodium thiopental and/or pentobarbital. (Response brief p.23).
-
-objection, showing how it satisfies Glossip’s second prong.12 Not until Plaintiffs were
-
-closing their case, did Defendants object and then the Chancery Court decided to
-
-not consider Plaintiffs’ proposed two-drug alternative.
-
-The due process issue unaddressed by Defendants, therefore, concerns their
-
-bad-faith actions and the lower court’s refusal to allow Plaintiffs to be heard on an
-
-essential element of the cause of action. Defendants’ brief fails to address this issue,
-
-therefore, Plaintiffs have no further reply and continue to rely on the points and
-
-authorities presented in their initial brief. (Brief pp.29-45).
+The due process issue unaddressed by Defendants, therefore, concerns their bad-faith actions and the lower court’s refusal to allow Plaintiffs to be heard on an essential element of the cause of action. Defendants’ brief fails to address this issue, therefore, Plaintiffs have no further reply and continue to rely on the points and authorities presented in their initial brief. (Brief pp.29-45).
 
 ### The Chancery Court improperly discounted Plaintiffs’ proof (due to its origin) of a one-drug pentobarbital alternative.
 
-The Chancery Court held that Plaintiffs did not meet the burden of proof on
+The Chancery Court held that Plaintiffs did not meet the burden of proof on availability and faulted Plaintiffs for not presenting in a certain manner evidence establishing that the one-drug pentobarbital alternative method of execution was available, and rejected facts originating from Defendants that—on their face— establish availability. See Brief pp.45-48.
 
-availability and faulted Plaintiffs for not presenting in a certain manner evidence
+The Chancery Court faulted Plaintiffs for not presenting proof of availability through their own experts. (R. XVI, 2241). It said, “unlike other cases where this element has been tried, the Inmates in this case presented none of their own witnesses to show [availability.]” (R. XVI, 2239). The lower court failed to engage 12 The same proof that establishes the two-drug method is readily-available and significantly reduces the substantial risk of serious pain caused by the three-drug midazolam protocol is also the same proof that establishes allegations in Plaintiffs’ complaint about the unnecessary and severe pain caused by vecuronium bromide. The proof was presented to the court without objection by Defendants. with the evidence that Plaintiffs discovered from Defendants and presented at the hearing and that the court accepted for its truth (Tr. XXXVII, 1334-35). Instead, the court discounted that evidence, characterizing it as Plaintiffs’ “attempt[] to prove their case solely by discrediting State officials.” (R. XVI, 2241). The court did not accept the proof at face value and, instead, supplied its own inferences favorable to Defendants and inconsistent with the facts presented by Plaintiffs. The court then said Plaintiffs’ proof is “not weighty evidence.” See, e.g., R. XVI, 2245-46; see also Brief p.48 n.34.
 
-establishing that the one-drug pentobarbital alternative method of execution was
+Defendants do not contest these facts. They also do not directly address Plaintiffs’ argument. Defendants adopt the lower court’s position that Plaintiffs did not meet the burden of proof because Plaintiffs’ own witnesses did not testify about the availability of pentobarbital. (Response Brief pp.22-23). Defendants also argue that “the Department’s efforts to obtain pentobarbital is a red herring” because the State does not have any burden under Glossip’s second prong. (Response Brief p.24). In other words, whether Defendants can carry-out the one-drug pentobarbital protocol is not the issue; the issue is whether Plaintiffs are able to prove they can.
 
-available, and rejected facts originating from Defendants that—on their face—
+The second prong of Glossip cannot be construed as imposing upon Plaintiffs an impossible-to-meet burden. In this case, Defendants opposed discovery about sources of pentobarbital available to them and the only persons to whom Plaintiffs were allowed to pose limited questions did not have personal knowledge of the subject matter. Defendants deliberately indicated pentobarbital was available until the eve of trial when they changed the game by issuing a new execution protocol. Plaintiffs presented evidence showing—on its face—that pentobarbital is available and Defendants presented no evidence to explain why the facts should be interpreted differently. The Chancery Court determined, however, that due to the source of Plaintiffs’ evidence, they could not carry the burden of showing pentobarbital is more likely than not available for their executions. Instead, the court relied on Defendants’ unsubstantiated statements that they could not obtain pentobarbital and denied Plaintiffs’ cause of action.
 
-establish availability. See Brief pp.45-48.
-
-The Chancery Court faulted Plaintiffs for not presenting proof of availability
-
-through their own experts. (R. XVI, 2241). It said, “unlike other cases where this
-
-element has been tried, the Inmates in this case presented none of their own
-
-witnesses to show [availability.]” (R. XVI, 2239). The lower court failed to engage
-
-12 The same proof that establishes the two-drug method is readily-available and significantly reduces the substantial risk of serious pain caused by the three-drug midazolam protocol is also the same proof that establishes allegations in Plaintiffs’ complaint about the unnecessary and severe pain caused by vecuronium bromide. The proof was presented to the court without objection by Defendants.
-
-with the evidence that Plaintiffs discovered from Defendants and presented at the
-
-hearing and that the court accepted for its truth (Tr. XXXVII, 1334-35). Instead, the
-
-court discounted that evidence, characterizing it as Plaintiffs’ “attempt[] to prove
-
-their case solely by discrediting State officials.” (R. XVI, 2241). The court did not
-
-accept the proof at face value and, instead, supplied its own inferences favorable to
-
-Defendants and inconsistent with the facts presented by Plaintiffs. The court then
-
-said Plaintiffs’ proof is “not weighty evidence.” See, e.g., R. XVI, 2245-46; see also
-
-Brief p.48 n.34.
-
-Defendants do not contest these facts. They also do not directly address
-
-Plaintiffs’ argument. Defendants adopt the lower court’s position that Plaintiffs did
-
-not meet the burden of proof because Plaintiffs’ own witnesses did not testify about
-
-the availability of pentobarbital. (Response Brief pp.22-23). Defendants also argue
-
-that “the Department’s efforts to obtain pentobarbital is a red herring” because the
-
-State does not have any burden under Glossip’s second prong. (Response Brief p.24).
-
-In other words, whether Defendants can carry-out the one-drug pentobarbital
-
-protocol is not the issue; the issue is whether Plaintiffs are able to prove they can.
-
-The second prong of Glossip cannot be construed as imposing upon Plaintiffs
-
-an impossible-to-meet burden. In this case, Defendants opposed discovery about
-
-sources of pentobarbital available to them and the only persons to whom Plaintiffs
-
-were allowed to pose limited questions did not have personal knowledge of the
-
-subject matter. Defendants deliberately indicated pentobarbital was available until
-
-the eve of trial when they changed the game by issuing a new execution protocol.
-
-Plaintiffs presented evidence showing—on its face—that pentobarbital is available
-
-and Defendants presented no evidence to explain why the facts should be
-
-interpreted differently. The Chancery Court determined, however, that due to the
-
-source of Plaintiffs’ evidence, they could not carry the burden of showing
-
-pentobarbital is more likely than not available for their executions. Instead, the
-
-court relied on Defendants’ unsubstantiated statements that they could not obtain
-
-pentobarbital and denied Plaintiffs’ cause of action.
-
-Plaintiffs have requested this Court to hold the appeal in abeyance and stay
-
-Plaintiff Miller’s December 6th execution date pending the Supreme Court’s
-
-decision in Bucklew v. Precythe, 138 S. Ct. 1706 (2018), because Bucklew will
-
-address the burden-of-proof issues that are central to this case. Defendants do not
-
-take a position on this request. They agree that Bucklew will address the burden of
-
-pleading and proving prong-two of the Glossip test but argue this Court should
-
-accept their view that the decision “has no application here[,]” and “any speculation
-
-regarding the potential outcome of Bucklew is not appropriate for the Court’s
-
-consideration.” (Response p.61). Plaintiffs disagree with Defendants and rely on
-
-their initial brief, pages 45-48.
+Plaintiffs have requested this Court to hold the appeal in abeyance and stay Plaintiff Miller’s December 6th execution date pending the Supreme Court’s decision in Bucklew v. Precythe, 138 S. Ct. 1706 (2018), because Bucklew will address the burden-of-proof issues that are central to this case. Defendants do not take a position on this request. They agree that Bucklew will address the burden of pleading and proving prong-two of the Glossip test but argue this Court should accept their view that the decision “has no application here[,]” and “any speculation regarding the potential outcome of Bucklew is not appropriate for the Court’s consideration.” (Response p.61). Plaintiffs disagree with Defendants and rely on their initial brief, pages 45-48.
 
 ## Conclusion
 
-Based on the reasons set forth above and in their initial brief, Plaintiffs
-
-respectfully request that the Court find the manner in which the Chancery Court
-
-addressed and analyzed the issues violates due process and vacate, reverse and
-
-remand the case for due consideration of the all evidence and with the guidance of
-
-the forthcoming opinion in Bucklew.
-
+Based on the reasons set forth above and in their initial brief, Plaintiffs respectfully request that the Court find the manner in which the Chancery Court addressed and analyzed the issues violates due process and vacate, reverse and remand the case for due consideration of the all evidence and with the guidance of the forthcoming opinion in Bucklew.
