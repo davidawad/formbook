@@ -104,7 +104,7 @@ Courts under `courts` (346).
 | [Court of Appeals of North Carolina](fourth-circuit/north-carolina/state/court-of-appeals) | `ncctapp` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Supreme Court of North Carolina](fourth-circuit/north-carolina/state/supreme-court) | `nc` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals of South Carolina](fourth-circuit/south-carolina/state/court-of-appeals) | `scctapp` | up for review | 5/5 | 4/4 | 4/4 | 29 |
-| [Supreme Court of South Carolina](fourth-circuit/south-carolina/state/supreme-court) | `sc` | up for review | 7/7 | 4/4 | 4/4 | 29 |
+| [Supreme Court of South Carolina](fourth-circuit/south-carolina/state/supreme-court) | `sc` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Court of Appeals of Virginia](fourth-circuit/virginia/state/court-of-appeals) | `vactapp` | up for review | 5/5 | 3/3 | 3/3 | 29 |
 | [Supreme Court of Virginia](fourth-circuit/virginia/state/supreme-court) | `va` | up for review | 8/8 | 7/7 | 7/7 | 29 |
 | [Intermediate Court of Appeals of West Virginia](fourth-circuit/west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
