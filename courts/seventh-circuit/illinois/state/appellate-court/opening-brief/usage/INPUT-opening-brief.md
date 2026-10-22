@@ -11,7 +11,6 @@ caption:
 trial_court:
   - "Appeal from the Circuit Court of Cook County, Criminal Division,"
   - "Cook County, Illinois"
-  - ""
   - "No. 20 CR 03050-01"
 judge: "Honorable James B. Linn, Presiding."
 brief_title: "Brief and Argument of Defendant-Appellant"
@@ -334,7 +333,7 @@ This Court has outlined factors to consider when determining a prosecutor’s ch
 
 Additionally, within a conflict analysis, Illinois courts also consider:
 
-> (1) the defendant’s interest in having the undivided loyalty of counsel; (2) the State’s right to a fair trial in which defense counsel acts ethically and does not use confidential information to attack a state’s witness; (3) the appearance of impropriety should the jury learn of the conflict; (4) the probability that continued representation by counsel of choice will provide grounds for overturning a conviction.
+> \(1) the defendant’s interest in having the undivided loyalty of counsel; (2) the State’s right to a fair trial in which defense counsel acts ethically and does not use confidential information to attack a state’s witness; (3) the appearance of impropriety should the jury learn of the conflict; (4) the probability that continued representation by counsel of choice will provide grounds for overturning a conviction.
 
 *People v. Buckhanan*, 2017 IL App (1st) 131097, ¶ 27.
 
@@ -400,7 +399,7 @@ The trial court erred when it denied Mr. Smollett’s motion to compel OSP to tu
 
 Illinois Supreme Court Rule 412 compels the prosecution to produce upon written motion of the Defendant:
 
-> (i) the names and last known addresses of persons whom the State intends to call as witnesses, together with their relevant written or recorded statements, memoranda containing substantially verbatim reports of their oral statements, and a list of memoranda reporting or summarizing their oral statements. Upon written motion of defense counsel memoranda reporting or summarizing oral statements shall be examined by the court in camera and if found to be substantially verbatim reports of oral statements shall be disclosed to defense counsel.
+> \(i) the names and last known addresses of persons whom the State intends to call as witnesses, together with their relevant written or recorded statements, memoranda containing substantially verbatim reports of their oral statements, and a list of memoranda reporting or summarizing their oral statements. Upon written motion of defense counsel memoranda reporting or summarizing oral statements shall be examined by the court in camera and if found to be substantially verbatim reports of oral statements shall be disclosed to defense counsel.
 
 Ill. Sup. Ct. R. 412.
 
@@ -456,15 +455,15 @@ In fact, at the trial court’s first opportunity in bringing up one of the defe
 
 > “Q. Have you ever done any personal research on this case by Googling or any social media posts on this one?
 >
-> A. Just the television stuff.
+> A\. Just the television stuff.
 >
-> Q. Just what you see on T.V., and you have agreed to put that aside. All right. Have you been the victim of a hate crime?
+> Q\. Just what you see on T.V., and you have agreed to put that aside. All right. Have you been the victim of a hate crime?
 >
-> A. No.
+> A\. No.
 >
-> Q. The lawyers want me to ask you this question, but I’m not sure why but do you watch TMZ?
+> Q\. The lawyers want me to ask you this question, but I’m not sure why but do you watch TMZ?
 >
-> A. No.”
+> A\. No.”
 
 (R 972) (emphasis in bold added).
 
@@ -642,7 +641,7 @@ It is well established that the Sixth Amendment of the United States Constitutio
 
 Even the removal of one member of the public from a courtroom has been deemed a violation of the Sixth Amendment Right to a public trial. *Evans*, 2016 IL App (1st) 142190. The *Evans’* Court gave specific conditions that must be met for any sort of closure to the public when it stated:
 
-> (i) whether there exists an overriding interest that is likely to be prejudiced, (ii) whether the closure is no broader than necessary to protect that interest, (iii) whether the trial court considered ’reasonable alternatives’ to closing the proceeding, and (iv) whether the trial court made adequate findings to support the closure.” *Id.* at ¶ 10. *See also*, *Radford*, 2020 IL 123975, ¶ 27.
+> \(i) whether there exists an overriding interest that is likely to be prejudiced, (ii) whether the closure is no broader than necessary to protect that interest, (iii) whether the trial court considered ’reasonable alternatives’ to closing the proceeding, and (iv) whether the trial court made adequate findings to support the closure.” *Id.* at ¶ 10. *See also*, *Radford*, 2020 IL 123975, ¶ 27.
 
 Finally, the *Evans* court made it clear that it is for the trial court to consider reasonable alternatives to closing the proceedings to the public and not for the attorneys to offer reasonable alternative suggestions to a trial court. *Id.* at ¶ 14.
 

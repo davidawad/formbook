@@ -14,7 +14,6 @@ trial_court:
   - "Appeal from the Circuit Court of"
   - "Cook County, Illinois, County"
   - "Department, County Division"
-  - ""
   - "Circuit Court No.: 2024 COEL 13"
 judge: "Hon. Tracie R. Porter, Judge Presiding."
 brief_title: "Brief of Petitioners-Appellees"

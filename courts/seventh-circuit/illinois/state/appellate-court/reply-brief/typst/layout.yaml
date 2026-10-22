@@ -1,0 +1,84 @@
+# Appellate Court of Illinois (illappct): appellant's reply brief. The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12).
+# Numbers trace to Ill. S. Ct. R. 341 (../../rules.md, ILAPP-*); lengths in points. No case text here: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant (the Rule 341(c) certificate wording).
+size: 12                  # ILAPP-FORM-003: 12-point or larger throughout, quotations and footnotes included
+pitch:
+  body: 27.6              # ILAPP-FORM-004: double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 108, right: 72}   # ILAPP-FORM-002: left at least 1 1/2 inch, the others 1 inch
+indent: 36
+page_number: {align: center, from: 1}   # ILAPP-FORM-002: every page numbered in the bottom margin, the cover page 1
+footnote: {size: 12, gap: 7}             # ILAPP-FORM-003, -004: 12 point, single-spaced footnotes allowed
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # ILAPP-FORM-004: quotations of two or more lines single spaced
+heading:                  # ILAPP-FORM-004: headings may be single-spaced; the filer types the numbering
+  - {align: center, bold: true, upper: true, above: 14.4, below: 12}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# ILAPP-CONT-001 (Rule 341(d)): the case number and the court, the parties as in the trial court with their status
+# here beside the court appealed from and the trial judge, the title, then the filing attorneys (two to a row, so
+# every attorney fits the one cover page).
+cover:
+  - {text: "No. {case_number}", align: right}
+  - {text: "{court}", align: center, bold: true, above: 14.4}
+  - {text: "{district}", align: center, bold: true}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", above: 6.9, below: 6.9}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", italic: true}
+      - blocks:
+          - {text: "{trial_court}"}
+          - {text: "{judge}", optional: true, above: 13.8}
+    gutter: 21.6
+    above: 21.6
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 55.2}
+  - when: oral_argument
+    blocks:
+      - {text: "ORAL ARGUMENT REQUESTED", align: center, above: 13.8}
+  - columns: {each: counsel, per_row: 2, row_gap: 13.8, blocks: [{text: "{names}", bold: true}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 55.2
+  - {text: "{phone}", optional: true, above: 6.9}
+# ILAPP-CONT-002 (Rule 341(h)(1)): the Points and Authorities, the headings with their pages.
+contents: {title: "Points and Authorities", depth: 3, col: 36, hang: 18, step: 18, above: 9.6}
+authorities:
+  title: "Authorities"
+  col: 56
+  hang: 18
+  above: 9.6
+  group: {bold: true, above: 14.4, below: 2.4}
+# ILAPP-CONT-009: the conclusion is followed by the names of counsel; the date and signature block never split.
+# ILAPP-CERT-001 (Rule 341(c)): the certificate of compliance in the rule's words, the length the filer's, signed by
+# counsel; ILAPP-CERT-002 (Rule 341(e)): the proof of service, when the sample gives one. Each on a page of its own.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 216, above: 4.8}
+      - {text: "{signature.signer}", left: 216}
+      - {text: "{signature.lines}", left: 216, above: 7.2}
+    above: 21.6
+  - {break: true}
+  - {text: "Certificate of Compliance", align: center, bold: true, upper: true}
+  - {text: "I certify that this brief conforms to the requirements of Rules 341(a) and (b). The length of this brief, excluding the pages or words contained in the Rule 341(d) cover, the Rule 341(h)(1) table of contents and statement of points and authorities, the Rule 341(c) certificate of compliance, the certificate of service, and those matters to be appended to the brief under Rule 342(a), is {length_certificate}.", pitch: body, indent: 36, above: 12}
+  - group:
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 216}
+      - {text: "{signature.signer}", left: 216}
+      - {text: "{signature.lines}", left: 216, above: 7.2}
+    above: 4.8
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36, above: 12}
+      - each: service.recipients
+        blocks: [{text: "{.}", left: 72, above: 13.8}]
+      - {text: "{service.closing}", optional: true, pitch: body, indent: 36, above: 13.8}
+      - group:
+          - {text: "/s/ *{signature.signer}*", underline: true, left: 216}
+          - {text: "{signature.signer}", left: 216}
+          - {text: "{signature.lines}", left: 216, above: 7.2}
+        above: 13.8

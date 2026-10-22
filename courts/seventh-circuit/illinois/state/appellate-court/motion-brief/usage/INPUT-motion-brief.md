@@ -33,7 +33,7 @@ In support, the Defendant-Appellant states as follows:
 
 3\. Illinois Supreme Court Rule 609 (a), which states as follows:
 
-> a. “ If an appeal is taken from a judgment following which the defendant is sentenced to imprisonment or periodic imprisonment, or to probation or conditional discharge conditioned upon periodic imprisonment, or from an order revoking or modifying the conditions attached to a sentence of probation or conditional discharge and imposing a sentence of imprisonment or periodic imprisonment, the defendant may be admitted to bail and the sentence or condition of imprisonment or periodic imprisonment stayed, with or without bond, by a judge of the trial or reviewing court. Upon motion showing good cause the reviewing court or a judge thereof may revoke the order of the trial court or order that the amount of bail be increased or decreased.”
+> a\. “ If an appeal is taken from a judgment following which the defendant is sentenced to imprisonment or periodic imprisonment, or to probation or conditional discharge conditioned upon periodic imprisonment, or from an order revoking or modifying the conditions attached to a sentence of probation or conditional discharge and imposing a sentence of imprisonment or periodic imprisonment, the defendant may be admitted to bail and the sentence or condition of imprisonment or periodic imprisonment stayed, with or without bond, by a judge of the trial or reviewing court. Upon motion showing good cause the reviewing court or a judge thereof may revoke the order of the trial court or order that the amount of bail be increased or decreased.”
 
 4\. In 2019, the Defendant-Appellant was indicted on multiple disorderly conduct counts in the matter known as People v Smollett filed under case number l9CR03I040I in the Circuit Court of Cook County.
 
@@ -63,11 +63,11 @@ In support, the Defendant-Appellant states as follows:
 
 17\. Smollett filed multiple motions to dismiss between 2019 and 2021 based on breach of contractual obligation and violation of his double jeopardy rights. Attached as Group Exhibit “2” are the sentencing memorandum and sentencing documents, including the original conviction which were filed with the Trial Court, as well as the following Group Exhibit 3; which include, additional motions, including pre-trial motions challenging the appointment of a special prosecutor and the State’s Attorney’s breach of contract:
 
-a. Motion to Dismiss Double Jeopardy
+a\. Motion to Dismiss Double Jeopardy
 
-b. Motion to Dismiss Based on Contract
+b\. Motion to Dismiss Based on Contract
 
-c. Motion to Dismiss Special Prosecutor
+c\. Motion to Dismiss Special Prosecutor
 
 18\. In addition, Mr.Smollett has substantial appellate issues and he will be irreparably harmed if he serves a sentence based on convictions which may be reversed on appeal. See Group Exhibit 4
 
@@ -81,7 +81,7 @@ c. Motion to Dismiss Special Prosecutor
 
 22\. Illinois Supreme Court Rule 305 (a), which states as follows:
 
-> a. “a. “Stay of Enforcement of Money Judgments. The enforcement of a judgment for money only, or any portion of a judgment which is for money, shall be stayed ifa timely notice of appeal is filed and an appeal bond or other fonn of security,including, but not limited to, letters of credit, escrow agreements, and certificates of deposit, is presented to, approved by and filed with the court within the time for filing the notice of appeal or within any extension of time granted under paragraph ( c) of this rule. Notice of the presentment of the bond or other fonn of security shall be given by the judgment debtor to allparties \.\.\.\.”
+> a\. “a. “Stay of Enforcement of Money Judgments. The enforcement of a judgment for money only, or any portion of a judgment which is for money, shall be stayed ifa timely notice of appeal is filed and an appeal bond or other fonn of security,including, but not limited to, letters of credit, escrow agreements, and certificates of deposit, is presented to, approved by and filed with the court within the time for filing the notice of appeal or within any extension of time granted under paragraph ( c) of this rule. Notice of the presentment of the bond or other fonn of security shall be given by the judgment debtor to allparties \.\.\.\.”
 
 23\. Appeal bonds ensure that original judgments are paid if an appeal is unsuccessful. These surety bonds discourage individuals who lose cases from filing frivolous appeals and prevent abuse of the appellate system.
 
