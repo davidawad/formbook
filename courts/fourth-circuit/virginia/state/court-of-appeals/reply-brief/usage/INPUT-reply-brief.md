@@ -107,7 +107,7 @@ signature:
 certificate:
   service: "I certify that on March 11, 2024, this document was filed electronically with the Court through VACES, and transmitted by email to: Margaret Hoehl O’Shea, Office of the Attorney General, 202 North Ninth Street, Richmond, VA 23219, MOShea@oag.state.va.us, *Counsel for Appellee*; and Alia Smith, Ballard Spahr LLP, 1909 K St., NW, 12th Floor, Washington, D.C. 20006, smithalia@ballardspahr.com, *Counsel for Amici Curiae*."
   oral_argument: "Appellants request oral argument."
-  words: 3705
+  words: "3,705"
 ---
 
 The Virginia Freedom of Information Act (“VFOIA”) requires that “any exemption from public access to records . . . shall be narrowly construed.” Va. Code § 2.2-3700(B). Despite this, Appellee (“VADOC”) urges this Court to “broadly” construe Va. Code § 2.2-3706(B)(4) (the “Records of Persons Imprisoned Exemption”). Appellee Br. 7–8. And, despite VFOIA’s explicit statutory instruction that “the affairs of government are not intended to be conducted in an atmosphere of secrecy,” Va. Code § 2.2-3700(B), VADOC asserts that public access to its records should be “curtail[ed].” Appellee Br. 11–12. Appellants respectfully submit this argument in reply.

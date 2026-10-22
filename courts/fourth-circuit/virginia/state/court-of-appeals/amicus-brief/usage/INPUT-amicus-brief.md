@@ -130,7 +130,7 @@ signature:
     - name: "Alia L. Smith"
       lines: ["VSB No. 97465", "BALLARD SPAHR LLP", "1909 K Street, 12th Floor", "Washington, D.C. 20006-1157", "Tel.: (202) 661-2200; Fax: (202) 661-2299", "smithalia@ballardspahr.com"]
 certificate:
-  words: 3824
+  words: "3,824"
 ---
 
 # INTERESTS OF AMICI CURIAE

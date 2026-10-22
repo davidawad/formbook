@@ -1,0 +1,76 @@
+# Court of Appeals of Virginia (vactapp): reply brief (Rule 5A:22). The whole layout, as data for the
+# shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to Rules 5A:4, 5A:19, 5A:20 and 5A:21 (../rules.md, VACTAPP-*); lengths in points. No
+# case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # VACTAPP-FORM-002: at least 14-point, footnotes included (Rule 5A:4(a))
+pitch:
+  body: 32.2              # VACTAPP-FORM-003: double spaced (Word's double, 2 x 1.15 x 14 pt; Rule 5A:4(a))
+  single: 16.1            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # VACTAPP-FORM-004: at least one inch on all four sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # the page number alone in the bottom margin (FORM-004); cover unnumbered, tables i, ii .., brief 1, 2 ..
+footnote: {size: 14, gap: 7}                        # VACTAPP-FORM-002, -003: footnotes 14 pt, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # VACTAPP-FORM-003: quotations over 49 words single spaced
+heading:                  # VACTAPP-FORM-003: headings single spaced; sections centred, capitals, bold
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The cover (Rule 5A:4(b); VACTAPP-FORM-006): the court, the record number, the style of the case (appellant first),
+# the title, then counsel (name, bar number, address, telephone, e-mail), whom they act for, and the date.
+cover:
+  - {text: "IN THE COURT OF APPEALS OF VIRGINIA", align: center, bold: true}
+  - {text: "RECORD NO. {record_number}", align: center, bold: true, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4}
+    blocks:
+      - {text: "{names}", align: center, above: 14.4}
+      - {text: "{designation}", align: center, italic: true, above: 4.8}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 28.8}
+  - each: counsel
+    above: 72
+    blocks:
+      - {text: "{names}", left: 230.4, above: 7.2}
+      - {text: "{lines}", left: 230.4}
+  - {text: "{counsel_for}", italic: true, left: 230.4, optional: true}
+  - {text: "{date}", left: 230.4, optional: true}
+# Rule 5A:20(a): a table of contents and a table of authorities (cases alphabetical, the year of each citation;
+# VACTAPP-OPEN-001, -005), each on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 12.6}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 2.8}
+# The signature block (Rule 5A:20(g); VACTAPP-OPEN-003: name, bar number, address, telephone, e-mail), never split;
+# then the certificate on a page of its own (Rule 5A:20(h), 5A:4(d); VACTAPP-OPEN-004: service, oral argument, the
+# word count), signed again.
+closing:
+  - group:
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true}
+      - each: signature.signers
+        blocks:
+          - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 12.6}
+          - {text: "{name}", left: 230.4}
+          - {text: "{lines}", left: 230.4, optional: true}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 8.4}
+    above: 21.6
+  - when: certificate
+    blocks:
+      - {break: true}
+      - {text: "Certificate", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{certificate.service}", pitch: body, indent: 36, optional: true}
+      - {text: "{certificate.oral_argument}", pitch: body, indent: 36, optional: true}
+      - {text: "This brief contains {certificate.words} words, excluding the cover page, table of contents, table of authorities, signature blocks, and this certificate. Headings, footnotes, and quotations are included in the count.", pitch: body, indent: 36, optional: true}
+      - {text: "{certificate.date}", pitch: body, indent: 36, optional: true}
+      - group:
+          - {text: "{signature.firm}", bold: true, left: 230.4, optional: true}
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 12.6}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", left: 230.4, optional: true}
+          - {text: "{signature.lines}", left: 230.4, optional: true, above: 8.4}
+        above: 4.8

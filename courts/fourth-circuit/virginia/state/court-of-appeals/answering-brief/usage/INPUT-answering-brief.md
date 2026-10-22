@@ -257,7 +257,7 @@ signature:
 certificate:
   service: "I certify that on May 19, 2023, this document was filed electronically with the Court through VACES. Copies were transmitted by email to: Isak J. Howell (Va. Bar No 75011), Isak J. Howell, Attorney at Law, 4227 Colonial Ave., Roanoke, VA 24018, Telephone: (540) 998-7744, isak@howell-lawoffice.com; Nathan Bellinger (*pro hac vice*) and Kimberly Willis (*pro hac vice*), Our Children’s Trust, P.O. Box 5181, Eugene, OR 97405, Telephone: (413) 687-1668, nate@ourchildrenstrust.org, kimberly@ourchildrenstrust.org, *Counsel for Appellant*."
   oral_argument: "Appellees desire to present oral argument."
-  words: 10499
+  words: "10,499"
 ---
 
 # INTRODUCTION

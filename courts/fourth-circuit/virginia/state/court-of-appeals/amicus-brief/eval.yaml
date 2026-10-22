@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE: report only. typst is on the shared document model (typst/layout.yaml) and latex/ and docx/
+# are generated from it, but the latex and docx renders still break lines and pages apart from typst where the shared
+# model differs (URLs, "§§", a quote before an em dash, footnote placement): docs/open-items/fb-595.54.67.md. Gate
+# once the model is fixed. The court folder's eval.yaml (14 pt, Rule 5A:4(a)) applies too.
+params:
+  cross_engine: report

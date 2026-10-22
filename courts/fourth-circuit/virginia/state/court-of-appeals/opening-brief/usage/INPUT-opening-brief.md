@@ -119,7 +119,7 @@ signature:
 certificate:
   service: "I certify that on January 25, 2024, this document was filed electronically with the Court through VACES, and transmitted by email to: Margaret Hoehl O’Shea, Office of the Attorney General, 202 North Ninth Street, Richmond, VA 23219, MOShea@oag.state.va.us, *Counsel for Appellee*."
   oral_argument: "Appellants request oral argument."
-  words: 9413
+  words: "9,413"
 ---
 
 # STATEMENT OF THE CASE

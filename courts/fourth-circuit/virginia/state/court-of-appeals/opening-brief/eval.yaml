@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE: report only. The typst template is on the shared document model (typst/layout.yaml), but the
+# sample quotes a numbered list (a list inside a block quotation), which lib/pandoc/xdoc.lua does not set yet: no
+# latex/ or docx/ engine is generated until it does (docs/open-items/fb-595.54.67.md). The court folder's eval.yaml
+# (14 pt, Rule 5A:4(a)) applies too.
+params:
+  cross_engine: report

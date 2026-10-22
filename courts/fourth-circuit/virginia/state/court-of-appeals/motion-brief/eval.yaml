@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE: report only. The typst template is on the shared document model (typst/layout.yaml), but the
+# sample puts a footnote in a heading ("BACKGROUND[^1]"), which the LaTeX and Word headings of lib/pandoc/xdoc.lua
+# drop, and a URL LaTeX cannot break runs into the right margin: no latex/ or docx/ engine is generated until the
+# model sets them (docs/open-items/fb-595.54.67.md). The court folder's eval.yaml (14 pt, Rule 5A:4(a)) applies too.
+params:
+  cross_engine: report
