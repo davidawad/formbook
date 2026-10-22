@@ -1,0 +1,124 @@
+# Numbers W.D. Okla. states (../rules.md). fb check merges this file over data/checks-default.yaml; a list replaces
+# the default list, so `checks:` below repeats the default checks and adds OKWD-FONT-001 and OKWD-FORM-001.
+# OKWD-FONT-001, LCvR7.1(d): print style, footnotes included, not less than 13 point (every word, not only the body).
+# OKWD-FORM-001, LCvR5.2(a): double-spaced, read as a baseline pitch of at least 2 x 13 pt between body-paragraph
+# lines (the template sets 29.9 pt, two single lines of Times New Roman at 13 pt: typst/ pitch-body).
+font:
+  size_pt: 13
+
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (fb-595.68.33, on the shared layout model lib/*/xengine*), so a difference fails.
+params:
+  min_body_pitch_pt: 26
+  cross_engine: gate
+
+checks:
+  - id: DEF-CONT-001
+    gate: 0
+    kind: T
+    name: every INPUT block (section, paragraph, quote, list item) appears in the PDF, in order, unaltered
+    method: g0_content
+    expect: "0 blocks missing or altered"
+    fix: {anchor: "set page("}
+  - id: DEF-FORM-001
+    gate: 1
+    kind: M
+    name: every page is US letter, 612 x 792 pt
+    method: page_size
+    expect: "all pages 612 x 792"
+    fix: {anchor: "set page("}
+  - id: DEF-FORM-002
+    gate: 1
+    kind: M
+    name: no body text in the 1 in margins (running headers and footers and pleading line numbers excepted)
+    method: margins_body
+    expect: "body text stays within the configured left, right, top and bottom margins"
+    fix: {anchor: "margin"}
+  - id: DEF-FORM-003
+    gate: 1
+    kind: M
+    name: body text is at least the stated size (12 pt unless the folder's eval.yaml says otherwise)
+    method: body_size
+    expect: "the most common word height is >= the height of the stated size in this font"
+    fix: {anchor: "size"}
+  - id: DEF-FONT-001
+    gate: 1
+    kind: M
+    name: every font in the PDF is embedded
+    method: fonts_all_embedded
+    expect: "all fonts emb=yes"
+    fix: {anchor: "font"}
+  - id: DEF-FONT-002
+    gate: 1
+    kind: T
+    name: every font is the family the template declares (Times New Roman or its metric twin unless it declares otherwise)
+    method: fonts_embedded
+    expect: "all embedded font names start with a declared family (no fallback)"
+    fix: {anchor: "font-family"}
+  - id: DEF-LEN-001
+    gate: 1
+    kind: M
+    name: the page count is within the court's page limit
+    method: page_limit
+    requires: ".params.page_limit"
+    engines_reason: "no rules.md states a page limit in machine-readable form; set params.page_limit in eval.yaml"
+    expect: "<= params.page_limit pages"
+    fix: {anchor: "set page("}
+  - id: DEF-TOC-001
+    gate: 1
+    kind: M
+    name: a table of contents or authorities, when there is one, never wraps a page reference alone onto a line or sets an entry against the Page(s) rule
+    method: toc_layout
+    expect: "every page reference ends its entry's last line after dot leaders; >= 2 pt clear below the column heading's rule (passes with no table)"
+    fix: {anchor: "outline"}
+  - id: DEF-COVER-001
+    gate: 1
+    kind: T
+    name: the cover is exactly one page (the pages before the first page number), and the first page after it prints the expected number
+    method: cover_pages
+    expect: "params.cover_pages (1) unnumbered pages, then 1, i or C-1 (or the physical page number, the cover counted); a document numbered from page 1 prints 1 there"
+    fix: {anchor: "set page("}
+
+  - id: OKWD-FONT-001
+    gate: 1
+    kind: M
+    name: every word is at least 13 point, footnotes included (LCvR7.1(d))
+    method: font_size
+    expect: "every word at least the height of 13 pt in this font"
+    fix: {anchor: "type-size"}
+  - id: OKWD-FORM-001
+    gate: 1
+    kind: M
+    name: body paragraphs are double-spaced (baseline pitch >= 2 x 13 pt; LCvR5.2(a))
+    method: double_space
+    expect: "every consecutive pair of body-paragraph lines >= 26 pt apart"
+    fix: {anchor: "pitch-body"}
+
+  # Gate 4 CROSS-ENGINE (the default checks, repeated: this list replaces the default one).
+  - id: XENG-001
+    gate: 4
+    kind: T
+    name: same page count as the typst render
+    method: cross_engine_pages
+    engines: [latex, docx]
+    engines_reason: "typst is the reference the other engines are compared with"
+    expect: "page count equal to OUTPUT-<id>.typst.pdf"
+    fix: {anchor: "par("}
+  - id: XENG-002
+    gate: 4
+    kind: T
+    name: every page starts and ends on the same word as the typst render
+    method: cross_engine_ends
+    engines: [latex, docx]
+    engines_reason: "typst is the reference the other engines are compared with"
+    expect: "0 pages with another first or last word"
+    fix: {anchor: "par("}
+  - id: XENG-003
+    gate: 4
+    kind: T
+    name: every typst line breaks after the same word in this engine
+    method: cross_engine_breaks
+    engines: [latex, docx]
+    engines_reason: "typst is the reference the other engines are compared with"
+    expect: "100% of typst lines broken after the same word (no break-word tolerance)"
+    fix: {anchor: "par("}
