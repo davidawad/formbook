@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The ACCA brief's Word styles; fb render builds the reference document from pandoc's default one with them
+     (tools/fb/src/docxref.rs), matching ../typst/acca-*.typ on the cross-engine layout model (lib/docx/xengine.lua):
+     Times New Roman 14 pt everywhere (Rule 13.2 / 17.1(b); the typst face; footnotes included); body lines exact at
+     656 twips (32.8 pt, typst pitch-body, double-spaced) with a 0.5 in first-line indent, single-spaced blocks
+     (headings, block quotations, footnotes) exact at 320 twips (16 pt, typst pitch-single); no paragraph spacing
+     but the typst template's own (headings 16.8 / 14 pt, level 3 14 / 11.2 pt, quotations 12.6 / 19.6 pt, 7 pt
+     after a footnote). The caption, signature blocks, certificate and footers are written by docx/acca-brief.lua
+     (paragraph properties of their own, FORMBOOK_FOOTERS, FORMBOOK_FINAL). -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" styles="merge" theme-font="Times New Roman" strip-theme-fonts="true">
+  <w:docDefaults>
+    <w:rPrDefault>
+      <w:rPr>
+        <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
+        <w:sz w:val="28"/>
+        <w:szCs w:val="28"/>
+        <w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/>
+      </w:rPr>
+    </w:rPrDefault>
+    <w:pPrDefault>
+      <w:pPr>
+        <w:widowControl/>
+        <w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>
+      </w:pPr>
+    </w:pPrDefault>
+  </w:docDefaults>
+  <w:style w:type="paragraph" w:default="1" w:styleId="Normal">
+    <w:name w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="BodyText">
+    <w:name w:val="Body Text"/>
+    <w:basedOn w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:before="0" w:after="0" w:line="656" w:lineRule="exact"/>
+      <w:ind w:firstLine="720"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="FirstParagraph">
+    <w:name w:val="First Paragraph"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:next w:val="BodyText"/>
+    <w:qFormat/>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Compact">
+    <w:name w:val="Compact"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:qFormat/>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyKeep">
+    <w:name w:val="Body Keep"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="BlockText">
+    <w:name w:val="Block Text"/>
+    <w:basedOn w:val="Normal"/>
+    <w:next w:val="BodyText"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:before="252" w:after="252" w:line="320" w:lineRule="exact"/>
+      <w:ind w:left="720" w:right="720" w:firstLine="0"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="BlockTextLast">
+    <w:name w:val="Block Text Last"/>
+    <w:basedOn w:val="BlockText"/>
+    <w:next w:val="BodyText"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:before="252" w:after="392" w:line="320" w:lineRule="exact"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading1">
+    <w:name w:val="heading 1"/>
+    <w:basedOn w:val="Normal"/>
+    <w:next w:val="BodyText"/>
+    <w:uiPriority w:val="9"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+      <w:spacing w:before="336" w:after="280" w:line="320" w:lineRule="exact"/>
+      <w:ind w:firstLine="0"/>
+      <w:jc w:val="center"/>
+      <w:outlineLvl w:val="0"/>
+    </w:pPr>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+      <w:color w:val="000000"/>
+      <w:sz w:val="28"/>
+      <w:szCs w:val="28"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading2">
+    <w:name w:val="heading 2"/>
+    <w:basedOn w:val="Heading1"/>
+    <w:next w:val="BodyText"/>
+    <w:uiPriority w:val="9"/>
+    <w:unhideWhenUsed/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:jc w:val="left"/>
+      <w:outlineLvl w:val="1"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading3">
+    <w:name w:val="heading 3"/>
+    <w:basedOn w:val="Heading1"/>
+    <w:next w:val="BodyText"/>
+    <w:uiPriority w:val="9"/>
+    <w:unhideWhenUsed/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:before="280" w:after="224" w:line="320" w:lineRule="exact"/>
+      <w:outlineLvl w:val="2"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading4">
+    <w:name w:val="heading 4"/>
+    <w:basedOn w:val="Heading3"/>
+    <w:next w:val="BodyText"/>
+    <w:uiPriority w:val="9"/>
+    <w:unhideWhenUsed/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:outlineLvl w:val="3"/>
+    </w:pPr>
+    <w:rPr>
+      <w:i w:val="0"/>
+      <w:iCs w:val="0"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="FootnoteText">
+    <w:name w:val="Footnote Text"/>
+    <w:basedOn w:val="Normal"/>
+    <w:uiPriority w:val="9"/>
+    <w:unhideWhenUsed/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:before="0" w:after="140" w:line="320" w:lineRule="exact"/>
+      <w:ind w:firstLine="0"/>
+    </w:pPr>
+    <w:rPr>
+      <w:sz w:val="28"/>
+      <w:szCs w:val="28"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="character" w:styleId="FootnoteReference">
+    <w:name w:val="Footnote Reference"/>
+    <w:basedOn w:val="DefaultParagraphFont"/>
+    <w:rPr>
+      <w:vertAlign w:val="superscript"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="character" w:styleId="Hyperlink">
+    <w:name w:val="Hyperlink"/>
+    <w:basedOn w:val="DefaultParagraphFont"/>
+    <w:rPr>
+      <w:color w:val="000000"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Footer">
+    <w:name w:val="footer"/>
+    <w:basedOn w:val="Normal"/>
+    <w:pPr>
+      <w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>
+    </w:pPr>
+  </w:style>
+</reference>
