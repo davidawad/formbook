@@ -21,7 +21,7 @@ sh tools/render.sh courts/fifth-circuit/court-of-appeals/opening-brief usage/INP
 sh tools/overlay.sh courts/fifth-circuit/court-of-appeals/opening-brief candel-opening-brief usage/FILED-EXAMPLE-opening-brief.pdf
 ```
 
-Typst runs with the vendored fonts only (`--ignore-system-fonts`); any typst warning fails the render. The font is EB Garamond (`fonts/eb-garamond/`), and cmarker 0.1.10 is vendored under `vendor/typst-packages/`.
+Typst runs with the vendored fonts only (`--ignore-system-fonts`); any typst warning fails the render. The font is Times New Roman (vendored under `fonts/`), and cmarker 0.1.10 is vendored under `vendor/typst-packages/`.
 
 ## Typeface (fonts pass, 2026-10-14)
 
@@ -29,7 +29,7 @@ Typst runs with the vendored fonts only (`--ignore-system-fonts`); any typst war
 |---|---|---|---|
 | CA5-FORM-005: proportionally spaced serif, 14 pt text, 12 pt footnotes (FRAP 32(a)(5)-(6); Checklist 2(a), 2(d)) | None. FRAP 32(a)(5)(A)-(B) allows any proportionally spaced face with serifs; Form 6 asks only for the program and font used. The local rule (5th Cir. R. 32.3) text was not fetched. | None needed: EB Garamond (`fonts/eb-garamond/`) kept | n/a (no court-named face; `docs/FONTS.md` "No face named") |
 
-The rules name no face, so the template keeps EB Garamond in typst, latex and docx. The filed exemplar is set in Century Schoolbook; the rules allow it but do not require it, so the difference is a tier-2 visual choice, not a rule failure. Checked on the typst render: `pdffonts` lists only `EBGaramond` (Regular, Bold, Italic) and nothing else is embedded.
+The rules name no face; the template sets Times New Roman (newtx in LaTeX, metric-compatible) in typst, latex and docx.
 
 ## Governing rules
 
@@ -109,7 +109,7 @@ Defects found and fixed during the review:
 - **Cover colour, spiral binding and paper-copy count** (checklist 3(b)-(c), 4) are paper-copy requirements and are not produced.
 - **Record references** are typed by the author (`ROA.1399`); the template does not validate them.
 - **Word count**: the certificate of compliance uses the word count computed from the markdown, not the PDF. Counsel must check it against the word processor before filing.
-- **Certificate typeface statement** names the typeface and point size as the template sets them (EB Garamond 14 point, footnotes 12 point). If a different face is used in filing, the statement must change.
+- **Certificate typeface statement** names the typeface and point size as the template sets them (14-point text, 12-point footnotes). If a different face is used in filing, the statement must change.
 - Not run: `tools/check.sh` and `tools/check-selftest.sh` (no check contract exists for this doc type yet).
 
 ## Verification pass 2026-10-16 (fb-595.26.5)
@@ -130,5 +130,8 @@ Defects found and fixed during the review:
 
 ## Engines
 
-- **latex** (`latex/template.tex`, `latex/ca5-brief.lua`; `sh tools/render.sh --engine latex`): matches the typst form for the mandated items: EB Garamond from `fonts/` (`fontdir`), 14 pt text, 12 pt footnotes, 30.8 pt double pitch, 17 pt single pitch for headings, quotations and certificates, 1 in margins, letter paper, roman front pages and arabic body from 1, certificates on their own pages, TOC and TOA built from the headings and `toa:` citations (two tectonic passes). Differs: the TOA page list is read from the previous pass, so it settles on the second run; the word count is computed from the markdown body and may differ from typst by a few words. Open tier-1 findings: see the PR description and the Gate 2 review rows.
-- **docx** (`docx/reference.docx`, built by `docx/make-reference.sh`; `docx/ca5-docx.lua`): styles only (font, sizes, spacing, margins, heading styles). BLOCKED: `<id>.docx.pdf` (no LibreOffice on this box: `soffice` not found, and conda-forge has no package), so Gates 0 and 1 cannot run on the docx. Not in the docx yet: the cover and caption layout, the front statements from frontmatter, the TOC and TOA (TOA citations are plain text), heading numbering labels, the page-number footer, and the generated certificates of service and compliance from frontmatter (the body certificates are in).
+All three engines run on the shared cross-engine layout model (fb-595.54.3; `lib/typst/xengine.typ`, `lib/latex/xengine.sty`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): Times New Roman (newtx in LaTeX) 14 pt in 30.8 pt line boxes for the text, 17 pt boxes for headings, quotations, tables, the cover, the signature and the certificate of interested persons, 12 pt footnotes in 14 pt boxes; first-fit line breaking, no kerning, ligatures or hyphenation; the spaces between blocks in pt. A paragraph's first line is indented only after another paragraph (typst's rule), in every engine. `eval.yaml` sets `params.cross_engine: gate`: the latex and docx renders must break every line and page where the typst render does (XENG-001..003 PASS on both: 15 pages, 289 of 289 lines).
+
+- **typst** (`typst/ca5-opening-brief.typ`): the reference. A loose list (blank lines between the items) is set by the template's own list rule (the number in a half-inch box, the text hanging), as xengine's list rule cannot hold an item's paragraph break.
+- **latex** (`latex/template.tex`, `latex/ca5-brief.lua`; pdflatex): cover, front statements, TOC (`\pageref`) and TOA (pages written to the aux file at shipout) built from the headings and `toa:` citations; the word count is the typst template's count-words on the markdown source, so all engines certify the same number.
+- **docx** (`docx/render.sh`, `docx/ca5-docx.lua`, `docx/reference.docx` built by `docx/make-reference.sh` on `lib/docx/xengine-reference.sh`): the cover, headings with their labels, TOC and TOA, signature blocks and certificates are written by the filter; sections (cover unnumbered, front matter lower roman, body arabic from 1) and footers by `render.sh`. The TOC and TOA page numbers come from a first LibreOffice pass (`docx/pagemap.awk`), and a second pass must give the same numbers. Differs from typst (tier 2, no line or page break moves): Word has no vertical fill, so the cover's counsel block sits a gap estimated from the cover's lines below the title, not at the foot of the page; a TOC/TOA page number sits at the right margin after the leader (Word's right tab) rather than right-aligned in its column.
