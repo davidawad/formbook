@@ -267,9 +267,26 @@ return require("docx.xdoc")({
       ["each"] = "statement_5531.items",
       ["blocks"] = {
         {
-          ["text"] = "{#}. {.}",
-          ["indent"] = 36,
-          ["pitch"] = "body",
+          ["columns"] = {
+            {
+              ["width"] = 28.8,
+              ["blocks"] = {
+                {
+                  ["text"] = "{#}.",
+                  ["pitch"] = "body",
+                },
+              },
+            },
+            {
+              ["blocks"] = {
+                {
+                  ["text"] = "{.}",
+                  ["pitch"] = "body",
+                },
+              },
+            },
+          },
+          ["gutter"] = 0,
         },
       },
     },

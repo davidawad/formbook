@@ -82,13 +82,19 @@ authorities:
   above: 9.8
   group: {bold: true, above: 16.8, below: 2.8}
 # NYAPPTERM-CONT-005: the statement pursuant to CPLR 5531, the first page after the cover (page i, before the tables,
-# listed in the contents), its items numbered 1 to 7 in the order of the rule (each a paragraph indented 0.5 in, its
-# number in its first line), dated and signed.
+# listed in the contents), its items numbered 1 to 7 in the order of the rule (each number in a 0.4 in column, the item
+# hung beside it), dated and signed.
 before_tables:
   - {text: "Statement Pursuant to CPLR § 5531", heading: 1}
   - each: statement_5531.items
     blocks:
-      - {text: "{#}. {.}", indent: 36, pitch: body}
+      - columns:
+          - width: 28.8
+            blocks:
+              - {text: "{#}.", pitch: body}
+          - blocks:
+              - {text: "{.}", pitch: body}
+        gutter: 0
   - group:
       - {text: "{statement_5531.dated}", above: 16.1}
       - columns:
