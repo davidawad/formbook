@@ -8,10 +8,10 @@ Doc type `opening-brief` for the U.S. Court of Appeals for the Fourth Circuit (c
 |---|---|
 | Exemplar | yes: filed Opening Brief of Appellant, *NetChoice v. Jones*, No. 26-1252, filed 04/15/2026 (see `usage/SOURCE.md`) |
 | Sample | `usage/INPUT-opening-brief.md`: 13 rendered pages (typst), excerpted from a 66-page filed brief |
-| Render | ok: `sh tools/render.sh courts/fourth-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md`; exit 0, no typst warnings, embedded fonts are TeX Gyre Schola only (`pdffonts`) |
+| Render | ok: `sh tools/render.sh courts/fourth-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md`; exit 0, no typst warnings, embedded fonts are Times New Roman only (`pdffonts`) |
 | Overlay | ok: `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/opening-brief netchoice-opening-brief`; wrote `usage/OVERLAY-netchoice-opening-brief.pdf` and `.txt` |
-| Pages reviewed | 13 of 13 typst pages (every page rendered at 60 dpi and viewed after the font change; the TOC was viewed again after the page-number fix). 16 of 16 LaTeX pages viewed (see Engines). |
-| Gate 2 | open: none in the typst render. The typeface gap is closed (see Typeface). LaTeX layout items are under Engines. |
+| Pages reviewed | 13 of 13 typst, latex and docx pages (fb-595.54.3, after the port to the cross-engine model: typst at 50 dpi, latex and docx at 40 dpi). |
+| Gate 2 | open: none. The three engines break every line and page alike (Gate 4, see Engines). |
 
 ## Governing rules
 
@@ -101,18 +101,11 @@ Searches (2026-10-14): CourtListener and RECAP for 4th Cir. opening briefs; the 
 
 ## Engines
 
-Three renderings of the same markdown (`usage/INPUT-opening-brief.md`). The typst template is the reference.
+Three renderings of the same markdown (`usage/INPUT-opening-brief.md`). The typst template is the reference. All three are on the shared cross-engine layout model since fb-595.54.3 (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Adopting the reference breaker"): Times New Roman (newtx in latex) 14 pt everywhere, the body in 25.9 pt line boxes (the pitch this template has always set), headings, tables, cover and certificates in 16 pt boxes, no kerning, ligatures or hyphenation, first-fit line breaking. latex and docx break every line and page where typst does, and `eval.yaml` gates it (`params.cross_engine: gate`, XENG-001..003). 13 pages in each engine; the certificate word count is 1,523 in each.
 
-**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `usage/OUTPUT-opening-brief.latex.pdf`, 16 pages (14 before the font change to Schola), every page rendered at 50 dpi and viewed; re-rendered and viewed again at 40 dpi on 2026-10-16 after the cover change. Layout items the font change exposed, not fixed here: the last Table of Authorities line ("Va. Code § 59.1-584") falls alone onto page iii, and the "REQUEST FOR ORAL ARGUMENT" heading sits at the foot of page 9 with its text on page 10. Matches: TeX Gyre Schola only (vendored, 14 pt text and footnotes), body double-spaced at the typst pitch (31.43 pt), 1-inch margins, 0.5-inch first-line indent, roman folios for the cover-less front matter and arabic from the body, the cover on one page with counsel in two columns (one group: right half), contents and authorities built from the frontmatter and the `toa:` links (passim from seven pages), the signature block kept with the last paragraph, and the certificate of compliance word count (1,523, the same as typst's count). Differs: the cover's spacing is a fixed gap (typst scales the gap to fit the page); paragraph and heading spacing differ slightly, so body page breaks and the folios in the contents and authorities differ from typst by a line or two per page. Not checked by `check.sh` (no `checks.yaml` in this court).
-
-**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `usage/OUTPUT-opening-brief.docx` is written; the `.docx.pdf` is not, because LibreOffice is not installed (see BLOCKED). Matches in the styles: TeX Gyre Schola 14 pt, body at 31.43 pt exact, 0.5-inch first-line indent, single-spaced headings and block quotations, 1-inch margins, three sections (cover without folio, front matter in roman, body in arabic). The contents and the table of authorities are Word fields (`TOC`, `TA` on each citation, `TOA` per category). Certificate word count 1,523.
-
-BLOCKED (docx):
-- All gates on `usage/OUTPUT-netchoice-opening-brief.docx.pdf`: LibreOffice (`soffice`) is not on this box and conda-forge has no package. A Debian `libreoffice-writer-nogui` 25.2.3 was unpacked without root under `~/apt-lo` and its `soffice.bin` segfaulted at start-up; not resolved.
-- Contents and authorities page numbers: the cached results have no page numbers, and Word fills them on update (fields are marked dirty). LibreOffice does not honour TA/TOA fields (docs/DOCX.md), so the TOA page checks cannot pass in a LibreOffice PDF.
-- The cover's rules and caption positions are paragraph borders and indents, approximated; the cover was not seen in any renderer.
-- The last paragraph is not kept with the signature block (no keep-with-next across the pair).
-- Opened in neither Word nor LibreOffice: the `.docx` was checked only for well-formed XML parts.
+- **typst** (`typst/ca4-opening-brief.typ`): pitches and block spaces in pt; contents and authorities rows with `listing-row` (36 pt page column; authorities 56 pt or the page list's width); the designation on the cover and the signature in a true right half of the text width (a `pad(left: 50%)` was relative to the padded content and moved with its width). A loose list (blank lines between items) has its paragraph breaks dropped before xengine's list rule (one paragraph per item). Every page viewed at 50 dpi after the port.
+- **LaTeX** (`latex/template.tex`, `latex/ca4.lua`): `\usepackage{xengine}`, `\xe@lines{14}{25.9}` and `{14}{16}`, `\addvspace` spacing, `\xe@row` contents and authorities; the text block is 0.05 bp wider than 6.5 in (newtx advances run about 0.05 pt a full line wider than Times New Roman's: a line that just fits in typst broke a word early here). Every page viewed at 40 dpi.
+- **docx** (`docx/build-reference.sh` -> `docx/reference.docx`, `docx/ca4.lua`, `docx/render.sh`, `docx/pagemap.awk`, `docx/footer.xml`; ca7's opening-brief machinery): exact line spacing at the typst pitches, the "CA ..." styles with typst's spaces in twips; sections (cover: no folio, front matter lower roman, body arabic from 1) and PAGE footers written by `render.sh`; the contents and authorities page numbers are static text read from the LibreOffice PDF of a first pass (two passes must agree). Every page of `usage/OUTPUT-opening-brief.docx.pdf` viewed at 40 dpi. Differs from typst only in vertical spacing on the cover and in the cover's double rules (one paragraph border). Not opened in Word.
 
 ## Verification pass 2026-10-16 (fb-595.26.4)
 
