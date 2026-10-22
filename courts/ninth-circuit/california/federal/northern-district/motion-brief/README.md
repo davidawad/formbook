@@ -2,9 +2,9 @@
 
 Doc type: **motion** (notice of motion with memorandum of points and authorities, one filed document). Court: United States District Court for the Northern District of California. Folder: `courts/ninth-circuit/california/federal/northern-district/motion-brief/`.
 
-Status: exemplar=listed in `usage/SOURCE.md` but the PDF is **not in this snapshot**; render=ok (Liberation Serif, 10 pages); overlay=fail (no exemplar PDF, `tools/overlay.sh` exits 1); pages reviewed 10 of 10 after the font change. Not a court-level `court.json` status; nothing here sets `status`.
+Status: exemplar=listed in `usage/SOURCE.md` but the PDF is **not in this snapshot**; render=ok (Times New Roman, 12 pages; fb-595.68.22); overlay=fail (no exemplar PDF, `tools/overlay.sh` exits 1); pages reviewed 10 of 10 of the earlier Liberation Serif render (the 12-page Times New Roman render is not re-reviewed page by page; fb-595.68.22). Not a court-level `court.json` status; nothing here sets `status`.
 
-Typeface: Civil L.R. 3-4(c)(2)(A)-(B) names Times New Roman and Century Schoolbook as examples of a standard proportional font. The template uses **Liberation Serif** (vendored Times New Roman substitute, metric-compatible, `docs/FONTS.md`) at 12 pt, replacing EB Garamond at 13 pt. The filed exemplar is Times.
+Typeface: Civil L.R. 3-4(c)(2)(A)-(B) names Times New Roman and Century Schoolbook as examples of a standard proportional font. The template uses vendored **Times New Roman** 12 pt, footnotes too, in typst and docx alike (fb-595.68.22; was Liberation Serif, and EB Garamond at 13 pt before that). The filed exemplar is Times.
 
 ## Governing rules
 
@@ -13,8 +13,8 @@ Source: N.D. Cal. Civil Local Rules, full text (PDF, "Effective October 2, 2026"
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
 | CAND-FORM-001 | Civil L.R. 3-4(c)(1) | 8½ × 11 inch white paper. Numbered lines apply to **manual** filing only (see gaps). | `typst/cand-motion-brief.typ` (paper) |
-| CAND-FORM-002 | Civil L.R. 3-4(c)(2)(A)-(B) | Standard proportionally spaced font (e.g. Times New Roman or Century Schoolbook), 12 point or larger, footnotes and quotations included, unless a judge's standing order says otherwise. | `type-size` = 12 pt, `font-family` = "Liberation Serif" (Times New Roman substitute) |
-| CAND-FORM-003 | Civil L.R. 3-4(c)(2) | Text on one side, double-spaced, no more than 28 lines per page, except counsel identification, title of the case, footnotes and quotations. | `line-pitch` = 24 pt, `body-leading` |
+| CAND-FORM-002 | Civil L.R. 3-4(c)(2)(A)-(B) | Standard proportionally spaced font (e.g. Times New Roman or Century Schoolbook), 12 point or larger, footnotes and quotations included, unless a judge's standing order says otherwise. | `type-size` = 12 pt, `font-family` = Times New Roman (vendored) (fb-595.68.22) |
+| CAND-FORM-003 | Civil L.R. 3-4(c)(2) | Text on one side, double-spaced, no more than 28 lines per page, except counsel identification, title of the case, footnotes and quotations. | `pitch-double` = 24 pt; `pitch-single` = 13.8 pt for counsel, caption, headings, tables, footnotes and signature (fb-595.68.22) |
 | CAND-FORM-004 | Civil L.R. 3-4(c)(2)(C) | "Spaced no more than 10 characters per horizontal inch." See open question 1. | not enforced |
 | CAND-FORM-005 | Civil L.R. 3-4(c)(3) | Footer on each page with the paper's title, and once a case number is assigned, the case number. | `running-footer` |
 | CAND-FIRST-001 | Civil L.R. 3-4(a)(1) | Counsel's name, address, telephone, email and state bar number, upper left, with the party represented and its status. | cover, `counsel` + `counsel_role` |
@@ -47,10 +47,10 @@ sh tools/render.sh courts/ninth-circuit/california/federal/northern-district/mot
 sh tools/overlay.sh courts/ninth-circuit/california/federal/northern-district/motion-brief tsi-akim-maidu-motion-to-dismiss
 ```
 
-- `usage/OUTPUT-motion-brief.typst.pdf`: 10 pages (was 12 in EB Garamond at 13 pt). Typst compiled with no warnings (`render.sh` fails on any warning). Only vendored fonts: `pdffonts` shows LiberationSerif, -Italic, -Bold, embedded. Body line pitch measured at 24.0 pt with `pdftotext -bbox-layout` (`body-leading` retuned from 0.54em to 1.09em for the new face).
+- `usage/OUTPUT-motion-brief.typst.pdf`: 12 pages, Times New Roman 12 pt on the shared cross-engine layout model (fb-595.68.22). Typst compiled with no warnings (`render.sh` fails on any warning). Only vendored fonts.
 - Overlay: **not generated**. `usage/` has no PDF in this snapshot, so `tools/overlay.sh` exits 1. `usage/OVERLAY-tsi-akim-maidu-motion-to-dismiss.txt` is the stale page map from the EB Garamond render and does not match the current render; it should be regenerated once the exemplar PDF is restored.
 
-## Visual review (all 10 pages of the Liberation Serif render, rendered at 70 dpi and looked at)
+## Visual review (all 10 pages of the Liberation Serif render, rendered at 70 dpi and looked at; before fb-595.68.22, not re-verified against the 12-page Times New Roman render)
 
 | PDF page | Printed page | What it is | Finding |
 |---|---|---|---|
@@ -71,12 +71,12 @@ Reviewed pages: 10 of 10.
 
 1. **Characters per inch (CAND-FORM-004).** Civil L.R. 3-4(c)(2)(C) says "spaced no more than 10 characters per horizontal inch." For a proportional font, 12-point Times New Roman runs at roughly 14-15 characters per inch (my estimate, not measured), so read literally the rule cannot be met by a proportional font at 12 pt. My reading: the cap is for fixed-pitch fonts (Courier at 12 pt is 10 cpi). Not enforced. **Needs David's call** (or the court's answer) before this template is treated as complete.
 2. **Numbered lines (CAND-FORM-001).** Civil L.R. 3-4(c)(1) requires numbered lines on paper for manual filing. The exemplar (an ECF filing) carries pleading-paper line numbers; this render does not. Not drawn: the template targets the electronic PDF. A pleading-paper variant would need a 28-line grid and a line-number margin.
-3. **Font.** Liberation Serif (vendored, OFL) at 12 pt, the Times New Roman substitute named in `docs/FONTS.md`. The rule's examples are "e.g.," so EB Garamond (the previous face, at 13 pt) would also have met the rule's wording; the filed exemplar is Times, so the substitute was chosen. Reading choice: revert `font-family` and `type-size` in `typst/cand-motion-brief.typ` if David prefers EB Garamond.
+3. **Font.** Times New Roman 12 pt (vendored), in typst and docx (fb-595.68.22; was Liberation Serif, and EB Garamond at 13 pt before that), the filed exemplar's face. The rule's examples are "e.g.," so other standard proportional faces would also meet its wording.
 4. **Lines per page.** 24 pt pitch, 1 inch top and bottom margins: 27 double-spaced lines fit per body page. Checked with `pdftotext -bbox-layout`: pitch 24.0 pt on every body page. Footnotes and quotations are exempt from double spacing under 3-4(c)(2). Headings are single-spaced too, but the rule does not exempt headings: that is a convention choice, flagged here.
 4a. **Court title position (CAND-FIRST-002).** The rule starts the court title on line 8 "except where additional space is required for counsel identification." Here the counsel block runs past seven lines, so the court title follows it with one line of space rather than sitting on line 8 exactly.
 5. **Footer size.** 11 pt. The rule's type-size floor applies to text, footnotes and quotations; the footer is the paper identification.
 6. **Judge standing orders** can change the form (3-4(c)(2) says "unless a Judge's standing order ... requires otherwise"). Not reflected.
-7. **Page limit (CAND-CONT-002).** The template does not count pages. The sample renders to 10 pages; the 25-page limit is for the author.
+7. **Page limit (CAND-CONT-002).** The template does not count pages. The sample renders to 12 pages (fb-595.68.22); the 25-page limit is for the author.
 8. **Tier 2 exemplars.** One exemplar only. The eval loop asks for two or three from different filers before tier 2 is judged. Not done. Searches tried are in `usage/SOURCE.md`.
 9. **Partial sample.** Argument III.B.2-4 not transcribed (see Sample).
 10. **Certificates.** None generated (see Governing rules).
@@ -85,7 +85,7 @@ Reviewed pages: 10 of 10.
 
 ## Engines
 
-Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate") and set Times New Roman 12 pt (CAND-FORM-002), footnotes too: body text in exact 24 pt line boxes (double spaced, CAND-FORM-001), counsel, caption, headings, tables, footnotes and signature in 13.8 pt boxes, the footer at 11 pt in 12.65 pt boxes. The docx breaks every line and page where typst does (`eval.yaml`: `params.cross_engine: gate`; XENG-001..003 pass, 311 of 311 lines, 12 pages).
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate") and set Times New Roman 12 pt (CAND-FORM-002), footnotes too: body text in exact 24 pt line boxes (double spaced, CAND-FORM-001), counsel, caption, headings, tables, footnotes and signature in 13.8 pt boxes, the footer at 11 pt in 12.65 pt boxes. The docx breaks every line and page where typst does (`eval.yaml`: `params.cross_engine: gate`; XENG-001..003 pass, 311 of 311 lines, 12 pages). `sh tools/check.sh <this folder>`: typst `RESULT: 9 checks passed, 0 failed`, docx `RESULT: 13 checks passed, 0 failed`; DEF-TOC-001 and DEF-COVER-001 pass on both (fb-595.68.22).
 
 Docx engine (fb-595.68.22): `docx/reference.xml` (the cross-engine style recipe, `base="xengine"`, in the typst face) and `docx/cand.lua`, no shell. The filter writes the cover (counsel and role, court title, the caption as a two-column table ruled at the parties' right and bottom, with the case number, the title and the noticed hearing), the table of contents and the table of authorities (page numbers from fb render's needles: the first block of the motion, every heading and every `toa:` link; the cover unnumbered, the tables in roman from i, the motion from 1), the numbered headings, the body (pandoc's paragraphs, so pandoc writes the footnotes), the signature block (one row that does not split), and the footer through `$FORMBOOK_FOOTERS`: the page number, the paper's title in capitals and the case number (CAND-FORM-003). The docx before this port had no tables, no hearing block, no caption rules and a page-number-only footer; all are built now.
 

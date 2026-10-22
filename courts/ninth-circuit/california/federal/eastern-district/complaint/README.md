@@ -7,10 +7,10 @@ Folder: `courts/ninth-circuit/california/federal/eastern-district/complaint/` (s
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md`: caption, paragraphs 1 to 35 (pages 1 to 11 of the filing), the prayer (1 to 12), signature, jury demand. Paragraphs 36 to 85 and Counts 1 to 8 are not transcribed (see Known gaps) |
-| typeface | face required: none (no E.D. Cal. local rule or Fed. R. Civ. P. 10 names a face). Filed exemplar is Times New Roman, which is not a requirement. Font: **EB Garamond** (kept; `docs/FONTS.md` "No face named"). Metric-compatible: n/a. Visual only: EB Garamond is not Times. |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, EBGaramond-Bold embedded), no warnings (`sh tools/render.sh <this folder> usage/INPUT-complaint.md`) |
+| typeface | face required: none (no E.D. Cal. local rule or Fed. R. Civ. P. 10 names a face). Filed exemplar is Times New Roman, which is not a requirement. Font: **Times New Roman** 12 pt (vendored; the exemplar's face), in typst and docx alike (fb-595.68.22). |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 13 pages, typst 0.15.0, vendored Times New Roman only, no warnings (`sh tools/render.sh <this folder> usage/INPUT-complaint.md`) (fb-595.68.22) |
 | overlay | ok: `usage/OVERLAY-morgan-complaint.pdf` and `usage/OVERLAY-morgan-complaint.txt` (`sh tools/overlay.sh <this folder> morgan-complaint`) |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; pages 1 to 10 were viewed before a footer-title and signature-line fix, and that fix is confined to the footer text and the signature block, which pages 11 and 12 show in their final form) |
+| pages reviewed | 12 of 12 of the EB Garamond render, before fb-595.68.22 (every page rendered at 60 dpi and viewed; pages 1 to 10 were viewed before a footer-title and signature-line fix, and that fix is confined to the footer text and the signature block, which pages 11 and 12 show in their final form). The Times New Roman render (13 pages) has not been re-reviewed page by page (fb-595.68.22). |
 
 File names: the tools name files by role (`INPUT-` is the markdown, `OUTPUT-` is our render, `OVERLAY-` is the comparison). This folder follows them rather than the `<id>.md` / `<id>-overlay.pdf` names in the brief, because `tools/render.sh`, `tools/overlay.sh` and `CLAUDE.md` read those names.
 
@@ -20,13 +20,13 @@ Primary source: **E.D. Cal. Local Rules, effective 1 January 2025** (the current
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| E.D. Cal. L.R. 130(b) | White paper, 8½ × 11, "with numbered lines in the left margin." | `line-numbers()`: 28 numbers down the left margin; `pleading-rules()`. |
+| E.D. Cal. L.R. 130(b) | White paper, 8½ × 11, "with numbered lines in the left margin." | `line-numbers()`: 27 numbers down the left margin (fb-595.68.22); `pleading-rules()`. |
 | E.D. Cal. L.R. 130(c) | "Documents shall be double-spaced except for the identification of counsel, title of the action, category headings, footnotes, quotations, exhibits and descriptions of real property." | `pitch = 24pt`, `body-leading`; counsel, caption, signature and headings single-spaced or on the grid. |
 | E.D. Cal. L.R. 130(d) | "Each page shall be numbered consecutively at the bottom and shall provide a brief description of the document on the same line." | `footer-block()`: the description (left) and the page number (right) are on one line. |
 | E.D. Cal. L.R. 131(a) | Name, address, telephone and State Bar number of all attorneys, and "the specific identification of each party represented by name and interest," in the upper left-hand corner of the first page. | `counsel` frontmatter (lines 1 to 7); the last counsel line names the party represented. |
 | E.D. Cal. L.R. 131(b), (c) | Signature by the attorney; "/s/" for an attorney's electronic signature; the name typed under it. | `signature-block()`: "Dated:", the firm, "By: /s/ <signer>", the signer's name, the role. |
 | E.D. Cal. L.R. 133(a) | The Court is a CM/ECF district; "all complaints ... shall be electronically filed." | Not a layout rule; it governs filing, and the template produces the PDF for filing. |
-| E.D. Cal. L.R. 133(f) | A courtesy paper copy to chambers for any electronically filed document over 25 pages. | Not in the template (the exemplar is 27 pages; the sample is 12). The courtesy-copy rule applies to the filing, not the layout. |
+| E.D. Cal. L.R. 133(f) | A courtesy paper copy to chambers for any electronically filed document over 25 pages. | Not in the template (the exemplar is 27 pages; the sample is 13 (fb-595.68.22)). The courtesy-copy rule applies to the filing, not the layout. |
 | Fed. R. Civ. P. 10(a) | Caption with "the court's name, a title, a file number, and a Rule 7(a) designation." Fetched from https://www.law.cornell.edu/rules/frcp/rule_10 on 2026-10-14 (text: "As amended Apr. 30, 2007, eff. Dec. 1, 2007."). | `court-title()` (court name and division), `caption()` (`Case No.`, title), the title of the paper. |
 | Fed. R. Civ. P. 10(b) | "A party must state its claims or defenses in numbered paragraphs," "each limited as far as practicable to a single set of circumstances." Same source. | `allegations()` numbers each body paragraph; headings, the WHEREFORE clause and the jury demand are unnumbered. |
 | Fed. R. Civ. P. 38 | Jury demand. | `jury_demand: true` puts "DEMAND FOR JURY TRIAL" in the caption; the jury demand is its own section at the end. |
@@ -35,8 +35,8 @@ Not produced by this template (separate filings that accompany a complaint): the
 
 ## Layout
 
-- Numbered lines 1 to 28 down the left margin, a double rule at the text's left edge and a single rule at its right (the pleading form, as in the exemplar).
-- Top margin 1 inch; the 28 lines end at 10.33 inches; the footer is in the bottom margin.
+- Numbered lines 1 to 27 down the left margin (fb-595.68.22), a double rule at the text's left edge and a single rule at its right (the pleading form, as in the exemplar).
+- Top margin 1 inch; the 27 lines end at 10 inches; the footer is in the 1 inch bottom margin (fb-595.68.22).
 - Counsel block single-spaced from line 1; the court title starts on line 8 (`counsel-lines = 7`), and more counsel lines push it down.
 - Court title: UNITED STATES DISTRICT COURT / EASTERN DISTRICT OF CALIFORNIA / the division (from `division`).
 - Caption: the party column closed by a rule; "Case No.:" and the title on the right; "DEMAND FOR JURY TRIAL" under the title when `jury_demand` is set.
@@ -62,19 +62,19 @@ Not produced by this template (separate filings that accompany a complaint): the
 ## Known gaps and open choices
 
 1. **One exemplar.** The brief asks for one exemplar per doc type. EVAL-LOOP's tier-2 rule asks for two or three filers. Other E.D. Cal. complaints were found by CourtListener search (not saved; see `usage/SOURCE.md`): Kennedy v. Thrive Causemetics (1:26-cv-07817, class action, 10 pp.) and others. Tier 2 is therefore **not** judged against two filers yet.
-2. **Font.** No E.D. Cal. rule names a typeface or type size. The exemplar is Times New Roman 12 pt. This template uses EB Garamond, the only font vendored in `fonts/`. EB Garamond at 12 pt has a smaller x-height than Times at 12 pt. This is an open choice for David (a vendored Times-metric font would remove the difference); it is not a rule failure.
+2. **Font.** No E.D. Cal. rule names a typeface or type size. The exemplar is Times New Roman 12 pt; the template now sets vendored Times New Roman 12 pt in typst and docx (fb-595.68.22), so the earlier EB Garamond x-height difference is gone. Not a rule requirement.
 3. **Excerpt.** The sample transcribes paragraphs 1 to 35 (exemplar pages 1 to 11), the prayer (exemplar pages 24 to 25), the signature and the jury demand (pages 26 to 27). Paragraphs 36 to 85 and Counts 1 to 8 (exemplar pages 11 to 23) are not transcribed. The filed paragraph numbers match the sample's (they are the filed numbers), so the sample's numbering is the filing's own up to paragraph 35. The filing's signature appears twice (after the prayer and after the jury demand); the sample carries both.
 4. **Footer.** The exemplar centers the page number on its own line with the title below. L.R. 130(d) says the number and the description are on the same line, so the template follows the rule. This differs from the exemplar on purpose.
 5. **Caption: the case number.** The filed complaint leaves "Case No." blank (the clerk assigns the number and judge initials). The sample does the same.
 6. **Court title position.** The rules do not fix the line; the template puts the court title on line 8 (as the N.D. Cal. complaint does). The exemplar puts it on line 7 with five counsel lines. Both are within L.R. 131(a).
-7. **Signature block and page breaks.** The template does not hold the last allegation with the signature (the motion template does); in this sample the signature falls on a page with room, so no defect is visible, but a longer prayer could strand a signature. Recorded as a known limitation.
+7. **Signature block and page breaks.** The block before each signature is kept whole with it, and the signature block is a whole number of numbered lines, in both engines (fb-595.68.22).
 8. **Page limits.** The Local Rules set no page limit for a complaint. The 25-page threshold in L.R. 133(f) triggers a courtesy copy to chambers; it is not a limit.
 9. **Headings.** A heading must fit one numbered line (the build fails otherwise). A longer heading needs a shorter title or a template change.
-10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. The render and overlay were run; the Gate 2 review above is the equivalent for this doc type.
+10. **Checks.** `sh tools/check.sh <this folder>` runs on this folder (`eval.yaml`): typst `RESULT: 9 checks passed, 0 failed`; docx `RESULT: 13 checks passed, 0 failed` (fb-595.68.22). No `tools/check-selftest.sh` result is recorded here.
 
 ## Review of the rendered pages (final PDF)
 
-Rendered at 60 dpi and viewed page by page.
+Rendered at 60 dpi and viewed page by page (the 12-page EB Garamond render, before fb-595.68.22; the page contents below are not re-verified against the 13-page Times New Roman render).
 
 - Page 1: counsel single-spaced on lines 1 to 5, court title on lines 8 to 10, party column and caption on lines 12 to 20, title and "DEMAND FOR JURY TRIAL" at the right, footer on one line. Pass.
 - Page 2: lead-in, I. THE PARTIES, paragraphs 1 and 2, II. JURISDICTION AND VENUE, paragraphs 3 to 6 on the grid. Pass.
@@ -95,9 +95,7 @@ Defects found and fixed during review: the signer's name printed three times (sa
 
 ### docx (checked with LibreOffice only; Word is not available here)
 
-- Build: `sh docx/build-reference.sh docx/reference.docx` (styles, the numbered-line header frame, the footer, page borders); render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (12 pages; EB Garamond embedded, no other face).
-- Pages viewed: all 12 pages of `OUTPUT-complaint.docx.pdf` at 60 dpi, in the final build.
-- No typst `OUTPUT` PDF exists in `usage/` for this sample, so the docx was compared with the typst template source and the rules above, not with a typst render page by page.
-- Matches the typst template: numbers 1 to 28 on every page (a header frame, not Word's line numbering, so blank lines are numbered too); exact 24 pt double spacing; 13.8 pt single spacing for counsel, caption and signature; counsel on lines 1 to 7 and the court title on line 8; the ruled party column of the caption; the footer with the description and the page number on one line; the lead-in on page 2.
-- Differs from typst: the signature blocks (13.8 pt single) sit between numbered lines rather than on them; the pleading rules are page borders around the text area, not lines drawn the full page height; the caption's right column wraps by LibreOffice's line breaking.
-- BLOCKED: `sh tools/check.sh <this folder> --engine docx` cannot run: it reads `court.json`, `checks.yaml` and `reviews/` in the folder, and this folder has none (the court has no `rules.md` yet; not created here). Exit 2, no stamp written. Gates 0 to 3 are therefore not run for docx; the pages were checked by eye only.
+- Build: `docx/reference.xml` (base="xengine", the shared cross-engine layout model; built by `fb render`) and the filter `docx/caed-complaint.lua`; render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (13 pages; Times New Roman embedded). `build-reference.sh`, `render.sh` and the EB Garamond `reference.docx` are gone (fb-595.68.22).
+- Matches the typst template line for line (fb-595.68.22): 27 numbered lines in a page-anchored frame of exact 24 pt lines (not Word's line numbering, so blank lines are numbered too); 24 pt double spacing; counsel, caption and signature single-spaced at 12 pt, each group 9.6 pt down so its baselines fall on and between the numbered lines; the paragraph number in a half-inch box after the indent; the block before each signature kept whole with it; the footer's description beside the page number (L.R. 130(d)).
+- Differs from typst: the pleading rules are page borders around the text area, not lines drawn the full page height.
+- Check: `sh tools/check.sh <this folder> --engine docx`: `RESULT: 13 checks passed, 0 failed`, Gate 4 XENG-001..003 pass (13 pages, 382/382 lines break after the same word as typst; `eval.yaml` `params.cross_engine: gate`). typst: `RESULT: 9 checks passed, 0 failed` (fb-595.68.22).

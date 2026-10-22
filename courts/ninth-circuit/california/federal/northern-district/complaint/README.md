@@ -7,11 +7,11 @@ Folder: `courts/ninth-circuit/california/federal/northern-district/complaint/`.
 |---|---|
 | exemplar | listed in `usage/SOURCE.md` (1 filer), but the PDF is **not in this snapshot**: `usage/` holds only `SOURCE.md` |
 | sample md | `usage/INPUT-complaint.md` (a portion of the filing, see below) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Bold embedded), no warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored Times New Roman only, no warnings (fb-595.68.22) |
 | overlay | **fail**: `tools/overlay.sh` exits 1 ("no exemplar pdf in usage/"). `usage/OVERLAY-superhuman-complaint.txt` is the stale page map from the EB Garamond render; no `.pdf` overlay exists |
-| pages reviewed | 10 of 10 (every page rendered at 70 dpi and viewed after the font change) |
+| pages reviewed | 10 of 10 of the earlier Liberation Serif render (every page rendered at 70 dpi and viewed). The 11-page Times New Roman render has not been re-reviewed page by page (fb-595.68.22). |
 
-Typeface: Civil L.R. 3-4(c)(2)(A) names Times New Roman and Century Schoolbook as examples of a standard proportional font. The template uses **Liberation Serif**, the vendored metric-compatible Times New Roman substitute (`docs/FONTS.md`), at 12 pt. The filed exemplar is Times. Page count is unchanged from the EB Garamond render (10 pages).
+Typeface: Civil L.R. 3-4(c)(2)(A) names Times New Roman and Century Schoolbook as examples of a standard proportional font. The template uses vendored **Times New Roman** 12 pt, in typst and docx alike (fb-595.68.22; was Liberation Serif, and EB Garamond before that). The filed exemplar is Times. The render is 11 pages (fb-595.68.22).
 
 ## Governing rules
 
@@ -23,8 +23,8 @@ Primary source: N.D. Cal. Civil Local Rules, fetched 2026-10-14 from https://www
 | Civil L.R. 3-4(a)(3) | From the eighth line of the first page: court title (with division), title of the action, case number with judge initials, title of the paper. | `court-title`, `caption`. Line 8 starts the court title unless counsel needs more room (the rule allows that). |
 | Civil L.R. 3-4(a)(5) | "Class Action" legend under the title, if the complaint is a class action. | `legend` frontmatter (not used by the sample; the sample is not a class action). |
 | Civil L.R. 3-4(c)(1) | 8½ × 11 inch white paper with numbered lines. | `page-w`, `page-h`, `line-numbers()`. |
-| Civil L.R. 3-4(c)(2) | Text double-spaced, no more than 28 lines per page, except counsel block, title, footnotes and quotations. | `pitch = 24pt`, `lines-per-page = 28`, `body-leading = 1.35em` (24 pt baseline pitch at 12 pt). |
-| Civil L.R. 3-4(c)(2)(A) | Standard proportionally spaced font (e.g. Times New Roman or Century Schoolbook). | `font-family = "Liberation Serif"` (Times New Roman substitute, metric-compatible; see Typeface above and Known gaps). |
+| Civil L.R. 3-4(c)(2) | Text double-spaced, no more than 28 lines per page, except counsel block, title, footnotes and quotations. | `pitch = 24pt`, `lines-per-page = 27` (fb-595.68.22); counsel, caption and signature at `pitch-single = 12pt`. |
+| Civil L.R. 3-4(c)(2)(A) | Standard proportionally spaced font (e.g. Times New Roman or Century Schoolbook). | `font-family` Times New Roman (vendored; see Typeface above) (fb-595.68.22). |
 | Civil L.R. 3-4(c)(2)(B) | 12-point type or larger. | `type-size = 12pt`, everywhere including footer (10 pt, see Known gaps). |
 | Civil L.R. 3-4(c)(2)(C) | No more than 10 characters per horizontal inch. | Not asserted (see Known gaps). |
 | Civil L.R. 3-4(c)(3) | Footer on each page with the paper's title, and the case number once assigned. | `footer-block` (title from `footer_title`, `CASE NO.` from `case_number`). |
@@ -37,11 +37,11 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Layout
 
-- Numbered lines 1 to 28 down the left margin, a double rule at the text's left edge and a single rule at its right (the pleading form).
-- Top margin 1 inch: line 1 sits on the top margin, so the 28 lines end at 10.33 inches and the footer is in the bottom margin.
+- Numbered lines 1 to 27 down the left margin (fb-595.68.22), a double rule at the text's left edge and a single rule at its right (the pleading form).
+- Top margin 1 inch: line 1 sits on the top margin, so the 27 lines end at 10 inches and the footer is in the 1 inch bottom margin (fb-595.68.22).
 - Counsel block single-spaced on lines 1 to 7 (the template grows the block for longer counsel lists, pushing the court title down).
-- Every block of text is a whole number of 24 pt rows (`on-grid`), so headings, paragraphs and signature blocks land on the numbered lines.
-- Paragraphs are numbered 1, 2, ... by the template; a heading stays with the paragraph after it (`heading-line` + the grouping in `allegations()`).
+- Body text, headings and prayer items sit in exact 24 pt line boxes on the numbered lines; counsel, caption and signature lines in 12 pt boxes, two to a numbered line (fb-595.68.22).
+- Paragraphs are numbered 1, 2, ... by the template (the number in a half-inch box after the indent); a heading is sticky (kept with what follows it), and the last block is kept with the signature block (fb-595.68.22).
 - Prayer items (markdown list) are lettered (a), (b), ...; the list may break across pages.
 
 ## Markdown contract (for samples)
@@ -54,7 +54,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search (CourtListener RECAP, `type=r`, `court=cand`, complaints filed 2026-10-02 to 2026-10-13) also found Saflor v. Every, Inc. (3:26-cv-11467, 10 pages, Times New Roman, pleading paper, counsel Clapp) and SK hynix Inc. v. Longhorn IP LLC (3:26-cv-11609, 35 pages). Those were downloaded and checked for text and format but not saved, because the brief asks for one exemplar per doc type. Tier 2 is therefore **not** judged against two filers yet.
-2. **Font.** The rule names Times New Roman and Century Schoolbook as examples of a standard proportional font. The template uses Liberation Serif (Times New Roman substitute, metric-compatible), replacing EB Garamond, because the filed exemplar is Times and `docs/FONTS.md` maps a named face to its substitute. Reading choice: the rule's text ("standard proportionally spaced font", "e.g.") would also allow EB Garamond; if David prefers that, revert `font-family` in `typst/cand-complaint.typ`.
+2. **Font.** The rule names Times New Roman and Century Schoolbook as examples of a standard proportional font. The template uses vendored Times New Roman 12 pt in typst and docx (fb-595.68.22; it was Liberation Serif, and EB Garamond before that), the filed exemplar's face. Reading choice: the rule's text ("standard proportionally spaced font", "e.g.") would also allow other faces.
 3. **Characters per inch (Civil L.R. 3-4(c)(2)(C)).** Not asserted. The rule is written as a pitch limit (10 cpi), which reads as the monospace case; the exemplar is proportional Times 12 pt. Taking the rule to apply to proportional text would require a different font size and is a reading question, not a template defect.
 4. **Footer type size.** The footer is 10 pt; the rule's 12-point requirement is written for "text", and footers are not text in the rule's terms (3-4(c)(3)). Logged as an interpretation.
 5. **Caption.** The party column is closed by a rule (right and bottom) rather than a column of ")" marks used in the exemplar. This is a tier-2 convention choice (both are seen in N.D. Cal. filings); recorded as ACCEPTED.
@@ -62,10 +62,10 @@ Not produced by this template (separate filings, not part of the complaint): the
 7. **Overlay pairing.** The sample is a portion of the 29-page filing (pages 2 to 7, 17 to 18, 22 to 23 of the exemplar, with the lead-in, the caption and the signature from pages 1 and 23 to 24). Pages 6 and 10 of the overlay pair with exemplar pages that have little overlap because the sample skips pages (the text pairs with the page that shares most words). The overlay is a diagnostic, not a score.
 8. **Paragraph numbers differ.** The sample numbers its allegations from 1 (the template numbers them). The filed paragraph numbers are not transcribed.
 9. **Ragged right.** Body text is left-aligned, not justified. The exemplar's justification could not be read from the text layer; this is a tier-2/3 choice and is not asserted.
-10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and a `rules.md` in the court directory, and this doc-type folder is not that shape; the brief forbids touching `tools/`, so the gates were not run. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
-11. **Headings must fit one line.** `heading-line` asserts a single numbered line (its height is fixed at one pitch); a two-line heading fails the build with a message. A two-line count heading needs a shorter title or a template change.
+10. **Checks.** `sh tools/check.sh <this folder>` runs on this folder (`eval.yaml`): typst `RESULT: 9 checks passed, 0 failed`; docx `RESULT: 13 checks passed, 0 failed` (fb-595.68.22). No `tools/check-selftest.sh` result is recorded here.
+11. **Headings.** A heading is sticky (kept with what follows it); the single-line `heading-line` assertion is gone with the shared layout model (fb-595.68.22).
 
-## Review of the rendered pages (current PDF)
+## Review of the rendered pages (the 10-page Liberation Serif render, before fb-595.68.22; not re-verified against the 11-page Times New Roman render)
 
 - Page 1: counsel on lines 1 to 7, court title on line 8 and 9, caption on lines 11 to 15, title and jury demand legend at the right. Footer: title and case number. No spill. Pass.
 - Page 2: lead-in (unnumbered), INTRODUCTION heading, paragraphs 1 to 3; body text on the numbered lines. Pass.

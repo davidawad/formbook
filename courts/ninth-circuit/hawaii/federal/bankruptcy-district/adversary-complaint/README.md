@@ -1,17 +1,19 @@
 # Adversary complaint (U.S. Bankruptcy Court, D. Hawaii)
 
-Complaint initiating an adversary proceeding, in the Typst engine (`typst/`), rendered from one markdown sample (`usage/INPUT-adversary-complaint.md`).
+Complaint initiating an adversary proceeding, in the Typst (`typst/`) and docx (`docx/`) engines, rendered from two markdown samples (`usage/INPUT-adversary-complaint.md`, `usage/INPUT-adversary-complaint-2.md`) (fb-595.68.22).
 
 | File | Role |
 |---|---|
 | `typst/main.typ`, `typst/hib-adversary-complaint.typ` | Template (entry point and rule-driven layout) |
 | `usage/INPUT-adversary-complaint.md` | Markdown input, transcribed from the filed exemplar (frontmatter = caption, counsel, signature) |
-| `usage/OUTPUT-adversary-complaint.typst.pdf` | Our render (`tools/render.sh`), 10 pages |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | Our render (`tools/render.sh`), 11 pages (fb-595.68.22) |
+| `usage/INPUT-adversary-complaint-2.md`, `usage/OUTPUT-adversary-complaint-2.typst.pdf` | A second INPUT and its render, 10 pages (fb-595.68.22) |
+| `usage/OUTPUT-adversary-complaint[-2].docx`, `.docx.pdf` | The docx renders of both INPUTs (fb-595.68.22) |
 | `usage/OVERLAY-hawaii-brewery-adversary-complaint.pdf` / `.txt` | Red (ours) / blue (filed) overlay and page map (`tools/overlay.sh`) |
 | `usage/FILED-EXAMPLE-adversary-complaint-3.pdf` | The filed exemplar (26 pages; cover sheet pp. 1-2, complaint pp. 3-26) |
 | `usage/SOURCE.md` | Filer, case, date filed, URL, date retrieved |
 
-Engines: typst only. No latex or docx engine is delivered for this doc type.
+Engines: typst and docx (see Engines below; fb-595.68.22). No latex engine is delivered for this doc type.
 
 ## Rules
 
@@ -29,7 +31,7 @@ Quoted from the primary text. Retrieved 2026-10-14.
 | HIB-ADV-FORM-008 | Cover sheet: "Every complaint initiating an adversary proceeding must be accompanied by a cover sheet substantially conforming to the Director's Procedural Form (Adversary Proceeding Cover Sheet)." Filed separately; not rendered by this template (see gaps). | LBR 7003-1, D. Haw. Local Bankruptcy Rules, Dec. 1, 2025: https://www.hib.uscourts.gov/sites/hib/files/documents/local-rules/LBR2025_dec01_7001-2_to_7067-2.pdf |
 | HIB-ADV-FORM-009 | Exhibits: separated from the text by a page identifying the exhibit; no tabs; exhibits are exempt from the formatting rules of LBR 9004-1(b). The sample refers to the lease as Exhibit "A" without transcribing it. | LBR 9004-1(a)(4), (b) (same PDF as HIB-ADV-FORM-002) |
 | HIB-ADV-FORM-010 | Signature block after the prayer, with the date line "DATED:" (convention). | Exemplar; no local rule text on complaint signatures |
-| HIB-ADV-FONT-001 | Typeface: **no face named.** LBR 9004-1(b)(1) is headed "Font style" but sets only the size (14-point, memoranda); the full Dec. 1, 2025 compilation names no typeface. Typeface row: face required = none; substitute = EB Garamond (vendored, `docs/FONTS.md` "No face named"); fit = n/a. | LBR 9004-1(b)(1) (same PDF as HIB-ADV-FORM-002; text searched 2026-10-15) |
+| HIB-ADV-FONT-001 | Typeface: **no face named.** LBR 9004-1(b)(1) is headed "Font style" but sets only the size (14-point, memoranda); the full Dec. 1, 2025 compilation names no typeface. Typeface row: face required = none; face used = Times New Roman 12 pt (vendored, the house face), in typst and docx (fb-595.68.22; was EB Garamond); fit = n/a. | LBR 9004-1(b)(1) (same PDF as HIB-ADV-FORM-002; text searched 2026-10-15) |
 
 No local rule numbered LBR 7010 or LBR 7008 appears in the December 1, 2025 compilation (the index of LBR 7001-2 through 7067-2 lists 7001-2, 7003-1, 7016-1, 7017-1, 7026-1 and later). The FRBP 7010 and 7008 rules above therefore govern the form and content of the complaint.
 
@@ -44,7 +46,7 @@ LBR 7016-1(b) (scheduling conference on filing of a complaint) also applies to t
 
 ## What the overlay shows
 
-`usage/OVERLAY-hawaii-brewery-adversary-complaint.pdf` (red = our render, blue = filed exemplar, black = both). Page pairing by text (`OVERLAY-hawaii-brewery-adversary-complaint.txt`):
+`usage/OVERLAY-hawaii-brewery-adversary-complaint.pdf` (red = our render, blue = filed exemplar, black = both; recorded for the 10-page EB Garamond render, before fb-595.68.22). Page pairing by text (`OVERLAY-hawaii-brewery-adversary-complaint.txt`):
 
 | Our page | Filed page | Word overlap | Reading |
 |---|---|---|---|
@@ -59,32 +61,22 @@ LBR 7016-1(b) (scheduling conference on filing of a complaint) also applies to t
 1. **Cover sheet (LBR 7003-1, Director's Form B1040).** Not rendered. The filed exemplar's pp. 1-2 are the B1040 form, which is a separate filing. The overlay therefore compares our caption page against the exemplar's page 3, not against the cover sheet. Open: the court may want the cover sheet generated, which would be a separate doc type.
 2. **Division (FRBP 7008).** FRBP 7008 requires the allegation of jurisdiction to name "the district and division where it is pending." The exemplar's ¶ 10 names the case and district but not a division. The sample follows the exemplar. Open: whether this court's complaints must state a division.
 3. **Certificate of service (LBR 9013-3).** None in the sample; the exemplar transcribed has none. LBR 9013-3(a) requires a certificate of service unless Rule 7005 governs service and every party served is a registered ECF user. A complaint is served with the summons under FRBP 7004, so whether 9013-3 applies is unclear. Open: needs a ruling on the complaint's service method before a certificate block is added.
-4. **Body abridged.** The sample transcribes ¶¶ 1-63, the first block quotation, the prayer ¶¶ A-H and the signature; ¶¶ 64-133 and the Lease (Exhibit A) are marked as omitted in the sample text. The exemplar is 24 pages of complaint; the sample is 10 pages, inside the 8-14 page band.
+4. **Body abridged.** The sample transcribes ¶¶ 1-63, the first block quotation, the prayer ¶¶ A-H and the signature; ¶¶ 64-133 and the Lease (Exhibit A) are marked as omitted in the sample text. The exemplar is 24 pages of complaint; the sample is 11 pages (fb-595.68.22), inside the 8-14 page band.
 5. **One filer only.** Tier 2 is judged against one exemplar (Hawaii Brewery Development Co., Adv. 26-90013). A second filer was identified (Collins v. Hughes Network Systems, LLC, Adv. 24-90002, Square One Legal, 9 pp.) but not saved, per `usage/SOURCE.md`. Tier 2 therefore cannot be fully judged; this is stated, not hidden.
-6. **Typeface.** The local rules name no typeface (HIB-ADV-FONT-001), so the template keeps EB Garamond (vendored), as `docs/FONTS.md` prescribes for a court that names no face. The exemplar is Calibri (one filer; tier 3).
+6. **Typeface.** The local rules name no typeface (HIB-ADV-FONT-001); the template sets vendored Times New Roman 12 pt, the house face, in typst and docx (fb-595.68.22; was EB Garamond). The exemplar is Calibri (one filer; tier 3).
 
 [Court README](../README.md)
 
 ## Engines
 
-The docx engine is `docx/make-reference.sh` (builds `docx/reference.docx`) and `docx/hib-adversary-complaint.lua` (cover, caption and signature). The line "Engines: typst only" above predates this section. Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`, which writes `usage/OUTPUT-adversary-complaint.docx`. The sample used is `INPUT-adversary-complaint.md`, the one named by the typst OUTPUT naming above.
+The docx engine (fb-595.68.22) is `docx/reference.xml` (the cross-engine style recipe, `base="xengine"`, in the typst face, first page without a number; built by `fb render`) and `docx/hib-adversary-complaint.lua` (cover, caption and signature). `docx/make-reference.sh` and `docx/reference.docx` are gone. Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md` (and `INPUT-adversary-complaint-2.md`), which writes `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (11 pages; the second INPUT 10 pages, as typst).
 
-What the docx sets (in `styles.xml` and `sectPr`; set, not rendered):
+Both engines are on the shared cross-engine layout model and set Times New Roman 12 pt (HIB-ADV-FONT-001, HIB-ADV-FORM-002):
 
-- Font EB Garamond everywhere (docDefaults and each style), 12 pt (HIB-ADV-FONT-001, HIB-ADV-FORM-002).
-- Body text double-spaced (`w:line` 480, auto) with a 0.5 in first-line indent. Block quotations single-spaced, 0.25 in inset each side, as in the typst template. Footnotes single-spaced, 12 pt. Headings centered and bold, single-spaced, one blank line above and below.
-- US Letter, 1 in margins (HIB-ADV-FORM-004). Centered PAGE field in the footer; the first page has an empty footer (`titlePg`), as in the typst template.
-- Counsel block, court name, caption table, title, and the DATED / signature table are paragraphs in the custom styles CounselBlock, CourtTitle, CaptionText and SignatureBlock, built by the Lua filter (raw OOXML tables with the party-column rule).
-
-What differs from typst:
-
-- Line pitch. Word's "double" is two single lines of EB Garamond (about 2.6 em); typst uses 2.3 em. The docx therefore runs longer than the typst PDF. Not measured.
-- The blank-line height is approximated (314 twips, 1.31 em at 12 pt).
-- Word lays out the caption table, footnote separator and tab stops by its own rules.
+- 27.6 pt double pitch (LBR 9004-1(b)(2)) and 13.8 pt single lines for the counsel block, court title, caption, quotations, footnotes and signature.
+- The caption one ruled table in both engines, rows kept whole (in the docx each row a table of its own, 0.1 pt apart, so LibreOffice draws no rule above a row carried to a new page).
+- Quotations half an inch in on both sides; footnotes at the text size, 7 pt apart; the last paragraph kept with the signature block.
+- US Letter, 1 in margins (HIB-ADV-FORM-004); the first page without a page number.
 - The cover sheet (LBR 7003-1, gap 1) is not rendered, in the docx as in the typst.
-- Page numbers are fields, so Word and LibreOffice may not agree on page breaks.
 
-BLOCKED:
-
-- docx.pdf Gates 0 to 3 (`check.sh --engine docx`): BLOCKED, reason: LibreOffice (`soffice`) is not installed on the build box, so no `OUTPUT-*.docx.pdf` exists and no page was rendered or viewed. pages_reviewed for docx = 0. The `.docx` is valid zip with well-formed XML parts (checked with `xmllint`), and it contains the footers.
-- Font check: Word substitutes silently if EB Garamond is not installed on the machine that opens the file (docs/DOCX.md). Not a gate here; noted for the PR.
+Checks: `sh tools/check.sh <this folder> --engine docx`: `RESULT: 26 checks passed, 0 failed` (both INPUTs); Gate 4 XENG-001..003 pass (267/267 and 253/253 lines break after the same word as typst; `eval.yaml` `params.cross_engine: gate`). typst: `RESULT: 18 checks passed, 0 failed`. The earlier docx BLOCKED items (no LibreOffice, no `.docx.pdf`, the EB Garamond font substitution) are resolved by this port.

@@ -6,7 +6,7 @@ Complete doc-type folder: template, sample, exemplar, render, overlay. Court-lev
 
 - `typst/main.typ` entrypoint; `typst/idb-adversary-complaint.typ` template (parameters at the top; each is cited to the rule it follows).
 - `usage/INPUT-adversary-complaint.md` transcribed sample (frontmatter: caption, counsel, lead-in, signature; body: `## ` headings, numbered allegations, `# COUNT` and `# PRAYER` headings, `- ` lettered items).
-- `usage/OUTPUT-adversary-complaint.typst.pdf` our render (9 pages), from `sh tools/render.sh <this-dir> usage/INPUT-adversary-complaint.md`.
+- `usage/OUTPUT-adversary-complaint.typst.pdf` our render (12 pages; fb-595.68.22), from `sh tools/render.sh <this-dir> usage/INPUT-adversary-complaint.md`.
 - `usage/OVERLAY-cutting-adversary-complaint.pdf` and `.txt`, from `sh tools/overlay.sh <this-dir> cutting-adversary-complaint`.
 - `usage/FILED-EXAMPLE-adversary-complaint.pdf` the filed complaint (32 pages); provenance in `usage/SOURCE.md`.
 
@@ -18,7 +18,7 @@ Complete doc-type folder: template, sample, exemplar, render, overlay. Court-lev
   - Cites Fed. R. Bankr. P. 7003, 7004, 7007.1, 7010, 9004(b) and Official Form 1040. Rule texts for those were not fetched.
 - D. Idaho LBR 5005-1(c), Documents for Filing [v. 3]: http://www.id.uscourts.gov/Content_Fetcher/index.cfml/Bankruptcy_Local_Rule_5005-1_3699.htm?Content_ID=3699
   - Counsel block in the upper left, starting 1 inch from the top; required items: name, ISB number, email, office address, telephone, facsimile, and the party represented.
-  - Font 12 to 14 point. The rule names no typeface (checked against the rule text, 2026-10-15), so the template keeps EB Garamond 13 pt; no substitute from `docs/FONTS.md` applies.
+  - Font 12 to 14 point. The rule names no typeface (checked against the rule text, 2026-10-15); the template sets the house face, vendored Times New Roman, at the exemplar's 12 pt, in typst and docx alike (fb-595.68.22; was EB Garamond 13 pt).
   - Caption: "UNITED STATES BANKRUPTCY COURT" / "DISTRICT OF IDAHO", "In re:", debtor, "Debtor" designation, case number and chapter, designation of the paper.
   - The rule does not address margins beyond the top start, line spacing, footers, or signature blocks. Those come from the filed exemplar and the template's defaults (1-inch margins; page number footer).
 - Fed. R. Civ. P. 10 (cited in the template header as applicable to the caption): numbered allegations. Text not fetched in this pass.
@@ -27,7 +27,7 @@ Complete doc-type folder: template, sample, exemplar, render, overlay. Court-lev
 
 ## What the overlay shows (`usage/OVERLAY-cutting-adversary-complaint.pdf`)
 
-Red is our render, blue is the filed exemplar, black is where they agree. The overlay pairs each of our 9 pages with the filed page sharing the most words (`.txt` page map):
+Red is our render, blue is the filed exemplar, black is where they agree. Recorded for the 9-page EB Garamond render, before fb-595.68.22 (the Times New Roman render is 12 pages). The overlay pairs each of our 9 pages with the filed page sharing the most words (`.txt` page map):
 
 | our page | filed page | word overlap |
 |---|---|---|
@@ -45,8 +45,8 @@ The sample is a portion of the 32-page filing, so pages 8 and 9 do not have a ma
 
 ## Gaps
 
-- The filed complaint uses bullet points in some allegations (e.g. Count I); the template renders them as lettered items `(a)`, `(b)`, which is a deliberate template choice (lettered is the convention the template uses for lists in pleadings). The filed text does not letter them.
-- Count headings are set in bold and centered on two lines; the filed headings wrap at a different point.
+- The filed complaint uses bullet points in some allegations (e.g. Count I); the template renders them as lettered items `a.`, `b.` (an inch in, the text hanging; fb-595.68.22), which is a deliberate template choice (lettered is the convention the template uses for lists in pleadings). The filed text does not letter them.
+- COUNT and PRAYER headings are bold, underlined and centered, with the count's description single-spaced under them (fb-595.68.22).
 - No cover sheet, no summons, no Rule 7007.1 corporate-ownership statement, no consent-to-final-order statement (FRBP 7008(a), LBR 7012-1). None is in the sample; the filed exemplar does not have a consent statement either.
 - Second filer: not collected. Tier 2 would be judged against 2 or 3 filers; this folder has one filer (the United States Trustee).
 
@@ -54,9 +54,7 @@ The sample is a portion of the 32-page filing, so pages 8 and 9 do not have a ma
 
 ### docx (`docx/`)
 
-- Set in `docx/reference.docx` (built by `docx/make-reference.sh`) and read by `docx/idb.lua`. Set in styles.xml/sectPr, not rendered: EB Garamond 13 pt in every style; body and allegations double spaced (line 480 auto) with 0.6 em (156 twips) after; US Letter, 1 in margins; headings centered bold (levels 1 and 2) or bold at the left (level 3), single spaced; a centered PAGE field at 11 pt in the footer.
-- Written by the filter, not rendered here: counsel block single spaced at the top margin; court heading; caption as a two-column table with a 0.75 pt vertical rule and the debtor rule as a paragraph border; title in caps; lead-in and numbered allegations with a first-line indent, numbers typed with a tab (not Word list numbering); lettered items `(a)`; the date line and signature block at 3.0 in; numbering stops after the PRAYER heading.
-- Differs from typst: line breaks and page count come from Word or LibreOffice, not from typst's leading (0.85 em); the typed numbers do not renumber when a paragraph is inserted; the footnote-like `¹` paragraph is a body paragraph, as in typst; the caption rule is a table border, not a line.
-- Not yet checked: no page of the docx has been rendered or looked at (pages_reviewed = 0).
-- BLOCKED (docx.pdf gates 0 to 3): LibreOffice (`soffice`) is not installed on the build box, so no `.docx.pdf` exists and the gates cannot run. The `.docx` itself is written and validated (zip and well-formed XML parts only).
-- BLOCKED (no TOC or TOA in this doc type): nothing to populate.
+- Built from `docx/reference.xml` (the cross-engine style recipe, `base="xengine"`, in the typst face; built by `fb render`) and `docx/idb.lua`. `docx/make-reference.sh` and `docx/reference.docx` are gone (fb-595.68.22). `sh tools/render.sh --engine docx <this-dir> usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (12 pages, as typst).
+- Both engines on the shared cross-engine layout model (fb-595.68.22): Times New Roman 12 pt (LBR 5005-1(c)(2): 12 to 14 point); 27.6 pt double pitch and 13.8 pt single lines, as the exemplar measures; the paragraph number in a half-inch box after the half-inch indent; lettered items a., b., ... an inch in with the text hanging; the caption as two ruled rows (debtors with the case and chapter numbers above the rule, the parties with "v." between them and the adversary number below it); COUNT and PRAYER headings bold, underlined and centered, section headings bold and underlined at the margin; the last paragraph kept with the signature block, "Date:" beside it.
+- Checks: `sh tools/check.sh <this-dir> --engine docx`: `RESULT: 13 checks passed, 0 failed`; Gate 4 XENG-001..003 pass (12 pages, 286/286 lines break after the same word as typst; `eval.yaml` `params.cross_engine: gate`). typst: `RESULT: 9 checks passed, 0 failed`. The earlier docx BLOCKED item (no LibreOffice, no `.docx.pdf`) is resolved by this port (fb-595.68.22).
+- No TOC or TOA in this doc type.

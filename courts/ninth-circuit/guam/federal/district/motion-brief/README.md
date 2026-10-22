@@ -7,10 +7,10 @@ Folder: `courts/ninth-circuit/guam/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (full transcription of the 12-page memorandum, Doc. 13-1; footnotes 1 and 2 not transcribed, see gaps) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored Times New Roman only, no warnings (`sh tools/render.sh`) (fb-595.68.22) |
 | overlay | ok: `usage/OVERLAY-leon-guerrero-memorandum.pdf` and `usage/OVERLAY-leon-guerrero-memorandum.txt` (`sh tools/overlay.sh`) |
-| typeface | face required: none (GNLR 5.1(a), 2022: no typeface or point size; the memorandum's exemplar is Times New Roman, a convention only). Substitute: n/a; EB Garamond kept, the default when a court names no face (`docs/FONTS.md`). Visual only. |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; all 11 viewed again on 2026-10-15 for the fonts pass, no change) |
+| typeface | face required: none (GNLR 5.1(a), 2022: no typeface or point size; the memorandum's exemplar is Times New Roman, a convention only). Font: **Times New Roman** 12 pt (vendored), the exemplar's face, in typst and docx alike (fb-595.68.22; was EB Garamond). |
+| pages reviewed | 11 of 11 of the EB Garamond render (every page rendered at 60 dpi and viewed; all 11 viewed again on 2026-10-15 for the fonts pass, no change); the Times New Roman render (11 pages) is not re-reviewed page by page (fb-595.68.22) |
 
 Tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the names in `tools/`); the brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools write, so the tool names are used.
 
@@ -22,7 +22,7 @@ Federal rules, text from the Legal Information Institute mirror, fetched 2026-10
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| GNLR 5.1(a) | White paper, 8 1/2 x 11 in.; all papers double-spaced except counsel identification, title of the case, footnotes, quotations and exhibits; all pages numbered consecutively at the bottom. | `page-w`, `page-h`; `body-leading` (24 pt pitch); page number centred in the footer. |
+| GNLR 5.1(a) | White paper, 8 1/2 x 11 in.; all papers double-spaced except counsel identification, title of the case, footnotes, quotations and exhibits; all pages numbered consecutively at the bottom. | `page-w`, `page-h`; `pitch-double` (24 pt; fb-595.68.22); page number centred in the footer. |
 | GNLR 5.1(b) | Court title centred, commencing not less than three inches from the top of the page. | `counsel-block`: a box from the top margin to 3 in.; a longer counsel block pushes the court title down (one line of clearance), never up. |
 | GNLR 5.1(c)(1) | Counsel name, address and telephone at the upper left; space right of centre reserved for the clerk's filing stamp. | `counsel-w` = 3.25 in. (the page centre is 4.25 in. from the left edge); the caption's right column starts at 4.5 in. |
 | GNLR 5.1(c)(2) | Title of the action below and to the left of the court title. | `caption-left`: all parties, `between` word ("v.") from the sample. |
@@ -40,7 +40,7 @@ GNLR 2022 contains no page limit, no memorandum-length rule, no typeface or poin
 - Counsel block (ten lines in the exemplar, two of them wrapped) single-spaced in the upper left; the court title is pushed down to 3.19 in. because the counsel block is taller than the 2 in. box (GNLR 5.1(b) allows it); court title bold, centred, one line in the exemplar.
 - Caption: parties left, with "v." between; file number, "CIVIL", the notice of the removal (`case_notes`), the bold title and the Rule 12 grounds right.
 - Body double-spaced (24 pt pitch, measured on the PDF), first-line indent 0.5 in., unnumbered paragraphs.
-- Headings: level 1 centred bold capitals (`I. INTRODUCTION`, `II. ARGUMENT`, `III. CONCLUSION`); level 2 bold, left (`A.`, `B.`, `C.`). A heading is kept with the paragraph after it.
+- Headings: level 1 centred bold capitals (`I. INTRODUCTION`, `II. ARGUMENT`, `III. CONCLUSION`); level 2 bold, left (`A.`, `B.`, `C.`); both at the body size and pitch with a double line above (fb-595.68.22). A heading is kept with the paragraph after it.
 - Signature block: "Respectfully submitted this ... day of ..." then the firm, "/s/" signer and lines, starting 3 in. from the left margin. Placed where the sample has `<!-- signature -->` (after the conclusion, and again after the certificate), or at the end if the sample has no marker.
 - Certificate of service: a new page; addresses single-spaced.
 
@@ -56,17 +56,17 @@ GNLR 2022 contains no page limit, no memorandum-length rule, no typeface or poin
 1. **One exemplar, one filer.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers; this is not met. Candidates seen and not saved: *Prutehi Guahan v. U.S. Department of the Air Force*, 1:22-cv-00001, Doc. 19 (a motion to dismiss on the RECAP index; not downloaded). *Develles v. Government of Guam*, 1:24-cv-00019, Doc. 45 (a motion to dismiss, but the RECAP PDF is a one-page scan with no text layer; not usable). *Guam Visitors Bureau*, 1:26-cv-00017, Doc. 20 (a first motion to dismiss for lack of jurisdiction, 12 pages, a scan with no text layer; not usable).
 2. **Only the memorandum (Doc. 13-1) is the exemplar.** The motion itself (Doc. 13, 3 pages, same counsel, same caption) is not transcribed or saved. The template renders the caption, the memorandum and the certificate; a standalone motion would use the same chrome with its own body.
 3. **Footnotes not transcribed.** The exemplar has footnote 1 (the Citizen Participation in Government Act, on its page 9) and footnote 2 (the SLAPP argument, 7 GCA § 17101 et seq., on its page 11). The template has no footnote support, and the sample omits both, so the transcription is not complete at those two places.
-4. **Typeface.** No court-named face: GNLR 5.1 (2022) sets none, so EB Garamond is kept (`docs/FONTS.md`, "No face named"). The exemplar is Times New Roman; the same convention question applies (see `../complaint/README.md`, gap 2).
+4. **Typeface.** No court-named face: GNLR 5.1 (2022) sets none. The template sets vendored Times New Roman 12 pt, the exemplar's face, in typst and docx (fb-595.68.22; was EB Garamond).
 5. **Italics are supplied by the transcription.** The exemplar's text layer has no italic markup; case names and signals are italicised by the transcriber, following the usual convention. Not checked against the filed typography.
 6. **Emphasis lost.** The memorandum says "(emphasis added)" in two places; the emphasis is not in the text layer and is not reproduced.
 7. **Caption.** No ")" column and no rules; the exemplar has none either. ACCEPTED.
 8. **Left-aligned** (ragged right), as in the complaint.
-9. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court directory with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids editing `tools/`. Render, overlay and the page review are the checks run here. No check stamp is written.
+9. **Checks.** `sh tools/check.sh <this folder>` runs on this folder (`eval.yaml`): typst `RESULT: 9 checks passed, 0 failed`; docx `RESULT: 13 checks passed, 0 failed` (fb-595.68.22). No `tools/check-selftest.sh` result is recorded here.
 10. **Line pitch and clearance** are measured on the PDF: counsel lines 13.8 pt, body 24.0 pt, the first line of the court title 3.19 in. from the top of the page (clear of the counsel block).
 
 ## Review of the rendered pages (Gate 2 equivalent)
 
-Rendered at 60 dpi, every page viewed, after the last template change:
+Rendered at 60 dpi, every page viewed, after the last template change before fb-595.68.22 (the EB Garamond render; not re-verified against the Times New Roman render):
 
 - Page 1: counsel block top left, single-spaced, ending above the court title; court title "IN THE UNITED STATES DISTRICT COURT OF GUAM" bold, centred; caption with the parties left and the file number, civil designation, removal notice, bold title and Rule 12 grounds right; heading I and the first paragraphs. **Pass.** (The first render overlapped the last counsel line with the court title; the counsel-block clearance fixed it.)
 - Page 2: heading II, A., paragraphs with the italic case names and signals. **Pass.**
@@ -80,34 +80,19 @@ Rendered at 60 dpi, every page viewed, after the last template change:
 - Page 10: C. end; heading III, CONCLUSION; signature block (firm, "/s/ Leslie A. Travis", the signer's lines). **Pass.**
 - Page 11: CERTIFICATE OF SERVICE on its own page; the two addresses single-spaced; the signature block again. **Pass.**
 
-Tier 2 is **not** judged (one filer only; see gap 1). OPEN items for tier 2: the second exemplar (gap 1), the footnotes (gap 3), the typeface (gap 4).
+Tier 2 is **not** judged (one filer only; see gap 1). OPEN items for tier 2: the second exemplar (gap 1), the footnotes (gap 3). The typeface (gap 4) is now the exemplar's Times New Roman (fb-595.68.22).
 
 ## Engines
 
-### docx (pandoc; `docx/`)
+### docx (pandoc; `docx/`; fb-595.68.22, checked with LibreOffice)
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once and committed) and `docx/gud.lua` (cover, caption, addresses, signature blocks at each `<!-- signature -->` marker and at the end, the page break before CERTIFICATE; body text and headings stay pandoc's). `sh tools/render.sh --engine docx` writes `usage/OUTPUT-motion-brief.docx`.
+Built from `docx/reference.xml` (the cross-engine style recipe, `base="xengine"`, in the typst face; built by `fb render`) and `docx/gud-motion-brief.lua` (on `docx.xengine`). `docx/make-reference.sh`, `docx/reference.docx` and `docx/gud.lua` are gone. `sh tools/render.sh --engine docx` writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (11 pages, as typst).
 
-Set in `styles.xml` and `sectPr`, **not rendered** (no LibreOffice on the build box, so no page of the docx has been looked at):
+Both engines are on the shared cross-engine layout model and set Times New Roman 12 pt:
 
-- EB Garamond 12 pt, black, in every style; exact 24 pt line pitch (double); 16.2 pt after each body paragraph (the typst `body-leading` gap).
-- Body text: 0.5 in first-line indent. Headings: bold; level 1 centred; 24 pt above; kept with the next paragraph.
-- Counsel, caption, addresses and signature: custom style `GudSingle`, exact 13.8 pt. Lettered items: style `GudList`.
-- Footnotes: single spaced, 12 pt.
-- US Letter; 1 in margins; centred PAGE field in the footer.
-- Court title: 3 in from the top edge, from the counsel line count (one line each).
-- Paragraphs are not numbered (GNLR sets no numbering for a motion; the typst template does not number them either).
+- 24 pt double pitch (GNLR 5.1(a)); 13.8 pt single lines for counsel, court title, caption, addresses and signature; paragraphs no longer 16.2 pt apart. Paragraphs are not numbered.
+- Headings at the body size and pitch with a double line above.
+- The court title at 3 in. from a counsel box of least height (Word: a table row of that least height); the case notes in the case column.
+- The CERTIFICATE heading opens a new page without the space above; addresses (`<!-- single -->`) a single line apart and kept whole; signature blocks kept whole, the firm a double line below the date.
 
-Differences from typst (judged in the XML only):
-
-- The caption is a borderless three-column table (3.25 in, 0.25 in gutter, 3.0 in), not a grid.
-- The court-title position counts counsel paragraphs, not wrapped lines; a counsel line that wraps in Word moves the title lower than 3 in (allowed by GNLR 5.1(b), but not the typst position). The sample's ten-line counsel block has one line that wraps at 3.25 in.
-- The CERTIFICATE page break is an empty 1 pt paragraph at the top of the new page.
-- Pagination, widow control and the footer position are Word's and not checked.
-
-BLOCKED (docx engine):
-
-- `docx.pdf` gates 0 to 3: BLOCKED, `soffice` (LibreOffice) is not installed on the build box, so `tools/render-docx.sh` stops after writing the `.docx` and no `.docx.pdf` exists.
-- docx visual review: pages reviewed = 0. The typst output was rendered and viewed as the reference only.
-- Word repair prompt: not checked (no Word). The `.docx` is a valid zip and every XML part is well-formed (`unzip -tq`, `xmllint --noout`).
-- TOC, TOA, cross-references: none in this doc type. Line numbering: not required by GNLR 5.1.
+Checks: `sh tools/check.sh <this folder> --engine docx`: `RESULT: 13 checks passed, 0 failed`; Gate 4 XENG-001..003 pass (11 pages, 301/301 lines break after the same word as typst; `eval.yaml` `params.cross_engine: gate`). typst: `RESULT: 9 checks passed, 0 failed`. The earlier docx BLOCKED items (no LibreOffice, no `.docx.pdf`, no docx gates) are resolved by this port. Word repair prompt: not checked (no Word). TOC, TOA, cross-references: none in this doc type. Line numbering: not required by GNLR 5.1.
