@@ -43,7 +43,21 @@ awk '
   skip && /^#[ \t]/ { skip = 0 }
   !skip { print }
 ' "$W/body.md" > "$W/count.md"
-WORDS=$(pandoc -f markdown+smart -t plain --wrap=none "$W/count.md" | wc -w | tr -d ' ')
+# the typst template's count-words, rule for rule, so both engines certify the same number
+WORDS=$(perl -CSD -0777 -ne '
+  s/<!--.*?-->/ /gs;
+  s/^\[\^[^\]]+\]:/ /gm;                  # footnote definition labels
+  s/\[\^[^\]]+\]//g;                      # footnote references
+  s/\[([^\]]*)\]\([^)]*\)/$1/g;           # links keep their text
+  s/^#{1,6}[ \t]+//gm;
+  s/^>[ \t]?//gm;
+  s/^[ \t]*(?:[-*+]|[0-9]+[.)])[ \t]+//gm; # list markers are not words
+  s/\\(.)/$1/g;                           # backslash escapes
+  s/\*//g;
+  s/(^|[\s(\[\x{201C}"])_/$1/g;
+  s/_([\s.,;:)\]\x{201D}"!?]|$)/$1/g;
+  my $n = grep { $_ ne "" } split /\s+/;
+  print $n;' "$W/count.md")
 case $(basename "$COURT") in
   reply-brief) LIMIT=6500 ;;   # FRBP 8015(a)(7)(B)(ii): half the principal-brief limit
   *) LIMIT=13000 ;;            # FRBP 8015(a)(7)(B)(i)
@@ -60,7 +74,23 @@ jq -r '.back' "$W/parts.json" > "$W/back.md"
 # ---- 4. headings, citations and the authorities cited (the page map's keys) ----
 grep -E '^#{1,5}[[:space:]]' "$W/body.md" | sed -E 's/^#+[[:space:]]+//' > "$W/heads.txt" || true
 NH=$(wc -l < "$W/heads.txt" | tr -d ' ')
-perl -0777 -ne 'while (/\[((?:[^\[\]]|\[[^\]]*\])+)\]\(toa:([A-Za-z0-9_]+)\)/g) { my ($t, $k) = ($1, $2); $t =~ s/\s+/ /g; print "$k\t$t\n" }' "$W/body.md" > "$W/links.tsv"
+# Each citation as a needle for the page map: its link text and the first letters and digits after it in its paragraph
+# (up to a footnote mark), or, at the end of a paragraph, the ones before it; so the same words elsewhere in the brief,
+# unlinked, are not taken for it (typst counts the links only).
+perl -0777 -ne '
+  sub alnum { my $s = shift; $s =~ s/\[([^\]]*)\]\([^)]*\)/$1/g; $s = lc $s; $s =~ s/[^a-z0-9]//g; $s }
+  while (/\[((?:[^\[\]]|\[[^\]]*\])+)\]\(toa:([A-Za-z0-9_]+)\)/g) {
+    my ($t, $k, $end, $start) = ($1, $2, pos(), $-[0]);
+    my $after = substr($_, $end, 300); $after =~ s/\n.*//s; $after =~ s/\[\^.*//s;
+    my $a = substr(alnum($after), 0, 14);
+    my $pre = "";
+    if (length($a) < 6) {
+      my $from = $start > 300 ? $start - 300 : 0;
+      my $before = substr($_, $from, $start - $from); $before =~ s/.*\n//s;
+      $pre = alnum($before); $pre = substr($pre, -14) if length($pre) > 14;
+    }
+    print "$k\t" . $pre . alnum($t) . $a . "\n";
+  }' "$W/body.md" > "$W/links.tsv"
 perl -0777 -ne 'while (/\(toa:([A-Za-z0-9_]+)\)/g) { print "$1\n" }' "$W/body.md" | awk '!s[$0]++' > "$W/keys.txt"
 : > "$W/T.tsv"
 while IFS= read -r k; do

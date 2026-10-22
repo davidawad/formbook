@@ -12,6 +12,30 @@
 --   A<TAB><key><TAB><pages>           "3, 5, 9" or "passim"
 
 local TAB = pandoc.RawInline("openxml", '<w:r><w:tab/></w:r>')
+-- The cross-engine layout model (lib/docx/xengine.lua): the break rules of typst on every run (a no-break hyphen
+-- before a digit, pandoc's abbreviation no-break spaces undone, a section sign bound to its number).
+local xe = require("docx.xengine")
+-- Before the page number of a table row: three no-break spaces, so the leader is never shorter than that.
+local LEAD = pandoc.Str("\u{00A0}\u{00A0}\u{00A0}")
+local ACOL = 1120   -- the authorities' page column, twips (typst toa-page-col, 56 pt)
+
+-- No break inside a token of adjacent parentheses ("8015(a)(7)(B)"), as typst's xengine boxes it: LibreOffice would
+-- break between ")" and "(" (Unicode line breaking allows it); a word joiner forbids it.
+local function joined(s)
+  return (s:gsub("%)%(", ")\u{2060}("))
+end
+
+-- The width of a page list in twips, Times New Roman 14 pt: digits 500/1000 em, comma and space 250, "passim" in
+-- italics 2778 (the font's advances; typst measures the same list).
+local function page_width(s)
+  if s == "passim" then return math.ceil(2778 * 0.28) end
+  local units = 0
+  for c in s:gmatch(".") do
+    if c:match("%d") then units = units + 500 elseif c == "," or c == " " then units = units + 250
+    else error("brief.lua: unexpected character in a page list: " .. s) end
+  end
+  return math.ceil(units * 0.28)
+end
 
 local function read_map()
   local path = os.getenv("BAP8_MAP")
@@ -146,6 +170,7 @@ function Pandoc(doc)
           inl[#inl + 1] = TAB
           for _, x in ipairs(h.content) do inl[#inl + 1] = x end
         end
+        inl[#inl + 1] = LEAD
         inl[#inl + 1] = TAB
         inl[#inl + 1] = pandoc.Str(H[k])
         out[#out + 1] = para_div(toc_style(h.level, h.in_arg, h.label ~= nil), inl)
@@ -174,14 +199,17 @@ function Pandoc(doc)
           head[#head + 1] = TAB
           head[#head + 1] = pandoc.Strong(pandoc.Underline(pandoc.Str("Page(s)")))
         end
+        out[#out + 1] = para_div(first and "TOAGroupFirst" or "TOAGroup", head)
         first = false
-        out[#out + 1] = para_div("TOAGroup", head)
         for _, t in ipairs(members) do
           local pages = A[t.key]
           if pages == nil then error("brief.lua: no page entry for " .. t.key) end
-          local pinl
-          if pages == "passim" then pinl = pandoc.Emph(pandoc.Str("passim")) else pinl = pandoc.Str(pages) end
-          out[#out + 1] = para_div("TOAEntry", { pandoc.Str(t.cite), TAB, pinl })
+          local prun = pages == "passim" and xe.runs("passim", { i = true }) or xe.runs(pages)
+          -- the cite wraps before the page column: 56 pt, or the page list's own width when longer (typst
+          -- calc.max(toa-page-col, measure(page-text).width)); a section sign stays with its number
+          local cite = joined(t.cite):gsub("§ ", "§\u{00A0}"):gsub("¶ ", "¶\u{00A0}")
+          out[#out + 1] = xe.raw(xe.para({ xe.style("TOAEntry"), xe.ind(504, 504, nil, math.max(ACOL, page_width(pages))) },
+            xe.runs(cite) .. xe.runs(xe.LEAD) .. prun))
         end
       end
     end
@@ -208,6 +236,16 @@ function Pandoc(doc)
       local inl = { pandoc.Str("\u{2022}"), TAB }
       for _, x in ipairs(p.content) do inl[#inl + 1] = x end
       final[i] = para_div("BulletItem", inl)
+    elseif b.t == "Div" and b.attr.attributes["custom-style"] == "CertBox" then
+      -- a certificate's check box: a ruled box around an X (a bordered run, typst checkbox), then a tab to the text
+      local p = b.content[1]
+      local c = p.content
+      if not (c[1] and c[1].t == "Str" and c[1].text == "CHECKBOXMARK" and c[2] and c[2].t == "Space") then
+        error("brief.lua: a check-box row must start with CHECKBOXMARK")
+      end
+      local inl = { pandoc.RawInline("openxml", xe.runs("X", { box = true })), TAB }
+      for j = 3, #c do inl[#inl + 1] = c[j] end
+      final[i] = para_div("CertBox", inl)
     end
   end
 
@@ -219,5 +257,6 @@ function Pandoc(doc)
       return nil
     end,
   })
-  return result
+  -- the break rules of typst on every run pandoc writes
+  return result:walk({ Inlines = xe.inlines, Str = function(s) return pandoc.Str(joined(s.text)) end })
 end

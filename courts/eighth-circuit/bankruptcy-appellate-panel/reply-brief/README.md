@@ -4,9 +4,9 @@
 - Doc type: `reply-brief`. Appellant's reply brief, FRBP 8014(c).
 - **Exemplar: BLOCKED: no qualifying text PDF found.** Five search passes are recorded in `usage/SOURCE.md`. A public appellate filing confirms a reply brief was filed in BAP No. 22-6009, but the accessible copy found is a scanned, non-searchable Eighth Circuit filing, not the BAP reply PDF. Nothing is stored in `usage/`.
 - Sample: still the synthetic rule-check sample `usage/INPUT-reply-brief.md` (placeholder text, not a filing). Its first caption side now sets `v: false` (see Template changes).
-- Render: ok, `usage/OUTPUT-reply-brief.typst.pdf`, 9 pages, Typst 0.15.1 with no warnings (2026-10-21). `pdffonts`: Times New Roman (regular, bold, and italic; embedded).
+- Render: ok, `usage/OUTPUT-reply-brief.typst.pdf`, 9 pages, typst with no warnings (2026-10-22, fb-595.54.4: shared cross-engine layout model; the template set EB Garamond until this run, against this README and the sample certificate). `pdffonts`: Times New Roman (regular, bold, and italic; embedded).
 - Overlay: fail as expected because there is no filed exemplar. `sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief reply-brief` reports `no FILED-EXAMPLE-reply-brief.pdf` (2026-10-21).
-- Pages reviewed: all 9 output pages rasterized at 60 dpi and inspected (2026-10-21). They are synthetic, so there is no filed page comparison.
+- Pages reviewed: all 9 pages of both engines rasterized at 60 dpi and inspected (2026-10-22). They are synthetic, so there is no filed page comparison.
 - Status: rule-driven template plus a synthetic sample. `court.json` untouched; `status` not set.
 - Typeface: the rules require a 14-point or larger serif face but do not name one; the template uses **Times New Roman**, 14 pt, matching the filed brief's typeface.
 
@@ -47,21 +47,21 @@ Primary sources, read on 2026-10-14:
 
 ## Gate 2: page review
 
-Render rechecked 2026-10-21 with Typst 0.15.1, every page rasterized at 60 dpi (`pdftoppm -r 60`) and inspected. Typst printed no warnings. No filed reply exemplar was available for comparison; these rows record only the synthetic sample's visible structure.
+Reviewed 2026-10-22 (fb-595.54.4), after the port to the shared cross-engine layout model and the typeface change from EB Garamond to Times New Roman (the sample's certificate names Times New Roman, and the opening and answering templates set it). Every page of both renders, `usage/OUTPUT-reply-brief.typst.pdf` and `usage/OUTPUT-reply-brief.docx.pdf`, rasterized at 60 dpi (`pdftoppm -r 60`) and viewed side by side. Typst printed no warnings. Fonts embedded, both engines: Times New Roman (regular, bold, italic) only. Both renders have 9 pages and break every line and page alike (Gate 4 XENG-001..003 PASS). No filed reply exemplar was available for comparison; these rows record only the synthetic sample's visible structure.
 
-| Page | Content | Result |
-|---|---|---|
-| 1 | Cover (REPLY BRIEF OF APPELLANT) | OK. Court name now wraps before "FOR THE EIGHTH CIRCUIT"; no "v." after the In re line. Re-viewed after the sample change. |
-| 2 | Certification of Interested Parties (i) | OK. Now opens with the L.R. BAP 8014A(b)(1) lead sentence. |
-| 3 | Certification of Related Cases (ii) | OK. |
-| 4 | Table of Contents (iii): Argument I, II and Conclusion | OK. Page numbers in their own column. |
-| 5 | Table of Authorities (iv): one rule | OK. |
-| 6 | Argument I and II (1) | OK. Space at the foot of the page: the conclusion moves to page 7 with its signature block. |
-| 7 | Conclusion; signature block (2) | OK. |
-| 8 | Certificate of Compliance (3); 127 words | OK. |
-| 9 | Certificate of Service (4) | OK. |
+| Page | Content | typst | docx |
+|---|---|---|---|
+| 1 | Cover (REPLY BRIEF OF APPELLANT) | OK. Court name wraps before "FOR THE EIGHTH CIRCUIT"; no "v." after the In re line. | OK. Same lines; the gaps between the parts are fixed paragraphs, so the parts sit up to 27 pt higher (tier 3). |
+| 2 | Certification of Interested Parties (i) | OK. Opens with the L.R. BAP 8014A(b)(1) lead sentence; 14 pt above the party list. | OK. Same lead sentence (the docx lacked it before). |
+| 3 | Certification of Related Cases (ii) | OK. | OK |
+| 4 | Table of Contents (iii): Argument I, II and Conclusion | OK. Page numbers in a 36 pt column. | OK. Leaders run on to the number. |
+| 5 | Table of Authorities (iv): one rule | OK. | OK |
+| 6 | Argument I and II (1) | OK. Point headings bold, centered. Space at the foot of the page: the conclusion moves to page 7 with its signature block. | OK |
+| 7 | Conclusion; signature block (2) | OK. | OK |
+| 8 | Certificate of Compliance (3); 127 words | OK. Check boxes a ruled box around an X. | OK. 127 words. |
+| 9 | Certificate of Service (4) | OK. | OK |
 
-Pages reviewed: 9 of 9 output pages.
+Pages reviewed: 9 of 9 (typst) and 9 of 9 (docx). OPEN: none. ACCEPTED (tier 3): the cover's vertical gaps differ between the engines (its lines break alike).
 
 ## Overlay
 
@@ -79,6 +79,11 @@ Run 2026-10-21: exits 1 (`no FILED-EXAMPLE-reply-brief.pdf`). No overlay is writ
 
 ## Engines
 
-**docx** (`docx/`). `usage/OUTPUT-reply-brief.docx` and `.docx.pdf` were built on 2026-10-15 and are **stale**: they predate this run's sample and template change (the docx still prints "v." after the In re line and lacks the 8014A(b)(1) lead sentence). Not rebuilt: `soffice` (LibreOffice) is not on this box. The docx build (`front.jq`, `brief.lua`) also does not know the new fields `appeal_title`, `caption[].v`, `preliminary`. BLOCKED: docx re-render (no LibreOffice here); docx front matter must be brought up to the typst template.
+**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `front.jq`, `brief.lua`, `render.sh`). `usage/OUTPUT-reply-brief.docx` and `.docx.pdf` (LibreOffice), rebuilt 2026-10-22 (fb-595.54.4). 9 pages, as typst. Times New Roman only.
+
+- Cross-engine layout model, as `../opening-brief/README.md` ("Engines") describes: `lib/typst/xengine.typ`, `lib/docx/xengine-reference.sh` and `lib/docx/xengine.lua`, the same pitches (32.2 / 16.1 / 18.4 pt) and spaces in both engines. Gate 4 is gated (`eval.yaml`: `params.cross_engine: gate`): XENG-001..003 PASS, 104 of 104 lines alike.
+- `front.jq` now writes what the typst template writes: the 8014A(b)(1) lead sentence, `appeal_title`, `caption[].v: false` and an empty designation, and the court name kept together from "for the Eighth Circuit" on (no-break spaces, as typst).
+- Not written: the typst template's optional `preliminary` statements. `docx/render.sh` refuses a sample that sets it (it never drops it silently); no sample sets it.
+- BLOCKED: none for this sample. `tools/check.sh --engine docx` passes (2026-10-22).
 
 **latex**: none in this folder.

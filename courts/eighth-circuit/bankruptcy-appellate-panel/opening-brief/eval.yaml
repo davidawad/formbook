@@ -5,8 +5,11 @@
 font:
   size_pt: 14
 
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (fb-595.54.4, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   min_body_pitch_pt: 28
+  cross_engine: gate
 
 checks:
   - id: DEF-CONT-001
@@ -75,3 +78,32 @@ checks:
     method: double_space
     expect: "every consecutive pair of body-paragraph lines >= 28 pt apart"
     fix: {anchor: "line-pitch"}
+
+  # Gate 4 CROSS-ENGINE (the default checks, repeated: this list replaces the default one).
+  - id: XENG-001
+    gate: 4
+    kind: T
+    name: same page count as the typst render
+    method: cross_engine_pages
+    engines: [latex, docx]
+    engines_reason: "typst is the reference the other engines are compared with"
+    expect: "page count equal to OUTPUT-<id>.typst.pdf"
+    fix: {anchor: "par("}
+  - id: XENG-002
+    gate: 4
+    kind: T
+    name: every page starts and ends on the same word as the typst render
+    method: cross_engine_ends
+    engines: [latex, docx]
+    engines_reason: "typst is the reference the other engines are compared with"
+    expect: "0 pages with another first or last word"
+    fix: {anchor: "par("}
+  - id: XENG-003
+    gate: 4
+    kind: T
+    name: every typst line breaks after the same word in this engine
+    method: cross_engine_breaks
+    engines: [latex, docx]
+    engines_reason: "typst is the reference the other engines are compared with"
+    expect: "100% of typst lines broken after the same word (no break-word tolerance)"
+    fix: {anchor: "par("}

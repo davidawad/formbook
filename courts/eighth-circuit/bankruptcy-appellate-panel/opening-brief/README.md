@@ -4,7 +4,7 @@
 - Doc type: `opening-brief`. Appellant's brief, FRBP 8014(a).
 - **Exemplar: yes.** `usage/FILED-EXAMPLE-opening-brief.pdf`: Brief of Appellant, Michael James Fisette, BAP No. 11-6012, filed 2011-04-07 (68 pages, text-based, public). Source, URL, filer and fetch date in `usage/SOURCE.md`.
 - **Sample: transcription.** `usage/INPUT-opening-brief.md` transcribes the filing's cover, party list, body from the Jurisdictional Statement (filing p. 7) through the Nobelman block quote (p. 15), the conclusion (pp. 26-27), the signature and the service certificate. Filing page 15 after the block quote through page 25 (rest of Argument II, Arguments III-VII) is omitted; the omission is marked in the file.
-- Render: ok, `usage/OUTPUT-opening-brief.typst.pdf`, 20 pages, typst with no warnings (2026-10-21, fb-595.65; 32.2 pt body line pitch).
+- Render: ok, `usage/OUTPUT-opening-brief.typst.pdf`, 20 pages, typst with no warnings (2026-10-22, fb-595.54.4: shared cross-engine layout model; 32.2 pt body line pitch).
 - Overlay: ok, `usage/OVERLAY-fisette-11-6012.pdf` and `.txt` (19 pages, 2026-10-14). Diagnostic only, see below.
 - Pages reviewed: 19 of 19 as PNG at 60 dpi (2026-10-14). Pages 3, 4, 11, 12 and 14 were re-viewed after the heading-numeral fix; the rest were viewed in the render before it, and the fix did not change pagination.
 - Status: `court.json` untouched; `status` not set. No `tracker.sh`, no `STATUS.md`.
@@ -15,7 +15,7 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `bap8-brief`. |
 | `typst/bap8-opening-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit` (13,000), `required-sections` (FRBP 8014(a)(4)-(9) order), `needs-standard-of-review`. |
-| `eval.yaml` | Check settings for `tools/check.sh`: 14 pt body size and BAP8-FORM-003 (body baseline pitch >= 28 pt, FRBP 8015(a)(4)), added to the default checks. |
+| `eval.yaml` | Check settings for `tools/check.sh`: 14 pt body size and BAP8-FORM-003 (body baseline pitch >= 28 pt, FRBP 8015(a)(4)), added to the default checks; Gate 4 XENG-001..003 repeated and gated (`params.cross_engine: gate`). |
 | `usage/INPUT-opening-brief.md` | Markdown transcription of the filed brief (contract below). |
 | `usage/OUTPUT-opening-brief.typst.pdf` | Render of the transcription (`sh tools/render.sh courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-opening-brief.md`). |
 | `usage/OVERLAY-fisette-11-6012.pdf`, `.txt` | Overlay on the exemplar (`sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief fisette-11-6012`). |
@@ -47,7 +47,7 @@ Primary sources, read on 2026-10-14:
 | FRBP 8014(a)(1)-(10) | Order: disclosure (if 8012), TOC, TOA, jurisdiction, issues with standard of review, case, summary, argument, conclusion, certificate of compliance | `required-sections`, `needs-standard-of-review`, `disclosure`, `certificate-of-compliance` |
 | FRBP 8014(a)(4)(A)-(D) | Jurisdiction: bankruptcy court, BAP, timeliness, final order | section heading check only; content not checked |
 | FRBP 8015(a)(2)(A)-(F) | Cover: case number at top; court name; case title (8003(d)(2)); nature of proceeding and court below; brief title; counsel name, address, telephone and email | `cover-body` |
-| FRBP 8015(a)(4) | 8.5 x 11; double spaced; long quotations may be single spaced; headings and footnotes single spaced; margins at least 1 inch | `page`, `line-pitch` (32.2 pt) and `body-leading`, quote and footnote styles; checked by BAP8-FORM-003 in `eval.yaml` |
+| FRBP 8015(a)(4) | 8.5 x 11; double spaced; long quotations may be single spaced; headings and footnotes single spaced; margins at least 1 inch | `page`, `line-pitch` (32.2 pt line boxes, lib/typst/xengine.typ), `pitch-single` (16.1 pt) for quotes, footnotes and headings; checked by BAP8-FORM-003 in `eval.yaml` |
 | FRBP 8015(a)(5)(A) | Proportional face with serifs, 14 pt or larger. No face named by the rule. | `type-size = 14pt`; `font-family = ("Times New Roman", "Liberation Serif")` (no court-named face; the filing's face, vendored) |
 | FRBP 8015(a)(6) | Plain roman; italics or bold for emphasis; case names italic or underlined | markdown emphasis; the template does not guess case names |
 | FRBP 8015(a)(7)(B)(i) | Principal brief: 13,000 words (or 1,300 monospaced lines), with certificate | `word-limit = 13000` (panic when exceeded) |
@@ -60,32 +60,32 @@ Primary sources, read on 2026-10-14:
 
 ## Gate 2: page review
 
-Reviewed 2026-10-21 (fb-595.65), after the line-pitch fix. Every page of both renders, `usage/OUTPUT-opening-brief.typst.pdf` and `usage/OUTPUT-opening-brief.docx.pdf`, was rasterized at 50 dpi (`pdftoppm -r 50`) and viewed; page 19 was viewed again at 60 dpi after the typeface fix. Typst printed no warnings. Fonts embedded, both engines: Times New Roman (regular, bold, italic) only. Both renders have 20 pages. Page numbers are PDF pages; the printed number follows in parentheses (body page 1 is the Jurisdictional Statement).
+Reviewed 2026-10-22 (fb-595.54.4), after the port to the shared cross-engine layout model (typst is the reference, so every typst page was looked at again). Every page of both renders, `usage/OUTPUT-opening-brief.typst.pdf` and `usage/OUTPUT-opening-brief.docx.pdf`, was rasterized at 60 dpi (`pdftoppm -r 60`) and viewed side by side. Typst printed no warnings. Fonts embedded, both engines: Times New Roman (regular, bold, italic) only. Both renders have 20 pages and break every line and page alike (Gate 4 XENG-001..003 PASS). Page numbers are PDF pages; the printed number follows in parentheses (body page 1 is the Jurisdictional Statement).
 
 | Page | Content | typst | docx |
 |---|---|---|---|
-| 1 | Cover: BAP No., court, caption, proceeding, title, counsel. Unnumbered. | OK | OK. The rule under the court name is a single line where typst draws a double one (tier 3). |
-| 2 | Certification of Interested Parties (i) | OK | OK |
+| 1 | Cover: BAP No., court, caption, proceeding, title, counsel. Unnumbered. | OK. Single-spaced in 16.1 pt line boxes; counsel lines 0.5 em in, italic. | OK. Same lines; the gaps between the parts are fixed paragraphs, so the parts sit up to 26 pt higher (tier 3). |
+| 2 | Certification of Interested Parties (i) | OK. 14 pt between the paragraphs and above the party list; bullets in a quarter-inch box. | OK. Same breaks. |
 | 3 | Certification of Related Cases (ii) | OK | OK |
-| 4 | Table of Contents (iii) | OK. Pages 1, 1, 2, 2, 5, 7, 7, 8, 11. | OK. Same pages. |
-| 5 | Table of Authorities, cases (iv) | OK | OK. Case pages differ from typst where body pagination differs (p. 14 to 17 below). |
-| 6 | Table of Authorities, statutes and rules (v) | OK | OK. § 1322(b)(2) is on 7 pages here, so *passim* (typst: 5 pages, listed). |
-| 7 | Jurisdictional Statement; Statement of Issues (1) | OK. Double-spaced, 32.2 pt pitch. | OK. 32.2 pt pitch. |
+| 4 | Table of Contents (iii) | OK. Pages 1, 1, 2, 2, 5, 7, 7, 8, 11; numbers in a 36 pt column, leaders from three spaces after the text. | OK. Same pages; the leader runs on to the number (Word's right tab). |
+| 5 | Table of Authorities, cases (iv) | OK. Page lists in a 56 pt column. | OK. Same page numbers (citations found by their link text and the words after it). |
+| 6 | Table of Authorities, statutes and rules (v) | OK. § 1322(b)(2) on 5 pages, listed; a list wider than 56 pt widens its own row's column. | OK. Same. |
+| 7 | Jurisdictional Statement; Statement of Issues (1) | OK. Double-spaced, 32.2 pt pitch; section headings 16 pt in 18.4 pt boxes. | OK |
 | 8 | Standard of Review; Statement of the Case (2) | OK | OK |
 | 9 | Statement of the Case (3) | OK | OK |
 | 10 | Statement of the Case (4) | OK | OK |
 | 11 | Summary of Argument (5) | OK | OK |
 | 12 | Summary of Argument (6) | OK | OK |
-| 13 | Argument; point heading I; footnote 1 (7) | OK. Footnote single-spaced, 14 pt. | OK |
-| 14 | Argument I end; point heading II (8) | OK | OK. Point heading II in small caps. From here to p. 17 the docx page breaks fall a few lines away from the typst ones (heading spacing differs, tier 3). |
+| 13 | Argument; point heading I; footnote 1 (7) | OK. Point heading bold (no small capitals: Word and typst synthesize them differently). Footnote single-spaced, 14 pt. | OK |
+| 14 | Argument I end; point heading II (8) | OK | OK |
 | 15 | Argument II (9) | OK | OK |
 | 16 | Argument II (10) | OK | OK |
-| 17 | Argument II end; Nobelman block quote; Conclusion (11) | OK. Block quote single-spaced and indented. | OK. Same; the page opens a few lines earlier in the text than typst. |
-| 18 | Conclusion end; signature block (12) | OK. Last paragraph kept with the signature. | OK |
-| 19 | Certificate of Compliance (13) | OK. "14-point Times New Roman" (the INPUT said EB Garamond before this run). 2,642 words. | OK. Same wording; `[X]` text boxes; 2,643 words. |
+| 17 | Argument II end; Nobelman block quote; Conclusion (11) | OK. Block quote single-spaced and indented both sides. | OK |
+| 18 | Conclusion end; signature block (12) | OK. Last paragraph kept with the signature; the block starts mid-line (3.25 in; it started 42 pt further left before). | OK |
+| 19 | Certificate of Compliance (13) | OK. 2,642 words; check boxes a ruled box around an X, the text hanging after it. | OK. Same count (render.sh counts as typst does; it counted 2,643 before). |
 | 20 | Certificate of Service (14) | OK | OK |
 
-Pages reviewed: 20 of 20 (typst) and 20 of 20 (docx). OPEN: none. ACCEPTED (tier 3): the docx single cover rule; the docx/typst page breaks inside the Argument, which move the authorities' page numbers on pp. 5-6 of the docx.
+Pages reviewed: 20 of 20 (typst) and 20 of 20 (docx). OPEN: none. ACCEPTED (tier 3): the cover's vertical gaps differ between the engines (its lines break alike).
 
 ## Overlay
 
@@ -117,10 +117,11 @@ What the overlay shows: our text and the filing's text share words and paragraph
 
 ## Engines
 
-**docx** (`docx/`: `reference.xml` (fb render builds `reference.docx` from it, `tools/fb/src/docxref.rs`), `front.jq`, `brief.lua`, `render.sh`). `usage/OUTPUT-opening-brief.docx` and `.docx.pdf` (LibreOffice). 20 pages, as typst (fb-595.65). `pdffonts` on the PDF: only Times New Roman (Regular, Bold, Italic) embedded; `docx/reference.xml` names Times New Roman, as the typst template does since fb-9fyu (fb-595.57; it named EB Garamond before, so LibreOffice embedded EB Garamond and DEF-FONT-002 failed).
+**docx** (`docx/`: `reference.xml` (fb render builds `reference.docx` from it, `tools/fb/src/docxref.rs`), `front.jq`, `brief.lua`, `render.sh`). `usage/OUTPUT-opening-brief.docx` and `.docx.pdf` (LibreOffice). 20 pages, as typst. `pdffonts` on the PDF: only Times New Roman (Regular, Bold, Italic) embedded; `docx/reference.xml` names Times New Roman, as the typst template does since fb-9fyu (fb-595.57; it named EB Garamond before, so LibreOffice embedded EB Garamond and DEF-FONT-002 failed).
 
-- Matches typst: Times New Roman 14 pt throughout (headings, footnotes, cover, contents, authorities); US Letter, 1 in margins; double spacing at 32.2 pt exact (`w:line="644"`, the typst `line-pitch`; measured 32.20 pt in both PDFs); 0.5 in first-line indent; single-spaced 14 pt footnotes and block quotations; section headings bold and centered; point headings bold small caps with roman labels; sub-heading labels hang at the typst positions; cover with the same parts in the same order; page numbers lower-roman on the front matter and arabic from body page 1, none on the cover; contents and authorities with dot leaders; the last body paragraph kept with the signature block.
-- Differs: the checkbox in the certificate of compliance is the text `[X]`, not a drawn box. Contents and authorities are text written at build time, not Word TOC/TA fields, so they do not update in Word; their page numbers are measured on the LibreOffice PDF. Headings are paragraph styles with outline levels, not Heading styles. The word count in the certificate comes from pandoc's plain text: 2,643 here, typst counts 2,642. Body page breaks inside the Argument fall a few lines apart from typst (heading spacing differs), so some authorities' page numbers differ (Gate 2, pp. 5-6).
-- BLOCKED: none for this engine. `tools/check.sh --engine docx` passes, BAP8-FORM-003 included (fb-595.65, 2026-10-21); all 20 pages of the `.docx.pdf` were viewed (Gate 2).
+- Cross-engine layout model (fb-595.54.4; docs/EVAL-LOOP.md, "Cross-engine gate"): `typst/` applies `lib/typst/xengine.typ` (first fit, no kerning, ligatures or hyphenation, exact line boxes: body 32.2 pt, single 16.1 pt, section headings 18.4 pt; spaces between blocks in pt), `docx/reference.xml` holds the styles of `lib/docx/xengine-reference.sh` with the same pitches and spaces in twips, and `docx/brief.lua` writes every run through `lib/docx/xengine.lua` (a no-break hyphen before a digit, pandoc's abbreviation no-break spaces undone, a section sign bound to its number, a word joiner inside "8015(a)(7)(B)"). Gate 4 is gated (`params.cross_engine: gate` in `eval.yaml`): XENG-001..003 PASS, 368 of 368 lines alike.
+- Matches typst: Times New Roman 14 pt throughout; US Letter, 1 in margins; 0.5 in first-line indent; single-spaced 14 pt footnotes and block quotations; section headings bold capitals, centered; point headings bold with roman labels; sub-heading labels hang at the typst positions; contents and authorities with the page number in its own column; the certificate's check boxes a ruled box around an X; the word count (render.sh applies the typst count-words rules); the last body paragraph kept with the signature block.
+- Differs: contents and authorities are text written at build time, not Word TOC/TA fields, so they do not update in Word; their page numbers are measured on the LibreOffice PDF (headings by their text, citations by their link text and the words after it). Headings are paragraph styles with outline levels, not Heading styles. Dot leaders run to the number (typst stops them at the page column). The cover's gaps are fixed paragraphs, not typst's fitted spacing.
+- BLOCKED: none for this engine. `tools/check.sh --engine docx` passes, BAP8-FORM-003 and XENG-001..003 included (2026-10-22).
 
-**latex**: none. This doc type has no `latex/` folder, so `tools/check.sh --engine latex` has nothing to render (it fails DEF-RENDER-001 for that reason). Not built in fb-595.65.
+**latex**: none. This doc type has no `latex/` folder.

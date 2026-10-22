@@ -1,103 +1,94 @@
 #!/bin/sh
-# Builds docx/reference.docx from pandoc's default reference for the BAP 8th Cir. brief (FRBP 8015).
-# Body: EB Garamond 14 pt (FRBP 8015(a)(5)(A)), exact 31 pt line pitch (double spacing, FRBP 8015(a)(4)),
-# first-line indent 0.5 in, widow control, 1 in margins on US Letter. Footnotes and block quotations are
-# single-spaced at 14 pt. Every font name is explicit (no theme fonts), so LibreOffice and Word both use EB Garamond.
-# Usage: sh docx/build-reference.sh <out.docx>   (needs pandoc, unzip, zip, perl, xmllint on PATH)
+# Builds docx/reference.docx for the BAP 8th Cir. brief (FRBP 8015): the shared style recipe of the cross-engine layout
+# model (lib/docx/xengine-reference.sh: Times New Roman 14 pt (FRBP 8015(a)(5)(A)), Body Text in 32.2 pt line boxes
+# with a half-inch first-line indent (double spacing, FRBP 8015(a)(4); typst line-pitch), quotations and footnotes
+# 14 pt in 16.1 pt boxes (typst pitch-single), exact line spacing, widow control, 1 in margins on US Letter), plus the
+# paragraph styles front.jq and brief.lua write the cover, front matter, headings, tables and certificates in, with the
+# typst template's pitches and spaces (twips = 20 x pt). The footer (a centered PAGE field) carries the id rIdBapFooter
+# the front matter's sections name; the body section numbers its pages from 1.
+# Usage: sh docx/build-reference.sh [out.docx]    (needs pandoc, unzip, zip, perl, xmllint)
 set -eu
-OUT=$(cd "$(dirname "$1")" && pwd)/$(basename "$1")
-FONT="EB Garamond"
+FONT="Times New Roman"
+D=$(cd "$(dirname "$0")" && pwd)
+OUT=${1:-$D/reference.docx}
+case $OUT in /*) ;; *) OUT=$PWD/$OUT ;; esac
 W=$(mktemp -d)
 trap 'rm -rf "$W"' EXIT
-pandoc -o "$W/ref.docx" --print-default-data-file reference.docx
-mkdir "$W/pkg"
-cd "$W/pkg" && unzip -q ../ref.docx
-F="<w:rFonts w:ascii=\"$FONT\" w:hAnsi=\"$FONT\" w:eastAsia=\"$FONT\" w:cs=\"$FONT\"/>"
-
-# ---- the styles this template sets (pandoc's own copies are replaced) ----
-{
-cat <<XML
-<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/><w:jc w:val="left"/></w:pPr><w:rPr>$F<w:sz w:val="28"/><w:szCs w:val="28"/></w:rPr></w:style>
-<w:style w:type="paragraph" w:styleId="BodyText"><w:name w:val="Body Text"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="0" w:line="629" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:styleId="FirstParagraph"><w:name w:val="First Paragraph"/><w:basedOn w:val="BodyText"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="0" w:line="629" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:styleId="Compact"><w:name w:val="Compact"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="0" w:line="629" w:lineRule="exact"/><w:ind w:firstLine="0"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:styleId="BlockText"><w:name w:val="Block Text"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:keepLines/><w:spacing w:before="280" w:after="280" w:line="240" w:lineRule="auto"/><w:ind w:left="720" w:right="720" w:firstLine="0"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:before="0" w:after="140" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/></w:pPr><w:rPr><w:sz w:val="28"/><w:szCs w:val="28"/></w:rPr></w:style>
-<w:style w:type="character" w:styleId="FootnoteReference"><w:name w:val="footnote reference"/><w:rPr><w:vertAlign w:val="superscript"/></w:rPr></w:style>
-<w:style w:type="character" w:styleId="Hyperlink"><w:name w:val="Hyperlink"/><w:rPr><w:color w:val="000000"/></w:rPr></w:style>
-<w:style w:type="paragraph" w:styleId="Footer"><w:name w:val="footer"/><w:basedOn w:val="Normal"/><w:pPr><w:jc w:val="center"/></w:pPr><w:rPr><w:sz w:val="28"/><w:szCs w:val="28"/></w:rPr></w:style>
-XML
-# cover and front matter (single spaced, centered or indented)
-cat <<XML
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="CoverCenter"><w:name w:val="Cover Center"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:jc w:val="center"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="CoverLeft"><w:name w:val="Cover Left"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="CoverIndent"><w:name w:val="Cover Indent"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:left="4680" w:firstLine="0"/><w:jc w:val="left"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="CoverGap"><w:name w:val="Cover Gap"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:before="0" w:after="0" w:line="200" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="DoubleRule"><w:name w:val="Double Rule"/><w:basedOn w:val="Normal"/><w:pPr><w:pBdr><w:bottom w:val="double" w:sz="6" w:space="1" w:color="000000"/></w:pBdr><w:spacing w:before="0" w:after="240" w:line="240" w:lineRule="auto"/></w:pPr><w:rPr><w:sz w:val="8"/><w:szCs w:val="8"/></w:rPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="ShortRule"><w:name w:val="Short Rule"/><w:basedOn w:val="Normal"/><w:pPr><w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="000000"/></w:pBdr><w:spacing w:before="0" w:after="240" w:line="240" w:lineRule="auto"/><w:ind w:left="3240" w:right="3240" w:firstLine="0"/><w:jc w:val="center"/></w:pPr><w:rPr><w:sz w:val="8"/><w:szCs w:val="8"/></w:rPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="Single"><w:name w:val="Single"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:before="0" w:after="280" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="Indented"><w:name w:val="Indented"/><w:basedOn w:val="Normal"/><w:pPr><w:keepLines/><w:spacing w:before="0" w:after="140" w:line="240" w:lineRule="auto"/><w:ind w:left="720" w:firstLine="0"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="BulletItem"><w:name w:val="Bullet Item"/><w:basedOn w:val="Normal"/><w:pPr><w:keepLines/><w:tabs><w:tab w:val="left" w:pos="360"/></w:tabs><w:spacing w:before="0" w:after="140" w:line="240" w:lineRule="auto"/><w:ind w:left="360" w:hanging="360"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="CertBox"><w:name w:val="Certificate Box"/><w:basedOn w:val="Normal"/><w:pPr><w:keepLines/><w:spacing w:before="160" w:after="160" w:line="240" w:lineRule="auto"/><w:ind w:left="720" w:firstLine="0"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="Signature"><w:name w:val="Signature"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:left="4680" w:firstLine="0"/><w:jc w:val="left"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="FrontHeading"><w:name w:val="Front Heading"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="0" w:after="308" w:line="320" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:jc w:val="center"/></w:pPr><w:rPr><w:b/><w:bCs/><w:caps/><w:sz w:val="32"/><w:szCs w:val="32"/></w:rPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="SectionHeading"><w:name w:val="Section Heading"/><w:basedOn w:val="FrontHeading"/><w:next w:val="BodyText"/><w:pPr><w:spacing w:before="420" w:after="120" w:line="320" w:lineRule="exact"/><w:outlineLvl w:val="0"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="SectionHeadingTop"><w:name w:val="Section Heading Top"/><w:basedOn w:val="SectionHeading"/><w:next w:val="BodyText"/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="0" w:after="120" w:line="240" w:lineRule="auto"/><w:outlineLvl w:val="0"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="PointHeading"><w:name w:val="Point Heading"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="336" w:after="280" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/><w:bCs/><w:smallCaps/></w:rPr></w:style>
-XML
-# sub-headings: label at the hanging position, text one half inch further in (typst's label-indent)
-for spec in "Sub2:1440:1" "Sub3:2160:2" "Sub4:2880:3" "Sub5:3600:4" "ArgSub3:1440:2" "ArgSub4:2160:3" "ArgSub5:2880:4"; do
-  id=${spec%%:*}; rest=${spec#*:}; left=${rest%%:*}; lvl=${rest#*:}
-  it=""; if [ "$lvl" -ge 3 ]; then it="<w:i/><w:iCs/>"; fi
-  echo "<w:style w:type=\"paragraph\" w:customStyle=\"1\" w:styleId=\"$id\"><w:name w:val=\"$id\"/><w:basedOn w:val=\"Normal\"/><w:next w:val=\"BodyText\"/><w:pPr><w:keepNext/><w:keepLines/><w:tabs><w:tab w:val=\"left\" w:pos=\"$left\"/></w:tabs><w:spacing w:before=\"220\" w:after=\"180\" w:line=\"240\" w:lineRule=\"auto\"/><w:ind w:left=\"$left\" w:hanging=\"720\" w:firstLine=\"0\"/><w:jc w:val=\"left\"/><w:outlineLvl w:val=\"$lvl\"/></w:pPr><w:rPr><w:b/><w:bCs/>$it</w:rPr></w:style>"
-done
-# table of contents lines: the same positions as the headings, dot leader to the right margin
-for spec in "TOCArg:720:720" "TOC2:1440:720" "TOC3:2160:720" "TOC4:2880:720" "TOC5:3600:720" "TOC1:0:0"; do
-  id=${spec%%:*}; rest=${spec#*:}; left=${rest%%:*}; hang=${rest#*:}
-  echo "<w:style w:type=\"paragraph\" w:customStyle=\"1\" w:styleId=\"$id\"><w:name w:val=\"$id\"/><w:basedOn w:val=\"Normal\"/><w:pPr><w:keepLines/><w:tabs><w:tab w:val=\"left\" w:pos=\"$left\"/><w:tab w:val=\"right\" w:leader=\"dot\" w:pos=\"9360\"/></w:tabs><w:spacing w:before=\"140\" w:after=\"0\" w:line=\"240\" w:lineRule=\"auto\"/><w:ind w:left=\"$left\" w:right=\"720\" w:hanging=\"$hang\"/><w:jc w:val=\"left\"/></w:pPr></w:style>"
-done
-cat <<XML
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="PageLabel"><w:name w:val="Page Label"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:before="0" w:after="240" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/><w:jc w:val="right"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="SigGap"><w:name w:val="Signature Gap"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="0" w:after="240" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyKeep"><w:name w:val="Body Keep"/><w:basedOn w:val="BodyText"/><w:pPr><w:keepNext/></w:pPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="TOAGroup"><w:name w:val="TOA Group"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:tabs><w:tab w:val="right" w:pos="9360"/></w:tabs><w:spacing w:before="280" w:after="120" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/></w:pPr><w:rPr><w:b/><w:bCs/></w:rPr></w:style>
-<w:style w:type="paragraph" w:customStyle="1" w:styleId="TOAEntry"><w:name w:val="TOA Entry"/><w:basedOn w:val="Normal"/><w:pPr><w:keepLines/><w:tabs><w:tab w:val="right" w:leader="dot" w:pos="9360"/></w:tabs><w:spacing w:before="140" w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:left="504" w:right="720" w:hanging="504"/><w:jc w:val="left"/></w:pPr></w:style>
-XML
-} > "$W/new-styles.xml"
-
-# replace same-id styles, then insert the new ones before </w:styles>
-BAPNEW="$W/new-styles.xml"; export BAPNEW
-perl -0pi -e '
-  my $new = do { local $/; open my $f, "<", $ENV{BAPNEW} or die "new-styles: $!"; <$f> };
-  my @blocks = ($new =~ /(<w:style [^>]*>.*?<\/w:style>)/gs);
-  for my $b (@blocks) {
-    my ($id) = $b =~ /w:styleId="([^"]+)"/;
-    s{<w:style [^>]*w:styleId="\Q$id\E"[^>]*>.*?</w:style>}{}s;
-  }
-  s{</w:styles>}{join("\n", @blocks) . "\n</w:styles>"}e;
-  # document defaults: EB Garamond 14 pt, widow control, single spacing
-  s{<w:docDefaults>.*?</w:docDefaults>}{<w:docDefaults><w:rPrDefault><w:rPr>'"$F"'<w:kern w:val="2"/><w:sz w:val="28"/><w:szCs w:val="28"/><w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>}s;
-  s{ w:(ascii|hAnsi|eastAsia|cs)Theme="[^"]*"}{}g;
-' word/styles.xml
+sh "$D/../../../../../lib/docx/xengine-reference.sh" "$W/ref.docx" font="$FONT" size=28 body=644 single=322 \
+  indent=720 heading=368 quote=280 note_after=140 footer=720 >/dev/null
+mkdir "$W/pkg" && cd "$W/pkg" && unzip -q ../ref.docx
+cat > "$W/styles.pl" <<'PL'
+# Appends the court's own styles to word/styles.xml (typst bap8-*.typ: pitches 32.2 / 16.1 / 18.4 pt).
+my ($file) = @ARGV;
+my $TEXTW = 9360;   # 6.5 in, the text width (letter, 1 in margins)
+my $PCOL = 720;     # the contents' page column (typst toc-page-col, 36 pt)
+my $ACOL = 1120;    # the authorities' page column (typst toa-page-col, 56 pt; brief.lua widens it for a longer list)
+open my $fh, '<:encoding(UTF-8)', $file or die "styles: $!";
+local $/; my $s = <$fh>; close $fh;
+sub sp { my ($b, $a, $l) = @_; $l //= 322; qq{<w:spacing w:before="$b" w:after="$a" w:line="$l" w:lineRule="exact"/>} }
+my @st;
+sub style {   # style(id, name, basedOn, pPr, rPr)
+  my ($id, $name, $based, $ppr, $rpr) = @_;
+  my $b = $based ? qq{<w:basedOn w:val="$based"/>} : '';
+  push @st, qq{<w:style w:type="paragraph" w:customStyle="1" w:styleId="$id"><w:name w:val="$name"/>$b<w:qFormat/><w:pPr>$ppr</w:pPr><w:rPr>$rpr</w:rPr></w:style>};
+}
+my $L = '<w:ind w:firstLine="0"/><w:jc w:val="left"/>';
+# the last body paragraph stays with the signature block (typst: block(breakable: false))
+style('BodyKeep', 'Body Keep', 'BodyText', '<w:keepNext/><w:keepLines/>', '');
+# cover: single-spaced, centered or from the middle of the line
+style('CoverCenter', 'Cover Center', 'Normal', sp(0, 0) . '<w:ind w:firstLine="0"/><w:jc w:val="center"/>', '');
+style('CoverIndent', 'Cover Indent', 'Normal', sp(0, 0) . '<w:ind w:left="4680" w:firstLine="0"/><w:jc w:val="left"/>', '');
+style('CoverStep', 'Cover Step', 'CoverIndent', '<w:ind w:left="4820" w:firstLine="0"/>', '');   # counsel lines, 0.5 em in
+style('CoverGap', 'Cover Gap', 'Normal', '<w:spacing w:before="0" w:after="0" w:line="200" w:lineRule="exact"/><w:jc w:val="center"/>', '');
+style('DoubleRule', 'Double Rule', 'Normal', '<w:pBdr><w:bottom w:val="double" w:sz="6" w:space="1" w:color="000000"/></w:pBdr><w:spacing w:before="0" w:after="240" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/>', '<w:sz w:val="8"/><w:szCs w:val="8"/>');
+style('ShortRule', 'Short Rule', 'Normal', '<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="000000"/></w:pBdr>' . sp(0, 240, 80) . '<w:ind w:left="3240" w:right="3240" w:firstLine="0"/><w:jc w:val="center"/>', '');
+# front matter and certificates: paragraphs 14 pt apart (typst par spacing 1em)
+style('Single', 'Single', 'Normal', sp(0, 280) . $L, '');
+style('BulletItem', 'Bullet Item', 'Normal', '<w:keepLines/>' . sp(0, 0) . '<w:ind w:left="360" w:hanging="360"/><w:jc w:val="left"/>', '');
+# a certificate's check-box row: the box half an inch in, the text in a 1.6 em column after it (typst box-row)
+style('CertBox', 'Certificate Box', 'Normal', '<w:keepLines/>' . sp(224, 224) . '<w:ind w:left="1168" w:hanging="448"/><w:jc w:val="left"/>', '');
+# signature block (typst signature-block, form-sig-line): from the middle of the line
+my $SIG = '<w:keepNext/><w:keepLines/>';
+style('Signature', 'Signature', 'Normal', $SIG . sp(0, 0) . '<w:ind w:left="4680" w:firstLine="0"/><w:jc w:val="left"/>', '');
+style('SigHead', 'Signature Head', 'Signature', sp(392, 0), '');
+style('SigName', 'Signature Name', 'Signature', sp(336, 0), '');
+style('SigLines', 'Signature Lines', 'Signature', '<w:ind w:left="4820" w:firstLine="0"/>', '<w:i/><w:iCs/>');
+style('SigDate', 'Signature Date', 'Normal', sp(224, 0) . $L, '');
+style('FormSig', 'Form Signature', 'Signature', '<w:keepNext w:val="0"/>' . sp(448, 0), '');
+# headings: a section heading 16 pt bold capitals in an 18.4 pt box, 21 pt above, 15.4 pt below (none above at the top
+# of a page); point headings 16.8 / 14 pt; sub-headings 15.4 / 12.6 pt, the label at its step, the text a half inch on
+my $HEAD = '<w:keepNext/><w:keepLines/>';
+style('FrontHeading', 'Front Heading', 'Normal', $HEAD . sp(0, 308, 368) . '<w:ind w:firstLine="0"/><w:jc w:val="center"/>', '<w:b/><w:bCs/><w:caps/><w:sz w:val="32"/><w:szCs w:val="32"/>');
+style('SectionHeading', 'Section Heading', 'FrontHeading', sp(420, 308, 368) . '<w:outlineLvl w:val="0"/>', '');
+style('SectionHeadingTop', 'Section Heading Top', 'FrontHeading', sp(0, 308, 368) . '<w:outlineLvl w:val="0"/>', '');
+style('PointHeading', 'Point Heading', 'Normal', $HEAD . sp(336, 280) . '<w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="1"/>', '<w:b/><w:bCs/>');
+for my $spec ("Sub2:1440:1", "Sub3:2160:2", "Sub4:2880:3", "Sub5:3600:4", "ArgSub3:1440:2", "ArgSub4:2160:3", "ArgSub5:2880:4") {
+  my ($id, $left, $lvl) = split /:/, $spec;
+  my $it = $lvl >= 3 ? '<w:i/><w:iCs/>' : '';
+  style($id, $id, 'Normal', $HEAD . sp(308, 252) . qq{<w:ind w:left="$left" w:hanging="720"/><w:jc w:val="left"/><w:outlineLvl w:val="$lvl"/>}, "<w:b/><w:bCs/>$it");
+}
+# contents rows (typst listing-row): the text wraps before the page column (right indent), the label at its step, a dot
+# leader runs to a right tab at the margin, beyond the indent
+for my $spec ("TOC1:720:168", "TOCArg:720:98", "TOC2:1440:98", "TOC3:2160:98", "TOC4:2880:98", "TOC5:3600:98") {
+  my ($id, $left, $before) = split /:/, $spec;
+  style($id, $id, 'Normal', qq{<w:keepLines/><w:tabs><w:tab w:val="right" w:leader="dot" w:pos="$TEXTW"/></w:tabs>} . sp($before, 0) . qq{<w:ind w:left="$left" w:right="$PCOL" w:hanging="720"/><w:jc w:val="left"/>}, '');
+}
+style('PageLabel', 'Page Label', 'Normal', '<w:keepNext/>' . sp(84, 0) . '<w:ind w:firstLine="0"/><w:jc w:val="right"/>', '');
+style('TOAGroup', 'TOA Group', 'Normal', qq{<w:keepNext/><w:tabs><w:tab w:val="right" w:pos="$TEXTW"/></w:tabs>} . sp(392, 56) . '<w:ind w:firstLine="0"/>', '<w:b/><w:bCs/>');
+style('TOAGroupFirst', 'TOA Group First', 'TOAGroup', sp(280, 56), '');
+style('TOAEntry', 'TOA Entry', 'Normal', qq{<w:keepLines/><w:tabs><w:tab w:val="right" w:leader="dot" w:pos="$TEXTW"/></w:tabs>} . sp(196, 0) . qq{<w:ind w:left="504" w:right="$ACOL" w:hanging="504"/><w:jc w:val="left"/>}, '');
+style('ServiceAddress', 'Service Address', 'Normal', '<w:keepLines/>' . sp(196, 0) . '<w:ind w:left="720" w:firstLine="0"/><w:jc w:val="left"/>', '');
+my $add = join('', @st);
+$s =~ s{</w:styles>}{$add</w:styles>} or die "styles: no end tag";
+open my $out, '>:encoding(UTF-8)', $file or die "styles: $!";
+print $out $s; close $out;
+PL
+perl "$W/styles.pl" word/styles.xml
 xmllint --noout word/styles.xml
-
-# theme: the major and minor latin faces are the court font as well
-perl -0pi -e 's{(<a:(major|minor)Font>\s*<a:latin typeface=")[^"]*(")}{$1'"$FONT"'$3}g' word/theme/theme1.xml
-xmllint --noout word/theme/theme1.xml
-
-# ---- footer: centered PAGE field (the front matter and the body each restart their own count, in the sections) ----
-cat > word/footer1.xml <<XML
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:ftr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><w:p><w:pPr><w:pStyle w:val="Footer"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></w:ftr>
-XML
-xmllint --noout word/footer1.xml
-perl -pi -e 's|</Relationships>|<Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Id="rIdBapFooter" Target="footer1.xml" /></Relationships>|' word/_rels/document.xml.rels
-perl -pi -e 's|</Types>|<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml" /></Types>|' '[Content_Types].xml'
-
-# ---- body section (the last section of the document): letter, 1 in margins, the footer ----
-perl -0pi -e 's{<w:sectPr\b[^>]*>.*?</w:sectPr>}{<w:sectPr><w:footerReference w:type="default" r:id="rIdBapFooter"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/><w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>}s' word/document.xml
+# the footer under the id the front matter's sections name (front.jq); the body section counts from 1
+perl -pi -e 's/rIdFooter1/rIdBapFooter/g' word/_rels/document.xml.rels word/document.xml
+perl -0pi -e 's{(<w:pgMar [^>]*/>)}{$1<w:pgNumType w:fmt="decimal" w:start="1"/>}s or die "pgMar"' word/document.xml
 xmllint --noout word/document.xml
-
 rm -f "$OUT"
 zip -q -X "$OUT" '[Content_Types].xml'
 zip -q -X -r "$OUT" _rels docProps word
