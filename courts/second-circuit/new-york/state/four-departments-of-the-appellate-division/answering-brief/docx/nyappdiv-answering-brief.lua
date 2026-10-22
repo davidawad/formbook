@@ -613,7 +613,9 @@ local function finish(doc)
 
   needle("S:toc", "B", "TABLE OF CONTENTS", "Page")
   needle("S:toa", "B", "TABLE OF AUTHORITIES", "Cases")
-  needle("S:body", "B", heads[1] and heads[1].text or stringify(blocks[1]), "")
+  -- the body starts at its first heading (H:1) or, when a paragraph comes first, at that paragraph's words
+  local body_at = heads[1] and "H:1" or "S:body"
+  if not heads[1] then needle("S:body", "B", stringify(blocks[1]), "") end
   local entries, body = {}, {}
   for i, b in ipairs(blocks) do
     local keep = i >= tail
@@ -642,7 +644,7 @@ local function finish(doc)
   local nl = {}
   for _, n in ipairs(needles) do nl[#nl + 1] = table.concat({ n.id, n.kind, n.needle, n.fallback }, "\t") end
   nl[#nl + 1] = "#section\tS:toc\tlower-roman\t"
-  nl[#nl + 1] = "#section\tS:body\tdecimal\t"
+  nl[#nl + 1] = "#section\t" .. body_at .. "\tdecimal\t"
   write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
   write_file("FORMBOOK_FOOTERS", "rIdFtrNy\t" .. FOOTER .. "\n")
   write_file("FORMBOOK_FINAL", sect_pr("rIdFtrNy", "decimal"))
