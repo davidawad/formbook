@@ -30,7 +30,7 @@ signature:
       - "STATE OF VERMONT"
       - "STATE’S ATTORNEY"
       - "by:"
-      - "__________________________"
+      - '\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_'
       - "David Tartter"
       - "Deputy State’s Attorney"
       - "110 State Street"
@@ -44,7 +44,7 @@ compliance:
   signature:
     - lines:
         - "by:"
-        - "__________________________"
+        - '\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_'
         - "David Tartter"
         - "Deputy State’s Attorney"
 ---
