@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. typst is on the shared document
+# model (typst/layout.yaml) and latex/ and docx/ are generated (TeX Gyre Bonum, fb-595.54.82); pages are equal in all
+# three engines, but the line differences are the model's (docs/open-items/fb-595.54.39.md): a list inside a
+# quotation (p11) is set narrower in typst than in LaTeX and Word (683/699 and 672/699 lines), and Word breaks a note
+# line typst fills to 539.73 of 540 pt (p5).
+params:
+  cross_engine: report

@@ -183,29 +183,34 @@ return require("docx.xdoc")({
           ["optional"] = true,
         },
         {
-          ["each"] = "signature.also",
+          ["when"] = "signature.also",
           ["blocks"] = {
             {
-              ["text"] = "-and-",
-              ["left"] = 216,
-              ["above"] = 16.8,
-              ["below"] = 16.8,
-            },
-            {
-              ["text"] = "{signer_line}",
-              ["left"] = 216,
-              ["underline"] = true,
-              ["optional"] = true,
-            },
-            {
-              ["text"] = "{name}",
-              ["left"] = 216,
-              ["optional"] = true,
-            },
-            {
-              ["text"] = "{signer}",
-              ["left"] = 216,
-              ["optional"] = true,
+              ["each"] = "signature.also",
+              ["blocks"] = {
+                {
+                  ["text"] = "-and-",
+                  ["left"] = 216,
+                  ["above"] = 16.8,
+                  ["below"] = 16.8,
+                },
+                {
+                  ["text"] = "{signer_line}",
+                  ["left"] = 216,
+                  ["underline"] = true,
+                  ["optional"] = true,
+                },
+                {
+                  ["text"] = "{name}",
+                  ["left"] = 216,
+                  ["optional"] = true,
+                },
+                {
+                  ["text"] = "{signer}",
+                  ["left"] = 216,
+                  ["optional"] = true,
+                },
+              },
             },
           },
         },
