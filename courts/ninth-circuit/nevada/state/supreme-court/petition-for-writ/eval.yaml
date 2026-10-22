@@ -1,0 +1,8 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated yet (second pass, model at
+# bd6599e5c); the differences are the shared model's (docs/open-items/fb-595.54.18.md): typst drops widow control in
+# list item 6, which calls note 12, and leaves its last line alone on p12, where LaTeX and Word keep the item's lines
+# together (their no-widow rule covers body paragraphs only), so p12-p16 differ in both; the docx table of authorities
+# misses a page cited only in a footnote (NRS 34.170 p12, note 39; NRS 293.3606 p14, note 44).
+params:
+  cross_engine: report
