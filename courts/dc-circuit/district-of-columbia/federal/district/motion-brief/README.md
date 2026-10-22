@@ -7,7 +7,7 @@ Folder: `courts/dc-circuit/district-of-columbia/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer, see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: caption and title, the table of contents (generated), introduction, facts A to G, legal standard, argument I (A, B), argument IV, conclusion and signature block. Exemplar pages 1, 7 to 16, and 25 to 26 |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 16 pages, typst 0.15.0, vendored Times New Roman only, no warnings |
 | overlay | ok: `usage/OVERLAY-estrada-motion-to-dismiss.pdf` and `OVERLAY-estrada-motion-to-dismiss.txt` |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed). Pages 1 and 2 (caption, table of contents) were viewed before the last two template edits (paragraph indent, keep-with-signature), which do not touch the caption or the contents page; the other twelve pages were viewed after them |
 
@@ -24,8 +24,8 @@ Primary sources, verified 2026-10-14:
 | LCvR 7(e) | A memorandum in support of a motion may not exceed 45 pages without prior approval of the Court. | Not enforced by the template (the page count is shown by the render). |
 | LCvR 7(m) | Duty to confer applies to nondispositive motions only. A motion under Rule 12(b)(6) is dispositive, so no conferral statement is required by this rule. | Not in the template. |
 | LCvR 5.1(c)(1) | Attorney-signed documents carry the attorney's name, address, telephone number and D.C. Bar identification number. | The signature block: each signer's name with bar number, firm, address, telephone and email. |
-| LCvR 5.1(d) | Typed double-spaced on 8 1/2 by 11 inch paper; a heading under the caption naming the document; the case number followed by the judge's initials once assigned; **all pleadings in 12-pt type and double-spaced; footnotes 12-pt**. | `type-size = 12pt`, `body-leading = 1.35em` (24 pt pitch), `page-w`/`page-h`, `case_number` in the caption with the judge's initials, `brief_title` centered under the caption. |
-| Typeface (LCvR 5.1(d), no face named) | Rule names only "12-pt. font" and double spacing; no typeface is required. | `font-family = "EB Garamond"` in `typst/dcd-motion-brief.typ`: no court-named face, so the default face under `docs/FONTS.md` (no substitution). Checked against the April 2017 text of LCvR 5.1(d). |
+| LCvR 5.1(d) | Typed double-spaced on 8 1/2 by 11 inch paper; a heading under the caption naming the document; the case number followed by the judge's initials once assigned; **all pleadings in 12-pt type and double-spaced; footnotes 12-pt**. | `type-size = 12pt`, `pitch-double = 27.6pt` (Word's double spacing in this face), `page-w`/`page-h`, `case_number` in the caption with the judge's initials, `brief_title` centered under the caption. |
+| Typeface (LCvR 5.1(d), no face named) | Rule names only "12-pt. font" and double spacing; no typeface is required. | `font-family = ("Times New Roman", "Liberation Serif")` in `typst/dcd-motion-brief.typ`: no court-named face, so the house standard (fb-9fyu), the face of both filed exemplars; the docx takes the same face (`{font}` in `docx/reference.xml`). Checked against the April 2017 text of LCvR 5.1(d). |
 | Fed. R. Civ. P. 12(b)(6) | Defense of failure to state a claim; the standard the memorandum argues. | Author content. The template does not check the argument. |
 
 Sources: the D.D.C. Local Civil Rules at https://www.dcd.uscourts.gov/sites/dcd/files/LocalRulesApril2017.pdf (the April 2017 edition, the most recent edition the court site served to this box; **the current edition was not confirmed**, see Known gaps 1). FRCP 12(b)(6) is cited from the rule as it appears in the exemplar and the standard it names; the rule text was not separately fetched.
@@ -37,8 +37,8 @@ Table of contents: LCvR 7(a) refers to a table of cases only in its last sentenc
 - US Letter, 1-inch margins on all sides (a convention; LCvR 5.1(d) names no margin size).
 - Page 1 (the caption page, unnumbered): court title centered bold, caption as a two-column table (parties with a rule on the right and bottom; "Civil Action No." with the case number and judge's initials on the right), the title of the paper centered bold below the caption.
 - Table of contents page(s) numbered in lower-case roman (i, ii, ...), generated from the headings with dot leaders and page numbers in the body's arabic numbering.
-- Body numbered from 1 in arabic. Paragraphs are unnumbered, first-line indented 0.5 inch, double-spaced at a 24 pt pitch. A `>` line is a block quotation indented 0.5 inch from both margins, double-spaced (LCvR 5.1(d) does not except quotations, so the template does not single-space them).
-- Headings: level 1 centered bold caps ("INTRODUCTION", "ARGUMENT", "CONCLUSION"); level 2 bold, left (argument headings, "I. ..."); level 3 bold, left (sub-headings "A. ..."). A heading stays with the text after it.
+- Body numbered from 1 in arabic. Paragraphs are unnumbered, first-line indented 0.5 inch, double-spaced at a 27.6 pt pitch (Word's double spacing for 12-pt Times New Roman, as in both exemplars); every line a box of its pitch (the cross-engine layout model, `lib/typst/xengine.typ`). A `>` line is a block quotation indented 0.5 inch from both margins, double-spaced (LCvR 5.1(d) does not except quotations, so the template does not single-space them).
+- Headings: 12 pt, single-spaced, a single line above and below; level 1 centered bold caps ("INTRODUCTION", "ARGUMENT", "CONCLUSION"); level 2 bold, left (argument headings, "I. ..."); level 3 bold, left (sub-headings "A. ..."). A heading stays with the text after it.
 - Signature block: "Dated" on the left; "Respectfully submitted," the firm name, the signature line, the signature text, and one block of lines per signer (name with bar number, address, telephone, email). The last paragraph is kept with the signature block so a signature never stands alone on a page.
 - Page numbers centered at the foot of each page.
 
@@ -60,39 +60,30 @@ Table of contents: LCvR 7(a) refers to a table of cases only in its last sentenc
 8. **Caption.** The party block is closed by a rule on its right and bottom, not the column of ")" marks some filers use. This is a tier-2 convention choice (accepted; both forms appear in D.D.C. filings).
 9. **Ragged right.** Body text is left-aligned, not justified. The exemplar's justification is not asserted; this is a tier-2/3 choice.
 10. **Proposed order and certificate of service.** Not part of this template. LCvR 7(c) requires the proposed order; a certificate of service is not in the exemplar and is not required by the local rules reviewed here.
-11. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape. The brief forbids touching `tools/`, so the gates were not run. Render and overlay were run; the page review below is the Gate 2 equivalent for this doc type.
+11. **Table of authorities** (gap 3) is still not generated.
 
-## Review of the rendered pages (current PDF, 14 pages)
+## Review of the rendered pages (fb-595.68.6, 16 pages per engine)
 
-Rendered with `pdftoppm -r 60` and viewed page by page. Page numbers below are the PDF pages; the body number is in brackets.
+Rendered with `pdftoppm -r 40`; every page of the typst render and of the docx render viewed side by side after the
+last template change.
 
-- PDF 1 (caption page, no number): court title, caption with party block and "Civil Action No. 26-cv-00603-ABJ", title centered bold in three lines. Pass.
-- PDF 2 (roman i): "TABLE OF CONTENTS" with the headings, dot leaders and page numbers (1 to 12 in the body); sub-headings indented; no heading split from its entry. Pass.
-- PDF 3 (body 1): "INTRODUCTION" centered bold; paragraphs first-line indented; heading "ALLEGED FACTS AND PROCEDURAL BACKGROUND" and sub-heading A. Pass.
-- PDF 4 (body 2): sub-headings B and C, paragraph flow. Pass.
-- PDF 5 (body 3): sub-heading C and D, paragraph flow. Pass.
-- PDF 6 (body 4): sub-heading D, paragraphs. Pass.
-- PDF 7 (body 5): sub-headings E and F (F wraps to two lines, bold, left). Pass.
-- PDF 8 (body 6): text and sub-heading G, bottom third of the page blank (the next page starts with the legal standard). Pass (layout).
-- PDF 9 (body 7): "LEGAL STANDARD" centered bold; "ARGUMENT" centered; "I. THE COURT SHOULD DISMISS..." bold, two lines. Pass.
-- PDF 10 (body 8): sub-heading A and the block quotation (indented from both margins). Pass.
-- PDF 11 (body 9): block quotation continues, paragraphs, sub-heading B (two lines). Pass.
-- PDF 12 (body 10): paragraphs, "IV. THE COURT SHOULD DISMISS..." bold, two lines. Pass.
-- PDF 13 (body 11): paragraphs to the end of the argument; blank space at the foot. Pass.
-- PDF 14 (body 12): "CONCLUSION" centered bold, its paragraph, "Dated", "Respectfully submitted," firm name, signature line, /s/ line, and both signer blocks. The conclusion and the signature are on the same page. Pass.
-
-Defects found during review and fixed in the template: body paragraphs had no first-line indent (the indent set on `par` did not reach the cmarker output; the indent is now an inline space); a signature block stood alone on a page (the last paragraph is now kept with it).
+- Page 1 (cover, unnumbered): court title, caption (party block closed by a rule; the case number at the right), the bold centered title. Pass on both engines.
+- Page i: TABLE OF CONTENTS, one row per heading (levels stepped a quarter inch), dot leaders, page numbers in a 36 pt column; the numbers match the body pages (CONCLUSION 14). Pass on both.
+- Pages 1 to 13: headings at 12 pt bold (level 1 centered capitals), a single line above and below; paragraphs at the double pitch with a 0.5-inch first-line indent; the block quotation on page 9 indented from both margins; no heading at a page foot. Pass on both.
+- Page 14: CONCLUSION, its paragraph and the signature block together (the last paragraph is kept with it). Pass on both.
 
 ## Engines
 
-The typst template (`typst/`) is the reference. The docx engine is `docx/` (`reference.docx` from `make-reference.sh`, `motion-brief.lua`, and `render.sh`, which owns the build), rendered by `sh tools/render.sh --engine docx motion-brief usage/INPUT-motion-brief.md` into `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.1.1; the vendored EB Garamond installed for it). The docx.pdf is 14 pages, the same count as the typst render; every page was rendered at 60 dpi and compared with the typst render.
+The typst template (`typst/`) is the reference. The docx engine is `docx/`: `reference.xml` (the cross-engine style
+recipe, `base="xengine"`, in the typst face) and `motion-brief.lua`; `fb render` builds the reference document, runs
+pandoc, finds the needles the filter writes (one per heading) in the LibreOffice PDF and renders again with their
+pages until they settle, so the contents carry the laid-out page numbers (no shell script, fb-595.68). Sections:
+the cover has no footer, the contents are numbered in roman from i, the body in arabic from 1. Both engines sit on
+the cross-engine layout model (27.6 pt body, 13.8 pt single lines, first-fit ragged-right breaking, no kerning,
+ligatures or hyphenation); the docx filter adds typst's break rules that LibreOffice lacks (a word joiner in ")(",
+a zero-width space after a slash before a letter).
 
-- **What matches the rules:** US Letter, 1-inch margins; 12-point EB Garamond; double spacing at an exact 24-pt pitch; the caption page with no page number; the contents on a page numbered in lower-case roman; the body numbered in arabic from 1; the caption and the title below it; first-line indented paragraphs; block quotations indented 0.5 inch from both margins; a heading that stays with the text after it; the last paragraph kept with the signature block, and the signature block laid out as in typst (Dated, Respectfully submitted, the firm, the `/s/` line and each signer's block).
-- **What differs from typst, and why:**
-  - Headings are 12 pt in the docx; the typst headings come out at its default heading size (about 17 pt), larger than the 12-point type LCvR 5.1(d) asks for. As for the complaint, this is for David to decide on the typst side.
-  - Contents: the docx lists each heading with dot leaders and a page number. The entries are typed text from the LibreOffice layout of a first pass (`render.sh` writes the numbers, then checks that the second pass lays out to the same pages), not a TOC field, so Word's "Update field" does not refresh them. Re-run `sh docx/render.sh` after any edit to the body. The entries are set more tightly than typst's.
-  - Body pagination: the same 12 body pages, but line breaks differ, so some headings fall on a different page (for example "ALLEGED FACTS AND PROCEDURAL BACKGROUND" is on body page 1 in the docx, page 2 in typst). The contents numbers follow the docx layout.
-  - No table of authorities: the template does not generate one either, so the docx matches typst here (see Known gaps 3).
-- **docx BLOCKED items:** none. The contents page numbers are computed from LibreOffice's layout; Word may paginate a line or two differently and so may place a heading one page off in the contents (`docs/DOCX.md`, Known limits). The docx has not been opened in Microsoft Word (none here).
-- **Not verified:** Word; the font is named, not embedded (`docs/DOCX.md`, Fonts).
-- **Gates:** `tools/check.sh` was not run for this folder (no `rules.md`; not the gate shape; see Known gaps 11 above, which applies here too).
+- **Gate 4:** `params.cross_engine: gate` (`eval.yaml`): XENG-001..003 pass (338 of 338 lines, 16 pages).
+- **docx BLOCKED items:** none. The contents are typed text with the laid-out numbers, not a TOC field (Word's "Update field" does not refresh them; re-render after editing).
+- **Not verified:** the `.docx` has not been opened in Microsoft Word (none here); it converts without error in LibreOffice (DEF-DOCX-OPEN).
+- **No latex template** in this folder.

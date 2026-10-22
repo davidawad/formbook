@@ -4,6 +4,7 @@
 // identification), 5.1(d) (8 1/2 by 11, typed, double-spaced, 12-point, case number with judge initials).
 // See ../README.md. Content-agnostic: every case-specific word comes from the sample's frontmatter.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
@@ -13,12 +14,25 @@
 #let page-w = 8.5in                     // LCvR 5.1(d): standard 8 1/2 by 11 inch format
 #let page-h = 11in
 #let margin = 1in                       // convention (no margin figure in LCvR 5.1); 1-inch margins all round
-#let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // LCvR 5.1(d): double-spaced; 1.35em leading on EB Garamond's 0.65em line box is a 24 pt pitch at 12 pt
-#let single-leading = 0.5em             // single spacing for the caption and the signature block
 #let para-indent = 0.5in                // first-line indent of body paragraphs
+#let quote-indent = 0.5in               // block quotations: indented from both margins
 #let caption-left = 3.4in               // width of the party column of the caption
-#let pitch = 24pt                       // the double-spaced line pitch, used for vertical gaps between blocks
+#let caption-gutter = 0.2in             // between the party column and the case-number column
+#let caption-inset = 10pt               // the party text stands off the caption's right rule
+#let right-inset = 0.1in                // the case-number column stands off the gutter
+#let sig-left = 2.8in                   // signature grid: the "Dated" column, a gutter, the signature column
+#let sig-gutter = 0.2in
+#let toc-page-col = 36pt                // contents: the page numbers keep the last 36 pt of the line to themselves
+#let toc-step = 0.25in                  // contents: an entry steps in a quarter inch per heading level below the first
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-single = 13.8pt              // a single line: 1.15 x the type size (Word's single line in this face)
+#let pitch-double = 2 * pitch-single    // LCvR 5.1(d): double-spaced (Word's double, as in the filed exemplars)
+#let caption-pad = pitch-single / 2     // caption: the rules stand half a line off the text
+#let gap = 12pt                         // between contents rows, and between the signature block's groups
+#let footer-descent = 21.7pt            // the page number's line box ends 0.5 in above the page foot (Word's footer)
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -33,147 +47,126 @@
 
 /// Inline markdown (for names with *et al.*, etc.).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// A heading: kept with the text after it, so a heading never ends a page.
-#let heading-block(c) = block(width: text-width, above: pitch * 0.5, below: pitch * 0.5, sticky: true, c)
+/// One single-spaced line block (a paragraph of its own), with explicit space above it.
+#let line-block(above: 0pt, below: 0pt, body) = block(width: 100%, above: above, below: below, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  body
+})
 
 // ---------------------------------------------------------------------------
-// Cover: court title, caption, title of the paper
+// Cover: court title, caption, title of the paper (a page of its own)
 // ---------------------------------------------------------------------------
 
-/// One single-spaced line per item.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => inl(i)))
-}
-
-#let court-title() = {
-  set par(leading: body-leading)
-  align(center, text(weight: "bold", [UNITED STATES DISTRICT COURT\ FOR THE DISTRICT OF COLUMBIA]))
-}
-
-#let caption(meta) = grid(
+#let caption(meta) = block(above: pitch-double, below: pitch-double, grid(
   columns: (caption-left, 1fr),
-  column-gutter: 0.2in,
-  block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt), {
+  column-gutter: caption-gutter,
+  block(width: 100%, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: caption-inset, bottom: caption-pad), {
     // Each party: its names, then its designation; "v." between the parties.
-    let rows = ()
     for (k, p) in meta.caption.parties.enumerate() {
-      if k > 0 { rows.push("v.") }
-      rows += p.names + (p.designation,)
+      if k > 0 { line-block("v.") }
+      for n in p.names { line-block(inl(n)) }
+      line-block(inl(p.designation))
     }
-    line-stack(rows)
   }),
-  block(inset: (left: 0.1in), {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
+  pad(left: right-inset, {
     // LCvR 5.1(d): the case number is followed by the judge's initials once a judge is assigned.
     let number = if "case_number" in meta and meta.case_number != "" { meta.case_number } else { "____________" }
-    line-stack(("Civil Action No. " + number,))
+    line-block("Civil Action No. " + number)
   }),
-)
+))
 
 #let cover(meta) = {
-  court-title()
-  v(pitch)
+  line-block(align(center, text(weight: "bold", "UNITED STATES DISTRICT COURT")))
+  line-block(align(center, text(weight: "bold", "FOR THE DISTRICT OF COLUMBIA")))
   caption(meta)
-  v(pitch)
   // The title of the paper, centered under the caption (LCvR 5.1(d): a heading under the caption).
-  block(width: text-width, {
-    set par(leading: body-leading, justify: false)
-    align(center, text(weight: "bold", inl(meta.brief_title)))
-  })
+  line-block(align(center, text(weight: "bold", inl(meta.brief_title))))
+}
+
+// One contents row: a step in per heading level below the first; the page number in its own column.
+#let toc-entry(it) = {
+  let hd = it.element
+  let ind = (hd.level - 1) * toc-step
+  listing-row(hd.location(), { h(ind); hd.body }, it.page(), toc-page-col, ind, gap)
 }
 
 // ---------------------------------------------------------------------------
 // Body and signature
 // ---------------------------------------------------------------------------
 
-#let signature-block(meta) = block(width: text-width, breakable: false, {
-  v(pitch)
-  grid(
-    columns: (2.8in, 1fr),
-    column-gutter: 0.2in,
-    [Dated: #meta.date],
-    {
-      set par(leading: single-leading, spacing: 0pt, justify: false)
-      [Respectfully submitted,]
-      v(pitch * 0.5)
-      line-stack((meta.signature.firm,))
-      v(pitch * 0.5)
-      line-stack(("________________________________",))
-      line-stack((meta.signature.signature,))
-      for lines in meta.signature.blocks {
-        v(pitch * 0.5)
-        line-stack(lines)
-      }
-    },
-  )
-})
-
-/// Body paragraphs. Each blank-line-separated chunk of markdown is one paragraph, first-line indented and
-/// unnumbered (a memorandum is not a numbered pleading). A heading stays with the chunk after it. A `>` line
-/// is a block quotation, indented from both margins. Numbering is not applied: a memorandum is not numbered.
-#let paragraphs(body, tail: []) = {
-  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
-  let pending = []
-  let has-pending = false
-  for c in chunks {
-    let t = c.trim()
-    if t.starts-with("#") {
-      pending += heading-block(cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1))
-      has-pending = true
-    } else {
-      let piece = if t.starts-with(">") {
-        block(width: text-width, inset: (left: 0.5in, right: 0.5in), par(leading: body-leading, first-line-indent: 0pt, cmarker.render(t.slice(1).trim(), raw-typst: false, smart-punctuation: true, h1-level: 1)))
-      } else {
-        block(width: text-width, par(leading: body-leading, first-line-indent: 0pt, [#h(para-indent)#cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)]))
-      }
-      let last = chunks.last() == c
-      if last {
-        // The last paragraph stays with the signature block, so a signature never stands alone on a page.
-        block(breakable: false, width: text-width, { pending; piece; tail })
-      } else if has-pending {
-        block(breakable: false, width: text-width, { pending; piece })
-      } else {
-        piece
-      }
-      pending = []
-      has-pending = false
+/// The signature block: "Dated" at the left; "Respectfully submitted,", the firm, the signature line and the
+/// signature, then one group of lines per signer, at the right; it never breaks across a page.
+#let signature-block(meta) = block(width: 100%, breakable: false, above: pitch-double, below: 0pt, grid(
+  columns: (sig-left, 1fr),
+  column-gutter: sig-gutter,
+  line-block[Dated: #meta.date],
+  {
+    line-block[Respectfully submitted,]
+    line-block(above: gap, inl(meta.signature.firm))
+    line-block(above: gap, "________________________________")
+    line-block(inl(meta.signature.signature))
+    for lines in meta.signature.blocks {
+      for (i, l) in lines.enumerate() { line-block(above: if i == 0 { gap } else { 0pt }, inl(l)) }
     }
+  },
+))
+
+/// The body: each blank-line-separated chunk of markdown is a heading, a block quotation (`>`, indented from both
+/// margins) or a paragraph (first-line indented, unnumbered: a memorandum is not a numbered pleading).
+#let paragraphs(body, tail) = {
+  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
+  for (i, c) in chunks.enumerate() {
+    let t = c.trim()
+    let piece = if t.starts-with("#") {
+      md(t)
+    } else if t.starts-with(">") {
+      block(width: 100%, above: 0pt, below: 0pt, pad(x: quote-indent, par(first-line-indent: 0pt, md(t.slice(1).trim()))))
+    } else {
+      block(width: 100%, above: 0pt, below: 0pt, par(first-line-indent: (amount: para-indent, all: true), md(t)))
+    }
+    // The last paragraph stays whole with the signature block, so a signature never stands alone on a page.
+    if i == chunks.len() - 1 { block(width: 100%, breakable: false, above: 0pt, below: 0pt, { piece; tail }) } else { piece }
   }
-  if pending != [] { block(breakable: false, width: text-width, pending) }
 }
 
 #let dcd-motion-brief(meta, body) = {
-  set page(paper: "us-letter", margin: margin, numbering: none)
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  // Typst leading sits between lines only: a block ends one leading short of its last line, so the gap
-  // between blocks is the leading again, which keeps every block on the double-spaced pitch.
-  set block(spacing: body-leading)
+  set page(width: page-w, height: page-h, margin: margin, numbering: none, footer: none)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch (LCvR 5.1(d): double-spaced).
+  show: xengine.with(pitch: pitch-double, list-indent: none)
 
-  // Headings: level 1 centered bold caps; level 2 and 3 bold, left-aligned (argument headings and sub-headings).
-  show heading.where(level: 1): it => heading-block(align(center, text(weight: "bold", upper(it.body))))
-  show heading.where(level: 2): it => heading-block(text(weight: "bold", it.body))
-  show heading.where(level: 3): it => heading-block(text(weight: "bold", it.body))
+  // Headings at the body size, single-spaced and bold, a single line above and below them: level 1 centered in
+  // capitals, levels 2 and 3 at the margin. Sticky: a heading never ends a page.
+  show heading: it => {
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    let b = if it.level == 1 { align(center, text(weight: "bold", upper(it.body))) } else { text(weight: "bold", it.body) }
+    block(sticky: true, width: 100%, above: pitch-single, below: pitch-single, b)
+  }
 
   cover(meta)
 
-  // Front matter (the table of contents) is numbered in lower-case roman; the body starts again at 1.
+  // The page number: centered in a single-spaced line box (Word's footer). The cover is unnumbered; the contents
+  // are numbered in lower-case roman; the body starts again at 1.
+  set page(footer-descent: footer-descent,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
   if "toc" in meta and meta.toc {
-    pagebreak()
     set page(numbering: "i")
     counter(page).update(1)
-    align(center, text(weight: "bold", "TABLE OF CONTENTS"))
-    v(pitch)
-    set par(leading: single-leading, spacing: 0.6em)
-    outline(title: none, depth: 3, indent: 1.5em)
-    pagebreak()
-  } else {
-    pagebreak()
+    line-block(below: gap, align(center, text(weight: "bold", "TABLE OF CONTENTS")))
+    {
+      set text(..edges(pitch-single))
+      set par(first-line-indent: 0pt)
+      show outline.entry: toc-entry
+      outline(title: none, depth: 3, indent: 0pt)
+    }
   }
 
-  set page(numbering: "1")
+  set page(numbering: "1")   // a new page, numbered from 1
   counter(page).update(1)
-  paragraphs(body, tail: signature-block(meta))
+  paragraphs(body, signature-block(meta))
 }
