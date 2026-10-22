@@ -77,7 +77,7 @@ Body:
 
 ## Decisions
 
-- **Typeface: EB Garamond at 14 pt; no face named.** FRAP 32(a)(5)(A) and (a)(6) require a proportionally spaced serif at 14 pt and name no face. The Sixth Circuit Briefs Checklist ("Typefaces") says "a proportionally spaced font at 14 pt. (such as Times New Roman)"; "such as" is an example, not a requirement. So `docs/FONTS.md`'s "no face named" row applies and the template keeps the vendored EB Garamond (`fonts/eb-garamond/`). The exemplar is Times New Roman, so the overlay shows the glyph difference on every line; it is a face difference, not a layout one.
+- **Typeface: Times New Roman at 14 pt** (Liberation Serif, its metric twin, as the fallback), as the typst template sets it. FRAP 32(a)(5)(A) and (a)(6) require a proportionally spaced serif at 14 pt and name no face; the Sixth Circuit Briefs Checklist ("Typefaces") gives "such as Times New Roman" as its example, and the exemplar is Times New Roman. LaTeX sets its metrics with newtx, Word names it.
 - **White cover.** FRAP 32(a)(2) calls for gray on a reply. The court's own checklist says colored covers are not required for electronically filed briefs, so the template follows the checklist.
 - **Compliance certificate directly after the signature.** 6 Cir. R. 32(a) says it "must immediately follow the signature at the end of the brief", so there is no page break before it. The Conclusion and its signature are kept together as one block.
 - **Certificate of service optional.** The exemplar has one (a CM/ECF service statement with the unregistered-party text left out); FRAP 25(d)(2) requires one only for service other than through the e-filing system. The sample includes it because the exemplar does.
@@ -111,7 +111,19 @@ The page-10 pairing is a matcher artifact: the Conclusion's words are few, and t
 
 ## Engines
 
-Same rules and numbers as the typst template (the reference). **latex** (`latex/`, tectonic): EB Garamond 14 pt from `fonts/`; 10 pages against typst's 12; certificate word count 1,458 (same as typst). Differs: the cover is more compact at the top than typst's; the counsel block is narrower so a long name does not wrap; pagination differs, so TOC and TOA page numbers follow the latex body. **docx** (`docx/`): 12 pages, same as typst; fonts EB Garamond only; certificate word count 1,458 matches. Differs: TOA page numbers for Johnson (p. 7, typst 6), McNeal (p. 4, typst 3) and Fed. R. Evid. 801(d)(2) (pp. 6–7) follow the docx's pagination; signature-block gaps are approximate; copy-paste from the docx includes a word joiner in "32(a)(7)(B)"-style tokens. The addendum path is removed (the typst has none). BLOCKED: none; `tools/check.sh` cannot run here (no `checks.yaml`).
+Same rules and numbers as the typst template; the typst output is the reference every engine matches line for line (Gate 4 CROSS-ENGINE, `params.cross_engine: gate` in `eval.yaml`).
+
+**latex** (`latex/template.tex`, `latex/*.lua`; pdflatex): the shared layout package `lib/latex/xengine.sty` and the inline rules `lib/latex/xengine.lua`; Times (newtx) 14 bp in 31.4 bp line boxes (body) and 20 bp boxes (headings, footnotes, tables, cover, certificates), the typst spaces as `\addvspace`, a block typst keeps whole as a `\vbox`, contents and authorities rows as `\xe@row`. XENG-001..003 pass.
+
+**docx** (`docx/make-reference.sh` builds `docx/reference.docx` from `lib/docx/xengine-reference.sh` and the footers in `docx/reference-src/`; `docx/render.sh`, `docx/pages.lua`, `docx/*.lua`): every paragraph carries the typst line box and spaces (exact line spacing), its text with typst's break rules; a word joiner keeps "32(a)(7)(B)" whole (LibreOffice would break between ")" and "("; a copy from the .docx carries it); the TOC and TOA numbers come from the LibreOffice PDF (`pages.lua`), rebuilt until stable. XENG-001..003 pass. BLOCKED: none.
+
+All three engines certify the same word count (1,458): each counts the markdown source as typst's `count-words` does.
+
+### Cross-engine layout (fb-595.54.3)
+
+Ported onto the shared model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty`, `lib/docx/xengine.lua`; `docs/EVAL-LOOP.md`, adoption checklist). typst: pitches instead of leadings, spaces in pt, `listing-row` contents and authorities (the authority's name and cite joined by a comma and a space, was a 0.2 em gap), the page number in a 20 pt line, the cover single-spaced with the counsel at an explicit 2.6 in (was `pad(left: 40%)`, which typst resolved against the padded block), the signers at 2.6 in, a footnote never split across pages (LaTeX and Word keep a note whole). Before: latex 72.2 %, 11 against 12 pages; docx 32.5 %, EB Garamond. After: typst, latex and docx 12 pages, 213/213 lines alike.
+
+All 12 pages of each render viewed (`pdftoppm -r 40`/`-r 50`). Tier-2 finding: p. 8 opens with "Respectfully submitted," and the signatures, apart from the Conclusion on p. 7: the sample ends with a footnote definition, so the template's keep-with-signature rule does not hold the last paragraph (all engines alike), ACCEPTED.
 
 ## Verification pass 2026-10-16 (fb-595.26.6)
 

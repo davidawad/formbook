@@ -2,121 +2,154 @@
 % Pandoc template. The brief's parts are written by ca6-reply-brief.lua from the sample's frontmatter
 % and body; this file holds the page setup, the fonts and the macros those parts call.
 % Same rules and the same numbers as ../typst/ca6-reply-brief.typ (see ../README.md, "Engines").
+%
+% Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): this template sets every line and page break where
+% the typst template (the reference) sets them. The model itself (no kerning or ligatures, first-fit breaking, fixed
+% line boxes, no widows, footnote marks, contents rows) is the shared package lib/latex/xengine.sty, which fb render
+% inlines into the generated .tex in place of \usepackage{xengine}; the inline rules are lib/latex/xengine.lua, run
+% by ca6-reply-brief.lua. Every size and space here is in bp (14 bp = typst's 14 pt), and blocks are spaced with
+% \addvspace (the larger of the space below one and above the next).
 \documentclass[14pt,letterpaper]{extarticle}
+% FRAP 32(a)(5)(A): proportionally spaced serif; Times from newtxtext/newtxmath, which ship with every TeX Live, so
+% the generated .tex compiles with stock pdflatex and no repo-local file; the faces (TeXGyreTermesX, NewTX) are
+% metric-compatible with Times New Roman, the typst template's face.
 \usepackage[T1]{fontenc}
 \usepackage{newtxtext,newtxmath}
-\usepackage[letterpaper,margin=1in]{geometry}
-\usepackage{fancyhdr,needspace,titletoc,longtable,array}
+% FRAP 32(a)(4): letter, 1 in margins; the page number in the bottom margin, as typst sets it.
+\usepackage[letterpaper,margin=1in,headheight=0pt,headsep=0pt,footskip=36bp]{geometry}
+\usepackage{longtable,array}
+\usepackage{xengine} % lib/latex/xengine.sty, inlined by fb render
+\providecommand{\href}[2]{#2}
+\providecommand{\hypertarget}[2]{#2}
+\providecommand{\hyperlink}[2]{#2}
+
 \makeatletter
+% Line boxes [typst pitch-double, pitch-single]: FRAP 32(a)(4) double spacing, 31.4 bp, for the body; single
+% spacing, 20 bp, for headings, quotations, footnotes (14 pt, FRAP 32(a)(5)(A)), the TOC/TOA, the cover and the
+% certificates.
+\renewcommand\normalsize{\xe@lines{14}{31.4}}
+\newcommand\singlespacing{\xe@lines{14}{20}}
+\renewcommand\footnotesize{\xe@lines{14}{20}}
+\normalsize
+\setlength{\parindent}{0.5in} % after xengine.sty's \raggedright, which sets it to zero
+\setcounter{secnumdepth}{-\maxdimen}
+% The page number in the 14 bp type, single-spaced; none on the cover.
+\def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
+  \def\@oddfoot{\reset@font\singlespacing\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}
+\pagestyle{plain}
 
-% FRAP 32(a)(5)(A): proportionally spaced serif; Times from newtxtext/newtxmath (loaded above), which ship with every
-% TeX Live, so the generated .tex compiles with stock pdflatex and no repo-local file; the faces (TeXGyreTermesX, NewTX)
-% are metric-compatible with Times New Roman. Point headings are plain bold, not small capitals, as in the typst template.
-
-% Metrics measured from the typst render (14-point Liberation Serif): body lines 31.43 pt apart (FRAP 32(a)(4)
-% double spacing), single-spaced blocks 19.95 pt apart. Paragraphs are ragged right, first line indented 0.5 in.
-\newcommand{\doublespacing}{\fontsize{14pt}{31.43pt}\selectfont}
-\newcommand{\singlespacing}{\fontsize{14pt}{19.95pt}\selectfont}
-\doublespacing
-\raggedright
-\setlength{\parindent}{0.5in}
-\setlength{\parskip}{0pt}
-\hyphenpenalty=10000
-\exhyphenpenalty=10000
-\tolerance=1000
-
-% Footnotes: 14 pt, single-spaced, the mark then a thin space (FRAP 32(a)(5)(A)); separator 30% wide.
-\renewcommand{\footnotesize}{\fontsize{14pt}{19.95pt}\selectfont}
-\renewcommand{\footnoterule}{\kern -6pt\hrule width 0.3\columnwidth height 0.5pt\kern 5.5pt}
-\long\def\@makefntext#1{\noindent\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
-\setlength{\footnotesep}{14pt}
-\setlength{\skip\footins}{14pt}
-
-% Page numbers: centered in the footer; none on the cover; roman in the front matter, arabic from the Introduction.
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfoot[C]{\fontsize{14pt}{19.95pt}\selectfont\thepage}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\fontsize{14pt}{19.95pt}\selectfont\thepage}\renewcommand{\headrulewidth}{0pt}}
-
-% Cover: the gap between its parts (typst: the largest gap at which the cover fits one page).
-\newcommand{\caGap}{4pt}
-\newcommand{\caShortRule}{\par\nointerlineskip\hbox to\textwidth{\hss\vrule width 2in height 0.7pt depth 0pt\hss}\nointerlineskip}
-
-% Headings. Labels hang in a 0.5 in box; each level steps in 0.5 in (typst: label-indent, heading-tab).
-% Each heading ends with \nopagebreak, so the paragraph after it cannot be left alone at a page foot. The
-% TOC entry is written right after the heading box: a write whatsit must not sit between the penalty and the
-% glue, because glue after a whatsit is a legal break point.
-\newcommand{\caHeadOne}[1]{%
-  \Needspace{5\baselineskip}\par\nopagebreak\vspace{21pt}%
-  {\singlespacing\centering\fontsize{16.1pt}{19.95pt}\selectfont\bfseries\MakeUppercase{#1}\par}%
-  \addcontentsline{toc}{caone}{\protect\caTocLine{}{\protect\MakeUppercase{#1}}}%
-  \nopagebreak\vspace{15.4pt}}
-\newcommand{\caHeadOneNoToc}[1]{%
-  \Needspace{5\baselineskip}\par\nopagebreak\vspace{21pt}%
-  {\singlespacing\centering\fontsize{16.1pt}{19.95pt}\selectfont\bfseries\MakeUppercase{#1}\par}%
-  \nopagebreak\vspace{15.4pt}}
-\newcommand{\caHeadPlain}[1]{%
-  \Needspace{4\baselineskip}\par\nopagebreak\vspace{16.8pt}%
-  {\singlespacing\noindent\textbf{#1}\par}%
-  \nopagebreak\vspace{12.6pt}}
-% Point and sub-headings: d steps from the margin (0 for the Argument's point headings, which hang from the
-% margin; typst: label-indent); level: 2..5 (levels 4 and up are bold italic); label; title. Levels 2 and up
-% are in the table of contents (catoc0 for d=0, catoc1..4 for the others).
-\newcommand{\caTab}{0.5in}
-\newcommand{\caHeadSub}[4]{%
-  \Needspace{4\baselineskip}\par\nopagebreak\vspace{15.4pt}%
-  {\singlespacing\noindent\hangindent=\dimexpr\caTab*(#1+1)\relax\hangafter=1
-   \hspace*{\dimexpr\caTab*#1\relax}\makebox[\caTab][l]{\textbf{#3}}%
-   \ifnum#2>3\textbf{\textit{#4}}\else\textbf{#4}\fi\par}%
-  \ifnum#2<3 \addcontentsline{toc}{catoc#1}{\protect\caTocLine{#3}{#4}}\fi
-  \nopagebreak\vspace{12.6pt}}
-
-% Table of contents: one line per heading, label in a 0.5 in box, dot leader, page number at right.
-\newcommand{\caTocLine}[2]{\ifx\relax#1\relax\else\makebox[\caTab][l]{#1}\fi#2}
-\newcommand{\caTocList}{\@starttoc{toc}}
-\titlecontents{caone}[0pt]{\addvspace{8.4pt}\singlespacing}{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
-\titlecontents{catoc0}[0pt]{\addvspace{4.9pt}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
-\titlecontents{catoc1}[0.5in]{\addvspace{4.9pt}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
-\titlecontents{catoc2}[1.0in]{\addvspace{4.9pt}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
-\titlecontents{catoc3}[1.5in]{\addvspace{4.9pt}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
-\titlecontents{catoc4}[2.0in]{\addvspace{4.9pt}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
-
-% Table of authorities. \toahit records each citation's printed page (written at shipout, so the page is the
-% page the citation sits on). \toaref keeps one entry per page; \toapages lists them; "passim" from 7 pages.
-\newcommand{\toahit}[1]{\protected@write\@auxout{}{\string\toaref{#1}{\thepage}}}
-\newcommand{\toaref}[2]{%
-  \@ifundefined{toalast@#1}{\expandafter\gdef\csname toalast@#1\endcsname{}\expandafter\gdef\csname toacount@#1\endcsname{0}}{}%
-  \edef\caTmp{#2}%
-  \expandafter\ifx\csname toalast@#1\endcsname\caTmp\relax\else
-    \expandafter\gdef\csname toalast@#1\endcsname{#2}%
-    \expandafter\xdef\csname toacount@#1\endcsname{\number\numexpr\csname toacount@#1\endcsname+1\relax}%
-    \@ifundefined{toapages@#1}{\expandafter\gdef\csname toapages@#1\endcsname{#2}}%
-      {\expandafter\xdef\csname toapages@#1\endcsname{\csname toapages@#1\endcsname, #2}}%
-  \fi}
-\newcommand{\caToaPages}[1]{%
-  \@ifundefined{toacount@#1}{}{%
-    \ifnum\csname toacount@#1\endcsname>6 \emph{passim}\else\csname toapages@#1\endcsname\fi}}
-\newcommand{\caToaGroup}[2]{%
-  \Needspace{3\baselineskip}\par\ifnum#2=1 \vspace{1em}\else \vspace{1.4em}\fi%
-  {\singlespacing\noindent\textbf{#1}\ifnum#2=1\hfill\textbf{\underline{Page(s)}}\fi\par}\vspace{0.2em}}
-\newcommand{\caToaEntry}[2]{%
-  \par\vspace{0.7em}{\singlespacing\noindent\hangindent=0.35in\hangafter=1 #1\hspace{0.8em}%
-  \leaders\hbox to 0.16em{.\hss}\hfill\hspace{0.3em}\caToaPages{#2}\par}}
-
-% Certificates and signature: single-spaced; the paragraphs of a certificate are one blank line apart.
-\newenvironment{caSingle}{\singlespacing\setlength{\parindent}{0pt}\setlength{\parskip}{14pt}}{\par}
-\newenvironment{caCenter}{\par\centering}{\par}
-\newenvironment{caLeft}{\par\raggedright}{\par}
-\newenvironment{caBlock}{\singlespacing\setlength{\parindent}{0pt}}{\par}
-
-% Block quotations as typst sets them: single-spaced, indented 0.5 in on both sides, one blank line around.
-\renewenvironment{quote}{\par\addvspace{14pt}\singlespacing\setlength{\parindent}{0pt}\setlength{\parskip}{12.6pt}%
-  \leftskip 0.5in\rightskip 0.5in\par}{\par\addvspace{14pt}}
-\providecommand{\tightlist}{}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \providecommand{\pandocbounded}[1]{#1}
 
+% Footnotes [footnote.entry]: 12.6 bp clear of the text, a 30 % rule, 7 bp above each note; the mark (58 % of the
+% 14 pt type) and a quarter em before the text. LaTeX resets the right skip inside a footnote: it is set back here.
+\setlength{\skip\footins}{12.6bp}
+\renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
+\xe@footnotemarks{14}
+\renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
+  \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25em #1}
+
+% The cover [cover-body]: centered single-spaced lines; the gaps between its parts take what the page leaves, none
+% when the page is full (typst: the largest gap at which the cover fits one page). A row of counsel columns keeps the
+% height of its minipages (each sets its own lines).
+\newcommand\cagap{\par\vskip 4bp plus 1fill\relax}
+\newcommand\carow[1]{{\xe@natural\noindent#1\par}}
+\newcommand\caDoubleRule{\par\nointerlineskip\hbox to\textwidth{\vrule width\textwidth height 1.6bp depth 0bp}%
+  \nointerlineskip\vskip 2.5bp\nointerlineskip\hbox to\textwidth{\vrule width\textwidth height 0.5bp depth 0bp}}
+\newcommand\caShortRule{\par\nointerlineskip\hbox to\textwidth{\hss\vrule width 2in height 0.7bp depth 0bp\hss}}
+% a centered line or paragraph; one in the right half (#1 the indent); an italic line stepped in 0.5 em
+\newcommand\cacenter[1]{\par\begingroup\centering\noindent#1\par\endgroup}
+\newcommand\caright[2]{\par\begingroup\leftskip=#1\relax\noindent#2\par\endgroup}
+
+% Block quotations [quote]: 0.5 in in from both margins, single-spaced, 14 bp above and below, 12.6 bp between.
+\renewenvironment{quote}{%
+  \par\addvspace{14bp}%
+  \begingroup\leftskip=0.5in\rightskip=\dimexpr0.5in\relax plus 1fil\relax\singlespacing\parindent=0pt\relax
+}{%
+  \par\endgroup\addvspace{14bp}%
+}
+
+% Headings [style-heading]. Section headings (level 1): bold capitals, 14 bp, centered, 21 / 15.4 bp around.
+% Point headings (the Argument's level 2): bold, centered, label and title, 16.8 / 14 bp. Sub-headings: the label in a
+% 0.5 in box at #1 half inches, the text hanging after it, bold (the text bold italic from level 4: #2), 15.4 / 12.6 bp.
+% Plain headings (the addendum): bold, 16.8 / 12.6 bp. A heading never ends a page (\nobreak, no orphans after it).
+% #<n> is the heading's index: the TOC refers to ca-hd-<n>.
+\newcommand{\caHeadOne}[2]{%
+  \par\addvspace{21bp}%
+  \begingroup\centering\singlespacing\bfseries\leavevmode\label{ca-hd-#2}\MakeUppercase{#1}\par\endgroup
+  \nobreak\addvspace{15.4bp}}
+\newcommand{\caHeadPoint}[3]{%
+  \par\addvspace{16.8bp}%
+  \begingroup\centering\singlespacing\bfseries\leavevmode\label{ca-hd-#3}#1 #2\par\endgroup
+  \nobreak\addvspace{14bp}}
+\newcommand{\caHeadSub}[5]{%
+  \par\addvspace{15.4bp}%
+  \begingroup\singlespacing\noindent
+  \hangindent=\dimexpr0.5in*(#1+1)\relax\hangafter=1\relax
+  \hspace*{\dimexpr0.5in*#1\relax}\label{ca-hd-#5}%
+  \makebox[0.5in][l]{\textbf{#3}}\ifnum#2>3 \textbf{\emph{#4}}\else\textbf{#4}\fi
+  \par\endgroup\nobreak\addvspace{12.6bp}}
+\newcommand{\caHeadPlain}[2]{%
+  \par\addvspace{16.8bp}%
+  \begingroup\singlespacing\noindent\label{ca-hd-#2}\textbf{#1}\par\endgroup
+  \nobreak\addvspace{12.6bp}}
+
+% One table-of-contents row [listing-row]: the text wraps before a 36 bp page column, a dot leader runs to the page;
+% rows single-spaced with no space between them. #1 indent in half inches (the text hangs half an inch more), #2 the
+% label (empty: none), #3 title, #4 index.
+\newcommand{\tocline}[4]{%
+  \begingroup\singlespacing\setlength{\xe@col}{36bp}\def\ca@lab{#2}%
+  \xe@row{0bp}{\dimexpr0.5in*(#1+1)\relax}{\hspace*{\dimexpr0.5in*#1\relax}%
+    \ifx\ca@lab\empty\else\makebox[0.5in][l]{#2}\fi#3}{\pageref{ca-hd-#4}}%
+  \endgroup}
+\newcommand{\tochead}{\par\addvspace{4.2bp}\begingroup\singlespacing\noindent\hfill\textbf{\underline{Page}}\par\endgroup}
+
+% Table of authorities. Each citation writes its page to the .aux file (\toahit, at shipout time); the next run
+% reads them back as \toapg@<key> = "p1,p2,...". \toapages prints the distinct pages in document order; 7 or more
+% distinct pages print as "passim" (typst passim-threshold).
+\newcommand{\toahit}[1]{\protected@write\@auxout{}{\string\toarec{#1}{\thepage}}}
+\newcommand{\toarec}[2]{%
+  \@ifundefined{toapg@#1}%
+    {\expandafter\gdef\csname toapg@#1\endcsname{#2,}}%
+    {\expandafter\xdef\csname toapg@#1\endcsname{\csname toapg@#1\endcsname#2,}}}
+\newcounter{toacnt}
+\newcommand{\toapages}[1]{%
+  \setcounter{toacnt}{0}\gdef\toapgs{}\def\toalast{}%
+  \@ifundefined{toapg@#1}{}{%
+    \expandafter\let\expandafter\toalist\csname toapg@#1\endcsname
+    \@for\toap:=\toalist\do{%
+      \ifx\toap\empty\else
+        \ifx\toap\toalast\else
+          \ifnum\value{toacnt}>0 \xdef\toapgs{\toapgs, }\fi
+          \xdef\toapgs{\toapgs\toap}\stepcounter{toacnt}%
+        \fi
+        \edef\toalast{\toap}%
+      \fi
+    }%
+  }%
+  \ifnum\value{toacnt}>6 \emph{passim}\else\toapgs\fi}
+% One authority [listing-row]: #1 name (empty for a statute etc.), #2 cite, #3 1 for a case, #4 key; the page column
+% is 56 bp, or the width of a longer page list.
+\newlength\ca@w
+\newcommand{\toaitem}[4]{%
+  \begingroup\singlespacing
+  \settowidth{\ca@w}{\toapages{#4}}%
+  \setlength{\xe@col}{56bp}\ifdim\ca@w>\xe@col\setlength{\xe@col}{\ca@w}\fi
+  \def\toaname{#1}%
+  \xe@row{9.8bp}{0.35in}{\ifx\toaname\empty\else\ifnum#3=1 \emph{#1},\else#1,\fi\newline\fi #2}{\toapages{#4}}%
+  \endgroup}
+% A group heading. #1 title, #2 1 for the first group (carries the "Page(s)" column head). It stays with its first
+% entry.
+\newcommand{\toagroup}[2]{%
+  \par\ifnum#2=1 \addvspace{14bp}\else\addvspace{19.6bp}\fi
+  \begingroup\singlespacing\noindent\textbf{#1}%
+  \ifnum#2=1 \hskip 0pt plus 1fill\textbf{\underline{Page(s)}}\fi\par\endgroup\nobreak\addvspace{2.8bp}}
+
+% Single-spaced text (disclosure, certificates, designation): no indent, 14 bp between paragraphs (\caPar).
+\newenvironment{caSingle}{\par\singlespacing\parindent=0pt\relax}{\par}
+\newcommand\caPar{\par\addvspace{14bp}}
+% The signature blocks: lines at #1 from the margin, each kept with the next.
+\newcommand\casig[2]{\par\nobreak\begingroup\leftskip=#1\relax\noindent#2\par\endgroup}
 \makeatother
 \begin{document}
 $body$

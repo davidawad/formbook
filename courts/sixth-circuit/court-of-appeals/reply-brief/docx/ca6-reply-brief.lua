@@ -1,17 +1,28 @@
 -- U.S. Court of Appeals for the Sixth Circuit: reply brief, Word (docx) engine.
--- A pandoc filter. It writes the brief from the sample's frontmatter and body with the paragraph styles of
--- reference.docx (reference-src/styles.xml), with the same rules and numbers as ../typst/ca6-reply-brief.typ:
--- cover, table of contents and table of authorities (roman), body and signature, the certificate of compliance,
--- and the certificate of service when the sample asks for one. The reply has no disclosure page, no statement in
--- support of oral argument, no designation and no addendum (the typst has none of them).
--- Page numbers (TOC, TOA) are plain text. docx/render.sh gets them from the rendered PDF (docx/pages.lua) and
--- builds again with them until they stop changing. Environment: CA6_DOCX_PAGES=<pagemap file> supplies the
--- numbers (absent: placeholders); CA6_DOCX_LIST=<file> writes the list of headings and citations to match.
--- Rules: ../README.md.
+-- A pandoc filter. It writes the brief from the sample's frontmatter and body on reference.docx (make-reference.sh:
+-- the shared style recipe of lib/docx/xengine-reference.sh), with the same rules and numbers as
+-- ../typst/ca6-reply-brief.typ. Page numbers (TOC, TOA) are plain text. docx/render.sh gets them from the rendered
+-- PDF (docx/pages.lua) and builds again with them until they stop changing. Environment: CA6_DOCX_PAGES=<pagemap
+-- file> supplies the numbers (absent: placeholders); CA6_DOCX_LIST=<file> writes the list of headings and citations
+-- to match. Rules: ../README.md.
+--
+-- Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"; lib/docx/xengine.lua): every paragraph written here
+-- carries the typst template's line box (exact line spacing: 31.4 pt body, 20 pt single) and spaces (twips = 20 x
+-- pt), its text as runs with typst's break rules; the text pandoc writes itself gets the same rules.
 
-local TOC_DEPTH = 2                     -- typst: toc-depth (sections and point headings)
+local xe = require('docx.xengine')
+
+local TOC_DEPTH = 2                     -- typst: toc-depth
 local PASSIM = 7                        -- typst: passim-threshold
-local WORD_LIMIT = 6500                 -- FRAP 32(a)(7)(B)(ii): a reply brief is half the principal-brief limit
+local WORD_LIMIT = 6500                 -- CA6-LEN-001: FRAP 32(a)(7)(B)(ii)
+local FACE = 'Times New Roman'          -- the typeface the template sets (typst font-family)
+
+-- typst's numbers, in twips
+local SINGLE = 400                      -- pitch-single 20 pt
+local TEXTW = 9360                      -- 6.5 in
+local COUNSEL = 3744                    -- counsel-indent, 2.6 in
+local COURT = 6336                      -- the court's name in a 4.4 in column, centered
+local TOC_COL, TOA_COL = 720, 1120      -- the page columns of the tables, 36 pt and 56 pt
 
 local PAGES = {}   -- tag -> printed page label: h<id> (heading), k<k> (citation k)
 local pages_file = os.getenv('CA6_DOCX_PAGES')
@@ -25,92 +36,72 @@ if pages_file and pages_file ~= '' then
 end
 local function page_of(tag) return PAGES[tag] or '0' end
 
--- Paragraph styles are named in the document ("CA Section"); the ids are what reference-src/styles.xml calls them.
-local NAME = {
-  CASection = 'CA Section', CASectionNewPage = 'CA Section New Page', CAPoint = 'CA Point',
-  CASub1 = 'CA Sub 1', CASub2 = 'CA Sub 2', CASub3 = 'CA Sub 3', CASub4 = 'CA Sub 4',
-  CABodyKeep = 'CA Body Keep', CASingle = 'CA Single',
-  CACover = 'CA Cover', CACoverBold = 'CA Cover Bold', CACourt = 'CA Court', CACoverTitle = 'CA Cover Title',
-  CAShortRule = 'CA Short Rule', CASpacerS = 'CA Spacer S', CASpacerM = 'CA Spacer M',
-  CASpacerL = 'CA Spacer L', CASpacerXL = 'CA Spacer XL',
-  CACounsel = 'CA Counsel', CACounselEnd = 'CA Counsel End', CARespect = 'CA Respectfully',
-  CASigFirst = 'CA Signature First', CASigLine = 'CA Signature Line', CASigEnd = 'CA Signature End',
-  CACertFirst = 'CA Certificate Signature First',
-  CATOCPage = 'CA TOC Page',
-  CATOCTextTop = 'CA TOC Text Top', CATOCText0 = 'CA TOC Text 0', CATOCText1 = 'CA TOC Text 1',
-  CATOCText2 = 'CA TOC Text 2', CATOCText3 = 'CA TOC Text 3',
-  CATOCLabel0 = 'CA TOC Label 0', CATOCLabel1 = 'CA TOC Label 1', CATOCLabel2 = 'CA TOC Label 2',
-  CATOCLabel3 = 'CA TOC Label 3', CATOAGroup = 'CA TOA Group', CATOAEntry = 'CA TOA Entry',
-  CATable = 'CA Table Text', CASectionBreak = 'CA Section Break',
-}
+local plain = pandoc.utils.stringify
 
-local TWIP_TEXT = 9360   -- 6.5 in
-local NBSP = '\u{00A0}'
-
-local function X(s) return pandoc.RawInline('openxml', s) end
-local function TAB() return X('<w:r><w:tab/></w:r>') end
--- Label to title: a tab to the hanging indent (the paragraph style's indent sets where the title starts).
-local function PTAB() return TAB() end
-local function attr(id) return pandoc.Attr('', {}, { ['custom-style'] = NAME[id] or id }) end
-local function para(id, inlines) return pandoc.Div({ pandoc.Para(inlines) }, attr(id)) end
-local function styled(id, blocks) return pandoc.Div(blocks, attr(id)) end
--- An empty paragraph of a fixed height (the spacers of the cover, the short rules).
-local function spacer(id) return pandoc.Div({ pandoc.Para({ pandoc.Str(NBSP) }) }, attr(id)) end
-
--- Plain text with the typst's "~" (no-break space) into inlines.
-local function txt(s)
-  local out = pandoc.List()
-  s = s:gsub('~', NBSP):gsub('%)%(', ')\u{2060}(')
-  local first = true
-  for w in s:gmatch('[^ ]+') do
-    if not first then out:insert(pandoc.Space()) end
-    first = false
-    out:insert(pandoc.Str(w))
+-- Unicode line breaking (typst) never breaks before a closing or separating mark, even after a space (UAX #14 LB13:
+-- ". . . ."); LibreOffice does: such a space is a no-break space here.
+local NOBREAK_BEFORE = '^[.,:;!?)%]}/]'
+local function bind_closers(il)
+  local out = pandoc.Inlines({})
+  for i, el in ipairs(il) do
+    local nx = il[i + 1]
+    if el.t == 'Space' and nx and nx.t == 'Str' and nx.text:match(NOBREAK_BEFORE) then
+      out:insert(pandoc.Str('\u{00A0}'))
+    else
+      out:insert(el)
+    end
   end
   return out
 end
+local function inlines(l) return bind_closers(xe.inlines(l)) end
+-- No break inside a token of adjacent parentheses ("32(a)(7)"; typst boxes it, LibreOffice would break between ")"
+-- and "("): a word joiner between them.
+local function join_parens(s) return (s:gsub('%)%(', ')\u{2060}(')) end
 
-local function concat(a, b)
-  local out = pandoc.List(a)
-  for _, x in ipairs(b) do out:insert(x) end
-  return out
+-- p(o, runs): o = { keep, lines, brk, bdr, tabs, before, after, line, left, hanging, first, right, jc }
+local function p(o, runs)
+  local x = {}
+  if o.keep then x[#x + 1] = '<w:keepNext/>' end
+  if o.lines ~= false then x[#x + 1] = '<w:keepLines/>' end
+  if o.brk then x[#x + 1] = xe.BREAK end
+  if o.bdr then x[#x + 1] = o.bdr end
+  if o.tabs then x[#x + 1] = o.tabs end
+  x[#x + 1] = xe.spacing(o.before or 0, o.after or 0, o.line or SINGLE)
+  local first = o.first
+  if first == nil and o.hanging == nil then first = 0 end
+  x[#x + 1] = xe.ind(o.left or 0, o.hanging, first, o.right)
+  if o.jc then x[#x + 1] = xe.jc(o.jc) end
+  return xe.para(x, runs or '')
+end
+local function P(o, runs) return xe.raw(p(o, runs)) end
+local TAB = '<w:r><w:tab/></w:r>'
+local NBH = '<w:r><w:noBreakHyphen/></w:r>'
+
+local function upper(il)
+  return pandoc.Inlines(il):walk({ Str = function(s) return pandoc.Str(pandoc.text.upper(s.text)) end })
 end
 
--- Inline lists joined with a space between them (each argument is a list of inlines).
-local function seq(...)
-  local out = pandoc.List()
-  for i, p in ipairs({ ... }) do
-    if i > 1 then out:insert(pandoc.Space()) end
-    for _, x in ipairs(p) do out:insert(x) end
-  end
-  return out
-end
-
-local function esc(s) return (s:gsub('&', '&amp;'):gsub('<', '&lt;'):gsub('>', '&gt;')) end
-
--- The section breaks. Each section's properties go in the paragraph that ends it; the last section's come from
--- reference.docx (footer with arabic numbers).
 local PG = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>'
 local function section_break(footer_rid, numfmt)
+  local f = footer_rid and ('<w:footerReference w:type="default" r:id="' .. footer_rid .. '"/>') or ''
   local pg = numfmt and ('<w:pgNumType w:fmt="' .. numfmt .. '" w:start="1"/>') or ''
-  return pandoc.RawBlock('openxml', '<w:p><w:pPr><w:pStyle w:val="CASectionBreak"/><w:sectPr><w:footerReference w:type="default" r:id="' ..
-    footer_rid .. '"/>' .. PG .. pg .. '</w:sectPr></w:pPr></w:p>')
+  return xe.raw('<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/><w:sectPr>' .. f
+    .. PG .. pg .. '</w:sectPr></w:pPr></w:p>')
 end
 
--- Numbering as typst's heading labels: Argument I. / A. / 1. / a.   Elsewhere A. / 1. / a. / (1)
 local function roman(n)
   local s = ''
-  for _, p in ipairs({ { 10, 'X' }, { 9, 'IX' }, { 5, 'V' }, { 4, 'IV' }, { 1, 'I' } }) do
-    while n >= p[1] do
-      s = s .. p[2]
-      n = n - p[1]
+  for _, q in ipairs({ { 10, 'X' }, { 9, 'IX' }, { 5, 'V' }, { 4, 'IV' }, { 1, 'I' } }) do
+    while n >= q[1] do
+      s = s .. q[2]
+      n = n - q[1]
     end
   end
   return s
 end
-local function letter(n, upper)
+local function letter(n, up)
   if n > 26 then error('ca6-reply-brief: more than 26 sub-headings at one level') end
-  return string.char((upper and 64 or 96) + n)
+  return string.char((up and 64 or 96) + n)
 end
 local function label_for(level, in_arg, n)
   if in_arg then
@@ -137,15 +128,50 @@ local function group_digits(n)
   return out
 end
 
--- FRAP 32(a)(7)(B): the body's words, footnotes included. The footnote numbers the plain writer prints are left
--- out; no-break spaces count as spaces, as in typst.
-local function count_words(blocks)
-  local s = pandoc.write(pandoc.Pandoc(blocks), 'plain')
-  s = s:gsub('%[%d+%]', ' ')
-  s = s:gsub('\194\160', ' ')
+local function source_body()
+  local f = PANDOC_STATE and PANDOC_STATE.input_files and PANDOC_STATE.input_files[1]
+  if not f then error('ca6-reply-brief: no input file to read', 0) end
+  local h = assert(io.open(f, 'r'))
+  local src = h:read('a')
+  h:close()
+  local fm = src:match('^%-%-%-\r?\n.-\r?\n%-%-%-[ \t]*\r?\n')
+  if not fm then error('ca6-reply-brief: the sample must start with a YAML frontmatter block', 0) end
+  return src:sub(#fm + 1)
+end
+
+-- typst count-words on the markdown source of the body, step by step, so that every engine certifies the same number.
+local function source_words(body)
+  local s = body:gsub('<!%-%-.-%-%->', ' ')
   local n = 0
-  for _ in s:gmatch('%S+') do n = n + 1 end
+  for line in (s .. '\n'):gmatch('(.-)\r?\n') do
+    line = line:gsub('^%[%^[^%]]+%]:', ' ')
+    line = line:gsub('%[%^[^%]]+%]', '')
+    line = line:gsub('%[([^%]]*)%]%([^)]*%)', '%1')
+    line = line:gsub('^#+[ \t]+', '')
+    line = line:gsub('^>[ \t]?', '')
+    line = line:gsub('^[ \t]*[-*+][ \t]+', ''):gsub('^[ \t]*%d+[.)][ \t]+', '')
+    line = line:gsub('\\(.)', '%1')
+    line = line:gsub('%*', '')
+    line = line:gsub('^_', ''):gsub('([%s(%[\u{201C}"])_', '%1')
+    line = line:gsub('_([%s.,;:)%]\u{201D}"!?])', '%1'):gsub('_$', '')
+    for _ in line:gmatch('%S+') do n = n + 1 end
+  end
   return n
+end
+
+-- typst keeps the last paragraph with the signature block unless the source ends on a heading or a footnote
+-- definition.
+local function keeps_last(body)
+  local last = body:gsub('%s+$', ''):match('.*\n[ \t]*\n(.*)$') or body
+  return last ~= '' and not last:match('^#') and not last:match('^%[%^')
+end
+
+local ADV = { [','] = 70, [' '] = 70, ['-'] = 93, i = 78, l = 78, v = 140, x = 140, c = 124, p = 140, a = 124,
+  s = 109, m = 218 }
+local function width_of(s)
+  local w = 0
+  for c in s:gmatch('.') do w = w + (c:match('%d') and 140 or ADV[c] or 140) end
+  return w
 end
 
 local KINDS = {
@@ -156,53 +182,79 @@ local KINDS = {
 local function authorities_of(meta)
   local out = {}
   for key, a in pairs(meta.authorities or {}) do
-    local sortsrc = a.sort and pandoc.utils.stringify(a.sort)
-      or ((a.name and pandoc.utils.stringify(a.name) or '') .. ' ' .. pandoc.utils.stringify(a.cite))
-    out[key] = { kind = pandoc.utils.stringify(a.kind), cite = a.cite, name = a.name, sort = sortsrc:lower():gsub('[^a-z0-9 ]', '') }
+    local sortsrc = a.sort and plain(a.sort) or ((a.name and plain(a.name) or '') .. ' ' .. plain(a.cite))
+    out[key] = { kind = plain(a.kind), cite = a.cite, name = a.name, sort = sortsrc:lower():gsub('[^a-z0-9 ]', '') }
   end
   return out
 end
 
--- Signature blocks after the Conclusion (6 Cir. R. 25(d)(1): s/Name), as typst's signature-block.
+-- The cover [cover-body]: centered single-spaced lines; the court in a 4.4 in column; counsel at 2.6 in.
+local function cover(m)
+  local out = {}
+  local GAP = 120
+  local function c(runs, before) out[#out + 1] = P({ jc = 'center', before = before or 0 }, runs) end
+  local function short_rule()
+    out[#out + 1] = P({ bdr = '<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:pBdr>',
+      before = 0, after = GAP, line = 80, left = 3240, right = 3240 })
+  end
+  c(xe.runs('No. ') .. xe.inl(m.case_number))
+  local side = (TEXTW - COURT) // 2
+  out[#out + 1] = P({ jc = 'center', before = GAP, left = side, right = side },
+    xe.runs('IN THE UNITED STATES COURT OF APPEALS FOR THE SIXTH CIRCUIT', { b = true }))
+  short_rule()
+  for i, s in ipairs(m.caption) do
+    for _, n in ipairs(s.names) do c(xe.inl(n)) end
+    c(xe.inl(s.designation))
+    if i < #m.caption then c(xe.runs('v.'), 60) end
+  end
+  short_rule()
+  c(xe.inl(m.proceeding), GAP)
+  short_rule()
+  c(xe.inl(upper(m.brief_title), { b = true }), GAP)
+  short_rule()
+  for gi, g in ipairs(m.counsel) do
+    for ni, n in ipairs(g.names) do
+      out[#out + 1] = P({ keep = true, left = COUNSEL, before = ni == 1 and GAP or 0 }, xe.inl(n))
+    end
+    for _, l in ipairs(g.lines or {}) do out[#out + 1] = P({ keep = true, left = COUNSEL }, xe.inl(l)) end
+  end
+  return out
+end
+
+-- The signature block [signature-block]: 19.6 pt above; "Respectfully submitted," at the margin; each signer 19.6 pt
+-- below, at 2.6 in. Not split.
 local function signature_blocks(m)
-  local out = { para('CARespect', { pandoc.Str('Respectfully submitted,') }) }
+  local out = { P({ keep = true, before = 392 }, xe.runs('Respectfully submitted,')) }
   local sigs = m.signatures
   for si, sig in ipairs(sigs) do
-    out[#out + 1] = para('CASigFirst', concat({ pandoc.Str('s/'), pandoc.Space() }, sig.signer))
     local lines = sig.lines or {}
-    for li, l in ipairs(lines) do
-      local last = si == #sigs and li == #lines
-      out[#out + 1] = para(last and 'CASigEnd' or 'CASigLine', l)
+    out[#out + 1] = P({ keep = si < #sigs or #lines > 0, before = 392, left = COUNSEL }, xe.runs('s/ ' .. plain(sig.signer)))
+    for i, l in ipairs(lines) do
+      out[#out + 1] = P({ keep = si < #sigs or i < #lines, left = COUNSEL }, xe.inl(l))
     end
   end
   return out
 end
 
--- The certificate's signature: "s/ Name" and the name (6 Cir. R. 25; FRAP 25(d)); the first signing attorney.
+-- A certificate's signature [cert-signature]: 22.4 pt above, at 2.6 in.
 local function cert_signature(m)
   local sig = m.signatures[1]
   return {
-    para('CACertFirst', concat({ pandoc.Str('s/'), pandoc.Space() }, sig.signer)),
-    para('CASigEnd', sig.signer),
+    P({ keep = true, before = 448, left = COUNSEL }, xe.runs('s/ ' .. plain(sig.signer))),
+    P({ left = COUNSEL }, xe.runs(plain(sig.signer))),
   }
 end
 
+local NB = '\u{00A0}'
+local FRAP = 'Fed.' .. NB .. 'R.' .. NB .. 'App.' .. NB .. 'P.' .. NB   -- typst: Fed.~R.~App.~P.~
+
 function Pandoc(doc)
+  doc = doc:walk({ Str = function(s) return pandoc.Str(join_parens(s.text)) end })   -- the body and the metadata
   local meta = doc.meta
   local auth = authorities_of(meta)
-  local DATE = meta.date
-  local UPON = meta.service and meta.service.upon
-  local USE_SERVICE = meta.service ~= nil and meta.service.certificate == true
 
-  -- Citations: occ[k] is the key of the k-th citation in the body; occ_text[k] its printed text.
   local occ, occ_text = {}, {}
-  -- Typst keeps a token of adjacent parentheses ("32(a)(7)(B)") on one line: a word joiner between them.
-  doc.blocks = doc.blocks:walk({
-    Str = function(s)
-      if s.text:find(')(', 1, true) then return pandoc.Str((s.text:gsub('%)%(', ')\u{2060}('))) end
-    end,
-  })
-  local main = doc.blocks:walk({
+  local blocks = doc.blocks:walk({
     Link = function(l)
       if l.target:sub(1, 4) ~= 'toa:' then return nil end
       local key = l.target:sub(5)
@@ -210,247 +262,189 @@ function Pandoc(doc)
         error('ca6-reply-brief: link `toa:' .. key .. '` has no entry under `authorities:` in the frontmatter')
       end
       occ[#occ + 1] = key
-      occ_text[#occ] = pandoc.utils.stringify(l.content)
+      occ_text[#occ] = plain(l.content)
       return l.content
     end,
   })
-  local words = count_words(main)
+  blocks = pandoc.Pandoc(blocks):walk({ Inlines = inlines }).blocks
+  local flat = pandoc.Blocks({})
+  for _, b in ipairs(blocks) do flat:extend(xe.list_items(b)) end
+  blocks = flat
+
+  local src = source_body()
+  local words = source_words(src)
   if words > WORD_LIMIT then
     error('ca6-reply-brief: the brief has ' .. words .. ' words; FRAP 32(a)(7)(B)(ii) allows ' .. WORD_LIMIT .. ' for a reply brief')
   end
 
   -- ---- headings: numbered as typst numbers them; each has an id (h<id>) for its page ----
   local hid = 0
-  local function head(level, label, title, style, depth, in_arg, toc, where)
+  local function head(o)
     hid = hid + 1
-    return { kind = 'head', id = hid, level = level, label = label, title = title, style = style,
-      depth = depth, in_arg = in_arg, toc = toc and level <= TOC_DEPTH, where = where or 'body' }
+    o.kind, o.id = 'head', hid
+    o.toc = o.toc and o.level <= TOC_DEPTH
+    o.where = o.where or 'body'
+    return o
   end
-
-  local function body_items(bs)
-    local st = { counters = { 0, 0, 0, 0, 0, 0 }, in_arg = false }
-    local items = {}
-    for _, b in ipairs(bs) do
-      if b.t ~= 'Header' then
-        items[#items + 1] = b
-      elseif b.level == 1 then
-        st.in_arg = pandoc.utils.stringify(b.content):lower():match('^%s*(.-)%s*$') == 'argument'
-        st.counters[1] = st.counters[1] + 1
-        for k = 2, 6 do st.counters[k] = 0 end
-        items[#items + 1] = head(1, nil, b.content, 'CASection', nil, st.in_arg, true)
-      else
-        st.counters[b.level] = st.counters[b.level] + 1
-        for k = b.level + 1, 6 do st.counters[k] = 0 end
-        local label = label_for(b.level, st.in_arg, st.counters[b.level])
-        if st.in_arg and b.level == 2 then
-          items[#items + 1] = head(2, label, b.content, 'CAPoint', 0, true, true)
-        else
-          local d = st.in_arg and (b.level - 2) or (b.level - 1)
-          items[#items + 1] = head(b.level, label, b.content, 'CASub' .. d, d, st.in_arg, true)
-        end
-      end
+  local st = { counters = { 0, 0, 0, 0, 0, 0 }, in_arg = false }
+  local body = {}
+  for _, b in ipairs(blocks) do
+    if b.t ~= 'Header' then
+      body[#body + 1] = b
+    elseif b.level == 1 then
+      st.in_arg = plain(b.content):lower():match('^%s*(.-)%s*$') == 'argument'
+      for k = 1, 6 do st.counters[k] = 0 end
+      body[#body + 1] = head({ level = 1, title = b.content, style = 'section', toc = true })
+    else
+      st.counters[b.level] = st.counters[b.level] + 1
+      for k = b.level + 1, 6 do st.counters[k] = 0 end
+      local label = label_for(b.level, st.in_arg, st.counters[b.level])
+      local d = st.in_arg and (b.level - 2) or (b.level - 1)
+      body[#body + 1] = head({ level = b.level, label = label, title = b.content, style = 'sub', ind = d, toc = true })
     end
-    return items
   end
-
-  local body = body_items(main)
-
-  local function fixed(text, style, where)
-    return head(1, nil, pandoc.Inlines({ pandoc.Str(text) }), style, nil, false, true, where)
+  local function fixed(text)
+    return head({ level = 1, title = pandoc.Inlines({ pandoc.Str(text) }), style = 'section', toc = true })
   end
-  local h_cert = fixed('Certificate of Compliance', 'CASection', 'body')
-  local h_serv = fixed('Certificate of Service', 'CASectionNewPage', 'body')
+  local h_cert = fixed('Certificate of Compliance')
+  local has_serv = meta.service and meta.service.certificate
+  local h_serv = has_serv and fixed('Certificate of Service') or nil
 
-  -- The TOC: the body's headings to TOC_DEPTH, then the certificates (typst outlines every heading except the
-  -- table of contents and the table of authorities).
   local toc = {}
   for _, it in ipairs(body) do if it.kind == 'head' and it.toc then toc[#toc + 1] = it end end
   toc[#toc + 1] = h_cert
-  if USE_SERVICE then toc[#toc + 1] = h_serv end
+  if h_serv then toc[#toc + 1] = h_serv end
 
-  -- ---- the list for the page finder (docx/pages.lua): one line per TOC heading and per citation ----
+  -- ---- the list for the page finder (docx/pages.lua) ----
   local list_file = os.getenv('CA6_DOCX_LIST')
   if list_file and list_file ~= '' then
     local f = assert(io.open(list_file, 'w'))
     for _, e in ipairs(toc) do
-      f:write('h' .. e.id, '\t', e.where, '\t', (e.label or '') .. pandoc.utils.stringify(e.title), '\n')
+      local where = e.style == 'section' and 'line' or 'body'
+      local text = plain(e.title)
+      if e.label then text = e.label .. ' ' .. text end
+      f:write('h' .. e.id, '\t', where, '\t', text, '\n')
     end
-    for k, text in ipairs(occ_text) do
-      f:write('k' .. k, '\tbody\t', text, '\n')
-    end
+    for k, text in ipairs(occ_text) do f:write('k' .. k, '\tbody\t', text, '\n') end
     f:close()
   end
 
-  -- A TOC entry is a one-row table: the label in a cell as wide as its indent, the title and page in the next
-  -- cell (a single dot-leader tab, so no tab sits between label and title). Section titles are capitals; the
-  -- page number is left alone. Point headings (Argument) have their label at the margin, sub-headings at d * 0.5 in.
-  local function toc_table(e)
-    local title = pandoc.List()
-    for _, x in ipairs(e.title) do
-      if e.level == 1 and x.t == 'Str' then title:insert(pandoc.Str(x.text:upper())) else title:insert(x) end
-    end
-    title:insert(TAB())
-    title:insert(pandoc.Str(page_of('h' .. e.id)))
-    local tstyle = e.level == 1 and 'CATOCTextTop' or ('CATOCText' .. (e.depth or 0))
-    local colspecs, rows
-    if e.level == 1 or not e.label then
-      colspecs = { { pandoc.AlignDefault, 1.0 } }
-      rows = { pandoc.Row({ pandoc.Cell({ pandoc.Div({ pandoc.Para(title) }, attr(tstyle)) }) }) }
-    else
-      local d = e.depth or 0
-      local lw = (d + 1) * 720
-      colspecs = { { pandoc.AlignDefault, lw / TWIP_TEXT }, { pandoc.AlignDefault, (TWIP_TEXT - lw) / TWIP_TEXT } }
-      rows = { pandoc.Row({
-        pandoc.Cell({ pandoc.Div({ pandoc.Para({ pandoc.Str(e.label) }) }, attr('CATOCLabel' .. d)) }),
-        pandoc.Cell({ pandoc.Div({ pandoc.Para(title) }, attr(tstyle)) }),
-      }) }
-    end
-    return pandoc.Table(pandoc.Caption(''), colspecs, pandoc.TableHead({}), { pandoc.TableBody(rows) }, pandoc.TableFoot({}))
+  -- A TOC row [listing-row]: wrapped before the 36 pt page column, a dot leader to the page.
+  local function toc_row(e)
+    local ind = e.label and e.ind or 0
+    local left = (ind + 1) * 720
+    local tabs = '<w:tabs><w:tab w:val="left" w:pos="' .. left .. '"/><w:tab w:val="right" w:leader="dot" w:pos="'
+      .. TEXTW .. '"/></w:tabs>'
+    local runs = ''
+    if e.label then runs = xe.runs(e.label) .. TAB end
+    runs = runs .. xe.inl(e.level == 1 and upper(e.title) or e.title) .. xe.runs(xe.LEAD) .. xe.runs(page_of('h' .. e.id))
+    return P({ tabs = tabs, left = left, hanging = 720, right = TOC_COL }, runs)
   end
 
-  -- ---- the TOA: the cited authorities, grouped and sorted; each one's pages, in document order ----
   local function toa_pages(key)
-    local seen, list = {}, {}
+    local seen_p, list = {}, {}
     for k, kk in ipairs(occ) do
       if kk == key then
-        local p = page_of('k' .. k)
-        if not seen[p] then
-          seen[p] = true
-          list[#list + 1] = p
+        local pg = page_of('k' .. k)
+        if not seen_p[pg] then
+          seen_p[pg] = true
+          list[#list + 1] = pg
         end
       end
     end
-    if #list >= PASSIM then return pandoc.Inlines({ pandoc.Emph({ pandoc.Str('passim') }) }) end
-    return pandoc.Inlines({ pandoc.Str(table.concat(list, ', ')) })
+    if #list >= PASSIM then return xe.runs('passim', { i = true }), width_of('passim') end
+    local s = table.concat(list, ', ')
+    return xe.runs(s), width_of(s)
+  end
+
+  -- A section heading (level 1): bold capitals, 14 pt, centered, 21 / 15.4 pt; `top`: it opens a page.
+  local function section_head(title, top, brk)
+    return P({ keep = true, brk = brk, before = top and 0 or 420, after = 308, jc = 'center' },
+      xe.inl(upper(title), { b = true }))
   end
 
   local function toa_blocks()
-    local out = { para('CASectionNewPage', { pandoc.Str('Table of Authorities') }) }
+    local out = { section_head(pandoc.Inlines({ pandoc.Str('Table of Authorities') }), true, true) }
     local first = true
     for _, g in ipairs(KINDS) do
-      local members, seen = {}, {}
+      local members, seen_k = {}, {}
       for _, key in ipairs(occ) do
-        if not seen[key] and auth[key].kind == g[1] then
-          seen[key] = true
+        if not seen_k[key] and auth[key].kind == g[1] then
+          seen_k[key] = true
           members[#members + 1] = key
         end
       end
       table.sort(members, function(x, y) return auth[x].sort < auth[y].sort end)
       if #members > 0 then
-        local title = pandoc.List({ pandoc.Str(g[2]) })
+        local runs = xe.runs(g[2], { b = true })
+        local tabs
         if first then
-          title:insert(TAB())
-          title:insert(pandoc.Strong({ pandoc.Underline({ pandoc.Str('Page(s)') }) }))
+          runs = runs .. TAB .. xe.runs('Page(s)', { b = true, u = true })
+          tabs = '<w:tabs><w:tab w:val="right" w:pos="' .. TEXTW .. '"/></w:tabs>'
         end
-        out[#out + 1] = para('CATOAGroup', title)
+        out[#out + 1] = P({ keep = true, tabs = tabs, before = first and 280 or 392, after = 56 }, runs)
         first = false
         for _, key in ipairs(members) do
           local a = auth[key]
-          local inl = pandoc.List()
-          if a.name then
-            inl:insert(a.kind == 'case' and pandoc.Emph(a.name) or pandoc.Span(a.name))
-            inl:insert(pandoc.Str(','))
-            inl:insert(pandoc.Space())
-          end
-          for _, x in ipairs(a.cite) do inl:insert(x) end
-          inl:insert(TAB())
-          for _, x in ipairs(toa_pages(key)) do inl:insert(x) end
-          out[#out + 1] = para('CATOAEntry', inl)
+          local runs2 = ''
+          if a.name then runs2 = xe.inl(a.name, { i = a.kind == 'case' }) .. xe.runs(', ') end
+          local pages, w = toa_pages(key)
+          runs2 = runs2 .. xe.inl(a.cite) .. xe.runs(xe.LEAD) .. pages
+          out[#out + 1] = P({ tabs = xe.leader_tab(TEXTW), before = 196, left = 504, hanging = 504,
+            right = math.max(TOA_COL, w) }, runs2)
         end
       end
     end
     return out
   end
 
-  -- ---- the cover (FRAP 32(a)(2); CA6-COVER-001 to -006) ----
-  local function cover()
-    local out = {}
-    local function add(b) out[#out + 1] = b end
-    add(spacer('CASpacerXL'))
-    add(para('CACover', concat({ pandoc.Str('No.'), pandoc.Space() }, meta.case_number)))
-    add(spacer('CASpacerL'))
-    add(para('CACourt', txt('IN THE UNITED STATES COURT OF APPEALS FOR THE SIXTH CIRCUIT')))
-    add(spacer('CASpacerL'))
-    add(spacer('CAShortRule'))
-    add(spacer('CASpacerL'))
-    for i, side in ipairs(meta.caption) do
-      for _, n in ipairs(side.names) do add(para('CACover', n)) end
-      add(para('CACover', side.designation))
-      if i < #meta.caption then
-        add(spacer('CASpacerM'))
-        add(para('CACover', { pandoc.Str('v.') }))
-        add(spacer('CASpacerM'))
-      end
-    end
-    add(spacer('CASpacerL'))
-    add(spacer('CAShortRule'))
-    add(spacer('CASpacerL'))
-    add(para('CACover', meta.proceeding))
-    add(spacer('CASpacerL'))
-    add(spacer('CAShortRule'))
-    add(spacer('CASpacerL'))
-    add(para('CACoverTitle', meta.brief_title))
-    add(spacer('CASpacerL'))
-    add(spacer('CAShortRule'))
-    add(spacer('CASpacerL'))
-    for gi, g in ipairs(meta.counsel) do
-      local lines = {}
-      for _, n in ipairs(g.names) do lines[#lines + 1] = n end
-      for _, l in ipairs(g.lines or {}) do lines[#lines + 1] = l end
-      for li, l in ipairs(lines) do add(para(li < #lines and 'CACounsel' or 'CACounselEnd', l)) end
-      if gi < #meta.counsel then add(spacer('CASpacerM')) end
-    end
-    return out
-  end
-
-  -- A heading: its label (a tab to the hanging indent), then the title.
-  local function heading_block(e)
-    local inl = pandoc.List()
-    if e.label then
-      inl:insert(pandoc.Str(e.label))
-      inl:insert(PTAB())
-    end
-    for _, x in ipairs(e.title) do inl:insert(x) end
-    return para(e.style, inl)
+  local function heading_block(e, top)
+    if e.style == 'section' then return section_head(e.title, top) end
+    local left = (e.ind + 1) * 720
+    local o = { b = true, i = e.level >= 4 }
+    return P({ keep = true, tabs = '<w:tabs><w:tab w:val="left" w:pos="' .. left .. '"/></w:tabs>', before = 308, after = 252,
+      left = left, hanging = 720 }, xe.runs(e.label, { b = true }) .. TAB .. xe.inl(e.title, o))
   end
 
   local out = {}
   local function push(x) out[#out + 1] = x end
 
   -- ---- section 1: the cover (no page number) ----
-  for _, b in ipairs(cover()) do push(b) end
-  push(section_break('rIdFtr0', nil))
+  for _, b in ipairs(cover(meta)) do push(b) end
+  push(section_break(nil, nil))
 
-  -- ---- section 2: front matter, lowercase roman numerals ----
-  push(para('CASection', { pandoc.Str('Table of Contents') }))
-  push(para('CATOCPage', { pandoc.Strong({ pandoc.Underline({ pandoc.Str('Page') }) }) }))
-  for _, e in ipairs(toc) do push(toc_table(e)) end
+  -- ---- section 2: contents and authorities (lowercase roman) ----
+  push(section_head(pandoc.Inlines({ pandoc.Str('Table of Contents') }), true))
+  push(P({ before = 84, jc = 'right' }, xe.runs('Page', { b = true, u = true })))
+  for _, e in ipairs(toc) do push(toc_row(e)) end
   for _, b in ipairs(toa_blocks()) do push(b) end
   push(section_break('rIdFtr1', 'lowerRoman'))
 
-  -- ---- section 3: the body (arabic from 1), the signature, the certificates ----
-  for _, it in ipairs(body) do
-    if it.kind == 'head' then push(heading_block(it)) else push(it) end
-  end
-  -- The signature block never stands alone on a page: the brief's last paragraph is kept with it.
+  -- ---- section 3: the body (arabic from 1), the signatures, the certificates ----
   local last = body[#body]
-  if last and last.t == 'Para' then out[#out] = styled('CABodyKeep', { last }) end
+  if keeps_last(src) and last and last.t == 'Para' then
+    body[#body] = pandoc.Div({ last }, pandoc.Attr('', {}, { ['custom-style'] = 'CA Body Keep' }))
+  end
+  for i, it in ipairs(body) do
+    if it.kind == 'head' then push(heading_block(it, i == 1)) else push(it) end
+  end
   for _, b in ipairs(signature_blocks(meta)) do push(b) end
 
-  push(heading_block(h_cert))
-  push(para('CASingle', txt('This reply brief complies with the type-volume limitation of Fed.~R.~App.~P.~32(a)(7)(B) because it contains ' ..
-    group_digits(words) .. ' words, excluding the parts of the brief exempted by Fed.~R.~App.~P.~32(f).')))
-  push(para('CASingle', txt('This reply brief complies with the typeface requirements of Fed.~R.~App.~P.~32(a)(5) and the type-style requirements of Fed.~R.~App.~P.~32(a)(6) because it has been prepared in a proportionally spaced typeface, 14-point EB Garamond.')))
+  -- Certificate of Compliance: after the signatures; its text and signature one unbreakable block.
+  push(section_head(h_cert.title, false))
+  push(P({ keep = true, before = 280 }, xe.runs(join_parens('This reply brief complies with the type-volume limitation of ' .. FRAP .. '32(a)(7)(B) because it contains '
+    .. group_digits(words) .. ' words, excluding the parts of the brief exempted by ' .. FRAP .. '32(f).'))))
+  push(P({ keep = true, before = 280 }, xe.runs(join_parens('This reply brief complies with the typeface requirements of ' .. FRAP .. '32(a)(5) and the type-style requirements of '
+    .. FRAP .. '32(a)(6) because it has been prepared in a proportionally spaced typeface, 14')) .. NBH .. xe.runs('point ' .. FACE .. '.')))
   for _, b in ipairs(cert_signature(meta)) do push(b) end
 
-  if USE_SERVICE then
-    push(heading_block(h_serv))
-    push(para('CASingle', concat(seq(txt('I certify that I electronically filed and served this'), meta.brief_title,
-      txt('using the Court\u{2019}s CM/ECF system upon'), UPON, txt('on'), DATE), { pandoc.Str('.') })))
+  if h_serv then
+    push(section_head(h_serv.title, true, true))
+    push(P({ keep = true, before = 280 }, xe.runs('I certify that I electronically filed and served this ') .. xe.inl(meta.brief_title)
+      .. xe.runs(' using the Court\u{2019}s CM/ECF system upon ') .. xe.inl(meta.service.upon) .. xe.runs(' on ') .. xe.inl(meta.date) .. xe.runs('.')))
     for _, b in ipairs(cert_signature(meta)) do push(b) end
   end
 
-  -- The date is in the certificate of service only; drop the metadata so pandoc prints no title block.
   meta.date = nil
   return pandoc.Pandoc(out, meta)
 end
