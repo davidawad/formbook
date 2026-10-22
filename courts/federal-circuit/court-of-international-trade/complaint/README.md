@@ -3,8 +3,8 @@
 - Court: `cit`, United States Court of International Trade (`courts/federal-circuit/court-of-international-trade/`)
 - Doc type: `complaint`. Pleading under USCIT Rule 7(a)(1); one self-contained folder.
 - Exemplar: `usage/FILED-EXAMPLE-complaint-4.pdf` (*Trek Bicycle Corp. v. United States*, Ct. No. 25-00917, filed 2025-12-23, ECF No. 2, 11 pages; provenance in `usage/SOURCE.md`).
-- Sample: `usage/INPUT-complaint.md`, transcribed from that complaint (caption, cause of action, parties, jurisdiction, facts, counts I-V, prayer, signature). Sample render is 9 pages against the filed 11.
-- Status: template complete; render, overlay and page review done (below). Not reviewed by a human; `court.json` untouched.
+- Sample: `usage/INPUT-complaint.md`, transcribed from that complaint (caption, cause of action, parties, jurisdiction, facts, counts I-V, prayer, signature). Sample render is 10 pages (typst and docx alike) against the filed 11.
+- Status: template complete; engines typst and docx on the shared cross-engine layout model (lib/typst/xengine.typ, lib/docx/xengine.lua; fb-595.54.6): the docx breaks every line and page as typst (XENG-001..003 PASS), `params.cross_engine: gate` in `eval.yaml`; render, overlay and page review done (below). Not reviewed by a human; `court.json` untouched.
 
 ## Files
 
@@ -13,7 +13,7 @@
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `cit-complaint`. |
 | `typst/cit-complaint.typ` | Template. Parameter block at the top (type size, leading, page, margins, caption widths). |
 | `usage/INPUT-complaint.md` | Markdown contract sample: YAML frontmatter plus body. |
-| `usage/OUTPUT-complaint.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-international-trade/complaint usage/INPUT-complaint.md` (9 pages). |
+| `usage/OUTPUT-complaint.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-international-trade/complaint usage/INPUT-complaint.md` (10 pages). |
 | `usage/OVERLAY-trek-bicycle.pdf`, `.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-international-trade/complaint trek-bicycle` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed complaint and `SOURCE.md`. |
 
@@ -66,19 +66,20 @@ Not applicable to the complaint and not in the template: Rule 7(b) motion requir
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-complaint.typst.pdf` was rendered at 70 dpi and viewed (9 of 9), next to the filed complaint's 11 pages in a contact sheet. Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-complaint.typst.pdf` was rendered at 60 dpi and viewed (10 of 10) after the cross-engine port (fb-595.54.6), next to the filed complaint's 11 pages. Typst printed no warnings. Fonts embedded: Times New Roman only. The port fixed the old render, whose last line of each paragraph sat on the next paragraph's first (a leading tuned for EB Garamond): every line is now a 24 pt box.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
 | 1 | exemplar p.1 | Cover: court name, caption, counts of parties, "COMPLAINT" centered. Caption uses ")" column; filed uses rules. Tier 2 convention not settled (one filer). | ACCEPTED |
 | 2 | exemplar p.2 | Numbered paragraphs, centered section headings. Headings bold but not underlined; filed headings are bold and underlined. | ACCEPTED |
-| 3 | exemplar p.3 | Paragraph numbering and double spacing as filed. | PASS |
-| 4 | exemplar p.4 | STATEMENT OF FACTS heading and numbered paragraphs 18-21 as filed. | PASS |
-| 5 | exemplar p.5 | Numbered paragraphs 22-28 as filed. | PASS |
-| 6 | exemplar p.6 | Numbered paragraphs 29-36 as filed. | PASS |
-| 7 | exemplar p.7 | COUNT I-IV headings centered, bold. | PASS |
-| 8 | exemplar p.8 | COUNT V heading and paragraphs 50-52; PRAYER FOR RELIEF heading, lettered list (a)-(h). | PASS |
-| 9 | exemplar p.9-11 | Prayer list (a)-(h) on p.8 as filed. Signature block on its own page 9 with the /s/ line, counsel lines and date; the filed signature block continues to p.11. | PASS |
+| 3 | exemplar p.3 | Paragraphs 7-14, JURISDICTION AND STANDING heading; double spacing as filed. | PASS |
+| 4 | exemplar p.4-5 | Paragraphs 14-20, STATEMENT OF FACTS heading. | PASS |
+| 5 | exemplar p.5-6 | Paragraphs 20-25. | PASS |
+| 6 | exemplar p.6-7 | Paragraphs 25-31. | PASS |
+| 7 | exemplar p.7-8 | Paragraphs 32-37; the page ends with paragraph 37, COUNT I kept with its text on p.8. | PASS |
+| 8 | exemplar p.8-9 | COUNT I-III headings centered, bold; paragraphs 38-46. | PASS |
+| 9 | exemplar p.9-10 | COUNT IV, V; PRAYER FOR RELIEF heading, lettered list (a)-(f), hanging at 0.9 in. | PASS |
+| 10 | exemplar p.10-11 | Prayer (f)-(h), the signature block (date, /s/ line, counsel lines) on the same page. | PASS |
 
 ## Engines
 
@@ -88,17 +89,16 @@ Typst is the primary engine (`typst/`). The docx engine is in `docx/`. There is 
 
 | Path | What |
 |---|---|
-| `docx/make-reference.sh` | Builds `docx/reference.docx` from pandoc's default: EB Garamond 12 pt, 24 pt exact double spacing for body text and list items, single spacing for headings, block quotations and footnotes, letter paper, 1 in margins, a centered PAGE field in the footer. |
+| `docx/make-reference.sh` | Builds `docx/reference.docx` with the shared recipe `lib/docx/xengine-reference.sh`: Times New Roman 12 pt, 24 pt exact body pitch, 14 pt single lines, letter paper, 1 in margins, a centered PAGE field in a 14 pt line. |
 | `docx/cit-complaint.lua` | Pandoc filter: the cover and caption (a borderless table with the ")" column), numbered allegations, lettered list items (a), (b), ..., the signature block. |
 | `usage/OUTPUT-complaint.docx` | `sh tools/render.sh --engine docx courts/federal-circuit/court-of-international-trade/complaint usage/INPUT-complaint.md` (writes the `.docx` and the `.docx.pdf`). |
-| `usage/OUTPUT-complaint.docx.pdf` | LibreOffice 26.8.1 conversion (10 pages). Fonts embedded: EB Garamond only (`pdffonts`). |
+| `usage/OUTPUT-complaint.docx.pdf` | LibreOffice 26.8.1 conversion (10 pages). Fonts embedded: Times New Roman only (`pdffonts`). |
 
-**Matches the typst output:** letter paper, 1 in margins, EB Garamond 12 pt, double spacing (24 pt), court name and caption with the ")" column and the court number at right, the title centered, centered bold headings, numbered allegations with the number at 0.5 in, the lettered prayer (a)-(h), the centered page number at the bottom, the `/s/` signature block with the Rule 11(a) lines. Every page of the `.docx.pdf` was rendered at 60 dpi and viewed (10 of 10), and the page text was compared with the typst render (`pdftotext`).
+**Matches the typst output:** letter paper, 1 in margins, Times New Roman 12 pt, double spacing (24 pt exact), court name and caption with the ")" column and the court number at right, the title centered, centered bold headings, numbered allegations with the number at 0.5 in, the lettered prayer (a)-(h), the centered page number at the bottom, the `/s/` signature block with the Rule 11(a) lines. Every page of the `.docx.pdf` was rendered at 60 dpi and viewed (10 of 10), and the page text was compared with the typst render (`pdftotext`).
 
 **Differs from the typst output:**
 
-- Length: 10 pages against the typst 9. The line breaks fall differently from page 3 on (the docx page 8 starts at paragraph 40; the typst page 8 starts at paragraph 49), so the signature block is on its own page 10 and the prayer ends on page 9. Length is not mandated for a complaint; the difference is LibreOffice's line breaking, not the form.
-- Paragraph numbers are typed text followed by a tab, not Word list numbering, so the numbers do not renumber if a paragraph is added by hand in Word.
+- None in the line and page breaks: Gate 4 XENG-001..003 PASS (249 of 249 lines). The filter writes every paragraph with the typst pitch, spaces and indents (lib/docx/xengine.lua). A doubled section sign ("§§ 2643") is bound to its number in both engines by this folder (the shared rules bind a single sign only).- Paragraph numbers are typed text followed by a tab, not Word list numbering, so the numbers do not renumber if a paragraph is added by hand in Word.
 - Word was not run. The file has no Word repair check; it is valid XML in a zip (`render-docx.sh`), and the `.docx.pdf` is LibreOffice's rendering.
 
 **docx BLOCKED items:** none for this doc type.
@@ -108,6 +108,6 @@ Typst is the primary engine (`typst/`). The docx engine is in `docx/`. There is 
 - **Exemplars: one filer.** Only the Sidley Austin complaint is in `usage/`. Tier 2 (house style vs convention) needs 2 or 3 filers; the caption layout and heading underlining above are open until a second filer's complaint is checked. Not judged against one filer.
 - **Caption.** The sample's caption uses a ")" column per line (with `pad` for designations). The filed caption uses horizontal rules and no ")" column. Both satisfy Rule 10(a); which one the clerks prefer is not settled.
 - **Headings.** Filed section headings are underlined; ours are bold only.
-- **Length.** The sample is 9 pages, the filed complaint 11; the sample is an excerpt-length transcription, so the page count is not a measure of compliance.
+- **Length.** The sample is 10 pages, the filed complaint 11; the sample is an excerpt-length transcription, so the page count is not a measure of compliance.
 - **Engines.** Typst and docx (see Engines). No `latex/` engine and no `checks.yaml` for this doc type.
 - **Overlay pairing.** Word-overlap pairing is noisy on the cover (40%) and the signature page (35%); the pairs are given above, not claimed as exact matches.
