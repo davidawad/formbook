@@ -1,4 +1,7 @@
-# Gate 4 CROSS-ENGINE: typst only. Not on the shared document model yet: the frontmatter's authorities
-# ({key, category, text}, cited by toa: links) are a shape the model does not read (docs/open-items/fb-595.54.24.md).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex engine is generated from the typst
+# template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: two headings carry a
+# toa: link, which typst also marks in their contents rows (its table of authorities cites RSA 632-A:2 on the
+# contents page, p. 2; latex does not), and the docx engine's page lookup stops at the first such heading, so docx is
+# not delivered (BLOCKED). Only lib/ or tools/ can fix them (docs/open-items/fb-595.54.24.md).
 params:
   cross_engine: report

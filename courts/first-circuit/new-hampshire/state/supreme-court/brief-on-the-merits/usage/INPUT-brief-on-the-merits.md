@@ -38,67 +38,67 @@ certificates:
     text: "I hereby certify that a copy of this brief is being timely provided to the Criminal Bureau of the New Hampshire Attorney General’s office through the electronic filing system’s electronic service."
     signer: "Christopher M. Johnson"
 authorities:
-  - {key: plantier, category: cases, text: "*Appeal of Plantier*, 126 N.H. 500 (1985)"}
-  - {key: aapsw, category: cases, text: "*Association of Am. Physicians and Surgeons v. Weinberger*, 395 F. Supp. 125 (N.D. Ill. 1975)"}
-  - {key: hood, category: cases, text: "*Attorney General v. Hood*, 2025 N.H. 3"}
-  - {key: connally, category: cases, text: "*Connally v. General Construction Co.*, 269 U.S. 385 (1926)"}
-  - {key: guillou, category: cases, text: "*Guillou v. State, Div. of Motor Vehicles*, 127 N.H. 579 (1986)"}
-  - {key: justin-d, category: cases, text: "*In re Justin D.*, 144 N.H. 450 (1999)"}
-  - {key: williams-2009, category: cases, text: "*In re Williams*, 159 N.H. 318 (2009)"}
-  - {key: kolender, category: cases, text: "*Kolender v. Lawson*, 461 U.S. 352 (1983)"}
-  - {key: lawrence, category: cases, text: "*Lawrence v. Texas*, 539 U.S. 558 (2003)"}
-  - {key: albers, category: cases, text: "*State v. Albers*, 113 N.H. 132 (1973)"}
-  - {key: beckert, category: cases, text: "*State v. Beckert*, 144 N.H. 315 (1999)"}
-  - {key: cooper, category: cases, text: "*State v. Cooper*, 135 N.H. 258 (1992)"}
-  - {key: czekalski, category: cases, text: "*State v. Czekalski*, 169 N.H. 732 (2017)"}
-  - {key: dansereau, category: cases, text: "*State v. Dansereau*, 157 N.H. 596 (2008)"}
-  - {key: dor, category: cases, text: "*State v. Dor*, 165 N.H. 198 (2013)"}
-  - {key: duran, category: cases, text: "*State v. Duran*, 158 N.H. 146 (2008)"}
-  - {key: foss, category: cases, text: "*State v. Foss*, 148 N.H. 209 (2002)"}
-  - {key: glidden, category: cases, text: "*State v. Glidden*, 122 N.H. 41 (1982)"}
-  - {key: hollenbeck, category: cases, text: "*State v. Hollenbeck*, 164 N.H. 154 (2012)"}
-  - {key: macelman, category: cases, text: "*State v. MacElman*, 154 N.H. 304 (2006)"}
-  - {key: mayo, category: cases, text: "*State v. Mayo*, 167 N.H. 443 (2015)"}
-  - {key: pike, category: cases, text: "*State v. Pike*, 128 N.H. 447 (1986)"}
-  - {key: ramos, category: cases, text: "*State v. Ramos*, 149 N.H. 272 (2003)"}
-  - {key: vonklock, category: cases, text: "*State v. vonKlock*, 121 N.H. 697 (1981)"}
-  - {key: whittey, category: cases, text: "*State v Whittey*, 149 N.H. 463 (2003)"}
-  - {key: williams-1990, category: cases, text: "*State v. Williams*, 133 N.H. 631 (1990)"}
-  - {key: winslow, category: cases, text: "*State v. Winslow*, 134 N.H. 398 (1991)"}
-  - {key: howe, category: cases, text: "*United States v. Howe*, 167 N.H. 143 (2014)"}
-  - {key: varandani, category: cases, text: "*Varandani v. Bowen*, 824 F.2d 307 (4th Cir. 1987)"}
-  - {key: hoffman, category: cases, text: "*Village of Hoffman Estates v. Flipside*, 455 U.S. 489 (1982)"}
-  - {key: webster, category: cases, text: "*Webster v. Town of Candia*, 146 N.H. 430 (2001)"}
-  - {key: iowa, category: statutes, text: "Iowa Code §709.15(2)(c)"}
-  - {key: ks, category: statutes, text: "KS ST 21-5927(a)(1)(F)"}
-  - {key: laws-1992, category: statutes, text: "N.H. Laws 1992, ch. 254:6"}
-  - {key: laws-1998, category: statutes, text: "N.H. Laws 1998, ch. 240:2"}
-  - {key: rsa-167-61a, category: statutes, text: "RSA 167:61-a"}
-  - {key: rsa-326b, category: statutes, text: "RSA 326-B"}
-  - {key: rsa-326b-11, category: statutes, text: "RSA 326-B:11 to :14-a"}
-  - {key: rsa-326b-34, category: statutes, text: "RSA 326-B:34, I"}
-  - {key: rsa-326b-37, category: statutes, text: "RSA 326-B:37"}
-  - {key: rsa-626, category: statutes, text: "RSA 626"}
-  - {key: rsa-626-6, category: statutes, text: "RSA 626:6"}
-  - {key: rsa-632a, category: statutes, text: "RSA 632-A"}
-  - {key: rsa-632a-1-iv, category: statutes, text: "RSA 632-A:1, IV"}
-  - {key: rsa-632a-1-v, category: statutes, text: "RSA 632-A:1, V"}
-  - {key: rsa-632a-2, category: statutes, text: "RSA 632-A:2"}
-  - {key: rsa-632a-2-i, category: statutes, text: "RSA 632-A:2, I"}
-  - {key: rsa-632a-2-ig1, category: statutes, text: "RSA 632-A:2, I(g)(1)"}
-  - {key: rsa-632a-2-ig2, category: statutes, text: "RSA 632-A:2, I(g)(2)"}
-  - {key: rsa-632a-2-ii, category: statutes, text: "RSA 632-A:2, I(i)"}
-  - {key: rsa-632a-2-ik3, category: statutes, text: "RSA 632-A:2, I(k)(3)"}
-  - {key: rsa-632a-2-vii, category: statutes, text: "RSA 632-A:2, VII"}
-  - {key: rsa-632a-4, category: statutes, text: "RSA 632-A:4"}
-  - {key: ut, category: statutes, text: "UT ST §26B3-1106(1)(e)"}
-  - {key: fifth, category: statutes, text: "Federal Constitution, Fifth Amendment"}
-  - {key: fourteenth, category: statutes, text: "Federal Constitution, Fourteenth Amendment"}
-  - {key: const-15, category: statutes, text: "New Hampshire Constitution, Part I, Article 15"}
-  - {key: nh-rev-401, category: rules, text: "N.H. R. Ev. 401"}
-  - {key: horwitz, category: other, text: "Horwitz, Rainey, “Medical Vibrators for Treatment of Female Hysteria,” Embryo Project Encyclopedia (2/29/2020)"}
-  - {key: rabin, category: other, text: "Rabin, Roni Caryn, *Pelvic Massage Can Be Legitimate, but Not in Larry Nassar’s Hands*, The New York Times (Jan. 31, 2018)"}
-  - {key: wikipedia, category: other, text: "Wikipedia, *Surrogate Partner*, https://en.wikipedia.org/wiki/Surrogate_partner"}
+  plantier: {kind: cases, cite: "*Appeal of Plantier*, 126 N.H. 500 (1985)", sort: "001"}
+  aapsw: {kind: cases, cite: "*Association of Am. Physicians and Surgeons v. Weinberger*, 395 F. Supp. 125 (N.D. Ill. 1975)", sort: "002"}
+  hood: {kind: cases, cite: "*Attorney General v. Hood*, 2025 N.H. 3", sort: "003"}
+  connally: {kind: cases, cite: "*Connally v. General Construction Co.*, 269 U.S. 385 (1926)", sort: "004"}
+  guillou: {kind: cases, cite: "*Guillou v. State, Div. of Motor Vehicles*, 127 N.H. 579 (1986)", sort: "005"}
+  justin-d: {kind: cases, cite: "*In re Justin D.*, 144 N.H. 450 (1999)", sort: "006"}
+  williams-2009: {kind: cases, cite: "*In re Williams*, 159 N.H. 318 (2009)", sort: "007"}
+  kolender: {kind: cases, cite: "*Kolender v. Lawson*, 461 U.S. 352 (1983)", sort: "008"}
+  lawrence: {kind: cases, cite: "*Lawrence v. Texas*, 539 U.S. 558 (2003)", sort: "009"}
+  albers: {kind: cases, cite: "*State v. Albers*, 113 N.H. 132 (1973)", sort: "010"}
+  beckert: {kind: cases, cite: "*State v. Beckert*, 144 N.H. 315 (1999)", sort: "011"}
+  cooper: {kind: cases, cite: "*State v. Cooper*, 135 N.H. 258 (1992)", sort: "012"}
+  czekalski: {kind: cases, cite: "*State v. Czekalski*, 169 N.H. 732 (2017)", sort: "013"}
+  dansereau: {kind: cases, cite: "*State v. Dansereau*, 157 N.H. 596 (2008)", sort: "014"}
+  dor: {kind: cases, cite: "*State v. Dor*, 165 N.H. 198 (2013)", sort: "015"}
+  duran: {kind: cases, cite: "*State v. Duran*, 158 N.H. 146 (2008)", sort: "016"}
+  foss: {kind: cases, cite: "*State v. Foss*, 148 N.H. 209 (2002)", sort: "017"}
+  glidden: {kind: cases, cite: "*State v. Glidden*, 122 N.H. 41 (1982)", sort: "018"}
+  hollenbeck: {kind: cases, cite: "*State v. Hollenbeck*, 164 N.H. 154 (2012)", sort: "019"}
+  macelman: {kind: cases, cite: "*State v. MacElman*, 154 N.H. 304 (2006)", sort: "020"}
+  mayo: {kind: cases, cite: "*State v. Mayo*, 167 N.H. 443 (2015)", sort: "021"}
+  pike: {kind: cases, cite: "*State v. Pike*, 128 N.H. 447 (1986)", sort: "022"}
+  ramos: {kind: cases, cite: "*State v. Ramos*, 149 N.H. 272 (2003)", sort: "023"}
+  vonklock: {kind: cases, cite: "*State v. vonKlock*, 121 N.H. 697 (1981)", sort: "024"}
+  whittey: {kind: cases, cite: "*State v Whittey*, 149 N.H. 463 (2003)", sort: "025"}
+  williams-1990: {kind: cases, cite: "*State v. Williams*, 133 N.H. 631 (1990)", sort: "026"}
+  winslow: {kind: cases, cite: "*State v. Winslow*, 134 N.H. 398 (1991)", sort: "027"}
+  howe: {kind: cases, cite: "*United States v. Howe*, 167 N.H. 143 (2014)", sort: "028"}
+  varandani: {kind: cases, cite: "*Varandani v. Bowen*, 824 F.2d 307 (4th Cir. 1987)", sort: "029"}
+  hoffman: {kind: cases, cite: "*Village of Hoffman Estates v. Flipside*, 455 U.S. 489 (1982)", sort: "030"}
+  webster: {kind: cases, cite: "*Webster v. Town of Candia*, 146 N.H. 430 (2001)", sort: "031"}
+  iowa: {kind: statutes, cite: "Iowa Code §709.15(2)(c)", sort: "032"}
+  ks: {kind: statutes, cite: "KS ST 21-5927(a)(1)(F)", sort: "033"}
+  laws-1992: {kind: statutes, cite: "N.H. Laws 1992, ch. 254:6", sort: "034"}
+  laws-1998: {kind: statutes, cite: "N.H. Laws 1998, ch. 240:2", sort: "035"}
+  rsa-167-61a: {kind: statutes, cite: "RSA 167:61-a", sort: "036"}
+  rsa-326b: {kind: statutes, cite: "RSA 326-B", sort: "037"}
+  rsa-326b-11: {kind: statutes, cite: "RSA 326-B:11 to :14-a", sort: "038"}
+  rsa-326b-34: {kind: statutes, cite: "RSA 326-B:34, I", sort: "039"}
+  rsa-326b-37: {kind: statutes, cite: "RSA 326-B:37", sort: "040"}
+  rsa-626: {kind: statutes, cite: "RSA 626", sort: "041"}
+  rsa-626-6: {kind: statutes, cite: "RSA 626:6", sort: "042"}
+  rsa-632a: {kind: statutes, cite: "RSA 632-A", sort: "043"}
+  rsa-632a-1-iv: {kind: statutes, cite: "RSA 632-A:1, IV", sort: "044"}
+  rsa-632a-1-v: {kind: statutes, cite: "RSA 632-A:1, V", sort: "045"}
+  rsa-632a-2: {kind: statutes, cite: "RSA 632-A:2", sort: "046"}
+  rsa-632a-2-i: {kind: statutes, cite: "RSA 632-A:2, I", sort: "047"}
+  rsa-632a-2-ig1: {kind: statutes, cite: "RSA 632-A:2, I(g)(1)", sort: "048"}
+  rsa-632a-2-ig2: {kind: statutes, cite: "RSA 632-A:2, I(g)(2)", sort: "049"}
+  rsa-632a-2-ii: {kind: statutes, cite: "RSA 632-A:2, I(i)", sort: "050"}
+  rsa-632a-2-ik3: {kind: statutes, cite: "RSA 632-A:2, I(k)(3)", sort: "051"}
+  rsa-632a-2-vii: {kind: statutes, cite: "RSA 632-A:2, VII", sort: "052"}
+  rsa-632a-4: {kind: statutes, cite: "RSA 632-A:4", sort: "053"}
+  ut: {kind: statutes, cite: "UT ST §26B3-1106(1)(e)", sort: "054"}
+  fifth: {kind: statutes, cite: "Federal Constitution, Fifth Amendment", sort: "055"}
+  fourteenth: {kind: statutes, cite: "Federal Constitution, Fourteenth Amendment", sort: "056"}
+  const-15: {kind: statutes, cite: "New Hampshire Constitution, Part I, Article 15", sort: "057"}
+  nh-rev-401: {kind: rules, cite: "N.H. R. Ev. 401", sort: "058"}
+  horwitz: {kind: other, cite: "Horwitz, Rainey, “Medical Vibrators for Treatment of Female Hysteria,” Embryo Project Encyclopedia (2/29/2020)", sort: "059"}
+  rabin: {kind: other, cite: "Rabin, Roni Caryn, *Pelvic Massage Can Be Legitimate, but Not in Larry Nassar’s Hands*, The New York Times (Jan. 31, 2018)", sort: "060"}
+  wikipedia: {kind: other, cite: "Wikipedia, *Surrogate Partner*, https://en.wikipedia.org/wiki/Surrogate_partner", sort: "061"}
 toc: true
 ---
 
