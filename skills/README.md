@@ -1,33 +1,18 @@
 # skills/
 
-Agent skills shipped with formbook. Each folder holds a `SKILL.md` (YAML frontmatter `name`, `description`, then instructions) plus optional `reference/` and `scripts/`.
+The `formbook/` folder is an agent skill: one `SKILL.md` (plus `reference/` notes it links to) that teaches an agent to draft a court filing as markdown and render a court-compliant PDF from this repo's Typst templates, or to write a new template for a court or document type that is missing.
 
-| Skill | Purpose |
-|---|---|
-| `formbook/` | Draft a court filing as markdown and render a court-compliant PDF from the repo's Typst templates; or write a new template for a court or doc type that is missing. |
+## Install
 
-All scripts are POSIX sh and are run from the formbook repo root.
-
-## Claude Code
-
-Copy or symlink the folder into a skills directory:
+From a checkout of this repo, one command copies the skill into your agent's skills folder (it replaces an older copy):
 
 ```sh
-# for you, in every project
-mkdir -p ~/.claude/skills && ln -s "$PWD/skills/formbook" ~/.claude/skills/formbook
-# for one project
-mkdir -p .claude/skills && ln -s "$PWD/skills/formbook" .claude/skills/formbook
+sh skills/install.sh ~/.claude/skills
 ```
 
-Claude Code loads it when the task matches the skill's `description` (formatting a court filing, adding a court template), or invoke it by name (`/formbook`). Work from a checkout of this repo so `tools/` and `courts/` are available.
+Then restart your agent and ask it to format a court filing, or type `/formbook`. Keep the checkout: the skill renders with its `tools/` and `courts/`.
 
-## Codex, Cursor, and other agents
-
-Point the agent at `skills/formbook/SKILL.md`: for example "Read skills/formbook/SKILL.md and follow it", or reference it from the agent's own instruction file (`AGENTS.md`, `.cursor/rules/`, and so on). Only a shell with `sh` is required. The SKILL.md links to `reference/` files; load those when it tells you to.
-
-## Plain LLM with shell access
-
-Paste or attach `skills/formbook/SKILL.md`, and give the model a shell in a checkout of the repo. It needs `sh`, `git`, and the toolchain from `sh tools/bootstrap.sh` (no root). No network is needed at render time.
+Other agents (Codex, Cursor, a plain LLM with a shell): point them at `skills/formbook/SKILL.md`, for example "Read skills/formbook/SKILL.md and follow it". They need `sh`, `git`, and the toolchain from `sh tools/bootstrap.sh` (no root).
 
 ## Try it
 
