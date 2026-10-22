@@ -32,37 +32,37 @@ service:
       - names: ["Karen Buckley, Executive Secretary", "Jessica Lane, General Counsel", "Public Service Commission of West Virginia", "201 Brooks Street", "Charleston, West Virginia 25323"]
         lines: []
 authorities:
-  atlantic: {kind: case, name: "Atlantic Greyhound Corp. v. Public Service Commission", cite: "132 W. Va. 650, 54 S.E.2d 169 (1949)"}
-  boggs: {kind: case, name: "Boggs v. Public Service Commission", cite: "154 W. Va. 146, 174 S.E.2d 331 (1970)"}
-  central: {kind: case, name: "Central W. Va. Refuse v. Public Service Commission", cite: "190 W. Va. 416, 438 S.E.2d 596 (1993)"}
-  charleston: {kind: case, name: "Charleston Transit Co. v. Public Service Commission", cite: "142 W. Va. 750, 98 S.E.2d 437 (1957)"}
-  chesapeake: {kind: case, name: "Chesapeake & Potomac Telephone Co. v. Public Service Commission", cite: "___ W. Va. ___, 300 S.E.2d 607 (1982)"}
-  wheeling: {kind: case, name: "City of Wheeling v. Public Service Commission of W. Va.", cite: "248 W. Va. 59, 887 S.E.2d 44 (2023)"}
-  frazier: {kind: case, name: "Frazier v. S.P.", cite: "242 W. Va. 657, 838 S.E.2d 741 (2020)"}
-  harrison: {kind: case, name: "Harrison Rural Electrification Association v. Public Service Commission", cite: "190 W. Va. 439, 438 S.E.2d 782 (1993)"}
-  heart: {kind: case, name: "W. Va. Department of Health & Human Resources Office of Health Facility Licensure v. Heart 2 Heart Volunteers, Inc.", cite: "249 W. Va. 464, 896 S.E.2d 102 (W. Va. Ct. App. 2023)"}
-  monongahela: {kind: case, name: "Monongahela Power Co. v. Public Service Commission", cite: "166 W. Va. 423, 276 S.E.2d 179 (1981)"}
-  reed: {kind: case, name: "Reed v. Thompson", cite: "235 W. Va. 211, 772 S.E.2d 617 (2015)"}
-  renick: {kind: case, name: "State ex rel. Wheeling v. Renick", cite: "145 W. Va. 640, 116 S.E.2d 763 (1960)"}
-  unitedfuel: {kind: case, name: "United Fuel Gas Co. v. Public Service Commission", cite: "143 W. Va. 33, 99 S.E.2d 1 (1957)"}
-  s8-6-5: {kind: statute, name: "W. Va. Code § 8-6-5", cite: "(2021)"}
-  s8-12-5: {kind: statute, name: "W. Va. Code § 8-12-5", cite: "(2023)"}
-  s8-12-19: {kind: statute, name: "W. Va. Code § 8-12-19", cite: "(2023)"}
-  s8-19-1: {kind: statute, name: "W. Va. Code § 8-19-1", cite: "(1990)"}
-  s8-19-3: {kind: statute, name: "W. Va. Code § 8-19-3", cite: "(1990)"}
-  s16-13a-2: {kind: statute, name: "W. Va. Code § 16-13A-2", cite: "(2005)"}
-  s16-13a-3: {kind: statute, name: "W. Va. Code § 16-13A-3", cite: "(2005)"}
-  s16-13a-8: {kind: statute, name: "W. Va. Code § 16-13A-8", cite: "(2017)"}
-  s24-1-1: {kind: statute, name: "W. Va. Code § 24-1-1", cite: "(2015)"}
-  s24-1-7: {kind: statute, name: "W. Va. Code § 24-1-7", cite: "(1979)"}
-  s24-1-9: {kind: statute, name: "W. Va. Code § 24-1-9", cite: "(2022)"}
-  s24-2-1n: {kind: statute, name: "W. Va. Code § 24-2-1n", cite: "(2023)"}
-  s24-5-1: {kind: statute, name: "W. Va. Code § 24-5-1", cite: "(2023)"}
-  r150-1-19: {kind: regulation, name: "W. Va. Code St. R. § 150-1-19", cite: "(2019)"}
-  r150-7-7: {kind: regulation, name: "W. Va. Code St. R. § 150-7-7", cite: "(2025)"}
-  r150-16-7: {kind: regulation, name: "W. Va. Code St. R. § 150-16-7", cite: "(2021)"}
-  rap14: {kind: rule, name: "R. App. P. 14", cite: ""}
-  rap19: {kind: rule, name: "R. App. P. 19", cite: ""}
+  atlantic: {kind: case, name: "*Atlantic Greyhound Corp. v. Public Service Commission*", cite: "132 W. Va. 650, 54 S.E.2d 169 (1949)"}
+  boggs: {kind: case, name: "*Boggs v. Public Service Commission*", cite: "154 W. Va. 146, 174 S.E.2d 331 (1970)"}
+  central: {kind: case, name: "*Central W. Va. Refuse v. Public Service Commission*", cite: "190 W. Va. 416, 438 S.E.2d 596 (1993)"}
+  charleston: {kind: case, name: "*Charleston Transit Co. v. Public Service Commission*", cite: "142 W. Va. 750, 98 S.E.2d 437 (1957)"}
+  chesapeake: {kind: case, name: "*Chesapeake & Potomac Telephone Co. v. Public Service Commission*", cite: "___ W. Va. ___, 300 S.E.2d 607 (1982)"}
+  wheeling: {kind: case, name: "*City of Wheeling v. Public Service Commission of W. Va.*", cite: "248 W. Va. 59, 887 S.E.2d 44 (2023)"}
+  frazier: {kind: case, name: "*Frazier v. S.P.*", cite: "242 W. Va. 657, 838 S.E.2d 741 (2020)"}
+  harrison: {kind: case, name: "*Harrison Rural Electrification Association v. Public Service Commission*", cite: "190 W. Va. 439, 438 S.E.2d 782 (1993)"}
+  heart: {kind: case, name: "*W. Va. Department of Health & Human Resources Office of Health Facility Licensure v. Heart 2 Heart Volunteers, Inc.*", cite: "249 W. Va. 464, 896 S.E.2d 102 (W. Va. Ct. App. 2023)"}
+  monongahela: {kind: case, name: "*Monongahela Power Co. v. Public Service Commission*", cite: "166 W. Va. 423, 276 S.E.2d 179 (1981)"}
+  reed: {kind: case, name: "*Reed v. Thompson*", cite: "235 W. Va. 211, 772 S.E.2d 617 (2015)"}
+  renick: {kind: case, name: "*State ex rel. Wheeling v. Renick*", cite: "145 W. Va. 640, 116 S.E.2d 763 (1960)"}
+  unitedfuel: {kind: case, name: "*United Fuel Gas Co. v. Public Service Commission*", cite: "143 W. Va. 33, 99 S.E.2d 1 (1957)"}
+  s8-6-5: {kind: statute, cite: "W. Va. Code § 8-6-5 (2021)"}
+  s8-12-5: {kind: statute, cite: "W. Va. Code § 8-12-5 (2023)"}
+  s8-12-19: {kind: statute, cite: "W. Va. Code § 8-12-19 (2023)"}
+  s8-19-1: {kind: statute, cite: "W. Va. Code § 8-19-1 (1990)"}
+  s8-19-3: {kind: statute, cite: "W. Va. Code § 8-19-3 (1990)"}
+  s16-13a-2: {kind: statute, cite: "W. Va. Code § 16-13A-2 (2005)"}
+  s16-13a-3: {kind: statute, cite: "W. Va. Code § 16-13A-3 (2005)"}
+  s16-13a-8: {kind: statute, cite: "W. Va. Code § 16-13A-8 (2017)"}
+  s24-1-1: {kind: statute, cite: "W. Va. Code § 24-1-1 (2015)"}
+  s24-1-7: {kind: statute, cite: "W. Va. Code § 24-1-7 (1979)"}
+  s24-1-9: {kind: statute, cite: "W. Va. Code § 24-1-9 (2022)"}
+  s24-2-1n: {kind: statute, cite: "W. Va. Code § 24-2-1n (2023)"}
+  s24-5-1: {kind: statute, cite: "W. Va. Code § 24-5-1 (2023)"}
+  r150-1-19: {kind: regulation, cite: "W. Va. Code St. R. § 150-1-19 (2019)"}
+  r150-7-7: {kind: regulation, cite: "W. Va. Code St. R. § 150-7-7 (2025)"}
+  r150-16-7: {kind: regulation, cite: "W. Va. Code St. R. § 150-16-7 (2021)"}
+  rap14: {kind: rule, cite: "R. App. P. 14"}
+  rap19: {kind: rule, cite: "R. App. P. 19"}
   lumberport: {kind: agency, name: "Lumberport-Shinnston Gas Co., Inc. v. Equitable Gas Co.", cite: "Case No. 86-749-G-C (Comm’n Order, Sept. 29, 1987)"}
   hurricane: {kind: agency, name: "City of Hurricane v. Putnam Pub. Serv. Dist.", cite: "Case No. 07-1419-WS-PC (Comm’n Order, May 7, 2008)"}
   wvam: {kind: agency, name: "W. Va.-Am. Water Co.", cite: "Case No. 11-0740-W-GI (Comm’n Order, Feb. 2, 2012)"}
