@@ -5,14 +5,14 @@ Governs an adversary complaint filed in the United States Bankruptcy Court for t
 ## Exemplar
 
 - `usage/FILED-EXAMPLE-adversary-complaint.pdf`: the U.S. Trustee's complaint to deny a Chapter 7 discharge, *Layng v. Clarke* (In re Marissa J. Clarke), Adv. No. 22-02003-kmp, filed 01/13/2022 (11 pp.). Provenance and checksum in `usage/SOURCE.md`.
-- Sample: `usage/INPUT-adversary-complaint.md` (full transcription, 87 numbered paragraphs, 9 rendered pages). Render: `usage/OUTPUT-adversary-complaint.typst.pdf`. Overlay: `usage/OVERLAY-layng-clarke.pdf` and `usage/OVERLAY-layng-clarke.txt`.
+- Sample: `usage/INPUT-adversary-complaint.md` (full transcription, 87 numbered paragraphs, 10 rendered pages in typst and docx). Render: `usage/OUTPUT-adversary-complaint.typst.pdf`. Overlay: `usage/OVERLAY-layng-clarke.pdf` and `usage/OVERLAY-layng-clarke.txt`.
 
 ## Governing rules (verified 2026-10-14)
 
 | Requirement | Source | Verified | Template use |
 |---|---|---|---|
 | WIEB-FORM-001: proportional font not smaller than 12-point | E.D. Wis. Bankruptcy Local Rule (LR) 9004-1(a), 2026 Local Rules: https://www.wieb.uscourts.gov/sites/default/files/forms/2026%20Local%20Rules%20WIEB.pdf | 2026-10-14 | `type-size = 12pt` |
-| WIEB-FORM-002: double-spaced | LR 9004-1(a) | 2026-10-14 | `body-leading = 1.35em`, about 24 pt baseline pitch (measured with `pdftotext -bbox`) |
+| WIEB-FORM-002: double-spaced | LR 9004-1(a) | 2026-10-14 | `pitch-body = 24pt`: exact 24 pt line boxes on the shared cross-engine model (`lib/typst/xengine.typ`), typst and docx alike |
 | WIEB-FORM-003: one-inch margins on all sides | LR 9004-1(a) | 2026-10-14 | `page-margin = 1in` |
 | Sequential page numbers | LR 9004-1(c) (stated for paper filings; applied to all) | 2026-10-14 | page number, bottom center |
 | Text-searchable PDF filing | LR 5005-1(a)(2)-(3) | 2026-10-14 | the render has embedded fonts and extractable text |
@@ -33,17 +33,28 @@ Frontmatter fields: `debtor` (`name`, `designation`, `case_number`, `chapter`); 
 
 `usage/OVERLAY-layng-clarke.pdf`: red is our render, blue is the filed exemplar, and black is where both agree. Each page is paired with the exemplar page sharing the most words (`OVERLAY-layng-clarke.txt`). Pages pair 1:1 for the caption and the first two pages. Later pages pair with an offset (ours p.3 to filed p.4, ours p.8 to filed p.10) because our rendering is shorter per page with different breaks. Word overlap is 46-71%, which reflects the font difference (EB Garamond vs. the filed Times-like face) and paragraph breaks rather than a content mismatch.
 
-## Page review (Gate 2, every page rendered at 60 dpi and viewed)
+## Page review (Gate 2, every page rendered at 50 dpi and viewed; 2026-10-22, fb-595.68.28)
 
-Pages reviewed: 9 of 9.
+Pages reviewed: 10 of 10, typst and docx; the docx breaks every line and page as typst does (XENG-001..003).
 
-- p.1 (caption): fixed in this pass: consent sentence, caption lines, and heading size overlapped before single-spacing was set; now clean. Court name is constant text in the template (not frontmatter), because this folder is for E.D. Wis. only.
-- p.2-8 (body): numbered paragraphs, centered section headings, and run-in subheads read correctly. Paragraph numbers are consecutive across headings (1-87). No overflow.
-- p.9 (conclusion and signature): "/s/" signature blocks and the attorney block are clean.
+| Page | What it is | Finding |
+|---|---|---|
+| 1 | Court title; caption (In re: debtor, case number and chapter centered beside it, a rule; the parties with "v.", the adversary number centered beside them, a rule); title; consent sentence; the lead paragraph; JURISDICTION AND VENUE, paragraphs 1-4 | OK |
+| 2 | Paragraphs 5-18, THE PARTIES, FACTS | OK |
+| 3 | Paragraphs 19-28, "A. The Defendant's Schedules", "Assets" (level 3, bold italic) | OK |
+| 4 | "Debts", paragraphs 29-36, "Income and Expenses", paragraphs 37-40 | OK |
+| 5 | "Statement of Financial Affairs", paragraphs 41-45, "B. Undisclosed SBA ...", paragraphs 46-50 | OK |
+| 6 | Paragraphs 51-62 | OK |
+| 7 | Paragraphs 63-66, COUNT I and its title (bold, left, two lines), paragraphs 67-70 | OK |
+| 8 | Paragraph 71, "a. Statement under Oath", 72-75, "b. False Statements", 76-79 | OK |
+| 9 | Paragraph 79 (end), "c. Knowing and Fraudulent", 80-82, "d. Materiality", 83-87 | OK |
+| 10 | CONCLUSION, the WHEREFORE paragraph, "Dated:", the two "/s/" signers at 3.25 in, kept on one page | OK |
+
+Numbers in the drafter's markdown sit in a 0.4 in box after the 0.5 in indent; their lines hang at 0.9 in.
 
 ## Known gaps / OPEN and ACCEPTED findings
 
-- ACCEPTED: font is EB Garamond 12 pt (the only vendored font). Its x-height is smaller than the filed Times-like face at the same point size, so the text looks smaller. The rule sets the size, not the face; the page still meets LR 9004-1(a).
+- Font: Times New Roman 12 pt (vendored), the house standard (`docs/FONTS.md`), in typst and docx alike; LR 9004-1(a) allows any proportional face of at least 12 points.
 - OPEN: the consent sentence is generated by the template right after the title, and the transcription also keeps the filed paragraph 6 consent sentence. A drafter would normally keep one. The template statement is the rule requirement; the duplicate is a transcription artifact.
 - OPEN: the Count heading subtitle is left-aligned bold; the filing centers it. Cosmetic.
 - OPEN: summons (Official Form 417A) and the Civil Cover Sheet are not part of this template. A complaint is filed with them, and the summons is issued by the clerk.
@@ -62,8 +73,7 @@ The overlay step (`tools/overlay.sh`) reads `usage/OUTPUT-<id>.pdf`. The sample 
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference for the court's form.
-- **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/wieb.lua`): pandoc on a reference.docx built from pandoc's default (EB Garamond 12 pt, exact 24 pt line pitch, 1 in margins on letter paper, centered PAGE footer, bold centered level-1 headings, bold level-2, italic level-3, no first-line indent on body paragraphs, numbered paragraphs typed by the drafter with the text at 1 in). The caption, consent sentence and signature block are styled paragraphs with tab stops; no tables and no forced line breaks. Every case word comes from the frontmatter. Built to `usage/OUTPUT-adversary-complaint.docx`; the zip and XML parts were checked (`unzip -tq`, `xmllint --noout`).
-  - Matches the typst form: font and size, double spacing, margins, the caption order (court, debtor and case, rule, parties with adversary number, rule, title), the consent sentence, the "/s/" signature block at 3.25 in, numbered paragraphs.
-  - Differs or unverified: the typst caption is a two-column grid with a vertically centred right column; the docx puts the case number on the debtor row and the adversary number on the "v." row, and its rules are paragraph borders. The numbered-paragraph layout (number at 0.5 in, text at 1 in) is a pleading convention, not the typst enum layout. Word's line breaks may differ from typst's. The signature block is kept together but not with the preceding paragraph.
-  - BLOCKED on this box: `soffice` (LibreOffice) is not installed, so `usage/OUTPUT-layng-clarke.docx.pdf` was not produced and the docx Gates 0 to 3 cannot run. No page was rendered or reviewed (0 pages). Not opened in Word. The typst template has no table of contents or table of authorities, so the TOC/TOA field caveat does not apply to this doc type.
+- **typst** (primary, `typst/`): the reference for the court's form, on the shared cross-engine layout model (`lib/typst/xengine.typ`): 24 pt body and 14.4 pt single line boxes, headings single-spaced.
+- **docx** (`docx/reference.xml`, `docx/wieb.lua`): `reference.xml` holds the Word styles (`base="xengine"` in the typst face `{font}`, Times New Roman, 12 pt, 480-twip body and 288-twip single line boxes, the 12 pt page-number footer 0.5 in above the page edge; `fb render` builds the reference document from it); `wieb.lua` reads the sample's body chunk by chunk as the typst template does and writes the caption (a table of two rows ruled at their foot, the numbers centered beside the parties), the title, the consent sentence, headings, numbered paragraphs and the signature as WordprocessingML on `lib/docx/xengine.lua`. No script: `fb render` runs pandoc with the filter and packs the archive (fb-595.68.28; were `build-reference.sh` and a committed `reference.docx` naming EB Garamond, which failed DEF-FONT-002). Every case word comes from the frontmatter and body.
+  - Cross-engine (fb-595.68.28): `sh tools/check.sh <this folder> --engine docx`: XENG-001..003 PASS (10 = 10 pages, 251/251 lines break after the same word); `params.cross_engine: gate` in `eval.yaml`. typst 9 and docx 13 checks passed, 0 failed.
+  - The `.docx` converts in LibreOffice without error (the check's conversion); not opened in Word. No table of contents or table of authorities in this doc type.
