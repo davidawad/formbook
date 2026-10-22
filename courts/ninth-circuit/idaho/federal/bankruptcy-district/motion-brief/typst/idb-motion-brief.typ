@@ -5,24 +5,35 @@
 // caption), LBR 9014-1 (witness testimony notice). See ./README.md for every parameter.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
-#import "/lib/typst/word-compat.typ": word-compat
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")   // LBR 5005-1(c)(2): 12 to 14 point type, no face named; kept per docs/FONTS.md (README)
+#let font-family = ("Times New Roman", "Liberation Serif")   // LBR 5005-1(c)(2): 12 to 14 point type, no face named; Times New Roman, the house standard (docs/FONTS.md)
 #let type-size = 12pt              // inside the 12-14 point range; both filers set Times New Roman at 12 pt (fb-w0vj)
 #let note-size = 12pt              // footnotes: LBR 5005-1(c)(2) sets 12 pt as the floor for all type
-#let body-leading = 1.607em        // double spacing (both filers; no rule sets it): 27.6 pt baseline to baseline at 12 pt
-#let single-leading = 0.457em      // single spacing (13.8 pt pitch at 12 pt): counsel, caption, signature, block quotes, notice, footnotes
 #let para-indent = 0.5in           // first-line indent of paragraphs (both filers)
 #let num-width = 0.5in             // paragraph number box: text after "1." and "10." starts at the same tab (both filers)
-#let margin-x = 1in
-#let margin-top = 1in              // LBR 5005-1(c)(1): counsel information starts 1 inch from the top
-#let margin-bottom = 1in
+#let bullet-width = 0.3in          // bullet box of a `- ` item, the item indented by para-indent
+#let margin = 1in                  // LBR 5005-1(c)(1): counsel information starts 1 inch from the top; 1 inch all round
 #let caption-left = 3.4in          // width of the party column of the caption
+#let caption-pad-left = 0.2in      // the party text stops this far left of the caption's rule
+#let caption-pad-right = 0.3in     // the case-number column starts this far right of the rule
+#let notice-inset = 0.1in          // the negative-notice box: text inset from its rule
+#let quote-left = 0.75in           // block quotations: left and right indents
+#let quote-right = 0.5in
 #let sig-indent = 3.0in            // signature column (both filers sign in the right half)
-#let counsel-leading = single-leading
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-single = 13.8pt         // single spacing, 1.15 x 12 pt: counsel, caption, quotations, notice, signature, footnotes
+#let pitch-double = 2 * pitch-single   // double spacing (both filers; no rule sets it): 27.6 pt
+#let gap = pitch-single            // between the parts of the cover, around quotations, above the signature
+#let notice-gap = 6.9pt            // between the paragraphs of the negative-notice legend
+#let note-gap = 7pt                // between two footnotes
+#let note-clearance = 10pt         // from the last text line to the separator: with note-gap, 17 pt; LibreOffice keeps more than 13.2 pt and at most 26.8 pt between the text and the first note (measured on this template, fb-595.68.23; Word sets the separator as a single-spaced paragraph)
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -51,59 +62,61 @@
 #let para-n = counter("idb-para")
 #let num-on = state("idb-num-on", true)   // off after the prayer and certificate headings
 
+/// One single-spaced line block (a paragraph of its own), with explicit space above and below it.
+#let line-block(above: 0pt, below: 0pt, left: 0pt, right: 0pt, body) = block(width: 100%, above: above, below: below,
+  breakable: false, pad(left: left, right: right, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    body
+  }))
+
+/// Single lines, one per item; an empty (or blank) item is a blank line.
+#let lines(items, left: 0pt, right: 0pt) = for i in items {
+  if i.trim() == "" { block(width: 100%, height: pitch-single, above: 0pt, below: 0pt) }
+  else { line-block(left: left, right: right, inl(i)) }
+}
+
+/// A double-spaced body paragraph: `num` a number in its box after the indent, or none.
+#let body-par(num, content) = block(width: 100%, above: 0pt, below: 0pt,
+  par(first-line-indent: 0pt, {
+    h(para-indent)
+    if num != none { box(width: num-width, num) }
+    content
+  }))
+
 // ---------------------------------------------------------------------------
 // Caption and cover
 // ---------------------------------------------------------------------------
 
-/// Party names one per line, then the designation centered under them.
-#let party-block(p) = {
-  for n in p.names { align(left, inl(n)) }
-  v(0.3em)
-  align(center, p.designation)
-}
-
-#let caption(meta) = table(
+/// The caption: the debtors under "In re:" with their designation centered under them, a rule, then the case
+/// number, chapter and judge (LBR 5005-1(c)(3)).
+#let caption(meta) = block(width: 100%, above: gap, below: 0pt, breakable: false, grid(
   columns: (caption-left, 1fr),
-  stroke: none,
-  inset: (x: 0pt, y: 0pt),
-  gutter: 0pt,
-  table.vline(x: 1, stroke: 0.75pt),
-  [
-    #set par(justify: false, leading: single-leading, spacing: 0.6em)
-    #pad(right: 0.2in)[
-      #align(left)[In re:] #v(0.6em)
-      #party-block(meta.debtors)
-    ]
-  ],
-  [
-    #set par(justify: false, leading: single-leading, spacing: 0.6em)
-    #pad(left: 0.3in)[
-      #v(0.6em)
-      Case No. #meta.case_number #v(0.9em)
-      Chapter #meta.chapter
-      #if "judge" in meta [#v(0.9em) #meta.judge]
-    ]
-  ],
-)
-
-/// Counsel block: upper left, single spaced, from the top margin (LBR 5005-1(c)(1)).
-#let counsel-block(lines) = {
-  set par(leading: counsel-leading, spacing: 0pt, justify: false)
-  for l in lines { inl(l); linebreak() }
-}
+  stroke: (x, y) => if x == 0 { (right: 0.75pt) } else { none },
+  {
+    lines(("In re:", ""), right: caption-pad-left)
+    lines(meta.debtors.names, right: caption-pad-left)
+    line-block(right: caption-pad-left, align(center, inl(meta.debtors.designation)))
+  },
+  {
+    let r = ("", "Case No. " + meta.case_number, "", "Chapter " + str(meta.chapter))
+    if "judge" in meta { r += ("", meta.judge) }
+    lines(r, left: caption-pad-right)
+  },
+))
 
 /// LBR 2002-2(d)(1): the negative-notice legend, immediately below the caption, in a text box
 /// (2008 advisory committee note). Its words come from the sample (`meta.notice`).
-#let notice-box(n) = block(width: 100%, stroke: 0.75pt, inset: (x: 0.1in, y: 0.1in), breakable: false, {
-  set par(leading: single-leading, spacing: 0.9em, justify: true)
-  align(center, text(weight: "bold", upper(n.heading)))
-  for p in n.paragraphs {
-    par(first-line-indent: 0pt, {
-      if "label" in p { underline(inl(p.label)); [ ] }
-      inl(p.text)
-    })
-  }
-})
+#let notice-box(n) = block(width: 100%, above: gap, below: 0pt, stroke: 0.75pt, inset: notice-inset,
+  breakable: false, {
+    line-block(align(center, text(weight: "bold", upper(n.heading))))
+    for p in n.paragraphs {
+      line-block(above: notice-gap, {
+        if "label" in p { underline(inl(p.label)); [ ] }
+        inl(p.text)
+      })
+    }
+  })
 
 // ---------------------------------------------------------------------------
 // Body
@@ -112,50 +125,46 @@
 /// A numbered paragraph: the template numbers them ("1."); the sample does not.
 #let numbered(md) = {
   para-n.step()
-  context if num-on.get() {
-    par(first-line-indent: 0pt)[
-      #h(para-indent)#box(width: num-width, context para-n.display("1."))#inl(md)
-    ]
-  } else {
-    par(first-line-indent: 0pt)[#h(para-indent)#inl(md)]
-  }
+  context body-par(if num-on.get() { para-n.display("1.") } else { none }, inl(md))
 }
 
 /// A bulleted list (`- `); the source's own letters or numbers, if any, stay in the item text.
-#let bullets(items) = {
-  for it in items {
-    block(above: body-leading, below: body-leading, pad(left: para-indent,
-      grid(columns: (0.3in, 1fr), gutter: 0pt, [•], inl(it))))
-  }
+#let bullets(items) = for it in items {
+  block(width: 100%, above: 0pt, below: 0pt, pad(left: para-indent,
+    par(first-line-indent: 0pt, hanging-indent: bullet-width, [#box(width: bullet-width)[•]#inl(it)])))
 }
 
-/// Body chunks: `# ` centered bold; `## ` centered bold; `### ` bold at the left; `- ` bullets;
-/// `> ` block quote; `~ ` unnumbered flush continuation; `: ` unnumbered indented paragraph;
-/// `WHEREFORE` unnumbered; `[^id]: ` footnote definitions (set at the foot of the page of their
-/// reference); anything else is a numbered paragraph. `md` is the chunk plus the footnote
-/// definitions it references (cmarker resolves them).
+/// A block quotation: single spaced, indented on both sides, a single line above and below.
+#let quotation(md) = line-block(above: gap, below: gap, left: quote-left, right: quote-right, inl(md))
+
+/// A heading at the body pitch, kept with what follows.
+#let head(above, body, centered: true) = block(width: 100%, sticky: true, above: above, below: 0pt, {
+  set par(first-line-indent: 0pt)
+  if centered { align(center, text(weight: "bold", body)) } else { text(weight: "bold", body) }
+})
+
+/// Body chunks: `# ` centered bold (a single line above); `## ` centered bold; `### ` bold at the left; `- `
+/// bullets; `> ` block quote; `~ ` unnumbered flush continuation; `: ` unnumbered indented paragraph;
+/// `WHEREFORE` unnumbered; `[^id]: ` footnote definitions (set at the foot of the page of their reference);
+/// anything else is a numbered paragraph. `md` is the chunk plus the footnote definitions it references.
 #let render-chunk(c, md) = {
   if c.starts-with("# ") {
     if c.slice(2).starts-with("PRAYER") or c.slice(2).starts-with("CERTIFICATE") { num-on.update(false) }
-    block(width: 100%, sticky: true, above: 2em, below: body-leading,
-      align(center, text(weight: "bold", inl(no-list(c.slice(2))))))
+    head(gap, inl(no-list(c.slice(2))))
   } else if c.starts-with("## ") {
-    block(width: 100%, sticky: true, above: 1.4em, below: body-leading,
-      align(center, text(weight: "bold", inl(no-list(c.slice(3))))))
+    head(0pt, inl(no-list(c.slice(3))))
   } else if c.starts-with("### ") {
-    block(width: 100%, sticky: true, above: body-leading, below: body-leading,
-      text(weight: "bold", inl(no-list(c.slice(4)))))
+    head(0pt, inl(no-list(c.slice(4))), centered: false)
   } else if c.starts-with("- ") {
     bullets(md.split("\n").map(l => l.trim()).filter(l => l.starts-with("- ")).map(l => l.slice(2)))
   } else if c.starts-with("WHEREFORE") {
-    par(first-line-indent: 0pt)[#h(para-indent)#inl(md)]
+    body-par(none, inl(md))
   } else if c.starts-with(": ") {
-    par(first-line-indent: 0pt)[#h(para-indent)#inl(md.slice(2))]
+    body-par(none, inl(md.slice(2)))
   } else if c.starts-with("> ") {
-    block(above: 1.4em, below: 1.4em, pad(left: 0.75in, right: 0.5in,
-      par(first-line-indent: 0pt, leading: single-leading, inl(md.slice(2)))))
+    quotation(md.slice(2))
   } else if c.starts-with("~ ") {
-    par(first-line-indent: 0pt, inl(md.slice(2)))
+    block(width: 100%, above: 0pt, below: 0pt, par(first-line-indent: 0pt, inl(md.slice(2))))
   } else {
     numbered(md)
   }
@@ -165,30 +174,23 @@
 /// `signer`, `by` (prefix before "/s/", default "By "), `lines_below` (firm, party, under the name).
 #let signature-block(meta) = {
   let s = meta.signature
-  v(1.2em)
-  par(first-line-indent: 0pt)[#h(para-indent)#meta.dated]
-  v(0.8em)
-  // groups of single-spaced lines in the signature column, a blank line between groups
-  let group(xs) = block(above: 1em, below: 0pt, {
-    set par(leading: counsel-leading, spacing: 0pt, justify: false, first-line-indent: 0pt)
-    xs.map(l => inl(l)).join(linebreak())
-  })
-  pad(left: sig-indent, {
-    let above = s.at("lines_above", default: ())
-    if above.len() > 0 { group(above) }
-    group((s.at("by", default: "By ") + "/s/ " + s.signer, s.signer))
-    let below = s.at("lines_below", default: ())
-    if below.len() > 0 { group(below) }
-  })
+  line-block(above: gap, left: para-indent, inl(meta.dated))
+  let groups = ()
+  let above = s.at("lines_above", default: ())
+  if above.len() > 0 { groups.push(above) }
+  groups.push((s.at("by", default: "By ") + "/s/ " + s.signer, s.signer))
+  let below = s.at("lines_below", default: ())
+  if below.len() > 0 { groups.push(below) }
+  for g in groups {
+    for (i, l) in g.enumerate() { line-block(above: if i == 0 { gap } else { 0pt }, left: sig-indent, inl(l)) }
+  }
 }
 
 /// The certificate's own signature (`meta.service_signature`: `signer`, optional `name`).
-#let service-signature(s) = block(above: 1.2em, breakable: false, pad(left: sig-indent, {
-  set par(leading: counsel-leading, spacing: 0pt, justify: false)
-  [By /s/ #s.signer]
-  linebreak()
-  [#s.at("name", default: s.signer)]
-}))
+#let service-signature(s) = block(width: 100%, above: gap, below: 0pt, breakable: false, {
+  line-block(left: sig-indent, [By /s/ #s.signer])
+  line-block(left: sig-indent, [#s.at("name", default: s.signer)])
+})
 
 // ---------------------------------------------------------------------------
 // Entry point: idb-motion-brief(meta, body)
@@ -198,39 +200,41 @@
   assert(meta.case_number.match(regex("^\\d{2}-(?:bk-)?\\d{5}-[A-Za-z]{3}$")) != none,
     message: "idb-motion-brief: case_number must end in a three-letter judge suffix")
 
+  // Page number centered in a single-spaced line box, where Word's footer sets it.
   set page(
     paper: "us-letter",
-    margin: (top: margin-top, bottom: margin-bottom, left: margin-x, right: margin-x),
-    footer: context align(center, text(size: 11pt, counter(page).display())),
+    margin: margin,
+    footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, justify: true, spacing: body-leading)   // both filers justify; no extra space between paragraphs
-  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
-  show: word-compat.with(meta.at("word", default: (:)))
-  set table(stroke: none)
-  set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt,
-    separator: line(length: 30%, stroke: 0.5pt))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch (double spaced).
+  show: xengine.with(pitch: pitch-double, list-indent: none)
+  // A doubled sign stays with its number too ("§§ 157"; xengine binds a single one).
+  show regex("[§¶]+ \\S+"): it => box(it)
+  // A quotation mark right after sentence punctuation closes a quotation (cmarker reads an unmatched one as
+  // opening; pandoc, the docx reader, as closing).
+  show regex("[.,;:!?][\u{201C}]"): it => it.text.replace("\u{201C}", "\u{201D}")
+  // Footnotes (LBR 5005-1(c)(2): 12 pt), single spaced: the indent, the mark, a space, the note (Word's footnote).
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt,
+    separator: line(length: 2in, stroke: 0.5pt))
   show footnote.entry: it => {
-    set text(size: note-size)   // typst's default is 0.85em (11 pt here); LBR 5005-1(c)(2) floor is 12 pt
-    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em, justify: true)
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    set text(size: note-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
     [#h(para-indent)#super(num)#h(0.25em)#note.body]
   }
 
-  counsel-block(meta.counsel)
-  v(1.2em)
-  align(center, {
-    set par(leading: single-leading)
-    text(weight: "bold")[UNITED STATES BANKRUPTCY COURT #linebreak() FOR THE DISTRICT OF IDAHO]
-  })
-  v(1.0em)
+  // Cover: counsel (LBR 5005-1(c)(1)), court, caption, title, the negative-notice legend, the lead-in.
+  lines(meta.counsel)
+  line-block(above: gap, align(center, text(weight: "bold")[UNITED STATES BANKRUPTCY COURT]))
+  line-block(align(center, text(weight: "bold")[FOR THE DISTRICT OF IDAHO]))
   caption(meta)
-  v(1.0em)
-  align(center, { set par(leading: single-leading, justify: false); text(weight: "bold", upper(meta.title)) })
-  v(0.8em)
-  if "notice" in meta { notice-box(meta.notice); v(0.8em) }
-  par(first-line-indent: 0pt)[#h(para-indent)#inl(meta.lead_in)]
+  line-block(above: gap, align(center, text(weight: "bold", upper(meta.title))))
+  if "notice" in meta { notice-box(meta.notice) }
+  block(width: 100%, above: gap, below: 0pt, body-par(none, inl(meta.lead_in)))
 
   // footnote definitions are pulled out and appended to the chunks that cite them
   let all = chunks(body)
@@ -259,12 +263,10 @@
   for (i, c) in cs.slice(0, n-body).enumerate() {
     if i != last { render-chunk(c, with-defs(c)) }
   }
-  if last != none {
-    let c = cs.at(last)
-    block(breakable: false, width: 100%, { render-chunk(c, with-defs(c)); signature-block(meta) })
-  } else {
-    block(breakable: false, width: 100%, signature-block(meta))
-  }
+  block(width: 100%, above: 0pt, below: 0pt, breakable: false, {
+    if last != none { let c = cs.at(last); render-chunk(c, with-defs(c)) }
+    signature-block(meta)
+  })
   for c in cs.slice(n-body) { render-chunk(c, with-defs(c)) }
   if cert != none and "service_signature" in meta { service-signature(meta.service_signature) }
 }
