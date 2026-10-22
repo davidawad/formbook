@@ -213,82 +213,82 @@ authorities:
     cite: "830 F.3d 216 (5th Cir. 2016)"
   const28:
     kind: statute
-    name: "LA. CONST. art. V, § 28(A)"
+    cite: "LA. CONST. art. V, § 28(A)"
   const30:
     kind: statute
-    name: "LA. CONST. art. V, § 30"
+    cite: "LA. CONST. art. V, § 30"
   const32:
     kind: statute
-    name: "LA. CONST. art. V, § 32"
+    cite: "LA. CONST. art. V, § 32"
   stat18:
     kind: statute
-    name: "LA. STAT. ANN. § 18:402(E)(1)"
+    cite: "LA. STAT. ANN. § 18:402(E)(1)"
   stat42_71:
     kind: statute
-    name: "LA. STAT. ANN. § 42:71"
+    cite: "LA. STAT. ANN. § 42:71"
   stat42_72:
     kind: statute
-    name: "LA. STAT. ANN. § 42:72"
+    cite: "LA. STAT. ANN. § 42:72"
   stat17:
     kind: statute
-    name: "LA. STAT. ANN. § 17:347 (repealed 1960)"
+    cite: "LA. STAT. ANN. § 17:347 (repealed 1960)"
   senate1960:
     kind: other
-    name: "1960 Senate Calendar of the State of Louisiana, Thirty-Second Extraordinary Session of the Legislature Under the Constitution of 1921"
+    cite: "1960 Senate Calendar of the State of Louisiana, Thirty-Second Extraordinary Session of the Legislature Under the Constitution of 1921"
   kellogg:
     kind: other
-    name: "Address of Governor Kellogg to the People of the United States on the Condition of Affairs in Louisiana with Official Facts and Figures"
+    cite: "Address of Governor Kellogg to the People of the United States on the Condition of Affairs in Louisiana with Official Facts and Figures"
   ballot21:
     kind: other
-    name: "Ballotpedia, City elections in New Orleans, Louisiana (2021)"
+    cite: "Ballotpedia, City elections in New Orleans, Louisiana (2021)"
   ballot25:
     kind: other
-    name: "Ballotpedia, City elections in New Orleans, Louisiana (2025)"
+    cite: "Ballotpedia, City elections in New Orleans, Louisiana (2025)"
   eji:
     kind: other
-    name: "EJI, A History of Racial Injustice, Sep 14, 1874: White Militia Wages Coup Against Integrated Louisiana Government"
+    cite: "EJI, A History of Racial Injustice, Sep 14, 1874: White Militia Wages Coup Against Integrated Louisiana Government"
   foner:
     kind: other
-    name: "Eric Foner, Reconstruction: America’s Unfinished Revolution, 1863-1877 (1988)"
+    cite: "Eric Foner, Reconstruction: America’s Unfinished Revolution, 1863-1877 (1988)"
   hearing:
     kind: other
-    name: "Hearing on S.B. 256 Before the S. Judiciary B Comm., 2026 Leg., Reg. Sess. (La. 2026)"
+    cite: "Hearing on S.B. 256 Before the S. Judiciary B Comm., 2026 Leg., Reg. Sess. (La. 2026)"
   brook:
     kind: other
-    name: "Jack Brook & Sara Cline, Louisiana GOP Races To Eliminate An Elected Office Won By An Exonerated Man, ASSOCIATED PRESS (Apr. 9, 2026)"
+    cite: "Jack Brook & Sara Cline, Louisiana GOP Races To Eliminate An Elected Office Won By An Exonerated Man, ASSOCIATED PRESS (Apr. 9, 2026)"
   sieder:
     kind: other
-    name: "Jill Jordan Sieder, ‘Never Seen Something So Barbaric’: Louisiana Republicans Push to Eliminate An Elected Position Won By Exonerated Black Man, ATLANTA BLACK STAR (Apr. 13, 2026)"
+    cite: "Jill Jordan Sieder, ‘Never Seen Something So Barbaric’: Louisiana Republicans Push to Eliminate An Elected Position Won By Exonerated Black Man, ATLANTA BLACK STAR (Apr. 13, 2026)"
   davis:
     kind: other
-    name: "Jimmie Davis, Governor, La., Speech on Statewide Television (Nov. 13, 1960)"
+    cite: "Jimmie Davis, Governor, La., Speech on Statewide Television (Nov. 13, 1960)"
   agletter:
     kind: other
-    name: "La. Office of the Att’y Gen, Attorney General Liz Murrill demands immediate rescission of New Orleans Clerk resolutions, or face potential forfeiture of their offices (May 13, 2026)"
+    cite: "La. Office of the Att’y Gen, Attorney General Liz Murrill demands immediate rescission of New Orleans Clerk resolutions, or face potential forfeiture of their offices (May 13, 2026)"
   sos:
     kind: other
-    name: "La. Sec’y of State, Orleans Par., Official Results, Nov. 15, 2025"
+    cite: "La. Sec’y of State, Orleans Par., Official Results, Nov. 15, 2025"
   acts15:
     kind: other
-    name: "La. State Legis., Acts 2026, No. 15, Regular Session of Louisiana Legislature"
+    cite: "La. State Legis., Acts 2026, No. 15, Regular Session of Louisiana Legislature"
   morris:
     kind: other
-    name: "La. State Sen., Profile of State Senator John C. “Jay” Morris III"
+    cite: "La. State Sen., Profile of State Senator John C. “Jay” Morris III"
   murrilllet:
     kind: other
-    name: "Liz Murrill, Att’y Gen. of La., Letter to Judge Calvin Johnson regarding New Orleans City Council’s May 11 Resolutions for Interim Clerk of Court (May 13, 2026)"
+    cite: "Liz Murrill, Att’y Gen. of La., Letter to Judge Calvin Johnson regarding New Orleans City Council’s May 11 Resolutions for Interim Clerk of Court (May 13, 2026)"
   ldfletter:
     kind: other
-    name: "Ltr. from LDF to La. House Comm. on Judiciary (Apr. 16, 2026)"
+    cite: "Ltr. from LDF to La. House Comm. on Judiciary (Apr. 16, 2026)"
   redmond:
     kind: other
-    name: "Redmond Gets Ouster Notice, TIMES-PICAYUNE, Jan. 13, 1961"
+    cite: "Redmond Gets Ouster Notice, TIMES-PICAYUNE, Jan. 13, 1961"
   pinchback:
     kind: other
-    name: "U.S. Senate, Senate Historical Office, Senate Stories | Reconstruction Louisiana and the Case of PBS Pinchback (Feb. 26, 2025)"
+    cite: "U.S. Senate, Senate Historical Office, Senate Stories | Reconstruction Louisiana and the Case of PBS Pinchback (Feb. 26, 2025)"
   mackel:
     kind: other
-    name: "Travers Mackel, AG Liz Murrill Questions The Past of New Orleans Political Candidate, WDSU NEWS, (Oct. 2, 2025, 2:21 PM)"
+    cite: "Travers Mackel, AG Liz Murrill Questions The Past of New Orleans Political Candidate, WDSU NEWS, (Oct. 2, 2025, 2:21 PM)"
 ---
 
 # INTEREST OF AMICI CURIAE
