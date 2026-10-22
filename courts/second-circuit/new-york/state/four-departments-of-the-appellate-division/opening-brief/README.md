@@ -7,7 +7,7 @@
 | Gate | Result |
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-opening-brief.pdf` (Third Dept, NYSCEF Doc. 39, filed 2024-03-29; see `usage/SOURCE.md`) |
-| render | ok: `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/opening-brief usage/INPUT-opening-brief.md`, 11 pages, EB Garamond only, no typst warnings (2026-10-16) |
+| render | ok: `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/opening-brief usage/INPUT-opening-brief.md`, 11 pages, Times New Roman only, no typst warnings (2026-10-22) |
 | overlay | ok: `sh tools/overlay.sh …/opening-brief synthetic-opening-brief`, wrote `usage/OVERLAY-synthetic-opening-brief.pdf` and `.txt` (2026-10-16) |
 | pages reviewed | 11 of 11 (every page rasterized at 60 dpi and viewed, 2026-10-16). Exemplar: pages 1–48 viewed as contact sheets (2026-10-15); 49–93 not viewed |
 
@@ -34,7 +34,7 @@ What the exemplar settled (and what the template now does):
 5. **Word count** in the printing statement is the template's whitespace count of the markdown body, headings included (1,442 for the sample), not a word-processor count. The 14,000-word limit is a hard stop. The page limit (1250.8(g)(2), typewritten briefs) is not checked.
 6. **Footnotes** are refused by the template. The rule comes from a 2012 secondary source on Part 1000; confirm it against the current Part 1000 before relying on it.
 7. **Type size** is 14 pt (1250.8(f)(1)(i) for proportional faces). **Line spacing** is double (1250.8(h)); `body-leading` was set by measurement against the rendered page, not against the exemplar.
-8. **Font**: no face is named by the rule. 1250.8(f)(1) requires "a serifed, proportionally spaced typeface such as Times Roman"; "such as" is an example, so EB Garamond is kept. Typeface row: face required none named; substitute none; fit n/a. Checked 2026-10-15 against the LII copy. No system font is used.
+8. **Font**: no face is named by the rule. 1250.8(f)(1) requires "a serifed, proportionally spaced typeface such as Times Roman"; "such as" is an example; the template sets Times New Roman, the house standard (2026-10-22, fb-595.68.37; was EB Garamond). Typeface row: face required none named; substitute none; fit n/a. Checked 2026-10-15 against the LII copy. No system font is used.
 9. **Cover colour** (blue, §1000.8(a)) is not produced. The paper rule does not settle the e-filed copy.
 10. **Form of the printing statement.** §1250.8(b)(6) asks for a certification "on a form approved by the court". That form was not obtained; the statement carries the §1250.8(j) content.
 11. **Certificate of service** is not generated.
@@ -70,18 +70,10 @@ What the exemplar settled (and what the template now does):
 
 ## Engines
 
-**docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/nyappdiv-opening-brief.lua`; output `usage/OUTPUT-<id>.docx`).
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.68.37): Times New Roman 14 pt (1250.8(f)(1)), the body in exact 28 pt line boxes (double spacing, 1250.8(h)), single lines (cover, headings, quotations, tables, signature, page number) in 16.1 pt boxes, first-fit ragged-right breaking with no kerning, ligatures or hyphenation.
 
-- Matches the typst form: letter, 1 in margins, EB Garamond 14 pt body, double-spaced body with a 0.5 in first-line indent, single-spaced headings, block quotations, signature block and printing statement; centered page number in the footer, none on the cover.
-- Differs: "double" is Word's double spacing (`w:line="480"`), not the typst leading, so line breaks and page counts differ. Word and LibreOffice also paginate differently from each other.
-- Differs: the contents is a TOC field with cached entries and no page numbers; Word or LibreOffice must update fields. The authorities list has no page references (a TOA field needs the same update, and LibreOffice does not honor TA/TOA fields).
-- The cover is a centered layout, not the caption table of the typst form. Footnotes are refused by the filter, as the typst template refuses them.
-- The word count and the word limit are computed by the filter from the markdown source, not by Word.
-- Validated: `tools/render.sh --engine docx` writes the `.docx`; `unzip -tq` and `xmllint --noout` pass on every XML part of the output and of `reference.docx`.
+**docx** (`docx/reference.xml`, `docx/nyappdiv-opening-brief.lua`; outputs `usage/OUTPUT-<id>.docx` and `.docx.pdf`, built by `fb render`, no shell).
 
-- Not updated in the 2026-10-16 pass: the docx filter does not read the new `argument:` and `email:` fields, so the committed `.docx` has no argued/submitted notation and no cover email. Open item for the docx engine.
-
-BLOCKED (docx engine, not passable on this box):
-
-- **docx.pdf gates (Gates 0 and 1, `tools/check.sh --engine docx`): BLOCKED.** LibreOffice (`soffice`) is not installed on this box, so no `usage/OUTPUT-<id>.docx.pdf` exists and the check cannot run. Stamp `usage/.check-docx.txt` not written.
-- **Pages reviewed: 0.** No `.docx` page was rendered or looked at, and the file was not opened in Word or LibreOffice, so no "no repair prompt" result is recorded.
+- The filter writes every paragraph with the typst template's spacing in twips: the cover (docket and the argued/submitted notation in a two-column row, court, caption, index number, proceeding, title, counsel with telephone and email, date), the contents and authorities with page numbers from `fb render`'s needles (front matter i, ii; body from 1; cover unnumbered), the headings (POINT I with its title, lettered and numbered sub-headings), block quotations, the conclusion kept with the signature, and the printing specifications statement with the word count, counted from the markdown rule for rule as typst counts.
+- Gate 4 CROSS-ENGINE is gated (`eval.yaml`, `params.cross_engine: gate`): the docx breaks every line and page where typst does (XENG-001..003 PASS).
+- Footnotes are refused by the filter, as the typst template refuses them. Word may paginate slightly differently from LibreOffice (docs/DOCX.md); the checked PDF is LibreOffice's.

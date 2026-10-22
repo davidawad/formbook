@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The NY Appellate Division opening brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs;
+     docs/EVAL-LOOP.md, "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; 22 NYCRR
+     1250.8(f)(1): a serifed, proportionally spaced face such as Times Roman) at 14 pt (size 28 half points, 1250.8(f)(1)(i));
+     Body Text in exact 28 pt line boxes (560 twips: typst pitch-body, double spacing, 1250.8(h)) with a half-inch
+     first-line indent; single lines in 16.1 pt boxes (322 twips: typst pitch-single). docx/nyappdiv-opening-brief.lua
+     writes every paragraph with its own spacing, the sections (letter page, 1 in margins, 1250.8(h); the cover
+     unnumbered, the tables i, ii, the body from 1) and the page-number footer (centred at 14 pt in a single-pitch line
+     whose box ends 0.5 in above the page edge, typst footer-distance). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="560" single="322" indent="720" footer="720"/>
