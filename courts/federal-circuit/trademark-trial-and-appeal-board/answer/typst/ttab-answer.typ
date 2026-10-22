@@ -3,21 +3,33 @@
 //
 // Rule-driven and content-agnostic. Requirement IDs (TTAB-...) refer to ../rules.md.
 // No case-specific text. The body is markdown rendered by cmarker; the caption, signature block and
-// certificate of service come from the YAML frontmatter of the same file (schema: ../README.extra.md).
+// certificate of service come from the YAML frontmatter of the same file (schema: ../README.md).
+//
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing). docx/ttab-answer.lua and docx/make-reference.sh
+// set the same pitches and spaces (twips = 20 x pt), so the docx breaks every line and page where this does.
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // the rule names no face (TTAB-FORM-006); metric-compatible with Times New Roman, vendored (OFL). `--input font=...` overrides it.
+// The rule names no face (TTAB-FORM-006). Times New Roman, or the vendored Liberation Serif with the same metrics.
+#let font-family = ("Times New Roman", "Liberation Serif")
 #let type-size = 12pt                     // TTAB-FORM-001: at least 11-point (the template uses 12)
-#let body-leading = 1.39em                // TTAB-FORM-002: with the ascender/descender line extent this gives a baseline
-                                          // pitch of 27.6 pt at 12 pt, the same as Word's "double" for Times New Roman.
-#let single-leading = 0.2em               // caption, block quotations, signature block, certificate.
+#let pitch-double = 27.6pt                // TTAB-FORM-002: double-spaced; Word's "double" for Times New Roman at 12 pt
+#let pitch-single = 13.8pt                // caption, block quotations, signature block, certificate: single-spaced
 #let page-margin = 1in                    // TTAB-FORM-005 (convention; the Board states no margin)
 #let para-indent = 0.5in
+#let sig-indent = 3.25in                  // the signature block starts at the middle of the text width
+#let caption-col = 64%                    // caption: matter and parties left, the proceeding number right
+#let caption-gutter = 8.4pt               // between the parties' text and the rule down the right of their cell
+#let caption-num-pad = 13.2pt             // between that rule and the proceeding number
+#let role-indent = 0.5in                  // a party's role under its name
+#let versus-indent = 0.25in               // "v." between the parties
 #let letter-width = 8.5in
 #let letter-height = 11in
 
@@ -51,6 +63,13 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
+/// One single-spaced line (or paragraph) of a block, with explicit spaces above and below.
+#let line-par(body, above: 0pt, below: 0pt, indent: 0pt) = block(above: above, below: below,
+  pad(left: indent, par(first-line-indent: 0pt, body)))
+
+/// A rule under a signature line.
+#let sig-rule(indent) = block(above: 3pt, below: 4pt, pad(left: indent, line(length: 100%, stroke: 0.5pt)))
+
 // ---------------------------------------------------------------------------
 // Caption (TTAB-COVER-001, -002, -010, TTAB-CONT-002; TBMP 311.01(a), 309.02(a))
 // ---------------------------------------------------------------------------
@@ -61,38 +80,34 @@
   let matter = need(meta, "matter")
   let kind = meta.at("kind", default: "opposition")
   let number-label = if kind == "cancellation" { "Cancellation No." } else { "Opposition No." }
-  set par(leading: single-leading, first-line-indent: 0pt, spacing: 0.7em)
-  align(center)[
-    #strong[IN THE UNITED STATES PATENT AND TRADEMARK OFFICE] \
-    #strong[BEFORE THE TRADEMARK TRIAL AND APPEAL BOARD]
-  ]
-  v(1.1em)
-  grid(
-    columns: (64%, 36%),
+  set text(..edges(pitch-single))
+  block(width: 100%, above: 0pt, below: 0pt, align(center, par(first-line-indent: 0pt,
+    strong[IN THE UNITED STATES PATENT AND TRADEMARK OFFICE])))
+  block(width: 100%, above: 0pt, below: 0pt, align(center, par(first-line-indent: 0pt,
+    strong[BEFORE THE TRADEMARK TRIAL AND APPEAL BOARD])))
+  block(above: 13.8pt, below: 0pt, grid(
+    columns: (caption-col, 100% - caption-col),
     column-gutter: 0pt,
     // left cell: matter lines and the parties; a rule down its right edge and along its foot
     block(
       stroke: (right: 0.75pt, bottom: 0.75pt),
-      inset: (right: 0.7em, bottom: 0.9em),
+      inset: (right: caption-gutter, bottom: 10.8pt),
       width: 100%,
       {
-        for l in matter { par(inl(l)) }
-        v(0.6em)
-        par(inl(plaintiff.name))
-        pad(left: 2.2em, par(inl(plaintiff.role)))
-        pad(left: 1.1em, par(emph[v.]))
-        par(inl(defendant.name))
-        pad(left: 2.2em, par(inl(defendant.role)))
+        for l in matter { line-par(inl(l)) }
+        line-par(inl(plaintiff.name), above: 7.2pt)
+        line-par(inl(plaintiff.role), indent: role-indent)
+        line-par(emph[v.], indent: versus-indent)
+        line-par(inl(defendant.name))
+        line-par(inl(defendant.role), indent: role-indent)
       },
     ),
-    // right cell: the proceeding number, vertically centred against the parties
-    align(horizon, pad(left: 1.1em)[
-      #number-label #need(meta, "proceeding_number")
-    ]),
-  )
-  v(1.4em)
-  align(center, text(weight: "bold", underline(inl(need(meta, "title")))))
-  v(0.9em)
+    // right cell: the proceeding number, on the line of the "v." between the parties
+    block(above: 0pt, below: 0pt, inset: (top: (matter.len() + 2) * pitch-single + 7.2pt),
+      line-par([#number-label #need(meta, "proceeding_number")], indent: caption-num-pad)),
+  ))
+  block(width: 100%, above: 16.8pt, below: 10.8pt, align(center, par(first-line-indent: 0pt,
+    text(weight: "bold", underline(inl(need(meta, "title")))))))
 }
 
 // ---------------------------------------------------------------------------
@@ -101,21 +116,16 @@
 
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  set par(leading: single-leading, first-line-indent: 0pt, spacing: 0.45em)
-  block(breakable: false, width: 100%, {
-    par(inl("Dated: " + sig.date))
-    v(0.5em)
-    pad(left: 3.25in, {
-      par(inl("Respectfully submitted,"))
-      v(0.3em)
-      par(strong(inl(sig.firm)))
-      v(1.1em)
-      par(inl(sig.esign))
-      line(length: 100%, stroke: 0.5pt)
-      par(inl(sig.name))
-      par(inl(sig.title))
-      for l in sig.at("lines", default: ()) { par(inl(l)) }
-    })
+  set text(..edges(pitch-single))
+  block(breakable: false, width: 100%, above: 19.2pt, below: 0pt, {
+    line-par(inl("Dated: " + sig.date))
+    line-par(inl("Respectfully submitted,"), above: 6pt, indent: sig-indent)
+    line-par(strong(inl(sig.firm)), above: 3.6pt, indent: sig-indent)
+    line-par(inl(sig.esign), above: 13.2pt, indent: sig-indent)
+    sig-rule(sig-indent)
+    line-par(inl(sig.name), indent: sig-indent)
+    line-par(inl(sig.title), indent: sig-indent)
+    for l in sig.at("lines", default: ()) { line-par(inl(l), indent: sig-indent) }
   })
 }
 
@@ -125,33 +135,30 @@
 
 #let certificate-of-service(meta) = {
   let sv = need(meta, "service")
-  set par(leading: single-leading, first-line-indent: 0pt, spacing: 0.7em)
-  align(center, text(weight: "bold", underline[CERTIFICATE OF SERVICE]))
-  v(0.6em)
+  set text(..edges(pitch-single))
+  block(width: 100%, above: 0pt, below: 0pt, align(center, par(first-line-indent: 0pt,
+    text(weight: "bold", underline[CERTIFICATE OF SERVICE]))))
   let by = if sv.at("method", default: "email") == "email" { "by email" } else { sv.method }
-  par(justify: false, first-line-indent: para-indent, {
+  block(above: 14.4pt, below: 10pt, par(first-line-indent: para-indent, {
     [I hereby certify that on ]
     inl(sv.date)
     [, a true and complete copy of the foregoing ]
     inl(sv.paper)
     [ was served #by on:]
-  })
+  }))
   for r in sv.recipients {
-    pad(left: para-indent, {
-      block(breakable: false, {
-        par(inl(r.name + ", " + r.role))
-        for l in r.at("lines", default: ()) { par(inl(l)) }
-        par(inl(r.email))
-      })
+    block(breakable: false, above: 0pt, below: 12pt, {
+      line-par(inl(r.name + ", " + r.role), indent: para-indent)
+      for l in r.at("lines", default: ()) { line-par(inl(l), indent: para-indent) }
+      line-par(inl(r.email), indent: para-indent)
     })
   }
-  v(0.8em)
-  block(breakable: false, width: 100%, pad(left: 3.25in, {
-    par(inl(sv.esign))
-    line(length: 100%, stroke: 0.5pt)
-    par(inl(sv.name))
-    par(inl(sv.title))
-  }))
+  block(breakable: false, width: 100%, above: 18pt, below: 0pt, {
+    line-par(inl(sv.esign), indent: sig-indent)
+    sig-rule(sig-indent)
+    line-par(inl(sv.name), indent: sig-indent)
+    line-par(inl(sv.title), indent: sig-indent)
+  })
 }
 
 // ---------------------------------------------------------------------------
@@ -164,60 +171,73 @@
     width: letter-width,
     height: letter-height,
     margin: page-margin,
-    footer: context align(center, text(size: type-size, counter(page).display())),
+    footer: context align(center, text(size: type-size, ..edges(pitch-single), counter(page).display())),
   )
   set text(font: sys.inputs.at("font", default: font-family), size: type-size, lang: "en", region: "US",
-           top-edge: "ascender", bottom-edge: "descender", hyphenate: false)
-  set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: false)
+           fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, no kerning, ligatures or hyphenation, line boxes of the body pitch,
+  // bullets in a half-inch box at the margin (numbered paragraphs are set by hand below).
+  show: xengine.with(pitch: pitch-double, list-indent: para-indent)
 
-  // Headings: level 1 centred bold capitals-as-typed; level 2 bold; level 3 italic. No numbering.
-  show heading.where(level: 1): it => {
-    set par(first-line-indent: 0pt, leading: single-leading)
-    block(width: 100%, above: 1.6em, below: 1.0em, breakable: false, sticky: true,
-      align(center, text(weight: "bold", size: type-size, it.body)))
-  }
-  show heading.where(level: 2): it => {
-    set par(first-line-indent: 0pt, leading: single-leading)
-    block(width: 100%, above: 1.3em, below: 0.9em, breakable: false, sticky: true,
-      text(weight: "bold", size: type-size, it.body))
-  }
-  show heading.where(level: 3): it => {
-    set par(first-line-indent: 0pt, leading: single-leading)
-    block(width: 100%, above: 1.1em, below: 0.8em, breakable: false, sticky: true,
-      text(style: "italic", size: type-size, it.body))
+  // Headings: level 1 centred bold capitals-as-typed; level 2 bold; level 3 bold italic. No numbering.
+  show heading: it => {
+    set text(size: type-size, weight: "bold", ..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    if it.level == 1 {
+      block(width: 100%, above: 19.2pt, below: 12pt, sticky: true, align(center, par(it.body)))
+    } else if it.level == 2 {
+      block(width: 100%, above: 15.6pt, below: 10.8pt, sticky: true, par(it.body))
+    } else {
+      block(width: 100%, above: 13.2pt, below: 9.6pt, sticky: true, par(text(style: "italic", it.body)))
+    }
   }
 
   // Drafting markers: a paragraph that is entirely bold text beginning with "[" is a drafting note
   // (for example "[CONFORM: ...]"). It is set flush left, single-spaced, in italics. TTAB-TOOL-002.
   show strong: it => if plain(it.body).starts-with("[") {
-    block(width: 100%, above: 0.9em, below: 0.9em, breakable: false, sticky: true, {
-      set par(leading: single-leading, first-line-indent: 0pt, spacing: 0.7em)
-      text(style: "italic", weight: "regular", it.body)
+    block(width: 100%, above: 10.8pt, below: 10.8pt, breakable: false, sticky: true, {
+      set text(..edges(pitch-single))
+      par(first-line-indent: 0pt, text(style: "italic", weight: "regular", it.body))
     })
   } else { it }
 
-  // Block quotations: indented both sides, single-spaced.
+  // Block quotations: indented one inch both sides, single-spaced.
   show quote.where(block: true): it => {
-    set par(leading: single-leading, first-line-indent: 0pt, spacing: 0.7em)
-    block(above: 0.9em, below: 1.0em, inset: (left: 1in, right: 1in), it.body)
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    set par(spacing: 8.4pt)
+    block(above: 10.8pt, below: 12pt, pad(left: 1in, right: 1in, it.body))
   }
 
-  // Numbered paragraphs: the number sits at the first-line indent; wrapped lines return to the margin.
-  // (Rendered by hand from the enum's children: typst's own enum layout hangs the body.)
+  // Numbered paragraphs: the number sits at the first-line indent, two no-break spaces after it; wrapped lines
+  // return to the margin. (Rendered by hand from the enum's children: an enum hangs its body.)
   show enum: it => {
     let n = if it.start == auto { 1 } else { it.start }
     for item in it.children {
-      let k = if item.has("number") and item.number != auto { item.number } else { n }
-      [#k.#h(0.55em)#item.body]
+      let k = if item.has("number") and item.number != auto and item.number != none { item.number } else { n }
+      [#k.#"\u{a0}\u{a0}"#item.body]
       parbreak()
       n = k + 1
     }
   }
 
   caption(meta)
-  cmarker.render(body, raw-typst: false, smart-punctuation: true, h1-level: 1)
-  v(1.6em)
-  signature-block(meta)
+  // The signature block never stands alone on a page: the paper's last paragraph is kept together with it
+  // (unless that last block is a heading or a list).
+  let text-md = body.trim(at: end)
+  let breaks = text-md.matches(regex("\n[ \t]*\n"))
+  let cut = if breaks.len() > 0 { breaks.last().end } else { 0 }
+  let tail = text-md.slice(cut)
+  let keep = tail.len() > 0 and not tail.starts-with("#") and tail.match(regex("^\\s*([-*+]|\\d+[.)])\\s")) == none
+  let render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
+  if keep {
+    render(text-md.slice(0, cut))
+    block(breakable: false, above: 0pt, below: 0pt, { render(tail); signature-block(meta) })
+  } else {
+    render(text-md)
+    signature-block(meta)
+  }
   if "service" in meta {
     pagebreak(weak: true)
     certificate-of-service(meta)
