@@ -42,7 +42,7 @@ Primary source: United States Court of International Trade, Rules of the Court, 
 | CIT-PAPER-001 | Rule 81(f): "Pleadings and other papers must be 8½ by 11 inches in size" | `page-w`, `page-h`, `paper: "us-letter"` |
 | CIT-PAPER-002 | Rule 81(f): "typed matter not exceeding 6½ by 9½ inches" | `margin-x`, `margin-y` (1 inch all round, 6½ × 9 in typed area; the page number sits in the bottom margin) |
 | CIT-TYPE-001 | Rule 81(f): "type size of 12 points or larger, including type used in footnotes" | `type-size = 12pt`; `set text(size:)` |
-| CIT-SPACE-001 | Rule 81(f): "Typed matter must be double spaced except footnotes, ..., quoted material, ... and titles, schedules, tables ..." | `pitch = 24pt`, `body-leading`; caption, counsel and signature lines single-spaced (permitted by the same sentence) |
+| CIT-SPACE-001 | Rule 81(f): "Typed matter must be double spaced except footnotes, ..., quoted material, ... and titles, schedules, tables ..." | `pitch = 24pt` (line pitch), `pitch-single = 14pt`; caption, counsel and signature lines single-spaced (permitted by the same sentence) |
 | CIT-NUM-001 | Rule 81(d): "The pages of each paper must be numbered consecutively, commencing with the number 1" | `numbering: "1"`, `running-number()` |
 | CIT-NUM-002 | Rule 81(f): "Pages must be numbered on the bottom." | page number in the footer |
 | CIT-CAP-001 | Rule 10(a): "Every pleading must have a caption with the court's name, a title, a court number, and a Rule 7(a) designation. The caption of the summons and the complaint must name all the parties" | `cover`, `caption` (all parties, designations, court number) |
