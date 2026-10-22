@@ -22,9 +22,10 @@ the final commit has been created:
 4. Push the finalized commit to the default branch with a fast-forward-only
    update. Never force-push. Verify the remote branch tip equals the finalized
    commit before reporting success.
-5. Keep publishing the run's task branch as recovery evidence. A failed direct
-   push must leave that branch available and must make the run fail visibly;
-   it must not be reported as landed.
+5. Publish the run's task branch as recovery evidence before attempting the
+   default-branch push. If that publication fails, do not attempt landing. A
+   failed direct push must leave the already-published task branch available
+   and must make the run fail visibly; it must not be reported as landed.
 
 Do not attempt direct landing for agent failures, an empty diff, a missing,
 failed or unavailable required quality command, or a failed finalize. Existing
@@ -43,6 +44,8 @@ to a real default branch:
   rejected without changing that branch; the task branch remains published.
 - A transport failure, rejected update, or remote-tip mismatch is reported as
   a failed landing and preserves the task branch.
+- A task-branch publication failure prevents the default-branch push; a later
+  default-branch push failure leaves the published task branch available.
 - An agent failure, empty diff, missing/failed quality command, unreadable
   policy, or a non-direct landing mode does not push the default branch.
 - Re-running after the default branch already points at the finalized commit
