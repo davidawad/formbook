@@ -344,6 +344,10 @@ function Pandoc(doc)
       if prev and prev.t ~= "Header" and b.t == "Para" and prev.t == "Para" then
         rest[#rest + 1] = pandoc.RawBlock("latex", "\\scotuspar")
       end
+      -- typst indents a paragraph only after a paragraph: not after a quotation or a list
+      if b.t == "Para" and prev and prev.t ~= "Para" and prev.t ~= "Header" then
+        b = pandoc.Para({ pandoc.RawInline("latex", "\\noindent "), table.unpack(b.content) })
+      end
       local note = false
       if b.t == "Para" then b:walk({ Note = function() note = true end }) end
       if note then

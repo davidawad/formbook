@@ -490,7 +490,7 @@ function Pandoc(doc)
   end
   local blocks = unlist_blocks(doc.blocks)
   local body = {}
-  local after_heading = false
+  local after_para = false -- typst indents a paragraph only after a paragraph (not after a heading or a quotation)
   for i, b in ipairs(blocks) do
     if b.t == "Header" then
       if b.level > 3 then error("brief.lua: headings deeper than level 3 are not supported") end
@@ -499,7 +499,7 @@ function Pandoc(doc)
       need(id, "B", stringify(b.content), nxt)
       if b.level <= TOC_DEPTH then items[#items + 1] = { id = id, level = b.level, title = b.content } end
       body[#body + 1] = raw(heading_xml(b.level, b.content, #body == 0))
-      after_heading = true
+      after_para = false
     else
       scan_blocks({ b }, false)
       b = pandoc.Pandoc({ b }):walk({
@@ -508,14 +508,14 @@ function Pandoc(doc)
       -- the break rules of typst on the text pandoc writes itself (body, footnotes)
       b = b:walk({ Inlines = xe.inlines }):walk(BIND)
       if b.t == "Para" then
-        local style = (after_heading and "First Paragraph" or "Body Text") .. (has_note(b) and " Note" or "")
+        local style = (after_para and "Body Text" or "First Paragraph") .. (has_note(b) and " Note" or "")
         body[#body + 1] = pandoc.Div({ b }, { ["custom-style"] = style })
       elseif b.t == "BlockQuote" then
         body[#body + 1] = quotation(b)
       else
         for _, x in ipairs(xe.list_items(b)) do body[#body + 1] = x end
       end
-      after_heading = false
+      after_para = b.t == "Para"
     end
   end
   for _, o in ipairs(occurrences) do
