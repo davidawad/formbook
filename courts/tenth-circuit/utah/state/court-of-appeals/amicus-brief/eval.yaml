@@ -1,3 +1,10 @@
 # Checklist for Briefs (revised December 2025; URAP 24, 26, 27): "Proportionally spaced typeface must be 13-point or larger for both text and footnotes." See ../rules.md, UTAHCTAPP-FORM-003.
 font:
   size_pt: 13
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). LaTeX breaks every line and page where
+# typst does and is gated. docx is reported: its page labels start three pages early (the first body heading is
+# longer than the docx page needle and is found in the table of contents; docs/open-items/fb-595.54.72.md).
+params:
+  cross_engine: report
+  cross_engine_latex: gate

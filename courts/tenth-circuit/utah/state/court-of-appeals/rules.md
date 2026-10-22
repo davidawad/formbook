@@ -59,6 +59,7 @@ Local rules not retrieved: the text of URAP 24, 26 and 27 itself. The URAP 27 te
 | UTAHCTAPP-CERT-001 | The brief carries a certificate of compliance stating that it complies with the word limit (the exemplars give the word count and cite URAP 24(f)(1)). | CL-BRIEF, Certificate of Compliance | M |
 | UTAHCTAPP-CERT-002 | The certificate of compliance states that the brief complies with URAP 21 on public and private records. | CL-BRIEF, Certificate of Compliance | M |
 | UTAHCTAPP-CERT-003 | The brief carries a certificate of service on the attorneys for all parties (or the self-represented party), with an original signature on the proof of service. Briefs in felony appeals are also served on the Attorney General, and misdemeanor appeals on the prosecuting attorney. | CL-BRIEF, Service of Briefs | M |
+| UTAHCTAPP-CERT-004 | The certificate of compliance follows the conclusion and the signature (the amicus, opening and answering exemplars; the template sets it on a page of its own after the signature, and the certificate of service after it). | Exemplars (amicus, opening, answering) | C |
 
 ## Motions (not in this folder)
 

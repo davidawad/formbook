@@ -1,0 +1,80 @@
+# Utah Court of Appeals (utahctapp): principal brief (URAP 24; the Utah Courts Checklist for Briefs, revised December
+# 2025, and Checklist for Reply Briefs, revised May 2026). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to ../rules.md (UTAHCTAPP-*); lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant (the court's name and address, the checklist's certificate wording).
+size: 14                  # UTAHCTAPP-FORM-003: 13-point or larger, text and footnotes; 14 pt, as every exemplar
+pitch:
+  body: 32.2              # UTAHCTAPP-FORM-004: double spaced (Word's double, 2 x 1.15 x 14 pt); 1.5 lines not accepted
+  single: 16.1            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # UTAHCTAPP-FORM-002: at least one inch on every side
+indent: 36
+page_number: {align: center, front: lower-roman}   # UTAHCTAPP-CONT-010: cover unnumbered, tables i, ii .., body from 1
+footnote: {size: 14, gap: 7}                       # UTAHCTAPP-FORM-003, -004: 14 pt, footnotes may be single spaced
+quote: {left: 36, right: 36, above: 14, below: 14} # UTAHCTAPP-FORM-004: block quotations may be single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The cover (UTAHCTAPP-CONT-001 to -006): the court and its address, centered between rules as the exemplars set them;
+# the caption with the party designations beside the appellate case number; the trial court and judge; the title
+# between rules; counsel two to a row (the filer's counsel, listed second, at the lower right).
+cover:
+  - {text: "IN THE UTAH COURT OF APPEALS", align: center, bold: true}
+  - {text: "PO Box 140230", align: center}                 # LOC: the clerk's mailing address
+  - {text: "Salt Lake City, UT 84114-0230", align: center}
+  - {rule: 0.75, above: 11.2}
+  - columns:
+      - blocks:
+          - each: parties
+            blocks:
+              - {text: "{designation}", italic: true, above: 8.4}
+              - {text: "{names}", left: 36, optional: true}
+      - width: 180
+        valign: center
+        blocks:
+          - {text: "Case No. {case_number}", bold: true}
+    gutter: 21.6
+    above: 5.6
+  - {rule: 0.75, above: 14}
+  - {text: "{lower_court}", align: center, above: 11.2}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 11.2}
+  - {rule: 0.75, above: 11.2}
+  - columns: {each: counsel, per_row: 2, row_gap: 14, blocks: [{text: "{heading}", italic: true}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 25.2
+# UTAHCTAPP-CONT-007: the table of contents and the table of authorities (cases, statutes, rules, other), with page
+# references, before the body.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 9.8}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 18
+  above: 9.8
+  group: {bold: true, above: 15.4, below: 2.8}
+# The date and the signature block, never split; then, each on a page of its own, the certificate of compliance
+# (UTAHCTAPP-CERT-001, -002: the word count and URAP 21, in the checklist's words; after the brief, as three of the four
+# exemplars place it: UTAHCTAPP-CERT-004) and the certificate of service (UTAHCTAPP-CERT-003).
+closing:
+  - group:
+      - {text: "{date}", optional: true, pitch: body, indent: 36}
+      - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 16.8}
+      - {text: "{signature.lines}", optional: true, left: 230.4}
+      - {text: "{signature.role}", bold: true, optional: true, left: 230.4}
+    above: 22.4
+  - when: compliance
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Compliance", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "I certify that this brief complies with the requirements of {compliance.rules}, including:", pitch: body, indent: 36}
+      - {text: "Word Limits: My brief has {compliance.words} words, which is less than the {compliance.limit} word limit. This brief does not contain any non-public information (URAP 21).", left: 36, right: 36, above: 8.4, below: 8.4}
+      - {text: "{compliance.extra}", optional: true, left: 36, right: 36}
+      - {text: "I understand that my brief may be rejected if I fail to comply with these rules.", pitch: body, indent: 36, above: 8.4}
+      - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 16.8}
+      - {text: "{signature.lines}", optional: true, left: 230.4}
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - {text: "s/ {service.signature.signer}", underline: true, left: 230.4, above: 16.8}

@@ -214,13 +214,13 @@ No privilege exists under paragraph (b) in the following
 
 circumstances:
 
-(1) Condition as Element of Claim or Defense. For
+\(1) Condition as Element of Claim or Defense. For
 
 communications relevant to an issue of the physical,
 
 mental, or emotional condition of the patient:
 
-(A) in any proceeding in which that condition is an
+\(A) in any proceeding in which that condition is an
 
 element of any claim or defense. . . Utah R. Evid. 506(d).
 
