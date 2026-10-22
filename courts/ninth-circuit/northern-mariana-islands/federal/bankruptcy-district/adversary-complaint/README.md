@@ -9,10 +9,11 @@ Folder: `courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-distri
 |---|---|
 | exemplar | no (BLOCKED: no exemplar; see the searches below) |
 | sample md | `usage/INPUT-adversary-complaint.md` (synthetic; placeholder names, numbers and dates; not a transcription of any filing) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
-| typeface | face required: none (LR 5.2(a): "serif font"); font kept: EB Garamond (serif, vendored); no substitute needed |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf` and `usage/OUTPUT-adversary-complaint.docx` / `.docx.pdf`, 3 pages each, typst 0.15.0 and LibreOffice, vendored Times New Roman only (`pdffonts`), no warnings |
+| typeface | face required: none (LR 5.2(a): 12 point or larger, "serif font"); font set: Times New Roman 12 pt (the house standard), typst `("Times New Roman", "Liberation Serif")`, the docx through `{font}` in `docx/reference.xml` |
+| checks | `sh tools/check.sh <dir>`: 8 passed, 0 failed; `--engine docx`: 12 passed, 0 failed, XENG-001..003 PASS (87/87 lines), `params.cross_engine: gate` |
 | overlay | fail: `tools/overlay.sh` needs an exemplar PDF in `usage/`; none exists, so no overlay was produced |
-| pages reviewed | 3 of 3 (every page rendered at 60 dpi and viewed on 2026-10-15) |
+| pages reviewed | 3 of 3 on both engines (every page rendered at 60 dpi and viewed on 2026-10-22) |
 
 ## Searches tried (for an exemplar)
 
@@ -43,13 +44,13 @@ Requirement IDs are `NMIB-ADV-...`.
 |---|---|---|---|---|
 | NMIB-ADV-001 | FRBP 7001 | The adversary proceedings (a) to recover money or property, (b) to determine a lien, (d) to object to discharge, (f) to determine dischargeability, and others. | Cornell LII, Rule 7001 (as amended Dec. 1, 2024) | author content; the template does not check the category |
 | NMIB-ADV-002 | FRBP 7003 | Commencement: Fed. R. Civ. P. 3 applies in an adversary proceeding. | Cornell LII, Rule 7003 (as amended Dec. 1, 2024) | body (author-written) |
-| NMIB-ADV-003 | FRBP 7008 | Fed. R. Civ. P. 8 applies. The complaint's jurisdiction allegation states the case's name, number and chapter, and the district and division; and states whether the pleader does or does not consent to the entry of final orders or judgment by the bankruptcy court. | Cornell LII, Rule 7008 (read in summary; the consent statement is quoted in summary form) | body (`::` paragraphs and author content; the sample has a placeholder for the consent statement, not checked) |
+| NMIB-ADV-003 | FRBP 7008 | Fed. R. Civ. P. 8 applies. The complaint's jurisdiction allegation states the case's name, number and chapter, and the district and division; and states whether the pleader does or does not consent to the entry of final orders or judgment by the bankruptcy court. | Cornell LII, Rule 7008 (read in summary; the consent statement is quoted in summary form) | body (`~ ` paragraphs and author content; the sample has a placeholder for the consent statement, not checked) |
 | NMIB-ADV-004 | FRBP 7010 | Fed. R. Civ. P. 10 applies, except that the caption must substantially conform to the appropriate version of Official Form 416. | Cornell LII, Rule 7010 (as amended Dec. 1, 2024; quoted in full) | caption (below) |
 | NMIB-ADV-005 | Official Form 416D (12/15) | Caption for use in an adversary proceeding: court name and district; "In re [debtor], Debtor"; Plaintiff; Defendant; right column Case No., Chapter, Adv. Proc. No.; the document title ("COMPLAINT [or other designation]"). | uscourts.gov Form 416D PDF (the text was extracted from the saved download, 2026-10-14) | `caption` (sides stacked with no "v."); right column `case_number`, `chapter`, `adv_number`, `brief_title` |
 | NMIB-ADV-006 | LBR 5005-1(b)(1) | The caption includes the chapter. | primary LBR PDF (`lbkr20181217.pdf`, see `../motion-brief/README.md` for the version caveat) | `chapter` field |
 | NMIB-ADV-007 | LBR 7003-1 | A complaint is accompanied by a cover sheet substantially conforming to the Adversary Proceeding Cover Sheet (Official Form B 1040). | primary LBR PDF | not generated: the cover sheet is a separate form |
 | NMIB-ADV-008 | LBR 7004-1 | When service is by first-class mail on an officer or agent of a corporation, the certificate of service names the officer or agent (or explains why not). | primary LBR PDF | not generated (the certificate is a separate filing) |
-| NMIB-ADV-009 | Fed. R. Civ. P. 10(b) (as applied by FRBP 7010) | Claims are in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | Fed. R. Civ. P. 10 text as quoted in `../../../../california/federal/northern-district/complaint/README.md` (fetched there 2026-10-14) | numbering: every paragraph is numbered by the template (`allegations()`); headings, lists and `::` paragraphs are not |
+| NMIB-ADV-009 | Fed. R. Civ. P. 10(b) (as applied by FRBP 7010) | Claims are in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | Fed. R. Civ. P. 10 text as quoted in `../../../../california/federal/northern-district/complaint/README.md` (fetched there 2026-10-14) | numbering: every paragraph is numbered by the template (`allegations()`); headings, lists and `~ ` paragraphs are not |
 | NMIB-ADV-010 | LBR 9004-1 → LR 5.2 (summary) | Form of papers: same as the motion (see `../motion-brief/README.md`, NMIB-FORM-001 to 004). | third-party summary (not verified) | same constants as the motion template |
 
 Not generated here: the summons (Form 287 adversary summons, FRBP 7004), the cover sheet (B 1040), the service certificate, the civil cover sheet, and any Rule 7.1 disclosure. These are separate filings.
@@ -58,15 +59,17 @@ Not generated here: the summons (Form 287 adversary summons, FRBP 7004), the cov
 
 - YAML frontmatter, then the body.
 - Frontmatter: `case_number`; `chapter`; `court` (list of lines); `counsel` (lines); `counsel_role`; `caption` (list of sides, each `names` and `designation`; no "v." between sides, as Form 416D does not use one); `brief_title` (the document title, e.g. "COMPLAINT TO DETERMINE..."); `adv_number` (optional; a blank line is printed if omitted); `footer_title`; `jury_demand` (optional); `signature` (`firm` lines, `signer`, `lines`); `date`.
-- Body: `# Heading` (level 1, centered caps); `## Heading` (level 2, bold centered); `### Heading` (level 3, bold italic). Paragraphs are **numbered by the template: do not type the number**. A paragraph that starts with `:: ` is unnumbered (use it for WHEREFORE and other lead-ins). Markdown lists (`1. ...`, written without blank lines between items) become lettered items (a), (b), ... (the prayer for relief).
+- Body: `# Heading` (level 1, centered caps); `## Heading` (level 2, bold centered); `### Heading` (level 3, bold italic). Paragraphs are **numbered by the template: do not type the number**. A paragraph that starts with `~ ` is unnumbered (use it for WHEREFORE and other lead-ins). Markdown lists (`1. ...`, written without blank lines between items) become lettered items (a), (b), ... (the prayer for relief).
 - Consent statement and jurisdiction: author content, placeholder in the synthetic sample.
 
 ## Layout
 
 - Numbered lines 1 to 24 down the left margin, a double rule at the text's left edge and a single rule at its right (pleading form, same geometry as the motion template).
-- Top margin 1.5 in; body on the 24 pt pitch, every block rounded to a whole pitch (`on-grid`), so body text lines fall on the numbers. Verified by reading baselines from the PDF: they sit at 108 + 24k pt (1.5 in top margin).
-- Counsel block on lines 1 to 7 (single-spaced); the court title follows. Caption: left column is the parties (closed by a rule at the right and the bottom), right column is the case number, chapter, adversary number, title, and "DEMAND FOR JURY TRIAL" when `jury_demand` is set.
-- Footer: the footer title (left) and the case number (right), with the page number above, as in the cand complaint template.
+- Top margin 1.5 in, 24 numbered lines of 24 pt, bottom margin 1.5 in (`eval.yaml` `margin_bottom_pt: 108`). The shared cross-engine layout model (`lib/typst/xengine.typ`): every line a box of its pitch with the baseline at 0.8 of it, so body baselines sit at 108 + 19.2 + 24k pt, on the numbers.
+- Single-spaced parts (counsel block, caption, signature) are 12 pt lines set 9.6 pt down (`single-drop`), so their odd lines stand on the numbers and the even lines fall halfway between.
+- Counsel block on lines 1 to 7 at least; the court title follows. Caption: left column is the parties (designation indented 1 in; closed by a rule at the right and the bottom of the row), right column is the case number, chapter, adversary number, title, and "DEMAND FOR JURY TRIAL" when `jury_demand` is set.
+- Numbered paragraphs: the number in a half-inch box after the half-inch indent; lists lettered (a), (b) in a 0.4 in box at the indent.
+- Footer, 6 pt under line 24: the page number, then the footer title (left) and the case number (right).
 
 ## Render
 
@@ -89,15 +92,28 @@ Change log for this review: (1) text edges set to ascender/descender, as in the 
 
 Reviewed pages: 3 of 3. Re-rendered 2026-10-14 (second session, `tools/render.sh`, exit 0, 3 pages); all 3 pages rasterized at 60 dpi and viewed again. No template change in that session.
 
+### Gate 2 review of the current renders (fb-595.68.23, 2026-10-22)
+
+The committed `usage/OUTPUT-adversary-complaint.typst.pdf` and `.docx.pdf`, every page rasterized at 60 dpi (`pdftoppm -r 60`) and viewed side by side. No exemplar exists, so this is a layout review against the rules, not a comparison with a filing.
+
+| Page | Engine | What it is | Finding | Status |
+|---|---|---|---|---|
+| 1 | typst | counsel block (lines 1 to 3), court title (lines 8 to 10), Form 416D caption, title, jury demand, footer | Counsel lines alternate on and between the numbers; caption rules close the party column over the full row; "Adv. Proc. No. ________" blank for the clerk; footer page number, "COMPLAINT" and the case number under line 24. | OK |
+| 1 | docx | the same | Same lines and positions as typst (baselines 0.00 pt apart); the three pleading rules run the full page height. | OK |
+| 2 | typst | headings and numbered paragraphs 1 to 11, level-3 sub-heading | Every line on a number; numbers 1. to 11. in their half-inch box; sub-heading bold italic, unnumbered. | OK |
+| 2 | docx | the same | Identical breaks and lines. | OK |
+| 3 | typst | claim heading, paragraphs 12 to 14, WHEREFORE lead-in, prayer (a) to (d), jury demand, signature | Lead-in unnumbered; prayer lettered with hanging text; signature block from line 16, "Dated:" beside "Respectfully submitted,". | OK |
+| 3 | docx | the same | Identical breaks and lines. | OK |
+
 ## Known gaps and open choices
 
 1. **No exemplar (BLOCKED).** Tier 2 cannot be judged. The layout follows the rules, the Form 416D caption and the NMI motion's pleading form. A filed complaint from this court would settle conventions (the numbered-paragraph style, the consent-statement wording, the jury-demand placement) that the rules leave open.
 2. **Court title in the caption.** Form 416D says "United States Bankruptcy Court … District Of …". This template prints the court title used on the filed motion in this court ("United States District Court for the Northern Mariana Islands, Bankruptcy Division"). FRBP 7010 needs only "substantially conform"; which wording the clerk prefers is for David or the court.
 3. **Synthetic sample.** The sample's parties, numbers, dates and addresses are placeholders. Its checks are layout checks only.
 4. **LR 5.2 values are a third-party summary** (see `../motion-brief/README.md`, NMIB-FORM-001).
-5. **Type size and face.** 13 pt EB Garamond. LR 5.2(a) (primary text, read 2026-10-15) requires 12-point type or larger in a serif font and names no face, so EB Garamond is kept (see `../motion-brief/README.md`, item 5).
+5. **Type size and face.** Times New Roman 12 pt on both engines (fb-595.68.23; was EB Garamond 13 pt). LR 5.2(a) (primary text, read 2026-10-15) requires 12-point type or larger in a serif font and names no face, so the house standard applies.
 6. **Not checked:** the consent statement (FRBP 7008), the core-proceeding statement, the 34-day and page limits (not applicable to a complaint), LBR 7003-1 cover-sheet conformance, and LBR 7004-1 service naming (no certificate is generated).
-7. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids edits to `tools/`.
+7. **Checks.** `sh tools/check.sh <dir>` (typst 8 passed, 0 failed) and `--engine docx` (12 passed, 0 failed) run on this folder. `tools/check-selftest.sh` needs a `court.json` in the folder and does not run on a doc-type folder.
 
 ## Third session (fb-595.20.11, 2026-10-15)
 
@@ -124,12 +140,6 @@ Result: no public filed adversary complaint found. The missing artifact is still
 Re-verified this session: `sh tools/render.sh` exit 0, `usage/OUTPUT-adversary-complaint.typst.pdf`, 3 pages, EB Garamond only (`pdffonts`). All 3 pages rasterized at 60 dpi (`pdftoppm -r 60`) and viewed: page 1 caption and title, page 2 paragraphs 1 to 11 and sub-heading, page 3 claim, prayer, jury demand and signature. No template change. `sh tools/overlay.sh <dir>` exit 2 (`parameter not set`, no exemplar PDF). The overlay stays not produced.
 ## Engines
 
-- **typst** (primary): `typst/`, as above.
-- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 13 pt, exact 24 pt line spacing, 0.5 in first-line indent, letter, margins 1.5 in top and bottom, 1.3 in left, 1 in right, pleading rules as page borders, line numbers 1 to 24 restarting each page, page number centered in the footer). `docx/nmib-adversary-complaint.lua` writes the cover, the Form 416D caption table, the numbered allegations (the "::" lead-in is unnumbered) and the signature block. Built 2026-10-15: `usage/OUTPUT-adversary-complaint.docx` written by `tools/render.sh --engine docx`; `unzip -tq` OK; every XML part `xmllint --noout` OK.
-- **Matches the typst form:** typeface and size, double spacing, indents, margins, pleading rules, numbers 1 to 24, page number, numbered paragraphs, caption layout (a table with a right and bottom rule), title and signature.
-- **Differs from the typst form:**
-  - Word's line numbering skips tables, so the caption and signature table rows carry no line numbers (typst numbers every line).
-  - The counsel block and the caption are single spaced, so they are not on the 24-point grid, and Word numbers each single-spaced line.
-  - The typst footer also prints the footer title and the case number. The docx footer comes from `reference.docx` and carries only the page number, because the case number is case-specific and the footer is static.
-  - Word and LibreOffice paginate differently; the page where a line falls may differ.
-- **BLOCKED (docx.pdf gates 0 and 1, and the page review):** LibreOffice (`soffice`) is not installed on this box, so `usage/OUTPUT-synthetic-complaint.docx.pdf` was not made and no page of the `.docx` was viewed. The `.docx` was not opened in Word either. Checks that cannot pass by construction: the footer case-number line, and line numbers on the caption and signature tables.
+- **typst** (primary): `typst/`, as above, on the shared cross-engine layout model (`lib/typst/xengine.typ`).
+- **docx** (fb-595.68.23): no shell and no committed `reference.docx`. `fb render` builds the reference document from `docx/reference.xml` (`base="xengine"`: Times New Roman through `{font}`, 12 pt, 24 pt body lines, 12 pt single lines, half-inch indent). `docx/nmib-adversary-complaint.lua` (on `require("docx.xengine")`) writes every paragraph with the typst pitches and spacings: the counsel block, court title, Form 416D caption table, numbered allegations (the "~ " lead-in unnumbered), lettered lists and the signature table. It writes the footer through `FORMBOOK_FOOTERS`: the numbers 1 to 24 in a frame placed where typst draws them, the three pleading rules the full page height (VML lines), and the page number, footer title and case number. It writes the last section through `FORMBOOK_FINAL`.
+- **Cross-engine gate:** XENG-001..003 PASS (87/87 typst lines broken alike, baselines 0.00 pt apart); `eval.yaml` sets `params.cross_engine: gate`. Rendered with LibreOffice; every page of `usage/OUTPUT-adversary-complaint.docx.pdf` viewed (Gate 2 table above). Word itself was not opened; Word may paginate slightly differently from LibreOffice.
