@@ -61,7 +61,7 @@ Courts under `courts` (346).
 | [Appellate Terms of the Supreme Court of New York](second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | up for review | 3/3 | — | — | 29 |
 | [New York Court of Appeals](second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | 1/1 | 3/3 | 29 |
 | [The Four Departments of the Appellate Division](second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 3/3 | 29 |
-| [Supreme Court of Vermont](second-circuit/vermont/state/supreme-court) | `vt` | in progress | 4/4 | 1/1 | 1/1 | 14 |
+| [Supreme Court of Vermont](second-circuit/vermont/state/supreme-court) | `vt` | up for review | 4/4 | 1/1 | 1/1 | 29 |
 | [Court of Appeals for the Third Circuit](third-circuit/court-of-appeals) | `ca3` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, D. Delaware](third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Delaware](third-circuit/delaware/federal/district) | `ded` | up for review | 2/2 | — | 2/2 | 14 |

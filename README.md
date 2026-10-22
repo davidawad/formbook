@@ -204,7 +204,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Vermont](courts/second-circuit/vermont/federal/bankruptcy-district) | `vtb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Vermont](courts/second-circuit/vermont/federal/district) | `vtd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Supreme Court of Vermont](courts/second-circuit/vermont/state/supreme-court) | `vt` | in progress | 4/4 | 1/1 | 1/1 | 14 |
+| [Supreme Court of Vermont](courts/second-circuit/vermont/state/supreme-court) | `vt` | up for review | 4/4 | 1/1 | 1/1 | 29 |
 
 ## Third Circuit
 
@@ -812,7 +812,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 0 | 6 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 5 | 0 | 5 | 14.0% |
 | First Circuit | 20 | 0 | 19 | 1 | 0 | 0.0% | 95.0% | 19 | 4 | 15 | 19.2% |
-| Second Circuit | 19 | 0 | 18 | 1 | 0 | 0.0% | 94.7% | 19 | 3 | 16 | 17.9% |
+| Second Circuit | 19 | 0 | 19 | 0 | 0 | 0.0% | 100.0% | 19 | 3 | 16 | 18.7% |
 | Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 4 | 16 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 6 | 24 | 19.1% |
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 2 | 23 | 18.0% |
@@ -823,7 +823,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 7 | 20 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 3 | 20 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 2 | 4 | 17.7% |
-| **Total** | 376 | 0 | 350 | 26 | 0 | 0.0% | 93.0% | 350 | 62 | 275 | 18.9% |
+| **Total** | 376 | 0 | 351 | 25 | 0 | 0.0% | 93.3% | 350 | 62 | 275 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
