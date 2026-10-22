@@ -7,11 +7,11 @@ Folder: `courts/sixth-circuit/ohio/federal/northern-district/complaint/` (one se
 |---|---|
 | exemplar | yes: 2 filers. `usage/FILED-EXAMPLE-complaint.pdf` (12 pp, transcribed) and `usage/FILED-EXAMPLE-complaint-2.pdf` (31 pp, second filer). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-complaint.md`: the whole 12-page filing (caption, all 26 numbered paragraphs, lettered sub-items, prayer, signature). |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
-| overlay | ok: `usage/OVERLAY-wagner-complaint.pdf` and `usage/OVERLAY-wagner-complaint.txt` (paired against the Wagner exemplar). |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, `tools/render.sh`, vendored Times New Roman only, no typst warnings; `usage/OUTPUT-complaint.docx` and `.docx.pdf`, 11 pages, breaking every line and page where typst does. |
+| overlay | `just overlay <dir>` writes `.overlay/<doc path>/OVERLAY-complaint.pdf` and `.txt` (gitignored, not committed). |
 | pages reviewed | 11 of 11 (every page of the current PDF rendered at 60 dpi and viewed after the last template change). |
 | content check | every word of the sample body appears in the PDF, in order; the only difference is "non-compliant", which the render breaks at its hyphen (the two halves are present). |
-| `tools/check.sh` | not run: it expects a court folder with `court.json`, `rules.md` and `checks.yaml`, which this doc-type folder is not (the same note as the cand complaint). |
+| `tools/check.sh` | typst: `RESULT: 9 checks passed, 0 failed`; docx: `RESULT: 13 checks passed, 0 failed`, XENG-001..003 PASS (260/260 lines, 11/11 pages), gated by `eval.yaml` (`params.cross_engine: gate`). |
 
 ## Governing rules
 
@@ -34,8 +34,8 @@ Not in the rules, so not asserted: a font (L.R. 10.1 sets no typeface or size); 
 - Court title centered at the top of page 1, below a 1 1/2 inch top space (L.R. 10.1); the rest of each page has a 1 inch margin.
 - Caption: the party names, a column of ")" marks (one mark for each line of each name), and at the right, the case number and judge. A name that wraps takes one ")" per line.
 - Title: bold, centered, in a measure narrower than the text (the words wrap; no break is forced).
-- Body: double-spaced. Measured: EB Garamond's line box is 0.65 em (7.8 pt at 12 pt, measured by typesetting two lines in a scratch file), so single spacing is 13.8 pt (1.15 em) and double spacing is 27.6 pt, twice the single pitch. The exemplar Hammill (N.D. Ohio, ECF) has a body pitch of 27.6 pt, the same value, so the spacing is the filed convention and not a guess.
-- Paragraphs are numbered 1, 2, ... (0.5 inch first-line indent, number, then the text). A paragraph crossing a page is split normally; the trailing leading after each paragraph is added as space so that the lines stay on the grid of body pitches.
+- Body: double-spaced at 27.6 pt, twice the 13.8 pt single pitch (1.15 x the type size). The exemplar Hammill (N.D. Ohio, ECF) has a body pitch of 27.6 pt, the same value, so the spacing is the filed convention and not a guess. Every line is a box of its pitch on the shared cross-engine layout model (`lib/typst/xengine.typ`): no kerning, ligatures or hyphenation, first-fit ragged-right lines, explicit spaces between blocks.
+- Paragraphs are numbered 1, 2, ... (0.5 inch first-line indent, the number in a 0.5 inch box, then the text, 1 inch from the margin; the docx a tab there). A paragraph crossing a page is split normally.
 - Headings: level 1 bold capitals centered; level 2 bold centered; level 3 bold italic at the left. A heading is sticky (never the last line of a page).
 - Lettered sub-items: a markdown ordered list is lettered A., B., ... ; the markdown number is the letter's position, so a list that continues a letter run from an earlier group starts at its own number (see ¶15 of the sample: A-B, C, D, E-O, P-R, S-T).
 - Group labels inside a paragraph list: a chunk that is only `**bold**` is an unnumbered label.
@@ -54,8 +54,8 @@ Not in the rules, so not asserted: a font (L.R. 10.1 sets no typeface or size); 
 
 | Value | Choice | Basis |
 |---|---|---|
-| Typeface | EB Garamond 12 pt (kept) | Face required: none (L.R. 10.1 names no face or size; it requires "plainly typewritten, printed, or prepared by a clearly legible duplication process"). Substitute: none needed, so EB Garamond stays (`docs/FONTS.md`: "No face named"). Vendored Times-metric option: Liberation Serif, not used (tier-2 convention, see open choice 1). |
-| Line box | 0.65 em (7.8 pt) | Measured on EB Garamond in a scratch file. |
+| Typeface | Times New Roman 12 pt | Face required: none (L.R. 10.1 names no face or size; it requires "plainly typewritten, printed, or prepared by a clearly legible duplication process"). Times New Roman (vendored, `docs/FONTS.md`), as both exemplars; the typst template declares ("Times New Roman", "Liberation Serif") and the docx names the same face. |
+| Line box | the pitch, baseline at 0.8 of it | The cross-engine layout model (Word's exact line spacing). |
 | Single pitch | 13.8 pt (1.15 em) | 7.8 pt line box + 6 pt leading. |
 | Double pitch | 27.6 pt | Twice the single pitch; equals the Hammill exemplar's measured body pitch. |
 | Top margin, page 1 | 1 1/2 in | L.R. 10.1. |
@@ -63,38 +63,38 @@ Not in the rules, so not asserted: a font (L.R. 10.1 sets no typeface or size); 
 
 ## Review of the rendered pages (current PDF)
 
-Compared with: the Wagner exemplar (filed pages 1 to 12 as the text layer and, for pages 1 and 2, the rendered image). "Text" means the page was compared with the exemplar's text layer, not an image.
+Typst and docx renders of `usage/INPUT-complaint.md` (fb-595.68.30), every page rendered at 60 dpi and viewed side by side; compared with the Wagner exemplar (filed pages 1 and 2 as images, the rest as the text layer) and the Miller exemplar's page 1. The two engines break every line and page alike (XENG-001..003 PASS), so each row holds for both.
 
-| Page | Compared with | Finding | Status |
-|---|---|---|---|
-| 1 | exemplar p.1 (image and text) | Court title below the 1 1/2 in top space; caption with ")" column; "Judge:" line; title; lead-in; ¶1 heading "JURISDICTION AND VENUE". | PASS |
-| 2 | exemplar p.2 (text) | ¶2 continues; ¶3; PARTIES heading; ¶¶4-7 at the double pitch; no paragraph crosses into the next one. | PASS |
-| 3 | exemplar p.3 (text) | ¶¶8-12 on the grid; no overlap at the page foot. | PASS |
-| 4 | exemplar p.4 (text) | ¶¶13-15; ¶15's "Accessible Routes" label and items A-C. | PASS |
-| 5 | exemplar p.5 (text) | Labels "Access to Goods and Services" and "Mobility Accessible Guest Room #708"; items D-I. | PASS |
-| 6 | exemplar p.6 (text) | Items J-O; the letter sequence continues from I. | PASS |
-| 7 | exemplar p.7 (text) | Label "Mobility Accessible Guestrooms Generally"; items P-R. | PASS |
-| 8 | exemplar p.8 (text) | Label "Policies and Procedures:"; items S-T; ¶16; COUNT I heading; ¶¶17-18. | PASS |
-| 9 | exemplar p.9 (text) | ¶¶19-23; COUNT II heading; the bold statute line "O.R.C. §4112.01 et seq.". | PASS |
-| 10 | exemplar p.10 (text) | ¶¶24-26; WHEREFORE (unnumbered) and its first item; the second item starts page 11 with the signature. | PASS |
-| 11 | exemplar p.11 (text) | Second WHEREFORE item; "Respectfully submitted," and the signature block with the Ohio Bar number. The signature is not alone: the last item and the signature share a block. | PASS |
+| Page | Finding | Status |
+|---|---|---|
+| 1 | Court title centered below the 1 1/2 in top space (L.R. 10.1); caption with a ")" on every line (two for the wrapped defendant name), "Case No." on the first row and "Judge:" on the third; title bold and centered; lead-in; "JURISDICTION AND VENUE"; ¶¶1-2. | PASS |
+| 2 | ¶2 continues; ¶3; PARTIES; ¶¶4-7 at the double pitch. | PASS |
+| 3 | ¶¶7-12. | PASS |
+| 4 | ¶¶12-15; the label "Accessible Routes" and items A-B, the letter half an inch in and the text hanging at 1 in. | PASS |
+| 5 | Labels "Lobby Restrooms", "Access to Goods and Services", "Mobility Accessible Guest Room #708", each kept with its item; items C-G. | PASS |
+| 6 | Items H-M; the letter sequence continues. | PASS |
+| 7 | Items N-Q; label "Mobility Accessible Guestrooms Generally". | PASS |
+| 8 | Items Q-T; label "Policies and Procedures:"; ¶16. | PASS |
+| 9 | COUNT I with its second heading; ¶¶17-21. | PASS |
+| 10 | COUNT II, its two headings and the bold statute line; ¶¶22-26; WHEREFORE (unnumbered) and the first prayer item. | PASS |
+| 11 | The last prayer item kept with "Respectfully submitted," and the signature block (name, Ohio Bar number, address, telephone, facsimile, e-mail; L.R. 10.1); centered page number on every page. | PASS |
 
-Every page was rendered at 60 dpi and viewed. No OPEN rows.
+No OPEN rows.
 
 ## Overlay
 
-`usage/OVERLAY-wagner-complaint.pdf` is red (ours), blue (filed), black (both). The pairing in `OVERLAY-wagner-complaint.txt` is by shared words, so pages one step apart in the filing pair with each other (our p.2 with the filed p.2 at 46.7%; our p.3 with the filed p.4). The shift is the paragraph numbering of the filed copy and the page breaks, not a missing paragraph (see the content check above). The overlay is a diagnostic; tier 3 differences are not chased.
+The overlay is a diagnostic (tier 3), not a score: `just overlay <dir>` writes it to the gitignored `.overlay/`. Our pages run one step ahead of the filing from page 2 on (the filed copy's paragraph numbering and page breaks differ), not a missing paragraph (see the content check above).
 
 ## Known gaps and open choices
 
-1. **Typeface.** L.R. 10.1 names no face and allows any clearly legible typeface, so `docs/FONTS.md` gives no substitute and the template keeps EB Garamond. The exemplars use Times New Roman; that is a filer convention (tier 2), not a rule. EB Garamond at 12 pt has a smaller x-height than Times, so the text looks smaller on the page. Liberation Serif (metric-compatible with Times New Roman) is vendored and would remove the difference; switching is a tier-2 decision left open.
+1. **Typeface.** L.R. 10.1 names no face and allows any clearly legible typeface. The template sets Times New Roman, as both exemplars (it was EB Garamond before fb-595.68.30).
 2. **Second filer not transcribed.** The Miller complaint is saved as the second exemplar for tier-2 comparison but was not transcribed (the sample is the Wagner filing). The comparison is by reading the Miller text layer and first page, not a page-by-page review.
 3. **Caption.** The Wagner filing draws the party column with ")" marks; the Miller filing uses a ":" column. The template follows the Wagner filing (tier 2; both are seen in N.D. Ohio filings).
 4. **Division.** The sample's caption carries no division (the Wagner filing does not print one). `division` is available in the frontmatter (the Hammill and Miller filings print "Western Division" and "Eastern Division").
 5. **Judge line.** "Judge:" prints with the value from frontmatter; a blank value leaves the label alone, as the Wagner filing does.
 6. **Lettered items use an ordered list.** Lettering goes beyond the 26 letters only if a list runs past Z; the sample uses A-T.
 7. **Standing orders.** Individual judges' standing orders may add format or page rules (for example a font size). Not reviewed here; the district rules above are the only ones cited.
-8. **Render and overlay names.** The brief names `usage/<id>.md` and `usage/<id>.pdf`; the tools write `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf/.txt` by default. The tools were used as written (they are not to be edited), so those are the names in the folder.
+8. **Render and overlay names.** Outputs are `usage/OUTPUT-complaint.typst.pdf`, `.docx`, `.docx.pdf`; overlays go to the gitignored `.overlay/`.
 9. **Not produced:** the JS-44 civil cover sheet, the corporate disclosure statement, the summons. They are separate filings (L.R. 3.13).
 
 ## Searches (exemplar selection)
@@ -107,9 +107,9 @@ Every page was rendered at 60 dpi and viewed. No OPEN rows.
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` is built by `docx/build-reference.sh` (pandoc's default, rewritten with sed/perl; zipped and checked with xmllint). `docx/render.sh` owns the build: pandoc with `docx/ohnd-complaint.lua` (caption table, numbered paragraphs, lettered items, signature), then the reference's styles, page setup and footer are put back.
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"), and `eval.yaml` gates it (`params.cross_engine: gate`): the docx render must break every line and page where the typst render does.
 
-- Matches typst (set in the reference, from the typst template and measured on its render): EB Garamond 12 pt (`fonts/eb-garamond`; the typst PDF embeds EBGaramond-Regular and -Bold); body lines at an exact 27.6 pt pitch (measured 27.6 pt on the typst page 2); single lines at an exact 13.8 pt; 0.5 in first-line indent; 1 in margins, letter paper; a centered 12 pt page number in the footer; numbered paragraphs 1., 2. with the WHEREFORE clause unnumbered; lettered items A., B. (the markdown numbers give the letter).
-- Differs from typst: the 1 1/2 in first-page top margin is a 0.5 in spacer paragraph on page 1 (Word has no per-page top margin); the caption's ")" column has one ")" per party name, not one per wrapped line (a Word table row does not know its wrap count), so a long name that wraps shows fewer ")" than typst; the caption is a borderless Word table, not a typst grid. Not measured: the docx page count (the typst render is 11 pages for the Wagner sample).
-- BLOCKED: `docx.pdf` and page review: soffice is not installed on this box (`soffice: not found`), so no LibreOffice PDF exists, Gates 0 to 3 cannot run on the docx, and no docx page was viewed.
-- BLOCKED: the caption ")" count on a wrapped name (see above); verify on the LibreOffice PDF before the docx gate.
+**docx** (`docx/`): `docx/reference.xml` (`base="xengine"`: Times New Roman 12 pt, the typst face as `{font}`; Body Text in exact 27.6 pt lines, single lines 13.8 pt, headings at the type size on the body pitch) and the filter `docx/ohnd-complaint.lua`, which `fb render` runs: it writes the court title (the 1 1/2 in first-page top margin as its space before), the caption as a borderless table (one row per line of the party column; the ")" count of a wrapped name computed from Times New Roman's advances, as typst measures it), the title, numbered paragraphs (the number then a tab to 1 in), labels and lettered items (A., B., the markdown number giving the letter), headings, the jury demand when asked for, the signature block kept with the last paragraph, and the footer (a centered page number) and last section via `$FORMBOOK_FOOTERS` and `$FORMBOOK_FINAL`. The old `build-reference.sh`, `render.sh` and `reference.docx` (EB Garamond) are gone.
+
+- Result: 11 pages, every typst line breaking after the same word (260/260), every page starting and ending on the same word; tier 1 (DEF-FONT-002, DEF-COVER-001, DEF-TOC-001 and the rest) green on both engines.
+- No BLOCKED items.
