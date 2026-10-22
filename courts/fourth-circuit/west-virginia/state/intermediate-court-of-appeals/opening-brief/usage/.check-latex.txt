@@ -1,2 +1,3 @@
 PASS
-10a6a6d58b94e8d8c5bdfce900e85614bb7f6186a8c1aa1d11e57572a73e7a6b  usage/OUTPUT-opening-brief.latex.pdf
+8454c08712a4b4119ecf00c65c0b0fde38c73ab2232ba5561d685d85b66bddcc  usage/OUTPUT-opening-brief.latex.pdf
+1f2a6632b87713d5d20ff1b8942a9b9b495ac725e48dd06311f251003c6c7eda  usage/OUTPUT-opening-brief.typst.pdf

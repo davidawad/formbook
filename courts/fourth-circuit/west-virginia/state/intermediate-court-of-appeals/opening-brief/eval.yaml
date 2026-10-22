@@ -1,6 +1,10 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex/ and docx/ are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) and render with tier 1 at 0 failed, but do not yet break every line where the typst
-# render does, for shared-model reasons recorded in docs/open-items/fb-595.54.66.md (fb-595.54.82 fixes them):
-# latex and docx: p10/p11, the orphan first line that carries footnote 3 (open item 1).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails. LaTeX passes XENG-001..003 (313/313 lines).
 params:
-  cross_engine: report
+  cross_engine: gate
+  # docx: INPUT-opening-brief p10: Word's footnote area is smaller than typst's, so Word keeps the first line of "Under
+  # the Supremacy Clause" with footnote 3 on p10, typst and LaTeX move both to p11; the page ends of p11-p13 and the
+  # contents and authorities pages after p9 follow. A shared-model difference (Word's footnote area),
+  # docs/open-items/fb-595.54.66.md (XENG-002, XENG-003).
+  cross_engine_docx: report
