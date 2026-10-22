@@ -3,7 +3,7 @@
 - Court: `bap10`, United States Bankruptcy Appellate Panel of the Tenth Circuit (`courts/tenth-circuit/bankruptcy-appellate-panel/`)
 - Doc type: `answering-brief`. Rule basis: Fed. R. Bankr. P. Part VIII and 10th Cir. BAP Local Rules (see Governing rules).
 - Exemplar: **none**. BLOCKED: no exemplar. Searched WebSearch (standard and extended), the CourtListener API (`court=bap10` RECAP: 0 documents; opinions only), Tenth Circuit RECAP (BAP-origin appeals are ca10 filings, not BAP filings), Justia dockets; only the court's own pro se guide sample brief was found (not a filing; it has no appellee brief). Searches are recorded in usage/SOURCE.md.
-- Render: `usage/OUTPUT-answering-brief.typst.pdf` (typst, vendored EB Garamond only). Overlay: **fail**, no exemplar PDF (`tools/overlay.sh` exits 1: "no FILED-EXAMPLE-answering-brief.pdf in usage").
+- Render: `usage/OUTPUT-answering-brief.typst.pdf` (typst, vendored Liberation Serif only). Overlay: **fail**, no exemplar PDF (`tools/overlay.sh` exits 1: "no FILED-EXAMPLE-answering-brief.pdf in usage").
 - Sample: `usage/INPUT-answering-brief.md`. Fictional parties, real rule citations. It is a generic sample built to exercise the template, not a transcription of any filing.
 - Status: template built and rendered; every page reviewed (see Page review). Not reviewed by a human; `court.json` untouched (status not set).
 
@@ -79,7 +79,7 @@ Tier-2 findings (OPEN or ACCEPTED): none OPEN. The answering brief has no statem
 9. The oral-argument section is excluded by matching its heading text.
 10. The table of authorities is built from `toa:` links only.
 11. Cover color and paper-copy rules are not produced.
-12. Only the vendored EB Garamond is available.
+12. The typeface is the vendored Liberation Serif (Times New Roman's metric twin, docs/FONTS.md), in the typst and docx renders alike.
 
 ## Build and check
 
@@ -94,14 +94,18 @@ Tier-2 findings (OPEN or ACCEPTED): none OPEN. The answering brief has no statem
 - Pages reviewed: 7 of 7. Every page was rasterised at 60 dpi and viewed on 2026-10-15. The Page review table above matches that render. No template change was made: with no exemplar, no open choice can be settled.
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/bap10.lua` builds the cover, front matter, headings, signature and certificates from the same markdown. Build: `sh docx/build-reference.sh docx/reference.docx`; render: `sh tools/render.sh --engine docx courts/tenth-circuit/bankruptcy-appellate-panel/answering-brief usage/INPUT-answering-brief.md`.
+**Cross-engine layout model (fb-595.54.5).** typst and docx share one layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `lib/docx/xengine-reference.sh`; docs/EVAL-LOOP.md, "Cross-engine gate"): first-fit line breaking on Unicode break opportunities, no hyphenation, kerning or ligatures, every line an exact box of its pitch (body 31.4 pt, single-spaced 20 pt, section headings 16 pt type in 23 pt lines), the spaces between blocks in points, the larger of two adjacent ones. typst is the reference; the docx render breaks every line and every page where it does, and `eval.yaml` gates that (`params.cross_engine: gate`; Gate 4 XENG-001..003). The design numbers did not change in the port (Liberation Serif 14 pt, the 2.245/1.425 em pitches, the em spaces now written in points); the section headings are 16 pt (were 1.15 em = 16.1 pt: Word has only half points), the point headings no longer ask for small capitals (Liberation Serif has none), the check box is a ruled box around an X, the signature blocks start at the middle of the text width, and the table of authorities sorts on the normalized key the template meant (a stray line had dropped the normalization).
 
-- Matches the typst form: letter, 1 in margins; EB Garamond 14 pt body, footnotes and headings; double-spaced body (Word "double", auto 480) with a 0.5 in first-line indent; single-spaced headings, quotations and footnotes; cover with no page number; front matter in lowercase roman; body in arabic from 1 (three sections); Argument point headings centered; heading labels (I. A. 1. a. in the Argument, A. 1. a. (1) elsewhere); word count and length check on the same markdown rule as typst (limit: 13,000 words); certificate of compliance; statement of related cases as the last page.
-- Differs from typst: heading labels are typed text, not list numbering; the certificate checkbox is "[X]", not a drawn box; the front matter and body are separate Word sections, and a cover that fills the page may push its empty section-break paragraph onto a new page in Word or LibreOffice; the required-section order check runs in typst only (not repeated in the Lua filter); no keep-with-signature rule.
-- BLOCKED, docx.pdf gates (Gates 0 and 1 on `OUTPUT-answering-brief.docx.pdf`): LibreOffice (`soffice`) is not installed on this box, so no `.docx.pdf` was made and no page was rendered or viewed (pages reviewed: 0).
-- BLOCKED, table of contents page numbers: the TOC is a TOC field whose cached entries have no page numbers; Word or LibreOffice fills them only after a field update. LibreOffice needs an update on load (see docs/DOCX.md).
-- BLOCKED, table of authorities page references: no page numbers are written (a TOA field is not honored by LibreOffice, and no first-pass page numbers are generated). The authorities list itself is complete.
-- Not checked here: no Word open test (no repair prompt), font embedding (EB Garamond must be installed on the reader's machine; the file names it), and Word vs LibreOffice pagination of the cover (one page is typst-checked only).
+**typst** (`typst/`): `show: xengine.with(pitch: 31.4pt, list-indent: 0.5in)`; contents and authorities rows with `listing-row` (the page in a 36 pt column, the authorities' in 56 pt or the list's own width); a loose list's paragraph breaks are dropped inside an item; "§§ 157" is kept together like "§ 157".
+
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` with `lib/docx/xengine-reference.sh` (Liberation Serif 14 pt, the typst pitches as exact line spacing); `docx/bap10.lua` writes the cover, front matter, headings, signature and certificates as paragraphs with the typst spaces, and pandoc writes the body on the reference styles. Build: `sh docx/build-reference.sh`; render: `sh tools/render.sh --engine docx courts/tenth-circuit/bankruptcy-appellate-panel/answering-brief usage/INPUT-answering-brief.md`.
+
+- Pages: `fb render` renders the document, finds every heading and citation in the LibreOffice PDF (the needles the filter writes) and renders again with those pages until they settle; the contents and authorities carry the same page numbers as typst. Three sections: no number on the cover, lowercase roman for the front matter, arabic from 1 for the body.
+- Headings are not "keep with next" in Word: LibreOffice moved a kept heading and the whole paragraph after it to the next page when that paragraph split there with a widow line pulled over (typst splits it). The filter keeps a run of headings with the text after it from the page map instead: the run's first heading breaks the page when the previous pass left it at the foot of a page whose text went on to the next.
+- The cover: the gap between its parts is typst's (the largest of 1, 0.8, 0.6 ... em that fits the page, estimated from Liberation Serif's advances); every cover line within 0.3 pt of typst's baseline.
+- Same word count as typst (counted on the markdown source by the same rules; limit: 13,000 words).
+- Not checked here: no Word open test, and Word's own pagination (the gate is LibreOffice's PDF; docs/DOCX.md).
+
 
 ## Exemplar batch re-check 2026-10-21
 
