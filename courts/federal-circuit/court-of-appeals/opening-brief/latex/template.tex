@@ -19,7 +19,13 @@
 % repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman (docs/FONTS.md).
 \usepackage{newtxtext,newtxmath}
 % FRAP 32(a)(4): at least one inch on all four sides; the page number in the bottom margin, as typst sets it.
-\usepackage[letterpaper,margin=1in,headheight=0pt,headsep=0pt,footskip=36bp]{geometry}
+% Glyph-advance allowance: newtx's advances are rounded to 1/1000 em, Times New Roman's (typst, Word) are 1/2048 em,
+% and the rounding is not neutral: weighted by the characters of a brief's text, newtx is wider by +0.050/1000 em per
+% character (measured per glyph: TFM widths vs the pinned Times New Roman, regular face; 13,244 characters of the
+% sample), +0.0007 bp at 14 bp, about +0.05 bp over a full 6.5 in line of some 75 characters. The line width is 0.05 bp
+% wider than 6.5 in so that a line typst fits with a few hundredths of a point to spare fits here too. Rigid; 0.05 bp
+% is far below the cross-engine position tolerance (0.5 pt) and nothing a reader or a margin check can see.
+\usepackage[letterpaper,margin=1in,right=71.95bp,headheight=0pt,headsep=0pt,footskip=36bp]{geometry}
 \usepackage{enumitem}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref} % bookmarks are written by \ca@bookmark

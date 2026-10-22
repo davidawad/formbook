@@ -212,6 +212,23 @@ function Pandoc(doc)
     doc.meta.keep_signature = pandoc.MetaBool(true)
   end
 
+  -- A paragraph that anchors a footnote has no widow or orphan control: typst's widow rule does not see the note, so
+  -- a last line whose note does not fit moves to the next page alone (docx: style "Body Text Note").
+  local nb = {}
+  for _, b in ipairs(bodyd.blocks) do
+    local note = false
+    if b.t == "Para" then
+      pandoc.Pandoc({ b }):walk({ Note = function(n) note = true return n end })
+    end
+    if note then
+      nb[#nb + 1] = pandoc.RawBlock("latex", "\\begingroup\\widowpenalty=0 \\clubpenalty=0 ")
+      nb[#nb + 1] = b
+      nb[#nb + 1] = pandoc.RawBlock("latex", "\\par\\endgroup")
+    else
+      nb[#nb + 1] = b
+    end
+  end
+  bodyd.blocks = nb
   doc.blocks = mark_arguments(bodyd.blocks)
   doc.meta.addendum = pandoc.MetaBlocks(addd.blocks)
   doc.meta.toa = pandoc.MetaBlocks({ pandoc.RawBlock("latex", toa_block(authorities)) })

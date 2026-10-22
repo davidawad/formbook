@@ -458,6 +458,12 @@ function Meta(meta)
   return meta
 end
 
+local function has_note(b)
+  local found = false
+  pandoc.Pandoc({ b }):walk({ Note = function(n) found = true return n end })
+  return found
+end
+
 function Pandoc(doc)
   local meta = doc.meta
   local body, add = {}, {}
@@ -522,6 +528,10 @@ function Pandoc(doc)
           tabs = '<w:tabs><w:tab w:val="left" w:pos="' .. (ind + TAB) .. '"/></w:tabs>', before = 308, after = 252,
           ind = { ind + TAB, TAB }, jc = "left" }, xe.runs(label .. "\t", o) .. xe.inl(b.content, o))
       end
+    elseif b.t == "Para" and has_note(b) then
+      -- a paragraph that anchors a footnote has no widow or orphan control ("Body Text Note"): typst's widow rule
+      -- does not see the note, so its last line moves to the next page alone when the note does not fit
+      body_blocks[#body_blocks + 1] = pandoc.Div({ b }, pandoc.Attr("", {}, { ["custom-style"] = "Body Text Note" }))
     elseif b.t == "OrderedList" or b.t == "BulletList" then
       append(body_blocks, xe.list_items(b))
     else
