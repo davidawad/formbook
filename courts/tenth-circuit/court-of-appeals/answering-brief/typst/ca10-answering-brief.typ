@@ -6,6 +6,7 @@
 // same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -14,12 +15,31 @@
 #let font-family = ("Times New Roman", "Liberation Serif")     // CA10-FORM-004: proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // CA10-FORM-004 / 10th Cir. R. 32(A): 13 or 14 point, 14 preferred.
                                            // A proportional face must be 14-point or larger (FRAP 32(a)(5)).
-#let body-leading = 1.36em                 // CA10-FORM-003: double spacing (FRAP 32(a)(4)); calibrated in README.md.
-#let single-leading = 0.65em               // quotations, headings, TOC/TOA, certificates: single-spaced (typst's normal line gap).
-#let para-spacing = 0.9em
+#let h1-size = 19.5pt                      // body section headings (typst's level-1 heading size, 1.4em, in whole half points)
+#let h2-size = 17pt                        // body point headings (typst's level-2 heading size, 1.2em, in whole half points)
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing). The spaces below are the template's own gaps,
+// measured baseline to baseline on its earlier render, less the line boxes now around them.
+#let pitch-double = 28.1pt                 // CA10-FORM-003: double spacing (FRAP 32(a)(4)); calibrated on the exemplar (README.md)
+#let pitch-single = 18.8pt                 // quotations, TOC/TOA, cover, certificates, footnotes: single-spaced
+#let pitch-h1 = 24pt                       // a 19.5 pt heading line
+#let pitch-h2 = 20pt                       // a 17 pt heading line
+#let single-gap = 3.5pt                    // between two single-spaced paragraphs
+#let h1-above = 12pt
+#let h1-below = 2pt
+#let h2-above = 10pt
+#let title-above = 13pt                    // the titles the template prints (front matter, statements, certificates)
+#let title-below = 4.8pt
+#let cert-gap = 14.7pt                     // the larger steps inside a certificate
+#let sig-gap = 20.3pt                      // above a signature, and between "Respectfully submitted," and it
+#let toc-page-col = 36pt                   // TOC: the page numbers keep the last 36 pt of the line to themselves
+#let toa-page-col = 56pt                   // TOA: page lists such as 1, 4, 6, 8 (a longer list widens its own row's column)
+#let list-hang = 0.4in                     // TOC/TOA rows: wrapped lines hang 0.4 in
 #let page-margin = 1in                     // CA10-FORM-002: at least one inch on all four sides (FRAP 32(a)(4)).
-#let page-margin-bottom = page-margin + 4pt   // the last line's descender (about 3 pt at 14 pt) must stay inside the 1-in margin too
 #let para-indent = 0.5in
+#let sig-indent = 3.25in                   // the signature blocks start at the middle of the text
+#let cert-indent = 0.4in                  // a certificate's numbered statements and their checked items
 #let passim-threshold = 7                  // an authority cited on this many pages or more: "passim".
 
 // ---------------------------------------------------------------------------
@@ -69,6 +89,12 @@
   if n > 1 { numbering("i", n) }
 }
 
+/// A single-spaced paragraph at the margin, `above` clear of the block before it.
+#let spar(body, above: single-gap, align-to: left) = block(width: 100%, above: above, below: single-gap, {
+  set par(first-line-indent: 0pt, hanging-indent: 0pt)
+  align(align-to, body)
+})
+
 // ---------------------------------------------------------------------------
 // Cover (FRAP 32(a)(2); 10th Cir. R. 28.2(C)(1)-(2))
 // ---------------------------------------------------------------------------
@@ -76,15 +102,11 @@
 #let caption-block(meta) = {
   let sides = need(meta, "caption")
   for (i, side) in sides.enumerate() {
-    if i > 0 {
-      v(0.5em)
-      align(center, par(first-line-indent: 0pt)[v.])
-      v(0.5em)
+    if i > 0 { spar(above: 10.5pt, align-to: center)[v.] }
+    for (k, name) in side.names.enumerate() {
+      spar(above: if i > 0 and k == 0 { 10.5pt } else { single-gap }, align-to: center, inl(name))
     }
-    for name in side.names {
-      align(center, par(first-line-indent: 0pt, leading: single-leading, inl(name)))
-    }
-    align(center, par(first-line-indent: 0pt, leading: single-leading, inl(side.designation)))
+    spar(align-to: center, inl(side.designation))
   }
 }
 
@@ -95,38 +117,30 @@
 #let cover-rule = align(center, line(length: 40%, stroke: 0.5pt))
 
 #let cover(meta) = {
-  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-  align(center)[No. #need(meta, "case_number")]
+  set text(..edges(pitch-single))
+  spar(align-to: center)[No. #need(meta, "case_number")]
   v(1fr)
-  align(center)[
-    *UNITED STATES COURT OF APPEALS*\
-    *FOR THE TENTH CIRCUIT*
-  ]
+  spar(align-to: center, strong[UNITED STATES COURT OF APPEALS\ FOR THE TENTH CIRCUIT])
   v(1fr)
   caption-block(meta)
   v(1fr)
-  align(center, inl(need(meta, "proceeding")))
-  if "judge" in meta { align(center, inl(meta.judge)) }
-  if "district_court_case" in meta { align(center, inl(meta.district_court_case)) }
+  spar(align-to: center, inl(need(meta, "proceeding")))
+  if "judge" in meta { spar(align-to: center, inl(meta.judge)) }
+  if "district_court_case" in meta { spar(align-to: center, inl(meta.district_court_case)) }
   v(1fr)
   cover-rule
-  align(center, strong(upper(need(meta, "brief_title"))))
+  spar(align-to: center, strong(upper(need(meta, "brief_title"))))
   cover-rule
   v(1fr)
-  align(center, need(meta, "oral_argument"))
+  spar(align-to: center, need(meta, "oral_argument"))
   v(1fr)
-  for group in need(meta, "counsel") {
-    align(center, block(width: 100%, sticky: true, {
-      for name in group.names {
-        par(first-line-indent: 0pt, leading: single-leading, align(center, inl(name)))
-      }
-      for line in group.lines {
-        par(first-line-indent: 0pt, leading: single-leading, align(center, emph(inl(line))))
-      }
-    }))
-    v(0.6em)
+  for (gi, group) in need(meta, "counsel").enumerate() {
+    block(width: 100%, sticky: true, above: if gi > 0 { 8.4pt } else { single-gap }, below: 0pt, {
+      for name in group.names { spar(align-to: center, inl(name)) }
+      for line in group.lines { spar(align-to: center, emph(inl(line))) }
+    })
   }
-  align(center, par(first-line-indent: 0pt, leading: single-leading, inl(need(meta, "phone"))))
+  spar(above: 8.4pt, align-to: center, inl(need(meta, "phone")))
   v(0.5fr)
 }
 
@@ -134,38 +148,38 @@
 // Headings in the body. The body's own numerals are kept as written (the sample is a transcription).
 // ---------------------------------------------------------------------------
 
-#let style-heading-1(it) = block(width: 100%, sticky: true, above: 1.2em, below: 1em,
-  align(center, strong(it.body)))
+#let style-heading-1(it) = block(width: 100%, sticky: true, above: h1-above, below: h1-below, {
+  set text(size: h1-size, ..edges(pitch-h1))
+  align(center, par(first-line-indent: 0pt, strong(it.body)))
+})
 
-#let style-heading-2(it) = block(width: 100%, sticky: true, above: 1em, below: 0.8em,
-  par(first-line-indent: 0pt, hanging-indent: 0.5in, leading: single-leading, strong(it.body)))
+#let style-heading-2(it) = block(width: 100%, sticky: true, above: h2-above, below: 0pt, {
+  set text(size: h2-size, ..edges(pitch-h2))
+  par(first-line-indent: 0pt, hanging-indent: 0.5in, strong(it.body))
+})
 
 /// Unnumbered titles the template prints itself (front matter, oral argument, certificates).
-#let section-title(body) = block(width: 100%, sticky: true, above: 0.4em, below: 1em,
-  align(center, strong(body)))
+#let section-title(body, above: title-above) = block(width: 100%, sticky: true, above: above, below: title-below, {
+  set text(..edges(pitch-single))
+  align(center, par(first-line-indent: 0pt, strong(body)))
+})
 
 // ---------------------------------------------------------------------------
 // Tables of contents and authorities
 // ---------------------------------------------------------------------------
 
-/// One row of a table: title, dot leader, page (the page counter at `loc`).
+/// One row of the contents (listing-row): title, dot leader, page (the page counter at `loc`).
 #let toc-row(title, loc, indent: 0pt) = {
   let pg = counter(page).at(loc).first()
   // Front-matter pages (before the body) are listed in roman numerals, as they are printed.
   let body-page = query(<ca10-body>).first().location().page()
   let shown = if loc.page() < body-page { numbering("i", pg) } else { [#pg] }
-  block(width: 100%, below: 0.6em, par(first-line-indent: 0pt, hanging-indent: 0.4in, leading: single-leading, justify: false, {
-    h(indent)
-    title
-    h(0.3em)
-    box(width: 1fr, repeat[.#h(0.16em)])
-    shown
-  }))
+  listing-row(none, { h(indent); title }, shown, toc-page-col, list-hang, 0pt)
 }
 
 #let toc-section() = {
-  section-title[TABLE OF CONTENTS]
-  align(right, strong(underline[Page]))
+  section-title(above: 0pt)[TABLE OF CONTENTS]
+  block(width: 100%, above: title-below, below: single-gap, align(right, strong(underline[Page])))
   context {
     // Front-matter entries, found by their labels.
     for (lab, t) in ((<ca10-toa>, [TABLE OF AUTHORITIES]), (<ca10-prior>, [STATEMENT OF PRIOR OR RELATED APPEALS])) {
@@ -174,7 +188,7 @@
     }
     // Body headings, levels 1 and 2 (the sample's own structure).
     for h in query(heading.where(level: 1).or(heading.where(level: 2))) {
-      toc-row(h.body, h.location(), indent: if h.level == 2 { 0.4in } else { 0pt })
+      toc-row(h.body, h.location(), indent: if h.level == 2 { list-hang } else { 0pt })
     }
     // Back matter, found by the labels on each title.
     for (lab, t) in (
@@ -206,18 +220,18 @@
 )
 
 #let toa-section(authorities) = {
-  [#section-title[TABLE OF AUTHORITIES] <ca10-toa>]
-  align(right, strong(underline[Page(s)]))
+  [#section-title(above: 0pt)[TABLE OF AUTHORITIES] <ca10-toa>]
+  block(width: 100%, above: title-below, below: 0pt, align(right, strong(underline[Page(s)])))
   context for k in toa-kinds {
     let items = authorities.pairs().filter(p => p.last().at("kind", default: "other") == k.kind)
     if items.len() > 0 {
-      block(width: 100%, above: 0.8em, below: 0.6em, sticky: true, strong(k.title))
+      block(width: 100%, above: 2pt, below: 0pt, sticky: true, par(first-line-indent: 0pt, strong(k.title)))
       for (key, a) in items.sorted(key: p => lower(p.last().name)) {
         let pages = pages-cited(key)
         let shown = if a.kind == "case" { emph(a.name) } else { [#a.name] }
         let cite = if a.at("cite", default: "") != "" { [, #a.cite] } else { [] }
         let mark = if pages.len() == 0 { [--] } else if pages.len() >= passim-threshold { [passim] } else { pages.map(str).join(", ") }
-        block(width: 100%, below: 0.6em, par(first-line-indent: 0pt, hanging-indent: 0.4in, leading: single-leading, justify: false, [#shown#cite#h(0.3em)#box(width: 1fr, repeat[.#h(0.16em)])#mark]))
+        listing-row(none, [#shown#cite], mark, calc.max(toa-page-col, measure(mark).width), list-hang, 0pt)
       }
     }
   }
@@ -227,71 +241,53 @@
 // Back matter: signature, oral argument, certificates, service
 // ---------------------------------------------------------------------------
 
-/// The signature lines, printed under the signer's name. Plain content (no par), so it can sit in a block.
-#let signature-lines(meta) = {
-  set par(first-line-indent: 0pt, leading: single-leading)
-  for line in need(meta, "signature").lines {
-    [#inl(line)]
-    linebreak()
-  }
+/// The signer's lines, one per line, in the right half.
+#let signature-lines(meta) = need(meta, "signature").lines.map(inl).join(linebreak())
+
+/// A signature in the right half of the page: `first` (the "s/" line) and the signer's lines.
+#let sig-block(meta, first, above: sig-gap) = block(width: 100%, breakable: false, above: above, below: 0pt,
+  { set par(first-line-indent: 0pt); pad(left: sig-indent, [#first#linebreak()#signature-lines(meta)]) })
+
+#let signature-block(meta) = block(width: 100%, breakable: false, above: 11pt, below: 0pt, {
+  set text(..edges(pitch-single))
+  { set par(first-line-indent: 0pt); pad(left: sig-indent)[Respectfully submitted,] }
+  sig-block(meta, [s/ #need(meta, "signature").signer])
+})
+
+/// A numbered statement of a certificate: the number in a half-inch box, the text hanging after it.
+#let cert-item(num, body, above: single-gap) = block(width: 100%, above: above, below: single-gap,
+  par(first-line-indent: 0pt, hanging-indent: cert-indent, { box(width: cert-indent, num); body }))
+
+#let certificate-of-compliance(meta, words) = {
+  set text(..edges(pitch-single))
+  [#section-title(above: 0pt)[CERTIFICATE OF COMPLIANCE WITH TYPE-VOLUME LIMIT] <ca10-cert-compliance>]
+  cert-item[1.][This brief complies with the type-volume limitation of Fed. R. App. P. 32(a)(7)(B) because:]
+  block(width: 100%, above: single-gap, below: single-gap, pad(left: cert-indent, par(first-line-indent: 0pt)[[x] this brief contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. App. P. 32(f) and 10th Cir. R. 32(B).]))
+  cert-item(above: cert-gap)[2.][This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because:]
+  block(width: 100%, above: single-gap, below: single-gap, pad(left: cert-indent, par(first-line-indent: 0pt)[[x] this brief has been prepared in a proportionally spaced typeface, #font-family.first(), in #int(type-size / 1pt)-point type.]))
+  spar(above: sig-gap)[Date: #need(meta, "date").]
+  sig-block(meta, [s/ #need(meta, "signature").signer])
 }
 
-#let signature-block(meta) = block(width: 100%, breakable: false, above: 1.6em, pad(left: 3.25in)[
-  #set par(first-line-indent: 0pt, leading: single-leading)
-  Respectfully submitted,
-  #v(1.2em)
-  s/ #need(meta, "signature").signer
-  #linebreak()
-  #signature-lines(meta)
-])
+#let certificate-of-digital-submission(meta) = {
+  set text(..edges(pitch-single))
+  [#section-title(above: 0pt)[CERTIFICATE OF DIGITAL SUBMISSION] <ca10-cert-digital>]
+  spar[I hereby certify that with respect to the foregoing:]
+  spar[(1) all required privacy redactions have been made per 10th Cir. R. 25.5;]
+  spar[(2) if required to file additional hard copies, that the ECF submission is an exact copy of those documents;]
+  spar[(3) the digital submissions have been scanned for viruses with the most recent version of a commercial virus scanning program, #need(meta, "virus_scanner"), and according to the program are free of viruses.]
+  sig-block(meta, [s/ #need(meta, "signature").signer])
+}
 
-#let certificate-of-compliance(meta, words) = [
-  #section-title[CERTIFICATE OF COMPLIANCE WITH TYPE-VOLUME LIMIT] <ca10-cert-compliance>
-  #set par(first-line-indent: 0pt, leading: single-leading)
-  1. This brief complies with the type-volume limitation of Fed. R. App. P. 32(a)(7)(B) because:
-
-  #pad(left: 0.4in)[[x] this brief contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. App. P. 32(f) and 10th Cir. R. 32(B).]
-  #v(0.8em)
-  2. This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because:
-
-  #pad(left: 0.4in)[[x] this brief has been prepared in a proportionally spaced typeface using Typst in #int(type-size / 1pt)-point #font-family.first().]
-  #v(1.2em)
-  Date: #need(meta, "date").
-  #v(1.2em)
-  #pad(left: 3.25in)[s/ #need(meta, "signature").signer #linebreak() #signature-lines(meta)]
-]
-
-#let certificate-of-digital-submission(meta) = [
-  #section-title[CERTIFICATE OF DIGITAL SUBMISSION] <ca10-cert-digital>
-  #set par(first-line-indent: 0pt, leading: single-leading)
-  I hereby certify that with respect to the foregoing:
-
-  (1) all required privacy redactions have been made per 10th Cir. R. 25.5;
-
-  (2) if required to file additional hard copies, that the ECF submission is an exact copy of those documents;
-
-  (3) the digital submissions have been scanned for viruses with the most recent version of a commercial virus scanning program, #need(meta, "virus_scanner"), and according to the program are free of viruses.
-  #v(1.2em)
-  #pad(left: 3.25in)[s/ #need(meta, "signature").signer #linebreak() #signature-lines(meta)]
-]
-
-#let certificate-of-service(meta) = [
-  #section-title[CERTIFICATE OF SERVICE] <ca10-cert-service>
-  #set par(first-line-indent: 0pt, leading: single-leading)
-  I hereby certify that on #need(meta, "date") a true and correct copy of the foregoing was filed with the Clerk of the Court using CM/ECF system and also served on the following:
-  #v(0.8em)
-  #for group in need(meta, "service").at("unregistered", default: ()) [
-    #block(width: 100%)[
-      #for (i, line) in group.enumerate() {
-        if i > 0 { linebreak() }
-        inl(line)
-      }
-    ]
-    #v(0.8em)
-  ]
-  #v(0.8em)
-  #pad(left: 3.25in)[By: s/ #need(meta, "signature").signer #linebreak() #signature-lines(meta)]
-]
+#let certificate-of-service(meta) = {
+  set text(..edges(pitch-single))
+  [#section-title(above: 0pt)[CERTIFICATE OF SERVICE] <ca10-cert-service>]
+  spar[I hereby certify that on #need(meta, "date") a true and correct copy of the foregoing was filed with the Clerk of the Court using CM/ECF system and also served on the following:]
+  for group in need(meta, "service").at("unregistered", default: ()) {
+    spar(above: cert-gap, group.map(inl).join(linebreak()))
+  }
+  sig-block(meta, [By: s/ #need(meta, "signature").signer], above: 26pt)
+}
 
 // ---------------------------------------------------------------------------
 // The brief
@@ -299,16 +295,36 @@
 
 #let ca10-brief(meta, md) = {
   set document(title: "Answer brief " + need(meta, "case_number"))
-  set text(font: font-family, size: type-size, lang: "en", region: "us")
-  set page(paper: "us-letter", margin: (x: page-margin, top: page-margin, bottom: page-margin-bottom), numbering: front-page-number)
-  set par(leading: body-leading, spacing: para-spacing, first-line-indent: (amount: para-indent, all: true), justify: false)
+  // The page number: centered in a single-spaced line box (Word's footer), at the same place on every page.
+  set page(paper: "us-letter", margin: page-margin, footer-descent: 30%,
+    footer: context {
+      let n = counter(page).get().first()
+      let label = if page.numbering == "1" { str(n) } else if n > 1 { numbering("i", n) } else { none }
+      if label != none { align(center, text(..edges(pitch-single), label)) }
+    })
+  set page(numbering: "i")
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model (lib/typst/xengine.typ): first fit, no kerning or ligatures, no hyphenation, line
+  // boxes of the body pitch, footnote marks at 58 %, lists with the number in a half-inch box, a section sign kept
+  // with its number, no break inside "60(b)(5)".
+  show: xengine.with(pitch: pitch-double, list-indent: para-indent)
   show heading.where(level: 1): it => style-heading-1(it)
   show heading.where(level: 2): it => style-heading-2(it)
+  set footnote.entry(gap: 7pt, clearance: 12.6pt, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
   show footnote.entry: it => {
-    set text(size: type-size)
-    set par(leading: single-leading, first-line-indent: 0pt)
-    it
+    set text(size: type-size, ..edges(pitch-single))   // 10th Cir. R. 32(A): footnotes at the body size
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, spacing: 7pt)
+    // marker, a quarter em, then the note
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    [#super(num)#h(0.25em)#note.body]
   }
+  show quote.where(block: true): it => block(above: 14pt, below: 14pt, pad(left: para-indent, right: para-indent, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt, spacing: 12.6pt)
+    it.body
+  }))
   // Tag every occurrence of an authority's `search` pattern with its key(s); toa-section reads them back.
   let auth = need(meta, "authorities")
   let pattern = auth.pairs().map(p => "(" + p.last().search + ")").join("|")
@@ -322,12 +338,14 @@
   pagebreak()
 
   // Front matter (roman numerals).
-  toc-section()
-  pagebreak()
-  toa-section(need(meta, "authorities"))
-  v(1.2em)
-  [#section-title[STATEMENT OF PRIOR OR RELATED APPEALS] <ca10-prior>]
-  par(first-line-indent: 0pt, leading: single-leading, inl(need(meta, "prior_related")))
+  {
+    set text(..edges(pitch-single))
+    toc-section()
+    pagebreak()
+    toa-section(need(meta, "authorities"))
+    [#section-title(above: 16pt)[STATEMENT OF PRIOR OR RELATED APPEALS] <ca10-prior>]
+    spar(above: title-below, inl(need(meta, "prior_related")))
+  }
 
   // Body (arabic numerals from 1).
   pagebreak()
@@ -338,10 +356,9 @@
 
   signature-block(meta)
 
-  // Statement of oral argument (10th Cir. R. 28.2(C)(2); FRAP 34).
-  v(1.2em)
+  // Statement of oral argument (10th Cir. R. 28.2(C)(2); FRAP 34): text of the brief, double-spaced.
   [#section-title[STATEMENT OF COUNSEL AS TO ORAL ARGUMENT] <ca10-oral>]
-  par(first-line-indent: para-indent, inl(need(meta, "oral_argument_statement")))
+  inl(need(meta, "oral_argument_statement"))
 
   // Certificates (10th Cir. R. 25.5; FRAP 32(g); FRAP 25(d); 10th Cir. R. 25.4).
   pagebreak()

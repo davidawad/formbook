@@ -117,10 +117,10 @@ The overlay is a diagnostic. Red is our render, blue is the filed page, black is
 
 ## Known gaps and accepted deviations
 
-- **Font.** The template uses EB Garamond (vendored, `fonts/eb-garamond/`), not the exemplar's Times New Roman. It is a proportional serif at 14 pt, which meets FRAP 32(a)(5)(A). The certificate of compliance states the face actually used.
+- **Font.** The template uses Times New Roman (its vendored metric twin), as the exemplar does. It is a proportional serif at 14 pt, which meets FRAP 32(a)(5)(A). The certificate of compliance states the face actually used.
 - **Cover colour.** Blue (appellant) is required for paper hard copies (CA10-COVER-004) and is not produced; the PDF is white, as in the ca9 template.
 - **Word count exclusions.** The count excludes the cover, TOC, TOA, statement of prior/related appeals, oral-argument statement, certificates and attachments index. Whether 10th Cir. R. 32(B) excludes anything else (for example, the prior-appeals statement) was not verified; the checklist only says "excluding the items listed under FRAP 32(f) and 10th Cir. R. 32(B)". The 10th Cir. R. 32(B) text was not fetched.
-- **Heading style** is the ca9 point-heading style (small capitals, centered), not the exemplar's. Tier 2 (professional look) is judged as acceptable; it is a template convention.
+- **Heading style** is the ca9 point-heading style (bold, centered; no small capitals, which Word and LaTeX would synthesize), not the exemplar's. Tier 2 (professional look) is judged as acceptable; it is a template convention.
 - **Oral-argument statement** follows the signature block on the same page (the exemplar gives it its own page). Accepted to keep the sample within the 8-14 page target.
 - **Certificates.** Compliance, digital submission and service are always printed (CA10-LEN-002). The digital-submission wording comes from the exemplar and the checklist cites 10th Cir. R. 25.5; the local rule text was not fetched.
 - **Attachments** are listed on the index only. The decision and judgment are filed as separate PDFs, not produced by the template.
@@ -130,9 +130,11 @@ The overlay is a diagnostic. Red is our render, blue is the filed page, black is
 
 ## Engines
 
-- **typst** (primary): `typst/`, output `usage/OUTPUT-opening-brief.typst.pdf`.
-- **latex** (`latex/template.tex` + `latex/ca10-opening-brief.lua`): output `usage/OUTPUT-opening-brief.latex.pdf`, 20 pages against typst's 13. Matches the 14-pt Times type (newtx under stock pdflatex), 31.43-pt double spacing, 1-inch margins, roman front matter and arabic body, cover on one page, TOC and TOA with page references, and the certificates. Known differences: pagination is longer; footnote text on some pages runs wide (not yet fixed); the TOC wrap indent is not hung; the signature block is not kept with the last paragraph.
-- **docx**: not built yet (see the court-level PR notes). LibreOffice is not installed on this box; a Debian-package extraction was started but not verified.
+Three renders of the INPUT, on the shared cross-engine layout model (docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.54.5): typst is the reference; latex and docx break every line and page where typst does, and `eval.yaml` gates it (`params.cross_engine: gate`; Gate 4 `XENG-001..003`).
+
+- **typst** (`typst/ca10-opening-brief.typ`): `lib/typst/xengine.typ` (first-fit breaking, no kerning, ligatures or hyphenation, exact line boxes): Times New Roman 14 pt, body in 31.4 pt boxes; headings, quotations, footnotes, tables, cover and certificates in 20 pt boxes; section headings 16 pt; every space in pt (the old em values at 14 pt); contents, authorities and the index of attachments as `listing-row` (36, 56 and 84 pt page columns). The signature blocks are full-width blocks, so their right half starts at the middle of the text (before, an auto-width block put it at the width of its own lines). The digital-submission item 4 prints its semicolon again ("April 6, 2026; and": `#ds.updated;` had swallowed it).
+- **latex** (`latex/template.tex`, `latex/ca10-opening-brief.lua`): `\usepackage{xengine}` (lib/latex/xengine.sty), every size through `\xe@lines` in bp, every space through `\addvspace`, `\xe@row` rows; the filter builds the cover, tables, statements and certificates, sets the fancy-list markers ("(I)") as text as CommonMark does, adds `\allowbreak` where typst breaks a web address, and certifies the typst word count (counted over the markdown source). 14 pages, 237/237 lines alike (was 20 pages vs 13, 41.7 %).
+- **docx** (`docx/`): `build-reference.sh` builds `reference.docx` with `lib/docx/xengine-reference.sh` (Times New Roman, the same pitches in twips; was EB Garamond, a DEF-FONT-002 failure). `ca10.lua` writes the cover, the contents and authorities with their page numbers (multi-pass render, `tools/fb/src/docxpass.rs`: the old BLOCKED TOC/TOA items are gone), the statements, signature and certificates with `lib/docx/xengine.lua`; zero-width spaces where typst breaks a web address, a word joiner in ")(". 14 pages, 237/237 lines alike (was 40.0 %, and 3 tier-1 failures).
 
 ## Typeface (fonts pass, 2026-10-15)
 
@@ -141,16 +143,6 @@ The overlay is a diagnostic. Red is our render, blue is the filed page, black is
 - **Substitute: none; EB Garamond kept** (vendored, `fonts/eb-garamond/`), per the fonts policy: a court whose rules name no face keeps EB Garamond. Set in the template as `font-family`.
 - **Compatibility:** not applicable (no named face to match). Pagination is therefore not checked against a Times or Century filing; the length gate uses the word count, not the page count.
 - **Renders (2026-10-15):** `tools/render.sh` with vendored fonts only, zero warnings; `pdffonts` shows only EB Garamond (Regular, Bold, Italic). Page counts unchanged. Every page rasterised at 60 dpi and viewed. Overlay regenerated against the filed exemplar (downloaded from the CourtListener URL in `usage/SOURCE.md`; the PDF is not committed to the repo).
-
-## Engines
-
-DOCX (`docx/`): `build-reference.sh` makes `reference.docx` (EB Garamond 14 pt; exact 31.4 pt double spacing; 0.5 in first-line indent; letter paper, 1 in margins; single-spaced headings, footnotes and front matter; centered page-number footer). `ca10.lua` writes the cover, the sections (cover without number, lower-roman front matter, arabic body), the labelled headings, the signature block, the oral-argument statement and the certificates.
-
-- Matches the typst output: 13 pages (typst: 13); 14 pt type, double spacing, margins; footer numbers i, ii, iii, then 1 to 9; cover on one page; the statement of prior appeals; heading labels (I., A., 1., a.); footnotes; signature block; the certificate of compliance word count (1,136, same as typst); the certificate of digital submission with the scanner and its date; the index of attachments.
-- Differs (tier 2, not chased): headings sit lower at the top of a page (Word keeps space before a heading at a section start); the cover spacing is fixed rather than fitted to one page; line breaks differ in places (LibreOffice breaks after a hyphen in "App.113-14", typst does not); the contents and authorities have no dot leaders.
-- BLOCKED `TOC` (contents, page column): the page numbers need a field update in Word or LibreOffice; this pipeline does not update fields, and no first-pass page map is written. The contents list every entry in order, without numbers.
-- BLOCKED `TOA` (table of authorities, "Page(s)" column): same reason; the authorities are listed, cited on the right pages in the typst output only.
-- `sh tools/check.sh <court-dir> --engine docx` fails: the court folder has no `checks.yaml` (Gate 1 cannot run). Nothing was edited to pass it.
 
 ## Verification pass 2026-10-16 (fb-595.26.10)
 

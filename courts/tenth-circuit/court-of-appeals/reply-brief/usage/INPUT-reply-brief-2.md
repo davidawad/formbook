@@ -1,6 +1,4 @@
 ---
-word:
-  justify: false
 # Complete transcription of usage/FILED-EXAMPLE-reply-brief-2.pdf (Appellant's Reply Brief, Lyman v.
 # Henderson, No. 26-4014, filed 2026-07-27, Kaylan Phillips, Public Interest Legal Foundation). Every word of
 # the body (introduction, Argument I-III, Conclusion, both footnotes) is transcribed in the filer's order and

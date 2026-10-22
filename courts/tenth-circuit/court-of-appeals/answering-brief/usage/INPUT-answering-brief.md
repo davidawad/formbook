@@ -71,7 +71,6 @@ The District does not object to the Willeys’ statement of jurisdiction and agr
 # STATEMENT OF ISSUES FOR REVIEW
 
 1. The District Court appropriately held that no genuine dispute of material fact existed in light of the Willeys’ failure to present evidence that there was an official policy regarding the use of preferred names or pronouns or “concealment” of a student’s choice from parents during the 2021-22 school year, and that no such use or concealment occurred during the 2022-23 school year when an official policy did exist. Therefore, the Willeys cannot demonstrate their fundamental constitutional rights have been violated.
-
 2. The District Court correctly determined that the 2022-23 and 2023-24 PNCPs were content neutral rules of general applicability such that Ms. Willey failed to establish an infringement on her fundamental Constitutional rights as a teacher.[^1]
 
 [^1]: The Willeys propose a third issue for review that is functionally identical to their first proposed issue. The District believes only two issues are properly before the Court.
