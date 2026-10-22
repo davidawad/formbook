@@ -42,15 +42,15 @@ signature:
 authorities:
   arthur:
     kind: case
-    name: "Arthur Young & Co. v. Vega III"
+    name: "*Arthur Young & Co. v. Vega III*"
     cite: "163 DPR 157 (1994)"
   tls:
     kind: case
-    name: "TLS Management and Marketing Services, LLC v. Rodríguez-Toledo"
+    name: "*TLS Management and Marketing Services, LLC v. Rodríguez-Toledo*"
     cite: "966 F.3d 46 (2020)"
   martins:
     kind: case
-    name: "Martin's BBQ v. García De Gracia"
+    name: "*Martin's BBQ v. García De Gracia*"
     cite: "178 DPR 978 (2010)"
 ---
 
