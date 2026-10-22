@@ -8,9 +8,10 @@ Doc type: Georgia has no petition for rehearing; the closest real type is the **
 |---|---|
 | `usage/` | 1 filing, text PDF, 15 pages: the motion (pages 1-2), its certificate of service (3), then the brief in support (4-15), each with its own cover; court e-filing stamp "Case A21A1129 Filed 11/03/2021" on every page |
 | `usage/INPUT-petition-for-rehearing.md` | transcription of the whole brief in support (filed pages 4-15). The two-page motion itself is not transcribed: it is a short request that refers to the brief. Id kept for the existing docx outputs |
-| render | ok: `usage/OUTPUT-petition-for-rehearing.typst.pdf`, 12 pages, exit 0, no warnings, Liberation Serif embedded |
+| render | ok: `usage/OUTPUT-petition-for-rehearing.typst.pdf` and `usage/OUTPUT-petition-for-rehearing.docx` / `.docx.pdf`, 12 pages each, exit 0, no warnings, Times New Roman embedded |
 | overlay | ok: `.overlay/courts/eleventh-circuit/georgia/state/court-of-appeals/petition-for-rehearing/OVERLAY-petition-for-rehearing.pdf` / `.txt` |
-| pages reviewed | all 12 output pages and all 15 exemplar pages rendered at 60 dpi and inspected |
+| pages reviewed | all 12 pages of the docx render at 50 dpi and of the typst render at 40 dpi (line for line the same: XENG PASS); all 15 exemplar pages at 60 dpi |
+| cross-engine | docx XENG-001..003 PASS (247/247 lines, 12 pages); `eval.yaml` `params.cross_engine: gate` |
 
 ## Governing rules (primary source, read 2026-10-16)
 
@@ -20,18 +21,18 @@ Rules effective March 26, 2026 (URL and archive copy as in `../motion-brief/READ
 
 The regenerated same-id overlay pairs ours pages 1-8 with filed pages 4-11, pages 9-10 with filed page 13, page 11 with filed page 14, and page 12 with filed page 15. The template places the signature under the conclusion; the filed brief uses a separate signature page.
 
-## Gate 2 review (12 of 12 pages)
+## Gate 2 review (12 of 12 pages, typst and docx alike)
 
 | Page | Finding |
 |---|---|
-| 1 | Cover: "IN THE COURT OF APPEALS STATE OF GEORGIA", Case No. A21A1129, three-party caption (Appellant, Appellee, Intervenor-Appellee, joined by "v." and "&"), title, counsel. OK |
-| 2-3 | Opening paragraph, Argument, the Order's four numbered findings as a single-spaced block quote. OK |
-| 4-6 | Argument text, heading I (bold, single spaced), the filer's bold passage kept bold. OK |
-| 7 | *Stein* block quotation. OK |
-| 8-9 | Heading II, numbered list "1)" / "2)", Conclusion. OK |
-| 10 | Conclusion and end of argument. OK |
-| 11 | Rule 24 certification, date, underlined "/s/ Robert Jackson" with the name below and both counsel's lines. OK; the second counsel's "/s/ Dorothy Jaffe" is a plain line, not underlined (contract limit, see Gaps) |
-| 12 | Certificate of service (Rule 6 (b) (2) prior-agreement wording), two recipient blocks, "SO CERTIFIED", signature. OK |
+| 1 | Cover: "IN THE COURT OF APPEALS STATE OF GEORGIA", Case No. A21A1129, three-party caption (names centered, designations from the middle of the line, joined by "v." and "&"), title, "Counsel for Appellant Sierra Club, Inc." centered, the two counsel in two columns (as filed). OK |
+| 2-3 | Opening paragraph, Argument, the Order's four numbered findings as a single-spaced block quotation. OK |
+| 4-6 | Argument text, heading I (bold, wrapped lines hanging), the filer's bold passage kept bold. OK |
+| 7-8 | *Stein* block quotation and its citation. OK |
+| 9 | Heading II, the numbered list (typed "1)" / "2)", set "1." / "2." in both engines: typst's markdown reader keeps no delimiter). ACCEPTED (tier 3) |
+| 10 | Conclusion. The page ends early: the certification, date and signature are kept together and move to page 11. OK |
+| 11 | Rule 24 certification, date, underlined "/s/ Robert Jackson" with the name below and both counsel's lines; the second counsel's "/s/ Dorothy Jaffe" is a plain line, not underlined (contract limit, see Gaps). OK |
+| 12 | Certificate of service on its own page (Rule 6 (b) (2) prior-agreement wording), two recipient blocks, "SO CERTIFIED", signature. OK |
 
 ## What changed
 
@@ -42,4 +43,8 @@ The regenerated same-id overlay pairs ours pages 1-8 with filed pages 4-11, page
 1. Word count (4,200) not computed.
 2. A second signer's conformed signature is not underlined (the contract has one `signer_line`).
 3. The filer's motion and brief are two documents in one PDF; the template renders one document per sample.
-4. docx: **not regenerated** (no `soffice` here); outputs are renders of the old synthetic sample with the old certificate wording. Open docx items as in `../motion-brief/README.md`.
+4. Table of authorities and contents are available (`authorities`, `toc`) but this sample uses neither, as filed.
+
+## Engines (fb-595.68.36)
+
+The template, filter and styles are those of `../motion-brief` (see its README, "Engines"): typst and docx on the shared cross-engine layout model, Times New Roman 14 pt, 32.2 pt body and 16.1 pt single line boxes, `docx/reference.xml` (`base="xengine"`) and `docx/gactapp-motion.lua` on `docx.xengine`; `make-reference.sh`, `render.sh` and `reference.docx` are gone. The docx was Liberation Serif (TNR-EMBEDDED failed) and printed the old synthetic layout.
