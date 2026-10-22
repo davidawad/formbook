@@ -6,23 +6,53 @@
 //   that is not an adversary-proceeding motion), 7012(b) (Fed. R. Civ. P. 12(b) defenses in adversary proceedings).
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; no system font is used (tools/render.sh)
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman, the house standard (docs/FONTS.md), vendored in fonts/; no system font is used (tools/render.sh)
 #let type-size = 12pt                   // convention: 12 point body text (no W.D. Wis. rule found; README.md)
+#let note-size = 10pt                   // footnote text
+#let footer-size = 11pt                 // the page number
 #let page-w = 8.5in                     // 8 1/2 by 11 inch paper (convention; README.md)
 #let page-h = 11in
-#let margin-x = 1in                     // convention: 1 inch side margins
-#let margin-top = 1in
-#let margin-bottom = 1in
-#let text-width = page-w - 2 * margin-x
-#let body-leading = 1.645em             // double-spaced body (convention; no W.D. Wis. rule found): 2 x 1.15 x 12 pt = 27.6 pt baseline pitch, the word-processor "double" line (README.md)
-#let single-leading = 0.5em             // single-spaced caption and signature block
-#let para-indent = 0.5in                // first-line indent of body paragraphs
+#let margin = 1in                       // convention: 1 inch margins
+#let footer-distance = 0.5in            // the page number's line box ends half an inch above the page edge (docx: footer 720)
+#let para-indent = 0.5in                // first-line indent of body paragraphs; a bullet starts here
+#let bullet-box = 0.4in                 // a bullet in a box after the indent: the item's lines hang at 0.9 in
+#let heading-hang = 0.4in               // a level-2 heading's lines after the first hang this far in
+#let title-inset = 0.5in                // the title of the paper is set this far in on both sides
+#let quote-inset = 0.5in                // block quotations: indented on both sides
 #let caption-left = 3.4in               // width of the party column of the caption
+#let caption-gutter = 0.25in
+#let caption-pad = 10pt                 // the party column's text stands this far from its rules (adversary caption)
+#let caption-rule = 0.75pt
+#let designation-right = 0.4in          // a party's designation is set flush right 0.4 in inside the party column
+#let sig-col = 3.4in                    // signature: the date in a 3.4 in column, the firm and signer after it
+#let adv-blank = "____________"         // the clerk's adversary number, when the sample has none
 #let court-name = ("UNITED STATES BANKRUPTCY COURT", "WESTERN DISTRICT OF WISCONSIN")   // Fed. R. Bankr. P. 9004(b)(1)
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; docx/wiwb.lua and docx/reference.xml set the same
+// twips: 20 x pt).
+#let pitch-body = 27.6pt                // double-spaced body (convention; no W.D. Wis. rule found): 2 x 1.15 x 12 pt, the word-processor "double" line (README.md)
+#let pitch-single = 13.8pt              // single spacing: caption, title, headings, block quotations, signature
+#let pitch-note = 11.5pt                // footnote lines: single spacing at 10 pt
+#let note-gap = 6pt                     // between two footnotes
+#let note-clearance = 13.8pt            // the body text to the footnote rule (Word's separator line)
+#let court-gap = 18pt                   // court title to caption
+#let caption-gap = 13.8pt               // a blank single line between the caption's elements (Official Form 416B)
+#let title-gap = 24pt                   // caption to title, title to the body
+#let heading-gap = 13.8pt               // above and below a heading (a blank single line)
+#let quote-gap = 13.8pt                 // above and below a block quotation
+#let sig-above = 39.6pt                 // the last paragraph to the signature block
+#let sig-gap = 18pt                     // the closing to the firm, the firm to "By: /s/"
+#let signer-above = 2.4pt               // "By: /s/" to the signer's lines
+#let designation-gap = 6pt              // adversary caption: a party's names to its designation
+#let versus-gap = 9.6pt                 // adversary caption: above and below "v."
+#let adv-above = 2.4pt                  // adversary caption: "Adversary Case No." below the caption's top
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -35,110 +65,90 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// Inline markdown (for names with *et al.*, etc.).
-#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// Single-spaced stack of lines (caption, signature block).
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => inl(i)))
+/// Inline content without the paragraph breaks cmarker may put around it.
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
 }
 
-/// Page number, centered in the footer. The ECF header is added by the court's system, not here.
-#let footer() = context align(center, text(size: 11pt, counter(page).display()))
+/// Inline markdown (for names with *et al.*, etc.).
+#let inl(s) = unloose(md(s))
+
+/// One single-pitch line (a paragraph of its own), with explicit spaces above and below it.
+#let sline(above: 0pt, below: 0pt, left: 0pt, right: none, centered: false, c) = block(width: 100%, above: above,
+  below: below, {
+    set text(..edges(pitch-single))
+    set align(center) if centered
+    let body = par(first-line-indent: 0pt, if type(c) == str { inl(c) } else { c })
+    if right != none { pad(right: right, align(std.right, body)) } else { pad(left: left, body) }
+  })
 
 // ---------------------------------------------------------------------------
 // Caption (Fed. R. Bankr. P. 9004(b); Fed. R. Bankr. P. 7010 and Official Form 416 for adversary captions)
 // ---------------------------------------------------------------------------
 
-#let court-title() = {
-  align(center, line-stack(court-name.map(l => "**" + l + "**")))
-  v(1.5em)
-}
-
-/// The party column: each side is its names, then its designation; "v." between the sides.
-#let party-column(meta) = {
-  let sides = meta.caption
-  for (i, side) in sides.enumerate() {
-    line-stack(side.names)
-    v(single-leading)
-    block(width: caption-left - 0.4in, align(right, inl(side.designation)))
-    if i < sides.len() - 1 {
-      v(0.8em)
-      align(left, "v.")
-      v(0.8em)
-    }
-  }
-}
-
 /// Caption. A contested matter in the main case (no `caption:` in the frontmatter) follows Official Form 416B
 /// (Caption, Short Title, 12/15): "In re" and the debtor's name with "Debtor" under it at the left; "Case No."
-/// and "Chapter" at the right; no rules. An adversary proceeding keeps the boxed party column with the
-/// adversary number at the right (Fed. R. Bankr. P. 7010). The adversary number is printed only when the
-/// sample gives one; otherwise a blank line for the clerk.
+/// and "Chapter" at the right; no rules; a blank single line between the elements. An adversary proceeding keeps
+/// the ruled party column with the adversary number at the right (Fed. R. Bankr. P. 7010). The adversary number
+/// is printed only when the sample gives one; otherwise a blank for the clerk.
 #let caption(meta) = if "caption" not in meta {
-  grid(
-    columns: (caption-left, 1fr),
-    column-gutter: 0.25in,
-    // One blank single-spaced line between the elements, as Official Form 416B spaces them.
+  block(width: 100%, above: court-gap, below: 0pt, grid(
+    columns: (caption-left, caption-gutter, 1fr),
+    { sline("In re:"); sline(above: caption-gap, meta.debtor); sline(above: caption-gap, left: para-indent, "Debtor.") },
+    [],
     {
-      set par(leading: single-leading, justify: false)
-      set block(spacing: 1.5em)
-      block("In re:")
-      block(inl(meta.debtor))
-      block(pad(left: para-indent, "Debtor."))
+      sline("Case No. " + meta.bankruptcy_case)
+      if "chapter" in meta { sline(above: caption-gap, "Chapter " + meta.chapter) }
     },
-    {
-      set par(leading: single-leading, justify: false)
-      set block(spacing: 1.5em)
-      block("Case No. " + meta.bankruptcy_case)
-      if "chapter" in meta { block("Chapter " + meta.chapter) }
-    },
-  )
+  ))
 } else {
-  grid(
-    columns: (caption-left, 1fr),
-    column-gutter: 0.25in,
-    block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 10pt), {
-      line-stack(("In re:", meta.debtor, "Debtor.", "Case No. " + meta.bankruptcy_case)
-        + if "chapter" in meta { ("Chapter " + meta.chapter,) } else { () })
-      v(1.2em)
-      party-column(meta)
-    }),
-    align(top, {
-      v(0.2em)
-      text(weight: "bold", "Adversary Case No.")
-      h(0.4em)
-      if "adversary_case" in meta and meta.adversary_case != "" {
-        meta.adversary_case
-      } else {
-        box(width: 1.6in, line(length: 1.6in, stroke: 0.5pt))
-      }
-    }),
-  )
+  let left = {
+    for l in ("In re:", meta.debtor, "Debtor.", "Case No. " + meta.bankruptcy_case) { sline(l) }
+    if "chapter" in meta { sline("Chapter " + meta.chapter) }
+    for (i, side) in meta.caption.enumerate() {
+      for (j, n) in side.names.enumerate() { sline(above: if i == 0 and j == 0 { caption-gap } else { 0pt }, n) }
+      sline(above: designation-gap, right: designation-right - caption-pad, side.designation)
+      if i < meta.caption.len() - 1 { sline(above: versus-gap, below: versus-gap, "v.") }
+    }
+  }
+  let n = if "adversary_case" in meta and meta.adversary_case != "" { meta.adversary_case } else { adv-blank }
+  block(width: 100%, above: court-gap, below: 0pt, grid(
+    columns: (caption-left, caption-gutter, 1fr),
+    stroke: (x, y) => if x == 0 { (right: caption-rule, bottom: caption-rule) },
+    inset: (x, y) => if x == 0 { (right: caption-pad, bottom: caption-pad) } else { 0pt },
+    left,
+    [],
+    // the space above the first line of a cell is not collapsed away (Word keeps it): a pad
+    pad(top: adv-above, sline([#text(weight: "bold")[Adversary Case No.] #n])),
+  ))
 }
 
 #let cover(meta) = {
-  court-title()
+  for l in court-name { sline(centered: true, text(weight: "bold", l)) }
   caption(meta)
-  v(2em)
   // Designation of the paper (Fed. R. Bankr. P. 9004(b)(4); Official Form 416B "[Designation of Character of
   // Paper]"): centred, bold capitals, single-spaced so a two-line title reads as one block.
-  align(center, block(width: text-width - 2 * para-indent, {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    text(weight: "bold", upper(meta.title))
-  }))
-  v(2em)
+  block(width: 100%, above: title-gap, below: title-gap, pad(x: title-inset,
+    sline(centered: true, text(weight: "bold", upper(inl(meta.title))))))
 }
 
 // ---------------------------------------------------------------------------
-// Body: headings, paragraphs, lists
+// Body: headings, paragraphs, lists, quotations
 // ---------------------------------------------------------------------------
 
-/// Brief body: each blank-line-separated chunk is one paragraph (first-line indent, not numbered: a brief
-/// is argument, not allegations). Headings are rendered by the show rules below. Markdown ordered lists
-/// become (1), (2), ... for the grounds and (a), (b), ... nowhere else.
-/// Chunks are emitted with parbreak() so that paragraphs do not run together.
+/// A body paragraph on the body pitch.
+#let body-par(sticky: false, first: para-indent, hang: 0pt, c) = block(width: 100%, above: 0pt, below: 0pt,
+  sticky: sticky, par(first-line-indent: (amount: first, all: true), hanging-indent: hang, unloose(c)))
+
+/// Brief body: each blank-line-separated chunk is one paragraph (first-line indent, not numbered by the template:
+/// a brief is argument, not allegations; numbers the drafter typed stay as typed). Headings are rendered by the
+/// show rules below; a "- " chunk is a bulleted item, a "1. " chunk a numbered one; a "> " chunk a quotation.
 #let brief-body(body) = {
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
   // Footnote text is kept apart from the chunks: each chunk is rendered alone, so a chunk gets the
@@ -148,32 +158,33 @@
     notes.insert(m.captures.at(0), m.captures.at(1))
   }
   let chunks = chunks.filter(c => not c.trim().starts-with(regex("^\\[\\^[^\\]]+\\]:")))
+  let item-re = regex("(?m)^(\\d+\\.|[-*+])[ \\t]+")
   for (i, c) in chunks.enumerate() {
     let t = c.trim()
+    let defs = ""
     for r in t.matches(regex("\\[\\^([^\\]]+)\\]")) {
       let id = r.captures.at(0)
-      t = t + "\n\n[^" + id + "]: " + notes.at(id, default: "")
+      defs += "\n\n[^" + id + "]: " + notes.at(id, default: "")
     }
-    parbreak()
-    // The last paragraph is kept on the page with the signature block that follows it, so the signature
-    // never stands alone on a page (the signature block itself does not break).
+    // The last paragraph is kept on the page with the signature block that follows it.
     let last = i == chunks.len() - 1
-    show: it => if last { block(sticky: true, breakable: false, it) } else { it }
     if t.starts-with("#") {
-      cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+      md(t + defs)
     } else if t.starts-with(">") {
       // Block quotation: indented 0.5 inch on both sides, single-spaced, not first-line indented.
-      pad(left: 0.5in, right: 0.5in, {
-        set par(leading: single-leading, spacing: body-leading, first-line-indent: 0pt)
-        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-      })
-    } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
-      set enum(numbering: "1.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-      set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-      cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+      let q = t.replace(regex("(?m)^>[ \\t]?"), "")
+      block(width: 100%, above: quote-gap, below: quote-gap, sticky: last,
+        pad(x: quote-inset, sline(md(q + defs))))
+    } else if t.match(regex("^(\\d+\\.|[-*+])[ \\t]")) != none {
+      let bullet = t.match(regex("^[-*+]")) != none
+      let items = t.split(item-re).map(s => s.trim()).filter(s => s != "")
+      for (k, item) in items.enumerate() {
+        let label = if bullet [•] else [#(k + 1).]
+        body-par(first: 0pt, hang: para-indent + bullet-box, sticky: last and k == items.len() - 1,
+          [#h(para-indent)#box(width: bullet-box, label)#unloose(md(item + defs))])
+      }
     } else {
-      h(para-indent)
-      cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+      body-par(sticky: last, md(t + defs))
     }
   }
 }
@@ -182,30 +193,25 @@
 // Signature block (Fed. R. Bankr. P. 9011): date, firm, /s/ signature, signer, bar number, address, phone
 // ---------------------------------------------------------------------------
 
+/// Single-spaced and kept on one page: the closing (when given) and the firm in a column from `sig-col`; then the
+/// date at the left on the same line as "By: /s/" (docx: a tab and a hanging indent at `sig-col`); then the signer's
+/// lines under the signature.
 #let signature(meta) = {
-  v(2 * body-leading)
-  // Rows: closing and firm in the right column; then the date at the left on the same line as the "By:"
-  // signature line; then the signer's lines under the signature.
-  block(width: text-width, breakable: false, {
-    set par(leading: single-leading, justify: false)
-    grid(
-      columns: (1fr, 3.1in),
-      row-gutter: 1.5em,
-      [],
-      {
-        // The closing line ("Respectfully submitted,") is the filer's choice; it is printed only when given.
-        if "closing" in meta.signature { block(below: 1.5em, meta.signature.closing) }
-        if "firm" in meta.signature { text(weight: "bold", meta.signature.firm) }
-      },
-      if "date" in meta { inl(meta.date) } else { [] },
-      // Electronic signature: "/s/" before the signer's name, as CM/ECF filers type it (Fed. R. Bankr. P.
-      // 9011(a) requires the signature; the "/s/" form is convention, see README.md).
-      {
-        "By: /s/ " + meta.signature.signer
-        v(0.2em)
-        line-stack(meta.signature.lines)
-      },
-    )
+  let sig = meta.signature
+  let lines = ()
+  // The closing line ("Respectfully submitted,") is the filer's choice; it is printed only when given.
+  if "closing" in sig { lines.push((none, sig.closing, 0pt)) }
+  if "firm" in sig { lines.push((none, text(weight: "bold", sig.firm), if lines.len() > 0 { sig-gap } else { 0pt })) }
+  // Electronic signature: "/s/" before the signer's name, as CM/ECF filers type it (Fed. R. Bankr. P. 9011(a)
+  // requires the signature; the "/s/" form is convention, see README.md).
+  lines.push((if "date" in meta { inl(meta.date) }, "By: /s/ " + sig.signer, if lines.len() > 0 { sig-gap } else { 0pt }))
+  for (k, l) in sig.lines.enumerate() { lines.push((none, l, if k == 0 { signer-above } else { 0pt })) }
+  block(width: 100%, breakable: false, above: sig-above, below: 0pt, {
+    set text(..edges(pitch-single))
+    for (lead, l, gap) in lines {
+      block(width: 100%, above: gap, below: 0pt, par(first-line-indent: 0pt, hanging-indent: sig-col,
+        [#box(width: sig-col, lead)#if type(l) == str { inl(l) } else { l }]))
+    }
   })
 }
 
@@ -219,28 +225,37 @@
   // template asserts nothing about heading names.
 
   set page(
-    paper: "us-letter",
-    margin: (top: margin-top, bottom: margin-bottom, left: margin-x, right: margin-x),
-    footer: footer(),
+    width: page-w,
+    height: page-h,
+    margin: margin,
+    // The page number centered at the foot of every page (the ECF header is added by the court's system, not
+    // here), in a single-pitch line box that ends footer-distance above the page edge.
+    footer-descent: margin - footer-distance - pitch-single,
+    footer: context align(center, text(size: footer-size, ..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  // Paragraph gap of body-leading: with the 1.645em leading and a 0.655em line box, paragraphs start at the
-  // same 27.6 pt pitch as lines (see README.md for the measurement method).
-  set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch, footnote marks at 58 %, a section sign kept with its number.
+  show: xengine.with(pitch: pitch-body, list-indent: none)
+  show regex("[§¶]+ \\S+"): it => box(it)
 
-  // Headings are the body size (typst's default heading size is larger; the filed memorandum's are 12 pt).
-  // A heading is single-spaced (a two-line heading reads as one unit) and set off by one double-spaced line
-  // above and below; it is sticky so it never ends a page.
-  show heading.where(level: 1): it => block(width: text-width, above: body-leading, below: body-leading,
-    sticky: true, {
-      set par(leading: single-leading)
-      align(center, text(size: type-size, weight: "bold", upper(it.body)))
-    })
-  show heading.where(level: 2): it => block(width: text-width, above: body-leading, below: body-leading,
-    sticky: true, {
-      set par(leading: single-leading, hanging-indent: 0.4in)
-      text(size: type-size, weight: "bold", it.body)
-    })
+  // Footnotes at 10 pt in single lines, the mark, a space, the text (docx: Footnote Text).
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 2in, stroke: 0.5pt))
+  show footnote.entry: it => {
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    set text(size: note-size, ..edges(pitch-note))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt) // the entry does not inherit the body's leading 0
+    [#super(num) #note.body]
+  }
+
+  // Headings are the body size (the filed memorandum's are 12 pt), single-spaced (a two-line heading reads as one
+  // unit) with a blank single line above and below; sticky so a heading never ends a page.
+  show heading: it => block(width: 100%, above: heading-gap, below: heading-gap, sticky: true, {
+    set text(size: type-size, weight: "bold", ..edges(pitch-single))
+    if it.level == 1 { set par(first-line-indent: 0pt); align(center, upper(it.body)) }
+    else { par(first-line-indent: 0pt, hanging-indent: heading-hang, it.body) }
+  })
 
   cover(meta)
   brief-body(body)
