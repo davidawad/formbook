@@ -12,7 +12,7 @@ caption:
     designation: "Intervenor-Respondents."
     joiner: "and"
 title: "Petition for Accelerated Review"
-right_lines: ["Judgment Entered:", "December 15, 2023", "", "Appealable Order Entered:", "December 13, 2023"]
+right_lines: ["Judgment Entered:", "December 15, 2023", "Appealable Order Entered:", "December 13, 2023"]
 closing: "Respectfully submitted,"
 date: "Dated: December 22, 2023"
 signature:
