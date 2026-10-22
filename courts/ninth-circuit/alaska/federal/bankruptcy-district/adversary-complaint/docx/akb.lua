@@ -29,14 +29,14 @@ local THIN = 'w:val="single" w:sz="4" w:space="0" w:color="000000"'       -- 0.5
 
 local function text(v) return pandoc.utils.stringify(v) end
 
--- A paragraph: o = { before, after, line, left, hanging, first, jc, keep, tab, b }.
+-- A paragraph: o = { before, after, line, left, right, hanging, first, jc, keep, tab }.
 local function p(body, o)
   o = o or {}
   local props = {}
   if o.keep then props[#props + 1] = xe.KEEP end
   if o.tab then props[#props + 1] = '<w:tabs><w:tab w:val="left" w:pos="' .. o.tab .. '"/></w:tabs>' end
   props[#props + 1] = xe.spacing(o.before or 0, o.after or 0, o.line or SINGLE)
-  props[#props + 1] = xe.ind(o.left or 0, o.hanging, not o.hanging and (o.first or 0) or nil)
+  props[#props + 1] = xe.ind(o.left or 0, o.hanging, not o.hanging and (o.first or 0) or nil, o.right)
   props[#props + 1] = xe.jc(o.jc or "left")
   return xe.para(props, body)
 end
@@ -175,7 +175,7 @@ local function body(blocks, out)
       -- LBR 9004-1(a)(4): quotations over fifty words single-spaced and indented
       for k, q in ipairs(b.content) do
         out[#out + 1] = p(xe.inl(q.content), { before = k == 1 and math.max(before, HALF) or 0,
-          after = k == #b.content and HALF or 0, left = INDENT })
+          after = k == #b.content and HALF or 0, left = INDENT, right = INDENT })
       end
     elseif b.t == "OrderedList" or b.t == "BulletList" then
       -- relief items, lettered A., B., ... (typst enum "A."): the letter half an inch in, the text a box after it

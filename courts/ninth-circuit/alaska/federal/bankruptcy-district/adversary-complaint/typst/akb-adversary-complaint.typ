@@ -161,7 +161,7 @@
       block(width: 100%, above: half-gap, below: half-gap, inset: (left: para-indent, right: para-indent), {
         set text(..edges(pitch-single))
         set par(first-line-indent: 0pt)
-        md(t.split(regex("\\r?\\n")).map(l => l.trim-start(">").trim()).join("\n"))
+        md(t.split(regex("\\r?\\n")).map(l => l.trim(">", at: start).trim()).join("\n"))
       })
     } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
       // Relief items are lettered (A., B., ...), as in the filed complaint, at the double pitch.
