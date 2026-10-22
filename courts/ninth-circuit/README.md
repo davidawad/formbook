@@ -38,11 +38,11 @@ Courts under `courts/ninth-circuit` (61).
 | [District Court, E.D. Washington](washington/federal/eastern-district) | `waed` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Washington](washington/federal/western-district) | `wawd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Alaska Court of Appeals](alaska/state/court-of-appeals) | `alaskactapp` | up for review | 1/1 | 1/1 | 1/1 | 14 |
-| [Alaska Supreme Court](alaska/state/supreme-court) | `alaska` | up for review | 6/6 | — | — | 29 |
+| [Alaska Supreme Court](alaska/state/supreme-court) | `alaska` | up for review | 6/6 | 5/5 | 3/3 | 29 |
 | [High Court of American Samoa](american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |
 | [Arizona Court of Appeals](arizona/state/court-of-appeals) | `arizctapp` | in progress | 7/7 | — | — | 14 |
 | [Arizona Supreme Court](arizona/state/supreme-court) | `ariz` | up for review | 9/9 | — | — | 29 |
-| [California Court of Appeal, Fifth Appellate District](california/state/court-of-appeal-fifth-district) | `calctapp5d` | up for review | 6/6 | — | — | 29 |
+| [California Court of Appeal, Fifth Appellate District](california/state/court-of-appeal-fifth-district) | `calctapp5d` | up for review | 6/6 | 1/1 | 1/1 | 29 |
 | [California Court of Appeal, First Appellate District](california/state/court-of-appeal-first-district) | `calctapp1d` | up for review | 7/7 | — | — | 29 |
 | [California Court of Appeal, Fourth Appellate District](california/state/court-of-appeal-fourth-district) | `calctapp4d` | up for review | 5/5 | — | — | 29 |
 | [California Court of Appeal, Second Appellate District](california/state/court-of-appeal-second-district) | `calctapp2d` | up for review | 5/5 | — | — | 29 |

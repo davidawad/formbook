@@ -7,7 +7,7 @@ Courts under `courts/eighth-circuit/minnesota` (4).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Minnesota](federal/bankruptcy-district) | `mnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Minnesota](federal/district) | `mnd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Appeals of Minnesota](state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 1/1 | 1/1 | 29 |
+| [Court of Appeals of Minnesota](state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
 | [Supreme Court of Minnesota](state/supreme-court) | `minn` | up for review | 8/8 | — | — | 29 |
 
 [Formbook index](../../../README.md)

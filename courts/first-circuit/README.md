@@ -17,7 +17,7 @@ Courts under `courts/first-circuit` (20).
 | [District Court, D. Puerto Rico](puerto-rico/federal/district) | `prd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Rhode Island](rhode-island/federal/bankruptcy-district) | `rib` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Rhode Island](rhode-island/federal/district) | `rid` | up for review | 2/2 | — | 2/2 | 14 |
-| [Supreme Judicial Court of Maine](maine/state/supreme-judicial-court) | `me` | up for review | 8/8 | 1/1 | 1/1 | 29 |
+| [Supreme Judicial Court of Maine](maine/state/supreme-judicial-court) | `me` | up for review | 8/8 | 8/8 | 8/8 | 29 |
 | [Massachusetts Appeals Court](massachusetts/state/appeals-court) | `massappct` | up for review | 5/5 | — | — | 29 |
 | [Massachusetts District Court, Appellate Division](massachusetts/state/district-court-appellate-division) | `massdistctapp` | in progress | — | — | — | 14 |
 | [Massachusetts Supreme Judicial Court](massachusetts/state/supreme-judicial-court) | `mass` | in progress | 9/9 | — | — | 14 |

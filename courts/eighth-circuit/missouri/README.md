@@ -13,7 +13,7 @@ Courts under `courts/eighth-circuit/missouri` (9).
 | [Missouri Court of Appeals, Eastern District](state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | — | — | 29 |
 | [Missouri Court of Appeals, Southern District](state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Missouri Court of Appeals, Western District](state/court-of-appeals-western-district) | `moctappwd` | up for review | 5/5 | — | — | 29 |
-| [Supreme Court of Missouri](state/supreme-court) | `mo` | up for review | 6/6 | — | — | 29 |
+| [Supreme Court of Missouri](state/supreme-court) | `mo` | up for review | 6/6 | 4/4 | 4/4 | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

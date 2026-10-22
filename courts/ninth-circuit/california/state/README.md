@@ -5,7 +5,7 @@ Courts under `courts/ninth-circuit/california/state` (11).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [California Court of Appeal, Fifth Appellate District](court-of-appeal-fifth-district) | `calctapp5d` | up for review | 6/6 | — | — | 29 |
+| [California Court of Appeal, Fifth Appellate District](court-of-appeal-fifth-district) | `calctapp5d` | up for review | 6/6 | 1/1 | 1/1 | 29 |
 | [California Court of Appeal, First Appellate District](court-of-appeal-first-district) | `calctapp1d` | up for review | 7/7 | — | — | 29 |
 | [California Court of Appeal, Fourth Appellate District](court-of-appeal-fourth-district) | `calctapp4d` | up for review | 5/5 | — | — | 29 |
 | [California Court of Appeal, Second Appellate District](court-of-appeal-second-district) | `calctapp2d` | up for review | 5/5 | — | — | 29 |
