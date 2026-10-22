@@ -94,6 +94,7 @@ local function convert_list(el)
     if a.style == "LowerAlpha" then m = string.char(96 + n)
     elseif a.style == "UpperAlpha" then m = string.char(64 + n)
     elseif a.style == "LowerRoman" then m = ROMAN[n] or tostring(n)
+    elseif a.style == "UpperRoman" then m = (ROMAN[n] or tostring(n)):upper()
     else m = tostring(n) end
     local label
     if a.delimiter == "TwoParens" then label = "(" .. m .. ")"
@@ -105,6 +106,8 @@ local function convert_list(el)
       for _, x in ipairs(first.content) do inl[#inl + 1] = x end
       out[#out + 1] = pandoc.Para(inl)
       for j = 2, #item do out[#out + 1] = item[j] end
+    elseif first == nil then
+      out[#out + 1] = pandoc.Para({ pandoc.Str(label) })   -- a label alone on its line ("I.")
     else
       for _, b in ipairs(item) do out[#out + 1] = b end
     end
