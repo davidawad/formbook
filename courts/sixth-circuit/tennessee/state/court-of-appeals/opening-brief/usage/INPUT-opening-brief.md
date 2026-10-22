@@ -23,64 +23,64 @@ signature:
   lines: ["REPORTERS COMMITTEE FOR FREEDOM OF THE PRESS", "6688 Nolensville Rd., Suite 108-20", "Brentwood, TN 37027", "Phone: 615.823.3633", "Facsimile: 202.795.9310", "pmcadoo@rcfp.org", "*Counsel for Petitioner-Appellant*"]
 service:
   date: "June 9, 2023"
-  method: "served through the court’s e-filing system on:"
+  method: "through the court’s e-filing system"
   recipients:
     - ["Michael Stahl, BPR No. 032381", "P.O. Box 20207", "Nashville, TN 37202", "Tel: (615) 253-5463", "Michael.Stahl@ag.tn.gov"]
 authorities:
   - heading: "Cases"
     entries:
-      - {cite: "*Appman v. Worthington*, 746 S.W.2d 165 (Tenn. 1987)", find: ["Appman"]}
-      - {cite: "*Ark. Dep’t of Health v. Westark Christian Action Council*, 910 S.W.2d 199 (Ark. 1995)", find: ["Westark"]}
-      - {cite: "*Arnold v. City of Chattanooga*, 19 S.W.3d 779 (Tenn. Ct. App. 1999)", find: ["Arnold v. City"]}
-      - {cite: "*Arnwine v. Union Cnty. Bd. of Educ.*, 120 S.W.3d 804 (Tenn. 2003)", find: ["Arnwine"]}
-      - {cite: "*Clarke v. City of Memphis*, 473 S.W.3d 285 (Tenn. Ct. App. 2015)", find: ["Clarke"]}
-      - {cite: "*Eng. Mountain Spring Water Co. v. Chumley*, 196 S.W.3d 144 (Tenn. Ct. App. 2005)", find: ["Chumley"]}
-      - {cite: "*Friedmann v. Marshall Cnty.*, 471 S.W.3d 427 (Tenn. Ct. App. 2015)", find: ["Friedmann"]}
-      - {cite: "*Gleaves v. Checker Cab Transit Corp.*, 15 S.W.3d 799 (Tenn. 2000)", find: ["Gleaves"]}
-      - {cite: "*Graham v. Caples*, 325 S.W.3d 578 (Tenn. 2010)", find: ["Graham v. Caples"]}
-      - {cite: "*Green v. Green*, 293 S.W.3d 493 (Tenn. 2009)", find: ["Green v. Green"]}
-      - {cite: "*Grove Fresh Distribs., Inc. v. Everfresh Juice Co.*, 24 F.3d 893 (7th Cir. 1994)", find: ["Grove Fresh"]}
-      - {cite: "*Hawks v. City of Westmoreland*, 960 S.W.2d 10 (Tenn. 1997)", find: ["Hawks"]}
-      - {cite: "*Henry v. White*, 250 S.W.2d 70 (Tenn. 1952)", find: ["Henry v. White"]}
-      - {cite: "*In re Kaliyah S.*, 455 S.W.3d 533 (Tenn. 2015)", find: ["Kaliyah"]}
-      - {cite: "*In re Recs. of Dep’t of Child. & Fam. Servs.*, 873 So. 2d 506 (Fla. Dist. Ct. App. 2004)", find: ["In re Recs."]}
-      - {cite: "*Lightbourne v. McCollum*, 969 So. 2d 326 (Fla. 2007)", find: ["Lightbourne"]}
-      - {cite: "*Lind v. Beaman Dodge, Inc.*, 356 S.W.3d 889 (Tenn. 2011)", find: ["Lind v. Beaman"]}
-      - {cite: "*Memphis Publ’g Co. v. Cherokee Child. & Fam. Servs., Inc.*, 87 S.W.3d 67 (Tenn. 2002)", find: ["Cherokee Child."]}
-      - {cite: "*Memphis Publ’g Co. v. Holt*, 710 S.W.2d 513 (Tenn. 1986)", find: ["Holt"]}
-      - {cite: "*Memphis Publ’g Co. v. City of Memphis*, 871 S.W.2d 681 (Tenn. 1994)", find: ["Publ’g Co. v. City of Memphis"]}
-      - {cite: "*Schneider v. City of Jackson*, 226 S.W.3d 332 (Tenn. 2007)", find: ["Schneider"]}
-      - {cite: "*State ex rel. Miami Herald Publ’g Co. v. McIntosh*, 340 So. 2d 904 (Fla. 1976)", find: ["McIntosh"]}
-      - {cite: "*State v. Williams*, 690 S.W.2d 517 (Tenn. 1985)", find: ["State v. Williams"]}
-      - {cite: "*Swickard v. Wayne Cnty. Med. Exam’r*, 475 N.W.2d 304 (Mich. 1991)", find: ["Swickard"]}
-      - {cite: "*Young v. Frist Cardiology, PLLC*, 599 S.W.3d 568 (Tenn. 2020)", find: ["Young v. Frist"]}
-      - {cite: "*The Tennessean v. Tennessee Department of Children’s Services*, No. 12-1769-II (Davidson Cnty. Chancery Ct. filed Jan. 23, 2013)", find: ["The Tennessean"]}
+      - {cite: "*Appman v. Worthington*, 746 S.W.2d 165 (Tenn. 1987)", find: "Appman"}
+      - {cite: "*Ark. Dep’t of Health v. Westark Christian Action Council*, 910 S.W.2d 199 (Ark. 1995)", find: "Westark"}
+      - {cite: "*Arnold v. City of Chattanooga*, 19 S.W.3d 779 (Tenn. Ct. App. 1999)", find: "Arnold v. City"}
+      - {cite: "*Arnwine v. Union Cnty. Bd. of Educ.*, 120 S.W.3d 804 (Tenn. 2003)", find: "Arnwine"}
+      - {cite: "*Clarke v. City of Memphis*, 473 S.W.3d 285 (Tenn. Ct. App. 2015)", find: "Clarke"}
+      - {cite: "*Eng. Mountain Spring Water Co. v. Chumley*, 196 S.W.3d 144 (Tenn. Ct. App. 2005)", find: "Chumley"}
+      - {cite: "*Friedmann v. Marshall Cnty.*, 471 S.W.3d 427 (Tenn. Ct. App. 2015)", find: "Friedmann"}
+      - {cite: "*Gleaves v. Checker Cab Transit Corp.*, 15 S.W.3d 799 (Tenn. 2000)", find: "Gleaves"}
+      - {cite: "*Graham v. Caples*, 325 S.W.3d 578 (Tenn. 2010)", find: "Graham v. Caples"}
+      - {cite: "*Green v. Green*, 293 S.W.3d 493 (Tenn. 2009)", find: "Green v. Green"}
+      - {cite: "*Grove Fresh Distribs., Inc. v. Everfresh Juice Co.*, 24 F.3d 893 (7th Cir. 1994)", find: "Grove Fresh"}
+      - {cite: "*Hawks v. City of Westmoreland*, 960 S.W.2d 10 (Tenn. 1997)", find: "Hawks"}
+      - {cite: "*Henry v. White*, 250 S.W.2d 70 (Tenn. 1952)", find: "Henry v. White"}
+      - {cite: "*In re Kaliyah S.*, 455 S.W.3d 533 (Tenn. 2015)", find: "Kaliyah"}
+      - {cite: "*In re Recs. of Dep’t of Child. & Fam. Servs.*, 873 So. 2d 506 (Fla. Dist. Ct. App. 2004)", find: "In re Recs."}
+      - {cite: "*Lightbourne v. McCollum*, 969 So. 2d 326 (Fla. 2007)", find: "Lightbourne"}
+      - {cite: "*Lind v. Beaman Dodge, Inc.*, 356 S.W.3d 889 (Tenn. 2011)", find: "Lind v. Beaman"}
+      - {cite: "*Memphis Publ’g Co. v. Cherokee Child. & Fam. Servs., Inc.*, 87 S.W.3d 67 (Tenn. 2002)", find: "Cherokee Child."}
+      - {cite: "*Memphis Publ’g Co. v. Holt*, 710 S.W.2d 513 (Tenn. 1986)", find: "Holt"}
+      - {cite: "*Memphis Publ’g Co. v. City of Memphis*, 871 S.W.2d 681 (Tenn. 1994)", find: "Publ’g Co. v. City of Memphis"}
+      - {cite: "*Schneider v. City of Jackson*, 226 S.W.3d 332 (Tenn. 2007)", find: "Schneider"}
+      - {cite: "*State ex rel. Miami Herald Publ’g Co. v. McIntosh*, 340 So. 2d 904 (Fla. 1976)", find: "McIntosh"}
+      - {cite: "*State v. Williams*, 690 S.W.2d 517 (Tenn. 1985)", find: "State v. Williams"}
+      - {cite: "*Swickard v. Wayne Cnty. Med. Exam’r*, 475 N.W.2d 304 (Mich. 1991)", find: "Swickard"}
+      - {cite: "*Young v. Frist Cardiology, PLLC*, 599 S.W.3d 568 (Tenn. 2020)", find: "Young v. Frist"}
+      - {cite: "*The Tennessean v. Tennessee Department of Children’s Services*, No. 12-1769-II (Davidson Cnty. Chancery Ct. filed Jan. 23, 2013)", find: "The Tennessean"}
   - heading: "Statutes"
     entries:
-      - {cite: "2014 Tenn. Laws Pub. Ch. 771 (H.B. 1505)", find: ["Pub. Ch. 771"]}
-      - {cite: "42 U.S.C. § 5106a", find: ["5106a"]}
-      - {cite: "Tenn. Code Ann. § 1-3-121", find: ["1-3-121"]}
-      - {cite: "Tenn. Code Ann. § 10-7-503", find: ["10-7-503"]}
-      - {cite: "Tenn. Code Ann. § 10-7-505", find: ["10-7-505"]}
-      - {cite: "Tenn. Code Ann. § 37-1-409", find: ["37-1-409"]}
-      - {cite: "Tenn. Code Ann. § 37-1-612", find: ["37-1-612"]}
-      - {cite: "Tenn. Code Ann. § 37-5-107", find: ["37-5-107"], passim: true}
-      - {cite: "Tenn. Code Ann. § 37-5-124", find: ["37-5-124"]}
-      - {cite: "Tenn. Code Ann. § 67-5-2201", find: ["67-5-2201"]}
+      - {cite: "2014 Tenn. Laws Pub. Ch. 771 (H.B. 1505)", find: "Pub. Ch. 771"}
+      - {cite: "42 U.S.C. § 5106a", find: "5106a"}
+      - {cite: "Tenn. Code Ann. § 1-3-121", find: "1-3-121"}
+      - {cite: "Tenn. Code Ann. § 10-7-503", find: "10-7-503"}
+      - {cite: "Tenn. Code Ann. § 10-7-505", find: "10-7-505"}
+      - {cite: "Tenn. Code Ann. § 37-1-409", find: "37-1-409"}
+      - {cite: "Tenn. Code Ann. § 37-1-612", find: "37-1-612"}
+      - {cite: "Tenn. Code Ann. § 37-5-107", pages: "passim"}
+      - {cite: "Tenn. Code Ann. § 37-5-124", find: "37-5-124"}
+      - {cite: "Tenn. Code Ann. § 67-5-2201", find: "67-5-2201"}
   - heading: "Other Authorities"
     entries:
-      - {cite: "*Child Welfare Policy Manual*, U.S. Dep’t of Health & Hum. Servs., § 2.1A.4, Question/Answer 8 (Sept. 2012)", find: ["Child Welfare Policy Manual"]}
-      - {cite: "*Full*, Am. Heritage Dictionary Eng. Language (5th ed. 2022)", find: ["Am. Heritage"]}
-      - {cite: "*Full*, Merriam-Webster", find: ["Merriam-Webster"]}
-      - {cite: "H.R. Rep. No. 104-430 (1995) (Conf. Rep.)", find: ["H.R. Rep."]}
-      - {cite: "*Pertinent*, Black’s Law Dictionary (11th ed. 2019)", find: ["Black’s Law Dictionary"]}
+      - {cite: "*Child Welfare Policy Manual*, U.S. Dep’t of Health & Hum. Servs., § 2.1A.4, Question/Answer 8 (Sept. 2012)", find: "Child Welfare Policy Manual"}
+      - {cite: "*Full*, Am. Heritage Dictionary Eng. Language (5th ed. 2022)", find: "Am. Heritage"}
+      - {cite: "*Full*, Merriam-Webster", find: "Merriam-Webster"}
+      - {cite: "H.R. Rep. No. 104-430 (1995) (Conf. Rep.)", find: "H.R. Rep."}
+      - {cite: "*Pertinent*, Black’s Law Dictionary (11th ed. 2019)", find: "Black’s Law Dictionary"}
   - heading: "Rules"
     entries:
-      - {cite: "Tenn. R. App. P. 4", find: ["Tenn. R. App. P. 4"]}
-      - {cite: "Tenn. R. Civ. P. 54.02", find: ["54.02"]}
-      - {cite: "Tenn. R. Civ. P. 59.04", find: ["59.04"]}
-      - {cite: "Tenn. R. Crim. P. 1", find: ["Crim. P. 1(a)"]}
-      - {cite: "Tenn. R. Crim. P. 16", find: ["Crim. P. 16"], passim: true}
+      - {cite: "Tenn. R. App. P. 4", find: "Tenn. R. App. P. 4"}
+      - {cite: "Tenn. R. Civ. P. 54.02", find: "54.02"}
+      - {cite: "Tenn. R. Civ. P. 59.04", find: "59.04"}
+      - {cite: "Tenn. R. Crim. P. 1", find: "Crim. P. 1(a)"}
+      - {cite: "Tenn. R. Crim. P. 16", pages: "passim"}
 ---
 
 # STATEMENT OF THE ISSUES PRESENTED FOR REVIEW
