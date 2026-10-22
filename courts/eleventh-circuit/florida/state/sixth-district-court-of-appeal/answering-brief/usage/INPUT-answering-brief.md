@@ -71,9 +71,9 @@ LaBelle Homes was the successful purchaser at the August 8, 2024 tax-deed sale a
 
 Accordingly, LaBelle Homes does not undertake in this Brief to defend every act or argument attributable to either governmental Appellee. The question as it relates to LaBelle Homes is narrower: whether M.K.E. has demonstrated reversible error requiring invalidation of the tax deed and reversal of the judgment quieting fee simple title in LaBelle Homes. It has not.
 
-M.K.E.'s appeal rests principally on the assertion that it changed its legally operative tax-mailing address from 2933 S.W. 14th Street in Miami to 510 Brittany Lane in LaBelle before the tax-deed proceeding and that the Property Appraiser confirmed that change. The objective record does not establish that proposition. Rather, the record distinguishes between the Property's physical or situs address, 1110 Norge Court, and M.K.E.'s owner mailing address as shown on the tax roll, which remained 2933 S.W. 14th Street, Miami, Florida.
+M.K.E.’s appeal rests principally on the assertion that it changed its legally operative tax-mailing address from 2933 S.W. 14th Street in Miami to 510 Brittany Lane in LaBelle before the tax-deed proceeding and that the Property Appraiser confirmed that change. The objective record does not establish that proposition. Rather, the record distinguishes between the Property's physical or situs address, 1110 Norge Court, and M.K.E.’s owner mailing address as shown on the tax roll, which remained 2933 S.W. 14th Street, Miami, Florida.
 
-That distinction defeats M.K.E.'s effort to bring this case within *Vosilla v. Rosado*, 944 So. 2d 289 (Fla. 2006). *Vosilla* involved express change-of-address communications for tax-related purposes and additional notice that the old address was no longer effective. This case involves E911 materials[^1] requesting and verifying a new locatable address for the parcel, other public records containing Brittany Lane, and a statutory tax-deed file that continued to identify Miami as M.K.E.'s owner mailing address.
+That distinction defeats M.K.E.’s effort to bring this case within *Vosilla v. Rosado*, 944 So. 2d 289 (Fla. 2006). *Vosilla* involved express change-of-address communications for tax-related purposes and additional notice that the old address was no longer effective. This case involves E911 materials[^1] requesting and verifying a new locatable address for the parcel, other public records containing Brittany Lane, and a statutory tax-deed file that continued to identify Miami as M.K.E.’s owner mailing address.
 
 The trial court correctly entered summary judgment, upheld the tax deed, and quieted title in LaBelle Homes. The judgment should be affirmed.
 
@@ -81,25 +81,25 @@ The trial court correctly entered summary judgment, upheld the tax deed, and qui
 
 ### M.K.E. acquired the Property using the Miami mailing address.
 
-M.K.E. acquired the subject property in July 2021 by General Warranty Deed. The deed identified M.K.E.'s mailing address as 2933 S.W. 14th Street, Miami, Florida 33145. (R. 2749). M.K.E. acknowledges that Miami was its correct mailing address when it acquired the Property. (R. 2748–2749).
+M.K.E. acquired the subject property in July 2021 by General Warranty Deed. The deed identified M.K.E.’s mailing address as 2933 S.W. 14th Street, Miami, Florida 33145. (R. 2749). M.K.E. acknowledges that Miami was its correct mailing address when it acquired the Property. (R. 2748–2749).
 
 M.K.E. later began using 510 Brittany Lane, LaBelle, Florida 33935 as its business and corporate mailing address, including in filings with the Florida Division of Corporations. (R. 2748–2750). But a corporate mailing address appearing in other records is not the same thing as the owner mailing address shown on the tax roll for purposes of a Chapter 197 tax-deed proceeding.
 
-The distinction between M.K.E.'s corporate or business mailing address and the owner mailing address appearing in the records governing the tax-deed process is central to this appeal.
+The distinction between M.K.E.’s corporate or business mailing address and the owner mailing address appearing in the records governing the tax-deed process is central to this appeal.
 
-### The E911 applications sought a new locatable address for the Property, not a change of M.K.E.'s owner-mailing address on the tax roll.
+### The E911 applications sought a new locatable address for the Property, not a change of M.K.E.’s owner-mailing address on the tax roll.
 
-M.K.E. places substantial emphasis on E911 materials from 2022 and 2023. (M.K.E.'s Second Initial Br. 5–7, 21–28). Those materials show that county personnel received documents identifying Brittany Lane as an address associated with M.K.E. They do not, however, establish the proposition on which M.K.E.'s appeal depends, that M.K.E. requested and obtained a change to the owner-mailing-address field of the tax assessment roll.
+M.K.E. places substantial emphasis on E911 materials from 2022 and 2023. (M.K.E.’s Second Initial Br. 5–7, 21–28). Those materials show that county personnel received documents identifying Brittany Lane as an address associated with M.K.E. They do not, however, establish the proposition on which M.K.E.’s appeal depends, that M.K.E. requested and obtained a change to the owner-mailing-address field of the tax assessment roll.
 
 The September 16, 2022, E911 Address Application identifies the parcel owner as M.K.E. Homes and lists 510 Brittany Lane in a separate "Mailing Address" field. (R. 2748–2750). But the governmental action selected on the form is significant. The form provided options for "New Address," "Address Verification," and "Request Address Change." M.K.E. selected "New Address." It did not select "Request Address Change". *Id.*
 
 The governmental action that followed confirms the nature of the request. The E911 process assigned the parcel a locatable street address: 1110 Norge Court, LaBelle, Florida 33935. County correspondence described the E911 program as a system for assigning new locatable street addresses to assist in locating property, including for emergency-response purposes. (R. 2748–2751).
 
-M.K.E. relies heavily on Property Appraiser employee Trish Coleman's October 3, 2022, response that the "parcel has been updated as requested." (R. 2750–2751). But the statement must be read in context. The communication identified the parcel and 1110 Norge Court. It did not say that M.K.E.'s tax-mailing address had been changed to Brittany Lane. It did not say that the owner-mailing-address field of the assessment roll had been amended. It did not say that Miami had been removed. And it did not say that future tax-deed notices should be mailed to Brittany Lane.
+M.K.E. relies heavily on Property Appraiser employee Trish Coleman's October 3, 2022, response that the "parcel has been updated as requested." (R. 2750–2751). But the statement must be read in context. The communication identified the parcel and 1110 Norge Court. It did not say that M.K.E.’s tax-mailing address had been changed to Brittany Lane. It did not say that the owner-mailing-address field of the assessment roll had been amended. It did not say that Miami had been removed. And it did not say that future tax-deed notices should be mailed to Brittany Lane.
 
-Subsequent E911 correspondence likewise concerned verification of 1110 Norge Court as the Property's locatable address. (R. 2748–2751). Thus, the E911 evidence establishes that 1110 Norge Court became the Property's physical or site address. It does not establish that 510 Brittany Lane replaced Miami as M.K.E.'s owner mailing address on the assessment roll.
+Subsequent E911 correspondence likewise concerned verification of 1110 Norge Court as the Property's locatable address. (R. 2748–2751). Thus, the E911 evidence establishes that 1110 Norge Court became the Property's physical or site address. It does not establish that 510 Brittany Lane replaced Miami as M.K.E.’s owner mailing address on the assessment roll.
 
-### The contemporaneous tax-deed records continued to identify Miami as M.K.E.'s owner mailing address.
+### The contemporaneous tax-deed records continued to identify Miami as M.K.E.’s owner mailing address.
 
 The distinction between site address and owner mailing address is confirmed by the records generated when the tax-deed proceeding actually commenced.
 
@@ -121,11 +121,11 @@ and:
 >
 > LaBelle, Florida.
 
-(R. 2765–2766). The same report identified M.K.E.'s titleholder address of record as the Miami address appearing on the General Warranty Deed. *Id.*
+(R. 2765–2766). The same report identified M.K.E.’s titleholder address of record as the Miami address appearing on the General Warranty Deed. *Id.*
 
-Thus, the April 2024 report is contemporaneous evidence that the records actually used in the tax-deed process distinguished between the two concepts M.K.E.'s Second Initial Brief conflates: 1110 Norge Court was identified as the site address, while Miami was identified as M.K.E.'s owner mailing address as shown on the tax roll.
+Thus, the April 2024 report is contemporaneous evidence that the records actually used in the tax-deed process distinguished between the two concepts M.K.E.’s Second Initial Brief conflates: 1110 Norge Court was identified as the site address, while Miami was identified as M.K.E.’s owner mailing address as shown on the tax roll.
 
-On May 10, 2024, the Tax Collector certified the tax-deed application and provided the Clerk with M.K.E.'s Miami address. (R. 2755, 2765–2766, 2786). The trial court found that the address was consistent with both the vesting deed and the most recent certified tax roll. (R. 3372–3386).
+On May 10, 2024, the Tax Collector certified the tax-deed application and provided the Clerk with M.K.E.’s Miami address. (R. 2755, 2765–2766, 2786). The trial court found that the address was consistent with both the vesting deed and the most recent certified tax roll. (R. 3372–3386).
 
 ### Other public records containing Brittany Lane did not change the owner address on the certified roll.
 
@@ -133,7 +133,7 @@ M.K.E. also relies on its Florida Division of Corporations filings and an April 
 
 A Notice of Commencement is not the record of conveyance vesting legal title in M.K.E., and an address appearing on an unrelated recorded instrument does not itself amend the legal titleholder's mailing address on the assessment roll.
 
-M.K.E. additionally emphasizes that the Tax Collector's vendor identified the Notice of Commencement and other records containing Brittany Lane during its searches. (R. 2770, 3498, 3410–3411). But the contemporaneous Property Information Report used in the tax-deed process expressly identified Miami as M.K.E.'s "Mailing Address as Shown on Tax Roll." (R. 2765–2766).
+M.K.E. additionally emphasizes that the Tax Collector's vendor identified the Notice of Commencement and other records containing Brittany Lane during its searches. (R. 2770, 3498, 3410–3411). But the contemporaneous Property Information Report used in the tax-deed process expressly identified Miami as M.K.E.’s "Mailing Address as Shown on Tax Roll." (R. 2765–2766).
 
 The mere appearance of another address in another governmental record does not transform that address into the legal titleholder's mailing address prescribed by section 197.502(4)(a), Florida Statutes. Nor does it render LaBelle Homes' tax deed invalid.
 
@@ -157,13 +157,13 @@ Following a hearing, the trial court entered its Order Granting Defendants' Moti
 
 The trial court further found the tax deed valid and, on that basis, held that the deed conveyed the statutory title provided by section 197.552, Florida Statutes, and quieted fee simple title in LaBelle Homes. (R. 3372–3386).
 
-M.K.E.'s motion for rehearing was denied on February 18, 2026. (R. 3435–3436). This appeal followed.
+M.K.E.’s motion for rehearing was denied on February 18, 2026. (R. 3435–3436). This appeal followed.
 
 # SUMMARY OF ARGUMENT
 
 The judgment should be affirmed for five principal reasons.
 
-First, M.K.E.'s argument begins with a factual proposition the objective record does not support. M.K.E. contends that its E911 submissions changed its owner mailing address on the tax assessment roll to 510 Brittany Lane. But the E911 materials show an application for a "New Address" for the Property, ultimately resulting in assignment and verification of 1110 Norge Court. The later, contemporaneous Property Information Report expressly distinguishes that site address from M.K.E.'s mailing address as shown on the tax roll, which remained Miami.
+First, M.K.E.’s argument begins with a factual proposition the objective record does not support. M.K.E. contends that its E911 submissions changed its owner mailing address on the tax assessment roll to 510 Brittany Lane. But the E911 materials show an application for a "New Address" for the Property, ultimately resulting in assignment and verification of 1110 Norge Court. The later, contemporaneous Property Information Report expressly distinguishes that site address from M.K.E.’s mailing address as shown on the tax roll, which remained Miami.
 
 Second, Chapter 197 prescribed the address sources governing the tax-deed process. Section 197.502(4)(a) directs the Tax Collector to identify the legal titleholder using the record of conveyance or, where applicable, the latest assessment roll. Section 197.522(3) expressly permits the Clerk to rely on addresses provided by the Tax Collector based on the certified tax roll and property information reports and states that the Clerk has no independent duty to investigate the validity of those addresses. The current statutory framework does not require the Clerk to treat every address appearing in every governmental record as a competing tax-notice address.
 
@@ -187,7 +187,7 @@ Likewise, whether undisputed material facts satisfy constitutional due process p
 
 ## M.K.E.'S APPEAL DEPENDS UPON A FACTUAL PREMISE THE RECORD DOES NOT ESTABLISH: BRITTANY LANE DID NOT REPLACE MIAMI AS M.K.E.'S OWNER MAILING ADDRESS ON THE OPERATIVE TAX ROLL.
 
-M.K.E.'s Second Initial Brief repeatedly asserts that the Property Appraiser changed M.K.E.'s owner mailing address on the assessment roll from Miami to Brittany Lane. *See* M.K.E.'s Second Initial Br. 5–7, 21–28.
+M.K.E.’s Second Initial Brief repeatedly asserts that the Property Appraiser changed M.K.E.’s owner mailing address on the assessment roll from Miami to Brittany Lane. *See* M.K.E.’s Second Initial Br. 5–7, 21–28.
 
 The assertion is central because M.K.E. recognizes that *Vosilla* involved a taxing authority that had actually received a titleholder's change of address but nevertheless sent tax-sale notice to the superseded address.
 
@@ -201,11 +201,11 @@ But the requested governmental action appears immediately above it. The form pro
 
 The ensuing governmental action confirms what was requested. Glades County assigned the parcel a new locatable street address: 1110 Norge Court.
 
-Thus, M.K.E.'s form disclosed Brittany Lane as contact information for the parcel owner, but the governmental task requested on the E911 form was the creation of a new locatable address for the parcel.
+Thus, M.K.E.’s form disclosed Brittany Lane as contact information for the parcel owner, but the governmental task requested on the E911 form was the creation of a new locatable address for the parcel.
 
 The form's content likewise points to a site- or locatable-address function: it called for an engineered site plan and driveway-to-boundary measurements. (R. 2748–2750). That content reinforces the objective distinction between an E911 locatable-address application and an instruction to change the owner mailing address used for tax notices.
 
-That is not the same thing as changing M.K.E.'s owner mailing address on the tax roll for purposes of tax-deed notice.
+That is not the same thing as changing M.K.E.’s owner mailing address on the tax roll for purposes of tax-deed notice.
 
 ### The Property Appraiser's response confirms a parcel-address update, not a tax-mailing-address change.
 
@@ -213,30 +213,30 @@ M.K.E. relies heavily upon Trish Coleman's October 3, 2022, email stating that t
 
 But the complete communication matters. Coleman referred to the parcel and identified 1110 Norge Court. *Id.* She did not state that:
 
-- M.K.E.'s tax-mailing address had been changed to Brittany Lane;
+- M.K.E.’s tax-mailing address had been changed to Brittany Lane;
 - the owner-mailing-address field of the assessment roll had been amended;
 - Miami had been removed; or
 - future tax-deed notices should be mailed to Brittany Lane.
 
 The only update shown by the E911 materials is the update requested through the E911 process: assignment and verification of the Property's locatable address.
 
-The October 2022 email therefore does not establish the key factual premise of M.K.E.'s due-process argument.
+The October 2022 email therefore does not establish the key factual premise of M.K.E.’s due-process argument.
 
 ### The April 2024 tax-deed records provide contemporaneous evidence that Miami remained the owner mailing address shown on the tax roll.
 
 The contemporaneous tax-deed records show which address information was actually used when the tax-deed process began.
 
-The Property Information Report obtained in April 2024 separately identified M.K.E.'s owner mailing address "as shown on tax roll" as the Miami address and the Property's site address as 1110 Norge Court. (R. 2765–2766).
+The Property Information Report obtained in April 2024 separately identified M.K.E.’s owner mailing address "as shown on tax roll" as the Miami address and the Property's site address as 1110 Norge Court. (R. 2765–2766).
 
 The report is not offered as dispositive proof of the accuracy of its own preparation. It is contemporaneous evidence that the records actually used in the tax-deed process continued to distinguish 1110 Norge Court as the site address from Miami as the owner mailing address shown on the tax roll. *Id.*
 
 On May 10, 2024, the Tax Collector certified the tax-deed application and transmitted the Miami address to the Clerk. (R. 2755, 2765–2766, 2786). The trial court found that the address was consistent with both the vesting deed and the most recent certified tax roll. (R. 3372–3386).
 
-M.K.E.'s contrary assertion is therefore not a basis for reversal.
+M.K.E.’s contrary assertion is therefore not a basis for reversal.
 
 ## THE STATUTORY TAX-DEED FRAMEWORK SUPPORTED THE TRIAL COURT'S RULING AND DID NOT REQUIRE AN OPEN-ENDED SEARCH FOR ALTERNATIVE ADDRESSES.
 
-M.K.E.'s Second Initial Brief seeks to convert the presence of Brittany Lane in other public records into a constitutional defect in the tax deed. That is not what Chapter 197 requires.
+M.K.E.’s Second Initial Brief seeks to convert the presence of Brittany Lane in other public records into a constitutional defect in the tax deed. That is not what Chapter 197 requires.
 
 Section 197.502(4)(a), Florida Statutes, governs the Tax Collector's identification of persons to be notified. The statute directs attention to legally operative sources such as the record of conveyance and, where applicable, the latest assessment roll. The address supplied to the Clerk in this case was the Miami address appearing in the deed and in the certified tax-roll information used in the tax-deed process. (R. 2749, 2765–2766, 2786).
 
@@ -244,7 +244,7 @@ The Legislature has gone further still. Section 197.502(4)(e), Florida Statutes,
 
 Section 197.522(3), Florida Statutes, further supports affirmance. The current statute permits the Clerk to rely on the names and addresses provided by the Tax Collector based on the certified tax roll and property information reports and provides that the Clerk has no independent duty to investigate the validity of those addresses. Section 197.522(3) defines the Clerk's statutory duty, but statutory compliance remains subject to constitutional due process when officials possess information making reliance on the statutory address unreasonable.
 
-That statutory framework matters. M.K.E.'s theory would require the Clerk and/or Tax Collector to treat every address appearing in every public record, E911 materials, corporate filings, notices of commencement, contractor documents, or other recorded instruments, as a potentially superseding tax-notice address. Chapter 197 does not impose that open-ended obligation.
+That statutory framework matters. M.K.E.’s theory would require the Clerk and/or Tax Collector to treat every address appearing in every public record, E911 materials, corporate filings, notices of commencement, contractor documents, or other recorded instruments, as a potentially superseding tax-notice address. Chapter 197 does not impose that open-ended obligation.
 
 Nor does due process require it on this record. Due process requires notice "reasonably calculated, under all the circumstances, to apprise interested parties of the pendency of the action and afford them an opportunity to present their objections." *Mullane v. Cent. Hanover Bank & Trust Co.*, 339 U.S. 306, 314 (1950); *accord Vosilla*, 944 So. 2d at 294. It does not require officials to send additional notice to every alternative address appearing anywhere in governmental records.
 
@@ -252,7 +252,7 @@ The trial court correctly rejected that theory.
 
 ## VOSILLA IS MATERIALLY DISTINGUISHABLE.
 
-M.K.E.'s appeal depends primarily on *Vosilla*. But *Vosilla* does not control this case.
+M.K.E.’s appeal depends primarily on *Vosilla*. But *Vosilla* does not control this case.
 
 In *Vosilla*, the owners sent objectively clear, tax-related instructions that their address had changed. They expressly stated that they had moved and directed that correspondence concerning the property be sent to the new address. *Vosilla*, 944 So. 2d at 291. They also sent a certified letter stating that their mailing address had changed and requesting that the property-tax records be changed. *Id.* The Clerk acknowledged receipt. *Id.*
 
@@ -260,9 +260,9 @@ The Supreme Court also relied on additional facts confirming that the old addres
 
 Those facts are absent here.
 
-M.K.E. did not submit an objectively clear change-of-address instruction directing that future tax-deed or property-tax notices be sent to Brittany Lane. M.K.E. did not identify a record in which the Property Appraiser stated that M.K.E.'s owner mailing address on the tax roll had been changed from Miami to Brittany Lane. And the contemporaneous April 2024 Property Information Report identified Miami as M.K.E.'s "Mailing Address as Shown on Tax Roll." (R. 2765–2766).
+M.K.E. did not submit an objectively clear change-of-address instruction directing that future tax-deed or property-tax notices be sent to Brittany Lane. M.K.E. did not identify a record in which the Property Appraiser stated that M.K.E.’s owner mailing address on the tax roll had been changed from Miami to Brittany Lane. And the contemporaneous April 2024 Property Information Report identified Miami as M.K.E.’s "Mailing Address as Shown on Tax Roll." (R. 2765–2766).
 
-M.K.E. argues that it should not matter which taxing authority received the information. LaBelle Homes does not dispute that *Vosilla* declined to require a titleholder to direct a change of address to any particular taxing authority. *See Vosilla*, 944 So. 2d at 300–01 (observing that the property appraiser prepares the assessment roll under section 193.114(1)(a), but that no provision of Chapter 193 or Chapter 197 "specif[ies] the taxing authority to which notice of a titleholder's change of address should be mailed"). That principle does not aid M.K.E., because it presupposes an actual change-of-address communication; it addresses where such a communication must go, not whether one was made. The material distinction here is what the communication objectively conveyed: the E911 materials requested a new locatable address for the Property and led to the assignment of 1110 Norge Court; they did not direct a change to M.K.E.'s owner mailing address on the tax roll. Indeed, the certified tax roll that the property appraiser is charged with preparing under section 193.114(1)(a) continued to show Miami as M.K.E.'s owner mailing address, as reflected in the contemporaneous Property Information Report. (R. 2765–2766).
+M.K.E. argues that it should not matter which taxing authority received the information. LaBelle Homes does not dispute that *Vosilla* declined to require a titleholder to direct a change of address to any particular taxing authority. *See Vosilla*, 944 So. 2d at 300–01 (observing that the property appraiser prepares the assessment roll under section 193.114(1)(a), but that no provision of Chapter 193 or Chapter 197 "specif[ies] the taxing authority to which notice of a titleholder's change of address should be mailed"). That principle does not aid M.K.E., because it presupposes an actual change-of-address communication; it addresses where such a communication must go, not whether one was made. The material distinction here is what the communication objectively conveyed: the E911 materials requested a new locatable address for the Property and led to the assignment of 1110 Norge Court; they did not direct a change to M.K.E.’s owner mailing address on the tax roll. Indeed, the certified tax roll that the property appraiser is charged with preparing under section 193.114(1)(a) continued to show Miami as M.K.E.’s owner mailing address, as reflected in the contemporaneous Property Information Report. (R. 2765–2766).
 
 The distinction is not technical. It is the difference between the factual setting in *Vosilla* and the factual setting here. *Vosilla* involved government use of a former address after actual tax-related change-of-address communications. This case involves statutory tax-deed records identifying Miami as the owner mailing address, notwithstanding the existence of other public records containing Brittany Lane.
 
@@ -292,11 +292,11 @@ LaBelle Homes need not prove actual receipt in order to affirm. The constitution
 
 The Clerk mailed notice by certified mail, return receipt requested, to the address supplied through the statutory tax-deed process. The mailing generated a return receipt bearing the designation "MKE Homes." (R. 1448-1449). The parties dispute whether an authorized M.K.E. representative completed the receipt. That dispute does not change what the Clerk received: an apparent delivery confirmation rather than a returned or undeliverable notice. In addition, the trial court found that notices were supplied for service and posting, that notice was posted at the Property, and that notice was published for four successive weeks. (R. 3372–3386).
 
-Florida law forecloses M.K.E.'s receipt argument. In *South Investment Properties, Inc. v. Icon Investments, LLC*, 988 So. 2d 1114 (Fla. 5th DCA 2008), the clerk mailed tax-deed notice by certified mail and received signed return receipts, and the owner argued the notice was insufficient because the signatures were not those of its representatives and the clerk was obligated to investigate who had signed. The Fifth District "totally reject[ed]" that argument, holding that the clerk "cannot be expected to investigate the signatures on a return receipt to determine if they belong to an employee or representative of a corporate property owner." *Id.* at 1118.
+Florida law forecloses M.K.E.’s receipt argument. In *South Investment Properties, Inc. v. Icon Investments, LLC*, 988 So. 2d 1114 (Fla. 5th DCA 2008), the clerk mailed tax-deed notice by certified mail and received signed return receipts, and the owner argued the notice was insufficient because the signatures were not those of its representatives and the clerk was obligated to investigate who had signed. The Fifth District "totally reject[ed]" that argument, holding that the clerk "cannot be expected to investigate the signatures on a return receipt to determine if they belong to an employee or representative of a corporate property owner." *Id.* at 1118.
 
-Consistent with that principle, "[a]ctual receipt of notice is not required, but strict adherence to the statutory requirements is essential." *Levy v. Ippolito*, 503 So. 2d 1308, 1311 (Fla. 2d DCA 1987). M.K.E.'s demand that the Clerk establish or investigate who signed "MKE Homes" on the return receipt asks for precisely the inquiry Florida courts have declined to require.
+Consistent with that principle, "[a]ctual receipt of notice is not required, but strict adherence to the statutory requirements is essential." *Levy v. Ippolito*, 503 So. 2d 1308, 1311 (Fla. 2d DCA 1987). M.K.E.’s demand that the Clerk establish or investigate who signed "MKE Homes" on the return receipt asks for precisely the inquiry Florida courts have declined to require.
 
-At most, M.K.E.'s argument creates a factual disagreement over who completed the return receipt and whether M.K.E. actually received the mailing. But unless M.K.E. first establishes that the notice procedure was constitutionally unreasonable, that factual disagreement is not a basis to invalidate LaBelle Homes' tax deed.
+At most, M.K.E.’s argument creates a factual disagreement over who completed the return receipt and whether M.K.E. actually received the mailing. But unless M.K.E. first establishes that the notice procedure was constitutionally unreasonable, that factual disagreement is not a basis to invalidate LaBelle Homes' tax deed.
 
 The additional-steps duty recognized in *Jones v. Flowers*, 547 U.S. 220 (2006), and *Delta Property Management, Inc. v. Profile Investments, Inc.*, 87 So. 3d 765 (Fla. 2012), arises when the government receives reliable information that its chosen method of notice has failed, as when the statutory notice is returned undelivered or unclaimed. Here, the Clerk had no comparable information: the certified mailing was not returned unclaimed or undeliverable, and the receipt came back bearing "MKE Homes."
 
@@ -304,7 +304,7 @@ The adequacy of notice in a tax-deed proceeding is measured by the Clerk's statu
 
 Nor was the third person's signature on the receipt dispositive in *Vosilla*. The constitutional defect arose in the context of the owners' direct, tax-related change-of-address communications and the sheriff's separate notice that they no longer lived at the old address. *Vosilla*, 944 So. 2d at 291–92. Here, the absence of comparably clear information—not the receipt alone—is the material distinction.
 
-M.K.E.'s reliance on the disputed receipt therefore does not supply the reversible error missing from its principal address-change argument.
+M.K.E.’s reliance on the disputed receipt therefore does not supply the reversible error missing from its principal address-change argument.
 
 ## THE JUDGMENT QUIETING TITLE IN LABELLE HOMES SHOULD BE AFFIRMED.
 
