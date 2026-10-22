@@ -269,6 +269,15 @@ Dot leaders are fill, not words (Word sets them as one run of dots touching the 
 
 For the fifth-circuit district adoption (fb-595.68.14), record each of its 12 folders that cannot match by folder and engine, with its XENG check ID and specific unmatched page/line. Do not describe a `REPORTED` engine as gated. The accompanying DOCX port checklist in [DOCX.md](DOCX.md) requires deleting each folder's shell builders and reducing court-specific shell baseline entries to zero.
 
+**Ninth Circuit part 02 adoption (fb-595.68.23, verified 2026-10-22).** These 14 folders have typst and DOCX templates and no LaTeX templates. Each DOCX uses `reference.xml` and Lua filters, with its body face inherited through `{font}` from typst. No folder retains a DOCX shell builder or binary `reference.docx`; the court-specific entries in `.shell-safety-baseline.json` are zero. All 14 folders set `params.cross_engine: gate`. On 2026-10-22, the typst and DOCX checks were rerun for every folder: all tier-1 checks passed with zero failures, including `DEF-COVER-001` and `DEF-TOC-001`; DOCX also passed XENG-001..003 on every input. No folder or engine remains at `report` for a cross-engine mismatch.
+
+| State | Folders |
+|---|---|
+| Idaho | `idaho/federal/bankruptcy-district/motion-brief`; `idaho/federal/district/complaint`; `idaho/federal/district/motion-brief` |
+| Montana | `montana/federal/bankruptcy-district/adversary-complaint`; `montana/federal/bankruptcy-district/motion-brief`; `montana/federal/district/complaint`; `montana/federal/district/motion-brief` |
+| Nevada | `nevada/federal/bankruptcy-district/adversary-complaint`; `nevada/federal/bankruptcy-district/motion-brief`; `nevada/federal/district/complaint`; `nevada/federal/district/motion-brief` |
+| Northern Mariana Islands | `northern-mariana-islands/federal/bankruptcy-district/adversary-complaint`; `northern-mariana-islands/federal/bankruptcy-district/motion-brief`; `northern-mariana-islands/federal/district/complaint` |
+
 **Eighth Circuit district adoption (fb-595.68.7, verified 2026-10-22).** The 13 folders in this fan-out have typst and docx templates; none has a LaTeX template. Every folder's typst and docx `check.sh` run has zero failed checks, including `DEF-COVER-001` and `DEF-TOC-001` (the samples have no contents or authorities table). The docx face matches the typst face in all 13 folders, and `docx/` contains only declarative XML and Lua inputs: no builder/render shell scripts or binary reference documents remain. Twelve folders pass XENG-001..003 on every input:
 
 | Folder | Engine | XENG-001..003 |
