@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: pdftotext reads
+# typst's note mark 4 as part of the word before it ("judgment.”).4", the mark on the word's own line box), LaTeX's
+# and Word's raised mark as a word of its own (p19 line 13; every other line, every page start and end the same, the
+# marks drawn alike). A shared-model item (docs/open-items/fb-595.54.46.md).
+params:
+  cross_engine: report
