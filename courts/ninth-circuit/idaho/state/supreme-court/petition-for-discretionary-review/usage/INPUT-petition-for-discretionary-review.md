@@ -12,7 +12,6 @@ caption_right:
   - "D.Ct. No. 2011-7510"
   - "(Kootenai County)"
   - "Hon. Carl B. Kerrick"
-  - ""
   - "**BRIEF IN SUPPORT OF PETITION FOR REVIEW**"
 counsel:
   - names: ["Deborah Whipple", "ISB No. 4355"]
