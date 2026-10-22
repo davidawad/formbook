@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The N.D. Tex. brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the typst
+     template ({font}, Times New Roman) at 12 pt (N.D. Tex. LR 7.2: 12-point or larger; size 24 half points); Body
+     Text in exact 24 pt line boxes (typst pitch-double, LR 7.2 double spacing) with a half-inch indent; the cover,
+     headings, quotations, tables, signature and footer lines in 13.8 pt boxes (typst pitch-single, LR 7.2 allows
+     quotations and headings single spaced); letter paper (LR 10.1) with 1-inch margins (LR 7.2) and a centered page
+     number, its line 36.75 pt above the page foot (735 twips: where typst sets it, footer-descent 30 %).
+     docx/txnd-motion-brief.lua writes every paragraph's own spacing and the three sections (cover unnumbered, tables
+     in roman, body in arabic). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="320" heading-after="40" quote="276" footer="735"/>

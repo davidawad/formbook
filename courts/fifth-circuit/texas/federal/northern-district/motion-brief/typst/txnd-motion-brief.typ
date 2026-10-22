@@ -6,23 +6,40 @@
 // (caption). See ../README.md for the rule text, the date verified and the gaps.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")   // LR 7.2 sets only the size; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // LR 7.2 sets only the size; Times New Roman (vendored), the exemplars' face
 #let type-size = 12pt                   // LR 7.2: 12-point or larger
-#let pitch = 24pt                       // double spacing: baseline-to-baseline distance of body text at 12 pt
-#let page-w = 8.5in                     // LR 10.1: 8 1/2 by 11 inch paper
-#let page-h = 11in
 #let margin-all = 1in                   // LR 7.2: margins of at least one inch
-#let text-width = page-w - 2 * margin-all
-#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 1.345em leading gives a 24 pt pitch at 12 pt (README.md)
-#let single-leading = 0.495em            // single spacing: caption, headings, block quotations, tables, signature block
 #let para-indent = 0.5in                // first-line indent of body paragraphs
+#let list-indent = 0.5in                // bullets: the bullet half an inch in, the text a box of this width after it
+#let quote-indent = 0.5in               // quotations: indented from both margins
+#let heading-hang = 0.5in               // level-2 and level-3 headings: the lines after the first hang this far
 #let caption-left = 3.0in               // width of the party column of the caption
 #let caption-sign = 0.3in               // the column of section marks (§) between the parties and the case data
-#let toa-passim-after = 5               // a authority on more pages than this is listed as "passim" (LR 7.2 tables)
+#let sig-left = 3.0in                   // the signature block starts here
+#let toc-step = 18pt                    // contents: each level steps in 1.5 em
+#let toc-page-col = 36pt                // contents: the page numbers keep the last 36 pt of the line to themselves
+#let toa-page-col = 72pt                // authorities: the page lists keep the last inch of the line to themselves
+#let toa-passim-after = 5               // an authority on more pages than this is listed as "passim" (LR 7.2 tables)
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-double = 24pt                // double spacing (LR 7.2): the body's baseline-to-baseline distance at 12 pt
+#let pitch-single = 13.8pt              // a single line: 1.15 x the type size; cover, headings, quotations, tables, signature
+#let cover-gap = 18pt                   // between the court title and the caption; below a table's title
+#let title-above = 42pt                 // between the caption and the title of the brief
+#let row-gap = 6pt                      // between the rows of the tables and the groups of the signature block
+#let group-gap = 12pt                   // above a group of the index of authorities (Cases, Statutes, Rules)
+#let h1-above = 16pt                    // a level-1 heading stands off the text above it
+#let h2-above = 8pt                     // a level-2 or level-3 heading sits on the double-spaced grid of the text
+#let heading-below = 2pt                // the text below a heading keeps to the double-spaced grid
+#let quote-above = 12pt                 // a quotation is set off from the text by about a single line
+#let quote-below = 6pt
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -37,20 +54,27 @@
 
 /// Inline markdown (for names with *et al.*, case names, etc.).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// One single-spaced line per item: a stack of blocks, each line one single-spaced pitch below the last.
-#let line-stack(items) = stack(dir: ttb, spacing: single-leading, ..items.map(i => [#i]))
+/// One single-spaced line block (a paragraph of its own), with explicit space above it.
+#let line-block(above: 0pt, below: 0pt, body) = block(width: 100%, above: above, below: below, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  body
+})
 
 /// Escape a string for use inside a regex pattern (the authority keys are literal text).
 #let esc(s) = s.clusters().map(c => if c in "\\.()[]{}*+?^$|" { "\\" + c } else { c }).join()
+
+/// A page number in a single-spaced line box, so it sits at the same place on every page (Word's footer).
+#let page-foot(fmt) = context align(center, text(..edges(pitch-single), counter(page).display(fmt)))
 
 // ---------------------------------------------------------------------------
 // Cover: court title, caption, title of the paper (no page number)
 // ---------------------------------------------------------------------------
 
-/// The caption: each party name and designation is one row, with a section mark beside it; the case number and
-/// the jury legend sit in the right-hand column, on the middle rows. Each name is one line in the sample; a name
-/// that wraps would shift the marks in its row (see README.md).
+/// The caption: each party name and designation is one row, with a section mark beside it; the case number sits
+/// in the right-hand column on the middle row. A name that wraps makes its row taller.
 #let caption(meta) = {
   let lines = ()
   for (k, p) in meta.caption.parties.enumerate() {
@@ -60,64 +84,62 @@
   let mid = calc.floor(lines.len() / 2)
   let cells = ()
   for (i, l) in lines.enumerate() {
-    cells.push(align(left, inl(l)))
-    cells.push(align(center, "§"))
-    if i == mid - 1 {
-      cells.push(align(left, "CIVIL ACTION NO. " + meta.case_number))
-    } else {
-      cells.push([])
-    }
+    cells.push(line-block(inl(l)))
+    cells.push(line-block(align(center, "§")))
+    cells.push(line-block(if i == mid - 1 [CIVIL ACTION NO. #meta.case_number]))
   }
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  table(
-    columns: (caption-left, caption-sign, 1fr),
-    stroke: none,
-    inset: 0pt,
-    row-gutter: single-leading,
-    ..cells,
-  )
+  block(width: 100%, above: cover-gap, below: 0pt, grid(columns: (caption-left, caption-sign, 1fr), ..cells))
 }
 
 #let cover(meta) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
   let court-lines = ("IN THE UNITED STATES DISTRICT COURT", "FOR THE NORTHERN DISTRICT OF TEXAS")
   if "court_division" in meta and meta.court_division != none {
     court-lines.push(upper(meta.court_division))
   }
-  align(center, stack(dir: ttb, spacing: single-leading, ..court-lines.map(l => text(weight: "bold", l))))
-  v(pitch)
+  for l in court-lines { line-block(align(center, text(weight: "bold", l))) }
   caption(meta)
-  v(pitch * 2)
-  align(center, text(weight: "bold", inl(meta.brief_title)))
+  line-block(above: title-above, align(center, text(weight: "bold", inl(meta.brief_title))))
 }
 
 // ---------------------------------------------------------------------------
 // Tables: contents (from the headings) and index of authorities (from the frontmatter)
 // ---------------------------------------------------------------------------
 
-/// The index of authorities. Each authority's pages are the pages of the body where its key occurs; the body is
-/// tagged by the show rule in `txnd-motion-brief` (metadata with label <toa-hit>), and queried here.
+/// A table's title: centered, bold, single spaced.
+#let table-title(t) = line-block(below: cover-gap, align(center, text(weight: "bold", t)))
+
+/// One contents row: each level steps in; the page number in its own column, a dot leader before it.
+#let toc-entry(it) = {
+  let hd = it.element
+  let ind = (hd.level - 1) * toc-step
+  listing-row(hd.location(), { h(ind); hd.body }, it.page(), toc-page-col, ind, row-gap)
+}
+
+#let contents() = {
+  table-title("TABLE OF CONTENTS")
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  show outline.entry: toc-entry
+  outline(title: none, depth: 3, indent: 0pt)
+}
+
+/// The index of authorities. Each authority's pages are the body pages where its key occurs; the body is tagged by
+/// the show rule in `txnd-motion-brief` (metadata with label <toa-hit>), and queried here.
 #let index-of-authorities(meta) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  align(center, text(weight: "bold", "INDEX OF AUTHORITIES"))
-  v(pitch)
+  table-title("INDEX OF AUTHORITIES")
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
   context {
     let hits = query(<toa-hit>)
-    for cat in meta.authorities {
-      text(weight: "bold", cat.category)
-      v(single-leading)
+    for (k, cat) in meta.authorities.enumerate() {
+      line-block(above: if k == 0 { 0pt } else { group-gap }, text(weight: "bold", cat.category))
       for e in cat.entries {
         let pages = hits.filter(h => h.value == e.key).map(h => counter(page).at(h.location()).first()).dedup()
-        let where = if pages.len() == 0 { "" } else if pages.len() > toa-passim-after { "passim" } else { pages.map(str).join(", ") }
-        grid(
-          columns: (1fr, 0.9in),
-          column-gutter: 0.1in,
-          inl(e.cite),
-          align(right, where),
-        )
-        v(single-leading)
+        let where = if pages.len() == 0 { "" } else if pages.len() > toa-passim-after { "passim" } else {
+          pages.map(str).join(", ")
+        }
+        listing-row(none, inl(e.cite), where, toa-page-col, 0pt, row-gap)
       }
-      v(single-leading)
     }
   }
 }
@@ -126,90 +148,88 @@
 // Body: paragraphs (unnumbered: briefs do not number paragraphs), headings, lists, quotations, signature
 // ---------------------------------------------------------------------------
 
-/// Body text: blank-line-separated chunks; a `#` heading, a list, a quotation or a paragraph.
-#let body-chunks(body) = {
-  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
-  for c in chunks {
-    let t = c.trim()
+/// The signature block, at the right: "Respectfully submitted," and, for each signer, the signature (/s/ and the
+/// name), the bar number, the firm, the address and the role, single spaced, the groups a little apart. It never
+/// breaks across a page.
+#let signature-block(meta) = block(width: 100%, breakable: false, above: pitch-double, below: 0pt,
+  pad(left: sig-left, {
+    line-block[Respectfully submitted,]
+    for s in meta.signature {
+      let items = ("/s/ " + s.signer, s.signer, s.bar) + s.firm + s.address + s.lines
+      for (i, l) in items.enumerate() { line-block(above: if i == 0 { row-gap } else { 0pt }, inl(l)) }
+    }
+  }))
+
+/// A body paragraph at the double pitch with a first-line indent. `keep`: kept on the page of the block after it
+/// (the paragraph before the signature block stays with it).
+#let body-par(content, keep: false) = block(width: 100%, above: 0pt, below: 0pt, sticky: keep, breakable: not keep,
+  par(first-line-indent: (amount: para-indent, all: true), content))
+
+/// Body text: blank-line-separated chunks; a `#` heading, a list, a quotation or a paragraph. The signature block
+/// goes before a certificate of service (as in the exemplar), or at the end.
+#let body-chunks(meta, body) = {
+  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "").map(c => c.trim())
+  let cert = chunks.position(t => lower(t).match(regex("^#\\s+certificate of service\\s*$")) != none)
+  let sig-at = if cert == none { chunks.len() } else { cert }
+  for (i, t) in chunks.enumerate() {
+    if i == sig-at { signature-block(meta) }
     if t.starts-with("#") {
-      cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+      md(t)
     } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
-      // Lists: a bullet per item, spaced by body-leading; the trailing v() closes the last one.
-      block(width: text-width, {
-        set par(leading: body-leading)
-        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-        v(body-leading)
-      })
+      pad(left: list-indent, md(t))
     } else if t.starts-with(">") {
-      // Quotations are single-spaced and indented (show rule below); the block is kept whole.
-      cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+      // Quotations: single spaced, indented from both margins (LR 7.2 allows single spacing).
+      block(width: 100%, above: quote-above, below: quote-below, pad(x: quote-indent, {
+        set text(..edges(pitch-single))
+        set par(first-line-indent: 0pt)
+        md(t.replace(regex("(?m)^>[ \\t]?"), ""))
+      }))
     } else {
-      block(width: text-width, below: body-leading, {
-        context [#h(para-indent)#cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)]
-      })
+      body-par(md(t), keep: i == sig-at - 1)
     }
   }
+  if sig-at == chunks.len() { signature-block(meta) }
 }
-
-#let signature-block(meta) = block(breakable: false, width: text-width, {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  pad(left: 3.0in, {
-    [Respectfully submitted,]
-    v(pitch * 0.5)
-    for s in meta.signature {
-      line-stack(("/s/ " + s.signer, s.signer, s.bar) + s.firm + s.address + s.lines)
-      v(pitch * 0.5)
-    }
-  })
-})
 
 #let txnd-motion-brief(meta, body) = {
   // Keys of the authorities: each occurrence in the body is tagged so the index can count its pages.
   let keys = meta.authorities.map(c => c.entries.map(e => e.key)).flatten()
   let key-pattern = regex(keys.map(esc).join("|"))
 
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  set page(paper: "us-letter", margin: margin-all)
+  set page(paper: "us-letter", margin: margin-all, footer-descent: 30%)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch (double spaced); lists as a label box (list-indent) with the text hanging.
+  show: xengine.with(pitch: pitch-double, list-indent: list-indent)
+  // A doubled section or paragraph sign stays with its number too ("¶¶ 42"; xengine binds a single sign; the docx
+  // filter binds both).
+  show regex("[§¶]+ \\S+"): it => box(it)
 
-  // Headings: level 1 is a centered bold section; level 2 a bold heading with a hanging letter; level 3 a bold
-  // heading with a hanging numeral. Each heading stays with the paragraph after it.
-  show heading.where(level: 1): it => block(width: text-width, above: pitch, below: body-leading, sticky: true,
-    par(leading: single-leading, align(center, text(weight: "bold", it.body))))
-  show heading.where(level: 2): it => block(width: text-width, above: body-leading, below: body-leading, sticky: true,
-    par(leading: single-leading, hanging-indent: 0.5in, text(weight: "bold", it.body)))
-  show heading.where(level: 3): it => block(width: text-width, above: body-leading, below: body-leading, sticky: true,
-    par(leading: single-leading, hanging-indent: 0.5in, text(weight: "bold", it.body)))
-
-  // Quotations: single-spaced, indented 0.5 inch on both sides.
-  show quote.where(block: true): it => block(width: text-width, below: body-leading, inset: (left: 0.5in, right: 0.5in),
-    par(leading: single-leading, it.body))
-
-  // Lists: bullets, indented.
-  set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
+  // Headings, single spaced and bold, kept with the text after them: level 1 centered; levels 2 and 3 at the
+  // margin, the lines after the first hanging half an inch.
+  show heading: it => {
+    let above = if it.level == 1 { h1-above } else { h2-above }
+    block(width: 100%, sticky: true, breakable: false, above: above, below: heading-below, {
+      set text(..edges(pitch-single), size: type-size, weight: "bold")
+      set par(first-line-indent: 0pt)
+      if it.level == 1 { align(center, it.body) } else { par(hanging-indent: heading-hang, it.body) }
+    })
+  }
 
   // Cover (no page number).
-  page(numbering: none, margin: margin-all)[
-    #cover(meta)
-  ]
+  page(footer: none, cover(meta))
 
-  // Front matter: table of contents and index of authorities, roman numerals.
-  page(numbering: "i", margin: margin-all)[
-    #set par(leading: single-leading, spacing: 0pt, justify: false)
-    #align(center, text(weight: "bold", "TABLE OF CONTENTS"))
-    #v(pitch)
-    #set block(spacing: single-leading)
-    #outline(title: none, depth: 3, indent: 1.5em)
-    #pagebreak()
-    #index-of-authorities(meta)
-  ]
+  // Front matter: table of contents and index of authorities, roman numerals (the cover is page i).
+  page(footer: page-foot("i"), {
+    contents()
+    pagebreak()
+    index-of-authorities(meta)
+  })
 
   // Body: arabic numerals from 1. The show rule tags each authority occurrence; it applies only in this block.
-  page(numbering: "1", margin: margin-all)[
-    #counter(page).update(1)
-    #show key-pattern: it => [#it#metadata(it.text)<toa-hit>]
-    #body-chunks(body)
-    #v(pitch)
-    #signature-block(meta)
-  ]
+  page(footer: page-foot("1"), {
+    counter(page).update(1)
+    show key-pattern: it => [#it#metadata(it.text)<toa-hit>]
+    body-chunks(meta, body)
+  })
 }
