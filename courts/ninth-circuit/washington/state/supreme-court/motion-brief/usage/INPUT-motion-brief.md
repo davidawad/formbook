@@ -74,5 +74,5 @@ Submitted this 3 rd  day of January, 2022.[^4]
 
 [^3]: The State notes that while both parties received permission to file overlength supplemental briefs, Stites’ supplemental brief was significantly longer than the State’s.
 
-[^4]: The State regrets the delay in filing this motion.  Undersigned counsel went on vacation immediately after filing the State’s supplemental brief on December 22 nd  and did not have a chance to thoroughly review Stites’ supplemental brief until December 29 th . Unfortunately, between the snow-induced closure of
+[^4]: The State regrets the delay in filing this motion.  Undersigned counsel went on vacation immediately after filing the State’s supplemental brief on December 22 nd  and did not have a chance to thoroughly review Stites’ supplemental brief until December 29 th. Unfortunately, between the snow-induced closure of
 

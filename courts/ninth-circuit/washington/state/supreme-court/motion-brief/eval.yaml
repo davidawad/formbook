@@ -1,0 +1,4 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. latex matches typst line for
+# line; docx keeps one word typst moves (p8, a line typst overflows by 0.01 pt): docs/open-items/fb-595.54.17.md.
+params:
+  cross_engine: report
