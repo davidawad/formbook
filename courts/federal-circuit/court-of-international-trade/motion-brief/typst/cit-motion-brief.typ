@@ -9,24 +9,45 @@
 // Procedures 2(A), 2(B) (single document; 14,000-word limit; exclusions; certificate of compliance).
 // No case-specific text, no coordinates measured off the exemplar, no forced line breaks. The body is
 // markdown, rendered by cmarker; the metadata is the YAML frontmatter of the same file (schema: ../README.md).
+//
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the two
+// explicit spacings. The docx engine (../docx/) sets the same pitches, spaces, indents and columns.
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = ("Times New Roman", "Liberation Serif")         // vendored in /fonts; the only font this template uses
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman; Liberation Serif is its metric twin
 #let type-size = 12pt                    // CIT-TYPE-001: Rule 81(f), 12 point or larger, footnotes included
-#let pitch = 24pt                        // CIT-SPACE-001: Rule 81(f), double spaced: 24 pt baseline pitch at 12 pt
-#let body-leading = 0.695em              // EB Garamond's line box is 1.3em at 12 pt; this gives a 24 pt pitch (see ../README.md)
-#let single-leading = 0em                // caption, headings, quotations, counsel lines: single spaced
+#let pitch = 24pt                        // CIT-SPACE-001: Rule 81(f), double spaced: 24 pt line pitch at 12 pt
+#let pitch-single = 14pt                 // caption, headings, quotations, footnotes, tables, counsel lines: single spaced
 #let margin-x = 1in                      // CIT-PAPER-002: typed matter 6 1/2 in wide and at most 9 1/2 in tall
 #let margin-y = 1in
 #let margins = (top: margin-y, bottom: margin-y, x: margin-x)
-#let para-indent = 0.5in                 // first-line indent of body paragraphs
+#let para-indent = 0.5in                 // first-line indent of body paragraphs; list labels in a box this wide
 #let caption-left = 3.4in                // width of the party column of the caption
 #let caption-paren = 0.3in               // width of the column of ")" marks
+#let caption-desig = 1.2in               // indent of a party's designation in the party column
+#let caption-right = 0.2in               // indent of the court number in the right column
+#let counsel-left = 3.3in                // the counsel block on the memorandum cover starts here
+#let sig-left = 2.8in                    // signature block: the date column; the counsel column takes the rest
+#let gap = 12pt                          // the half-line spaces: party to title, "Respectfully submitted," to /s/
+#let space-section = (above: 24pt, below: 12pt)   // level-1 headings (centered capitals)
+#let space-sub = (above: 12pt, below: 12pt)       // lower headings
+#let space-quote = 14pt                  // above, below and between the paragraphs of a block quotation
+#let note-gap = 7pt                      // between footnotes
+#let note-clearance = 12.6pt             // between the body and the footnote rule
+#let toc-page-col = 36pt                 // the contents' page column
+#let toc-indent = 0.5in                  // each heading level below the first indents the contents row this much
+#let toc-above = (7pt, 4.9pt)            // above a contents row of a level-1 and of a lower heading
+#let toa-page-col = 56pt                 // the authorities' page column (wider when the page list is)
+#let toa-hang = 0.35in                   // wrapped lines of an authority hang this much
+#let toa-above = 9.8pt                   // above an authority
+#let toa-group = (first: 14pt, next: 19.6pt, below: 2.8pt)   // above and below a group title ("Cases:")
 #let word-limit = 14000                  // Chambers Procedures 2(B)(1)(a): movant's brief, Rule 56.2 motion
 #let passim-threshold = 7                // authority cited on this many pages or more: "passim"
 
@@ -42,7 +63,7 @@
 }
 
 /// Inline markdown (italic case names, etc.).
-#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+#let inl(s) = cmarker.render(s.trim(), raw-typst: false, smart-punctuation: true)
 
 /// Block markdown (paragraphs, lists, quotations) with the body paragraph style.
 #let blk(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
@@ -116,37 +137,32 @@
   (c, false)
 }
 
+
+/// One single-spaced line (a paragraph of its own, no indent).
+#let line1(body) = par(first-line-indent: 0pt, hanging-indent: 0pt, body)
+
 // ---------------------------------------------------------------------------
 // Caption (Rule 10(a)): every party on a side, a designation, a ")" mark on each line, the court
 // number on the right. A side may name the word that joins it to the next side (default "v.").
 // ---------------------------------------------------------------------------
 
 #let caption(meta) = {
-  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
   let sides = need(meta, "caption")
   let rows = ()
   for (i, side) in sides.enumerate() {
-    for n in side.names { rows.push(inl(n)) }
-    rows.push(pad(left: 1.2in, inl(side.designation)))
-    if i < sides.len() - 1 { rows.push(align(center, inl(side.at("between", default: "v.")))) }
+    for n in side.names { rows.push(line1(inl(n))) }
+    rows.push(pad(left: caption-desig, line1(inl(side.designation))))
+    if i < sides.len() - 1 { rows.push(align(center, line1(inl(side.at("between", default: "v."))))) }
   }
-  let right = {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    pad(left: 0.2in, {
-      [Ct. No. #need(meta, "court_no")]
-      if "before" in meta { linebreak(); [Before: #meta.before] }
-    })
-  }
+  let right = pad(left: caption-right, {
+    line1[Ct. No. #need(meta, "court_no")]
+    if "before" in meta { line1[Before: #meta.before] }
+  })
   let cells = ()
   for (k, r) in rows.enumerate() {
-    if k == 0 {
-      cells.push(r)
-      cells.push([)])
-      cells.push(grid.cell(rowspan: rows.len(), align(top, right)))
-    } else {
-      cells.push(r)
-      cells.push([)])
-    }
+    cells.push(r)
+    cells.push(line1[)])
+    if k == 0 { cells.push(grid.cell(rowspan: rows.len(), align(top, right))) }
   }
   grid(columns: (caption-left, caption-paren, 1fr), row-gutter: 0pt, ..cells)
 }
@@ -157,16 +173,14 @@
 
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  block(breakable: false, above: pitch, {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    grid(columns: (2.6in, 1fr), column-gutter: 0.2in,
-      [Dated: #need(meta, "date")],
+  block(breakable: false, above: pitch, below: 0pt, {
+    set text(..edges(pitch-single))
+    grid(columns: (sig-left, 1fr), column-gutter: 0pt,
+      line1[Dated: #need(meta, "date")],
       {
-        [Respectfully submitted,]
-        v(pitch * 0.5)
-        [/s/ #sig.signer]
-        linebreak()
-        for l in sig.lines { inl(l); linebreak() }
+        line1[Respectfully submitted,]
+        block(above: gap, below: 0pt, line1[/s/ #sig.signer])
+        for l in sig.lines { line1(inl(l)) }
       })
   })
 }
@@ -176,47 +190,47 @@
 // ---------------------------------------------------------------------------
 
 #let cover-page(meta, title) = {
-  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-  align(center, strong(upper(need(meta, "court").map(l => [#l]).join(linebreak()))))
+  set text(..edges(pitch-single))
+  for l in need(meta, "court") { align(center, line1(strong(upper(l)))) }
   v(pitch)
   caption(meta)
   v(pitch)
-  align(center, strong(upper(inl(need(meta, "party")))))
-  v(pitch * 0.5)
-  align(center, strong(upper(inl(title))))
+  align(center, line1(strong(upper(inl(need(meta, "party"))))))
+  block(above: gap, below: 0pt, width: 100%, { set align(center); line1(strong(upper(inl(title)))) })
 }
 
 #let counsel-block(meta) = {
-  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-  align(right, block(width: 3.2in, {
-    for l in need(meta, "counsel") { inl(l); linebreak() }
-  }))
+  set text(..edges(pitch-single))
+  pad(left: counsel-left, for l in need(meta, "counsel") { line1(inl(l)) })
 }
 
 // ---------------------------------------------------------------------------
-// Headings. Level 1 is a centered section (I., II., ...); level 2 a bold sub-heading (A., B., ...);
-// level 3 bold italic. The numerals are typed in the markdown, so the text is exactly the author's.
+// Headings. Level 1 is a centered section (I., II., ...); lower levels bold, flush left, wrapped lines hanging
+// half an inch. The numerals are typed in the markdown, so the text is exactly the author's. Typst's built-in
+// heading sizes are not used: every heading is the body size, single spaced.
 // ---------------------------------------------------------------------------
 
 #let style-heading(it) = {
-  set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
+  set par(first-line-indent: 0pt, hanging-indent: 0pt)
+  set text(size: type-size, ..edges(pitch-single))
   if it.level == 1 {
-    block(width: 100%, sticky: true, above: pitch * 0.5, below: pitch * 0.5,
-      align(center, strong(upper(it.body))))
-  } else if it.level == 2 {
-    block(width: 100%, sticky: true, above: pitch * 0.5, below: pitch * 0.5,
-      par(hanging-indent: 0.5in, strong(it.body)))
+    block(width: 100%, sticky: true, ..space-section, align(center, strong(upper(it.body))))
   } else {
-    block(width: 100%, sticky: true, above: pitch * 0.5, below: pitch * 0.5,
-      par(hanging-indent: 0.5in, strong(emph(it.body))))
+    block(width: 100%, sticky: true, ..space-sub, par(hanging-indent: para-indent, strong(it.body)))
   }
 }
 
 // ---------------------------------------------------------------------------
-// Table of contents (Rule 56.2(c)(2)) and table of authorities (Rule 56.2(c)(2)).
+// Table of contents (Rule 56.2(c)(2)) and table of authorities (Rule 56.2(c)(2)): rows as in Word, the text
+// wrapping before a page column, a dot leader from three spaces after the text to the page (listing-row).
 // ---------------------------------------------------------------------------
 
-#let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
+#let toc-entry(it) = {
+  let hd = it.element
+  let ind = toc-indent * (hd.level - 1)
+  listing-row(hd.location(), { h(ind); hd.body }, it.page(), toc-page-col, ind,
+    if hd.level == 1 { toc-above.at(0) } else { toc-above.at(1) })
+}
 
 #let toa-groups = (
   ("case", "Cases:"),
@@ -246,14 +260,14 @@
         .filter(p => p.last().kind == kind and hits.any(h => h.value == p.first()))
         .sorted(key: p => sort-key(p.last()))
       if members.len() == 0 { continue }
-      block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
+      block(above: if first { toa-group.first } else { toa-group.next }, below: toa-group.below, sticky: true, {
         set par(first-line-indent: 0pt)
         strong(title)
         if first { h(1fr); strong(underline[Page(s)]) }
       })
       first = false
       for (key, a) in members {
-        // Distinct printed page labels, in document order.
+        // Distinct printed page labels, in page order.
         let pages = ()
         for h in hits.filter(h => h.value == key) {
           let loc = h.location()
@@ -261,18 +275,14 @@
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, par(hanging-indent: 0.35in, first-line-indent: 0pt, leading: single-leading, {
+        listing-row(none, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
             linebreak()
           }
           inl(a.cite)
-          h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
-        }))
+        }, page-text, calc.max(toa-page-col, measure(page-text).width), toa-hang, toa-above)
       }
     }
   }
@@ -285,10 +295,8 @@
 // ---------------------------------------------------------------------------
 
 #let certificate-of-compliance(meta, words) = {
-  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-  align(center, strong(upper[Certificate of Compliance]))
-  v(pitch)
-  par(first-line-indent: para-indent, leading: body-leading, [
+  { set text(..edges(pitch-single)); align(center, line1(strong(upper[Certificate of Compliance]))) }
+  block(above: pitch, below: 0pt, par[
     This brief has been prepared using a proportionally spaced typeface (#font-family.first(), #str(type-size.pt())-point).
     In accordance with the Standard Chambers Procedures of this Court, the undersigned certifies that
     this brief contains #group-digits(words) words, excluding the parts of the brief exempted by
@@ -309,25 +317,46 @@
   }
 
   set document(title: need(meta, "brief_title") + ", Ct. No. " + need(meta, "court_no"))
-  set page(paper: "us-letter", margin: margins, numbering: "1", footer: context align(center, counter(page).display()))
-  set text(font: font-family, size: type-size, lang: "en", region: "us", hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: (amount: para-indent, all: true), justify: false)
+  // Rule 81(d) numbers every page from 1; the cover counts as page 1. The number sits in a single-spaced line box.
+  set page(paper: "us-letter", margin: margins, numbering: "1", footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, no kerning, ligatures or hyphenation, line boxes of the body pitch,
+  // footnote marks at 58 %; lists below (the label in a half-inch box, as xengine sets them).
+  show: xengine.with(pitch: pitch, list-indent: none)
+  // A doubled section sign stays with its number too ("§§ 1500"), as the docx filter binds it.
+  show regex("[§¶]{2} \\S+"): it => box(it)
+  // Loose lists (items apart by a blank line) carry a paragraph break at the end of each item, which may not stand
+  // inside the item's paragraph (lib/typst/xengine.typ): the items are set as xengine sets them, without it.
+  let tight(b) = if b.func() == [].func() { b.children.filter(c => c.func() != parbreak).join() } else { b }
+  let item(lab, body) = block(above: 0pt, below: 0pt,
+    par(hanging-indent: para-indent, first-line-indent: 0pt, { box(width: para-indent, lab); tight(body) }))
+  show enum: it => {
+    let n = if it.start == auto { 1 } else { it.start }
+    for i in it.children {
+      if i.has("number") and i.number != none { n = i.number }
+      item(numbering(it.numbering, n), i.body)
+      n += 1
+    }
+  }
+  show list: it => for i in it.children { item([•], i.body) }
   set heading(numbering: none)
-  set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
   show footnote.entry: it => {
-    set text(size: type-size)     // CIT-TYPE-001 covers footnotes too
-    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em)
+    // CIT-TYPE-001 covers footnotes too: 12 pt, single spaced; the marker, a space, the note
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt)
     [#super(num)#h(0.25em)#note.body]
   }
-  show quote.where(block: true): it => block(above: 1em, below: 1em, pad(left: para-indent, right: para-indent, {
-    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
-    it.body
-  }))
-  show regex("\\S*\\)\\(\\S*"): it => box(it)
-  show regex("[§¶] \\S+"): it => box(it)
+  show quote.where(block: true): it => block(above: space-quote, below: space-quote,
+    pad(left: para-indent, right: para-indent, {
+      set text(..edges(pitch-single))
+      set par(first-line-indent: 0pt, spacing: space-quote)
+      it.body
+    }))
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {
@@ -335,49 +364,41 @@
     } else { it.body }
   }
 
-  // ---- front matter: motion cover and motion; memorandum cover; contents (lower-case roman) ----
-  // Rule 81(d) numbers every page from 1; the cover counts as page 1.
+  // ---- motion cover and motion ----
   cover-page(meta, need(meta, "brief_title"))
-  v(pitch)
   // The motion's last paragraph (the WHEREFORE paragraph) stays on the page with the signature block,
   // so a signature is never alone on a page (keep-together, not a forced break).
-  let motion-paras = need(meta, "motion").split("\n\n")
-  if motion-paras.len() > 1 {
-    block(width: 100%, blk(motion-paras.slice(0, -1).join("\n\n")))
-  }
-  block(width: 100%, breakable: false, {
-    blk(motion-paras.last())
-    signature-block(meta)
+  let motion-paras = need(meta, "motion").trim(at: end).split("\n\n")
+  block(above: pitch, below: 0pt, width: 100%, {
+    if motion-paras.len() > 1 { blk(motion-paras.slice(0, -1).join("\n\n")) }
+    block(above: 0pt, below: 0pt, width: 100%, breakable: false, {
+      blk(motion-paras.last())
+      signature-block(meta)
+    })
   })
   pagebreak()
 
+  // ---- memorandum cover ----
   cover-page(meta, need(meta, "memo_title"))
   v(pitch)
   counsel-block(meta)
   v(pitch)
-  align(center, [Dated: #need(meta, "date")])
+  { set text(..edges(pitch-single)); align(center, line1[Dated: #need(meta, "date")]) }
   pagebreak()
 
-  // ---- contents ----
-  heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  show outline.entry: it => link(it.element.location(), block(above: 0.35em, below: 0pt, par(
-    hanging-indent: 0.5in * (it.element.level - 1) + 0.5in, first-line-indent: 0pt, leading: single-leading, {
-      h(0.5in * (it.element.level - 1))
-      it.element.body
-      h(0.8em)
-      dot-leader
-      box(width: 2.6em, align(right, it.page()))
-    })))
-  outline(title: none, depth: 3)
-  pagebreak()
-
-  toa-section(authorities)
+  // ---- contents and authorities ----
+  {
+    set text(..edges(pitch-single))
+    heading(level: 1, numbering: none, outlined: false)[Table of Contents]
+    show outline.entry: toc-entry
+    outline(title: none, depth: 3, indent: 0pt)
+    pagebreak()
+    toa-section(authorities)
+  }
   pagebreak()
 
   // ---- body: the memorandum from the Rule 56.2 statement on; the signature and certificate follow ----
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: (amount: para-indent, all: true), justify: false)
-  cmarker.render(md, raw-typst: false, smart-punctuation: true, h1-level: 1)
-
+  blk(md)
   signature-block(meta)
   pagebreak()
 
