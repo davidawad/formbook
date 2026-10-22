@@ -76,9 +76,15 @@ measure() {
       txt = substr($0, length($1) + length($2) + 3)
       gsub(/[ \t]/, "", txt); txt = toupper(txt)
       if (kind == "H" && length(txt) > 40) txt = substr(txt, 1, 40)
+      # a link: its text, then (after a US character) the words after it; searched together first, so that an unlinked
+      # mention of the same authority (a heading) is not counted; the link text alone (its first 30 characters) where
+      # the two are not found together on a page (a citation that runs over a page end)
+      after = ""
+      if (kind == "L" && (u = index(txt, "\037")) > 0) { after = substr(txt, u + 1); txt = substr(txt, 1, u - 1) }
+      if (kind == "L" && length(after) > 12) after = substr(after, 1, 12)
       if (kind == "L" && length(txt) > 30) txt = substr(txt, 1, 30)
       if (kind == "H") H[++nh] = id SUBSEP txt
-      else { L[++nl] = id SUBSEP txt }
+      else { L[++nl] = id SUBSEP txt SUBSEP txt after }
     }
     END {
       last = start
@@ -92,7 +98,10 @@ measure() {
       for (i = 1; i <= nl; i++) {
         split(L[i], f, SUBSEP)
         if (!(f[1] in seen)) { seen[f[1]] = 1; order[++no] = f[1] }
-        for (p = start; p <= np; p++) if (hit(p, f[2])) {
+        needle = f[3]
+        if (length(f[2]) < 30) { any = 0; for (p = start; p <= np; p++) if (hit(p, needle)) any = 1; if (!any) needle = f[2] }
+        else needle = f[2]
+        for (p = start; p <= np; p++) if (hit(p, needle)) {
           if (!((f[1] SUBSEP p) in got)) {
             got[f[1] SUBSEP p] = 1
             pages[f[1]] = (f[1] in pages) ? pages[f[1]] "," (p - start + 1) : (p - start + 1)
