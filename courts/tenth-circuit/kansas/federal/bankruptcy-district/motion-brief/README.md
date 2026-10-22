@@ -46,9 +46,9 @@ Requirement IDs used in `ksb-motion-brief.typ`:
 | ID | Requirement | Where | Source | Kind |
 |---|---|---|---|---|
 | KSB-FORM-001 | 8½ × 11 paper, margins 1 inch on all sides | `set page` | LBR 9004.1(a)(1) (paper); margin is a style choice | M (paper), C (margin) |
-| KSB-FORM-002 | Type ≥ 12 pt and ≤ 12 characters per inch on average | `type-size = 16pt` | LBR 9004.1(a)(1). At 14 pt EB Garamond measured 13.4 cpi | M |
-| KSB-FORM-003 | Double-spaced where practicable | `line-pitch = 2 × type-size` | LBR 9004.1(a)(1) | M |
-| KSB-FORM-004 | Pages numbered from the first page, the cover included | `numbering: "1"` | LBR 9004.1(a)(2) | M |
+| KSB-FORM-002 | Type ≥ 12 pt and ≤ 12 characters per inch on average | `type-size = 16pt`, Times New Roman (vendored metric twin; no rule names a face) | LBR 9004.1(a)(1). Measured in Liberation Serif: 12.8 cpi at 14 pt, 11.2 at 16 pt | M |
+| KSB-FORM-003 | Double-spaced where practicable | `pitch-double = 32pt` (2 × type size); counsel, caption, title, headings, tables and signature single-spaced, `pitch-single = 18.4pt` (1.15 × type size) | LBR 9004.1(a)(1) | M |
+| KSB-FORM-004 | Pages numbered from the first page, the cover included | `numbering: "1"`, the number centered in the footer | LBR 9004.1(a)(2) | M |
 | KSB-MEM-001 | The four required sections (nature, facts, question presented, argument) | `ksb-motion-brief` panics on a missing heading | LBR 9013.1(a)(1)–(4) | M |
 | KSB-MEM-002 | The arguments and authorities section is at most 30 pages | not checked | LBR 9013.1(b) | M, not yet enforced |
 | KSB-CAP-001 | Caption: court name, case title, case number, adversary number, designation | `caption-block` | FRBP 9004(b) | M |
@@ -59,12 +59,14 @@ Requirement IDs used in `ksb-motion-brief.typ`:
 `usage/OVERLAY-williamson-comcast-memorandum.pdf` (14 pages, one per page of our render) puts our render (red) over the best-matching page of the filed memorandum (blue). Pages are paired by word overlap, not index.
 
 - Pairings (word overlap, from the `.txt` map): ours p.1 ↔ filed p.1 (63%), p.2 ↔ p.2 (68%), p.3 ↔ p.4 (40%), p.4 (TOA continuation) ↔ no match, p.5 ↔ p.5 (86%), p.6 ↔ p.6 (34%), p.7 ↔ p.6 (44%), p.8 ↔ p.7 (37%), p.9 ↔ p.7 (62%), p.10 ↔ p.8 (54%), p.11 ↔ p.8 (58%), p.12 ↔ p.9 (45%), p.13 ↔ p.1 (34%), p.14 ↔ p.13 (84%). Pairing by word overlap is only a locator; it does not show that the layouts match.
-- Visible differences: the filed memorandum uses Times, our render uses EB Garamond, so line breaks fall at different words. The blue layer carries the ECF header and footer (`Doc# 8`, `Filed 04/06/20`, per `SOURCE.md`) and the filer's own TOC and TOA page numbers. Our p.13 (signature block) pairs with filed p.1 by overlap, which is a weak match; our p.14 (certificate of service) pairs with filed p.13.
+- Visible differences: the filed memorandum uses Times, our render used EB Garamond when this overlay was made (it is Times New Roman 16 pt now), so line breaks fall at different words. The blue layer carries the ECF header and footer (`Doc# 8`, `Filed 04/06/20`, per `SOURCE.md`) and the filer's own TOC and TOA page numbers. Our p.13 (signature block) pairs with filed p.1 by overlap, which is a weak match; our p.14 (certificate of service) pairs with filed p.13.
 - The overlay is a diagnostic (tier 3), not a score.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 70 dpi and viewed (14 of 14). Typst printed no warnings. Fonts: EB Garamond only. The "Compared with" column gives the overlay pairing. Filed pages were viewed as images only for overlay p.8.
+Made on the earlier EB Garamond render. The 14 pages of the current typst and docx renders (Times New Roman, cross-engine layout model, fb-595.68.32) were viewed side by side at 60 dpi on 2026-10-22: every line and page alike; the cover, caption, contents and authorities with their page numbers, headings, signature and certificate look as listed below, and the p. 13 item is resolved (the conclusion now moves with the signature block: the last body block is kept with it).
+
+Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 70 dpi and viewed (14 of 14). Typst printed no warnings. Fonts: EB Garamond only (then). The "Compared with" column gives the overlay pairing. Filed pages were viewed as images only for overlay p.8.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -79,27 +81,29 @@ Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 70 dpi and viewed 
 | 9 | filed p.7 (overlay) | Argument heading A. with a hanging label; the first paragraph of Argument. | PASS |
 | 10 | filed p.8 (overlay) | Argument A.1. heading (hanging label, bold); text. | PASS |
 | 11 | filed p.8 (overlay) | Argument A.1. continues; citations in the body. | PASS |
-| 12 | filed p.9 (overlay) | End of argument; Conclusion heading and WHEREFORE paragraph. | PASS |
-| 13 | filed p.1 (overlay, by overlap) | Signature block alone: "Dated" line and the firm block. The WHEREFORE paragraph stays on p.12. A signature alone on a page is the layout the rules do not dictate, but a clerk would notice it. | OPEN |
+| 12 | filed p.9 (overlay) | End of argument. (Now: the Conclusion moves to p. 13 with the signature.) | PASS |
+| 13 | filed p.1 (overlay, by overlap) | Signature block alone: "Dated" line and the firm block. The WHEREFORE paragraph stays on p.12. A signature alone on a page is the layout the rules do not dictate, but a clerk would notice it. | RESOLVED (2026-10-22: the Conclusion heading and its paragraph are kept with the signature block on p. 13) |
 | 14 | filed p.13 (overlay) | Certificate of service: wording, signature, role. | PASS |
 
-**OPEN (p. 13):** the signature block is alone on its page. The fix is to keep the conclusion's last paragraph with the block; the template does not do that yet. It was not changed in this pass, because the existing template is not broken and the change touches the layout of every signature block. A follow-up should decide it.
+**Resolved (p. 13):** the last body block is now kept with the never-split signature block (fb-595.68.32), so the Conclusion heading and paragraph open p. 13 above the signature.
 
 ## Known gaps
 
 1. **One exemplar.** Tier 2 wants two or three filers. The second candidate in `usage/SOURCE.md` (*Taylor v. Community Loan Servicing*, 23-06024, doc 45) was not downloaded in this pass.
 2. **The motion is not produced.** Only the memorandum; the motion it supports is a separate filing.
-3. **Page 13 signature block** (OPEN above).
+3. **Page 13 signature block**: resolved (above).
 4. **Passim and TOA checks** are template behaviour (pages from `toa:` links, passim at 7 or more pages). The sample's authorities were added by hand and were not cross-checked against the PDF text here.
 5. **The 30-page limit** (LBR 9013.1(b)) is not enforced. The sample is 14 pages.
 6. **No consent statement or local-rule timing** is checked: LBR 7012.1(b)–(c) is procedure, not a layout requirement.
 7. **Counsel block** is the filer's own; the template prints it as given.
-8. **Character density** (LBR 9004.1(a)(1)) is not checked mechanically. 16 pt was chosen from a 14 pt measurement (13.4 cpi); the 16 pt figure was not re-measured.
+8. **Character density** (LBR 9004.1(a)(1)) is not checked mechanically. 16 pt was chosen from Liberation Serif (Times New Roman metrics) measurements on the sample text: 11.2 cpi at 16 pt.
 
 ## Engines
 
-**docx** (`docx/build-reference.sh` makes `docx/reference.docx`; `docx/ksb.lua` builds the counsel block, caption, title, table of contents, table of authorities, signature block and certificate of service). `docx/render.sh` renders in two passes: pass 1 writes the search phrases and a PDF, `docx/pages.lua` (run by `pandoc lua`) finds each heading and each authority in that PDF, and pass 2 writes the page numbers into the TOC and TOA. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`. The `.docx.pdf` is 14 pages, the typst output is 14 pages; every page was rasterized at 60 dpi and compared.
+The typst template is the reference; the docx breaks every line and page where it does (Gate 4 CROSS-ENGINE, `params.cross_engine: gate` in `eval.yaml`). Both are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; fb-595.68.32): Times New Roman 16 pt, exact 32 pt body lines and 18.4 pt single lines, explicit spaces between blocks, sticky headings, the last body block kept with the never-split signature block. The contents and authorities rows are `listing-row` (the text wraps before a page column of 36 pt, 72 pt for the authorities, a dot leader to the page; each row's last word keeps 4 pt free before the leader, as LibreOffice wants it before the leader tab).
 
-- Matches typst: the cover and caption, the TOC and TOA on their own pages with the Page(s) column, "passim" for an authority on 7 pages or more, double-spaced body, level-1 headings centered in caps and levels 2 to 4 with hanging labels (A., 1., a.), the signature block (the signature alone on page 13 reproduces typst's OPEN item), the certificate of service on its own page, and the centered page number.
-- Differs (tier 2, noted, not chased): (a) TOC and TOA page numbers come from the LibreOffice pagination of this docx, and four entries differ from typst because line breaks differ: Khalick p. 8 (typst 9), Woodridge p. 10 (typst 11), Trustees (Wasatch) p. 10 (typst 11), and 11 U.S.C. § 548(a)(1)(B) lists 5, 7, 9 (typst 5, 7, 9, 10). Word may paginate differently again. (b) Dot leaders are tab leaders, set tighter than typst's spaced dots. (c) A heading at the top of a page keeps its space above, which typst drops, so it sits about a line lower. (d) Heading keep-with-next is on and widow control is off, to keep the page count at typst's 14.
-- BLOCKED: none for the layout. `sh tools/check.sh <folder> --engine docx` cannot run: this folder has no `checks.yaml` (and no `court.json`). Opened and converted in LibreOffice only; Word is not available here.
+DOCX (`docx/`): `reference.xml` (`base="xengine"`: the face is the typst template's through `{font}`, 16 pt, 32 pt body and 18.4 pt single lines, 1 in margins; the markdown read as CommonMark, as cmarker reads it) and `ksb-motion-brief.lua` (on `lib/docx/xengine.lua`: the cover, caption table, contents, authorities, headings with their labels, body, signature and certificate of service, each in the typst template's line boxes and spaces). `fb render` builds the reference document and runs the passes: the filter writes needles (the cover's first line, where page 1 starts; each heading by its label and title and the words after it; each `toa:` citation by its text and the words after it, in document order) and gets their pages back until they settle; one section, every page numbered from the first. No shell script, no committed `reference.docx` (were `build-reference.sh`, `reference.docx`, `ksb.lua`, `render.sh` and `pages.lua`, EB Garamond). Samples: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion; opened in LibreOffice, not Word).
+
+- `tools/check.sh <dir>`: RESULT: 8 checks passed, 0 failed (DEF-TOC-001, DEF-COVER-001 pass).
+- `tools/check.sh <dir> --engine docx`: RESULT: 12 checks passed, 0 failed; XENG-001..003 PASS (14 pages, 259/259 lines). The contents and authorities page numbers are the same in both engines.
+- No latex engine for this folder.

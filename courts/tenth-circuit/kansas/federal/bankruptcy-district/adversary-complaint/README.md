@@ -13,7 +13,7 @@
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls `ksb-adversary-complaint`. |
 | `typst/ksb-adversary-complaint.typ` | Template. Parameter block at the top (type, spacing, margins, indents). Metadata checks at the top of `ksb-adversary-complaint`. |
 | `usage/INPUT-adversary-complaint.md` | Markdown contract sample: YAML frontmatter, then the body. |
-| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/tenth-circuit/kansas/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md` (10 pages, no typst warnings). |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/tenth-circuit/kansas/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md` (9 pages, no typst warnings; on the shared cross-engine layout model, fb-595.68.32). |
 | `usage/OVERLAY-rebein-sandy-road-farms.pdf`, `.txt` | `sh tools/overlay.sh courts/tenth-circuit/kansas/federal/bankruptcy-district/adversary-complaint rebein-sandy-road-farms` (red = ours, blue = filed, black = agree; page map in the `.txt`). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -42,10 +42,10 @@ Requirement IDs used in `ksb-adversary-complaint.typ`:
 | ID | Requirement | Where | Source | Kind |
 |---|---|---|---|---|
 | KSB-FORM-001 | 8½ × 11 paper, margins 1 inch on all sides | `set page` | LBR 9004.1(a)(1) (paper); margin is a style choice | M (paper), C (margin) |
-| KSB-FORM-002 | Type ≥ 12 pt and ≤ 12 characters per inch on average | `type-size = 16pt` | LBR 9004.1(a)(1). At 14 pt EB Garamond measured 13.4 cpi, so 16 pt | M |
-| KSB-FORM-003 | Double-spaced where practicable | `line-pitch = 2 × type-size` | LBR 9004.1(a)(1) | M |
+| KSB-FORM-002 | Type ≥ 12 pt and ≤ 12 characters per inch on average | `type-size = 16pt`, Times New Roman (vendored metric twin; no rule names a face) | LBR 9004.1(a)(1). Measured in Liberation Serif: 12.8 cpi at 14 pt, 11.2 at 16 pt | M |
+| KSB-FORM-003 | Double-spaced where practicable | `pitch-double = 32pt` (2 × type size); court, caption, title, signature and tables single-spaced, `pitch-single = 18.4pt` (1.15 × type size) | LBR 9004.1(a)(1) | M |
 | KSB-FORM-004 | Pages numbered from the first page, the cover included | `numbering: "1"` | LBR 9004.1(a)(2) | M |
-| KSB-CAP-001 | Caption: court name, case title, case number, adversary number (blank line when not yet assigned), document designation | `caption-block` | FRBP 9004(b); FRBP 7010 and Form 416 | M |
+| KSB-CAP-001 | Caption: court name, case title, case number, adversary number (blank line when not yet assigned), document designation | `caption-block` (a table of one row per single line, the party column ruled at its right) | FRBP 9004(b); FRBP 7010 and Form 416 | M |
 | KSB-CAP-002 | Adversary number, when given, is printed as `Adv. Proc. No. <number>`; the sample leaves it blank, as the filer did. The number format is the author's responsibility | `adversary_number` (optional) | LBR 7003.1(b) | A |
 
 ## Overlay
@@ -58,7 +58,9 @@ Requirement IDs used in `ksb-adversary-complaint.typ`:
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 70 dpi and viewed (10 of 10). Typst printed no warnings. Fonts: EB Garamond only. The "Compared with" column gives the overlay pairing. Filed pages were viewed as images only for overlay p.1 and filed p.4.
+Made on the earlier EB Garamond render (10 pages). The 9 pages of the current typst and docx renders (Times New Roman 16 pt, cross-engine layout model, fb-595.68.32) were viewed side by side at 60 dpi on 2026-10-22: every line and page alike; caption, headings, numbered paragraphs (the number in a half-inch box after the indent), the signature block (p. 8, kept whole with the last prayer) and Exhibit A on its own page (p. 9: the payee column twice as wide as each other one, so a payee takes two lines, not three) look professional. No defect found.
+
+Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 70 dpi and viewed (10 of 10). Typst printed no warnings. Fonts: EB Garamond only (then). The "Compared with" column gives the overlay pairing. Filed pages were viewed as images only for overlay p.1 and filed p.4.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -84,12 +86,14 @@ Tier-2 findings (ACCEPTED): the paragraph spacing (pp. 4-5), and the Exhibit A c
 5. **Consent statement and core/non-core** (FRBP 7008(a)) are in the sample but not checked by the template.
 6. **Certificate of service** is not included. The complaint is served with the summons (FRBP 7004), and that certificate is a separate filing. LBR 9013.3 applies to later papers.
 7. **Numbered-paragraph spacing** is the open tier-2 question above; not chased, since the rules do not dictate it.
-8. **Character density** (LBR 9004.1(a)(1)) is not checked mechanically. 16 pt was chosen from a 14 pt measurement (13.4 cpi); the 16 pt figure was not re-measured.
+8. **Character density** (LBR 9004.1(a)(1)) is not checked mechanically. 16 pt was chosen from Liberation Serif (Times New Roman metrics) measurements on the sample text: 11.2 cpi at 16 pt.
 
 ## Engines
 
-**docx** (`docx/build-reference.sh` makes `docx/reference.docx`; `docx/ksb.lua` builds the cover, caption, signature block, numbered allegations and exhibit table). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`. The `.docx.pdf` is 10 pages, the typst output is 10 pages; every page was rasterized at 60 dpi and compared.
+The typst template is the reference; the docx breaks every line and page where it does (Gate 4 CROSS-ENGINE, `params.cross_engine: gate` in `eval.yaml`). Both are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; fb-595.68.32): Times New Roman 16 pt, exact 32 pt body lines and 18.4 pt single lines, explicit spaces between blocks, headings at the body pitch and sticky, the last body block kept with the never-split signature block, exhibits on a page of their own.
 
-- Matches typst: EB Garamond 16 pt, exact 32 pt double pitch, 1 in margins, 0.5 in first-line indent, numbered allegations (number at 0.5 in, text at 1 in, one count across headings), centered caps headings, the caption with its vertical rule, the signature block on the right half, the borderless exhibit table with a repeated header, the centered page number, and the page break before Exhibit A.
-- Differs (tier 2, noted, not chased): (a) typst prints the caption party names in bold (its `show table.cell.where(y: 0)` also bolds the caption row); the docx keeps them regular, which no rule requires. (b) Typst sets no space between paragraphs, so the docx's double-spaced paragraph boundaries are one line taller; line breaks fall at different words. (c) The docx turns off widow control and keeps headings with the next paragraph; with widow control on, LibreOffice moved a heading and its paragraph to the next page and the count became 11 against typst's 10. (d) Exhibit A column widths are set to match the typst wrap, so the table is about 6.4 in wide against typst's 6.3 in.
-- BLOCKED: none for the layout. `sh tools/check.sh <folder> --engine docx` cannot run: this folder has no `checks.yaml` (and no `court.json`), so every gate fails at load. Opened and converted in LibreOffice only; Word is not available here.
+DOCX (`docx/`): `reference.xml` (`base="xengine"`: the face is the typst template's through `{font}`, 16 pt, 32 pt body and 18.4 pt single lines, 1 in margins, the centered page-number footer; the markdown read as CommonMark with pipe tables, as cmarker reads it) and `ksb-adversary-complaint.lua` (on `lib/docx/xengine.lua`: the court lines, the caption table, the title, the numbered paragraphs, headings, the signature and the exhibit table, each in the typst template's line boxes and spaces). `fb render` builds the reference document; no shell script and no committed `reference.docx` (were `build-reference.sh`, `reference.docx` and `ksb.lua`, EB Garamond; the old filter looked for a `[[signature]]` marker the sample does not use, so its render carried no signature block). Samples: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice conversion; opened in LibreOffice, not Word).
+
+- `tools/check.sh <dir>`: RESULT: 9 checks passed, 0 failed (DEF-TOC-001, DEF-COVER-001 pass).
+- `tools/check.sh <dir> --engine docx`: RESULT: 13 checks passed, 0 failed; XENG-001..003 PASS (9 pages, 188/188 lines).
+- No latex engine for this folder.

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Bankr. D. Kan. memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of
+     the typst template ({font}, Times New Roman; no D. Kan. rule names a face) at 16 pt (size 32 half points: D. Kan.
+     LBR 9004.1(a)(1), 12 pt or larger and no more than 12 characters per inch on average); Body Text in exact 32 pt
+     line boxes (typst pitch-double, LBR 9004.1(a)(1) double spaced: two type sizes) with a half-inch indent; the
+     counsel, court, caption, title, heading, table, quotation and signature lines in 18.4 pt boxes (typst
+     pitch-single, 1.15 x the size); letter page with 1-inch margins. docx/ksb-motion-brief.lua writes every
+     paragraph's own spacing and the one section: every page numbered from the first, the cover included (LBR
+     9004.1(a)(2)), the number centered at the bottom, its line 645 twips above the page foot (where typst sets its
+     18.4 pt line box, footer-descent 30 %). The markdown is read as CommonMark, as cmarker reads it. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="commonmark+smart+yaml_metadata_block" size="32" body="640" single="368" indent="720" heading="368" heading-before="368" heading-after="368" quote="368" footer="645"/>
