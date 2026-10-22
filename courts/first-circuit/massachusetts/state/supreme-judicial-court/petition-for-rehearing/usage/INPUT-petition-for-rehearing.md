@@ -99,17 +99,17 @@ If this Court agrees that it should modify its opinion and authorize sentences t
 
 1. Establish a rebuttable presumption of a stay for certain individuals, such as those who are:
 
-   a. Eligible for parole and incarcerated for an offense that is not listed in Appendix A of this Court’s April 3, 2020, decision;
+a. Eligible for parole and incarcerated for an offense that is not listed in Appendix A of this Court’s April 3, 2020, decision;
 
-   b. Serving time in a house of correction for a non-excluded offense;
+b. Serving time in a house of correction for a non-excluded offense;
 
-   c. Completing their sentences within six months, taking into account any credit for good behavior or programming;
+c. Completing their sentences within six months, taking into account any credit for good behavior or programming;
 
-   d. Incarcerated for a probation or parole violation that does not include an allegation of a new criminal offense;
+d. Incarcerated for a probation or parole violation that does not include an allegation of a new criminal offense;
 
-   e. Vulnerable to COVID-19 due to age or medical condition; or
+e. Vulnerable to COVID-19 due to age or medical condition; or
 
-   f. Medically qualified for medical parole.
+f. Medically qualified for medical parole.
 
 2. Order DOC and the Sheriffs to facilitate the prompt filing of stay motions by providing Petitioners with the name, docket number, inmate number, wrap-up date, and parole eligibility date of all individuals who fall into the categories listed above; providing access to medical records within 24 hours of a request; and ensuring prompt access to confidential attorney-client communications.
 

@@ -1,0 +1,65 @@
+# Massachusetts Supreme Judicial Court (mass): motion for reconsideration or modification of a decision (petition for
+# rehearing, Mass. R. A. P. 27). The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/
+# and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to Mass. R. A. P. 20 and 27
+# (../../rules.md, MASS-*); lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant (the court's name).
+size: 14                  # MASS-FORM-002 (MRAP 20(a)(4)(B)): 14 point or larger, footnotes included (MASS-MOT-002: 12 the floor)
+pitch:
+  body: 32.2              # MASS-FORM-004, MASS-MOT-002 (20(a)(4)(C), 20(b)(2)(A)): double spaced (Word's double, 2 x 1.15 x 14)
+  single: 16.1            # caption, headings, footnotes, quotations, signature: single (1.15 x 14 pt)
+# MASS-FORM-003, MASS-MOT-002: margins at least 1 inch; top and bottom 1 inch + 4 pt keep a raised note mark inside
+margin: {top: 76, bottom: 76, left: 72, right: 72}
+indent: 36                # style: half-inch first-line indent
+list_indent: 21.6         # style: a list's text hangs 0.3 inch after its number, as the old template set it
+page_number: {align: center}   # MASS-FORM-005 (20(a)(4)(A)): numbers in the margin, from page 1 (the caption page)
+footnote: {size: 14, pitch: 16.1, gap: 7}   # MASS-FORM-002, -004: notes 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # MASS-FORM-004: indented quotations single spaced
+# Sections centered bold (Background, Discussion); argument points and sub-points bold, hanging half an inch.
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, hang: 36, above: 14, below: 11.2}
+  - {bold: true, hang: 36, above: 11.2, below: 11.2}
+# MASS-MOT-001, MASS-APP-004 (MRAP 20(b)(2)(A)): no cover; page 1 carries the name of the court, the venue and the
+# docket number, the title of the case and the motion's descriptive title between rules; the text follows.
+front:
+  - {text: "COMMONWEALTH OF MASSACHUSETTS", align: center, bold: true}
+  - {text: "Supreme Judicial Court", align: center}
+  - columns:
+      - blocks:
+          - {text: "{venue}"}
+      - blocks:
+          - {text: "No. {case_number}", align: right}
+    above: 11.2
+  - each: caption
+    above: 8.4
+    between:
+      - {text: "v.", align: center, above: 7.2, below: 7.2}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {rule: 0.5, above: 4.2, below: 4.2}
+  - {text: "{title}", align: center, bold: true, upper: true}
+  - {rule: 0.5, above: 4.2, below: 16.8}
+# MASS-FORM-012 (MRAP 20(b)(2)(B)): "Respectfully submitted," and the counsel blocks side by side, one column per
+# entry of signature.columns, never split; the date of signing under it.
+closing:
+  - group:
+      - {text: "{signature.intro}", optional: true}
+      - columns:
+          each: signature.columns
+          blocks:
+            - each: "."
+              blocks:
+                - {text: "{sig}", optional: true}
+                - {text: "{lines}", optional: true, below: 14}
+        gutter: 28.8
+        above: 14
+    above: 11.2
+  - {text: "{date}", optional: true, above: 11.2}
+  # MASS-APP-003 (MRAP 27): a certificate of compliance when the filing gives one
+  - when: compliance
+    blocks:
+      - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true, keep: true, above: 16.8, below: 8.4}
+      - {text: "{compliance.paragraphs}", pitch: body, indent: 36}
+      - {text: "{compliance.signature.sig}", optional: true, above: 14}
+      - {text: "{compliance.signature.lines}", optional: true}
