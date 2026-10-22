@@ -3,8 +3,10 @@
 font:
   size_pt: 14
   pdf_prefix: "LiberationSans"
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. The typst template is on the
-# shared document model (typst/layout.yaml), but `fb engines gen` has no LaTeX face for Arial / Liberation Sans
-# (FLADISTCTAPP4-FORM-005), so latex/ and docx/ are not generated yet (docs/open-items/fb-595.54.39.md).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. typst is on the shared document
+# model (typst/layout.yaml) and latex/ and docx/ are generated (TeX Gyre Heros, fb-595.54.82); pages are equal in all
+# three engines, but two line differences are the model's, not this folder's (docs/open-items/fb-595.54.39.md):
+# latex has no break after a slash inside a word ("calls/phone", p12, p13, p17: 932/953 lines), and LibreOffice sets
+# note 3 on the page after its anchor line (p24; pages 25-32 end a few lines early: 941/953 lines).
 params:
   cross_engine: report
