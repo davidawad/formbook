@@ -7,7 +7,7 @@ Courts under `courts/second-circuit/new-york/state` (3).
 |---|---|---|---|---|---|---:|
 | [Appellate Terms of the Supreme Court of New York](appellate-terms-of-the-supreme-court) | `nyappterm` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [New York Court of Appeals](court-of-appeals) | `ny` | up for review | 8/8 | 7/7 | 7/7 | 29 |
-| [The Four Departments of the Appellate Division](four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 3/3 | 29 |
+| [The Four Departments of the Appellate Division](four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | 1/1 | 4/4 | 29 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->

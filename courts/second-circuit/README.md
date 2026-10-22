@@ -22,8 +22,8 @@ Courts under `courts/second-circuit` (19).
 | [Connecticut Supreme Court](connecticut/state/supreme-court) | `conn` | up for review | 7/7 | 6/6 | 6/6 | 29 |
 | [Appellate Terms of the Supreme Court of New York](new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [New York Court of Appeals](new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | 7/7 | 7/7 | 29 |
-| [The Four Departments of the Appellate Division](new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 3/3 | 29 |
-| [Supreme Court of Vermont](vermont/state/supreme-court) | `vt` | up for review | 4/4 | 1/1 | 1/1 | 29 |
+| [The Four Departments of the Appellate Division](new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | 1/1 | 4/4 | 29 |
+| [Supreme Court of Vermont](vermont/state/supreme-court) | `vt` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 
 [Formbook index](../../README.md)
 <!-- fb:generated:end -->

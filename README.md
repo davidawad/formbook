@@ -157,7 +157,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Puerto Rico](courts/first-circuit/puerto-rico/federal/bankruptcy-district) | `prb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Puerto Rico](courts/first-circuit/puerto-rico/federal/district) | `prd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](courts/first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | up for review | 1/1 | 1/1 | 1/1 | 29 |
-| [Supreme Court of Puerto Rico](courts/first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | — | — | 29 |
+| [Supreme Court of Puerto Rico](courts/first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 
 ### Rhode Island
 
@@ -196,7 +196,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, W.D. New York](courts/second-circuit/new-york/federal/western-district) | `nywd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Appellate Terms of the Supreme Court of New York](courts/second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [New York Court of Appeals](courts/second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | 7/7 | 7/7 | 29 |
-| [The Four Departments of the Appellate Division](courts/second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 3/3 | 29 |
+| [The Four Departments of the Appellate Division](courts/second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | 1/1 | 4/4 | 29 |
 
 ### Vermont
 
@@ -204,7 +204,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Vermont](courts/second-circuit/vermont/federal/bankruptcy-district) | `vtb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Vermont](courts/second-circuit/vermont/federal/district) | `vtd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Supreme Court of Vermont](courts/second-circuit/vermont/state/supreme-court) | `vt` | up for review | 4/4 | 1/1 | 1/1 | 29 |
+| [Supreme Court of Vermont](courts/second-circuit/vermont/state/supreme-court) | `vt` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 
 ## Third Circuit
 
@@ -811,8 +811,8 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 1 | 6 | 16.5% |
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 0 | 6 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 5 | 0 | 5 | 14.0% |
-| First Circuit | 20 | 0 | 19 | 1 | 0 | 0.0% | 95.0% | 19 | 7 | 18 | 19.2% |
-| Second Circuit | 19 | 0 | 19 | 0 | 0 | 0.0% | 100.0% | 19 | 6 | 19 | 18.7% |
+| First Circuit | 20 | 0 | 19 | 1 | 0 | 0.0% | 95.0% | 19 | 8 | 19 | 19.2% |
+| Second Circuit | 19 | 0 | 19 | 0 | 0 | 0.0% | 100.0% | 19 | 7 | 19 | 18.7% |
 | Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 6 | 18 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 10 | 28 | 19.1% |
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 7 | 24 | 18.0% |
@@ -823,7 +823,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 8 | 21 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 8 | 25 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 2 | 4 | 17.7% |
-| **Total** | 376 | 0 | 353 | 23 | 0 | 0.0% | 93.8% | 352 | 104 | 312 | 19.0% |
+| **Total** | 376 | 0 | 353 | 23 | 0 | 0.0% | 93.8% | 352 | 106 | 313 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 

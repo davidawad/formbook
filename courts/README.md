@@ -41,7 +41,7 @@ Courts under `courts` (346).
 | [Massachusetts Supreme Judicial Court](first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 | [Supreme Court of New Hampshire](first-circuit/new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | 8/8 | 6/6 | 29 |
 | [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | up for review | 1/1 | 1/1 | 1/1 | 29 |
-| [Supreme Court of Puerto Rico](first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | — | — | 29 |
+| [Supreme Court of Puerto Rico](first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Supreme Court of Rhode Island](first-circuit/rhode-island/state/supreme-court) | `ri` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Court of Appeals for the Second Circuit](second-circuit/court-of-appeals) | `ca2` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, D. Connecticut](second-circuit/connecticut/federal/bankruptcy-district) | `ctb` | up for review | 2/2 | — | 2/2 | 14 |
@@ -60,8 +60,8 @@ Courts under `courts` (346).
 | [Connecticut Supreme Court](second-circuit/connecticut/state/supreme-court) | `conn` | up for review | 7/7 | 6/6 | 6/6 | 29 |
 | [Appellate Terms of the Supreme Court of New York](second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [New York Court of Appeals](second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | 7/7 | 7/7 | 29 |
-| [The Four Departments of the Appellate Division](second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 3/3 | 29 |
-| [Supreme Court of Vermont](second-circuit/vermont/state/supreme-court) | `vt` | up for review | 4/4 | 1/1 | 1/1 | 29 |
+| [The Four Departments of the Appellate Division](second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | 1/1 | 4/4 | 29 |
+| [Supreme Court of Vermont](second-circuit/vermont/state/supreme-court) | `vt` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Court of Appeals for the Third Circuit](third-circuit/court-of-appeals) | `ca3` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, D. Delaware](third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Delaware](third-circuit/delaware/federal/district) | `ded` | up for review | 2/2 | — | 2/2 | 14 |
