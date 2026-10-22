@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. latex and docx keep or drop a word typst fits
+# within hundredths of a point (latex p74 line 2, "and" at 503.99; docx p32 line 15, "Thus," at 504.0): the line-fit
+# tolerance the shared model lacks;
+# docs/open-items/fb-595.54.17.md.
+params:
+  cross_engine: report
