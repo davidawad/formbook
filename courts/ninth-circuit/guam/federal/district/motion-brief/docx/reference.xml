@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Guam motion brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the typst
+     template ({font}, Times New Roman; GNLR 5.1 names none) at 12 pt (size 24 half points); Body Text in exact 24 pt
+     line boxes (typst pitch-double, GNLR 5.1(a) double spaced) with a half-inch indent, and the headings in them; the
+     counsel, court title, caption, address and signature lines in 13.8 pt boxes (typst pitch-single); letter page with 1-inch
+     margins on all sides and a centered page number at the bottom (GNLR 5.1(a)), its line 36 pt above the page foot
+     (720 twips: where typst sets it, footer-descent 30 %). docx/gud-motion-brief.lua writes every paragraph's own
+     spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="480" heading-before="0" heading-after="0" footer="720"/>

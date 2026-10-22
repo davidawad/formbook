@@ -20,7 +20,7 @@ local GUTTER = 360                                     -- typst caption-gutter, 
 local COUNSEL_H = 2880 - SINGLE                        -- typst court-title-top less the margin and a single line
 local SIG_LEFT = 4320                                  -- typst signature-indent, 3 in
 
--- A paragraph: o = { before, after, line, left, right, hanging, first, tab, jc, keep, brk }.
+-- A paragraph: o = { before, after, line, left, right, hanging, first, tab, jc, keep }.
 local function p(body, o)
   o = o or {}
   local props = {}
