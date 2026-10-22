@@ -6,25 +6,33 @@
 // the caption); 11(a)(3) (counsel block under the signature). Fed. R. Civ. P. 12(b)(6) is the motion's basis.
 // See ../README.md. Content-agnostic: every case-specific word comes from the sample's frontmatter.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
 #let court-name = ("UNITED STATES DISTRICT COURT", "MIDDLE DISTRICT OF LOUISIANA") // the court's name, not a case's
-#let font-family = ("Times New Roman", "Liberation Serif")   // LR 10(a)(1): standard typeface; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // LR 10(a)(1): standard typeface (vendored, docs/FONTS.md)
 #let type-size = 12pt                   // LR 10(a)(1): no smaller than standard 12-point
-#let page-w = 8.5in                     // LR 10(a)(1): 8 1/2 by 11 inch paper
-#let page-h = 11in
-#let margin = 1in                       // LR 10(a)(1): every margin no less than one inch
-#let footer-descent = 0.6in             // LR 10(a)(1): page numbers no less than 1/2 inch from the bottom edge
-#let body-leading = 1.345em             // LR 10(a)(1): double spaced; Liberation Serif's 0.655em line box + 1.345em = 24 pt pitch at 12 pt (README.md)
-#let single-pitch = 13.8pt              // single spacing (caption, quotations, signature): 0.655em + 0.495em at 12 pt
-#let para-indent = 0.5in                // first-line indent of body paragraphs
+#let margin = 1in                       // LR 10(a)(1): every margin no less than one inch; 8 1/2 x 11 inch paper
+#let text-width = 8.5in - 2 * margin
+#let para-indent = 0.5in                // first-line indent of body paragraphs; a level 3 heading's indent
 #let quote-indent = 1in                 // block quotation indent, both sides
-#let single-leading-quote = 0.495em      // single spacing for block quotations: the single pitch minus the 0.655em line box
 #let signature-indent = 2.5in           // the signature column starts at mid-page, as in the filed exemplars
-#let text-width = page-w - 2 * margin
 #let caption-party-w = 2.7in            // width of the party column (the party names, then "VERSUS" between them)
+#let caption-pad = 0.3in                // the civil action number stands off the party column
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; docx/lamd-motion-brief.lua sets the same twips).
+#let pitch-body = 24pt                  // LR 10(a)(1): double spaced (court name, title, headings, body)
+#let pitch-single = 13.8pt              // single spaced (LR 10(a)(1) allows it for quotations): caption, quotations,
+                                        // signature lines, page number
+#let blank = 24pt                       // one blank double-spaced line: court name to caption, caption to title,
+                                        // title to text, around the signature block and a "/s/" line, below a quotation
+// LR 10(a)(1): page numbers no less than 1/2 inch from the bottom edge. The number sits in a single-spaced line box
+// whose foot is 0.6 in above the bottom edge (docx: footer distance 864 twips): 72 - 43.2 - 13.8 = 15 pt below the text.
+#let footer-descent = 15pt
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -37,23 +45,37 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// Markdown inline to content (for case names in italics, etc.).
-#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
+/// Inline markdown (case names in italics, etc.).
+#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
-/// One single-spaced line per item; each line is a fixed-height block, so the caption and the
-/// signature keep the single pitch whatever the text is.
-#let single-lines(items, width: auto) = stack(dir: ttb, spacing: 0pt, ..items.map(i =>
-  block(width: width, height: single-pitch, above: 0pt, below: 0pt, text(i))))
+/// Inline content without the paragraph breaks cmarker may put around it.
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
+}
+
+/// Single-spaced lines, one paragraph each, as typed (plain text); an empty item is a blank single line.
+#let line-stack(items) = {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  let gap = 0pt
+  for i in items {
+    if i == "" { gap += pitch-single } else {
+      block(width: 100%, above: gap, below: 0pt, i)
+      gap = 0pt
+    }
+  }
+}
+
+/// A line (or more) at the body pitch, centred.
+#let centred(body, above: 0pt) = block(width: 100%, above: above, below: 0pt,
+  align(center, par(first-line-indent: 0pt, body)))
 
 /// The markdown line that marks where the signature block goes (after the conclusion, before the certificate).
 #let signature-marker = "<!-- signature -->"
-
-// ---------------------------------------------------------------------------
-// Page furniture
-// ---------------------------------------------------------------------------
-
-/// Page number centered in the bottom margin (page-number placement: LR 10(a)(1)).
-#let page-footer() = context align(center, text(size: type-size, counter(page).display()))
 
 // ---------------------------------------------------------------------------
 // Cover: court name, caption, title of the paper
@@ -66,104 +88,82 @@
   n
 }
 
-#let caption(meta) = grid(
-  columns: (caption-party-w, 1fr),
-  single-lines(meta.caption),
-  block(inset: (left: 0.3in), {
-    single-lines(("CIVIL ACTION NO. " + file-number(meta),))
-    if "judge" in meta and meta.judge != "" {
-      v(single-pitch)
-      single-lines((meta.judge,))
-    }
-    if "magistrate" in meta and meta.magistrate != "" {
-      single-lines((meta.magistrate,))
-    }
-  }),
-)
+/// The party column at left; at right the civil action number, then the judge and the magistrate judge, each on the
+/// line of the next party row (a blank single line between).
+#let caption(meta) = {
+  let right = ("CIVIL ACTION NO. " + file-number(meta),)
+  if "judge" in meta and meta.judge != "" { right += ("", meta.judge) }
+  if "magistrate" in meta and meta.magistrate != "" { right += ("", meta.magistrate) }
+  block(above: blank, below: 0pt, breakable: false, grid(
+    columns: (caption-party-w, text-width - caption-party-w),
+    line-stack(meta.caption),
+    pad(left: caption-pad, line-stack(right)),
+  ))
+}
 
 #let cover(meta) = {
-  align(center, {
-    for line in court-name { text(weight: "bold", line) + linebreak() }
-  })
-  v(body-leading)
+  for line in court-name { centred(text(weight: "bold", line)) }
   caption(meta)
-  v(body-leading)
-  align(center, text(weight: "bold", upper(meta.title)))
-  v(body-leading)
+  // The title as typed (in capitals by convention; a rule cited in it keeps its letters: "12(b)(6)").
+  centred(above: blank, text(weight: "bold", meta.title))
 }
 
 // ---------------------------------------------------------------------------
 // Body and signature
 // ---------------------------------------------------------------------------
 
-/// Counsel block under the signature (LR 11(a)(3)): right part of the page, single spaced. Wide enough
-/// for the longest firm name on one line (single lines are fixed-height, so they cannot wrap).
-#let signature-block(meta) = block(breakable: false, width: text-width, {
-  pad(left: signature-indent, single-lines(meta.signature_lines, width: text-width - signature-indent))
-  v(body-leading)
-})
+/// Counsel block under the signature (LR 11(a)(3)): from mid-page, single spaced, a blank double-spaced line above
+/// and below it. The space above is the block's own (typst drops a gap at the start of the pad).
+#let signature-block(meta) = block(width: 100%, breakable: false, above: blank, below: blank,
+  pad(left: signature-indent, line-stack(meta.signature_lines)))
 
-/// Body paragraphs. Each blank-line-separated chunk of markdown is one paragraph (first-line indent,
-/// double spaced), except: a heading (`#`, `##`, `###`), a list, or a chunk that starts with ">", which is a
-/// single-spaced block quotation indented on both sides.
-/// Paragraphs are handled per chunk, not with a `show par` rule: a show rule that re-wraps paragraph
-/// content recurses without end in typst 0.15.
-#let paragraphs(body) = {
+/// Body paragraphs. Each blank-line-separated chunk of markdown is one paragraph (first-line indent, double
+/// spaced), except: a heading (`#` centred bold capitals, `##` bold at the margin, `###` bold half an inch in, each
+/// kept with the block after it), a chunk that starts with ">" (a single-spaced block quotation indented on both
+/// sides, a blank line below it), and a "/s/" chunk (an electronic signature, LR 11(a)(2), in the signature column).
+/// `keep-last`: the last chunk is kept whole and with what follows (the signature block). `first-above`: the space
+/// above the first chunk.
+#let paragraphs(body, keep-last: false, first-above: 0pt) = {
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
-  for c in chunks {
+  for (i, c) in chunks.enumerate() {
     let t = c.trim()
+    let sticky = keep-last and i == chunks.len() - 1
+    let above = if i == 0 { first-above } else { 0pt }
     if t.starts-with("#") {
-      md(t)
-    } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
-      // Lists are not used by this memorandum's body; rendered flush, double spaced, as written.
-      {
-        set par(leading: body-leading)
-        md(t)
-        v(body-leading)
-      }
+      let level = t.match(regex("^#+")).end
+      // A title that starts "2. " is a heading, not a list item: the period is escaped for the markdown reader.
+      let s = t.slice(level).trim().replace(regex("^(\\d+)\\."), m => m.captures.at(0) + "\\.")
+      let h = text(weight: "bold", if level == 1 { upper(inl(s)) } else { inl(s) })
+      block(width: 100%, sticky: true, above: above, below: 0pt,
+        if level == 1 { align(center, par(first-line-indent: 0pt, h)) }
+        else { pad(left: if level >= 3 { para-indent } else { 0pt }, par(first-line-indent: 0pt, h)) })
     } else if t.starts-with(">") {
-      pad(left: quote-indent, right: quote-indent, {
-        set par(leading: single-leading-quote)
-        md(t.slice(1).trim())
-      })
-      v(body-leading)
+      set text(..edges(pitch-single))
+      block(width: 100%, sticky: sticky, breakable: not sticky, above: above, below: blank, pad(x: quote-indent,
+        par(first-line-indent: 0pt, unloose(inl(t.replace(regex("(?m)^>[ \t]?"), ""))))))
     } else if t.starts-with("/s/") {
-      // An electronic signature line (LR 11(a)(2)) sits in the signature column, flush, not indented.
-      pad(left: signature-indent, {
-        set par(leading: single-leading-quote)
-        md(t)
-      })
-      v(body-leading)
+      set text(..edges(pitch-single))
+      block(width: 100%, sticky: sticky, breakable: not sticky, above: blank, below: blank, pad(left: signature-indent,
+        par(first-line-indent: 0pt, unloose(inl(t)))))
     } else {
-      set par(leading: body-leading)
-      h(para-indent)
-      md(t)
-      parbreak()
+      block(width: 100%, sticky: sticky, breakable: not sticky, above: above, below: 0pt, par(unloose(inl(t))))
     }
   }
 }
 
 #let lamd-motion-brief(meta, body) = {
+  // Every page numbered, bottom centre (LR 10(a)(1)).
   set page(
     paper: "us-letter",
     margin: margin,
-    footer: page-footer(),
     footer-descent: footer-descent,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  // Paragraph and block spacing equal the double-space pitch: a line of text is about 0.655em tall, so
-  // with spacing 0 consecutive paragraphs and blocks overprint (measured; see README.md).
-  set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
-  set block(spacing: body-leading)
-
-  // Headings: level 1 is a centered bold section (INTRODUCTION, CONCLUSION); level 2 a bold heading at the
-  // left margin (I. ..., II. ...); level 3 a bold sub-heading at the left margin (A. ...).
-  show heading.where(level: 1): it => block(width: 100%, sticky: true, above: body-leading, below: body-leading,
-    align(center, text(size: type-size, weight: "bold", upper(it.body))))
-  show heading.where(level: 2): it => block(width: 100%, sticky: true, above: body-leading, below: body-leading,
-    text(size: type-size, weight: "bold", it.body))
-  show heading.where(level: 3): it => block(width: 100%, sticky: true, above: body-leading, below: body-leading,
-    pad(left: 0.5in, text(size: type-size, weight: "bold", it.body)))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch. No markdown lists reach typst's list layout (list-indent: none).
+  show: xengine.with(pitch: pitch-body, list-indent: none)
 
   cover(meta)
 
@@ -172,12 +172,9 @@
   let before = parts.at(0)
   let after = parts.slice(1).join("", default: "")
 
-  // The last paragraph before the signature stays on the page with it: a signature never starts a page alone.
-  let chunks = before.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
-  paragraphs(chunks.slice(0, -1).join("\n\n", default: ""))
-  block(breakable: false, width: text-width, {
-    paragraphs(chunks.last())
-    signature-block(meta)
-  })
+  // The first paragraph sits a blank line below the title. The last paragraph before the signature stays on the
+  // page with it: a signature never starts a page alone.
+  paragraphs(before, keep-last: true, first-above: blank)
+  signature-block(meta)
   paragraphs(after)
 }
