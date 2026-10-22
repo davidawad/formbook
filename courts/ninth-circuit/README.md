@@ -65,7 +65,7 @@ Courts under `courts/ninth-circuit` (61).
 | [Court of Appeals of Oregon](oregon/state/court-of-appeals) | `orctapp` | up for review | 1/2 | — | — | 29 |
 | [Oregon Supreme Court](oregon/state/supreme-court) | `or` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals of Washington](washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
-| [Washington Supreme Court](washington/state/supreme-court) | `wash` | up for review | 9/9 | 2/2 | 2/2 | 29 |
+| [Washington Supreme Court](washington/state/supreme-court) | `wash` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 
 [Formbook index](../../README.md)
 <!-- fb:generated:end -->
