@@ -191,19 +191,15 @@ authorities:
     cite: "(1982) 455 U.S. 422"
   ccpappeal:
     kind: statute
-    name: "Code Civ. Proc., § 904.1"
     cite: "Code Civ. Proc., § 904.1"
   ccpmsj:
     kind: statute
-    name: "Code Civ. Proc., § 437c"
     cite: "Code Civ. Proc., § 437c"
   govpublic:
     kind: statute
-    name: "Gov. Code, § 815.6"
     cite: "Gov. Code, § 815.6"
   govdiscretion:
     kind: statute
-    name: "Gov. Code, § 820.2"
     cite: "Gov. Code, § 820.2"
   govapa:
     kind: statute
@@ -211,115 +207,87 @@ authorities:
     cite: "Gov. Code, § 11340 et seq."
   penfirearm:
     kind: statute
-    name: "Pen. Code, § 16520"
     cite: "Pen. Code, § 16520"
   penlonggun:
     kind: statute
-    name: "Pen. Code, § 168654"
     cite: "Pen. Code, § 168654"
   penrifle:
     kind: statute
-    name: "Pen. Code, § 17090"
     cite: "Pen. Code, § 17090"
   penshotgun:
     kind: statute
-    name: "Pen. Code, § 17191"
     cite: "Pen. Code, § 17191"
   penlongarm:
     kind: statute
-    name: "Pen. Code, § 16865"
     cite: "Pen. Code, § 16865"
   penclass:
     kind: statute
-    name: "Pen. Code, § 16640"
     cite: "Pen. Code, § 16640"
   pencategory:
     kind: statute
-    name: "Pen. Code, § 16530"
     cite: "Pen. Code, § 16530"
   penfflsale:
     kind: statute
-    name: "Pen. Code, § 26700"
     cite: "Pen. Code, § 26700"
   pensale:
     kind: statute
-    name: "Pen. Code, § 27545"
     cite: "Pen. Code, § 27545"
   penprivate:
     kind: statute
-    name: "Pen. Code, § 2824"
     cite: "Pen. Code, § 2824"
   penrecord:
     kind: statute
-    name: "Pen. Code, § 28100"
     cite: "Pen. Code, § 28100"
   penformat:
     kind: statute
-    name: "Pen. Code, § 28105"
     cite: "Pen. Code, § 28105"
   penelectronic:
     kind: statute
-    name: "Pen. Code, § 28155"
     cite: "Pen. Code, § 28155"
   penentry:
     kind: statute
-    name: "Pen. Code, § 28160"
     cite: "Pen. Code, § 28160"
   penexclusive:
     kind: statute
-    name: "Pen. Code, § 28205"
     cite: "Pen. Code, § 28205"
   pendes:
     kind: statute
-    name: "Pen. Code, § 28215"
     cite: "Pen. Code, § 28215"
   penduty:
     kind: statute
-    name: "Pen. Code, § 28220"
     cite: "Pen. Code, § 28220"
   penrange:
     kind: statute
-    name: "Pen. Code, §§ 28200-28255"
     cite: "Pen. Code, §§ 28200-28255"
   penreg:
     kind: statute
-    name: "Pen. Code, § 11106"
     cite: "Pen. Code, § 11106"
   penassault:
     kind: statute
-    name: "Pen. Code, § 30515"
     cite: "Pen. Code, § 30515"
   fedcivil:
     kind: statute
-    name: "42 U.S.C. § 1983"
     cite: "42 U.S.C. § 1983"
   fedfees:
     kind: statute
-    name: "42 U.S.C. § 1988"
     cite: "42 U.S.C. § 1988"
   regdealer:
     kind: regulation
-    name: "Cal. Code Regs., tit. 11, § 4210"
     cite: "Cal. Code Regs., tit. 11, § 4210"
   cacontract:
     kind: constitution
-    name: "Cal. Const., art. I, § 9"
     cite: "Cal. Const., art. I, § 9"
   cabudget:
     kind: constitution
-    name: "Cal. Const., art. IV, § 8"
     cite: "Cal. Const., art. IV, § 8"
   usprocess:
     kind: constitution
-    name: "U.S. Const., amend XIV"
     cite: "U.S. Const., amend XIV"
   usarms:
     kind: constitution
-    name: "U.S. Const., amend. II"
     cite: "U.S. Const., amend. II"
   uscommerce:
     kind: constitution
-    name: "U.S. Const., art. I"
     cite: "U.S. Const., art. I"
   oal:
     kind: other
@@ -327,7 +295,6 @@ authorities:
     cite: "Office of Administrative Law, State of California, Administrative Procedure Act & OAL Regulations, https://www.oal.ca.gov/publications/administrative\\_procedure\\_act/"
   sbill:
     kind: other
-    name: "Sen. Bill No. 118 (2019-2020 Reg. Sess.)"
     cite: "Sen. Bill No. 118 (2019-2020 Reg. Sess.)"
 ---
 
