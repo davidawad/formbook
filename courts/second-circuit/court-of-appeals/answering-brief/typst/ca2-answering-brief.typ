@@ -393,7 +393,7 @@
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [This brief complies with the type-volume limitation of Fed. R. App. P. 32(a)(7)(B) and Local Rule 32.1(a)(4)(A) because this brief contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. App. P. 32(f).]
   parbreak()
-  [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because this brief has been prepared in a proportionally spaced typeface using #meta.at("software", default: software) in 14-point #meta.at("typeface", default: "Liberation Serif").]
+  [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because this brief has been prepared in a proportionally spaced typeface using #meta.at("software", default: software) in 14-point #meta.at("typeface", default: "Times New Roman").]
   form-sig-line(meta)
 }
 
