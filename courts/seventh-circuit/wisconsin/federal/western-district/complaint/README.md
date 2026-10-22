@@ -7,10 +7,10 @@ Folder: `courts/seventh-circuit/wisconsin/federal/western-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (a portion of the 34-page filing: caption, sections I to IV in part, prayer A to F, jury demand, signature) |
-| typeface | Face required by the rules: **none named** (W.D. Wis. LR list and Briefing Guidelines checked; see "Not verified" below). Vendored substitute: none needed. Font kept: **EB Garamond** (`docs/FONTS.md`, "No face named"). Times substitute `Liberation Serif` is vendored but not used, since no rule asks for Times. |
-| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (pdffonts: EB Garamond Regular, Bold, BoldItalic, all embedded), no warnings |
+| typeface | Face required by the rules: **none named** (W.D. Wis. LR list and Briefing Guidelines checked; see "Not verified" below). Vendored substitute: none needed. Font: **Times New Roman** (vendored), the house standard (`docs/FONTS.md`) and the exemplar's face, in typst and docx alike (fb-595.68.28). |
+| render | ok (re-rendered 2026-10-22, fb-595.68.28): `usage/OUTPUT-complaint.typst.pdf` and `.docx.pdf`, 9 pages each, typst 0.15.0, vendored Times New Roman only (regular, bold, bold italic, embedded), no warnings |
 | overlay | **not re-run**: the filed exemplar PDF is not in `usage/` in this snapshot (only `SOURCE.md`), so `tools/overlay.sh` cannot run. `usage/OVERLAY-olson-complaint.txt` is the page map from an earlier run against the filed PDF; `OVERLAY-olson-complaint.pdf` is not in the snapshot. |
-| pages reviewed | 9 of 9 re-rendered at 60 dpi and viewed 2026-10-15 (see the review section) |
+| pages reviewed | 9 of 9, typst and docx, re-rendered at 50 dpi and viewed 2026-10-22 (see the review section) |
 
 File names: the brief asks for `<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` read and write the role-prefixed names (`INPUT-`, `OUTPUT-`, `OVERLAY-`), so those are used here (see CLAUDE.md, "File roles are in the name").
 
@@ -32,9 +32,9 @@ Not produced by this template (separate filings, or not called for by the rules 
 
 - Court title centered in bold caps (`UNITED STATES DISTRICT COURT` / `WESTERN DISTRICT OF WISCONSIN`), then a caption: parties on the left in a column closed by a rule, `Case No.` on the right.
 - Title of the paper centered in bold below the caption.
-- Body double-spaced (24 pt pitch at 12 pt, `body-leading = 1.35em`), 1-inch margins, page number centered in the footer.
-- Headings: level 1 centered bold caps (`I. NATURE OF THE CASE`, `PRAYER FOR RELIEF`); level 2 centered bold; level 3 bold italic at the left margin (the sub-heading `A.`, `B.`, `C.` of the facts).
-- Numbered allegations, first-line indent 0.5 in. Markdown lists become lettered items (`A.`, `B.`, ...).
+- Body double-spaced (exact 24 pt line boxes at 12 pt, `pitch-body`, on the shared cross-engine model `lib/typst/xengine.typ`; single lines 13.8 pt), 1-inch margins, page number (11 pt) centered in the footer.
+- Headings at 12 pt on the body pitch, no space of their own: level 1 centered bold caps (`I. NATURE OF THE CASE`, `PRAYER FOR RELIEF`); level 2 centered bold; level 3 bold italic at the left margin (the sub-heading `A.`, `B.`, `C.` of the facts).
+- Numbered allegations: the number at the 0.5 in first-line indent in a 0.5 in box, the text from 1 in. Markdown lists become lettered items (`A.`, `B.`, ...), the letter at 0.5 in, the lines hanging at 0.9 in.
 - Signature block: "Dated:", "Respectfully submitted," the firm, then `/s/ name` and the lines for each signer, single-spaced.
 
 ## Markdown contract (for samples)
@@ -60,59 +60,41 @@ ours p.8  filed p.33  word-overlap 57.6%
 ours p.9  filed p.34  word-overlap 48.8%
 ```
 
-The overlay is a diagnostic, not a score. Pages 2 to 6 of the sample are paired with filed pages that are not in the sample (the sample is a portion), so the overlap there is low by design. The caption (page 1) and the prayer and signature (pages 8 and 9) line up with their filed pages. The filed exemplar's font (Times New Roman) is not EB Garamond, so letterforms differ on every page; that is expected.
+The overlay is a diagnostic, not a score. Pages 2 to 6 of the sample are paired with filed pages that are not in the sample (the sample is a portion), so the overlap there is low by design. The caption (page 1) and the prayer and signature (pages 8 and 9) line up with their filed pages. That overlay predates the switch to Times New Roman (fb-595.68.28), the exemplar's face.
 
 ## Known gaps and open choices
 
 1. **W.D. Wis. form rules not located (open question for David).** The template's font, size, margins and spacing are conventions matched to the exemplar, not rule citations. A future pass needs the civil local rules (LR 7, LR 10 or their equivalent) or a confirmation from the clerk. Until then the template makes no claim that it complies with a W.D. Wis. form rule.
-2. **Font.** The filed exemplar uses Times New Roman, but no rule the template cites names a face, so the template keeps EB Garamond. `Liberation Serif`, the Times-metric substitute, is vendored (`docs/FONTS.md`). EB Garamond at 12 pt is narrower and has a smaller x-height, so the sample is shorter than the exemplar at the same page count. Switching to `Liberation Serif` is a filer's choice unless a local rule or the clerk requires Times.
+2. **Font.** No rule the template cites names a face; Times New Roman 12 pt, the house standard (`docs/FONTS.md`) and the exemplar's face, in both engines (was EB Garamond until fb-595.68.28).
 3. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search (CourtListener RECAP, `court=wiwd`, complaints filed 2026-10-02 to 2026-10-13) found Iconocare Strategic Branding (3:26-cv-01023, 7 pages, Times New Roman and Calibri, counsel Reimann; too short to show a full complaint) and Sieverding v. Koritzinsky & Karls (3:26-cv-00627, 36 pages, scanned, no text layer). Tier 2 is therefore not judged against two filers.
 4. **Caption.** The party column is closed by a right rule and a bottom rule, not a column of `)` marks. The exemplar uses the same party/case-number split with no column of marks; this is a convention choice.
 5. **Counsel block at the top.** The exemplar puts counsel at the end (signature block). The template follows the exemplar and has no top counsel block. A court that wants the N.D. Cal.-style top block would need the `counsel` field rendered; the field exists but is not rendered.
 6. **Paragraph numbers differ.** The sample numbers its allegations from 1; the filed numbers run to 216. The sample's section headings are transcribed as filed (roman numerals and lettered sub-headings), but filed pages 13 to 29 are only partly transcribed, so some paragraph numbers in the sample have no filed counterpart.
 7. **Italics.** Case names and statutes are roman in the transcription (the text layer has no italic markup for this filing).
-8. **Not run: `tools/check.sh`, `tools/check-selftest.sh`, `tools/tracker.sh`.** These expect a court folder with `court.json` and `rules.md` in the court directory; this doc-type folder has neither. The brief forbids running the tracker and editing `tools/`. The render and overlay steps were run; the review below is the Gate 2 equivalent.
+8. **Gate scripts.** Since fb-595.68.28: `sh tools/check.sh <this folder>` and `--engine docx` both exit 0 (typst 9, docx 13 checks passed, 0 failed).
 9. **Medical detail omitted** from the transcription (filed paragraphs on the plaintiff's health are not transcribed).
 
-## Review of the rendered pages (`OUTPUT-complaint.typst.pdf`, 9 pages)
+## Review of the rendered pages (`OUTPUT-complaint.typst.pdf` and `.docx.pdf`, 9 pages each)
 
-Each page rendered at 60 dpi and viewed after the last template change.
+Each page rendered at 50 dpi and viewed on both engines after the cross-engine port (fb-595.68.28); the docx breaks every line and page as typst does (XENG-001..003).
 
-- Page 1: court title, caption with the case number at right, title centered, section I heading, paragraphs 1 to 4 double-spaced with indent, no overlap. Pass.
-- Page 2: paragraph 5; section II PARTIES (paragraphs 6 to 8); section III heading (paragraph 9). Pass.
-- Page 3: paragraphs 10 to 12; section IV heading; sub-heading A (bold italic, left) kept with its first paragraph; paragraphs 13 to 20. Pass.
-- Page 4: paragraphs 21 to 31; sub-heading B kept with its first paragraph. Pass.
-- Page 5: paragraphs 32 to 41; sub-heading C on page 5 with its first paragraph. Pass.
+- Page 1: court title, caption with the rules and the case number at right, title centered, section I heading, paragraphs 1 to 4. Pass.
+- Page 2: paragraph 4 (end) and 5; section II PARTIES (paragraphs 6 to 8); section III heading (paragraph 9). Pass.
+- Page 3: paragraphs 10 to 12; section IV heading; sub-heading A (bold italic, left, two lines) kept with paragraph 13; paragraphs 13 to 20. Pass.
+- Page 4: paragraphs 21 to 31; sub-heading B kept with paragraph 23. Pass.
+- Page 5: paragraphs 32 to 41; sub-heading C kept with paragraph 37. Pass.
 - Page 6: paragraphs 42 to 55. Pass.
 - Page 7: paragraphs 56 to 62; the last paragraph carries onto page 8. Pass.
-- Page 8: paragraphs 63 and 64; PRAYER FOR RELIEF heading; WHEREFORE lead-in unnumbered (`^`); items A to D. Pass.
-- Page 9: items E and F; JURY DEMAND heading; the demand unnumbered; "Dated:", the firm, both `/s/` signature blocks. Pass.
+- Page 8: paragraphs 63 and 64; PRAYER FOR RELIEF; the WHEREFORE lead-in unnumbered (`^`); items A to D. Pass.
+- Page 9: items D (end) to F; JURY DEMAND; the demand unnumbered; "Dated:", the firm, both `/s/` signature blocks, the role. Pass.
 
-Defects found during review and fixed: (a) the first render stacked lines on top of each other (block spacing zero against a 0.65 em line box; fixed by setting block spacing to the double-spacing leading and by stacking the court title as a single-spaced block); (b) WHEREFORE and the jury-demand sentence were numbered (fixed with the `^` marker).
 
 ## Engines
 
-**typst** is the primary engine (sections above). **latex**: not built here. **docx**: built, not checked.
+**typst** is the primary engine (sections above). **latex**: not built here. **docx**: built and checked.
 
-Files: `docx/reference.docx` (made by `docx/build-reference.sh <out>`: pandoc plus libzip's `ziptool`, no `zip` or `unzip` needed) and `docx/wiwd-complaint.lua` (cover, caption table, numbered allegations, lettered lists, signature block). No case text is in either file.
+Files: `docx/reference.xml` (the Word styles: `base="xengine"` in the typst face `{font}`, Times New Roman, 12 pt, 480-twip body and 276-twip single line boxes, headings on the body pitch, the 11 pt page-number footer 0.5 in above the page edge; `fb render` builds the reference document from it) and `docx/wiwd-complaint.lua`, which reads the sample's body chunk by chunk, as the typst template does, and writes every paragraph as WordprocessingML on `lib/docx/xengine.lua`: the court title, the caption table (the party column ruled at right and foot), the title, numbered allegations, `^` paragraphs, headings, the lettered prayer and the signature block. No script: `fb render` runs pandoc with the filter and packs the archive (fb-595.68.28; were `build-reference.sh` and a committed `reference.docx` naming EB Garamond). No case text is in either file.
 
-What matches typst (set in the reference; checked against the source, not a rendered docx):
-- Font: EB Garamond 12 pt, the only vendored face (`docs/FONTS.md`), named in the document defaults and the body, heading and footer styles. Typst's PDF embeds EB Garamond Regular, Bold and BoldItalic only (`pdffonts`, measured).
-- Page: US Letter, 1 in margins on every side (`w:pgSz` 12240 x 15840, `w:pgMar` 1440; measured in the output `.docx`).
-- Line pitch: exact 24 pt for body text, headings and lettered items (the "double" pitch in `wiwd-complaint.typ`).
-- First-line indent 0.5 in on numbered allegations; numbers are typed as `N.` followed by a tab.
-- Footer: centered `PAGE` field, 11 pt.
-- Typst output for comparison: 9 pages, EB Garamond only (`/work/artifacts/wiwd/complaint/OUTPUT-olson-complaint.pdf`, outside the court folder). The `.docx` page count is not measured.
-
-What differs from typst (not verified in a rendered docx):
-- Paragraph gaps: the docx sets no space before or after body paragraphs; `wiwd-complaint.typ` sets block spacing equal to the body leading. The gap on the page is not measured.
-- Allegation numbers are typed text, not Word list numbering, so they do not renumber when a paragraph is added.
-- Caption: a Word table, with the right and bottom rules on the left cell. Borders differ between Word and LibreOffice (`docs/DOCX.md`).
-- The cover and signature take plain text from the frontmatter; markdown inside frontmatter values (italics) is not carried.
-- Headings use keep-with-next and keep-lines; that is not checked against a render.
-
-BLOCKED (docx):
-- `docx.pdf` and the page-by-page review: `soffice` (LibreOffice) is not installed on this box and cannot be installed here. Gates 0 and 1 cannot run on `usage/OUTPUT-olson-complaint.docx.pdf`.
-- `tools/render-docx.sh` integrity check: `unzip` is not installed on this box, so the script exits 1 at its zip test, before `soffice`. Checked by hand instead: the `.docx` lists 17 parts and every `.xml` and `.rels` part is well formed (`xmllint`), and pandoc reads its text back in order.
-- TOC and TOA: not produced. The typst template does not produce them and the complaint has none.
-- Pleading line numbers: not in the typst template, so not built.
+- Cross-engine (fb-595.68.28): `sh tools/check.sh <this folder> --engine docx`: XENG-001..003 PASS (252/252 typst lines break after the same word, 9 = 9 pages); `params.cross_engine: gate` in `eval.yaml`. typst 9 and docx 13 checks passed, 0 failed.
+- Allegation numbers are typed text, not Word list numbering, so they do not renumber when a paragraph is added. The `.docx` converts in LibreOffice without error; not opened in Word.
+- TOC and TOA: not produced; the complaint has none. Pleading line numbers: not in the typst template, so not built.
