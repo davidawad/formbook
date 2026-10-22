@@ -9,5 +9,6 @@ font:
 # (docs/open-items/fb-595.54.58.md).
 params:
   cross_engine: gate
-  # No docx engine: LibreOffice's render cannot find the page of the authority "Article III §§ 32 and 52" (needle
-  # a47.1; the doubled section sign the shared code binds), so fb render fails (docs/open-items/fb-595.54.58.md).
+  # docx: Word fits 'duty”);' and its note mark 3 at the end of p41 line 7, typst breaks before it; the rest of the
+  # paragraph follows (the line-fit tolerance and the note mark width, open in docs/open-items/fb-595.54.82.md).
+  cross_engine_docx: report

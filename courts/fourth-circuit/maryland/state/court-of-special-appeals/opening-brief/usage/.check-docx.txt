@@ -1,0 +1,3 @@
+PASS
+3d16f07a1d0595d184692893663c9101fa8dbec9f49b26be4ed5427366df717b  usage/OUTPUT-opening-brief.docx
+9de1d740bd1c99707d0435f5bc8c4b591684544c852e075366c6cde4fa59bd5b  usage/OUTPUT-opening-brief.docx.pdf
