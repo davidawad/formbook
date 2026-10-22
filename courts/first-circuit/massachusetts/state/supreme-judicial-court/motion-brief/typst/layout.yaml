@@ -1,0 +1,72 @@
+# Massachusetts Supreme Judicial Court (mass): a motion and its supporting memorandum, or any other document addressed
+# to the court (Mass. R. A. P. 15, 20(b)). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to Mass. R. A. P. 20 (../../rules.md, MASS-*); lengths in points. No case text here: every string printed comes from
+# the sample's frontmatter ({field}) or is a court constant. A motion has no cover and no tables (MRAP 16 does not
+# apply to it): the caption is on page 1 (MASS-MOT-001).
+size: 14                  # MASS-FORM-002 (MRAP 20(a)(4)(B)), MASS-MOT-002 (20(b)(2)(A)): 14 point, footnotes included
+pitch:
+  body: 32.2              # MASS-FORM-004, MASS-MOT-002: double spaced (Word's double, 2 x 1.15 x 14)
+  single: 16.1            # caption, signature, certificate, footnotes, quotations: single (1.15 x 14 pt)
+# MASS-FORM-003, MASS-MOT-002: margins at least 1 inch; top and bottom 1 inch + 4 pt keep a raised note mark inside
+margin: {top: 76, bottom: 76, left: 72, right: 72}
+indent: 36                # style: half-inch first-line indent
+list_indent: 21.6         # style: a list label's box
+page_number: {align: center}   # MASS-FORM-005 (20(a)(4)(A)): numbered from the first page (the caption page)
+footnote: {size: 14, pitch: 16.1, gap: 7}   # MASS-FORM-002, -004: notes 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # MASS-FORM-004: indented quotations single spaced
+# Headings, if the filer uses any: level 1 centered bold, levels 2 and 3 bold (level 3 italic) at the left.
+heading:
+  - {align: center, bold: true, above: 16.8, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# MASS-MOT-001 (MRAP 20(b)(2)(A)): the caption on the first page: the court, the county and the docket number, the
+# title of the case with each side's designation, a brief descriptive title.
+front:
+  - {text: "{court}", align: center, bold: true}
+  - columns:
+      - {blocks: [{text: "{county}", optional: true}]}
+      - {blocks: [{text: "{docket}", align: right}]}
+    above: 16.1
+  - each: caption
+    above: 16.1
+    between:
+      - {text: "v.", align: center, above: 5.6, below: 5.6}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: right, right: 90, above: 2.8}
+  - {text: "{title}", align: center, bold: true, above: 16.1, below: 32.2}
+# MASS-FORM-012 (16(a)(12)), MASS-MOT-002 (20(b)(2)(B)): the date, the introduction and the signers side by side,
+# never split; MASS-FORM-011 (13(e)): the certificate of service, the recipients side by side, signed.
+closing:
+  - group:
+      - columns:
+          - {blocks: [{text: "Dated: {date}"}]}
+          - {blocks: [{text: "{signature.intro|Respectfully submitted,}"}]}
+        gutter: 28.8
+      - columns:
+          each: signature.columns
+          per_row: 2
+          row_gap: 16.1
+          blocks:
+            - {text: "/s/ {signer}"}
+            - {text: "{lines}", optional: true, above: 2.8}
+        gutter: 28.8
+        above: 16.1
+    above: 16.1
+  - when: certificate
+    blocks:
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, keep: true, above: 32.2, below: 16.1}
+      - {text: "{certificate.text}", pitch: body, indent: 36}
+      - columns:
+          each: certificate.recipients
+          per_row: 2
+          row_gap: 16.1
+          blocks:
+            - {text: "{.}"}
+        gutter: 21.6
+        above: 8
+      - group:
+          - {text: "/s/ {certificate.signer}", left: 252}
+          - {text: "{certificate.signer}", left: 252}
+        above: 32.2
