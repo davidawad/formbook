@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated
+# (docs/open-items/fb-595.54.61.md, shared-model requests): lib/typst/xdoc.typ drops widow and orphan control for a
+# whole block quotation when one of its paragraphs calls a footnote (LaTeX and Word only for that paragraph), so typst
+# leaves one line of a quoted paragraph at the foot of p7; and pdftotext reads LaTeX's "* * * *" as one word.
+params:
+  cross_engine: report

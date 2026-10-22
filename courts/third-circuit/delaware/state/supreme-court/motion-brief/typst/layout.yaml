@@ -1,0 +1,68 @@
+# Supreme Court of the State of Delaware (del): a motion, an answer to a motion, or a reply (Rules 13(b), 30). The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to Rule 13 (../../rules.md, DEL-*); lengths in points. No case text
+# here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # DEL-FORM-001, -202 (R. 13(a)(i), 13(b)): Times New Roman 14-point, footnotes included
+pitch:
+  body: 32.2              # DEL-FORM-002, -202 (R. 13(a)(ii)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # DEL-FORM-002: quotations over 50 words and footnotes single spaced (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # DEL-FORM-003 (R. 13(a)(ii)): margins not less than one inch
+indent: 36
+page_number: {align: center}                       # every page numbered from 1 (the filed answer)
+footnote: {size: 14, gap: 7}                       # DEL-FORM-001, -002: 14-point footnotes, single spaced
+quote: {left: 72, right: 72, above: 14, below: 14}  # DEL-FORM-002: long quotations single spaced, indented
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, left: 36, hang: 36, above: 15.4, below: 8.4}
+# The words of the motion as the template counts them (DEL-LEN-201, R. 30(d): the caption, the signature block and the
+# eFile footer not counted; everything else is). No `limit`: the Rule 30(d) limit of 1,200 words binds a motion, an
+# answer or a reply under Rule 30, and the filed exemplar (an answer under Rule 43(b), certified at 2,751 words) is
+# over it; the certificate states the count and the limit (docs/open-items/fb-595.54.61.md).
+words: {}
+# DEL-FORM-201 (R. 13(b)): the Court's name, the caption of the case with the file number beside it behind a column of
+# ")" (DEL-CONV-001, the filed answer), and the descriptive title of the paper.
+front:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF DELAWARE", align: center}
+  - columns:
+      - {width: 252, blocks: [{text: "{caption}"}]}
+      - {width: 21.6, repeat: ")"}
+      - {valign: center, blocks: [{text: "No. {case_number}"}]}
+    gutter: 7.2
+    above: 21.6
+  - {text: "{brief_title}", align: center, bold: true, underline: true, above: 21.6, below: 21.6}
+# The date beside the signature block (DEL-ELEC-003, R. 10.2(4)(c)(i): "/s/" signature, name, bar number, address,
+# telephone), never split from the last paragraph; then the certificate of compliance (DEL-CERT-201, R. 30(d)) under
+# the caption, as filed, and the proof of service (DEL-CERT-202, R. 10(c)) when the frontmatter gives one.
+keep_with_closing: true
+closing:
+  - columns:
+      - {blocks: [{text: "Dated: {date}"}]}
+      - {width: 230.4, blocks: [{text: "{signature.lines}"}]}
+    gutter: 21.6
+    above: 32.2
+  - {break: true}
+  - {text: "IN THE SUPREME COURT OF THE STATE OF DELAWARE", align: center}
+  - columns:
+      - {width: 252, blocks: [{text: "{caption}"}]}
+      - {width: 21.6, repeat: ")"}
+      - {valign: center, blocks: [{text: "No. {case_number}"}]}
+    gutter: 7.2
+    above: 21.6
+  - {text: "CERTIFICATE OF COMPLIANCE WITH TYPEFACE REQUIREMENT AND TYPE-VOLUME LIMITATION", align: center, bold: true, left: 36, right: 36, above: 21.6, below: 21.6}
+  - {text: "1. This paper complies with the typeface requirement of Rule 13(a)(i) because it has been prepared in Times New Roman 14-point typeface.", pitch: body, indent: 36}
+  - {text: "2. This paper contains {xd.words} words, counted by the template, excluding the caption and the signature block (Rule 30(d): a motion, an answer or a reply may not exceed 1,200 words).", pitch: body, indent: 36}
+  - columns:
+      - {blocks: [{text: "Dated: {date}"}]}
+      - {width: 230.4, blocks: [{text: "{signature.lines}"}]}
+    gutter: 21.6
+    above: 32.2
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 16.8}
+      - {text: "I certify that on {service.date} I caused a true and correct copy of the foregoing to be served on the following counsel of record by {service.method}:", pitch: body, indent: 36}
+      - columns: {each: service.recipients, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 16.8
+      - {text: "{signature.lines.0}", left: 252, above: 32.2}
