@@ -65,9 +65,9 @@ It is troubling that the Court would use such pejorative terms in referring to t
 
 ## 2. Statement of the Issues.
 
-a. Did the trial court comply with Minn. R. Crim. P. 25.03 in denying Petitioners’ request for access to criminal court records in *State v. Chauvin*?
+a\. Did the trial court comply with Minn. R. Crim. P. 25.03 in denying Petitioners’ request for access to criminal court records in *State v. Chauvin*?
 
-b. Do the restrictions imposed by the trial court on Petitioners’ access to criminal court records in *State v. Chauvin* infringe on Petitioner’s First Amendment rights?
+b\. Do the restrictions imposed by the trial court on Petitioners’ access to criminal court records in *State v. Chauvin* infringe on Petitioner’s First Amendment rights?
 
 ## 3. Argument and Statement of the Reasons Extraordinary Relief is Necessary.
 
@@ -77,9 +77,9 @@ The restrictions imposed by Judge Barnette on Petitioner’s access to the court
 
 Rule 25.03, subd. 1 states that “this rule governs the issuance of any court order restricting public access to public records relating to a criminal proceeding.” It further provides that a trial court “may issue a restrictive order under this rule only if the court concludes that:”
 
-> (a) Access to public records will present a substantial likelihood of interfering with the fair and impartial administration of justice.
+> \(a) Access to public records will present a substantial likelihood of interfering with the fair and impartial administration of justice.
 >
-> (b) All reasonable alternatives to a restrictive order are inadequate.
+> \(b) All reasonable alternatives to a restrictive order are inadequate.
 
 The Rule further states that “[a] restrictive order must be no broader than necessary to protect against the potential interference with the fair and impartial administration of justice.” *Id.*
 

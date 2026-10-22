@@ -1,0 +1,58 @@
+# Minnesota Court of Appeals (minnctapp): petition for writ of mandamus or prohibition (petition-for-writ). The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file
+# by `fb engines gen`, fb-595.54.12). Numbers trace to Minn. R. Civ. App. P. 120.01 (petition contents), 120.04 and
+# 132.02 (form of documents) and 132.04 (signature); see ../../rules.md. Lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}).
+size: 13                  # MINNCTAPP-FORM-002/-004: at least 13-point, headings and footnotes included
+pitch:
+  body: 29.9              # MINNCTAPP-FORM-004: double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # caption, headings, quotations, footnotes, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MINNCTAPP-FORM-001: matter within 6-1/2 x 9-1/2 in
+indent: 36                # every paragraph indented half an inch
+page_number: {align: center, from: 1}   # MINNCTAPP-FORM-004: pages numbered at the center of the bottom margin
+footnote: {size: 13, gap: 7}             # MINNCTAPP-FORM-002: footnotes 13-point too, single spaced
+quote: {left: 36, right: 36, above: 7.8, below: 13, gap: 13}
+# MINNCTAPP-CONT-010 (Rule 120.01): the petition's parts as headings, numbered in the text as filed; half an inch
+# in, bold italic, the sub-parts bold (MINNCTAPP-FORM-007: the exemplar's style).
+heading:
+  - {align: center, bold: true, above: 13, below: 13}
+  - {left: 36, hang: 36, bold: true, italic: true, above: 7.8, below: 7.8}
+  - {left: 36, hang: 36, bold: true, above: 7.8, below: 7.8}
+# MINNCTAPP-CONT-009/-010 (Rules 132.02 subd. 2, 120.01): the court, the title of the case (In re the petitioner, then
+# the trial court caption), the docket numbers and the title, between two rules.
+front:
+  - {text: "{court_line}", align: center, bold: true}
+  - {rule: 0.5, above: 3.9}
+  # both columns on one grid of single lines (a blank line between the parts, as filed), so a line of one column
+  # is level with a line of the other or a whole line apart
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "{between}", optional: true, above: 14.95}
+            blocks:
+              - {text: "{names}", above: 14.95}
+              - {text: "{designation}", left: 86.4, above: 14.95}
+      - blocks:
+          - {text: "{title}", bold: true, above: 14.95}
+          - {text: "{title_notes}", optional: true}
+          - each: fields
+            blocks:
+              - {text: "{label}", above: 14.95}
+              - {text: "{value}", optional: true}
+    gutter: 21.6
+  - {rule: 0.5, above: 14.95, below: 10.4}
+# MINNCTAPP-FORM-006 (Rule 132.04): signed, with the signer's name, license number, address and telephone; the date
+# at the left, the signature block 3.2 in from the margin, never split; counsel of record below it.
+closing:
+  - group:
+      - {text: "{date}"}
+      - {text: "/s/ {signer}", underline: true, left: 230.4, above: 14.4}
+      - {text: "{signature_lines}", left: 230.4}
+    above: 21.6
+  - when: of_counsel
+    blocks:
+      - group:
+          - {text: "OF COUNSEL:", left: 230.4}
+          - {text: "{of_counsel}", left: 230.4, above: 7.8}
+        above: 10.4
