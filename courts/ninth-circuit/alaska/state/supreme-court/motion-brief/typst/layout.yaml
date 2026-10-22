@@ -1,0 +1,50 @@
+# Supreme Court of the State of Alaska (alaska): motion (ARAP 503: in the form of Rule 513.5(b)). The
+# whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this
+# file by `fb engines gen`, fb-595.54.12). Numbers trace to ARAP 513.5 and 212 (../../rules.md, ALASKA-*); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # ALASKA-FORM-003: text, headings and footnotes at least 13 point
+pitch:
+  body: 29.9              # ALASKA-FORM-004: double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # ALASKA-FORM-004: headings, footnotes, quotations single spaced (1.15 x 13 pt); cover, tables
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # ALASKA-FORM-005, -006: one-inch sides, 6-1/2 x 9 in of matter
+indent: 36
+page_number: {align: center, from: 1}   # ALASKA-FORM-007: consecutive numbers at the bottom center, the cover page one
+footnote: {size: 13, gap: 7}            # ALASKA-FORM-003, -004: 13 point, single spaced
+quote: {left: 36, right: 36, above: 10.4, below: 15.6}   # ALASKA-FORM-004: single spaced, indented half an inch each side
+heading:
+  - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
+  - {bold: true, hang: 36, above: 15.6, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+  - {bold: true, hang: 36, above: 13, below: 10.4}
+# ALASKA-COVER-001 (ARAP 212(b)(1)-(6)), as a brief has it: the court and the case numbers, the title of the case, the
+# proceeding and the court below, the title of the document, counsel; a page of its own (a motion has no tables: the
+# blocks open page 1 of the body, which is the cover page, ALASKA-FORM-007).
+front:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF ALASKA", align: center, bold: true}
+  - {text: "Supreme Court No. {case_number}", align: center, bold: true, above: 21.6}
+  - {text: "Trial Court No. {trial_case_number}", align: center, optional: true}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 14, pitch: 16.1, above: 36}
+  - each: counsel
+    above: 36
+    blocks:
+      - {text: "{names}", bold: true, left: 230.4, above: 7.8}
+      - {text: "{lines}", left: 230.4}
+  - {text: "{phone}", left: 230.4, optional: true}
+  - {break: true}
+# The date and the signature block (ALASKA-COVER-002: the bar number is on the cover), never split.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, optional: true}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 5.2}
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 10.4}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, above: 7.8}
+    above: 21.6
