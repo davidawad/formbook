@@ -1,0 +1,59 @@
+# Tribunal de Apelaciones de Puerto Rico (prapp): amicus curiae brief (RTA R. 81). The whole layout, as data for the
+# shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to the Reglamento del Tribunal de Apelaciones (../../rules.md, PRAPP-*); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court
+# constant (the title of the índice).
+size: 12                  # PRAPP-FORM-003: pica (12 pt) or larger
+pitch:
+  body: 27.6              # PRAPP-FORM-002: double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # PRAPP-FORM-002: quotations and footnotes excepted; cover, headings, signature single
+margin: {top: 72, bottom: 72, left: 108, right: 72}   # PRAPP-FORM-004: left at least 1.5 in, right at least 0.5 in
+indent: 36                # paragraphs indented half an inch (style)
+page_number: {align: center, from: 2}   # PRAPP-CONV-001: the cover unnumbered, the pages after it at the bottom center
+footnote: {size: 12, gap: 7}             # PRAPP-FORM-002: notas al calce single spaced, at pica
+quote: {left: 36, right: 36, above: 6.9, below: 13.8}   # PRAPP-FORM-002: direct quotations single spaced, indented
+list: {markers: ["•"]}
+heading:
+  - {bold: true, above: 27.6, below: 6.9}
+  - {bold: true, above: 27.6, below: 6.9}
+  - {bold: true, italic: true, above: 27.6, below: 6.9}
+# PRAPP-COVER-001..003: the heading (the Commonwealth, the court, the Región Judicial), the caption with each party's
+# designation beside the case information, the title of the filing, counsel two to a row, the date.
+cover:
+  - {text: "{court}", align: center, bold: true}
+  - columns:
+      - blocks:
+          - each: parties
+            blocks:
+              - {text: "{names}", above: 4.6}
+              - {text: "{role}", align: right, optional: true}
+      - width: 172.8
+        blocks:
+          - {text: "{origin}", optional: true}
+          - {text: "{case_number}"}
+          - {text: "{lower_case}", optional: true, above: 6.9}
+          - {text: "{subject}", optional: true, above: 6.9}
+    gutter: 43.2
+    above: 13.8
+  - {text: "{title}", align: center, bold: true, above: 17.25}
+  - columns: {each: counsel, per_row: 2, row_gap: 6.9, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 14.4
+    above: 17.25
+  - {text: "{date}", align: right, optional: true, above: 6.9}
+# PRAPP-IDX-001: a detailed índice follows the cover, before the body.
+contents: {title: "ÍNDICE", style: {align: center}, depth: 3, col: 36, hang: 0, step: 24, above: 13.8}
+# PRAPP-CERT-001: the closing words, the date and each counsel's block (name, RUA, e-mail, address), never split;
+# PRAPP-CERT-002: then the certificación de notificación.
+closing:
+  - group:
+      - {text: "{closing}", optional: true}
+      - {text: "{date}", optional: true, above: 6.9}
+      - columns: {each: signature.blocks, per_row: 2, row_gap: 13.8, blocks: [{text: "{name}"}, {text: "{sign}", optional: true}, {text: "{lines}"}]}
+        gutter: 14.4
+        above: 13.8
+    above: 13.8
+  - each: certificates
+    blocks:
+      - {text: "{heading}", optional: true, align: center, bold: true, above: 13.8}
+      - {text: "{text}", pitch: body, above: 13.8}
+      - {text: "{signer}", optional: true, above: 13.8}

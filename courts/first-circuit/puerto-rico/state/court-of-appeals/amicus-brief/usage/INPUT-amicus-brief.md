@@ -13,13 +13,11 @@ parties:
     role: "Apelados-Interventores"
   - names:
       - "vs."
-    role: ""
   - names:
       - "OFICINA DEL COMISIONADO DE INSTITUCIONES FINANCIERAS DE PUERTO RICO; COMISIONADO DE INSTITUCIONES FINANCIERAS DE PUERTO RICO, LCDO. RAFAEL BLANCO LATORRE"
     role: "Apelantes-Demandados"
   - names:
       - "vs."
-    role: ""
   - names:
       - "UBS FINANCIAL SERVICES OF PUERTO RICO, INC."
     role: "Demandados"
@@ -58,7 +56,7 @@ signature:
       lines:
         - "Abogados de North American Securities Administrators Association"
         - "Centro Internacional de Mercadeo, Torre II"
-        - "# 90 Carr. 165, Suite 407"
+        - "\\# 90 Carr. 165, Suite 407"
         - "Guaynabo, P.R. 00968"
         - "Tel. (787) 273-8300; Fax (787) 273-8379"
     - name: "ROBERTO ABESADA AGUET"
