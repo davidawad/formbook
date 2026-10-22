@@ -14,12 +14,12 @@ normally be judged against 2 or 3 filers; one filer is on file, so a second memo
 | Item | Status |
 |---|---|
 | exemplar | **yes**: `usage/FILED-EXAMPLE-motion-brief-2.pdf` (42 pages, text layer) |
-| sample md | `usage/INPUT-motion-brief.md`: excerpt transcription (7 body pages plus the conclusion, signature and affidavit, 7 rendered pages in all). The frontmatter comment lists what is omitted and why. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, letter, EB Garamond only (embedded), `tools/render.sh` exit 0, no typst warnings |
+| sample md | `usage/INPUT-motion-brief.md`: excerpt transcription (7 body pages plus the conclusion, signature and affidavit, 8 rendered pages in all). The frontmatter comment lists what is omitted and why. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, letter, Times New Roman only (embedded), `tools/render.sh` exit 0, no typst warnings; `tools/check.sh` typst 9 passed, 0 failed |
 | overlay | ok: `usage/OVERLAY-motion-brief.pdf` and `.txt`, `tools/overlay.sh` exit 0. The overlay pairs our page 1 with the filing's page 8 (the filing's caption and text start on different pages; see the gaps). Word-overlap per page: 52.8, 78.4, 55.0, 61.6, 58.9, 76.1, 70.7 percent |
-| pages reviewed | 7 of 7, each rendered at 70 dpi and viewed. The final change moved only the affidavit's date line (page 7), and page 7 was viewed again after it. |
+| pages reviewed | 8 of 8 of the typst and of the docx render (fb-595.68.25), each rendered at 60 dpi and viewed beside the other and the filed exemplar (its pages 8, 9, 41 and 42). |
 
-The rendered sample is 7 pages, below the 8 to 14 pages that an excerpt of a 42-page filing would give if it were
+The rendered sample is 8 pages, below the 8 to 14 pages that an excerpt of a 42-page filing would give if it were
 transcribed in full. The transcription covers the caption and the body opening, then jumps to the conclusion; the
 omitted middle (Points I to VII) is listed under the gaps. It is not padded to reach a page count.
 
@@ -50,7 +50,7 @@ Primary sources, fetched 2026-10-14 (the date verified for every row).
 
 | Rule | Requirement | Kind | Where it is in the template |
 |---|---|---|---|
-| LBR 9004-1(a)(1)(A)-(E), (a)(2)(A)-(C) (N.D.N.Y. Local Bankruptcy Rules, effective 12-01-2024; the PDF used is https://www.nynb.uscourts.gov/sites/nynb/files/LBR_GenOrders/Local%20Bankruptcy%20Rules_Effective%2012-01-2024%20Final.pdf) | 12-point minimum (text and footnotes); double-spaced except block quotations and footnotes; legible, single-sided, black; one-inch margins on all four sides; consecutively numbered pages; letter size | M | `type-size`, `pitch`, `body-leading`, `margin`, page numbering, `paper: "us-letter"` |
+| LBR 9004-1(a)(1)(A)-(E), (a)(2)(A)-(C) (N.D.N.Y. Local Bankruptcy Rules, effective 12-01-2024; the PDF used is https://www.nynb.uscourts.gov/sites/nynb/files/LBR_GenOrders/Local%20Bankruptcy%20Rules_Effective%2012-01-2024%20Final.pdf) | 12-point minimum (text and footnotes); double-spaced except block quotations and footnotes; legible, single-sided, black; one-inch margins on all four sides; consecutively numbered pages; letter size | M | `type-size`, `pitch-double` (24 pt line boxes; `pitch-single` 13.8 pt for block quotations), `margin`, page numbering, `paper: "us-letter"` |
 | LBR 9004-1(c) | Caption: court name, case title, case number and chapter, last four SSN/TIN digits, adversary name and number if pertinent, short title naming the document and the party | M | `bankruptcy-caption`, `adversary-caption`, `title` |
 | LBR 9013-1(a)(1) | The notice of motion sets out the specific relief, the party against whom it is sought, and the rule or statute relied on | M (for the notice of motion; the memorandum states the same) | the filing's Preliminary Statement names the motion, the rule (12(b)(6), via 7012(b)(6)) and the relief |
 | LBR 9013-1(c) | A certificate of service on registered and non-registered users, stating the manner of service on each party | M | `certificate` (the exemplar's affidavit of service states first-class mail) |
@@ -98,24 +98,15 @@ govern and the template keeps its rule-based form.
    relief, the party and the rule), the proposed order, the Statement of Material Facts for a summary-judgment motion (LBR
    7056-1(a)), the chambers copy's delivery (LBR 9013-1(h)), the 21-day service (LBR 9013-1(e)), and the adjournment and
    withdrawal forms (LBR 9013-1(i) to (n)).
-9. **No gate checks.** There is no `checks.yaml` for this doc type, so `tools/check.sh` is not wired here and no stamp
-   exists. Gates 0 and 1 are not run.
-10. **Typeface.** LBR 9004-1 sets a minimum size, not a typeface. EB Garamond is our choice, vendored in `fonts/`.
+9. **Typeface.** LBR 9004-1 sets a minimum size, not a typeface. Times New Roman (the house standard, vendored in `fonts/`) on both engines.
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` with the same styles as the complaint (EB Garamond
-12 pt, exact 24 pt body lines, 13.8 pt single lines for the caption, block quotations and signature, 1 in margins, letter,
-centred PAGE field); `docx/nynb-motion-brief.lua` builds the cover (chambers legend when given, counsel, court title,
-bankruptcy and adversary captions, title), the body (headings and block quotations from the reference styles), the
-signature block and the certificate of service. Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`
-(LibreOffice). The `.docx` converts in LibreOffice with no error; the zip and XML parts are well formed.
-
-- Matches the typst output: font and size, line pitch, margins, page numbers, caption layout and rules, headings
-  (centred, flush left bold, bold italic), block quotation, the signature block before the affidavit of service, the
-  affidavit. Page count 7 = 7; all 7 pages of the `.docx.pdf` were viewed beside the typst page.
-- Differs: line breaks fall on other words, so text moves a line or two between pages. The caption right inset is 6 pt
-  (typst: 10 pt), so the debtor line "HIGHGATE LTC MANAGEMENT, LLC, et al.," stays on one line as in typst; the rule is
-  where typst puts it. The caption rules are table borders.
-- BLOCKED: `docx`: no `checks.yaml` exists for this doc type, so `tools/check.sh --engine docx` cannot run (exit 2,
-  "no such file"). No gate has been run on the docx; the `.docx.pdf` has not been checked against the rules.
+**docx** (`docx/`): `docx/reference.xml` (`base="xengine"`, the typst face as `{font}`: Times New Roman 12 pt, exact 24 pt
+body lines, 13.8 pt single lines for the caption, block quotations and signature, 1 in margins, letter, page number
+centred in the footer) and `docx/nynb-motion-brief.lua`, run by `fb render` (no shell): the cover (chambers legend when
+given, counsel, court title, bankruptcy and adversary captions with the party column ruled right and bottom, title),
+the body (headings, paragraphs, block quotations, each paragraph with its own spacing), the signature block and the
+certificate of service. Both engines are on the shared cross-engine layout model (lib/typst/xengine.typ,
+lib/docx/xengine.lua): `tools/check.sh --engine docx` 13 passed, 0 failed, XENG-001..003 PASS (203/203 lines, 8 = 8
+pages), gated (`eval.yaml`: `params.cross_engine: gate`).
