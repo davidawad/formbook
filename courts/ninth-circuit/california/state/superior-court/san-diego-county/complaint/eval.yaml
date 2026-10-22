@@ -1,0 +1,7 @@
+# CRC 2.107 sets the left (1 in) and right (1/2 in) margins only; line 1 is 1 in from the top (CRC 2.111(1)) and the
+# 28 numbered lines of 24 pt end 48 pt above the page edge, where the footer (CRC 2.109, 2.110) sits.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (fb-595.68.37, on the shared layout model lib/*/xengine*), so a difference fails.
+params:
+  margin_bottom_pt: 48
+  cross_engine: gate

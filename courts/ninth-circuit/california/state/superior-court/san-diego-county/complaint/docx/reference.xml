@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The San Diego County Superior Court complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs)
+     in the face of the typst template ({font}, Times New Roman; CRC 2.105) at 12 pt (CRC 2.104: not smaller than 12
+     points; size 24 half points); Body Text in exact 24 pt line boxes (typst pitch, CRC 2.108(1) double spacing on
+     numbered lines) with a half-inch indent, the headings in them with no space of their own; single lines of 12 pt
+     (typst pitch-single). The page (letter, 1 in top, 1.5 in left, 0.5 in right, 28 numbered lines), the pleading
+     rules and the footer with the line numbers are written by docx/calsuperct-sandiego-complaint.lua (FORMBOOK_FINAL,
+     FORMBOOK_FOOTERS). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="240" indent="720" heading="480" heading-before="0" heading-after="0" footer="360"/>
