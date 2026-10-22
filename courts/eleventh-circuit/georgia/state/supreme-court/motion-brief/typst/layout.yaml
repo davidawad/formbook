@@ -1,0 +1,72 @@
+# Supreme Court of Georgia (ga): motion or response to a motion (SCt R 20, 26, 27). The whole layout, as data for the
+# shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to the Rules of the Supreme Court of Georgia (../../rules.md, GA-SC-*); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # GA-SC-FONT-002, SCt R 16(2): body text and headings no smaller than 13 point
+pitch:
+  body: 19.5              # GA-SC-SPACE-001, SCt R 16(4): between 1.2 times and double (1.5 x the type size)
+  single: 15.9            # cover, headings, quotations, tables' titles, signature (1.22 x the type size; R 16(4) lets
+                          # block quotations, headings and captions be single-spaced)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # GA-SC-MARGIN-001, SCt R 16(5): at least one inch on every side
+indent: 36                # a half-inch first-line indent (style choice)
+# GA-SC-PAGE-001, SCt R 21: the counted pages in Arabic numerals from 1; the cover unnumbered, the table of contents
+# (not counted, R 20(6)) numbered apart in lower-case Roman.
+page_number: {align: center, front: lower-roman}
+footnote: {size: 11, pitch: 13.5, gap: 6, clearance: 8.95}   # GA-SC-FONT-002: notes no smaller than 11 point, single
+quote: {left: 36, right: 36, above: 9.75, below: 9.75, gap: 9.75}   # GA-SC-SPACE-001: quotations may be single-spaced
+heading:
+  - {align: center, bold: true, above: 19.5, below: 9.75}
+  - {bold: true, above: 15.6, below: 7.8}
+  - {bold: true, italic: true, above: 15.6, below: 7.8}
+# The cover (R 16 applies; no page number): the docket number, the court, the caption beside the lower-court docket,
+# the title and filer between rules, counsel two to a row (the exemplars' arrangement), the party they represent.
+cover:
+  - {text: "{case_number}", align: center, bold: true}
+  - {text: "IN THE", align: center, bold: true, above: 15.6}
+  - {text: "SUPREME COURT OF GEORGIA", align: center, bold: true}
+  - columns:
+      - width: 230.4
+        blocks:
+          - each: caption
+            between:
+              - {text: "v.", align: center, above: 15.6, below: 15.6}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", align: right, above: 5.2}
+      - width: 21.6
+        valign: center
+        blocks:
+          - {text: ")", align: center}
+      - valign: center
+        blocks:
+          - {text: "{docket}"}
+    above: 19.5
+  - {rule: 0.75, above: 19.5}
+  - {text: "{title}", align: center, bold: true, upper: true, above: 11.7}
+  - {text: "{filed_by}", align: center, optional: true, above: 7.8}
+  - {rule: 0.75, above: 11.7}
+  - columns: {each: counsel, per_row: 2, row_gap: 13, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 15.6
+    above: 15.6
+  - {text: "{attorneys_for}", align: center, bold: true, above: 15.6}
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 0, step: 0, pitch: body}
+# GA-SC-CERT-001, SCt R 20(7): the word-count statement immediately above the signature block; the date, the
+# statement and the signature never split. Then GA-SC-SERVE-001, SCt R 14: the certificate of service on its own page.
+closing:
+  - group:
+      - {text: "This submission does not exceed the word-count limit imposed by Rule 20."}
+      - {text: "{date}", optional: true, above: 15.9}
+      - {text: "Respectfully submitted,", above: 10.4}
+      - {text: "/s/ {signature.signer}", right: 165.6, above: 13}
+      - {text: "{signature.signer}", upper: true, right: 165.6}
+      - {text: "{signature.lines}", right: 165.6}
+    above: 19.5
+  - {break: true}
+  - {text: "Certificate of Service", align: center, bold: true, below: 9.75}
+  - {text: "{service.statement}", pitch: body}
+  - columns: {each: service.served, per_row: 2, row_gap: 13, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 13
+    above: 10.4
+  - {text: "{service.note}", optional: true, pitch: body, above: 10.4}
+  - {text: "/s/ {signature.signer}", above: 19.5}
+  - {text: "{signature.signer}", upper: true}

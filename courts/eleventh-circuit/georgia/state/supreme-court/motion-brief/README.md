@@ -1,6 +1,6 @@
 # Supreme Court of Georgia: motion or response to a motion (`motion-brief`)
 
-Governing rules for a motion, or a response to a motion, filed in the Supreme Court of Georgia. Verified 2026-10-15 against the official rules PDF below. The layout is shared with `petition-for-review` (same typography, page numbering, certification and certificate of service); only the questions-presented page is absent, because a motion has none.
+Governing rules for a motion, or a response to a motion, filed in the Supreme Court of Georgia. Verified 2026-10-15 against the official rules PDF below. `petition-for-review` had the same layout (typography, certification and certificate of service) plus a questions-presented page; this folder moved to the shared document model (fb-595.54.36) and that one did not yet (docs/open-items/fb-595.54.36.md).
 
 ## Primary source
 
@@ -13,16 +13,16 @@ Governing rules for a motion, or a response to a motion, filed in the Supreme Co
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
 | GA-SC-FONT-001 | Rule 16(1) | Proportionally spaced serif body font; monospaced not allowed; Century family given as an example. | `typst/ga-motion-brief.typ` (`font-family`) |
-| GA-SC-FONT-002 | Rule 16(2) | Body and headings no smaller than 13-pt Century Schoolbook; footnotes no smaller than 11-pt. | `type-size`, `note-size` |
-| GA-SC-SPACE-001 | Rule 16(4); Rule 17(2) | Line spacing between 1.2x and double; block quotations, headings, captions and footnotes may be single-spaced. Everything else must keep at least 1.2x. | `pitch-body` 19.5 pt (1.5x); `pitch-single` 15.9 pt (1.22x) for the cover, headings, quotations, signature, certificate lines and contents title; `pitch-note` 13.5 pt for the 11-pt footnotes |
-| GA-SC-MARGIN-001 | Rule 16(5); Rule 17(2) | Margins at least one inch, top, bottom and sides. Letter paper: Rule 17(1). | `page-margin` = 1 in |
-| GA-SC-ELEC-001 | Rule 17(3) | E-filed documents carry no hyperlinks to other documents or external sites. | `show link` keeps the text and drops the target |
-| GA-SC-PAGE-001 | Rule 21 | Counted pages numbered sequentially in Arabic numerals. The cover is the only unnumbered page. | the page-number footer starts after the cover, `counter(page).update(1)` |
+| GA-SC-FONT-002 | Rule 16(2) | Body and headings no smaller than 13-pt Century Schoolbook; footnotes no smaller than 11-pt. | `typst/layout.yaml` `size` 13, `footnote.size` 11 |
+| GA-SC-SPACE-001 | Rule 16(4); Rule 17(2) | Line spacing between 1.2x and double; block quotations, headings, captions and footnotes may be single-spaced. Everything else must keep at least 1.2x. | `pitch.body` 19.5 pt (1.5x); `pitch.single` 15.9 pt (1.22x) for the cover, headings, quotations, signature and certificate lines; `footnote.pitch` 13.5 pt for the 11-pt footnotes |
+| GA-SC-MARGIN-001 | Rule 16(5); Rule 17(2) | Margins at least one inch, top, bottom and sides. Letter paper: Rule 17(1). | `margin` 72 pt on every side |
+| GA-SC-ELEC-001 | Rule 17(3) | E-filed documents carry no hyperlinks to other documents or external sites. | **Not enforced by the shared model** (it keeps a markdown link's target; requested for lib/typst/xdoc.typ and lib/pandoc/xdoc.lua in docs/open-items/fb-595.54.36.md): the author writes no markdown links to other documents or sites. The sample has none. |
+| GA-SC-PAGE-001 | Rule 21 | Counted pages numbered sequentially in Arabic numerals. The cover is the only unnumbered page. | `page_number.front: lower-roman`: the cover unnumbered, the table of contents (not counted, Rule 20(6)) i, the motion from 1 |
 | GA-SC-LIMIT-001 | Rule 20(3) | Motions, and responses and replies to them, are limited to 7,000 words. | **Not enforced by the template** (see gaps). Sample body: 1,915 words. |
 | GA-SC-LIMIT-002 | Rule 20(6) | Cover, table of contents, table of citations, certificate of service, signature block and the word-count statement are not counted. | Template layout |
-| GA-SC-LIMIT-003 | Rule 20(7) | "This submission does not exceed the word-count limit imposed by Rule 20." immediately above the signature block. | `signature()` (generated; wording exact) |
+| GA-SC-LIMIT-003 | Rule 20(7) | "This submission does not exceed the word-count limit imposed by Rule 20." immediately above the signature block. | `closing` (a court constant; wording exact) |
 | GA-SC-FORM-001 | Rule 22(2) | Georgia citations include the official reporter (case name, volume, page). | Content (author) |
-| GA-SC-SERVE-001 | Rule 14 | Service on the other parties. The certificate of service is generated from frontmatter `service`. | `service-certificate()` |
+| GA-SC-SERVE-001 | Rule 14 | Service on the other parties. The certificate of service is generated from frontmatter `service`. | `closing` (after a page break) |
 | GA-SC-CIP-001 | Rule 26.1(1) | A movant or petitioner files a Certificate of Interested Persons as a separate document at the first filing. | **Not generated** (a separate document; see gaps). Responding parties are not named by Rule 26.1(1). |
 
 ## Typeface and substitute
@@ -51,17 +51,17 @@ Same as `petition-for-review/README.md`, except there is no `questions_presented
 
 ## Gate 2: page review
 
-All 9 PDF pages of `usage/OUTPUT-motion-brief.typst.pdf` and of `usage/OUTPUT-motion-brief.docx.pdf` were rasterized (50 to 70 dpi) and read, side by side, after the final render (fb-595.68.36: the cross-engine layout model, Times New Roman on both engines). XENG-001..003 pass (219/219 lines, 9 pages alike).
+All 9 PDF pages of `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf` and `.docx.pdf` were rasterized (60 dpi) and read side by side after the final render (fb-595.54.36: the shared document model, `typst/layout.yaml`; latex and docx generated by `fb engines gen`). XENG-001..003 pass on latex and docx (219/219 lines, 9 pages alike).
 
 | Page (PDF) | Printed | Result |
 |---|---|---|
-| 1 | cover | OK. Case number, court, caption (parenthesis and docket centered on the parties), rules around the title, counsel two columns, italics where written. Same in both engines. |
-| 2 | 1 | Table of contents. OK. Every entry's page matches the page the heading is on in each engine (typst: the leader stops at the 36 pt page column; Word: the leader runs to the number). |
-| 3–7 | 2–6 | Body. OK. Headings single-spaced (level 1 centered bold, level 2 bold, level 3 bold italic) and kept with the text; paragraphs indented after a paragraph, flush after a heading or quotation; the block quotation single-spaced half an inch in on both sides; footnote 1 at 11 pt under a short rule on printed page 2. |
-| 8 | 7 | Conclusion, the Rule 20(7) statement, date and signature block on one page. OK (was: the signature block alone on its page; the last paragraph is now kept with it, which moves the Conclusion with it and leaves printed page 6 short). |
-| 9 | 8 | Certificate of service on its own page. OK. |
+| 1 | cover | OK. Case number, court, caption (parenthesis and docket centered on the parties), rules around the title, counsel two columns, italics where written. Same in the three engines. |
+| 2 | i | Table of contents. OK. Every entry's page matches the page the heading is on in each engine (typst and LaTeX: the leader stops before the 36 pt page column; Word: the leader runs to the number). |
+| 3–7 | 1–5 | Body. OK. Headings single-spaced (level 1 centered bold, level 2 bold, level 3 bold italic) and kept with the text; paragraphs indented; the block quotation single-spaced half an inch in on both sides; footnote 1 at 11 pt under a short rule on printed page 1. |
+| 8 | 6 | The Rule 20(7) statement, date and signature block. ACCEPTED: the block stands alone on its page (the shared model keeps the closing whole, not with the last paragraph; requested in docs/open-items/fb-595.54.36.md). |
+| 9 | 7 | Certificate of service on its own page. OK. |
 
-No OPEN rows. ACCEPTED: printed page 6 ends about a third of a page early (the Conclusion heading, its paragraph and the signature block move on together); the caption's designation and "v." sit 2.5 pt and 1.2 pt further right in typst than in Word (cover only, diagnostic).
+No OPEN rows. ACCEPTED: page 8 above; body paragraphs touch at the 19.5 pt pitch (the shared model has no space between body paragraphs; the template had 7.8 pt), the first-line indent marks them; the certificate of service is no longer a row of the table of contents (it is set by the closing, not a body heading).
 
 ## Gaps
 
@@ -84,12 +84,8 @@ The render fails on any typst warning and on any font outside the vendored set (
 
 ## Engines
 
-Typst is the reference engine; the docx engine (`docx/`, the same files in `motion-brief/` and `petition-for-review/`) breaks every line and every page where typst does, on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"). `eval.yaml` sets `params.cross_engine: gate`.
+The folder is on the shared document model (docs/EVAL-LOOP.md, "Generated engines"; fb-595.54.36): `typst/layout.yaml` holds every number and block of the layout with its rule, `typst/ga-motion-brief.typ` names the face and hands the layout to `lib/typst/xdoc.typ`. `fb engines gen` writes `latex/template.tex`, `latex/xdoc.lua`, `docx/xdoc.lua` and `docx/reference.xml` from it (`fb engines gen --check` fails on a stale one); the latex and docx renders break every line and page where typst does, and `eval.yaml` sets `params.cross_engine: gate`.
 
-- `docx/reference.xml`: the cross-engine recipe (`base="xengine"`) in `{font}` at 13 pt, with the typst pitches in twips (20 x pt): Body Text 390 (19.5 pt) with 156 (7.8 pt) above and below and a half-inch first-line indent; single lines 318 (15.9 pt); Block Text 195 (9.75 pt) around quotations; footnotes 11 pt in 270 (13.5 pt) lines, 120 (6 pt) apart; Body Flush, the Note (no widow control) and Keep variants.
-- `docx/ga-motion.lua`: the cover (caption and counsel as fixed-width borderless tables, the rules as paragraph borders), the questions presented (a petition), the table of contents (a dot leader to the page in a 36 pt column, as typst's `listing-row`), the headings, the Rule 20(7) statement and signature block, and the certificate of service; body paragraphs, quotations, lists and footnotes are written by pandoc in the reference styles. Contents page numbers come from `fb render`'s needles (a needle per heading, its text and the words after it); the page-number footer (a 15.9 pt line) and the sections (the cover unnumbered, arabic from 1 after it) are given to `fb render` (FORMBOOK_FOOTERS, FORMBOOK_FINAL).
-- The last body paragraph is kept with the signature block in both engines (typst: one unbreakable block; Word: Body Keep and keep-with-next), so the closing never stands alone on a page.
-
-Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-<id>.md`: `usage/OUTPUT-<id>.docx` and `.docx.pdf` (LibreOffice). The latex engine is not built for this folder.
+Render with `sh tools/render.sh --engine latex|docx <this folder> usage/INPUT-<id>.md`: `usage/OUTPUT-<id>.latex.pdf`, `usage/OUTPUT-<id>.docx` and `.docx.pdf` (LibreOffice).
 
 BLOCKED: none.
