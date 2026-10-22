@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The arwb motion-brief Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}) at 13 pt (size 26 half points; the template's
+     size, Rule 9004(a) legible); Body Text in exact 24 pt line boxes (typst pitch-body, double spacing) with a
+     half-inch first-line indent (typst para-indent); single lines 15.6 pt (typst pitch-single); letter page, 1 in
+     margins. Every paragraph of the document is written by docx/arwb-motion-brief.lua with its own spacing (the
+     typst values, twips = 20 x pt). The footer is the plain page number, centred (typst page-footer), in a
+     single-pitch line box under its own relationship id, which the section names in place of the recipe's footer;
+     w:footer (695 twips) puts the line where typst sets the footer (footer-descent 30 %; fb diff --engines
+     baselines). -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="26" body="480" single="312" indent="720">
+<footer id="rIdFooter2"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="312" w:lineRule="exact" /><w:jc w:val="center" /></w:pPr><w:r><w:fldChar w:fldCharType="begin" /></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate" /></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end" /></w:r></w:p></footer>
+<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter2" /><w:pgSz w:w="12240" w:h="15840" /><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="695" w:gutter="0" /></w:sectPr>
+</reference>

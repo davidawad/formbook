@@ -4,17 +4,30 @@
 // retrievable (see ../README.md, gap 1); the layout follows the filed exemplar. Content-agnostic: every
 // case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a named layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")        // vendored in fonts/; no Times New Roman is vendored (README.md, gap 3)
-#let type-size = 13pt                   // EB Garamond sets narrower than Times, so 13 pt gives about the exemplar's line length (README.md, gap 3)
-#let body-leading = 1.2em               // double spacing: 0.65em line box + 1.2em leading = 24 pt baseline pitch at 13 pt (measured)
-#let single-leading = 0.55em            // single spacing for the caption, counsel and signature: 1.2em pitch
+#let font-family = ("Times New Roman", "Liberation Serif")        // vendored in fonts/ (no rule names a face)
+#let type-size = 13pt                   // legible (Rule 9004(a)); the template's size, no rule sets one
 #let para-indent = 0.5in                // first-line indent of body paragraphs
+#let label-box = 0.5in                  // a heading's or a list item's label in a box: the text after it at the next half inch
+#let list-left = 0.5in                  // a list item's label stands at this indent; its text hangs at list-left + label-box
 #let margin-all = 1in
 #let caption-left = 3.6in               // width of the debtor column of the caption
+#let caption-gutter = 0.2in             // the case number stands off the debtor column
+#let designation-indent = 0.9in         // the debtor's designation in the caption
+#let recipient-indent = 0.5in           // the recipients of the certificate of service
+#let signature-left = 3.25in            // the signature column, from the left margin
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; docx/arwb-motion-brief.lua sets the same twips).
+#let pitch-body = 24pt                  // double spacing at 13 pt
+#let pitch-single = 15.6pt              // single spacing (1.2 em): court title, caption, signature, recipients
+#let line-gap = 15.6pt                  // one blank single line: court title to caption, recipients to the signer
+#let half-gap = 7.8pt                   // half a single line: caption to title, around the signature and certificate
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -36,45 +49,44 @@
 /// Inline markdown (italics such as *Id.* and case names, smart quotes) as inline content.
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
-/// A double-spaced block that occupies whole pitches. `below` adds the leading that follows the last line,
-/// so a block of n lines is n x (line box + leading) tall and the next block starts on the grid of lines.
-/// Without it, consecutive blocks sit one line box apart and their lines overlap.
-#let grid-block(c) = block(width: 100%, above: 0pt, below: body-leading, c)
+/// One single-spaced line (a paragraph of its own), with an explicit space above and below it.
+#let line-block(above: 0pt, below: 0pt, body) = block(width: 100%, above: above, below: below, {
+  set text(..edges(pitch-single))
+  body
+})
 
-/// Single-spaced lines (court title, caption, signature): one item per line, with a single gap between items.
-#let single-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items)
-}
+/// A double-spaced paragraph with the half-inch first-line indent.
+#let body-par(sticky: false, body) = block(width: 100%, above: 0pt, below: 0pt, sticky: sticky, [#h(para-indent)#body])
 
 // ---------------------------------------------------------------------------
 // Page furniture and cover (Rule 9004(b): court, title, case number, designation)
 // ---------------------------------------------------------------------------
 
-#let page-footer() = context align(center, text(size: type-size, counter(page).display("1")))
+#let page-footer() = context align(center, text(size: type-size, ..edges(pitch-single), counter(page).display("1")))
 
-#let court-title(meta) = {
-  let lines = need(meta, "court").map(l => align(center, text(weight: "bold", upper(inl(l)))))
-  single-stack(lines)
+#let court-title(meta) = for l in need(meta, "court") {
+  line-block(align(center, text(weight: "bold", upper(inl(l)))))
 }
 
-/// Debtor on the left, case number and chapter on the right.
+/// Debtor on the left, case number and chapter on the right, a blank line below the court title.
 #let caption(meta) = {
   let c = need(meta, "caption")
   let debtor = c.debtor
-  let left = single-stack(
-    debtor.names.map(n => inl(n)) + (pad(left: 0.9in, inl(debtor.designation)),),
-  )
-  let right = single-stack(([Case No: #need(meta, "case_number")], [Chapter #need(meta, "chapter")]))
-  grid(columns: (caption-left, 1fr), column-gutter: 0.2in, left, right)
+  let left = {
+    for n in debtor.names { line-block(inl(n)) }
+    line-block(pad(left: designation-indent, inl(debtor.designation)))
+  }
+  let right = {
+    line-block[Case No: #need(meta, "case_number")]
+    line-block[Chapter #need(meta, "chapter")]
+  }
+  block(above: line-gap, below: 0pt, grid(columns: (caption-left, 1fr), column-gutter: caption-gutter, left, right))
 }
 
 #let cover(meta) = {
   court-title(meta)
-  block(height: body-leading * 1.5)
   caption(meta)
-  block(height: body-leading * 1.5)
-  align(center, grid-block(text(weight: "bold", upper(need(meta, "brief_title")))))
+  block(width: 100%, above: half-gap, below: 0pt, align(center, text(weight: "bold", upper(need(meta, "brief_title")))))
 }
 
 // ---------------------------------------------------------------------------
@@ -82,15 +94,16 @@
 // ---------------------------------------------------------------------------
 
 /// Headings are numbered by level (level 2: I., 3: A., 4: 1., 5: a.), and the numbers are typed by the template,
-/// not the author. Level 1 is not used in the sample.
-#let body-of(md) = {
+/// not the author. Level 1 is not used in the sample. With `keep-last`, the last paragraph stays on the page with
+/// the signature block after it.
+#let body-of(md, keep-last: false) = {
   let chunks = md.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
   let c2 = 0
   let c3 = 0
   let c4 = 0
   let c5 = 0
   let out = []
-  for c in chunks {
+  for (ci, c) in chunks.enumerate() {
     let t = c.trim()
     if t.starts-with("#") {
       let lv = t.find(regex("^#+")).len()
@@ -105,73 +118,62 @@
       } else if lv == 4 {
         c4 += 1; c5 = 0
         label = numbering("1.", c4)
-      } else {
+      } else if lv == 5 {
         c5 += 1
         label = numbering("a.", c5)
+      } else {
+        panic("arwb-motion-brief: heading level " + str(lv) + " is not used by the template (use ## to #####)")
       }
-      // Sticky: the heading stays on the page with the text after it.
-      out += block(width: 100%, above: 0pt, below: body-leading, sticky: true,
-        par(hanging-indent: 0.5in, first-line-indent: 0pt, leading: body-leading,
-          text(weight: "bold", [#label#h(0.5in)#upper(title)])))
+      // Bold capitals on a body line, the title after its label at the half inch, hanging there; sticky: the
+      // heading stays on the page with the text after it.
+      out += block(width: 100%, above: 0pt, below: 0pt, sticky: true,
+        par(hanging-indent: label-box, text(weight: "bold", [#box(width: label-box, label)#upper(title)])))
     } else if t.find(regex("^\\d+\\.\\s")) != none {
       // A markdown list of factors or items: each item is labelled (1), (2), ... and hangs from its label.
       let li = 0
       for item in t.split(regex("\\r?\\n")).filter(l => l.trim() != "") {
         li += 1
         let text-of = item.trim().replace(regex("^\\d+\\.\\s+"), "")
-        out += grid-block({
-          set par(leading: body-leading, first-line-indent: 0pt, hanging-indent: 0.5in)
-          pad(left: 0.5in, [(#li)#h(0.5in)#inl(text-of)])
-        })
+        out += block(width: 100%, above: 0pt, below: 0pt, pad(left: list-left,
+          par(hanging-indent: label-box, [#box(width: label-box)[(#li)]#inl(text-of)])))
       }
     } else {
-      out += grid-block({
-        set par(leading: body-leading, first-line-indent: 0pt)
-        [#h(para-indent)#inl(t)]
-      })
+      out += body-par(sticky: keep-last and ci == chunks.len() - 1, inl(t))
     }
   }
   out
 }
 
-#let signature-block(meta) = block(breakable: false, above: body-leading, {
-  let sig = need(meta, "signature")
-  pad(left: 3.25in, {
-    single-stack(([Respectfully submitted,], block(height: body-leading * 0.5)))
-    single-stack(sig.map(l => inl(l)))
-  })
-})
+/// "Respectfully submitted," then the signer's lines, single spaced at 3.25 in; never split.
+#let signature-block(meta) = block(breakable: false, above: half-gap, below: 0pt, pad(left: signature-left, {
+  line-block(below: half-gap)[Respectfully submitted,]
+  for l in need(meta, "signature") { line-block(inl(l)) }
+}))
 
+/// The certificate of service: a centred heading, the text, the recipients, the signer; never split.
 #let certificate(meta) = {
   let cos = need(meta, "certificate_of_service")
-  block(breakable: false, above: body-leading, {
-    align(center, block(width: 100%, below: body-leading, sticky: true,
-      text(weight: "bold", [CERTIFICATE OF SERVICE])))
-    grid-block({
-      set par(leading: body-leading, first-line-indent: 0pt)
-      [#h(para-indent)#inl(cos.text)]
-    })
-    pad(left: 0.5in, single-stack(cos.recipients.map(r => inl(r))))
-    block(height: body-leading * 1.5)
-    pad(left: 3.25in, single-stack(cos.signer.map(l => inl(l))))
+  block(breakable: false, above: half-gap, below: 0pt, {
+    block(width: 100%, above: 0pt, below: 0pt, align(center, text(weight: "bold", [CERTIFICATE OF SERVICE])))
+    body-par(inl(cos.text))
+    block(above: half-gap, below: 0pt, pad(left: recipient-indent, for r in cos.recipients { line-block(inl(r)) }))
+    block(above: line-gap, below: 0pt, pad(left: signature-left, for l in cos.signer { line-block(inl(l)) }))
   })
 }
 
 #let arwb-motion-brief(meta, md) = {
-  set page(paper: "us-letter", margin: margin-all, footer: page-footer())
-  set text(font: font-family, size: type-size, lang: "en", region: "us", hyphenate: false)
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
+  set page(paper: "us-letter", margin: margin-all, footer-descent: 30%, footer: page-footer())
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  set par(first-line-indent: 0pt)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch, a section sign kept with its number. The lists are written above (list-indent: none).
+  show: xengine.with(pitch: pitch-body, list-indent: none)
 
   cover(meta)
 
-  if "lead_in" in meta {
-    grid-block({
-      set par(leading: body-leading, first-line-indent: 0pt)
-      [#h(para-indent)#inl(meta.lead_in)]
-    })
-  }
+  if "lead_in" in meta { body-par(inl(meta.lead_in)) }
 
-  body-of(md)
+  body-of(md, keep-last: true)
 
   signature-block(meta)
   if "certificate_of_service" in meta { certificate(meta) }
