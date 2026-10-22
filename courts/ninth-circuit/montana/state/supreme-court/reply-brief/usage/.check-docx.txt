@@ -1,0 +1,3 @@
+PASS
+64f7049794a642ad9b26b508fad2b5612aa3d727f79e38de4be2b82ac9d6b861  usage/OUTPUT-reply-brief.docx
+6da8af9dcbb6bed8ae743dcb392e40134e684befc2570ac7bf9e9f1eb5c72bfe  usage/OUTPUT-reply-brief.docx.pdf
