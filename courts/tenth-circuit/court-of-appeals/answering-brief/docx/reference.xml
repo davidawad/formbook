@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Word styles: the shared style recipe of the cross-engine layout model
+     (tools/fb/src/docxxengine.rs): Times New Roman 14 pt everywhere, footnotes too (CA10-FORM-004, 10th Cir. R.
+     32(A)); Body Text and List Item in 28.1 pt line boxes (typst pitch-double, CA10-FORM-003) with a half-inch indent;
+     quotations, footnotes and the heading styles in 18.8 pt boxes (typst pitch-single); quotations 14 pt above and
+     below, footnotes 7 pt apart (typst quote, footnote.entry). ca10.lua writes every heading, the cover, the tables and
+     the certificates with their own spacing; the styles give the body text and the outline levels. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="562" single="376" indent="720" heading="376" quote="280" note-after="140"/>
