@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The W.D.N.Y. Bankruptcy motion brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs;
+     docs/EVAL-LOOP.md, "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; no W.D.N.Y.
+     rule names a face, LBR 9004-1 asks only that a paper be "plainly and legibly written"; the exemplar's face) at
+     12 pt (size 24 half points, as the filed exemplar); Body Text in exact 27.6 pt line boxes (552 twips: typst
+     pitch-body, double spacing at the exemplar's pitch) with a half-inch first-line indent; single lines in 13.8 pt
+     boxes (276 twips: typst pitch-single). Letter page (LBR 9004-1), one-inch margins (no W.D.N.Y. margin rule; the
+     exemplar's). docx/nywb-motion-brief.lua writes every paragraph's own spacing, the three sections (cover
+     unnumbered, contents in roman from i, body in arabic from 1) and their 10 pt page-number footer, whose line box
+     ends 0.5 in above the page edge (typst footer-distance). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" footer="720"/>
