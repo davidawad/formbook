@@ -1,7 +1,9 @@
 {
   "array_expansions": {},
   "branches": {
-    "courts/eleventh-circuit/court-of-appeals/reply-brief/docx/make-reference.sh": 8,
+    "courts/eleventh-circuit/court-of-appeals/answering-brief/docx/render.sh": 47,
+    "courts/eleventh-circuit/court-of-appeals/opening-brief/docx/render.sh": 47,
+    "courts/eleventh-circuit/court-of-appeals/reply-brief/docx/render.sh": 47,
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/make-reference.sh": 6,
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/render.sh": 31,
     "courts/federal-circuit/court-of-appeals/answering-brief/docx/build-reference.sh": 5,
@@ -30,6 +32,7 @@
     "courts/supreme-court-of-the-united-states/amicus-brief/docx/build-reference.sh": 1,
     "courts/supreme-court-of-the-united-states/cert-petition/docx/build-reference.sh": 1,
     "courts/supreme-court-of-the-united-states/merits-brief/docx/build-reference.sh": 1,
+    "courts/tenth-circuit/court-of-appeals/reply-brief/docx/build-reference.sh": 1,
     "tools/check/_lib/lib-helpers.sh": 97,
     "tools/check/lib.sh": 147,
     "tools/gen_tree.sh": 8

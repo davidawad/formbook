@@ -1,24 +1,24 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds one sample with the ca11 Word template (docs/EVAL-LOOP.md, "Engines"). Pandoc writes the document with
 # reference.docx and ca11.lua. The document is first rendered by LibreOffice; the pages of every heading and every
 # citation are looked up in that PDF (the needles ca11.lua wrote); the document is then written again with those pages
 # in its tables, and its sections get their footers (C-1, roman, arabic). Word may paginate slightly differently.
-# Usage: sh docx/render.sh <court-dir> <sample.md, relative to the court dir> <out.docx>
-set -eu
-ROOT=$(cd "$(dirname "$0")/../../../../.." && pwd)
+# Usage: bash docx/render.sh <court-dir> <sample.md, relative to the court dir> <out.docx>
+set -euo pipefail
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
 OUT=$3
 D="$COURT/docx"
 SOFFICE=${SOFFICE:-$(command -v soffice || echo /opt/homebrew/bin/soffice)}
-WORK=$(mktemp -d)
+WORK=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made here (the mktemp work directory or one inside it)
+safe_rmdir() { rm -r -- "${1:?}"; }
 # FORMBOOK_KEEP=1 keeps the work directory (the needles, the pages, both passes) for debugging
-if [ -n "${FORMBOOK_KEEP:-}" ]; then echo "work: $WORK" >&2; else trap 'rm -rf "$WORK"' EXIT; fi
+if [ -n "${FORMBOOK_KEEP:-}" ]; then echo "work: $WORK" >&2; else trap 'safe_rmdir "$WORK"' EXIT; fi
 
 # add_footers <docx>: the footers of the sections (rIds used by ca11.lua), in place
 add_footers() {
   X="$WORK/unz.$$"
-  rm -rf "$X"
   mkdir "$X"
   (cd "$X" && unzip -q "$1")
   page_footer() { # $1 = file, $2 = text before the page number
@@ -49,7 +49,7 @@ XML
   done
   rm -f "$1"
   (cd "$X" && zip -X -q -r "$1" '[Content_Types].xml' _rels docProps word)
-  rm -rf "$X"
+  safe_rmdir "$X"
 }
 
 # build <out.docx> <pages.tsv or empty>: pandoc with the reference and the filter; writes the needles
