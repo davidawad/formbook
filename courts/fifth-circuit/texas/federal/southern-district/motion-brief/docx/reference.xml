@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The S.D. Tex. motion brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman) at 13 pt (Galveston Div. R. of Practice f and Judge Hanks Procs. 7.A;
+     size 26 half points); Body Text in exact 26 pt line boxes (typst pitch-double, LR10.2 double spaced) with a
+     half-inch indent, and the headings in them; the court title, caption, signature and certificate-signature lines in 14.95 pt boxes (typst
+     pitch-single); letter page with 1-inch margins. docx/txsd.lua writes every paragraph's own spacing, the page-number
+     footer (its single-spaced line 35.45 pt above the page foot, 709 twips: where typst sets it, footer-descent 30 %)
+     and the last section. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="26" body="520" single="299" indent="720" heading="520" heading-before="0" heading-after="0" footer="709"/>
