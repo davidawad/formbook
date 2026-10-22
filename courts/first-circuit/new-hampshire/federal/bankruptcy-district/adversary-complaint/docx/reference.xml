@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D.N.H. bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in
+     the face of the typst template ({font}, Times New Roman) at 12 pt (size 24 half points; no NH rule sets a size);
+     Body Text in exact 27.6 pt line boxes (typst pitch-double, double-spaced) with a half-inch first-line indent;
+     single lines in 13.8 pt boxes (typst pitch-single); letter page with 1-inch margins and a centered page number,
+     its line 36.6 pt above the page foot (732 twips: where typst sets it, footer-descent 30 %). docx/nhb.lua writes
+     every paragraph's own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" footer="732">
+</reference>
