@@ -54,10 +54,10 @@ authorities:
       - {cite: "Wis. Stat. § 19.35(1)(d)", find: "(1)(d)"}
       - {cite: "Wis. Stat. § 19.35(1)(i)", find: "19.35(1)(i)"}
       - {cite: "Wis. Stat. § 19.36(4)", find: "19.36(4)"}
-      - {cite: "Wis. Stat. § 19.37(1)", find: "19.37(1) "}
+      - {cite: "Wis. Stat. § 19.37(1)", find: "19.37(1)."}
       - {cite: "Wis. Stat. § 19.37(1)(a)", find: "19.37(1)(a)"}
       - {cite: "Wis. Stat. § 783.01", find: "783.01"}
-      - {cite: "Wis. Stat. § 804.01", find: "783.01, 804.01"}
+      - {cite: "Wis. Stat. § 804.01", find: "804.01."}
       - {cite: "Wis. Stat. § 804.01(2)(a)", find: "804.01(2)(a)"}
       - {cite: "Wis. Stat. § 804.01(3)(a)", find: "804.01(3)"}
       - {cite: "Wis. Stat. § 804.05(1)", find: "804.05(1)"}
@@ -129,7 +129,7 @@ On July 21, 2016, Lueders emailed Krug's office and stated in relevant part:
 
 After receiving this letter, Krug consulted with the Chief Clerk, and then contacted Lueders. (R. 30:9 ¶ 20; 40:3 ¶ 20; 36:19-20 ¶ 66.) Having determined that paper copies fulfilled his public records obligations under Wis. Stat. § 19.35(1), Krug declined Lueders' request to provide the records in electronic form. (R. 36:19-20 ¶ 66.) Krug's office sent an email to Lueders on July 26, 2016, stating:
 
-> As you know, "[t]he Public Records Law provides "[e]xcept as otherwise provided by law, any requester has the right to inspect any record." Wis. Stat. 19.35(1)(a). The law requires copies of written documents be "substantially as readable" as the originals. Wis. Stat. § 19.35(1)(b). Additionally, Wis. Stat. § 19.35(1)(b) provides the custodian has the option to choose how a record will be copied. See *Grebner v. Schiebel*, 240 Wis. 2d 551 (2000)."
+> As you know, "[t]he Public Records Law provides “[e]xcept as otherwise provided by law, any requester has the right to inspect any record." Wis. Stat. 19.35(1)(a). The law requires copies of written documents be "substantially as readable" as the originals. Wis. Stat. § 19.35(1)(b). Additionally, Wis. Stat. § 19.35(1)(b) provides the custodian has the option to choose how a record will be copied. See *Grebner v. Schiebel*, 240 Wis. 2d 551 (2000).”
 >
 > Our standard policy is to make responsive records available to requesters through the office of the Assembly Chief Clerk. The Chief Clerk makes arrangements for the requester to review the records, provides any copies that may be requested, and collects any location or reproduction costs associated with the request. This policy is the most efficient way for our office to comply with the records request, while continuing the day-to-day operation of our official duties without disruption. Individual offices are not set up to accept cash or check as payment for records requests.
 >

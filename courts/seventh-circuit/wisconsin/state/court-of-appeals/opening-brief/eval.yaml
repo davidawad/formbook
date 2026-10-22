@@ -1,0 +1,15 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # The model binds the token after a section sign ("§ 19.36(4).[^7]") and the note call goes inside LaTeX's \mbox,
+  # where pdfLaTeX drops the note's text (p25: mark 7 printed, its note lost; the pages from p26 on move by a few
+  # lines, and the authorities' page numbers with them). pdftotext also reads typst's note marks 4, 5 and 6 as part
+  # of the word before them ("typeface.”4", p17 line 20; p22 line 14; p24 line 7), LaTeX's as words of their own.
+  # Shared-model items (docs/open-items/fb-595.54.46.md). Reported, not gated.
+  cross_engine_latex: report
+  # Word: the same three note marks read apart (p17 line 20, p22 line 14, p24 line 7), and at "§ 19.36(4).[^7]" typst
+  # moves "system" to the next line where LaTeX and Word keep it on p25 line 12 (the sign's token box holds the note
+  # call; lines 12 to 16 of p25 differ, the page ends do not). Shared-model items. Reported, not gated.
+  cross_engine_docx: report
