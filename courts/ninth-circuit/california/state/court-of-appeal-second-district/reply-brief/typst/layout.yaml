@@ -123,9 +123,10 @@ closing:
           - {text: "{name}", left: 36}
           - {text: "Served {method}.", left: 36}
         above: 7.8
-  - {text: "I declare under penalty of perjury under the laws of the State of California that the foregoing is true and correct.", above: 10.4}
-  - {text: "Executed on {service.executed}.", above: 10.4}
+  # The declaration, its date and the declarant's signature never split (tier 2: a signature never stands alone on a page).
   - group:
-      - {text: "{service.declarant}", left: 198}
+      - {text: "I declare under penalty of perjury under the laws of the State of California that the foregoing is true and correct."}
+      - {text: "Executed on {service.executed}.", above: 10.4}
+      - {text: "{service.declarant}", left: 198, above: 18.2}
       - {text: "Declarant", left: 198}
-    above: 18.2
+    above: 10.4

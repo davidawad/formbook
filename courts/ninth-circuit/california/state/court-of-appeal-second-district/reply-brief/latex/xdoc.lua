@@ -350,25 +350,25 @@ return require("latex.xdoc")({
       },
     },
     {
-      ["text"] = "I declare under penalty of perjury under the laws of the State of California that the foregoing is true and correct.",
-      ["above"] = 10.4,
-    },
-    {
-      ["text"] = "Executed on {service.executed}.",
-      ["above"] = 10.4,
-    },
-    {
       ["group"] = {
+        {
+          ["text"] = "I declare under penalty of perjury under the laws of the State of California that the foregoing is true and correct.",
+        },
+        {
+          ["text"] = "Executed on {service.executed}.",
+          ["above"] = 10.4,
+        },
         {
           ["text"] = "{service.declarant}",
           ["left"] = 198,
+          ["above"] = 18.2,
         },
         {
           ["text"] = "Declarant",
           ["left"] = 198,
         },
       },
-      ["above"] = 18.2,
+      ["above"] = 10.4,
     },
   },
   ["latex_bias"] = 0,
