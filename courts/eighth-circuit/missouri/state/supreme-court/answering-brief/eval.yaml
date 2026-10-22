@@ -1,0 +1,9 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). docx breaks every line and page where
+# typst does and is gated.
+params:
+  cross_engine: gate
+  # LaTeX does not break before an em dash; typst and Word do, and break there when a spaced ellipsis is bound to the
+  # dash ("continues to argue— . . . he", note 4, page 20 lines 21-22: typst and Word end the line after "argue", LaTeX
+  # after "argue—"; XENG-003). A shared-model gap, recorded in docs/open-items/fb-595.54.59.md; reported, not gated.
+  cross_engine_latex: report
