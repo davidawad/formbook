@@ -1,4 +1,8 @@
-# Gate 4 CROSS-ENGINE: typst only. Not on the shared document model yet: the frontmatter's authorities
-# ({key, category, text}, cited by toa: links) are a shape the model does not read (docs/open-items/fb-595.54.24.md).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # pdfLaTeX has no break after a slash inside a word ("psychiatric/", p5 line 23), where typst and Word break: a shared-model
+  # feature (lib/latex; docs/open-items/fb-595.54.24.md).
+  cross_engine_latex: report

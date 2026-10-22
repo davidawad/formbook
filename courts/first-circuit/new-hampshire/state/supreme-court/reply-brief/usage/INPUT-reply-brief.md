@@ -35,22 +35,22 @@ certificates:
     text: "I hereby certify that a copy of this brief is being timely provided to Sam M. Gonyea, counsel for the State, through the electronic filing system’s electronic service."
     signer: "Christopher M. Johnson"
 authorities:
-  - {key: rsa-159-3, category: statutes, text: "RSA 159:3"}
-  - {key: rsa-161f-43, category: statutes, text: "RSA 161-F:43, VII"}
-  - {key: rsa-259-96, category: statutes, text: "RSA 259:96"}
-  - {key: rsa-318b, category: statutes, text: "RSA 318-B"}
-  - {key: rsa-318b-1, category: statutes, text: "RSA 318-B:1"}
-  - {key: rsa-318b-2b, category: statutes, text: "RSA 318-B:2-b, I"}
-  - {key: rsa-326b-32, category: statutes, text: "RSA 326-B:32"}
-  - {key: rsa-326b-37, category: statutes, text: "RSA 326-B:37"}
-  - {key: rsa-570a-2, category: statutes, text: "RSA 570-A:2, II(k)(1)"}
-  - {key: rsa-625-11, category: statutes, text: "RSA 625:11"}
-  - {key: rsa-632a-2, category: statutes, text: "RSA 632-A:2, I(g)(1)"}
-  - {key: rsa-639a-1, category: statutes, text: "RSA 639-A:1, III"}
-  - {key: npa, category: statutes, text: "Nurse Practice Act, RSA 326-B"}
-  - {key: nh-laws-1992, category: statutes, text: "N.H. Laws 1992, ch. 254:6"}
-  - {key: nh-laws-1994, category: statutes, text: "N.H. Laws 1994, ch. 376:2"}
-  - {key: nh-laws-2005, category: statutes, text: "N.H. Laws 2005, ch. 293:1"}
+  rsa-159-3: {kind: statutes, cite: "RSA 159:3", sort: "001"}
+  rsa-161f-43: {kind: statutes, cite: "RSA 161-F:43, VII", sort: "002"}
+  rsa-259-96: {kind: statutes, cite: "RSA 259:96", sort: "003"}
+  rsa-318b: {kind: statutes, cite: "RSA 318-B", sort: "004"}
+  rsa-318b-1: {kind: statutes, cite: "RSA 318-B:1", sort: "005"}
+  rsa-318b-2b: {kind: statutes, cite: "RSA 318-B:2-b, I", sort: "006"}
+  rsa-326b-32: {kind: statutes, cite: "RSA 326-B:32", sort: "007"}
+  rsa-326b-37: {kind: statutes, cite: "RSA 326-B:37", sort: "008"}
+  rsa-570a-2: {kind: statutes, cite: "RSA 570-A:2, II(k)(1)", sort: "009"}
+  rsa-625-11: {kind: statutes, cite: "RSA 625:11", sort: "010"}
+  rsa-632a-2: {kind: statutes, cite: "RSA 632-A:2, I(g)(1)", sort: "011"}
+  rsa-639a-1: {kind: statutes, cite: "RSA 639-A:1, III", sort: "012"}
+  npa: {kind: statutes, cite: "Nurse Practice Act, RSA 326-B", sort: "013"}
+  nh-laws-1992: {kind: statutes, cite: "N.H. Laws 1992, ch. 254:6", sort: "014"}
+  nh-laws-1994: {kind: statutes, cite: "N.H. Laws 1994, ch. 376:2", sort: "015"}
+  nh-laws-2005: {kind: statutes, cite: "N.H. Laws 2005, ch. 293:1", sort: "016"}
 ---
 
 # I. AS A MATTER OF STATUTORY INTERPRETATION, EVIDENCE OF CONSENT IS ADMISSIBLE IN A CASE CHARGING A CRIME UNDER RSA 632-A:2, I(G)(1).
