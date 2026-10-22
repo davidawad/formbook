@@ -1,0 +1,61 @@
+# Missouri Court of Appeals (moctapp): reply brief. The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to Mo. Sup. Ct. R. 84.03, 84.04 and 84.06 (../../rules.md, MOCTAPP-*); lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}).
+size: 13                  # MOCTAPP-FORM-004: not smaller than 13 point, Times New Roman, footnotes included
+pitch:
+  body: 22.45             # MOCTAPP-FORM-003: line spacing not less than 1.5 (1.5 x 14.95 pt, up to a whole twip)
+  single: 14.95           # caption, headings, quotations, footnotes, certificates, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MOCTAPP-FORM-002: not less than one inch
+indent: 36
+page_number: {align: center, from: 1}   # MOCTAPP-FORM-001: every page, the cover included, numbered at the bottom
+footnote: {size: 13, gap: 6.5}          # MOCTAPP-FORM-003, -004: 13 point, single spaced
+quote: {left: 36, right: 36, above: 7.8, below: 13}   # MOCTAPP-FORM-003: long quotations single spaced, indented
+# Headings single spaced (MOCTAPP-FORM-003); levels as the exemplars set them (MOCTAPP-FORM-007).
+heading:
+  - {align: center, bold: true, upper: true, above: 15.6, below: 13}
+  - {bold: true, hang: 36, above: 13, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# The cover (page one, MOCTAPP-FORM-001; its contents follow the exemplars, MOCTAPP-FORM-007): the case number, the
+# court, the parties, the court appealed from and the judge between rules, the title, counsel.
+cover:
+  - {text: "No. {case_number}", align: center, bold: true}
+  - {text: "{court_line}", align: center, bold: true, above: 7.2}
+  - each: caption
+    above: 8.6
+    between:
+      - {text: "v.", align: center, above: 2.6}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center}
+  - {rule: 0.5, above: 8.4}
+  - {text: "{proceeding}", align: center, above: 2.6}
+  - {text: "{judge}", align: center, optional: true}
+  - {rule: 0.5, above: 2.6}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 8.6}
+  - each: counsel
+    above: 8.6
+    blocks:
+      - {text: "{names}", left: 158.4, above: 10.4}
+      - {text: "{lines}", left: 158.4}
+# Rule 84.04(a)(1), applied to the reply by Rule 84.06(a): a detailed table of contents and a table of authorities.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 19.5, above: 9.1}
+# The date or closing words at the left, then the signature right of center, never split (MOCTAPP-FORM-007).
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - when: closing
+        blocks:
+          - {text: "{closing}", left: 230.4}
+      - {text: "{signature.firm}", left: 230.4, above: 7.8}
+      - {text: "/s/ {signature.signer}", underline: true, left: 230.4, above: 7.8}
+      - {text: "{signature.lines}", left: 230.4}
+    above: 28.8
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 9.1
+  group: {bold: true, above: 14.3, below: 2.6}
+# MOCTAPP-CERT-001 (Rule 84.06(c)): the certificates, single spaced, open a page after the signature.
+tail: {at: "Certificat", break: true, indent: 36, gap: 13}
