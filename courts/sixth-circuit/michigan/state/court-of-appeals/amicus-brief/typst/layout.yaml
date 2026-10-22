@@ -1,0 +1,61 @@
+# Michigan Court of Appeals (michctapp): amicus curiae brief (MCR 7.212(H)). The whole layout, as data for the shared document
+# model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to MCR 7.212(B)(5) and 1.109(D)(1) (../rules.md, MICHCTAPP-*); lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # MICHCTAPP-FORM-001: 12-point body text and footnotes
+pitch:
+  body: 20.7              # MCR 7.212(B)(5): 1.5-line spaced (Word's 1.5 lines, 1.5 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MCR 7.212(B)(5): at least one-inch margins
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
+footnote: {size: 12, gap: 7}             # MCR 7.212(B)(5): footnotes may be single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # MCR 7.212(B)(5): quotations may be single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 12}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 9.6, below: 7.2}
+# The cover: the court, the caption beside the case numbers, the title, counsel two to a row.
+cover:
+  - {text: "STATE OF MICHIGAN", align: center, bold: true}
+  - {text: "IN THE COURT OF APPEALS", align: center, bold: true}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v", above: 3.6, below: 7.2}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", italic: true, above: 4.8}
+      - width: 165.6
+        blocks:
+          - {text: "Court of Appeals No. {case_number}"}
+          - {text: "{trial_court_case}", optional: true}
+    gutter: 14.4
+    above: 36
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 28.8}
+  - {text: "{oral_argument}", align: center, bold: true, upper: true, optional: true, above: 3.6}
+  - columns: {each: counsel, per_row: 2, row_gap: 14.4, blocks: [{text: "{names}", bold: true}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 72
+# MCR 7.212(C)(2), (3): the table of contents and the index of authorities, on their own pages.
+contents: {title: "Table of Contents", depth: 2, col: 36, hang: 18, step: 18, above: 7.2}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 18
+  above: 10.8
+  group: {bold: true, above: 14.4, below: 2.4}
+# The date, the signature block (each signer: "/s/" and the name underlined, the name, the signer's own lines) and
+# the MCR 7.212(B)(3) word-count statement, never split.
+closing:
+  - group:
+      - {text: "DATED: {date}", optional: true}
+      - {text: "Respectfully submitted,", left: 216, above: 4.8}
+      - each: signature.signers
+        blocks:
+          - {text: "/s/ *{name}*", underline: true, left: 216, above: 10.8}
+          - {text: "{name}", left: 216}
+          - {text: "{lines}", left: 216, optional: true}
+      - {text: "This brief contains {word_count} countable words under MCR 7.212(B)(2)-(3).", optional: true, above: 7.2}
+    above: 21.6
