@@ -3,27 +3,38 @@
 // authorities, citing the Code, the Rules, the LBRs and controlling authority), LBR 9013-1(c)(1) (response-time
 // NOTICE, at least 11 point, in single or double space), LBR 9013-1(c)(2) (14, 21 or 30 day periods),
 // LBR 1005-1(a) (case name, number, judge's initials and chapter on every paper), 1005-1(b) (8 1/2 x 11 inch pdf),
-// 1005-1(c) (signature block), LBR 9013-3(a) (certificate of service). Not generated: the notice of motion,
+// 1005-1(c) (signature block), LBR 9013-3(a) (certificate of service); L.Cv.R. 7(e) through LBR 1001-1(b) (12 point,
+// double spacing, page numbers at the bottom center; ../rules.md, Finding 2). Not generated: the notice of motion,
 // certifications, proposed order and the certificate of service's list of parties (separate papers or
 // frontmatter, see README.md).
 // Content-agnostic: every case-specific word comes from the sample's frontmatter and body, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")        // no typeface rule in the PR bankruptcy LBRs; Times New Roman substitute per docs/FONTS.md (convention)
-#let type-size = 12pt                   // convention (the exemplar sets 12 pt); LBR 9013-1(c)(1) needs 11 pt minimum for the notice
-#let page-w = 8.5in                     // LBR 1005-1(b): 8 1/2 x 11 inch
-#let page-h = 11in
+#let font-family = ("Times New Roman", "Liberation Serif")   // no typeface rule (../rules.md, Finding 3); Times New Roman, the house default and the face of the Oriental Bank exemplar (docs/FONTS.md); Liberation Serif its metric twin
+#let type-size = 12pt                   // L.Cv.R. 7(e) via LBR 1001-1(b): no less than 12 points; LBR 9013-1(c)(1): the notice at least 11
 #let margin = 1in                       // convention (the exemplar has one-inch margins)
-#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 1.345em gives a 24 pt baseline pitch at 12 pt (measured, README.md)
-#let pitch = 24pt                        // one double-spaced row: body-leading on a 12 pt line box
-#let single-leading = 0.5em             // single spacing for the caption, the notice, quotations and the signature block
-#let para-indent = 0.5in                // first-line indent of body paragraphs
+#let para-indent = 0.5in                // first-line indent of body paragraphs; quotations stand this far in on both sides
 #let caption-left = 3.4in               // width of the left (parties) column of the caption
-#let text-width = page-w - 2 * margin
+#let caption-gutter = 0.2in             // between the parties column and the case-number column
+#let caption-pad = 10pt                 // the parties' text stands off the column's right and bottom rules
+#let right-pad = 0.15in                 // the case-number column's text stands in from its left
+#let sig-indent = 3in                   // the signer's lines stand this far in
+#let rule = 0.75pt
 #let response-periods = (14, 21, 30)    // LBR 9013-1(c)(1) and (c)(2): days allowed to respond
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-double = 24pt                // double spacing (L.Cv.R. 7(e)): two 12 pt lines
+#let pitch-single = 13.8pt              // a single line: 1.15 x the type size (Word's single line in this face)
+#let half-gap = pitch-single / 2        // around the rule between the debtor and the parties
+#let quote-gap = pitch-double / 2       // above and below a quotation
+#let note-gap = 7pt                     // between two footnotes (Word: Footnote Text's space after)
+#let note-clearance = 7.5pt            // from the text to the footnote rule: with note-gap, the space LibreOffice keeps above its separator (7 to 8 pt set every page as the docx; 5 and 8.5 do not)
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -39,83 +50,48 @@
 /// Inline markdown (for case names, *et al.*, etc.).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
-/// Single-spaced lines, one item per line.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => inl(i)))
-}
+/// One single-spaced line block (a paragraph of its own), with explicit space above it; `ruled`: a rule below it.
+#let line-block(above: 0pt, indent: 0pt, ruled: false, body) = block(width: 100%, above: above, below: 0pt,
+  stroke: if ruled { (bottom: rule) } else { none }, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    pad(left: indent, body)
+  })
 
-/// A block of whole double-spaced rows: its height is rounded up to a multiple of `pitch`, so whatever
-/// follows it stays on the same 24 pt grid (a one-line block would otherwise be only one line box high).
-#let on-grid(c) = context {
-  let h = measure(width: text-width, c).height
-  block(width: text-width, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, c)
-}
-
-/// A heading: whole rows (a long heading may wrap), kept with the paragraph after it, so it never ends a page.
-#let heading-block(c) = context {
-  let h = measure(width: text-width, c).height
-  block(width: text-width, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, sticky: true, c)
-}
-
-// ---------------------------------------------------------------------------
-// Page furniture
-// ---------------------------------------------------------------------------
-
-/// Page number, centered in the footer.
-#let footer-number() = context align(center, text(size: type-size, counter(page).display()))
+/// A body paragraph at the double pitch, the first line half an inch in.
+#let body-par(c) = block(width: 100%, above: 0pt, below: 0pt, par(first-line-indent: (amount: para-indent, all: true), c))
 
 // ---------------------------------------------------------------------------
 // Caption: court, debtor, parties, case number, chapter, adversary number, title
 // ---------------------------------------------------------------------------
 
-#let court-title(meta) = align(center, {
-  for (k, line) in meta.court.enumerate() {
-    if k > 0 { linebreak() }
-    text(weight: "bold", upper(line))
-  }
-})
+#let court-title(meta) = for l in meta.court { line-block(align(center, strong(upper(inl(l))))) }
 
 #let caption(meta) = {
   assert("bankruptcy_case" in meta, message: "prb-motion-brief: LBR 1005-1(a) requires the bankruptcy case number and judge's initials in the frontmatter (bankruptcy_case)")
   assert("chapter" in meta, message: "prb-motion-brief: LBR 1005-1(a) requires the chapter in the frontmatter (chapter)")
-  grid(
+  // An adversary number that is not yet assigned prints as a blank to fill in.
+  let adv = meta.at("adversary", default: "")
+  block(above: pitch-double, below: 0pt, grid(
     columns: (caption-left, 1fr),
-    column-gutter: 0.2in,
-    block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 10pt), {
-      // "In re:" and the debtor, then a rule, then the parties; "v." between the parties.
-      set par(leading: single-leading, spacing: 0pt, justify: false)
-      line-stack(("In re:",) + meta.debtor.names + (meta.debtor.designation,))
-      v(single-leading)
-      line(length: 100%, stroke: 0.75pt)
-      v(single-leading)
-      let rows = ()
+    column-gutter: caption-gutter,
+    // "In re:" and the debtor, a rule, then the parties with "v." between them; ruled at the right and below.
+    block(width: 100%, stroke: (right: rule, bottom: rule), inset: (right: caption-pad, bottom: caption-pad), {
+      line-block[In re:]
+      for n in meta.debtor.names { line-block(inl(n)) }
+      line-block(ruled: true, inl(meta.debtor.designation))
       for (k, p) in meta.parties.enumerate() {
-        if k > 0 { rows.push("v.") }
-        rows += p.names + (p.designation,)
+        if k > 0 { line-block[v.] }
+        for (i, n) in p.names.enumerate() { line-block(above: if k == 0 and i == 0 { half-gap } else { 0pt }, inl(n)) }
+        line-block(inl(p.designation))
       }
-      line-stack(rows)
     }),
-    block(inset: (left: 0.15in), {
-      // An adversary number that is not yet assigned prints as a blank to fill in (the exemplar leaves it blank).
-      let adv = meta.at("adversary", default: "")
-      set par(leading: single-leading, spacing: 0pt, justify: false)
-      line-stack((
-        "Bankr. Case No. " + meta.bankruptcy_case,
-        meta.chapter,
-        "Adv. Proceeding No. " + if adv == "" { "__________" } else { adv },
-      ))
+    pad(left: right-pad, {
+      line-block[Bankr. Case No. #inl(meta.bankruptcy_case)]
+      line-block(inl(meta.chapter))
+      line-block[Adv. Proceeding No. #if adv == "" { "__________" } else { inl(adv) }]
     }),
-  )
-}
-
-#let cover(meta) = {
-  court-title(meta)
-  v(body-leading)
-  caption(meta)
-  v(body-leading)
-  align(center, text(weight: "bold", inl(meta.title)))
-  v(body-leading)
+  ))
 }
 
 // ---------------------------------------------------------------------------
@@ -149,6 +125,8 @@
     out += inl(t.slice(pos, m.start))
     out += footnote(inl(defs.at(n)))
     pos = m.end
+    // a space after the mark stays (each piece is rendered on its own, which trims it)
+    if t.slice(pos).starts-with(regex("\\s")) { out += [ ] }
   }
   out + inl(t.slice(pos))
 }
@@ -156,25 +134,12 @@
 /// Body blocks: each blank-line-separated chunk of markdown is a heading, a block quotation or one paragraph.
 /// Paragraphs are not numbered (a memorandum of law, unlike a complaint, does not number its paragraphs).
 #let body-blocks(body, defs) = {
-  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
-  for c in chunks {
+  for c in body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "") {
     let t = c.trim()
-    if t.starts-with("#") {
-      heading-block(cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1))
-    } else if t.starts-with(">") {
-      // Block quotation: single spaced and indented from both margins, then a double-spaced row below it.
-      block(width: text-width, breakable: true, {
-        set par(leading: single-leading, spacing: 0pt, justify: false)
-        show quote.where(block: true): it => pad(x: 0.5in, it.body)
-        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-        v(body-leading - single-leading)
-      })
+    if t.starts-with("#") or t.starts-with(">") {
+      cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
     } else {
-      on-grid({
-        set par(leading: body-leading)
-        h(para-indent)
-        para-content(t, defs)
-      })
+      body-par(para-content(t, defs))
     }
   }
 }
@@ -193,73 +158,76 @@
     "21": "twenty-one (21)",
     "30": "thirty (30)",
   ).at(str(days))
-  block(width: text-width, breakable: false, {
-    set par(leading: single-leading, spacing: 0pt, justify: true)
-    v(body-leading)
-    align(center, text(weight: "bold", "NOTICE"))
-    v(single-leading)
-    [Within #words days after service as evidenced by the certification, and an additional three (3) days pursuant to Fed. R. Bank. P. 9006(f) if you were served by mail, any party against whom this paper has been served, or any other party to the action who objects to the relief sought herein, shall serve and file an objection or other appropriate response to this paper with the clerk's office of the United States Bankruptcy Court for the District of Puerto Rico. If no objection or other response is filed within the time allowed herein, the paper will be deemed unopposed and may be granted unless: (i) the requested relief is forbidden by law; (ii) the requested relief is against public policy; or (iii) in the opinion of the court, the interest of justice requires otherwise.]
+  block(width: 100%, breakable: false, above: pitch-double, below: 0pt, {
+    line-block(align(center, strong[NOTICE]))
+    line-block(above: pitch-single)[Within #words days after service as evidenced by the certification, and an additional three (3) days pursuant to Fed. R. Bank. P. 9006(f) if you were served by mail, any party against whom this paper has been served, or any other party to the action who objects to the relief sought herein, shall serve and file an objection or other appropriate response to this paper with the clerk’s office of the United States Bankruptcy Court for the District of Puerto Rico. If no objection or other response is filed within the time allowed herein, the paper will be deemed unopposed and may be granted unless: (i) the requested relief is forbidden by law; (ii) the requested relief is against public policy; or (iii) in the opinion of the court, the interest of justice requires otherwise.]
   })
 }
 
 #let certificate-of-service(meta) = if "certificate" in meta {
-  block(width: text-width, breakable: false, {
-    set par(leading: body-leading, spacing: 0pt, justify: false)
-    v(body-leading)
-    on-grid({
-      set par(leading: body-leading)
-      text(weight: "bold", "CERTIFICATE OF SERVICE: ")
-      inl(meta.certificate)
-    })
-  })
+  block(width: 100%, breakable: false, above: pitch-double, below: 0pt,
+    par(first-line-indent: 0pt)[#strong[CERTIFICATE OF SERVICE:] #inl(meta.certificate)])
 }
 
 #let signature-block(meta) = {
   assert("signature" in meta, message: "prb-motion-brief: the frontmatter needs a signature block (LBR 1005-1(c))")
   assert("signer" in meta.signature, message: "prb-motion-brief: the signature block needs the signer's name (LBR 5005-4(b)(2)(C)(ii): /s/ name)")
-  v(body-leading)
-  block(breakable: false, width: text-width, {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    [Respectfully submitted,]
-    v(body-leading)
-    [#meta.signature.date]
-    v(body-leading)
-    pad(left: 3.0in, line-stack(("/s/ " + meta.signature.signer,) + meta.signature.lines))
+  block(breakable: false, width: 100%, above: pitch-double, below: 0pt, {
+    line-block[Respectfully submitted,]
+    line-block(above: pitch-single, inl(meta.signature.date))
+    line-block(above: pitch-single, indent: sig-indent)[/s/ #inl(meta.signature.signer)]
+    for l in meta.signature.lines { line-block(indent: sig-indent, inl(l)) }
   })
 }
 
 #let prb-motion-brief(meta, body) = {
+  // Page numbers centered at the foot of every page (L.Cv.R. 7(e): preferably at the bottom center), in a single
+  // line box, so the number sits at the same place on every page (Word's footer).
   set page(
     paper: "us-letter",
     margin: margin,
-    footer: footer-number(),
+    footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  // Footnotes: the same size as the text (convention; the exemplar's footnotes are the text size).
-  set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
-  show footnote.entry: set text(size: type-size)
-  show footnote.entry: set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em)
-
-  // Headings: level 1 is a bold capitals section; level 2 bold; level 3 bold italic (the exemplar's sub-point).
-  show heading.where(level: 1): it => heading-block(text(size: type-size, weight: "bold", upper(it.body)))
-  show heading.where(level: 2): it => heading-block(text(size: type-size, weight: "bold", it.body))
-  show heading.where(level: 3): it => heading-block(text(size: type-size, weight: "bold", style: "italic", it.body))
-
-  cover(meta)
-
-  on-grid(text(weight: "bold", "TO THE HONORABLE COURT:"))
-
-  let (text-body, defs) = split-footnotes(body)
-
-  if "lead_in" in meta {
-    on-grid({
-      set par(leading: body-leading)
-      h(para-indent)
-      inl(meta.lead_in)
-    })
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: 0pt)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch.
+  show: xengine.with(pitch: pitch-double)
+  // A doubled section sign stays with its number ("§§ 1391"; the docx filter binds it with a no-break space).
+  show regex("[§¶]{2,} \\S+"): it => box(it)
+  // Footnotes at the text size (the exemplar's), single lines, under a 30 % rule, 7 pt between notes; the mark and
+  // a space before the text (Word's footnote).
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
+  show footnote.entry: it => {
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    [#super(num)#h(0.25em)#note.body]
+  }
+  // Quotations single-spaced, half an inch in on both sides, half a double line off the text.
+  show quote.where(block: true): it => block(width: 100%, above: quote-gap, below: quote-gap, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    pad(x: para-indent, it.body)
+  })
+  // Headings at the body size and pitch, at the margin: level 1 bold capitals, level 2 bold, level 3 bold italic
+  // (the exemplar's sub-point). No space of their own; sticky: a heading never ends a page.
+  show heading: it => {
+    set text(size: type-size)
+    set par(first-line-indent: 0pt)
+    let b = if it.level == 1 { upper(it.body) } else if it.level == 3 { emph(it.body) } else { it.body }
+    block(sticky: true, width: 100%, above: 0pt, below: 0pt, strong(b))
   }
 
+  court-title(meta)
+  caption(meta)
+  block(sticky: true, width: 100%, above: pitch-double, below: pitch-single, line-block(align(center, strong(inl(meta.title)))))
+  block(sticky: true, width: 100%, above: 0pt, below: 0pt, strong[TO THE HONORABLE COURT:])
+
+  let (text-body, defs) = split-footnotes(body)
+  if "lead_in" in meta { body-par(inl(meta.lead_in)) }
   body-blocks(text-body, defs)
 
   response-notice(meta)

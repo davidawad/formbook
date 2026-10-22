@@ -20,7 +20,7 @@ Local rules text: the court's "Local Bankruptcy Rules" compilation (PRLBRs-2013,
 | LBR 5005-4(b)(2)(C)(ii) | The electronic signature is the filer's name preceded by "/s/". | `signature-block()`: prints "/s/ " before the signer. |
 | LBR 9013-3(a) (2013 compilation) | The certificate of service states how and when service was made, names and addresses of all persons served, and the name and address of the person certifying. | `certificate-of-service()`: the frontmatter `certificate` text. Not generated from a list of parties. See gap 4. |
 | FRBP 9004(b) (https://www.law.cornell.edu/rules/frbp/rule_9004, fetched 2026-10-14) | A document's caption sets out the court, the case title, the case and adversary numbers, and a designation of the document. | `caption()` and `cover()`. |
-| Typeface (fonts pass, 2026-10-14) | Face required: **none named** in the PR bankruptcy LBRs (2013 compilation and GO 18-02; no typeface or size clause found). LBR 1001-1(b) falls back to the District Court's local civil rules for matters not covered; their Local Rule 10 text was not retrieved, so this is OPEN. Vendored substitute: **none needed**; keeps **EB Garamond** (`docs/FONTS.md`, "No face named"). Metric fit: n/a. | `font-family` in `prb-motion-brief.typ`. |
+| Typeface (fonts pass, 2026-10-14) | Face required: **none named** in the PR bankruptcy LBRs (2013 compilation and GO 18-02; no typeface or size clause found). LBR 1001-1(b) falls back to the District Court's local civil rules for matters not covered; their Local Rule 10 text was not retrieved, so this is OPEN. L.Cv.R. 7(e) (via LBR 1001-1(b), `../rules.md` Finding 2) asks no less than 12 points. The template sets **Times New Roman** 12 pt (Liberation Serif its metric twin), the house standard and the face of the Oriental Bank exemplar (`data/exemplar-fonts.json`), on typst and docx alike (fb-595.68.17). | `font-family` in `prb-motion-brief.typ`. |
 
 ## What the overlay shows
 
@@ -34,27 +34,23 @@ Local rules text: the court's "Local Bankruptcy Rules" compilation (PRLBRs-2013,
 4. **Certificate of service (LBR 9013-3(a)).** The certificate is the exemplar's text. It names counsel for plaintiff, the chapter 13 trustee and the U.S. Trustee's office, and gives the first-class mail address for plaintiff's counsel; it does not list every party served. Not checked against the case's docket of parties.
 5. **Not templated (separate papers, or not in the exemplar):** the notice of motion and hearing date, any certification or declaration (the exemplar relies on a separate statement of uncontested facts at Dk. No. 28), the proposed order, and the urgent-motion certification (LBR 9013-1(a)(1)).
 6. **Table of contents and table of authorities.** None is generated and the LBR 9013-2 text checked does not require one. Judges' preferences are not checked.
-7. **Typeface.** No PR bankruptcy rule sets a typeface or size. The template uses EB Garamond 12 pt, the convention both exemplars follow at 12 pt; the exemplar's text is Garamond (embedded, per `usage/SOURCE.md`), so it is a close face match.
+7. **Typeface.** No PR bankruptcy rule names a typeface. The template uses Times New Roman 12 pt on both engines, the face of the Oriental Bank exemplar (`FILED-EXAMPLE-motion-brief-3.pdf`, per the font audit).
 8. **Second exemplar not collected.** `usage/SOURCE.md` records that the only other PR bankruptcy motion-with-memorandum found was a PROMESA district-court filing, which does not match this folder. Tier 2 is judged against one filer. This is OPEN.
 9. **Footnote numbering.** Footnotes are written as `[^n]` markers with `[^n]:` definitions in the sample; typst numbers them in order of appearance, so the sample's numbers must run in order. A footnote marker inside bold or italic text would split the formatting; none is in the sample.
 
 ## Gate 2 review
 
-- Page 1: court name, caption (debtor, parties, case number, chapter, adversary number), the bold title, "TO THE HONORABLE COURT:", the lead-in and the start of section I, with footnote 1 at the foot. Pass.
-- Pages 2-7: body paragraphs, footnotes 2-5 on the pages where they are marked, headings I-VII (sub-point "a. V. Conclusion" in bold italic), the § 524(a) and *Morales* block quotations, the WHEREFORE paragraph. Pass as layout; the 524(a) line breaks are gap 2.
-- Page 8: the NOTICE (rule text, 14 days), the certificate of service, "Respectfully submitted," the date and the signature block. Pass as layout; the period and signature lines are gaps 1 and 3.
-- All 8 pages were rasterized and viewed individually (render), and the overlay was viewed page by page.
+Re-done 2026-10-22 on the cross-engine renders (fb-595.68.17), typst and docx, every page of both samples (9 and 9) rasterized and viewed:
+
+- Page 1: court lines, the caption (parties ruled at the right and below, a rule under the debtor; case, chapter and adversary numbers at the right), the bold title, "TO THE HONORABLE COURT:", the lead-in, section I with footnote 1 at the foot. Pass.
+- Pages 2-7 (msj) / 2-8 (osj): body paragraphs, footnotes 2-5 at the foot of the pages that mark them (footnote 4 runs over from page 6 to 7 in the msj, on both engines), headings at the margin (sub-point "a. V. Conclusion" in bold italic), the § 524(a) and *Morales* quotations single-spaced half an inch in on both sides. Pass as layout; the 524(a) line breaks are gap 2.
+- Pages 8-9: the WHEREFORE paragraph, the NOTICE (rule text, 14 days), the certificate of service, "Respectfully submitted," the date and the `/s/` block at 3 in. Pass as layout; the period and signature lines are gaps 1 and 3.
+- OPEN (sample, for David): the osj body carries its own "NOTICE OF RESPONSE TIME" and "(single) " paragraphs, printed as written, so the osj shows two notices on both engines.
 
 ## Engines
 
-docx: `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt double pitch, 13.8 pt single lines, 0.5 in first-line indent, footnotes 12 pt single, block quotations single and indented 0.5 in both sides, 1 in margins, PAGE field in the footer); `docx/prb-motion-brief.lua` builds the caption table, the title, the lead-in, the response-time NOTICE, the certificate of service (when the frontmatter has one) and the signature block. Headings, paragraphs and footnotes are pandoc's native Word elements. Checked on `usage/OUTPUT-motion-brief.docx.pdf` and `usage/OUTPUT-motion-brief-2.docx.pdf` (LibreOffice). Opened with LibreOffice only; Word was not checked.
+Both engines are on the shared cross-engine layout model (lib/typst/xengine.typ, lib/docx/xengine.lua; docs/EVAL-LOOP.md): Times New Roman 12 pt, exact 24 pt double pitch for the body and headings, 13.8 pt single lines for the court lines, caption, title, notice, quotations, footnotes and signature, ragged right, no hyphenation; `eval.yaml` sets `params.cross_engine: gate`, and the docx breaks every line and page as typst on both samples (XENG-001..003).
 
-Matches the typst form (measured on the PDFs): US Letter, one-inch margins, EB Garamond 12 pt, body line pitch 24.0 pt and single-line pitch 13.8 pt in both, page counts 8 = 8 (msj) and 9 = 9 (osj), caption, bold capital level-1 headings, italic level-3 sub-point, footnote numbering, block quotations, the NOTICE and certificate, `/s/` signature block.
-
-Differs:
-- LibreOffice breaks some lines at other words than typst, so page breaks fall at different sentences; the page counts match.
-- The osj sample's body already contains "NOTICE OF RESPONSE TIME" and a "(single)" certificate paragraph, and the template adds its own NOTICE from the frontmatter (default 14 days, as typst does). The osj therefore shows two notices in both engines. This is a sample issue for David to decide (remove the body notice or set the frontmatter), not a template fix.
-- In the osj, typst ends page 8 with the template NOTICE and puts the signature block alone on page 9; the docx keeps the NOTICE with the signature block on page 9 (keep-with-next).
-- A block quotation in the osj moves whole to page 5 in the docx; typst splits it across pages 4 and 5.
+docx: `docx/reference.xml` (base="xengine", the face only as `{font}`; Footnote Text without keepLines so a note splits across a page as in typst; Body Text Note without widow control for a paragraph that marks a footnote) replaces `build-reference.sh` and the committed EB Garamond `reference.docx`; `docx/prb-motion-brief.lua` writes the court lines, the caption table, the title, the lead-in, the headings, the NOTICE, the certificate of service (when the frontmatter has one) and the signature block; body paragraphs, quotations (Block Text) and footnotes are pandoc's, numbered through the document (the old reference restarted them, DEF-CONT-001). The typst `note-clearance` (7.5 pt) makes the space above the footnote rule LibreOffice's. Checked on `usage/OUTPUT-motion-brief.docx.pdf` and `usage/OUTPUT-motion-brief-2.docx.pdf` (LibreOffice); Word was not checked.
 
 BLOCKED: none.
