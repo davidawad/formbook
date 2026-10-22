@@ -25,7 +25,7 @@ Courts under `courts/fifth-circuit` (26).
 | [District Court, S.D. Texas](texas/federal/southern-district) | `txsd` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Texas](texas/federal/western-district) | `txwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Louisiana Court of Appeal](louisiana/state/court-of-appeal) | `lactapp` | up for review | 6/6 | 5/5 | 5/5 | 29 |
-| [Supreme Court of Louisiana](louisiana/state/supreme-court) | `la` | up for review | 9/9 | 8/8 | 8/8 | 29 |
+| [Supreme Court of Louisiana](louisiana/state/supreme-court) | `la` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals of Mississippi](mississippi/state/court-of-appeals) | `missctapp` | up for review | 5/5 | 5/5 | 4/4 | 29 |
 | [Mississippi Supreme Court](mississippi/state/supreme-court) | `miss` | up for review | 7/7 | 5/5 | 5/5 | 29 |
 | [Court of Civil Appeals of Texas](texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | 2/2 | 4/5 | 29 |
