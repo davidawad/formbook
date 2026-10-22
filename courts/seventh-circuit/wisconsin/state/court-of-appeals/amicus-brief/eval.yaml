@@ -1,0 +1,11 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # pdftotext reads typst's note marks 4, 5 and 6 as part of the word before them ("funding.4", p11 line 2;
+  # "implicated.5", p12 line 8; "hearing.”6", p13 line 19), LaTeX's and Word's raised marks as words of their own;
+  # the lines, the marks and every page start and end are the same (384/387 lines). A shared-model item
+  # (docs/open-items/fb-595.54.46.md, request 6). Reported, not gated, in both engines.
+  cross_engine_latex: report
+  cross_engine_docx: report

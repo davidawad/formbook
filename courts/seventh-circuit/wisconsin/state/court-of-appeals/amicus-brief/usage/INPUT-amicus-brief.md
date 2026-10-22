@@ -61,8 +61,8 @@ authorities:
       - {cite: "Kaeding, Danielle, *Rural Wisconsin Lacking Lawyers, Especially Up North*, WPR (Aug. 23, 2016) at https://www.wpr.org/rural-wisconsin-lacking-lawyers-especially-north", find: "Kaeding"}
       - {cite: "SCR 20:1.2(c)d.", find: "SCR 20:1.2"}
       - {cite: "Wis. Admin. Code Ch. PD 1", find: "Ch. PD 1"}
-      - {cite: "Wis. Admin. Code § PD 1.04", find: "PD 1.04"}
-      - {cite: "Wis. Admin. Code § PD 2.12", find: "PD 2.12"}
+      - {cite: "Wis. Admin. Code § PD 1.04", find: "1.04."}
+      - {cite: "Wis. Admin. Code § PD 2.12", find: "2.12."}
 certified_words: 2990
 date: "October 15, 2020"
 efiling_certificate:
