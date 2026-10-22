@@ -37,15 +37,15 @@ authorities:
       - name: "Baptist Vie Le v. State"
         italic: true
         rest: ", 993 S.W.2d 650 (Tex. Crim. App. 1999)"
-        pages: "10"
+        pages: "11"
       - name: "Guzman v. State"
         italic: true
         rest: ", 955 S.W.2d 85 (Tex. Crim. App. 1997)"
-        pages: "9"
+        pages: "10"
       - name: "Hereford v. State"
         italic: true
         rest: ", 339 S.W.3d 111 (Tex. Crim. App. 2011)"
-        pages: "9"
+        pages: "10"
       - name: "In re L.J."
         italic: true
         rest: ", No. 03-04-00807-CV, 2005 WL 3338302 (Tex. App.—Austin Dec. 9, 2005, no pet.)"
@@ -57,11 +57,11 @@ authorities:
       - name: "Le v. State"
         italic: true
         rest: ", No. 14-94-01265-CR, 2000 WL 1335290 (Tex. App.—Houston [14th Dist.] Sept. 14, 2000, pet. ref’d)"
-        pages: "10"
+        pages: "11"
       - name: "Matter of F.M.V."
         italic: true
         rest: ", 720 S.W.3d 494 (Tex. App.—El Paso 2025, pet. filed)"
-        pages: "1, 10, 11"
+        pages: "2, 10, 11"
       - name: "McIntyre v. State"
         italic: true
         rest: ", 619 S.W.3d 311 (Tex. App.—Fort Worth 2021, pet. ref’d)"
@@ -77,7 +77,7 @@ authorities:
         pages: "9"
       - name: "Tex. Fam. Code § 51.095"
         rest: ""
-        pages: "2, 3, 4, 7, 8, 9, 10"
+        pages: "2, 4, 5, 7, 8, 9, 10"
       - name: "Tex. Fam. Code § 51.12(f)"
         rest: ""
         pages: "3"
@@ -91,7 +91,7 @@ authorities:
         pages: "4"
       - name: "Tex. R. App. P. 56.1(a)(6)"
         rest: ""
-        pages: "4"
+        pages: "5"
 ---
 # IDENTITIES OF PARTIES AND COUNSEL
 

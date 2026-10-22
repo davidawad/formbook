@@ -1,19 +1,34 @@
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // Texas Rules of Appellate Procedure, Rule 9.4(c)-(e): letter paper, one-inch margins,
 // double-spaced text in a conventional typeface of at least 14 point, footnotes of at
 // least 12 point. Rule 9.4(d) lets footnotes, block quotations, short lists and issues
-// be single-spaced. Liberation Serif is the metric clone of Times New Roman, the face of
-// the filed exemplars.
+// be single-spaced. Times New Roman is the face of the filed exemplars (and the house
+// standard, docs/FONTS.md rule 6); Liberation Serif is its metric twin.
 #let font-family = ("Times New Roman", "Liberation Serif")
 #let text-size = 14pt
 #let note-size = 12pt
 
-// Typst leading is the gap between lines. On this font the natural line height is
-// 0.655 em, so 1.645 em gives a 32.2 pt baseline pitch (Word "double" at 14 pt) and
-// 0.5 em gives a 16.2 pt single pitch. Measured with pdftotext -bbox; see README.md.
-#let double = 1.645em
-#let single = 0.5em
+// The cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine
+// gate"): every line is a box of its pitch with the baseline at 0.8 of it, the boxes touch,
+// and the space between blocks is the larger of the one's below and the next one's above
+// (Word's exact line spacing; the docx engine sets the same values in twips, 20 x pt).
+#let pitch-double = 32.2pt   // Rule 9.4(d): double-spaced text (Word's double line at 14 pt)
+#let pitch-single = 16.1pt   // a single line at 14 pt: cover, headings, quotations, tables, signature, footer
+#let pitch-note = 13.8pt     // a single line at 12 pt: footnotes
+#let heading-above = 12.9pt  // a heading sits on the text's double-spaced grid: 12.9 pt above its line box
+#let heading-below = 3.2pt   // and 3.2 pt below it
+#let gap = 8pt               // between single-spaced paragraphs (identities, table rows)
+#let para-indent = 0.5in
+#let quote-indent = 1in      // block quotations, both sides
+#let level-indent = 0.5in    // a heading level steps in by this much in the contents
+#let toc-col = 36pt          // contents: the page numbers keep the last 36 pt of the line to themselves
+#let toa-col = 56pt          // index of authorities: at least 56 pt, or the page list's own width
+#let toa-hang = 0.5in        // the second line of an authority
+#let sig-indent = 3.25in     // the signature block: the right half of the page, as all three filers set it
+#let note-gap = 7pt          // between footnotes
+#let note-clearance = 7pt    // the text to the footnote rule
 
 // Which text of the rules governs. Misc. Docket No. 25-9104 (Dec. 23, 2025) amended
 // Rules 9.4, 53 and 55 for petitions filed on or after January 1, 2026. Frontmatter
@@ -56,6 +71,7 @@
   ),
 )
 #let doc-name = "petition for review"
+#let order-rule = "Rule 53.2"
 
 #let split-frontmatter(src) = {
   let m = src.match(regex("^---\\r?\\n([\\s\\S]*?)\\r?\\n---[ \\t]*\\r?\\n"))
@@ -114,73 +130,92 @@
     let k = rest.position(t => t.find(regex(pat)) != none)
     assert(
       k != none,
-      message: "Rule 53.2 (" + edition + "): the " + doc-name + " needs a section matching `" + pat + "`, after the sections before it in the rule's order",
+      message: order-rule + " (" + edition + "): the " + doc-name + " needs a section matching `" + pat + "`, after the sections before it in the rule's order",
     )
     pos += k + 1
   }
 }
 
+#let inl(s) = cmarker.render(s, smart-punctuation: true)
+#let render-md(md) = cmarker.render(md, smart-punctuation: true)
+
+/// A single-spaced block with explicit space above it.
+#let line-block(above: 0pt, below: 0pt, left: 0pt, sticky: false, body) = block(width: 100%, above: above,
+  below: below, sticky: sticky, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt)
+    pad(left: left, body)
+  })
+
+// Cover (Rule 9.4(g)): case number, court, caption, the court below, the title between rules; the
+// lead counsel at the foot of the page.
 #let cover(meta) = {
-  set par(leading: single, first-line-indent: 0pt, justify: false)
-  align(center)[No. #meta.case_number]
-  v(0.45in)
-  align(center)[#strong[IN THE SUPREME COURT OF TEXAS]]
-  v(0.35in)
+  let c(above, body) = line-block(above: above, align(center, body))
+  c(0pt)[No. #meta.case_number]
+  c(32.4pt, strong[IN THE SUPREME COURT OF TEXAS])
   for (i, side) in meta.caption.enumerate() {
-    if i > 0 {
-      v(0.2in)
-      align(center)[v.]
-      v(0.2in)
-    }
-    align(center)[#side]
+    if i > 0 { c(14.4pt)[v.] }
+    c(if i == 0 { 25.2pt } else { 14.4pt }, inl(side))
   }
-  v(0.35in)
-  align(center)[#meta.on_review]
-  v(0.35in)
-  line(length: 100%, stroke: 0.75pt)
-  v(0.2in)
-  align(center)[#strong[#meta.title]]
-  v(0.2in)
-  line(length: 100%, stroke: 0.75pt)
+  c(25.2pt, inl(meta.on_review))
+  block(width: 100%, above: 25.2pt, below: 0pt, stroke: (top: 0.75pt, bottom: 0.75pt), inset: (y: 14pt),
+    line-block(align(center, strong(inl(meta.title)))))
   v(1fr)
   let lead = meta.lead_counsel
-  align(left)[
-    #lead.name #linebreak()
-    #for line in lead.address { line + linebreak() }
-    #lead.phone #linebreak()
-    #lead.email #linebreak()
-    Texas Bar No. #lead.bar_number
-    #v(0.3in)
-    #meta.filing_party
-  ]
+  line-block(inl(lead.name))
+  for l in lead.address { line-block(inl(l)) }
+  line-block(inl(lead.phone))
+  line-block(inl(lead.email))
+  line-block[Texas Bar No. #lead.bar_number]
+  line-block(above: 21.6pt, inl(meta.filing_party))
   if meta.at("oral_argument_requested", default: false) {
-    v(0.4in)
-    align(center)[#strong[ORAL ARGUMENT REQUESTED]]
+    line-block(above: 28.8pt, align(center, strong[ORAL ARGUMENT REQUESTED]))
   }
-  // Keeps the last line of the cover above the 1 in bottom margin (the line box extends past the frame).
-  v(0.05in)
 }
 
-// Table of contents: generated from the headings, page numbers from the layout.
-// Rule 53.2(c): it must show the subject of each issue or point, so it lists the
-// argument's subheadings to the third level; the heading is bookmarked but not listed.
+// Advance widths (1/1000 em, Times New Roman) of the characters a page list holds, for its
+// width: the docx filter sizes the page column from the same table.
+#let advances = (
+  "0": 500, "1": 500, "2": 500, "3": 500, "4": 500, "5": 500, "6": 500, "7": 500, "8": 500, "9": 500,
+  ",": 250, " ": 250, "-": 333, "–": 500, "p": 500, "a": 444, "s": 389, "i": 278, "m": 778, "n": 500,
+  "v": 500, "x": 500, "f": 333, "l": 278, "c": 444,
+)
+/// The page column of an index row: 56 pt, or the page list's width at the type size in whole points and half
+/// an em (7 pt) clear of the leader.
+#let page-col(pages) = {
+  let units = pages.clusters().map(ch => advances.at(ch, default: 500)).sum(default: 0)
+  calc.max(toa-col / 1pt, calc.div-euclid(units * 14 + 999, 1000) + 7) * 1pt
+}
+
+// Table of contents: generated from the headings (to the third level), page numbers from the
+// layout. Rule 55.2(b) / 53.2(c): it shows the subject of each issue or point. Each row keeps
+// a page column of its own; the leader runs from the end of the entry to the number.
 #let contents() = {
   heading(level: 1, outlined: false, bookmarked: true)[TABLE OF CONTENTS]
-  set par(leading: single, first-line-indent: 0pt, justify: false)
-  show outline.entry: it => { block(above: 0.7em)[#it] }
-  outline(title: none, depth: 3, indent: 2em)
+  context {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    for hd in query(heading.where(outlined: true)).filter(x => x.level <= 3) {
+      let loc = hd.location()
+      let pg = numbering(loc.page-numbering(), counter(page).at(loc).first())
+      let ind = (hd.level - 1) * level-indent
+      listing-row(loc, [#h(ind)#hd.body], pg, toc-col, ind, gap)
+    }
+  }
 }
 
 // Index of authorities: entered in frontmatter (`authorities`), one entry per authority,
 // pages given by the author from the rendered PDF.
 #let authorities-page(groups) = {
   heading(level: 1)[INDEX OF AUTHORITIES]
-  set par(leading: single, first-line-indent: 0pt, justify: false)
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
   for g in groups {
-    block(above: double, below: single, sticky: true)[#strong(g.group)]
+    block(above: pitch-single, below: gap, sticky: true, par(strong(g.group)))
     for a in g.items {
-      let name = if a.at("italic", default: false) { emph(a.name) } else { [#a.name] }
-      block(above: 0.7em)[#name#a.rest #box(width: 1fr, repeat[.]) #a.pages]
+      let name = if a.at("italic", default: false) { emph(inl(a.name)) } else { inl(a.name) }
+      let pages = str(a.pages)
+      listing-row(none, [#name#inl(a.rest)], pages, page-col(pages), toa-hang, gap)
     }
   }
 }
@@ -188,29 +223,21 @@
 // Signature block (Rule 9.1: signed by counsel, with mailing address, telephone,
 // email and State Bar number). Set in the right half of the page, single-spaced, the
 // way all three filers set it. From frontmatter `signature`.
-#let signature-block(sig) = block(breakable: false, above: double, below: double, {
-  set par(leading: single, spacing: single, first-line-indent: 0pt, justify: false)
-  grid(columns: (1fr, 1fr), [], {
-    [Respectfully submitted,]
-    v(0.8em)
-    for l in sig.at("office", default: ()) { [#l]; linebreak() }
-    v(0.8em)
-    [By: /s/ #sig.name]
-    linebreak()
-    for l in sig.at("lines", default: ()) { [#l]; linebreak() }
-    v(0.8em)
-    emph(sig.at("for", default: ""))
-  })
+#let signature-block(sig) = block(breakable: false, above: pitch-single, below: 0pt, {
+  let l(above: 0pt, body) = line-block(above: above, left: sig-indent, body)
+  l[Respectfully submitted,]
+  for (i, x) in sig.at("office", default: ()).enumerate() { l(above: if i == 0 { pitch-single } else { 0pt }, inl(x)) }
+  l(above: pitch-single)[By: /s/ #sig.name]
+  for x in sig.at("lines", default: ()) { l(inl(x)) }
+  if sig.at("for", default: "") != "" { l(above: pitch-single, emph(inl(sig.at("for")))) }
 })
 
 // The short signature under each certificate (Rule 9.5(e): the certificate of
 // service must be signed by the person who made the service).
-#let certificate-signature(sig) = block(breakable: false, above: 1.2em, {
-  set par(leading: single, first-line-indent: 0pt, justify: false)
-  grid(columns: (1fr, 1fr), [], [/s/ #sig.name #linebreak() #sig.name])
+#let certificate-signature(sig) = block(breakable: false, above: pitch-single, below: 0pt, {
+  line-block(left: sig-indent)[/s/ #sig.name]
+  line-block(left: sig-indent, inl(sig.name))
 })
-
-#let render-md(md) = cmarker.render(md, smart-punctuation: true)
 
 #let render-doc(meta, body) = {
   let edition = str(meta.at("rules_edition", default: default-edition))
@@ -223,14 +250,14 @@
   assert(sig != none, message: "frontmatter `signature` is required (Rule 9.1)")
   let front = body.slice(0, start)
   let main = body.slice(start)
-  // The introduction is counted with the rest (Rule 53.2(a), 9.4(i)(2)(D)).
+  // Every counted section, wherever it sits, is counted (Rule 9.4(i)(1)).
   let words = word-count(front) + word-count(main)
   assert(
     words <= word-limit,
     message: "word count " + str(words) + " exceeds the " + str(word-limit) + "-word limit of Rule 9.4(i)(2)",
   )
   for s in sections(body) {
-    if lower(s.title).starts-with("introduction") and edition == "2026" {
+    if lower(s.title).starts-with("introduction") and edition == "2026" and intro-limit != none {
       let n = count-words(s.text)
       assert(n <= intro-limit, message: "introduction has " + str(n) + " words; Rule 53.2(a) allows " + str(intro-limit))
     }
@@ -238,32 +265,46 @@
   let main = main.replace("{{word-count}}", group-digits(words))
 
   set document(title: meta.title + ", No. " + meta.case_number, author: sig.name)
-  set page(paper: "us-letter", margin: 1in, numbering: none)
-  set text(font: font-family, size: text-size, lang: "en", hyphenate: false)
-  set par(leading: double, spacing: double, justify: true, first-line-indent: (amount: 0.5in, all: true))
-  // Footnote markers drawn as raised digits, not the font's superscript glyphs: Liberation
-  // Serif has those only for 1 to 3, so markers from 4 on would come out in another size.
-  set super(typographic: false)
-  set footnote.entry(separator: line(length: 1.5in, stroke: 0.5pt))
-  show footnote.entry: set text(size: note-size)
-  show footnote.entry: set par(leading: single, spacing: single, justify: false, first-line-indent: 0pt)
-  show heading.where(level: 1): it => block(width: 100%, above: double, below: double, sticky: true)[
-    #set par(leading: single, first-line-indent: 0pt, justify: false)
-    #align(center, strong(it.body))
-  ]
-  show heading.where(level: 2): it => block(width: 100%, above: double, below: double, sticky: true)[
-    #set par(leading: single, first-line-indent: 0pt, justify: false)
-    #strong(it.body)
-  ]
-  show heading.where(level: 3): it => block(width: 100%, above: double, below: double, sticky: true)[
-    #set par(leading: single, first-line-indent: 0pt, justify: false)
-    #pad(left: 0.5in, strong(emph(it.body)))
-  ]
-  show heading: set text(size: text-size)
-  show quote.where(block: true): it => pad(left: 1in, right: 1in)[
-    #set par(leading: single, spacing: double, first-line-indent: 0pt, justify: true)
-    #it.body
-  ]
+  // The page number: centered in a single-spaced line box (Word's footer), none on the cover.
+  set page(paper: "us-letter", margin: 1in, numbering: none, footer-descent: 30%,
+    footer: context if page.numbering != none {
+      align(center, text(..edges(pitch-single), counter(page).display(page.numbering)))
+    })
+  set text(font: font-family, size: text-size, lang: "en")
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // First fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the body pitch,
+  // footnote marks at 58 %, lists with the number in a half-inch box, a sign kept with its number.
+  show: xengine.with(pitch: pitch-double, list-indent: para-indent)
+  // A doubled sign stays with its number ("¶¶ I."), as a single one does in xengine.
+  show regex("[§¶]{2} \\S+"): it => box(it)
+
+  // Footnotes: 12 pt (Rule 9.4(e)) single-spaced; the mark, a space, the note; each kept whole
+  // on one page, as Word's Footnote Text keeps its lines together.
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 1.5in, stroke: 0.5pt))
+  show footnote.entry: it => {
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    set text(size: note-size, ..edges(pitch-note))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
+    block(breakable: false, [#super(num) #note.body])
+  }
+
+  // Headings at the text size, bold, single-spaced, on the double-spaced grid; kept with the
+  // text after them. Level 1 centered, level 2 flush left, level 3 italic too and indented.
+  let head(it, below) = block(width: 100%, above: heading-above, below: below, sticky: true, {
+    set text(size: text-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt)
+    if it.level == 1 { align(center, strong(it.body)) }
+    else if it.level == 2 { strong(it.body) }
+    else { pad(left: para-indent, strong(emph(it.body))) }
+  })
+  show heading: it => head(it, heading-below)
+  show quote.where(block: true): it => block(width: 100%, above: pitch-single, below: pitch-single,
+    pad(left: quote-indent, right: quote-indent, {
+      set text(..edges(pitch-single))
+      set par(first-line-indent: 0pt, spacing: pitch-single)
+      it.body
+    }))
 
   // Cover: page 1, no number.
   cover(meta)
@@ -274,10 +315,13 @@
   for s in sections(front) {
     if lower(s.title).starts-with("identit") {
       // Counsel lists are single-spaced, the way the filed exemplars set them.
-      set par(leading: single, spacing: 0.9em, first-line-indent: 0pt, justify: false)
+      // Half a single line between them, and after the heading.
+      show heading: it => head(it, gap)
+      set text(..edges(pitch-single))
+      set par(spacing: gap, first-line-indent: 0pt)
       render-md(s.text)
     } else {
-      // The introduction (Rule 53.2(a)) is argument text: double-spaced.
+      // Any other front section is argument text: double-spaced.
       render-md(s.text)
     }
     pagebreak()
@@ -287,15 +331,27 @@
   authorities-page(meta.authorities)
   pagebreak()
 
-  // Body: arabic numbers from 1. The signature block follows the prayer; each
-  // certificate carries its own short signature; the appendix starts a new page.
+  // Body: arabic numbers from 1. The signature block follows the prayer, kept on one page
+  // with its last paragraph; each certificate carries its own short signature; the appendix
+  // starts a new page.
   set page(numbering: "1")
   counter(page).update(1)
   for s in sections(main) {
     let t = lower(s.title)
     if t.starts-with("appendix") { pagebreak(weak: true) }
-    render-md(s.text)
-    if t.find("prayer") != none { signature-block(sig) }
+    if t.find("prayer") != none {
+      let chunks = s.text.trim(at: end).split(regex("\\n[ \\t]*\\n"))
+      let tail = chunks.last()
+      if chunks.len() > 1 and not tail.starts-with("#") and not tail.starts-with("[^") {
+        render-md(chunks.slice(0, -1).join("\n\n"))
+        block(breakable: false, above: 0pt, below: 0pt, { render-md(tail); signature-block(sig) })
+      } else {
+        render-md(s.text)
+        signature-block(sig)
+      }
+    } else {
+      render-md(s.text)
+    }
     if t.starts-with("certificat") { certificate-signature(sig) }
   }
 }
