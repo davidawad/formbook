@@ -1,0 +1,143 @@
+# New York Supreme Court, Appellate Division, any of the four departments (nyappdiv): amicus curiae brief
+# (22 NYCRR 1250.4(f), 1250.8). The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/
+# and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to 22 NYCRR Part 1250
+# (../../rules.md, NYAPPDIV-*) and the template this file replaces; lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # NYAPPDIV-FORM-002 (1250.8(f)(1)(i)): the body in 14-point type
+pitch:
+  body: 32.2              # NYAPPDIV-FORM-003 (1250.8(h)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # headings, quotations, footnotes, tables, cover, signature: single (1250.8(h))
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NYAPPDIV-FORM-003 (1250.8(h)): one inch on all sides
+indent: 36
+# NYAPPDIV-FORM-003: pages numbered consecutively; the tables in lower-case roman, the brief from 1, the cover unnumbered.
+page_number: {align: center, front: lower-roman}
+# NYAPPDIV-FORM-002: footnotes no smaller than 12 point; the body size, as the exemplar; single spaced.
+footnote: {size: 14, pitch: 16.1, gap: 7}
+quote: {left: 36, right: 36, above: 14, below: 14, gap: 12.6, pitch: single}   # NYAPPDIV-CONT-006: single, indented
+# NYAPPDIV-FORM-001 (1250.8(f)(1)): bold and capitals in headings only. The sections centred in bold capitals; the
+# argument's points numbered by the template I., A., 1., a., each level 0.5 in further in, the text hanging after
+# the number.
+heading:
+  - {align: center, bold: true, upper: true, above: 21, below: 15.4}
+  - {bold: true, upper: true, number: "I.", hang: 36, above: 15.4, below: 12.6}
+  - {bold: true, number: "A.", left: 36, hang: 36, above: 15.4, below: 12.6}
+  - {bold: true, italic: true, number: "1.", left: 72, hang: 36, above: 15.4, below: 12.6}
+  - {bold: true, italic: true, number: "a.", left: 108, hang: 36, above: 15.4, below: 12.6}
+# NYAPPDIV-LEN-002 (1250.8(f)(2)): an amicus brief at most 7,000 words, inclusive of point headings and footnotes;
+# more stops the render. The count is the printing statement's.
+words: {limit: 7000}
+# 1250.8(b): the docket number (and county clerk's index number) upper left and the counsel who will argue upper
+# right, the court and department, the title of the action between double rules, the title of the brief, and the
+# filing attorneys with address, telephone and e-mail at the lower right, whom they represent.
+cover:
+  - columns:
+      - blocks:
+          - {text: "Case No.: {docket}"}
+          - {text: "{county_clerk_index}", optional: true}
+      - width: 223.2
+        blocks:
+          - when: argument.presenter
+            blocks:
+              - {text: "To be Argued by:"}
+              - {text: "{argument.presenter}", bold: true, upper: true}
+              - {text: "(Time Requested: {argument.time_requested})"}
+          - unless: argument.presenter
+            blocks:
+              - {text: "Submitted without oral argument"}
+    gutter: 21.6
+  - {text: "New York Supreme Court", align: center, bold: true, above: 14}
+  - {text: "Appellate Division—{department}", align: center}
+  - {rule: 1.6, above: 14}
+  - {rule: 0.5, above: 2.5}
+  - each: caption
+    above: 14
+    between:
+      - {text: "– against –", align: center, above: 4.2, below: 4.2}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", left: 234}
+  - {text: "{caption_note}", align: center, optional: true, above: 4.2}
+  - {rule: 1.6, above: 14}
+  - {rule: 0.5, above: 2.5}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 14}
+  - {rule: 0.7, above: 14}
+  - each: counsel
+    above: 14
+    between:
+      - {text: "", pitch: 8.4}
+    blocks:
+      - {text: "{firm}", bold: true, upper: true, left: 223.2}
+      - {text: "{lines}", left: 223.2}
+  - {text: "{attorneys_for}", italic: true, left: 223.2, above: 8.4}
+  - {rule: 1.6, above: 14}
+  - {rule: 0.5, above: 2.5}
+# NYAPPDIV-CONT-001 (1250.8(b)(1)-(2)): the table of contents with the point headings, the table of authorities
+# with the pages where each is cited, from the body's `toa:` links; a case name in italics (the frontmatter's own
+# markup), a comma and the citation; seven pages or more "passim".
+contents: {title: "Table of Contents", depth: 4, col: 28, hang: 36, step: 36, above: 5}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 25.2
+  above: 9.8
+  passim: 7
+  page_heading: "Page(s)"
+  group: {bold: true, above: 16.8, below: 2.8}
+  kinds:
+    - {kind: case, title: "Cases:"}
+    - {kind: constitution, title: "Constitutional Provisions:"}
+    - {kind: statute, title: "Statutes:"}
+    - {kind: regulation, title: "Regulations:"}
+    - {kind: rule, title: "Rules:"}
+    - {kind: other, title: "Other Authorities:"}
+# The date and place, then each firm's signature (the one marked `by` with its "By:" blank), side by side and never
+# split, kept with the conclusion's last paragraph; then the printing specifications statement (NYAPPDIV-CONT-005,
+# 1250.8(j)) and a proof of service of blanks (NYAPPDIV-CONT-009), each on a page of its own.
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "{signature.date}"}
+      - {text: "{signature.place}", optional: true}
+      - columns:
+          each: signature.blocks
+          blocks:
+            - {text: "{firm}", bold: true, upper: true}
+            - when: by
+              blocks:
+                - {text: "By: \_\_\_\_\_\_\_\_\_\_\_\_\_\_"}
+            - {text: "{names}"}
+            - {text: "{lines}", italic: true}
+        gutter: 28.8
+        above: 16.1
+      - {text: "{signature.attorneys_for}", italic: true, optional: true, above: 8.4}
+    above: 19.6
+  - {break: true}
+  - {text: "Printing Specifications Statement", heading: 1}
+  - {text: "I hereby certify pursuant to 22 NYCRR 1250.8(j) that the foregoing brief was prepared on a computer.", pitch: body, indent: 36}
+  - {text: "A proportionally spaced typeface was used, as follows:", pitch: body, indent: 36}
+  - {text: "Name of typeface: Times New Roman", left: 36, above: 11.2}
+  - {text: "Point size: 14", left: 36}
+  - {text: "Line spacing: Double", left: 36, below: 11.2}
+  - {text: "**Word Count.** The total number of words in this brief, inclusive of point headings and footnotes and exclusive of pages containing the table of contents, table of citations, proof of service, and this statement, is {xd.words}.", pitch: body, indent: 36}
+  - {break: true}
+  - {text: "Affidavit of Service", align: center, bold: true, upper: true, below: 15.4}
+  - columns:
+      - width: 216
+        blocks:
+          - {text: "STATE OF NEW YORK"}
+          - {text: ""}
+          - {text: "COUNTY OF \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_"}
+      - blocks:
+          - {text: ")"}
+          - {text: ") ss.:"}
+          - {text: ")"}
+  - {text: "\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_, being duly sworn, deposes and says: deponent is not a party to this action, is over 18 years of age, and resides at \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_.", pitch: body, indent: 36, above: 16.8}
+  - {text: "On the \\_\\_\\_\\_\\_\\_ day of \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_, 20\\_\\_\\_\\_, deponent served the within brief upon each attorney for each party to this appeal, at the address designated by that attorney for that purpose, by \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_, and by \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_.", pitch: body, indent: 36}
+  - group:
+      - {text: "\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_"}
+      - {text: "Sworn to before me this", above: 16.1}
+      - {text: "\\_\\_\\_\\_\\_\\_ day of \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_, 20\\_\\_\\_\\_"}
+      - {text: "\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_", above: 16.1}
+      - {text: "Notary Public"}
+    left: 234
+    above: 25.2

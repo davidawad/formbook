@@ -62,29 +62,29 @@ signature:
         - "Tel: 202-466-3234"
         - "katskee@au.org"
 authorities:
-  belya: {kind: case, name: "Belya v Kapral", cite: "45 F4th 621 (2d Cir 2022)"}
-  bollard: {kind: case, name: "Bollard v California Province of the Socy. of Jesus", cite: "196 F3d 940 (9th Cir 1999)"}
-  catholiccharities: {kind: case, name: "Catholic Charities Diocese of Albany v Serio", cite: "7 NY3d 510 (2006)"}
-  abington: {kind: case, name: "Doe v Abington Friends Sch.", cite: "480 F3d 252 (3d Cir 2007)"}
-  smith: {kind: case, name: "Employment Div., Dept. of Human Resources of Oregon v Smith", cite: "494 US 872 (1990)"}
-  franciscan: {kind: case, name: "Franciscan Alliance, Inc. v Becerra", cite: "47 F4th 368 (5th Cir 2022)"}
-  fulton: {kind: case, name: "Fulton v City of Philadelphia, Pennsylvania", cite: "141 S Ct 1868 (2021)"}
-  methodist: {kind: case, name: "Gen. Council on Fin. & Admin. of the United Methodist Church v Superior Ct. of Cal., County of San Diego", cite: "439 US 1369 (1978)"}
-  hall: {kind: case, name: "Hall v Baptist Memorial Health Care Corp.", cite: "215 F3d 618 (6th Cir 2000)"}
-  jonesv: {kind: case, name: "Jones v Wolf", cite: "443 US 595 (1979)"}
-  kedroff: {kind: case, name: "Kedroff v St. Nicholas Cathedral of Russian Orthodox Church in North America", cite: "344 US 94 (1952)"}
-  martinelli: {kind: case, name: "Martinelli v Bridgeport R.C. Diocesan Corp.", cite: "196 F3d 409 (2d Cir 1999)"}
-  masterpiece: {kind: case, name: "Masterpiece Cakeshop, Ltd. v Colorado Civ. Rights Commn.", cite: "138 S Ct 1719 (2018)"}
-  yetev: {kind: case, name: "Matter of Congregation Yetev Lev D’Satmar, Inc. v Kahana", cite: "9 NY3d 282 (2007)"}
-  gifford: {kind: case, name: "Matter of Gifford v McCarthy", cite: "137 AD3d 30 (3d Dept 2016)"}
-  parkslope: {kind: case, name: "Park Slope Jewish Center v Congregation B’nai Jacob", cite: "90 NY2d 517 (1997)"}
-  guadalupe: {kind: case, name: "Our Lady of Guadalupe Sch. v Morrissey-Berru", cite: "140 S Ct 2049 (2020)"}
-  seattle: {kind: case, name: "Seattle’s Union Gospel Mission v Woods", cite: "142 S Ct 1094 (2022)"}
-  columbus: {kind: case, name: "United States v Columbus Country Club", cite: "915 F2d 877 (3d Cir 1990)"}
-  watson: {kind: case, name: "Watson v Jones", cite: "80 US 679 (1871)"}
-  weichman: {kind: case, name: "Weichman v Weichman", cite: "199 AD3d 865 (2d Dept 2021)"}
-  weisberger: {kind: case, name: "Weisberger v Weisberger", cite: "154 AD3d 41 (2d Dept 2017)"}
-  yupride: {kind: case, name: "YU Pride Alliance v Yeshiva Univ.", cite: "No. 154010/21, 2022 WL 2158381 (Sup Ct, NY County 2022)"}
+  belya: {kind: case, name: "*Belya v Kapral*", cite: "45 F4th 621 (2d Cir 2022)"}
+  bollard: {kind: case, name: "*Bollard v California Province of the Socy. of Jesus*", cite: "196 F3d 940 (9th Cir 1999)"}
+  catholiccharities: {kind: case, name: "*Catholic Charities Diocese of Albany v Serio*", cite: "7 NY3d 510 (2006)"}
+  abington: {kind: case, name: "*Doe v Abington Friends Sch.*", cite: "480 F3d 252 (3d Cir 2007)"}
+  smith: {kind: case, name: "*Employment Div., Dept. of Human Resources of Oregon v Smith*", cite: "494 US 872 (1990)"}
+  franciscan: {kind: case, name: "*Franciscan Alliance, Inc. v Becerra*", cite: "47 F4th 368 (5th Cir 2022)"}
+  fulton: {kind: case, name: "*Fulton v City of Philadelphia, Pennsylvania*", cite: "141 S Ct 1868 (2021)"}
+  methodist: {kind: case, name: "*Gen. Council on Fin. & Admin. of the United Methodist Church v Superior Ct. of Cal., County of San Diego*", cite: "439 US 1369 (1978)"}
+  hall: {kind: case, name: "*Hall v Baptist Memorial Health Care Corp.*", cite: "215 F3d 618 (6th Cir 2000)"}
+  jonesv: {kind: case, name: "*Jones v Wolf*", cite: "443 US 595 (1979)"}
+  kedroff: {kind: case, name: "*Kedroff v St. Nicholas Cathedral of Russian Orthodox Church in North America*", cite: "344 US 94 (1952)"}
+  martinelli: {kind: case, name: "*Martinelli v Bridgeport R.C. Diocesan Corp.*", cite: "196 F3d 409 (2d Cir 1999)"}
+  masterpiece: {kind: case, name: "*Masterpiece Cakeshop, Ltd. v Colorado Civ. Rights Commn.*", cite: "138 S Ct 1719 (2018)"}
+  yetev: {kind: case, name: "*Matter of Congregation Yetev Lev D’Satmar, Inc. v Kahana*", cite: "9 NY3d 282 (2007)"}
+  gifford: {kind: case, name: "*Matter of Gifford v McCarthy*", cite: "137 AD3d 30 (3d Dept 2016)"}
+  parkslope: {kind: case, name: "*Park Slope Jewish Center v Congregation B’nai Jacob*", cite: "90 NY2d 517 (1997)"}
+  guadalupe: {kind: case, name: "*Our Lady of Guadalupe Sch. v Morrissey-Berru*", cite: "140 S Ct 2049 (2020)"}
+  seattle: {kind: case, name: "*Seattle’s Union Gospel Mission v Woods*", cite: "142 S Ct 1094 (2022)"}
+  columbus: {kind: case, name: "*United States v Columbus Country Club*", cite: "915 F2d 877 (3d Cir 1990)"}
+  watson: {kind: case, name: "*Watson v Jones*", cite: "80 US 679 (1871)"}
+  weichman: {kind: case, name: "*Weichman v Weichman*", cite: "199 AD3d 865 (2d Dept 2021)"}
+  weisberger: {kind: case, name: "*Weisberger v Weisberger*", cite: "154 AD3d 41 (2d Dept 2017)"}
+  yupride: {kind: case, name: "*YU Pride Alliance v Yeshiva Univ.*", cite: "No. 154010/21, 2022 WL 2158381 (Sup Ct, NY County 2022)"}
   nycadmin: {kind: statute, cite: "Administrative Code of City of NY § 8-102"}
   ada: {kind: statute, cite: "Americans with Disabilities Act, 42 USC § 12187"}
   fha: {kind: statute, cite: "Fair Housing Act, 42 USC § 3607 (a)"}
