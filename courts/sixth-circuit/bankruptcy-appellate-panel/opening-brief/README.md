@@ -22,7 +22,7 @@ Doc type `opening-brief` of `courts/sixth-circuit/bankruptcy-appellate-panel`. S
 | `usage/OVERLAY-chieftain-steel-19-8005.pdf`, `.txt` | `tools/overlay.sh` output: red = ours, blue = filed, black = both. The `.txt` maps each of our pages to its best-matching filed page. |
 | `typst/main.typ`, `typst/bap6-opening-brief.typ` | Entry point and template. |
 
-Build (from the repo root, toolchain on PATH): `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-opening-brief.md`. The render uses only vendored fonts (Times New Roman) (`--ignore-system-fonts`); any typst warning fails it.
+Build (from the repo root, toolchain on PATH): `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-opening-brief.md`. The render uses only the vendored Times New Roman (`--ignore-system-fonts`); any typst warning fails it.
 
 ## Governing rules
 
@@ -36,14 +36,14 @@ Verified 2026-10-14. Sources: Fed. R. Bankr. P. 8014 and 8015 (amended eff. Dec.
 | Table of authorities (cases alphabetical, statutes, other) | FRBP 8014(a)(3), (c) | `toa-section` |
 | Statement regarding oral argument, one page at most, after the TOA | FRBP 8019(a); LBR 8014-1(b) | `oral_argument` page |
 | Typeface: proportionally spaced serif, 14-point or larger; plain roman, case names italic | FRBP 8015(a)(5)(A), (a)(6) | `font-family`, `type-size`, `brief-style` |
-| Double spacing; margins at least one inch | FRBP 8015(a)(4); LBR 8014-1(d) | `body-leading`, `page-margin` |
+| Double spacing; margins at least one inch | FRBP 8015(a)(4); LBR 8014-1(d) | `pitch-double`, `page-margin` |
 | Word limit: 13,000 words, or 6,500 for a reply | FRBP 8015(a)(7)(B) | `word-limit`, checked by `brief` |
 | Words excluded from the limit | FRBP 8015(g) | `count-words` runs over the body only |
 | Certificate of compliance (word count and typeface) | FRBP 8015(h) | "Certificate of Compliance" |
 
 **Conflict: type size.** LBR 8014-1(d) (2014) says "a font not less than 12 points". FRBP 8015(a)(5)(A) (restyled eff. Dec. 1, 2024) says a proportionally spaced face "must be 14-point or larger". The template uses 14 point. The federal rule is taken to govern the local one. That choice is ours, not a ruling; David should confirm it. The Practice Guidelines (§ VI(c)) repeat the 12-point figure and predate the 2024 rule.
 
-**Calibration: double spacing.** Measured on the render with `pdftotext -bbox`: a line in this font advances `0.65em` plus the paragraph `leading`. Single spacing is therefore `1.3em` (18.2 pt at 14 pt) and double is `2.6em` (36.4 pt). `body-leading` is `1.95em`, and paragraph `spacing` equals `body-leading`, so paragraph breaks keep the same 36.4 pt pitch. Consecutive body lines measure 36.4 pt apart.
+**Calibration: double spacing.** Measured on the render with `pdftotext -bbox`: a line in this font advances `0.65em` plus the paragraph `leading`. Single spacing is therefore `1.3em` (18.2 pt at 14 pt) and double is `2.6em` (36.4 pt). `body-leading` is `1.95em`, and paragraph `spacing` equals `body-leading`, so paragraph breaks keep the same 36.4 pt pitch. Consecutive body lines measure 36.4 pt apart. Since the cross-engine port (fb-595.54.3) these pitches are set directly as line boxes: `pitch-double` 36.4 pt, `pitch-single` 18.2 pt (`lib/typst/xengine.typ`).
 
 Required body sections (FRBP 8014(a)(4)-(9), checked by the build): Statement of Jurisdiction, Statement of the Issues, Statement of the Case, Summary of Argument, Argument, Conclusion. Required: a statement regarding oral argument.
 
@@ -96,6 +96,8 @@ The overlay and the page renders exposed these. All three templates changed the 
 
 Every page of `usage/OUTPUT-opening-brief.typst.pdf` (13 pages) was rasterised at 70 dpi and viewed, one page at a time, after the last template change. The overlay pages were viewed as pairs. Findings:
 
+2026-10-22 (fb-595.54.3, cross-engine port): every page of the new typst render and of the docx render (13 each) rasterised at 50 dpi and viewed side by side; same lines, same page breaks; the cover now fits its page with the counsel block after a fixed 36.4 pt gap (it was pinned to the foot of the page with `v(1fr)`, which Word cannot set), and the TOC rows carry dot leaders (`listing-row`).
+
 - **Overlay: cover overflow.** The date line ran onto page 2. Fixed in the template (see Template changes).
 - **Case names not italic.** The certificate of compliance says case names are in italics; the body was not. Fixed in the transcription.
 - **Heading names.** The filing says "JURISDICTIONAL STATEMENT" and "STATEMENT OF ISSUES". The build checks for the names in the template ("Statement of Jurisdiction", "Statement of the Issues"), so the sample uses those.
@@ -117,27 +119,16 @@ Every page of `usage/OUTPUT-opening-brief.typst.pdf` (13 pages) was rasterised a
 
 ## Engines
 
-Docx engine (`docx/`, built per `docs/EVAL-LOOP.md` "Engines"). `docx/reference.xml` holds the Word styles, from which fb render builds `reference.docx` on pandoc's default reference (`tools/fb/src/docxref.rs`); `docx/bap6-brief.lua` builds the cover, the front matter, the signature block and the certificates from the frontmatter and applies the rules checks (required sections, oral-argument statement, word limit, every registered authority cited). There is no `docx/render.sh`: fb render's multi-pass docx engine (`tools/fb/src/docxpass.rs`, `docxpages.rs`) adds the footers and the last section. Build: `sh tools/render.sh --engine docx courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-opening-brief.md`; output `usage/OUTPUT-opening-brief.docx` and `.docx.pdf`. Needs pandoc and LibreOffice (`soffice`).
+Two engines: typst (the reference) and docx. There is no latex engine for this court.
 
-**Matches the typst form** (typst values measured on `usage/OUTPUT-opening-brief.typst.pdf` with `pdftohtml -xml` and `pdftotext -bbox-layout`):
+**Cross-engine layout model** (fb-595.54.3; `docs/EVAL-LOOP.md`, "Cross-engine gate" and its adoption checklist). The typst template applies `lib/typst/xengine.typ` (first-fit breaking, no kerning, ligatures or hyphenation, every line a box of its pitch with the baseline at 0.8 of it, block spaces in pt that collapse to the larger); the docx engine sets the same boxes with Word's exact line spacing. The pitches are this folder's calibration (see "Calibration"): body 36.4 pt (`pitch-double`), single 18.2 pt (`pitch-single`), level-1 headings 19.5 pt type in 24 pt boxes, level-2 headings 17 pt type in 20 pt boxes, the cover title 16 pt. The table of contents and of authorities set each entry with `listing-row`: the text wraps before a page column (36 pt contents, 56 pt authorities) and a dot leader runs from three spaces after the text to the page. `eval.yaml` sets `params.cross_engine: gate`: `tools/check.sh --engine docx` fails unless the docx PDF has typst's page count, starts and ends every page on typst's words and breaks every line after typst's word (XENG-001..003).
 
-- Font: Times New Roman 14 pt, the typst face; the PDF embeds TimesNewRomanPSMT, -BoldMT and -ItalicMT only. The font name is declared in the styles; it must be installed where the file is opened.
-- Spacing: double spacing as the typst body pitch, exact 37.1 pt (typst 37.08 pt); single spacing (cover, contents, authorities, signature) exact 18.8 pt (typst 18.81 pt); first-line indent 0.5 in, none on the first paragraph after a heading.
-- Page: US Letter, 1 in margins on all four sides.
-- Headings: level 1 and the front-matter titles bold 19.5 pt centered (typst 19.6 pt), level 2 bold 17 pt (typst 16.8 pt), level 3 bold indented 0.5 in, level 4 italic indented 1 in; the space above a heading is the typst gap, none at the top of a page.
-- Sections: cover without a number; front matter lower roman from i; the brief arabic from 1, as typst.
-- Table of contents (every heading, as typst) and table of authorities (dot leaders, pages in page order, `passim` from 7 pages) with page numbers, FRBP 8014(a)(2)-(3): the filter writes a needle for every heading and citation, fb render finds them in the LibreOffice PDF and renders again with those pages until they settle (fb-595.63). Every entry was checked against the body pages.
-- Certificate of compliance: the word count equals typst's (1,093 words) and it names the typeface used, Times New Roman at 14-point, as typst; certificate of service with the same wording.
+Docx engine (`docx/`, built per `docs/EVAL-LOOP.md` "Engines"). `docx/reference.xml` holds the Word styles, from which fb render builds `reference.docx` on pandoc's default reference (`tools/fb/src/docxref.rs`): the recipe of `lib/docx/xengine-reference.sh` (Times New Roman 14 pt, Body Text 36.4 pt exact with a half-inch first-line indent, First Paragraph without it, single 18.2 pt, theme fonts stripped so Times New Roman is the only face embedded, fb-595.63), plus the "Bap Line" and block-quotation styles. Body paragraphs end 2 twips (0.1 pt) short of the margin: LibreOffice sets a body line up to about 0.1 pt narrower than typst (its glyph positions are rounded), and without this a line typst fills to within that much of the margin took one more word (reply brief p. 8). `docx/bap6-brief.lua` writes the cover, the front matter, the headings, the signature block and the certificates as paragraphs with typst's spaces in twips, the body through pandoc with `lib/docx/xengine.lua`'s break rules (a paragraph that follows another is indented, as in typst). The filter also writes the sections (cover: no footer; front matter: lower roman from i; brief: arabic from 1, `FORMBOOK_FINAL`) and the page-number footer (`FORMBOOK_FOOTERS`, the number in a line box of the single pitch). There is no `docx/render.sh`: the TOC and TOA page numbers (FRBP 8014(a)(2)-(3)) come from fb render's multi-pass docx engine (`tools/fb/src/docxpass.rs`, `docxpages.rs`; fb-595.63): the filter writes a needle for every heading (its text and what follows it) and every citation (from the last word of its link text, so a citation that runs over a page end counts on the page where the link text ends, as typst records it), fb render finds them in the LibreOffice PDF and renders again with those pages until they settle; `passim` from 7 pages. Build: `sh tools/render.sh --engine docx courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-opening-brief.md`. Needs pandoc, LibreOffice (`soffice`) and poppler.
 
-**Differs from typst (tier 2, not chased):**
+**Result** (2026-10-22): `tools/check.sh --engine typst` 8 passed, 0 failed; `--engine docx` 12 passed, 0 failed, XENG-001..003 PASS (13 pages, every line of the typst render broken alike). Every page of both PDFs was rendered at 50 dpi and viewed side by side after the last change. Word count in the certificate of compliance: 1,093 on both engines.
 
-- 14 pages (typst 14). The typst cover runs over: its date falls on an unnumbered second page, so the docx carries one more body page in the same count. Line and page breaks follow LibreOffice; Word may paginate slightly differently from the LibreOffice PDF the contents and authorities pages come from (`docs/DOCX.md`).
-- Cover: the counsel block follows a fixed gap, not pinned to the foot of the page (`v(1fr)` in typst); the whole cover, date included, stays on page 1.
-- Below a heading the first body line sits about 3 pt (level 1) to 14 pt (level 3) lower than in typst: an exact Word line puts its extra height above the text.
-- Contents: a wrapped entry is indented under its title and its page number is set on the last line (typst sets it on the first line and starts the wrapped line at the margin).
+**Differs from typst (not gated):** the dot leader of a TOC or TOA row runs to the page number in Word (a right tab beyond the right indent) and stops at the page column in typst; the footer's page number sits a few points apart. Line breaks, page breaks and the text are the same.
 
-docx check (fb-595.63, 2026-10-21): `sh tools/check.sh courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief --engine docx`: RESULT: 10 checks passed, 0 failed (TNR-EMBEDDED and DEF-FONT-002 failed before, when the reference named EB Garamond). Every page of `usage/OUTPUT-opening-brief.docx.pdf` was viewed. The .docx passes DEF-DOCX-OPEN (valid zip, well-formed XML, every relationship resolves, LibreOffice converts it headless); it has not been opened in Word.
-
-**BLOCKED (docx):** none.
+**Not verified:** opening the .docx in Microsoft Word itself (only LibreOffice converts it here); Word computes no fields in this document, so its page numbers are the ones fb render wrote from the LibreOffice PDF.
 
 [Formbook index](../../../../README.md) | [Court README](../README.md)
