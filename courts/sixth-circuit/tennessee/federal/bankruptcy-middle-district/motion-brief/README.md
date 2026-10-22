@@ -7,10 +7,10 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district/motio
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, the defendant; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: the full 8-page memorandum with its three footnotes, transcribed from the text layer |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| typeface | Rules name no face (LBR 5005-3(a): "All filings shall be clearly legible in 12-point font"). Vendored family: `EB Garamond` (`docs/FONTS.md`, "No face named"). Exemplar is Times New Roman: EB Garamond is visual only against it, not metric-compatible. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored Times New Roman only, no warnings (`tools/render.sh`) |
+| typeface | Rules name no face (LBR 5005-3(a): "All filings shall be clearly legible in 12-point font"). Times New Roman (vendored), the face of the exemplar and the default of docs/FONTS.md; the docx names the same face. |
 | overlay | ok: `usage/OVERLAY-nng-mtd-memo.pdf` and `usage/OVERLAY-nng-mtd-memo.txt` (`tools/overlay.sh`) |
-| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names follow the tools, not the brief's `<id>.pdf` / `<id>-overlay.pdf`: `tools/render.sh` writes `OUTPUT-<id>.pdf`, `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt`, and the markdown is `INPUT-<id>.md`.
 
@@ -21,7 +21,7 @@ Primary source: Local Bankruptcy Rules of the United States Bankruptcy Court for
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LBR 5005-3(a) | 8 1/2 x 11 inch; "All filings shall be clearly legible in 12-point font"; one-inch margins throughout. | `page-w`, `page-h`, `margin = 1in`, `type-size = 12pt`; the footnote text is also 12 pt (`show footnote.entry`). |
-| LBR 5005-3(b) | All pages sequentially numbered at the bottom, with room for the CM/ECF docket footer. | `numbering: "1"`, centered, `footer-descent: 0.6in`. |
+| LBR 5005-3(b) | All pages sequentially numbered at the bottom, with room for the CM/ECF docket footer. | the page number centered in a 13.8 pt line, `footer-descent: 0.6in` (docx: footer 300 twips). |
 | LBR 9004-2(a)(1), (b) | Caption: case number, chapter, judge; adversary number for adversary filings; a title that describes the document. | `caption()`; `title` in the frontmatter. |
 | LBR 9013-1 | A request for relief (other than one that requires an adversary proceeding) must be made by written motion, complying with the LBR 9013-1 Motion Practice Procedures. | Not a template element: the motion, the LBR 9013-1 Notice and the proposed order are separate filings (Known gaps 3). |
 | LBR 9013-1 Procedures (7.28.25) | The motion, the LBR 9013-1 Notice and the proposed order are filed as one PDF, with the notice first. | Not produced (Known gaps 3). |
@@ -33,12 +33,12 @@ Primary source: Local Bankruptcy Rules of the United States Bankruptcy Court for
 ## Layout
 
 - Court title (three centered bold lines), the caption (debtor and parties on the left, a ")" column, case number, chapter, judge and adversary number on the right), then the two-line title of the paper, centered and bold.
-- Body double-spaced (24 pt baseline pitch at 12 pt); paragraphs are not numbered (a memorandum, not a pleading); first-line indent 0.5 inch.
-- Level 1 headings (INTRODUCTION AND FACTUAL SUMMARY, ARGUMENT, CONCLUSION) are centered bold caps. Level 2 headings (the A. and B. argument points) are bold, left-aligned, with a 0.5 inch hanging indent, and single-spaced.
-- Block quotations are single-spaced and indented 0.5 inch from both margins; multi-paragraph quotations keep their paragraph gaps.
-- Footnotes at 12 pt. A footnote reference may sit in body text, in a heading, or inside a quotation.
+- Body double-spaced (24 pt line boxes at 12 pt); paragraphs are not numbered (a memorandum, not a pleading); first-line indent 0.5 inch.
+- Level 1 headings (INTRODUCTION AND FACTUAL SUMMARY, ARGUMENT, CONCLUSION) are centered bold caps. Level 2 headings (the A. and B. argument points) are bold and single-spaced, the typed label at the 0.5 inch indent in a half-inch box, the text hanging at 1 inch and stopping 0.5 inch short of the right margin (as filed). Headings stand half a body line from the text on either side.
+- Block quotations are single-spaced and indented 0.5 inch from both margins; half a body line around a quotation and between its paragraphs; the paragraph right after a quotation (its citation) starts at the margin, as filed.
+- Footnotes at 12 pt, single-spaced, each kept whole on one page. A footnote reference may sit in body text, in a heading, or inside a quotation.
 - The last paragraph is kept with the signature block, so a signature never starts a page alone.
-- Signature block at the right half; then the certificate of service (heading, statement of service, each addressee single-spaced).
+- Signature block at 2.5 in, a blank single line below "Respectfully submitted,"; then the certificate of service (its title bold and underlined as filed, the statement single-spaced, each addressee single-spaced at 0.5 in), kept together.
 
 ## Markdown contract (for samples)
 
@@ -48,11 +48,11 @@ Primary source: Local Bankruptcy Rules of the United States Bankruptcy Court for
 
 ## Overlay
 
-`usage/OVERLAY-nng-mtd-memo.pdf`: red is our render, blue is the filed exemplar, black is where they agree. `OVERLAY-nng-mtd-memo.txt` maps each of our pages to the best-matching filed page by shared words: ours 1 to filed 1 (65.4%), 2 to 2 (62.5%), 3 to 3 (74.4%), 4 to 5 (52.6%), 5 to 6 (60.5%), 6 to 7 (71.1%), 7 to 8 (73.9%). The exemplar is 8 pages and the render is 7. The map is off by one from page 4 on because the page breaks differ; the cause was not isolated (the font difference, Known gap 1, is the likely driver). The overlay is a diagnostic, not a score.
+`usage/OVERLAY-nng-mtd-memo.pdf`: red is our render, blue is the filed exemplar, black is where they agree. `OVERLAY-nng-mtd-memo.txt` maps each of our pages to the best-matching filed page by shared words: ours 1 to filed 1 (65.4%), 2 to 2 (62.5%), 3 to 3 (74.4%), 4 to 5 (52.6%), 5 to 6 (60.5%), 6 to 7 (71.1%), 7 to 8 (73.9%). (Measured on an earlier 7-page EB Garamond render; the render is now 8 pages in Times New Roman, as the exemplar.) The overlay is a diagnostic, not a score.
 
 ## Known gaps and open choices
 
-1. **Font.** The rules name no font family. The exemplar is Times New Roman. The only serif font vendored in `fonts/` is EB Garamond, the same choice as the other doc types here. EB Garamond at 12 pt has a smaller x-height than Times at 12 pt. The 12-point minimum is met. Liberation Serif (the Times New Roman substitute, metric-compatible, `docs/FONTS.md`) is vendored, but the rules name no face, so the template keeps EB Garamond. Switching to Liberation Serif would be a tier-2 choice to match the exemplar, and is left open.
+1. **Font.** The rules name no font family. The exemplar is Times New Roman; the template sets the vendored Times New Roman (docs/FONTS.md), in both engines. The 12-point minimum is met.
 2. **One exemplar, one filer.** The brief asks for one exemplar per doc type, so tier 2 (2 or 3 filers) is not met. The companion motion (Doc. 8, 2 pages, same filer) was downloaded and has a text layer but is not saved: the exemplar here is the memorandum, which is the "brief" part of a motion-brief. A second filer for this doc type has not been collected.
 3. **Separate filings not produced.** The motion itself, the LBR 9013-1 Notice (the court's form, with the hearing date, the response deadline and the courtroom), and the proposed order are separate filings under LBR 9013-1 and its Procedures. They are not in this template. The Procedures say the three should be filed as one PDF, with the notice first (unless the size dictates otherwise); a filer must assemble that.
 4. **Certificate attachment.** LBR 9013-3(b) requires a copy of the papers served to be attached to the certificate. The template produces the certificate text and addressees, not the attachment; the attachment is a filing-level step.
@@ -62,7 +62,7 @@ Primary source: Local Bankruptcy Rules of the United States Bankruptcy Court for
 8. **Caption rows.** As in the complaint, each party name must fit one line in the 3.7 inch party column.
 9. **Heading style.** The exemplar's sub-headings are bold, with the argument letter at the start; the template matches that. Tier-2 choice; not asserted.
 10. **Alignment.** Body text is left-aligned (ragged right). Not asserted.
-11. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and `tools/` is out of scope for this box. The renders and the overlay were run; the review below is the Gate 2 equivalent.
+11. **Gates.** `sh tools/check.sh <this folder>` (typst 9 passed, 0 failed) and `--engine docx` (13 passed, 0 failed, XENG-001..003 gated). `tools/check-selftest.sh` needs a court folder with `court.json`; this doc-type folder has no selftest.
 
 ## Searches for the exemplar
 
@@ -72,19 +72,23 @@ Primary source: Local Bankruptcy Rules of the United States Bankruptcy Court for
 
 ## Review of the rendered pages (current PDF)
 
-- Page 1: court title, caption, the memorandum title on two lines, the opening paragraph, "In support, NNG states as follows:"; the INTRODUCTION heading (its footnote 1 reference) moves to page 2 with its paragraph, leaving white space at the foot of page 1. Footnote 1 at 12 pt at the foot. Pass.
-- Page 2: INTRODUCTION AND FACTUAL SUMMARY; paragraphs; footnote 2 at the foot. Pass.
-- Page 3: the remainder of the introduction, ARGUMENT, the A. sub-heading (bold, hanging indent), the first paragraphs of argument A. Pass.
-- Page 4: the RCS quotation (single-spaced, indented); the paragraphs after it; *Del-Met* paragraph. Pass.
-- Page 5: the remainder of argument A, the *Regions Bank* quotation with footnote 3 inside it (three quotation paragraphs, each its own block, with paragraph gaps), *Id.* citation; the B. sub-heading and the start of argument B; footnote 3 at 12 pt at the foot. Pass.
-- Page 6: argument B, the Koch Refining quotation, the closing paragraph of the argument. White space at the foot, because CONCLUSION and its paragraph are kept together and move to page 7. Pass.
-- Page 7: CONCLUSION, its paragraph, signature block, CERTIFICATE OF SERVICE with the statement and the addressee. Pass.
+Typst and docx renders viewed page by page at 60 dpi (8 of 8 each, side by side); they are line for line the same.
+
+- Page 1: court title, caption, the two-line title, the opening paragraph, "In support, NNG states as follows:". The INTRODUCTION heading carries footnote 1, which does not fit with it and two lines of text: heading and note move to page 2, leaving white space at the foot of page 1 (ACCEPTED: the keep rule, in both engines).
+- Page 2: INTRODUCTION AND FACTUAL SUMMARY with its footnote mark; paragraphs; footnote 1 whole at the foot. Pass.
+- Page 3: the rest of the introduction; footnote 2 at the foot. ARGUMENT moves to page 4 with its sub-heading and two lines. Pass.
+- Page 4: ARGUMENT; the A. sub-heading (bold, label in a box, text hanging, as filed); the RCS quotation single-spaced and indented; "*Id.* at 225." at the margin. Pass.
+- Page 5: argument A; the *Regions Bank* quotation with footnote 3 inside it; footnote 3 at the foot. Pass.
+- Page 6: the rest of the quotation (three paragraphs, half a body line apart, the ellipsis paragraph), "*Id.* at 616-17.", the B. sub-heading and argument B. Pass.
+- Page 7: the end of argument B with the *Koch Refining* quotation; white space at the foot because CONCLUSION, its paragraph and the signature block are kept together (ACCEPTED: the signature never starts a page alone).
+- Page 8: CONCLUSION, its paragraph, the signature block, CERTIFICATE OF SERVICE with the statement and the addressee. Pass.
 
 ## Engines
 
-**docx** (`docx/build-reference.sh` makes `docx/reference.docx`; `docx/tnmb.lua` builds the cover, caption table, signature, certificate of service and footnote handling; `tools/render.sh --engine docx`, the PDF is the LibreOffice conversion).
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"), Times New Roman 12 pt on both: 24 pt double body pitch, 13.8 pt single lines (court title, caption, title, headings, quotations, signature, certificate, footnotes, page number), half a body line around headings and quotations and between a quotation's paragraphs, 12 pt footnotes 7 pt apart, each kept whole on one page. `eval.yaml` sets `params.cross_engine: gate`.
 
-- Matches the typst output: 7 pages in both; EB Garamond 12 pt throughout, footnotes 12 pt; 8 1/2 x 11 with one-inch margins; double spacing as an exact 24 pt pitch; unnumbered body paragraphs with a 0.5 in first-line indent; the caption as a borderless table with the ")" column; the title lines bold and centered; section headings 12 pt bold, centered (level 1) or hanging-indented (level 2); block quotations single spaced and indented 0.5 in from both margins; the signature block at 2.5 in; the certificate of service with the addressee block indented 0.5 in; the page number centered at the foot. Reviewed page by page at 60 dpi (7 of 7 pages, docx and typst): page 1, the signature block and the certificate of service agree with typst to about 1 pt or 3 pt; pages 2 to 6 drift by a few lines after the footnote shift described below.
-- Differs: the footnote on the INTRODUCTION heading is on page 2 in the docx, next to its reference; the typst render sets it at the foot of page 1. Page 1 of the docx therefore has no footnote, and the lines after it shift by a few lines, so some paragraphs break one word differently. Footnote text is single spaced in the docx.
+**docx** (`docx/reference.xml`, `base="xengine"` with the face as `{font}`, "Head 1"/"Head 2", "Body Text Note", "Body Flush", "Body Keep"; `docx/tnmb-motion-brief.lua` writes the court title, caption table (one single line per row, the ")" column), title, signature and certificate of service with the typst spacing in twips, and leaves headings (a footnote in a heading stays a Word footnote), paragraphs, quotations and footnotes to pandoc in those styles).
+
+- XENG-001..003 pass: 8 pages, every page end and 219/219 lines as typst.
 - Not produced (as in typst): the motion's LBR 9013-1 notice, the proposed order, exhibits.
-- BLOCKED: none for the render. `sh tools/check.sh <court-dir> --engine docx` cannot run in this folder: the court folder has no `checks.yaml` and no `rules.md`, so the gates have nothing to read (not changed here). The docx gates are therefore not run.
+- BLOCKED: none.
