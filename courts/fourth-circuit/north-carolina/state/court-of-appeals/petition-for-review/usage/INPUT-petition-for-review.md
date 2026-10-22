@@ -117,12 +117,17 @@ Immediately after the Dismissal Order, there was a dismissed Notice of Appeal (a
 
 Appellate review of Commission decisions is governed by N.C. Gen. Stat. § 62-94, which provides that this Court may affirm or reverse the decision of the Commission, declare the same null and void, or remand the case for further proceedings; or it may reverse or modify the decision if the substantial rights of the appellants have been prejudiced because the Commission’s findings, inferences, conclusions or decisions are:
 
-> (1) In violation of constitutional provisions, or
-> (2) In excess of statutory authority or jurisdiction of the Commission, or
-> (3) Made upon unlawful proceedings, or
-> (4) Affected by other errors of law, or
-> (5) Unsupported by competent, material and substantial evidence in view of the entire record as submitted, or
-> (6) Arbitrary or capricious.
+> \(1) In violation of constitutional provisions, or
+>
+> \(2) In excess of statutory authority or jurisdiction of the Commission, or
+>
+> \(3) Made upon unlawful proceedings, or
+>
+> \(4) Affected by other errors of law, or
+>
+> \(5) Unsupported by competent, material and substantial evidence in view of the entire record as submitted, or
+>
+> \(6) Arbitrary or capricious.
 
 Id. § 62-94(b).
 

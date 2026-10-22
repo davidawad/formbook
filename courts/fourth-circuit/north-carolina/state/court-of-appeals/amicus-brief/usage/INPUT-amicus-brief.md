@@ -61,7 +61,7 @@ authorities:
       - cite: "John V. Orth & Paul Martin Newby, *The North Carolina State Constitution* (2d ed. 2013)"
         find: "Orth & Newby"
       - cite: "Judge Robert N. Hunter, Jr., *The Past as Prologue: Albion Tourgée and the North Carolina Constitution*, 5 Elon L. Rev. 89 (2013)"
-        find: "Past as Prologue"
+        find: "Prologue"
 signature:
   preamble: "Respectfully submitted this 3rd day of March, 2025."
   signers:

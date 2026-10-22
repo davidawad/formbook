@@ -1,0 +1,107 @@
+# Court of Appeals of North Carolina (ncctapp): briefs, motions and petitions (N.C. R. App. P. 26, 28). The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to ../../rules.md (NCCTAPP-*); lengths in points. No case text here:
+# every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # NCCTAPP-FORM-001: no smaller than 12-point, no larger than 14-point (Rule 26(g)(1))
+pitch:
+  body: 27.6              # NCCTAPP-FORM-003: body double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, footnotes, signature blocks: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NCCTAPP-FORM-002: one inch on all sides
+indent: 36                # paragraphs indented half an inch
+page_number: {align: center, front: lower-roman}   # NCCTAPP-CONV-003: cover unnumbered, index and tables i, ii .., body 1, 2 ..
+footnote: {size: 12, gap: 7}   # NCCTAPP-FORM-001, -003: footnotes at the text size, single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # NCCTAPP-FORM-003: block quotations indented, single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 12}
+  - {bold: true, hang: 36, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# NCCTAPP-CONT-001: the docket number and the trial court's district, the court, the county and file numbers of the
+# trial court, the caption (each party's name with its designation at the right), the title between rows of
+# asterisks, counsel.
+cover:
+  - {text: "NO. {appellate_case_no}"}
+  - {text: "{district}", align: right}
+  - {text: "{court}", align: center, bold: true, above: 28.8}
+  - {text: "{appeal_from}", align: center, above: 21.6}
+  - each: caption
+    blocks:
+      - columns:
+          - blocks:
+              - {text: "{names}"}
+          - width: 180
+            valign: center
+            blocks:
+              - {text: "{designation}", align: right}
+        above: 21.6
+  - {text: '\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*', align: center, above: 86.4}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 7.2}
+  - {text: '\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*', align: center, above: 7.2}
+  - when: counsel
+    blocks:
+      - each: counsel
+        above: 57.6
+        blocks:
+          - {text: "{names}", bold: true, left: 230.4, above: 8.4}
+          - {text: "{lines}", optional: true, left: 230.4}
+# NCCTAPP-CONT-003: the index (table of contents) and the table of authorities, each on its own page.
+contents: {title: "Index", depth: 3, col: 36, hang: 18, step: 18, above: 7.2}
+authorities:
+  title: "Table of Authorities"
+  col: 120
+  hang: 36
+  above: 7.2
+  group: {bold: true, above: 14.4, below: 4.8}
+# The date line and the signature block (the firm, "/s/" and the typed name of each signer, the Rule 33(b)
+# certification, the other counsel, the address), never split; then the certificate of compliance (NCCTAPP-CERT-001)
+# and the certificate of service (NCCTAPP-CERT-002), each on a page of its own, signed by the first signer.
+closing:
+  - group:
+      - {text: "{signature.preamble}", optional: true, pitch: body, indent: 36}
+      - {text: "{signature.firm}", optional: true, bold: true, left: 230.4, above: 9.6}
+      - each: signature.signers
+        blocks:
+          - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 9.6}
+          - {text: "{name}", left: 230.4}
+          - {text: "{lines}", optional: true, left: 230.4}
+      - {text: "{signature.lines}", optional: true, left: 230.4, above: 7.2}
+      - {text: "{signature.certification}", optional: true, left: 230.4, above: 9.6}
+      - when: signature.cosigners
+        blocks:
+          - each: signature.cosigners
+            blocks:
+              - {text: "{name}", left: 230.4, above: 7.2}
+              - {text: "{lines}", optional: true, left: 230.4}
+      - {text: "{signature.address}", optional: true, left: 230.4, above: 7.2}
+    above: 28.8
+  - when: compliance
+    blocks:
+      - {break: true}
+      - {text: "{compliance.heading}", align: center, bold: true, upper: true}
+      - {text: "{compliance.text}", pitch: body, indent: 36, above: 7.2}
+      - group:
+          - {text: "{signature.firm}", optional: true, bold: true, left: 230.4}
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 9.6}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", optional: true, left: 230.4}
+        above: 9.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.heading}", align: center, bold: true, upper: true}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36, above: 7.2}
+      - each: service.recipients
+        blocks:
+          - group:
+              - {text: "{.}", left: 72}
+            above: 12
+      - {text: "{service.closing}", optional: true, pitch: body, indent: 36, above: 12}
+      - group:
+          - {text: "{signature.firm}", optional: true, bold: true, left: 230.4}
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 9.6}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", optional: true, left: 230.4}
+        above: 9.6
