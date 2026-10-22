@@ -5,21 +5,37 @@
 // disclosure) are separate filings and are not produced here. See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")   // no local rule sets a complaint typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // no local rule sets a complaint typeface: the house standard, as the exemplar is set
 #let type-size = 12pt                   // the memorandum rule (L.U.Civ.R. 7(b)(5)(B)) is the court's only typeface rule; used here too
+#let footnote-size = 11pt               // L.U.Civ.R. 7(b)(5)(B) (footnotes 11-point or larger), applied for consistency
 #let page-w = 8.5in                     // 8 1/2 by 11 inch paper (L.U.Civ.R. 7(b)(5)(A), applied for consistency)
 #let page-h = 11in
 #let margin = 1in                       // at least 1 inch on all four sides (L.U.Civ.R. 7(b)(5)(A))
-#let text-width = page-w - 2 * margin
-#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 1.345em gives 24 pt at 12 pt
-#let pitch = 24pt                       // one double-spaced line (the baseline pitch of body text)
-#let single-leading = 0.495em            // single spacing for the caption, the title, and the signature block
-#let para-indent = 0.5in                // first-line indent of numbered paragraphs
+#let para-indent = 0.5in                // first-line indent of every body paragraph
+#let number-box = 0.4in                 // a paragraph number's box after the indent; the text follows it
+#let item-indent = 0.5in                // prayer items: the number half an inch in ...
+#let item-box = 0.4in                   // ... in a box of 0.4 in, the text hanging after it
 #let caption-left = 3.25in              // width of the party column of the caption
+#let caption-gutter = 0.25in            // between the party column and the case-number column
+#let caption-inset = 12pt               // the party text stands off the caption's right rule
+#let right-inset = 0.2in                // the case-number column stands off the gutter
+#let sig-left = 2.6in                   // signature grid: the "Dated" column, a gutter, the signature column
+#let sig-gutter = 0.2in
+#let note-gap = 7pt                     // between footnotes
+#let note-clearance = 10pt             // between the body and the footnote rule: where LibreOffice's separator leaves the body
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-single = 13.8pt              // a single line: 1.15 x the type size (Word's single line in this face)
+#let pitch-double = 2 * pitch-single    // double-spaced body (L.U.Civ.R. 7(b)(5)(A); the exemplar is Word's double, 27.6 pt)
+#let pitch-note = 12.65pt               // a footnote line: 1.15 x the footnote size
+#let caption-pad = pitch-single / 2     // caption: the bottom rule stands half a line below the last party line
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -34,12 +50,15 @@
 
 /// Inline markdown (names, designations, signature lines).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// One single-spaced line per item.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => inl(i)))
-}
+/// One single-spaced line block (a paragraph of its own), with explicit space above and below it.
+#let line-block(above: 0pt, below: 0pt, sticky: false, body) = block(width: 100%, above: above, below: below,
+  sticky: sticky, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    body
+  })
 
 /// Footnote definitions in the body ("[^key]: text" in its own chunk), keyed by the key.
 #let footnote-defs(body) = {
@@ -70,165 +89,144 @@
   out + text-piece(t.slice(pos))
 }
 
-/// Content set on whole numbered lines: the block is measured, then rounded up to a multiple of `pitch`, so
-/// whatever follows it stays on the grid of double-spaced lines. (Measuring is what keeps every line in place.)
-#let on-grid(c) = context {
-  let h = measure(width: text-width, c).height
-  block(width: text-width, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, c)
-}
-
-/// A heading: kept with the text after it, so it never ends a page.
-#let heading-block(c) = block(width: text-width, above: body-leading, below: body-leading, sticky: true, c)
-
-// ---------------------------------------------------------------------------
-// Page furniture
-// ---------------------------------------------------------------------------
-
-/// Page number, centered in the bottom margin (no rule requires a footer title).
-#let page-number() = align(center, text(size: type-size, context counter(page).display()))
-
 // ---------------------------------------------------------------------------
 // Cover: court (FRCP 10(a)), caption, title of the pleading
 // ---------------------------------------------------------------------------
 
 #let court-title(meta) = {
-  set par(leading: single-leading, spacing: 0pt)
-  align(center)[
-    #text(weight: "bold", "IN THE UNITED STATES DISTRICT COURT") \
-    #text(weight: "bold", "FOR THE NORTHERN DISTRICT OF MISSISSIPPI") \
-    #if "division" in meta and meta.division != none {
-      text(weight: "bold", upper(meta.division) + " DIVISION")
-    }
-  ]
-  v(body-leading)
+  line-block(align(center, text(weight: "bold", "IN THE UNITED STATES DISTRICT COURT")))
+  line-block(align(center, text(weight: "bold", "FOR THE NORTHERN DISTRICT OF MISSISSIPPI")))
+  if "division" in meta and meta.division != none {
+    line-block(align(center, text(weight: "bold", upper(meta.division) + " DIVISION")))
+  }
 }
 
-#let caption(meta) = grid(
+#let caption(meta) = block(above: pitch-single, below: 0pt, grid(
   columns: (caption-left, 1fr),
-  column-gutter: 0.25in,
-  block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 12pt, bottom: 8pt), {
+  column-gutter: caption-gutter,
+  block(width: 100%, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: caption-inset, bottom: caption-pad), {
     // Each party: its names, then its designation; "v." between the parties.
-    let rows = ()
     for (k, p) in meta.caption.parties.enumerate() {
-      if k > 0 { rows.push("v.") }
-      rows += p.names + (p.designation,)
+      if k > 0 { line-block("v.") }
+      for n in p.names { line-block(inl(n)) }
+      line-block(inl(p.designation))
     }
-    line-stack(rows)
   }),
-  block(inset: (left: 0.2in), {
-    line-stack(("CIVIL ACTION NO.:", meta.case_number))
+  pad(left: right-inset, {
+    line-block("CIVIL ACTION NO.:")
+    line-block(inl(meta.case_number))
     if "jury_demand" in meta and meta.jury_demand {
-      v(single-leading * 2)
-      line-stack(("JURY TRIAL DEMANDED",))
+      line-block(above: pitch-single, "JURY TRIAL DEMANDED")
     }
   }),
-)
+))
 
-#let cover(meta) = {
-  court-title(meta)
-  caption(meta)
-  v(body-leading)
-  align(center, block(width: text-width, text(weight: "bold", inl(meta.title))))
-  v(body-leading)
-}
+/// The title of the pleading: centered, bold, in a line of the body pitch, a single line below the caption.
+#let title-block(meta) = block(width: 100%, above: pitch-single, below: 0pt, sticky: true, {
+  set par(first-line-indent: 0pt)
+  align(center, text(weight: "bold", inl(meta.title)))
+})
 
 // ---------------------------------------------------------------------------
 // Body and signature
 // ---------------------------------------------------------------------------
 
-/// Numbering for the prayer list: "1." at the top level, "a." for a list nested in an item.
-#let prayer-numbering(..nums) = {
-  let n = nums.pos()
-  if n.len() == 1 { numbering("1.", n.at(0)) } else { numbering("a.", n.at(n.len() - 1)) }
+/// A body paragraph at the double pitch: unnumbered (first-line indent), or numbered (Fed. R. Civ. P. 10(b)): the
+/// first-line indent, the number in a box, the text after it. `last`: the paragraph before the signature, kept whole
+/// and on the page of the signature (a signature never starts a page alone).
+#let body-par(num, content, last: false) = {
+  let p = par(first-line-indent: (amount: para-indent, all: true),
+    if num == none { content } else { [#box(width: number-box, [#num.])#content] })
+  // a paragraph straight in the flow, so that typst moves a line with its footnote to the next page (inside a
+  // block it leaves the line and moves the note alone)
+  if last { block(width: 100%, above: 0pt, below: 0pt, sticky: true, breakable: false, p) } else { p }
 }
 
-#let signature-block(meta) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  block(width: text-width, breakable: false, above: body-leading, below: 0pt, grid(
-    columns: (2.6in, 1fr),
-    column-gutter: 0.2in,
-    [Dated: #meta.date],
-    {
-      [Respectfully submitted,]
-      v(body-leading)
-      line-stack(("By: /s/ " + meta.signature.signer,) + meta.signature.counsel)
-    },
-  ))
-}
+/// A heading as its own sticky block (a heading never ends a page), in a line of the body pitch: level 1 centered
+/// bold capitals, level 2 centered bold.
+#let heading-block(lvl, content) = block(width: 100%, above: 0pt, below: 0pt, sticky: true, {
+  set par(first-line-indent: 0pt)
+  align(center, text(weight: "bold", if lvl == 1 { upper(content) } else { content }))
+})
+
+/// Signature block: "Dated" at the left; "Respectfully submitted," then "By: /s/" and the counsel lines
+/// (L.U.Civ.R. 11(a)) at the right. It never breaks across a page.
+#let signature-block(meta) = block(width: 100%, breakable: false, above: pitch-double, below: 0pt, grid(
+  columns: (sig-left, 1fr),
+  column-gutter: sig-gutter,
+  line-block[Dated: #inl(meta.date)],
+  {
+    line-block[Respectfully submitted,]
+    line-block(above: pitch-single, inl("By: /s/ " + meta.signature.signer))
+    for l in meta.signature.counsel { line-block(inl(l)) }
+  },
+))
 
 /// Numbered paragraphs (Fed. R. Civ. P. 10(b)). Each blank-line-separated chunk of markdown that is neither
 /// a heading nor a list is one numbered paragraph, except a paragraph that starts with "WHEREFORE", which is
 /// the unnumbered lead-in of the prayer. Headings and lists are not numbered.
 /// Numbering is applied per chunk, not with a `show par` rule: a show rule that re-wraps paragraph
-/// content recurses without end in typst 0.15.
-#let allegations(body, para-counter, defs) = {
-  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
-  for c in chunks {
-    let t = c.trim()
-    if t.starts-with(regex("^\\[\\^[^\\]]+\\]:")) {
-      // A footnote definition: rendered where its mark is, by with-footnotes().
-      continue
-    } else if t.starts-with("#") {
-      heading-block(cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1))
+/// content recurses without end in typst 0.15. `has-tail`: a jury demand follows, so no chunk here is the last.
+#let allegations(body, defs, has-tail) = {
+  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim())
+    .filter(c => c != "" and not c.starts-with(regex("^\\[\\^[^\\]]+\\]:")))
+  let n = 0
+  for (i, t) in chunks.enumerate() {
+    let last = not has-tail and i == chunks.len() - 1
+    if t.starts-with("#") {
+      let lvl = t.match(regex("^#+")).text.len()
+      // a heading that opens with a number ("1. The ...") is a heading, not a list item: the period is escaped
+      heading-block(lvl, inl(t.replace(regex("^#+[ \\t]*"), "").replace(regex("^(\\d+)([.)])"), m => m.captures.at(0) + "\\" + m.captures.at(1))))
     } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
-      // A list may break across pages. Items are spaced by body-leading; the trailing v() closes the last one.
-      set enum(numbering: prayer-numbering, indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-      set par(leading: body-leading)
-      cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-      v(body-leading)
+      // The prayer: the number half an inch in, in its box, the text hanging after it; double-spaced.
+      pad(left: item-indent, md(t))
     } else if t.starts-with("WHEREFORE") {
-      on-grid({
-        set par(leading: body-leading)
-        h(para-indent)
-        with-footnotes(t, defs)
-      })
+      body-par(none, with-footnotes(t, defs), last: last)
     } else {
-      // The number is part of the first line. The paragraph is set on whole numbered lines (on-grid), because
-      // a paragraph in a loop, or in an auto-height block, loses the height of its later lines.
-      para-counter.step()
-      on-grid({
-        set par(leading: body-leading)
-        h(para-indent)
-        context para-counter.display()
-        [.#h(0.3in)]
-        with-footnotes(t, defs)
-      })
+      n += 1
+      body-par(n, with-footnotes(t, defs), last: last)
     }
   }
 }
 
 #let msnd-complaint(meta, body) = {
-  let para-counter = counter("allegation")
-
+  // Page numbers centered on every page, in a single-spaced line box (Word's footer at the same place).
   set page(
-    paper: "us-letter",
+    width: page-w,
+    height: page-h,
     margin: margin,
-    numbering: none,
-    footer: page-number(),
+    footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  show footnote.entry: set text(size: 11pt)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch (double-spaced); prayer items as a number box (item-box) with the text hanging.
+  show: xengine.with(pitch: pitch-double, list-indent: item-box)
+  set enum(numbering: "1.")
 
-  // Headings: level 1 is a centered caps section; level 2 a centered bold sub-heading.
-  show heading.where(level: 1): it => heading-block(align(center, text(size: type-size, weight: "bold", upper(it.body))))
-  show heading.where(level: 2): it => heading-block(align(center, text(size: type-size, weight: "bold", it.body)))
-
-  cover(meta)
-
-  if "lead_in" in meta {
-    set par(leading: body-leading)
-    h(para-indent)
-    inl(meta.lead_in)
+  // Footnotes single-spaced at 11 pt: the mark, a space, the note; the rule as long as Word's separator in
+  // LibreOffice (30 % of the measure).
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
+  show footnote.entry: it => {
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    set text(size: footnote-size, ..edges(pitch-note))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)   // the entry does not inherit the body's leading
+    [#super(num)#h(0.25em)#note.body]
   }
 
-  allegations(body, para-counter, footnote-defs(body))
+  court-title(meta)
+  caption(meta)
+  title-block(meta)
 
-  if "jury_demand_text" in meta {
-    heading-block(align(center, text(weight: "bold", "JURY DEMAND")))
-    set par(leading: body-leading)
-    h(para-indent)
-    inl(meta.jury_demand_text)
+  if "lead_in" in meta { body-par(none, inl(meta.lead_in)) }
+
+  let jury = "jury_demand_text" in meta
+  allegations(body, footnote-defs(body), jury)
+
+  if jury {
+    heading-block(1, "JURY DEMAND")
+    body-par(none, inl(meta.jury_demand_text), last: true)
   }
 
   signature-block(meta)
