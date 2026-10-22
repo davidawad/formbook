@@ -269,6 +269,26 @@ Dot leaders are fill, not words (Word sets them as one run of dots touching the 
 
 For the fifth-circuit district adoption (fb-595.68.14), record each of its 12 folders that cannot match by folder and engine, with its XENG check ID and specific unmatched page/line. Do not describe a `REPORTED` engine as gated. The accompanying DOCX port checklist in [DOCX.md](DOCX.md) requires deleting each folder's shell builders and reducing court-specific shell baseline entries to zero.
 
+**Eighth Circuit district adoption (fb-595.68.7, verified 2026-10-22).** The 13 folders in this fan-out have typst and docx templates; none has a LaTeX template. Every folder's typst and docx `check.sh` run has zero failed checks, including `DEF-COVER-001` and `DEF-TOC-001` (the samples have no contents or authorities table). The docx face matches the typst face in all 13 folders, and `docx/` contains only declarative XML and Lua inputs: no builder/render shell scripts or binary reference documents remain. Twelve folders pass XENG-001..003 on every input:
+
+| Folder | Engine | XENG-001..003 |
+|---|---|---|
+| `eighth-circuit/arkansas/federal/bankruptcy-eastern-district/adversary-complaint` | docx | PASS |
+| `eighth-circuit/arkansas/federal/bankruptcy-eastern-district/motion-brief` | docx | PASS |
+| `eighth-circuit/arkansas/federal/bankruptcy-western-district/adversary-complaint` | docx | PASS |
+| `eighth-circuit/arkansas/federal/bankruptcy-western-district/motion-brief` | docx | PASS |
+| `eighth-circuit/arkansas/federal/eastern-district/complaint` | docx | PASS |
+| `eighth-circuit/arkansas/federal/eastern-district/motion-brief` | docx | PASS |
+| `eighth-circuit/arkansas/federal/western-district/complaint` | docx | PASS |
+| `eighth-circuit/arkansas/federal/western-district/motion-brief` | docx | PASS |
+| `eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint` | docx | PASS |
+| `eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief` | docx | PASS |
+| `eighth-circuit/iowa/federal/bankruptcy-southern-district/adversary-complaint` | docx | PASS |
+| `eighth-circuit/iowa/federal/northern-district/complaint` | docx | PASS |
+| `eighth-circuit/iowa/federal/bankruptcy-southern-district/motion-brief` | docx | REPORTED: XENG-003, p. 8 line 25 |
+
+The reported motion-brief difference is footnote 2: typst keeps the final two note lines together (four lines on p. 7, two on p. 8), while LibreOffice ignores widow control in a note (five lines on p. 7, one on p. 8). Letting typst split the note freely leaves the note on p. 7 below its moved anchor paragraph, which is worse; no available setting makes the renderers agree. Its `eval.yaml` therefore keeps `params.cross_engine: report`, and its README records the exact exception. Do not count this folder as gated.
+
 **Tolerance, from measurement.** On break words: none. On positions, measured on ca9 once every break agreed (both samples, 880 lines per engine pair, `fb diff --engines` diagnostics): the width of a line both engines break alike differs by at most 0.10 pt (latex) and 0.37 pt (docx); outside the cover every line's left edge and baseline is within 0.5 pt of typst's (cover: the gaps between its parts differ, up to 34 pt; its lines break alike). The documented tolerance is therefore **glyph-advance drift below 0.5 pt per line, and no other**: a template whose identical lines drift more, or whose breaks differ at all, has a layout difference to fix. The 0.5 pt is reported (`width`, `left edge`, `baseline` diagnostics of `fb diff --engines`), not gated: the gate is the breaks.
 
 **What the measurement found** (before the fix; ca9 typst vs latex 59.8 % / 57.2 % of lines alike, docx 78.7 % / 64.9 %, two of four page counts different; repo-wide 0 of 548 engine pairs passing, latex mean 52 %, docx mean 27 %):

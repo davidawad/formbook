@@ -101,3 +101,9 @@ Every sample page was rendered at 60 dpi and looked at, after the last template 
 11. **Not produced:** the summons and the civil cover sheet. The rules read here do not require either to be part of the complaint document; the summons is a separate issuance by the clerk.
 
 [Formbook index](../../../../../../README.md) | [Iowa](../../../README.md) | [motion-brief](../motion-brief/README.md)
+
+## Current shared-model adoption status (2026-10-22)
+
+The DOCX engine uses `docx/reference.xml` and Lua filters with the shared cross-engine layout model. The Word face is resolved from this folder's typst template. The folder has no docx shell builder/render script or binary `reference.docx`; its entry is absent from `.shell-safety-baseline.json`. The current `sh tools/check.sh` runs for typst and docx both report zero failed checks. `DEF-COVER-001` and `DEF-TOC-001` pass; the sample has no contents or authorities table. No LaTeX engine is present in this folder.
+
+The docx check passes XENG-001..003 on every input. Older DOCX notes in this README describe the pre-adoption shell-built engine and are superseded by this status.

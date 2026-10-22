@@ -108,3 +108,9 @@ export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (microma
 sh tools/render.sh courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/adversary-complaint rice-trustee-complaint
 ```
+
+## Current shared-model adoption status (2026-10-22)
+
+The DOCX engine uses `docx/reference.xml` and Lua filters with the shared cross-engine layout model. The Word face is resolved from this folder's typst template. The folder has no docx shell builder/render script or binary `reference.docx`; its entry is absent from `.shell-safety-baseline.json`. The current `sh tools/check.sh` runs for typst and docx both report zero failed checks. `DEF-COVER-001` and `DEF-TOC-001` pass; the sample has no contents or authorities table. No LaTeX engine is present in this folder.
+
+The docx check passes XENG-001..003 on every input. Older DOCX notes in this README describe the pre-adoption shell-built engine and are superseded by this status.

@@ -81,3 +81,9 @@ Not produced by this template (separate filings): the civil cover sheet (JS-44);
 - Page 8: JURY DEMAND heading and unnumbered demand; date; signature block (firm, By: /s/, counsel lines, ATTORNEYS FOR PLAINTIFF). Pass.
 
 Heading size: the first render had headings at typst's default heading size (larger than body text) and two-line headings that collided with the following text. Both were fixed (body size; double-spaced headings) and every page re-viewed.
+
+## Current shared-model adoption status (2026-10-22)
+
+The DOCX engine uses `docx/reference.xml` and Lua filters with the shared cross-engine layout model. The Word face is resolved from this folder's typst template. The folder has no docx shell builder/render script or binary `reference.docx`; its entry is absent from `.shell-safety-baseline.json`. The current `sh tools/check.sh` runs for typst and docx both report zero failed checks. `DEF-COVER-001` and `DEF-TOC-001` pass; the sample has no contents or authorities table. No LaTeX engine is present in this folder.
+
+The docx check passes XENG-001..003 on every input. Older DOCX notes in this README describe the pre-adoption shell-built engine and are superseded by this status.

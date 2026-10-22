@@ -106,3 +106,9 @@ Earlier renders had two defects, both fixed in the template and re-viewed: parag
 8. **Heading format.** The exemplar's heading centering and numbering cannot be read from the text layer (bold is visible in the embedded font; centering is not). The template's choices (level 1 centered, level 2 hanging) are conventions, not transcribed from the filed copy.
 9. **Italics.** Case names are roman because the exemplar has no italic font (see Exemplar). A filer's own italics would need markup in the sample.
 10. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape; `tools/` was not edited. Render and overlay were run; the page review above is the Gate 2 equivalent for this doc type.
+
+## Current shared-model adoption status (2026-10-22)
+
+The DOCX engine uses `docx/reference.xml` and Lua filters with the shared cross-engine layout model. The Word face is resolved from this folder's typst template. The folder has no docx shell builder/render script or binary `reference.docx`; its entry is absent from `.shell-safety-baseline.json`. The current `sh tools/check.sh` runs for typst and docx both report zero failed checks. `DEF-COVER-001` and `DEF-TOC-001` pass; the sample has no contents or authorities table. No LaTeX engine is present in this folder.
+
+The docx check passes XENG-001..003 on every input. Older DOCX notes in this README describe the pre-adoption shell-built engine and are superseded by this status.

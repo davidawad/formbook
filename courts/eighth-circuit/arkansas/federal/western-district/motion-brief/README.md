@@ -102,3 +102,9 @@ The typst template above is the primary engine. The docx engine is in `docx/`; i
 8. **Certificate of service is conditional.** Rendered only when the frontmatter has `certificate`, because Fed. R. Civ. P. 5(d)(1)(B) does not require one for ECF service.
 9. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at the court root; this doc-type folder is not that shape, and the brief forbids editing `tools/`. The Gate 2 table above is the review for this doc type.
 10. **Exemplar PDF not in the tree.** `usage/SOURCE.md` records the CourtListener URL, but the `SAMPLE-*.pdf` file was never committed (the exemplar row above said it was). On 2026-10-14 it was re-fetched from that URL into a scratch directory (`/work/artifacts/arwd-exemplars/`), not the repo, and used for the overlay. Commit it to `usage/` if the repo is to rebuild the overlay offline.
+
+## Current shared-model adoption status (2026-10-22)
+
+The DOCX engine uses `docx/reference.xml` and Lua filters with the shared cross-engine layout model. The Word face is resolved from this folder's typst template. The folder has no docx shell builder/render script or binary `reference.docx`; its entry is absent from `.shell-safety-baseline.json`. The current `sh tools/check.sh` runs for typst and docx both report zero failed checks. `DEF-COVER-001` and `DEF-TOC-001` pass; the sample has no contents or authorities table. No LaTeX engine is present in this folder.
+
+The docx check passes XENG-001..003 on every input. Older DOCX notes in this README describe the pre-adoption shell-built engine and are superseded by this status.

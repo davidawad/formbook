@@ -108,3 +108,9 @@ The overlay is a diagnostic, not a score. Its page map (`OVERLAY-hess-equifax.tx
 9. **OCR in the exemplar.** The text layer is an OCR of a scan. Corrections in the sample: "Plaintifrs" to "Plaintiff's"; "maccuracy" to "inaccuracy"; "139l" to "1391"; "168la" to "1681a"; the duplicated "Trans Union remove" to "removed"; "Plaintiffs" to "Plaintiff's". Unverified: the statute subsection at ¶ 10 and ¶ 15 reads "1681a(t)" in the text layer; the scan may read otherwise. Recorded so the sample is not treated as a verbatim copy.
 10. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape; `tools/` was not edited. Render and overlay were run; the page review above is the Gate 2 equivalent for this doc type.
 11. **Heading length.** Headings are centered and may wrap; they are rounded up to the line grid. A long heading wraps onto two double-spaced lines, which is a template defect if it happens. Not seen in this sample.
+
+## Current shared-model adoption status (2026-10-22)
+
+The DOCX engine uses `docx/reference.xml` and Lua filters with the shared cross-engine layout model. The Word face is resolved from this folder's typst template. The folder has no docx shell builder/render script or binary `reference.docx`; its entry is absent from `.shell-safety-baseline.json`. The current `sh tools/check.sh` runs for typst and docx both report zero failed checks. `DEF-COVER-001` and `DEF-TOC-001` pass; the sample has no contents or authorities table. No LaTeX engine is present in this folder.
+
+The docx check passes XENG-001..003 on every input. Older DOCX notes in this README describe the pre-adoption shell-built engine and are superseded by this status.

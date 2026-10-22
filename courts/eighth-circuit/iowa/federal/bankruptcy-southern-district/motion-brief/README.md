@@ -115,3 +115,11 @@ docx BLOCKED (this run):
 - `.docx` opens in LibreOffice and Word without a repair prompt: **NOT VERIFIED**. Checked only: a valid zip, well-formed XML parts, and a pandoc read-back (text, numbering, footnotes, verifications, certificate).
 - `sh tools/check.sh <this folder> --engine docx`: **cannot run** for this court. The court has no `rules.md` or `checks.yaml` (Gate 1 has nothing to check), and the checker reads `court.json` from the court root.
 - Gate 2 for docx: pages reviewed **0** (of 0 rendered).
+
+## Current shared-model adoption status (2026-10-22)
+
+The DOCX engine uses `docx/reference.xml` and Lua filters with the shared cross-engine layout model. The Word face is resolved from this folder's typst template. The folder has no docx shell builder/render script or binary `reference.docx`; its entry is absent from `.shell-safety-baseline.json`. The current `sh tools/check.sh` runs for typst and docx both report zero failed checks. `DEF-COVER-001` and `DEF-TOC-001` pass; the sample has no contents or authorities table. No LaTeX engine is present in this folder.
+
+XENG-001 and XENG-002 pass. XENG-003 is REPORTED, not gated: 289/290 lines match; the first difference is p. 8 line 25, where footnote 2 splits 4+2 lines across typst pages 7–8 and 5+1 in LibreOffice. The renderer limitation and reason this folder remains `params.cross_engine: report` are recorded above in this README and in `eval.yaml`.
+
+Older DOCX notes in this README describe the pre-adoption shell-built engine and are superseded by this status.
