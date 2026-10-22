@@ -97,11 +97,11 @@ Next, without a stay, Appellants must spend considerable resources to develop an
 
 This Court has held that agencies should not have to implement district court orders before an appeal is completed, even for cases that do not concern judicial review of contested cases under the Montana Administrative Procedure Act. *See Grenz v. Mont. DNRC*, 2011 MT 17, ¶¶ 17–20, 359 Mont. 154, 248 P.3d 785. That principle has even more force here, where a hastily-developed GHG and climate impacts analysis will affect multiple agencies and reshape Appellants’ MEPA review. *See*, App. 202, Doc. 424.
 
-# III. Plaintiffs will not be injured by a stay.
+## III. Plaintiffs will not be injured by a stay.
 
 Third, Plaintiffs will not be harmed by a stay. *Leiva-Perez*, 640 F.3d at 970. While Plaintiffs insist that they suffer ongoing harms due to climate change, hastily implementing methods for analyzing GHG emissions during MEPA review will not relieve those harms. Climate change is a complex issue, and developing sound methods for analyzing it will take time. And even if DEQ could implement those methods overnight, MEPA does not let DEQ deny permits for “fossil fuel projects,” or any projects. § 75-1-201(1)(b); 75-1-102(1)(a)–(b) & 3(b). Permitting will continue under the requirements of substantive permitting statutes, even if MEPA reviews include GHG emissions and climate change impacts analysis.
 
-# IV. The public interest favors a stay.
+## IV. The public interest favors a stay.
 
 An order that violates the Constitution’s hard limit on the separation of powers is always against the public interest. *Stormans, Inc. v. Selecky*, 586 F.3d 1109, 1139 (9th Cir. 2009). Second, immediately implementing GHG emissions and climate impacts analyses in every MEPA review would deprive the public of its right to notice and comment on a significant change. *See* §§ 2-4-302, -305, MCA. No one benefits from “justice on the fly” that disregards the complex issues this fundamental change to MEPA analysis raises. *Leiva-Perez*, 640 F.3d at 970. But all Montanans benefit from an orderly and thoughtful review of these unprecedented issues by this Court first.
 
