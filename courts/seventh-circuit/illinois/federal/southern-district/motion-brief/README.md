@@ -7,11 +7,11 @@ Folder: `courts/seventh-circuit/illinois/federal/southern-district/motion-brief/
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: the whole exemplar (caption, motion, brief, conclusion, signature, certificate of service, 12 footnotes) |
-| typeface | face required by rules: **none** (S.D. Ill. LR 7.1(a)(3) sets 12-point font; LR 5.1(a) sets paper and spacing; no typeface named). Vendored substitute: **EB Garamond** (kept, because no face is named). Fit: n/a. |
-| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, typst 0.15.0, `pdffonts`: EB Garamond only (Regular, Bold, Italic, embedded), no warnings |
+| typeface | face required by rules: **none** (S.D. Ill. LR 7.1(a)(3) sets 12-point font; LR 5.1(a) sets paper and spacing; no typeface named). Template face: **Times New Roman** (vendored, Liberation Serif its metric twin), the exemplar's face; the docx names the same face (`{font}`). |
+| render | ok (2026-10-22): `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, Times New Roman embedded, no warnings; `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`, 8 pages |
 | overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `usage/*.pdf`, which is not in this snapshot (only `usage/SOURCE.md` is tracked). `usage/OVERLAY-shelton-motion-to-dismiss.txt` is the earlier output and was not regenerated; no `.pdf` overlay is present. |
-| pages reviewed | 7 of 7 (2026-10-15: every page rendered at 60 dpi and viewed; no template change in that pass) |
-| `check.sh` | not run: same reason as `../complaint/README.md` (this doc-type folder is not a court folder with `court.json` and `rules.md`). The review below is the Gate 2 equivalent. |
+| pages reviewed | 8 of 8 (2026-10-22: typst and docx, every page rendered at 60 dpi and viewed) |
+| `check.sh` | typst `RESULT: 9 checks passed, 0 failed`; docx `RESULT: 13 checks passed, 0 failed`, XENG-001..003 PASS (188/188 lines; `params.cross_engine: gate`) (2026-10-22) |
 
 File names: the overlay tool reads and writes `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (its fixed names).
 
@@ -37,13 +37,15 @@ Local practice not checked: the judges' standing orders and case-management proc
 
 ## Layout
 
-- Court name on two lines, centered; caption (parties, ")" column, "Civil Action No." on the right); title centered and bold.
-- Body: one document rendered by cmarker. Paragraphs have a 0.5 in first-line indent and a 24 pt baseline pitch (measured on page 2: 24.0 pt between body lines; footnote lines 14 pt).
-- Headings are numbered by the template (not typed): level 1 `#` → I., II., III. (label on its own line, centered, bold); level 2 `##` → A., B., ... (bold, label hanging at 0.5 in); level 3 `###` → 1., 2., ... (indented 0.5 in). The sample types no numbers.
-- Footnotes at 12 pt; single spaced inside the footnote area.
-- Signature block: "Dated this ..." on the left, then "Respectfully submitted," and the signer, the counsel lines and the role, starting at 3.0 in (`breakable: false`).
-- Certificate of service on its own page, after the signature (`pagebreak`), with the recipients from frontmatter `service.recipients`.
-- Page numbers centered at the foot of each page. The exemplar's footer carries the title and "PAGE n"; the template does not (see Gaps).
+Cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): Times New Roman 12 pt, ragged right (the INPUT's `word:` map, justify and shrink, is no longer read), first-fit line breaks, no kerning, ligatures or hyphenation; every line a box of its pitch (24 pt body, double spacing; 13.8 pt single lines: Word's single line at 12 pt).
+
+- Court name on two single lines, centered, a 24 pt gap; caption: one row per party line (names, a blank line, the designation 1.4 in in, a blank line, "v." centered, a blank line, ...), a 0.4 in column of ")" marks (one per line of text), "Civil Action No." on the "v." row 0.25 in right of the marks (was vertically centered); title bold, centered in the middle 80 % of the line, 24 pt below the caption and 12 pt above the body.
+- Body: one document rendered by cmarker. Paragraphs have a 0.5 in first-line indent and a 24 pt pitch.
+- Headings are numbered by the template (not typed), single-spaced, bold, kept with the next block: level 1 `#` → I., II., III. (the label on a line of its own above the text, both centered; 18 pt above, 12 pt below); level 2 `##` → A., B., ... (the label in a 0.5 in box, the text hanging after it; 12 pt above and below); level 3 `###` → 1., 2., ... (the same, 0.5 in further in). The sample types no numbers.
+- Footnotes at 12 pt in 13.8 pt lines, 7 pt apart, 7 pt between text and rule (the room LibreOffice keeps above a note).
+- The last paragraph is kept on one page with the signature block: "Dated this ..." on the left, then at 2.75 in "Respectfully submitted,", "By: /s/" with the counsel lines, the role (bold), a blank single line between the groups (2.75 in keeps the firm's line whole in Times New Roman; was 3.0 in for EB Garamond).
+- Certificate of service on its own page, with the recipients from frontmatter `service.recipients` (1 in in, 6 pt around each) and the date and "/s/" signer on one line (the signer right-aligned; Word: a right tab).
+- Page numbers centered at the foot of each page, in a 13.8 pt line. The exemplar's footer carries the title and "PAGE n"; the template does not (see Gaps).
 
 ## Sample
 
@@ -52,19 +54,22 @@ Local practice not checked: the judges' standing orders and case-management proc
 - The sample uses the exemplar's text, including the typed "215e ILCS 155." (footnote 2 gives the complaint paragraphs), "29 U.S.C. § 1001, et seq.," and "Doc. 1-1" as printed.
 - The exemplar's Exhibit A and B are not part of the document (they are attachments); the sample refers to them as the exemplar does.
 
-## Review of the rendered pages (current PDF, 60 dpi, every page viewed)
+## Review of the rendered pages (2026-10-22, typst and docx, 60 dpi, every page viewed)
+
+The typst and docx renders break every line and page alike (XENG-001..003), so one review covers both; each page was viewed in both PDFs.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
-| 1 | exemplar p.1 | Court name, caption with ")" column, Civil Action No., centered two-line title; opening paragraph; section I label and heading (heading was enlarged before the fix: heading text now 12 pt); footnotes 1 to 5 at 12 pt. | FIXED (heading size), then re-viewed: PASS |
-| 2 | exemplar p.2 | Continuing I; II. ARGUMENT AND AUTHORITIES centered; A. THE STANDARD hanging label; footnotes 6 to 9. | FIXED (heading size), then re-viewed: PASS |
-| 3 | exemplar p.3 | B. heading two lines, label hanging; Hecker, Tierney italic; footnote 10. | FIXED (heading size), then re-viewed: PASS |
+| 1 | exemplar p.1 | Court name, caption with the ")" column, Civil Action No. on the "v." row, two-line bold title; opening paragraph; I. and its heading; footnotes 1 and 2. | PASS |
+| 2 | exemplar p.2 | Continuing I; II. ARGUMENT AND AUTHORITIES; A. THE STANDARD with its hanging label; footnotes 3 to 8. | PASS |
+| 3 | exemplar p.3 | B. heading on two lines, the text hanging under its first word; *Hecker*, *Tierney* italic; footnotes 9 and 10. | PASS |
 | 4 | exemplar p.4 | Body; *Pilot Life* italic; footnotes 11 and 12 (the ¶ and ¶¶ marks render). | PASS |
-| 5 | exemplar p.5 | C. and D. headings; III. CONCLUSION centered; conclusion paragraph ends the page. | FIXED (heading size), then re-viewed: PASS |
-| 6 | exemplar p.6 | Signature block only: "Dated this 4th day of March 2026."; "Respectfully submitted," the signer, counsel lines, "ATTORNEYS FOR DEFENDANT". The "P.C." wrapped to its own line; sig indent narrowed to 3.0 in, fixed. | OPEN (see Gap 3): the signature block is alone on this page; the sig indent was narrowed to 3.0 in and fixed, but the page itself has no body text. |
-| 7 | exemplar p.7 (certificate of service) | CERTIFICATE OF SERVICE centered; the certificate text; "Christopher A. Koester / Email: koester@taylor.net"; date and "/s/ Iwana Rademaekers". The recipient list sits close under "as follows:". | ACCEPTED (tier 2 spacing; see Gap 4) |
+| 5 | exemplar p.5 | C. heading; body. | PASS |
+| 6 | exemplar p.5 | D. heading and its paragraph; the rest of the page free, since III. CONCLUSION and its paragraph stay with the signature block. | ACCEPTED (tier 2: the alternative is a signature alone on a page) |
+| 7 | exemplar p.6 | III. CONCLUSION, the conclusion paragraph, "Dated this 4th day of March 2026.", the signature block with the firm on one line, ATTORNEYS FOR DEFENDANT bold. | PASS |
+| 8 | exemplar p.7 (certificate of service) | CERTIFICATE OF SERVICE centered; the certificate text; the recipient; date and "/s/ Iwana Rademaekers" on one line. | PASS |
 
-Reviewed pages: 7 of 7.
+Reviewed pages: 8 of 8 (typst and docx).
 
 ## Overlay
 
@@ -73,26 +78,23 @@ Reviewed pages: 7 of 7.
 ## Known gaps and open choices
 
 1. **One exemplar, one filer.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search for S.D. Ill. 12(b)(6) motions with a memorandum returned mostly orders and pro se papers. Shelton is the only one found with a complete text layer. Clearinghouse pages (which listed the U.S. v. Illinois motion, 3:25-cv-01691, ECF 18) returned HTTP 403, so that motion was not checked. The tier-2 judgement is against one filer.
-2. **Font.** EB Garamond (vendored, OFL) at 12 pt. The local rules name no typeface (LR 7.1(a)(3) sets "12-point font"), so `docs/FONTS.md` keeps EB Garamond. The exemplar is Times New Roman, 12 pt (`usage/SOURCE.md`): a tier-2 convention, not a rule. Liberation Serif (metric-compatible Times substitute) is vendored and would switch the font if David decides the convention outweighs the rule. EB Garamond at 12 pt reads smaller than Times at 12 pt; the rule's minimum is met.
-3. **Signature page without body text.** The conclusion ends page 5 and the signature block (kept together with `breakable: false`) falls to page 6 alone. The exemplar keeps the conclusion and the signature on one page. A fix would keep the last body paragraph with the signature (not done: the markdown body is rendered as one document, and a general keep-with-next for the last paragraph is not implemented). Tier 2; recorded as OPEN, not fixed.
+2. **Font.** Times New Roman (vendored; Liberation Serif its metric twin) at 12 pt, the exemplar's face. The local rules name no typeface (LR 7.1(a)(3) sets "12-point font"). The docx was EB Garamond until fb-595.68.27; it now names the typst face.
+3. **Signature page.** The last paragraph (the conclusion) is kept with the signature block, so III. CONCLUSION, its paragraph and the signature open page 7 and page 6 ends after section D with its foot free. The exemplar fits the conclusion and the signature on its page 6 (its body is justified and its footnotes 10 pt). Tier 2; ACCEPTED.
 4. **Certificate spacing.** The recipient list is close to "as follows:" (6 pt). The exemplar's certificate spacing was not measured. Tier 2; ACCEPTED.
 5. **Footer.** The exemplar's footer carries the title and "PAGE n" on each page; the template prints a centered page number only. The rules do not require a footer title; ACCEPTED as tier 3 (filer style).
-6. **Page limit (SDIL-LR 7.1(a)(3)).** The template does not count pages. This sample is 7 pages; the 20-page limit applies to the author.
+6. **Page limit (SDIL-LR 7.1(a)(3)).** The template does not count pages. This sample is 8 pages; the 20-page limit applies to the author.
 7. **Tables.** No table of contents and no table of authorities. The rule excludes them from the count (LR 7.1(a)(3)); they are not required by the rule for a brief of this length. A brief over about 10 pages needs them as a convention; the template does not produce them (the ca9 and cand templates do, and the same approach could be copied). Not built here.
 8. **Exhibits and proposed orders.** Not produced (separate filings). Exhibits A and B of the exemplar are attachments.
 9. **Caption style.** The ")" column is used. The exemplar uses a "§" column. Both appear in S.D. Ill. filings; the choice is a tier-2 convention and is not asserted by any rule.
 
 ## Engines
 
-DOCX (`docx/`; built 2026-10-15, not reviewed):
+DOCX (`docx/`; ported to the cross-engine layout model 2026-10-22, fb-595.68.27):
 
-- Files: `docx/build-reference.sh` (same build as `complaint/docx/`: EB Garamond 12 pt, exact 24 pt line pitch, 0.5 in first-line indent, 1 in margins, letter, footnotes 12 pt single, centered PAGE footer, custom styles), `docx/reference.docx` (committed build output), `docx/ilsd.lua` (cover, caption table, headings labelled I., A., 1. by the filter, signature block, certificate of service, from the frontmatter).
-- Output: `usage/OUTPUT-motion-brief.docx`, written by `sh tools/render.sh --engine docx courts/seventh-circuit/illinois/federal/southern-district/motion-brief usage/INPUT-motion-brief.md`. The `.docx` opens as a valid zip and every XML part is well-formed (`unzip -tq`, `xmllint --noout`). The footer relationship (`footer1.xml`) and its content type are present.
-- Matches the typst form, by construction (not checked on a render): font and size, double spacing, 0.5 in first-line indent, 1 in margins, centered page number, 12 pt footnotes, heading labels and hanging indents, the signature block at 3.0 in, and the certificate of service on its own page with the recipients from the frontmatter.
-- Differs or unverified: the caption ")" column relies on exact 14 pt caption lines in a borderless table; the spacing around the caption, title, signature and certificate is set by style, not measured against typst. The date line and the certificate's right-aligned signer use a right tab at 6.5 in. The typst signature block is kept together (`breakable: false`); the docx signature paragraphs use keep-with-next, which Word and LibreOffice may honour differently. The open tier-2 finding in this folder (the signature block alone on a page, README "Review") may recur.
-- BLOCKED: `docx.pdf` not produced (`soffice` is not installed on this box, and cannot be installed here). The LibreOffice PDF gates (Gates 0 to 3, `sh tools/check.sh --engine docx`) cannot run. The docx.pdf render and page review are the REMAINING work.
-- Page review (Gate 2 for docx): 0 of 7 pages reviewed.
-- Cover and caption table borders are not verified against the typst layout (the table is set to no borders; the view was not checked).
+- Files: `docx/reference.xml` (the Word styles: `base="xengine"` in the typst face `{font}`, Times New Roman 12 pt; Body Text in exact 24 pt line boxes with a 0.5 in first-line indent, Body Keep for the last paragraph, Block Text single-spaced 0.5 in in on both sides, Footnote Text 12 pt in 13.8 pt lines 7 pt apart, the page number in a 13.8 pt footer line; `fb render` builds `reference.docx` from it) and `docx/ilsd-motion-brief.lua` (court name, caption table, title, numbered headings, signature block and certificate of service as WordprocessingML with the typst pitches and spaces in twips; body paragraphs, quotations, lists and footnotes written by pandoc in the styles above). No shell script and no committed `reference.docx` (were `build-reference.sh`, which set EB Garamond, and `reference.docx`).
+- Output: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice), written by `fb check --engine docx`.
+- Check (2026-10-22): typst `RESULT: 9 checks passed, 0 failed`; docx `RESULT: 13 checks passed, 0 failed`, XENG-001..003 PASS (8 pages, 188/188 lines break as in typst), gated (`eval.yaml`: `params.cross_engine: gate`).
+- Page review (Gate 2 for docx): 8 of 8 pages viewed at 60 dpi beside the typst render: same lines and pages.
 - No TOC or TOA: the typst template has none for this doc type either.
 
 ## Commands

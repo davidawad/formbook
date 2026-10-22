@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The S.D. Ill. motion to dismiss and brief in support, Word styles: the cross-engine recipe
+     (tools/fb/src/docxxengine.rs) in the face of the typst template ({font}, Times New Roman; no local rule names one)
+     at 12 pt (size 24 half points; SDIL-LR 7.1(a)(3), "12-point font", footnotes too); Body Text in exact 24 pt line
+     boxes (480 twips: typst pitch-body, double spacing) with a half-inch first-line indent; Body Keep the same kept
+     with the next paragraph (the last paragraph, kept with the signature block); Block Text single-spaced, half an
+     inch in on both sides, 14 pt from the text (280 twips: typst quote-gap); footnotes 12 pt in 13.8 pt boxes
+     (276 twips: typst pitch-single), 7 pt after each (typst note-gap), not kept whole (LibreOffice splits a note
+     where typst does); List Item the label in a half-inch box; letter page with 1-inch margins and the page number
+     centered in the footer in a 13.8 pt line, 36.75 pt above the page foot (735 twips: where typst sets it,
+     footer-descent 30 %). docx/ilsd-motion-brief.lua writes the court name, caption, title, headings, signature and
+     certificate with their own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" list="720" heading="276" heading-before="0" heading-after="0" quote="280" note="276" note-after="140" footer="735">
+<footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></footer>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="140" w:line="276" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyKeep"><w:name w:val="Body Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>
