@@ -2,8 +2,10 @@
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
 # the typst render does, so a difference fails.
 params:
-  # LaTeX: a spaced ellipsis ("matters . . . arising", p27; "a way . . . to render", p30): typst does not break before
-  # " ." (UAX 14 LB13), LaTeX does (708 of 713 lines identical, pages and page ends equal). docx: LibreOffice sets
-  # footnote 2 (page 10) on the next page and keeps its anchor's line, typst moves the line on with it, and pages 11 to
-  # 22 shift. Both are the shared model's (docs/open-items/fb-595.54.76.md, requests 1 and 6); reported, not gated.
-  cross_engine: report
+  # LaTeX passes XENG-001..003 since the shared model keeps a spaced ellipsis with the word before it (fb-595.54.82).
+  cross_engine: gate
+  # LibreOffice sets footnote 3 (page 10/11, "claims 3 Thus, to paraphrase this Court ...") on the next page and keeps
+  # its anchor's line; typst and LaTeX move the line on with its note, and pages 11 to 18 shift (XENG-002, XENG-003;
+  # 686 of 713 lines identical, page count equal). No docx setting moves the line (docs/open-items/fb-595.54.76.md,
+  # request 6); reported, not gated.
+  cross_engine_docx: report

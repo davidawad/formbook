@@ -1,3 +1,3 @@
 PASS
-19f485108a871433a5b6ada8dac436f05f0bfc238981f8d7c4e7afd0024c2e97  usage/OUTPUT-amicus-brief.docx
-75fb8eb869a8256f7c08c25a13275d3a5372d522e3d03c0b36fa17eafa09be24  usage/OUTPUT-amicus-brief.docx.pdf
+a13991ca4667e077e794e062810144a8b738e44242e9fee23def42a7b8bc6ce9  usage/OUTPUT-amicus-brief.docx
+ac708fcacc464fdca9038af9b931c629446163b5721fed3fcfff93f6dee6d4bd  usage/OUTPUT-amicus-brief.docx.pdf
