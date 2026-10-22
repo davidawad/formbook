@@ -29,7 +29,8 @@ front:
   - {text: "{lower_court_case}", align: center, optional: true, above: 25.2}
   - {text: "{title}", align: center, bold: true, upper: true, left: 35, right: 35, above: 28, below: 28}
 # Rule 9.045 sets no signature form (Fla. R. Gen. Prac. & Jud. Admin. 2.515, not retrieved): the date line and the
-# signature 3 in from the margin, kept whole; then the certificate of service on a page of its own, signed.
+# signature 3 in from the margin, kept whole; then the certificate of service on a page of its own, signed with
+# the name and the bar number.
 closing:
   - group:
       - {text: "Respectfully submitted this {signature.date}.", indent: 36, pitch: body, optional: true}
@@ -51,4 +52,5 @@ closing:
       - group:
           - {text: "{signature.signer_line}", left: 216, underline: true}
           - {text: "{signature.name}", left: 216, optional: true}
+          - {text: "{signature.signer.0}", left: 216, optional: true}   # the bar number (the first signer line)
         above: 8.4
