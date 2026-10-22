@@ -1,0 +1,9 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  # A spaced ellipsis (". . .") after a word: typst does not break before " ." (UAX 14 LB13), LaTeX and Word do.
+  # INPUT-motion-brief page 12 lines 2-3 ("the tax appeal court . . . in the person's own name"): typst moves "court"
+  # to the next line, LaTeX and Word end the line after "court . ."; 374 of 376 lines identical, pages and page ends
+  # equal. The shared model needs one rule for it (docs/open-items/fb-595.54.76.md, request 1); reported, not gated.
+  cross_engine: report

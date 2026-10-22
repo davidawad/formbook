@@ -16,15 +16,9 @@ signature:
   signer: "RONALD I. HELLER"
   role: "Attorney for Taxpayer-Appellant"
 date: "Honolulu, Hawaii, January 5, 2021"
-authorities:
-  hrs232-16: {kind: statute, cite: "HRS § 232-16"}
-  hrs235-64: {kind: statute, cite: "HRS § 235-64"}
-  hrs235-114: {kind: statute, cite: "HRS § 235-114"}
-  hrs237-41-5: {kind: statute, cite: "HRS § 237-41.5"}
-  hrs237-42: {kind: statute, cite: "HRS § 237-42"}
 ---
 
-Pursuant to Sections [232-16](toa:hrs232-16), [235-64](toa:hrs235-64), [235-114](toa:hrs235-114), [237-41.5](toa:hrs237-41-5) and [237-42](toa:hrs237-42), Hawaii Revised Statutes, and other applicable law, Taxpayer-Appellant CATHERINE K. COBB, NOW KNOWN AS CATHERINE PARRY, appeals from the Final Notice of Personal Liability for General Excise Tax dated December 22, 2020, a redacted copy of which is attached hereto as Exhibit A, and the Notice of Final Assessment of Withholding Tax dated December 22, 2020, a redacted copy of which is attached hereto as Exhibit B (collectively the “Notices”). In support of this appeal, Taxpayer-Appellant submits the following information:
+Pursuant to Sections 232-16, 235-64, 235-114, 237-41.5 and 237-42, Hawaii Revised Statutes, and other applicable law, Taxpayer-Appellant CATHERINE K. COBB, NOW KNOWN AS CATHERINE PARRY, appeals from the Final Notice of Personal Liability for General Excise Tax dated December 22, 2020, a redacted copy of which is attached hereto as Exhibit A, and the Notice of Final Assessment of Withholding Tax dated December 22, 2020, a redacted copy of which is attached hereto as Exhibit B (collectively the “Notices”). In support of this appeal, Taxpayer-Appellant submits the following information:
 
 ## TAXPAYER’S NAME, ID AND ADDRESS
 
@@ -45,7 +39,7 @@ rheller@torkildson.com
 
 ## TYPE OF TAX AND PERIODS INVOLVED
 
-The assessments in dispute are “responsible person” penalty assessments, purportedly made under HRS Sections [235-64](toa:hrs235-64) and [237-41.5](toa:hrs237-41-5), related to Withholding Tax and General Excise Tax due from (or purportedly due from) Kailua Print Shop LLC, for tax periods from the year ended December 31, 2015, to the month ending March 31, 2020, as shown in detail in the Notice attached as Exhibit A.
+The assessments in dispute are “responsible person” penalty assessments, purportedly made under HRS Sections 235-64 and 237-41.5, related to Withholding Tax and General Excise Tax due from (or purportedly due from) Kailua Print Shop LLC, for tax periods from the year ended December 31, 2015, to the month ending March 31, 2020, as shown in detail in the Notice attached as Exhibit A.
 
 ## AMOUNTS IN DISPUTE
 
@@ -85,6 +79,6 @@ Taxpayer-Appellant hereby requests that the Court enter Judgment in favor of Tax
 
 \(1) That the Notices dated December 22, 2020 that are the subject of this case are erroneous, contrary to law, and null and void;
 
-\(2) That Taxpayer-Appellant, individually, does not owe any tax related to Kailua Print Shop L.L.C. under HRS Section [235-64](toa:hrs235-64), HRS Section [237-41.5](toa:hrs237-41-5), or otherwise, for any tax period;
+\(2) That Taxpayer-Appellant, individually, does not owe any tax related to Kailua Print Shop L.L.C. under HRS Section 235-64, HRS Section 237-41.5, or otherwise, for any tax period;
 
 Taxpayer-Appellant further requests that the Court award Taxpayer-Appellant her attorneys’ fees and costs, together with such other and further relief as the Court may deem appropriate.

@@ -1,0 +1,84 @@
+# Hawaii Tax Appeal Court (hawtax): motion and supporting memorandum. The whole layout, as data for the shared document
+# model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). The Rules
+# of the Tax Appeal Court set no form of their own (HAWTAX-FORM-002: the Circuit Court rules apply where RTAC is
+# silent); the numbers are those of HRAP 32(a)-(b) the template has followed (1-inch margins, 12-point Times New
+# Roman, double spacing) and the exemplars' first page (HAWTAX-COVER-001, -002). Lengths in points. No case text here:
+# every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # HRAP 32(b): 12 point, footnotes and quotations included
+pitch:
+  body: 27.6              # HRAP 32(b): double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # flyleaf, headings, quotations, footnotes, tables, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # HRAP 32(a): not less than 1 inch on all sides
+indent: 36
+page_number: {align: center, from: 2}   # the flyleaf is page 1, unnumbered; the pages after it from 2
+footnote: {size: 12, pitch: single, gap: 6}   # HRAP 32(b): footnotes the size of the text, single spaced
+quote: {left: 36, right: 36, above: 12, below: 12, gap: 10.8, pitch: single}   # quotations single spaced, indented
+# Section headings centred in capitals; the argument's points numbered I., A., 1., a., each level 0.5 in further in,
+# the text hanging after the number.
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 12}
+  - {bold: true, number: "I.", hang: 36, above: 12, below: 9.6}
+  - {bold: true, number: "A.", left: 36, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, number: "1.", left: 72, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, number: "a.", left: 108, hang: 36, above: 12, below: 9.6}
+# The flyleaf (HAWTAX-COVER-001, -002; RCCH 3(c)): counsel at the top left, 3.5 inches wide (the top right left
+# clear for the clerk), the court centred under it, then the title of the cause at the left and the case number, the
+# title of the document in capitals and the judges at the right. (The 3-inch band beside a short counsel block of the
+# amicus and notice folders is a column of its own; a cover that opens with columns is not found by the docx page
+# lookup, docs/open-items/fb-595.54.76.md: this cover opens with counsel as text.)
+cover:
+  - each: counsel
+    blocks:
+      - {text: "{names}", right: 216}
+      - {text: "{lines}", right: 216, below: 4.8}
+  - {text: "{counsel_for}", italic: true, right: 216}
+  - {text: "{court_lines}", align: center, bold: true, above: 21.6}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 90, above: 13.8, below: 13.8}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 90}
+          - {text: "{proceeding}", optional: true, above: 13.8}
+      - blocks:
+          - {text: "CASE NO. {case_number}"}
+          - {text: "{brief_title}", bold: true, upper: true, above: 13.8}
+          - {text: "{judges}", above: 13.8}
+    gutter: 18
+    above: 14.4
+# HAWTAX-BRIEF-003 (RTAC 16): a table of contents with page references and the authorities cited with their pages.
+contents: {title: "Table of Contents", depth: 5, col: 24, hang: 36, step: 36, above: 4.2}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 25.2
+  above: 8.4
+  group: {bold: true, above: 16.8, below: 4.2}
+# The date at the left, counsel's signature at the right (HAWTAX-COVER-002), never split; the certificate of service
+# (when the frontmatter has one) on a page of its own.
+closing:
+  - columns:
+      - blocks:
+          - {text: "DATED: {date}"}
+      - width: 230.4
+        blocks:
+          - {text: "{signature.firm}"}
+          - {rule: 0.5, above: 21.6}
+          - {text: "{signature.signer}"}
+          - {text: "{signature.role}", italic: true}
+    above: 16.8
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 12}
+      - {text: "I certify that on {date}, two copies of the foregoing document, {brief_title}, were served on the following parties by {service.method}:", below: 9.6}
+      - each: service.served
+        blocks:
+          - {text: "{name}", left: 36, above: 7.2}
+          - {text: "{address}", left: 36}
+      - group:
+          - {text: "{signature.signer}", left: 234}
+          - {text: "{signature.role}", italic: true, left: 234}
+        above: 16.8
