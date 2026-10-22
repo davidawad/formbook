@@ -167,3 +167,65 @@ mod tests {
         assert_eq!(a, src);
     }
 }
+
+/// Two docx renders of the TTAB answer give the same .docx.pdf bytes, and a render whose font runs came out in
+/// another order (the reverse of /BaseFont order, so objects 100 and 95 trade places: fb-595.75) normalizes to the
+/// same bytes too; skipped, and logged to TEST_SKIP_LOG, without pandoc, zip, xmllint, pdftotext or LibreOffice.
+#[cfg(test)]
+#[test]
+fn ttab_answer_docx_pdf_is_reproducible() {
+    let skip = |why: &str| {
+        eprintln!("SKIP ttab_answer_docx_pdf_is_reproducible: {why}");
+        if let Some(log) = std::env::var_os("TEST_SKIP_LOG") {
+            use std::io::Write;
+            let mut f = std::fs::OpenOptions::new()
+                .create(true)
+                .append(true)
+                .open(log)
+                .unwrap();
+            writeln!(f, "pdfrepro::ttab_answer_docx_pdf_is_reproducible: {why}").unwrap();
+        }
+    };
+    let Ok(root) = crate::repo_root() else {
+        return skip("no repo root");
+    };
+    let court = root.join("courts/federal-circuit/trademark-trial-and-appeal-board/answer");
+    if !court.join("usage/INPUT-answer-3.md").is_file() {
+        return skip("no answer-3 INPUT");
+    }
+    for tool in ["pandoc", "zip", "xmllint", "pdftotext"] {
+        if !crate::proc::have(tool) {
+            return skip(&format!("{tool} not installed"));
+        }
+    }
+    if !crate::proc::have("soffice") && std::env::var_os("SOFFICE").is_none() {
+        return skip("soffice not installed");
+    }
+    let tmp = std::env::temp_dir().join(format!("fb-pdfrepro-{}", std::process::id()));
+    std::fs::create_dir_all(&tmp).unwrap();
+    let sample = std::path::Path::new("usage/INPUT-answer-3.md");
+    let go = |n: &str| {
+        let out = tmp.join(format!("{n}.docx.pdf"));
+        crate::render::render_one(
+            &root,
+            "docx",
+            &court,
+            sample,
+            &out,
+            crate::render::Warnings::Allow,
+        )
+        .unwrap();
+        std::fs::read(out).unwrap()
+    };
+    let (a, b) = (go("a"), go("b"));
+    let _ = std::fs::remove_dir_all(&tmp);
+    assert!(a == b, "two TTAB answer .docx.pdf renders differ");
+    let mut c = a.clone();
+    assert_eq!(crate::fontorder::arrange(&mut c, true), Some(true));
+    assert!(c != a);
+    normalize(&mut c, crate::render::REPRO_EPOCH.parse().unwrap());
+    assert!(
+        c == a,
+        "a TTAB answer render with its font runs in another order normalizes to other bytes"
+    );
+}

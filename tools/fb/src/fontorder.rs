@@ -1,9 +1,10 @@
 //! LibreOffice writes each embedded font as a run of objects (the font program and its /Length, the descriptor,
 //! the ToUnicode map, the font dictionary), one run after another, in an order that follows heap addresses: two
 //! renders of the same .docx can number and place the runs differently (the page content names them /F1, /F2,
-//! ... and does not change). `canonical` puts the runs in /BaseFont order and renumbers their objects to match,
-//! in place: the runs keep their total length, every renumbered object keeps its digit count, and the moved
-//! objects' cross-reference entries are rewritten, so no other byte moves. A PDF of any other shape is left alone.
+//! ... and does not change). `canonical` puts the runs in /BaseFont order, renumbers their objects to match and
+//! rewrites the cross-reference entries. When every renumbered object keeps its digit count no other byte moves;
+//! when one does not (runs 86-90, 91-95, 96-100 where 100 becomes 95: the TTAB answer, fb-595.75) the objects
+//! after it shift and the file is laid out again with new offsets. A PDF of any other shape is left alone.
 use std::collections::{BTreeMap, BTreeSet};
 
 pub(crate) fn find(hay: &[u8], needle: &[u8], from: usize) -> Option<usize> {
@@ -86,7 +87,8 @@ fn refs(bytes: &[u8]) -> Vec<(usize, usize, usize)> {
 }
 
 /// Rewrite the references (and the `N 0 obj` header) in the dictionary part of `obj` through `map`.
-fn renumber(obj: &mut [u8], map: &BTreeMap<usize, usize>) {
+/// A number may change its digit count, so the spans are rewritten from the last one back.
+fn renumber(obj: &mut Vec<u8>, map: &BTreeMap<usize, usize>) {
     let end = dict_part(obj).len();
     let mut spans = refs(&obj[..end]);
     if let Some(h) = find(obj, b" 0 obj", 0) {
@@ -94,19 +96,22 @@ fn renumber(obj: &mut [u8], map: &BTreeMap<usize, usize>) {
             spans.push((0, h, n));
         }
     }
-    for (s, e, n) in spans {
+    spans.sort_unstable();
+    for (s, e, n) in spans.into_iter().rev() {
         if let Some(m) = map.get(&n) {
-            obj[s..e].copy_from_slice(m.to_string().as_bytes());
+            obj.splice(s..e, m.to_string().into_bytes());
         }
     }
 }
 
 /// Put LibreOffice's font runs in /BaseFont order; true when the PDF changed.
-pub fn canonical(pdf: &mut [u8]) -> bool {
-    try_canonical(pdf).unwrap_or(false)
+pub fn canonical(pdf: &mut Vec<u8>) -> bool {
+    arrange(pdf, false).unwrap_or(false)
 }
 
-fn try_canonical(pdf: &mut [u8]) -> Option<bool> {
+/// Put the font runs in /BaseFont order, or the reverse of it (`reverse`, for tests that need a render whose
+/// runs came out in another order); Some(true) when the PDF changed.
+pub(crate) fn arrange(pdf: &mut Vec<u8>, reverse: bool) -> Option<bool> {
     let (xref_at, objs) = xref(pdf)?;
     // each object's bytes run to the next object (or the cross-reference table)
     let mut by_offset: Vec<(usize, usize)> = objs.iter().map(|(&n, &(o, _))| (o, n)).collect();
@@ -170,6 +175,9 @@ fn try_canonical(pdf: &mut [u8]) -> Option<bool> {
     if sorted.windows(2).any(|w| w[0].0 == w[1].0) {
         return None;
     }
+    if reverse {
+        sorted.reverse();
+    }
     if sorted
         .iter()
         .map(|f| f.1[0])
@@ -181,38 +189,50 @@ fn try_canonical(pdf: &mut [u8]) -> Option<bool> {
     let mut k = lo;
     for (_, run) in &sorted {
         for &n in run {
-            if n.to_string().len() != k.to_string().len() {
-                return None;
-            }
             map.insert(n, k);
             k += 1;
         }
     }
-    // the new run region, and every other object's references
-    let mut region = Vec::with_capacity(end - start);
+    // lay the file out again: the runs in their new order where the old ones were, every other object where it
+    // was, each with its references renumbered (a number that changes its digit count moves the bytes after it)
+    let mut order: Vec<(usize, usize)> = span.iter().map(|(&n, &(s, _))| (s, n)).collect();
+    order.sort_unstable();
+    let mut out = pdf[..order[0].0].to_vec();
     let mut offsets = BTreeMap::new();
-    for (_, run) in &sorted {
-        for &n in run {
-            offsets.insert(map[&n], start + region.len());
-            let mut obj = body(n).to_vec();
-            renumber(&mut obj, &map);
-            region.extend_from_slice(&obj);
+    let mut emit = |out: &mut Vec<u8>, n: usize| {
+        offsets.insert(map.get(&n).copied().unwrap_or(n), out.len());
+        let mut obj = body(n).to_vec();
+        renumber(&mut obj, &map);
+        out.extend_from_slice(&obj);
+    };
+    for (s, n) in order {
+        if s == start {
+            for (_, run) in &sorted {
+                for &m in run {
+                    emit(&mut out, m);
+                }
+            }
+        }
+        if !(start..end).contains(&s) {
+            emit(&mut out, n);
         }
     }
-    let rest: Vec<usize> = objs
-        .keys()
-        .copied()
-        .filter(|n| !map.contains_key(n))
-        .collect();
-    pdf[start..end].copy_from_slice(&region);
-    for n in rest {
-        let (s, e) = span[&n];
-        renumber(&mut pdf[s..e], &map);
-    }
+    let new_xref = out.len();
+    let mut tail = pdf[xref_at..].to_vec();
     for (n, o) in offsets {
-        let field = objs[&n].1;
-        pdf[field..field + 10].copy_from_slice(format!("{o:010}").as_bytes());
+        let field = objs[&n].1 - xref_at;
+        tail[field..field + 10].copy_from_slice(format!("{o:010}").as_bytes());
     }
+    let sx = tail.windows(9).rposition(|w| w == b"startxref")? + 9;
+    let ds = sx
+        + tail[sx..]
+            .iter()
+            .take_while(|c| c.is_ascii_whitespace())
+            .count();
+    let de = ds + tail[ds..].iter().take_while(|c| c.is_ascii_digit()).count();
+    tail.splice(ds..de, new_xref.to_string().into_bytes());
+    out.extend_from_slice(&tail);
+    *pdf = out;
     Some(true)
 }
 
@@ -315,10 +335,39 @@ mod tests {
         assert_eq!(y, x.into_bytes());
         b.truncate(20);
         assert!(!canonical(&mut b));
-        // 9 would become 10: the numbers must keep their digit count
-        let src = pdf_from(3, &["DAAAAA+Italic", "CAAAAA+Regular", "BAAAAA+Bold"]);
-        let mut z = src.clone();
-        assert!(!canonical(&mut z));
-        assert_eq!(z, src);
+    }
+
+    /// Objects 9 and 10 trade places across a digit count (fb-595.75): the file is laid out again, every
+    /// cross-reference entry and startxref point at their objects, and the runs end up in /BaseFont order.
+    #[test]
+    fn runs_whose_numbers_change_digit_count_are_laid_out_again() {
+        let laid_out = |b: &[u8]| {
+            let (at, objs) = xref(b).unwrap();
+            assert!(b[at..].starts_with(b"xref"));
+            for (n, (o, _)) in objs {
+                assert!(
+                    b[o..].starts_with(format!("{n} 0 obj").as_bytes()),
+                    "{n} at {o}"
+                );
+            }
+        };
+        let mut b = pdf_from(3, &["DAAAAA+Italic", "CAAAAA+Regular", "BAAAAA+Bold"]);
+        assert!(canonical(&mut b));
+        laid_out(&b);
+        let s = String::from_utf8_lossy(&b).into_owned();
+        let at = |f: &str| s.find(&format!("/BaseFont/{f}")).unwrap();
+        assert!(
+            at("BAAAAA+Bold") < at("CAAAAA+Regular") && at("CAAAAA+Regular") < at("DAAAAA+Italic")
+        );
+        assert!(
+            s.contains("<</Type/Font/Subtype/TrueType/BaseFont/BAAAAA+Bold/FontFile2 3 0 R>>"),
+            "{s}"
+        );
+        // the reverse order and back again is the same file
+        let want = b.clone();
+        assert_eq!(arrange(&mut b, true), Some(true));
+        laid_out(&b);
+        assert!(canonical(&mut b));
+        assert_eq!(b, want);
     }
 }
