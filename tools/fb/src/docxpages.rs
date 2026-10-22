@@ -200,10 +200,17 @@ pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
         None
     };
     let mut cur = 0;
+    // the end of the last heading's own text: a heading is searched from there (below)
+    let mut past_heading = 0;
     let mut found = vec![];
     for n in &ns {
+        let heading = n.id.0.starts_with('h') || n.id.0.starts_with('H');
         let from = if n.place == Place::Body {
-            cur
+            if heading {
+                cur.max(past_heading)
+            } else {
+                cur
+            }
         } else {
             starts
                 .get(page_at(cur).saturating_sub(1))
@@ -218,9 +225,13 @@ pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
             })
             .or_else(|| find(&n.fallback, from));
         if let (Some(p), true) = (pos, n.place == Place::Body) {
-            // past the needle's own text (its fallback), not past what follows it: a heading's needle "argument" + the
-            // next paragraph is found again inside "summary of argument" + the same words unless the search moves on
-            cur = p + n.fallback.len().min(n.needle.len()).max(1);
+            cur = p + 1;
+            // the next heading is searched past this one's own text (its fallback), not past what follows it: its
+            // needle "argument" + the next paragraph is found again inside "summary of argument" + the same words
+            // otherwise; any other needle (an authority cited in the heading) is searched from the next character
+            if heading {
+                past_heading = p + n.fallback.len().min(n.needle.len()).max(1);
+            }
         }
         found.push(pos.map_or(0, page_at));
     }

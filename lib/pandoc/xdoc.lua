@@ -30,8 +30,8 @@ function M.meta()
   return m
 end
 
--- The value at a dotted path ("a.b"; "." the context itself), or nil (an empty string too); "a.b|text": the text when
--- there is none (lib/typst/xdoc.typ lookup alike).
+-- The value at a dotted path ("a.b"; "." the context itself), or nil; "a.b|text": the text when there is
+-- none (lib/typst/xdoc.typ lookup alike).
 function M.lookup(ctx, path)
   local bar = path:find("|", 1, true)
   if bar then
@@ -45,8 +45,6 @@ function M.lookup(ctx, path)
     if type(v) ~= "table" then return nil end
     v = v[k]
   end
-  -- an empty string prints nothing: it is missing
-  if v == "" then return nil end
   return v
 end
 
@@ -68,7 +66,8 @@ function M.expand(tpl, ctx, optional)
     local missing = false
     local s = tpl:gsub("{([^{}]+)}", function(p)
       local x = M.lookup(ctx, p)
-      if x == nil then
+      -- an optional block whose field is empty prints nothing, as one whose field is missing
+      if x == nil or (optional and x == "") then
         if optional then missing = true; return "" end
         error("xdoc: missing required metadata field `" .. p .. "`", 0)
       end

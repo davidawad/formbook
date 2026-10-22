@@ -39,8 +39,8 @@
 // A rule's line box besides its stroke (lib/pandoc/xdoc.lua RULE): LibreOffice's smallest exact line, one twip.
 #let RULE = 0.05
 
-/// The value at a dotted path ("a.b", "." the context itself), or none (an empty string too); "a.b|text": the text
-/// when there is none (a blank a filer completes, e.g. "{service.date|____________}"; lib/pandoc/xdoc.lua lookup alike).
+/// The value at a dotted path ("a.b", "." the context itself), or none; "a.b|text": the text when
+/// there is none (a blank a filer completes, e.g. "{service.date|____________}"; lib/pandoc/xdoc.lua lookup alike).
 #let lookup(ctx, path) = {
   let bar = path.position("|")
   if bar != none {
@@ -52,8 +52,7 @@
   for k in path.split(".") {
     if type(v) == dictionary and k in v { v = v.at(k) } else { return none }
   }
-  // an empty string prints nothing: it is missing
-  if v == "" { none } else { v }
+  v
 }
 
 /// The paragraphs of a text template: "{path}" alone and a list value gives one per item; otherwise every {path} is
@@ -70,7 +69,8 @@
     let s = tpl
     for m in tpl.matches(regex("\\{([^{}]+)\\}")) {
       let v = lookup(ctx, m.captures.at(0))
-      if v == none {
+      // an optional block whose field is empty prints nothing, as one whose field is missing
+      if v == none or (optional and v == "") {
         if optional { missing = true } else { panic("xdoc: missing required metadata field `" + m.captures.at(0) + "`") }
       } else {
         s = s.replace(m.text, str(v))
