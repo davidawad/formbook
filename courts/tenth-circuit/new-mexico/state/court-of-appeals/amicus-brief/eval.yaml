@@ -3,8 +3,11 @@
 font:
   size_pt: 14
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated: a bare URL in a footnote
-# breaks after a period in typst ("http://www.ose." / "state.nm.us"), where LaTeX and Word do not break it; the shared
-# model has no URL rule (docs/open-items/fb-595.54.54.md).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). docx breaks every line and page where
+# typst does (XENG-001..003 pass; the model's URL rule breaks the footnote URL alike). latex is held back: the shared
+# LaTeX model sets the token after "§" in an \mbox (lib/latex/xdoc.lua, xd.hold_sign_tokens) and that token here
+# carries footnote 4 ("§ 28.[^4]"), which LaTeX drops inside a box; the committed latex render is the one before that
+# rule, which passes XENG-001..003 against this typst render; a render at HEAD would not. docs/open-items/fb-595.54.54.md.
 params:
-  cross_engine: report
+  cross_engine: gate
+  cross_engine_latex: report
