@@ -7,16 +7,28 @@
 // LBR 9004-1 (BNH number after the signature), LBR 7103 (certificate of service). See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
 #let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; no NH rule sets a typeface (README.md, gap 1)
 #let type-size = 12pt                   // no NH or federal minimum found for the body; 12 pt is the working standard
-#let body-leading = 1.645em             // double spacing: about 27.6 pt line pitch at 12 pt (2 x 13.8 pt, the Word convention for 12 pt Times)
-#let single-leading = 0.5em             // counsel block, caption, signature, footnotes: single spaced
-#let para-indent = 0.5in                // first-line indent of body paragraphs (memoranda are not numbered)
+#let note-size = 10pt                   // footnotes
+#let para-indent = 0.5in                // first-line indent of body paragraphs (memoranda are not numbered); quotations in by as much on both sides
 #let page-margin = 1in                  // letter paper, one-inch margins (no NH rule found; common practice)
+#let sig-indent = 3.25in                // the signature block: the right half of the page
+#let rule = 0.5pt                       // the caption's rules
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-single = 13.8pt              // a single line: 1.15 x the type size (Word's single line in this face)
+#let pitch-double = 2 * pitch-single    // the body, double-spaced (27.6 pt, Word's double spacing at 12 pt)
+#let pitch-note = 11.5pt                // a footnote line: 1.15 x the footnote size
+#let note-gap = 5pt                     // between two footnotes (Word: Footnote Text's space after)
+#let cap-gap = 12pt                     // between the groups of the caption and of a signature block; around a quotation
+#let head-above = 6pt                   // above a section heading
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -32,60 +44,40 @@
 /// Inline markdown (italics, bold, footnote references) in text.
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
-/// The bankruptcy caption: the debtor, the chapter and the case number with the judge's initials (LBR 7102(a)(2), (3)).
+/// One single-spaced paragraph of its own, with explicit space above it.
+#let line-block(above: 0pt, indent: 0pt, body) = block(width: 100%, above: above, below: 0pt, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  pad(left: indent, body)
+})
+
+/// The bankruptcy caption: the debtor, the chapter and the case number with the judge's initials (LBR 7102(a)(2),
+/// (3)); two equal columns, the left one ruled at its right and foot, the right one standing off the rule.
 #let bankruptcy-caption(meta) = {
   let b = meta.bankruptcy
-  grid(
+  block(above: 18pt, below: 0pt, grid(
     columns: (1fr, 1fr),
     column-gutter: 0pt,
-    block(
-      width: 100%,
-      stroke: (right: 0.5pt, bottom: 0.5pt),
-      inset: (right: 10pt, bottom: 8pt, top: 2pt),
-    )[
-      #set par(leading: single-leading)
-      In re:
-
-      #v(6pt)
-      #strong(b.debtor)
-
-      #align(right)[#b.designation]
-    ],
-    block(inset: (left: 18pt, top: 2pt))[
-      #set par(leading: single-leading)
-      #b.chapter
-
-      #v(6pt)
-      Case No. #b.case_number
-    ],
-  )
+    block(width: 100%, stroke: (right: rule, bottom: rule), inset: (right: 10pt, bottom: 8pt, top: 2pt), {
+      line-block[In re:]
+      line-block(above: cap-gap, strong(inl(b.debtor)))
+      line-block(above: cap-gap, align(right, inl(b.designation)))
+    }),
+    block(width: 100%, inset: (left: 18pt, top: 2pt), {
+      line-block(inl(b.chapter))
+      line-block(above: cap-gap)[Case No. #inl(b.case_number)]
+    }),
+  ))
 }
 
-/// Caption block: court title, bankruptcy caption, the document title.
-#let caption(meta) = {
-  set par(leading: single-leading)
-  align(center, stack(dir: ttb, spacing: 3pt, ..meta.court.map(l => strong(l))))
-  v(18pt)
-  bankruptcy-caption(meta)
-  v(18pt)
-  align(center, strong(meta.title))
-  v(12pt)
-}
-
-/// A signature block: the date (left), then the firm or party, the signer and the counsel lines (right half).
-#let signature-block(date-label, date, intro, signer, lines) = block(sticky: true, width: 100%)[
-  #set par(leading: single-leading)
-  #v(12pt)
-  #date-label #date
-  #v(12pt)
-  #pad(left: 3.25in)[
-    #stack(dir: ttb, spacing: 3pt, ..intro.map(l => [#l]))
-    #v(24pt)
-    #signer
-    #v(2pt)
-    #stack(dir: ttb, spacing: 3pt, ..lines.map(l => [#l]))
-  ]
-]
+/// A signature block, one block that never breaks: the date at the left, then the firm or party, the signer and
+/// the counsel lines at the signature indent.
+#let signature-block(date-label, date, intro, signer, lines) = block(breakable: false, width: 100%, above: cap-gap, below: 0pt, {
+  line-block[#date-label #inl(date)]
+  for (i, l) in intro.enumerate() { line-block(above: if i == 0 { cap-gap } else { 0pt }, indent: sig-indent, inl(l)) }
+  line-block(above: 2 * cap-gap, indent: sig-indent, inl(signer))
+  for (i, l) in lines.enumerate() { line-block(above: if i == 0 { cap-gap } else { 0pt }, indent: sig-indent, inl(l)) }
+})
 
 /// Footnotes: cmarker does not render markdown footnotes, so `[^n]` references in a paragraph become typst
 /// footnotes, with the text of the `[^n]: ...` definition (`notes`, keyed by n).
@@ -102,35 +94,34 @@
   out + seg(c.slice(pos))
 }
 
-/// Body: `#` headings are centered bold caps (sections), `##` headings are bold, left, with a hanging
-/// indent (lettered sub-sections). Every other chunk is an unnumbered, first-line-indented paragraph.
-/// Footnote definitions (`[^n]: ...`) are not body text; they are read into `notes`.
+/// A heading at the body pitch, kept with what follows.
+#let head(above, body) = block(sticky: true, width: 100%, above: above, below: 0pt, {
+  set par(first-line-indent: 0pt)
+  body
+})
+
+/// Body: `#` headings are centered bold (sections), `##` headings are bold, left, with a hanging indent (lettered
+/// sub-sections), `###` headings bold italic; `>` blocks are quotations, single-spaced and indented both sides.
+/// Every other chunk is an unnumbered, first-line-indented paragraph; the last one stays whole and on the page of
+/// the signature block. Footnote definitions (`[^n]: ...`) are not body text; they are read into `notes`.
 #let body(src, notes) = {
-  let chunks = src.split("\n\n").map(s => s.trim()).filter(s => s != "" and not s.starts-with("[^"))
+  let chunks = src.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(s => s.trim()).filter(s => s != "" and not s.starts-with("[^"))
   let last = chunks.len() - 1
   for (i, c) in chunks.enumerate() {
     if c.starts-with("### ") {
-      block(sticky: true, width: 100%)[#strong(emph(c.slice(4)))]
-    } else if c.starts-with("> ") {
-      // block quotation: single spaced, indented both sides, no first-line indent
-      block(width: 100%, inset: (left: 0.5in, right: 0.5in), below: 12pt)[
-        #set par(leading: single-leading, spacing: 12pt)
-        #with-footnotes(c.slice(2), notes)
-      ]
+      head(0pt, strong(emph(inl(c.slice(4)))))
     } else if c.starts-with("## ") {
-      block(sticky: true, width: 100%)[
-        #set par(hanging-indent: 0.5in)
-        #strong(c.slice(3))
-      ]
+      head(0pt, par(hanging-indent: para-indent, strong(inl(c.slice(3)))))
     } else if c.starts-with("# ") {
-      block(sticky: true, width: 100%)[#v(6pt) #align(center, strong(c.slice(2)))]
-    } else if i == last {
-      // the last paragraph stays whole and on the same page as the signature block
-      block(sticky: true, breakable: false, width: 100%)[#h(para-indent) #with-footnotes(c, notes)]
-      parbreak()
+      head(head-above, align(center, strong(inl(c.slice(2)))))
+    } else if c.starts-with("> ") {
+      block(width: 100%, above: cap-gap, below: cap-gap, {
+        set text(..edges(pitch-single))
+        set par(first-line-indent: 0pt)
+        pad(x: para-indent, par(with-footnotes(c.slice(2), notes)))
+      })
     } else {
-      [#h(para-indent) #with-footnotes(c, notes)]
-      parbreak()
+      block(width: 100%, above: 0pt, below: 0pt, sticky: i == last, breakable: i != last, par(with-footnotes(c, notes)))
     }
   }
 }
@@ -139,48 +130,47 @@
 // Document
 // ---------------------------------------------------------------------------
 #let nhb-motion-brief(meta, src) = {
+  // The page number centered at the foot, in a single-spaced line box (where Word's footer sets it).
   set page(
     paper: "us-letter",
     margin: page-margin,
-    numbering: "1",
-    footer: context align(center, counter(page).display()),
+    footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: body-leading, justify: false)
-  set footnote.entry(separator: line(length: 1.5in, stroke: 0.5pt))
-  show footnote.entry: set text(size: 10pt)
-  show footnote.entry: set par(leading: single-leading)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch (double-spaced).
+  show: xengine.with(pitch: pitch-double)
+  // A doubled section sign stays with its number ("§§ 329"), as the Word filter binds it (xengine binds a single one).
+  show regex("[§¶]{2,} \\S+"): it => box(it)
+  // Footnotes at 10 pt, single-spaced, the mark and a space before the note (Word's Footnote Text).
+  set footnote.entry(gap: note-gap, clearance: 12.6pt, indent: 0pt, separator: line(length: 1.5in, stroke: rule))
+  show footnote.entry: it => {
+    set text(size: note-size, ..edges(pitch-note))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    [#super(num)#h(0.25em)#note.body]
+  }
 
   let notes = (:)
   for m in src.matches(regex("(?m)^\\[\\^([0-9]+)\\]: (.*)$")) {
     notes.insert(m.captures.at(0), m.captures.at(1))
   }
 
-  caption(meta)
+  // court title, centered bold, one line per entry; the caption; the title
+  for l in meta.court { line-block(align(center, strong(inl(l)))) }
+  bankruptcy-caption(meta)
+  block(width: 100%, above: 18pt, below: 12pt, line-block(align(center, strong(inl(meta.title)))))
   body(src, notes)
   let s = meta.signature
-  signature-block(
-    meta.at("date_label", default: "Date:"),
-    meta.date,
-    s.intro,
-    s.signer,
-    s.lines,
-  )
+  signature-block(meta.at("date_label", default: "Date:"), meta.date, s.intro, s.signer, s.lines)
+  // Certificate of service (LBR 7103): its heading kept with its text, the text at the body pitch, its own signature.
   let c = meta.at("certificate", default: none)
   if c != none {
-    v(24pt)
-    block(sticky: true, width: 100%)[#align(center, strong(c.title))]
-    v(6pt)
-    for p in c.paragraphs {
-      [#h(para-indent) #inl(p)]
-      parbreak()
-    }
-    signature-block(
-      c.at("date_label", default: "Date:"),
-      c.date,
-      (),
-      c.signer,
-      c.lines,
-    )
+    block(sticky: true, width: 100%, above: 2 * cap-gap, below: head-above, line-block(align(center, strong(inl(c.title)))))
+    for p in c.paragraphs { block(width: 100%, above: 0pt, below: 0pt, par(inl(p))) }
+    signature-block(c.at("date_label", default: "Date:"), c.date, (), c.signer, c.lines)
   }
 }
