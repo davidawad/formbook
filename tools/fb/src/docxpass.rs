@@ -16,6 +16,9 @@
 //!   * a reproducible archive (docxzip.rs);
 //!   * the LibreOffice PDF, and the page of every needle in it.
 //!
+//! Every pass also gets `$FORMBOOK_META`: the sample's YAML frontmatter as JSON (`pandoc.json.decode`), the values as
+//! written, where pandoc's own metadata reads each string as markdown.
+//!
 //! The passes go on until the pages stop changing (a page list longer than its placeholder can move text).
 //! Word may paginate slightly differently from LibreOffice (docs/DOCX.md).
 use crate::proc::capture;
@@ -49,7 +52,7 @@ fn run(cmd: &mut Command, what: &str) -> Res<()> {
     Err(fail(1, format!("fb render: {what} failed")))
 }
 
-/// One pandoc pass: `args` are the reference document and filter arguments.
+/// One pandoc pass: `args` are the reader (`--from=..`), reference document and filter arguments.
 fn pandoc(
     court: &Path,
     args: &[String],
@@ -64,8 +67,9 @@ fn pandoc(
             .env("FORMBOOK_NEEDLES", work.join("needles.tsv"))
             .env("FORMBOOK_FINAL", work.join("final.xml"))
             .env("FORMBOOK_FOOTERS", work.join("footers.tsv"))
+            .env("FORMBOOK_META", work.join("meta.json"))
             .env("FORMBOOK_PAGES", pages)
-            .args(["--from", "markdown+smart", "--to", "docx"])
+            .args(["--to", "docx"])
             .args(args)
             .arg(sample)
             .arg("-o")
@@ -154,6 +158,30 @@ fn finish(docx: &Path, work: &Path) -> Res<()> {
     crate::docxzip::pack(&x, docx)
 }
 
+/// The sample's YAML frontmatter as JSON, for `$FORMBOOK_META`: the values as written (pandoc's metadata reads
+/// every string as markdown); `{}` for a sample without one.
+fn write_meta(sample: &Path, work: &Path) -> Res<()> {
+    let text = read(sample)?;
+    let json = match crate::lint::metadata::frontmatter(&text) {
+        Err(_) => "{}".to_string(),
+        Ok(yaml) => {
+            let v: serde_yaml::Value = serde_yaml::from_str(yaml).map_err(|e| {
+                fail(
+                    1,
+                    format!("fb render: {}: frontmatter: {e}", sample.display()),
+                )
+            })?;
+            serde_json::to_string(&v).map_err(|e| {
+                fail(
+                    1,
+                    format!("fb render: {}: frontmatter: {e}", sample.display()),
+                )
+            })?
+        }
+    };
+    write(&work.join("meta.json"), &json)
+}
+
 /// The pages file of the LibreOffice PDF of `docx`.
 fn pages_of(docx: &Path, n: usize, work: &Path) -> Res<String> {
     let pdf = work.join(format!("pages{n}.pdf"));
@@ -167,8 +195,9 @@ fn pages_of(docx: &Path, n: usize, work: &Path) -> Res<String> {
 }
 
 /// Build `sample` into `out` (a .docx): one pass for a filter without needles, otherwise passes until the pages
-/// settle. `args` are the `--reference-doc` and `--lua-filter` arguments; `work` is scratch space.
+/// settle. `args` are the `--from`, `--reference-doc` and `--lua-filter` arguments; `work` is scratch space.
 pub fn render(court: &Path, args: &[String], sample: &str, out: &Path, work: &Path) -> Res<()> {
+    write_meta(&court.join(sample), work)?;
     let pass = |n: usize| work.join(format!("pass{n}.docx"));
     pandoc(court, args, sample, "", work, &pass(1))?;
     if !work.join("needles.tsv").is_file() {

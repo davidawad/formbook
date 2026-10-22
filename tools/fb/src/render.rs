@@ -255,8 +255,8 @@ mod tests {
             return skip("no repo root");
         };
         let court = root.join("courts/supreme-court-of-the-united-states/cert-petition");
-        if !court.join("docx/reference.docx").is_file() {
-            return skip("no cert-petition docx/reference.docx");
+        if !court.join("docx/reference.xml").is_file() {
+            return skip("no cert-petition docx/reference.xml");
         }
         for tool in ["pandoc", "zip", "xmllint", "pdftotext"] {
             if !crate::proc::have(tool) {

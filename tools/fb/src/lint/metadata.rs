@@ -4,7 +4,7 @@ use serde_yaml::Value;
 use std::path::Path;
 use std::process::ExitCode;
 
-fn frontmatter(text: &str) -> Result<&str, String> {
+pub(crate) fn frontmatter(text: &str) -> Result<&str, String> {
     let mut lines = text.split_inclusive('\n');
     if lines.next().map(str::trim_end) != Some("---") {
         return Err("file must start with YAML frontmatter delimited by ---".into());

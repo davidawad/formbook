@@ -304,6 +304,7 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
         let mut args = vec![
             "--to".to_string(),
             "docx".into(),
+            format!("--from={}", crate::docxref::pandoc_from(&d)?),
             format!("--reference-doc={}", d.join("reference.docx").display()),
         ];
         args.extend(lua_filters(&d));

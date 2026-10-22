@@ -1,43 +1,59 @@
 //! The reference document of `fb render --engine docx`, built from `docx/reference.xml` (were the per-court
-//! `docx/build-reference.sh` and `make-reference.sh` shell builders).
+//! `docx/build-reference.sh` and `make-reference.sh` shell builders, and a committed binary `reference.docx`).
 //!
 //! `reference.xml` holds only the WordprocessingML a court sets; fb starts from pandoc's own reference document
-//! (`pandoc --print-default-data-file reference.docx`) and applies it:
+//! (`pandoc --print-default-data-file reference.docx`), or from the cross-engine recipe (docxxengine.rs), and
+//! applies it:
 //!
 //! ```text
-//! <reference xmlns:w=".." xmlns:r=".." styles="merge|replace" theme-font="Times New Roman" strip-theme-fonts="true">
-//!   <w:docDefaults>..</w:docDefaults>      replaces pandoc's document defaults (optional)
-//!   <w:style w:styleId="X">..</w:style>    merge: replaces pandoc's style X in place, or is added at the end;
+//! <reference xmlns:w=".." xmlns:r=".." base="pandoc|xengine" styles="merge|replace" theme-font="{font}"
+//!            strip-theme-fonts="true" pandoc-from="markdown+smart" [recipe attributes, docxxengine.rs]>
+//!   <w:styles ..>..</w:styles>             the whole styles part, verbatim (alone: no other styles, no xengine base)
+//!   <w:docDefaults>..</w:docDefaults>      replaces the document defaults (optional)
+//!   <w:style w:styleId="X">..</w:style>    merge: replaces style X in place, or is added at the end;
 //!                                          replace: the styles part holds only these (and the defaults and
 //!                                          a <w:latentStyles>, when given)
 //!   <footer id="rIdX"><w:p>..</w:p></footer>  a footer part (word/footerN.xml) under relationship id rIdX
 //!   <header id="rIdY"><w:p>..</w:p></header>  a header part (word/headerN.xml), the same way
+//!   <part name="word/settings.xml"><w:settings ..>..</w:settings></part>  a part of pandoc's reference, replaced
 //!   <w:sectPr>..</w:sectPr>                the document's last section properties (optional)
 //! </reference>
 //! ```
 //!
-//! `theme-font` sets the theme's major and minor latin faces; `strip-theme-fonts` drops the `w:*Theme` font
-//! attributes from the styles part, so every style names its font explicitly. The parts are packed with
-//! docxzip::pack (reproducible archive).
+//! `{font}` anywhere in the file is the body face of the folder's typst template (typstface.rs): the docx names the
+//! face the typst template sets, from one source. `theme-font` sets the theme's major and minor latin faces;
+//! `strip-theme-fonts` drops the `w:*Theme` font attributes from the styles part, so every style names its font
+//! explicitly. `pandoc-from` is the reader of every pandoc pass (default `markdown+smart`). The parts are packed
+//! with docxzip::pack (reproducible archive). `fb docx-reference --extract` writes the file from a reference.docx
+//! (docxextract.rs).
 use crate::proc::capture;
 use crate::{fail, Res};
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-const STYLES_NS: &str = r#"xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships""#;
+pub(crate) const STYLES_NS: &str = r#"xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships""#;
+const DECL: &str = r#"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>"#;
+/// What `{font}` stands for in a reference.xml.
+pub(crate) const FONT: &str = "{font}";
 
 /// A parsed `reference.xml`.
 #[derive(Debug, Default, PartialEq)]
-struct Spec {
-    replace_styles: bool,
-    theme_font: Option<String>,
-    strip_theme_fonts: bool,
-    defaults: Option<String>,
-    latent: Option<String>,
-    styles: Vec<String>,
-    footers: Vec<(String, String)>,
-    headers: Vec<(String, String)>,
-    sect: Option<String>,
+pub(crate) struct Spec {
+    pub(crate) xengine: Option<crate::docxxengine::Recipe>,
+    pub(crate) replace_styles: bool,
+    pub(crate) theme_font: Option<String>,
+    pub(crate) strip_theme_fonts: bool,
+    pub(crate) pandoc_from: Option<String>,
+    /// namespace declarations (and mc:Ignorable) of `<reference>` beyond w and r, for the styles part
+    pub(crate) ns: String,
+    pub(crate) styles_part: Option<String>,
+    pub(crate) defaults: Option<String>,
+    pub(crate) latent: Option<String>,
+    pub(crate) styles: Vec<String>,
+    pub(crate) footers: Vec<(String, String)>,
+    pub(crate) headers: Vec<(String, String)>,
+    pub(crate) parts: Vec<(String, String)>,
+    pub(crate) sect: Option<String>,
 }
 
 fn bad(what: &str) -> crate::Fail {
@@ -45,7 +61,7 @@ fn bad(what: &str) -> crate::Fail {
 }
 
 /// The value of attribute `name` in the start tag `tag`.
-fn attr(tag: &str, name: &str) -> Option<String> {
+pub(crate) fn attr(tag: &str, name: &str) -> Option<String> {
     let key = format!(" {name}=\"");
     let at = tag.find(&key)? + key.len();
     let end = tag[at..].find('"')?;
@@ -54,7 +70,7 @@ fn attr(tag: &str, name: &str) -> Option<String> {
 
 /// Every `<name ...>...</name>` or `<name .../>` element of `text` (not nested in itself), in order; `<name`
 /// must be followed by a space, `/` or `>` so `w:style` does not match `w:styles`.
-fn elements<'a>(text: &'a str, name: &str) -> Vec<&'a str> {
+pub(crate) fn elements<'a>(text: &'a str, name: &str) -> Vec<&'a str> {
     let open = format!("<{name}");
     let close = format!("</{name}>");
     let mut out = vec![];
@@ -83,13 +99,28 @@ fn elements<'a>(text: &'a str, name: &str) -> Vec<&'a str> {
 }
 
 /// The content of an element (between its start tag and its end tag).
-fn inner(el: &str) -> &str {
+pub(crate) fn inner(el: &str) -> &str {
     let start = el.find('>').map_or(0, |i| i + 1);
     let end = el.rfind("</").unwrap_or(el.len());
     &el[start..end.max(start)]
 }
 
-fn parse(text: &str) -> Res<Spec> {
+/// The start tag of an element.
+fn start_tag(el: &str) -> &str {
+    &el[..el.find('>').unwrap_or(0)]
+}
+
+/// `text` with `{font}` replaced by `face` (an error if it is needed and the typst template names none).
+pub(crate) fn with_font(text: &str, face: Option<&str>) -> Res<String> {
+    if !text.contains(FONT) {
+        return Ok(text.to_string());
+    }
+    face.map(|f| text.replace(FONT, f))
+        .ok_or_else(|| bad("names {font}, but the typst template sets no face (typstface.rs)"))
+}
+
+pub(crate) fn parse(text: &str, face: Option<&str>) -> Res<Spec> {
+    let text = &with_font(text, face)?;
     well_formed(text)?;
     let root = text
         .find("<reference")
@@ -101,20 +132,44 @@ fn parse(text: &str) -> Res<Spec> {
         Some("replace") => true,
         Some(v) => return Err(bad(&format!("styles=\"{v}\" (merge or replace)"))),
     };
+    let xengine = match attr(root, "base").as_deref() {
+        None | Some("pandoc") => None,
+        Some("xengine") => {
+            let f = face.ok_or_else(|| {
+                bad("base=\"xengine\" takes the typst template's face, and it sets none")
+            })?;
+            Some(crate::docxxengine::recipe(|k| attr(root, k), f).map_err(|e| bad(&e))?)
+        }
+        Some(v) => return Err(bad(&format!("base=\"{v}\" (pandoc or xengine)"))),
+    };
     let mut rest = text.to_string();
     let (mut footers, mut headers) = (vec![], vec![]);
     for (kind, list) in [("footer", &mut footers), ("header", &mut headers)] {
         for f in elements(text, kind) {
-            let id = attr(&f[..f.find('>').unwrap_or(0)], "id")
-                .ok_or_else(|| bad(&format!("a <{kind}> has no id")))?;
+            let id =
+                attr(start_tag(f), "id").ok_or_else(|| bad(&format!("a <{kind}> has no id")))?;
             list.push((id, inner(f).trim().to_string()));
             rest = rest.replacen(f, "", 1);
         }
     }
-    Ok(Spec {
+    let mut parts = vec![];
+    for p in elements(text, "part") {
+        let name = attr(start_tag(p), "name").ok_or_else(|| bad("a <part> has no name"))?;
+        parts.push((name, inner(p).trim().to_string()));
+        rest = rest.replacen(p, "", 1);
+    }
+    let styles_part = elements(&rest, "w:styles").first().map(|s| s.to_string());
+    if let Some(sp) = &styles_part {
+        rest = rest.replacen(sp.as_str(), "", 1);
+    }
+    let spec = Spec {
+        xengine,
         replace_styles,
         theme_font: attr(root, "theme-font"),
         strip_theme_fonts: flag("strip-theme-fonts"),
+        pandoc_from: attr(root, "pandoc-from"),
+        ns: extra_ns(root),
+        styles_part,
         defaults: elements(&rest, "w:docDefaults")
             .first()
             .map(|s| s.to_string()),
@@ -127,11 +182,36 @@ fn parse(text: &str) -> Res<Spec> {
             .collect(),
         footers,
         headers,
+        parts,
         sect: elements(&rest, "w:sectPr").last().map(|s| s.to_string()),
-    })
+    };
+    let piecewise = spec.defaults.is_some() || spec.latent.is_some() || !spec.styles.is_empty();
+    if spec.styles_part.is_some() && (piecewise || spec.xengine.is_some()) {
+        return Err(bad(
+            "a whole <w:styles> part takes no other styles and no xengine base",
+        ));
+    }
+    Ok(spec)
 }
 
-fn well_formed(text: &str) -> Res<()> {
+/// The `xmlns:x` declarations of a start tag other than w and r, and its `mc:Ignorable`, in order, each followed by a
+/// space (the styles part gets them: a style may use `w14:` elements).
+fn extra_ns(tag: &str) -> String {
+    let mut out = String::new();
+    for (i, _) in tag.match_indices(' ') {
+        let a = &tag[i + 1..];
+        let Some(eq) = a.find("=\"") else { continue };
+        let name = &a[..eq];
+        let keep = (name.starts_with("xmlns:") && name != "xmlns:w" && name != "xmlns:r")
+            || name == "mc:Ignorable";
+        if let (true, Some(v)) = (keep, attr(tag, name)) {
+            out.push_str(&format!("{name}=\"{v}\" "));
+        }
+    }
+    out
+}
+
+pub(crate) fn well_formed(text: &str) -> Res<()> {
     let mut r = quick_xml::Reader::from_str(text);
     loop {
         match r.read_event() {
@@ -142,8 +222,11 @@ fn well_formed(text: &str) -> Res<()> {
     }
 }
 
-/// The styles part of pandoc's reference with the spec applied.
+/// The styles part of the base reference with the spec applied.
 fn styles(base: &str, s: &Spec) -> Res<String> {
+    if let Some(part) = &s.styles_part {
+        return Ok(format!("{DECL}\n{part}\n"));
+    }
     let mut out = if s.replace_styles {
         let parts: Vec<&str> = [s.defaults.as_deref(), s.latent.as_deref()]
             .into_iter()
@@ -151,19 +234,23 @@ fn styles(base: &str, s: &Spec) -> Res<String> {
             .chain(s.styles.iter().map(String::as_str))
             .collect();
         format!(
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<w:styles {STYLES_NS}>\n{}\n</w:styles>\n",
+            "{DECL}\n<w:styles {}{STYLES_NS}>\n{}\n</w:styles>\n",
+            s.ns,
             parts.join("\n")
         )
     } else {
         let mut out = base.to_string();
+        if !s.ns.is_empty() {
+            out = out.replacen("<w:styles ", &format!("<w:styles {}", s.ns), 1);
+        }
         let mut added = vec![];
         for st in &s.styles {
-            let id = attr(&st[..st.find('>').unwrap_or(0)], "w:styleId")
+            let id = attr(start_tag(st), "w:styleId")
                 .ok_or_else(|| bad("a <w:style> has no w:styleId"))?;
             let key = format!("w:styleId=\"{id}\"");
             if let Some(old) = elements(&out, "w:style")
                 .into_iter()
-                .find(|e| e[..e.find('>').unwrap_or(0)].contains(&key))
+                .find(|e| start_tag(e).contains(&key))
             {
                 out = out.replacen(old, st, 1);
             } else {
@@ -205,7 +292,7 @@ fn strip_attr(text: &str, name: &str) -> String {
 }
 
 /// The theme with its major and minor latin faces set to `font`.
-fn theme(base: &str, font: &str) -> String {
+pub(crate) fn theme(base: &str, font: &str) -> String {
     let mut out = base.to_string();
     for group in ["<a:majorFont>", "<a:minorFont>"] {
         let Some(g) = out.find(group) else { continue };
@@ -221,17 +308,16 @@ fn theme(base: &str, font: &str) -> String {
     out
 }
 
-fn read(p: &Path) -> Res<String> {
+pub(crate) fn read(p: &Path) -> Res<String> {
     std::fs::read_to_string(p).map_err(|e| fail(2, format!("fb render: {}: {e}", p.display())))
 }
 
-fn write(p: &Path, text: &str) -> Res<()> {
+pub(crate) fn write(p: &Path, text: &str) -> Res<()> {
     std::fs::write(p, text).map_err(|e| fail(2, format!("fb render: {}: {e}", p.display())))
 }
 
-/// Build the reference document of `spec_path` into `work/reference.docx`.
-pub fn build(spec_path: &Path, work: &Path) -> Res<PathBuf> {
-    let spec = parse(&read(spec_path)?)?;
+/// pandoc's own reference document, unpacked into `dir`.
+pub(crate) fn pandoc_reference(work: &Path, dir: &Path) -> Res<()> {
     let base = work.join("pandoc-reference.docx");
     let o = capture(Command::new("pandoc").args(["--print-default-data-file", "reference.docx"]))?;
     if !o.status.success() {
@@ -242,23 +328,64 @@ pub fn build(spec_path: &Path, work: &Path) -> Res<PathBuf> {
     }
     std::fs::write(&base, &o.stdout)
         .map_err(|e| fail(2, format!("fb render: {}: {e}", base.display())))?;
+    crate::docxzip::unpack(&base, dir)
+}
+
+/// The doc folder a `docx/reference.xml` belongs to (the parent of its `docx/`).
+fn doc_dir(spec_path: &Path) -> Option<&Path> {
+    spec_path.parent()?.parent()
+}
+
+/// Build the reference document of `spec_path` into `work/reference.docx`.
+pub fn build(spec_path: &Path, work: &Path) -> Res<PathBuf> {
+    let face = doc_dir(spec_path).and_then(crate::typstface::face);
+    let spec = parse(&read(spec_path)?, face.as_deref())?;
     let x = work.join("reference-parts");
-    crate::docxzip::unpack(&base, &x)?;
+    pandoc_reference(work, &x)?;
     let sp = x.join("word/styles.xml");
-    write(&sp, &styles(&read(&sp)?, &spec)?)?;
+    let dp = x.join("word/document.xml");
+    let mut footers = spec.footers.clone();
+    if let Some(r) = &spec.xengine {
+        write(
+            &sp,
+            &crate::docxxengine::styles(&read(&sp)?, r).map_err(|e| bad(&e))?,
+        )?;
+        write(
+            &dp,
+            &crate::docxxengine::document(&read(&dp)?, r).map_err(|e| bad(&e))?,
+        )?;
+        footers.insert(0, ("rIdFooter1".into(), crate::docxxengine::FOOTER.into()));
+    }
+    // a spec without styles of its own leaves the base's styles part as it is (byte for byte)
+    let own_styles = spec.styles_part.is_some()
+        || spec.replace_styles
+        || spec.strip_theme_fonts
+        || !spec.ns.is_empty();
+    if own_styles || spec.defaults.is_some() || spec.latent.is_some() || !spec.styles.is_empty() {
+        write(&sp, &styles(&read(&sp)?, &spec)?)?;
+    }
     if let Some(font) = &spec.theme_font {
         let tp = x.join("word/theme/theme1.xml");
         write(&tp, &theme(&read(&tp)?, font))?;
     }
+    for (name, content) in &spec.parts {
+        let p = x.join(name);
+        if name.contains("..") || !p.is_file() {
+            return Err(bad(&format!(
+                "<part name=\"{name}\">: pandoc's reference has no such part"
+            )));
+        }
+        write(&p, &format!("{DECL}\n{content}\n"))?;
+    }
     let mut rels = String::new();
     let mut types = String::new();
-    for (kind, list) in [("footer", &spec.footers), ("header", &spec.headers)] {
+    for (kind, list) in [("footer", &footers), ("header", &spec.headers)] {
         let root = if kind == "footer" { "w:ftr" } else { "w:hdr" };
         for (n, (id, body)) in list.iter().enumerate() {
             let file = format!("{kind}{}.xml", n + 1);
             write(
                 &x.join("word").join(&file),
-                &format!("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<{root} {STYLES_NS}>{body}</{root}>\n"),
+                &format!("{DECL}\n<{root} {STYLES_NS}>{body}</{root}>\n"),
             )?;
             rels.push_str(&format!(r#"<Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/{kind}" Id="{id}" Target="{file}" />"#));
             types.push_str(&format!(r#"<Override PartName="/word/{file}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml" />"#));
@@ -275,7 +402,6 @@ pub fn build(spec_path: &Path, work: &Path) -> Res<PathBuf> {
         &read(&cp)?.replacen("</Types>", &format!("{types}</Types>"), 1),
     )?;
     if let Some(sect) = &spec.sect {
-        let dp = x.join("word/document.xml");
         let doc = crate::docxpass::replace_final_sect(&read(&dp)?, sect)
             .ok_or_else(|| bad("pandoc's reference document has no final sectPr"))?;
         write(&dp, &doc)?;
@@ -293,10 +419,17 @@ pub fn build(spec_path: &Path, work: &Path) -> Res<PathBuf> {
 }
 
 /// `fb docx-reference <docx-dir> <out.docx>`: write the reference document a docx/reference.xml describes (to open
-/// the styles in Word; `fb render` builds its own).
+/// the styles in Word; `fb render` builds its own). `fb docx-reference --extract <docx-dir>`: write
+/// docx/reference.xml from docx/reference.docx (docxextract.rs).
 pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
+    if args.first().map(String::as_str) == Some("--extract") {
+        return crate::docxextract::main(&args[1..]);
+    }
     let [dir, out] = args else {
-        return Err(fail(2, "usage: fb docx-reference <docx-dir> <out.docx>"));
+        return Err(fail(
+            2,
+            "usage: fb docx-reference <docx-dir> <out.docx> | fb docx-reference --extract <docx-dir>",
+        ));
     };
     std::env::set_var("SOURCE_DATE_EPOCH", crate::render::REPRO_EPOCH);
     let work = crate::proc::TempDir::new("docx-reference")?;
@@ -304,6 +437,20 @@ pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
     std::fs::copy(&built, out).map_err(|e| fail(2, format!("fb docx-reference: {out}: {e}")))?;
     println!("{out}");
     Ok(std::process::ExitCode::SUCCESS)
+}
+
+/// The reader of every pandoc pass for the court's docx folder `d` (`pandoc-from`, default `markdown+smart`).
+pub fn pandoc_from(d: &Path) -> Res<String> {
+    let spec = d.join("reference.xml");
+    if !spec.is_file() {
+        return Ok("markdown+smart".into());
+    }
+    let text = read(&spec)?;
+    let root = text
+        .find("<reference")
+        .and_then(|i| text[i..].find('>').map(|j| &text[i..i + j]))
+        .ok_or_else(|| bad("no <reference> element"))?;
+    Ok(attr(root, "pandoc-from").unwrap_or_else(|| "markdown+smart".into()))
 }
 
 /// The court's docx folder as the engine runs it: `d` itself, or, when `d` has a `reference.xml`, a copy of it
@@ -345,97 +492,5 @@ fn copy_tree(from: &Path, to: &Path) -> Res<()> {
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    const SPEC: &str = r#"<?xml version="1.0"?>
-<reference xmlns:w="w" xmlns:r="r" theme-font="Times New Roman" strip-theme-fonts="true">
-<w:docDefaults><w:rPrDefault/></w:docDefaults>
-<w:style w:type="paragraph" w:styleId="Normal"><w:name w:val="Normal"/></w:style>
-<w:style w:type="paragraph" w:styleId="New"><w:name w:val="New"/></w:style>
-<footer id="rIdF"><w:p><w:r><w:t>1</w:t></w:r></w:p></footer>
-<header id="rIdH"><w:p/></header>
-<w:sectPr><w:footerReference r:id="rIdF"/></w:sectPr>
-</reference>
-"#;
-
-    #[test]
-    fn parses_every_piece() {
-        let s = parse(SPEC).unwrap();
-        assert!(!s.replace_styles && s.strip_theme_fonts);
-        assert_eq!(s.theme_font.as_deref(), Some("Times New Roman"));
-        assert_eq!(
-            s.defaults.as_deref(),
-            Some("<w:docDefaults><w:rPrDefault/></w:docDefaults>")
-        );
-        assert_eq!(s.styles.len(), 2);
-        assert_eq!(s.headers, vec![("rIdH".to_string(), "<w:p/>".to_string())]);
-        assert_eq!(
-            s.footers,
-            vec![(
-                "rIdF".to_string(),
-                "<w:p><w:r><w:t>1</w:t></w:r></w:p>".to_string()
-            )]
-        );
-        assert_eq!(
-            s.sect.as_deref(),
-            Some(r#"<w:sectPr><w:footerReference r:id="rIdF"/></w:sectPr>"#)
-        );
-        assert!(parse("<reference styles=\"x\"/>").is_err());
-        assert!(parse("<reference><w:style></reference>").is_err());
-    }
-
-    #[test]
-    fn merge_replaces_same_ids_and_appends_the_rest() {
-        let base = "<w:styles>\n<w:docDefaults><old/></w:docDefaults>\n<w:style w:styleId=\"Normal\"><w:rFonts w:asciiTheme=\"minorHAnsi\" w:ascii=\"A\"/></w:style>\n<w:style w:styleId=\"Keep\"><w:rFonts w:hAnsiTheme=\"x\"/></w:style>\n</w:styles>";
-        let got = styles(base, &parse(SPEC).unwrap()).unwrap();
-        assert!(!got.contains("<old/>") && got.contains("<w:rPrDefault/>"));
-        assert_eq!(got.matches("w:styleId=\"Normal\"").count(), 1);
-        assert!(got.contains("<w:name w:val=\"Normal\"/>") && got.contains("w:styleId=\"New\""));
-        assert!(got.contains("w:styleId=\"Keep\"><w:rFonts/>"));
-        assert!(got.find("w:styleId=\"New\"") < got.find("</w:styles>"));
-        assert!(got.find("<w:name w:val=\"Normal\"/>") < got.find("w:styleId=\"Keep\""));
-    }
-
-    #[test]
-    fn replace_keeps_only_the_spec() {
-        let spec = SPEC.replace("<reference ", "<reference styles=\"replace\" ");
-        let got = styles(
-            "<w:styles><w:style w:styleId=\"Old\"/></w:styles>",
-            &parse(&spec).unwrap(),
-        )
-        .unwrap();
-        assert!(
-            !got.contains("Old")
-                && got.contains("w:styleId=\"New\"")
-                && got.contains("<w:rPrDefault/>")
-        );
-    }
-
-    #[test]
-    fn theme_sets_major_and_minor_latin() {
-        let t = "<a:majorFont><a:latin typeface=\"Aptos Display\"/></a:majorFont><a:minorFont><a:latin typeface=\"Aptos\"/></a:minorFont>";
-        assert_eq!(
-            theme(t, "Times New Roman"),
-            "<a:majorFont><a:latin typeface=\"Times New Roman\"/></a:majorFont><a:minorFont><a:latin typeface=\"Times New Roman\"/></a:minorFont>"
-        );
-    }
-
-    #[test]
-    fn elements_do_not_confuse_style_and_styles() {
-        assert_eq!(
-            elements(
-                "<w:latentStyles w:count=\"1\"/><w:style a=\"2\"/>",
-                "w:latentStyles"
-            ),
-            ["<w:latentStyles w:count=\"1\"/>"]
-        );
-        assert_eq!(
-            elements(
-                "<w:styles><w:style a=\"1\">x</w:style></w:styles>",
-                "w:style"
-            ),
-            ["<w:style a=\"1\">x</w:style>"]
-        );
-    }
-}
+#[path = "docxref_tests.rs"]
+mod tests;

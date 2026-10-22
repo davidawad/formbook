@@ -1,5 +1,6 @@
 //! `fb lint <doc-dir> [--engine typst|latex|all]` checks a doc dir; `fb lint metadata <input.md>`
-//! validates brief frontmatter; `fb lint fonts` checks audited faces globally; `fb lint paths`
+//! validates brief frontmatter; `fb lint fonts` checks audited faces globally (and reports every docx whose face is
+//! not its typst template's, docxfonts.rs; `--docx-strict` fails on one); `fb lint paths`
 //! checks the usage/ layout under courts/ (see paths.rs); `fb lint rules` checks the format of every
 //! courts/**/rules.md (see rules.rs); `fb lint pipefail`
 //! rejects a pipe into an early-exiting grep in shell under tools/ (see pipefail.rs); `fb lint docx` checks that
@@ -13,9 +14,10 @@
 //! Output: `LINT <kind> <file>:<line>: <detail>` per finding, then `RESULT: LINT PASS` or
 //! `RESULT: LINT FAIL (<n> findings)`; exit 1 on findings.
 mod docx;
+mod docxfonts;
 pub(crate) mod fonts;
 mod input;
-mod metadata;
+pub(crate) mod metadata;
 mod ngram;
 pub(crate) mod paths;
 mod pipefail;
@@ -29,7 +31,7 @@ use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
 const USAGE: &str =
-    "usage: fb lint <doc-dir> [--engine typst|latex|all] | fb lint metadata <input.md> | fb lint fonts|paths|pipefail|rules | fb lint docx [file.docx ...]";
+    "usage: fb lint <doc-dir> [--engine typst|latex|all] | fb lint metadata <input.md> | fb lint fonts [--docx-strict] | fb lint paths|pipefail|rules | fb lint docx [file.docx ...]";
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Finding {
@@ -135,7 +137,7 @@ fn rel(dir: &Path, p: &Path) -> String {
 
 pub fn main(args: &[String]) -> Res<ExitCode> {
     match args {
-        [a] if a == "fonts" => return fonts::main(),
+        [a, rest @ ..] if a == "fonts" => return fonts::main(rest),
         [a] if a == "paths" => return paths::main(),
         [a] if a == "pipefail" => return pipefail::main(),
         [a] if a == "rules" => return rules::main(),

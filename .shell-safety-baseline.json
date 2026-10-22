@@ -1,7 +1,6 @@
 {
   "array_expansions": {},
   "branches": {
-    "courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief/docx/render.sh": 76,
     "courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief/docx/render.sh": 77,
     "courts/eighth-circuit/court-of-appeals/answering-brief/docx/build-reference.sh": 7,
     "courts/eighth-circuit/court-of-appeals/answering-brief/docx/render.sh": 21,
@@ -40,7 +39,6 @@
     "courts/fifth-circuit/court-of-appeals/opening-brief/docx/render.sh": 22,
     "courts/fifth-circuit/court-of-appeals/reply-brief/docx/make-reference.sh": 6,
     "courts/fifth-circuit/court-of-appeals/reply-brief/docx/render.sh": 22,
-    "courts/fifth-circuit/texas/state/court-of-criminal-appeals/petition-for-discretionary-review/docx/build-reference.sh": 12,
     "courts/first-circuit/puerto-rico/federal/district/motion-brief/docx/make-reference.sh": 8,
     "courts/fourth-circuit/court-of-appeals/answering-brief/docx/build-reference.sh": 7,
     "courts/fourth-circuit/court-of-appeals/answering-brief/docx/render.sh": 25,
@@ -50,7 +48,6 @@
     "courts/fourth-circuit/court-of-appeals/reply-brief/docx/render.sh": 25,
     "courts/sixth-circuit/court-of-appeals/reply-brief/docx/make-reference.sh": 7,
     "courts/supreme-court-of-the-united-states/amicus-brief/docx/build-reference.sh": 1,
-    "courts/supreme-court-of-the-united-states/cert-petition/docx/build-reference.sh": 1,
     "courts/supreme-court-of-the-united-states/merits-brief/docx/build-reference.sh": 1,
     "courts/tenth-circuit/court-of-appeals/reply-brief/docx/build-reference.sh": 1,
     "tools/check/_lib/lib-helpers.sh": 97,

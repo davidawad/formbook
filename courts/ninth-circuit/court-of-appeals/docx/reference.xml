@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The CA9 brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the typst
+     template (CA9-FORM-004, Times New Roman) at 14 pt (size 28 half points); Body Text and List Item in 29.4 pt line
+     boxes (typst pitch-double, CA9-FORM-003) with a half-inch indent; quotations and footnotes in 17 pt boxes (typst
+     pitch-single); the heading styles in 19.95 pt boxes (ca9.lua sets every heading's own spacing; the styles give
+     the outline levels). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="588" single="340" indent="720" heading="399"/>

@@ -104,7 +104,7 @@ fn collect_typst(dir: &Path, out: &mut Vec<PathBuf>) -> std::io::Result<()> {
     Ok(())
 }
 
-fn template_files(doc_dir: &Path) -> std::io::Result<Vec<PathBuf>> {
+pub(crate) fn template_files(doc_dir: &Path) -> std::io::Result<Vec<PathBuf>> {
     let typst = doc_dir.join("typst");
     let main = typst.join("main.typ");
     let mut files = Vec::new();
@@ -196,19 +196,50 @@ pub fn check(root: &Path) -> Res<(usize, Vec<String>)> {
     Ok((entries.len(), findings))
 }
 
-pub fn main() -> Res<ExitCode> {
+pub fn main(args: &[String]) -> Res<ExitCode> {
+    let docx_strict = match args {
+        [] => false,
+        [a] if a == "--docx-strict" => true,
+        _ => return Err(fail(2, "usage: fb lint fonts [--docx-strict]")),
+    };
     let root = repo_root()?;
     let (checked, findings) = check(&root)?;
     for finding in &findings {
         println!("{finding}");
     }
-    if findings.is_empty() {
+    let docx_ok = docx_report(&root, docx_strict);
+    if findings.is_empty() && docx_ok {
         println!("RESULT: LINT FONTS PASS ({checked} templates)");
         Ok(ExitCode::SUCCESS)
     } else {
         println!("RESULT: LINT FONTS FAIL ({} findings)", findings.len());
         Ok(ExitCode::from(1))
     }
+}
+
+/// The docx rule (lint/docxfonts.rs): every folder whose docx names another face than its typst template; true
+/// unless `strict` and there is one.
+fn docx_report(root: &Path, strict: bool) -> bool {
+    let (seen, found) = super::docxfonts::check(root);
+    let word = if strict { "LINT" } else { "REPORT" };
+    for f in &found {
+        println!(
+            "{word} docx-font {}: docx names {}; typst sets {}",
+            f.docx.display(),
+            f.faces.join(", "),
+            f.typst.as_deref().unwrap_or("no face")
+        );
+    }
+    let mode = if strict {
+        ""
+    } else {
+        " (report only until fb-595.68 step 2; --docx-strict fails on them)"
+    };
+    println!(
+        "RESULT: DOCX FONTS {} of {seen} docx folders name a face other than their typst template's{mode}",
+        found.len()
+    );
+    !strict || found.is_empty()
 }
 
 #[cfg(test)]

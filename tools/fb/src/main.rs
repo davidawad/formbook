@@ -9,10 +9,12 @@ mod diff;
 mod diffselftest;
 mod doclig;
 mod docxdedupe;
+mod docxextract;
 mod docxopen;
 mod docxpages;
 mod docxpass;
 mod docxref;
+mod docxxengine;
 mod docxzip;
 mod engines;
 mod eval;
@@ -39,8 +41,10 @@ mod t1ids;
 mod texlive;
 mod track;
 mod tracker;
+mod typstface;
 mod unicode;
 mod worklist;
+mod xmlfmt;
 
 use std::process::ExitCode;
 

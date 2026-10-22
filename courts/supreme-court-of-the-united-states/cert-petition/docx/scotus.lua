@@ -1,5 +1,5 @@
 -- SCOTUS cert petition, docx engine (docs/DOCX.md; typst: scotus-cert-petition-cert-petition.typ). pandoc writes the
--- body (paragraphs, quotations, footnotes) with docx/reference.docx (docx/build-reference.sh: Schola 12 pt in 14 pt
+-- body (paragraphs, quotations, footnotes) with docx/reference.docx (fb render builds it from docx/reference.xml: Schola 12 pt in 14 pt
 -- lines, 10 pt notes in 12 pt lines); this filter writes what needs Word formatting:
 --   * the cover (Rule 34.1(a)-(g)), the headings, the tables of contents and authorities (Rule 34.2), the signature
 --     (Rule 34.3) and the certificate of compliance (Rule 33.1(h)), as paragraphs with explicit spacing and indents;
