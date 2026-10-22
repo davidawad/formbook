@@ -58,6 +58,7 @@ diff DIR:
 # repo-wide lints: audited font faces, usage/ path validity, rules.md format, no pipe into grep -q under pipefail,
 # every committed OUTPUT .docx opens (DEF-DOCX-OPEN; needs soffice)
 lint:
+    {{fb}} tracker --check
     {{fb}} lint fonts
     {{fb}} lint paths
     {{fb}} lint rules

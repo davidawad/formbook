@@ -79,18 +79,41 @@ pub fn write_all(root: &Path, manifest: &str, rows: &str, docrows: &str) -> Res<
     })?;
     let top = root.join("README.md");
     let s = read_text(&top)?;
-    let [a, b] = ["<!-- index:start -->", "<!-- index:end -->"].map(|m| s.find(m));
-    let (a, b) = a
-        .zip(b)
-        .ok_or_else(|| fail(1, "README.md: no <!-- index:start/end --> markers"))?;
-    let block = inputs.index_block().map_err(e1)?;
-    write(
-        &top,
-        &format!("{}<!-- index:start -->\n{block}\n{}", &s[..a], &s[b..]),
-    )?;
+    write(&top, &root_index(root, manifest, rows, docrows, &s)?)?;
     Ok(format!(
         "readmes written for {} leaves, {} folders",
         inputs.courts.len(),
         folders.len()
+    ))
+}
+
+/// The root README with its generated index block refreshed, without writing it.
+pub fn root_index(
+    root: &Path,
+    manifest: &str,
+    rows: &str,
+    docrows: &str,
+    current: &str,
+) -> Res<String> {
+    let idx = crate::manifest::read_json(&root.join("data/index.json"))?;
+    let empty = serde_json::Map::new();
+    let inputs = gen::Inputs {
+        courts: idx["courts"].as_object().unwrap_or(&empty),
+        legacy: idx["legacy_aliases"].as_object().unwrap_or(&empty),
+        unplaced: idx["unplaced"].as_array().map_or(&[][..], Vec::as_slice),
+        manual: gen::manual(manifest),
+        rows: gen::rows(rows),
+        docs: gen::docs(docrows),
+    };
+    let e1 = |e: String| fail(1, format!("fb readmes: {e}"));
+    let [a, b] = ["<!-- index:start -->", "<!-- index:end -->"].map(|m| current.find(m));
+    let (a, b) = a
+        .zip(b)
+        .ok_or_else(|| fail(1, "README.md: no <!-- index:start/end --> markers"))?;
+    let block = inputs.index_block().map_err(e1)?;
+    Ok(format!(
+        "{}<!-- index:start -->\n{block}\n{}",
+        &current[..a],
+        &current[b..]
     ))
 }

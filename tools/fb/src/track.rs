@@ -10,7 +10,39 @@ const DOCTYPE_INTRO: &str = "\nTypst per doc type (a doc type is complete with t
 pub fn main(args: &[String]) -> Res<ExitCode> {
     match args {
         [] => run(&crate::repo_root()?),
-        _ => Err(fail(2, "usage: fb tracker")),
+        [arg] if arg == "--check" => check(&crate::repo_root()?),
+        _ => Err(fail(2, "usage: fb tracker [--check]")),
+    }
+}
+
+/// Recompute the two committed root tracker files without writing any generated files.
+fn check(root: &Path) -> Res<ExitCode> {
+    let man = manifest::court_lines(root)?;
+    let dts = manifest::doctype_lines(root)?;
+    let s = tracker::compute(&man, &dts);
+    let block = format!("{}{DOCTYPE_INTRO}{}", s.summary, s.dsummary);
+    let readme_path = root.join("README.md");
+    let current_readme = fs::read_to_string(&readme_path).map_err(|e| io_fail(&readme_path, e))?;
+    let readme = current_readme.replace("\r\n", "\n").replace('\r', "\n");
+    let expected_readme =
+        readmes::root_index(root, &man, &s.rows, &s.docrows, &splice(&readme, &block))?;
+    let status_path = root.join("STATUS.md");
+    let expected_status = status_md(&s);
+    let current_status = fs::read_to_string(&status_path).map_err(|e| io_fail(&status_path, e))?;
+    let stale = [
+        ("README.md", current_readme != expected_readme),
+        ("STATUS.md", current_status != expected_status),
+    ]
+    .into_iter()
+    .filter_map(|(name, differs)| differs.then_some(name))
+    .collect::<Vec<_>>();
+    if stale.is_empty() {
+        println!("RESULT: TRACKER CHECK PASS");
+        Ok(ExitCode::SUCCESS)
+    } else {
+        println!("RESULT: TRACKER CHECK FAIL: stale {}", stale.join(", "));
+        println!("Run `tools/tracker.sh` to regenerate the tracker files.");
+        Ok(ExitCode::from(1))
     }
 }
 

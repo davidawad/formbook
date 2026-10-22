@@ -5,7 +5,14 @@
 name: contribute-verify
 on:
   pull_request:
-    paths: ["courts/**"]
+    paths:
+      - "courts/**"
+      - "data/**"
+      - "tools/fb/**"
+      - "README.md"
+      - "STATUS.md"
+      - "justfile"
+      - ".github/workflows/**"
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -17,6 +24,8 @@ jobs:
         run: |
           sh tools/bootstrap.sh
           echo "$HOME/.local/share/formbook/env/bin" >> "$GITHUB_PATH"
+      - name: Check committed tracker
+        run: cargo run -q --release --manifest-path tools/fb/Cargo.toml -- tracker --check
       - name: Verify each touched unit
         run: |
           git fetch -q origin "${{ github.base_ref }}"
