@@ -11,6 +11,11 @@
 
 local xe = require("docx.xengine")
 
+-- A line may end after a slash before a letter ("CM/ECF"), as typst breaks (Unicode line breaking); LibreOffice does
+-- not: a zero-width space marks the place.
+local ZWSP = "\u{200B}"
+local function slash_breaks(s) return (s:gsub("/(%a)", "/" .. ZWSP .. "%1")) end
+
 local WORD_LIMIT = 14000 -- Fed. Cir. R. 32(b) (typst word-limit)
 local TOC_DEPTH = 4      -- typst toc-depth
 local TEXTW = 9360       -- 6.5 in, the text width (letter, 1 in margins)
@@ -52,6 +57,7 @@ end
 
 -- inlines as runs: xe.inl, with the line breaks (TOA: name, then the cite) and raw runs the tables need
 local function runs(il, o)
+  il = pandoc.Inlines(il):walk({ Str = function(e) return pandoc.Str(slash_breaks(e.text)) end })
   local out, part = {}, pandoc.Inlines({})
   local function flush()
     if #part > 0 then out[#out + 1] = xe.inl(part, o) end
@@ -342,6 +348,7 @@ function Pandoc(doc)
   })
   -- the break rules of typst on the text pandoc writes itself (body, footnotes)
   doc = doc:walk({ Inlines = xe.inlines })
+  doc = doc:walk({ Str = function(e) return pandoc.Str(slash_breaks(e.text)) end })
 
   -- the body: headings get their labels; lists their label boxes
   local heads, body = {}, {}

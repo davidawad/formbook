@@ -10,7 +10,29 @@ local TOC_DEPTH = 4      -- typst toc-depth
 
 -- The inline rules of the cross-engine layout model (lib/latex/xengine.lua): break opportunities as typst has them,
 -- ligature characters as commands, a section sign bound to its number. Run on the body and on every metadata value.
-local xe_inlines = require("latex.xengine").inlines
+local xe_lib = require("latex.xengine").inlines
+
+-- Two break rules of typst this folder adds to the shared ones: a line may end after a slash before a letter
+-- ("CM/ECF", Unicode line breaking), and an ellipsis is the one 1 em glyph (template.tex \\caellipsis), not \\ldots.
+local function folder_inlines(inlines)
+  local out = pandoc.Inlines({})
+  for _, el in ipairs(inlines) do
+    if el.t == "Str" and (el.text:find("\u{2026}") or el.text:find("/%a")) then
+      -- marks: \1 a break after the slash, \2 the ellipsis
+      local s = el.text:gsub("/(%a)", "/\1%1"):gsub("\u{2026}", "\2")
+      for part, mark in (s .. "\3"):gmatch("([^\1\2\3]*)([\1\2\3])") do
+        if part ~= "" then out:insert(pandoc.Str(part)) end
+        if mark == "\1" then out:insert(pandoc.RawInline("latex", "\\allowbreak{}"))
+        elseif mark == "\2" then out:insert(pandoc.RawInline("latex", "\\caellipsis{}")) end
+      end
+    else
+      out:insert(el)
+    end
+  end
+  return out
+end
+
+local function xe_inlines(l) return folder_inlines(xe_lib(l)) end
 
 local function fail(msg) error("cafc answering-brief: " .. msg, 0) end
 
@@ -334,7 +356,7 @@ function Pandoc(doc)
     back[#back + 1] = raw("\\clearpage\\casection{Certificate of Service}")
     back[#back + 1] = raw("\\begingroup\\singlespacing\\parindent=0pt I certify that on " ..
       (meta.date ~= nil and tex(meta.date) or "the date of filing") ..
-      " I electronically filed the foregoing brief with the Clerk of Court using the CM/ECF system, which will " ..
+      " I electronically filed the foregoing brief with the Clerk of Court using the CM/\\allowbreak{}ECF system, which will " ..
       "send notice of the filing to all counsel of record.\\par\\endgroup")
     back[#back + 1] = raw(certificate_signature(meta))
   end

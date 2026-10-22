@@ -59,12 +59,16 @@
 % The right half of the cover and of the signature blocks: the text starts at the middle of the line.
 \newcommand\carighthalf{\leftskip=0.5\linewidth\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parindent=0pt\relax}
 
+% An ellipsis [typst: the one glyph U+2026, 1 em wide]: three periods spread over 1 em, which the PDF text reads as
+% the one character (ActualText), as typst's and Word's glyph.
+\newcommand\caellipsis{\pdfliteral page{/Span<</ActualText<FEFF2026>>>BDC}\hbox to 1em{.\hss.\hss.}\pdfliteral page{EMC}}
+
 % Block quotations [quote]: 0.5 in in from both margins, single-spaced, 14 bp above and below, 12.6 bp between
 % paragraphs.
 \renewenvironment{quote}{%
   \par\addvspace{14bp}%
   \begingroup\leftskip=0.5in\rightskip=\dimexpr0.5in\relax plus 1fil\relax\singlespacing\parindent=0pt\relax
-  \parskip=12.6bp\relax
+  \parskip=12.6bp\relax\vskip-\parskip % the first paragraph takes no \parskip: 14 bp above, as typst
 }{%
   \par\endgroup\addvspace{14bp}%
 }
