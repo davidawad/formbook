@@ -1,7 +1,7 @@
 # Federal Circuit: answering brief (brief for the appellee)
 
 Doc type: `answering-brief`. Court: `cafc` (Court of Appeals for the Federal Circuit).
-Status: full-depth template built from one filed exemplar; the sample renders to 14 pages (13 before the 2026-10-16 pass added the representative-claim page).
+Status: full-depth template built from one filed exemplar; typst, latex and docx render the sample to 15 pages each, on the shared cross-engine layout model, and the folder gates Gate 4 CROSS-ENGINE (`eval.yaml`: `params.cross_engine: gate`; fb-595.54.6, see "Cross-engine layout" below).
 Not a court-level `court.json` status change: this folder does not set `status` (only David does).
 
 ## Layout
@@ -77,9 +77,11 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 
 | Engine | Files | Output (`usage/`) | Pages |
 |---|---|---|---|
-| typst (reference) | `typst/` | `OUTPUT-answering-brief.typst.pdf` | 14 |
+| typst (reference) | `typst/` | `OUTPUT-answering-brief.typst.pdf` | 15 |
 | latex | `latex/template.tex`, `latex/cafc.lua` (stock pdflatex, newtx Times) | `OUTPUT-answering-brief.latex.pdf` | 15 |
-| docx | `docx/reference.docx` (`docx/make-reference.sh`, `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-answering-brief.docx` and `.docx.pdf` | 14 |
+| docx | `docx/reference.docx` (`docx/build-reference.sh`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pagemap.awk`, `docx/footer.xml` | `OUTPUT-answering-brief.docx` and `.docx.pdf` | 15 |
+
+The paragraphs below, down to "Pages viewed", describe the engines before the cross-engine port and are kept as history; "Cross-engine layout" at the end of this file is the current state.
 
 **Matches the typst layout:** 14 pt EB Garamond, double spacing at the typst pitch (32.13 pt, 0.99em leading); 1 in margins; the cover; contents and authorities with page numbers; the Roman section headings (I. to V.) hanging at the margin with the A./1. sub-headings; the statement of related cases; the certificate of compliance with the signature under it; the certificate of service; the footers (roman then arabic).
 
@@ -112,3 +114,13 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 ## DOCX font and layout fixes (2026-10-21, fb-595.59)
 
 The docx engine moves from EB Garamond to Times New Roman, the face the typst template declares (DEF-FONT-002). The type-volume certificate's boxes are bordered runs ("X" or three no-break spaces) in the body face, as ca9.lua draws them, not DejaVu Sans ballot-box glyphs. `check.sh --engine docx` is green.
+
+## Cross-engine layout (2026-10-22, fb-595.54.6)
+
+The three engines now run on the shared layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; `docs/EVAL-LOOP.md`, "Adopting the reference breaker") and break every line and page alike: `check.sh --engine latex|docx` prints XENG-001..003 PASS (before: latex 13 against 15 pages, 66.3 % of lines alike; docx 13 against 14, 41.1 %), and `eval.yaml` gates it.
+
+- Pitches from the exemplar (this README, "What the overlay shows"): 32.2 pt for the double-spaced text, 16.1 pt for everything single-spaced (Word's single line of 14 pt Times, as the exemplar's tables and certificate measure). The typst template had drifted to a 26.6 pt body pitch when the face changed to Times New Roman (its 0.99em leading had been set for EB Garamond's line box), so the brief is now 15 pages (was 13): the body runs pp. 1 to 8, the certificates pp. 9 and 10.
+- Spaces between blocks in pt (the em values before, at 14 pt); contents and authorities as `listing-row` rows with a 36 pt / 56 pt page column; footnote marks at 58 %; the list bullet in a half-inch box; the right half of the cover and the signature blocks starts at the middle of the text width (before, typst's `pad(left: 50%)` inside `align` measured half of the block's own width, so the signature block moved with its longest line).
+- No orphan where a footnote moves a line on (typst `no-footnote-orphan`): typst keeps a paragraph's first two lines together but, when the second carries a footnote that does not fit under it, moved that line on and left the first alone; Word and LaTeX move the paragraph. The typst template now does the same (body p. 5 ends after the B. section, "Appellants concede" starts p. 6).
+- latex and docx are rewritten on the model: `latex/cafc.lua` builds the cover, tables, signature and certificates as the typst template does, `latex/template.tex` holds the macros (`\xe@lines`, `\addvspace`, `\xe@row`); the docx is built by `docx/render.sh` in two passes (pass 1 with placeholders, the page map of its LibreOffice PDF read by `docx/pagemap.awk`, pass 2 must give the same map), on a reference from `lib/docx/xengine-reference.sh`. Word count block by block in every engine (1,330).
+- Pages viewed (60 dpi, all 15 of the typst render, all 15 of latex and docx side by side against it, 2026-10-22): no defect found. Positions differ only on the cover (the gaps between its parts: typst 14 pt plus block spacing, latex and docx 14 pt) and by under 2.5 pt elsewhere (footnote marks, bullets).
