@@ -2,7 +2,7 @@
 # document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
 # fb-595.54.12). Numbers trace to NRAP 27(d) and 32(a) (../../rules.md, NEVAPP-*); lengths in points. No case text
 # here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
-size: 14                  # NEVAPP-FORM-004, NEVAPP-MOT-007: proportionally spaced type of 14 points, footnotes too
+size: 14                  # NEVAPP-FORM-004, NEVAPP-MOT-007: proportionally spaced type of 14 points, footnotes the same
 pitch:
   body: 32.2              # NEVAPP-FORM-003: double spaced (Word's double, 2 x 1.15 x 14 pt)
   single: 16.1            # caption, headings, footnotes, quotations, signature: single (1.15 x 14 pt)
@@ -11,9 +11,9 @@ pitch:
 margin: {top: 72, bottom: 79.2, left: 72, right: 72}
 indent: 36                # paragraphs indented half an inch
 list_indent: 18
-# NEVAPP-FORM-005: pages numbered consecutively at the bottom; the caption page counts as page 1 and prints no
-# number (the exemplar numbers the motion from 1 after it: the model sets a cover apart only before tables, see
-# docs/open-items/fb-595.54.64.md)
+# NEVAPP-FORM-005: pages consecutively numbered at the bottom. The caption page counts as page 1 and prints no
+# number; the exemplar (NEVAPP-MOT-009) numbers the motion from 1 after it, which the model cannot yet do without
+# tables (docs/open-items/fb-595.54.64.md)
 page_number: {align: center, from: 2}
 footnote: {size: 14, pitch: single, gap: 7}   # NEVAPP-FORM-003, -004: footnotes 14 point, single spaced
 quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # NEVAPP-FORM-003: long quotations indented, single spaced
@@ -22,8 +22,8 @@ heading:
   - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
   - {bold: true, hang: 36, above: 16.8, below: 11.2}
   - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
-# NEVAPP-MOT-006 (NRAP 27(d)(1)(B)): the name of the court, the title of the case, the case number and a brief
-# descriptive title; counsel below, centered.
+# NEVAPP-MOT-006 (NRAP 27(d)(1)(B)): the name of the court, the docket number, the title of the case and a brief
+# descriptive title naming the party; counsel below, centered (NEVAPP-MOT-009).
 front:
   - {text: "THE COURT OF APPEALS OF THE STATE OF NEVADA", align: center, bold: true}
   - columns:
@@ -42,20 +42,17 @@ front:
       - {text: "{names}", align: center, optional: true, above: 12.6}
       - {text: "{lines}", align: center, optional: true}
   - {break: true}
-# NEVAPP-MOT-005 (NRAP 27(d)(2)(C)), NRAP 27(d)(1)(E) with 32(c)(2): the date, the word count when the motion relies on
-# it, and the signature block right of centre, never split.
+# NEVAPP-FORM-007 (NRAP 32(d)), NEVAPP-MOT-009: the date and the signature block right of centre, never split.
 closing:
   - group:
       - {text: "Dated: {date}."}
-      - {text: "This motion contains {word_count} words and complies with the word limit of NRAP 27(d)(2)(A).",
-         optional: true, indent: 36, pitch: body, above: 5.6}
       - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 5.6}
       - {text: "/s/ {signature.signer}", underline: true, left: 230.4, above: 11.2}
       - {text: "{signature.signer}", left: 230.4}
       - {text: "{signature.lines}", left: 230.4, optional: true}
     above: 21.6
-  # NRAP 25(d): the certificate of service, on its own page: the paragraphs in the body's form, each recipient a
-  # block an inch in, then the serving signer's block.
+  # NEVAPP-MOT-008 (NRAP 25(d)): the certificate of service, on its own page: the paragraphs in the body's form,
+  # each recipient a block an inch in, then the serving signer's block.
   - when: service
     blocks:
       - {break: true}

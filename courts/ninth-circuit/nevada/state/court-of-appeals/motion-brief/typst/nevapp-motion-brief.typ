@@ -4,7 +4,7 @@
 // coordinates or forced breaks.
 #import "/lib/typst/xdoc.typ": xdoc, split-frontmatter
 
-// NEVAPP-FORM-004 (NRAP 32(a)(5)(A), applied to motions by NRAP 27(d)(1)(E)): Times New Roman is named as a
+// NEVAPP-FORM-004, NEVAPP-MOT-007 (NRAP 32(a)(5)(A), applied to motions by NRAP 27(d)(1)(E)): Times New Roman is named as a
 // proportionally spaced face; Liberation Serif is its metric twin (docs/FONTS.md).
 #let font-family = ("Times New Roman", "Liberation Serif")
 

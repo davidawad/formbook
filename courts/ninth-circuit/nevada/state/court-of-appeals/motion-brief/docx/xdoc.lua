@@ -123,13 +123,6 @@ return require("docx.xdoc")({
           ["text"] = "Dated: {date}.",
         },
         {
-          ["text"] = "This motion contains {word_count} words and complies with the word limit of NRAP 27(d)(2)(A).",
-          ["optional"] = true,
-          ["indent"] = 36,
-          ["pitch"] = "body",
-          ["above"] = 5.6,
-        },
-        {
           ["text"] = "{signature.firm}",
           ["bold"] = true,
           ["left"] = 230.4,
