@@ -6,7 +6,7 @@
 // same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
-#import "../../../../../lib/typst/tables.typ": leader-row
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -14,10 +14,14 @@
 
 #let font-family = ("Times New Roman", "Liberation Serif")     // FRAP 32(a)(5): proportionally spaced serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // FRAP 32(a)(5)(A): 14-point or larger, everywhere.
-#let body-leading = 1.336em                // 11th Cir. R. 32-3: double-spaced, with the metric-aligned
-                                           // line box below (about 2.2 x type size baseline pitch).
-#let single-leading = 0.516em              // cover, headings, quotations, footnotes, certificate of service.
-                                           // Liberation Serif line box (ascender to descender) is 0.909em: body pitch 0.909 + 1.336 = 2.245em, single 1.425em.
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; LaTeX \pdfeachlineheight).
+#let pitch-double = 31.4pt                 // 11th Cir. R. 32-3: double-spaced, about 2.24 x type size.
+#let pitch-single = 20pt                   // cover, headings, quotations, footnotes, signature: single-spaced.
+#let single-leading = 0pt                  // the line boxes carry the spacing: no leading between them
+#let toc-page-col = 36.4pt                 // TOC: the page numbers keep the last 2.6 em of the line to themselves
+#let toa-page-col = 56pt                   // TOA: page lists such as 4*, 6, 8 (a longer list widens its own row's column)
 #let page-margin = 1in                     // FRAP 32(a)(4): at least one inch on all four sides.
 #let para-indent = 0.5in
 #let heading-tab = 0.5in
@@ -153,17 +157,17 @@
 
 #let style-heading(it) = {
   set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
-  set text(size: type-size)   // typst's built-in heading sizes are not used; every heading is body size
+  set text(size: type-size, ..edges(pitch-single))   // typst's built-in heading sizes are not used; every heading is body size
   if it.level == 1 {
     // Section headings (ARGUMENT AND CITATIONS OF AUTHORITY, CONCLUSION): bold, centered.
-    block(width: 100%, sticky: true, above: 1.5em, below: 1.1em, align(center, strong(it.body)))
+    block(width: 100%, sticky: true, above: 21pt, below: 15.4pt, align(center, strong(it.body)))
   } else if it.numbering == none {
-    block(width: 100%, sticky: true, above: 1.2em, below: 0.9em, strong(it.body))
+    block(width: 100%, sticky: true, above: 16.8pt, below: 12.6pt, strong(it.body))
   } else {
     // Point and sub-point headings: label in a fixed box, title hangs under the title text.
     let ind = label-indent(it)
     let lab = heading-label(it)
-    block(width: 100%, sticky: true, above: 1.1em, below: 0.9em, hang(ind + heading-tab, {
+    block(width: 100%, sticky: true, above: 15.4pt, below: 12.6pt, hang(ind + heading-tab, {
       h(ind)
       box(width: heading-tab, strong(lab))
       if it.level >= 4 { strong(emph(it.body)) } else { strong(it.body) }
@@ -182,20 +186,21 @@
   let ind = if numbered { label-indent(hd) } else { 0pt }
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
-  let hang-by = ind + heading-tab
-  // The gap between entries equals the leading inside an entry, so the whole table is double-spaced.
-  link(hd.location(), block(width: 100%, above: body-leading, below: 0pt,
-    leader-row({
-      h(ind)
-      if numbered { box(width: heading-tab, lab) }
-      title
-    }, it.page(), hang: hang-by, leading: body-leading, page-width: 1.2em, gutter: 0pt)))
+  // The page number has its own column (listing-row), so a title that fills its last line can never push the number
+  // onto a line of its own; the leader runs from the end of the title to the number. Every line, wrapped ones too,
+  // is a box of the body pitch: the whole table is double-spaced.
+  listing-row(hd.location(), {
+    h(ind)
+    if numbered { box(width: heading-tab, lab) }
+    title
+  }, it.page(), toc-page-col, ind + heading-tab, 0pt)
 }
 
 #let toc-section() = {
   heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  align(right, block(above: 0.3em, below: 0pt, strong(underline[Page])))
+  align(right, block(above: 4.2pt, below: 0pt, text(..edges(pitch-single), strong(underline[Page]))))
   show outline.entry: toc-entry
+  set text(..edges(pitch-double))
   outline(title: none, target: selector(heading.where(outlined: true)), depth: toc-depth, indent: 0pt)
 }
 
@@ -229,7 +234,8 @@
         .filter(p => p.last().kind == kind and hits.any(h => h.value.key == p.first()))
         .sorted(key: p => sort-key(p.last()))
       if members.len() == 0 { continue }
-      block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
+      block(above: if first { 14pt } else { 19.6pt }, below: 2.8pt, sticky: true, {
+        set text(..edges(pitch-single))
         set par(first-line-indent: 0pt)
         strong(title)
         if first { h(1fr); strong(underline[Page(s)]) }
@@ -246,14 +252,16 @@
           if h.value.at("primary", default: false) and label not in starred { starred.push(label) }
         }
         let page-text = labels.map(l => if l in starred { l + "*" } else { l }).join(", ")
-        block(breakable: false, above: body-leading, below: 0pt, width: 100%, leader-row({
+        // One double-spaced row (11th Cir. R. 32-3; listing-row): the citation wraps before the page column, which
+        // is as wide as a longer page list.
+        listing-row(none, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
             linebreak()
           }
           inl(a.cite)
-        }, page-text, hang: 0.35in, leading: body-leading, lead-gap: 0.8em))
+        }, page-text, calc.max(toa-page-col, measure(page-text).width), 0.35in, 0pt)
       }
     }
   }
@@ -266,7 +274,8 @@
 #let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
 
 #let cover-body(meta, gap) = {
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt, leading: single-leading, spacing: 4.9pt, justify: false)
   set align(center)
   // Docket number, centered at the top (11th Cir. R. 28-1(a)).
   strong[COURT OF APPEALS NO. #need(meta, "case_number")]
@@ -298,10 +307,10 @@
   v(gap)
   // Counsel (FRAP 32(a)(2)(F), 11th Cir. R. 28-1(a): name, office address, telephone number).
   {
-    set par(hanging-indent: 0pt, spacing: 0.5em)
+    set par(hanging-indent: 0pt, spacing: 7pt)
     let groups = need(meta, "counsel")
     for (gi, g) in groups.enumerate() {
-      block(breakable: false, {
+      block(breakable: false, above: 7pt, below: 7pt, {
         for n in g.at("names", default: ()) { n; linebreak() }
         let lines = g.at("lines", default: ())
         if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
@@ -326,7 +335,10 @@
 
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  block(breakable: false, above: 1.4em, {
+  // Single-spaced, 19.6 pt above: the signer's lines from the middle of the page, then 16.8 pt below them the
+  // office address at the margin.
+  block(breakable: false, above: 19.6pt, {
+    set text(..edges(pitch-single))
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
     align(left, pad(left: 50%, {
       [/s/ #sig.signer]
@@ -335,8 +347,7 @@
       for l in sig.at("lines", default: ()) { linebreak(); inl(l) }
     }))
     if "address" in sig {
-      v(1.2em)
-      for l in sig.address { inl(l); linebreak() }
+      block(above: 16.8pt, below: 0pt, par(sig.address.map(inl).join(linebreak())))
     }
   })
 }
@@ -344,10 +355,10 @@
 /// Certificate of Compliance, FRAP 32(g)(1) and Form 6 (11th Cir. R. 32-4 exempts the parts listed).
 #let certificate-of-compliance(meta, words) = {
   heading(level: 1, numbering: none)[Certificate of Compliance]
-  set par(first-line-indent: para-indent, leading: body-leading, spacing: body-leading, justify: false)
+  set par(first-line-indent: para-indent, leading: single-leading, justify: false)
   [1\. This document complies with the word limit of Fed. R. App. P. 32(a)(7)(B) because, excluding the parts of the document exempted by Fed. R. App. P. 32(f) and 11th Cir. R. 32-4, this document contains #group-digits(words) words. This word count was computed from the source text of this document.]
   parbreak()
-  [2\. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced typeface using Typst in #font-family.first(), #(type-size / 1pt)-point font.]
+  [2\. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced typeface, #font-family.first(), in #(type-size / 1pt)-point font.]
   signature-block(meta)
 }
 
@@ -355,7 +366,7 @@
 #let certificate-of-service(meta) = {
   let svc = need(meta, "service")
   heading(level: 1, numbering: none)[Certificate of Service]
-  set par(first-line-indent: para-indent, leading: body-leading, spacing: body-leading, justify: false)
+  set par(first-line-indent: para-indent, leading: single-leading, justify: false)
   [I hereby certify that I have electronically filed the foregoing with the Clerk of the Court using the CM/ECF system, which will automatically send e-mail notification of such filing to all parties who have appeared in the action.]
   parbreak()
   [This #(svc.date).]
@@ -382,38 +393,35 @@
     title: plain(inl(need(meta, "brief_title"))) + ", No. " + need(meta, "case_number"),
     author: need(meta, "signature").signer,
   )
-  set page(paper: "us-letter", margin: page-margin, number-align: center, footer-descent: 30%)
-  set text(
-    font: font-family, size: type-size, lang: "en", region: "us",
-    hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
-  )
-  set par(
-    leading: body-leading, spacing: body-leading,
-    first-line-indent: (amount: para-indent, all: true), justify: false,
-  )
+  // The page number: centered in a single-spaced line box whatever the text around it (Word's footer, LaTeX's
+  // plain page style), so it sits at the same place on every page.
+  set page(paper: "us-letter", margin: page-margin, footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model (lib/typst/xengine.typ): first fit, no kerning or ligatures, no hyphenation, line
+  // boxes of the body pitch (double spacing), footnote marks at 58 %, lists with the number in a half-inch box, a
+  // section sign kept with its number, no break inside "60(b)(5)".
+  show: xengine.with(pitch: pitch-double, list-indent: para-indent)
   set heading(numbering: none)
   set footnote.entry(
-    gap: 0.5em, clearance: 0.9em, indent: 0pt,
+    gap: 7pt, clearance: 12.6pt, indent: 0pt,
     separator: line(length: 30%, stroke: 0.5pt),
   )
   show footnote.entry: it => {
-    set text(size: type-size)   // typst's default is 0.85em; FRAP 32(a)(5) allows nothing under 14 pt
-    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em)
+    // typst's default is 0.85em; FRAP 32(a)(5) allows nothing under 14 pt. Single-spaced.
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 7pt)
     // marker, a thin space, then the note (typst's default runs them together)
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
     [#super(num)#h(0.25em)#note.body]
   }
-  show quote.where(block: true): it => block(above: 1em, below: 1em, pad(left: para-indent, right: para-indent, {
-    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
+  show quote.where(block: true): it => block(above: 14pt, below: 14pt, pad(left: para-indent, right: para-indent, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: 12.6pt)
     it.body
   }))
-  // Typography that holds for any text: never break inside a token of adjacent parentheses
-  // ("60(b)(5)"), and never between a section sign / pilcrow and its number. Done with
-  // unbreakable boxes so the extracted text stays exactly the author's characters.
-  show regex("\\S*\\)\\(\\S*"): it => box(it)
-  show regex("[§¶] \\S+"): it => box(it)
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa-primary:") {

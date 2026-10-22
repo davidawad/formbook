@@ -8,7 +8,7 @@ Doc-type folder for the Eleventh Circuit, `opening-brief` (one self-contained fo
 | Sample markdown | `usage/INPUT-opening-brief.md`, a partial transcription of the exemplar (cover, CIP, oral argument, jurisdiction, issues, case, argument II.A/II.B, conclusion, certificates) |
 | Render | ok: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md` gives 16 pages, no typst warnings |
 | Overlay | ok (2026-10-16): `sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-opening-brief` writes `usage/OVERLAY-hill-opening-brief.pdf` and `.txt` (16 pages paired) |
-| Typeface | face required: none named (FRAP 32(a)(5)(A)); no substitute; EB Garamond kept |
+| Typeface | face required: none named (FRAP 32(a)(5)(A)); Times New Roman (vendored; newtx in latex) in all three engines since fb-595.54.5 (the docx had stayed on EB Garamond and failed DEF-FONT-002) |
 | Pages reviewed | 16 of 16 re-rendered 2026-10-16 and viewed one by one at 60 dpi (see "Verification pass 2026-10-16") |
 | Tier 1 gates | not built (no `checks.yaml` for this doc type); the form rules below are implemented in the template and checked by review only |
 | Status | not set. `court.json` is not used here |
@@ -20,7 +20,7 @@ Dates verified: 2026-10-14, for every source below, unless marked otherwise.
 | ID | Requirement | Source | Implemented as |
 |---|---|---|---|
 | CA11-FORM-002 | Margins at least 1 inch, all four sides | FRAP 32(a)(4) https://www.law.cornell.edu/rules/frap/rule_32 | `page-margin = 1in` |
-| CA11-FORM-003 | Proportionally spaced serif face, 14-point or larger, including footnotes | FRAP 32(a)(5)(A), same URL; 11th Cir. R. 32-3 (as printed in the Aug. 5, 2026 packet) | EB Garamond at 14 pt; footnotes at 14 pt |
+| CA11-FORM-003 | Proportionally spaced serif face, 14-point or larger, including footnotes | FRAP 32(a)(5)(A), same URL; 11th Cir. R. 32-3 (as printed in the Aug. 5, 2026 packet) | Times New Roman at 14 pt; footnotes at 14 pt |
 | CA11-FORM-004 | Double spacing for typed matter | 11th Cir. R. 32-3, https:\/\/www.ca11.uscourts.gov\/sites\/default\/files\/courtdocs\/clk\/Redlined%20Rules%20Excerpts.AUG26.pdf (as printed in the Aug. 5, 2026 packet of proposed amendments; the packet's redline marks do not show in text extraction, so the 32-3 wording is taken as current) | body, CIP, TOC, TOA, Certificate of Compliance double-spaced |
 | CA11-FORM-005 | Single spacing allowed only for cover, certificate of service, direct quotes, headings, footnotes | 11th Cir. R. 32-3 (as above) | cover, headings, block quotes, footnotes, signature blocks, certificate of service single-spaced |
 | CA11-FORM-006 | Type style: plain roman; case names italicized or underlined | FRAP 32(a)(6), same URL | `*...*` in the markdown, as written |
@@ -116,18 +116,25 @@ sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-
 
 ## Engines
 
-The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
-outputs are `usage/OUTPUT-opening-brief.latex.pdf`, `.docx` and `.docx.pdf`.
+All three on the shared cross-engine layout model (fb-595.54.5; `lib/typst/xengine.typ`, `lib/latex/xengine.sty` and
+`xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Adopting the reference
+breaker"): Times New Roman (newtx in latex) 14 pt, no kerning or ligatures, first-fit line breaking; the body, the
+CIP, the TOC, the TOA and the Certificate of Compliance in 31.4 pt line boxes (double spacing, 11th Cir. R. 32-3);
+headings, quotations, footnotes, the cover, the signature and the Certificate of Service in 20 pt boxes; CIP entries
+with the number in a half-inch box; TOC and TOA rows that wrap before a page column (36.4 pt; 56 pt or the page list)
+with a leader of at least three spaces. The latex and docx renders break every line and page where typst does, and
+`eval.yaml` gates it (`params.cross_engine: gate`, XENG-001..003: 16 pages, 286 of 286 lines). Every engine certifies
+1,055 words and names Times New Roman.
 
-- **latex** (`latex/template.tex`, `latex/ca11.lua`; stock pdflatex, newtx Times). Matches: Times 14 pt,
-  double spacing, one-inch margins, the cover, the C-1 and C-2 pages of the certificate of interested persons,
-  roman front matter, arabic body, the table of contents and table of citations with their pages (from a second
-  LaTeX pass), the asterisks on primary citations, the signature kept with the last paragraph, both certificates.
-  Differs: line breaks and some heading spacing, so body text falls one line apart from typst from about page 12 on; the
-  table pages carry the LaTeX pages.
-- **docx** (`docx/reference.docx`, `docx/ca11.lua`, `docx/render.sh`, `docx/make-reference.sh`). The cover, the
-  certificates and the tables are written with explicit formatting; sections carry the C-, roman and arabic footers.
-  The page numbers in the tables are written text, taken from a first LibreOffice render (no TOC or TOA fields), so
-  Word may paginate differently. Differs: no space before the dot leaders of the tables; the body text runs about
-  as long as typst's, 16 pages both.
-  BLOCKED: none for the build. The docx is checked on its LibreOffice PDF only; Word was not available.
+- **typst** (`typst/`): the reference.
+- **latex** (`latex/template.tex`, `latex/ca11.lua`; stock pdflatex, newtx Times): `\xe@lines` for every size,
+  `\addvspace` for every space, `\xe@row` table rows; a heading keeps the next block (a list too) with it; the last
+  paragraph and the signature, and the service list and the signature, are one unbreakable box; the table of
+  citations takes the page of a citation's first word (as typst does) and its page lists keep their spaces.
+- **docx** (`docx/reference.docx` from `docx/make-reference.sh` = `lib/docx/xengine-reference.sh`, `docx/ca11.lua`,
+  `docx/render.sh`): exact line spacing at the typst pitches and spaces; the cover, CIP, tables and certificates as
+  paragraphs written by the filter; sections carry the C-, roman and arabic footers. The page numbers in the tables
+  are written text from a first LibreOffice render: each heading is found by its label and title at the start of a
+  line, each citation by its link text and the words after it, in document order (no TOC or TOA fields), so Word may
+  paginate differently. Differs: the dot leaders run up to the page number (Word's leader tab). BLOCKED: none. The
+  docx is checked on its LibreOffice PDF only; Word was not available.

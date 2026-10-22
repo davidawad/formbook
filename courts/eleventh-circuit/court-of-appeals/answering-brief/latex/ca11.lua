@@ -13,6 +13,9 @@ local TOC_DEPTH = 4  -- heading levels listed in the table of contents (typst: t
 local WORD_LIMITS = { standard = 13000, ["cross-appeal"] = 15300 }  -- FRAP 32(a)(7)(B)(i); FRAP 28.1(e)(2)(A)(ii)
 
 local stringify = pandoc.utils.stringify
+-- The inline rules of the cross-engine layout model (lib/latex/xengine.lua): break opportunities as typst has them,
+-- ligature characters as commands, a section sign bound to its number. Run on the body and on every metadata value.
+local xe = require("latex.xengine")
 
 local function trim(s)
   return (s:gsub("^%s+", ""):gsub("%s+$", ""))
@@ -20,7 +23,7 @@ end
 
 -- Inline content as LaTeX (pandoc does the escaping).
 local function latex_of(inlines)
-  return trim(pandoc.write(pandoc.Pandoc({ pandoc.Plain(inlines) }), "latex"))
+  return trim(pandoc.write(pandoc.Pandoc({ pandoc.Plain(xe.inlines(pandoc.Inlines(inlines))) }), "latex"))
 end
 
 local function roman(n)
@@ -94,18 +97,67 @@ local function source_body()
   return src:sub(pos)
 end
 
--- Every toa: link becomes \catoahit{key}{primary}{text}; this brief marks no primary citations.
+-- Every toa: link keeps its text, with \catoahit{key}{0} right after its first word (typst: tag-after-first-word,
+-- so a citation that runs over a page end is listed at the page where it starts); this brief marks no primary
+-- citations.
+local function mark_first(inlines, mark)
+  local out, done = pandoc.Inlines({}), false
+  for _, el in ipairs(inlines) do
+    if not done and el.t == "Str" then
+      out:insert(el)
+      out:insert(mark)
+      done = true
+    elseif not done and el.t ~= "Note" and el.content ~= nil and type(el.content) == "table" then
+      local inner, d = mark_first(el.content, mark)
+      el.content = inner
+      out:insert(el)
+      done = d
+    else
+      out:insert(el)
+    end
+  end
+  return out, done
+end
 local used = {}
 local function link_filter(el)
   local key = el.target:match("^toa:(.+)$")
   if key == nil then return nil end
   used[key] = true
-  local out = { pandoc.RawInline("latex", "\\catoahit{" .. key .. "}{0}{") }
-  for _, i in ipairs(el.content) do
-    out[#out + 1] = i
-  end
-  out[#out + 1] = pandoc.RawInline("latex", "}")
+  local mark = pandoc.RawInline("latex", "\\catoahit{" .. key .. "}{0}")
+  local out, done = mark_first(el.content, mark)
+  if not done then out:insert(1, mark) end
   return out
+end
+
+-- The cover's counsel (typst: cover-body): one group from the middle of the page; two or more side by side, up to
+-- three a row, in columns of (text width - gutters) / n, 14 bp (1 em) apart, rows 11.2 bp apart. Each group: the
+-- names, then the lines (the telephone closes the last group) 0.5 em in, wrapped lines 1 em in; 3.5 bp between them.
+local function counsel_tex(groups, phone)
+  local function group(gi, g)
+    local out = {}
+    for _, n in ipairs(g.names or {}) do out[#out + 1] = "\\noindent " .. latex_of(n) .. "\\par" end
+    local lines = {}
+    for _, l in ipairs(g.lines or {}) do lines[#lines + 1] = l end
+    if gi == #groups then lines[#lines + 1] = phone end
+    for _, l in ipairs(lines) do
+      out[#out + 1] = "\\noindent\\hangindent=14bp\\hangafter=1\\relax\\hspace*{7bp}\\emph{" .. latex_of(l) .. "}\\par"
+    end
+    return "\\casingle\\parskip=3.5bp\\relax\\parindent=0pt\\relax\n" .. table.concat(out, "\n")
+  end
+  if #groups == 1 then
+    return "{\\raggedright\\leftskip=0.5\\textwidth\n" .. group(1, groups[1]) .. "\n}"
+  end
+  local cols = math.min(#groups, 3)
+  local w = "\\dimexpr(\\textwidth-" .. (14 * (cols - 1)) .. "bp)/" .. cols .. "\\relax"
+  local rows = {}
+  for r = 1, #groups, cols do
+    local cells = {}
+    for gi = r, math.min(r + cols - 1, #groups) do
+      cells[#cells + 1] = "\\begin{minipage}[t]{" .. w .. "}" .. group(gi, groups[gi]) .. "\\end{minipage}"
+    end
+    rows[#rows + 1] = (r > 1 and "\\par\\addvspace{11.2bp}" or "") .. "\\carow{" .. table.concat(cells, "\\hspace{14bp minus 1bp}") .. "}"
+  end
+  return table.concat(rows, "\n")
 end
 
 local function toa_section(authorities)
@@ -210,14 +262,20 @@ function Pandoc(doc)
     error("ca11.lua: the brief has " .. words .. " words; FRAP 32(a)(7)(B) allows " .. limit)
   end
   doc = doc:walk({ Link = link_filter })
+  -- the break rules of typst on the body and on every metadata value the template prints
+  doc = doc:walk({ Inlines = xe.inlines })
+  doc.meta = pandoc.Pandoc({}, doc.meta):walk({ Inlines = xe.inlines }).meta
 
   local main_blocks, add_blocks = addendum_split(doc.blocks)
   local body = render_blocks(main_blocks, heading_latex)
 
   -- The signature stays with the last paragraph (typst: the tail block is kept together with the signature).
+  -- (A paragraph with a footnote is not boxed: a footnote inside a \vbox would not reach the page.)
   local last = body[#body]
-  if last and last.t ~= "Header" then
-    table.insert(body, #body, pandoc.RawBlock("latex", "\\begin{samepage}"))
+  local has_note = false
+  if last then pandoc.Pandoc({ last }):walk({ Note = function() has_note = true end }) end
+  if last and last.t ~= "Header" and not has_note then
+    table.insert(body, #body, pandoc.RawBlock("latex", "\\cakeepbegin"))
     doc.meta.keep = "1"
   end
 
@@ -230,10 +288,8 @@ function Pandoc(doc)
 
   if stringify(doc.meta.word_limit_basis or "standard") == "cross-appeal" then doc.meta.cross = "1" end
   -- The phone line closes the last counsel group (typst: the last group carries the telephone number).
-  local counsel = doc.meta.counsel
-  if counsel and #counsel > 0 then counsel[#counsel].phone = doc.meta.phone end
   -- Two or more counsel groups sit side by side across the full width (typst: up to three per row).
-  if counsel and #counsel > 1 then doc.meta.counsel_multi = "1" end
+  doc.meta.counsel_tex = pandoc.MetaBlocks({ pandoc.RawBlock("latex", counsel_tex(doc.meta.counsel or {}, doc.meta.phone)) })
   doc.meta.words = group_digits(words)
   doc.meta.limit = group_digits(limit)
   doc.meta.toa = pandoc.MetaBlocks({ pandoc.RawBlock("latex", toa_section(doc.meta.authorities)) })

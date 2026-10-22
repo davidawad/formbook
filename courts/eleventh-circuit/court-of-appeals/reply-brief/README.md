@@ -78,7 +78,7 @@ Pages reviewed: 14 of 14. Every page was rendered and viewed.
 
 ## Differences from the exemplar (accepted, with reason)
 
-- **Typeface**: decided 2026-10-14. Face required: none named. FRAP 32(a)(5)(A) requires a proportionally spaced serif face, 14 pt or larger, and names no family; the Eleventh Circuit local-rule text could not be read here. No substitute, so EB Garamond (vendored in `fonts/eb-garamond/`) stays; the exemplar's Times New Roman is a filer's choice (tier 3). The certificate says so.
+- **Typeface**: decided 2026-10-14. Face required: none named. FRAP 32(a)(5)(A) requires a proportionally spaced serif face, 14 pt or larger, and names no family; the Eleventh Circuit local-rule text could not be read here. Every engine sets Times New Roman (vendored; newtx in latex), the face the typst template declares, since fb-595.54.5 (fb-595.59 moved the docx off EB Garamond); the certificate names it.
 - **Double-spaced TOC and TOA**: the exemplar single-spaces them; 11th Cir. R. 32-3 requires double spacing. The template follows the rule.
 - **Asterisks in the TOA**: the exemplar has none. The primary-citation marks (Ross, QBE, Trbovich) are the transcriber's choice, and need the brief's author to confirm.
 - **Certificates numbered**: 11th Cir. R. 32-4 lets them go unnumbered; the exemplar numbers them, so the template numbers them.
@@ -115,20 +115,28 @@ pdftoppm -r 60 -png courts/eleventh-circuit/court-of-appeals/reply-brief/usage/O
 
 ## Engines
 
-The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
-outputs are `usage/OUTPUT-reply-brief.latex.pdf`, `.docx` and `.docx.pdf`.
+All three on the shared cross-engine layout model (fb-595.54.5; `lib/typst/xengine.typ`, `lib/latex/xengine.sty` and
+`xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Adopting the reference
+breaker"): Times New Roman (newtx in latex) 14 pt, no kerning or ligatures, first-fit line breaking; the body, the
+TOC, the TOA and both certificates in 31.4 pt line boxes (double spacing, 11th Cir. R. 32-3); headings, quotations,
+footnotes, the cover and the signature in 20 pt boxes; TOC and TOA rows that wrap before a page column (36.4 pt; 56 pt
+or the page list) with a leader of at least three spaces. The latex and docx renders break every line and page where
+typst does, and `eval.yaml` gates it (`params.cross_engine: gate`, XENG-001..003: 15 pages, 290 of 290 lines). Every
+engine certifies 2,132 words and names Times New Roman (no program name).
 
-- **latex** (`latex/template.tex`, `latex/ca11.lua`; stock pdflatex, newtx Times). Matches: Times 14 pt, double spacing,
-  one-inch margins, the centered cover, the table of contents (with the Table of Authorities and the certificates
-  listed, as typst lists them) and the table of authorities with the primary citations starred, the two numbered
-  certificates of counsel with the signature blocks. Differs: line breaks and some heading spacing (14 pages both);
-  the heading labels of the Argument follow the same I., A., 1. scheme as typst.
-- **docx** (`docx/reference.docx`, `docx/ca11.lua`, `docx/render.sh`, `docx/make-reference.sh`). The cover, the
-  certificates and the tables are written with explicit formatting; sections carry the roman and arabic footers. The
-  page numbers in the tables are written text from a first LibreOffice render, and the primary-citation stars are set
-  on the pages where a `toa-primary:` link is found. Differs: 15 pages against typst's 14 (the body text breaks
-  earlier in Word's layout).
-  BLOCKED: none for the build; checked on the LibreOffice PDF only.
+- **typst** (`typst/`): the reference.
+- **latex** (`latex/template.tex`, `latex/ca11.lua`; stock pdflatex, newtx Times): `\xe@lines` for every size,
+  `\addvspace` for every space, `\xe@row` table rows; a heading keeps the next block with it; the last paragraph and
+  the signature are one unbreakable box; the table of authorities takes the page of a citation's first word (as typst
+  does), with the asterisk after a primary page.
+- **docx** (`docx/reference.docx` from `docx/make-reference.sh` = `lib/docx/xengine-reference.sh`, `docx/ca11.lua`,
+  `docx/render.sh`): exact line spacing at the typst pitches and spaces; the cover, tables, signature and certificates
+  as paragraphs written by the filter; a word joiner between ")" and "(" in the filter's own text (typst never breaks
+  "32(a)(7)(B)", LibreOffice would); sections carry the roman and arabic footers. The page numbers in the tables are
+  written text from a first LibreOffice render: each heading is found by its label and title at the start of a line,
+  each citation by its link text and the words after it, in document order (no TOC or TOA fields), so Word may
+  paginate differently. Differs: the dot leaders run up to the page number (Word's leader tab). BLOCKED: none. The
+  docx is checked on its LibreOffice PDF only; Word was not available.
 
 ## DOCX font and layout fixes (2026-10-21, fb-595.59)
 

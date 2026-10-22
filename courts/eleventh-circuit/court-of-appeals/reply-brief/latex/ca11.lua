@@ -13,6 +13,9 @@ local LIMIT = 6500   -- FRAP 32(a)(7)(B)(ii): a reply brief is half the principa
 local TOC_DEPTH = 2  -- heading levels listed in the table of contents (typst: toc-depth)
 
 local stringify = pandoc.utils.stringify
+-- The inline rules of the cross-engine layout model (lib/latex/xengine.lua): break opportunities as typst has them,
+-- ligature characters as commands, a section sign bound to its number. Run on the body and on every metadata value.
+local xe = require("latex.xengine")
 
 local function trim(s)
   return (s:gsub("^%s+", ""):gsub("%s+$", ""))
@@ -20,7 +23,7 @@ end
 
 -- Inline content as LaTeX (pandoc does the escaping).
 local function latex_of(inlines)
-  return trim(pandoc.write(pandoc.Pandoc({ pandoc.Plain(inlines) }), "latex"))
+  return trim(pandoc.write(pandoc.Pandoc({ pandoc.Plain(xe.inlines(pandoc.Inlines(inlines))) }), "latex"))
 end
 
 local function roman(n)
@@ -100,7 +103,26 @@ local function source_body()
   return src:sub(pos)
 end
 
--- Every toa: and toa-primary: link becomes \catoahit{key}{primary}{text}.
+-- Every toa: and toa-primary: link keeps its text, with \catoahit{key}{primary} right after its first word (typst:
+-- tag-after-first-word, so a citation that runs over a page end is listed at the page where it starts).
+local function mark_first(inlines, mark)
+  local out, done = pandoc.Inlines({}), false
+  for _, el in ipairs(inlines) do
+    if not done and el.t == "Str" then
+      out:insert(el)
+      out:insert(mark)
+      done = true
+    elseif not done and el.t ~= "Note" and el.content ~= nil and type(el.content) == "table" then
+      local inner, d = mark_first(el.content, mark)
+      el.content = inner
+      out:insert(el)
+      done = d
+    else
+      out:insert(el)
+    end
+  end
+  return out, done
+end
 local used = {}
 local function link_filter(el)
   local key = el.target:match("^toa%-primary:(.+)$")
@@ -108,11 +130,9 @@ local function link_filter(el)
   if key == nil then key = el.target:match("^toa:(.+)$") end
   if key == nil then return nil end
   used[key] = true
-  local out = { pandoc.RawInline("latex", "\\catoahit{" .. key .. "}{" .. (primary and "1" or "0") .. "}{") }
-  for _, i in ipairs(el.content) do
-    out[#out + 1] = i
-  end
-  out[#out + 1] = pandoc.RawInline("latex", "}")
+  local mark = pandoc.RawInline("latex", "\\catoahit{" .. key .. "}{" .. (primary and "1" or "0") .. "}")
+  local out, done = mark_first(el.content, mark)
+  if not done then out:insert(1, mark) end
   return out
 end
 
@@ -175,6 +195,9 @@ function Pandoc(doc)
     error("ca11.lua: the reply brief has " .. words .. " words; FRAP 32(a)(7)(B)(ii) allows " .. LIMIT)
   end
   doc = doc:walk({ Link = link_filter })
+  -- the break rules of typst on the body and on every metadata value the template prints
+  doc = doc:walk({ Inlines = xe.inlines })
+  doc.meta = pandoc.Pandoc({}, doc.meta):walk({ Inlines = xe.inlines }).meta
 
   local in_arg = false
   local counts = { 0, 0, 0, 0, 0, 0 }
@@ -195,7 +218,7 @@ function Pandoc(doc)
   -- The signature stays with the last paragraph (typst: the tail block is kept together with the signature).
   local last = body[#body]
   if last and last.t ~= "Header" then
-    table.insert(body, #body, pandoc.RawBlock("latex", "\\begin{samepage}"))
+    table.insert(body, #body, pandoc.RawBlock("latex", "\\cakeepbegin"))
     doc.meta.keep = "1"
   end
 

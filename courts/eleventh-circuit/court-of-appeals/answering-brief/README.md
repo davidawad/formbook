@@ -23,7 +23,7 @@ Kind: **M** = mandated by a court rule (FRAP or Circuit Rule), **C** = conventio
 | CA11-FORM-001 | Letter paper, 8½ × 11 in. | FRAP 32(a)(4), HB | M |
 | CA11-FORM-002 | Margins at least one inch on all four sides; page numbers may sit in the margin, no other text may. | FRAP 32(a)(4), HB | M |
 | CA11-FORM-003 | Text double-spaced, including the Table of Contents and the Table of Citations. Quotations over two lines and headings and footnotes may be single-spaced; the cover page and the certificate of service may be single-spaced. | FRAP 32(a)(4); 11th Cir. R. 32-3, HB | M |
-| CA11-FORM-004 | Proportionally spaced serif face, 14-point or larger. Template: EB Garamond (vendored), 14 pt, everywhere including footnotes and headings. | FRAP 32(a)(5)(A), HB | M |
+| CA11-FORM-004 | Proportionally spaced serif face, 14-point or larger. Template: Times New Roman (vendored; newtx in latex) in all three engines since fb-595.54.5 (was EB Garamond; the docx failed DEF-FONT-002 on it), 14 pt everywhere including footnotes; section headings 16 pt. | FRAP 32(a)(5)(A), HB | M |
 | CA11-FORM-005 | Plain roman type; italics or bold for emphasis; case names italicized. | FRAP 32(a)(6), HB | M |
 | CA11-FORM-006 | Every font embedded and vendored. Typst's fallback monospace font is not allowed; the template prints the point size as a number so no length value is rendered in a fallback face. | project | T |
 | CA11-FORM-007 | Page numbers: the cover is unnumbered; front matter (Statement Regarding Oral Argument, Table of Contents, Table of Citations) in lowercase roman; body from 1 at the Introduction; certificates and the addendum continue the body count. | 11th Cir. R. 32-4 (materials in 28-1(a)–(g) need not be numbered); SHELL, EX | C |
@@ -170,20 +170,33 @@ Nothing is marked OK without a render and a look.
 
 ## Engines
 
-The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
-outputs are `usage/OUTPUT-answering-brief.latex.pdf`, `.docx` and `.docx.pdf`.
+All three on the shared cross-engine layout model (fb-595.54.5; `lib/typst/xengine.typ`, `lib/latex/xengine.sty` and
+`xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Adopting the reference
+breaker"): Times New Roman (newtx in latex) 14 pt, no kerning or ligatures, first-fit line breaking; the body, the
+TOC, the TOA and the Certificate of Compliance in 31.4 pt line boxes (double spacing, 11th Cir. R. 32-3); headings
+(section headings 16 pt), quotations, footnotes, the cover, the signature and the Certificate of Service in 20 pt
+boxes; TOC and TOA rows that wrap before a page column (30.8 pt; 56 pt or the page list) with a leader of at least
+three spaces; the cover counsel in columns of (text width - 1 em gutters) / n. A footnote is never split across pages
+(typst `block(breakable: false)`, LaTeX `\interfootnotelinepenalty`, Word keeps its lines), and its clearance is
+9 pt: with the 7 pt above the note that is the 16 pt LibreOffice gives the footnote area (measured by bisection on a
+test document, 16.0 to 16.1 pt), so a note moves to the next page in all three engines alike (at 12.6 pt typst
+and LaTeX moved a line LibreOffice kept). The latex and docx renders break every line and page where typst does, and
+`eval.yaml` gates it (`params.cross_engine: gate`, XENG-001..003: 15 pages, 247 of 247 lines). Every engine certifies
+1,428 words and names Times New Roman (the typst certificate no longer names the program).
 
-- **latex** (`latex/template.tex`, `latex/ca11.lua`; stock pdflatex, newtx Times). Matches: Times 14 pt, double spacing,
-  one-inch margins, the cover with its double rules, the statement regarding oral argument, the table of contents
-  (single spaced; typst now double-spaces it, see "Verification pass 2026-10-16") and the table of authorities with the capitalised group titles, the Form 6
-  certificate of compliance, the certificate of service when `service.certificate` is set. Differs: line breaks and
-  quotation spacing, so some body paragraphs fall one line apart from typst (14 pages both).
-  The addendum (`Add-n` pages with its own table, the `# Addendum` heading) is written but this sample has none, so it is
+- **typst** (`typst/`): the reference.
+- **latex** (`latex/template.tex`, `latex/ca11.lua`; stock pdflatex, newtx Times): `\xe@lines` for every size,
+  `\addvspace` for every space, `\xe@row` table rows; a heading keeps the next block with it; the last paragraph and
+  the signature are one unbreakable box; the cover counsel and the form signature are minipage columns (built by
+  `ca11.lua`); the table of authorities takes the page of a citation's first word (as typst does) and its page lists
+  keep their spaces. The addendum (`Add-n` pages with its own table) is written but this sample has none, so it is
   untested here.
-- **docx** (`docx/reference.docx`, `docx/ca11.lua`, `docx/render.sh`, `docx/make-reference.sh`). The cover, the
-  certificates and the tables are written with explicit formatting; sections carry the roman and arabic footers. Page
-  numbers in the tables come from a first LibreOffice render (no TOC or TOA fields). Differs: the table of
-  authorities' last group runs onto its own page where typst keeps it on one; 14 pages both.
+- **docx** (`docx/reference.docx` from `docx/make-reference.sh` = `lib/docx/xengine-reference.sh`, `docx/ca11.lua`,
+  `docx/render.sh`): exact line spacing at the typst pitches and spaces; the cover counsel and the form signature as
+  borderless tables; sections carry the roman and arabic footers. Page numbers in the tables are written text from a
+  first LibreOffice render: each heading found by its label and title at the start of a line, each citation by its
+  link text and the words after it in document order (a citation in a footnote from the page the body has reached).
+  Differs: the dot leaders run up to the page number (Word's leader tab).
   BLOCKED: the addendum (`# Addendum`) is not built for docx. `ca11.lua` stops with an error on that heading (its
   `Add-n` numbering needs a section and a table of its own, not yet written). The sample has no addendum, so the
-  sample builds.
+  sample builds. The docx is checked on its LibreOffice PDF only; Word was not available.

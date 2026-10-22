@@ -2,93 +2,116 @@
 % LaTeX engine. The same form as typst/ca11-reply-brief.typ: rule-driven and content-agnostic. Everything printed
 % comes from the markdown frontmatter, the body, or latex/ca11.lua (heading labels, table of citations, word count).
 % Built by tools/render.sh --engine latex with stock pdflatex; Times from newtx (below). See ../README.md.
+%
+% Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): this template sets every line and page break where
+% the typst template (the reference) sets them. The model itself (no kerning or ligatures, first-fit breaking, fixed
+% line boxes, no widows, footnote marks, list labels, contents rows) is the shared package lib/latex/xengine.sty,
+% which fb render inlines into the generated .tex in place of \usepackage{xengine}; the inline rules are
+% lib/latex/xengine.lua, run by ca11.lua. Every size and space here is in bp (14 bp = typst's 14 pt), and blocks
+% are spaced with \addvspace (the larger of the space below one and above the next).
 \documentclass[14pt,letterpaper]{extarticle}
 \usepackage[T1]{fontenc}
 % Times: newtxtext/newtxmath ship with every TeX Live, so the generated .tex compiles with stock pdflatex and no
 % repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman (docs/FONTS.md).
 \usepackage{newtxtext,newtxmath}
-\usepackage[letterpaper,margin=1in,footskip=0.3in]{geometry}
+% FRAP 32(a)(4): letter, 1 in margins; the page number in the bottom margin, where typst sets it.
+\usepackage[letterpaper,margin=1in,headheight=0pt,headsep=0pt,footskip=37.6bp]{geometry}
 \usepackage{etoolbox}      % table-of-citations page lists
+\usepackage{enumitem}
 \usepackage[hidelinks,unicode,bookmarks=false]{hyperref}
-\usepackage{xcolor}
+\usepackage{xengine} % lib/latex/xengine.sty, inlined by fb render
 \makeatletter
 
 % ---------------------------------------------------------------------------
 % Page, text and type (FRAP 32(a)(4)-(6); 11th Cir. R. 32-3)
 % ---------------------------------------------------------------------------
-\setlength{\parindent}{0.5in}
-\setlength{\parskip}{0pt}
-\raggedright
-\hyphenpenalty=10000
-\exhyphenpenalty=10000
+% Line boxes [typst pitch-double, pitch-single]: double spacing, 31.4 bp, for the body, the tables and the
+% certificates; single spacing, 20 bp, for headings, quotations, footnotes, the cover and the signature. Every size
+% 14 bp (FRAP 32(a)(5)(A)), footnotes too.
+\renewcommand\normalsize{\xe@lines{14}{31.4}}
+\newcommand\cabody{\normalsize}
+\newcommand\casingle{\xe@lines{14}{20}}
+\renewcommand\footnotesize{\casingle}
+\normalsize
+\setlength{\parindent}{0.5in} % after xengine.sty's \raggedright, which sets it to zero
+\xe@lists{0.5in}
+% The page number in the 14 bp type, single-spaced.
+\def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
+  \def\@oddfoot{\reset@font\casingle\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}
 \pagestyle{plain}
-\newcommand{\cabody}{\fontsize{14pt}{31.43pt}\selectfont}     % double spacing: 2.2 x type size
-\newcommand{\casingle}{\fontsize{14pt}{19.95pt}\selectfont}   % headings, quotations, notes, cover, certificates
-\AtBeginDocument{\cabody\setlength{\parindent}{0.5in}}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-% Footnotes: 14 point, single spaced (FRAP 32(a)(5)(A)); the marker is superscript.
-\renewcommand{\footnotesize}{\fontsize{14pt}{19.95pt}\selectfont\setlength{\parskip}{0.5em}}
-\renewcommand{\footnoterule}{\kern-3pt{\hrule width 0.3\textwidth height 0.5pt}\kern2.6pt}
-\renewcommand{\@makefntext}[1]{\parindent=0pt\noindent\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
-\setlength{\skip\footins}{1.2em}
+% Footnotes [footnote.entry]: 12.6 bp clear of the text, a 30 % rule, 7 bp above each note; the mark (58 % of 14 pt)
+% and a quarter em before the text. LaTeX resets the right skip inside a footnote: it is set back here.
+\setlength{\skip\footins}{12.6bp}
+\renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
+\xe@footnotemarks{14}
+\renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
+  \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25em #1}
 
-% Block quotations: inset half an inch on each side, single spaced, ragged right like the body (a rigid \rightskip
-% would justify them, and with hyphenation off a line that cannot be justified runs into the margin).
-\renewenvironment{quote}{\par\addvspace{1em}\begingroup\casingle\leftskip=0.5in\rightskip=0.5in plus 2em
-  \parindent=0pt\parskip=0.9em\relax}{\par\endgroup\addvspace{1em}}
+% Block quotations [quote]: 0.5 in in from both margins, single-spaced, 14 bp above and below.
+\renewenvironment{quote}{%
+  \par\addvspace{14bp}%
+  \begingroup\leftskip=0.5in\rightskip=\dimexpr0.5in\relax plus 1fil\relax\casingle\parindent=0pt\relax
+}{%
+  \par\endgroup\addvspace{14bp}%
+}
+
+% A block that is not split across pages (typst: block(breakable: false)): the last paragraph with the signature.
+\newcommand\cakeepbegin{\par\vbox\bgroup}
+\newcommand\cakeepend{\par\egroup}
 
 % ---------------------------------------------------------------------------
-% Headings (typst: style-heading). ca11.lua supplies the label and the entry; these set the form.
+% Headings (typst: style-heading). ca11.lua supplies the label and the entry; these set the form. A heading never
+% ends a page (\nobreak, and no orphans after it); its table-of-contents entry is written inside its paragraph.
 % ---------------------------------------------------------------------------
-% Typst sets the first line after a block on the natural line height, not the double-spaced one: each block
-% boundary gives back \caleadcut (double-spaced pitch minus natural height) so the gaps are typst's.
-\newlength{\caleadcut}\setlength{\caleadcut}{13.13pt}
-% A centered block: #1 space above, #2 space below, #3 text.
-\newcommand{\catitle}[3]{%
-  \vspace{\dimexpr#1-\caleadcut\relax}\par
-  \begingroup\centering\casingle#3\par\endgroup
-  \nopagebreak\vspace{\dimexpr#2-\caleadcut\relax}\par}
-% Section heading (level 1): bold capitals, centered; listed in the table of contents at its own page.
-\DeclareRobustCommand{\caHone}[1]{%
-  \catitle{1.5em}{1.1em}{\bfseries #1%
-  \addcontentsline{toc}{caLone}{\MakeUppercase{#1}}}}
+% After a heading no page break before the next block, a list included (LaTeX's \@afterheading: a list's
+% \@beginparpenalty is not added while \if@nobreak); the paragraph that follows keeps its indent.
+\newcommand\ca@afterheading{\@afterindenttrue\@afterheading}
+\@clubpenalty=\clubpenalty % \@afterheading restores the club penalty from it: no orphans (xengine.sty)
+% A centered bold heading, 21 / 15.4 bp around it. #1 text, #2 its table-of-contents entry (empty: not listed).
+\newcommand{\catitle}[2]{%
+  \par\addvspace{21bp}%
+  \begingroup\centering\casingle\bfseries\leavevmode
+  \ifx\relax#2\relax\else\addcontentsline{toc}{caLone}{#2}\fi#1\par\endgroup
+  \nobreak\addvspace{15.4bp}\ca@afterheading}
+% Section heading (level 1): bold, centered, as written; listed in the table of contents in capitals.
+\DeclareRobustCommand{\caHone}[1]{\catitle{#1}{\MakeUppercase{#1}}}
 % Section heading not listed in any table (Table of Contents).
-\DeclareRobustCommand{\caunnumhone}[1]{\catitle{1.5em}{1.1em}{\bfseries #1}}
-% Point heading of the Argument (level 2): bold capitals, centered. #1 label, #2 text, #3 TOC style, #4 entry.
-\DeclareRobustCommand{\capoint}[4]{\catitle{1.2em}{1em}{\bfseries\MakeUppercase{#1 #2}%
-  \ifx\relax#3\relax\else\addcontentsline{toc}{#3}{#4}\fi}}
-% Sub-heading: label in a half-inch box, text hangs under the text.
+\DeclareRobustCommand{\caunnumhone}[1]{\catitle{#1}{}}
+% Point and sub-point heading: label in a half-inch box, text hangs under the text, 15.4 / 12.6 bp.
 % #1 indent, #2 label, #3 text, #4 TOC style (empty: not listed), #5 TOC entry.
 \newcommand{\casub}[5]{%
-  \addvspace{\dimexpr1.1em-\caleadcut\relax}\par
+  \par\addvspace{15.4bp}%
   \begingroup\casingle\noindent\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\relax
-  \hspace*{#1}\makebox[0.5in][l]{#2}#3%
-  \ifx\relax#4\relax\else\addcontentsline{toc}{#4}{#5}\fi\par\endgroup
-  \nopagebreak\addvspace{\dimexpr0.9em-\caleadcut\relax}\par}
+  \ifx\relax#4\relax\else\addcontentsline{toc}{#4}{#5}\fi
+  \hspace*{#1}\makebox[0.5in][l]{#2}#3\par\endgroup
+  \nobreak\addvspace{12.6bp}\ca@afterheading}
 % Label of a table-of-contents entry: a half-inch box, then the title.
 \DeclareRobustCommand{\calab}[2]{\makebox[0.5in][l]{#1}#2}
 
 % ---------------------------------------------------------------------------
-% Tables of contents (typst: toc-entry). The entries are double spaced; #1 indent, #2 text, #3 page.
+% Table of contents (typst: toc-entry, listing-row): double-spaced rows (11th Cir. R. 32-3); the text wraps before a
+% 36.4 bp page column, a dot leader runs to the page. #1 indent, #2 text, #3 page.
 % ---------------------------------------------------------------------------
-\newcommand{\cadots}{\leaders\hbox to 0.16em{\hss.\hss}\hfill}
 \newcommand{\catocline}[3]{%
-  \par\begingroup\cabody\noindent\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\relax
-  \hspace*{#1}#2\nobreak\hspace{0.8em}\nobreak\cadots\nobreak\hbox to 2.2em{\hfill#3}\par\endgroup}
-\def\l@caLone#1#2{\par\addvspace{0.6em}\catocline{0in}{#1}{#2}}
-\def\l@caTzero#1#2{\par\addvspace{0.3em}\catocline{0in}{#1}{#2}}
-\def\l@caTone#1#2{\par\addvspace{0.3em}\catocline{0.5in}{#1}{#2}}
-\def\l@caTtwo#1#2{\par\addvspace{0.3em}\catocline{1in}{#1}{#2}}
-\def\l@caTthree#1#2{\par\addvspace{0.3em}\catocline{1.5in}{#1}{#2}}
-\def\l@caTfour#1#2{\par\addvspace{0.3em}\catocline{2in}{#1}{#2}}
-\def\l@caTfive#1#2{\par\addvspace{0.3em}\catocline{2.5in}{#1}{#2}}
+  \begingroup\cabody\setlength{\xe@col}{36.4bp}%
+  \xe@row{0bp}{\dimexpr#1+0.5in\relax}{\hspace*{#1}#2}{#3}%
+  \endgroup}
+\def\l@caLone#1#2{\catocline{0in}{#1}{#2}}
+\def\l@caTzero#1#2{\catocline{0in}{#1}{#2}}
+\def\l@caTone#1#2{\catocline{0.5in}{#1}{#2}}
+\def\l@caTtwo#1#2{\catocline{1in}{#1}{#2}}
+\def\l@caTthree#1#2{\catocline{1.5in}{#1}{#2}}
+\def\l@caTfour#1#2{\catocline{2in}{#1}{#2}}
+\def\l@caTfive#1#2{\catocline{2.5in}{#1}{#2}}
 
 % ---------------------------------------------------------------------------
 % Table of citations (typst: toa-section). Pages come from the links in the body (aux file), every page is listed.
 % ---------------------------------------------------------------------------
-% A link writes its page and its primary flag (1: the party primarily relies on it) to the aux file.
-\DeclareRobustCommand{\catoahit}[3]{#3\protected@write\@auxout{}{\string\catoaentry{#1}{\thepage}{#2}}}
+% A link writes its page and its primary flag (1: the party primarily relies on it) to the aux file, from right after
+% its first word (ca11.lua puts \catoahit there).
+\DeclareRobustCommand{\catoahit}[2]{\protected@write\@auxout{}{\string\catoaentry{#1}{\thepage}{#2}}}
 % Each (authority, page) pair is kept once, in document order; a primary page is marked with an asterisk.
 \newcommand{\catoaentry}[3]{%
   \@ifundefined{catoaseen@#1@#2}{%
@@ -101,37 +124,54 @@
     }%
   }{}%
   \ifnum#3=1 \expandafter\gdef\csname catoastar@#1@#2\endcsname{}\fi}
-% The page list of one authority: "4, 5, *6", from the first pass's aux file (empty before it exists).
-% \catoacur is the authority being listed; \forcsvlist (etoolbox) runs \catoaadd over its pages.
+% The page list of one authority: "4, 5*, 6", from the first pass's aux file (empty before it exists); the asterisk
+% follows the page (typst). \catoacur is the authority being listed; \forcsvlist (etoolbox) runs \catoaadd over its
+% pages.
 \newcommand{\catoaadd}[1]{%
   \ifx\catoaout\@empty\else\g@addto@macro\catoaout{, }\fi
-  \@ifundefined{catoastar@\catoacur @#1}{}{\g@addto@macro\catoaout{*}}%
-  \g@addto@macro\catoaout{#1}}
+  \g@addto@macro\catoaout{#1}%
+  \@ifundefined{catoastar@\catoacur @#1}{}{\g@addto@macro\catoaout{*}}}
 \newcommand{\catoapages}[1]{%
   \@ifundefined{catoa@#1}{}{%
     \begingroup
     \gdef\catoacur{#1}\gdef\catoaout{}%
     \edef\catoalist{\csname catoa@#1\endcsname}%
-    \forcsvlist{\catoaadd}{\catoalist}%
+    \expandafter\forcsvlist\expandafter\catoaadd\expandafter{\catoalist}% (the list itself, not its name)
     \catoaout
     \endgroup}}
-% A group heading; #2 is 1 for the first group, which carries the "Page(s)" label.
+% A group heading, single-spaced, 14 bp (the first) or 19.6 bp above, 2.8 bp below; #2 is 1 for the first group,
+% which carries the "Page(s)" label. It stays with its first entry.
 \newcommand{\catoagroup}[2]{%
-  \par\begingroup\cabody
-  \ifnum#2=1 \addvspace{0.6em}\else \addvspace{1.4em}\fi
-  \noindent\textbf{#1}\ifnum#2=1 \hfill\textbf{\underline{Page(s)}}\fi\par\endgroup
-  \nopagebreak}
-% One authority: #1 name (may be empty; a case name is italic), #2 citation, #3 key.
+  \par\ifnum#2=1 \addvspace{14bp}\else\addvspace{19.6bp}\fi
+  \begingroup\casingle\noindent\textbf{#1}\ifnum#2=1 \hskip 0pt plus 1fill\textbf{\underline{Page(s)}}\fi
+  \par\endgroup\nobreak\addvspace{2.8bp}}
+% One authority [listing-row], double-spaced: #1 name (may be empty; a case name is italic), #2 citation, #3 key.
+% The page column is 56 bp, or the width of a longer page list.
 \def\catoaempty{}
+\newlength\ca@w
 \newcommand{\catoarow}[3]{%
-  \par\begingroup\cabody\addvspace{0.7em}\begin{samepage}\hangindent=0.35in\hangafter=1\relax\noindent
-  \ifx#1\catoaempty\else #1,\\\fi
-  #2\hspace{0.8em}\cadots\hspace{0.3em}\catoapages{#3}\par\end{samepage}\endgroup}
+  \begingroup\cabody
+  \settowidth{\ca@w}{\catoapages{#3}}%
+  \setlength{\xe@col}{56bp}\ifdim\ca@w>\xe@col\setlength{\xe@col}{\ca@w}\fi
+  \def\catoaname{#1}%
+  \xe@row{0bp}{0.35in}{\ifx\catoaname\catoaempty\else #1,\newline\fi #2}{\catoapages{#3}}%
+  \endgroup}
 
 % ---------------------------------------------------------------------------
-% Cover rules (11th Cir. R. 28-1(a)): short rules drawn with no line height.
-\newcommand{\cashortrule}{\par\nointerlineskip\vskip 0.6em
-  \hbox to\textwidth{\hss\vrule width 2in height 0.7pt depth 0pt\hss}\nointerlineskip\vskip 0.6em\par}
+% Cover (typst: cover-body): single-spaced, centered, 4.9 bp between paragraphs, 14 bp (1 em) between its parts.
+% ---------------------------------------------------------------------------
+\newcommand{\cagap}{\par\addvspace{14bp}}
+\newcommand{\cashortrule}{\cagap\nointerlineskip\hbox to\textwidth{\hss\vrule width 2in height 0.7pt depth 0pt\hss}%
+  \nointerlineskip\cagap}
+
+% The signature block (typst: signature-block): single-spaced, 19.6 bp above; the signer's lines from the middle of
+% the page, then 16.8 bp below them the office address at the margin. #1 signer's lines, #2 address lines (or empty).
+\newcommand{\casignature}[2]{%
+  \par\addvspace{19.6bp}%
+  \begingroup\casingle\parindent=0pt\relax
+  {\leftskip=0.5\textwidth\noindent #1\par}%
+  \def\ca@addr{#2}\ifx\ca@addr\@empty\else\addvspace{16.8bp}\noindent #2\par\fi
+  \endgroup}
 
 \begin{document}
 
@@ -140,51 +180,41 @@
 % party designations, which sit at the middle of the page (typst: cover-body).
 % ---------------------------------------------------------------------------
 \thispagestyle{empty}
-\casingle\setlength{\parskip}{0.35em}
-\par\begingroup\centering\textbf{COURT OF APPEALS NO. $case_number$}\par\endgroup
-\vspace{1.2em}
-\par\begingroup\centering\textbf{IN THE UNITED STATES COURT OF APPEALS\\FOR THE ELEVENTH CIRCUIT}\par\endgroup
+\begingroup\casingle\centering\parskip=4.9bp\relax
+\textbf{COURT OF APPEALS NO. $case_number$}\par
+\cagap
+{\parskip=0pt\relax\textbf{IN THE UNITED STATES COURT OF APPEALS}\\\textbf{FOR THE ELEVENTH CIRCUIT}\par}
 \cashortrule
 $for(caption)$
-\par\begingroup\centering
 $for(caption.names)$$it$\par
 $endfor$
-\endgroup
-\par\noindent\hspace*{0.5\textwidth}$caption.designation$\par
+{\raggedright\leftskip=0.5\textwidth\noindent $caption.designation$\par}
 $sep$
-\par\begingroup\centering v.\par\endgroup
+\addvspace{4.2bp}v.\par\addvspace{4.2bp}
 $endfor$
 \cashortrule
-\par\begingroup\centering
 $proceeding$\par
 $if(district_court_case)$D.C. No. $district_court_case$$if(judge)$; $judge$$endif$\par
 $elseif(judge)$$judge$\par
 $endif$
-\endgroup
 \cashortrule
-\par\begingroup\centering\textbf{$brief_title$}\par\endgroup
+\textbf{$brief_title$}\par
 \cashortrule
-\par\begingroup\centering
+{\parskip=0pt\relax
 $for(counsel)$
-$for(counsel.names)$$it$\par
+$for(counsel.names)$$it$\\$endfor$$for(counsel.lines)$$it$$sep$\\$endfor$$if(counsel.phone)$\\$counsel.phone$$endif$\par
+$sep$\addvspace{7bp}
 $endfor$
-$for(counsel.lines)$$it$\par
-$endfor$
-$if(counsel.phone)$$counsel.phone$\par
-$endif$
-\vspace{0.5em}
-$endfor$
+}
 \endgroup
 
 % ---------------------------------------------------------------------------
 % Front matter (lowercase roman): table of contents, table of authorities
 % ---------------------------------------------------------------------------
 \clearpage
-\setlength{\parskip}{0pt}
 \pagenumbering{roman}
-\setcounter{page}{1}
 \caunnumhone{Table of Contents}
-\begingroup\casingle\hfill\textbf{\underline{Page}}\par\endgroup
+\par\addvspace{4.2bp}\begingroup\casingle\noindent\hskip 0pt plus 1fill\textbf{\underline{Page}}\par\endgroup
 \@starttoc{toc}
 
 \clearpage
@@ -195,71 +225,30 @@ $toa$
 % Body (arabic from 1)
 % ---------------------------------------------------------------------------
 \clearpage
-\setcounter{page}{1}
 \pagenumbering{arabic}
 \cabody
 $body$
 
-% The signature block (typst: signature-block). It stays with the last paragraph (samepage).
-\nopagebreak\par\addvspace{1.4em}\noindent\hspace*{0.5\textwidth}
-\begin{minipage}[t]{0.5\textwidth}\casingle
-/s/ $signature.signer$\\
-$signature.signer$
-$for(signature.lines)$\\
-$it$
-$endfor$
-$if(signature.address)$
-\par\addvspace{1.2em}\noindent
-$for(signature.address)$$it$\\
-$endfor$
-$endif$
-\end{minipage}
-$if(keep)$\end{samepage}$endif$
+% The signature block (typst: signature-block). It stays with the last paragraph (\cakeepbegin in ca11.lua).
+\casignature{/s/ $signature.signer$\\$signature.signer$$for(signature.lines)$\\$it$$endfor$}{$for(signature.address)$$it$$sep$\\$endfor$}
+$if(keep)$\cakeepend$endif$
 
 % ---------------------------------------------------------------------------
-% Certificate of compliance (FRAP 32(g)(1); 11th Cir. R. 28-3(l); typst: certificate-of-compliance)
+% Certificate of compliance (FRAP 32(g)(1); 11th Cir. R. 28-3(l); typst: certificate-of-compliance). Double-spaced.
 % ---------------------------------------------------------------------------
 \clearpage
 \caHone{Certificate of Compliance}
-\begingroup\cabody\setlength{\parskip}{0.94em}\parindent=0.5in\relax
-1\. This document complies with the word limit of Fed. R. App. P. 32(a)(7)(B) because, excluding the parts of the document exempted by Fed. R. App. P. 32(f) and 11th Cir. R. 32-4, this document contains $words$ words. This word count was computed from the source text of this document.\par
-2\. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced typeface using LaTeX in Liberation Serif, 14-point font.\par
-\endgroup
-\par\addvspace{1.4em}\noindent\hspace*{0.5\textwidth}
-\begin{minipage}[t]{0.5\textwidth}\casingle
-/s/ $signature.signer$\\
-$signature.signer$
-$for(signature.lines)$\\
-$it$
-$endfor$
-$if(signature.address)$
-\par\addvspace{1.2em}\noindent
-$for(signature.address)$$it$\\
-$endfor$
-$endif$
-\end{minipage}
+1. This document complies with the word limit of Fed. R. App. P. 32(a)(7)(B) because, excluding the parts of the document exempted by Fed. R. App. P. 32(f) and 11th Cir. R. 32-4, this document contains $words$ words. This word count was computed from the source text of this document.\par
+2. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced typeface, Times New Roman, in 14-point font.\par
+\casignature{/s/ $signature.signer$\\$signature.signer$$for(signature.lines)$\\$it$$endfor$}{$for(signature.address)$$it$$sep$\\$endfor$}
 
 % ---------------------------------------------------------------------------
-% Certificate of service (FRAP 25(d); 11th Cir. R. 28-3(m); typst: certificate-of-service)
+% Certificate of service (FRAP 25(d); 11th Cir. R. 28-3(m); typst: certificate-of-service). Double-spaced.
 % ---------------------------------------------------------------------------
 \clearpage
 \caHone{Certificate of Service}
-\begingroup\cabody\setlength{\parskip}{0.94em}\parindent=0.5in\relax
 I hereby certify that I have electronically filed the foregoing with the Clerk of the Court using the CM/ECF system, which will automatically send e-mail notification of such filing to all parties who have appeared in the action.\par
 This $service.date$.\par
-\endgroup
-\par\addvspace{1.4em}\noindent\hspace*{0.5\textwidth}
-\begin{minipage}[t]{0.5\textwidth}\casingle
-/s/ $signature.signer$\\
-$signature.signer$
-$for(signature.lines)$\\
-$it$
-$endfor$
-$if(signature.address)$
-\par\addvspace{1.2em}\noindent
-$for(signature.address)$$it$\\
-$endfor$
-$endif$
-\end{minipage}
+\casignature{/s/ $signature.signer$\\$signature.signer$$for(signature.lines)$\\$it$$endfor$}{$for(signature.address)$$it$$sep$\\$endfor$}
 
 \end{document}
