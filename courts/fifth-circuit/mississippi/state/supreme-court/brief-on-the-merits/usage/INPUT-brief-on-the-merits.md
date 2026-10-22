@@ -97,61 +97,61 @@ authorities:
   bl: {kind: case, name: "State ex rel. McClurg v. Powell", cite: "27 So. 927 (Miss. 1900)"}
   bm: {kind: case, name: "State ex rel. Moore v. Molpus", cite: "578 So. 2d 624 (Miss. 1991)"}
   bn: {kind: case, name: "State v. Wood", cite: "187 So. 2d 820 (Miss. 1966)"}
-  bo: {kind: other, name: "U.S. CONST. art. I, § 4", cite: ""}
-  bp: {kind: other, name: "MISS. CONST. art. 1, § 2", cite: ""}
-  bq: {kind: other, name: "MISS. CONST. art. 5, § 135", cite: ""}
-  br: {kind: other, name: "MISS. CONST. art. 5, § 139", cite: ""}
-  bs: {kind: other, name: "MISS. CONST. art. 5, § 140", cite: ""}
-  bt: {kind: other, name: "MISS. CONST. art. 6, § 146", cite: ""}
-  bu: {kind: other, name: "MISS. CONST. art. 6, § 156", cite: ""}
-  bv: {kind: other, name: "MISS. CONST. art. 6, § 171", cite: ""}
-  bw: {kind: other, name: "MISS. CONST. art. 8, § 206", cite: ""}
-  bx: {kind: other, name: "MISS. CONST. art. 8, § 213-A (1944)", cite: ""}
-  by: {kind: other, name: "MISS. CONST. art. 12, § 241", cite: ""}
-  bz: {kind: other, name: "MISS. CONST. art. 12, § 250", cite: ""}
-  ca: {kind: other, name: "MISS. CONST. art. 14, § 260", cite: ""}
-  cb: {kind: other, name: "MISS. CONST. art. 15, § 273(3)", cite: ""}
-  cc: {kind: other, name: "MISS. CONST. art. 15, § 273(4)", cite: ""}
-  cd: {kind: other, name: "MISS. CONST. art. 15, § 273(8)", cite: ""}
-  ce: {kind: other, name: "MISS. CONST. art. 15, § 273(9)", cite: ""}
-  cf: {kind: other, name: "MISS. CONST. art. 15, § 273(10)", cite: ""}
-  cg: {kind: other, name: "MISS. CONST. art. 15, § 273(12)", cite: ""}
-  ch: {kind: other, name: "MISS. CONST. art. 15, § 273(13)", cite: ""}
-  ci: {kind: statute, name: "Miss. Code Ann. § 9-3-9", cite: ""}
-  cj: {kind: statute, name: "Miss. Code Ann. § 19-1-35", cite: ""}
-  ck: {kind: statute, name: "Miss. Code Ann. § 19-1-53", cite: ""}
-  cl: {kind: statute, name: "Miss. Code Ann. § 21-7-1", cite: ""}
-  cm: {kind: statute, name: "Miss. Code Ann. § 23-15-1037", cite: ""}
-  cn: {kind: statute, name: "Miss. Code Ann. § 23-15-1093", cite: ""}
-  co: {kind: statute, name: "Miss. Code Ann. § 23-17-1", cite: ""}
-  cp: {kind: statute, name: "Miss. Code Ann. § 23-17-5", cite: ""}
-  cq: {kind: statute, name: "Miss. Code Ann. § 23-17-11", cite: ""}
-  cr: {kind: statute, name: "Miss. Code Ann. § 23-17-19", cite: ""}
-  cs: {kind: statute, name: "Miss. Code Ann. § 23-17-23(b)", cite: ""}
-  ct: {kind: statute, name: "Miss. Code Ann. § 23-17-31", cite: ""}
-  cu: {kind: statute, name: "Miss. Code Ann. § 37-3-2(2)(a)", cite: ""}
-  cv: {kind: statute, name: "Miss. Code Ann. § 37-101-3", cite: ""}
-  cw: {kind: statute, name: "Miss. Code Ann. § 63-17-57", cite: ""}
-  cx: {kind: statute, name: "Miss. Code Ann. § 73-5-1", cite: ""}
-  cy: {kind: statute, name: "Miss. Code Ann. § 73-19-7", cite: ""}
-  cz: {kind: statute, name: "Miss. Code Ann. § 73-21-75", cite: ""}
-  da: {kind: statute, name: "Miss. Code Ann. § 73-30-5", cite: ""}
-  db: {kind: statute, name: "Miss. Code Ann. § 73-57-7", cite: ""}
-  dc: {kind: statute, name: "Miss. Code Ann. § 75-57-101", cite: ""}
-  dd: {kind: statute, name: "Miss. Code Ann. § 75-60-4(1)", cite: ""}
-  de: {kind: other, name: "H.R. Con. Res. 22, 2014 Leg., Reg. Sess. (Miss. 2014)", cite: ""}
-  df: {kind: other, name: "H.R. Con. Res. 26, 2015 Leg., Reg. Sess. (Miss. 2015)", cite: ""}
-  dg: {kind: other, name: "H.R. Con. Res. 43, 2020 Leg., Reg. Sess. (Miss. 2020)", cite: ""}
-  dh: {kind: other, name: "H.R. Con. Res. 58, 2003 Leg., Reg. Sess. (Miss. 2003)", cite: ""}
-  di: {kind: other, name: "S. Con. Res. 510, 2007 Leg., Reg. Sess. (Miss. 2007)", cite: ""}
-  dj: {kind: other, name: "S. Con. Res. 523, 2009 Leg., Reg. Sess. (Miss. 2009)", cite: ""}
-  dk: {kind: other, name: "S. Con. Res. 549, 2015 Leg., Reg. Sess. (Miss. 2015)", cite: ""}
-  dl: {kind: other, name: "Hosemann, Miss. Att'y Gen. Op. No. 2009-00001, 2009 WL 367638 (Jan. 9, 2009)", cite: ""}
-  dm: {kind: other, name: "Turner, Miss. Att'y Gen. Op. No. 2015-00158, 2015 WL 4394179 (June 5, 2015)", cite: ""}
-  dn: {kind: other, name: "City of Madison Zoning Ordinance § 7.02, art. VII", cite: ""}
-  do: {kind: other, name: "City of Madison Zoning Ordinance § 8.02, art. VIII", cite: ""}
-  dp: {kind: other, name: "THE FEDERALIST No. 51 (James Madison)", cite: ""}
-  dq: {kind: other, name: "THE FEDERALIST No. 78 (Alexander Hamilton)", cite: ""}
+  bo: {kind: other, name: "", cite: "U.S. CONST. art. I, § 4"}
+  bp: {kind: other, name: "", cite: "MISS. CONST. art. 1, § 2"}
+  bq: {kind: other, name: "", cite: "MISS. CONST. art. 5, § 135"}
+  br: {kind: other, name: "", cite: "MISS. CONST. art. 5, § 139"}
+  bs: {kind: other, name: "", cite: "MISS. CONST. art. 5, § 140"}
+  bt: {kind: other, name: "", cite: "MISS. CONST. art. 6, § 146"}
+  bu: {kind: other, name: "", cite: "MISS. CONST. art. 6, § 156"}
+  bv: {kind: other, name: "", cite: "MISS. CONST. art. 6, § 171"}
+  bw: {kind: other, name: "", cite: "MISS. CONST. art. 8, § 206"}
+  bx: {kind: other, name: "", cite: "MISS. CONST. art. 8, § 213-A (1944)"}
+  by: {kind: other, name: "", cite: "MISS. CONST. art. 12, § 241"}
+  bz: {kind: other, name: "", cite: "MISS. CONST. art. 12, § 250"}
+  ca: {kind: other, name: "", cite: "MISS. CONST. art. 14, § 260"}
+  cb: {kind: other, name: "", cite: "MISS. CONST. art. 15, § 273(3)"}
+  cc: {kind: other, name: "", cite: "MISS. CONST. art. 15, § 273(4)"}
+  cd: {kind: other, name: "", cite: "MISS. CONST. art. 15, § 273(8)"}
+  ce: {kind: other, name: "", cite: "MISS. CONST. art. 15, § 273(9)"}
+  cf: {kind: other, name: "", cite: "MISS. CONST. art. 15, § 273(10)"}
+  cg: {kind: other, name: "", cite: "MISS. CONST. art. 15, § 273(12)"}
+  ch: {kind: other, name: "", cite: "MISS. CONST. art. 15, § 273(13)"}
+  ci: {kind: statute, name: "", cite: "Miss. Code Ann. § 9-3-9"}
+  cj: {kind: statute, name: "", cite: "Miss. Code Ann. § 19-1-35"}
+  ck: {kind: statute, name: "", cite: "Miss. Code Ann. § 19-1-53"}
+  cl: {kind: statute, name: "", cite: "Miss. Code Ann. § 21-7-1"}
+  cm: {kind: statute, name: "", cite: "Miss. Code Ann. § 23-15-1037"}
+  cn: {kind: statute, name: "", cite: "Miss. Code Ann. § 23-15-1093"}
+  co: {kind: statute, name: "", cite: "Miss. Code Ann. § 23-17-1"}
+  cp: {kind: statute, name: "", cite: "Miss. Code Ann. § 23-17-5"}
+  cq: {kind: statute, name: "", cite: "Miss. Code Ann. § 23-17-11"}
+  cr: {kind: statute, name: "", cite: "Miss. Code Ann. § 23-17-19"}
+  cs: {kind: statute, name: "", cite: "Miss. Code Ann. § 23-17-23(b)"}
+  ct: {kind: statute, name: "", cite: "Miss. Code Ann. § 23-17-31"}
+  cu: {kind: statute, name: "", cite: "Miss. Code Ann. § 37-3-2(2)(a)"}
+  cv: {kind: statute, name: "", cite: "Miss. Code Ann. § 37-101-3"}
+  cw: {kind: statute, name: "", cite: "Miss. Code Ann. § 63-17-57"}
+  cx: {kind: statute, name: "", cite: "Miss. Code Ann. § 73-5-1"}
+  cy: {kind: statute, name: "", cite: "Miss. Code Ann. § 73-19-7"}
+  cz: {kind: statute, name: "", cite: "Miss. Code Ann. § 73-21-75"}
+  da: {kind: statute, name: "", cite: "Miss. Code Ann. § 73-30-5"}
+  db: {kind: statute, name: "", cite: "Miss. Code Ann. § 73-57-7"}
+  dc: {kind: statute, name: "", cite: "Miss. Code Ann. § 75-57-101"}
+  dd: {kind: statute, name: "", cite: "Miss. Code Ann. § 75-60-4(1)"}
+  de: {kind: other, name: "", cite: "H.R. Con. Res. 22, 2014 Leg., Reg. Sess. (Miss. 2014)"}
+  df: {kind: other, name: "", cite: "H.R. Con. Res. 26, 2015 Leg., Reg. Sess. (Miss. 2015)"}
+  dg: {kind: other, name: "", cite: "H.R. Con. Res. 43, 2020 Leg., Reg. Sess. (Miss. 2020)"}
+  dh: {kind: other, name: "", cite: "H.R. Con. Res. 58, 2003 Leg., Reg. Sess. (Miss. 2003)"}
+  di: {kind: other, name: "", cite: "S. Con. Res. 510, 2007 Leg., Reg. Sess. (Miss. 2007)"}
+  dj: {kind: other, name: "", cite: "S. Con. Res. 523, 2009 Leg., Reg. Sess. (Miss. 2009)"}
+  dk: {kind: other, name: "", cite: "S. Con. Res. 549, 2015 Leg., Reg. Sess. (Miss. 2015)"}
+  dl: {kind: other, name: "", cite: "Hosemann, Miss. Att'y Gen. Op. No. 2009-00001, 2009 WL 367638 (Jan. 9, 2009)"}
+  dm: {kind: other, name: "", cite: "Turner, Miss. Att'y Gen. Op. No. 2015-00158, 2015 WL 4394179 (June 5, 2015)"}
+  dn: {kind: other, name: "", cite: "City of Madison Zoning Ordinance § 7.02, art. VII"}
+  do: {kind: other, name: "", cite: "City of Madison Zoning Ordinance § 8.02, art. VIII"}
+  dp: {kind: other, name: "", cite: "THE FEDERALIST No. 51 (James Madison)"}
+  dq: {kind: other, name: "", cite: "THE FEDERALIST No. 78 (Alexander Hamilton)"}
 ---
 # STATEMENT OF ISSUES
 

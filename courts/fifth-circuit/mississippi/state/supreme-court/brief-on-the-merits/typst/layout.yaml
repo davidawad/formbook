@@ -1,0 +1,76 @@
+# Supreme Court of Mississippi (miss): brief on the merits (Rule 28(a)). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to MRAP 32(a) and (b) (../rules.md, MISS-*); lengths in points. No case text here: every string printed comes from
+# the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # MISS-FORM-002: body text at least 12-point
+pitch:
+  body: 27.6              # MISS-FORM-004: double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # quotations, footnotes, headings, cover and signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 54, left: 108, right: 36}   # MISS-FORM-003: 1 in top, 3/4 in bottom, 1 1/2 in left, 1/2 in right
+indent: 36
+# MISS-FORM-001: every page numbered: the cover unnumbered, the tables i, ii .., the body from 1.
+page_number: {align: center, front: lower-roman}
+footnote: {size: 11, pitch: 12.65, gap: 6}   # MISS-FORM-002, -004: footnotes at least 11-point, single spaced (1.15 x 11 pt)
+quote: {left: 36, right: 36, above: 12, below: 12}   # MISS-FORM-004: quotations single spaced, indented
+heading:
+  - {align: center, bold: true, above: 14.4, below: 12}
+  - {bold: true, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, above: 13.2, below: 7.2}
+  - {bold: true, above: 13.2, below: 7.2}
+  - {italic: true, above: 13.2, below: 7.2}
+# The cover, a page of its own (MRAP 32(a)(1)-(6), 32(b); MISS-COV-001, MISS-MOT-002): the court, the
+# case number, the style of the case (one line per entry), the title, the nature of the proceeding, the oral-argument statement and counsel, side by side.
+cover:
+  - {text: "IN THE SUPREME COURT OF MISSISSIPPI", align: center, bold: true}
+  - {text: "No. {case_number}", align: center, above: 9.6, below: 19.2}
+  - {text: "{caption}"}
+  - {text: "{brief_title}", align: center, bold: true, above: 21.6, below: 19.2}
+  - {text: "{proceeding}", align: center, optional: true, below: 19.2}
+  - {text: "{oral_argument}", align: center, bold: true, optional: true, below: 19.2}
+  - columns:
+      each: counsel
+      blocks:
+        - {text: "{names}"}
+        - {text: "{lines}"}
+    gutter: 21.6
+# MRAP 28(a)(2), 28(m) (MISS-SEC-001, MISS-SEC-005): a table of contents and a table of cases, statutes and other
+# authorities with page references, each on pages of its own; the authorities grouped by kind (the frontmatter's keyed
+# `authorities`, cited by `[text](toa:key)` links), case names in italics, seven pages or more "passim".
+contents: {title: "TABLE OF CONTENTS", depth: 4, col: 36, hang: 18, step: 18, above: 7.2}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 56
+  hang: 18
+  above: 6
+  passim: 7
+  group: {bold: true, above: 13.2, below: 6}
+  kinds:
+    - {kind: case, title: "CASES", italic: true}
+    - {kind: statute, title: "STATUTES"}
+    - {kind: rule, title: "RULES"}
+    - {kind: other, title: "OTHER AUTHORITIES"}
+# The date and the signature blocks (MISS-CERT-002), never split.
+closing:
+  - group:
+      - {text: "Respectfully submitted, {date}.", pitch: body}
+      - columns:
+          each: signature
+          blocks:
+            - {text: "{lines}"}
+        gutter: 21.6
+        above: 13.8
+    above: 13.8
+# The proof of service (MRAP 25(d), MISS-CERT-001) on a page of its own: the filer's wording, the date, the signature.
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 14.4}
+      - {text: "{service.text}", pitch: body, indent: 36}
+      - group:
+          - {text: "{service.date}", pitch: body}
+          - columns:
+              each: signature
+              blocks:
+                - {text: "{lines}"}
+            gutter: 21.6
+            above: 13.8

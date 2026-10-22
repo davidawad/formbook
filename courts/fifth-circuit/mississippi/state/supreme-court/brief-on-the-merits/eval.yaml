@@ -1,0 +1,9 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) but do not yet break every page where
+# typst does: on p17 LaTeX keeps two more body lines and moves footnote 9 to p18, apart from its mark (pages 18-22
+# end differently); Word keeps one more body line above two notes on p13 (pages 14-21 end differently), and its table
+# of authorities (p3) gives page 4 for "Smith v. Clark, 189 F. Supp. 2d 548" (typst and LaTeX 3: two keyed links that start
+# with the same words). Pages equal; 980/991 (latex) and 979/991 (docx) lines identical. Shared-model items
+# (docs/open-items/fb-595.54.51.md); reported, not gated (fb-595.54.51).
+params:
+  cross_engine: report

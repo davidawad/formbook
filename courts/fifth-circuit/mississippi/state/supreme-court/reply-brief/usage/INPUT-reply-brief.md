@@ -84,22 +84,22 @@ authorities:
   bh: {kind: case, name: "Smith v. Hosemann", cite: "852 F. Supp. 2d 757 (S.D. Miss. 2011)"}
   bi: {kind: case, name: "Tellus Operating Grp., LLC v. Maxwell Energy, Inc.", cite: "156 So. 3d 255 (Miss. 2015)"}
   bj: {kind: case, name: "Wilson v. Hosemann", cite: "185 So. 3d 370 (Miss. 2016)"}
-  bk: {kind: other, name: "MISS. CONST. art. 3, § 5", cite: ""}
-  bl: {kind: other, name: "MISS. CONST. art. 4, § 104", cite: ""}
-  bm: {kind: other, name: "MISS. CONST. art. 15, § 273(3)", cite: ""}
-  bn: {kind: other, name: "MISS. CONST. art. 15, § 273(9)", cite: ""}
-  bo: {kind: other, name: "MISS. CONST. art. 15, § 273(12)", cite: ""}
-  bp: {kind: other, name: "U.S. CONST. art. VI, cl. 2", cite: ""}
-  bq: {kind: statute, name: "2 U.S.C. § 2a", cite: ""}
-  br: {kind: statute, name: "2 U.S.C. § 2c", cite: ""}
-  bs: {kind: statute, name: "28 U.S.C. § 2284", cite: ""}
-  bt: {kind: statute, name: "Miss. Code Ann. § 5-3-121", cite: ""}
-  bu: {kind: statute, name: "Miss. Code Ann. § 5-3-123", cite: ""}
-  bv: {kind: statute, name: "Miss. Code Ann. § 9-4-1", cite: ""}
-  bw: {kind: statute, name: "Miss. Code Ann. § 9-4-5", cite: ""}
-  bx: {kind: statute, name: "Miss. Code Ann. § 15-1-49", cite: ""}
-  by: {kind: statute, name: "Miss. Code Ann. § 23-15-927", cite: ""}
-  bz: {kind: statute, name: "Miss. Code Ann. § 23-15-1037", cite: ""}
+  bk: {kind: other, name: "", cite: "MISS. CONST. art. 3, § 5"}
+  bl: {kind: other, name: "", cite: "MISS. CONST. art. 4, § 104"}
+  bm: {kind: other, name: "", cite: "MISS. CONST. art. 15, § 273(3)"}
+  bn: {kind: other, name: "", cite: "MISS. CONST. art. 15, § 273(9)"}
+  bo: {kind: other, name: "", cite: "MISS. CONST. art. 15, § 273(12)"}
+  bp: {kind: other, name: "", cite: "U.S. CONST. art. VI, cl. 2"}
+  bq: {kind: statute, name: "", cite: "2 U.S.C. § 2a"}
+  br: {kind: statute, name: "", cite: "2 U.S.C. § 2c"}
+  bs: {kind: statute, name: "", cite: "28 U.S.C. § 2284"}
+  bt: {kind: statute, name: "", cite: "Miss. Code Ann. § 5-3-121"}
+  bu: {kind: statute, name: "", cite: "Miss. Code Ann. § 5-3-123"}
+  bv: {kind: statute, name: "", cite: "Miss. Code Ann. § 9-4-1"}
+  bw: {kind: statute, name: "", cite: "Miss. Code Ann. § 9-4-5"}
+  bx: {kind: statute, name: "", cite: "Miss. Code Ann. § 15-1-49"}
+  by: {kind: statute, name: "", cite: "Miss. Code Ann. § 23-15-927"}
+  bz: {kind: statute, name: "", cite: "Miss. Code Ann. § 23-15-1037"}
 ---
 # SUMMARY OF THE ARGUMENT
 
@@ -155,7 +155,7 @@ Miss. Code Ann. § 23-15-1039 states,
 
 Thus, state law contemplates that *if* Mississippi’s number of representatives decreases, and § 23-15-1037 is not amended “to conform to the new apportionment,” then there will be *no* districts because representatives will be elected at large. By its plain terms, Miss. Code Ann. § 23-15-1039 renders [Miss. Code Ann. § 23-15-1037](toa:bz) ineffective today.
 
-This plain-language reading of the two statutes matches the Court’s decision in [*Mauldin*](toa:av) *v. Branch*, 866 So. 2d 429, 434 (Miss. 2003). Following the United States Supreme Court’s affirmance of the federal injunction, this Court heard the [*Mauldin*](toa:av) appeal from the Hinds County Chancery Court’s redistricting order. After finding that the chancery court lacked jurisdiction to redistrict, the Court held state law required an at-large election under Miss. Code Ann. § 23-15-1039. [*Mauldin*](toa:av), 866 So. 2d at 434*.* The Court described § 23-15-1039 as the State’s “statutorily-mandated and federally-approved default procedure which comes into play when the Legislature fails to act.” *Id.* In fact, the Court went so far as to declare that to ignore § 23-15-1039 would “undermine all enforcement of state law.” [*Mauldin*](toa:av), 866 So. 2d at 435.
+This plain-language reading of the two statutes matches the Court’s decision in [*Mauldin*](toa:av) *v. Branch*, 866 So. 2d 429, 434 (Miss. 2003). Following the United States Supreme Court’s affirmance of the federal injunction, this Court heard the [*Mauldin*](toa:av) appeal from the Hinds County Chancery Court’s redistricting order. After finding that the chancery court lacked jurisdiction to redistrict, the Court held state law required an at-large election under Miss. Code Ann. § 23-15-1039. [*Mauldin*](toa:av), 866 So. 2d at 434. The Court described § 23-15-1039 as the State’s “statutorily-mandated and federally-approved default procedure which comes into play when the Legislature fails to act.” *Id.* In fact, the Court went so far as to declare that to ignore § 23-15-1039 would “undermine all enforcement of state law.” [*Mauldin*](toa:av), 866 So. 2d at 435.
 
 As the [*Mauldin*](toa:av) Court recognized, the “default procedure” has been triggered, and Mississippi has *no* congressional districts as a matter of state law. [Miss. Code Ann. § 23-15-1037](toa:bz) may remain on the books, but Miss. Code Ann. § 23-15-1039 trumps. Only under the federal injunction does Mississippi have any congressional districts at all.
 
@@ -199,7 +199,7 @@ The Secretary was a party to the [*Smith*](toa:bh) cases, and to this day, he is
 
 ##### iii. The Secretary is judicially estopped from now claiming [Miss. Code Ann. § 23-15-1037](toa:bz) is enforceable.
 
-The Court should hold the Secretary of State is judicially estopped from now claiming the five-district districting plan is indeed enforceable (but for “other purposes”) because it has never been repealed. In [*State ex rel. Moore v. Molpus*](toa:az), 578 So. 2d 624 (Miss. 1991), the Court applied collateral estoppel to bar the Secretary of State from relitigating whether Mississippi’s original voter initiative amendment was effective*.* Similarly, here the Court should hold the Secretary is judicially estopped from taking a contrary position to his position in [*Smith*](toa:bh).
+The Court should hold the Secretary of State is judicially estopped from now claiming the five-district districting plan is indeed enforceable (but for “other purposes”) because it has never been repealed. In [*State ex rel. Moore v. Molpus*](toa:az), 578 So. 2d 624 (Miss. 1991), the Court applied collateral estoppel to bar the Secretary of State from relitigating whether Mississippi’s original voter initiative amendment was effective. Similarly, here the Court should hold the Secretary is judicially estopped from taking a contrary position to his position in [*Smith*](toa:bh).
 
 “A party will be judicially estopped from taking a subsequent position if (1) the position is inconsistent with one previously taken during litigation, (2) a court accepted the previous position, and (3) the party did not inadvertently take the inconsistent positions.” [*Clark v. Neese*](toa:ai), 131 So. 3d 556, 560 (Miss. 2013). The Secretary represented to the federal court that “the current districting plan (dividing the State into five congressional districts) isunenforceable….” [*Smith*](toa:bh), 189 F. Supp. 2d at 507 (emphasis added). This is directly contrary to his current claim that “[f]ive districts…exist pursuant to never-repealed Code Section 23-15-1037 and can be used [i.e., enforced] for anything but congressional elections.” Appellee’s Br. at 17. The federal court accepted the Secretary’s previous position by enjoining [Miss. Code Ann. § 23-15-1037](toa:bz)’s implementation. And there is no evidence that the Secretary’s admission was somehow inadvertent. The elements of judicial estoppel are met, and this is but one more reason why the Secretary’s argument for a “shadow set” of five districts is foreclosed.
 
