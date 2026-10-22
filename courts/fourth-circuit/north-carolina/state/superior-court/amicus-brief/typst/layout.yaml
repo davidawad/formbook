@@ -1,0 +1,64 @@
+# Superior Court of North Carolina (ncsuperct): one layout for the papers of this court (briefs, motions, amicus briefs,
+# petitions for judicial review and for writ); only the doc type's own blocks differ. The whole layout, as data for the
+# shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). No North Carolina rule text could be retrieved (../../rules.md): every number traces to a convention
+# row there (NCSUPERCT-*) or to the default eval values; lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # NCSUPERCT-FORM-002: Times at 12 point (the default eval floor; no rule read sets another)
+pitch:
+  body: 27.6              # NCSUPERCT-FORM-003: double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NCSUPERCT-FORM-002: 1 inch margins
+indent: 36                # paragraphs indented half an inch, as in the exemplars
+page_number: {align: center, front: lower-roman}   # NCSUPERCT-FORM-004: the cover unnumbered, the contents i, the body 1, 2 ..
+footnote: {size: 12, gap: 7}                       # NCSUPERCT-FORM-003: footnotes single spaced, at the text size
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # NCSUPERCT-FORM-003: block quotations single spaced, indented
+list: {markers: ["–"]}    # an en dash: the bullet is not in Times New Roman or Liberation Serif as the exemplars set it
+heading:
+  - {align: center, bold: true, upper: true, above: 19.2, below: 14.4}
+  - {bold: true, hang: 36, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# NCSUPERCT-CONT-002, -004 to -008: the cover: the court lines, the file number, the caption, the title and counsel
+# (three groups to a row: amici and co-counsel come in several groups, and a second row would push the cover past
+# one page, DEF-COVER-001).
+cover:
+  - {text: "{court_lines}", align: center, bold: true}
+  - {text: "{file_number}", align: center, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true, above: 4.8}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 28.8}
+  - columns: {each: counsel, per_row: 3, row_gap: 14.4, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 14.4
+    above: 28.8
+  - {text: "{counsel_for}", italic: true, optional: true, above: 9.6}
+  - {text: "{date}", optional: true, above: 9.6}
+# NCSUPERCT-CONT-002: the table of contents, on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 7.2}
+# NCSUPERCT-CONT-003, NCSUPERCT-CERT-001: the signature block right of centre, never split; then the certificate of
+# service on a page of its own, in the body's spacing.
+closing:
+  - group:
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true}
+      - when: signature.signers
+        blocks:
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 10.8}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", left: 230.4}
+      - when: signature.signer
+        blocks:
+          - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 9.6}
+          - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 7.2}
+    above: 21.6
+  - when: certificate
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 14.4}
+      - {text: "{certificate}", pitch: body}
