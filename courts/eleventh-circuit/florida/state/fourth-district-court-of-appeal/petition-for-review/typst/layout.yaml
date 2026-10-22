@@ -1,0 +1,64 @@
+# Fourth District Court of Appeal (fladistctapp4): petition for review of non-final agency action
+# (petition-for-review). The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and
+# docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to Fla. R. App. P. 9.045 and
+# 9.210 (../../rules.md, FLADISTCTAPP4-*); lengths in points. No case text here: every string printed comes from the
+# sample's frontmatter ({field}) or is a court constant.
+size: 14                  # FLADISTCTAPP4-FORM-005: Arial 14 point; footnotes and quotations too (-FORM-006)
+pitch:
+  body: 32.2              # FLADISTCTAPP4-FORM-004: double spaced (Word's double for Arial 14 pt, 2 x 16.1)
+  single: 16.1            # caption, headings, quotations, footnotes, signature: single (-FORM-006); Word's single line
+# FLADISTCTAPP4-FORM-003: no less than one inch; top and bottom 3 pt deeper, as the template had them
+margin: {top: 75, bottom: 75, left: 72, right: 72}
+indent: 36
+page_number: {align: center, from: 2}   # the caption page unnumbered, Arabic numerals after it (Rule 9.045 sets none)
+footnote: {size: 14, gap: 7}             # FLADISTCTAPP4-FORM-006: 14 point, single spaced
+quote: {left: 36, right: 36, above: 8.4, below: 16.8}    # FLADISTCTAPP4-FORM-006: quotations single spaced, 14 point
+list: {markers: ["•", "–"]}
+heading:                                 # FLADISTCTAPP4-FORM-006: at least body size, single spaced
+  - {bold: true, upper: true, above: 16.8, below: 2}
+  - {bold: true, hang: 36, above: 14, below: 2}
+  - {bold: true, hang: 36, above: 14, below: 2}
+# FLADISTCTAPP4-PET-001 (a document under Rule 9.045): the court, the parties and their designations beside the
+# case numbers, the title; the petition starts under it on page 1.
+front:
+  - {text: "{court}", align: center, bold: true, upper: true}
+  - columns:
+      - width: 288
+        blocks:
+          - each: parties
+            blocks:
+              - {text: "{name}", above: 12.6}
+              - {text: "{role}", left: 36}
+          - {text: "{caption_end}", above: 12.6}
+      - valign: center
+        blocks:
+          - {text: "CASE NO: {case_number}"}
+          - {text: "{lower_court_case}", optional: true}
+    above: 19.6
+  - {text: "{title}", align: center, bold: true, upper: true, underline: true, left: 20, right: 20, above: 19.6, below: 16.8}
+# Rule 9.045 sets no signature form (Fla. R. Gen. Prac. & Jud. Admin. 2.515, not retrieved): the signature block
+# 2.5 in from the margin, kept whole; then the certificate of service and the certificate of compliance, which
+# Rule 9.045(e) puts immediately after it (FLADISTCTAPP4-FORM-008), each signed.
+closing:
+  - group:
+      - {text: "Respectfully submitted,", left: 180}
+      - {text: "{signature.signer_line}", left: 180, underline: true, above: 14}
+      - {text: "{signature.name}", left: 180, optional: true}
+      - {text: "{signature.signer}", left: 180, optional: true}
+    above: 16.8
+  - when: service
+    blocks:
+      - group:
+          - {text: "{service.heading}", align: center, bold: true, upper: true, underline: true, below: 12.6}
+          - {text: "{service.statement}", indent: 36, pitch: body}
+          - {text: "{service.signer_line}", left: 180, underline: true, above: 11.2}
+          - {text: "{service.signer_role}", left: 180, optional: true}
+        above: 19.6
+  - when: compliance
+    blocks:
+      - group:
+          - {text: "{compliance.heading}", align: center, bold: true, upper: true, underline: true, below: 12.6}
+          - {text: "{compliance.statement}", indent: 36, pitch: body}
+          - {text: "{compliance.signer_line}", left: 180, underline: true, above: 11.2}
+          - {text: "{compliance.signer_role}", left: 180, optional: true}
+        above: 19.6
