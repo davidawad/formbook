@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Bankr. E.D. Okla. brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of
+     the typst template ({font}, Times New Roman; LBR 9004-1(A) names no face) at 12 pt (size 24 half points; LBR
+     9004-1(A): no less than 12 point, footnotes included); Body Text in exact 27.6 pt line boxes (typst pitch-double,
+     LBR 9004-1(A) briefs double spaced: Word's double, 2 x 1.15 x 12 pt) with a half-inch first-line indent; the
+     court, caption, title, heading, quotation, bullet, footnote, counsel and signature lines in 13.8 pt boxes (typst
+     pitch-single), 7 pt between footnotes (typst note-gap); letter page with 1-inch margins (LBR 9004-1(A)) and a
+     centered page number at the bottom, its line 36 pt above the page foot (720 twips: where typst sets it,
+     footer-descent 30 %). Added: Body Text Note (a paragraph that anchors a footnote, without widow control: typst
+     moves such a paragraph's last line on alone with its note), Body Text Keep (the last paragraph, kept whole with
+     the signature block, and the certificate's paragraphs, kept whole), and Footnote Text that may split where typst
+     splits a note. docx/okeb-motion-brief.lua writes every other paragraph's own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="276" heading-before="276" heading-after="276" quote="276" note="276" note-after="140" footer="720">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="140" w:line="276" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+</reference>

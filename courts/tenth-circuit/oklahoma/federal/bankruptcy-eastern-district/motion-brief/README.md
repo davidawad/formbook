@@ -2,22 +2,24 @@
 
 - Court: `okeb`, United States Bankruptcy Court, E.D. Oklahoma (`courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/`)
 - Doc type: `motion-brief`. A brief filed in support of a motion or objection (not a motion, not a complaint).
-- Engine: typst only. No latex or docx files for this doc type yet.
+- Engines: typst (`typst/`) and docx (`docx/`), both on the shared cross-engine layout model (fb-595.68.32); no latex.
 - Exemplars: two public filings from different filers, in `usage/` (provenance in `usage/SOURCE.md`):
   - `FILED-EXAMPLE-motion-brief-2.pdf`: Great Plains National Bank's closing brief (creditor's counsel), Chapter 11, filed 2025-04-28, 22 pages.
   - `FILED-EXAMPLE-motion-brief.pdf`: Chapter 13 standing trustee's brief in support of objection to claim, filed 2017-02-02, 4 pages.
 - Samples: `usage/INPUT-motion-brief-2.md` (excerpt, 22 pages filed, transcribed in part; see Gaps) and `usage/INPUT-motion-brief.md` (complete).
-- Status: template, samples, renders, overlays and page review done (below). Not reviewed by a human. `court.json` untouched, no status set.
+- Status: template, samples, renders and page review done (below). Not reviewed by a human. `court.json` untouched, no status set. `sh tools/check.sh`: typst 18 checks passed, 0 failed; docx 26 passed, 0 failed, XENG-001..003 PASS on both INPUTs (`params.cross_engine: gate` in `eval.yaml`).
 
 ## Files
 
 | Path | What |
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `okeb-motion-brief`. |
-| `typst/okeb-motion-brief.typ` | Template. Caption, body, headings, numbered paragraphs, signature block, optional certificate. Parameter block at the top. |
+| `typst/okeb-motion-brief.typ` | Template. Caption, title, optional counsel block, body (headings, numbered paragraphs, quotations, bullets, footnotes), signature block, optional certificate. Parameter block at the top. |
+| `docx/reference.xml`, `docx/okeb-motion-brief.lua` | The Word template: styles (`base="xengine"`) and the filter that writes every block as typst sets it. |
+| `eval.yaml` | `params.cross_engine: gate`. |
 | `usage/INPUT-motion-brief-2.md` | Markdown sample with YAML frontmatter (caption, counsel, signature, certificate, excerpt note). |
 | `usage/INPUT-motion-brief.md` | Same, for the trustee's brief. |
-| `usage/OUTPUT-<id>.pdf` | `sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-<id>.md`. Great Plains: 11 pages. Brooks: 3 pages. |
+| `usage/OUTPUT-<id>.typst.pdf`, `.docx`, `.docx.pdf` | `sh tools/render.sh [--engine docx] courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-<id>.md`. Great Plains: 12 pages. Brooks: 4 pages (the certificate of mailing on a page of its own, as filed). |
 | `usage/OVERLAY-<id>.pdf`, `.txt` | `sh tools/overlay.sh <court>/motion-brief <id> <exemplar.pdf>`. Red = ours, blue = filed, black = both. The `.txt` is the page map. |
 | `usage/` | The two filed PDFs and `SOURCE.md`. |
 
@@ -27,7 +29,7 @@ Template parameters, with the source of each:
 
 | Rule | Requirement | Where the template uses it | Verification |
 |---|---|---|---|
-| LBR 9004-1 (E.D. Okla. Bankr.), "Papers: requirements of form" | 8½ × 11; type no smaller than 12 point, footnotes included; margins at least one inch; pleadings and briefs double spaced | `type-size`, `page-margin`, `double-leading`, footnote style | **Not verified against the primary text.** The court's site (okeb.uscourts.gov) rejected the request, and courtrules.net returned a Cloudflare challenge. The wording came from a search-engine summary of courtrules.net. Re-check against the court's current local rules before any filing. |
+| LBR 9004-1 (E.D. Okla. Bankr.), "Papers: requirements of form" | 8½ × 11; type no smaller than 12 point, footnotes included; margins at least one inch; pleadings and briefs double spaced | `type-size`, `page-margin`, `pitch-double = 27.6pt` (every body line a 27.6 pt box, Word's double), 13.8 pt single lines for quotations, bullets, footnotes and blocks; footnote style | **Not verified against the primary text.** The court's site (okeb.uscourts.gov) rejected the request, and courtrules.net returned a Cloudflare challenge. The wording came from a search-engine summary of courtrules.net. Re-check against the court's current local rules before any filing. |
 | LBR 9013-1, "Motions; form and service" | Motion papers; any brief-length cap | not used | **Not verified.** Only the title was found. Any page limit (search snippets mention 20 and 10 pages on an old page, not tied to a rule) is not enforced. |
 | Fed. R. Bankr. P. 9037 | Privacy redaction | Not applied by the template. The Brooks sample omits the SSN fragments because the template has no field for them, not because the rule requires it. | Not read this session. |
 
@@ -46,18 +48,18 @@ What the overlay shows: the page-paired diagnostic lines up the caption and the 
 
 ## Pages reviewed
 
-Every page of each render was rasterized to PNG and viewed.
+Every page of each render (typst and docx, both INPUTs) was rasterized to PNG and viewed side by side after the last template change (2026-10-22).
 
-- Great Plains render: 11 pages reviewed (pages 1-11).
-- Brooks render: 3 pages reviewed (pages 1-3).
+- Great Plains render: 12 of 12 pages, typst and docx.
+- Brooks render: 4 of 4 pages, typst and docx.
 
 Findings from the page review:
 
-- Page 1: counsel block fits on the cover; caption and title match the filed exemplar's layout.
-- Pages 2-9: double spacing, footnotes, block quotations and the lists are placed as expected.
-- Page 10: the conclusion starts on a new page because the signature block cannot break; the page has space left, which is expected.
-- Page 11: signature block, "Respectfully submitted," and the certificate of service (after the signature, as in the filed brief).
-- Brooks pages 1-3: caption with two debtors, numbered paragraphs 1-16 running across "FACTS" and "DISCUSSION", "WHEREFORE", signature, and the certificate of mailing.
+- Page 1: caption, the three-line title and the counsel block on the first page, as filed.
+- Great Plains pages 2-10: double spacing, footnotes, headings (levels 1 to 3), block quotations and the bullets placed as expected; "* * *" centered on page 10.
+- Great Plains page 11: the conclusion; the rest of the page is empty because the signature block cannot break and does not fit with the conclusion.
+- Great Plains page 12: the dated line, signature block and the certificate of service.
+- Brooks pages 1-3: caption with two debtors, numbered paragraphs 1-16 running across "FACTS" and "DISCUSSION", "WHEREFORE" and the signature. Page 4: the certificate of mailing, kept whole on its own page (as filed).
 
 ## Gaps
 
@@ -65,19 +67,17 @@ These are open. None are blocking for a render, but a clerk would notice some of
 
 1. **Rules not verified against primary text.** See the table above. The template's LBR 9004-1 numbers (12 point, one inch, double spacing) come from a secondary summary.
 2. **No table of contents or table of authorities.** The Great Plains brief has both (filed pages 1-4). The template does not generate them and the sample does not transcribe them. A brief of that length normally carries them, so this is an open tier-2 finding. Whether E.D. Okla. requires them could not be checked (see item 1).
-3. **First paragraph after a level-2 or level-3 heading is flush left in the render.** Level-1 headings are followed by an indented paragraph. A minimal Typst test with the same heading rules indents correctly, so the cause is in how the markdown is passed through cmarker. Not fixed in this pass.
+3. **First paragraph after a heading (fixed).** Every body paragraph is indented half an inch, after a heading too (each chunk is its own paragraph since fb-595.68.32).
 4. **Great Plains sample is partial.** It transcribes filed pages 1, 5-13, 21 and 22 of 22. Pages 2-4 (table of contents, table of authorities, start of the argument) and 14-20 (the rest of the argument) are omitted; a line of asterisks marks the gap before the conclusion. The overlay therefore covers those pages only as unpaired.
 5. **ECF header and footer not reproduced.** The filed PDFs carry the court's "Case … Doc … Filed … Entered … Page x of y" stamp on every page. The court's system applies it at filing; the template does not produce it.
-6. **Brooks mailing list is one paragraph.** The filed certificate lists the debtors' address on its own line. The sample sets it as a paragraph after the certificate's lead-in.
-7. **No `rules.md`, `checks.yaml`, `latex/`, `docx/`, or `court.json` status changes.** These are outside this task. No `tools/check.sh` run, so no gate result is reported.
+6. **Brooks mailing list.** A certificate paragraph written with markdown line breaks (an address) is set as single-spaced lines at the margin, as filed.
+7. **No `checks.yaml` or `latex/`.** `tools/check.sh` runs the default checks; the RESULT lines are under Status and Engines. The LBR 7007-1(B) 20-page limit is asserted by the typst template (DEF-LEN-001 still SKIPs: no `params.page_limit`).
 
 ## Engines
 
-Docx engine (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.sh reference.docx`) and `docx/okeb-motion-brief.lua` (caption as a table with a vertical rule, consecutive numbered paragraphs, property lists, optional counsel block, signature block, optional certificate). It matches the typst form in paper (letter, 1 in margins), type (EB Garamond 12 pt, footnotes included), double spacing (exact 27.6 pt), 0.5 in first-line indent, block quotations (single spaced, indented 0.5 in each side), heading levels (level 1 bold centered capitals, level 2 bold, level 3 bold indented 0.5 in) and the centered page number in the footer.
+Both engines follow the shared cross-engine layout model (fb-595.68.32): Times New Roman 12 pt (LBR 9004-1(A) names no face; the docx names the typst face through `{font}`), every line an exact box of its pitch (27.6 pt double-spaced body, LBR 9004-1(A); 13.8 pt single lines for the court, caption, title, headings, quotations, bullets, footnotes, counsel and signature), explicit spaces between blocks, first-fit ragged-right breaking without kerning, ligatures or hyphenation (the Brooks sample's `word:` justification map is no longer read).
 
-Differences from typst: Word's line breaking and the caption table's border rendering are not checked; the typst vertical gaps are approximated with paragraph spacing; the body stays ragged right, as in the typst form. A certificate body given as markdown is split into paragraphs at line breaks in the frontmatter.
+- Layout: the caption a one-row table, the debtor column ruled at its right; the title bold centered capitals, single spaced, a double line below the caption; the counsel block 3.25 in from the margin; headings single spaced, a single line above and below, sticky (level 1 centered capitals, level 2 bold at the margin, level 3 bold half an inch in); quotations half an inch in on both sides and bullets (the bullet half an inch in, the text hanging 0.25 in after it) single spaced, a single line above and below; "* * *" centered; footnotes in single lines under a 30 % rule, 7 pt apart; the signature block a double line below the body, never split, the last body block kept with it; the certificate kept whole.
+- docx: `docx/reference.xml` (`base="xengine"`, 24 half points, body 552, single 276 twips, footer 720; Body Text Note without widow control, Body Text Keep, a Footnote Text that splits) and `docx/okeb-motion-brief.lua` (`require("docx.xengine")`): every paragraph with the typst pitch and spaces in twips; the caption an OOXML table; the signature block a table row that cannot split, after an empty double line kept with it (a chain of kept paragraphs longer than the room left would be split, where typst moves the block whole); the caption, counsel and signature strings from `$FORMBOOK_META` as written, the title and certificate text read as markdown. `docx/build-reference.sh` and the binary `reference.docx` are gone. The docx had been set in EB Garamond, failing DEF-FONT-002 and TNR-EMBEDDED.
 
-BLOCKED (docx engine, `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief-2.docx` are written and valid XML, but the rest cannot run here):
-- `docx.pdf` (Gates 0 and 1 on the LibreOffice PDF): soffice not installed on this box, and LibreOffice cannot be installed here (no conda-forge package, no root). `tools/render-docx.sh` fails at its soffice step.
-- Visual review of the docx pages: BLOCKED for the same reason; pages reviewed: 0.
-- Word open check (no repair prompt): not done, no Word here.
+Results (2026-10-22): typst `RESULT: 18 checks passed, 0 failed`; docx `RESULT: 26 checks passed, 0 failed`; XENG-001..003 PASS on both INPUTs (Brooks 82/82 lines, 4 pages; Great Plains 321/321 lines, 12 pages). Every page of both renders of both INPUTs viewed side by side. Great Plains page 11 ends half empty: the conclusion and the 22-line signature block do not fit on one page together, so the signature block starts page 12 (both engines).
