@@ -52,7 +52,9 @@ Separate cover page by default (`cover_page`, default true; both filed exemplars
 
 `court`, `case_number`, `lower_court_case` (optional), `parties` (list of `name`, `role`; a `v.` entry with empty role), `title`, `counsel` (optional cover groups of `names` and `lines`, set two to a row in half-width columns; a group without `lines` is a centered line, such as "Counsel for ..."), `cover_page` (default true: the cover on its own page with the counsel), `toc`, `authorities` (as the briefs: `heading`, `entries` of `cite`, `find`), `signature` (`date`, `lines` printed above the /s/ line, `signer_line`, `name`, `signer` lines), `service` (`date`, `doc_type`, `served_on`, `method`, `address` for the generated sentence; or `paragraphs`, `recipients`, `closing`), `word_count` (ignored).
 
-## Engines (fb-595.68.36)
+## Engines
+
+typst, latex and docx on the shared document model (fb-595.54.12; docs/EVAL-LOOP.md, "Generated engines", fb-595.54.59): `typst/layout.yaml` holds the layout as data (the numbers below, each with its rule), `typst/gactapp-motion-brief.typ` hands it to `lib/typst/xdoc.typ`, and `fb engines gen` writes `latex/` and `docx/` from it. Word breaks every line and page where typst does (`params.cross_engine: gate` in `eval.yaml`); LaTeX is reported (`eval.yaml`). What follows records the hand-written engines of fb-595.68.36 that the generated ones replace.
 
 typst and docx are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): first-fit breaking, no kerning, ligatures or hyphenation, exact line boxes (32.2 pt body, 16.1 pt single; twips = 20 x pt), explicit block spaces (a single line above a heading, half a line below; half a line around quotations, between table rows and between footnotes), footnote rule 11.5 pt below the text (with the rule and half a line the 20.1 pt LibreOffice keeps), the page number centered in a 16.1 pt footer line. The face is Times New Roman in both (`data/exemplar-fonts.json`; the template was TeX Gyre Schola after the exemplar, Rule 2 (c) (3) names Times New Roman as compliant).
 

@@ -1,0 +1,2 @@
+PASS
+79c4826c08c4dc1f2ecb0be26e75f9212cfcac46fc80a302ee7560836259e781  usage/OUTPUT-motion-brief.latex.pdf
