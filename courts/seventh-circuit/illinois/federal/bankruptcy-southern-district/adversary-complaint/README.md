@@ -2,7 +2,7 @@
 
 Doc type: **adversary complaint** (the complaint that opens an adversary proceeding). Court: United States Bankruptcy Court for the Southern District of Illinois (ilsb). Folder: `courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/adversary-complaint/`.
 
-Status: exemplar=yes, render=ok, overlay=ok, pages reviewed 7 of 7 (final render). No `court.json` status is set here; nothing in this folder sets `status`.
+Status: exemplar=yes, render=ok, overlay=ok, pages reviewed 8 of 8, typst and docx (fb-595.68.27). No `court.json` status is set here; nothing in this folder sets `status`.
 
 ## Governing rules
 
@@ -31,7 +31,7 @@ Not generated, on purpose: the summons (docketed automatically, ILSB-AP-001); th
 
 ## Sample
 
-- `usage/INPUT-adversary-complaint.md` is a transcription of the exemplar: the caption, the lead-in, the jurisdiction and party paragraphs, the procedural history, the factual heading and paragraphs 22 to 30, Count I's first paragraphs and prayer, Count III's paragraphs and prayer, and the signature and attorney blocks. Paragraph 21, paragraphs 31 to 104 and 110 to 162, and parts of 165 to 185 are not transcribed (the exemplar is 33 pages; the sample is 7 pages). The omitted parts are listed in the sample's frontmatter comment. The template numbers the paragraphs, so the sample's numbers run from 1.
+- `usage/INPUT-adversary-complaint.md` is a transcription of the exemplar: the caption, the lead-in, the jurisdiction and party paragraphs, the procedural history, the factual heading and paragraphs 22 to 30, Count I's first paragraphs and prayer, Count III's paragraphs and prayer, and the signature and attorney blocks. Paragraph 21, paragraphs 31 to 104 and 110 to 162, and parts of 165 to 185 are not transcribed (the exemplar is 33 pages; the sample is 8 pages). The omitted parts are listed in the sample's frontmatter comment. The template numbers the paragraphs, so the sample's numbers run from 1.
 - Frontmatter fields are described below, then `typst/` and the sample's markdown contract.
 
 ### Frontmatter (`usage/*.md`)
@@ -65,38 +65,40 @@ Not generated, on purpose: the summons (docketed automatically, ILSB-AP-001); th
 ## Typst and render
 
 ```sh
-export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-adversary-complaint.md
-sh tools/overlay.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/adversary-complaint gargula-adversary-complaint
+fb render courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-adversary-complaint.md            # typst
+fb check courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/adversary-complaint --engine typst|docx                           # render and gates
+just overlay courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/adversary-complaint
 ```
 
-- `typst/main.typ` is the entry point; `typst/ilsb-adversary-complaint.typ` is the template. Vendored fonts only (EB Garamond); `tools/render.sh` uses `--ignore-system-fonts` and fails on any typst warning. The render compiled with no warnings.
-- `usage/OUTPUT-adversary-complaint.typst.pdf`: 7 pages. `pdffonts`: EBGaramond-Regular and -Bold, embedded.
-- `usage/OVERLAY-gargula-adversary-complaint.pdf` and `.txt`: red is our render, blue the exemplar, black both. The page map (by word overlap): ours p.1-3 to filed p.1-3, ours p.4 to filed p.5, ours p.5 to filed p.23, p.6 to p.32, p.7 to p.33. The overlay is a diagnostic, not a score: the exemplar is Times in a different layout, so the layers will not line up on text.
+- `typst/main.typ` is the entry point; `typst/ilsb-adversary-complaint.typ` is the template. Times New Roman 12 pt (vendored, `("Times New Roman", "Liberation Serif")`); vendored fonts only, `--ignore-system-fonts`, warnings fail. The render compiles with no warnings.
+- Layout: the shared cross-engine model (`lib/typst/xengine.typ`; docs/EVAL-LOOP.md, "Cross-engine gate"): every line a box of its pitch, the boxes touching, explicit spaces between blocks. Pitches: 24 pt body (double spacing, as filed), 13.8 pt single lines (court title, caption, headings, quotations, signature and attorney block), the 10 pt "Page X of Y" footer in a 12 pt line. Body paragraphs run on at double spacing with no extra space between them (as filed); headings stand half a body line (12 pt) from the text. A numbered paragraph has its number in a half-inch box at the half-inch indent, the text starting 1 in from the margin (as filed); a prayer item its letter in a 0.3 in box at the indent, the text hanging at 0.8 in. The caption's groups are a single line apart, "v." with a single line on either side.
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 8 pages. `pdffonts`: TimesNewRomanPSMT and -BoldMT, embedded.
+- Overlays (`just overlay`) are written to the gitignored `.overlay/` folder. The overlay is a diagnostic, not a score: the exemplar is Times in a different layout, so the layers will not line up on text.
 
-Naming: `tools/render.sh` and `tools/overlay.sh` write and read `usage/OUTPUT-<id>.pdf`, `usage/OVERLAY-<id>.pdf` and `.txt` (the repo's tool names), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief. The tools are shared and were not edited.
+## Visual review (Gate 2, all 8 pages of the typst and the docx render at 60 dpi, looked at; fb-595.68.27)
 
-## Visual review (Gate 2, all 7 pages rendered at 60 dpi and looked at, final render)
+The docx render breaks every line and page as the typst render (XENG-001..003, 209/209 lines); the pages below hold for both.
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Court title, caption (debtor, parties, "v.", case no., chapter, adversary no.), title, lead-in, Jurisdiction and venue ¶¶ 1-3 | OK. Caption right and bottom rules drawn. Double spacing consistent. |
-| 2 | ¶¶ 3-13: venue, Parties, Procedural history | OK. Section headings centered bold, numbers continue. |
-| 3 | Factual allegations heading, sub-heading A, ¶¶ 14-21 | OK. Sub-heading left bold; paragraph spacing as on page 2. |
-| 4 | ¶¶ 22-29, Count I heading (centered bold, case as typed), ¶¶ 30-31 | OK. |
-| 5 | Count I ¶¶ 32-35, WHEREFORE with prayer A-D, Count III heading (one line) and ¶¶ 36-37 | OK. Prayer letters hang with the text. |
-| 6 | ¶¶ 38-44, blank space at foot | OK. The WHEREFORE line for Count III moved to page 7 with its prayer (kept together; the sticky rule works). |
-| 7 | WHEREFORE for Count III with prayer A-E, Dated line, "Respectfully submitted", "/s/" signature, attorney block | OK. Signature block not split. |
+| 1 | Court title, caption (debtor, parties, "v.", case no., chapter, adversary no.), title, lead-in, Jurisdiction and Venue ¶ 1 | OK. Caption right and bottom rules drawn; groups a line apart. Double spacing consistent. |
+| 2 | ¶¶ 2-10: venue, Parties | OK. Section headings centered bold capitals, numbers continue. |
+| 3 | ¶ 11, Procedural History, Factual Allegations heading, sub-heading A (bold, left), ¶¶ 14-18 | OK. |
+| 4 | ¶¶ 18-26 | OK. The web address in ¶ 19 breaks after "https://www." in both engines (typst's rule for an address; the docx sets the same break). |
+| 5 | ¶¶ 26-29, Count I heading (centered bold, as typed), ¶¶ 30-34 | OK. |
+| 6 | ¶ 35, WHEREFORE with prayer A-D, Count III heading, ¶¶ 36-39 | OK. Prayer letters at the indent, the text hanging. |
+| 7 | ¶¶ 39-44, WHEREFORE for Count III with prayer A-C | OK. |
+| 8 | Prayer D-E, Dated line, "Respectfully submitted", "/s/" signature, attorney block | OK. Signature block kept together. |
 
-Reviewed pages: 7 of 7.
+Reviewed pages: 8 of 8 (typst) and 8 of 8 (docx).
 
 ## Known gaps and open choices
 
-1. **No typeface, type size or margin rule.** The S.D. Ill. local rules and the FRBP text fetched (restyled FRBP 9004 has only (a) legibility and (b) caption) set none. EB Garamond 12 pt (vendored), 1-inch margins and double spacing are style choices that match the exemplar's look. The exemplar is Times. Needs David's call if the court has a standing order.
+1. **No typeface, type size or margin rule.** The S.D. Ill. local rules and the FRBP text fetched (restyled FRBP 9004 has only (a) legibility and (b) caption) set none. Times New Roman 12 pt (vendored), 1-inch margins and double spacing are style choices that match the exemplar (Times). Needs David's call if the court has a standing order.
 2. **Double spacing** (24 pt pitch) is a convention; no S.D. Ill. rule requires it for complaints.
 3. **Caption.** Follows Form 416 as S.D. Ill. uses it, "substantially" (FRBP 7010). Layout is ours, not the official form, and the adversary number is left as a fill-in line, as in the exemplar.
 4. **Jury demand** is not supported by a field. A complaint with a jury demand needs one added (not in the exemplar).
-5. **Summary of Exhibits** is implemented (`exhibits`, `exhibits_service`) but no sample exercises it; the exemplar attaches Exhibit 1 separately. Untested.
+5. **Summary of Exhibits** is implemented in both engines (`exhibits`, `exhibits_service`) but no sample exercises it; the exemplar attaches Exhibit 1 separately. Untested. Bullet lists and block quotations are implemented in both engines but not exercised by the sample either.
 6. **Partial sample.** About a quarter of the exemplar is transcribed (see Sample). The omitted paragraphs are not checked against the template.
 7. **Tier 2.** One exemplar only. The eval loop asks for two or three from different filers. Not done (SOURCE.md records the search).
 8. **Summons, cover sheet, ECF header** are not generated (see Governing rules).
@@ -106,7 +108,6 @@ Reviewed pages: 7 of 7.
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
-- **latex** (`latex/`): see `latex/`; not changed by this section.
-- **docx** (`docx/reference.docx`, `docx/ilsb.lua`, `docx/build-reference.sh`): pandoc on reference.docx, EB Garamond 12 pt, exact 24 pt body line pitch, 0.5 in first-line indent, 1 in margins, letter, "Page x of y" footer (PAGE and NUMPAGES fields). `ilsb.lua` lays out the caption (a table with a right and a bottom rule), court title, title, lead-in, numbered paragraphs (typed by the filter, numbers from 1), prayer items (`A.` with a hanging indent), signature table and attorney block, and the Summary of Exhibits; every case word comes from the frontmatter. Matches the typst form in: font and size, body pitch, margins, indent, paragraph numbering, prayer layout, page-number footer, page order. Differs or is unverified: the single-spacing gaps and the caption and signature table spacing are approximate (Word table and style metrics, not measured against typst); footnote text is 12 pt single-spaced (typst's footnote size was not checked); the numbered paragraph tab stop is the default 0.5 in grid, not the typst 0.3 in gap.
-- docx checks: `usage/OUTPUT-adversary-complaint.docx` was written and validated (zip test and well-formed XML in every part). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `usage/OUTPUT-gargula-adversary-complaint.docx.pdf` was not produced and the docx Gate 0 to 3 checks (`tools/check.sh --engine docx`) cannot run. No page was rendered or reviewed (pages reviewed 0). The `.docx` has not been opened in Word or LibreOffice.
-- Blocked or unverified docx items: the docx.pdf render and page review (blocked on soffice); cover and caption table borders not verified against the typst layout; the page count and page breaks in Word may differ from typst.
+- **docx** (`docx/reference.xml`, `docx/ilsb.lua`; built by `fb render`, no shell): `reference.xml` is the cross-engine recipe (`base="xengine"`, `{font}` = the typst face, Times New Roman 12 pt; Body Text in exact 480-twip lines with a 720-twip first-line indent, 276-twip single lines, headings 240 twips from the text, Block Text 240 twips around) plus "Numbered Paragraph" (tab at 1 in), "Prayer Item" (letter at 0.5 in, text hanging at 0.8 in), "Body Keep" (WHEREFORE, kept with the prayer) and the "Page X of Y" footer (10 pt in a 240-twip line, 768 twips from the page foot). `ilsb.lua` (`require("docx.xengine")`) writes the court title, the caption table (rules right and bottom of the party column), title, headings, quotations, the signature and attorney block (kept together) and the Summary of Exhibits with the typst spacing in twips; the lead-in, numbered paragraphs, WHEREFORE and prayer items go to pandoc in those styles (footnotes stay Word footnotes). Break rules as typst: no break inside ")(", a break after a slash before a letter and after a period in a web address, `§§` bound to its number. Until fb-595.68.27 the docx was EB Garamond from `docx/build-reference.sh` (DEF-FORM-002, DEF-FONT-002 and TNR-EMBEDDED failed).
+- Checks (fb-595.68.27): typst `RESULT: 9 checks passed, 0 failed`; docx `RESULT: 13 checks passed, 0 failed`, XENG-001..003 PASS (8 pages each, 209/209 lines). `eval.yaml` sets `params.cross_engine: gate`.
+- **latex**: no latex template for this doc type.
