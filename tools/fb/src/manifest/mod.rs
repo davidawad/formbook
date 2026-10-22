@@ -1,7 +1,7 @@
 //! `fb manifest [--doctypes] [repo-root]`: one line per court (or per Typst doc type) for the tracker.
 //!
 //! Court lines:    alias|group|level|name|path|manual|flags   (flags: keys::court_flags, then keys::docs_flag)
-//! Doc-type lines: alias|group|doctype|path|flags             (flags: see keys::doctype_flags)
+//! Doc-type lines: alias|group|doctype|path|flags|engines     (flags: see keys::doctype_flags; engines: keys::engine_states)
 //! Order follows data/index.json; courts missing from it sort with position 0, ties bytewise.
 mod files;
 mod keys;
@@ -79,7 +79,8 @@ pub fn doctype_lines(root: &Path) -> Res<String> {
                 .chain(subs)
                 .map(|(dt, p)| {
                     let flags = keys::doctype_flags(&root.join(&p));
-                    order.row(&alias, &[dt.clone(), p, flags], &[alias.clone(), dt])
+                    let engines = keys::engine_states(&root.join(&p));
+                    order.row(&alias, &[dt.clone(), p, flags, engines], &[alias.clone(), dt])
                 })
                 .collect::<Vec<_>>())
         })

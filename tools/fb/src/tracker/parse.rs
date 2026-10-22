@@ -40,6 +40,9 @@ pub struct Court {
     pub pct: u32,
     pub engines: Option<[char; 3]>,
     pub items: String,
+    /// Per engine (typst, latex, docx): (doc folders with that template, those whose stamp is valid),
+    /// aggregated from the court's doc folders by `with_engines`.
+    pub agg: [(u32, u32); 3],
 }
 
 /// One doc-type line (its status: up for review when its typst stamp is valid, in progress when anything is
@@ -55,6 +58,8 @@ pub struct DocType {
     pub samples: char,
     pub exemplars: char,
     pub bits: [u32; 5],
+    /// Per engine (typst, latex, docx): '0' no template, '1' untested, '2' pass, '3' fail.
+    pub engines: [char; 3],
 }
 
 fn is(c: char, k: char) -> u32 {
@@ -144,6 +149,7 @@ pub fn court(line: &str) -> Option<Court> {
         pct,
         engines,
         items,
+        agg: [(0, 0); 3],
     })
 }
 
@@ -164,6 +170,8 @@ pub fn doctype(line: &str) -> Option<DocType> {
         _ => return None,
     };
     let (samples, exemplars, bits) = doc_bits(flags)?;
+    let mut es = fs.get(5).copied().unwrap_or("").chars().chain(std::iter::repeat('0'));
+    let engines = std::array::from_fn(|_| es.next().unwrap_or('0'));
     Some(DocType {
         status: doc_status(&bits),
         alias: alias.into(),
@@ -173,6 +181,7 @@ pub fn doctype(line: &str) -> Option<DocType> {
         samples,
         exemplars,
         bits,
+        engines,
     })
 }
 
@@ -188,6 +197,21 @@ pub fn doc_status(bits: &[u32; 5]) -> Status {
 /// 1 iff template, sample, render and exemplar are all present.
 pub fn complete(bits: &[u32; 5]) -> u32 {
     bits[..4].iter().product()
+}
+
+/// Fills each court's per-engine counts from its doc folders (`ds` lines carry the court alias).
+pub fn with_engines(cs: Vec<Court>, ds: &[DocType]) -> Vec<Court> {
+    cs.into_iter()
+        .map(|c| {
+            let agg = std::array::from_fn(|i| {
+                ds.iter()
+                    .filter(|d| d.alias == c.alias)
+                    .map(|d| d.engines[i])
+                    .fold((0, 0), |(t, p), e| (t + u32::from(e != '0'), p + u32::from(e == '2')))
+            });
+            Court { agg, ..c }
+        })
+        .collect()
 }
 
 pub fn courts(text: &str) -> Vec<Court> {

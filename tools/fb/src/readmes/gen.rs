@@ -47,22 +47,25 @@ pub struct Doc {
     pub status: String,
     pub has_input: bool,
     pub pass: bool,
+    /// Per engine (typst, latex, docx): '0' no template, '1' untested, '2' pass, '3' fail.
+    pub engines: Vec<char>,
 }
 
-/// alias -> doc folders, from the tracker's alias|doctype|path|status|inputs|gates lines.
+/// alias -> doc folders, from the tracker's alias|doctype|path|status|inputs|gates|engines lines.
 pub fn docs(text: &str) -> HashMap<String, Vec<Doc>> {
     text.lines()
         .map(|l| l.split('|').map(str::to_string).collect::<Vec<_>>())
-        .filter_map(|p| <[String; 6]>::try_from(p).ok())
+        .filter_map(|p| <[String; 7]>::try_from(p).ok())
         .fold(
             HashMap::new(),
-            |mut m, [a, doctype, path, status, inputs, gates]| {
+            |mut m, [a, doctype, path, status, inputs, gates, engines]| {
                 m.entry(a).or_default().push(Doc {
                     doctype,
                     path,
                     status,
                     has_input: inputs != "0",
                     pass: gates == "1",
+                    engines: engines.chars().collect(),
                 });
                 m
             },
@@ -260,7 +263,7 @@ impl Inputs<'_> {
         out.extend(
             [
                 "",
-                &format!("Engines: typst `{}`, latex `{}`, docx `{}`.", r.ty, r.la, r.dx),
+                &format!("Engines (doc folders passing / with that template): typst `{}`, latex `{}`, docx `{}`.", r.ty, r.la, r.dx),
                 "",
                 "`done` is set by a human in `court.json` (`\"status\": \"done\"`); nothing automated writes it.",
                 "A court is `up for review` when `rules.md` is present and every doc folder under it with a `usage/INPUT-*.md` has a valid `usage/.check-typst.txt` stamp (`just eval` writes them; the default checks are `data/checks-default.yaml`).",
@@ -410,10 +413,11 @@ fn first_seen(it: impl Iterator<Item = String>) -> Vec<String> {
 /// The "Doc folders" section of a court README (with a trailing blank line): the eval tally, one row per doc folder.
 fn docs_text(ds: &[Doc]) -> String {
     let with: Vec<&Doc> = ds.iter().filter(|d| d.has_input).collect();
-    let eval = |d: &Doc| match (d.has_input, d.pass) {
-        (false, _) => "no INPUT",
-        (true, true) => "pass",
-        (true, false) => "not passing",
+    let engine = |d: &Doc, i: usize| match d.engines.get(i) {
+        Some('2') => "pass",
+        Some('3') => "fail",
+        Some('1') => "untested",
+        _ => "—",
     };
     let link = |d: &Doc| match d.doctype.as_str() {
         "(court root)" => ".".to_string(),
@@ -423,18 +427,20 @@ fn docs_text(ds: &[Doc]) -> String {
         .iter()
         .map(|d| {
             format!(
-                "| [{}]({}) | {} | {} |",
+                "| [{}]({}) | {} | {} | {} | {} |",
                 d.doctype,
                 link(d),
                 d.status,
-                eval(d)
+                engine(d, 0),
+                engine(d, 1),
+                engine(d, 2)
             )
         })
         .collect();
     match ds.is_empty() {
         true => String::new(),
         false => format!(
-            "## Doc folders\n\n{} of {} doc folders with an INPUT pass the typst eval.\n\n| Doc folder | Status | Eval |\n|---|---|---|\n{}\n",
+            "## Doc folders\n\n{} of {} doc folders with an INPUT pass the typst eval.\n\n| Doc type | Status | Typst | LaTeX | DOCX |\n|---|---|---|---|---|\n{}\n",
             with.iter().filter(|d| d.pass).count(),
             with.len(),
             rows.join("\n")

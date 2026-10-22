@@ -2,7 +2,7 @@
 //! fb-r53u, full-tree parity in the fb-nack run artifacts) and rewritten when the overlay item was
 //! dropped (fb-pklq: courts score seven items, doc types four).
 use super::compute;
-use super::render::{cell, num, pct1, verdict};
+use super::render::{agg_cell, cell, num, pct1, verdict};
 
 #[test]
 fn pct1_truncates() {
@@ -21,8 +21,12 @@ fn pct1_truncates() {
 #[test]
 fn cells() {
     assert_eq!(
-        [cell('0'), cell('1'), cell('2'), cell('3')],
-        ["—", "built", "pass", "—"]
+        [cell('0'), cell('1'), cell('2'), cell('3'), cell('x')],
+        ["—", "untested", "pass", "fail", "—"]
+    );
+    assert_eq!(
+        [agg_cell((0, 0)), agg_cell((2, 2)), agg_cell((3, 1))],
+        ["—", "2/2", "1/3"]
     );
     let ns: Vec<String> = ['0', '1', '2', '9', 'x', 'é'].map(num).to_vec();
     assert_eq!(ns, ["—", "1", "2", "9+", "x", "é"]);
@@ -66,10 +70,10 @@ fn malformed_and_runs() {
     assert_eq!(
         summary,
         [
-            "| G | 4 | 0 | 1 | 1 | 2 | 0.0% | 25.0% | 2 | 0 | 0 | 10.7% |",
+            "| G | 4 | 0 | 1 | 1 | 2 | 0.0% | 25.0% | 0 | 0 | 0 | 10.7% |",
             "|  | 1 | 0 | 0 | 0 | 1 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |",
             "| G | 5 | 0 | 0 | 3 | 2 | 0.0% | 0.0% | 0 | 0 | 0 | 11.6% |",
-            "| **Total** | 10 | 0 | 1 | 4 | 5 | 0.0% | 10.0% | 2 | 0 | 0 | 10.1% |",
+            "| **Total** | 10 | 0 | 1 | 4 | 5 | 0.0% | 10.0% | 0 | 0 | 0 | 10.1% |",
         ]
     );
     let rows: Vec<&str> = s.rows.lines().collect();
@@ -77,15 +81,15 @@ fn malformed_and_runs() {
         rows,
         [
             "m1|todo|0|—|—|—|",
-            "m3|in progress|14|pass|—|—|0001000",
+            "m3|in progress|14|—|—|—|0001000",
             "m4|todo|0|—|—|—|",
-            "m5|up for review|29|pass|—|—|1001000",
+            "m5|up for review|29|—|—|—|1001000",
             "|todo|0|—|—|—|",
             "m7|in progress|29|—|—|—|0110000",
             "m8|in progress|0|—|—|—|0000000",
             "m9|todo|0|—|—|—|0000000",
             "mA|todo|0|—|—|—|",
-            "mB|in progress|29|built|built|built|1000001",
+            "mB|in progress|29|—|—|—|1000001",
         ]
     );
     assert!(s.status.contains("\n| []() |  | todo | — | — | — | 0 |\n"));
@@ -111,7 +115,7 @@ fn unicode_flags() {
             "u4|in progress|0|—|—|—|0000000",
             "u5|todo|0|—|—|—|",
             "u6|in progress|29|—|—|—|0110000",
-            "u7|in progress|71|—|pass|—|1110101",
+            "u7|in progress|71|—|—|—|1110101",
         ]
     );
     let d = compute("", "u1|Q — é|brief—x|courts/é|1é1é1\nu3|G|dt|p|ééé").dsummary;
@@ -135,7 +139,29 @@ fn doc_type_status() {
     );
     assert_eq!(
         s.docrows,
-        "a|brief|courts/a/brief|up for review|1|1\nb|motion|courts/a/motion|in progress|1|0\nc|empty|courts/a/empty|todo|0|0\n"
+        "a|brief|courts/a/brief|up for review|1|1|000\nb|motion|courts/a/motion|in progress|1|0|000\nc|empty|courts/a/empty|todo|0|0|000\n"
     );
     assert!(s.dsummary.contains("| Up for review |"));
+}
+
+/// Court engine cells and "pass" counts aggregate the court's doc folders (6th doc-type field: typst, latex, docx
+/// as 0 none, 1 untested, 2 pass, 3 fail); a court passes an engine only when every folder with that template does.
+#[test]
+fn court_engines_aggregate() {
+    let m = "a|G|l|A|p|todo|1000000\nb|G|l|B|p|todo|1000000\nc|G|l|C|p|todo|1000000";
+    let d = "a|G|x|pa/x|11211|220\na|G|y|pa/y|11211|222\nb|G|x|pb/x|11211|231\nb|G|y|pb/y|11211|200";
+    let s = compute(m, d);
+    let rows: Vec<&str> = s.rows.lines().collect();
+    assert_eq!(
+        rows,
+        [
+            "a|in progress|14|2/2|2/2|1/1|1000000",
+            "b|in progress|14|2/2|0/1|0/1|1000000",
+            "c|in progress|14|—|—|—|1000000",
+        ]
+    );
+    assert!(s.summary.contains("| 0.0% | 0.0% | 2 | 1 | 1 |"));
+    assert!(s.status.contains("| in progress | 2/2 | 2/2 | 1/1 | 14 |"));
+    let dt: Vec<&str> = s.docrows.lines().collect();
+    assert_eq!(dt[2], "b|x|pb/x|up for review|1|1|231");
 }

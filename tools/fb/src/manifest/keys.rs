@@ -133,6 +133,30 @@ pub fn court_flags(dir: &Path) -> String {
     head.iter().chain(&engines).chain(&tail).collect()
 }
 
+/// Does the folder hold the engine's template (typst/main.typ, latex/template.tex, docx/reference.xml or .docx)?
+fn engine_template(dir: &Path, engine: &str) -> bool {
+    let has = |rel: &str| is_file(&dir.join(engine).join(rel));
+    match engine {
+        "typst" => has("main.typ"),
+        "latex" => has("template.tex"),
+        _ => has("reference.xml") || has("reference.docx"),
+    }
+}
+
+/// One character per engine (typst, latex, docx): '0' no template, '1' template without a stamp file
+/// (untested), '2' valid stamp (pass), '3' a stamp file that is not valid (fail).
+pub fn engine_states(dir: &Path) -> String {
+    ENGINES
+        .iter()
+        .map(|e| match (engine_template(dir, e), stamp(dir, e)) {
+            (false, _) => '0',
+            (true, true) => '2',
+            (true, false) if dir.join(USAGE_DIR).join(format!(".check-{e}.txt")).is_file() => '3',
+            (true, false) => '1',
+        })
+        .collect()
+}
+
 /// Five characters: template, inputs, typst render, sources, review.
 pub fn doctype_flags(dir: &Path) -> String {
     let template = is_file(&dir.join("typst").join("main.typ"));

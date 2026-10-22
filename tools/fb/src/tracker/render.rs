@@ -32,13 +32,14 @@ fn add(a: u32, b: u32) -> u32 {
     a.wrapping_add(b)
 }
 
-fn pass(c: char) -> u32 {
-    u32::from(c == '2')
+/// 1 when the court has at least one doc folder with the engine's template and every such folder passes.
+fn all_pass((templates, passing): (u32, u32)) -> u32 {
+    u32::from(templates > 0 && passing == templates)
 }
 
 impl Agg {
     pub fn bump(self, c: &Court) -> Agg {
-        let [tp, lp, dp] = c.engines.map_or([0; 3], |e| e.map(pass));
+        let [tp, lp, dp] = c.agg.map(all_pass);
         let isst = |s: Status| u32::from(c.status == s);
         Agg {
             n: add(self.n, 1),
@@ -177,18 +178,26 @@ pub fn dsummary(ds: &[DocType]) -> Vec<String> {
     )
 }
 
-/// Engine cell: '2' pass, '1' built, anything else "—".
+/// Doc-folder engine cell: '2' pass, '3' fail, '1' untested (template, no valid stamp), anything else "—".
 pub fn cell(c: char) -> &'static str {
     match c {
         '2' => "pass",
-        '1' => "built",
+        '3' => "fail",
+        '1' => "untested",
         _ => "—",
     }
 }
 
+/// Court engine cell: passing / doc folders with the engine's template, "—" when there are none.
+pub fn agg_cell((templates, passing): (u32, u32)) -> String {
+    match templates {
+        0 => "—".into(),
+        n => format!("{passing}/{n}"),
+    }
+}
+
 fn engines(c: &Court, sep: &str) -> String {
-    let [t, l, d] = c.engines.map_or(["—"; 3], |e| e.map(cell));
-    [t, l, d].join(sep)
+    c.agg.map(agg_cell).join(sep)
 }
 
 fn with_head(head: &str, sep: &str, rows: impl Iterator<Item = String>) -> Vec<String> {
@@ -288,18 +297,19 @@ pub fn doctypes(ds: &[DocType]) -> Vec<String> {
     )
 }
 
-/// One line per doc type for the folder READMEs: alias|doctype|path|status|inputs|gates.
+/// One line per doc type for the folder READMEs: alias|doctype|path|status|inputs|gates|engines.
 pub fn docrows(ds: &[DocType]) -> Vec<String> {
     ds.iter()
         .map(|d| {
             format!(
-                "{}|{}|{}|{}|{}|{}",
+                "{}|{}|{}|{}|{}|{}|{}",
                 d.alias,
                 d.doctype,
                 d.path,
                 d.status.name(),
                 d.samples,
-                d.bits[4]
+                d.bits[4],
+                d.engines.iter().collect::<String>()
             )
         })
         .collect()

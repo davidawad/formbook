@@ -21,8 +21,8 @@ fn text(ls: Vec<String>) -> String {
 /// `manifest`: lines alias|group|level|name|path|manual|flags; `doctypes`: lines
 /// alias|group|doctype|path|flags (see fb manifest).
 pub fn compute(manifest: &str, doctypes: &str) -> Sections {
-    let cs = parse::courts(manifest);
     let ds = parse::doctypes(doctypes);
+    let cs = parse::with_engines(parse::courts(manifest), &ds);
     Sections {
         summary: text(render::summary(&cs)),
         status: text(render::status(&cs)),
