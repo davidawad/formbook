@@ -1,0 +1,50 @@
+# Supreme Court of Hawaii (haw): answering brief (HRAP 28(c)). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to HRAP 32 (../../rules.md, HAW-*); lengths in points. No case text here: every string printed comes from the
+# sample's frontmatter ({field}) or is a court constant.
+size: 12                  # HAW-FORM-003, -004: 12 point, footnotes and quotations the same size
+pitch:
+  body: 24                # HAW-FORM-005: double spaced, as the exemplar sets it (exactly 24 pt, 2 x 12 pt)
+  single: 13.8            # flyleaf, headings, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # HAW-FORM-002: not less than 1 inch on all sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # HAW-FORM-007: bottom center; as the exemplar: the flyleaf unnumbered, the tables i, ii .., the brief from 1
+footnote: {size: 12, gap: 7}             # HAW-FORM-004, -005: same size as the text, single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # HAW-FORM-005: quotations single spaced, indented
+quote: {left: 36, right: 36, above: 9.6, below: 19.2}   # HAW-FORM-005: quotations single spaced, indented
+heading:
+  - {align: center, bold: true, upper: true, above: 19.2, below: 14.4}   # HAW-FORM-005: headings single spaced
+  - {bold: true, hang: 36, above: 14.4, below: 14.4}
+  - {bold: true, italic: true, hang: 36, above: 14.4, below: 14.4}
+# The flyleaf (HAW-COVER-001, -002): 3 inches clear at the top (the 1-inch margin and 2 inches more), the case
+# number, the court and the court below with its judge, the cause and the consolidated cases, the character of the
+# document, then counsel (HAW-COVER-003: the arrangement is the exemplar's).
+cover:
+  - {text: "{case_number}", align: center, bold: true, above: 144}
+  - {text: "IN THE SUPREME COURT OF THE STATE OF HAWAI'I", align: center, bold: true, above: 18}
+  - {text: "{lower_court}", align: center, optional: true, above: 10.8}
+  - each: caption
+    above: 14.4
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true, above: 4.8}
+  - {text: "{consolidated}", align: center, optional: true, above: 14.4}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 43.2}
+  - each: counsel
+    above: 43.2
+    blocks:
+      - {text: "{names}", bold: true}
+      - {text: "{lines}"}
+# The subject index with page references (HAW-OPEN-001 (1), as the exemplar), on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 10.8}
+# The date, the signature block (HAW-SIG-001: the name typed under the signature) and the HAW-SIG-002 notation (case
+# number, case name and title), never split.
+closing:
+  - group:
+      - {text: "DATED: {date}.", indent: 36, optional: true}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 9.6}
+      - {text: "/s/ {signature.signer}", left: 230.4, above: 19.2}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, above: 7.2}
+      - {text: "{notation}", optional: true, above: 28.8}
+    above: 21.6
