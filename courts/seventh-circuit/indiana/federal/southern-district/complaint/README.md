@@ -7,9 +7,9 @@ Folder: `courts/seventh-circuit/indiana/federal/southern-district/complaint/` (s
 |---|---|
 | exemplar | yes, 2 filers: `usage/FILED-EXAMPLE-complaint.pdf` (primary, used for the overlay) and `usage/FILED-EXAMPLE-complaint-2.pdf` (second filer, structure only). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-complaint.md` (caption, parties, jurisdiction, about 49 numbered paragraphs, the coverage section, the prayer and signature; see "Known gaps") |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages (the docx render too), typst 0.15.0, vendored Times New Roman only, no warnings |
 | overlay | ok: `usage/OVERLAY-lightning-rod-complaint.pdf` and `OVERLAY-lightning-rod-complaint.txt` (run as `sh tools/overlay.sh <this-dir> lightning-rod-complaint <exemplar>`) |
-| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 9 of 9, typst and docx (every page rendered at 50 dpi and viewed; fb-595.68.28) |
 
 ## Governing rules
 
@@ -29,11 +29,11 @@ Not produced by this template: the civil cover sheet, the Rule 7.1 disclosure st
 
 - Court title centered at the top (three lines), then the caption: parties on the left, a column of ")" marks, the case number on the right. Single spaced.
 - Title of the paper in bold caps centered below the caption (L.R. 5-1(b) "title on the first page"); "JURY TRIAL DEMANDED" appears under it when `jury_demand: true`.
-- Body double spaced (24 pt pitch at 12 pt, from `body-leading = 1.35em`); paragraphs are separated by one line pitch so the text stays on a grid.
-- Numbered paragraphs 1, 2, ... with a 0.5 in indent; paragraphs before the first heading (the lead-in) are not numbered. Paragraphs that begin "WHEREFORE" are not numbered.
+- Body double spaced in exact 24 pt line boxes (`pitch-body`; single lines 13.8 pt) on the shared cross-engine layout model (`lib/typst/xengine.typ`); 16.1 pt below every paragraph, list item, heading and quotation.
+- Numbered paragraphs 1, 2, ...: the number in a 0.5 in box after the 0.5 in indent, the text from 1 in; paragraphs before the first heading (the lead-in) are not numbered. Paragraphs that begin "WHEREFORE" are not numbered.
 - Headings: `#` is centered bold caps; `###` is bold, left. Block quotes are single spaced and indented 0.5 in on both sides.
-- Prayer items are a markdown numbered list (rendered "1.", "2.", ...).
-- Signature block: date line, then (indented 3.25 in) the firm, the "/s/" line, the signer, and the contact lines.
+- Prayer items are a markdown numbered list (rendered "1.", "2.", ... at the 0.5 in indent, the text hanging at 1 in).
+- Signature block: date line, then (indented 3.25 in) the firm, the "/s/" line, the signer, and the contact lines; the last chunk of the body is kept with it.
 - Footer: page number, centered, consecutive from page 1.
 
 ## Markdown contract (for samples)
@@ -45,34 +45,35 @@ Not produced by this template: the civil cover sheet, the Rule 7.1 disclosure st
 
 ## Known gaps and open choices
 
-1. **Sample length.** The exemplar is 17 pages. The sample renders to 7 pages: it carries the caption, paragraphs 1 to 49 (the parties, jurisdiction, facts, the coverage section), the prayer and the signature. Paragraphs 60 to 68 (the exclusions and the remaining definitions) are not transcribed (see `omitted` in the frontmatter). The brief asked for 8 to 14 pages; the shortfall is the untranscribed part of the filing, not the template.
-2. **Orphaned signature block.** On the rendered sample, the signature block sits alone on page 7 after the last prayer item on page 6. A clerk would not object, and the block is kept whole (`breakable: false`). A keep-with-previous rule for the last prayer item is not implemented.
+1. **Sample length.** The exemplar is 17 pages. The sample renders to 9 pages: it carries the caption, paragraphs 1 to 49 (the parties, jurisdiction, facts, the coverage section), the prayer and the signature. Paragraphs 60 to 68 (the exclusions and the remaining definitions) are not transcribed (see `omitted` in the frontmatter). The brief asked for 8 to 14 pages; the shortfall is the untranscribed part of the filing, not the template.
+2. **Signature block.** Kept whole and kept with the last chunk of the body (here the last prayer item), so it never stands alone on a page.
 3. **E-mail address.** The Lightning Rod signature block has no e-mail address. L.R. 5-1(b) asks for the e-mail "where available", so the template does not require one; the sample follows the exemplar.
-4. **Font.** L.R. 5-1(b) sets a 12-point minimum and no typeface. The only vendored font is EB Garamond (`fonts/`), which has a smaller x-height than Times at 12 pt. The text looks smaller than the exemplar. A vendored Times-metric font would remove the difference; that is a question for David.
+4. **Font.** L.R. 5-1(b) sets a 12-point minimum and no typeface. Times New Roman 12 pt (vendored), the house standard (`docs/FONTS.md`), in typst and docx alike; the exemplar is Times New Roman too.
 5. **Numbering.** The sample's paragraphs are numbered 1 to 49 by the template. The filed paragraph numbers are not reproduced in full (the exemplar has 68+ paragraphs, and the transcribed paragraphs are numbered in the order they appear).
 6. **Overlay pairing.** The overlay pairs each sample page with the filed page that shares the most words. Pages 5 to 7 of the sample pair with exemplar pages 7, 10 and 17 respectively, because the sample skips paragraphs. The overlay is a diagnostic, not a score; its PNG pages were not viewed individually.
 7. **Second exemplar.** The Cook complaint (exemplar 2) is kept for structure only: it has the ")" caption, counts and a "DEMAND FOR JURY TRIAL" heading. It is not transcribed, because its content (the death of a minor) is not needed to test the template.
 8. **Caption wording.** The Cook exemplar uses "JURY TRIAL DEMAND" in the caption; the Lightning Rod exemplar does not. The template supports both (`jury_demand`).
-9. **Engines.** Typst only. The latex and docx engines are not built for this doc type.
-10. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape. The brief forbids editing `tools/` or the court root, so the gates were not run.
+9. **Engines.** typst and docx (see Engines); no latex engine for this doc type.
+10. **Gates.** `sh tools/check.sh <this folder>` and `--engine docx` both exit 0 (typst 9, docx 13 checks passed, 0 failed; fb-595.68.28).
 11. **File names.** The brief asked for `usage/<id>.md`, `usage/<id>.pdf` and `<id>-overlay.pdf`. The shared tools (`render.sh`, `overlay.sh`) use `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so the files follow the tools' names.
 
-## Review of the rendered pages (OUTPUT-complaint.typst.pdf)
+## Review of the rendered pages (OUTPUT-complaint.typst.pdf and OUTPUT-complaint.docx.pdf)
 
-- Page 1: court title on three lines; caption with a ")" column and the case number; title centered; the lead-in (unnumbered); paragraphs 1 to 6. Pass.
-- Page 2: paragraphs 7 to 15, "JURISDICTION AND VENUE" and "FACTUAL BACKGROUND" centered bold; no heading at the foot of the page. Pass.
-- Page 3: paragraphs 16 to 27. Pass.
-- Page 4: paragraphs 28 to 35. Pass.
-- Page 5: paragraphs 36 to 43; "THE INSURANCE CONTRACT" heading; the policy quote is single spaced and indented; paragraph numbers continue after the quote. Pass.
-- Page 6: paragraphs 44 to 49; "REQUEST FOR RELIEF"; the unnumbered WHEREFORE paragraph; prayer items 1 to 4. Pass.
-- Page 7: the date line and signature block only (see gap 2). Pass with the note.
+Every page of both renders viewed (fb-595.68.28); the docx breaks every line and page as typst does (XENG-001..003).
+
+- Page 1: court title on three lines; caption with a ")" column and the case number; title centered; the lead-in (unnumbered); THE PARTIES; paragraphs 1 to 3. Pass.
+- Page 2: paragraphs 4 to 11; "JURISDICTION AND VENUE" centered bold. Pass.
+- Page 3: paragraphs 12 to 19; "FACTUAL BACKGROUND". Pass.
+- Page 4: paragraphs 20 to 27. Pass.
+- Page 5: paragraphs 28 to 33. Pass.
+- Page 6: paragraphs 34 to 39; "THE INSURANCE CONTRACT"; the policy quotation and the first definition, single spaced and indented 0.5 in each side. Pass.
+- Page 7: the second definition; paragraphs 40 to 46. Pass.
+- Page 8: paragraphs 47 to 49; "REQUEST FOR RELIEF"; the unnumbered WHEREFORE paragraph; prayer items 1 to 3. Pass.
+- Page 9: prayer item 4, kept with the date line and signature block. Pass.
 
 ## Engines
 
-Typst is the primary engine. The DOCX engine (`docx/`: `build-reference.sh`, `reference.docx`, `insd.lua`) is built and validated; it is not visually checked.
+Typst is the primary engine. The docx engine (`docx/`): `reference.xml` holds the Word styles (`base="xengine"` in the typst face `{font}`, Times New Roman 12 pt, 480-twip body and 276-twip single line boxes, the 12 pt page-number footer 0.5 in above the page edge; `fb render` builds the reference document from it), and `insd.lua` reads the sample's body chunk by chunk as the typst template does and writes every paragraph as WordprocessingML on `lib/docx/xengine.lua` (the frontmatter read as written, `$FORMBOOK_META`, so the caption keeps its leading spaces). No script: `fb render` runs pandoc with the filter and packs the archive (fb-595.68.28; were `build-reference.sh` and a committed `reference.docx` naming EB Garamond, which failed DEF-FONT-002).
 
-- **Matches the typst form (by construction, not by page review):** EB Garamond 12 pt body; exact 24 pt (double) line pitch with one line between paragraphs; 0.5 in first-line indent; 1 in margins on letter paper; numbered paragraphs 1, 2, ... after the first heading (lead-in and WHEREFORE paragraphs unnumbered); centered bold headings (Heading 1) and a left bold heading (Heading 3); single-spaced block quotes indented 0.5 in on both sides; single-spaced caption, court lines, title and signature block (signature indented 3.25 in); centered PAGE footer from page 1.
-- **Differs or unverified:** footnotes are 10 pt single spaced (L.R. 5-1(b)); the typst template has no footnote handling and the sample has none. Numbered paragraphs use a tab stop at 0.88 in, not the typst 0.25 in gap after the number. The prayer list uses pandoc's list indents, not the typst 0.5 in / 0.4 in. The caption table's cell borders are off (none); the caption lines keep their leading spaces as written in the frontmatter. The signature block is kept together with keep-with-next, which approximates `breakable: false`.
-- **Fonts:** EB Garamond is not installed by the build; the machine that opens the file must have it (vendored in `fonts/`).
-- **BLOCKED:** `usage/OUTPUT-lightning-rod-complaint.docx.pdf` is not produced (LibreOffice `soffice` is not installed on this box, so `tools/render-docx.sh` stops at the conversion step after writing and validating the `.docx`). No page has been rendered or reviewed for the docx engine (0 pages). The cover and caption table borders are not verified against the typst layout. Gate 0 and 1 for docx are not run.
-- **Build:** `sh docx/build-reference.sh docx/reference.docx`, then `sh tools/render.sh --engine docx <this-dir> usage/INPUT-complaint.md`.
+- Cross-engine (fb-595.68.28): typst and docx share the layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`). `sh tools/check.sh <this folder> --engine docx`: XENG-001..003 PASS (9 = 9 pages, every line breaks after the same word); `params.cross_engine: gate` in `eval.yaml`. typst 9 and docx 13 checks passed, 0 failed.
+- The `.docx` converts in LibreOffice without error (the check's conversion); not opened in Word.
