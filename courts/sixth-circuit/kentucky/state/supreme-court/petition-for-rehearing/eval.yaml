@@ -1,4 +1,9 @@
 # RAP 31(A)(1)(e): 1.5-inch left margin (RAP 43(B)(4) takes the RAP 31 form), 1 inch on other sides (margin_left_pt 108).
 # RAP 43(B)(5): 3,500 words or 8 pages; the limit is word-controlled (RAP 15), so no page_limit is set.
+# RAP 31(C)(1)(b) (rules.md KY-COVER-005): the signed certificate of service naming every person served sits on the
+# front cover and, if it will not fit, carries over onto white paper immediately after the cover. The seven counsel
+# blocks and eight served persons do not fit one page (the filed petition's cover runs 3 pages), so the cover is the
+# green page plus its white carry-over page; numbering starts at 1 after it (cover_pages 2).
 params:
   margin_left_pt: 108
+  cover_pages: 2

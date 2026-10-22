@@ -67,7 +67,8 @@
 
 #let service-list(meta) = grid(
   columns: (1fr, 1fr),
-  gutter: 0.3in,
+  column-gutter: 0.3in,
+  row-gutter: 0.6em, // about half a blank line between recipients: the 0.3-in row gap pushed the cover certificate past one page (DEF-COVER-001)
   ..meta.service.recipients.map(g => {
     lines-of(g.names)
     lines-of(g.lines)
@@ -107,8 +108,9 @@
   block(width: 100%, [Submitted by:])
   v(0.4em)
   grid(
-    columns: (1fr, 1fr),
-    gutter: 0.3in,
+    columns: if meta.counsel.len() == 1 { 1 } else { (1fr, 1fr) }, // a lone counsel block takes the full width, so its lines do not wrap (DEF-COVER-001)
+    column-gutter: 0.3in,
+    row-gutter: 0.6em, // as the service list (DEF-COVER-001)
     ..meta.counsel.map(g => {
       lines-of(g.names)
       lines-of(g.lines, italic: true)
@@ -116,11 +118,10 @@
   )
   if cover-service {
     v(0.9em)
-    align(center, text(weight: "bold", "CERTIFICATE OF SERVICE"))
-    v(0.4em)
+    block(sticky: true, width: 100%, below: 0.4em + leading-single, align(center, text(weight: "bold", "CERTIFICATE OF SERVICE"))) // the title stays with its text when the certificate carries over (RAP 31(C)(1)(b))
     set par(leading: leading-single, spacing: leading-single, first-line-indent: indent)
-    [I certify that a true and accurate copy of the foregoing document has been served by
-    #meta.service.method on #meta.service.date upon the following:]
+    par(first-line-indent: (amount: indent, all: true))[I certify that a true and accurate copy of the foregoing document has been served by
+    #meta.service.method on #meta.service.date upon the following:] // indented after the title block too
     v(0.6em)
     service-list(meta)
     if "record_certificate" in meta {
