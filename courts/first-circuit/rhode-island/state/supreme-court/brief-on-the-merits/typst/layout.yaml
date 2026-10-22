@@ -1,0 +1,81 @@
+# Rhode Island Supreme Court (ri): brief on the merits (Rule 16(a)-(c); form under Rule 16(f) and Rule 18(b)). The
+# whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this
+# file by `fb engines gen`, fb-595.54.12). Numbers trace to Article I Rules 16 and 18 (../../rules.md, RI-*); lengths
+# in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court
+# constant.
+size: 14                  # RI-FONT-002, -003 (Rule 18(b)): at least 14-point Times New Roman, footnotes too
+pitch:
+  body: 32.2              # RI-SPACE-001 (Rule 18(b)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # RI-SPACE-002: footnotes single spaced; cover, tables and counsel blocks single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # RI-MARGIN-001: at least one inch on all four sides
+indent: 36
+# RI-PAGE-001: numbered consecutively at the bottom center; the cover unnumbered, the table of contents i, ii .., the
+# brief from 1.
+page_number: {align: center, from: 1, front: lower-roman}
+footnote: {size: 14, pitch: single, gap: 7}   # RI-FONT-003, RI-SPACE-002: 14 point, single spaced
+quote: {left: 36, right: 36, above: 14, below: 14, pitch: body}   # RI-SPACE-001: all papers double spaced
+heading:
+  - {align: center, bold: true, pitch: body, above: 16.8, below: 14}
+  - {bold: true, pitch: body, above: 16.8, below: 11.2}
+  - {bold: true, pitch: body, above: 16.8, below: 11.2}
+# RI-COVER-001 (Rule 16(f)): the court and the case number, the title of the case, the nature of the proceeding and
+# the court below, the title of the document between rules, and counsel with bar number and contact information.
+cover:
+  - {text: "STATE OF RHODE ISLAND", align: center, bold: true}
+  - {text: "SUPREME COURT", align: center, bold: true}
+  - columns:
+      - width: 302.4
+        blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 36, above: 16.1, below: 16.1}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36, optional: true}
+      - blocks:
+          - {text: "Case Number: {case_number}", align: right}
+    gutter: 21.6
+    above: 22.4
+  - {text: "{proceeding}", align: center, above: 16.8}
+  - {rule: 0.5, above: 16.8}
+  - {text: "{brief_title}", align: center, bold: true, above: 2.8}
+  - {rule: 0.5, above: 2.8}
+  - columns:
+      each: counsel
+      blocks:
+        - {text: "{names}"}
+        - {text: "{lines}"}
+    gutter: 21.6
+    above: 16.8
+contents: {title: "TABLE OF CONTENTS", depth: 2, col: 36, hang: 21, step: 21, above: 8.4}
+# The closing (Rule 18(b)): "Respectfully submitted,", for whom, the signature block and the date, never split; then
+# the certification of word count headed as RI-CERT-001 requires, signed by the filing attorney, and the certificate of
+# service (RI-SERVE-001, -002), each on a page of its own.
+closing:
+  - group:
+      - {text: "Respectfully submitted,", pitch: body}
+      - {text: "{submitted_for}", optional: true, above: 8.4}
+      - {text: "{signature.lines}", above: 16.8}
+      - {text: "Dated: {date}", pitch: body, optional: true, above: 16.8}
+    above: 14
+  - {break: true}
+  - group:
+      - {text: "CERTIFICATION OF WORD COUNT AND COMPLIANCE WITH RULE 18(B)", align: center, bold: true, pitch: body, below: 16.8}
+      - {text: "1. This brief contains {word_count} words, excluding the parts exempted from the word count by Rule 18(b).", pitch: body}
+      - {text: "2. This brief complies with the font, spacing, and type size requirements stated in Rule 18(b).", pitch: body}
+      - {text: "{certification.lines}", left: 237.6, above: 16.8}
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body, below: 16.8}
+      - {text: "I, the undersigned, hereby certify that on {date}, I filed and served the foregoing {service.document} through the Rhode Island Judiciary's Electronic Filing System with notice to the following counsel:", indent: 36, pitch: body}
+      - columns:
+          each: service.recipients
+          per_row: 2
+          row_gap: 19.6
+          blocks:
+            - {text: "{names}"}
+            - {text: "{lines}"}
+        gutter: 21.6
+        above: 16.8
+      - {text: "The document electronically filed and served is available for viewing and/or downloading from the Rhode Island Judiciary's Electronic Filing System.", pitch: body, above: 16.8}
