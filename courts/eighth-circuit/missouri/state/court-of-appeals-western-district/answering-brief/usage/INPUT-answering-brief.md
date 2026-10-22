@@ -308,6 +308,7 @@ I further certify that this brief contains the information required by Rule 55.0
 
 /s/ Nick Beydler\
 Assistant Attorney General
+
 [^1]: This case originated in the Administrative Hearing Commission (“AHC”). L.F. 3-18, 549-59. The AHC does not have authority to declare a statute unconstitutional. State Tax Comm’n v. Admin. Hearing Comm’n, 641 S.W.2d 69, 75 (Mo. banc 1982). Nevertheless, Appellants raised their constitutional challenges at the AHC, and AHC considered them. L.F. 10-15, 553-56, 558.
 
 [^2]: Appellants’ first Point Relied On and the corresponding argument section of their brief do not address Section 130.021.8, but Appellants’ Conclusion asks this Court to find this provision unconstitutional. App. Br. at 43. Without conceding that Appellants have properly presented their challenge to this statutory provision, Respondent will address it.

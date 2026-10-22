@@ -1,0 +1,55 @@
+# Missouri Court of Appeals, Western District (moctappwd): amicus curiae brief. The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12).
+# Numbers trace to Mo. Sup. Ct. R. 84.03, 84.04, 84.05(f) and 84.06 (../../rules.md, MOCTAPPWD-*); lengths in points.
+# No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # MOCTAPPWD-FORM-004: Times New Roman, footnotes included, not smaller than 13 point
+pitch:
+  body: 22.45             # MOCTAPPWD-FORM-003: line spacing not less than 1.5 (1.5 x 14.95 pt, up to a whole twip)
+  single: 14.95           # MOCTAPPWD-FORM-003: caption, headings, quotations, footnotes, certificates, signature (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MOCTAPPWD-FORM-002: not less than one inch on every side
+indent: 36                # paragraphs indented half an inch (MOCTAPPWD-FORM-007, as filed)
+page_number: {align: center, from: 1}   # MOCTAPPWD-FORM-001: every page, the cover included, Arabic numerals at the bottom
+footnote: {size: 13, pitch: single, gap: 7}   # MOCTAPPWD-FORM-003, -004: 13 point, single spaced
+quote: {left: 36, right: 36, above: 7.8, below: 13}   # MOCTAPPWD-FORM-003: quotations single spaced, indented
+heading:   # MOCTAPPWD-FORM-003: headings single spaced; their form as filed (MOCTAPPWD-FORM-007)
+  - {align: center, bold: true, above: 15.6, below: 13}
+  - {bold: true, above: 13, below: 10.4}
+  - {bold: true, hang: 36, above: 13, below: 10.4}
+# The cover (MOCTAPPWD-FORM-007, as filed): the case number, the court, the parties, the court appealed from and the
+# title, centered; counsel side by side and their role below (MOCTAPPWD-AMI-003).
+cover:
+  - {text: "No. {case_number}", align: center, bold: true}
+  - {text: "{court_lines}", align: center, bold: true, above: 15.6}
+  - each: caption
+    above: 15.6
+    between:
+      - {text: "v.", align: center, above: 7.8, below: 7.8}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center}
+  - {text: "{proceeding}", align: center, above: 15.6}
+  - {text: "{brief_title}", align: center, bold: true, above: 20.8}
+  - columns: {each: counsel, blocks: [{text: "{lines}"}]}
+    gutter: 28.8
+    above: 72
+  - {text: "{counsel_role}", above: 10.4}
+# MOCTAPPWD-CONT-001, MOCTAPPWD-AMI-003: a detailed table of contents and a table of authorities.
+contents: {title: "Table of Contents", depth: 4, col: 36, hang: 36, step: 13, above: 7.8}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 9.1
+  group: {bold: true, above: 14.3, below: 2.6}
+# MOCTAPPWD-CERT-002: the date (when given) and the signature block, single spaced, never split.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "{signature.intro}", left: 230.4, above: 7.8}
+      - {text: "{signature.firm}", left: 230.4, above: 7.8, optional: true}
+      - {text: "/s/ {signature.signer}", underline: true, left: 230.4, above: 7.8}
+      - {text: "{signature.lines}", left: 230.4}
+    above: 28.8
+# MOCTAPPWD-CERT-001: the certificate of service and compliance opens a page after the signature, single spaced
+# (MOCTAPPWD-FORM-003).
+tail: {at: "Certific", break: true, pitch: single, gap: 13}

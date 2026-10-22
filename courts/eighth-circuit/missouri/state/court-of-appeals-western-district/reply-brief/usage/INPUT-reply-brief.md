@@ -221,19 +221,19 @@ Appellants have amended their prayer to particularize that they seek both facial
 
 Appellants Stop Now! and Gerald Geier pray this Court to find, conclude and declare pursuant to RSMo. 536.140 and 42 U.S.C. §1983 that:
 
-a. On their face and as applied to Appellants here in the context of no speech or activity for ten or six years respectively, and to all similarly situated Missouri PACs and their treasurers, RSMo. 130.046.1 [ongoing quarterly reports], RSMo. 130.021.4(1) [maintain a bank account], RSMo. 130.021.7 [file an amendment of the initial statement of organization if the committee changes banks or its bank accounts], and RSMo. 130.021.8 [file a termination report] are unconstitutional,
+a\. On their face and as applied to Appellants here in the context of no speech or activity for ten or six years respectively, and to all similarly situated Missouri PACs and their treasurers, RSMo. 130.046.1 [ongoing quarterly reports], RSMo. 130.021.4(1) [maintain a bank account], RSMo. 130.021.7 [file an amendment of the initial statement of organization if the committee changes banks or its bank accounts], and RSMo. 130.021.8 [file a termination report] are unconstitutional,
 
-b. As applied to Appellants here in the context of no speech or activity for ten or six years respectively that Respondent MEC and its individual Respondent Commissioners' enforcement action was not substantially justified,
+b\. As applied to Appellants here in the context of no speech or activity for ten or six years respectively that Respondent MEC and its individual Respondent Commissioners' enforcement action was not substantially justified,
 
-c. As applied to Appellants here, and to all similarly situated Missouri PACs and their treasurers, that Respondent MEC and its individual Respondent Commissioners' hearing, closed over timely objection pursuant to RSMo. 105.961.3, unconstitutionally violated Appellants' Sixth Amendment, Mo. Const. I §14, and RSMo. 476.170 right to open courts and the public and the press's First Amendment rights and Mo. Const. I §8 rights,
+c\. As applied to Appellants here, and to all similarly situated Missouri PACs and their treasurers, that Respondent MEC and its individual Respondent Commissioners' hearing, closed over timely objection pursuant to RSMo. 105.961.3, unconstitutionally violated Appellants' Sixth Amendment, Mo. Const. I §14, and RSMo. 476.170 right to open courts and the public and the press's First Amendment rights and Mo. Const. I §8 rights,
 
-d. The findings of the AHC affirming Respondent MEC's enforcement action and declaratory action as to Appellants shall be reversed in full,
+d\. The findings of the AHC affirming Respondent MEC's enforcement action and declaratory action as to Appellants shall be reversed in full,
 
-e. As applied to Appellants herein that if under RSMo. 105.961.3 there was a violation of the law then only the Appellant committee Stop Now! can be liable, and that no liability shall vest in Appellant Geier; or in the alternative, should Geier be liable, that he shall not be liable personally but only in his official capacity as treasurer of Stop Now!,
+e\. As applied to Appellants herein that if under RSMo. 105.961.3 there was a violation of the law then only the Appellant committee Stop Now! can be liable, and that no liability shall vest in Appellant Geier; or in the alternative, should Geier be liable, that he shall not be liable personally but only in his official capacity as treasurer of Stop Now!,
 
-f. Pursuant to RSMo. 536.087 and 42 U.S.C. §1988 that Appellants shall be awarded their reasonable attorney's fees and costs for their defense in all judicial forums as to Respondent MEC and individual Respondent Commissioners' enforcement action, and
+f\. Pursuant to RSMo. 536.087 and 42 U.S.C. §1988 that Appellants shall be awarded their reasonable attorney's fees and costs for their defense in all judicial forums as to Respondent MEC and individual Respondent Commissioners' enforcement action, and
 
-g. For such other relief as may be just, meet and reasonable.
+g\. For such other relief as may be just, meet and reasonable.
 
 # Certification of Compliance
 

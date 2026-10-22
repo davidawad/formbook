@@ -1,0 +1,39 @@
+# Missouri Court of Appeals, Western District (moctappwd): petition for writ. The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12).
+# Numbers trace to Mo. Sup. Ct. R. 84.03 and 84.24 (../../rules.md, MOCTAPPWD-*); lengths in points. No case text here:
+# every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # MOCTAPPWD-FORM-004, -WRIT-005: Times New Roman, footnotes included, not smaller than 13 point
+pitch:
+  body: 22.45             # MOCTAPPWD-FORM-003: line spacing not less than 1.5 (1.5 x 14.95 pt, up to a whole twip)
+  single: 14.95           # MOCTAPPWD-FORM-003: caption, headings, quotations, footnotes, signature (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MOCTAPPWD-FORM-002: not less than one inch on every side
+indent: 36                # paragraphs indented half an inch (MOCTAPPWD-FORM-007, as filed)
+page_number: {align: center, from: 1}   # MOCTAPPWD-FORM-001: every page consecutively, Arabic numerals at the bottom
+footnote: {size: 13, pitch: single, gap: 6.5}   # MOCTAPPWD-FORM-003, -004: 13 point, single spaced
+quote: {left: 36, right: 36, above: 7.8, below: 13}   # MOCTAPPWD-FORM-003: quotations single spaced, indented
+heading:   # MOCTAPPWD-FORM-003: headings single spaced; their form as filed (MOCTAPPWD-FORM-007)
+  - {align: center, bold: true, above: 15.6, below: 13}
+  - {bold: true, hang: 36, above: 13, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# The top of page one (MOCTAPPWD-FORM-007, as filed; no cover): the court, the caption with the case number beside it,
+# the title.
+front:
+  - {text: "{court_line}", align: center, bold: true}
+  - {text: "{district_line}", align: center, bold: true}
+  - columns:
+      - width: 223.2
+        blocks:
+          - {text: "{caption}"}
+      - valign: center
+        blocks:
+          - {text: "{case_number_line}"}
+    gutter: 43.2
+    above: 15.6
+  - {text: "{brief_title}", align: center, bold: true, underline: true, upper: true, above: 18.2, below: 10.4}
+# MOCTAPPWD-CERT-002: the closing words and the signature block, single spaced, never split.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "{signature.firm}", left: 230.4, above: 7.8}
+      - {text: "{signature.lines}", left: 230.4, above: 7.8}
+    above: 28.8
