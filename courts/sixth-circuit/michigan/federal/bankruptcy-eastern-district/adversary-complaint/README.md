@@ -6,7 +6,7 @@ Doc type: **adversary complaint** (the complaint that starts an adversary procee
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md` (the whole 7-page complaint, transcribed; filed wording kept) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored Times New Roman only, no warnings (`tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-griffin-adversary-complaint.pdf` and `-overlay.txt` (`tools/overlay.sh`, see "Overlay" below) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -17,8 +17,8 @@ Verified 2026-10-14. Each rule is quoted or closely paraphrased from the source 
 | ID | Rule | Requirement | Source | Where it lives in the template |
 |---|---|---|---|---|
 | MIEB-FORM-001 | E.D. Mich. LBR 9029-1(h) | 8½ × 11 inch white paper; margins at least 1 inch on the top, sides and bottom; each page numbered consecutively. | Local Bankruptcy Rules PDF, https://www.mieb.uscourts.gov/sites/mieb/files/Local%20Bankruptcy%20Rules.pdf (see caveat below) | `margins = 1in`, `paper: "us-letter"`, footer `N of M`. |
-| MIEB-FORM-002 | LBR 9029-1(h) | "Except for standard preprinted forms … type size of all text and footnotes must be no smaller than … 14 point (proportional)." | same | `type-size = 14pt`, `font-family = "EB Garamond"` (vendored in `fonts/`), footer 14 pt. |
-| MIEB-FORM-003 | LBR 9029-1(h) | Papers are "double-spaced, except for quoted material and footnotes." | same | `body-leading = 1.35em`: measured line pitch 28.0 pt for 14 pt type, i.e. twice the single-spaced pitch of 14 pt type. |
+| MIEB-FORM-002 | LBR 9029-1(h) | "Except for standard preprinted forms … type size of all text and footnotes must be no smaller than … 14 point (proportional)." | same | `type-size = 14pt`, `font-family = ("Times New Roman", "Liberation Serif")` (vendored in `fonts/`), footer 14 pt; the docx names the same face (`{font}` in `docx/reference.xml`). |
+| MIEB-FORM-003 | LBR 9029-1(h) | Papers are "double-spaced, except for quoted material and footnotes." | same | `pitch-body = 28pt`: a 28 pt line pitch for 14 pt type, twice the type size (docx: exact 560-twip lines). |
 | MIEB-FORM-004 | LBR 9029-1(h) | "plainly typewritten … clearly legible." | same | Caption, counsel and signature blocks are single-spaced (`single-leading`), a convention the rule does not forbid. |
 | MIEB-FORM-005 | LBR 9004-1(b) | "The paper … may use only one side of a page and under the signature line must state any attorney's name, mailing address and telephone number and the name of the client. The pages, excluding exhibits, must be numbered." | same | One-sided output; signature block carries name, firm, address, phone and email (`signature` in the sample). Page numbers (MIEB-FORM-001). |
 | MIEB-CAP-001 | LBR 9004-1(a)(1) and (2); Fed. R. Bankr. P. 9004(b) | The caption states the court's name, the case title, the case number and the adversary number, and "the chapter number under which the petition is pending" and "the judge to whom the case is assigned". | same; FRBP 9004(b), https://www.law.cornell.edu/rules/frbp/rule_9004 (checked 2026-10-14) | `bankruptcy-caption()`: court name, `in_re`, `case.number`, `case.chapter`, `case.judge`. |
@@ -91,9 +91,6 @@ Pages reviewed: 8 of 8.
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` builds `reference.docx`; `mieb-adversary-complaint.lua` writes the caption, the numbered body and the signature block; `render.sh` assembles the file. Sample `griffin-adversary-complaint` renders to `usage/OUTPUT-adversary-complaint.docx` (`sh tools/render.sh --engine docx`), a valid zip with no duplicate entries and well-formed XML.
+docx (`docx/`): `reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst face) and `mieb-adversary-complaint.lua` (caption, numbered body, signature block); `fb render` builds the reference document and the file, with no shell script (fb-595.68.29).
 
-- **Matches the typst template (set in the reference, read from the source of `typst/mieb-adversary-complaint.typ`):** EB Garamond (the vendored family, named `EB Garamond` in the styles) at 14 pt; exact 28 pt line pitch for the body (the pitch the typst README measured); no first-line indent; letter paper; 1 in margins; footer "N of M" centered at 14 pt (PAGE and NUMPAGES fields with cached result); headings centered and bold, kept with the next paragraph; signature block "Dated" left, signer right (4752 / 4608 twips, the typst grid widths).
-- **Differs from typst:** the caption rules are paragraph borders and the two-column caption is a borderless table; single-spaced caption lines use Word's `auto` 240 spacing, not the typst 0.3 em leading, and paragraph spacing is zero in both (the typst gap was not measured against Word). Numbers are typed as text by the filter, as typst does. Typst `#` headings sit one line of space above and below; the docx headings have none (exact 28 pt lines).
-- **Pagination not measured.** The typst render is 8 pages (`pdfinfo`, letter); the docx page count is unknown because the LibreOffice conversion did not run.
-- **docx BLOCKED:** `docx.pdf` and the page-by-page review: `soffice` is not installed on this box, so `usage/OUTPUT-griffin-adversary-complaint.docx.pdf` was not produced and no page was viewed. No Word-native feature is needed for this doc type (no TOC, TOA or pleading line numbers in the rules recorded above), so no other docx check is blocked.
+- **Cross-engine (fb-595.68.29):** typst and docx are on the shared layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): Times New Roman 14 pt; 28 pt body lines (560 twips), 17 pt single lines (340 twips) for the court name, caption, title and signature block; the two captions ruled across by cell borders 4 pt off the text; the lead-in, numbered paragraphs and prayers with a half-inch first-line indent; the last paragraph kept with the signature block; the footer "N of M" in a single line box. `params.cross_engine: gate` (`eval.yaml`): XENG-001..003 pass on the sample (204/204 lines, 10 pages in both engines).
