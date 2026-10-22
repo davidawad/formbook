@@ -7,20 +7,19 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adve
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md` (21-page complaint transcribed: caption, intro, paragraphs 1–70 with transfer tables and footnotes, the prayer and the signature; paragraphs 71–116 omitted and marked in the sample) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 11 pages, US Letter, typst 0.15.0, vendored EB Garamond only, no typst warnings |
-| overlay | ok: `usage/OVERLAY-brewers-adversary-complaint.pdf` and `usage/OVERLAY-brewers-adversary-complaint.txt` |
-| pages reviewed | 11 of 11 (every page of the final render rasterized at 60 dpi and viewed) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf` and `usage/OUTPUT-adversary-complaint.docx.pdf`, 12 pages each, US Letter, Times New Roman (vendored), no typst warnings |
+| overlay | `just overlay <dir>` writes `.overlay/<doc path>/OVERLAY-adversary-complaint.pdf` (gitignored, not committed) |
+| pages reviewed | 12 of 12, typst and docx (every page rasterized at 60 dpi and viewed; fb-595.68.31) |
 | tier 2 | not met: one filer only (see Known gaps 1) |
-| typeface | face required by the rules: none (Known gaps 2) -> vendored substitute: none needed, EB Garamond kept per `docs/FONTS.md` ("No face named") -> not applicable |
+| typeface | face required by the rules: none (Known gaps 2) -> the exemplar's Times New Roman (vendored, `("Times New Roman", "Liberation Serif")`) |
 
-Commands (from the repo root, with `export PATH="$HOME/tb/bin:$PATH"`):
+Commands (from the repo root, toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md
-sh tools/overlay.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adversary-complaint brewers-adversary-complaint
+sh tools/check.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adversary-complaint                 # typst: render and gates
+sh tools/check.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adversary-complaint --engine docx   # docx: render, gates, XENG
+just overlay courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adversary-complaint
 ```
-
-Output names are the tools' defaults (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`): `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and cannot be pointed at a file named `<id>.pdf`.
 
 ## Governing rules
 
@@ -39,17 +38,20 @@ Not produced by this template (separate filings): the adversary cover sheet, the
 
 ## Layout
 
-- Letter paper, 1 in margins. Body EB Garamond 12 pt, double spaced (24 pt baseline pitch), first-line indent of 0.5 in.
-- Court heading centered: `UNITED STATES BANKRUPTCY COURT`, `WESTERN DISTRICT OF TENNESSEE`, and the division if given.
-- Caption: a two-column table with a section-mark (§) column (the exemplar's style). Debtor block on top (`IN RE:`, debtor name, `DEBTOR.`) with the case number and chapter on the right; adversary block below (plaintiffs, `Plaintiff,`, `vs.`, defendants, `Defendants.`) with `ADVERSARY PROCEEDING NO.` on the right.
-- Title centered in capitals between rules.
-- Allegations numbered by the template. The first paragraph (the introduction) is unnumbered, and so is the prayer lead-in (any paragraph starting `WHEREFORE`) and an editorial note written in italics within square brackets (`*[...]*`).
-- `#` headings: centered bold capitals (claims, sections). `##`: centered bold, mixed case (the parenthetical under a claim heading). `###`: left bold (lettered sub-headings).
-- Prayer items (`- ` list) are lettered A., B., ... with a hanging indent.
-- Transfer tables (markdown pipe tables) are centered, single spaced, ruled; a table that breaks across pages repeats its header row.
-- Footnotes: `text[^key]` plus `[^key]: ...` definitions; 10 pt.
-- Signature block at 3 in from the left margin, single spaced: closing line, firm, `/s/` signer, name line, address and contact lines, role. The last allegation or prayer item is kept in one unbreakable block with the signature, so the signature never stands alone.
-- Page number centered at the foot of each page.
+The shared cross-engine layout model (`lib/typst/xengine.typ`; docs/EVAL-LOOP.md, "Cross-engine gate"): every line a box of its pitch with the baseline at 0.8 of it, the boxes touching, explicit spaces between blocks; first fit, ragged right, no kerning, ligatures or hyphenation. The docx sets the same pitches and spaces in twips (`docx/reference.xml`, `docx/tnwb-adversary-complaint.lua`). No TNWB rule sets any of these numbers (TNWB-FORM-002): they are the exemplar's conventions.
+
+- Letter paper, 1 in margins. Times New Roman 12 pt; body double spaced (24 pt pitch), first-line indent 0.5 in; single lines 13.8 pt (Word's single line at 12 pt).
+- Court heading centered, plain capitals (as filed): `UNITED STATES BANKRUPTCY COURT`, `WESTERN DISTRICT OF TENNESSEE`, and the division if given; a body line below.
+- Caption (as filed): a three-column table, one single line per row: the parties on the left (names in capitals; `DEBTOR.`, `Plaintiff,` and `Defendants.` 1.5 in in, `vs.` 0.5 in in), a section mark (§) on every row in a 0.5 in column, `CASE NO.:` and the chapter lines beside the debtor, `ADVERSARY PROCEEDING NO.:` beside the first plaintiff; a 0.5 pt rule under the debtor block and under the parties (left and § columns). A name that wraps takes two lines in its row, with one §.
+- Title centered bold capitals, half a body line (12 pt) above and below.
+- Allegations numbered by the template: the number in a half-inch box at the half-inch indent, the text from 1 in, wrapping to the margin (as filed). The first paragraph (the introduction), the prayer lead-in (`WHEREFORE`, kept with the prayer) and an editorial note in italics within square brackets (`*[...]*`) are not numbered.
+- `#` headings: centered bold underlined capitals (as filed); `##`: centered bold, mixed case; `###`: bold at the margin. Single lines, 12 pt above and below, kept with the text after them.
+- Prayer items (`- ` list) lettered A., B., ... in the number's box, laid out as the allegations (as filed).
+- Transfer tables (markdown pipe tables): centered, 60 % of the text width, the columns equal, 0.5 pt rules, 8 pt / 3 pt cell padding, single lines, the header row bold and centered; 12 pt above and below; rows are not split and the header row is not repeated on the next page.
+- Quotations (`>`): single lines, 0.5 in in on both sides, 12 pt above and below.
+- Footnotes: 10 pt in 11.5 pt lines, 6 pt apart, a 30 % rule 7.8 pt above (with the 6 pt, Word's 13.8 pt separator line).
+- Signature: the closing ("Respectfully submitted ...") on a body line at the indent; then, 12 pt below and 2.5 in from the margin (as filed), single lines: firm (bold), `/s/` signer, name line, address and contact lines, role (italic). The last allegation or prayer item is kept on one page with the signature block.
+- Page number centered in the footer, in a 13.8 pt line.
 
 ## Markdown contract (for samples)
 
@@ -75,39 +77,39 @@ Not supported: raw typst, images, nested lists.
 1. **One exemplar, not two or three.** The tier-2 test (2 or 3 filers) is not met. The search (CourtListener RECAP, `court=tnwb`, adversary complaints 2019–2025) found Springfield 19-00070 and Reed 20-00136 (pro se, 2–3 pages, not representative) and Butcher Shop of Cordova 21-00106 (44 pages, mostly scanned exhibits, little text). None was saved.
 2. **No court typeface, margin or spacing rule found.** The W.D. Tenn. bankruptcy local rules (2017 text, `LocalRules.4.3.17.pdf`, re-read 2026-10-15 as extracted text: no font, size, spacing or margin requirement) contain none, and FRBP 9004 (restyled 2024) has none either. The template uses the exemplar's conventions: 12 pt, double spaced, 1 in margins. These are conventions, not court requirements. The court's current local rules may have changed since 2017 and were not verified. A search snippet reports that the Middle District's 2025 amendments moved LBR 9013-1 instructions to the court's website; nothing was found for TNWB either way.
 3. **Form 416 was not fetched.** FRBP 7010 requires the caption to substantially conform to Official Form 416. The caption follows the exemplar and the rule's stated contents; the form text itself is unverified.
-4. **Font.** The exemplar is set in Times New Roman, but the rules name no face (Known gaps 2), so `docs/FONTS.md` ("No face named") keeps EB Garamond. The exemplar settles only what the rules leave open, and a Times face is a tier-2 look, not a rule. Liberation Serif (metric-compatible with Times New Roman, vendored) would be the substitute if David decides the clerk-facing look should follow the exemplar. EB Garamond at 12 pt has a smaller x-height than Times at 12 pt, so the text reads smaller than the exemplar; that is a decision for David.
+4. **Font.** The rules name no face (Known gaps 2); the template sets the exemplar's Times New Roman (vendored), in every engine (the docx names the typst face through `{font}`; until fb-595.68.31 the docx was EB Garamond and failed DEF-FONT-002 and TNR-EMBEDDED). A decision for David if the court's face should be another.
 5. **State bar number.** LBR 1001-3(h) requires the state bar disciplinary number. The exemplar's counsel block has none (its counsel is a New York firm), so the sample has none either. The template prints `name_line` if given and does not check for it.
 6. **Italics.** The exemplar's text layer does not show italics. The sample italicizes case names and signals as a convention, not from the filing.
 7. **Transcription.** The sample is the exemplar's text transcribed from its text layer, with the exemplar's own errors kept: the stray quotation mark in the introduction (`“hereinafter referred to as “Bassuk”)`), "should be avoided under as it did not" (paragraph 51), and "a constructively fraudulent conveyances" (paragraph 66). Paragraphs 71–116 are omitted and marked; the prayer is transcribed as filed and still refers to the omitted Fourth and Fifth Claims.
-8. **Justification.** Body text is ragged right. The exemplar's justification could not be read from the text layer; not asserted.
-9. **Overlay pairing.** The overlay pairs pages by word overlap, not by index (`OVERLAY-<id>.txt`). The lowest matches are our pages 5 (35.0%, paired with filed page 6) and 11 (27.0%, paired with filed page 21): page 5 is the 40-row table, which the exemplar sets differently, and page 11 is the signature page of a sample that omits paragraphs 71–116. Pages 1–3 match 57–81%. The overlay is a diagnostic, not a score.
-10. **Checker not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json`, `rules.md` and `checks.yaml`; this doc-type folder has none of those, and the brief forbids changes to `tools/`. Render and overlay were run; the page review below is the visual check.
+8. **Justification.** Body text is ragged right (the cross-engine model: first fit, no hyphenation). The exemplar's justification could not be read from the text layer; not asserted.
+9. **Overlay.** The overlay (`just overlay`) pairs pages by word overlap; the exemplar sets its tables and caption in a different vertical rhythm, so the layers do not line up on the table pages. The overlay is a diagnostic, not a score.
+10. **Caption section marks.** A party name that wraps in the caption takes two lines in its row with one § beside it (the exemplar types a § on every line); the rows hold the frontmatter lines, not measured lines. Tier 2, ACCEPTED.
 11. **Cover sheet, summons and exhibits** are separate filings and are not generated (see Governing rules).
 
-## Review of the rendered pages (final render, 11 pages)
+## Review of the rendered pages (final render, 12 pages, typst and docx; fb-595.68.31)
 
-Rendered at 60 dpi with `pdftoppm -r 60` and viewed page by page.
+Rendered at 60 dpi with `pdftoppm -r 60` and viewed page by page, typst beside docx. The docx breaks every line and page as the typst render (XENG-001..003, 330/330 lines); the findings hold for both.
 
 | Page | Content | Result |
 |---|---|---|
-| 1 | Court heading, caption (debtor and adversary blocks, § column), title, introduction, paragraphs 1–5 | Pass. Caption rows do not overlap; wrapped party names sit in their rows. |
-| 2 | Paragraphs 6–15; GENERAL ALLEGATIONS and THE AGREEMENT headings | Pass. Heading kept with the following paragraph. |
-| 3 | Paragraphs 16–25; first transfer table (25) | Pass. Table fits the page. |
-| 4 | Continued table 25, paragraphs 26–30; tables 27 and 28 | Pass. Table 25 breaks onto this page with its header row repeated. |
-| 5 | Paragraph 31 and its 40-row table | Pass. Table fits the page. |
-| 6 | Paragraphs 32–41; INSOLVENCY; footnotes 1 and 2 | Pass. |
-| 7 | Paragraphs 42–51; FIRST CLAIM FOR RELIEF heading and subtitle; footnotes 3 and 4 | Pass. |
-| 8 | Paragraphs 52–58; SECOND CLAIM FOR RELIEF heading | Pass. |
-| 9 | Paragraphs 59–67; THIRD CLAIM FOR RELIEF heading | Pass. Italic case names in paragraph 59. |
-| 10 | Paragraphs 68–70; the omission note (unnumbered); WHEREFORE; prayer A–F | Pass. |
-| 11 | Prayer item G; "Respectfully submitted this 19th day of September, 2025."; signature block | Pass. Item G is kept with the signature block. Finding (tier 2, ACCEPTED): the prayer breaks between pages 10 and 11, leaving page 11 short; the keep rule is preferred to a full page 10. |
+| 1 | Court heading, caption (debtor and adversary blocks, § column, two rules), title, introduction, PARTIES heading, paragraphs 1–4 | Pass. Wrapped debtor and plaintiff names keep their rows (Known gaps 10, ACCEPTED). |
+| 2 | Paragraphs 5–12; GENERAL ALLEGATIONS and THE AGREEMENT headings | Pass. Headings kept with the following paragraph. |
+| 3 | Paragraphs 13–24 | Pass. |
+| 4 | Paragraphs 25–27 and their transfer tables | Pass. Paragraph 28 and its table move to page 5 (the space left is less than the 12 pt above a table and a body line). |
+| 5 | Paragraphs 28–31; table 28 and the start of table 31 | Pass. Table 31 breaks between rows; no row split. |
+| 6 | The rest of table 31; paragraph 32 | Pass. Header row not repeated on the continuation (both engines). |
+| 7 | Paragraphs 33–41; INSOLVENCY; footnotes 1 and 2 | Pass. |
+| 8 | Paragraphs 42–49; FIRST CLAIM FOR RELIEF and its parenthetical; footnotes 3 and 4 | Pass. |
+| 9 | Paragraphs 50–57; SECOND CLAIM FOR RELIEF and its parenthetical | Pass. |
+| 10 | Paragraphs 58–65 | Pass. Italic case names in paragraph 59. |
+| 11 | Paragraphs 66–70; THIRD CLAIM FOR RELIEF; the omission note (unnumbered); WHEREFORE; prayer A–C | Pass. |
+| 12 | Prayer D–G; closing; signature block | Pass. Item G kept with the closing and signature block. |
 
-Open tier-2 findings: none that block the layout. The items above (Known gaps 2–6) are the ones a clerk or a tier-2 comparison would raise.
+Open tier-2 findings: none. ACCEPTED: Known gaps 10 (one § per wrapped caption row).
 
 ## Engines
 
-docx (`docx/build-reference.sh` -> `docx/reference.docx`, filter `docx/tnwb.lua`; render `sh tools/render.sh --engine docx`; judged on `usage/OUTPUT-adversary-complaint.docx.pdf`, the LibreOffice conversion):
-
-- Matches the typst output: 11 pages in both; EB Garamond only (`pdffonts`, no fallback face); US Letter, 1 in margins; double spacing (exact 23.9 pt, so 27 lines per page as in typst at 24 pt); single-spaced court heading, caption (with the section-mark column), signature block and parties; numbered allegations at 0.5 in with text at 1 in; lettered prayer with a hanging indent; centered caps, centered bold and left bold headings; transfer tables centered, auto width, ruled, header row repeated across pages; footnotes at 10 pt; page number centered in the footer. Pages reviewed: 11 of 11 (every page of the final docx.pdf rasterized at 60 dpi and viewed, compared with the typst pages).
-- Differs (tier 2, not chased): (1) pagination: LibreOffice places exact-spaced text about 4 pt lower and table rows are 14.3 pt against typst's 13.8 pt, so a few page breaks fall a line or two away from typst (for example the transfer table of paragraph 31 starts on page 5 and ends on page 6 in the docx, and entirely on page 5 in typst); (2) the firm name in the signature block wraps to three lines in LibreOffice (typst: two); (3) footnote leading is exact 11.5 pt; (4) cell text of the transfer tables is plain text (markdown emphasis inside a table cell is not carried over); (5) no PDF bookmarks.
-- BLOCKED: none in the template. `sh tools/check.sh <court-dir> --engine docx` cannot run on this folder: it needs `checks.yaml` and `rules.md` (and the court's `court.json`), which this unit does not create; the run exits 2 before any gate. No check ID is BLOCKED by the docx template itself.
+- **typst** (primary, `typst/tnwb-adversary-complaint.typ`): the reference for the form, on `lib/typst/xengine.typ` (`xengine.with(pitch: 24pt)`, single lines in `edges(13.8pt)` boxes, footnotes in `edges(11.5pt)`).
+- **docx** (`docx/reference.xml`, `docx/tnwb-adversary-complaint.lua`; built by `fb render`, no shell): `reference.xml` is the cross-engine recipe (`base="xengine"`, `{font}` = the typst face; Body Text 480-twip lines with a 720-twip indent, 276-twip single lines, headings 240 twips from the text, footnotes 10 pt in 230-twip lines 120 twips apart, the page number in a 276-twip footer line 735 twips from the page foot) plus "Numbered Paragraph" (tab at 1 in) with its "Note" (no widow control, for a paragraph that anchors a footnote) and "Keep" variants, "Body Text Note" and "Body Keep". The filter (`require("docx.xengine")`) writes the court heading, the caption table, title, headings, transfer tables, quotations and the signature block with the typst spacing in twips; the introduction, allegations, WHEREFORE and prayer items go to pandoc in those styles (footnotes stay Word footnotes). Break rules as typst: no break inside ")(", a break after a slash before a letter, `§§` bound to its number. Until fb-595.68.31 the docx was EB Garamond from `docx/build-reference.sh` (TNR-EMBEDDED and DEF-FONT-002 failed).
+- Checks (fb-595.68.31): typst `RESULT: 9 checks passed, 0 failed`; docx `RESULT: 13 checks passed, 0 failed`, XENG-001..003 PASS (12 pages each, 330/330 lines). `eval.yaml` sets `params.cross_engine: gate`.
+- **latex**: no latex template for this doc type.
