@@ -238,7 +238,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/eastern-district) | `paed` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/middle-district) | `pamd` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/western-district) | `pawd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Commonwealth Court of Pennsylvania](courts/third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | 7/7 | 3/3 | 4/4 | 29 |
+| [Commonwealth Court of Pennsylvania](courts/third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Superior Court of Pennsylvania](courts/third-circuit/pennsylvania/state/superior-court) | `pasuperct` | up for review | 5/5 | 5/5 | 5/5 | 29 |
 | [Supreme Court of Pennsylvania](courts/third-circuit/pennsylvania/state/supreme-court) | `pa` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 
