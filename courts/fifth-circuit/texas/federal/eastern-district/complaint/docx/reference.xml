@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The E.D. Tex. complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman) at 12 pt (CV-10(a)(5): no smaller than 12-point, footnotes and page
+     number too; size 24 half points); Body Text in exact 27.6 pt line boxes (typst pitch-double, CV-10(a)(5) double
+     spaced) with a half-inch first-line indent, and the headings in them; the court title, caption, title, signature
+     and footnote lines in 13.8 pt boxes (typst pitch-single), 6 pt after each footnote (typst note-gap); letter page
+     with 1-inch margins and a centered page number, its line 36.75 pt above the page foot (735 twips: where typst sets
+     it, footer-descent 30 %). Added: Numbered Paragraph (Fed. R. Civ. P. 10(b): the number after the first-line
+     indent, a tab to 1 in), Lettered Item (the prayer: the letter half an inch in, the text hanging a further half
+     inch; the Keep variant for the last item, kept whole with the signature block as typst keeps it), and Noted
+     variants without widow control for a paragraph that holds a footnote (typst moves the line with the reference
+     on with its note, even when that leaves a widow). docx/txed-complaint.lua writes the cover, headings and
+     signature with their own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" note-after="120" footer="735">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraph"><w:name w:val="Numbered Paragraph"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraphNoted"><w:name w:val="Numbered Paragraph Noted"/><w:basedOn w:val="NumberedParagraph"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNoted"><w:name w:val="Body Text Noted"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="LetteredItem"><w:name w:val="Lettered Item"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="0" w:line="552" w:lineRule="exact"/><w:ind w:left="1440" w:hanging="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="LetteredItemNoted"><w:name w:val="Lettered Item Noted"/><w:basedOn w:val="LetteredItem"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="LetteredItemKeep"><w:name w:val="Lettered Item Keep"/><w:basedOn w:val="LetteredItem"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>
