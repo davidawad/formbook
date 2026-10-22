@@ -7,9 +7,9 @@ Folder: `courts/ninth-circuit/oregon/federal/bankruptcy-district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`). It is a motion with its argument in the body, not a separate memorandum. |
 | sample md | `usage/INPUT-motion-brief.md` (transcription of the full 5-page filing, plus the rule-mandated notice; see Known gaps) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `.docx.pdf`, 5 pages each, the same lines and pages (XENG gated), vendored Times New Roman only, no warnings (2026-10-22) |
 | overlay | ok: `usage/OVERLAY-sheehy-motion.pdf` and `OVERLAY-sheehy-motion.txt` |
-| pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed; page 1 also at 110 dpi after the court-title fix) |
+| pages reviewed | 5 of 5 on each engine (`reviews/2026-10-22.md`) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`), not the `<id>.md` names in the brief.
 
@@ -20,8 +20,8 @@ Primary source: Local Bankruptcy Rules of the District of Oregon, "LBR.120125 cl
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LBR 9004-1(a)(1)-(2) | Letter size; type at least 12 pt or 10 cpi; margins at least 1 inch top and bottom, 3/4 inch sides. | `page-w`, `page-h`, `type-size`, `margin-top`, `margin-bottom`, `margin-side`. |
-| LBR 9004-1(a)(1)(B) (typeface) | Type size only; no typeface is named in the local rules (checked 2026-10-15 against the fetched LBR text). | Face required: none. Template face: EB Garamond (vendored; `docs/FONTS.md` "No face named" row). |
-| LBR 9004-1(a)(4)(A) | Body double-spaced. | `leading-double`. |
+| LBR 9004-1(a)(1)(B) (typeface) | Type size only; no typeface is named in the local rules (checked 2026-10-15 against the fetched LBR text). | Face required: none. Template face: Times New Roman (vendored, the house face), typst and docx alike. |
+| LBR 9004-1(a)(4)(A) | Body double-spaced. | `pitch-body` (24 pt line boxes at 12 pt). |
 | LBR 9004-1(a)(9)(A), (D) | Counsel block single-spaced upper left; title and page number in the lower-left margin. | `lines(meta.counsel)`; `page-footer()`. |
 | LBR 9004-2(c) | Adversary caption (see the complaint README for the layout). | `court-title()`, `caption()`. |
 | LBR 9013-1(b)(1) | The motion's title names the parties against whom relief is requested. | `brief_title` in the sample, which names ETC and the ECF 9 order. The template does not check it. |
@@ -35,10 +35,11 @@ Not verified in this run: FRCP 60(b) and FRBP 9024, as cited by the exemplar (no
 
 ## Layout
 
-- Page 1: counsel block, court title, caption (parties | ")" column | case numbers, title, hearing lines if `hearing` is set), then a page break.
-- Notice (LBR 9013-1(b)(2)) on page 2, from `notice`.
+- Page 1: counsel block, court title, the ruled caption (debtor block | case number; parties | adversary number, title, hearing lines if `hearing` is set), then the body after a blank double line, as in the filed motion.
+- Notice (LBR 9013-1(b)(2)) before the body, from `notice`.
+- The cross-engine layout model (`lib/typst/xengine.typ`, replacing `word-compat`): 24 pt body line boxes, 13.8 pt single lines, headings at the type size on the body pitch, explicit spaces between blocks.
 - Body: headings (level 1 centered bold caps for BACKGROUND, LEGAL STANDARD, ARGUMENT, CONCLUSION; level 2 bold for argument headings); paragraphs are not numbered (a motion does not number its paragraphs); a chunk starting `- `, `* `, or `1. ` is a list lettered 1., 2., ...; a chunk starting `~ ` is a paragraph without the first-line indent (used for bullets in the Legal Standard).
-- Signature block at the right half, after the date line.
+- Signature block 3 in from the margin, after the date line; the last chunk is kept with it.
 - Certificate of service on its own page, from `certificate` (its chunks are rendered like the body).
 
 ## Markdown contract (for samples)
@@ -57,25 +58,16 @@ Not verified in this run: FRCP 60(b) and FRBP 9024, as cited by the exemplar (no
 2. **The sample adds the LBR 9013-1(b)(2) notice.** The exemplar has no notice paragraph. The notice text is the rule's form (no facts), so it is added and the overlay shows it red-only. The exemplar's omission is a deviation from the rule, recorded here, not a template choice.
 3. **No LBR 7007-1(a)(1) prefiling certification.** The exemplar has none. The wording depends on facts (whether and how the parties conferred), so the sample does not add one. A real filing in an adversary proceeding needs it; the template renders it if it is written into the body's first paragraph, but does not check for it.
 4. **Caption wording.** LBR 9004-2(c) uses "Case No."; the exemplar's caption reads "Originating Case No." The template uses the rule's wording.
-5. **Font, footer size, caption approximation** as in the complaint README (EB Garamond, kept because the local rule names no face; footer at 12 pt; the ")" column is measured, not exact).
-6. **Tool checks.** `tools/check.sh` and `tools/check-selftest.sh` were not run for the same reason as the complaint (the brief forbids touching `tools/`, and this folder is not a court folder). Render and overlay were run; the page review is the Gate 2 equivalent.
-7. **Latex and docx engines** are not built for this doc type (the brief asks for typst only).
+5. **Font, footer size, caption form** as in the complaint README (Times New Roman, the house face, as the local rule names none; footer at 12 pt; the caption ruled as both filed examples, not LBR 9004-2(c)'s ")" column).
+6. **Tool checks.** `tools/check.sh <this folder>` and `--engine docx` run every gate (0 failed; XENG-001..003 gated in `eval.yaml`). `tools/check-selftest.sh` takes a court root with `checks.yaml` and does not run here.
+7. **Latex** is not built for this doc type.
 
-## Review of the rendered pages (5 pages)
+## Review of the rendered pages
 
-- Page 1: counsel block at the top; court title; caption with the two party blocks, Case No. 25-33351-thp7 and Adv. Proc. No. 26-03009-thp at the right, the title in bold. Pass.
-- Page 2: LBR notice paragraph at the top, then the opening paragraph and BACKGROUND. Pass (the notice was overlapping the first paragraph before the spacing fix; the overlap is gone).
-- Page 3: LEGAL STANDARD with the two `~ ` bullets, then the start of ARGUMENT. Pass.
-- Page 4: argument headings 4 and 5, CONCLUSION, the numbered list 1-3, the date line and the signature block. Pass.
-- Page 5: the certificate of service on its own page. Pass.
+`reviews/2026-10-22.md` (5 of 5 pages, typst and docx).
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (the same page and type values as the complaint; headings 17 pt and 14.5 pt; "Pleading Flush" for the `~` paragraphs; "Pleading Notice" for the LBR 9013-1(b)(2) notice); `docx/orb-motion.lua` with `docx/orb-common.lua` writes the cover, the caption, the notice, the body (unnumbered paragraphs, lettered lists 1., 2., ...), the signature block and the certificate of service on its own page; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in capitals. Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8.1), 6 pages, all 6 viewed at 60 dpi (review: `reviews/2026-10-15-docx.md`).
+**docx** (`docx/`): `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst face `{font}`: Times New Roman 12 pt, Body Text in exact 24 pt lines, single lines 13.8 pt; "Body Flush" for the `~` paragraphs, "Body Numbered" with a tab to 1 in for list items) and `docx/orb-motion.lua` with `docx/lib/orb-common.lua` (the same file as the complaint's): the cover and the ruled caption, the notice, the body, the signature block, the certificate of service on its own page, the footer (the title in capitals and "Page N of M") and the section. No shell: `fb render` builds the reference document and packs the archive (were `docx/build-reference.sh` and `render.sh`). Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`, 5 pages, every line and page as typst (XENG-001..003 gated).
 
-- Matches the typst output: letter; margins; EB Garamond 12 pt; double-spaced body; 0.5 in first-line indent on body paragraphs and none on the `~` paragraphs; the caption with the ")" column and the hearing lines when a sample sets them; the notice on page 2; the H1 and H2 headings; the certificate of service on its own page with its heading centered.
-- Differs from typst: the ")" count is estimated from the width of each party line (see the complaint Engines note); the list numbers are typed; the certificate's lines are single-spaced paragraphs with the same gap as the typst `v()`. Pagination: LibreOffice puts 6 pages where typst puts 5; the signature block (date and firm lines) moves to page 5 by itself because it is kept together with the date.
-- Fonts: as the complaint: LibreOffice must see only `/work/repo/fonts` (`FONTCONFIG_FILE`).
-- Not verified in Word. The `.docx` is a valid zip of well-formed XML, and LibreOffice converts it without a repair prompt.
-
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`; a doc-type folder has neither, so the script exits 2 (the same errors as the complaint). The gates did not run and `usage/.check-docx.txt` was not written.
+- Not verified in Word (LibreOffice only); it opens and converts without a repair prompt.
