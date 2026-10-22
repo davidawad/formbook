@@ -76,8 +76,6 @@ service:
     - "W. Mark Lanier"
 ---
 
-{{contents}}
-
 Plaintiffs[^1] offer this joint response to Manufacturing Defendants’ Joint Motion to Transfer, filed April 20, 2018, for the Panel’s consideration of Defendants’ motion and the proper forum for the proposed opioid multi-district litigation (MDL) proceedings. As an initial matter, Plaintiffs join in the Texas Attorney General’s request that a ruling on the motion to transfer be delayed.
 
 ## INTRODUCTION

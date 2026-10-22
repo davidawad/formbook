@@ -189,8 +189,6 @@ service:
     - "/s/ Noelle M. Reed"
     - "Noelle M. Reed"
 ---
-{{contents}}
-
 Plaintiffs[^1] do not, and cannot, dispute that the cases brought by Texas Counties against prescription opioid manufacturers and distributors involve common questions of fact and law. As such, coordinating the cases before a single court for all pretrial proceedings will promote efficiency, avoid duplicative discovery and inconsistent rulings, and conserve judicial and party resources.
 
 Though Plaintiffs acknowledge that their cases “may” meet the criteria for transfer to an MDL pretrial court, including that the cases are related for purposes of Rule 13, Plaintiffs object to the pending Motions to Transfer as purportedly “procedurally defective” because the original Motions did not include some related cases. This argument is meritless. First, a motion to coordinate cases in an MDL is not defective merely because it does not include every related case that may later be added. Rule 13 contemplates that after an MDL proceeding is created, later actions may be added as tag-along cases. Plaintiffs cite no case law supporting their claim that the Motions are improper merely because they do not include every possible related case.

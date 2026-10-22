@@ -120,8 +120,6 @@ service:
     - "/s/ Robert Scott"
     - "Robert Scott"
 ---
-{{contents}}
-
 ## INTRODUCTION
 
 Defendants AmerisourceBergen Drug Corporation[^1], McKesson Corporation, and Cardinal Health, Inc. (collectively, “Distributor Defendants”) respectfully move this Court, pursuant to Tex. Gov’t Code § 74.162 and Tex. R. Jud. Admin. 13.3, to transfer all pending Texas opioid-related cases listed in Appendix A, as well as any future-filed tag-along actions, to a single court for coordinated pretrial proceedings. Distributor Defendants further move the Panel to stay all related district court proceedings in the Texas opioid actions pending consideration of this Motion to Transfer.

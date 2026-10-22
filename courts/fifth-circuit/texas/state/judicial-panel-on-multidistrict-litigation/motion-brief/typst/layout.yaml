@@ -1,0 +1,82 @@
+# Texas Judicial Panel on Multidistrict Litigation (texjpml): motion to transfer (motion-brief). The whole layout, as
+# data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to ../../rules.md (TEXJPML-*: TRAP 9.4 applied by convention); lengths
+# in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is the
+# template's own wording (the certificate of service).
+size: 14                  # TEXJPML-FORM-006: 14-point for all text
+pitch:
+  body: 32.2              # TEXJPML-FORM-003: double-spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # cover, headings, contents, quotations, counsel, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # TEXJPML-FORM-002: at least one inch on all sides
+indent: 36
+# TEXJPML-FORM-005: the cover unnumbered, front matter lower-roman, the text arabic from 1, centred at the bottom.
+page_number: {align: center, front: lower-roman}
+footnote: {size: 12, pitch: 13.8, gap: 7}   # TEXJPML-FORM-003, -006: footnotes 12-point, single-spaced (1.15 x 12 pt)
+quote: {left: 36, right: 36, above: 16.8, below: 16.8, gap: 16.8}   # TEXJPML-FORM-003: block quotations single-spaced
+# TEXJPML-MOT-001: the sections centred and bold; the points numbered by the template, never typed: level 2 I.
+# (centred), level 3 A., level 4 1., level 5 a. (each label in a half-inch box beside the title).
+heading:
+  - {align: center, bold: true, upper: true, above: 25.2, below: 18}
+  - {align: center, bold: true, number: "I.", above: 21.6, below: 14.4}
+  - {bold: true, number: "A.", label_box: 36, above: 18, below: 14.4}
+  - {bold: true, number: "1.", label_box: 36, above: 18, below: 14.4}
+  - {italic: true, number: "a.", label_box: 36, above: 18, below: 14.4}
+# TEXJPML-CONT-001, -002: the docket number, the court, the caption, the title between rules, then the lead counsel
+# (TRAP 9.4(g)), or every counsel group when the frontmatter names no lead counsel, two to a row, and the date. The
+# cover's counsel are set solid (one line per 14 pt, single spacing as TEXJPML-FORM-003 allows; the old template's
+# leading) so four counsel groups of a dozen lines keep the cover to one page (DEF-COVER-001).
+cover:
+  - {text: "{docket}", align: center, bold: true, optional: true}
+  - {text: "{court}", align: center, above: 14.4}
+  - {rule: 0.75, above: 10.1}
+  - {text: "{caption}", align: center, bold: true, upper: true, above: 10.1}
+  - {rule: 0.75, above: 10.1}
+  - {text: "{brief_title}", align: center, bold: true, above: 10.1}
+  - {rule: 0.75, above: 10.1}
+  - when: notes
+    blocks:
+      - {text: "{notes}", align: center, bold: true, above: 14.4}
+  - when: lead_counsel
+    blocks:
+      - columns: {each: lead_counsel, per_row: 2, row_gap: 15.85, blocks: [{text: "{lines}", pitch: 14}]}
+        gutter: 21.6
+        above: 28.8
+  - unless: lead_counsel
+    blocks:
+      - columns: {each: counsel, per_row: 2, row_gap: 15.85, blocks: [{text: "{lines}", pitch: 14}]}
+        gutter: 21.6
+        above: 28.8
+  - {text: "{date}", optional: true, above: 18}
+contents: {title: "TABLE OF CONTENTS", depth: 4, col: 36, hang: 36, step: 28.8, above: 8.6}
+# The index of authorities, when the frontmatter lists them (the model's `authorities` schema).
+authorities:
+  title: "INDEX OF AUTHORITIES"
+  col: 56
+  hang: 18
+  above: 14
+  group: {bold: true, upper: true, above: 22.4, below: 8.4}
+# After the text: the date and the signature block (3 in from the left, never split); with a lead counsel on the
+# cover, every counsel group follows, two to a row; then the certificate of service (TEXJPML-FORM-008, TRAP 9.5(d),
+# (e)), worded by the template from the service date and the title, signed by its signer, else by the signature.
+closing:
+  - {text: "Dated: {date}", optional: true, above: 16.8}
+  - group:
+      - {text: "{signature}", left: 216}
+    above: 16.8
+  - when: lead_counsel
+    blocks:
+      - columns: {each: counsel, per_row: 2, row_gap: 15.85, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 16.8
+  - when: service
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true}
+          - {text: "I hereby certify that, on {service.date}, a true and correct copy of this {brief_title} was served through the electronic filing system to all counsel of record.", pitch: body, indent: 36, above: 8.4}
+          - when: service.signer
+            blocks:
+              - {text: "{service.signer}", left: 216, above: 16.8}
+          - unless: service.signer
+            blocks:
+              - {text: "{signature}", left: 216, above: 16.8}
+        above: 16.8
