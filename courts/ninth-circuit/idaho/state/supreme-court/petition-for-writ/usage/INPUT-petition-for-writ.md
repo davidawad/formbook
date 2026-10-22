@@ -195,18 +195,18 @@ Reclaim Idaho and the Committee to Protect and Preserve the Idaho Constitution b
 
 Petitioners respectfully request that this Court:
 
-(a) Declare that the requirement of Idaho Code § 34-1805(2) that initiative and referendum petitions must be supported by the valid signatures of 6% of the registered voters in each of Idaho’s 35 legislative districts is an unconstitutional restriction on the people’s right under Article III, § 1.
+\(a) Declare that the requirement of Idaho Code § 34-1805(2) that initiative and referendum petitions must be supported by the valid signatures of 6% of the registered voters in each of Idaho’s 35 legislative districts is an unconstitutional restriction on the people’s right under Article III, § 1.
 
-(b) Declare that Idaho Code § 34-1805(2) is constitutional and enforceable only to the extent that it reads: “Before such petitions shall be entitled to final filing and consideration by the secretary of state, there shall be affixed thereto the signatures of legal voters equal in number to not less than six percent (6%) of the qualified electors at the time of the last general election.”
+\(b) Declare that Idaho Code § 34-1805(2) is constitutional and enforceable only to the extent that it reads: “Before such petitions shall be entitled to final filing and consideration by the secretary of state, there shall be affixed thereto the signatures of legal voters equal in number to not less than six percent (6%) of the qualified electors at the time of the last general election.”
 
-(c) Declare that the prohibition in Idaho Code § 34-1813(2) on an effective date for legislation passed by initiative before July 1 of the year following its passage is an unconstitutional restriction on the people’s right under Article III, § 1.
+\(c) Declare that the prohibition in Idaho Code § 34-1813(2) on an effective date for legislation passed by initiative before July 1 of the year following its passage is an unconstitutional restriction on the people’s right under Article III, § 1.
 
-(d) Issue a peremptory writ of prohibition to the Idaho Secretary of State permanently and absolutely prohibiting him from enforcing the requirement in Idaho Code § 34-1805(2) that initiative and referendum petitions be supported by 6% of the registered voters in each of Idaho’s 35 legislative districts.
+\(d) Issue a peremptory writ of prohibition to the Idaho Secretary of State permanently and absolutely prohibiting him from enforcing the requirement in Idaho Code § 34-1805(2) that initiative and referendum petitions be supported by 6% of the registered voters in each of Idaho’s 35 legislative districts.
 
-(e) For a show cause or other hearing as the Court may require pursuant to Idaho Appellate Rule 5(d).
+\(e) For a show cause or other hearing as the Court may require pursuant to Idaho Appellate Rule 5(d).
 
-(f) For an award of attorney fees and costs of this action pursuant the private attorney general doctrine, Idaho Code § 12-117, § 12-121, or as otherwise provided by law.
+\(f) For an award of attorney fees and costs of this action pursuant the private attorney general doctrine, Idaho Code § 12-117, § 12-121, or as otherwise provided by law.
 
-(g) Any other relief that the Court deems just and equitable under the circumstances.
+\(g) Any other relief that the Court deems just and equitable under the circumstances.
 
 The exhibits cited in this petition (Exhibits 1 through 8, the declarations of Ben Ysursa, Luke Mayville, Dr. Gary Moncrief, David Daley, Robin Nettinga, Karen Lansing, Linda Larson and Jessica Mahuron) are attached to the filed petition and are not reproduced here.
