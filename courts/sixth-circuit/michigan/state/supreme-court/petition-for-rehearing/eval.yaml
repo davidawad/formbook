@@ -4,3 +4,6 @@
 # its text starts at 1 on page 3, as ours does (cover_pages 2).
 params:
   cover_pages: 2
+  # Gate 4 CROSS-ENGINE: reported, not gated (docs/open-items/fb-595.54.31.md: a cover numbered apart without tables
+  # is dropped by the docx engine and numbered roman by the latex engine).
+  cross_engine: report

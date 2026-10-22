@@ -130,19 +130,19 @@ certificates:
 
 # STATEMENT OF QUESTIONS PRESENTED
 
-I. DID THE COURT OF APPEALS MAJORITY ERR IN CONCLUDING THAT MS. DAVIS’S COMMON-LAW CLAIMS FOR FRAUD, CONVERSION, AND BREACH OF CONTRACT WERE PREEMPTED BY MICHIGAN’S LAWFUL INTERNET GAMING ACT, MCL 432.301, et seq?
+I\. DID THE COURT OF APPEALS MAJORITY ERR IN CONCLUDING THAT MS. DAVIS’S COMMON-LAW CLAIMS FOR FRAUD, CONVERSION, AND BREACH OF CONTRACT WERE PREEMPTED BY MICHIGAN’S LAWFUL INTERNET GAMING ACT, MCL 432.301, et seq?
 
 Plaintiff-Appellant says “Yes.”
 
 Defendant-Appellee says “No.”
 
-II. DID THE COURT OF APPEALS MAJORITY ERR IN CONCLUDING THAT THE MICHIGAN GAMING CONTROL BOARD HAD EXCLUSIVE JURISDICTION TO ADDRESS MS. DAVIS’S COMMON-LAW CLAIMS?
+II\. DID THE COURT OF APPEALS MAJORITY ERR IN CONCLUDING THAT THE MICHIGAN GAMING CONTROL BOARD HAD EXCLUSIVE JURISDICTION TO ADDRESS MS. DAVIS’S COMMON-LAW CLAIMS?
 
 Plaintiff-Appellant says “Yes.”
 
 Defendant-Appellee says “No.”
 
-III. ASSUMING THAT THE MICHIGAN GAMING CONTROL BOARD HAD JURISDICTION TO CONSIDER MS. DAVIS’S COMMON LAW CLAIMS, WOULD THE GAMING CONTROL BOARD BE REQUIRED TO AFFORD HER ALL OF HER COMMON-LAW REMEDIES?
+III\. ASSUMING THAT THE MICHIGAN GAMING CONTROL BOARD HAD JURISDICTION TO CONSIDER MS. DAVIS’S COMMON LAW CLAIMS, WOULD THE GAMING CONTROL BOARD BE REQUIRED TO AFFORD HER ALL OF HER COMMON-LAW REMEDIES?
 
 Plaintiff-Appellant says “Yes.”
 
@@ -198,7 +198,7 @@ In his letter, Mr. Hicks further indicated that the Lawful Internet Gaming Act (
 
 > Any investigation conducted by the Board is not intended to make a determination on the merits of any outstanding dispute or litigation between an authorized participant and the internet gaming operator and its internet gaming platform provider and accordingly should not be used for such purposes. Furthermore, the Board has no authority to award any money or other relief directly to an authorized participant.
 >
-> Id.
+> Id\.
 
 Mr. Hicks’s letter concluded by noting that its investigation into Ms. Davis’s complaint would continue, while again emphasizing that the Gaming Board “may only investigate whether a specific violation of the Michigan Lawful Internet Gaming Act and the related administrative rules has occurred.” Id.
 

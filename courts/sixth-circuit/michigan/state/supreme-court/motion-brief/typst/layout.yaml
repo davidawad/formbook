@@ -1,0 +1,59 @@
+# Michigan Supreme Court (mich): motion and its supporting brief, MCR 7.311 and 7.212(B). The whole layout, as data
+# for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines
+# gen`, fb-595.54.12). Numbers trace to the rules in ../../rules.md (MSC-*); lengths in points. No case text here:
+# every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # MSC-FORM-002, MCR 7.212(B)(5): 12-point type, footnotes the same
+pitch:
+  body: 20.7              # MSC-FORM-004, MCR 7.212(B)(5): 1.5-line spaced (Word's 1.5 lines, 1.5 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MSC-FORM-003, MCR 7.212(B)(5): at least one-inch margins
+indent: 36
+page_number: {align: center}   # MSC-FORM-006: numbered from page 1, the caption at its top (as the filed motion, usage/SOURCE.md)
+footnote: {size: 12, gap: 5.5}           # MSC-FORM-004: footnotes may be single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4, gap: 5.5}   # MSC-FORM-004: quotations may be single spaced
+# MSC-FORM-008: headings in capitals or boldface; the motion types its own numbering.
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 12}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 9.6, below: 7.2}
+# MSC-FORM-005 (MCR 1.109(D)(1)(b)): the caption at the top of page 1 (a motion has no cover; the filed motion sets
+# it so): the court and the court below, the parties beside the Supreme Court and lower-court numbers, the
+# identification of the paper, and counsel two to a row (name, address, telephone, bar number).
+front:
+  - {text: "STATE OF MICHIGAN", align: center, bold: true}
+  - {text: "IN THE SUPREME COURT", align: center, bold: true}
+  - {text: "{proceeding}", align: center, optional: true}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v", above: 3.6, below: 7.2}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", italic: true}
+      - width: 165.6
+        blocks:
+          - {text: "Supreme Court No. {case_number}"}
+          - {text: "{lower_court_numbers}", optional: true}
+    gutter: 14.4
+    above: 21.6
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 21.6}
+  - {text: "{oral_argument}", align: center, bold: true, upper: true, optional: true, above: 3.6}
+  - columns: {each: counsel, per_row: 2, row_gap: 21.6, blocks: [{text: "{names}", bold: true}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 21.6
+    below: 14.4
+# The date, the signature block (MSC-CERT-002: each signer's name, bar number, address and telephone) and the
+# MCR 7.212(B)(3) word-count statement, never split.
+closing:
+  - group:
+      - {text: "DATED: {date}", optional: true}
+      - {text: "Respectfully submitted,", left: 216, above: 4.8}
+      - {text: "{signature.firm}", bold: true, left: 216, above: 9.6}
+      - each: signature.signers
+        blocks:
+          - {text: "/s/ *{name}*", underline: true, left: 216, above: 10.8}
+          - {text: "{name}", left: 216}
+          - {text: "{lines}", left: 216}
+      - {text: "This brief contains {word_count} countable words under MCR 7.212(B)(2)-(3).", optional: true, above: 7.2}
+    above: 21.6

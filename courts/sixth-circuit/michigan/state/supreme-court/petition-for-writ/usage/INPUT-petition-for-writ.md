@@ -45,11 +45,11 @@ Plaintiff Raise the Wage MI for its Verified Complaint for Mandamus against the 
 
 5\. In order to preempt challenges to a petition summary as misleading or deceptive, the Michigan Election Law provides a mechanism for a summary to be prepared by the Director of Elections and approved by the BOSC before a petition is circulated:
 
-> (1) A person who circulates a petition . . . may, before circulating any petition, submit the summary of the purpose of the proposed amendment or question proposed . . . to the board of state canvassers for approval as to the content of the summary. The board of state canvassers must issue an approval or rejection of the content of the summary not more than 30 days after the summary is submitted. . . .
+> \(1) A person who circulates a petition . . . may, before circulating any petition, submit the summary of the purpose of the proposed amendment or question proposed . . . to the board of state canvassers for approval as to the content of the summary. The board of state canvassers must issue an approval or rejection of the content of the summary not more than 30 days after the summary is submitted. . . .
 >
-> (2) If a person submits the summary of the purpose of the proposed amendment or question proposed as provided in subsection (1), all of the following apply:
+> \(2) If a person submits the summary of the purpose of the proposed amendment or question proposed as provided in subsection (1), all of the following apply:
 >
-> (a) The summary of the purpose of the proposed amendment or question proposed must be prepared by the director of elections, with the approval of the board of state canvassers.
+> \(a) The summary of the purpose of the proposed amendment or question proposed must be prepared by the director of elections, with the approval of the board of state canvassers.
 
 MCL 168.482b(1), (2)(a).
 
@@ -73,7 +73,7 @@ MCL 168.482b(1) (emphasis added). This language is absolute and permits of no ex
 
 12\. The Bureau of Elections (“BOE”) and BOSC urge ballot proposal sponsors to submit their petitions for approval as to form:
 
-> E. Optional Pre-Circulation “Approval as To Form” Process
+> E\. Optional Pre-Circulation “Approval as To Form” Process
 >
 > Sponsors of petitions to initiate legislation, amend the constitution, or invoke the right of referendum are urged to submit a proof copy of the petition to the Board of State Canvassers for approval as to form prior to the circulation of the petition.
 >

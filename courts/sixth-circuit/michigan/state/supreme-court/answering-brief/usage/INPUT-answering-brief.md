@@ -106,7 +106,7 @@ certificates:
 
 # COUNTER-STATEMENT OF QUESTIONS PRESENTED
 
-I. Whether plaintiff-appellant’s common-law claims of fraud, conversion and breach of contract are precluded by the Lawful Internet Gaming Act (LIGA), which establishes the Michigan Gaming Control Board (MGCB) as the exclusive arbiter of patron disputes regarding alleged internet gaming winnings?
+I\. Whether plaintiff-appellant’s common-law claims of fraud, conversion and breach of contract are precluded by the Lawful Internet Gaming Act (LIGA), which establishes the Michigan Gaming Control Board (MGCB) as the exclusive arbiter of patron disputes regarding alleged internet gaming winnings?
 
 Plaintiff-Appellant says: “No.”
 
@@ -114,7 +114,7 @@ Defendant-Appellee says: “Yes.”
 
 The Court of Appeals said: “Yes.”
 
-II. Whether the MGCB has exclusive jurisdiction to adjudicate disputes arising between an online gaming participant and an online gaming platform provider, where LIGA created a new legal right and prescribes a particular remedy?
+II\. Whether the MGCB has exclusive jurisdiction to adjudicate disputes arising between an online gaming participant and an online gaming platform provider, where LIGA created a new legal right and prescribes a particular remedy?
 
 Plaintiff-Appellant answers: “No.”
 
@@ -257,25 +257,25 @@ LIGA unambiguously bestows the MGCB with sweeping powers to fully regulate every
 
 > R 432.613. Board duties, jurisdiction, and authority. . . .
 >
-> (1) To execute and administer the act for the purpose of licensing, regulating, and enforcing lawful internet gaming, the board may do all of the following:
+> \(1) To execute and administer the act for the purpose of licensing, regulating, and enforcing lawful internet gaming, the board may do all of the following:
 >
 > \*\*\*
 >
-> (3) The board has general responsibility for the implementation of the act. The board’s duties include, but are not limited to, all of the following:
+> \(3) The board has general responsibility for the implementation of the act. The board’s duties include, but are not limited to, all of the following:
 >
 > \*\*\*
 >
-> (c) Supervising internet wagering authorized by the act.
+> \(c) Supervising internet wagering authorized by the act.
 >
-> (d) Investigating alleged violations of the act or these rules and taking appropriate disciplinary action against a licensee or any other person, or instituting appropriate legal action for enforcement, or both.
+> \(d) Investigating alleged violations of the act or these rules and taking appropriate disciplinary action against a licensee or any other person, or instituting appropriate legal action for enforcement, or both.
 >
-> (e) Conducting investigative and contested case hearings, issuing subpoenas, and administering oaths and affirmations to the witnesses to exercise and discharge the powers and duties of the board under the act.
+> \(e) Conducting investigative and contested case hearings, issuing subpoenas, and administering oaths and affirmations to the witnesses to exercise and discharge the powers and duties of the board under the act.
 >
-> (f) Revoking or suspending licenses and registrations, and imposing fines as the board considers necessary and in compliance with applicable laws of this state.
+> \(f) Revoking or suspending licenses and registrations, and imposing fines as the board considers necessary and in compliance with applicable laws of this state.
 >
-> (g) Imposing fines against individuals, internet gaming operators and internet gaming suppliers for engaging in a fraudulent practice, for each violation of the act, these rules, or any resolution or order of the board, or for any other action that the board determines is a detriment or impediment to internet gaming.
+> \(g) Imposing fines against individuals, internet gaming operators and internet gaming suppliers for engaging in a fraudulent practice, for each violation of the act, these rules, or any resolution or order of the board, or for any other action that the board determines is a detriment or impediment to internet gaming.
 >
-> (h) Taking any other action as may be reasonable or appropriate to enforce the act and these rules.
+> \(h) Taking any other action as may be reasonable or appropriate to enforce the act and these rules.
 >
 > R 432.613 (emphases added).
 
@@ -307,21 +307,21 @@ The Rules specifically provide for procedures for handling disputes arising out 
 
 > R 432.641 Authorized participant complaints…
 >
-> (1) An internet gaming operator or internet gaming platform provider must include on its internet gaming platform a clear mechanism to advise authorized participants of their right to make a complaint against the internet gaming operator, the internet gaming platform provider, or another authorized participant (when collusion is suspected or when an authorized participant is disruptive or abusive), including information explaining how complaints can be filed, how complaints are resolved, and how the authorized participant may submit a complaint to the board.
+> \(1) An internet gaming operator or internet gaming platform provider must include on its internet gaming platform a clear mechanism to advise authorized participants of their right to make a complaint against the internet gaming operator, the internet gaming platform provider, or another authorized participant (when collusion is suspected or when an authorized participant is disruptive or abusive), including information explaining how complaints can be filed, how complaints are resolved, and how the authorized participant may submit a complaint to the board.
 >
-> (2) An internet gaming operator or internet gaming platform provider must attempt to resolve all complaints with the authorized participant.
+> \(2) An internet gaming operator or internet gaming platform provider must attempt to resolve all complaints with the authorized participant.
 >
-> (3) An internet gaming operator or internet gaming platform provider must investigate each complaint and provide a response to the authorized participant within 10 calendar days after receipt of the complaint.
+> \(3) An internet gaming operator or internet gaming platform provider must investigate each complaint and provide a response to the authorized participant within 10 calendar days after receipt of the complaint.
 >
-> (4) In its response, the internet gaming operator or internet gaming platform provider must advise the authorized participant of his or her right to submit the complaint to the board in the form and manner prescribed by the board.
+> \(4) In its response, the internet gaming operator or internet gaming platform provider must advise the authorized participant of his or her right to submit the complaint to the board in the form and manner prescribed by the board.
 >
-> (5) The complaint and the internet gaming operator’s or internet gaming platform provider’s response must be made in writing.
+> \(5) The complaint and the internet gaming operator’s or internet gaming platform provider’s response must be made in writing.
 >
-> (6) Unless otherwise directed by the board, for complaints related to internet wagering accounts, game outcomes, or illegal activity related to internet gaming that cannot be resolved to the satisfaction of the authorized participant, the internet gaming operator or internet gaming platform provider must promptly notify the board of the complaint and the internet gaming operator’s or internet gaming platform provider’s response.
+> \(6) Unless otherwise directed by the board, for complaints related to internet wagering accounts, game outcomes, or illegal activity related to internet gaming that cannot be resolved to the satisfaction of the authorized participant, the internet gaming operator or internet gaming platform provider must promptly notify the board of the complaint and the internet gaming operator’s or internet gaming platform provider’s response.
 >
-> (7) On receipt of a complaint from an authorized participant or notification of an unresolved complaint from an internet gaming operator or internet gaming platform provider, the board may conduct any investigation the board considers necessary and may direct an internet gaming operator or internet gaming platform provider to take any corrective action the board considers appropriate.
+> \(7) On receipt of a complaint from an authorized participant or notification of an unresolved complaint from an internet gaming operator or internet gaming platform provider, the board may conduct any investigation the board considers necessary and may direct an internet gaming operator or internet gaming platform provider to take any corrective action the board considers appropriate.
 >
-> (8) An internet gaming operator or internet gaming platform provider must maintain records related to authorized participant complaints for a minimum of 5 years and must provide the records to the board on request.
+> \(8) An internet gaming operator or internet gaming platform provider must maintain records related to authorized participant complaints for a minimum of 5 years and must provide the records to the board on request.
 >
 > R 432.641 (emphases added).
 
@@ -347,9 +347,9 @@ Second, Ms. Davis says past MGCB boards have expressed reluctance to afford reme
 
 This case parallels *Lamphere* in that Ms. Davis’s complaint before the Circuit Court articulated causes of action that were not viable under common law. The remedy prescribed by LIGA is exclusive—not because Ms. Davis’s common law remedies have been abrogated (although if they had existed, abrogation was clearly the Legislative intent, see *infra*), but because those common law remedies never existed in the first place. See, e.g., *Millross v Plum Hollow Golf Club*, 429 Mich 178, 187-88; 413 NW2d 17 (1987), where this Court articulated a two-part test to determine which claims were “proscribed by the exclusive remedy provision” of the Dram Shop Act:
 
-> (1) Does the claim against “the tavern owner” arise out of an unlawful sale, giving away, or furnishing of intoxicants? If so, the dramshop act is the exclusive remedy.
+> \(1) Does the claim against “the tavern owner” arise out of an unlawful sale, giving away, or furnishing of intoxicants? If so, the dramshop act is the exclusive remedy.
 >
-> (2) If the claim arises out of conduct other than selling, giving away, or furnishing of intoxicants, does the common law recognize a cause of action for the negligent conduct? If so, then the dramshop act neither abrogates nor controls the common-law action. If not, there is no independent common-law claim.
+> \(2) If the claim arises out of conduct other than selling, giving away, or furnishing of intoxicants, does the common law recognize a cause of action for the negligent conduct? If so, then the dramshop act neither abrogates nor controls the common-law action. If not, there is no independent common-law claim.
 >
 > *Id.* at 187.[^17]
 

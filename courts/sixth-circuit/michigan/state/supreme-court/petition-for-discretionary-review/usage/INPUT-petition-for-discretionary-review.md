@@ -195,15 +195,15 @@ Court of Appeals' answer: Did not answer.
 
 > If the foregoing means are not adequate to secure recovery of payments, the director shall do 1 or more of the following:
 >
-> (C) Bring an action for other legal or equitable relief in a court of competent jurisdiction, including, but not limited to, an order to increase, for cause, the 25% withholding limit, an injunction to prevent the removal of attachable assets, an order to sequester assets, or an order for the appointment of a receiver to take possession of attachable assets.
+> \(C) Bring an action for other legal or equitable relief in a court of competent jurisdiction, including, but not limited to, an order to increase, for cause, the 25% withholding limit, an injunction to prevent the removal of attachable assets, an order to sequester assets, or an order for the appointment of a receiver to take possession of attachable assets.
 
 #### MCL 600.1621
 
 > Except for actions provided for in sections 1605, 1611, 1615, and 1629, venue is determined as follows:
 >
-> (a) The county in which a defendant resides, has a place of business, or conducts business, or in which the registered office of a defendant corporation is located, is a proper county in which to commence and try an action.
+> \(a) The county in which a defendant resides, has a place of business, or conducts business, or in which the registered office of a defendant corporation is located, is a proper county in which to commence and try an action.
 >
-> (b) If none of the defendants meet 1 or more of the criteria in subdivision (a), the county in which a plaintiff resides or has a place of business, or in which the registered office of a plaintiff corporation is located, is a proper county in which to commence and try an action.
+> \(b) If none of the defendants meet 1 or more of the criteria in subdivision (a), the county in which a plaintiff resides or has a place of business, or in which the registered office of a plaintiff corporation is located, is a proper county in which to commence and try an action.
 
 #### MCL 600.1627
 
@@ -211,41 +211,41 @@ Court of Appeals' answer: Did not answer.
 
 #### MCL 600.1629
 
-> (1) Subject to subsection (2), in an action based on tort or another legal theory seeking damages for personal injury, property damage, or wrongful death, all of the following apply:
+> \(1) Subject to subsection (2), in an action based on tort or another legal theory seeking damages for personal injury, property damage, or wrongful death, all of the following apply:
 >
-> (a) The county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
+> \(a) The county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
 >
-> (i) The defendant resides, has a place of business, or conducts business in that county.
+> \(i) The defendant resides, has a place of business, or conducts business in that county.
 >
-> (ii) The corporate registered office of a defendant is located in that county.
+> \(ii) The corporate registered office of a defendant is located in that county.
 >
-> (b) If a county does not satisfy the criteria under subdivision (a), the county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
+> \(b) If a county does not satisfy the criteria under subdivision (a), the county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
 >
-> (i) The plaintiff resides, has a place of business, or conducts business in that county.
+> \(i) The plaintiff resides, has a place of business, or conducts business in that county.
 >
-> (ii) The corporate registered office of a plaintiff is located in that county.
+> \(ii) The corporate registered office of a plaintiff is located in that county.
 >
-> (c) If a county does not satisfy the criteria under subdivision (a) or (b), a county in which both of the following apply is a county in which to file and try the action:
+> \(c) If a county does not satisfy the criteria under subdivision (a) or (b), a county in which both of the following apply is a county in which to file and try the action:
 >
-> (i) The plaintiff resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
+> \(i) The plaintiff resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
 >
-> (ii) The defendant resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
+> \(ii) The defendant resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
 >
-> (d) If a county does not satisfy the criteria under subdivision (a), (b), or (c), a county that satisfies the criteria under section 1621 or 1627 is a county in which to file and try an action.
+> \(d) If a county does not satisfy the criteria under subdivision (a), (b), or (c), a county that satisfies the criteria under section 1621 or 1627 is a county in which to file and try an action.
 
 #### MCL 600.1631
 
 > The county in which the seat of state government is located is a proper county in which to commence and try the following actions:
 >
-> (a) when the action is commenced by the attorney general in the name of the state or of the people of the state for the use and benefit thereof;
+> \(a) when the action is commenced by the attorney general in the name of the state or of the people of the state for the use and benefit thereof;
 >
-> (b) when venue cannot be laid under any other of the venue provisions.
+> \(b) when venue cannot be laid under any other of the venue provisions.
 
 #### MCL 600.1641
 
-> (1) Except as provided in subsection (2), if causes of action are joined, whether properly or not, venue is proper in any county in which either cause of action, if sued upon separately, could have been commenced and tried, subject to separation and change as provided by court rule.
+> \(1) Except as provided in subsection (2), if causes of action are joined, whether properly or not, venue is proper in any county in which either cause of action, if sued upon separately, could have been commenced and tried, subject to separation and change as provided by court rule.
 >
-> (2) If more than 1 cause of action is pleaded in the complaint or added by amendment at any time during the action and 1 of the causes of action is based on tort or another legal theory seeking damages for personal injury, property damage, or wrongful death, venue shall be determined under the rules applicable to actions in tort as provided in section 1629.
+> \(2) If more than 1 cause of action is pleaded in the complaint or added by amendment at any time during the action and 1 of the causes of action is based on tort or another legal theory seeking damages for personal injury, property damage, or wrongful death, venue shall be determined under the rules applicable to actions in tort as provided in section 1629.
 
 #### MCR 2.222(A)
 
@@ -357,27 +357,27 @@ To begin, the language of the tort venue provisions bear mention. MCL 600.1641(2
 
 MCL 600.1629 places proper venue in a number of locations, applied in a hierarchy:
 
-> (1) Subject to subsection (2), in an action based on tort or another legal theory seeking damages for personal injury, property damage, or wrongful death, all of the following apply:
+> \(1) Subject to subsection (2), in an action based on tort or another legal theory seeking damages for personal injury, property damage, or wrongful death, all of the following apply:
 >
-> (a) The county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
+> \(a) The county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
 >
-> (i) The defendant resides, has a place of business, or conducts business in that county.
+> \(i) The defendant resides, has a place of business, or conducts business in that county.
 >
-> (ii) The corporate registered office of a defendant is located in that county.
+> \(ii) The corporate registered office of a defendant is located in that county.
 >
-> (b) If a county does not satisfy the criteria under subdivision (a), the county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
+> \(b) If a county does not satisfy the criteria under subdivision (a), the county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
 >
-> (i) The plaintiff resides, has a place of business, or conducts business in that county.
+> \(i) The plaintiff resides, has a place of business, or conducts business in that county.
 >
-> (ii) The corporate registered office of a plaintiff is located in that county.
+> \(ii) The corporate registered office of a plaintiff is located in that county.
 >
-> (c) If a county does not satisfy the criteria under subdivision (a) or (b), a county in which both of the following apply is a county in which to file and try the action:
+> \(c) If a county does not satisfy the criteria under subdivision (a) or (b), a county in which both of the following apply is a county in which to file and try the action:
 >
-> (i) The plaintiff resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
+> \(i) The plaintiff resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
 >
-> (ii) The defendant resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
+> \(ii) The defendant resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
 >
-> (d) If a county does not satisfy the criteria under subdivision (a), (b), or (c), a county that satisfies the criteria under section 1621 or 1627 is a county in which to file and try an action.
+> \(d) If a county does not satisfy the criteria under subdivision (a), (b), or (c), a county that satisfies the criteria under section 1621 or 1627 is a county in which to file and try an action.
 
 It is true that MCL 600.1641(2), through its use of the word "shall," directs parties in tort suits to use MCL 600.1629 if there is an additional cause of action in the complaint. See *De Martinez v Lamagno*, 515 US 417, 434 n 9 ("legal writers sometimes use . . . 'shall' to mean 'will'"). But, as Justice Corrigan acknowledged, MCL 600.1641 is not a substantive venue provision, but merely tells parties where to go when determining venue. *Massey v Mandell*, 462 Mich 375, 388 (2000) (Corrigan, J., concurring). Thus, MCL 600.1641 acts as an "arrow" and not a "stop sign" when directing parties on venue.
 
@@ -399,27 +399,27 @@ Even if the tort venue provisions are applied instead of the Attorney General ve
 
 MCL 600.1629 places proper venue in a number of locations:
 
-> (1) Subject to subsection (2), in an action based on tort or another legal theory seeking damages for personal injury, property damage, or wrongful death, all of the following apply:
+> \(1) Subject to subsection (2), in an action based on tort or another legal theory seeking damages for personal injury, property damage, or wrongful death, all of the following apply:
 >
-> (a) The county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
+> \(a) The county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
 >
-> (i) The defendant resides, has a place of business, or conducts business in that county.
+> \(i) The defendant resides, has a place of business, or conducts business in that county.
 >
-> (ii) The corporate registered office of a defendant is located in that county.
+> \(ii) The corporate registered office of a defendant is located in that county.
 >
-> (b) If a county does not satisfy the criteria under subdivision (a), the county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
+> \(b) If a county does not satisfy the criteria under subdivision (a), the county in which the original injury occurred and in which either of the following applies is a county in which to file and try the action:
 >
-> (i) The plaintiff resides, has a place of business, or conducts business in that county.
+> \(i) The plaintiff resides, has a place of business, or conducts business in that county.
 >
-> (ii) The corporate registered office of a plaintiff is located in that county.
+> \(ii) The corporate registered office of a plaintiff is located in that county.
 >
-> (c) If a county does not satisfy the criteria under subdivision (a) or (b), a county in which both of the following apply is a county in which to file and try the action:
+> \(c) If a county does not satisfy the criteria under subdivision (a) or (b), a county in which both of the following apply is a county in which to file and try the action:
 >
-> (i) The plaintiff resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
+> \(i) The plaintiff resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
 >
-> (ii) The defendant resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
+> \(ii) The defendant resides, has a place of business, or conducts business in that county, or has its corporate registered office located in that county.
 >
-> (d) If a county does not satisfy the criteria under subdivision (a), (b), or (c), a county that satisfies the criteria under section 1621 or 1627 is a county in which to file and try an action.
+> \(d) If a county does not satisfy the criteria under subdivision (a), (b), or (c), a county that satisfies the criteria under section 1621 or 1627 is a county in which to file and try an action.
 
 As a preliminary matter, (1)(a)(i) and (1)(c)(ii) do not apply because they refer to the defendant, and Michigan courts have read these provisions to mean that the option does not apply when there are multiple defendants. *Massey v Mandell*, 462 Mich at 382. However, as discussed below, (1)(b)(i) and (1)(d) do apply based on the conclusion that, for the conversion of intangible, electronic funds, the place of the original injury is where the plaintiff is located at the time of the wrongful conduct, and thus, where venue lies.
 

@@ -44,15 +44,15 @@ toc: false
 
 6\.	This leads to several possible options for adjusting the wages for 2025 through 2028:
 
-a. Option 1 – bring the statutory minimum wages in Section 4(1) current to July 31, 2024, through an inflationary catch-up beginning January 1, 2019;
+a\. Option 1 – bring the statutory minimum wages in Section 4(1) current to July 31, 2024, through an inflationary catch-up beginning January 1, 2019;
 
-b. Option 2 – look back 12-months before July 31, 2024, consistent with the 12-month provision in Section 4(2);
+b\. Option 2 – look back 12-months before July 31, 2024, consistent with the 12-month provision in Section 4(2);
 
-c. Option 3 – strictly apply Section 4(2) assuming a year-over-year inflation analysis beginning in September 2021;
+c\. Option 3 – strictly apply Section 4(2) assuming a year-over-year inflation analysis beginning in September 2021;
 
-d. Option 4 – strictly apply Section 4(2) assuming a 12-month averaging analysis;
+d\. Option 4 – strictly apply Section 4(2) assuming a 12-month averaging analysis;
 
-e. Option 5 – Apply a rolling start year for each of the years and enumerated wages set forth in the Wage Act, Section 4(1)a–d, while maintaining a July 31, 2024 end date.
+e\. Option 5 – Apply a rolling start year for each of the years and enumerated wages set forth in the Wage Act, Section 4(1)a–d, while maintaining a July 31, 2024 end date.
 
 7\.	Each of these options is explained in more detail below. The differences among these methodologies dramatically impacts the entire State. Treasury believes Option 1 is correct, and Treasury and LEO intend to begin preparing to implement the law using the Option 1 methodology on September 16, 2024, unless this Court directs otherwise.
 
@@ -144,11 +144,11 @@ One could read Footnote 22’s citation to Section 4(2) as directing Treasury fi
 
 36\.	Unless this Court directs otherwise and in light of the November 1, 2024 deadline for calculating and publishing inflation rates:
 
-a. It is Treasury’s intent to begin to implement this Court’s opinion in accordance with Option 1 above, using February 21, 2025, as the effective date for 2025 and January 1 as the effective start date for 2026 going forward;
+a\. It is Treasury’s intent to begin to implement this Court’s opinion in accordance with Option 1 above, using February 21, 2025, as the effective date for 2025 and January 1 as the effective start date for 2026 going forward;
 
-b. Further, LEO will implement the “tip credit” as a baseline minimum wage and corresponding rate increases under Section 4d(2);
+b\. Further, LEO will implement the “tip credit” as a baseline minimum wage and corresponding rate increases under Section 4d(2);
 
-c. Finally, LEO will implement 2018 PA 337, Section 4d(2) (i.e., applying the 90% graduated increase for tipped wages starting in 2029) as written.
+c\. Finally, LEO will implement 2018 PA 337, Section 4d(2) (i.e., applying the 90% graduated increase for tipped wages starting in 2029) as written.
 
 WHEREFORE, for the reasons stated above, Defendants Michigan Attorney General Dana Nessel on behalf of the Department of Treasury and Department of Labor and Economic Opportunity (LEO), and Defendant State of Michigan respectfully seeks this Court’s clarification as to implementation of the Court’s July 31, 2024 Opinion. Given the impending November 1, 2024, deadline to implement the Court’s remedial scheme, the State requests that the Court rule on this motion no later than September 15, 2024.
 

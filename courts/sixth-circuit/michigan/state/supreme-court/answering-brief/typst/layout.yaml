@@ -1,0 +1,68 @@
+# Michigan Supreme Court (mich): answering (appellee's) brief, MCR 7.312(A)-(C) and 7.212(B), (D). The whole layout,
+# as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to the rules in ../../rules.md (MSC-*); lengths in points. No case
+# text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # MSC-FORM-002, MCR 7.212(B)(5): 12-point type, footnotes the same
+pitch:
+  body: 20.7              # MSC-FORM-004, MCR 7.212(B)(5): 1.5-line spaced (Word's 1.5 lines, 1.5 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MSC-FORM-003, MCR 7.212(B)(5): at least one-inch margins
+indent: 36
+page_number: {align: center, front: lower-roman}   # MSC-FORM-006: the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
+footnote: {size: 12, gap: 6}             # MSC-FORM-004: footnotes may be single spaced
+quote: {left: 36, right: 36, above: 7.2, below: 12, gap: 7.2}   # MSC-FORM-004: quotations may be single spaced
+# MSC-FORM-008: headings in capitals or boldface; the brief types its own numbering.
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 12}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+  - {italic: true, hang: 36, above: 9.6, below: 7.2}
+# MSC-COVER-001, -002 (MCR 7.312(C)): the court, the court appealed from, the parties, "MSC No." left blank for the
+# clerk with the lower-court numbers, the title of the brief and the oral-argument line; counsel two to a row
+# (MSC-FORM-005: name, address, telephone and bar number).
+cover:
+  - {text: "{court_line}", align: center, bold: true, upper: true}
+  - {text: "IN THE SUPREME COURT", align: center, bold: true, above: 7.2}
+  - {text: "{proceeding}", align: center, optional: true, above: 7.2}
+  - {text: "{trial_court}", align: center, optional: true}
+  - {text: "{judge}", align: center, optional: true}
+  - each: caption
+    above: 14.4
+    between:
+      - {text: "v.", align: center, above: 7.2}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center}
+  - {text: "MSC No. \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_", align: center, above: 14.4}
+  - {text: "COA No. {coa_no}", align: center, optional: true}
+  - {text: "Trial Ct No. {trial_court_no}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 14.4}
+  - {text: "ORAL ARGUMENT {oral_argument}", align: center, bold: true, upper: true, optional: true, above: 7.2}
+  - columns: {each: counsel, per_row: 2, row_gap: 21.6, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 21.6
+# MSC-BRF-001 (MCR 7.212(C)(2), (3)): the table of contents and the index of authorities, on their own pages.
+contents: {title: "Table of Contents", depth: 2, col: 36, hang: 18, step: 18, above: 7.2}
+authorities:
+  title: "Index of Authorities"
+  col: 56
+  hang: 36
+  above: 4.8
+  group: {bold: true, above: 13.2, below: 8.4}
+# The date and each signature block (MSC-CERT-002: name, address, telephone, bar number), never split; then each
+# certificate (the MCR 7.212(B)(3) word count, the proof of service) on a page of its own.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - each: signature
+        blocks:
+          - {text: "{firm}", left: 208.8, above: 14.4}
+          - {text: "/s/ {signer}", underline: true, left: 208.8, above: 7.2}
+          - {text: "{lines}", left: 208.8}
+    above: 21.6
+  - each: certificates
+    blocks:
+      - {break: true}
+      - {text: "{heading}", align: center, bold: true, upper: true}
+      - {text: "{text}", pitch: body, indent: 36, above: 4.8}
+      - {text: "/s/ {signer}", underline: true, left: 208.8, optional: true, above: 4.8}
