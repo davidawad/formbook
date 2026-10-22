@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # Word breaks an e-mail address wider than its cover column (147.3 pt in a 141.6 pt column of three) inside the
+  # word, typst lets it run into the gutter: INPUT-petition-for-writ p1 line 23 ("chammerman@paulweiss.com"), 438/439
+  # lines identical, pages and page ends equal. The same emergency break of an over-long word that is not a URL is a
+  # shared-model request (docs/open-items/fb-595.54.51.md); reported, not gated (fb-595.54.51).
+  cross_engine_docx: report
