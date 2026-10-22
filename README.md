@@ -752,7 +752,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [Florida District Courts of Appeal](courts/eleventh-circuit/florida/state/district-courts-of-appeal) | `fladistctapp` | up for review | 8/8 | — | — | 29 |
 | [Florida Fifth District Court of Appeal](courts/eleventh-circuit/florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | up for review | 8/8 | 8/8 | 8/8 | 29 |
 | [Florida First District Court of Appeal](courts/eleventh-circuit/florida/state/first-district-court-of-appeal) | `fladistctapp1` | up for review | 8/8 | — | — | 29 |
-| [Florida Fourth District Court of Appeal](courts/eleventh-circuit/florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | up for review | 8/8 | — | — | 29 |
+| [Florida Fourth District Court of Appeal](courts/eleventh-circuit/florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | up for review | 8/8 | 8/8 | 7/7 | 29 |
 | [Florida Second District Court of Appeal](courts/eleventh-circuit/florida/state/second-district-court-of-appeal) | `fladistctapp2` | up for review | 8/8 | — | — | 29 |
 | [Florida Sixth District Court of Appeal](courts/eleventh-circuit/florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Florida Supreme Court](courts/eleventh-circuit/florida/state/supreme-court) | `fla` | up for review | 9/9 | — | — | 29 |
@@ -821,9 +821,9 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 16 | 37 | 20.3% |
 | Ninth Circuit | 61 | 0 | 59 | 2 | 0 | 0.0% | 96.7% | 58 | 18 | 52 | 21.0% |
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 8 | 21 | 19.3% |
-| Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 6 | 23 | 20.0% |
+| Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 7 | 24 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 2 | 4 | 17.7% |
-| **Total** | 376 | 0 | 353 | 23 | 0 | 0.0% | 93.8% | 352 | 95 | 303 | 19.0% |
+| **Total** | 376 | 0 | 353 | 23 | 0 | 0.0% | 93.8% | 352 | 96 | 304 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
