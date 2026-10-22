@@ -46,7 +46,9 @@ authorities:
   col: 56
   hang: 36
   above: 9.6
-  group: {bold: true, above: 14.4, below: 4.8}
+  group: {bold: true, upper: true, above: 14.4, below: 4.8}   # the group headings in capitals, as filed (CASES)
+# the brief's last paragraph kept on the signature's page, so the signature never stands alone.
+keep_with_closing: true
 # SC-FORM-006: the date and the signature block right of centre, never split ("/s/" and the typed name, SCACR 267(b));
 # then the certificate of service on a page of its own when the frontmatter gives one.
 closing:

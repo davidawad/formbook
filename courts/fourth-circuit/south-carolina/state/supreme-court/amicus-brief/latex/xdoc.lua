@@ -157,10 +157,12 @@ return require("latex.xdoc")({
     ["above"] = 9.6,
     ["group"] = {
       ["bold"] = true,
+      ["upper"] = true,
       ["above"] = 14.4,
       ["below"] = 4.8,
     },
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {
