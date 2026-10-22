@@ -1,0 +1,48 @@
+# Court of Appeals of the State of Alaska (alaskactapp): amicus curiae brief (Appellate Rule 517.2(b), in the form of
+# Rules 212 and 513.5). The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/
+# are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to ../../rules.md (ALASKACTAPP-*);
+# lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a
+# court constant (the court's name, "Court of Appeals No.", "Trial Case No.", the title of the contents).
+size: 13                  # ALASKACTAPP-FORM-003: text, headings and footnotes at least 13 point
+pitch:
+  body: 29.9              # ALASKACTAPP-FORM-004: double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # ALASKACTAPP-FORM-004: headings, footnotes and quotations single (1.15 x 13 pt); cover, tables
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # ALASKACTAPP-FORM-005, -006: one inch, 6-1/2 x 9-1/2 in of matter
+indent: 36
+page_number: {align: center, front: lower-roman}   # ALASKACTAPP-FORM-007: bottom center; the exemplar's cover unnumbered, tables i, brief 1
+footnote: {size: 13, gap: 4}             # ALASKACTAPP-FORM-003, -004: 13 point, single spaced
+quote: {left: 36, right: 36, above: 7.5, below: 15}   # ALASKACTAPP-FORM-004: single spaced, indented half an inch both sides
+heading:
+  - {align: center, bold: true, upper: true, above: 21, below: 15}
+  - {bold: true, hang: 36, above: 15, below: 10.5}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.5}
+# ALASKACTAPP-COVER-001 (Rule 212(b)(1)-(6)): the court and the case number, the title of the case, the nature of the
+# proceeding and the court below, the title of the document, counsel (two to a row, as the exemplar).
+cover:
+  - {text: "IN THE COURT OF APPEALS OF THE STATE OF ALASKA", align: center, bold: true}
+  - {text: "Court of Appeals No. {case_number}", align: center, bold: true, above: 14.95}
+  - {text: "Trial Case No. {trial_case_number}", align: center, optional: true}
+  - each: caption
+    above: 14.95
+    between:
+      - {text: "v.", align: center, above: 7.5, below: 7.5}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 14.95}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 14.95}
+  - columns: {each: counsel, per_row: 2, row_gap: 14.95, blocks: [{text: "{names}", bold: true}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 21.6
+  - {text: "{phone}", optional: true, above: 14.95}
+# ALASKACTAPP-CONT-001 (Rule 212(c)(1)(A)): the table of contents with page references.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 18, above: 9}
+# The date and the signature block, right of center, never split.
+closing:
+  - group:
+      - {text: "{date}", optional: true, left: 36}
+      - {text: "{signature.firm}", bold: true, optional: true, left: 230.4, above: 15}
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 7.5}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 7.5}
+    above: 21.6

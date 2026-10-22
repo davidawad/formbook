@@ -11,9 +11,9 @@ proceeding: "Appeal from the Superior Court for the State of Alaska, Third Judic
 brief_title: "Brief of Amici Curiae American Civil Liberties Union Foundation and American Civil Liberties Union of Alaska"
 counsel:
   - names: ["Adriel I. Cepeda Derieux*"]
-    lines: ["AMERICAN CIVIL LIBERTIES UNION FOUNDATION", "915 15th St. NW", "Washington, DC 20001", "(212) 457-0800", "acepedaderieux@aclu.org", "* pro hac vice admission pending"]
+    lines: ["AMERICAN CIVIL LIBERTIES UNION FOUNDATION", "915 15th St. NW", "Washington, DC 20001", "(212) 457-0800", "acepedaderieux@aclu.org", "\\* pro hac vice admission pending"]
   - names: ["Victoria Ochoa*", "Ethan Herenstein*", "Alejandro Ortiz*", "Sophia Lin Lakin*"]
-    lines: ["AMERICAN CIVIL LIBERTIES UNION FOUNDATION", "125 Broad St., 18th Floor", "New York, NY 10004", "(212) 549-2500", "* pro hac vice admission pending"]
+    lines: ["AMERICAN CIVIL LIBERTIES UNION FOUNDATION", "125 Broad St., 18th Floor", "New York, NY 10004", "(212) 549-2500", "\\* pro hac vice admission pending"]
   - names: ["Susan Orlansky [8106042]", "Katherine Wagner [2503016]"]
     lines: ["AMERICAN CIVIL LIBERTIES UNION OF ALASKA", "1057 W. Fireweed La., Suite 207", "Anchorage, AK 99503", "(907) 258-0044", "sorlansky@acluak.org", "kwagner@acluak.org"]
 phone: "Counsel for Amici Curiae"
@@ -154,7 +154,7 @@ The Court should reverse the trial court's denial of Ms. Smith's motion to dismi
 
 [^26]: *Id.* at 632 (internal quotation marks and emphasis omitted).
 
-[^27]: Br. of Former Prosecutors as Amici Curiae in Support of Appellant Crystal Mason at *5, *Mason v. State*, No. 02-18-00138-CR, 2021 WL 3410404 (Tex. Crim. App. 2022).
+[^27]: Br. of Former Prosecutors as Amici Curiae in Support of Appellant Crystal Mason at \*5, *Mason v. State*, No. 02-18-00138-CR, 2021 WL 3410404 (Tex. Crim. App. 2022).
 
 [^28]: The Court of Criminal Appeals has since agreed to review the sufficiency-of-the-evidence question. *See State v. Mason*, No. PD-0300-24 (Tex. Crim. App. Aug. 21, 2024) (order granting discretionary review). However, the order granting review does not disturb the court's earlier mens rea holding.
 
