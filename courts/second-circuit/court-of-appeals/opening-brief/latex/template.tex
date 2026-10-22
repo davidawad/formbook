@@ -5,153 +5,187 @@
 % frontmatter and numbers the headings.
 % The tables of contents and authorities are two-pass: each entry writes its page to the .aux or .toc
 % file, and the next run prints the pages. pdflatex reruns until the references are stable.
+%
+% Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): this template sets every line and page break where
+% the typst template (the reference) sets them. The model itself (no kerning or ligatures, first-fit breaking, fixed
+% line boxes, no widows, footnote marks, list labels, contents rows) is the shared package lib/latex/xengine.sty,
+% which fb render inlines into the generated .tex in place of \usepackage{xengine}; the inline rules are
+% lib/latex/xengine.lua, run by ca2.lua. Every size and space here is in bp (14 bp = typst's 14 pt), and blocks are
+% spaced with \addvspace (the larger of the space below one and above the next).
 \documentclass[14pt,letterpaper]{extarticle}
 \usepackage[T1]{fontenc}
 % CA2-FORM-004 (FRAP 32(a)(5)(A)): a proportional serif at 14 point or larger, Times. newtxtext/newtxmath ship with
 % every TeX Live, so the generated .tex compiles with stock pdflatex and no repo-local file; the faces
 % (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman.
 \usepackage{newtxtext,newtxmath}
-\usepackage[letterpaper,margin=1in,footskip=0.6in]{geometry}
-\usepackage{indentfirst}
-\usepackage{changepage}
-\usepackage{needspace}
-\usepackage{microtype}
-\usepackage[hidelinks]{hyperref}
+% CA2-FORM-003: letter, 1 in margins; the page number in the bottom margin, as typst sets it.
+\usepackage[letterpaper,margin=1in,headheight=0pt,headsep=0pt,footskip=36bp]{geometry}
+\usepackage{enumitem}
+\usepackage{xengine} % lib/latex/xengine.sty, inlined by fb render
+% Links in the brief are citations (toa:) or none; the fallbacks keep pandoc's output valid.
+\providecommand{\href}[2]{#2}
+\providecommand{\hypertarget}[2]{#2}
+\providecommand{\hyperlink}[2]{#2}
 
 \makeatletter
 % ---------------------------------------------------------------------------
-% Type and spacing (CA2-FORM-004, CA2-CONV-001)
+% Type and spacing (CA2-FORM-004, CA2-CONV-001): line boxes [typst pitch-double, pitch-single]
 % ---------------------------------------------------------------------------
-\raggedright
-\hyphenpenalty=10000 \exhyphenpenalty=10000
-\setlength{\parindent}{0.5in}
-\setlength{\parskip}{0pt}
-% Double spacing: 31.4 pt, the baseline pitch the typst template gets from its body leading (0.94 em).
-\renewcommand\normalsize{\fontsize{14}{31.4}\selectfont}
-\normalsize
-% Single spacing for headings, quotations, footnotes, the tables and the cover.
-\newcommand\briefsingle{\fontsize{14}{19.9}\selectfont}
+% Double spacing, 31.4 bp boxes, for the body; single spacing, 20 bp boxes, for headings, quotations, footnotes, the
+% tables, the cover and the certificates.
+\renewcommand\normalsize{\xe@lines{14}{31.4}}
+\newcommand\briefsingle{\xe@lines{14}{20}}
+\newcommand\briefpitch[1]{\xe@lines{14}{#1}} % 14 bp in line boxes of #1 bp (a cover set closer than single)
 \renewcommand\footnotesize{\briefsingle}
 \renewcommand\small{\briefsingle}
-\renewcommand\large{\fontsize{14}{31.4}\selectfont}
+\normalsize
+\setlength{\parindent}{0.5in} % after xengine.sty's \raggedright, which sets it to zero
+\setcounter{secnumdepth}{0}
+\xe@lists{0.5in}
+% The page number in the 14 bp type, single-spaced.
+\def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
+  \def\@oddfoot{\reset@font\briefsingle\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}
+\pagestyle{plain}
 
-% Footnotes: 14 point, single spaced, the number then the note, no indent, a rule of 30% width. \noprotrusion keeps
-% the number at the margin (microtype would protrude it, and a digit left of the margin reads as a line number).
-\setlength{\footnotesep}{0.5em}
-\setlength{\skip\footins}{0.9em}
-\renewcommand\footnoterule{\kern-0.3em\noindent{\rule{0.3\linewidth}{0.5pt}}\kern0.4em}
-\renewcommand\@makefntext[1]{\noindent\noprotrusion\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
-
-% Quotations: single spaced, half an inch in on both sides.
-\renewenvironment{quote}{%
-  \begin{adjustwidth}{0.5in}{0.5in}\briefsingle\setlength{\parskip}{0.9em}\setlength{\parindent}{0pt}}{%
-  \end{adjustwidth}}
-
+% An ellipsis (…) as one character, as typst and Word set it: the T1 fonts have no ellipsis glyph, so three periods in
+% the glyph's 1 em, marked in the PDF as the character U+2026 (ActualText, a stock pdfTeX primitive).
+\newcommand\briefellipsis{\pdfliteral direct{/Span<</ActualText<FEFF2026>>>BDC}\makebox[1em][s]{.\hfil.\hfil.}\pdfliteral direct{EMC}}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \providecommand{\pandocbounded}[1]{#1}
 
+% Footnotes [footnote.entry]: 14 point, single spaced, 12.6 bp clear of the text, a 30 % rule, 7 bp above each note;
+% the mark (58 % of 14 pt) and a quarter em before the text. LaTeX resets the right skip inside a footnote: it is set
+% back here.
+\setlength{\skip\footins}{12.6bp}
+\renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
+\xe@footnotemarks{14}
+\renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
+  \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25em #1}
+
+% Quotations [quote]: single spaced, half an inch in on both sides, 14 bp above, below and between paragraphs.
+\renewenvironment{quote}{%
+  \par\addvspace{14bp}%
+  \begingroup\leftskip=0.5in\rightskip=\dimexpr0.5in\relax plus 1fil\relax\briefsingle\parindent=0pt\relax
+  \parskip=14bp\relax\vskip-\parskip % the first paragraph's skip is the 14 bp above, not more
+}{%
+  \par\endgroup\addvspace{14bp}%
+}
+
 % ---------------------------------------------------------------------------
-% Headings (CA2-CONV-004). The labels come from ca2.lua; the layout is here.
+% Headings (CA2-CONV-004). The labels come from ca2.lua; the layout is here. [style-heading]: 21 / 15.4 bp around a
+% section heading, 16.8 / 14 bp around a point heading, 15.4 / 12.6 bp around a sub-heading; a heading never ends a
+% page (\nobreak, and no orphans after it).
 % ---------------------------------------------------------------------------
 \newlength{\briefheadtab}\setlength{\briefheadtab}{0.5in}
-% Room for a heading and its first lines (\needspace), unless the heading follows another: that one ended in
-% \nopagebreak, and asking for room again would break the page between the two.
-\newcommand\brief@need[1]{\ifnum\lastpenalty<10000 \needspace{#1}\fi}
 % The end of a heading: ca2.lua writes the contents entry right after the heading, so the entry is taken in here and
-% the \nopagebreak follows it (after the entry, a whatsit, the page could otherwise break below the heading).
-\newcommand\brief@endhead{\@ifnextchar\addcontentsline{\brief@endtoc}{\nopagebreak}}
-\def\brief@endtoc\addcontentsline#1#2#3{\addcontentsline{#1}{#2}{#3}\nopagebreak}
-% Section headings: bold capitals, centered (typst: 1.15 em, above 1.5 em, below 1.1 em).
+% the \nobreak follows it (after the entry, a whatsit, the page could otherwise break below the heading).
+% A list right after a heading must not open with a break either (typst: the heading is sticky): LaTeX's \@nobreak
+% flag makes its first item skip the list's break penalty; the next paragraph clears it.
+\newcommand\brief@endhead[1]{\@ifnextchar\addcontentsline{\brief@endtoc{#1}}{\brief@keep{#1}}}
+\def\brief@endtoc#1\addcontentsline#2#3#4{\addcontentsline{#2}{#3}{#4}\brief@keep{#1}}
+\newcommand\brief@keep[1]{\nobreak\addvspace{#1}\global\@nobreaktrue\everypar{\global\@nobreakfalse\everypar{}}}
+% Section headings: bold capitals, centered, 16 bp.
 \newcommand\briefhead[1]{%
-  \par\brief@need{2\baselineskip}\addvspace{1.5em}%
-  {\centering\briefsingle\bfseries\fontsize{16.1}{19.9}\selectfont\MakeUppercase{#1}\par}%
-  \nopagebreak\addvspace{1.1em}\brief@endhead}
-% Point headings of the Argument: bold, centered, the label in front. Not small capitals: Times New Roman has none,
-% and newtx bold small capitals share a font descriptor with the upright bold whose ascent and descent they would
-% shrink (the word heights the type-size check measures).
+  \par\addvspace{21bp}%
+  \begingroup\centering\xe@lines{16}{20}\bfseries\MakeUppercase{#1}\par\endgroup
+  \brief@endhead{15.4bp}}
+% Point headings of the Argument: bold, centered, the label in front.
 \newcommand\briefpoint[2]{%
-  \par\brief@need{2\baselineskip}\addvspace{1.2em}%
-  {\centering\briefsingle\bfseries #1\ #2\par}%
-  \nopagebreak\addvspace{1.1em}\brief@endhead}
+  \par\addvspace{16.8bp}%
+  \begingroup\centering\briefsingle\bfseries #1\ #2\par\endgroup
+  \brief@endhead{14bp}}
+% A left point heading (reply): the label at the margin in a half-inch box, the text hanging under it.
 % Sub-headings: the label at indent #1 in a half-inch box, the text hanging under it.
 % #2 label, #3 style (bold; bold italic from level 4), #4 text.
 \newcommand\briefsub[4]{%
-  \par\brief@need{2\baselineskip}\addvspace{1.1em}%
-  \noindent\hspace*{#1}\makebox[\briefheadtab][l]{#3{#2}}%
-  \begingroup\parbox[t]{\dimexpr\linewidth-#1-\briefheadtab\relax}{\raggedright #3{#4}}\endgroup
-  \par\nopagebreak\addvspace{0.9em}\brief@endhead}
+  \par\addvspace{15.4bp}%
+  \begingroup\briefsingle\noindent\hangindent=\dimexpr#1+\briefheadtab\relax\hangafter=1\relax
+  \hspace*{#1}\makebox[\briefheadtab][l]{#3{#2}}#3{#4}\par\endgroup
+  \brief@endhead{12.6bp}}
+% Unnumbered sub-headings: bold, at the margin.
+\newcommand\briefplain[1]{%
+  \par\addvspace{16.8bp}%
+  \begingroup\briefsingle\noindent\textbf{#1}\par\endgroup
+  \brief@endhead{12.6bp}}
 
 % ---------------------------------------------------------------------------
-% Tables of contents and authorities (FRAP 28(a)(2)-(3))
+% Tables of contents and authorities (FRAP 28(a)(2)-(3)) [listing-row]: the text wraps before a page column (36 bp
+% in the contents, 56 bp or the page list's width in the authorities), a dot leader runs to the page.
 % ---------------------------------------------------------------------------
-\renewcommand\@pnumwidth{2.6em}
-\renewcommand\@tocrmarg{2.6em}
-\newcommand\l@brieftoc[2]{\@dottedtocline{1}{0in}{0in}{#1}{#2}}
-\newcommand\l@briefpt[2]{\@dottedtocline{2}{0in}{0.5in}{#1}{#2}}
-\newcommand\l@briefa[2]{\@dottedtocline{2}{0.5in}{0.5in}{#1}{#2}}
-\newcommand\l@briefb[2]{\@dottedtocline{3}{1in}{0.5in}{#1}{#2}}
-\newcommand\l@briefc[2]{\@dottedtocline{4}{1.5in}{0.5in}{#1}{#2}}
-\newcommand\briefTOCpage{\par{\raggedleft\briefsingle\bfseries\underline{Page}\par}}
-\newcommand\briefTOC{\par\briefTOCpage\begingroup\briefsingle\@starttoc{toc}\endgroup}
+% A contents row: #1 the label's indent, #2 label (empty: none), #3 title, #4 page, #5 space above.
+\newcommand\brief@tocrow[5]{%
+  \begingroup\briefsingle\setlength{\xe@col}{36bp}%
+  \def\brief@lab{#2}%
+  \xe@row{#5}{\dimexpr#1+\briefheadtab\relax}{%
+    \hspace*{#1}\ifx\brief@lab\empty\else\makebox[\briefheadtab][l]{#2}\fi #3}{#4}%
+  \endgroup}
+% A section heading's row (\addcontentsline{toc}{brieftoc}{TITLE}) and a numbered heading's row
+% (\addcontentsline{toc}{briefn}{{<label indent>}{<label>}{<title>}}).
+\newcommand\l@brieftoc[2]{\brief@tocrow{0in}{}{#1}{#2}{8.4bp}}
+\newcommand\l@briefn[2]{\brief@nrow#1{#2}}
+\def\brief@nrow#1#2#3#4{\brief@tocrow{#1}{#2}{#3}{#4}{4.9bp}}
+% The column head over the page numbers: #1 its text ("Page", underlined or not).
+\newcommand\briefTOCpage[1]{\par\addvspace{4.2bp}\begingroup\raggedleft\briefsingle\bfseries #1\par\endgroup}
+\newcommand\briefTOC{\par\begingroup\briefsingle\@starttoc{toc}\endgroup}
 
-% Table of authorities. A citation writes its page to the .aux file (\toamark); the next run reads the
-% marks back (\toaref) and keeps the distinct pages. Seven or more pages print as "passim" (typst).
+% Table of authorities. A citation writes its page to the .aux file (\toamark); the next run reads the marks back
+% (\toaref) and keeps the distinct pages in document order. Seven or more pages print as "passim" (typst).
 \newcommand\toamark[1]{\protected@write\@auxout{}{\string\toaref{#1}{\thepage}}}
 \newcommand\toaref[2]{%
   \@ifundefined{toacnt@#1}{%
     \expandafter\newcount\csname toacnt@#1\endcsname
-    \expandafter\gdef\csname toapg@#1\endcsname{}%
-    \expandafter\gdef\csname toalast@#1\endcsname{}}{}%
-  \edef\toapgnow{#2}%
-  \expandafter\ifx\csname toalast@#1\endcsname\toapgnow\else
-    \expandafter\gdef\csname toalast@#1\endcsname{#2}%
+    \expandafter\gdef\csname toapg@#1\endcsname{}}{}%
+  \@ifundefined{toaseen@#1@#2}{%
+    \expandafter\gdef\csname toaseen@#1@#2\endcsname{}%
     \global\advance\csname toacnt@#1\endcsname 1
     \ifnum\csname toacnt@#1\endcsname>1 \expandafter\g@addto@macro\csname toapg@#1\endcsname{, }\fi
-    \expandafter\g@addto@macro\csname toapg@#1\endcsname{#2}%
-  \fi}
+    \expandafter\g@addto@macro\csname toapg@#1\endcsname{#2}}{}}
 \newcommand\toapages[1]{%
   \@ifundefined{toacnt@#1}{}{%
     \ifnum\csname toacnt@#1\endcsname>6 \emph{passim}\else\csname toapg@#1\endcsname\fi}}
-% One printed authority: key, the lines before the citation (name and line break, or nothing), citation.
+% One authority [listing-row]: key, the lines before the citation (name and line break, or nothing), citation.
+\newlength\brief@w
 \newcommand\toaprint[3]{%
   \@ifundefined{toacnt@#1}{}{%
-    \ifnum\csname toacnt@#1\endcsname>0
-      \par\addvspace{0.7em}\noindent\begin{minipage}{\linewidth}\briefsingle
-      #2\hspace*{0.35in}#3\ \leaders\hbox to 0.16em{\hss.\hss}\hfill\ \toapages{#1}
-      \end{minipage}\par
-    \fi}}
-\newcommand\toaitem[3]{\toaprint{#1}{#2,\\}{#3}}     % key, name, citation
-\newcommand\toaitemnoname[2]{\toaprint{#1}{}{#2}}    % key, citation
+    \begingroup\briefsingle
+    \settowidth{\brief@w}{\toapages{#1}}%
+    \setlength{\xe@col}{56bp}\ifdim\brief@w>\xe@col\setlength{\xe@col}{\brief@w}\fi
+    \xe@row{9.8bp}{0.35in}{#2#3}{\toapages{#1}}%
+    \endgroup}}
+\newcommand\toaitem[3]{\toaprint{#1}{#2,\newline}{#3}}     % key, name, citation
+\newcommand\toaitemnoname[2]{\toaprint{#1}{}{#2}}          % key, citation
+% A group title; the first one carries the column head "Page(s)" (#2) at the right margin. It stays with its first
+% entry.
 \newcommand\toagroup[1]{%
-  \par\addvspace{1.4em}\noindent\begin{minipage}{\linewidth}\briefsingle\bfseries #1\end{minipage}\par\nopagebreak}
-\newcommand\toagroupfirst[1]{%
-  \par\addvspace{1em}\noindent\begin{minipage}{\linewidth}\briefsingle\bfseries #1\hfill\underline{Page(s)}\end{minipage}\par\nopagebreak}
+  \par\addvspace{19.6bp}\begingroup\briefsingle\noindent\textbf{#1}\par\endgroup\nobreak\addvspace{2.8bp}}
+\newcommand\toagroupfirst[2]{%
+  \par\addvspace{14bp}\begingroup\briefsingle\noindent\textbf{#1}\hskip 0pt plus 1fill\textbf{#2}\par\endgroup
+  \nobreak\addvspace{2.8bp}}
 
 % ---------------------------------------------------------------------------
 % Cover (FRAP 32(a)(2)); ca2.lua writes the cover from the frontmatter
 % ---------------------------------------------------------------------------
-\newcommand\briefrulesmall{\par{\centering\rule{2in}{0.7pt}\par}}
-\newcommand\briefdouble{\par\noindent\rule{\linewidth}{1.6pt}\par\vspace{2.5pt}\noindent\rule{\linewidth}{0.5pt}\par}
-\newcommand\briefcaptiondesig[1]{\par\noindent\hspace*{0.5\linewidth}#1\par}
-\newcommand\briefcounselblock[1]{\par\noindent\hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright#1\end{minipage}\par}
+% The gaps between the cover's parts: #1 bp, more to fill the page, none when the page is full (typst: the largest
+% gap at which the cover fits one page). The rules are drawn in vertical mode, outside any line box.
+% The one-inch docket number (Local Rule 32.1(a)(1)) in an 80 bp line box; a line that holds boxes (the reply's
+% counsel columns) keeps its natural height.
+\newcommand\briefdocketsize{\xe@lines{72}{80}}
+\newcommand\briefnatural{\xe@natural}
+\newcommand\briefgap[1]{\par\vskip #1bp plus 1fill minus #1bp\relax}
+\newcommand\briefrulesmall{\par\hbox to\linewidth{\hss\vrule width 2in height 0.7bp\hss}}
+\newcommand\briefdouble{\par\hrule height 1.6bp\vskip 2.5bp\hrule height 0.5bp}
 
 % ---------------------------------------------------------------------------
-% Signature and certificates (FRAP 32(g); typst signature-block, certificates)
+% Signature and certificates (FRAP 32(g); typst signature-block, form-sig-line, certificates)
 % ---------------------------------------------------------------------------
-\newenvironment{briefsig}{%
-  \par\addvspace{1.4em}\noindent\hspace*{0.5\linewidth}%
-  \begin{minipage}[t]{0.5\linewidth}\briefsingle\raggedright}{\end{minipage}\par}
+% A certificate's signature line: the right column starts (text width + 1 em) / 2 in, as typst's grid.
 \newcommand\briefsigfoot[2]{%
-  \par\needspace{160pt}\addvspace{1.6em}\noindent
-  \begin{minipage}[t]{0.47\linewidth}\briefsingle\raggedright\strut #1\\Signature\end{minipage}\hfill
-  \begin{minipage}[t]{0.47\linewidth}\briefsingle\raggedright\strut #2\\Date\end{minipage}\par}
-\newenvironment{briefcert}{\par\begingroup\briefsingle\setlength{\parindent}{0pt}\setlength{\parskip}{1em}}{\endgroup\par}
+  \par\nobreak\addvspace{22.4bp}\nobreak\begingroup\briefsingle\noindent\makebox[241bp][l]{#1}#2\par\nobreak
+  \noindent\makebox[241bp][l]{Signature}Date\par\endgroup}
+% A certificate's text: single spaced, no indent; ca2.lua puts 14 bp between its paragraphs (\addvspace).
+\newenvironment{briefcert}{\par\begingroup\briefsingle\setlength{\parindent}{0pt}}{\par\endgroup}
+\makeatother
 
-% ---------------------------------------------------------------------------
-% Document
-% ---------------------------------------------------------------------------
-\setcounter{secnumdepth}{0}
-\pagestyle{plain}
 \begin{document}
 $body$
 \end{document}
