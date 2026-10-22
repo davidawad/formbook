@@ -91,7 +91,7 @@ authorities:
   - heading: "Constitutional Provisions and Statutes"
     entries:
       - {cite: "Mont. Const. art. II, § 3", find: "Article II"}
-      - {cite: "Mont. Const. art. V, § 1", find: "Art. V"}
+      - {cite: "Mont. Const. art. V, § 1", find: "Art. V,"}
       - {cite: "Mont. Const. art. VII, § 4(1)", find: "Art. VII"}
       - {cite: "Mont. Const. art. IX, § 1", find: "Article IX"}
       - {cite: "U.S. Const. art. III, § 2", find: "Art. III"}

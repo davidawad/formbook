@@ -1,0 +1,65 @@
+# Montana Supreme Court (mont): brief on the merits (appellant's principal brief, MRAP 12(1)). The whole layout, as data
+# for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to M.R.App.P. 11 and 12 (../../rules.md, MONT-*); lengths in points. No case text here:
+# every string printed comes from the sample's frontmatter ({field}) or is a court constant. The numbers and styles are
+# the answering brief's (../../answering-brief/typst/layout.yaml), so the court's briefs look alike.
+size: 14                  # MONT-FORM-003 (MRAP 11(2)): a proportionately spaced typeface of 14 points or more
+pitch:
+  body: 32.2              # MONT-FORM-004 (MRAP 11(3)(b)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # MRAP 11(3)(b): footnotes, quotations, headings, tables, cover, signature single (1.15 x 14 pt)
+# MONT-FORM-002 (MRAP 11(3)(a)): at least 1 inch on every side; the bottom 0.1 in deeper so the last footnote line's
+# descenders stay inside the 1 inch line.
+margin: {top: 72, bottom: 79.2, left: 72, right: 72}
+indent: 36
+page_number: {align: center, from: 1}   # MONT-FORM-004: pages are numbered; the cover is page 1
+footnote: {size: 14, gap: 7}            # MRAP 11(2): footnotes 14 points; 11(3)(b): single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # MRAP 11(3)(b): indented material single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, left: 36, hang: 36, above: 14, below: 11.2}   # one step in; not italic (an italic case name in it)
+# MONT-COVER-001 (MRAP 11(6)(b)): the court, the cause number, the caption with designations, the lower tribunal, venue
+# and judge, the document title, and counsel for each party. MRAP 11(2) exempts the cover from the 14-point size: the
+# title is 16 points, counsel 12 points, two groups to a row.
+cover:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF MONTANA", align: center, bold: true}
+  - {text: "{case_number}", align: center, bold: true, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, above: 21.6}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 36}
+  - columns: {each: counsel, per_row: 2, row_gap: 7.2, blocks: [{text: "{names}", bold: true, size: 12, pitch: 13.8}, {text: "{lines}", size: 12, pitch: 13.8}]}
+    gutter: 28.8
+    above: 36
+# MONT-ORDER-001 (MRAP 12(1)(a)-(b)): a table of contents with page references, then a table of cases and authorities
+# with the pages where each is cited, each on its own page (not counted, MONT-LEN-003).
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 7.2}
+authorities:
+  title: "Table of Authorities"
+  col: 36
+  hang: 18
+  above: 7.2
+  group: {bold: true, above: 16.8, below: 4.2}
+# The date and the signature block (right of center), never split; then the MONT-CERT-001 (MRAP 11(4)(e)) certificate of
+# compliance on a page of its own: line spacing, typeface and size, the word count and the program that counted it.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, optional: true}
+      - {text: "{signature.firm}", bold: true, optional: true, left: 230.4, above: 11.2, below: 11.2}
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 5.6}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, above: 8.4}
+    above: 21.6
+  - {break: true}
+  - {text: "Certificate of Compliance", align: center, bold: true, upper: true, below: 16.8}
+  - {text: "Pursuant to Rule 11 of the Montana Rules of Appellate Procedure, I certify that this brief is printed with a proportionately spaced Times New Roman text typeface of 14 points; is double spaced except for footnotes and for indented material; and the word count calculated by {word_processor} is {word_count}, excluding those sections exempted under Rule 11(4)(d).", pitch: body, indent: 36}
+  - {text: "{signature.firm}", bold: true, optional: true, left: 230.4, above: 16.8, below: 11.2}
+  - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 5.6}
+  - {text: "{signature.signer}", left: 230.4}
+  - {text: "{signature.lines}", left: 230.4, above: 8.4}
