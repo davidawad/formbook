@@ -1,0 +1,3 @@
+# Public filed exemplars: Arizona Supreme Court, petition-for-writ
+
+| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | COLLECTED: 57 pp., text layer verified 2026-10-17; Arizona special action replaces writs (RPSA). Wayback copy of azcourts.gov posting | `FILED-EXAMPLE-petition-for-writ.pdf` | Dennis Liles et al. (petitioners) | Liles v. ___, No. CV-26-0272 (petition for special action) | 2026-08-14 | https://web.archive.org/web/20260817205114id_/https://www.azcourts.gov/Portals/0/ASC-CV260272%20-%208-14-2026%20-%20FILED%20-%20PETITION%20FOR%20SPECIAL%20ACTION.pdf | `e878704c474445c3171403d38f3faa4a9a7429fd83799b49dfbf5424edbf69ef` |

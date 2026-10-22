@@ -1,62 +1,55 @@
-# Massachusetts District Court Appellate Division: briefs, appendices and papers
+# Massachusetts District Court Appellate Division: briefs and motions
 
-Alias `massdistctapp`. Scope: briefs, appendices and motions or other papers filed in the Appellate Division of the District and Municipal Courts. Verified against the District/Municipal Courts Rules for Appellate Division Appeals (Rules 16, 17, 19 and 20, as posted on mass.gov) on 2026-10-21. The mass.gov pages do not show an edition date.
+Alias `massdistctapp`. Scope: briefs, appendices and motions addressed to the Appellate Division of the Massachusetts District and Boston Municipal Courts (Dist./Mun. Cts. R. A. D. A.). No public filed exemplar was obtained (see usage/SOURCE.md), so no doc-type folder is built yet. Verified against the Dist./Mun. Cts. Rules for Appellate Division Appeals as shown on mass.gov (Rules 16, 17 and 20, each showing Effective Date 07/01/1994) on 2026-10-22.
 
 ## Sources
 
 | Tag | Source | URL |
 |---|---|---|
-| DCAD-R20 | District/Municipal Courts Rules for Appellate Division Appeals, Rule 20: Forms of briefs, appendices and other papers | https://www.mass.gov/districtmunicipal-courts-rules-for-appellate-division-appeals/rule-20-forms-of-briefs-appendices-and-other-papers |
-| DCAD-R16 | Same rules, Rule 16: Briefs | https://www.mass.gov/districtmunicipal-courts-rules-for-appellate-division-appeals/rule-16-briefs |
-| DCAD-R19 | Same rules, Rule 19: Filing and serving of briefs | https://www.mass.gov/districtmunicipal-courts-rules-for-appellate-division-appeals/rule-19-filing-and-serving-of-briefs |
-| DCAD-R17 | Same rules, Rule 17: Brief of an amicus curiae | https://www.mass.gov/districtmunicipal-courts-rules-for-appellate-division-appeals/rule-17-brief-of-an-amicus-curiae |
+| RADA 16 | Dist./Mun. Cts. R. A. D. A. Rule 16, Briefs (effective 07/01/1994) | https://www.mass.gov/districtmunicipal-courts-rules-for-appellate-division-appeals/rule-16-briefs |
+| RADA 17 | Dist./Mun. Cts. R. A. D. A. Rule 17, Brief of an amicus curiae (effective 07/01/1994) | https://www.mass.gov/districtmunicipal-courts-rules-for-appellate-division-appeals/rule-17-brief-of-an-amicus-curiae |
+| RADA 20 | Dist./Mun. Cts. R. A. D. A. Rule 20, Forms of briefs, appendices and other papers (effective 07/01/1994) | https://www.mass.gov/districtmunicipal-courts-rules-for-appellate-division-appeals/rule-20-forms-of-briefs-appendices-and-other-papers |
 
-The Rule 20 reporter's note says the form requirements are essentially those of Mass. R.A.P. 20, with a separate typewritten-brief section added. This file cites only the District/Municipal rules above.
-
-## Form of briefs and appendices (Rule 20)
-
-Rule 20(a) requires one of two forms: (1) printed, or (2) typewritten. A brief complies with one of the two.
+## Form of briefs and appendices
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
-| MASSDISTCTAPP-FORM-001 | Briefs and appendices are either typographically printed or produced by any duplicating or copying process that gives a clear black image on white paper. Carbon copies are not submitted without the Appellate Division's permission. | DCAD-R20 (a)(1) | M |
-| MASSDISTCTAPP-FORM-002 | Printed form: opaque paper with a dull surface; text in clear type not smaller than 11-point, with 3-point leads between lines (indented quotations may be set without leads); footnotes in 10-point type with 1-point leads may be used; type page no wider than 5 inches. | DCAD-R20 (a)(1) | M |
-| MASSDISTCTAPP-FORM-003 | Printed form: page 8⅜ or 8½ inches wide and 10¾ or 11 inches high. | DCAD-R20 (a)(1) | M |
-| MASSDISTCTAPP-FORM-004 | Printed form: back margin, from the type page to the center fold, is not less than 2 inches. Pages are firmly bound at the left (saddle-wire, side-wire, staples, or sewing). | DCAD-R20 (a)(1) | M |
-| MASSDISTCTAPP-FORM-005 | Printed form: matter reproduced by Xerography or a similar process is typed in pica type and double-spaced. | DCAD-R20 (a)(1) | M |
-| MASSDISTCTAPP-FORM-006 | Typewritten form: opaque paper with a dull surface, 8½ inches wide and 11 inches long, typed double-spaced except indented quotations (which may be single-spaced), on one side of each page only. Briefs are signed by counsel. No type size is stated for this form. | DCAD-R20 (a)(2) | M |
-| MASSDISTCTAPP-FORM-007 | Motions and other papers follow the printed or typewritten form above; consecutive sheets are attached at the left margin. Carbon copies may be used for filing and service if legible. | DCAD-R20 (b) | M |
-| MASSDISTCTAPP-CAP-001 | A brief, motion or other paper addressed to the Appellate Division has a caption on the first page, typed legibly, giving the Appellate Division district, the trial court and case name, the trial court docket number, and a brief descriptive title of the paper's purpose. | DCAD-R20 (b) | M |
+| MASSDISTCTAPP-FORM-001 | Briefs are produced by standard typographic printing or a duplicating process giving a clear black image on white paper, or are typewritten; printed text is on opaque paper with a dull surface. | RADA 20(a)(1)-(2) | M |
+| MASSDISTCTAPP-FORM-002 | Printed text is in clear type not smaller than eleven-point, with three-point leads between lines; indented quotations may be set without leads; footnotes may be ten-point with one-point leads. Typewritten text is double-spaced, except indented quotations may be single-spaced. | RADA 20(a)(1)-(2) | M |
+| MASSDISTCTAPP-FORM-003 | The width of the type page does not exceed five inches. | RADA 20(a)(1) | M |
+| MASSDISTCTAPP-FORM-004 | Page size is 8-3/8 or 8-1/2 inches wide by 10-3/4 or 11 inches high (letter paper for typewritten briefs: 8-1/2 by 11 inches). | RADA 20(a)(1)-(2) | M |
+| MASSDISTCTAPP-FORM-005 | The back margin, from the type page to the center fold, is not less than two inches on printed briefs. | RADA 20(a)(1) | M |
+| MASSDISTCTAPP-FORM-006 | Pages are firmly bound at the left (saddle-wired, side-wired, stapled or sewn); side-wired or sewn copies have a strong paper cover. | RADA 20(a)(1) | M |
+| MASSDISTCTAPP-FORM-007 | The front cover of a brief or appendix, if separately produced, shows: the designation of the Appellate Division district; the title of the case; the nature of the proceeding and the trial court and its docket number; the title of the document; and the names, addresses and telephone numbers of counsel for the filing party. | RADA 20(a)(1) | M |
+| MASSDISTCTAPP-FORM-008 | Briefs are signed by counsel. | RADA 20(a)(2) | M |
+| MASSDISTCTAPP-FORM-009 | Briefs or appendices not in substantial compliance with Rule 20 are not received unless the Appellate Division orders otherwise. | RADA 20(a)(3) | M |
 
 ## Briefs (Rule 16)
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
-| MASSDISTCTAPP-CONT-001 | In a brief of twenty pages or more: table of contents with page references, and a table of cases, statutes and other authorities (alphabetical) with the pages where each is cited. | DCAD-R16 (a)(1) | M |
-| MASSDISTCTAPP-CONT-002 | The argument has a short summary of argument, suitably paragraphed with page references, where the argument runs more than twenty-four pages. The summary condenses the argument and does not repeat the headings. | DCAD-R16 (a)(4) | M |
-| MASSDISTCTAPP-CONT-003 | Record references in the statement of facts and argument follow Rule 16 and Rule 18 (appendix pages, or the pages of the parts of the record not reproduced). | DCAD-R16 (record references); Rule 18(a) cited therein | M |
-| MASSDISTCTAPP-LEN-001 | Principal briefs do not exceed 50 pages of standard typographic printing, or 70 pages of reproduction by another process, excluding the table of contents, tables of citations and any addendum of statutes, rules and regulations, unless the Appellate Division permits more. | DCAD-R16 (length, final paragraph) | M |
-| MASSDISTCTAPP-LEN-002 | Reply briefs do not exceed 25 pages of standard typographic printing, or 35 pages of reproduction by another process, unless the Appellate Division permits more. | DCAD-R16 (length, final paragraph) | M |
-
-## Filing and service (Rule 19)
-
-| ID | Requirement | Source | Kind |
-|---|---|---|---|
-| MASSDISTCTAPP-ELEC-001 | Six copies of each brief are filed, and one copy is served on each party or counsel. | DCAD-R19 (b) | M |
-| MASSDISTCTAPP-CONT-004 | Rule 8C appeals: appellant's brief within 30 days after notice from the Appellate Division of receipt of the appeal; appellee's brief within 20 days after service of the appellant's brief; appellant's reply within 14 days after service of the appellee's brief. | DCAD-R19 (a) | M |
-| MASSDISTCTAPP-CONT-005 | Rule 8A and 8B appeals: briefs are filed and served before the case is transmitted to the Appellate Division. | DCAD-R19 (a) | M |
-| MASSDISTCTAPP-CONT-006 | Late filing of briefs on Rule 8A or 8B appeals is allowed only at the Appellate Division's discretion, on terms it sets. | DCAD-R19 (d) | A |
+| MASSDISTCTAPP-BRIEF-001 | In a brief of twenty pages or more, a table of contents with page references and a table of cases, statutes and other authorities (alphabetical, with the pages cited). | RADA 16(a)(1) | M |
+| MASSDISTCTAPP-BRIEF-002 | The appellant's brief sets out, under headings and in order: the statement of issues presented; the statement of the case (nature, proceedings and disposition in the trial court, then the facts with record references); the argument; a short conclusion stating the precise relief sought; and, where geographical facts matter, an outline plan; the names and addresses of individual counsel, to which firm names may be added. | RADA 16(a)(2)-(7) | M |
+| MASSDISTCTAPP-BRIEF-003 | A brief of more than twenty-four pages of argument has a short summary of argument with page references. | RADA 16(a)(4) | M |
+| MASSDISTCTAPP-BRIEF-004 | The appellee's brief follows Rule 16(a)(1)-(4), (6) and (7); the statements of issues and of the case need not be made unless the appellee is dissatisfied with the appellant's. | RADA 16(b) | M |
+| MASSDISTCTAPP-BRIEF-005 | A reply brief complies with Rule 16(a)(1); no further brief is filed except with leave. | RADA 16(c) | M |
+| MASSDISTCTAPP-BRIEF-006 | Record references are to the pages of the appendix where the part appears, or to the page of the record part not reproduced (for example, "Answer p. 1"). | RADA 16(e) | M |
 
 ## Amicus briefs (Rule 17)
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
-| MASSDISTCTAPP-CONT-007 | An amicus brief is filed only by leave of the Appellate Division or at its request, except when the Commonwealth files. | DCAD-R17 | M |
+| MASSDISTCTAPP-AMI-001 | An amicus brief may be filed only by leave of the Appellate Division, on motion, when solicited by the court, or where consent or leave is not required under the rule; the motion for leave identifies the applicant's interest and why the brief is desirable. | RADA 17 | M |
 
-## Template-only requirements
+## Motions and other papers
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
-| MASSDISTCTAPP-TPL-001 | A reusable template contains no case-specific text, measured coordinates, or forced line breaks. | Project rule (docs/EVAL-LOOP.md) | T |
+| MASSDISTCTAPP-MOT-001 | A motion or other paper addressed to the Appellate Division is produced in the manner of Rule 20(a)(1) or (2); consecutive sheets are attached at the left margin. | RADA 20(b) | M |
+| MASSDISTCTAPP-MOT-002 | A motion or other paper has a caption on the first page giving the Appellate Division district, the trial court and case, the trial court docket number, and a brief descriptive title; the caption is typed so as to be legible. | RADA 20(b) | M |
 
-Verified against the District/Municipal Courts Rules for Appellate Division Appeals, Rules 16, 17, 19 and 20 (mass.gov, no edition date shown) on 2026-10-21.
+## Template-only requirement
+
+| ID | Requirement | Kind |
+|---|---|---|
+| MASSDISTCTAPP-TPL-001 | A reusable template contains no case-specific text, measured coordinates, or forced line breaks. | T |

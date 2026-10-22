@@ -1,0 +1,2 @@
+PASS
+a87b300d5e59ef10f4ff813ea238fd9f96f9855d2b069ecfac47d45936b6c31b  usage/OUTPUT-brief-on-the-merits.typst.pdf

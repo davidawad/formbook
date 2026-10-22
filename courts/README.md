@@ -39,7 +39,7 @@ Courts under `courts` (346).
 | [Massachusetts Appeals Court](first-circuit/massachusetts/state/appeals-court) | `massappct` | up for review | 5/5 | — | — | 29 |
 | [Massachusetts District Court, Appellate Division](first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` | in progress | — | — | — | 14 |
 | [Massachusetts Supreme Judicial Court](first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | in progress | 9/9 | — | — | 14 |
-| [Supreme Court of New Hampshire](first-circuit/new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | — | — | 29 |
+| [Supreme Court of New Hampshire](first-circuit/new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | 4/4 | 4/4 | 29 |
 | [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | up for review | 1/1 | 1/1 | 1/1 | 29 |
 | [Supreme Court of Puerto Rico](first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | — | — | 29 |
 | [Supreme Court of Rhode Island](first-circuit/rhode-island/state/supreme-court) | `ri` | up for review | 3/3 | — | — | 29 |
@@ -79,7 +79,7 @@ Courts under `courts` (346).
 | [Supreme Court of New Jersey](third-circuit/new-jersey/state/supreme-court) | `nj` | up for review | 5/5 | 3/3 | 3/3 | 29 |
 | [Commonwealth Court of Pennsylvania](third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | 7/7 | 3/3 | 4/4 | 29 |
 | [Superior Court of Pennsylvania](third-circuit/pennsylvania/state/superior-court) | `pasuperct` | up for review | 5/5 | — | — | 29 |
-| [Supreme Court of Pennsylvania](third-circuit/pennsylvania/state/supreme-court) | `pa` | up for review | 9/9 | — | — | 29 |
+| [Supreme Court of Pennsylvania](third-circuit/pennsylvania/state/supreme-court) | `pa` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 | [Court of Appeals for the Fourth Circuit](fourth-circuit/court-of-appeals) | `ca4` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, D. Maryland](fourth-circuit/maryland/federal/bankruptcy-district) | `mdb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Maryland](fourth-circuit/maryland/federal/district) | `mdd` | up for review | 2/2 | — | 2/2 | 14 |
@@ -258,11 +258,11 @@ Courts under `courts` (346).
 | [Alaska Court of Appeals](ninth-circuit/alaska/state/court-of-appeals) | `alaskactapp` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Alaska Supreme Court](ninth-circuit/alaska/state/supreme-court) | `alaska` | up for review | 6/6 | — | — | 29 |
 | [High Court of American Samoa](ninth-circuit/american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |
-| [Arizona Court of Appeals](ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | in progress | — | — | — | 14 |
-| [Arizona Supreme Court](ninth-circuit/arizona/state/supreme-court) | `ariz` | in progress | — | — | — | 14 |
+| [Arizona Court of Appeals](ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | in progress | 7/7 | — | — | 14 |
+| [Arizona Supreme Court](ninth-circuit/arizona/state/supreme-court) | `ariz` | up for review | 9/9 | — | — | 29 |
 | [California Court of Appeal, Fifth Appellate District](ninth-circuit/california/state/court-of-appeal-fifth-district) | `calctapp5d` | up for review | 6/6 | — | — | 29 |
 | [California Court of Appeal, First Appellate District](ninth-circuit/california/state/court-of-appeal-first-district) | `calctapp1d` | up for review | 7/7 | — | — | 29 |
-| [California Court of Appeal, Fourth Appellate District](ninth-circuit/california/state/court-of-appeal-fourth-district) | `calctapp4d` | in progress | — | — | — | 29 |
+| [California Court of Appeal, Fourth Appellate District](ninth-circuit/california/state/court-of-appeal-fourth-district) | `calctapp4d` | up for review | 5/5 | — | — | 29 |
 | [California Court of Appeal, Second Appellate District](ninth-circuit/california/state/court-of-appeal-second-district) | `calctapp2d` | up for review | 5/5 | — | — | 29 |
 | [California Court of Appeal, Sixth Appellate District](ninth-circuit/california/state/court-of-appeal-sixth-district) | `calctapp6d` | up for review | 7/7 | 1/1 | 1/1 | 29 |
 | [California Court of Appeal, Third Appellate District](ninth-circuit/california/state/court-of-appeal-third-district) | `calctapp3d` | up for review | 2/2 | — | — | 29 |
@@ -276,11 +276,11 @@ Courts under `courts` (346).
 | [Supreme Court of Hawaii](ninth-circuit/hawaii/state/supreme-court) | `haw` | up for review | 9/9 | 2/2 | 3/3 | 29 |
 | [Idaho Court of Appeals](ninth-circuit/idaho/state/court-of-appeals) | `idahoctapp` | up for review | 3/3 | — | — | 29 |
 | [Idaho Supreme Court](ninth-circuit/idaho/state/supreme-court) | `idaho` | up for review | 7/7 | 7/7 | 7/7 | 29 |
-| [Montana Supreme Court](ninth-circuit/montana/state/supreme-court) | `mont` | up for review | 9/9 | — | — | 29 |
+| [Montana Supreme Court](ninth-circuit/montana/state/supreme-court) | `mont` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 | [Court of Appeals of Nevada](ninth-circuit/nevada/state/court-of-appeals) | `nevapp` | in progress | 5/5 | — | — | 14 |
-| [Nevada Supreme Court](ninth-circuit/nevada/state/supreme-court) | `nev` | in progress | 9/9 | — | — | 14 |
+| [Nevada Supreme Court](ninth-circuit/nevada/state/supreme-court) | `nev` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 | [Supreme Court of The Commonwealth of The Northern Mariana Islands](ninth-circuit/northern-mariana-islands/state/supreme-court) | `nmi` | up for review | 1/1 | 1/1 | 1/1 | 14 |
-| [Court of Appeals of Oregon](ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | in progress | 0/1 | — | — | 29 |
+| [Court of Appeals of Oregon](ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | up for review | 1/2 | — | — | 29 |
 | [Oregon Supreme Court](ninth-circuit/oregon/state/supreme-court) | `or` | in progress | — | — | — | 29 |
 | [Court of Appeals of Washington](ninth-circuit/washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
 | [Washington Supreme Court](ninth-circuit/washington/state/supreme-court) | `wash` | up for review | 9/9 | 2/2 | 2/2 | 29 |

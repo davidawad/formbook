@@ -6,7 +6,7 @@
 - Level: state-appellate
 - Circuit: `ca9`
 - State / territory: Oregon
-- Status: **in progress** (29%); manual status in `court.json`: `todo`
+- Status: **up for review** (29%); manual status in `court.json`: `todo`
 
 ## Checklist
 
@@ -18,18 +18,19 @@
 - [ ] docx engine passes (`usage/.check-docx.txt` valid)
 - [ ] a review file in `reviews/`
 
-Engines (doc folders passing / with that template): typst `0/1`, latex `—`, docx `—`.
+Engines (doc folders passing / with that template): typst `1/2`, latex `—`, docx `—`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and every doc folder under it with a `usage/INPUT-*.md` has a valid `usage/.check-typst.txt` stamp (`just eval` writes them; the default checks are `data/checks-default.yaml`).
 
 ## Doc folders
 
-0 of 0 doc folders with an INPUT pass the typst eval.
+1 of 1 doc folders with an INPUT pass the typst eval.
 
 | Doc type | Status | Typst | LaTeX | DOCX |
 |---|---|---|---|---|
 | [amicus-brief](amicus-brief) | in progress | untested | — | — |
+| [motion-brief](motion-brief) | up for review | pass | — | — |
 
 ## Folders
 

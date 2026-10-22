@@ -1,0 +1,3 @@
+# Public filed exemplars — Arizona Supreme Court, petition-for-rehearing
+
+| `petition-for-rehearing` — Petition for panel rehearing or rehearing en banc | COLLECTED: 17 pp., text layer verified 2026-10-17; ARCAP 22 motion for reconsideration. Wayback copy of azcourts.gov posting | `FILED-EXAMPLE-petition-for-rehearing.pdf` | Jane Doe I et al. (plaintiffs/appellants; Lynne Cadigan Law, Manly Stewart & Finaldi) | Doe v. Corporation of the President of the Church of Jesus Christ of Latter-day Saints, No. CV-25-0213-PR | 2026-08-12 | https://web.archive.org/web/20260815001413id_/https://www.azcourts.gov/Portals/0/ASC-CV250213%20-%208-12-2026%20-%20FILED%20-%20MOTION%20FOR%20RECONSIDERATION.pdf | `063885d5c800bb437d5dfb93a3d0df9903effb9e812b39df249a3e1c2a3647a0` |

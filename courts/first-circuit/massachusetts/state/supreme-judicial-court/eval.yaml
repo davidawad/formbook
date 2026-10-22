@@ -1,4 +1,4 @@
-# Mass. R. A. P. 20(a)(4)(B) (rules.md MA-FORM-002): a proportionally spaced font of 14 point or larger, footnotes included.
-# Margins stay at the default 72 pt (1 inch): Mass. R. A. P. 20(a)(4)(A) (MA-FORM-003).
+# MRAP 20(a)(4)(B): a proportionally spaced typeface (such as Times New Roman) of 14 point or larger, footnotes included.
+# (MRAP 20(b)(2)(A) sets 12 point for a motion; the 14 point floor is stricter and holds for every doc type here.)
 font:
   size_pt: 14
