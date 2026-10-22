@@ -48,432 +48,76 @@ service:
 
 This amid curiae brief is filed in conjunction with the Motion for
 
-Leave to File Brief Amid Curiae, which is filed contemporaneously
-
-herewith.
+Leave to File Brief Amid Curiae, which is filed contemporaneously herewith.
 
 # INTEREST OF THE AMICI CURIAE
 
-Amici are the Tennessee Association of Criminal Defense Lawyers,
+Amici are the Tennessee Association of Criminal Defense Lawyers, one of the nation’s oldest state criminal bar associations comprised of criminal defense attorneys, and certain individual members of the Tennessee Bar. Before the Court is the state’s motion to set execution dates before the drugs to be used in its new lethal injection protocol expire. Defendant has filed an action in the Chancery Court of Davidson County, Tennessee, alleging the new protocol violates the Tennessee and United States Constitutions. The Chancery Court action is currently pending, and Amid seek leave to file a brief in this matter urging the Court to allow the Chancery Court action to proceed to a full trial on the merits, as required by due process.
 
-one of the nation's oldest state criminal bar associations comprised of
+Amid have a profound interest in upholding the rule of law and the integrity of the judiciary as the State seeks to carry out what is a somber and irrevocable task.     As attorneys practicing in Tennessee, and an organization of criminal law practitioners in particular, Amid are engaged in “a common calling to promote justice and public good;” they are “public citizen[s] having special responsibility for the quality of justice.” Tennessee Supreme Court Rule 8, Rules of Professional Conduct, Preamble, Comment [1]. It is in furtherance of these obligations and interests that the undersigned file this Motion.
 
-criminal defense attorneys, and certain individual members of the
-
-Tennessee Bar. Before the Court is the state's motion to set execution dates
-
-before the drugs to be used in its new lethal injection protocol expire.
-
-Defendant has filed an action in the Chancery Court of Davidson County,
-
-Tennessee, alleging the new protocol violates the Tennessee and United
-
-States Constitutions. The Chancery Court action is currently pending, and
-
-Amid seek leave to file a brief in this matter urging the Court to allow the
-
-Chancery Court action to proceed to a full trial on the merits, as required by
-
-due process.
-
-Amid have a profound interest in upholding the rule of law and the
-
-integrity of the judiciary as the State seeks to carry out what is a somber
-
-and irrevocable task.     As attorneys practicing in Tennessee, and an
-
-organization of criminal law practitioners in particular, Amid are engaged
-
-in "a common calling to promote justice and public good;" they are "public
-
-citizen[s] having special responsibility for the quality of justice." Tennessee
-
-Supreme Court Rule 8, Rules of Professional Conduct, Preamble, Comment
-
-[1]. It is in furtherance of these obligations and interests that the
-
-undersigned file this Motion.
-
-Before this Court can set execution dates, there are critically
-
-important interpretations of the Tennessee and United States Constitutions
-
-that simply must be resolved and developments in the evidence of the
-
-community's evolving standards of decency that must be given due
-
-consideration in the appropriate tribunal. And, they must take place on a
-
-fully developed record before a trier of fact, not on a rushed basis so the
-
-State can use a new protocol before its drugs expire. The promotion of a full
-
-and fair trial on these matters is of vital importance to the administration of
-
-justice in Tennessee and, by extension, of vital interest to the undersigned.
+Before this Court can set execution dates, there are critically important interpretations of the Tennessee and United States Constitutions that simply must be resolved and developments in the evidence of the community’s evolving standards of decency that must be given due consideration in the appropriate tribunal. And, they must take place on a fully developed record before a trier of fact, not on a rushed basis so the State can use a new protocol before its drugs expire. The promotion of a full and fair trial on these matters is of vital importance to the administration of justice in Tennessee and, by extension, of vital interest to the undersigned.
 
 # STATEMENT OF THE CASE AND FACTS
 
-The Amici adopt the statement of the case and the facts as set forth
-
-in the Response in Opposition to Motion to Set Execution Dates.
+The Amici adopt the statement of the case and the facts as set forth in the Response in Opposition to Motion to Set Execution Dates.
 
 # ISSUE PRESENTED
 
-Should the Court set dates for executions using a drug cocktail whose
-
-constitutionality has not been reviewed by Tennessee courts when a lawsuit
-
-is currently pending in Chancery Court challenging the constitutionality of
-
-the cocktail, and the parties have not had a full opportunity to litigate the
-
-constitutionality of the cocktail in the pending lawsuit?
+Should the Court set dates for executions using a drug cocktail whose constitutionality has not been reviewed by Tennessee courts when a lawsuit is currently pending in Chancery Court challenging the constitutionality of the cocktail, and the parties have not had a full opportunity to litigate the constitutionality of the cocktail in the pending lawsuit?
 
 # ARGUMENT
 
 ## Introduction
 
-Amid are the Tennessee Association of Criminal Defense Lawyers, one of
+Amid are the Tennessee Association of Criminal Defense Lawyers, one of the nation’s oldest state criminal bar associations comprised of criminal defense attorneys, and certain individual members of the Tennessee Bar. Before the Court is the state’s motion to set execution dates before the drugs to be used in its new lethal injection protocol expire. Defendant has filed an action in the Chancery Court of Davidson County, Tennessee, alleging the new protocol violates the Tennessee and United States Constitutions. The Chancery Court action is currently pending, and Amid seek leave to file a brief in this matter urging the Court to allow the Chancery Court action to proceed to a full trial on the merits, as required by due process.
 
-the nation's oldest state criminal bar associations comprised of criminal
+Amid have a profound interest in upholding the rule of law and the integrity of the judiciary as the State seeks to carry out what is a somber and irrevocable task.     As attorneys practicing in Tennessee, and an organization of criminal law practitioners in particular, Amid are engaged in “a common calling to promote justice and public good;” they are “public citizen[s] having special responsibility for the quality of justice.” Tennessee Supreme Court Rule 8, Rules of Professional Conduct, Preamble, Comment [1]. It is in furtherance of these obligations and interests that the undersigned file this Motion.
 
-defense attorneys, and certain individual members of the Tennessee Bar.
+Before this Court can set execution dates, there are critically important interpretations of the Tennessee and United States Constitutions and facts evidencing the community’s evolving standards of decency that simply must be resolved. And, they must take place on a fully developed record before a trier of fact, not on a rushed basis so the State can use a new protocol before its drugs expire. The promotion of a full and fair trial on these matters is of vital importance to the administration of justice in Tennessee and, by extension, of vital interest to the undersigned.
 
-Before the Court is the state's motion to set execution dates before the drugs
+## Tennessee Courts Have Not Determined the Constitutionality of the Untested Protocol.
 
-to be used in its new lethal injection protocol expire. Defendant has filed an
+The constitutionality of the Untested Protocol has never been considered by a Tennessee court. As Movant notes in its Motion to Set Execution Dates, the “constitutionality of Tennessee’s Lethal Injection Protocol, which called for the use of the single drug pentobarbital” has been previously litigated in Tennessee. Mot. to Set Execution Dates at 2. The parties briefed the constitutionality of pentobarbitalin Chancery Court and on appeal, and the U.S. Supreme Court denied review on that drug. Despite Movant’s attempt to characterize prior litigation over other protocols binding as to future protocols, the constitutionality determination is distinct for different methods of execution. Never in any of these decisions has this Court (or any other) even referenced the Untested Protocol.
 
-action in the Chancery Court of Davidson County, Tennessee, alleging the
+Indeed, no Tennessee court has analyzed the constitutionality of the Untested Protocol under the Tennessee or United States Constitutions, because the Department of Corrections did not add it to its execution protocol until January 8, 2018 — less than two months ago. Now, Movant attempts to conflate the two protocols, asking the Court to sanction the Untested Protocol in a rush to execute the Defendant on the basis of determinations it made about pentobarbital. Movant similarly points to this Court’s prior determination of the constitutionality of sodium pentothal, but that determination likewise has no bearing on this analysis. Prior analyses of the constitutionality of other protocols cannot be imputed to Movant’s current plan to use the new Untested Protocol.[^1][^2]
 
-new protocol violates the Tennessee and United States Constitutions. The
+## Defendant Should Be Given A Full and Fair Opportunity to Litigate the Constitutionality of the Untested Protocol.
 
-Chancery Court action is currently pending, and Amid seek leave to file a
+In challenges to sentences of death and execution methodologies, the importance of due process is magnified. “Due process is flexible and calls for such procedural protections as the particular situation demands.” Howell v. State, 151 S.W.3d 450, 461 (Tenn. 2004)(quoting State v. Seals, 23 S.W.3d 272, 277 (Tenn. 2000)). In determining what review should be afforded an inmate’s challenge to his sentence of death, this Court should “be mindful that ‘a sentence of death is final, irrevocable, and qualitatively different than any other form or level of punishment.”’ Pike v. State, 164 S.W.3d 257, 266 (Tenn. 2005) (quoting Van Tran v. State, 66 S.W.3d 790, 809 (Tenn. 2001) (internal quotations omitted)). As weighed against the State’s “interest in the finality of judgments,” this Court has recognized that a defendant sentenced to die has “[an] interest [that] is even stronger—his interest in protecting his very life.” Howell, 151 S.W.3d at 462.
 
-brief in this matter urging the Court to allow the Chancery Court action to
+This Court has long recognized a “heightened due process applicable in capital cases” and “the heightened reliability required and the gravity of the ultimate penalty in capital cases.” Smith v. State, 357 S.W.3d 322, 346 (Tenn. 2011)(quoting State v. Lazes, 875 S.W.2d 253, 260(Tenn. 1994)). To meet these standards, all available evidence should be given due consideration in an appropriate tribunal. As this Court held in a prior challenge to an execution protocol, “rdlecisions involving such profoundly important and sensitive issues such as the ones involved in this case are best decided on evidence that has been presented, tested, and weighed in an adversarial hearing.” Order, West v. Ray, No. M2010-02275-SC-R11-CV (Tenn. Nov. 6, 2010)(per curiam)(copy attached).
 
-proceed to a full trial on the merits, as required by due process.
+Indeed, this Court, in discussing a potential challenge to a new method of execution, specifically recognized that defendants are entitled to challenge a new execution protocol with a full trial on the merits. State v. West, No. M1987-000130-SC-DPE-DD, slip op. at 3 ‘(Tenn. Nov. 29, 2010) (per curiam)(copy attached). The Court stated:
 
-Amid have a profound interest in upholding the rule of law and the
+The principles of constitutional adjudication and procedural fairness require that decisions regarding constitutional challenges to acts of the Executive and Legislative Branches be considered in light of a fully developed record addressing the specific merits of the challenge. The requirement of a fully developed record envisions a trial on the merits during which both sides have an opportunity to develop the facts that have a bearing on the constitutionality of the challenged provision. Id. The Chancery Court Action regarding the Untested Protocol is such a challenge, and due process requires that it be considered only with the aid of a fully developed record.
 
-integrity of the judiciary as the State seeks to carry out what is a somber
+Critically, to the extent there is any added urgency in these proceedings, it is a false urgency of Movant’s creation and is irrelevant to the due process issues at stake. Movant litigated a case about pentobarbital through the fall of 2017 and only informed the Court on February 15, 2018 that it “currently has [no pentobarbital] on hand.” Mot. to Set Execution Dates at 2. Movant gives no basis for this statement but now claims the Department of Corrections has “deemed it necessary to provide an alternative drug combination to ensure it could comply with its statutory obligation to carry out death sentences by lethal injection when ordered to do so.” Id. at 3. In fact, Movant has only been “ordered” to carry out one death sentence — that of Billy Ray Irick — and that sentence is not set to be carried out until August 9, 2018. What Movant seeks to do here is not to carry out its statutory obligation but instead to foreclose the Tennessee Courts’ ability to ensure Defendant’s executions is conducted in accordance with the Tennessee and U.S. Constitutions. Movant relies on an alleged exigency of its own making by rushing to avoid the expiration of drugs in an Untested Protocol that Movant only recently indicated it intends to use.
 
-and irrevocable task.     As attorneys practicing in Tennessee, and an
+Movant’s self-created sense of urgency cannot be allowed to outweigh the irrevocable and fatal consequence of depriving due process to Defendant.
 
-organization of criminal law practitioners in particular, Amid are engaged
+### This Court Has Made Clear That Defendant Has The Right to Challenge New Methods Of Execution.
 
-in "a common calling to promote justice and public good;" they are "public
+In West v. Schofield, 468 S.W.3d 482, 494 (Tenn. 2015), this Court acknowledged that Defendant should be afforded a right to challenge a new method of execution and required that Defendant be given notice of any use of a new method of execution to provide time for Defendant to file a declaratory judgment action. See id. Because the chemicals in the Untested Protocol constitute an entirely new method of execution, West v. Schofield dictates that Defendant be granted a chance to fully challenge, vet, and litigate the constitutionality of the Untested Protocol. Id. Defendant seeks to stay his executions for this purpose, as contemplated by this Court. See id. (“Should the Inmates need additional time to litigate future ripe challenges to electrocution, the Inmates may seek stays from this Court.”). As acknowledged by this Court, due process requires that Defendant be afforded the chance to fully litigate the constitutionality of the Untested Protocol before he is executed with it.
 
-citizen[s] having special responsibility for the quality of justice." Tennessee
+### Defendant’s Due Process Rights Are Heightened by the Eighth Amendment’s Protections.
 
-Supreme Court Rule 8, Rules of Professional Conduct, Preamble, Comment
+The Untested Protocol consists of midazolam, a sedative that has no anesthetic effect; vecuronium bromide, a paralytic designed only to mask signs of discomfort and pain; and potassium chloride, a poison that kills with extreme pain. Defendant asserts that this new cocktail “presents a risk that is sure or very likely to cause serious illness and needless suffering, amounting to an objectively intolerable risk of harm,” in contravention of the Eighth Amendment. See Glossip, 135 S.Ct. at 2736 (internal quotations omitted). The Eighth Amendment’s prohibition against cruel and unusual[^3] punishment amplifies the need for due process and, in turn, for Defendant to receive a full trial on the merits of his Eighth Amendment challenge.
 
-[1]. It is in furtherance of these obligations and interests that the
+The United States Supreme Court has consistently held that the Eighth Amendment demands regular re-evaluation of what constitutes cruel and unusual punishment. “To enforce the Constitution’s protection of human dignity,” when a punishment is challenged, courts must “look to the evolving standards of decency that mark the progress of a maturing society.” Moore v. Texas, 137 S.Ct. 1039, 1048 (2017) (internal quotations omitted). In this way, the Eighth Amendment “is not fastened to the obsolete.” Id. (internal quotations omitted).
 
-undersigned file this Motion.
+Supreme Court cases over time have illustrated the nation’s fidelity to this concept. For instance, the Supreme Court determined that the Eighth Amendment did not prohibit the execution of juvenile offenders between the ages of 15 and 18 in 1989, and “[a] plurality of the Court also ‘emphatically reject[ed]’ the suggestion that the Court should bring its own judgment to bear on the acceptability of the juvenile death penalty.” Roper V. Simmons, 543 U.S. 551, 562 (2005) (quoting Stanford v. Kentucky, 492 U.S. 361, 377-78 (1989)). The Court later determined that the Eighth Amendment prohibits the imposition of the death penalty on juveniles under the age of eighteen. See id. The Court also later reversed a prior ruling when it held that the Eighth Amendment exempts from the death penalty individuals with intellectual disabilities. See id.(discussing Penry v. Lynaugh, 492 U.S. 302(1989) and Atkins v. Virginia, 536 U.S. 304(2002)).
 
-Before this Court can set execution dates, there are critically
+As evidence arises that a punishment is cruel and unusual, as it has here, the government must re-evaluate the punishment’s constitutionality and reaffirm the compact with the citizenry that they shall be treated with dignity. Casting aside Defendant’s Due Process rights as if they were less valuable than the perishable drugs that will kill him would utterly eviscerate Defendant’s dignity and violate the Eighth Amendment.
 
-important interpretations of the Tennessee and United States Constitutions
-
-and facts evidencing the community's evolving standards of decency that
-
-simply must be resolved. And, they must take place on a fully developed
-
-record before a trier of fact, not on a rushed basis so the State can use a new
-
-protocol before its drugs expire. The promotion of a full and fair trial on
-
-these matters is of vital importance to the administration of justice in
-
-Tennessee and, by extension, of vital interest to the undersigned.
-
-## Tennessee Courts Have Not Determined the Constitutionality of the
-
-Untested Protocol.
-
-The constitutionality of the Untested Protocol has never been
-
-considered by a Tennessee court. As Movant notes in its Motion to Set
-
-Execution Dates, the "constitutionality of Tennessee's Lethal Injection
-
-Protocol, which called for the use of the single drug pentobarbital" has been
-
-previously litigated in Tennessee. Mot. to Set Execution Dates at 2. The
-
-parties briefed the constitutionality of pentobarbitalin Chancery Court and
-
-on appeal, and the U.S. Supreme Court denied review on that drug. Despite
-
-Movant's attempt to characterize prior litigation over other protocols
-
-binding as to future protocols, the constitutionality determination is distinct
-
-for different methods of execution. Never in any of these decisions has this
-
-Court (or any other) even referenced the Untested Protocol.
-
-Indeed, no Tennessee court has analyzed the constitutionality of the
-
-Untested Protocol under the Tennessee or United States Constitutions,
-
-because the Department of Corrections did not add it to its execution
-
-protocol until January 8, 2018 — less than two months ago. Now, Movant
-
-attempts to conflate the two protocols, asking the Court to sanction the
-
-Untested Protocol in a rush to execute the Defendant on the basis of
-
-determinations it made about pentobarbital. Movant similarly points to
-
-this Court's prior determination of the constitutionality of sodium pentothal,
-
-but that determination likewise has no bearing on this analysis. Prior
-
-analyses of the constitutionality of other protocols cannot be imputed to
-
-Movant's current plan to use the new Untested Protocol.[^1][^2]
-
-## Defendant Should Be Given A Full and Fair Opportunity to Litigate
-
-the Constitutionality of the Untested Protocol.
-
-In challenges to sentences of death and execution methodologies, the
-
-importance of due process is magnified."Due process is flexible and calls for
-
-such procedural protections as the particular situation demands." Howell v.
-
-State, 151 S.W.3d 450, 461 (Tenn. 2004)(quoting State v. Seals, 23 S.W.3d
-
-272, 277 (Tenn. 2000)). In determining what review should be afforded an
-
-inmate's challenge to his sentence of death, this Court should "be mindful
-
-that 'a sentence of death is final, irrevocable, and qualitatively different
-
-than any other form or level of punishment."' Pike v. State, 164 S.W.3d 257,
-
-266 (Tenn. 2005) (quoting Van Tran v. State, 66 S.W.3d 790, 809 (Tenn.
-
-2001) (internal quotations omitted)). As weighed against the State's
-
-"interest in the finality of judgments," this Court has recognized that a
-
-defendant sentenced to die has "[an] interest [that] is even stronger—his
-
-interest in protecting his very life." Howell, 151 S.W.3d at 462.
-
-This Court has long recognized a "heightened due process applicable
-
-in capital cases" and "the heightened reliability required and the gravity of
-
-the ultimate penalty in capital cases." Smith v. State, 357 S.W.3d 322, 346
-
-(Tenn. 2011)(quoting State v. Lazes, 875 S.W.2d 253, 260(Tenn. 1994)). To
-
-meet these standards, all available evidence should be given due
-
-consideration in an appropriate tribunal. As this Court held in a prior
-
-challenge to an execution protocol, "rdlecisions involving such profoundly
-
-important and sensitive issues such as the ones involved in this case are
-
-best decided on evidence that has been presented, tested, and weighed in an
-
-adversarial hearing." Order, West v. Ray, No. M2010-02275-SC-R11-CV
-
-(Tenn. Nov. 6, 2010)(per curiam)(copy attached).
-
-Indeed, this Court, in discussing a potential challenge to a new
-
-method of execution, specifically recognized that defendants are entitled to
-
-challenge a new execution protocol with a full trial on the merits. State v.
-
-West, No. M1987-000130-SC-DPE-DD, slip op. at 3 '(Tenn. Nov. 29, 2010)
-
-(per curiam)(copy attached). The Court stated:
-
-The principles of constitutional adjudication and procedural fairness require that decisions regarding constitutional challenges to acts of the Executive and Legislative Branches be considered in light of a fully developed record addressing the specific merits of the challenge. The requirement of a fully developed record envisions a trial on the merits during which both sides have an opportunity to develop the facts that have a bearing on the constitutionality of the challenged provision.
-
-Id. The Chancery Court Action regarding the Untested Protocol is such a
-
-challenge, and due process requires that it be considered only with the aid of
-
-a fully developed record.
-
-Critically, to the extent there is any added urgency in these
-
-proceedings, it is a false urgency of Movant's creation and is irrelevant to
-
-the due process issues at stake. Movant litigated a case about pentobarbital
-
-through the fall of 2017 and only informed the Court on February 15, 2018
-
-that it "currently has [no pentobarbital] on hand." Mot. to Set Execution
-
-Dates at 2. Movant gives no basis for this statement but now claims the
-
-Department of Corrections has "deemed it necessary to provide an
-
-alternative drug combination to ensure it could comply with its statutory
-
-obligation to carry out death sentences by lethal injection when ordered to
-
-do so." Id. at 3. In fact, Movant has only been "ordered" to carry out one
-
-death sentence — that of Billy Ray Irick — and that sentence is not set to be
-
-carried out until August 9, 2018. What Movant seeks to do here is not to
-
-carry out its statutory obligation but instead to foreclose the Tennessee
-
-Courts' ability to ensure Defendant's executions is conducted in accordance
-
-with the Tennessee and U.S. Constitutions. Movant relies on an alleged
-
-exigency of its own making by rushing to avoid the expiration of drugs in an
-
-Untested Protocol that Movant only recently indicated it intends to use.
-
-Movant's self-created sense of urgency cannot be allowed to outweigh
-
-the irrevocable and fatal consequence of depriving due process to Defendant.
-
-A.    This Court Has Made Clear That Defendant Has The Right to Challenge New Methods Of Execution.
-
-In West v. Schofield, 468 S.W.3d 482, 494 (Tenn. 2015), this Court
-
-acknowledged that Defendant should be afforded a right to challenge a new
-
-method of execution and required that Defendant be given notice of any use
-
-of a new method of execution to provide time for Defendant to file a
-
-declaratory judgment action. See id. Because the chemicals in the Untested
-
-Protocol constitute an entirely new method of execution, West v. Schofield
-
-dictates that Defendant be granted a chance to fully challenge, vet, and
-
-litigate the constitutionality of the Untested Protocol. Id. Defendant seeks to
-
-stay his executions for this purpose, as contemplated by this Court. See id.
-
-("Should the Inmates need additional time to litigate future ripe challenges
-
-to electrocution, the Inmates may seek stays from this Court."). As
-
-acknowledged by this Court, due process requires that Defendant be
-
-afforded the chance to fully litigate the constitutionality of the Untested
-
-Protocol before he is executed with it.
-
-B.      Defendant's Due Process Rights Are Heightened by the Eighth Amendment's Protections.
-
-The Untested Protocol consists of midazolam, a sedative that has no
-
-anesthetic effect; vecuronium bromide, a paralytic designed only to mask
-
-signs of discomfort and pain; and potassium chloride, a poison that kills
-
-with extreme pain. Defendant asserts that this new cocktail "presents a risk
-
-that is sure or very likely to cause serious illness and needless suffering,
-
-amounting to an objectively intolerable risk of harm," in contravention of
-
-the Eighth Amendment. See Glossip, 135 S.Ct. at 2736 (internal quotations
-
-omitted). The Eighth Amendment's prohibition against cruel and unusual[^3]
-
-punishment amplifies the need for due process and, in turn, for Defendant
-
-to receive a full trial on the merits of his Eighth Amendment challenge.
-
-The United States Supreme Court has consistently held that the
-
-Eighth Amendment demands regular re-evaluation of what constitutes cruel
-
-and unusual punishment. "To enforce the Constitution's protection of
-
-human dignity," when a punishment is challenged, courts must "look to the
-
-evolving standards of decency that mark the progress of a maturing society."
-
-Moore v. Texas, 137 S.Ct. 1039, 1048 (2017) (internal quotations omitted).
-
-In this way, the Eighth Amendment "is not fastened to the obsolete." Id.
-
-(internal quotations omitted).
-
-Supreme Court cases over time have illustrated the nation's fidelity
-
-to this concept. For instance, the Supreme Court determined that the
-
-Eighth Amendment did not prohibit the execution of juvenile offenders
-
-between the ages of 15 and 18 in 1989, and "[a] plurality of the Court also
-
-`emphatically reject[ed]' the suggestion that the Court should bring its own
-
-judgment to bear on the acceptability of the juvenile death penalty." Roper
-
-V. Simmons, 543 U.S. 551, 562 (2005) (quoting Stanford v. Kentucky,
-
-492 U.S. 361, 377-78 (1989)). The Court later determined that the Eighth
-
-Amendment prohibits the imposition of the death penalty on juveniles
-
-under the age of eighteen. See id. The Court also later reversed a prior
-
-ruling when it held that the Eighth Amendment exempts from the death
-
-penalty individuals with intellectual disabilities. See id.(discussing Penry v.
-
-Lynaugh, 492 U.S. 302(1989) and Atkins v. Virginia, 536 U.S. 304(2002)).
-
-As evidence arises that a punishment is cruel and unusual, as it has
-
-here, the government must re-evaluate the punishment's constitutionality
-
-and reaffirm the compact with the citizenry that they shall be treated with
-
-dignity. Casting aside Defendant's Due Process rights as if they were less
-
-valuable than the perishable drugs that will kill him would utterly
-
-eviscerate Defendant's dignity and violate the Eighth Amendment.
-
-Therefore, Due Process, heightened by the Eighth Amendment
-
-considerations inherent in the Chancery Court Action, should lead this
-
-Court to decline to hasten Defendant's executions without affording him the
-
-opportunity to challenge the Untested Protocol.
+Therefore, Due Process, heightened by the Eighth Amendment considerations inherent in the Chancery Court Action, should lead this Court to decline to hasten Defendant’s executions without affording him the opportunity to challenge the Untested Protocol.
 
 # CONCLUSION
 
-Granting the State's Motion to Set Execution Dates without affording
-
-Defendant an opportunity to present his case fully in the Chancery Court
-
-Action would deprive Defendant of his due process rights and work an
-
-irreversible injustice upon him Undersigned counsel respectfully ask the
-
-Court to afford Defendant this basic and fundamental opportunity.
-
+Granting the State’s Motion to Set Execution Dates without affording Defendant an opportunity to present his case fully in the Chancery Court Action would deprive Defendant of his due process rights and work an irreversible injustice upon him Undersigned counsel respectfully ask the Court to afford Defendant this basic and fundamental opportunity.
 
 [^1]: The U.S. Supreme Court has also not addressed the Untested Protocol. Although it analyzed the use of midazolam in executions in Glossip v. Gross, 135 S.Ct. 2726 (2015), the Court found only that the parties in that case had not met their burden of proving the requisite level of risk of harm. Since that time, evidence of the harm caused by the use of midazolam in executions has compounded, and states are moving away from its use.
 
-[^2]: Movant's Motion actually demonstrates that Movant is aware of the distinction between the Untested Protocol and pentobarbital, having anticipated a challenge to the Untested Protocol, most likely from widespread media coverage of horribly botched executions using midazolam. See Mot. to Set Execution Dates at 4. ("Pointing to anecdotal evidence from news reports, defendants (sic) will argue that midazolam is not effective in preventing pain and suffering caused by the second and third drugs of the protocol.").
+[^2]: Movant’s Motion actually demonstrates that Movant is aware of the distinction between the Untested Protocol and pentobarbital, having anticipated a challenge to the Untested Protocol, most likely from widespread media coverage of horribly botched executions using midazolam. See Mot. to Set Execution Dates at 4. (“Pointing to anecdotal evidence from news reports, defendants (sic) will argue that midazolam is not effective in preventing pain and suffering caused by the second and third drugs of the protocol.”).
 
 [^3]: Technically, Defendant will not seek a stay because Movant has not waited for the Court to set executions in its ordinary course of business, but instead seeks the extraordinary relief of expediting those executions. Accordingly, the proper method to challenge this effort is to oppose the Motion to Set Execution Dates.
-
