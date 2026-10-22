@@ -1,3 +1,12 @@
 # SCACR 208(b)(5): a principal brief (respondent's brief, SC-ANS-002) does not exceed fifty (50) pages.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
   page_limit: 50
+  cross_engine: gate
+  # LaTeX loses a footnote whose mark follows the token after a section sign ("§ 8-21-30.[^2]"): the shared model
+  # holds that token unbroken (lib/pandoc/xdoc.lua hold_sign_tokens), mark and all, in a box LaTeX drops the note from
+  # (INPUT-answering-brief, page 10, footnote 2); every page after it shifts. Reported, not gated, until the shared
+  # model stops the held token at a note (docs/open-items/fb-595.54.49.md).
+  cross_engine_latex: report

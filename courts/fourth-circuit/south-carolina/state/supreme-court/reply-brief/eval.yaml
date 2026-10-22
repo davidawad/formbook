@@ -1,3 +1,14 @@
 # SC-ANS-002 is for principal briefs; reply briefs are limited to 25 pages (SC-REP-002, SCACR 208(b)(5)).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
   page_limit: 25
+  cross_engine: gate
+  # LaTeX sets the box bar of "SMITH│ROBINSON" (counsel and signature) as newtx's glyph centred in a box of Liberation
+  # Serif's advance, so the PDF text splits the word in three (the cross-engine diff joins that split for LibreOffice
+  # only): pages 2 and 17. LibreOffice splits footnote 1 over pages 15 and 16 where typst moves its line on with it
+  # (the open note-placement request of docs/open-items/fb-595.54.82.md). Both reported, not gated
+  # (docs/open-items/fb-595.54.49.md).
+  cross_engine_latex: report
+  cross_engine_docx: report

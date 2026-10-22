@@ -1,3 +1,14 @@
 # SCACR 208(b)(5): a principal brief (SC-MER-003) does not exceed fifty (50) pages.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
   page_limit: 50
+  cross_engine: gate
+  # LaTeX loses the footnotes whose marks follow the token after a pilcrow ("Bodde Aff. ¶ 11).[^5]"): the shared model
+  # holds that token unbroken (lib/pandoc/xdoc.lua hold_sign_tokens), mark and all, in a box LaTeX drops the note from
+  # (INPUT-brief-on-the-merits, page 13, footnotes 5 and 6); the pages after it shift. Word sets one body line more
+  # above a long note than typst (page 20, footnote 12; the open "Word's footnote area" request of
+  # docs/open-items/fb-595.54.82.md). Both reported, not gated (docs/open-items/fb-595.54.49.md).
+  cross_engine_latex: report
+  cross_engine_docx: report
