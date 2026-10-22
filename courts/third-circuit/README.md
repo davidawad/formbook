@@ -12,12 +12,12 @@ Courts under `courts/third-circuit` (18).
 | [District Court, D. New Jersey](new-jersey/federal/district) | `njd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Pennsylvania](pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, M.D. Pennsylvania](pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States Bankruptcy Court, W.D. Pennsylvania](pennsylvania/federal/bankruptcy-western-district) | `pawb` | up for review | 2/2 | — | 1/2 | 14 |
-| [District Court, E.D. Pennsylvania](pennsylvania/federal/eastern-district) | `paed` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, M.D. Pennsylvania](pennsylvania/federal/middle-district) | `pamd` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, W.D. Pennsylvania](pennsylvania/federal/western-district) | `pawd` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, D. Virgin Islands](virgin-islands/federal/bankruptcy-district) | `vib` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, Virgin Islands](virgin-islands/federal/district) | `vid` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, W.D. Pennsylvania](pennsylvania/federal/bankruptcy-western-district) | `pawb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Pennsylvania](pennsylvania/federal/eastern-district) | `paed` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, M.D. Pennsylvania](pennsylvania/federal/middle-district) | `pamd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, W.D. Pennsylvania](pennsylvania/federal/western-district) | `pawd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, D. Virgin Islands](virgin-islands/federal/bankruptcy-district) | `vib` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, Virgin Islands](virgin-islands/federal/district) | `vid` | up for review | 2/2 | — | 2/2 | 14 |
 | [Delaware Supreme Court](delaware/state/supreme-court) | `del` | up for review | 5/5 | — | — | 29 |
 | [Supreme Court of New Jersey](new-jersey/state/supreme-court) | `nj` | up for review | 5/5 | — | — | 29 |
 | [Commonwealth Court of Pennsylvania](pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | 7/7 | — | — | 29 |
