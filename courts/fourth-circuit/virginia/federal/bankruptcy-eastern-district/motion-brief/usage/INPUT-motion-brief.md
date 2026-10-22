@@ -26,7 +26,7 @@ signature:
   signer: David C. Jones, Jr.
   lines:
     - VSB 37483
-    - 10617 Jones Street, #301-A
+    - "10617 Jones Street, #301-A"
     - Fairfax, Virginia 22030
     - (703) 273-7350
     - davidcjonesjr@gmail.com
