@@ -35,9 +35,12 @@ cover:
           - {width: 144, valign: center, blocks: [{text: "{designation}", align: right}]}
         gutter: 12
         above: 21.6
-  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 72}
+  # the title centred in the space between the caption and counsel, counsel at the foot of the page (the old
+  # template's v(1fr) on each side of the title)
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true, upper: true}
+  - {fill: 1}
   - each: counsel
-    above: 72
     blocks:
       - {text: "{names}", bold: true, left: 230.4, above: 7.2}
       - {text: "{lines}", left: 230.4}

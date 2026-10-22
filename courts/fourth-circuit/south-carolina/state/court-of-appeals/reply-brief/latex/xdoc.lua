@@ -118,15 +118,19 @@ return require("latex.xdoc")({
       },
     },
     {
+      ["fill"] = 1,
+    },
+    {
       ["text"] = "{brief_title}",
       ["align"] = "center",
       ["bold"] = true,
       ["upper"] = true,
-      ["above"] = 72,
+    },
+    {
+      ["fill"] = 1,
     },
     {
       ["each"] = "counsel",
-      ["above"] = 72,
       ["blocks"] = {
         {
           ["text"] = "{names}",
