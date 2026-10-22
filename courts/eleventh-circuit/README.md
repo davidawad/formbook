@@ -32,7 +32,7 @@ Courts under `courts/eleventh-circuit` (32).
 | [Florida First District Court of Appeal](florida/state/first-district-court-of-appeal) | `fladistctapp1` | up for review | 8/8 | — | — | 29 |
 | [Florida Fourth District Court of Appeal](florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | up for review | 8/8 | — | — | 29 |
 | [Florida Second District Court of Appeal](florida/state/second-district-court-of-appeal) | `fladistctapp2` | up for review | 8/8 | — | — | 29 |
-| [Florida Sixth District Court of Appeal](florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | up for review | 7/7 | — | — | 29 |
+| [Florida Sixth District Court of Appeal](florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Florida Supreme Court](florida/state/supreme-court) | `fla` | up for review | 9/9 | — | — | 29 |
 | [Florida Third District Court of Appeal](florida/state/third-district-court-of-appeal) | `fladistctapp3` | up for review | 8/8 | 1/1 | 1/1 | 29 |
 | [Georgia Court of Appeals](georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | 3/3 | 6/6 | 29 |

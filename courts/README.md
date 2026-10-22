@@ -131,7 +131,7 @@ Courts under `courts` (346).
 | [Louisiana Court of Appeal](fifth-circuit/louisiana/state/court-of-appeal) | `lactapp` | up for review | 6/6 | 5/5 | 5/5 | 29 |
 | [Supreme Court of Louisiana](fifth-circuit/louisiana/state/supreme-court) | `la` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | up for review | 5/5 | 5/5 | 4/4 | 29 |
-| [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | 7/7 | 1/1 | 1/1 | 29 |
+| [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | 7/7 | 5/5 | 5/5 | 29 |
 | [Court of Civil Appeals of Texas](fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | 2/2 | 4/5 | 29 |
 | [Court of Criminal Appeals of Texas](fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | 1/1 | 3/3 | 29 |
 | [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | 2/2 | 2/2 | 29 |
@@ -342,7 +342,7 @@ Courts under `courts` (346).
 | [Florida First District Court of Appeal](eleventh-circuit/florida/state/first-district-court-of-appeal) | `fladistctapp1` | up for review | 8/8 | — | — | 29 |
 | [Florida Fourth District Court of Appeal](eleventh-circuit/florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | up for review | 8/8 | — | — | 29 |
 | [Florida Second District Court of Appeal](eleventh-circuit/florida/state/second-district-court-of-appeal) | `fladistctapp2` | up for review | 8/8 | — | — | 29 |
-| [Florida Sixth District Court of Appeal](eleventh-circuit/florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | up for review | 7/7 | — | — | 29 |
+| [Florida Sixth District Court of Appeal](eleventh-circuit/florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Florida Supreme Court](eleventh-circuit/florida/state/supreme-court) | `fla` | up for review | 9/9 | — | — | 29 |
 | [Florida Third District Court of Appeal](eleventh-circuit/florida/state/third-district-court-of-appeal) | `fladistctapp3` | up for review | 8/8 | 1/1 | 1/1 | 29 |
 | [Georgia Court of Appeals](eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | 3/3 | 6/6 | 29 |
