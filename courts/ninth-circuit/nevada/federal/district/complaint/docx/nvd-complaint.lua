@@ -20,7 +20,8 @@ local LINES = 28                         -- typst lines-per-page (LR IA 10-1(a)(
 local INDENT = 720                       -- typst para-indent, 0.5 in
 local TEXTW = 8640                       -- 6 in: 8.5 in less the 1.5 in and 1 in margins
 local CAP_LEFT, CAP_GUTTER = 4608, 288   -- typst caption-left 3.2 in, caption-gutter 0.2 in
-local CAP_PAD, CAP_BOTTOM = 200, 174     -- typst caption-pad 10 pt, caption-bottom 8.7 pt
+local CAP_PAD, CAP_BOTTOM = 200, 159     -- typst caption-pad 10 pt, caption-bottom 8.7 pt less the 0.75 pt (15 twips) of
+                                         -- the bottom rule, which LibreOffice adds to the row and typst draws over the inset
 local CAP_RIGHT_PAD = 144                -- typst caption-right-pad 0.1 in
 local DESIG = 1728                       -- typst designation-indent 1.2 in
 local HANG = 504                         -- typst summary-hang 0.35 in
