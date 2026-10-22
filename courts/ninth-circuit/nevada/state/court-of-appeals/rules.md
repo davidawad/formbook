@@ -62,6 +62,7 @@ Verified against the source above on 2026-10-22.
 | NEVAPP-MOT-005 | A motion that relies on a word count carries a certificate of the word count. The Rule 27(d)(2) limit in the capture is a page limit only; no motion word limit is printed there, so this row applies only if a current rule states one. | NRAP 27(d)(2); 32(a)(9)(B) | A |
 | NEVAPP-MOT-006 | A caption that names the Court of Appeals of the State of Nevada, the docket number, the case title, and the party on whose behalf the motion is filed. | NRAP 27(d)(1)(B) | M |
 | NEVAPP-MOT-007 | The motion's form (typeface, type style, spacing, margins and page numbers) follows NRAP 27(d)(1)(D)-(E), which apply the NRAP 32(a)(4)-(6) requirements, including the 14-point proportional typeface. | NRAP 27(d)(1)(D)-(E); 32(a)(5)(A) | M |
+| NEVAPP-MOT-008 | Convention, not rule: the caption page unnumbered and the motion numbered from 1 after it, a centered counsel block on the caption page, the signature block right of center. | exemplar (motion-brief/usage/SOURCE.md) | C |
 
 ## Electronic filing and service
 
