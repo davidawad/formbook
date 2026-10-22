@@ -15,8 +15,12 @@
 //     number (the LaTeX and Word filters bind them with a no-break space);
 //   - lists: the number or bullet in a box of `list-indent` at the margin, the text hanging after it, with no space
 //     of their own (`list-indent: none` keeps typst's lists).
-//   - no footnote widows: a paragraph whose last line carries a footnote that does not fit with it carries its
-//     second-to-last line over too, as LaTeX and Word do (widow-start, below; fb-595.54.9).
+//   - with `footnote-widows: false`, no footnote widows: a paragraph whose last line carries a footnote that does not
+//     fit with it carries its second-to-last line over too, as LaTeX and Word do (widow-start, below; fb-595.54.9).
+//     Opt-in: by default typst may set such a widow, and the LaTeX and Word filters turn widow control off for a
+//     paragraph that anchors a footnote instead (the federal-circuit folders, fb-595.54.6); the rule's layout can
+//     fail to settle in a long document whose notes move between passes, so a template enables it only where it
+//     renders without warnings.
 // The template keeps its own numbers: type size, pitches (`edges`), spacings, indents, page column widths.
 
 /// The line box of a pitch: the baseline at 0.8 of it (Word's exact line spacing; LaTeX \pdfeachlineheight).
@@ -89,7 +93,7 @@
   if widow or query(<xe-float>).any(f => f.value.par == s) [#metadata(s)<xe-widow>]
 }
 
-#let xengine(pitch: none, list-indent: 0.5in, body) = {
+#let xengine(pitch: none, list-indent: 0.5in, footnote-widows: true, body) = {
   if pitch == none { panic("xengine: `pitch` (the body's line pitch) is required") }
   set text(hyphenate: false, kerning: false, ligatures: false, ..edges(pitch))
   set par(leading: 0pt, spacing: 0pt, linebreaks: "simple", justify: false)
@@ -124,10 +128,12 @@
   show list: it => if list-indent == none { it } else {
     for item in it.children { list-item([•], item.body) }
   }
-  // No footnote widows (widow-start, above).
-  show par: it => [#widow-start(it)<xe-ps>#it#metadata(none)<xe-pe>]
-  show footnote: it => it + widow-check()
-  body
+  // No footnote widows (widow-start, above), when the template asks for it.
+  if footnote-widows { body } else {
+    show par: it => [#widow-start(it)<xe-ps>#it#metadata(none)<xe-pe>]
+    show footnote: it => it + widow-check()
+    body
+  }
 }
 
 /// One row of a table of contents or of authorities: the text wraps before a column of width `col` kept for the

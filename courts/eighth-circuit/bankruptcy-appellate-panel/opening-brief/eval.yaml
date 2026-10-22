@@ -70,6 +70,13 @@ checks:
     method: toc_layout
     expect: "every page reference ends its entry's last line after dot leaders; >= 2 pt clear below the column heading's rule (passes with no table)"
     fix: {anchor: "outline"}
+  - id: DEF-COVER-001
+    gate: 1
+    kind: T
+    name: the cover is exactly one page (the pages before the first page number), and the first page after it prints the expected number
+    method: cover_pages
+    expect: "params.cover_pages (1) unnumbered pages, then 1, i or C-1 (or the physical page number, the cover counted); a document numbered from page 1 prints 1 there"
+    fix: {anchor: "set page("}
 
   - id: BAP8-FORM-003
     gate: 1

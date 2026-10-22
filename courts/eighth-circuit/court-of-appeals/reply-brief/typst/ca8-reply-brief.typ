@@ -399,7 +399,9 @@
   // The cross-engine layout model (lib/typst/xengine.typ): first fit, no kerning or ligatures, no hyphenation, line
   // boxes of the body pitch, footnote marks at 58 %, lists with the number in a half-inch box, a section sign or
   // pilcrow kept with its number, no break inside "1692f(1)".
-  show: xengine.with(pitch: pitch-double, list-indent: para-indent)
+  // footnote-widows: false: a paragraph whose last line carries a footnote moves on with its second-to-last line, as
+  // LaTeX and Word set it (lib/typst/xengine.typ, fb-595.54.9)
+  show: xengine.with(pitch: pitch-double, list-indent: para-indent, footnote-widows: false)
   // No widows or orphans, as LaTeX (\widowpenalty 10000) and Word's widow control forbid them; typst's default only
   // charges for one, and a long footnote could make it take a widow the other engines refuse.
   set text(costs: (widow: 10000%, orphan: 10000%))
