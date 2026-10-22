@@ -76,46 +76,53 @@ authorities:
     kind: case
     name: "Appalachian Power Co. v. State Corp. Commission"
     cite: "301 Va. 257 (2022)"
+    sort: "appalachian power co v state corp commission 301 va 257 2022"
   alger:
     kind: case
     name: "Alger v. Commonwealth"
     cite: "267 Va. 255 (2004)"
+    sort: "alger v commonwealth 267 va 255 2004"
   williams:
     kind: case
     name: "Commonwealth v. Williams"
     cite: "295 Va. 90 (2018)"
+    sort: "commonwealth v williams 295 va 90 2018"
   charlottesville-payne:
     kind: case
     name: "City of Charlottesville v. Payne"
     cite: "299 Va. 515 (2021)"
+    sort: "city of charlottesville v payne 299 va 515 2021"
   berner:
     kind: case
     name: "Berner v. Mills"
     cite: "265 Va. 408 (2003)"
+    sort: "berner v mills 265 va 408 2003"
   martin-v-hadix:
     kind: case
     name: "Martin v. Hadix"
     cite: "527 U.S. 343 (1999)"
+    sort: "martin v hadix 527 us 343 1999"
   landgraf:
     kind: case
     name: "Landgraf v. USI Film Prod."
     cite: "511 U.S. 244 (1994)"
+    sort: "landgraf v usi film prod 511 us 244 1994"
   va-code-53-1-202-3:
     kind: statute
-    name: "Va. Code Ann. § 53.1-202.3"
-    cite: ""
+    cite: "Va. Code Ann. § 53.1-202.3"
+    sort: " va code ann  5312023"
   va-code-1-13-39-3:
     kind: statute
-    name: "Va. Code § 1–13.39:3"
-    cite: ""
+    cite: "Va. Code § 1–13.39:3"
+    sort: " va code  113393"
   va-code-8-01-273-1:
     kind: statute
-    name: "Va. Code § 8.01–273.1"
-    cite: ""
+    cite: "Va. Code § 8.01–273.1"
+    sort: " va code  8012731"
   va-code-38-2-5001:
     kind: statute
-    name: "Va. Code § 38.2–5001"
-    cite: ""
+    cite: "Va. Code § 38.2–5001"
+    sort: " va code  3825001"
 ---
 
 In this case, two pieces of legislation addressing the earned sentence credit statute were passed in different General Assembly sessions but took effect simultaneously. H.B. 5148, which passed in 2020, is explicitly retroactive, dictating that enhanced credits be awarded as to the entirety of eligible sentences. Budget Item 404(R), passed in 2022 as part of a temporary budget bill directing appropriations for a two-year period, has no explicit statement of retroactive intent. Although Respondent-Appellees (hereinafter “VDOC”) argue that applying Budget Item 404(R) to render Mr. Anderson ineligible for enhanced sentence credits on his time served prior to the effective date of the Budget Item both reflects legislative intent and does not constitute a retroactive application of the law, this interpretation is not supported by the plain language of the Budget Item and is not permissible under this Court’s precedents.[^1]

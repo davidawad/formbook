@@ -74,184 +74,233 @@ authorities:
     kind: case
     name: "Adams v. Alliant Techsystems"
     cite: "261 Va. 594 (2001)"
+    sort: "adams v alliant techsystems 261 va 594 2001"
   american-cyanamid-v-commonwealth:
     kind: case
     name: "American Cyanamid Co. v. Commonwealth"
     cite: "187 Va. 831 (1948)"
+    sort: "american cyanamid co v commonwealth 187 va 831 1948"
   appalachian-power-v-scc:
     kind: case
     name: "Appalachian Power Co. v. State Corp. Commission"
     cite: "__ Va. __, 876 S.E.2d 349 (2022)"
+    sort: "appalachian power co v state corp commission  va  876 se2d 349 2022"
   bailey-v-spangler:
     kind: case
     name: "Bailey v. Spangler"
     cite: "289 Va. 353 (2015)"
+    sort: "bailey v spangler 289 va 353 2015"
   brown-v-lukhard:
     kind: case
     name: "Brown v. Lukhard"
     cite: "229 Va. 316 (1985)"
+    sort: "brown v lukhard 229 va 316 1985"
   carter-v-nelms:
     kind: case
     name: "Carter v. Nelms"
     cite: "204 Va. 338 (1963)"
+    sort: "carter v nelms 204 va 338 1963"
   city-of-charlottesville-v-payne:
     kind: case
     name: "City of Charlottesville v. Payne"
     cite: "299 Va. 515 (2021)"
+    sort: "city of charlottesville v payne 299 va 515 2021"
   conyers-v-martial-arts-world:
     kind: case
     name: "Conyers v. Martial Arts World of Richmond, Inc."
     cite: "273 Va. 96 (2007)"
+    sort: "conyers v martial arts world of richmond inc 273 va 96 2007"
   day-v-pickett:
     kind: case
     name: "Day v. Pickett"
     cite: "18 Va. (4 Munf.) 104, 109 (1813)"
+    sort: "day v pickett 18 va 4 munf 104 109 1813"
   eaton-v-davis:
     kind: case
     name: "Eaton v. Davis"
     cite: "176 Va. 330 (1940)"
+    sort: "eaton v davis 176 va 330 1940"
   ewell-v-murray:
     kind: case
     name: "Ewell v. Murray"
     cite: "11 F.3d 482 (4th Cir. 1993)"
+    sort: "ewell v murray 11 f3d 482 4th cir 1993"
   ferguson-v-ferguson:
     kind: case
     name: "Ferguson v. Ferguson"
     cite: "169 Va. 77 (1937)"
+    sort: "ferguson v ferguson 169 va 77 1937"
   gilmore-v-landsidle:
     kind: case
     name: "Gilmore v. Landsidle"
     cite: "252 Va. 388 (1996)"
+    sort: "gilmore v landsidle 252 va 388 1996"
   gionis-v-commonwealth:
     kind: case
     name: "Gionis v. Commonwealth"
     cite: "76 Va. App. 1 (2022)"
+    sort: "gionis v commonwealth 76 va app 1 2022"
   goodwin-v-commonwealth:
     kind: case
     name: "Goodwin v. Commonwealth"
     cite: "No. 0312-22-3, 2022 WL 16823537 (Va. Ct. App. Nov. 9, 2022)"
+    sort: "goodwin v commonwealth no 0312223 2022 wl 16823537 va ct app nov 9 2022"
   green-v-commonwealth:
     kind: case
     name: "Green v. Commonwealth"
     cite: "75 Va. App. 69 (2022)"
+    sort: "green v commonwealth 75 va app 69 2022"
   hewitt-v-helms:
     kind: case
     name: "Hewitt v. Helms"
     cite: "459 U.S. 460 (1983)"
+    sort: "hewitt v helms 459 us 460 1983"
   kentucky-dept-of-corrections-v-thompson:
     kind: case
     name: "Kentucky Department of Corrections v. Thompson"
     cite: "490 U.S. 454 (1989)"
+    sort: "kentucky department of corrections v thompson 490 us 454 1989"
   landgraf-v-usi-film-prod:
     kind: case
     name: "Landgraf v. USI Film Prod."
     cite: "511 U.S. 244 (1994)"
+    sort: "landgraf v usi film prod 511 us 244 1994"
   lynce-v-mathis:
     kind: case
     name: "Lynce v. Mathis"
     cite: "519 U.S. 433 (1997)"
+    sort: "lynce v mathis 519 us 433 1997"
   martin-v-hadix:
     kind: case
     name: "Martin v. Hadix"
     cite: "527 U.S. 343 (1999)"
+    sort: "martin v hadix 527 us 343 1999"
   mccarthy-v-commonwealth:
     kind: case
     name: "McCarthy v. Commonwealth"
     cite: "73 Va. App. 630 (2021)"
+    sort: "mccarthy v commonwealth 73 va app 630 2021"
   palmer-v-atlantic-coast-pipeline:
     kind: case
     name: "Palmer v. Atl. Coast Pipeline, LLC"
     cite: "293 Va. 573 (2017)"
+    sort: "palmer v atl coast pipeline llc 293 va 573 2017"
   riddett-v-virginia-elec-power:
     kind: case
     name: "Riddett v. Virginia Elec. & Power Co."
     cite: "255 Va. 23 (1998)"
+    sort: "riddett v virginia elec  power co 255 va 23 1998"
   rotonda-condo-v-rotonda-assocs:
     kind: case
     name: "Rotonda Condo. Unit Owners Ass'n v. Rotonda Assocs."
     cite: "238 Va. 85 (1989)"
+    sort: "rotonda condo unit owners assn v rotonda assocs 238 va 85 1989"
   sch-bd-norfolk-v-us-gypsum:
     kind: case
     name: "Sch. Bd. of City of Norfolk v. U.S. Gypsum Co."
     cite: "234 Va. 32 (1987)"
+    sort: "sch bd of city of norfolk v us gypsum co 234 va 32 1987"
   school-bd-chesterfield-v-school-bd-richmond:
     kind: case
     name: "School Board of Chesterfield County v. School Board of the City of Richmond"
     cite: "219 Va. 244 (1978)"
+    sort: "school board of chesterfield county v school board of the city of richmond 219 va 244 1978"
   shiflet-v-eller:
     kind: case
     name: "Shiflet v. Eller"
     cite: "228 Va. 115 (1984)"
+    sort: "shiflet v eller 228 va 115 1984"
   shilling-v-commonwealth:
     kind: case
     name: "Shilling v. Commonwealth"
     cite: "4 Va. App. 500 (1987)"
+    sort: "shilling v commonwealth 4 va app 500 1987"
   taylor-v-commonwealth:
     kind: case
     name: "Taylor v. Commonwealth"
     cite: "44 Va. App. 179 (2004)"
+    sort: "taylor v commonwealth 44 va app 179 2004"
   town-of-culpeper-v-virginia-elec-power:
     kind: case
     name: "Town of Culpeper v. Virginia Elec. & Power Co."
     cite: "215 Va. 189 (1974)"
+    sort: "town of culpeper v virginia elec  power co 215 va 189 1974"
   tvardek-v-powhatan-vill-homeowners:
     kind: case
     name: "Tvardek v. Powhatan Vill. Homeowners Ass'n, Inc."
     cite: "291 Va. 269 (2016)"
+    sort: "tvardek v powhatan vill homeowners assn inc 291 va 269 2016"
   weaver-v-graham:
     kind: case
     name: "Weaver v. Graham"
     cite: "450 U.S. 24 (1981)"
+    sort: "weaver v graham 450 us 24 1981"
   wilkins-v-commonwealth:
     kind: case
     name: "Wilkins v. Commonwealth"
     cite: "292 Va. 2 (2016)"
+    sort: "wilkins v commonwealth 292 va 2 2016"
   wolff-v-mcdonnell:
     kind: case
     name: "Wolff v. McDonnell"
     cite: "418 U.S. 539 (1974)"
+    sort: "wolff v mcdonnell 418 us 539 1974"
   va-code-18-2-478:
     kind: statute
     cite: "Va. Code Ann. § 18.2-478"
+    sort: " va code ann  182478"
   va-code-18-2-48-1:
     kind: statute
     cite: "Va. Code Ann. § 18.2-48.1"
+    sort: " va code ann  182481"
   va-code-18-2-57:
     kind: statute
     cite: "Va. Code Ann. § 18.2-57"
+    sort: " va code ann  18257"
   va-code-53-1-202-2-a:
     kind: statute
     cite: "Va. Code Ann. § 53.1-202.2(A)"
+    sort: " va code ann  5312022a"
   va-code-53-1-202-3:
     kind: statute
     cite: "Va. Code Ann. § 53.1-202.3"
+    sort: " va code ann  5312023"
   michie-jurisprudence-statutes-17:
     kind: other
     cite: "17 Michie's Jurisprudence Statutes § 73 (1979)"
+    sort: " 17 michies jurisprudence statutes  73 1979"
   hb-30-2022:
     kind: other
     cite: "H.B. 30, 2022 Gen. Assemb., Reg. Sess. (Va. 2022) (available at https://budget.lis.virginia.gov/get/budget/4623/HB30/)"
+    sort: " hb 30 2022 gen assemb reg sess va 2022 available at httpsbudgetlisvirginiagovgetbudget4623hb30"
   hb-5001-1994:
     kind: other
     cite: "H.B. 5001, 1994 Gen. Assemb., Spec. Sess. II (Va. 1994)"
+    sort: " hb 5001 1994 gen assemb spec sess ii va 1994"
   hb-5148-2020:
     kind: other
     cite: "H.B. 5148, 2020 Gen. Assemb., Spec. Sess. I (Va. 2020)"
+    sort: " hb 5148 2020 gen assemb spec sess i va 2020"
   hjr-res-455-2022:
     kind: other
     cite: "H.R.J. Res. 455, 2022 Gen. Assemb., Reg. Sess. (Va. 2022)"
+    sort: " hrj res 455 2022 gen assemb reg sess va 2022"
   boysko-washington-post-2022:
     kind: other
     cite: "Jennifer Boysko, An important Virginia criminal reform is threatened, THE WASHINGTON POST (June 16, 2022)"
+    sort: " jennifer boysko an important virginia criminal reform is threatened the washington post june 16 2022"
   dashiell-wdbj7-2022:
     kind: other
     cite: "Joe Dashiell, Expansion of earned sentence credits to clear the way for release of state inmates, WDBJ7 (May 17, 2022)"
+    sort: " joe dashiell expansion of earned sentence credits to clear the way for release of state inmates wdbj7 may 17 2022"
   joint-appendix:
     kind: other
     cite: "Joint Appendix"
+    sort: " joint appendix"
   oliver-virginia-mercury-2020:
     kind: other
     cite: "Ned Oliver, Thousands of Virginia prisoners could be released early under new earned sentence credit program, VIRGINIA MERCURY (October 26, 2020)"
+    sort: " ned oliver thousands of virginia prisoners could be released early under new earned sentence credit program virginia mercury october 26 2020"
 ---
 
 # INTRODUCTION

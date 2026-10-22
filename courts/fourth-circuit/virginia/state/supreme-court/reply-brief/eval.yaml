@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # BLOCKED in LaTeX: lib/latex/xdoc.lua binds the token after "§" in an \mbox, and a footnote called at the token's
+  # end ("Va. Code Ann. § 53.1-202.3.[^4]", INPUT-reply-brief page 8) goes into the box, where LaTeX drops it: the
+  # LaTeX render prints the mark 4 and loses the note (XENG-003, page 8). A shared-model fix (the note outside the
+  # box); reported, not gated (docs/open-items/fb-595.54.35.md).
+  cross_engine_latex: report
