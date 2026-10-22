@@ -1,0 +1,13 @@
+# Uniform Rules of Louisiana Courts of Appeal, Rule 2-12.2(D)(2) (../rules.md, LACTAPP-FORM-002): 14-point or larger,
+# all text and footnotes.
+font:
+  size_pt: 14
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12).
+# Reported, not gated: the differences are the shared model's (docs/open-items/fb-595.54.58.md, requests 6, 7, 8).
+params:
+  cross_engine: report
+  # latex and docx: "Uniform Rule 4-3." ends a paragraph on the last line of p6; LaTeX and Word read page 6, typst marks
+  # it on p7 (table of authorities, p5 line 13). The spaced ellipsis "services . . . ." breaks between its periods in
+  # pdfTeX and LibreOffice, not in typst (p13 line 16). docx: LibreOffice breaks a long URL of footnote 5 elsewhere and
+  # pages 13 to 18 start a line earlier.

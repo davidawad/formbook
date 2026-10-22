@@ -251,7 +251,7 @@ The trial court did not commit reversible error in this case. First, Louisiana�
 
 [^1]: Though a 50-foot permanent right of way is necessary to ensure safe distances between the Bayou Bridge pipeline and the pre-existing pipeline that Bayou Bridge paralleled across the property, Bayou Bridge cleared only 30 feet of its 50-foot right-of-way and will maintain this smaller dimension in the future.
 [^2]: Prior to filing the expropriation action, Bayou Bridge acquired more than 400 easements, including the owners with the largest interest and who had consistently paid the property taxes since 1956.
-[^3]: Appellants’ ownership was stipulated as follows: (1) Theda Larson Wright ‒ 0.0000994, (2) Peter K. Aaslestad ‒ 0.0005803, and (3) Katherine Aaslestad ‒ 0.0005803.
+[^3]: Appellants’ ownership was stipulated as follows: (1) Theda Larson Wright – 0.0000994, (2) Peter K. Aaslestad – 0.0005803, and (3) Katherine Aaslestad – 0.0005803.
 [^4]: The undisputed evidence showed that the U.S. Postal Service attempted delivery and left a note at the listed address stating “no secure location available.” 6 R. at 1264-66; Defendants Exh. B. Thereafter, the letter remained “available for pick-up” for several weeks before it was returned to Bayou Bridge. Defendants Exh. B.
 [^5]: The evidence established that Mr. Aaslestad’s original offer was made by Bayou Bridge in December, 2016 before current Section (B) was added to La. R.S. 19:2.2. BBP Exh. 25.
 [^6]: A best case scenario for total just compensation was: Theda Larson Wright, $0.09 (land) + $0.28 (timber) = $0.91; Peter K. Aaslestad, $0.51 (land) + $1.66 (timber) = $6.64; Katherine Aaslestad, $0.51 (land) + $1.66 (timber) = $6.64.

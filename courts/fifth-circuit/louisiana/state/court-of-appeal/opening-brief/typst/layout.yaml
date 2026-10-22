@@ -1,0 +1,70 @@
+# Court of Appeal of Louisiana (lactapp): an original or reply brief on appeal, a motion memorandum or a writ
+# application. The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are
+# generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to the Uniform Rules of Louisiana Courts
+# of Appeal, Rules 2-12.2 to 2-12.4 and 2-14 (../../rules.md, LACTAPP-*); lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant (the certificate's form text).
+size: 14                  # LACTAPP-FORM-002 (2-12.2(D)(2)): 14-point or larger, all text and footnotes
+pitch:
+  body: 32.2              # LACTAPP-FORM-004 (2-12.2(B)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # headings, block quotations, footnotes, cover and tables: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # LACTAPP-FORM-003 (2-12.2(B), (D)(2)): 1 inch on every side
+indent: 36
+page_number: {align: center, from: 2}   # LACTAPP-FORM-005: numbered consecutively; the cover carries no number
+footnote: {size: 14, pitch: 16.1}       # LACTAPP-FORM-002, -004: footnotes 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # LACTAPP-FORM-004: block quotations indented, single spaced
+# Sections centered in capitals; the argument's points numbered by the template: I., A., 1., a.
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, number: "I.", hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, number: "A.", hang: 36, above: 14, below: 11.2}
+  - {bold: true, number: "1.", hang: 36, above: 14, below: 11.2}
+  - {bold: true, italic: true, number: "a.", hang: 36, above: 14, below: 11.2}
+# LACTAPP-COV-001 (2-12.3(a)-(j)), in the rule's order: the docket number and the court, the case title, the court
+# and judge below and the kind of proceeding, the party and the nature of the brief, the kind of case, counsel.
+cover:
+  - {text: "No. {case_number}", align: center, bold: true, optional: true}
+  - {text: "{court_title}", align: center, bold: true, above: 8.4}
+  - each: caption
+    above: 14.4
+    between:
+      - {text: "v.", align: center, above: 8.4, below: 8.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true, above: 5.6}
+  - {text: "{proceeding}", align: center, optional: true, above: 14.4}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 21.6}
+  - {text: "{on_behalf_of}", align: center, optional: true, above: 8.4}
+  - {text: "{case_type}", align: center, optional: true, above: 8.4}
+  # counsel side by side across the page, as both filed covers set them (tier 2)
+  - columns: {each: counsel, per_row: 2, row_gap: 5.6, blocks: [{text: "{names}", bold: true}, {text: "{lines}", optional: true}]}
+    gutter: 28.8
+    above: 14.4
+# LACTAPP-SEC-001 (2-12.4(A)(1), (2)): a table of contents and a table of authorities with page references.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 21, above: 12.6}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 5.6}
+# The date and the signature of counsel (2-12.3(i)), never split; the certificate of service (LACTAPP-CERT-001, -002:
+# 2-14.1, 2-14.2) on its own page when there is one.
+closing:
+  - group:
+      - {text: "{date}", optional: true, indent: 36}
+      - {text: "/s/ {signature.signer}", left: 230.4, above: 22.4}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true}
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "I certify that on {service.date} a copy of the foregoing was served on all counsel of record and on each unrepresented party by {service.method}, in accordance with La. Code Civ. Proc. art. 1313, as follows:", pitch: body, indent: 36}
+      - each: service.recipients
+        blocks: [{text: "{.}", left: 36, above: 8.4}]
+      - group:
+          - {text: "/s/ {signature.signer}", left: 230.4, above: 22.4}
+          - {text: "{signature.signer}", left: 230.4}
+          - {text: "{signature.lines}", left: 230.4, optional: true}
+        above: 5.6

@@ -1,0 +1,12 @@
+# Uniform Rules of Louisiana Courts of Appeal, Rule 2-12.2(D)(2) (../rules.md, LACTAPP-FORM-002): 14-point or larger,
+# all text and footnotes.
+font:
+  size_pt: 14
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12).
+# Reported, not gated: the differences are the shared model's (docs/open-items/fb-595.54.58.md, requests 2, 4).
+params:
+  cross_engine: report
+  # latex: typst breaks after the slash in "Tier 2/section", pdfTeX does not (p25 line 11, p35 line 17; p36 starts a
+  # line later). docx: "La. Stat. Ann. § 1:4" reads page 32 where typst reads 33 (p4 line 11) and the page list of
+  # "§ 89-25(h)" sets its leader to the number (p6 line 3).
