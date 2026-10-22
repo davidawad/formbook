@@ -1,0 +1,17 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): typst and docx are on the shared layout model
+# (lib/*/xengine*; fb-595.68.36; TeX Gyre Schola in both engines) and the docx render breaks 307 of the 309 typst
+# lines alike, every page count equal; it is reported, not gated. The difference is LibreOffice's footnote placement
+# (docs/EVAL-LOOP.md, "What the federal-appellate adoption found", "Footnotes and widows"): on body page 6 the last
+# line of a paragraph ("$33,465,716.") anchors footnote 3, and the line and its three-line note do not fit together
+# below footnote 2. typst moves the line (and the note) to page 7; LibreOffice keeps the line on page 6 and sets
+# the whole note on page 7, so pages 7 and 8 start a line apart (XENG-002 p10, p11; XENG-003 p10 line 1, p11 line 1).
+# No setting moves the anchor line in LibreOffice (widow control on or off, the note kept whole or not). The court's
+# own parameters (13 pt body, SCt R 16(2)) are in ../eval.yaml.
+params:
+  cross_engine: report
+  # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent (15.8 pt above the
+  # baseline at 13 pt bold; typst's 9.6 pt), so a single-spaced line that opens a page (the cover's court line, the
+  # titles of the tables and of the certificate), whose 15.6 pt line box starts at the 1 in margin (baseline at
+  # 84.48 pt), measures 3.31 pt into the margin on docx (box top 68.69 pt; typst 74.9 pt). The vertical tolerance
+  # covers that box, not text: Gate 4 puts both engines on the same baselines.
+  eps_v_pt: 3.5

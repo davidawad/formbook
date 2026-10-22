@@ -1,0 +1,11 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (fb-595.68.36, on the shared layout model lib/*/xengine*; TeX Gyre Schola in both engines), so a
+# difference fails. The court's own parameters (13 pt body, SCt R 16(2)) are in ../eval.yaml.
+params:
+  cross_engine: gate
+  # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent (15.8 pt above the
+  # baseline at 13 pt bold; typst's 9.6 pt), so a single-spaced line that opens a page (the cover's court line, the
+  # titles of the tables and of the certificate), whose 15.6 pt line box starts at the 1 in margin (baseline at
+  # 84.48 pt), measures 3.31 pt into the margin on docx (box top 68.69 pt; typst 74.9 pt). The vertical tolerance
+  # covers that box, not text: Gate 4 puts both engines on the same baselines.
+  eps_v_pt: 3.5

@@ -136,6 +136,10 @@ authorities:
     kind: statute
     name: "O.C.G.A. § 51-12-2"
     sort: "51-12-2"
+  s51-13-1:
+    kind: statute
+    name: "O.C.G.A. § 51-13-1"
+    sort: "51-13-1"
 ---
 
 The trial court here erred in enforcing the statutory “cap” on noneconomic damages in this wrongful death medical malpractice case. The court’s cursory analysis – taken from an order proposed by Defendants – ignored Defendants’ waiver, failed to conduct the required severability analysis, and overlooked the constitutional failings of the “cap” under the framework of [*Atlanta Oculoplastic Surgery, P.C. v. Nestlehutt*, 286 Ga. 731 (2010)](toa:nestlehutt). This Court should reverse, with instruction to render a new Judgment that gives full effect to the jury’s award of damages.

@@ -5,8 +5,8 @@ Doc type: the appellee's brief in a direct appeal (Ga. Sup. Ct. R. 19(2), 20(1))
 | Check | Result |
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-answering-brief.pdf` (see `usage/SOURCE.md`) |
-| render | ok: `tools/render.sh` (typst, `--ignore-system-fonts`, no warnings); 12 pages; only TeX Gyre Schola embedded (`pdffonts`) |
-| overlay | ok: `usage/OVERLAY-clark.pdf` and `OVERLAY-clark.txt` (`tools/overlay.sh`) |
+| render | ok: `tools/render.sh` (typst, `--ignore-system-fonts`, no warnings); 13 pages; only TeX Gyre Schola embedded (`pdffonts`) |
+| overlay | `just overlay <this folder>` writes `.overlay/<doc path>/OVERLAY-answering-brief.pdf` and `.txt` (gitignored; `tools/overlay.sh`) |
 | pages reviewed | 12 of 12, each rendered to PNG at 60 dpi and looked at |
 
 ## Governing rules
@@ -31,7 +31,7 @@ As the opening brief: Century Schoolbook is the rule-named face (Rule 16(2) size
 
 - `typst/main.typ`: entry point. `typst/ga-answering-brief.typ`: template, `ga-brief(meta, body)` (same code as the opening-brief template).
 - `usage/INPUT-answering-brief.md`: transcription of the appellee's brief. The statement of the case (to the amended judgment) and the opening of argument I are transcribed; the rest is marked `[Omitted from this transcription: ...]`. The block quotation of O.C.G.A. § 51-13-1 is omitted.
-- `usage/OUTPUT-answering-brief.typst.pdf`, `usage/OVERLAY-clark.pdf`, `usage/OVERLAY-clark.txt`.
+- `usage/OUTPUT-answering-brief.typst.pdf` (overlays: `just overlay`, into the gitignored `.overlay/`).
 
 ## What the overlay shows
 
@@ -50,7 +50,7 @@ Red is our render only, blue is the filed exemplar only, black is both. Pages ar
 - **Sample is partial.** The statement of the case is transcribed to the amended judgment, the opening of argument I is transcribed, and the rest of the body is omitted. The sample is 12 pages in total.
 - **TOA depends on links.** Only `[text](toa:key)` links are recorded. The TOA lists the authorities the sample cites through links.
 - **Record cites in the exemplar** (`V26 – 148-49`) are transcribed as given; the Rule 22 format is a Vol.-Page form, and the template does not check it.
-- **No `tools/check.sh` gate run.** Same as the opening brief.
+- **Gates.** `tools/check.sh` runs on the typst and docx engines (see Engines); `tools/check-selftest.sh` does not run here (the court has no `checks.yaml`).
 - **Exemplar** is the appellee's counsel's response brief in the same appeal (S26A0349). Different filer from the opening-brief exemplar.
 
 ## Related
@@ -59,26 +59,17 @@ Red is our render only, blue is the filed exemplar only, black is both. Pages ar
 
 ## Engines
 
-Typst is the primary engine (above). The DOCX engine is `docx/`: `build-reference.sh` writes `reference.docx` (TeX Gyre Schola 13 pt, exact line pitches that match the typst render, 1-in margins, letter paper, 11-pt footnotes, the page number in the footer); `ga-brief.lua` builds the cover, table of contents, table of authorities, closing and certificate, and the three sections (cover without folio, roman front matter, arabic body); `render.sh` makes two renders, so the TOC and TOA page numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-answering-brief.md`: `usage/OUTPUT-answering-brief.docx` and `usage/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1, `soffice --headless --convert-to pdf`). It needs pandoc (3.12.1), LibreOffice (`soffice`), poppler (`pdfinfo`, `pdftotext`), perl, zip, unzip and xmllint; the other doc types use the same folder layout.
+Typst is the reference engine; the docx engine sets the same layout, line for line (docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.68.36). The answering, opening and reply briefs share the code: `typst/ga-<doc type>.typ` (one copy per folder, the same but for its first line) and `docx/ga-brief.lua` and `docx/reference.xml` (identical copies). Render with `sh tools/render.sh [--engine docx] <this folder> usage/INPUT-answering-brief.md`: `usage/OUTPUT-answering-brief.typst.pdf`, `.docx` and `.docx.pdf` (LibreOffice).
 
-| | docx | typst |
-|---|---|---|
-| Pages | 12 | 12 |
-| Font | TeX Gyre Schola only (`pdffonts`) | TeX Gyre Schola only |
-| Line pitch | double 31.2 pt, single 15.6 pt, footnotes 13.2 pt | same |
-| Margins, paper | 1 in, letter | same |
-| Cover, caption, counsel | same layout | same |
-| Heading sizes | 18 pt (level 1), 15.5 pt (level 2), 13 pt (level 3) | same |
-| TOC, TOA | dot leaders; every number equals the typst output | same |
-| Closing, certificate | same; the closing is kept on one page | same |
+- **Layout model.** Both engines are on the shared cross-engine model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): first-fit line breaking, ragged right (Rule 16(3): left-aligned), no kerning, ligatures or hyphenation, and every line a box of its pitch with the baseline at 0.8 of it: 31.2 pt (double, Rule 16(4)) for the text, the closing and the certificate's statements; 15.6 pt (1.2 x 13 pt, the rule's floor) for the cover, headings, quotations, the tables' rows and the signature and service columns; 13.2 pt for the 11 pt footnotes. The spaces between blocks are explicit, the larger of two adjacent ones applying, as in Word: half a single line (7.8 pt) around headings and quotations and between authorities, a single line between contents rows and around the signature and service columns.
+- **Headings** are 13 pt bold (level 3 bold italic, a case name in it upright), single-spaced, kept with the next paragraph: the body size, as both exemplars set them (were typst's default 18.2 and 15.6 pt, which Word cannot set in half points).
+- **Tables.** Contents (levels 1 and 2; level 2 half an inch in) and authorities (by kind, sorted, wrapped lines hanging 0.4 in, "passim" from seven pages): the text wraps before a page column (36 pt; 72 pt or the page list's own width), and a dot leader runs from three spaces after the text to the page number. A citation's page is the page on which it starts. The cover counts as page i, so the contents start at ii (as the opening-brief exemplar).
+- **docx.** `docx/reference.xml` holds the styles (base="xengine", the face as `{font}`, which is the typst face TeX Gyre Schola; `w14:ligatures none`, so LibreOffice sets no fi or fl ligatures); `docx/ga-brief.lua` writes the cover, the tables, the closing and the certificate from the frontmatter as written (`$FORMBOOK_META`, the strings typst sets) and leaves headings, paragraphs, lists, quotations and footnotes to pandoc in those styles. The table pages come from fb render's needles (the page of every heading and citation in the LibreOffice PDF, rendered again until they settle); the sections and the page-number footer from `$FORMBOOK_FOOTERS` and `$FORMBOOK_FINAL` (cover unnumbered, front matter ii, iii, ..., body from 1, the number in a 15.6 pt line 27.6 pt above the page edge, where typst sets it). This replaced `build-reference.sh`, `reference.docx` and a two-pass `render.sh`.
+- **LibreOffice measures** (docs/EVAL-LOOP.md, "What the federal-appellate adoption found"): the right margin is 1441 twips (1440 to 1442 break every line of the three samples as typst does, 1443 moves one); the three no-break spaces before a leader are two at 13 pt and one at 9 pt, 9.73 pt for typst's 0.75 em (Schola's space is 0.278 em); LibreOffice reserves the face's line height, 15.13 pt, for the footnote separator (measured: a one-line note under a one-line anchor fits with 303 twips to spare, not 302), which typst reserves as an 8.53 pt clearance plus the 6.6 pt gap before the note.
+- **DEF-FORM-002.** LibreOffice embeds Schola with word boxes reaching 15.8 pt above the baseline (typst 9.6 pt), so a single line opening a page measures 3.31 pt into the top margin on docx while its glyphs are inside; `eval.yaml` sets the vertical tolerance to 3.5 pt.
 
-Checked: every page of `OUTPUT-ga-answering-brief-clark.docx.pdf` was rendered (60 dpi) and set beside the typst page; the first body line, the heading spacing and the TOC and TOA numbers were measured with `pdftotext -bbox` and `pdftotext -layout`.
+Checks (`sh tools/check.sh <this folder> --engine typst|docx`): typst 8 passed, 0 failed; docx 12 passed, 0 failed, XENG-001..003 PASS (250 of 250 typst lines alike, every page start and end, 13 pages), so `eval.yaml` gates it (`params.cross_engine: gate`). `tools/check-selftest.sh` does not run here: the court has no `checks.yaml` (fb selftest reads its sample list from it).
 
-What differs:
+Reviewed: every page of both renders as page images at 40 dpi, typst and docx side by side, and the opening brief's cover, contents and authorities and the reply brief's body page 9 again at 70 to 80 dpi. Word itself was not run: the contents and authorities numbers are those of the LibreOffice PDF, and Word may paginate differently (docs/DOCX.md).
 
-- **Run-in headings.** A level-3 heading after body text sits about 7 pt lower in the docx (LibreOffice adds the paragraph gap and the heading's space above; typst takes the larger). Through the middle of the brief the docx sets one or two lines fewer per page than typst, so its page breaks fall a line or two apart.
-- **Front-matter numbers.** Typst counts the cover as page 1, so its TOC is page `ii`; the docx starts the roman numbers at `i` on the TOC. The court's rule decides which is right; the docx follows the usual convention.
-- **Word.** Not run here. The docx opens in LibreOffice without a repair prompt (it was converted). The TOC and TOA numbers are plain text, not fields: Word may paginate differently, and the numbers would then be off by a page. Check them in Word before filing.
-- Fonts: the `.docx` names TeX Gyre Schola, so the court face must be installed where the file is opened (`docs/DOCX.md`).
-
-BLOCKED: none. No check IDs apply to this folder's docx (the gates here are typst's); the differences above are not blocks.
+BLOCKED: none.
