@@ -130,7 +130,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Maine](courts/first-circuit/maine/federal/bankruptcy-district) | `meb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Maine](courts/first-circuit/maine/federal/district) | `med` | up for review | 2/2 | — | 2/2 | 14 |
-| [Supreme Judicial Court of Maine](courts/first-circuit/maine/state/supreme-judicial-court) | `me` | up for review | 8/8 | — | — | 29 |
+| [Supreme Judicial Court of Maine](courts/first-circuit/maine/state/supreme-judicial-court) | `me` | up for review | 8/8 | 1/1 | 1/1 | 29 |
 
 ### Massachusetts
 
@@ -226,7 +226,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. New Jersey](courts/third-circuit/new-jersey/federal/bankruptcy-district) | `njb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. New Jersey](courts/third-circuit/new-jersey/federal/district) | `njd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Supreme Court of New Jersey](courts/third-circuit/new-jersey/state/supreme-court) | `nj` | up for review | 5/5 | — | — | 29 |
+| [Supreme Court of New Jersey](courts/third-circuit/new-jersey/state/supreme-court) | `nj` | up for review | 5/5 | 1/1 | 1/1 | 29 |
 
 ### Pennsylvania
 
@@ -380,7 +380,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, W.D. Michigan](courts/sixth-circuit/michigan/federal/bankruptcy-western-district) | `miwb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, E.D. Michigan](courts/sixth-circuit/michigan/federal/eastern-district) | `mied` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Michigan](courts/sixth-circuit/michigan/federal/western-district) | `miwd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Michigan Court of Appeals](courts/sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | — | — | 29 |
+| [Michigan Court of Appeals](courts/sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | 1/1 | 1/1 | 29 |
 | [Michigan Supreme Court](courts/sixth-circuit/michigan/state/supreme-court) | `mich` | up for review | 8/8 | — | — | 29 |
 
 ### Ohio
@@ -464,7 +464,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, W.D. Arkansas](courts/eighth-circuit/arkansas/federal/bankruptcy-western-district) | `arwb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Eastern District of Arkansas](courts/eighth-circuit/arkansas/federal/eastern-district) | `ared` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Western District of Arkansas](courts/eighth-circuit/arkansas/federal/western-district) | `arwd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Arkansas Court of Appeals](courts/eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | up for review | 6/6 | — | — | 29 |
+| [Arkansas Court of Appeals](courts/eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | up for review | 6/6 | 1/1 | 1/1 | 29 |
 | [Arkansas Supreme Court](courts/eighth-circuit/arkansas/state/supreme-court) | `ark` | up for review | 9/9 | — | — | 29 |
 
 ### Iowa
@@ -484,7 +484,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/district) | `mnd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Appeals of Minnesota](courts/eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | — | — | 29 |
+| [Court of Appeals of Minnesota](courts/eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 1/1 | 1/1 | 29 |
 | [Supreme Court of Minnesota](courts/eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | 8/8 | — | — | 29 |
 
 ### Missouri
@@ -811,19 +811,19 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 1 | 6 | 16.5% |
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 0 | 6 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 5 | 0 | 5 | 14.0% |
-| First Circuit | 20 | 0 | 18 | 2 | 0 | 0.0% | 90.0% | 19 | 1 | 12 | 18.5% |
+| First Circuit | 20 | 0 | 18 | 2 | 0 | 0.0% | 90.0% | 19 | 2 | 13 | 18.5% |
 | Second Circuit | 19 | 0 | 18 | 1 | 0 | 0.0% | 94.7% | 19 | 1 | 15 | 17.9% |
-| Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 1 | 13 | 18.1% |
+| Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 2 | 14 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 1 | 19 | 19.1% |
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 1 | 22 | 18.0% |
-| Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 1 | 20 | 18.6% |
+| Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 2 | 21 | 18.6% |
 | Seventh Circuit | 21 | 0 | 20 | 1 | 0 | 0.0% | 95.2% | 20 | 1 | 15 | 18.2% |
-| Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 1 | 22 | 20.3% |
+| Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 3 | 24 | 20.3% |
 | Ninth Circuit | 61 | 0 | 52 | 8 | 1 | 0.0% | 85.2% | 54 | 1 | 36 | 19.8% |
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 1 | 14 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 1 | 20 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 1 | 3 | 17.7% |
-| **Total** | 376 | 0 | 342 | 32 | 2 | 0.0% | 90.9% | 346 | 14 | 230 | 18.6% |
+| **Total** | 376 | 0 | 342 | 32 | 2 | 0.0% | 90.9% | 346 | 19 | 235 | 18.6% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
