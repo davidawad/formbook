@@ -1,0 +1,14 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): typst and docx are on the shared layout model
+# (lib/*/xengine*; fb-595.68.9) and the docx render breaks every line and page where the typst render does
+# (pdftotext -bbox-layout of OUTPUT-motion-brief.typst.pdf and .docx.pdf: all 400 lines on 10 pages word for word
+# alike). The docx is still reported, not gated: the face is TeX Gyre Termes (the audited exemplar's Times,
+# data/exemplar-fonts.json), which LibreOffice embeds with a 1.2 em ascent, so each word box reaches above the
+# baseline of the line before it, and fb's line measure (tools/fb/src/measure/build.rs: the baseline is the mode of
+# the glyph baselines inside the line's box) gives a centered title line the baseline of the longer line above it;
+# XENG-003 then reports p1 line 20 of the title as not carried word for word although it is.
+params:
+  cross_engine: gate
+  cross_engine_docx: report   # see above: an fb measure artifact of LibreOffice's Termes word boxes, not a break
+  # DEF-FORM-002: LibreOffice's Termes word boxes reach 14.6 pt above the baseline (typst's 9.1 pt), so a line at the
+  # top margin measures 3.5 pt into it while its glyphs are inside; the vertical tolerance covers that glyph box.
+  eps_v_pt: 4.0

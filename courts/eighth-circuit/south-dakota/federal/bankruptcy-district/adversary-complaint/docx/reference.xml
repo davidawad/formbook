@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Bankr. D.S.D. adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the
+     face of the typst template ({font}, Times New Roman; R. 9004-1(a)(1) asks for one simple font) at 12 pt (size 24
+     half points); Body Text, the headings and every other line in exact 13.8 pt line boxes (typst pitch-single:
+     single spacing, no spacing rule in the local rules) with a half-inch indent; letter page with 1-inch margins
+     (R. 9004-1(a)(1)) and a centered page number, its line 36.75 pt above the page foot (735 twips: where typst sets
+     it, footer-descent 30 %). docx/sdb-adversary-complaint.lua writes every paragraph's own spacing (240 the
+     paragraph gap, 360 the section gap). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="276" single="276" indent="720" heading="276" heading-before="360" heading-after="240" footer="735"/>

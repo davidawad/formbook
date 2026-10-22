@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Bankr. D.S.D. motion with memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in
+     the face of the typst template ({font}, TeX Gyre Termes, the audited exemplar's Times; R. 9004-1(a)(1) asks for
+     one simple font) at 12 pt (size 24 half points); Body Text, the headings and every other line in exact 13.8 pt
+     line boxes (typst pitch-single: single spacing, no spacing rule in the local rules) with a half-inch indent;
+     ligatures off (w14:ligatures in docDefaults: Termes has fi/fl ligatures, which LibreOffice would form and typst
+     does not set); letter page with 1-inch margins (R. 9004-1(a)(1)) and a centered page number, its line 36.75 pt
+     above the page foot (735 twips: where typst sets it, footer-descent 30 %). docx/sdb-motion-brief.lua writes every
+     paragraph's own spacing (240 the paragraph gap, 360 the section gap). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" mc:Ignorable="w14" base="xengine" size="24" body="276" single="276" indent="720" heading="276" heading-before="360" heading-after="240" footer="735">
+<w:docDefaults>
+    <w:rPrDefault>
+      <w:rPr>
+        <w:rFonts w:ascii="{font}" w:hAnsi="{font}" w:eastAsia="{font}" w:cs="{font}"/>
+        <w:sz w:val="24"/>
+        <w:szCs w:val="24"/>
+        <w:lang w:val="en-US" w:eastAsia="zh-CN" w:bidi="ar-SA"/>
+      <w14:ligatures w14:val="none"/></w:rPr>
+    </w:rPrDefault>
+    <w:pPrDefault>
+      <w:pPr>
+        <w:widowControl/>
+        <w:spacing w:after="0"/>
+      </w:pPr>
+    </w:pPrDefault>
+  </w:docDefaults>
+</reference>
