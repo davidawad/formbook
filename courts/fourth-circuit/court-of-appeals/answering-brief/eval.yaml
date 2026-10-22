@@ -2,3 +2,7 @@
 # where the typst render does (fb-595.54.3, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-001: the cover, then the disclosure statement on its own unnumbered page, before page i. The disclosure
+  # is the court's own form (Local Rule 26.1, form 12/01/2019 SCC), paginated by itself (-1-, -2- in both FILED-EXAMPLEs),
+  # not part of the brief's roman sequence.
+  cover_pages: 2
