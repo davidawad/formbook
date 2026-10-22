@@ -1,7 +1,7 @@
-# Gate 4 CROSS-ENGINE: report only. The latex and docx engines are generated from typst/layout.yaml (`fb engines gen`,
-# fb-595.54.12) but do not yet break every line where typst does, for want of a shared-model fix recorded in
-# docs/open-items/fb-595.54.52.md.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 # N.D.R.App.P. 40(b) (effective 7/1/2026): "A petition for rehearing or answer may not exceed 10 pages, excluding any addendum. Footnotes or endnotes must be included in the page count."
 params:
-  cross_engine: report
+  cross_engine: gate
   page_limit: 10
