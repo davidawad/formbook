@@ -156,7 +156,6 @@ Every citizen 21 years of age, possessing the following qualifications,
 
 shall be entitled to vote at all elections ….
 
-…
 
 3. He or she shall have resided in the election district where he or she shall
 

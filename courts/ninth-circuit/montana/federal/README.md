@@ -5,8 +5,8 @@ Courts under `courts/ninth-circuit/montana/federal` (2).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Montana](bankruptcy-district) | `mtb` | up for review | — | — | — | 14 |
-| [District Court, D. Montana](district) | `mtd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Montana](bankruptcy-district) | `mtb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Montana](district) | `mtd` | up for review | 2/2 | — | 2/2 | 14 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->
