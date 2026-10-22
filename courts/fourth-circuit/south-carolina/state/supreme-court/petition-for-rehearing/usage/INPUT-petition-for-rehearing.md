@@ -214,7 +214,7 @@ In particular, severing only the words “male and female” does not disrupt th
 
 > . . . (c) persons who have a child in common; or
 >
-> (d) who are cohabiting or formerly have cohabited.
+> \(d) who are cohabiting or formerly have cohabited.
 
 Thus, as severed, the word “persons” easily serves as the noun to precede both (c) and (d). In other words, “persons” precedes “who are cohabiting or formerly have cohabited” as well as “persons who have a child in common.” Such limited severance removes the discrimination, as well as it preserves the cohabitation protections. The more limited severance, striking only the words “male and female” would return to virtually the same language the General Assembly used in 1984 in the original Domestic Abuse Act. See Act No. 484 of 1984. Moreover, this narrower severance is consistent with Stone v. Traynham’s admonition that the judiciary “go no further than absolutely necessary in declaring unconstitutional an action of the legislature.” Stone, supra. If the Court were to sever these words only, leaving the word “persons” to precede “who are cohabiting . . .” the legislature could address the “roommate” problem it had encountered earlier when it returns in January.
 

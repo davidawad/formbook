@@ -1,0 +1,76 @@
+# Supreme Court of South Carolina (sc): briefs and petitions behind a caption cover (principal, final and reply briefs,
+# petitions for rehearing and for writ). The whole layout, as data for the shared document model (lib/typst/xdoc.typ;
+# latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to SCACR 267 and the
+# rows of ../../rules.md (SC-*); lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant.
+size: 12                  # SC-FORM-001, SCACR 267(c): type of 12 point or larger, footnotes too
+pitch:
+  body: 27.6              # SC-FORM-001, SCACR 267(c): double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # caption, counsel, headings, tables, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # SC-FORM-002, SCACR 267(d): one inch on all sides
+indent: 36
+page_number: {align: center, from: 2}   # SC-FORM-011, SCACR 240(c): consecutive numbers; the cover (caption only) unnumbered
+footnote: {size: 12, gap: 7}             # SCACR 267(c): no type under 12 point; footnotes single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 12}   # block quotations indented, single spaced
+heading:
+  - {align: center, bold: true, above: 14.4, below: 10.8}
+  - {bold: true, above: 12, below: 8.4}
+  - {bold: true, italic: true, above: 10.8, below: 7.2}
+# SC-FORM-004, -005, SCACR 267(e): the front cover holds the caption only: the court, the court appealed from and its
+# judge, the appellate case numbers, the parties with their roles, the document title, set off by short rules (45 %
+# of the text width, centered). Counsel and the date follow on the next page.
+cover:
+  - {text: "THE STATE OF SOUTH CAROLINA", align: center}
+  - {text: "{court_name}", align: center, above: 3.6}
+  - {text: "{lower_court}", align: center, optional: true, above: 10.8}
+  - columns: [{width: 128.7, blocks: []}, {blocks: [{rule: 0.6}]}, {width: 128.7, blocks: []}]
+    above: 10.8
+  - each: appellate_case_numbers
+    above: 7.2
+    blocks: [{text: "Appellate Case No. {.}", align: center}]
+  - columns: [{width: 128.7, blocks: []}, {blocks: [{rule: 0.6}]}, {width: 128.7, blocks: []}]
+    above: 7.2
+  - each: caption
+    above: 14.4
+    blocks:
+      - {text: "{connector}", align: center, optional: true, above: 7.2, below: 7.2}
+      - columns:
+          - blocks: [{text: "{lines}"}]
+          - width: 151.2
+            valign: center
+            blocks: [{text: "{role}", align: right}]
+        gutter: 21.6
+        below: 7.2
+  - columns: [{width: 128.7, blocks: []}, {blocks: [{rule: 0.6}]}, {width: 128.7, blocks: []}]
+    above: 7.2
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 9.6}
+  - columns: [{width: 128.7, blocks: []}, {blocks: [{rule: 0.6}]}, {width: 128.7, blocks: []}]
+    above: 7.2
+  - {break: true}
+  - columns: {each: counsel, per_row: 2, row_gap: 14.4, blocks: [{text: "{names}"}, {text: "{lines}", above: 3.6}, {text: "{note}", italic: true, optional: true, above: 4.8}]}
+    gutter: 28.8
+  - {text: "Dated: {date}", optional: true, above: 28.8}
+# SCACR 208(b)(1)(A), 208(b)(3): the table of contents and of authorities, each on its own page.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 18, above: 7.2}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 56
+  hang: 28.8
+  above: 7.2
+  group: {bold: true, above: 13.2, below: 6}
+# SC-FORM-006, -007: "Respectfully submitted," and the signers, two to a row, never split; then the certificates.
+closing:
+  - group:
+      - {text: "Respectfully submitted,"}
+      - columns: {each: signature, per_row: 2, row_gap: 14.4, blocks: [{text: "{lines}"}]}
+        gutter: 28.8
+        above: 9.6
+    above: 13.8
+  - when: certificates
+    blocks:
+      - each: certificates
+        blocks:
+          - {text: "{title}", align: center, bold: true, keep: true, above: 21.6, below: 10.8}
+          - {text: "{text}", pitch: body, indent: 36}
+          - {text: "{recipients}", optional: true, above: 4.8}
+          - {text: "{signer}", optional: true, above: 9.6}

@@ -1,0 +1,78 @@
+# Supreme Court of South Carolina (sc): amicus curiae brief (SCACR 213, 208(b), 211, 267). The whole layout, as data for
+# the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to SCACR 267 and the rows of ../../rules.md (SC-*); lengths in points. No case text
+# here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # SC-FORM-001, SCACR 267(c): type of 12 point or larger, footnotes too
+pitch:
+  body: 27.6              # SC-FORM-001, SCACR 267(c): double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # SC-FORM-002, SCACR 267(d): one inch on all sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
+footnote: {size: 12, gap: 7}             # SCACR 267(c): no type under 12 point; footnotes single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # block quotations indented, single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 12}
+  - {bold: true, hang: 36, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# SC-FORM-004, -005, SCACR 267(e): the cover: the state and the court, the court appealed from and its judge, the
+# appellate case number over a short rule, the parties with their designations beside them, the title, counsel.
+cover:
+  - {text: "{state}", align: center, bold: true}
+  - {text: "{court}", align: center}
+  - {text: "{appeal_from}", align: center, optional: true, above: 21.6}
+  - {text: "Appellate Case No. {appellate_case_no}", align: center, above: 21.6}
+  - columns: [{width: 126, blocks: []}, {blocks: [{rule: 0.6}]}, {width: 126, blocks: []}]
+    above: 14.4
+  - each: caption
+    blocks:
+      - columns:
+          - blocks: [{text: "{names}"}]
+          - width: 108
+            valign: center
+            blocks: [{text: "{designation}", align: right}]
+        gutter: 14.4
+        above: 21.6
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 43.2}
+  - each: counsel
+    above: 43.2
+    blocks:
+      - {text: "{names}", bold: true, left: 230.4, above: 8.4}
+      - {text: "{lines}", left: 230.4}
+# SCACR 208(b)(1)(A), 213: the table of contents and of authorities (the frontmatter's), each on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 7.2}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 9.6
+  group: {bold: true, above: 14.4, below: 4.8}
+# SC-FORM-006: the date and the signature block right of centre, never split ("/s/" and the typed name, SCACR 267(b));
+# then the certificate of service on a page of its own when the frontmatter gives one.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, optional: true}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 9.6}
+      - when: signature.signers
+        blocks:
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 10.8}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", left: 230.4}
+      - when: signature.signer
+        blocks:
+          - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 10.8}
+          - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 9.6}
+    above: 28.8
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 12}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - when: service.recipients
+        blocks:
+          - each: service.recipients
+            blocks: [{text: "{.}", left: 72, above: 12}]
+      - {text: "{service.closing}", optional: true, pitch: body, indent: 36, above: 12}

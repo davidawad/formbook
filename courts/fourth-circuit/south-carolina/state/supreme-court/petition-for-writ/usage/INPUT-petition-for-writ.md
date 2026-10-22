@@ -30,7 +30,7 @@ counsel:
       - "Democracy Forward Foundation"
       - "P.O. Box 34553"
       - "Washington, DC 20043"
-      - "* pro hac vice applications pending"
+      - "\\* pro hac vice applications pending"
     note: "Attorneys for Petitioners"
   - names:
       - "James G. Carpenter"
@@ -59,7 +59,7 @@ signature:
       - "Democracy Forward Foundation"
       - "P.O. Box 34553"
       - "Washington, DC 20043"
-      - "* pro hac vice applications pending"
+      - "\\* pro hac vice applications pending"
   - lines:
       - "James G. Carpenter"
       - "SC Bar No. 1136"
@@ -750,7 +750,7 @@ https://www.youtube.com/watch?v=pYTO-iyEJYw.
 
 enforcing the law.” Sloan v. Dep’t of Transp., 379 S.C. 160, 170, 666 S.E.2d 236, 241
 
-(2008) (quoting Sloan, 342 S.C. at 523, 537 S.E.2d at 303). In this case, Governor
+\(2008) (quoting Sloan, 342 S.C. at 523, 537 S.E.2d at 303). In this case, Governor
 
 McMaster’s unlawful deployment implicates the public fisc. Typically, the federal
 

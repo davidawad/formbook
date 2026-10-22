@@ -45,7 +45,6 @@ signature:
       - "cbhutto@williamsattys.com"
       - "skyler@williamsattys.com"
       - "Attorneys for Respondent"
-certificate_of_service: null
 ---
 
 Respondent hereby states and moves as follows pursuant to Rule 240, SCACR:
