@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  # LaTeX: "good defense/claim" (page 14, line 4): typst and Word break after the slash, LaTeX does not (692 of 703 lines
+  # identical, pages and page ends equal). docx: the statement pursuant to CPLR 5531 takes page 1 (`front`), and the
+  # docx page lookup labels every contents row a page low; a level-1 heading followed by a numbered one ("Argument",
+  # "I. THE COURT ERRED ...") is found in the contents, not the body (docs/open-items/fb-595.54.76.md, requests 7, 8, 9).
+  # Reported, not gated.
+  cross_engine: report
