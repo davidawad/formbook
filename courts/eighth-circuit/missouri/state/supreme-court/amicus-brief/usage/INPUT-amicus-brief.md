@@ -55,7 +55,7 @@ authorities:
   - heading: "Missouri Supreme Court Rules"
     entries:
       - {cite: "Mo. S. Ct. R. 4-1.0", find: "4-1.0"}
-      - {cite: "Mo. S. Ct. R. 4-1.1", finds: ["4-1.1,", "4-1.1.", "4-1.1 (", "4-1-1"]}
+      - {cite: "Mo. S. Ct. R. 4-1.1", find: "4-1.1", finds: ["4-1.1", "4-1-1"]}
       - {cite: "Mo. S. Ct. R. 4-1.6", pages: "passim"}
       - {cite: "Mo. S. Ct. R. 4-1.18", find: "4-1.18"}
 ---
