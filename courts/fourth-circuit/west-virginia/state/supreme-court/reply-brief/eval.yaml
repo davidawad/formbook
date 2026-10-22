@@ -1,8 +1,12 @@
 # West Virginia reply brief (rules.md WVA-LEN-002): 20 pages, excluding the cover, tables and certificate of service
 # (RAP 38(c)); DEF-LEN-001 counts every page of the PDF, so no page_limit is set here.
-# Gate 4 CROSS-ENGINE: report, not gate. The latex and docx engines are generated from typst/layout.yaml (`fb engines
-# gen`, fb-595.54.12) but break pages differently from typst on this sample: LaTeX keeps footnote 3 whole where typst
-# splits it (p6), Word leaves a one-line widow typst avoids (p9). Both are shared-model items (docs/open-items/
-# fb-595.54.21.md); the folder is gated once they are fixed in the model.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LibreOffice sets a footnote that does not fit under its anchor's line on the next page and keeps the line (typst
+  # and LaTeX move the line on with its note): INPUT-reply-brief, page 6 ("such, both matters underlying this appeal
+  # were consolidated into a single civil case.3"), and every page after it shifts (XENG-002, XENG-003). No docx
+  # setting moves the line (fb-595.54.13); reported, not gated (docs/open-items/fb-595.54.21.md).
+  cross_engine_docx: report

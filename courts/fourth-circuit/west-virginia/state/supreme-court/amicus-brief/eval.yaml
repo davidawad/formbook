@@ -2,8 +2,9 @@
 # tables and certificate of service (RAP 38(c)). DEF-LEN-001 counts every page of the PDF, so no page_limit is set here:
 # a total count cannot express a body-only limit, and a total limit of 25 would reject a compliant filing.
 # Gate 4 CROSS-ENGINE: report, not gate. The latex and docx engines are generated from typst/layout.yaml (`fb engines
-# gen`, fb-595.54.12) but break pages differently from typst on this sample: LaTeX keeps footnote 14 whole where typst
-# splits it (p9), Word splits footnote 19 where typst moves it (p10). Shared-model items (docs/open-items/
-# fb-595.54.21.md); the folder is gated once they are fixed in the model.
+# gen`, fb-595.54.12) but break pages differently from typst on this sample: typst sets footnote 14 on page 10 while
+# its mark ("failed.14") stays on page 9, LaTeX moves the mark's line on with its note (p10); Word's footnote area
+# holds one body line more than typst's on page 12. Both are open shared-model items (fb-595.54.82 "not implemented":
+# a note on another page than its mark; Word's footnote area; docs/open-items/fb-595.54.21.md).
 params:
   cross_engine: report
