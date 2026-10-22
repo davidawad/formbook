@@ -1,0 +1,48 @@
+# Supreme Court of Hawaii (haw): application for transfer (HRAP 40.2; `petition-for-discretionary-review`). The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to HRAP 32 (../../rules.md, HAW-*); lengths in points. No case text
+# here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # HAW-FORM-003, -004: 12 point, footnotes and quotations the same size
+pitch:
+  body: 27.6              # HAW-FORM-005: double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # flyleaf, headings, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # HAW-FORM-002: not less than 1 inch on all sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # HAW-FORM-007: bottom center; as the exemplar: the flyleaf unnumbered, the application from 1
+footnote: {size: 12, gap: 7}             # HAW-FORM-004, -005: same size as the text, single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # HAW-FORM-005: quotations single spaced, indented
+heading:
+  - {bold: true, hang: 36, above: 14.4, below: 9.6}   # HAW-FORM-005: headings single spaced
+  - {bold: true, hang: 36, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# The flyleaf (HAW-COVER-001, -002): 3 inches clear at the top (the 1-inch margin and 2 inches more), the case
+# number, the court, the parties beside the proceedings below and their judge, the character of the document, then
+# counsel right of centre (HAW-COVER-003: the arrangement is the exemplar's).
+cover:
+  - {text: "{case_number}", above: 144}
+  - {text: "{court_title}", align: center, bold: true, above: 28.8}
+  - columns:
+      - blocks:
+          - each: caption
+            blocks:
+              - {text: "{names}", above: 9.6}
+              - {text: "{designation}", align: right, above: 2.4}
+      - blocks:
+          - {text: "{caption_right}"}
+    gutter: 21.6
+    above: 28.8
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 43.2}
+  - each: counsel
+    above: 43.2
+    blocks:
+      - {text: "{names}", bold: true, left: 230.4, above: 7.2}
+      - {text: "{lines}", left: 230.4}
+# The date and the signature block (HAW-SIG-001: the name typed under the signature), never split.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "{signature.lead}", left: 230.4, optional: true, above: 9.6}
+      - {text: "{signature.sign}", left: 230.4, above: 19.2}
+      - {text: "{signature.name}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, above: 9.6}
+    above: 21.6
