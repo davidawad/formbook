@@ -1,0 +1,114 @@
+# Appellate Court of Maryland (formerly the Court of Special Appeals; mdctspecapp): amicus-brief. The whole layout, as data
+# for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to Maryland Rules 1-301(c), 8-112, 8-503 and 8-504 (../rules.md, MDCTSPECAPP-*);
+# lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a
+# court constant (the court's name, the certificate's form text).
+size: 13                  # MDCTSPECAPP-FONT-002 (Rule 8-112(c)(1)): text and footnotes not smaller than 13 point
+pitch:
+  body: 29.9              # MDCTSPECAPP-FORM-002 (Rule 8-112(c)(2)): double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # headings, indented quotations, footnotes, cover, tables, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MDCTSPECAPP-FORM-001 (Rule 1-301(c)): one inch or more
+indent: 36
+# MDCTSPECAPP-FORM-003 (Rule 8-503(a)): consecutively numbered; MDCTSPECAPP-CONV-002: the cover unnumbered, the tables
+# i, ii .., the body 1, 2 ..
+page_number: {align: center, front: lower-roman}
+footnote: {size: 13, pitch: 14.95}   # MDCTSPECAPP-FONT-002, FORM-002: footnotes 13 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 15.6}   # MDCTSPECAPP-FORM-002: indented quotations single spaced
+# Sections centered in bold; points bold, sub-points bold italic; the sample writes their numbers (I., A., 1.).
+heading:
+  - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
+  - {bold: true, hang: 36, above: 15.6, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# MDCTSPECAPP-CONV-001: the court, the September Term, the docket number, the caption, the court below, the title,
+# counsel and the filing date (the paper's color, MDCTSPECAPP-COV-001 to -003, is the printed copy's, not the file's).
+cover:
+  - {text: "{court|IN THE APPELLATE COURT OF MARYLAND}", align: center, bold: true}
+  - {text: "{sept_term}", align: center, optional: true, above: 8.4}
+  - {text: "No. {case_number}", align: center, bold: true, above: 8.4}
+  # the sample's caption carries its own "v." between the parties
+  - each: caption
+    above: 14.4
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true, optional: true, above: 5.2}
+  - {text: "{proceeding}", align: center, optional: true, above: 14.4}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {text: "{trial_judge}", align: center, optional: true}
+  - {text: "{appeal_from}", align: center, optional: true, above: 14.4}
+  - {text: "{lower_court}", align: center, optional: true, above: 14.4}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 21.6}
+  - {text: "{oral_argument}", align: center, bold: true, optional: true, above: 14.4}
+  # counsel one group under another, right of centre (the signature indent)
+  - each: counsel
+    above: 14.4
+    blocks: [{text: "{names}", bold: true, left: 230.4, above: 8.4}, {text: "{lines}", left: 230.4, optional: true}]
+  - {text: "{counsel_role}", italic: true, optional: true, above: 10.4, left: 230.4}
+  - {text: "Filed: {date}", align: center, optional: true, above: 14.4}
+# MDCTSPECAPP-CONT-001 (Rule 8-504(a)(1)): a table of contents and a table of citations.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 18, above: 10.4}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 10.4
+  group: {bold: true, above: 15.6, below: 5.2}
+# The date and the signature (Rule 1-311), never split; the Rule 8-504(a)(9) certificate when the sample gives the word
+# count (a sample that writes its own certificate sets it in the tail below); the certificate of service (Rule 1-323,
+# MDCTSPECAPP-CERT-002) when the sample gives one.
+closing:
+  - group:
+      - {text: "{date}", optional: true, indent: 36}
+      - {text: "{signature.preamble}", optional: true, indent: 36}
+      - {text: "{signature.closing}", optional: true, left: 230.4, above: 10.4}
+      - {text: "{signature.firm}", bold: true, optional: true, left: 230.4, above: 10.4}
+      - when: signature.signers
+        blocks:
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ *{name}*", left: 230.4, above: 10.4}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", left: 230.4, optional: true}
+      - when: signature.signer
+        blocks:
+          - {text: "/s/ *{signature.signer}*", left: 230.4, above: 10.4}
+          - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 10.4}
+    above: 20.8
+  - when: word_count
+    blocks:
+      - {break: true}
+      - {text: "Certification of Word Count and Compliance with Rule 8-112", align: center, bold: true, upper: true, below: 15.6}
+      - {text: "This brief contains {word_count} words, excluding the parts of the brief exempted from the word count by Rule 8-503. This brief complies with the font, spacing, and type size requirements stated in Rule 8-112.", pitch: body, indent: 36}
+      - group:
+          - when: signature.signers
+            blocks:
+              - each: signature.signers
+                blocks:
+                  - {text: "/s/ *{name}*", left: 230.4, above: 10.4}
+                  - {text: "{name}", left: 230.4}
+          - when: signature.signer
+            blocks:
+              - {text: "/s/ *{signature.signer}*", left: 230.4, above: 10.4}
+              - {text: "{signature.signer}", left: 230.4}
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 15.6}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36, optional: true}
+      - each: service.recipients
+        blocks: [{text: "{.}", left: 72, above: 13}]
+      - {text: "{service.closing}", pitch: body, indent: 36, optional: true, above: 13}
+      - group:
+          - when: signature.signers
+            blocks:
+              - each: signature.signers
+                blocks:
+                  - {text: "/s/ *{name}*", left: 230.4, above: 10.4}
+                  - {text: "{name}", left: 230.4}
+          - when: signature.signer
+            blocks:
+              - {text: "/s/ *{signature.signer}*", left: 230.4, above: 10.4}
+              - {text: "{signature.signer}", left: 230.4}
+# Certificates the sample writes itself (a level-1 heading that starts "Certificat", any case): set after the closing,
+# on a page of their own, double spaced as the body.
+tail: {at: "[Cc][Ee][Rr][Tt][Ii][Ff][Ii][Cc][Aa][Tt]", break: true, pitch: body, indent: 36}

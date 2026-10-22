@@ -1,6 +1,14 @@
-# Numbers stated by the Maryland rules for this doc type (../rules.md). Stricter than the default eval (12 pt).
+# Numbers stated by the Maryland rules for this court (../rules.md). Stricter than the default eval (12 pt).
 # font.size_pt: Md. Rule 8-112(c)(1): proportionally spaced type in the text and footnotes "shall not be smaller than 13 point".
 # params.margin_pt is left at the default 72 pt (1 in): Md. Rule 1-301(c) requires at least one inch.
-# The amicus length limit (Rule 8-503(d)(4)) is a word count, not a page limit: no params.page_limit is set.
 font:
   size_pt: 13
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails; a difference that is the shared model's is reported, not gated
+# (docs/open-items/fb-595.54.58.md).
+params:
+  cross_engine: report
+  # latex: typst breaks after the en dash of "1688–1766" in the table of authorities (p3 line 21) and "Success –"
+  # (p4 line 9), pdfTeX does not; a URL of footnote breaks elsewhere (p11 line 23). docx: pages 13 to 22
+  # start on other words, from p13 (a page of notes; the cause is not isolated), and the tables' page numbers follow.

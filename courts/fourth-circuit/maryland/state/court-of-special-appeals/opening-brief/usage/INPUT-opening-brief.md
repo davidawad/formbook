@@ -1,36 +1,23 @@
 ---
 # Transcription of a real filing: The Bradford Plaintiffs (Keith A. Bradford, et al.) v. Maryland State Board of Education, Appellate Court of Maryland No. ACM-REG-0209-2023 (September Term, 2023), Brief of Appellants the Bradford Plaintiffs (Page Proof), Oral Argument Requested in Brief, filed November 13, 2023 by Baker & Hostetler LLP, NAACP Legal Defense & Educational Fund, and ACLU of Maryland (counsel for Appellants). On appeal from the Circuit Court for Baltimore City (Hon. Audrey Carrion).
 # Source and fetch details: ../usage/SOURCE.md. The text follows the filed brief. Case-name italics were applied by convention; they were not read from the PDF font runs. Page headers, footers, page numbers and the e-filing stamp are omitted.
+sept_term: "September Term, 2023"
 case_number: "ACM-REG-0209-2023"
+lower_court: "On Appeal from the Circuit Court for Baltimore City (Hon. Audrey Carrion)"
 caption:
   - names: ["THE BRADFORD PLAINTIFFS (KEITH A. BRADFORD, ET AL.),"]
     designation: "Appellants,"
   - names: ["MARYLAND STATE BOARD OF EDUCATION,"]
     designation: "Appellee."
 brief_title: "Brief of Appellants the Bradford Plaintiffs (Page Proof)"
+counsel_role: "Counsel for Appellants the Bradford Plaintiffs"
 counsel:
-  - names: ["Counsel for Appellants the Bradford Plaintiffs"]
-    lines: []
-  - names: ["Elizabeth B. McCallum"]
-    lines: ["Baker & Hostetler LLP", "1050 Connecticut Ave., NW, Suite 1100", "Washington, DC 20036", "(202) 861-1522", "emccallum@bakerlaw.com"]
-  - names: ["Jeffrey E. Liskov"]
-    lines: ["(MD Bar ID 2012170120)", "Baker & Hostetler LLP", "1050 Connecticut Ave., NW, Suite 1100", "Washington, DC 20036", "(202) 861-1522", "jliskov@bakerlaw.com"]
-  - names: ["Danyll Foix"]
-    lines: ["Baker & Hostetler LLP", "1050 Connecticut Ave., NW, Suite 1100", "Washington, DC 20036", "(202) 861-1522"]
-  - names: ["Christine M. Kennedy"]
-    lines: ["(MD Bar ID 2112140193)", "Baker & Hostetler LLP", "1050 Connecticut Ave., NW, Suite 1100", "Washington, DC 20036", "(202) 861-1522", "ckennedy@bakerlaw.com"]
-  - names: ["Arielle Humphries"]
-    lines: ["NAACP Legal Defense & Educational Fund", "40 Rector Street, 5th Floor", "New York, NY 10006", "(212) 965-2200", "ahumphries@naacpldf.org"]
-  - names: ["Victor Genecin"]
-    lines: ["NAACP Legal Defense & Educational Fund", "40 Rector Street, 5th Floor", "New York, NY 10006", "(212) 965-2200", "vgenecin@naacpldf.org"]
-  - names: ["Alaizah Koorji"]
-    lines: ["NAACP Legal Defense & Educational Fund", "40 Rector Street, 5th Floor", "New York, NY 10006", "(212) 965-2200", "akoorji@naacpldf.org"]
-  - names: ["Joseph Wong"]
-    lines: ["NAACP Legal Defense & Educational Fund", "700 14th Street, NW, Suite 600", "Washington, DC 20005", "jwong@naacpldf.org"]
-  - names: ["Deborah A. Jeon"]
-    lines: ["(MD Bar ID 9006280125)", "ACLU of Maryland", "3600 Clipper Mill Road, Suite 350", "Baltimore, MD 21211", "(410) 889-8550", "jeon@aclu-md.org"]
-  - names: ["David Rocah"]
-    lines: ["(MD Bar ID 0312050001)", "ACLU of Maryland", "3600 Clipper Mill Road, Suite 350", "Baltimore, MD 21211", "(410) 889-8550", "drocah@aclu-md.org"]
+  - names: ["Elizabeth B. McCallum", "Jeffrey E. Liskov", "(MD Bar ID 2012170120)", "Danyll Foix", "Christine M. Kennedy", "(MD Bar ID 2112140193)"]
+    lines: ["Baker & Hostetler LLP", "1050 Connecticut Ave., NW, Suite 1100", "Washington, DC 20036", "(202) 861-1522", "emccallum@bakerlaw.com", "jliskov@bakerlaw.com", "ckennedy@bakerlaw.com"]
+  - names: ["Arielle Humphries", "Victor Genecin", "Alaizah Koorji"]
+    lines: ["NAACP Legal Defense & Educational Fund", "40 Rector Street, 5th Floor", "New York, NY 10006", "(212) 965-2200", "ahumphries@naacpldf.org", "vgenecin@naacpldf.org", "akoorji@naacpldf.org", "**Joseph Wong**", "NAACP Legal Defense & Educational Fund", "700 14th Street, NW, Suite 600", "Washington, DC 20005", "jwong@naacpldf.org"]
+  - names: ["Deborah A. Jeon", "(MD Bar ID 9006280125)", "David Rocah", "(MD Bar ID 0312050001)"]
+    lines: ["ACLU of Maryland", "3600 Clipper Mill Road, Suite 350", "Baltimore, MD 21211", "(410) 889-8550", "jeon@aclu-md.org", "drocah@aclu-md.org"]
 authorities:
   - heading: "Cases"
     entries:
@@ -121,7 +108,7 @@ authorities:
       - cite: "Md. Code, Cts. & Jud. Proc. § 3-412"
         find: "§ 3-412"
       - cite: "2007 Md. Laws (Special Session) ch. 2"
-        find: "2007 Md. Laws (Special Session)"
+        find: "2007 Md. Laws (Special Session) ch. 2"
       - cite: "HB1372, Md. Laws, 2021 Session, Chapter 55, § 19"
         find: "HB1372"
   - heading: "Rules"
@@ -145,12 +132,7 @@ signature:
   signers:
     - name: "Jeffrey E. Liskov"
       lines: ["/s/ Jeffrey E. Liskov", "1050 Connecticut Ave., NW, Suite 1100", "Washington, DC 20036", "Phone: (202) 861-1522", "Email: jliskov@bakerlaw.com"]
-date: "Filed: November 13, 2023."
-service:
-  paragraphs:
-    - "I, Jeffrey Liskov, attorney for Appellants, certify that I have this day served a copy of this “Page-Proof” Brief of Appellants on all counsel of record via MDEC."
-  recipients: []
-  closing: "SO CERTIFIED, this 13th day of November, 2023."
+date: "November 13, 2023"
 ---
 # Statement of the Case
 
@@ -397,39 +379,39 @@ SECTION 32. No money shall be drawn from the Treasury of the State, by any order
 
 SECTION 52. (1) The General Assembly shall not appropriate any money out of the Treasury except in accordance with the provisions of this section (amended by Chapter 159, Acts of 1916, ratified Nov. 7, 1916; Chapter 497, Acts of 1947, ratified Nov. 2, 1948).
 
-(2) Every appropriation bill shall be either a Budget Bill, or a Supplementary Appropriation Bill, as hereinafter provided.
+\(2) Every appropriation bill shall be either a Budget Bill, or a Supplementary Appropriation Bill, as hereinafter provided.
 
-(3) On the third Wednesday in January in each year, (except in the case of a newly elected Governor, and then not later than ten days after the convening of the General Assembly), unless such time shall be extended by the General Assembly, the Governor shall submit to the General Assembly a Budget for the next ensuing fiscal year. Each Budget shall contain a complete plan of proposed expenditures and estimated revenues for said fiscal year and shall show the estimated surplus or deficit of revenues at the end of the preceding fiscal year. Accompanying each Budget shall be a statement showing: (a) the revenues and expenditures for the preceding fiscal year; (b) the current assets, liabilities, reserves and surplus or deficit of the State; (c) the debts and funds of the State; (d) an estimate of the State’s financial condition as of the beginning and end of the preceding fiscal year; (e) any explanation the Governor may desire to make as to the important features of the Budget and any suggestions as to methods for reduction or increase of the State’s revenue (amended by Chapter 725, Acts of 1955, ratified Nov. 6, 1956; Chapter 161, Acts of 1964, ratified Nov. 3, 1964).
+\(3) On the third Wednesday in January in each year, (except in the case of a newly elected Governor, and then not later than ten days after the convening of the General Assembly), unless such time shall be extended by the General Assembly, the Governor shall submit to the General Assembly a Budget for the next ensuing fiscal year. Each Budget shall contain a complete plan of proposed expenditures and estimated revenues for said fiscal year and shall show the estimated surplus or deficit of revenues at the end of the preceding fiscal year. Accompanying each Budget shall be a statement showing: (a) the revenues and expenditures for the preceding fiscal year; (b) the current assets, liabilities, reserves and surplus or deficit of the State; (c) the debts and funds of the State; (d) an estimate of the State’s financial condition as of the beginning and end of the preceding fiscal year; (e) any explanation the Governor may desire to make as to the important features of the Budget and any suggestions as to methods for reduction or increase of the State’s revenue (amended by Chapter 725, Acts of 1955, ratified Nov. 6, 1956; Chapter 161, Acts of 1964, ratified Nov. 3, 1964).
 
-(4) Each Budget shall embrace an estimate of all appropriations in such form and detail as the Governor shall determine or as may be prescribed by law, as follows: (a) for the General Assembly as certified to the Governor in the manner hereinafter provided; (b) for the Executive Department; (c) for the Judiciary Department, as provided by law, as certified to the Governor; (d) to pay and discharge the principal and interest of the debt of the State in conformity with Section 34 of Article III of the Constitution, and all laws enacted in pursuance thereof; (e) for the salaries payable by the State and under the Constitution and laws of the State; (f) for the establishment and maintenance throughout the State of a thorough and efficient system of public schools in conformity with Article 8 of the Constitution and with the laws of the State; and (g) for such other purposes as are set forth in the Constitution or laws of the State (amended by Chapter 20, Acts of 1952, ratified Nov. 4, 1952; Chapter 62, Acts of 1990, ratified Nov. 6, 1990).
+\(4) Each Budget shall embrace an estimate of all appropriations in such form and detail as the Governor shall determine or as may be prescribed by law, as follows: (a) for the General Assembly as certified to the Governor in the manner hereinafter provided; (b) for the Executive Department; (c) for the Judiciary Department, as provided by law, as certified to the Governor; (d) to pay and discharge the principal and interest of the debt of the State in conformity with Section 34 of Article III of the Constitution, and all laws enacted in pursuance thereof; (e) for the salaries payable by the State and under the Constitution and laws of the State; (f) for the establishment and maintenance throughout the State of a thorough and efficient system of public schools in conformity with Article 8 of the Constitution and with the laws of the State; and (g) for such other purposes as are set forth in the Constitution or laws of the State (amended by Chapter 20, Acts of 1952, ratified Nov. 4, 1952; Chapter 62, Acts of 1990, ratified Nov. 6, 1990).
 
-(5) The Governor shall deliver to the presiding officer of each House the Budget and a bill for all the proposed appropriations of the Budget classified and in such form and detail as he shall determine or as may be prescribed by law; and the presiding officer of each House shall promptly cause said bill to be introduced therein, and such bill shall be known as the “Budget Bill.” The Governor may, with the consent of the General Assembly, before final action thereon by the General Assembly, amend or supplement said Budget to correct an oversight, provide funds contingent on passage of pending legislation or, in case of an emergency, by delivering such an amendment or supplement to the presiding officers of both Houses; and such amendment or supplement shall thereby become a part of said Budget Bill as an addition to the items of said bill or as a modification of or a substitute for any item of said bill such amendment or supplement may affect (amended by Chapter 20, Acts of 1952, ratified Nov. 4, 1952).
+\(5) The Governor shall deliver to the presiding officer of each House the Budget and a bill for all the proposed appropriations of the Budget classified and in such form and detail as he shall determine or as may be prescribed by law; and the presiding officer of each House shall promptly cause said bill to be introduced therein, and such bill shall be known as the “Budget Bill.” The Governor may, with the consent of the General Assembly, before final action thereon by the General Assembly, amend or supplement said Budget to correct an oversight, provide funds contingent on passage of pending legislation or, in case of an emergency, by delivering such an amendment or supplement to the presiding officers of both Houses; and such amendment or supplement shall thereby become a part of said Budget Bill as an addition to the items of said bill or as a modification of or a substitute for any item of said bill such amendment or supplement may affect (amended by Chapter 20, Acts of 1952, ratified Nov. 4, 1952).
 
 (5a) The Budget and the Budget Bill as submitted by the Governor to the General Assembly shall have a figure for the total of all proposed appropriations and a figure for the total of all estimated revenues available to pay the appropriations, and the figure for total proposed appropriations shall not exceed the figure for total estimated revenues. Neither the Governor in submitting an amendment or supplement to the Budget Bill nor the General Assembly in amending the Budget Bill shall thereby cause the figure for total proposed appropriations to exceed the figure for total estimated revenues, including any revisions, and in the Budget Bill as enacted the figure for total estimated revenues always shall be equal to or exceed the figure for total appropriations (added by Chapter 745, Acts of 1973, ratified Nov. 5, 1974).
 
-(6) The General Assembly shall not amend the Budget Bill so as to affect either the obligations of the State under Section 34 of Article III of the Constitution, or the provisions made by the laws of the State for the establishment and maintenance of a system of public schools or the payment of any salaries required to be paid by the State of Maryland by the Constitution (amended by Chapter 373, Acts of 1972, ratified Nov. 7, 1972).
+\(6) The General Assembly shall not amend the Budget Bill so as to affect either the obligations of the State under Section 34 of Article III of the Constitution, or the provisions made by the laws of the State for the establishment and maintenance of a system of public schools or the payment of any salaries required to be paid by the State of Maryland by the Constitution (amended by Chapter 373, Acts of 1972, ratified Nov. 7, 1972).
 
 (6a) In enacting a balanced Budget Bill each fiscal year as required under this Section, the General Assembly may amend the bill by increasing or diminishing the items therein relating to the General Assembly, and by increasing or diminishing the items therein relating to the Judiciary, but except as hereinbefore specified, may not alter the said bill except to strike out or reduce items therein, provided, however, that the salary or compensation of any public officer shall not be decreased during the public officer’s term of office. When passed by both Houses, the Budget Bill shall be presented to the Governor for approval or disapproval according to Section 17 of Article II of this Constitution (added by Chapter 645, Acts of 2020, ratified Nov. 3, 2020).
 
 (6b) In enacting a balanced Budget Bill as required under this Section for Fiscal Year 2024 and each fiscal year thereafter, the General Assembly may amend the bill by increasing, diminishing, or adding items therein relating to the General Assembly, by increasing, diminishing, or adding items therein relating to the Judiciary, and by increasing, diminishing, or adding items relating to the Executive Department, provided that the total of the appropriation for the Executive Department approved by the General Assembly does not exceed the total proposed appropriation for the Executive Department submitted by the Governor. The salary or compensation of any public officer may not be decreased during the public officer’s term of office. When passed by both Houses, the Budget Bill shall be a law immediately without further action by the Governor (added by Chapter 645, Acts of 2020, ratified Nov. 3, 2020).
 
-(7) The Governor and such representatives of the executive departments, boards, officers and commissions of the State expending or applying for State’s moneys, as have been designated by the Governor for this purpose, shall have the right, and when requested by either House of the General Assembly, it shall be their duty to appear and be heard with respect to any Budget Bill during the consideration thereof, and to answer inquiries relative thereto (amended by Chapter 159, Acts of 1916, ratified Nov. 7, 1916; Chapter 497, Acts of 1947, ratified Nov. 2, 1948).
+\(7) The Governor and such representatives of the executive departments, boards, officers and commissions of the State expending or applying for State’s moneys, as have been designated by the Governor for this purpose, shall have the right, and when requested by either House of the General Assembly, it shall be their duty to appear and be heard with respect to any Budget Bill during the consideration thereof, and to answer inquiries relative thereto (amended by Chapter 159, Acts of 1916, ratified Nov. 7, 1916; Chapter 497, Acts of 1947, ratified Nov. 2, 1948).
 
-(8) Supplementary Appropriation Bill. Either House may consider other appropriations but both Houses shall not finally act upon such appropriations until after the Budget Bill has been finally acted upon by both Houses, and no such other appropriation shall be valid except in accordance with the provisions following: (a) Every such appropriation shall be embodied in a separate bill limited to some single work, object or purpose therein stated and called herein a Supplementary Appropriation Bill; (b) Each Supplementary Appropriation Bill shall provide the revenue necessary to pay the appropriation thereby made by a tax, direct or indirect, to be levied and collected as shall be directed in said bill; (c) No Supplementary Appropriation Bill shall become a law unless it be passed in each House by a vote of a majority of the whole number of the members elected, and the yeas and nays recorded on its final passage; (d) Each Supplementary Appropriation Bill shall be presented to the Governor of the State as provided in Section 17 of Article 2 of the Constitution and thereafter all the provisions of said section shall apply (amended by Chapter 416, Acts of 1966, ratified Nov. 8, 1966).
+\(8) Supplementary Appropriation Bill. Either House may consider other appropriations but both Houses shall not finally act upon such appropriations until after the Budget Bill has been finally acted upon by both Houses, and no such other appropriation shall be valid except in accordance with the provisions following: (a) Every such appropriation shall be embodied in a separate bill limited to some single work, object or purpose therein stated and called herein a Supplementary Appropriation Bill; (b) Each Supplementary Appropriation Bill shall provide the revenue necessary to pay the appropriation thereby made by a tax, direct or indirect, to be levied and collected as shall be directed in said bill; (c) No Supplementary Appropriation Bill shall become a law unless it be passed in each House by a vote of a majority of the whole number of the members elected, and the yeas and nays recorded on its final passage; (d) Each Supplementary Appropriation Bill shall be presented to the Governor of the State as provided in Section 17 of Article 2 of the Constitution and thereafter all the provisions of said section shall apply (amended by Chapter 416, Acts of 1966, ratified Nov. 8, 1966).
 
-(9) Nothing in this section shall be construed as preventing the General Assembly from passing at any time, in accordance with the provisions of Section 28 of Article 3 of the Constitution and subject to the Governor’s power of approval as provided in Section 17 of Article 2 of the Constitution, an appropriation bill to provide for the payment of any obligation of the State within the protection of Section 10 of Article 1 of the Constitution of the United States (amended by Chapter 159, Acts of 1916, ratified Nov. 7, 1916; Chapter 497, Acts of 1947, ratified Nov. 2, 1948).
+\(9) Nothing in this section shall be construed as preventing the General Assembly from passing at any time, in accordance with the provisions of Section 28 of Article 3 of the Constitution and subject to the Governor’s power of approval as provided in Section 17 of Article 2 of the Constitution, an appropriation bill to provide for the payment of any obligation of the State within the protection of Section 10 of Article 1 of the Constitution of the United States (amended by Chapter 159, Acts of 1916, ratified Nov. 7, 1916; Chapter 497, Acts of 1947, ratified Nov. 2, 1948).
 
-(10) If the Budget Bill shall not have been finally acted upon by the Legislature seven days before the expiration of the regular session, the Governor shall issue a proclamation extending the session for some further period as may, in his judgment, be necessary for the passage of such bill; but no other matter than such bill shall be considered during such extended session except a provision for the cost thereof (amended by Chapter 576, Acts of 1970, ratified Nov. 3, 1970).
+\(10) If the Budget Bill shall not have been finally acted upon by the Legislature seven days before the expiration of the regular session, the Governor shall issue a proclamation extending the session for some further period as may, in his judgment, be necessary for the passage of such bill; but no other matter than such bill shall be considered during such extended session except a provision for the cost thereof (amended by Chapter 576, Acts of 1970, ratified Nov. 3, 1970).
 
-(11) For the purpose of making up the Budget, the Governor shall require from the proper State officials (including all executive departments, all executive and administrative offices, bureaus, boards, commissions and agencies that expend or supervise the expenditure of, and all institutions applying for State moneys and appropriations) such itemized estimates and other information, in such form and at such times as directed by the Governor. An estimate for a program required to be funded by a law which will be in effect during the fiscal year covered by the Budget and which was enacted before July 1 of the fiscal year prior to that date shall provide a level of funding not less than that prescribed in the law. The estimates for the Legislative Department, certified by the presiding officer of each House, of the Judiciary, as provided by law, certified by the Chief Judge of the Court of Appeals, and for the public schools, as provided by law, shall be transmitted to the Governor, in such form and at such times as directed by the Governor, and shall be included in the Budget without revision (amended by Chapter 971, Acts of 1978, ratified Nov. 7, 1978; Chapter 62, Acts of 1990, ratified Nov. 6, 1990).
+\(11) For the purpose of making up the Budget, the Governor shall require from the proper State officials (including all executive departments, all executive and administrative offices, bureaus, boards, commissions and agencies that expend or supervise the expenditure of, and all institutions applying for State moneys and appropriations) such itemized estimates and other information, in such form and at such times as directed by the Governor. An estimate for a program required to be funded by a law which will be in effect during the fiscal year covered by the Budget and which was enacted before July 1 of the fiscal year prior to that date shall provide a level of funding not less than that prescribed in the law. The estimates for the Legislative Department, certified by the presiding officer of each House, of the Judiciary, as provided by law, certified by the Chief Judge of the Court of Appeals, and for the public schools, as provided by law, shall be transmitted to the Governor, in such form and at such times as directed by the Governor, and shall be included in the Budget without revision (amended by Chapter 971, Acts of 1978, ratified Nov. 7, 1978; Chapter 62, Acts of 1990, ratified Nov. 6, 1990).
 
-(12) The Governor may provide for public hearings on all estimates and may require the attendance at such hearings of representatives of all agencies, and for all institutions applying for State moneys. After such public hearings he may, in his discretion, revise all estimates except those for the legislative and judiciary departments, and for the public schools, as provided by law, and except that he may not reduce an estimate for a program below a level of funding prescribed by a law which will be in effect during the fiscal year covered by the Budget, and which was enacted before July 1 of the fiscal year prior thereto (amended by Chapter 971, Acts of 1978, ratified Nov. 7, 1978).
+\(12) The Governor may provide for public hearings on all estimates and may require the attendance at such hearings of representatives of all agencies, and for all institutions applying for State moneys. After such public hearings he may, in his discretion, revise all estimates except those for the legislative and judiciary departments, and for the public schools, as provided by law, and except that he may not reduce an estimate for a program below a level of funding prescribed by a law which will be in effect during the fiscal year covered by the Budget, and which was enacted before July 1 of the fiscal year prior thereto (amended by Chapter 971, Acts of 1978, ratified Nov. 7, 1978).
 
-(13) The General Assembly may, from time to time, enact such laws not inconsistent with this section, as may be necessary and proper to carry out its provisions.
+\(13) The General Assembly may, from time to time, enact such laws not inconsistent with this section, as may be necessary and proper to carry out its provisions.
 
-(14) In the event of any inconsistency between any of the provisions of this Section and any of the other provisions of the Constitution, the provisions of this Section shall prevail. But nothing herein shall in any manner affect the provisions of Section 34 of Article 3 of the Constitution or of any laws heretofore or hereafter passed in pursuance thereof, or be construed as preventing the Governor from calling extraordinary sessions of the General Assembly, as provided by Section 16 of Article 2, or as preventing the General Assembly at such extraordinary sessions from considering any emergency appropriation or appropriations (amended by Chapter 159, Acts of 1916, ratified Nov. 7, 1916; Chapter 497, Acts of 1947, ratified Nov. 2, 1948).
+\(14) In the event of any inconsistency between any of the provisions of this Section and any of the other provisions of the Constitution, the provisions of this Section shall prevail. But nothing herein shall in any manner affect the provisions of Section 34 of Article 3 of the Constitution or of any laws heretofore or hereafter passed in pursuance thereof, or be construed as preventing the Governor from calling extraordinary sessions of the General Assembly, as provided by Section 16 of Article 2, or as preventing the General Assembly at such extraordinary sessions from considering any emergency appropriation or appropriations (amended by Chapter 159, Acts of 1916, ratified Nov. 7, 1916; Chapter 497, Acts of 1947, ratified Nov. 2, 1948).
 
-(15) If any item of any appropriation bill passed under the provisions of this Section shall be held invalid upon any ground, such invalidity shall not affect the legality of the bill or of any other item of such bill or bills.
+\(15) If any item of any appropriation bill passed under the provisions of this Section shall be held invalid upon any ground, such invalidity shall not affect the legality of the bill or of any other item of such bill or bills.
 
 ## Maryland Constitution Declaration of Rights, Article 43
 
@@ -437,19 +419,19 @@ Article 43. That the Legislature ought to encourage the diffusion of knowledge a
 
 ## Md. Code, Courts & Judicial Proceedings § 3-412: Supplementary Relief
 
-(a) Further relief based on a declaratory judgment or decree may be granted if necessary or proper.
+\(a) Further relief based on a declaratory judgment or decree may be granted if necessary or proper.
 
-(b) An application for further relief shall be by petition to a court having jurisdiction to grant the relief.
+\(b) An application for further relief shall be by petition to a court having jurisdiction to grant the relief.
 
-(c) If the application is sufficient, the court, on reasonable notice, shall require any adverse party whose rights have been adjudicated by the declaratory judgment or decree, to show cause why further relief should not be granted.
+\(c) If the application is sufficient, the court, on reasonable notice, shall require any adverse party whose rights have been adjudicated by the declaratory judgment or decree, to show cause why further relief should not be granted.
 
 ## 2007 Md. Laws (Special Session) Ch. 2, § 5–202 (cleaned up)
 
-(a) (13) “Target per pupil foundation amount” means:
+\(a) (13) “Target per pupil foundation amount” means:
 
-(i) In fiscal [year 2004, $5,730] years 2008, 2009, and 2010, $6,694; and
+\(i) In fiscal [year 2004, $5,730] years 2008, 2009, and 2010, $6,694; and
 
-(ii) In subsequent fiscal years:
+\(ii) In subsequent fiscal years:
 
 1. The target per pupil foundation amount for the prior fiscal year increased by the same percentage as the lessor of:
 
@@ -463,25 +445,25 @@ C. 5%; or
 
 ## Md. House Bill 1372, Md. Laws, 2021 Session, Chapter 55 § 19 [Excerpts]
 
-(a) (1) In this section the following words have the meanings indicated.
+\(a) (1) In this section the following words have the meanings indicated.
 
-(2) “General Fund estimate” means the estimate of General Fund revenues [for fiscal year 2022] by the Board of Revenue Estimates as required under § 6–106 of the State Finance and Procurement Article.
+\(2) “General Fund estimate” means the estimate of General Fund revenues [for fiscal year 2022] by the Board of Revenue Estimates as required under § 6–106 of the State Finance and Procurement Article.
 
-(3) “Major education aid” has the meaning stated in § 5–201(l) of the Education Article as enacted by this Act.
+\(3) “Major education aid” has the meaning stated in § 5–201(l) of the Education Article as enacted by this Act.
 
-(b) Beginning December 1, [2020] 2021, and each December 1 thereafter FOR FISCAL YEAR 2023 AND FOR EACH FISCAL YEAR THEREAFTER, if the December General Fund estimate in the December Board of Revenue Estimates report FOR THAT FISCAL YEAR is more than 7.5% below the March General Fund estimate in the March Board of Revenue Estimates report [of that year] FOR THAT FISCAL YEAR:
+\(b) Beginning December 1, [2020] 2021, and each December 1 thereafter FOR FISCAL YEAR 2023 AND FOR EACH FISCAL YEAR THEREAFTER, if the December General Fund estimate in the December Board of Revenue Estimates report FOR THAT FISCAL YEAR is more than 7.5% below the March General Fund estimate in the March Board of Revenue Estimates report [of that year] FOR THAT FISCAL YEAR:
 
-(1) notwithstanding any other provision of law, per pupil FORMULA increases in major education aid required under this Act shall be limited to the rate of inflation, as defined in § 5–201(h) of the Education Article as enacted by this Act; and
+\(1) notwithstanding any other provision of law, per pupil FORMULA increases in major education aid required under this Act shall be limited to the rate of inflation, as defined in § 5–201(h) of the Education Article as enacted by this Act; and
 
-(2) notwithstanding any other provision of law, any additional funding increases required under this Act shall be limited to the rate of inflation, as defined in § 5–201(h) of the Education Article as enacted by this Act.
+\(2) notwithstanding any other provision of law, any additional funding increases required under this Act shall be limited to the rate of inflation, as defined in § 5–201(h) of the Education Article as enacted by this Act.
 
 ## Maryland Rules, Rule 2-501: Motion for Summary Judgment [Excerpts]
 
-(a) Motion. Any party may file a written motion for summary judgment on all or part of an action on the ground that there is no genuine dispute as to any material fact and that the party is entitled to judgment as a matter of law. The motion shall be supported by affidavit if it is (1) filed before the day on which the adverse party’s initial pleading or motion is filed or (2) based on facts not contained in the record. A motion for summary judgment may not be filed: (A) after any evidence is received at trial on the merits, or (B) unless permission of the court is granted, after the deadline for dispositive motions specified in the scheduling order entered pursuant to Rule 2-504(b)(1)(E).
+\(a) Motion. Any party may file a written motion for summary judgment on all or part of an action on the ground that there is no genuine dispute as to any material fact and that the party is entitled to judgment as a matter of law. The motion shall be supported by affidavit if it is (1) filed before the day on which the adverse party’s initial pleading or motion is filed or (2) based on facts not contained in the record. A motion for summary judgment may not be filed: (A) after any evidence is received at trial on the merits, or (B) unless permission of the court is granted, after the deadline for dispositive motions specified in the scheduling order entered pursuant to Rule 2-504(b)(1)(E).
 
-(b) Response. A response to a motion for summary judgment shall be in writing and shall (1) identify with particularity each material fact as to which it is contended that there is a genuine dispute and (2) as to each such fact, identify and attach the relevant portion of the specific document, discovery response, transcript of testimony (by page and line), or other statement under oath that demonstrates the dispute. A response asserting the existence of a material fact or controverting any fact contained in the record shall be supported by an affidavit or other written statement under oath.
+\(b) Response. A response to a motion for summary judgment shall be in writing and shall (1) identify with particularity each material fact as to which it is contended that there is a genuine dispute and (2) as to each such fact, identify and attach the relevant portion of the specific document, discovery response, transcript of testimony (by page and line), or other statement under oath that demonstrates the dispute. A response asserting the existence of a material fact or controverting any fact contained in the record shall be supported by an affidavit or other written statement under oath.
 
-(f) Entry of Judgment. The court shall enter judgment in favor of or against the moving party if the motion and response show that there is no genuine dispute as to any material fact and that the party in whose favor judgment is entered is entitled to judgment as a matter of law. By order pursuant to Rule 2-602 (b), the court may direct entry of judgment (1) for or against one or more but less than all of the parties to the action, (2) upon one or more but less than all of the claims presented by a party to the action, or (3) for some but less than all of the amount requested when the claim for relief is for money only and the court reserves disposition of the balance of the amount requested. If the judgment is entered against a party in default for failure to appear in the action, the clerk promptly shall send a copy of the judgment to that party at the party’s last known address appearing in the court file.
+\(f) Entry of Judgment. The court shall enter judgment in favor of or against the moving party if the motion and response show that there is no genuine dispute as to any material fact and that the party in whose favor judgment is entered is entitled to judgment as a matter of law. By order pursuant to Rule 2-602 (b), the court may direct entry of judgment (1) for or against one or more but less than all of the parties to the action, (2) upon one or more but less than all of the claims presented by a party to the action, or (3) for some but less than all of the amount requested when the claim for relief is for money only and the court reserves disposition of the balance of the amount requested. If the judgment is entered against a party in default for failure to appear in the action, the clerk promptly shall send a copy of the judgment to that party at the party’s last known address appearing in the court file.
 
 # Certificate of Service
 

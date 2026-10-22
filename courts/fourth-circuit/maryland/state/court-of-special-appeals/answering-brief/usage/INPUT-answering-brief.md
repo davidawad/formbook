@@ -3,7 +3,8 @@
 # of Maryland No. 956, September Term 2023, Brief of Appellee, filed January 9, 2024 by Zuckerman
 # Spaeder LLP and the ACLU of Maryland Foundation (counsel for Appellee). E-filed stamp 1/9/2024 12:02 PM.
 # Source and fetch details: SOURCE.md (this folder).
-case_number: "No. 956, September Term 2023"
+case_number: "956"
+sept_term: "September Term 2023"
 caption:
   - names: ["SHERIFF RICKY COX,"]
     designation: "Appellant,"
@@ -69,19 +70,13 @@ counsel:
     lines: ["ZUCKERMAN SPAEDER LLP", "100 East Pratt Street, Suite 2440", "Baltimore, MD 21202-1031", "410.332.0444", "wmurphy@zuckerman.com", "samiller@zuckerman.com", "Attorney No. 8406010273 (Murphy)", "Attorney No. 1912180059 (Miller)", "*Attorneys for Appellee*"]
   - names: ["Deborah A. Jeon", "Dara Johnson"]
     lines: ["American Civil Liberties Union Foundation of Maryland", "3600 Clipper Mill Road, Suite 350", "Baltimore, MD 21211", "410.889.8550", "jeon@aclu-md.org", "djohnson@aclu-md.org", "Attorney No. 9006280125 (Jeon)", "Attorney No. 2301120003 (Johnson)", "*Attorneys for Appellee*"]
-date: "Dated: January 9, 2024"
+date: "January 9, 2024"
 signature:
   closing: "Respectfully submitted,"
   signers:
     - name: "William J. Murphy"
       lines: ["/s/ William J. Murphy", "Attorney No. 406010273"]
   lines: ["ZUCKERMAN SPAEDER LLP", "Samantha A. Miller", "Attorney No. 1912180059", "100 East Pratt Street, Suite 2440", "Baltimore, MD 21202-1031", "410.332.0444", "wmurphy@zuckerman.com", "samiller@zuckerman.com", "*Attorneys for Appellee*", "Deborah A. Jeon", "Attorney No. 9006280125", "Dara Johnson", "Attorney No. 2301120003", "American Civil Liberties Union Foundation of Maryland", "3600 Clipper Mill Road, Suite 350", "Baltimore, MD 21211", "410.889.8550", "jeon@aclu-md.org", "djohnson@aclu-md.org", "*Attorneys for Appellee*"]
-service:
-  paragraphs:
-    - "I hereby certify that on this 9th day of January, 2024, I caused two copies of the foregoing Brief for Appellee to be sent by MDEC email and first-class, postage-prepaid mail to:"
-  recipients:
-    - ["Kirstin Lustila", "Assistant Attorney General", "Attorney No. 1212120196", "Office of the Attorney General", "80 Calvert Street, 4th Floor", "Annapolis, Maryland 21401", "klustila@treasurer.state.md.us"]
-  signature: ["/s/ William J. Murphy", "William J. Murphy"]
 ---
 # INTRODUCTION
 
@@ -141,13 +136,13 @@ Two weeks later, the Sheriff (again through Lt. Colonel McDowell) responded with
 
 On March 2, 2022, the ACLU filed suit against the Sheriff of Calvert County, alleging one count of Improper Denial of Waiver of Fees. E.20-42. In its Prayer for Relief, the ACLU asked the Court to:
 
-> (1) Enter judgment in favor of Plaintiff ACLU declaring that Defendants[^2] have violated the MPIA;
+> \(1) Enter judgment in favor of Plaintiff ACLU declaring that Defendants[^2] have violated the MPIA;
 >
-> (2) Order Defendants to waive all fees associated with the July 22 request;
+> \(2) Order Defendants to waive all fees associated with the July 22 request;
 >
-> (3) Order Defendants to produce all documents associated with the July 22 request; and
+> \(3) Order Defendants to produce all documents associated with the July 22 request; and
 >
-> (4) Award Plaintiff ACLU its costs, including attorneys’ fees, it has incurred in maintaining this action, as authorized by Md. Code, G.P. § 4-362(f).
+> \(4) Award Plaintiff ACLU its costs, including attorneys’ fees, it has incurred in maintaining this action, as authorized by Md. Code, G.P. § 4-362(f).
 
 E.26-27. The Sheriff filed a motion to dismiss, which the Circuit Court denied. E.3. Thereafter, the parties engaged in discovery. One of the ACLU’s discovery requests to the Sheriff was for “[a]ll documents related to Plaintiff’s request for a fee waiver, including all documents reviewed, referred to, or relied upon in connection with Plaintiff’s fee waiver request.” E.250. The Sheriff agreed to produce “[a]ll existing non-privileged responsive documents.” *Id.*
 
@@ -181,17 +176,17 @@ In *Open Justice*, the requester, the nonprofit organization Open Justice Baltim
 
 OJB requested a public interest fee waiver, which BPD denied. *Open Justice*, 485 Md. at 635-39. BPD explained its denial as follows:
 
-> 6. I reached this decision, in part, because OJB did not provide sufficient information to establish its need for a fee waiver. OJB’s articulated public interest purpose for the records was extremely general and vague. The reasons OJB provided for its request did not explain its public interest purpose or how disclosure would achieve its purpose.
+> 6\. I reached this decision, in part, because OJB did not provide sufficient information to establish its need for a fee waiver. OJB’s articulated public interest purpose for the records was extremely general and vague. The reasons OJB provided for its request did not explain its public interest purpose or how disclosure would achieve its purpose.
 >
-> 7. Additionally, I determined that the materials sought would not likely “contribute significantly to public understanding of the operations and activities of the [BPD]” and therefore the request was not in the public interest so as to justify a fee waiver.
+> 7\. Additionally, I determined that the materials sought would not likely “contribute significantly to public understanding of the operations and activities of the [BPD]” and therefore the request was not in the public interest so as to justify a fee waiver.
 >
 > \*\*\*
 >
 > The documents sought would likely be heavily redacted and thus not understandable to the public.
 >
-> 9. Much thought was given to OJB’s request, but it was determined that OJB’s fee waiver request did not meet the public interest standard or factors. In reaching this conclusion, BPD did consider the overall cost of production, budgetary constraints, and manpower shortages in the Public Integrity Bureau, but these considerations did not drive the decision.
+> 9\. Much thought was given to OJB’s request, but it was determined that OJB’s fee waiver request did not meet the public interest standard or factors. In reaching this conclusion, BPD did consider the overall cost of production, budgetary constraints, and manpower shortages in the Public Integrity Bureau, but these considerations did not drive the decision.
 >
-> 10. BPD did not willfully, knowingly, or deliberately ignore the Plaintiff’s fee waiver request. Rather, BPD thoughtfully and carefully considered all of the available information and legal guidance and, based on the information provided, concluded that a fee waiver would not be appropriate for OJB’s requests.
+> 10\. BPD did not willfully, knowingly, or deliberately ignore the Plaintiff’s fee waiver request. Rather, BPD thoughtfully and carefully considered all of the available information and legal guidance and, based on the information provided, concluded that a fee waiver would not be appropriate for OJB’s requests.
 
 *Open Justice I*, 2022 WL 354486, at \*8 (Md. App. 2022) (unreported).
 
@@ -199,7 +194,7 @@ OJB sued in the Circuit Court for Baltimore City, and the Circuit Court granted 
 
 The Supreme Court agreed with this Court that BPD acted arbitrarily and capriciously in denying OJB’s request for a public interest fee waiver, and affirmed on that basis. *Open Justice*, 485 Md. at 671. In its briefs, BPD had asserted four “rationales” for denying the fee waiver:
 
-> (1) the asserted public interest purpose was too vague and general; (2) the records were unlikely to contribute significantly to public understanding of government operations because they would be either redundant or unclear; (3) OJB either did not prove its inability to pay or BPD determined OJB could afford to pay; and (4) the cost and burden of the request.
+> \(1) the asserted public interest purpose was too vague and general; (2) the records were unlikely to contribute significantly to public understanding of government operations because they would be either redundant or unclear; (3) OJB either did not prove its inability to pay or BPD determined OJB could afford to pay; and (4) the cost and burden of the request.
 
 *Id.* at 663. The Supreme Court rejected rationales (1) and (2) because they were unsupported by the evidence. *Id.* at 663-65. It rejected rationale (3) because “[t]he MPIA imposes no affirmative burden on requestors to demonstrate their inability to pay unless they are indigent and submit an affidavit of indigency,” and because BPD’s conclusion that OJB could afford the fee was itself arbitrary and capricious. *Id.* at 666-67. With respect to rationale (4), the Court found as follows:
 
@@ -292,6 +287,27 @@ Appellee respectfully requests oral argument.
 # CERTIFICATE OF WORD COUNT AND R. 8-112 COMPLIANCE
 
 I hereby certify that the foregoing paper was prepared in 13 point proportionally spaced Georgia font and contains 7,845 words, excluding the items set forth in Rule 8-503, and therefore it complies with the 9100-word limit set forth in Rule 8-503(d)(1). This brief further complies with the requirements stated in Rule 8-112.
+
+/s/ William J. Murphy
+William J. Murphy
+
+# CERTIFICATE OF SERVICE
+
+I hereby certify that on this 9th day of January, 2024, I caused two copies of the foregoing Brief for Appellee to be sent by MDEC email and first-class, postage-prepaid mail to:
+
+> Kirstin Lustila
+>
+> Assistant Attorney General
+>
+> Attorney No. 1212120196
+>
+> Office of the Attorney General
+>
+> 80 Calvert Street, 4th Floor
+>
+> Annapolis, Maryland 21401
+>
+> klustila@treasurer.state.md.us
 
 /s/ William J. Murphy
 William J. Murphy

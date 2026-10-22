@@ -1,0 +1,13 @@
+# Numbers stated by the Maryland rules for this court (../rules.md). Stricter than the default eval (12 pt).
+# font.size_pt: Md. Rule 8-112(c)(1): proportionally spaced type in the text and footnotes "shall not be smaller than 13 point".
+# params.margin_pt is left at the default 72 pt (1 in): Md. Rule 1-301(c) requires at least one inch.
+font:
+  size_pt: 13
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails; a difference that is the shared model's is reported, not gated
+# (docs/open-items/fb-595.54.58.md).
+params:
+  cross_engine: gate
+  # No docx engine: LibreOffice's render cannot find the page of the authority "Article III §§ 32 and 52" (needle
+  # a47.1; the doubled section sign the shared code binds), so fb render fails (docs/open-items/fb-595.54.58.md).

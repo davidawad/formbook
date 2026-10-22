@@ -39,7 +39,6 @@ counsel:
       - "Tel: 202-637-5491"
       - "Fax:202-637-5910"
       - "cate.stetson@hoganlovells.com"
-date: "undated"
 date_note: "No date is printed in the filing text; Aug. 2016 is the month given in usage/SOURCE.md."
 signature:
   signers:

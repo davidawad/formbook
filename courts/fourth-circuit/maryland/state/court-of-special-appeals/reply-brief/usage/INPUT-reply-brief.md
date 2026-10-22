@@ -10,7 +10,7 @@
 # The court-root folder is named for the Court of Special Appeals; the filing itself is captioned as the
 # Appellate Court of Maryland, and that caption is kept as filed.
 case_number: "ACM-REG-0209-2023"
-court: "IN THE APPELLATE COURT OF MARYLAND, September Term, 2023"
+sept_term: "September Term, 2023"
 lower_court: "On Appeal from the Circuit Court for Baltimore City (Hon. Audrey Carrion)"
 caption:
   - names: ["THE BRADFORD PLAINTIFFS", "(KEITH A. BRADFORD, ET AL.),"]
@@ -19,26 +19,12 @@ caption:
     designation: "Appellee."
 brief_title: "Reply and Opposition Brief of Appellants/Cross-Appellees the Bradford Plaintiffs (Page Proof)"
 counsel:
-  - names: ["Elizabeth B. McCallum"]
-    lines: ["Baker & Hostetler LLP", "1050 Connecticut Ave., NW, Suite 1100", "Washington, DC 20036", "(202) 861-1522", "emccallum@bakerlaw.com"]
-  - names: ["Jeffrey E. Liskov"]
-    lines: ["(MD Bar ID 2012170120)", "Baker & Hostetler LLP", "1050 Connecticut Ave., NW, Suite 1100", "Washington, DC 20036", "(202) 861-1522", "jliskov@bakerlaw.com"]
-  - names: ["Danyll Foix"]
-    lines: ["Baker & Hostetler LLP", "1050 Connecticut Ave., NW, Suite 1100", "Washington, DC 20036", "(202) 861-1522", "dfoix@bakerlaw.com"]
-  - names: ["Christine M. Kennedy"]
-    lines: ["(MD Bar ID 2112140193)", "Baker & Hostetler LLP", "1050 Connecticut Ave., NW, Suite 1100", "Washington, DC 20036", "(202) 861-1522", "ckennedy@bakerlaw.com"]
-  - names: ["Arielle Humphries"]
-    lines: ["NAACP Legal Defense & Educational Fund", "40 Rector Street, 5th Floor", "New York, NY 10006", "(212) 965-2200", "ahumphries@naacpldf.org"]
-  - names: ["Victor Genecin"]
-    lines: ["NAACP Legal Defense & Educational Fund", "40 Rector Street, 5th Floor", "New York, NY 10006", "(212) 965-2200", "vgenecin@naacpldf.org"]
-  - names: ["Alaizah Koorji"]
-    lines: ["NAACP Legal Defense & Educational Fund", "40 Rector Street, 5th Floor", "New York, NY 10006", "(212) 965-2200", "akoorji@naacpldf.org"]
-  - names: ["Joseph Wong"]
-    lines: ["NAACP Legal Defense & Educational Fund", "700 14th Street, NW, Suite 600", "Washington, DC 20005", "jwong@naacpldf.org"]
-  - names: ["Deborah A. Jeon"]
-    lines: ["(MD Bar ID 9006280125)", "ACLU of Maryland", "3600 Clipper Mill Road, Suite 350", "Baltimore, MD 21211", "(410) 889-8550", "jeon@aclu-md.org"]
-  - names: ["David Rocah"]
-    lines: ["(MD Bar ID 0312050001)", "ACLU of Maryland", "3600 Clipper Mill Road, Suite 350", "Baltimore, MD 21211", "(410) 889-8550", "drocah@aclu-md.org"]
+  - names: ["Elizabeth B. McCallum", "Jeffrey E. Liskov", "(MD Bar ID 2012170120)", "Danyll Foix", "Christine M. Kennedy", "(MD Bar ID 2112140193)"]
+    lines: ["Baker & Hostetler LLP", "1050 Connecticut Ave., NW, Suite 1100", "Washington, DC 20036", "(202) 861-1522", "emccallum@bakerlaw.com", "jliskov@bakerlaw.com", "dfoix@bakerlaw.com", "ckennedy@bakerlaw.com"]
+  - names: ["Arielle Humphries", "Victor Genecin", "Alaizah Koorji"]
+    lines: ["NAACP Legal Defense & Educational Fund", "40 Rector Street, 5th Floor", "New York, NY 10006", "(212) 965-2200", "ahumphries@naacpldf.org", "vgenecin@naacpldf.org", "akoorji@naacpldf.org", "**Joseph Wong**", "NAACP Legal Defense & Educational Fund", "700 14th Street, NW, Suite 600", "Washington, DC 20005", "jwong@naacpldf.org"]
+  - names: ["Deborah A. Jeon", "(MD Bar ID 9006280125)", "David Rocah", "(MD Bar ID 0312050001)"]
+    lines: ["ACLU of Maryland", "3600 Clipper Mill Road, Suite 350", "Baltimore, MD 21211", "(410) 889-8550", "jeon@aclu-md.org", "drocah@aclu-md.org"]
 counsel_role: "Counsel for Appellants the Bradford Plaintiffs"
 authorities:
   - heading: "A. Cases"
@@ -143,7 +129,7 @@ authorities:
         find: "INJUNCTIONS § 1"
       - cite: "Md. Const. art. VIII"
         find: "Article VIII"
-date: "2024-02-20"
+date: "February 20, 2024"
 signature:
   firm: "Baker & Hostetler LLP"
   signers:
@@ -232,6 +218,7 @@ Finally, Appellee argues that the standards of 1983 must govern because *Hornbec
 Appellee’s argument that Appellants somehow are precluded from stating a claim under Article VIII because they cited several purportedly inconsistent sources on adequacy, Appellee Br. at 36–37, disregards the contents of Appellants’ allegations and the teachings of *Hornbeck*. Appellants have reiterated that, to define “adequate by contemporary standards,” they rely on the *State’s own educational standards*. That position is consistent with the Court’s recognition in *Hornbeck* that a constitutional claim is cognizable when the State’s “comprehensive statewide qualitative standards governing all facets of the educational process” are “not being met” in a school district. 295 Md. at 632. The fact that numerous other sources also establish the inadequacy of Appellee’s education system merely demonstrates that there is, at a minimum, a genuine issue of material fact in this case.
 
 In keeping with *Hornbeck*, as well as the reasoning of the courts of other states, this Court should reject the Circuit Court’s attempt to divorce Article VIII standard from these frameworks. *See* Appellants’ Br. at 12–15; Education Law Center Amicus Br. at 1–8 (describing nationwide standards governing a constitutionally adequate education).
+
 ## III. APPELLEE WRONGLY ASSERTS THAT THERE ARE NO GENUINELY DISPUTED MATERIAL FACTS.
 
 In complete disregard of the voluminous record, Appellee reduces the factual evidence to a single page in its brief and asserts that State has fulfilled all its obligations under the Consent Decree, the orders pursuant to the Decree, and the Constitution by enacting the Built to Learn and Blueprint Acts. Appellee Br. at 38–39. Appellee does not even mention the substantial evidence in the record showing that thousands of children must try to learn in a system utterly lacking in the tools needed to achieve the State’s own standards in core subjects, and in which the majority of buildings are in disrepair and pose health and safety risks. Appellants refer the Court to their opening brief for a full discussion of that evidence, Appellants Br. at 16–24, and summarize it below. There is at least a genuine issue of material fact that these systemic issues exist notwithstanding funding from the Built to Learn and Blueprint Acts, such that Appellee was not entitled to a grant of summary judgment under any constitutional standard.
