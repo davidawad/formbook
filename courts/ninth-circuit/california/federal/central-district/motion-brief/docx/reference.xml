@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The C.D. Cal. motion's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman) at 14 pt (L.R. 11-3.1.1: 14-point or larger; size 28 half points);
+     Body Text in exact 24 pt line boxes (typst pitch, L.R. 11-3.2 and 11-3.6 double spacing on numbered lines) with a
+     half-inch indent, the headings in them with no space of their own; single lines of 16 pt (typst pitch-single).
+     The pages (letter, 1.5 in left and 1 in other margins, 27 numbered lines, the pleading rules), the sections and
+     their footers with the line numbers are written by docx/cacd-motion-brief.lua (FORMBOOK_FINAL, FORMBOOK_FOOTERS).
+     Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="480" single="320" indent="720" heading="480" heading-before="0" heading-after="0" footer="500"/>

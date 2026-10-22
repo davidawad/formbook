@@ -31,6 +31,7 @@ counsel:
   - "Facsimile: 310-586-7800"
   - "Attorneys for Defendant"
   - "Katheryn Hudson p/k/a Katy Perry"
+notice_to: "TO PLAINTIFF AND ITS ATTORNEYS OF RECORD:"
 notice:
   - "PLEASE TAKE NOTICE that, on March 6, 2019 at 10:00 a.m., or as soon thereafter as the matter may be heard, in Courtroom 7B of the above-entitled Court, located at 350 West First Street, Los Angeles, California 90012, Defendant Katheryn Hudson p/k/a Katy Perry (“Defendant”) will, and hereby does, move the Court for an order dismissing the Complaint filed herein by Plaintiff BackGrid USA Inc. (“Plaintiff”) pursuant to Federal Rule of Civil Procedure 12(b)(6) and, in the alternative, for a Court inquiry to the Register of Copyrights pursuant to 17 U.S.C. 411(b)(2)."
   - "The Complaint fails to state a claim for which relief may be granted and should be dismissed in its entirety."
