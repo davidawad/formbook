@@ -32,8 +32,18 @@
   // Unbreakable boxes, so the extracted text stays exactly the author's characters.
   show regex("\\S*\\)\\(\\S*"): it => box(it)
   show regex("[§¶] \\S+"): it => box(it)
+  // An item of a loose list (blank lines between the items) ends in a paragraph break; inside the item's paragraph
+  // it means nothing (the items have no space of their own), so it is dropped.
+  let unloose(body) = {
+    if body.func() != [].func() { return body }
+    let cs = body.children
+    if not cs.any(c => c.func() == parbreak) { return body }
+    while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+    while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+    cs.join()
+  }
   let list-item(lab, body) = block(above: 0pt, below: 0pt,
-    par(hanging-indent: list-indent, first-line-indent: 0pt, { box(width: list-indent, lab); body }))
+    par(hanging-indent: list-indent, first-line-indent: 0pt, { box(width: list-indent, lab); unloose(body) }))
   show enum: it => if list-indent == none { it } else {
     let n = if it.start == auto { 1 } else { it.start }
     for item in it.children {
