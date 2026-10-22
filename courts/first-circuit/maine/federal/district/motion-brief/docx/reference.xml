@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Me. motion brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman; D. Me. LR 10(b)(1) names no face) at 12 pt (size 24 half points, LR
+     10(b)(1): 12-point or larger); Body Text in exact 27.6 pt line boxes (typst pitch-double, LR 10(b)(2)
+     double-spaced) with a half-inch first-line indent; single lines, headings and the footer in 13.8 pt boxes (typst
+     pitch-single); footnotes 11 pt (size 22; LR 10(b)(1): 10-point or larger) in 12.65 pt boxes, 7 pt apart (typst
+     pitch-note, note-gap); letter page (LR 10(b)(3)) with 1-inch margins (LR 10(b)(5)) and a centered page number
+     (LR 10(b)(4)), its line 36.6 pt above the page foot (732 twips: where typst sets it, footer-descent 30 %).
+     docx/med-motion-brief.lua writes every other paragraph's own spacing. Twips: 20 x pt.
+     One style of its own: "Body Text Note", Body Text without widow control, for a paragraph that carries a footnote
+     mark (typst lets the line with the mark move on alone when its note does not fit; Word's widow control would
+     move the line before it too). -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="276" heading-before="0" heading-after="0" note="253" note-size="22" note-after="140" footer="732">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+</reference>
