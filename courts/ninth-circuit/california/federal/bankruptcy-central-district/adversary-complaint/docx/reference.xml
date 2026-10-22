@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The C.D. Cal. bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs)
+     in the face of the typst template ({font}, Times New Roman: a typeface Central Guide 9004-1(b)(2)(C) lists) at
+     12 pt (size 24 half points); Body Text in exact 24 pt line boxes (typst pitch, the numbered lines, Central Guide
+     9004-1(b)(2)(F) double spacing) with a half-inch indent, and the headings in them; single lines in 12 pt boxes
+     (typst pitch-single). Pleading paper as typst/cacb-adversary-complaint.typ: letter; top 1 in (line 1 at least
+     1 inch down, Central Guide 9004-1(b)(2)(C)), 27 numbered lines of 24 pt (9004-1(b)(2)(B)(i) allows 28; the 28th would fall in the 1 in
+     bottom margin the checks hold the text to), so the bottom margin is 1 in; left 1.5 in, right 1 in. The header (rIdHdrLines) holds the line numbers 1 to 27: a text box on
+     the page, 1 in down, 1 in wide (the numbers end half an inch left of the text), right-aligned in exact 24 pt line
+     boxes, on the baselines of the body lines. The pleading rules are page borders: a double rule at the text's left
+     edge, a single rule at its right. The footer (rIdFooter1) is the typst one (Central Guide 9004-1(b)(2)(G)): the
+     page number centered in a 12 pt line 6 pt below the last numbered line, then the paper's title (the SUBJECT
+     property) and "ADV. NO." with the adversary number (COMMENTS) 4 pt below; docx/cacb-adversary.lua sets both
+     properties from the sample. The footer's last line ends 38 pt above the page foot (760 twips). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="240" indent="720" heading="480" heading-before="0" heading-after="0" footer="760">
+<header id="rIdHdrLines"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/></w:pPr><w:r><w:drawing xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="251659264" behindDoc="1" locked="0" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="page"><wp:posOffset>0</wp:posOffset></wp:positionH><wp:positionV relativeFrom="page"><wp:posOffset>914400</wp:posOffset></wp:positionV><wp:extent cx="914400" cy="8229600"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/><wp:docPr id="1" name="PleadingLineNumbers"/><wp:cNvGraphicFramePr/><a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"><wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="914400" cy="8229600"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/><a:ln><a:noFill/></a:ln></wps:spPr><wps:txbx><w:txbxContent>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>1</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>2</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>3</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>4</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>5</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>6</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>7</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>8</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>9</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>10</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>11</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>12</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>13</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>14</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>15</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>16</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>17</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>18</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>19</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>20</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>21</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>22</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>23</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>24</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>25</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>26</w:t></w:r></w:p>
+<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:jc w:val="right"/></w:pPr><w:r><w:t>27</w:t></w:r></w:p>
+</w:txbxContent></wps:txbx><wps:bodyPr rot="0" vert="horz" wrap="square" lIns="0" tIns="0" rIns="0" bIns="0" anchor="t" anchorCtr="0"><a:noAutofit/></wps:bodyPr></wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r></w:p></header>
+<footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="exact"/><w:ind w:left="0" w:firstLine="0"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p><w:p><w:pPr><w:tabs><w:tab w:val="right" w:pos="8640"/></w:tabs><w:spacing w:before="80" w:after="0" w:line="240" w:lineRule="exact"/><w:ind w:left="0" w:firstLine="0"/><w:jc w:val="left"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> SUBJECT </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>SUBJECT</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r><w:r><w:tab/></w:r><w:r><w:t xml:space="preserve">ADV. NO. </w:t></w:r><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> COMMENTS </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>COMMENTS</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></footer>
+<w:sectPr><w:headerReference w:type="default" r:id="rIdHdrLines"/><w:footerReference w:type="default" r:id="rIdFooter1"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="2160" w:header="720" w:footer="760" w:gutter="0"/><w:pgBorders w:offsetFrom="text"><w:left w:val="double" w:sz="4" w:space="11" w:color="000000"/><w:right w:val="single" w:sz="6" w:space="7" w:color="000000"/></w:pgBorders></w:sectPr>
+</reference>
