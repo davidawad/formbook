@@ -47,6 +47,10 @@ eval-all:
 check-selftest DIR:
     {{fb}} check-selftest {{DIR}}
 
+# fb check --no-render on every engine of every court doc folder changed since BASE (the landing gate)
+check-changed BASE="origin/master":
+    {{fb}} check-changed --base {{BASE}}
+
 # measured diff (fb diff) of each typst render of DIR against its same-id FILED-EXAMPLE
 diff DIR:
     {{fb}} usage pairs {{DIR}} | xargs -n2 {{fb}} diff
