@@ -5,17 +5,32 @@
 // Admin Guide Rule 5005-4(8) ("s/" signature); LBR 9013-3 (certificate of service). See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")        // no E.D.N.C. typeface rule; the exemplar is a Times-style serif; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // no E.D.N.C. typeface rule; Times New Roman, the house standard (docs/FONTS.md), as in the exemplar
 #let type-size = 12pt                   // no E.D.N.C. type-size rule (FRBP 9004(a): "clearly legible"); exemplar is 12 pt
-#let body-leading = 1.345em             // double spacing as in the exemplar: 0.655em line box + 1.345em leading = 24 pt pitch
-#let single-leading = 0.5em             // single spacing: counsel, signature, certificate of service, quotations
 #let margin = 1in                       // no E.D.N.C. margin rule; 1 inch as in the exemplar
 #let para-indent = 0.5in                // first-line indent of body paragraphs
-#let text-width = 8.5in - 2 * margin
+#let heading-hang = 0.5in               // a level-2 heading's lines after the first
+#let caption-left = 3.4in               // the party column, ruled on its right and bottom
+#let caption-gutter = 0.2in             // between the party column and the case numbers
+#let caption-inset = 0.1in              // the case numbers' own inset
+#let rule-pad-right = 10pt              // the party text stops this far left of the rule
+#let rule-pad-bottom = 8pt              // and the rule this far below the last party's space
+#let quote-inset = 1in                  // block quotations: indented 1 inch on both sides
+#let quote-item = 0.25in                // a numbered item in a quotation: the number in a box of this width
+#let sig-indent = 3in                   // the signature column
+#let served-indent = 1in                // the certificate's list of those served
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-double = 24pt                // double spacing as in the exemplar
+#let pitch-single = 13.8pt              // caption, headings, quotations, signature, certificate lists: 1.15 x 12 pt
+#let gap = 12pt                         // the unit of the spaces between single-spaced blocks
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -31,117 +46,136 @@
 /// Markdown to content (smart punctuation: the author's characters are kept).
 #let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
+/// Body chunks: blank-line-separated blocks of the markdown body.
+#let chunks(body) = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim()).filter(c => c != "")
+
+/// One single-spaced line block (a paragraph of its own), with explicit space above and below it.
+#let line-block(above: 0pt, below: 0pt, left: 0pt, right: 0pt, body) = block(width: 100%, above: above, below: below,
+  pad(left: left, right: right, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    body
+  }))
+
 // ---------------------------------------------------------------------------
 // Caption: court (centered caps), then the parties on the left and the case numbers on the right.
 // FRBP 9004(b) and LBR 9004-2 require the court, the division, the case and adversary numbers, the chapter,
 // and a designation of the paper; the title below states that designation.
 // ---------------------------------------------------------------------------
 
+/// A party: its names, the designation at the right, a gap after it.
 #let party-block(p) = {
-  for n in p.names { [#n \ ] }
-  align(right, [#p.designation])
-  v(single-leading * 2)
+  for n in p.names { line-block(md(n)) }
+  line-block(below: gap, align(right, md(p.designation)))
 }
 
 #let caption(meta) = {
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  for line in meta.court { align(center, text(weight: "bold", upper(line))) }
-  align(center, text(weight: "bold", upper(meta.division)))
-  v(single-leading * 3)
-  grid(
-    columns: (3.4in, 1fr),
-    column-gutter: 0.2in,
-    block(width: 100%, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt), {
-      [In re:]
-      v(single-leading)
+  for l in meta.court { line-block(align(center, text(weight: "bold", upper(l)))) }
+  line-block(align(center, text(weight: "bold", upper(meta.division))))
+  block(width: 100%, above: 1.5 * gap, below: 0pt, grid(
+    columns: (caption-left, 1fr),
+    block(width: 100%, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: rule-pad-right, bottom: rule-pad-bottom), {
+      line-block(below: gap / 2)[In re:]
       for p in meta.caption.in_re { party-block(p) }
       for p in meta.caption.parties { party-block(p) }
+      v(gap)   // the last party's gap too (a block's last `below` is not kept)
     }),
-    block(inset: (left: 0.1in), {
-      v(single-leading * 4)
-      [Case No. #meta.case_number \ ]
-      [Chapter #meta.chapter \ ]
-      if "adversary_number" in meta [ \ Adversary Proceeding No. #meta.adversary_number ]
+    pad(left: caption-gutter + caption-inset, {
+      // the case numbers on the lines of the first party, the adversary number on the second party's first line
+      v(pitch-single + gap / 2)
+      line-block[Case No. #meta.case_number]
+      line-block[Chapter #meta.chapter]
+      if "adversary_number" in meta { line-block(above: gap)[Adversary Proceeding No. #meta.adversary_number] }
     }),
-  )
-  v(single-leading * 3)
-  align(center, text(weight: "bold", upper(meta.title)))
-  v(single-leading * 2)
+  ))
+  line-block(above: 1.5 * gap, below: gap, align(center, text(weight: "bold", upper(meta.title))))
 }
 
 // ---------------------------------------------------------------------------
 // Signature block and certificate of service
 // ---------------------------------------------------------------------------
 
-#let signature-block(sig) = block(breakable: false, {
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  v(single-leading * 2)
-  if "date" in sig [ Dated: #sig.date ]
-  v(single-leading * 2)
-  pad(left: 3in, {
-    [Respectfully submitted,]
-    v(single-leading * 2)
-    for s in sig.signers {
-      [#s.sign \ ]
-      for l in s.lines { [#l \ ] }
-      v(single-leading * 2)
-    }
-    if "role" in sig { [#text(style: "italic", sig.role)] }
-  })
+#let signature-block(sig) = block(width: 100%, breakable: false, above: gap, below: 0pt, {
+  if "date" in sig { line-block[Dated: #sig.date] }
+  line-block(above: gap, left: sig-indent)[Respectfully submitted,]
+  for s in sig.signers {
+    line-block(above: gap, left: sig-indent, md(s.sign))
+    for l in s.lines { line-block(left: sig-indent, md(l)) }
+  }
+  if "role" in sig { line-block(above: gap, left: sig-indent, text(style: "italic", sig.role)) }
 })
 
+/// The certificate of service (LBR 9013-3), on a page of its own.
 #let certificate(c) = {
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  align(center, text(weight: "bold", upper(c.title)))
-  v(single-leading * 3)
-  par(leading: body-leading, first-line-indent: para-indent, justify: false, c.text)
-  v(single-leading * 2)
-  pad(left: 1in, {
-    for l in c.served { [#l \ ] }
-  })
-  v(single-leading * 3)
-  pad(left: 3in, {
-    [Dated: #c.date]
-    v(single-leading * 2)
-    [#c.signer.sign \ ]
-    for l in c.signer.lines { [#l \ ] }
-  })
+  pagebreak()
+  line-block(align(center, text(weight: "bold", upper(c.title))))
+  block(width: 100%, above: 1.5 * gap, below: 0pt, par(first-line-indent: (amount: para-indent, all: true), md(c.text)))
+  for (i, l) in c.served.enumerate() { line-block(above: if i == 0 { gap } else { 0pt }, left: served-indent, md(l)) }
+  line-block(above: 1.5 * gap, left: sig-indent)[Dated: #c.date]
+  line-block(above: gap, left: sig-indent, md(c.signer.sign))
+  for l in c.signer.lines { line-block(left: sig-indent, md(l)) }
 }
 
 // ---------------------------------------------------------------------------
 // Body: headings, paragraphs, block quotations
 // ---------------------------------------------------------------------------
 
+/// A block quotation: single-spaced, indented on both sides, its paragraphs and numbered items a gap apart (an
+/// item's number in a box, the text hanging after it).
+#let quotation(c) = {
+  let ps = c.replace(regex("(?m)^>[ \\t]?"), "").split(regex("\\n[ \\t]*\\n")).map(s => s.trim()).filter(s => s != "")
+  for (i, q) in ps.enumerate() {
+    let m = q.match(regex("^(\\d+\\.)[ \\t]+"))
+    let body = if m == none { md(q) } else {
+      par(hanging-indent: quote-item, [#box(width: quote-item, m.captures.at(0))#md(q.slice(m.end))])
+    }
+    line-block(above: if i == 0 { gap / 2 } else { gap }, below: if i == ps.len() - 1 { gap } else { 0pt },
+      left: quote-inset, right: quote-inset, body)
+  }
+}
+
 #let body-style(body) = {
-  // Level 1: centered, bold, capitals (argument sections: INTRODUCTION, ARGUMENT, CONCLUSION, ...).
-  show heading.where(level: 1): it => block(width: 100%, above: 24pt, below: 12pt, sticky: true,
-    align(center, text(size: type-size, weight: "bold", upper(it.body))))
-  // Level 2: bold, flush left (numbered argument points, e.g. "I. ...").
-  show heading.where(level: 2): it => block(width: 100%, above: 12pt, below: 12pt, sticky: true,
-    par(leading: single-leading, first-line-indent: 0pt, hanging-indent: 0.5in, text(size: type-size, weight: "bold", it.body)))
-  // Block quotations: indented 1 inch on both sides, single-spaced (FRAP-style; see README.md).
-  show quote.where(block: true): it => pad(left: 1in, right: 1in, top: 6pt, bottom: 12pt, {
-    set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-    it.body
-  })
-  set par(leading: body-leading, first-line-indent: para-indent, justify: false)
-  md(body)
+  // Level 1: centered, bold, capitals (INTRODUCTION, ARGUMENT, CONCLUSION, ...), 24 pt above and 12 below.
+  // Level 2: bold at the margin, its later lines hanging (numbered argument points, e.g. "I. ..."), 12 pt above and
+  // below. Single-spaced, kept with the text after them.
+  show heading: it => {
+    let above = if it.level == 1 { 2 * gap } else { gap }
+    block(width: 100%, above: above, below: gap, sticky: true, {
+      set text(size: type-size, ..edges(pitch-single))
+      if it.level == 1 { align(center, text(weight: "bold", upper(it.body))) } else {
+        par(first-line-indent: 0pt, hanging-indent: heading-hang, text(weight: "bold", it.body))
+      }
+    })
+  }
+  for c in chunks(body) {
+    if c.starts-with("#") {
+      md(c)
+    } else if c.starts-with(">") {
+      quotation(c)
+    } else {
+      block(width: 100%, par(first-line-indent: (amount: para-indent, all: true), md(c)))
+    }
+  }
 }
 
 #let nceb-motion-brief(meta, body) = {
   set document(title: meta.title)
+  // The page number centered at the foot of every page, in a single-spaced line box, where Word's footer sets it.
   set page(
     paper: "us-letter",
     margin: margin,
-    numbering: "1",
-    number-align: center,
+    footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: 0pt)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch (double spaced).
+  show: xengine.with(pitch: pitch-double, list-indent: none)
+  // A doubled sign stays with its number too ("§§ 105(a)"; xengine binds a single one).
+  show regex("[§¶]+ \\S+"): it => box(it)
   caption(meta)
   body-style(body)
   signature-block(meta.signature)
-  if "certificate" in meta {
-    pagebreak()
-    certificate(meta.certificate)
-  }
+  if "certificate" in meta { certificate(meta.certificate) }
 }

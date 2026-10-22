@@ -5795,6 +5795,8 @@
       "class": "approximate",
       "face": "TeX Gyre Schola",
       "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.18 under David's 2026-10-17 ruling that Times New Roman is the standard: no E.D.N.C. rule names a face (FRBP 9004(a): clearly legible), so the template is set in Times New Roman 12 pt on typst and docx, as the nceb motion brief is, not in Century Schoolbook's stand-in Schola (the docx had named EB Garamond against a Schola typst face); face stays the audited match.",
       "fonts": [
         "Arial-BoldMT",
         "ArialMT",
@@ -5855,6 +5857,8 @@
       "class": "approximate",
       "face": "TeX Gyre Schola",
       "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.18 under David's 2026-10-17 ruling that Times New Roman is the standard: no M.D.N.C. rule names a face (FRBP 9004(a): clearly legible), so the template is set in Times New Roman 12 pt on typst and docx, not in Century Schoolbook's stand-in Schola (the docx had named EB Garamond against a Schola typst face); face stays the audited match.",
       "fonts": [
         "Aptos-Narrow",
         "CenturySchoolbook",
@@ -5964,6 +5968,8 @@
       "class": "approximate",
       "face": "TeX Gyre Schola",
       "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.18 under David's 2026-10-17 ruling that Times New Roman is the standard: E.D.N.C. LR 10.1(a) names no face (at least 11 point), so the template is set in Times New Roman 12 pt on typst and docx, as the nced motion brief is, not in Century Schoolbook's stand-in Schola (the docx had named EB Garamond against a Schola typst face); face stays the audited match.",
       "fonts": [
         "Arial-BoldMT",
         "ArialMT",

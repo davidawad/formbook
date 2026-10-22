@@ -1,197 +1,259 @@
--- nceb-adversary-complaint.lua (docx engine). Builds what pandoc does not build from the sample's frontmatter and body,
--- in the form of typst/nceb-adversary-complaint.typ: the caption (court lines, division, caption table with the rule
--- at its right and bottom edges, title), the numbered allegations, and the signature block. No case text is written here;
--- every word comes from the sample. See ../README.md "Engines".
+-- nceb-adversary-complaint.lua (docx engine): the E.D.N.C. bankruptcy adversary complaint as Word paragraphs, so that
+-- it reads and breaks as typst/nceb-adversary-complaint.typ does: the court lines and division, the caption (the party
+-- column ruled on its right and bottom, the case numbers beside it), the title, the allegations numbered 1., 2., ...
+-- (FRCP 10(b); not the lead-in before the first heading, the lettered introduction items, a "(" continuation, a "["
+-- note, the prayer's lead-in, quotations, tables or the prayer list), headings, ruled tables, block quotations, the
+-- prayer list and the signature block. Everything printed comes from the sample's frontmatter and body: no case text
+-- lives in this file.
+--
+-- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
+-- exact line boxes of the typst pitch (twips = 20 x pt: 480 the double-spaced body, 276 a single line), the spaces
+-- between blocks those of the typst template (the larger of the one's below and the next one's above), and the break
+-- rules of typst on every run. pandoc reads the sample without fancy lists (reference.xml pandoc-from), so "A. ..."
+-- and a quotation's "a) ..." stay paragraphs, as typst reads them.
 
-local function txt(x) return pandoc.utils.stringify(x) end
+local xe = require("docx.xengine")
+local stringify = pandoc.utils.stringify
 
-local function xesc(s)
-  s = s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;")
-  return s
+local BODY, SINGLE = 480, 276            -- typst pitch-double, pitch-single
+local GAP = 240                          -- typst gap, 12 pt
+local TEXTW = 9360                       -- 6.5 in
+local CAP_LEFT = 4608                    -- typst caption-left, 3.2 in
+local CAP_RIGHT_IND = 432                -- typst caption-gutter + caption-inset, 0.3 in
+local RULE_R, RULE_B = 200, 145          -- typst rule-pad-right 10 pt, rule-pad-bottom 8 pt less the 0.75 pt rule
+                                         -- LibreOffice adds to the row (measured)
+local ITEM = 720                         -- typst item-indent, 0.5 in
+local QUOTE = 1440                       -- typst quote-inset, 1 in
+local SIG = 4320                         -- typst sig-indent, 3 in
+local CELL_X, CELL_Y = 120, 60           -- typst cell-x 6 pt, cell-y 3 pt
+local CELL_B = 50                        -- cell-y less the 0.5 pt row border LibreOffice adds to each row (measured)
+
+local function plain(m)
+  if m == nil then return "" end
+  if type(m) == "string" then return m end
+  return stringify(m)
 end
 
-local function xpara(style, text)
-  return '<w:p><w:pPr><w:pStyle w:val="' .. style .. '"/></w:pPr>' ..
-    (text ~= "" and ('<w:r><w:t xml:space="preserve">' .. xesc(text) .. '</w:t></w:r>') or "") .. '</w:p>'
+-- A paragraph: o = { before, after, line, left, right, jc, keep, page }.
+local function p(body, o)
+  o = o or {}
+  local props = {}
+  if o.keep then props[#props + 1] = xe.KEEP end
+  props[#props + 1] = xe.spacing(o.before or 0, o.after or 0, o.line or SINGLE)
+  props[#props + 1] = xe.ind(o.left or 0, nil, 0, o.right)
+  props[#props + 1] = xe.jc(o.jc or "left")
+  return xe.para(props, body)
 end
 
--- Caption table: two columns, 3.2 in (left, ruled on its right and bottom) and 6.3 in (case numbers).
--- Widths in twips: 4608 + 4752 = 9360 (6.5 in text width). The right cell is indented 0.3 in.
-local function caption_table(meta)
+local TBL_PR = '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/>' ..
+  '<w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>' ..
+  '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="0"/>'
+
+local function tbl(widths, rows, borders)
+  local grid, trs = {}, {}
+  for _, w in ipairs(widths) do grid[#grid + 1] = '<w:gridCol w:w="' .. w .. '"/>' end
+  for _, row in ipairs(rows) do trs[#trs + 1] = '<w:tr><w:trPr><w:cantSplit/></w:trPr>' .. table.concat(row) .. '</w:tr>' end
+  return '<w:tbl><w:tblPr><w:tblW w:w="' .. TEXTW .. '" w:type="dxa"/>' .. (borders or "") .. TBL_PR .. '</w:tblPr><w:tblGrid>' ..
+    table.concat(grid) .. '</w:tblGrid>' .. table.concat(trs) .. '</w:tbl>'
+end
+
+local function tc(w, pr, body)
+  return '<w:tc><w:tcPr><w:tcW w:w="' .. w .. '" w:type="dxa"/>' .. (pr or "") .. '</w:tcPr>' .. body .. '</w:tc>'
+end
+
+-- ---------------------------------------------------------------------------
+-- Caption: court, division, the parties (ruled right and bottom) beside the case numbers, title
+-- ---------------------------------------------------------------------------
+
+local function caption(meta, out)
+  for _, l in ipairs(meta.court) do out[#out + 1] = p(xe.runs(pandoc.text.upper(plain(l)), { b = true }), { jc = "center" }) end
+  -- typst: the caption block stands 18 pt below the division
+  out[#out + 1] = p(xe.runs(pandoc.text.upper(plain(meta.division)), { b = true }), { jc = "center", after = 360 })
   local left = {}
-  local function party(p)
-    for _, n in ipairs(p.names) do table.insert(left, xpara("NCEBCaptionCell", txt(n))) end
-    table.insert(left, xpara("NCEBDesignation", txt(p.designation)))
+  local function party(pt)
+    for _, n in ipairs(pt.names) do left[#left + 1] = p(xe.inl(n)) end
+    left[#left + 1] = p(xe.inl(pt.designation), { jc = "right", after = GAP })
   end
-  for _, p in ipairs(meta.caption.in_re) do party(p) end
-  for _, p in ipairs(meta.caption.parties) do party(p) end
-  local right = {}
-  table.insert(right, xpara("NCEBCaseNumbers", "Case No. " .. txt(meta.case_number)))
-  table.insert(right, xpara("NCEBCaptionCell", "Chapter " .. txt(meta.chapter)))
+  for _, pt in ipairs(meta.caption.in_re) do party(pt) end
+  for _, pt in ipairs(meta.caption.parties) do party(pt) end
+  local right = { p("", { line = BODY }), p(xe.runs("Case No. " .. plain(meta.case_number))),
+    p(xe.runs("Chapter " .. plain(meta.chapter))) }
   if meta.adversary_number then
-    table.insert(right, xpara("NCEBCaptionCell", ""))
-    table.insert(right, xpara("NCEBCaptionCell", "Adversary Proceeding No. " .. txt(meta.adversary_number)))
+    right[#right + 1] = p(xe.runs("Adversary Proceeding No. " .. plain(meta.adversary_number)), { before = SINGLE })
   end
-  return '<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/>' ..
-    '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>' ..
-    '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>' ..
-    '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="1" w:noVBand="1"/></w:tblPr>' ..
-    '<w:tblGrid><w:gridCol w:w="4608"/><w:gridCol w:w="4752"/></w:tblGrid><w:tr><w:trPr><w:cantSplit/></w:trPr>' ..
-    '<w:tc><w:tcPr><w:tcW w:w="4608" w:type="dxa"/><w:tcBorders>' ..
-    '<w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:tcBorders>' ..
-    '<w:tcMar><w:bottom w:w="160" w:type="dxa"/><w:right w:w="200" w:type="dxa"/></w:tcMar></w:tcPr>' ..
-    table.concat(left) .. '</w:tc>' ..
-    '<w:tc><w:tcPr><w:tcW w:w="4752" w:type="dxa"/><w:tcMar><w:left w:w="432" w:type="dxa"/></w:tcMar></w:tcPr>' ..
-    table.concat(right) .. '</w:tc></w:tr></w:tbl>'
+  local rule = '<w:tcBorders><w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/>' ..
+    '<w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:tcBorders>' ..
+    '<w:tcMar><w:bottom w:w="' .. RULE_B .. '" w:type="dxa"/><w:right w:w="' .. RULE_R .. '" w:type="dxa"/></w:tcMar>'
+  out[#out + 1] = tbl({ CAP_LEFT, TEXTW - CAP_LEFT }, { {
+    tc(CAP_LEFT, rule, table.concat(left)),
+    tc(TEXTW - CAP_LEFT, '<w:tcMar><w:left w:w="' .. CAP_RIGHT_IND .. '" w:type="dxa"/></w:tcMar>', table.concat(right)),
+  } })
+  out[#out + 1] = p(xe.runs(pandoc.text.upper(plain(meta.title)), { b = true }), { jc = "center", before = 360, after = GAP })
 end
 
-local function styled(style, inlines)
-  return pandoc.Div({ pandoc.Para(inlines) }, { ["custom-style"] = style })
+-- ---------------------------------------------------------------------------
+-- Tables (typst: pipe-table): ruled, single-spaced, the full width; each column's share its longest word (x3) plus
+-- its longest cell (capped at 60 characters).
+-- ---------------------------------------------------------------------------
+
+-- characters as typst counts them: without the break marks this filter adds (zero-width space, word joiner)
+local function ulen(s)
+  s = s:gsub("\u{200B}", ""):gsub("\u{2060}", "")
+  return utf8.len(s) or #s
 end
 
--- Allegations: numbered 1, 2, ... by the template (FRCP 10(b)). Unnumbered: the lead-in before the first heading,
--- headings, lettered items (indented), a "~" paragraph (the author's mark, removed), a "(" continuation, a "[" note
--- (italic), lists, tables and quotations.
-local function number_body(blocks)
-  local first_h
-  for i, b in ipairs(blocks) do
-    if b.t == "Header" then first_h = i break end
-  end
-  local out, n = {}, 0
-  for i, b in ipairs(blocks) do
-    if b.t ~= "Para" then
-      table.insert(out, b)
-    else
-      local s = txt(b)
-      local c1 = s:sub(1, 1)
-      if first_h == nil or i < first_h then
-        table.insert(out, b)
-      elseif c1 == "~" then
-        local first = b.content[1]
-        if first and first.t == "Str" then first.text = first.text:sub(2) end
-        table.insert(out, b)
-      elseif s:match("^[A-Z]%. ") then
-        table.insert(out, pandoc.Div({ b }, { ["custom-style"] = "NCEB Indent Item" }))
-      elseif c1 == "[" then
-        table.insert(out, pandoc.Para({ pandoc.Emph(b.content) }))
-      elseif c1 == "(" then
-        table.insert(out, b)
-      else
-        n = n + 1
-        table.insert(b.content, 1, pandoc.Str(n .. ".\u{2003}"))
-        table.insert(out, b)
-      end
+local function pipe_table(t)
+  local rows = {}
+  local function add(rs)
+    for _, r in ipairs(rs) do
+      local row = {}
+      for _, c in ipairs(r.cells) do row[#row + 1] = c.contents end
+      rows[#rows + 1] = row
     end
   end
-  return out
-end
-
--- Tables: column widths weighted by the longest word of each column (x3, so no word breaks) plus the longest cell
--- text (capped at 60 characters). Pandoc would otherwise give every column the same width.
-local function table_widths(t)
+  add(t.head.rows)
+  for _, b in ipairs(t.bodies) do add(b.head); add(b.body) end
+  -- an all-empty header row is not a row
+  if #rows > 0 then
+    local empty = true
+    for _, c in ipairs(rows[1]) do if plain(c) ~= "" then empty = false end end
+    if empty then table.remove(rows, 1) end
+  end
   local n = #t.colspecs
-  local word, text = {}, {}
-  for i = 1, n do word[i] = 1; text[i] = 1 end
-  local function scan(rows)
-    for _, row in ipairs(rows) do
-      for ci, cell in ipairs(row.cells) do
-        local s = txt(cell.contents)
-        for w in s:gmatch("%S+") do
-          if #w > word[ci] then word[ci] = #w end
-        end
-        if #s > text[ci] then text[ci] = math.min(#s, 60) end
-      end
-    end
-  end
-  scan(t.head.rows)
-  for _, body in ipairs(t.bodies) do scan(body.head); scan(body.body) end
-  local weight, total = {}, 0
+  local weights, total = {}, 0
   for i = 1, n do
-    weight[i] = 3 * word[i] + text[i]
-    total = total + weight[i]
-  end
-  for i = 1, n do t.colspecs[i][2] = weight[i] / total end
-  return t
-end
-
--- A list inside a block quotation (the Section 9 terms, lettered a), b), c)): each item becomes a labelled paragraph
--- inside the quotation's indent, since pandoc's list numbering would start at the margin.
-local function list_label(l, n)
-  local style = tostring(l.listAttributes.style)
-  local delim = tostring(l.listAttributes.delimiter)
-  local v = tostring(n)
-  if style == "LowerAlpha" then v = string.char(96 + n) elseif style == "UpperAlpha" then v = string.char(64 + n) end
-  if delim == "OneParen" then return v .. ")" end
-  if delim == "TwoParens" then return "(" .. v .. ")" end
-  return v .. "."
-end
-
--- Each list item becomes a paragraph in the given style, its label a text run and the label's end a Word tab. The
--- last item takes last_style (keep-with-next, so the prayer's last item stays with the signature block).
-local TAB = pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>")
-
-local function list_paragraphs(l, style, last_style)
-  local out = {}
-  local start = l.listAttributes.start
-  for i, item in ipairs(l.content) do
-    local inl = pandoc.List({ pandoc.Str(list_label(l, start + i - 1)), TAB })
-    local first = item[1]
-    local from = 1
-    if first and (first.t == "Plain" or first.t == "Para") then
-      for _, x in ipairs(first.content) do inl:insert(x) end
-      from = 2
+    local word, text = 1, 1
+    for _, r in ipairs(rows) do
+      local s = plain(r[i] or {})
+      for w in s:gmatch("%S+") do word = math.max(word, ulen(w)) end
+      text = math.max(text, math.min(ulen(s), 60))
     end
-    local st = (i == #l.content) and last_style or style
-    table.insert(out, pandoc.Div({ pandoc.Para(inl) }, { ["custom-style"] = st }))
-    for k = from, #item do table.insert(out, item[k]) end
+    weights[i] = 3 * word + text
+    total = total + weights[i]
   end
-  return out
+  local widths = {}
+  for i = 1, n do widths[i] = math.floor(TEXTW * weights[i] / total + 0.5) end
+  local B = '<w:%s w:val="single" w:sz="4" w:space="0" w:color="000000"/>'
+  local borders = '<w:tblBorders>' .. B:format("top") .. B:format("left") .. B:format("bottom") .. B:format("right") ..
+    B:format("insideH") .. B:format("insideV") .. '</w:tblBorders>'
+  local mar = '<w:tcMar><w:top w:w="' .. CELL_Y .. '" w:type="dxa"/><w:left w:w="' .. CELL_X .. '" w:type="dxa"/>' ..
+    '<w:bottom w:w="' .. CELL_B .. '" w:type="dxa"/><w:right w:w="' .. CELL_X .. '" w:type="dxa"/></w:tcMar>'
+  local trs = {}
+  for _, r in ipairs(rows) do
+    local tcs = {}
+    for i = 1, n do
+      local blocks = r[i] or {}
+      local inl = (#blocks > 0 and blocks[1].content) or pandoc.Inlines({})
+      tcs[#tcs + 1] = tc(widths[i], mar, p(xe.inl(inl)))
+    end
+    trs[#trs + 1] = tcs
+  end
+  return tbl(widths, trs, borders)
+end
+
+-- ---------------------------------------------------------------------------
+-- Signature block: kept together (typst: an unbreakable block)
+-- ---------------------------------------------------------------------------
+
+local function signature(sig, out)
+  local rows = {}
+  if sig.lead then rows[#rows + 1] = { xe.inl(sig.lead), 0, GAP } end
+  if sig.firm then rows[#rows + 1] = { xe.runs(pandoc.text.upper(plain(sig.firm))), SIG, GAP } end
+  for _, s in ipairs(sig.signers) do
+    rows[#rows + 1] = { xe.inl(s.sign), SIG, GAP }
+    for _, l in ipairs(s.lines) do rows[#rows + 1] = { xe.inl(l), SIG, 0 } end
+  end
+  if sig.role then rows[#rows + 1] = { xe.inl(sig.role, { i = true }), SIG, GAP } end
+  for i, r in ipairs(rows) do out[#out + 1] = p(r[1], { left = r[2], before = r[3], keep = i < #rows }) end
+end
+
+-- ---------------------------------------------------------------------------
+-- Body
+-- ---------------------------------------------------------------------------
+
+-- Headings, single-spaced and centered, kept with the text: level 1 bold capitals (24 pt above, 12 below), level 2
+-- bold (6 and 6), level 3 plain (6 and 12).
+local SPACE = { { 2 * GAP, GAP }, { GAP // 2, GAP // 2 }, { GAP // 2, GAP } }
+local function heading(b)
+  local lvl = math.min(b.level, 3)
+  local content = b.content
+  if lvl == 1 then
+    content = pandoc.Inlines(content):walk({ Str = function(s) return pandoc.Str(pandoc.text.upper(s.text)) end })
+  end
+  return xe.para({ xe.style("Heading" .. lvl), xe.KEEP, xe.spacing(SPACE[lvl][1], SPACE[lvl][2], SINGLE), xe.ind(0, nil, 0),
+    xe.jc("center") }, xe.inl(content, { b = lvl <= 2 }))
+end
+
+local function body_par(body, left)
+  return p(body, { line = BODY, left = left })
+end
+
+-- typst's break opportunities that LibreOffice does not share: none inside ")(" (a word joiner), one after a
+-- slash before a letter (a zero-width space). Neither shows in the PDF text.
+local function breaks(s)
+  return pandoc.Str((s.text:gsub("%)%(", ")\u{2060}("):gsub("/([^%d%s])", "/\u{200B}%1")))
+end
+
+-- A doubled sign stays with its number ("§§ 151"; typst boxes "[§¶]+ \S+", xe.inl binds a single sign).
+local function bind_doubled(inl)
+  for i = 1, #inl - 1 do
+    local a, b = inl[i], inl[i + 1]
+    if a.t == "Str" and a.text:match("^[\u{00A7}\u{00B6}][\u{00A7}\u{00B6}]+$") and b.t == "Space" then
+      inl[i + 1] = pandoc.Str("\u{00A0}")
+    end
+  end
+  return inl
 end
 
 function Pandoc(doc)
+  doc = doc:walk({ Str = breaks }):walk({ Inlines = bind_doubled })
   local meta = doc.meta
-  -- pass 1: lists inside block quotations (quotation indent)
-  local d1 = doc:walk({
-    BlockQuote = function(bq)
-      local content = {}
-      for _, b in ipairs(bq.content) do
-        if b.t == "OrderedList" then
-          for _, x in ipairs(list_paragraphs(b, "NCEB Quote Item", "NCEB Quote Item")) do table.insert(content, x) end
-        else
-          table.insert(content, b)
-        end
-      end
-      bq.content = content
-      return bq
-    end,
-  })
-  -- pass 2: tables, and the other lists (at the margin, with a hanging indent)
-  local d = d1:walk({
-    Table = table_widths,
-    OrderedList = function(l) return list_paragraphs(l, "NCEB List Item", "NCEB List Item Last") end,
-  })
-  local blocks = {}
-  for _, line in ipairs(meta.court) do
-    table.insert(blocks, styled("NCEB Court", { pandoc.Str(txt(line):upper()) }))
+  local out = {}
+  caption(meta, out)
+  local blocks = doc.blocks
+  local first_h = #blocks + 1
+  for i, b in ipairs(blocks) do
+    if b.t == "Header" then first_h = i break end
   end
-  table.insert(blocks, styled("NCEB Division", { pandoc.Str(txt(meta.division):upper()) }))
-  table.insert(blocks, pandoc.RawBlock("openxml", caption_table(meta)))
-  table.insert(blocks, styled("NCEB Title", { pandoc.Str(txt(meta.title):upper()) }))
-  for _, b in ipairs(number_body(d.blocks)) do table.insert(blocks, b) end
-  -- signature block (LBR 9011-4; Admin Guide 5005-4(8))
-  local sig = meta.signature
-  if sig then
-    if sig.lead then table.insert(blocks, styled("NCEB Lead In", { pandoc.Str(txt(sig.lead)) })) end
-    if sig.firm then table.insert(blocks, styled("NCEB Signature Last", { pandoc.Str(txt(sig.firm):upper()) })) end
-    for _, s in ipairs(sig.signers) do
-      table.insert(blocks, styled("NCEB Signature", { pandoc.Str(txt(s.sign)) }))
-      local lines = s.lines
-      for i, l in ipairs(lines) do
-        local style = (i == #lines) and "NCEB Signature Last" or "NCEB Signature"
-        table.insert(blocks, styled(style, { pandoc.Str(txt(l)) }))
+  local n = 0
+  for i, b in ipairs(blocks) do
+    local next = blocks[i + 1]
+    if b.t == "Header" then
+      out[#out + 1] = heading(b)
+    elseif b.t == "OrderedList" or b.t == "BulletList" then
+      for _, x in ipairs(xe.list_items(b)) do out[#out + 1] = x end
+    elseif b.t == "Table" then
+      -- typst: 6 pt above the table, 12 pt below it (the next block's own space if larger)
+      out[#out + 1] = p("", { line = GAP // 2 })
+      out[#out + 1] = pipe_table(b)
+      local nb = 0
+      if next and next.t == "Header" then nb = SPACE[math.min(next.level, 3)][1] end
+      if next and next.t == "BlockQuote" then nb = GAP // 2 end
+      if GAP > nb then out[#out + 1] = p("", { line = GAP - nb }) end
+    elseif b.t == "BlockQuote" then
+      local qs = b.content
+      for k, q in ipairs(qs) do
+        out[#out + 1] = p(xe.inl(q.content), { before = k == 1 and GAP // 2 or GAP, after = k == #qs and GAP or 0,
+          left = QUOTE, right = QUOTE })
       end
+    elseif b.t == "Para" or b.t == "Plain" then
+      local s = plain(b)
+      if (s:match(":$") and next and next.t == "OrderedList") or s:match("^%(") or i < first_h then
+        out[#out + 1] = body_par(xe.inl(b.content))
+      elseif s:match("^%[") then
+        out[#out + 1] = body_par(xe.inl(b.content, { i = true }))
+      elseif s:match("^[A-Z]%. ") then
+        out[#out + 1] = body_par(xe.inl(b.content), ITEM)
+      else
+        n = n + 1
+        out[#out + 1] = body_par(xe.runs(n .. ".\u{2003}") .. xe.inl(b.content))
+      end
+    else
+      error("nceb-adversary-complaint.lua: unsupported block " .. b.t)
     end
-    if sig.role then table.insert(blocks, styled("NCEB Signature", { pandoc.Emph({ pandoc.Str(txt(sig.role)) }) })) end
   end
-  return pandoc.Pandoc(blocks, pandoc.Meta({}))
+  signature(meta.signature, out)
+  local res = {}
+  for _, x in ipairs(out) do res[#res + 1] = type(x) == "string" and xe.raw(x) or x end
+  return pandoc.Pandoc(res, pandoc.Meta({}))
 end
