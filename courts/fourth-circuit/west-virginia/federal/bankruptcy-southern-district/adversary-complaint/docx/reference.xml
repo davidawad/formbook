@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The S.D. W. Va. bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs)
+     in the face of the typst template ({font}, Times New Roman; WVSB-FORM-002, no rule names one) at 12 pt (size 24
+     half points); Body Text in exact 24 pt line boxes (typst pitch-body, WVSB-FORM-003 double spacing) with a
+     half-inch first-line indent; the court title, caption, headings and signature lines in 13.8 pt boxes (typst
+     pitch-single), a heading half a body line from the text on either side; letter page with 1-inch margins
+     (WVSB-FORM-001, WVSB-FORM-004) and a centered 11 pt page number, its 13.8 pt line 36.75 pt above the page foot
+     (735 twips: where typst sets it, footer-descent 30 %). docx/wvsb-adversary-complaint.lua writes every paragraph
+     with its own spacing. Pandoc's fancy lists are off: the typed labels "a." of the sub-paragraphs are text, as
+     the typst template (cmarker) reads them. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="240" heading-after="240" footer="735" pandoc-from="markdown+smart-fancy_lists">
+  <footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:fldChar w:fldCharType="begin" /></w:r><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:fldChar w:fldCharType="separate" /></w:r><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t>1</w:t></w:r><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:fldChar w:fldCharType="end" /></w:r></w:p></footer>
+</reference>
