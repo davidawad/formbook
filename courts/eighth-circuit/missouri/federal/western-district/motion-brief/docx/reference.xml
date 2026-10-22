@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The W.D. Mo. suggestions' Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman; no face, size or spacing rule in the W.D. Mo. Local Rules) at 13 pt (size
+     26 half points); Body Text in exact 29.9 pt line boxes (typst pitch-double, double spacing) with a half-inch
+     first-line indent; the cover, headings, contents, authorities, quotations and the signature block in 14.95 pt
+     boxes (typst pitch-single). docx/mowd-motion-brief.lua writes every paragraph's own spacing and the sections (the
+     page number 0.5 in above the page foot, typst footer-descent). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="26" body="598" single="299" indent="720" heading="299" heading-before="299" heading-after="0" quote="299"/>
