@@ -40,9 +40,9 @@ cover:
           - {text: "COA No. {coa_no}", optional: true}
           - {text: "Trial Ct No. {trial_court_no}", optional: true}
           - each: caption_right
-            above: 14.4
+            above: 13.8
             blocks:
-              - {text: "{.}", below: 7.2}
+              - {text: "{.}", below: 13.8}
     gutter: 18
     above: 14.4
   - {text: "{brief_title}", align: center, bold: true, upper: true, above: 14.4}

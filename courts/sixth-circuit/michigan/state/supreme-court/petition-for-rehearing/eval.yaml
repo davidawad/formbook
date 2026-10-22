@@ -1,9 +1,12 @@
-# MCR 1.109(D)(1)(b)(ii), (v) (rules.md MSC-FORM-005, MSC-COVER-004): the caption names the parties and gives each
-# attorney's name, business address, telephone number and bar number. This motion's caption names some thirty
-# plaintiffs and eleven attorneys, which do not fit one page; the filed motion's cover runs two unnumbered pages and
-# its text starts at 1 on page 3, as ours does (cover_pages 2).
 params:
+  # MCR 1.109(D)(1)(b)(ii), (v) (rules.md MSC-FORM-005, MSC-COVER-004): the caption names the parties and gives each
+  # attorney's name, business address, telephone number and bar number. This motion's caption names some thirty
+  # plaintiffs and eleven attorneys, which do not fit one page; the filed motion's cover runs two unnumbered pages and
+  # its text starts at 1 on page 3, as ours does (cover_pages 2).
   cover_pages: 2
-  # Gate 4 CROSS-ENGINE: reported, not gated (docs/open-items/fb-595.54.31.md: a cover numbered apart without tables
-  # is dropped by the docx engine and numbered roman by the latex engine).
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
+  # (`fb engines gen`, fb-595.54.12); after the serial lane fb-595.54.82 they still break lines or pages apart from
+  # typst where the shared model differs between engines (docs/open-items/fb-595.54.31.md, "Second pass"): typst
+  # lets a bullet item's first line end page 11 alone ("What's more, ..."), LaTeX and Word move it to page 12 (orphan
+  # control in list items). Reported, not gated.
   cross_engine: report
