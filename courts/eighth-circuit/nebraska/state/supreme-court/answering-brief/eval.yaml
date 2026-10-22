@@ -1,0 +1,9 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). LaTeX breaks every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # LibreOffice sets TeX Gyre Schola's fi, fl and ff ligatures (each such word about 0.47 pt narrower than typst's and
+  # LaTeX's), so Word fits a word more on some lines: page 32 line 10 ("Com. Sav.") and every line after it shifts
+  # (XENG-003). The model sets no ligatures off in Word; reported, not gated (docs/open-items/fb-595.54.70.md).
+  cross_engine_docx: report

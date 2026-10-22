@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex engine is generated from the typst
+# template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and breaks every line and page where the typst
+# render does, so a difference fails. No docx engine yet: Word's page lookup (docxpages.rs) loses its place at an
+# authority whose find opens a heading ("L.B. 574 IS UNCONSTITUTIONAL") and the render stops (DEF-RENDER-001);
+# docs/open-items/fb-595.54.70.md.
+params:
+  cross_engine: gate

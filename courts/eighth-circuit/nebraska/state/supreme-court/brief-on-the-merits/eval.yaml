@@ -1,0 +1,8 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the shared model
+# does not yet set this sample alike in every engine (docs/open-items/fb-595.54.70.md): typst counts an authority whose
+# find ends a page's last line inside a boxed token a page late ("art. IV, § 15." p32, "?p=34390." p23; LaTeX and Word
+# give the page it is on); LaTeX sets a token held after "§" ("§§ 4(3)(a)–(c)") at TeX Live Schola's advances, not
+# the vendored ones (p15, p22, p24 and the page ends from p25); Word sets Schola's ligatures (p10 line 24).
+params:
+  cross_engine: report
