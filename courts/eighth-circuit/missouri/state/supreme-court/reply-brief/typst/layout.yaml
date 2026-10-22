@@ -35,7 +35,7 @@ cover:
     above: 14.4
   - {text: "{counsel_role}", align: right, bold: true, optional: true, above: 7.8}
 # MO-CONT-001 (Rule 84.04(a)(1)): the table of contents and the table of authorities, each on its own page.
-contents: {title: "Table of Contents", depth: 1, col: 36, hang: 36, above: 9.1}
+contents: {title: "Table of Contents", depth: 1, col: 36, hang: 0, above: 9.1}   # hang 0: Word takes a hang as a tab stop, a row shorter than it ("V.") lost its leader
 authorities:
   title: "Table of Authorities"
   col: 56
@@ -43,6 +43,8 @@ authorities:
   above: 5.2
   group: {bold: true, above: 14.3, below: 3.9}
 # MO-CERT-002: the closing words, then the signature block, single spaced, never split.
+# The last paragraph kept with it (tier 2: a signature page of its own reads as detached).
+keep_with_closing: true
 closing:
   - group:
       - {text: "{date}", optional: true}

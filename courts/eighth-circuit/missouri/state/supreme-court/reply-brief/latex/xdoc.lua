@@ -126,7 +126,7 @@ return require("latex.xdoc")({
     ["title"] = "Table of Contents",
     ["depth"] = 1,
     ["col"] = 36,
-    ["hang"] = 36,
+    ["hang"] = 0,
     ["above"] = 9.1,
   },
   ["authorities"] = {
@@ -140,6 +140,7 @@ return require("latex.xdoc")({
       ["below"] = 3.9,
     },
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {
