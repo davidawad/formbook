@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Del. Bankruptcy motion brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs;
+     docs/EVAL-LOOP.md, "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; LR
+     7007-2(a)(ii): Courier New or Times New Roman, at least 12 point) at 12 pt (size 24 half points); Body Text in
+     exact 24 pt line boxes (480 twips, typst pitch-body; LR 7007-2(a)(ii): double spaced) with a half-inch
+     first-line indent (typst para-indent); single lines and footnotes in 14 pt boxes (280 twips, typst
+     pitch-single), 7 pt after a footnote (typst note-gap); Footnote Text restated with a 4-twip right indent
+     (LibreOffice sets a footnote line about 0.15 pt narrower than typst; a line typst fills to within that would
+     otherwise keep one more word). Added here, as the typst template sets them: "Body Text
+     Keep" (the last paragraph, kept whole with the signature block: typst one unbreakable block) and "Quotation" (a
+     block quotation's paragraph: single spaced, 0.5 in in on both sides, a blank single line above, between and
+     below; typst quote-inset, quote-gap). docx/deb-motion-brief.lua writes the cover, the contents, the headings, the
+     signature block, the footers (the page number, centred, its line box ending 0.5 in above the edge: typst
+     footer-descent; none on the cover) and the three sections (cover; contents and authorities lower roman from i;
+     brief arabic from 1). Twips: 20 x pt. pandoc-from: CommonMark with smart punctuation and footnotes, as typst's
+     cmarker reads the body. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="commonmark+smart+footnotes+yaml_metadata_block" size="24" body="480" single="280" indent="720" heading="480" heading-before="0" heading-after="0" note-after="140" footer="720">
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:keepLines/><w:spacing w:before="0" w:after="140" w:line="280" w:lineRule="exact"/><w:ind w:right="4"/></w:pPr><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Quotation"><w:name w:val="Quotation"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="280" w:after="280" w:line="280" w:lineRule="exact"/><w:ind w:left="720" w:right="720" w:firstLine="0"/></w:pPr></w:style>
+</reference>
