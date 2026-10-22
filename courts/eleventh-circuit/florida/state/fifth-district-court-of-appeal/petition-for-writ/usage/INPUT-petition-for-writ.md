@@ -81,7 +81,7 @@ APD: "Judge, this is not a capital offense or an offense punishable by life with
 
 ASA: "Judge we would argue this is a dangerous crime and therefore due to the threat of safety to the victim the state is asking for no bond.
 
-"
+“
 
 APD: "Judge it is a dangerous crime. However, in order for a court to issue a no bond as far as a dangerous crime the State needs to show that there is probable cause and there are exigent circumstances. The state has set forth no exigent circumstances. Absent that your honor the motion is insufficient, and we would ask the court to set bond pursuant to 3.131(b). We would ask the court to set bond in this case.“
 
