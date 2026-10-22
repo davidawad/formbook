@@ -1,43 +1,82 @@
-// San Diego County Superior Court (calsuperct-sandiego): motion (notice and memorandum of points and authorities) on pleading paper.
+// San Diego County Superior Court (calsuperct-sandiego): motion (notice and memorandum of points and authorities) on
+// pleading paper.
 //
-// Rule-driven and content-agnostic. The governing rules are Cal. Rules of Court 2.100-2.119 and
-// the San Diego Superior Court Local Rules, Division II (see ../README.md for the rule numbers, URLs
-// and the date each was verified). No case-specific text, no coordinates measured off the filed
-// exemplar, no forced line breaks. The markdown body is rendered by cmarker; the metadata comes
-// from the YAML frontmatter of the same file.
+// Rule-driven and content-agnostic. The governing rules are Cal. Rules of Court 2.100-2.119, 3.1110 and 3.1113 and
+// the San Diego Superior Court Local Rules, Division II (see ../README.md for the rule numbers, URLs and the date each
+// was verified). No case-specific text, no coordinates measured off the filed exemplar, no forced line breaks. The
+// markdown body is rendered by cmarker; the metadata comes from the YAML frontmatter of the same file.
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/pleading-paper.typ": line-numbers as shared-line-numbers, pleading-rules as shared-pleading-rules
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters: the only numbers in this file. Each one traces to a rule or is a named style choice.
 // ---------------------------------------------------------------------------
 
 // CRC 2.105: "essentially equivalent to Courier, Times New Roman, or Arial". No face is named, so
-// the Times New Roman row of docs/FONTS.md applies: Liberation Serif (metric-compatible).
+// the house face applies: Times New Roman (Liberation Serif, its metric twin, as the fallback).
 #let font-family = ("Times New Roman", "Liberation Serif")
-#let type-size = 12pt              // CRC 2.104: a font size not smaller than 12 points.
-#let box-h = 12pt                  // one text line occupies 1 em of box; the leading sets the pitch.
-#let pitch = 24pt                  // double spacing (CRC 2.108(1)); the pleading grid is this pitch.
-#let grid-rows = 28                // numbered lines per page (pleading convention, tier 2).
+#let type-size = 12pt              // CRC 2.104: a font size not smaller than 12 points (footnotes included).
+#let lines-per-page = 28           // numbered lines per page (pleading convention, tier 2; CRC 2.108 sets no count).
+#let page-w = 8.5in
+#let page-h = 11in
 #let top-margin = 1in              // line 1 starts 1 inch from the top (CRC 2.111(1)).
-#let bottom-margin = 46pt          // 28 lines (672 pt) fit; 29 lines (696 pt) do not.
 #let left-margin = 1.5in           // text starts here; CRC 2.107 requires at least 1 inch.
 #let right-margin = 0.5in          // CRC 2.107 requires at least 1/2 inch.
-#let clerk-rows = 7                // lines 1-7 keep the right of center clear (CRC 2.111(2)).
-#let footer-rise = 14pt            // footer sits above the page edge, clear of the body.
+#let clerk-lines = 7               // lines 1-7 keep the right of center clear (CRC 2.111(2)).
 #let para-indent = 0.5in
-#let text-width = 8.5in - left-margin - right-margin  // measured widths must be absolute: 100% mis-measures inside layout()
+#let fee-width = 2.3in             // the fee-exemption label's column, top right (SD Local Rule 2.1.2(H)).
+#let caption-left = 3.6in          // the party column of the caption.
+#let caption-inset = 9pt           // the party column's text stands off its right rule
+#let caption-foot = 9pt            // and its last line off its bottom rule
+#let caption-rule = 0.75pt         // the party column's rules
+#let caption-right = 0.2in         // the case column stands off the party column's rule
+#let space-indent = 3pt            // a leading space in a caption line indents it by a quarter em (12 pt)
+#let signature-left = 3.1in        // the signature column
+#let signer-indent = 0.3in         // the signer's name and role, in from the signature column
+#let signature-rule = 2.7in        // the signature line after "By:"
+#let footer-size = 10pt            // CRC 2.110: the footer title in at least 10-point type.
+#let memo-page-limit = 10          // CRC 3.1113(f): over 10 pages, a TOC and a TOA are required.
+#let toc-indent = 0.5in            // each heading level below the top one, in the table of contents
+#let toc-col = 0.5in               // the page column of the table of contents
+#let toa-hang = 0.25in             // a citation stands under its case name, this far in
+#let toa-col = 0.75in              // the page column of the table of authorities
 
-// Text box settings shared by the body, the line numbers and the footer. A box of exactly one em
-// with these edges puts the baseline of every line on the same place, so line numbers align.
-#let box-edges = (top-edge: 0.7em, bottom-edge: -0.3em)
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is set here (Word's exact
+// line spacing; docx/calsuperct-sandiego-motion-brief.lua sets the same twips).
+#let pitch = 24pt                  // double spacing (CRC 2.108(1)); the numbered lines (body, headings, tables).
+#let pitch-single = 12pt           // single spacing (attorney block, caption, signature): two lines to a numbered line.
+#let pitch-note = pitch           // footnotes on the numbered lines (CRC 2.108(3) allows single spacing, does not require
+                                   // it): stacked from the foot of line 28, every note line is level with a line number, so
+                                   // the PDF text reads the same lines in every engine (single lines there would stand
+                                   // 2.4 pt off a number and read with it or apart by a hair)
+#let note-gap = 0pt                // between two footnotes: none, so every note stays on the numbered lines
+#let note-clearance = 14.5pt       // the body text to the footnote rule: the 14.5 pt LibreOffice keeps above a note
+#let gap = pitch-single            // a single line between the groups of the caption and the signature
+// A group of single lines starts this far below a numbered line's top, so every second single line stands level
+// with a line number and the others halfway between two: the PDF text reads the same lines in every engine.
+#let single-drop = 0.8 * (pitch - pitch-single)
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the footer
+#let footer-gap = 4pt              // the footer's rule this far below the last numbered line
+#let footer-rule-gap = 2pt         // the page number's line box this far below the rule
 
 // ---------------------------------------------------------------------------
 // Small helpers
 // ---------------------------------------------------------------------------
 
-/// Render an inline markdown string (italics etc.) as inline content.
-#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+/// A loose markdown paragraph's trailing paragraph break dropped (a chunk rendered alone ends in one).
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
+}
+
+/// Render an inline markdown string (italics, links, footnote references) as inline content.
+#let inl(s) = unloose(cmarker.render(s, raw-typst: false, smart-punctuation: true))
 
 #let need(meta, key) = {
   if key not in meta { panic("calsuperct-sandiego-motion-brief: missing required metadata field `" + key + "`") }
@@ -51,179 +90,122 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// Lines of text joined with line breaks; each list item is one line of inline markdown.
-/// Leading spaces in an item are kept as an indent (0.25 em per space), so the caption's
-/// "Plaintiff," and "v." can sit where the filer put them.
-#let lines(items) = {
-  let out = ()
-  for (i, it) in items.enumerate() {
-    if i > 0 { out.push(linebreak()) }
+/// Single-spaced lines, one paragraph per item, with `above` before the first. An empty item is an empty line;
+/// leading spaces in an item indent it by a quarter em each, so the caption's "Plaintiff," and "v." sit where the
+/// filer put them.
+#let line-stack(items, above: 0pt, weight: "regular", align-to: left) = block(width: 100%, above: above, below: 0pt, {
+  set text(..edges(pitch-single), weight: weight)
+  set par(first-line-indent: 0pt)
+  for it in items {
     let m = it.match(regex("^( *)(.*)$"))
     let n = m.captures.at(0).len()
-    if n > 0 { out.push(h(n * 0.25em)) }
-    out.push(inl(m.captures.at(1)))
+    let t = m.captures.at(1)
+    if t == "" { block(height: pitch-single) } else {
+      block(width: 100%, inset: (left: n * space-indent), align(align-to, inl(t)))
+    }
   }
-  out.join()
-}
+})
 
 // ---------------------------------------------------------------------------
 // Pleading paper: 28 numbered lines, two vertical rules, footer below the page number
 // ---------------------------------------------------------------------------
 
-#let pleading-background() = {
-  for i in range(grid-rows) {
-    place(top + left, dx: 0.7in, dy: top-margin + i * pitch, box(width: 0.35in,
-      align(right, text(size: type-size, ..box-edges, str(i + 1)))))
-  }
-  // Vertical rules: a double rule between the numbers and the text, a single rule on the right.
-  place(top + left, dx: 1.22in, line(start: (0pt, 0pt), end: (0pt, 792pt), stroke: 0.6pt))
-  place(top + left, dx: 1.25in, line(start: (0pt, 0pt), end: (0pt, 792pt), stroke: 0.6pt))
-  place(top + left, dx: 8.1in, line(start: (0pt, 0pt), end: (0pt, 792pt), stroke: 0.6pt))
-}
+#let line-numbers() = shared-line-numbers(left-margin, top-margin, pitch, lines-per-page, type-size, ..edges(pitch))
 
-/// Footer (CRC 2.109, 2.110): a printed line, the page number, then the title of the paper
-/// in at least 10-point type.
-#let pleading-footer(title) = context {
-  set text(size: type-size, ..box-edges)
-  stack(
-    spacing: 2pt,
-    line(length: 100%, stroke: 0.5pt),
-    align(center, counter(page).display()),
-    align(center, text(size: 10pt, title)),
-  )
-}
+#let pleading-rules() = shared-pleading-rules(page-w, page-h, left-margin, right-margin)
+
+/// Footer (CRC 2.109, 2.110): a printed line, the page number (in the numbering of the page it sits on), then the
+/// title of the paper in at least 10-point type, in the bottom margin below the last numbered line.
+#let footer-block(title) = place(
+  top + left,
+  dx: left-margin,
+  dy: top-margin + lines-per-page * pitch + footer-gap,
+  block(width: page-w - left-margin - right-margin, {
+    line(length: 100%, stroke: 0.5pt)
+    block(above: footer-rule-gap, below: 0pt, {
+      set text(..edges(pitch-single))
+      align(center, context numbering(here().page-numbering(), ..counter(page).get()))
+    })
+    block(above: 0pt, below: 0pt, {
+      set text(size: footer-size, ..edges(pitch-single))
+      align(center, title)
+    })
+  }),
+)
 
 // ---------------------------------------------------------------------------
-// First page (CRC 2.111): attorney block on line 1, court title on line 8, caption
+// First page (CRC 2.111, 3.1110(b)): attorney block on line 1, court title on line 8, caption
 // ---------------------------------------------------------------------------
 
-/// Attorney block: single-spaced lines starting at line 1, left of center.
-#let attorney-block(meta, width) = {
-  let items = need(meta, "attorney")
-  let body = par(leading: 0pt, spacing: 0pt, first-line-indent: 0pt, lines(items))
-  // Lines 1 to 7 are reserved for the attorney block and the clerk's space (CRC 2.111(1),(2)).
-  layout(size => {
-    let h = measure(block(width: width, body)).height
-    if h > clerk-rows * pitch {
-      panic("calsuperct-sandiego-motion-brief: the attorney block is taller than lines 1-" + str(clerk-rows))
-    }
-  })
-  block(width: width, height: clerk-rows * pitch, body)
-}
-
-/// Top of the first page: the attorney block on lines 1-7. When the filer is exempt from fees
-/// (Gov. Code, § 6103), the label goes in the upper right-hand corner above the caption, clear of
-/// the clerk's file-stamp area (SD Local Rule 2.1.2(H)), so the block is narrowed to make room.
+/// Top of the first page: the attorney block, single spaced from line 1, left of center, on lines 1-7 at least
+/// (CRC 2.111(1), (2)); more lines push the court title down to the next numbered line. When the filer is exempt
+/// from fees (Gov. Code, § 6103), the label goes in the upper right-hand corner above the caption, clear of the
+/// clerk's file-stamp area (SD Local Rule 2.1.2(H)).
 #let first-page-top(meta) = {
-  if "fee_exempt" in meta {
-    grid(columns: (4.2in, 2.3in), column-gutter: 0pt,
-      attorney-block(meta, 4.2in),
-      block(width: 2.3in, height: clerk-rows * pitch, par(leading: 0pt, spacing: 0pt,
-        first-line-indent: 0pt, align(right, lines(meta.fee_exempt)))))
+  let att = need(meta, "attorney")
+  let fee = meta.at("fee_exempt", default: ())
+  let rows = calc.max(att.len(), fee.len())
+  let n = calc.max(clerk-lines, calc.ceil((single-drop + rows * pitch-single) / pitch))
+  if fee.len() > 0 {
+    grid(columns: (1fr, fee-width), column-gutter: 0pt,
+      block(height: n * pitch, inset: (top: single-drop), line-stack(att)),
+      block(height: n * pitch, inset: (top: single-drop), line-stack(fee, align-to: right)))
   } else {
-    attorney-block(meta, text-width)
+    block(height: n * pitch, inset: (top: single-drop), line-stack(att))
   }
 }
 
-/// Court title: centered, on line 8 (CRC 2.111(3)). Line 8 begins 7 lines below line 1.
+/// Court title: centered, bold, one numbered line each, from line 8 (CRC 2.111(3)).
 #let court-title(meta) = {
-  block(width: 100%, height: 2 * pitch, align(center, par(leading: pitch - box-h, spacing: 0pt,
-    first-line-indent: 0pt, strong(lines(need(meta, "court"))))))
+  for l in need(meta, "court") { block(align(center, text(weight: "bold", inl(l)))) }
 }
 
-/// Caption: parties on the left (closed by a right rule and a bottom rule), the case number,
-/// the nature of the paper and the judge and department on the right (CRC 2.111(4)-(7)).
+/// Caption, a numbered line below the court title: parties on the left (ruled at its right and foot), the case
+/// number, the nature of the paper, the details and the hearing block on the right (CRC 2.111(4)-(7), 3.1110(b)).
 #let caption(meta) = {
   let cap = need(meta, "caption")
-  let left-cell = block(width: 100%, stroke: (right: 0.6pt + black, bottom: 0.6pt + black),
-    inset: (right: 0.12in, bottom: 0.12in, top: 0pt),
-    par(leading: 0pt, spacing: 0pt, first-line-indent: 0pt, lines(need(cap, "left"))))
-  let right-cell = block(width: 100%, inset: (left: 0.2in, top: 0pt),
-    par(leading: 0pt, spacing: 0pt, first-line-indent: 0pt, {
-      if "case_number" in cap {
-        [#cap.case_number]
-        linebreak()
-        linebreak()
-      }
+  block(above: pitch, grid(
+    columns: (caption-left, 1fr),
+    grid.cell(stroke: (right: caption-rule, bottom: caption-rule), inset: (top: single-drop, right: caption-inset, bottom: caption-foot + caption-rule),
+      line-stack(need(cap, "left"))),
+    // The case column ends as low as the party column: Word and LibreOffice give a row the foot of its tallest cell
+    // with the party column's inset and rule below it.
+    grid.cell(inset: (top: single-drop, left: caption-right, bottom: caption-foot + caption-rule), {
+      let above = 0pt
+      if "case_number" in cap { line-stack((cap.case_number,)); above = gap }
       // Limited civil cases carry the words "Limited Civil Case" in the caption (CRC 2.111(10)).
-      if "limited_civil" in cap and cap.limited_civil {
-        [LIMITED CIVIL CASE]
-        linebreak()
-        linebreak()
-      }
-      strong(lines(need(cap, "title")))
-      if "details" in cap {
-        linebreak()
-        linebreak()
-        lines(cap.details)
-      }
-      // CRC 3.1110(b): the hearing date, time and place, the hearing judge, the date the action was
-      // filed and the trial date (if set) appear on the first page. CRC 2.111(7): judge and
-      // department below the nature of the paper, when assigned.
+      if "limited_civil" in cap and cap.limited_civil { line-stack(("LIMITED CIVIL CASE",), above: above); above = gap }
+      line-stack(need(cap, "title"), above: above, weight: "bold")
+      if "details" in cap { line-stack(cap.details, above: gap) }
+      // CRC 3.1110(b): the hearing date, time and place, the hearing judge, the date the action was filed and the
+      // trial date (if set) on the first page. CRC 2.111(7): judge and department below the nature of the paper.
+      let rows = ()
       if "hearing" in cap {
-        let hr = cap.hearing
-        linebreak()
-        linebreak()
-        for key in ("date", "time", "dept", "judge") {
-          if key in hr {
-            let label = if key == "date" { "Date:" } else if key == "time" { "Time:" } else if key == "dept" { "Dept.:" } else { "Judge:" }
-            [#label #hr.at(key)]
-            linebreak()
-          }
+        for (key, label) in (("date", "Date:"), ("time", "Time:"), ("dept", "Dept.:"), ("judge", "Judge:")) {
+          if key in cap.hearing { rows.push(label + " " + cap.hearing.at(key)) }
         }
-        if "action_filed" in cap { [Action filed: #cap.action_filed] ; linebreak() }
-        if "trial_date" in cap { [Trial date: #cap.trial_date] ; linebreak() }
-      } else if "judge" in cap or "dept" in cap {
-        linebreak()
-        linebreak()
-        if "dept" in cap { [Dept.: #cap.dept] }
-        if "dept" in cap and "judge" in cap { linebreak() }
-        if "judge" in cap { [Judge: #cap.judge] }
+      } else {
+        if "dept" in cap { rows.push("Dept.: " + cap.dept) }
+        if "judge" in cap { rows.push("Judge: " + cap.judge) }
       }
-      // CRC 2.111(9): on a complaint, the amount-demanded statement (wording from the frontmatter).
-      if "amount_demanded" in cap {
-        linebreak()
-        linebreak()
-        inl(cap.amount_demanded)
-      }
-    }))
-  grid(columns: (3.6in, 2.9in), column-gutter: 0pt, left-cell, right-cell)
+      if "action_filed" in cap { rows.push("Action filed: " + cap.action_filed) }
+      if "trial_date" in cap { rows.push("Trial date: " + cap.trial_date) }
+      if rows.len() > 0 { line-stack(rows, above: gap) }
+      // CRC 2.111(9): on a limited civil paper, the amount-demanded statement (wording from the frontmatter).
+      if "amount_demanded" in cap { line-stack((cap.amount_demanded,), above: gap) }
+    }),
+  ))
 }
 
 // ---------------------------------------------------------------------------
-// Headings and body text
+// Tables of contents and authorities (CRC 3.1113(f)): a memorandum that exceeds 10 pages must include both. Built
+// when the frontmatter has `authorities:`; citations in the body are links `[text](toa:key)` whose key names an
+// entry there. Every row is on the numbered lines.
 // ---------------------------------------------------------------------------
 
-#let style-heading(it) = {
-  set par(first-line-indent: 0pt, leading: 12pt, spacing: 12pt)
-  if it.level == 1 {
-    block(width: 100%, sticky: true, above: 12pt, below: 12pt,
-      align(center, strong(upper(it.body))))
-  } else if it.level == 2 {
-    block(width: 100%, sticky: true, above: 12pt, below: 12pt,
-      align(center, strong(upper(it.body))))
-  } else if it.level == 3 {
-    block(width: 100%, sticky: true, above: 12pt, below: 12pt, strong(it.body))
-  } else {
-    block(width: 100%, sticky: true, above: 12pt, below: 12pt, strong(emph(it.body)))
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Tables of contents and authorities (CRC 3.1113(f)): a memorandum that exceeds 10 pages must
-// include both. Built when the frontmatter has `authorities:`; citations in the body are links
-// `[text](toa:key)` whose key names an entry there. Every row sits on the 24 pt pleading grid.
-// ---------------------------------------------------------------------------
-
-#let memo-page-limit = 10           // CRC 3.1113(f): over 10 pages, a TOC and a TOA are required.
-#let toc-indent = 0.5in             // each heading level below the top one, in the table of contents.
-#let toa-hang = 0.25in              // a citation's second line hangs under its case name.
-
-#let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
-
-/// Put an invisible `tag` right after the first word of `c`, keeping any emphasis around it.
-/// A tag placed before the first word of a line is filed under the previous line, which can be
-/// on the previous page, so the table of authorities would cite the wrong page.
+/// Put an invisible `tag` right after the first word of `c`, keeping any emphasis around it. A tag placed before
+/// the first word of a line is filed under the previous line, which can be on the previous page, so the table of
+/// authorities would cite the wrong page.
 #let tag-after-first-word(c, tag) = {
   if type(c) == str or c.func() == text {
     let t = if type(c) == str { c } else { c.text }
@@ -248,32 +230,18 @@
 /// Printed page label of a location ("3", "ii").
 #let page-label(loc) = numbering(loc.page-numbering(), ..counter(page).at(loc))
 
-#let table-title(t) = block(width: 100%, sticky: true, below: box-h,
-  align(center, par(first-line-indent: 0pt, strong(t))))
-
-/// One row of the table of contents: the heading text, a dot leader, the page number.
-#let toc-entry(top-level, it) = {
-  let hd = it.element
-  let ind = (hd.level - top-level) * toc-indent
-  link(hd.location(), block(width: 100%,
-    par(first-line-indent: 0pt, hanging-indent: ind + toc-indent, {
-      h(ind)
-      hd.body
-      h(0.6em)
-      dot-leader
-      box(width: 2.4em, align(right, page-label(hd.location())))
-    })))
-}
+#let table-title(t) = block(sticky: true, align(center, strong(t)))
 
 #let toc-section() = {
   table-title[TABLE OF CONTENTS]
   context {
-    let target = selector(heading).after(<memo-start>)
-    let levels = query(target).map(h => h.level)
-    if levels.len() == 0 { panic("calsuperct-sandiego-motion-brief: the memorandum has no headings for its table of contents") }
-    let top = calc.min(..levels)
-    show outline.entry: it => toc-entry(top, it)
-    outline(title: none, target: target, depth: 9, indent: 0pt)
+    let hds = query(selector(heading).after(<memo-start>))
+    if hds.len() == 0 { panic("calsuperct-sandiego-motion-brief: the memorandum has no headings for its table of contents") }
+    let top = calc.min(..hds.map(h => h.level))
+    for hd in hds {
+      let ind = (hd.level - top) * toc-indent
+      listing-row(hd.location(), { h(ind); hd.body }, page-label(hd.location()), toc-col, ind + toc-indent, 0pt)
+    }
   }
 }
 
@@ -286,6 +254,10 @@
   ("other", "OTHER AUTHORITIES"),
 )
 
+#let sort-key(a) = lower(a.at("sort", default: a.at("name", default: a.cite)))
+
+/// Each group a numbered line below the one before, its title kept with its first entry; an entry with a name is
+/// the name on its own line and the citation under it, a dot leader and every page that cites it.
 #let toa-section(authorities) = {
   table-title[TABLE OF AUTHORITIES]
   context {
@@ -295,78 +267,84 @@
         panic("calsuperct-sandiego-motion-brief: link `toa:" + h.value + "` has no entry under `authorities:` in the frontmatter")
       }
     }
+    let first = true
     for (kind, title) in toa-groups {
       let members = authorities.pairs()
         .filter(p => p.last().kind == kind and hits.any(h => h.value == p.first()))
-        .sorted(key: p => lower(p.last().at("sort", default: p.last().at("name", default: p.last().cite))))
+        .sorted(key: p => sort-key(p.last()))
       if members.len() == 0 { continue }
-      block(width: 100%, sticky: true, above: box-h, par(first-line-indent: 0pt, strong(title)))
+      block(above: if first { 0pt } else { pitch }, sticky: true, strong(title))
+      first = false
       for (key, a) in members {
         let pages = ()
         for h in hits.filter(h => h.value == key) {
           let label = page-label(h.location())
           if label not in pages { pages.push(label) }
         }
-        block(width: 100%, breakable: false, above: box-h, par(first-line-indent: 0pt, hanging-indent: toa-hang, {
-          if "name" in a {
-            if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
-            [,]
-            linebreak()
-          }
-          inl(a.cite)
-          h(0.6em)
-          dot-leader
-          h(0.3em)
-          pages.join(", ")
-        }))
+        if "name" in a {
+          block(sticky: true, par(hanging-indent: toa-hang, [#if kind == "case" { emph(inl(a.name)) } else { inl(a.name) },]))
+          listing-row(none, { h(toa-hang); inl(a.cite) }, pages.join(", "), toa-col, toa-hang, 0pt)
+        } else {
+          listing-row(none, inl(a.cite), pages.join(", "), toa-col, toa-hang, 0pt)
+        }
       }
     }
   }
 }
 
 // ---------------------------------------------------------------------------
-// Signature block (CRC 2.111(1); signature under CCP 128.7 is the signer's own)
+// Signature block (CRC 2.111(1); the signature under CCP 128.7 is the signer's own)
 // ---------------------------------------------------------------------------
 
+/// A numbered line below the text: the date at the left, the signature lines in the signature column, a numbered
+/// line, "By:" and the signature line, the signer's name and role; never split across pages.
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  block(width: 100%, sticky: true, above: pitch, {
-    par(leading: box-h, spacing: 0pt, first-line-indent: 0pt, {
-      if "dated" in sig { [Dated: #sig.dated] }
+  block(breakable: false, above: pitch, inset: (top: single-drop), {
+    if "dated" in sig { line-stack(("Dated: " + sig.dated,)) }
+    pad(left: signature-left, {
+      line-stack(sig.at("lines", default: ()))
+      block(above: pitch, below: 0pt, {
+        set text(..edges(pitch-single))
+        [By: #box(width: signature-rule, line(length: 100%, stroke: 0.5pt))]
+      })
+      pad(left: signer-indent, {
+        line-stack((upper(sig.signer),), weight: "bold")
+        if "role" in sig { block(above: 0pt, below: 0pt, { set text(..edges(pitch-single)); inl(sig.role) }) }
+      })
     })
-    pad(left: 3.1in, par(leading: 0pt, spacing: 0pt, first-line-indent: 0pt, lines(sig.lines)))
-    v(pitch)
-    pad(left: 3.1in, par(leading: 0pt, spacing: 0pt, first-line-indent: 0pt, {
-      [By: #box(width: 2.7in, line(length: 100%, stroke: 0.5pt))]
-      linebreak()
-      h(0.3in)
-      strong(upper(sig.signer))
-      if "role" in sig {
-        linebreak()
-        h(0.3in)
-        sig.role
-      }
-    }))
   })
 }
 
-/// The body, then `closing` (jury demand, signature block). The signature block never stands alone
-/// on a page: the body's last paragraph is kept on the page with it. Trailing footnote definitions
-/// stay with the rest of the body; a last paragraph that is a heading, a quotation or carries a
-/// footnote reference is not split off, so its note still resolves.
-#let body-with-closing(md, closing) = {
-  let render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
-  let paras = md.trim(at: end).split(regex("\n[ \t]*\n"))
-  let k = paras.len() - 1
-  while k > 0 and paras.at(k).trim().starts-with("[^") { k -= 1 }
-  let tail = paras.at(k).trim()
-  if k == 0 or tail.starts-with("#") or tail.starts-with(">") or tail.contains("[^") {
-    render(md)
-    closing
-  } else {
-    render((paras.slice(0, k) + paras.slice(k + 1)).join("\n\n"))
-    block(width: 100%, breakable: false, above: box-h, { render(tail); closing })
+// ---------------------------------------------------------------------------
+// The body: markdown chunks (the text between blank lines), without the footnote definitions; each chunk rendered
+// alone with the definitions of the footnotes it refers to. A heading is on the numbered lines, kept with the chunk
+// after it; every other chunk is a paragraph, its first line indented half an inch.
+// ---------------------------------------------------------------------------
+
+#let chunks-of(md) = {
+  md.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim())
+    .filter(c => c != "" and not c.starts-with(regex("\\[\\^[^\\]]+\\]:")))
+}
+
+#let pieces-of(chunks, notes) = chunks.map(t => {
+  let defs = ""
+  for r in t.matches(regex("\\[\\^([^\\]]+)\\]")) {
+    let id = r.captures.at(0)
+    defs += "\n\n[^" + id + "]: " + notes.at(id, default: "")
   }
+  if t.starts-with("#") {
+    block(sticky: true, cmarker.render(t + defs, raw-typst: false, smart-punctuation: true, h1-level: 1))
+  } else {
+    block(par(first-line-indent: (amount: para-indent, all: true), inl(t + defs)))
+  }
+})
+
+/// Pieces whose last one stays whole with `closing` after it.
+#let with-closing(pieces, closing) = {
+  if pieces.len() == 0 { closing; return }
+  for p in pieces.slice(0, -1) { p }
+  block(breakable: false, { pieces.last(); closing })
 }
 
 // ---------------------------------------------------------------------------
@@ -378,60 +356,84 @@
   if body.match(regex("(?m)^#+[ \t]+[^\n]*\\]\\(toa:")) != none {
     panic("calsuperct-sandiego-motion-brief: citation links (toa:) are not allowed in headings; the table of contents would list them as authorities")
   }
-  // A combined paper (notice of motion, then the memorandum) is split at the memorandum's heading;
-  // the tables go between the two. Without that heading the whole body is the memorandum.
-  let memo = body.match(regex("(?mi)^#+[ \t]+memorandum of points and authorities[^\n]*$"))
-  let notice-md = if memo == none { "" } else { body.slice(0, memo.start) }
-  let memo-head = if memo == none { "" } else { body.slice(memo.start, memo.end) }
-  let memo-md = if memo == none { body } else { body.slice(memo.end) }
-  let render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+  // Footnote text is kept apart from the chunks (each chunk is rendered alone with the definitions it refers to).
+  let notes = (:)
+  for m in body.matches(regex("(?m)^\\[\\^([^\\]]+)\\]:[ \\t]*(.*)$")) { notes.insert(m.captures.at(0), m.captures.at(1)) }
+  // A combined paper (notice of motion, then the memorandum) is split at the memorandum's heading; the tables go
+  // between the two. Without that heading the whole body is the memorandum.
+  let chunks = chunks-of(body)
+  let memo-at = chunks.position(c => c.match(regex("(?i)^#+[ \t]+memorandum of points and authorities")) != none)
+  let notice-chunks = if memo-at == none { () } else { chunks.slice(0, memo-at) }
+  let memo-head = if memo-at == none { () } else { (chunks.at(memo-at),) }
+  let memo-chunks = if memo-at == none { chunks } else { chunks.slice(memo-at + 1) }
 
   set page(
     paper: "us-letter",
     margin: (top: top-margin, bottom: bottom-margin, left: left-margin, right: right-margin),
-    background: pleading-background(),
-    footer: pleading-footer(need(meta, "footer_title")),
-    footer-descent: footer-rise,
-    // CRC 2.109: pages numbered consecutively at the bottom. With tables, the caption page, any
-    // notice and the tables take lowercase roman numerals and the memorandum starts again at 1.
+    background: {
+      line-numbers()
+      pleading-rules()
+    },
+    footer: none,
+    foreground: footer-block(need(meta, "footer_title")),
+    // CRC 2.109: pages numbered consecutively at the bottom. With tables, the caption page, any notice and the
+    // tables take lowercase roman numerals and the memorandum starts again at 1.
     numbering: if authorities == none { "1" } else { "i" },
   )
-  set text(font: font-family, size: type-size, ..box-edges, lang: "en")
-  // Blocks take no automatic spacing: every vertical gap is set explicitly so the grid holds.
-  set block(spacing: 0pt)
-  set par(leading: box-h, spacing: box-h, first-line-indent: (amount: para-indent, all: true), justify: false)
-  show heading: style-heading
-  show footnote.entry: set text(size: type-size)
-  set footnote.entry(indent: 0pt)
+  set text(font: font-family, size: type-size, lang: "en")
+  set par(first-line-indent: 0pt)
+  show: xengine.with(pitch: pitch, list-indent: none)
+  // A doubled sign stays with its number ("§§ 17200"): xengine binds one sign, so "§" "§ 17200" could part.
+  show regex("[§¶]+ \\S+"): it => box(it)
+  set block(above: 0pt, below: 0pt, width: 100%)
+
+  // Headings on the numbered lines: levels 1 and 2 centered bold capitals; level 3 bold; levels 4 and 5 bold italic.
+  show heading: it => {
+    let b = if it.level <= 2 { upper(it.body) } else { it.body }
+    let t = text(size: type-size, weight: "bold", style: if it.level >= 4 { "italic" } else { "normal" }, b)
+    block(width: 100%, if it.level <= 2 { align(center, t) } else { t })
+  }
+  // Footnotes at 12 pt (CRC 2.104) in single lines (CRC 2.108(3)), the mark, a space, the text (docx: Footnote Text).
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 2in, stroke: 0.5pt))
+  show footnote.entry: it => {
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    set text(size: type-size, ..edges(pitch-note))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
+    [#super(num) #note.body]
+  }
+  // A citation link (toa:KEY) is recorded with the page its first word is on.
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {
       tag-after-first-word(it.body, [#metadata(it.dest.slice(4))<toa-hit>]).first()
     } else { it }
   }
 
-  // Lines 1-7: attorney block (fixed height). Lines 8-9: court title. Line 10 is blank.
   first-page-top(meta)
   court-title(meta)
-  v(pitch)
   caption(meta)
-  v(pitch)
 
-  let memorandum = {
-    render(memo-head)
+  let closing = {
+    if "jury_demand" in meta {
+      block(above: pitch, sticky: true, align(center, text(weight: "bold", upper(meta.jury_demand))))
+    }
+    signature-block(meta)
+  }
+  let memorandum(gap) = {
+    if gap { v(pitch) }
+    for p in pieces-of(memo-head, notes) { p }
     [#metadata(none)<memo-start>]
-    body-with-closing(memo-md, {
-      if "jury_demand" in meta {
-        block(width: 100%, sticky: true, above: 24pt, below: 12pt,
-          align(center, strong(upper(meta.jury_demand))))
-      }
-      signature-block(meta)
-    })
+    with-closing(pieces-of(memo-chunks, notes), closing)
     [#metadata(none)<memo-end>]
   }
 
+  // The notice (if any) a numbered line below the caption.
+  if notice-chunks.len() > 0 {
+    v(pitch)
+    for p in pieces-of(notice-chunks, notes) { p }
+  }
   if authorities == none {
-    render(notice-md)
-    memorandum
+    memorandum(notice-chunks.len() == 0)
     // CRC 3.1113(f): a memorandum over 10 pages needs a table of contents and a table of authorities.
     context {
       let n = locate(<memo-end>).page() - locate(<memo-start>).page() + 1
@@ -440,7 +442,6 @@
       }
     }
   } else {
-    render(notice-md)
     pagebreak()
     toc-section()
     pagebreak()
@@ -448,7 +449,7 @@
     {
       set page(numbering: "1")
       counter(page).update(1)
-      memorandum
+      memorandum(false)
     }
   }
 }

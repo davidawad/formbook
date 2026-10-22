@@ -29,7 +29,7 @@ Verified 2026-10-15 unless the row says otherwise.
 | Rule | Requirement | Used for | Source |
 |---|---|---|---|
 | CRC 2.104 | Font size not smaller than 12 points (amended 2017-01-01) | `type-size = 12pt` | https://www.courts.ca.gov/cms/rules/index/two/rule2_104 |
-| CRC 2.105 | Font style essentially equivalent to Courier, Times New Roman, or Arial (amended 2017-01-01) | **Liberation Serif** (Times New Roman row of `docs/FONTS.md`) | https://www.courts.ca.gov/cms/rules/index/two/rule2_105 |
+| CRC 2.105 | Font style essentially equivalent to Courier, Times New Roman, or Arial (amended 2017-01-01) | **Times New Roman** (the house face; Liberation Serif, its metric twin, as the fallback; the docx through `{font}`) | https://www.courts.ca.gov/cms/rules/index/two/rule2_105 |
 | CRC 2.107, 2.108, 2.109, 2.110 | Margins; double-spaced numbered lines; page numbers; footer title ≥10 pt (verified 2026-10-13 by the sibling complaint; not re-fetched today) | the same grid as `../complaint/` | https://www.courts.ca.gov/cms/rules/index/two/rule2_107 (and 2_108, 2_109, 2_110) |
 | CRC 2.111(1)-(7) | First-page format: attorney block lines 1-7, court title on line 8, caption, case number, nature of the paper, judge and department (verified 2026-10-15, summarized) | first page | https://www.courts.ca.gov/cms/rules/index/two/rule2_111 |
 | CRC 3.1110(b) | First page of each paper states the date, time and place of any scheduled hearing, the hearing judge if ascertainable, the title, the filing date of the action, and the trial date if set (verified 2026-10-15, summarized; amended 2017-01-01) | the caption's `hearing`, `action_filed`, `trial_date` fields | https://www.courts.ca.gov/cms/rules/index/three/rule3_1110 |
@@ -43,11 +43,13 @@ The memorandum's substantive content (CCP, CRC 3.1113 contents) is not checked b
 
 ## Layout
 
-The same as `../complaint/`: a 28-line pleading grid, double-spaced, 12 pt Liberation Serif, footer title, attorney block in lines 1-7 (measured at the absolute text width, not 100%, which mis-measures inside `layout()`). The caption's right column prints the hearing block under the nature of the paper: `Date:`, `Time:`, `Dept.:`, `Judge:`, then `Action filed:` and `Trial date:`.
+The same as `../complaint/`: a 28-line pleading grid of 24 pt lines on the cross-engine layout model, 12 pt Times New Roman, 12 pt single lines for the attorney block, caption and signature, footer rule, page number and title, attorney block on lines 1-7 at least. The caption's right column prints the hearing block under the nature of the paper: `Date:`, `Time:`, `Dept.:`, `Judge:`, then `Action filed:` and `Trial date:`.
 
 **Tables (CRC 3.1113(f), added 2026-10-16).** When the frontmatter has `authorities:`, the paper gets a table of contents and a table of authorities. Order: caption page (any notice of motion text follows the caption), then the TOC on a new page, the TOA on a new page, then the memorandum. The caption page, notice and tables are numbered in lowercase roman (i, ii, ...); the memorandum restarts at 1 (CRC 2.109 asks for consecutive numbering at the bottom; the roman front matter is the exemplar's convention, which numbers its TOC "i"). A body with a `## MEMORANDUM OF POINTS AND AUTHORITIES` heading is split there (notice before, memorandum after); without that heading the whole body is the memorandum. The TOC lists every heading of the memorandum, indented 0.5 in per level below the top one, dot leader, page number. The TOA groups authorities as CASES, CONSTITUTIONAL PROVISIONS, STATUTES, REGULATIONS, RULES, OTHER AUTHORITIES (bold caps, flush left), each case name in italics with the citation on the next line (0.25 in hang), dot leader and every page that cites it. Every row of both tables sits on the 24 pt pleading grid.
 
 **Length check.** Without `authorities:`, the template measures the memorandum (from its first line to the signature) and stops with an error when it runs over 10 pages, quoting CRC 3.1113(f). Tested 2026-10-16: the atamian sample with its `authorities:` block removed fails with "the memorandum runs 11 pages; CRC 3.1113(f) requires a table of contents and a table of authorities over 10".
+
+**Footnotes.** 12 pt (CRC 2.104), under a 2 in rule, on the numbered lines from the foot of line 28 up (24 pt lines, no space between notes), 14.5 pt between the text and the rule. CRC 2.108(3) allows single-spaced footnotes; on the pleading grid a single footnote line would stand 2.4 pt off a line number.
 
 **Signature kept with the text.** The memorandum's last paragraph is kept on the page with the signature block, so the signature never stands alone (trailing footnote definitions stay with the body; a last paragraph that is a heading, a quotation or carries a footnote reference is not split off).
 
@@ -88,31 +90,30 @@ sh tools/overlay.sh $D atamian-motion-brief
 pdftoppm -r 60 -png $D/usage/OUTPUT-atamian-motion-brief.pdf /tmp/sd/p
 ```
 
-`tools/check.sh` is not run for this doc type: there is no `checks.yaml` or `rules.md` in the folder yet, so the gates have nothing to check against.
+`sh tools/check.sh <dir>` and `sh tools/check.sh <dir> --engine docx` run the gates on both samples (the court root has `rules.md`; `eval.yaml` here sets the bottom margin and the cross-engine gate).
 
-## Results (2026-10-16)
+## Results (2026-10-22, fb-595.68.37: typst and docx on the cross-engine layout model)
 
-- **render=ok.** `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages (i-iv front matter, 1-10 memorandum), US Letter. typst exit 0, no warnings. `usage/OUTPUT-motion-brief-2.typst.pdf`, 2 pages, exit 0.
-- **overlay=ok.** `usage/OVERLAY-atamian-motion-brief.pdf` (14 pages) and `.txt`. Page map: ours 1 (caption) to filed 3 (88%); ours 2 (TOC) to filed 4 (63%); ours 3-4 (TOA) to filed 5 and 7 (42%, 60%: our TOA lists 21 of the filed 45 cases); ours 5-13 (memorandum pp. 1-9) to filed 9-17 in order (59-95%); ours 14 (memorandum p. 10: the end of III.C.2.i and the signature) to filed 17 again (38%), because the filed brief continues with section ii where our excerpt stops. The exemplar's broken xref makes poppler print warnings while reading it; the overlay exits 0.
+- **render=ok.** `usage/OUTPUT-motion-brief.typst.pdf`, 15 pages (i-v front matter, 1-10 memorandum), US Letter, typst exit 0, no warnings; `usage/OUTPUT-motion-brief-2.typst.pdf`, 2 pages. The docx renders (`.docx`, `.docx.pdf`, fb render and LibreOffice) have the same 15 and 2 pages.
+- **check.** `sh tools/check.sh <dir>`: 18 checks passed, 0 failed (both samples); `--engine docx`: 26 checks passed, 0 failed, XENG-001..003 PASS on both samples (465/465 and 73/73 lines alike, 15 = 15 and 2 = 2 pages), DEF-TOC-001 and DEF-COVER-001 pass on both engines.
+- **overlay** (2026-10-16, before the port): page map ours caption/TOC/TOA/memorandum to filed pp. 3, 4, 5-7, 9-17; a diagnostic, not a score.
 
-### Gate 2 review: all 14 pages rendered at 60 dpi and looked at (2026-10-16), plus all 14 overlay pages
+### Gate 2 review: every page of both samples rendered at 50 dpi and looked at, typst and docx side by side (2026-10-22)
 
 | Page | Finding |
 |---|---|
-| i | Attorney block lines 1-5; court title lines 8-9; caption from line 11 with case number, the four-line bold title, `CLASS ACTION`, judge line, `[IMAGED FILE]`, hearing block; footer `i`. No body text, as in the filed caption page. Pass. |
-| ii | TABLE OF CONTENTS centered bold on line 1; entries from line 2, one grid line each, nested 0.5 in per level, wrapped lines hang under the entry, dot leaders, page numbers 1-8 right-aligned. Pass. |
-| iii | TABLE OF AUTHORITIES centered bold; CASES bold caps; each case: italic name line, citation on the next grid line with leader and pages. Rows on the grid. Pass. |
-| iv | Cases continue (Serrano ... Walker); STATUTES and REGULATIONS groups. Pass. |
-| 1 | I. INTRODUCTION, II. heading, body double-spaced on lines 1-28. Pass. |
-| 2 | Body continues; ends at line 27 because the three-line III. heading moves to the next page with its first paragraph. Pass. |
-| 3 | III. heading (four lines, centered bold caps), A. heading, body. Pass. |
-| 4-5 | Body, citations italic; B. heading on p. 4. Pass. |
-| 6 | C. heading, bold italic 1. heading, footnotes 1-2 single-spaced at 12 pt under a short rule, below line 26. Pass. |
-| 7-9 | Body, footnotes 3-5, 2. and i. headings. Pass. |
-| 10 | Last two paragraphs, then `Dated:` and the signature block at 3.1 in with `By:` line, signer, role. Pass. |
+| i | Attorney block lines 1-5 (single lines, every second level with a number); court title lines 8-9; caption from line 11 with case number, the bold title, `CLASS ACTION`, judge line, `[IMAGED FILE]`, hearing block; footer rule, `i`, title. Same on docx. Pass. |
+| ii | TABLE OF CONTENTS centered bold on line 1; rows from line 2 on the numbered lines, 0.5 in per level, wrapped lines hanging, dot leaders to a 0.5 in page column, pages 1-8. Same pages on docx. Pass. |
+| iii-iv | TABLE OF AUTHORITIES; CASES; each case its italic name on one line and the citation under it, 0.25 in in, a leader and every page that cites it; STATUTES a numbered line below. Same on docx. Pass. |
+| v | REGULATIONS alone (its title kept with its row, the blank line before it did not fit on iv). Same on docx. ACCEPTED (tier 2: a short last page of the table). |
+| 1-5 | Headings on the numbered lines (I.-III. centered bold capitals, A.-C. bold), body double-spaced on lines 1-28. Same on docx. Pass. |
+| 6-9 | Footnotes 1-5 at 12 pt under a 2 in rule, on the numbered lines from the foot of line 28 (double spaced: see the open items). Same on docx. Pass. |
+| 10 | Last two paragraphs, then `Dated:` and the signature block at 3.1 in with `By:` line, signer, role. Same on docx. Pass. |
+| sample 2, 1-2 | Caption with the hearing block, body from line 21, headings I.-III., A., 1., the signature on p. 2. Same on docx. Pass. |
 
 Open tier-2 items (one filer, so not decided):
 
+- Footnotes are double spaced on the numbered lines; the filed ones are single spaced (CRC 2.108(3) allows either). Single lines in the footnote area stand 2.4 pt off a line number and the PDF text then reads them with it in one engine and apart in the other (XENG-003), so the template keeps them on the grid. OPEN.
 - Level-1 heading alignment (centered in ours, flush left in the filed); level-3 hanging indent (filed has it).
 - Footer: the filed footer is bold caps, with the case number on a second line; ours is one line, not bold.
 - Caption order: the filed puts `CLASS ACTION` and the judge line above the title, and has a `Reservation Confirmation` line.
@@ -129,15 +130,13 @@ Open tier-2 items (one filer, so not decided):
 - **Hearing reservation.** SD LR 2.1.19(A): the date must be reserved; the template cannot check that.
 - **Notice vs memorandum.** A packet often has a separate notice, a memorandum, a separate statement and declarations; this template produces one paper at a time (a notice, a memorandum, or a combined notice and memorandum).
 - **Exemplar size.** `SAMPLE-...pdf` is 6.7 MB (24 pages of an OCR'd scan); kept because the eval loop overlays against the real page.
-- **Latex.** Not built for this doc type. **Docx:** see Engines; the docx filter does not build the TOC and TOA (paused, typst-only batch).
+- **Latex.** Not built for this doc type. **Docx:** see Engines.
 
 ## Engines
 
-**typst** is the primary form (above). **docx** (`docx/`) and **latex** (not built) are secondary.
+**typst** is the primary form (above). **docx** (`docx/`) follows it line for line; **latex** is not built.
 
-**docx** (`docx/`): the same build as the complaint's (`build-reference.sh`, the same pleading grid, footer and line numbering), with `calsuperct-sandiego-motion-brief.lua` for the first page, the hearing block (Date, Time, Dept., Judge, Action filed, Trial date), the jury line and the signature block. `render.sh` fills the footer title from `footer_title`. Output: `usage/OUTPUT-motion-brief-2.docx`.
+**docx** (`docx/`, no shell): `reference.xml` is the cross-engine style recipe (`base="xengine"`) in `{font}` (the typst face) at 12 pt, body 480 twips, single 240, Footnote Text 480 with no space after, and Body Text Keep. `calsuperct-sandiego-motion-brief.lua` writes every paragraph with exact spacing in the typst pitches, as the complaint's filter does (first page, caption with the hearing block, the body read chunk by chunk with each chunk's footnote definitions, the signature block, the footer with the 28 line numbers in a page-anchored frame, `$FORMBOOK_FOOTERS`), and with `authorities:` the tables: it writes a needle for each heading of the memorandum and each `toa:` link (kind `N` inside a footnote), `fb render` finds them in the LibreOffice PDF and renders again with their pages (`$FORMBOOK_PAGES`) until they settle; two sections, the first page and tables in lower roman from i, the memorandum in arabic from 1 (`$FORMBOOK_FINAL`). A paragraph that carries a footnote is a pandoc paragraph (Body Text), so pandoc writes the note. Output: `usage/OUTPUT-motion-brief{,-2}.docx`, `.docx.pdf`.
 
-- Matches typst: as the complaint, plus the hearing block in the caption.
-- Differs: as the complaint (line numbers skip table rows; page borders span the text area; footnotes single-spaced; attorney row at least 168 pt). No exemplar exists, so there is no tier-2 comparison for Word either.
-- BLOCKED (docx.pdf gates): LibreOffice is not installed, so `usage/OUTPUT-synthetic-motion-brief.docx.pdf` cannot be made; Gates 0-3 on the docx.pdf were not run. No docx page was viewed (`pages_reviewed=0`).
-- BLOCKED by construction: CRC 2.108 consecutive numbering on every line, as in the complaint (table rows on page 1 are not numbered).
+- Gate 4: `params.cross_engine: gate`; XENG-001..003 pass on both samples.
+- Differs (tier 2, accepted): the pleading rules run the height of the text area, not the full page. The typst length check (CRC 3.1113(f) without `authorities:`) stops the typst render only; the docx does not repeat it. Word may paginate differently from LibreOffice, and its table pages are LibreOffice's.
