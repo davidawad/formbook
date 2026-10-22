@@ -86,13 +86,11 @@ At Rockdale, Ms. Evans was first assessed by a triage nurse, Mr. Harold Hildreth
 
 Ms. Evans was discharged around 12:30 a.m. on the morning of January 17, 2012, and she was given discharge instructions which included the following:
 
-(1) Follow-up with a primary care physician by January 20, 2012 due to
+(1) Follow-up with a primary care physician by January 20, 2012 due to uncontrolled hypertension [T. V. 7, 1204:22–1205:5], and
 
-uncontrolled hypertension [T. V. 7, 1204:22–1205:5], and
+(2) Return to the Emergency Department if her condition worsened [T. V. 8, 1654:17–22].
 
-(2) Return to the Emergency Department if her condition worsened [T. V.
-
-8, 1654:17–22]. Ms. Evans signed the discharge instructions, attesting to her understanding of the instructions. [Id.] During the next several days, Ms. Evans’ physical condition continued to deteriorate, as she experienced at least three falls [T. V. 5, 809:2–3], slurred speech [T. V. 7, 1501:20–1502:1] and reported leaning to the left when she walked. [T. V. 5, 810:7–12.] In fact, although Ms. Evans had never previously missed a day of work, she was unable to attend work for the next five days. [Id., 803:14–20.] Moreover, on the evening of January 21, 2012, Ms. Evans experienced an episode of falling after which she was unable to get up and was forced to crawl to bed. [T. V. 5, 805:12–20.] Despite these dramatic, worsening symptoms, by the morning of January 22, 2012, Ms. Evans still had not seen a primary care physician as she had been instructed to do, nor had she returned to the Emergency Department. [T. V. 5, 732:13–19.] It was not until January 22, 2012—five days after Ms. Evans’ discharge from Rockdale—that the Evans finally contacted 911 Emergency Services. [Id., 749:8–11.] Ms. Evans subsequently was diagnosed with significant brain damage due to an intracranial hemorrhage which likely was caused by her longstanding, uncontrolled hypertension. [T. V. 6, 834:19–835:24.]
+Ms. Evans signed the discharge instructions, attesting to her understanding of the instructions. [Id.] During the next several days, Ms. Evans’ physical condition continued to deteriorate, as she experienced at least three falls [T. V. 5, 809:2–3], slurred speech [T. V. 7, 1501:20–1502:1] and reported leaning to the left when she walked. [T. V. 5, 810:7–12.] In fact, although Ms. Evans had never previously missed a day of work, she was unable to attend work for the next five days. [Id., 803:14–20.] Moreover, on the evening of January 21, 2012, Ms. Evans experienced an episode of falling after which she was unable to get up and was forced to crawl to bed. [T. V. 5, 805:12–20.] Despite these dramatic, worsening symptoms, by the morning of January 22, 2012, Ms. Evans still had not seen a primary care physician as she had been instructed to do, nor had she returned to the Emergency Department. [T. V. 5, 732:13–19.] It was not until January 22, 2012—five days after Ms. Evans’ discharge from Rockdale—that the Evans finally contacted 911 Emergency Services. [Id., 749:8–11.] Ms. Evans subsequently was diagnosed with significant brain damage due to an intracranial hemorrhage which likely was caused by her longstanding, uncontrolled hypertension. [T. V. 6, 834:19–835:24.]
 
 ## B. The Trial And The Jury’s Verdict
 
@@ -122,17 +120,9 @@ Once the trial judge approved the jury’s verdict, the Court of Appeals was obl
 
 # VI. ARGUMENT AND CITATION OF AUTHORITY
 
-## A. The Court of Appeals Applied An Incorrect Standard Of Review And
+## A. The Court of Appeals Applied An Incorrect Standard Of Review And Ignored The “Any Evidence” Standard That Applies When A Trial Court Denies A Motion For New Trial.
 
-Ignored The “Any Evidence” Standard That Applies When A Trial
-
-Court Denies A Motion For New Trial.
-
-### 1. The “any evidence” standard of review should have been applied
-
-by the Court of Appeals in reviewing the trial court’s denial of the
-
-Evans’ Motion for New Trial.
+### 1. The “any evidence” standard of review should have been applied by the Court of Appeals in reviewing the trial court’s denial of the Evans’ Motion for New Trial.
 
 Although the Evans sought relief from the jury’s award pursuant to O.C.G.A. § 51-12-12, which primarily addresses additur and remittitur, there is no question that, for all practical and legal purposes, their motion was one for a new trial. As this Court first recognized in Spence v. Maurice H. Hilliard, Jr., P.C., 260 Ga. 107, 107 (1990), the “three statutory options [afforded by O.C.G.A. § 51-12-12] involve granting a motion for new trial.” (emphasis in original). See also Lisle v. Willis, 265 Ga. 861, 862 (1995). “O.C.G.A. § 51-12-12 does not empower the trial judge to reduce an award but empowers the trial judge to seek the parties to accept an additur or remittitur upon the threat of a new trial and allows the judge to order a new trial on the issue of damages only; refusal by either party to accept leaves the judge with the power only to grant or to deny a new trial and to decide what issues will be retried.” Smith v. Crump, 223 Ga. App. 52, 57 (1996) (citing Spence, 260 Ga. 107; Jacobsen v. Haldi, 210 Ga. App. 817 (1993)). See also ARA Health Services v. Stitt, 250 Ga. App. 420, 424 (2001) (holding that review of the grant of a motion for additur pursuant to O.C.G.A. § 51-12-12 must be reviewed “under the appellate standard of review employed for motions for new trial.”)
 
@@ -142,21 +132,11 @@ In the specific context of cases discussing O.C.G.A. § 51-12-12, Georgia courts
 
 Most importantly, when a trial judge denies a motion brought pursuant to O.C.G.A. § 51-12-12, the presumption of correctness that arises from the trial court’s decision is so strong that the verdict must be affirmed on appeal if there is any evidence to support it. See, e.g., Vineyard Indus., Inc. v. Bailey, 343 Ga. App. 517, 523 (2017); Reliance Trust Co. v. Candler, 315 Ga. App. 495, 498 (2012) (cits. omitted) (vacated on other grounds); Arnsdorff v. Fortner, 276 Ga. App. 1, 4 (2005); Shasta Beverages, Inc. v. Tetley USA, Inc., 248 Ga. App. 381, 386 (2001); Sims v. Heath, 258 Ga. App. 681, 688 (2002); Sykes v. Sin, 229 Ga. App. 155, 159 (1997). See also Georgia Clinic, P.C. v. Stout, 323 Ga. App. 487, 493 (2013); McIntee v. Deramus, 313 Ga. App. 653 (2012); Hensley, 246 Ga. App. at 419, 420; Brock v. Douglas Kohoutek, L.P., 225 Ga. App. 104, 109 (1997). As stated by the Court of Appeals in Sims:
 
-Where the trial judge approves the jury’s verdict, the sole question for
+> Where the trial judge approves the jury’s verdict, the sole question for determination is whether there is any evidence to authorize it, with a view toward not upsetting it. We will not substitute our judgment based upon a cold record for that of enlightened jurors who heard the evidence and saw the witnesses.
 
-determination is whether there is any evidence to authorize it, with a
+Sims, 258 Ga. App. at 688. “Under either ground [set forth in O.C.G.A. § 51-12-12] the grant or denial of a motion for new trial is a matter within the sound discretion of the trial court and will not be disturbed if there is any evidence to authorize it.” Reliance Trust, 315 Ga. App. at 498. When reviewing a motion brought pursuant to O.C.G.A. § 51-12-12, an appellate court “must affirm a judgment entered on a jury verdict if there is any evidence to support it . . .” Shasta, 248 Ga. App. at 386.
 
-view toward not upsetting it. We will not substitute our judgment based
-
-upon a cold record for that of enlightened jurors who heard the evidence
-
-and saw the witnesses. Sims, 258 Ga. App. at 688. “Under either ground [set forth in O.C.G.A. § 51-12-12] the grant or denial of a motion for new trial is a matter within the sound discretion of the trial court and will not be disturbed if there is any evidence to authorize it.” Reliance Trust, 315 Ga. App. at 498. When reviewing a motion brought pursuant to O.C.G.A. § 51-12-12, an appellate court “must affirm a judgment entered on a jury verdict if there is any evidence to support it . . .” Shasta, 248 Ga. App. at 386.
-
-### 2. The preponderance of the evidence standard of review set forth in
-
-O.C.G.A. § 51-12-12(a) applies to the trial court; it does not apply
-
-to appellate review.
+### 2. The preponderance of the evidence standard of review set forth in O.C.G.A. § 51-12-12(a) applies to the trial court; it does not apply to appellate review.
 
 “The focus of O.C.G.A. § 51-12-12 . . . . is to allow the trial court to interfere with a jury verdict in two opposite situations—where the award is so inadequate or so excessive as to be contrary to the preponderance of the evidence.” Moody, 269 Ga. at 221; Kohl v. Tirado 256 Ga. App. 681, 682 (2002) (emphasis in originals). An excessive or inadequate verdict is a mistake of fact rather than of law and addresses itself to the discretion of the trial judge who, like the jury, saw the witnesses and heard the testimony. Moody, 269 Ga. at 221. The express language of O.C.G.A. § 51-12-12(a) requires the court to weigh all the evidence presented at trial to determine whether “the damages awarded by the jury are clearly so inadequate or so excessive as to be inconsistent with the preponderance of the evidence in the case.” It is only the trial court, rather than an appellate court, that is authorized to perform this function because only the trial court is authorized to weigh the evidence and evaluate the credibility of witnesses, which would necessarily be required to conduct the inquiry prescribed by O.C.G.A. § 51-12-12(a).
 
@@ -164,9 +144,7 @@ In fact, this Court repeatedly has held that “[a]ppellate courts . . . . do no
 
 Thus, when O.C.G.A. § 51-12-12(a) is read in combination with the rule against the re-weighing of evidence by an appellate court, it is apparent that the standard set forth in the statute is meant for the trial court and does not affect the standard of review on appeal. It simply is not possible for an appellate court to determine whether a jury’s award of damages is “inconsistent with the preponderance of the evidence” because, to do so, the appellate court necessarily would be required to weigh all the evidence presented at trial. This fact is especially true in a case like this one, which lasted nearly two weeks, involved 27 witnesses and hundreds of pages of documentary evidence. As stated by this Court in Moody, therefore, it is apparent that O.C.G.A. § 51-12-12 empowers the trial court to determine whether a damage award is inconsistent with the preponderance of the evidence presented during a trial. Once the trial court makes its determination in this regard, the appellate standard of review is that the court’s decision must be upheld if there is “any evidence” to support it.
 
-### 3. The Court of Appeals erred by failing to apply or even mention the
-
-“any evidence” standard of review.
+### 3. The Court of Appeals erred by failing to apply or even mention the “any evidence” standard of review.
 
 The Court of Appeals’ opinion substantially ignored the “heavy appellate burden” and “extremely high threshold” for reversal that applied to the court’s review of the denial of the Evans’ motion for additur. In its briefing and at oral argument in the Court of Appeals, Rockdale devoted extensive time to the standard- of-review issue and repeatedly emphasized the importance of applying the correct “any evidence” standard. Rockdale also emphasized that, given the “extremely high” threshold for reversal and the “presumption of correctness” that applied to the trial court’s decision, historically it has been extraordinarily rare for Georgia appellate courts to reverse a trial court’s decision on a motion brought pursuant to the current version of O.C.G.A. § 51-12-12. In fact, other than this case, Rockdale has identified only one published decision since the 1987 amendment of O.C.G.A. § 51-12-12 in which a Georgia appellate court has reversed a trial court’s denial of a motion for additur brought pursuant to the amended statute. See Moore v. TCI Cablevision of Georgia, Inc., 235 Ga. App. 796, 797 (1998) (reversing denial of motion for additur based upon “the peculiar facts of this case” and holding that a motion for new trial on all issues should have been granted on “general grounds”).
 
@@ -174,9 +152,7 @@ Despite Rockdale’s considerable emphasis on the appropriate appellate standard
 
 It is evident from the Court of Appeals’ Opinion that the court incorrectly conducted a de novo review of the trial court’s decision, applying the trial court standard set forth in O.C.G.A. § 51-12-12(a) rather than the “any evidence” standard for appellate review. The court improperly weighed the evidence presented at trial, compared the evidence to the damages awarded, and then simply substituted its judgment for that of the jury and the trial court to conclude that the award of damages was “clearly inadequate under a preponderance of the evidence. . . .” [Id., p. 1.] The court’s analytical approach to this appeal was improper, as it devoted most of its opinion to a discussion of the trial evidence that arguably supported a larger damage award, rather than focusing on whether there was “any evidence” to support the trial court’s approval of the jury’s award of more than $1.2 million. Rockdale respectfully asks this Court to reverse the Court of Appeals’ decision to ensure that the correct standard of review is applied in this case.
 
-## B. The Trial Record Contains Ample Evidence And Justification For The
-
-Jury’s Damage Award.
+## B. The Trial Record Contains Ample Evidence And Justification For The Jury’s Damage Award.
 
 The Court of Appeals reached the remarkable conclusion that a seven-figure award of damages in the total amount of $1,263,843.97 somehow was so “clearly inadequate” as to “shock the conscience.” As an initial matter, to Rockdale’s knowledge, no Georgia court ever has held such a large, seven-figure verdict to be legally inadequate. In fact, all the cases cited by the Court of Appeals in which a jury award was deemed inadequate involved awards of either zero or relatively nominal damages. [See Court of Appeals Opinion, pp. 8-9.] Given the absence of any case in Georgia in which such a large award was deemed inadequate, there certainly is an argument that such a large award is per se adequate under Georgia law, especially under the appropriate “any evidence” appellate standard of review.
 
