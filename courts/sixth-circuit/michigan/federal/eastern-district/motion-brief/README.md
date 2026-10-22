@@ -7,20 +7,20 @@ Folder: `courts/sixth-circuit/michigan/federal/eastern-district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (partial transcription, see Known gaps) |
-| typeface | required: none (LR 5.1(a)(3) sets 14 pt for proportional type and names no face); vendored substitute: none needed; font kept: **EB Garamond** (`docs/FONTS.md`, "No face named"). Visual-only: the exemplar is Times New Roman, not a rule. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
-| embedded fonts | `pdffonts`: EBGaramond-Regular, -Bold, -Italic only (all embedded) |
-| overlay | ok: `usage/OVERLAY-soboleski-motion-brief.pdf` and `OVERLAY-soboleski-motion-brief.txt` (re-run 2026-10-15) |
-| pages reviewed | 15 of 15 (every page rendered at 60 dpi and viewed on 2026-10-15) |
+| typeface | required: none (LR 5.1(a)(3) sets 14 pt for proportional type and names no face); used: **Times New Roman** 14 pt (vendored, `docs/FONTS.md`), as the filed exemplar, in both engines |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `usage/OUTPUT-motion-brief.docx.pdf`, 16 pages each (re-rendered 2026-10-22) |
+| embedded fonts | `pdffonts`: TimesNewRomanPSMT, -BoldMT, -ItalicMT only (all embedded), both engines |
+| overlay | `just overlay` writes `.overlay/<doc path>/OVERLAY-motion-brief.pdf` (not committed) |
+| pages reviewed | 16 of 16, both engines (every page rendered at 60 dpi and viewed on 2026-10-22) |
 
 ## Governing rules
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| E.D. Mich. LR 5.1(a)(2) | Papers double-spaced (quotations excepted), margins at least 1 inch on all sides, pages numbered. | `margin = 1in`; `double-leading` (2.3em pitch); page numbers in three sections. |
-| E.D. Mich. LR 5.1(a)(3) | Type no smaller than 14 point for proportional fonts, footnotes included. | `type-size = 14pt`. |
+| E.D. Mich. LR 5.1(a)(2) | Papers double-spaced (quotations excepted), margins at least 1 inch on all sides, pages numbered. | `margin = 1in`; `pitch-body` 32.2 pt (twice the 16.1 pt single line); page numbers in three sections. |
+| E.D. Mich. LR 5.1(a)(3) | Type no smaller than 14 point for proportional fonts, footnotes included. | `type-size = 14pt`; docx `size="28"`. |
 | E.D. Mich. LR 7.1(a)(1) | The motion states the conferral: the date and the result of the conference with the other side. | Author content: the `L.R. 7.1 STATEMENT OF CONFERRAL` heading in the motion. |
-| E.D. Mich. LR 7.1(d)(2) | The brief opens with a concise statement of the issues, then a list of the controlling or most appropriate authority; a table of contents and index of authorities are optional. | `STATEMENT OF ISSUES PRESENTED` and `CONTROLLING OR MOST APPROPRIATE AUTHORITIES` in the front matter; the contents are generated (`[[toc]]`). |
+| E.D. Mich. LR 7.1(d)(2) | The brief opens with a concise statement of the issues, then a list of the controlling or most appropriate authority; a table of contents and index of authorities are optional. | `STATEMENT OF ISSUES PRESENTED` and `CONTROLLING OR MOST APPROPRIATE AUTHORITIES` in the front matter; the contents are generated (`<!-- toc -->`). |
 | E.D. Mich. LR 7.1(d)(3)(A) | A brief supporting a motion may not exceed 25 pages, including footnotes and signatures. | Not checked by the template (no page counter). The sample is a partial brief. |
 | Fed. R. Civ. P. 12(b)(6) | The motion's ground: failure to state a claim. | Author content. |
 
@@ -28,71 +28,56 @@ Rule text: the E.D. Mich. local rules PDF (`https://www.mied.uscourts.gov/PDFs/L
 
 ## Layout
 
-- Motion (pages numbered 1, 2, ...): caption, motion title, the motion paragraph, the conferral statement, the date and the signature block at the right half of the page.
-- Brief cover (no page number): the caption again and the brief's title.
-- Front matter (roman numerals from ii; the cover is i): statement of issues, controlling authorities (bulleted, single-spaced), table of contents (generated from the body headings, so page numbers track the render).
-- Body (numbered from 1): INTRODUCTION, ARGUMENT with I., II., III. (bold, flush left) and A., B., C. (bold, indented), CONCLUSION, then the signature block.
-- Certificate of service (numbered, not in the contents).
-- Headings: `#` = centered bold caps; `##` = bold flush left; `###` = bold indented 0.5 in. Block quotations are single-spaced and indented on both sides.
+Both engines run on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): every line is a box of its pitch (body 32.2 pt, single 16.1 pt, the 12 pt page number 13.8 pt), first-fit ragged-right breaking, no kerning, ligatures or hyphenation; the docx breaks every line and page where the typst render does (`eval.yaml`: `params.cross_engine: gate`).
+
+- Motion (pages numbered 1, 2, ...): court title, caption, motion title, the motion text and the conferral statement, then the signature block (kept on one page).
+- Brief cover (no page number; it counts as i): the caption again and the brief's title.
+- Front matter (roman numerals from ii), each level-1 section opening a page: statement of issues (the issue numbered at the indent, double spaced), controlling authorities (bulleted, single spaced, hanging), table of contents (the body headings, single spaced rows indented 0.5 in per level, a dot leader to the page in a 0.5 in column; typst computes the pages, the docx takes them from fb render's passes over the LibreOffice PDF).
+- Body (numbered from 1): INTRODUCTION, ARGUMENT with I., II., III. (bold at the margin) and A., B., C. (bold, 0.5 in in), CONCLUSION, then the signature block, kept on one page with the conclusion's last paragraph.
+- Certificate of service on a page of its own (numbered, not in the contents): the certification double spaced, its signature lines single spaced from 3.2 in.
+- Headings at the type size on the body pitch with no space of their own, kept with the next line: `#` centred bold capitals; `##` bold at the margin, later lines hanging 0.5 in; `###` bold, 0.5 in in, later lines hanging another 0.5 in. Block quotations single spaced, indented 0.5 in on both sides, a single line above and below; the paragraph after a quotation goes on unindented.
+- Caption: as the complaint's (the party column ruled at its right and foot, designations set in 1 in, a blank line around "v."). Signature block: "Dated:" at the left of its first line, from 3.2 in "Respectfully submitted,", the firm, "By: /s/" and the signer, the contact lines.
+- Page number: 12 pt, centred, its line box ending 0.5 in above the page edge.
 
 ## Markdown contract (for samples)
 
 - YAML frontmatter, then the body.
-- Frontmatter: `division`, `caption.parties` (list of `{names, designation}`), `case_number`, `judges` (list), `motion_title`, `brief_title`, `date`, `signature` (`firm` lines, `signer`, `lines`).
-- Markers (lines of their own): `[[brief]]` starts the brief's cover (the motion is before it); `[[toc]]` places the contents; `[[body]]` starts the numbered text. `# CERTIFICATE OF SERVICE` closes the body and is kept out of the contents.
-- Headings in the front matter are not in the contents (they are not outlined).
+- Frontmatter: `division`, `caption.parties` (list of `{names, designation}`), `case_number`, `judge` or `judges` (list), `motion_title`, `brief_title`, `date` (optional), `signature` (`firm` lines, `signer`, `lines`).
+- Markers (HTML comments on lines of their own): `<!-- brief -->` starts the brief's cover (the motion is before it); `<!-- toc -->` places the contents; `<!-- body -->` starts the numbered text. `# CERTIFICATE OF SERVICE` closes the body and is kept out of the contents; its first paragraph is the certification, the paragraphs after it its signature lines.
+- Blocks: `#` to `###` headings, `>` quotations, `1.` lists (numbered issues), `-` lists (authorities), paragraphs. Headings in the front matter are not in the contents. Not supported: footnotes, tables, raw typst.
 
 ## Known gaps and open choices
 
 1. **One exemplar only.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The CourtListener search (`court=mied`, `type=r`, motions to dismiss) also found Nano Magic, Inc. v. The Hilsinger Company Parent, LLC, 2:26-cv-12212, ECF 7 (26 pp., Liberation Sans; a Rule 12(b)(2) motion with its brief, Honigman LLP). It was checked for text but not saved. Tier 2 is therefore **not** judged against two filers yet.
-2. **Partial sample.** The brief is 22 pages in the exemplar; the sample transcribes the motion, the front matter (issues, authorities, no table of authorities), the introduction, Argument I, II.A to II.C (II.B and II.C are shortened, the case-string paragraphs of II.B other than Stockdale and James are omitted), III and the conclusion, plus the certificate of service. The table of authorities (pages 'passim' and page numbers) is not transcribed; the template does not generate one. The render is 15 pages, one over the 8-14 target, because the front matter is a full page each.
-3. **Font.** As for the complaint: LR 5.1(a)(3) names no face, so EB Garamond at 14 pt is kept (`docs/FONTS.md`, "No face named"). The exemplar's Times New Roman is a filer's choice, not a rule; the x-height difference is visual only (a question for David).
-4. **Double spacing.** Same reading as the complaint: 2.3em pitch, ~32 pt at 14 pt, matching Times New Roman's double line box.
+2. **Partial sample.** The brief is 22 pages in the exemplar; the sample transcribes the motion, the front matter (issues, authorities, no table of authorities), the introduction, Argument I, II.A to II.C (II.B and II.C are shortened, the case-string paragraphs of II.B other than Stockdale and James are omitted), III and the conclusion, plus the certificate of service. The table of authorities (pages 'passim' and page numbers) is not transcribed; the template does not generate one. The render is 16 pages (motion 2, cover 1, front matter 3, body 9, certificate 1).
+3. **Font.** LR 5.1(a)(3) names no face; Times New Roman (the exemplar's face, the repo default) in both engines. The docx was EB Garamond before the cross-engine port (2026-10-22).
+4. **Double spacing.** Same reading as the complaint: Times New Roman's single line box, 16.1 pt single and 32.2 pt double at 14 pt. Headings are on the double pitch too (the exemplar single-spaces a heading's lines); the authorities and the contents rows are single spaced, as in the exemplar.
 5. **Page numbers.** The motion is numbered 1 and 2; the brief cover is unnumbered; the front matter is roman from ii; the body restarts at 1. The exemplar follows the same pattern, but its motion pages and cover are not transcribed page-for-page, so the page numbers in the TOC follow our render, not the exemplar's.
-6. **Contents.** Generated from the body headings with `outline()`; page numbers are typst's. The exemplar's contents are not matched line-for-line (its heading wording is the same).
+6. **Contents.** Generated from the body headings in both engines (typst from the heading locations; docx from fb render's needles, settled over its passes); the front-matter sections are not listed (the exemplar lists the statement of issues and the authorities with their roman pages; tier 3, OPEN). The typst leader stops at the page column, Word's runs to the number (a tab leader); the text and the breaks are the same.
 7. **Caption.** Party block closed by a right and bottom rule (same choice as the complaint); the judge lines are at right.
-8. **Sample file names.** The brief asked for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. `tools/overlay.sh` reads `usage/OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`, and CLAUDE.md requires the INPUT-/OUTPUT-/OVERLAY- names, so this folder follows the repo convention. Flagged for the PM.
-9. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` are court-level gates and this doc-type folder is not that shape; the brief forbids editing `tools/`. Render and overlay were run; the review below is the Gate 2 equivalent for this doc type.
+8. **Sample file names.** `usage/` follows the INPUT-/OUTPUT-/FILED-EXAMPLE- convention of CLAUDE.md.
+9. **Selftest.** `tools/check-selftest.sh` needs a `court.json` in the folder it is given ("court.json unreadable" on this doc folder), so it does not apply here; `tools/check.sh` runs on the doc folder (typst and docx below).
 10. **Overlay.** The overlay map pairs each render page with the exemplar page sharing the most words; the pairing is by text, not index, so the page numbers on the overlay map are not the filed page numbers. Diagnostic, not a score.
 
-## Review of the rendered pages (current PDF, 15 pages)
+## Review of the rendered pages (typst and docx, 16 pages each, 2026-10-22)
 
-- Page 1 (motion): caption, motion title, the motion paragraph. Pass.
-- Page 2 (motion): L.R. 7.1 STATEMENT OF CONFERRAL, the date, the signature block at the right. Pass.
-- Page 3 (brief cover, unnumbered): caption and brief title. Pass.
-- Page 4 (ii): STATEMENT OF ISSUES PRESENTED, the numbered issue, the two answers, CONTROLLING OR MOST APPROPRIATE AUTHORITIES begins. Pass.
-- Pages 5 and 6 (iii, iv): bulleted authorities (single-spaced, hanging) and the TABLE OF CONTENTS with dot leaders and page numbers. The contents shows INTRODUCTION 1, ARGUMENT 2, sections I to III, the subsections A to C, and CONCLUSION 8. Pass.
-- Pages 7 and 8 (body 1 and 2): INTRODUCTION on page 1; ARGUMENT and I. on page 2. Pass.
-- Pages 9 to 12 (body 3 to 6): II. (bold, hanging) on body page 3; A., B., C. headings indented and bold; block quotations single-spaced and indented; the Keating block quote on body page 6. Pass.
-- Pages 13 to 15 (body 7 to 9): the rest of II.C; III. and CONCLUSION on body page 8 with the signature block; CERTIFICATE OF SERVICE on body page 9, not in the contents. Pass.
+The docx render breaks every line and page as the typst render (XENG-001..003 PASS, 290/290 lines), so each row holds for both.
 
-Defects found and fixed during this review:
-- Paragraph spacing: typst applies `spacing` between paragraphs, not `leading`; the body's `spacing` is the double pitch (same fix as the complaint).
-- `context` and separate content pieces misplaced lines; the body is rendered as one markdown string per section.
+- Page 1 (motion, 1): court title, caption with the ruled party column and the case number and judges at the right, the motion title in two bold lines, the motion paragraph, L.R. 7.1 STATEMENT OF CONFERRAL and the first lines of its paragraph. Pass.
+- Page 2 (motion, 2): the rest of the conferral paragraph, the date at the left and the signature block from 3.2 in. Pass.
+- Page 3 (brief cover, no number): caption and the brief title. Pass.
+- Page 4 (ii): STATEMENT OF ISSUES PRESENTED, issue 1 with its number at the indent, the two answers. Pass.
+- Page 5 (iii): CONTROLLING OR MOST APPROPRIATE AUTHORITIES, Cases and Statutes and Regulations, bulleted, single spaced, hanging. Pass.
+- Page 6 (iv): TABLE OF CONTENTS: INTRODUCTION 1, ARGUMENT 2, I. 2, II. 3, A. 4, B. 5, C. 6, III. 8, CONCLUSION 9, each matching the body page it names. Pass.
+- Pages 7 to 9 (1 to 3): INTRODUCTION; ARGUMENT and I. on page 2; II. (two lines, hanging) on page 3. Pass.
+- Pages 10 to 14 (4 to 8): A. with the two block quotations (single spaced, indented both sides, the following text unindented); B. (three lines) on page 5; C. on page 6; the Webster and Keating quotations on page 7; III. on page 8, which ends short so that CONCLUSION stays with the signature block. Pass.
+- Page 15 (9): CONCLUSION, its paragraph and the signature block. Pass.
+- Page 16 (10): CERTIFICATE OF SERVICE, the certification and its signature lines. Pass.
 
 [Formbook index](../../../../../README.md)
 
 ## Engines
 
-Built 2026-10-15 with `docx/build-reference.sh`, `docx/mied-motion-brief.lua`, and `docx/render.sh` (the court's own build: it maps the section footers to the ids pandoc writes), run by tools/render.sh --engine docx (pandoc 3.6.4).
-
-**docx: BLOCKED (not passed).** `usage/OUTPUT-motion-brief.docx` is written and valid (no duplicate zip entries, every XML part well formed). The `.docx.pdf` step did not run: LibreOffice (`soffice`) is not installed on this box, so `tools/render-docx.sh` exits 1 at the conversion. The docx.pdf checks and the page-by-page visual review are BLOCKED, and no `usage/.check-docx.txt` stamp is written. Pages reviewed: 0.
-
-Blocked items, by check area (docs/DOCX.md):
-- docx.pdf / page review: soffice not installed on this box.
-- Table of contents (the body headings): the contents is a TOC field over the heading styles. Its cached result lists the entries without page numbers; the page numbers appear only when the field is updated. `settings.xml` sets `updateFields`, so Word asks to update on open (accept it); LibreOffice needs an update on load. Page numbers in the contents are not verified in this box.
-- Table of authorities: none on this doc type; the front matter lists the authorities as a bulleted list, as in the sample (the template has no TOA either).
-- Pagination: Word and LibreOffice may break lines differently, so a page-number reference in the contents may be off by a page in Word.
-
-What the docx matches, as set in `docx/reference.docx` and the filter (checked in the XML, not on a page):
-- Sections as in the typst template: motion (arabic from 1), brief cover (unnumbered, the empty footer `footer2.xml`), front matter (lowercase roman), body and certificate (arabic from 1). Four `w:sectPr` blocks; the footers are named by relationship id after `docx/render.sh` maps the placeholders.
-- US Letter, 1 in margins on all sides; EB Garamond 14 pt (vendored family); body exact 644 twips (32.2 pt = 2.3 em, the typst double pitch) with a 0.5 in first-line indent; block quotations single spaced and indented 0.5 in on both sides; footers 12 pt.
-- Headings: level 1 centered bold caps; level 2 bold flush left; level 3 bold indented 0.5 in. Motion and front-matter headings use styles with no outline level, so they are not in the contents; the certificate starts on a new page.
-- Caption on both covers: court title, party block with right and bottom rules, case number and judges at right, the title bold centered.
-
-Differences from typst (not verified on a page):
-- Single spacing is Word's font-metric single line (`w:line 240 auto`), not typst's 1.15 em pitch; the typst PDF is 15 pages (motion 2, brief cover 1, front matter 3, body 9). The docx page count is unmeasured.
-- The caption rules are cell borders in a table; judge the LibreOffice PDF when it can be made (docs/DOCX.md, "Cover pages and caption boxes").
-- The issues list and the authorities use hanging-indent paragraphs, not the typst list engine; their spacing is judged on the PDF only.
-
-Not reviewed: the .docx has not been opened in Word or LibreOffice (no repair prompt check possible here).
+- **typst** (primary): `typst/mied-motion-brief.typ` on `lib/typst/xengine.typ`. `tools/check.sh --engine typst`: all tier-1 checks pass (DEF-TOC-001: 1 table page, 0 defects).
+- **docx**: `docx/reference.xml` (`base="xengine"`, `{font}` Times New Roman, size 28, body 644, single 322 twips, the three heading styles) and `docx/mied-motion-brief.lua` on `lib/docx/xengine.lua`, which writes the covers, the four sections and their footers (`$FORMBOOK_FOOTERS`, `$FORMBOOK_FINAL`), and the contents with the pages of fb render's passes (`$FORMBOOK_NEEDLES`, `$FORMBOOK_PAGES`; no TOC field); `fb render` builds the package (no scripts in `docx/`). `tools/check.sh --engine docx`: all tier-1 checks and XENG-001..003 pass (gated).
+- **latex**: none for this doc type.
