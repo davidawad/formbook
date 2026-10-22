@@ -76,84 +76,84 @@ signature:
     - Hartford, CT 06103
     - "Juris No. 040248"
 authorities:
-  - {key: valentine-sc, category: cases, text: "*Valentine v. Collier*, ___ S. Ct. ___, 2020 WL 2497541 (May 14, 2020)"}
-  - {key: valentine-tx, category: cases, text: "*Valentine v. Collier*, ___ F. Supp. 3d ___, 2020 WL 1916883 (S.D. Tex. Apr. 20, 2020)"}
-  - {key: markley, category: cases, text: "*Markley v. Department of Public Utility Control*, 301 Conn. 56 (2011)"}
-  - {key: carey, category: cases, text: "*State v. Carey*, 222 Conn. 299 (1992)"}
-  - {key: matthew-f, category: cases, text: "*In re Matthew F.*, 297 Conn. 673 (2010)"}
-  - {key: jose-b, category: cases, text: "*In re Jose B.*, 303 Conn. 569 (2012)"}
-  - {key: egri, category: cases, text: "*Egri v. Foisie*, 83 Conn. App. 243 (2004)"}
-  - {key: izzo, category: cases, text: "*Izzo v. Quinn*, 170 Conn. App. 631 (2017)"}
-  - {key: allen, category: cases, text: "*Allen v. Meacham*, No. 33 32 40, 1993 WL 78174 (Conn. Super. Mar. 3, 1993)"}
-  - {key: golden-hill, category: cases, text: "*Golden Hill Paugussett Tribe v. Weicker*, CV91-0500895, 1992 WL 96732 (Conn. Super. May 5, 1992)"}
-  - {key: electrical, category: cases, text: "*Electrical Contractors, Inc. v. Dep't of Education*, 303 Conn. 402 (2012)"}
-  - {key: reitzer, category: cases, text: "*Reitzer v. Bd. of Trustees of State Colleges*, 2 Conn. App. 196 (1984)"}
-  - {key: worrell, category: cases, text: "*Connecticut Ass'n of Health Care Facilities, Inc. v. Worrell*, 199 Conn. 609 (1986)"}
-  - {key: powers, category: cases, text: "*Powers v. Ohio*, 499 U.S. 400 (1991)"}
-  - {key: triplett, category: cases, text: "*United States Dept. of Labor v. Triplett*, 494 U.S. 715 (1990)"}
-  - {key: griswold, category: cases, text: "*Griswold v. Connecticut*, 381 U.S. 479 (1965)"}
-  - {key: naacp, category: cases, text: "*NAACP v. Alabama*, 357 U.S. 449 (1958)"}
-  - {key: craig, category: cases, text: "*Craig v. Boren*, 429 U.S. 190 (1976)"}
-  - {key: warth, category: cases, text: "*Warth v. Seldin*, 422 U.S. 490 (1975)"}
-  - {key: helling, category: cases, text: "*Helling v. McKinney*, 509 U.S. 25 (1993)"}
-  - {key: toliver, category: cases, text: "*Toliver v. Comm'r Semple*, No. 3:16-cv-1899 (SRU), 2016 WL 7115942 (D. Conn. Dec. 6, 2016)"}
-  - {key: rahman, category: cases, text: "*Rahman v. Schriro*, 22 F. Supp. 3d 305 (S.D.N.Y. 2014)"}
-  - {key: savino, category: cases, text: "*Savino v. Souza*, No. 20-10617-WGY, 2020 WL 1703844 (D. Mass. Apr. 8, 2020)"}
-  - {key: ortuno, category: cases, text: "*Ortuno v. Jennings*, No. 20-cv-02064-MMC, 2020 WL 1701724 (N.D. Cal. Apr. 8, 2020)"}
-  - {key: castillo, category: cases, text: "*Castillo v. Barr*, No. CV20-00605 TJM (AFMx) 2020 WL 1502864 (C.D. Cal. Mar. 27, 2020)"}
-  - {key: stoughton, category: cases, text: "*People ex rel. Stoughton v. Brann*, No. 451078/2020, 2020 WL 1679209 (N.Y. Sup. Ct. Apr. 6, 2020)"}
-  - {key: brown-plata, category: cases, text: "*Brown v. Plata*, 563 U.S. 493 (2011)"}
-  - {key: farmer, category: cases, text: "*Farmer v. Brennan*, 511 U.S. 825 (1994)"}
-  - {key: bell, category: cases, text: "*Bell v. Wolfish*, 441 U.S. 520 (1979)"}
-  - {key: santiago, category: cases, text: "*State v. Santiago*, 318 Conn. 1 (2015)"}
-  - {key: ross, category: cases, text: "*State v. Ross*, 230 Conn. 183 (1994)"}
-  - {key: faraday, category: cases, text: "*Faraday v. Comm'r of Corr.*, 288 Conn. 326 (2008)"}
-  - {key: jolly, category: cases, text: "*Jolly v. Coughlin*, 76 F.3d 468 (2d Cir. 1996)"}
-  - {key: ruderman, category: cases, text: "*Ruderman v. Kolitwenzew*, No. 20-cv-2082, 2020 WL 2449758 (C.D. Ill. May 12, 2020)"}
-  - {key: frazier, category: cases, text: "*Frazier v. Kelley*, No. 20-cv-00434, 2020 WL 2110896 (E.D. Ark. May 4, 2020)"}
-  - {key: awshana, category: cases, text: "*Awshana v. Adducci*, No. 20-10699, 2020 WL 1808906 (E.D. Mich. Apr. 9, 2020)"}
-  - {key: jabbar, category: cases, text: "*Jabbar v. Fischer*, 683 F.3d 54 (2d Cir. 2012)"}
-  - {key: deshaney, category: cases, text: "*DeShaney v. Winnebago County Dept. of Social Services*, 489 U.S. 189 (1989)"}
-  - {key: morgan, category: cases, text: "*Morgan v. Dzurenda*, 956 F.3d 84 (2d Cir. 2020)"}
-  - {key: matthiessen, category: cases, text: "*Matthiessen v. Vanech*, 266 Conn. 822 (2003)"}
-  - {key: chance, category: cases, text: "*Chance v. Armstrong*, 143 F.3d 698 (2d Cir. 1998)"}
-  - {key: estelle, category: cases, text: "*Estelle v. Gamble*, 429 U.S. 97 (1976)"}
-  - {key: berry, category: cases, text: "*Berry v. Peterman*, 604 F.3d 435 (7th Cir. 2010)"}
-  - {key: waldrop, category: cases, text: "*Waldrop v. Evans*, 871 F.2d 1030 (11th Cir. 1989)"}
-  - {key: jones-westchester, category: cases, text: "*Jones v. Westchester County Department of Corrections Medical Dept.*, 557 F. Supp. 2d 408 (S.D.N.Y. 2008)"}
-  - {key: martinez-brooks, category: cases, text: "*Martinez-Brooks v. Easter*, No. 3:20-cv-00569, 2020 WL 2405350 (D. Conn. May 12, 2020)"}
-  - {key: wilson, category: cases, text: "*Wilson v. Williams*, No. 4:20-cv-00794, 2020 WL 1940882 (N.D. Ohio Apr. 22, 2020)"}
-  - {key: swain, category: cases, text: "*Swain v. Junior*, No. 1:20-cv-21457-KMW, 2020 WL 2078580 (S.D. Fla. Apr. 29, 2020)"}
-  - {key: coleman, category: cases, text: "*Coleman v. Wilson*, 912 F. Supp. 1282 (E.D. Cal. 1995)"}
-  - {key: almighty, category: cases, text: "*Almighty Supreme Born Allah v. Milling*, 876 F.3d 48 (2d Cir. 2017)"}
-  - {key: darnell, category: cases, text: "*Darnell v. Pineiro*, 849 F.3d 17 (2d Cir. 2017)"}
-  - {key: cameron, category: cases, text: "*Cameron v. Bouchard*, No. 20-10949, 2020 WL 2569868 (E.D. Mich. May 21, 2020)"}
-  - {key: thakker, category: cases, text: "*Thakker v. Doll*, No. 1:20-cv-480, 2020 WL 1671563 (M.D. Pa. Mar. 31, 2020)"}
-  - {key: basank, category: cases, text: "*Basank v. Decker*, No. 20 Civ. 2518 (AT), 2020 WL 1481503 (S.D.N.Y. Mar. 26, 2020)"}
-  - {key: golding, category: cases, text: "*State v. Golding*, 213 Conn. 233 (1989)"}
-  - {key: cambodian, category: cases, text: "*Cambodian Buddhist Society of Connecticut, Inc. v. Planning and Zoning Com'n of Town of Newtown*, 285 Conn. 381 (2008)"}
-  - {key: peeler-2004, category: cases, text: "*State v. Peeler*, 271 Conn. 338 (2004)"}
-  - {key: geisler, category: cases, text: "*State v. Geisler*, 222 Conn. 672 (1992)"}
-  - {key: griffin-doc, category: cases, text: "*Griffin v. Commissioner of Correction*, 333 Conn. 480 (2019)"}
-  - {key: const-8, category: constitutional, text: "United States Constitution, Amendment VIII"}
-  - {key: const-14, category: constitutional, text: "United States Constitution, Amendment XIV"}
-  - {key: ct-const-8, category: constitutional, text: "Connecticut Constitution, Article First, § 8"}
-  - {key: ct-const-9, category: constitutional, text: "Connecticut Constitution, Article First, § 9"}
-  - {key: gs-18-7, category: statutes, text: "General Statutes § 18-7"}
-  - {key: gs-28-9, category: statutes, text: "General Statutes § 28-9"}
-  - {key: cpcs, category: cases, text: "*Committee for Public Counsel Services v. Chief Justice of Trial Court*, 484 Mass. 431, 142 N.E.3d 525, aff'd as modified, 484 Mass. 1029, 143 N.E.3d 408 (2020)"}
-  - {key: atkins, category: cases, text: "*Atkins v. Virginia*, 536 U.S. 304 (2002)"}
-  - {key: peeler-2016, category: cases, text: "*State v. Peeler*, 321 Conn. 375 (2016)"}
-  - {key: dejesus, category: cases, text: "*State v. DeJesus*, 288 Conn. 418 (2008)"}
-  - {key: melendez, category: cases, text: "*State v. Melendez*, 291 Conn. 693 (2009)"}
-  - {key: holmes, category: cases, text: "*State v. Holmes*, 334 Conn. 202 (2019)"}
-  - {key: payne, category: cases, text: "*State v. Payne*, 260 Conn. 446 (2002)"}
-  - {key: in-re-ross, category: cases, text: "*In re Ross*, 272 Conn. 674 (2005)"}
-  - {key: yasiel, category: cases, text: "*In re Yasiel R.*, 317 Conn. 773 (2015)"}
-  - {key: mccleese, category: cases, text: "*State v. McCleese*, 333 Conn. 378 (2019)"}
-  - {key: harris, category: cases, text: "*United States v. Harris*, No. 19-00356, 2020 WL 1503444 (D.D.C. Mar. 26, 2020)"}
-  - {key: gs-18-100h, category: statutes, text: "General Statutes § 18-100h"}
-  - {key: pb-10-39, category: rules, text: "Practice Book § 10-39"}
+  valentine-sc: {kind: cases, cite: "*Valentine v. Collier*, ___ S. Ct. ___, 2020 WL 2497541 (May 14, 2020)", sort: "valentine v collier s ct 2020 wl 2497541 may 14 2020"}
+  valentine-tx: {kind: cases, cite: "*Valentine v. Collier*, ___ F. Supp. 3d ___, 2020 WL 1916883 (S.D. Tex. Apr. 20, 2020)", sort: "valentine v collier f supp 3d 2020 wl 1916883 sd tex apr 20 2020"}
+  markley: {kind: cases, cite: "*Markley v. Department of Public Utility Control*, 301 Conn. 56 (2011)", sort: "markley v department of public utility control 301 conn 56 2011"}
+  carey: {kind: cases, cite: "*State v. Carey*, 222 Conn. 299 (1992)", sort: "state v carey 222 conn 299 1992"}
+  matthew-f: {kind: cases, cite: "*In re Matthew F.*, 297 Conn. 673 (2010)", sort: "in re matthew f 297 conn 673 2010"}
+  jose-b: {kind: cases, cite: "*In re Jose B.*, 303 Conn. 569 (2012)", sort: "in re jose b 303 conn 569 2012"}
+  egri: {kind: cases, cite: "*Egri v. Foisie*, 83 Conn. App. 243 (2004)", sort: "egri v foisie 83 conn app 243 2004"}
+  izzo: {kind: cases, cite: "*Izzo v. Quinn*, 170 Conn. App. 631 (2017)", sort: "izzo v quinn 170 conn app 631 2017"}
+  allen: {kind: cases, cite: "*Allen v. Meacham*, No. 33 32 40, 1993 WL 78174 (Conn. Super. Mar. 3, 1993)", sort: "allen v meacham no 33 32 40 1993 wl 78174 conn super mar 3 1993"}
+  golden-hill: {kind: cases, cite: "*Golden Hill Paugussett Tribe v. Weicker*, CV91-0500895, 1992 WL 96732 (Conn. Super. May 5, 1992)", sort: "golden hill paugussett tribe v weicker cv910500895 1992 wl 96732 conn super may 5 1992"}
+  electrical: {kind: cases, cite: "*Electrical Contractors, Inc. v. Dep't of Education*, 303 Conn. 402 (2012)", sort: "electrical contractors inc v dept of education 303 conn 402 2012"}
+  reitzer: {kind: cases, cite: "*Reitzer v. Bd. of Trustees of State Colleges*, 2 Conn. App. 196 (1984)", sort: "reitzer v bd of trustees of state colleges 2 conn app 196 1984"}
+  worrell: {kind: cases, cite: "*Connecticut Ass'n of Health Care Facilities, Inc. v. Worrell*, 199 Conn. 609 (1986)", sort: "connecticut assn of health care facilities inc v worrell 199 conn 609 1986"}
+  powers: {kind: cases, cite: "*Powers v. Ohio*, 499 U.S. 400 (1991)", sort: "powers v ohio 499 us 400 1991"}
+  triplett: {kind: cases, cite: "*United States Dept. of Labor v. Triplett*, 494 U.S. 715 (1990)", sort: "united states dept of labor v triplett 494 us 715 1990"}
+  griswold: {kind: cases, cite: "*Griswold v. Connecticut*, 381 U.S. 479 (1965)", sort: "griswold v connecticut 381 us 479 1965"}
+  naacp: {kind: cases, cite: "*NAACP v. Alabama*, 357 U.S. 449 (1958)", sort: "naacp v alabama 357 us 449 1958"}
+  craig: {kind: cases, cite: "*Craig v. Boren*, 429 U.S. 190 (1976)", sort: "craig v boren 429 us 190 1976"}
+  warth: {kind: cases, cite: "*Warth v. Seldin*, 422 U.S. 490 (1975)", sort: "warth v seldin 422 us 490 1975"}
+  helling: {kind: cases, cite: "*Helling v. McKinney*, 509 U.S. 25 (1993)", sort: "helling v mckinney 509 us 25 1993"}
+  toliver: {kind: cases, cite: "*Toliver v. Comm'r Semple*, No. 3:16-cv-1899 (SRU), 2016 WL 7115942 (D. Conn. Dec. 6, 2016)", sort: "toliver v commr semple no 316cv1899 sru 2016 wl 7115942 d conn dec 6 2016"}
+  rahman: {kind: cases, cite: "*Rahman v. Schriro*, 22 F. Supp. 3d 305 (S.D.N.Y. 2014)", sort: "rahman v schriro 22 f supp 3d 305 sdny 2014"}
+  savino: {kind: cases, cite: "*Savino v. Souza*, No. 20-10617-WGY, 2020 WL 1703844 (D. Mass. Apr. 8, 2020)", sort: "savino v souza no 2010617wgy 2020 wl 1703844 d mass apr 8 2020"}
+  ortuno: {kind: cases, cite: "*Ortuno v. Jennings*, No. 20-cv-02064-MMC, 2020 WL 1701724 (N.D. Cal. Apr. 8, 2020)", sort: "ortuno v jennings no 20cv02064mmc 2020 wl 1701724 nd cal apr 8 2020"}
+  castillo: {kind: cases, cite: "*Castillo v. Barr*, No. CV20-00605 TJM (AFMx) 2020 WL 1502864 (C.D. Cal. Mar. 27, 2020)", sort: "castillo v barr no cv2000605 tjm afmx 2020 wl 1502864 cd cal mar 27 2020"}
+  stoughton: {kind: cases, cite: "*People ex rel. Stoughton v. Brann*, No. 451078/2020, 2020 WL 1679209 (N.Y. Sup. Ct. Apr. 6, 2020)", sort: "people ex rel stoughton v brann no 4510782020 2020 wl 1679209 ny sup ct apr 6 2020"}
+  brown-plata: {kind: cases, cite: "*Brown v. Plata*, 563 U.S. 493 (2011)", sort: "brown v plata 563 us 493 2011"}
+  farmer: {kind: cases, cite: "*Farmer v. Brennan*, 511 U.S. 825 (1994)", sort: "farmer v brennan 511 us 825 1994"}
+  bell: {kind: cases, cite: "*Bell v. Wolfish*, 441 U.S. 520 (1979)", sort: "bell v wolfish 441 us 520 1979"}
+  santiago: {kind: cases, cite: "*State v. Santiago*, 318 Conn. 1 (2015)", sort: "state v santiago 318 conn 1 2015"}
+  ross: {kind: cases, cite: "*State v. Ross*, 230 Conn. 183 (1994)", sort: "state v ross 230 conn 183 1994"}
+  faraday: {kind: cases, cite: "*Faraday v. Comm'r of Corr.*, 288 Conn. 326 (2008)", sort: "faraday v commr of corr 288 conn 326 2008"}
+  jolly: {kind: cases, cite: "*Jolly v. Coughlin*, 76 F.3d 468 (2d Cir. 1996)", sort: "jolly v coughlin 76 f3d 468 2d cir 1996"}
+  ruderman: {kind: cases, cite: "*Ruderman v. Kolitwenzew*, No. 20-cv-2082, 2020 WL 2449758 (C.D. Ill. May 12, 2020)", sort: "ruderman v kolitwenzew no 20cv2082 2020 wl 2449758 cd ill may 12 2020"}
+  frazier: {kind: cases, cite: "*Frazier v. Kelley*, No. 20-cv-00434, 2020 WL 2110896 (E.D. Ark. May 4, 2020)", sort: "frazier v kelley no 20cv00434 2020 wl 2110896 ed ark may 4 2020"}
+  awshana: {kind: cases, cite: "*Awshana v. Adducci*, No. 20-10699, 2020 WL 1808906 (E.D. Mich. Apr. 9, 2020)", sort: "awshana v adducci no 2010699 2020 wl 1808906 ed mich apr 9 2020"}
+  jabbar: {kind: cases, cite: "*Jabbar v. Fischer*, 683 F.3d 54 (2d Cir. 2012)", sort: "jabbar v fischer 683 f3d 54 2d cir 2012"}
+  deshaney: {kind: cases, cite: "*DeShaney v. Winnebago County Dept. of Social Services*, 489 U.S. 189 (1989)", sort: "deshaney v winnebago county dept of social services 489 us 189 1989"}
+  morgan: {kind: cases, cite: "*Morgan v. Dzurenda*, 956 F.3d 84 (2d Cir. 2020)", sort: "morgan v dzurenda 956 f3d 84 2d cir 2020"}
+  matthiessen: {kind: cases, cite: "*Matthiessen v. Vanech*, 266 Conn. 822 (2003)", sort: "matthiessen v vanech 266 conn 822 2003"}
+  chance: {kind: cases, cite: "*Chance v. Armstrong*, 143 F.3d 698 (2d Cir. 1998)", sort: "chance v armstrong 143 f3d 698 2d cir 1998"}
+  estelle: {kind: cases, cite: "*Estelle v. Gamble*, 429 U.S. 97 (1976)", sort: "estelle v gamble 429 us 97 1976"}
+  berry: {kind: cases, cite: "*Berry v. Peterman*, 604 F.3d 435 (7th Cir. 2010)", sort: "berry v peterman 604 f3d 435 7th cir 2010"}
+  waldrop: {kind: cases, cite: "*Waldrop v. Evans*, 871 F.2d 1030 (11th Cir. 1989)", sort: "waldrop v evans 871 f2d 1030 11th cir 1989"}
+  jones-westchester: {kind: cases, cite: "*Jones v. Westchester County Department of Corrections Medical Dept.*, 557 F. Supp. 2d 408 (S.D.N.Y. 2008)", sort: "jones v westchester county department of corrections medical dept 557 f supp 2d 408 sdny 2008"}
+  martinez-brooks: {kind: cases, cite: "*Martinez-Brooks v. Easter*, No. 3:20-cv-00569, 2020 WL 2405350 (D. Conn. May 12, 2020)", sort: "martinezbrooks v easter no 320cv00569 2020 wl 2405350 d conn may 12 2020"}
+  wilson: {kind: cases, cite: "*Wilson v. Williams*, No. 4:20-cv-00794, 2020 WL 1940882 (N.D. Ohio Apr. 22, 2020)", sort: "wilson v williams no 420cv00794 2020 wl 1940882 nd ohio apr 22 2020"}
+  swain: {kind: cases, cite: "*Swain v. Junior*, No. 1:20-cv-21457-KMW, 2020 WL 2078580 (S.D. Fla. Apr. 29, 2020)", sort: "swain v junior no 120cv21457kmw 2020 wl 2078580 sd fla apr 29 2020"}
+  coleman: {kind: cases, cite: "*Coleman v. Wilson*, 912 F. Supp. 1282 (E.D. Cal. 1995)", sort: "coleman v wilson 912 f supp 1282 ed cal 1995"}
+  almighty: {kind: cases, cite: "*Almighty Supreme Born Allah v. Milling*, 876 F.3d 48 (2d Cir. 2017)", sort: "almighty supreme born allah v milling 876 f3d 48 2d cir 2017"}
+  darnell: {kind: cases, cite: "*Darnell v. Pineiro*, 849 F.3d 17 (2d Cir. 2017)", sort: "darnell v pineiro 849 f3d 17 2d cir 2017"}
+  cameron: {kind: cases, cite: "*Cameron v. Bouchard*, No. 20-10949, 2020 WL 2569868 (E.D. Mich. May 21, 2020)", sort: "cameron v bouchard no 2010949 2020 wl 2569868 ed mich may 21 2020"}
+  thakker: {kind: cases, cite: "*Thakker v. Doll*, No. 1:20-cv-480, 2020 WL 1671563 (M.D. Pa. Mar. 31, 2020)", sort: "thakker v doll no 120cv480 2020 wl 1671563 md pa mar 31 2020"}
+  basank: {kind: cases, cite: "*Basank v. Decker*, No. 20 Civ. 2518 (AT), 2020 WL 1481503 (S.D.N.Y. Mar. 26, 2020)", sort: "basank v decker no 20 civ 2518 at 2020 wl 1481503 sdny mar 26 2020"}
+  golding: {kind: cases, cite: "*State v. Golding*, 213 Conn. 233 (1989)", sort: "state v golding 213 conn 233 1989"}
+  cambodian: {kind: cases, cite: "*Cambodian Buddhist Society of Connecticut, Inc. v. Planning and Zoning Com'n of Town of Newtown*, 285 Conn. 381 (2008)", sort: "cambodian buddhist society of connecticut inc v planning and zoning comn of town of newtown 285 conn 381 2008"}
+  peeler-2004: {kind: cases, cite: "*State v. Peeler*, 271 Conn. 338 (2004)", sort: "state v peeler 271 conn 338 2004"}
+  geisler: {kind: cases, cite: "*State v. Geisler*, 222 Conn. 672 (1992)", sort: "state v geisler 222 conn 672 1992"}
+  griffin-doc: {kind: cases, cite: "*Griffin v. Commissioner of Correction*, 333 Conn. 480 (2019)", sort: "griffin v commissioner of correction 333 conn 480 2019"}
+  const-8: {kind: constitutional, cite: "United States Constitution, Amendment VIII", sort: "united states constitution amendment viii"}
+  const-14: {kind: constitutional, cite: "United States Constitution, Amendment XIV", sort: "united states constitution amendment xiv"}
+  ct-const-8: {kind: constitutional, cite: "Connecticut Constitution, Article First, § 8", sort: "connecticut constitution article first 8"}
+  ct-const-9: {kind: constitutional, cite: "Connecticut Constitution, Article First, § 9", sort: "connecticut constitution article first 9"}
+  gs-18-7: {kind: statutes, cite: "General Statutes § 18-7", sort: "general statutes 187"}
+  gs-28-9: {kind: statutes, cite: "General Statutes § 28-9", sort: "general statutes 289"}
+  cpcs: {kind: cases, cite: "*Committee for Public Counsel Services v. Chief Justice of Trial Court*, 484 Mass. 431, 142 N.E.3d 525, aff'd as modified, 484 Mass. 1029, 143 N.E.3d 408 (2020)", sort: "committee for public counsel services v chief justice of trial court 484 mass 431 142 ne3d 525 affd as modified 484 mass 1029 143 ne3d 408 2020"}
+  atkins: {kind: cases, cite: "*Atkins v. Virginia*, 536 U.S. 304 (2002)", sort: "atkins v virginia 536 us 304 2002"}
+  peeler-2016: {kind: cases, cite: "*State v. Peeler*, 321 Conn. 375 (2016)", sort: "state v peeler 321 conn 375 2016"}
+  dejesus: {kind: cases, cite: "*State v. DeJesus*, 288 Conn. 418 (2008)", sort: "state v dejesus 288 conn 418 2008"}
+  melendez: {kind: cases, cite: "*State v. Melendez*, 291 Conn. 693 (2009)", sort: "state v melendez 291 conn 693 2009"}
+  holmes: {kind: cases, cite: "*State v. Holmes*, 334 Conn. 202 (2019)", sort: "state v holmes 334 conn 202 2019"}
+  payne: {kind: cases, cite: "*State v. Payne*, 260 Conn. 446 (2002)", sort: "state v payne 260 conn 446 2002"}
+  in-re-ross: {kind: cases, cite: "*In re Ross*, 272 Conn. 674 (2005)", sort: "in re ross 272 conn 674 2005"}
+  yasiel: {kind: cases, cite: "*In re Yasiel R.*, 317 Conn. 773 (2015)", sort: "in re yasiel r 317 conn 773 2015"}
+  mccleese: {kind: cases, cite: "*State v. McCleese*, 333 Conn. 378 (2019)", sort: "state v mccleese 333 conn 378 2019"}
+  harris: {kind: cases, cite: "*United States v. Harris*, No. 19-00356, 2020 WL 1503444 (D.D.C. Mar. 26, 2020)", sort: "united states v harris no 1900356 2020 wl 1503444 ddc mar 26 2020"}
+  gs-18-100h: {kind: statutes, cite: "General Statutes § 18-100h", sort: "general statutes 18100h"}
+  pb-10-39: {kind: rules, cite: "Practice Book § 10-39", sort: "practice book 1039"}
 ---
 
 # STATEMENT OF THE ISSUE
@@ -186,7 +186,7 @@ In addition, it now appears that COVID-19 has spread among Connecticut prisons e
 
 ## II. TRIAL COURT PROCEEDINGS
 
-The plaintiffs brought this action to protect the health and safety of the people confined in Connecticut's correctional facilities. The plaintiffs claimed that the defendants' failure to take steps to mitigate the spread of the virus has exposed Connecticut's incarcerated population to a substantial risk of serious illness. The plaintiffs claimed that the defendants' failure to act violated (1) the [Eighth Amendment](toa:const-8) (with respect to sentenced persons) and [Fourteenth Amendment](toa:const-14) (with respect to pretrial detainees) of the U.S. constitution, (2) the corresponding provisions in [article first, §§ 8](toa:ct-const-8) and [9](toa:ct-const-9) of the Connecticut constitution, (3) the Governor's obligation under [General Statutes § 28-9(b)(5)](toa:gs-28-9) to "protect[] the health and safety of inmates of state institutions" during public health and civil preparedness emergencies.;" and (4) the Commissioner's obligation under [General Statutes § 18-7](toa:gs-18-7) to "provide for the relief of any sick or infirm prisoner …." The plaintiffs sought various forms of relief, including release of incarcerated people at heightened risk for serious illness or death from COVID-19, an order to reduce the population density at all DOC facilities, and an order to submit a plan to provide adequate sanitation, social distancing, and medical treatment. The defendants moved to dismiss, claiming that the plaintiffs lacked standing, and that the action is barred by the political question doctrine.[^9]
+The plaintiffs brought this action to protect the health and safety of the people confined in Connecticut's correctional facilities. The plaintiffs claimed that the defendants' failure to take steps to mitigate the spread of the virus has exposed Connecticut's incarcerated population to a substantial risk of serious illness. The plaintiffs claimed that the defendants' failure to act violated (1) the [Eighth Amendment](toa:const-8) (with respect to sentenced persons) and [Fourteenth Amendment](toa:const-14) (with respect to pretrial detainees) of the U.S. constitution, (2) the corresponding provisions in [article first, §§ 8](toa:ct-const-8) and [9](toa:ct-const-9) of the Connecticut constitution, (3) the Governor's obligation under [General Statutes § 28-9(b)(5)](toa:gs-28-9) to "protect[] the health and safety of inmates of state institutions" during public health and civil preparedness emergencies.;” and (4) the Commissioner's obligation under [General Statutes § 18-7](toa:gs-18-7) to "provide for the relief of any sick or infirm prisoner …." The plaintiffs sought various forms of relief, including release of incarcerated people at heightened risk for serious illness or death from COVID-19, an order to reduce the population density at all DOC facilities, and an order to submit a plan to provide adequate sanitation, social distancing, and medical treatment. The defendants moved to dismiss, claiming that the plaintiffs lacked standing, and that the action is barred by the political question doctrine.[^9]
 
 On April 24, 2020, the trial court, Bellis, J., granted the defendants' motion to dismiss, concluding that Connecticut courts have no jurisdiction over the plaintiffs' suit. First, the court held that none of the plaintiffs had standing because they did not sufficiently allege that they suffered a direct injury as a result of the defendants' actions. With respect to the individual plaintiffs, the trial court focused solely on the substance of the Eighth Amendment claim, rather than whether the plaintiffs alleged a colorable claim of injury. Order re Mot. to Dismiss, pp. 5-6. The court also did not mention the plaintiffs' separate allegations that the defendants violated the Fourteenth Amendment (given that the plaintiffs who are pretrial detainees do not come under the Eighth Amendment in the first place), the Connecticut Constitution, and General Statutes §§ 18-7 and 28-9(b). Instead, the court concluded – improperly – that the plaintiffs lacked standing solely because, in the court's view, the complaint failed to state a claim under the Eighth Amendment. *Id.*
 
@@ -434,7 +434,7 @@ For all of the reasons set forth herein, the trial court's decision should be re
 
 [^20]: Under the Fourteenth Amendment, officials are deliberately indifferent, and thus violate their constitutional obligations, when they (1) recklessly fail to act with reasonable care to mitigate the risk that the condition posed to the pretrial detainee even though (2) they knew, or should have known, that the condition posed an excessive risk to health or safety. [*Darnell*, 849 F.3d at 35](toa:darnell). Notably, because pretrial detainees have not been convicted and therefore cannot be lawfully punished, they do not have to prove the subjective element of deliberate indifference. *Id.*
 
-[^21]: See also [*Basank v. Decker*, 2020 WL 1481503, at \*1, 5 (S.D.N.Y. Mar. 26, 2020)](toa:basank) (concluding that plaintiffs who suffer from chronic conditions "face[] an imminent risk of death or serious injury in immigration detention if exposed" to the pathogen); Order, United States v. Hector, No. 2004183 (4th Cir. Mar. 27, 2020) (reversing denial of release pending appeal and ordering the district court to "consider the severity of the risk that the COVID-19 virus poses to appellant given her existing medical conditions"), on remand, Order, No. 18-002, Dkt. 748 (W.D. Va. Mar. 27, 2020) (granting release pending sentencing; Order, Xochihua-Jaimes v. Barr, No. 18-71460 (9th Cir. Mar. 23, 2020) (ordering sua sponte release "[i]n light of the rapidly escalating public health crisis); Order, United States v. Bolston, No. 1800382, Dkt. No. 20 (N.D. Ga. Mar. 30, 2020) (releasing defendant in part because "the danger inherent in his continued incarceration. . . during the COVID-19 outbreak".); Order, United States v. Kennedy, No. 1820315, Dkt. No. 77 (E.D. Mich. Mar. 27, 2020) (same); Order, United States v. Michaels, No. 16-00076, Dkt. No. 1061 (C.D. Cal. Mar. 26, 2020) (granting temporary release because the pathogen constitutes a compelling reason not to detain people); Order, [*United States v. Harris*, 2020 WL 1503444 (D.D.C. Mar. 26, 2020)](toa:harris) ("The Court is convinced that incarcerating Defendant while the current COVID-19 crisis continues to expand poses a far greater risk to community safety than the risk posed by Defendant's release to home confinement on . . . strict conditions.").
+[^21]: See also [*Basank v. Decker*, 2020 WL 1481503, at \*1, 5 (S.D.N.Y. Mar. 26, 2020)](toa:basank) (concluding that plaintiffs who suffer from chronic conditions "face[] an imminent risk of death or serious injury in immigration detention if exposed" to the pathogen); Order, United States v. Hector, No. 2004183 (4th Cir. Mar. 27, 2020) (reversing denial of release pending appeal and ordering the district court to "consider the severity of the risk that the COVID-19 virus poses to appellant given her existing medical conditions"), on remand, Order, No. 18-002, Dkt. 748 (W.D. Va. Mar. 27, 2020) (granting release pending sentencing; Order, Xochihua-Jaimes v. Barr, No. 18-71460 (9th Cir. Mar. 23, 2020) (ordering sua sponte release "[i]n light of the rapidly escalating public health crisis); Order, United States v. Bolston, No. 1800382, Dkt. No. 20 (N.D. Ga. Mar. 30, 2020) (releasing defendant in part because “the danger inherent in his continued incarceration. . . during the COVID-19 outbreak”.); Order, United States v. Kennedy, No. 1820315, Dkt. No. 77 (E.D. Mich. Mar. 27, 2020) (same); Order, United States v. Michaels, No. 16-00076, Dkt. No. 1061 (C.D. Cal. Mar. 26, 2020) (granting temporary release because the pathogen constitutes a compelling reason not to detain people); Order, [*United States v. Harris*, 2020 WL 1503444 (D.D.C. Mar. 26, 2020)](toa:harris) (“The Court is convinced that incarcerating Defendant while the current COVID-19 crisis continues to expand poses a far greater risk to community safety than the risk posed by Defendant's release to home confinement on . . . strict conditions.").
 
 [^22]: Paragraph 90 states: "During the COVID-19 pandemic, and at all other times, the defendants bear the duty to refrain from cruelly and unusually punishing sentenced prisoners of the State in contravention of the Connecticut and United States Constitutions by failing to provide adequate sanitation and medical care."
 

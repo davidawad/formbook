@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails. LaTeX is gated (1311/1311 lines). Word is reported, not gated: the
+# line breaks match until page 9, where note 4 (13 lines) does not fit under its anchor's line; typst and LaTeX move
+# the line and its paragraph to page 10 with the note, LibreOffice keeps the line on page 9 and sets the note on page
+# 10 (no docx setting changes it; docs/EVAL-LOOP.md, the Pennsylvania fan-out), so its pages run ahead from there
+# (51 pages, typst 53). A shared-model item.
+params:
+  cross_engine: gate
+  cross_engine_docx: report
