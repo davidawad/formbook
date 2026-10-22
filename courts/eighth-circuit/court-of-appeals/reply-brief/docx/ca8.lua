@@ -14,7 +14,7 @@ local CFG = {
   kind = "reply-brief",
   toc_depth = 4,
   word_limit = 6500,       -- CA8-LIMIT-001: half of the 13,000-word principal limit (FRAP 32(a)(7)(B)(ii))
-  font_name = "Gelasio, 14-point",   -- typst font-name, printed in the certificate of compliance
+  font_name = "Times New Roman, 14-point",   -- typst font-name, printed in the certificate of compliance
   -- The typst template's line boxes and spaces, in twips: the single pitch (17 pt); the cover's gap (14 pt, the
   -- largest typst tries) and its 4.9 pt between paragraphs; the right half (234 pt) and the quarter (117 pt) of the
   -- text block and the 7 pt step of the cover's address lines; the signature block (19.6 pt above, 16.8 pt after

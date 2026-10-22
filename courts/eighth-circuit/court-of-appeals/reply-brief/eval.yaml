@@ -1,0 +1,9 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx renders break every line and page
+# where the typst render does (fb-595.54.9, on the shared layout model lib/*/xengine*), so a difference fails.
+# The docx is reported, not gated: every page and page end match typst, and 397 of 400 lines, but on p9 line 14 typst
+# overflows the measure by 0.07 pt with "collateral" and LibreOffice, which measures a line in whole twips (its PDF
+# sets the line 0.08 pt narrower), keeps the word; a right indent of 1 twip that fixes p9 breaks p16 line 2, which
+# typst fills to within 0.01 pt. No template setting reproduces a sub-twip decision; see README.md.
+params:
+  cross_engine: gate
+  cross_engine_docx: report

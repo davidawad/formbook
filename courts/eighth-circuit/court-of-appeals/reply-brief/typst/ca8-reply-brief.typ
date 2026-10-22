@@ -12,9 +12,10 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Gelasio"          // CA8-FORM-004: serif, proportional; Georgia's metric twin (the audited exemplar
-                                      // is set in Georgia; docs/FONTS.md). Vendored in /fonts.
-#let font-name = "Gelasio, 14-point"      // printed in the certificate of compliance: the face set above
+#let font-family = ("Times New Roman", "Liberation Serif")   // CA8-FORM-004: serif, proportional. Times New Roman, the
+                                           // standard face (David, 2026-10-17; fb-595.54.9), though the audited exemplar is
+                                           // set in Georgia (data/exemplar-fonts.json, template_face). Pinned install, docs/FONTS.md.
+#let font-name = "Times New Roman, 14-point"   // printed in the certificate of compliance: the face set above
 #let type-size = 14pt                      // CA8-FORM-004: 14-point or larger, everywhere.
 // Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
 // its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
@@ -402,8 +403,7 @@
   // No widows or orphans, as LaTeX (\widowpenalty 10000) and Word's widow control forbid them; typst's default only
   // charges for one, and a long footnote could make it take a widow the other engines refuse.
   set text(costs: (widow: 10000%, orphan: 10000%))
-  // Footnote marks are the digits scaled to 58 %, as Word and LaTeX set them: Gelasio has superior figures of its own
-  // (a full-width advance), which typst would otherwise take.
+  // Footnote marks are the digits scaled to 58 %, as Word and LaTeX set them, never a face's own superior figures.
   set super(typographic: false)
   set heading(numbering: none)
   // Footnotes: 8.5 pt from the text to the separator and 7 pt from it to each note, 15.5 pt in all.

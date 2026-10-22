@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Builds docx/reference.docx: the shared style recipe of the cross-engine layout model
-# (lib/docx/xengine-reference.sh: Gelasio 14 pt, Body Text in 28 pt line boxes with a half-inch indent,
+# (lib/docx/xengine-reference.sh: Times New Roman 14 pt, Body Text in 28 pt line boxes with a half-inch indent,
 # footnotes in 17 pt boxes, 7 pt after each, exact line spacing; typst pitch-double, pitch-single), plus the "CA ..."
 # paragraph styles ca8.lua writes the cover, headings, tables, signature and certificates in: single-spaced (17 pt
 # boxes), with the typst template's spaces (twips = 20 x pt). Page setup and the footers are NOT taken from here:
@@ -21,7 +21,7 @@ safe_rmdir() {
   esac
 }
 trap 'safe_rmdir "$W"' EXIT
-sh "$D/../../../../../lib/docx/xengine-reference.sh" "$W/ref.docx" font="Gelasio" size=28 body=560 \
+sh "$D/../../../../../lib/docx/xengine-reference.sh" "$W/ref.docx" font="Times New Roman" size=28 body=560 \
   single=340 indent=720 note_after=140 quote=280 >/dev/null
 mkdir "$W/pkg" && cd "$W/pkg" && unzip -q ../ref.docx
 cat > "$W/styles.pl" <<'PL'

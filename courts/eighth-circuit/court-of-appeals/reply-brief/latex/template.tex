@@ -1,5 +1,5 @@
 % Eighth Circuit reply brief, LaTeX engine (docs/EVAL-LOOP.md, "Engines").
-% Mirrors ../typst/ca8-reply-brief.typ: page order, Gelasio 14 pt type everywhere, double spacing (28 bp line
+% Mirrors ../typst/ca8-reply-brief.typ: page order, Times (newtx) 14 pt type everywhere, double spacing (28 bp line
 % boxes), one-inch margins, no hyphenation, left alignment. ca8.lua builds the cover, the front matter, the tables,
 % the signature block and the certificates from the YAML frontmatter; this file holds the page setup and the macros
 % that filter emits. Compiled by fb render with stock pdflatex: the fonts are TeX Live packages (no repo-local file,
@@ -15,12 +15,14 @@
 \documentclass[14pt,letterpaper]{extarticle}
 % FRAP 32(a)(5)(A): proportionally spaced serif, 14 point.
 \usepackage[T1]{fontenc}
-% Gelasio, the family the typst template declares (Georgia's metric twin): the gelasio package (Type 1 faces) ships with
-% TeX Live, so the generated .tex compiles with stock pdflatex and no repo-local file. Its default figures are the
-% vendored Gelasio's (measured: every glyph advance and the space agree to 0.01 pt, roman, italic, bold).
-\usepackage{gelasio}
+% Times: newtxtext/newtxmath ship with every TeX Live, so the generated .tex compiles with stock pdflatex and no
+% repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman.
+\usepackage{newtxtext,newtxmath}
 % FRAP 32(a)(4): letter, 1 in margins; the page number in the bottom margin, as typst sets it.
 \usepackage[letterpaper,margin=1in,headheight=0pt,headsep=0pt,footskip=36bp]{geometry}
+% The text 0.05 bp wider than typst's: newtx sets a full line up to about 0.04 bp wider than Times New Roman (measured:
+% p9 line 11 of the reply INPUT, which typst fills to within 0.02 bp, 0.035 bp wider here), so such a line still fits.
+\AtBeginDocument{\advance\hsize 0.05bp \textwidth\hsize \linewidth\hsize \columnwidth\hsize}
 \usepackage{enumitem}
 \usepackage{xengine} % lib/latex/xengine.sty, inlined by fb render
 % Links in the brief are citations (toa:) or none; the fallbacks keep pandoc's output valid.
@@ -57,10 +59,9 @@
 \renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
   \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25em #1}
 
-% An ellipsis: one glyph in typst and Word, Gelasio's (11.30 bp at 14 bp, 13.19 bp bold; measured with typst on the
-% vendored font); here three periods spread over its width, U+2026 in the PDF text.
+% An ellipsis: one 1 em glyph in typst and Word; here three periods spread over 1 em, U+2026 in the PDF text.
 \newcommand\caellipsis{\pdfliteral page{/Span<</ActualText<FEFF2026>>>BDC}%
-  \makebox[\ifx\f@series\bfdefault 13.19bp\else 11.30bp\fi]{\hfil.\hfil.\hfil.\hfil}\pdfliteral page{EMC}}
+  \makebox[1em]{\hfil.\hfil.\hfil.\hfil}\pdfliteral page{EMC}}
 
 % [short-rule]: 2 in, 0.7 bp, centered, costing its own height.
 \newcommand\cashortrule{\par\nointerlineskip\hbox to\linewidth{\hss\vrule width 2in height 0.7bp\hss}\nointerlineskip}

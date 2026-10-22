@@ -13,7 +13,7 @@ local CONFIG = {
   italic_from = 4,      -- heading titles from this level are italic; labels never (typst style-heading)
   toc_depth = 4,        -- deepest heading level listed in the table of contents (typst toc-depth)
   word_limit = 6500,    -- CA8-LIMIT-001: half of the 13,000-word principal limit (FRAP 32(a)(7)(B)(ii))
-  font_name = {'Gelasio', '14\\mbox{-}point'},   -- typst font-name, printed in the certificate of compliance
+  font_name = {'Times New Roman', '14\\mbox{-}point'},   -- typst font-name, printed in the certificate of compliance
 }
 
 local function fail(msg) error('ca8-' .. CONFIG.kind .. ': ' .. msg, 0) end
@@ -22,8 +22,8 @@ local function fail(msg) error('ca8-' .. CONFIG.kind .. ': ' .. msg, 0) end
 -- ligature characters as commands, a section sign bound to its number. Run on the body and on every metadata value.
 local xe_texify = require('latex.xengine').inlines
 
--- Two more rules of this template's text: an ellipsis is one glyph in typst and Word, and T1 Gelasio has none
--- (\textellipsis is three periods): template.tex's \caellipsis sets the three dots across the glyph's width and keeps
+-- Two more rules of this template's text: an ellipsis is one glyph in typst and Word, and T1 Times has none
+-- (\textellipsis is three periods, 0.75 em): template.tex's \caellipsis sets the three dots across 1 em and keeps
 -- U+2026 as the PDF text. A line may end after a slash that a digit or a second slash does not follow ("Meta/Spill",
 -- not "1/2"), as Unicode line breaking lets typst and Word end it; TeX breaks at spaces only.
 -- A URL breaks only after "?", "=", "&", a hyphen or a slash that no digit (nor a second slash) follows, never after
