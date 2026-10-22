@@ -57,7 +57,7 @@ Courts under `courts` (346).
 | [United States Bankruptcy Court, D. Vermont](second-circuit/vermont/federal/bankruptcy-district) | `vtb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Vermont](second-circuit/vermont/federal/district) | `vtd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Connecticut Court of Appeals](second-circuit/connecticut/state/court-of-appeals) | `connappct` | up for review | 6/6 | 6/6 | 5/5 | 29 |
-| [Connecticut Supreme Court](second-circuit/connecticut/state/supreme-court) | `conn` | up for review | 7/7 | — | — | 29 |
+| [Connecticut Supreme Court](second-circuit/connecticut/state/supreme-court) | `conn` | up for review | 7/7 | 6/6 | 6/6 | 29 |
 | [Appellate Terms of the Supreme Court of New York](second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [New York Court of Appeals](second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | 1/1 | 3/3 | 29 |
 | [The Four Departments of the Appellate Division](second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 3/3 | 29 |
@@ -183,7 +183,7 @@ Courts under `courts` (346).
 | [Illinois Supreme Court](seventh-circuit/illinois/state/supreme-court) | `ill` | up for review | 8/8 | — | — | 29 |
 | [Indiana Court of Appeals](seventh-circuit/indiana/state/court-of-appeals) | `indctapp` | up for review | 3/3 | — | — | 29 |
 | [Indiana Supreme Court](seventh-circuit/indiana/state/supreme-court) | `ind` | up for review | 1/1 | — | — | 29 |
-| [Court of Appeals of Wisconsin](seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
+| [Court of Appeals of Wisconsin](seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Wisconsin Supreme Court](seventh-circuit/wisconsin/state/supreme-court) | `wis` | up for review | 9/9 | — | — | 29 |
 | [United States Bankruptcy Appellate Panel of The Eighth Circuit](eighth-circuit/bankruptcy-appellate-panel) | `bap8` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Eighth Circuit](eighth-circuit/court-of-appeals) | `ca8` | up for review | 3/3 | 3/3 | 3/3 | 14 |

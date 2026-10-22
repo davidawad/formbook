@@ -180,7 +180,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Connecticut](courts/second-circuit/connecticut/federal/bankruptcy-district) | `ctb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Connecticut](courts/second-circuit/connecticut/federal/district) | `ctd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Connecticut Court of Appeals](courts/second-circuit/connecticut/state/court-of-appeals) | `connappct` | up for review | 6/6 | 6/6 | 5/5 | 29 |
-| [Connecticut Supreme Court](courts/second-circuit/connecticut/state/supreme-court) | `conn` | up for review | 7/7 | — | — | 29 |
+| [Connecticut Supreme Court](courts/second-circuit/connecticut/state/supreme-court) | `conn` | up for review | 7/7 | 6/6 | 6/6 | 29 |
 
 ### New York
 
@@ -446,7 +446,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, W.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district) | `wiwb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, E.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/eastern-district) | `wied` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/western-district) | `wiwd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Appeals of Wisconsin](courts/seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
+| [Court of Appeals of Wisconsin](courts/seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Wisconsin Supreme Court](courts/seventh-circuit/wisconsin/state/supreme-court) | `wis` | up for review | 9/9 | — | — | 29 |
 
 ## Eighth Circuit
@@ -812,7 +812,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 0 | 6 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 5 | 0 | 5 | 14.0% |
 | First Circuit | 20 | 0 | 19 | 1 | 0 | 0.0% | 95.0% | 19 | 7 | 18 | 19.2% |
-| Second Circuit | 19 | 0 | 19 | 0 | 0 | 0.0% | 100.0% | 19 | 5 | 18 | 18.7% |
+| Second Circuit | 19 | 0 | 19 | 0 | 0 | 0.0% | 100.0% | 19 | 6 | 19 | 18.7% |
 | Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 5 | 17 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 10 | 28 | 19.1% |
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 7 | 24 | 18.0% |
