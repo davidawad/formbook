@@ -6,11 +6,11 @@ Folder: `courts/ninth-circuit/washington/federal/western-district/complaint/`.
 | Item | Status |
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (primary) and `usage/FILED-EXAMPLE-complaint-2.pdf` (second filer, structure only). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-complaint.md`: the whole filed complaint (11 pages as filed; 10 rendered), transcribed from the text layer. |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings. |
+| sample md | `usage/INPUT-complaint.md`: the whole filed complaint (11 pages as filed; 11 rendered), transcribed from the text layer. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, Times New Roman (pinned) only, no typst warnings. |
 | overlay | ok: `usage/OVERLAY-ironleaf-complaint.pdf` and `usage/OVERLAY-ironleaf-complaint.txt`. |
-| pages reviewed | 10 of 10: every page rendered at 60 dpi and viewed in its final state (footer crop also checked at 150 dpi). |
-| typeface | Face required: **none**. LCR 10(e)(1) requires "a proportionally spaced font" and names no face, so no substitute is needed and EB Garamond is kept (`FONTS.md`: no face named). Checked against the rule text, 2026-10-15. Metric fit: n/a. Both filed exemplars embed Times New Roman (tier-2 question, gap 1). |
+| pages reviewed | 11 of 11, typst and docx: every page rendered at 60 dpi side by side and viewed in its final state (2026-10-22). |
+| typeface | Face required: **none**. LCR 10(e)(1) requires "a proportionally spaced font" and names no face, and both filed exemplars embed Times New Roman, so the template sets Times New Roman (`docs/FONTS.md`: a Times exemplar), in every engine. Checked against the rule text, 2026-10-15. Metric fit: n/a. |
 
 ## Governing rules
 
@@ -19,7 +19,7 @@ Primary source: W.D. Wash. Local Civil Rules (2026 edition, "WAWD Local Civil Ru
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LCR 10(d) | 8 1/2 x 11 inch page. | `page-w`, `page-h`. |
-| LCR 10(e)(1) | No less than three inches above the court title on the first page; one-inch margins; 12 pt or larger; double spaced or exactly 24 pt; proportionally spaced font. | `first-page-blank = 6` (lines 1 to 6 blank, court title on line 7 at 3 in); `top-margin`, `right-margin`; `type-size = 12pt`; `pitch = 24pt`; `font-family = "EB Garamond"`. Footnotes are not used in the sample (see gaps). |
+| LCR 10(e)(1) | No less than three inches above the court title on the first page; one-inch margins; 12 pt or larger; double spaced or exactly 24 pt; proportionally spaced font. | `first-page-blank = 6` (lines 1 to 6 blank, court title on line 7 at 3 in); `top-margin`, `right-margin`; `type-size = 12pt`; `pitch-body = 24pt`; `font-family = ("Times New Roman", "Liberation Serif")`. Footnotes are not used in the sample (see gaps). |
 | LCR 10(e)(2) | Words "United States District Court, Western District of Washington" on the first page, and below the docket number a title of the paper and the party presenting it. | `court-title()` (three lines: UNITED STATES DISTRICT COURT / WESTERN DISTRICT OF WASHINGTON / location from frontmatter, default "AT SEATTLE" as in the filings); `caption()` with `Case No.` and `brief_title`. |
 | LCR 10(e)(3) | Bottom notation: left, the abbreviated title and case number with the page number; right, the firm, mailing address and telephone of the preparing attorney. | `footer-block()`: title and `(Case No. ...) - page` at left; `footer_firm` lines at right. |
 | LCR 10(e)(4) | Dated and signed as under Fed. R. Civ. P. 11 and LCR 11. | `signature-block()`: `signature.date`, "Respectfully submitted," and `signature.signers` with "By:" on the first line. The signature itself is the signer's `s/` line from the sample. |
@@ -53,10 +53,10 @@ Word overlap per page (rendered page vs filed page): p1 77%, p2 86%, p3 77%, p4 
 
 ## Known gaps and open choices
 
-1. **Font.** LCR 10(e)(1) requires a proportional font but names none, so EB Garamond is kept (see the typeface row). Its x-height is smaller than Times New Roman's, and both filed complaints embed Times New Roman, so the text looks smaller than the filed exemplars at the same 12 pt. Liberation Serif (metric-compatible with Times New Roman) would remove the difference, but the rule does not require it: a tier-2 convention call for David.
+1. **Font.** LCR 10(e)(1) requires a proportional font but names none; both filed complaints embed Times New Roman, which the template sets (typst and docx alike).
 2. **Footer type size.** The bottom notation is 10 pt (title) and 9 pt (firm block). LCR 10(e)(1)'s 12-point rule is written for "text", and LCR 10(e)(3) puts the notation in the margin. Logged as an interpretation; the filings use a similar size.
 3. **Character spacing.** No cpi rule for proportional text is in LCR 10(e); none is asserted.
-4. **Long URLs break mid-word** at the line end (e.g. "www.ironleafcap / ital.com", page 3). The sample transcribes the filing's text; typst breaks long unbroken words. Not fixed; harmless to the form.
+4. **Web addresses** are kept whole at the line end (a dotted token is not broken, as Word does not break it).
 5. **Line numbers** are 27 on the 24 pt pitch, as in the exemplar; the text of a full page fills all 27 lines.
 6. **Caption.** The party column is closed by a rule (right and bottom) rather than a column of ")" marks. Both appear in W.D. Wash. filings; recorded as an accepted tier-2 convention.
 7. **Second filer, tier 2.** Two filers are saved (Ironleaf and Materia). The Materia filing has the same caption structure (case number at right of the caption) and the same bottom notation (firm block at right). It was checked by its text layer only; its body is not transcribed.
@@ -66,22 +66,23 @@ Word overlap per page (rendered page vs filed page): p1 77%, p2 86%, p3 77%, p4 
 
 ## Engines
 
-**docx** (`docx/`; `usage/OUTPUT-complaint.docx` and `.docx.pdf`, the LibreOffice conversion). Built by `docx/build-reference.sh` (reference.docx with the styles, the header with the 27 line numbers and the pleading rules, and a footer placeholder), `docx/complaint.lua` (cover, caption, numbered allegations, prayer and signature block as OpenXML) and `docx/render.sh` (pandoc reads the sample as CommonMark, as cmarker does; the bottom notation is written from the frontmatter).
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`;
+docs/EVAL-LOOP.md, "Cross-engine gate"), and `eval.yaml` gates it (`params.cross_engine: gate`): the docx breaks every
+line and page where typst does (XENG-001..003 pass, 362/362 lines).
 
-Matches the typst output (checked on the rendered pages, not by a gate):
-- Letter page; 1 in top and bottom margins, 1.5 in left, 1 in right; 27 numbered lines at exact 24 pt, so body text sits on the numbers.
-- EB Garamond only: `pdffonts` shows EBGaramond Regular and Bold, embedded; no fallback face.
-- Lines 1 to 6 blank, court title on lines 7 to 9, caption table with a right and bottom rule, "JURY TRIAL DEMANDED" at right.
-- Double rule at the left and single rule at the right, full page height (lines anchored to the page).
-- Bottom notation on every page: title and case number with the page number at left, the firm block at right.
-- Numbered paragraphs typed 1 to N; prayer items hang at 0.9 in; the signature block at 3.2 in.
+- Pitches: body 24 pt (LCR 10(e)(1)); single-spaced lines (caption, signature) exactly 12 pt, half a numbered line,
+  and every single-spaced block starts 9.6 pt below the top of a numbered line, so each single line's baseline is a
+  number's or halfway between two (and the line numbers are read with the same text lines in both engines).
+- Caption and signature rows are rounded up to whole numbered lines, so the text after them stays on the numbers;
+  typst measures the row, `docx/complaint.lua` computes the same height from the lines with Times New Roman's
+  advances (first fit, no kerning).
+- Headings on the body pitch, kept with the text after them; the last paragraph is kept with the signature block,
+  and the co-counsel list with the signers.
+- Bottom notation (LCR 10(e)(3)) fixed at its foot, 0.2 in above the page edge plus Word's 1 pt closing paragraph.
 
-Differs from the typst output (tier 2 at most):
-- Keep with next: a heading stays with the first line of the following paragraph (Word); typst keeps it with the whole paragraph. The page breaks differ from page 2 on (the docx p.2 starts mid-paragraph 1; typst p.2 starts at "THE PARTIES"). Both are 10 pages.
-- The caption title and notes are single spaced (about 13.8 pt); typst sets them at the body pitch.
-- Caption and signature rows are sized to whole numbered lines by estimate; a longer party name than estimated would move the lines below it off the grid.
-- Only the LibreOffice PDF was checked; Word was not available.
-
-Pages reviewed: docx.pdf 10 of 10, every page rendered at 60 dpi and viewed in its final state.
-
-BLOCKED: check.sh (no check IDs yet): `tools/check.sh` cannot run on this folder. It reads `<court>/court.json` and `<court>/checks.yaml`; the western-district court folder has neither checks.yaml nor a docx check set, so Gates 0 to 3 were not run on the docx. Needs the court-level checks.yaml (outside this unit).
+**docx** (`docx/`; `usage/OUTPUT-complaint.docx` and `.docx.pdf`, the LibreOffice conversion): `docx/reference.xml`
+(the recipe styles in the typst face via `{font}`, the header `rIdWawdLines` with the 27 numbers in a text box and the
+three pleading rules as anchored lines) and `docx/complaint.lua` (cover, caption, numbered allegations, prayer,
+signature block, the bottom notation from the frontmatter in `$FORMBOOK_FOOTERS`, the section in `$FORMBOOK_FINAL`).
+pandoc reads the sample as CommonMark (`pandoc-from="commonmark_x+smart"`), as cmarker does. No shell. Only the
+LibreOffice PDF was checked; Word was not available.
