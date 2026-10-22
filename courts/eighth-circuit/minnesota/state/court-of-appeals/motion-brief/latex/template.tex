@@ -26,13 +26,15 @@
 \providecommand{\pandocbounded}[1]{#1}
 \xe@lists{36bp}
 % footnotes (layout.yaml footnote): 13 bp type in 14.95 bp line boxes, the mark and a space, 7 bp above
-% each note, 7.5 bp from the text to a 30 % rule; marks at 58 % of the type size
+% each note, 7.5 bp from the text to a 30 % rule; marks at 58 % of the type size (of the note's in the note)
 \renewcommand\footnotesize{\xe@lines{13}{14.95}}
 \setlength{\skip\footins}{7.5bp}
 \renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
 \xe@footnotemarks{13}
 \renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
-  \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25em #1}
+  \vskip 0pt\noindent\raisebox{3.77bp}{\fontsize{7.54bp}{0bp}\selectfont\@thefnmark}\hskip 0.25em #1}
+% an ellipsis as typst and Word set it (lib/latex/xdoc.lua writes \xd@ellipsis for "…")
+\newcommand\xd@ellipsis{\pdfliteral page{/Span<</ActualText<FEFF2026>>>BDC}.\kern0.125em.\kern0.125em.\pdfliteral page{EMC}}
 \makeatother
 \begin{document}
 \makeatletter

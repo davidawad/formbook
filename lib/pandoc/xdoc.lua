@@ -8,7 +8,7 @@
 -- The tree (xd.tree): a list of nodes, each with `above`, `below` and `lead` (points):
 --   { t = "par", text = <Inlines>, st = <style> }       one paragraph of a text block
 --   { t = "rule", w = <stroke> }                         a horizontal rule: a box of xd.RULE + w points
---   { t = "cols", cols = { { width = <pt or nil>, items = <nodes> }, .. }, gutter = <pt> }
+--   { t = "cols", cols = { { width = <pt or nil>, valign = <"center" or nil>, items = <nodes> }, .. }, gutter = <pt> }
 --   { t = "group", items = <nodes>, keep = <bool> }
 -- `lead` is the space above a node that opens its container (a column, a group, the page): typst drops a block's
 -- space above there, so every engine sets it as explicit space instead; between two nodes the larger of the one's
@@ -107,6 +107,14 @@ local function copy(t)
   return o
 end
 
+-- The context of an item of a list: its fields (a map item) and "." (the item) over the outer context.
+function M.item_ctx(ctx, it)
+  local c = copy(ctx)
+  if type(it) == "table" then for k, v in pairs(it) do c[k] = v end end
+  c["."] = it
+  return c
+end
+
 -- The nodes of a block list (lib/typst/xdoc.typ `blocks`, rule for rule).
 function M.tree(spec, list, ctx, first)
   local out = {}
@@ -127,9 +135,19 @@ function M.tree(spec, list, ctx, first)
       out[#out + 1] = { t = "rule", w = num(b.rule), lead = lead, above = above, below = below }
       first = false
     elseif b.columns ~= nil then
+      -- a list of columns, or one column per item of a list (`each`), each with its context
       local cols = {}
-      for _, c in ipairs(b.columns) do
-        cols[#cols + 1] = { width = c.width, items = M.tree(spec, c.blocks, ctx, true) }
+      if b.columns.each ~= nil then
+        local items = M.lookup(ctx, b.columns.each)
+        if items == nil then error("xdoc: missing required metadata field `" .. b.columns.each .. "`", 0) end
+        for _, it in ipairs(items) do
+          cols[#cols + 1] = { width = b.columns.width, valign = b.columns.valign,
+            items = M.tree(spec, b.columns.blocks, M.item_ctx(ctx, it), true) }
+        end
+      else
+        for _, c in ipairs(b.columns) do
+          cols[#cols + 1] = { width = c.width, valign = c.valign, items = M.tree(spec, c.blocks, ctx, true) }
+        end
       end
       out[#out + 1] = { t = "cols", cols = cols, gutter = num(b.gutter), lead = lead, above = above, below = below }
       first = false
@@ -140,9 +158,7 @@ function M.tree(spec, list, ctx, first)
         if i > 1 and b.between then
           for _, n in ipairs(M.tree(spec, b.between, ctx, false)) do out[#out + 1] = n end
         end
-        local ictx = copy(ctx)
-        if type(it) == "table" then for k, v in pairs(it) do ictx[k] = v end end
-        ictx["."] = it
+        local ictx = M.item_ctx(ctx, it)
         local bl = b.blocks
         if i == 1 and #bl > 0 then
           bl = copy(bl)

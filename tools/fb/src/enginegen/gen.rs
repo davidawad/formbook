@@ -142,18 +142,19 @@ fn lua_str(s: &str) -> String {
 }
 
 /// The LaTeX packages that set the metrics of a typst face (docs/EVAL-LOOP.md, "Adopting the reference breaker",
-/// step 0), and whether its Lua advances module (lib/latex/xeschola.lua) applies.
-pub fn latex_face(face: &str) -> Result<(&'static str, bool), String> {
+/// step 0), and the face's ellipsis advance in em when it is known (\xd@ellipsis kerns three periods to it).
+pub fn latex_face(face: &str) -> Result<(&'static str, Option<f64>), String> {
     match face {
+        // Times New Roman and Liberation Serif: the ellipsis is 1000/1000 em, newtx's period 250
         "Times New Roman" | "Liberation Serif" | "TeX Gyre Termes" => {
-            Ok(("\\usepackage{newtxtext,newtxmath}", false))
+            Ok(("\\usepackage{newtxtext,newtxmath}", Some(1.0)))
         }
-        "TeX Gyre Schola" | "Century Schoolbook" => Ok((
-            "\\usepackage{tgschola}\n\\usepackage{xeschola} % lib/latex/xeschola.sty",
-            true,
+        "EB Garamond" => Ok(("\\usepackage{ebgaramond}", None)),
+        "Gelasio" => Ok(("\\usepackage{gelasio}", None)),
+        // lib/latex/xeschola.lua (the vendored Schola's advances) is not yet run by lib/latex/xdoc.lua
+        "TeX Gyre Schola" | "Century Schoolbook" => Err(format!(
+            "`{face}`: the shared document model does not set Schola in LaTeX yet (lib/latex/xeschola.lua)"
         )),
-        "EB Garamond" => Ok(("\\usepackage{ebgaramond}", false)),
-        "Gelasio" => Ok(("\\usepackage{gelasio}", false)),
         f => Err(format!(
             "no LaTeX face for `{f}` (one face per template: newtx, tgschola, ebgaramond, gelasio)"
         )),

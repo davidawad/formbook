@@ -151,6 +151,19 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
         out.push_str(&s);
         out.push('\n');
     }
+    // list items per nesting level, in the body and in the tail: the label at the level's indent, the text hanging
+    for (base, line) in [("XdList", body), ("XdTailList", tp)] {
+        for lv in 1..=3i64 {
+            let ind = format!(r#"<w:ind w:left="{}" w:hanging="{list}"/>"#, lv * list);
+            out.push_str(&style(
+                &format!("{base}{lv}"),
+                &format!("{base} {lv}"),
+                "Normal",
+                &(exact(0, 0, line) + &ind),
+            ));
+            out.push('\n');
+        }
+    }
     out.push_str(&format!(r#"<footer id="rIdFooter1">{footer_p}</footer>"#));
     out.push('\n');
     if !first.is_empty() {

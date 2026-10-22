@@ -54,7 +54,7 @@ return function(spec)
     props[#props + 1] = xe.spacing(before, after, tw(xd.pitch(spec, st.pitch)))
     local hang = tw(st.hang)
     local first
-    if hang == 0 then first = 0 end -- a hanging indent and a first-line one exclude each other
+    if hang == 0 then first = tw(st.indent) end -- a hanging indent and a first-line one exclude each other
     props[#props + 1] = xe.ind(tw(st.left) + hang, hang > 0 and hang or nil, first,
       tw(st.right) > 0 and tw(st.right) or nil)
     props[#props + 1] = xe.jc(st.align == "center" and "center" or st.align == "right" and "right" or "left")
@@ -76,6 +76,7 @@ return function(spec)
     for _, c in ipairs(cells) do
       grid[#grid + 1] = '<w:gridCol w:w="' .. c.width .. '"/>'
       local mar = c.left > 0 and ('<w:tcMar><w:left w:w="' .. c.left .. '" w:type="dxa"/></w:tcMar>') or ""
+      if c.valign == "center" then mar = mar .. '<w:vAlign w:val="center"/>' end
       tcs[#tcs + 1] = '<w:tc><w:tcPr><w:tcW w:w="' .. c.width .. '" w:type="dxa"/>' .. mar .. '</w:tcPr>'
         .. c.xml .. '</w:tc>'
     end
@@ -105,7 +106,7 @@ return function(spec)
     for i, c in ipairs(n.cols) do
       local gut = i > 1 and tw(n.gutter) or 0
       local w = c.width and tw(c.width) or math.floor((TEXTW - fixed) / math.max(flex, 1))
-      cells[#cells + 1] = { width = w + gut, left = gut, xml = cell(c.items) }
+      cells[#cells + 1] = { width = w + gut, left = gut, valign = c.valign, xml = cell(c.items) }
       used = used + w + gut
     end
     cells[#cells].width = cells[#cells].width + (TEXTW - used)
@@ -139,13 +140,15 @@ return function(spec)
   end
 
   -- A heading of the body: a paragraph of its level's style, kept with the next.
-  local function heading(b)
+  -- `first`: the heading opens the tail, whose own space above replaces the heading's (typst drops a block's space
+  -- above at the start of a container).
+  local function heading(b, first)
     local st = {}
     for k, v in pairs(xd.heading(spec, b.level)) do st[k] = v end
     st.keep = true
     local text = b.content
     if st.upper then text = xd.upper(text) end
-    return { t = "par", text = text, st = st, lead = 0, above = tonumber(st.above) or 0,
+    return { t = "par", text = text, st = st, lead = 0, above = first and 0 or tonumber(st.above) or 0,
       below = tonumber(st.below) or 0 }
   end
 
@@ -154,21 +157,50 @@ return function(spec)
     return false
   end
 
+  local list_items
+
   local function styled(style, inlines)
     return pandoc.Div({ pandoc.Para(inlines:walk({ Str = breaks }):walk({ Inlines = xe.inlines })) },
       { ["custom-style"] = style })
   end
 
+  -- A list at nesting `level` (lib/typst/xdoc.typ list-items): one paragraph per item in the level's style (the label,
+  -- a tab to the hanging indent, the text; XdList1.. in the body, XdTailList1.. in the tail), nested lists after it.
+  local markers = spec.list and spec.list.markers or { "\u{2022}" }
+  function list_items(b, level, base)
+    local out = pandoc.Blocks({})
+    local n = b.t == "OrderedList" and b.listAttributes.start or 1
+    local delim = b.t == "OrderedList" and b.listAttributes.delimiter or "Period"
+    for _, item in ipairs(b.content) do
+      local lab = markers[math.min(level + 1, #markers)]
+      if b.t == "OrderedList" then
+        lab = delim == "OneParen" and (n .. ")") or delim == "TwoParens" and ("(" .. n .. ")") or (n .. ".")
+      end
+      local inlines = pandoc.Inlines({ pandoc.Str(lab), pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>") })
+      local subs = {}
+      for k, blk in ipairs(item) do
+        if k == 1 and (blk.t == "Plain" or blk.t == "Para") then inlines:extend(blk.content)
+        elseif blk.t == "OrderedList" or blk.t == "BulletList" then subs[#subs + 1] = blk
+        else error("xdoc: a list item holds one paragraph and nested lists", 0) end
+      end
+      out:insert(styled(base .. math.min(level + 1, 3), inlines))
+      for _, sb in ipairs(subs) do out:extend(list_items(sb, level + 1, base)) end
+      n = n + 1
+    end
+    return out
+  end
+
   -- The body blocks as Word paragraphs; `para` the style of a plain paragraph (Body Text, or XdTail in the tail).
-  local function body(blocks, s, para)
+  local function body(blocks, s, para, first)
     local out = pandoc.Blocks({})
     local function raw(xml) out:insert(xe.raw(xml)) end
     local function flush()
-      if s.pending > 0 then raw(spacer(s.pending)); s.pending = 0 end
+      if s.pending > s.prev_after then raw(spacer(s.pending - s.prev_after)) end
+      s.pending = 0
     end
-    for _, b in ipairs(blocks) do
+    for k, b in ipairs(blocks) do
       if b.t == "Header" then
-        for _, x in ipairs(emit_list({ heading(b) }, s, false)) do raw(x) end
+        for _, x in ipairs(emit_list({ heading(b, first and k == 1) }, s, false)) do raw(x) end
       elseif b.t == "Para" or b.t == "Plain" then
         flush()
         out:insert(styled(para == "Body Text" and has_note(b.content) and "Body Text Note" or para, b.content))
@@ -185,11 +217,7 @@ return function(spec)
         s.prev_after = tw(spec.quote and spec.quote.below)
       elseif b.t == "OrderedList" or b.t == "BulletList" then
         flush()
-        for _, d in ipairs(xe.list_items(b)) do
-          if d.t ~= "Div" then error("xdoc: a list item holds one paragraph", 0) end
-          d.content[1].content = d.content[1].content:walk({ Str = breaks }):walk({ Inlines = xe.inlines })
-          out:insert(d)
-        end
+        out:extend(list_items(b, 0, para == "Body Text" and "XdList" or "XdTailList"))
         s.prev_after = 0
       else
         error("xdoc: unsupported block " .. b.t, 0)
@@ -211,10 +239,8 @@ return function(spec)
           out:insert(xe.raw(x))
         end
         if #rest > 0 then
-          local h = math.max(tw(spec.tail.above), s.pending) - s.prev_after
-          if h > 0 then out:insert(xe.raw(spacer(h))) end
-          s.pending = 0
-          out:extend(body(rest, s, "XdTail"))
+          s.pending = math.max(tw(spec.tail.above), s.pending)
+          out:extend(body(rest, s, "XdTail", true))
         end
         return pandoc.Pandoc(out, pandoc.Meta({}))
       end,

@@ -87,11 +87,15 @@
   let al = (left: left, center: center, right: right).at(st.at("align", default: "left"))
   // an explicit par: typst ignores a `set par(hanging-indent)` inside a block
   pad(left: pt(st.at("left", default: 0)), right: pt(st.at("right", default: 0)), align(al,
-    par(first-line-indent: 0pt, hanging-indent: pt(st.at("hang", default: 0)), styled(st, body))))
+    par(first-line-indent: (amount: pt(st.at("indent", default: 0)), all: true),
+      hanging-indent: pt(st.at("hang", default: 0)), styled(st, body))))
 })
 
 /// A string as typst content: markdown inlines, in capitals when the style says so.
 #let inl(st, s) = if st.at("upper", default: false) { upper(md(s)) } else { md(s) }
+
+/// The context of an item of a list: its fields (a dictionary item) and "." (the item) over the outer context.
+#let item-ctx(ctx, it) = if type(it) == dictionary { ctx + it + ("." : it) } else { ctx + ("." : it) }
 
 /// The blocks of a list. `first`: the list opens its container (a column, a group, the page), where the space
 /// above its first block is set as explicit space (every engine keeps it there).
@@ -115,11 +119,17 @@
         place(top + left, dy: pt(b.rule) / 2, line(length: 100%, stroke: pt(b.rule))))
       first = false
     } else if "columns" in b {
-      let cols = b.columns
+      // the columns, each with its context: a list of columns, or one column per item of a list (`each`)
+      let cols = if type(b.columns) == dictionary {
+        let items = lookup(ctx, b.columns.each)
+        if items == none { panic("xdoc: missing required metadata field `" + b.columns.each + "`") }
+        items.map(it => b.columns + (ctx: item-ctx(ctx, it)))
+      } else { b.columns.map(c => c + (ctx: ctx)) }
       let widths = cols.map(c => if c.at("width", default: none) == none { 1fr } else { pt(c.width) })
       block(width: 100%, above: above, below: below, breakable: false, grid(
         columns: widths, column-gutter: pt(b.at("gutter", default: 0)),
-        ..cols.map(c => blocks(spec, c.blocks, ctx, first: true)),
+        ..cols.map(c => grid.cell(align: if c.at("valign", default: "top") == "center" { horizon } else { top },
+          blocks(spec, c.blocks, c.ctx, first: true))),
       ))
       first = false
     } else if "each" in b {
@@ -127,12 +137,11 @@
       if items == none { panic("xdoc: missing required metadata field `" + b.each + "`") }
       for (i, it) in items.enumerate() {
         if i > 0 and "between" in b { blocks(spec, b.between, ctx, first: false) }
-        let item-ctx = if type(it) == dictionary { ctx + it + ("." : it) } else { ctx + ("." : it) }
         // the space above the first item's first block: the each block's own
         let bl = b.blocks
         if i == 0 and bl.len() > 0 { bl.at(0).insert("above", calc.max(b.at("above", default: 0),
           bl.at(0).at("above", default: 0))) }
-        blocks(spec, bl, item-ctx, first: first and i == 0)
+        blocks(spec, bl, item-ctx(ctx, it), first: first and i == 0)
       }
       if items.len() > 0 { first = false }
     } else if "group" in b {
@@ -142,6 +151,34 @@
     } else {
       panic("xdoc: unknown block " + repr(b))
     }
+  }
+}
+
+/// A list item's own text and the lists nested in it.
+#let split-item(body) = {
+  let cs = if body.func() == [].func() { body.children } else { (body,) }
+  let subs = cs.filter(c => c.func() in (list, enum))
+  let head = cs.filter(c => c.func() not in (list, enum, parbreak))
+  while head.len() > 0 and head.last() == [ ] { head = head.slice(0, -1) }
+  (head.join(), subs)
+}
+
+/// A list (bulleted or numbered) at nesting `level`: each item's label in a box of the list indent, `level` boxes
+/// in, the text hanging after it, no space of its own; a nested list one level deeper. Bullets per level from
+/// `list.markers`.
+#let list-items(spec, it, level) = {
+  let li = pt(spec.at("list_indent", default: spec.indent))
+  let markers = spec.at("list", default: (:)).at("markers", default: ("•",))
+  let numbered = it.func() == enum
+  let n = if numbered and it.start != auto { it.start } else { 1 }
+  for item in it.children {
+    if numbered and item.at("number", default: none) not in (none, auto) { n = item.number }
+    let lab = if numbered { numbering(it.numbering, n) } else { markers.at(calc.min(level, markers.len() - 1)) }
+    let (head, subs) = split-item(item.body)
+    block(above: 0pt, below: 0pt, pad(left: level * li,
+      par(first-line-indent: 0pt, hanging-indent: li, { box(width: li, lab); head })))
+    for s in subs { list-items(spec, s, level + 1) }
+    n += 1
   }
 }
 
@@ -160,6 +197,8 @@
     line-block(spec, st + (keep: true), if st.at("upper", default: false) { upper(it.body) } else { it.body },
       pt(st.at("above", default: 0)), pt(st.at("below", default: 0)))
   }
+  show list: it => list-items(spec, it, 0)
+  show enum: it => list-items(spec, it, 0)
   show quote.where(block: true): it => block(width: 100%, above: pt(q.at("above", default: 0)),
     below: pt(q.at("below", default: 0)), {
     set text(..edges(pitch-of(spec, q.at("pitch", default: none))))
@@ -187,7 +226,7 @@
     })
   set text(font: spec.font, size: pt(spec.size), lang: "en", region: "us", fallback: false)
   set par(first-line-indent: (amount: pt(spec.indent), all: true))
-  show: xengine.with(pitch: pt(spec.pitch.body), list-indent: pt(spec.at("list_indent", default: spec.indent)))
+  show: xengine.with(pitch: pt(spec.pitch.body), list-indent: none) // lists: list-items
   set heading(numbering: none)
   set footnote.entry(gap: pt(fn.at("gap", default: 7)), clearance: pt(fn.at("clearance", default: 7.5)), indent: 0pt,
     separator: line(length: 30%, stroke: 0.5pt))

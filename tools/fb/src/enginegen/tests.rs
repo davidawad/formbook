@@ -107,7 +107,8 @@ fn one_latex_face_per_typst_face() {
         latex_face("Times New Roman").unwrap().0,
         "\\usepackage{newtxtext,newtxmath}"
     );
-    assert!(latex_face("TeX Gyre Schola").unwrap().1);
+    assert_eq!(latex_face("Times New Roman").unwrap().1, Some(1.0));
+    assert!(latex_face("TeX Gyre Schola").is_err());
     assert!(latex_face("Comic Sans").is_err());
 }
 

@@ -20,8 +20,8 @@ end
 
 local function raw(s) return pandoc.RawBlock("latex", s) end
 
--- Italic and bold as font switches: \emph and \textbf add an italic correction after the text, which typst and
--- Word do not (a line holding two of them came out 0.7 pt wider).
+-- Italic and bold as font switches: \emph and \textbf add an italic correction after the text, which typst and Word
+-- do not (a line holding two of them came out 0.7 pt wider).
 local function wrap(open, content)
   local l = pandoc.Inlines({ pandoc.RawInline("latex", open) })
   l:extend(content)
@@ -29,8 +29,26 @@ local function wrap(open, content)
   return pandoc.Span(l)
 end
 
+-- An ellipsis as the template's \xd@ellipsis (three periods kerned to the face's ellipsis advance, read as "…" in the
+-- PDF text): pandoc's \ldots sets spaced dots, wider than the glyph typst and Word set.
+local function ellipses(s)
+  if not s.text:find("\u{2026}", 1, true) then return nil end
+  local out = pandoc.Inlines({})
+  local rest = s.text
+  while true do
+    local a, b = rest:find("\u{2026}", 1, true)
+    if not a then break end
+    if a > 1 then out:insert(pandoc.Str(rest:sub(1, a - 1))) end
+    out:insert(pandoc.RawInline("latex", "\\xd@ellipsis{}"))
+    rest = rest:sub(b + 1)
+  end
+  if rest ~= "" then out:insert(pandoc.Str(rest)) end
+  return out
+end
+
 local function switches(inlines)
   return inlines:walk({
+    Str = ellipses,
     Emph = function(e) return wrap("{\\itshape ", e.content) end,
     Strong = function(e) return wrap("{\\bfseries ", e.content) end,
   })
@@ -76,7 +94,9 @@ return function(spec)
     local body = tex(n.text)
     if st.underline then body = "\\underline{" .. body .. "}" end
     local face = (st.bold and "\\bfseries" or "") .. (st.italic and "\\itshape" or "")
-    return open(n) .. "\\begingroup\\noindent" .. lines(st) .. skips .. "\\relax"
+    local start = (tonumber(st.indent) or 0) > 0 and ("\\parindent=" .. bp(st.indent) .. "\\relax\\indent")
+      or "\\noindent"
+    return open(n) .. "\\begingroup" .. start .. lines(st) .. skips .. "\\relax"
       .. (h > 0 and ("\\hangindent=" .. bp(h) .. "\\hangafter=1\\relax") or "") .. face .. " " .. body
       .. "\\par\\endgroup" .. close(n, st.keep)
   end
@@ -91,18 +111,25 @@ return function(spec)
     return "\\vtop{\\hsize=" .. bp(width) .. "\\linewidth=\\hsize\\vskip0pt " .. emit(items, true) .. "}"
   end
 
+  -- Each column is set in a box first (scratch boxes 0, 2, ..., local to the group), so a column centered in the
+  -- row (`valign: center`) starts half the difference between the row's depth and its own lower.
   local function columns(n)
     local fixed, flex = 0, 0
     for i, c in ipairs(n.cols) do
       if c.width then fixed = fixed + c.width else flex = flex + 1 end
       if i > 1 then fixed = fixed + n.gutter end
     end
-    local parts = {}
+    local set, row = {}, {}
     for i, c in ipairs(n.cols) do
-      if i > 1 then parts[#parts + 1] = "\\hskip" .. bp(n.gutter) end
-      parts[#parts + 1] = vtop(c.width or (TEXTW - fixed) / math.max(flex, 1), c.items)
+      local b = 2 * (i - 1)
+      set[#set + 1] = "\\setbox" .. b .. "=" .. vtop(c.width or (TEXTW - fixed) / math.max(flex, 1), c.items)
+        .. "\\ifdim\\dp" .. b .. ">\\dimen0 \\dimen0=\\dp" .. b .. "\\fi"
+      if i > 1 then row[#row + 1] = "\\hskip" .. bp(n.gutter) end
+      local drop = c.valign == "center" and ("\\vskip\\dimexpr(\\dimen0-\\dp" .. b .. ")/2\\relax") or ""
+      row[#row + 1] = "\\vtop{\\vskip0pt" .. drop .. "\\unvbox" .. b .. "}"
     end
-    return open(n) .. "\\hbox to " .. bp(TEXTW) .. "{" .. table.concat(parts) .. "\\hss}" .. close(n)
+    return open(n) .. "\\begingroup\\dimen0=0pt " .. table.concat(set, "%\n") .. "%\n\\hbox to " .. bp(TEXTW)
+      .. "{" .. table.concat(row) .. "\\hss}\\endgroup" .. close(n)
   end
 
   local function group(n)
@@ -127,13 +154,15 @@ return function(spec)
     return table.concat(out, "%\n")
   end
 
-  local function heading(b)
+  -- `first`: the heading opens the tail, whose own space above replaces the heading's (typst drops a block's space
+  -- above at the start of a container).
+  local function heading(b, first)
     local st = {}
     for k, v in pairs(xd.heading(spec, b.level)) do st[k] = v end
     st.keep = true
     local text = b.content
     if st.upper then text = xd.upper(text) end
-    return par({ t = "par", text = text, st = st, lead = 0, above = st.above, below = st.below })
+    return par({ t = "par", text = text, st = st, lead = 0, above = first and 0 or st.above, below = st.below })
   end
 
   local function has_note(inlines)
@@ -148,13 +177,13 @@ return function(spec)
   end
 
   -- The body blocks; `gap` the space between two paragraphs (0 in the body, the tail's gap in the tail).
-  local function body(blocks, gap)
+  local function body(blocks, gap, first)
     local out = pandoc.Blocks({})
     local q = spec.quote or {}
     local prev
-    for _, b in ipairs(blocks) do
+    for k, b in ipairs(blocks) do
       if b.t == "Header" then
-        out:insert(raw(heading(b)))
+        out:insert(raw(heading(b, first and k == 1)))
       elseif b.t == "Para" or b.t == "Plain" then
         if prev == "Para" and gap > 0 then out:insert(raw("\\par\\addvspace{" .. bp(gap) .. "}")) end
         out:extend(para(b.content))
@@ -193,7 +222,7 @@ return function(spec)
           local t = spec.tail
           out:insert(raw("\\par\\addvspace{" .. bp(t.above) .. "}" .. lines(t) .. "\\setlength{\\parindent}{"
             .. bp(t.indent) .. "}"))
-          out:extend(body(rest, tonumber(t.gap) or 0))
+          out:extend(body(rest, tonumber(t.gap) or 0, true))
         end
         return pandoc.Pandoc(out, doc.meta)
       end,

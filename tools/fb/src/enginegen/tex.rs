@@ -7,8 +7,51 @@ use serde_yaml::Value;
 pub const NOTE_GAP: f64 = 7.0;
 pub const CLEARANCE: f64 = 7.5;
 
+/// A list marker as LaTeX text.
+fn tex_marker(m: &str) -> String {
+    match m {
+        "\u{2022}" => "\\textbullet".into(),
+        "\u{2013}" => "\\textendash".into(),
+        "\u{2014}" => "\\textemdash".into(),
+        "-" => "-{}".into(),
+        s => s
+            .chars()
+            .filter(|c| c.is_alphanumeric() || " .,;:()[]*+".contains(*c))
+            .collect(),
+    }
+}
+
+/// The bullets of the four list levels LaTeX nests (layout.yaml `list.markers`, the last repeated; typst xdoc the same).
+fn markers(l: &Value) -> String {
+    let ms: Vec<String> = l
+        .get("list")
+        .and_then(|x| x.get("markers"))
+        .and_then(Value::as_sequence)
+        .map(|s| s.iter().filter_map(Value::as_str).map(tex_marker).collect())
+        .unwrap_or_default();
+    if ms.is_empty() {
+        return String::new();
+    }
+    (1..=4)
+        .map(|lv| {
+            format!(
+                "\\setlist[itemize,{lv}]{{label={}}}\n",
+                ms[(lv - 1).min(ms.len() - 1)]
+            )
+        })
+        .collect()
+}
+
 pub fn template(l: &Value, face: &str) -> Result<String, String> {
-    let (pkg, _) = latex_face(face)?;
+    let (pkg, ellipsis) = latex_face(face)?;
+    // three periods (newtx: 0.25 em each) kerned to the face's ellipsis, read as one "…" (/ActualText)
+    let ellipsis = match ellipsis {
+        Some(adv) => format!(
+            "\\newcommand\\xd@ellipsis{{\\pdfliteral page{{/Span<</ActualText<FEFF2026>>>BDC}}.\\kern{k}em.\\kern{k}em.\\pdfliteral page{{EMC}}}}",
+            k = fmt((adv - 0.75) / 2.0)
+        ),
+        None => "\\newcommand\\xd@ellipsis{\\textellipsis}".into(),
+    };
     let size = num(l, "size", None)?;
     let body = num(l, "pitch.body", None)?;
     let (single, skip, _) = footer(l)?;
@@ -68,14 +111,16 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
 \providecommand{{\tightlist}}{{\setlength{{\itemsep}}{{0pt}}\setlength{{\parskip}}{{0pt}}}}
 \providecommand{{\pandocbounded}}[1]{{#1}}
 \xe@lists{{{list}bp}}
-% footnotes (layout.yaml footnote): {nsize} bp type in {npitch} bp line boxes, the mark and a space, {gap} bp above
-% each note, {clear} bp from the text to a 30 % rule; marks at 58 % of the type size
+{markers}% footnotes (layout.yaml footnote): {nsize} bp type in {npitch} bp line boxes, the mark and a space, {gap} bp above
+% each note, {clear} bp from the text to a 30 % rule; marks at 58 % of the type size (of the note's in the note)
 \renewcommand\footnotesize{{\xe@lines{{{nsize}}}{{{npitch}}}}}
 \setlength{{\skip\footins}}{{{clear}bp}}
 \renewcommand\footnoterule{{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}}
 \xe@footnotemarks{{{size}}}
 \renewcommand\@makefntext[1]{{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip={gap}bp\relax
-  \vskip 0pt\noindent\xe@mark{{\@thefnmark}}\hskip 0.25em #1}}
+  \vskip 0pt\noindent\raisebox{{{nraise}bp}}{{\fontsize{{{nmark}bp}}{{0bp}}\selectfont\@thefnmark}}\hskip 0.25em #1}}
+% an ellipsis as typst and Word set it (lib/latex/xdoc.lua writes \xd@ellipsis for "…")
+{ellipsis}
 \makeatother
 \begin{{document}}
 \makeatletter
@@ -98,5 +143,9 @@ $body$
         npitch = fmt(npitch),
         gap = fmt(gap),
         clear = fmt(clear),
+        nraise = fmt(0.29 * nsize),
+        nmark = fmt(0.58 * nsize),
+        markers = markers(l),
+        ellipsis = ellipsis,
     ))
 }

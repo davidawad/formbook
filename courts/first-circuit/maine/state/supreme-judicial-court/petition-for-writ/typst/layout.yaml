@@ -1,0 +1,54 @@
+# Maine Supreme Judicial Court original petition: petition for writ of habeas corpus (14 M.R.S. 5501 et seq.), filed
+# before a single justice. The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and
+# docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to ../rules.md; lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court
+# constant (the court's name, "Docket No.", the closing words).
+size: 14                  # ME-FORM-001: printed matter at least 14-point
+pitch:
+  body: 32.2              # ME-FORM-005: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # caption, headings, quotations, signature blocks: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # ME-FORM-003, -004: one inch
+indent: 36                # paragraphs indented half an inch
+page_number: {align: center, from: 1}   # ME-FORM-007: Arabic numerals from page 1
+footnote: {size: 11, pitch: 12.65, gap: 7}   # ME-FORM-001: footnotes may be 11-point, single (1.15 x 11 pt)
+quote: {left: 36, right: 36, above: 14, below: 14}   # ME-FORM-005: block quotations single spaced
+list: {markers: ["–", "o"]}   # the exemplar's certificate: a dash, then "o" for the second level
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, above: 15.4, below: 8.4}
+# ME-PET-002: the court and the docket number, then the title of the action with every party on the first side,
+# and the descriptive title beside it.
+front:
+  - columns:
+      - blocks:
+          - {text: "STATE OF MAINE"}
+      - blocks:
+          - {text: "SUPREME JUDICIAL COURT"}
+          - {text: "Docket No. {docket}"}
+    gutter: 21.6
+  - columns:
+      - width: 237.6
+        blocks:
+          - each: caption
+            between:
+              - {text: "v.", above: 12.6, below: 12.6}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", above: 5.6}
+      - valign: center
+        blocks:
+          - {text: "{brief_title}"}
+    gutter: 21.6
+    above: 22.4
+    below: 25.2
+# ME-PET-002 (dated), ME-CERT-001, -002: the date, then each counsel's signature block side by side, never split.
+closing:
+  - group:
+      - {text: "Respectfully submitted this {date},", pitch: body, indent: 36}
+      - {text: "By the Petitioners,", left: 230.4, above: 8.4}
+      - columns: {each: signers, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 16.8
+# ME-FORM-009, ME-CERT-004: the certificate of filing and service follows the signature blocks, in the body's form.
+tail: {at: "CERTIFICATE", pitch: body, indent: 36, above: 16.8}
