@@ -1,0 +1,87 @@
+# Supreme Court of Idaho (idaho): brief in support of a petition for review (I.A.R. 118(c)), set as a brief (IDAHO-PET-003).
+# The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Rules:
+# ../../rules.md (I.A.R. 34, 36, 110); a number with no rule is a style choice of the template, kept from the
+# template it replaces. Lengths in points. No case text: every string printed comes from the sample's frontmatter
+# ({field}) or is a court constant.
+size: 14                  # IDAHO-FORM-007 (I.A.R. 36(b)(3)): 14-point or larger, text and footnotes
+pitch:
+  body: 32.2              # IDAHO-FORM-002 (I.A.R. 36(b)(1)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # headings, footnotes, block quotations, cover, tables, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # IDAHO-FORM-003 (I.A.R. 36(b)(1)): at least one inch
+indent: 36
+page_number: {align: center, from: 1}   # IDAHO-FORM-004 (I.A.R. 36(b)(1)): bottom margin; the cover is page 1
+footnote: {size: 14, pitch: single, gap: 7}   # IDAHO-FORM-007, -002: 14 pt, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # IDAHO-FORM-002: block quotations single spaced, indented
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# IDAHO-CONT-001 (I.A.R. 36(a)), IDAHO-CONT-002 (I.A.R. 110): the court, the docket number, the title of the action,
+# the court appealed from and the judge, the title of the brief, every counsel and for whom they appear.
+# Set as `front` closed by a page break, not `cover`: lib/docx/xdoc.lua emits a cover only with tables (fb-595.54.51
+# request 2); the briefs in support carry neither table (the sample: `toc: false`, no authorities).
+front:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF IDAHO", align: center, bold: true}
+  - {text: "{case_number}", align: center, bold: true, above: 28.8}
+  - each: caption
+    above: 28.8
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, above: 28.8, optional: true}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 43.2}
+  - columns:
+      each: counsel
+      per_row: 2
+      row_gap: 8.4
+      blocks:
+        - {text: "{names}", bold: true}
+        - {text: "{lines}", optional: true}
+    gutter: 28.8
+    above: 43.2
+  - {break: true}
+# IDAHO-CERT-001 (I.A.R. 34(b)(4)): the word-count certificate, stating the number, immediately before the signature;
+# the date line, the certificate and the signature block never split. IDAHO-CERT-002: the certificate of service on a
+# page of its own, signed by the filer.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, pitch: body, optional: true}
+      - {text: "This brief contains {word_count} words and complies with the word-count limit of I.A.R. 34(b).", indent: 36, pitch: body}
+      - group:
+          - when: signature.firm
+            blocks:
+              - {text: "{signature.firm}", bold: true, left: 230.4}
+          - when: signature.signer
+            blocks:
+              - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 11.2}
+              - {text: "{signature.signer}", left: 230.4}
+          - when: signature.signers
+            blocks:
+              - each: signature.signers
+                blocks:
+                  - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 12.6}
+                  - {text: "{name}", left: 230.4}
+                  - {text: "{lines}", left: 230.4, optional: true}
+          - {text: "{signature.lines}", left: 230.4, optional: true}
+        above: 5.6
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.heading}", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{service.paragraphs}", indent: 36, pitch: body}
+      - when: service.recipients
+        blocks:
+          - each: service.recipients
+            blocks:
+              - {text: "{.}", left: 72, above: 14}
+      - {text: "{service.closing}", indent: 36, pitch: body, optional: true}
+      - group:
+          - {text: "/s/ *{service.signature.signer}*", underline: true, left: 230.4}
+          - {text: "{service.signature.signer}", left: 230.4}
+          - {text: "{service.signature.lines}", left: 230.4, optional: true}
+        above: 19.6

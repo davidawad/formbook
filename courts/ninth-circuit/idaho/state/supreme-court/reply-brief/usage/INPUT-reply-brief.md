@@ -36,7 +36,7 @@ authorities:
       - {cite: "*Hammer v. City of Sun Valley*, 163 Idaho 439, 414 P.3d 1178 (2016)", find: "Hammer v. City of Sun Valley"}
   - heading: "Rules"
     entries:
-      - {cite: "I.A.R. 40", find: "Appellate Rule 40"}
+      - {cite: "I.A.R. 40", find: "Idaho Appellate Rule"}
   - heading: "Statutes"
     entries:
       - {cite: "Idaho Code § 63-602GG", find: "63-602GG"}
@@ -61,9 +61,9 @@ Idaho Code § 73-113 provides the court with the tool for application in this ca
 
 > 73-113. CONSTRUCTION OF WORDS AND PHRASES.
 >
-> (1) The language of a statute should be given its plain, usual and ordinary meaning. Where a statute is clear and unambiguous, the expressed intent of the legislature shall be given effect without engaging in statutory construction. The literal words of a statute are the best guide to determining legislative intent.
+> \(1) The language of a statute should be given its plain, usual and ordinary meaning. Where a statute is clear and unambiguous, the expressed intent of the legislature shall be given effect without engaging in statutory construction. The literal words of a statute are the best guide to determining legislative intent.
 >
-> (2) If a statute is capable of more than one (1) conflicting construction, the reasonableness of the proposed interpretations shall be considered, and the statute must be construed as a whole. Interpretations which would render the statute a nullity, or which would lead to absurd results, are disfavored[.]
+> \(2) If a statute is capable of more than one (1) conflicting construction, the reasonableness of the proposed interpretations shall be considered, and the statute must be construed as a whole. Interpretations which would render the statute a nullity, or which would lead to absurd results, are disfavored[.]
 
 ## 2. This case is all about a statute capable of more than one conflicting construction.
 
@@ -71,7 +71,7 @@ In some important particulars, the Legislature has spoken clearly and unmistakab
 
 > “It is hereby declared:
 >
-> (a) That within the state there is a shortage of safe or sanitary dwelling accommodations available which persons of low incomes can afford and that such persons are forced to occupy overcrowded and congested dwelling accommodations; that the aforesaid conditions cause an increase in and spread of disease and crime, and constitute a menace to the health, safety, morals and welfare of the residents of the state and impair economic values[.]
+> \(a) That within the state there is a shortage of safe or sanitary dwelling accommodations available which persons of low incomes can afford and that such persons are forced to occupy overcrowded and congested dwelling accommodations; that the aforesaid conditions cause an increase in and spread of disease and crime, and constitute a menace to the health, safety, morals and welfare of the residents of the state and impair economic values[.]
 
 IDAHO CODE § 67-6201.
 
@@ -91,7 +91,7 @@ The Statute requires, and Aspen Park complies by renting its low-income housing 
 
 Respondent’s argument concerning the income requirements in Idaho Code § 63-602GG(3)(c) completely fails to take into account two important words: “or less.”
 
-> (c) Except for a manager’s unit, all of the housing units in the low-income housing property are dedicated to low-income housing in the following manner: Fifty-five percent (55%) of the units shall be rented to those earning sixty percent (60%) or less of the median income for the county in which the housing is located; twenty percent (20%) of the units shall be rented to those earning fifty percent (50%). or less of the median income of the county in which the housing is located; and twenty-five percent (25%) of the units shall be rented to those earning thirty percent (30%) or less of the median income for the county in which the housing is located.
+> \(c) Except for a manager’s unit, all of the housing units in the low-income housing property are dedicated to low-income housing in the following manner: Fifty-five percent (55%) of the units shall be rented to those earning sixty percent (60%) or less of the median income for the county in which the housing is located; twenty percent (20%) of the units shall be rented to those earning fifty percent (50%). or less of the median income of the county in which the housing is located; and twenty-five percent (25%) of the units shall be rented to those earning thirty percent (30%) or less of the median income for the county in which the housing is located.
 
 (emphasis added). The only reasonable interpretation of the income categories would be that each category has an income ceiling, but no income floor. For instance, for the first category (“Category A”), fifty-five (55%) of the units must be rented to those earning from 0-60% of the median county income. For the second category (“Category B”), twenty percent (20%) of the units must be rented to those earning from 0-50% of the median county income. And, for the third category (“Category C”), twenty-five percent (25%) of the units must be rented to those earning from 0-30% of the median county income. “Or less” in each case could have no other meaning than an income floor of zero.
 
