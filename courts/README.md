@@ -134,7 +134,7 @@ Courts under `courts` (346).
 | [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | 7/7 | 1/1 | 1/1 | 29 |
 | [Court of Civil Appeals of Texas](fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | 2/2 | 4/5 | 29 |
 | [Court of Criminal Appeals of Texas](fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | 1/1 | 3/3 | 29 |
-| [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | — | 2/2 | 29 |
+| [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | 2/2 | 2/2 | 29 |
 | [United States Bankruptcy Appellate Panel of The Sixth Circuit](sixth-circuit/bankruptcy-appellate-panel) | `bap6` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Sixth Circuit](sixth-circuit/court-of-appeals) | `ca6` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, E.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-eastern-district) | `kyeb` | up for review | 2/2 | — | 2/2 | 14 |
@@ -265,7 +265,7 @@ Courts under `courts` (346).
 | [California Court of Appeal, Fourth Appellate District](ninth-circuit/california/state/court-of-appeal-fourth-district) | `calctapp4d` | up for review | 5/5 | — | — | 29 |
 | [California Court of Appeal, Second Appellate District](ninth-circuit/california/state/court-of-appeal-second-district) | `calctapp2d` | up for review | 5/5 | — | — | 29 |
 | [California Court of Appeal, Sixth Appellate District](ninth-circuit/california/state/court-of-appeal-sixth-district) | `calctapp6d` | up for review | 7/7 | 1/1 | 1/1 | 29 |
-| [California Court of Appeal, Third Appellate District](ninth-circuit/california/state/court-of-appeal-third-district) | `calctapp3d` | up for review | 2/2 | — | — | 29 |
+| [California Court of Appeal, Third Appellate District](ninth-circuit/california/state/court-of-appeal-third-district) | `calctapp3d` | up for review | 2/2 | 1/1 | 1/1 | 29 |
 | [California Courts of Appeal](ninth-circuit/california/state/courts-of-appeal) | `calctapp` | up for review | 5/5 | 1/1 | 4/4 | 29 |
 | [California Superior Court](ninth-circuit/california/state/superior-court) | `calsuperct` | up for review | 2/2 | — | 2/2 | 14 |
 | [California Superior Court, San Diego County](ninth-circuit/california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | up for review | 2/2 | — | 2/2 | 14 |
