@@ -25,14 +25,14 @@ Courts under `courts/fourth-circuit` (29).
 | [District Court, N.D. West Virginia](west-virginia/federal/northern-district) | `wvnd` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, S.D. West Virginia](west-virginia/federal/southern-district) | `wvsd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Maryland](maryland/state/court-of-appeals) | `md` | up for review | 9/9 | 4/4 | 7/7 | 29 |
-| [Court of Special Appeals of Maryland](maryland/state/court-of-special-appeals) | `mdctspecapp` | up for review | 6/6 | — | — | 29 |
+| [Court of Special Appeals of Maryland](maryland/state/court-of-special-appeals) | `mdctspecapp` | up for review | 6/6 | 6/6 | 5/5 | 29 |
 | [Court of Appeals of North Carolina](north-carolina/state/court-of-appeals) | `ncctapp` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Supreme Court of North Carolina](north-carolina/state/supreme-court) | `nc` | up for review | 9/9 | — | — | 29 |
-| [Court of Appeals of South Carolina](south-carolina/state/court-of-appeals) | `scctapp` | up for review | 5/5 | — | — | 29 |
+| [Court of Appeals of South Carolina](south-carolina/state/court-of-appeals) | `scctapp` | up for review | 5/5 | 4/4 | 4/4 | 29 |
 | [Supreme Court of South Carolina](south-carolina/state/supreme-court) | `sc` | up for review | 7/7 | 4/4 | 4/4 | 29 |
-| [Court of Appeals of Virginia](virginia/state/court-of-appeals) | `vactapp` | up for review | 5/5 | — | — | 29 |
+| [Court of Appeals of Virginia](virginia/state/court-of-appeals) | `vactapp` | up for review | 5/5 | 3/3 | 3/3 | 29 |
 | [Supreme Court of Virginia](virginia/state/supreme-court) | `va` | up for review | 8/8 | 3/3 | 3/3 | 29 |
-| [Intermediate Court of Appeals of West Virginia](west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | up for review | 5/5 | — | — | 29 |
+| [Intermediate Court of Appeals of West Virginia](west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
 | [West Virginia Supreme Court](west-virginia/state/supreme-court) | `wva` | up for review | 9/9 | 3/3 | 3/3 | 29 |
 
 [Formbook index](../../README.md)

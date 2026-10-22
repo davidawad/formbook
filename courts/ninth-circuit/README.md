@@ -56,10 +56,10 @@ Courts under `courts/ninth-circuit` (61).
 | [Supreme Court of Guam](guam/state/supreme-court) | `guam` | up for review | 2/2 | 2/2 | 2/2 | 29 |
 | [Hawaii Intermediate Court of Appeals](hawaii/state/intermediate-court-of-appeals) | `hawapp` | up for review | 5/5 | — | — | 29 |
 | [Supreme Court of Hawaii](hawaii/state/supreme-court) | `haw` | up for review | 9/9 | 2/2 | 3/3 | 29 |
-| [Idaho Court of Appeals](idaho/state/court-of-appeals) | `idahoctapp` | up for review | 3/3 | — | — | 29 |
+| [Idaho Court of Appeals](idaho/state/court-of-appeals) | `idahoctapp` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Idaho Supreme Court](idaho/state/supreme-court) | `idaho` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Montana Supreme Court](montana/state/supreme-court) | `mont` | up for review | 9/9 | 9/9 | 9/9 | 29 |
-| [Court of Appeals of Nevada](nevada/state/court-of-appeals) | `nevapp` | up for review | 5/5 | — | — | 29 |
+| [Court of Appeals of Nevada](nevada/state/court-of-appeals) | `nevapp` | up for review | 5/5 | 1/1 | 1/1 | 29 |
 | [Nevada Supreme Court](nevada/state/supreme-court) | `nev` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 | [Supreme Court of The Commonwealth of The Northern Mariana Islands](northern-mariana-islands/state/supreme-court) | `nmi` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Court of Appeals of Oregon](oregon/state/court-of-appeals) | `orctapp` | up for review | 1/2 | — | — | 29 |

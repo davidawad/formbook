@@ -24,7 +24,7 @@ Courts under `courts/seventh-circuit` (21).
 | [Illinois Supreme Court](illinois/state/supreme-court) | `ill` | up for review | 8/8 | — | — | 29 |
 | [Indiana Court of Appeals](indiana/state/court-of-appeals) | `indctapp` | in progress | — | — | — | 29 |
 | [Indiana Supreme Court](indiana/state/supreme-court) | `ind` | up for review | 1/1 | — | — | 29 |
-| [Court of Appeals of Wisconsin](wisconsin/state/court-of-appeals) | `wisctapp` | up for review | 7/7 | — | — | 29 |
+| [Court of Appeals of Wisconsin](wisconsin/state/court-of-appeals) | `wisctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
 | [Wisconsin Supreme Court](wisconsin/state/supreme-court) | `wis` | up for review | 9/9 | — | — | 29 |
 
 [Formbook index](../../README.md)

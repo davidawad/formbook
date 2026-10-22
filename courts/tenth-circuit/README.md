@@ -31,7 +31,7 @@ Courts under `courts/tenth-circuit` (31).
 | [New Mexico Court of Appeals](new-mexico/state/court-of-appeals) | `nmctapp` | up for review | 6/6 | 4/4 | 4/4 | 29 |
 | [New Mexico Supreme Court](new-mexico/state/supreme-court) | `nm` | up for review | 8/8 | 1/1 | 1/1 | 29 |
 | [Court of Civil Appeals of Oklahoma](oklahoma/state/court-of-civil-appeals) | `oklacivapp` | up for review | 1/1 | — | — | 14 |
-| [Court of Criminal Appeals of Oklahoma](oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | up for review | 5/5 | — | — | 29 |
+| [Court of Criminal Appeals of Oklahoma](oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
 | [Supreme Court of Oklahoma](oklahoma/state/supreme-court) | `okla` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [Court of Appeals of Utah](utah/state/court-of-appeals) | `utahctapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Utah Supreme Court](utah/state/supreme-court) | `utah` | up for review | 7/7 | 7/7 | 7/7 | 29 |

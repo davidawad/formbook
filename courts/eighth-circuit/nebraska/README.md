@@ -7,7 +7,7 @@ Courts under `courts/eighth-circuit/nebraska` (4).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Nebraska](federal/bankruptcy-district) | `nebraskab` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court, Nebraska](federal/district) | `ned` | up for review | 2/2 | — | 2/2 | 14 |
-| [Nebraska Court of Appeals](state/court-of-appeals) | `nebctapp` | up for review | 4/4 | — | — | 29 |
+| [Nebraska Court of Appeals](state/court-of-appeals) | `nebctapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Nebraska Supreme Court](state/supreme-court) | `neb` | up for review | 5/5 | — | — | 29 |
 
 [Formbook index](../../../README.md)
