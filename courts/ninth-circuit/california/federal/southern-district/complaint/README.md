@@ -7,17 +7,17 @@ Folder: `courts/ninth-circuit/california/federal/southern-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (a portion of the 35-page filing, see its header comment) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, Times New Roman, no warnings (docx: `usage/OUTPUT-complaint.docx`, `.docx.pdf`, the same 9 pages) |
 | overlay | ok: `usage/OVERLAY-bachman-complaint.pdf` and `OVERLAY-bachman-complaint.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; pages 6 to 8 re-viewed after the last template change; all 8 re-viewed on 2026-10-15 in the typeface pass, no template change) |
+| pages reviewed | 9 of 9 on typst and on docx (every page rendered at 50 dpi and viewed after the cross-engine port, fb-595.68.22) |
 
 ## Governing rules
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| S.D. Cal. Civil L.R. 5.1 | Papers typed double-spaced on one side, line-numbered in the left margin, not more than 28 lines per page, letter size. | `lines-per-page = 28`, `pitch = 24pt`, `page-w = 8.5in`, `line-numbers()`. |
+| S.D. Cal. Civil L.R. 5.1 | Papers typed double-spaced on one side, line-numbered in the left margin, not more than 28 lines per page, letter size. | `lines-per-page = 27` (CivLR 5.1 allows 28), `pitch = 24pt`, `page-w = 8.5in`, `line-numbers()`. |
 | S.D. Cal. Civil L.R. 5.1 | Proportional font such as Times New Roman at 14-point; no smaller type for text, footnotes or quotations. | `type-size = 14pt` for all body text, headings, caption and counsel. The footer is 10 pt (see gap 4). |
-| S.D. Cal. Civil L.R. 5.1 (typeface) | No face is required. "Such as Times New Roman" is an example, not a requirement, so the court-named-face substitution does not apply. | Face required: none. Font: **EB Garamond** (kept; `font-family` in `casd-complaint.typ`). Substitute not used, so the fit column is n/a. |
+| S.D. Cal. Civil L.R. 5.1 (typeface) | No face is required. "Such as Times New Roman" is an example, not a requirement, so the court-named-face substitution does not apply. | Face required: none. Font: **Times New Roman** (the house standard and the exemplar's face; `font-family` in `casd-complaint.typ`, the docx face through `{font}`). |
 | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number and a Rule 7(a) designation. | `court-title`, `caption` (case number on the right, title below it). |
 | Fed. R. Civ. P. 10(b) | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | `allegations()` numbers each body paragraph; headings, lists and the PRAYER and DEMAND paragraphs are not numbered. |
 
@@ -29,14 +29,14 @@ Not checked: CivLR 7.1 and CivLR 3 (the complaint's first-page requirements, if 
 
 ## Layout
 
-- Numbered lines 1 to 28 down the left margin, a double rule at the text's left edge and a single rule at its right (the pleading form).
-- Top margin 1 inch: line 1 sits on the top margin, so the 28 lines end at 10.33 inches and the footer is in the bottom margin.
-- Body leading `14.9pt` gives a 24 pt baseline pitch at 14 pt EB Garamond (measured with `pdftotext -bbox` on a test page: pitch 24.00 pt on all lines; natural line box 9.1 pt). The cand template's 12 pt leading does not carry over.
-- Counsel block single-spaced (`single-leading = 3.5pt`, pitch about 12.6 pt) on lines 1 to 7; the template grows the block for longer counsel lists.
-- Court title on line 8 (UNITED STATES DISTRICT COURT, SOUTHERN DISTRICT OF CALIFORNIA), caption from line 11.
-- Every block of text is a whole number of 24 pt rows (`on-grid`), so headings, paragraphs and signature blocks land on the numbered lines.
-- Paragraphs are numbered 1, 2, ... by the template; a heading stays with the paragraph after it (`heading-line` + the grouping in `allegations()`). Paragraphs under a heading starting with PRAYER or DEMAND are not numbered (the filed complaint leaves those unnumbered).
-- Prayer items (markdown numbered list) are lettered (a), (b), ... as in the filing.
+- Numbered lines 1 to 27 down the left margin (CivLR 5.1: not more than 28), a double rule at the text's left edge and a single rule at its right (the pleading form).
+- Top margin 1 inch: line 1 sits on the top margin, so the 27 lines end at 10 inches and the footer is in the 1 inch bottom margin.
+- Cross-engine layout model (`lib/typst/xengine.typ`): every body line a 24 pt box with the baseline at 0.8 of it, the line numbers on the same boxes; single lines (counsel, caption, signature) 16 pt boxes, each group starting 6.4 pt below a numbered line's top (`single-drop`), so every third single line stands level with a line number.
+- Counsel block on lines 1 to 7; the template grows the block to the next numbered line for longer counsel lists (11 lines in the sample: the court title on line 9).
+- Court title (UNITED STATES DISTRICT COURT, SOUTHERN DISTRICT OF CALIFORNIA) on the numbered lines after the counsel block, the caption a numbered line below it.
+- Paragraphs are numbered 1, 2, ... by the template, the number in a half-inch box after the half-inch indent; a heading stays with the paragraph after it (sticky). Paragraphs under a heading starting with PRAYER or DEMAND are not numbered (the filed complaint leaves those unnumbered).
+- Prayer items (markdown numbered list) are lettered (a), (b), ... as in the filing, half an inch in, the text hanging 0.4 in after the letter.
+- The last body block stays with the signature block, which never splits.
 
 ## Markdown contract (for samples)
 
@@ -48,28 +48,29 @@ Not checked: CivLR 7.1 and CivLR 3 (the complaint's first-page requirements, if 
 ## Known gaps and open choices
 
 1. **Only one exemplar.** Tier 2 asks for 2 or 3 filers. The CourtListener API search (`type=r`, `court=casd`, complaints filed 2026-09-08 to 2026-10-11) found other S.D. Cal. complaints (e.g. Novick v. Capricor Therapeutics, 3:26-cv-05568, Pomerantz LLP; Alo, LLC v. Derco, LLC, 3:26-cv-04957, Name Game IP, PC), not downloaded. Tier 2 is therefore **not** judged against two filers yet.
-2. **Font.** CivLR 5.1 names Times New Roman only as an example ("a proportional font such as Times New Roman"), so the rule names no face and this template keeps EB Garamond at 14 pt. `fonts/liberation-serif/` (the Times New Roman substitute, metric-compatible per `docs/FONTS.md`) is vendored, so switching is a one-line change in `font-family` if David reads the exemplar's Times as the clerk's convention. EB Garamond has a smaller x-height than Times, so the sample reads smaller than the exemplar even at the same nominal size. Question for David: should the S.D. Cal. templates keep EB Garamond (the rule's text allows any proportional font) or use Liberation Serif (the exemplar's face)?
+2. **Font.** CivLR 5.1 names Times New Roman as its example; the template sets it (the exemplar's face and the house standard; was EB Garamond until fb-595.68.22).
 3. **Footer type size.** The footer is 10 pt (case number and title). The 14-point rule is written for text; footers are logged as an interpretation, the same as in the cand template.
 4. **Caption.** The party column is closed by a rule (right and bottom), not the column of ")" marks in the exemplar. ACCEPTED as a tier-2 convention choice.
 5. **Overlay names.** `tools/overlay.sh` reads `usage/OUTPUT-<id>.pdf` and writes `usage/OVERLAY-<id>.pdf` and `.txt`; the render is `OUTPUT-<id>.pdf` (the default of `tools/render.sh`). These are the names the tools use, so they are used here in place of `<id>.pdf` and `<id>-overlay.pdf`.
 6. **Overlay pairing.** The sample is a portion of the 35-page filing (paragraphs 1 to 28, the prayer, the jury demand and the signature block; the CLRA venue declaration is not transcribed). The overlay pairs each sample page with the exemplar page sharing the most words; pages 6 to 8 pair with exemplar pages 10, 12 and 33 because the sample skips the filing's pages between. The overlay is a diagnostic, not a score.
 7. **Paragraph numbers differ.** The sample numbers its allegations from 1; the filed numbers are not transcribed.
 8. **Ragged right.** Body text is left-aligned, not justified. The exemplar's justification could not be read from the text layer; not asserted.
-9. **Keep-with-next.** A heading and the paragraph after it are kept together as one unbreakable block, so a heading can leave a short gap at the foot of a page (page 4 of the sample: five empty lines before JURISDICTION AND VENUE). Accepted as the cost of never ending a page on a heading.
-10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court directory with `court.json` and `rules.md`, and this doc-type folder does not have that shape. The gates were not run; render and overlay were run, and the review above is the Gate 2 equivalent for this doc type.
-11. **Headings must fit one line.** `heading-line` asserts a single numbered line; a two-line heading fails the build with a message.
+9. **Keep-with-next.** A heading is sticky: it moves to the next page with the paragraph after it, which may then break across pages.
+10. **Checks.** `sh tools/check.sh <dir> --engine typst|docx` run green (typst 9, docx 13 checks, 0 failed).
+11. **Headings.** A heading is one block at the 24 pt pitch; a long heading wraps onto the next numbered line.
 12. **Signature block.** One signature block, after the jury demand. The filing repeats the signature under its own jury-demand page; the template does not produce that second signature.
 
 ## Review of the rendered pages (current PDF)
 
-- Page 1: counsel on lines 1 to 7 (single-spaced), court title on lines 8 and 9, caption on lines 11 to 17, the title, CLASS ACTION legend and DEMAND FOR JURY TRIAL at the right, footer with title and case number. Pass.
-- Page 2: the body begins on the page after the caption with ¶1 (the opening paragraph), the INTRODUCTION heading centered bold, ¶¶1 to 5. Text on the numbered lines. Pass.
-- Page 3: ¶¶6 to 10; PARTIES heading and the Plaintiff sub-heading (bold italic) at the foot, with ¶11 starting on line 28. Pass.
-- Page 4: ¶¶11 to 14 (Plaintiff, Defendant); lines 24 to 28 empty before JURISDICTION AND VENUE, which moved to page 5 with its paragraph (gap 9). Pass with the noted gap.
-- Page 5: JURISDICTION AND VENUE, ¶¶15 to 17, FACTUAL ALLEGATIONS, sub-heading A (bold italic), ¶¶18 to 19. Pass.
-- Page 6: ¶¶20 to 26 (the ¶23 and ¶24 website paragraphs). No heading at the foot. Pass.
-- Page 7: ¶27, sub-heading B, ¶28, PRAYER FOR RELIEF (centered bold), the unnumbered WHEREFORE paragraph, items (a) to (c). Pass.
-- Page 8: items (d) to (h), DEMAND FOR JURY TRIAL (centered bold, unnumbered paragraph), the date, the signature block (single-spaced, "By: /s/" and the signer). Pass.
+- Page 1 (typst and docx alike, 2026-10-22): counsel single-spaced from line 1 (11 lines), court title on lines 9 and 10, caption from line 12: the ruled party column, the case number, the title, CLASS ACTION and DEMAND FOR JURY TRIAL at the right; footer -1-, title and case number. Pass.
+- Page 2: ¶¶1 to 5, INTRODUCTION centered bold. Pass.
+- Page 3: ¶¶5 to 10. Pass.
+- Page 4: ¶¶10 to 13, PARTIES, the Plaintiff and Defendant sub-headings (bold italic). Pass.
+- Page 5: ¶¶14 to 18, JURISDICTION AND VENUE, FACTUAL ALLEGATIONS, sub-heading A. Pass.
+- Page 6: ¶¶18 to 24. Pass.
+- Page 7: ¶¶24 to 28, sub-heading B. Pass.
+- Page 8: PRAYER FOR RELIEF, the unnumbered WHEREFORE paragraph, items (a) to (h). Pass.
+- Page 9: DEMAND FOR JURY TRIAL, its unnumbered paragraph, a numbered line, the dated signature block. Pass.
 
 Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
 
@@ -77,29 +78,13 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ### docx
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx` from pandoc's default reference) and `docx/casd.lua` (the filter). Sample: `usage/OUTPUT-complaint.docx` (zip and XML parts checked with `unzip -t` and `xmllint`; the LibreOffice PDF was not made).
+Built by `fb render` from `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst face `{font}`) and `docx/casd.lua` (fb-595.68.22; were `docx/make-reference.sh` and a committed `reference.docx` in EB Garamond). Both engines run on the shared layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): Times New Roman 14 pt, 24 pt exact line boxes on the 27 numbered lines, single lines of 16 pt (counsel, caption, signature) starting 6.4 pt below a numbered line's top, so every third single line stands level with a line number and the others 8 pt off it.
 
-Set in `styles.xml` and `sectPr` only, **not rendered** (no LibreOffice on the build box):
+- The line numbers 1 to 27 are a page-anchored frame in the footer (a fixed grid on every page, as typst draws them; Word's `lnNumType` numbered only text lines), the footer carries `-N-`, the paper title and the case number (`$FORMBOOK_FOOTERS`); the page and the pleading rules (page borders: double left, single right) are the last section (`$FORMBOOK_FINAL`).
+- The caption is a table: the party column ruled at its right and foot (the rules run to the foot of the row in both engines, as in the exemplar), the case column beside it. The signature block is a row that never splits; the last body block stays with it.
+- Allegation numbers in a half-inch box after the half-inch indent (Word: a tab at 1 in); prayer items `(a)`, `(b)`, ... half an inch in, in a 0.4 in box.
 
-- EB Garamond 14 pt in every style (Normal, Body Text, Heading 1 to 3, Compact, Block Text, Footnote Text), black text.
-- 24 pt exact line spacing (`w:line="480"`, `exact`) on body, heading, list and block text; no space before or after; paragraphs run on without gaps.
-- First-line indent 0.5 in on body paragraphs; numbered allegations are `N.` plus a tab (the filter), prayer items `(a)`, `(b)` in the "Prayer Item" style (hanging indent).
-- Headings: level 1 and level 2 centered bold, level 3 bold italic at the margin.
-- US Letter; top 1 in, left 1.5 in, right 0.75 in, bottom 48 pt (so 28 lines of 24 pt fill the text area exactly).
-- Word line numbering (`w:lnNumType`, restart each page), and a double rule at the left and a single rule at the right of the text (`w:pgBorders`).
+`sh tools/check.sh <dir> --engine docx`: 13 passed, 0 failed; XENG-001..003 pass (280/280 lines, 9 pages), `params.cross_engine: gate` in `eval.yaml`.
 
-What differs from the typst template:
+Differs from typst: the pleading rules are page borders, so they run from the top to the bottom margin, not the full page height.
 
-- No footer: no page number, footer title or case number (typst prints all three). Not in the reference.
-- The caption is paragraphs, not the bordered party box; the case number sits at the right on its own line.
-- The counsel block is single spaced but not on the 24 pt grid, so the numbered lines in Word may not line up with the typst lines on page 1.
-- Word numbers text lines (`lnNumType`), not a fixed grid of 1 to 28 on every page; blank space may not be numbered. The numbering of allegations is typed text, not a Word list.
-- Footnote Text is single spaced (a convention, not verified); no footnotes in the sample.
-- `date` is written as "Dated:" in the signature block; the typst block is the same in content.
-
-BLOCKED for this engine:
-
-- `docx.pdf` gates 0 to 3: BLOCKED, no `soffice` on the build box (LibreOffice is not on conda-forge). The `.docx` is written, not converted.
-- Pages reviewed for docx: 0. No docx page was rendered or looked at. The typst render of the same sample was viewed page by page as the comparison.
-- Footer (page number, footer title): not produced (see above).
-- Word fidelity (repair prompt, line-number placement, border offsets): not checked in Word.
