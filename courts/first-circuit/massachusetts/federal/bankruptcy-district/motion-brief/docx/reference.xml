@@ -3,7 +3,7 @@
      the typst template ({font}, Times New Roman) at 12 pt (size 24 half points; MLBR Appendix 8(c): not less than
      12-point); Body Text in exact 24 pt line boxes (typst pitch-double; Appendix 8(a): double-spaced) with a half-inch
      first-line indent, and the headings in them; single lines in 13.8 pt boxes (typst pitch-single); footnotes 10 pt
-     (Appendix 8(c)) in 11.5 pt boxes, 7 pt apart (typst pitch-note, note-gap). Added: Numbered Paragraph (Body Text
+     (Appendix 8(c)) in 11.5 pt boxes, 7 pt apart (typst pitch-note, note-gap), Footnote Text restated without the recipe's keepLines (a long note runs on to the next page, where typst splits it). Added: Numbered Paragraph (Body Text
      with a tab stop at 1 in: the number in the half-inch box after the indent, typst body-par()), Lettered Item (the
      label at 0.5 in, the text hanging at 1 in), Service Entry (a served party: single lines, flush left, never split,
      a single line above it; "First" without it, after the heading; typst service-par()) and the "Note" variants of
