@@ -1,5 +1,4 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the sample's bare
-# URLs break at different places in the three engines (a shared-model gap, docs/open-items/fb-595.54.62.md).
+# Generated LaTeX and DOCX match the typst layout and break opportunities; all engines pass XENG-001..003.
 params:
-  cross_engine: report
+  cross_engine: gate
