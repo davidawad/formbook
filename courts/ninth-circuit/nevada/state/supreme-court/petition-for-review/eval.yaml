@@ -1,7 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated yet: docx matches typst line
-# for line (453/453), but LaTeX does not break a long URL where typst and Word do (p19: the oral-argument URL runs
-# into the right margin, DEF-FORM-002, and pushes a line to p20), a difference of the shared model, not this folder's
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails. The INPUT's long URL (p19) carries a zero-width space after each
+# inner "/", the break point typst and Word already use, because the shared model gives LaTeX none there
 # (docs/open-items/fb-595.54.18.md).
 params:
-  cross_engine: report
+  cross_engine: gate
