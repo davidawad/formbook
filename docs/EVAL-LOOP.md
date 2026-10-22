@@ -241,6 +241,15 @@ Tolerances: `tools/fb/tolerance.json` stays at 0.01 pt (two builds of the same s
 
 Every engine's output must look the same for the record: the latex and docx renders of an INPUT break every line and every page where the typst render (the reference) breaks them. A line or page break that moves between engines is a failure to fix, never a tolerance.
 
+### Adoption checklist (one folder)
+
+For each INPUT in the folder, render typst, latex, and docx from the same markdown, then review every page of each new render. Complete these steps before setting `params.cross_engine: gate`:
+
+1. Compare latex and docx with typst using `fb diff --engines`; fix every different page count, page boundary, line ending, and word sequence. Do not accept a percentage or a tolerance for a changed break.
+2. Run the folder's full checker on all three engines. Every tier-1 check must pass, including `DEF-COVER-001` and `DEF-TOC-001` (the latter passes when the document has no contents or authorities table).
+3. Re-do the Gate 2 review against the new renders and record the reviewed pages and findings in `reviews/`. Keep unresolved differences only when an engine cannot reproduce the reference for a documented renderer limitation; identify the exact folder, INPUT, page or line, and reason, and leave that engine at `report` rather than claiming the cross-engine gate passes.
+4. Once both latex and docx pass XENG-001..003 on every INPUT and all tier-1 checks pass, set `params.cross_engine: gate`. Run the folder selftest where present and include the results with the review record.
+
 **The gate.** Gate 4 CROSS-ENGINE of `fb check` runs on the latex and docx engines (typst is the reference: SKIP there with that reason) and compares `usage/OUTPUT-<id>.<engine>.pdf` with `usage/OUTPUT-<id>.typst.pdf` (`fb diff --engines <typst.pdf> <other.pdf>` prints the same comparison by hand):
 
 | Id | Checks |
