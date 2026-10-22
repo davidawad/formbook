@@ -119,7 +119,12 @@ local function cover()
   -- the caption stands a single line below the court title (Word: the title's space after; a table has no space of
   -- its own), the title of the paper a single line below the caption
   out[#out] = out[#out]:gsub('w:after="0"', 'w:after="' .. SINGLE .. '"', 1)
-  out[#out + 1] = tbl({ CAP_COL, CAP_COL }, rows)
+  -- each row a table of its own, a 0.1 pt paragraph between them (LibreOffice draws a rule above a row that a
+  -- table carries over to a new page; typst's rows are blocks of their own)
+  for i, r in ipairs(rows) do
+    if i > 1 then out[#out + 1] = p("", { line = 2 }) end
+    out[#out + 1] = tbl({ CAP_COL, CAP_COL }, { r })
+  end
   out[#out + 1] = p(title, { b = true, jc = "center", before = SINGLE, after = SINGLE })
   return out
 end
