@@ -10,19 +10,21 @@ fn g0_missing(md: &str, runs: &[&str]) -> String {
 fn g0_metric(md: &str, runs: &[(u32, &str)], metric: &str) -> String {
     let placed: Vec<(u32, f64, &str)> = runs
         .iter()
-        .map(|(pg, top, t)| format!("{pg}\t{top}\t0\t0\t0\t0\t{t}\n"))|        .map(|(pg, top, t)| format!("{pg}\t{top}\t0\t0\t0\t0\t{t}\n"))
-)| (*pg, 100.0 + 20.0 * i as f64, *t))
+        .enumerate()
+        .map(|(i, (pg, t))| (*pg, 100.0 + 20.0 * i as f64, *t))
         .collect();
     g0_metric_at(md, &placed, metric)
 }
 
 /// Like `g0_metric`, with each run's distance from the top of its page in points: (page, top, text).
 fn g0_metric_at(md: &str, runs: &[(u32, f64, &str)], metric: &str) -> String {
+    // one directory per call: tests run in parallel and may share md and run counts
+    static CALL: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
     let chk = format!("{}/../check", env!("CARGO_MANIFEST_DIR"));
     let dir = std::env::temp_dir().join(format!(
-        "fb-g0-{}-{:x}",
+        "fb-g0-{}-{}",
         std::process::id(),
-        md.len() * 31 + runs.len() * 7 + metric.len()
+        CALL.fetch_add(1, std::sync::atomic::Ordering::Relaxed)
     ));
     std::fs::create_dir_all(&dir).unwrap();
     let (mdf, runsf, blocks) = (
