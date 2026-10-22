@@ -51,10 +51,10 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 | Doc type | Face required (rule) | Vendored substitute | Fit |
 |---|---|---|---|
-| motion-brief | none named (L.B.R. full text checked 2026-10-15; FRBP 9004(a) legibility only) | none; EB Garamond kept | n/a |
-| adversary-complaint | none named (same check) | none; EB Garamond kept | n/a |
+| motion-brief | none named (L.B.R. full text checked 2026-10-15; FRBP 9004(a) legibility only) | Times New Roman, the house face (was EB Garamond) | n/a |
+| adversary-complaint | none named (same check) | Times New Roman, the house face (was EB Garamond) | n/a |
 
-The local rules name no typeface for pleadings, so both doc types keep EB Garamond (`docs/FONTS.md`, "No face named").
+The local rules name no typeface for pleadings, so both doc types use the house face, Times New Roman 12 pt, in typst and docx alike (`docs/FONTS.md`, "No face named"; EB Garamond until fb-595.68.34).
 
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`
