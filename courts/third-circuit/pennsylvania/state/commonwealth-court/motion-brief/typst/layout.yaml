@@ -1,0 +1,72 @@
+# Commonwealth Court of Pennsylvania (pacommwct): application (motion). The whole layout, as data for the shared document
+# model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to the Pennsylvania Rules of Appellate Procedure (210 Pa. Code), ../../rules.md (PACOMMWCT-*); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # PACOMMWCT-FORM-003 (Pa.R.A.P. 124(a)(4)): text no smaller than 14 point
+pitch:
+  body: 32.2              # PACOMMWCT-FORM-002 (124(a)(3)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # 124(a)(3): block quotations single spaced; the caption, headings, signature (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # PACOMMWCT-FORM-002: at least one inch on all four sides
+indent: 36
+page_number: {align: center, from: 2}   # every page numbered at the foot, the first page counted (exemplars)
+footnote: {size: 12, pitch: 13.8, gap: 7}   # PACOMMWCT-FORM-002, -003: footnotes 12 point, single spaced (1.15 x 12)
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # PACOMMWCT-FORM-002: block quotations indented, single
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The first page (PACOMMWCT-FORM-004, 124(a)(2): three inches clear at the top): the court, the docket number, the
+# caption, the title, counsel; it opens the document (`front`) and the body starts on the next page. Counsel sit a fixed
+# 0.3 in below the title (the model has no space that fills a page; the caption leaves no room for more).
+front:
+  - {text: "In the Commonwealth Court of Pennsylvania", align: center, bold: true, upper: true, above: 144}
+  - {text: "{docket_number}", align: center, bold: true, above: 10.8}
+  - {text: "{proceeding}", align: center, optional: true, above: 10.8}
+  - each: caption
+    above: 10.8
+    between:
+      - {text: "v.", align: center, above: 7.2}
+    blocks:
+      - {text: "{names}", align: center, above: 7.2}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{lower_court}", align: center, optional: true, above: 10.8}
+  - {text: "{brief_title}", align: center, bold: true, above: 7.2}
+  - each: counsel
+    above: 21.6
+    blocks:
+      - {text: "{names}", bold: true, left: 144, above: 4.9}
+      - {text: "{lines}", left: 144, optional: true}
+  - {break: true}
+# PACOMMWCT-CERT-004 (Pa.R.A.P. 123(f), 127(a)): the Public Access Policy certificate in the form of Rule 127's Comment,
+# the filing's own compliance statements, the date and the signature (PACOMMWCT-CERT-003: "/s/" and the typed name),
+# never split; then each other certificate (service) on a page of its own.
+closing:
+  - group:
+      - {text: "Certificate of Compliance", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial System of Pennsylvania that require filing confidential information and documents differently than non-confidential information and documents.", indent: 36, pitch: body}
+      - each: certificates
+        blocks:
+          - {text: "{text}", indent: 36, pitch: body, optional: true}
+      - {text: "{date}", indent: 36, pitch: body, optional: true}
+      - each: signature.signers
+        blocks:
+          - {text: "/s/ {name}", left: 230.4, above: 14}
+          - {text: "{name}", left: 230.4}
+          - {text: "{lines}", left: 230.4, optional: true}
+    above: 21.6
+  - each: certificates
+    blocks:
+      - when: heading
+        blocks:
+          - {break: true}
+          - {text: "{heading}", align: center, bold: true, upper: true, below: 16.8}
+          - {text: "{paragraphs}", indent: 36, pitch: body}
+          - each: recipients
+            blocks:
+              - {text: "{.}", left: 72, above: 14}
+          - {text: "{closing}", indent: 36, pitch: body, optional: true, above: 14}
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ {name}", left: 230.4, above: 14}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", left: 230.4, optional: true}

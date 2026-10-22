@@ -1,0 +1,83 @@
+# Commonwealth Court of Pennsylvania (pacommwct): amicus curiae brief. The whole layout, as data for the shared document
+# model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to the Pennsylvania Rules of Appellate Procedure (210 Pa. Code), ../../rules.md (PACOMMWCT-*); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # PACOMMWCT-FORM-003 (Pa.R.A.P. 124(a)(4)): text no smaller than 14 point
+pitch:
+  body: 32.2              # PACOMMWCT-FORM-002 (124(a)(3)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # 124(a)(3): block quotations single spaced; the cover, headings, tables, signature (1.15 x 14)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # PACOMMWCT-FORM-002: at least one inch on all four sides
+indent: 36
+page_number: {align: center, from: 1, front: lower-roman}   # cover unnumbered, tables roman, the brief from 1
+footnote: {size: 12, pitch: 13.8, gap: 7}   # PACOMMWCT-FORM-002, -003: footnotes 12 point, single spaced (1.15 x 12)
+quote: {left: 72, right: 72, above: 11.2, below: 16.8}   # PACOMMWCT-FORM-002: block quotations indented, single
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, hang: 36, above: 14, below: 11.2}
+  - {italic: true, hang: 36, above: 14, below: 11.2}
+# The cover (PACOMMWCT-FORM-004, 124(a)(2): three inches clear at the top of the first page): the court, the docket
+# number, the caption, the title, counsel two to a row (the exemplar's cover).
+cover:
+  - {text: "In the Commonwealth Court of Pennsylvania", align: center, bold: true, upper: true, above: 144}
+  - {text: "{district}", align: center, bold: true, upper: true, optional: true}
+  - {text: "No. {case_number}", align: center, bold: true, above: 14.4}
+  - each: caption
+    above: 7.2
+    between:
+      - {text: "v.", align: center, above: 7.2}
+    blocks:
+      - {text: "{names}", align: center, above: 7.2}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 10.8}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 14.4}
+  - columns:
+      each: counsel
+      per_row: 2
+      row_gap: 4.9
+      blocks:
+        - {text: "{names}", bold: true}
+        - {text: "{lines}", optional: true}
+    gutter: 21.6
+    above: 10.8
+# PACOMMWCT-CONT-001 (Pa.R.A.P. 2111(a)): the table of contents and the table of authorities, each on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 21, step: 21, above: 12.6}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 11.2}
+# The date and the signature (PACOMMWCT-CERT-003: "/s/" and the typed name, the attorney lines), never split; then on
+# a page of its own the certificate of compliance: the Rule 127 certificate (PACOMMWCT-CERT-002, the form of Rule 127's
+# Comment) and the amicus word limit (PACOMMWCT-LEN-003, Pa.R.A.P. 531(b)(3)), signed; then the proof of service.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "/s/ {signature.signer}", left: 230.4, above: 5.6}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 8.4}
+    above: 21.6
+  - {break: true}
+  - {text: "Certificate of Compliance", align: center, bold: true, upper: true, below: 16.8}
+  - {text: "I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial System of Pennsylvania that require filing confidential information and documents differently than non-confidential information and documents.", indent: 36, pitch: body}
+  - {text: "I certify that this brief complies with the word count limit of Pa.R.A.P. 531(b)(3) (7,000 words during merits briefing).", indent: 36, pitch: body}
+  - group:
+      - {text: "/s/ {signature.signer}", left: 230.4}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 8.4}
+    above: 5.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Proof of Service", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{service.paragraphs}", indent: 36, pitch: body}
+      - each: service.recipients
+        blocks:
+          - {text: "{.}", left: 72, above: 14}
+      - {text: "{service.closing}", indent: 36, pitch: body, optional: true, above: 14}
+      - group:
+          - {text: "/s/ {signature.signer}", left: 230.4}
+          - {text: "{signature.signer}", left: 230.4}
+          - {text: "{signature.lines}", left: 230.4, optional: true, above: 8.4}
+        above: 5.6
