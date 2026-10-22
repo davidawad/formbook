@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The wawb adversary-complaint Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman) at 12 pt (size 24 half points;
+     LBR 9004-1(a): a standard embedded font of 11 or 12 point, double spaced); Body Text in exact 24 pt line boxes, the
+     numbered lines of the pleading paper (typst pitch), single lines in 12 pt boxes, two to a numbered line (typst
+     pitch-single). docx/wawb-adversary-complaint.lua writes every paragraph with its own spacing, indents and
+     alignment, the footer that carries the line numbers, the rules and the bottom notation (LBR 9004-1(b)), and the
+     last section: letter, top margin 1 in, 27 numbered lines, left margin 1.5 in, right 1 in (typst top-margin,
+     lines-per-page, left-margin, right-margin). The section below is the same page, without the furniture.
+     Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="240" indent="720" heading="480" heading-before="0" heading-after="0" quote="480">
+<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="2160" w:header="720" w:footer="380" w:gutter="0"/></w:sectPr>
+</reference>

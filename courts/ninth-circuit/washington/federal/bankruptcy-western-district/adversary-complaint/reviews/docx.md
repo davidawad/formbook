@@ -1,22 +1,19 @@
-# Gate 2 review, docx (LibreOffice PDF), harbor-custom-complaint
+# Gate 2 review, docx (LibreOffice PDF), adversary-complaint
 
-Reviewer: the docx engine agent, 2026-10-15. Method: `pdftoppm -r 60`, every page viewed. Comparison: the typst render of the same sample (`/work/artifacts/wawb/adversary-complaint/typst-harbor-custom-complaint.pdf`), pages 1, 8 and 9 viewed.
+Reviewer: the porting agent (fb-595.68.24), 2026-10-22. Method: `pdftoppm -r 60`, every page of `usage/OUTPUT-adversary-complaint.docx.pdf` and of `usage/OUTPUT-adversary-complaint.typst.pdf` viewed side by side, and pages 1, 2, 5 and 20 of `usage/FILED-EXAMPLE-adversary-complaint.pdf` and page 1 of `FILED-EXAMPLE-adversary-complaint-2.pdf` for the conventions. Cross-engine: XENG-001..003 PASS (9 pages each, 303/303 typst lines break after the same word); the pages below look the same in both engines.
 
-## sample harbor-custom-complaint docx
-
-- PDF: `usage/OUTPUT-harbor-custom-complaint.docx.pdf`, sha256 `d1fda9b2d935dee8b9c676b826c7e53751367f1be202d7c40c26013801c6dae7`
-- DOCX: `usage/OUTPUT-harbor-custom-complaint.docx`, sha256 `fdb35d92ac8bc2d784a1aa234387bbf57bcf5b9e137d35f82694dbf9094d026e`
+## sample adversary-complaint docx
 
 | page | verdict | note |
 |---|---|---|
-| 1 | Pass | counsel top left, judge and chapter top right, court title, caption closed by the rules, adversary number and title at right, bottom notation |
-| 2 | Pass | lead-in and paragraphs 1 to 9 on the numbered lines |
-| 3 | Pass | paragraphs 10 to 16; FACTUAL ALLEGATIONS and the Debtors sub-heading |
-| 4 | Pass | paragraphs 17 to 24; Loans by Sound Equity and the italic sub-heading kept with paragraph 21 |
-| 5 | Pass | paragraphs 25 to 30; blank lines 26 to 28 at the foot because the next heading moves with its paragraph (as the typst render) |
-| 6 | Pass | CLAIMS FOR RELIEF, Count I and II headings with their statutory lines, paragraphs 31 to 39 |
-| 7 | Pass | Count III to V; paragraphs 40 to 48 |
-| 8 | Pass | paragraph 49, PRAYER FOR RELIEF, lettered items A. to J. with the text at 0.9 in |
-| 9 | Pass | date and the two firm signature blocks, kept whole |
+| 1 | Pass | counsel top left from line 1 (single lines, every other one on a number), judge and chapter top right, court title bold and centred, half a line below lines 11 to 13 (see the tier-2 note), caption: debtor block and parties ruled right and below, adversary number and bold title at right; bottom notation (title and page number left, counsel right) |
+| 2 | Pass | lead-in, JURISDICTION, PARTIES, paragraphs 1 to 9, each body line level with its number |
+| 3 | Pass | paragraphs 10 to 15, FACTUAL ALLEGATIONS, "Debtors" |
+| 4 | Pass | paragraphs 16 to 24; the bold italic sub-heading kept with paragraph 21 |
+| 5 | Pass | paragraphs 25 to 28 |
+| 6 | Pass | Count I and the two-line Count II title, their statutory lines ("§§" kept with its number) |
+| 7 | Pass | Counts III to V; line 27 left blank as in typst (paragraph 46 moves on with two lines) |
+| 8 | Pass | PRAYER FOR RELIEF, items A to F lettered, text hanging at 0.9 in |
+| 9 | Pass | items G to J, date and both firm signatures kept whole |
 
-Open: none in tier 1. Tier 2 pagination differs from typst (LibreOffice line breaks); recorded in the README Engines section, not a defect.
+Open: none in tier 1. Tier 2, ACCEPTED: page 1 runs single lines at 12 pt (two to a numbered line), as both exemplars do; the spacing that returns the cover to the numbered lines is counted from the frontmatter items, so a wrapped counsel or caption line (the sample's counsel note) leaves the court title and caption half a line between numbers in both engines.
