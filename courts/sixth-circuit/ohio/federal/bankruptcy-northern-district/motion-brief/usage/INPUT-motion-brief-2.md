@@ -22,8 +22,10 @@ signature:
   signer-name-printed: "STEVEN J. HEIMBERGER (0084618)"
   lines:
     - "Roderick Linton Belfance, LLP"
-    - "50 S. Main Street, 10th Floor, Akron, Ohio 44308"
-    - "(330) 434-3000, telephone; (330) 434-9220, fax"
+    - "50 S. Main Street, 10th Floor"
+    - "Akron, Ohio 44308"
+    - "(330) 434-3000, telephone"
+    - "(330) 434-9220, fax"
     - "sheimberger@rlbllp.com"
     - "*Attorney for Defendant, Templar Companies, LLC*"
 service:

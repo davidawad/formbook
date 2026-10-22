@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The ohnb motion's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; the N.D. Ohio rules name no face,
+     LBR 9013-2(a) sets at least 12 point) at 12 pt (size 24 half points); Body Text in exact 24 pt line boxes (480
+     twips, typst pitch-body: double spacing, as both filed motions) with a half-inch first-line indent (typst
+     para-indent); single lines in 13.8 pt boxes (276 twips, typst pitch-single). Added here: "Body Text Keep" (the last
+     chunk of a part, kept whole with its signature block; typst: one unbreakable block). docx/ohnb-motion-brief.lua
+     writes the court lines, the caption table, the title, the headings, the signature blocks, the notice of motion and
+     the certificate of service, the footer (the centred page number) and the section (letter, 1 in margins, the footer
+     0.5 in from the edge). Twips: 20 x pt. pandoc-from: CommonMark with smart punctuation, as typst's cmarker reads
+     the body. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" footer="720" pandoc-from="commonmark+smart+yaml_metadata_block">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>

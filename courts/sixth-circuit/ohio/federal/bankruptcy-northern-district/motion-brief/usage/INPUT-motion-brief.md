@@ -1,6 +1,4 @@
 ---
-word:
-  justify: false
 # Complete transcription of FILED-EXAMPLE-motion-brief.pdf (Harrison v. Meddings, A.P. No. 21-3021, ECF Doc. 12,
 # 7 pages): the motion, its signature, the memorandum, its signature and the certificate of service, every word in the
 # filer's order and spelling. Template-driven, not transcribed as filed: the caption labels ("Case No.", "Chapter",
@@ -49,11 +47,13 @@ service:
     - "201 Superior Av. E Ste. 401"
     - "Cleveland, OH  41114"
     - "(Served via ECF)"
+    - ""
     - "William Swope"
     - "Chapter 7 Trustee"
     - "610 Tiffin Avenue"
     - "Findlay, OH 45840-3336"
     - "(Served via ECF)"
+    - ""
     - "Charles M. Elsea"
     - "Stebelton Snider LPA"
     - "109 N. Broad Street, Ste. 200"

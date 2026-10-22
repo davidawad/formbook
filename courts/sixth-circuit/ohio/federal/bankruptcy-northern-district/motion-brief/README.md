@@ -1,6 +1,6 @@
 # N.D. Ohio Bankruptcy Court: motion with memorandum
 
-Status: template built, sample rendered, overlay run, every page reviewed (Gate 2 by eye). Engines: typst only; latex and docx not built.
+Status: template built, both samples rendered on typst and docx, overlay run, every page reviewed on both engines (Gate 2 by eye, 2026-10-22). Engines: typst and docx on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; XENG gated in `eval.yaml`); latex not built.
 
 ## Governing rules (verified 2026-10-14 unless marked)
 
@@ -15,7 +15,7 @@ Status: template built, sample rendered, overlay run, every page reviewed (Gate 
 | Notice that objections must be filed within 14 days, and that the court may grant the relief without further notice | M | LBR 9013-1(a)(2) (same PDF) | 2026-10-14 | "NOTICE OF MOTION" paragraph, generated |
 | Response and reply periods | M | LBR 9013-1(b), (c) (same PDF) | 2026-10-14 | Not generated (the response is the opponent's paper) |
 | Certificate of service: identifies the document, date and method of service, each entity served, and refers to the notice | M | LBR 9013-3(1)-(4) (same PDF) | 2026-10-14 | "CERTIFICATE OF SERVICE" generated from the `service` frontmatter |
-| Margins, double spacing, heading style | C | No N.D. Ohio rule found; chosen to match the filed exemplars | - | 1 in margins; 24 pt line pitch; centred bold caps headings |
+| Margins, double spacing, heading style | C | No N.D. Ohio rule found; chosen to match the filed exemplars | - | 1 in margins; Times New Roman 12 pt; 24 pt body pitch, 13.8 pt single lines (court lines, caption, title, signatures, service list); centred bold caps headings on the body pitch |
 
 Not verified in this session: FRBP 9013 (form of a motion) and FRBP 7012(b) text. The 14-day period is the court's own (LBR 9013-1(a)); LBR 9013-1(b) and (c) carry the FRBP 9006(f) cross-reference, whose text was not fetched.
 
@@ -26,27 +26,40 @@ Not verified in this session: FRBP 9013 (form of a motion) and FRBP 7012(b) text
 - `usage/`: two filed motions with memoranda: Templar (Swearingen v. Templar, adversary 21-6017) and Meddings (Harrison v. Meddings, A.P. 21-3021). Sources in `usage/SOURCE.md`.
 - `usage/INPUT-motion-brief.md`: Meddings' motion, memorandum and certificate, transcribed in full from `FILED-EXAMPLE-motion-brief.pdf` (7 pages; calibration set, `data/calibration-set.json`).
 - `usage/INPUT-motion-brief-2.md`: Templar's motion and memorandum, transcribed in full from `FILED-EXAMPLE-motion-brief-2.pdf` (5 pages in the exemplar).
-- `usage/OVERLAY-motion-brief.pdf` and `.txt`: overlay against the Templar exemplar (passed explicitly; the tool's default would pick the Meddings file alphabetically).
+- `usage/OUTPUT-<id>.typst.pdf`, `.docx`, `.docx.pdf`: our renders (motion-brief 7 pages, motion-brief-2 5 pages, the same lines and pages in both engines).
+- `docx/reference.xml`: the Word styles (`base="xengine"`, Times New Roman 12 pt, Body Text on 480 twips with a 720 twip first-line indent, single lines 276 twips; "Body Text Keep" for the last chunk of a part).
+- `docx/ohnb-motion-brief.lua`: the docx filter (court lines, caption table, title, headings, the two parts and their signatures, notice, certificate, the footer and the section through `$FORMBOOK_FOOTERS` and `$FORMBOOK_FINAL`).
+- `eval.yaml`: `params.cross_engine: gate`.
+- Overlays: `just overlay <this folder>` writes them to the gitignored `.overlay/` (not committed).
 
 Build and check:
 
 ```sh
-export PATH="$HOME/tb/bin:$PATH"
 cd /work/repo
 sh tools/render.sh courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/motion-brief usage/INPUT-motion-brief.md
+sh tools/check.sh courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/motion-brief --engine typst
+sh tools/check.sh courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/motion-brief --engine docx
 sh tools/overlay.sh courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/motion-brief motion-brief courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/motion-brief/usage/FILED-EXAMPLE-motion-brief-2.pdf
 ```
 
-## Gate 2 review (by eye, every page of the current PDF)
+## Gate 2 review (by eye, every page of the current PDFs)
 
-Reviewed 2026-10-14 against the Templar exemplar.
+Reviewed 2026-10-22: every page of `OUTPUT-motion-brief.typst.pdf` (7) and `OUTPUT-motion-brief-2.typst.pdf` (5) and of their LibreOffice PDFs `.docx.pdf` rendered at 60 dpi side by side and viewed; page 1 compared with page 1 of both filed motions. The two engines set every line and page alike (XENG-001..003 gated: 177/177 and 117/117 lines), so one table serves both.
 
-| Page | Finding | Status |
-|---|---|---|
-| 1 | Caption and the motion's opening paragraphs; WHEREFORE at the foot. The signature block falls to page 2, where the exemplar also puts it. | ACCEPTED (matches the exemplar's break) |
-| 2 | Signature block, then the memorandum heading (bold, centred, caps; heading size fixed to body size) and paragraphs 1 to 5. | FIXED |
-| 3 | Paragraphs 5 to 10, the WHEREFORE for the memorandum; italic case names and "Id." render as italic. | PASS |
-| 4 | Second signature block, NOTICE OF MOTION (LBR 9013-1(a), generated; the exemplar has no notice), certificate of service with the service list. | PASS (the notice is an addition the exemplar lacks; see Known gaps) |
+| Sample | Page | Finding | Status |
+|---|---|---|---|
+| motion-brief | 1 | Court lines centred bold capitals with the division; caption (debtor, parties, ")" column, case, chapter, judge, adversary numbers), MOTION TO DISMISS; the motion's first paragraph. The WHEREFORE paragraph and the signature do not fit below it and move to page 2 together, leaving the foot of page 1 empty. | ACCEPTED (the last paragraph is kept with the signature) |
+| motion-brief | 2 | WHEREFORE, the signature block single-spaced 3.25 in from the margin, MEMORANDUM IN SUPPORT (a blank single line above), the memorandum. | PASS |
+| motion-brief | 3-5 | Memorandum paragraphs, double spaced with the 0.5 in indent; italic case names. | PASS |
+| motion-brief | 6 | The memorandum's WHEREFORE kept with its signature; NOTICE OF MOTION (LBR 9013-1(a)(2)). The certificate does not fit below it and opens page 7. | ACCEPTED (the certificate is kept on one page) |
+| motion-brief | 7 | CERTIFICATE OF SERVICE (LBR 9013-3): the sentence, the three entities single-spaced with a blank line between them, the "s/" signature. | PASS |
+| motion-brief-2 | 1 | Caption without a chapter line (none in the frontmatter); the title wraps over three centred bold lines; the motion's first two paragraphs. | PASS |
+| motion-brief-2 | 2 | WHEREFORE and the signature (the attorney line wraps after "Companies,", as in the filed motion); the memorandum heading over three double-spaced lines; paragraphs 1 to 5. | ACCEPTED (a long level-1 heading is set on the body pitch) |
+| motion-brief-2 | 3 | Paragraphs 5 to 9; "Id." and case names italic. | PASS |
+| motion-brief-2 | 4 | Paragraph 10, the closing paragraph kept with the signature, NOTICE OF MOTION. | PASS |
+| motion-brief-2 | 5 | CERTIFICATE OF SERVICE and its signature. | PASS |
+
+Open tier-2 rows: none. The .docx files were opened in LibreOffice only (no repair prompt), not in Word.
 
 ## Overlay
 
@@ -55,20 +68,17 @@ Reviewed 2026-10-14 against the Templar exemplar.
 ## Known gaps
 
 - The Templar exemplar has no LBR 9013-1(a) notice and certificate wording; our template adds the notice. This is a tier-1 rule as the local rule reads, so the template follows the rule, not the exemplar.
-- Exemplar length: our render (4 pages) is shorter than the 8 to 14 page target. The Templar motion is 5 pages in the filed form; the Meddings motion (7 pages) is in `usage/` but not transcribed.
+- Length: our renders are 7 pages (Meddings) and 5 pages (Templar), as filed.
 - Table of contents and table of authorities: not generated. LBR 9013-2(a) requires a table of contents only when leave to exceed 20 pages is granted; the sample is well under 20 pages.
 - Footnote size (12 pt under LBR 9013-2(a)) is set by the template but no footnote is in the sample.
-- LaTeX and docx engines are not built.
+- LaTeX is not built for this doc type.
 - The sample's CourtListener docket page for the Templar adversary was not recorded (see `usage/SOURCE.md`).
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` makes `docx/reference.docx` (EB Garamond 12 pt, letter, 1 in margins, body double spacing at an exact 24.6 pt pitch, 0.5 in first-line indent, centered bold caps headings, a centered PAGE footer); `render.sh` and `ohnb-motion-brief.lua` build the caption table, the title, the motion, the signature blocks after the motion and the memorandum, and the NOTICE OF MOTION and CERTIFICATE OF SERVICE as in the typst template. Build: `sh docx/build-reference.sh "$PWD/docx/reference.docx"` from the court folder.
+docx (`docx/`): `docx/reference.xml` (fb render builds the styles from the cross-engine recipe, `base="xengine"`, in the typst face Times New Roman; was `build-reference.sh`, `render.sh` and a committed `reference.docx` in EB Garamond, fb-595.68.30) and `docx/ohnb-motion-brief.lua` on `lib/docx/xengine.lua`: every paragraph in exact line boxes of the typst pitches (480 and 276 twips), the caption a borderless fixed table of 5040, 432 and 3888 twips (typst 3.5, 0.3 and 2.7 in), the signatures 4680 twips (3.25 in) from the margin, the notice and the certificate each kept on one page (keep with next through the block, as typst's unbreakable blocks), the footer's centred page number 720 twips from the bottom edge (typst footer-foot 0.5 in), the typst break rules on every run (no break inside ")(", a break after a slash before a letter, a doubled section sign bound to its number).
 
-- Matches typst, by measurement: page size (612 x 792 pt) and margins (72 pt); font family and size (EB Garamond 12 pt, the same three faces embedded in the typst PDF); body line pitch (24.6 pt on the typst render, exact in the docx); the LBR 9013-2(a) 12 pt size applies to the docx body and the footer.
-- Differs from typst: heading, signature and certificate spacing are set in twips by eye from the typst render, not measured line by line; no page count is measured (the typst PDF is 4 pages; the docx has not been paginated); the NOTICE and certificate blocks are kept together only by keep-with-next, not by the block's unbreakable setting in typst; footnotes (none in the sample) are 12 pt in the docx and the typst template sets no footnote size.
+- `sh tools/check.sh <this folder> --engine typst` and `--engine docx`: every gate green on both samples, XENG-001..003 PASS (7/7 and 5/5 pages, 177/177 and 117/117 lines).
+- `tools/check-selftest.sh` takes a court root with `court.json` and does not run on this doc-type folder.
 - Not generated by either engine: TOC and TOA (not required below 20 pages under LBR 9013-2(a)); pleading line numbers.
-- BLOCKED, docx.pdf and page review: `soffice` is not installed on this box, so `usage/OUTPUT-motion-brief.docx.pdf` does not exist. The docx checks cannot run; no page was viewed.
-- BLOCKED, Word and LibreOffice open check: not done (no repair-prompt check was run).
-- Zip and XML: `OUTPUT-motion-brief.docx` passes the renderer's zip and well-formed-XML checks and has no duplicate entries.
-- Word counts: the docx and the typst PDF carry the same words (996 and 1006 by `pandoc -t plain` and `pdftotext`; the difference is the page numbers and caption-cell reading order, not checked word by word).
+- The .docx files were opened in LibreOffice only, not in Word.
