@@ -6,8 +6,8 @@ Doc type: **motion-brief**: the memorandum of law in support of a motion in the 
 |---|---|
 | exemplar | yes, one filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: cover and caption, table of contents and table of authorities (generated), Preliminary Statement, Legal Standards, Argument A and B with footnotes 1 and 2, Conclusion, signature blocks, certification of service. Argument C and D are not transcribed (see Known gaps). |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages (cover, TOC i, TOA ii, body 1 to 6, signature 7, certification 8), typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Italic and Bold, embedded), no typst warnings |
-| typeface | no face named by the rules; EB Garamond kept (vendored, embedded). See Known gaps 4 |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 13 pages (cover, TOC i, TOA ii and iii, body 1 to 9), typst 0.15.0, vendored Times New Roman only (embedded), no typst warnings; docx: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`, the same 13 pages, every line as typst |
+| typeface | no face named by the rules; Times New Roman, the house face (vendored, embedded). See Known gaps 4 |
 | overlay | ok: `usage/OVERLAY-whitfield-motion-brief.pdf` and `OVERLAY-whitfield-motion-brief.txt` (pairs by text; exemplar PDF `usage/FILED-EXAMPLE-motion-brief.pdf` fetched from the SOURCE.md URL on 2026-10-15) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi to PNG and viewed on 2026-10-15) |
 
@@ -29,9 +29,9 @@ Primary sources, fetched 2026-10-14:
 
 | ID | Rule | Requirement | Where it is in the template |
 |---|---|---|---|
-| CTD-FORM-001 | L. Civ. R. 7(a)(5) | "memoranda shall be double-spaced (except headings, footnotes, and block quotes)". | `line-pitch = 27.6pt`, paragraphs `spacing: body-leading` so the gap between paragraphs is a full pitch. Headings, footnotes and block quotes are single spaced. |
-| CTD-FORM-002 | L. Civ. R. 7(a)(5) | "text shall appear in at least 12 point font; footnotes shall appear in at least 10 point font." | `type-size = 12pt`; `footnote-size = 10pt` (`show footnote.entry`). Headings are pinned to `type-size` (typst's default heading scale is larger). |
-| CTD-FORM-003 | EFPP I.F.2 | Fonts embedded in the PDF; base-14 fonts or legally embeddable fonts. | EB Garamond (vendored, OFL), embedded. See Known gaps. |
+| CTD-FORM-001 | L. Civ. R. 7(a)(5) | "memoranda shall be double-spaced (except headings, footnotes, and block quotes)". | `pitch-body = 27.6pt` (lib/typst/xengine.typ line boxes), no extra space between paragraphs. Headings, footnotes and block quotes are single spaced (`pitch-single = 13.8pt`, `pitch-note = 11.5pt`). |
+| CTD-FORM-002 | L. Civ. R. 7(a)(5) | "text shall appear in at least 12 point font; footnotes shall appear in at least 10 point font." | `type-size = 12pt`; `note-size = 10pt` (`show footnote.entry`). Headings are pinned to `type-size` (typst's default heading scale is larger). |
+| CTD-FORM-003 | EFPP I.F.2 | Fonts embedded in the PDF; base-14 fonts or legally embeddable fonts. | Times New Roman (vendored), embedded on both engines. See Known gaps. |
 | CTD-FORM-004 | L. Civ. R. 10 | "margins of at least 1"". | `margin = 1in` on all sides. |
 | CTD-FORM-005 | L. Civ. R. 7(a)(5) | Page limit: "no more than forty (40) 8 1/2" by 11" printed pages, exclusive of pages containing a table of contents, table of statutes, rules or the like." | Not enforced: the template does not count pages (see Known gaps). |
 | CTD-FIRST-001 | Fed. R. Civ. P. 10(a) | Caption with court name, title, file number and designation. | `court`, `caption` (every party), `brief_title`, `case_number`. |
@@ -47,10 +47,10 @@ Primary sources, fetched 2026-10-14:
 
 - Cover (page 1, no number): court title, caption (left party column with indented designations, right column with case number, date and title in bold caps), optional oral-argument legend in the lower margin.
 - Front matter: table of contents (roman i), table of authorities (roman ii on). Body from arabic 1, page numbers centred in the bottom margin.
-- Body: double spaced (27.6 pt pitch), first-line indent 0.5 in, paragraphs separated by a full pitch. Level 1 headings centred bold caps; level 2 "A.", "B." with hanging labels; level 3 "1.", level 4 "a.". Headings single spaced.
+- Body: double spaced (27.6 pt pitch), first-line indent 0.5 in, no extra space between paragraphs. Level 1 headings centred bold caps; level 2 "A.", "B." with hanging labels; level 3 "1.", level 4 "a.". Headings single spaced, a blank single line above.
 - Footnotes 10 pt single spaced; block quotations single spaced, indented 0.5 in both sides.
-- Signature block unbreakable, "Dated:" left, "Respectfully submitted," and each signer right; the block moves to a new page when the conclusion ends near the foot of a page (memorandum page 7, PDF page 10).
-- Certification: a level-1 heading not in the table of contents (the exemplar's is not), flush text, signature block right-aligned.
+- Signature block: "Dated:" at the margin and "Respectfully submitted," in the signature column on one line, then each signer; kept in one block with the conclusion (from the last level 1 heading), so a sign-off never stands alone.
+- Certification: a centred bold title not in the table of contents (the exemplar's is not), the text on the body pitch, the signer in the signature column; one block.
 
 ## Markdown contract (for samples)
 
@@ -64,55 +64,41 @@ Primary sources, fetched 2026-10-14:
 ## Known gaps and open choices
 
 1. **One exemplar.** The eval-loop tier-2 rule asks for two or three filers, each a different filer. The brief asks for one exemplar per doc type; the other D. Conn. filings checked (Succow v. Bondi, Doc. 57-1, a federal-defendant memorandum; Schuster v. Liberty Bank, Doc. 18-1, a partial motion) are in `usage/SOURCE.md` and were not saved. Tier 2 is judged against the rules and this filing.
-2. **Sample is partial.** Argument C (pre-recorded calls) and D (standing for injunctive relief), the last pages of the memorandum, are not transcribed, to keep the render at 11 pages. The table of authorities lists only authorities cited in the transcribed text, so it is shorter than the exemplar's. The overlay pairs render pages 4 to 9 (body 1 to 6) with exemplar pages 7 to 12, and render pages 10 and 11 (signature and certification) with exemplar page 19; the pairing is coarse.
+2. **Sample is partial.** Argument C (pre-recorded calls) and D (standing for injunctive relief), the last pages of the memorandum, are not transcribed, to keep the render short (13 pages). The table of authorities lists only authorities cited in the transcribed text, so it is shorter than the exemplar's. The overlay pairing with the exemplar is coarse.
 3. **Page limit not checked.** L. Civ. R. 7(a)(5) allows 40 pages excluding the TOC and TOA. The template does not count pages; the author must check before filing.
-4. **Font.** No rule text read for this doc type names a face. EFPP I.F.2 (fetched 2026-10-15) lists Times New Roman among the base-14 fonts only as fonts that need not be embedded. Local Rule 7 and 10 name none in the text checked (the 9.4.26 rules PDF cited above returned 404 on 2026-10-15; re-verify against the live rules). Per `docs/FONTS.md`, a court that names no face keeps EB Garamond, so the template keeps it (embedded). Liberation Serif, the Times-metric substitute, is vendored and is not used because no rule calls for it. Judge-specific orders are separate: the Electronic Filing Order of Judge Vanessa L. Bryant (revised 1/17/2018, fetched 2026-10-15, text in the order's own PDF) says "All documents must be typewritten using Arial bold 12 point font, double spaced" for documents in cases before her. That is one judge's order, not a court rule. Arial is substituted by Liberation Sans (`docs/FONTS.md`), but the template does not switch per judge: a memorandum filed before Judge Bryant must be set in Arial by hand, and that is a filer's choice to confirm with the assigned judge's order.
+4. **Font.** No rule text read for this doc type names a face. EFPP I.F.2 (fetched 2026-10-15) lists Times New Roman among the base-14 fonts only as fonts that need not be embedded. Local Rule 7 and 10 name none in the text checked (the 9.4.26 rules PDF cited above returned 404 on 2026-10-15; re-verify against the live rules). The template sets Times New Roman, the house standard and the face of every exemplar (vendored, embedded), on both engines. Judge-specific orders are separate: the Electronic Filing Order of Judge Vanessa L. Bryant (revised 1/17/2018, fetched 2026-10-15, text in the order's own PDF) says "All documents must be typewritten using Arial bold 12 point font, double spaced" for documents in cases before her. That is one judge's order, not a court rule. Arial is substituted by Liberation Sans (`docs/FONTS.md`), but the template does not switch per judge: a memorandum filed before Judge Bryant must be set in Arial by hand, and that is a filer's choice to confirm with the assigned judge's order.
 5. **Oral argument legend.** The rule places it on the motion; the exemplar memorandum has none. The template prints it only when `oral_argument` is set, so the sample does not show it.
 6. **Date in caption.** The exemplar's caption has no date; L. Civ. R. 10 requires one. The template follows the rule.
 7. **TOA coverage depends on the author.** The TOA is generated from `toa:` links only. An authority cited without a link is silently absent. A check that every registry key is used, and that every citation has a link, belongs in a future gate; none exists now.
-8. **Signature page.** The unbreakable signature block moves to its own page when the conclusion ends near the foot of a page (memorandum page 7, PDF page 10). Acceptable, but a clerk would see a page with only a signature block.
-9. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither, and the brief forbids touching `tools/`. Render, overlay and the page review are the Gate 2 equivalent.
+8. **Signature page.** The conclusion and the signature block are one unbreakable block, so a conclusion that ends near the foot of a page moves on with the signatures (body page 7 is half free in the sample). Acceptable.
+9. **Checks.** `sh tools/check.sh <folder> --engine typst|docx` runs on this folder (court.json and rules.md at the court root); both engines pass every gate.
 10. **Footnote 1 link.** Footnote 1 carries a `toa:` link (Barton v. Delfgauw, 47 C.F.R. § 64.1200). The TOA lists its page (4) correctly in the render.
 11. **Typographical errors kept.** "SOLICITION" (heading), "Comunity" and similar, and "Calls" in the transcribed text are as filed.
 
-## Review of the rendered pages (11 of 11, rendered at 60 dpi and viewed)
+## Review of the rendered pages (13 of 13 on both engines, rendered at 40 dpi, the cover, tables, body pages 4 and 5 and the last three pages at 70 dpi, viewed on 2026-10-22 against `usage/FILED-EXAMPLE-motion-brief.pdf`)
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 (cover, no number) | Court title, caption with designations indented, case number, date and bold title | OK. No oral-argument legend (none set). |
-| 2 (TOC, i) | Table of contents: five entries with dot leaders, page column "Page", the long Argument A heading hanging under its label | OK. Page numbers match the body (1, 2, 3, 3, 5, 6). |
-| 3 (TOA, ii) | Cases, Statutes, Federal Rules, Regulations; page numbers right; italic case names; "passim" not needed | OK. Entries wrap under the title with a hanging indent. |
-| 4 (body 1) | Introduction paragraph (indented), PRELIMINARY STATEMENT, the list 1) to 3) | OK. Heading size matches body text after the fix. |
-| 5 (body 2) | List item 4); LEGAL STANDARDS; the citations with links and italic *Id.* | OK. |
-| 6 (body 3) | End of Legal Standards; ARGUMENT; heading A (three lines, bold caps); opening paragraph of A | OK. Heading at the top of the page is kept with the paragraph after it. |
-| 7 (body 4) | Continuation of A; block quotation (single spaced, indented); footnote 1 at the foot of the page | OK. Footnote 10 pt. |
-| 8 (body 5) | End of A with footnote 2; heading B (two lines); the start of B | OK. |
-| 9 (body 6) | Rest of B; CONCLUSION | OK. |
-| 10 (signature) | Dated; "Respectfully submitted"; "BY: /s/" and the name with Fed. Bar No.; second signer | OK. The block starts a new page (see Known gaps, item 8). |
-| 11 (certification, page 8 of the memorandum numbering) | CERTIFICATION OF SERVICE; text; right-aligned /s/ signature | OK. |
+| 1 (cover, no number) | Court title, caption ("v." between blank lines, designations indented), case number, date and bold title | OK. No oral-argument legend (none set). |
+| 2 (TOC, i) | TABLE OF CONTENTS, "Page"; five entries with dot leaders; Argument A and B hanging under their labels | OK. Page numbers match the body (1, 2, 4, 4, 6, 8) on both engines. |
+| 3 (TOA, ii) | TABLE OF AUTHORITIES, "Page(s)"; Cases, italic names, hanging second lines | OK |
+| 4 (TOA, iii) | Last case; Statutes, Federal Rules, Regulations | OK |
+| 5 (body 1) | Opening paragraph, PRELIMINARY STATEMENT, items 1) and 2) | OK |
+| 6 (body 2) | Items 3) and 4); LEGAL STANDARDS | OK |
+| 7 (body 3) | Rest of Legal Standards | OK. Ends four lines short: ARGUMENT, heading A (four lines) and two lines of its paragraph do not fit and move on together. |
+| 8 (body 4) | ARGUMENT; heading A; footnote 1 (10 pt) | OK |
+| 9 (body 5) | Rest of A, the Gillam block quotation (single spaced, indented both sides); footnote 2 | OK |
+| 10 (body 6) | Heading B; Worsham and Meyer | OK |
+| 11 (body 7) | Griffin and Dobronski; "For these reasons" | OK. Half a page free: the conclusion is kept with the signature block. |
+| 12 (body 8) | CONCLUSION; "Dated" and "Respectfully submitted," on one line; both signers | OK |
+| 13 (body 9) | CERTIFICATION OF SERVICE; text; "/s/" and the signer's lines in the signature column | OK. Heading, text and signer kept together. |
+
+ACCEPTED (tier 3): the exemplar underlines its title and its level 1 headings, puts "PRELIMINARY STATEMENT" etc. in the contents with dot leaders but without labels for the level 1 entries, and has no date in the caption (L. Civ. R. 10 requires one); the template keeps bold headings and the date.
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion-brief.lua` writes the cover, the table of contents, the table of authorities, the body (numbered headings, numbered lists, footnotes, block quotations), the signature block and the certification; `docx/render.sh` (run by `tools/render-docx.sh`) makes two passes: the first is converted to PDF, the printed page of each heading and of each authority is found in its text (`pagemap.awk`), and the second pass writes those page numbers into the table of contents and the table of authorities. Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8, `pdffonts`: EBGaramond Regular, Italic and Bold, embedded), 11 pages, the same count as the typst render (cover, TOC i, TOA ii, body 1 to 8).
+Both engines run on the shared cross-engine layout model (fb-595.68.25; docs/EVAL-LOOP.md, "Cross-engine gate"): `typst/ctd-motion-brief.typ` on `lib/typst/xengine.typ` (pitches, explicit block spacing, `listing-row` for the contents and authorities), `docx/motion-brief.lua` on `lib/docx/xengine.lua`, with the same numbers in twips. Times New Roman on both (the docx had named EB Garamond): 12 pt text in 27.6 pt line boxes (L. Civ. R. 7(a)(5): double-spaced), headings, quotations, table rows and signature lines in 13.8 pt boxes (single-spaced, as the rule allows), footnotes 10 pt in 11.5 pt boxes 4 pt apart; a blank single line above a heading, a quotation, a table row or group; a blank body line around the signature block and the certification; the page number centred 0.5 in above the bottom edge.
 
-- Matches the typst output: US Letter; 1 in margins; EB Garamond 12 pt; cover with the court, the caption table (party column ruled right and bottom, case number, date and the title in bold capitals), no page number; roman pages for the contents and the authorities, arabic from 1 in the body; headings level 1 centred and bold capitals, level 2 to 4 with the labels A., 1., a. hanging; body double spaced (27.6 pt pitch, measured on the PDF) with a 0.5 in first-line indent; block quotations single spaced and indented; footnotes at 10 pt; lists numbered 1) and 2); signature block with "BY: /s/" for each signer; certification of service on its own block, flush, with the signer at right; "passim" for an authority on seven or more pages.
-- Differs from typst: the TOC and TOA are written as text (not as Word TOC and TOA fields), with the page numbers of the LibreOffice PDF; Word may paginate a line or two differently and so move a number, and the page numbers are not updated when the document is edited in Word. The TOA page of an authority is found by searching the text of its first 40 characters on each body page (a short form such as "12(b)(6)" is found wherever it appears on a page, which is the same authority in this sample); typst counts the link itself. Body pages 1 to 4 break where typst's do; from body page 5 the docx runs about two lines behind typst (the Gillam quotation ends on body page 5 in the docx, on page 4 in typst). Text sits lower in exact-spaced lines than in typst (see the complaint's Engines note). The oral-argument legend is written in the cover footer (CTD-FIRST-003); the sample has none, so the legend path was not exercised.
-- Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML; every style it uses is defined in `reference.docx`.
+**docx** (`docx/`): `docx/reference.xml` (`base="xengine"`, `{font}`, `pandoc-from` CommonMark with smart punctuation and footnotes, as cmarker reads the body) holds the styles; fb render builds the reference document from it. `docx/motion-brief.lua` writes the cover, the tables, the headings, the lists, the quotations, the signature block and the certification, and the sections: the cover unnumbered (fb render's `rIdFtrNone`, or a legend footer when `oral_argument` is set), the tables in lower roman, the body from 1 (`$FORMBOOK_FINAL`, the page-number footer in `$FORMBOOK_FOOTERS`). The tables' page numbers come from needles (`$FORMBOOK_NEEDLES`: the table titles, the body's first words, each heading, each `toa:` citation, in document order), which replace `docx/render.sh` and `pagemap.awk`. No shell script.
 
-Gate 2 review of the docx PDF (11 of 11 pages rendered at 60 dpi and viewed on 2026-10-15; typst pages viewed alongside):
-
-| Page | What it is | Finding |
-|---|---|---|
-| 1 (cover) | Court, caption table, title in capitals; no page number | OK |
-| 2 (i) | TABLE OF CONTENTS: level 1 entries, A. and B. with wrapped titles, page numbers from the PDF | OK |
-| 3 (ii) | TABLE OF AUTHORITIES on one page: Cases, Statutes, Federal Rules, Regulations | OK. Long entries wrap before the page numbers. |
-| 4 (1) | Opening paragraph; PRELIMINARY STATEMENT; items 1) to 3) | OK |
-| 5 (2) | Item 4); LEGAL STANDARDS | OK |
-| 6 (3) | Quotation (Iqbal); Dismissal under 12(b)(1); ARGUMENT; heading A. | OK |
-| 7 (4) | Text of A; the Gillam block quotation; footnote 1 | OK |
-| 8 (5) | Rest of A; footnote 2; heading B. | OK |
-| 9 (6) | Rest of B; Griffin and Dobronski; "For these reasons" | OK |
-| 10 (7) | CONCLUSION; "Dated"; Respectfully submitted; both signers | OK |
-| 11 (8) | CERTIFICATION OF SERVICE; text; signer at right | OK. Heading, text and signer kept together. |
-
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and a doc-type folder has neither (the court folder has `court.json` but no `checks.yaml` or `rules.md` yet), so the gates did not run and `usage/.check-docx.txt` was not written. Gate 0 was checked by hand: every word of the sample is in the PDF except the `--` dash spelling and two words split by a line-end hyphen.
+`fb diff --engines`: 13 pages each, 0 page ends differ, 261/261 typst lines identical; the contents and authorities pages have the same text and page numbers. `eval.yaml` sets `params.cross_engine: gate`. Not verified in Word (only LibreOffice); Word may paginate a line differently, and the table page numbers are text, not fields.
