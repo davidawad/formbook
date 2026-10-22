@@ -84,7 +84,7 @@ authorities:
       - {cite: "Alice Nasar Hanan, CHILD USA, Revival Laws for Child Sex Abuse (June 6, 2024)", find: "Alice Nasar Hanan"}
       - {cite: "Amy E. Bonomi et al., Health Care Utilization and Costs Associated with Childhood Abuse, 23 J. Gen. Internal Med. 294, 298 (2008)", find: "Bonomi"}
       - {cite: "Andrew Ortiz, Child USA, Delayed Disclosure: Child USA 2024 Fact Sheet (2024)", find: "Ortiz"}
-      - {cite: "54 C.J.S. Limitations of Actions § 132", find: "54 C.J.S."}
+      - {cite: "54 C.J.S. Limitations of Actions § 132", find: "C.J.S."}
       - {cite: "Dafna Tener & Sharon B. Murphy, Adult Disclosure of Child Sexual Abuse: A Literature Review, 16 Trauma, Violence, & Abuse 395", find: "Tener"}
       - {cite: "Darkness to Light, The Issue of Child Sexual Abuse (2023)", find: "Darkness to Light"}
       - {cite: "Delphine Collin-Vézina et al., A Preliminary Mapping of Individual, Relational, and Social Factors that Impede Disclosure of Childhood Sexual Abuse, 43 Child Abuse & Neglect 123 (2015)", find: "Collin-Vézina"}
