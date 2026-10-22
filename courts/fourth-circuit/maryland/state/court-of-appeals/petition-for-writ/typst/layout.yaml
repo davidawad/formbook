@@ -1,0 +1,79 @@
+# Court of Appeals of Maryland (Supreme Court of Maryland, md): petition for an extraordinary writ. The whole layout, as
+# data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to Md. Rules 1-301(c), 8-112 and 8-504 (../rules.md, MD-*); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # MD-FORM-004: not less than 13 points for proportionally spaced fonts, footnotes too
+pitch:
+  body: 29.9              # MD-FORM-002: double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # MD-FORM-002: headings, indented quotations and footnotes single spaced (1.15 x 13 pt)
+margin: {top: 108, bottom: 72, left: 108, right: 72}   # MD-FORM-001: top and left 1 1/2 in, bottom and right 1 in
+indent: 36
+page_number: {align: center, front: lower-roman}   # MD-FORM-005, MD-CONV-002: the cover unnumbered, the table i, the body 1
+footnote: {size: 13, gap: 7}            # MD-FORM-004, -002: 13 points, single spaced
+quote: {left: 36, right: 36, above: 13, below: 13}   # MD-FORM-002: indented quotations, single spaced
+heading:
+  - {align: center, bold: true, above: 15.6, below: 13}
+  - {bold: true, above: 15.6, below: 10.4}
+  - {bold: true, italic: true, above: 14.3, below: 7.8}
+# The cover (MD-CONV-001, MD-CONV-004): the Court, the docket number and term, the parties (the designation indented
+# under the names, "v." between two sides), the title and counsel.
+cover:
+  - {text: "IN THE", align: center, bold: true}
+  - {text: "SUPREME COURT OF MARYLAND", align: center, bold: true}
+  - {text: "{record_number}", align: center, bold: true, above: 15.6}
+  - {text: "{term}", align: center, optional: true}
+  - each: caption
+    above: 20.8
+    between:
+      - {text: "v.", left: 36, above: 10.4, below: 10.4}
+    blocks:
+      - {text: "{names}"}
+      - {text: "{designation}", left: 36, optional: true}
+  - {text: "{proceeding}", align: center, above: 15.6, optional: true}
+  - {text: "{doc_title}", align: center, bold: true, above: 28.6}
+  - each: counsel
+    above: 31.2
+    blocks:
+      - group:
+          - {text: "{names}"}
+          - {text: "{lines}"}
+        below: 15.6
+# MD-CONV-004: the table of contents (headings to level 3, each level a half inch in).
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 18, step: 36, above: 7.8}
+# After the conclusion: the date line and each signature block, never split (Rule 1-311). Then the certification of
+# word count and compliance (MD-CERT-001, the official form) and the certificate of service (Md. Rule 1-321), each on
+# its own page when the frontmatter has them.
+closing:
+  - {text: "{submitted}", pitch: body, above: 10.4, optional: true}
+  - each: signature
+    blocks:
+      - group:
+          - {text: "{lines}"}
+        above: 15.6
+  - when: word_count
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATION OF WORD COUNT AND COMPLIANCE WITH RULE 8-112", align: center, bold: true, below: 15.6, keep: true}
+      - {text: "1\\. This petition contains {word_count} words, excluding the parts exempted from the word count by Rule 8-503.", pitch: body, indent: 36}
+      - {text: "2\\. This petition complies with the font, spacing, and type size requirements stated in Rule 8-112.", pitch: body, indent: 36}
+      - each: certificate_signature
+        blocks:
+          - group:
+              - {text: "{lines}"}
+            above: 15.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 15.6, keep: true}
+      - {text: "{service.text}", pitch: body, indent: 36}
+      - when: service.recipients
+        blocks:
+          - each: service.recipients
+            blocks:
+              - group:
+                  - {text: "{names}"}
+                  - {text: "{lines}"}
+                above: 15.6
+      - group:
+          - {text: "{service.signature}"}
+        above: 15.6
