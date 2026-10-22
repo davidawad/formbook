@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The N.D. Ga. complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman, LR 5.1(C)) at 14 pt (size 28 half points); Body Text in exact 32.2 pt
+     line boxes (typst pitch-body, LR 5.1(C) double-spaced) with a half-inch indent; headings, caption, signature lines
+     and footnotes (14 pt, LR 5.1(C)) in 16.1 pt boxes (typst pitch-single), 7 pt after a note; letter page with 1-inch
+     margins (LR 5.1(D)) and a centered page number (LR 5.1(E)), its line 34.3 pt above the page foot (686 twips:
+     where typst sets it, footer-descent 30 %). docx/gand-complaint.lua writes every paragraph's own spacing.
+     Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="644" single="322" indent="720" heading="322" heading-before="322" heading-after="322" note-after="140" footer="686"/>
