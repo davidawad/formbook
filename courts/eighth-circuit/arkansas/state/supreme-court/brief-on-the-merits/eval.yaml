@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Gated for docx (917/917 lines). LaTeX is
+# reported, not gated: every page and line is the same, but pdftotext reads LaTeX's spaced "* * *" (p32, at the same
+# coordinates as typst's) as one word "***", so XENG-003 counts 916/917 (docs/open-items/fb-595.54.28.md).
+params:
+  cross_engine: gate
+  cross_engine_latex: report
