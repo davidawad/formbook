@@ -13329,6 +13329,8 @@
       "class": "metric-exact",
       "face": "Caladea",
       "why": "Cambria metrics",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.33 under David's 2026-10-17 ruling that Times New Roman is the standard: no N.D. Okla. rule names a face (rules.md OKND-FONT-002: LGnR2-4(a) sets no typeface), and the one exemplar's face is that filer's style (tier 3), so the template is set in Times New Roman on typst and docx (the docx had named EB Garamond against a Caladea typst face); face stays the audited match.",
       "fonts": [
         "Arial",
         "ArialMT",
@@ -13359,6 +13361,8 @@
       "class": "approximate",
       "face": "TeX Gyre Schola",
       "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.33 under David's 2026-10-17 ruling that Times New Roman is the standard: no W.D. Okla. rule names a face (rules.md OKWD-FONT-002: LCvR7.1(d) sets no typeface), and the one exemplar's Century Schoolbook is that filer's style (tier 3), so the template is set in Times New Roman on typst and docx (the docx had named EB Garamond against a Schola typst face); face stays the audited match.",
       "fonts": [
         "Arial-BoldMT",
         "ArialMT",
@@ -13539,6 +13543,8 @@
       "class": "approximate",
       "face": "TeX Gyre Pagella",
       "why": "Palatino lineage; widths differ slightly",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.33 under David's 2026-10-17 ruling that Times New Roman is the standard: no D. Wyo. rule names a face (rules.md WYD-FORM-001: LR 10.1(a) sets 12 point, no typeface), and the one exemplar's Palatino is that filer's style (tier 3), so the template is set in Times New Roman on typst and docx (the docx had named EB Garamond against a Pagella typst face); face stays the audited match.",
       "fonts": [
         "ArialMT",
         "LiberationSans",
@@ -13555,6 +13561,8 @@
       "class": "approximate",
       "face": "TeX Gyre Schola",
       "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.33 under David's 2026-10-17 ruling that Times New Roman is the standard: no D. Wyo. rule names a face (rules.md WYD-FORM-002: LR 10.1(a) sets 12 point, no typeface), and this exemplar's Century Schoolbook is that filer's style (tier 3), so the template is set in Times New Roman on typst and docx (the docx had named EB Garamond against a Schola typst face); face stays the audited match.",
       "fonts": [
         "Arial-BoldMT",
         "ArialMT",
