@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The NY Appellate Division answering brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs;
+     docs/EVAL-LOOP.md, "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; 22 NYCRR
+     1250.8(f)(1): a serifed, proportionally spaced face such as Times Roman) at 14 pt (size 28 half points, 1250.8(f)(1)(i));
+     Body Text in exact 28 pt line boxes (560 twips: typst pitch-body, double spacing, 1250.8(h)) with a half-inch
+     first-line indent (and Body Text Keep, the same kept with the signature block); single lines in 16.1 pt boxes (322
+     twips: typst pitch-single); Footnote Text at 14 pt (the body size; 1250.8(f)(1)(i): at least 12) in 16.1 pt boxes
+     with 6 pt after each note (typst note-gap). docx/nyappdiv-answering-brief.lua writes every other paragraph with its
+     own spacing, the sections (letter page, 1 in margins, 1250.8(h); the cover unnumbered, the tables i, ii, the body
+     from 1) and the page-number footer (centred at 14 pt in a single-pitch line whose box ends 0.5 in above the page
+     edge, typst footer-distance). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="560" single="322" indent="720" note="322" note-size="28" note-after="120" footer="720">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>

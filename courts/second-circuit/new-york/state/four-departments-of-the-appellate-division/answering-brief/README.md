@@ -5,7 +5,7 @@ Status: **exemplar found** (2026-10-16): a First Department respondent's brief, 
 | Gate | Result |
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-answering-brief.pdf` (First Dept, NYSCEF Doc. 17, filed 2023-04-19, Kramer Levin for plaintiffs-respondents) |
-| render | ok: `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/answering-brief usage/INPUT-answering-brief.md`, 19 pages, EB Garamond Regular/Bold/Italic only, no typst warnings (2026-10-16) |
+| render | ok: `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/answering-brief usage/INPUT-answering-brief.md`, 17 pages, Times New Roman Regular/Bold/Italic only, no typst warnings (2026-10-22) |
 | overlay | ok: `sh tools/overlay.sh …/answering-brief nycla-2022-03908-answering`, wrote `usage/OVERLAY-nycla-2022-03908-answering.pdf` and `.txt` (2026-10-16) |
 | pages reviewed | 19 of 19 (every page rasterized at 60 dpi and viewed, 2026-10-16); overlay viewed as a 40 dpi contact sheet, pages 1, 5 and 12 at 100 dpi |
 
@@ -83,23 +83,17 @@ Body: `#` section (centered, bold, capitals); `##` under the Argument is a point
 3. **Word count** is the template's count of the markdown body (links keep their text, markup removed), not a word-processor count. The 14,000-word limit is a hard stop.
 4. **Proof of service** is a blank affidavit form; its form is not verified against Part 1250. The exemplar copy has none.
 5. **CPLR 5531 statement** (appellant's addendum in the First and Second Departments) is not generated; see NYAD-ADD-001.
-6. **Double spacing** (`body-leading`) is the reply-brief value, checked by overlay against the First Department exemplars only.
-7. **docx engine not updated.** The docx filter (`docx/nyappdiv-answering-brief.lua`) reads the old frontmatter schema (`index_no`, `calendar`, `counsel.names`, `phone`, `service`). The committed `usage/OUTPUT-nyappdiv-answering-brief-nyappdivansweringbriefsample.docx` is from the removed placeholder sample; it was not touched in this pass. The docx engine needs the new schema before it can render the new sample.
+6. **Double spacing** is an exact 28 pt pitch (two 14 pt lines; 2026-10-22, was a 31.4 pt leading), checked by overlay against the First Department exemplars only.
+7. **docx engine**: on the new schema and the shared layout model since 2026-10-22 (see Engines).
 
 [Formbook index](../../../../../../README.md) | [Court folder](../README.md)
 
 ## Engines
 
-**docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/nyappdiv-answering-brief.lua`; output `usage/OUTPUT-<id>.docx`).
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.68.37): Times New Roman 14 pt (1250.8(f)(1)), footnotes at the same size, the body in exact 28 pt line boxes (double spacing, 1250.8(h)), single lines (cover, headings, quotations, tables, footnotes, signature, page number) in 16.1 pt boxes, first-fit ragged-right breaking with no kerning, ligatures or hyphenation.
 
-- Matches the typst form: letter, 1 in margins, EB Garamond 14 pt body, double-spaced body with a 0.5 in first-line indent, single-spaced headings, block quotations, signature block and printing statement; centered page number in the footer, none on the cover.
-- Differs: "double" is Word's double spacing (`w:line="480"`), not the typst leading, so line breaks and page counts differ. Word and LibreOffice also paginate differently from each other.
-- Differs: the contents is a TOC field with cached entries and no page numbers; Word or LibreOffice must update fields. The authorities list has no page references (a TOA field needs the same update, and LibreOffice does not honor TA/TOA fields).
-- The cover is a centered layout with the calendar notation on the right. Footnote text is 12 pt, as the typst template sets. The affidavit of service prints the method and affiant from the metadata.
-- The word count and the word limit are computed by the filter from the markdown source, not by Word.
-- Validated: `tools/render.sh --engine docx` writes the `.docx`; `unzip -tq` and `xmllint --noout` pass on every XML part of the output and of `reference.docx`.
+**docx** (`docx/reference.xml`, `docx/nyappdiv-answering-brief.lua`; outputs `usage/OUTPUT-<id>.docx` and `.docx.pdf`, built by `fb render`, no shell).
 
-BLOCKED (docx engine, not passable on this box):
-
-- **docx.pdf gates (Gates 0 and 1, `tools/check.sh --engine docx`): BLOCKED.** LibreOffice (`soffice`) is not installed on this box, so no `usage/OUTPUT-<id>.docx.pdf` exists and the check cannot run. Stamp `usage/.check-docx.txt` not written.
-- **Pages reviewed: 0.** No `.docx` page was rendered or looked at, and the file was not opened in Word or LibreOffice, so no "no repair prompt" result is recorded.
+- The filter writes every paragraph with the typst template's spacing in twips: the cover (docket and argument notice in a two-column row, court, double rules, caption with joiners, title, counsel, whom they represent), the contents and authorities with page numbers from `fb render`'s needles (front matter i, ii; body from 1; cover unnumbered), the headings, block quotations, the last paragraph kept with the signature block, the printing specifications statement with the word count (counted from the markdown rule for rule as typst counts) and the affidavit of service (blanks as underscores). A paragraph that anchors a footnote is left to pandoc (Body Text), which writes the note in Footnote Text.
+- Gate 4 CROSS-ENGINE is gated (`eval.yaml`, `params.cross_engine: gate`): the docx breaks every line and page where typst does (XENG-001..003 PASS).
+- Word may paginate slightly differently from LibreOffice (docs/DOCX.md); the checked PDF is LibreOffice's.
