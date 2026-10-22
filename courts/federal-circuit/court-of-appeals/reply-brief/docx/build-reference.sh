@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx: the shared style recipe of the cross-engine layout model
 # (lib/docx/xengine-reference.sh: Times New Roman 14 pt; Body Text in 32.2 pt line boxes with a half-inch indent; List
 # Item with the label in a half-inch box; footnotes 14 pt in 16.1 pt boxes, 7 pt apart; exact line spacing; typst
@@ -8,12 +8,20 @@
 # setup and the footers are NOT taken from here: pandoc does not carry a reference's section properties into its
 # output, so docx/render.sh writes them.
 # Usage: sh docx/build-reference.sh [out.docx]    (needs pandoc, unzip, zip, perl, xmllint)
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 OUT=${1:-$D/reference.docx}
 case $OUT in /*) ;; *) OUT=$PWD/$OUT ;; esac
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 sh "$D/../../../../../lib/docx/xengine-reference.sh" "$W/ref.docx" font="Times New Roman" size=28 body=644 \
   single=322 indent=720 list=720 note=322 note_size=28 note_after=140 >/dev/null
 mkdir "$W/pkg" && cd "$W/pkg" && unzip -q ../ref.docx

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Renders the motion-brief sample to .docx (tools/render-docx.sh hands the build over here when this file exists).
 # Usage: sh docx/render.sh <court-dir> <sample.md, relative to the court dir> <out.docx>
 #
@@ -11,19 +11,27 @@
 # The build is final when measuring it gives the map it was built with. Otherwise the new map is used and the
 # build is repeated, at most 3 times. The body is checked against RCFC 5.4(b)(1): 40 pages, 50 for a cross-motion,
 # counting the body and the certificate.
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
 OUT=$3
 SOFFICE=${SOFFICE:-$(command -v soffice || echo /opt/homebrew/bin/soffice)}
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 FILTER="--lua-filter=$D/uscfc-motion-brief.lua"
 
 # build <map or empty> <out.docx> <list out or empty>
 build() {
-  (cd "$COURT" && USCFC_MAP="$1" USCFC_LIST="$3" pandoc --from markdown+smart --to docx --reference-doc="$D/reference.docx" $FILTER "$SAMPLE" -o "$2")
+  (cd "$COURT" && USCFC_MAP="$1" USCFC_LIST="$3" pandoc --from markdown+smart --to docx --reference-doc="$D/reference.docx" "$FILTER" "$SAMPLE" -o "$2")
 }
 
 # to_pdf <docx> <outdir>: LibreOffice conversion with its own profile.
@@ -60,7 +68,7 @@ measure() {
   : > "$W/pages.txt"
   p=$start
   while [ "$p" -le "$n" ]; do
-    printf '%s %s\n' "$p" "$(pdftotext -f "$p" -l "$p" "$1" - | perl -CSD -pe 's/\x{00A0}//g' | tr -d ' \t\r\n\f' | tr 'a-z' 'A-Z')" >> "$W/pages.txt"
+    printf '%s %s\n' "$p" "$(pdftotext -f "$p" -l "$p" "$1" - | perl -CSD -pe 's/\x{00A0}//g' | tr -d ' \t\r\n\f' | tr "[:lower:]" "[:upper:]")" >> "$W/pages.txt"
     p=$((p + 1))
   done
   echo "B $start" > "$3"

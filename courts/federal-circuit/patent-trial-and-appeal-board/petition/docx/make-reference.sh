@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx: the shared style recipe of the cross-engine layout model
 # (lib/docx/xengine-reference.sh): Times New Roman 14 pt; Body Text in 32 pt exact line boxes (double spacing,
 # PTAB-PET-FORM-003) with a half-inch first-line indent; List Item with the label in a half-inch box; footnotes 14 pt
@@ -7,12 +7,20 @@
 # signature and certificates are written by ptab-petition.lua with their own exact spacing (twips = 20 x
 # the typst pt). Page setup and footers are written by docx/render.sh (pandoc does not carry them over).
 # Usage: sh docx/make-reference.sh [out.docx]    (needs pandoc, unzip, zip, perl, xmllint)
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 OUT=${1:-$D/reference.docx}
 case $OUT in /*) ;; *) OUT=$PWD/$OUT ;; esac
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 sh "$D/../../../../../lib/docx/xengine-reference.sh" "$W/ref.docx" font="Times New Roman" size=28 body=640 \
   single=320 indent=720 list=720 note_after=140 >/dev/null
 mkdir "$W/pkg" && cd "$W/pkg" && unzip -q ../ref.docx

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx with the shared style recipe of the cross-engine layout model
 # (lib/docx/xengine-reference.sh): Liberation Sans 14 pt (CAVC-FORM-004; the family the typst template names);
 # Body Text and List Item in 29.4 pt line boxes (typst pitch-double, CAVC-FORM-003) with a half-inch indent;
@@ -7,14 +7,22 @@
 # One change to the recipe: a footnote may run over to the next page (Footnote Text without keepLines), as typst
 # sets a note that does not fit: the recipe keeps a note whole, which moves it off its reference's page.
 # Usage: sh docx/make-reference.sh [out.docx]   (needs pandoc, perl, unzip, zip, xmllint)
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 OUT=${1:-$D/reference.docx}
 case $OUT in /*) ;; *) OUT=$(pwd)/$OUT ;; esac
 sh "$D/../../../../../lib/docx/xengine-reference.sh" "$OUT" \
   font="Liberation Sans" size=28 body=588 single=340 indent=720 heading=400 >/dev/null
-T=$(mktemp -d)
-trap 'rm -rf "$T"' EXIT
+T=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$T"' EXIT
 (cd "$T" && unzip -q "$OUT")
 perl -0pi -e 's{(<w:style [^>]*w:styleId="FootnoteText".*?<w:pPr>)\s*<w:keepLines/>}{$1}s or die "FootnoteText"' "$T/word/styles.xml"
 xmllint --noout "$T/word/styles.xml"

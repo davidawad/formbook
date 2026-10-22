@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Build one sample as a .docx (docs/EVAL-LOOP.md, "Engines"; tools/render-docx.sh calls this and converts the result).
 #   sh docx/render.sh <court-dir> <sample.md> <out.docx>
 # pandoc writes the document with ptab-petition.lua on docx/reference.docx. The package then gets what
@@ -7,7 +7,7 @@
 # checked. The contents' page numbers come from the PDF: pass 1 writes the .docx with placeholders, LibreOffice
 # converts it and the page of each heading is read from that PDF (pagemap below); pass 2 writes the numbers, and its
 # PDF must give the same numbers again (otherwise the render fails).
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
@@ -15,8 +15,16 @@ OUT=$(cd "$(dirname "$3")" && pwd)/$(basename "$3")
 SOFFICE=${SOFFICE:-$(command -v soffice || echo /opt/homebrew/bin/soffice)}
 FILTER=$D/ptab-petition.lua
 RUNNING="Petition for Inter Partes Review of"   # typst running-title
-W=${RENDER_WORK:-$(mktemp -d)}   # RENDER_WORK=<dir>: keep the intermediate files there
-[ -n "${RENDER_WORK:-}" ] || trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 NS='xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"'
 # the footer sits 18.4 pt above the page edge (typst: 30 % footer descent below the 1 in margin's text area, two
 # 16 pt lines); the cover and the contents keep the filter's 34.4 pt (one line)
@@ -33,7 +41,8 @@ PAGENO='<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space
 
 finish() { # <raw.docx> <out.docx>: footers, the body's section; a valid zip with well-formed XML
   X=$W/pkg
-  rm -rf "$X" && mkdir "$X"
+  [ ! -e "$X" ] || safe_rmdir "$X"
+  mkdir "$X"
   (cd "$X" && unzip -q "$1")
   printf '%s\n' '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' \
     "<w:ftr $NS><w:p><w:pPr>$LINE<w:jc w:val=\"center\"/></w:pPr>$PAGENO</w:p></w:ftr>" > "$X/word/footer-roman.xml"
@@ -42,12 +51,10 @@ finish() { # <raw.docx> <out.docx>: footers, the body's section; a valid zip wit
   perl -0pi -e 's#</Relationships>#<Relationship Id="rIdFooterRoman" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer-roman.xml"/><Relationship Id="rIdFooterArabic" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer-arabic.xml"/></Relationships>#' "$X/word/_rels/document.xml.rels"
   perl -0pi -e 's#</Types>#<Override PartName="/word/footer-roman.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/><Override PartName="/word/footer-arabic.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/></Types>#' "$X/[Content_Types].xml"
   # the body's section (the last one, certificates included): arabic numbers from 1
-  BODY_SECT="<w:sectPr><w:footerReference w:type=\"default\" r:id=\"rIdFooterArabic\"/>$PAGE<w:pgNumType w:fmt=\"decimal\" w:start=\"1\"/></w:sectPr>"
-  export BODY_SECT
-  perl -0pi -e 'my $s = $ENV{BODY_SECT}; s{<w:sectPr(?:(?!<w:sectPr).)*?</w:sectPr>(\s*</w:body>)}{$s$1}s or s{(\s*</w:body>)}{$s$1}s' "$X/word/document.xml"
+  PAGE=$PAGE perl -0pi -e 'my $s = q{<w:sectPr><w:footerReference w:type="default" r:id="rIdFooterArabic"/>} . $ENV{PAGE} . q{<w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>}; s{<w:sectPr(?:(?!<w:sectPr).)*?</w:sectPr>(\s*</w:body>)}{$s$1}s or s{(\s*</w:body>)}{$s$1}s' "$X/word/document.xml"
   for part in "$X"/word/*.xml "$X"/word/_rels/*.rels "$X/[Content_Types].xml"; do
     xmllint --noout "$part" || {
-      echo "render.sh: ${part#$X/} is not well-formed XML" >&2
+      echo "render.sh: ${part#"$X"/} is not well-formed XML" >&2
       exit 1
     }
   done
@@ -76,7 +83,8 @@ convert() { # <docx>: the LibreOffice PDF, in $W/pdf
 # an arabic number) as the start of a line; fails if one is not found
 pagemap() {
   P=$W/pages
-  rm -rf "$P" && mkdir "$P"
+  [ ! -e "$P" ] || safe_rmdir "$P"
+  mkdir "$P"
   n=$(pdfinfo "$1" | awk '/^Pages:/ { print $2 }')
   i=1
   files=""
