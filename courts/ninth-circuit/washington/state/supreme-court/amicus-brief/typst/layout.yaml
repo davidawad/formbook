@@ -1,0 +1,98 @@
+# Supreme Court of the State of Washington (wash): amicus-brief. The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to RAP 10.3, 18.17 and Form 5 (../../rules.md, WASH-*); lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # WASH-FORM-004: 14 point for all text, footnotes and block quotations (RAP 18.17(a)(2))
+pitch:
+  body: 32.2              # WASH-FORM-005: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # WASH-FORM-005: footnotes and block quotations single spaced; also cover, headings, tables
+# WASH-FORM-002: left 2 in, right, top and bottom at least 1 1/2 in (RAP 18.17(a)(1)); the bottom 0.1 in deeper so the
+# page number sits clear of the last line. The first-page top margin conflict with GR 14(a) is open (WASH-FORM-003).
+margin: {top: 108, bottom: 115.2, left: 144, right: 108}
+indent: 36
+# The cover unnumbered, the tables i, ii .., the body from 1 (RAP 10.3(a); WASH-ORDER-001).
+page_number: {align: center, front: lower-roman}
+footnote: {size: 14, gap: 7}                       # WASH-FORM-004, -005: 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # WASH-FORM-005: block quotations single spaced, indented
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The cover (WASH-COVER-001, RAP 10.3(a)(1) and RAP Form 5): the court, the caption beside the court number and the
+# title, the court below (when given), then counsel with WSBA numbers at the foot of the page. No column of ")": Word
+# overfills the page with one beside a {fill} (docs/open-items/fb-595.54.17.md, request 9).
+cover:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF WASHINGTON", align: center, bold: true}
+  - columns:
+      - width: 194.4
+        blocks:
+          - each: caption
+            between:
+              - {text: "vs.", align: center, above: 4.2, below: 4.2}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", italic: true, left: 36}   # a two-party designation fits unbroken
+      - valign: center
+        blocks:
+          - {text: "{case_number}"}
+          - {text: "{brief_title}", upper: true, above: 16.1}
+    gutter: 28.8
+    above: 36
+  - {text: "{proceeding}", optional: true, above: 28.8}
+  - {fill: 1}
+# Counsel (WASH-COVER-001: name, WSBA number, party represented, address, telephone), one group under another: a
+# line too long for half the page (an e-mail address, a firm name) would wrap in two columns.
+  - each: counsel
+    blocks:
+      - {text: "{names}", bold: true, above: 8.4}
+      - {text: "{lines}"}
+# RAP 10.3(a)(2): the table of contents and the table of authorities with page references, each on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 21, step: 21, above: 12.6}
+# RAP 10.3(a)(2): cases alphabetically arranged, then statutes and other authorities, each with the pages where cited:
+# keyed authorities, cases sorted by name, the others in the order the brief lists them. An authority cited on six
+# pages or more is *passim*, as the Washington filers set it (usage/SOURCE.md: the amicus, answering, discretionary
+# review and writ exemplars), where a list of every page would be wider than the line (docs/open-items/fb-595.54.17.md).
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 11.2}
+  passim: 6
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: constitution, title: "Constitutional Provisions"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: rule, title: "Rules"}
+    - {kind: regulation, title: "Regulations"}
+    - {kind: other, title: "Other Authorities"}
+# WASH-CERT-001 (RAP 18.17(b)): the word count statement above the signature, then the date and the signature block,
+# never split, 1 in from the left margin so a signer line "/s/ name, WSBA no." fits the line.
+closing:
+  - group:
+      - {text: "This document contains {word_count} words, excluding the parts of the document exempted from the word count by RAP 18.17(b).", optional: true, pitch: body, indent: 36}
+      - {text: "{date}", optional: true, pitch: body, indent: 36}
+      - {text: "{signature.firm}", bold: true, optional: true, left: 72, above: 5.6, below: 11.2}
+      - when: signature.signer
+        blocks:
+          - {text: "/s/ *{signature.signer}*", underline: true, left: 72, above: 5.6}
+          - {text: "{signature.signer}", left: 72}
+      - when: signature.signers
+        blocks:
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ *{name}*", underline: true, left: 72, above: 12.6}
+              - {text: "{name}", left: 72}
+      - {text: "{signature.lines}", optional: true, left: 72, above: 8.4}
+    above: 21.6
+  # The certificate of service (GR 30; the Appellate Courts' Portal e-filing instructions) on a page of its own.
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.heading}", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - each: service.recipients
+        blocks: [{group: [{text: "{.}", left: 72}], above: 14}]   # a recipient never split
+      - {text: "{service.closing}", optional: true, pitch: body, indent: 36, above: 14}
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 72, above: 19.6}
+      - {text: "{signature.signer}", left: 72}

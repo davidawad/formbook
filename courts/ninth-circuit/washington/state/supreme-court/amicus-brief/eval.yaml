@@ -1,0 +1,4 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx break every typst line after the same
+# word, page for page.
+params:
+  cross_engine: gate
