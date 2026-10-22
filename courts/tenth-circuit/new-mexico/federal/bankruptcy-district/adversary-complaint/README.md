@@ -7,11 +7,11 @@ Folder: `courts/tenth-circuit/new-mexico/federal/bankruptcy-district/adversary-c
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md`: the whole filing (10 pages), transcribed from the text layer |
-| typeface | No face named (FRBP 9004 and NM LBR, 2023 edition, read in full 2026-10-15; neither names a typeface, font size or spacing). Keeps EB Garamond (`docs/FONTS.md`, "No face named"). Not a substitution: no metric or visual check applies. |
-| render | ok (re-run 2026-10-15, `sh tools/render.sh`): `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, letter, EB Garamond only (`pdffonts`: `EBGaramond-Regular`, `EBGaramond-Bold`, embedded), no typst warnings |
+| typeface | No face named (FRBP 9004 and NM LBR, 2023 edition, read in full 2026-10-15; neither names a typeface, font size or spacing). Times New Roman (vendored metric twin), the house standard, on typst and docx alike (fb-595.68.32; the docx was EB Garamond). |
+| render | ok (2026-10-22, `sh tools/check.sh`): `usage/OUTPUT-adversary-complaint.typst.pdf`, 10 pages, letter, Times New Roman only, no typst warnings, on the shared cross-engine layout model (`lib/typst/xengine.typ`; fb-595.68.32) |
 | overlay | ok (re-run 2026-10-15, `sh tools/overlay.sh`): `usage/OVERLAY-johnson-v-marker-complaint.pdf` and `OVERLAY-johnson-v-marker-complaint.txt`. The exemplar PDF is not in `usage/` in this snapshot; the run passed a copy fetched from the URL in `usage/SOURCE.md` (sha256 `fea81f88d4b89acffd7e08a90a9bf7eebca9a095e52ba387ab476e383b064eeb`, 10 pages, 2,966 words) as the optional third argument. |
-| pages reviewed | 9 of 9 (re-rendered 2026-10-15; every page rasterized at 60 dpi and viewed) |
-| check.sh / selftest | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/` |
+| pages reviewed | 10 of 10 on typst and docx (every page rendered at 45 dpi and viewed side by side after the last template change, 2026-10-22) |
+| check.sh / selftest | `sh tools/check.sh <dir>`: RESULT: 9 checks passed, 0 failed; `--engine docx`: RESULT: 13 checks passed, 0 failed (XENG-001..003 PASS). No selftest for this doc-type folder. |
 
 ## Governing rules
 
@@ -20,7 +20,7 @@ Primary sources. Fetch date 2026-10-14 for all.
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | Fed. R. Bankr. P. 7010 (https://www.law.cornell.edu/rules/frbp/rule_7010, as amended eff. 2024-12-01) | Fed. R. Civ. P. 10 applies to an adversary complaint, except that the caption must substantially conform to Official Form 416. | `caption()` in `typst/nmb-adversary-complaint.typ`; the court line, debtor block, case number right, parties with adversary number, title. |
-| Fed. R. Bankr. P. 9004(a) (https://www.law.cornell.edu/rules/frbp/rule_9004, as amended eff. 2024-12-01) | A pleading must be clearly legible. Common English abbreviations are acceptable. | Body 12 pt EB Garamond, black on white (see Known gaps 1 and 2). |
+| Fed. R. Bankr. P. 9004(a) (https://www.law.cornell.edu/rules/frbp/rule_9004, as amended eff. 2024-12-01) | A pleading must be clearly legible. Common English abbreviations are acceptable. | Body 12 pt Times New Roman, black on white (see Known gaps 1 and 2). |
 | Fed. R. Bankr. P. 9004(b) | The caption sets out: (1) the court's name; (2) the case title; (3) the case number and, if appropriate, the adversary-proceeding number; (4) a brief designation of the paper. | Frontmatter `court`, `debtor`, `case_number`, `adv_number`, `title`. |
 | NM LBR 9004-2 (local rules PDF, see below) | Every paper after the petition includes the chapter number, the case number, the judge's initial and the initial of the location of the 341 meeting, e.g. `7-10-12345-JA`. | `case_number` frontmatter (`Case No. 23-11087-J13`); the sample's own case number is transcribed as filed. Gate 1 would check the form; not checked here. |
 | NM LBR 9011-1(a) | Every filed paper includes the name, address, telephone and e-mail of the attorney below the signature line. | `signature()`; the `email` line prints from the frontmatter. The filed copy has no e-mail (see Known gaps 4). |
@@ -34,15 +34,15 @@ Not verified against the rule text in this pass (cited from memory; check before
 ## Layout
 
 - Letter paper, 1 inch margins (convention; no rule given).
-- Body 12 pt EB Garamond, double spaced (about 24 pt baseline pitch), left-aligned.
-- Court title centered and bold at the top; debtor block at left and case number at right; party block with a rule at right and bottom and the adversary number to its right; title centered bold.
-- Paragraphs numbered by the template from 1, first-line indent 0.5 in; typed numbers in the sample are dropped.
-- Headings centered and bold; claim headings are three centered lines.
-- Block quotations single spaced, indented 0.75 in each side.
-- Sub-items (`    1. ...`) lettered (a), (b), ... under the paragraph before them.
-- Footnotes with `[^n]` markers and frontmatter text, 10 pt.
-- Footer: the title left, `Page X of Y` right, 10 pt.
-- Signature block at the right half, firm in bold, `By:` line, signer, the address and telephone lines, e-mail, role.
+- Body 12 pt Times New Roman, double spaced: 24 pt line boxes (`pitch-double`), ragged right, on the shared cross-engine layout model (`lib/typst/xengine.typ`: no kerning, ligatures or hyphenation, first-fit line breaking).
+- Court lines centered and bold at the top; a single line below them the debtor's lines at left and the case number at right; a single line below that the parties box (each party's names and role, a blank line between parties) ruled at its right and bottom, its text 9 pt off the rules, the adversary number beside its middle line; a double line below the caption the title, centered and bold. Every caption line a 15 pt single line (`pitch-single`), never split.
+- The lead-in a double line below the title. Paragraphs numbered by the template from 1, first-line indent 0.5 in; typed numbers in the sample are dropped.
+- Headings centered and bold at the body pitch, kept with the next block; claim headings are three centered lines.
+- Block quotations single spaced (15 pt lines), indented 0.75 in each side, a single line above and below each quoted paragraph.
+- Sub-items (`    1. ...`) lettered (a), (b), ... half an inch in, the text hanging 0.4 in after the letter.
+- Footnotes with `[^n]` markers and frontmatter text, 10 pt in 11.5 pt lines under a 30 % rule, 7 pt between notes; a space after a marker in the text is kept.
+- Footer: the short title left, `Page X of Y` right, 10 pt in an 11.5 pt line, 36 pt above the page foot.
+- The prayer kept whole with the signature block. Signature block 3.25 in from the left margin, single spaced, never split: `Respectfully Submitted,`, the firm in bold, a `By:` line of underscores, signer, the address and telephone lines, e-mail, role.
 
 ## Markdown contract (for samples)
 
@@ -52,7 +52,7 @@ Not verified against the rule text in this pass (cited from memory; check before
 
 ## Known gaps and open choices
 
-1. **Typeface.** No rule in the bankruptcy rules or the NM local rules sets a typeface (re-checked 2026-10-15 against the full text of the 2023 NM LBR PDF and FRBP 9004). EB Garamond is the only vendored serif (`fonts/`); the filed exemplar is Equity-A-style serif at 12 pt for the body and Helvetica for the footer. The body reads a little smaller than the exemplar because EB Garamond has a smaller x-height than Equity at 12 pt. Logged as a convention choice, not a rule defect.
+1. **Typeface.** No rule in the bankruptcy rules or the NM local rules sets a typeface (re-checked 2026-10-15 against the full text of the 2023 NM LBR PDF and FRBP 9004). The template sets Times New Roman (vendored metric twin), the house standard; the filed exemplar is an Equity-style serif at 12 pt for the body and Helvetica for the footer. Logged as a convention choice, not a rule defect.
 2. **Paper and margins.** The rules cited here do not give a margin or paper size; the template uses letter and 1 inch. The exemplar's margins were not measured, and no coordinate was taken from it.
 3. **One exemplar only.** The brief asks for one exemplar per doc type, so tier 2 is judged against one filer. Two more text-layer complaints from this court exist in the public RECAP set (Quorum Health v. Bailey, Adv. 18-01028; Montoya v. Goldstein, Adv. 20-01027; listed in `usage/SOURCE.md`). They were not saved here, so the tier-2 check against two or three filers is not done. Open for David: save one or both as `usage/` files and judge tier 2 against them.
 4. **Exemplar e-mail.** The filed signature block has no e-mail line, which LBR 9011-1(a) requires. The sample carries a bracketed placeholder for the e-mail line, and the template prints it. The template follows the rule, not the exemplar.
@@ -62,7 +62,7 @@ Not verified against the rule text in this pass (cited from memory; check before
 8. **Footer size.** 10 pt. No rule gives a footer size for bankruptcy papers.
 9. **Filenames.** The brief names overlay outputs `<id>-overlay.pdf` and `<id>-overlay.txt`, and render outputs `<id>.pdf`. `tools/overlay.sh` reads and writes `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt`, and `tools/render.sh` writes `OUTPUT-<id>.pdf` by default. The tools' names are used so that the overlay runs without changes to `tools/`.
 
-## Review of the rendered pages (current PDF, 9 pages)
+## Review of the rendered pages (made on an earlier render, 9 pages. The 10 pages of the current typst and docx renders were viewed side by side on 2026-10-22: every line and page alike, caption, headings, footnote, signature and footers as described under Layout; no defect found. The page numbers in the table below are those of the earlier render)
 
 Compared with the filed exemplar (10 pages).
 
@@ -82,10 +82,11 @@ Gate 2 rows are recorded here, not in `reviews/`, because this doc type has no c
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `nmb-filter.lua` builds the caption, numbered paragraphs, lettered sub-items, signature and certificate from the frontmatter). Output: `usage/OUTPUT-<id>.docx` (produced and zip/XML-validated; see the render check below).
+The typst template is the reference; the docx breaks every line and page where it does (Gate 4 CROSS-ENGINE, `params.cross_engine: gate` in `eval.yaml`).
 
-- Matches the typst form: EB Garamond 12 pt; exact 24 pt (double) line spacing; letter paper, 1 in margins; numbered paragraphs with a 0.5 in first-line indent and renumbered by the filter; lettered sub-items with a hanging indent; 15 pt single-spaced block quotations indented 0.75 in each side; caption table (court, debtor block, case number, party block with right and bottom rule, adversary number, title); signature block at 3.25 in; footnotes 10 pt; footer "Page X of Y" (PAGE and NUMPAGES fields).
-- Differs: the typst footer's left-hand title is not in the docx footer, because the footer is part of the reference and the title is case text from the frontmatter (a `render.sh` could add it; not done). Table borders, the "By:" leader line (tab leader, not a 2.6 in rule) and pagination differ between Word and LibreOffice. Word substitutes silently if EB Garamond is not installed on the machine that opens the file (`docs/FONTS.md`).
-- No TOC or TOA in these forms, so no field-update caveat applies.
-- Validation run here: `sh docx/build-reference.sh reference.docx` (unzip -tq and xmllint on every XML part: no errors); `sh tools/render.sh --engine docx` wrote the `.docx` and passed the zip and XML-well-formedness checks, then stopped at the soffice step.
-- BLOCKED (docx.pdf gates 0 and 1, and the visual check of every page): LibreOffice (`soffice`) is not installed on this box, so no `usage/OUTPUT-<id>.docx.pdf` exists and no docx page was rendered or looked at. `tools/check.sh --engine docx` cannot pass until it is run where soffice exists. Not claimed as passed.
+**docx** (`docx/`): `reference.xml` (`base="xengine"`: the face is the typst template's through `{font}`, 12 pt, exact 24 pt body lines, 15 pt single lines, 10 pt footnotes in 11.5 pt lines, 1 in margins; Body Text Note, Body Text Keep, Sub Item and a Footnote Text that splits) and `nmb-adversary-complaint.lua` (on `lib/docx/xengine.lua`: reads the sample as the typst template does, the frontmatter strings as written and the body in blank-line-separated chunks as CommonMark, and writes the court lines, the caption as two tables, the title, the lead-in, the numbered paragraphs, headings, quotations, lettered sub-items, the prayer, the signature and the footnotes in the typst template's line boxes and spaces; the footer with the short title and "Page X of Y" (PAGE and NUMPAGES fields) and the section through `$FORMBOOK_FOOTERS` and `$FORMBOOK_FINAL`). `fb render` builds the reference document; no shell script and no committed `reference.docx` (fb-595.68.32; were `build-reference.sh`, `reference.docx` and `nmb-filter.lua`, EB Garamond, with no title in the footer). Samples: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice conversion; opened in LibreOffice, not Word).
+
+- `tools/check.sh <dir>`: RESULT: 9 checks passed, 0 failed (DEF-TOC-001, DEF-COVER-001 pass).
+- `tools/check.sh <dir> --engine docx`: RESULT: 13 checks passed, 0 failed; XENG-001..003 PASS (10 pages, 262/262 lines).
+- No TOC or TOA in this form, so no field-update caveat applies.
+- No latex engine for this folder.
