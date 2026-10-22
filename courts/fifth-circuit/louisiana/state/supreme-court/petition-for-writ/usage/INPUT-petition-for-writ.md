@@ -157,30 +157,32 @@ authorities:
     cite: "2024-01175 (La. 3/18/25), 402 So. 3d 1206"
   const-iv8:
     kind: statute
-    name: "La. Const. art. IV, § 8"
+    cite: "La. Const. art. IV, § 8"
   ccrp927:
     kind: statute
-    name: "La. Code Crim. P. art. 927"
+    cite: "La. Code Crim. P. art. 927"
   ccrp930-2:
     kind: statute
-    name: "La. Code Crim. P. art. 930.2"
+    cite: "La. Code Crim. P. art. 930.2"
   ccrp930-4:
     kind: statute
-    name: "La. Code Crim. P. art. 930.4"
+    cite: "La. Code Crim. P. art. 930.4"
   ccrp930-8:
     kind: statute
-    name: "La. Code Crim. P. art. 930.8"
+    cite: "La. Code Crim. P. art. 930.8"
   rulex:
     kind: rule
-    name: "La. Sup. Ct. Rule X"
+    cite: "La. Sup. Ct. Rule X"
   vedros1:
     kind: other
     name: "Colin Vedros, ‘Cheneyville Slasher’ Victim Attempts Attack During Court Hearing In 9th JDC"
     cite: "KLAB (May 12, 2025)"
+    sort: "colin vedros cheneyville slasher victim attempts attack during court hearing in 9th jdc"
   vedros2:
     kind: other
     name: "Colin Vedros, Rapides DA Speaks On Attempted Attack On ‘Cheneyville Slasher’ In Court"
     cite: "KLAB (May 13, 2025)"
+    sort: "colin vedros rapides da speaks on attempted attack on cheneyville slasher in court"
 ---
 
 # INTRODUCTION
