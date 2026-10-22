@@ -2,8 +2,7 @@
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
 # the typst render does, so a difference fails.
 params:
-  # LaTeX: heading III (five lines) split at the foot of page 21, and "Rule 2221(e)(2)-(3)" (page 26) breaks after the
-  # hyphen in LaTeX only (649 of 653 lines identical). docx: "Reply Argument" followed by the numbered "I. PLAINTIFF
-  # CONTINUES ..." is found in the table of contents, and every contents row is labelled from there
-  # (docs/open-items/fb-595.54.76.md, requests 2, 7 and 10). Reported, not gated.
+  # "CPLR Rule 2221(e)(2)-(3)" (p26 lines 9-10): LaTeX and Word break after "(2)-", typst keeps the word (its
+  # xengine boxes ")(" words); 650 of 652 lines identical, pages equal, on both engines. The shared model's
+  # (docs/open-items/fb-595.54.76.md, request 10); reported, not gated.
   cross_engine: report

@@ -76,26 +76,45 @@ return require("latex.xdoc")({
   },
   ["cover"] = {
     {
-      ["text"] = "{docket}",
-    },
-    {
-      ["when"] = "argument.presenter",
-      ["blocks"] = {
+      ["columns"] = {
         {
-          ["text"] = "To be Argued by:",
-          ["left"] = 288,
+          ["width"] = 288,
+          ["blocks"] = {
+            {
+              ["text"] = "{docket}",
+            },
+          },
         },
         {
-          ["text"] = "{argument.presenter}",
-          ["bold"] = true,
-          ["upper"] = true,
-          ["left"] = 288,
-        },
-        {
-          ["text"] = "(Time Requested: {argument.time_requested})",
-          ["left"] = 288,
+          ["blocks"] = {
+            {
+              ["when"] = "argument.presenter",
+              ["blocks"] = {
+                {
+                  ["text"] = "To be Argued by:",
+                },
+                {
+                  ["text"] = "{argument.presenter}",
+                  ["bold"] = true,
+                  ["upper"] = true,
+                },
+                {
+                  ["text"] = "(Time Requested: {argument.time_requested})",
+                },
+              },
+            },
+            {
+              ["unless"] = "argument.presenter",
+              ["blocks"] = {
+                {
+                  ["text"] = "Submitted without oral argument",
+                },
+              },
+            },
+          },
         },
       },
+      ["gutter"] = 0,
     },
     {
       ["text"] = "{county_clerk_index}",
@@ -239,19 +258,16 @@ return require("latex.xdoc")({
       ["below"] = 2.8,
     },
   },
-  ["front"] = {
+  ["before_tables"] = {
     {
       ["text"] = "Statement Pursuant to CPLR § 5531",
-      ["align"] = "center",
-      ["bold"] = true,
-      ["upper"] = true,
-      ["below"] = 15.4,
+      ["heading"] = 1,
     },
     {
       ["each"] = "statement_5531.items",
       ["blocks"] = {
         {
-          ["text"] = "{.}",
+          ["text"] = "{#}. {.}",
           ["indent"] = 36,
           ["pitch"] = "body",
         },
@@ -296,9 +312,6 @@ return require("latex.xdoc")({
           },
         },
       },
-    },
-    {
-      ["break"] = true,
     },
   },
   ["closing"] = {

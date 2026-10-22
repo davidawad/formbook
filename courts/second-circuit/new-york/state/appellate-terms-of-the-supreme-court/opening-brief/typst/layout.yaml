@@ -25,12 +25,20 @@ heading:
 # lower court index number, the court, the title of the action between double rules, the title of the brief, and the
 # filing attorneys with address and telephone at the lower right.
 cover:
-  - {text: "{docket}"}
-  - when: argument.presenter
-    blocks:
-      - {text: "To be Argued by:", left: 288}
-      - {text: "{argument.presenter}", bold: true, upper: true, left: 288}
-      - {text: "(Time Requested: {argument.time_requested})", left: 288}
+  - columns:
+      - width: 288
+        blocks:
+          - {text: "{docket}"}
+      - blocks:
+          - when: argument.presenter
+            blocks:
+              - {text: "To be Argued by:"}
+              - {text: "{argument.presenter}", bold: true, upper: true}
+              - {text: "(Time Requested: {argument.time_requested})"}
+          - unless: argument.presenter
+            blocks:
+              - {text: "Submitted without oral argument"}   # NYAPPTERM-CONT-002 (22 NYCRR 640.5(b))
+    gutter: 0
   - {text: "{county_clerk_index}", align: center, optional: true, above: 11.2}
   - {text: "{court_lines}", align: center, bold: true, above: 14}
   - {rule: 1.6, above: 11.2}
@@ -73,14 +81,14 @@ authorities:
   hang: 25.2
   above: 9.8
   group: {bold: true, above: 16.8, below: 2.8}
-# NYAPPTERM-CONT-005: the statement pursuant to CPLR 5531 (the template set it on the first page after the cover, before
-# the tables; the model has no front matter there, docs/open-items/fb-595.54.76.md): the top of page 1, a page of its
-# own, its items in the order of the rule, dated and signed.
-front:
-  - {text: "Statement Pursuant to CPLR § 5531", align: center, bold: true, upper: true, below: 15.4}
+# NYAPPTERM-CONT-005: the statement pursuant to CPLR 5531, the first page after the cover (page i, before the tables,
+# listed in the contents), its items numbered 1 to 7 in the order of the rule (each a paragraph indented 0.5 in, its
+# number in its first line), dated and signed.
+before_tables:
+  - {text: "Statement Pursuant to CPLR § 5531", heading: 1}
   - each: statement_5531.items
     blocks:
-      - {text: "{.}", indent: 36, pitch: body}
+      - {text: "{#}. {.}", indent: 36, pitch: body}
   - group:
       - {text: "{statement_5531.dated}", above: 16.1}
       - columns:
@@ -93,7 +101,6 @@ front:
                   - {text: "{names}"}
                   - {text: "{lines}"}
               - {text: "{signature.attorneys_for}", italic: true, optional: true}
-  - {break: true}
 # The date and place, then each firm's signature (the one marked `by` with its "By:" blank), never split.
 closing:
   - group:

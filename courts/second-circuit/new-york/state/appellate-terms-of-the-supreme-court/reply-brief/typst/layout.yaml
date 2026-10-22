@@ -25,12 +25,20 @@ heading:
 # lower court index number, the court, the title of the action between double rules, the title of the brief, and the
 # filing attorneys with address and telephone at the lower right.
 cover:
-  - {text: "{docket}"}
-  - when: argument.presenter
-    blocks:
-      - {text: "To be Argued by:", left: 288}
-      - {text: "{argument.presenter}", bold: true, upper: true, left: 288}
-      - {text: "(Time Requested: {argument.time_requested})", left: 288}
+  - columns:
+      - width: 288
+        blocks:
+          - {text: "{docket}"}
+      - blocks:
+          - when: argument.presenter
+            blocks:
+              - {text: "To be Argued by:"}
+              - {text: "{argument.presenter}", bold: true, upper: true}
+              - {text: "(Time Requested: {argument.time_requested})"}
+          - unless: argument.presenter
+            blocks:
+              - {text: "Submitted without oral argument"}   # NYAPPTERM-CONT-002 (22 NYCRR 640.5(b))
+    gutter: 0
   - {text: "{county_clerk_index}", align: center, optional: true, above: 11.2}
   - {text: "{court_lines}", align: center, bold: true, above: 14}
   - {rule: 1.6, above: 11.2}

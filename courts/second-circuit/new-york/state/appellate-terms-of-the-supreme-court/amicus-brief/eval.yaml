@@ -2,8 +2,6 @@
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
 # the typst render does, so a difference fails.
 params:
-  # A spaced ellipsis (page 46, "new . . . perception"; request 1) moves pages 47 to 52 in LaTeX and Word, and with them
-  # the page of a Weaver citation in the table of authorities; a URL inside a table-of-authorities row (page 7) breaks
-  # after its slashes in typst only (the pandoc engines apply the URL rule to the body, request 11). Reported, not gated
-  # (docs/open-items/fb-595.54.76.md).
-  cross_engine: report
+  # The spaced ellipsis (p46) and the URL in a table-of-authorities row (p7) now break alike in every engine
+  # (fb-595.54.82); XENG-001..003 pass on latex and docx.
+  cross_engine: gate
