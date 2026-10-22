@@ -148,7 +148,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. New Hampshire](courts/first-circuit/new-hampshire/federal/bankruptcy-district) | `nhb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. New Hampshire](courts/first-circuit/new-hampshire/federal/district) | `nhd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Supreme Court of New Hampshire](courts/first-circuit/new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | 4/4 | 4/4 | 29 |
+| [Supreme Court of New Hampshire](courts/first-circuit/new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | 8/8 | 6/6 | 29 |
 
 ### Puerto Rico
 
