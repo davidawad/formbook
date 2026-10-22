@@ -1,27 +1,27 @@
-# ord motion-brief: Gate 2 review, docx engine
+# ord motion-brief: Gate 2 review, typst and docx engines
 
-Reviewer: docx engine build (agent), 2026-10-15. Every page of the current LibreOffice PDF was rasterized at 60 dpi
-(`pdftoppm -r 60`) and viewed, after the last re-render. The typst reference (12 pages) was rasterized and viewed for
-comparison (pages 1, 2, 11 and 12 compared directly). `tools/check.sh` cannot run on this doc-type folder (see the
-Engines section of ../README.md), so this file is the Gate 2 record for the docx engine.
+Reviewer: agent (fb-595.68.24), 2026-10-22, after the move onto the shared cross-engine layout model. Every page of
+both current renders was rasterized at 60 dpi (`pdftoppm -r 60`) and viewed side by side; pages 1 and 2 were also
+compared with `usage/FILED-EXAMPLE-motion-brief.pdf` (the Zoetis motion to dismiss, 11 pages) and with the rules in
+`../rules.md` (LR 7-1, LR 10-1, LR 10-2).
 
-## sample zoetis-rule-12-motion-to-dismiss docx
+## sample motion-brief
 
-- pdf: `usage/OUTPUT-zoetis-rule-12-motion-to-dismiss.docx.pdf`, sha256 `6d813f664694e6704c25f84125b50e309cc08cec895262b05ec6e205596b81f8`, 12 pages, letter, EB Garamond embedded
-- docx: `usage/OUTPUT-zoetis-rule-12-motion-to-dismiss.docx`, sha256 `00f7a099179ea52c6dd1cc011ddc5d8e470434454254d073f12a98250e08abad`
-- pages reviewed: 12 of 12
+- typst: `usage/OUTPUT-motion-brief.typst.pdf`, sha256 `1c4e3e259be39f9ad63d49eca22599b3d8687fa7289555a1a5eb726325f6ee9f`, 11 pages
+- docx: `usage/OUTPUT-motion-brief.docx.pdf`, sha256 `1ddcc43c357f8f0b5b31b21987a5655ba2e46bf5fc6d12c0b314d682411f5668`, 11 pages (LibreOffice), Times New Roman embedded
+- cross-engine: XENG-001..003 PASS, 295/295 typst lines break after the same word in the docx
+- pages reviewed: 11 of 11, both engines
 
 | Page | Content | Finding |
 |---|---|---|
-| 1 | Cover: counsel block (two firms, blank lines kept), court title, caption, case number at the page center, title in capitals, legend; footer "Page 1 - ..." | OK |
-| 2 | LR 7-1 certification; the motion; the start of the memorandum | OK |
-| 3 | Introduction (end); FACTS ALLEGED | OK |
+| 1 | Counsel block (two firms, blank lines kept); court title 1 in below it, centred, capitals, double-spaced; caption (parties at the margin, "vs."; case number, title in capitals and "(Oral Argument Requested)" from the page center); footer "Page 1 - DEFENDANT ZOETIS, INC.'S RULE 12 MOTION TO DISMISS" | OK. The exemplar's first page also holds only the cover. |
+| 2 | LR 7-1 CERTIFICATION (LR 7-1(a): conferral in the first paragraph); the motion; MEMORANDUM OF POINTS AND AUTHORITIES | OK. Headings bold, centred, at the type size, as in the exemplar (which also underlines them: tier 3, not chased). |
+| 3 | Memorandum (end of introduction); FACTS ALLEGED | OK |
 | 4 | Facts (end); LEGAL STANDARD | OK |
-| 5 | ARGUMENT; I. heading (bold, left); argument text | OK |
-| 6 | Block quotation (single-spaced, indented both sides); paragraph; II. heading | OK |
-| 7 | II. text; A. heading (bold, indented) | OK |
-| 8 | A. text; B. heading (wraps to two lines, indented) | OK |
-| 9 | B. text; C. heading | OK |
-| 10 | C. text (end); III. heading and its paragraph; the page ends early because CONCLUSION is kept with the signature block (same as typst) | OK |
-| 11 | CONCLUSION; DATED and the signature block (two firms) | ACCEPTED: the phone and fax line wraps in the right column at the same place as in typst. |
-| 12 | Certificate of service: wording, served party, method, signature | OK |
+| 5 | ARGUMENT; heading I (bold, at the margin); the block quotation begins (single-spaced, indented both sides) | OK |
+| 6 | Quotation ends; Fowler citation; heading II | OK |
+| 7 | II text; heading A (bold, half an inch in) | OK |
+| 8 | A text (end); heading B | OK |
+| 9 | B text (end); heading C | OK |
+| 10 | C text (end); III; CONCLUSION; DATED and the signature block (two firms), kept with the last paragraph | OK. Long signature lines wrap in the 3.4 in column at the same words in both engines. |
+| 11 | Certificate of service on its own page: wording, the party served, the method, the signature | OK |
