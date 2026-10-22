@@ -1,28 +1,35 @@
-# Gate 2 review: complaint, docx engine (LibreOffice PDF)
+# Gate 2 review: complaint, typst and docx engines (fb-595.68.24)
 
-Reviewer: the lead's docx sub-agent (every page rendered at 60 dpi with pdftoppm and viewed with the image reader, after the last template change). check.sh could not run on this folder (see README "## Engines"), so this record is the review.
+Reviewer: the porting agent of fb-595.68.24. Every page of both renders rendered at 60 dpi with pdftoppm and viewed
+with the image reader side by side (typst | docx), after the last template change, against
+`usage/FILED-EXAMPLE-complaint.pdf` pages 1 and 2 and the court's rules (`../rules.md`).
 
-## sample plenty-complaint docx
+## sample complaint
 
-- `OUTPUT-plenty-complaint.docx` sha256: 787a2e9e9501da2bf7f7d895250f3e37bee1dbd480e2bc0abcf817cf664db736
-- `OUTPUT-plenty-complaint.docx.pdf` sha256: 070edc11093cdd5e8c7c67fd9f682daee587605059d19b78eb2e467840addf03
-- Pages: 9 of 9 viewed.
+- `OUTPUT-complaint.typst.pdf` sha256: 523871c8530e3cf885aa8bda261baebf7069d6f0d4a89ce02c74fa7b74ce42bf
+- `OUTPUT-complaint.docx` sha256: 35d934dabcae3422a7634fefbe6f28588076c9c5df6be8682af3f1365e43c543
+- `OUTPUT-complaint.docx.pdf` sha256: 1fd356a1a6e4f65dcb2c00f33c23db0b024e5abf83e0e755869be876ae5b8a52
+- Pages: 10 of 10 viewed on each engine. `check.sh --engine docx`: XENG-001..003 PASS (219/219 lines break alike).
 
-| page | content | result |
+| page | content (both engines) | result |
 |---|---|---|
-| 1 | Counsel lines 1 to 4; court title lines 5 to 7; caption lines 9 to 12 (right and bottom rules under the parties); case number and bold title at right; body from line 13; footer "PLAINTIFF’S CLASS ACTION COMPLAINT - 1". | Pass |
-| 2 | Paragraphs 2 (end) to 8; JURISDICTION AND VENUE on line 9; text to line 21. | Pass |
-| 3 | Paragraphs 8 (end) to 15; PARTIES (line 3) and FACTUAL ALLEGATIONS (line 7) centered. | Pass |
-| 4 | Paragraphs 15 (end) to 19; the call list (i) to (xiii) runs inside paragraph 19 as text. | Pass |
-| 5 | Paragraphs 19 (end) to 26. | Pass |
-| 6 | Paragraphs 26 (end) to 28 (consumer quotations shortened, marked [...]); LEGAL STANDARD on line 15. | Pass |
-| 7 | CLASS ACTION ALLEGATIONS on line 1; paragraphs 29 to 36. | Pass |
-| 8 | Paragraphs 37 to 42; FIRST CAUSE OF ACTION and its two sub-heading lines on lines 11 to 13. | Pass |
-| 9 | Paragraph 42 (end); RELIEF REQUESTED; 43 with items A to F; JURY DEMAND; 44; DATED and signature block on lines 14 to 18; nothing in the footer area. | Pass |
+| 1 | Counsel single spaced on lines 1 to 4; court title on lines 5 to 7, centred; blank line 8; caption on lines 9 to 12 (the party box ruled at its right and foot, the rule on a numbered line), case number, bold title (two lines) and DEMAND FOR JURY TRIAL at right; paragraph 1 from line 13; INTRODUCTION on line 16; footer "PLAINTIFF’S CLASS ACTION COMPLAINT - 1" below line 20. | Pass |
+| 2 | Paragraphs 3 to 8; JURISDICTION AND VENUE on line 10. | Pass |
+| 3 | Paragraphs 8 (end) to 13; PARTIES (line 6) and FACTUAL ALLEGATIONS (line 10). | Pass |
+| 4 | Paragraphs 13 (end) to 18. | Pass |
+| 5 | Paragraphs 19 to 22; the call list (i) to (xiii) runs inside paragraph 19 as text; line 20 empty (paragraph 23 keeps its two lines together). | Pass |
+| 6 | Paragraphs 23 to 26 (consumer quotations shortened, marked [...]). | Pass |
+| 7 | Paragraphs 26 (end) to 30; LEGAL STANDARD (line 6), CLASS ACTION ALLEGATIONS (line 12); line 20 empty (widow control). | Pass |
+| 8 | Paragraphs 30 (end) to 37; line 20 empty. | Pass |
+| 9 | Paragraphs 38 to 42; FIRST CAUSE OF ACTION and its two sub-headings on lines 9 to 11. | Pass |
+| 10 | RELIEF REQUESTED; paragraph 43 with items A to F (D and F wrap under their text); JURY DEMAND; paragraph 44; a blank single line, then DATED and the signature block (lines 15 to 19); nothing in the footer area. | Pass |
 
-Page starts match the typst output (same first line on every page, 9 pages). Body text sits on the numbers (checked with pdftotext -bbox: body line 13 at the same y as number 13).
+Body text sits on the numbered lines on every page in both engines (`fb diff --engines`: 0.00 pt baseline difference
+over 219 lines, line numbers and footer included).
 
 Open or accepted (tier 2 or 3):
-- ACCEPTED: the pleading rules are page borders over the text area, not full-height rules from the page edge; one line of reason in README "## Engines".
-- ACCEPTED: the caption rules are cell borders; a Word table may differ by a fraction of a point.
-- OPEN (not verified): the file was not opened in Microsoft Word; LibreOffice only.
+- ACCEPTED: the docx pleading rules are page borders around the text area, not full-height rules from the page edge
+  as typst draws them (Word has no full-height page rule without a drawing).
+- ACCEPTED (tier 3): the exemplar sets the court title bold and single spaced, the headings underlined, and runs 21
+  lines a page; the template keeps 20 numbered lines inside the 1 in bottom margin (the rule fixes no count).
+- OPEN (not verified): the .docx was not opened in Microsoft Word; LibreOffice only.
