@@ -14,9 +14,8 @@ parties:
   - name: "GEORGIA POWER COMPANY,"
     role: "Intervenor-Appellee."
 title: "Brief in Support of Appellant's Motion for Reconsideration"
+counsel_role: "Counsel for Appellant Sierra Club, Inc."
 counsel:
-  - names: ["Counsel for Appellant Sierra Club, Inc."]
-    lines: []
   - names: ["Robert B. Jackson, IV, Esq."]
     lines: ["Georgia Bar #387750", "Robert B. Jackson, IV, LLC", "260 Peachtree St - Ste 2200", "Atlanta, GA 30303", "(404) 313-2039 Voice", "rbj4law@gmail.com"]
   - names: ["Dorothy E. Jaffe, Esq."]
@@ -105,8 +104,8 @@ As a final basis for affirming the decisions below, the Court’s October 25 Ord
 
 To be clear, nowhere in any of the Appellees’ briefs do the Appellees cite any evidence or authority that:
 
-1) Georgia was handling its wastes lawfully or prudently: rather the only evidence in the record is that Georgia was handling its wastes unlawfully and imprudently, and Georgia Power is now seeking to make its customers pay the costs to correct that unlawful and imprudent conduct;
-2) It is just or reasonable to force Georgia Power’s captive customers to pay all the costs to clean up the coal ash pollution caused solely by Georgia Power’s unlawful and imprudent conduct.
+1. Georgia was handling its wastes lawfully or prudently: rather the only evidence in the record is that Georgia was handling its wastes unlawfully and imprudently, and Georgia Power is now seeking to make its customers pay the costs to correct that unlawful and imprudent conduct;
+2. It is just or reasonable to force Georgia Power’s captive customers to pay all the costs to clean up the coal ash pollution caused solely by Georgia Power’s unlawful and imprudent conduct.
 
 There is nothing in the lower Court Order or Appellees’ briefs that can sustain this Court’s decision.
 

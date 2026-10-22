@@ -45,6 +45,8 @@ The regenerated same-id overlay pairs ours pages 1-8 with filed pages 4-11, page
 3. The filer's motion and brief are two documents in one PDF; the template renders one document per sample.
 4. Table of authorities and contents are available (`authorities`, `toc`) but this sample uses neither, as filed.
 
-## Engines (fb-595.68.36)
+## Engines
+
+typst, latex and docx on the shared document model (fb-595.54.12; docs/EVAL-LOOP.md, "Generated engines", fb-595.54.59): `typst/layout.yaml` holds the layout as data (the motion brief's, with the counsel line `counsel_role` above the two columns of counsel), `typst/gactapp-petition-for-rehearing.typ` hands it to `lib/typst/xdoc.typ`, and `fb engines gen` writes `latex/` and `docx/` from it; LaTeX and Word break every line and page where typst does (`params.cross_engine: gate`). INPUT changes for the port: the counsel line is the field `counsel_role` (it was a counsel group without lines), and the two-item list is numbered "1." (typst sets a "1)" list as "1.", LaTeX and Word as written; docs/open-items/fb-595.54.59.md). What follows records the hand-written engines of fb-595.68.36 that the generated ones replace.
 
 The template, filter and styles are those of `../motion-brief` (see its README, "Engines"): typst and docx on the shared cross-engine layout model, Times New Roman 14 pt, 32.2 pt body and 16.1 pt single line boxes, `docx/reference.xml` (`base="xengine"`) and `docx/gactapp-motion.lua` on `docx.xengine`; `make-reference.sh`, `render.sh` and `reference.docx` are gone. The docx was Liberation Serif (TNR-EMBEDDED failed) and printed the old synthetic layout.
