@@ -10,8 +10,12 @@
 //! string. Body needles (kind `B`) are found in document order, each from where the one before it was found, so a
 //! short citation ("Id.") is found after the text before it, not earlier on the page. A needle inside a footnote
 //! (kind `N`) is searched from the start of the page the body has reached (footnotes are printed at the foot of the
-//! page) and moves nothing. When NEEDLE runs over a page break with footnotes between, FALLBACK (the text alone) is
-//! tried.
+//! page) and moves nothing. When NEEDLE runs over a page break with footnotes between, it is found by its halves: a
+//! body needle's head on a page and its tail where the next page starts (the longest head first); failing that,
+//! FALLBACK (the text alone) is tried.
+
+/// The shortest tail of a needle that runs over a page end (docs in the module comment).
+const MIN_TAIL: usize = 4;
 
 /// Lower-case ASCII letters and digits only.
 pub fn norm(s: &str) -> String {
@@ -176,6 +180,25 @@ pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
             })
             .flatten()
     };
+    // a body needle that runs over a page end, with the footnotes and the page number between its halves: its head on
+    // a page (from `from`), its tail (MIN_TAIL characters or more) where the next page starts
+    let split = |s: &str, from: usize| -> Option<usize> {
+        for q in page_at(from)..starts.len() {
+            let (b, a) = (starts[q], starts[q - 1].max(from));
+            if b <= a {
+                continue;
+            }
+            for k in (1..=s.len().saturating_sub(MIN_TAIL)).rev() {
+                let (head, tail) = s.split_at(k);
+                if all[b..].starts_with(tail) {
+                    if let Some(i) = all[a..b].find(head) {
+                        return Some(a + i);
+                    }
+                }
+            }
+        }
+        None
+    };
     let mut cur = 0;
     let mut found = vec![];
     for n in &ns {
@@ -187,7 +210,9 @@ pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
                 .copied()
                 .unwrap_or(0)
         };
-        let pos = find(&n.needle, from).or_else(|| find(&n.fallback, from));
+        let pos = find(&n.needle, from)
+            .or_else(|| (n.place == Place::Body).then(|| split(&n.needle, from)).flatten())
+            .or_else(|| find(&n.fallback, from));
         if let (Some(p), true) = (pos, n.place == Place::Body) {
             cur = p + 1;
         }
@@ -269,6 +294,17 @@ mod tests {
             got,
             "S:toc\t2\ti\nH:1\t3\t1\nT:1\t3\t1\nT:2\t4\t2\nT:3\t4\t2\nS:add\t5\tAdd-1\n"
         );
+    }
+
+    #[test]
+    fn a_body_needle_over_a_page_end_is_found_by_its_halves() {
+        let pdf = "Intro\nsee Smith, 18\n1 Footnote text 2026\n4\n\u{c}U.S.C. 2710. Only a person\nmore 18 U.S.C. 2710 here\n5\n\u{c}";
+        let p = page_texts(pdf);
+        let needles = "T:1\tB\t18usc2710onlyaperson\t18usc2710\nT:2\tB\tmore18usc\tmore\n";
+        assert_eq!(lookup(needles, &p).unwrap(), "T:1\t1\t-\nT:2\t2\t-\n");
+        // a footnote needle is not split; its fallback still finds it
+        let notes = "T:1\tN\t18usc2710onlyaperson\t18usc2710\n";
+        assert_eq!(lookup(notes, &p).unwrap(), "T:1\t2\t-\n");
     }
 
     #[test]
