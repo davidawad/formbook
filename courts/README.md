@@ -130,9 +130,9 @@ Courts under `courts` (346).
 | [District Court, W.D. Texas](fifth-circuit/texas/federal/western-district) | `txwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Louisiana Court of Appeal](fifth-circuit/louisiana/state/court-of-appeal) | `lactapp` | up for review | 6/6 | 5/5 | 5/5 | 29 |
 | [Supreme Court of Louisiana](fifth-circuit/louisiana/state/supreme-court) | `la` | up for review | 9/9 | — | — | 29 |
-| [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
+| [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | up for review | 5/5 | 5/5 | 4/4 | 29 |
 | [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | 7/7 | 5/5 | 5/5 | 29 |
-| [Court of Civil Appeals of Texas](fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | 2/2 | 5/5 | 29 |
+| [Court of Civil Appeals of Texas](fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | 2/2 | 4/5 | 29 |
 | [Court of Criminal Appeals of Texas](fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | 2/2 | 4/4 | 29 |
 | [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | 2/2 | 2/2 | 29 |
 | [United States Bankruptcy Appellate Panel of The Sixth Circuit](sixth-circuit/bankruptcy-appellate-panel) | `bap6` | up for review | 3/3 | — | 3/3 | 14 |
@@ -282,7 +282,7 @@ Courts under `courts` (346).
 | [Supreme Court of The Commonwealth of The Northern Mariana Islands](ninth-circuit/northern-mariana-islands/state/supreme-court) | `nmi` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Court of Appeals of Oregon](ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | up for review | 1/2 | — | — | 29 |
 | [Oregon Supreme Court](ninth-circuit/oregon/state/supreme-court) | `or` | up for review | 9/9 | — | — | 29 |
-| [Court of Appeals of Washington](ninth-circuit/washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | 5/5 | 5/5 | 29 |
+| [Court of Appeals of Washington](ninth-circuit/washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
 | [Washington Supreme Court](ninth-circuit/washington/state/supreme-court) | `wash` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 | [United States Bankruptcy Appellate Panel of The Tenth Circuit](tenth-circuit/bankruptcy-appellate-panel) | `bap10` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Tenth Circuit](tenth-circuit/court-of-appeals) | `ca10` | up for review | 3/3 | 1/1 | 3/3 | 14 |
