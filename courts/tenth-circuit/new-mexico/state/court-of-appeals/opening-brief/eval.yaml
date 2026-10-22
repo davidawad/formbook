@@ -2,3 +2,11 @@
 # (the cover page may be 11-point only if needed to fit the cover on one page; the cover here is set at 14 pt).
 font:
   size_pt: 14
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). latex breaks every line and page where
+# typst does (XENG-001..003 pass). docx is reported: p15 line 3 "… entirely new part of § 20.11.72" is 0.05 pt wider
+# than the 468 pt measure in typst, which moves "§ 20.11.72" down; LibreOffice's twip-rounded advances set the line
+# 0.27 pt narrower and keep it (the line-fit tolerance open in docs/open-items/fb-595.54.82.md); pages and page ends equal.
+params:
+  cross_engine: gate
+  cross_engine_docx: report
