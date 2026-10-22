@@ -1,4 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
 # typst render does (fb-595.68.23, on the shared layout model lib/*/xengine*), so a difference fails.
+# The bottom margin is 1.5 in (24 numbered lines of 24 pt under the 1.5 in top margin; LR 5.2(a) asks at least 1 in):
+# the footer (page number, title, case number) stands in it, so the content gate leaves it out from there.
 params:
   cross_engine: gate
+  margin_bottom_pt: 108
