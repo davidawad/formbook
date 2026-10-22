@@ -29,12 +29,12 @@ Courts under `courts/eighth-circuit` (38).
 | [District Court, D. South Dakota](south-dakota/federal/district) | `sdd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Arkansas Court of Appeals](arkansas/state/court-of-appeals) | `arkctapp` | up for review | 6/6 | 4/4 | 4/4 | 29 |
 | [Arkansas Supreme Court](arkansas/state/supreme-court) | `ark` | up for review | 9/9 | 8/8 | 8/8 | 29 |
-| [Court of Appeals of Iowa](iowa/state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 3/3 | 3/3 | 29 |
+| [Court of Appeals of Iowa](iowa/state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Supreme Court of Iowa](iowa/state/supreme-court) | `iowa` | up for review | 8/8 | 6/6 | 6/6 | 29 |
 | [Court of Appeals of Minnesota](minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
 | [Supreme Court of Minnesota](minnesota/state/supreme-court) | `minn` | up for review | 8/8 | 2/2 | 2/2 | 29 |
 | [Missouri Court of Appeals](missouri/state/court-of-appeals) | `moctapp` | up for review | 5/5 | 1/1 | 1/1 | 29 |
-| [Missouri Court of Appeals, Eastern District](missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 3/3 | 29 |
+| [Missouri Court of Appeals, Eastern District](missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Missouri Court of Appeals, Southern District](missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Missouri Court of Appeals, Western District](missouri/state/court-of-appeals-western-district) | `moctappwd` | up for review | 5/5 | 5/5 | 5/5 | 29 |
 | [Supreme Court of Missouri](missouri/state/supreme-court) | `mo` | up for review | 6/6 | 6/6 | 6/6 | 29 |

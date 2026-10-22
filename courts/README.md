@@ -209,12 +209,12 @@ Courts under `courts` (346).
 | [District Court, D. South Dakota](eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Arkansas Court of Appeals](eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | up for review | 6/6 | 4/4 | 4/4 | 29 |
 | [Arkansas Supreme Court](eighth-circuit/arkansas/state/supreme-court) | `ark` | up for review | 9/9 | 8/8 | 8/8 | 29 |
-| [Court of Appeals of Iowa](eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 3/3 | 3/3 | 29 |
+| [Court of Appeals of Iowa](eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Supreme Court of Iowa](eighth-circuit/iowa/state/supreme-court) | `iowa` | up for review | 8/8 | 6/6 | 6/6 | 29 |
 | [Court of Appeals of Minnesota](eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
 | [Supreme Court of Minnesota](eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | 8/8 | 2/2 | 2/2 | 29 |
 | [Missouri Court of Appeals](eighth-circuit/missouri/state/court-of-appeals) | `moctapp` | up for review | 5/5 | 1/1 | 1/1 | 29 |
-| [Missouri Court of Appeals, Eastern District](eighth-circuit/missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 3/3 | 29 |
+| [Missouri Court of Appeals, Eastern District](eighth-circuit/missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Missouri Court of Appeals, Southern District](eighth-circuit/missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Missouri Court of Appeals, Western District](eighth-circuit/missouri/state/court-of-appeals-western-district) | `moctappwd` | up for review | 5/5 | 5/5 | 5/5 | 29 |
 | [Supreme Court of Missouri](eighth-circuit/missouri/state/supreme-court) | `mo` | up for review | 6/6 | 6/6 | 6/6 | 29 |
@@ -314,7 +314,7 @@ Courts under `courts` (346).
 | [Supreme Court of Oklahoma](tenth-circuit/oklahoma/state/supreme-court) | `okla` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [Court of Appeals of Utah](tenth-circuit/utah/state/court-of-appeals) | `utahctapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Utah Supreme Court](tenth-circuit/utah/state/supreme-court) | `utah` | up for review | 7/7 | 7/7 | 7/7 | 29 |
-| [Wyoming Supreme Court](tenth-circuit/wyoming/state/supreme-court) | `wyo` | up for review | 3/3 | — | — | 29 |
+| [Wyoming Supreme Court](tenth-circuit/wyoming/state/supreme-court) | `wyo` | up for review | 3/3 | 2/2 | 2/2 | 29 |
 | [United States Court of Appeals for the Eleventh Circuit](eleventh-circuit/court-of-appeals) | `ca11` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court for the Middle District of Alabama](eleventh-circuit/alabama/federal/bankruptcy-middle-district) | `almb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Alabama](eleventh-circuit/alabama/federal/bankruptcy-northern-district) | `alnb` | up for review | 2/2 | — | 2/2 | 14 |
