@@ -7,7 +7,7 @@ Folder: `courts/ninth-circuit/washington/federal/bankruptcy-western-district/mot
 |---|---|
 | exemplar | yes. Primary: `usage/FILED-EXAMPLE-motion-brief.pdf` (19 pp., Debtor's motion and memorandum, William C. Budigan). Second filer: `usage/FILED-EXAMPLE-motion-brief-2.pdf` (15 pp., memorandum in support of partial summary judgment, The Rigby Law Firm; filed 2015 under the old rules). Both re-downloaded 2026-10-14 from the URLs in `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md`: transcription of exemplar pp. 1 to 11 and 17 to 18 (notation, caption, motion, memorandum, signature, certificate of service). Pages 12 to 16 and 19 are not transcribed; see Known gaps. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, Letter, typst 0.15.0 through `tools/render.sh`, no typst warnings, fonts: EB Garamond Regular, Bold and Italic only (`pdffonts`, all embedded). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, Letter, typst 0.15.0 through `tools/render.sh`, no typst warnings, vendored Times New Roman only (all embedded); docx `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`, 14 pages (see Engines). |
 | overlay | ok: `usage/OVERLAY-smith-motion-memorandum.pdf` and `usage/OVERLAY-smith-motion-memorandum.txt` (page map), against the Smith exemplar. |
 | pages reviewed | 12 of 12: every page rasterized at 80 dpi and viewed in the final render (after the caption and signature fixes, all pages were viewed again). |
 
@@ -28,8 +28,8 @@ Verified 2026-10-14. Primary source: the W.D. Wash. Local Bankruptcy Rules, "Eff
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LBR 9004-1(a) (M) | 8-1/2 x 11; standard embedded font, 11 or 12 point; double spaced. | `page-w`, `page-h`; `type-size = 12pt`; `pitch = 24pt` (double spacing); `footer-size = 11pt`. |
-| Typeface | Face required: none. LBR 9004-1(a) says "a standard embedded font" and names no face; no other W.D. Wash. local rule names one (checked 2026-10-15 against the same 2023 PDF). | Face: EB Garamond (`font-family` in `typst/wawb-motion-brief.typ`), kept because the rule names no face (`docs/FONTS.md`, "No face named"). No vendored substitute applies; fit n/a. The filed exemplars use Times New Roman and Arial; that is filer convention, not a rule. |
-| LBR 9004-1(b)(1) (M) | Numbered paper: line numbers in the left margin. | `line-numbers()`: 28 numbered lines. The filed exemplar (Smith) has none; the template follows the rule. |
+| Typeface | Face required: none. LBR 9004-1(a) says "a standard embedded font" and names no face; no other W.D. Wash. local rule names one (checked 2026-10-15 against the same 2023 PDF). | Face: Times New Roman (`font-family` in `typst/wawb-motion-brief.typ`; the docx names the same face through `{font}`), the house standard where the rule names no face. The filed exemplars use Times New Roman and Arial. |
+| LBR 9004-1(b)(1) (M) | Numbered paper: line numbers in the left margin. | `line-numbers()`: 27 numbered lines, level with their text. The filed exemplar (Smith) has none; the template follows the rule. |
 | LBR 9004-1(b)(2) (M) | Judge's name at the right side of the top of the front page. | `notation()`: judge at top right. |
 | LBR 9013-1(d)(1)(B) (M) | On the motion, notice, response and reply: judge, chapter, location, date and time of hearing, and response date, in the top right-hand corner. | `notation()`: chapter, hearing location, date, time, response date (from the frontmatter `hearing`). |
 | LBR 9004-1(b)(3) (M) | Bottom left: abbreviated title and page number. Bottom right: name, address and telephone of the attorney or firm. | `footer-block()`: `footer_title` and page number; `footer_counsel` at right. |
@@ -48,7 +48,7 @@ Tier-2 conventions, checked against both filed exemplars (both use these; the te
 
 ## Layout
 
-- Page 1: notation top right (lines 1 to 6); court title on lines 7 to 9; caption on lines 11 to 19 (debtor block with one ")" per line, the case number and the title at right); the notice-and-motion paragraph follows.
+- Page 1: notation top right (lines 1 to 6, single spaced); court title on lines 8 to 10; caption on lines 12 to 18 (debtor block with one ")" per line, the case number and the title at right); the notice-and-motion paragraph follows.
 - Body: double spaced on the 24 pt grid; first-line indent; no paragraph numbers (LBR 9013-1 does not number them and neither exemplar numbers the motion paragraphs). Level-1 headings centered in bold capitals (RELIEF REQUESTED, MEMORANDUM OF LAW, CERTIFICATE OF SERVICE); level-2 headings bold, left aligned; level-3 italic. Block quotations are indented 0.5 in on both sides and double spaced (see Known gaps). Lists are bulleted.
 - Signature: the paragraph beginning "Dated:" is kept whole on one page (`blocks()`), so the signature never splits.
 - Certificate of service: the transcribed certificate, with the party list. The party list is in the markdown body with hard line breaks.
@@ -76,39 +76,38 @@ The overlay is a diagnostic, not a score. Pages 1 to 3 agree most closely: the n
 
 ## Page review
 
-- Page 1: notation top right, court title, caption with ")" column and case number and title, the notice-and-motion paragraph and the start of the background list. Pass.
-- Page 2: background list (continued), RELIEF REQUESTED, the arrears and accelerated-amount paragraphs. Pass.
-- Page 3: the reduction request, "As explained below", MEMORANDUM OF LAW and the first statute-of-limitations paragraphs. Pass.
-- Page 4: Citing line, the acceleration heading (two lines, kept with its paragraph), Merritt block quotation. Pass.
-- Page 5: POLICY heading, LUV block quotation, "Impact of bankruptcy Filing" heading, the Johnson and Dewsnup quotation. Pass.
-- Page 6: discharge paragraph, the stay paragraph, "Washington state laws" and the RCW 4.16.230 block quotation (kept on one page). Pass.
-- Page 7: "Impact of US Bankruptcy laws", the Hazel facts, the court's ruling. Pass.
-- Page 8: 11 U.S.C. 108(c) block quotation and the Thurman analysis. Pass.
-- Page 9: the minority-jurisdiction and Ninth Circuit paragraphs and the Southern Cal. Plastics quotation. Pass.
-- Page 10: Southern Cal. Plastics (continued), Hazel conclusion, FIRST MORTGAGE HISTORY heading (two lines, kept with its paragraph), loan transfer paragraphs. Pass.
-- Page 11: YEARS IN BANKRUPTCY heading, bankruptcy history, the three-item gap list, the omitted-table note. Lines 25 to 28 are empty because the signature block moves to page 12 as one unit. Pass (accepted: the signature block is kept whole by design).
-- Page 12: signature block, CERTIFICATE OF SERVICE, the declaration and the party list. Pass.
+Typst render of 2026-10-22 (fb-595.68.24), every page at 60 dpi; the docx pages are in `reviews/docx.md`.
+
+- Page 1: notation top right from line 1, court title, caption with ")" column, case number and bold title, the notice-and-motion paragraph, "Background for Motion" and the first bullet. Pass.
+- Page 2: the other bullets, RELIEF REQUESTED, the arrears and accelerated-amount paragraphs. Pass.
+- Page 3: the reduction request, "As explained below", MEMORANDUM OF LAW, the first statute-of-limitations paragraph. Pass.
+- Page 4: Copper Creek and Merritt, Citing line, the two-line acceleration heading kept with its paragraph. Pass.
+- Page 5: Merritt block quotation, POLICY heading, LUV block quotation. Pass.
+- Page 6: "Impact of bankruptcy Filing", the Johnson quotation, the discharge paragraph. Pass.
+- Page 7: the stay paragraph, the RCW 4.16.230 quotation, "Impact of US Bankruptcy laws", Hazel. Pass.
+- Pages 8 to 10: Hazel facts and ruling, the 11 U.S.C. 108(c) quotations. Pass.
+- Page 11: the last quotation, FIRST MORTGAGE HISTORY (two lines) and the loan paragraphs; lines 26 and 27 empty because the next three-line heading moves on with its paragraph. Pass.
+- Page 12: YEARS IN BANKRUPTCY heading, bankruptcy history, the three-item gap list; lines 26 and 27 empty (the omitted-table note would leave one line). Pass.
+- Page 13: the omitted-table note, the "Dated:" signature kept whole, CERTIFICATE OF SERVICE and the party list. Pass.
+- Page 14: the last two lines of the party list. Pass.
 
 ## Known gaps
 
-1. **Length (LBR 9013-1(d)(1)(C), M).** The template does not count pages or decide whether the motion is dispositive. The sample renders to 12 pages including the notice, the certificate and the party list. The filed exemplar's memorandum runs past 12 pages (the filing is 19 pages). If this is a non-dispositive motion, the memorandum needs prior court approval to exceed 12 pages; if it is dispositive, the limit is 24. Counsel decides which. This is the author's responsibility (A).
+1. **Length (LBR 9013-1(d)(1)(C), M).** The template does not count pages or decide whether the motion is dispositive. The sample renders to 14 pages including the notice, the certificate and the party list. The filed exemplar's memorandum runs past 12 pages (the filing is 19 pages). If this is a non-dispositive motion, the memorandum needs prior court approval to exceed 12 pages; if it is dispositive, the limit is 24. Counsel decides which. This is the author's responsibility (A).
 2. **Notice text (LBR 9013-1(c)(3)(B), M).** The notice must say that a response must be filed by the response date and that if none is filed the court may grant the motion before the hearing without further notice. The sample does not say so: the filed exemplar does not either. The template cannot add it. This is the author's responsibility (A).
 3. **Declaration and proposed order (LBR 9013-1(d)(1)(A), (d)(1)(D), M).** The sample does not include a declaration of the debtor, although the certificate's title names one; the transcription did not reach the filing's declaration pages. The proposed order is a separate exhibit under LBR 9013-1(d)(1)(D) and is not produced by this template.
 4. **Transcription omissions.** Not transcribed: the recording-history table (exemplar pp. 10 and 11; replaced by a bracketed note in the sample), the foreclosure-cost analysis and exhibit arithmetic (exemplar pp. 12 to 16), and the declaration (p. 19). The sample ends with the certificate of service.
 5. **Block quotations double spaced.** LBR 9004-1(a) says all pleadings are double spaced, so the template double spaces block quotations. The filer single-spaces them. This is a tier-2 choice I resolved toward the rule; if the court's clerks accept single-spaced block quotations, change `quote-indent` handling in `typst/wawb-motion-brief.typ`.
-6. **Pleading line count.** LBR 9004-1(b)(1) requires line numbers but does not say how many. 28 lines follows the sibling complaint template in this court; it is not set by the rule.
+6. **Pleading line count.** LBR 9004-1(b)(1) requires line numbers but does not say how many. 27 lines of 24 pt between 1 in margins, as the sibling complaint template; it is not set by the rule.
 7. **Caption entries.** The debtor names are split into one frontmatter entry per line (`MELANIE A SMITH`, `*aka* M A SMITH`, `*aka* M SMITH,`) so that each ")" lines up with one name line. This is sample data, not a template break.
 8. **Second filer not overlaid.** The Pigida filing (2015) was used for the tier-2 cross-check of the notation, caption and bottom notation. It is not overlaid because its pleading format predates the 2023 rules.
-9. **Gate 2 record.** No `reviews/` file for this doc type. The page review above is the visual check; it is not a recorded Gate 2 review.
+9. **Gate 2 record.** `reviews/docx.md` records the docx pages; the page review above is the typst one.
 10. **Adversary complaint.** The sibling `adversary-complaint/` folder has no `OUTPUT` or `OVERLAY` PDF and no `README` outputs in `usage/`. Not touched in this change.
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion-brief.lua` writes the notation, the caption, the body and the signature; `docx/render.sh` (run by `tools/render-docx.sh`) fills the bottom notation from the frontmatter. Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8), 12 pages; all 12 pages rendered at 60 dpi and viewed (`reviews/docx.md`).
+Both engines are on the shared cross-engine layout model (lib/typst/xengine.typ, lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"), and the docx is gated against the typst render (`eval.yaml`: `params.cross_engine: gate`): it breaks every line and page where typst does (XENG-001..003). `sh tools/check.sh <this dir> --engine typst|docx` runs every gate (`usage/.check-typst.txt`, `.check-docx.txt`).
 
-- Matches the typst output: letter; the same margins and 28-line grid as the complaint; EB Garamond 12 pt (`pdffonts`: EBGaramond Regular, Bold, Italic); pleading rules; the notation at the top right (judge, chapter, hearing location, date, time, response date) on lines 1 to 6; the court title; the caption with the debtor block, a ")" column and the case number and title at right, with a rule under the party column; body paragraphs unnumbered with a first-line indent; level 1 headings centered caps, level 2 bold, level 3 italic; block quotations indented 0.5 in both sides and double spaced; lists with bullets at 0.5 in and text at 0.9 in; the "Dated:" paragraph kept whole; bottom notation on every page.
-- Differs from typst: the numbers and the bottom notation are floating text boxes, not body flow; the notation and the caption are table rows with a minimum height in whole grid lines, so the body stays on the grid when a row wraps differently; page breaks follow LibreOffice (both renders are 12 pages, but the certificate and the "Dated:" block fall on different pages); the bullets are typed "•" in a table, not a Word list.
-- Fonts: as for the complaint, run with a `FONTCONFIG_FILE` that lists only the repo's `fonts/` directory.
-- Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML, every style it uses is defined, and the footer placeholders are all filled.
+**typst** (`typst/`): Times New Roman 12 pt in exact line boxes: 24 pt for the numbered lines and the body (block quotations included), 12 pt for the single-spaced notation and caption (two to a numbered line; each block starts 9.6 pt below a numbered line's top, so every other line sits on a number's baseline), 12 pt for the 11 pt bottom notation; 27 numbered lines, the numbers level with their text. The space that brings the notation and the caption back onto the numbered lines is counted from their items, as the docx engine counts it: an odd number of wrapped extra lines would leave the court title half a line off the numbers, in both engines alike (the sample's notation wraps by an even number and stays on them).
 
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml` at the court level, and a doc-type folder has neither; it exits 2 (`jq: Could not open file .../court.json`), so the gates did not run and `usage/.check-docx.txt` was not written.
+**docx** (`docx/`): `docx/reference.xml` (the cross-engine styles in the typst face, `{font}`) and `docx/wawb-motion-brief.lua`, which writes every paragraph at the typst pitches and spaces (the author's hard line breaks as Word line breaks), the footer (`$FORMBOOK_FOOTERS`: the line numbers in a page-anchored text box, the pleading rules as page-anchored lines, the bottom notation from `footer_title` and `footer_counsel`) and the last section (`$FORMBOOK_FINAL`). `fb render` builds the reference document and runs the pass; no script. Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice), 14 pages, as typst. The bullets are typed "•" and a tab, not a Word list. Not verified in Word (only LibreOffice here); Word may paginate differently.

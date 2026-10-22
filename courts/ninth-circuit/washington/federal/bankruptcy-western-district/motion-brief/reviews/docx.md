@@ -1,25 +1,24 @@
-# Gate 2 review, docx (LibreOffice PDF), smith-motion-memorandum
+# Gate 2 review, docx (LibreOffice PDF), motion-brief
 
-Reviewer: the docx engine agent, 2026-10-15. Method: `pdftoppm -r 60`, every page viewed. Comparison: the typst render of the same sample (`/work/artifacts/wawb/motion-brief/typst-smith-motion-memorandum.pdf`), pages 1 and 12 viewed.
+Reviewer: the porting agent (fb-595.68.24), 2026-10-22. Method: `pdftoppm -r 60`, every page of `usage/OUTPUT-motion-brief.docx.pdf` and of `usage/OUTPUT-motion-brief.typst.pdf` viewed side by side, and page 1 of `usage/FILED-EXAMPLE-motion-brief.pdf` for the conventions. Cross-engine: XENG-001..003 PASS (14 pages each, 416/416 typst lines break after the same word); the pages below look the same in both engines.
 
-## sample smith-motion-memorandum docx
-
-- PDF: `usage/OUTPUT-smith-motion-memorandum.docx.pdf`, sha256 `d2952185cf7f12ddef25a96f213e336bea1d20d3cedc13338c87da6fd0296ad0`
-- DOCX: `usage/OUTPUT-smith-motion-memorandum.docx`, sha256 `55bb04330125384687d0303c1ba23e9136b9259809fcad69d812ca467d3cc7c3`
+## sample motion-brief docx
 
 | page | verdict | note |
 |---|---|---|
-| 1 | Pass | notation top right (judge, chapter, hearing data), court title, caption with the ")" column, title at right, notice-and-motion paragraph, background list |
-| 2 | Pass | background list (continued), RELIEF REQUESTED, arrears paragraphs |
-| 3 | Pass | reduction request, MEMORANDUM OF LAW, first statute-of-limitations paragraphs |
-| 4 | Pass | Citing line; acceleration heading (two lines) kept with its paragraph; Merritt block quotation |
-| 5 | Pass | POLICY heading, LUV block quotation, Impact of bankruptcy Filing heading |
-| 6 | Pass | discharge and stay paragraphs; RCW 4.16.230 block quotation |
-| 7 | Pass | Impact of US Bankruptcy laws; Hazel facts |
-| 8 | Pass | 11 U.S.C. 108(c) block quotation |
-| 9 | Pass | minority-jurisdiction and Ninth Circuit paragraphs |
-| 10 | Pass | First mortgage history heading (two lines); loan transfer paragraphs |
-| 11 | Pass | bankruptcy history; the three-item bullet list (text at 0.9 in); the omitted-table note; Dated and signature lines on the grid |
-| 12 | Pass | certificate of service: party list at the foot |
+| 1 | Pass | notation top right (judge, chapter, hearing location, date and time, response date; LBR 9013-1(d)(1)(B)), court title on lines 8 to 10, caption with the ")" column, the rule under the debtor block, case number and bold title at right; the notice-and-motion paragraph on the numbered lines; bottom notation (title and page number left, counsel right) |
+| 2 | Pass | bullets at 0.5 in, text hanging at 0.9 in; RELIEF REQUESTED |
+| 3 | Pass | MEMORANDUM OF LAW, level-2 heading bold at the margin |
+| 4 | Pass | the two-line acceleration heading kept with its paragraph; italic case names |
+| 5 | Pass | block quotations 0.5 in in on both sides, double spaced |
+| 6 | Pass | "Impact of bankruptcy Filing" opens the page; Johnson quotation |
+| 7 | Pass | RCW 4.16.230 quotation, "Impact of US Bankruptcy laws" |
+| 8 | Pass | Hazel facts, the 108(c) quotation |
+| 9 | Pass | quotations continued |
+| 10 | Pass | quotations continued |
+| 11 | Pass | FIRST MORTGAGE HISTORY (two lines) and the loan paragraphs; lines 26 and 27 empty, as in typst (the next three-line heading moves on with its paragraph) |
+| 12 | Pass | bankruptcy history, the gap list with "S/L" kept whole; lines 26 and 27 empty, as in typst |
+| 13 | Pass | omitted-table note, "Dated:" signature kept whole with its hard line breaks, CERTIFICATE OF SERVICE, party list |
+| 14 | Pass | the last two lines of the party list |
 
-Open: none in tier 1. Tier 2 pagination differs from typst (LibreOffice line breaks; the "Dated:" block and the certificate fall on different pages); recorded in the README Engines section, not a defect.
+Open: none in tier 1. Tier 2, ACCEPTED: the sample renders to 14 pages; whether the memorandum's length needs approval under LBR 9013-1(d)(1)(C) is the author's call (README, Known gaps 1).
