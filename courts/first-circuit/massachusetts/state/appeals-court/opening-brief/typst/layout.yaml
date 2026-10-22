@@ -1,0 +1,88 @@
+# Massachusetts Appeals Court (massappct): principal brief (opening-brief; MRAP 16(a), 20). The whole layout, as data
+# for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to MRAP 16 and 20 (../../rules.md, MASSAPPCT-*); lengths in points. No
+# case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # MASSAPPCT-FORM-002 (MRAP 20(a)(4)(B)(ii)): 14 point or larger, footnotes included
+pitch:
+  body: 32.2              # MASSAPPCT-FORM-004 (MRAP 20(a)(4)(C)): double-spaced (Word's double, 2 x 1.15 x 14 pt:
+                          # 2.2 lines an inch, 20 a page, within 3 and 27)
+  single: 16.1            # cover, headings, footnotes, quotations, tables, signatures: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MASSAPPCT-FORM-003 (MRAP 20(a)(4)(A)): at least 1 inch
+indent: 36
+page_number: {align: center, from: 1}   # MASSAPPCT-FORM-005: the cover is page 1, pages run to the last, addendum included
+footnote: {size: 14, gap: 7, clearance: 14}   # MASSAPPCT-FORM-002, -004: footnotes 14 point, single-spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # MASSAPPCT-FORM-004: indented quotations single-spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The cover (MASSAPPCT-FORM-006, MRAP 20(a)(6)(B)): the court and the case number, the title of the case, the lower
+# court, the date, the title of the brief between the page's free space, and counsel right of centre.
+cover:
+  - {text: "COMMONWEALTH OF MASSACHUSETTS", align: center, bold: true}
+  - {text: "Appeals Court", align: center}
+  - {text: "No. {case_number}", align: center, bold: true, above: 10.8}
+  - each: caption
+    above: 10.8
+    between:
+      - {text: "v.", align: center, above: 7.2, below: 7.2}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true, above: 5.6}
+  - {text: "{lower_court}", align: center, above: 10.8}
+  - {text: "{date}", align: center, above: 10.8}
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - {text: "{names}", bold: true, left: 230.4, above: 8.4}
+      - {text: "{lines}", left: 230.4}
+# MRAP 16(a)(3), (4) (MASSAPPCT-FORM-008): the table of contents and the table of authorities, each on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 21.6, above: 12.6}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 2.8}
+# MASSAPPCT-OPEN-001 (MRAP 16(a)(12)-(15)): the signature block right of centre, never split, after the conclusion;
+# then the addendum (the body from its "# ADDENDUM" heading, MRAP 16(a)(13)); then the certificate of compliance on a
+# page of its own (MRAP 16(k)) and the certificate of service (MRAP 13(e)), each signed.
+closing:
+  - group:
+      - {text: "{signature.intro}", left: 230.4, optional: true}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 8.4}
+      - each: signature.signers
+        blocks:
+          - {text: "{name}", underline: true, left: 230.4, above: 16.8}
+          - {text: "{lines}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 8.4}
+    above: 16.8
+tail: {at: "ADDENDUM", break: true, pitch: body, indent: 36}
+after_tail:
+  - when: compliance
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Compliance", heading: 1}
+      - {text: "{compliance.paragraphs}", pitch: body, indent: 36}
+      - group:
+          - {text: "{compliance.signature.firm}", bold: true, left: 230.4, optional: true}
+          - each: compliance.signature.signers
+            blocks:
+              - {text: "{name}", underline: true, left: 230.4, above: 16.8}
+              - {text: "{lines}", left: 230.4}
+          - {text: "{compliance.signature.lines}", left: 230.4, optional: true, above: 8.4}
+        above: 5.6
+  - when: service
+    blocks:
+      - {text: "Certificate of Service", heading: 1}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - group:
+          - {text: "{service.signature.firm}", bold: true, left: 230.4, optional: true}
+          - each: service.signature.signers
+            blocks:
+              - {text: "{name}", underline: true, left: 230.4, above: 16.8}
+              - {text: "{lines}", left: 230.4}
+          - {text: "{service.signature.lines}", left: 230.4, optional: true, above: 8.4}
+        above: 5.6

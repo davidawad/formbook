@@ -269,7 +269,7 @@ CASSANDRA FERREIRA,
 
 Plaintiff,
 
-v.
+v\.
 
 ORDER
 
@@ -475,7 +475,7 @@ Case Disposition: Findings and Order, 06/25/2021.
 
 Effective: March 16, 2005.
 
-<Section impacted by 2020, 65, Secs. 3, 4 and 6 effective April 20, 2020 relating to lessor accessing rent received in advance for the last month of tenancy in order to address disruptions caused by the outbreak of COVID-19.>
+\<Section impacted by 2020, 65, Secs. 3, 4 and 6 effective April 20, 2020 relating to lessor accessing rent received in advance for the last month of tenancy in order to address disruptions caused by the outbreak of COVID-19.>
 
 (1) (a) No lease relating to residential real property shall contain a provision that a lessor may, except to inspect the premises, to make repairs thereto or to show the same to a prospective tenant, purchaser, mortgagee or its agents, enter the premises before the termination date of such lease. A lessor may, however, enter such premises: (i) in accordance with a court order; (ii) if the premises appear to have been abandoned by the lessee; or (iii) to inspect, within the last thirty days of the tenancy or after either party has given notice to the other of intention to terminate the tenancy, the premises for the purpose of determining the amount of damage, if any, to the premises which would be cause for deduction from any security deposit held by the lessor pursuant to this section.
 
@@ -539,7 +539,7 @@ Credits: Added by St.1969, c. 244, § 1. Amended by St.1970, c. 666, § 1; St.19
 
 Effective: March 16, 2005.
 
-<Section impacted by 2020, 65, Secs. 3 and 6 effective April 20, 2020 relating to suspension of evictions in order to address disruptions caused by the outbreak of COVID-19.>
+\<Section impacted by 2020, 65, Secs. 3 and 6 effective April 20, 2020 relating to suspension of evictions in order to address disruptions caused by the outbreak of COVID-19.>
 
 (a) For the purposes of this section the following words shall have the following meanings:--
 
@@ -601,7 +601,7 @@ Credits: Added by St.2004, c. 417, § 2, eff. Mar. 16, 2005.
 
 § 8A. Rent withholding; grounds; amount claimed; presumptions and burden of proof; procedures.
 
-<Section impacted by 2020, 65, Secs. 3 and 6 effective April 20, 2020 and 2020, 257, Sec. 1, as amended by 2021, 20, Secs. 12 to 15, 29 and 30 and 2022, 42, Sec. 30 effective December 31, 2020 relating to eviction protections in order to address disruptions caused by the outbreak of COVID-19.>
+\<Section impacted by 2020, 65, Secs. 3 and 6 effective April 20, 2020 and 2020, 257, Sec. 1, as amended by 2021, 20, Secs. 12 to 15, 29 and 30 and 2022, 42, Sec. 30 effective December 31, 2020 relating to eviction protections in order to address disruptions caused by the outbreak of COVID-19.>
 
 In any action under this chapter to recover possession of any premises rented or leased for dwelling purposes, brought pursuant to a notice to quit for nonpayment of rent, or where the tenancy has been terminated without fault of the tenant or occupant, the tenant or occupant shall be entitled to raise, by defense or counterclaim, any claim against the plaintiff relating to or arising out of such property, rental, tenancy, or occupancy for breach of warranty, for a breach of any material provision of the rental agreement, or for a violation of any other law. The amounts which the tenant or occupant may claim hereunder shall include, but shall not be limited to, the difference between the agreed upon rent and the fair value of the use and occupation of the premises, and any amounts reasonably spent by the tenant or occupant pursuant to section one hundred and twenty-seven L of chapter one hundred and eleven and such other damages as may be authorized by any law having as its objective the regulation of residential premises.
 

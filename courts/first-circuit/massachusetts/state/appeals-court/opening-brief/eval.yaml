@@ -2,3 +2,10 @@
 # or larger, footnotes included. Margins of 1 inch (the default) are the minimum under Rule 20(a)(4)(A).
 font:
   size_pt: 14
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the table of authorities
+# row of G.L. c. 239, § 8A has a page list wider than the page column (22 pages), which the shared model does not yet
+# set on a line of its own (docs/open-items/fb-595.54.68.md); typst wraps its citation word by word, Word and LaTeX
+# elsewhere, and LaTeX runs it into the right margin (DEF-FORM-002), so the latex engine is BLOCKED (not committed).
+params:
+  cross_engine: report
