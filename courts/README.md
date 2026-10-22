@@ -36,7 +36,7 @@ Courts under `courts` (346).
 | [United States Bankruptcy Court, D. Rhode Island](first-circuit/rhode-island/federal/bankruptcy-district) | `rib` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Rhode Island](first-circuit/rhode-island/federal/district) | `rid` | up for review | 2/2 | — | 2/2 | 14 |
 | [Supreme Judicial Court of Maine](first-circuit/maine/state/supreme-judicial-court) | `me` | up for review | 8/8 | 8/8 | 8/8 | 29 |
-| [Massachusetts Appeals Court](first-circuit/massachusetts/state/appeals-court) | `massappct` | up for review | 5/5 | 1/1 | 2/2 | 29 |
+| [Massachusetts Appeals Court](first-circuit/massachusetts/state/appeals-court) | `massappct` | up for review | 5/5 | 3/3 | 5/5 | 29 |
 | [Massachusetts District Court, Appellate Division](first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` | in progress | — | — | — | 14 |
 | [Massachusetts Supreme Judicial Court](first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 | [Supreme Court of New Hampshire](first-circuit/new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | 4/4 | 4/4 | 29 |
@@ -133,7 +133,7 @@ Courts under `courts` (346).
 | [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | up for review | 5/5 | 5/5 | 4/4 | 29 |
 | [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | 7/7 | 5/5 | 5/5 | 29 |
 | [Court of Civil Appeals of Texas](fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | 2/2 | 4/5 | 29 |
-| [Court of Criminal Appeals of Texas](fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | 1/1 | 3/3 | 29 |
+| [Court of Criminal Appeals of Texas](fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | 2/2 | 4/4 | 29 |
 | [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | 2/2 | 2/2 | 29 |
 | [United States Bankruptcy Appellate Panel of The Sixth Circuit](sixth-circuit/bankruptcy-appellate-panel) | `bap6` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Sixth Circuit](sixth-circuit/court-of-appeals) | `ca6` | up for review | 3/3 | 3/3 | 3/3 | 14 |
