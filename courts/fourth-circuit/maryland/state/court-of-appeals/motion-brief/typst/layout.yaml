@@ -1,0 +1,58 @@
+# Court of Appeals of Maryland (Supreme Court of Maryland, md): motion and supporting memorandum. The whole layout, as
+# data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to Md. Rules 1-301(c) and 8-112 (../rules.md, MD-FORM-*, MD-FORM-006);
+# lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a
+# court constant. No word-count certificate and no tables (MD-FORM-006: no word limit for motions was retrieved).
+size: 13                  # MD-FORM-004: not less than 13 points for proportionally spaced fonts, footnotes too
+pitch:
+  body: 29.9              # MD-FORM-002: double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # MD-FORM-002: headings, indented quotations and footnotes single spaced (1.15 x 13 pt)
+margin: {top: 108, bottom: 72, left: 108, right: 72}   # MD-FORM-001: top and left 1 1/2 in, bottom and right 1 in
+indent: 36
+page_number: {align: center, from: 1}   # MD-FORM-005: every page numbered consecutively, the cover is page 1
+footnote: {size: 13, gap: 7}            # MD-FORM-004, -002: 13 points, single spaced
+quote: {left: 36, right: 36, above: 10.4, below: 15.6}   # MD-FORM-002: indented quotations, single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
+  - {bold: true, hang: 36, above: 15.6, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# The caption page (MD-CONV-003): the Court, the docket number, the parties, the court below and the relief sought in
+# the title; counsel (when given) right of centre. Set as the top of the body ending in a page break (the docx
+# engine sets `cover` only before tables, and a motion has none): the same page 1 in every engine.
+front:
+  - {text: "{court_name}", align: center, bold: true, upper: true}
+  - {text: "No. {case_number}", align: center, bold: true, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true, optional: true}
+  - {text: "{proceeding}", align: center, above: 21.6, optional: true}
+  - {text: "{trial_court_case}", align: center, above: 21.6, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 57.6}
+  - each: counsel
+    above: 57.6
+    blocks:
+      - {text: "{names}", bold: true, left: 230.4}
+      - {text: "{lines}", left: 230.4, below: 7.8}
+  - {break: true}
+# The date and the signature block after the conclusion, never split (Rule 1-311): "/s/" and the typed name underlined,
+# the bar number, address, telephone and e-mail beneath; then the certificate of service (Md. Rule 1-321) on its own
+# page.
+closing:
+  - group:
+      - {text: "{date}", pitch: body, indent: 36, optional: true}
+      - {text: "{signature.firm}", bold: true, left: 230.4, above: 5.2, optional: true}
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 10.4}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, above: 7.8}
+    above: 21.6
+  - {break: true}
+  - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 15.6, keep: true}
+  - {text: "{service.paragraphs}", pitch: body}
+  - group:
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4}
+      - {text: "{signature.signer}", left: 230.4}
+    above: 5.2
