@@ -2,3 +2,11 @@
 # verification and certificate of service (RAP 38(c)). The total page count checked here is a stricter count.
 params:
   page_limit: 40
+# Gate 4 CROSS-ENGINE: report, not gate. The latex and docx engines are generated from typst/layout.yaml (`fb engines
+# gen`, fb-595.54.12); each meets an open defect of the shared model (docs/open-items/fb-595.54.21.md):
+# - latex: the table of authorities orders "W. Va. Code §§ 55-7B-1 et seq." first among the statutes, typst after
+#   "§ 55-7B-9(g)": lib/typst/xdoc.typ sort-key keeps the punctuation the Lua sort key drops (p3, 6 lines); pages and
+#   page ends are otherwise identical.
+# - docx: LibreOffice keeps the anchor line of note 5 ("emotional distress claims.5") on page 9 and sets the note on
+#   page 10, where typst and LaTeX move the line on with its note; 18 of 30 page ends differ after it.
+  cross_engine: report
