@@ -289,19 +289,19 @@ Courts under `courts` (346).
 | [United States Bankruptcy Court, D. Colorado](tenth-circuit/colorado/federal/bankruptcy-district) | `cob` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Colorado](tenth-circuit/colorado/federal/district) | `cod` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Kansas](tenth-circuit/kansas/federal/bankruptcy-district) | `ksb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Kansas](tenth-circuit/kansas/federal/district) | `ksd` | up for review | 2/2 | — | 0/2 | 14 |
+| [District Court, D. Kansas](tenth-circuit/kansas/federal/district) | `ksd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. New Mexico](tenth-circuit/new-mexico/federal/bankruptcy-district) | `nmb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. New Mexico](tenth-circuit/new-mexico/federal/district) | `nmd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-eastern-district) | `okeb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States Bankruptcy Court, N.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-northern-district) | `oknb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, W.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-western-district) | `okwb` | up for review | 1/1 | — | 0/1 | 14 |
-| [United States District Court for the District of Oklahoma](tenth-circuit/oklahoma/federal/district) | `okd` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, N.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-northern-district) | `oknb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, W.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-western-district) | `okwb` | up for review | 1/1 | — | 1/1 | 14 |
+| [United States District Court for the District of Oklahoma](tenth-circuit/oklahoma/federal/district) | `okd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court, Oklahoma Eastern](tenth-circuit/oklahoma/federal/eastern-district) | `oked` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court, Oklahoma Northern](tenth-circuit/oklahoma/federal/northern-district) | `oknd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court, Oklahoma Western](tenth-circuit/oklahoma/federal/western-district) | `okwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Utah](tenth-circuit/utah/federal/bankruptcy-district) | `utb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Utah](tenth-circuit/utah/federal/district) | `utd` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States Bankruptcy Court, D. Wyoming](tenth-circuit/wyoming/federal/bankruptcy-district) | `wyb` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, D. Wyoming](tenth-circuit/wyoming/federal/bankruptcy-district) | `wyb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Wyoming](tenth-circuit/wyoming/federal/district) | `wyd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Colorado Court of Appeals](tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | up for review | 5/5 | — | — | 29 |
 | [Colorado Supreme Court](tenth-circuit/colorado/state/supreme-court) | `colo` | up for review | 8/8 | — | — | 29 |
@@ -331,7 +331,7 @@ Courts under `courts` (346).
 | [United States Bankruptcy Court, M.D. Georgia](eleventh-circuit/georgia/federal/bankruptcy-middle-district) | `gamb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Georgia](eleventh-circuit/georgia/federal/bankruptcy-northern-district) | `ganb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Georgia](eleventh-circuit/georgia/federal/bankruptcy-southern-district) | `gasb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Middle District of Georgia](eleventh-circuit/georgia/federal/middle-district) | `gamd` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States District Court for the Middle District of Georgia](eleventh-circuit/georgia/federal/middle-district) | `gamd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Northern District of Georgia](eleventh-circuit/georgia/federal/northern-district) | `gand` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Southern District of Georgia](eleventh-circuit/georgia/federal/southern-district) | `gasd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Alabama Court of Civil Appeals](eleventh-circuit/alabama/state/court-of-civil-appeals) | `alacivapp` | up for review | 3/3 | — | — | 29 |

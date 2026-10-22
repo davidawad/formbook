@@ -10,7 +10,7 @@ Courts under `courts/tenth-circuit` (31).
 | [United States Bankruptcy Court, D. Colorado](colorado/federal/bankruptcy-district) | `cob` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Colorado](colorado/federal/district) | `cod` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Kansas](kansas/federal/bankruptcy-district) | `ksb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Kansas](kansas/federal/district) | `ksd` | up for review | 2/2 | — | 1/2 | 14 |
+| [District Court, D. Kansas](kansas/federal/district) | `ksd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. New Mexico](new-mexico/federal/bankruptcy-district) | `nmb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. New Mexico](new-mexico/federal/district) | `nmd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Oklahoma](oklahoma/federal/bankruptcy-eastern-district) | `okeb` | up for review | 2/2 | — | 2/2 | 14 |
