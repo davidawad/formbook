@@ -1,6 +1,13 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) but do not yet break every line and
-# page where the typst render does, for want of shared-model features (docs/open-items/fb-595.54.56.md): reported,
-# not gated.
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LaTeX drops footnote 2 (page 18): its mark follows "¶¶ 38-49." and lib/latex/xdoc.lua sets the token after a
+  # pilcrow sign in an \mbox, where a \footnote is lost; every page from 18 on shifts (XENG-002, XENG-003). A
+  # shared-model fix (docs/open-items/fb-595.54.56.md); reported, not gated.
+  cross_engine_latex: report
+  # LibreOffice sets a footnote that does not fit under its anchor's line on the next page and keeps the line (typst
+  # and LaTeX move the line on with its note): page 44 ("disclose the conflict. (R 432).9"), pages 45 to 51 shift
+  # (XENG-002, XENG-003). No docx setting moves the line; reported, not gated (as fb-595.54.13).
+  cross_engine_docx: report
