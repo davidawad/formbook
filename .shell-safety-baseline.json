@@ -3,8 +3,6 @@
   "branches": {
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/make-reference.sh": 6,
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/render.sh": 31,
-    "courts/federal-circuit/court-of-federal-claims/motion-brief/docx/make-reference.sh": 6,
-    "courts/federal-circuit/court-of-federal-claims/motion-brief/docx/render.sh": 41,
     "courts/federal-circuit/court-of-international-trade/motion-brief/docx/make-reference.sh": 1,
     "courts/federal-circuit/court-of-veteran-appeals/answering-brief/docx/make-reference.sh": 6,
     "courts/federal-circuit/court-of-veteran-appeals/opening-brief/docx/make-reference.sh": 6,

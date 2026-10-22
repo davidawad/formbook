@@ -2,9 +2,12 @@
 -- as typst/uscfc-motion-brief.typ does (README "Engines"): the cover (caption, title, counsel), the table of contents
 -- and table of authorities (front matter, roman), the numbered headings (I., A., 1., a., (1)), the links to
 -- authorities (toa:KEY), the signature block and the certificate of service (body, arabic from 1).
--- The page numbers in the table of contents and authorities are measured on a build of this file (docx/render.sh):
--- the render searches the PDF for each heading's text and each authority link's text, and this file prints them
--- again with the page numbers. Nothing here is a case's text or a measured coordinate.
+-- The page numbers in the table of contents and authorities are measured on a build of this file: fb render
+-- (tools/fb/src/docxpass.rs) renders it, finds the page of each heading and each authority link in the PDF (the
+-- needles this file writes to FORMBOOK_NEEDLES; contract in tools/fb/src/docxpages.rs), and this file prints them
+-- again with the page numbers (FORMBOOK_PAGES) until they settle; the body is then held to RCFC 5.4(b)(1) (were
+-- docx/render.sh and its measure). The styles: docx/reference.xml. Nothing here is a case's text or a measured
+-- coordinate.
 --
 -- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
 -- exact line boxes of the typst pitch (twips = 20 x pt: 552 the double-spaced body, 276 a single line), the spaces
@@ -13,8 +16,6 @@
 
 local xe = require("docx.xengine")
 
-local MAP_FILE = os.getenv("USCFC_MAP") or ""
-local LIST_FILE = os.getenv("USCFC_LIST") or ""
 
 local BODY, SINGLE = 552, 276          -- typst pitch-double, pitch-single
 local GAP = 552                        -- typst cover-gap
@@ -82,21 +83,45 @@ local function signed(name, col, before)
 end
 
 -- ---------------------------------------------------------------------------
--- Page map: from docx/render.sh, lines "H <index> <body page>" and "A <key> <body pages>" (written after a measured
--- build). USCFC_LIST, when set, makes this build write the texts render.sh searches for: "H <index> <text>" for each
--- heading and "L <key> <text>" for each authority link.
+-- Needles and pages (fb render's multi-pass build): the labels of the previous build, id -> label; none on the first
 -- ---------------------------------------------------------------------------
 
-local HEADPAGE = {}
-local AUTHPAGES = {}
-if MAP_FILE ~= "" then
-  local fh = io.open(MAP_FILE, "r")
-  if fh == nil then error("uscfc-motion-brief.lua: cannot read " .. MAP_FILE) end
-  for line in fh:lines() do
-    local kind, a, b = line:match("^(%a) (%S+) (%S+)$")
-    if kind == "H" then HEADPAGE[tonumber(a)] = b
-    elseif kind == "A" then AUTHPAGES[a] = b end
+local LABELS, HAVE_PAGES = {}, false
+do
+  local path = os.getenv("FORMBOOK_PAGES")
+  local fh = path and path ~= "" and io.open(path, "r")
+  if fh then
+    HAVE_PAGES = true
+    for line in fh:lines() do
+      local id, _, lab = line:match("^([^\t]+)\t([^\t]*)\t(.*)$")
+      if id then LABELS[id] = lab end
+    end
+    fh:close()
   end
+end
+
+local NEEDLE_MAX = 60 -- a needle is a prefix of the text (letters and digits only)
+
+-- letters and digits only, lower case: fb render normalizes the PDF text the same way
+local function key_norm(t)
+  return (t:lower():gsub("[^a-z0-9]", ""))
+end
+
+-- a needle: id, kind B (body, in document order: moves the search on) or N (inside a footnote: searched from the
+-- page the body has reached, moves nothing), the text and the words after it; the fallback is the text alone
+local NEEDLES = {}
+local function need_at(id, kind, t, context)
+  local short = key_norm(t):sub(1, NEEDLE_MAX)
+  local long = key_norm(t .. " " .. (context or "")):sub(1, NEEDLE_MAX)
+  if short == "" then short = long end
+  NEEDLES[#NEEDLES + 1] = table.concat({ id, kind, long, short }, "\t")
+end
+
+local function write_file(env, t)
+  local path = os.getenv(env)
+  if not path or path == "" then return end
+  local fh = assert(io.open(path, "w"))
+  fh:write(t)
   fh:close()
 end
 
@@ -130,7 +155,18 @@ end
 local counts = { 0, 0, 0, 0, 0, 0 }
 local HEADINGS = {}   -- { index, level, label, content (inlines) }
 local LINKED = {}     -- authority keys linked in the body
-local LINK_TEXTS = {} -- { key, text, after } for each link, for the page search (USCFC_LIST)
+local OCC = {}        -- every authority link in the body, in document order: { key, id } (its needle's id)
+local BLOCKS = {}     -- each top-level block of the body: { header, cites = { kind, key, text, context }, lead }
+
+-- The pages of an authority's links, in order, each once ("3,5,8"), for the table of authorities.
+local function auth_pages(key)
+  local ls, got = {}, {}
+  for _, o in ipairs(OCC) do
+    local l = LABELS[o.id]
+    if o.key == key and l and not got[l] then got[l] = true; ls[#ls + 1] = l end
+  end
+  return table.concat(ls, ",")
+end
 
 -- A section heading: bold capitals, centered (typst section-above, section-below); a sub-heading: its label in a
 -- half-inch box at its level's indent, the text hanging after it, bold (bold italic from level 4), a single line
@@ -157,26 +193,14 @@ local function Header(el)
   return xe.raw(heading_para(el.level, lab, el.content, idx == 1 and 0 or nil))
 end
 
--- Authority links: [*Full cite*](toa:KEY). The text is shown as is. The render searches the PDF for the link text and
--- the words after it (docx/render.sh), so that a heading or a sentence that names the same authority without a link is
--- not counted (typst counts the links only).
-local function after_words(il, i)
-  local t = {}
-  for j = i + 1, #il do
-    local e = il[j]
-    if e.t == "Str" then t[#t + 1] = e.text elseif e.t == "Space" or e.t == "SoftBreak" then t[#t + 1] = " " else break end
-    if #table.concat(t) >= 12 then break end
-  end
-  return table.concat(t)
-end
-
+-- Authority links: [*Full cite*](toa:KEY). The text is shown as is. Each link is a needle (scan): its text and the
+-- words after it, so that a heading or a sentence that names the same authority without a link is not counted (typst
+-- counts the links only).
 local function Links(il)
   local out = pandoc.Inlines({})
-  for i, el in ipairs(il) do
+  for _, el in ipairs(il) do
     if el.t == "Link" and el.target:sub(1, 4) == "toa:" then
-      local key = el.target:sub(5)
-      LINKED[key] = true
-      LINK_TEXTS[#LINK_TEXTS + 1] = { key = key, text = pandoc.utils.stringify(el.content), after = after_words(il, i) }
+      LINKED[el.target:sub(5)] = true
       out:extend(el.content)
     else
       out:insert(el)
@@ -231,7 +255,7 @@ local function cover(meta)
 end
 
 -- The paragraph that ends a section: the cover has no page number, the front matter is roman from i (the body's own
--- section, arabic from 1, is in the reference).
+-- section, arabic from 1, is the last: FORMBOOK_FINAL).
 local function section_break(fmt)
   local footer = fmt == "none" and "" or '<w:footerReference w:type="default" r:id="rIdFooter1"/>'
   local numfmt = fmt == "none" and "decimal" or fmt
@@ -256,7 +280,7 @@ local function toc()
   out[#out + 1] = p(xe.runs("Page", { b = true, u = true }), { keepnext = true, jc = "right" })
   for _, h in ipairs(HEADINGS) do
     local ind = h.level >= 2 and (h.level - 1) * TAB_W or 0
-    local page = HEADPAGE[h.index] or "0"
+    local page = LABELS["H:" .. h.index] or "0"
     local title = h.level == 1 and upper(h.content) or h.content
     out[#out + 1] = row(xe.runs(h.label) .. TAB .. xe.inl(title), xe.runs(page), TOC_COL, ind + TAB_W, TAB_W,
       h.level == 1 and 180 or 80)
@@ -281,7 +305,7 @@ local function toa(meta)
   for _, g in ipairs(groups) do
     local members = {}
     for key, a in pairs(authorities) do
-      if plain(a.kind) == g[1] and AUTHPAGES[key] ~= nil then members[#members + 1] = key end
+      if plain(a.kind) == g[1] and HAVE_PAGES and LINKED[key] then members[#members + 1] = key end
     end
     if #members > 0 then
       local function sk(key)
@@ -297,7 +321,7 @@ local function toa(meta)
       first = false
       for _, key in ipairs(members) do
         local a = authorities[key]
-        local pages = AUTHPAGES[key]
+        local pages = auth_pages(key)
         local n = 0
         for _ in pages:gmatch("[^,]+") do n = n + 1 end
         local text = pages:gsub(",", ", ")
@@ -358,6 +382,92 @@ end
 -- Document
 -- ---------------------------------------------------------------------------
 
+-- The body as written, block by block (before the filters below change it): its headings, its authority links (kind
+-- B in the text, N in a footnote; the link text and the words after it, up to a footnote, a quotation or another
+-- link) and the text each block starts with, as printed (a footnote's text stops at its mark).
+local function scan(doc)
+  local function lead_text(b)
+    local d = pandoc.Pandoc({ b }):walk({ Note = function() return pandoc.Str("\1") end })
+    return (pandoc.utils.stringify(d):match("^[^\1]*"))
+  end
+  local scan_blocks
+  local function scan_inlines(il, kind, list)
+    for k, el in ipairs(il) do
+      if el.t == "Link" and el.target:sub(1, 4) == "toa:" then
+        local rest = {}
+        for j = k + 1, math.min(#il, k + 12) do
+          local t = il[j].t
+          if t == "Note" or t == "Quoted" or t == "Link" then break end
+          rest[#rest + 1] = il[j]
+        end
+        list[#list + 1] = { kind = kind, key = el.target:sub(5), text = pandoc.utils.stringify(el.content),
+          context = pandoc.utils.stringify(pandoc.Inlines(rest)) }
+      elseif el.t == "Note" then
+        scan_blocks(el.content, "N", list)
+      elseif el.content ~= nil and type(el.content) == "table" and el.t ~= "Code" then
+        scan_inlines(el.content, kind, list)
+      end
+    end
+  end
+  scan_blocks = function(bs, kind, list)
+    for _, b in ipairs(bs) do
+      if b.t == "Para" or b.t == "Plain" or b.t == "Header" then scan_inlines(b.content, kind, list)
+      elseif b.t == "BlockQuote" or b.t == "Div" then scan_blocks(b.content, kind, list)
+      elseif b.t == "BulletList" or b.t == "OrderedList" then
+        for _, it in ipairs(b.content) do scan_blocks(it, kind, list) end
+      end
+    end
+  end
+  for _, b in ipairs(doc.blocks) do
+    local cites = {}
+    scan_blocks({ b }, "B", cites)
+    BLOCKS[#BLOCKS + 1] = { header = b.t == "Header", cites = cites, lead = lead_text(b):sub(1, 40) }
+  end
+end
+
+-- The needles, in document order: each heading (its label and title and the text after it, so the same words
+-- earlier on the page are not taken for it), each link, then the certificate of service and its signature (the
+-- last page). Sections: the body from its first block, arabic from 1.
+local function write_needles(meta)
+  local h, pending, first = 0, nil, nil
+  local function cites(bl)
+    for _, c in ipairs(bl.cites) do
+      OCC[#OCC + 1] = { key = c.key, id = "T:" .. (#OCC + 1) }
+      need_at(OCC[#OCC].id, c.kind, c.text, c.context)
+    end
+  end
+  local function flush(next_text)
+    if pending then
+      need_at(pending.id, "B", pending.text, next_text)
+      cites(pending.bl)
+      pending = nil
+    end
+  end
+  for bi, bl in ipairs(BLOCKS) do
+    if bl.header then
+      h = h + 1
+      local hd = HEADINGS[h]
+      local shown = hd.label .. " " .. pandoc.utils.stringify(hd.content)
+      flush(shown)
+      pending = { id = "H:" .. h, text = shown, bl = bl }
+      first = first or "H:" .. h
+    else
+      flush(bl.lead)
+      if bi == 1 then
+        need_at("S:body", "B", bl.lead, "")
+        first = "S:body"
+      end
+      cites(bl)
+    end
+  end
+  flush("")
+  need_at("S:cert", "B", "Certificate of Service", "I hereby certify")
+  need_at("S:end", "B", "/s/ " .. plain(need(need(meta, "signature"), "signer")), "")
+  write_file("FORMBOOK_NEEDLES", table.concat(NEEDLES, "\n") .. "\n#section\t" .. (first or "S:cert") .. "\tdecimal\t\n")  -- the body's section (the last): arabic from 1, the reference's page-number footer
+  write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/>' .. SECT_PG
+    .. '<w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>')
+end
+
 -- Break opportunities as typst has them (Unicode line breaking, UAX #14):
 --   * none inside a token of adjacent parentheses ("2304a(d)(4)"; lib/typst/xengine.typ boxes it; UAX #14 would allow
 --     a break before each "("): a word joiner (U+2060) between ")" and "(";
@@ -376,6 +486,7 @@ local function finish(doc)
     need(meta, k)
   end
 
+  write_needles(meta)
   -- Front matter: cover (no number), then the table of contents and authorities (roman), single spaced.
   local blocks = {}
   for _, b in ipairs(cover(meta)) do blocks[#blocks + 1] = xe.raw(b) end
@@ -384,8 +495,7 @@ local function finish(doc)
   for _, b in ipairs(toa(meta)) do blocks[#blocks + 1] = xe.raw(b) end
   blocks[#blocks + 1] = xe.raw(section_break("lowerRoman"))
 
-  -- Body (arabic from 1). The render finds its first page by the footer "1" (docx/render.sh). The break rules of
-  -- typst on every run pandoc writes itself.
+  -- Body (arabic from 1). The break rules of typst on every run pandoc writes itself.
   local body = doc.blocks:walk({ Inlines = xe.inlines })
   -- The signature block never stands alone: the last paragraph is kept with it.
   if #body > 0 and body[#body].t == "Para" then
@@ -396,12 +506,15 @@ local function finish(doc)
   for _, b in ipairs(signature(meta)) do blocks[#blocks + 1] = xe.raw(b) end
   for _, b in ipairs(certificate(meta)) do blocks[#blocks + 1] = xe.raw(b) end
 
-  -- The texts docx/render.sh searches the PDF for (USCFC_LIST): each heading without its label, each link.
-  if LIST_FILE ~= "" then
-    local fh = assert(io.open(LIST_FILE, "w"))
-    for _, h in ipairs(HEADINGS) do fh:write("H ", h.index, " ", pandoc.utils.stringify(h.content), "\n") end
-    for _, l in ipairs(LINK_TEXTS) do fh:write("L ", l.key, " ", l.text, "\31", l.after, "\n") end
-    fh:close()
+  -- The body fits the page limit (RCFC 5.4(b)(1): 40 pages, 50 for a cross-motion, counting the body and the
+  -- certificate): its last page is the certificate's signature.
+  if HAVE_PAGES then
+    local limit = meta.cross_motion == true and 50 or 40
+    local pages = tonumber(LABELS["S:end"] or "")
+    if pages and pages > limit then
+      error("uscfc-motion-brief.lua: the body runs " .. pages .. " pages; RCFC 5.4(b)(1) allows " .. limit
+        .. " without leave of court")
+    end
   end
 
   doc.blocks = blocks
@@ -412,4 +525,4 @@ local function finish(doc)
   return doc
 end
 
-return { { Inlines = Links }, { Str = break_rules }, { Header = Header }, { Pandoc = finish } }
+return { { Pandoc = scan }, { Inlines = Links }, { Str = break_rules }, { Header = Header }, { Pandoc = finish } }
