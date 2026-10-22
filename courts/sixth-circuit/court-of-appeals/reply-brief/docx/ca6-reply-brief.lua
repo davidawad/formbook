@@ -1,10 +1,11 @@
 -- U.S. Court of Appeals for the Sixth Circuit: reply brief, Word (docx) engine.
--- A pandoc filter. It writes the brief from the sample's frontmatter and body on reference.docx (make-reference.sh:
--- the shared style recipe of lib/docx/xengine-reference.sh), with the same rules and numbers as
--- ../typst/ca6-reply-brief.typ. Page numbers (TOC, TOA) are plain text. docx/render.sh gets them from the rendered
--- PDF (docx/pages.lua) and builds again with them until they stop changing. Environment: CA6_DOCX_PAGES=<pagemap
--- file> supplies the numbers (absent: placeholders); CA6_DOCX_LIST=<file> writes the list of headings and citations
--- to match. Rules: ../README.md.
+-- A pandoc filter. It writes the brief from the sample's frontmatter and body on reference.docx (fb render builds it
+-- from docx/reference.xml: the shared style recipe, tools/fb/src/docxxengine.rs), with the same rules and numbers as
+-- ../typst/ca6-reply-brief.typ. Page numbers (TOC, TOA) are plain text: fb render (tools/fb/src/docxpass.rs) renders
+-- the document, finds the page of every TOC heading and citation in the LibreOffice PDF (the needles this filter
+-- writes to FORMBOOK_NEEDLES) and renders again with those pages (FORMBOOK_PAGES; absent: placeholders) until they
+-- stop changing (fb-595.68.5: were docx/render.sh and docx/pages.lua). The page-number footer and the last section go
+-- to FORMBOOK_FOOTERS and FORMBOOK_FINAL. Rules: ../README.md.
 --
 -- Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"; lib/docx/xengine.lua): every paragraph written here
 -- carries the typst template's line box (exact line spacing: 31.4 pt body, 20 pt single) and spaces (twips = 20 x
@@ -24,17 +25,45 @@ local COUNSEL = 3744                    -- counsel-indent, 2.6 in
 local COURT = 6336                      -- the court's name in a 4.4 in column, centered
 local TOC_COL, TOA_COL = 720, 1120      -- the page columns of the tables, 36 pt and 56 pt
 
-local PAGES = {}   -- tag -> printed page label: h<id> (heading), k<k> (citation k)
-local pages_file = os.getenv('CA6_DOCX_PAGES')
-if pages_file and pages_file ~= '' then
-  local f = assert(io.open(pages_file, 'r'))
+-- Needles and pages (fb render's multi-pass build; the contract is in tools/fb/src/docxpages.rs): the filter writes
+-- the text of every TOC heading and every citation, in document order, to FORMBOOK_NEEDLES; fb render finds each in
+-- the LibreOffice PDF and renders again with the printed pages (FORMBOOK_PAGES) until they settle.
+local NEEDLE_MAX = 60                   -- a needle is a prefix of the text (letters and digits only)
+
+-- letters and digits only, lower case: fb render normalizes the PDF text the same way
+local function norm(s) return (s:lower():gsub('[^a-z0-9]', '')) end
+
+-- a needle: id, kind B (body, in document order: moves the search on) or N (inside a footnote: searched from the
+-- page the body has reached, moves nothing), the text and the words after it, and the text alone as a fallback
+local needles = {}
+local function need_at(id, kind, text, context)
+  local short = norm(text):sub(1, NEEDLE_MAX)
+  local long = norm(text .. ' ' .. (context or '')):sub(1, NEEDLE_MAX)
+  if short == '' then short = long end
+  needles[#needles + 1] = table.concat({ id, kind, long, short }, '\t')
+end
+
+local PAGES = {}   -- needle id -> printed page label: h<id> (heading), k<k> (citation k); empty on the first pass
+local function load_pages()
+  local path = os.getenv('FORMBOOK_PAGES')
+  if not path or path == '' then return end
+  local f = io.open(path, 'r')
+  if not f then return end
   for line in f:lines() do
-    local tag, label = line:match('^(%S+)%s+(%S+)$')
-    if tag then PAGES[tag] = label end
+    local id, _, label = line:match('^([^\t]+)\t([^\t]*)\t(.*)$')
+    if id then PAGES[id] = label end
   end
   f:close()
 end
 local function page_of(tag) return PAGES[tag] or '0' end
+
+local function write_file(env, text)
+  local path = os.getenv(env)
+  if not path or path == '' then return end
+  local f = assert(io.open(path, 'w'))
+  f:write(text)
+  f:close()
+end
 
 local plain = pandoc.utils.stringify
 
@@ -82,6 +111,11 @@ local function upper(il)
 end
 
 local PG = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>'
+-- The page-number footer (fb render writes it as rIdFtr1, FORMBOOK_FOOTERS): the PAGE field centered in a 20 pt line.
+-- The cover's section names no footer, so it has none.
+local FOOTER_P = '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="400" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p>'
+-- the last section (the body, arabic from 1), FORMBOOK_FINAL
+local SECT_BODY = '<w:sectPr><w:footerReference w:type="default" r:id="rIdFtr1"/>' .. PG .. '<w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>'
 local function section_break(footer_rid, numfmt)
   local f = footer_rid and ('<w:footerReference w:type="default" r:id="' .. footer_rid .. '"/>') or ''
   local pg = numfmt and ('<w:pgNumType w:fmt="' .. numfmt .. '" w:start="1"/>') or ''
@@ -252,8 +286,46 @@ function Pandoc(doc)
   doc = doc:walk({ Str = function(s) return pandoc.Str(join_parens(s.text)) end })   -- the body and the metadata
   local meta = doc.meta
   local auth = authorities_of(meta)
+  load_pages()
 
-  local occ, occ_text = {}, {}
+  -- every toa: citation in document order, per top-level block (the citations k1, k2, ...): the authority key, the
+  -- link text and the words after it in its paragraph (up to a footnote mark, a quotation or another link), so the
+  -- same words in the table of authorities are not taken for it; kind N inside a footnote
+  local cites, occ = {}, {}
+  local scan_blocks
+  local function scan(inls, kind, list)
+    for i, el in ipairs(inls) do
+      if el.t == 'Link' and el.target:sub(1, 4) == 'toa:' then
+        local rest = {}
+        for j = i + 1, math.min(#inls, i + 12) do
+          local t = inls[j].t
+          if t == 'Note' or t == 'Quoted' or t == 'Link' then break end
+          rest[#rest + 1] = inls[j]
+        end
+        occ[#occ + 1] = el.target:sub(5)
+        list[#list + 1] = { id = 'k' .. #occ, kind = kind, text = plain(el.content), context = plain(pandoc.Inlines(rest)) }
+      elseif el.t == 'Note' then
+        scan_blocks(el.content, 'N', list)
+      elseif el.content ~= nil and type(el.content) == 'table' and el.t ~= 'Code' then
+        scan(el.content, kind, list)
+      end
+    end
+  end
+  scan_blocks = function(bs, kind, list)
+    for _, b in ipairs(bs) do
+      if b.t == 'Para' or b.t == 'Plain' or b.t == 'Header' then scan(b.content, kind, list)
+      elseif b.t == 'BlockQuote' or b.t == 'Div' then scan_blocks(b.content, kind, list)
+      elseif b.t == 'BulletList' or b.t == 'OrderedList' then
+        for _, item in ipairs(b.content) do scan_blocks(item, kind, list) end
+      end
+    end
+  end
+  for bi, b in ipairs(doc.blocks) do
+    cites[bi] = {}
+    scan_blocks({ b }, 'B', cites[bi])
+  end
+
+  local n_links = 0
   local blocks = doc.blocks:walk({
     Link = function(l)
       if l.target:sub(1, 4) ~= 'toa:' then return nil end
@@ -261,14 +333,23 @@ function Pandoc(doc)
       if not auth[key] then
         error('ca6-reply-brief: link `toa:' .. key .. '` has no entry under `authorities:` in the frontmatter')
       end
-      occ[#occ + 1] = key
-      occ_text[#occ] = plain(l.content)
+      n_links = n_links + 1
       return l.content
     end,
   })
+  if n_links ~= #occ then
+    error('ca6-reply-brief: a toa: link sits where the page finder does not look (a table?); only paragraphs, '
+      .. 'headings, quotations, lists and footnotes may cite')
+  end
   blocks = pandoc.Pandoc(blocks):walk({ Inlines = inlines }).blocks
-  local flat = pandoc.Blocks({})
-  for _, b in ipairs(blocks) do flat:extend(xe.list_items(b)) end
+  -- list items become paragraphs; origin[i]: the top-level block flat block i came from (its citations)
+  local flat, origin = pandoc.Blocks({}), {}
+  for bi, b in ipairs(blocks) do
+    for _, x in ipairs(xe.list_items(b)) do
+      flat:insert(x)
+      origin[#flat] = bi
+    end
+  end
   blocks = flat
 
   local src = source_body()
@@ -315,19 +396,43 @@ function Pandoc(doc)
   toc[#toc + 1] = h_cert
   if h_serv then toc[#toc + 1] = h_serv end
 
-  -- ---- the list for the page finder (docx/pages.lua) ----
-  local list_file = os.getenv('CA6_DOCX_LIST')
-  if list_file and list_file ~= '' then
-    local f = assert(io.open(list_file, 'w'))
-    for _, e in ipairs(toc) do
-      local where = e.style == 'section' and 'line' or 'body'
-      local text = plain(e.title)
-      if e.label then text = e.label .. ' ' .. text end
-      f:write('h' .. e.id, '\t', where, '\t', text, '\n')
-    end
-    for k, text in ipairs(occ_text) do f:write('k' .. k, '\tbody\t', text, '\n') end
-    f:close()
+  -- ---- the needles for fb render's page finder (FORMBOOK_NEEDLES), in document order ----
+  -- The contents heading, the authorities heading with the first group's head (so the contents are not taken for
+  -- it), each TOC heading with the words after it (the next heading, or the start of the next paragraph), the
+  -- citations of each block after its heading, then the certificates. A section heading is a TOC entry too: its
+  -- words alone would also match the contents.
+  local function item_text(it)
+    if it == nil then return '' end
+    if it.kind == 'head' then return (it.label and (it.label .. ' ') or '') .. plain(it.title) end
+    return plain(it)
   end
+  local first_group = ''
+  for _, g in ipairs(KINDS) do
+    for _, key in ipairs(occ) do if auth[key].kind == g[1] then first_group = g[2] break end end
+    if first_group ~= '' then break end
+  end
+  need_at('S:toc', 'B', 'Table of Contents', 'Page')
+  need_at('S:toa', 'B', 'Table of Authorities ' .. first_group, '')
+  local body_id = 'S:body'
+  for i, it in ipairs(body) do
+    if it.kind == 'head' then
+      if i == 1 then body_id = 'h' .. it.id end
+      if it.toc then need_at('h' .. it.id, 'B', item_text(it), item_text(body[i + 1]):sub(1, 40)) end
+    elseif i == 1 then
+      need_at(body_id, 'B', plain(it):sub(1, NEEDLE_MAX), '')
+    end
+    if origin[i + 1] ~= origin[i] then
+      for _, c in ipairs(cites[origin[i]] or {}) do need_at(c.id, c.kind, c.text, c.context) end
+    end
+  end
+  need_at('h' .. h_cert.id, 'B', 'Certificate of Compliance', 'This reply brief complies with')
+  if h_serv then need_at('h' .. h_serv.id, 'B', 'Certificate of Service', 'I certify that I electronically') end
+  -- how fb render labels pages: the contents are page i, the body and the certificates from the body's first block
+  needles[#needles + 1] = '#section\tS:toc\tlower-roman\t'
+  needles[#needles + 1] = '#section\t' .. body_id .. '\tdecimal\t'
+  write_file('FORMBOOK_NEEDLES', table.concat(needles, '\n') .. '\n')
+  write_file('FORMBOOK_FOOTERS', 'rIdFtr1\t' .. FOOTER_P .. '\n')
+  write_file('FORMBOOK_FINAL', SECT_BODY)
 
   -- A TOC row [listing-row]: wrapped before the 36 pt page column, a dot leader to the page.
   local function toc_row(e)
