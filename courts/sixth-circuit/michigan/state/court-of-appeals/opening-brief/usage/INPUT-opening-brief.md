@@ -314,7 +314,7 @@ The statutes define “public records” and “public bodies” in the followin
 >
 > (iv) Any other body that is created by state or local authority or is primarily funded by or through state or local authority, except that the judiciary, including the office of the county clerk and its employees when acting in the capacity of clerk to the circuit court, is not included in the definition of public body.
 >
-> (i) "Public record" means a writing prepared, owned, used, in the possession of, or retained by a public body in the performance of an official function, from the time it is created.
+> \(i) "Public record" means a writing prepared, owned, used, in the possession of, or retained by a public body in the performance of an official function, from the time it is created.
 
 MCL 15.232(h) and (i) (emphasis added).
 

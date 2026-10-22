@@ -1,0 +1,3 @@
+PASS
+7678c93972774e037df7a0caacaa048304b169506856a21bd87443d16c9fd006  usage/OUTPUT-opening-brief.latex.pdf
+8a3b30ed7df37c629c66fdb71e2262aad1dd374454f1eb4027746f6502406fad  usage/OUTPUT-opening-brief.typst.pdf
