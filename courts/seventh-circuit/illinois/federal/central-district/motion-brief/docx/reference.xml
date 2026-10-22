@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The ilcd motion brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the typst
+     template ({font}, Times New Roman; CDIL LR 5.1(B)(2) asks for a plain roman style and names no face) at 12 pt
+     (size 24 half points; LR 5.1(B)(2), 12 point); Body Text in exact 24 pt line boxes (typst pitch-body; LR 5.1(B)(1)
+     and 7.1(B)(4) double spacing) with a half-inch first-line indent; single lines 13.8 pt (typst pitch-single);
+     quotations (Block Text) single-spaced, half an inch in on both sides, a single line above and below (quote 276);
+     footnotes 10 pt (LR 5.1(B)(2): no smaller than 10 point) in 11.5 pt boxes (typst pitch-note), 6 pt after each (typst
+     note-gap), kept whole. Styles added: Body Text Noted, Body Text without widow control, for a paragraph that holds a
+     footnote mark; Body Text Keep, a paragraph of the conclusion kept whole with the next and so with the signature
+     block (typst: one unbreakable block). docx/ilcd-motion-brief.lua writes the cover, the tables, the headings, the
+     signature, the certificate, the sections and the page-number footer (a 13.8 pt line 735 twips above the page foot,
+     where typst sets it with footer-descent 30 %). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="480" heading-before="0" heading-after="0" quote="276" note="230" note-size="20" note-after="120" footer="735">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNoted"><w:name w:val="Body Text Noted"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>
