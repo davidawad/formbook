@@ -1,0 +1,53 @@
+# Minnesota Supreme Court (minn): motion and supporting memorandum (motion-brief). The whole layout, as data for the
+# shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to Minn. R. Civ. App. P. 127 (motions), 132.02 (documents other than formal briefs)
+# and 132.04 (signature); see ../../rules.md. Lengths in points. No case text here: every string printed comes from
+# the sample's frontmatter ({field}).
+size: 13                  # MINN-FORM-002: at least 13-point, headings and footnotes included
+pitch:
+  body: 29.9              # MINN-FORM-003: typed material double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # caption, headings, quotations, footnotes, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MINN-FORM-001: matter within 6-1/2 x 9-1/2 in
+indent: 36                # every paragraph indented half an inch
+page_number: {align: center, from: 2}   # MINN-FORM-005: numbered at the center of the bottom margin; the caption page unnumbered, as filed
+footnote: {size: 13, gap: 7}             # MINN-FORM-002: footnotes 13-point too
+quote: {left: 36, right: 36, above: 7.8, below: 13}   # quotations single spaced, indented half an inch each side
+heading:
+  - {bold: true, hang: 36, above: 13, below: 10.4}           # points typed with their own numerals, as filed
+  - {left: 36, hang: 36, bold: true, above: 13, below: 10.4}
+# MINN-MOT-003 (Rule 132.02 subd. 2): the docket number, the court, the title of the case and a descriptive title
+# beside it, on a page of their own (MINN-FORM-007: the exemplar's caption page; a front that ends in a page
+# break, the body from page 2).
+front:
+  - {text: "{case_number}", align: center}
+  - {text: "{court_lines}", align: center, bold: true}
+  - columns:
+      - width: 306
+        blocks:
+          - each: caption
+            blocks:
+              - {text: "{joiner}", optional: true, below: 7.8}
+              - {text: "{names}"}
+              - {text: "{designation}", left: 72, above: 7.8, below: 7.8}
+      - valign: center
+        blocks:
+          - {text: "{title}", align: center, bold: true, upper: true}
+    gutter: 14.4
+    above: 14.4
+  - {break: true}
+# MINN-FORM-006 (Rule 132.04): signed, with the signer's name, license number, address, telephone and email; the
+# date at the left, the signature blocks 3 in from the margin, each never split.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "{signature.firm}", left: 216, above: 5.2}
+      - {text: "{signature.signer}", left: 216, underline: true, above: 7.8}
+      - {text: "{signature.lines}", left: 216}
+    above: 28.8
+  - when: signature_more
+    blocks:
+      - each: signature_more
+        blocks:
+          - group:
+              - {text: "{lines}", left: 216}
+            above: 10.4

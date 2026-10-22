@@ -1,0 +1,3 @@
+PASS
+f619a21a9987ec4261222d02df4af6d0becccec6824daf7a99c77f041b431536  usage/OUTPUT-motion-brief.latex.pdf
+f1e05981e78700bf3cc163da5f2325165407045d0c7506e34665910ba611b751  usage/OUTPUT-motion-brief.typst.pdf
