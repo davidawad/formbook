@@ -1,6 +1,5 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the signature group fills
-# p25 to the bottom margin exactly; typst moves it to a page of its own, LaTeX and Word keep it on p25 (27 pages against
-# 26). Before it every line and page end is the same (docs/open-items/fb-595.54.28.md).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Gated: 26 pages in every engine, the
+# signature on the conclusion's page, every line, page end and table of authorities row the same (fb-595.54.82).
 params:
-  cross_engine: report
+  cross_engine: gate
