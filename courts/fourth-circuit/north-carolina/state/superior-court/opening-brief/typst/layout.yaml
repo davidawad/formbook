@@ -38,6 +38,8 @@ cover:
   - {text: "{date}", optional: true, above: 9.6}
 # NCSUPERCT-CONT-002: the table of contents, on its own page.
 contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 7.2}
+# the brief's last paragraph (its date line) kept on the signature's page, so the signature never stands alone.
+keep_with_closing: true
 # NCSUPERCT-CONT-003, NCSUPERCT-CERT-001: the signature block right of centre, never split; then the certificate of
 # service on a page of its own, in the body's spacing.
 closing:

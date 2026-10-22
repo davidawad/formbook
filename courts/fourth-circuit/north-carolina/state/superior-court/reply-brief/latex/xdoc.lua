@@ -97,23 +97,6 @@ return require("latex.xdoc")({
       ["above"] = 28.8,
     },
     {
-      ["columns"] = {
-        ["each"] = "counsel",
-        ["per_row"] = 3,
-        ["row_gap"] = 14.4,
-        ["blocks"] = {
-          {
-            ["text"] = "{names}",
-          },
-          {
-            ["text"] = "{lines}",
-          },
-        },
-      },
-      ["gutter"] = 14.4,
-      ["above"] = 28.8,
-    },
-    {
       ["text"] = "{counsel_for}",
       ["italic"] = true,
       ["optional"] = true,
@@ -189,6 +172,23 @@ return require("latex.xdoc")({
         },
       },
       ["above"] = 21.6,
+    },
+    {
+      ["columns"] = {
+        ["each"] = "counsel",
+        ["per_row"] = 2,
+        ["row_gap"] = 14.4,
+        ["blocks"] = {
+          {
+            ["text"] = "{names}",
+          },
+          {
+            ["text"] = "{lines}",
+          },
+        },
+      },
+      ["gutter"] = 21.6,
+      ["above"] = 28.8,
     },
     {
       ["when"] = "certificate",

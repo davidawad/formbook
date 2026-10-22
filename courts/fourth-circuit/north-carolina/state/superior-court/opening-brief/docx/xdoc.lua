@@ -133,6 +133,7 @@ return require("docx.xdoc")({
     ["step"] = 18,
     ["above"] = 7.2,
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {
