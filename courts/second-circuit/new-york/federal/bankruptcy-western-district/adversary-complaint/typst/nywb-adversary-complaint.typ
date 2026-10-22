@@ -100,8 +100,11 @@
   right += ("", "Adv. Pro. No. " + adv, "")
   block(width: 100%, above: cover-gap, below: 0pt, grid(
     columns: (caption-left, caption-gutter, 1fr),
-    block(width: caption-left, stroke: (right: caption-rule, bottom: caption-rule),
-      inset: (right: caption-pad, bottom: caption-pad), slines(rows)),
+    // the party column's rules run the height of the caption row (Word's cell borders); the caption pad below every
+    // column (LibreOffice keeps it below the row whichever column is taller)
+    stroke: (x, y) => if x == 0 { (right: caption-rule, bottom: caption-rule) },
+    inset: (x, y) => if x == 0 { (right: caption-pad, bottom: caption-pad) } else { (bottom: caption-pad) },
+    slines(rows),
     [],
     pad(left: caption-right-pad, {
       slines(right)
