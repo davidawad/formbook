@@ -1,0 +1,88 @@
+# Supreme Court of Virginia (va): petition for review (Rule 5:17A, VA-REV-*). The whole layout, as data for the
+# shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to Rule 5:6 (../rules.md, VA-*); lengths in points. No case text here: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # VA-FORM-003 (Rule 5:6(a)(3)): at least 14-point type, footnotes included
+pitch:
+  body: 32.2              # VA-FORM-004: text double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # VA-FORM-004: headings, quotations, footnotes single spaced (1.15 x 14 pt); cover, tables
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # VA-FORM-001 (Rule 5:6(a)(2)): at least one inch on all sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # VA-FORM-006: numbered; the cover none, the tables i, ii .., the text 1, 2 ..
+footnote: {size: 14, gap: 7}                       # VA-FORM-003, -004: 14-point footnotes, single spaced
+quote: {left: 36, right: 36, above: 14, below: 14}  # VA-FORM-004: quotations over 49 words single spaced
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, above: 15.4, below: 8.4}
+# The cover (Rule 5:6(b), VA-FORM-007, -008): the court, the record number (when assigned), the style of the case,
+# the title, and counsel's name, VSB number, address, telephone, fax and e-mail.
+cover:
+  - {text: "IN THE", align: center, bold: true}
+  - {text: "SUPREME COURT OF VIRGINIA", align: center, bold: true}
+  - {text: "RECORD NO. {record_number}", align: center, bold: true, above: 16.8, optional: true}   # none before the Court assigns one
+  - each: caption
+    above: 22.4
+    between:
+      - {text: "v.", left: 36, above: 11.2, below: 11.2}
+    blocks:
+      - {text: "{names}"}
+      - {text: "{designation}", left: 36}
+  - {text: "{proceeding}", align: center, optional: true, above: 16.8}
+  - {text: "{brief_title}", align: center, bold: true, above: 30.8}
+  # counsel one block under another (side by side, long e-mail addresses would crowd the columns)
+  - each: counsel
+    above: 33.6
+    blocks:
+      - {text: "{names}", above: 16.8}
+      - {text: "{lines}"}
+# The table of contents and the table of authorities, each on its own page (VA-REV-002: Rule 5:17A(c)(i) applies the
+# petition-for-appeal content rules of Rule 5:17(c)): cases first, alphabetical, the year in each citation; seven
+# pages or more print passim.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 18, step: 18, above: 9.6}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 56
+  hang: 28.8
+  above: 4
+  passim: 7
+  group: {bold: true, above: 15.4, below: 7}
+  kinds:
+    - {kind: case, title: "CASES", italic: true}
+    - {kind: statute, title: "STATUTES"}
+    - {kind: constitution, title: "CONSTITUTIONAL PROVISIONS"}
+    - {kind: rule, title: "RULES"}
+    - {kind: other, title: "OTHER AUTHORITIES"}
+# The closing and signature blocks (VA-CERT-001, Rule 5:1B(f)), never split and never alone on a page; then the
+# certificate of compliance (Rule 5:26(g)) and the certificate of filing and e-mail service (Rule 5:1B(c),
+# VA-ELEC-002), each on a page of its own. A date the filer has not given prints as a blank to complete.
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "Respectfully submitted,", pitch: body}
+      - {text: "{signing_party}<br>By Counsel", pitch: body, optional: true}
+      - {text: "this {date}.", pitch: body, optional: true}
+      - columns: {each: signature, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 16.1
+    above: 16.8
+  - {break: true}
+  - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true, below: 16.8}
+  - {text: "I hereby certify that this petition complies with Rules 5:6(a) and 5:17A(c) of the Rules of the Supreme Court of Virginia.", pitch: body, indent: 36}
+  - {text: "It contains {word_count} words, excluding the cover page, table of contents, table of authorities, signature blocks, and this certificate (Rule 5:26(g)).", pitch: body, indent: 36, optional: true}
+  - {break: true}
+  - {text: "CERTIFICATE OF FILING AND SERVICE", align: center, bold: true, below: 16.8}
+  - {text: "I hereby certify that on the {service.filed_date|____________} I electronically filed the foregoing with the Clerk of the Supreme Court of Virginia through the Virginia Appellate Courts Electronic System, and that on the {service.service_date|____________} I served true and correct copies of it by e-mail on the following counsel of record:", pitch: body, indent: 36}
+  - when: service.recipients
+    blocks:
+      - each: service.recipients
+        above: 16.8
+        blocks:
+          - {text: "{names}", above: 16.8}
+          - {text: "{lines}", optional: true}
+  # no recipients given: lines for the filer to complete (Rule 5:1B(c) requires the certificate on every filing)
+  - unless: service.recipients
+    blocks:
+      - {text: "____________________________________", above: 16.8}
+      - {text: "____________________________________", above: 16.1}
+      - {text: "____________________________________", above: 16.1}
