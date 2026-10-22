@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D.S.C. memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; L.R. 1.05(B)) at 12 pt (size 24
+     half points; L.R. 1.05(C): minimum 12 point, footnotes included); Body Text in exact 27.6 pt line boxes (typst
+     pitch-body, L.R. 1.05(E) double spacing, Word's double of 12 pt Times) with a half-inch first-line indent (typst
+     para-indent); single lines in 13.8 pt boxes (typst pitch-single); Block Text 12 pt above and below, 0.5 in in on
+     both sides (typst quote-gap, quote-indent); footnotes at 12 pt in 13.8 pt boxes, 6 pt apart (typst note-gap);
+     letter page, 1 in margins (L.R. 1.05(A)). Added here: "Body Text Note" (no widow control, for a paragraph that
+     anchors a footnote). The footer: the page number centred in a 13.8 pt line box whose foot is 0.5 in above the
+     bottom edge (footer="720"; typst footer-descent 22.2 pt). Court name, caption, title, headings and signature
+     carry their own spacing (docx/scd-motion-brief.lua). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" quote="240" note="276" note-size="24" note-after="120" footer="720">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></footer>
+</reference>
