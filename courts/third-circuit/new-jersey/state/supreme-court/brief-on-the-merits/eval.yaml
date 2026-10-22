@@ -1,0 +1,8 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: typst sorts the
+# keyed authorities with punctuation and quotes kept where the pandoc engines drop them ("N.J.S.A. 2C:11-3(b)(1)",
+# "“Aging in Prison”", pages v-vii), and lets the last line of a block quotation's first paragraph go to the next page
+# because the quotation's later paragraph anchors note 4, where LaTeX and Word keep widow control for that paragraph
+# (p17/p18). Every other line matches (docs/open-items/fb-595.54.72.md).
+params:
+  cross_engine: report

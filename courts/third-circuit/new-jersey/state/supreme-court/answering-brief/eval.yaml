@@ -1,0 +1,8 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated. LaTeX: every page
+# ends where typst's does, but pdfLaTeX sets two closing single quotes "’’" (as filed) with a gap between them, so two
+# lines break differently (p23, p24). docx: LibreOffice keeps the line that anchors a note too tall for the page's
+# foot (p13, note 3) where typst moves the line with its note, and the pages drift from there
+# (docs/open-items/fb-595.54.72.md).
+params:
+  cross_engine: report

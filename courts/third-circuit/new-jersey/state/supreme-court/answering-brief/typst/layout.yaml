@@ -1,0 +1,81 @@
+# Supreme Court of New Jersey (nj): respondent's (appellee's) formal brief (R. 2:6-2, 2:6-4, 2:6-6, 2:6-10). The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to ../rules.md (NJ-* ids); lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # NJ-FORM-003: no smaller than 12-point; 14 pt, stricter (see the OPEN item in rules.md)
+pitch:
+  body: 32.2              # NJ-FORM-002: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # caption, counsel, headings, tables, quotations, footnotes, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NJ-FORM-004: approximately one inch
+indent: 36
+links: false              # links print their text (the citations stand in full in the text); toa: marks stay
+# NJ-CONV-002: the cover unnumbered, the tables in roman numerals from i, the body in arabic numerals from 1.
+page_number: {align: center, front: lower-roman}
+footnote: {size: 14, gap: 7}                              # NJ-FORM-002: footnotes may be single spaced
+quote: {left: 36, right: 36, above: 14, below: 14}        # NJ-FORM-002: indented quotations may be single spaced
+# Headings as the filer numbers them in the text (R. 2:6-2(a)(6) point headings): sections centered bold; points bold,
+# sub-points bold italic, then bold and bold italic again; single spaced.
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, above: 15.4, below: 8.4}
+  - {bold: true, above: 15.4, below: 8.4}
+  - {bold: true, italic: true, above: 15.4, below: 8.4}
+# NJ-COV-001 (R. 2:6-6(a)): the parties with their designations at the left and, at the right, the Court, the docket
+# number, the nature of the action and the court below with its judge and docket; the title; counsel (NJ-CONV-001:
+# attorney of record, on the brief), stacked, and the party they represent.
+cover:
+  - columns:
+      - width: 234
+        blocks:
+          - each: caption
+            between:
+              - {text: "VS.", left: 36, above: 11.2, below: 11.2}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36, optional: true}
+      - blocks:
+          - {text: "SUPREME COURT OF NEW JERSEY", bold: true}
+          - {text: "DOCKET NO.: {case_number}", bold: true}
+          - {text: "{nature}", optional: true, above: 16.8}
+          - when: below
+            blocks:
+              - {text: "{below_label|On Appeal From:}", above: 16.8}
+              - {text: "{below}"}
+    gutter: 21.6
+  - {text: "{brief_title}", align: center, bold: true, above: 30.8, below: 33.6}
+  - each: counsel
+    blocks:
+      - group:
+          - {text: "{heading}", bold: true, optional: true}
+          - {text: "{names}", optional: true}
+          - {text: "{lines}", optional: true}
+        below: 16.8
+  - {text: "{counsel_for}", optional: true}
+# NJ-CONT-001 (R. 2:6-2(a)(1)-(2)): the table of contents with the point headings and the table of citations, cases
+# then statutes, constitutional provisions, rules and other authorities, from the body's `toa:` marks; a case name in
+# italics (the INPUT writes it so: the model's italic group drops the comma before the citation); seven pages or
+# more "passim".
+contents: {title: "TABLE OF CONTENTS", depth: 5, col: 36, hang: 36, step: 0, above: 12.6}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 72
+  hang: 21
+  above: 5.6
+  passim: 7
+  group: {bold: true, above: 15.4, below: 5.6}
+  kinds:
+    - {kind: case, title: "CASES"}
+    - {kind: statute, title: "STATUTES"}
+    - {kind: constitution, title: "CONSTITUTIONAL PROVISIONS"}
+    - {kind: rule, title: "RULES"}
+    - {kind: other, title: "OTHER AUTHORITIES"}
+# NJ-CONV-001: "Respectfully submitted," then each signer's lines, single spaced, and the date; never split.
+closing:
+  - group:
+      - {text: "Respectfully submitted,", pitch: body}
+      - each: signature
+        blocks:
+          - {text: "{lines}", below: 16.8}
+      - {text: "Dated: {date}", optional: true}
+    above: 16.8

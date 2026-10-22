@@ -36,108 +36,108 @@ signature:
       - "Newark, New Jersey 07102"
       - "(973) 596-4500"
 authorities:
-  adams194: {kind: case, name: "State v. Adams", cite: "194 N.J. 186 (2008)", sort: "State v. Adams (2008)"}
-  adams06: {kind: case, name: "State v. Adams", cite: "2006 WL 3798760 (App. Div. Dec. 28, 2006)", sort: "State v. Adams (2006)"}
-  alston: {kind: case, name: "State v. Alston", cite: "88 N.J. 211 (1981)"}
-  atkins: {kind: case, name: "Atkins v. Virginia", cite: "536 U.S. 304 (2002)"}
-  acevedo: {kind: case, name: "State v. Acevedo", cite: "205 N.J. 40 (2011)"}
-  baker: {kind: case, name: "State v. Baker", cite: "81 N.J. 99 (1979)"}
-  bey: {kind: case, name: "State v. Bey", cite: "129 N.J. 557 (1992)"}
-  bearcloudwy: {kind: case, name: "Bear Cloud v. State", cite: "334 P.3d 132 (Wyo. 2014)"}
-  bearcloudsc: {kind: case, name: "Bear Cloud v. Wyoming", cite: "133 S.Ct. 183 (2012)"}
-  bobby: {kind: case, name: "Bobby v. Bies", cite: "556 U.S. 825 (2009)"}
-  brown: {kind: case, name: "Brown v. State", cite: "10 N.E.3d 1 (Ind. 2014)"}
-  byrne: {kind: case, name: "Right to Choose v. Byrne", cite: "91 N.J. 287 (1982)"}
-  caballero: {kind: case, name: "People v. Caballero", cite: "282 P.3d 291 (Cal. 2012)"}
-  casiano: {kind: case, name: "Casiano v. Comm'r of Corr.", cite: "115 A.3d 1031 (Conn. 2015)"}
-  chicago: {kind: case, name: "Chicago, B. & Q.R. Co. v. Chicago", cite: "166 U.S. 226 (1897)"}
-  chun: {kind: case, name: "State v. Chun", cite: "194 N.J. 54 (2008)"}
-  coker: {kind: case, name: "Coker v. Georgia", cite: "433 U.S. 584 (1977)"}
-  colorado: {kind: case, name: "Colorado Republican Fed. Campaign Comm. v. Fed. Election Comm'n", cite: "518 U.S. 604 (1996)"}
-  crowell: {kind: case, name: "Crowell v. Benson", cite: "285 U.S. 22 (1932)"}
-  darby: {kind: case, name: "State v. Darby", cite: "200 N.J. Super. 327 (App. Div. 1984)"}
-  davis: {kind: case, name: "Davis v. United States", cite: "417 U.S. 333 (1974)"}
-  dean: {kind: case, name: "Dean v. United States", cite: "556 U.S. 568 (2009)"}
-  diatchenko: {kind: case, name: "Diatchenko v. Dist. Att. for Suffolk Dist.", cite: "1 N.E.3d 270 (Mass. 2013)"}
-  doe: {kind: case, name: "Doe v. Poritz", cite: "142 N.J. 1 (1995)"}
-  eckel: {kind: case, name: "State v. Eckel", cite: "185 N.J. 523 (2006)"}
-  enmund: {kind: case, name: "Enmund v. Florida", cite: "458 U.S. 782 (1982)"}
-  escobedo: {kind: case, name: "Escobedo v. Illinois", cite: "378 U.S. 478 (1964)"}
-  farmer: {kind: case, name: "Planned Parenthood of Cent. New Jersey v. Farmer", cite: "165 N.J. 609 (2000)"}
-  fuentes: {kind: case, name: "State v. Fuentes", cite: "217 N.J. 57 (2014)"}
-  garner: {kind: case, name: "Tennessee v. Garner", cite: "471 U.S. 1 (1985)"}
-  gerald: {kind: case, name: "State v. Gerald", cite: "113 N.J. 40 (1988)"}
-  gilmore: {kind: case, name: "State v. Gilmore", cite: "103 N.J. 508 (1986)"}
-  grady: {kind: case, name: "In re Grady", cite: "85 N.J. 235 (1981)"}
-  graham: {kind: case, name: "Graham v. Florida", cite: "560 U.S. 48 (2010)"}
-  greiman: {kind: case, name: "Greiman v. Hodges", cite: "79 F. Supp. 3d 933 (S.D. Iowa 2015)"}
-  hayden: {kind: case, name: "Hayden v. Keller", cite: "2015 WL 5773634 (E.D.N.C. Sept. 25, 2015)"}
-  hempele: {kind: case, name: "State v. Hempele", cite: "120 N.J. 182 (1990)"}
-  henry: {kind: case, name: "Henry v. State", cite: "175 So.3d 675 (Fla. 2015)"}
-  hogan: {kind: case, name: "State v. Hogan", cite: "144 N.J. 216 (1995)"}
-  hunt: {kind: case, name: "State v. Hunt", cite: "91 N.J. 338 (1982)"}
-  johnson193: {kind: case, name: "State v. Johnson", cite: "193 N.J. 528 (2008)", sort: "State v. Johnson (2008)"}
-  johnson68: {kind: case, name: "State v. Johnson", cite: "68 N.J. 349 (1975)", sort: "State v. Johnson (1975)"}
-  johnsontx: {kind: case, name: "Johnson v. Texas", cite: "509 U.S. 350 (1993)"}
-  kennedy: {kind: case, name: "Kennedy v. Louisiana", cite: "554 U.S. 407 (2008)"}
-  koskovich: {kind: case, name: "State v. Koskovich", cite: "168 N.J. 448 (2001)"}
-  lopez: {kind: case, name: "United States v. Lopez", cite: "514 U.S. 549 (1995)"}
-  lyle: {kind: case, name: "State v. Lyle", cite: "854 N.W.2d 378 (Iowa 2014)"}
-  maldonado: {kind: case, name: "State v. Maldonado", cite: "137 N.J. 536 (1994)"}
-  marshall: {kind: case, name: "State v. Marshall", cite: "130 N.J. 109 (1992)"}
-  martini: {kind: case, name: "State v. Martini", cite: "144 N.J. 603 (1996)"}
-  mccleskey: {kind: case, name: "McCleskey v. Kemp", cite: "481 U.S. 279 (1987)"}
-  miller: {kind: case, name: "Miller v. Alabama", cite: "132 S.Ct. 2455 (2012)"}
-  montgomery: {kind: case, name: "Montgomery v. Louisiana", cite: "136 S.Ct. 718 (2016)"}
-  moore: {kind: case, name: "Moore v. Biter", cite: "725 F.3d 1184 (9th Cir. 2013)"}
-  muhammad: {kind: case, name: "State v. Muhammad", cite: "182 N.J. 551 (2005)"}
-  murray: {kind: case, name: "State v. Murray", cite: "162 N.J. 240 (2000)"}
-  natale: {kind: case, name: "State v. Natale", cite: "184 N.J. 458 (2005)"}
-  njcoal: {kind: case, name: "New Jersey Coal. Against The War In The Middle East v. J.M.B Realty", cite: "138 N.J. 326 (1994)"}
-  nieto: {kind: case, name: "People v. Nieto", cite: "__N.E.3d__, 2016 WL 1165717 (Ill. App. Ct. Mar. 23, 2016)"}
-  norman: {kind: case, name: "State v. Norman", cite: "151 N.J. 5 (1997)"}
-  novembrino: {kind: case, name: "State v. Novembrino", cite: "105 N.J. 95 (1987)"}
-  null: {kind: case, name: "State v. Null", cite: "836 N.W.2d 41 (Iowa 2013)"}
-  pierce: {kind: case, name: "State v. Pierce", cite: "136 N.J. 184 (1994)"}
-  quinlan: {kind: case, name: "In re Quinlan", cite: "70 N.J. 10 (1976)"}
-  rainer: {kind: case, name: "People v. Rainer", cite: "__P.3d__, 2013 WL 1490107 (Col. Ct. App. April 11, 2013)"}
-  ramseur: {kind: case, name: "State v. Ramseur", cite: "106 N.J. 123 (1987)"}
-  riley: {kind: case, name: "State v. Riley", cite: "110 A.3d 1205 (Conn. 2015)"}
-  robinson: {kind: case, name: "Robinson v. Cahill", cite: "62 N.J. 473 (1973)"}
-  ronquillo: {kind: case, name: "State v. Ronquillo", cite: "361 P.3d 779 (Wash. Ct. App. 2015)"}
-  roper: {kind: case, name: "Roper v. Simmons", cite: "543 U.S. 551 (2005)"}
-  schmid: {kind: case, name: "State v. Schmid", cite: "84 N.J. 535 (1980)"}
-  shannon: {kind: case, name: "State v. Shannon", cite: "222 N.J. 576 (2015)"}
-  sisler: {kind: case, name: "Sisler v. Gannett Co., Inc.", cite: "222 N.J. Super. 153 (App. Div. 1987)"}
-  stateinre: {kind: case, name: "State in re A.C.", cite: "426 N.J. Super. 81 (Ch. Div. 2012)"}
-  stovall: {kind: case, name: "State v. Stovall", cite: "170 N.J. 346 (2002)"}
-  tison: {kind: case, name: "Tison v. Arizona", cite: "481 U.S. 137 (1987)"}
-  umbehr: {kind: case, name: "Bd. of Cty. Comm'rs v. Umbehr", cite: "518 U.S. 668 (1996)"}
-  valencia: {kind: case, name: "State v. Valencia", cite: "__P.3d__, 2016 WL 1203414 (Ariz. Ct. App. Mar. 28, 2016)"}
-  veal: {kind: case, name: "Veal v. State", cite: "__S.E.2d__, 2016 WL 1085360 (Ga. Mar. 21, 2016)"}
-  williams: {kind: case, name: "State v. Williams", cite: "93 N.J. 39 (1983)"}
-  woodson: {kind: case, name: "Woodson v. North Carolina", cite: "428 U.S. 280 (1976)"}
-  yarborough: {kind: case, name: "State v. Yarborough", cite: "100 N.J. 627 (1985)"}
-  yothers: {kind: case, name: "State v. Yothers", cite: "282 N.J. Super. 86 (App. Div. 1995)"}
-  zarate: {kind: case, name: "State v. Zarate", cite: "2016 WL 1079462 (App. Div. Mar. 21, 2016)"}
-  zuber: {kind: case, name: "State v. Zuber", cite: "442 N.J. Super. 611 (App. Div. 2015)"}
-  njs2c5: {kind: statute, name: "N.J.S.A. 2C:5-2", cite: ""}
-  njs2c11: {kind: statute, name: "N.J.S.A. 2C:11-3", cite: ""}
-  njs2c15: {kind: statute, name: "N.J.S.A. 2C:15-1", cite: ""}
-  njs2c20: {kind: statute, name: "N.J.S.A. 2C:20-3(a)", cite: ""}
-  njs2c39a: {kind: statute, name: "N.J.S.A. 2C:39-4(a)", cite: ""}
-  njs2c39b: {kind: statute, name: "N.J.S.A. 2C:39-5(b)", cite: ""}
-  njs2c43: {kind: statute, name: "N.J.S.A. 2C:43-7.2", cite: ""}
-  njs2c44b: {kind: statute, name: "N.J.S.A. 2C:44-1b(13)", cite: ""}
-  njs2c44: {kind: statute, name: "N.J.S.A. 2C:44-5", cite: ""}
-  l1985: {kind: statute, name: "L. 1985, c. 478", cite: ""}
-  l2015: {kind: statute, name: "L. 2015, c. 89", cite: ""}
-  r1135: {kind: rule, name: "R. 1:13-5", cite: ""}
-  r2122a: {kind: rule, name: "R. 2:12-2(a)", cite: ""}
-  r2611d: {kind: rule, name: "R. 2:6-11(d)", cite: ""}
-  r32110b: {kind: rule, name: "R. 3:21-10(b)", cite: ""}
-  njconst: {kind: constitution, name: "N.J. Const., art. I, para. 12", cite: ""}
-  usconst: {kind: constitution, name: "U.S. Const. amend. VIII", cite: ""}
+  adams194: {kind: case, name: "*State v. Adams*", cite: "194 N.J. 186 (2008)", sort: "*State v. Adams (2008)"}
+  adams06: {kind: case, name: "*State v. Adams*", cite: "2006 WL 3798760 (App. Div. Dec. 28, 2006)", sort: "*State v. Adams (2006)"}
+  alston: {kind: case, name: "*State v. Alston*", cite: "88 N.J. 211 (1981)"}
+  atkins: {kind: case, name: "*Atkins v. Virginia*", cite: "536 U.S. 304 (2002)"}
+  acevedo: {kind: case, name: "*State v. Acevedo*", cite: "205 N.J. 40 (2011)"}
+  baker: {kind: case, name: "*State v. Baker*", cite: "81 N.J. 99 (1979)"}
+  bey: {kind: case, name: "*State v. Bey*", cite: "129 N.J. 557 (1992)"}
+  bearcloudwy: {kind: case, name: "*Bear Cloud v. State*", cite: "334 P.3d 132 (Wyo. 2014)"}
+  bearcloudsc: {kind: case, name: "*Bear Cloud v. Wyoming*", cite: "133 S.Ct. 183 (2012)"}
+  bobby: {kind: case, name: "*Bobby v. Bies*", cite: "556 U.S. 825 (2009)"}
+  brown: {kind: case, name: "*Brown v. State*", cite: "10 N.E.3d 1 (Ind. 2014)"}
+  byrne: {kind: case, name: "*Right to Choose v. Byrne*", cite: "91 N.J. 287 (1982)"}
+  caballero: {kind: case, name: "*People v. Caballero*", cite: "282 P.3d 291 (Cal. 2012)"}
+  casiano: {kind: case, name: "*Casiano v. Comm'r of Corr.*", cite: "115 A.3d 1031 (Conn. 2015)"}
+  chicago: {kind: case, name: "*Chicago, B. & Q.R. Co. v. Chicago*", cite: "166 U.S. 226 (1897)"}
+  chun: {kind: case, name: "*State v. Chun*", cite: "194 N.J. 54 (2008)"}
+  coker: {kind: case, name: "*Coker v. Georgia*", cite: "433 U.S. 584 (1977)"}
+  colorado: {kind: case, name: "*Colorado Republican Fed. Campaign Comm. v. Fed. Election Comm'n*", cite: "518 U.S. 604 (1996)"}
+  crowell: {kind: case, name: "*Crowell v. Benson*", cite: "285 U.S. 22 (1932)"}
+  darby: {kind: case, name: "*State v. Darby*", cite: "200 N.J. Super. 327 (App. Div. 1984)"}
+  davis: {kind: case, name: "*Davis v. United States*", cite: "417 U.S. 333 (1974)"}
+  dean: {kind: case, name: "*Dean v. United States*", cite: "556 U.S. 568 (2009)"}
+  diatchenko: {kind: case, name: "*Diatchenko v. Dist. Att. for Suffolk Dist.*", cite: "1 N.E.3d 270 (Mass. 2013)"}
+  doe: {kind: case, name: "*Doe v. Poritz*", cite: "142 N.J. 1 (1995)"}
+  eckel: {kind: case, name: "*State v. Eckel*", cite: "185 N.J. 523 (2006)"}
+  enmund: {kind: case, name: "*Enmund v. Florida*", cite: "458 U.S. 782 (1982)"}
+  escobedo: {kind: case, name: "*Escobedo v. Illinois*", cite: "378 U.S. 478 (1964)"}
+  farmer: {kind: case, name: "*Planned Parenthood of Cent. New Jersey v. Farmer*", cite: "165 N.J. 609 (2000)"}
+  fuentes: {kind: case, name: "*State v. Fuentes*", cite: "217 N.J. 57 (2014)"}
+  garner: {kind: case, name: "*Tennessee v. Garner*", cite: "471 U.S. 1 (1985)"}
+  gerald: {kind: case, name: "*State v. Gerald*", cite: "113 N.J. 40 (1988)"}
+  gilmore: {kind: case, name: "*State v. Gilmore*", cite: "103 N.J. 508 (1986)"}
+  grady: {kind: case, name: "*In re Grady*", cite: "85 N.J. 235 (1981)"}
+  graham: {kind: case, name: "*Graham v. Florida*", cite: "560 U.S. 48 (2010)"}
+  greiman: {kind: case, name: "*Greiman v. Hodges*", cite: "79 F. Supp. 3d 933 (S.D. Iowa 2015)"}
+  hayden: {kind: case, name: "*Hayden v. Keller*", cite: "2015 WL 5773634 (E.D.N.C. Sept. 25, 2015)"}
+  hempele: {kind: case, name: "*State v. Hempele*", cite: "120 N.J. 182 (1990)"}
+  henry: {kind: case, name: "*Henry v. State*", cite: "175 So.3d 675 (Fla. 2015)"}
+  hogan: {kind: case, name: "*State v. Hogan*", cite: "144 N.J. 216 (1995)"}
+  hunt: {kind: case, name: "*State v. Hunt*", cite: "91 N.J. 338 (1982)"}
+  johnson193: {kind: case, name: "*State v. Johnson*", cite: "193 N.J. 528 (2008)", sort: "*State v. Johnson (2008)"}
+  johnson68: {kind: case, name: "*State v. Johnson*", cite: "68 N.J. 349 (1975)", sort: "*State v. Johnson (1975)"}
+  johnsontx: {kind: case, name: "*Johnson v. Texas*", cite: "509 U.S. 350 (1993)"}
+  kennedy: {kind: case, name: "*Kennedy v. Louisiana*", cite: "554 U.S. 407 (2008)"}
+  koskovich: {kind: case, name: "*State v. Koskovich*", cite: "168 N.J. 448 (2001)"}
+  lopez: {kind: case, name: "*United States v. Lopez*", cite: "514 U.S. 549 (1995)"}
+  lyle: {kind: case, name: "*State v. Lyle*", cite: "854 N.W.2d 378 (Iowa 2014)"}
+  maldonado: {kind: case, name: "*State v. Maldonado*", cite: "137 N.J. 536 (1994)"}
+  marshall: {kind: case, name: "*State v. Marshall*", cite: "130 N.J. 109 (1992)"}
+  martini: {kind: case, name: "*State v. Martini*", cite: "144 N.J. 603 (1996)"}
+  mccleskey: {kind: case, name: "*McCleskey v. Kemp*", cite: "481 U.S. 279 (1987)"}
+  miller: {kind: case, name: "*Miller v. Alabama*", cite: "132 S.Ct. 2455 (2012)"}
+  montgomery: {kind: case, name: "*Montgomery v. Louisiana*", cite: "136 S.Ct. 718 (2016)"}
+  moore: {kind: case, name: "*Moore v. Biter*", cite: "725 F.3d 1184 (9th Cir. 2013)"}
+  muhammad: {kind: case, name: "*State v. Muhammad*", cite: "182 N.J. 551 (2005)"}
+  murray: {kind: case, name: "*State v. Murray*", cite: "162 N.J. 240 (2000)"}
+  natale: {kind: case, name: "*State v. Natale*", cite: "184 N.J. 458 (2005)"}
+  njcoal: {kind: case, name: "*New Jersey Coal. Against The War In The Middle East v. J.M.B Realty*", cite: "138 N.J. 326 (1994)"}
+  nieto: {kind: case, name: "*People v. Nieto*", cite: "\\_\\_N.E.3d\\_\\_, 2016 WL 1165717 (Ill. App. Ct. Mar. 23, 2016)"}
+  norman: {kind: case, name: "*State v. Norman*", cite: "151 N.J. 5 (1997)"}
+  novembrino: {kind: case, name: "*State v. Novembrino*", cite: "105 N.J. 95 (1987)"}
+  nullstate: {kind: case, name: "*State v. Null*", cite: "836 N.W.2d 41 (Iowa 2013)"}
+  pierce: {kind: case, name: "*State v. Pierce*", cite: "136 N.J. 184 (1994)"}
+  quinlan: {kind: case, name: "*In re Quinlan*", cite: "70 N.J. 10 (1976)"}
+  rainer: {kind: case, name: "*People v. Rainer*", cite: "\\_\\_P.3d\\_\\_, 2013 WL 1490107 (Col. Ct. App. April 11, 2013)"}
+  ramseur: {kind: case, name: "*State v. Ramseur*", cite: "106 N.J. 123 (1987)"}
+  riley: {kind: case, name: "*State v. Riley*", cite: "110 A.3d 1205 (Conn. 2015)"}
+  robinson: {kind: case, name: "*Robinson v. Cahill*", cite: "62 N.J. 473 (1973)"}
+  ronquillo: {kind: case, name: "*State v. Ronquillo*", cite: "361 P.3d 779 (Wash. Ct. App. 2015)"}
+  roper: {kind: case, name: "*Roper v. Simmons*", cite: "543 U.S. 551 (2005)"}
+  schmid: {kind: case, name: "*State v. Schmid*", cite: "84 N.J. 535 (1980)"}
+  shannon: {kind: case, name: "*State v. Shannon*", cite: "222 N.J. 576 (2015)"}
+  sisler: {kind: case, name: "*Sisler v. Gannett Co., Inc.*", cite: "222 N.J. Super. 153 (App. Div. 1987)"}
+  stateinre: {kind: case, name: "*State in re A.C.*", cite: "426 N.J. Super. 81 (Ch. Div. 2012)"}
+  stovall: {kind: case, name: "*State v. Stovall*", cite: "170 N.J. 346 (2002)"}
+  tison: {kind: case, name: "*Tison v. Arizona*", cite: "481 U.S. 137 (1987)"}
+  umbehr: {kind: case, name: "*Bd. of Cty. Comm'rs v. Umbehr*", cite: "518 U.S. 668 (1996)"}
+  valencia: {kind: case, name: "*State v. Valencia*", cite: "\\_\\_P.3d\\_\\_, 2016 WL 1203414 (Ariz. Ct. App. Mar. 28, 2016)"}
+  veal: {kind: case, name: "*Veal v. State*", cite: "\\_\\_S.E.2d\\_\\_, 2016 WL 1085360 (Ga. Mar. 21, 2016)"}
+  williams: {kind: case, name: "*State v. Williams*", cite: "93 N.J. 39 (1983)"}
+  woodson: {kind: case, name: "*Woodson v. North Carolina*", cite: "428 U.S. 280 (1976)"}
+  yarborough: {kind: case, name: "*State v. Yarborough*", cite: "100 N.J. 627 (1985)"}
+  yothers: {kind: case, name: "*State v. Yothers*", cite: "282 N.J. Super. 86 (App. Div. 1995)"}
+  zarate: {kind: case, name: "*State v. Zarate*", cite: "2016 WL 1079462 (App. Div. Mar. 21, 2016)"}
+  zuber: {kind: case, name: "*State v. Zuber*", cite: "442 N.J. Super. 611 (App. Div. 2015)"}
+  njs2c5: {kind: statute, cite: "N.J.S.A. 2C:5-2"}
+  njs2c11: {kind: statute, cite: "N.J.S.A. 2C:11-3"}
+  njs2c15: {kind: statute, cite: "N.J.S.A. 2C:15-1"}
+  njs2c20: {kind: statute, cite: "N.J.S.A. 2C:20-3(a)"}
+  njs2c39a: {kind: statute, cite: "N.J.S.A. 2C:39-4(a)"}
+  njs2c39b: {kind: statute, cite: "N.J.S.A. 2C:39-5(b)"}
+  njs2c43: {kind: statute, cite: "N.J.S.A. 2C:43-7.2"}
+  njs2c44b: {kind: statute, cite: "N.J.S.A. 2C:44-1b(13)"}
+  njs2c44: {kind: statute, cite: "N.J.S.A. 2C:44-5"}
+  l1985: {kind: statute, cite: "L. 1985, c. 478"}
+  l2015: {kind: statute, cite: "L. 2015, c. 89"}
+  r1135: {kind: rule, cite: "R. 1:13-5"}
+  r2122a: {kind: rule, cite: "R. 2:12-2(a)"}
+  r2611d: {kind: rule, cite: "R. 2:6-11(d)"}
+  r32110b: {kind: rule, cite: "R. 3:21-10(b)"}
+  njconst: {kind: constitution, cite: "N.J. Const., art. I, para. 12"}
+  usconst: {kind: constitution, cite: "U.S. Const. amend. VIII"}
   apabrief: {kind: other, name: "Brief of American Psychological Association et al. As Amici Curiae in Support of Respondent, Roper v. Simmons, 543 U.S. 551 (2005)", cite: "2004 WL 1636447", sort: "Brief of American Psychological"}
   delavega: {kind: other, name: "Connie de la Vega and Michelle Leighton, Sentencing Our Children to Die in Prison: Global Law and Practice", cite: "42 U.S.F. L. REV. 983 (2008)", sort: "de la Vega"}
   edens: {kind: other, name: "John F. Edens, et al., Assessment of Juvenile Psychopathy and Its Association with Violence: A Critical Review", cite: "19 BEHAV. SCI. & L. 53 (2001)"}
@@ -235,7 +235,7 @@ Nor do the accepted rationales for sentencing, also critical to the Court’s an
 
 Indeed, to interpret the Supreme Court’s holdings as applicable only to sentences formally designated “life without parole,” would elevate form over substance in a way that both the United States Supreme Court and this Court have always rejected. See, e.g., Bd. of Cty. Comm’rs v. [Umbehr](toa:umbehr), 518 U.S. 668, 679 (1996) (“Determining constitutional claims on the basis of [] formal distinctions, which can be manipulated largely at the will of the government . . . , is an enterprise that we have consistently eschewed.”) (citing, e.g., [Colorado Republican Fed. Campaign Comm. v. Fed. Election Comm'n](toa:colorado), 518 U.S. 604, 622 (1996) (opinion of Breyer, J.) (“[T]he government ‘cannot foreclose the exercise of rights by mere labels’”); [Escobedo](toa:escobedo) v. Illinois, 378 U.S. 478, 486 (1964) (declining to “exalt form over substance” in determining the temporal scope of Sixth Amendment protections); [Crowell](toa:crowell) v. Benson, 285 U.S. 22, 53 (1932) (“Regard must be had . . . in . . . cases where constitutional limits are invoked, not to mere matters of form but to the substance of what is required”); [Chicago](toa:chicago), B. & Q.R. Co. v. [Chicago](toa:chicago), 166 U.S. 226, 235 (1897) (“In determining what is due process of law regard must be had to substance, not to form.”)); State v. [Stovall](toa:stovall), 170 N.J. 346, 363 (2002) (refusing to “elevate form over function” in “reasonable suspicion” analysis); accord [Casiano](toa:casiano), 115 A.3d at 1044 (“We agree, however, with those courts that have concluded that the Supreme Court's focus in [Graham](toa:graham) and [Miller](toa:miller) ‘was not on the label of a ‘life sentence’’ but rather on whether a juvenile would, as a consequence of a lengthy sentence without the possibility of parole, actually be imprisoned for the rest of his life.”); [Moore v. Biter](toa:moore), 725 F.3d 1184, 1192 (9th Cir. 2013) (“[Graham](toa:graham)'s focus was not on the label of a ‘life sentence’ — but rather on the difference between life in prison with, or without, possibility of parole.”).
 
-Thus, both the United States Supreme Court and the lower courts of this State have held these precedents applicable to terms of years that amount to LWOP, just as surely as to formal sentences of life without parole. See [Bear Cloud v. Wyoming](toa:bearcloudsc), 133 S.Ct. 183, 183–84 (2012) (vacating and remanding for resentencing in accordance with [Miller](toa:miller) in the case of a juvenile defendant sentenced to consecutive terms of life with parole for murder and 20-25 years for aggravated burglary); [Zarate](toa:zarate), 2016 WL 1079462, at \*11, DSa54 (finding [Miller](toa:miller) applicable to de facto LWOP because “[t]he United States Supreme Court's case law . . . focuses upon whether a juvenile offender will have a ‘meaningful’ opportunity for a future life outside of prison walls.”). Indeed, the majority of state and federal courts to have reached the issue are in agreement that, “[Graham](toa:graham)’s analysis does not focus on the precise sentence meted out. Instead . . . it holds that a state must provide a juvenile offender ‘with some realistic opportunity to obtain release’ from prison during his or her expected lifetime.’” People v. [Caballero](toa:caballero), 282 P.3d 291, 298 (Cal. 2012); accord [Moore](toa:moore), 725 F.3d at 1191-92; [Greiman](toa:greiman) v. Hodges, 79 F. Supp. 3d 933 (S.D. Iowa 2015); [Hayden](toa:hayden), 2015 WL 5773634, at \*8; [Henry](toa:henry), 175 So.3d 675; State v. [Riley](toa:riley), 110 A.3d 1205, 1213-14 (Conn. 2015); State v. [Ronquillo](toa:ronquillo), 361 P.3d 779 (Wash. Ct. App. 2015); [Bear Cloud](toa:bearcloudwy), 334 P.3d at 141-42; [Brown](toa:brown), 10 N.E.3d at 8; [Null](toa:null), 836 N.W.2d 41; [Rainer](toa:rainer), 2013 WL 1490107.
+Thus, both the United States Supreme Court and the lower courts of this State have held these precedents applicable to terms of years that amount to LWOP, just as surely as to formal sentences of life without parole. See [Bear Cloud v. Wyoming](toa:bearcloudsc), 133 S.Ct. 183, 183–84 (2012) (vacating and remanding for resentencing in accordance with [Miller](toa:miller) in the case of a juvenile defendant sentenced to consecutive terms of life with parole for murder and 20-25 years for aggravated burglary); [Zarate](toa:zarate), 2016 WL 1079462, at \*11, DSa54 (finding [Miller](toa:miller) applicable to de facto LWOP because “[t]he United States Supreme Court's case law . . . focuses upon whether a juvenile offender will have a ‘meaningful’ opportunity for a future life outside of prison walls.”). Indeed, the majority of state and federal courts to have reached the issue are in agreement that, “[Graham](toa:graham)’s analysis does not focus on the precise sentence meted out. Instead . . . it holds that a state must provide a juvenile offender ‘with some realistic opportunity to obtain release’ from prison during his or her expected lifetime.’” People v. [Caballero](toa:caballero), 282 P.3d 291, 298 (Cal. 2012); accord [Moore](toa:moore), 725 F.3d at 1191-92; [Greiman](toa:greiman) v. Hodges, 79 F. Supp. 3d 933 (S.D. Iowa 2015); [Hayden](toa:hayden), 2015 WL 5773634, at \*8; [Henry](toa:henry), 175 So.3d 675; State v. [Riley](toa:riley), 110 A.3d 1205, 1213-14 (Conn. 2015); State v. [Ronquillo](toa:ronquillo), 361 P.3d 779 (Wash. Ct. App. 2015); [Bear Cloud](toa:bearcloudwy), 334 P.3d at 141-42; [Brown](toa:brown), 10 N.E.3d at 8; [Null](toa:nullstate), 836 N.W.2d 41; [Rainer](toa:rainer), 2013 WL 1490107.
 
 In sum, this Court should, as one jurisdiction has held, “focus on the forest — the aggregate sentence — rather than the trees — consecutive or concurrent, number of counts, or length of the sentence on any individual count.” [Brown](toa:brown), 10 N.E.3d at 8. [Graham](toa:graham), [Miller](toa:miller), and [Montgomery](toa:montgomery) must, then, be applied in Comer’s case.
 
@@ -345,7 +345,7 @@ Deterrence is the idea that the specter of punishment will influence the “cold
 And for the juveniles sentenced to LWOP, parole ineligibility has the opposite of a deterrent effect because, “[a] young person who knows that he or she has no chance to leave prison before life's end has little incentive to become a responsible individual.” [Graham](toa:graham), 560 U.S. at 79. Thus, sentencing
 juveniles to LWOP will not deter juvenile crime.
 
-Incapacitation justifies punishment to remove an offender from society for the public’s safety; in the case of juveniles sentenced to LWOP, this justification “requires the sentencer to make a judgment that the juvenile is incorrigible.” Id. at 72-73. [Montgomery](toa:montgomery) makes clear that, under [Miller](toa:miller), a factual finding of just such incorrigibility (alternatively denoted “irreparable corruption,” [Roper](toa:roper), 543 U.S. at 573; [Miller](toa:miller), 132 S.Ct. at 2469, and “irretrievably depraved character,” [Roper](toa:roper), 543 U.S. at 570; [Graham](toa:graham), 560 U.S. at 68) is the only rationale that might justify juvenile LWOP ― a sentence of life without even the possibility of ever being released ― and that without a finding of incorrigibility, such a sentence is unconstitutional. 136 S.Ct. at 735 (States are not “free to sentence a child whose crime reflects transient immaturity to life without parole. To the contrary, [Miller](toa:miller) established that this punishment is disproportionate under the Eighth Amendment.”); [Veal](toa:veal) v. State, \_\_S.E.2d\_\_, 2016 WL 1085360, at \*9 (Ga. Mar. 21, 2016) (“Thus, [Montgomery](toa:montgomery) emphasizes that a life without parole sentence is permitted only in ‘exceptional circumstances,’ for ‘the rare juvenile offender who exhibits such irretrievable depravity that rehabilitation is impossible’”) (emphasis in original). That is to say, juvenile offenders should not, unless they are demonstrably incorrigible, be sentenced to life without the possibility of release. State v. [Lyle](toa:lyle), 854 N.W.2d 378, 400 (Iowa 2014) (holding that, where incorrigibility cannot be demonstrated, and the juvenile offender is therefore capable of reform, “the incapacitation objective can no longer seriously be served, and . . . [juvenile LWOP] becomes ‘nothing more than the purposeless and needless imposition of pain and suffering.’”).
+Incapacitation justifies punishment to remove an offender from society for the public’s safety; in the case of juveniles sentenced to LWOP, this justification “requires the sentencer to make a judgment that the juvenile is incorrigible.” Id. at 72-73. [Montgomery](toa:montgomery) makes clear that, under [Miller](toa:miller), a factual finding of just such incorrigibility (alternatively denoted “irreparable corruption,” [Roper](toa:roper), 543 U.S. at 573; [Miller](toa:miller), 132 S.Ct. at 2469, and “irretrievably depraved character,” [Roper](toa:roper), 543 U.S. at 570; [Graham](toa:graham), 560 U.S. at 68) is the only rationale that might justify juvenile LWOP — a sentence of life without even the possibility of ever being released — and that without a finding of incorrigibility, such a sentence is unconstitutional. 136 S.Ct. at 735 (States are not “free to sentence a child whose crime reflects transient immaturity to life without parole. To the contrary, [Miller](toa:miller) established that this punishment is disproportionate under the Eighth Amendment.”); [Veal](toa:veal) v. State, \_\_S.E.2d\_\_, 2016 WL 1085360, at \*9 (Ga. Mar. 21, 2016) (“Thus, [Montgomery](toa:montgomery) emphasizes that a life without parole sentence is permitted only in ‘exceptional circumstances,’ for ‘the rare juvenile offender who exhibits such irretrievable depravity that rehabilitation is impossible’”) (emphasis in original). That is to say, juvenile offenders should not, unless they are demonstrably incorrigible, be sentenced to life without the possibility of release. State v. [Lyle](toa:lyle), 854 N.W.2d 378, 400 (Iowa 2014) (holding that, where incorrigibility cannot be demonstrated, and the juvenile offender is therefore capable of reform, “the incapacitation objective can no longer seriously be served, and . . . [juvenile LWOP] becomes ‘nothing more than the purposeless and needless imposition of pain and suffering.’”).
 
 But the fact that adolescent identities are transient, with most juvenile criminality limited to adolescence, means that no such determination is possible at the time of sentencing. Indeed, the Supreme Court summarized the social science research in [Graham](toa:graham) and held, “‘[i]t is difficult even for expert psychologists to differentiate between the juvenile offender whose crime reflects unfortunate yet transient immaturity, and the rare juvenile offender whose crime reflects irreparable corruption.’” Id. at 68.
 
@@ -434,6 +434,7 @@ Finally, Comer presents issues of first impression to this Court. This Court has
 # CONCLUSION
 
 For the foregoing reasons, defendant James Comer respectfully submits that this Court should affirm the judgment vacating his sentence, and remand for re-sentencing to a term less than de facto life without parole, after a hearing that comports with the constitutional mandates of [Miller](toa:miller) and [Montgomery](toa:montgomery).
+
 [^13]: [Hunt](toa:hunt) requires that, in deciding whether or not the New Jersey Constitution should be interpreted differently than the Federal, the Court consider: (1) textual differences in constitutional language; (2) respective drafting histories; (3) State law predating a Supreme Court opinion; (4) differences in federal and State structures; (5) subjective matters of particular State or local interest; (6) State history or traditions; and (7) societal beliefs or attitudes particular to the State. [Hunt](toa:hunt), 91 N.J. at 363-68. However, these factors are “illustrative, rather than exhaustive,” id. at 368, and this Court has made clear that it may diverge from the Federal Constitution where, as here, some but not all of the factors counsel such divergence. See, e.g., State v. [Eckel](toa:eckel), 185 N.J. 523, 538 (2006) (“Although [the relevant text of the New Jersey Constitution] is almost identical to the text of the Fourth Amendment to the Federal Constitution, we have not hesitated in the past to afford our citizens greater protection against unreasonable searches and seizures under Article I, Paragraph 7 than would be the case under its federal counterpart.”). In interpreting the State Cruel and Unusual Punishment Clause more broadly than the Eighth Amendment, this Court has several times relied on a single [Hunt](toa:hunt) factor. See, e.g., [Gerald](toa:gerald), 113 N.J. at 76 (basing decision on factor (5), the particular State interest in criminal punishment); [Ramseur](toa:ramseur), 106 N.J. at 167 (same); State v. [Martini](toa:martini), 144 N.J. 603, 612-13 (1996) (basing decision on factor (4), and describing the unique role of the judiciary with regard to determining the constitutionality of capital punishment); State v. [Marshall](toa:marshall), 130 N.J. 109, 209 (1992) (invoking factors (6) and (7), based upon New Jersey’s long history and deeply-held beliefs in opposition to the “terrible realities” of racism).
 
 [^14]: Available at http://www.nj.gov/oag/jjc/pdf/JDAI-2011-Report-Annual.pdf.

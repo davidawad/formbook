@@ -43,64 +43,64 @@ signature:
       - "Attorney ID No. 188002016"
       - "Counsel for Petitioner James Comer"
 authorities:
-  abbott: {kind: case, name: "Abbott v. Burke", cite: "100 N.J. 269 (1985)"}
-  adams194: {kind: case, name: "State v. Adams", cite: "194 N.J. 186 (2008)"}
-  adams2006: {kind: case, name: "State v. Adams", cite: "2006 WL 3798760 (App. Div. Dec. 28, 2006)"}
-  atkins: {kind: case, name: "Atkins v. Virginia", cite: "536 U.S. 304 (2002)"}
-  bey: {kind: case, name: "State v. Bey", cite: "129 N.J. 557 (1992)"}
-  buckner: {kind: case, name: "State v. Buckner", cite: "223 N.J. 1 (2015)"}
-  burlington: {kind: case, name: "S. Burlington Cty. N.A.A.C.P. v. Mt. Laurel Twp.", cite: "92 N.J. 158 (1983)"}
-  ck: {kind: case, name: "State in the Interest of C.K.", cite: "233 N.J. 44 (2018)"}
-  comer: {kind: case, name: "State v. Comer", cite: "2020 WL 2179075 (N.J. App. Div. May 6, 2020)"}
-  coker: {kind: case, name: "Coker v. Georgia", cite: "433 U.S. 584 (1977)"}
-  depascale: {kind: case, name: "DePascale v. State", cite: "211 N.J. 40 (2012)"}
-  dull: {kind: case, name: "State v. Dull", cite: "351 P.3d 641 (Kan. 2015)"}
-  galicia: {kind: case, name: "State v. Galicia", cite: "210 N.J. 364 (2012)"}
-  gerald: {kind: case, name: "State v. Gerald", cite: "113 N.J. 40 (1988)"}
-  graham: {kind: case, name: "Graham v. Florida", cite: "560 U.S. 48 (2010)"}
-  holman: {kind: case, name: "People v. Holman", cite: "91 N.E.3d 849 (Ill. 2017)"}
-  houston: {kind: case, name: "State v. Houston-Sconiers", cite: "391 P.3d 409 (Wa. 2017)"}
-  hudson: {kind: case, name: "State v. Hudson", cite: "209 N.J. 513 (2012)"}
-  jones: {kind: case, name: "Jones v. Mississippi", cite: "593 U.S. ___ (2021)"}
-  kennedy: {kind: case, name: "Kennedy v. Louisiana", cite: "554 U.S. 407 (2008)"}
-  koskovich: {kind: case, name: "State v. Koskovich", cite: "168 N.J. 448 (2001)"}
-  lyle: {kind: case, name: "State v. Lyle", cite: "854 N.W.2d 378 (Iowa 2014)"}
-  maldonado: {kind: case, name: "State v. Maldonado", cite: "137 N.J. 536 (1994)"}
-  marbury: {kind: case, name: "Marbury v. Madison", cite: "5 U.S. 137 (1803)"}
-  marshall: {kind: case, name: "State v. Marshall", cite: "130 N.J. 109 (1992)"}
-  martini: {kind: case, name: "State v. Martini", cite: "144 N.J. 603 (1996)"}
-  mccleskey: {kind: case, name: "McCleskey v. Kemp", cite: "481 U.S. 279 (1987)"}
-  miller: {kind: case, name: "Miller v. Alabama", cite: "567 U.S. 460 (2012)"}
-  montgomery: {kind: case, name: "Montgomery v. Louisiana", cite: "577 U.S. 190 (2016)"}
-  popovich: {kind: case, name: "New Amsterdam Cas. Co. v. Popovich", cite: "18 N.J. 218 (1955)"}
-  pratt: {kind: case, name: "State v. Pratt", cite: "226 N.J. Super. 307 (App. Div. 1988)"}
-  ramseur: {kind: case, name: "State v. Ramseur", cite: "106 N.J. 123 (1987)"}
-  roberts: {kind: case, name: "Roberts v. Louisiana", cite: "428 U.S. 325 (1976)"}
-  roper: {kind: case, name: "Roper v. Simmons", cite: "543 U.S. 551 (2005)"}
-  robinson: {kind: case, name: "Robinson v. Cahill", cite: "69 N.J. 133 (1975)"}
-  stanford: {kind: case, name: "Stanford v. Kentucky", cite: "492 U.S. 361 (1989)"}
-  penry: {kind: case, name: "Penry v. Lynaugh", cite: "492 U.S. 302 (1989)"}
-  tapia: {kind: case, name: "Tapia v. United States", cite: "564 U.S. 319 (2011)"}
-  taveras: {kind: case, name: "United States v. Taveras", cite: "436 F. Supp. 2d 493 (E.D.N.Y. 2006)"}
-  tison: {kind: case, name: "Tison v. Arizona", cite: "481 U.S. 137 (1987)"}
-  trantino: {kind: case, name: "Trantino v. New Jersey State Parole Bd.", cite: "154 N.J. 19 (1998)"}
-  trop: {kind: case, name: "Trop v. Dulles", cite: "356 U.S. 86 (1958)"}
-  woodson: {kind: case, name: "Woodson v. North Carolina", cite: "428 U.S. 280 (1976)"}
-  yarbough: {kind: case, name: "State v. Yarbough", cite: "100 N.J. 627 (1985)"}
-  zuber: {kind: case, name: "State v. Zuber", cite: "227 N.J. 422 (2017)"}
-  njs2c113b1: {kind: statute, name: "N.J.S.A. 2C:11-3b(1)"}
-  njs2c113a3: {kind: statute, name: "N.J.S.A. 2C:11-3(a)(3)"}
-  njs2c113b1x: {kind: statute, name: "N.J.S.A. 2C:11-3(b)(1)"}
-  njs2c52: {kind: statute, name: "N.J.S.A. 2C:5-2"}
-  njs2c151: {kind: statute, name: "N.J.S.A. 2C:15-1"}
-  njs2c395b: {kind: statute, name: "N.J.S.A. 2C:39-5(b)"}
-  njs2c394a: {kind: statute, name: "N.J.S.A. 2C:39-4(a)"}
-  njs2c203a: {kind: statute, name: "N.J.S.A. 2C:20-3(a)"}
-  njs2c437: {kind: statute, name: "N.J.S.A. 2C:43-7.2"}
-  njs2c441: {kind: statute, name: "N.J.S.A. 2C:44-1"}
-  njs2c72g: {kind: statute, name: "N.J.S.A. 2C:7-2(g)"}
-  njs2a44d: {kind: statute, name: "N.J.S.A. 2A:4A-44d(1)(a), (b)"}
-  usc3582: {kind: statute, name: "18 U.S.C. § 3582(a)"}
+  abbott: {kind: case, name: "*Abbott v. Burke*", cite: "100 N.J. 269 (1985)"}
+  adams194: {kind: case, name: "*State v. Adams*", cite: "194 N.J. 186 (2008)"}
+  adams2006: {kind: case, name: "*State v. Adams*", cite: "2006 WL 3798760 (App. Div. Dec. 28, 2006)"}
+  atkins: {kind: case, name: "*Atkins v. Virginia*", cite: "536 U.S. 304 (2002)"}
+  bey: {kind: case, name: "*State v. Bey*", cite: "129 N.J. 557 (1992)"}
+  buckner: {kind: case, name: "*State v. Buckner*", cite: "223 N.J. 1 (2015)"}
+  burlington: {kind: case, name: "*S. Burlington Cty. N.A.A.C.P. v. Mt. Laurel Twp.*", cite: "92 N.J. 158 (1983)"}
+  ck: {kind: case, name: "*State in the Interest of C.K.*", cite: "233 N.J. 44 (2018)"}
+  comer: {kind: case, name: "*State v. Comer*", cite: "2020 WL 2179075 (N.J. App. Div. May 6, 2020)"}
+  coker: {kind: case, name: "*Coker v. Georgia*", cite: "433 U.S. 584 (1977)"}
+  depascale: {kind: case, name: "*DePascale v. State*", cite: "211 N.J. 40 (2012)"}
+  dull: {kind: case, name: "*State v. Dull*", cite: "351 P.3d 641 (Kan. 2015)"}
+  galicia: {kind: case, name: "*State v. Galicia*", cite: "210 N.J. 364 (2012)"}
+  gerald: {kind: case, name: "*State v. Gerald*", cite: "113 N.J. 40 (1988)"}
+  graham: {kind: case, name: "*Graham v. Florida*", cite: "560 U.S. 48 (2010)"}
+  holman: {kind: case, name: "*People v. Holman*", cite: "91 N.E.3d 849 (Ill. 2017)"}
+  houston: {kind: case, name: "*State v. Houston-Sconiers*", cite: "391 P.3d 409 (Wa. 2017)"}
+  hudson: {kind: case, name: "*State v. Hudson*", cite: "209 N.J. 513 (2012)"}
+  jones: {kind: case, name: "*Jones v. Mississippi*", cite: "593 U.S. ___ (2021)"}
+  kennedy: {kind: case, name: "*Kennedy v. Louisiana*", cite: "554 U.S. 407 (2008)"}
+  koskovich: {kind: case, name: "*State v. Koskovich*", cite: "168 N.J. 448 (2001)"}
+  lyle: {kind: case, name: "*State v. Lyle*", cite: "854 N.W.2d 378 (Iowa 2014)"}
+  maldonado: {kind: case, name: "*State v. Maldonado*", cite: "137 N.J. 536 (1994)"}
+  marbury: {kind: case, name: "*Marbury v. Madison*", cite: "5 U.S. 137 (1803)"}
+  marshall: {kind: case, name: "*State v. Marshall*", cite: "130 N.J. 109 (1992)"}
+  martini: {kind: case, name: "*State v. Martini*", cite: "144 N.J. 603 (1996)"}
+  mccleskey: {kind: case, name: "*McCleskey v. Kemp*", cite: "481 U.S. 279 (1987)"}
+  miller: {kind: case, name: "*Miller v. Alabama*", cite: "567 U.S. 460 (2012)"}
+  montgomery: {kind: case, name: "*Montgomery v. Louisiana*", cite: "577 U.S. 190 (2016)"}
+  popovich: {kind: case, name: "*New Amsterdam Cas. Co. v. Popovich*", cite: "18 N.J. 218 (1955)"}
+  pratt: {kind: case, name: "*State v. Pratt*", cite: "226 N.J. Super. 307 (App. Div. 1988)"}
+  ramseur: {kind: case, name: "*State v. Ramseur*", cite: "106 N.J. 123 (1987)"}
+  roberts: {kind: case, name: "*Roberts v. Louisiana*", cite: "428 U.S. 325 (1976)"}
+  roper: {kind: case, name: "*Roper v. Simmons*", cite: "543 U.S. 551 (2005)"}
+  robinson: {kind: case, name: "*Robinson v. Cahill*", cite: "69 N.J. 133 (1975)"}
+  stanford: {kind: case, name: "*Stanford v. Kentucky*", cite: "492 U.S. 361 (1989)"}
+  penry: {kind: case, name: "*Penry v. Lynaugh*", cite: "492 U.S. 302 (1989)"}
+  tapia: {kind: case, name: "*Tapia v. United States*", cite: "564 U.S. 319 (2011)"}
+  taveras: {kind: case, name: "*United States v. Taveras*", cite: "436 F. Supp. 2d 493 (E.D.N.Y. 2006)"}
+  tison: {kind: case, name: "*Tison v. Arizona*", cite: "481 U.S. 137 (1987)"}
+  trantino: {kind: case, name: "*Trantino v. New Jersey State Parole Bd.*", cite: "154 N.J. 19 (1998)"}
+  trop: {kind: case, name: "*Trop v. Dulles*", cite: "356 U.S. 86 (1958)"}
+  woodson: {kind: case, name: "*Woodson v. North Carolina*", cite: "428 U.S. 280 (1976)"}
+  yarbough: {kind: case, name: "*State v. Yarbough*", cite: "100 N.J. 627 (1985)"}
+  zuber: {kind: case, name: "*State v. Zuber*", cite: "227 N.J. 422 (2017)"}
+  njs2c113b1: {kind: statute, cite: "N.J.S.A. 2C:11-3b(1)"}
+  njs2c113a3: {kind: statute, cite: "N.J.S.A. 2C:11-3(a)(3)"}
+  njs2c113b1x: {kind: statute, cite: "N.J.S.A. 2C:11-3(b)(1)"}
+  njs2c52: {kind: statute, cite: "N.J.S.A. 2C:5-2"}
+  njs2c151: {kind: statute, cite: "N.J.S.A. 2C:15-1"}
+  njs2c395b: {kind: statute, cite: "N.J.S.A. 2C:39-5(b)"}
+  njs2c394a: {kind: statute, cite: "N.J.S.A. 2C:39-4(a)"}
+  njs2c203a: {kind: statute, cite: "N.J.S.A. 2C:20-3(a)"}
+  njs2c437: {kind: statute, cite: "N.J.S.A. 2C:43-7.2"}
+  njs2c441: {kind: statute, cite: "N.J.S.A. 2C:44-1"}
+  njs2c72g: {kind: statute, cite: "N.J.S.A. 2C:7-2(g)"}
+  njs2a44d: {kind: statute, cite: "N.J.S.A. 2A:4A-44d(1)(a), (b)"}
+  usc3582: {kind: statute, cite: "18 U.S.C. § 3582(a)"}
   calpc: {kind: statute, name: "Cal. Penal Code § 3051(b)", cite: "(2016)"}
   wyo: {kind: statute, name: "Wyo. Stat. Ann. § 6–10–301(c)", cite: "(2016)"}
   wva: {kind: statute, name: "W. Va. Code § 61–11–23(b)", cite: "(2016)"}
@@ -118,32 +118,32 @@ authorities:
   nc: {kind: statute, name: "N.C. Gen. Stat. § 15A–1340.19A", cite: "(2016)"}
   nev: {kind: statute, name: "Nev. A.B. 267, 78th Reg. Sess.", cite: "(2015)"}
   ohio: {kind: statute, name: "Ohio S.B. 256, 133rd Gen. Assemb.", cite: "(2020)"}
-  rule3210: {kind: rule, name: "N.J.C.R. 3:21-10(b)(5)"}
+  rule3210: {kind: rule, cite: "N.J.C.R. 3:21-10(b)(5)"}
   gibbons: {kind: other, name: "John J. Gibbons & Nicholas de B. Katzenbach, Confronting Confinement", cite: "(2006)"}
-  haney: {kind: other, name: "Craig Haney, “The Psychological Impact of Incarceration”"}
-  moffitt: {kind: other, name: "Terrie E. Moffitt, “Adolescence-Limited and Life-Course-Persistent Antisocial Behavior: A Developmental Taxonomy”"}
-  steinberg: {kind: other, name: "Laurence Steinberg, “The Influence of Neuroscience on U.S. Supreme Court Decisions about Adolescents’ Criminal Culpability”"}
-  laub: {kind: other, name: "John H. Laub & Robert J. Sampson, “Understanding Desistance from Crime”"}
-  blumstein: {kind: other, name: "Alfred Blumstein, et al., “Delinquency Careers: Innocents, Desisters, and Persisters”"}
-  duration: {kind: other, name: "Alfred Blumstein, et al., The Duration of Adult Criminal Careers"}
-  western: {kind: other, name: "Bruce Western, et al., “Stress and Hardship After Prison”"}
-  ejisuper: {kind: other, name: "Equal Justice Initiative, Report, “The Superpredator Myth, 20 Years Later”"}
-  ejichild: {kind: other, name: "Equal Justice Initiative, Report, “All Children Are Children: Challenging Abusive Punishment of Juveniles”"}
-  aging: {kind: other, name: "“Aging in Prison: Reducing Elder Incarceration and Promoting Public Safety”"}
-  cfsy: {kind: other, name: "Campaign for Fair Sentencing of Youth, Report, “National Trends in Sentencing Children to Life without Parole”"}
-  tipping: {kind: other, name: "Campaign for Fair Sentencing of Youth, Report, “Tipping Point: A Majority of States Abandon Life-Without-Parole Sentences for Children”"}
-  couloute: {kind: other, name: "Lucius Couloute, “Nowhere to Go: Homelessness Among Formerly Incarcerated People”"}
-  piquero: {kind: other, name: "Alex R. Piquero, et al., “The Criminal Career Paradigm”"}
-  kurlycheck: {kind: other, name: "Megan C. Kurlycheck, et al., “Long-Term Crime Desistance and Recidivism Patterns – Evidence from the Essex County Felony Study”"}
-  erickson: {kind: other, name: "Maynard L. Erickson, “Delinquency in a Birth Cohort: A New Direction in Criminological Research”"}
-  ulmer: {kind: other, name: "Jeffery T. Ulmer & Darrell Steffensmeier, “The Age and Crime Relationship: Social Variation, Social Explanations, The Nurture Versus Biosocial Debate in Criminology”"}
-  cullen: {kind: other, name: "Francis T. Cullen & Paul Gendreau, “Assessing Correctional Rehabilitation: Policy, Practice, and Prospects”"}
-  njreentry: {kind: other, name: "N.J. Reentry Corporation, Report, “Improving Upon Corrections in New Jersey to Reduce Recidivism and Promote Successful Reintegration”"}
-  daza: {kind: other, name: "Sebastian Daza, et al., “The Consequences for Mortality of Incarceration in the United States”"}
-  anno: {kind: other, name: "B. Jaye Anno, et al., “Correctional Health Care: Addressing the Needs of Elderly, Chronically Ill, and Terminally Ill Inmates”"}
-  golub: {kind: other, name: "Andrew Golub, “The Adult Termination Rate of Criminal Careers”"}
-  covid: {kind: other, name: "Equal Justice Initiative, “COVID-19’s Impact on People in Prisons”"}
-  williams: {kind: other, name: "Brie Williams & Rita Abraldes, “Growing Older: Challenges of Prison and Reentry for the Aging Population”"}
+  haney: {kind: other, cite: "Craig Haney, “The Psychological Impact of Incarceration”"}
+  moffitt: {kind: other, cite: "Terrie E. Moffitt, “Adolescence-Limited and Life-Course-Persistent Antisocial Behavior: A Developmental Taxonomy”"}
+  steinberg: {kind: other, cite: "Laurence Steinberg, “The Influence of Neuroscience on U.S. Supreme Court Decisions about Adolescents’ Criminal Culpability”"}
+  laub: {kind: other, cite: "John H. Laub & Robert J. Sampson, “Understanding Desistance from Crime”"}
+  blumstein: {kind: other, cite: "Alfred Blumstein, et al., “Delinquency Careers: Innocents, Desisters, and Persisters”"}
+  duration: {kind: other, cite: "Alfred Blumstein, et al., The Duration of Adult Criminal Careers"}
+  western: {kind: other, cite: "Bruce Western, et al., “Stress and Hardship After Prison”"}
+  ejisuper: {kind: other, cite: "Equal Justice Initiative, Report, “The Superpredator Myth, 20 Years Later”"}
+  ejichild: {kind: other, cite: "Equal Justice Initiative, Report, “All Children Are Children: Challenging Abusive Punishment of Juveniles”"}
+  aging: {kind: other, cite: "“Aging in Prison: Reducing Elder Incarceration and Promoting Public Safety”"}
+  cfsy: {kind: other, cite: "Campaign for Fair Sentencing of Youth, Report, “National Trends in Sentencing Children to Life without Parole”"}
+  tipping: {kind: other, cite: "Campaign for Fair Sentencing of Youth, Report, “Tipping Point: A Majority of States Abandon Life-Without-Parole Sentences for Children”"}
+  couloute: {kind: other, cite: "Lucius Couloute, “Nowhere to Go: Homelessness Among Formerly Incarcerated People”"}
+  piquero: {kind: other, cite: "Alex R. Piquero, et al., “The Criminal Career Paradigm”"}
+  kurlycheck: {kind: other, cite: "Megan C. Kurlycheck, et al., “Long-Term Crime Desistance and Recidivism Patterns – Evidence from the Essex County Felony Study”"}
+  erickson: {kind: other, cite: "Maynard L. Erickson, “Delinquency in a Birth Cohort: A New Direction in Criminological Research”"}
+  ulmer: {kind: other, cite: "Jeffery T. Ulmer & Darrell Steffensmeier, “The Age and Crime Relationship: Social Variation, Social Explanations, The Nurture Versus Biosocial Debate in Criminology”"}
+  cullen: {kind: other, cite: "Francis T. Cullen & Paul Gendreau, “Assessing Correctional Rehabilitation: Policy, Practice, and Prospects”"}
+  njreentry: {kind: other, cite: "N.J. Reentry Corporation, Report, “Improving Upon Corrections in New Jersey to Reduce Recidivism and Promote Successful Reintegration”"}
+  daza: {kind: other, cite: "Sebastian Daza, et al., “The Consequences for Mortality of Incarceration in the United States”"}
+  anno: {kind: other, cite: "B. Jaye Anno, et al., “Correctional Health Care: Addressing the Needs of Elderly, Chronically Ill, and Terminally Ill Inmates”"}
+  golub: {kind: other, cite: "Andrew Golub, “The Adult Termination Rate of Criminal Careers”"}
+  covid: {kind: other, cite: "Equal Justice Initiative, “COVID-19’s Impact on People in Prisons”"}
+  williams: {kind: other, cite: "Brie Williams & Rita Abraldes, “Growing Older: Challenges of Prison and Reentry for the Aging Population”"}
 ---
 
 # INTRODUCTION
