@@ -7,23 +7,41 @@
 // signature page), LR 7001-1(D) (filing fee and Form B-104 cover sheet, not generated here). See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter or body, never from this file.
 #import "@preview/cmarker:0.1.10"
-#import "/lib/typst/word-compat.typ": word-compat
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or is a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute per docs/FONTS.md, vendored in fonts/liberation-serif; the W.D. Va. rules name no typeface or size
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman (vendored metric twin Liberation Serif, docs/FONTS.md); the W.D. Va. rules name no typeface or size
 #let type-size = 12pt              // convention: 12 pt body, the size the filed complaint uses
-#let body-leading = 1.345em        // about 24 pt pitch at 12 pt: double spacing, as in the filed complaint
-#let single-leading = 0.5em        // counsel, caption and signature blocks
-#let page-w = 8.5in                // LR 5005-3(C), LR 7001-1(C)(3): standard letter size
-#let page-h = 11in
+#let footer-size = 10pt            // the page number
 #let top-margin = 1.5in            // LR 5005-3(C), LR 7001-1(C)(3): top margin of not less than 1 1/2 inches
 #let side-margin = 1in             // convention: one inch left and right
 #let bottom-margin = 1in
-#let text-width = page-w - 2 * side-margin
-#let para-indent = 0.5in           // first-line indent of prose paragraphs
+#let text-width = 8.5in - 2 * side-margin
+#let number-indent = 0.5in         // a paragraph number starts half an inch in ...
+#let number-box = 0.5in            // ... in a box of its own; the text starts 1 in from the margin and wraps there (docx: Numbered Paragraph)
 #let caption-left = 4in            // width of the party column of the caption; wide enough that "(n/k/a" does not break
+#let caption-gutter = 0.25in       // between the party column and the case numbers
+#let caption-pad = 10pt            // the party column's rules stand off its text by this much on the right ...
+#let caption-pad-bottom = 8pt      // ... and below
+#let case-pad = 0.1in              // the case numbers stand off the gutter
+#let sig-right = 2.9in             // the signature column (lower right) ...
+#let sig-gutter = 0.2in            // ... and the space between it and counsel's column (lower left, LR 7001-1(C)(4))
+#let court-name = ("UNITED STATES BANKRUPTCY COURT", "WESTERN DISTRICT OF VIRGINIA")
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; docx/vawb-adversary-complaint.lua and
+// docx/reference.xml set the same twips).
+#let pitch-body = 24pt             // double spacing, as in the filed complaint: body, court name, title, headings
+#let pitch-single = 13.8pt         // caption, signature, counsel and service blocks
+#let pitch-footer = 11.5pt         // the page number's line
+#let court-below = 24pt            // the court name to the caption
+#let caption-below = 24pt          // the caption to the title
+#let signature-above = 24pt        // the last paragraph to the signature block
+#let block-gap = 6pt               // the date to the signature columns; between two service addresses
+#let service-above = 24pt          // the signature block to the service addresses
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -39,25 +57,38 @@
 /// Inline markdown (names with *et al.*, case names, and so on).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
-/// One single-spaced line per item.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => inl(i)))
+/// Inline content without the paragraph breaks a loose list item puts around it (they may not occur inside a
+/// paragraph).
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
 }
 
-// ---------------------------------------------------------------------------
-// Caption: court title, then the "In re" block and the parties on the left,
-// chapter, case number and adversary number on the right (LR 9013-1(I) layout, Form 416).
-// ---------------------------------------------------------------------------
+/// One line (a paragraph of its own) with an explicit space above it.
+#let line-block(above: 0pt, body) = block(width: 100%, above: above, below: 0pt, body)
 
-#let court-title(meta) = {
-  align(center, text(weight: "bold", [UNITED STATES BANKRUPTCY COURT]))
-  align(center, text(weight: "bold", [WESTERN DISTRICT OF VIRGINIA]))
-  if "division" in meta and meta.division != none {
-    align(center, text(weight: "bold", upper(meta.division)))
+/// Single-spaced lines, one paragraph each; an empty item is a blank line (the next line sits a line lower).
+/// `above`: a space of its own above the first line (padding, which typst keeps at the top of a grid cell, as Word
+/// keeps a paragraph's space before at the top of a table cell).
+#let line-stack(items, above: 0pt) = {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  let gap = above
+  for t in items {
+    if t == "" { gap += pitch-single } else {
+      line-block(pad(top: gap, inl(t)))
+      gap = 0pt
+    }
   }
-  v(body-leading)
 }
+
+// ---------------------------------------------------------------------------
+// Cover: court name, caption ("In re" block and parties left, chapter, case number and adversary number right;
+// Form 416), title, salutation
+// ---------------------------------------------------------------------------
 
 #let caption-left-rows(meta) = {
   let rows = ()
@@ -88,45 +119,53 @@
   rows
 }
 
-#let caption(meta) = grid(
-  columns: (caption-left, 1fr),
-  column-gutter: 0.25in,
-  block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt),
-    line-stack(caption-left-rows(meta))),
-  block(inset: (left: 0.1in), line-stack(caption-right-rows(meta))),
-)
-
-// ---------------------------------------------------------------------------
-// Signature page: counsel lower left (LR 7001-1(C)(4)), party and signer lower right.
-// ---------------------------------------------------------------------------
-
-#let signature-block(meta) = block(breakable: false, width: text-width, {
-  v(body-leading)
-  if "date" in meta.signature and meta.signature.date != none {
-    line-stack(("Dated: " + meta.signature.date,))
-    v(single-leading)
+#let cover(meta) = {
+  set par(first-line-indent: 0pt)
+  let lines = court-name
+  if "division" in meta and meta.division != none { lines.push(upper(meta.division)) }
+  for l in lines { line-block(align(center, text(weight: "bold", l))) }
+  block(width: 100%, above: court-below, below: caption-below, grid(
+    columns: (caption-left, caption-gutter, text-width - caption-left - caption-gutter),
+    grid.cell(stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: caption-pad, bottom: caption-pad-bottom),
+      line-stack(caption-left-rows(meta))),
+    [],
+    pad(left: case-pad, line-stack(caption-right-rows(meta))),
+  ))
+  if "title" in meta and meta.title != none {
+    line-block(align(center, text(weight: "bold", upper(inl(meta.title)))))
   }
-  grid(
-    columns: (1fr, 2.9in),
-    column-gutter: 0.2in,
-    line-stack(meta.counsel.names + meta.counsel.lines),
-    line-stack(
-      ("Respectfully submitted,", "", upper(meta.signature.party), "", "BY: /s/ " + meta.signature.signer)
-        + meta.signature.lines,
-    ),
-  )
-})
+  if "salutation" in meta and meta.salutation != none {
+    line-block(inl(meta.salutation))
+  }
+}
 
-/// Service addresses under the signature, when the sample gives them.
+// ---------------------------------------------------------------------------
+// Signature page: counsel lower left (LR 7001-1(C)(4)), party and signer lower right. The space above the block is
+// spacing of its own (docx: an empty paragraph of that height), so it stays behind when the block moves on.
+// ---------------------------------------------------------------------------
+
+#let signature-block(meta) = {
+  v(signature-above)
+  let dated = "date" in meta.signature and meta.signature.date != none
+  let right-above = if dated { pitch-single + block-gap } else { 0pt }
+  block(width: 100%, breakable: false, above: 0pt, below: 0pt, grid(
+    columns: (text-width - sig-right - sig-gutter, sig-gutter, sig-right),
+    {
+      if dated { line-stack(("Dated: " + meta.signature.date,)) }
+      line-stack(meta.counsel.names + meta.counsel.lines, above: if dated { block-gap } else { 0pt })
+    },
+    [],
+    line-stack(("Respectfully submitted,", "", upper(meta.signature.party), "", "BY: /s/ " + meta.signature.signer)
+      + meta.signature.lines, above: right-above),
+  ))
+}
+
+/// Service addresses under the signature, when the sample gives them; kept on one page.
 #let service-block(meta) = if "service" in meta and meta.service != none {
-  block(breakable: false, width: text-width, {
-    v(body-leading)
+  v(service-above)
+  block(width: 100%, breakable: false, above: 0pt, below: 0pt, {
     line-stack(("Service:",))
-    v(single-leading)
-    for g in meta.service {
-      line-stack(g.names + g.lines)
-      v(single-leading)
-    }
+    for g in meta.service { line-stack(g.names + g.lines, above: block-gap) }
   })
 }
 
@@ -135,35 +174,45 @@
 // ---------------------------------------------------------------------------
 
 #let vawb-adversary-complaint(meta, body) = {
+  // Every page numbered, bottom centre; the number in a line box of its own (Word's footer).
   set page(
     paper: "us-letter",
     margin: (top: top-margin, bottom: bottom-margin, left: side-margin, right: side-margin),
-    footer: context align(center, text(size: 10pt, counter(page).display())),
+    footer-descent: 30%,
+    footer: context align(center, text(size: footer-size, ..edges(pitch-footer), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
-  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
-  show: word-compat.with(meta.at("word", default: (:)))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  set par(first-line-indent: 0pt)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch, a section sign kept with its number. Lists are the numbered allegations, below (list-indent: none).
+  show: xengine.with(pitch: pitch-body, list-indent: none)
 
-  // Headings: level 1 is a centered section; level 2 and 3 are bold sub-headings.
-  show heading.where(level: 1): it => block(width: 100%, above: body-leading, below: body-leading, sticky: true,
-    align(center, text(size: type-size, weight: "bold", upper(it.body))))
-  show heading.where(level: 2): it => block(width: 100%, above: body-leading, below: body-leading, sticky: true,
-    text(size: type-size, weight: "bold", it.body))
-  show heading.where(level: 3): it => block(width: 100%, above: body-leading, below: body-leading, sticky: true,
-    text(size: type-size, weight: "bold", style: "italic", it.body))
+  // Headings: level 1 a centred section, level 2 and 3 bold sub-headings, all on the body pitch with no space of
+  // their own, kept with the text after them (docx: Heading 1 to 3 in docx/reference.xml).
+  show heading: it => block(width: 100%, above: 0pt, below: 0pt, sticky: true, {
+    set par(first-line-indent: 0pt)
+    set text(size: type-size, weight: "bold")
+    if it.level == 1 { align(center, upper(it.body)) } else if it.level == 2 { it.body } else { emph(it.body) }
+  })
 
-  // Numbered allegations (Fed. R. Civ. P. 10(b)): markdown ordered lists become 1., 2., ...
-  set enum(numbering: "1.", indent: 0.5in, body-indent: 0.5in, spacing: body-leading)
-  show quote.where(block: true): it => block(width: 100%, inset: (left: 0.5in, right: 0.5in),
-    par(leading: single-leading, spacing: body-leading, it.body))
-
-  court-title(meta)
-  caption(meta)
-  v(body-leading)
-  if "salutation" in meta and meta.salutation != none {
-    par(meta.salutation)
+  // Numbered allegations (Fed. R. Civ. P. 10(b)): the number half an inch in, the text 1 in from the margin and
+  // wrapped there; the sample's own numbers.
+  show enum: it => {
+    let n = if it.start == auto { 1 } else { it.start }
+    for item in it.children {
+      if item.has("number") and item.number != none { n = item.number }
+      block(width: 100%, above: 0pt, below: 0pt, pad(left: number-indent,
+        par(first-line-indent: 0pt, hanging-indent: number-box, [#box(width: number-box)[#n.]#unloose(item.body)])))
+      n += 1
+    }
   }
+  // Block quotations: single-spaced, half an inch in on both sides, 12 pt above and below (docx: Block Text).
+  show quote.where(block: true): it => block(width: 100%, above: 12pt, below: 12pt, inset: (x: 0.5in), {
+    set text(..edges(pitch-single))
+    it.body
+  })
+
+  cover(meta)
   cmarker.render(body, raw-typst: false, smart-punctuation: true)
   signature-block(meta)
   service-block(meta)
