@@ -12,10 +12,10 @@ sh tools/overlay.sh courts/federal-circuit/patent-trial-and-appeal-board/patent-
 | Item | Status |
 |---|---|
 | exemplar | yes: one filed response, Swarm Technology (patent owner), IPR2021-01445. Second filer: not found. |
-| render | ok: `usage/OUTPUT-patent-owner-response.typst.pdf`, 13 pages, Liberation Serif embedded, no typst warnings |
+| render | ok: `usage/OUTPUT-patent-owner-response.typst.pdf`, 13 pages, Times New Roman embedded (the pinned face; Liberation Serif is the fallback), no typst warnings; docx: 13 pages, every line and page as typst (cross-engine gated, see Engines) |
 | overlay | ok: `usage/OVERLAY-juniper-ipr.pdf` and `.txt`, against the Swarm exemplar (passed explicitly) |
 | pages reviewed | 13 (every page of the render viewed as PNG at 70 dpi) |
-| typeface | face required: Times New Roman, 14-pt (§ 42.6(a)(2)(ii)) → vendored substitute: `Liberation Serif` (`fonts/liberation-serif`, metric-compatible, per `docs/FONTS.md`) → embedded: LiberationSerif only (`pdffonts`) |
+| typeface | face required: Times New Roman, 14-pt (§ 42.6(a)(2)(ii)) → vendored substitute: `Liberation Serif` (`fonts/liberation-serif`, metric-compatible, per `docs/FONTS.md`) → embedded: TimesNewRomanPS (`pdffonts`, typst and docx) |
 
 ## Layout
 
@@ -86,32 +86,12 @@ Tier-2 findings, compared against the Swarm exemplar only (one filer, so none ca
 
 | Engine | Folder | State |
 |---|---|---|
-| typst (primary) | `typst/` | rendered and reviewed (above) |
-| docx | `docx/` | `.docx` built (`usage/OUTPUT-patent-owner-response.docx`); `.docx.pdf` BLOCKED; no page reviewed |
-| latex | none | not in this brief |
+| typst (primary) | `typst/` | the reference; `check.sh` RESULT 0 failed |
+| docx | `docx/` | `usage/OUTPUT-patent-owner-response.docx` and its LibreOffice PDF `usage/OUTPUT-patent-owner-response.docx.pdf`, 13 pages; `check.sh --engine docx` RESULT 0 failed; **cross-engine gated**: XENG-001..003 PASS (every line and page breaks as in typst, 100 %) |
+| latex | none | not built |
 
-Build: `sh docx/make-reference.sh docx/reference.docx` rebuilds the reference (committed). `sh tools/render.sh --engine docx courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response usage/INPUT-patent-owner-response.md` writes the `.docx`; its LibreOffice step needs `soffice`.
+Cross-engine layout model (fb-595.54.6; docs/EVAL-LOOP.md, "Cross-engine gate"; `lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `lib/docx/xengine-reference.sh`): `params.cross_engine: gate` in `eval.yaml`. Both engines set Times New Roman 14 pt without kerning or ligatures, break lines first fit, and set every line in an exact box: 32 pt double-spaced body (PTAB-FORM-003), 16 pt single (headings, cover, contents, signature, service list, footnotes), 24 pt block quotations. Spaces between blocks are the same numbers in both (typst pt, docx twips = 20 x pt). Headings carry their labels (I., A., 1.) as text; contents rows set the label in a half-inch box, wrap before a 36 pt page column and run a dot leader to the page. The running identification ("Patent Owner Response, U.S. Patent No. …") is the second footer line under the page number in both.
 
-What matches typst (set in the XML; no rendered page has been seen yet):
+Build: `sh docx/make-reference.sh` rebuilds `docx/reference.docx` (committed). `sh tools/render.sh --engine docx courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response usage/INPUT-patent-owner-response.md` writes the `.docx` and its PDF (needs `soffice`). `docx/render.sh` renders twice: the contents' page numbers are read from the LibreOffice PDF of the first pass, and the second pass must give the same numbers. The docx reads the markdown without pandoc's fancy lists, so an item that starts "i)" stays text, as in typst.
 
-- Letter, 1-inch margins, 14-point body, double-spaced body (Word's "double", `w:line="480"`).
-- Cover with no page number and no header; contents in lower-case roman; body numbered from 1; running header "Patent Owner Response, U.S. Patent No. …" on the body pages only, read from the frontmatter.
-- Headings numbered I., A., 1. (one list, numId 901); level 1 centered in capitals.
-- Footnotes 14-point, single spaced; block quotations indented from both margins, 1½ spaced.
-- The conclusion stays on the page of its signature block (keep-with-next).
-- Word-count certificate (the count is checked against 14,000 at build) and certificate of service.
-
-What differs from typst:
-
-- Font: the `.docx` names Times New Roman, the face the rule names. Typst uses Liberation Serif, its vendored stand-in. Where Times New Roman is missing (LibreOffice here), the renderer substitutes Liberation Serif, so the `.docx.pdf` will embed LiberationSerif, not TimesNewRoman.
-- Line pitch and pagination: Word's "double" is not typst's leading, so the page count will differ from the typst 13 pages until a PDF is rendered.
-- Contents: the cached TOC has no page numbers. Word fills them on open (`updateFields`; Word asks to update fields).
-- No title block: pandoc's title and date are suppressed, because the cover prints them.
-- Bullets: pandoc's list formatting, not typst's indent (the bullet item in tier 2 stays OPEN).
-
-docx BLOCKED (list these in the PR):
-
-- Gates 0 to 3 on `usage/OUTPUT-juniper-ipr.docx.pdf`: BLOCKED. The build box has no LibreOffice (`libreoffice` is not on conda-forge, and `soffice` is not installed). So there is no PDF, no stamp and no page review.
-- Contents page numbers: BLOCKED. LibreOffice does not update TOC fields, so a PDF check cannot pass the contents until a renderer fills them.
-- Header and page-number placement on each body page: unverified (needs the PDF).
-- Opens in Word and LibreOffice without a repair prompt: not checked. Every XML part is well-formed (`xmllint`) and pandoc reads the file back, which is necessary, not sufficient (docs/DOCX.md).
+Remaining differences (diagnostic, not breaks): the typst leader stops before the page column, the Word leader runs to the number; the docx contents have static page numbers (no TOC field).
