@@ -76,6 +76,40 @@
   ])
 }
 
+/// The cover body with its fixed gaps scaled by g. Single-spaced: the body's double paragraph spacing pushed the
+/// cover past one page (DEF-COVER-001).
+#let cover-body(meta, g) = [
+  #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
+  #align(center)[
+    #text(weight: "bold")[IN THE COMMONWEALTH COURT OF PENNSYLVANIA] \
+    #v(0.15in * g)
+    #text(weight: "bold")[#need(meta, "docket_number")]
+  ]
+  #v(0.15in * g)
+  #if "caption" in meta {
+    caption-side(meta.caption.at(0))
+    v(0.1in * g)
+    align(center)[v.]
+    v(0.1in * g)
+    caption-side(meta.caption.at(1))
+  }
+  #v(0.1in * g)
+  #align(center)[
+    #text(weight: "bold", size: type-size, upper(inl(need(meta, "brief_title"))))
+    #if "subtitle" in meta [ \ #text(weight: "bold", inl(meta.subtitle)) ]
+  ]
+  #v(0.12in * g)
+  // Counsel side by side: the cover has 7 in of body height after the three-inch clear space.
+  #{
+    set par(leading: single-leading, first-line-indent: 0pt)
+    grid(
+      columns: range(need(meta, "counsel").len()).map(_ => 1fr),
+      column-gutter: 0.3in,
+      ..need(meta, "counsel").map(c => block(width: 100%, counsel-group(c))),
+    )
+  }
+]
+
 // ---------------------------------------------------------------------------
 // Template
 // ---------------------------------------------------------------------------
@@ -127,42 +161,21 @@
   }
 
   // ---- Cover (Pa.R.A.P. 124(a)(2): three-inch clear space at the top of the first page) ----
-  page(margin: (top: first-page-top, bottom: page-margin, left: page-margin, right: page-margin), numbering: none)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
-    #align(center)[
-      #text(weight: "bold")[IN THE COMMONWEALTH COURT OF PENNSYLVANIA] \
-      #v(0.15in)
-      #text(weight: "bold")[#need(meta, "docket_number")]
-    ]
-    #v(0.15in)
-    #if "caption" in meta {
-      caption-side(meta.caption.at(0))
-      v(0.1in)
-      align(center)[v.]
-      v(0.1in)
-      caption-side(meta.caption.at(1))
-    }
-    #v(0.1in)
-    #align(center)[
-      #text(weight: "bold", size: type-size, upper(inl(need(meta, "brief_title"))))
-      #if "subtitle" in meta [ \ #text(weight: "bold", inl(meta.subtitle)) ]
-    ]
-    #v(0.12in)
-    // Counsel side by side: the cover has 7 in of body height after the three-inch clear space.
-    #{
-      set par(leading: single-leading, first-line-indent: 0pt)
-      grid(
-        columns: range(need(meta, "counsel").len()).map(_ => 1fr),
-        column-gutter: 0.3in,
-        ..need(meta, "counsel").map(g => block(width: 100%, counsel-group(g))),
-      )
-    }
-  ]
+  page(margin: (top: first-page-top, bottom: page-margin, left: page-margin, right: page-margin), numbering: none, layout(size => {
+    // The cover is one page (DEF-COVER-001): its fixed gaps are the only thing that gives; the largest scale at which
+    // the whole cover fits under the three-inch space is used (the type size never shrinks).
+    let fits(g) = measure(block(width: size.width, cover-body(meta, g))).height <= size.height
+    let g = (1.0, 0.8, 0.6, 0.45, 0.3, 0.2, 0.1, 0.0).find(fits)
+    if g == none { panic("pacommwct-petition-for-writ: the cover does not fit on one page; shorten the counsel or party lines") }
+    cover-body(meta, g)
+  }))
 
   // ---- Notice to plead (Pa.R.A.P. 1513(e)(6); rules.md PACOMMWCT-CONT-014): its own page before the body ----
+  // Numbered from the cover on (the cover counted, its number not printed), as the filed petition numbers every page: no
+  // rule makes this page part of the cover, and unnumbered it read as a second cover page (DEF-COVER-001).
   if "notice_to_plead" in meta {
     let np = meta.notice_to_plead
-    page(numbering: none)[
+    page(numbering: "1", number-align: center + bottom)[
       #set par(leading: body-leading, first-line-indent: 0pt)
       #align(center, text(weight: "bold", "NOTICE TO PLEAD"))
       #v(0.6em)
@@ -179,7 +192,6 @@
 
   // ---- Body: numbered paragraphs under the petition's headings ----
   page(numbering: "1", number-align: center + bottom)[
-    #counter(page).update(1)
     #cmarker.render(body, raw-typst: false, smart-punctuation: true)
   ]
 

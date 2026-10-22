@@ -142,6 +142,48 @@
   else { "" }
 }
 
+/// The cover body with its fixed gaps scaled by g. Single-spaced: the body's paragraph spacing pushed the cover
+/// past one page (DEF-COVER-001).
+#let cover-body(meta, g, fill: true) = [
+  #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
+  #align(center)[
+    #text(weight: "bold")[IN THE COMMONWEALTH COURT OF PENNSYLVANIA] \
+    #if "district" in meta { text(weight: "bold")[#upper(meta.district)] }
+    #v(0.2in * g)
+    #text(weight: "bold")[No. #need(meta, "case_number")]
+  ]
+  #v(0.2in * g)
+  #caption-side(meta.caption.at(0))
+  #v(0.1in * g)
+  #if meta.at("versus", default: true) { align(center)[v.] }
+  #v(0.1in * g)
+  #caption-side(meta.caption.at(1))
+  #v(0.15in * g)
+  #align(center)[
+    #set par(leading: single-leading, first-line-indent: 0pt)
+    #if "proceeding" in meta { inl(meta.proceeding) }
+  ]
+  #v(if fill { 1fr } else { 0pt })   // measured as 0pt: a 1fr gap in an auto-height block drops the paragraph spacing beside it
+  #align(center)[
+    #set par(leading: single-leading, first-line-indent: 0pt)
+    #text(weight: "bold", size: 16pt, upper(inl(need(meta, "brief_title"))))
+  ]
+  #v(0.5in * g)
+  #{
+    set par(leading: single-leading, first-line-indent: 0pt)
+    // Two counsel groups sit side by side (the cover of a two-counsel filing); one or three stack at right.
+    let groups = need(meta, "counsel")
+    if groups.len() == 2 {
+      grid(columns: (1fr, 1fr), column-gutter: 0.3in, ..groups.map(c => counsel-group(c)))
+    } else {
+      pad(left: sig-indent, {
+        for c in groups { counsel-group(c) }
+        if "phone" in meta [ #meta.phone ]
+      })
+    }
+  }
+]
+
 // ---------------------------------------------------------------------------
 // Template
 // ---------------------------------------------------------------------------
@@ -189,45 +231,14 @@
   }
 
   // ---- Cover (page 1: three-inch space at the top, Pa.R.A.P. 124(a)(2); not numbered) ----
-  page(margin: (top: first-page-top, rest: page-margin), numbering: none)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
-    #align(center)[
-      #text(weight: "bold")[IN THE COMMONWEALTH COURT OF PENNSYLVANIA] \
-      #if "district" in meta { text(weight: "bold")[#upper(meta.district)] }
-      #v(0.2in)
-      #text(weight: "bold")[No. #need(meta, "case_number")]
-    ]
-    #v(0.2in)
-    #caption-side(meta.caption.at(0))
-    #v(0.1in)
-    #if meta.at("versus", default: true) { align(center)[v.] }
-    #v(0.1in)
-    #caption-side(meta.caption.at(1))
-    #v(0.15in)
-    #align(center)[
-      #set par(leading: single-leading, first-line-indent: 0pt)
-      #if "proceeding" in meta { inl(meta.proceeding) }
-    ]
-    #v(1fr)
-    #align(center)[
-      #set par(leading: single-leading, first-line-indent: 0pt)
-      #text(weight: "bold", size: 16pt, upper(inl(need(meta, "brief_title"))))
-    ]
-    #v(0.5in)
-    #{
-      set par(leading: single-leading, first-line-indent: 0pt)
-      // Two counsel groups sit side by side (the cover of a two-counsel filing); one or three stack at right.
-      let groups = need(meta, "counsel")
-      if groups.len() == 2 {
-        grid(columns: (1fr, 1fr), column-gutter: 0.3in, ..groups.map(g => counsel-group(g)))
-      } else {
-        pad(left: sig-indent, {
-          for g in groups { counsel-group(g) }
-          if "phone" in meta [ #meta.phone ]
-        })
-      }
-    }
-  ]
+  page(margin: (top: first-page-top, rest: page-margin), numbering: none, layout(size => {
+    // The cover is one page (DEF-COVER-001): its fixed gaps are the only thing that gives; the largest scale at which
+    // the whole cover fits under the three-inch space is used (the type size never shrinks).
+    let fits(g) = measure(block(width: size.width, cover-body(meta, g, fill: false))).height <= size.height
+    let g = (1.0, 0.8, 0.6, 0.45, 0.3, 0.2, 0.1, 0.0).find(fits)
+    if g == none { panic("pacommwct-reply-brief: the cover does not fit on one page; shorten the counsel or party lines") }
+    cover-body(meta, g)
+  }))
 
   // ---- Table of contents and table of authorities (roman numerals; Pa.R.A.P. 124 does not fix them) ----
   set page(numbering: "i")
