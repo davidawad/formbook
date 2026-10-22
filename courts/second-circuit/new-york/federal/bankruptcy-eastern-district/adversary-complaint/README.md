@@ -7,7 +7,7 @@ Folder: `courts/second-circuit/new-york/federal/bankruptcy-eastern-district/adve
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md` (the whole complaint: caption, 69 numbered paragraphs, five cause headings, prayer, signature) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored Times New Roman only, no warnings; docx `usage/OUTPUT-adversary-complaint.docx.pdf` 9 pages, the same line and page breaks |
 | overlay | ok: `usage/OVERLAY-toyvation-adversary-complaint.pdf` and `usage/OVERLAY-toyvation-adversary-complaint.txt` |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed in its final state) |
 
@@ -31,9 +31,9 @@ Not produced by this template (separate papers, not part of the complaint): the 
 
 ## Layout
 
-- Letter paper, 1 inch margins, 12 pt EB Garamond (vendored in `fonts/`), double-spaced body (24 pt pitch), single-spaced caption and signature block.
+- Letter paper, 1 inch margins, 12 pt Times New Roman (vendored in `fonts/`), double-spaced body (24 pt line boxes), single-spaced court title, caption and signature block (13.8 pt line boxes); 12 pt above a heading (none at the top of a page).
 - Page 1: court title centred in bold caps (two lines), then a bordered caption block: the debtor's `In re` block with case number and chapter at the right; then the adversary block with the parties, `-against-` between them, and the adversary number and the title at the right. Title bold.
-- Body: numbered paragraphs (number at 0.5 in, text at 1 in, wrapped lines return to 1 in); headings bold caps centred (`#`), cause headings bold caps centred over two lines when long; the prayer is a lead-in ("WHEREFORE, plaintiff demands judgment:") followed by lettered items (a), (b), ...
+- Body: an unnumbered lead-in with a 0.5 in first-line indent; numbered paragraphs (number at 0.5 in, text at 1 in, wrapped lines return to 1 in); headings bold centred as typed (`#`), cause headings bold caps centred over two lines when long; the prayer is a lead-in ("WHEREFORE, plaintiff demands judgment:") followed by lettered items (a), (b), ...
 - Footer: page number centred. No header; the ECF header on the exemplar is not reproduced.
 - Signature block: "Dated:" at left; signer's block at right, single-spaced.
 - The last paragraph or prayer item and the signature block are kept together (unbreakable block); a heading and the paragraph after it are kept together (`sticky`).
@@ -52,7 +52,7 @@ Not produced by this template (separate papers, not part of the complaint): the 
 
 1. **Adversary number is not on the exemplar.** The filed complaint's caption has no "Adv. Pro. No.", but LBR 9004-2(a) requires it for an adversary proceeding. The template follows the rule. The sample adds `26-01152-ess`, taken from the CourtListener docket record (adversary case 1-26-01152), not from the filing. David should confirm the number and whether the court's clerk expects it on the caption.
 2. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for two or three filers; the brief asks for one per doc type. Tier 2 is not judged against two filers yet.
-3. **Font.** No E.D.N.Y. rule names a font or size (LBR 9004-1 and 9004-2 do not; Rule 9004(a) says only that a paper must be "clearly legible"). The template uses 12 pt EB Garamond, the only font vendored in `fonts/`. The exemplar is set in a Times-family font, so its text looks larger. Whether a Times-metric font should be vendored is a choice for David.
+3. **Font.** No E.D.N.Y. rule names a font or size (LBR 9004-1 and 9004-2 do not; Rule 9004(a) says only that a paper must be "clearly legible"). The template uses 12 pt Times New Roman (vendored; the house standard, docs/FONTS.md), the face of both filed exemplars (was EB Garamond until fb-595.68.25).
 4. **Page count.** Our render is 9 pages against the exemplar's 10. The cause has not been determined (font metrics and the exemplar's line breaks are the likely candidates).
 5. **Transcription.** The sample is the filed text from its text layer. Two extraction artifacts are corrected: "Venue isMmm proper" is written "Venue is proper", and the stray "that that" in paragraph 46 is kept as filed. Case names are roman in the transcription (the text layer has no italics). Typographic errors in the filing are kept as filed.
 6. **Paragraph numbering.** The template numbers paragraphs; the transcription has 69 numbered paragraphs, the same count as the filed last paragraph (69). Each filed paragraph number was not compared individually.
@@ -61,15 +61,17 @@ Not produced by this template (separate papers, not part of the complaint): the 
 
 ## Review of the rendered pages (final state)
 
-- Page 1: court title; caption with `In re` block, `Case No.`, `Chapter`, plaintiff and defendants, adversary number and title; lead-in; "JURISDICTION AND VENUE"; paragraphs 1 to 4; "FIRST CAUSE OF ACTION" heading (two lines); paragraph 5. Pass.
-- Page 2: paragraphs 6 to 17, continuous numbering, no overlap. Pass.
-- Page 3: paragraphs 18 to 24, text runs to the foot. Pass.
-- Page 4: paragraphs 25 to 32; "SECOND CAUSE OF ACTION" heading kept with paragraph 28. Pass.
-- Page 5: paragraphs 33 to 46. Pass.
-- Page 6: paragraphs 47 to 55. Pass.
-- Page 7: paragraph 56; "THIRD CAUSE" and "FOURTH CAUSE" headings (two lines each), paragraphs 57 to 65. Pass.
-- Page 8: paragraphs 66 to 69, "FIFTH CAUSE" heading. Pass.
-- Page 9: "WHEREFORE" lead-in, prayer items (a) to (e), "Dated:" and the signature block, kept together. Pass.
+Typst and docx renders of 2026-10-22 (fb-595.68.25), each page viewed side by side at 60 dpi; the two engines break every line and page alike.
+
+- Page 1: court title; caption between rules (`In re` block, `Case No.`, `Chapter`; plaintiff, `-against-`, defendants; adversary number and title centred on the parties); lead-in; "JURISDICTION AND VENUE"; paragraphs 1 to 4. The two-line "FIRST CAUSE OF ACTION" heading moves to page 2 with its first paragraph (kept with next). Pass.
+- Page 2: the first cause heading, paragraphs 5 to 15. Pass.
+- Page 3: paragraphs 16 to 23. Pass.
+- Page 4: paragraphs 24 to 30; "SECOND CAUSE OF ACTION" heading with paragraph 28. Pass.
+- Page 5: paragraphs 31 to 41. Pass.
+- Page 6: paragraphs 42 to 51. Pass.
+- Page 7: paragraphs 52 to 60; "THIRD CAUSE" heading (two lines). Pass.
+- Page 8: paragraphs 61 to 69; "FOURTH CAUSE" and "FIFTH CAUSE" headings; the WHEREFORE lead-in and prayer item (a), which runs on to page 9. Pass.
+- Page 9: the rest of (a), items (b) to (e), "Dated:" and the signature block (the underscore rule as typed), kept with item (e). Pass.
 
 Pages reviewed: 9 of 9.
 
@@ -83,9 +85,10 @@ Pages reviewed: 9 of 9.
 
 ## Engines
 
-docx (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (pandoc default, styles replaced, footer with a centred page number, letter page with 1 in margins); `docx/nyeb-adversary-complaint.lua` builds the cover, caption, numbered allegations, prayer and signature. `tools/render.sh --engine docx` uses the default path of `tools/render-docx.sh`. Output: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice, 9 pages). Reviewed: 9 of 9 pages of the `.docx.pdf`, against the typst render (9 pages) at 60 dpi. LibreOffice converts the file with no error; `pdffonts` shows EB Garamond embedded.
+Both engines run on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.68.25): every line a box of its pitch (24 pt body, 13.8 pt single), explicit spaces between blocks, first-fit ragged-right lines, no kerning, ligatures or hyphenation.
 
-- **Matches typst:** letter paper, 1 in margins; EB Garamond 12 pt; body on a 24 pt pitch with a 0.5 in first-line indent; caption with the rules, the `In re` / `Case No.` / `Chapter` block, the adversary block with `Adv. Pro. No.` and the title; numbered allegations (number at 0.5 in, text at 1 in, wrapped lines back at 1 in); unnumbered lead-in; prayer lettered (a) to (e); WHEREFORE kept with the prayer; signature block kept with the last prayer item; centred page number.
-- **Differs:** paragraph numbers and prayer letters are typed text followed by a tab, not Word list numbering, so they do not renumber if a paragraph is added in Word. Exact line spacing puts glyphs a few points lower than typst's line box, so lines on a page sit up to about 5 pt lower, and page breaks differ (in the docx, prayer item (d) ends page 8 and (e) moves with the signature to page 9). The title is in the caption only: it is not written to the document properties.
-- **docx BLOCKED (not run):** `tools/check.sh <doc-type-dir> --engine docx` (Gates 0 to 3) cannot run for this folder. It reads `court.json` and `checks.yaml` at the court root, and this court has no `checks.yaml` yet. No `usage/.check-docx.txt` stamp is written. The page review above and the font and page-size checks stand in for Gate 2 only; they are not a Gate 1 pass.
+docx (`docx/`): no shell. `docx/reference.xml` holds the Word styles (`base="xengine"`, the typst face through `{font}`: Times New Roman; the headings, "Allegation", the footer with a centred page number, letter page with 1 in margins); `fb render` builds the reference document from it. `docx/nyeb-adversary-complaint.lua` builds the court title, caption, numbered allegations, prayer and signature (the signature lines as written, from `$FORMBOOK_META`). Output: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice, 9 pages). Reviewed: 9 of 9 pages of the `.docx.pdf`, side by side with the typst render at 60 dpi.
+
+- **Matches typst:** every line and page break (Gate 4 XENG-001..003 gated in `eval.yaml`: 9 pages, 237/237 lines alike).
+- **Differs:** paragraph numbers and prayer letters are typed text followed by a tab, not Word list numbering, so they do not renumber if a paragraph is added in Word. The title is in the caption only: it is not written to the document properties.
 - **Not checked in Word:** no Word is available here. The file was opened and converted in LibreOffice.
