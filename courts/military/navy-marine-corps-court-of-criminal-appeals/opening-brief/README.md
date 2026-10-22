@@ -10,20 +10,19 @@ Court: U.S. Navy-Marine Corps Court of Criminal Appeals (`nmcca`). Doc type: ope
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `usage/FILED-EXAMPLE-opening-brief.pdf` | The filed exemplar (appellant's brief, *U.S. v. Miles*, NMCCA No. 201300272, 2013). Provenance in `usage/SOURCE.md`. |
 | `usage/INPUT-opening-brief.md` | Transcription of part of that exemplar (cover, index source, assignments, jurisdiction, statement of the case, the opening facts, summary, Argument I, conclusion, signature, certificate). |
-| `usage/OUTPUT-opening-brief.typst.pdf` | Our render of the sample (12 pages). |
-| `usage/OVERLAY-miles-opening-brief.pdf`, `.txt` | Red (ours) / blue (filed) overlay and the page map. |
-
-File names follow the repo tools, not the shorter names in the brief: `tools/render.sh` writes `OUTPUT-<id>.pdf`, `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf/.txt`, so the id is `miles-opening-brief`.
+| `usage/OUTPUT-opening-brief.typst.pdf` | Our render of the sample (16 pages). |
+| `docx/nmcca.lua`, `docx/reference.xml` | The docx engine (see "Engines"); `usage/OUTPUT-opening-brief.docx` and `.docx.pdf` are its output. |
+| `eval.yaml` | `params.cross_engine: gate` (Gate 4, XENG-001..003). |
 
 Build and overlay (from the repo root, with the toolchain on PATH):
 
 ```sh
 D=courts/military/navy-marine-corps-court-of-criminal-appeals/opening-brief
 sh tools/render.sh $D usage/INPUT-opening-brief.md     # -> usage/OUTPUT-opening-brief.typst.pdf
-sh tools/overlay.sh $D miles-opening-brief                     # -> usage/OVERLAY-miles-opening-brief.pdf and .txt
+just overlay $D                                        # -> .overlay/<doc path>/OVERLAY-opening-brief.pdf and .txt (not committed)
 ```
 
-`render.sh` compiles with vendored fonts only (`--ignore-system-fonts`) and treats any typst warning as a failure. Rendered 2026-10-14: no warnings; the PDF embeds only `EBGaramond` faces (see "Typeface" below).
+`render.sh` compiles with vendored fonts only (`--ignore-system-fonts`) and treats any typst warning as a failure. Rendered 2026-10-22: no warnings; the PDF embeds only `LiberationMono` faces (see "Typeface" below).
 
 ## Governing rules
 
@@ -53,9 +52,9 @@ https://stjececmsdusgva001.blob.core.usgovcloudapi.net/public/documents/2022_NMC
 |---|---|
 | Rule text | Rule 17(c), p. 28: "All printed matter, including footnotes, must appear in 14-point proportional type, e.g., Times New Roman, Century Schoolbook, etc. Courier, Courier New, and similar non-proportional fonts are not acceptable." (text read with `pdftotext`, 2026-10-14) |
 | Face the rule requires | None. The named faces are examples, and the rule allows any 14-point proportional type. |
-| Typst family used | `EB Garamond` (`fonts/eb-garamond/`). No substitute: the court names no face, so the template keeps EB Garamond (`docs/FONTS.md`). |
-| Fit to a named face | Not applicable. A Times-metric substitute (`Liberation Serif`) would also conform, but the rule does not require it (see open choice 3). |
-| Checked | Rendered 2026-10-14 with `tools/render.sh`: 12 pages, no warnings. `pdffonts`: only EBGaramond Regular, Italic, Bold and BoldItalic, all embedded. Footnotes measured at 14 pt (same glyph height as body text). |
+| Typst family used | `Liberation Mono` (`fonts/liberation-mono/`), in typst and docx. Set on 2026-10-17 (commit "align templates with audited exemplar fonts"): `data/exemplar-fonts.json` records the filed exemplar as Courier New and maps it to Liberation Mono, and `fb lint fonts` (run by `fb check`) fails the folder unless the template declares that face. **Conflict with NMCCA-FORM-001**: Rule 17(c) bars Courier and similar non-proportional type, so a brief in this face would not conform; the exemplar predates the 2022 rules. Open choice 3. Before 2026-10-17 the template used EB Garamond. |
+| Fit to a named face | Liberation Mono is metric-compatible with Courier New (the exemplar face). |
+| Checked | Rendered 2026-10-22 with `tools/render.sh`: 16 pages, no warnings. `pdffonts` (typst and docx): only LiberationMono Regular, Bold, Italic and BoldItalic, all embedded. |
 
 ## Exemplar search (what was tried)
 
@@ -70,22 +69,21 @@ The exemplar is a 2013 filing: 12-point Times New Roman, single-spaced, under th
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-opening-brief.typst.pdf` (12 pages) was rendered at 60 dpi with `pdftoppm -r 60` and looked at. The table is from the pass of 2026-10-14 that ran after the footnote-size fix (see "Changed 2026-10-14"). PDF page n is body page n-2 for n of 3 and up; the index prints roman "ii".
+Re-reviewed 2026-10-22 after the port to the cross-engine layout model (fb-595.54.7): every page of `OUTPUT-opening-brief.typst.pdf` and of `OUTPUT-opening-brief.docx.pdf` (16 pages each) was rendered at 60 dpi (`pdftoppm -r 60`) and looked at side by side. The two engines set every page alike (same lines, same page breaks, same footnotes per page; `fb diff --engines`: baselines within 0.04 pt). The face is Liberation Mono (see "Typeface"), which makes the brief 16 pages where EB Garamond made 12. PDF pages 3-15 are body pages 1-13; PDF page 16 is the certificate (page 14).
 
 | PDF page | Content | Finding |
 |---|---|---|
-| 1 | Cover | Fits one page. Caption, NMCCA No., title, Before Panel No. 3, tried-at paragraph and counsel block all present. The counsel block sits directly under the tried-at paragraph rather than at the foot of the page (the `v(1fr)` spacer did not pin it). **OPEN**, cosmetic. |
-| 2 | Index of Brief (roman "ii") | Generated from headings; page references match the body (Conclusion p. 9). The Argument point sub-entry is in capitals with no label. **OPEN**, cosmetic. |
-| 3 | Assignments of error, jurisdiction (body p. 1) | Double-spaced, 14 pt. Issue I is flush left and II-V are first-line indented, as the sample writes them. Appendix I shows the issues as numbered items. **OPEN**, cosmetic (sample-driven). |
-| 4-6 | Statement of the case, facts (body pp. 2-4) | Footnotes at 14 pt, single-spaced, superscript references. OK. |
-| 7 | Summary of argument, begins mid-page (body p. 5) | Summary heading centred; points I-II in sentence form, with the same first-line-indent pattern as page 3 (point III begins on page 8). **OPEN**, cosmetic (sample-driven). |
-| 8 | Summary end, Argument I opening (body p. 6) | "Standard of Review" and "Principles of Law" bare bold; argument heading bold italic with label I. OK. |
-| 9 | Principles of Law, Quiroz factors (body p. 7) | The numbered list prints with default list markers at the body indent. OK. |
-| 10 | Discussion, Conclusion (body p. 8) | "Discussion" bare; "A." labelled sub-heading; argument "Conclusion" bare; footnote 38 at 14 pt. OK. |
-| 11 | Final "CONCLUSION", signature block (body p. 9) | The signature block sits with the conclusion on the same page. The stranded-signature layout finding of the earlier pass is gone. OK. |
-| 12 | Certificate of filing and service (body p. 10) | Own page, numbered. Service line reads "Appellate Government Division on 16 December 2013." OK. |
+| 1 | Cover | Court name, Before Panel No. 3, caption in two columns on one line grid, title, "To the Honorable" lines, tried-at paragraph; the counsel block sits at the foot of the cover (2 in bottom margin) in both engines; "1254 Charles Morris Street SE, Suite 100" wraps in the 3.5 in column. OK. |
+| 2 | Index of Brief (roman "ii") | Generated from the headings; page numbers match the body (Conclusion p. 13); the Argument point now carries its "I." label, the text hanging after it. OK. |
+| 3 | Assignments of error, jurisdiction (body p. 1) | Issue I flush left, II-V first-line indented, as the sample writes them (paragraphs, not a list). **OPEN**, cosmetic (sample-driven). |
+| 4-9 | Statement of the case, facts, summary of argument (body pp. 2-7) | Double-spaced 14 pt; footnotes 14 pt single-spaced under a short rule, numbers raised; the long footnote 11 stays whole on page 6. Summary points I-V as paragraphs (same pattern as page 3). OK. |
+| 10-11 | Summary end, Argument, point I, Standard of Review (body pp. 8-9) | Point heading bold italic with label I.; "Standard of Review" and "Principles of Law" bare bold. OK. |
+| 12-13 | Principles of Law, the five Quiroz factors (body pp. 10-11) | The list is numbered in a 0.5 in box with the text hanging. OK. |
+| 14 | Discussion, "A." sub-heading, argument conclusion (body p. 12) | Labels and bare headings per NMCCA-CONT-004. OK. |
+| 15 | Final "CONCLUSION" and signature block (body p. 13) | The last paragraph and the signature block stay together. OK. |
+| 16 | Certificate of filing and service (body p. 14) | Own page, numbered; "Appellate Government Division on 16 December 2013." OK. |
 
-Overlay: `OVERLAY-miles-opening-brief.txt` pairs each sample page with the filed page it shares the most words with. Pages 1-2 pair with the filed cover and index (word overlap 91% and 31%). The body pairs run 34-75%, because the sample is 2022-rule formatted (14 pt, double-spaced) and the filed page is 12-point single-spaced, so line and page breaks differ by design. Pages 11-12 both pair with filed page 63, the filing's last page. That pairing is by word overlap only and is not evidence that those pages match. The overlay is a diagnostic, not a score.
+Overlay: not re-run for this pass (`just overlay <this-folder>` writes it to the gitignored `.overlay/`). The exemplar is a 2013 filing (12 pt, single-spaced), so body pages do not line up with it by design; the cover and index layout were compared with it by eye (FILED-EXAMPLE pages 1-2): same parts in the same order.
 
 ## Changed 2026-10-14
 
@@ -96,30 +94,20 @@ Overlay: `OVERLAY-miles-opening-brief.txt` pairs each sample page with the filed
 
 - **Table of authorities** is not generated (NMCCA-CONT-002). Not needed for the sample (under 10,000 words), but a real brief over 10,000 words needs one.
 - **Word count** is not computed or checked against the 15,000-word limit (NMCCA-FORM-005).
-- **Cover counsel block** is not pinned to the foot of the cover (PDF page 1).
-- **Argument point labels** are not repeated in the index.
 - **Sample is partial.** Argument points II-V, the rest of the statement of facts (after the "mat room" paragraph, including the paragraphs describing the conduct), and most of the discussion are omitted. The sample keeps the headings, the first points and the closing conclusion. Points II-V are described in the summary only.
-- **Font.** See "Typeface" above: no face is required, so EB Garamond (vendored in `fonts/`) stays.
+- **Font.** See "Typeface" above: the template declares Liberation Mono (the audited exemplar face), which NMCCA-FORM-001 does not allow. Open choice 3.
 
 ## Open choices (for David)
 
 1. **Issues format.** Rule 18.1(b)(2) says UPPER CASE; Appendix I shows bold italic sentence case. The template follows whatever the sample writes, so the choice is the sample's, not the template's. Which governs?
 2. **Index of Brief.** Rule 18.1(b)(1) requires a table of cases and authorities for briefs over 10,000 words. Should the template generate it, or should it stay a sample-only concern?
-3. **Font.** Rule 17(c) allows any 14-point proportional type, so EB Garamond (current) conforms. Switch to a Times-metric face (`Liberation Serif`, vendored) by preference, or keep EB Garamond?
+3. **Font.** The font audit (`data/exemplar-fonts.json`) makes this template declare Liberation Mono (Courier New metrics, as the 2013 exemplar), but Rule 17(c) (NMCCA-FORM-001) bars Courier and similar non-proportional fonts. Should the audit entry be overridden so the template returns to a proportional face (EB Garamond, as the answering brief, or a Times-metric face), or does the exemplar face stand? Both engines follow whichever face the template declares.
 
 ## Engines
 
-### docx (`docx/`)
+Both engines are on the shared cross-engine layout model (fb-595.54.7; `lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Adopting the reference breaker"): Liberation Mono 14 pt everywhere (footnotes too; see "Typeface"), body lines in 33.6 pt boxes (double spacing), the cover, headings, index, quotations, footnotes and signature blocks in 16.8 pt boxes, first-fit line breaking, no kerning and no hyphenation. The docx render breaks every line and page where the typst render does, and `eval.yaml` gates it (`params.cross_engine: gate`, XENG-001..003 PASS). Widow and orphan control is off in both engines (typst's is a cost that footnotes can override, LibreOffice's a rule; they broke pages apart). typst sets standard ligatures, as LibreOffice does whatever the file says (Liberation Mono has none).
 
-Files: `docx/reference.docx` (built by `sh docx/build-reference.sh reference.docx`: EB Garamond 14 pt with the font named explicitly in the styles and theme, exact 33.6 pt body spacing, exact 16.8 pt single spacing, 0.5 in first-line indent, letter page, 1 in margins, centred PAGE footer), `docx/nmcca.lua` (cover, caption, index, signature block and certificate; heading labels per NMCCA-CONT-004), `docx/render.sh` (two layout passes so the index page numbers come from the PDF). Render: `sh tools/render.sh --engine docx <this-folder> usage/INPUT-opening-brief.md`.
+- **typst** (`typst/`): the reference.
+- **docx** (`docx/`): `reference.xml` (the Word styles, which fb render applies to pandoc's reference document: Liberation Mono 14 pt, Body Text exact 672 twips with a 0.5 in first-line indent, First Paragraph without it, List Item, Block Text and footnotes exact 336 twips, headings) and `nmcca.lua` (cover with the two-column caption and the counsel block in a frame at the foot of the text area, Index of Brief with leader tabs, labelled headings with outline levels, signature block kept with the last paragraph, certificate on a new page; the cover, index and body as sections with rIdFtrNone / lower-roman from ii / arabic from 1 footers). The index page numbers come from fb render's multi-pass build (the filter writes heading needles to `$FORMBOOK_NEEDLES` and reads `$FORMBOOK_PAGES`); `render.sh`, `build-reference.sh` and the binary `reference.docx` are retired. The index is static text, not a TOC field: re-render after editing. Opened in LibreOffice only, not in Word.
 
-Matches the typst output: the typeface (`pdffonts` on `OUTPUT-opening-brief.docx.pdf`: EBGaramond Regular, Italic, Bold, BoldItalic, all embedded; no Noto, Aptos or Calibri), the 14 pt size of body, footnotes and headings, the line pitch (33.6 pt body, 16.8 pt single, measured on both PDFs), the cover layout and its 2 in bottom margin (the counsel block sits at the foot of the cover), the index on its own page numbered "ii" (cover counted, not printed), the body numbered from 1, the Argument labels (I., A., 1., a.) with hanging indents and bold italic Argument points, the signature block, and the certificate on its own page.
-
-Differs from the typst output:
-
-- Line placement. Word and LibreOffice place exact-spaced text at the bottom of its line box, so the space of a double line sits above each line, not between lines as typst sets it. Measured on body page 1 of both PDFs: the first line sits 3.7 pt lower than in typst and the first line after a heading 8 pt lower; that offset holds down the page, so line and page breaks shift slightly. The sample is 13 pages in docx against 12 in typst (9 against 8 for the answering brief), and the conclusion with the signature block moves to its own page in the docx (body page 10) where typst keeps it on page 9. Nothing in the rules fixes the length; the word limit is not measured here.
-- Index page numbers are static text, filled in by `render.sh` from a first layout pass (not a TOC field). If the brief is edited in Word, the index does not update; re-render instead. Pass 2 must lay out to the same pages or `render.sh` fails.
-- The counsel block is a frame placed at its page position (the typst `v(1fr)` equivalent). It does not reflow with the text above it.
-- Word has not been used to open the file here (LibreOffice only). Word may paginate slightly differently.
-
-BLOCKED (docx): none for this sample. The check IDs cannot be run yet: this court has no `checks.yaml` (`sh tools/check.sh --engine docx` stops at once with "open .../checks.yaml: no such file"), so the Gate 1 results are not reported here. The table of authorities (NMCCA-CONT-002) is not generated in any engine; that is a known gap, not a docx limit.
+BLOCKED (docx): none. `sh tools/check.sh <this-folder> --engine docx`: RESULT 11 checks passed, 0 failed.

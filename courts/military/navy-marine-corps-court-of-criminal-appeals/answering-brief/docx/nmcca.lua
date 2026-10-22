@@ -1,171 +1,221 @@
--- NMCCA brief, DOCX engine (docs/DOCX.md). The markdown contract -> a Word brief on reference.docx, with the
--- layout of typst/nmcca-*.typ: a cover (its own section, 2 in bottom margin, no page number), the index of
--- brief (own section, lower-roman page numbers), the body (arabic from 1), the signature block, and the
--- certificate on a new page. Heading labels follow NMCCA-CONT-004 (Argument: I. A. 1. a.; elsewhere A. 1. a. (1)).
--- Index page numbers: render.sh runs the filter twice. Pass 1 writes the heading list to NMCCA_HEADINGS;
--- pass 2 reads the page of each heading (in document order) from NMCCA_PAGES.
--- Known limits (BLOCKED, see the PR): the cover counsel block is a frame placed by its page position;
--- headings are read at the top level of the body only (the samples have no nested headings).
+-- NMCCA brief, DOCX engine (docs/DOCX.md), on the cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md,
+-- "Cross-engine gate"): the typst render (../typst/nmcca-*.typ) is the reference this one breaks every line and page
+-- alike with. Every paragraph has exact line spacing at a typst pitch (body 672 twips, single 336), the spaces
+-- between blocks are typst's (pt x 20), and the text goes through xe.inl / xe.runs / xe.inlines (the break rules of
+-- typst: no-break hyphen before a digit, no abbreviation no-break spaces, section signs bound to their number).
+-- pandoc writes the body text (paragraphs, quotations, lists, footnotes) with the styles of docx/reference.xml; this
+-- filter writes:
+--   * the cover (its own section, 2 in bottom margin, no page number; Appendix I, NMCCA-FORM-004);
+--   * the Index of Brief (its own section, lower-roman page numbers from ii), its rows with a dot leader to the page
+--     number, which fb render's multi-pass build fills in (tools/fb/src/docxpass.rs: the needles this filter writes
+--     to FORMBOOK_NEEDLES, the pages it reads from FORMBOOK_PAGES);
+--   * the headings with their labels (NMCCA-CONT-004: Argument I. A. 1. a.; elsewhere A. 1. a. (1)) and outline
+--     levels; the body (arabic from 1; FORMBOOK_FINAL), the signature block kept with the last paragraph, and the
+--     certificate of filing and service on a new page.
+-- Footers: fb render's rIdFtrNone and rIdFtrPage. Headings are read at the top level of the body.
+
+local xe = require("docx.xengine")
+local runs, inl, para, raw, style, ind, jc = xe.runs, xe.inl, xe.para, xe.raw, xe.style, xe.ind, xe.jc
+local spacing, KEEP, BREAK = xe.spacing, xe.KEEP, xe.BREAK
+local stringify = pandoc.utils.stringify
+
+-- The typst template's numbers, in twips (pt x 20).
+local TEXT_W = 9360       -- 6.5 in
+local SINGLE = 336        -- pitch-single, 16.8 pt
+local DOUBLE = 672        -- pitch-double, 33.6 pt (NMCCA-FORM-002)
+local INDENT = 720        -- para-indent, 0.5 in
+local HALF = 4320         -- 3 in: counsel and signature blocks
+local LABEL = 567         -- label-box, 28.35 pt
+local TOC_IND = 420       -- toc-indent, 21 pt
+local TOC_COL = 720       -- toc-page-col, 36 pt
+local SP = {
+  section = 392, sub = 308, toc_row = 168,
+  cover_small = 336, cover_mid = 336, cover_large = 504,
+  sig = 336, sig_line = 672,
+}
+local PAGE_H = 15840
+local MARGIN_TOP = 1440
+local MARGIN_BOTTOM = 1520  -- 1 in + 4 pt
+local COVER_BOTTOM = 2880   -- 2 in (NMCCA-FORM-003)
+local FOOTER = 727          -- the page number sits where typst puts it (footer-descent 30 % of the 76 pt bottom margin)
+local NEEDLE_MAX = 60
+-- Before an index row's leader tab: a no-break space widened to 0.75 em (10.5 pt, 210 twips), the least leader typst's
+-- listing-row keeps after the text (h(0.75em)); xe.LEAD's three no-break spaces are 0.75 em only in a face whose
+-- space is 0.25 em. EB Garamond's no-break space is 2.8 pt (56 twips).
+local SPACE_W = 56
+local LEAD_RUN = '<w:r><w:rPr><w:spacing w:val="' .. (210 - SPACE_W) .. '"/></w:rPr><w:t xml:space="preserve">\u{00A0}</w:t></w:r><w:r><w:tab/></w:r>'
 
 local META = {}
-local TEXT_W = 9360 -- 6.5 in, in twips
-local PAGE_H = 15840
 
-local function esc(s)
-  s = s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;")
-  return s
+local function meta(k)
+  return META[k]
 end
 
-local function trim(s) return (s:gsub("^%s+", ""):gsub("%s+$", "")) end
-
-local function lower(s) return string.lower(s) end
-
-local function meta_str(k)
-  local v = META[k]
-  if v == nil then return "" end
-  return trim(pandoc.utils.stringify(v))
+local function meta_list(v)
+  if v == nil then return {} end
+  if pandoc.utils.type(v) == "List" then
+    local out = {}
+    for _, item in ipairs(v) do out[#out + 1] = item end
+    return out
+  end
+  return { v }
 end
 
-local function meta_list_of(v)
+local function P(props, body)
+  return raw(para(props, body or ""))
+end
+
+local function upper_inlines(x)
+  return pandoc.Inlines(x):walk({ Str = function(s) return pandoc.Str(pandoc.text.upper(s.text)) end })
+end
+
+-- ---------------------------------------------------------------------------
+-- Sections: the paragraph that ends a section carries its properties (footer, page numbers, margins)
+-- ---------------------------------------------------------------------------
+
+local function sect_pr(footer, bottom, fmt, start)
+  local pg = fmt and string.format('<w:pgNumType w:fmt="%s" w:start="%d"/>', fmt, start or 1) or ""
+  return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/>'
+    .. '<w:pgSz w:w="12240" w:h="15840"/>'
+    .. string.format('<w:pgMar w:top="%d" w:right="1440" w:bottom="%d" w:left="1440" w:header="720" w:footer="%d" w:gutter="0"/>',
+      MARGIN_TOP, bottom, FOOTER)
+    .. pg .. "</w:sectPr>"
+end
+
+local function section_break(footer, bottom, fmt, start)
+  return raw('<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>'
+    .. sect_pr(footer, bottom, fmt, start) .. "</w:pPr></w:p>")
+end
+
+-- ---------------------------------------------------------------------------
+-- Needles and pages (docxpages.rs)
+-- ---------------------------------------------------------------------------
+
+local function norm(s)
+  return (s:lower():gsub("[^a-z0-9]", ""))
+end
+
+local needles = {}
+local function opening(text)
+  local out = ""
+  for w in text:gmatch("%S+") do
+    out = out .. norm(w)
+    if #out >= 8 then break end
+  end
+  return out:sub(1, NEEDLE_MAX)
+end
+
+local function need(id, text, context)
+  local short = opening(text)
+  local long = norm(text .. " " .. (context or "")):sub(1, NEEDLE_MAX)
+  if short == "" then short = long end
+  needles[#needles + 1] = table.concat({ id, "B", long, short }, "\t")
+end
+
+local labels = {}
+local function load_pages()
+  local path = os.getenv("FORMBOOK_PAGES")
+  if not path or path == "" then return end
+  local f = io.open(path, "r")
+  if not f then return end
+  for line in f:lines() do
+    local id, page, label = line:match("^([^\t]+)\t([^\t]*)\t(.*)$")
+    if id then labels[id] = label end
+  end
+  f:close()
+end
+
+local function write_file(var, text)
+  local path = os.getenv(var)
+  if not path or path == "" then return end
+  local f = io.open(path, "w")
+  if not f then return end
+  f:write(text)
+  f:close()
+end
+
+-- The text of a block as printed, up to its first footnote (the PDF has the note's number there, not its text).
+local function printed(b)
   local out = {}
-  if v == nil then return out end
-  if v.t == "MetaList" or (v.t == nil and #v > 0) then
-    for _, item in ipairs(v) do out[#out + 1] = trim(pandoc.utils.stringify(item)) end
+  local stop = false
+  local function walk(x)
+    for _, el in ipairs(x) do
+      if stop then return end
+      if el.t == "Note" then stop = true return end
+      if el.content and type(el.content) == "table" and el.t ~= "Str" then
+        walk(el.content)
+      elseif el.t == "Space" or el.t == "SoftBreak" or el.t == "LineBreak" then
+        out[#out + 1] = " "
+      else
+        out[#out + 1] = stringify(el)
+      end
+    end
+  end
+  if b.t == "Para" or b.t == "Plain" or b.t == "Header" then
+    walk(b.content)
   else
-    out[1] = trim(pandoc.utils.stringify(v))
+    return stringify(b)
   end
-  return out
-end
-
-local function meta_list(k)
-  return meta_list_of(META[k])
-end
-
-local function meta_sig()
-  local sig = META["signature"]
-  if sig == nil then return "", {} end
-  return trim(pandoc.utils.stringify(sig["signer"] or "")), meta_list_of(sig["lines"])
-end
-
--- ---------------------------------------------------------------------------
--- OpenXML helpers
--- ---------------------------------------------------------------------------
-
-local function rpr(opts)
-  local s = ""
-  if opts.b then s = s .. "<w:b/><w:bCs/>" end
-  if opts.i then s = s .. "<w:i/><w:iCs/>" end
-  if opts.caps then s = s .. "<w:caps/>" end
-  return s
-end
-
-local function run(text, opts)
-  local rp = rpr(opts or {})
-  local rpx = rp ~= "" and ("<w:rPr>" .. rp .. "</w:rPr>") or ""
-  return '<w:r>' .. rpx .. '<w:t xml:space="preserve">' .. esc(text) .. '</w:t></w:r>'
-end
-
-local TAB = '<w:r><w:tab/></w:r>'
-
--- paragraph properties in schema order: keepNext, keepLines, pageBreakBefore, framePr, pBdr, spacing, ind, jc, sectPr
-local function ppr(o)
-  o = o or {}
-  local s = ""
-  if o.style then s = s .. '<w:pStyle w:val="' .. o.style .. '"/>' end
-  if o.keepNext then s = s .. "<w:keepNext/>" end
-  if o.keepLines then s = s .. "<w:keepLines/>" end
-  if o.pageBreakBefore then s = s .. "<w:pageBreakBefore/>" end
-  if o.frame then s = s .. o.frame end
-  if o.border then s = s .. '<w:pBdr><w:bottom w:val="single" w:sz="4" w:space="1" w:color="000000"/></w:pBdr>' end
-  if o.tabs then s = s .. o.tabs end
-  s = s .. string.format('<w:spacing w:before="%d" w:after="%d" w:line="%d" w:lineRule="exact"/>',
-    o.before or 0, o.after or 0, o.line or 336)
-  if o.left or o.right or o.firstLine or o.hanging then
-    local a = ""
-    if o.left then a = a .. string.format(' w:left="%d"', o.left) end
-    if o.right then a = a .. string.format(' w:right="%d"', o.right) end
-    if o.firstLine then a = a .. string.format(' w:firstLine="%d"', o.firstLine) end
-    s = s .. "<w:ind" .. a .. "/>"
-  end
-  if o.jc then s = s .. '<w:jc w:val="' .. o.jc .. '"/>' end
-  if o.outline then s = s .. '<w:outlineLvl w:val="' .. o.outline .. '"/>' end
-  if o.sect then s = s .. o.sect end
-  return s
-end
-
-local function P(o, inner)
-  return pandoc.RawBlock("openxml", "<w:p><w:pPr>" .. ppr(o) .. "</w:pPr>" .. (inner or "") .. "</w:p>")
-end
-
--- section properties: page size and margins, the footer (if any), the page-number format
-local function sect(bottom, footer, fmt, start)
-  local f = footer and ('<w:footerReference w:type="default" r:id="rIdNmccaFooter"/>') or ""
-  local pn = fmt and string.format('<w:pgNumType w:fmt="%s" w:start="%d"/>', fmt, start or 1) or ""
-  return '<w:sectPr>' .. f .. '<w:pgSz w:w="12240" w:h="15840"/>' ..
-    string.format('<w:pgMar w:top="1440" w:right="1440" w:bottom="%d" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>', bottom) ..
-    pn .. '</w:sectPr>'
-end
-
--- a section break: an empty paragraph of 1 pt carrying the sectPr of the section that ends here
-local function section_break(bottom, footer, fmt, start)
-  return P({ line = 20, sect = sect(bottom, footer, fmt, start) }, '<w:r><w:rPr><w:sz w:val="2"/></w:rPr></w:r>')
+  return table.concat(out)
 end
 
 -- ---------------------------------------------------------------------------
 -- Cover (typst cover(): Appendix I, NMCCA-FORM-004)
 -- ---------------------------------------------------------------------------
 
-local function cell(width, blocks)
-  local parts = {}
-  for _, b in ipairs(blocks) do parts[#parts + 1] = b.text end
-  return '<w:tc><w:tcPr><w:tcW w:w="' .. width .. '" w:type="dxa"/></w:tcPr>' .. table.concat(parts) .. '</w:tc>'
+local B = { b = true }
+
+local function line(before, body, o)
+  o = o or {}
+  local props = {}
+  if o.keep then props[#props + 1] = KEEP end
+  if o.frame then props[#props + 1] = o.frame end
+  if o.tabs then props[#props + 1] = o.tabs end
+  props[#props + 1] = spacing(before, o.after or 0, o.line or SINGLE)
+  if o.left or o.first then props[#props + 1] = ind(o.left or 0, nil, o.first) end
+  if o.center then props[#props + 1] = jc("center") end
+  return para(props, body)
 end
 
-local function cover_blocks(out)
-  local B = { b = true }
-  out[#out + 1] = P({ jc = "center" }, run("IN THE UNITED STATES NAVY-MARINE CORPS", B))
-  out[#out + 1] = P({ jc = "center" }, run("COURT OF CRIMINAL APPEALS", B))
-  out[#out + 1] = P({ jc = "center", before = 336 }, run("Before " .. meta_str("panel")))
+local function cover(out)
+  out[#out + 1] = raw(line(0, runs("IN THE UNITED STATES NAVY-MARINE CORPS", B), { center = true }))
+  out[#out + 1] = raw(line(0, runs("COURT OF CRIMINAL APPEALS", B), { center = true }))
+  out[#out + 1] = raw(line(SP.cover_mid, runs("Before ") .. inl(meta("panel")), { center = true, after = SP.cover_large }))
 
   -- caption: two columns (1fr, 1fr) with a 14 pt gutter; left: parties, right: number and title
-  local left = {}
-  local function lp(before, text, o, opts)
-    local oo = { before = before, jc = o and o.jc or nil }
-    left[#left + 1] = P(oo, run(text, opts))
+  local left = {
+    line(0, inl(meta("appellee"))),
+    line(SP.cover_small, inl(meta("appellee_role")), { center = true }),
+    line(SP.cover_small, runs("v.")),
+    line(SP.cover_small, inl(meta("appellant"))),
+  }
+  for _, l in ipairs(meta_list(meta("appellant_lines"))) do left[#left + 1] = line(0, inl(l, { i = true })) end
+  left[#left + 1] = line(SP.cover_small, inl(meta("appellant_role")), { center = true })
+  local right = {
+    line(0, runs("NMCCA No. ") .. inl(meta("nmcca_no"))),
+    line(SP.cover_small, inl(upper_inlines(meta("title")), B)),
+  }
+  local function cell(w, ps)
+    return '<w:tc><w:tcPr><w:tcW w:w="' .. w .. '" w:type="dxa"/></w:tcPr>' .. table.concat(ps) .. "</w:tc>"
   end
-  lp(0, meta_str("appellee"), nil, {})
-  lp(252, meta_str("appellee_role"), { jc = "center" }, {})
-  lp(252, "v.", nil, {})
-  lp(252, meta_str("appellant"), nil, {})
-  for _, l in ipairs(meta_list("appellant_lines")) do lp(0, l, nil, { i = true }) end
-  lp(252, meta_str("appellant_role"), { jc = "center" }, {})
-  local right = {}
+  out[#out + 1] = raw('<w:tbl><w:tblPr><w:tblW w:w="' .. TEXT_W .. '" w:type="dxa"/>'
+    .. '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/>'
+    .. '<w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders><w:tblLayout w:type="fixed"/>'
+    .. '<w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
+    .. '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="1" w:noVBand="1"/></w:tblPr>'
+    .. '<w:tblGrid><w:gridCol w:w="4540"/><w:gridCol w:w="280"/><w:gridCol w:w="4540"/></w:tblGrid>'
+    .. "<w:tr>" .. cell(4540, left) .. cell(280, { line(0, "") }) .. cell(4540, right) .. "</w:tr></w:tbl>")
 
-  right[#right + 1] = P({}, run("NMCCA No. " .. meta_str("nmcca_no")))
-  right[#right + 1] = P({ before = 252 }, run(string.upper(meta_str("title")), B))
-  local tbl = '<w:tbl><w:tblPr><w:tblW w:w="' .. TEXT_W .. '" w:type="dxa"/>' ..
-    '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/>' ..
-    '<w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>' ..
-    '<w:tblLayout w:type="fixed"/>' ..
-    '<w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>' ..
-    '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="1" w:noVBand="1"/></w:tblPr>' ..
-    '<w:tblGrid><w:gridCol w:w="4540"/><w:gridCol w:w="280"/><w:gridCol w:w="4540"/></w:tblGrid>' ..
-    '<w:tr>' .. cell(4540, left) .. cell(280, { P({}) }) ..
-    cell(4540, right) .. '</w:tr></w:tbl>'
-  out[#out + 1] = pandoc.RawBlock("openxml", tbl)
+  out[#out + 1] = raw(line(SP.cover_large, runs("TO THE HONORABLE, THE JUDGES OF THE UNITED STATES", B), { center = true }))
+  out[#out + 1] = raw(line(0, runs("NAVY-MARINE CORPS COURT OF CRIMINAL APPEALS", B), { center = true }))
+  out[#out + 1] = raw(line(SP.cover_mid, inl(meta("tried_at"))))
 
-  out[#out + 1] = P({ before = 504, jc = "center" }, run("TO THE HONORABLE, THE JUDGES OF THE UNITED STATES", B))
-  out[#out + 1] = P({ jc = "center" }, run("NAVY-MARINE CORPS COURT OF CRIMINAL APPEALS", B))
-  out[#out + 1] = P({ before = 336 }, run(meta_str("tried_at")))
-
-  -- counsel block, pinned to the foot of the cover (the 2 in bottom margin ends the text area at
-  -- 15840 - 2880 twips); a frame at the page position, so it does not depend on the lines above
-  local counsel = meta_list("counsel")
-  local h = 336 * #counsel
-  local y = (PAGE_H - 2880) - h
-  local frame = string.format('<w:framePr w:w="5040" w:h="%d" w:hRule="exact" w:hSpace="0" w:wrap="around" ' ..
-    'w:vAnchor="page" w:hAnchor="page" w:x="5760" w:y="%d"/>', h, y)
-  for _, l in ipairs(counsel) do out[#out + 1] = P({ frame = frame }, run(l)) end
+  -- counsel: at the foot of the cover from 3 in (typst: place(bottom)); a frame whose foot is the foot of the text
+  -- area, as tall as its lines (a long line wraps in it as in typst)
+  local counsel = meta_list(meta("counsel"))
+  local frame = string.format('<w:framePr w:w="%d" w:hSpace="0" w:wrap="around" w:vAnchor="margin" w:hAnchor="page" '
+    .. 'w:x="%d" w:yAlign="bottom"/>', TEXT_W - HALF, 1440 + HALF)
+  for _, l in ipairs(counsel) do out[#out + 1] = raw(line(0, inl(l), { frame = frame })) end
 end
 
 -- ---------------------------------------------------------------------------
@@ -175,9 +225,8 @@ end
 local UNLAB = { ["standard of review"] = true, ["principles of law"] = true, discussion = true, conclusion = true }
 
 local function upper_roman(n)
-  local vals = { { 10, "X" }, { 9, "IX" }, { 5, "V" }, { 4, "IV" }, { 1, "I" } }
   local s = ""
-  for _, p in ipairs(vals) do
+  for _, p in ipairs({ { 10, "X" }, { 9, "IX" }, { 5, "V" }, { 4, "IV" }, { 1, "I" } }) do
     while n >= p[1] do s = s .. p[2]; n = n - p[1] end
   end
   return s
@@ -195,160 +244,179 @@ local ARG_KINDS = { "R", "A", "n", "a" }
 local OTH_KINDS = { "A", "n", "a", "p" }
 
 -- ---------------------------------------------------------------------------
--- Index of brief (typst outline, depth 2): page numbers from NMCCA_PAGES (pass 2)
--- ---------------------------------------------------------------------------
-
-local function read_pages()
-  local path = os.getenv("NMCCA_PAGES")
-  local pages = {}
-  if not path then return pages end
-  local f = io.open(path, "r")
-  if not f then return pages end
-  for line in f:lines() do pages[#pages + 1] = line end
-  f:close()
-  return pages
-end
-
-local function index_blocks(entries, pages, out)
-  out[#out + 1] = P({ jc = "center" }, run("INDEX OF BRIEF", { b = true }))
-  local first = true
-  for k, e in ipairs(entries) do
-    if e.level <= 2 then
-      local before = first and 336 or 0
-      first = false
-      local tabs = '<w:tabs><w:tab w:val="right" w:leader="dot" w:pos="' .. TEXT_W .. '"/></w:tabs>'
-      local pg = pages[k] or ""
-      out[#out + 1] = P({ tabs = tabs, before = before, after = 168, left = (e.level == 2) and 420 or 0 },
-        run(e.text) .. TAB .. run(pg))
-    end
-  end
-end
-
--- ---------------------------------------------------------------------------
 -- Signature block and certificate (typst signature-block(), certificate())
 -- ---------------------------------------------------------------------------
 
-local function signature(out, lead)
-  local signer, lines = meta_sig()
-  local SIG = { keepNext = true, keepLines = true, left = 4320 }
-  local function sp(o, inner)
-    local t = {}
-    for k, v in pairs(SIG) do t[k] = v end
-    for k, v in pairs(o or {}) do t[k] = v end
-    return P(t, inner)
+-- the 3 in signature line: an underlined tab to the end of the line (typst: a 3 in rule under the baseline)
+local function sig_line(out, before)
+  out[#out + 1] = raw(line(before, '<w:r><w:rPr><w:u w:val="single"/></w:rPr><w:tab/></w:r>',
+    { keep = true, left = HALF, tabs = '<w:tabs><w:tab w:val="left" w:pos="' .. (HALF + HALF) .. '"/></w:tabs>' }))
+end
+
+local function sig_lines(out)
+  local sig = meta("signature") or {}
+  local lines = meta_list(sig.lines)
+  out[#out + 1] = raw(line(0, inl(sig.signer), { keep = #lines > 0, left = HALF }))
+  for i, l in ipairs(lines) do
+    out[#out + 1] = raw(line(0, inl(l, { i = true }), { keep = i < #lines, left = HALF }))
   end
-  if lead then
-    out[#out + 1] = sp({ before = 336 }, run("Respectfully submitted."))
-  end
-  out[#out + 1] = sp({ before = 672, right = 720, border = true, keepNext = true }, "")
-  out[#out + 1] = sp({ before = 0 }, run(signer))
-  for _, l in ipairs(lines) do out[#out + 1] = sp({ keepNext = true }, run(l, { i = true })) end
+end
+
+local function signature(out)
+  out[#out + 1] = raw(line(SP.sig, runs("Respectfully submitted."), { keep = true, left = HALF }))
+  sig_line(out, SP.sig_line)
+  sig_lines(out)
 end
 
 local function certificate(out)
-  out[#out + 1] = P({ keepNext = true, pageBreakBefore = true, jc = "center" }, run("CERTIFICATE OF FILING AND SERVICE", { b = true }))
-  out[#out + 1] = P({ before = 336, line = 672, firstLine = 720, keepNext = true },
-    run("I certify that the foregoing was delivered to the Navy-Marine Corps Court of Criminal Appeals, and that a copy was served on " ..
-      meta_str("served_on") .. " on " .. meta_str("date") .. "."))
-  signature(out, false)
+  out[#out + 1] = raw(para({ KEEP, BREAK, spacing(0, 0, SINGLE), jc("center") },
+    runs("CERTIFICATE OF FILING AND SERVICE", B)))
+  out[#out + 1] = raw(line(SP.cover_mid,
+    runs("I certify that the foregoing was delivered to the Navy-Marine Corps Court of Criminal Appeals, and that a copy was served on ")
+      .. inl(meta("served_on")) .. runs(" on ") .. inl(meta("date")) .. runs("."),
+    { keep = true, line = DOUBLE, first = INDENT }))
+  sig_line(out, SP.sig_line)
+  sig_lines(out)
 end
 
 -- ---------------------------------------------------------------------------
 -- Body
 -- ---------------------------------------------------------------------------
 
-local function heading_blocks(blocks)
-  -- collect headings in document order (top level); assign labels and the argument italics
-  local counts = { 0, 0, 0, 0, 0, 0 }
-  local arg = false
-  local heads = {}
-  local out = {}
+local function is_heading(b) return b.t == "Header" end
+
+-- pandoc reads "II. WHETHER ..." (and "A. ...", "a. ...") as a list; typst's CommonMark reader has only numbered
+-- lists, so such a list is set as the paragraphs it is in the typst render, the label as written.
+local function unfancy(blocks)
+  local out = pandoc.Blocks({})
   for _, b in ipairs(blocks) do
-    if b.t == "Header" then
-      local text = trim(pandoc.utils.stringify(b.content))
-      local t = lower(text)
-      local lvl = b.level
-      heads[#heads + 1] = { level = lvl, text = text }
-      if lvl == 1 then
-        arg = (t == "argument")
-        counts = { 0, 0, 0, 0, 0, 0 }
-        out[#out + 1] = b
-      else
-        for j = lvl + 1, 6 do counts[j] = 0 end
-        local content = b.content
-        if lvl == 2 and arg then
-          content = { pandoc.Emph(content) }
-        end
-        if UNLAB[t] or lvl > 5 then
-          out[#out + 1] = pandoc.Header(lvl, content, b.attr)
-        else
-          counts[lvl] = counts[lvl] + 1
-          local kinds = arg and ARG_KINDS or OTH_KINDS
-          local kind = kinds[lvl - 1]
-          local label = label_text(kind, counts[lvl])
-          local inl = { pandoc.Str(label), pandoc.RawInline("openxml", TAB) }
-          for _, x in ipairs(content) do inl[#inl + 1] = x end
-          local h = pandoc.Header(lvl, inl, b.attr)
-          out[#out + 1] = h
-        end
+    local st = b.t == "OrderedList" and b.listAttributes.style or nil
+    local simple = st and st ~= "Decimal" and st ~= "DefaultStyle"
+    if simple then
+      for _, item in ipairs(b.content) do
+        if #item ~= 1 or (item[1].t ~= "Plain" and item[1].t ~= "Para") then simple = false end
+      end
+    end
+    if simple then
+      local n = b.listAttributes.start
+      for _, item in ipairs(b.content) do
+        local lab
+        if st == "UpperRoman" then lab = upper_roman(n)
+        elseif st == "LowerRoman" then lab = pandoc.text.lower(upper_roman(n))
+        elseif st == "UpperAlpha" then lab = string.char(64 + n)
+        else lab = string.char(96 + n) end
+        local d = b.listAttributes.delimiter
+        lab = d == "OneParen" and (lab .. ")") or d == "TwoParens" and ("(" .. lab .. ")") or (lab .. ".")
+        local inl = pandoc.Inlines({ pandoc.Str(lab), pandoc.Space() })
+        inl:extend(item[1].content)
+        out:insert(pandoc.Para(inl))
+        n = n + 1
       end
     else
-      out[#out + 1] = b
+      out:insert(b)
     end
   end
-  return out, heads
-end
-
-local function write_file(path, lines)
-  local f = io.open(path, "w")
-  if not f then return end
-  for _, l in ipairs(lines) do f:write(l, "\n") end
-  f:close()
+  return out
 end
 
 function Pandoc(doc)
-  META = {}
-  for k, v in pairs(doc.meta) do META[k] = v end
-  doc.meta.title = nil
-  doc.meta.date = nil
-  local body, heads = heading_blocks(doc.blocks)
+  META = doc.meta
+  load_pages()
+  local blocks = unfancy(doc.blocks)
 
-  local headpath = os.getenv("NMCCA_HEADINGS")
-  if headpath then
-    local lines = {}
-    for _, h in ipairs(heads) do lines[#lines + 1] = h.level .. "\t" .. h.text end
-    write_file(headpath, lines)
+  -- headings: labels, the Argument's points, needles (index entries: levels 1 and 2)
+  local counts = { 0, 0, 0, 0, 0, 0 }
+  local arg = false
+  local heads = {}
+  for i, b in ipairs(blocks) do
+    if is_heading(b) then
+      local text = pandoc.text.lower(stringify(b.content)):gsub("^%s+", ""):gsub("%s+$", "")
+      local lab = nil
+      if b.level == 1 then
+        arg = (text == "argument")
+        counts = { 0, 0, 0, 0, 0, 0 }
+      else
+        for j = b.level + 1, 6 do counts[j] = 0 end
+        if not UNLAB[text] and b.level <= 5 then
+          counts[b.level] = counts[b.level] + 1
+          lab = label_text((arg and ARG_KINDS or OTH_KINDS)[b.level - 1], counts[b.level])
+        end
+      end
+      heads[i] = { level = b.level, label = lab, point = (b.level == 2 and arg), id = "H:" .. i }
+    end
+  end
+  local function shown(i)
+    local b, h = blocks[i], heads[i]
+    if not h then return printed(b) end
+    local t = printed(b)
+    if h.level == 1 then t = pandoc.text.upper(t) end
+    return (h.label and (h.label .. " ") or "") .. t
+  end
+  local first_id = nil
+  for i, b in ipairs(blocks) do
+    local h = heads[i]
+    if h and h.level <= 2 then
+      need(h.id, shown(i), blocks[i + 1] and shown(i + 1) or "")
+      first_id = first_id or h.id
+    end
   end
 
-  -- the first heading of the body sits at the top of its page: no space before (typst: none at a page top)
-  if body[1] and body[1].t == "Header" and body[1].level == 1 then
-    local plain = true
-    for _, x in ipairs(body[1].content) do
-      if x.t ~= "Str" and x.t ~= "Space" then plain = false end
-    end
-    if plain then
-      body[1] = P({ style = "Heading1", before = 0, after = 0, jc = "center", outline = 0 },
-        run(pandoc.utils.stringify(body[1].content)))
-    end
-  end
-  local pages = read_pages()
   local out = {}
-  cover_blocks(out)
-  out[#out + 1] = section_break(2880, false, nil)
-  index_blocks(heads, pages, out)
-  out[#out + 1] = section_break(1440, true, "lowerRoman", 2)
-  -- the last paragraph of the body moves with the signature block (no signature alone on a page);
-  -- it keeps the first-paragraph form when it follows a heading (typst: no indent after a heading)
-  local prev = nil
-  for i, b in ipairs(body) do
-    if i == #body and b.t == "Para" then
-      local style = (prev and (prev.t == "Header" or prev.t == "Div")) and "Body Keep With Next First" or "Body Keep With Next"
-      b = pandoc.Div({ b }, pandoc.Attr("", {}, { ["custom-style"] = style }))
+  cover(out)
+  out[#out + 1] = section_break("rIdFtrNone", COVER_BOTTOM)
+
+  -- Index of Brief (typst index-of-brief(): listing-row)
+  out[#out + 1] = raw(line(0, runs("INDEX OF BRIEF", B), { center = true }))
+  local first = true
+  for i, b in ipairs(blocks) do
+    local h = heads[i]
+    if h and h.level <= 2 then
+      local indent = h.level == 1 and 0 or TOC_IND
+      local lw = h.label and LABEL or 0
+      local body = (h.label and runs(h.label .. "\t") or "") .. inl(b.content)
+      out[#out + 1] = raw(para({ xe.LINES, xe.leader_tab(TEXT_W), spacing(first and SP.cover_mid or SP.toc_row, 0, SINGLE),
+        ind(indent + lw, h.label and lw or nil, nil, TOC_COL) }, body .. LEAD_RUN .. runs(labels[h.id] or "1")))
+      first = false
     end
-    out[#out + 1] = b
+  end
+  out[#out + 1] = section_break("rIdFtrPage", MARGIN_BOTTOM, "lowerRoman", 2)
+
+  -- the body; paragraphs indented when they follow a paragraph (typst first-line-indent); the last paragraph kept
+  -- with the signature block
+  local last_para = nil
+  for i = #blocks, 1, -1 do
+    if blocks[i].t ~= "Null" then
+      if blocks[i].t == "Para" then last_para = i end
+      break
+    end
+  end
+  local prev = nil
+  for i, b in ipairs(blocks) do
+    local h = heads[i]
+    if h then
+      local before = (h.id == first_id) and 0 or (h.level == 1 and SP.section or SP.sub)
+      local content = h.level == 1 and upper_inlines(b.content) or b.content
+      local props = { style("Heading" .. math.min(h.level, 5)), KEEP, spacing(before, 0, SINGLE) }
+      if h.label then props[#props + 1] = ind(LABEL, LABEL) else props[#props + 1] = ind(0) end
+      props[#props + 1] = jc(h.level == 1 and "center" or "left")
+      local body = (h.label and runs(h.label .. "\t", B) or "") .. inl(content, { b = true, i = h.point })
+      out[#out + 1] = P(props, body)
+    elseif b.t == "Para" then
+      local after_par = prev ~= nil and prev.t == "Para"
+      local st = after_par and "Body Text" or "First Paragraph"
+      if i == last_para then st = after_par and "Body Keep" or "First Keep" end
+      out[#out + 1] = pandoc.Div({ b:walk({ Inlines = xe.inlines }) }, pandoc.Attr("", {}, { ["custom-style"] = st }))
+    else
+      for _, x in ipairs(xe.list_items(b)) do out[#out + 1] = x:walk({ Inlines = xe.inlines }) end
+    end
     prev = b
   end
-  signature(out, true)
+  signature(out)
   certificate(out)
-  return pandoc.Pandoc(out, doc.meta)
+
+  local nl = needles
+  if first_id then nl[#nl + 1] = "#section\t" .. first_id .. "\tdecimal\t" end
+  write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
+  write_file("FORMBOOK_FINAL", sect_pr("rIdFtrPage", MARGIN_BOTTOM, "decimal", 1))
+  return pandoc.Pandoc(out, pandoc.Meta({}))
 end

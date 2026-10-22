@@ -4,9 +4,9 @@ Court: U.S. Navy-Marine Corps Court of Criminal Appeals (`nmcca`). Doc type: ans
 
 ## Status
 
-**BLOCKED: no exemplar.** No public filed NMCCA answer (government brief answering an appellant's assignments of error) was found after a real search on 2026-10-15 (trail in `usage/SOURCE.md`). Without one, the sample cannot be rewritten to a real structure and the overlay cannot run. The template and sample below are unchanged from 2026-10-14 and remain synthetic.
+**BLOCKED: no exemplar.** No public filed NMCCA answer (government brief answering an appellant's assignments of error) was found after a real search on 2026-10-15 (trail in `usage/SOURCE.md`). Without one, the sample cannot be rewritten to a real structure and the overlay cannot run. The sample remains synthetic; the template was ported to the cross-engine layout model on 2026-10-22 (see "Engines").
 
-- Template: built and rendered. Typst only (`typst/`). `latex/` and `docx/` are not in this folder.
+- Template: built and rendered in typst (`typst/`, the reference) and docx (`docx/`), on the shared cross-engine layout model and gated (see "Engines"). No latex engine in this folder.
 - Exemplar: **none**. No public filed NMCCA answer was found (search trail in `usage/SOURCE.md`). The template follows the rules and the appellant's format, not a filed answer.
 - Sample: `usage/INPUT-answering-brief.md` is **synthetic**. Names, numbers, dates and citations are placeholders in brackets, and the issues and argument are generic. It is not a transcription of any filed brief, so it does not show what a real NMCCA answer looks like.
 - Overlay: **not produced**. `tools/overlay.sh` needs a filed exemplar PDF to compare against, and there is none (it exits 1: "no exemplar pdf").
@@ -19,7 +19,9 @@ Court: U.S. Navy-Marine Corps Court of Criminal Appeals (`nmcca`). Doc type: ans
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits the frontmatter from the body, calls the template. |
 | `typst/nmcca-answering-brief.typ` | The template: `nmcca-answering-brief(meta, md)`. Content-agnostic; the layout values are named parameters at the top. |
 | `usage/INPUT-answering-brief.md` | Synthetic sample (frontmatter + body). Caption, assignments of error, jurisdiction, statement of the case and of the facts, summary, argument with standard of review, conclusion, signature, certificate. About 6 pages of body. |
-| `usage/OUTPUT-answering-brief.typst.pdf` | Our render of the sample (8 pages: cover, index, body 1-5, certificate on 6). |
+| `usage/OUTPUT-answering-brief.typst.pdf` | Our render of the sample (9 pages: cover, index, body 1-6, certificate on 7). |
+| `docx/nmcca.lua`, `docx/reference.xml` | The docx engine (see "Engines"); `usage/OUTPUT-answering-brief.docx` and `.docx.pdf` are its output. |
+| `eval.yaml` | `params.cross_engine: gate` (Gate 4, XENG-001..003). |
 | `usage/SOURCE.md` | The exemplar search. No PDF. |
 
 Build (from the repo root, with the toolchain on PATH):
@@ -48,7 +50,7 @@ Because the rules do not give an answer-specific caption, the template follows t
 
 ## Typeface
 
-Same as the opening brief (see `../opening-brief/README.md`, "Typeface"). Rule 17(c) names no face it requires (Times New Roman and Century Schoolbook are examples) and allows any 14-point proportional type, so the template keeps `EB Garamond` (`fonts/eb-garamond/`), with no substitute. Rendered 2026-10-14: 8 pages, no warnings; `pdffonts` lists only EBGaramond faces.
+Rule 17(c) names no face it requires (Times New Roman and Century Schoolbook are examples) and allows any 14-point proportional type, so the template keeps `EB Garamond` (`fonts/eb-garamond/`), with no substitute. Rendered 2026-10-22: 9 pages, no warnings; `pdffonts` lists only EBGaramond faces (typst and docx).
 
 ## What the template is built to check
 
@@ -60,22 +62,21 @@ The template fails the build (with a message) if:
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-answering-brief.typst.pdf` (8 pages) was rendered at 60 dpi (`pdftoppm -r 60`) and looked at after the final edit (the argument-heading fix). Pages 1-8 were all reviewed, and no page was skipped. Re-reviewed 2026-10-14 after the footnote-size fix: the sample has no footnotes, so the layout did not change.
+Re-reviewed 2026-10-22 after the port to the cross-engine layout model (fb-595.54.7): every page of `OUTPUT-answering-brief.typst.pdf` and of `OUTPUT-answering-brief.docx.pdf` (9 pages each) was rendered at 60 dpi (`pdftoppm -r 60`) and looked at side by side. The two engines set every page alike (same lines, same page breaks; `fb diff --engines`: baselines within 0.04 pt). PDF pages 3-8 are body pages 1-6; PDF page 9 is the certificate (page 7).
 
 | PDF page | Content | Finding |
 |---|---|---|
-| 1 | Cover | Caption, "Before Panel", United States as appellee, appellant block, title, "To the Honorable" line, tried-at paragraph and counsel block all present. The NMCCA number wraps onto two lines because the placeholder is long. **OPEN**, cosmetic (placeholder length). |
-| 2 | Index of Brief (roman "ii") | Generated from headings; page references match the body. The argument point sub-entries have no "I." / "II." label, the known gap from the opening brief. **OPEN**, cosmetic. |
-| 3 | Assignments of error, jurisdiction, statement of the case, facts (body p. 1) | The second issue's first line is indented, the first issue's is not. The template gives every paragraph a first-line indent, but the issue paragraphs are not indented alike. **OPEN**, cosmetic (sample-driven: the sample writes the issues as separate paragraphs). |
-| 4 | Summary of argument, Argument opening (body p. 2) | "Standard of Review" under the Argument prints bold italic, the same style as the argument point headings. The opening brief prints it bare bold. **OPEN**, cosmetic (template styles every level-2 heading in the Argument italic). |
-| 5 | Argument point I, sub-headings (body p. 3) | "I." label appears once (heading numerals removed from the sample, which had doubled them). "Principles of Law" and "Discussion" bare; the first sub-point is labelled A. **Fixed** (the duplicated numerals were a sample fault, and the sample is corrected). |
-| 6 | Argument point I end, point II, standard of review (body p. 4) | Labels "A.", "B.", "II." each printed once. Point II's "Standard of Review" (level 3) is bare bold. OK. |
-| 7 | Point II discussion, conclusion, signature block (body p. 5) | The conclusion ends and the signature block sits with it on the same page. OK. |
-| 8 | Certificate of filing and service (body p. 6) | Own page, numbered. The service line reads "Appellate Defense Division, Navy-Marine Corps Appellate Review Activity on [date of filing]." OK. |
+| 1 | Cover | Court name, "Before Panel", caption in two columns on one line grid (a blank single line between the parts), title, "To the Honorable" lines, tried-at paragraph; the counsel block now sits at the foot of the cover (2 in bottom margin) in both engines. The NMCCA number wraps onto two lines because the placeholder is long. **OPEN**, cosmetic (placeholder length). |
+| 2 | Index of Brief (roman "ii") | Generated from the headings with dot leaders and page numbers that match the body; the Argument points now carry their "I." / "II." labels with the text hanging after them. typst ends the leader before a 36 pt page column, Word runs it to the number. OK. |
+| 3 | Assignments of error, jurisdiction, statement of the case (body p. 1) | The second issue is indented, the first is not (a paragraph that follows a paragraph is indented; the sample writes the issues as paragraphs). **OPEN**, cosmetic (sample-driven). |
+| 4 | Statement of facts, summary of argument (body p. 2) | Double-spaced 14 pt, headings centred bold capitals. OK. |
+| 5 | Argument, standard of review, point I, principles of law, discussion (body p. 3) | "Standard of Review" under the Argument prints bold italic like the points. **OPEN**, cosmetic (see open choice 2). Labels I. and bare sub-headings as NMCCA-CONT-004. OK. |
+| 6 | Discussion end, sub-points A. and B. (body p. 4) | Labels printed once, text hangs after them. OK. |
+| 7 | Point II, standard of review, discussion (body p. 5) | The page ends early: the conclusion, kept with the signature block, does not fit below. OK. |
+| 8 | Conclusion and signature block (body p. 6) | The last paragraph and the signature block stay together; signature rule 3 in. OK. |
+| 9 | Certificate of filing and service (body p. 7) | Own page, numbered; service line and signature block. OK. |
 
-Re-rendered and re-reviewed 2026-10-15: `sh tools/render.sh` exit 0, 8 pages, fonts are EB Garamond only. All 8 pages were rasterized (`pdftoppm -r 60`) and viewed. The table above still holds; PDF pages 3-7 are body pages 1-5 and PDF page 8 is the certificate (page 6).
-
-Overlay: not produced. `sh tools/overlay.sh` exits 1 on 2026-10-15 (and on 2026-10-14) ("no exemplar pdf"): no filed NMCCA answer exists to compare against (see Status and `usage/SOURCE.md`). Opening-brief exemplar is not a substitute, since it is a different document type.
+Overlay: not produced. `sh tools/overlay.sh` exits 1 ("no exemplar pdf"): no filed NMCCA answer exists to compare against (see Status and `usage/SOURCE.md`). Opening-brief exemplar is not a substitute, since it is a different document type.
 
 ## Known gaps
 
@@ -83,9 +84,8 @@ Overlay: not produced. `sh tools/overlay.sh` exits 1 on 2026-10-15 (and on 2026-
 - **Sample is synthetic.** `usage/INPUT-answering-brief.md` uses placeholders; it is not a transcription and must not be read as a filed brief.
 - **Table of authorities** is not generated (NMCCA-CONT-002). Not needed for a sample this size; a real answer over 10,000 words needs one.
 - **Word count** is not computed or checked against the 15,000-word limit (NMCCA-FORM-005; applicability to answers in NMCCA-ANS-003).
-- **Argument point labels** are not repeated in the index.
-- **Standard of Review** under the Argument is styled bold italic, not bare bold (see page 4).
-- **Font.** See "Typeface" above: EB Garamond at 14 pt, as in the opening-brief template.
+- **Standard of Review** under the Argument is styled bold italic, not bare bold (see page 5).
+- **Font.** See "Typeface" above: EB Garamond at 14 pt. (The opening-brief template now declares Liberation Mono, the face the font audit records for its 2013 exemplar; see its README.)
 
 ## Open choices (for David)
 
@@ -94,12 +94,9 @@ Overlay: not produced. `sh tools/overlay.sh` exits 1 on 2026-10-15 (and on 2026-
 
 ## Engines
 
-### docx (`docx/`)
+Both engines are on the shared cross-engine layout model (fb-595.54.7; `lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Adopting the reference breaker"): EB Garamond 14 pt everywhere (footnotes too), body lines in 33.6 pt boxes (double spacing), the cover, headings, index, quotations, footnotes and signature blocks in 16.8 pt boxes, first-fit line breaking, no kerning and no hyphenation. The docx render breaks every line and page where the typst render does, and `eval.yaml` gates it (`params.cross_engine: gate`, XENG-001..003 PASS). Two choices follow from LibreOffice, which makes the docx PDF: it sets EB Garamond's standard ligatures (fi, ff, ffi) whatever the file says (it ignores `w14:ligatures`), so the typst template sets them too; and widow and orphan control is off in both engines (typst's is a cost, LibreOffice's a rule, and they broke pages apart).
 
-Files: `docx/reference.docx` (built by `sh docx/build-reference.sh reference.docx`: the same reference as the opening brief, EB Garamond 14 pt named in the styles and theme, exact 33.6 pt body and 16.8 pt single spacing, 1 in margins, centred PAGE footer), `docx/nmcca.lua`, `docx/render.sh` (two layout passes for the index page numbers). Render: `sh tools/render.sh --engine docx <this-folder> usage/INPUT-answering-brief.md`.
+- **typst** (`typst/`): the reference.
+- **docx** (`docx/`): `reference.xml` (the Word styles, which fb render applies to pandoc's reference document: EB Garamond 14 pt, Body Text exact 672 twips with a 0.5 in first-line indent, First Paragraph without it, List Item, Block Text and footnotes exact 336 twips, headings) and `nmcca.lua` (cover with the two-column caption and the counsel block in a frame at the foot of the text area, Index of Brief with leader tabs, labelled headings with outline levels, signature block kept with the last paragraph, certificate on a new page; the cover, index and body as sections with rIdFtrNone / lower-roman from ii / arabic from 1 footers). The index page numbers come from fb render's multi-pass build (the filter writes heading needles to `$FORMBOOK_NEEDLES` and reads `$FORMBOOK_PAGES`); `render.sh`, `build-reference.sh` and the binary `reference.docx` are retired. The index is static text, not a TOC field: re-render after editing. Opened in LibreOffice only, not in Word.
 
-Matches the typst output: typeface (`pdffonts` on `OUTPUT-answering-brief.docx.pdf`: EBGaramond Regular, Italic, Bold, BoldItalic, all embedded), sizes and line pitch, cover and caption, index on its own page numbered "ii", body from 1, Argument labels and italics, signature block, certificate.
-
-Differs from the typst output: the same exact-spacing placement as the opening brief (first lines sit a few points lower than in typst), 9 pages in docx against 8 in typst, and the index page numbers are static text from a first layout pass. The sample is synthetic (placeholders), so the layout is checked, not any filed brief. Word has not been used here (LibreOffice only).
-
-BLOCKED (docx): none for this sample. The check IDs cannot be run: this court has no `checks.yaml`, so `sh tools/check.sh --engine docx` stops with "open .../checks.yaml: no such file". Gate 1 is not reported here.
+BLOCKED (docx): none. `sh tools/check.sh <this-folder> --engine docx`: RESULT 11 checks passed, 0 failed.
