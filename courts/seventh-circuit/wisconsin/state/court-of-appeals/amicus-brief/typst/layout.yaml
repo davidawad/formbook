@@ -49,8 +49,8 @@ cover:
       - group:
           - {text: "{names}", bold: true, left: 230.4}
           - {text: "{lines}", left: 230.4, optional: true}
-        below: 7.8
-  - {text: "{phone}", left: 230.4, optional: true}
+        above: 7.8
+  - {text: "{phone}", left: 230.4, optional: true, above: 7.8}
 # WISCTAPP-AMI-002 (809.19(7)(d), (1)(a)): the table of contents with the argument headings, and the table of authorities with
 # the pages on which each is cited, each on its own page.
 contents: {title: "Table of Contents", depth: 4, col: 36, hang: 19.5, step: 19.5, above: 11.7}
@@ -69,9 +69,11 @@ keep_with_closing: false
 # its count the counted portions' words, signed. WISCTAPP-ELEC-003: the certificate of electronic filing and service
 # when the brief carries one.
 closing:
-  - {text: "{date}", optional: true, above: 21.6}
-  - group: &signature
-      - columns:
+  # the date and the signature one block, never split
+  - group:
+      - {text: "{date}", optional: true}
+      - &signature
+        columns:
           - blocks:
               - {text: ""}
           - width: 201.6
@@ -80,6 +82,7 @@ closing:
               - {rule: 0.5, above: 28.6}
               - {text: "{signature.signer}", above: 3.9}
               - {text: "{signature.lines}"}
+        above: 5.2
     above: 21.6
   - when: assisted
     blocks:
@@ -87,12 +90,12 @@ closing:
   - {break: true}
   - {text: "CERTIFICATION AS TO FORM AND LENGTH", align: center, bold: true, below: 15.6}
   - {text: "I hereby certify that this brief conforms to the rules contained in s. 809.19 (8) (b) and (c) for a brief produced with a proportional serif font. The length of this brief is {xd.words} words.", pitch: body, indent: 36}
-  - group: *signature
+  - group: [*signature]
     above: 15.6
   - when: efiling_certificate
     blocks:
       - {break: true}
       - {text: "CERTIFICATION OF ELECTRONIC FILING AND SERVICE", align: center, bold: true, below: 15.6}
       - {text: "{efiling_certificate}", pitch: body, indent: 36}
-      - group: *signature
+      - group: [*signature]
         above: 15.6
