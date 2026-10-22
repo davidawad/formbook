@@ -1,6 +1,6 @@
 # USCMCR: brief on behalf of appellant (opening brief)
 
-Status for this doc type: exemplar=yes, render=ok, overlay=ok, pages_reviewed=13 (every page of `usage/OUTPUT-opening-brief.typst.pdf`, viewed after the last render).
+Status for this doc type: exemplar=yes, render=ok, overlay=ok, pages_reviewed=16 (every page of `usage/OUTPUT-opening-brief.typst.pdf` and `.docx.pdf`, viewed after the cross-engine port, fb-595.54.7; the "Page review" table below is of the earlier render).
 
 **Tier 1 (the rules' mandated form) is NOT verified.** The governing rules text could not be read (see "Rule basis"), and the typeface the rules call for is not vendored (see "Typeface"). Do not treat this template as passing tier 1.
 
@@ -102,21 +102,19 @@ Fixes made during this review: paragraph spacing was zero, so separate paragraph
 
 ## Known gaps
 
-- **Typeface** (above): Liberation Serif now stands in for Times New Roman. The face comes from the filings, not the rule text, which is unverified.
+- **Typeface**: Times New Roman (vendored; the PDFs embed TimesNewRomanPSMT), as Rule 15(e) names it (`../../rules.md`, MC-FORM-001). The "Typeface" section above describes an earlier Liberation Serif render.
 - **Rules unverified** (above): the rule numbers and the 14,000-word, 12-point, double-spacing values are not confirmed against the primary text.
 - **Table of authorities** is not produced. The table of contents is generated. A TOA would need a citation registry like the Ninth Circuit template's.
 - **Word count** is a frontmatter value, not computed from the body.
-- **Line spacing** is set as `leading: 0.95em` (double-spaced by eye), not measured against a rule.
+- **Line spacing**: body lines at 27.6 pt, Rule 15(e) double spacing (see "Engines").
 - **Signature alone on a page** (PDF p.11): open tier-2 item above.
-- **Footnote size** is 11 pt; the rule on footnote size is not verified.
+- **Footnote size**: 12 pt (Rule 15(e) names 12 point for the document).
 - **Exemplar coverage**: one opening brief from one filer; tier 2 asks for two or three.
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default reference, `mc.lua` builds the cover, contents, signature and certificates from the frontmatter). Render: `sh tools/render.sh --engine docx <folder> usage/INPUT-opening-brief.md` writes `usage/OUTPUT-opening-brief.docx` and `.docx.pdf` (LibreOffice). Pages reviewed: 13 of 13 (every page of the `.docx.pdf`, each compared with the typst page; the review PNGs are in `/work/artifacts/mc/opening-brief/`, not committed).
+**Shared cross-engine layout model (fb-595.54.7).** The typst template (`typst/mc-opening-brief.typ`) imports `lib/typst/xengine.typ`, and the docx filter (`docx/mc.lua`) uses `lib/docx/xengine.lua` on `docx/reference.xml` (`fb render` builds the reference document; `build-reference.sh` and `reference.docx` are retired). Both engines set Times New Roman 12 pt (Rule 15(e); the vendored face, so `TNR-EMBEDDED` and `DEF-FONT-002` pass on both), footnotes included, in exact line boxes: body 27.6 pt (Rule 15(e) double spacing: twice Times New Roman's 13.8 pt single line), single-spaced material (cover, caption, contents, signature, certificates, footnotes) 13.8 pt, section headings 17 pt bold on 19.6 pt, argument headings 14.5 pt bold on 16.7 pt; first-fit breaks, no kerning, ligatures or hyphenation. The contents rows are `listing-row` (page column 36 pt, dot leader) in typst and right-indented leader-tab paragraphs in Word; the Word page numbers come from `fb render`'s multi-pass engine (needles per heading, `FORMBOOK_PAGES`, footers `rIdFtrNone`/`rIdFtrPage`, `FORMBOOK_FINAL`). pandoc reads "(a) ..." / "(1) ..." paragraphs as fancy lists; the filter writes them back as paragraphs, as CommonMark (typst) reads them. Both certificates print the word count with a thousands separator. The docx render breaks every line and page where the typst render does (`fb diff --engines`: XENG-001..003 PASS, 100 % of lines), so `eval.yaml` sets `params.cross_engine: gate`.
 
-- Matches the typst form: Liberation Serif 12 pt (the Times New Roman substitute, `docs/FONTS.md`; `pdffonts` shows only LiberationSerif), 1 in margins, US Letter; caption with the parenthesis column; counsel block; centered bold level-1 headings (17 pt, the size the typst headings render at) and bold hanging level-2/3 headings; footnotes 11 pt; cover and contents unnumbered; body numbered from 1, centered; certificates on their own pages; the signature block kept together.
-- Differs: the word count prints with a thousands separator (3,857), as the filed exemplar does; the typst prints 3857. The issues list (1) to (4) is a Word numbered list with a hanging indent, not the typst paragraphs. Word may paginate differently from LibreOffice.
-- Typst leading: the typst body renders at a 19.25 pt line pitch (measured), which is not the 25 pt a 12 pt double-spaced line gives in Word. The docx keeps the typst pitch. Whether the rules require true double spacing is unverified (see "Rule basis").
-- BLOCKED: TOC page numbers (the contents field has cached entries without page numbers; a field update in Word or LibreOffice adds them; no second pass is implemented). No check ID exists yet (no `checks.yaml`).
-- BLOCKED: `sh tools/check.sh <folder> --engine docx` exits 2: `Error: open .../checks.yaml: no such file or directory`. Gates 0 to 3 were not run.
+Render: `sh tools/render.sh <folder> usage/INPUT-opening-brief.md` (typst) and `sh tools/render.sh --engine docx <folder> usage/INPUT-opening-brief.md` (`usage/OUTPUT-opening-brief.docx` and `.docx.pdf`, LibreOffice). Check: `sh tools/check.sh <folder>` and `sh tools/check.sh <folder> --engine docx` (both 0 failed). Pages reviewed after the port: all 16 pages of the typst and of the docx PDF, at 60 dpi, side by side (no visible difference beyond the footnote rule's weight and the contents' page numbers set flush with the margin in Word).
+
+Changes in the port that move the typst output: body pitch 19.7 pt to 27.6 pt (the template said "double-spaced", Rule 15(e) requires it, the exemplars are at about 27.6 pt), footnotes 11 pt to 12 pt (Rule 15(e): 12 point), headings 16.8/14.4 pt to 17/14.5 pt (whole half points), the certificate word count with a thousands separator, footnote text flush left with a space after the mark. Word may paginate slightly differently from LibreOffice (`docs/DOCX.md`).
