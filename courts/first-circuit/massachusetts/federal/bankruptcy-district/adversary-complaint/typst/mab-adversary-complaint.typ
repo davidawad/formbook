@@ -136,11 +136,14 @@
 // ---------------------------------------------------------------------------
 
 /// A body paragraph at the double pitch: the first line half an inch in, then (numbered) the number in a box of
-/// the paragraph indent before the text.
-#let body-par(num, content) = block(width: 100%, above: 0pt, below: 0pt,
+/// the paragraph indent before the text. A paragraph that carries a footnote mark (`note`) sets no widow or orphan
+/// rule: its lines fill the page and the note follows its mark, as Word's "Note" styles (no widow control) do.
+#let body-par(num, content, note: false) = block(width: 100%, above: 0pt, below: 0pt, {
+  set text(costs: (widow: 0%, orphan: 0%)) if note
   par(first-line-indent: (amount: para-indent, all: true), if num == none { content } else {
     [#box(width: para-indent, [#num.])#content]
-  }))
+  })
+})
 
 /// A markdown table (the transfer schedule): unruled, centered, single-spaced, fixed columns, a single line above
 /// and below it.
@@ -192,9 +195,9 @@
     } else if numbered and not t.starts-with("WHEREFORE") {
       // "WHEREFORE" paragraphs are the prayer: not numbered.
       n += 1
-      body-par(n, inl(with-notes(t, defs)))
+      body-par(n, inl(with-notes(t, defs)), note: t.contains("[^"))
     } else {
-      body-par(none, inl(with-notes(t, defs)))
+      body-par(none, inl(with-notes(t, defs)), note: t.contains("[^"))
     }
   }
   if not signed { signature-block(meta) }
@@ -224,14 +227,16 @@
   set enum(numbering: "a.")
   // A doubled section sign stays with its number ("§§ 547"), as the Word filter binds it (xengine binds a single one).
   show regex("[§¶]{2,} \\S+"): it => box(it)
-  // Footnotes at 10 pt, single-spaced, the mark and a space before the note (Word's Footnote Text), kept whole.
-  set footnote.entry(gap: note-gap, clearance: 12.6pt, indent: 0pt, separator: line(length: 1.5in, stroke: 0.5pt))
+  // Footnotes at 10 pt, single-spaced, the mark and a space before the note (Word's Footnote Text). A long note
+  // runs on to the next page, as Word continues it. The space between the text and the notes is the note gap
+  // (typst adds the gap above the first note too), as the motion template measured it against LibreOffice.
+  set footnote.entry(gap: note-gap, clearance: note-gap, indent: 0pt, separator: line(length: 1.5in, stroke: 0.5pt))
   show footnote.entry: it => {
     set text(size: footnote-size, ..edges(pitch-note))
     set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
-    block(breakable: false, [#super(num)#h(0.25em)#note.body])
+    [#super(num)#h(0.25em)#note.body]
   }
 
   caption(meta)
