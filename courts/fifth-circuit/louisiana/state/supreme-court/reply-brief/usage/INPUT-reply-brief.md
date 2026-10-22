@@ -148,13 +148,13 @@ authorities:
     cite: "549 U.S. 406 (2007)"
   const3:
     kind: statute
-    name: "La. Const. art. I, § 3"
+    cite: "La. Const. art. I, § 3"
   const12:
     kind: statute
-    name: "La. Const. art. I, § 12"
+    cite: "La. Const. art. I, § 12"
   const17:
     kind: statute
-    name: "La. Const. art. I, § 17"
+    cite: "La. Const. art. I, § 17"
 ---
 
 # SUMMARY OF THE ARGUMENT

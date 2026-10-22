@@ -1,6 +1,10 @@
-# Gate 4 CROSS-ENGINE: reported, not gated. This folder is not yet on the shared document model (fb-595.54.12): the
-# model sets US Letter only, and this court's template is on legal paper (LA-FORM-001, -002); its other needs are listed
-# in docs/open-items/fb-595.54.26.md, "shared-model requests" (the serial lane fb-595.54.82). It has no latex or docx
-# engine to compare. The court folder's eval.yaml keeps the page and margin parameters.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails. The court folder's eval.yaml keeps the page and margin parameters
+# (legal paper, 612 x 1008 pt, top 108 pt: LA-FORM-001, -002, -005).
 params:
-  cross_engine: report
+  cross_engine: gate
+  # A URL in note 1 (page 8): typst moves its last piece ("20190816150657072_18-5924%20Respondent%20BOM.pdf.") whole to
+  # the next line, LibreOffice breaks inside it. Shared docx URL breaking (docs/open-items/fb-595.54.26.md); reported,
+  # not gated (fb-595.54.26).
+  cross_engine_docx: report
