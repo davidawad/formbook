@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The California Supreme Court petition for review's Word styles: the cross-engine recipe
+     (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md, "Cross-engine gate") in the face of the typst template ({font},
+     Times New Roman; rules 8.74(b)(1) and 8.204(b)(2) prefer Century Schoolbook and require no face) at 13 pt (size 26
+     half points; rules 8.204(b)(4), 8.74(b)(1): 13-point or larger, footnotes included); Body Text in exact 24 pt
+     line boxes (480 twips: typst pitch-body; at least 1.5-spaced, rule 8.204(b)(5)) with a half-inch first-line
+     indent; single lines in 14.95 pt boxes (299 twips: typst pitch-single); Footnote Text at 13 pt single-spaced in
+     14.95 pt boxes, 6.5 pt after each note (typst note-gap). Styles added: Body Text Note, Body Text without widow
+     control, for a paragraph that anchors a footnote (typst: no widow or orphan rule for it); Body Text Keep, the
+     last paragraph, kept with the signature block (typst: one unbreakable block). docx/cal.lua writes the section
+     (letter page, 1.5 in left and right, 1 in top and bottom, rule 8.204(b)(6)) and the page-number footer (centered
+     at 13 pt, none on the cover, rule 8.204(b)(7), in a single-pitch line whose box ends 0.5 in above the page edge,
+     typst footer-distance), and every other paragraph with its own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="26" body="480" single="299" indent="720" heading="299" heading-before="0" heading-after="0" note="299" note-size="26" note-after="130" footer="720">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>

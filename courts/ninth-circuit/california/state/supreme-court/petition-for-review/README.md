@@ -2,7 +2,7 @@
 
 Doc-type folder for the California Supreme Court (`cal`, `courts/ninth-circuit/california/state/supreme-court/`). It is self-contained: exemplars, sample, template, and this README. The court root's `typst/` and `usage/` (other doc types) are not touched.
 
-Status: exemplar found (two filed petitions); typst template renders the sample with no warnings; overlay generated against the primary exemplar; every page of the sample rendered and inspected (13 of 13; again on 2026-10-16, see "Verification pass"). Latex and docx engines are not built for this doc type.
+Status: exemplar found (two filed petitions); typst template renders the sample with no warnings; overlay generated against the primary exemplar; every page of the sample rendered and inspected (13 of 13; again on 2026-10-16, see "Verification pass"). Typst and docx are on the cross-engine layout model (fb-595.68.37): the docx render breaks every line and page where typst does (`params.cross_engine: gate` in `eval.yaml`); no latex engine for this doc type.
 
 ## Folder
 
@@ -40,14 +40,14 @@ Verified 2026-10-14 against the courts.ca.gov rule pages (the "California Rules 
 | [8.504(d)(1)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_504) | A computer-prepared petition must not exceed 8,400 words, including footnotes, and needs a certificate stating the word count. | `word-limit = 8400`; `count-words()` on the body (CAL-LENGTH-001); the Certificate of Compliance prints the count (CAL-CERT-001). |
 | 8.504(d)(3) | Tables, cover, the opinion, the word-count certificate, signature blocks and attachments are not counted. | The count is taken from the body markdown only. |
 | [8.204(b)(4)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_204) | Font size at least 13-point, footnotes included. | `type-size = 13pt`; footnotes set at `type-size` (CAL-FONT-002). |
-| 8.204(b)(5) | Text unnumbered and at least 1.5-spaced; headings and footnotes may be single-spaced; block quotes may be indented and single-spaced. | Text double-spaced (`body-leading`, matches the exemplar; CAL-SPACE-001); headings, footnotes, quotations, tables single-spaced. Line numbers are never printed. |
+| 8.204(b)(5) | Text unnumbered and at least 1.5-spaced; headings and footnotes may be single-spaced; block quotes may be indented and single-spaced. | Text in exact 24 pt lines (`pitch-body`; 1.5 x the face's 14.95 pt single line is 22.4 pt; double, as the exemplar is); headings, footnotes, quotations, tables single-spaced. Line numbers are never printed. |
 | [8.204(b)(6)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_204) | Margins: at least 1½ in left and right, 1 in top and bottom. | `margin-x = 1.5in`, `margin-y = 1in` (CAL-MARGIN-001). |
 | 8.204(b)(7) | Pages numbered consecutively in Arabic numerals from the cover as page 1; the cover number may be suppressed. | Cover is page 1, number not printed; all later pages numbered from 2 (CAL-PAGE-001). |
 | [8.74(a)(1)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | Text-searchable PDF. | Typst output; text layer checked with `pdftotext`. |
 | 8.74(a)(2), (a)(7) | Page counter matches page numbers; 8½ × 11 in. | `paper: "us-letter"`; numbering from the cover. |
 | [8.74(a)(3)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | A descriptive bookmark for each heading, subheading, and first page of each component (declaration, exhibit, proof of service). | Typst outlines every heading; a hidden outlined heading on the cover gives the cover a bookmark (CAL-BOOK-001). Checked in the PDF's outline (`/Title` entries). |
 | [8.74(a)(9)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | The cover lists each filing attorney's name, mailing address, telephone number and State Bar number. | Frontmatter `counsel:` (names carry the SBN) and `phone:` (CAL-COVER-002). |
-| [8.74(b)(1)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | Proportionally spaced serif face (Century Schoolbook preferred), 13-point including footnotes; sans-serif allowed for headings and captions. | Court-named face: Century Schoolbook (preferred). Vendored substitute: **TeX Gyre Schola** (`font-family`), metric-compatible with the New Century Schoolbook AFMs (`docs/FONTS.md`). 13 pt. The certificate names the face the rule names, "Century Schoolbook". |
+| [8.74(b)(1)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | Proportionally spaced serif face (Century Schoolbook preferred), 13-point including footnotes; sans-serif allowed for headings and captions. | Century Schoolbook is preferred, not required: **Times New Roman** (`font-family`, the house face, vendored; `docs/FONTS.md`), 13 pt, footnotes included, on typst and docx. The certificate names the face used, "Times New Roman". |
 | [8.74(b)(2)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | Text 1.5-spaced (footnotes, headings, subheadings, quotations may be single). | Same as 8.204(b)(5). |
 | [8.74(b)(3)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | Margins 1½ in left/right, 1 in top/bottom. | Same as 8.204(b)(6). |
 | [8.74(b)(4)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | Left-aligned, not justified. | `justify: false` everywhere. |
@@ -96,9 +96,10 @@ The word count in the certificate is computed from the body markdown (headings, 
 ## Decisions
 
 - **Exemplar: Quach over Hoehn.** Quach opens its body with "I. ISSUES PRESENTED FOR REVIEW" and its certificate states the font and word count. Hoehn opens with an "Introduction" and has no issues statement, which rule 8.504(b)(1) requires. The template follows the rule, so Hoehn is not transcribed.
-- **Typeface: TeX Gyre Schola, 13 pt** (substitute for Century Schoolbook). Rule 8.74(b)(1) says the face "must be a proportionally spaced serif face. Century Schoolbook is preferred", and the Quach exemplar uses Century Schoolbook. Schola is the vendored Century Schoolbook clone (`docs/FONTS.md`: metric-compatible). Before the switch the template used EB Garamond; page count (13) and the TOC and TOA page numbers were unchanged after it. The certificate says "13-point Century Schoolbook font", the face the rule names, not the substitute's family name.
-- **Spacing: double.** Matches the exemplar; the rules ask for at least 1.5.
-- **Cover fits one page.** The gap between cover parts shrinks to make it fit (never the type). The template refuses to build if the cover still does not fit.
+- **Typeface: Times New Roman, 13 pt.** Rule 8.74(b)(1) says the face "must be a proportionally spaced serif face. Century Schoolbook is preferred"; preferred is not required, so the house face (Times New Roman, as the Hoehn exemplar uses) is set on every engine. The certificate states the face used ("13-point Times New Roman font"; it had named Century Schoolbook, which the PDF did not use).
+- **Spacing: exact 24 pt lines** (double at 12 pt; at least 1.5 x the 14.95 pt single line, rule 8.204(b)(5)); single lines 14.95 pt.
+- **Cover fits one page** with fixed 18 pt gaps between its parts; the template refuses to build if it does not fit (the type never shrinks). The counsel block and the signature column start 2 in from the margin.
+- **The conclusion's last paragraph is kept with the signature block**, so the signature never stands alone on a page.
 - **Certificate of compliance before the proof of service**, as in the exemplar.
 
 ## Overlay
@@ -118,25 +119,21 @@ The pairing in the current render (TeX Gyre Schola; `-overlay.txt`): sample p.1 
 
 ## Known gaps
 
-1. **Typeface.** Resolved in the fonts pass: TeX Gyre Schola stands in for the Century Schoolbook that rule 8.74(b)(1) prefers. The substitution is metric-compatible but not the original face; a court could still object to a clone, which is a question for David.
+1. **Typeface.** Times New Roman, not the Century Schoolbook that rule 8.74(b)(1) prefers (not requires).
 2. **Court of Appeal opinion attachment** (rule 8.504(b)(4)–(6)). The petition must be filed with the opinion attached (and the attachments are not counted toward the length limit). The template produces the petition only; the opinion PDF is added at filing.
 3. **Certificate of interested entities** (rule 8.208). Not generated. The rule text covers Court of Appeal civil appeals and does not address Supreme Court petitions, and the exemplars have none. Open question: whether the Supreme Court requires one for this petition. Not included until David decides.
 4. **Service list.** The Quach exemplar serves the Court of Appeal and the superior court clerk as well as the parties. The rule text (8.25(a)) requires service on each separately represented party and any other person required by rule or statute; the rule that requires service on the court of appeal and trial court for a petition was not verified. The template prints whatever the frontmatter lists.
 5. **The sample is a portion.** The statement after its first two parts, most of the reasons, and the Court of Appeal opinion are not transcribed. The certificate's word count (1,785 at the time of render) is the count of the sample's body, not of the real petition.
 6. **Bookmarks.** Checked in the PDF outline for the headings, the cover, the TOC, the TOA, the certificate and the proof of service. Entries with curly apostrophes are stored hex-encoded in the file, so a plain grep finds only some of them.
-7. **No check script.** `tools/check.sh` and `tools/check-selftest.sh` are built for court-root ca9-style folders and are not run here. Validation is the render (exit 0, no typst warnings), the font list (`pdffonts`: embedded TeX Gyre Schola only), the page-by-page inspection, and the overlay.
+7. **Checks.** `sh tools/check.sh <this dir>` (typst 9 passed, 0 failed) and `--engine docx` (13 passed, 0 failed, XENG-001..003 PASS). `tools/check-selftest.sh` needs a folder with `checks.yaml` and `court.json` and does not run here.
 8. **Tier 2 is not measured.** The template is judged against one exemplar (Quach) plus the second filer's (Hoehn) conventions by eye; the overlay is diagnostic.
 
 [Formbook index](../../../../../../README.md) | [Court root](../README.md)
 
 ## Engines
 
-**docx** (`docx/make-reference.sh` builds `docx/reference.docx`; `docx/cal.lua` writes the cover from the frontmatter; `tools/render.sh --engine docx`).
+**docx** (`docx/reference.xml`: the cross-engine style recipe, `base="xengine"`, in the typst face; `docx/cal.lua` writes the document; `fb render --engine docx` builds it in passes, with the page numbers of the two tables from its needles; no shell scripts).
 
-- Set in styles.xml and sectPr, not rendered (no LibreOffice on the build box): font TeX Gyre Schola 13 pt throughout, footnotes included; body double spaced (`w:line="480"`, auto) with 0.5 in first-line indent and 240 twips after; headings single spaced, bold, Heading 1 centred and capitalised; footnotes single spaced; US Letter, 1.5 in left and right, 1 in top and bottom; arabic PAGE field centred in the footer, none on the cover (`titlePg`).
-- Differs from typst: TOC and TOA are not generated (typst builds them from headings with computed page numbers); the cover is paragraphs, not the ruled layout; no bookmarks; no line numbering. Line spacing is "auto" multiples, not exact points. Font name is the vendored Schola (the rule-named Century Schoolbook is metric-compatible; swap the name if the filer's machine has it).
-- `pages_reviewed` for docx: 0. The `.docx` was validated (zip, well-formed XML parts); `OUTPUT-<id>.docx.pdf` was not made.
-- BLOCKED: `docx.pdf` gates 0 to 3: no LibreOffice (`soffice`) on the build box, so no PDF was rendered or checked.
-- BLOCKED: TOC and TOA check IDs: no TOC/TOA fields or generated entries in the docx.
-- BLOCKED: caption and cover layout check IDs: the cover is paragraphs, so the ruled caption layout is not reproduced.
-- Pagination in Word may differ from typst (line breaking, footnote placement), so footer page numbers may be off by a page in Word.
+- The same content and layout as typst from the same markdown: the cover, the tables of contents and of authorities with page numbers, the heading labels, lists, footnotes (13 pt), the signature block kept with the last paragraph, the certificate of compliance with the same word count, the proof of service. Every paragraph in exact line boxes of the typst pitches (480 and 299 twips) with the typst spaces between blocks.
+- Gate 4: XENG-001..003 PASS (282/282 lines, 13 = 13 pages), `params.cross_engine: gate`. Measured on the LibreOffice PDF; Word may paginate slightly differently (docs/DOCX.md).
+- Not reproduced: PDF bookmarks (LibreOffice's export writes none by default).

@@ -5,43 +5,79 @@
 // coordinates measured off any filed petition, no forced line breaks. The markdown body is
 // rendered by cmarker; the metadata comes from the YAML frontmatter of the same file
 // (schema: ../README.md, "Markdown contract").
+//
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other. docx/cal.lua and docx/reference.xml set the same numbers in twips (20 x pt), so
+// the Word render breaks every line and every page where this one does.
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = ("Times New Roman", "Liberation Serif")      // CAL-FONT-001: proportionally spaced serif, Century Schoolbook preferred (rule 8.74(b)(1)). Substitute per docs/FONTS.md. Vendored in /fonts.
-#let font-named = "Century Schoolbook"    // the face the rule names; the certificate states it (Schola is a Century Schoolbook clone).
-#let type-size = 13pt                      // CAL-FONT-002: 13-point or larger, footnotes included (rules 8.204(b)(4), 8.74(b)(1)).
-#let body-leading = 0.94em                 // CAL-SPACE-001: double-spaced text, as the filed exemplar is. Rule 8.204(b)(5) asks for 1.5.
-#let single-leading = 0.12em               // headings, quotations, footnotes, tables, certificates: single-spaced (rule 8.204(b)(5)).
-#let margin-x = 1.5in                      // CAL-MARGIN-001: left and right (rules 8.204(b)(6), 8.74(b)(3)).
-#let margin-y = 1in                        // CAL-MARGIN-001: top and bottom.
-#let para-indent = 0.5in
-#let heading-tab = 0.5in
+// CAL-FORM-002: a proportionally spaced serif face; rule 8.74(b)(1) and 8.204(b)(2) prefer Century Schoolbook but
+// require none: Times New Roman, the house face (docs/FONTS.md), vendored in fonts/. The certificate names it.
+#let font-family = ("Times New Roman", "Liberation Serif")
+#let font-named = "Times New Roman"        // the face the certificate of compliance states
+#let type-size = 13pt                      // CAL-FORM-003: 13-point or larger, footnotes included (rules 8.204(b)(4), 8.74(b)(1))
+#let margin-x = 1.5in                      // CAL-FORM-006: left and right (rules 8.204(b)(6), 8.74(b)(3))
+#let margin-y = 1in                        // CAL-FORM-006: top and bottom
+#let footer-distance = 0.5in               // the page number's line box ends half an inch above the page edge (docx: footer 720)
+#let para-indent = 0.5in                   // first-line indent of every body paragraph
+#let label-box = 0.5in                     // a heading or list label in a box this wide; each deeper heading level starts this far further in
+#let quote-inset = 0.5in                   // block quotations: indented on both sides
+#let toc-step = 0.35in                     // contents: each deeper level starts this far further in
+#let toc-col = 0.5in                       // contents: the page column the rows wrap before
+#let toa-col = 1.25in                      // authorities: the page column ("4, 5, 6, 7, 10" fits)
+#let toa-hang = 0.35in                     // an authority's citation and later lines start this far in
+#let counsel-left = 2in                    // the cover's counsel block and the signature column start this far from the margin
+#let service-indent = 0.5in                // the proof of service's list of persons served
+#let rule-length = 2in                     // the short rules between the cover's parts
 #let toc-depth = 4
 #let passim-threshold = 7                  // an authority cited on this many pages or more prints "passim"
-#let word-limit = 8400                     // CAL-LENGTH-001: rule 8.504(d)(1), computer-prepared petition, footnotes included.
+#let word-limit = 8400                     // CAL-LEN-003: rule 8.504(d)(1), computer-prepared petition, footnotes included.
+#let lead-slack = 4pt                      // a table row keeps its last word before the leader only with this much to spare: LibreOffice
+                                           // wants about 4 pt free after the leader's three spaces (docs/EVAL-LOOP.md), so typst asks for it too
+
+// Pitches and spaces (twips in docx/cal.lua and docx/reference.xml: 20 x pt).
+#let pitch-body = 24pt                     // CAL-FORM-005: the text is at least 1.5-spaced (rule 8.204(b)(5); 1.5 x 14.95 pt = 22.4 pt); double, as filed
+#let pitch-single = 14.95pt                // single spacing of the face at 13 pt (1.15 em): headings, cover, tables, quotations, footnotes, certificates
+#let cover-gap = 18pt                      // between the cover's parts
+#let h1-above = 24pt                       // above a section heading
+#let heading-above = 12pt                  // above a sub-heading
+#let heading-below = 12pt                  // below every heading, before its text
+#let quote-gap = 12pt                      // above and below a block quotation
+#let toc-row-gap = 6pt                     // above a contents row (level 1: toc-h1-gap)
+#let toc-h1-gap = 12pt
+#let toa-group-gap = 14.95pt               // above a group title of the authorities (a blank single line)
+#let toa-row-gap = 9pt                     // above an authority
+#let sig-above = 24pt                      // the text to the signature block, "Dated:" to "Respectfully submitted,"
+#let signer-above = 24pt                   // "Respectfully submitted," to "/s/"
+#let cert-gap = 12pt                       // between the paragraphs of a certificate
+#let service-gap = 12pt                    // above each person served
+#let note-gap = 6.5pt                      // between two footnotes
+#let note-clearance = 8.45pt               // the text to the footnote rule: with note-gap, Word's single-line separator
 
 // ---------------------------------------------------------------------------
 // Small helpers
 // ---------------------------------------------------------------------------
 
-/// Render an inline markdown string (italics etc.) as inline content.
-#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+#let render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// Plain text of a piece of content, for comparisons only.
-#let plain(c) = {
-  if type(c) == str { c }
-  else if c == [] { "" }
-  else if c.has("text") { c.text }
-  else if c.has("children") { c.children.map(plain).join() }
-  else if c.has("body") { plain(c.body) }
-  else if c.func() == [ ].func() { " " }
-  else { "" }
+/// Inline content without the paragraph breaks cmarker may put around it.
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
 }
+
+/// Render an inline markdown string (italics etc.) as inline content.
+#let inl(s) = unloose(render(s))
 
 #let need(meta, key) = {
   if key not in meta { panic("cal-petition: missing required metadata field `" + key + "`") }
@@ -54,6 +90,16 @@
   if m == none { panic("cal-petition: the sample must start with a YAML frontmatter block") }
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
+
+/// One single-pitch paragraph with explicit spaces above and below it; `left`/`right` inset it, `hang` indents its
+/// later lines, `align` places it. `c` is markdown or content.
+#let sline(above: 0pt, below: 0pt, left: 0pt, right: 0pt, hang: 0pt, align: left, sticky: false, c) = block(
+  width: 100%, above: above, below: below, sticky: sticky, {
+    set text(..edges(pitch-single))
+    set std.align(align)
+    pad(left: left, right: right, par(first-line-indent: 0pt, hanging-indent: hang,
+      if type(c) == str { inl(c) } else { c }))
+  })
 
 /// Put an invisible `tag` right after the first word of `c`, keeping any emphasis around it.
 /// Returns (content, placed). Why not simply put the tag in front: when a citation begins at the
@@ -93,6 +139,7 @@
 
 /// Word count of markdown source, whitespace-delimited like a word processor.
 /// Markup characters are removed first; links keep their text; footnote text is counted.
+/// (docx/cal.lua count_words: the same rules, line by line.)
 #let count-words(md) = {
   let s = md
   s = s.replace(regex("<!--[\\s\\S]*?-->"), " ")
@@ -112,7 +159,7 @@
 }
 
 // ---------------------------------------------------------------------------
-// Headings: numbering scheme and styles (CAL-CONT-001)
+// Headings: numbering scheme (CAL-CONT-001)
 // ---------------------------------------------------------------------------
 
 /// I. / A. / 1. / a. / (1), by level. Roman numerals mark the sections (Issues, Introduction, ...).
@@ -130,30 +177,19 @@
 /// Printed label of a numbered heading.
 #let heading-label(h) = numbering(heading-number, ..counter(heading).at(h.location()))
 
-/// A single-spaced paragraph whose continuation lines are indented by `indent`.
-/// (Must be an explicit `par`: a `set par(hanging-indent)` inside a block is ignored by typst 0.15.)
-#let hang(indent, body) = par(
-  hanging-indent: indent, first-line-indent: 0pt, leading: single-leading, justify: false, body,
-)
-
+/// Headings on the single pitch, bold, kept with their text. Level 1: centered capitals after its numeral ("I.");
+/// an unnumbered one (front and back matter) the same without it. Deeper levels: the label in a box at the level's
+/// indent, the later lines hanging after it.
 #let style-heading(it) = {
-  set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
-  set text(size: type-size)   // every heading is body size or larger
+  set text(size: type-size, weight: "bold", ..edges(pitch-single))
+  set par(first-line-indent: 0pt)
   if it.level == 1 {
-    // Section headings: bold capitals, centered. A numbered section keeps its Roman numeral.
-    block(width: 100%, sticky: true, above: 1.5em, below: 1.1em, align(center,
-      if it.numbering == none { strong(upper(it.body)) }
-      else { strong[#heading-label(it) #upper(it.body)] }))
-  } else if it.numbering == none {
-    block(width: 100%, sticky: true, above: 1.2em, below: 0.9em, strong(it.body))
+    block(width: 100%, above: h1-above, below: heading-below, sticky: true, align(center,
+      if it.numbering == none { upper(it.body) } else [#heading-label(it) #upper(it.body)]))
   } else {
-    // Sub-headings: the label sits in a fixed box, the text hangs under itself, bold.
-    let ind = (it.level - 1) * heading-tab
-    block(width: 100%, sticky: true, above: 1.1em, below: 0.9em, hang(ind + heading-tab, {
-      h(ind)
-      box(width: heading-tab, strong(heading-label(it)))
-      strong(it.body)
-    }))
+    let ind = (it.level - 2) * label-box
+    block(width: 100%, above: heading-above, below: heading-below, sticky: true,
+      par(hanging-indent: ind + label-box, [#h(ind)#box(width: label-box, heading-label(it))#it.body]))
   }
 }
 
@@ -161,44 +197,32 @@
 // Tables of contents and authorities (CAL-TOC-001, CAL-TOA-001)
 // ---------------------------------------------------------------------------
 
-#let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
-#let page-col = 2em   // the TOC's page-number column; wrapped title lines stop short of it
+#let page-label(loc) = numbering(loc.page-numbering(), ..counter(page).at(loc))
 
-/// A table row: `body` (ending in a dot leader) wraps in the left column; `pg` sits in its own
-/// right-hand column, level with the last line, so no wrapped line runs into the page numbers.
-#let leader-row(body, pg) = grid(
-  columns: (1fr, page-col), column-gutter: 0.3em,
-  body, align(right + bottom, pg),
-)
-
-/// One table-of-contents row, built from an outline entry. Wrapped lines hang under the title.
-#let toc-entry(it) = {
-  let hd = it.element
-  // Narrower steps than the body's: a deep entry must keep room for its page number on its first line.
-  let ind = if hd.level >= 2 { (hd.level - 1) * 0.35in } else { 0pt }
-  let lab = if hd.numbering != none { heading-label(hd) } else { none }
-  let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
-  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.7em } else { 0.4em }, below: 0pt,
-    leader-row(hang(ind + heading-tab, {
-      h(ind)
-      if lab != none { box(width: heading-tab, lab) }
-      title
-      h(0.3em)
-      dot-leader
-    }), it.page())))
+/// A table's title (an unnumbered level 1 heading, on a new page) and its column label at the right.
+#let table-head(title, col) = {
+  heading(level: 1, numbering: none, title)
+  sline(align: right, sticky: true, strong(underline(col)))
 }
 
-/// Contents: every outlined heading from the Issues to the certificates (the front matter and
-/// certificates are not listed).
+/// Contents: every outlined heading from the Issues to the conclusion (the front matter and certificates are not
+/// listed). A row: the label in a box at the level's indent, the title hanging after it, a leader to the page.
 #let toc-section() = {
-  heading(level: 1, numbering: none)[Table of Contents]
-  align(right, block(above: 0.3em, below: 0pt, strong(underline[Page])))
-  show outline.entry: toc-entry
-  outline(
-    title: none,
-    target: selector(heading.where(outlined: true)).after(<body-start>).before(<certs-start>),
-    depth: toc-depth, indent: 0pt,
-  )
+  table-head[Table of Contents][Page]
+  context {
+    set text(..edges(pitch-single))
+    let hs = query(selector(heading.where(outlined: true)).after(<body-start>).before(<certs-start>))
+    for hd in hs {
+      if hd.level > toc-depth { continue }
+      let ind = (hd.level - 1) * toc-step
+      let lab = if hd.numbering != none { heading-label(hd) } else { none }
+      let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
+      listing-row(hd.location(),
+        [#h(ind)#if lab != none { box(width: label-box, lab) }#title#h(lead-slack)],
+        page-label(hd.location()), toc-col, ind + if lab != none { label-box } else { 0pt },
+        if hd.level == 1 { toc-h1-gap } else { toc-row-gap })
+    }
+  }
 }
 
 #let toa-groups = (
@@ -210,185 +234,186 @@
   ("other", "Other Authorities:"),
 )
 
-#let sort-key(a) = {
-  let s = lower(plain(inl(a.at("sort", default: a.at("name", default: "") + " " + a.cite))))
-  s.replace(regex("[^a-z0-9 ]"), "")
-}
+/// Sort key of an authority: its `sort` field, else its name and citation, as lower-case letters, digits and spaces.
+#let sort-key(a) = lower(a.at("sort", default: a.at("name", default: "") + " " + a.cite)).replace(regex("[^a-z0-9 ]"), "")
 
-/// Table of authorities, built from the `toa:` links found in the body.
+/// Table of authorities, built from the `toa:` links found in the body. An authority with a name: the name (a case
+/// in italics) and a comma on its own line, then the citation toa-hang in with the leader and its pages; one without:
+/// the citation alone.
 #let toa-section(authorities) = {
-  heading(level: 1, numbering: none)[Table of Authorities]
+  table-head[Table of Authorities][Page(s)]
   context {
+    set text(..edges(pitch-single))
     let hits = query(<toa-hit>)
     for h in hits {
       if h.value not in authorities {
         panic("cal-petition: link `toa:" + h.value + "` has no entry under `authorities:` in the frontmatter")
       }
     }
-    let first = true
     for (kind, title) in toa-groups {
       let members = authorities.pairs()
         .filter(p => p.last().kind == kind and hits.any(h => h.value == p.first()))
         .sorted(key: p => sort-key(p.last()))
       if members.len() == 0 { continue }
-      block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
-        set par(first-line-indent: 0pt)
-        strong(title)
-        if first { h(1fr); strong(underline[Page(s)]) }
-      })
-      first = false
+      sline(above: toa-group-gap, sticky: true, strong(title))
       for (key, a) in members {
         // Distinct printed page numbers, in document order.
         let pages = ()
         for h in hits.filter(h => h.value == key) {
-          let loc = h.location()
-          let label = numbering(loc.page-numbering(), ..counter(page).at(loc))
+          let label = page-label(h.location())
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
-          if "name" in a {
-            if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
-            [,]
-            linebreak()
-          }
-          inl(a.cite)
-          h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
-        }))
+        let cite-above = toa-row-gap
+        if "name" in a {
+          sline(above: toa-row-gap, sticky: true, right: toa-col, hang: toa-hang,
+            [#if kind == "case" { emph(inl(a.name)) } else { inl(a.name) },])
+          cite-above = 0pt
+        }
+        pad(left: if "name" in a { toa-hang } else { 0pt },
+          listing-row(none, [#inl(a.cite)#h(lead-slack)], page-text, toa-col,
+            if "name" in a { 0pt } else { toa-hang }, cite-above))
       }
     }
   }
 }
 
 // ---------------------------------------------------------------------------
-// Cover (rules 8.504(b)(7), 8.74(a)(9), 8.74(c)(1); CAL-COVER-001 to -005)
+// Cover (rules 8.504(b)(7), 8.74(a)(9), 8.74(c)(1); CAL-CONT-001 to -004)
 // ---------------------------------------------------------------------------
 
-#let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
+#let short-rule = block(width: 100%, above: cover-gap, below: 0pt, align(center, line(length: rule-length, stroke: 0.7pt)))
 
-/// A left-aligned block set against the right margin: as wide as its widest line, at least half
-/// the text width, at most all of it. Used for the cover's counsel block and the signature block,
-/// so a long name or address line does not wrap in a column fixed at half the page.
-#let right-column(body) = layout(size => {
-  let natural = measure(body).width
-  let w = calc.min(calc.max(natural, size.width * 50%), size.width)
-  align(left, pad(left: size.width - w, block(width: w, align(left, body))))
-})
-
-#let cover-body(meta, gap) = {
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
-  set align(center)
-  v(gap * 0.6)
-  strong[No. #meta.at("supreme_court_case", default: "S__________")]
-  v(gap)
+#let cover-body(meta) = {
+  sline(align: center, strong[No. #meta.at("supreme_court_case", default: "S__________")])
   // Fixed court heading for this document type (not case text).
-  [In the Supreme Court of the State of California]
-  v(gap)
+  sline(above: cover-gap, align: center)[In the Supreme Court of the State of California]
   short-rule
-  v(gap)
   // Title and designation of the parties: identical to the Court of Appeal opinion (rule 8.504(b)(7)).
   let sides = need(meta, "caption")
   for (i, side) in sides.enumerate() {
-    for name in side.names { inl(name); parbreak() }
-    block(width: 100%, align(right, inl(side.designation)))
-    if i < sides.len() - 1 { v(gap * 0.3); [v.]; v(gap * 0.3) }
-  }
-  v(gap)
-  short-rule
-  v(gap)
-  // Court below: the Court of Appeal and trial court numbers and judge (rule 8.74(c)(1)).
-  inl(need(meta, "court_of_appeal"))
-  parbreak()
-  inl(need(meta, "trial_court"))
-  if "judge" in meta {
-    parbreak()
-    inl(meta.judge)
-  }
-  v(gap)
-  short-rule
-  v(gap)
-  strong[PETITION FOR REVIEW]
-  v(gap)
-  short-rule
-  v(gap)
-  // Attorneys filing the petition: name, State Bar number, address, telephone (rule 8.74(a)(9)),
-  // and the party they represent (rule 8.74(c)(1)).
-  right-column({
-    set par(hanging-indent: 0pt, spacing: 0.5em)
-    let groups = need(meta, "counsel")
-    for (gi, g) in groups.enumerate() {
-      block(breakable: false, {
-        for n in g.names { inl(n); linebreak() }
-        let lines = g.at("lines", default: ())
-        if gi == groups.len() - 1 { lines = lines + ("Telephone: " + need(meta, "phone"),) }
-        for l in lines { h(0.5em); inl(l); linebreak() }
-      })
+    for (k, name) in side.names.enumerate() {
+      sline(above: if k == 0 { cover-gap } else { 0pt }, align: center, name)
     }
-    emph(inl(need(meta, "represents")))
-  })
-  v(gap)
-  align(left, need(meta, "date"))
+    sline(align: right, side.designation)
+    if i < sides.len() - 1 { sline(above: cover-gap / 2, align: center)[v.] }
+  }
+  short-rule
+  // Court below: the Court of Appeal and trial court numbers and judge (rule 8.74(c)(1)).
+  sline(above: cover-gap, align: center, need(meta, "court_of_appeal"))
+  sline(align: center, need(meta, "trial_court"))
+  if "judge" in meta { sline(align: center, meta.judge) }
+  short-rule
+  sline(above: cover-gap, align: center, strong[PETITION FOR REVIEW])
+  short-rule
+  // Attorneys filing the petition: name, State Bar number, address, telephone (rule 8.74(a)(9)), and the party they
+  // represent (rule 8.74(c)(1)).
+  let groups = need(meta, "counsel")
+  for (gi, g) in groups.enumerate() {
+    let lines = g.names + g.at("lines", default: ())
+    if gi == groups.len() - 1 { lines.push("Telephone: " + need(meta, "phone")) }
+    for (k, l) in lines.enumerate() {
+      sline(above: if k == 0 { cover-gap } else { 0pt }, left: counsel-left, l)
+    }
+  }
+  sline(left: counsel-left, emph(inl(need(meta, "represents"))))
+  sline(above: cover-gap, need(meta, "date"))
 }
 
-/// The cover is one page. The spacing between its parts is the only thing that gives:
-/// the largest spacing at which the whole cover fits the page is used (the type size never shrinks).
-#let cover(meta) = page(numbering: none, footer: none, layout(size => {
+/// The cover is page 1, its number not shown (rule 8.204(b)(7)). It must fit one page: the type size never shrinks.
+#let cover(meta) = page(footer: none, {
   // Bookmark for the first page of the petition (rule 8.74(a)(3)); placed, so it takes no room and prints nothing.
   place(top + left, hide(heading(level: 1, numbering: none)[Petition for Review]))
-  let fits(g) = measure(block(width: size.width, cover-body(meta, g * 1em))).height <= size.height
-  let g = (1.0, 0.8, 0.6, 0.45, 0.3, 0.2, 0.1, 0.0).find(fits)
-  if g == none { panic("cal-petition: the cover does not fit on one page; shorten the counsel or party lines") }
-  cover-body(meta, g * 1em)
-}))
+  layout(size => {
+    if measure(block(width: size.width, cover-body(meta))).height > size.height {
+      panic("cal-petition: the cover does not fit on one page; shorten the counsel or party lines")
+    }
+  })
+  cover-body(meta)
+})
 
 // ---------------------------------------------------------------------------
-// Signature, certificates, proof of service (CAL-CERT-001 to -003)
+// Signature, certificates, proof of service (CAL-LEN-007, rule 8.25(a))
 // ---------------------------------------------------------------------------
 
+/// "Dated:" at the margin; from counsel-left "Respectfully submitted,", "/s/" and the signer, the signer in
+/// capitals, the lines (in italics). Single-spaced, kept on one page.
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  block(breakable: false, above: 1.4em, {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    [Dated: #need(meta, "date")]
-    v(1.2em)
-    right-column({
-      [Respectfully submitted,]
-      v(1.2em)
-      [/s/ #sig.signer]
-      linebreak()
-      upper(sig.signer)
-      for l in sig.at("lines", default: ()) { linebreak(); h(0.5em); emph(inl(l)) }
-    })
+  block(width: 100%, breakable: false, above: sig-above, below: 0pt, {
+    sline[Dated: #need(meta, "date")]
+    sline(above: sig-above, left: counsel-left)[Respectfully submitted,]
+    sline(above: signer-above, left: counsel-left)[/s/ #sig.signer]
+    sline(left: counsel-left, upper(sig.signer))
+    for l in sig.at("lines", default: ()) { sline(left: counsel-left, emph(inl(l))) }
   })
 }
 
-/// Certificate of compliance: font and word count (rule 8.504(d)(1), rule 8.204(c)(1)).
+/// Certificate of compliance: font and word count (rule 8.504(d)(1), rule 8.204(c)(1)). On a new page.
 #let certificate-of-compliance(meta, words) = {
+  pagebreak(weak: true)
   heading(level: 1, numbering: none)[Certificate of Compliance]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
-  [I certify that the attached PETITION FOR REVIEW uses a 13-point #font-named font and contains #group-digits(words) words.]
+  sline[I certify that the attached PETITION FOR REVIEW uses a 13-point #font-named font and contains #group-digits(words) words.]
   signature-block(meta)
 }
 
-/// Proof of service (rule 8.25(a)): each party and court served, the manner of service.
+/// Proof of service (rule 8.25(a)): each party and court served, the manner of service. On a new page.
 #let proof-of-service(meta) = {
+  pagebreak(weak: true)
   heading(level: 1, numbering: none)[Proof of Service]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
-  [I certify that the foregoing PETITION FOR REVIEW was electronically served on the following interested parties on #need(meta, "date"), in the manner described.]
+  sline[I certify that the foregoing PETITION FOR REVIEW was electronically served on the following interested parties on #need(meta, "date"), in the manner described.]
   for s in need(meta, "service") {
-    block(above: 0.9em, breakable: false, pad(left: 0.5in, {
-      set par(first-line-indent: 0pt, leading: single-leading, spacing: 0pt, justify: false)
-      inl(s.party)
-      for n in s.at("names", default: ()) { linebreak(); inl(n) }
-      for l in s.at("lines", default: ()) { linebreak(); inl(l) }
-      linebreak()
-      [#s.method]
-    }))
+    let lines = (s.party,) + s.at("names", default: ()) + s.at("lines", default: ()) + (s.method,)
+    block(width: 100%, breakable: false, above: service-gap, below: 0pt,
+      for l in lines { sline(left: service-indent, l) })
   }
   signature-block(meta)
+}
+
+// ---------------------------------------------------------------------------
+// The body, chunk by chunk
+// ---------------------------------------------------------------------------
+
+/// Each blank-line-separated chunk of the body is rendered alone with the definitions of the footnotes it refers to:
+/// a heading, a list item, a block quotation (each of its paragraphs single-spaced, quote-inset in on both sides) or
+/// a paragraph on the body pitch, its first line indented. A paragraph that anchors a footnote has no widow or orphan
+/// rule (docx: Body Text Note, Word's widow control off), so its line with the mark may move on with the note.
+/// The last chunk, a paragraph, is kept on one page with `tail` (the signature block), so the signature never
+/// stands alone (docx: Body Text Keep).
+#let petition-body(body, tail) = {
+  let notes = (:)
+  for m in body.matches(regex("(?m)^\\[\\^([^\\]]+)\\]:[ \\t]*(.*)$")) {
+    notes.insert(m.captures.at(0), m.captures.at(1))
+  }
+  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim()).filter(c => c != "")
+    .filter(c => not c.starts-with(regex("^\\[\\^[^\\]]+\\]:")))
+  for (i, t) in chunks.enumerate() {
+    let last = i == chunks.len() - 1
+    let defs = ""
+    for r in t.matches(regex("\\[\\^([^\\]]+)\\]")) {
+      let id = r.captures.at(0)
+      defs += "\n\n[^" + id + "]: " + notes.at(id, default: "")
+    }
+    if t.starts-with("#") {
+      render(t + defs)
+    } else if t.starts-with(">") {
+      let q = t.replace(regex("(?m)^>[ \\t]?"), "")
+      let ps = q.split(regex("\\n[ \\t]*\\n")).map(s => s.trim()).filter(s => s != "")
+      for (k, s) in ps.enumerate() {
+        sline(above: if k == 0 { quote-gap } else { 0pt }, below: if k == ps.len() - 1 { quote-gap } else { 0pt },
+          left: quote-inset, right: quote-inset, s + defs)
+      }
+    } else if t.starts-with(regex("([-*+]|[0-9]+[.)])[ \\t]")) {
+      render(t + defs)
+    } else {
+      set text(costs: (widow: 0%, orphan: 0%)) if defs != ""
+      let p = par(unloose(render(t + defs)))
+      if last { block(width: 100%, breakable: false, above: 0pt, below: 0pt, { p; tail }) } else { p }
+    }
+    if last and (t.starts-with("#") or t.starts-with(">") or t.starts-with(regex("([-*+]|[0-9]+[.)])[ \\t]"))) {
+      panic("cal-petition: the body must end with a paragraph (the conclusion), kept with the signature block")
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -425,39 +450,42 @@
   )
   set page(
     paper: "us-letter", margin: (x: margin-x, y: margin-y),
-    numbering: "1", number-align: center, footer-descent: 30%,
+    numbering: "1",
+    // centered at the foot (rule 8.204(b)(7)), in a single-pitch line box that ends footer-distance above the page edge
+    footer-descent: margin-y - footer-distance - pitch-single,
+    footer: context align(center, text(size: type-size, ..edges(pitch-single), counter(page).display())),
   )
-  set text(
-    font: font-family, size: type-size, lang: "en", region: "us",
-    hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
-  )
-  set par(
-    leading: body-leading, spacing: body-leading,
-    first-line-indent: (amount: para-indent, all: true), justify: false,
-  )
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right (rule 8.74(b)(4): not justified), no kerning, ligatures
+  // or hyphenation, line boxes of the body pitch, footnote marks at 58 %, a section sign kept with its number; list
+  // labels in a half-inch box at the margin.
+  show: xengine.with(pitch: pitch-body, list-indent: label-box)
+  // A doubled sign stays with its number too (xengine binds a single one).
+  show regex("[§¶]+ \\S+"): it => box(it)
+  // A web address breaks only after a slash before a letter (where the docx filter lets Word break it).
+  show regex("https?://\\S+"): it => {
+    let s = it.text
+    let (pieces, start) = ((), 0)
+    for m in s.matches(regex("/[^/\\d\\s]")) {
+      pieces.push(s.slice(start, m.start + 1))
+      start = m.start + 1
+    }
+    pieces.push(s.slice(start))
+    pieces.map(p => box(p)).join()
+  }
   set heading(numbering: heading-number)
-  set footnote.entry(
-    gap: 0.5em, clearance: 0.9em, indent: 0pt,
-    separator: line(length: 30%, stroke: 0.5pt),
-  )
+  show heading: style-heading
+  // Footnotes at 13 pt (rule 8.204(b)(4)), single-spaced: the mark, a space, the note (docx: Footnote Text).
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
   show footnote.entry: it => {
-    set text(size: type-size)   // typst's default is 0.85em; rule 8.204(b)(4) allows nothing under 13 pt
-    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em)
-    // marker, a thin space, then the note (typst's default runs them together)
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
-    [#super(num)#h(0.25em)#note.body]
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt) // the entry does not inherit the body's leading 0
+    [#super(num) #note.body]
   }
-  show quote.where(block: true): it => block(above: 1em, below: 1em, pad(left: para-indent, right: para-indent, {
-    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
-    it.body
-  }))
-  // Never break inside a token of adjacent parentheses ("60(b)(5)"), and never between a section
-  // sign / pilcrow and its number. Unbreakable boxes keep the extracted text the author's characters.
-  show regex("\\S*\\)\\(\\S*"): it => box(it)
-  show regex("[§¶] \\S+"): it => box(it)
-  show heading: style-heading
+  // Authority links print as text; a link whose target is `toa:KEY` is recorded on the page it starts on.
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {
       tag-after-first-word(it.body, [#metadata(it.dest.slice(4))<toa-hit>]).first()
@@ -475,13 +503,10 @@
 
   // ---- body ----
   [#metadata("body-start") <body-start>]
-  cmarker.render(md, raw-typst: false, smart-punctuation: true, h1-level: 1)
-  signature-block(meta)
+  petition-body(md, signature-block(meta))
 
   // ---- certificates and proof of service (rules 8.504(d)(1), 8.25(a)) ----
-  pagebreak(weak: true)
   [#metadata("certs-start") <certs-start>]
   certificate-of-compliance(meta, words)
-  pagebreak(weak: true)
   proof-of-service(meta)
 }
