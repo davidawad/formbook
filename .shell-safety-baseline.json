@@ -27,6 +27,9 @@
     "courts/fifth-circuit/texas/state/court-of-criminal-appeals/petition-for-discretionary-review/docx/build-reference.sh": 12,
     "courts/first-circuit/bankruptcy-appellate-panel/reply-brief/docx/build-reference.sh": 5,
     "courts/first-circuit/puerto-rico/federal/district/motion-brief/docx/make-reference.sh": 8,
+    "courts/supreme-court-of-the-united-states/amicus-brief/docx/build-reference.sh": 1,
+    "courts/supreme-court-of-the-united-states/cert-petition/docx/build-reference.sh": 1,
+    "courts/supreme-court-of-the-united-states/merits-brief/docx/build-reference.sh": 1,
     "tools/check/_lib/lib-helpers.sh": 97,
     "tools/check/lib.sh": 147,
     "tools/gen_tree.sh": 8
