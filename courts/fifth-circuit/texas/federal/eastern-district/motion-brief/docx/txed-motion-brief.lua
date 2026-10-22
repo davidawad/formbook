@@ -1,31 +1,43 @@
--- txed-motion-brief.lua (docx engine): what the Word output adds to pandoc's default conversion, so that the
--- .docx follows ../typst/txed-motion-brief.typ (see ../README.md, "Engines"):
---   * the cover: court lines, the caption (parties on the left, case number and oral-argument line on the right),
---     and the title of the paper, from the sample's frontmatter (no case text here);
---   * level-1 headings labelled I., II., ... (the statement of the issues is numbered too, as in the typst
---     template); level-2 headings labelled A., B., ... and restarted under each level-1 heading; level-3
---     headings are unlabelled bold italic run-in lines (pandoc's Heading 3 style, set in reference.docx);
---   * the relief list lettered a., b., ... with a hanging indent;
---   * the signature block, then the certificate of service (date and method from the frontmatter).
--- Footnotes are pandoc's native footnotes (Footnote Text style, single spaced, from reference.docx).
--- The excerpt flag and the 30-page check are typst-only (see ../README.md).
+-- txed-motion-brief.lua (docx engine): what the Word output adds to pandoc's conversion, so that it reads and breaks
+-- as typst/txed-motion-brief.typ does (see ../README.md, "Engines"): the court lines, the caption (parties on the
+-- left, the case number and the bold line under it at the foot of the right column) and the title of the paper;
+-- level-1 headings labelled I., II., ... and level-2 headings A., B., ... (restarting under each level-1 heading),
+-- level-3 headings bold italic; quotations; lists lettered a., b., ...; the signature block at the right half of the
+-- page, then the certificate of service (CV-5(c): date and method from the frontmatter). The statement of the issues
+-- (CV-7(a)(1)) is required unless the sample is an excerpt, as the typst template requires it; the 30-page check is
+-- typst's. Everything printed comes from the sample's frontmatter and body: no case text lives in this file. The
+-- caption is an OOXML table.
+--
+-- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
+-- exact line boxes of the typst pitch (twips = 20 x pt: 552 the double-spaced body, 276 a single line), the spaces
+-- between blocks those of the typst template, and the break rules of typst on every run. Body paragraphs and
+-- quotations are pandoc's own (styles in docx/reference.xml), so that their footnotes are Word footnotes.
 
+local xe = require("docx.xengine")
+
+local BODY, SINGLE = 552, 276            -- typst pitch-double, pitch-single
+local TEXTW = 9360                       -- 6.5 in
+local CAP_RIGHT, CAP_GUTTER = 3744, 360  -- typst caption-right 2.6 in, caption-gutter 0.25 in
+local DESIG = 2160                       -- typst designation-indent 1.5 in
+local SIG = 4320                         -- typst signature-indent 3 in
 local TAB = pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>")
 
-local function styled(style, content)
-  return pandoc.Div({ pandoc.Para(content) }, { ["custom-style"] = style })
+local function plain(m)
+  if m == nil then return "" end
+  if type(m) == "string" then return m end
+  return pandoc.utils.stringify(m)
 end
 
--- An empty paragraph in a named style. pandoc drops empty styled paragraphs, so it is written as raw OOXML.
-local function gap(style)
-  return pandoc.RawBlock("openxml", "<w:p><w:pPr><w:pStyle w:val=\"" .. style .. "\" /></w:pPr></w:p>")
-end
-
-local function concat(a, b)
-  local out = pandoc.Inlines({})
-  for _, x in ipairs(a) do out:insert(x) end
-  for _, x in ipairs(b) do out:insert(x) end
-  return out
+-- A paragraph: o = { before, after, line, left, jc, keep, lines, style }.
+local function p(body, o)
+  o = o or {}
+  local props = {}
+  if o.style then props[#props + 1] = xe.style(o.style) end
+  if o.keep then props[#props + 1] = xe.KEEP elseif o.lines then props[#props + 1] = xe.LINES end
+  props[#props + 1] = xe.spacing(o.before or 0, o.after or 0, o.line or SINGLE)
+  props[#props + 1] = xe.ind(o.left or 0, nil, 0)
+  props[#props + 1] = xe.jc(o.jc or "left")
+  return xe.para(props, body)
 end
 
 local function roman(n)
@@ -39,112 +51,184 @@ local function roman(n)
   return out
 end
 
--- Cover: the court lines, a gap, the caption table, the title of the paper.
-local function cover(meta)
-  local blocks = {}
-  for _, line in ipairs(meta.court or {}) do
-    table.insert(blocks, styled("Court Title", line))
-  end
-  table.insert(blocks, gap("BlockGap"))
-
-  local left, right = {}, {}
-  for k, p in ipairs(meta.caption or {}) do
-    if k > 1 then table.insert(left, styled("Caption Line", { pandoc.Str("v.") })) end
-    for _, n in ipairs(p.names) do table.insert(left, styled("Caption Line", n)) end
-    table.insert(left, styled("Caption Designation", p.designation))
-  end
-  -- The case number and the jury line sit at the foot of the caption, as in the typst template (bottom-aligned
-  -- there). A pandoc table cell cannot be bottom-aligned, so the right column is padded with empty lines.
-  table.insert(right, styled("Caption Line", meta.case_number))
-  if meta.jury_demand then
-    table.insert(right, gap("CaptionLine"))
-    table.insert(right, styled("Caption Line", { pandoc.Strong(meta.jury_demand) }))
-  end
-  for _ = 1, #left - #right do table.insert(right, 1, gap("CaptionLine")) end
-
-  -- Column proportions of the typst caption (3.65 in, 0.25 in gutter, 2.6 in on 6.5 in); pandoc sizes them as
-  -- fractions of the table width (5000 pct), so they are not twips.
-  local caption = pandoc.Table(
-    pandoc.Caption(),
-    { { pandoc.AlignDefault, 0.5615 }, { pandoc.AlignDefault, 0.0385 }, { pandoc.AlignDefault, 0.4 } },
-    pandoc.TableHead({}),
-    { { attr = pandoc.Attr(), head = {}, body = { pandoc.Row({ pandoc.Cell(left), pandoc.Cell({}), pandoc.Cell(right) }) }, row_head_columns = 0 } },
-    pandoc.TableFoot({})
-  )
-  table.insert(blocks, caption)
-  table.insert(blocks, styled("Title of Paper", meta.brief_title))
-  return blocks
+local function upper(ils)
+  return ils:walk({ Str = function(s) return pandoc.Str(pandoc.text.upper(s.text)) end })
 end
 
--- Signature block (CV-10(a)(3)): the firm, the signer, the bar and contact lines, the role.
-local function signature(sig)
-  local blocks = {}
-  local function line(content) table.insert(blocks, styled("Signature Block", content)) end
-  local function sig_gap() table.insert(blocks, gap("SignatureGap")) end
-  line({ pandoc.Str("Respectfully submitted,") })
-  sig_gap()
-  for _, l in ipairs(sig.firm or {}) do line(l) end
-  sig_gap()
-  line(concat({ pandoc.Str("/s/"), pandoc.Space() }, sig.signer))
-  line(sig.signer)
-  for _, l in ipairs(sig.lines or {}) do line(l) end
-  sig_gap()
-  line(sig.role)
-  return blocks
-end
-
--- Certificate of service (CV-5(c)): the date and the method, from the frontmatter.
-local function certificate(service)
-  local blocks = {}
-  table.insert(blocks, styled("Certificate Heading", { pandoc.Str("CERTIFICATE OF SERVICE") }))
-  table.insert(blocks, pandoc.Para({
-    pandoc.Str("I hereby certify that on " .. pandoc.utils.stringify(service.date) .. ", the foregoing document was served on all counsel of record " .. pandoc.utils.stringify(service.method) .. "."),
-  }))
-  return blocks
-end
-
--- Body: level-1 headings get I., II., ...; level-2 headings get A., B., ... (restarting under each level-1
--- heading); a bulleted list is lettered a., b., ... with a hanging indent.
-local function body(blocks)
-  local out = {}
-  local sections, subsections = 0, 0
-  for _, b in ipairs(blocks) do
-    if b.t == "Header" and b.level == 1 then
-      sections = sections + 1
-      subsections = 0
-      table.insert(b.content, 1, pandoc.Space())
-      table.insert(b.content, 1, pandoc.Str(roman(sections) .. "."))
-      table.insert(out, b)
-    elseif b.t == "Header" and b.level == 2 then
-      subsections = subsections + 1
-      table.insert(b.content, 1, pandoc.Space())
-      table.insert(b.content, 1, pandoc.Str(string.char(64 + subsections) .. "."))
-      table.insert(out, b)
-    elseif b.t == "BulletList" then
-      for i, item in ipairs(b.content) do
-        local first = item[1]
-        local inl = pandoc.Inlines({ pandoc.Str(string.char(96 + i) .. "."), TAB })
-        if first and (first.t == "Plain" or first.t == "Para") then
-          inl = concat(inl, first.content)
-        end
-        table.insert(out, styled("Lettered Item", inl))
-        for j = 2, #item do table.insert(out, item[j]) end
-      end
-    else
-      table.insert(out, b)
+-- A doubled section or paragraph sign stays with its number ("¶¶ 92"), as typst boxes it.
+local function signs(ils)
+  for i = 1, #ils - 1 do
+    if ils[i].t == "Str" and ils[i].text:match("^[\u{00A7}\u{00B6}][\u{00A7}\u{00B6}]+$") and ils[i + 1].t == "Space" then
+      ils[i + 1] = pandoc.Str("\u{00A0}")
     end
   end
+  return ils
+end
+
+-- typst's break opportunities that LibreOffice does not share: none inside ")(" (a word joiner), one after a
+-- slash before a letter (a zero-width space). Neither shows in the PDF text.
+local function brk(t)
+  return (t:gsub("%)%(", ")\u{2060}("):gsub("/([^%d])", "/\u{200B}%1"))
+end
+local function breaks(s) return pandoc.Str(brk(s.text)) end
+
+-- A frontmatter value as inlines, with the body's break rules (xe.inl applies the shared ones itself).
+local function mi(v)
+  return signs(pandoc.Inlines(v)):walk({ Str = breaks })
+end
+
+-- ---------------------------------------------------------------------------
+-- Cover: court lines, caption, title of the paper
+-- ---------------------------------------------------------------------------
+
+local function cover(meta)
+  local out = {}
+  local court = meta.court or {}
+  -- the caption stands a double line below the court (typst: the caption block's above); Word has no space before
+  -- a table, so the last court line takes it as space after
+  for i, l in ipairs(court) do
+    out[#out + 1] = p(xe.inl(upper(mi(l)), { b = true }), { jc = "center", after = i == #court and BODY or 0 })
+  end
+  -- Left cell: each party's names, then its designation, indented; "v." between the parties.
+  local left = {}
+  for k, party in ipairs(meta.caption) do
+    if k > 1 then left[#left + 1] = p(xe.runs("v.")) end
+    for _, n in ipairs(party.names) do left[#left + 1] = p(xe.inl(mi(n))) end
+    left[#left + 1] = p(xe.inl(mi(party.designation)), { left = DESIG })
+  end
+  -- Right cell, at the foot of the row (typst: align(bottom)): the case number, the bold line a single line below.
+  local right = { p(xe.inl(mi(meta.case_number))) }
+  if meta.jury_demand then right[#right + 1] = p(xe.inl(mi(meta.jury_demand), { b = true }), { before = SINGLE }) end
+  local capl = TEXTW - CAP_RIGHT - CAP_GUTTER
+  out[#out + 1] = '<w:tbl><w:tblPr><w:tblW w:w="' .. TEXTW .. '" w:type="dxa"/><w:tblLayout w:type="fixed"/>' ..
+    '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/>' ..
+    '<w:right w:w="0" w:type="dxa"/></w:tblCellMar>' ..
+    '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="0"/></w:tblPr>' ..
+    '<w:tblGrid><w:gridCol w:w="' .. capl .. '"/><w:gridCol w:w="' .. (TEXTW - capl) .. '"/></w:tblGrid>' ..
+    '<w:tr><w:trPr><w:cantSplit/></w:trPr>' ..
+    '<w:tc><w:tcPr><w:tcW w:w="' .. capl .. '" w:type="dxa"/></w:tcPr>' .. table.concat(left) .. '</w:tc>' ..
+    '<w:tc><w:tcPr><w:tcW w:w="' .. (TEXTW - capl) .. '" w:type="dxa"/><w:tcMar><w:left w:w="' .. CAP_GUTTER ..
+    '" w:type="dxa"/></w:tcMar><w:vAlign w:val="bottom"/></w:tcPr>' .. table.concat(right) .. '</w:tc></w:tr></w:tbl>'
+  -- The title (CV-10(a)(2)): bold capitals, centered, single spaced, a double line below the caption (as space
+  -- before: Word has no space after a table); the text follows on its grid.
+  out[#out + 1] = p(xe.inl(upper(mi(meta.brief_title)), { b = true }), { jc = "center", before = BODY, keep = true })
   return out
+end
+
+-- ---------------------------------------------------------------------------
+-- Signature block (CV-10(a)(3)) at 3 in, single spaced, a double line below the text, kept on one page (each line
+-- kept with the next, as the typst block is unbreakable); the certificate of service (CV-5(c)) a double line below
+-- it, its heading kept with its statement.
+-- ---------------------------------------------------------------------------
+
+local function signature(sig)
+  local lines = {}
+  local function add(body, before) lines[#lines + 1] = { body, before or 0 } end
+  add(xe.runs("Respectfully submitted,"), BODY)
+  for i, l in ipairs(sig.firm or {}) do add(xe.inl(mi(l)), i == 1 and SINGLE or 0) end
+  add(xe.runs("/s/ ") .. xe.inl(mi(sig.signer)), SINGLE)
+  add(xe.inl(mi(sig.signer)))
+  for _, l in ipairs(sig.lines or {}) do add(xe.inl(mi(l))) end
+  add(xe.inl(mi(sig.role)), SINGLE)
+  local out = {}
+  for i, l in ipairs(lines) do
+    out[#out + 1] = p(l[1], { left = SIG, before = l[2], keep = i < #lines })
+  end
+  return table.concat(out)
+end
+
+local function certificate(service)
+  local text = xe.runs("I hereby certify that on ") .. xe.inl(mi(service.date)) ..
+    xe.runs(", the foregoing document was served on all counsel of record ") .. xe.inl(mi(service.method)) .. xe.runs(".")
+  return p(xe.runs("CERTIFICATE OF SERVICE", { b = true }), { jc = "center", before = BODY, line = BODY, keep = true }) ..
+    p(text, { line = BODY, lines = true })
+end
+
+-- ---------------------------------------------------------------------------
+-- The body
+-- ---------------------------------------------------------------------------
+
+-- A paragraph in its style (pandoc writes it, footnotes included); the Noted variant (no widow control) for a
+-- paragraph that holds a footnote: typst moves the line with the reference on with its note.
+local function div(style, ils, noteable)
+  local noted = false
+  pandoc.Inlines(ils):walk({ Note = function() noted = true end })
+  return pandoc.Div({ pandoc.Para(ils) }, { ["custom-style"] = style .. ((noted and noteable ~= false) and " Noted" or "") })
+end
+
+-- Headings at the body pitch, bold, kept with the text.
+local function heading(el, label)
+  local ils = pandoc.Inlines({})
+  if label then ils:extend({ pandoc.Str(label), pandoc.Space() }) end
+  ils:extend(el.level == 1 and upper(el.content) or el.content)
+  local lvl = math.min(el.level, 3)
+  return xe.para({ xe.style("Heading" .. lvl), xe.KEEP, xe.spacing(0, 0, BODY), xe.ind(0, nil, 0),
+    xe.jc(lvl == 1 and "center" or "left") }, xe.inl(ils, { b = true, i = lvl == 3 }))
+end
+
+local function item_inlines(item)
+  if #item ~= 1 or (item[1].t ~= "Plain" and item[1].t ~= "Para") then
+    error("txed-motion-brief.lua: a list item holds one paragraph")
+  end
+  return item[1].content
 end
 
 function Pandoc(doc)
   local meta = doc.meta
-  local blocks = cover(meta)
-  for _, b in ipairs(body(doc.blocks)) do table.insert(blocks, b) end
-  for _, b in ipairs(signature(meta.signature or {})) do table.insert(blocks, b) end
-  if meta.service then
-    for _, b in ipairs(certificate(meta.service)) do table.insert(blocks, b) end
+  local excerpt = meta.excerpt == true or plain(meta.excerpt) == "true"
+  if not excerpt and not plain(doc.blocks):lower():find("statement of the issue", 1, true) then
+    error("txed-motion-brief.lua: CV-7(a)(1) requires a statement of the issues to be decided (a level-1 heading 'Statement of the Issue(s)')")
   end
-  doc.blocks = blocks
-  return doc
+  doc.blocks = doc.blocks:walk({ Inlines = function(ils) return signs(xe.inlines(ils)) end })
+  doc.blocks = doc.blocks:walk({ Str = breaks })
+  local out = {}
+  for _, x in ipairs(cover(meta)) do out[#out + 1] = xe.raw(x) end
+  local sections, subsections = 0, 0
+  -- typst indents a paragraph only after a paragraph (not after the title, a heading, a quotation or a list)
+  local after_para = false
+  for _, b in ipairs(doc.blocks) do
+    local para = false
+    if b.t == "Header" then
+      local label = nil
+      if b.level == 1 then
+        sections, subsections = sections + 1, 0
+        label = roman(sections) .. "."
+      elseif b.level == 2 then
+        subsections = subsections + 1
+        label = string.char(64 + subsections) .. "."
+      end
+      out[#out + 1] = xe.raw(heading(b, label))
+    elseif b.t == "Para" or b.t == "Plain" then
+      out[#out + 1] = div(after_para and "Body Text" or "First Paragraph", b.content)
+      para = true
+    elseif b.t == "BlockQuote" then
+      -- single spaced, half an inch in from both margins, a single line above and below the quotation
+      local n = #b.content
+      for j, q in ipairs(b.content) do
+        if q.t ~= "Para" and q.t ~= "Plain" then error("txed-motion-brief.lua: a quotation holds only paragraphs") end
+        if n == 1 then
+          -- (widow control stays on: typst keeps a short quotation whole, its footnote too)
+          out[#out + 1] = div("Block Text", q.content, false)
+        else
+          out[#out + 1] = div(j == 1 and "Block Text First" or j == n and "Block Text Last" or "Block Text Middle",
+            q.content, false)
+        end
+      end
+    elseif b.t == "OrderedList" then
+      -- typst sets a numbered list as the layout model does: the number in a half-inch box, the text hanging
+      for _, x in ipairs(xe.list_items(b)) do out[#out + 1] = x end
+    elseif b.t == "BulletList" then
+      for i, item in ipairs(b.content) do
+        local ils = pandoc.Inlines({ pandoc.Str(string.char(96 + i) .. "."), TAB })
+        ils:extend(item_inlines(item))
+        out[#out + 1] = div("Lettered Item", ils)
+      end
+    else
+      error("txed-motion-brief.lua: unsupported block " .. b.t)
+    end
+    after_para = para
+  end
+  out[#out + 1] = xe.raw(signature(meta.signature))
+  if meta.service then out[#out + 1] = xe.raw(certificate(meta.service)) end
+  return pandoc.Pandoc(out, pandoc.Meta({}))
 end
