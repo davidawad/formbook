@@ -1,3 +1,9 @@
-#import "oklacrimapp-answering-brief.typ": render
+// Entrypoint. Compile with the doc-type folder as --root; tools/render.sh does it:
+//   typst compile --root <doctype-dir> --font-path <repo>/fonts --ignore-system-fonts \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
+//     typst/main.typ out.pdf
+#import "oklacrimapp-answering-brief.typ": render-brief, split-frontmatter
+
 #let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answering-brief.md"))
-#render(src)
+#let (meta, body) = split-frontmatter(src)
+#render-brief(meta, body)

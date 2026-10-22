@@ -1,0 +1,50 @@
+# Court of Criminal Appeals of Oklahoma (oklacrimapp): answering brief (the State's response). The whole layout, as
+# data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). The OCCA rules were not retrieved (../../rules.md): the numbers are the default
+# tier-1 set (data/checks-default.yaml: US letter, one-inch margins, at least 12 pt) and the form the filed response
+# (usage/FILED-EXAMPLE-answering-brief.pdf, ../../rules.md EX-ANSWER) sets. Lengths in points. No case text here:
+# every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # EX-ANSWER: 13-point body text (above the 12-point default floor)
+pitch:
+  body: 29.9              # EX-ANSWER: double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # cover, headings, tables, quotations, footnotes: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # default tier 1: one-inch margins
+indent: 36                # EX-ANSWER: paragraphs indented half an inch
+page_number: {align: center, front: lower-roman}     # the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
+footnote: {size: 12, gap: 7}                         # EX-ANSWER: footnotes 12-point, single spaced
+quote: {left: 36, right: 36, above: 18.2, below: 18.2, gap: 15.6}   # EX-ANSWER: block quotations single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 25.2, below: 18}
+  - {bold: true, hang: 36, above: 21.6, below: 14.4}
+  - {bold: true, italic: true, hang: 36, above: 18, below: 14.4}
+  - {italic: true, hang: 36, above: 18, below: 14.4}
+# The cover (EX-ANSWER): the case number, the court between rules, the parties, the proceeding and cause below, the
+# title between rules, counsel at the right.
+cover:
+  - {text: "No. {case_number}", align: center}
+  - {rule: 0.75, above: 10.8}
+  - {text: "IN THE COURT OF CRIMINAL APPEALS", align: center, bold: true, above: 7.2}
+  - {text: "FOR THE STATE OF OKLAHOMA", align: center, bold: true}
+  - {rule: 0.75, above: 7.2}
+  - {text: "{caption}", align: center, bold: true, optional: true, above: 10.8}
+  - {text: "{appellant}", align: center, bold: true, upper: true, above: 10.8}
+  - {text: "Appellant,", align: center}
+  - {text: "v.", align: center, above: 7.2}
+  - {text: "{appellee}", align: center, bold: true, upper: true, above: 7.2}
+  - {text: "Appellee.", align: center}
+  - {rule: 0.75, above: 10.8}
+  - {text: "{proceeding}", align: center, above: 7.2}
+  - {text: "Case No. {trial_cause}", align: center}
+  - {text: "{trial_judge}, Presiding", align: center, optional: true}
+  - {rule: 0.75, above: 7.2}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 10.8}
+  - {rule: 0.75, above: 10.8}
+  - {text: "{counsel}", left: 216, above: 72}
+# The table of contents (headings to the third level) and the index of authorities, each on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 28.8, step: 28.8, above: 8.6}
+authorities:
+  title: "Index of Authorities"
+  col: 56
+  hang: 18
+  above: 14.4
+  group: {bold: true, upper: true, above: 23.4, below: 14.4}

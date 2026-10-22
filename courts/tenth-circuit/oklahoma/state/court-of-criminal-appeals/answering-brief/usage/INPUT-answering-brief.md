@@ -35,8 +35,6 @@ signer: "Caroline E.J. Hunt"
 authorities: []
 ---
 
-{{contents}}
-
 On July 9, 2020, the United States Supreme Court in McGirt v. Oklahoma, 140 S. Ct. 2452 (2020), held that, for purposes of the Major Crimes Act (18 U.S.C. § 1153), the Creek Nation’s Reservation has not been disestablished. The Court also affirmed the Tenth Circuit’s decision in Murphy v. Royal, 875 F.3d 896 (10th Cir. 2017), for the reasons stated in McGirt. Sharp v. Murphy, 140 S. Ct. 2412 (2020). On July 16, 2020, this Court granted the State’s request to file a response to Petitioner’s claim, in Proposition I of this successive post-conviction application, that the State lacked jurisdiction in his case pursuant to 18 U.S.C. §§ 1151-1153. Successive Application for Post-Conviction Relief – Death Penalty (hereinafter, “App.”) at 15-33. Specifically, Petitioner alleges that jurisdiction over his crimes rests exclusively in the federal courts because his victims were members of the Chickasaw Tribe and he murdered his victims within the undiminished boundaries of the original Chickasaw Reservation. App. at 17-32.
 
 Pursuant to this Court’s July 16, 2020, order, the State hereby files its Response to Petitioner’s jurisdictional claim. Given the numerous cases before this Court and Oklahoma district courts potentially affected by McGirt, in this Response the State both seeks clarification from this Court on a number of issues left unsettled by McGirt relevant to both this case and others, and offers affirmative arguments for the denial of relief in this case. In Part I, the State offers a brief procedural history of this case. In Parts II-V, the State addresses questions undecided by McGirt, including how Indian status is determined for Indian Country jurisdictional claims, which party bears the burden of proof as to such claims, whether the State has concurrent jurisdiction over crimes committed by non-Indians against Indians, and whether an evidentiary hearing is necessary where a reservation of any other Tribe besides the Creek’s is involved. The State further takes the position that the State does have concurrent jurisdiction over crimes committed by non- Indians against Indians, such that trial court had jurisdiction in this case. Finally, in Part VI, the State urges this Court to procedurally bar Petitioner’s jurisdictional claim and deny relief.
@@ -45,7 +43,7 @@ Before proceeding to Part I, an initial matter requires addressing. Although the
 
 # I. Procedural History
 
-Shaun Michael Bosse, hereinafter “Petitioner,” was convicted by a jury for Counts 1-3: First Degree Malice Aforethought Murder, in violation of 21 O.S.Supp.2009, § 701.7(A); and Count 4: First Degree Arson, in violation of 21 O.S.2001, § 1401(A), in McClain County District Court, Case No. CF-2010-213, before the Honorable Greg Dixon, District Judge. The jury found the existence of three aggravating circumstances for each murder count, namely: (1) during the commission of each murder, the defendant knowingly created a great risk of death to more than one person; (2) each murder was especially heinous, atrocious or cruel; and (3) each murder was committed for the purpose of avoiding or preventing a lawful arrest or prosecution. The jury sentenced Petitioner to Count 1 (murder of Katrina Griffin): death; Count 2 (murder of C.G.): death; Count 3 (murder of C.H): death; Count 4 (arson): 35 years imprisonment and a $25,000.00 fine. On December 18, 2012, the trial court sentenced Petitioner in accordance with the jury’s verdicts and ran the sentences for all four counts consecutively.
+Shaun Michael Bosse, hereinafter “Petitioner,” was convicted by a jury for Counts 1-3: First Degree Malice Aforethought Murder, in violation of 21 O.S.Supp.2009, § 701.7(A); and Count 4: First Degree Arson, in violation of 21 O.S.2001, § 1401(A), in McClain County District Court, Case No. CF-2010-213, before the Honorable Greg Dixon, District Judge. The jury found the existence of three aggravating circumstances for each murder count, namely: (1) during the commission of each murder, the defendant knowingly created a great risk of death to more than one person; (2) each murder was especially heinous, atrocious or cruel; and (3) each murder was committed for the purpose of avoiding or preventing a lawful arrest or prosecution. The jury sentenced Petitioner to Count 1 (murder of Katrina Griffin): death; Count 2 (murder of C.G.): death; Count 3 (murder of C.H): death; Count 4 (arson): 35 years imprisonment and a \$25,000.00 fine. On December 18, 2012, the trial court sentenced Petitioner in accordance with the jury’s verdicts and ran the sentences for all four counts consecutively.
 
 On October 16, 2015, this Court affirmed the judgment and sentence on direct appeal. Bosse v. State, 2015 OK CR 14, 360 P.3d 1203. The United States Supreme Court granted certiorari review and reversed, however, finding that certain victim impact testimony admitted in Petitioner’s penalty phase violated the Eighth Amendment. Bosse v. Oklahoma, 137 S. Ct. 1, 2-3 (2016). On remand, this Court again affirmed the judgment and sentence on May 25, 2017, finding the victim impact testimony in question was harmless beyond a reasonable doubt. Bosse v. State, 2017 OK CR 10, ¶¶ 56-63, 400 P.3d 834, 855-57, adhered to on reh’g, 2017 OK CR 19, 406 P.3d 26. This Court also denied Petitioner’s first application for post-conviction relief. Bosse v. State, No. PCD-2013-360 (Okl. Cr. App. Dec. 16, 2015).
 
@@ -77,7 +75,7 @@ to defer to the tribe to determine whether that individual is a member. Oakley, 
 
 For these reasons, this Court should not adopt the fact-intensive inquiry created by other courts, which have relied on four factors, in declining order of significance:
 
-1) enrollment in a tribe; 2) government recognition formally and informally through
+1\) enrollment in a tribe; 2) government recognition formally and informally through
 
 providing the person assistance reserved only to Indians; 3) enjoying benefits of
 
@@ -215,7 +213,7 @@ Court of Criminal Appeals may not consider the merits of or grant relief based o
 
 the subsequent or untimely original application unless:
 
-a. the application contains claims and issues that have not been and could
+a\. the application contains claims and issues that have not been and could
 
 not have been presented previously in a timely original application or in a
 
@@ -223,7 +221,7 @@ previously considered application filed under this section, because the legal
 
 basis for the claim was unavailable, or
 
-b. (1) the application contains sufficient specific facts establishing that the
+b\. (1) the application contains sufficient specific facts establishing that the
 
 current claims and issues have not and could not have been presented
 
@@ -235,7 +233,7 @@ was unavailable as it was not ascertainable through the exercise of
 
 reasonable diligence on or before that date, and
 
-(2) the facts underlying the claim, if proven and viewed in light of the
+\(2) the facts underlying the claim, if proven and viewed in light of the
 
 evidence as a whole, would be sufficient to establish by clear and
 
@@ -247,19 +245,19 @@ have rendered the penalty of death. 22 O.S.2011, § 1089(D)(8).
 
 Below, Respondent demonstrates that, first, Petitioner has made no showing that his jurisdictional claim falls within any of the above-quoted exceptions in § 1089(D)(8) that would allow its consideration in this successive post-conviction proceeding. Second, while Petitioner suggests—and this Court’s cases at times has supported—that his claim need not meet the requirements of § 1089(D)(8) because it is a challenge to the trial court’s subject matter jurisdiction, App at 16-17, this argument contravenes legislative intent and should be rejected by this Court.
 
-i. Petitioner cannot meet the requirements of § 1089(D)(8) for a successive capital
+i\. Petitioner cannot meet the requirements of § 1089(D)(8) for a successive capital
 
 post-conviction application
 
 Petitioner’s jurisdictional claim is barred by § 1089(D)(8). To begin with, as to § 1089(D)(8)(a), Petitioner cannot show that the legal basis of this claim was previously unavailable. Section 1089 explains that “a legal basis of a claim is unavailable on or before a date described by this subsection if the legal basis”:
 
-a. was not recognized by or could not have been reasonably formulated from a final
+a\. was not recognized by or could not have been reasonably formulated from a final
 
 decision of the United States Supreme Court, a court of appeals of the United States,
 
 or a court of appellate jurisdiction of this state on or before that date, or
 
-b. is a new rule of constitutional law that was given retroactive effect by the United
+b\. is a new rule of constitutional law that was given retroactive effect by the United
 
 States Supreme Court or a court of appellate jurisdiction of this state and had not
 
@@ -277,7 +275,7 @@ Second, in addition to satisfying § 1089(D)(8)(b)(1)—which he has not done—
 
 For all of the above reasons, Petitioner has not demonstrated that he can meet the provisions of either § 1089(D)(8)(a) or § 1089(D)(8)(b). Accordingly, his jurisdictional claim cannot be considered in this second post-conviction proceeding.
 
-ii. Petitioner’s challenge to jurisdiction should not allow him to escape the
+ii\. Petitioner’s challenge to jurisdiction should not allow him to escape the
 
 provisions of § 1089(D)(8)
 
@@ -291,7 +289,7 @@ Neither Wackerly nor Murphy appeared to consider whether this Court’s general 
 
 The Oklahoma Legislature’s amendments to § 1089 to add the restrictions on successive capital post-conviction applications were effective on November 1, 1995. Importantly, this followed just months after Congress’s enactment of the Antiterrorism and Effective Death Penalty Act of 1996 (“AEDPA”), which was effective on April 24, 1996. AEDPA, PL 104–132, April 24, 1996, 110 Stat 1214. In pertinent part, the AEDPA implemented strict requirements for the filing of second or successive federal habeas petitions challenging state court convictions:
 
-(b) LIMITS ON SECOND OR SUCCESSIVE APPLICATIONS.—Section
+\(b) LIMITS ON SECOND OR SUCCESSIVE APPLICATIONS.—Section
 
 2244(b) of title 28, United States Code, is amended to read as follows:
 
@@ -353,13 +351,13 @@ section, because the factual or legal basis for the claim was unavailable.
 
 a date described by this subsection if the legal basis:
 
-a. was not recognized by or could not have been reasonably formulated from
+a\. was not recognized by or could not have been reasonably formulated from
 
 a final decision of the United States Supreme Court, a court of appeals of the United
 
 States, or a court of appellate jurisdiction of this state on or before that date, or
 
-b. is a new rule of constitutional law that was given retroactive effect by the
+b\. is a new rule of constitutional law that was given retroactive effect by the
 
 United States Supreme Court or a court of appellate jurisdiction of this state and
 
@@ -371,7 +369,7 @@ or before a date described by this subsection if the factual basis was not
 
 ascertainable through the exercise of reasonable diligence on or before that date. CRIMINAL PROCEDURE—DEATH SENTENCE—EXECUTION OF JUDGMENT—POST– CONVICTION RELIEF, 1995 Okla. Sess. Law Serv. Ch. 256 (H.B. 1659) (WEST). Then, in 2004, the Oklahoma Legislature amended § 1089 again, conforming it even more closely to § 2244’s restrictions on successive habeas petitions. Criminal Procedure—Stays of Executions and Capital Post-Conviction Relief, 2004 Okla. Sess. Law Serv. Ch. 164 (S.B. 1220) (WEST). The amended § 1089 was changed to read—and still reads to this day—such that it bars consideration of successive capital post-conviction applications unless:
 
-a. the application contains claims and issues that have not been and could
+a\. the application contains claims and issues that have not been and could
 
 not have been presented previously in a timely original application or in a
 
@@ -379,7 +377,7 @@ previously considered application filed under this section, because the legal
 
 basis for the claim was unavailable, or
 
-b. (1) the application contains sufficient specific facts establishing that the
+b\. (1) the application contains sufficient specific facts establishing that the
 
 current claims and issues have not and could not have been presented
 
@@ -391,7 +389,7 @@ was unavailable as it was not ascertainable through the exercise of
 
 reasonable diligence on or before that date, and
 
-(2) the facts underlying the claim, if proven and viewed in light of the
+\(2) the facts underlying the claim, if proven and viewed in light of the
 
 evidence as a whole, would be sufficient to establish by clear and
 
@@ -563,9 +561,9 @@ years old—or (as here) even older—can involve. Prost, 636 F.3d at 582–83; 
 
 This case provides a stark illustration of the problems Prost predicted when the principle of finality is disregarded—ten years ago last month Petitioner murdered a mother and her two children, leaving behind a grieving family that still awaits justice. In the interests of finality, it is perfectly reasonable to conclude Petitioner’s state court attacks on his convictions and death sentences at this juncture, even if doing so forecloses a jurisdictional challenge.
 
-Finally, Petitioner would be hard-pressed to argue that there is anything unfair or controversial about barring a jurisdictional claim. For starters, Justice Thomas discussed with approval the bar referenced by this Court in McGirt, i.e., McGirt’s failure to raise his jurisdictional claim on direct appeal. McGirt, slip op. at 2-3 (Thomas, J., dissenting). Moreover, in the Murphy litigation before the Supreme Court, Murphy’s Brief in Opposition to the State’s Petition for Writ of Certiorari scoffed at the idea that numerous state court convictions would be open to attack if the Tenth Circuit’s decision were permitted to stand. Among other things, Murphy asserted that “[s]tate courts . . . limit defendants from challenging long-final convictions. See, e.g., Okla. Stat. tit. 22 § 1086 (requiring “sufficient reason” to consider successive petition) . . . .” Brief in Opposition at 33, Terry Royal v. Patrick Dwayne Murphy, Case No. 17-1107 (U.S. Supreme Court, April 29, 2018) (hereinafter, “Murphy Brief in Opposition”) (available at https://www.supremecourt.gov/DocketPDF/17/17-1107/42807/20180409154638946_Murphy% 20BIO%204-9-2018%201215pmA.pdf). This Court should accept that invitation and bar this claim here.
+Finally, Petitioner would be hard-pressed to argue that there is anything unfair or controversial about barring a jurisdictional claim. For starters, Justice Thomas discussed with approval the bar referenced by this Court in McGirt, i.e., McGirt’s failure to raise his jurisdictional claim on direct appeal. McGirt, slip op. at 2-3 (Thomas, J., dissenting). Moreover, in the Murphy litigation before the Supreme Court, Murphy’s Brief in Opposition to the State’s Petition for Writ of Certiorari scoffed at the idea that numerous state court convictions would be open to attack if the Tenth Circuit’s decision were permitted to stand. Among other things, Murphy asserted that “[s]tate courts . . . limit defendants from challenging long-final convictions. See, e.g., Okla. Stat. tit. 22 § 1086 (requiring “sufficient reason” to consider successive petition) . . . .” Brief in Opposition at 33, Terry Royal v. Patrick Dwayne Murphy, Case No. 17-1107 (U.S. Supreme Court, April 29, 2018) (hereinafter, “Murphy Brief in Opposition”) (available at https://www.supremecourt.gov/DocketPDF/​17/17-1107/42807/20180409154638946_Murphy% 20BIO%204-9-2018%201215pmA.pdf). This Court should accept that invitation and bar this claim here.
 
-***
+\*\*\*
 
 For all of these reasons, this Court should find Petitioner’s jurisdictional challenge to be waived and barred by § 1089(D)(8). B. Sixty-Day Deadline for Successive Capital Post-Conviction Applications
 
@@ -639,7 +637,7 @@ limit defendants from challenging long-final convictions. See, e.g., Okla. Stat.
 
 State, 903 P.2d 325, 327 (Okla. Crim. App. 1995) (“laches” may “prohibit the
 
-consideration” of challenges to long-final convictions). Murphy Brief in Opposition at 33; see also Murphy Argument Transcript at 46 (counsel for Murphy noting that “the state has a laches doctrine”). The Creek Nation also urged the application of laches to bar untimely post-conviction claims in its briefing in Murphy. See Supplemental Brief for Amicus Curiae Muscogee (Creek) Nation in Support of Respondent at 12, Mike Carpenter v. Patrick Dwayne Murphy, Case No. 17-1107 (U.S. Supreme Court Dec. 28, 2018) (available at https://www.supremecourt.gov/DocketPDF/17/17-1107/77854/20181228130713523_17-1107% 20Supplemental%20​Brief%20​of%20​Amicus%20​Curiae%20​MUscogee%20​Creek%20​Nation.pd f). Again, this Court should accept this invitation to apply laches to belated jurisdictional claims.
+consideration” of challenges to long-final convictions). Murphy Brief in Opposition at 33; see also Murphy Argument Transcript at 46 (counsel for Murphy noting that “the state has a laches doctrine”). The Creek Nation also urged the application of laches to bar untimely post-conviction claims in its briefing in Murphy. See Supplemental Brief for Amicus Curiae Muscogee (Creek) Nation in Support of Respondent at 12, Mike Carpenter v. Patrick Dwayne Murphy, Case No. 17-1107 (U.S. Supreme Court Dec. 28, 2018) (available at https://www.supremecourt.gov/DocketPDF/​17/17-1107/77854/20181228130713523_17-1107% 20Supplemental%20​Brief%20​of%20​Amicus%20​Curiae%20​MUscogee%20​Creek%20​Nation.pd f). Again, this Court should accept this invitation to apply laches to belated jurisdictional claims.
 
 The State is not required to show prejudice from Petitioner’s inaction for laches to apply. Paxton, 1995 OK CR 47, ¶ 14, 903 P.2d at 332. In any event, given that this is a capital case, the prejudice to the State is obvious. As Justice Scalia recognized, death sentences are costly and time-consuming for the State to secure and defend, given “the proliferation of labyrinthine restrictions on capital punishment” over the foregoing decades. Glossip v. Gross, 135 S. Ct. 2726, 2749 (2015) (Scalia, J., concurring). Here, as in other capital cases, the State has suffered prejudice in relying on Petitioner’s inaction in bringing his jurisdictional claim. Until his second post- conviction action, Petitioner never questioned the trial court’s jurisdiction; thus, the State has expended extraordinary time and resources in defending Petitioner’s murder convictions and death sentences at every previous stage of this case under the belief that jurisdiction was uncontested. The victims’ family members have been subjected to the trauma of a trial and numerous appeals, all while Petitioner silently sat on his jurisdictional challenge. Given the State’s legitimate reliance on Petitioner’s inaction and the undoubtedly “disruptive” application of McGirt he seeks, this Court should refuse to consider his belated jurisdictional challenge. See City of Sherrill, 544 U.S. at 216-17; cf. also McGirt, slip op. at 31 (“[F]or 113 years, Oklahoma has asserted jurisdiction over the former Indian Territory on the understanding that it is not a reservation, without any objection by the Five Tribes until recently (or by McGirt for the first 20 years after his convictions).” (Roberts, C.J., dissenting)); id. at 34 (“[T]he Court’s decision draws into question thousands of convictions obtained by the State for crimes involving Indian defendants or Indian victims across several decades.” (Roberts, C.J., dissenting)).
 
@@ -671,9 +669,9 @@ ASSISTANT ATTORNEYS GENERAL
 
 Oklahoma City, OK 73105
 
-(405) 521-3921
+\(405) 521-3921
 
-(405) 522-4534 (FAX)
+\(405) 522-4534 (FAX)
 
 ATTORNEYS FOR APPELLEE
 
@@ -689,7 +687,7 @@ Sarah M. Jernigan
 
 Oklahoma City, OK 73102
 
-___________________________
+\___________________________
 
 CAROLINE E.J. HUNT
 
