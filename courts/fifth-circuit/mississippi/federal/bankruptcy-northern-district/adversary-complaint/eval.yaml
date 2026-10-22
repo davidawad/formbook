@@ -1,0 +1,8 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (fb-595.68.14, on the shared layout model lib/*/xengine*), so a difference fails.
+params:
+  cross_engine: gate
+  # DEF-FORM-002: LibreOffice embeds TeX Gyre Termes with tall word boxes (14.6 pt above the baseline, typst's 9.1 pt),
+  # so the court title's line at the top margin measures 3.5 pt into it while its glyphs are inside; the vertical
+  # tolerance covers that glyph box (as the sdb motion brief, also in Termes).
+  eps_v_pt: 4.0
