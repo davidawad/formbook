@@ -10,6 +10,9 @@
 #let body-size = 14pt // Pa.R.A.P. 124(a)(4): 14-point text
 #let note-size = 12pt // Pa.R.A.P. 124(a)(4): footnotes 12-point
 #let margin = 1in // Pa.R.A.P. 124(a)(2): margins at least one inch on all four sides (PA-FORM-002)
+// Pa.R.A.P. 124(a)(2): the first page keeps a three-inch space from the top for court stampings (PA-FORM-002); it is
+// the 1 in margin plus this gap, so a cover that runs on starts its next page at the 1 in margin.
+#let stamp-space = 3in - margin
 #let indent = 0.5in
 // Measured on the render at 14 pt: a leading of 1.6 em gives a double-spaced pitch (Pa.R.A.P. 124(a)(3)); 0.46 em
 // gives single spacing for headings, block quotations, footnotes, caption and signature lines.
@@ -46,38 +49,63 @@
   block(width: 100%, [#h(0.5in)#side.designation])
 }
 
-#let cover(meta) = {
+// Pa.R.A.P. 2172(a)(6) (PA-COVER-001): the names of all counsel, and the office address and telephone of the one to
+// be served. When a group is marked `service: true`, the cover gives that group's lines without e-mail addresses
+// and the other groups' names only; every group's full contact lines stay in the signature block.
+#let cover-counsel(meta) = {
+  let served = meta.counsel.any(c => c.at("service", default: false))
+  meta.counsel.map(c => {
+    if not served { c.lines } else if c.at("service", default: false) { c.lines.filter(l => not l.contains("@")) } else {
+      ()
+    }
+  })
+}
+
+// Front cover, Pa.R.A.P. 2172(a)(1)-(4), (6): court, number, caption, title, counsel. `g` scales the gaps only.
+#let cover-front(meta, g) = {
   set par(leading: leading-single, spacing: leading-single, first-line-indent: 0pt)
+  v(stamp-space)
   align(center, text(weight: "bold", court-lines.at(0)))
   align(center, text(weight: "bold", court-lines.at(1)))
-  v(1.2em)
+  v(1.2em * g)
   if meta.case_number != "" [
     #align(center, text(weight: "bold", "No. " + meta.case_number))
-    #v(1.6em)
+    #v(1.6em * g)
   ]
   caption-side(meta.caption.at(0))
-  v(0.8em)
+  v(0.8em * g)
   block(width: 100%, [#h(0.5in) v.])
-  v(0.8em)
+  v(0.8em * g)
   caption-side(meta.caption.at(1))
   if "proceeding" in meta [
-    #v(1.2em)
+    #v(1.2em * g)
     #align(center, meta.proceeding)
   ]
-  v(2.2em)
+  v(2.2em * g)
   align(center, text(weight: "bold", meta.brief_title))
-  v(2.4em)
-  // Counsel name, bar number, mailing address, telephone, e-mail: two columns, two rows of counsel groups.
+  v(2.4em * g)
+  // Two columns of counsel groups.
   grid(
     columns: (1fr, 1fr),
     column-gutter: 0.25in,
-    row-gutter: 0.8em,
-    ..meta.counsel.map(g => block(width: 100%, [
-      #lines-of(g.names)
-      #lines-of(g.lines)
+    row-gutter: 0.8em * g,
+    ..meta.counsel.zip(cover-counsel(meta)).map(((c, ls)) => block(width: 100%, [
+      #lines-of(c.names)
+      #lines-of(ls)
     ])),
   )
-  // The county respondents named on the cover's reverse in the filed copy, set after the counsel block.
+}
+
+// The gaps between the cover's parts are the only thing that gives (type size never shrinks): the largest scale, down
+// to 0.6, at which the front cover fits one page. The rest of the caption (Pa.R.C.P. 1018 via Pa.R.A.P. 106,
+// PA-COVER-002: the names of all the parties), which the caption refers to as the back cover, follows the counsel
+// block; a long caption or counsel list runs the cover onto more pages (eval.yaml params.cover_pages).
+#let cover(meta) = {
+  layout(size => {
+    let fits(g) = measure(block(width: size.width, cover-front(meta, g))).height <= size.height
+    let g = (1.0, 0.8, 0.6).find(fits)
+    cover-front(meta, if g == none { 0.6 } else { g })
+  })
   if "back_cover" in meta [
     #v(1.2em)
     #set par(leading: leading-single, spacing: leading-single, first-line-indent: 0pt, justify: true)
@@ -169,12 +197,13 @@
   set page(paper: "us-letter", margin: margin, footer-descent: 0.4in)
   set text(font: font-family, size: body-size, lang: "en")
   // Cover: no folio. Front matter: roman numerals. Body: restarts at 1 in arabic numerals.
-  page(margin: (top: 3in, rest: margin), numbering: none, footer: none)[
+  page(numbering: none, footer: none)[
     #show: style-body
     #cover(meta)
   ]
   page(numbering: "i", footer: folio)[
     #show: style-body
+    #counter(page).update(1)
     #front-title[TABLE OF CONTENTS]
     #outline(title: none, depth: 3, indent: 0pt)
   ]

@@ -6,6 +6,7 @@ Alias `pa`. Scope: filings in the Supreme Court of Pennsylvania under the Pennsy
 
 | Tag | Source | URL |
 |---|---|---|
+| R106 | Pa.R.A.P. 106, Original Jurisdiction Matters (common pleas practice applies unless these rules provide otherwise); verified 2026-10-22 | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter1/s106.html&d=reduce |
 | R123 | Pa.R.A.P. 123, Application for Relief (Pa. Code Title 210, ch. 1) | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter1/s123.html&d=reduce |
 | R124 | Pa.R.A.P. 124, Form of Documents (size, spacing, type size, margins, first-page space); Official Note | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter1/s124.html&d=reduce |
 | R127 | Pa.R.A.P. 127, Confidential Information and Confidential Documents; certification of compliance with the Public Access Policy | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter1/s127.html&d=reduce |
@@ -21,6 +22,8 @@ Alias `pa`. Scope: filings in the Supreme Court of Pennsylvania under the Pennsy
 | R2115 | Pa.R.A.P. 2115, Order or Other Determination in Question | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter21/s2115.html&d=reduce |
 | R2116 | Pa.R.A.P. 2116, Statement of Questions Involved | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter21/s2116.html&d=reduce |
 | R2131 | Pa.R.A.P. 2131, References in Briefs to Parties | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter21/s2131.html&d=reduce |
+| R2172 | Pa.R.A.P. 2172, Covers (front cover contents: court, docket number, caption, title, names of counsel and the address and telephone of the one to be served); verified 2026-10-22 | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter21/s2172.html&d=reduce |
+| R2173 | Pa.R.A.P. 2173, Numbering of Pages (Arabic figures; tables per Rule 2174); verified 2026-10-22 | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter21/s2173.html&d=reduce |
 | R2135 | Pa.R.A.P. 2135, Length of Briefs (word limits; certificate of compliance) | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter21/s2135.html&d=reduce |
 | R2136 | Pa.R.A.P. 2136, Briefs in Cases Involving Cross-Appeals | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter21/s2136.html&d=reduce |
 | R2137 | Pa.R.A.P. 2137, Briefs in Cases Involving Multiple Appellants or Appellees | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter21/s2137.html&d=reduce |
@@ -28,6 +31,7 @@ Alias `pa`. Scope: filings in the Supreme Court of Pennsylvania under the Pennsy
 | R2544 | Pa.R.A.P. 2544, Contents of Application for Reargument (3,000 words; certificate) | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter25/s2544.html&d=reduce |
 | R3309 | Pa.R.A.P. 3309, Applications for Extraordinary Relief (King's Bench) | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter33/s3309.html&d=reduce |
 | R3321 | Pa.R.A.P. 3321, Appeals from Legislative Reapportionment Commission (governed by ch. 15) | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/210/chapter33/s3321.html&d=reduce |
+| RCP1018 | Pa.R.C.P. 1018, Caption (the caption of the pleading that commences an action names all the parties); verified 2026-10-22 | https://www.pacodeandbulletin.gov/Display/pacode?file=/secure/pacode/data/231/chapter1000/s1018.html&d=reduce |
 
 Local rules not retrieved: https://www.pacourts.us/public-records (Public Access Policy, cited in the Pa.R.A.P. 127 Comment), HTTP 403 on 2026-10-21. The certification wording quoted in the Rule 127 Comment is used as the form text. The Supreme Court's copy-and-fee page (https://www.pacourts.us/courts/supreme-court/copy-and-fee-requirements) was not retrieved (the pacourts.us WAF returned 403); copy counts are not modeled.
 
@@ -95,6 +99,8 @@ Local rules not retrieved: https://www.pacourts.us/public-records (Public Access
 | PA-CONT-017 | An application for relief under 42 Pa.C.S. sec. 726 or the King's Bench powers shows service on all persons who may be affected and on the clerk of any court in which the subject matter may be pending. | Pa.R.A.P. 3309(a). | M |
 | PA-CONT-018 | The adverse party may answer within 14 days after service; a party not answering files a letter saying so. | Pa.R.A.P. 3309(b). | M |
 | PA-CERT-006 | The application includes the Rule 127 certificate of compliance. | Pa.R.A.P. 127(a); 123(f) (applications). | M |
+| PA-COVER-001 | Cover (Rule 2172 by analogy; it names briefs and petitions for allowance of appeal, and no rule prescribes a separate cover for a Rule 3309 application): the name of the court, the docket number, the caption, the title of the filing, and the names of counsel with the office address and telephone number of the one upon whom notices are to be served. Only that counsel's address and telephone are required on the cover; the other counsel appear by name, with their full contact lines in the signature block. | Pa.R.A.P. 2172(a)(1)-(4), (6). | M |
+| PA-COVER-002 | The caption names all the parties: a King's Bench application starts an original matter (Rule 3309; common pleas practice under Rule 106), and the caption of the pleading that starts an action sets forth the names of all the parties. Where the caption (here 67 county boards of elections) and counsel do not fit the first page at 14 pt under the three-inch space, the cover runs onto a second unnumbered page and the front matter starts at i on the next page (eval.yaml params.cover_pages 2, as in the filed copy). | Pa.R.C.P. 1018 via Pa.R.A.P. 106; Pa.R.A.P. 124(a)(2), (a)(4), 2173. | M |
 
 ## Application for reargument (`petition-for-rehearing`)
 
