@@ -115,7 +115,7 @@ compliance:
 
 # PRELIMINARY STATEMENT
 
-Appellant, Brittany Stoddard, the defendant and counter-plaintiff below, will be referred to as "Appellant." Appellee, Bank of America, N.A., the plaintiff and counter-defendant below, will be referred to as "Appellee." Citations to the Record on Appeal appear as "(R. __)," and citations to Appellant's Initial Brief appear as "(IB. __)."
+Appellant, Brittany Stoddard, the defendant and counter-plaintiff below, will be referred to as "Appellant." Appellee, Bank of America, N.A., the plaintiff and counter-defendant below, will be referred to as "Appellee." Citations to the Record on Appeal appear as "(R. \_\_)," and citations to Appellant's Initial Brief appear as "(IB. \_\_)."
 
 # STATEMENT OF THE CASE AND FACTS
 
