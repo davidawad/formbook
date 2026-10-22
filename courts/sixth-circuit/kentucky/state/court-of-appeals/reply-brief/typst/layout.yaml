@@ -1,0 +1,82 @@
+# Kentucky Court of Appeals (kyctapp): appellant's reply brief (RAP 32 (C)). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12).
+# Numbers trace to the Kentucky Rules of Appellate Procedure (Supreme Court of Kentucky Order 2022-49, effective
+# January 1, 2023; ../../rules.md, KYCTAPP-*); lengths in points. No case text here: every string printed comes from
+# the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # KYCTAPP-FORM-002 (RAP 31 (A) (1) (c)-(d)): text and footnotes no smaller than 12 point
+pitch:
+  body: 27.6              # KYCTAPP-FORM-003 (RAP 31 (A) (1) (b)): double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, the authorities, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 108, right: 72}   # KYCTAPP-FORM-004 (RAP 31 (A) (1) (e)): 1 1/2 in left, 1 in others
+indent: 36
+# KYCTAPP-FORM-008: the rules set no numbering; the cover unnumbered, the statement of authorities i, the body from 1.
+page_number: {align: center, front: lower-roman}
+footnote: {size: 12, gap: 6}   # KYCTAPP-FORM-002: notes 12 point; single spaced as filed
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # quotations single spaced (exemplar convention)
+# The author numbers the headings ("I."): level 1 a section, centred; level 2 a point heading; level 3 below it.
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 8.4}
+  - {bold: true, hang: 36, above: 13.2, below: 8.4}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 8.4}
+# KYCTAPP-CAP-001, KYCTAPP-COVER-001 (RAP 5 (B) (1), RAP 31 (C) (1) (a)): the court, the appeal's case number, the
+# caption of the lead appellant and appellee beside the action appealed from (with its case number), the title and
+# the party filing. KYCTAPP-COVER-002 (RAP 31 (C) (1) (b)): the signed certificate of service on the cover.
+cover:
+  - {text: "COMMONWEALTH OF KENTUCKY", align: center, bold: true}
+  - {text: "COURT OF APPEALS", align: center, bold: true}
+  - {text: "CASE NO. {case_number}", align: center, above: 7.2}
+  - columns:
+      - width: 207
+        blocks:
+          - each: caption
+            between:
+              - {text: "V."}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", align: right, bold: true}
+      - blocks:
+          - {text: "{appeal_from}", align: center}
+    gutter: 18
+    above: 21.6
+  - {rule: 0.75, above: 18, below: 8.4}
+  - {text: "{brief_title}", align: center, bold: true}
+  - {text: "{brief_party}", align: center, bold: true}
+  - {rule: 0.75, above: 8.4}
+  - {text: "Respectfully submitted,", above: 18, below: 6}
+  - columns: {each: counsel, per_row: 2, blocks: [{text: "{names}", bold: true}, {text: "{lines}"}]}
+    gutter: 18
+  - group:
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 7.2}
+      - {text: "{service.paragraphs}", indent: 36, below: 4.8}
+      - each: service.recipients
+        blocks: [{text: "{.}", left: 36, above: 4.8}]
+      - {text: "/s/ *{service.signer.name}*", underline: true, left: 216, above: 9.6}
+      - {text: "{service.signer.name}", left: 216}
+    above: 18
+# KYCTAPP-CONT-004 (RAP 32 (C) (1)): a statement of authorities, with page references, on its own page.
+authorities:
+  title: "STATEMENT OF AUTHORITIES"
+  style: {align: center}
+  col: 56
+  hang: 18
+  above: 8.4
+  group: {bold: true, above: 14.4, below: 2.4}
+# KYCTAPP-SIG-001 (RAP 32 (A) (6), (B) (5)): the signature, never split; then the RAP 15 (E) word-count certificate
+# when the sample gives one.
+closing:
+  - group:
+      - {text: "Respectfully submitted,", left: 216}
+      - each: signature.signers
+        blocks:
+          - {text: "/s/ *{name}*", underline: true, left: 216, above: 13.8}
+          - {text: "{name}", left: 216}
+          - {text: "{lines}", left: 216, optional: true}
+    above: 21.6
+  - when: word_count
+    blocks:
+      - group:
+          - {text: "WORD COUNT CERTIFICATE", align: center, bold: true, below: 7.2}
+          - {text: "{word_count.text}", pitch: body, indent: 36}
+          - {text: "/s/ *{word_count.signer}*", underline: true, left: 216, above: 8.4}
+          - {text: "{word_count.signer}", left: 216}
+        above: 28.8

@@ -1,0 +1,65 @@
+# Court of Appeals of Kentucky (kyctapp): a motion with its argument (RAP 7, RAP 21; RAP 5 form). The whole layout, as
+# data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to the Kentucky Rules of Appellate Procedure (../../rules.md,
+# KYCTAPP-*); lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field})
+# or is a court constant.
+size: 12                  # KYCTAPP-FORM-002 (RAP 5 (B) (4)): black type no smaller than 12 point; footnotes too
+pitch:
+  body: 27.6              # KYCTAPP-FORM-003 (RAP 5 (B) (4)): double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # caption, title, headings, signature, certificate, quotations and notes single spaced
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # KYCTAPP-FORM-004 (RAP 5 (B) (4)): motions 1 inch on all sides
+indent: 36
+page_number: {align: center}   # KYCTAPP-FORM-008: no scheme stated; Arabic from the first page (no cover)
+footnote: {size: 12}           # KYCTAPP-FORM-002: footnotes no smaller than 12 point; single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4, gap: 7.2}   # quotations single spaced, indented both sides
+# The author numbers the headings; level 1 a centered section title, deeper levels flush left with a hanging indent.
+heading:
+  - {bold: true, upper: true, align: center, above: 14.4, below: 8.4}
+  - {bold: true, hang: 36, above: 13.2, below: 8.4}
+  - {bold: true, hang: 36, above: 12, below: 8.4}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 8.4}
+  - {italic: true, hang: 36, above: 10.8, below: 7.2}
+# KYCTAPP-CAP-001 (RAP 5 (B) (1)): the court, the case number, the style of the action, the title.
+front:
+  - {text: "COMMONWEALTH OF KENTUCKY", align: center, bold: true}
+  - {text: "COURT OF APPEALS", align: center, bold: true}
+  - {text: "CASE NO. {case_number}", align: center, above: 7.2, below: 21.6}
+  # the court below (RAP 21 (A) (2): a motion for intermediate relief identifies the action appealed from)
+  - when: appeal_from
+    blocks:
+      - {text: "{appeal_from}", align: center, below: 11.5}
+  # one row per side: the names, and the designation flush right; "V." between the sides
+  - each: caption
+    between:
+      - {text: "V.", above: 11.5, below: 11.5}
+    blocks:
+      - columns:
+          - {width: 252, blocks: [{text: "{names}"}]}   # 3.5 in, as the filed motion (the old template had 2.5 in)
+          - {blocks: [{text: "{designation}", align: right, bold: true}]}
+        gutter: 36
+  # the title between two rules
+  - {rule: 0.75, above: 18}
+  - {text: "{brief_title}", align: center, bold: true, above: 8.65, below: 8.65}
+  - {rule: 0.75, below: 18}
+# KYCTAPP-SIG-001 (RAP 5 (B) (3)): signed by counsel; KYCTAPP-SVC-001 (RAP 5 (A)): the certificate of service.
+closing:
+  - group:
+      - {text: "Respectfully submitted,", left: 216}
+      - each: signature.signers
+        blocks:
+          - {text: "{name}", left: 216, above: 8.4}
+          - {text: "{lines}", left: 216}
+    above: 21.6
+  - when: service
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 21.6}
+          - {text: "{service.paragraphs}", pitch: body, indent: 36}
+        above: 28.8
+      - each: service.recipients
+        blocks:
+          - group:
+              - {text: "{.}", left: 36}
+            above: 7.2
+            below: 7.2
+      - {text: "{service.signer.name}", left: 216, above: 4.8}

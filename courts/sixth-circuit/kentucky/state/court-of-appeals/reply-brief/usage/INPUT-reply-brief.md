@@ -3,6 +3,7 @@
 # Kentucky No. 2024-CA-0556-MR, filed October 15, 2024 by the Jefferson County Attorney. Source and fetch details:
 # ../usage/SOURCE.md. Typos are kept as filed. The filing has no statement of points and authorities; the template
 # generates the statement of authorities that RAP 32 (C) (1) requires, from the authorities listed below.
+# The second counsel block lists its two names under `names` and the rest under `lines` (the template sets names bold).
 case_number: "2024-CA-0556-MR"
 body_start: "I. METRO’S SOVEREIGN IMMNUITY WAS NOT WAIVED FOR A TORT-BASED GOOD FAITH AND FAIR DEALING CLAIM."
 appeal_from:
@@ -20,8 +21,8 @@ counsel:
   - names: ["MICHAEL J. O’CONNELL", "JEFFERSON COUNTY ATTORNEY"]
     bold: true
     lines: []
-  - names: ["Richard Elder", "John S. Harrison", "Assistant Jefferson County Attorneys", "First Trust Centre", "200 South Fifth Street, Suite 300N", "Louisville, KY 40202", "(502) 574-3225", "richard.elder@louisvilleky.gov", "*Counsel for Appellant, Louisville/Jefferson County Metropolitan Government*"]
-    lines: []
+  - names: ["Richard Elder", "John S. Harrison"]
+    lines: ["Assistant Jefferson County Attorneys", "First Trust Centre", "200 South Fifth Street, Suite 300N", "Louisville, KY 40202", "(502) 574-3225", "richard.elder@louisvilleky.gov", "*Counsel for Appellant, Louisville/Jefferson County Metropolitan Government*"]
 service:
   paragraphs:
     - "I certify that on the 15 day of October, 2024, Appellant Louisville/Jefferson County Metropolitan Government’s Reply Brief was filed via the Electronic Filing System to the Commonwealth of Kentucky Court of Appeals, Kate Morgan, Clerk, 669 Chamberlain Ave., Suite B, Frankfort, KY 40601; and copies were electronically served and/or mailed, via First Class Mail, postage prepaid upon: Hon. Melissa Logan Bellows, Judge, Jefferson Circuit Court, Division Seven, 700 West Jefferson Street, Louisville, KY 40202; and Hon. Oliver H. Barber, Jr., 802 Lily Creek Rd., Louisville KY, 40299; I hereby further certify that the record on appeal has been returned to the Clerk of the Jefferson Circuit Court."
