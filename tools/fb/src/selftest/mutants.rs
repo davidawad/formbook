@@ -154,6 +154,14 @@ pub const MUTANTS: &[Mutant] = &[
         expr: r"s/^            linebreak()$/            [ ]/;s/below: 2\.8pt, sticky: true, {/below: 0pt, sticky: true, height: 12pt, {/;s/0\.35in, 9\.8pt)$/0.35in, 0pt)/",
     },
     Mutant {
+        name: r"cover-two-pages",
+        want: r"DEF-COVER-001",
+        kind: Kind::Layout,
+        // the cover runs onto a second unnumbered page, so the front matter starts a page late (fb-595.73; ca9's
+        // cover refuses to overflow on its own, so the spill page is added after it)
+        expr: r"s/^  { set text(..edges(pitch-single)); cover(meta) }$/  { set text(..edges(pitch-single)); cover(meta); page(numbering: none, footer: none)[] }/",
+    },
+    Mutant {
         name: r"typst-metric-times",
         want: r"CA9-FORM-007",
         kind: Kind::Layout,

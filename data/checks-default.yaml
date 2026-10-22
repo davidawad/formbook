@@ -4,7 +4,8 @@
 # supplied (not guessed) in an `eval.yaml` beside rules.md or in the doc folder: its keys are merged over this file.
 #
 # Not in this file on purpose: pleading-paper line numbers, 14 pt rules, cover contents, section order, certificates, TOC/TOA
-# contents (DEF-TOC-001 checks only the layout of a table that is there, which needs no court data).
+# contents (DEF-TOC-001 checks only the layout of a table that is there, and DEF-COVER-001 only how many pages come before
+# the first page number, neither of which needs court data).
 # Those need court data; they belong in a court-level checks.yaml (see courts/ninth-circuit/court-of-appeals/).
 
 template: typst/main.typ
@@ -25,6 +26,7 @@ params:
   eps_v_pt: 3.0                      # vertical tolerance (glyph boxes include ascent and descent)
   eps_pt: 3.0                        # horizontal tolerance: glyph advance boxes of text set exactly at the margin overhang it by 1-3 pt
   # page_limit: 30                   # unset on purpose: no rules.md states its limit in machine-readable form
+  # cover_pages: 1                   # DEF-COVER-001: unnumbered pages before the first page number; set in eval.yaml for a longer declared cover
 
 checks:
   - id: DEF-CONT-001
@@ -85,6 +87,13 @@ checks:
     method: toc_layout
     expect: "every page reference ends its entry's last line after dot leaders; >= 2 pt clear below the column heading's rule (passes with no table)"
     fix: {anchor: "outline"}
+  - id: DEF-COVER-001
+    gate: 1
+    kind: T
+    name: the cover is exactly one page (the pages before the first page number), and the first page after it prints the expected number
+    method: cover_pages
+    expect: "params.cover_pages (1) unnumbered pages, then 1, i or C-1 (or the physical page number, the cover counted); a document numbered from page 1 prints 1 there"
+    fix: {anchor: "set page("}
 
 # Reported as SKIP by `fb check` (no rule data to test against). DEF-RENDER-001, render succeeds with no typst warnings,
 # is run by the driver itself (`fb render --deny-warnings`) before any of the above.

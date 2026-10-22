@@ -105,6 +105,16 @@ pub fn evaluate(c: &Ctx, s: &Sample, method: &str) -> Res<Option<Verdict>> {
                 found.iter().take(8).cloned().collect::<Vec<_>>().join("\n"),
             )
         }
+        "cover_pages" => {
+            let runs = super::toclayout::parse_runs(&file(&format!("{}/runs.tsv", s.w))?);
+            let cover = super::sh::cfg(&c.env, &c.checks, ".params.cover_pages // 1")?;
+            let (pass, meas, detail) = super::coverpages::judge(
+                &super::coverpages::printed(&runs, c.ftop as f64),
+                s.npages.parse().unwrap_or(0),
+                cover.parse().unwrap_or(1),
+            );
+            result(pass, meas, detail)
+        }
         "page_limit" => {
             let limit = super::sh::cfg(&c.env, &c.checks, ".params.page_limit")?;
             let pages: usize = s.npages.parse().unwrap_or(0);

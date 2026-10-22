@@ -5,7 +5,7 @@ use crate::{fail, repo_root, Res};
 use std::process::{Command, ExitCode, Stdio};
 
 /// runs.tsv of a PDF, as `fb check` prepares it (pdftohtml -xml -zoom 2 | pdf-runs.awk).
-fn runs_of(pdf: &str) -> Res<Vec<Run>> {
+pub fn runs_of(pdf: &str) -> Res<Vec<Run>> {
     let awk = repo_root()?.join("tools/check/pdf-runs.awk");
     let tmp = crate::proc::TempDir::new("toc-runs")?;
     let xml = tmp.path().join("runs.xml");
@@ -25,7 +25,7 @@ fn runs_of(pdf: &str) -> Res<Vec<Run>> {
 
 /// The default footer line of `fb toc-layout`: 720 pt on a letter page (1 in bottom margin), in proportion on
 /// any other page height (pdfinfo's first page).
-fn footer_top(pdf: &str) -> f64 {
+pub fn footer_top(pdf: &str) -> f64 {
     let info = Command::new("pdfinfo")
         .arg(pdf)
         .stdin(Stdio::null())

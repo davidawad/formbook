@@ -419,6 +419,7 @@ pub fn analyze(pdf: &str, runs: &[Run], ftop: f64) -> Res<(BTreeSet<u32>, Vec<St
 #[path = "toclayout_cli.rs"]
 mod cli;
 pub use cli::main;
+pub(crate) use cli::{footer_top, runs_of};
 
 #[cfg(test)]
 #[path = "toclayout_tests.rs"]

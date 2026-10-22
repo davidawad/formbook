@@ -362,7 +362,7 @@ mod tests {
 
     #[test]
     fn table_matches_the_shell_script() {
-        assert_eq!(MUTANTS.len(), 27);
+        assert_eq!(MUTANTS.len(), 28);
         assert_eq!(
             MUTANTS.iter().filter(|m| m.kind == Kind::Content).count(),
             6
@@ -374,6 +374,9 @@ mod tests {
             MUTANTS.iter().filter(|m| m.want == "CA9-TOOL-007").count(),
             2
         );
+        assert!(MUTANTS
+            .iter()
+            .any(|m| m.name == "cover-two-pages" && m.want == "DEF-COVER-001"));
     }
 
     #[test]

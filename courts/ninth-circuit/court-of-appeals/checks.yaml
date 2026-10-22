@@ -367,6 +367,13 @@ checks:
     method: cover_one_page
     expect: "page 2 starts with TABLE OF CONTENTS"
     fix: {anchor: "let cover(meta)"}
+  - id: DEF-COVER-001
+    gate: 1
+    kind: T
+    name: the cover is exactly one page (the pages before the first page number), and the first page after it prints the expected number; engine-neutral, the default set's check
+    method: cover_pages
+    expect: "1 unnumbered page, then page 2 prints i"
+    fix: {anchor: "let cover(meta)"}
   - id: CA9-CERT-001
     gate: 1
     kind: M

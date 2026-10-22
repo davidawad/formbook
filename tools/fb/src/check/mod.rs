@@ -2,6 +2,7 @@
 //! Verdicts are native where migrated; bridge.rs is the compatibility path for remaining methods.
 mod bridge;
 mod calibtex;
+pub mod coverpages;
 mod declared;
 mod docxgate;
 #[cfg(test)]
