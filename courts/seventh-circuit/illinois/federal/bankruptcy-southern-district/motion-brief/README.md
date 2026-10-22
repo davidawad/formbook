@@ -2,7 +2,7 @@
 
 Doc type: **brief in support of a motion** (here, a brief supporting a motion to dismiss an adversary complaint, the case L.R. 9013-5(A) names). Court: United States Bankruptcy Court for the Southern District of Illinois (ilsb). Folder: `courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief/`.
 
-Status: exemplar=yes (one filed exemplar, Gargula v. Deighan Law LLC, Adv. 20-06018, Doc 15-1, a memorandum in support of a motion; see `usage/SOURCE.md`), render=ok (`usage/OUTPUT-motion-brief.typst.pdf`, 10 pages), overlay=ok (`usage/OVERLAY-gargula-motion-brief.pdf`, `.txt` page map), pages reviewed 10 of 10 (every page rendered at 70 dpi and looked at). Open: a second filer for the tier-2 comparison (see `usage/SOURCE.md`). No `court.json` status is set here; nothing in this folder sets `status`.
+Status: exemplar=yes (one filed exemplar, Gargula v. Deighan Law LLC, Adv. 20-06018, Doc 15-1, a memorandum in support of a motion; see `usage/SOURCE.md`), render=ok (`usage/OUTPUT-motion-brief.typst.pdf` and `.docx.pdf`, 12 pages each), pages reviewed 12 of 12, typst and docx (fb-595.68.27). Open: a second filer for the tier-2 comparison (see `usage/SOURCE.md`). No `court.json` status is set here; nothing in this folder sets `status`.
 
 ## Governing rules
 
@@ -39,52 +39,51 @@ Tier 2 wants two or three filers; one is saved. The second candidate (Naumann, 0
 ## Typst and render
 
 ```sh
-export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief usage/INPUT-motion-brief.md
-sh tools/overlay.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief gargula-motion-brief
+fb render courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief usage/INPUT-motion-brief.md            # typst
+fb check courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief --engine typst|docx                     # render and gates
+just overlay courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief
 ```
 
-- `typst/main.typ` is the entry point; `typst/ilsb-motion-brief.typ` is the template (EB Garamond, vendored; `--ignore-system-fonts`; any typst warning fails). The render compiled with no warnings.
-- `usage/OUTPUT-motion-brief.typst.pdf`: 10 pages. The overlay pairs sample pages 1 to 9 with filed pages 1 to 9 and sample page 10 with filed page 19 (word overlap 56% to 86%; 31% for page 10, where the filed conclusion follows omitted text).
-- `usage/OVERLAY-gargula-motion-brief.pdf` (red = render, blue = filed exemplar, black = both) and `OVERLAY-gargula-motion-brief.txt` (page map).
+- `typst/main.typ` is the entry point; `typst/ilsb-motion-brief.typ` is the template. Times New Roman 12 pt (vendored, `("Times New Roman", "Liberation Serif")`); vendored fonts only, `--ignore-system-fonts`, warnings fail. The render compiles with no warnings.
+- Layout: the shared cross-engine model (`lib/typst/xengine.typ`; docs/EVAL-LOOP.md, "Cross-engine gate"): every line a box of its pitch, the boxes touching, explicit spaces between blocks. Pitches: 24 pt body (double spacing, as filed), 13.8 pt single lines (court title, caption, headings, quotations, footnotes, signature), the 10 pt "Page X of Y" footer in a 12 pt line. Headings and block quotations stand half a body line (12 pt) from the text; footnotes are 12 pt (as filed), 7 pt apart, under a rule 6.8 pt below the text (with the 7 pt gap, the 13.8 pt single line of Word's separator), and split over pages where LibreOffice splits them. The caption is the adversary complaint's.
+- `usage/OUTPUT-motion-brief.typst.pdf`: 12 pages. `pdffonts`: Times New Roman regular, bold and italic, embedded.
+- Overlays (`just overlay`) are written to the gitignored `.overlay/` folder; a diagnostic, not a score.
 
-Naming: `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt` (the repo's tool names). The tools were not edited.
+## Visual review (Gate 2, all 12 pages of the typst and the docx render at 60 dpi, looked at; fb-595.68.27)
 
-## Visual review (Gate 2: every page rendered at 70 dpi and looked at)
-
-Pages 1 to 9 were viewed in the render before the signature fix and are unchanged by it. Page 10 was viewed in the render before and after the fix.
+The docx render breaks every line and page as the typst render (XENG-001..003, 337/337 lines); the pages below hold for both.
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Court title, caption (copied from Doc 18), title, Overview; footnotes 1 and 2 | Caption is template-only: the filed attachment has none (see SOURCE.md). Typeface differs (EB Garamond, not Times). Footnote 1 is attached to the first sentence, not the title. Otherwise OK. |
-| 2 | Overview (continued), Procedural Posture; footnotes 3 to 5 | OK. Footnote numbering matches the filing. |
-| 3 | Procedural Posture (continued), Part III; footnotes 6 to 14 | OK. |
-| 4 | Part III (continued); footnotes 15 to 22 | OK. |
-| 5 | Part III (continued), Part IV starts on page 6; footnotes 23 to 28 | OK. |
-| 6 | Part IV (Legal Standard) | OK. |
-| 7 | Argument V.A and A.1; block quotation (Dimick) | The paragraph after the block quotation (the Dimick citation) takes a first-line indent; in the filing it is flush left, as a continuation. Markup has no "continuation" paragraph. Accepted. |
-| 8 | Block quotation (Granfinanciera test); A.2 | Same as page 7 for the paragraph after the quotation. Otherwise OK. |
-| 9 | A.2 (continued), A.3; footnote 29 | OK. The transcription note (italic, before the Conclusion) is on page 10. |
-| 10 | Transcription note; Conclusion; signature | **Fixed.** Before: the attorney block sat full-width at left, and the signer line had a stray comma ("Mark T. Lavery,"). After: the attorney block sits in the signature column under the signature, as in the filing, and the comma is gone (`typst/ilsb-motion-brief.typ`, `signature-block`). Also OK: the Armgardt block follows the Lavery block with a gap. |
+| 1 | Court title, caption (copied from Doc 18), title, Overview; footnotes 1 and 2 | Caption is template-only: the filed attachment has none (see SOURCE.md). Footnote 1 is attached to the first sentence, not the title. OK. |
+| 2 | Overview (continued), Procedural Posture | OK. |
+| 3 | Procedural Posture (continued); footnotes 3 to 10 | OK. Footnote numbering matches the filing. |
+| 4 | Procedural Posture (end), Part III; footnotes 11 to 16 | OK. |
+| 5 | Part III (continued); footnotes 17 to 24 | OK. |
+| 6 | Part III (end); footnotes 25 to 28 | OK. |
+| 7 | Part IV (Legal Standard) | OK. |
+| 8 | Part IV (end), Argument V, A, A.1; block quotation (Dimick) | ACCEPTED: the paragraph after a block quotation takes a first-line indent; in the filing it is flush left, as a continuation. Markup has no "continuation" paragraph. |
+| 9 | Block quotation (Granfinanciera test); A.2 | Same as page 8 for the paragraph after the quotation. Otherwise OK. |
+| 10 | A.2 (continued); footnote 29 | OK. |
+| 11 | A.3, transcription note (italic), Conclusion | OK. |
+| 12 | Signature, the two counsel blocks in the signature column | ACCEPTED: the signature block is kept whole and does not fit under the Conclusion, so it stands alone on the last page (gap 5). |
 
-Reviewed pages: 10 of 10.
+Reviewed pages: 12 of 12 (typst) and 12 of 12 (docx).
 
 ## Known gaps and open choices
 
 1. **One exemplar, not two.** Tier 2 (a clerk's conventions, judged against two or three filers) needs a second filer; see `usage/SOURCE.md` for the candidate not saved. The caption of the exemplar is not in the filing (copied from the same adversary's Doc 18). The filing has no certificate of service, so the sample does not test that block.
-2. **Typeface, type size, margins.** No S.D. Ill. rule names them. EB Garamond 12 pt, 1-inch margins and double spacing are style choices, the same as the adversary complaint folder.
+2. **Typeface, type size, margins.** No S.D. Ill. rule names them. Times New Roman 12 pt (footnotes too, as filed), 1-inch margins and double spacing are style choices, the same as the adversary complaint folder.
 3. **20-page limit (L.R. 9013-5(F)).** Not counted. The author must check the length, excluding the signature page and attachments.
 4. **Citations (L.R. 9013-5(D)).** The rule requires citations to the authorities relied on. The template does not check them. Authorities are the author's.
-5. **Signature alone on a page.** The signature block is kept whole, so it can move to a page of its own. The filed exemplar's Conclusion and signature fall on pages 19 and 20 of its own paging; in the sample they sit on one page with the Conclusion. Keeping the last paragraph with the block would still prevent a stranded block; not done.
-6. **Certificate of service.** Generated only when `service:` is in the frontmatter. The statement and recipients are the author's text. L.R. 9013-2(A) requires it for papers under Rules 9013 and 9014; the template does not check that the certificate is present for a given filing.
+5. **Signature alone on a page.** The signature block is kept whole, so it can move to a page of its own (it does in the sample). Keeping the last paragraph with the block would prevent a stranded block; not done.
+6. **Certificate of service.** Generated in both engines only when `service:` is in the frontmatter. The statement and recipients are the author's text. L.R. 9013-2(A) requires it for papers under Rules 9013 and 9014; the template does not check that the certificate is present for a given filing. No sample exercises it.
 7. **Motion and proposed order** are separate filings and not produced (L.R. 9013-1(A), 9013-4).
 8. **Tables of contents and authorities** are not generated (no rule requires them for an S.D. Ill. brief).
-9. **Footnote and quotation sizes** are the default sizes of the typst theme, not set separately.
 
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
-- **latex** (`latex/`): see `latex/`; not changed by this section.
-- **docx** (`docx/reference.docx`, `docx/ilsb.lua`, `docx/build-reference.sh`): pandoc on reference.docx, EB Garamond 12 pt, exact 24 pt body line pitch, 0.5 in first-line indent, 1 in margins, letter, "Page x of y" footer (PAGE and NUMPAGES fields). `ilsb.lua` lays out the caption (a table with a right and a bottom rule), court title, title, the body as written (headings, paragraphs, block quotations as single-spaced indented blocks, bullets, footnotes), the signature table with the attorney block in the signature column, and the certificate of service when the frontmatter has `service`. Every case word comes from the frontmatter. Matches the typst form in: font and size, body pitch, margins, indent, heading styles (centered bold capitals, centered bold, bold), page-number footer, page order. Differs or is unverified: the single-spacing gaps and the caption and signature table spacing are approximate (Word table and style metrics, not measured against typst); footnote text is 12 pt single-spaced (typst's footnote size was not checked); the sample has no certificate of service, so that path is untested.
-- docx checks: `usage/OUTPUT-motion-brief.docx` was written and validated (zip test and well-formed XML in every part). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `usage/OUTPUT-gargula-motion-brief.docx.pdf` was not produced and the docx Gate 0 to 3 checks (`tools/check.sh --engine docx`) cannot run. No page was rendered or reviewed (pages reviewed 0). The `.docx` has not been opened in Word or LibreOffice.
-- Blocked or unverified docx items: the docx.pdf render and page review (blocked on soffice); cover and caption table borders not verified against the typst layout; the page count and page breaks in Word may differ from typst.
+- **docx** (`docx/reference.xml`, `docx/ilsb.lua`; built by `fb render`, no shell): `reference.xml` is the cross-engine recipe (`base="xengine"`, `{font}` = the typst face, Times New Roman 12 pt; Body Text in exact 480-twip lines with a 720-twip first-line indent, 276-twip single lines, headings 240 twips from the text, Block Text 240 twips around and between its paragraphs, Footnote Text 12 pt in 276-twip lines, 140 twips after, without keep-lines) plus "Body Text Note" (no widow control, for a paragraph that anchors a footnote) and the "Page X of Y" footer (10 pt in a 240-twip line, 768 twips from the page foot). `ilsb.lua` (`require("docx.xengine")`) writes the court title, the caption table (rules right and bottom of the party column), title, headings, the signature with the attorney block in the signature column (kept together) and the certificate of service with the typst spacing in twips; body paragraphs, quotations and footnotes go to pandoc in those styles. Break rules as typst: no break inside ")(", a break after a slash before a letter and after a period in a web address, a section sign bound to its number also when doubled or after a typed quotation mark ("“§ __"). Until fb-595.68.27 the docx was EB Garamond from `docx/build-reference.sh` (12 pages against typst's 11, 63/331 lines as typst; DEF-FONT-002 and TNR-EMBEDDED failed on its render).
+- Checks (fb-595.68.27): typst `RESULT: 9 checks passed, 0 failed`; docx `RESULT: 13 checks passed, 0 failed`, XENG-001..003 PASS (12 pages each, 337/337 lines). `eval.yaml` sets `params.cross_engine: gate`.
+- **latex**: no latex template for this doc type.
