@@ -1,31 +1,38 @@
-# Gate 2 review: motion with memorandum, docx engine (LibreOffice PDF)
+# Gate 2 review: motion with memorandum, typst and docx engines (fb-595.68.24)
 
-Reviewer: the lead's docx sub-agent (every page rendered at 60 dpi with pdftoppm and viewed with the image reader, after the last template change). check.sh could not run on this folder (see README "## Engines"), so this record is the review.
+Reviewer: the porting agent of fb-595.68.24. Every page of both renders rendered at 60 dpi with pdftoppm and viewed
+with the image reader side by side (typst | docx), after the last template change, against
+`usage/FILED-EXAMPLE-motion-brief.pdf` pages 1, 2 and 5 and the court's rules (`../rules.md`).
 
-## sample hartsock-motion-to-dismiss docx
+## sample motion-brief
 
-- `OUTPUT-hartsock-motion-to-dismiss.docx` sha256: aedd97801a2dac79086f1dc94f422308dda7bce2eb9b0d739188d2cd092a81be
-- `OUTPUT-hartsock-motion-to-dismiss.docx.pdf` sha256: d795d35d28307293d1fefa71bb61c4fec4c9edebb889f3c8dfe2be4e908a0e53
-- Pages: 11 of 11 viewed.
+- `OUTPUT-motion-brief.typst.pdf` sha256: 769228565209dd831393bc1fa29982327c3ae4bd5bd9cba6a01ee4cc578c2d15
+- `OUTPUT-motion-brief.docx` sha256: a7cd154cee552907d6b13261f3afb97bdaa4cea2203d65e18d866a6292cfe365
+- `OUTPUT-motion-brief.docx.pdf` sha256: 59b2a1416aa17a345627c68c68392ce0ebb638347f87a80b0df36277c5fb7986
+- Pages: 15 of 15 viewed on each engine. `check.sh --engine docx`: XENG-001..003 PASS (341/341 lines break alike).
 
-| page | content | result |
+| page | content (both engines) | result |
 |---|---|---|
-| 1 | Counsel lines 1 to 6; court title lines 7 to 9; caption from line 11 (right and bottom rules under the parties); case number, bold title, "Hearing date: 8/31/2026", "Without Oral Argument" at right; footer "BATTELLE’S MOTION TO DISMISS - 1". | Pass |
-| 2 | TABLE OF CONTENTS on line 1; entries I to V and CERTIFICATE OF SERVICE, dot leaders, pages 3, 4, 6, 7, 7, 7, 10, 11 (checked against the body pages). | Pass |
-| 3 | I. INTRODUCTION (line 1), paragraphs to line 21. | Pass |
-| 4 | II. FACTUAL BACKGROUND; paragraphs to line 21 ("Id., ¶3.9." at the foot). | Pass |
-| 5 | Facts June 12 to June 14, 2024; ends on line 20. | Pass |
-| 6 | June 24, 2024 facts; bracketed note that July to November 2024 is not transcribed; III. PROCEDURAL BACKGROUND on line 9. | Pass |
-| 7 | IV. AUTHORITY & ARGUMENT; A. Legal Standard; B. heading on line 12; first retaliation paragraph. | Pass |
-| 8 | Retaliation paragraphs (protected activity, adverse action, causation). | Pass |
-| 9 | "Shifted gears" and temporal-proximity paragraphs; bracketed note that Sections IV.C to IV.E are not transcribed. | Pass |
-| 10 | V. CONCLUSION; "DATED this 6th day of July, 2026" with "Respectfully submitted," and the firm; "By s/" signer and lines on the grid. | Pass |
-| 11 | CERTIFICATE OF SERVICE on its own page; service paragraph; date; legal assistant line. | Pass |
+| 1 | Counsel single spaced on lines 1 to 6; the court title single spaced, centred, on lines 7 and 8; the caption row on lines 9 to 20 (the party box ruled at its right and foot), case number, bold title and "Hearing date: 8/31/2026", "Without Oral Argument" at right; footer "BATTELLE’S MOTION TO DISMISS - 1". | Pass |
+| 2 | TABLE OF CONTENTS, a blank line, I to V with A. and B. indented, labels in their box, dot leaders, pages 3, 4, 8, 9, 9, 10, 14 (the pages the headings start on in both renders); B. wraps under its title. | Pass |
+| 3 | I. INTRODUCTION; four paragraphs on the numbered lines. | Pass |
+| 4 | Introduction ends; II. FACTUAL BACKGROUND on line 14. | Pass |
+| 5 to 7 | Facts, paragraphs with a 0.5 in first-line indent. | Pass |
+| 8 | Facts end, the bracketed note; III. PROCEDURAL BACKGROUND on line 8; line 20 empty (the next paragraph keeps two lines). | Pass |
+| 9 | IV. AUTHORITY & ARGUMENT and A. Legal Standard on lines 7 and 8. | Pass |
+| 10 | B. heading over two numbered lines (4 and 5). | Pass |
+| 11 to 13 | Retaliation argument; citations in italics. | Pass |
+| 14 | The bracketed note; V. CONCLUSION; a blank single line, then DATED and the signature block (firm, "By s/", the signers, e-mails, the attorneys' line) on lines 9 to 16. | Pass |
+| 15 | CERTIFICATE OF SERVICE on its own page; the service paragraph, date and the legal assistant's line. | Pass |
 
-Page starts match the typst output on all 11 pages. The TOC page numbers match the body pages (checked by hand against the pages above).
+Body text sits on the numbered lines on every page in both engines (`fb diff --engines`: 0.00 pt baseline difference
+over 341 lines, line numbers and footer included).
 
 Open or accepted (tier 2 or 3):
-- ACCEPTED: the TOC is a Word TOC field with cached entries; its page numbers are the LibreOffice pagination. Word may paginate differently; update the field there (F9) if the pages move.
-- ACCEPTED: the pleading rules are page borders over the text area, not full-height rules from the page edge.
-- ACCEPTED: table of authorities not generated (as the typst output; sample gap 2).
-- OPEN (not verified): the file was not opened in Microsoft Word; LibreOffice only.
+- OPEN (decision): the face. Liberation Mono (the exemplar's Courier New, audited) is kept; `../rules.md` WAED-FORM-002
+  names only a proportional face, LCivR 10(d) as quoted in the README also allows a monospaced one. README gap 8.
+- ACCEPTED: the docx pleading rules are page borders around the text area, not full-height rules from the page edge.
+- ACCEPTED (tier 3): the docx contents' leader runs to the page number (Word's tab leader); typst's stops short of the
+  page column. The exemplar's contents use roman page numbers and a single-spaced wrap; the template numbers pages
+  sequentially (LCivR 10(a)(2)).
+- OPEN (not verified): the .docx was not opened in Microsoft Word; LibreOffice only.

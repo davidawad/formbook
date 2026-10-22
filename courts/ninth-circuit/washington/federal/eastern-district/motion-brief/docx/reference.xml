@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The waed motion Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Liberation Mono, the Courier New metrics of the
+     exemplar) at 14 pt (size 28 half points; LCivR 10(d)); Body Text in exact 32 pt line boxes, one numbered line of
+     the pleading paper (typst pitch, LCivR 10(d) double spacing) with a half-inch first-line indent (typst
+     para-indent); single lines in 16 pt boxes (typst pitch-single); headings one numbered line, no space of their
+     own (typst heading-block). Added here, as the typst template sets it: "List Letter" (an item's "A." half an inch
+     in, the text hanging 0.9 in from the margin; typst list-indent, letter-box). The page (letter, the typst
+     margins, the numbered lines, the pleading rules and the footer with the title and page number, LCivR
+     10(a)(1)(E), 10(a)(2), 10(d)) is written by docx/lib/pleading.lua ($FORMBOOK_FOOTERS, $FORMBOOK_FINAL).
+     Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="640" single="320" indent="720" heading="640" heading-before="0" heading-after="0" footer="1040">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="ListLetter"><w:name w:val="List Letter"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1296"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="640" w:lineRule="exact"/><w:ind w:left="1296" w:hanging="576"/></w:pPr></w:style>
+</reference>

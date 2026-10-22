@@ -1,29 +1,45 @@
 // Motion with memorandum for the U.S. District Court for the Eastern District of Washington (waed).
 // Rules: LCivR 10(a) (caption, footer, pagination), LCivR 10(d) (8 1/2 x 11, line numbers, serif type of 14 points
-// or more, double spacing), LCivR 7(b)(1) (the motion serves as the memorandum), LCivR 7(i)(1) (hearing in the
-// caption), LCivR 7(f)(1), (4) (length; caption, signatures and certificates are not counted). See ../README.md.
+// or more, or a monospaced face, double spacing), LCivR 7(b)(1) (the motion serves as the memorandum), LCivR 7(i)(1)
+// (hearing in the caption), LCivR 7(f)(1), (4) (length; caption, signatures and certificates are not counted).
+// See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Mono"        // LCivR 10(d): audited Courier New face per docs/FONTS.md
-#let type-size = 14pt                   // LCivR 10(d): proportionately spaced typeface of 14 points or more
-#let pitch = 32pt                       // LCivR 10(d): text double spaced; 32 pt = 2 x 1.15 x 14 pt (the exemplar's pitch)
-#let lines-per-page = 20                // the exemplar has 21; 20 keeps every line inside the 1 in bottom margin (the rule fixes no count)
+#let font-family = "Liberation Mono"        // LCivR 10(d): audited Courier New face per docs/FONTS.md (the exemplar's)
+#let type-size = 14pt                   // LCivR 10(d): 14 points (8.6 characters an inch, within the monospaced 10.5)
+#let lines-per-page = 20                // the exemplar has 26 at 12 pt; 20 numbered lines inside the 1 in bottom margin (the rule fixes no count)
 #let page-w = 8.5in                     // LCivR 10(d): 8 1/2 x 11 inch
 #let page-h = 11in
-#let top-margin = 72pt                  // the numbered lines start at the top margin
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // holds the footer
 #let left-margin = 1.1in                // room for the line numbers and the pleading rules
 #let right-margin = 1in
-#let text-width = page-w - left-margin - right-margin
-#let body-leading = pitch - 0.65em      // EB Garamond's line box is 0.65em; this makes the baseline pitch 32 pt at 14 pt
-#let single-leading = 0.5em             // single spacing for counsel, caption, headings and signature: about 16 pt
+#let text-width = page-w - left-margin - right-margin   // 460.8 pt
 #let para-indent = 0.5in                // first-line indent of body paragraphs
+#let list-indent = 0.5in                // a list item's letter starts half an inch in ...
+#let letter-box = 0.4in                 // ... in a box of its own; the text hangs 0.9 in from the margin
 #let caption-left = 3.2in               // width of the party column of the caption
+#let caption-gutter = 0.2in             // between the party column and the right column
+#let caption-rule-pad = 10pt            // the party column's text stands this far off its right rule ...
+#let caption-rule-below = 8pt           // ... and its last line this far above its bottom rule
+#let caption-right-pad = 0.15in         // the right column's text stands off the gutter by this much
+#let sig-left = 2.6in                   // the date column of the signature block
+#let sig-gutter = 0.2in
 #let counsel-lines = 4                  // LCivR 10(a)(1)(A): counsel above line five; the court title starts on line five
+#let toc-tab = 0.6in                    // contents: a heading's label in a box of this width ("III." and a space), each level this much further in
+#let toc-col = 0.5in                    // contents: the page column
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is explicit (Word's exact
+// line spacing; docx/motion-brief.lua and docx/reference.xml set the same twips).
+#let pitch = 32pt                       // LCivR 10(d): double spaced; one numbered line (2 x 16 pt)
+#let pitch-single = 16pt                // single spacing (LCivR 10(d) allows it for counsel, caption, signature): half a numbered line
+#let top-margin = 72pt                  // the numbered lines start at the top margin
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 80 pt: holds the footer
+#let footer-gap = 12pt                  // the footer line's box starts this far below the last numbered line
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -36,34 +52,42 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// Inline markdown (for case names in italics, etc.).
-#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
-
-/// Fill whole numbered lines: the block is rounded up to a multiple of `pitch`, so whatever follows
-/// it stays on the grid of numbered lines.
-#let on-grid(c) = context {
-  let h = measure(width: text-width, c).height
-  block(width: text-width, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, c)
+/// Inline content without the paragraph breaks cmarker may put around it (they may not occur inside a paragraph).
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
 }
 
-/// A heading: single spaced, rounded up to whole numbered lines (a long heading wraps onto the next one and
-/// the text after it stays on the grid), kept with the text after it (a heading never ends a page).
-#let heading-line(c) = context {
-  let c1 = { set par(leading: single-leading); c }
-  let h = measure(width: text-width, c1).height
-  block(width: text-width, height: calc.max(1, calc.ceil(h / pitch)) * pitch, above: 0pt, below: 0pt, sticky: true, c1)
+/// Inline markdown (case names in italics, quotations, and so on).
+#let inl(s) = unloose(cmarker.render(s, raw-typst: false, smart-punctuation: true))
+
+/// Single-spaced lines, one paragraph each, at the single pitch; an item is a string (markdown) or content.
+/// `gaps`: the indices of items that a blank single line precedes.
+#let line-stack(items, gaps: ()) = {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  for (k, i) in items.enumerate() {
+    block(width: 100%, above: if k in gaps { pitch-single } else { 0pt }, below: 0pt,
+      par(if type(i) == str { inl(i) } else { i }))
+  }
 }
+
+/// Whole numbered lines for a height: at least `min`.
+#let grid-lines(h, min: 1) = calc.max(min, calc.ceil(h / pitch - 0.001))
 
 // ---------------------------------------------------------------------------
 // Page furniture
 // ---------------------------------------------------------------------------
 
-/// Numbers 1 to 21 down the left margin, one per numbered line.
+/// Numbers 1 to 20 down the left margin, each in a numbered line's box, ending 0.65 in from the page edge.
 #let line-numbers() = {
+  set text(..edges(pitch))
   for i in range(1, lines-per-page + 1) {
-    place(top + left, dx: 0pt, dy: top-margin + (i - 1) * pitch,
-      block(width: left-margin - 0.45in, height: pitch,
-        align(right, text(size: type-size, str(i)))))
+    place(top + left, dy: top-margin + (i - 1) * pitch,
+      block(width: left-margin - 0.45in, height: pitch, align(right, str(i))))
   }
 }
 
@@ -74,142 +98,146 @@
   place(top + left, dx: page-w - right-margin + 0.1in, line(start: (0pt, 0pt), end: (0pt, page-h), stroke: 0.75pt))
 }
 
-/// LCivR 10(a)(1)(E) and 10(a)(2): in the footer of every page, the title (or an abbreviated title) followed by
-/// the page number, sequentially numbered through the whole filing.
-#let footer-block(title) = place(
-  top + left,
-  dx: left-margin,
-  dy: top-margin + lines-per-page * pitch + 12pt,
+/// LCivR 10(a)(1)(E) and 10(a)(2): in the footer of every page, the title (or an abbreviated title) followed by the
+/// page number, sequentially numbered through the whole filing; one single-spaced line 12 pt below the last numbered
+/// line (docx: the footer, docx/lib/pleading.lua).
+#let footer-block(title) = place(top + left, dx: left-margin, dy: top-margin + lines-per-page * pitch + footer-gap,
   block(width: text-width, {
-    set text(size: type-size)
-    upper(title) + " - " + context counter(page).display("1")
-  }),
-)
+    set text(..edges(pitch-single))
+    par(first-line-indent: 0pt, upper(title) + " - " + context counter(page).display("1"))
+  }))
 
 // ---------------------------------------------------------------------------
 // Cover: counsel (lines 1-4), court title (line 5 on), caption with the hearing, title of the paper
 // ---------------------------------------------------------------------------
 
-/// One single-spaced line per item: each item is a block, and the stack keeps the single spacing.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => inl(i)))
-}
-
+/// Counsel, single spaced from line 1, in whole numbered lines, at least four (LCivR 10(a)(1)(A)).
 #let counsel-block(meta) = context {
-  // Lines 1 to 4 at least; more counsel lines push the court title down (LCivR 10(a)(1)(A)).
-  let h = measure(width: text-width, line-stack(meta.counsel)).height
-  block(width: text-width, height: calc.max(counsel-lines, calc.ceil(h / pitch)) * pitch,
-    line-stack(meta.counsel))
+  let body = line-stack(meta.counsel)
+  let h = measure(width: text-width, body).height
+  block(width: 100%, height: grid-lines(h, min: counsel-lines) * pitch, above: 0pt, below: 0pt, body)
 }
 
+/// The court's name, centred and single spaced (LCivR 10(a)(1)(B); LCivR 10(d): captions may be single spaced), as
+/// in the exemplar, in whole numbered lines (three lines take two: the caption stands a blank single line below).
 #let court-title(meta) = {
-  on-grid(align(center, "UNITED STATES DISTRICT COURT"))
-  on-grid(align(center, "EASTERN DISTRICT OF WASHINGTON"))
-  if "division" in meta {
-    on-grid(align(center, upper(meta.division)))
-  }
+  let lines = ("UNITED STATES DISTRICT COURT", "EASTERN DISTRICT OF WASHINGTON")
+  if "division" in meta and meta.division != none { lines.push(upper(meta.division)) }
+  block(width: 100%, height: grid-lines((lines.len() + 1) * pitch-single) * pitch, above: 0pt, below: 0pt,
+    align(center, line-stack(lines)))
 }
 
-#let caption(meta) = on-grid(grid(
-  columns: (caption-left, 1fr),
-  column-gutter: 0.2in,
-  block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt), {
-    // Each party: its names, then its designation; "v." between the parties.
-    let rows = ()
-    for (k, p) in meta.caption.parties.enumerate() {
-      if k > 0 { rows.push("v.") }
-      rows += p.names + (p.designation,)
-    }
-    line-stack(rows)
-  }),
-  block(inset: (left: 0.15in), {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    line-stack(("Case No. " + meta.case_number,))
-    v(pitch * 0.5)
-    [#text(weight: "bold", inl(meta.brief_title))]
-    // LCivR 7(i)(1): a motion's caption carries the hearing date and time or place (or "without oral argument").
-    if "hearing" in meta and meta.hearing != none {
-      v(pitch * 0.5)
-      line-stack(
-        ("Hearing date: " + meta.hearing.date,)
-          + if "type" in meta.hearing { (meta.hearing.type,) } else { () }
-          + if "judge" in meta.hearing { (meta.hearing.judge,) } else { () },
-      )
-    }
-  }),
-))
+/// The parties at left (each party's names, then its designation; "v." between them) in a box ruled at its right
+/// and foot; the case number, the title of the paper (bold) and the hearing (LCivR 7(i)(1): the date and the time and
+/// place, or "without oral argument") at right (LCivR 10(a)(1)(C), (D)). The row is whole numbered lines tall, so the
+/// text after it is on the numbered lines.
+#let caption(meta) = context {
+  let rows = ()
+  for (k, p) in meta.caption.parties.enumerate() {
+    if k > 0 { rows.push("v.") }
+    rows += p.names + (p.designation,)
+  }
+  let items = ("Case No. " + meta.case_number, text(weight: "bold", inl(meta.brief_title)))
+  let gaps = (1,)
+  if "hearing" in meta and meta.hearing != none {
+    gaps.push(items.len())
+    items.push("Hearing date: " + meta.hearing.date)
+    if "type" in meta.hearing { items.push(meta.hearing.type) }
+    if "judge" in meta.hearing { items.push(meta.hearing.judge) }
+  }
+  let left = line-stack(rows)
+  let right = line-stack(items, gaps: gaps)
+  let right-w = text-width - caption-left - caption-gutter
+  let hl = measure(width: caption-left - caption-rule-pad, left).height + caption-rule-below
+  let hr = measure(width: right-w - caption-right-pad, right).height
+  block(width: 100%, breakable: false, above: 0pt, below: 0pt, grid(
+    columns: (caption-left, caption-gutter, right-w),
+    rows: (grid-lines(calc.max(hl, hr)) * pitch,),
+    grid.cell(stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: caption-rule-pad), left),
+    [],
+    grid.cell(inset: (left: caption-right-pad), right),
+  ))
+}
 
 #let cover(meta) = {
   counsel-block(meta)
   court-title(meta)
-  v(pitch)
   caption(meta)
 }
 
 // ---------------------------------------------------------------------------
-// Body and signature
+// Body, contents and signature
 // ---------------------------------------------------------------------------
 
-#let signature-block(meta) = on-grid(grid(
-  columns: (2.6in, 1fr),
-  column-gutter: 0.2in,
-  [DATED #meta.date],
+/// Headings: bold, at the margin, on the numbered lines (a long one wraps onto the next), kept with the block after
+/// them; level 1 in capitals, level 3 bold italic. Levels 1 and 2 are listed in the table of contents.
+#let heading-block(level, s, outlined: true) = {
+  let body = if level == 1 { upper(inl(s)) } else { inl(s) }
+  let body = if level >= 3 { text(weight: "bold", style: "italic", body) } else { text(weight: "bold", body) }
+  block(width: 100%, sticky: true, above: 0pt, below: 0pt, par(first-line-indent: 0pt, {
+    if outlined and level <= 2 [#metadata((level: level, title: s))<waed-toc>]
+    body
+  }))
+}
+
+/// A body paragraph, its first line indented half an inch.
+#let body-par(s) = block(width: 100%, above: 0pt, below: 0pt,
+  par(first-line-indent: (amount: para-indent, all: true), inl(s)))
+
+/// A list item: the letter in its box half an inch in, the text hanging after it.
+#let lettered(k, s) = block(width: 100%, above: 0pt, below: 0pt, pad(left: list-indent,
+  par(first-line-indent: 0pt, hanging-indent: letter-box, [#box(width: letter-box)[#numbering("A.", k)]#inl(s)])))
+
+/// A heading's label ("I.", "A.", "1.") and its title.
+#let label-re = regex("^([IVXLC]+\\.|[A-Z]\\.|\\d+\\.)\\s+")
+
+/// The table of contents (levels 1 and 2), on its own page: the heading's label in its box, the title, a dot leader
+/// to the page it starts on, so the page numbers are the render's own (LCivR 10(a)(2)). One numbered line a row.
+#let contents() = {
+  block(width: 100%, above: 0pt, below: pitch, align(center, par(first-line-indent: 0pt, strong[TABLE OF CONTENTS])))
+  context for e in query(<waed-toc>) {
+    let (level, title) = (e.value.level, e.value.title)
+    let m = title.match(label-re)
+    let (lab, rest) = if m == none { ("", title) } else { (m.captures.at(0), title.slice(m.end)) }
+    let rest = if level == 1 { upper(inl(rest)) } else { inl(rest) }
+    let ind = (level - 1) * toc-tab
+    listing-row(e.location(), [#h(ind)#box(width: toc-tab, lab)#rest], str(counter(page).at(e.location()).first()),
+      toc-col, ind + toc-tab, 0pt)
+  }
+}
+
+/// The date at the margin and the signature column, single spaced, on one page, a blank single line below the text.
+#let signature-block(meta) = block(width: 100%, breakable: false, above: pitch-single, below: 0pt, grid(
+  columns: (sig-left, sig-gutter, text-width - sig-left - sig-gutter),
+  line-stack(("DATED " + meta.date,)),
+  [],
   {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    [Respectfully submitted,]
-    v(pitch * 0.5)
-    line-stack(meta.signature.firm)
-    v(pitch * 0.5)
-    line-stack(("By s/" + meta.signature.signer,) + meta.signature.lines)
+    let firm = meta.signature.firm
+    line-stack(("Respectfully submitted,",) + firm + ("By s/" + meta.signature.signer,) + meta.signature.lines,
+      gaps: (1, 1 + firm.len()))
   },
 ))
 
-/// Body chunks. A heading is one numbered line (left aligned, bold); a list is lettered by the template; any
-/// other chunk is a paragraph with a first-line indent. Memoranda are not numbered (LCivR 7(b)(1)).
-/// Numbering is not applied with a `show par` rule: a show rule that re-wraps paragraph content recurses without
-/// end in typst 0.15.
-#let body-chunks(body) = {
-  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
-  // A heading is kept in one unbreakable block with the chunk after it, so it never ends a page.
-  let pending = []
-  let has-pending = false
-  for c in chunks {
-    let t = c.trim()
+/// Body chunks: a `#` heading (levels 1 to 3), a `1.` or `-` list (lettered A., B., ... afresh in each list), or a
+/// paragraph. Memoranda are not numbered (LCivR 7(b)(1)).
+#let item-re = regex("^(\\d+\\.|[-*+])[ \\t]+")
+#let body-chunks(body, outlined: true) = {
+  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim()).filter(c => c != "")
+  for t in chunks {
     if t.starts-with("#") {
-      pending += cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-      has-pending = true
-    } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
-      // A list may break across pages; only a heading in front of it is kept with its first line.
-      let items = {
-        set par(leading: body-leading)
-        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-        v(body-leading)
+      let level = t.match(regex("^#+")).end
+      heading-block(calc.min(level, 3), t.slice(level).trim(), outlined: outlined)
+    } else if t.starts-with(item-re) {
+      // One item per line that starts with a label; a line without one continues the item before it.
+      let items = ()
+      for l in t.split("\n").map(l => l.trim()).filter(l => l != "") {
+        if l.starts-with(item-re) or items.len() == 0 { items.push(l.replace(item-re, "")) } else { items.last() += " " + l }
       }
-      if has-pending {
-        block(breakable: false, width: text-width, { pending; items })
-      } else {
-        items
-      }
-      pending = []
-      has-pending = false
+      for (k, item) in items.enumerate() { lettered(k + 1, item) }
     } else {
-      // A paragraph breaks across pages like any text; only a heading in front of it is kept with its first line.
-      let piece = on-grid({
-        set par(leading: body-leading)
-        h(para-indent)
-        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-      })
-      if has-pending {
-        block(breakable: false, width: text-width, { pending; piece })
-      } else {
-        piece
-      }
-      pending = []
-      has-pending = false
+      body-par(t)
     }
   }
-  if pending != [] { block(breakable: false, width: text-width, pending) }
 }
 
 #let waed-motion-brief(meta, body) = {
@@ -222,38 +250,27 @@
     },
     foreground: footer-block(meta.footer_title),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-
-  // Headings: level 1 is a bold caps section; level 2 a bold sub-section; level 3 bold italic. All left aligned,
-  // as in the exemplar's memorandum body.
-  show heading.where(level: 1): it => heading-line(text(weight: "bold", upper(it.body)))
-  show heading.where(level: 2): it => heading-line(text(weight: "bold", it.body))
-  show heading.where(level: 3): it => heading-line(text(weight: "bold", style: "italic", it.body))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  set par(first-line-indent: 0pt)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch. Lists are written by body-chunks() (list-indent: none).
+  show: xengine.with(pitch: pitch, list-indent: none)
+  // A doubled sign stays whole and with its number ("¶¶3.1, 3.32", "§§ 206(a)"): typst would break between the signs.
+  show regex("[§¶]{2,} \\S+"): it => box(it)
 
   cover(meta)
-
-  // Table of contents, generated from the body's headings, so its page numbers are the render's own (LCivR 10(a)(2)).
   if "toc" in meta and meta.toc {
     pagebreak()
-    set par(leading: single-leading, spacing: 0pt)
-    outline(
-      title: on-grid(align(center, text(weight: "bold", "TABLE OF CONTENTS"))),
-      depth: 2,
-      indent: level => (0pt, 0.5in, 1in).at(calc.min(level, 2)),
-    )
-    pagebreak(weak: true)
+    contents()
+    pagebreak()
   }
-
-  // Body: the memorandum text (not numbered; LCivR 7(b)(1)).
-  set enum(numbering: "A.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-  set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-  // The certificate of service follows the signature block, on its own page, as in the exemplar.
+  // The certificate of service follows the signature block, on its own page, as in the exemplar; it is not listed in
+  // the table of contents.
   let parts = body.split(regex("(?m)^# CERTIFICATE OF SERVICE\\s*$"))
   body-chunks(parts.at(0))
   signature-block(meta)
   if parts.len() > 1 {
     pagebreak()
-    body-chunks("# CERTIFICATE OF SERVICE\n\n" + parts.at(1))
+    body-chunks("# CERTIFICATE OF SERVICE\n\n" + parts.at(1), outlined: false)
   }
 }

@@ -39,27 +39,35 @@ local function adv(ch, style)
   return t[ch] or TNR.r[ch] or 1024
 end
 
--- The words of pandoc inlines (or a metadata value) as { { text, style }... } segments, split at spaces.
+-- The pieces of pandoc inlines (or a metadata value) between break opportunities, each a list of { char, style }
+-- with `space` set when a space precedes it: lines break at spaces and after a hyphen or a slash that a letter
+-- follows (UAX #14, as typst breaks; xe.runs keeps a hyphen before a digit, docx/lib's break rules a slash).
 local function words(x, style, out, cur)
   out = out or {}
-  cur = cur or { w = {} }
-  local function flush()
+  cur = cur or { w = { space = false }, space = false }
+  local function flush(space)
     if #cur.w > 0 then out[#out + 1] = cur.w end
-    cur.w = {}
+    cur.w = { space = space }
   end
   local function add(s, st)
-    for ch in s:gmatch(utf8.charpattern) do cur.w[#cur.w + 1] = { ch, st } end
+    local chars = {}
+    for ch in s:gmatch(utf8.charpattern) do chars[#chars + 1] = ch end
+    for k, ch in ipairs(chars) do
+      cur.w[#cur.w + 1] = { ch, st }
+      local nxt = chars[k + 1]
+      if (ch == "-" or ch == "/") and nxt and not nxt:match("^%d") then flush(false) end
+    end
   end
   if type(x) == "string" then
     for part in x:gmatch("[^ ]+%s*") do
-      add((part:gsub("%s+$", "")), style); flush()
+      add((part:gsub("%s+$", "")), style); flush(true)
     end
     return out, cur
   end
   for _, el in ipairs(x) do
     local t = el.t
     if t == "Str" then add(el.text, style)
-    elseif t == "Space" or t == "SoftBreak" or t == "LineBreak" then flush()
+    elseif t == "Space" or t == "SoftBreak" or t == "LineBreak" then flush(true)
     elseif t == "Emph" then words(el.content, style == "b" and "b" or "i", out, cur)
     elseif t == "Strong" then words(el.content, "b", out, cur)
     elseif t == "Quoted" then
@@ -81,8 +89,9 @@ function M.count_lines(x, avail, bold)
   for _, w in ipairs(ws) do
     local ww = 0
     for _, c in ipairs(w) do ww = ww + adv(c[1], c[2]) * unit end
+    local gap = w.space and space or 0
     if width == nil then width = ww
-    elseif width + space + ww <= avail + 0.2 then width = width + space + ww
+    elseif width + gap + ww <= avail + 0.2 then width = width + gap + ww
     else lines = lines + 1; width = ww end
   end
   return lines
@@ -97,15 +106,16 @@ end
 -- Paragraphs
 -- ---------------------------------------------------------------------------
 
--- A paragraph: o = { style, keep, before, after, line, left, hanging, first, right, jc, tabs }.
+-- A paragraph: o = { style, keep, brk (starts a page), before, after, line, left, hanging, first, right, jc, tabs }.
 function M.p(body, o)
   o = o or {}
   local props = {}
   if o.style then props[#props + 1] = xe.style(o.style) end
   if o.keep then props[#props + 1] = xe.KEEP end
+  if o.brk then props[#props + 1] = xe.BREAK end
   if o.tabs then props[#props + 1] = o.tabs end
   props[#props + 1] = xe.spacing(o.before or 0, o.after or 0, o.line or M.SINGLE)
-  props[#props + 1] = xe.ind(o.left or 0, o.hanging, o.hanging and nil or (o.first or 0), o.right)
+  props[#props + 1] = xe.ind(o.left or 0, o.hanging, (not o.hanging) and (o.first or 0) or nil, o.right)
   props[#props + 1] = xe.jc(o.jc or "left")
   return xe.para(props, body)
 end
@@ -178,13 +188,21 @@ function M.counsel(lines)
   return table.concat(out)
 end
 
--- The court's name, one numbered line each, centred (LCivR 10(a)(1)(B)), then a blank numbered line.
-function M.court(division)
+-- The court's name, centred (LCivR 10(a)(1)(B)): one numbered line each and a blank numbered line, or (single)
+-- single spaced with a blank single line after it, in whole numbered lines.
+function M.court(division, single)
   local lines = { "UNITED STATES DISTRICT COURT", "EASTERN DISTRICT OF WASHINGTON" }
   if txt(division) ~= "" then lines[#lines + 1] = txt(division):upper() end
   local out = {}
-  for _, l in ipairs(lines) do out[#out + 1] = M.p(xe.runs(l), { line = M.BODY, jc = "center" }) end
-  out[#out + 1] = M.p("", { line = M.BODY })
+  for _, l in ipairs(lines) do
+    out[#out + 1] = M.p(xe.runs(l), { line = single and M.SINGLE or M.BODY, jc = "center" })
+  end
+  if single then
+    local pad = M.grid_lines((#lines + 1) * M.SINGLE) * M.BODY - #lines * M.SINGLE
+    out[#out] = out[#out]:gsub('w:after="0"', 'w:after="' .. pad .. '"', 1)
+  else
+    out[#out + 1] = M.p("", { line = M.BODY })
+  end
   return table.concat(out)
 end
 
