@@ -4,7 +4,7 @@
 - Doc type: `opening-brief`. Brief of Appellant (FRAP 28(a); Fed. Cir. R. 28(a)); one self-contained folder, no shared files.
 - Exemplar: `usage/FILED-EXAMPLE-opening-brief.pdf` (*Delfasco LLC v. Secretary of the Army*, No. 24-1363, filed 2024-03-26; provenance in `usage/SOURCE.md`).
 - Sample: `usage/INPUT-opening-brief.md` (transcription of the filed brief, excerpted; see Known gaps).
-- Status: template built; render, overlay and page review done (below). Not reviewed by a human; `court.json` untouched.
+- Status: template built; render, overlay and page review done (below). Engines typst, latex, docx on the shared cross-engine layout model; cross-engine `report` (see the last section). Not reviewed by a human; `court.json` untouched.
 
 ## Files
 
@@ -140,3 +140,11 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 ## DOCX font and layout fixes (2026-10-21, fb-595.59)
 
 The docx engine moves from EB Garamond to Times New Roman, the face the typst template declares (DEF-FONT-002). The type-volume certificate's boxes are bordered runs ("X" or three no-break spaces) in the body face, as ca9.lua draws them, not DejaVu Sans ballot-box glyphs. `check.sh --engine docx` is green.
+
+## Cross-engine layout model (2026-10-22, fb-595.54.6)
+
+All three engines run on the shared layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty`/`.lua`, `lib/docx/xengine.lua`): first-fit breaking, no kerning, ligatures or hyphenation, exact line boxes (body 31.45 pt, single 19.95 pt; the typst body pitch had drifted to 25.9 pt since the Times New Roman switch and is back at the 31.45 pt the latex and docx engines already used), block spacings in pt, contents and authorities as `listing-row` rows (36 pt / 56 pt page columns), no small capitals in the point headings, check boxes as a ruled box around an X, signature, counsel and designation blocks at the middle of the text, signer names with typographic apostrophes. typst, latex and docx: 22 pages each; tier 1 `check.sh` 0 failed on all three.
+
+**Cross-engine status: `report`, not gated.** docx breaks 380 of 381 typst lines alike (99.7 %), latex 376 of 381 (98.7 %); the page counts agree. What remains:
+- p16/p17 (body 10/11), both engines: the last line of a paragraph carries footnote 4, which does not fit on p16. typst moves that line alone to p17 (a widow: typst's widow prevention does not count a line's footnote, and no `costs` setting changes it); LaTeX and LibreOffice keep the last two lines together, as the model requires. Not fixable in the template without a per-line hack.
+- p14 line 1 and p20 line 3, latex only: typst's line fits with 0.04 pt to spare; newtx's advances (1/1000 em) are a few hundredths of a point wider than Times New Roman's (1/2048 em), so LaTeX breaks one word earlier. Glyph-advance drift, below the 0.5 pt diagnostic tolerance, but it moves a break.

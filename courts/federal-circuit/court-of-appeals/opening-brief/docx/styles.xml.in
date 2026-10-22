@@ -11,7 +11,7 @@
     <w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="@SINGLE@" w:lineRule="exact"/></w:pPr></w:pPrDefault>
   </w:docDefaults>
   <w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/>
-    <w:pPr><w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" w:line="@SINGLE@" w:lineRule="exact"/></w:pPr></w:style>
+    <w:pPr><w:widowControl/><w:spacing w:before="0" w:after="0" w:line="@SINGLE@" w:lineRule="exact"/></w:pPr></w:style>
   <w:style w:type="character" w:default="1" w:styleId="DefaultParagraphFont"><w:name w:val="Default Paragraph Font"/><w:uiPriority w:val="1"/><w:semiHidden/><w:unhideWhenUsed/></w:style>
   <w:style w:type="table" w:default="1" w:styleId="TableNormal"><w:name w:val="Normal Table"/><w:uiPriority w:val="99"/><w:semiHidden/><w:unhideWhenUsed/>
     <w:tblPr><w:tblInd w:w="0" w:type="dxa"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="108" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar></w:tblPr></w:style>
@@ -19,6 +19,14 @@
   <!-- Body text: double spaced (exact @BODY@), first line indented 0.5 in (FRAP 32(a)(4); the typst para-indent). -->
   <w:style w:type="paragraph" w:styleId="BodyText"><w:name w:val="Body Text"/><w:basedOn w:val="Normal"/><w:qFormat/>
     <w:pPr><w:spacing w:before="0" w:after="0" w:line="@BODY@" w:lineRule="exact"/><w:ind w:firstLine="720"/><w:jc w:val="left"/></w:pPr></w:style>
+  <!-- The brief's last paragraph: kept whole and with the signature block that follows (the typst template sets them
+       as one unbreakable block). -->
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="0" w:after="0" w:line="@BODY@" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+  <!-- List items (lib/docx/xengine.lua, xe.list_items): the number or bullet in a half-inch box at the margin, the
+       text hanging after it, double spaced (lib/typst/xengine.typ lists). -->
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="ListItem"><w:name w:val="List Item"/><w:basedOn w:val="BodyText"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="0" w:after="0" w:line="@BODY@" w:lineRule="exact"/><w:ind w:left="720" w:hanging="720"/></w:pPr></w:style>
   <w:style w:type="paragraph" w:styleId="FirstParagraph"><w:name w:val="First Paragraph"/><w:basedOn w:val="BodyText"/><w:next w:val="BodyText"/><w:qFormat/>
     <w:pPr><w:spacing w:before="0" w:after="0" w:line="@BODY@" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
   <w:style w:type="paragraph" w:styleId="Compact"><w:name w:val="Compact"/><w:basedOn w:val="BodyText"/><w:qFormat/>
@@ -41,15 +49,15 @@
     <w:rPr><w:b/><w:bCs/><w:i/><w:iCs/></w:rPr></w:style>
   <w:style w:type="paragraph" w:styleId="Heading5"><w:name w:val="heading 5"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:qFormat/>
     <w:pPr><w:keepNext/><w:keepLines/><w:tabs><w:tab w:val="left" w:pos="3600"/></w:tabs><w:spacing w:before="308" w:after="252" w:line="@SINGLE@" w:lineRule="exact"/><w:ind w:left="3600" w:hanging="720"/><w:outlineLvl w:val="4"/></w:pPr>
-    <w:rPr><w:i/><w:iCs/></w:rPr></w:style>
+    <w:rPr><w:b/><w:bCs/><w:i/><w:iCs/></w:rPr></w:style>
   <!-- Section heading that hangs its label at the margin (answering and reply briefs, typst "I. TITLE" headings). -->
   <w:style w:type="paragraph" w:styleId="SectionHang"><w:name w:val="Section Hang"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/>
     <w:pPr><w:keepNext/><w:keepLines/><w:tabs><w:tab w:val="left" w:pos="720"/></w:tabs><w:spacing w:before="308" w:after="252" w:line="@SINGLE@" w:lineRule="exact"/><w:ind w:left="720" w:hanging="720"/><w:outlineLvl w:val="0"/></w:pPr>
     <w:rPr><w:b/><w:bCs/></w:rPr></w:style>
-  <!-- Centered point heading of an Argument (opening brief): bold small capitals. -->
+  <!-- Centered point heading of an Argument (opening brief): bold (the filter writes these as Heading 2, centered). -->
   <w:style w:type="paragraph" w:styleId="PointHeading"><w:name w:val="Point Heading"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/>
     <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="336" w:after="280" w:line="@SINGLE@" w:lineRule="exact"/><w:jc w:val="center"/><w:outlineLvl w:val="1"/></w:pPr>
-    <w:rPr><w:b/><w:bCs/><w:smallCaps/></w:rPr></w:style>
+    <w:rPr><w:b/><w:bCs/></w:rPr></w:style>
   <!-- Contents (table of contents) entries: label hung at its level's margin, title, right tab with dot leader. -->
   <w:style w:type="paragraph" w:styleId="ContentsL1"><w:name w:val="Contents Level 1"/><w:basedOn w:val="Normal"/><w:qFormat/>
     <w:pPr><w:keepLines/><w:tabs><w:tab w:val="left" w:pos="720"/><w:tab w:val="right" w:leader="dot" w:pos="9360"/></w:tabs><w:spacing w:before="200" w:after="0" w:line="@SINGLE@" w:lineRule="exact"/><w:ind w:left="720" w:right="720" w:hanging="720"/></w:pPr></w:style>

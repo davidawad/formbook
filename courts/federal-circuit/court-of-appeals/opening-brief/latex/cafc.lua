@@ -9,7 +9,8 @@
 --   4. Builds the table of authorities from the `authorities:` registry, in the six groups of the typst template,
 --      cases alphabetized, only the authorities the body cites. Page numbers come from the aux file.
 --   5. Counts the words of the body (footnotes included, the addendum excluded) for the certificate of compliance.
---   6. Keeps the last paragraph of the body with the signature block (meta keep_signature).
+--   6. Keeps the last paragraph of the body with the signature block (meta keep_signature: an unbreakable group).
+--   7. Runs the cross-engine inline rules (lib/latex/xengine.lua) over the body and every metadata value.
 --
 -- A link to a key that is not in `authorities:` stops the build, as in the typst template.
 
@@ -17,23 +18,16 @@ local function text(x)
   return pandoc.utils.stringify(x)
 end
 
--- A section or pilcrow sign stays with the number after it, as in the typst template ("§ 1331" is not split).
-local function bind_signs(inlines)
-  for i = 1, #inlines - 1 do
-    local a, b = inlines[i], inlines[i + 1]
-    if a.t == "Str" and (a.text == "\u{00A7}" or a.text == "\u{00B6}") and b.t == "Space" then
-      inlines[i + 1] = pandoc.Str("\u{00A0}")
-    end
-  end
-  return inlines
-end
+-- The inline rules of the cross-engine layout model (lib/latex/xengine.lua): break opportunities as typst has them,
+-- ligature characters as commands, a section sign bound to its number. Run on the body and on every metadata value.
+local xe_inlines = require("latex.xengine").inlines
 
 -- LaTeX for inline content (a list of inlines), trimmed.
 local function latex(x)
   if x == nil then
     return ""
   end
-  local s = pandoc.write(pandoc.Pandoc({ pandoc.Plain(bind_signs(x)) }), "latex")
+  local s = pandoc.write(pandoc.Pandoc({ pandoc.Plain(xe_inlines(pandoc.Inlines(x))) }), "latex")
   return (s:gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
@@ -97,9 +91,9 @@ local function toa_block(authorities)
         if a.name then
           name = latex(a.name)
           if g.kind == "case" then
-            name = "\\emph{" .. name .. "},\\\\ "
+            name = "\\emph{" .. name .. "},\\newline "
           else
-            name = name .. ",\\\\ "
+            name = name .. ",\\newline "
           end
         end
         out[#out + 1] = "\\ca@toaline{" .. m.key .. "}{" .. name .. latex(a.cite) .. "}"
@@ -148,6 +142,19 @@ local function group_digits(n)
   return (out:gsub("^,", ""))
 end
 
+-- The paragraphs of a block quotation are 14 bp apart (typst: the quotation's paragraph spacing).
+local function quote_sep(q)
+  local out = {}
+  for i, b in ipairs(q.content) do
+    if i > 1 then
+      out[#out + 1] = pandoc.RawBlock("latex", "\\ca@qsep")
+    end
+    out[#out + 1] = b
+  end
+  q.content = out
+  return q
+end
+
 function Pandoc(doc)
   local body, add, in_add = {}, {}, false
   for _, b in ipairs(doc.blocks) do
@@ -185,8 +192,10 @@ function Pandoc(doc)
   end
 
   -- Link conversion runs over the body first, then the addendum, so `cited` keeps document order.
-  local bodyd = pandoc.Pandoc(body):walk({ Link = link_filter, Inlines = bind_signs })
-  local addd = pandoc.Pandoc(add):walk({ Link = link_filter, Inlines = bind_signs })
+  local bodyd = pandoc.Pandoc(body):walk({ Link = link_filter }):walk({ Inlines = xe_inlines, BlockQuote = quote_sep })
+  local addd = pandoc.Pandoc(add):walk({ Link = link_filter }):walk({ Inlines = xe_inlines, BlockQuote = quote_sep })
+  -- every metadata value the template sets, with the same inline rules
+  doc.meta = pandoc.Pandoc({}, doc.meta):walk({ Inlines = xe_inlines }).meta
 
   local authorities = doc.meta.authorities or {}
   for _, key in ipairs(cited) do
@@ -195,32 +204,11 @@ function Pandoc(doc)
     end
   end
 
-  -- Headings followed directly by another heading (`# Argument` and its first point heading) share a samepage
-  -- group with it, so they never part at a page end.
-  local keep = {}
-  for i = 1, #bodyd.blocks - 1 do
-    local a, b = bodyd.blocks[i], bodyd.blocks[i + 1]
-    if a.t == "Header" and b.t == "Header" then
-      keep[i] = true
-    end
-  end
-  local joined = {}
-  for i, b in ipairs(bodyd.blocks) do
-    if keep[i] and not keep[i - 1] then
-      joined[#joined + 1] = pandoc.RawBlock("latex", "\\begin{samepage}")
-    end
-    joined[#joined + 1] = b
-    if keep[i - 1] and not keep[i] then
-      joined[#joined + 1] = pandoc.RawBlock("latex", "\\end{samepage}")
-    end
-  end
-  bodyd.blocks = joined
-
-  -- The last paragraph of the brief and the signature block (added by the template) are one samepage group,
+  -- The last paragraph of the brief and the signature block (added by the template) are one unbreakable group,
   -- so the signature never stands alone on a page. A heading or a footnote definition at the end is not kept.
   local last = bodyd.blocks[#bodyd.blocks]
   if last ~= nil and (last.t == "Para" or last.t == "Plain") then
-    table.insert(bodyd.blocks, #bodyd.blocks, pandoc.RawBlock("latex", "\\noindent\\begin{minipage}[t]{\\linewidth}"))
+    table.insert(bodyd.blocks, #bodyd.blocks, pandoc.RawBlock("latex", "\\begingroup\\interlinepenalty=10000\\relax"))
     doc.meta.keep_signature = pandoc.MetaBool(true)
   end
 
