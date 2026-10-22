@@ -36,12 +36,13 @@
   set page(
     paper: "us-letter",
     margin: margin,
-    // Body numbering starts at the Introduction (filed-brief convention, see usage/SOURCE.md): the cover (page 1)
-    // and table of contents (page 2) are unnumbered, so the displayed number is the physical page minus 2.
-    numbering: n => str(n - 2),
+    // Every page after the cover is numbered (ch. 4.6(b): "should always be paginated") and carries the A-number
+    // (ch. 4.6(c)(2)): the table of contents in roman from i, the body in arabic from 1 at the Introduction (the
+    // filed brief's body numbering, usage/SOURCE.md). Only the cover is unnumbered (DEF-COVER-001).
+    numbering: "i",
     footer: context {
       // ch. 4.6(b) requires pagination, ch. 4.6(c)(2) the A-number at bottom right.
-      if counter(page).get().first() > 2 [
+      if here().page() > 1 [
         #set text(size: 11pt)
         #grid(
           columns: (1fr, 1fr, 1fr),
@@ -108,6 +109,7 @@
     )
   }
   pagebreak()
+  counter(page).update(1)
 
   // ---- table of contents (generated from the headings; excluded from the page limit, ch. 4.6(b)) ----
   {
@@ -116,7 +118,8 @@
     set par(first-line-indent: 0pt, leading: 0.9em)
     outline(title: none, depth: 2, indent: 0pt)
   }
-  pagebreak()
+  set page(numbering: "1")   // a new page: the body, numbered from 1
+  counter(page).update(1)
 
   // ---- body ----
   let body = cmarker.render(md, raw-typst: false, smart-punctuation: true, h1-level: 1)

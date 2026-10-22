@@ -1,7 +1,7 @@
 -- BIA brief on appeal, DOCX engine (docs/DOCX.md). Pandoc writes the markdown body; this filter writes the
 -- front matter and the back matter as WordprocessingML, from the same frontmatter fields that
 -- typst/bia-brief-on-appeal.typ reads: the cover, the contents (a TOC field with its result filled in), the
--- signature block and the certificate of service. Sections: cover (no footer), contents (no footer), body
+-- signature block and the certificate of service. Sections: cover (no footer), contents (footer, roman from i), body
 -- (footer with the page number and the A-number; numbering restarts at the Introduction, as in the typst copy).
 -- The table of contents page numbers come from docx/render.sh (a first pass renders the PDF and finds each
 -- heading), passed as metadata bia_toc=<file>, one page number per line in heading order.
@@ -32,6 +32,9 @@ end
 
 local BOLD = "<w:b/><w:bCs/>"
 local SECT = '<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>'
+-- the contents section: the body's footer (page number and A-number, docx/build-reference.sh), numbered in roman from i
+-- (PM ch. 4.6(b) pagination, ch. 4.6(c)(2) A-number on every page after the cover; typst numbers it the same way)
+local TOC_SECT = '<w:sectPr><w:footerReference w:type="default" r:id="rIdBiaFooter1"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/><w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>'
 local NOBORDERS = '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>'
 
 local function R(text, rpr)
@@ -137,7 +140,7 @@ local function contents(entries, pages)
     xml[#xml + 1] = P("Single", '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> TOC \\o "1-2" \\h \\z \\u </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r>')
   end
   out[#out + 1] = RAW(table.concat(xml))
-  out[#out + 1] = RAW(P("Single", "", SECT))
+  out[#out + 1] = RAW(P("Single", "", TOC_SECT))
   return out
 end
 
