@@ -11,11 +11,13 @@
 | Path | What |
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `cadc-brief`. |
-| `typst/cadc-reply-brief.typ` | Template. Helpers copied from the ca9 template (cmarker body, TOC and TOA built from introspection, cover-fit loop, `toa:` links); rule parameters and certificates rewritten for the D.C. Circuit. |
+| `typst/cadc-reply-brief.typ` | Template. Helpers copied from the ca9 template (cmarker body, TOC and TOA built from introspection, cover-fit loop, `toa:` links); rule parameters and certificates rewritten for the D.C. Circuit. On the shared cross-engine layout model (`lib/typst/xengine.typ`). |
+| `latex/template.tex`, `latex/cadc.lua` | LaTeX engine: layout (`lib/latex/xengine.sty`) and the filter that writes the cover, tables, signature and certificates. |
+| `docx/cadc.lua`, `docx/make-reference.sh`, `docx/reference.docx` | DOCX engine: the filter (`lib/docx/xengine.lua`) and the reference document built by `make-reference.sh` (`lib/docx/xengine-reference.sh`). |
+| `eval.yaml` | `params.cross_engine: gate` (Gate 4). |
 | `usage/INPUT-reply-brief.md` | Markdown contract sample: frontmatter plus the brief body. |
-| `usage/OUTPUT-reply-brief.typst.pdf` | `sh tools/render.sh courts/dc-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md` (15 pages). |
-| `usage/OVERLAY-rosen-kellogg-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/dc-circuit/court-of-appeals/reply-brief rosen-kellogg-reply-brief`. |
-| `usage/` | The filed exemplar and `SOURCE.md`. |
+| `usage/OUTPUT-reply-brief.typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` | `sh tools/render.sh [--engine latex\|docx] courts/dc-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md` (16 pages each). |
+| `usage/` | The filed exemplars and `SOURCE.md`. Overlays (`just overlay`) go to the gitignored `.overlay/`. |
 
 ## Governing rules
 
@@ -64,35 +66,34 @@ The pairings are close throughout. The typeface is now the metric-compatible sub
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-reply-brief.typst.pdf` was rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the font change (2026-10-15): **15 of 15 pages reviewed**. Typst printed no warnings. Fonts embedded: Liberation Serif (Regular, Bold, Italic, BoldItalic) only.
+Every page of `OUTPUT-reply-brief.typst.pdf` was rendered at 50 dpi (`pdftoppm -r 50`) and viewed after the port onto the cross-engine layout model (fb-595.54.2, 2026-10-22), and every page of the latex and docx renders beside it: **16 of 16 pages reviewed** in each engine. Typst printed no warnings. Fonts embedded: Times New Roman (Regular, Bold, Italic, BoldItalic) in typst and docx, TeX Gyre Termes X (its metric twin) in latex.
 
 | PDF page | Printed | Content | Result |
 |---|---|---|---|
-| 1 | — | Cover: oral-argument line, number, court, caption, D.C. No. and judge, brief title, counsel | OK after 2026-10-16 (the oral-argument line was missing before; see the verification pass). Fits one page; the judge line wraps. |
-| 2 | i | Table of Contents (point and sub-point hanging indents; page column) | OK after 2026-10-16: before, the page numbers of entries I.A, I.B.2 and I.C wrapped onto lines of their own. |
-| 3 | ii | Table of Authorities, cases (first page) | OK. Case names italic (FRAP 32(a)(6)). |
-| 4 | iii | Table of Authorities, cases (second page) | OK. |
-| 5 | 1 | Summary of Argument; ARGUMENT; point I; sub-point A | OK. |
-| 6 | 2 | Counsel's bullets (Valentin, Ketab, Monroe) | OK. |
-| 7 | 3 | Bullets (Orr to Rousset) | OK. Escaped asterisks in "at \*2" render as literal asterisks. |
-| 8 | 4 | Rousset, continued; Edwards; sub-point B; B.1; Willoughby, Foman, Richards | OK. Level-4 heading "1." in bold italic (ca9 convention; see Known gaps). |
-| 9 | 5 | Wisdom; Caribbean block quote; Rule 15(a) block; point B.2 heading; the District Court quotation | OK. |
-| 10 | 6 | JA0221 passage; sub-point C heading; the futility argument | OK. |
-| 11 | 7 | The District Court's temporal-proximity quotation; complaint quotation (¶ 19) | OK. |
-| 12 | 8 | Proposed amended complaint; Iqbal/Twombly | OK. |
-| 13 | 9 | Conclusion heading; Respectfully submitted; signature block; date | OK. The signature block stays with the last paragraph. |
-| 14 | 10 | Certificate of Compliance (word count 2,175; typeface sentence "Liberation Serif, 14-point") | OK. Typeface sentence is literal text (see the build note below). |
-| 15 | 11 | Certificate of Service | OK. Template-authored wording (see Known gaps). |
+| 1 | — | Cover: oral-argument line, number, double rule, court, caption with designations from the middle, D.C. No. and judge, brief title, counsel and telephone, double rule | OK. One page; the judge line wraps after "United States" in all three engines. |
+| 2 | i | Table of Contents ("Page" underlined; point and sub-point hanging indents; page column) | OK. No page number alone on a line. |
+| 3 | ii | Table of Authorities, cases *Ashcroft* to *Orr* ("Page(s)" underlined) | OK. Case names italic (FRAP 32(a)(6)); every page listed, no passim (Cir. R. 28(a)(2)). |
+| 4 | iii | Table of Authorities, *Richards* to *Wisdom* | OK. |
+| 5 | 1 | Summary of Argument | OK. The Argument heading chain (ARGUMENT, I., A. and two lines of text) does not fit below it and opens page 2. |
+| 6 | 2 | ARGUMENT; point I; sub-point A; bullets (*Valentin*) | OK. Bullets at the margin, text half an inch in. |
+| 7 | 3 | Bullets *Ketab* to *Surface Art* | OK. |
+| 8 | 4 | "And compare:"; bullets *McDaniel* to *Edwards* | OK. |
+| 9 | 5 | Sub-point B; B.1 (bold italic); *Willoughby*, *Foman*, *Richards*, *Precythe* | OK. |
+| 10 | 6 | *Wisdom*; the *Caribbean* quotation; B.2 heading; the District Court quotation begins | OK. Quotations single-spaced, half an inch in on both sides. |
+| 11 | 7 | Quotation ends; JA0221; the argument to "already have." | OK. |
+| 12 | 8 | Sub-point C; the futility argument; the temporal-proximity quotation begins | OK. |
+| 13 | 9 | Quotation ends; the complaint quotation with its numbered paragraph 19; JA0013; the proposed amendment | OK. Item 19 has its number in a half-inch box inside the quotation. |
+| 14 | 10 | *Iqbal*/*Twombly*; CONCLUSION; signature block; date | OK. The signature block stays with the last paragraph. |
+| 15 | 11 | Certificate of Compliance (2,175 words; "Times New Roman, 14-point") | OK. |
+| 16 | 12 | Certificate of Service | OK. Template-authored wording (see Known gaps). |
 
-**Build issue fixed during review.** An earlier render of the certificate page embedded `DejaVuSansMono`, a fallback font, because the typeface sentence interpolated the length value `type-size` into the content. That line is now literal text ("Liberation Serif, 14-point"), and the rebuilt PDF embeds only Liberation Serif.
-
-**Length.** The body runs 9 printed pages (1-9), plus the certificates (10-11) and the front matter (cover, TOC, TOA: 4 pages), for 15 pages in all. In EB Garamond the body was 10 pages and the total 16. The exemplar is 16 pages in all with the same shape: its body runs 11 pages to the conclusion, and it has no certificate of service. The sample is a full transcription, not an excerpt.
+**Length.** The body runs 10 printed pages (1-10), plus the certificates (11-12) and the front matter (cover, TOC, TOA: 4 pages), for 16 pages in all (15 before the cross-engine port, at a 25.9 pt pitch). The exemplar is 16 pages in all with the same shape: its body runs 11 pages to the conclusion, and it has no certificate of service. The sample is a full transcription, not an excerpt.
 
 **Word count.** The template's count of the markdown body is 2,175 words; the filed certificate says 2,251. The filing's counting method is not known, so the gap is not explained. Both are under 6,500, and the certificate uses the template's count.
 
 ## Known gaps
 
-- **Typeface (resolved 2026-10-15).** Face required: Times New Roman. The D.C. Circuit Handbook (rev. 2021, IX.A.6) names Century and Times New Roman and discourages Garamond; the filed exemplar is Times New Roman 14-point. Substitute: `Liberation Serif` (`docs/FONTS.md`; metric-compatible with Times New Roman). The template was EB Garamond before this change. Page count went from 16 to 15.
+- **Typeface (resolved 2026-10-15).** Face required: Times New Roman. The D.C. Circuit Handbook (rev. 2021, IX.A.6) names Century and Times New Roman and discourages Garamond; the filed exemplar is Times New Roman 14-point. Substitute: `Liberation Serif` (`docs/FONTS.md`; metric-compatible with Times New Roman). The template was EB Garamond before this change. Page count went from 16 to 15. Since the pinned Times New Roman files were added (`docs/FONTS.md`), typst renders Times New Roman itself, Liberation Serif being the fallback; the docx names Times New Roman and latex sets newtx, its metric twin.
 - **Current Circuit Rule 32 not retrieved.** The 6,500-word figure comes from FRAP 28.1(e)(2)(C) and Cir. R. 32(e)(1) as the 2016 order states it. The current Circuit Rules PDF on `cadc.uscourts.gov` returned 404 from this box; it should be checked before the template is used for a live filing.
 - **Certificate of service.** The exemplar has none. The wording is template-authored from FRAP 25(d) and the CM/ECF practice; it has not been checked against a D.C. Circuit form. It is in the sample only because the brief's structure calls for it (`service.certificate: true`).
 - **Case names** are italic in the sample and template (FRAP 32(a)(6) and the Handbook). The filed brief sets them roman; that is a difference from the exemplar, following the rule.
@@ -103,28 +104,20 @@ Every page of `OUTPUT-reply-brief.typst.pdf` was rendered at 60 dpi (`pdftoppm -
 
 ## Engines
 
-The typst template is the reference. The LaTeX and DOCX engines are built from the same markdown.
+The typst template is the reference. The LaTeX and DOCX engines are built from the same markdown by `fb render`:
+`sh tools/render.sh --engine latex|docx courts/dc-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md`.
 
-Build commands, from the repo root:
+- **latex** (`usage/OUTPUT-reply-brief.latex.pdf`, 16 pages; pdflatex, Times from newtx). `latex/cadc.lua` writes the cover, the contents and authorities (two-pass page numbers), the headings with their labels, the signature block and the certificates; `latex/template.tex` holds the layout. Word count 2,175, the typst template's count of the markdown source. Every line and page breaks where typst breaks it (see "Cross-engine").
+- **docx** (`usage/OUTPUT-reply-brief.docx`, `.docx.pdf` 16 pages; LibreOffice). `docx/cadc.lua` writes the cover (rules as paragraph borders), the contents and authorities with their page numbers (fb render's two-pass page map: needles for every heading and citation), the quotations, the signature block and the certificates; Times New Roman. Word count 2,175. The earlier gaps (no cover, tables or certificates in the `.docx`, no `.docx.pdf`) are closed. Word may paginate slightly differently from the LibreOffice PDF the page numbers come from (`docs/DOCX.md`).
 
-- LaTeX (pdflatex, Times from newtx; reruns until the contents and authorities settle):
-  `sh tools/render.sh --engine latex courts/dc-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md`
-- DOCX (run from the court folder):
-  `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/cadc.lua usage/INPUT-reply-brief.md -o usage/OUTPUT-reply-brief.docx`
+## Cross-engine (fb-595.54.2)
 
-**LaTeX matches the typst output (tier 1):** Liberation Serif 14 pt from `fonts/`, 1 in margins, body line pitch 25.9 pt and single 14.2 pt (measured on the typst render; body lines agree within 1 pt), cover in the same order and positions, roman contents and authorities, arabic body from 1, Certificate of Compliance with the template's count (2,175 words, the same count as typst, computed by `render.sh` from the markdown), Certificate of Service, signature block kept with the last paragraph, I. / A. / 1. / a. heading labels under "Argument", 14 pt footnotes.
+All three engines on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Adopting the reference breaker"); `params.cross_engine: gate` in `eval.yaml`.
 
-**LaTeX differs from typst:**
-- The summary paragraph breaks into 13 lines against typst's 14 (one word moves at the end of a line); the rest of the body follows, so the body is 8 pages against typst's 9 and the whole brief is 13 pages against 15 (the table of authorities is one page here against two in typst).
-- Table of authorities: each entry flows as "name, citation" in one paragraph; typst puts the citation on the line after the name.
-- A heading after a heading is about 2.5 pt closer than typst's collapsed space.
-- Contents and authorities page numbers and the Conclusion's page number follow the LaTeX pagination (the build checks that they settle).
-
-**DOCX (BLOCKED):** LibreOffice is not available on this box (`soffice` is not installed; the extracted build fails with a UNO DeploymentException), so no `.docx.pdf` exists. The Gate 0 and Gate 1 checks that run on the `.docx.pdf` are BLOCKED for this reason; the `.docx` itself passes `unzip -tq` and `xmllint --noout` on every XML and rels part. Also BLOCKED or not produced in the `.docx`:
-- Cover, table of contents, table of authorities, Certificate of Compliance and Certificate of Service are not generated (pandoc writes the body only). The word count, the typeface statement and the certificates are therefore not checked in the `.docx`.
-- The 6,500-word reply limit (FRAP 28.1(e)(2)(C)) is checked by the typst and LaTeX engines only.
-- The `.docx` declares Liberation Serif; Word substitutes silently if it is not installed on the machine that opens the file.
-- Heading labels (I., A., 1., a.) are written as text by `docx/cadc.lua`, not as Word numbering; the contents field is not generated.
+- typst: `show: xengine.with(pitch: 29.4pt, list-indent: 0.5in)`; line boxes of 29.4 pt (body) and 17 pt (headings, quotations, footnotes, tables, cover, signature, certificates); every space in pt (the em values it had, at 14 pt); `listing-row` contents and authorities (36 pt page column; 56 pt or the list's own width); the signature block and the cover's designations and counsel at the middle of the text width (3.25 in); the page number in a 17 pt box. The pitches changed: the template's line box (ascender to descender plus a leading) gave a 25.9 pt body pitch, 1.85 times the type size, which is under double spacing (FRAP 32(a)(4)), and a 14.2 pt single pitch, under the face's own height, which Word's exact line spacing would clip; the ca9 reference's 29.4 pt (2.1 x) and 17 pt are used. The certificate names Times New Roman, the face all three engines set (it named Liberation Serif, which no engine embeds).
+- latex: `\usepackage{xengine}`, `\xe@lines`, `\addvspace`, `\xe@row`, `\xe@footnotemarks`, `\xe@lists`; filter on `require("latex.xengine")`; the ellipsis as one 1 em unit with ActualText U+2026; a quotation sets `\@totalleftmargin` and `\linewidth` so a list inside it is measured from the quotation; a citation mark leaves vertical mode first (a citation that opens a list item at the top of a page was listed a page early); headings are not split.
+- docx: `reference.docx` from `make-reference.sh` (`lib/docx/xengine-reference.sh`, Times New Roman 14 pt, 588 and 340 twips); `cadc.lua` on `docx.xengine` with exact spacing, leader-tab rows, sections and footers, a word joiner in ")(" tokens.
+- Before (fresh baseline, 2026-10-21): latex 13 pages against typst's 15, 52.9 % of lines with typst's break; docx 9 pages (no cover, tables or certificates), 43.5 %. After: typst 16 pages; latex and docx 16 pages, 334/334 lines, every page starting and ending on typst's words (XENG-001..003 PASS); tier 1: typst 8 passed, latex 11 passed, docx 12 passed, 0 failed. Positions (diagnostic): widths within 0.09 pt (latex) and 0.37 pt (docx); every line within 1.4 pt of typst's baseline and left edge (latex 1.4 pt and docx 0.2 pt at most on the baseline; the largest differences are on the cover).
 
 [Formbook index](../../../../README.md) | [Status table](../../../../STATUS.md)
 
