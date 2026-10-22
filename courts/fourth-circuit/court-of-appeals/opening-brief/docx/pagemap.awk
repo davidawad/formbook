@@ -1,6 +1,6 @@
 # pagemap.awk: the TOC and TOA page numbers, read from the LibreOffice PDF of a first pass (docx/render.sh).
 # Usage: awk -v man=<manifest> -f pagemap.awk page-1.txt page-2.txt ...   (pdftotext -layout, one file per page)
-# Output: H<TAB>idx<TAB>folio (headings), S<TAB>name<TAB>folio (table of authorities, certificates),
+# Output: H<TAB>idx<TAB>folio (headings), E<TAB>idx<TAB>folio (a heading whose next block starts on the next page), S<TAB>name<TAB>folio (table of authorities, certificates),
 #         T<TAB>key<TAB>pages (authorities, from the C needles of the manifest; "passim" from 7 pages), and MISSING<TAB>... where a search failed.
 # A page belongs to the body when its last text line is an arabic folio; the front matter has roman folios.
 # true when text t occurs in s starting at or before position last (so it begins on this page)
@@ -20,7 +20,7 @@ function norm(s) {
 BEGIN {
   while ((getline line < man) > 0) {
     n = split(line, f, "\t")
-    if (f[1] == "H") { nh++; hid[nh] = f[2]; hkey[nh] = f[4] }
+    if (f[1] == "H") { nh++; hid[nh] = f[2]; hkey[nh] = f[4]; hnext[nh] = f[5] }
     else if (f[1] == "S") { ns++; sname[ns] = f[2]; smode[ns] = f[3]; skey[ns] = f[4] }
     else if (f[1] == "C") { nc++; ckey[nc] = f[2]; ckind[nc] = f[3]; ctext[nc] = f[4] }
   }
@@ -44,12 +44,19 @@ END {
         if (!body[p]) continue
         for (k = 1; k <= nl[p]; k++) {
           t = norm(L[p, k]); pos = index(t, hkey[h])
-          if (pos == 1) { found = 1; hf = folio[p]; cur = p; break }
+          if (pos == 1) { found = 1; hf = folio[p]; cur = p; hp = p; hk = k; break }
         }
       }
     }
-    if (found) print "H\t" hid[h] "\t" hf
-    else print "MISSING\theading\t" hid[h] "\t" hkey[h]
+    if (!found) { print "MISSING\theading\t" hid[h] "\t" hkey[h]; continue }
+    print "H\t" hid[h] "\t" hf
+    # a heading that ends its page (the first words of the block after it are not on the page below it): typst would
+    # have moved it to the next page with what follows (a sticky heading), so docx/render.sh breaks the page before it
+    if (hnext[h] != "") {
+      after = 0
+      for (j = hk + 1; j <= nl[hp] && !after; j++) if (index(norm(L[hp, j]), hnext[h]) > 0) after = 1
+      if (!after) print "E\t" hid[h] "\t" hf
+    }
   }
   for (s = 1; s <= ns; s++) {
     found = 0

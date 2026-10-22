@@ -4,8 +4,8 @@
 # reference.docx; this script then writes the sections (cover: no number; front matter: lower roman; body: arabic
 # from 1), the page-number footers and the page setup, which pandoc does not carry over from the reference.
 # The TOC and TOA page numbers come from the PDF: pass 1 writes the .docx with placeholders, LibreOffice converts
-# it, pagemap.awk reads the page of each heading and authority from that PDF; pass 2 writes the numbers into the
-# .docx, and its PDF must give the same numbers again (otherwise the render fails).
+# it, pagemap.awk reads the page of each heading and authority from that PDF; the next pass writes the numbers into
+# the .docx, until a pass gives the numbers it was written with (see the loop at the end).
 set -eu
 D=$(cd "$(dirname "$0")" && pwd)
 COURT=$(cd "$1" && pwd)
@@ -69,14 +69,25 @@ pagemap() { # <pdf> <manifest>: the page map on stdout; fails on any MISSING sea
   cat "$P/map.txt"
 }
 
+# Pass 1 has no page numbers. Each later pass writes those of the pass before, and the headings any pass found at the
+# foot of a page (E rows) open the next page from then on (typst's sticky headings; ca4.lua writes headings without
+# keep-with-next, which LibreOffice honours by moving a heading whenever the paragraph after it is split). The render
+# is done when a pass gives the page map it was written with; at most five passes.
 build "$W/p1.docx" "" "$W/man1.txt"
 pagemap "$(convert "$W/p1.docx")" "$W/man1.txt" > "$W/map1.txt" || exit 1
-build "$W/p2.docx" "$W/map1.txt" "$W/man2.txt"
-pagemap "$(convert "$W/p2.docx")" "$W/man2.txt" > "$W/map2.txt" || exit 1
-cmp -s "$W/map1.txt" "$W/map2.txt" || {
-  echo "render.sh: the page numbers of the second pass differ from the first:" >&2
-  diff "$W/map1.txt" "$W/map2.txt" >&2
-  exit 1
-}
-cp "$W/p2.docx" "$OUT"
+pass=1
+while :; do
+  m=$((pass + 1))
+  build "$W/p$m.docx" "$W/map$pass.txt" "$W/man$m.txt"
+  pagemap "$(convert "$W/p$m.docx")" "$W/man$m.txt" > "$W/new.txt" || exit 1
+  { grep -v '^E' "$W/new.txt" || true; { grep '^E' "$W/map$pass.txt" "$W/new.txt" -h || true; } | sort -u; } > "$W/map$m.txt"
+  cmp -s "$W/map$pass.txt" "$W/map$m.txt" && break
+  if [ "$m" -ge 5 ]; then
+    echo "render.sh: the page numbers do not settle after $m passes:" >&2
+    diff "$W/map$pass.txt" "$W/map$m.txt" >&2
+    exit 1
+  fi
+  pass=$m
+done
+cp "$W/p$m.docx" "$OUT"
 echo "$OUT"

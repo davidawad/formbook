@@ -37,16 +37,18 @@ sub style {   # style(id, name, basedOn, pPr, rPr)
 style('CABodyLast', 'CA Body Last', 'BodyText', '<w:keepNext/><w:keepLines/>', '');
 # section headings: 21 pt above, 15.4 pt below, centered bold capitals (the answering and reply briefs: 16 pt type in
 # a 16 pt box); unnumbered sub-headings 16.8 / 12.6 pt, bold at the margin; numbered ones 15.4 / 12.6 pt, the label
-# at S half-inches, the text hanging a half inch more; a centered point heading 16.8 / 14 pt
-style('CASection', 'CA Section', 'Normal', '<w:keepNext/><w:keepLines/>' . sp(420, 308) . '<w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="0"/>', '<w:b/><w:caps/>');
+# at S half-inches, the text hanging a half inch more; a centered point heading 16.8 / 14 pt. No keep-with-next:
+# LibreOffice moves such a heading whenever the paragraph after it must be split (typst splits it); docx/render.sh
+# breaks the page before a heading a pass left at the foot of a page instead (typst's sticky headings)
+style('CASection', 'CA Section', 'Normal', '<w:keepLines/>' . sp(420, 308) . '<w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="0"/>', '<w:b/><w:caps/>');
 style('CASectionBig', 'CA Section Big', 'CASection', '', '<w:sz w:val="32"/><w:szCs w:val="32"/>');
-style('CAUnnum', 'CA Unnumbered', 'Normal', '<w:keepNext/><w:keepLines/>' . sp(336, 252) . '<w:ind w:firstLine="0"/><w:jc w:val="left"/><w:outlineLvl w:val="1"/>', '<w:b/>');
-style('CAPoint', 'CA Point', 'Normal', '<w:keepNext/><w:keepLines/>' . sp(336, 280) . '<w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="1"/>', '<w:b/>');
+style('CAUnnum', 'CA Unnumbered', 'Normal', '<w:keepLines/>' . sp(336, 252) . '<w:ind w:firstLine="0"/><w:jc w:val="left"/><w:outlineLvl w:val="1"/>', '<w:b/>');
+style('CAPoint', 'CA Point', 'Normal', '<w:keepLines/>' . sp(336, 280) . '<w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="1"/>', '<w:b/>');
 for my $l (2..5) { for my $sx (0..4) {
   my $ind = ($sx + 1) * 720;
   my $i = $l >= $ITAL ? '<w:i/>' : '';
   style("CAHeadL${l}S$sx", "CA Heading L${l} S$sx", 'Normal',
-    qq{<w:keepNext/><w:keepLines/><w:tabs><w:tab w:val="left" w:pos="$ind"/></w:tabs>} . sp(308, 252) . qq{<w:ind w:left="$ind" w:hanging="720"/><w:jc w:val="left"/><w:outlineLvl w:val="}.($l-1).q{"/>},
+    qq{<w:keepLines/><w:tabs><w:tab w:val="left" w:pos="$ind"/></w:tabs>} . sp(308, 252) . qq{<w:ind w:left="$ind" w:hanging="720"/><w:jc w:val="left"/><w:outlineLvl w:val="}.($l-1).q{"/>},
     qq{<w:b/>$i});
 } }
 style('CACentered', 'CA Centered', 'Normal', sp(0, 98) . '<w:ind w:firstLine="0"/><w:jc w:val="center"/>', '');

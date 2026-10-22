@@ -1,80 +1,109 @@
-% Fourth Circuit brief, LaTeX engine. Matches typst/ca4-opening-brief.typ (the reference): Liberation Serif 14 pt,
-% double spacing (baseline 31.43 pt), 1-inch margins, left-aligned, 0.5-inch paragraph indent, roman folios for the
-% front matter and arabic from the body. Everything that depends on the frontmatter is written by ca4.lua as raw LaTeX.
-% Fonts: Times from newtxtext/newtxmath, which ship with every TeX Live, so the generated .tex compiles with stock
-% pdflatex and no repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman.
-\documentclass[12pt,letterpaper]{article}
+% Fourth Circuit brief, LaTeX engine. Matches the typst template of this folder (typst/ca4-*.typ, the reference):
+% Times (newtx) 14 pt everywhere, double spacing in 25.9 bp line boxes, single spacing in 16 bp boxes, 1-inch margins,
+% left-aligned, 0.5-inch paragraph indent, roman folios for the front matter and arabic from the body. Everything that
+% depends on the frontmatter is written by ca4.lua as raw LaTeX. Fonts: Times from newtxtext/newtxmath, which ship
+% with every TeX Live, so the generated .tex compiles with stock pdflatex and no repo-local file; the faces
+% (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman.
+%
+% Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): this template sets every line and page break where
+% the typst template sets them. The model itself (no kerning or ligatures, first-fit breaking, fixed line boxes, no
+% widows, footnote marks, list labels, contents rows) is the shared package lib/latex/xengine.sty, which fb render
+% inlines into the generated .tex in place of \usepackage{xengine}; the inline rules are lib/latex/xengine.lua, run by
+% ca4.lua. Every size and space here is in bp (14 bp = typst's 14 pt), and blocks are spaced with \addvspace (the
+% larger of the space below one and above the next).
+\documentclass[14pt,letterpaper]{extarticle}
 \usepackage[T1]{fontenc}
 \usepackage{newtxtext,newtxmath}
-\usepackage[letterpaper,margin=1in]{geometry}
-\usepackage{indentfirst}
-\usepackage{needspace}
-\usepackage[hidelinks]{hyperref}
+% FRAP 32(a)(4): letter, 1 in margins; the page number in the bottom margin, as typst sets it. The text block is
+% 0.05 bp wider than 6.5 in: newtx advances run about 0.004 pt a word wider than Times New Roman's, and a full
+% line of the body about 0.05 pt, so a line that just fits in typst fits here too (the margin moves 0.05 bp).
+\usepackage[letterpaper,left=1in,textwidth=468.05bp,top=1in,bottom=1in,headheight=0pt,headsep=0pt,footskip=36bp]{geometry}
+\usepackage{enumitem}
+\usepackage{xengine} % lib/latex/xengine.sty, inlined by fb render
+% Links in the brief are citations (toa:) or none; the fallbacks keep pandoc's output valid.
+\providecommand{\href}[2]{#2}
+\providecommand{\hypertarget}[2]{#2}
+\providecommand{\hyperlink}[2]{#2}
 
 \makeatletter
-% Type size and leading (FRAP 32(a)(4), (a)(5)): 14 pt everywhere; body double-spaced at 31.43 pt.
-\renewcommand\normalsize{\fontsize{14pt}{31.43pt}\selectfont}
-\renewcommand\footnotesize{\fontsize{14pt}{16.8pt}\selectfont}
-\newcommand\singlespacing{\fontsize{14pt}{20pt}\selectfont}
-\setlength{\parindent}{0.5in}
-\AtBeginDocument{\setlength{\parindent}{0.5in}}
-\setlength{\parskip}{0pt}
-\raggedright
-\addtolength{\topskip}{3pt}
-\addtolength{\textheight}{-8pt}
-\setcounter{secnumdepth}{0}
-\setlength{\footnotesep}{0.5em}
-% Footnote: marker, a thin space, then the note; no indent; single-spaced.
-\long\def\@makefntext#1{\noindent\textsuperscript{\@thefnmark}\,#1}
-\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setlength{\leftmargini}{0.5in}
+% Line boxes [typst pitch-double, pitch-single]: FRAP 32(a)(4) double spacing, 25.9 bp, for the body; single spacing,
+% 16 bp, for headings, quotations, footnotes, the TOC/TOA, the cover and the certificates. FRAP 32(a)(5)(A): 14 pt
+% everywhere, footnotes included.
+\renewcommand\normalsize{\xe@lines{14}{25.9}}
+\newcommand\singlespacing{\xe@lines{14}{16}}
+\renewcommand\footnotesize{\xe@lines{14}{16}}
+\normalsize
+\setlength{\parindent}{0.5in} % after xengine.sty's \raggedright, which sets it to zero
+\setcounter{secnumdepth}{-\maxdimen}
+\xe@lists{0.5in}
+% The page number in the 14 bp type, single-spaced.
+\def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
+  \def\@oddfoot{\reset@font\singlespacing\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}
 \pagestyle{plain}
 
-% ---- headings (called by ca4.lua) ----
-% \brfsection{display}: a level-1 heading: centred, bold, capitals.
-\newcommand\cvrule[2]{\par\nointerlineskip\hbox to\linewidth{\hfil\vrule width #1 height #2 depth 0pt\hfil}\par\nointerlineskip}
-\newcommand\brfsection[1]{%
-  \par\needspace{100pt}\vspace{21pt}%
-  {\singlespacing\centering\textbf{#1}\par}%
-  \vspace{4.5pt}\nopagebreak}
-% \brfsub{indent}{label}{title}: a numbered sub-heading; the label sits at the indent, the title hangs under itself.
-\newcommand\brfsub[3]{%
-  \par\needspace{70pt}\vspace{15.4pt}%
-  {\singlespacing\noindent\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\relax
-    \hspace*{#1}\makebox[0.5in][l]{#2}#3\par}%
-  \vspace{9pt}\nopagebreak}
-% \brfunnum{indent}{title}: an unnumbered sub-heading: bold, left, single-spaced.
-\newcommand\brfunnum[2]{%
-  \par\needspace{70pt}\vspace{15.4pt}%
-  {\singlespacing\noindent\hangindent=#1\relax\hangafter=1\relax\hspace*{#1}\textbf{#2}\par}%
-  \vspace{9pt}\nopagebreak}
-% \brfpoint{title}: a centred point heading (answering brief: see CFG in ca4.lua).
-\newcommand\brfpoint[1]{%
-  \par\needspace{70pt}\vspace{15.4pt}%
-  {\singlespacing\centering\textbf{#1}\par}%
-  \vspace{11pt}\nopagebreak}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\pandocbounded}[1]{#1}
 
-% ---- table of contents: entry types written by the headings; \@dottedtocline does the leaders ----
-\newcommand\l@brfone[2]{\@dottedtocline{0}{0pt}{0pt}{#1}{#2}}
-\newcommand\l@brftwo[2]{\@dottedtocline{0}{0.5in}{0.5in}{#1}{#2}}
-\newcommand\l@brfthree[2]{\@dottedtocline{0}{1in}{0.5in}{#1}{#2}}
-\newcommand\l@brffour[2]{\@dottedtocline{0}{1.5in}{0.5in}{#1}{#2}}
-\newcommand\l@brfutwo[2]{\@dottedtocline{0}{0pt}{0pt}{#1}{#2}}
-\newcommand\l@brfuthree[2]{\@dottedtocline{0}{0.5in}{0pt}{#1}{#2}}
-\newcommand\l@brfufour[2]{\@dottedtocline{0}{1in}{0pt}{#1}{#2}}
-\newcommand\l@brfpoint[2]{\@dottedtocline{0}{0pt}{0.5in}{#1}{#2}}
-% The addendum's contents (reply brief): its level-2 headings, in their own list file.
-\newcommand\l@brfadd[2]{\@dottedtocline{0}{0pt}{0pt}{#1}{#2}}
-\newcommand\brfcontentsadd{%
-  \par\needspace{100pt}\vspace{21pt}%
-  {\singlespacing\centering\textbf{TABLE OF CONTENTS}\par}\vspace{14pt}%
-  {\singlespacing\raggedleft\textbf{\underline{Page}}\par}\vspace{4pt}%
-  {\singlespacing\@starttoc{adt}}}
-\newcommand\brfcontents{%
-  \par\needspace{100pt}\vspace{21pt}%
-  {\singlespacing\centering\textbf{TABLE OF CONTENTS}\par}\vspace{14pt}%
-  {\singlespacing\raggedleft\textbf{\underline{Page}}\par}\vspace{4pt}%
-  {\singlespacing\@starttoc{toc}}}
+% Footnotes [footnote.entry]: 12.6 bp clear of the text, a 30 % rule, 7 bp above each note; the mark (58 % of 14 pt)
+% and a quarter em before the text. LaTeX resets the right skip inside a footnote: it is set back here.
+\setlength{\skip\footins}{12.6bp}
+\renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
+\xe@footnotemarks{14}
+\renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
+  \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25em #1}
+
+% Section headings of the answering and reply briefs: 16 bp capitals (typst 1.15 em, in whole half points).
+\newcommand\cabig{\xe@lines{16}{16}}
+
+% The cover: the gaps between its parts are #1 bp (typst: the largest gap at which the cover fits one page).
+% A row of counsel columns keeps the height of its minipages (each sets its own lines).
+\newcommand\carow[1]{{\xe@natural\noindent#1\par}}
+\newcommand\cvrule[2]{\par\nointerlineskip\hbox to\linewidth{\hfil\vrule width #1 height #2 depth 0pt\hfil}\par\nointerlineskip}
+
+% Block quotations [quote]: 0.5 in in from both margins, single-spaced, 14 bp above and below, 12.6 bp between their
+% paragraphs.
+\renewenvironment{quote}{%
+  \par\addvspace{14bp}%
+  \begingroup\leftskip=0.5in\rightskip=\dimexpr0.5in\relax plus 1fil\relax\singlespacing\parindent=0pt\relax
+  \parskip=12.6bp\relax
+}{%
+  \par\endgroup\addvspace{14bp}%
+}
+
+% ---- headings (written by ca4.lua) ----
+% \brfsection{display}{index}: a level-1 heading: centred, bold capitals; 21 / 15.4 bp around it.
+\newcommand\brfsection[2]{%
+  \par\addvspace{21bp}%
+  \begingroup\centering\singlespacing\leavevmode\label{ca-hd-#2}#1\par\endgroup
+  \nobreak\addvspace{15.4bp}}
+% \brfsub{indent}{label}{title}{index}: a numbered sub-heading; the label sits at the indent in a 0.5 in box, the title
+% hangs under itself; 15.4 / 12.6 bp around it. A heading never ends a page (\nobreak, and no orphans after it).
+\newcommand\brfsub[4]{%
+  \par\addvspace{15.4bp}%
+  \begingroup\singlespacing\noindent\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\relax
+    \hspace*{#1}\label{ca-hd-#4}\makebox[0.5in][l]{#2}#3\par\endgroup
+  \nobreak\addvspace{12.6bp}}
+% \brfunnum{indent}{title}{index}: an unnumbered sub-heading: bold, left; 16.8 / 12.6 bp around it.
+\newcommand\brfunnum[3]{%
+  \par\addvspace{16.8bp}%
+  \begingroup\singlespacing\noindent\hangindent=#1\relax\hangafter=1\relax\hspace*{#1}\label{ca-hd-#3}#2\par\endgroup
+  \nobreak\addvspace{12.6bp}}
+% \brfpoint{title}{index}: a centred point heading (answering brief); 16.8 / 14 bp around it.
+\newcommand\brfpoint[2]{%
+  \par\addvspace{16.8bp}%
+  \begingroup\centering\singlespacing\leavevmode\label{ca-hd-#2}#1\par\endgroup
+  \nobreak\addvspace{14bp}}
+
+% ---- table of contents [listing-row]: the text wraps before a 36 bp page column, a dot leader runs to the page ----
+% \tocline{above}{indent}{label or empty}{title}{index}
+\newcommand\tocline[5]{%
+  \begingroup\singlespacing\setlength{\xe@col}{36bp}%
+  \def\ca@lab{#3}%
+  \xe@row{#1}{\dimexpr#2+\ifx\ca@lab\empty 0pt\else 0.5in\fi\relax}{%
+    \hspace*{#2}\ifx\ca@lab\empty\else\makebox[0.5in][l]{#3}\fi #4}{\pageref{ca-hd-#5}}%
+  \endgroup}
+% The "Page" column head of the contents, 4.2 bp below the heading.
+\newcommand\tochead{\par\addvspace{4.2bp}\begingroup\raggedleft\singlespacing\bfseries\underline{Page}\par\endgroup}
 
 % ---- table of authorities: the pages come from the aux file, written by \brfhit after each citation ----
 \newcommand\brfhit[1]{\protected@write\@auxout{}{\string\brfcite{#1}{\thepage}}}
@@ -94,16 +123,22 @@
 \newcommand\brfpages[1]{%
   \@ifundefined{brfn@#1}{}{%
     \ifnum\csname brfn@#1\endcsname>6 \emph{passim}\else\csname brfp@#1\endcsname\fi}}
-% \brftoaentry{name}{cite}{key}{has name}: the name (for cases, italic) and the cite, then the pages at the right.
+% \brftoaentry{above}{name, or empty}{cite}{key} [listing-row]: the name (already italic for a case) and a comma, a
+% new line, the cite; the page column is 56 bp, or the width of a longer page list.
+\newlength\ca@w
 \newcommand\brftoaentry[4]{%
-  \par\noindent\ifnum#4=1 \needspace{42pt}\else\needspace{26pt}\fi\vspace{5.5pt}%
-  {\singlespacing\hangindent=0.35in\hangafter=1\relax
-    \ifnum#4=1 #1,\\\fi #2\ %
-    \leaders\hbox to 0.7em{\hss.\hss}\hfill\hspace{0.3em}\brfpages{#3}\par}}
-% \brftoagroup{title}{first}: a group heading ("Cases:"); the first group carries the "Page(s)" column head.
+  \begingroup\singlespacing
+  \settowidth{\ca@w}{\brfpages{#4}}%
+  \setlength{\xe@col}{56bp}\ifdim\ca@w>\xe@col\setlength{\xe@col}{\ca@w}\fi
+  \def\ca@name{#2}%
+  \xe@row{#1}{0.35in}{\ifx\ca@name\empty\else#2,\newline\fi #3}{\brfpages{#4}}%
+  \endgroup}
+% \brftoagroup{title}{first}: a group heading ("Cases:"); the first group carries the "Page(s)" column head. It stays
+% with its first entry.
 \newcommand\brftoagroup[2]{%
-  \par\needspace{60pt}\ifnum#2=1 \else\vspace{19.6pt}\fi%
-  {\singlespacing\noindent\textbf{#1}\ifnum#2=1 \hfill\textbf{\underline{Page(s)}}\fi\par}}
+  \par\ifnum#2=1 \addvspace{14bp}\else\addvspace{19.6bp}\fi
+  \begingroup\singlespacing\noindent\textbf{#1}%
+  \ifnum#2=1 \hskip 0pt plus 1fill\textbf{\underline{Page(s)}}\fi\par\endgroup\nobreak\addvspace{2.8bp}}
 \makeatother
 
 \begin{document}

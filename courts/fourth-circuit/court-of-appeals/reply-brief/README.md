@@ -156,7 +156,7 @@ Three renderings of the same markdown (`usage/INPUT-reply-brief.md`). The typst 
 
 - **typst** (`typst/ca4-reply-brief.typ`): as the opening brief (see its README, Engines): pitches and spaces in pt, `listing-row` tables, counsel and signature in a true right half. Every page viewed at 40 dpi after the port.
 - **LaTeX** (`latex/template.tex`, `latex/ca4.lua`, the opening brief's files with `DOCTYPE = 'reply-brief'`): the signature now writes `s/` as typst's `signature-line` does. The addendum (`Add-N` folios, its own contents) is built but the sample has none. Every page viewed at 40 dpi.
-- **docx** (`docx/`, the opening brief's machinery with `DOCTYPE = 'reply-brief'`): every page of `usage/OUTPUT-reply-brief.docx.pdf` viewed at 40 dpi. BLOCKED: an addendum; the filter stops with an error (`the docx engine does not yet render the addendum`) rather than drop it; the sample has none. Not opened in Word.
+- **docx** (`docx/`, the opening brief's machinery with `DOCTYPE = 'reply-brief'`): every page of `usage/OUTPUT-reply-brief.docx.pdf` viewed at 40 dpi. BLOCKED: an addendum; the filter stops with an error (`the docx engine does not yet render the addendum`) rather than drop it; the sample has none. Not opened in Word. Headings carry no keep-with-next and the leader's three spaces are 8 pt (see the answering brief's README, Engines).
 
 ## Verification pass 2026-10-16 (fb-595.26.4)
 

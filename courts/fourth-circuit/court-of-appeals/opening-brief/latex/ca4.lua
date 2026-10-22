@@ -303,7 +303,7 @@ local function disclosure(m)
     local a = answers[i] == false and 'no' or answers[i] == true and 'yes' or plain(answers[i])
     if a ~= 'yes' and a ~= 'no' then error('ca4-brief: disclosure answer ' .. i .. ' must be `yes` or `no`') end
     out[#out + 1] = '\\addvspace{12.6bp}\\begingroup\\interlinepenalty=10000\\relax\\noindent ' .. i .. '. ' .. esc(q)
-      .. '\\par\\nobreak\\noindent\\hspace*{1.6em}YES\\hspace{0.4em}' .. box(a == 'yes') .. '\\hspace{2.4em}NO\\hspace{0.4em}'
+      .. '\\par\\nobreak\\noindent\\hspace*{1.6em}YES\\hspace{0.4em} ' .. box(a == 'yes') .. '\\hspace{2.4em} NO\\hspace{0.4em} '
       .. box(a == 'no') .. '\\par\\endgroup'
   end
   out[#out + 1] = '\\addvspace{22.4bp}{\\leftskip=0.5\\linewidth\\noindent /s/ ' .. ltx(d.signer) .. '\\par\\nobreak\\noindent '
@@ -321,6 +321,7 @@ local function signature(m)
     '\\begingroup\\singlespacing\\leftskip=0.5\\linewidth\\parindent=0pt\\interlinepenalty=10000\\relax' }
   L[#L + 1] = 'Respectfully submitted,\\par\\nobreak'
   if CFG.sig == 'answering' then
+    L[#L + 1] = '\\vspace{16.8bp}\\nobreak'
     for _, l in ipairs(items(sig.lead)) do L[#L + 1] = ltx(l) .. '\\par\\nobreak' end
     L[#L + 1] = '\\vspace{8.4bp}\\nobreak /s/ ' .. ltx(sig.signer) .. '\\par\\nobreak'
     for _, l in ipairs(items(sig.lines)) do L[#L + 1] = ltx(l) .. '\\par\\nobreak' end
@@ -522,9 +523,17 @@ function Pandoc(doc)
       local key = el.target:sub(5)
       if auth[key] == nil then error('ca4-brief: link `toa:' .. key .. '` has no entry under `authorities:`') end
       hits[key] = true
-      local content = pandoc.Inlines({})
-      for _, x in ipairs(el.content) do content:insert(x) end
-      content:insert(pandoc.RawInline('latex', '\\brfhit{' .. key .. '}'))
+      -- the mark after the first word (typst tag-after-first-word): a citation that runs over a page end is filed
+      -- under the page it begins on
+      local placed = false
+      local content = pandoc.Inlines(el.content):walk({
+        Str = function(s)
+          if placed then return nil end
+          placed = true
+          return { s, pandoc.RawInline('latex', '\\brfhit{' .. key .. '}') }
+        end,
+      })
+      if not placed then content:insert(pandoc.RawInline('latex', '\\brfhit{' .. key .. '}')) end
       return content
     end,
   })

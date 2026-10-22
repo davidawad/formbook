@@ -105,7 +105,7 @@ Overlay: `usage/OVERLAY-chapman-answering-brief.pdf` (13 pages), regenerated aft
 
 The sample PDF was rendered to PNG at 60 dpi (`pdftoppm -r 60`) and every page was viewed after the font change. The TOC page was viewed again after the page-number change.
 
-Count: **13 of 13 pages reviewed** (typst).
+Count: **14 of 14 pages reviewed** in each engine (typst, latex, docx; 2026-10-22, fb-595.54.3, after the port to the cross-engine model, 40 dpi). The pages, lines and page ends are the same in all three; the cover and the disclosure statement keep one page each; the footnote stays on page 3. Earlier: 13 of 13 typst pages (before the port).
 
 Earlier defects found in review and fixed (still in place):
 
@@ -129,20 +129,13 @@ Earlier defects found in review and fixed (still in place):
 
 ## Engines
 
-Three renderings of the same markdown (`usage/INPUT-answering-brief.md`). The typst template is the reference.
+Three renderings of the same markdown (`usage/INPUT-answering-brief.md`). The typst template is the reference. All three are on the shared cross-engine layout model since fb-595.54.3 (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Adopting the reference breaker"), with the opening brief's numbers: Times New Roman (newtx in latex) 14 pt, section headings 16 pt (typst's 1.15 em in whole half points), the body in 25.9 pt line boxes, headings, tables, footnotes, cover, disclosure and certificates in 16 pt boxes. latex and docx break every line and page where typst does, and `eval.yaml` gates it (`params.cross_engine: gate`, XENG-001..003). 14 pages in each engine; the certificate word count is 1,734 in each.
 
-**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `usage/OUTPUT-answering-brief.latex.pdf`, 14 pages (12 before the font change), every page rendered at 50 dpi and viewed. Layout items the font change exposed, not fixed here: the Statutes and Rules lists of the TOA fall onto page iii, and the "CONCLUSION" heading sits at the foot of page 7 with its text on page 8. Matches: Liberation Serif only (14 pt text and footnotes), double spacing at the typst pitch, 1-inch margins, the cover with judge and date/party line, the FRAP 26.1 disclosure statement (seven yes/no answers), contents and authorities (the authorities list is built from the `toa:` links), Argument point headings in small capitals, centred, and the Argument-only numbering, the certificate of compliance (1,734 words, the same as typst's count) and the certificate of service on the same page as the compliance certificate when it fits. Differs: the cover is tighter (fixed gap); body paragraph and heading spacing differ slightly, so page breaks and folios differ from typst; the disclosure boxes are drawn rather than glyphs. Not checked by `check.sh` (no `checks.yaml` in this court).
+- **typst** (`typst/ca4-answering-brief.typ`): as the opening brief (see its README, Engines), and: the Argument's point headings centred in bold, no longer small capitals (Word and LaTeX synthesize small capitals differently; the adoption checklist bars them); the disclosure check boxes a ruled box around a literal X (or around the X's room), not two drawn diagonals. Every page viewed at 40 dpi after the port.
+- **LaTeX** (`latex/template.tex`, `latex/ca4.lua`, the opening brief's files with `DOCTYPE = 'answering-brief'`): the table of authorities files a citation under the page of its first word, as typst does (a citation that ran over a page end was listed under the next page). Every page viewed at 40 dpi.
+- **docx** (`docx/`, the opening brief's machinery with `DOCTYPE = 'answering-brief'`): the disclosure statement on its own unnumbered page after the cover; the check boxes a bordered run, their gaps no-break spaces sized to typst's `h()`; the point headings centred. Every page of `usage/OUTPUT-answering-brief.docx.pdf` viewed at 40 dpi. Not opened in Word.
 
-**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `usage/OUTPUT-answering-brief.docx` is written; the `.docx.pdf` is not (see BLOCKED). Styles and sections as in the opening brief. Contents and authorities are Word fields; the TA fields sit after each citation. Certificate word count 1,734.
-
-BLOCKED (docx):
-- All gates on the `.docx.pdf`: no LibreOffice on this box (see the opening brief's README, Engines, for what was tried).
-- Contents and authorities page numbers: Word fills them on update; LibreOffice does not honour TA/TOA fields (docs/DOCX.md).
-- Argument point headings are hanging like the other sub-headings, not centred small capitals (a heading style cannot vary per paragraph here).
-- The disclosure boxes are the text `[X]` / `[  ]`.
-- The cover's rules and caption positions are paragraph borders and indents, approximated.
-- The compliance and service certificates may fall on different pages from typst: the service certificate's position depends on the flow.
-- Opened in neither Word nor LibreOffice: well-formed XML only.
+Two LibreOffice behaviours the docx works around (all three folders, found on this brief): a heading with keep-with-next is moved to the next page whenever the paragraph after it must be split, where typst splits it; so headings carry no keep-with-next, and `docx/render.sh` breaks the page before a heading (and the headings directly above it) that a pass left without the first words of its next block below it, typst's sticky heading. And on a table row's last line LibreOffice wants about 4.5 pt beyond the leader's three spaces, so those spaces are set in 8 pt.
 
 ## Verification pass 2026-10-16 (fb-595.26.4)
 

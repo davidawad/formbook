@@ -62,7 +62,12 @@ local TOA_GROUPS = {
 }
 
 local xe = require('docx.xengine')
-local LEAD = pandoc.Str('\u{00A0}\u{00A0}\u{00A0}')   -- the leader is never shorter than three spaces
+-- Before the page number of a table row: three no-break spaces, so the leader is never shorter than that and the last
+-- word takes them along when it wraps (typst listing-row: h(0.75em)). LibreOffice keeps about 4.5 pt more on the last
+-- line of a row whose tab runs past the right indent (measured: the same threshold for a one- and a three-digit page),
+-- so the three spaces are set in 8 pt (2 pt each, 6 pt in all: 10.5 less 4.5) and the row wraps where typst's does.
+local LEAD = pandoc.RawInline('openxml',
+  '<w:r><w:rPr><w:sz w:val="16"/><w:szCs w:val="16"/></w:rPr><w:t xml:space="preserve">\u{00A0}\u{00A0}\u{00A0}</w:t></w:r>')
 local TAB = pandoc.RawInline('openxml', '<w:r><w:tab/></w:r>')
 local LB = pandoc.LineBreak()
 local SECT_COVER = '<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>'
@@ -198,7 +203,7 @@ end
 -- page numbers from a first pass (docx/render.sh): DOCX_PAGEMAP, DOCX_MANIFEST
 -- ---------------------------------------------------------------------------
 
-local PM = { H = {}, S = {}, T = {} }
+local PM = { H = {}, S = {}, T = {}, E = {} }
 local pm_path = os.getenv('DOCX_PAGEMAP')
 local have_pm = pm_path ~= nil and pm_path ~= ''
 if have_pm then
@@ -209,6 +214,7 @@ if have_pm then
     if k == 'H' then PM.H[tonumber(a)] = b
     elseif k == 'S' then PM.S[a] = b
     elseif k == 'T' then PM.T[a] = b
+    elseif k == 'E' then PM.E[tonumber(a)] = true
     end
   end
   f:close()
@@ -365,7 +371,13 @@ local function disclosure(meta)
     local a = answers[i] == false and 'no' or answers[i] == true and 'yes' or plain(answers[i])
     if a ~= 'yes' and a ~= 'no' then fail('disclosure answer ' .. i .. ' must be `yes` or `no`') end
     add(P('CACounsel', cat(tostring(i) .. '. ' .. q), KEEP .. '<w:keepLines/>' .. sp(252, 0)))
-    add(P('CACounsel', cat('YES ', box(a == 'yes'), ' NO ', box(a == 'no')),
+    -- typst: YES, a space and h(0.4em) (9.1 pt), the box, a space and h(2.4em) (37.1 pt), NO, 9.1 pt, the box; Word has
+    -- no fixed space, so a no-break space (0.25 em) in a size that gives that width (36 pt: 9 pt; 148.5 pt: 37.1 pt)
+    local function gap(halfpts)
+      return pandoc.RawInline('openxml', '<w:r><w:rPr><w:sz w:val="' .. halfpts .. '"/><w:szCs w:val="' .. halfpts
+        .. '"/></w:rPr><w:t xml:space="preserve">\u{00A0}</w:t></w:r>')
+    end
+    add(P('CACounsel', cat('YES', gap(72), box(a == 'yes'), gap(297), 'NO', gap(72), box(a == 'no')),
       '<w:keepLines/>' .. sp(0, 0) .. '<w:ind w:left="448" w:firstLine="0"/>'))
   end
   add(P('CASignature', cat('/s/ ', minl(d.signer)), sp(448, 0)))
@@ -384,7 +396,7 @@ local function signature(meta)
   local B = {}
   B[#B + 1] = P('CASigHead', { pandoc.Str('Respectfully submitted,') }, KEEP)
   if CFG.sig == 'answering' then
-    for _, l in ipairs(items(sig.lead)) do B[#B + 1] = P('CASignature', minl(l), KEEP) end
+    for i, l in ipairs(items(sig.lead)) do B[#B + 1] = P('CASignature', minl(l), KEEP .. (i == 1 and sp(336, 0) or '')) end
     B[#B + 1] = P('CASignature', cat('/s/ ', minl(sig.signer)), KEEP .. sp(168, 0))
     for _, l in ipairs(items(sig.lines)) do B[#B + 1] = P('CASignature', minl(l), KEEP) end
     return B
@@ -628,7 +640,19 @@ function Pandoc(doc)
   end
   local function headings(blocks, first_top)
     local out = {}
-    for _, b in ipairs(blocks) do
+    -- a heading the page map moves takes the headings right before it along: the break goes before the first of them
+    local brk = {}
+    do
+      local idx, start = #heads, nil
+      for bi, b in ipairs(blocks) do
+        if b.t == 'Header' then
+          idx = idx + 1
+          if bi == 1 or blocks[bi - 1].t ~= 'Header' then start = idx end
+          if PM.E[idx] then brk[start] = true end
+        end
+      end
+    end
+    for bi, b in ipairs(blocks) do
       if b.t == 'Header' then
         local text = plain(b.content)
         if b.level == 1 then
@@ -639,27 +663,44 @@ function Pandoc(doc)
         counters[b.level] = counters[b.level] + 1
         for i = b.level + 1, 6 do counters[i] = 0 end
         local h = { level = b.level, title = b.content, idx = #heads + 1, label = '', addendum = in_add, toc = true }
+        -- No keep-with-next: LibreOffice moves a heading that has it to the next page whenever the paragraph after it
+        -- must be split, where typst splits it. typst's sticky heading instead: a heading the first pass left at the
+        -- foot of a page (page map E) opens the next page, with no space above it.
+        local function moved(after) return brk[h.idx] and (BREAK_BEFORE .. sp(0, after)) or nil end
         if b.level == 1 then
           h.steps = 0
-          local top = (#out == 0 and first_top) and TOP or ''
-          out[#out + 1] = P(CFG.big_h1 and 'CASectionBig' or 'CASection', b.content, KEEP .. top)
+          local top = (#out == 0 and first_top) and TOP or moved(308)
+          out[#out + 1] = P(CFG.big_h1 and 'CASectionBig' or 'CASection', b.content, top)
         elseif in_add or (CFG.numbering == 'argument' and not in_arg) then
           -- unnumbered sub-heading: bold at the margin; its contents row steps in as typst's
           h.steps = in_add and (b.level - 2) or (b.level - 1)
           h.unnumbered = true
           h.toc = not in_add or b.level == 2
-          out[#out + 1] = P('CAUnnum', b.content, KEEP)
+          out[#out + 1] = P('CAUnnum', b.content, moved(252))
         else
           h.label = label_for(b.level, counters[b.level])
           if b.level == 2 and CFG.point_centered and in_arg then
             h.steps = 0
-            out[#out + 1] = P('CAPoint', cat(h.label, ' ', b.content), KEEP)
+            out[#out + 1] = P('CAPoint', cat(h.label, ' ', b.content), moved(280))
           else
             h.steps = b.level - CFG.base
-            out[#out + 1] = P('CAHeadL' .. b.level .. 'S' .. h.steps, cat(h.label, TAB, b.content), KEEP)
+            out[#out + 1] = P('CAHeadL' .. b.level .. 'S' .. h.steps, cat(h.label, TAB, b.content), moved(252))
           end
         end
         h.key = search_key(h.label ~= '' and (h.label .. ' ' .. text) or text)
+        -- the first words of the block after the heading (docx/pagemap.awk: a heading ends its page when they are not
+        -- on that page below it)
+        local nb = blocks[bi + 1]
+        if nb ~= nil and nb.t == 'Header' then
+          h.next_head = true
+        elseif nb ~= nil then
+          local words = {}
+          local s = norm_text(pandoc.utils.stringify(nb)):gsub('^%d+[.)]', ''):gsub('^\u{2022}', '')
+          for x in s:gmatch('%S+') do
+            if #words < 3 then words[#words + 1] = x end
+          end
+          h.next = table.concat(words, ' ')
+        end
         heads[#heads + 1] = h
       else
         out[#out + 1] = b
@@ -668,6 +709,9 @@ function Pandoc(doc)
     return out
   end
   body = headings(body, true)
+  for _, h in ipairs(heads) do
+    if h.next_head and heads[h.idx + 1] then h.next = heads[h.idx + 1].key end
+  end
 
   -- the last paragraph stays with the signature block (typst keeps them together)
   if #body > 0 and body[#body].t == 'Para' then
@@ -686,7 +730,7 @@ function Pandoc(doc)
   if man_path ~= nil and man_path ~= '' then
     local f = assert(io.open(man_path, 'w'))
     for _, h in ipairs(heads) do
-      if h.toc then f:write(string.format('H\t%d\t%d\t%s\n', h.idx, h.level, h.key)) end
+      f:write(string.format('H\t%d\t%d\t%s\t%s\n', h.idx, h.level, h.key, h.next or ''))
     end
     if CFG.toc_front then
       f:write('S\ttoa\troman\ttable of authorities\n')
