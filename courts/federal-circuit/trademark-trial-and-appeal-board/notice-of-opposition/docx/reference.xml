@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The TTAB notice of opposition's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of
+     the typst template (TeX Gyre Termes) at 12 pt (size 24 half points); Body Text (and First Paragraph)
+     double-spaced in 24 pt exact line boxes with a half-inch first-line indent (37 CFR 2.126(a)(1); typst
+     pitch-double); single-spaced lines 13.8 pt (typst pitch-single); US Letter, 1 in margins, a centered page number
+     in the footer. docx/ttab-notice.lua writes the front matter, the count headings, the signature block and the
+     slip sheets as paragraphs with their own exact spacing (the typst template's pitches and spaces). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720"/>

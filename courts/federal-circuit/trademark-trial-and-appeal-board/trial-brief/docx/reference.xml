@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The TTAB trial brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template (Times New Roman) at 12 pt (size 24 half points); Body Text (and First Paragraph) double-spaced
+     in 24 pt exact line boxes with a half-inch first-line indent (37 CFR 2.126(a)(1); typst pitch-double); block
+     quotations single-spaced (13.8 pt, typst pitch-single), a half inch in on both sides, 14 pt above and below;
+     footnotes at the body size, single-spaced, 7 pt apart; US Letter, 1 in margins. ttab-trial-brief.lua writes the
+     caption page, the table of authorities, the headings, the signature block and the certificate with the typst
+     template's pitches and spaces, the front matter's roman sections and the body's last section (arabic from 1);
+     fb render writes the footer (docxpass.rs). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" quote="280" note-after="140"/>

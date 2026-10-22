@@ -1,16 +1,19 @@
 -- ttab-trial-brief.lua (docx engine, brief on the case). Builds the front matter, the table of authorities and the
 -- trailing blocks (signature, certificate of service) as WordprocessingML from the sample's YAML frontmatter (the
 -- contract the typst template reads, ../README.md "Markdown contract"). The body paragraphs, block quotations and
--- footnotes are pandoc's own conversion, styled by reference.docx (make-reference.sh); the headings are written here.
+-- footnotes are pandoc's own conversion, styled by reference.docx (docx/reference.xml); the headings are written here.
 --
 --   * Sections (Word-native numbering): the caption page and the table of authorities are roman (i, ii); the body is
---     arabic from 1 (set on the final section in reference.docx). Each front-matter section ends in a one-point
---     paragraph that carries its sectPr, so the break adds no page.
+--     arabic from 1 (the last section, written to FORMBOOK_FINAL). fb render writes the page-number footer
+--     (rIdFtrPage). Each front-matter section ends in a one-point paragraph that carries its sectPr, so the break
+--     adds no page.
 --   * The counsel block and the date sit at the foot of the caption page: a frame anchored to the bottom margin.
 --   * The table of authorities lists each key with its pages and dot leaders. pandoc cannot know the pages, so
---     render.sh converts twice: this filter writes one search needle per link (TTAB_TOA_SEARCH); render.sh finds
---     the needles on the body pages of the PDF and writes TTAB_TOA_PAGES ("key<TAB>1, 4, 7"); the next pass lists
---     them. An authority cited on 7 or more pages prints "passim" (the typst template's rule).
+--     fb render converts until the pages settle (tools/fb/src/docxpass.rs): this filter writes a needle per link, in
+--     document order (FORMBOOK_NEEDLES; B in the body, N in a footnote), and where the arabic pages start; fb
+--     render finds them in the PDF and writes their page labels (FORMBOOK_PAGES); the next pass lists each key's
+--     body pages. Before the first pass every authority is listed on a placeholder page. An authority cited on 7 or
+--     more pages prints "passim" (the typst template's rule).
 --   * A citation is a link whose target is toa:KEY (../README.md). A key that is not in the authorities stops the build.
 -- No case text is in this file.
 --
@@ -57,13 +60,17 @@ local function line(body, o)
   return xe.para(props, body)
 end
 
--- The footer is referenced once, by the first section; later sections inherit it.
-local FOOTER = '<w:footerReference w:type="default" r:id="rIdFooter1" />'
+-- The footer (fb render's centered PAGE field) is referenced by the first section and the last; the sections between
+-- inherit it.
+local FOOTER = '<w:footerReference w:type="default" r:id="rIdFtrPage" />'
 local PAGE = '<w:pgSz w:w="12240" w:h="15840" /><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="432" w:gutter="0" />'
 
 local function section_xml(numfmt, first)
   return "<w:sectPr>" .. (first and FOOTER or "") .. PAGE .. '<w:pgNumType w:fmt="' .. numfmt .. '" /></w:sectPr>'
 end
+
+-- The last section, the body: arabic from 1.
+local FINAL = "<w:sectPr>" .. FOOTER .. PAGE .. '<w:pgNumType w:fmt="decimal" w:start="1" /></w:sectPr>'
 
 -- A one-point paragraph that ends a section: it takes no room, so it cannot push a page over.
 local function section_end(numfmt, first)
@@ -157,23 +164,39 @@ end
 -- Table of authorities (37 CFR 2.128(b): the index of cases, then the other authorities)
 -- ---------------------------------------------------------------------------
 
--- The page list of each key from render.sh's previous pass (TTAB_TOA_PAGES: "key<TAB>1, 4, 7" per line). Before the
--- first pass, each authority is listed on a placeholder page, so the first pass has the same entries.
+-- The needles of the links, in document order (filled by Pandoc below): { id, kind, key, needle, fallback }.
+local needles = {}
+
+-- The page list of each key from fb render's previous pass (FORMBOOK_PAGES: "id<TAB>page<TAB>label" per needle):
+-- the arabic labels of its links' pages, each once, in page order. Before the first pass (no labels), each authority
+-- is listed on a placeholder page, so the first pass has the same entries.
 local function read_pages()
-  local path = os.getenv("TTAB_TOA_PAGES")
-  if path == nil then return nil end
+  local path = os.getenv("FORMBOOK_PAGES")
+  if path == nil or path == "" then return nil end
   local f = io.open(path, "r")
   if f == nil then return nil end
-  local pages = {}
+  local label = {}
   for l in f:lines() do
-    local key, list = l:match("^([^\t]+)\t(.*)$")
-    if key ~= nil then
-      local t = {}
-      for n in list:gmatch("%d+") do t[#t + 1] = n end
-      pages[key] = t
-    end
+    local id, lab = l:match("^([^\t]+)\t[^\t]*\t(.*)$")
+    if id ~= nil then label[id] = lab end
   end
   f:close()
+  if next(label) == nil then return nil end
+  local seen, pages = {}, {}
+  for _, n in ipairs(needles) do
+    local lab = label[n.id]
+    if n.key ~= nil and lab ~= nil and lab:match("^%d+$") then
+      seen[n.key] = seen[n.key] or {}
+      seen[n.key][tonumber(lab)] = true
+    end
+  end
+  for key, set in pairs(seen) do
+    local t = {}
+    for p in pairs(set) do t[#t + 1] = p end
+    table.sort(t)
+    for i, p in ipairs(t) do t[i] = tostring(p) end
+    pages[key] = t
+  end
   return pages
 end
 
@@ -291,33 +314,65 @@ local function certificate(meta)
 end
 
 -- ---------------------------------------------------------------------------
--- Links to authorities: recorded for the first pass, shown as their text
+-- Links to authorities: a needle each, shown as their text
 -- ---------------------------------------------------------------------------
 
-local used_keys = {}
-local search_path = os.getenv("TTAB_TOA_SEARCH")
+local NEEDLE_MAX = 60  -- a needle is a prefix of the text (letters and digits only, docxpages.rs)
 
--- The first 30 characters of the link text: enough to find the citation's start on a page.
-local function needle_of(s)
-  s = s:gsub("\u{00A0}", " ")
-  local cut = utf8.offset(s, 31)
-  if cut then return s:sub(1, cut - 1) end
-  return s
+local function norm(s)
+  return (s:lower():gsub("[^a-z0-9]", ""))
 end
 
-function Link(el)
-  local target = el.target
-  if target:sub(1, 4) ~= "toa:" then return nil end
-  local key = target:sub(5)
-  used_keys[#used_keys + 1] = key
-  if search_path ~= nil then
-    local f = io.open(search_path, "a")
-    if f ~= nil then
-      f:write(key .. "\t" .. needle_of(stringify(el)) .. "\n")
-      f:close()
+-- The fallback is the text's first words (at least 8 letters and digits): a needle that runs over a page break is
+-- not found whole, because the page's footnotes come between its two halves in the PDF text.
+local function opening(text)
+  local out = ""
+  for w in text:gmatch("%S+") do
+    out = out .. norm(w)
+    if #out >= 8 then break end
+  end
+  return out:sub(1, NEEDLE_MAX)
+end
+
+local function add_needle(id, kind, key, text)
+  local long = norm(text):sub(1, NEEDLE_MAX)
+  local short = opening(text)
+  if short == "" then short = long end
+  needles[#needles + 1] = { id = id, kind = kind, key = key, needle = long, fallback = short }
+end
+
+-- Every toa: link of the body, in document order (a footnote's links where its mark is, kind N), and the start of
+-- the body (the arabic pages): its first block and the text after it.
+local function record_needles(blocks)
+  local function link(kind)
+    return function(el)
+      if el.target:sub(1, 4) == "toa:" then
+        add_needle("L:" .. (#needles + 1), kind, el.target:sub(5), stringify(el))
+      end
     end
   end
-  return el.content
+  local in_note = { traverse = "topdown", Link = link("N") }
+  local in_body = { traverse = "topdown", Link = link("B"),
+    Note = function(n) n:walk(in_note); return n, false end }
+  local start = stringify(blocks[1] or "") .. " " .. stringify(blocks[2] or "")
+  add_needle("BODY", "B", nil, start)
+  for _, b in ipairs(blocks) do b:walk(in_body) end
+end
+
+local function write_file(env, text)
+  local path = os.getenv(env)
+  if path == nil or path == "" then return end
+  local f = assert(io.open(path, "w"))
+  f:write(text)
+  f:close()
+end
+
+local function write_needles()
+  local nl = {}
+  for _, n in ipairs(needles) do nl[#nl + 1] = n.id .. "\t" .. n.kind .. "\t" .. n.needle .. "\t" .. n.fallback end
+  nl[#nl + 1] = "#section\tBODY\tdecimal\t"
+  write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
+  write_file("FORMBOOK_FINAL", FINAL)
 end
 
 -- ---------------------------------------------------------------------------
@@ -325,9 +380,12 @@ end
 function Pandoc(doc)
   local meta = doc.meta
   local auth = need(meta, "authorities")
-  for _, key in ipairs(used_keys) do
-    if auth[key] == nil then error("ttab-trial-brief.lua: `" .. key .. "` is not in authorities") end
+  record_needles(doc.blocks)
+  for _, n in ipairs(needles) do
+    if n.key ~= nil and auth[n.key] == nil then error("ttab-trial-brief.lua: `" .. n.key .. "` is not in authorities") end
   end
+  write_needles()
+  doc = doc:walk({ Link = function(el) if el.target:sub(1, 4) == "toa:" then return el.content end end })
   doc = doc:walk({ Inlines = xe.inlines })
   local pages = read_pages()
   local blocks = pandoc.List({ caption_page(meta), toa_section(meta, pages) })
