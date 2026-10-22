@@ -3,7 +3,7 @@
 - Court: `cavc`, United States Court of Appeals for Veterans Claims (`courts/federal-circuit/court-of-veteran-appeals/`)
 - Doc type: `opening-brief`, the appellant's principal brief (Vet. App. R. 28(a), 32). The Secretary's brief is `../answering-brief/`.
 - Exemplar: `usage/FILED-EXAMPLE-opening-brief.pdf` (*Chavez v. Wilkie*, Vet. App. No. 19-7391, filed 2020-06-22, private counsel). Provenance in `usage/SOURCE.md`. One exemplar only: see Known gaps.
-- Status: template built, rendered, overlay generated, every page reviewed (Gate 2 below). Not reviewed by a human. `court.json` untouched; no status set.
+- Status: typst and docx on the shared cross-engine layout model; docx cross-engine gated (XENG-001..003 PASS on both INPUTs, fb-595.54.6); every page reviewed (Gate 2 below). Not reviewed by a human. `court.json` untouched; no status set.
 - Every page is the court's own form; no case-specific text in the template.
 
 ## Files
@@ -13,7 +13,7 @@
 | `typst/main.typ` | Entry point; reads `--input sample=...` (default `usage/INPUT-opening-brief.md`) and calls `cavc-opening-brief`. |
 | `typst/cavc-opening-brief.typ` | Template. Parameter block at the top: font and size, leading, margins, `page-limit = 30`, `required-sections` (Rule 28(a) order). |
 | `usage/INPUT-opening-brief.md` | Markdown sample: frontmatter (caption, counsel, signature, service, authorities registry) and a transcribed portion of the brief. |
-| `usage/OUTPUT-opening-brief.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-veteran-appeals/opening-brief usage/INPUT-opening-brief.md` (15 pages). |
+| `usage/OUTPUT-opening-brief.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-veteran-appeals/opening-brief usage/INPUT-opening-brief.md` (14 pages). |
 | `usage/OVERLAY-chavez-opening-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-veteran-appeals/opening-brief chavez-opening-brief` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -32,7 +32,7 @@ Primary source: Court of Appeals for Veterans Claims, *Rules of Practice and Pro
 | R. 28(a)(6) | Short conclusion stating the precise relief | `required-sections`: "conclusion" |
 | R. 28(i) | Superseded or unpublished authorities reproduced in the brief or an appendix (not in the sample; the template generates no appendix) | not generated (known gap) |
 | R. 32(a) | Letter size; margins at least one inch from all edges; one side only | `page`, `page-margin = 1in` |
-| R. 32(b) | Proportionally spaced typeface 13-point or larger; text double spaced; quotations of 50 words or more single spaced; footnotes single spaced and in the same typeface requirement | `type-size = 14pt` (EB Garamond, vendored); `body-leading` (double); block quotes single-spaced (all, a convention); footnotes 14 pt, single-spaced |
+| R. 32(b) | Proportionally spaced typeface 13-point or larger; text double spaced; quotations of 50 words or more single spaced; footnotes single spaced and in the same typeface requirement | `type-size = 14pt` (Times New Roman); `pitch-double` 29.4 pt (double); block quotes single-spaced (all, a convention); footnotes 14 pt, single-spaced |
 | R. 32(c) | Caption page, separate from the text; name of the court, case number, title of the case, brief heading; no cover required (Form 2) | `cover` (caption page, unnumbered): "Vet. App. No.", court, caption, proceeding, brief heading, counsel |
 | R. 32(d) | Arabic page numbers for the pages subject to the page limit; lower-case roman for the TOC, TOA, certificate of service; centered at the bottom | caption unnumbered; TOC and TOA `i`, `ii`...; body `1`...; certificate of service `i` |
 | R. 32(e) | Principal brief ≤ 30 pages, not counting the TOC, TOA, superseded-authorities appendix, and certificate of service | `page-limit = 30`; the build fails above it (counts from the body's first page to the signature) |
@@ -55,62 +55,44 @@ Checked and not applicable: Rule 32 sets no word limit and no certificate of com
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-opening-brief.typst.pdf` was rendered at 60 dpi and viewed (15 of 15). Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of the four renders was rendered at 60 dpi and viewed (fb-595.54.6, after the move to the shared cross-engine layout model): `OUTPUT-opening-brief.typst.pdf` and `.docx.pdf` (14 of 14 each), `OUTPUT-opening-brief-2.typst.pdf` and `.docx.pdf` (12 of 12 each). Typst printed no warnings. Fonts embedded: Times New Roman (regular, bold, italic) in all four.
+
+`OUTPUT-opening-brief` (the docx pages are the same, line for line):
 
 | Page | Content | Result |
 |---|---|---|
-| i (pdf 1) | Caption page | OK. Vet. App. No., court, caption, proceeding, brief heading, counsel; fits one page; unnumbered. |
-| ii (pdf 2) | TOC | OK. Entries, dot leaders, page column right-aligned. |
-| ii-iv (pdf 3-5) | TOA: cases, statutes, regulations, rules, record cites | OK. Record cites are grouped as "Citations to the Record Before the Agency" in numerical order. Page numbers update with the layout (checked after the last change). |
-| 1 (pdf 6) | Statement of the Issue; Statement of the Case begins | OK. Double spaced; heading centered. |
-| 2 (pdf 7) | Statement of the Case, footnote 1 | OK. Footnote 14 pt single spaced. |
-| 3 (pdf 8) | Statement of the Case, footnote 2 | OK. |
-| 4 (pdf 9) | Statement of the Case end; Summary of the Argument; Standard of Review begins | OK. |
-| 5 (pdf 10) | Standard of Review; Argument begins | OK. |
-| 6 (pdf 11) | Argument | OK. |
-| 7 (pdf 12) | Argument; Conclusion begins | OK. |
-| 8 (pdf 13) | Five lines: end of the Conclusion's first paragraphs | OPEN (layout). The last paragraph and the signature are kept together (the ca9 rule, so a signature never stands alone); that block did not fit, so page 8 is short. Accepted for now: see Known gaps. |
-| 9 (pdf 14) | Last paragraph of the Conclusion; signature block; date | OK. |
-| i (pdf 15) | Certificate of service | OK. Roman numeral; wording drafted (see Governing rules). |
+| pdf 1 | Caption page | OK. Vet. App. No., court, caption, proceeding, brief heading, counsel; fits one page; unnumbered. |
+| i (pdf 2) | TOC | OK. Leaders to a 36 pt page column. |
+| ii-iv (pdf 3-5) | TOA: cases, statutes, regulations, rules, record cites | OK. Record cites grouped last ("Citations to the Record Before the Agency"), in their `sort` order. |
+| 1 (pdf 6) | Statement of the Issue; Statement of the Case begins | OK. |
+| 2-3 (pdf 7-8) | Statement of the Case; footnotes 1 and 2 | OK. Footnotes 14 pt, single spaced; footnote 2 runs over to page 3 (both engines). |
+| 4 (pdf 9) | Summary of the Argument; Standard of Review | OK. |
+| 5-7 (pdf 10-12) | Standard of Review end; Argument; Conclusion begins | OK. |
+| 8 (pdf 13) | Conclusion end; signature block; date | OK. The last paragraph is kept with the signature block. |
+| i (pdf 14) | Certificate of service | OK. Roman numeral; signature in the right half. |
+
+`OUTPUT-opening-brief-2` (Butler; the docx pages are the same, line for line): caption page (no proceeding line: the INPUT gives none), TOC i, TOA ii-iii, body 1-7 (Brief of the Appellant, Statement of the Issue, Statement of the Case A-C with footnote 1, the block quotation on 3-4, Argument opening with its bold "Summary" paragraph, point I., Conclusion with the signature block on 7), certificate of service i. OK.
+
+Visible changes from the renders before fb-595.54.6: body pitch 29.4 pt (was about 30 pt with taller ascender boxes; 14 pages, was 13; -2 still 12); section headings 16 pt; point headings bold without small capitals; TOC/TOA rows on the shared listing-row (page column, leader from three spaces after the text); `INPUT-opening-brief-2.md`'s `word: {justify: true, shrink: 0.76}` is no longer applied (the layout model sets ragged right, first fit, in every engine), so that brief is now ragged right.
 
 ## Engines
 
 | Engine | Folder | Output in `usage/` | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-opening-brief.typst.pdf` | rendered; Gate 2 above |
-| docx | `docx/` | `OUTPUT-opening-brief.docx` (pandoc, `docx/reference.docx`, `docx/cavc.lua`) | `.docx` written; `.docx.pdf` not produced (BLOCKED, below) |
-| latex | `—` | none | not built |
+| typst (primary) | `typst/` | `OUTPUT-opening-brief.typst.pdf`, `OUTPUT-opening-brief-2.typst.pdf` | `check.sh`: 0 failed; Gate 2 above |
+| docx | `docx/` | `OUTPUT-opening-brief[-2].docx`, `.docx.pdf` (pandoc, `docx/reference.docx`, `docx/cavc.lua`) | `check.sh --engine docx`: 0 failed, XENG-001..003 PASS on both INPUTs (cross-engine gated) |
+| latex | none | none | not built |
 
-Build: `sh docx/make-reference.sh` regenerates `docx/reference.docx` from pandoc's default reference; `sh tools/render.sh --engine docx courts/federal-circuit/court-of-veteran-appeals/opening-brief usage/INPUT-opening-brief.md` writes the `.docx`. No `checks.yaml` exists for this court yet. `tools/check.sh --engine docx` exits 2 here (no `court.json` in the doc-type folder, and no `yq` on this box), so no gate ran on either engine.
+Both engines run on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `lib/docx/xengine-reference.sh`; docs/EVAL-LOOP.md, "Cross-engine gate"): first-fit breaking, no kerning, ligatures or hyphenation, exact line boxes (body 29.4 pt, single 17 pt, section headings 16 pt in 20 pt), explicit block spacings. `eval.yaml` sets `params.cross_engine: gate`: the docx must break every line and page where typst does. Build: `sh docx/make-reference.sh` rebuilds `docx/reference.docx`; `sh tools/render.sh --engine docx <this folder> usage/INPUT-<id>.md` renders (fb render runs the page pass: the filter writes needles, the TOC and TOA page numbers come from the LibreOffice PDF of the previous pass). `docx/cavc.lua` is the same file as `../answering-brief/docx/cavc.lua` except its `CFG` block.
 
-**docx matches the typst template:**
+Where LibreOffice would break otherwise, the docx filter follows typst (Unicode line breaking): no break at a space before closing punctuation (". . ."), none inside a token of adjacent parentheses ("7261(a)(3)", a word joiner), a measure one twip narrower (LibreOffice keeps a word that overruns by less than a twip), and footnotes that may run over to the next page (the shared reference recipe keeps them whole; typst splits them).
 
-- Letter page, 1-inch margins; EB Garamond 14 pt (the font named in the styles, not embedded); body double-spaced (exact 31.45 pt) with a half-inch first-line indent; block quotations and footnotes single-spaced at 14 pt.
-- Caption page with Form 2's contents (Vet. App. No., court, caption, proceeding, brief title, counsel, telephone), with no page number.
-- Contents and authorities in lower roman from i; the body in arabic from 1; the certificate of service in lower roman from i (section breaks carry `w:pgNumType`).
-- Rule 28 labels and indents: in the Argument, point headings (`I.`, `II.`) centered in small capitals and sub-headings `A.`, `1.`, `a.`; elsewhere `A.`, `1.`, `a.`, `(1)`. Levels 4 and below are bold italic, as in the typst template.
-- Table of authorities groups in the typst order (cases, statutes, regulations, rules, other authorities, record citations).
-- The signature block is kept with the last paragraph of the brief (`keepNext`).
-- The level-1 sections required by Rule 28 are checked; the build fails when one is missing or out of order, as the typst template does.
-
-**docx differs from the typst template:**
-
-- The table of contents and the table of authorities have no page numbers. Typst measures them. The docx engine has no pagination pass, so both are static text (not Word fields) and show the entries without page numbers.
-- The caption rules are paragraph borders, and the caption's spacing is set by hand; the typst template fits the caption to one page by measurement. Whether it fits one page has not been checked.
-- Word and LibreOffice paginate differently from each other; no page-based property is asserted for docx.
-
-**docx BLOCKED (delivered partial):**
-
-- `docx.pdf` gates (Gates 0 to 3 and the page review) are BLOCKED. `soffice --headless --convert-to pdf` segfaults at startup on the box where this was built (exit 139), after LibreOffice 25.2.3 and its runtime packages were unpacked from Debian trixie without root; no debugger was available. No `.docx.pdf` was produced, so no page was rendered or reviewed (`pages_reviewed=0`).
-- R. 28(a)(1)-(2), the table of contents and table of authorities with page references: not generated for docx.
-- R. 32(e), the 30-page limit: not checked for docx (the typst template checks it).
-- The `.docx` passed the render script's integrity check (a valid zip, every XML part well formed). It has not been opened in Word or LibreOffice, and no font check has been run on it.
+docx limits: the 30-page limit (R. 32(e)) is checked by the typst template only (the docx breaks its pages alike); the caption page's spacing is estimated from the text length, not measured (its lines break alike, its gaps differ by a few points); Word may paginate slightly differently from LibreOffice (docs/DOCX.md).
 
 ## Known gaps
 
 - **One exemplar per doc type.** Tier 2 asks for 2-3 filed exemplars from different filers. Only *Chavez* (opening) was found for this doc type. A second CAVC appellant's brief from another filer would be the next step (the efiling records at `efiling.uscourts.cavc.gov/cmecf/servlet/TransportRoom?servlet=ShowDoc%2F...` are the source; the Gray brief at hillandponton.com is 53 pages).
 - **Exemplar age.** The exemplar is 2020. The governing rules are the 2026 text; the exemplar's own font and spacing are not the rule's floor.
-- **Page 8 layout.** The short page 8 is the keep-with-signature rule applied to a 20-line block. Shortening the block or dropping the keep would remove it; neither was done.
 - **Signature block.** One signer only. A brief with several counsel signing (the Secretary's briefs) is not generated; the answering-brief template has the same limit.
 - **Superseded authorities appendix (R. 28(i), 32(d)).** Not generated. A brief that cites superseded statutes or regulations needs one.
 - **Standard of Review heading.** Not required by the rule; the sample has one, as the filed brief does.
