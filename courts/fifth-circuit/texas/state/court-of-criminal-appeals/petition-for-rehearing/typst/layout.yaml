@@ -1,0 +1,65 @@
+# Court of Criminal Appeals of Texas (texcrimapp): motion for rehearing (petition-for-rehearing; TRAP 79, 9.4). The
+# whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this
+# file by `fb engines gen`, fb-595.54.12). Numbers trace to TRAP 9.4 (../rules.md, TEXCRIMAPP-*); lengths in points.
+# No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # TEXCRIMAPP-FORM-004 (TRAP 9.4(e)): no smaller than 14-point
+pitch:
+  body: 32.2              # TEXCRIMAPP-FORM-003 (TRAP 9.4(d)): double-spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # cover, headings, quotations, footnotes, signature: single (1.15 x 14 pt)
+margin: {top: 76, bottom: 76, left: 72, right: 72}   # TEXCRIMAPP-FORM-002 (TRAP 9.4(c)): at least one inch
+indent: 36                # every body paragraph indented half an inch
+page_number: {align: center, from: 1}   # TRAP 9.4: pages numbered at the foot in Arabic numerals, the cover page 1
+footnote: {size: 14, gap: 7}             # TEXCRIMAPP-FORM-003, -004: footnotes single-spaced, here at the text's size
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # TEXCRIMAPP-FORM-003: block quotations single-spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 19.6, below: 14}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# TEXCRIMAPP-LEN-004, -007 (TRAP 9.4(i)(1), (2)(E)): every word of the body counts (headings, footnotes, quotations);
+# a motion for rehearing is limited to 4,500 words. The count is printed in the certificate of compliance.
+words: {limit: 4500}
+# The cover (TRAP 9.4(g), TEXCRIMAPP-CONT-001): the court, the case number, the case style (each party and its role),
+# the court below, the title of the motion between the page's free space, and counsel.
+cover:
+  - {text: "{court}", align: center, bold: true, upper: true}
+  - {text: "{case_number}", align: center, bold: true, above: 11.2}
+  - each: parties
+    above: 16.8
+    between:
+      - {text: "", pitch: 7}
+    blocks:
+      - {text: "{name}", align: center}
+      - {text: "{role}", align: center, italic: true, left: 108, optional: true}
+  - {text: "{lower_court_case}", align: center, optional: true, above: 15.4}
+  - {fill: 1}
+  - {text: "{title}", align: center, bold: true, upper: true, left: 35, right: 35}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - group:
+          - {text: "{names}", bold: true, left: 180}
+          - {text: "{lines}", left: 180}
+        above: 11.2
+# The closing: the certificate of compliance just above the signature (TRAP 9.4(i)(3), TEXCRIMAPP-CERT-001), the
+# signature block never split; then the certificate of service (TRAP 9.5(e), TEXCRIMAPP-CERT-002) on a page of its
+# own, signed by the signer.
+closing:
+  - group:
+      - {text: "This motion complies with the word limit of TRAP 9.4(i)(2)(E). It contains {xd.words} words, excluding the parts of the document that TRAP 9.4(i)(1) exempts, as counted by the word-processing program (TRAP 9.4(i)(3)).", pitch: body, indent: 36}
+      - {text: "Respectfully submitted this {signature.date}.", pitch: body, indent: 36, optional: true}
+      - {text: "{signature.lines}", left: 234, above: 8.4}
+      - {text: "{signature.signer_line}", underline: true, left: 234, above: 16.1}
+      - {text: "{signature.name}", left: 234, optional: true}
+      - {text: "{signature.signer}", left: 234}
+    above: 16.8
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", heading: 1}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - {text: "{service.closing}", pitch: body, indent: 36, optional: true}
+      - group:
+          - {text: "{signature.signer_line}", underline: true, left: 234}
+          - {text: "{signature.name}", left: 234, optional: true}
+          - {text: "{signature.signer.0}", left: 234, optional: true}
+        above: 8.4
