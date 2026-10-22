@@ -1,7 +1,5 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). docx breaks every line and page where
-# typst does and is gated. LaTeX is reported: it lets a level-1 heading end a page when a numbered list follows it
-# (typst and Word keep the heading with the list; p6 "ESTABLISHMENT OF NJRC"; docs/open-items/fb-595.54.72.md).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Both break every line and page where
+# typst does (400/400 lines; LaTeX keeps a level-1 heading with the numbered list after it since fb-595.54.82).
 params:
-  cross_engine: report
-  cross_engine_docx: gate
+  cross_engine: gate
