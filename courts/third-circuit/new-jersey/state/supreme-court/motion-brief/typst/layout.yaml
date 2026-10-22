@@ -1,0 +1,39 @@
+# Supreme Court of New Jersey (nj): motion and supporting letter brief (R. 2:6-2(b), R. 2:6-10; motion-brief). The
+# whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this
+# file by `fb engines gen`, fb-595.54.12). Letter form: the R. 2:6-6(a) information is carried in the letter heading,
+# so no separate cover is printed. Numbers trace to ../rules.md (NJ-* ids); lengths in points. No case text here:
+# every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # NJ-FORM-003: no smaller than 12-point; 14 pt, stricter (see the OPEN item in rules.md)
+pitch:
+  body: 32.2              # NJ-FORM-002: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # letter heading, headings, quotations, footnotes, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NJ-FORM-004: approximately one inch
+indent: 36
+page_number: {align: center, from: 2}   # a letter: the first page carries the letterhead, no number
+footnote: {size: 14, gap: 7}             # NJ-FORM-002: footnotes may be single spaced
+quote: {left: 36, right: 36, above: 14, below: 14}   # NJ-FORM-002: indented quotations may be single spaced
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 15.4, below: 8.4}
+# The letter heading (R. 2:6-2(b) letter brief): the firm and its lines, the date, the manner of delivery, the
+# Clerk's address, the "Re:" lines and the salutation.
+front:
+  - {text: "{letterhead.firm}", align: center, bold: true}
+  - {text: "{letterhead.lines}", align: center}
+  - {text: "{date}", above: 22.4}
+  - {text: "{delivery}", bold: true, above: 16.8}
+  - {text: "{addressee}", above: 8.4}
+  - columns:
+      - width: 36
+        blocks: [{text: "Re:"}]
+      - blocks: [{text: "{re}"}]
+    gutter: 7.2
+    above: 16.8
+  - {text: "{salutation}", above: 16.8, below: 16.1}
+# The closing and each signature group, never split.
+closing:
+  - group:
+      - {text: "Respectfully Submitted,", pitch: body}
+      - each: signature
+        blocks: [{text: "{lines}", above: 16.8}]
