@@ -3,7 +3,7 @@
 # (Matter of Karlin v. Stanford, APL-2022-00182, Brief of Amicus Curiae the New York Civil Liberties Union, February 29, 2024;
 # see usage/SOURCE.md). The body is the filed text transcribed from the PDF's text layer: the disclosure statement, the
 # preliminary statement, the argument and the conclusion, with the footnotes. Page numbers and the tables of contents and
-# authorities are not transcribed; the tables here are generated from the authorities field below , each page
+# authorities are not transcribed; the tables here are generated from the authorities field below, each page
 # from a [text](toa:key) link in the body (a case name in markdown italics in its entry). See ../README.md, "Markdown contract", for the meaning of every field.
 apl_docket: "APL-2022-00182"
 caption:

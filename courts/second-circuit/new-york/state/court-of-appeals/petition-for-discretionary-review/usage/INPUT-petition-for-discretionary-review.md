@@ -6,8 +6,8 @@
 # with the reasons they merit review, the disclosure statement and the calendar-preference statement, with the footnotes. The
 # exhibits (the notice of entry, the Appellate Division decision and the Supreme Court decision, Exhibits A and B) are not
 # transcribed, and neither is the scanned signature. The layer is an OCR-like scan: obvious OCR errors (for example "lA." for
-# "J.A.", "Gamer" for "Garner") are corrected. The tables are generated from the authorities field below and carry no page
-# references (known gap, see ../README.md). See ../README.md, "Markdown contract", for the meaning of every field.
+# "J.A.", "Gamer" for "Garner") are corrected. The tables are generated from the authorities field below, each page from a
+# [text](toa:key) link in the body. See ../README.md, "Markdown contract", for the meaning of every field.
 apl_docket: "AD No. 2015-02774"
 caption:
   - names: ["In the Matter of New York Civil Liberties Union,"]
@@ -26,77 +26,77 @@ date: "Dated: New York, New York, August 14, 2015"
 authorities:
   richmond:
     kind: case
-    name: "Richmond Newspapers, Inc. v. Virginia"
+    name: "*Richmond Newspapers, Inc. v. Virginia*"
     cite: "448 US 555 [1980]"
   nytsullivan:
     kind: case
-    name: "New York Times Co. v. Sullivan"
+    name: "*New York Times Co. v. Sullivan*"
     cite: "376 US 254 [1964]"
   fink:
     kind: case
-    name: "Matter of Fink v. Lefkowitz"
+    name: "*Matter of Fink v. Lefkowitz*"
     cite: "47 NY2d 567 [1979]"
   suffolk:
     kind: case
-    name: "Matter of District Attorney of Suffolk County"
+    name: "*Matter of District Attorney of Suffolk County*"
     cite: "58 NY2d 436 [1983]"
   dinapoli:
     kind: case
-    name: "People v. Di Napoli"
+    name: "*People v. Di Napoli*"
     cite: "27 NY2d 229 [1970]"
   jones:
     kind: case
-    name: "People v. Jones"
+    name: "*People v. Jones*"
     cite: "24 NY3d 623 [2014]"
   cipolla:
     kind: case
-    name: "People v. Cipolla"
+    name: "*People v. Cipolla*"
     cite: "184 Misc 2d 880 [Sup Ct, Rensselaer County 2000]"
   cplr5602:
     kind: statute
-    name: "CPLR 5602"
-    cite: ""
+    name: ""
+    cite: "CPLR 5602"
   cplr5611:
     kind: statute
-    name: "CPLR 5611"
-    cite: ""
+    name: ""
+    cite: "CPLR 5611"
   cpl19025:
     kind: statute
-    name: "CPL 190.25"
-    cite: ""
+    name: ""
+    cite: "CPL 190.25"
   cpl19024:
     kind: statute
-    name: "CPL 190.24"
-    cite: ""
+    name: ""
+    cite: "CPL 190.24"
   penal3530:
     kind: statute
-    name: "Penal Law § 35.30"
-    cite: ""
+    name: ""
+    cite: "Penal Law § 35.30"
   rule50022:
     kind: rule
-    name: "22 NYCRR 500.22"
-    cite: ""
+    name: ""
+    cite: "22 NYCRR 500.22"
   rule50017:
     kind: rule
-    name: "22 NYCRR 500.17(b)"
-    cite: ""
+    name: ""
+    cite: "22 NYCRR 500.17(b)"
   rule50011:
     kind: rule
-    name: "22 NYCRR 500.11"
-    cite: ""
+    name: ""
+    cite: "22 NYCRR 500.11"
   eo147:
     kind: other
-    name: "Executive Order No. 147 (2015)"
-    cite: ""
+    name: ""
+    cite: "Executive Order No. 147 (2015)"
 ---
 
-PLEASE TAKE NOTICE that, pursuant to Rule 500.22 of this Court, Appellant New York Civil Liberties Union (NYCLU) will move this Court for an order granting leave to appeal from a final judgment and decision of the Appellate Division, Second Department entered on July 29, 2015 in this matter. This motion shall be returnable in the Court of Appeals at 20 Eagle Street, Albany, New York at 9:00 am on Monday, August 24, 2015. Any opposing papers shall be served at least two days before this return date.
+PLEASE TAKE NOTICE that, pursuant to [Rule 500.22](toa:rule50022) of this Court, Appellant New York Civil Liberties Union (NYCLU) will move this Court for an order granting leave to appeal from a final judgment and decision of the Appellate Division, Second Department entered on July 29, 2015 in this matter. This motion shall be returnable in the Court of Appeals at 20 Eagle Street, Albany, New York at 9:00 am on Monday, August 24, 2015. Any opposing papers shall be served at least two days before this return date.
 
-PLEASE TAKE FURTHER NOTICE that, if this Court grants leave to appeal, Appellant requests that, pursuant to Rule 500.17(b), this Court also grant a calendar preference setting this appeal for argument during the November 2015 session. To that end, Appellant further requests that the Court set a briefing schedule requiring the submission of Appellant’s opening brief by September 30, 2015; Respondent’s brief by October 30, 2015; and Appellant’s reply brief by November 13, 2015. Support for this application is presented in a statement appended to this notice of motion.
+PLEASE TAKE FURTHER NOTICE that, if this Court grants leave to appeal, Appellant requests that, pursuant to [Rule 500.17(b)](toa:rule50017), this Court also grant a calendar preference setting this appeal for argument during the November 2015 session. To that end, Appellant further requests that the Court set a briefing schedule requiring the submission of Appellant’s opening brief by September 30, 2015; Respondent’s brief by October 30, 2015; and Appellant’s reply brief by November 13, 2015. Support for this application is presented in a statement appended to this notice of motion.
 
 # Statement of the Procedural History of the Case
 
-In this case, the NYCLU sought an order pursuant to C.P.L. § 190.25(4) mandating the public disclosure of the transcript of the grand jury proceedings relating to the death of Eric Garner. This application was narrowed, however, by the proposed redaction of “any name and any personally identifiable information regarding grand jurors, witnesses or individuals from the Office of the District Attorney of Richmond County . . . .” (J.A. 182).[^f1] The NYCLU application further requested “the instructions given to the grand jury, in the Eric Garner matter, regarding relevant principles of law, including without limitation, Penal Law § 35.30 pertaining to a police officer’s use of physical force in making an arrest.” (J.A. 182). And it requested “a comprehensive list of evidence presented to the grand jury . . . .” (J.A. 183). Finally, the application sought “physical and documentary evidence presented as exhibits to the grand jury . . . including four videos, records regarding NYPD policies and procedures, photographs of the scene and records pertaining to NYPD training, except that autopsy photographs and medical records pertaining to Mr. Garner” were not requested. (J.A. 183).
+In this case, the NYCLU sought an order pursuant to [C.P.L. § 190.25(4)](toa:cpl19025) mandating the public disclosure of the transcript of the grand jury proceedings relating to the death of Eric Garner. This application was narrowed, however, by the proposed redaction of “any name and any personally identifiable information regarding grand jurors, witnesses or individuals from the Office of the District Attorney of Richmond County . . . .” (J.A. 182).[^f1] The NYCLU application further requested “the instructions given to the grand jury, in the Eric Garner matter, regarding relevant principles of law, including without limitation, [Penal Law § 35.30](toa:penal3530) pertaining to a police officer’s use of physical force in making an arrest.” (J.A. 182). And it requested “a comprehensive list of evidence presented to the grand jury . . . .” (J.A. 183). Finally, the application sought “physical and documentary evidence presented as exhibits to the grand jury . . . including four videos, records regarding NYPD policies and procedures, photographs of the scene and records pertaining to NYPD training, except that autopsy photographs and medical records pertaining to Mr. Garner” were not requested. (J.A. 183).
 
 The NYCLU application was initiated with the filing of an Order to Show Cause with notice to the District Attorney. The Order to Show Cause was signed and entered in the Supreme Court, Richmond County on December 11, 2014, setting the matter down for a hearing. Oral argument regarding the NYCLU application was heard by Justice William Garnett of the New York State Supreme Court, Richmond County, on February 5, 2015 along with arguments presented in connection with similar petitions presented by counsel from the Legal Aid Society, the Public Advocate of New York City, the New York Post and the Staten Island branch of the National Association for the Advancement of Colored People (NAACP).
 
@@ -106,9 +106,9 @@ On July 29, 2015, the Appellate Division, Second Department rendered a decision 
 
 # Jurisdictional Statement
 
-CPLR § 5602 permits an appeal to be taken to the Court of Appeals by “permission of the Court of Appeals . . . upon direct application” to the Court. Under this provision, such appeal may be taken “in an action originating in the Supreme Court . . . from an order of the appellate division which finally determines the action . . . .” Id. The issue of “finality” is addressed in CPLR § 5611 which provides, in part, that “[i]f the appellate division disposes of all the issues in the action, its order shall be considered a final one . . . .”
+[CPLR § 5602](toa:cplr5602) permits an appeal to be taken to the Court of Appeals by “permission of the Court of Appeals . . . upon direct application” to the Court. Under this provision, such appeal may be taken “in an action originating in the Supreme Court . . . from an order of the appellate division which finally determines the action . . . .” Id. The issue of “finality” is addressed in [CPLR § 5611](toa:cplr5611) which provides, in part, that “[i]f the appellate division disposes of all the issues in the action, its order shall be considered a final one . . . .”
 
-On March 19, 2015, a decision and order was entered in the Supreme Court, Richmond County denying, in all respects, the application of the NYCLU for the disclosure of the grand jury materials in connection with the death of Eric Garner. (J.A. 8-19). This denial constituted a final decision in response to the application. A notice of entry of the March 19, 2015 order was served upon the Richmond County District Attorney on April 2, 2015 and a timely Notice of Appeal was served and filed on April 2, 2015. (J.A. 39). The Appellate Division, Second Department’s decision and order in the appeal was entered on July 29, 2015. (Ex. A of the Decision & Order). The order affirmed the lower court’s denial of the “petitions submitted by [each of] the appellants [seeking] to release grand jury minutes and evidence based upon CPL §190.24(4)(a) . . . .” (Ex. A at 9 of the Decision & Order). The order, in effect, terminated, with finality, those proceedings. A Notice of Entry was served upon all parties to the appeal on August 10, 2015. (Ex. A at 1 of the Notice of Entry).
+On March 19, 2015, a decision and order was entered in the Supreme Court, Richmond County denying, in all respects, the application of the NYCLU for the disclosure of the grand jury materials in connection with the death of Eric Garner. (J.A. 8-19). This denial constituted a final decision in response to the application. A notice of entry of the March 19, 2015 order was served upon the Richmond County District Attorney on April 2, 2015 and a timely Notice of Appeal was served and filed on April 2, 2015. (J.A. 39). The Appellate Division, Second Department’s decision and order in the appeal was entered on July 29, 2015. (Ex. A of the Decision & Order). The order affirmed the lower court’s denial of the “petitions submitted by [each of] the appellants [seeking] to release grand jury minutes and evidence based upon [CPL §190.24(4)(a)](toa:cpl19024) . . . .” (Ex. A at 9 of the Decision & Order). The order, in effect, terminated, with finality, those proceedings. A Notice of Entry was served upon all parties to the appeal on August 10, 2015. (Ex. A at 1 of the Notice of Entry).
 
 This motion for leave to appeal, dated August 14, 2015, is being taken within 30 days of the Notice of Entry. (Id.) And, as noted above, this appeal is being taken from the legal errors and the misapplication of law committed by the court below.
 
@@ -124,17 +124,17 @@ The Garner grand jury is plainly the precipitating event giving rise to the deba
 
 The lack of answers to these questions means that the legislators and members of the public who are considering grand jury reform in response to the Garner grand jury result are trying to fashion a “fix” without really knowing what is broken.
 
-This lack of public knowledge is incompatible with the understanding that democracy works best when public policy choices are undertaken by an informed electorate and their representatives. That understanding lies at the heart of the First Amendment. “Implicit in [the] structural role [of the First Amendment] is not only ‘the principle that debate on public issues should be uninhibited, robust and wide-open,’ but also the antecedent assumption that valuable’ public debate—as well as other civic behavior—must be informed.” See *Richmond Newspapers, Inc. v. Virginia*, 448 US 555, 586-88 [1980] (Brennan, J., concurring) (quoting *New York Times Co. v. Sullivan*, 376 US 254, 270 [1964]). That understanding also plays a prominent role in New York public policy, embodied in our Freedom of Information Law, which “permits the electorate to have sufficient information in order to make intelligent, informed choices with respect to both the direction and scope of governmental activities.” See *Matter of Fink v. Lefkowitz*, 47 NY2d 567, 571 [1979].
+This lack of public knowledge is incompatible with the understanding that democracy works best when public policy choices are undertaken by an informed electorate and their representatives. That understanding lies at the heart of the First Amendment. “Implicit in [the] structural role [of the First Amendment] is not only ‘the principle that debate on public issues should be uninhibited, robust and wide-open,’ but also the antecedent assumption that valuable’ public debate—as well as other civic behavior—must be informed.” See [*Richmond Newspapers, Inc. v. Virginia*](toa:richmond), 448 US 555, 586-88 [1980] (Brennan, J., concurring) (quoting [*New York Times Co. v. Sullivan*](toa:nytsullivan), 376 US 254, 270 [1964]). That understanding also plays a prominent role in New York public policy, embodied in our Freedom of Information Law, which “permits the electorate to have sufficient information in order to make intelligent, informed choices with respect to both the direction and scope of governmental activities.” See [*Matter of Fink v. Lefkowitz*](toa:fink), 47 NY2d 567, 571 [1979].
 
 As noted, the outcome of the Garner grand jury has also been the source of significant distrust in the fairness of the criminal justice system. This is a matter of deep concern to the entire community. But lawyers and judges have a special obligation to promote public respect for the system and to respond to public perceptions that the system is not operating fairly.
 
-Under circumstances such as these, precedent from this Court, interpreting CPL § 190.25, allows the statutory presumption in favor of grand jury secrecy to be overcome where there is “a compelling and particularized need” for disclosure of grand jury materials and where the “balance of interests” tips in favor of disclosure. *Matter of District Attorney of Suffolk County*, 58 NY2d 436, 444 [1983]. In this regard, the case law further explains that the requirement of a “particularized need” is satisfied when the strong interest that supports disclosure cannot be effectively advanced without the disclosure requested. *Id.* at 444 (holding that disclosure is warranted when “sources other than the Grand Jury minutes are inadequate” to advance the compelling interest). The decision of the Appellate Division below rested, first, on an erroneous legal application of the term “compelling and particularized need” and, second, on an abuse of discretion. As a threshold matter, both of these grounds for denying disclosure of the Garner grand jury materials present questions of law for this Court’s review.
+Under circumstances such as these, precedent from this Court, interpreting [CPL § 190.25](toa:cpl19025), allows the statutory presumption in favor of grand jury secrecy to be overcome where there is “a compelling and particularized need” for disclosure of grand jury materials and where the “balance of interests” tips in favor of disclosure. *Matter of [District Attorney of Suffolk County](toa:suffolk)*, 58 NY2d 436, 444 [1983]. In this regard, the case law further explains that the requirement of a “particularized need” is satisfied when the strong interest that supports disclosure cannot be effectively advanced without the disclosure requested. *Id.* at 444 (holding that disclosure is warranted when “sources other than the Grand Jury minutes are inadequate” to advance the compelling interest). The decision of the Appellate Division below rested, first, on an erroneous legal application of the term “compelling and particularized need” and, second, on an abuse of discretion. As a threshold matter, both of these grounds for denying disclosure of the Garner grand jury materials present questions of law for this Court’s review.
 
-In *Matter of District Attorney of Suffolk County*, 58 NY2d at 444-46, this Court reviewed and affirmed, as a matter of law, an Appellate Division decision that a lower court had misapplied the “compelling and particularized need” standard and had engaged in an “abuse of discretion” in deciding to release grand jury materials. See also *People v. Di Napoli*, 27 NY2d 229 [1970] (where this Court affirmed as a matter of law an Appellate Division decision that upheld a lower court’s exercise of discretion in granting disclosure of grand jury materials).
+In *Matter of [District Attorney of Suffolk County](toa:suffolk)*, 58 NY2d at 444-46, this Court reviewed and affirmed, as a matter of law, an Appellate Division decision that a lower court had misapplied the “compelling and particularized need” standard and had engaged in an “abuse of discretion” in deciding to release grand jury materials. See also [*People v. Di Napoli*](toa:dinapoli), 27 NY2d 229 [1970] (where this Court affirmed as a matter of law an Appellate Division decision that upheld a lower court’s exercise of discretion in granting disclosure of grand jury materials).
 
-In this case, the Appellate Division made clear that its holding rested on a threshold question of law regarding its interpretation of the “compelling and particularized need” standard that preceded any exercise of discretion. (Ex. A at 6 of the Decision & Order) (noting that “without the initial showing of a compelling and particularized need, the question of discretion need not be reached”) (citing *Matter of District Attorney of Suffolk County*, 58 NY2d at 444). Even with regard to the ultimate exercise of discretion, this Court has held that “an abuse of discretion is a question of law, not of fact . . . [even if that discretion] was exercised in a factual setting.” *People v. Jones*, 24 NY3d 623, 629 [2014] (internal citation and quotation omitted). That remains so even if this Court “must look at the facts in order to determine whether the discretion was indeed abused.” *Id.*
+In this case, the Appellate Division made clear that its holding rested on a threshold question of law regarding its interpretation of the “compelling and particularized need” standard that preceded any exercise of discretion. (Ex. A at 6 of the Decision & Order) (noting that “without the initial showing of a compelling and particularized need, the question of discretion need not be reached”) (citing *Matter of [District Attorney of Suffolk County](toa:suffolk)*, 58 NY2d at 444). Even with regard to the ultimate exercise of discretion, this Court has held that “an abuse of discretion is a question of law, not of fact . . . [even if that discretion] was exercised in a factual setting.” [*People v. Jones*](toa:jones), 24 NY3d 623, 629 [2014] (internal citation and quotation omitted). That remains so even if this Court “must look at the facts in order to determine whether the discretion was indeed abused.” *Id.*
 
-Each of the two legal questions presented in this appeal merit a reversal of the Appellate Division’s decision by this Court. The Appellate Division erroneously held that the legislative and public debate about grand jury reform prompted by the Garner grand jury did not constitute, as a matter of law, “a compelling and particularized need” for disclosure. (Ex. A at 6 of the Decision & Order). But there is a compelling interest in having a knowledgeable electorate and fully informed legislators deliberate over the nature and scope of any grand jury reform, and a separately compelling interest in restoring public confidence in the grand jury system, when that debate and that lack of confidence stem directly from the operation of the grand jury at issue. *People v. Cipolla*, 184 Misc 2d 880, 881 [Sup Ct, Rensselaer County 2000] (holding that disclosure is justified where “the integrity of the grand jury system . . . is [in] question”).
+Each of the two legal questions presented in this appeal merit a reversal of the Appellate Division’s decision by this Court. The Appellate Division erroneously held that the legislative and public debate about grand jury reform prompted by the Garner grand jury did not constitute, as a matter of law, “a compelling and particularized need” for disclosure. (Ex. A at 6 of the Decision & Order). But there is a compelling interest in having a knowledgeable electorate and fully informed legislators deliberate over the nature and scope of any grand jury reform, and a separately compelling interest in restoring public confidence in the grand jury system, when that debate and that lack of confidence stem directly from the operation of the grand jury at issue. [*People v. Cipolla*](toa:cipolla), 184 Misc 2d 880, 881 [Sup Ct, Rensselaer County 2000] (holding that disclosure is justified where “the integrity of the grand jury system . . . is [in] question”).
 
 Where, as here, reforms have been proposed in response to the conduct of the Garner grand jury, there is a compelling interest in knowing what happened in that specific grand jury room and a particularized need to examine these specific grand jury materials, which provide the only possible source of that knowledge. The Appellate Division’s error forecloses an informed debate, while permitting public distrust of the grand jury proceedings to persist.
 
@@ -150,11 +150,11 @@ The NYCLU hereby discloses that it is a non-profit, 501(c)(4) corporation, and i
 
 # Statement Pursuant to Rule 500.17(b) in Support of a Calendar Preference
 
-In the event that this Court grants leave to appeal, the NYCLU further requests a calendar preference pursuant to Rule 500.17(b) of this Court. Specifically, the NYCLU requests that this matter be calendared no later than the November 2015 sitting so that the impending debate in the 2015-16 legislative session about reform of the grand jury process can proceed informed by what happened in the Garner grand jury proceedings. The NYCLU further requests that a scheduling order be issued requiring the submission of Appellant’s opening brief by September 30, 2015; Respondent’s brief by October 30, 2015; and Appellant’s reply brief by November 13, 2015.
+In the event that this Court grants leave to appeal, the NYCLU further requests a calendar preference pursuant to [Rule 500.17(b)](toa:rule50017) of this Court. Specifically, the NYCLU requests that this matter be calendared no later than the November 2015 sitting so that the impending debate in the 2015-16 legislative session about reform of the grand jury process can proceed informed by what happened in the Garner grand jury proceedings. The NYCLU further requests that a scheduling order be issued requiring the submission of Appellant’s opening brief by September 30, 2015; Respondent’s brief by October 30, 2015; and Appellant’s reply brief by November 13, 2015.
 
-The compelling interest supporting disclosure relates to the call for grand jury reform as a result of the outcome of the Garner grand jury. As noted, legislative reform proposals are being considered and debated even though neither the Legislature nor the public can fully know why the grand jury reached the result that it did. The interest in having a fully informed legislative debate on this issue lies at the heart of the NYCLU application in this case. While several bills proposing amendments to the grand jury process were introduced in this year’s legislative session,[^f5] the Legislature—lacking concrete information from the Garner grand jury materials to inform their policymaking decisions about the merits of various reform proposals—passed none. Nor did the Legislature pass any of the several bills proposing that independent monitors review cases involving unarmed people killed by police officers.[^f6] This state of paralysis was temporarily resolved by Governor Cuomo, who issued a one-year executive order appointing the Attorney General as special prosecutor, fully expecting the Legislature to take the issue of grand jury reform up again in the forthcoming legislative session. See Executive Order No. 147 (2015). But to ensure a permanent resolution, it is important to provide the Legislature, reconvening in January 2016, with the Garner grand jury materials to permit a fully informed legislative consideration of the need for and appropriate scope of any reform.
+The compelling interest supporting disclosure relates to the call for grand jury reform as a result of the outcome of the Garner grand jury. As noted, legislative reform proposals are being considered and debated even though neither the Legislature nor the public can fully know why the grand jury reached the result that it did. The interest in having a fully informed legislative debate on this issue lies at the heart of the NYCLU application in this case. While several bills proposing amendments to the grand jury process were introduced in this year’s legislative session,[^f5] the Legislature—lacking concrete information from the Garner grand jury materials to inform their policymaking decisions about the merits of various reform proposals—passed none. Nor did the Legislature pass any of the several bills proposing that independent monitors review cases involving unarmed people killed by police officers.[^f6] This state of paralysis was temporarily resolved by Governor Cuomo, who issued a one-year executive order appointing the Attorney General as special prosecutor, fully expecting the Legislature to take the issue of grand jury reform up again in the forthcoming legislative session. See [Executive Order No. 147 (2015)](toa:eo147). But to ensure a permanent resolution, it is important to provide the Legislature, reconvening in January 2016, with the Garner grand jury materials to permit a fully informed legislative consideration of the need for and appropriate scope of any reform.
 
-It is, therefore, important to permit this appeal to be heard sufficiently in advance of January 2016 to render a decision prior to that date. Summary review of this appeal, pursuant to Rule 500.11 of this Court, is inadequate because the important issues raised by this case require plenary consideration. Counsel from the office of the Richmond County District Attorney wrote, in an email sent to Natalie Rea, counsel for the Legal Aid Society in its parallel appeal in this controversy, that it “cannot agree to a preference.”
+It is, therefore, important to permit this appeal to be heard sufficiently in advance of January 2016 to render a decision prior to that date. Summary review of this appeal, pursuant to [Rule 500.11](toa:rule50011) of this Court, is inadequate because the important issues raised by this case require plenary consideration. Counsel from the office of the Richmond County District Attorney wrote, in an email sent to Natalie Rea, counsel for the Legal Aid Society in its parallel appeal in this controversy, that it “cannot agree to a preference.”
 
 [^f1]: “J.A.” refers to the Joint Appendix originally filed with the Appellate Division, Second Department, and submitted to this Court by counsel from the Legal Aid Society in support of the coordinated motions for leave to appeal from the Appellate Division’s order.
 

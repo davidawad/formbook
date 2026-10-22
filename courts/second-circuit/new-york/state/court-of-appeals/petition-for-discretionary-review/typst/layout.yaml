@@ -1,0 +1,109 @@
+# New York Court of Appeals (ny): motion for leave to appeal (petition for discretionary review, 500.22, NY-LEAVE-001,
+# -002): the notice of motion and the statement in one document. The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12).
+# Numbers trace to 22 NYCRR 500.1 and 500.13 (../../rules.md, NY-*); lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # NY-FORM-002: 14-point body for a proportionally spaced face
+pitch:
+  body: 32.2              # NY-FORM-003: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # cover, headings, quotations, tables, signature: single spaced (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NY-FORM-003: one inch on all sides
+indent: 36
+# NY-FORM-003: pages numbered consecutively in the center of the bottom margin; the cover prints no number, the tables
+# are numbered i, ii .. (the cover counted, so they start at ii, as filed briefs number them) and the body from 1.
+page_number: {align: center, from: 1, front: lower-roman, cover: counted}
+footnote: {size: 12, pitch: 13.8, gap: 7}   # NY-FORM-002, -003: footnotes 12 point (1.15 x 12 pt), single spaced
+quote: {left: 36, right: 36, above: 14, below: 14}   # NY-FORM-003: quotations indented and single spaced
+justify: true             # the body justified, as the court's filed briefs set it (tier 2)
+# Headings (NY-FORM-001: bold and capitals only in headings; NY-FORM-003: single spaced), kept with their text: level 1
+# centered bold capitals, 2 bold, 3 bold half an inch in, 4 italic an inch in. The point numbers are typed in the
+# markdown (README "Markdown contract").
+heading:
+  - {align: center, bold: true, upper: true, above: 19.6, below: 16.8}
+  - {bold: true, above: 16.8, below: 12.6}
+  - {bold: true, left: 36, above: 18.2, below: 15.4}
+  - {italic: true, left: 72, above: 16.8, below: 14}
+# The cover (500.13(b), NY-CONT-005, -006): the argument request in the upper right corner when given, the court, the
+# docket, the parties with "against" between them, the title and the proceeding; counsel's names and addresses, the
+# telephone and fax at the foot of the page (the space between filling the page).
+cover:
+  - when: argued_by
+    blocks:
+      - {text: "To be argued by:", align: right}
+      - {text: "{argued_by}", align: right, below: 22.4}
+  - {text: "Court of Appeals", align: center, bold: true}
+  - {text: "of the State of New York", align: center, bold: true, above: 2.8}
+  - {text: "{apl_docket}", align: center, above: 16.8}
+  - {text: "{county_clerk_index}", align: center, optional: true, above: 5.6}
+  - each: caption
+    above: 21
+    between:
+      - {text: "--against--", align: center, italic: true, above: 8.4, below: 8.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, above: 4.2}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 25.2}
+  - {text: "{proceeding}", align: center, optional: true, above: 16.8}
+  - {fill: 1}
+  - columns:
+      each: counsel
+      per_row: 2
+      blocks:
+        - {text: "{names}"}
+        - {text: "{lines}", italic: true, above: 4.2}
+    gutter: 21.6
+    above: 21
+  - {text: "{phone}", above: 11.2}
+  - {text: "{fax}", optional: true, above: 4.2}
+  - {text: "{date}", optional: true, above: 4.2}
+# NY-CONT-001 (500.13(a)): a table of contents and a table of cases and authorities, each on its own page.
+contents: {title: "Table of Contents", depth: 2, col: 36, hang: 18, step: 36, above: 7}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 18
+  above: 4.2
+  page_heading: "Page(s)"
+  passim: 7
+  group: {bold: true, above: 14, below: 4.2}
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: constitution, title: "Constitutional Provisions"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: regulation, title: "Regulations"}
+    - {kind: rule, title: "Rules"}
+    - {kind: other, title: "Other Authorities"}
+# NY-LEN-001 (500.13(c)(1)): the word count the certificate of compliance prints, the whole body with its footnotes
+# (no tail). No limit is set (500.22 sets none in the text this folder retrieved).
+words: {}
+# The signature block in the right half, never split (NY-FORM-004 500.1(m)); then the certificate of compliance
+# (NY-LEN-001: 500.13(c)(1), the word count of the body, footnotes included) and the certificate of service when given,
+# each on its own page.
+closing:
+  - group:
+      - {text: "Respectfully submitted,", left: 234}
+      - {text: "{signature.signer}", left: 234, above: 25.2}
+      - {text: "{signature.lines}", italic: true, left: 234}
+      - {text: "{date}", optional: true, left: 234}
+    above: 21
+  - {break: true}
+  - {text: "Certificate of Compliance", align: center, bold: true, upper: true, below: 16.8}
+  - {text: "I certify that this motion complies with the word limit of 22 NYCRR 500.13(c)(1), that it contains {xd.words} words in the body of the brief, excluding the caption, tables and signature block, and that the count was made by the word-processing system used to prepare it.", pitch: body, indent: 36}
+  - group:
+      - {text: "{signature.signer}", left: 234}
+      - {text: "{date}", optional: true, left: 234}
+    above: 21
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "I certify that on the date below I served copies of this motion on counsel for all parties by {service.method}.", pitch: body, indent: 36}
+      - when: service.unregistered
+        blocks:
+          - each: service.unregistered
+            blocks:
+              - {text: "{name}", above: 14}
+              - {text: "{address}"}
+      - group:
+          - {text: "{signature.signer}", left: 234}
+          - {text: "{date}", optional: true, left: 234}
+        above: 21
