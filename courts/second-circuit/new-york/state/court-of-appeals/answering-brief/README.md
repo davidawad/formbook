@@ -58,7 +58,7 @@ Rule dates: none verified. The Justia copy is current only through September 202
 | `fax` | no | cover, under `phone` (500.13(b) asks for telephone and facsimile numbers); shown only when given |
 | `signature` | yes | `signer` and `lines`, after the Conclusion and on the certificates |
 | `date` | no | under the signature and on the certificates |
-| `disclosure` | no | disclosure statement page, shown only when given |
+| `disclosure` | no | disclosure statement page, shown only when given (not set at present: see "Engines", BLOCKED) |
 | `service` | no | `method` and `unregistered` (list of `{name, address}`); shown only when given; certificate of service |
 | `authorities` | yes if the body cites any | table of authorities registry: `kind` (case, constitution, statute, regulation, rule, other), `name`, `cite` |
 
@@ -146,9 +146,7 @@ See `usage/SOURCE.md`. The 2026-10-14 search found no answering brief. The 2026-
 
 ## Engines
 
-Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.68.37): Times New Roman 14 pt (22 NYCRR 500.1(i), (j)(1)), footnotes 12 pt, exact line pitches (31.4 pt double, 19 pt single, 16.3 pt footnotes), first-fit ragged-right lines without kerning, ligatures or hyphenation. The docx render breaks every line and every page where the typst render does (`params.cross_engine: gate` in `eval.yaml`).
+All three engines are on the shared document model (fb-595.54.12, fb-595.54.34): `typst/layout.yaml` holds the whole layout (every number with its rule), `lib/typst/xdoc.typ` sets it in typst, and `fb engines gen` writes `latex/` and `docx/` from it (Times New Roman 14 pt, footnotes 12 pt; Word's pitches, 32.2 pt double and 16.1 pt single). The latex and docx renders break every line and every page where the typst render does (`params.cross_engine: gate` in `eval.yaml`). The table of authorities lists each authority the body cites by a `[text](toa:key)` link, with its pages; the word count is the model's (the body with its footnotes); counsel stand at the foot of the cover (a fill).
 
-**docx** (`docx/`): `docx/reference.xml` (fb render builds `reference.docx` from it: the xengine recipe in the typst face, Body Text Note for a paragraph that anchors a footnote) and `docx/ny-answering.lua`, which writes the cover (the same gap search as typst, on an estimate of its height), the disclosure statement, the table of contents with its page numbers (needles: fb render finds each heading's page in the LibreOffice PDF and renders again), the table of authorities, the headings, the signature block and the certificates, and the three sections (cover unnumbered, front matter from ii, body from 1). No shell scripts. Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/court-of-appeals/answering-brief usage/INPUT-answering-brief.md`.
-
-- The table of authorities has no page references on either engine (known gap 2: the sample's citations are not `toa:` links).
+- BLOCKED (every engine): the `disclosure` page is not set. The model breaks the page after `before_tables` even when its only block is a `when` that is not met, so an optional disclosure page leaves a blank page in typst; and set at the end of the cover it makes the cover two pages (DEF-COVER-001). Requested from the shared model (docs/open-items/fb-595.54.34.md); the sample has no disclosure.
 - Word may paginate slightly differently from the LibreOffice PDF the contents' page numbers come from (docs/DOCX.md).

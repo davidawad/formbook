@@ -4,7 +4,8 @@
 # The body text is the filed text, transcribed from the PDF's text layer for these pages only: the preliminary statement,
 # question presented, the start of the statement of the case, the standard of review, the start of the argument, and the
 # conclusion and certification. The rest of the 52-page brief is not transcribed. Tables are generated from the
-# authorities field below and carry no page references (known gap, see ../README.md).
+# authorities field below, each page from a [text](toa:key) link in the body (an entry the transcribed pages do not cite
+# is not listed).
 # See ../README.md, "Markdown contract", for the meaning of every field.
 apl_docket: "APL-2023-00099"
 argued_by: "MICHAEL J. YETTER (20 Minutes Requested)"
@@ -28,35 +29,35 @@ date: "January 12, 2024"
 authorities:
   strickland:
     kind: case
-    name: "Strickland v. Washington"
+    name: "*Strickland v. Washington*"
     cite: "466 U.S. 668 (1984)"
   benevento:
     kind: case
-    name: "People v. Benevento"
+    name: "*People v. Benevento*"
     cite: "91 N.Y.2d 708 (1998)"
   boone:
     kind: case
-    name: "People v. Boone"
+    name: "*People v. Boone*"
     cite: "30 N.Y.3d 521 (2017)"
   hobot:
     kind: case
-    name: "People v. Hobot"
+    name: "*People v. Hobot*"
     cite: "84 N.Y.2d 1021 (1995)"
   love:
     kind: case
-    name: "People v. Love"
+    name: "*People v. Love*"
     cite: "57 N.Y.2d 998 (1982)"
   rivera:
     kind: case
-    name: "People v. Rivera"
+    name: "*People v. Rivera*"
     cite: "71 N.Y.2d 705 (1988)"
   watkins-ad:
     kind: case
-    name: "People v. Watkins"
+    name: "*People v. Watkins*"
     cite: "206 A.D.3d 452 (1st Dept. 2022)"
   wragg:
     kind: case
-    name: "People v. Wragg"
+    name: "*People v. Wragg*"
     cite: "26 N.Y.3d 403 (2015)"
   penal-110:
     kind: statute
@@ -70,7 +71,7 @@ authorities:
 
 # Preliminary Statement
 
-By permission of the Honorable Shirley Troutman, Associate Judge of the Court of Appeals, defendant Mark Watkins appeals from a June 9, 2022 order of the Appellate Division, First Department. By that order, the Appellate Division unanimously affirmed a March 26, 2018 judgment of the Supreme Court, New York County, convicting defendant, after a jury trial, of Attempted Assault in the First Degree (Penal Law §§ 110.00, 120.10[1]), Assault in the Second Degree (Penal Law § 120.05[2]), and Criminal Possession of a Weapon in the Third Degree (Penal Law § 265.02[1]). Defendant was sentenced, as a second violent felony offender, to an aggregate term of 13 years in prison to be followed by five years of post-release supervision. He is currently incarcerated pursuant to that judgment.
+By permission of the Honorable Shirley Troutman, Associate Judge of the Court of Appeals, defendant Mark Watkins appeals from a June 9, 2022 order of the Appellate Division, First Department. By that order, the Appellate Division unanimously affirmed a March 26, 2018 judgment of the Supreme Court, New York County, convicting defendant, after a jury trial, of Attempted Assault in the First Degree ([Penal Law §§ 110.00](toa:penal-110), [120.10[1]](toa:penal-120-10)), Assault in the Second Degree (Penal Law § 120.05[2]), and Criminal Possession of a Weapon in the Third Degree (Penal Law § 265.02[1]). Defendant was sentenced, as a second violent felony offender, to an aggregate term of 13 years in prison to be followed by five years of post-release supervision. He is currently incarcerated pursuant to that judgment.
 
 The judgment arose from an attack that occurred at about 1:00 p.m. on October 7, 2016, on East 103rd Street in the East Harlem neighborhood of Manhattan. Defendant, who is Black, approached 65-year-old David Pena, a non-Black Hispanic who was a 25-year resident of East Harlem, and punched Pena in the face with his right hand while clutching a hard object, fracturing Pena’s left orbital bone. During the subsequent interaction, Pena looked at defendant’s face for about 10 seconds from a distance of approximately 10 to 15 feet before defendant walked away.
 
@@ -78,15 +79,15 @@ On October 10, 2016, Pena reported the attack to the police. A detective had Pen
 
 By New York County Indictment Number 4292/2016, filed on November 4, 2016, defendant was charged with one count each of attempted first-degree assault, second-degree assault, and third-degree criminal possession of a weapon. At trial, the defense theory was that Pena was mistaken when he identified defendant as his attacker. During the charge conference, defense counsel asked the judge to give the pattern jury instruction on single-witness identifications but did not request a separate instruction on cross-racial identifications. On July 21, 2017, the jury convicted defendant of all counts. On March 26, 2018, defendant was sentenced as noted above.
 
-The Appellate Division, First Department affirmed, rejecting defendant’s argument that his trial attorney had been ineffective for failing to request a cross-racial identification charge. The court found that defendant’s ineffective-assistance claim was unreviewable on direct appeal because it involved “matters not fully explained by the record.” People v. Watkins, 206 A.D.3d 452, 453 (1st Dept. 2022). In the alternative, the court rejected defendant’s claim on the merits, concluding that he had shown neither that “it was objectively unreasonable for counsel to refrain from requesting a jury charge on cross-racial identification,” nor that “such a request would have been granted at the time of the trial, or that the absence of such a charge affected the outcome of the case.” Watkins, 206 A.D.3d at 453.
+The Appellate Division, First Department affirmed, rejecting defendant’s argument that his trial attorney had been ineffective for failing to request a cross-racial identification charge. The court found that defendant’s ineffective-assistance claim was unreviewable on direct appeal because it involved “matters not fully explained by the record.” [People v. Watkins](toa:watkins-ad), 206 A.D.3d 452, 453 (1st Dept. 2022). In the alternative, the court rejected defendant’s claim on the merits, concluding that he had shown neither that “it was objectively unreasonable for counsel to refrain from requesting a jury charge on cross-racial identification,” nor that “such a request would have been granted at the time of the trial, or that the absence of such a charge affected the outcome of the case.” [Watkins](toa:watkins-ad), 206 A.D.3d at 453.
 
 This Court should affirm. Defendant’s sole argument on appeal is that his trial counsel was constitutionally ineffective for failing to request a cross-racial identification charge. Defendant’s argument is a categorical one: according to him, his counsel was required to request such a charge regardless of the weakness of any attack on Pena’s cross-racial identification, and regardless of any reasons his trial counsel may have had for declining to pursue such a fruitless attack. For defendant, those factors are irrelevant because there could be no conceivable strategic reason not to request a cross-racial identification charge whenever a case involves a single-witness cross-racial identification.
 
-Defendant’s categorical argument is inconsistent with this Court’s well-established ineffective-assistance precedents. When a defendant challenges his counsel’s performance as ineffective based on a single alleged error, the error must be so egregious, clear-cut, and completely dispositive in light of the record that no reasonable attorney would have made it. Here, there was no clear legal or factual support for requesting a cross-racial identification charge at the time of defendant’s trial. As a legal matter, this Court had not yet decided People v. Boone, 30 N.Y.3d 521 (2017), which for the first time held that a cross-racial identification charge was available upon demand. As a factual matter, the record developed at trial included concrete evidence that the eyewitness, Pena, had no difficulty making this cross-racial identification. Reasonable defense counsel could thus have concluded that any challenge to Pena’s identification on cross-racial grounds was so weak as to not be worth making, especially in comparison to other, stronger challenges.
+Defendant’s categorical argument is inconsistent with this Court’s well-established ineffective-assistance precedents. When a defendant challenges his counsel’s performance as ineffective based on a single alleged error, the error must be so egregious, clear-cut, and completely dispositive in light of the record that no reasonable attorney would have made it. Here, there was no clear legal or factual support for requesting a cross-racial identification charge at the time of defendant’s trial. As a legal matter, this Court had not yet decided [People v. Boone](toa:boone), 30 N.Y.3d 521 (2017), which for the first time held that a cross-racial identification charge was available upon demand. As a factual matter, the record developed at trial included concrete evidence that the eyewitness, Pena, had no difficulty making this cross-racial identification. Reasonable defense counsel could thus have concluded that any challenge to Pena’s identification on cross-racial grounds was so weak as to not be worth making, especially in comparison to other, stronger challenges.
 
 Defendant disregards these factors by asserting that counsel is constitutionally ineffective any time he omits an argument from which defendant has “everything to gain and nothing to lose.” But this Court has consistently declined to adopt such a view of ineffective assistance and, to the contrary, has repeatedly recognized that counsel can reasonably decline to pursue a weak argument, even if presenting such an argument would not affirmatively harm the defendant.
 
-Finally, even if counsel should have requested the charge, his failure to do so did not prejudice the defense or deprive defendant of a fair trial. As the Appellate Division correctly concluded, there is no indication that the trial court would have granted such a charge prior to Boone, and even less indication, given the trial record, that the jury would have drawn the adverse inference permitted but not mandated by the cross-racial identification charge.
+Finally, even if counsel should have requested the charge, his failure to do so did not prejudice the defense or deprive defendant of a fair trial. As the Appellate Division correctly concluded, there is no indication that the trial court would have granted such a charge prior to [Boone](toa:boone), and even less indication, given the trial record, that the jury would have drawn the adverse inference permitted but not mandated by the cross-racial identification charge.
 
 # Question Presented
 
@@ -110,9 +111,9 @@ When defendant looked in Pena’s direction, Pena saw his face. It was sunny, th
 
 # Standard of Review and Summary of Argument
 
-To establish an ineffective assistance claim under the United States Constitution, a defendant must first demonstrate that his counsel’s performance was so deficient that the attorney was not functioning as the professional counsel guaranteed by the Sixth Amendment. That demonstration must overcome the strong presumption that counsel’s conduct fell “within the wide range of reasonable professional assistance” appropriate under the circumstances of the case. Strickland v. Washington, 466 U.S. 668, 689-90 (1984). Even if a defendant can surmount that hurdle, he must further demonstrate prejudice, that is, a “reasonable probability that, but for counsel’s unprofessional errors, the result of the proceeding would have been different.” Id. at 694.
+To establish an ineffective assistance claim under the United States Constitution, a defendant must first demonstrate that his counsel’s performance was so deficient that the attorney was not functioning as the professional counsel guaranteed by the Sixth Amendment. That demonstration must overcome the strong presumption that counsel’s conduct fell “within the wide range of reasonable professional assistance” appropriate under the circumstances of the case. [Strickland v. Washington](toa:strickland), 466 U.S. 668, 689-90 (1984). Even if a defendant can surmount that hurdle, he must further demonstrate prejudice, that is, a “reasonable probability that, but for counsel’s unprofessional errors, the result of the proceeding would have been different.” Id. at 694.
 
-New York law provides a similar two-step standard. On the first prong, as under the federal Constitution, a defendant must show that his counsel’s performance fell below a permissible standard of “meaningful representation” considering the evidence, the law, and the circumstances of the particular case, viewed in their totality. People v. Wragg, 26 N.Y.3d 403, 409 (2015); People v. Benevento, 91 N.Y.2d 708, 712 (1998). An attorney is presumed to have provided meaningful representation. See People v. Hobot, 84 N.Y.2d 1021, 1022 (1995). That presumption can be overcome only if the absence of strategic or other legitimate explanations for counsel’s alleged shortcomings is demonstrated.
+New York law provides a similar two-step standard. On the first prong, as under the federal Constitution, a defendant must show that his counsel’s performance fell below a permissible standard of “meaningful representation” considering the evidence, the law, and the circumstances of the particular case, viewed in their totality. [People v. Wragg](toa:wragg), 26 N.Y.3d 403, 409 (2015); [People v. Benevento](toa:benevento), 91 N.Y.2d 708, 712 (1998). An attorney is presumed to have provided meaningful representation. See [People v. Hobot](toa:hobot), 84 N.Y.2d 1021, 1022 (1995). That presumption can be overcome only if the absence of strategic or other legitimate explanations for counsel’s alleged shortcomings is demonstrated.
 
 # Argument
 
@@ -120,7 +121,7 @@ New York law provides a similar two-step standard. On the first prong, as under 
 
 Defendant contends that his trial attorney was constitutionally ineffective based on a single error: not requesting a cross-racial identification charge as part of his “honest-but-mistaken misidentification defense” (Defense Brief [“DB”]: 2). Because defendant asserts this claim on direct appeal without the benefit of a record on his trial counsel’s reasoning, and because defendant identifies only this isolated error without raising broader objections to his counsel’s overall performance, defendant can prevail only if there is essentially a per se rule of ineffective assistance from failing to request such a charge whenever a prosecution “rest[s] on a stranger cross-racial identification” (DB: 20).
 
-There is no such categorical rule. Depending on the circumstances of a case, defense counsel could reasonably decline to request a cross-racial identification charge, including, as here, when there was good reason to believe that the particular witness’s ability to identify defendant was not confounded by defendant’s race. No clear-cut rule at the time of defendant’s trial provided otherwise. Indeed, a rule requiring defense counsel to request a cross-racial identification charge in nearly every case would be inconsistent with this Court’s decision in Boone, which left that strategic choice to defense counsel. Finally, even assuming that counsel’s performance here fell below the constitutional standard for meaningful representation, defendant has not shown that the absence of a request for a cross-racial identification charge caused any prejudice here. This Court should accordingly affirm the decision below.
+There is no such categorical rule. Depending on the circumstances of a case, defense counsel could reasonably decline to request a cross-racial identification charge, including, as here, when there was good reason to believe that the particular witness’s ability to identify defendant was not confounded by defendant’s race. No clear-cut rule at the time of defendant’s trial provided otherwise. Indeed, a rule requiring defense counsel to request a cross-racial identification charge in nearly every case would be inconsistent with this Court’s decision in [Boone](toa:boone), which left that strategic choice to defense counsel. Finally, even assuming that counsel’s performance here fell below the constitutional standard for meaningful representation, defendant has not shown that the absence of a request for a cross-racial identification charge caused any prejudice here. This Court should accordingly affirm the decision below.
 
 # Conclusion
 
