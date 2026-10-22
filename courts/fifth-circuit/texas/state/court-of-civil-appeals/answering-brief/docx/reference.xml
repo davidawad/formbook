@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Texas Court of Appeals briefs' Word styles (opening, answering and reply briefs; one copy per folder): the
+     cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the typst template ({font}, Times New Roman;
+     TRAP 9.4(e) names none) at 14 pt (size 28 half points; TRAP 9.4(e)); Body Text in exact 31.5 pt line boxes
+     (630 twips: typst pitch-body, double spacing, TRAP 9.4(d)) with a half-inch first-line indent (typst
+     para-indent); single lines 16.1 pt (322 twips: typst pitch-single); Block Text (quotations, issues)
+     single-spaced, half an inch in on both sides, 14 pt around a quotation and between its paragraphs (280 twips:
+     typst quote-gap); List Item the label in a half-inch box at the body pitch; footnotes 12 pt (TRAP 9.4(e)) in
+     13.8 pt boxes (276 twips: typst pitch-note), 4 pt after each (80 twips: typst note-gap), kept whole.
+     Added here (typst texapp-*.typ): "Tex Head 1" (bold capitals, centered, 24 pt above and 12 pt below: typst
+     h1-above, h1-below), "Tex Head 2" (bold), "Tex Head 3" (bold italic) and "Tex Head 4" (italic), single lines
+     16 pt above and 8 pt below (typst h-above, h-below), kept with the next paragraph (typst sticky); "Tex Single"
+     (a single line with no indent: cover, contents and index rows, label rows, signature); "Body Flush" (a short
+     paragraph, under 50 characters, at the margin: typst short-line); "Body Lead" and "Body Flush Lead" (a paragraph
+     ending in a colon, kept with what it introduces: typst sticky); "Body Text Note" and "Body Flush Note" (without
+     widow control, for a paragraph that anchors a footnote). Letter page, 1 in margins (TRAP 9.4(c)); the footers
+     and sections are texapp.lua's (FORMBOOK_FOOTERS, FORMBOOK_FINAL). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="630" single="322" indent="720" list="720" heading="322" heading-before="320" heading-after="160" quote="280" note="276" note-size="24" note-after="80">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="TexHead1"><w:name w:val="Tex Head 1"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="480" w:after="240" w:line="322" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="0"/></w:pPr><w:rPr><w:b/><w:bCs/><w:caps/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="TexHead2"><w:name w:val="Tex Head 2"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="320" w:after="160" w:line="322" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/><w:bCs/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="TexHead3"><w:name w:val="Tex Head 3"/><w:basedOn w:val="TexHead2"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:outlineLvl w:val="2"/></w:pPr><w:rPr><w:b/><w:bCs/><w:i/><w:iCs/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="TexHead4"><w:name w:val="Tex Head 4"/><w:basedOn w:val="TexHead2"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:outlineLvl w:val="3"/></w:pPr><w:rPr><w:b w:val="0"/><w:bCs w:val="0"/><w:i/><w:iCs/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="TexSingle"><w:name w:val="Tex Single"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="0" w:line="322" w:lineRule="exact"/><w:ind w:firstLine="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyFlush"><w:name w:val="Body Flush"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:ind w:firstLine="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyLead"><w:name w:val="Body Lead"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyFlushLead"><w:name w:val="Body Flush Lead"/><w:basedOn w:val="BodyFlush"/><w:qFormat/><w:pPr><w:keepNext/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyFlushNote"><w:name w:val="Body Flush Note"/><w:basedOn w:val="BodyFlush"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+</reference>

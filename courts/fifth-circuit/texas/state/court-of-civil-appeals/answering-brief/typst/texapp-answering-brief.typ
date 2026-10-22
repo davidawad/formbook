@@ -1,25 +1,53 @@
 // Texas Court of Appeals: appellee's brief (TRAP 38.2).
 //
-// Rule-driven and content-agnostic. Governing rules and their verification status: ../README.md.
+// Rule-driven and content-agnostic. Governing rules: ../../rules.md (TRAP 9.4, 38) and ../README.md.
 // No case-specific text, no coordinates measured off any filed brief, no forced line breaks.
 // The body is the sample markdown rendered by cmarker; the metadata is the YAML frontmatter of
 // the same file (contract: ../README.md, "Markdown contract").
+//
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing). The docx engine (../docx/texapp.lua,
+// ../docx/reference.xml) writes the same layout in twips (20 x the pt values here).
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = ("Times New Roman", "Liberation Serif") // TRAP 9.4(e) names no typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif") // TRAP 9.4(e) names no typeface; Times New Roman, the default per docs/FONTS.md
 #let type-size = 14pt              // TRAP 9.4(e): conventional typeface no smaller than 14-point
 #let footnote-size = 12pt          // TRAP 9.4(e): footnotes no smaller than 12-point
-#let body-leading = 1.6em          // TRAP 9.4(d): double-spaced text; natural line + 1.6em = 2.25em pitch (README)
-#let single-leading = 0.495em       // TRAP 9.4(d) exceptions: footnotes, block quotations, headings, tables, lists
+#let pitch-body = 31.5pt           // TRAP 9.4(d): double-spaced text (2.25 x the type size)
+#let pitch-single = 16.1pt         // TRAP 9.4(d) exceptions: block quotations, issues, headings, tables, lists of
+                                   // parties, signature, contents, index; Word's single line at 14 pt (1.15 x)
+#let pitch-note = 13.8pt           // footnotes, single-spaced (Word's single line at 12 pt)
+#let note-gap = 4pt                // between footnotes
+#let note-clearance = 12.1pt       // the text to the footnote rule: with note-gap, Word's 16.1 pt separator line
 #let page-margin = 1in             // TRAP 9.4(c): margins at least 1 inch on all four sides
 #let para-indent = 0.5in
-#let short-line = 50               // paragraphs shorter than this (characters) are set flush left
+#let short-line = 50               // paragraphs shorter than this (bytes of text) are set flush left
+#let quote-gap = 14pt              // around a block quotation and between its paragraphs
+#let h1-above = 24pt               // level-1 heading: space above and below
+#let h1-below = 12pt
+#let h-above = 16pt                // level-2 to level-4 headings
+#let h-below = 8pt
 #let label-column = 2.25in         // first column of a two-column (label, text) table and of the identity list
+#let label-gutter = 0.25in
+#let row-gap = 14pt                // between the rows of such a table
+#let sig-indent = 3in              // signature and cover counsel: the right half of the page
+#let sig-above = 22pt
+#let toc-col = 36pt                // contents: the page column
+#let toa-col = 56pt                // index of authorities: the page column (page lists such as "1, 4, 6")
+#let row-hang = 0.25in             // a wrapped contents or index row hangs this far
+#let lead-room = 4pt               // a row's last word keeps this much more room before the leader (LibreOffice
+                                   // wraps a word that leaves less than about 4 pt for its leader tab)
+#let toc-step = 0.4in             // contents: each heading level steps in by this
+#let toc-above = 8pt               // between contents and index rows
+#let toc-above-1 = 14pt            // above a level-1 contents row
+#let group-above = 22pt            // index: above a group title
 #let word-limit = 15000            // TRAP 9.4(i)(2)(B): brief in a court of appeals, computer-generated
 #let default-district = "Fifth"    // court-lines default; frontmatter `district` and `seat` override
 #let default-seat = "Dallas"
@@ -61,14 +89,16 @@
   out
 }
 
+#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+
 #let count-words(s) = s.split(regex("\\s+")).filter(w => w.find(regex("[A-Za-z0-9]")) != none).len()
 
 /// TRAP 9.4(i)(1): words in every level-1 section not excluded by the rule. Text before the first
-/// heading of the body (the address to the court) counts; signature blocks are placeholders and
-/// are not counted.
-#let word-count(md) = {
+/// heading of the body (the address to the court) counts; placeholders are not counted.
+/// (docx/texapp.lua counts the same way.)
+#let word-count(src) = {
   let total = 0
-  let chunks = md.split(regex("(?m)^# "))
+  let chunks = src.split(regex("(?m)^# "))
   total += count-words(chunks.first().replace(regex("\\{\\{[a-z-]+\\}\\}"), ""))
   for chunk in chunks.slice(1) {
     let title = chunk.split("\n").first().trim()
@@ -78,111 +108,117 @@
   total
 }
 
-/// The cover, TRAP 9.4(g): case style, case number, title, filing party, lead counsel's name,
-/// address, telephone, email and bar number (the `counsel` lines); the oral-argument request
-/// (TRAP 39.7) when `oral_argument_requested` is true.
-#let cover(meta) = {
-  set align(center)
-  set par(leading: single-leading, spacing: single-leading, first-line-indent: 0in, justify: false)
-  let district = meta.at("district", default: default-district)
-  let seat = meta.at("seat", default: default-seat)
-  [No. #meta.case_number]
-  v(0.15in)
-  line(length: 100%, stroke: 0.75pt)
-  v(0.1in)
-  text(weight: "bold")[IN THE COURT OF APPEALS]
-  linebreak()
-  text(weight: "bold")[FOR THE #upper(district) DISTRICT OF TEXAS]
-  linebreak()
-  text(weight: "bold")[AT #upper(seat)]
-  v(0.1in)
-  line(length: 100%, stroke: 0.75pt)
-  v(0.15in)
-  if "caption" in meta { text(weight: "bold")[#meta.caption]; v(0.15in) }
-  text(weight: "bold")[#upper(meta.appellant)]
-  linebreak()
-  [Appellant,]
-  v(0.1in)
-  [v.]
-  v(0.1in)
-  text(weight: "bold")[#upper(meta.appellee)]
-  linebreak()
-  [Appellee.]
-  v(0.15in)
-  line(length: 100%, stroke: 0.75pt)
-  v(0.1in)
-  [On Appeal from the #meta.trial_court, #meta.county County, Texas]
-  linebreak()
-  [Trial Court Cause No. #meta.trial_cause]
-  if "trial_judge" in meta { linebreak(); [#meta.trial_judge, Presiding] }
-  v(0.1in)
-  line(length: 100%, stroke: 0.75pt)
-  v(0.15in)
-  text(weight: "bold")[#upper(meta.brief_title)]
-  v(0.15in)
-  line(length: 100%, stroke: 0.75pt)
-  v(1fr)
-  align(left, pad(left: 3in)[
-    #set par(first-line-indent: 0in)
-    #meta.counsel.map(l => [#l]).join(linebreak())
-  ])
-  if meta.at("oral_argument_requested", default: false) or "cover_notes" in meta {
-    v(0.25in)
-    let notes = if meta.at("oral_argument_requested", default: false) { ("ORAL ARGUMENT REQUESTED",) } else { () }
-    notes += meta.at("cover_notes", default: ())
-    text(weight: "bold", notes.map(n => [#n]).join(linebreak()))
-  }
-  // Keeps the last cover line above the 1 in bottom margin (the line box extends past the frame).
-  v(0.05in)
+/// A block of single-spaced lines (each a line box of the single pitch).
+#let single(above: 0pt, below: 0pt, left: 0pt, sticky: false, breakable: true, body) = block(width: 100%,
+  above: above, below: below, sticky: sticky, breakable: breakable, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt)
+    pad(left: left, body)
+  })
+
+/// Lines from the frontmatter, one paragraph each; an empty string is an empty line.
+#let lines-of(ls) = for l in ls {
+  if l == "" { block(width: 100%, height: pitch-single, above: 0pt, below: 0pt) }
+  else { block(width: 100%, above: 0pt, below: 0pt, par(md(l))) }
 }
 
-/// Identity of parties and counsel, TRAP 38.1(a): one row per role, the names and addresses
-/// single-spaced beside it. A row is never split across pages.
-#let identity-block(entries) = {
-  set par(leading: single-leading, spacing: single-leading, first-line-indent: 0in, justify: false)
-  for e in entries {
-    block(breakable: false, above: 1.4em, below: 1.4em, grid(
-      columns: (label-column, 1fr),
-      column-gutter: 0.25in,
-      text(weight: "bold", e.role),
-      e.lines.map(l => [#l]).join(linebreak()),
+/// The cover, TRAP 9.4(g): case style, case number, title, filing party, lead counsel's name,
+/// address, telephone, email and bar number (the `counsel` lines); the oral-argument request
+/// (TRAP 9.4(g), 39.7) when `oral_argument_requested` is true. Single-spaced centered lines with rules between the
+/// parts; counsel in the right half below the title.
+#let cover(meta) = {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  let district = meta.at("district", default: default-district)
+  let seat = meta.at("seat", default: default-seat)
+  let c(above, body) = block(width: 100%, above: above, below: 0pt, align(center, par(body)))
+  let rule(above) = block(width: 100%, above: above, below: 0pt, line(length: 100%, stroke: 0.75pt))
+  c(0pt)[No. #meta.case_number]
+  rule(11pt)
+  c(7pt, strong[IN THE COURT OF APPEALS])
+  c(0pt, strong[FOR THE #upper(district) DISTRICT OF TEXAS])
+  c(0pt, strong[AT #upper(seat)])
+  rule(7pt)
+  if "caption" in meta { c(11pt, strong(meta.caption)) }
+  c(11pt, strong(upper(meta.appellant)))
+  c(0pt)[Appellant,]
+  c(7pt)[v.]
+  c(7pt, strong(upper(meta.appellee)))
+  c(0pt)[Appellee.]
+  rule(11pt)
+  c(7pt)[On Appeal from the #meta.trial_court, #meta.county County, Texas]
+  c(0pt)[Trial Court Cause No. #meta.trial_cause]
+  if "trial_judge" in meta { c(0pt)[#meta.trial_judge, Presiding] }
+  rule(7pt)
+  c(11pt, strong(upper(meta.brief_title)))
+  rule(11pt)
+  block(width: 100%, above: 36pt, below: 0pt, pad(left: sig-indent, lines-of(meta.counsel)))
+  let notes = if meta.at("oral_argument_requested", default: false) { ("ORAL ARGUMENT REQUESTED",) } else { () }
+  notes += meta.at("cover_notes", default: ())
+  for (i, n) in notes.enumerate() { c(if i == 0 { 22pt } else { 0pt }, strong(n)) }
+}
+
+/// Label/text rows (the identity of parties and counsel, TRAP 38.1(a); a two-column table): the label in a
+/// 2.25 in column, the text beside it, single-spaced; a row is never split across pages.
+#let label-rows(rows) = {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt, hanging-indent: 0pt)
+  for (i, (lab, txt)) in rows.enumerate() {
+    // between two rows an empty line of row-gap, kept at the top of a page as Word keeps a table's empty row there
+    if i > 0 { block(width: 100%, height: row-gap, above: 0pt, below: 0pt) }
+    block(width: 100%, breakable: false, above: if i == 0 { row-gap } else { 0pt },
+      below: if i == rows.len() - 1 { row-gap } else { 0pt }, grid(
+      columns: (label-column, 1fr), column-gutter: label-gutter,
+      lab, txt,
     ))
   }
 }
 
+#let identity-block(entries) = label-rows(entries.map(e => (strong(md(e.role)), lines-of(e.lines))))
+
 /// A signature block: single-spaced, in the right half of the page, never split.
-#let signature-block(lines) = block(breakable: false, above: 1.6em, below: 1.6em, pad(left: 3in)[
-  #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0in, justify: false)
-  #lines.map(l => [#l]).join(linebreak())
-])
+#let signature-block(lines) = single(above: sig-above, left: sig-indent, breakable: false, lines-of(lines))
+
+/// A level-1 title (a section heading, the contents' and index's titles): bold capitals, centered.
+#let h1(body) = single(above: h1-above, below: h1-below, sticky: true, align(center, strong(upper(body))))
+
+/// Contents, TRAP 38.1(b): every heading of levels 1 to 3 with the page it starts on (front matter in lower roman,
+/// the body in arabic), each row a listing-row: the text wraps before the page column, a leader runs to the number.
+#let toc-page() = context {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  for hd in query(heading.where(level: 1).or(heading.where(level: 2)).or(heading.where(level: 3))) {
+    let loc = hd.location()
+    let pg = numbering(loc.page-numbering(), ..counter(page).at(loc))
+    let ind = (hd.level - 1) * toc-step
+    listing-row(loc, [#h(ind)#hd.body#h(lead-room)], pg, toc-col, ind + row-hang, if hd.level == 1 { toc-above-1 } else { toc-above })
+  }
+}
 
 /// Index of authorities, TRAP 38.1(c): authorities from the frontmatter, grouped, each listed
 /// with every body page on which its `find` string appears (located by the layout, not typed).
 #let authorities-index(groups) = {
-  set par(leading: single-leading, spacing: single-leading, first-line-indent: 0in, justify: false)
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
   let n = 0
   for g in groups {
-    block(above: 1.6em, below: 1em, sticky: true, text(weight: "bold", upper(g.group)))
+    block(width: 100%, above: group-above, below: toc-above, sticky: true, par(strong(upper(g.group))))
     for a in g.items {
       let i = n
       n += 1
       let name = if a.at("italic", default: true) { emph(a.name) } else { [#a.name] }
       let cite = a.at("cite", default: none)
-      // The entry wraps inside the left column with a hanging indent; the dot leader runs to
-      // the page-number column, so the numbers always stand flush right on the last line.
-      block(above: 1em, below: 1em, breakable: false, grid(
-        columns: (1fr, auto),
-        align: (left + bottom, right + bottom),
-        par(hanging-indent: 0.25in)[#name#if cite != none [, #cite] #box(width: 1fr, repeat[.~])],
-        context {
-          let pages = query(<texapp-authority>)
-            .filter(m => m.value == i)
-            .map(m => counter(page).at(m.location()).first())
-            .dedup()
-            .sorted()
-          if pages.len() == 0 { text(weight: "bold")[not cited] } else { [~] + pages.map(str).join(", ") }
-        },
-      ))
+      // the page column: toa-col, or the page list's own width when longer (it is never wrapped)
+      context {
+        let ps = query(<texapp-authority>)
+          .filter(m => m.value == i)
+          .map(m => counter(page).at(m.location()).first())
+          .dedup()
+          .sorted()
+        let pages = if ps.len() == 0 { strong[not cited] } else { ps.map(str).join(", ") }
+        listing-row(none, [#name#if cite != none [, #cite]#h(lead-room)], pages, calc.max(toa-col, measure(pages).width), row-hang,
+          toc-above)
+      }
     }
   }
 }
@@ -225,60 +261,48 @@
   let (front, main) = parts
 
   set document(title: meta.brief_title)
-  set page(
-    paper: "us-letter",
-    margin: page-margin,
-    numbering: "i",
-    footer: context {
-      // The cover carries no page number; it counts as page i of the front matter.
-      if here().page() > 1 {
-        align(center, text(size: type-size, counter(page).display()))
-      }
-    },
-  )
-  set text(font: font-family, size: type-size, lang: "en", hyphenate: false)
-  set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: false)
+  // The page number: centered in a single-spaced line box (Word's footer); none on the cover, which counts as i.
+  set page(paper: "us-letter", margin: page-margin, numbering: "i",
+    footer: context if here().page() > 1 {
+      align(center, text(..edges(pitch-single), counter(page).display(page.numbering)))
+    })
+  set text(font: font-family, size: type-size, lang: "en")
+  set par(first-line-indent: (amount: para-indent, all: true))
+  show: xengine.with(pitch: pitch-body, list-indent: para-indent)
 
-  // Headings: single-spaced, kept with the text that follows.
-  show heading.where(level: 1): it => block(width: 100%, above: 0.35in, below: 0.25in, sticky: true)[
-    #set par(leading: single-leading, first-line-indent: 0in, justify: false)
-    #set align(center)
-    #text(weight: "bold", upper(it.body))
-  ]
-  show heading.where(level: 2): it => block(above: 0.3in, below: 0.2in, sticky: true)[
-    #set par(leading: single-leading, first-line-indent: 0in)
-    #text(weight: "bold", it.body)
-  ]
-  show heading.where(level: 3): it => block(above: 0.25in, below: 0.2in, sticky: true)[
-    #set par(leading: single-leading, first-line-indent: 0in)
-    #text(weight: "bold", style: "italic", it.body)
-  ]
-  show heading.where(level: 4): it => block(above: 0.25in, below: 0.2in, sticky: true)[
-    #set par(leading: single-leading, first-line-indent: 0in)
-    #text(style: "italic", it.body)
-  ]
+  // Headings: 14 pt, single-spaced, kept with the text that follows. Level 1 bold capitals centered; level 2 bold;
+  // level 3 bold italic; level 4 italic.
+  show heading: set text(size: type-size)
+  show heading.where(level: 1): it => h1(it.body)
+  show heading.where(level: 2): it => single(above: h-above, below: h-below, sticky: true, strong(it.body))
+  show heading.where(level: 3): it => single(above: h-above, below: h-below, sticky: true, strong(emph(it.body)))
+  show heading.where(level: 4): it => single(above: h-above, below: h-below, sticky: true, emph(it.body))
 
-  // Block quotations and footnotes: single-spaced (TRAP 9.4(d)); footnotes in 12-point (9.4(e)).
-  show quote.where(block: true): it => block(above: 1.4em, below: 1.4em, inset: (x: 0.5in))[
-    #set par(leading: single-leading, spacing: 1.2em, first-line-indent: 0in)
-    #it.body
-  ]
-  set footnote.entry(separator: line(length: 2in, stroke: 0.5pt))
-  show footnote.entry: set text(size: footnote-size)
-  show footnote.entry: set par(leading: single-leading, spacing: single-leading, first-line-indent: 0in)
-  show list: set par(first-line-indent: 0in)
-  show enum: set par(first-line-indent: 0in)
-  // Tables (TRAP 9.4(d) lets tabular matter be single-spaced): no rules, single-spaced cells.
-  set table(stroke: none, inset: (x: 0in, y: 0.08in), column-gutter: 0.25in)
-  show table: set par(leading: single-leading, spacing: single-leading, first-line-indent: 0in, justify: false)
-  // A two-column markdown table is read as label and text (a statement of the case set out
-  // in rows): the label column takes the identity-list width, and the first row (a markdown
-  // table always has one) is an ordinary row, not a header repeated on every page.
-  // Other tables keep their columns and header.
-  show table: it => if it.columns == (auto, auto) {
+  // Block quotations and footnotes: single-spaced (TRAP 9.4(d)); footnotes in 12-point (9.4(e)), each kept whole.
+  show quote.where(block: true): it => block(above: quote-gap, below: quote-gap, pad(x: para-indent, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt, spacing: quote-gap)
+    it.body
+  }))
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 2in, stroke: 0.5pt))
+  show footnote.entry: it => {
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    set text(size: footnote-size, ..edges(pitch-note))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
+    block(breakable: false, [#super(num) #note.body])
+  }
+  // A two-column markdown table is read as label and text (a statement of the case set out in rows), as the
+  // identity list is set; its first row (a markdown table always has one) is an ordinary row.
+  show table: it => if it.columns.len() == 2 {
     let cells = it.children.map(c => if c.func() == table.header { c.children } else { (c,) }).flatten()
-    table(columns: (label-column, 1fr), ..cells)
-  } else { it }
+    label-rows(range(0, cells.len(), step: 2).map(k => (cells.at(k).body, cells.at(k + 1).body)))
+  } else {
+    set table(stroke: none, inset: (x: 0pt, y: 4pt), column-gutter: label-gutter)
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    it
+  }
   // Short standalone lines (a record or case citation after a quotation, a label) are not
   // indented; body paragraphs keep the first-line indent.
   // A paragraph that ends in a colon introduces what follows (a list, a quotation) and is
@@ -288,28 +312,45 @@
     let p = if it.first-line-indent.amount != 0pt and s.len() < short-line {
       par(first-line-indent: 0pt, it.body)
     } else { it }
-    if s.ends-with(":") { context block(sticky: true, spacing: par.spacing, p) } else { p }
+    if s.ends-with(":") { block(sticky: true, above: 0pt, below: 0pt, p) } else { p }
   }
 
-  // Placeholders a body paragraph may hold on its own line.
-  let render-md(md) = {
-    let md-render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
-    let pieces = md.split(regex("(?m)^(\\{\\{(?:identity|signature|signer)\\}\\})[ \t]*$"))
-    let tags = md.matches(regex("(?m)^\\{\\{(identity|signature|signer)\\}\\}[ \t]*$")).map(m => m.captures.at(0))
+  // The markdown with its placeholders: {{identity}}, {{signature}} and {{signer}} on lines of their own. The
+  // brief's last block before {{signature}} is kept with the signature; a certificate (the last level-1 section
+  // before {{signer}}) is kept on one page with its signer.
+  let render-md(m) = {
+    let pieces = m.split(regex("(?m)^(\\{\\{(?:identity|signature|signer)\\}\\})[ \t]*$"))
+    let tags = m.matches(regex("(?m)^\\{\\{(identity|signature|signer)\\}\\}[ \t]*$")).map(x => x.captures.at(0))
     for (k, piece) in pieces.enumerate() {
       let t = tags.at(k, default: none)
-      // A certificate (the last level-1 section before `{{signer}}`) is kept on one page with
-      // its signature, so the signature never stands alone at the top of a page.
       let heads = piece.matches(regex("(?m)^# "))
       if t == "signer" and heads.len() > 0 {
         let at = heads.last().start
-        md-render(piece.slice(0, at))
-        block(breakable: false, width: 100%, { md-render(piece.slice(at)); signature-block(meta.signer) })
+        md(piece.slice(0, at))
+        block(breakable: false, width: 100%, above: h1-above, below: 0pt, { md(piece.slice(at)); signature-block(meta.signer) })
+      } else if t == "signature" or t == "signer" {
+        let blocks = piece.trim(at: end).split(regex("\n[ \t]*\n"))
+        let last = blocks.last()
+        if blocks.len() > 1 and not last.starts-with("#") {
+          // of a list, its last item alone is kept with the signature
+          let marker = regex("^([-*+]|[0-9]+[.)])[ \t]")
+          let lines = last.split("\n")
+          let k = lines.len() - 1
+          while k > 0 and lines.at(k).find(marker) == none { k -= 1 }
+          let head = blocks.slice(0, -1)
+          if lines.first().find(marker) != none and k > 0 {
+            head.push(lines.slice(0, k).join("\n"))
+            last = lines.slice(k).join("\n")
+          }
+          md(head.join("\n\n"))
+          block(breakable: false, width: 100%, above: if last.starts-with(">") { quote-gap } else { 0pt }, below: 0pt, { md(last); signature-block(meta.at(t)) })
+        } else {
+          md(piece)
+          signature-block(meta.at(t))
+        }
       } else {
-        md-render(piece)
+        md(piece)
         if t == "identity" { identity-block(meta.identity) }
-        else if t == "signature" { signature-block(meta.signature) }
-        else if t == "signer" { signature-block(meta.signer) }
       }
     }
   }
@@ -325,13 +366,8 @@
   }
 
   // Table of contents, generated from the headings (TRAP 38.1(b)).
-  [
-    #heading(level: 1)[Table of Contents]
-    #set par(leading: single-leading, first-line-indent: 0in)
-    #show outline.entry.where(level: 1): set block(above: 0.2in)
-    #show outline.entry: set block(above: 0.12in)
-    #outline(title: none, depth: 3, indent: 0.4in)
-  ]
+  heading(level: 1)[Table of Contents]
+  toc-page()
   pagebreak()
 
   // Index of authorities (TRAP 38.1(c)).

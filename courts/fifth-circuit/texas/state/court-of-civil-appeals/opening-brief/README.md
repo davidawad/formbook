@@ -1,6 +1,6 @@
 # Appellant's Opening Brief template (Texas Court of Appeals)
 
-Typst template for an appellant's brief in a Texas court of appeals (TRAP 38.1). The district and seat on the cover come from the frontmatter (`district`, `seat`; default Fifth District at Dallas, the court of the exemplar). Engines: typst (`typst/`, primary) and docx (`docx/`, not regenerated in the 2026-10-16 pass; see "Engines").
+Typst template for an appellant's brief in a Texas court of appeals (TRAP 38.1). The district and seat on the cover come from the frontmatter (`district`, `seat`; default Fifth District at Dallas, the court of the exemplar). Engines: typst (`typst/`, primary) and docx (`docx/`), on one cross-engine layout (see "Layout" and "Engines").
 
 ## Governing rules (checked 2026-10-15, re-attempted 2026-10-16)
 
@@ -9,17 +9,17 @@ Verification status: the primary text, the Texas Rules of Appellate Procedure as
 | Rule | Requirement | Where the template uses it | Verification |
 |---|---|---|---|
 | TRAP 9.4(c) | margins at least 1 inch on both sides, top and bottom | `page-margin` = 1in | secondary |
-| TRAP 9.4(d) | text double-spaced; footnotes, block quotations, short lists and issues may be single-spaced | `body-leading` = 1.6em (pitch 31.5 pt, measured); `single-leading` = 0.5em (about 16 pt) for footnotes, block quotations (the issues are set as block quotations), tables, identity list, signature blocks, contents and index | secondary |
+| TRAP 9.4(d) | text double-spaced; footnotes, block quotations, short lists and issues may be single-spaced | `pitch-body` = 31.5 pt; `pitch-single` = 16.1 pt for footnotes, block quotations (the issues are set as block quotations), tables, identity list, signature blocks, contents and index | secondary |
 | TRAP 9.4(e) | conventional typeface no smaller than 14-point; footnotes no smaller than 12-point | `type-size` = 14pt, `footnote-size` = 12pt (measured: footnote glyph boxes are 12/14 of the body's) | secondary |
 | TRAP 9.4(g) | cover: case style, case number, title, filing party, lead counsel's name, address, telephone, email, State Bar number | `cover()`: case number, court, caption, parties, lower court, title, `counsel` lines (the author supplies bar number, telephone and email there) | secondary (sibling `supreme-court/brief-on-the-merits/README.md`) |
 | TRAP 39.7 | a party requesting oral argument notes the request on the cover | `oral_argument_requested: true` prints ORAL ARGUMENT REQUESTED on the cover | secondary |
 | TRAP 9.4(i)(1) | parts not counted: caption, identity of parties and counsel, statement regarding oral argument, table of contents, index of authorities, statement of the case, issues presented, jurisdiction, procedural history, signature, certificates, appendix | `excluded-section` regex on level-1 headings; the count typed in the markdown (literal) in the certificate is replaced by the count | secondary |
 | TRAP 9.4(i)(2)(B) | 15,000 words for a computer-generated brief in a court of appeals | `word-limit` = 15000; `assert` fails the render above it | secondary |
 | TRAP 38.1(a)-(j) | identity of parties and counsel, table of contents, index of authorities, statement of the case, statement regarding oral argument, issues presented, statement of facts, summary of the argument, argument, prayer | identity grid from `identity`; contents generated from headings; index generated from `authorities` with page numbers found in the layout; other sections are markdown headings in the sample | secondary |
-| TRAP 9.5 | certificate of service | markdown section in the sample, signed with `<!-- signer -->` | not verified (the exemplar cites Rule 9.5) |
+| TRAP 9.5 | certificate of service | markdown section in the sample, signed with `{{signer}}` | not verified (the exemplar cites Rule 9.5) |
 | Fifth Court local rules | local length and briefing limits | not encoded | secondary |
 
-Typeface: no face is named by the rules, so EB Garamond (vendored; `docs/FONTS.md`).
+Typeface: no face is named by the rules, so Times New Roman (vendored; the house default, `docs/FONTS.md` rule 6), on typst and docx alike.
 
 ## Markdown contract
 
@@ -27,13 +27,13 @@ Typeface: no face is named by the rules, so EB Garamond (vendored; `docs/FONTS.m
 
 - `case_number`, `appellant`, `appellee`, `trial_court`, `county`, `trial_cause`, `brief_title`, `counsel` (list of lines for the cover): required.
 - `district`, `seat` (cover court lines; default Fifth, Dallas), `caption`, `trial_judge`, `oral_argument_requested` (bool), `cover_notes` (list of bold lines under it, for example "ACCELERATED APPEAL"): optional.
-- `identity`: list of `{role, lines}`; printed as a two-column, single-spaced list where the body holds `<!-- identity -->`.
-- `signature` (list of lines; `<!-- signature -->`) and `signer` (list of lines; `<!-- signer -->`, for the certificates): single-spaced blocks in the right half of the page, never split. A certificate section is kept on one page with its `<!-- signer -->` block.
+- `identity`: list of `{role, lines}`; printed as a two-column, single-spaced list where the body holds `{{identity}}`.
+- `signature` (list of lines; `{{signature}}`) and `signer` (list of lines; `{{signer}}`, for the certificates): single-spaced blocks in the right half of the page, never split. A certificate section is kept on one page with its `{{signer}}` block.
 - `authorities`: list of groups `{group, items}`; each item `{name, cite, find, italic}`. `find` is a literal string (usually the reporter cite, such as `451 S.W.3d`) searched for in the body; every page where it appears is listed. An authority never found prints a bold "not cited".
 
 Body:
 
-- Everything before the `<!-- contents -->` line is front matter (identity, record citations), on lower-roman pages from ii after the unnumbered cover. At `<!-- contents -->` the template inserts the table of contents and the index of authorities, then starts the body on arabic page 1.
+- Everything before the `{{contents}}` line is front matter (identity, record citations), on lower-roman pages from ii after the unnumbered cover. At `{{contents}}` the template inserts the table of contents and the index of authorities, then starts the body on arabic page 1.
 - `#` headings are centred, bold, upper case; `##` bold; `###` bold italic; all single-spaced and kept with the next block. The contents list levels 1 to 3.
 - `>` block quotations are single-spaced and indented 0.5 in each side. Footnotes (`[^id]`) are 12 pt, single-spaced.
 - Every body paragraph has a 0.5 in first-line indent, except paragraphs under 50 characters (a record or case citation after a quotation). A paragraph ending in a colon is kept on the page with what follows it.
@@ -50,7 +50,7 @@ Body:
 
 `usage/INPUT-opening-brief.md` is transcribed from the exemplar in the filed order of contents, rearranged to the TRAP 38.1 order: cover, identity of parties, counsel and judges, citation to the record, contents, index of authorities (16 authorities in two groups), address to the court, statement of the case, statement concerning oral argument, issues presented, statement of facts (parts D and E), summary of the argument, standard of review and law (with a footnote), argument on the first issue (law section with three block quotations), conclusion and prayer, signature, certificate of compliance (generated word count) and certificate of service. Text about the minor's background, diagnoses and the complainant is bracketed out; some paragraphs are left out to keep the render near the 8-14 page target.
 
-Render: 15 pages (cover; front matter ii-iv: identity and record citation, contents, index; body 1-11). Every page was rendered at 60 dpi and viewed on 2026-10-16; review in `reviews/2026-10-16.md`.
+Render (2026-10-22): 17 pages in typst and docx alike (cover; ii-v: identity of parties, citation to the record, contents, index; body 1-12). Every page of both renders viewed at 50 dpi, the contents and index at 70 dpi; review in `reviews/2026-10-22.md`.
 
 ## Render and review
 
@@ -77,11 +77,15 @@ sh tools/overlay.sh courts/fifth-circuit/texas/state/court-of-civil-appeals/open
 2. A citation paragraph longer than 50 characters right after a block quotation is indented (the filer sets it flush). The template cannot tell it from a body paragraph. OPEN, tier 2.
 3. The contents list level-1 entries in the heading's own case (Title Case), while the headings print upper case. Tier 3.
 4. Appendix (TRAP 38.1(k)) is not built; counsel attaches it.
-5. Rule text is secondary (see table). `tools/check.sh` was not run (no `checks.yaml` or `rules.md` at the court level); no stamp is written.
+5. Rule text is secondary (see table). `tools/check.sh` runs on the folder: typst and docx 0 failed, XENG-001..003 PASS (2026-10-22).
+
+## Layout (2026-10-22, fb-595.68.36)
+
+Typst and docx are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): Times New Roman 14 pt on both engines (TRAP 9.4(e); the docx had set EB Garamond); every line a box of its pitch, the boxes touching: 31.5 pt for the double-spaced text (TRAP 9.4(d)), 16.1 pt single lines for the cover, headings, block quotations and issues, label rows, signature, contents and index, 13.8 pt for the 12 pt footnotes (4 pt apart, 12.1 pt clear of the text above the rule); headings at 14 pt (were typst's 1.4 and 1.2 em sizes): level 1 bold capitals centered 24 pt above and 12 pt below, level 2 bold, level 3 bold italic, level 4 italic, 16 pt above and 8 pt below; quotations 0.5 in in on both sides, 14 pt around them; the identity of parties and a two-column table as label rows (label 2.25 in, text 0.25 in after it, rows never split, an empty 14 pt line between rows); contents and index rows with a 36 pt (contents) and 56 pt (index, or the page list's width when longer) page column, wrapped rows hanging 0.25 in, contents levels stepping 0.4 in; the last list item or paragraph before the signature kept with it; each certificate kept with its signer; the page number in a single line, none on the cover (page i), lower roman to the end of the index, arabic from the body. Word count (TRAP 9.4(i)(1)) the same in both engines (counted on the markdown).
 
 ## Engines
 
 - **typst** (`typst/`): the reference for the form.
-- **docx** (`docx/render.sh`, `docx/build-reference.sh`, `docx/reference.docx`, `docx/texapp.lua`): `usage/OUTPUT-opening-brief.docx` and `.docx.pdf` are from the earlier 8-page sample and were **not regenerated** on 2026-10-16: LibreOffice (`soffice`) is not installed on this box. The docx filter does not know the new contract: it would print `<!-- contents -->`, `<!-- identity -->`, `<!-- signature -->`, `<!-- signer -->` and the count typed in the markdown (literal) literally, and it builds no identity grid, index of authorities, roman front-matter numbering or ORAL ARGUMENT REQUESTED line. BLOCKED until `texapp.lua` is updated and the docx is re-rendered where `soffice` exists.
-- BLOCKED: tools/check.sh docx gates 0 to 3 not run (no `checks.yaml`, `rules.md` at the level `check.sh` reads; no `.check-docx.txt` stamp).
+- **docx** (`docx/texapp.lua`, `docx/reference.xml`; one copy in each of the opening, answering and reply folders): `fb render` builds the reference document from `reference.xml` (base="xengine", the face only as `{font}`) and runs the filter; the contents and index page numbers come from needles (FORMBOOK_NEEDLES) looked up in the LibreOffice PDF until they settle (were `docx/render.sh`'s two passes; `build-reference.sh` and the binary `reference.docx` are gone). Word may paginate slightly differently from LibreOffice; the page numbers are LibreOffice's (docs/DOCX.md).
+- Gate 4: `params.cross_engine: gate` (`eval.yaml`): the docx breaks every line and page as typst does (XENG-001..003).
 - **latex**: not built for this doc type.
