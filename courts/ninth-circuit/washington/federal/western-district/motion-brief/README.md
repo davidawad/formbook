@@ -7,10 +7,10 @@ Folder: `courts/ninth-circuit/washington/federal/western-district/motion-brief/`
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`). Tier 2 is not judged against two or three filers; see gaps. |
 | sample md | `usage/INPUT-motion-brief.md`: caption, noting data, table of contents, the introduction through Argument II, the conclusion, the word-count certificate, signature, and certificate of service. Argument III and IV, and the table of authorities, are not transcribed (see gaps). |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 13 pages, typst 0.15.0, Times New Roman (pinned) only, no typst warnings. |
 | overlay | ok: `usage/OVERLAY-hoffman-motion-to-dismiss.pdf` and `usage/OVERLAY-hoffman-motion-to-dismiss.txt`. |
-| pages reviewed | 12 of 12: every page rendered at 60 dpi and viewed in its final state. |
-| typeface | Face required: **none**. LCR 10(e)(1) requires "a proportionally spaced font" and names no face, so no substitute is needed and EB Garamond is kept (`FONTS.md`: no face named). Checked against the rule text, 2026-10-15. Metric fit: n/a. The filed motion embeds Times New Roman (tier-2 question, gap 6). |
+| pages reviewed | 13 of 13, typst and docx: every page rendered at 60 dpi side by side and viewed in its final state (2026-10-22). |
+| typeface | Face required: **none**. LCR 10(e)(1) requires "a proportionally spaced font" and names no face, and the filed motion embeds Times New Roman, so the template sets Times New Roman (`docs/FONTS.md`: a Times exemplar), in every engine. Checked against the rule text, 2026-10-15. Metric fit: n/a. |
 
 ## Governing rules
 
@@ -19,7 +19,7 @@ Primary source: W.D. Wash. Local Civil Rules (2026 edition, "WAWD Local Civil Ru
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LCR 10(d) | 8 1/2 x 11 inch page. | `page-w`, `page-h`. |
-| LCR 10(e)(1) | No less than three inches above the court title on the first page; one-inch margins; 12 pt or larger; double spaced or exactly 24 pt; proportionally spaced font. | `first-page-blank = 6`; `top-margin`, `right-margin`; `type-size = 12pt`; `pitch = 24pt`; `font-family = "EB Garamond"`. Footnotes are not used in the sample (see gaps). |
+| LCR 10(e)(1) | No less than three inches above the court title on the first page; one-inch margins; 12 pt or larger; double spaced or exactly 24 pt; proportionally spaced font. | `first-page-blank = 6`; `top-margin`, `right-margin`; `type-size = 12pt`; `pitch-body = 24pt`; `font-family = ("Times New Roman", "Liberation Serif")`. Footnotes are not used in the sample (see gaps). |
 | LCR 10(e)(2) | "United States District Court, Western District of Washington" on the first page, and a title below the docket number. | `court-title()`, `caption()`. |
 | LCR 10(e)(3) | Bottom notation: left, the abbreviated title and case number with the page number; right, the firm, mailing address and telephone (the filing may omit the firm block). | `footer-block()`: title and case number at left; `footer_firm` at right (omitted when the sample gives none). |
 | LCR 10(e)(4) | Dated and signed under Fed. R. Civ. P. 11 and LCR 11. | `signature-block()`. |
@@ -39,7 +39,7 @@ Not produced by this template: the proposed order (LCR 10(e)(7) "Presented by" l
 
 - Numbered lines 1 to 27 down the left margin on a 24 pt grid, with a double rule at the text's left edge and a single rule at its right.
 - Page 1 (cover): judge's name at line 1, right (`judge`), lines 1 to 6 blank (three inches), court title on lines 7 to 9, caption from line 11 with the noting data and the title of the paper in its right column.
-- The table of contents starts on a new page (`page_breaks`). Its rows are single-spaced, indented by section level (I. at 0.5 in, A. at 1 in), with the page numbers at the right; the whole table is rounded to whole grid lines.
+- The table of contents starts on a new page (`page_breaks`). Its rows are single-spaced (12 pt), half a numbered line apart; "I." labels at the margin and "A." labels at 0.5 in, each in a 0.5 in box with the title hanging after it, the page number at the right on the entry's last line.
 - The introduction starts on a new page (`page_breaks`).
 - Headings: level 1 centered bold caps; level 2 bold, left, with a hanging indent (argument headings); level 3 bold italic, left.
 - Body paragraphs: double spaced, 0.5 in first-line indent, on the grid. A heading stays with the paragraph after it.
@@ -63,8 +63,8 @@ Pairing and word overlap: our p1 to filed p1 (96%), p2 to p2 (98%), p3 to p10 (9
 2. **Excerpt.** The sample transcribes the filing's cover, table of contents, introduction, relevant allegations, legal standards, Argument I and the start of II, the conclusion, the word-count certificate, the signature and the certificate of service. Argument II (its end), III and IV, and the table of authorities are not transcribed. Rendered length (12 pages) is within the 8 to 14 page target for a motion of this kind.
 3. **Page numbering.** The filing numbers its front matter (table of contents and authorities) in roman numerals and starts the arabic count at the introduction. The template numbers every page in arabic from the cover. Matching the filing would need a page-numbering rule keyed to the section starts; not done.
 4. **Footnotes** are not supported in the sample. The filing has footnotes (1, 2 and 4 in the argument), set at 10 pt by LCR 10(e)(1); the template has no footnote rule.
-5. **Table of contents** rows are single-spaced with a 12 pt gap, rounded to the grid; the filing uses dot leaders, which the template does not draw.
-6. **Font.** LCR 10(e)(1) names no face, so EB Garamond is kept (see the typeface row). It reads smaller than the Times New Roman of the filing at 12 pt. Same tier-2 question for David as in the complaint README, gap 1.
+5. **Table of contents**: the filing uses dot leaders, which the template does not draw: the page numbers are typed in the INPUT, and a leader joins an entry's closing period to its dots, which DEF-CONT-001 reads as altered text (and the entry "... Rule 12(b)(6) ... | 12" is then not found at all). A tier-2 deviation, kept for the tier-1 content gate.
+6. **Font.** LCR 10(e)(1) names no face; the filed motion embeds Times New Roman, which the template sets (typst and docx alike).
 7. **Footer type size.** 10 pt (title) and 9 pt (firm block); see the complaint README, gap 2.
 8. **No firm block in the footer** for this sample: the filing carries none. The template prints one when `footer_firm` is given.
 9. **Output file names.** As in the complaint README, gap 9: `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt` are the tools' names, not the brief's `<id>.pdf` and `<id>-overlay.pdf`.
@@ -72,23 +72,30 @@ Pairing and word overlap: our p1 to filed p1 (96%), p2 to p2 (98%), p3 to p10 (9
 
 ## Engines
 
-**docx** (`docx/`; `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`, the LibreOffice conversion). Built by `docx/build-reference.sh` (reference.docx with the styles, the header with the 27 line numbers and the pleading rules, and a footer placeholder), `docx/motion-brief.lua` (cover, caption, table of contents, body, word-count certificate, signature block and certificate of service as OpenXML) and `docx/render.sh` (pandoc reads the sample as CommonMark, as cmarker does, so a Westlaw star page such as "*2" stays literal; the bottom notation is written from the frontmatter).
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`;
+docs/EVAL-LOOP.md, "Cross-engine gate"), and `eval.yaml` gates it (`params.cross_engine: gate`): the docx breaks every
+line and page where typst does (XENG-001..003 pass, 406/406 lines).
 
-Matches the typst output (checked on the rendered pages, not by a gate):
-- Letter page; 1 in top and bottom margins, 1.5 in left, 1 in right; 27 numbered lines at exact 24 pt.
-- EB Garamond only: `pdffonts` shows EBGaramond Regular and Bold, embedded; no fallback face.
-- Judge's name on line 1 at right; lines 1 to 6 blank; court title on lines 7 to 9; caption with the noting data and the bold title at right; the party block closed by a right and bottom rule.
-- Table of contents as a two-column table: "I." entries at 0.5 in, "A." entries at 1 in, the "Page" header at right; the TOC and the introduction start on new pages (`page_breaks`).
-- Headings: level 1 centered bold caps; level 2 bold with a hanging indent; level 3 bold italic.
-- Word-count certificate after the conclusion (LCR 7(e)(6)); signature block; certificate of service on its own page last.
-- Bottom notation on every page: title and case number with the page number at left; no firm block (the sample gives none).
+- Pitches: body 24 pt (LCR 10(e)(1)); single-spaced lines (caption, contents, signature) exactly 12 pt, half a
+  numbered line, and every single-spaced block starts 9.6 pt below the top of a numbered line, so each single line's
+  baseline is a number's or halfway between two (and the line numbers are read with the same text lines in both
+  engines).
+- Caption and signature rows are rounded up to whole numbered lines; typst measures the row, `docx/motion-brief.lua`
+  computes the same height from the lines with Times New Roman's advances (first fit, no kerning).
+- Headings on the body pitch at the type size, kept with the text after them; the TOC and the introduction open a
+  page (`page_breaks`); the word certificate is kept with the signature block, the co-counsel list with the signers;
+  the certificate of service on its own page last.
+- Bottom notation (LCR 10(e)(3)) fixed at its foot, 0.2 in above the page edge plus Word's 1 pt closing paragraph; no
+  firm block (the sample gives none).
+- Table of contents page numbers are typed from the sample. They do not match the footer count, which starts at the
+  cover (page 1): the sample lists INTRODUCTION at page 1 and the rendered introduction is on page 3 (see the gaps,
+  item 3).
 
-Differs from the typst output (tier 2 at most):
-- Table of contents page numbers are typed from the sample, as in typst. They do not match the footer count, which starts at the cover (page 1): the sample lists INTRODUCTION at page 1 and the rendered introduction is on page 3 (same in typst; see the README gaps, item 3).
-- The title in the caption wraps to four lines (typst: three); the caption title and notes are single spaced.
-- Keep with next: a heading stays with the first line of the following paragraph (Word); typst keeps it with the whole paragraph.
-- Only the LibreOffice PDF was checked; Word was not available.
+**docx** (`docx/`; `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`, the LibreOffice conversion): `docx/reference.xml`
+(the recipe styles in the typst face via `{font}`, the header `rIdWawdLines` with the 27 numbers in a text box and the
+three pleading rules as anchored lines) and `docx/motion-brief.lua` (cover, caption, contents, body, word certificate,
+signature block, certificate of service, the bottom notation from the frontmatter in `$FORMBOOK_FOOTERS`, the section
+in `$FORMBOOK_FINAL`). pandoc reads the sample as CommonMark (`pandoc-from="commonmark_x+smart"`), as cmarker does, so
+a Westlaw star page such as "*2" stays literal. No shell. Only the LibreOffice PDF was checked; Word was not available.
 
-Pages reviewed: docx.pdf 12 of 12, every page rendered at 60 dpi and viewed in its final state.
-
-BLOCKED: check.sh (no check IDs yet): `tools/check.sh` cannot run on this folder. It reads `<court>/court.json` and `<court>/checks.yaml`; the western-district court folder has neither checks.yaml nor a docx check set, so Gates 0 to 3 were not run on the docx. Needs the court-level checks.yaml (outside this unit).
+Pages reviewed: typst and docx, 13 of 13 each, rendered at 60 dpi side by side and viewed in their final state.
