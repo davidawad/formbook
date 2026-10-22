@@ -151,7 +151,14 @@ pub fn engine_states(dir: &Path) -> String {
         .map(|e| match (engine_template(dir, e), stamp(dir, e)) {
             (false, _) => '0',
             (true, true) => '2',
-            (true, false) if dir.join(USAGE_DIR).join(format!(".check-{e}.txt")).is_file() => '3',
+            (true, false)
+                if dir
+                    .join(USAGE_DIR)
+                    .join(format!(".check-{e}.txt"))
+                    .is_file() =>
+            {
+                '3'
+            }
             (true, false) => '1',
         })
         .collect()

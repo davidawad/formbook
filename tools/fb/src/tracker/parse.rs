@@ -170,7 +170,12 @@ pub fn doctype(line: &str) -> Option<DocType> {
         _ => return None,
     };
     let (samples, exemplars, bits) = doc_bits(flags)?;
-    let mut es = fs.get(5).copied().unwrap_or("").chars().chain(std::iter::repeat('0'));
+    let mut es = fs
+        .get(5)
+        .copied()
+        .unwrap_or("")
+        .chars()
+        .chain(std::iter::repeat('0'));
     let engines = std::array::from_fn(|_| es.next().unwrap_or('0'));
     Some(DocType {
         status: doc_status(&bits),
@@ -207,7 +212,9 @@ pub fn with_engines(cs: Vec<Court>, ds: &[DocType]) -> Vec<Court> {
                 ds.iter()
                     .filter(|d| d.alias == c.alias)
                     .map(|d| d.engines[i])
-                    .fold((0, 0), |(t, p), e| (t + u32::from(e != '0'), p + u32::from(e == '2')))
+                    .fold((0, 0), |(t, p), e| {
+                        (t + u32::from(e != '0'), p + u32::from(e == '2'))
+                    })
             });
             Court { agg, ..c }
         })

@@ -211,9 +211,18 @@ impl Shots {
         let t_out = format!("{HERO}/usage/OUTPUT-opening-brief.typst.pdf");
         let t_filed = format!("{HERO}/usage/FILED-EXAMPLE-opening-brief.pdf");
         // our page, the filed page it corresponds to (the same part of the same brief)
-        for (i, (ours, filed)) in [(1, 1), (2, 2), (4, 5), (5, 6), (7, 16), (11, 40), (14, 71), (15, 72)]
-            .iter()
-            .enumerate()
+        for (i, (ours, filed)) in [
+            (1, 1),
+            (2, 2),
+            (4, 5),
+            (5, 6),
+            (7, 16),
+            (11, 40),
+            (14, 71),
+            (15, 72),
+        ]
+        .iter()
+        .enumerate()
         {
             self.page(&t_out, *ours, &format!("p{}", i + 1), 70)?;
             self.page(&t_filed, *filed, &format!("f{}", i + 1), 70)?;
@@ -225,12 +234,26 @@ impl Shots {
         // only courts whose current render visibly matches the filed example
         let list = [
             (HERO, "opening-brief", "D.C. Circuit: opening brief"),
-            (MDB, "adversary-complaint", "D. Md. Bankruptcy: adversary complaint"),
+            (
+                MDB,
+                "adversary-complaint",
+                "D. Md. Bankruptcy: adversary complaint",
+            ),
             (CASUP, "complaint", "California Superior Court: complaint"),
         ];
         for (i, (dir, id, _)) in list.iter().enumerate() {
-            self.page(&format!("{dir}/usage/OUTPUT-{id}.typst.pdf"), 1, &format!("c{}", i + 1), 70)?;
-            self.page(&format!("{dir}/usage/FILED-EXAMPLE-{id}.pdf"), 1, &format!("d{}", i + 1), 70)?;
+            self.page(
+                &format!("{dir}/usage/OUTPUT-{id}.typst.pdf"),
+                1,
+                &format!("c{}", i + 1),
+                70,
+            )?;
+            self.page(
+                &format!("{dir}/usage/FILED-EXAMPLE-{id}.pdf"),
+                1,
+                &format!("d{}", i + 1),
+                70,
+            )?;
         }
         let labels: Vec<&str> = list.iter().map(|(_, _, l)| *l).collect();
         self.compose("courts.typ", &courts_typ(&labels), "courts.png", 64)

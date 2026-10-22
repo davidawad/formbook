@@ -80,7 +80,11 @@ pub fn doctype_lines(root: &Path) -> Res<String> {
                 .map(|(dt, p)| {
                     let flags = keys::doctype_flags(&root.join(&p));
                     let engines = keys::engine_states(&root.join(&p));
-                    order.row(&alias, &[dt.clone(), p, flags, engines], &[alias.clone(), dt])
+                    order.row(
+                        &alias,
+                        &[dt.clone(), p, flags, engines],
+                        &[alias.clone(), dt],
+                    )
                 })
                 .collect::<Vec<_>>())
         })
