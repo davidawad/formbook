@@ -1,6 +1,6 @@
 # Adversary complaint: U.S. Bankruptcy Court, D. Utah (utb)
 
-Doc type folder for a complaint commencing an adversary proceeding. Engine: typst (`typst/`). Exemplars and their filers are in `usage/SOURCE.md`.
+Doc type folder for a complaint commencing an adversary proceeding. Engines: typst (`typst/`, the reference) and docx (`docx/`). Exemplars and their filers are in `usage/SOURCE.md`.
 
 ## Files
 
@@ -8,8 +8,12 @@ Doc type folder for a complaint commencing an adversary proceeding. Engine: typs
 |---|---|
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...` |
 | `typst/utb-adversary-complaint.typ` | The template: parameters, caption, numbered allegations, prayer, signature, verification |
+| `docx/reference.xml` | The Word styles, page and footer (built by `fb render`; base `xengine`) |
+| `docx/utb-adversary-complaint.lua` | The docx filter: the same chunks, caption, signature and verification as the typst template |
+| `eval.yaml` | `params.cross_engine: gate` |
 | `usage/INPUT-adversary-complaint.md` | Our transcription of the Plaza 106 verified complaint (frontmatter + body) |
-| `usage/OUTPUT-adversary-complaint.typst.pdf` | Our render, `sh tools/render.sh`, 9 pages |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | Our render, `sh tools/render.sh`, 10 pages |
+| `usage/OUTPUT-adversary-complaint.docx` / `.docx.pdf` | The docx render and its LibreOffice PDF, 10 pages |
 | `usage/OVERLAY-plaza106-verified-complaint.pdf` / `.txt` | Red (ours) / blue (filed) / black (both) overlay against `FILED-EXAMPLE-adversary-complaint.pdf`, and the page map |
 | `usage/FILED-EXAMPLE-adversary-complaint.pdf` | Filed exemplar, Doc 1, 19 pp. |
 | `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` | Second filed exemplar (different filer), Doc 1, 19 pp. with exhibits; not overlaid |
@@ -55,19 +59,20 @@ The overlay compares our render with the Plaza 106 filing (Doc 1, 19 pp.) page b
 2. **FRBP 7008(a) statement is ours, not the filer's.** Paragraph 4 of the sample states "Plaintiff does not consent to the entry of final orders or judgment by the bankruptcy court." Neither filed exemplar contains that statement: the text of both PDFs has no "consent" in it (checked this run; see `usage/SOURCE.md`). The template asserts that the statement is present, so the sample supplies it. This is the one place the sample departs from the exemplar.
 3. **Verification.** The date and place of execution are blanks (`__________`) in the sample's frontmatter, as the input gives them. The template prints them as given.
 4. **Rule text.** The rules in the table above are cited, not re-read. Nothing in this folder is verified against the court's current local-rules text.
-5. **Page count.** Our render is 9 pages; the filing is 19 pages, including the verification and no exhibits. Nine pages is inside the 8–14 target for the body the sample transcribes; it is not the full filing.
+5. **Page count.** Our render is 10 pages; the filing is 19 pages, including the verification and no exhibits. Ten pages is inside the 8–14 target for the body the sample transcribes; it is not the full filing.
 6. **Second exemplar not overlaid.** The Clauson filing (a different filer, with exhibits) is kept as a second exemplar for tier-2 comparison. It is not overlaid here and is not used in the sample.
 
 ## Engines
 
-The typst template is the primary form. The DOCX engine is in `docx/` (`reference.docx`, `utb-adversary-complaint.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md`.
+The typst template is the reference; the docx engine is in `docx/` (`reference.xml`, the Word styles; `utb-adversary-complaint.lua`, the filter). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md`. `fb render` builds the reference document from `docx/reference.xml`; no shell script and no binary `reference.docx` (fb-595.68).
 
-**What the docx matches** (the same mandated form as the typst template): EB Garamond 12 pt; exact 24 pt line pitch; 0.5 in first-line indent; letter paper with a 1.5 in top margin and 1 in other margins; centred bold level-1 and level-2 headings; 12 pt single-spaced footnotes; a bottom-centre page number (PAGE field in the footer). The cover is built from the same metadata: counsel block, court title, Form 416D caption (a borderless table with a right and a bottom rule on the party column), title. Numbered allegations: the filter types `1.`, `2.`, ... at 0.5 in with the text at 0.9 in on the first line (a tab stop); the lead-in and the WHEREFORE paragraph are unnumbered; the prayer items `A.`-`H.` hang at 0.9 in. Signature block and verification are borderless tables.
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"), and the docx breaks every line and page where the typst render does: `eval.yaml` sets `params.cross_engine: gate`, and XENG-001..003 pass (248/248 lines, 10 = 10 pages).
 
-**What differs**: the numbers are typed text, not Word list numbering, so they do not renumber on edit. Word and LibreOffice break lines differently, so the page count of the docx is not the typst page count (the typst render is 9 pages). Table rules are drawn by the application. The EB Garamond font must be installed where the file is opened, or Word substitutes silently. The template has no table of contents or table of authorities.
-
-**BLOCKED for the docx engine** (not done on this box):
-- `docx.pdf` (`usage/OUTPUT-plaza106-verified-complaint.docx.pdf`, the LibreOffice PDF on which Gates 0 and 1 are measured): BLOCKED, `soffice` not installed on the box (no conda-forge package, no root).
-- Zip integrity step of `tools/render-docx.sh` (`unzip -tq`): BLOCKED, `unzip` not installed on the box. `tools/render.sh --engine docx` wrote `usage/OUTPUT-adversary-complaint.docx` and then exited 1 with `render-docx.sh: unzip: not found` and `not a valid zip`. As a substitute, every XML and rels part was checked with `ziptool` and `xmllint --noout`: all well-formed.
-- Visual review of the docx pages (opened in LibreOffice or Word, no repair prompt): BLOCKED, no LibreOffice and no Word. Pages reviewed: 0. The typst render (9 pages) was reviewed page by page; the docx was not.
-- `sh tools/check.sh <dir> --engine docx` not run to a pass: it needs the `.docx.pdf` (see above), so no `.check-docx.txt` stamp is written.
+- **Face and size**: Times New Roman 12 pt on both (no rule names a face, UTB-FORM-004; the docx used to name EB Garamond and failed DEF-FONT-002). The docx names the face only as `{font}`, the typst template's face.
+- **Pitches** (Word's exact line spacing; twips = 20 x pt): the body double-spaced at 24 pt (480; DUCivR 10-1(4)), no extra space between paragraphs; counsel block, court title, caption, title, headings, signature and verification lines single-spaced at 13.8 pt (276). Headings 12 pt bold (levels 1 and 2 centered, level 3 at the margin), 18 pt above and 6 pt below, kept with the text after them. The parts of the first page 24 pt apart.
+- **Body** (chunk by chunk, in both engines alike): the lead-in before the first heading and the WHEREFORE paragraph unnumbered, indented 0.5 in; every other paragraph a numbered allegation (Fed. R. Civ. P. 10(b)), its number ("1.") in a 0.4 in box after the 0.5 in indent, the text from 0.9 in and its other lines at the margin; a prayer item "A. ..." with its letter in the same box and its lines hanging at 0.9 in; a list's label in a 0.5 in box.
+- **Caption** (Form 416D): the party column 3.3 in wide, ruled on its right and at its foot (0.75 pt; its text 10 pt from the right rule and 8 pt above the foot), a blank single line between its elements; the case numbers and the judge 0.15 in right of the 0.25 in gutter. The docx writes it as a one-row table.
+- **Signature and verification**: "DATED ..." at the margin, the firm beside it at 3.4 in, a blank single line, "/s/" and the signer's lines under the firm; the last chunk (the last prayer item) is kept on one page with the signature block (it stood alone on the page before). The verification (28 U.S.C. § 1746) is kept on one page: the heading, the declaration double-spaced, "Executed on ..." at the margin, the declarant's name and title under it at 3.4 in (they stood beside a wrapped "Executed on" line before).
+- **Page**: letter, top margin 1.5 in (DUCivR 10-1(1)), 1 in on the other sides; the page number centered at the foot of every page in a single-pitch line whose box ends 0.5 in above the page edge.
+- **Reading**: the docx filter reads the sample chunk by chunk (the text between blank lines), as typst does, and the frontmatter as written (`$FORMBOOK_META`: "__________" stays a blank, not a rule). Break rules both engines share: no break inside ")(" or between a sign and its number ("§§ 1334(b)": typst boxes `[§¶]+ \S+`, the docx binds it with a no-break space), no break at a hyphen before a digit, a break after a slash before a letter.
+- **Limits**: footnotes are not supported (both engines read the body chunk by chunk, so a footnote's definition would be a chunk of its own; the sample has none). The allegation numbers are typed text, not Word list numbering, so they do not renumber on edit in Word.

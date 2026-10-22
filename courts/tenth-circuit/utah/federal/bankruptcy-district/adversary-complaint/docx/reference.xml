@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Bankr. D. Utah adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs;
+     docs/EVAL-LOOP.md, "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; no rule names
+     a face, UTB-FORM-004) at 12 pt (size 24 half points, UTB-FORM-003/004: DUCivR 10-1(3), LBR 5005-3(a)(4)); Body
+     Text in exact 24 pt line boxes (480 twips: typst pitch-body, double spacing, DUCivR 10-1(4)) with a half-inch
+     first-line indent; single lines in 13.8 pt boxes (276 twips: typst pitch-single). Letter page, top margin 1.5 in
+     (2160 twips, DUCivR 10-1(1)) and 1 in on the other sides (LBR 5005-3(a)(3)), the page number centred at 12 pt on
+     every page (LBR 5005-3(a)(7)) in a single-pitch line whose box ends 0.5 in above the page edge (typst
+     footer-distance). docx/utb-adversary-complaint.lua writes every paragraph's own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="360" heading-after="120" footer="720">
+<footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></footer>
+<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="2160" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>
+</reference>
