@@ -4,9 +4,11 @@ font:
   size_pt: 14
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). docx breaks every line and page where
-# typst does (XENG-001..003 pass). latex is held back: footnote 2 on page 4 does not fit, typst and Word carry its
-# last line to page 5, the shared LaTeX model never splits a footnote (lib/latex/xengine.sty
-# \interfootnotelinepenalty=10000) and moves the anchor line instead (docs/open-items/fb-595.54.54.md).
+# typst does (XENG-001..003 pass). latex is held back: the shared LaTeX model sets the token after "¶" in an \mbox
+# (lib/latex/xdoc.lua, xd.hold_sign_tokens) and that token here carries footnote 5 ("¶ 9.[^5]"), which LaTeX drops
+# inside a box; the committed latex render is the one before that rule, which passes XENG-001..003 against this typst
+# render (the footnote split of pass 1 is gone: notes are unsplit in every engine); a render at HEAD would not.
+# docs/open-items/fb-595.54.54.md.
 params:
   cross_engine: gate
   cross_engine_latex: report
