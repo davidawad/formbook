@@ -22,7 +22,7 @@ Courts under `courts/third-circuit` (18).
 | [Supreme Court of New Jersey](new-jersey/state/supreme-court) | `nj` | up for review | — | — | — | 29 |
 | [Commonwealth Court of Pennsylvania](pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | — | — | — | 29 |
 | [Superior Court of Pennsylvania](pennsylvania/state/superior-court) | `pasuperct` | up for review | — | — | — | 29 |
-| [Supreme Court of Pennsylvania](pennsylvania/state/supreme-court) | `pa` | up for review | — | — | — | 29 |
+| [Supreme Court of Pennsylvania](pennsylvania/state/supreme-court) | `pa` | in progress | — | — | — | 29 |
 
 [Formbook index](../../README.md)
 <!-- fb:generated:end -->

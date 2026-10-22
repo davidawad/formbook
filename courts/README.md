@@ -79,7 +79,7 @@ Courts under `courts` (346).
 | [Supreme Court of New Jersey](third-circuit/new-jersey/state/supreme-court) | `nj` | up for review | — | — | — | 29 |
 | [Commonwealth Court of Pennsylvania](third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | — | — | — | 29 |
 | [Superior Court of Pennsylvania](third-circuit/pennsylvania/state/superior-court) | `pasuperct` | up for review | — | — | — | 29 |
-| [Supreme Court of Pennsylvania](third-circuit/pennsylvania/state/supreme-court) | `pa` | up for review | — | — | — | 29 |
+| [Supreme Court of Pennsylvania](third-circuit/pennsylvania/state/supreme-court) | `pa` | in progress | — | — | — | 29 |
 | [Court of Appeals for the Fourth Circuit](fourth-circuit/court-of-appeals) | `ca4` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Maryland](fourth-circuit/maryland/federal/bankruptcy-district) | `mdb` | up for review | — | — | — | 14 |
 | [District Court, D. Maryland](fourth-circuit/maryland/federal/district) | `mdd` | up for review | — | — | — | 14 |
