@@ -3,9 +3,6 @@
   "branches": {
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/make-reference.sh": 6,
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/render.sh": 31,
-    "courts/federal-circuit/court-of-international-trade/motion-brief/docx/make-reference.sh": 1,
-    "courts/federal-circuit/court-of-veteran-appeals/answering-brief/docx/make-reference.sh": 6,
-    "courts/federal-circuit/court-of-veteran-appeals/opening-brief/docx/make-reference.sh": 6,
     "courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response/docx/make-reference.sh": 5,
     "courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response/docx/render.sh": 32,
     "courts/federal-circuit/patent-trial-and-appeal-board/petition/docx/make-reference.sh": 5,
