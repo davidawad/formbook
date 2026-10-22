@@ -213,7 +213,7 @@ CASSANDRA FERREIRA,
 
 Plaintiff,
 
-v.
+v\.
 
 ORDER
 
@@ -417,7 +417,7 @@ Case Disposition: Findings and Order, 06/25/2021.
 
 § 8A. Rent withholding; grounds; amount claimed; presumptions and burden of proof; procedures.
 
-<Section impacted by 2020, 65, Secs. 3 and 6 effective April 20, 2020 and 2020, 257, Sec. 1, as amended by 2021, 20, Secs. 12 to 15, 29 and 30 and 2022, 42, Sec. 30 effective December 31, 2020 relating to eviction protections in order to address disruptions caused by the outbreak of COVID-19.>
+\<Section impacted by 2020, 65, Secs. 3 and 6 effective April 20, 2020 and 2020, 257, Sec. 1, as amended by 2021, 20, Secs. 12 to 15, 29 and 30 and 2022, 42, Sec. 30 effective December 31, 2020 relating to eviction protections in order to address disruptions caused by the outbreak of COVID-19.>
 
 In any action under this chapter to recover possession of any premises rented or leased for dwelling purposes, brought pursuant to a notice to quit for nonpayment of rent, or where the tenancy has been terminated without fault of the tenant or occupant, the tenant or occupant shall be entitled to raise, by defense or counterclaim, any claim against the plaintiff relating to or arising out of such property, rental, tenancy, or occupancy for breach of warranty, for a breach of any material provision of the rental agreement, or for a violation of any other law. The amounts which the tenant or occupant may claim hereunder shall include, but shall not be limited to, the difference between the agreed upon rent and the fair value of the use and occupation of the premises, and any amounts reasonably spent by the tenant or occupant pursuant to section one hundred and twenty-seven L of chapter one hundred and eleven and such other damages as may be authorized by any law having as its objective the regulation of residential premises.
 
@@ -439,7 +439,7 @@ Credits: Added by St.1965, c. 888. Amended by St.1967, c. 420, § 1; St.1969, c.
 
 Effective: March 16, 2005.
 
-<Section impacted by 2020, 65, Secs. 3 and 6 effective April 20, 2020 relating to suspension of evictions in order to address disruptions caused by the outbreak of COVID-19.>
+\<Section impacted by 2020, 65, Secs. 3 and 6 effective April 20, 2020 relating to suspension of evictions in order to address disruptions caused by the outbreak of COVID-19.>
 
 (a) For the purposes of this section the following words shall have the following meanings:--
 

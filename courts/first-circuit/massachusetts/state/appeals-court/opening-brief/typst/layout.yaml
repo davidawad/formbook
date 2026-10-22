@@ -48,7 +48,7 @@ authorities:
   group: {bold: true, above: 16.8, below: 2.8}
 # MASSAPPCT-OPEN-001 (MRAP 16(a)(12)-(15)): the signature block right of centre, never split, after the conclusion;
 # then the addendum (the body from its "# ADDENDUM" heading, MRAP 16(a)(13)); then the certificate of compliance on a
-# page of its own (MRAP 16(k)) and the certificate of service (MRAP 13(e)), each signed.
+# page of its own (MRAP 16(k)) and the certificate of service (MRAP 13(e)), each signed, its text kept with its signature.
 closing:
   - group:
       - {text: "{signature.intro}", left: 230.4, optional: true}
@@ -65,9 +65,9 @@ after_tail:
     blocks:
       - {break: true}
       - {text: "Certificate of Compliance", heading: 1}
-      - {text: "{compliance.paragraphs}", pitch: body, indent: 36}
       - group:
-          - {text: "{compliance.signature.firm}", bold: true, left: 230.4, optional: true}
+          - {text: "{compliance.paragraphs}", pitch: body, indent: 36}
+          - {text: "{compliance.signature.firm}", bold: true, left: 230.4, optional: true, above: 5.6}
           - each: compliance.signature.signers
             blocks:
               - {text: "{name}", underline: true, left: 230.4, above: 16.8}
@@ -77,9 +77,9 @@ after_tail:
   - when: service
     blocks:
       - {text: "Certificate of Service", heading: 1}
-      - {text: "{service.paragraphs}", pitch: body, indent: 36}
       - group:
-          - {text: "{service.signature.firm}", bold: true, left: 230.4, optional: true}
+          - {text: "{service.paragraphs}", pitch: body, indent: 36}
+          - {text: "{service.signature.firm}", bold: true, left: 230.4, optional: true, above: 5.6}
           - each: service.signature.signers
             blocks:
               - {text: "{name}", underline: true, left: 230.4, above: 16.8}
