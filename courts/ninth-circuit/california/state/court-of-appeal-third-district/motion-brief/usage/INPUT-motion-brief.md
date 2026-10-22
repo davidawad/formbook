@@ -108,7 +108,7 @@ Here, Appellants are submitting economic and fiscal impact statements of the Cal
 
 Should this Court, however, see a distinction that disallows these exhibits to be noticed, or if this Court has any other reason to deny judicial notice that was not addressed in this memorandum, Appellants respectfully request that the Court clarify its reasoning for the denial of judicial notice so Appellants have a chance to address the Court’s concerns.
 
-* * * *
+\* \* \* \*
 
 For these reasons, Appellants respectfully request that this Court reconsider its order denying judicial notice of Exhibits 8 and 9.
 
