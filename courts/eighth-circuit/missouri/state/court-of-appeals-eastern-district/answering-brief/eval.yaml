@@ -3,7 +3,3 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # LaTeX reported, not gated: a shared-model limitation outside this folder's layout (fb-595.54.75): LaTeX breaks
-  # inside a spaced ellipsis ("one year . . .", p13 line 1: "year ." / ". .”"; lib/latex/xengine.lua makes a no-break space
-  # after a period breakable), where typst cannot break before " ." (XENG-003). docs/open-items/fb-595.54.75.md
-  cross_engine_latex: report
