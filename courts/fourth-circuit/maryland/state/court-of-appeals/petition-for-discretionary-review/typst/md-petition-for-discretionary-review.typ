@@ -84,13 +84,20 @@
   ]
   v(2.2em)
   align(center, text(weight: "bold", meta.doc_title))
-  v(2.4em)
-  // Counsel blocks stack one under another: two columns overflow the right margin with long e-mail addresses.
-  for g in meta.counsel [
-    #lines-of(g.names)
-    #lines-of(g.lines)
-    #v(1.2em)
-  ]
+  v(1.6em) // was 2.4 em: the cover fits one page with the counsel groups below (DEF-COVER-001)
+  // Counsel groups side by side in two columns, each group kept whole, as the filed petition sets them (it uses
+  // three; at 13 pt (MD-FORM-004) a third of the 6 in measure is narrower than a long e-mail address). Stacked in one
+  // column the groups ran the cover onto a second unnumbered page (DEF-COVER-001; MD-FORM-005 numbers every page
+  // after the cover).
+  grid(
+    columns: (1fr, 1fr),
+    column-gutter: 0.3in,
+    row-gutter: 1.2em,
+    ..meta.counsel.map(g => block(breakable: false, {
+      lines-of(g.names)
+      lines-of(g.lines)
+    })),
+  )
 }
 
 // ---- Table of contents and table of citations (Rule 8-504(a)) ----------------------------------
