@@ -1,0 +1,4 @@
+PASS
+f0ba54e85f8a370ef06297b5dfd8005a2d8a060bc29645fdf0814a108e1f3d3c  usage/OUTPUT-adversary-complaint.docx
+1c5a0fa018261673705ab643ff553537d59416c9b907b79eb12971f46546e75c  usage/OUTPUT-adversary-complaint.docx.pdf
+0211a5ba647df59892aead0c0a726f7a2e01f693c3f61a82fe2a046e4f6fd257  usage/OUTPUT-adversary-complaint.typst.pdf

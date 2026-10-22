@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The orb adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; LBR 9004-1(a)(1)(B) sets a 12 point
+     minimum, footnotes included, and names no face) at 12 pt (size 24 half points); Body Text in exact 24 pt line
+     boxes (480 twips, typst pitch-body; LBR 9004-1(a)(4)(A): double spacing) with a half-inch first-line indent (typst
+     para-indent); single lines in 13.8 pt boxes (276 twips, typst pitch-single). Added here, as the typst template
+     sets them: "Body Numbered" (an allegation or a prayer item: the number after the indent, a tab to the text 1 in
+     in; typst num-box), and "Body Text Keep" / "Body Numbered Keep" (the last chunk, kept whole with the signature
+     block; typst: one unbreakable block). docx/orb-complaint.lua (with docx/lib/orb-common.lua) writes the cover, the
+     ruled caption, the headings, the signature block, the footer (the title and "Page N of M", LBR 9004-1(a)(9)(D)) and
+     the section (letter; 1 in top and bottom, 0.75 in sides, LBR 9004-1(a)(2)). Twips: 20 x pt. pandoc-from:
+     CommonMark with smart punctuation, as typst's cmarker reads the body. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" footer="504" pandoc-from="commonmark+smart+footnotes+yaml_metadata_block">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyNumbered"><w:name w:val="Body Numbered"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyNumberedKeep"><w:name w:val="Body Numbered Keep"/><w:basedOn w:val="BodyNumbered"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>

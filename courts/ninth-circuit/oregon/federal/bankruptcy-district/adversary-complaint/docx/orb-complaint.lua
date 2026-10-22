@@ -1,67 +1,59 @@
--- Adversary complaint, DOCX engine (docs/DOCX.md). The markdown contract -> a Word document on reference.docx,
--- mirroring orb-adversary-complaint.typ: the cover and caption (orb-common.lua), the lead-in, numbered allegations
--- (FRCP 10(b) through FRBP 7010; the number is typed, as the typst counter does), level 1 headings in capitals,
--- unnumbered "~" paragraphs (the WHEREFORE lead-in), lettered prayer items (A., B., ...), the signature block.
+-- Adversary complaint, docx engine (docs/DOCX.md). Mirrors typst/orb-adversary-complaint.typ: the cover and the ruled
+-- caption (docx/lib/orb-common.lua), a page break, the lead-in, numbered allegations (FRCP 10(b) through FRBP 7010; the
+-- number is typed, as the typst counter does), headings, unnumbered "~" paragraphs (the WHEREFORE lead-in), lettered
+-- prayer items (A., B., ...), the last of them kept with the date and the signature block. The footer and the
+-- section are the filter's (orb-common furniture()); no shell (were docx/build-reference.sh and render.sh).
 local DIR = PANDOC_SCRIPT_FILE:match("^(.*)[/\\]") or "."
-local C = dofile(DIR .. "/orb-common.lua")
+local C = dofile(DIR .. "/lib/orb-common.lua")
+local xe = C.xe
 local LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
--- a paragraph written "~ text" (unnumbered; the marker is dropped)
-local function is_tilde(b)
-  local f, s = b.content[1], b.content[2]
-  return f ~= nil and f.t == "Str" and f.text == "~" and s ~= nil and s.t == "Space"
-end
-
-local function drop_tilde(inl)
-  local out = pandoc.List()
-  for i = 3, #inl do out:insert(inl[i]) end
-  return out
-end
-
-local TAB = pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>")
-
-function Pandoc(doc)
+local function finish(doc)
   local meta = doc.meta
-  local date = meta.date
-  -- pandoc would print date and subtitle as a title block; the date sits in the signature block and the subtitle in the caption
-  doc.meta = pandoc.Meta({})
+  local more = {}
+  if meta.subtitle then more[#more + 1] = { xe.inl(meta.subtitle) } end
+  if meta.jury_demand then more[#more + 1] = { xe.runs("DEMAND FOR JURY TRIAL") } end
 
-  local out = pandoc.List()
-  out:insert(pandoc.RawBlock("openxml", C.cover(meta)))
-  if meta.lead_in then
-    out:insert(C.styled(C.minl(meta.lead_in), "Pleading Body"))
-  end
+  local out = pandoc.Blocks({})
+  out:insert(xe.raw(C.cover(meta, C.caption_right(meta, more))))
+  -- the body opens page 2 (typst pagebreak()): the break goes with its first block
+  local brk = true
+  if meta.lead_in then out:insert(C.para(meta.lead_in, "Body Text", nil, false, true)); brk = false end
 
+  local last = C.last_block(doc.blocks)
   local n, letter = 0, 0
-  for _, b in ipairs(doc.blocks) do
+  for i, b in ipairs(doc.blocks) do
+    local keep = i == last
     if b.t == "Header" then
-      if b.level == 1 then
-        b.content = pandoc.List({ pandoc.Str(pandoc.text.upper(pandoc.utils.stringify(b.content))) })
-      end
-      out:insert(b)
+      out:insert(C.heading(b.level, b.content, true, brk and xe.BREAK or nil))
     elseif b.t == "Para" or b.t == "Plain" then
-      if is_tilde(b) then
-        out:insert(C.styled(drop_tilde(b.content), "Pleading Body"))
+      local t = C.tilde(b)
+      if t then
+        out:insert(C.para(t, "Body Text", nil, keep, brk))
       else
         n = n + 1
-        local inl = pandoc.List({ pandoc.Str(n .. "."), TAB })
-        inl:extend(b.content)
-        out:insert(C.styled(inl, "Pleading Body"))
+        out:insert(C.para(b.content, "Body Numbered", n .. ".", keep, brk))
       end
     elseif b.t == "BulletList" or b.t == "OrderedList" then
-      for _, item in ipairs(b.content) do
+      for k, item in ipairs(b.content) do
         letter = letter + 1
-        local inl = pandoc.List({ pandoc.Str(LETTERS:sub(letter, letter) .. "."), TAB })
         local first = item[1]
-        if first and (first.t == "Para" or first.t == "Plain") then inl:extend(first.content) end
-        out:insert(C.styled(inl, "Pleading Item"))
+        if #item ~= 1 or (first.t ~= "Para" and first.t ~= "Plain") then
+          error("orb-complaint.lua: a prayer item must be one paragraph")
+        end
+        out:insert(C.para(first.content, "Body Numbered", LETTERS:sub(letter, letter) .. ".", keep and k == #b.content,
+          brk and k == 1))
       end
     else
-      out:insert(b)
+      error("orb-complaint.lua: unsupported block " .. b.t)
     end
+    brk = false
   end
+  out:insert(xe.raw(C.signature(meta)))
 
-  out:insert(pandoc.RawBlock("openxml", C.signature(meta, date)))
-  doc.blocks = out
-  return doc
+  C.furniture()
+  -- The frontmatter was consumed above; pandoc would otherwise write its title block at the top of the document.
+  return pandoc.Pandoc(pandoc.Blocks(out):walk({ Inlines = xe.inlines }), pandoc.Meta({}))
 end
+
+return { { Str = C.break_rules, Inlines = C.bind_spaces }, { Pandoc = finish } }
