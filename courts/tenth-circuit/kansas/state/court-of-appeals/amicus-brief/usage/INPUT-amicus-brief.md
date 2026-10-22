@@ -6,7 +6,7 @@ caption:
     designation: "Plaintiffs-Appellees,"
   - names: ["DEREK SCHMIDT, in his official capacity as Attorney General of the State of Kansas; and STEPHEN M. HOWE, in his official capacity as District Attorney for Johnson County,"]
     designation: "Defendants-Appellants."
-proceeding: "Appeal from the District Court of Shawnee County, Kansas\\\nHonorable Larry D. Hendricks, Judge"
+proceeding: "Appeal from the District Court of Shawnee County, Kansas<br>Honorable Larry D. Hendricks, Judge"
 trial_court_case: "District Court Case No. 2015-CV-490"
 brief_title: "Brief of Amicus Curiae American College of Obstetricians and Gynecologists in Support of Plaintiffs-Appellees"
 counsel:

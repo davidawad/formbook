@@ -5,9 +5,7 @@
 # hyphenation and OCR letter errors are fixed; spellings of names and words are kept as filed.
 case_number: "17-118640-A"
 proceeding: |-
-  Appeal from the District Court of Shawnee County, Kansas\
-  Honorable Mark Braun, District Judge\
-  District Court Case No. 16 CR 2341
+  Appeal from the District Court of Shawnee County, Kansas<br>Honorable Mark Braun, District Judge<br>District Court Case No. 16 CR 2341
 caption:
   - names: ["STATE OF KANSAS,"]
     designation: "Plaintiff-Appellant,"
@@ -21,7 +19,7 @@ authorities:
   - heading: "Cases"
     entries:
       - cite: '*Adams v. Williams*, 407 U.S. [143,] 92 S. Ct. 1921, 32 L. Ed 2d 612 (1972)'
-        find: "92 S. Ct. 1921"
+        find: "Adams v. Williams"
       - cite: '*Hudson v. Michigan*, 547 U.S. 586, 126 S. Ct. 2159, 165 L. Ed. 2d 56 (2006)'
         find: "547 U.S. 586"
       - cite: '*Illinois v. Lafayette*, 462 U.S. 640, 103 S. Ct. 2605 (1983)'
@@ -276,11 +274,11 @@ In determining if there was reasonable suspicion, the *Wardlow* court held that 
 
 In *State v. Anderson*, No. 99,779, 2009 WL 1591399 (issued June 5, 2009) (unpublished) (attached), this Court considered whether there was reasonable suspicion of illegal activity that justified the defendant’s seizure. Particularly, the defendant immediately fled from the officer when the officer attempted to investigate the defendant’s activity. There, the district court had identified three facts to support its conclusion that there was reasonable suspicion:
 
-(1) The police officer personally observed a foot chase in progress late at night in a high crime area;
+\(1) The police officer personally observed a foot chase in progress late at night in a high crime area;
 
-(2) when the individuals involved in the foot chase noticed the police officer, they immediately stopped running; and
+\(2) when the individuals involved in the foot chase noticed the police officer, they immediately stopped running; and
 
-(3) when the police officer indicated his intention to verify the defendant’s story about what had happened, the defendant immediately took flight and ran away from the officer.
+\(3) when the police officer indicated his intention to verify the defendant’s story about what had happened, the defendant immediately took flight and ran away from the officer.
 
 *Anderson*, 2009 WL 1591399 at \*4.
 
@@ -352,11 +350,11 @@ Under the attenuation doctrine, evidence is admissible when the connection betwe
 
 In analyzing whether the seizure of evidence is attenuated from the illegality, this Court considers:
 
-(1) the time elapsed between the illegality and the acquisition of the evidence;
+\(1) the time elapsed between the illegality and the acquisition of the evidence;
 
-(2) the presence of intervening circumstances; and
+\(2) the presence of intervening circumstances; and
 
-(3) the purpose and flagrancy of the official misconduct.
+\(3) the purpose and flagrancy of the official misconduct.
 
 *Strieff*, 136 S. Ct. at 2061-62.
 

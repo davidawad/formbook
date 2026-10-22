@@ -10,7 +10,7 @@ caption:
     designation: "Plaintiff-Appellant,"
   - names: ["LEE SAWYZER SANDERS,"]
     designation: "Defendant-Appellee"
-proceeding: "Appeal from the District Court of Shawnee County, Kansas  \nHonorable Mark Braun, District Judge"
+proceeding: "Appeal from the District Court of Shawnee County, Kansas<br>Honorable Mark Braun, District Judge"
 trial_court_case: "District Court Case No. 16 CR 2341"
 brief_title: "Reply Brief of Appellant"
 counsel:

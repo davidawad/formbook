@@ -45,13 +45,13 @@ Perhaps recognizing this jurisdictional impediment, Plaintiffs amended their not
 
 1\. Plaintiffs originally filed their Petition in this lawsuit in Shawnee County District Court on June 1, 2021. They asserted fourteen claims, attacking (on a vast array of different constitutional theories) four discrete election integrity statutes passed by the Legislature in 2021. Specifically, they challenged:
 
-a. New criminal provisions related to the false representation of election officials (H.B. 2183, Â§ 3(a)(2), (3)) (codified at K.S.A. 25-2438(a)(2), (3)); 
+a\. New criminal provisions related to the false representation of election officials (H.B. 2183, Â§ 3(a)(2), (3)) (codified at K.S.A. 25-2438(a)(2), (3)); 
 
-b. The signature verification requirement for advance mail voting ballots (H.B. 2183, Â§ 5(h)) (codified at K.S.A. 25-1124(h));
+b\. The signature verification requirement for advance mail voting ballots (H.B. 2183, Â§ 5(h)) (codified at K.S.A. 25-1124(h));
 
-c. Restrictions on the collection of advance mail voting ballots (H.B. 2183, Â§ 2) (codified at K.S.A. 25-2437); and
+c\. Restrictions on the collection of advance mail voting ballots (H.B. 2183, Â§ 2) (codified at K.S.A. 25-2437); and
 
-d. Prohibitions on persons/entities not residing in Kansas from sending advance mail ballot applications to Kansas registered voters (H.B. 2332, Â§ 3(1)(1)) (codified at K.S.A. 25-1122(!)(1)).
+d\. Prohibitions on persons/entities not residing in Kansas from sending advance mail ballot applications to Kansas registered voters (H.B. 2332, Â§ 3(1)(1)) (codified at K.S.A. 25-1122(!)(1)).
 
 2\. On June 18, 2021, Plaintiffs filed a motion for a partial temporary injunction in connection with their causes of action related to the false representation of an election official statute. Plaintiffs did not seek temporary injunctive relief on any other statute in their Petition.
 
@@ -77,13 +77,13 @@ d. Prohibitions on persons/entities not residing in Kansas from sending advance 
 
 This Court has no jurisdiction over Plaintiffs’ appeal due to the absence of a final judgment on all claims in the case. “Kansas appellate courts may exercise jurisdiction only under circumstances allowed by statute; the appellate courts do not have discretionary power to entertain appeals from all district court orders.” *Flores Rentals, L.L.C. v. Flores*, 283 Kan. 476, 481, 153 P.3d 523 (2007). In a Chapter 60 action such as the one in the case at bar, K.S.A. 60-2102 dictates that appellate jurisdiction generally extends only to the following:
 
-> (1) An order that discharges, vacates or modifies a provisional remedy.
+> \(1) An order that discharges, vacates or modifies a provisional remedy.
 >
-> (2) An order that grants, continues, modifies, refuses or dissolves an injunction, or an order that grants or refuses relief in the form of mandamus, quo warranto or habeas corpus.
+> \(2) An order that grants, continues, modifies, refuses or dissolves an injunction, or an order that grants or refuses relief in the form of mandamus, quo warranto or habeas corpus.
 >
-> (3) An order that appoints a receiver or refuses to wind up a receivership or to take steps to accomplish the purposes thereof, such as directing sales or other disposal of property, or an order involving the tax or revenue laws, the title to real estate, the constitution of this state or the constitution, laws or treaties of the United States.
+> \(3) An order that appoints a receiver or refuses to wind up a receivership or to take steps to accomplish the purposes thereof, such as directing sales or other disposal of property, or an order involving the tax or revenue laws, the title to real estate, the constitution of this state or the constitution, laws or treaties of the United States.
 >
-> (4) A final decision in any action, except in an action where a direct appeal to the supreme court is required by law. In any appeal or cross appeal from a final decision, any act or ruling from the beginning of the proceedings shall be reviewable.
+> \(4) A final decision in any action, except in an action where a direct appeal to the supreme court is required by law. In any appeal or cross appeal from a final decision, any act or ruling from the beginning of the proceedings shall be reviewable.
 
 ## A. This Court Has No Jurisdiction Over Plaintiffs’ Appeal of the Dismissal of their Claims Pursuant to KS.A. 60-212(b)(6) Because There Has Been No Final Judgment.
 

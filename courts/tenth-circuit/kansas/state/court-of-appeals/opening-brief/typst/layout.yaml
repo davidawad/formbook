@@ -1,0 +1,83 @@
+# Court of Appeals of Kansas (kanctapp): opening-brief. The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). The Kansas
+# rule text was not retrieved (../rules.md): every number follows the filed exemplars (KANCTAPP-FORM-*, kind C) or is
+# a style choice of the template; lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant.
+size: 13                  # KANCTAPP-FORM-002: Times New Roman at about 13 pt, footnotes the same
+pitch:
+  body: 29.9              # KANCTAPP-FORM-003: double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # KANCTAPP-FORM-004: one inch on every side
+indent: 36
+page_number: {align: center, from: 1}   # KANCTAPP-FORM-004: numbered at the bottom, the cover is page 1
+footnote: {size: 13, pitch: single, gap: 7}   # KANCTAPP-FORM-002, -003: the text's size, single spaced
+quote: {left: 36, right: 36, above: 10.4, below: 15.6}   # KANCTAPP-FORM-003: block quotations single spaced, indented
+heading:
+  - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
+  - {bold: true, hang: 36, above: 15.6, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# KANCTAPP-CONT-001: the cover: the case number, the court, the caption with each party's designation, the appeal
+# line and the district court case number, the title, the counsel block.
+cover:
+  - {text: "IN THE COURT OF APPEALS OF THE STATE OF KANSAS", align: center, bold: true}
+  - {text: "No. {case_number}", align: center, bold: true, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, above: 21.6}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 72}
+  - each: counsel
+    above: 72
+    blocks:
+      - {text: "{names}", bold: true, left: 230.4, above: 7.8}
+      - {text: "{lines}", left: 230.4, optional: true}
+  - {text: "{phone}", left: 230.4, optional: true}
+# KANCTAPP-CONT-002: the table of contents and the table of authorities, each on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 19.5, above: 11.7}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 19.5
+  above: 11.7
+  group: {bold: true, above: 15.6, below: 2.6}
+# KANCTAPP-CERT-001: the date line and the signature block (the firm, each signer's "/s/" and typed name, the
+# contact lines), never split; KANCTAPP-CERT-002: the certificate of service on a page of its own, signed again.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, pitch: body, optional: true}
+      - &signature
+        group:
+          - when: signature.firm
+            blocks:
+              - {text: "{signature.firm}", bold: true, left: 230.4, above: 5.2}
+          - when: signature.signer
+            blocks:
+              - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 10.4}
+              - {text: "{signature.signer}", left: 230.4}
+          - when: signature.signers
+            blocks:
+              - each: signature.signers
+                blocks:
+                  - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 10.4}
+                  - {text: "{name}", left: 230.4}
+                  - {text: "{lines}", left: 230.4, optional: true}
+          - {text: "{signature.lines}", left: 230.4, above: 7.8, optional: true}
+        above: 5.2
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 15.6}
+      - {text: "{service.paragraphs}", indent: 36, pitch: body}
+      - when: service.recipients
+        blocks:
+          - each: service.recipients
+            blocks:
+              - {text: "{.}", left: 72, above: 13}
+      - {text: "{service.closing}", indent: 36, pitch: body, optional: true}
+      - *signature
