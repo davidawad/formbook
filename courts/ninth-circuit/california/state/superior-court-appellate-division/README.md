@@ -6,11 +6,11 @@
 - Level: state-appellate
 - Circuit: `ca9`
 - State / territory: California
-- Status: **todo** (0%); manual status in `court.json`: `todo`
+- Status: **in progress** (14%); manual status in `court.json`: `todo`
 
 ## Checklist
 
-- [ ] `rules.md` present
+- [x] `rules.md` present
 - [ ] `usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)
 - [ ] `usage/` has at least 2 INPUT .md samples
 - [ ] typst engine passes (`usage/.check-typst.txt` valid)
@@ -18,7 +18,7 @@
 - [ ] docx engine passes (`usage/.check-docx.txt` valid)
 - [ ] a review file in `reviews/`
 
-Engines (doc folders passing / with that template): typst `—`, latex `—`, docx `—`.
+Engines: typst `—`, latex `—`, docx `—`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and every doc folder under it with a `usage/INPUT-*.md` has a valid `usage/.check-typst.txt` stamp (`just eval` writes them; the default checks are `data/checks-default.yaml`).

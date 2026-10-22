@@ -5,9 +5,9 @@ Courts under `courts/third-circuit/pennsylvania/state` (3).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Commonwealth Court of Pennsylvania](commonwealth-court) | `pacommwct` | up for review | 7/7 | — | — | 29 |
-| [Superior Court of Pennsylvania](superior-court) | `pasuperct` | up for review | 5/5 | — | — | 29 |
-| [Supreme Court of Pennsylvania](supreme-court) | `pa` | in progress | 8/9 | — | — | 29 |
+| [Commonwealth Court of Pennsylvania](commonwealth-court) | `pacommwct` | up for review | — | — | — | 29 |
+| [Superior Court of Pennsylvania](superior-court) | `pasuperct` | up for review | — | — | — | 29 |
+| [Supreme Court of Pennsylvania](supreme-court) | `pa` | in progress | — | — | — | 29 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->

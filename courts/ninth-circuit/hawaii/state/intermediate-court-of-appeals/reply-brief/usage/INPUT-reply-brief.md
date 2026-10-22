@@ -1,0 +1,171 @@
+---
+# transcribed from FILED-EXAMPLE-reply-brief.pdf (pp. 1-12; body is pp. 3-12, printed pp. 1-10)
+# omitted: the cover's CIVIL NO. line and its "APPEAL FROM" list of orders (no frontmatter key for them); the ECF stamp; the signature date line is kept only as the date key
+# no certificate of service or appendix appears in the exemplar
+# signature.firm: no firm line is printed above the signature; the firm from the counsel block is used
+case_number: "CAAP-22-0000268"
+court_lines: ["IN THE INTERMEDIATE COURT OF APPEALS", "STATE OF HAWAI‘I"]
+caption:
+  - names: ["PUALANI KANAKA‘OLE KANAHELE", "EDWARD HALEALOHA AYAU", "KELI‘I W. IOANE, JR."]
+    designation: "Plaintiffs-Appellants,"
+  - names: ["STATE OF HAWAI‘I", "DEPARTMENT OF TRANSPORTATION", "JADE BUTAY, in his official capacity as director of the Department of Transportation", "DEPARTMENT OF LAND AND NATURAL RESOURCES", "SUZANNE CASE, in her official capacity as the director of the Department of Land and Natural Resources", "DEPARTMENT OF HAWAIIAN HOME LANDS", "HAWAIIAN HOMES COMMISSION", "WILLIAM J. AILĀ, JR., in his official capacity as the director of the Department of Hawaiian Home Lands and Chair of the Hawaiian Homes Commission", "PATRICIA A. KAHANAMOKU-TERUYA, RANDY K. AWO, PAULINE N. NAMU‘O, ZACHARY Z. HELM, DENNIS L. NEVES, MICHAEL L. KALEIKINI, RUSSELL K. KAUPU, and DAVID B. KA‘APU, in their official capacities as members of the Hawaiian Homes Commission"]
+    designation: "Defendants-Appellees."
+proceeding: "FIRST CIRCUIT COURT"
+judges: ["Judge: Honorable Lisa W. Cataldo"]
+brief_title: "PLAINTIFFS-APPELLANTS’ REPLY BRIEF"
+counsel:
+  - names: ["DAVID KAUILA KOPPER", "9374"]
+    lines: ["NATIVE HAWAIIAN LEGAL CORPORATION", "1164 Bishop Street, Suite 1205", "Honolulu, Hawai‘i 96813", "Telephone: (808) 521-2302"]
+  - names: ["ASHLEY K. OBREY", "9199"]
+    lines: ["NATIVE HAWAIIAN LEGAL CORPORATION", "1164 Bishop Street, Suite 1205", "Honolulu, Hawai‘i 96813", "Telephone: (808) 521-2302"]
+counsel_for: "Attorneys for Plaintiffs-Appellants Pualani Kanaka‘ole Kanahele, Edward Halealoha Ayau, and Keli‘i W. Ioane, Jr."
+signature:
+  firm: "NATIVE HAWAIIAN LEGAL CORPORATION"
+  signer: "DAVID KAUILA KOPPER"
+  role: "Attorneys for Plaintiffs-Appellants Pualani Kanaka‘ole Kanahele, Edward Halealoha Ayau, and Keli‘i W. Ioane, Jr."
+date: "Honolulu, Hawai‘i, November 28, 2022"
+authorities:
+  wong: {kind: case, name: "Wong v. Cayetano", cite: "111 Hawai‘i 462, 143 P.3d 1 (2006)"}
+  pennymac: {kind: case, name: "Pennymac Corp. v. Godinez", cite: "148 Hawai‘i 323, 474 P.3d 264 (2020)"}
+  gold-coast: {kind: case, name: "Gold Coast Neighborhood Ass'n v. State", cite: "140 Hawai‘i 437, 403 P.3d 214 (2017)"}
+  santos: {kind: case, name: "Santos v. Perreira", cite: "2 Haw. App. 387, 633 P.2d 1118 (1981)"}
+  bush-watson: {kind: case, name: "Bush v. Watson", cite: "81 Hawai‘i 474, 918 P.2d 1130 (1996)"}
+  ching: {kind: case, name: "Ching v. Case", cite: "145 Hawai‘i 148, 449 P.3d 1146 (2019)"}
+  pdf: {kind: case, name: "Pele Def. Fund v. Paty", cite: "73 Haw. 578, 837 P.2d 1247 (1992)"}
+  pash: {kind: case, name: "Public Access Shoreline Hawaii v. Hawai‘i County Planning Comm’n", cite: "79 Hawai‘i 425, 903 P.2d 1246 (1995)"}
+  ahia: {kind: case, name: "Ahia v. Dep’t of Transp.", cite: "69 Haw. 538, 751 P.2d 81 (1988)"}
+  ahuna: {kind: case, name: "Ahuna v. DHHL", cite: "64 Haw. 327, 640 P.2d 1161 (1982)"}
+  oha-hcdc: {kind: case, name: "Office of Hawaiian Affairs v. Hous. & Cmty. Dev. Corp.", cite: "117 Hawai‘i 174, 177 P.3d 884 (2008)"}
+  oha-state: {kind: case, name: "Office of Hawaiian Affairs v. State", cite: "110 Hawai‘i 338, 133 P.3d 767 (2006)"}
+  aged-hawaiians: {kind: case, name: "Aged Hawaiians v. Hawaiian Homes Comm’n", cite: "78 Hawai‘i 192, 891 P.2d 279 (1995)"}
+  ex-parte-young: {kind: case, name: "Ex Parte Young", cite: "209 U.S. 123 (1908)"}
+  adams: {kind: case, name: "Adams v. Dole Food Co.", cite: "132 Hawai‘i 478, 323 P.3d 122 (ICA 2014)"}
+  kahoohanohano: {kind: case, name: "Kaho‘ohanohano v. State", cite: "114 Hawai‘i 302, 162 P.3d 696 (2007)"}
+  kapiolani: {kind: case, name: "Kapiolani Park Pres. Soc’y v. Honolulu", cite: "69 Haw. 569, 751 P.2d 1022 (1988)"}
+  umberger: {kind: case, name: "Umberger v. Dep’t of Land & Nat. Res.", cite: "140 Hawai‘i 500, 403 P.3d 277 (2017)"}
+  carmichael: {kind: case, name: "Carmichael v. Bd. of Land & Nat. Res.", cite: "150 Hawai‘i 547, 506 P.3d 211 (2022)"}
+  flores: {kind: case, name: "Flores v. Logan", cite: "151 Hawai‘i 357, 513 P.3d 423 (2022)"}
+  act14: {kind: other, cite: "Act 14 (1995)"}
+  act395: {kind: other, cite: "Act 395"}
+  hhca: {kind: statute, cite: "HHCA"}
+  hrs26-19: {kind: statute, cite: "HRS § 26-19"}
+  hrs264: {kind: statute, cite: "HRS ch. 264"}
+  hrs264-1: {kind: statute, cite: "HRS § 264-1"}
+  hrs264-6: {kind: statute, cite: "HRS § 264-6"}
+  hrs264-12: {kind: statute, cite: "HRS § 264-12"}
+  hrs264-13: {kind: statute, cite: "HRS § 264-13"}
+  hrs264-14: {kind: statute, cite: "HRS § 264-14"}
+  hrs264-17: {kind: statute, cite: "HRS § 264-17"}
+  hrs673: {kind: statute, cite: "HRS ch. 673"}
+  hrs673-2: {kind: statute, cite: "HRS § 673-2"}
+  har10-2-42: {kind: regulation, cite: "HAR § 10-2-42"}
+  cfr43-47: {kind: regulation, cite: "43 CFR Part 47"}
+---
+
+## INTRODUCTION
+
+This case is only about the State’s taking[^1] of trust lands. To avoid recourse for that taking, Defendants build a strawman and miscast Plaintiffs’ claims as based on the same “public use” that Act 14 purported to resolve. Their misrepresentation fail. Plaintiffs are not suing to close the Access Road nor determine the public’s rights to use it. Because Defendants do not dispute that they breached their fiduciary duties and the law, and because Plaintiffs have a right to protect trust assets when their trustees fail them, this Court should reverse and vacate the circuit court below and grant partial summary judgment in favor of Plaintiffs.
+
+## ACT 14 (1995) DOES NOT BAR PLAINTIFFS’ CLAIMS THAT AROSE IN 2018
+
+### ACT 14 CANNOT HAVE THE EFFECT OF RES JUDICATA
+
+Defendants argue that Act 14 precludes Plaintiffs’ claims through res judicata, which requires Defendants to prove that the challenged claims arose at the same time and based on “the same set of facts” as the previously resolved claims. [Act 14 § 4](toa:act14); [*Wong v. Cayetano*, 111 Hawai‘i 462, 478, 143 P.3d 1, 17 (2006)](toa:wong); [*Pennymac Corp. v. Godinez*, 148 Hawai‘i 323, 327, 474 P.3d 264, 268 (2020)](toa:pennymac). They cannot do so as the 2018 designation occurred 40 years after Act 14’s claim period ended, and Defendants harmed beneficiaries in a way not addressed by Act 14.
+
+The claims subject of this appeal arose on March 15, 2018 when Defendants, for the first time, took the Access Road lands out of the Hawaiian home lands trust and placed it into DOT’s inventory by designating it for inclusion into the State Highways System. Dkt. #87 at 23; Dkt. #80 at 10 ¶ 61. That taking, and the acquiescence to it, occurred 40 years after the end of the Act 14 claims period. It is impossible for Act 14 to preclude new claims that did not exist in 1988.
+
+To avoid the limits of Act 14 and res judicata, Defendants argue that the 2018 designation is a continuation of the same “public use” that Act 14 purported to resolve in 1995. Answering Brief at 18-22. It is not. For roads and highways, Act 14 only sought to remedy “uncompensated public uses of Hawaiian home lands.” Dkt. #95 at 24 (emphasis added). The legislature considered the “public use” of trust lands for roads a different “category” of land claims than those related to “permanent reservation of trust lands,” “alienation of trust lands,” or lands that were intended to be part of the trust but were not in the DHHL’s inventory. *Id.* at 4.
+
+Unlike the past public use of trust lands Act 14 resolved, the 2018 designation triggered entirely new breaches of trust through the State’s taking of the effective ownership of trust lands. The 2018 designation unilaterally removed the “maintenance and operation” of the road from the home lands trust and placed it with DOT for the first time and in a way that was never done with any other agency previously. [HRS § 26-19](toa:hrs26-19). The designation allows DOT to close and restrict use of the Access Road at its own discretion. It prohibits DHHL and beneficiaries from installing infrastructure on or near the road without obtaining a written permit. [HRS § 264-6](toa:hrs264-6). It prohibits DHHL and beneficiaries from connecting a new road or access to the Access Road without a DOT permit. [HRS § 264-14](toa:hrs264-14). It allows DOT and the governor to further encumber or alienate the Access Road by granting “easements within” and “access rights along” the Access Road and adjoining trust lands. [HRS § 264-13](toa:hrs264-13). It gives DOT the ability to seek fines or imprisonment of “any person, including any public officer or employee” including DHHL and their beneficiaries who do not obtain required permits from DOT. [HRS § 264-12](toa:hrs264-12). As DOT can only designate roads that it or the County owns in fee simple for inclusion in the State Highways System, see [HRS § 264-1](toa:hrs264-1) (requiring a deed of conveyance accepted by the Director of DOT), its 2018 designation is tantamount to a seizure of title of those lands from the trust. This taking of the effective ownership of trust lands violates the Hawaiian Homes Commission Act and Defendants’ trust duties. [HHCA § 206](toa:hhca) (“The powers and duties of the governor . . . shall not extend to [trust lands], except as specifically provided in [the HHCA].”); [*id.* § 204](toa:hhca) (“[A]ll available lands shall immediately assume the status of Hawaiian home lands and be under the control of the [Department] to be used and disposed of in accordance with the provisions of this Act[.]”); [HAR § 10-2-42](toa:har10-2-42) (requiring approval of the Commission for land dispositions).
+
+This taking of trust lands is part of a materially different transactional nucleus of facts than that addressed by Act 14. Defendants admit that the State historically acknowledged DHHL Defendants’ continuing effective ownership over the subject lands when it returned them to DHHL in 1976. Answering Brief at 11; Dkt. #92 at 10; Answering Brief at 11. They also admit that, as the public continued to use the Access Road until 2018, Hawaiʻi County, in 1983, acknowledged the DHHL Defendants’ continuing management and control over the road and accepted only maintenance obligations for it while recognizing that the Access Road is situate on trust lands. Answering Brief at 11; Dkt. #94 at 87. They therefore concede that Act 14 addressed only the use of DHHL lands by the public while those lands were in the Hawaiian home lands trust inventory and not the taking of trust lands.
+
+The difference between the public’s use and DOT taking trust lands through its invocation of [chapter 264](toa:hrs264) is legally significant. Long-term public use of a road, even that which may create public rights,[^2] is distinguishable from a road’s status as a State or public road or highway pursuant to statute. In [*Gold Coast Neighborhood Ass'n v. State*, 140 Hawai‘i 437, 403 P.3d 214 (2017)](toa:gold-coast), the Court held that, while long term public use of a seawall created a public easement through implied dedication, such a claim is separate and distinct from a statutory transfer of title pursuant to [chapter 264](toa:hrs264). See [*Gold Coast*, 140 Hawai‘i at 454, 403 P.3d at 231](toa:gold-coast). In [*Santos v. Perreira*, 2 Haw. App. 387, 633 P.2d 1118 (1981)](toa:santos), the Intermediate Court of Appeals rejected an argument that historic use of a road made it a public highway, though the Court found alternative basis for a right of way based on use. [*Santos*, 2 Haw. App. At 390, 633 P.2d at 1122)](toa:santos).
+
+The 2018 designation is distinct from the Act 14 claims period not only by time, which is enough to overcome res judicata; it is also a completely distinct and new legal harm caused by new acts and omissions that did not previously occur. Plaintiffs are able to sue to stop these new breaches of trust.[^3]
+
+### DEFENDANTS HAVE HARMED BENEFICIARIES AND THE TRUST
+
+The State’s argument that the 2018 designation caused no injury entitling Plaintiffs to relief (i.e., standing) fails. Answering Brief at 27-29. The law does not require injury-in fact and, even if it did, Defendants harmed beneficiaries by taking, and allowing the taking of, trust lands.
+
+[HRS chapter 673](toa:hrs673) permits suit for breach of trust without injury-in-fact. Any “native Hawaiian” beneficiary of the Hawaiian home lands trust “shall have the right to bring an action” under the chapter. [HRS § 673-2](toa:hrs673-2). Further, the Supreme Court has repeatedly recognized the ability of Native Hawaiian trust beneficiaries to bring claims for declaratory and injunctive relief to remedy ongoing breaches of trust without a waiver of sovereign immunity. *See* [*Bush v. Watson*, 81 Hawai‘i 474, 918 P.2d 1130](toa:bush-watson) (holding that beneficiaries have standing to challenge the Hawaiian Homes Commission’s decision to approve agreements between homestead lessees and third parties); [*Ching v. Case*, 145 Hawai‘i 148, 174, 449 P.3d 1146, 1172 (2019)](toa:ching) (finding standing where “the trust duty that the Plaintiffs allege the State has breached is a duty the State owes to the Plaintiffs”); [*Pele Def. Fund v. Paty*, 73 Haw. 578, 594, 837 P.2d 1247, 1258 (1992)](toa:pdf) (“PDF”) (“[A]dditionally, unless members of the public and native Hawaiians, as beneficiaries of the trust, have standing, the State would be free to dispose of the trust res without the citizens of the State having any recourse.”); [*Public Access Shoreline Hawaii v. Hawai‘i County Planning Comm’n*, 79 Hawai‘i 425, 434 n.15, 903 P.2d 1246, 1255 n.15 (1995)](toa:pash) (recognizing “the need to avoid foreclosing challenges to administrative determinations through restrictive applications of standing requirements”) (internal quotations, brackets, and citations omitted).
+
+Regardless, Defendants harmed Plaintiffs as trust beneficiaries. As a result of the 2018 designation and DHHL Defendants’ acquiescence to it, the Hawaiian home lands trust was depleted of both land and revenue. Beneficiaries can no longer benefit from income generated by those lands or use it for infrastructure or access to other lands in the area for homesteading purposes. Plaintiffs testified to the harms these acts and omissions have caused. Plaintiff Kanakaʻole-Kanahele noted, “[t]hirty eight years after the [*Ahuna*](toa:ahuna) decision, I am being personally affected by DHHL Defendants making the same mistake as they did back then, allowing the government to use trust lands for non-trust purposes, without lawful authority or compensation.” Dkt. #85 at 3. Plaintiff Ioane testified that, as “a beneficiary who is still waiting, I am irreparably harmed by the mismanagement of Trust resources that results in extending my wait even a day longer.” *Id.* at 17. Plaintiff Ayau, who resigned from his employment with DHHL due to his concerns over trust mismanagement, testified that “it is critical to make use of all trust assets wisely and efficiently so the benefits of the trust can be maximized” to remedy the growing waitlist “for homestead leases [that] now exceeds 28,000 applicants.” *Id.* at 7-14.[^4] (emphasis added). Defendants’ actions deprived Plaintiffs and all beneficiaries of their seats at the table when trust lands are alienated, as is contemplated by federal law and DHHL’s own consultation policy. *See* [43 CFR Part 47](toa:cfr43-47). Beneficiaries are injured when there is less revenue and land to support homesteading, *see, e.g.*, [*Ahia v. Dep’t of Transp.*, 69 Haw. 538, 550, 751 P.2d 81, 89 (1988)](toa:ahia) (recognizing that leasing trust lands generates revenues which supports homesteading), when the interests of the public are given undue weight over interests of beneficiaries, [*Ahuna v. DHHL*, 64 Haw. 327, 331, 640 P.2d 1161, 1164 (1982)](toa:ahuna) (finding a breach of trust where DHHL withheld trust lands from beneficiaries for a prospective public roadway transaction), and when the government breaches their duties when managing trust land. [*Office of Hawaiian Affairs v. Hous. & Cmty. Dev. Corp.*, 117 Hawai‘i 174, 214, 177 P.3d 884, 924 (2008)](toa:oha-hcdc) (“OHA”) (“Aina . . . is of crucial importance to the [n]ative Hawaiian [p]eople -- to their culture, their religion, their economic self-sufficiency and their sense of personal and community well-being. . . .To [n]ative Hawaiians, land is not a commodity; it is the foundation of their cultural and spiritual identity as Hawaiians.”). Defendants have violated their trust duties. Plaintiffs must be able to sue to require them to act in the best interests of their beneficiaries.
+
+### PLAINTIFFS HAVE BEEN CONSISTENT
+
+Defendants argue that Plaintiffs have been inconsistent. *See* Answering Brief at 20 (misrepresenting that Plaintiffs’ pled their “injuries and breach of trust claims stem from the uncompensated use of MKAR as a public road in general”). The record belies their argument.
+
+Plaintiffs have consistently cited to the 2018 designation’s taking of trust lands as the source of their claims. Defendants provided incomplete and misleading excerpts of the First Amended Complaint, Answering Brief at 20, leaving out Plaintiffs’ specific allegations connecting the 2018 designation to Defendants’ breaches of trust and Plaintiffs’ injuries:
+
+> *DOT Asserts Control Over The MKAR*
+>
+> 64\. On March 15, 2018, the DOT purportedly approved the designation of 6.27 miles of the MKAR between the intersection with Daniel K. Inouye Highway (Route 200) up to125 feet past the Visitor Information Center entrance as State Highway Route 210.
+>
+> 65\. On July 15, 2019, the DOT, with the assistance of the DOCARE and the DLNR, closed the MKAR to the public to allow for the transport of equipment and materials for the construction of the Thirty Meter Telescope, allegedly pursuant to HRS chapter 264.
+>
+> 66\. On August 30, 2019, the Department of the Attorney General, DHHL, and the DOT issued a joint statement asserting DOT control and authority over the MKAR.
+>
+> 67\. The joint statement declared that “all claims regarding use of roads and highways crossing DHHL lands have been resolved.”
+>
+> 68\. Defendants State of Hawaiʻi, DOT, DLNR, DHHL and their respective officials, continue to assert that the DOT has control and legal authority over the MKAR.
+>
+> 69\. DHHL Defendants continue to collaborate with, and defer to, State Defendants in matters dealing with the control and legal authority over the MKAR.
+
+Dkt. #12 ¶¶ 64-69. Plaintiffs also pled that “State Defendants have breached their trust duties by exercising control and legal authority over the MKAR by designating [it] as part of the State Highway System.” *Id.* ¶102 (emphasis added). Plaintiffs consistently cite to the 2018 designation as the genesis of their claims throughout this action, *See* Dkt. #62 at 2, 4, 11, and 14 (noting that Plaintiffs’ claims seek “declaratory relief . . . prospective injunctive relief, and . . . damages to restore the [] trust for the State designation of the [Access Road] as State Highway Route 210 in violation of its constitutionally-based trust duties.”); Dkt. #84 at 19-27 (citing to the 2018 designation as the cause of Defendants’ breach of trust). Plaintiffs also made clear that they are seeking relief from State Defendants’ taking of trust lands and DHHL Defendants’ acquiescence in that taking, not the public’s use of said trust lands. Dkt. #12 (lacking any reference to “public use” as a basis for Plaintiffs’ claims); Dkt. #84 (same); Opening Brief (same). Defendants misrepresented the record.
+
+It is inconsequential that Plaintiffs also pled that State Defendants misused trust lands beyond the 2018 designation. Answering Brief at 25-29. Hawai‘i adopts a liberal notice pleading standard and permits parties to plead in the alternative even if those claims are mutually exclusive.
+
+> At the time a complaint is filed, the parties are often uncertain about the facts and the law; and yet, prompt filing is encouraged and often required by a statute of limitations, laches, the need to preserve evidence and other such concerns. In recognition of these uncertainties, we . . . allow pleadings in the alternative—even if the alternatives are mutually exclusive. As the litigation progresses, and each party learns more about its case and that of its opponents, some allegations fall by the wayside as legally or factually unsupported. . . . Parties usually abandon claims because, over the passage of time and through diligent work, they have learned more about the available evidence and viable legal theories, and wish to shape their allegations to conform to these newly discovered realities. We do not call this process sham pleading; we call it litigation.
+
+[*Adams v. Dole Food Co.*, 132 Hawai‘i 478, 486, 323 P.3d 122, 130 (ICA 2014)](toa:adams). Defendants have a history of abuse of trust lands, and Plaintiffs wished to plead that abuse out of an abundance of caution. That does not affect their claims.
+
+## THIS COURT CAN RULE ON THE STATE’S VIOLATION OF CHAPTER 264
+
+Defendants’ private right of action argument is an irrelevant distraction done in an effort to prevent Plaintiffs from suing to stop ongoing breaches of trust.
+
+Plaintiffs do not bring their claims under [chapter 264](toa:hrs264) like Defendants misrepresent; they bring breach of trust claims based on the taking of trust lands. It was Defendants who invoked [chapter 264](toa:hrs264) to remove trust lands into DOT’s inventory. Dkt. #87 at 25-26; Dkt. #80 at 10 ¶ 63 (Defendants’ joint statement that “[The Access Road] is under the control and jurisdiction of DOT. Pursuant to [HRS §26-19](toa:hrs26-19) and [HRS Ch. 264](toa:hrs264), DOT has control and jurisdiction over all state highways and [the Access Road] is designated to DOT’s State Highway System as Route 210. This includes any portions of the road that cross over DHHL land.”).
+
+Defendants’ non-compliance with [chapter 264](toa:hrs264) is reachable by Plaintiffs’ breach of trust claims. In [*Ching v. Case*](toa:ching), Native Hawaiian traditional and customary practitioners sued the State for breaching its trust duties. See [*Ching*, 145 Hawai‘i at 154, 449 P.3d at 1152](toa:ching). The plaintiffs alleged the State breached their duties by failing to enforce or otherwise follow provisions in a lease to the United States Army that required clean-ups and annual inspections of leased property by the State. [*Id.*](toa:ching) In response, the State argued that such action was akin to a breach of contract that required joinder of the Army. [*Id.* at 169-70, 449 P.3d at 1167-68](toa:ching). The Court rejected that characterization and concluded that the State’s failure to follow and enforce the subject contract was redressable on plaintiffs’ breach of trust claim without joining the Army. *See* [*id.*](toa:ching). Similarly here, Plaintiffs raised [chapter 264](toa:hrs264) in the context of Defendants’ breaches of trust. *See* Dkt. #84 at 13 (“[HRS chapter 264](toa:hrs264) is not a legal cure for [Defendants] to comply with the terms of the Act and its trust duties.”). A declaration regarding [chapter 264](toa:hrs264) is material to Plaintiffs’ breach of trust claims as Defendants have used that chapter as cover for its taking of trust lands. See Dkt. #87 at 25-26; 80 at 10 ¶ 63.[^5] A private right of action is not necessary or relevant here.
+
+## PLAINTIFFS’ CLAIMS ARE NOT PRECLUDED BY SOVEREIGN IMMUNITY
+
+### PLAINTIFFS’ CLAIMS ARE AUTHORIZED BY ACT 395
+
+Defendants argue that Act 395 prevents Plaintiffs’ damages claims. Defendants have not proven that the 2018 designation is a government activity that was established prior to July 1, 1988. See Answering Brief at 33-39. Their argument fails.
+
+As a result of the passage of Act 395, the State waived its immunity for “any breach of trust or fiduciary duty resulting from [] acts or omissions . . . in the management and disposition of trust funds and resources of …[t]he Hawaiian home lands [.]” [Act 395 § 2](toa:act395). However, Defendants argue that under the terms of [Act 395 § 4](toa:act395), suits are barred for “projects, programs, or any other governmental activities which are continuing, and which were begun, completed, or established prior to July 1, 1988.” “‘Program’ is generally defined as ‘a plan or system under which action may be taken toward a goal.’ ‘Project’ is defined as ‘a specific plan or design’ or ‘a planned undertaking.’” See [*Umberger v. Dep’t of Land & Nat. Res.*, 140 Hawai‘i 500, 513, 403 P.3d 277, 290 (2017)](toa:umberger)). Activity is “behavior or actions of a particular kind.”[^6]
+
+Continuing actions under new legal authorizations are new activities. In *Umberger*, the Court found that aquarium collection activities that occurred for years prior constituted a new project or program where that activity was previously authorized by renewed yearly permits. [*Umberger*, 140 Hawai‘i at 513-516, 403 P.3d at 290-293](toa:umberger). In [*Carmichael v. Bd. of Land & Nat. Res.*](toa:carmichael), the Court found that water diversions made under revocable permits annually for decades constituted a new project or program when authorized by a renewed permit. *See* [*Carmichael v. Bd. of Land & Nat. Res.*, 150 Hawai‘i 547, 570, 506 P.3d 211, 234 (2022)](toa:carmichael). There, the Court found that each new disposition changed the “status quo” because without those dispositions, the applicant “would have retained no rights at all” to the subject resource. *Id.*
+
+Like the dispositions in [*Carmichael*](toa:carmichael) and [*Umberger*](toa:umberger), the 2018 designation changed the status quo. It purports to provide State Defendants with the ultimate jurisdiction and control over trust lands that would not have existed but for the designation. *See* Section II.B., *supra*. That designation, which occurred for the first time on March 15, 2018, was a new “program” “project” or “activity” that constituted a new commitment to take the MKAR out of its trust inventory and into the State Highway System for the first time in 2018. Because the 2018 designation is a new program, project and activity post-dating July 1, 1988, sovereign immunity is waived for any related claims.
+
+### PLAINTIFFS’ NON-DAMAGES CLAIMS ARE PERMITTED
+
+Even assuming arguendo that Act 395 did not waive sovereign immunity for damages, Plaintiffs’ remaining claims survive. Answering Brief at 35-39.
+
+When “relief sought against a state official is prospective in nature, the relief is allowed regardless of the state’s sovereign immunity.” [*PDF*, 73 Haw. at 609-10, 837 P.2d at 1266](toa:pdf) (adopting [*Ex Parte Young*, 209 U.S. 123 (1908)](toa:ex-parte-young)). Relief is prospective if it stops continuing and ongoing violations. *See* [*id.* at 481-82, 918 P.2d at 1137-38](toa:bush-watson); [*Office of Hawaiian Affairs v. State*, 110 Hawai‘i 338, 357, 133 P.3d 767, 786 (2006)](toa:oha-state) (“If there is a continuing violation of or ongoing breach resulting from a past action, then prospective relief . . . is available.”); [*Aged Hawaiians v. Hawaiian Homes Comm’n*, 78 Hawai‘i 192, 208 n.26, 891 P.2d 279, 295 (1995)](toa:aged-hawaiians) (“Trust beneficiaries have the right to (a) compel the performance of trust duties, (b) enjoin the commission of a breach of trust by the trustee, and (c) compel the trustee to redress a breach of trust.”). This is true even where there is a “substantial ancillary effect on the state treasury.” [*PDF*, 73 Haw. at 609-10, 837 P.2d at 1266](toa:pdf). Only retrospective relief tantamount to damages, i.e., “a request for compensation for [] past actions” that has a “direct and unavoidable effect on the state treasury” is prohibited. [*Id.* At 611, 837 P.2d at 1267](toa:pdf) (emphasis added).
+
+Plaintiffs’ non-damages claims are not retrospective under [*PDF*](toa:pdf) as Defendants argue. Answering Brief at 37-39. In [*PDF*](toa:pdf), the Court concluded that imposing a constructive trust on an already consummated land transaction to a third party was retrospective, i.e., tantamount to damages, because it required the State to compensate the third-party purchaser of the property. [*PDF*, 73 Haw. at 584-85, 837 P.2d at 1253](toa:pdf). Plaintiffs here are not seeking to unwind any transaction that required consideration like [*PDF*](toa:pdf) as there was no such transaction; State Defendants unilaterally took trust lands without authority and in breach of the Act and its trust duties, and DHHL Defendants allowed that taking without complying with the law. No money or other consideration changed hands, so invalidating the 2018 designation and preventing further unlawful takings would have no effect on the treasury. There is no transaction to rewind.
+
+Plaintiffs only seek to stop “continuing violation[s] and ongoing breach[es.]” [*OHA v. State*, 110 Hawai‘i at 357, 133 P.3d at 786](toa:oha-state).[^7] Instead, the 2018 designation is void ab initio for violating the Act. See [*Bush v. Watson*, 81 Haw. 474, 487, 918 P.2d 1130, 1143 (1996)](toa:bush-watson) (holding that third party agreements were “void ab initio because they violate the HHCA”).
+
+Even if the 2018 designation was a mutual transaction requiring unwinding, [*PDF*](toa:pdf) still does not apply pursuant to the Court’s decision in [*OHA v. HCDC*](toa:oha-hcdc). See [*OHA*, 117 Hawai‘i at 199, 177 P.3d at 909](toa:oha-hcdc). In that case, the Court distinguished [*PDF*](toa:pdf) and recognized that where land “was transferred from one state agency to another . . . . [r]eturning the parcel to the public lands trust” would have an ancillary effect on the State treasury at most. [*Id.*, 117 Hawai‘i at 199, 177 P.3d at 909](toa:oha-hcdc). Here, like in [*OHA*](toa:oha-hcdc), DOT did not provide any substantial consideration, and the fee ownership of the underlying property remains with the State. There is no impact to the treasury by invalidating an unauthorized taking among State agencies where no money exchanged hands.
+
+Plaintiffs’ claims will not “turn[] back the clock” and affect the public’s use of the Access Road, as Defendants argue. Answering Brief at 37-39. Plaintiffs do not ask for any declaratory and injunctive relief regarding the public’s use and are not seeking a shutdown of the road. Whether the public’s historic use of the road has created a right-of-way is not relevant to this matter and is wholly separate from the Access Road’s legal status pursuant to [HRS 264](toa:hrs264). That the State previously expended money on infrastructure is also irrelevant because that infrastructure is still in use, and, ultimately, infrastructure expenditures have only an ancillary impact on the treasury. [*OHA*, 117 Hawai‘i at 200, 177 P.3d at 910](toa:oha-hcdc). Defendants cannot cry foul that this case will extinguish the Access Road’s legal status as a public or state highway because it never had that status; Defendants have never met the statutory requirements of [chapter 264](toa:hrs264) to turn the Access Road into a public or State Highway. Defendants are breaching their trust duties, and Plaintiffs are entitled to relief to end it.
+
+“[A]ll principles of equity” mandates that Plaintiffs be allowed to protect trust assets to prevent ongoing breaches of trust. [*Kapiolani Park Pres. Soc’y v. Honolulu*, 69 Haw. 569, 572-73, 751 P.2d 1022, 1025 (1988)](toa:kapiolani). Without recourse, there is nothing preventing their trust from continuing to fall into ruin on Defendants’ collective watch.
+
+[^1]: “Taking” is used to refer to the actual or effective acquisition of rights to real property. See Taking, Black’s Law Dictionary (11th ed. 2019).
+
+[^2]: Plaintiffs do not concede that the public has an easement over the road based on the limited record but instead cite to the Gold Coast line of cases to demonstrate the fundamental difference between public use and statutory dedication pursuant to chapter 264.
+
+[^3]: Because Plaintiffs do not seek to enforce Act 14 or address claims it resolved, Plaintiffs are not required to seek enforcement of Act 14 as Defendants argue. Answering Brief at 23. Ultimately, enforcement of Act 14 is irrelevant as there is no certainty that a “land exchange” involving unknown properties to resolve the past use of the Access Road would involve the Access Road itself or would otherwise result in ending the ongoing breaches of trust.
+
+[^4]: Further, Plaintiffs Ioane and Kanaka‘ole-Kanahele would not have been arrested on the Access Road but for the false pretense that it was a State highway. Dkt. #85 at 4 ¶ 28, 15 ¶11.
+
+[^5]: Even if Plaintiffs brought their claims pursuant to chapter 264, [*Flores v. Logan*](toa:flores) does not apply. See Answering Brief at 30. Unlike the statute at issue in *Flores*, which was not intended to provide “for the special benefit of private citizens[,]” [*Flores v. Logan*, 151 Hawai‘i 357, 367, 513, P.3d 423, 433 (2022)](toa:flores), chapter 264 concerns not only the State’s authority over public highways but also the public’s ability to use those lands. See, e.g., [HRS § 264-17](toa:hrs264-17) (requiring public hearings for major public highway projects allowing all interested persons to provide comment). In recognition of the public’s right of action under chapter 264, Hawai‘i’s appellate courts have consistently permitted declaratory actions by the public to determine whether a road is public pursuant to [HRS § 264-1](toa:hrs264-1). See *supra* Gold Coast v. State (collecting cases).
+
+[^6]: See http://www.merriam-webster.com/ dictionary/activity (last visited November 22, 2022).
+
+[^7]: Plaintiffs concede that its request for past monetary damages requires chapter 673’s waiver of sovereign immunity. However, they can seek injunctive relief preventing the State’s future uncompensated taking of trust lands. [*Kaho‘ohanohano v. State*, 114 Hawai‘i 302, 337, 162 P.3d 696, 731 (2007)](toa:kahoohanohano).

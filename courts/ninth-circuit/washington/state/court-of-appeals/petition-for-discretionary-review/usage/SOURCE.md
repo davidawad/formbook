@@ -1,0 +1,3 @@
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `petition-for-discretionary-review` — Petition for discretionary review | COLLECTED: 38 pp., text layer verified 2026-10-17; RAP 2.3 motion for discretionary review filed in COA Div. I; later transferred (SC No. 103730-9) | `FILED-EXAMPLE-petition-for-discretionary-review.pdf` | Amazon.com, Inc. (defendant-petitioner, counsel) | Scott v. Amazon.com, Inc., COA No. 84933-6-I | 2023-02-13 | https://www.courts.wa.gov/content/Briefs/A08/1037309%20COA%20103730-9%20Amazon%27s%20Motion%20for%20Discretionary%20Review.pdf | `8feee8be55bb68792ef90d411f7743c492b9211ad53a55878bda2868a0e17e7a` |

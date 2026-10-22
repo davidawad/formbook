@@ -146,9 +146,7 @@ In 2016, the City of Greenville (“the City”) and the Pitt County Board of Ed
 
 On 30 June 2016, the North Carolina General Assembly ratified Session Law 2016-64 (“S.L. 2016-64”) as a local act for the City and the Board. [R 4] In relevant parts, S.L. 2016-64 provides that:
 
-> A violation detected by a traffic control photographic system shall be deemed a non-criminal violation for which a civil penalty of one hundred dollars ($100.00) shall be assessed . . . .
->
-> ...
+> A violation detected by a traffic control photographic system shall be deemed a non-criminal violation for which a civil penalty of one hundred dollars ($100.00) shall be assessed . . . . ...
 >
 > The City of Greenville and the Pitt County Board of Education may enter into an interlocal agreement necessary and proper to effectuate the purpose and intent of G.S. 160A-300.1 and this act. Any agreement entered into pursuant to this section may include provisions on cost-sharing and reimbursement that the Pitt County Board of Education and the City of Greenville freely and voluntarily agree to for the purpose of effectuating the provisions of G.S. 160A-300.1 and this act. [R 16]
 

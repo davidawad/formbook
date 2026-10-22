@@ -1,0 +1,5 @@
+# RoP 7.02(B)(1), (D)(1), (D)(3) (rules.md OHIO-JURIS-001): the memorandum in support of jurisdiction is not longer than
+# 15 numbered pages, excluding the table of contents, signature block and certificate of service. Applied to the whole
+# rendered PDF (cover included), which is stricter; this render is 15 pages in all, cover and certificate included.
+params:
+  page_limit: 15

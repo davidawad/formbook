@@ -5,7 +5,7 @@ Courts under `courts/third-circuit/delaware/state` (1).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Delaware Supreme Court](supreme-court) | `del` | up for review | 5/5 | — | — | 29 |
+| [Delaware Supreme Court](supreme-court) | `del` | up for review | — | — | — | 29 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->

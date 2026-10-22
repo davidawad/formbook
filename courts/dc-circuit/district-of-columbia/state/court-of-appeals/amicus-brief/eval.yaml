@@ -1,0 +1,3 @@
+# DCCA Rule 32 (a) (4): the font size, including footnotes, must be 14-point or larger, in Times New Roman, Arial, or similarly readable typeface.
+font:
+  size_pt: 14

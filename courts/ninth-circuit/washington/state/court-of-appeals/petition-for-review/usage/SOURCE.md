@@ -1,0 +1,3 @@
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `petition-for-review` — Petition for review (agency order or state high court) | COLLECTED: 61 pp., text layer verified 2026-10-17; RAP 13.4(a): petition for review is filed in the Court of Appeals (bears COA Div. II file stamp), addressed to the Supreme Court | `FILED-EXAMPLE-petition-for-review.pdf` | Antio, LLC et al. (petitioners, Colvin + Hallett P.S.) | Antio, LLC v. Department of Revenue, COA No. 57312-1-II (SC No. 102223-9) | 2023-07-27 | https://www.courts.wa.gov/content/Briefs/A08/1022239%20Petition%20for%20Review.pdf | `b37350e02363dc026b48de53ac89f4d2560a1fe28ce92aadf297dfe4bbb7e648` |

@@ -1,0 +1,6 @@
+# DCCA Rule 32 (a) (4): the font size, including footnotes, must be 14-point or larger, in Times New Roman, Arial, or similarly readable typeface.
+font:
+  size_pt: 14
+# DCCA Rule 32 (a) (5): a principal brief may not exceed 50 pages; the tables required by Rule 28 (a) (1)-(4) do not count, so the whole-file count is a safe upper bound.
+params:
+  page_limit: 50
