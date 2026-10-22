@@ -7,7 +7,7 @@ Folder: `courts/first-circuit/rhode-island/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, 14 pages, memorandum ECF No. 7; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: the whole memorandum (introduction, facts, standard of review, argument with its four numbered sub-headings, conclusion), the five footnotes, the signature block and the certificate of service. Converted from the text layer and corrected by hand. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 15 pages, typst 0.15.0, vendored Times New Roman (Liberation Serif metrics) only, no warnings |
 | overlay | ok: `usage/OVERLAY-tablada-motion-brief.pdf` and `usage/OVERLAY-tablada-motion-brief.txt` |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -23,7 +23,7 @@ Primary sources, fetched 2026-10-14:
 | LR Cv 5(a) | 8 1/2 by 11 inch paper. | `page-w`, `page-h`. |
 | LR Cv 5(a)(1) | Full caption, names of all parties; filings after docketing carry the case number and the judge's initials. | `caption()`; `case_number: 1:26-cv-00118-MSM-AEM` in the sample. |
 | LR Cv 5(a)(2) | Title stating the nature of the document and the filer. | `brief_title`: "MEMORANDUM IN SUPPORT OF DEFENDANT, ROCKET MORTGAGE, LLC'S MOTION TO DISMISS". |
-| LR Cv 5(a)(3) | Double-spaced, at least 12-point type; footnotes at least 10-point, may be single-spaced. | `pitch = 27.6pt`, `body-leading = 1.65em`, `type-size = 12pt`, `footnote-size = 10pt` with single spacing (`show footnote.entry`). Pitch as measured on both exemplars (see complaint README). |
+| LR Cv 5(a)(3) | Double-spaced, at least 12-point type; footnotes at least 10-point, may be single-spaced. | `pitch-double = 27.6pt` (line boxes of the shared cross-engine model), `type-size = 12pt`, `footnote-size = 10pt` with single spacing (`show footnote.entry`). Pitch as measured on both exemplars (see complaint README). |
 | LR Cv 5(a)(3) | Pages numbered bottom center. | `set page(numbering: "1")`. |
 | LR Cv 5(a)(5) | Signature block: name, address, telephone, bar number, firm, email. | `signature`: `party`, `lead`, `signers` (name and bar), `firm`. |
 | LR Cv 7(a)(2)(A) | A motion states with particularity the grounds, the relief, and the legal argument. | Author content (this memorandum carries the argument). |
@@ -72,6 +72,8 @@ Every page was rendered at 60 dpi and viewed. Findings:
 | 13 | Conclusion, "Statement on oral argument", "Dated:" and the signature block. The lead line was missing. | Fixed: `signature.lead` ("Respectfully submitted by," as in the exemplar). Re-viewed. |
 | 14 | Certificate of service, text and "/s/" signer. | none |
 | 1-6, 10 | Headings I., II., III., IV. and A.-D. auto-numbered; footnotes 1 to 4 at the foot of their pages. | none |
+| 1-15 | (fb-595.68.17) Re-rendered on the shared cross-engine layout model (lib/typst/xengine.typ), Times New Roman, 15 pages: every page of typst and docx viewed at 45 dpi side by side; caption, title, headings I.-V. and A.-D., the four argument sub-headings, block quotation (double-spaced, half an inch in each side), footnotes 1-5 at the foot of their pages, oral-argument statement, signature block and certificate (page 15) correct; both engines break every line and page alike. | none |
+| 15 | The signature block and the certificate of service share page 15, after the conclusion on page 14 (each block is kept whole). | ACCEPTED (tier 2) |
 
 OPEN: none in the template.
 
@@ -82,7 +84,7 @@ OPEN: none in the template.
 3. **Oral argument statement.** LR Cv 7(c) requires the statement in motions and responses. The exemplar memorandum has none (the motion carries it). The template prints the statement from `oral_argument`. The sample's value ("not requested") is a placeholder, not a fact from the exemplar.
 4. **Page limit.** No page limit was found in the text of LR Cv 7 or LR Cv 5 as posted. Individual judges' practices were not checked. The template has no page check. The sample is 14 pages, the same as the exemplar.
 5. **Caption rule.** The party column is closed by a rule; the exemplar uses a ")" column. Recorded as a tier-2 choice.
-6. **Font.** LR Cv 5(a)(3) names no typeface (same check as the complaint, 2026-10-14), so EB Garamond is kept per `docs/FONTS.md`; it sets smaller than the exemplar's Times at the same size.
+6. **Font.** LR Cv 5(a)(3) names no typeface (same check as the complaint, 2026-10-14), so the template sets Times New Roman, the house standard (`docs/FONTS.md`) and the exemplar's face (fb-595.68.17; it was EB Garamond before).
 7. **Case names.** Not italicized in the sample (no italic markup in the text layer). A tier-2 gap for filers' italics; the template renders italics when they are marked.
 8. **Verbatim errors kept.** The exemplar's "Id..", "form the ECF system", "Respectfully submitted by," and "2018WL" spacing are transcribed as filed.
 9. **Certificate on its own page.** The certificate of service falls on page 14 by itself. The exemplar carries it on its last page with the end of the conclusion; the template starts it on the page the signature leaves.
@@ -93,11 +95,10 @@ LOG:
 
 ## Engines
 
-**typst** is the reference and is unchanged by the docx work.
+**typst** is the reference. Since fb-595.68.17 it is on the shared cross-engine layout model (`lib/typst/xengine.typ`: line boxes of 27.6 pt, 13.8 pt and 11.5 pt for footnotes, first fit, ragged right, no kerning or ligatures), and `eval.yaml` sets `params.cross_engine: gate`: the docx must break every line and page as typst does (XENG-001..003). The footnote clearance (`note-clearance`, 6 pt) is the room LibreOffice keeps above the footnotes: 2 to 9 pt break every page of the sample alike.
 
-**docx** (`docx/reference.docx` built by `docx/make-reference.sh`; `docx/rid-motion-brief.lua` for the cover, the heading labels, the statement on oral argument, the signature block and the certificate of service). Output: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice, 15 pages; typst is 14). Status: converts without error; every page of the docx PDF was viewed at 60 dpi beside the typst page of the same sample (pages_reviewed = 15). Not opened in Microsoft Word (not available here); the file is a valid zip with well-formed XML parts.
+**docx** (`docx/reference.xml`: the cross-engine style recipe in the typst face, built by `fb render`, with Heading 1 without capitals, a double-spaced Block Text and "Body Text Note"; `docx/rid-motion-brief.lua` writes the cover, headings, statement, signature and certificate on `lib/docx/xengine.lua`, and leaves body paragraphs, quotations and footnotes to pandoc). Output: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice, 15 pages). XENG-001..003 pass: 362/362 typst lines break after the same word, every page starts and ends on the same word. Every page viewed beside the typst page. Not opened in Microsoft Word (not available here).
 
-- *Matches typst (checked on the LibreOffice PDF):* US Letter, 1-inch margins; EB Garamond 12 pt (the only font embedded); double spacing at exact 27.6 pt; footnotes 10 pt, single spaced; block quotations indented 0.5 in on both sides, double spaced; the caption and cover; headings with the typst labels (I. INTRODUCTION centered; A. Tablada's Mortgage at the left; level 3 as written, bold); the statement on oral argument; the signature block with "Dated:", "Respectfully submitted by," and the same gaps as typst (measured on the PDF); the certificate of service on its own last page with its signer line; page number centered at the bottom of every page, arabic from 1.
-- *Differs (tier 2, not blocking):* (a) Pagination: the docx has one page more (15 against 14). The text drifts by a line or two per page because LibreOffice wraps some lines differently; the level 3 heading "1." of the Argument moves to page 8 (keep with next), which leaves about six blank lines at the foot of page 7; the conclusion and signature block fall on page 14 in the docx and page 13 in typst. The certificate is alone on page 15 in the docx and on page 14 in typst. (b) Footnote text wraps slightly wider in LibreOffice than in typst (same 10 pt size and line pitch), so footnote lines differ. (c) Every line sits about 3 pt lower than in the typst PDF (same cause as the complaint). (d) Heading labels are typed text, not Word numbering.
+- *Differs (tier 2, not blocking):* baselines within 1 pt of typst's. Heading labels are typed text, not Word numbering.
 - *BLOCKED:* none. This folder has no `checks.yaml`, so no check IDs exist for the docx; no Gate 1 check was run on the docx. No tier-1 requirement is blocked in docx.
 - *Pagination:* Word may paginate slightly differently from LibreOffice (see `docs/DOCX.md`).
