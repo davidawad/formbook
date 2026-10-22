@@ -7,7 +7,7 @@ Courts under `courts/ninth-circuit/nevada` (4).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Nevada](federal/bankruptcy-district) | `nvb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Nevada](federal/district) | `nvd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Appeals of Nevada](state/court-of-appeals) | `nevapp` | in progress | 5/5 | — | — | 14 |
+| [Court of Appeals of Nevada](state/court-of-appeals) | `nevapp` | up for review | 5/5 | — | — | 29 |
 | [Nevada Supreme Court](state/supreme-court) | `nev` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 
 [Formbook index](../../../README.md)

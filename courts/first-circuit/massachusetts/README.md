@@ -9,7 +9,7 @@ Courts under `courts/first-circuit/massachusetts` (5).
 | [District Court, D. Massachusetts](federal/district) | `mad` | up for review | 2/2 | — | 2/2 | 14 |
 | [Massachusetts Appeals Court](state/appeals-court) | `massappct` | up for review | 5/5 | — | — | 29 |
 | [Massachusetts District Court, Appellate Division](state/district-court-appellate-division) | `massdistctapp` | in progress | — | — | — | 14 |
-| [Massachusetts Supreme Judicial Court](state/supreme-judicial-court) | `mass` | in progress | 9/9 | — | — | 14 |
+| [Massachusetts Supreme Judicial Court](state/supreme-judicial-court) | `mass` | up for review | 9/9 | — | — | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

@@ -38,7 +38,7 @@ Courts under `courts` (346).
 | [Supreme Judicial Court of Maine](first-circuit/maine/state/supreme-judicial-court) | `me` | up for review | 8/8 | 8/8 | 8/8 | 29 |
 | [Massachusetts Appeals Court](first-circuit/massachusetts/state/appeals-court) | `massappct` | up for review | 5/5 | — | — | 29 |
 | [Massachusetts District Court, Appellate Division](first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` | in progress | — | — | — | 14 |
-| [Massachusetts Supreme Judicial Court](first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | in progress | 9/9 | — | — | 14 |
+| [Massachusetts Supreme Judicial Court](first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | up for review | 9/9 | — | — | 29 |
 | [Supreme Court of New Hampshire](first-circuit/new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | 4/4 | 4/4 | 29 |
 | [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | up for review | 1/1 | 1/1 | 1/1 | 29 |
 | [Supreme Court of Puerto Rico](first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | — | — | 29 |
@@ -257,8 +257,8 @@ Courts under `courts` (346).
 | [District Court, W.D. Washington](ninth-circuit/washington/federal/western-district) | `wawd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Alaska Court of Appeals](ninth-circuit/alaska/state/court-of-appeals) | `alaskactapp` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Alaska Supreme Court](ninth-circuit/alaska/state/supreme-court) | `alaska` | up for review | 6/6 | 5/5 | 3/3 | 29 |
-| [High Court of American Samoa](ninth-circuit/american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |
-| [Arizona Court of Appeals](ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | in progress | 7/7 | — | — | 14 |
+| [High Court of American Samoa](ninth-circuit/american-samoa/state/high-court) | `amsamoa` | in progress | — | — | — | 14 |
+| [Arizona Court of Appeals](ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | up for review | 7/7 | — | — | 29 |
 | [Arizona Supreme Court](ninth-circuit/arizona/state/supreme-court) | `ariz` | up for review | 9/9 | — | — | 29 |
 | [California Court of Appeal, Fifth Appellate District](ninth-circuit/california/state/court-of-appeal-fifth-district) | `calctapp5d` | up for review | 6/6 | 1/1 | 1/1 | 29 |
 | [California Court of Appeal, First Appellate District](ninth-circuit/california/state/court-of-appeal-first-district) | `calctapp1d` | up for review | 7/7 | — | — | 29 |
@@ -277,7 +277,7 @@ Courts under `courts` (346).
 | [Idaho Court of Appeals](ninth-circuit/idaho/state/court-of-appeals) | `idahoctapp` | up for review | 3/3 | — | — | 29 |
 | [Idaho Supreme Court](ninth-circuit/idaho/state/supreme-court) | `idaho` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Montana Supreme Court](ninth-circuit/montana/state/supreme-court) | `mont` | up for review | 9/9 | 9/9 | 9/9 | 29 |
-| [Court of Appeals of Nevada](ninth-circuit/nevada/state/court-of-appeals) | `nevapp` | in progress | 5/5 | — | — | 14 |
+| [Court of Appeals of Nevada](ninth-circuit/nevada/state/court-of-appeals) | `nevapp` | up for review | 5/5 | — | — | 29 |
 | [Nevada Supreme Court](ninth-circuit/nevada/state/supreme-court) | `nev` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 | [Supreme Court of The Commonwealth of The Northern Mariana Islands](ninth-circuit/northern-mariana-islands/state/supreme-court) | `nmi` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Court of Appeals of Oregon](ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | up for review | 1/2 | — | — | 29 |

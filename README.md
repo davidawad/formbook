@@ -140,7 +140,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/district) | `mad` | up for review | 2/2 | — | 2/2 | 14 |
 | [Massachusetts Appeals Court](courts/first-circuit/massachusetts/state/appeals-court) | `massappct` | up for review | 5/5 | — | — | 29 |
 | [Massachusetts District Court, Appellate Division](courts/first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` | in progress | — | — | — | 14 |
-| [Massachusetts Supreme Judicial Court](courts/first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | in progress | 9/9 | — | — | 14 |
+| [Massachusetts Supreme Judicial Court](courts/first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | up for review | 9/9 | — | — | 29 |
 
 ### New Hampshire
 
@@ -549,7 +549,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Arizona](courts/ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Arizona](courts/ninth-circuit/arizona/federal/district) | `azd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Arizona Court of Appeals](courts/ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | in progress | 7/7 | — | — | 14 |
+| [Arizona Court of Appeals](courts/ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | up for review | 7/7 | — | — | 29 |
 | [Arizona Supreme Court](courts/ninth-circuit/arizona/state/supreme-court) | `ariz` | up for review | 9/9 | — | — | 29 |
 
 ### California
@@ -616,7 +616,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Nevada](courts/ninth-circuit/nevada/federal/bankruptcy-district) | `nvb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Nevada](courts/ninth-circuit/nevada/federal/district) | `nvd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Appeals of Nevada](courts/ninth-circuit/nevada/state/court-of-appeals) | `nevapp` | in progress | 5/5 | — | — | 14 |
+| [Court of Appeals of Nevada](courts/ninth-circuit/nevada/state/court-of-appeals) | `nevapp` | up for review | 5/5 | — | — | 29 |
 | [Nevada Supreme Court](courts/ninth-circuit/nevada/state/supreme-court) | `nev` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 
 ### Northern Mariana Islands
@@ -651,7 +651,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [High Court of American Samoa](courts/ninth-circuit/american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |
+| [High Court of American Samoa](courts/ninth-circuit/american-samoa/state/high-court) | `amsamoa` | in progress | — | — | — | 14 |
 
 ## Tenth Circuit
 
@@ -811,7 +811,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 1 | 6 | 16.5% |
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 0 | 6 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 5 | 0 | 5 | 14.0% |
-| First Circuit | 20 | 0 | 18 | 2 | 0 | 0.0% | 90.0% | 19 | 4 | 15 | 18.5% |
+| First Circuit | 20 | 0 | 19 | 1 | 0 | 0.0% | 95.0% | 19 | 4 | 15 | 19.2% |
 | Second Circuit | 19 | 0 | 18 | 1 | 0 | 0.0% | 94.7% | 19 | 3 | 16 | 17.9% |
 | Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 4 | 16 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 6 | 24 | 19.1% |
@@ -819,11 +819,11 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 4 | 23 | 18.6% |
 | Seventh Circuit | 21 | 0 | 20 | 1 | 0 | 0.0% | 95.2% | 20 | 2 | 16 | 18.2% |
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 9 | 30 | 20.3% |
-| Ninth Circuit | 61 | 0 | 56 | 4 | 1 | 0.0% | 91.8% | 57 | 13 | 48 | 20.3% |
+| Ninth Circuit | 61 | 0 | 58 | 3 | 0 | 0.0% | 95.0% | 57 | 13 | 48 | 21.0% |
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 7 | 20 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 3 | 20 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 2 | 4 | 17.7% |
-| **Total** | 376 | 0 | 347 | 28 | 1 | 0.0% | 92.2% | 350 | 62 | 275 | 18.8% |
+| **Total** | 376 | 0 | 350 | 26 | 0 | 0.0% | 93.0% | 350 | 62 | 275 | 18.9% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 

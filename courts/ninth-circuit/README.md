@@ -39,8 +39,8 @@ Courts under `courts/ninth-circuit` (61).
 | [District Court, W.D. Washington](washington/federal/western-district) | `wawd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Alaska Court of Appeals](alaska/state/court-of-appeals) | `alaskactapp` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Alaska Supreme Court](alaska/state/supreme-court) | `alaska` | up for review | 6/6 | 5/5 | 3/3 | 29 |
-| [High Court of American Samoa](american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |
-| [Arizona Court of Appeals](arizona/state/court-of-appeals) | `arizctapp` | in progress | 7/7 | — | — | 14 |
+| [High Court of American Samoa](american-samoa/state/high-court) | `amsamoa` | in progress | — | — | — | 14 |
+| [Arizona Court of Appeals](arizona/state/court-of-appeals) | `arizctapp` | up for review | 7/7 | — | — | 29 |
 | [Arizona Supreme Court](arizona/state/supreme-court) | `ariz` | up for review | 9/9 | — | — | 29 |
 | [California Court of Appeal, Fifth Appellate District](california/state/court-of-appeal-fifth-district) | `calctapp5d` | up for review | 6/6 | 1/1 | 1/1 | 29 |
 | [California Court of Appeal, First Appellate District](california/state/court-of-appeal-first-district) | `calctapp1d` | up for review | 7/7 | — | — | 29 |
@@ -59,7 +59,7 @@ Courts under `courts/ninth-circuit` (61).
 | [Idaho Court of Appeals](idaho/state/court-of-appeals) | `idahoctapp` | up for review | 3/3 | — | — | 29 |
 | [Idaho Supreme Court](idaho/state/supreme-court) | `idaho` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Montana Supreme Court](montana/state/supreme-court) | `mont` | up for review | 9/9 | 9/9 | 9/9 | 29 |
-| [Court of Appeals of Nevada](nevada/state/court-of-appeals) | `nevapp` | in progress | 5/5 | — | — | 14 |
+| [Court of Appeals of Nevada](nevada/state/court-of-appeals) | `nevapp` | up for review | 5/5 | — | — | 29 |
 | [Nevada Supreme Court](nevada/state/supreme-court) | `nev` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 | [Supreme Court of The Commonwealth of The Northern Mariana Islands](northern-mariana-islands/state/supreme-court) | `nmi` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Court of Appeals of Oregon](oregon/state/court-of-appeals) | `orctapp` | up for review | 1/2 | — | — | 29 |
