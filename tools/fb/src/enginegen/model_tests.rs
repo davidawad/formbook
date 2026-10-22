@@ -81,7 +81,7 @@ print(table.concat(t, " "))
     assert_eq!(lines[1], "(ab)\tiv.\t12.");
     // the body before the certificate: "#" and "—" alone are no words; with the certificate and the note 22
     assert_eq!(lines[2], "13\t22");
-    assert_eq!(lines[3], "https://|a.|org/|b/|c-d/|2015/");
+    assert_eq!(lines[3], "https://|a.|org/|b/|c-|d/|2015/");
     // a missing field's default; lists CommonMark does not read are paragraphs with their markers
     assert_eq!(lines[4], "___\tx");
     assert_eq!(
@@ -146,7 +146,7 @@ fn typst_side_agrees() {
     assert!(text.contains("A."), "{text}");
     assert!(text.contains("Words: 13. ___ x."), "{text}");
     assert!(
-        text.contains("https://|a.|org/|b/|c-d/|2015/|11/|x."),
+        text.contains("https://|a.|org/|b/|c-|d/|2015/|11/|x."),
         "{text}"
     );
 }

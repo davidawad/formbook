@@ -7,9 +7,11 @@
 //
 //   font, size, pitch: {body, single}, margin: {top, bottom, left, right}, indent, list_indent,
 //   page_number: {align, from}, footnote: {size, pitch, gap, clearance}, quote: {left, right, above, below, gap},
-//   heading: [level 1, level 2, ...] (each a text style plus above/below), front: [blocks], closing: [blocks],
+//   heading: [level 1, level 2, ...] (each a text style plus above/below; `number`: "I." etc., the label in a box of the
+//   `hang`), front: [blocks], closing: [blocks],
 //   tail: {at, pitch, indent, gap, above}
-//   blocks: {text: "literal with {field} or {a.b}", <style>}, {rule: <stroke>, above, below},
+//   blocks: {text: "literal with {field}, {a.b} or {a.b|default} ({body_words}: computed)", <style>},
+//           {rule: <stroke>, above, below},
 //           {columns: [{width, blocks}, ..], gutter}, {each: field, blocks, between}, {group: [blocks], keep}
 //   style: align (left, center, right), bold, italic, upper, underline, left, right, hang, above, below, pitch
 //          (body, single or a number), keep, optional
