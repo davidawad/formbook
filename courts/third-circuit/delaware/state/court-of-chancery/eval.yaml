@@ -1,0 +1,5 @@
+# Numbers Rule 10 of the Court of Chancery Rules states (rules.md, DELCH-FORM-001..003): Times New Roman 14-point text
+# (convention A of Rule 10(b)(1)), so the default 12-point body check is replaced with 14 points. Margins stay at the default
+# 1 in on all sides, which Rule 10(b)(3) requires at a minimum (DELCH-FORM-003).
+font:
+  size_pt: 14

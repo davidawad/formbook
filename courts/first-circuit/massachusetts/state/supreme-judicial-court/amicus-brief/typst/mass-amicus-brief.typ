@@ -1,10 +1,10 @@
-// Massachusetts Appeals Court (mass): brief of an appellant or appellee (opening and answering briefs).
+// Massachusetts Supreme Judicial Court (mass): amicus curiae brief (Mass. R. A. P. 17).
 //
 // Content-agnostic. Every number is a named parameter below and traces to the rule cited next to
-// it (Massachusetts Rules of Appellate Procedure, Rules 16, 20 and 21, as posted on mass.gov;
+// it (Massachusetts Rules of Appellate Procedure, Rules 13, 16, 17, 20 and 21, as posted on mass.gov;
 // see ../../rules.md). No case-specific text, no coordinates measured off any filed brief, no
 // forced line breaks. The markdown body is rendered by cmarker; the metadata is the YAML
-// frontmatter of the sample (fields listed in ../README.md).
+// frontmatter of the sample (usage/INPUT-amicus-brief.md).
 
 #import "@preview/cmarker:0.1.10"
 
@@ -13,7 +13,7 @@
 // ---------------------------------------------------------------------------
 
 #let font-family = "Times New Roman"
-#let type-size = 14pt                      // MRAP 20 (a) (4) (B) (ii): proportionally spaced font of 14 point or larger, footnotes included.
+#let type-size = 14pt                      // MRAP 20 (a) (4) (B): proportionally spaced font of 14 point or larger, footnotes included.
 #let body-leading = 1.65em                 // MRAP 20 (a) (4) (C): double-spaced (not more than 3 lines per vertical inch, 27 lines per page).
 #let single-leading = 0.45em               // MRAP 20 (a) (4) (C): headings, footnotes, indented quotations and visual aids may be single-spaced.
 #let page-margin = 1in                     // MRAP 20 (a) (4) (A): top, bottom, left and right margins at least 1 inch.
@@ -33,12 +33,12 @@
 /// Split "---\nyaml\n---\nbody" into (meta, body).
 #let split-frontmatter(src) = {
   let m = src.match(regex("^---\r?\n([\\s\\S]*?)\r?\n---[ \t]*\r?\n"))
-  if m == none { panic("mass-opening-brief: the sample must start with a YAML frontmatter block") }
+  if m == none { panic("mass-amicus-brief: the sample must start with a YAML frontmatter block") }
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
 #let need(meta, key) = {
-  if key not in meta { panic("mass-opening-brief: missing required metadata field `" + key + "`") }
+  if key not in meta { panic("mass-amicus-brief: missing required metadata field `" + key + "`") }
   meta.at(key)
 }
 
@@ -132,7 +132,7 @@
 // Template
 // ---------------------------------------------------------------------------
 
-#let mass-brief(meta, body) = {
+#let mass-amicus-brief(meta, body) = {
   set document(title: need(meta, "brief_title"))
   // MRAP 20 (a) (4) (A): page numbers in the margin; the cover is page 1 and numbering runs to the last page.
   // The top and bottom margins are 1 inch plus 4 pt: the raised figure of a footnote reference on the first line of a page
@@ -215,7 +215,7 @@
   if "disclosure" in meta {
     page[
       #set par(leading: body-leading, first-line-indent: (amount: para-indent, all: true))
-      #align(center, text(weight: "bold")[CORPORATE DISCLOSURE STATEMENT])
+      #heading(level: 1, outlined: true)[Corporate Disclosure Statement]
       #v(0.5em)
       #for p in meta.disclosure.paragraphs { par(inl(p)) }
     ]
@@ -256,7 +256,7 @@
   if "compliance" in meta {
     let c = meta.compliance
     pagebreak(weak: true)
-    heading(level: 1, outlined: false)[Certificate of Compliance]
+    heading(level: 1, outlined: true)[Certificate of Compliance]
     for p in c.paragraphs { par(inl(p)) }
     v(0.4em)
     signature-block(c.signature)
@@ -267,7 +267,7 @@
     let svc = meta.service
     v(1.2em)
     block(breakable: false)[
-      #heading(level: 1, outlined: false)[Certificate of Service]
+      #heading(level: 1, outlined: true)[Certificate of Service]
       #for p in svc.paragraphs { par(inl(p)) }
     ]
     v(0.4em)

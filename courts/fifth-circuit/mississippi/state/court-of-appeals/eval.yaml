@@ -1,0 +1,9 @@
+# Mississippi Rules of Appellate Procedure 32(a): body text at least 12-point, footnotes at least 11-point;
+# margins 1 1/2 in left, 1 in top, 3/4 in bottom, 1/2 in right (72 pt per inch). Stated numbers, not guesses.
+font:
+  size_pt: 12
+params:
+  margin_left_pt: 108
+  margin_top_pt: 72
+  margin_bottom_pt: 54
+  margin_right_pt: 36

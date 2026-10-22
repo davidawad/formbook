@@ -148,7 +148,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. New Hampshire](courts/first-circuit/new-hampshire/federal/bankruptcy-district) | `nhb` | up for review | — | — | — | 14 |
 | [District Court, D. New Hampshire](courts/first-circuit/new-hampshire/federal/district) | `nhd` | up for review | — | — | — | 14 |
-| [Supreme Court of New Hampshire](courts/first-circuit/new-hampshire/state/supreme-court) | `nh` | in progress | — | — | — | 14 |
+| [Supreme Court of New Hampshire](courts/first-circuit/new-hampshire/state/supreme-court) | `nh` | up for review | — | — | — | 29 |
 
 ### Puerto Rico
 
@@ -156,7 +156,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Puerto Rico](courts/first-circuit/puerto-rico/federal/bankruptcy-district) | `prb` | up for review | — | — | — | 14 |
 | [District Court, D. Puerto Rico](courts/first-circuit/puerto-rico/federal/district) | `prd` | up for review | — | — | — | 14 |
-| [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](courts/first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | in progress | — | — | — | 29 |
+| [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](courts/first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Puerto Rico](courts/first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | up for review | — | — | — | 29 |
 
 ### Rhode Island
@@ -179,8 +179,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Connecticut](courts/second-circuit/connecticut/federal/bankruptcy-district) | `ctb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Connecticut](courts/second-circuit/connecticut/federal/district) | `ctd` | up for review | — | — | — | 14 |
-| [Connecticut Court of Appeals](courts/second-circuit/connecticut/state/court-of-appeals) | `connappct` | in progress | — | — | — | 14 |
-| [Connecticut Supreme Court](courts/second-circuit/connecticut/state/supreme-court) | `conn` | in progress | — | — | — | 14 |
+| [Connecticut Court of Appeals](courts/second-circuit/connecticut/state/court-of-appeals) | `connappct` | up for review | — | — | — | 29 |
+| [Connecticut Supreme Court](courts/second-circuit/connecticut/state/supreme-court) | `conn` | up for review | — | — | — | 29 |
 
 ### New York
 
@@ -240,7 +240,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/western-district) | `pawd` | up for review | — | — | — | 14 |
 | [Commonwealth Court of Pennsylvania](courts/third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | — | — | — | 29 |
 | [Superior Court of Pennsylvania](courts/third-circuit/pennsylvania/state/superior-court) | `pasuperct` | up for review | — | — | — | 29 |
-| [Supreme Court of Pennsylvania](courts/third-circuit/pennsylvania/state/supreme-court) | `pa` | up for review | — | — | — | 29 |
+| [Supreme Court of Pennsylvania](courts/third-circuit/pennsylvania/state/supreme-court) | `pa` | in progress | — | — | — | 29 |
 
 ### Virgin Islands
 
@@ -335,7 +335,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, S.D. Mississippi](courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district) | `mssb` | up for review | — | — | — | 14 |
 | [District Court, N.D. Mississippi](courts/fifth-circuit/mississippi/federal/northern-district) | `msnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Mississippi](courts/fifth-circuit/mississippi/federal/southern-district) | `mssd` | up for review | — | — | — | 14 |
-| [Court of Appeals of Mississippi](courts/fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | in progress | — | — | — | 29 |
+| [Court of Appeals of Mississippi](courts/fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | up for review | — | — | — | 29 |
 | [Mississippi Supreme Court](courts/fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | — | — | — | 29 |
 
 ### Texas
@@ -807,15 +807,15 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Supreme Court of the United States | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
-|  | 30 | 0 | 7 | 17 | 6 | 0.0% | 23.3% | 0 | 0 | 0 | 12.7% |
+|  | 30 | 0 | 8 | 17 | 5 | 0.0% | 26.6% | 0 | 0 | 0 | 13.2% |
 | Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 16.5% |
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
-| First Circuit | 20 | 0 | 15 | 4 | 1 | 0.0% | 75.0% | 0 | 0 | 0 | 16.3% |
-| Second Circuit | 19 | 0 | 15 | 4 | 0 | 0.0% | 78.9% | 0 | 0 | 0 | 15.5% |
-| Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 18.1% |
+| First Circuit | 20 | 0 | 17 | 2 | 1 | 0.0% | 85.0% | 0 | 0 | 0 | 17.0% |
+| Second Circuit | 19 | 0 | 17 | 2 | 0 | 0.0% | 89.4% | 0 | 0 | 0 | 17.1% |
+| Third Circuit | 18 | 0 | 17 | 1 | 0 | 0.0% | 94.4% | 0 | 0 | 0 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 19.1% |
-| Fifth Circuit | 26 | 0 | 25 | 1 | 0 | 0.0% | 96.1% | 0 | 0 | 0 | 18.0% |
+| Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 18.0% |
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 18.6% |
 | Seventh Circuit | 21 | 0 | 20 | 1 | 0 | 0.0% | 95.2% | 0 | 0 | 0 | 18.2% |
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 20.3% |
@@ -823,29 +823,29 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 17.7% |
-| **Total** | 376 | 0 | 325 | 42 | 9 | 0.0% | 86.4% | 1 | 1 | 1 | 17.8% |
+| **Total** | 376 | 0 | 330 | 38 | 8 | 0.0% | 87.7% | 1 | 1 | 1 | 18.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
 | Group | Doc types | Template | Sample | Render | Exemplar | Typst complete | % complete | Up for review |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-|  | 12 | 12 | 12 | 12 | 12 | 12 | 100.0% | 12 |
+|  | 13 | 13 | 13 | 13 | 13 | 13 | 100.0% | 13 |
 | Supreme Court of the United States | 3 | 3 | 3 | 3 | 3 | 3 | 100.0% | 3 |
 |  | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
 | Federal Circuit and feeder courts | 14 | 14 | 14 | 14 | 14 | 14 | 100.0% | 14 |
 | Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 12 |
 | National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 6 |
-| First Circuit | 53 | 53 | 52 | 52 | 51 | 51 | 96.2% | 52 |
-| Second Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 42 |
-| Third Circuit | 58 | 58 | 58 | 58 | 58 | 58 | 100.0% | 58 |
-| Fourth Circuit | 107 | 107 | 107 | 107 | 107 | 107 | 100.0% | 107 |
-| Fifth Circuit | 71 | 71 | 71 | 71 | 71 | 71 | 100.0% | 71 |
-| Sixth Circuit | 94 | 94 | 94 | 94 | 90 | 90 | 95.7% | 94 |
-| Seventh Circuit | 59 | 59 | 59 | 59 | 59 | 59 | 100.0% | 59 |
+| First Circuit | 65 | 65 | 65 | 65 | 64 | 64 | 98.4% | 65 |
+| Second Circuit | 59 | 59 | 59 | 59 | 59 | 59 | 100.0% | 59 |
+| Third Circuit | 58 | 58 | 58 | 58 | 58 | 58 | 100.0% | 57 |
+| Fourth Circuit | 109 | 109 | 109 | 109 | 109 | 109 | 100.0% | 109 |
+| Fifth Circuit | 78 | 78 | 78 | 78 | 78 | 78 | 100.0% | 78 |
+| Sixth Circuit | 98 | 98 | 98 | 98 | 94 | 94 | 95.9% | 98 |
+| Seventh Circuit | 61 | 61 | 61 | 61 | 61 | 61 | 100.0% | 61 |
 | Eighth Circuit | 134 | 134 | 134 | 134 | 133 | 133 | 99.2% | 134 |
-| Ninth Circuit | 118 | 118 | 117 | 117 | 115 | 115 | 97.4% | 117 |
-| Tenth Circuit | 103 | 103 | 103 | 103 | 100 | 100 | 97.0% | 103 |
-| Eleventh Circuit | 115 | 115 | 115 | 115 | 114 | 114 | 99.1% | 115 |
+| Ninth Circuit | 127 | 127 | 126 | 126 | 124 | 124 | 97.6% | 126 |
+| Tenth Circuit | 105 | 105 | 105 | 105 | 102 | 102 | 97.1% | 105 |
+| Eleventh Circuit | 129 | 129 | 129 | 129 | 128 | 128 | 99.2% | 129 |
 | D.C. Circuit | 9 | 9 | 9 | 9 | 9 | 9 | 100.0% | 9 |
-| **Total** | 1017 | 1017 | 1015 | 1015 | 1001 | 1001 | 98.4% | 1015 |
+| **Total** | 1087 | 1087 | 1086 | 1086 | 1072 | 1072 | 98.6% | 1085 |
 <!-- tracker:end -->

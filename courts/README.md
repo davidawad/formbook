@@ -39,8 +39,8 @@ Courts under `courts` (346).
 | [Massachusetts Appeals Court](first-circuit/massachusetts/state/appeals-court) | `massappct` | in progress | — | — | — | 14 |
 | [Massachusetts District Court, Appellate Division](first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` | todo | — | — | — | 0 |
 | [Massachusetts Supreme Judicial Court](first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | in progress | — | — | — | 14 |
-| [Supreme Court of New Hampshire](first-circuit/new-hampshire/state/supreme-court) | `nh` | in progress | — | — | — | 14 |
-| [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | in progress | — | — | — | 29 |
+| [Supreme Court of New Hampshire](first-circuit/new-hampshire/state/supreme-court) | `nh` | up for review | — | — | — | 29 |
+| [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Puerto Rico](first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | up for review | — | — | — | 29 |
 | [Supreme Court of Rhode Island](first-circuit/rhode-island/state/supreme-court) | `ri` | up for review | — | — | — | 29 |
 | [Court of Appeals for the Second Circuit](second-circuit/court-of-appeals) | `ca2` | up for review | — | — | — | 14 |
@@ -56,8 +56,8 @@ Courts under `courts` (346).
 | [District Court, W.D. New York](second-circuit/new-york/federal/western-district) | `nywd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Vermont](second-circuit/vermont/federal/bankruptcy-district) | `vtb` | up for review | — | — | — | 14 |
 | [District Court, D. Vermont](second-circuit/vermont/federal/district) | `vtd` | up for review | — | — | — | 14 |
-| [Connecticut Court of Appeals](second-circuit/connecticut/state/court-of-appeals) | `connappct` | in progress | — | — | — | 14 |
-| [Connecticut Supreme Court](second-circuit/connecticut/state/supreme-court) | `conn` | in progress | — | — | — | 14 |
+| [Connecticut Court of Appeals](second-circuit/connecticut/state/court-of-appeals) | `connappct` | up for review | — | — | — | 29 |
+| [Connecticut Supreme Court](second-circuit/connecticut/state/supreme-court) | `conn` | up for review | — | — | — | 29 |
 | [Appellate Terms of the Supreme Court of New York](second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | in progress | — | — | — | 14 |
 | [New York Court of Appeals](second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | — | — | — | 29 |
 | [The Four Departments of the Appellate Division](second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | — | — | — | 29 |
@@ -130,7 +130,7 @@ Courts under `courts` (346).
 | [District Court, W.D. Texas](fifth-circuit/texas/federal/western-district) | `txwd` | up for review | — | — | — | 14 |
 | [Louisiana Court of Appeal](fifth-circuit/louisiana/state/court-of-appeal) | `lactapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Louisiana](fifth-circuit/louisiana/state/supreme-court) | `la` | up for review | — | — | — | 29 |
-| [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | in progress | — | — | — | 29 |
+| [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | up for review | — | — | — | 29 |
 | [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | — | — | — | 29 |
 | [Court of Civil Appeals of Texas](fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | — | — | — | 29 |
 | [Court of Criminal Appeals of Texas](fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | — | — | — | 29 |

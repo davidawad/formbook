@@ -1,0 +1,5 @@
+# Numbers the Appellate Term rules state (rules.md). Default checks assume 12 pt body and 1 in margins.
+# 22 NYCRR 731.10(e)(1)(A)(i) (Second Department Appellate Term): body of a proportionally spaced brief is 14-point type,
+# footnotes at least 12 points (NYAPPTERM-FORM-003). The First Department Part 640 sets no type size.
+font:
+  size_pt: 14

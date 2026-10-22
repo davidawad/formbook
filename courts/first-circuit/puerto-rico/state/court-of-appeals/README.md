@@ -6,7 +6,7 @@
 - Level: state-appellate
 - Circuit: `ca1`
 - State / territory: Puerto Rico
-- Status: **in progress** (29%); manual status in `court.json`: `todo`
+- Status: **up for review** (29%); manual status in `court.json`: `todo`
 
 ## Checklist
 
@@ -23,6 +23,13 @@ Engines: typst `—`, latex `—`, docx `—`.
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and every doc folder under it with a `usage/INPUT-*.md` has a valid `usage/.check-typst.txt` stamp (`just eval` writes them; the default checks are `data/checks-default.yaml`).
 
+## Doc folders
+
+1 of 1 doc folders with an INPUT pass the typst eval.
+
+| Doc folder | Status | Eval |
+|---|---|---|
+| [amicus-brief](amicus-brief) | up for review | pass |
 
 ## Folders
 

@@ -1,0 +1,5 @@
+# Practice Book Sec. 67-2A(b) (2026): "Margins shall be 1 and 1/2 inches on all sides" (CONNAPPCT-FORM-003). The same
+# one-and-one-half-inch margin applies to motions and oppositions (Sec. 66-2), petitions (Sec. 77-1) and amicus
+# applications and briefs (Sec. 67-7A(b)). Font size stays at the default 12 pt (CONNAPPCT-FORM-001).
+params:
+  margin_pt: 108

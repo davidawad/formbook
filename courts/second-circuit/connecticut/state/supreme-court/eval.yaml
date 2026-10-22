@@ -1,0 +1,4 @@
+# P.B. 67-2A(b) (electronic briefs), 66-2 and 84-5(b): margins are 1 and 1/2 inches on all sides, larger than the default
+# one-inch margin. The body text size (12 point serif, P.B. 67-2A(b)) is the default and is not overridden here.
+params:
+  margin_pt: 108

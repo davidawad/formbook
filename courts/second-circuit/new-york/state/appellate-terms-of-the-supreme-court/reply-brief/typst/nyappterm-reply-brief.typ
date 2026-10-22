@@ -1,6 +1,7 @@
-// New York Supreme, Appellate Division: a reply brief (22 NYCRR 1250.8(d)), any of the four departments.
+// New York Supreme Court, Appellate Term: a reply brief (22 NYCRR 731.10 and CPLR 5528(c), Second Department;
+// the First Department sets no type rule). Rule IDs (NYAPPTERM-...) are in ../rules.md.
 //
-// Rule-driven and content-agnostic. Rule references (22 NYCRR Part 1250) are in ../README.md.
+// Rule-driven and content-agnostic.
 // No case-specific text, no coordinates measured off any filed brief, no forced line
 // breaks. The markdown body is rendered by cmarker; the metadata comes from the YAML
 // frontmatter of the same file (schema: ../README.md, "Markdown contract").
@@ -11,16 +12,17 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Times New Roman"      // Filed exemplars are set in Times New Roman (rules.md NYAPPTERM-FORM-004).
-#let type-size = 12pt                      // Filed exemplars' body face (rules.md NYAPPTERM-FORM-005); no Appellate Term rule states a size.
+#let font-family = "Times New Roman"      // Serifed proportional face named by 731.10(e)(1)(A) (rules.md NYAPPTERM-FORM-003).
+#let type-size = 14pt                      // 731.10(e)(1)(A)(i): body of a proportionally spaced brief is 14-point (NYAPPTERM-FORM-003).
+#let footnote-size = 12pt                  // 731.10(e)(1)(A)(i): footnotes at least 12 points.
 #let body-leading = 1.15em                 // Gap between lines: one Times New Roman line (about 1.15 em) added to the line, so the pitch is double spacing.
-#let single-leading = 0.516em              // headings, quotations, footnotes, contents: single spaced (1250.8(h)).
-#let page-margin = 1in                     // 1250.8(h): one inch on all sides.
+#let single-leading = 0.516em              // headings, quotations, footnotes, contents: single spaced (731.10(e)(2)(C)).
+#let page-margin = 1in                     // 731.10(e)(2)(C): one inch on all sides (NYAPPTERM-FORM-002).
 #let para-indent = 0.5in
 #let heading-tab = 0.5in
 #let toc-depth = 4
 #let passim-threshold = 7                  // an authority cited on this many pages or more prints "passim".
-#let word-limit = none                     // No word limit in 22 NYCRR Part 731 (Second Department); 640.5(d) (First Department) sets 20 pages for a reply, not counted here.
+#let word-limit = 7000                     // 731.10(e)(1)(B): reply and amicus curiae briefs, 7,000 words (NYAPPTERM-LEN-001).
 #let caption-separator = [—against—]
 
 // ---------------------------------------------------------------------------
@@ -136,7 +138,7 @@
   set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
   set text(size: type-size)   // every heading is body size or larger; no typst default sizes
   if it.level == 1 {
-    // Section headings: bold, capitals, centered (1250.8(f)(1): capitals and bold only in headings).
+    // Section headings: bold, capitals, centered (731.10(e)(1)(A): bold and capitals only in headings).
     block(width: 100%, sticky: true, above: 1.5em, below: 1.1em,
       align(center, strong(upper(it.body))))
   } else if it.numbering == none {
@@ -251,7 +253,7 @@
 }
 
 // ---------------------------------------------------------------------------
-// Cover (1250.8(b))
+// Cover (731.10(a))
 // ---------------------------------------------------------------------------
 
 #let double-rule = {
@@ -261,7 +263,7 @@
 }
 #let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
 
-/// The cover: the docket and the argument notice on one row (upper right: 1250.8(b)), the court,
+/// The cover: the docket (upper left) and the argument notice (upper right) on one row, the court,
 /// the caption, the title, and the filing attorney's name, address, telephone and email (lower right).
 #let cover-body(meta, gap) = {
   // The cover is set with the glyph bounds as its line box, so the counsel and caption fit one page.
@@ -373,7 +375,7 @@
             "attorneys_for", "signature") { let _ = need(meta, k) }
   let authorities = meta.at("authorities", default: (:))
 
-  // ---- word limit (1250.8(f)(2)): the body, inclusive of point headings and footnotes ----
+  // ---- word limit (731.10(e)(1)(B)): the body, inclusive of point headings and footnotes ----
   let words = count-words(md)
   if word-limit != none and words > word-limit {
     panic("nyappterm-reply-brief: the brief has " + str(words) + " words; the limit is " + str(word-limit))
@@ -400,8 +402,8 @@
     separator: line(length: 30%, stroke: 0.5pt),
   )
   show footnote.entry: it => {
-    // 1250.8(f)(1)(i): footnotes at least 12 points. The body size is used, as the exemplar does.
-    set text(size: type-size)
+    // 731.10(e)(1)(A)(i): footnotes at least 12 points.
+    set text(size: footnote-size)
     set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em)
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
@@ -453,7 +455,17 @@
       signature-block(meta)
     } else {
       render(head.join("\n\n"))
-      block(breakable: false, { render(tail.join("\n\n")); signature-block(meta) })
+      // The last paragraph and the signature stay together when they fit on one page. A block taller
+      // than a page cannot be kept together (typst then runs it into the bottom margin), so it may break.
+      let full = 11in - 2 * page-margin
+      layout(size => {
+        let blk = { render(tail.join("\n\n")); signature-block(meta) }
+        if measure(block(width: size.width, blk)).height < full {
+          block(breakable: false, blk)
+        } else {
+          blk
+        }
+      })
     }
   }
 
