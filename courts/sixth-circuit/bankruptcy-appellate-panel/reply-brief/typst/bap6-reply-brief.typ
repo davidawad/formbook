@@ -21,6 +21,7 @@
 #let body-leading = 1.955em                // FRBP 8015(a)(4): double-spaced. Pitch = 0.655em (Liberation Serif line box) + leading = 2.61em; single = 1.305em (calibration in ../README.md).
 #let single-leading = 0.65em               // headings, block quotations, cover, TOC and TOA: single-spaced (typst default leading).
 #let page-margin = 1in                     // FRBP 8015(a)(4): at least one inch on all four sides.
+#let page-margin-bottom = page-margin + 4pt   // the cover's last line (pushed to the foot by 1fr) keeps its descender (about 3 pt at 14 pt) inside the 1-in margin too
 #let para-indent = 0.5in
 #let passim-threshold = 7                  // an authority cited on this many pages or more prints "passim" (style)
 #let word-limit = if doc-type == "reply" { 6500 } else { 13000 }   // FRBP 8015(a)(7)(B)(i)-(ii)
@@ -144,8 +145,8 @@
 // the brief's title naming the party, and counsel's name, address, phone and email.
 // ---------------------------------------------------------------------------
 
-#let cover(meta) = page(numbering: none)[
-  #set par(leading: single-leading, first-line-indent: 0pt)
+#let cover(meta) = page(numbering: none, margin: (x: page-margin, top: page-margin, bottom: page-margin-bottom))[
+  #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)   // single-spaced: the body's double paragraph spacing pushed the cover past one page (DEF-COVER-001)
   #set align(center)
   #let lines = ()
   #let lines = lines + ([Case No. #meta.case_number],)
