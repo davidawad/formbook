@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The msnb motion's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the typst
+     template ({font}, Times New Roman, as data/exemplar-fonts.json audits the exemplar) at 12 pt (ULR 5005-1(K): no
+     font smaller than 12 point, footnotes and the page number too; size 24 half points); Body Text and the headings
+     in exact 27.6 pt line boxes (typst pitch-double: ULR 5005-1(K) double-spaced, Word's double) with a half-inch
+     first-line indent; footnotes in 13.8 pt boxes (typst pitch-single; footnotes may be single-spaced), 7 pt after
+     each (typst note-gap); letter page (ULR 5005-1(K)) with 1-inch margins and a centered page number, its line
+     36.75 pt above the page foot (735 twips: where typst sets it, footer-descent 30 %). Added styles, the paragraphs
+     pandoc writes with their footnotes: Body Para (a body or numbered paragraph: the number at the indent, a tab to
+     1 in, typst number-box), Item (a lettered item: the letter at 1 in, the text hanging at 1.5 in, typst item-left
+     and item-box), each with a Keep variant (the last paragraph before the signature, kept with it) and a Note
+     variant (a paragraph that anchors a footnote: no widow control, as typst sets it). The markdown is read as
+     CommonMark with smart punctuation and footnotes (pandoc-from), as typst's cmarker reads it; the old render.sh
+     escaped "[^n]:" so that pandoc kept the in-place notes, which are real footnotes now. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="commonmark+smart+yaml_metadata_block+footnotes" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" note-after="140" footer="735">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyPara"><w:name w:val="Body Para"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="552" w:lineRule="exact"/><w:ind w:left="0" w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyParaKeep"><w:name w:val="Body Para Keep"/><w:basedOn w:val="BodyPara"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyParaNote"><w:name w:val="Body Para Note"/><w:basedOn w:val="BodyPara"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Item"><w:name w:val="Item"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="2160"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="552" w:lineRule="exact"/><w:ind w:left="2160" w:hanging="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="ItemKeep"><w:name w:val="Item Keep"/><w:basedOn w:val="Item"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="ItemNote"><w:name w:val="Item Note"/><w:basedOn w:val="Item"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+</reference>

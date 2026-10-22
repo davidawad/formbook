@@ -1,172 +1,246 @@
--- msnb motion with memorandum brief: pandoc filter for the docx engine (the same content as typst/
--- msnb-motion-brief.typ, from the same markdown contract). Styles and page setup come from reference.docx
--- (make-reference.sh). This filter writes the caption, the signature blocks and the OF COUNSEL block as
--- WordprocessingML paragraphs, turns each numbered line into a "Numbered Paragraph" (sequential across the
--- whole document, as in the typst template) and each "- " item into a "Lettered Item" "(a)", "(b)", ...,
--- and moves the CERTIFICATE OF SERVICE to the end, after OF COUNSEL. Known gaps: docs/DOCX.md and README.md.
+-- Motion (with memorandum brief) for the U.S. Bankruptcy Court, N.D. Mississippi (msnb), docx engine: what the Word
+-- output adds to pandoc's conversion, so that it reads and breaks as typst/msnb-motion-brief.typ does: the court name
+-- and caption (FRBP 9004(b)), the title, the headings, the numbered paragraphs (one count through the paper), the
+-- lettered items, the signature block, OF COUNSEL (ULR 5005-1(L)(i), 9011-1(a)) and the certificate of service with
+-- its signature (ULR 9004-1(c)). pandoc writes the paragraphs that may carry footnotes (styles Body Para, Item and
+-- their Keep and Note variants, from docx/reference.xml) and the notes (Footnote Text). Everything printed comes from
+-- the sample's frontmatter and body: no case text lives here.
+--
+-- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
+-- exact line boxes of the typst pitch (twips = 20 x pt: 552 the double-spaced body, 276 a single line), the spaces
+-- between blocks those of the typst template, and the break rules of typst on every run.
 
-local PAGE_TEXT_WIDTH = 9360 -- twips: 6.5 in between the 1 in margins
+local xe = require("docx.xengine")
 
-local function esc(s)
-  return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
-end
+local BODY, SINGLE = 552, 276            -- typst pitch-double, pitch-single
+local GAP = 276                          -- typst gap: one blank single line
+local TEXTW = 9360                       -- 6.5 in
+local CAP_RIGHT = 4320                   -- typst caption-right 3 in
+local ROLE_INDENT = 1440                 -- typst role-indent 1 in
+local SIG_INDENT = 3960                  -- typst signature-indent 2.75 in
+local TITLE_INDENT = 720                 -- typst signer-title-indent 0.5 in
 
-local function text(m)
+local function plain(m)
   if m == nil then return "" end
-  return (pandoc.utils.stringify(m):gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", ""))
+  if type(m) == "string" then return m end
+  return pandoc.utils.stringify(m)
 end
 
-local function need(meta, key)
-  if meta[key] == nil then error("msnb-motion-brief: missing required metadata field `" .. key .. "`") end
-  return meta[key]
+local function need(v, msg)
+  if v == nil or plain(v) == "" then error("msnb-motion-brief: " .. msg) end
+  return v
 end
 
-local function raw(xml)
-  return pandoc.RawBlock("openxml", xml)
+-- A single-pitch paragraph: o = { keep, before, after, line, left, jc }.
+local function p(body, o)
+  o = o or {}
+  local props = {}
+  if o.keep then props[#props + 1] = xe.KEEP end
+  props[#props + 1] = xe.spacing(o.before or 0, o.after or 0, o.line or SINGLE)
+  props[#props + 1] = xe.ind(o.left or 0, nil, 0)
+  props[#props + 1] = xe.jc(o.jc or "left")
+  return xe.para(props, body)
 end
 
--- One WordprocessingML paragraph. runs: a list of { s = text, b = bold, i = italic, u = underline } or a
--- string. opts: jc, ind_left, tab_right (a right tab stop at PAGE_TEXT_WIDTH), after, before, line (exact).
-local function para(runs, opts)
-  opts = opts or {}
-  local ppr = ""
-  if opts.keep_next then ppr = ppr .. "<w:keepNext/>" end
-  if opts.border_bottom then ppr = ppr .. '<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="000000"/></w:pBdr>' end
-  if opts.tab_right then ppr = ppr .. '<w:tabs><w:tab w:val="right" w:pos="' .. PAGE_TEXT_WIDTH .. '"/></w:tabs>' end
-  ppr = ppr .. '<w:spacing w:before="' .. (opts.before or 0) .. '" w:after="' .. (opts.after or 0) ..
-    '" w:line="' .. (opts.line or 276) .. '" w:lineRule="exact"/>'
-  if opts.ind_left then ppr = ppr .. '<w:ind w:left="' .. opts.ind_left .. '" w:firstLine="0"/>' end
-  if opts.jc then ppr = ppr .. '<w:jc w:val="' .. opts.jc .. '"/>' end
-  local body = {}
-  if type(runs) == "string" then runs = { { s = runs } } end
-  for _, r in ipairs(runs) do
-    if r.tab then
-      body[#body + 1] = "<w:r><w:tab/></w:r>"
-    else
-      local rpr = ""
-      if r.b then rpr = rpr .. "<w:b/>" end
-      if r.i then rpr = rpr .. "<w:i/>" end
-      if r.u then rpr = rpr .. '<w:u w:val="single"/>' end
-      if rpr ~= "" then rpr = "<w:rPr>" .. rpr .. "</w:rPr>" end
-      body[#body + 1] = '<w:r>' .. rpr .. '<w:t xml:space="preserve">' .. esc(r.s) .. "</w:t></w:r>"
+local NO_BORDERS = '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/>' ..
+  '<w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders><w:tblLayout w:type="fixed"/>'
+local CELL_MAR = '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/>' ..
+  '<w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
+local LOOK = '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="0"/>'
+
+local function tc(w, body, pr)
+  return '<w:tc><w:tcPr><w:tcW w:w="' .. w .. '" w:type="dxa"/>' .. (pr or "") .. '</w:tcPr>' .. body .. '</w:tc>'
+end
+
+-- ---------------------------------------------------------------------------
+-- Cover: court name, caption (one bold table: "IN RE:", the names with the case number beside the last, the
+-- designation with the chapter; a blank single line between the blocks), title
+-- ---------------------------------------------------------------------------
+
+local function caption(meta)
+  local d = need(meta.debtor, "frontmatter needs debtor (names, role, chapter)")
+  local left_w = TEXTW - CAP_RIGHT
+  local B = { b = true }
+  local rows = {}
+  local function row(l, r, lo)
+    rows[#rows + 1] = '<w:tr><w:trPr><w:cantSplit/></w:trPr>' .. tc(left_w, p(l, lo)) ..
+      tc(CAP_RIGHT, p(r, { jc = "right" })) .. '</w:tr>'
+  end
+  local function spacer()
+    rows[#rows + 1] = '<w:tr><w:trPr><w:trHeight w:val="' .. GAP .. '" w:hRule="exact"/></w:trPr>' ..
+      tc(TEXTW, p("", { line = GAP }), '<w:gridSpan w:val="2"/>') .. '</w:tr>'
+  end
+  row(xe.runs("IN RE:", B), "")
+  spacer()
+  for i, n in ipairs(d.names) do
+    row(xe.inl(n, B), i == #d.names and xe.runs("CASE NO. " .. plain(need(meta.case_number, "frontmatter needs case_number")), B) or "")
+  end
+  spacer()
+  row(xe.inl(d.role, B), d.chapter and xe.runs("CHAPTER " .. plain(d.chapter), B) or "", { left = ROLE_INDENT })
+  return '<w:tbl><w:tblPr><w:tblW w:w="' .. TEXTW .. '" w:type="dxa"/>' .. NO_BORDERS .. CELL_MAR .. LOOK ..
+    '</w:tblPr><w:tblGrid><w:gridCol w:w="' .. left_w .. '"/><w:gridCol w:w="' .. CAP_RIGHT .. '"/></w:tblGrid>' ..
+    table.concat(rows) .. '</w:tbl>'
+end
+
+local function cover(meta)
+  local court = { "IN THE UNITED STATES BANKRUPTCY COURT", "NORTHERN DISTRICT OF MISSISSIPPI" }
+  local out = {}
+  for k, l in ipairs(court) do
+    out[#out + 1] = p(xe.runs(l, { b = true }), { jc = "center", after = k == #court and GAP or 0 })
+  end
+  out[#out + 1] = caption(meta)
+  local title = need(meta.title, "frontmatter needs title (FRBP 9004(b))")
+  out[#out + 1] = p(xe.runs(pandoc.text.upper(plain(title)), { b = true }), { jc = "center", before = GAP, after = GAP })
+  return table.concat(out)
+end
+
+-- ---------------------------------------------------------------------------
+-- Signature blocks
+-- ---------------------------------------------------------------------------
+
+-- "Respectfully submitted,", the party, "By:" and the signer, the signer's title in the right half, a double line
+-- below the text; then OF COUNSEL and the counsel lines flush left.
+local function signature(meta)
+  local s = need(meta.signature, "frontmatter needs signature")
+  local out = {
+    p(xe.runs("Respectfully submitted,"), { left = SIG_INDENT, before = BODY, keep = true }),
+    p(xe.inl(s.firm, { b = true }), { left = SIG_INDENT, before = GAP, keep = true }),
+    p(xe.runs("By: ") .. xe.inl(s.signer, { i = true, u = true }), { left = SIG_INDENT, before = GAP, keep = true }),
+    p(xe.inl(s.title), { left = SIG_INDENT + TITLE_INDENT }),
+  }
+  local counsel = meta.counsel or {}
+  if #counsel > 0 then
+    out[#out + 1] = p(xe.runs("OF COUNSEL:"), { before = BODY, keep = true })
+    for i, l in ipairs(counsel) do out[#out + 1] = p(xe.inl(l), { keep = i < #counsel or nil }) end
+  end
+  return table.concat(out)
+end
+
+-- The certificate's signature: its lines single-spaced in the right half, kept together, a double line above.
+local function cert_signature(blocks)
+  local out = {}
+  for i, b in ipairs(blocks) do
+    if b.t ~= "Para" and b.t ~= "Plain" then error("msnb-motion-brief.lua: unsupported block in a signature: " .. b.t) end
+    out[#out + 1] = p(xe.inl(b.content), { left = SIG_INDENT, before = i == 1 and BODY or 0, keep = i < #blocks or nil })
+  end
+  return table.concat(out)
+end
+
+-- ---------------------------------------------------------------------------
+-- Body
+-- ---------------------------------------------------------------------------
+
+-- A heading, one line at the double pitch, kept with the block after it: level 1 centered bold underlined capitals,
+-- level 2 bold at the left, level 3 bold italic at the left.
+local function heading(el)
+  local content = el.content
+  if el.level == 1 then
+    content = content:walk({ Str = function(s) return pandoc.Str(pandoc.text.upper(s.text)) end })
+  end
+  local lvl = math.min(el.level, 3)
+  return xe.para({ xe.style("Heading" .. lvl), xe.KEEP, xe.spacing(0, 0, BODY), xe.ind(0, nil, 0),
+    xe.jc(lvl == 1 and "center" or "left") }, xe.inl(content, { b = true, i = lvl == 3, u = lvl == 1 }))
+end
+
+local function has_note(inlines)
+  for _, x in ipairs(inlines) do
+    if x.t == "Note" then return true end
+  end
+  return false
+end
+
+-- A paragraph pandoc writes in `style` ("Body Para" or "Item"): the Keep variant before the signature, else the Note
+-- variant when it anchors a footnote (no widow control), as typst sets it.
+local function div(style, inlines, keep)
+  if keep then style = style .. " Keep" elseif has_note(inlines) then style = style .. " Note" end
+  return pandoc.Div({ pandoc.Para(inlines) }, { ["custom-style"] = style })
+end
+
+local TAB = pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>")
+
+-- typst's break opportunities that LibreOffice does not share: none inside ")(" (a word joiner), one after a
+-- slash before a letter (a zero-width space). Neither shows in the PDF text.
+local function breaks(s)
+  return pandoc.Str((s.text:gsub("%)%(", ")\u{2060}("):gsub("/([^%d])", "/\u{200B}%1")))
+end
+
+-- Two more of typst's rules (Unicode line breaking): no break between a section sign or pilcrow and its number,
+-- also when the sign ends a word, nor at a space before a period, comma, colon or semicolon: that space becomes a
+-- no-break space.
+local function binds(l)
+  for i = 1, #l - 1 do
+    local a, b = l[i], l[i + 1]
+    if a.t == "Str" and b.t == "Space" then
+      local nxt = l[i + 2]
+      if (a.text:sub(-2) == "\u{00A7}" or a.text:sub(-2) == "\u{00B6}") or (nxt and nxt.t == "Str" and nxt.text:find("^[.,:;]")) then
+        l[i + 1] = pandoc.Str("\u{00A0}")
+      end
     end
   end
-  return raw("<w:p><w:pPr>" .. ppr .. "</w:pPr>" .. table.concat(body) .. "</w:p>")
+  return l
 end
 
-local function blank(after)
-  return para("", { after = after or 0 })
-end
-
--- The cover: court title, caption, title of the paper.
-local function cover(meta)
-  -- (the counsel block is not on the cover: it follows the signature, as OF COUNSEL)
-  local out = {}
-  out[#out + 1] = para({ { s = "UNITED STATES BANKRUPTCY COURT", b = true } }, { jc = "center" })
-  out[#out + 1] = para({ { s = "NORTHERN DISTRICT OF MISSISSIPPI", b = true } }, { jc = "center", after = 240 })
-  -- the caption: a left column (names) and a right column (case number, chapter) on a right tab stop
-  local debtor = need(meta, "debtor")
-  out[#out + 1] = para({ { s = "IN RE:" } }, { after = 120 })
-  for i, n in ipairs(debtor.names) do
-    local right = (i == 1) and ("CASE NO. " .. text(need(meta, "case_number"))) or ""
-    out[#out + 1] = para({ { s = text(n) }, { tab = true }, { s = right } }, { tab_right = true, after = 120 })
+local function item_inlines(item)
+  if #item ~= 1 or (item[1].t ~= "Plain" and item[1].t ~= "Para") then
+    error("msnb-motion-brief.lua: a list item must be one paragraph")
   end
-  local role = text(debtor.role)
-  local chapter = debtor.chapter and ("CHAPTER " .. text(debtor.chapter)) or ""
-  out[#out + 1] = para({ { s = role }, { tab = true }, { s = chapter } }, { tab_right = true, after = 240 })
-  out[#out + 1] = para({ { s = text(need(meta, "title")):upper(), b = true } }, { jc = "center", before = 120, after = 360 })
-  return out
-end
-
--- Respectfully submitted, the firm, the signature line and the title: in the right-hand column.
-local function signature(meta)
-  local sig = need(meta, "signature")
-  local out = {}
-  out[#out + 1] = para("Respectfully submitted,", { jc = "right", keep_next = true, before = 240 })
-  out[#out + 1] = para({ { s = text(sig.firm), b = true } }, { jc = "right", keep_next = true, before = 360 })
-  out[#out + 1] = para({ { s = "By: " }, { s = text(sig.signer), i = true, u = true } }, { jc = "right", keep_next = true, before = 360 })
-  out[#out + 1] = para(text(sig.title), { jc = "right" })
-  return out
-end
-
--- OF COUNSEL: flush left after the signature.
-local function of_counsel(meta)
-  local out = {}
-  local counsel = meta.counsel or {}
-  if #counsel == 0 then return out end
-  out[#out + 1] = para("OF COUNSEL:", { before = 360, keep_next = true })
-  for _, line in ipairs(counsel) do out[#out + 1] = para(text(line), { keep_next = true }) end
-  return out
-end
-
--- A "[^n]: text" chunk (the typst template's footnote note): the number as a superscript, the text at 10 point.
-local function footnote_note(b)
-  local first = b.content[1]
-  if first == nil or first.t ~= "Str" or not first.text:match("^%[%^%d+%]:$") then return nil end
-  local n = first.text:match("%d+")
-  local marks = { "¹", "²", "³", "⁴", "⁵" }
-  local content = pandoc.Inlines { pandoc.Str(marks[tonumber(n)]), pandoc.Space() }
-  for i = 2, #b.content do
-    if not (i == 2 and b.content[i].t == "Space") then content[#content + 1] = b.content[i] end
-  end
-  return pandoc.Div({ pandoc.Para(content) }, pandoc.Attr("", {}, { ["custom-style"] = "Footnote Text" }))
-end
-
-local function is_certificate(b)
-  return b.t == "Header" and b.level == 1 and text(b.content):upper() == "CERTIFICATE OF SERVICE"
-end
-
--- A numbered motion paragraph: "N." then the text, first line indented (global count, as in the typst template).
-local motion_count = 0
-local function numbered(item)
-  motion_count = motion_count + 1
-  local first = item[1]
-  local inl = (first and (first.t == "Plain" or first.t == "Para")) and first.content or pandoc.Inlines {}
-  local content = pandoc.Inlines { pandoc.Str(motion_count .. "."), pandoc.Space() }
-  content:extend(inl)
-  local blocks = { pandoc.Para(content) }
-  for i = 2, #item do blocks[#blocks + 1] = item[i] end
-  return pandoc.Div(blocks, pandoc.Attr("", {}, { ["custom-style"] = "Numbered Paragraph" }))
-end
-
--- A lettered item: "(a)", "(b)", ... with a hanging indent (the label at 0.5 in, the text at 1 in).
-local function lettered_list(items)
-  local letters = "abcdefghijklmnopqrstuvwxyz"
-  local out = {}
-  for n, item in ipairs(items) do
-    local first = item[1]
-    local inl = (first and (first.t == "Plain" or first.t == "Para")) and first.content or pandoc.Inlines {}
-    local content = pandoc.Inlines { pandoc.Str("(" .. letters:sub(n, n) .. ")"), pandoc.RawInline("openxml", '<w:r><w:tab/></w:r>') }
-    content:extend(inl)
-    local blocks = { pandoc.Para(content) }
-    for i = 2, #item do blocks[#blocks + 1] = item[i] end
-    out[#out + 1] = pandoc.Div(blocks, pandoc.Attr("", {}, { ["custom-style"] = "Lettered Item" }))
-  end
-  return out
+  return item[1].content
 end
 
 function Pandoc(doc)
+  doc = doc:walk({ Str = breaks }):walk({ Inlines = binds })
+  doc.blocks = doc.blocks:walk({ Inlines = xe.inlines })
   local meta = doc.meta
+  local out = { xe.raw(cover(meta)) }
   local blocks = doc.blocks
-  local main, tail = {}, {}
-  local in_tail = false
-  for _, b in ipairs(blocks) do
-    if is_certificate(b) then in_tail = true end
-    local dest = in_tail and tail or main
-    if b.t == "OrderedList" then
-      for _, item in ipairs(b.content) do dest[#dest + 1] = numbered(item) end
-    elseif b.t == "BulletList" then
-      for _, d in ipairs(lettered_list(b.content)) do dest[#dest + 1] = d end
-    else
-      dest[#dest + 1] = (b.t == "Para" and footnote_note(b)) or b
+  -- the block the signature follows: the one before the certificate heading, or the last; the certificate's own
+  -- signature: from its first paragraph that starts with "/s/" or "s/"
+  local cert, cert_sig
+  for i, b in ipairs(blocks) do
+    if not cert and b.t == "Header" and plain(b.content):upper() == "CERTIFICATE OF SERVICE" then cert = i end
+  end
+  if cert then
+    for i = cert + 1, #blocks do
+      local b = blocks[i]
+      if not cert_sig and (b.t == "Para" or b.t == "Plain") and plain(b.content):gsub("\u{200B}", ""):match("^/?s/ ") then cert_sig = i end
     end
   end
-  local out = cover(meta)
-  for _, b in ipairs(main) do out[#out + 1] = b end
-  for _, b in ipairs(signature(meta)) do out[#out + 1] = b end
-  for _, b in ipairs(of_counsel(meta)) do out[#out + 1] = b end
-  for _, b in ipairs(tail) do out[#out + 1] = b end
-  doc.meta.title = nil -- the title is set on the cover, not as pandoc's Title paragraph
-  doc.blocks = out
-  return doc
+  local sign_after = cert and cert - 1 or #blocks
+  local n = 0
+  for i, b in ipairs(blocks) do
+    if cert_sig and i >= cert_sig then
+      if i == cert_sig then
+        local rest = {}
+        for k = cert_sig, #blocks do rest[#rest + 1] = blocks[k] end
+        out[#out + 1] = xe.raw(cert_signature(rest))
+      end
+      goto continue
+    end
+    do
+      local keep = i == sign_after
+      if b.t == "Header" then
+        out[#out + 1] = xe.raw(heading(b))
+      elseif b.t == "OrderedList" then
+        for k, item in ipairs(b.content) do
+          n = n + 1
+          local inls = pandoc.Inlines({ pandoc.Str(n .. "."), TAB })
+          inls:extend(item_inlines(item))
+          out[#out + 1] = div("Body Para", inls, keep and k == #b.content)
+        end
+      elseif b.t == "BulletList" then
+        for k, item in ipairs(b.content) do
+          local inls = pandoc.Inlines({ pandoc.Str(string.char(96 + k) .. "."), TAB })
+          inls:extend(item_inlines(item))
+          out[#out + 1] = div("Item", inls, keep and k == #b.content)
+        end
+      elseif b.t == "Para" or b.t == "Plain" then
+        out[#out + 1] = div("Body Para", b.content, keep)
+      else
+        error("msnb-motion-brief.lua: unsupported block " .. b.t)
+      end
+      if keep then out[#out + 1] = xe.raw(signature(meta)) end
+    end
+    ::continue::
+  end
+  return pandoc.Pandoc(out, pandoc.Meta({}))
 end
