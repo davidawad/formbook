@@ -34,24 +34,24 @@ signature:
     - "Concord, NH 03302-1137"
     - "gouldb@cwbpa.com"
 authorities:
-  - {key: brzica, category: cases, text: "*Brzica v. Trustees of Dartmouth Coll.*, 147 N.H. 443 (2002)"}
-  - {key: scamman, category: cases, text: "*Scamman v. Sondheim*, 97 N.H. 280 (1952)"}
-  - {key: stapleford, category: cases, text: "*In re Stapleford*, 156 N.H. 260 (2007)"}
-  - {key: samyn, category: cases, text: "*Samyn-D’Elia Architects v. Satter Companies of N.E., Inc.*, 137 N.H. 174 (1993)"}
-  - {key: londonderry-nc, category: cases, text: "*In re Londonderry Neighborhood Coalition*, 145 N.H. 201 (2000)"}
-  - {key: goodlander, category: cases, text: "*In re Goodlander*, 161 N.H. 490 (2011)"}
-  - {key: lamarche, category: cases, text: "*Lamarche v. McCarthy*, 158 N.H. 197 (2008)"}
-  - {key: snyder, category: cases, text: "*Snyder v. N.H. Sav. Bank*, 134 N.H. 32 (1991)"}
-  - {key: mass-food, category: cases, text: "*Mass. Food Ass’n v. Mass. Alcoholic Beverages Control Comm’n*, 197 F.3d 560 (1st Cir. 1999)"}
-  - {key: tweed, category: cases, text: "*Tweed v. Town of Nottingham*, 2019 WL 12875417 (N.H. Super. Aug. 6, 2019)"}
-  - {key: g2003b, category: cases, text: "*G2003B, LLC v. Town of Weare*, 153 N.H. 725 (2006)"}
-  - {key: aft, category: cases, text: "*American Federation of Teachers, et al. v. Gardner, et al.*, No. 218-2020-CV-0570 (N.H. Super. Ct. Sept. 4, 2020)"}
-  - {key: trbovich, category: cases, text: "*Trbovich v. United Mine Workers*, 404 U.S. 528 (1972)"}
-  - {key: berger, category: cases, text: "*Berger v. North Carolina State Conf. of the NAACP*, 142 S. Ct. 2191 (2022)"}
-  - {key: rule-15, category: rules, text: "N.H. Super. Ct. R. 15"}
-  - {key: frcp-24, category: rules, text: "Fed. R. Civ. P. 24(a)"}
-  - {key: rsa-659-23a, category: statutes, text: "RSA 659:23-a, VI"}
-  - {key: rsa-659-34, category: statutes, text: "RSA 659:34"}
+  brzica: {kind: cases, cite: "*Brzica v. Trustees of Dartmouth Coll.*, 147 N.H. 443 (2002)", sort: "001"}
+  scamman: {kind: cases, cite: "*Scamman v. Sondheim*, 97 N.H. 280 (1952)", sort: "002"}
+  stapleford: {kind: cases, cite: "*In re Stapleford*, 156 N.H. 260 (2007)", sort: "003"}
+  samyn: {kind: cases, cite: "*Samyn-D’Elia Architects v. Satter Companies of N.E., Inc.*, 137 N.H. 174 (1993)", sort: "004"}
+  londonderry-nc: {kind: cases, cite: "*In re Londonderry Neighborhood Coalition*, 145 N.H. 201 (2000)", sort: "005"}
+  goodlander: {kind: cases, cite: "*In re Goodlander*, 161 N.H. 490 (2011)", sort: "006"}
+  lamarche: {kind: cases, cite: "*Lamarche v. McCarthy*, 158 N.H. 197 (2008)", sort: "007"}
+  snyder: {kind: cases, cite: "*Snyder v. N.H. Sav. Bank*, 134 N.H. 32 (1991)", sort: "008"}
+  mass-food: {kind: cases, cite: "*Mass. Food Ass’n v. Mass. Alcoholic Beverages Control Comm’n*, 197 F.3d 560 (1st Cir. 1999)", sort: "009"}
+  tweed: {kind: cases, cite: "*Tweed v. Town of Nottingham*, 2019 WL 12875417 (N.H. Super. Aug. 6, 2019)", sort: "010"}
+  g2003b: {kind: cases, cite: "*G2003B, LLC v. Town of Weare*, 153 N.H. 725 (2006)", sort: "011"}
+  aft: {kind: cases, cite: "*American Federation of Teachers, et al. v. Gardner, et al.*, No. 218-2020-CV-0570 (N.H. Super. Ct. Sept. 4, 2020)", sort: "012"}
+  trbovich: {kind: cases, cite: "*Trbovich v. United Mine Workers*, 404 U.S. 528 (1972)", sort: "013"}
+  berger: {kind: cases, cite: "*Berger v. North Carolina State Conf. of the NAACP*, 142 S. Ct. 2191 (2022)", sort: "014"}
+  rule-15: {kind: rules, cite: "N.H. Super. Ct. R. 15", sort: "015"}
+  frcp-24: {kind: rules, cite: "Fed. R. Civ. P. 24(a)", sort: "016"}
+  rsa-659-23a: {kind: statutes, cite: "RSA 659:23-a, VI", sort: "017"}
+  rsa-659-34: {kind: statutes, cite: "RSA 659:34", sort: "018"}
 toc: true
 ---
 

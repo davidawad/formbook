@@ -1,4 +1,9 @@
-# Gate 4 CROSS-ENGINE: typst only. Not on the shared document model yet: the frontmatter's authorities
-# ({key, category, text}, cited by toa: links) are a shape the model does not read (docs/open-items/fb-595.54.24.md).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # Word cannot know a page: the shared docx page lookup (tools/fb docxpages.rs) sets two table rows wrong: a citation
+  # split over a page end (Londonderry, pp. 8-9) takes the later page, and a bare [Id.](toa:g2003b) ending its
+  # paragraph matches "id" inside an earlier word (p. 11 lost). docs/open-items/fb-595.54.24.md.
+  cross_engine_docx: report
