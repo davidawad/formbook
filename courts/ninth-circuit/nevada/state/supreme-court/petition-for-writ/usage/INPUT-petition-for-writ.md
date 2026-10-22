@@ -122,22 +122,22 @@ authorities:
 certificates:
   - heading: "VERIFICATION"
     paragraphs:
-      - "I, Sadmira Ramic, declare as follows:"
-      - "1\\. I am counsel for Petitioners ACLU of Nevada and Steven Bacus."
-      - "2\\. I verify that I have read the foregoing Emergency Petition and that the same is true of my own knowledge, except for matters state on information and belief, and as to those matters, I believe them true."
-      - "3\\. I declare under penalty of perjury under the law of the Nevada that foregoing is true and correct."
-      - "Executed this 14th day of October 2022, in Las Vegas, Nevada."
+      - text: "I, Sadmira Ramic, declare as follows:"
+      - text: "1\\. I am counsel for Petitioners ACLU of Nevada and Steven Bacus."
+      - text: "2\\. I verify that I have read the foregoing Emergency Petition and that the same is true of my own knowledge, except for matters state on information and belief, and as to those matters, I believe them true."
+      - text: "3\\. I declare under penalty of perjury under the law of the Nevada that foregoing is true and correct."
+      - text: "Executed this 14th day of October 2022, in Las Vegas, Nevada."
     signature:
       signers:
         - name: "Sadmira Ramic, Esq."
           lines: ["Nevada Bar No.: 15984"]
   - heading: "CERTIFICATE OF COMPLIANCE"
     paragraphs:
-      - "I hereby certify that I have read this petition, and to the best of my knowledge, information, and belief it is not frivolous or interposed for any improper purpose. I further certify that this brief complies with all applicable Nevada Rules of Appellate Procedure, including the requirement of Rule 28(e), which requires that every assertion in the brief regarding matters in the record be supported by a reference to the page and volume number, if any, of the appendix where the matter relied on is to be found. I understand that I may be subject to sanctions in the event that the accompanying brief is not in conformity with the requirements of the Nevada Rules of Appellate Procedure."
-      - "I further certify that this brief complies with the formatting requirements of NRAP 32(a)(4), the typeface requirements of NRAP 32(a)(5) and the type style requirements of NRAP 32(a)(6) because this brief has been prepared in a proportionally spaced typeface using Microsoft Word for Office 365 in 14 point Times New Roman."
-      - "The remainder of this page intentionally left blank."
-      - "Finally, I hereby certify that this brief complies with the type-volume limitations of NRAP 21(d) and 32(c)(2) because, excluding the parts of the brief exempted by NRAP 32(a)(7)(C), it is proportionately spaced, has a typeface of 14 points or more and contains 5,436 words."
-      - "DATED this 14th day of October 2022."
+      - text: "I hereby certify that I have read this petition, and to the best of my knowledge, information, and belief it is not frivolous or interposed for any improper purpose. I further certify that this brief complies with all applicable Nevada Rules of Appellate Procedure, including the requirement of Rule 28(e), which requires that every assertion in the brief regarding matters in the record be supported by a reference to the page and volume number, if any, of the appendix where the matter relied on is to be found. I understand that I may be subject to sanctions in the event that the accompanying brief is not in conformity with the requirements of the Nevada Rules of Appellate Procedure."
+      - text: "I further certify that this brief complies with the formatting requirements of NRAP 32(a)(4), the typeface requirements of NRAP 32(a)(5) and the type style requirements of NRAP 32(a)(6) because this brief has been prepared in a proportionally spaced typeface using Microsoft Word for Office 365 in 14 point Times New Roman."
+      - text: "The remainder of this page intentionally left blank."
+      - text: "Finally, I hereby certify that this brief complies with the type-volume limitations of NRAP 21(d) and 32(c)(2) because, excluding the parts of the brief exempted by NRAP 32(a)(7)(C), it is proportionately spaced, has a typeface of 14 points or more and contains 5,436 words."
+      - text: "DATED this 14th day of October 2022."
     signature:
       firm: "AMERICAN CIVIL LIBERTIES UNION OF NEVADA"
       signers:
@@ -150,65 +150,72 @@ certificates:
       lines: ["601 South Rancho Drive, Suite B-11", "Las Vegas, Nevada 89106", "Telephone: (702) 366-1536", "Facsimile: (702) 366-1331", "Email: ramic@aclunv.org", "Email: peterson@aclunv.org", "Email: romero@aclunv.org", "*Counsel for Petitioners*"]
   - heading: "NRAP 27(e) CERTIFICATE"
     paragraphs:
-      - "I, Christopher Peterson, declare as follows:"
-      - "4\\. I am counsel for Petitioners ACLU of Nevada and Steven Bacus."
-      - "5\\. The telephone numbers and address of the attorneys for the parties are as follows:"
-      - - "For the ACLU of Nevada and Steven Bacus"
-        - "Sadmira Ramic"
-        - "NV Bar #15984"
-        - "702.751.1483"
-        - "ramic@aclunv.org"
-        - "American Civil Liberties Union of Nevada"
-        - "601 S. Rancho Dr., #B-11"
-        - "Las Vegas, NV 89106"
-      - - "Christopher Peterson"
-        - "NV Bar #13932"
-        - "702.366.1902"
-        - "peterson@aclunv.org"
-        - "American Civil Liberties Union of Nevada"
-        - "601 S. Rancho Dr., #B-11"
-        - "Las Vegas, NV 89106"
-      - - "Sophia Romero"
-        - "NV Bar N#12446"
-        - "775.446.5546"
-        - "romero@aclunv.org"
-        - "American Civil Liberties Union of Nevada"
-        - "601 S. Rancho Dr., #B-11"
-        - "Las Vegas, NV 89106"
-      - - "For the County of Nye and Mark Kampf"
-        - "Harry L. Arnold"
-        - "702.207.6090"
-        - "harnold@maclaw.com"
-        - "Marquis Aurbach"
-        - "10001 Park Run Dr."
-        - "Las Vegas, NV 89145"
-      - - "Brian R. Hardy"
-        - "702.382.0711"
-        - "bhardy@maclaw.com"
-        - "Marquis Aurbach"
-        - "10001 Park Run Dr."
-        - "Las Vegas, NV 89145"
-      - "6\\. Emergency relief is proper because voting will begin in Nye County on October 22, 2022, and Mr. Kampf will begin implementing his proposed voting procedures on October 22, 2022 and the hand counting process on October 25, 2022. The proposed procedures violate the Nevada Constitution, Nevada election law, and federal election law. If Nye County and Kampf are not prevented from implementing their proposed procedures, it will result in immediate and irreparable harm to the voters of Nye County and the uniform implementation of statewide election processes."
-      - "7\\. Prior to filing this brief, I spoke by telephone with attorneys Harry L. Arnold and Brian R. Hardy on October 14, 2022. I explained that this petition is substantively similar to that filed before the Fifth Judicial district both in the legal arguments and the relief sought. I sent Mr. Arnold and Mr. Hardy, via email, a digital copy of the foregoing petition and Petitioner’s Appendix, Volume 1, on October 14, 2022, before they were filed."
-      - "8\\. I also contacted the Office of the Clerk of the Supreme Court of Nevada to notify it that the ACLU of Nevada would be filing this motion, in accordance with Nevada Rule of Appellate Procedure 27(e)(1), on behalf of petitioners."
-      - "Executed this 14th day of October 2022, in Las Vegas, Nevada."
+      - text: "I, Christopher Peterson, declare as follows:"
+      - text: "4\\. I am counsel for Petitioners ACLU of Nevada and Steven Bacus."
+      - text: "5\\. The telephone numbers and address of the attorneys for the parties are as follows:"
+      - lines:
+          - "For the ACLU of Nevada and Steven Bacus"
+          - "Sadmira Ramic"
+          - "NV Bar #15984"
+          - "702.751.1483"
+          - "ramic@aclunv.org"
+          - "American Civil Liberties Union of Nevada"
+          - "601 S. Rancho Dr., #B-11"
+          - "Las Vegas, NV 89106"
+      - lines:
+          - "Christopher Peterson"
+          - "NV Bar #13932"
+          - "702.366.1902"
+          - "peterson@aclunv.org"
+          - "American Civil Liberties Union of Nevada"
+          - "601 S. Rancho Dr., #B-11"
+          - "Las Vegas, NV 89106"
+      - lines:
+          - "Sophia Romero"
+          - "NV Bar N#12446"
+          - "775.446.5546"
+          - "romero@aclunv.org"
+          - "American Civil Liberties Union of Nevada"
+          - "601 S. Rancho Dr., #B-11"
+          - "Las Vegas, NV 89106"
+      - lines:
+          - "For the County of Nye and Mark Kampf"
+          - "Harry L. Arnold"
+          - "702.207.6090"
+          - "harnold@maclaw.com"
+          - "Marquis Aurbach"
+          - "10001 Park Run Dr."
+          - "Las Vegas, NV 89145"
+      - lines:
+          - "Brian R. Hardy"
+          - "702.382.0711"
+          - "bhardy@maclaw.com"
+          - "Marquis Aurbach"
+          - "10001 Park Run Dr."
+          - "Las Vegas, NV 89145"
+      - text: "6\\. Emergency relief is proper because voting will begin in Nye County on October 22, 2022, and Mr. Kampf will begin implementing his proposed voting procedures on October 22, 2022 and the hand counting process on October 25, 2022. The proposed procedures violate the Nevada Constitution, Nevada election law, and federal election law. If Nye County and Kampf are not prevented from implementing their proposed procedures, it will result in immediate and irreparable harm to the voters of Nye County and the uniform implementation of statewide election processes."
+      - text: "7\\. Prior to filing this brief, I spoke by telephone with attorneys Harry L. Arnold and Brian R. Hardy on October 14, 2022. I explained that this petition is substantively similar to that filed before the Fifth Judicial district both in the legal arguments and the relief sought. I sent Mr. Arnold and Mr. Hardy, via email, a digital copy of the foregoing petition and Petitioner’s Appendix, Volume 1, on October 14, 2022, before they were filed."
+      - text: "8\\. I also contacted the Office of the Clerk of the Supreme Court of Nevada to notify it that the ACLU of Nevada would be filing this motion, in accordance with Nevada Rule of Appellate Procedure 27(e)(1), on behalf of petitioners."
+      - text: "Executed this 14th day of October 2022, in Las Vegas, Nevada."
     signature:
       signers:
         - name: "Christopher M. Peterson, Esq."
           lines: ["Nevada Bar No.: 13932"]
   - heading: "CERTIFICATE OF SERVICE"
     paragraphs:
-      - "I hereby certify that on October 17, 2022, I electronically filed the foregoing EMERGENCY PETITION FOR WRIT OF MANDAMUS PURSUANT TO NRAP 21(a)(6) with the Nevada Supreme Court by using the appellate electronic filing system."
-      - "I further certify that I served a copy of this document by mailing a true and correct copy thereof, postage pre-paid, addressed to:"
-      - - "Harry L. Arnold"
-        - "Marquis Aurbach"
-        - "10001 Park Run Drive"
-        - "Las Vegas, NV 89145"
-      - "I further certify that a true and correct copy of this document was served by email to:"
-      - - "Harry L. Arnold"
-        - "harnold@maclaw.com"
-        - "Brian R. Hardy"
-        - "bhardy@maclaw.com"
+      - text: "I hereby certify that on October 17, 2022, I electronically filed the foregoing EMERGENCY PETITION FOR WRIT OF MANDAMUS PURSUANT TO NRAP 21(a)(6) with the Nevada Supreme Court by using the appellate electronic filing system."
+      - text: "I further certify that I served a copy of this document by mailing a true and correct copy thereof, postage pre-paid, addressed to:"
+      - lines:
+          - "Harry L. Arnold"
+          - "Marquis Aurbach"
+          - "10001 Park Run Drive"
+          - "Las Vegas, NV 89145"
+      - text: "I further certify that a true and correct copy of this document was served by email to:"
+      - lines:
+          - "Harry L. Arnold"
+          - "harnold@maclaw.com"
+          - "Brian R. Hardy"
+          - "bhardy@maclaw.com"
     signature:
       signers:
         - name: "Christopher Peterson"
@@ -403,8 +410,6 @@ In order to limit the touch screens to those with “special needs,” poll work
 [^52]: Nev. Const. art. 2 § 1A(9). The language of Article 2 § 1A(9) of the Nevada Constitution was codified as part of the “Voter’s Bill of Rights” in NRS 293.2546(9).
 
 
-[^38]: *Lorton v. Jones*, 130 Nev. 51, 54, 322 P.3d 1051 (2014), quoting *Salaiscooper v. Eighth Judicial Dist. Court*, 117 Nev. 892, 34 P.3d 509 (2001).
-
 ## IV. Nye County’s proposed “stringent signature verification” procedure violates NRS 293.285, NRS 293.8874, and NRS 293.277.
 
 The use of more “stringent signature verifications,” including “no prompting of voter verification information” and “requir[ing] identification if signature or verification fails,” conflict with the procedure for checking signatures mandated by the legislature under NRS 293.285, NRS 293.8874, and NRS 293.277.
@@ -415,13 +420,13 @@ In addition to outlining how verification of a signature is conducted, NRS 293.8
 
 > For purposes of subsection 1:
 >
-> (a) There is a reasonable question of fact as to whether the signature used for the mail ballot matches the signature of the voter if the signature used for the mail ballot differs in multiple, significant and obvious respects from the signatures of the voter available in the records of the clerk.
+> \(a) There is a reasonable question of fact as to whether the signature used for the mail ballot matches the signature of the voter if the signature used for the mail ballot differs in multiple, significant and obvious respects from the signatures of the voter available in the records of the clerk.
 >
-> (b) There is not a reasonable question of fact as to whether the signature used for the mail ballot matches the signature of the voter if:
+> \(b) There is not a reasonable question of fact as to whether the signature used for the mail ballot matches the signature of the voter if:
 >
-> (1) The signature used for the mail ballot is a variation of the signature of the voter caused by the substitution of initials for the first or middle name or the use of a common nickname and it does not otherwise differ in multiple, significant and obvious respects from the signatures of the voter available in the records of the clerk; or
+> \(1) The signature used for the mail ballot is a variation of the signature of the voter caused by the substitution of initials for the first or middle name or the use of a common nickname and it does not otherwise differ in multiple, significant and obvious respects from the signatures of the voter available in the records of the clerk; or
 >
-> (2) There are only slight dissimilarities between the signature used for the mail ballot and the signatures of the voter available in the records of the clerk.
+> \(2) There are only slight dissimilarities between the signature used for the mail ballot and the signatures of the voter available in the records of the clerk.
 
 [^53]: NRS 293.8874.
 
