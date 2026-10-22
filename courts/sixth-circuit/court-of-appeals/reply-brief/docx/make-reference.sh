@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx: the shared style recipe of the cross-engine layout
 # model (lib/docx/xengine-reference.sh; docs/EVAL-LOOP.md, "Cross-engine gate": Times New Roman 14 pt, Body Text in
 # 31.4 pt line boxes with a half-inch indent, footnotes 14 pt in 20 pt boxes with 7 pt between them, block quotations
@@ -7,19 +7,25 @@
 # Every other paragraph (cover, headings, tables, signature, certificates) carries its own spacing, written by
 # ca6-reply-brief.lua. Rerun after editing reference-src/ or the numbers below.
 # Needs: pandoc, perl, unzip, zip, xmllint (the formbook toolchain).
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 S=$D/reference-src
-T=$(mktemp -d)
-trap 'rm -rf "$T"' EXIT
+T=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$T"' EXIT
 sh "$D/../../../../../lib/docx/xengine-reference.sh" "$T/base.docx" font="Times New Roman" size=28 body=628 \
   single=400 indent=720 quote=280 note_after=140 >/dev/null
 
 # build <final footer relationship id> <out.docx>
 build() {
-  W=$T/w-$1
-  rm -rf "$W"
-  mkdir -p "$W"
+  W=$(mktemp -d "$T/w.XXXXXX") || exit 1
   (cd "$W" && unzip -q "$T/base.docx")
   # the body's last paragraph stays with the signature block (typst sets them in one unbreakable block)
   perl -0pi -e 's{</w:styles>}{<w:style w:type="paragraph" w:customStyle="1" w:styleId="CABodyKeep"><w:name w:val="CA Body Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style></w:styles>} or die "styles"' "$W/word/styles.xml"

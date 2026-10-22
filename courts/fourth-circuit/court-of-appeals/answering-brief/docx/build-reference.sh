@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Builds docx/reference.docx: the shared style recipe of the cross-engine layout model
 # (lib/docx/xengine-reference.sh: Times New Roman 14 pt everywhere, Body Text in 25.9 pt line boxes with a half-inch
 # indent, footnotes 14 pt in 16 pt boxes, exact line spacing; typst pitch-double, pitch-single), plus the "CA ..."
@@ -7,13 +7,21 @@
 # carry a reference's section properties into its output, so docx/render.sh writes them.
 # Usage: sh docx/build-reference.sh [out.docx]    (needs pandoc, unzip, zip, perl, xmllint)
 # The same file in the three doc-type folders except for ITAL (typst style-heading).
-set -eu
+set -euo pipefail
 ITAL=99        # numbered heading levels from this one are bold italic, label included (typst style-heading)
 D=$(cd "$(dirname "$0")" && pwd)
 OUT=${1:-$D/reference.docx}
 case $OUT in /*) ;; *) OUT=$PWD/$OUT ;; esac
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 sh "$D/../../../../../lib/docx/xengine-reference.sh" "$W/ref.docx" font="Times New Roman" size=28 body=518 \
   single=320 indent=720 note=320 note_after=140 quote=280 >/dev/null
 mkdir "$W/pkg" && cd "$W/pkg" && unzip -q ../ref.docx
