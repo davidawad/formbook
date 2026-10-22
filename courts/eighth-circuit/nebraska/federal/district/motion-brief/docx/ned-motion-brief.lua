@@ -1,307 +1,209 @@
--- ned-motion-brief.lua (docx engine, brief in support of a motion): what the Word output adds to pandoc's default
--- conversion, to match motion-brief/typst/ned-motion-brief.typ (see ../README.md, "Engines"):
---   * page 1: the two court-title lines, the caption as a table with a right and a bottom rule on the party column,
---     the case number and the bold title;
---   * the lead-in paragraph ("COME NOW ...") and unnumbered body paragraphs with a first-line indent;
---   * facts lists numbered 1., 2., ... with a hanging indent;
---   * headings: level 1 centered bold capitals; level 2 bold with a hanging indent; level 3 bold italic;
---   * the signature block at 3.25 in, kept with the last paragraph;
---   * the certificate of compliance (NECivR 7.1(d)(3)) and the certificate of service (when the sample has one);
---   * the title and the case number go to the document properties (subject, description), which the footer's
---     SUBJECT and COMMENTS fields show from page 2 on (the footers are in reference.docx).
--- Like the typst template, the build stops when the stated word count is over 13,000 (NECivR 7.1(d)(1)(A)) or the
--- sample has no compliance block. Everything case-specific comes from the sample's frontmatter.
+-- Brief in support of a motion, U.S. District Court for the District of Nebraska (ned), docx engine: what the Word
+-- output adds to pandoc's conversion, so that it reads and breaks as typst/ned-motion-brief.typ does (README
+-- "Engines"): the court title and caption (NECivR 10.1(a)(3)), the lead-in and the unnumbered body paragraphs, the
+-- headings, the block quotations, the numbered facts lists, the signature block (NECivR 11.1(a)(1)(A)), the
+-- certificate of compliance (NECivR 7.1(d)(3)) and the certificate of service (when the sample has one). The caption
+-- is an OOXML table, because pandoc has no caption construct. The footer from page 2 is in docx/reference.xml; it
+-- shows the paper's title and the case number from the document properties (SUBJECT, COMMENTS), which this filter
+-- sets from the frontmatter. Like the typst template, the build stops when the stated word count is over 13,000
+-- (NECivR 7.1(d)(1)(A)) or the sample has no compliance block. Everything printed comes from the sample's
+-- frontmatter and body: no case text lives in this file.
+--
+-- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
+-- exact line boxes of the typst pitch (twips = 20 x pt: 552 the double-spaced body, 276 a single line), the spaces
+-- between blocks those of the typst template (the larger of the one's below and the next one's above, written as
+-- the next paragraph's space before), and the break rules of typst on every run.
 
--- ---------------------------------------------------------------------------
--- Metadata values
--- ---------------------------------------------------------------------------
+local xe = require("docx.xengine")
 
--- A metadata value as a list of inlines (a frontmatter string is markdown, so it arrives as MetaInlines).
-local function inl(v)
-  if v == nil then return {} end
-  if type(v) == "string" then return { pandoc.Str(v) } end
-  if v.t == nil or v.t == "MetaInlines" then return v end -- a list of inlines
-  return { pandoc.Str(pandoc.utils.stringify(v)) }
+local BODY, SINGLE = 552, 276            -- typst pitch-double, pitch-single
+local INDENT = 720                       -- typst para-indent, item-indent, heading-hang, quote-indent: 0.5 in
+local TEXTW = 9360                       -- 6.5 in
+local CAP_LEFT, CAP_GUTTER = 4680, 360   -- typst caption-left 3.25 in, caption-gutter 0.25 in
+local CAP_INSET, CAP_PAD = 200, 138      -- typst caption-inset 10 pt, caption-pad (half a single line)
+local RIGHT_INSET = 144                  -- typst right-inset 0.1 in
+local DESIGNATION = 2160                 -- typst designation-indent 1.5 in
+local SIG_INDENT = 4680                  -- typst sig-indent 3.25 in
+local RECIPIENT_INDENT = 720             -- typst recipient-indent 0.5 in
+local WORD_LIMIT = 13000                 -- NECivR 7.1(d)(1)(A)
+
+local function plain(m)
+  if m == nil then return "" end
+  if type(m) == "string" then return m end
+  return pandoc.utils.stringify(m)
 end
 
-local function text(v)
-  if v == nil then return "" end
-  return pandoc.utils.stringify(v)
+-- A paragraph: o = { before, line, left, right, hanging, first, jc, keep } (a hanging indent writes no firstLine:
+-- Word takes firstLine over hanging). No space after: the next paragraph's space before carries the gap.
+local function p(body, o)
+  o = o or {}
+  local props = {}
+  if o.keep then props[#props + 1] = xe.KEEP end
+  props[#props + 1] = xe.spacing(o.before or 0, 0, o.line or SINGLE)
+  props[#props + 1] = xe.ind(o.left or 0, o.hanging, not o.hanging and (o.first or 0) or nil, o.right)
+  props[#props + 1] = xe.jc(o.jc or "left")
+  return xe.para(props, body)
 end
 
--- ---------------------------------------------------------------------------
--- Raw WordprocessingML helpers
--- ---------------------------------------------------------------------------
-
-local function esc(s)
-  s = s:gsub("&amp;", "&") -- pandoc can hand over an entity that is already encoded
-  s = s:gsub("&", "&amp;")
-  s = s:gsub("<", "&lt;")
-  s = s:gsub(">", "&gt;")
-  return s
-end
-
--- Run properties from flags: bold, italic (in schema order).
-local function rpr(f)
-  local x = ""
-  if f.b then x = x .. "<w:b/>" end
-  if f.i then x = x .. "<w:i/>" end
-  if x == "" then return "" end
-  return "<w:rPr>" .. x .. "</w:rPr>"
-end
-
-local function run(s, f)
-  return '<w:r>' .. rpr(f or {}) .. '<w:t xml:space="preserve">' .. esc(s) .. '</w:t></w:r>'
-end
-
--- Inline content (markdown already parsed by pandoc) as runs. Emphasis, strong and smart quotes are kept.
-local function runs(list, f)
-  f = f or {}
-  local out = {}
-  for _, el in ipairs(list) do
-    local t = el.t
-    if t == "Str" then
-      out[#out + 1] = run(el.text, f)
-    elseif t == "Space" or t == "SoftBreak" or t == "LineBreak" then
-      out[#out + 1] = run(" ", f)
-    elseif t == "Emph" then
-      out[#out + 1] = runs(el.content, { b = f.b, i = true })
-    elseif t == "Strong" then
-      out[#out + 1] = runs(el.content, { b = true, i = f.i })
-    elseif t == "Span" then
-      out[#out + 1] = runs(el.content, f)
-    elseif t == "Quoted" then
-      local q = el.quotetype == "DoubleQuote" and { "\u{201C}", "\u{201D}" } or { "\u{2018}", "\u{2019}" }
-      out[#out + 1] = run(q[1], f) .. runs(el.content, f) .. run(q[2], f)
-    else
-      out[#out + 1] = run(pandoc.utils.stringify(el), f)
-    end
+local function tbl(widths, cells)
+  local grid, tcs = {}, {}
+  for i, w in ipairs(widths) do
+    grid[#grid + 1] = '<w:gridCol w:w="' .. w .. '"/>'
+    tcs[#tcs + 1] = '<w:tc><w:tcPr><w:tcW w:w="' .. w .. '" w:type="dxa"/>' .. (cells[i].pr or "") .. '</w:tcPr>' ..
+      table.concat(cells[i].body) .. '</w:tc>'
   end
-  return table.concat(out)
+  return '<w:tbl><w:tblPr><w:tblW w:w="' .. TEXTW .. '" w:type="dxa"/><w:tblLayout w:type="fixed"/>' ..
+    '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/>' ..
+    '<w:right w:w="0" w:type="dxa"/></w:tblCellMar>' ..
+    '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="0"/></w:tblPr>' ..
+    '<w:tblGrid>' .. table.concat(grid) .. '</w:tblGrid><w:tr><w:trPr><w:cantSplit/></w:trPr>' .. table.concat(tcs) ..
+    '</w:tr></w:tbl>'
 end
 
--- Paragraph spacing in twips (1 pt = 20): space before, space after, exact line height.
-local function sp(before, after, line)
-  return string.format('<w:spacing w:before="%d" w:after="%d" w:line="%d" w:lineRule="exact"/>', before, after, line)
-end
+-- ---------------------------------------------------------------------------
+-- Cover: court title and caption (NECivR 10.1(a)(3))
+-- ---------------------------------------------------------------------------
 
-local DOUBLE = 480 -- body pitch, 24 pt
-local SINGLE = 288 -- single spacing, 14.4 pt
-local GAP = 132 -- the gap the typst template puts between blocks, 6.6 pt (see complaint/docx)
-local HEAD_GAP = 310 -- space before a heading (its pitch above), as in the complaint reference
-
-local function para(ppr, body)
-  return '<w:p><w:pPr>' .. ppr .. '</w:pPr>' .. body .. '</w:p>'
-end
-
--- A blank line of a given height (the typst v(...) spaces): an empty exact-height paragraph.
-local function spacer(line)
-  return para(sp(0, 0, line), '')
-end
-
--- Single-spaced lines at a left indent (twips, or nil), each with the gap before it (the first one gets `before`).
--- Every line but the last is kept with the next one (a signature or an address block must not split).
-local function single_lines(items, indent, before)
-  local out = {}
-  for k, body in ipairs(items) do
-    local last = k == #items
-    local kn = (not last) and '<w:keepNext/>' or ''
-    local ind = indent and string.format('<w:ind w:left="%d"/>', indent) or ''
-    out[#out + 1] = para(kn .. '<w:keepLines/>' .. sp(k == 1 and before or 0, 0, SINGLE) .. ind, body)
+local function cover(meta)
+  -- The caption stands a double line below the title (Word has no space before a table: the last title line takes
+  -- it as space after).
+  local out = {
+    p(xe.runs("IN THE UNITED STATES DISTRICT COURT", { b = true }), { jc = "center" }),
+    xe.para({ xe.spacing(0, BODY, SINGLE), xe.ind(0, nil, 0), xe.jc("center") },
+      xe.runs("FOR THE DISTRICT OF NEBRASKA", { b = true })),
+  }
+  -- Left cell: each party's names, then its designation, indented; "v." between the parties.
+  local left = {}
+  local parties = meta.caption.parties
+  for k, party in ipairs(parties) do
+    if k > 1 then left[#left + 1] = p(xe.runs("v.")) end
+    for _, n in ipairs(party.names) do left[#left + 1] = p(xe.inl(n)) end
+    local last = k == #parties
+    left[#left + 1] = xe.para({ xe.spacing(0, last and CAP_PAD or 0, SINGLE), xe.ind(DESIGNATION, nil, 0),
+      xe.jc("left") }, xe.inl(party.designation))
   end
-  return table.concat(out)
+  -- Right cell: the case number, the title.
+  local right = {
+    p(xe.runs("Case No. ") .. xe.inl(meta.case_number)),
+    p(xe.inl(meta.brief_title, { b = true }), { before = SINGLE }),
+  }
+  local rule = 'w:val="single" w:sz="6" w:space="0" w:color="000000"'
+  out[#out + 1] = tbl({ CAP_LEFT, TEXTW - CAP_LEFT }, {
+    { pr = '<w:tcBorders><w:bottom ' .. rule .. '/><w:right ' .. rule .. '/></w:tcBorders>' ..
+      '<w:tcMar><w:right w:w="' .. CAP_INSET .. '" w:type="dxa"/></w:tcMar>', body = left },
+    { pr = '<w:tcMar><w:left w:w="' .. (CAP_GUTTER + RIGHT_INSET) .. '" w:type="dxa"/></w:tcMar>', body = right },
+  })
+  return out
 end
 
 -- ---------------------------------------------------------------------------
--- Tables (the caption is a ruled table)
+-- The document: blocks with the space above and below them (typst block above/below)
 -- ---------------------------------------------------------------------------
 
-local NO_BORDERS = '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/>'
-  .. '<w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>'
-
-local function table_xml(grid, cells)
-  local g = {}
-  for _, w in ipairs(grid) do g[#g + 1] = '<w:gridCol w:w="' .. w .. '"/>' end
-  return '<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/><w:tblInd w:w="0" w:type="dxa"/>' .. NO_BORDERS
-    .. '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
-    .. '<w:tblLook w:val="0000"/></w:tblPr><w:tblGrid>' .. table.concat(g) .. '</w:tblGrid>'
-    .. '<w:tr><w:trPr><w:cantSplit/></w:trPr>' .. table.concat(cells) .. '</w:tr></w:tbl>'
-end
-
-local function cell(width, inner, tcpr)
-  return '<w:tc><w:tcPr><w:tcW w:w="' .. width .. '" w:type="dxa"/>' .. (tcpr or '') .. '</w:tcPr>' .. inner .. '</w:tc>'
-end
-
-local RULE = 'w:val="single" w:sz="6" w:space="0" w:color="000000"'
-
--- ---------------------------------------------------------------------------
--- Cover: court title, caption
--- ---------------------------------------------------------------------------
-
-local function court_title()
-  return para('<w:keepNext/><w:keepLines/>' .. sp(0, 0, SINGLE) .. '<w:jc w:val="center"/>',
-      run("IN THE UNITED STATES DISTRICT COURT", { b = true }))
-    .. para('<w:keepNext/><w:keepLines/>' .. sp(0, 0, SINGLE) .. '<w:jc w:val="center"/>',
-      run("FOR THE DISTRICT OF NEBRASKA", { b = true }))
-end
-
-local function caption(m)
-  -- Party column: names, "v." between the parties; each designation is indented 1.5 in (2160 twips).
-  local col = {}
-  for pk, p in ipairs(m.caption.parties) do
-    if pk > 1 then col[#col + 1] = { body = run("v."), ind = 0 } end
-    for _, n in ipairs(p.names) do col[#col + 1] = { body = runs(inl(n)), ind = 0 } end
-    col[#col + 1] = { body = runs(inl(p.designation)), ind = 2160 }
-  end
-  local lines = {}
-  for j, c in ipairs(col) do
-    local ind = c.ind > 0 and string.format('<w:ind w:left="%d"/>', c.ind) or ''
-    local before = j == 1 and 80 or 0 -- 4 pt inset from the top of the box
-    lines[#lines + 1] = para(sp(before, 0, SINGLE) .. ind, c.body)
-  end
-  local left_cell = cell(4680, table.concat(lines),
-    '<w:tcBorders><w:right ' .. RULE .. '/><w:bottom ' .. RULE .. '/></w:tcBorders>'
-    .. '<w:tcMar><w:left w:w="0" w:type="dxa"/>'
-    .. '<w:bottom w:w="160" w:type="dxa"/><w:right w:w="200" w:type="dxa"/></w:tcMar>')
-
-  -- Right column: case number, then the bold title.
-  local right = {}
-  right[#right + 1] = para(sp(0, 0, SINGLE), run("Case No. ") .. runs(inl(m.case_number)))
-  right[#right + 1] = para(sp(108, 0, SINGLE), runs(inl(m.brief_title), { b = true }))
-  local right_cell = cell(4320, table.concat(right), '<w:tcMar><w:left w:w="144" w:type="dxa"/></w:tcMar>')
-  local gutter = cell(360, para(sp(0, 0, SINGLE), ''))
-  return table_xml({ 4680, 360, 4320 }, { left_cell, gutter, right_cell })
-end
-
--- ---------------------------------------------------------------------------
--- Signature block and certificates (NECivR 11.1(a)(1)(A) order; at 3.25 in, as in the typst template)
--- ---------------------------------------------------------------------------
-
-local SIG_INDENT = 4680 -- 3.25 in
-local RECIPIENT_INDENT = 720 -- 0.5 in
-
-local function signature_lines(m)
-  local sig = m.signature
-  local lines = {}
-  lines[#lines + 1] = run("s/ ") .. runs(inl(sig.signer))
-  lines[#lines + 1] = run("Bar Number: ") .. runs(inl(sig.bar_number))
-  lines[#lines + 1] = run("Attorney for ") .. runs(inl(sig.attorney_for))
-  for _, l in ipairs(sig.firm) do lines[#lines + 1] = runs(inl(l)) end
-  return lines
-end
-
-local function signature(m)
-  return single_lines(signature_lines(m), SIG_INDENT, GAP)
-end
-
--- The certificate heading: centered bold capitals, one heading gap above.
-local function certificate_heading(title)
-  return para('<w:keepNext/><w:keepLines/>' .. sp(HEAD_GAP, 0, SINGLE) .. '<w:jc w:val="center"/>',
-    run(title, { b = true }))
-end
-
--- A double-spaced paragraph after a certificate heading: first-line indent, the heading's gap above.
-local function certificate_text(body)
-  return para('<w:keepNext/><w:keepLines/>' .. sp(170, 0, DOUBLE) .. '<w:ind w:firstLine="720"/>', body)
-end
-
-local function compliance_certificate(m)
-  if m.compliance == nil then
-    error("ned-motion-brief: NECivR 7.1(d)(3) requires a certificate of compliance; add a `compliance` block")
-  end
-  local words = text(m.compliance.word_count)
-  local count = tonumber((words:gsub(",", "")))
-  if count == nil or count > 13000 then
-    error("ned-motion-brief: NECivR 7.1(d)(1)(A) limits a supporting brief to 13,000 words; this one states " .. words)
-  end
-  local out = certificate_heading("CERTIFICATE OF COMPLIANCE")
-  out = out .. certificate_text(run("I hereby certify that this Brief complies with NECivR 7.1(d)(1). It contains ")
-    .. runs(inl(m.compliance.word_count))
-    .. run(" words, including the caption, headings, footnotes, and quotations, as calculated by the word-count function of ")
-    .. runs(inl(m.compliance.software)) .. run("."))
-  local sig = m.signature
-  local lines = { run("s/ ") .. runs(inl(sig.signer)), runs(inl(sig.signer)) .. run(", #") .. runs(inl(sig.bar_number)) }
-  return out .. single_lines(lines, SIG_INDENT, GAP)
-end
-
-local function service_certificate(m)
-  if m.service == nil then return "" end
-  local svc = m.service
-  local out = certificate_heading("CERTIFICATE OF SERVICE") .. certificate_text(runs(inl(svc.text)))
-  for _, r in ipairs(svc.recipients) do
-    local lines = {}
-    for _, l in ipairs(r) do lines[#lines + 1] = runs(inl(l)) end
-    out = out .. single_lines(lines, RECIPIENT_INDENT, GAP)
-  end
-  local sig = m.signature
-  local lines = { run("s/ ") .. runs(inl(sig.signer)), runs(inl(sig.signer)) .. run(", #") .. runs(inl(sig.bar_number)) }
-  return out .. single_lines(lines, SIG_INDENT, GAP)
-end
-
--- ---------------------------------------------------------------------------
--- Body
--- ---------------------------------------------------------------------------
-
-local TAB = pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>")
-
-local function styled(blocks, style)
-  return pandoc.Div(blocks, pandoc.Attr("", {}, { { "custom-style", style } }))
+-- typst's break opportunities that LibreOffice does not share: none inside ")(" (a word joiner), one after a
+-- slash before a letter ("CM/ECF": a zero-width space). Neither shows in the PDF text.
+local function breaks(s)
+  return pandoc.Str((s.text:gsub("%)%(", ")\u{2060}("):gsub("/([^%d])", "/\u{200B}%1")))
 end
 
 function Pandoc(doc)
-  local m = doc.meta
-  local out = {}
-  local function raw(x) out[#out + 1] = pandoc.RawBlock("openxml", x) end
-
-  -- Page 1: court title and caption, then the lead-in.
-  raw(court_title())
-  raw(spacer(348))
-  raw(caption(m))
-  raw(spacer(121))
-  if m.lead_in ~= nil then
-    out[#out + 1] = pandoc.Para(inl(m.lead_in))
+  doc = doc:walk({ Str = breaks })
+  local meta = doc.meta
+  local out = cover(meta)
+  -- the caption stands a single line above the text (typst: the caption block's below)
+  local pend = SINGLE
+  -- one paragraph: `above`/`below` as in typst, the rest as for p()
+  local function add(body, o, above, below)
+    o.before = math.max(pend, above or 0)
+    out[#out + 1] = p(body, o)
+    pend = below or 0
   end
-
-  -- Body. Paragraphs are unnumbered; a list is numbered 1., 2., ...; the block after a heading takes its gap.
-  local body = {}
-  for i, b in ipairs(doc.blocks) do
-    local after_heading = i > 1 and doc.blocks[i - 1].t == "Header"
-    local last_block = i == #doc.blocks
-    if b.t == "Para" then
-      body[#body + 1] = pandoc.Para(b.content)
-      if after_heading then
-        body[#body] = styled({ body[#body] }, last_block and "Body After Heading Keep Next" or "Body After Heading")
-      elseif last_block then
-        body[#body] = styled({ body[#body] }, "Body Keep Next")
-      end
-    elseif b.t == "OrderedList" or b.t == "BulletList" then
-      for k, item in ipairs(b.content) do
-        local label = b.t == "OrderedList" and (tostring(k) .. ".") or "\u{2022}"
-        local content = { pandoc.Str(label), TAB }
-        local first = item[1]
-        if first and (first.t == "Para" or first.t == "Plain") then
-          for _, x in ipairs(first.content) do content[#content + 1] = x end
-        end
-        local style = (after_heading and k == 1) and "Enumerated Item After Heading" or "Enumerated Item"
-        body[#body + 1] = styled({ pandoc.Para(content) }, style)
-      end
-    else
-      body[#body + 1] = b
+  -- typst line-group: single lines at an indent, a blank single line above, never split (`sticky`: kept with what
+  -- follows)
+  local function group(indent, lines, sticky)
+    for k, l in ipairs(lines) do
+      add(l, { left = indent, keep = sticky or k < #lines }, k == 1 and SINGLE or 0)
     end
   end
-  for _, b in ipairs(body) do out[#out + 1] = b end
+  local function body_par(inlines, keep)
+    add(xe.inl(inlines), { line = BODY, first = INDENT, keep = keep })
+  end
 
-  -- The signature stays with the last paragraph (a signature never starts a page alone).
-  raw(para('<w:keepNext/><w:keepLines/>' .. sp(0, 0, DOUBLE), '') .. signature(m))
-  raw(compliance_certificate(m))
-  raw(service_certificate(m))
+  if meta.lead_in then body_par(meta.lead_in) end
+  for i, b in ipairs(doc.blocks) do
+    local last = i == #doc.blocks
+    if b.t == "Header" then
+      if b.level == 1 then
+        local content = b.content:walk({ Str = function(s) return pandoc.Str(pandoc.text.upper(s.text)) end })
+        add(xe.inl(content, { b = true }), { line = BODY, jc = "center", keep = true })
+      else
+        add(xe.inl(b.content, { b = true, i = b.level > 2 }), { left = INDENT, hanging = INDENT, keep = true }, SINGLE)
+      end
+    elseif b.t == "Para" or b.t == "Plain" then
+      body_par(b.content, last)
+    elseif b.t == "OrderedList" or b.t == "BulletList" then
+      local n = b.t == "OrderedList" and b.listAttributes.start or 1
+      for _, item in ipairs(b.content) do
+        local lab = b.t == "OrderedList" and (n .. ".") or "\u{2022}"
+        for k, ib in ipairs(item) do
+          add(xe.runs(k == 1 and (lab .. "\t") or "") .. xe.inl(ib.content),
+            { line = BODY, left = 2 * INDENT, hanging = INDENT })
+        end
+        n = n + 1
+      end
+    elseif b.t == "BlockQuote" then
+      for _, q in ipairs(b.content) do
+        add(xe.inl(q.content), { left = INDENT, right = INDENT }, SINGLE, SINGLE)
+      end
+    else
+      error("ned-motion-brief.lua: unsupported block " .. b.t)
+    end
+  end
 
-  -- Document properties for the footer (SUBJECT and COMMENTS fields): the title in capitals, the case number.
-  doc.meta.date = nil
-  doc.meta.title = nil
-  doc.meta.subject = pandoc.MetaInlines({ pandoc.Str(text(m.footer_title):upper()) })
-  doc.meta.description = pandoc.MetaInlines({ pandoc.Str(text(m.case_number)) })
+  -- Signature block in NECivR 11.1(a)(1)(A) order.
+  local sig = meta.signature
+  local lines = { xe.runs("s/ ") .. xe.inl(sig.signer), xe.runs("Bar Number: ") .. xe.inl(sig.bar_number),
+    xe.runs("Attorney for ") .. xe.inl(sig.attorney_for) }
+  for _, l in ipairs(sig.firm or {}) do lines[#lines + 1] = xe.inl(l) end
+  group(SIG_INDENT, lines)
+  local short = { xe.runs("s/ ") .. xe.inl(sig.signer), xe.inl(sig.signer) .. xe.runs(", #") .. xe.inl(sig.bar_number) }
+  local function cert_heading(t)
+    add(xe.runs(t, { b = true }), { line = BODY, jc = "center", keep = true }, SINGLE)
+  end
 
-  doc.blocks = out
-  return doc
+  -- Certificate of compliance (NECivR 7.1(d)(3)); the stated count must be within NECivR 7.1(d)(1)(A).
+  if meta.compliance == nil then
+    error("ned-motion-brief: NECivR 7.1(d)(3) requires a certificate of compliance; add a `compliance` block")
+  end
+  local words = plain(meta.compliance.word_count)
+  local count = tonumber((words:gsub(",", "")))
+  if count == nil or count > WORD_LIMIT then
+    error("ned-motion-brief: NECivR 7.1(d)(1)(A) limits a supporting brief to 13,000 words; this one states " .. words)
+  end
+  cert_heading("CERTIFICATE OF COMPLIANCE")
+  add(xe.runs("I hereby certify that this Brief complies with NECivR 7.1(d)(1). It contains " .. words ..
+    " words, including the caption, headings, footnotes, and quotations, as calculated by the word-count function of ")
+    .. xe.inl(meta.compliance.software) .. xe.runs("."), { line = BODY, first = INDENT, keep = true })
+  group(SIG_INDENT, short)
+
+  -- Certificate of service, when the sample has one: the sentence, each recipient's block, the signature.
+  if meta.service then
+    local svc = meta.service
+    cert_heading("CERTIFICATE OF SERVICE")
+    body_par(svc.text, true)
+    for _, r in ipairs(svc.recipients) do
+      local rl = {}
+      for _, l in ipairs(r) do rl[#rl + 1] = xe.inl(l) end
+      group(RECIPIENT_INDENT, rl, true)
+    end
+    group(SIG_INDENT, short)
+  end
+
+  local blocks = {}
+  for _, x in ipairs(out) do blocks[#blocks + 1] = xe.raw(x) end
+  -- The footer's SUBJECT and COMMENTS fields: the paper's title in capitals, the case number.
+  return pandoc.Pandoc(blocks, pandoc.Meta({
+    subject = pandoc.MetaInlines({ pandoc.Str(pandoc.text.upper(plain(meta.footer_title))) }),
+    description = pandoc.MetaInlines({ pandoc.Str(plain(meta.case_number)) }),
+  }))
 end
