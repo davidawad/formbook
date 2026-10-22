@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Nebraska Bankruptcy motion brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the
+     face of the typst template ({font}, TeX Gyre Bonum: the exemplar's Bookman, data/exemplar-fonts.json) at 12 pt
+     (size 24 half points); Body Text and the headings in exact 28.8 pt line boxes (typst pitch-double, double
+     spacing) with a half-inch first-line indent; footnotes 11 pt (22 half points) in exact 13.2 pt boxes (264 twips,
+     typst pitch-note), 7 pt after each (typst footnote.entry gap); letter page with 1-inch margins and a centered
+     page number, its line 36.75 pt above the page foot (735 twips: where typst sets it, footer-descent 30 %).
+     Ligatures off (w14:ligatures; Bonum has fi/fl ligatures, which LibreOffice would form and typst does not set).
+     The caption, the headings, the signature blocks and the certificate of service are written by
+     docx/nebraskab-motion-brief.lua with their own spacing. "Body Text Last": the last body paragraph, kept with the
+     signature block after it (typst sets them in one unbreakable block). The section: the recipe's page, footer and
+     margins, but the right margin 1439 twips (1 in less 0.05 pt): LibreOffice sets Bonum a hair wider than typst and
+     decides a line in whole twips, so a line typst fills to the margin (p3, "... the collateral") wrapped one word
+     early; 1436 to 1439 all break every sample line as typst does, 1439 is the least change. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" mc:Ignorable="w14" base="xengine" size="24" body="576" single="288" indent="720" heading="576" heading-before="0" heading-after="0" note="264" note-size="22" note-after="140" footer="735">
+<w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{font}" w:hAnsi="{font}" w:eastAsia="{font}" w:cs="{font}"/><w:sz w:val="24"/><w:szCs w:val="24"/><w:lang w:val="en-US" w:eastAsia="zh-CN" w:bidi="ar-SA"/><w14:ligatures w14:val="none"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="0"/></w:pPr></w:pPrDefault></w:docDefaults>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextLast"><w:name w:val="Body Text Last"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1439" w:bottom="1440" w:left="1440" w:header="720" w:footer="735" w:gutter="0"/></w:sectPr>
+</reference>
