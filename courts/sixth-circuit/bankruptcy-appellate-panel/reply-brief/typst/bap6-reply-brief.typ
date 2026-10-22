@@ -8,7 +8,7 @@
 // YAML frontmatter of the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
-#import "../../../../../lib/typst/tables.typ": leader-row
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or is a style choice)
@@ -18,11 +18,21 @@
 #let doc-title = "reply brief of appellant"      // FRBP 8014(c)
 #let font-family = ("Times New Roman", "Liberation Serif")      // FRBP 8015(a)(5): proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // FRBP 8015(a)(5)(A): 14-point or larger, everywhere.
-#let body-leading = 1.955em                // FRBP 8015(a)(4): double-spaced. Pitch = 0.655em (Liberation Serif line box) + leading = 2.61em; single = 1.305em (calibration in ../README.md).
-#let single-leading = 0.65em               // headings, block quotations, cover, TOC and TOA: single-spaced (typst default leading).
+#let h1-size = 19.5pt                      // section headings and front-matter titles (style; Word sizes are half points)
+#let h2-size = 17pt                        // level-2 headings (style)
+#let title-size = 16pt                     // the brief's title on the cover (style)
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; LaTeX \pdfeachlineheight).
+#let pitch-double = 36.4pt                 // FRBP 8015(a)(4): double-spaced, 2.6 x type size (calibration in ../README.md)
+#let pitch-single = 18.2pt                 // block quotations, cover, TOC, TOA, signature, certificates: single-spaced
+#let pitch-h1 = 24pt                       // a line of a 19.5 pt heading
+#let pitch-h2 = 20pt                       // a line of a 17 pt heading
 #let page-margin = 1in                     // FRBP 8015(a)(4): at least one inch on all four sides.
-#let page-margin-bottom = page-margin + 4pt   // the cover's last line (pushed to the foot by 1fr) keeps its descender (about 3 pt at 14 pt) inside the 1-in margin too
 #let para-indent = 0.5in
+#let toc-step = 21pt                       // TOC: each heading level indents one more step; wrapped lines hang by one step
+#let toc-page-col = 36pt                   // TOC: the page numbers keep the last 36 pt of the line to themselves
+#let toa-page-col = 56pt                   // TOA: page lists such as 1, 4, 6, 8
 #let passim-threshold = 7                  // an authority cited on this many pages or more prints "passim" (style)
 #let word-limit = if doc-type == "reply" { 6500 } else { 13000 }   // FRBP 8015(a)(7)(B)(i)-(ii)
 #let oral-argument-required = doc-type == "opening"                  // FRBP 8019(a); LBR 8014-1(b). The filed appellee brief (19-8005) has none, so it is optional there.
@@ -106,37 +116,57 @@
   }
 }
 
+/// One single-spaced line block (cover, signature): its own paragraph, `above` the space before it.
+#let line-block(body, above: 0pt) = block(above: above, below: 0pt, width: 100%, par(first-line-indent: 0pt, body))
+
 // ---------------------------------------------------------------------------
 // Style: applied once to the whole document by `#show: brief-style`
 // ---------------------------------------------------------------------------
 
 #let brief-style(doc) = {
-  set page(paper: "us-letter", margin: page-margin)
+  // The page number: centered in a single-spaced line box (Word's footer), at the same place on every page.
+  set page(paper: "us-letter", margin: page-margin, footer-descent: 30%,
+    footer: context {
+      let n = here().page-numbering()
+      if n != none { align(center, text(..edges(pitch-single), counter(page).display(n))) }
+    })
   set text(font: font-family, size: type-size, lang: "en", fallback: false)
-  set par(leading: body-leading, spacing: body-leading, first-line-indent: para-indent, justify: false)
+  set par(first-line-indent: para-indent)
+  // The cross-engine layout model: first fit, no kerning or ligatures, no hyphenation, line boxes of the body
+  // pitch, a section sign kept with its number, no break inside "60(b)(5)".
+  show: xengine.with(pitch: pitch-double, list-indent: para-indent)
   set heading(numbering: none)
-  show heading.where(level: 1): it => block(sticky: true, above: 1.6em, below: 1.2em, width: 100%)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
-    #align(center, text(weight: "bold", it.body))
-  ]
-  show heading.where(level: 2): it => block(sticky: true, above: 1.2em, below: 1em, width: 100%)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
-    #text(weight: "bold", it.body)
-  ]
-  show heading.where(level: 3): it => block(sticky: true, above: 1.1em, below: 1em, width: 100%)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
-    #pad(left: 0.5in, text(weight: "bold", it.body))
-  ]
-  show heading.where(level: 4): it => block(sticky: true, above: 1em, below: 1em, width: 100%)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
-    #pad(left: 1in, text(style: "italic", it.body))
-  ]
-  show quote.where(block: true): it => block(above: 1em, below: 1.4em)[
-    #pad(left: 0.5in, right: 0.5in)[
-      #set par(leading: single-leading, first-line-indent: 0pt)
-      #it.body
-    ]
-  ]
+  show heading.where(level: 1): it => block(sticky: true, above: 22.4pt, below: 16.8pt, width: 100%, {
+    set text(size: h1-size, ..edges(pitch-h1))
+    set par(first-line-indent: 0pt)
+    align(center, text(weight: "bold", it.body))
+  })
+  show heading.where(level: 2): it => block(sticky: true, above: 16.8pt, below: 14pt, width: 100%, {
+    set text(size: h2-size, ..edges(pitch-h2))
+    set par(first-line-indent: 0pt)
+    text(weight: "bold", it.body)
+  })
+  show heading.where(level: 3): it => block(sticky: true, above: 15.4pt, below: 14pt, width: 100%, {
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    pad(left: 0.5in, text(weight: "bold", it.body))
+  })
+  show heading.where(level: 4): it => block(sticky: true, above: 14pt, below: 14pt, width: 100%, {
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    pad(left: 1in, text(style: "italic", it.body))
+  })
+  show quote.where(block: true): it => block(above: 14pt, below: 19.6pt, pad(left: 0.5in, right: 0.5in, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    it.body
+  }))
+  set footnote.entry(gap: 7pt, clearance: 12.6pt, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
+  show footnote.entry: it => {
+    set text(size: type-size, ..edges(pitch-single))   // FRBP 8015(a)(5)(A): 14-point in footnotes too
+    set par(first-line-indent: 0pt, hanging-indent: 0pt)
+    it
+  }
   doc
 }
 
@@ -145,32 +175,27 @@
 // the brief's title naming the party, and counsel's name, address, phone and email.
 // ---------------------------------------------------------------------------
 
-#let cover(meta) = page(numbering: none, margin: (x: page-margin, top: page-margin, bottom: page-margin-bottom))[
-  #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)   // single-spaced: the body's double paragraph spacing pushed the cover past one page (DEF-COVER-001)
-  #set align(center)
-  #let lines = ()
-  #let lines = lines + ([Case No. #meta.case_number],)
-  #let lines = lines + ([*United States Bankruptcy Appellate Panel of the Sixth Circuit*],)
-  #for side in meta.caption {
-    let names = side.names.map(n => inl(n))
-    lines = lines + ((stack(dir: ttb, spacing: single-leading, ..names, inl(side.designation))),)
-    if side != meta.caption.last() { lines = lines + ([v.],) }
+#let cover(meta) = page(numbering: none, {
+  set text(..edges(pitch-single))
+  set align(center)
+  line-block[Case No. #meta.case_number]
+  line-block(above: 12.6pt)[*United States Bankruptcy Appellate Panel of the Sixth Circuit*]
+  for (i, side) in meta.caption.enumerate() {
+    for (j, n) in side.names.enumerate() { line-block(above: if j == 0 { 12.6pt } else { 0pt }, inl(n)) }
+    line-block(inl(side.designation))
+    if i < meta.caption.len() - 1 { line-block(above: 12.6pt)[v.] }
   }
-  #stack(dir: ttb, spacing: 0.9em, ..lines)
-  #v(1.4em)
-  #inl(meta.proceeding)
-  #v(1.4em)
-  #text(size: 1.15em, weight: "bold", upper(meta.brief_title))
-  #v(1fr)
-  #for group in meta.counsel {
-    let rows = group.names.map(n => inl(n)) + group.lines.map(l => inl(l))
-    stack(dir: ttb, spacing: single-leading, ..rows)
-    v(0.9em)
+  line-block(above: 19.6pt, inl(meta.proceeding))
+  line-block(above: 19.6pt, text(size: title-size, weight: "bold", upper(meta.brief_title)))
+  for (gi, group) in meta.counsel.enumerate() {
+    for (ni, n) in group.names.enumerate() {
+      line-block(above: if ni > 0 { 0pt } else if gi == 0 { 36.4pt } else { 12.6pt }, inl(n))
+    }
+    for l in group.lines { line-block(inl(l)) }
   }
-  #stack(dir: ttb, spacing: single-leading, ..(meta.phone,).map(p => [#p]))
-  #v(0.8em)
-  #meta.at("date", default: "")
-]
+  line-block(above: 12.6pt, meta.phone)
+  if "date" in meta { line-block(above: 11.2pt, meta.date) }
+})
 
 // ---------------------------------------------------------------------------
 // Front matter
@@ -178,23 +203,23 @@
 
 /// Table of contents: every outlined heading, with its printed page.
 #let toc-section() = context {
+  set text(..edges(pitch-single))
   for head in query(heading.where(outlined: true)) {
-    let indent = if head.level == 1 { 0pt } else { 1.5em * (head.level - 1) }
-    block(above: 0.5em, below: 0.5em, width: 100%)[
-      #set par(leading: single-leading, first-line-indent: 0pt, hanging-indent: 1.5em)
-      #grid(columns: (1fr, auto), column-gutter: 0.5em, [#h(indent)#head.body], [#printed-page(head.location())])
-    ]
+    let indent = toc-step * (head.level - 1)
+    listing-row(head.location(), { h(indent); head.body }, printed-page(head.location()), toc-page-col,
+      indent + toc-step, 7pt)
   }
 }
 
 /// Table of authorities. Each `[text](toa:KEY)` link in the body is recorded with its page (the
 /// `show link` rule in `bap6-brief`); the registry in the frontmatter names each authority once.
 #let toa-section(auths) = context {
+  set text(..edges(pitch-single))
   let hits = query(<toa-hit>)
   for kind in kind-order {
     let keys = auths.keys().filter(k => auths.at(k).kind == kind)
     if keys.len() == 0 { continue }
-    block(sticky: true, above: 1.2em, below: 0.8em)[#text(weight: "bold", kind-heading.at(kind))]
+    block(sticky: true, above: 16.8pt, below: 11.2pt, par(first-line-indent: 0pt, text(weight: "bold", kind-heading.at(kind))))
     for k in keys.sorted(key: k => auths.at(k).at("sort", default: auths.at(k).at("name", default: auths.at(k).cite))) {
       let a = auths.at(k)
       let pgs = hits.filter(x => x.value == k).map(x => (p: x.location().page(), s: printed-page(x.location())))
@@ -204,24 +229,29 @@
       let cited = if kind == "case" and "name" in a { "*" + a.name + "*, " + a.cite }
         else if "name" in a { a.name + ", " + a.cite }
         else { a.cite }
-      block(width: 100%, above: 0.5em, below: 0.5em,
-        leader-row(inl(cited), shown, hang: 0.5in, leading: single-leading, dot-gap: 0pt, lead-gap: 0.25em, gutter: 0.3em,
-          min-leader: 1.5em))
+      listing-row(none, inl(cited), shown, toa-page-col, 0.5in, 7pt)
     }
   }
 }
 
 /// Certificate blocks and the signature block take the same closing block.
-#let signature-block(meta) = block(above: 1.6em, width: 100%, breakable: false)[
-  #set par(leading: single-leading, first-line-indent: 0pt)
-  #pad(left: 50%)[
-    Respectfully submitted,
-    #v(1.2em)
-    #stack(dir: ttb, spacing: single-leading, [s/ #meta.signature.signer], ..meta.signature.lines.map(l => inl(l)))
-    #v(0.8em)
-    #meta.at("date", default: "")
-  ]
-]
+#let signature-block(meta) = block(above: 22.4pt, below: 0pt, width: 100%, breakable: false, {
+  set text(..edges(pitch-single))
+  pad(left: 50%, {
+    line-block[Respectfully submitted,]
+    line-block(above: 16.8pt)[s/ #meta.signature.signer]
+    for l in meta.signature.lines { line-block(inl(l)) }
+    if "date" in meta { line-block(above: 11.2pt, meta.date) }
+  })
+})
+
+/// A front-matter or certificate page that opens with a heading: the heading (no space above it at the top of
+/// the page) and its text, single-spaced.
+#let cert-text(body) = block(above: 0pt, below: 0pt, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  body
+})
 
 // ---------------------------------------------------------------------------
 // The brief
@@ -278,18 +308,18 @@
 
   // Each certificate is one unbreakable block, so its heading, text and signature stay together.
   pagebreak()
-  block(breakable: false)[
-    #heading(level: 1, outlined: false)[Certificate of Compliance]
-    This #doc-title complies with the type-volume limitation of Fed. R. Bankr. P. 8015(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. Bankr. P. 8015(g). It complies with the typeface requirement of Fed. R. Bankr. P. 8015(a)(5) and the type-style requirement of Fed. R. Bankr. P. 8015(a)(6) because it was prepared in a proportionally spaced typeface, #font-family.first() at #str(type-size / 1pt)-point, with case names in italics.
-    #signature-block(meta)
-  ]
+  block(breakable: false, above: 0pt, below: 0pt, {
+    heading(level: 1, outlined: false)[Certificate of Compliance]
+    cert-text[This #doc-title complies with the type-volume limitation of Fed. R. Bankr. P. 8015(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. Bankr. P. 8015(g). It complies with the typeface requirement of Fed. R. Bankr. P. 8015(a)(5) and the type-style requirement of Fed. R. Bankr. P. 8015(a)(6) because it was prepared in a proportionally spaced typeface, #font-family.first() at #str(type-size / 1pt)-point, with case names in italics.]
+    signature-block(meta)
+  })
 
   if meta.at("service", default: false) {
-    block(breakable: false)[
-      #heading(level: 1, outlined: false)[Certificate of Service]
-      I certify that on #meta.at("date", default: "[date]") I filed this #doc-title with the Clerk of the Bankruptcy Appellate Panel of the Sixth Circuit through the court's electronic filing system, which will send notice of the filing to all counsel of record.
-      #signature-block(meta)
-    ]
+    block(breakable: false, above: 22.4pt, below: 0pt, {
+      heading(level: 1, outlined: false)[Certificate of Service]
+      cert-text[I certify that on #meta.at("date", default: "[date]") I filed this #doc-title with the Clerk of the Bankruptcy Appellate Panel of the Sixth Circuit through the court's electronic filing system, which will send notice of the filing to all counsel of record.]
+      signature-block(meta)
+    })
   }
 
   if addendum != none {

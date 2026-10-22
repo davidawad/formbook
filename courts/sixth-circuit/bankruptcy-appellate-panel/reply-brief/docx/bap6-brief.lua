@@ -1,27 +1,19 @@
 -- United States Bankruptcy Appellate Panel of the Sixth Circuit, DOCX engine (docs/DOCX.md).
--- The markdown contract (typst/bap6-*.typ, README "Markdown contract") -> a Word document on docx/reference.docx
--- (built by fb render from docx/reference.xml). Built here, as in the typst template: the cover (own section, no
--- footer), the front matter (own section, lower roman from i: disclosure, table of contents, table of authorities,
--- oral-argument statement), the brief (arabic from 1: body, signature block, certificate of compliance,
--- certificate of service, addendum).
--- The pages in the contents and the table of authorities (FRBP 8014(a)(2)-(3)): fb render
+-- The markdown contract (typst/bap6-*.typ, README "Markdown contract") -> a Word document on docx/reference.docx,
+-- on the cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every line a box
+-- of the typst pitch (exact line spacing), the typst template's spaces in twips (20 x pt), its break rules on every
+-- run. Built here, as in the typst template: the cover (own section, no footer), the front matter (own section,
+-- lower roman from i: disclosure, table of contents, table of authorities, oral-argument statement), the brief
+-- (arabic from 1, the section FORMBOOK_FINAL: body, signature block, certificate of compliance, certificate of
+-- service, addendum). The pages in the contents and the table of authorities (FRBP 8014(a)(2)-(3)): fb render
 -- (tools/fb/src/docxpass.rs) renders the document once, finds the page of every heading and citation in that PDF
 -- (the needles this filter writes to FORMBOOK_NEEDLES), and renders again with those pages (FORMBOOK_PAGES) until
--- they settle. Sections name fb render's footers (rIdFtrNone, rIdFtrPage); the last section is written to
--- FORMBOOK_FINAL. Word may paginate slightly differently from the LibreOffice PDF the pages come from.
+-- they settle. The sections name fb render's empty footer (rIdFtrNone) and this filter's page-number footer
+-- (rIdBapPage, FORMBOOK_FOOTERS: the number in a line box of the single pitch, as typst sets it). Word may
+-- paginate slightly differently from the LibreOffice PDF the pages come from.
 -- No case-specific text in this file. Metadata comes from the YAML frontmatter of the sample.
 
-local KIND_ORDER = { "case", "constitution", "statute", "regulation", "rule", "other" }
-local KIND_HEADING = {
-  case = "Cases", constitution = "Constitutional Provisions", statute = "Statutes",
-  regulation = "Regulations", rule = "Rules", other = "Other Authorities",
-}
-local FONT_NAME = "Times New Roman"   -- the face reference.xml names (typst: font-family.first())
-local TYPE_SIZE = 14                  -- points (typst: type-size)
-local PASSIM = 7                      -- an authority cited on this many pages or more prints "passim" (typst: passim-threshold)
-local NEEDLE_MAX = 60                 -- a needle is a prefix of the text (letters and digits only)
-local PAGE_SETUP = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440"'
-  .. ' w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>'
+local xe = require("docx.xengine")
 
 -- the only text that differs between the three copies of this file (see README "Engines")
 local CFG = {
@@ -32,22 +24,41 @@ local CFG = {
   oral_argument_required = false,
 }
 
+local FACE, SIZE = "Times New Roman", 14   -- typst font-family.first(), type-size
+local KIND_ORDER = { "case", "constitution", "statute", "regulation", "rule", "other" }
+local KIND_HEADING = {
+  case = "Cases", constitution = "Constitutional Provisions", statute = "Statutes",
+  regulation = "Regulations", rule = "Rules", other = "Other Authorities",
+}
+-- typst pitches and spaces, in twips
+local SINGLE, H1, H2 = 364, 480, 400            -- pitch-single 18.2 pt, pitch-h1 24 pt, pitch-h2 20 pt
+local H1_SZ, H2_SZ, TITLE_SZ = 39, 34, 32       -- 19.5, 17, 16 pt (half points)
+local TEXTW = 9360                              -- 6.5 in: letter, 1 in margins
+local TOC_STEP, TOC_COL, TOA_COL = 420, 720, 1120   -- toc-step 21 pt, toc-page-col 36 pt, toa-page-col 56 pt
+local PASSIM = 7                                -- an authority cited on this many pages or more prints "passim"
+local NEEDLE_MAX = 60                           -- a needle is a prefix of the text (letters and digits only)
+local SIG_LEFT = 4680                           -- the signature block's left edge: half the text width
+local SECT_LINE = '<w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>'
+local PAGE = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>'
+local SECT_COVER = '<w:sectPr><w:footerReference w:type="default" r:id="rIdFtrNone"/>' .. PAGE .. '</w:sectPr>'
+local SECT_ROMAN = '<w:sectPr><w:footerReference w:type="default" r:id="rIdBapPage"/>' .. PAGE
+  .. '<w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>'
+
 -- ---------------------------------------------------------------------------
 -- helpers
 -- ---------------------------------------------------------------------------
 
+-- the page-number footer (FORMBOOK_FOOTERS): centered, in a line box of the single pitch, as typst's folio
+local FOOTER = '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="364" w:lineRule="exact"/><w:ind w:firstLine="0"/>'
+  .. '<w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE '
+  .. '</w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p>'
+
+local function fail(msg) error("bap6: " .. msg, 0) end
+
 local function plain(v)
   if v == nil then return "" end
+  if type(v) == "string" then return v end
   return pandoc.utils.stringify(v)
-end
-
--- a metadata value (markdown inlines) as a list of inlines
-local function inl_of(v)
-  if v == nil then return pandoc.List() end
-  if type(v) == "string" then return pandoc.List({ pandoc.Str(v) }) end
-  if v.t == "MetaInlines" then return pandoc.List(v) end
-  if v.t == "MetaBlocks" and #v == 1 and v[1].content then return pandoc.List(v[1].content) end
-  return pandoc.List({ pandoc.Str(plain(v)) })
 end
 
 -- a metadata value (markdown inlines or blocks) as a list of blocks
@@ -58,25 +69,69 @@ local function meta_blocks(v)
     for _, b in ipairs(v) do out[#out + 1] = b end
     return out
   end
-  return { pandoc.Para(inl_of(v)) }
+  return { pandoc.Para(pandoc.Inlines(v)) }
 end
 
--- a paragraph in a named paragraph style (a custom-style Div)
-local function styled(inl, style)
-  return pandoc.Div({ pandoc.Para(inl) }, pandoc.Attr("", {}, { ["custom-style"] = style }))
+-- One single-spaced line paragraph (style Bap Line), its properties in schema order. o: keep (keep with the next
+-- paragraph), brk (page break before), tabs, before, after, line (twips), ind (xml), jc, body (runs).
+local function line(o)
+  local p = { xe.style("BapLine") }
+  if o.keep then p[#p + 1] = xe.KEEP elseif o.lines then p[#p + 1] = xe.LINES end
+  if o.brk then p[#p + 1] = xe.BREAK end
+  if o.tabs then p[#p + 1] = o.tabs end
+  p[#p + 1] = xe.spacing(o.before or 0, o.after or 0, o.line or SINGLE)
+  if o.ind then p[#p + 1] = o.ind end
+  if o.jc then p[#p + 1] = xe.jc(o.jc) end
+  return xe.raw(xe.para(p, o.body or ""))
 end
 
-local function raw_block(xml) return pandoc.RawBlock("openxml", xml) end
-local TAB = pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>")
-
--- the paragraph that ends a section (the next section starts on a new page)
-local function section_end(footer_rid, fmt)
-  local pg = fmt and ('<w:pgNumType w:fmt="' .. fmt .. '" w:start="1"/>') or ""
-  return raw_block('<w:p><w:pPr><w:pStyle w:val="SectionEnd"/><w:sectPr><w:footerReference w:type="default" r:id="'
-    .. footer_rid .. '"/>' .. PAGE_SETUP .. pg .. '<w:cols w:space="720"/></w:sectPr></w:pPr></w:p>')
+local function group_digits(n)
+  local s = tostring(n)
+  local out = s:reverse():gsub("(%d%d%d)", "%1,"):reverse()
+  return (out:gsub("^,", ""))
 end
 
--- Letters and digits only, lower case: fb render (docxpages.rs) normalizes the PDF text the same way.
+-- typst's count-words, line by line, on the markdown source of the body (FRBP 8015(g): headings count)
+local function source_words()
+  local f = PANDOC_STATE and PANDOC_STATE.input_files and PANDOC_STATE.input_files[1]
+  if not f then fail("no input file to count words in") end
+  local h = io.open(f, "r")
+  if not h then fail("cannot open " .. f) end
+  local text = h:read("a")
+  h:close()
+  local lines, dashes = {}, 0
+  for l in (text .. "\n"):gmatch("(.-)\n") do
+    if dashes < 2 then
+      if l == "---" then dashes = dashes + 1 end
+    elseif l:match("^#%s+[Aa]ddendum%s*$") then
+      break
+    else
+      lines[#lines + 1] = l
+    end
+  end
+  local n = 0
+  for _, l in ipairs(lines) do
+    local s = l
+    s = s:gsub("^%[%^[^%]]+%]:", " ")
+    s = s:gsub("%[%^[^%]]*%]", "")
+    s = s:gsub("%[([^%]]*)%]%([^%)]*%)", "%1")
+    s = s:gsub("^#+%s+", "")
+    s = s:gsub("^>%s?", "")
+    s = s:gsub("^%s*[-*+]%s+", "")
+    s = s:gsub("^%s*%d+[.)]%s+", "")
+    s = s:gsub("\\(.)", "%1")
+    s = s:gsub("%*", "")
+    s = s:gsub("_", "")
+    for _ in s:gmatch("%S+") do n = n + 1 end
+  end
+  return n
+end
+
+-- ---------------------------------------------------------------------------
+-- page numbers from the pass before (fb render, tools/fb/src/docxpass.rs and docxpages.rs)
+-- ---------------------------------------------------------------------------
+
+-- Letters and digits only, lower case: fb render (docxpages.rs) reduces the PDF text the same way.
 local function norm(s)
   return (s:lower():gsub("[^a-z0-9]", ""))
 end
@@ -97,17 +152,18 @@ local function load_pages()
   if not path or path == "" then return end
   local f = io.open(path, "r")
   if not f then return end
-  for line in f:lines() do
-    local id, page, lab = line:match("^([^\t]+)\t([^\t]*)\t(.*)$")
+  for l in f:lines() do
+    local id, page, lab = l:match("^([^\t]+)\t([^\t]*)\t(.*)$")
     if id then labels[id] = { page = tonumber(page) or 0, label = lab } end
   end
   f:close()
 end
 
+-- the printed page of a needle: "0" on the first pass, the pass before's label afterwards
 local function label_of(id)
   local l = labels[id]
   if l then return l.label end
-  return "00" -- the first pass: a placeholder of about the final width
+  return "0"
 end
 
 local function write_file(env, text)
@@ -118,46 +174,80 @@ local function write_file(env, text)
   f:close()
 end
 
--- typst's count-words, line by line, on the markdown source of the body (FRBP 8015(g): headings count)
-local function source_words()
-  local f = PANDOC_STATE and PANDOC_STATE.input_files and PANDOC_STATE.input_files[1]
-  if not f then error("bap6: no input file to count words in", 0) end
-  local h = io.open(f, "r")
-  if not h then error("bap6: cannot open " .. f, 0) end
-  local text = h:read("a")
-  h:close()
-  local lines, dashes = {}, 0
-  for line in (text .. "\n"):gmatch("(.-)\n") do
-    if dashes < 2 then
-      if line == "---" then dashes = dashes + 1 end
-    elseif line:match("^#%s+[Aa]ddendum%s*$") then
-      break
-    else
-      lines[#lines + 1] = line
-    end
+-- ---------------------------------------------------------------------------
+-- the parts
+-- ---------------------------------------------------------------------------
+
+-- a heading as typst sets it (brief-style); top: it opens a page (no space above it)
+local function heading(level, inlines, top, brk)
+  local o = { keep = true, brk = brk }
+  if level == 1 then
+    o.before, o.after, o.line, o.jc = 448, 336, H1, "center"
+    o.body = xe.inl(inlines, { b = true, sz = H1_SZ })
+  elseif level == 2 then
+    o.before, o.after, o.line = 336, 280, H2
+    o.body = xe.inl(inlines, { b = true, sz = H2_SZ })
+  elseif level == 3 then
+    o.before, o.after, o.ind = 308, 280, xe.ind(720)
+    o.body = xe.inl(inlines, { b = true })
+  else
+    o.before, o.after, o.ind = 280, 280, xe.ind(1440)
+    o.body = xe.inl(inlines, { i = true })
   end
-  local n = 0
-  for _, line in ipairs(lines) do
-    local s = line
-    s = s:gsub("^%[%^[^%]]+%]:", " ")
-    s = s:gsub("%[%^[^%]]*%]", "")
-    s = s:gsub("%[([^%]]*)%]%([^%)]*%)", "%1")
-    s = s:gsub("^#+%s+", "")
-    s = s:gsub("^>%s?", "")
-    s = s:gsub("^%s*[-*+]%s+", "")
-    s = s:gsub("^%s*%d+[.)]%s+", "")
-    s = s:gsub("\\(.)", "%1")
-    s = s:gsub("%*", "")
-    s = s:gsub("_", "")
-    for _ in s:gmatch("%S+") do n = n + 1 end
-  end
-  return n
+  if top then o.before = 0 end
+  return line(o)
 end
 
-local function group_digits(n)
-  local s = tostring(n)
-  local out = s:reverse():gsub("(%d%d%d)", "%1,"):reverse()
-  return (out:gsub("^,", ""))
+-- the signature block (typst signature-block): 22.4 pt above, at the middle of the line; `last_keep`: its last line
+-- stays with what follows
+local function signature(meta, out)
+  local sig = meta.signature
+  if sig == nil then return end
+  local L = {}
+  L[#L + 1] = { before = 448, body = xe.runs("Respectfully submitted,") }
+  L[#L + 1] = { before = 336, body = xe.runs("s/ " .. plain(sig.signer)) }
+  for _, l in ipairs(sig.lines or {}) do L[#L + 1] = { body = xe.inl(l) } end
+  if meta.date then L[#L + 1] = { before = 224, body = xe.inl(meta.date) } end
+  for i, o in ipairs(L) do
+    o.ind = xe.ind(SIG_LEFT)
+    o.keep = i < #L
+    o.lines = true
+    out[#out + 1] = line(o)
+  end
+end
+
+-- body blocks as typst sets them: a paragraph that follows another is indented, any other is not; headings,
+-- quotations and lists in the typst shapes. `top`: the first block opens a page.
+local function body(blocks, out, toc, top)
+  local prev = nil
+  for i, b in ipairs(blocks) do
+    local first = top and i == 1
+    if b.t == "Header" then
+      out[#out + 1] = heading(b.level, b.content, first)
+      prev = "head"
+    elseif b.t == "Para" or b.t == "Plain" then
+      local st = prev == "para" and "Body Text" or "First Paragraph"
+      out[#out + 1] = pandoc.Div({ pandoc.Para(b.content) }, { ["custom-style"] = st })
+      prev = "para"
+    elseif b.t == "BlockQuote" then
+      local n = #b.content
+      for j, q in ipairs(b.content) do
+        local st = n == 1 and "Bap Quote Only" or j == 1 and "Bap Quote First" or j == n and "Bap Quote Last" or "Bap Quote"
+        if q.t == "Para" or q.t == "Plain" then
+          out[#out + 1] = pandoc.Div({ pandoc.Para(q.content) }, { ["custom-style"] = st })
+        else
+          out[#out + 1] = q
+        end
+      end
+      prev = "quote"
+    elseif b.t == "OrderedList" or b.t == "BulletList" then
+      for _, x in ipairs(xe.list_items(b)) do out[#out + 1] = x end
+      prev = "list"
+    else
+      out[#out + 1] = b
+      prev = "other"
+    end
+  end
 end
 
 -- ---------------------------------------------------------------------------
@@ -173,16 +263,14 @@ function Pandoc(doc)
   if meta.authorities then
     for key, a in pairs(meta.authorities) do
       auth[key] = { kind = plain(a.kind), name = a.name, cite = a.cite, sort = a.sort }
-      if not KIND_HEADING[auth[key].kind] then
-        error("bap6: authority `" .. key .. "` has kind `" .. auth[key].kind .. "`", 0)
-      end
+      if not KIND_HEADING[auth[key].kind] then fail("authority `" .. key .. "` has kind `" .. auth[key].kind .. "`") end
     end
   end
 
   local disclosure = meta.disclosure and meta_blocks(meta.disclosure) or nil
   local oral = meta.oral_argument and meta_blocks(meta.oral_argument) or nil
 
-  -- body and addendum (typst: the addendum starts at a line `# Addendum` and keeps its heading)
+  -- body and addendum
   local main, addendum = {}, nil
   for i, b in ipairs(doc.blocks) do
     if b.t == "Header" and b.level == 1 and plain(b.content):match("^Addendum%s*$") then
@@ -198,40 +286,45 @@ function Pandoc(doc)
     for _, b in ipairs(main) do
       if b.t == "Header" and b.level == 1 and plain(b.content):sub(1, #s) == s then found = true end
     end
-    if not found then error("bap6: the sample has no `# " .. s .. "` section, required for a " .. CFG.kind .. " brief (FRBP 8014)", 0) end
+    if not found then fail("the sample has no `# " .. s .. "` section, required for a " .. CFG.kind .. " brief (FRBP 8014)") end
   end
-  if CFG.oral_argument_required and not meta.oral_argument then
-    error("bap6: the frontmatter needs `oral_argument` for a " .. CFG.kind .. " brief (FRBP 8019(a); LBR 8014-1(b))", 0)
+  if CFG.oral_argument_required and not oral then
+    fail("the frontmatter needs `oral_argument` for a " .. CFG.kind .. " brief (FRBP 8019(a); LBR 8014-1(b))")
   end
   local words = source_words()
   if words > CFG.word_limit then
-    error("bap6: the brief has " .. words .. " words; the limit for a " .. CFG.kind .. " brief is " .. CFG.word_limit .. " (FRBP 8015(a)(7)(B))", 0)
+    fail("the brief has " .. words .. " words; the limit for a " .. CFG.kind .. " brief is " .. CFG.word_limit .. " (FRBP 8015(a)(7)(B))")
   end
 
-  -- Citations and headings, in document order: each `toa:` link is an occurrence and a needle (kind N inside a
-  -- footnote), each heading a needle and a contents entry (typst lists every outlined heading).
-  local used, occurrences, entries = {}, {}, {}
+  -- Citations and headings, in page order: each `toa:` link is an occurrence and a needle (kind N inside a
+  -- footnote), each heading a needle and a contents entry (typst lists every outlined heading). A needle is its
+  -- text and what follows it, so a heading is found in the body, not at its entry in the table of contents.
+  local used, occurrences, toc = {}, {}, {}
   local scan_blocks
   local function scan_inlines(list, in_note)
     for i, el in ipairs(list) do
       if el.t == "Link" and el.target:match("^toa:") then
         local key = el.target:sub(5)
-        if not auth[key] then error("bap6: link toa:" .. key .. " has no entry in the authorities registry", 0) end
+        if not auth[key] then fail("link toa:" .. key .. " has no entry in the authorities registry") end
         used[key] = true
         occurrences[#occurrences + 1] = { key = key, id = "T:" .. (#occurrences + 1) }
         local rest = {}
         for j = i + 1, #list do rest[#rest + 1] = list[j] end
-        need(occurrences[#occurrences].id, in_note and "N" or "B", plain(el.content), pandoc.utils.stringify(rest))
+        -- typst records a citation where its link text ends (on the next page when the text runs over the page
+        -- end), so the needle starts at the last word of the link text
+        local last = ""
+        for w in plain(el.content):gmatch("%S+") do if norm(w) ~= "" then last = w end end
+        need(occurrences[#occurrences].id, in_note and "N" or "B", last, plain(rest))
       elseif el.t == "Note" then
         scan_blocks(el.content, true)
-      elseif el.content and type(el.content) ~= "string" then
+      elseif el.content ~= nil and type(el.content) == "table" and el.t ~= "Code" then
         scan_inlines(el.content, in_note)
       end
     end
   end
   scan_blocks = function(list, in_note)
     for _, b in ipairs(list) do
-      if b.t == "Para" or b.t == "Plain" then
+      if b.t == "Para" or b.t == "Plain" or b.t == "Header" then
         scan_inlines(b.content, in_note)
       elseif b.t == "BlockQuote" or b.t == "Div" then
         scan_blocks(b.content, in_note)
@@ -241,27 +334,25 @@ function Pandoc(doc)
     end
   end
   local function text_after(blocks, i)
-    return blocks[i + 1] and pandoc.utils.stringify(blocks[i + 1]):sub(1, 40) or ""
+    return blocks[i + 1] and plain(blocks[i + 1]):sub(1, 40) or ""
   end
-  -- a front-matter heading: a needle (its title and what follows) and, unless `quiet`, a contents entry
-  local function front_heading(id, title, after, quiet)
+  local function toc_add(id, level, inls) toc[#toc + 1] = { id = id, level = level, inl = inls } end
+  local function front(id, title, after, list)
     need(id, "B", title, after)
-    if not quiet then entries[#entries + 1] = { id = id, level = 1, text = title } end
+    toc_add(id, 1, pandoc.Inlines({ pandoc.Str(title) }))
+    scan_blocks(list or {}, false)
   end
   local h_n = 0
   local function scan_body(blocks)
     for i, b in ipairs(blocks) do
       if b.t == "Header" then
         h_n = h_n + 1
-        local id = "H:" .. h_n
-        need(id, "B", plain(b.content), text_after(blocks, i))
-        entries[#entries + 1] = { id = id, level = b.level, text = plain(b.content) }
-      else
-        scan_blocks({ b }, false)
+        need("H:" .. h_n, "B", plain(b.content), text_after(blocks, i))
+        toc_add("H:" .. h_n, b.level, b.content)
       end
+      scan_blocks({ b }, false)
     end
   end
-
   -- the first group of the table of authorities (its heading's needle runs into it)
   local first_kind = nil
   for _, kind in ipairs(KIND_ORDER) do
@@ -269,30 +360,25 @@ function Pandoc(doc)
   end
 
   -- front matter, in page order
-  local front_id
+  local front_id = "F:toc"
   if disclosure then
     front_id = "F:disclosure"
-    front_heading(front_id, "Corporate Disclosure Statement", pandoc.utils.stringify(disclosure[1]):sub(1, 40))
-    scan_blocks(disclosure, false)
+    front(front_id, "Corporate Disclosure Statement", plain(disclosure[1]):sub(1, 40), disclosure)
   end
   need("F:toc", "B", "Table of Contents", "")
-  front_id = front_id or "F:toc"
-  front_heading("F:toa", "Table of Authorities", first_kind and KIND_HEADING[first_kind] or "")
-  if oral then
-    front_heading("F:oral", "Statement Regarding Oral Argument", pandoc.utils.stringify(oral[1]):sub(1, 40))
-    scan_blocks(oral, false)
-  end
+  front("F:toa", "Table of Authorities", first_kind and KIND_HEADING[first_kind] or "")
+  if oral then front("F:oral", "Statement Regarding Oral Argument", plain(oral[1]):sub(1, 40), oral) end
   -- the brief
   local body_id = "S:body"
   if main[1] and main[1].t == "Header" then
     body_id = "H:1"
   elseif main[1] then
-    need(body_id, "B", pandoc.utils.stringify(main[1]):sub(1, NEEDLE_MAX), "")
+    need(body_id, "B", plain(main[1]):sub(1, NEEDLE_MAX), "")
   end
   scan_body(main)
   if addendum then scan_body(addendum) end
   for key in pairs(auth) do
-    if not used[key] then error("bap6: authority `" .. key .. "` is listed but never cited in the body", 0) end
+    if not used[key] then fail("authority `" .. key .. "` is listed but never cited in the body") end
   end
 
   local nl = {}
@@ -301,95 +387,79 @@ function Pandoc(doc)
   nl[#nl + 1] = "#section\t" .. front_id .. "\tlower-roman\t"
   nl[#nl + 1] = "#section\t" .. body_id .. "\tdecimal\t"
   write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
-  write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdFtrPage"/>' .. PAGE_SETUP
-    .. '<w:pgNumType w:fmt="decimal" w:start="1"/><w:cols w:space="720"/></w:sectPr>')
+  write_file("FORMBOOK_FOOTERS", "rIdBapPage\t" .. FOOTER .. "\n")
+  write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdBapPage"/>' .. PAGE
+    .. '<w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>')
 
-  -- links to toa: keep their text only
-  local unlink = {
-    Link = function(el)
-      if el.target:match("^toa:") then return el.content end
-      return nil
-    end,
-  }
-  local function unlinked(blocks) return pandoc.Pandoc(blocks):walk(unlink).blocks end
-  -- the first paragraph after a heading has no first-line indent (typst: first-line-indent skips it)
-  local function first_unindented(blocks)
-    local out = {}
-    for i, b in ipairs(blocks) do
-      if i == 1 and b.t == "Para" then b = styled(b.content, "FirstParagraph") end
-      out[#out + 1] = b
-    end
-    return out
+  -- the text of a citation stays, the link goes; typst's break rules on every run pandoc writes
+  local function prep(blocks)
+    local d = pandoc.Pandoc(blocks):walk({ Link = function(el) if el.target:match("^toa:") then return el.content end end })
+    return d:walk({ Inlines = xe.inlines }).blocks
   end
+  if disclosure then disclosure = prep(disclosure) end
+  if oral then oral = prep(oral) end
+  main = prep(main)
+  if addendum then addendum = prep(addendum) end
 
   local out = {}
   local function add(b) out[#out + 1] = b end
-  local function addall(bs) for _, b in ipairs(bs) do add(b) end end
 
-  local function signature_block()
-    local sig = meta.signature
-    if not sig then return end
-    add(styled({ pandoc.Str("Respectfully submitted,") }, "SignatureLead"))
-    add(styled(pandoc.List({ pandoc.Str("s/"), pandoc.Space() }) .. inl_of(sig.signer), "Signature"))
-    for _, l in ipairs(sig.lines or {}) do add(styled(inl_of(l), "Signature")) end
-    if meta.date then add(styled(inl_of(meta.date), "SignatureDate")) end
-  end
-
-  -- ---- cover (FRBP 8015(a)(2)): its own section, no footer
-  add(styled(pandoc.List({ pandoc.Str("Case No. ") }) .. inl_of(meta.case_number), "Centered"))
-  add(styled({ pandoc.Strong({ pandoc.Str("United States Bankruptcy Appellate Panel of the Sixth Circuit") }) }, "CoverGap"))
+  -- ---- cover (FRBP 8015(a)(2)): its own section, no footer (typst cover)
+  local function cl(before, body) add(line({ before = before, jc = "center", body = body })) end
+  cl(0, xe.runs("Case No. " .. plain(meta.case_number)))
+  cl(252, xe.runs("United States Bankruptcy Appellate Panel of the Sixth Circuit", { b = true }))
   for i, side in ipairs(meta.caption or {}) do
-    for j, n in ipairs(side.names or {}) do
-      add(styled(inl_of(n), (j == 1) and "CoverGap" or "Centered"))
-    end
-    add(styled(inl_of(side.designation), "Centered"))
-    if i < #meta.caption then add(styled({ pandoc.Str("v.") }, "CoverGap")) end
+    for j, n in ipairs(side.names or {}) do cl(j == 1 and 252 or 0, xe.inl(n)) end
+    cl(0, xe.inl(side.designation))
+    if i < #meta.caption then cl(252, xe.runs("v.")) end
   end
-  add(styled(inl_of(meta.proceeding), "CoverWide"))
-  add(styled(inl_of(meta.brief_title), "CoverTitle"))
+  cl(392, xe.inl(meta.proceeding))
+  cl(392, xe.runs(pandoc.text.upper(plain(meta.brief_title)), { b = true, sz = TITLE_SZ }))
   for gi, group in ipairs(meta.counsel or {}) do
-    for ni, n in ipairs(group.names or {}) do
-      local style = "Centered"
-      if ni == 1 then style = (gi == 1) and "CoverBottom" or "CoverGroup" end
-      add(styled(inl_of(n), style))
-    end
-    for _, l in ipairs(group.lines or {}) do add(styled(inl_of(l), "Centered")) end
+    for ni, n in ipairs(group.names or {}) do cl(ni > 1 and 0 or gi == 1 and 728 or 252, xe.inl(n)) end
+    for _, l in ipairs(group.lines or {}) do cl(0, xe.inl(l)) end
   end
-  if meta.phone then add(styled(inl_of(meta.phone), "CoverGroup")) end
-  if meta.date then add(styled(inl_of(meta.date), "CoverDate")) end
-  add(section_end("rIdFtrNone", nil))
+  if meta.phone then cl(252, xe.inl(meta.phone)) end
+  if meta.date then cl(224, xe.inl(meta.date)) end
+  add(xe.raw('<w:p><w:pPr>' .. SECT_LINE .. SECT_COVER .. '</w:pPr></w:p>'))
 
-  -- ---- front matter (lower roman from i)
+  -- ---- front matter (lower-roman footer)
+  local opened = false   -- whether a page of the front matter has begun (the next heading breaks the page)
   if disclosure then
-    add(styled({ pandoc.Str("Corporate Disclosure Statement") }, "FrontHeading"))
-    addall(first_unindented(unlinked(disclosure)))
+    add(heading(1, pandoc.Inlines({ pandoc.Str("Corporate Disclosure Statement") }), true))
+    body(disclosure, out, nil, false)
+    opened = true
   end
-  add(styled({ pandoc.Str("Table of Contents") }, disclosure and "ContentsHeadingBreak" or "ContentsHeading"))
-  for _, e in ipairs(entries) do
-    add(styled({ pandoc.Str(e.text), TAB, pandoc.Str(label_of(e.id)) }, "TOCEntry" .. math.min(e.level, 4)))
+  add(heading(1, pandoc.Inlines({ pandoc.Str("Table of Contents") }), true, opened))
+  local toc_tabs = xe.leader_tab(TEXTW)
+  for _, e in ipairs(toc) do
+    local ind = TOC_STEP * (e.level - 1)
+    add(line({ lines = true, tabs = toc_tabs, before = 140, ind = xe.ind(ind + TOC_STEP, TOC_STEP, nil, TOC_COL),
+      body = xe.inl(e.inl) .. xe.runs(xe.LEAD) .. xe.runs(label_of(e.id)) }))
   end
 
-  add(styled({ pandoc.Str("Table of Authorities") }, "AuthoritiesHeading"))
+  add(heading(1, pandoc.Inlines({ pandoc.Str("Table of Authorities") }), true, true))
   for _, kind in ipairs(KIND_ORDER) do
     local members = {}
     for key, a in pairs(auth) do
       if a.kind == kind then members[#members + 1] = key end
     end
     if #members > 0 then
-      local function sort_key(k)
+      local function sk(k)
         local a = auth[k]
         return a.sort and plain(a.sort) or (a.name and plain(a.name) or plain(a.cite))
       end
-      table.sort(members, function(x, y) return sort_key(x) < sort_key(y) end)
-      add(styled({ pandoc.Str(KIND_HEADING[kind]) }, "AuthorityKind"))
+      table.sort(members, function(x, y) return sk(x) < sk(y) end)
+      add(line({ keep = true, before = 336, after = 224, body = xe.runs(KIND_HEADING[kind], { b = true }) }))
       for _, k in ipairs(members) do
         local a = auth[k]
-        local inl = pandoc.List({})
+        local il = pandoc.Inlines({})
         if a.name then
-          if kind == "case" then inl:insert(pandoc.Emph(inl_of(a.name))) else inl:extend(inl_of(a.name)) end
-          inl:insert(pandoc.Str(", "))
+          if kind == "case" then il:insert(pandoc.Emph(pandoc.Inlines(a.name))) else il:extend(pandoc.Inlines(a.name)) end
+          il:insert(pandoc.Str(","))
+          il:insert(pandoc.Space())
         end
-        inl:extend(inl_of(a.cite))
+        il:extend(pandoc.Inlines(a.cite))
         -- the distinct pages of the authority, in page order (typst: passim from PASSIM pages)
         local pages, seen = {}, {}
         for oi, o in ipairs(occurrences) do
@@ -398,68 +468,53 @@ function Pandoc(doc)
             local p = l and l.page or -oi
             if not seen[p] then
               seen[p] = true
-              pages[#pages + 1] = { page = l and l.page or 0, label = l and l.label or "00" }
+              pages[#pages + 1] = { page = l and l.page or 0, label = l and l.label or "0" }
             end
           end
         end
         table.sort(pages, function(x, y) return x.page < y.page end)
-        inl:insert(TAB)
+        local where
         if #pages >= PASSIM then
-          inl:insert(pandoc.Str("passim"))
+          where = "passim"
         else
           local l = {}
           for _, p in ipairs(pages) do l[#l + 1] = p.label end
-          inl:insert(pandoc.Str(table.concat(l, ", ")))
+          where = table.concat(l, ", ")
         end
-        add(styled(inl, "TOAEntry"))
+        add(line({ lines = true, tabs = toc_tabs, before = 140, ind = xe.ind(720, 720, nil, TOA_COL),
+          body = xe.inl(il) .. xe.runs(xe.LEAD) .. xe.runs(where) }))
       end
     end
   end
 
   if oral then
-    add(styled({ pandoc.Str("Statement Regarding Oral Argument") }, "FrontHeadingBreak"))
-    addall(first_unindented(unlinked(oral)))
+    add(heading(1, pandoc.Inlines({ pandoc.Str("Statement Regarding Oral Argument") }), true, true))
+    body(oral, out, nil, false)
   end
-  add(section_end("rIdFtrPage", "lowerRoman"))
+  add(xe.raw('<w:p><w:pPr>' .. SECT_LINE .. SECT_ROMAN .. '</w:pPr></w:p>'))
 
   -- ---- the brief (arabic from 1)
-  -- the first heading opens a page: no space above it (typst drops a block's space at the top of a page)
-  for i, b in ipairs(unlinked(main)) do
-    if i == 1 and b.t == "Header" and b.level == 1 then
-      b = styled(b.content, "Heading1Top")
-    elseif i == 2 and b.t == "Para" and main[1].t == "Header" then
-      b = styled(b.content, "FirstParagraph")
-    end
-    add(b)
-  end
-  signature_block()
+  body(main, out, nil, true)
+  signature(meta, out)
 
-  -- certificate of compliance (FRBP 8015(h)); each certificate is kept together, as typst's unbreakable block
-  add(styled({ pandoc.Str("Certificate of Compliance") }, "FrontHeadingBreak"))
-  add(styled({ pandoc.Str("This " .. CFG.doc_title .. " complies with the type-volume limitation of Fed. R. Bankr. P. 8015(a)(7)(B) because it contains " .. group_digits(words) .. " words, excluding the parts of the brief exempted by Fed. R. Bankr. P. 8015(g). It complies with the typeface requirement of Fed. R. Bankr. P. 8015(a)(5) and the type-style requirement of Fed. R. Bankr. P. 8015(a)(6) because it was prepared in a proportionally spaced typeface, " .. FONT_NAME .. " at " .. TYPE_SIZE .. "-point, with case names in italics.") }, "CertText"))
-  signature_block()
+  -- certificate of compliance (FRBP 8015(h)): one unbreakable block on a new page
+  add(heading(1, pandoc.Inlines({ pandoc.Str("Certificate of Compliance") }), true, true))
+  add(line({ keep = true, body = xe.runs("This " .. CFG.doc_title .. " complies with the type-volume limitation of Fed. R. Bankr. P. 8015(a)(7)(B) because it contains " .. group_digits(words) .. " words, excluding the parts of the brief exempted by Fed. R. Bankr. P. 8015(g). It complies with the typeface requirement of Fed. R. Bankr. P. 8015(a)(5) and the type-style requirement of Fed. R. Bankr. P. 8015(a)(6) because it was prepared in a proportionally spaced typeface, " .. FACE .. " at " .. SIZE .. "-point, with case names in italics.") }))
+  signature(meta, out)
 
   -- certificate of service (FRBP 8011, CM/ECF convention; the wording is ours, see README)
   if meta.service == true then
-    add(styled({ pandoc.Str("Certificate of Service") }, "CertHeading"))
-    add(styled({ pandoc.Str("I certify that on " .. (meta.date and plain(meta.date) or "[date]") .. " I filed this " .. CFG.doc_title .. " with the Clerk of the Bankruptcy Appellate Panel of the Sixth Circuit through the court’s electronic filing system, which will send notice of the filing to all counsel of record.") }, "CertText"))
-    signature_block()
+    add(heading(1, pandoc.Inlines({ pandoc.Str("Certificate of Service") }), false))
+    add(line({ keep = true, body = xe.runs("I certify that on " .. (meta.date and plain(meta.date) or "[date]") .. " I filed this " .. CFG.doc_title .. " with the Clerk of the Bankruptcy Appellate Panel of the Sixth Circuit through the court’s electronic filing system, which will send notice of the filing to all counsel of record.") }))
+    signature(meta, out)
   end
 
   if addendum then
-    local first = true
-    for _, b in ipairs(unlinked(addendum)) do
-      if first and b.t == "Header" then
-        add(styled(b.content, "FrontHeadingBreak"))
-      else
-        add(b)
-      end
-      first = false
-    end
+    out[#out + 1] = heading(1, addendum[1].content, true, true)
+    body({ table.unpack(addendum, 2) }, out, nil, false)
   end
 
-  -- the frontmatter is consumed here; pandoc would print a title block
-  doc.meta = pandoc.Meta({})
-  doc.blocks = out
+  doc.blocks = pandoc.Blocks(out)
+  doc.meta = pandoc.Meta({})   -- pandoc would print the date and title as a block at the top
   return doc
 end
