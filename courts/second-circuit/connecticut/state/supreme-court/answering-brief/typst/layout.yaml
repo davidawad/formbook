@@ -1,0 +1,79 @@
+# Connecticut Supreme Court (conn): appellee's brief (P.B. 67-5). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to Practice Book §§ 67-2A, 67-4, 67-5 and 62-7 (../../rules.md, CONN-*); lengths in points.
+# No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant (the
+# certifications' form text).
+size: 12                  # CONN-FORM-002 (P.B. 67-2A(b)): body text, footnotes and block quotes in 12-point serif
+pitch:
+  body: 20.7              # CONN-FORM-004: spacing 1.5 (Word's 1.5 lines, 1.5 x 1.15 x 12 pt), uniform in body, notes, quotes
+  single: 13.8            # cover, tables, signature and service lists: single (1.15 x 12 pt)
+margin: {top: 108, bottom: 108, left: 108, right: 108}   # CONN-FORM-003 (P.B. 67-2A(b)): 1 1/2 inches on all sides
+indent: 36                # first-line indent, half an inch (style)
+# CONN-FORM-007, CONN-COVER-002 (P.B. 67-1(b), 67-2A(c)): one pagination scheme from the cover on, centered at the
+# bottom, "Page X of XX".
+page_number: {align: center, from: 1, text: "Page {page} of {pages}"}
+footnote: {size: 12, pitch: body, gap: 6.9}   # CONN-FORM-002, -004: notes at 12 point and the text's 1.5 spacing
+quote: {left: 36, right: 36, pitch: body, above: 6.9, below: 13.8}   # CONN-FORM-002, -004: block quotes at 12 pt, 1.5
+# CONN-FORM-002: headings in 14-point serif, at the text's 1.5 spacing (1.5 x 1.15 x 14 pt); bold for emphasis, never
+# underlined (CONN-FORM-005); the sections carry their own numbers or letters (CONN-FORM-006).
+heading:
+  - {align: center, bold: true, size: 14, pitch: 24.15, above: 20.7, below: 13.8}
+  - {bold: true, size: 14, pitch: 24.15, above: 20.7, below: 6.9}
+  - {bold: true, italic: true, size: 14, pitch: 24.15, above: 13.8, below: 6.9}
+  - {bold: true, size: 14, pitch: 24.15, above: 13.8, below: 6.9}
+# CONN-COVER-001 (P.B. 67-2A(d)): from the top, the court, the docket number, the case name, the nature of the brief,
+# and counsel (name, address, telephone and email), in 12-point serif; numbered "Page 1 of XX" (CONN-COVER-002).
+cover:
+  - {text: "{court}", align: center, bold: true}
+  - {text: "{docket}", align: center, above: 14.4}
+  - {text: "{case_title}", align: center, above: 18}
+  - {text: "{title}", align: center, bold: true, above: 18}
+  - columns:
+      each: counsel
+      per_row: 2
+      row_gap: 14.4
+      blocks:
+        - {text: "{role}", italic: true, optional: true}
+        - {text: "{names}"}
+        - {text: "{lines}"}
+    gutter: 14.4
+    above: 18
+# CONN-SEC-011 (P.B. 67-5(a)-(c)): the table of contents, the statement of issues (the body's first level-1 section,
+# on a page of its own, CONN-SEC-003), then the table of authorities.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 24, step: 24, above: 6.9}
+body_before_tables: {count: 1, place: between}
+# CONN-SEC-007 (P.B. 67-4(c), 67-5(c)): every authority cited, with its pages; the groups in the order of the old template,
+# "passim" over five pages.
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 56
+  hang: 24
+  above: 6.9
+  passim: 6
+  group: {bold: true, above: 13.8, below: 6.9}
+  kinds:
+    - {kind: cases, title: "Cases"}
+    - {kind: constitutional, title: "Constitutional Provisions"}
+    - {kind: statutes, title: "Statutes"}
+    - {kind: rules, title: "Rules"}
+    - {kind: other, title: "Other Authorities"}
+# CONN-SIG-001 (P.B. 67-5(j), 62-8): the signature of counsel of record, never split; then the certifications
+# (P.B. 67-2A(f)): word count (CONN-CERT-003), redaction (CONN-CERT-002) and service under P.B. 62-7 with the names
+# and email addresses of counsel served (CONN-CERT-001), each a 14-point heading (CONN-FORM-002).
+closing:
+  - group:
+      - {text: "Respectfully submitted,"}
+      - {text: "{signature.party}", right: 108, above: 13.8}
+      - {text: "/s/ {signature.signer}", right: 108, above: 13.8}
+      - {text: "{signature.lines}", right: 108}
+      - {text: "{date}", above: 6.9}
+    above: 20.7
+  - {text: "CERTIFICATION OF WORD COUNT", heading: 1}
+  - {text: "The undersigned certifies that this brief complies with the word limit of Practice Book § 67-3A and contains {word_count} words, counted as that section directs.", pitch: body}
+  - {text: "CERTIFICATION OF REDACTION", heading: 1}
+  - {text: "The undersigned certifies that this brief and any appendix have been redacted, or do not contain any names or other personal identifying information that is prohibited from disclosure by rule, statute, court order or case law.", pitch: body}
+  - {text: "CERTIFICATION OF SERVICE", heading: 1}
+  - group:
+      - {text: "The undersigned certifies that a copy of this brief has been delivered electronically on {date} to each counsel of record listed below, in compliance with Practice Book § 62-7.", pitch: body}
+      - {text: "{service}", above: 6.9}
+      - {text: "/s/ {signature.signer}", above: 20.7}

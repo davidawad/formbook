@@ -44,58 +44,58 @@ signature:
     - David.Schulz@yale.edu
     - "Juris. No.: 439467"
 authorities:
-  - {key: celentano, category: cases, text: "*Celentano v. Rocque*, 282 Conn. 645 (2007)"}
-  - {key: new-haven-1988, category: cases, text: "*City of New Haven v. Freedom of Info. Comm'n*, 205 Conn. 767 (1988)"}
-  - {key: ct-emergency-2018, category: cases, text: "*Comm'r of Emergency Servs. & Pub. Prot. v. Freedom of Info. Comm'n*, 330 Conn. 372 (2018)"}
-  - {key: cotton, category: cases, text: "*Cotton v. Chief, Police Dep't, City of Meriden*, No. FIC 2006-020 (Aug. 9, 2006)"}
-  - {key: dps-1997, category: cases, text: "*Dep't of Pub. Safety, Div. of State Police v. Freedom of Info. Comm'n*, 242 Conn. 79 (1997)"}
-  - {key: dps-1998, category: cases, text: "*Dep't of Pub. Safety v. Freedom of Info. Commission*, 51 Conn. App. 100 (App. Ct. 1998)"}
-  - {key: director-2001, category: cases, text: "*Director, Ret. & Benefits Servs. Div. v. Freedom of Info. Comm'n*, 256 Conn. 764 (2001)"}
-  - {key: foti, category: cases, text: "*Does v. Foti*, 81 So. 3d 101 (La. App. 2011)"}
-  - {key: galvin, category: cases, text: "*Galvin v. Freedom of Info. Comm'n*, 201 Conn. 448 (1986)"}
-  - {key: glastonbury, category: cases, text: "*Glastonbury Educ. Ass'n v. Freedom of Info. Comm'n*, 234 Conn. 704 (1995)"}
-  - {key: goldstar, category: cases, text: "*Goldstar Med. Servs., Inc. v. Dep't of Soc. Servs.*, 288 Conn. 790 (2008)"}
-  - {key: graeber, category: cases, text: "*Graeber v. Chief, Police Dep't, City of New Haven*, No. FIC 2016-0865 (Sept. 27, 2017)"}
-  - {key: griffin, category: cases, text: "*Griffin Hosp. v. Comm'n on Hosps. & Health Care*, 200 Conn. 489 (1986)"}
-  - {key: hartford, category: cases, text: "*Hartford v. Freedom of Info. Comm'n*, 201 Conn. 421 (1986)"}
-  - {key: hoda, category: cases, text: "*Hoda v. Chief, Police Dep't City of New Haven*, No. FIC 2007-143 (Jan. 23, 2008)"}
-  - {key: huang-do, category: cases, text: "*Huang Do v. Comm'r of Motor Vehicles*, 330 Conn. 651 (2019)"}
-  - {key: huck, category: cases, text: "*Huck v. Inland Wetlands & Watercourses Agency*, 203 Conn. 525 (1987)"}
-  - {key: lawrence, category: cases, text: "*Lawrence v. Kozlowski*, 171 Conn. 705 (1976)"}
-  - {key: lesher, category: cases, text: "*Lesher v. Hynes*, 19 N.Y.3d 57 (N.Y. 2012)"}
-  - {key: loevy, category: cases, text: "*Loevy & Loevy v. New York City Police Department*, 139 A.D.3d 598 (N.Y. 2016)"}
-  - {key: lopez, category: cases, text: "*Lopez v. Chief, Police Department, City of Bridgeport*, No. FIC 2015-398 (Feb 24, 2016)"}
-  - {key: mapother, category: cases, text: "*Mapother v. Dep't of Just.*, 3 F.3d 1533 (D.C. Cir. 1993)"}
-  - {key: newman, category: cases, text: "*Newman v. King County*, 947 P.2d 712 (Wash. 1997)"}
-  - {key: robbins, category: cases, text: "*NLRB v. Robbins Tire & Rubber Co.*, 437 U.S. 214 (1978)"}
-  - {key: ostrowski, category: cases, text: "*Ostrowski v. Avery*, 243 Conn. 355 (1997)"}
-  - {key: pardee, category: cases, text: "*Pardee v. Connick*, 267 So. 3d 179 (La. App. 2019)"}
-  - {key: pictometry, category: cases, text: "*Pictometry Int'l Corp. v. Freedom of Info. Comm'n*, 307 Conn. 648 (2013)"}
-  - {key: rouen, category: cases, text: "*Rouen v. Chief, Police Dep't, Town of Groton*, No. FIC 2006-064 (Jan. 24, 2007)"}
-  - {key: samperi, category: cases, text: "*Samperi v. Inland Wetlands Agency*, 226 Conn. 579 (1993)"}
-  - {key: sedensky, category: cases, text: "*Sedensky v. Freedom of Info. Comm'n*, 2013 WL 6698055"}
-  - {key: strauss, category: cases, text: "*Strauss v. Chief, Police Dep't, Town of Westport*, No. FIC 2010-487 (May 25, 2011)"}
-  - {key: reporters, category: cases, text: "*U.S. Dep't of Just. v. Reps. Comm. for Freedom of Press*, 489 U.S. 749 (1989)"}
-  - {key: unistar, category: cases, text: "*Unistar Properties, LLC v. Conservation & Inland Wetlands Comm'n of Town of Putnam*, 293 Conn. 93 (2009)"}
-  - {key: wood, category: cases, text: "*Wood v. Chief, Police Dep't, Town of Enfield*, No. FIC 2008-523 (July 22, 2009)"}
-  - {key: yates, category: cases, text: "*Yates v. Chief, Police Dep't, Town of Westport*, No. FIC 2005-084 (Dec. 14, 2005)"}
-  - {key: amodio, category: cases, text: "*Amodio v. Amodio*, 56 Conn. App. 459 (App. Ct. 2000)"}
-  - {key: altimari, category: cases, text: "*Altimari v. Dep't of Emergency Servs. & Pub. Prot.*, No. FIC 2017-0623 (Sept. 26, 2018)"}
-  - {key: matter-la, category: cases, text: "*In re A Matter Under Investigation*, 15 So. 3d 972 (La. 2009)"}
-  - {key: 1-210-b3, category: statutes, text: "Conn. Gen. Stat. § 1-210(b)(3)"}
-  - {key: 1-210-b3c, category: statutes, text: "Conn. Gen. Stat. § 1-210(b)(3)(C)"}
-  - {key: 1-210-b3d, category: statutes, text: "Conn. Gen. Stat. § 1-210(b)(3)(D)"}
-  - {key: 4-183c, category: statutes, text: "Conn. Gen. Stat. § 4-183(c)"}
-  - {key: 4-183j, category: statutes, text: "Conn. Gen. Stat. § 4-183(j)"}
-  - {key: 19a-411c, category: statutes, text: "Conn. Gen. Stat. § 19a-411(c)"}
-  - {key: la-44-3f, category: statutes, text: "La. Stat. Ann. § 44:3(F)"}
-  - {key: wa-42-56-240, category: statutes, text: "Wash. Rev. Code § 42.56.240"}
-  - {key: blacks, category: other, text: "*Prospective*, Black's Law Dictionary (11th ed. 2019)"}
-  - {key: nossiter, category: other, text: "Adam Nossiter, *Grand Jury Won't Indict Doctor in Hurricane Deaths*, N.Y. Times (July 25, 2007)"}
-  - {key: khan, category: other, text: "Carrie Khan & Robert Siegel, *Jury Sides with Doctor in Katrina \"Mercy Killings,\"* NPR (July 24, 2007)"}
-  - {key: turchiano, category: other, text: "Danielle Turchiano, *\"America's Most Wanted\" Viewer Tip Leads to 1,187th Capture*, Variety (Mar. 24, 2021)"}
-  - {key: bailey, category: other, text: "Ryan Bailey, *The Case of Dr. Anna Pou: Physician Liability in Emergency Situations*, 12 AMA J. Ethics Virtual Mentor 726 (2010)"}
-  - {key: hr-proc, category: other, text: "18 H.R. Proc., Pt. 8, p. 3911 (Conn. 1975)"}
+  celentano: {kind: cases, cite: "*Celentano v. Rocque*, 282 Conn. 645 (2007)", sort: "celentano v rocque 282 conn 645 2007"}
+  new-haven-1988: {kind: cases, cite: "*City of New Haven v. Freedom of Info. Comm'n*, 205 Conn. 767 (1988)", sort: "city of new haven v freedom of info commn 205 conn 767 1988"}
+  ct-emergency-2018: {kind: cases, cite: "*Comm'r of Emergency Servs. & Pub. Prot. v. Freedom of Info. Comm'n*, 330 Conn. 372 (2018)", sort: "commr of emergency servs pub prot v freedom of info commn 330 conn 372 2018"}
+  cotton: {kind: cases, cite: "*Cotton v. Chief, Police Dep't, City of Meriden*, No. FIC 2006-020 (Aug. 9, 2006)", sort: "cotton v chief police dept city of meriden no fic 2006020 aug 9 2006"}
+  dps-1997: {kind: cases, cite: "*Dep't of Pub. Safety, Div. of State Police v. Freedom of Info. Comm'n*, 242 Conn. 79 (1997)", sort: "dept of pub safety div of state police v freedom of info commn 242 conn 79 1997"}
+  dps-1998: {kind: cases, cite: "*Dep't of Pub. Safety v. Freedom of Info. Commission*, 51 Conn. App. 100 (App. Ct. 1998)", sort: "dept of pub safety v freedom of info commission 51 conn app 100 app ct 1998"}
+  director-2001: {kind: cases, cite: "*Director, Ret. & Benefits Servs. Div. v. Freedom of Info. Comm'n*, 256 Conn. 764 (2001)", sort: "director ret benefits servs div v freedom of info commn 256 conn 764 2001"}
+  foti: {kind: cases, cite: "*Does v. Foti*, 81 So. 3d 101 (La. App. 2011)", sort: "does v foti 81 so 3d 101 la app 2011"}
+  galvin: {kind: cases, cite: "*Galvin v. Freedom of Info. Comm'n*, 201 Conn. 448 (1986)", sort: "galvin v freedom of info commn 201 conn 448 1986"}
+  glastonbury: {kind: cases, cite: "*Glastonbury Educ. Ass'n v. Freedom of Info. Comm'n*, 234 Conn. 704 (1995)", sort: "glastonbury educ assn v freedom of info commn 234 conn 704 1995"}
+  goldstar: {kind: cases, cite: "*Goldstar Med. Servs., Inc. v. Dep't of Soc. Servs.*, 288 Conn. 790 (2008)", sort: "goldstar med servs inc v dept of soc servs 288 conn 790 2008"}
+  graeber: {kind: cases, cite: "*Graeber v. Chief, Police Dep't, City of New Haven*, No. FIC 2016-0865 (Sept. 27, 2017)", sort: "graeber v chief police dept city of new haven no fic 20160865 sept 27 2017"}
+  griffin: {kind: cases, cite: "*Griffin Hosp. v. Comm'n on Hosps. & Health Care*, 200 Conn. 489 (1986)", sort: "griffin hosp v commn on hosps health care 200 conn 489 1986"}
+  hartford: {kind: cases, cite: "*Hartford v. Freedom of Info. Comm'n*, 201 Conn. 421 (1986)", sort: "hartford v freedom of info commn 201 conn 421 1986"}
+  hoda: {kind: cases, cite: "*Hoda v. Chief, Police Dep't City of New Haven*, No. FIC 2007-143 (Jan. 23, 2008)", sort: "hoda v chief police dept city of new haven no fic 2007143 jan 23 2008"}
+  huang-do: {kind: cases, cite: "*Huang Do v. Comm'r of Motor Vehicles*, 330 Conn. 651 (2019)", sort: "huang do v commr of motor vehicles 330 conn 651 2019"}
+  huck: {kind: cases, cite: "*Huck v. Inland Wetlands & Watercourses Agency*, 203 Conn. 525 (1987)", sort: "huck v inland wetlands watercourses agency 203 conn 525 1987"}
+  lawrence: {kind: cases, cite: "*Lawrence v. Kozlowski*, 171 Conn. 705 (1976)", sort: "lawrence v kozlowski 171 conn 705 1976"}
+  lesher: {kind: cases, cite: "*Lesher v. Hynes*, 19 N.Y.3d 57 (N.Y. 2012)", sort: "lesher v hynes 19 ny3d 57 ny 2012"}
+  loevy: {kind: cases, cite: "*Loevy & Loevy v. New York City Police Department*, 139 A.D.3d 598 (N.Y. 2016)", sort: "loevy loevy v new york city police department 139 ad3d 598 ny 2016"}
+  lopez: {kind: cases, cite: "*Lopez v. Chief, Police Department, City of Bridgeport*, No. FIC 2015-398 (Feb 24, 2016)", sort: "lopez v chief police department city of bridgeport no fic 2015398 feb 24 2016"}
+  mapother: {kind: cases, cite: "*Mapother v. Dep't of Just.*, 3 F.3d 1533 (D.C. Cir. 1993)", sort: "mapother v dept of just 3 f3d 1533 dc cir 1993"}
+  newman: {kind: cases, cite: "*Newman v. King County*, 947 P.2d 712 (Wash. 1997)", sort: "newman v king county 947 p2d 712 wash 1997"}
+  robbins: {kind: cases, cite: "*NLRB v. Robbins Tire & Rubber Co.*, 437 U.S. 214 (1978)", sort: "nlrb v robbins tire rubber co 437 us 214 1978"}
+  ostrowski: {kind: cases, cite: "*Ostrowski v. Avery*, 243 Conn. 355 (1997)", sort: "ostrowski v avery 243 conn 355 1997"}
+  pardee: {kind: cases, cite: "*Pardee v. Connick*, 267 So. 3d 179 (La. App. 2019)", sort: "pardee v connick 267 so 3d 179 la app 2019"}
+  pictometry: {kind: cases, cite: "*Pictometry Int'l Corp. v. Freedom of Info. Comm'n*, 307 Conn. 648 (2013)", sort: "pictometry intl corp v freedom of info commn 307 conn 648 2013"}
+  rouen: {kind: cases, cite: "*Rouen v. Chief, Police Dep't, Town of Groton*, No. FIC 2006-064 (Jan. 24, 2007)", sort: "rouen v chief police dept town of groton no fic 2006064 jan 24 2007"}
+  samperi: {kind: cases, cite: "*Samperi v. Inland Wetlands Agency*, 226 Conn. 579 (1993)", sort: "samperi v inland wetlands agency 226 conn 579 1993"}
+  sedensky: {kind: cases, cite: "*Sedensky v. Freedom of Info. Comm'n*, 2013 WL 6698055", sort: "sedensky v freedom of info commn 2013 wl 6698055"}
+  strauss: {kind: cases, cite: "*Strauss v. Chief, Police Dep't, Town of Westport*, No. FIC 2010-487 (May 25, 2011)", sort: "strauss v chief police dept town of westport no fic 2010487 may 25 2011"}
+  reporters: {kind: cases, cite: "*U.S. Dep't of Just. v. Reps. Comm. for Freedom of Press*, 489 U.S. 749 (1989)", sort: "us dept of just v reps comm for freedom of press 489 us 749 1989"}
+  unistar: {kind: cases, cite: "*Unistar Properties, LLC v. Conservation & Inland Wetlands Comm'n of Town of Putnam*, 293 Conn. 93 (2009)", sort: "unistar properties llc v conservation inland wetlands commn of town of putnam 293 conn 93 2009"}
+  wood: {kind: cases, cite: "*Wood v. Chief, Police Dep't, Town of Enfield*, No. FIC 2008-523 (July 22, 2009)", sort: "wood v chief police dept town of enfield no fic 2008523 july 22 2009"}
+  yates: {kind: cases, cite: "*Yates v. Chief, Police Dep't, Town of Westport*, No. FIC 2005-084 (Dec. 14, 2005)", sort: "yates v chief police dept town of westport no fic 2005084 dec 14 2005"}
+  amodio: {kind: cases, cite: "*Amodio v. Amodio*, 56 Conn. App. 459 (App. Ct. 2000)", sort: "amodio v amodio 56 conn app 459 app ct 2000"}
+  altimari: {kind: cases, cite: "*Altimari v. Dep't of Emergency Servs. & Pub. Prot.*, No. FIC 2017-0623 (Sept. 26, 2018)", sort: "altimari v dept of emergency servs pub prot no fic 20170623 sept 26 2018"}
+  matter-la: {kind: cases, cite: "*In re A Matter Under Investigation*, 15 So. 3d 972 (La. 2009)", sort: "in re a matter under investigation 15 so 3d 972 la 2009"}
+  1-210-b3: {kind: statutes, cite: "Conn. Gen. Stat. § 1-210(b)(3)", sort: "conn gen stat 1210b3"}
+  1-210-b3c: {kind: statutes, cite: "Conn. Gen. Stat. § 1-210(b)(3)(C)", sort: "conn gen stat 1210b3c"}
+  1-210-b3d: {kind: statutes, cite: "Conn. Gen. Stat. § 1-210(b)(3)(D)", sort: "conn gen stat 1210b3d"}
+  4-183c: {kind: statutes, cite: "Conn. Gen. Stat. § 4-183(c)", sort: "conn gen stat 4183c"}
+  4-183j: {kind: statutes, cite: "Conn. Gen. Stat. § 4-183(j)", sort: "conn gen stat 4183j"}
+  19a-411c: {kind: statutes, cite: "Conn. Gen. Stat. § 19a-411(c)", sort: "conn gen stat 19a411c"}
+  la-44-3f: {kind: statutes, cite: "La. Stat. Ann. § 44:3(F)", sort: "la stat ann 443f"}
+  wa-42-56-240: {kind: statutes, cite: "Wash. Rev. Code § 42.56.240", sort: "wash rev code 4256240"}
+  blacks: {kind: other, cite: "*Prospective*, Black's Law Dictionary (11th ed. 2019)", sort: "prospective blacks law dictionary 11th ed 2019"}
+  nossiter: {kind: other, cite: "Adam Nossiter, *Grand Jury Won't Indict Doctor in Hurricane Deaths*, N.Y. Times (July 25, 2007)", sort: "adam nossiter grand jury wont indict doctor in hurricane deaths ny times july 25 2007"}
+  khan: {kind: other, cite: "Carrie Khan & Robert Siegel, *Jury Sides with Doctor in Katrina \"Mercy Killings,\"* NPR (July 24, 2007)", sort: "carrie khan robert siegel jury sides with doctor in katrina mercy killings npr july 24 2007"}
+  turchiano: {kind: other, cite: "Danielle Turchiano, *\"America's Most Wanted\" Viewer Tip Leads to 1,187th Capture*, Variety (Mar. 24, 2021)", sort: "danielle turchiano americas most wanted viewer tip leads to 1187th capture variety mar 24 2021"}
+  bailey: {kind: other, cite: "Ryan Bailey, *The Case of Dr. Anna Pou: Physician Liability in Emergency Situations*, 12 AMA J. Ethics Virtual Mentor 726 (2010)", sort: "ryan bailey the case of dr anna pou physician liability in emergency situations 12 ama j ethics virtual mentor 726 2010"}
+  hr-proc: {kind: other, cite: "18 H.R. Proc., Pt. 8, p. 3911 (Conn. 1975)", sort: "18 hr proc pt 8 p 3911 conn 1975"}
 ---
 
 # STATEMENT OF PRINCIPAL ISSUES
