@@ -67,7 +67,7 @@ print(xd.count_words(src, "Certificate"), xd.count_words(src, nil))
 local s = xe.urls(pandoc.Inlines({{ pandoc.Str("https://a.org/b/c-d/2015/") }}))[1].text
 print((s:gsub("\u{{200B}}", "|")))
 print(xd.lookup({{ a = {{}} }}, "a.b|___"), xd.lookup({{ a = {{ b = "x" }} }}, "a.b|___"))
-local ls = xd.commonmark_lists(pandoc.read("a. one\n\nb. two\n\n(1) three\n\n1. four\n", "markdown").blocks)
+local ls = xd.commonmark_lists(pandoc.read("a. one\n\nb. two\n\n(1) three\n\n1. four\n\nx\n\nc. five\nd. six\n", "markdown").blocks)
 local t = {{}}
 for _, b in ipairs(ls) do t[#t + 1] = b.t .. ":" .. pandoc.utils.stringify(b) end
 print(table.concat(t, " "))
@@ -81,10 +81,13 @@ print(table.concat(t, " "))
     assert_eq!(lines[1], "(ab)\tiv.\t12.");
     // the body before the certificate: "#" and "—" alone are no words; with the certificate and the note 22
     assert_eq!(lines[2], "13\t22");
-    assert_eq!(lines[3], "https://|a.org/|b/|c-d/|2015/");
+    assert_eq!(lines[3], "https://|a.|org/|b/|c-d/|2015/");
     // a missing field's default; lists CommonMark does not read are paragraphs with their markers
     assert_eq!(lines[4], "___\tx");
-    assert_eq!(lines[5], "Para:a. one Para:b. two Para:(1) three OrderedList:four");
+    assert_eq!(
+        lines[5],
+        "Para:a. one Para:b. two Para:(1) three OrderedList:four Para:x Para:c. five d. six"
+    );
 }
 
 #[test]
@@ -143,7 +146,7 @@ fn typst_side_agrees() {
     assert!(text.contains("A."), "{text}");
     assert!(text.contains("Words: 13. ___ x."), "{text}");
     assert!(
-        text.contains("https://|a.org/|b/|c-d/|2015/|11/|x."),
+        text.contains("https://|a.|org/|b/|c-d/|2015/|11/|x."),
         "{text}"
     );
 }

@@ -319,20 +319,43 @@ function M.commonmark_lists(blocks)
     if LIST_SYM[style] == "1" and delim ~= "TwoParens" then return nil end
     local sym = LIST_SYM[style] or "1"
     local pat = delim == "TwoParens" and ("(" .. sym .. ")") or delim == "OneParen" and (sym .. ")") or (sym .. ".")
-    local out = pandoc.Blocks({})
+    -- a tight list (its items on consecutive lines) is one paragraph there, its items joined by a soft break
+    local out, acc = pandoc.Blocks({}), nil
+    local function flush()
+      if acc then out:insert(pandoc.Para(acc)) end
+      acc = nil
+    end
     for k, item in ipairs(l.content) do
       local label = pandoc.Inlines({ pandoc.Str(M.numbering(pat, a.start + k - 1)), pandoc.Space() })
       for j, b in ipairs(item) do
-        if j == 1 and (b.t == "Para" or b.t == "Plain") then
+        if j == 1 and b.t == "Plain" and #item == 1 then
+          if acc then acc:insert(pandoc.SoftBreak()) else acc = pandoc.Inlines({}) end
+          acc:extend(label)
+          acc:extend(b.content)
+        elseif j == 1 and (b.t == "Para" or b.t == "Plain") then
+          flush()
           label:extend(b.content)
           out:insert(pandoc.Para(label))
         else
+          flush()
           out:insert(b)
         end
       end
     end
+    flush()
     return out
   end })
+end
+
+-- A doubled section or pilcrow sign stays with the number after it ("§§ 3146.2c", "¶¶ 4-8"), in every engine: a no-break
+-- space (lib/typst/xdoc.typ boxes the signs with their number; xengine binds a single sign only).
+function M.bind_double_signs(l)
+  for i = 1, #l - 1 do
+    if l[i].t == "Str" and (l[i].text == "§§" or l[i].text == "¶¶") and l[i + 1].t == "Space" then
+      l[i + 1] = pandoc.Str("\u{00A0}")
+    end
+  end
+  return l
 end
 
 -- The body blocks before the tail heading (`tail.at`, a level-1 heading that starts with it), and the rest.

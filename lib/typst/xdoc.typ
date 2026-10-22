@@ -25,7 +25,13 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+/// A frontmatter string as markdown inlines. A value that starts like a block ("* Pro hac vice", "1. ", "# ", "> ") is text:
+/// its marker escaped (lib/pandoc/xdoc.lua inlines prints such a value as its plain words).
+#let md(s) = {
+  let s = str(s).replace(regex("^(\\s*)([-*+>#])(\\s|$)"), m => m.captures.at(0) + "\\" + m.captures.at(1) + m.captures.at(2))
+    .replace(regex("^(\\s*)(\\d+)([.)])(\\s|$)"), m => m.captures.at(0) + m.captures.at(1) + "\\" + m.captures.at(2) + m.captures.at(3))
+  cmarker.render(s, raw-typst: false, smart-punctuation: true)
+}
 #let pt(x) = if x == none { 0pt } else { x * 1pt }
 
 // A rule's line box besides its stroke (lib/pandoc/xdoc.lua RULE): LibreOffice's smallest exact line, one twip.
@@ -411,10 +417,15 @@
   // no punctuation hanging into the margin (typst's overhang): LaTeX and Word set none, and a hanging period moved a
   // centered line 1.4 pt and lets a line hold more
   set text(overhang: false)
-  // inside a URL a line may end after every slash not followed by another and every dot before an ASCII letter or digit
+  // inside a URL a line may end after every slash not followed by another, every dot before an ASCII letter or digit and
+  // every hyphen before a letter
   // (lib/pandoc/xengine.lua urls; here, not in body-of: the footnotes are laid out outside its show rules)
   show regex("(https?://|\\(?www\\.)\\S+"): it => it.text.replace(regex("/([^/])"), m => "/\u{200B}" + m.captures.at(0))
     .replace(regex("\\.([A-Za-z0-9])"), m => ".\u{200B}" + m.captures.at(0))
+    .replace(regex("-([A-Za-z])"), m => "-\u{200B}" + m.captures.at(0))
+  // a doubled section or pilcrow sign stays with its number ("¶¶ 4-8"; lib/pandoc/xdoc.lua bind_double_signs): xengine
+  // boxes a single sign with its number only, which left a break between the two signs
+  show regex("[§¶]{2} \\S+"): it => box(it)
   // every heading steps the heading counter when a style numbers them (heading-label)
   set heading(numbering: if numbered(spec) { "1.1" } else { none })
   set footnote.entry(gap: pt(fn.at("gap", default: 7)), clearance: pt(fn.at("clearance", default: 9.1)), indent: 0pt,

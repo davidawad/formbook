@@ -1,8 +1,17 @@
-# Pa.R.A.P. 2172(a)(3), (6) and Pa.R.C.P. 1018 via Pa.R.A.P. 106 (court rules.md PA-COVER-001, PA-COVER-002): the cover
-# carries the caption with the names of all the parties and the names of all counsel. This application names ten
+# Pa.R.C.P. 1018 via Pa.R.A.P. 106 and Pa.R.A.P. 2172(a)(3), (6) (court rules.md PA-COVER-001, PA-COVER-002): the
+# cover carries the caption with the names of all the parties and the names of all counsel. This application names ten
 # petitioners, the Secretary and 67 county boards of elections, and twelve counsel: at 14 pt (Pa.R.A.P. 124(a)(4)) under
 # the first page's three-inch space they do not fit one page, so the rest of the caption (the county respondents) runs
 # onto a second unnumbered page, the "back cover" the caption refers to, as in the filed copy. The table of contents
 # starts at i on page 3, as the filed copy's does (cover_pages 2).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
   cover_pages: 2
+  cross_engine: gate
+  # LibreOffice sets a footnote that does not fit under its anchor's line on the next page and keeps the line (typst
+  # and LaTeX move the line on with its note): INPUT-petition-for-writ page 50 ("grounded in the Election Code ...
+  # precedent.31"), and the pages after it shift (XENG-002, XENG-003); and it breaks the URL of a note on page 31
+  # inside "2024" though a break follows "year-". Reported, not gated (fb-595.54.13).
+  cross_engine_docx: report

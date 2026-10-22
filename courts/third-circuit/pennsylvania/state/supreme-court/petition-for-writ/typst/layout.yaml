@@ -1,0 +1,76 @@
+# Supreme Court of Pennsylvania (pa): application for extraordinary relief under the King's Bench jurisdiction (Pa.R.A.P.
+# 3309; ../rules.md PA-CONT-017, PA-CONT-018, PA-CERT-006). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to Pa.R.A.P. 124, 127 and 2172 (../rules.md, PA-*); lengths in points. No case text here: every string printed comes
+# from the sample's frontmatter ({field}) or is a court constant (the court's name, the certificates' form text).
+size: 14                  # PA-FORM-004 (Pa.R.A.P. 124(a)(4)): lettering no smaller than 14 point in the text
+pitch:
+  body: 32.2              # PA-FORM-003 (124(a)(3)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # cover, headings, tables, quotations, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # PA-FORM-002 (124(a)(3)): at least one inch on all four sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the contents i, ii .., the application 1, 2 ..
+footnote: {size: 12, pitch: 13.8, gap: 7}   # PA-FORM-003, -004: footnotes 12 point, single spaced (1.15 x 12 pt)
+quote: {left: 36, right: 36, above: 14, below: 14}   # PA-FORM-003: quotations indented and single spaced
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, above: 15.4, below: 8.4}
+# PA-COVER-001 (Pa.R.A.P. 2172(a)(1)-(4), (6) by analogy): the court, the docket number, the caption, the title and
+# the names of all counsel, then the office address and telephone of the group marked `service` (the others'
+# contact lines are in the signature block); PA-COVER-002: the rest of the caption (every party, Pa.R.C.P. 1018 via Pa.R.A.P.
+# 106), which the caption refers to as the back cover, follows; under the three-inch space of PA-FORM-002 (72 + 144
+# pt). A long caption runs the cover onto a second unnumbered page (eval.yaml params.cover_pages).
+cover:
+  - {text: "IN THE", align: center, bold: true, above: 144}
+  - {text: "SUPREME COURT OF PENNSYLVANIA", align: center, bold: true}
+  - {text: "No. {case_number}", align: center, bold: true, above: 5.6}
+  - each: caption
+    above: 8.4
+    between:
+      - {text: "v.", left: 36, above: 2.8, below: 2.8}
+    blocks:
+      - {text: "{names}"}
+      - {text: "{designation}", left: 36}
+  - {text: "{proceeding}", align: center, optional: true, above: 11.2}
+  - {text: "{brief_title}", align: center, bold: true, above: 11.2}
+  - columns: {each: counsel, per_row: 2, row_gap: 2.8, blocks: [{text: "{names}"}]}
+    gutter: 18
+    above: 11.2
+  - each: counsel
+    blocks:
+      - when: service
+        blocks:
+          - {text: "{lines}", above: 5.6}
+  - {text: "{back_cover}", optional: true, above: 11.2}
+# The table of contents (Pa.R.A.P. 2174 by analogy).
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 36, step: 21, above: 9.8}
+# The date and the signature blocks, two to a row, never split; the Rule 127 certificate (PA-CERT-006) on a page of its
+# own; a verification page for each verifier (Pa.R.A.P. 123(c), PA-CONT-010: facts not of record are verified), its
+# date as the verifier gave it, a line to sign.
+closing:
+  - group:
+      - {text: "Dated: {date}", pitch: body}
+      - {text: "Respectfully submitted,", pitch: body, above: 8.4}
+      - columns: {each: signature, per_row: 2, row_gap: 19.6, blocks: [{text: "{lines}"}]}
+        gutter: 28.8
+        above: 8.4
+    above: 16.1
+  - {break: true}
+  - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true, below: 16.8}
+  - {text: "I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial System of Pennsylvania that require filing confidential information and documents differently than non-confidential information and documents.", pitch: body, indent: 36}
+  - {text: "{compliance_signer}", align: right, optional: true, above: 16.8}
+  - each: verifications
+    blocks:
+      - {break: true}
+      - {text: "VERIFICATION", align: center, bold: true, below: 16.8}
+      - {text: "I verify that the statements made in the foregoing {verification_subject} are true and correct to the best of my knowledge, information and belief. I understand that false statements made herein are subject to the penalties of 18 Pa. C.S. § 4904 relating to unsworn falsification to authorities.", pitch: body, indent: 36}
+      - {text: "Dated: {date}", above: 33.6}
+      - columns:
+          - width: 280.8
+            blocks: [{rule: 0.5}]
+          - blocks: []
+        above: 33.6
+      - {text: "{name}", above: 2.8}
+      - {text: "{title}", optional: true}
+      - {text: "{org}", optional: true}

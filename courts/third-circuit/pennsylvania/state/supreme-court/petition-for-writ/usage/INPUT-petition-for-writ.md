@@ -377,9 +377,13 @@ Petitioners have no adequate remedy at law to redress the wrongs suffered as set
 WHEREFORE, Petitioners respectfully request that this Honorable Court exercise its King’s Bench authority and enter judgment in their favor and against the Secretary of Commonwealth and all 67 County Boards of Elections:
 
 a. Declare pursuant to Pennsylvania’s Declaratory Judgments Act, 42 Pa.C.S. § 7531 et seq., that enforcement of the Election Code’s envelope dating provisions, 25 P.S. §§ 3146.6(a), 3150.16(a), to reject timely mail ballots submitted by eligible voters, based solely on the absence of a handwritten date on the mail ballot return envelope is unconstitutional under the Free and Equal Elections Clause, Pa. Const. art. I, § 5;
+
 b. Declare pursuant to Pennsylvania’s Declaratory Judgments Act, 42 Pa.C.S. § 7531 et seq., that enforcement of the Election Code’s envelope dating provisions, 25 P.S. §§ 3146.6(a), 3150.16(a), to reject timely mail ballots submitted by eligible voters, based solely on the determination that the voter wrote an incorrect date on the mail ballot return envelope is unconstitutional under the Free and Equal Elections Clause, Pa. Const. art. I, § 5;
+
 c. Preliminarily and permanently enjoin further enforcement of the Election Code’s envelope dating provisions, 25 P.S. §§ 3146.6(a), 3150.16(a), to reject timely mail ballots submitted by eligible voters, based either on (i) the absence of a handwritten date on the mail ballot return envelope or (ii) the determination that the voter-written date is “incorrect”;
+
 d. Award Petitioners costs; and
+
 e. Provide such other and further relief as this Honorable Court deems just and appropriate.
 
 

@@ -26,15 +26,8 @@ local function breaks(x)
   return pandoc.Str((x.text:gsub("%)%(", ")\u{2060}("):gsub("([^%s/])/(%a)", "%1/\u{200B}%2"):gsub("^%-(%a)", "-\u{200B}%1")))
 end
 
--- A doubled section sign stays with its number, as typst binds it.
-local function bind_double_signs(l)
-  for i = 1, #l - 1 do
-    if l[i].t == "Str" and (l[i].text == "§§" or l[i].text == "¶¶") and l[i + 1].t == "Space" then
-      l[i + 1] = pandoc.Str("\u{00A0}")
-    end
-  end
-  return l
-end
+-- A doubled section sign stays with its number (lib/pandoc/xdoc.lua bind_double_signs).
+local bind_double_signs = xd.bind_double_signs
 
 local TBL = '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/>'
   .. '<w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
