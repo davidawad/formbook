@@ -7,20 +7,19 @@ Folder: `courts/ninth-circuit/idaho/federal/district/complaint/` (self-contained
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (primary) and `usage/FILED-EXAMPLE-complaint-2.pdf` (second filer). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-complaint.md` (excerpts of the 19-page filing; the parties, the facts, Counts I to III, the prayer, the jury demand and the signature; see Known gaps) |
-| typeface | face required: none (LR 5.2(a) sets only a 12-point minimum; checked on the Court's site 2026-10-15). Substitute: none needed; EB Garamond kept. Fit: n/a. |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, letter, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold embedded only, no warnings |
+| typeface | face required: none (LR 5.2(a) sets only a 12-point minimum, footnotes and footer included; checked on the Court's site 2026-10-15). Times New Roman 12 pt, the house standard (`docs/FONTS.md`), as the three Times-style exemplars; typst names `("Times New Roman", "Liberation Serif")`, the docx the same face through `{font}`. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf` and `usage/OUTPUT-complaint.docx` / `.docx.pdf`, 12 pages each, letter, Times New Roman Regular and Bold embedded only, no warnings |
 | overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF (`usage/SAMPLE-tarazona-castro-…pdf`), which is not in this snapshot (`usage/` holds only `SOURCE.md`). The `.txt` page map and the `.pdf` from the earlier run are stale against this render; regenerate once the exemplar is restored. |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on the 2026-10-15 re-render; no template change since the last review) |
+| pages reviewed | 12 of 12 on both engines (typst and docx.pdf, every page at 60 dpi, side by side, 2026-10-22, after the cross-engine port) |
 
 ## Commands
 
 ```
 sh tools/render.sh courts/ninth-circuit/idaho/federal/district/complaint usage/INPUT-complaint.md
-sh tools/overlay.sh courts/ninth-circuit/idaho/federal/district/complaint tarazona-castro-complaint \
-  courts/ninth-circuit/idaho/federal/district/complaint/usage/FILED-EXAMPLE-complaint.pdf
+sh tools/render.sh --engine docx courts/ninth-circuit/idaho/federal/district/complaint usage/INPUT-complaint.md
+sh tools/check.sh courts/ninth-circuit/idaho/federal/district/complaint [--engine docx]
+just overlay courts/ninth-circuit/idaho/federal/district/complaint
 ```
-
-File names follow the tools, not the brief's shorthand: `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt`. The sample is `INPUT-<id>.md` and the id is `tarazona-castro-complaint`. `tools/` is not edited.
 
 ## Governing rules
 
@@ -28,7 +27,7 @@ Primary source: the District of Idaho's Local Civil Rules, the print packet from
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| Dist. Idaho Loc. Civ. R. 5.2(a) | 8½ × 11 inch paper; "plainly typewritten"; "double-spaced, except for quoted material and footnotes"; "Each page must be numbered consecutively"; top, bottom and side margins "at least one inch"; "the font or typeface for all text, including footnotes, must be at least 12 point." | `page-w`/`page-h`, `margin = 1in`, `type-size = 12pt` (footer included), `body-leading` (24 pt pitch), footer `N - TITLE`. |
+| Dist. Idaho Loc. Civ. R. 5.2(a) | 8½ × 11 inch paper; "plainly typewritten"; "double-spaced, except for quoted material and footnotes"; "Each page must be numbered consecutively"; top, bottom and side margins "at least one inch"; "the font or typeface for all text, including footnotes, must be at least 12 point." | `page-w`/`page-h`, `margin = 1in`, `type-size = 12pt` (footer included), `pitch-double` (27.6 pt, Word double spacing of 12 pt Times New Roman, as the exemplars), footer `N - TITLE`. |
 | Dist. Idaho Loc. Civ. R. 5.2(b) | Upper-left counsel block: attorney name, e-mail, State Bar number, office address, telephone, fax, and the party represented. | `counsel` frontmatter. The template does not check that each item is present. |
 | Dist. Idaho Loc. Civ. R. 5.2(b) | "commencing four inches below the top of the first page, (except where additional space is required for identification)" the caption, with the court title. | `cover()`: the caption starts at `caption-top = 4in`; counsel that needs more room pushes it down (`calc.max`). |
 | Dist. Idaho Loc. Civ. R. 5.2(b)(1)–(3) | The court title; the title of the action; the CM/ECF file number (division, year, civil, number, judge initials). | `caption.court`, `caption.parties`, `case_number` (for example `1:26-cv-00521-DKG`). |
@@ -40,12 +39,15 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Layout
 
-- Counsel block single-spaced in the upper left, from the top margin.
-- Court title and caption on the page at four inches from the top, or, when the counsel block is longer, directly after it (the exemplar's counsel block is long, so the caption sits at about 4.4 inches; the rule's exception applies).
-- Caption: party column closed by a right and bottom rule; the right column carries the CM/ECF file number, the title and the jury notation.
-- Body double-spaced at a 24 pt baseline pitch. Each numbered paragraph has a 0.5 inch first-line indent. Headings fill whole 24 pt slots (`on-grid`), so the paragraph after a heading starts on the line grid without overlap.
-- Prayer items are lettered (a), (b), ... by the template.
-- Signature block: "DATED this ... day of ...", the firm, "/s/" and the signer, with the lines from the frontmatter.
+All of it on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): every line a box of its pitch, first-fit ragged-right breaking, no kerning, ligatures or hyphenation, so the docx breaks every line and page where typst does.
+
+- Counsel block single-spaced (13.8 pt lines) in the upper left, from the top margin.
+- Court title (bold, centered) and caption at four inches from the top, or, when the counsel block is longer, 12 pt below it (the exemplar's counsel block is long, so the caption sits lower; the rule's exception applies). The docx holds the counsel block in a table row at least 3 in high, with 12 pt after its last line.
+- Caption: party column 3.25 in, closed by a right and bottom rule; the right column carries the CM/ECF file number, the title and the jury notation, a blank single line apart.
+- Body double-spaced at a 27.6 pt pitch, no space between paragraphs. Each numbered paragraph: a 0.5 in first-line indent, the number in a 0.5 in box, the text. Headings on the same pitch, kept with the text after them.
+- Prayer items are lettered (a), (b), ... by the template: the label at 0.5 in in a 0.5 in box, the text hanging after it.
+- Signature block: "DATED this ... ." beside "Respectfully submitted,", the firm, "/s/" and the signer, with the lines from the frontmatter; kept on one page with the last paragraph.
+- Footer: "N - TITLE" (the page number and `footer_title` in capitals), 12 pt, flush left, on every page.
 
 ## Markdown contract (for samples)
 
@@ -56,76 +58,49 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## What the overlay shows
 
-`usage/OVERLAY-tarazona-castro-complaint.pdf`: red is our render, blue is the filed exemplar, black is agreement. The page map (`.txt`) pairs each of our pages with the exemplar page sharing the most words:
-
-```
-ours p.1  filed p.1  word-overlap 80.9%
-ours p.2  filed p.2  word-overlap 68.0%
-ours p.3  filed p.4  word-overlap 58.3%
-ours p.4  filed p.6  word-overlap 66.0%
-ours p.5  filed p.8  word-overlap 64.4%
-ours p.6  filed p.9  word-overlap 63.5%
-ours p.7  filed p.13  word-overlap 48.7%
-ours p.8  filed p.14  word-overlap 41.5%
-ours p.9  filed p.19  word-overlap 48.2%
-```
-
-The sample is an excerpt, and the page pairing is by words, so the lower overlap on pages 7 to 9 reflects the skipped middle of the filing, not a layout defect. The overlay is a diagnostic, not a score.
+The page map below is from the earlier 9-page render (24 pt pitch), before the cross-engine port; `just overlay` regenerates it in `.overlay/` (not committed). The sample is an excerpt, and the page pairing is by words, so the overlap reflects the skipped middle of the filing, not a layout defect. The overlay is a diagnostic, not a score.
 
 ## Page review (Gate 2 equivalent)
 
-Every page of `OUTPUT-complaint.typst.pdf` was rendered at 60 dpi and viewed after the last template change.
+Every page of `OUTPUT-complaint.typst.pdf` and `OUTPUT-complaint.docx.pdf` was rendered at 60 dpi and viewed side by side after the last template change (2026-10-22). The two engines break every line and page alike (XENG-001..003 PASS, 278/278 lines).
 
-| Page | Result |
+| Page | Result (typst and docx) |
 |---|---|
-| 1 | Counsel block upper left; court title and caption below it (the counsel block is longer than three inches, so the caption sits at about 4.4 inches, as the rule's exception allows); "DEMAND FOR JURY TRIAL" under the title; lead-in and paragraph 1 start on the page. Footer "1 - CLASS AND COLLECTIVE ACTION COMPLAINT". Pass. |
-| 2 | Paragraphs 2 to 11, Jurisdiction and Venue heading (after paragraph 8). Pass. |
-| 3 | Paragraphs 12 to 25; Parties heading; Factual Allegations heading before paragraph 23. Pass. |
-| 4 | Paragraphs 26 to 37. Pass. |
-| 5 | Paragraphs 38 to 47; FLSA Collective Action Allegations heading before paragraph 47. Pass. |
-| 6 | Paragraphs 48 to 56 (56 continues onto page 7); Rule 23 Class Action Allegations heading before paragraph 55. Pass. |
-| 7 | Paragraphs 57 to 66; Causes of Action heading and Count I. Pass (defect found and fixed: the Count headings overlapped the first paragraph under them; fixed by putting headings on whole 24 pt slots). |
-| 8 | Count II (paragraphs 67 to 69), Count III (70 to 74), Prayer for Relief heading and items (a) to (d). Pass. |
-| 9 | Prayer items (e) to (g); "DEMAND FOR JURY TRIAL" with paragraph 76; the date; the signature block ("/s/ DeAnne Casperson", "Attorneys for Plaintiff"). Pass. |
+| 1 | Counsel block upper left; court title and caption below it (the counsel block is longer than three inches, so the caption is pushed down, as the rule's exception allows); title and "DEMAND FOR JURY TRIAL" beside the party column; the lead-in. Footer "1 - CLASS AND COLLECTIVE ACTION COMPLAINT". Pass. |
+| 2 | Nature of the Action heading, paragraphs 1 to 8. Pass. |
+| 3 | Jurisdiction and Venue (9 to 12), Parties heading, 13 to 16. Pass. |
+| 4 | Paragraphs 17 to 25; Factual Allegations heading before 23. Pass. |
+| 5 | Paragraphs 26 to 33; two lines free at the foot (paragraph 34 moves whole: no orphan). Pass. |
+| 6 | Paragraphs 34 to 42. Pass. |
+| 7 | Paragraphs 43 to 48; FLSA Collective Action Allegations heading before 47. Pass. |
+| 8 | Paragraphs 49 to 55; Rule 23 Class Action Allegations heading before 55. Pass. |
+| 9 | Paragraphs 56 to 62; Causes of Action, Count I and its title. Pass. |
+| 10 | Paragraphs 63 to 70; Count II and Count III with their titles. Pass. |
+| 11 | Paragraphs 71 to 75; Prayer for Relief heading; items (a) to (e). Pass. |
+| 12 | Items (f) and (g); "DEMAND FOR JURY TRIAL" with paragraph 76; the date and the signature block ("/s/ DeAnne Casperson", "Attorneys for Plaintiff"). Pass. |
 
 ## Tier-2 findings (against the two filed exemplars, by page)
 
-Compared with `SAMPLE-tarazona-castro-…` and `SAMPLE-wilcox-…`:
+Compared with `FILED-EXAMPLE-complaint.pdf` (Tarazona Castro) and `FILED-EXAMPLE-complaint-2.pdf` (Wilcox):
 
 | Page | Finding | Status |
 |---|---|---|
-| 1 | The exemplars set the counsel block in a Times-style face, which reads larger than EB Garamond at 12 pt, so our text looks smaller. The 12-point minimum in LR 5.2(a) is met. The only vendored font is EB Garamond (`fonts/`); a Times-metric font would remove the difference. | OPEN (font choice for David; see Known gaps). |
+| all | Times New Roman 12 pt, double-spaced at 27.6 pt, as both exemplars (27.6 pt measured on their body pages). | ACCEPTED. |
 | 1 | The caption's party column is closed by a rule, not the ")" column used in the Tarazona filing. The Wilcox complaint also uses the closed box. | ACCEPTED. |
 | all | Footer carries "N - TITLE" on every page at 12 pt. Tarazona's footer is in the same form. | ACCEPTED. |
 | all | No pleading-paper line numbers (the Wilcox and Tarazona filings have none). | ACCEPTED. |
 
 ## Known gaps and open choices
 
-1. **Font (rule-level answer; visual difference remains).** LR 5.2(a) names no typeface, so the template keeps EB Garamond, per `docs/FONTS.md`. EB Garamond at 12 pt meets the rule's point size, but it looks smaller than the Times-style exemplars. Those exemplars are a convention, not a requirement; switching to Liberation Serif would be a tier-2 choice for David.
-2. **Counsel block content (not checked).** LR 5.2(b) lists seven items (name, e-mail, State Bar number, office address, telephone, fax, party represented). The template renders what the frontmatter lists and does not check that each item is there.
-3. **Sample is an excerpt.** The sample carries the sections of the 19-page exemplar in condensed form: the Nature of the Action, Jurisdiction and Venue, Parties, the facts, the FLSA and Rule 23 allegations, Counts I to III, the prayer, the jury demand and the signature. Counts IV to VI and the rest of the class allegations are not transcribed. The sample's paragraphs are numbered 1 to 76 by the template; the filed paragraph numbers differ. The rendered sample is 9 pages.
-4. **Second exemplar not transcribed.** The Wilcox complaint is saved and checked for layout on page 1 only; its content is not in the sample.
-5. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder does not have that shape. The brief forbids touching `tools/`, so the gates were not run; the render, the overlay and the review above are the checks.
-6. **Footers** are 12 pt, the same size as the text, to satisfy "all text" in LR 5.2(a).
-7. **Caption position.** The caption starts at four inches when the counsel block is short enough. The Tarazona counsel block is long, so the caption sits lower (the rule's exception). The template does not warn when the counsel block pushes the caption down.
-8. **Court title, e-mail and fax** are rendered as the frontmatter gives them; the template does not reformat them.
+1. **Counsel block content (not checked).** LR 5.2(b) lists seven items (name, e-mail, State Bar number, office address, telephone, fax, party represented). The template renders what the frontmatter lists and does not check that each item is there.
+2. **Sample is an excerpt.** The sample carries the sections of the 19-page exemplar in condensed form: the Nature of the Action, Jurisdiction and Venue, Parties, the facts, the FLSA and Rule 23 allegations, Counts I to III, the prayer, the jury demand and the signature. Counts IV to VI and the rest of the class allegations are not transcribed. The sample's paragraphs are numbered 1 to 76 by the template; the filed paragraph numbers differ. The rendered sample is 12 pages.
+3. **Second exemplar not transcribed.** The Wilcox complaint is saved and checked for layout on page 1 only; its content is not in the sample.
+4. **Footers** are 12 pt, the same size as the text, to satisfy "all text" in LR 5.2(a).
+5. **Caption position.** The caption starts at four inches when the counsel block is short enough. The Tarazona counsel block is long, so the caption sits lower (the rule's exception). The template does not warn when the counsel block pushes the caption down.
+6. **Court title, e-mail and fax** are rendered as the frontmatter gives them; the template does not reformat them.
 
 ## Engines
 
-Docx engine (`docx/`): `make-reference.sh` builds `docx/reference.docx` (run once; it unpacks in a temp dir), `idd.lua` writes the cover, the numbered paragraphs, the lettered prayer items and the signature block. Output: `usage/OUTPUT-complaint.docx`.
+typst (`typst/idd-complaint.typ`, the reference) and docx (`docx/reference.xml`, `docx/idd-complaint.lua`); no latex. Both pass `tools/check.sh` with 0 failed; the docx passes XENG-001..003 and `eval.yaml` sets `params.cross_engine: gate`.
 
-What the docx sets (in styles.xml, sectPr and footer1.xml; set, not rendered: no LibreOffice on the build box):
-- Page: US Letter, 1 inch margins, footer 0.4 inch from the bottom edge.
-- Font: EB Garamond 12 pt everywhere, footer page number included.
-- Body: exact 24 pt line (double), first-line indent 0.5 inch, no space before or after. Headings: exact 24 pt, bold; level 1 centered caps, level 2 centered bold, level 3 bold left; keep with next.
-- Cover: counsel single-spaced; court title bold, centered; caption as a borderless table whose left cell is ruled on the right and bottom; case number, title and "DEMAND FOR JURY TRIAL" in the right cell; signature block as a borderless two-column table.
-- Footnotes: 12 pt, single-spaced (none in this sample).
-- Numbering: the filter writes "1.", "2." ... as text plus a tab (not a Word list), and "(a)" ... for the prayer list.
-
-What differs from the typst form:
-- Footer: page number only, left-aligned. The typst footer "N - TITLE" needs the case title, which is case-specific, so it is not in the template. Tier 2, OPEN.
-- Caption position: the typst caption starts at 4 inches (or below a long counsel block). The docx uses empty paragraphs between blocks, so the caption position is approximate and not measured.
-- Caption rule: a table border, drawn the same way as the typst rule; its exact length and offset are not checked.
-- Paragraph numbers are text, so they do not renumber if a paragraph is inserted by hand.
-
-BLOCKED (docx.pdf gates 0 to 3): `tools/render-docx.sh` writes the `.docx`, then fails at `soffice` because LibreOffice is not installed on the build box (no `soffice` on this machine; conda-forge has none). No docx page was rendered or looked at: pages reviewed for docx = 0. The `.docx` was checked only as a valid zip with well-formed XML parts (xmllint); it was not opened in Word or LibreOffice, so "opens without a repair prompt" is unverified.
+The docx (fb-595.68.23): `docx/reference.xml` is the cross-engine style recipe (`base="xengine"`) in the typst face (`{font}`), 12 pt, 27.6 pt body and heading lines, 13.8 pt single lines; `docx/idd-complaint.lua` writes every paragraph with its own exact spacing, the caption as a table (its left cell ruled right and below; the party text 0.75 pt less from the rule than in typst, since LibreOffice takes the rule's width from the cell), the counsel block as a table row at least 3 in high, and the footer "N - TITLE" with the last section through `fb render` (`$FORMBOOK_FOOTERS`, `$FORMBOOK_FINAL`). No shell and no binary reference document. Paragraph numbers are text, so they do not renumber if a paragraph is inserted by hand. Word may paginate slightly differently from LibreOffice (docs/DOCX.md).
