@@ -48,7 +48,7 @@ end
 -- A metadata value that holds markdown (one paragraph, or several) as a list of inline lists.
 local function paragraphs(v)
   if v == nil then return {} end
-  if v.t == "MetaBlocks" then
+  if pandoc.utils.type(v) == "Blocks" then
     local out = {}
     for _, b in ipairs(v) do out[#out + 1] = b.content end
     return out
