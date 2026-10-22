@@ -97,8 +97,10 @@
   v(0.8em)
   align(center)[#stars(56)]
   v(0.8em)
+  // The party column takes two thirds of the width, as on the filed motion, and the lower-court references the
+  // rest: at half the width a long party list ran the cover onto a second unnumbered page (DEF-COVER-001).
   table(
-    columns: (1fr, 1fr),
+    columns: (2fr, 1fr),
     stroke: none,
     inset: 0pt,
     table.cell(inset: (right: 0.2in, bottom: 0.3em), stroke: (right: 0.75pt, bottom: 0.75pt))[
@@ -112,7 +114,8 @@
   v(1.2em)
   align(center)[#stars(40)]
   v(0.4em)
-  align(center)[#block(width: 4in, align(center)[#text(weight: "bold", need(meta, "brief_title"))])]
+  // The title spans the text width, as on the filed motion (a 4 in measure added lines to the cover, DEF-COVER-001).
+  align(center)[#text(weight: "bold", need(meta, "brief_title"))]
   v(0.4em)
   align(center)[#stars(40)]
 }
