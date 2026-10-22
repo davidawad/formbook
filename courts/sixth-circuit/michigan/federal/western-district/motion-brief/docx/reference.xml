@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The miwd motion brief Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman) at 12 pt, footnotes included
+     (size 24 half points; LCivR 10.1: type no smaller than 12 point); Body Text in exact 24 pt line boxes (typst
+     pitch-body, LCivR 10.1 double spaced) with a half-inch first-line indent (typst para-indent); single lines,
+     footnotes and quotations in 13.8 pt boxes (typst pitch-single), notes 7 pt apart (typst note-gap), a quotation
+     half an inch in on both sides and 12 pt off the text (typst quote-gap); lists with the label in a half-inch box.
+     Letter page, 1 in margins (LCivR 10.1); the footer's single-pitch line box ends 0.5 in above the page edge
+     (footer="720"; typst footer-descent). docx/miwd-motion-brief.lua writes the cover, the contents, the headings and
+     the signature with their own spacing, the page-number footer and the three sections (the cover without a number;
+     the contents in lower roman; the brief in arabic from 1). pandoc reads the sample as CommonMark, as cmarker does.
+     Twips: 20 x pt.
+     Footnote Text is the recipe's without keepLines, so a long note splits across a page as typst's does. Two styles
+     of its own: "Body Text Note", Body Text without widow control, for a paragraph that carries a footnote mark
+     (typst lets the line with the mark move on alone when its note does not fit; Word's widow control would move the
+     line before it too); "Body Text Keep", Body Text kept whole with the signature block after it. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="240" heading-after="240" note="276" note-after="140" footer="720" pandoc-from="commonmark_x+smart">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="140" w:line="276" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:styleId="BlockText"><w:name w:val="Block Text"/><w:basedOn w:val="BodyText"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:spacing w:before="240" w:after="240" w:line="276" w:lineRule="exact"/><w:ind w:firstLine="0" w:left="720" w:right="720"/></w:pPr></w:style>
+</reference>
