@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Haw. motion and memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face
+     of the typst template ({font}, Times New Roman, LR 10.2(a)(2)) at 14 pt (size 28 half points, footnotes included);
+     Body Text in exact 32.2 pt line boxes (typst pitch-double, LR 10.2(a)(4) double spacing) with a half-inch
+     first-line indent; Block Text (quotations) and footnotes in 16.1 pt boxes (typst pitch-single), a quotation 14 pt
+     off the text (typst quote-gap), notes 7 pt apart (typst note-gap); letter page with 1-inch margins (LR 10.1,
+     10.2(a)(1)). docx/hid.lua writes the cover, tables, headings, signature and certificates with their own spacing,
+     and the three sections (the motion, its first page without a number; the tables in roman; the memorandum in
+     arabic from 1), their page number centered in a 16.1 pt line 34.3 pt above the page foot (686 twips: where typst
+     sets it, footer-descent 30 %). Twips: 20 x pt.
+     Footnote Text is the recipe's without keepLines, so a long note splits across a page as typst's does. Two styles
+     of its own: "Body Text Note", Body Text without widow control, for a paragraph that carries a footnote mark
+     (typst lets the line with the mark move on alone when its note does not fit; Word's widow control would move the
+     line before it too); "Body Text Keep", Body Text kept whole with the signature block after it. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="644" single="322" indent="720" heading="322" heading-before="0" heading-after="0" quote="280" note="322" note-after="140" footer="686">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="140" w:line="322" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="28"/><w:szCs w:val="28"/></w:rPr></w:style>
+</reference>
