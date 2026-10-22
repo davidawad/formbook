@@ -402,14 +402,15 @@
     } else { it.body }
   }
 
-  // ---- the motion: unnumbered pages (LR 7.1, 7.3, 7.8, 10.2) ----
+  // ---- the motion (LR 7.1, 7.3, 7.8, 10.2): page 1 unnumbered; a continuation page prints its number, "2" (DEF-COVER-001) ----
+  set page(numbering: "1", footer: context if counter(page).get().first() > 1 { align(center, counter(page).display()) })
   caption(meta)
   motion-paragraphs(meta)
   signature-block(meta)
 
   // ---- front matter: table of contents, table of authorities (lowercase roman) ----
   pagebreak()
-  set page(numbering: "i", number-align: center + bottom)
+  set page(numbering: "i", number-align: center + bottom, footer: auto)
   counter(page).update(1)
   toc-section()
   pagebreak()

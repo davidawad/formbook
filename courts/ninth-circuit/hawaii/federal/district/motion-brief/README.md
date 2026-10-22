@@ -40,12 +40,12 @@ Primary sources. Each rule text was read from the source named; the local rules 
 | LR 5.3 (same) | Electronic filing under Fed. R. Civ. P. 5(d)(3) and the local rules. | The PDF is the filing form; no certificate is required by the rule. | — |
 | LR 12.1 and 10.3 (same) | Mandatory chambers copies of a Rule 12 motion include two copies of the related complaint; chambers copies are tabbed and in the form LR 10.3 requires. | Not produced (separate chambers copies). | M, separate |
 
-Convention (tier 2; from the exemplar): the certificate of service in the caption (the exemplar's copy has none, so the template's certificate follows the CM/ECF wording in `certificate-of-service()`; that wording is the template's convention, not copied from the exemplar); the TOC, TOA and body numbering (roman for the front matter, arabic from 1 for the memorandum), with the motion pages unnumbered; "Page(s)" heading in the TOA; `passim`; footers with a centered page number.
+Convention (tier 2; from the exemplar): the certificate of service in the caption (the exemplar's copy has none, so the template's certificate follows the CM/ECF wording in `certificate-of-service()`; that wording is the template's convention, not copied from the exemplar); the TOC, TOA and body numbering (roman for the front matter, arabic from 1 for the memorandum), with the motion's first page unnumbered; "Page(s)" heading in the TOA; `passim`; footers with a centered page number.
 
 ## Layout
 
 - Page 1: counsel block (two columns, 12 pt, single-spaced) and "Attorneys for Defendants" under it; court title; caption box (parties at left, a rule at right and bottom; at right, the case number, the document title in bold capitals, and "Judge:"). The caption stays on page 1 only if it fits; the template keeps the caption block unbreakable.
-- Pages 1–2: the motion (unnumbered), its dated line and signature block.
+- Pages 1–2: the motion, its dated line and signature block; page 1 prints no number, a continuation page prints its own ("2"), so the caption page is the only unnumbered page (DEF-COVER-001).
 - Pages i–ii: TABLE OF CONTENTS (outline, dotted leaders), TABLE OF AUTHORITIES (cases, statutes, rules; "Page(s)" at right; hanging indents).
 - Pages 1–9 (arabic): MEMORANDUM IN SUPPORT OF MOTION, then the body. Level 1 headings: bold, left, roman (I., II.), capitals written in the markdown. Level 2: bold, letter (A., B.), sentence case. Level 3: bold, arabic. Body: 14 pt, double-spaced, first-line indent 0.5 in on every paragraph (including the first after a heading). Footnotes: 14 pt, single-spaced, at the foot of the page.
 - The last paragraph of the memorandum is kept on the same page as the signature block, so a signature does not stand alone on a page (as ca9 does; when the last block is a heading, no paragraph is moved). Footnote definitions stay with the body part that holds their references.
