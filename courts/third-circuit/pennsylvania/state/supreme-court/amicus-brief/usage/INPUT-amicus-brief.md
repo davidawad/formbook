@@ -8,7 +8,6 @@ caption:
       - "COMMONWEALTH OF PENNSYLVANIA,"
     designation: "Appellant,"
   - names:
-      - "v."
       - "JUSTEN IRLAND; SMITH AND WESSON 9MM SEMI-AUTOMATIC PISTOL, SERIAL #PDW0493,"
     designation: "Appellee."
 proceeding: "Appeal from the January 13, 2017 Order of the Commonwealth Court en banc at Docket No. 448 C.D. 2015, Reversing the Order of the Court of Common Pleas of Adams County at Docket No. CP-01-CR-0000224-2014"

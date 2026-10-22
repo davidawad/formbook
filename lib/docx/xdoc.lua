@@ -60,7 +60,9 @@ return function(spec)
     props[#props + 1] = xe.jc(st.align == "center" and "center" or st.align == "right" and "right" or "left")
     local size = st.size and tw(st.size) // 10 or nil
     local text = n.text:walk({ Str = breaks })
-    return xe.para(props, xe.inl(bind_double_signs(text), { b = st.bold, i = st.italic, u = st.underline, sz = size }))
+    -- a heading's number (layout.yaml heading `number`): the label, a tab to the hanging indent, the text
+    local label = n.label and (xe.runs(n.label, { b = st.bold, i = st.italic, sz = size }) .. "<w:r><w:tab/></w:r>") or ""
+    return xe.para(props, label .. xe.inl(bind_double_signs(text), { b = st.bold, i = st.italic, u = st.underline, sz = size }))
   end
 
   local function rule(n, before, after)
@@ -155,7 +157,7 @@ return function(spec)
     local text = b.content
     if st.upper then text = xd.upper(text) end
     return { t = "par", text = text, st = st, lead = 0, above = first and 0 or tonumber(st.above) or 0,
-      below = tonumber(st.below) or 0 }
+      below = tonumber(st.below) or 0, label = b.attributes["xd-label"] }
   end
 
   local function has_note(inlines)
@@ -279,7 +281,7 @@ return function(spec)
     for _, h in ipairs(heads) do
       if h.level <= (c.depth or 3) then
         out[#out + 1] = row(c.above, (h.level - 1) * (tonumber(c.step) or 0), tonumber(c.hang) or 0,
-          tw(c.col or 36), xe.inl(bind_double_signs(h.content:walk({ Str = breaks }))), labels["h" .. h.n] or "00", pitch)
+          tw(c.col or 36), xe.inl(bind_double_signs(h.row:walk({ Str = breaks }))), labels["h" .. h.n] or "00", pitch)
       end
     end
     return out
@@ -420,12 +422,14 @@ return function(spec)
   return {
     {
       Pandoc = function(doc)
-        local meta = xd.meta()
+        local meta = xd.context(spec, xd.meta())
         local entries = xd.authority_entries(meta)
-        local blocks = xd.mark(doc.blocks:walk({ Inlines = bind_double_signs }), entries, function(k, note, after)
+        -- a URL's break opportunities (lib/pandoc/xengine.lua urls; lib/typst/xdoc.typ sets the same)
+        local blocks = xd.mark(doc.blocks:walk({ Inlines = require("pandoc.xengine").urls }):walk({ Inlines = bind_double_signs }), entries, function(k, note, after)
           return pandoc.Span({}, { ["xd-k"] = tostring(k), ["xd-n"] = note and "N" or "B", ["xd-after"] = after,
             ["xd-find"] = entries[k].find })
         end)
+        xd.number_headings(spec, blocks)
         local main, rest = xd.split_tail(spec, blocks)
         local s = { prev_after = 0, pending = 0 }
         local out = pandoc.Blocks({})

@@ -207,6 +207,23 @@
   if hs.len() == 0 { (bold: true) } else { hs.at(calc.min(n, hs.len()) - 1) }
 }
 
+/// The number of a heading (layout.yaml heading style `number`, a typst numbering pattern): the count at its level of
+/// typst's heading counter, which every heading steps (xdoc sets a numbering when a style has a `number`; the show
+/// rule writes the heading itself). lib/pandoc/xdoc.lua number_headings counts alike. none when unnumbered.
+#let heading-label(spec, h) = {
+  let st = heading-style(spec, h.level)
+  if "number" not in st { return none }
+  let c = counter(heading).at(h.location())
+  numbering(st.number, c.at(h.level - 1, default: 1))
+}
+
+/// Whether a heading style numbers its headings.
+#let numbered(spec) = spec.at("heading", default: ()).any(h => "number" in h)
+
+/// The words of a body (`{body_words}`; lib/pandoc/xdoc.lua count_words): split at white space, a word holds an ASCII
+/// letter or digit.
+#let count-words(s) = s.split(regex("\s+")).filter(w => w.find(regex("[A-Za-z0-9]")) != none).len()
+
 /// The entries of the frontmatter's table of authorities (`authorities: [{heading, entries: [{cite, find}]}]`), in
 /// order, each with its number k (from 1; lib/pandoc/xdoc.lua numbers them alike).
 #let authority-entries(meta) = {
@@ -248,12 +265,41 @@
 
 /// The body: markdown; paragraphs at the body pitch with a first-line indent, headings, quotations, lists and
 /// footnotes as layout.yaml says, the authorities marked.
+/// Whether content holds a footnote (its mark).
+#let has-note(c) = {
+  if type(c) != content { return false }
+  if c.func() == footnote { return true }
+  if c.has("children") { return c.children.any(has-note) }
+  if c.has("body") { return has-note(c.body) }
+  if c.has("child") { return has-note(c.child) }
+  false
+}
+
+/// The paragraphs of a body (cmarker's sequence, split at its paragraph breaks) that anchor a footnote, with no widow or
+/// orphan control, as lib/latex/xdoc.lua and lib/docx/xdoc.lua set them (a show rule on par comes too late: the note is
+/// realized by then).
+#let free-notes(body) = {
+  if body.func() != [].func() { return body }
+  let (out, run) = ((), ())
+  for c in body.children + (parbreak(),) {
+    if c.func() == parbreak {
+      out.push(if run.any(has-note) { set text(costs: (widow: 0%, orphan: 0%)); run.join() } else { run.join() })
+      out.push(c)
+      run = ()
+    } else { run.push(c) }
+  }
+  out.slice(0, -1).join()
+}
+
 #let body-of(spec, meta, src) = {
   let q = spec.at("quote", default: (:))
-  show heading: it => {
+  show heading: it => context {
     let st = heading-style(spec, it.level)
-    line-block(spec, st + (keep: true), if st.at("upper", default: false) { upper(it.body) } else { it.body },
-      pt(st.at("above", default: 0)), pt(st.at("below", default: 0)))
+    let text = if st.at("upper", default: false) { upper(it.body) } else { it.body }
+    // its number in a box of the hanging indent, the text after it
+    let label = heading-label(spec, it)
+    if label != none { text = box(width: pt(st.at("hang", default: 0)), label) + text }
+    line-block(spec, st + (keep: true), text, pt(st.at("above", default: 0)), pt(st.at("below", default: 0)))
   }
   show list: it => list-items(spec, it, 0)
   show enum: it => list-items(spec, it, 0)
@@ -263,7 +309,7 @@
     set par(first-line-indent: 0pt, spacing: pt(q.at("gap", default: 0)))
     pad(left: pt(q.at("left", default: spec.indent)), right: pt(q.at("right", default: spec.indent)), it.body)
   })
-  with-marks(meta, cmarker.render(src, raw-typst: false, smart-punctuation: true, h1-level: 1))
+  with-marks(meta, free-notes(cmarker.render(src, raw-typst: false, smart-punctuation: true, h1-level: 1)))
 }
 
 /// One row of a table of contents or authorities: lib/typst/xengine.typ's listing-row (the text wraps before a page
@@ -303,7 +349,8 @@
     for h in hs {
       // the row's space above outside the indent (inside it typst would drop it: the start of a container)
       block(width: 100%, above: pt(c.at("above", default: 0)), below: 0pt,
-        pad(left: (h.level - 1) * pt(c.at("step", default: 0)), table-row(h.location(), h.body,
+        pad(left: (h.level - 1) * pt(c.at("step", default: 0)), table-row(h.location(),
+          { let l = heading-label(spec, h); if l != none [#l #h.body] else { h.body } },
           page-label(h.location()), pt(c.at("col", default: 36)), pt(c.at("hang", default: 0)), 0pt)))
     }
   }
@@ -357,14 +404,19 @@
   // no punctuation hanging into the margin (typst's overhang): LaTeX and Word set none, and a hanging period moved a
   // centered line 1.4 pt and lets a line hold more
   set text(overhang: false)
-  set heading(numbering: none)
-  set footnote.entry(gap: pt(fn.at("gap", default: 7)), clearance: pt(fn.at("clearance", default: 7.5)), indent: 0pt,
+  // inside a URL a line may end after every slash not followed by another (lib/pandoc/xengine.lua urls; here, not in
+  // body-of: the footnotes are laid out outside its show rules)
+  show regex("(https?://|\\(?www\\.)\\S+"): it => it.text.replace(regex("/([^/])"), m => "/\u{200B}" + m.captures.at(0))
+  // every heading steps the heading counter when a style numbers them (heading-label)
+  set heading(numbering: if numbered(spec) { "1.1" } else { none })
+  set footnote.entry(gap: pt(fn.at("gap", default: 7)), clearance: pt(fn.at("clearance", default: 9.1)), indent: 0pt,
     separator: line(length: 30%, stroke: 0.5pt))
   show footnote.entry: it => {
     set text(size: pt(fn.at("size", default: spec.size)), ..edges(note-pitch))
     set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
     let note = it.note
-    [#super(numbering(note.numbering, ..counter(footnote).at(note.location())))#h(0.25em)#with-marks(meta, note.body)]
+    // a note is never split across pages (LaTeX: \interfootnotelinepenalty 10000): its line moves on with it
+    block(breakable: false)[#super(numbering(note.numbering, ..counter(footnote).at(note.location())))#h(0.25em)#with-marks(meta, note.body)]
   }
   // the body up to the tail heading, and the tail (certificates set after the closing)
   let tail = spec.at("tail", default: none)
@@ -377,6 +429,9 @@
       (main, rest) = (body.slice(0, at.start) + "\n\n" + defs, body.slice(at.start))
     }
   }
+  // the computed fields: the words of the body before the tail
+  let words = count-words(if rest == "" { body } else { body.slice(0, body.len() - rest.len()) })
+  let meta = if "body_words" in meta { meta } else { meta + (body_words: words) }
   let front = if pn == none { none } else { pn.at("front", default: none) }
   if front != none { xd-num.update(none) }
   if "cover" in spec {

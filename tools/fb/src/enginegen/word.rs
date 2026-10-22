@@ -45,7 +45,7 @@ pub fn reference(l: &Value, _face: &str) -> Result<String, String> {
     )?;
     let nsize = (num(l, "footnote.size", Some(size))? * 2.0).round() as i64;
     let gap = tw(num(l, "footnote.gap", Some(NOTE_GAP))?, "footnote.gap")?;
-    let _ = CLEARANCE; // Word sets the space above the footnote rule itself (typst and LaTeX follow it)
+    let _ = CLEARANCE; // LibreOffice sets the space above the footnote rule itself (typst and LaTeX follow it: tex.rs)
     let q = l.get("quote");
     let qn = |k: &str, d: f64| num(l, &format!("quote.{k}"), Some(d));
     let (qa, qb, qg) = (
@@ -91,8 +91,8 @@ pub fn reference(l: &Value, _face: &str) -> Result<String, String> {
         "<!-- {} The Word styles of the shared document model (lib/docx/xdoc.lua): the cross-engine recipe \
 (tools/fb/src/docxxengine.rs) in the typst face at {} pt, Body Text in exact {} pt line boxes with a {} pt \
 first-line indent, footnotes in {} pt boxes {} pt apart; added: Body Text Note (a paragraph that anchors a \
-footnote, without widow control: typst may move its last line on alone with the note), a Footnote Text that may \
-split where typst splits a note, the quotation styles (first, middle, last, only), the tail style, the page-number \
+footnote, without widow control: typst may move its last line on alone with the note), a Footnote Text that is never \
+split (typst and LaTeX never split a note), the quotation styles (first, middle, last, only), the tail style, the page-number \
 footer in a single line box {} pt above the page foot, and the page's margins. Twips: 20 x pt. -->\n",
         super::gen::HEAD,
         fmt(size),
@@ -114,7 +114,7 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
             r#"<w:widowControl w:val="0"/>"#,
         ),
         format!(
-            r#"<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr>{}</w:pPr><w:rPr><w:sz w:val="{nsize}"/><w:szCs w:val="{nsize}"/></w:rPr></w:style>"#,
+            r#"<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:keepLines/>{}</w:pPr><w:rPr><w:sz w:val="{nsize}"/><w:szCs w:val="{nsize}"/></w:rPr></w:style>"#,
             exact(0, gap, note)
         ),
         style(

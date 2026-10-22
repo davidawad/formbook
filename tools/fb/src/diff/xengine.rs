@@ -124,8 +124,10 @@ fn without_leaders(m: &Measured) -> Measured {
                 .words
                 .iter()
                 .flat_map(|w| {
-                    // a no-break space is a space: Word's keeps "§ 1331" in one pdftotext word
-                    w.t.split('\u{a0}')
+                    // a no-break space is a space: Word's keeps "§ 1331" in one pdftotext word; zero-width characters
+                    // (the break rules of a URL: lib/pandoc/xengine.lua urls) are not text
+                    w.t.replace(['\u{200b}', '\u{2060}', '\u{feff}'], "")
+                        .split('\u{a0}')
                         .flat_map(unleader)
                         .map(|t| t.trim_end_matches('.').to_string())
                         .filter(|t| !t.is_empty())
@@ -285,6 +287,15 @@ mod tests {
         assert_eq!((c.lines, c.same), (2, 1));
         assert!(c.first[0].contains("word for word"), "{:?}", c.first);
         assert_eq!(at("p12 line 3: x 4"), (12, 3));
+    }
+
+    #[test]
+    fn zero_width_characters_are_not_text() {
+        // typst writes the word joiners and zero-width spaces of a URL's break rules into the text, LaTeX does not
+        let a = doc(&[&["see http://\u{200b}a.b/\u{200b}c-\u{2060}d"]]);
+        let b = doc(&[&["see http://a.b/c-d"]]);
+        let c = compare(&a, &b);
+        assert!(c.breaks_equal() && c.ends_bad == 0, "{c:?}");
     }
 
     #[test]

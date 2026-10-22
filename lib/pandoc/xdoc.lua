@@ -216,6 +216,89 @@ function M.heading(spec, n)
   return hs[math.min(n, #hs)]
 end
 
+-- A number in a typst numbering pattern of one counting symbol ("I.", "A.", "1.", "(a)", "i."): what is before the
+-- symbol, the number in its form, what is after (typst numbering() for these patterns).
+local function roman(n)
+  local out = ""
+  for _, p in ipairs({ { 1000, "M" }, { 900, "CM" }, { 500, "D" }, { 400, "CD" }, { 100, "C" }, { 90, "XC" },
+    { 50, "L" }, { 40, "XL" }, { 10, "X" }, { 9, "IX" }, { 5, "V" }, { 4, "IV" }, { 1, "I" } }) do
+    while n >= p[1] do out = out .. p[2]; n = n - p[1] end
+  end
+  return out
+end
+
+local function alpha(n)
+  local out = ""
+  while n > 0 do
+    n = n - 1
+    out = string.char(65 + n % 26) .. out
+    n = n // 26
+  end
+  return out
+end
+
+function M.numbering(pattern, n)
+  local a = pattern:find("[1IiAa]")
+  if not a then error("xdoc: a heading number pattern needs one of 1, I, i, A, a: `" .. pattern .. "`", 0) end
+  local sym = pattern:sub(a, a)
+  local v = sym == "1" and string.format("%d", n) or sym == "I" and roman(n) or sym == "i" and roman(n):lower()
+    or sym == "A" and alpha(n) or alpha(n):lower()
+  return pattern:sub(1, a - 1) .. v .. pattern:sub(a + 1)
+end
+
+-- The heading numbers (layout.yaml heading styles with `number`, lib/typst/xdoc.typ heading-label): every heading in
+-- document order steps typst's heading counter (from (0): level n adds one at n and drops the deeper levels, or pads
+-- with 1s up to n), and a level whose style has a `number` pattern shows the count at its level in it. The label goes
+-- into the heading's attribute `xd-label`.
+function M.number_headings(spec, blocks)
+  local numbered = false
+  for _, h in ipairs(spec.heading or {}) do if h.number then numbered = true end end
+  if not numbered then return end
+  local c = { 0 }
+  for _, b in ipairs(blocks) do
+    if b.t == "Header" then
+      local l = b.level
+      if #c >= l then
+        c[l] = c[l] + 1
+        for k = #c, l + 1, -1 do c[k] = nil end
+      else
+        while #c < l do c[#c + 1] = 1 end
+      end
+      local st = M.heading(spec, l)
+      if st.number then b.attributes["xd-label"] = M.numbering(st.number, c[l]) end
+    end
+  end
+end
+
+-- The words of the body before the tail heading (`{body_words}` in a block; lib/typst/xdoc.typ count-words): the
+-- sample's markdown after its frontmatter, cut at the tail heading, split at white space; a word holds an ASCII letter
+-- or digit (so a footnote definition's "[^1]:" counts, a lone dash does not).
+local USPACE = { "\u{00A0}", "\u{1680}", "\u{2000}", "\u{2001}", "\u{2002}", "\u{2003}", "\u{2004}", "\u{2005}",
+  "\u{2006}", "\u{2007}", "\u{2008}", "\u{2009}", "\u{200A}", "\u{2028}", "\u{2029}", "\u{202F}", "\u{205F}",
+  "\u{3000}", "\u{0085}" }
+function M.count_words(src, at)
+  local s = src:gsub("^%-%-%-\r?\n.-\r?\n%-%-%-[ \t]*\r?\n", "", 1)
+  if at then
+    local cut = ("\n" .. s):find("\n# +" .. at:gsub("%p", "%%%0"))
+    if cut then s = s:sub(1, cut - 1) end
+  end
+  for _, u in ipairs(USPACE) do s = s:gsub(u, " ") end
+  local n = 0
+  for w in s:gmatch("%S+") do if w:find("[A-Za-z0-9]") then n = n + 1 end end
+  return n
+end
+
+-- The frontmatter with the computed fields: `body_words` (M.count_words of the sample pandoc reads).
+function M.context(spec, meta)
+  local path = PANDOC_STATE and PANDOC_STATE.input_files and PANDOC_STATE.input_files[1]
+  local f = path and io.open(path, "r")
+  if f and meta.body_words == nil then
+    meta.body_words = M.count_words(f:read("a"), spec.tail and spec.tail.at)
+  end
+  if f then f:close() end
+  return meta
+end
+
 -- The body blocks before the tail heading (`tail.at`, a level-1 heading that starts with it), and the rest.
 function M.split_tail(spec, blocks)
   local main, rest = pandoc.Blocks({}), pandoc.Blocks({})
@@ -332,12 +415,19 @@ function M.mark(blocks, entries, mark)
   return mark_blocks(blocks, false)
 end
 
--- The headings of the blocks to `depth`, in order: { n (1, 2, ..), level, content }.
+-- The headings of the blocks to `depth`, in order: { n (1, 2, ..), level, content, row }; `row`, the text of its row in
+-- the contents: its number (M.number_headings), a space and its text.
 function M.headings(blocks, depth)
   local out = {}
   for _, b in ipairs(blocks) do
     if b.t == "Header" and b.level <= (depth or 3) then
-      out[#out + 1] = { n = #out + 1, level = b.level, content = b.content }
+      local label = b.attributes["xd-label"]
+      local row = b.content
+      if label then
+        row = pandoc.Inlines({ pandoc.Str(label), pandoc.Space() })
+        row:extend(b.content)
+      end
+      out[#out + 1] = { n = #out + 1, level = b.level, content = b.content, row = row }
     end
   end
   return out

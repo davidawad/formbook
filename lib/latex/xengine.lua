@@ -57,6 +57,10 @@ function M.texify(inlines)
         elseif c == "\u{00A0}" and i > 1 and chars[i - 1] == "." then
           flush()
           res:insert(pandoc.Space())
+        elseif c == "\u{200B}" then
+          -- a break opportunity of no width (lib/pandoc/xengine.lua urls)
+          flush()
+          res:insert(raw("\\hskip0pt\\relax{}"))
         elseif c == "-" and chars[i + 1] and chars[i + 1]:match("^%d$") then
           flush()
           res:insert(raw("\\mbox{-}"))

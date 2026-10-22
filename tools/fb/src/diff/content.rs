@@ -53,7 +53,7 @@ pub fn norm(w: &str) -> String {
             '\u{FB02}' => s.push_str("fl"),
             '\u{FB03}' => s.push_str("ffi"),
             '\u{FB04}' => s.push_str("ffl"),
-            '\u{00AD}' | '\u{200B}' | '\u{FEFF}' => {}
+            '\u{00AD}' | '\u{200B}' | '\u{2060}' | '\u{FEFF}' => {}
             '\u{2010}' | '\u{2011}' => s.push('-'),
             _ => s.push(c),
         }

@@ -170,6 +170,11 @@ return function(spec)
     hn = hn + 1
     local mark = "\\xd@hmark{" .. hn .. "}\\pdfbookmark[" .. (b.level - 1) .. "]{"
       .. tex(pandoc.Inlines({ pandoc.Str(pandoc.utils.stringify(b.content)) })) .. "}{xd.h." .. hn .. "}"
+    -- its number (layout.yaml heading `number`) in a box of the hanging indent, the text after it
+    local label = b.attributes["xd-label"]
+    if label then
+      mark = mark .. "\\hbox to " .. bp(st.hang) .. "{" .. tex(pandoc.Inlines({ pandoc.Str(label) })) .. "\\hss}"
+    end
     return par({ t = "par", text = text, st = st, lead = 0, above = first and 0 or st.above, below = st.below,
       prefix = mark })
   end
@@ -199,7 +204,7 @@ return function(spec)
     for _, h in ipairs(heads) do
       if h.level <= (c.depth or 3) then
         -- the heading's text without its authority marks (typst marks the body, not the contents)
-        local text = h.content:walk({ RawInline = function(r)
+        local text = h.row:walk({ RawInline = function(r)
           if r.text:find("xd@amark", 1, true) then return {} end
         end })
         out[#out + 1] = row(c.above, (h.level - 1) * (tonumber(c.step) or 0), tonumber(c.hang) or 0, c.col or 36,
@@ -271,9 +276,11 @@ return function(spec)
   return {
     {
       Pandoc = function(doc)
-        local meta = xd.meta()
-        local blocks = xd.mark(doc.blocks, xd.authority_entries(meta),
+        local meta = xd.context(spec, xd.meta())
+        -- a URL's break opportunities (lib/pandoc/xengine.lua urls; lib/typst/xdoc.typ sets the same)
+        local blocks = xd.mark(doc.blocks:walk({ Inlines = require("pandoc.xengine").urls }), xd.authority_entries(meta),
           function(k) return pandoc.RawInline("latex", "\\xd@amark{" .. k .. "}") end)
+        xd.number_headings(spec, blocks)
         local main, rest = xd.split_tail(spec, blocks)
         local heads = xd.headings(blocks, 9)
         local out = pandoc.Blocks({})

@@ -5,7 +5,10 @@ use serde_yaml::Value;
 
 /// The footnote defaults of the model (lib/typst/xdoc.typ): 7 pt between two notes, `CLEARANCE` above the rule.
 pub const NOTE_GAP: f64 = 7.0;
-pub const CLEARANCE: f64 = 7.5;
+/// LibreOffice keeps 16.1 pt between the last line box of the text and the first note's: the note gap and 9.1 pt (measured
+/// fb-595.54.13 with a one-line note under a page of text whose top margin moved 0.05 pt at a time; 12 and 14 pt notes,
+/// body pitches 24 and 32.2 alike); typst and LaTeX keep the same (7.5 left a line on a page LibreOffice moved on).
+pub const CLEARANCE: f64 = 9.1;
 
 /// A list marker as LaTeX text.
 fn tex_marker(m: &str) -> String {

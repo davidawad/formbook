@@ -94,6 +94,36 @@ pub fn validate(l: &Value, path: &str, errs: &mut Vec<String>) {
     }
 }
 
+/// A heading style with a `number` (lib/pandoc/xdoc.lua number_headings) sets the label in a box of its hanging indent
+/// (typst), `\hbox to` it (LaTeX) or a tab to it (Word): it needs a `hang` and a left-aligned heading.
+pub fn validate_numbers(l: &Value, errs: &mut Vec<String>) {
+    let Some(hs) = l.get("heading").and_then(Value::as_sequence) else {
+        return;
+    };
+    for (i, h) in hs.iter().enumerate() {
+        let Some(pat) = h.get("number") else { continue };
+        let pat = pat.as_str().unwrap_or("");
+        if pat.chars().filter(|c| "1IiAa".contains(*c)).count() != 1 {
+            errs.push(format!(
+                "layout.yaml: `heading[{i}].number` = {pat:?}: one counting symbol (1, I, i, A or a)"
+            ));
+        }
+        if h.get("hang").and_then(Value::as_f64).unwrap_or(0.0) <= 0.0 {
+            errs.push(format!(
+                "layout.yaml: `heading[{i}].number` needs a `hang` (the label's box)"
+            ));
+        }
+        if h.get("align")
+            .and_then(Value::as_str)
+            .is_some_and(|a| a != "left")
+        {
+            errs.push(format!(
+                "layout.yaml: `heading[{i}].number` needs a left-aligned heading"
+            ));
+        }
+    }
+}
+
 /// A Lua literal of a YAML value (maps keep their order; null is nil).
 pub fn lua(v: &Value, indent: usize) -> String {
     let pad = "  ".repeat(indent + 1);
@@ -185,6 +215,7 @@ pub fn footer(l: &Value) -> Result<(f64, f64, f64), String> {
 pub fn generate(l: &Value, face: &str) -> Result<Files, String> {
     let mut errs = Vec::new();
     validate(l, "", &mut errs);
+    validate_numbers(l, &mut errs);
     if !errs.is_empty() {
         return Err(errs.join("\n"));
     }
