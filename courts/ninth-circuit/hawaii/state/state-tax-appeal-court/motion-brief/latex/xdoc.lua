@@ -74,23 +74,38 @@ return require("latex.xdoc")({
   },
   ["cover"] = {
     {
-      ["each"] = "counsel",
-      ["blocks"] = {
+      ["columns"] = {
         {
-          ["text"] = "{names}",
-          ["right"] = 216,
+          ["width"] = 252,
+          ["blocks"] = {
+            {
+              ["each"] = "counsel",
+              ["blocks"] = {
+                {
+                  ["text"] = "{names}",
+                },
+                {
+                  ["text"] = "{lines}",
+                  ["below"] = 4.8,
+                },
+              },
+            },
+            {
+              ["text"] = "{counsel_for}",
+              ["italic"] = true,
+            },
+          },
         },
         {
-          ["text"] = "{lines}",
-          ["right"] = 216,
-          ["below"] = 4.8,
+          ["blocks"] = {
+            {
+              ["box"] = {},
+              ["height"] = 216,
+              ["stroke"] = 0,
+            },
+          },
         },
       },
-    },
-    {
-      ["text"] = "{counsel_for}",
-      ["italic"] = true,
-      ["right"] = 216,
     },
     {
       ["text"] = "{court_lines}",
@@ -170,6 +185,7 @@ return require("latex.xdoc")({
       ["below"] = 4.2,
     },
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["columns"] = {

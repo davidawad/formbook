@@ -23,15 +23,19 @@ heading:
   - {bold: true, italic: true, number: "a.", left: 108, hang: 36, above: 12, below: 9.6}
 # The flyleaf (HAWTAX-COVER-001, -002; RCCH 3(c)): counsel at the top left, 3.5 inches wide (the top right left
 # clear for the clerk), the court centred under it, then the title of the cause at the left and the case number, the
-# title of the document in capitals and the judges at the right. (The 3-inch band beside a short counsel block of the
-# amicus and notice folders is a column of its own; a cover that opens with columns is not found by the docx page
-# lookup, docs/open-items/fb-595.54.76.md: this cover opens with counsel as text.)
+# title of the document in capitals and the judges at the right. The 3-inch band (RCCH 3(c)) is an empty box beside
+# counsel.
 cover:
-  - each: counsel
-    blocks:
-      - {text: "{names}", right: 216}
-      - {text: "{lines}", right: 216, below: 4.8}
-  - {text: "{counsel_for}", italic: true, right: 216}
+  - columns:
+      - width: 252
+        blocks:
+          - each: counsel
+            blocks:
+              - {text: "{names}"}
+              - {text: "{lines}", below: 4.8}
+          - {text: "{counsel_for}", italic: true}
+      - blocks:
+          - {box: [], height: 216, stroke: 0}
   - {text: "{court_lines}", align: center, bold: true, above: 21.6}
   - columns:
       - blocks:
@@ -56,6 +60,7 @@ authorities:
   hang: 25.2
   above: 8.4
   group: {bold: true, above: 16.8, below: 4.2}
+keep_with_closing: true   # the last paragraph stays with the date and signature
 # The date at the left, counsel's signature at the right (HAWTAX-COVER-002), never split; the certificate of service
 # (when the frontmatter has one) on a page of its own.
 closing:

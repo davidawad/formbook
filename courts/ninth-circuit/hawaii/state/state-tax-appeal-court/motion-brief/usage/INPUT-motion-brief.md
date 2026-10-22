@@ -34,7 +34,7 @@ authorities:
       - {cite: "*Yamane v. Pohlson*, 111 Hawaii 74 (2006)", find: "Yamane"}
   - heading: "Statutes:"
     entries:
-      - {cite: "HRS § 232-1", pages: "12, 13"}
+      - {cite: "HRS § 232-1", find: "232-1"}
       - {cite: "HRS § 232-14.5", find: "232-14.5"}
       - {cite: "HRS § 235-108", find: "235-108"}
       - {cite: "HRS § 235-114", find: "235-114"}
