@@ -7,11 +7,11 @@ Folder: `courts/third-circuit/pennsylvania/federal/middle-district/motion-brief/
 |---|---|
 | exemplar | yes, one filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (Cumberland County's memorandum in support of a 12(b)(6) motion). A second filer was **not found**: see gap 1. See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md`: caption, Preliminary Statement and facts (I–III), Statement of Questions (IV), Standard of Review (V), Argument A and A.1 only (VI), Conclusion (VII), the LR 7.1 certificate of non-concurrence, the certificate of service (first two counsel), signature. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `usage/OVERLAY-orndorff.pdf` and `OVERLAY-orndorff.txt` (red = ours, blue = Orndorff exemplar) |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; see "Review" below) |
+| render | ok (2026-10-22): `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, and `usage/OUTPUT-motion-brief.docx` with its LibreOffice PDF, 10 pages; `fb render`, vendored Times New Roman only, no warnings |
+| overlay | `just overlay` writes `.overlay/<doc path>/OVERLAY-motion-brief.pdf` (not committed); a diagnostic, not a score |
+| pages reviewed | 10 of 10, both engines, side by side at 50 dpi (2026-10-22, the renders of fb-595.68.35) |
 
-Naming: the tools (`tools/render.sh`, `tools/overlay.sh`) read and write `INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf` and `.txt`, so the sample id is `orndorff`.
+Naming: `usage/` holds `INPUT-motion-brief.md`, `OUTPUT-motion-brief.typst.pdf`, `OUTPUT-motion-brief.docx` and `.docx.pdf`, the `FILED-EXAMPLE-` files and `SOURCE.md` (`fb usage` prints the names).
 
 ## Governing rules
 
@@ -40,24 +40,24 @@ Not produced by this template (separate filings): the motion itself; the propose
 
 ## Layout
 
-- Letter paper, 1 in margins, 14 pt EB Garamond, 32 pt double-spaced body text (about 20 lines per page).
-- Caption and title as the complaint's: court title on two stacked lines; party column with a ":" column; right column with the civil action number and the judge; the title centred and bold caps below.
+- Letter paper, 1 in margins, Times New Roman 14 pt (LR 5.1(c)), the cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): every line a box of its pitch, 32 pt for the body (double spacing, the pitch of the 14 pt filed exemplar), 16 pt for single lines; the spaces between blocks explicit. Page number 12 pt, centred in a 13.8 pt line ending 0.5 in above the page edge (in the margin, LR 5.1(c)).
+- Caption and title as the complaint's: court title on two single lines; one single line per caption row (party column, a ":" on every row, the right column with the civil action number and the judge); the title bold capitals, centred single lines, 32 pt below.
 - Body paragraphs: first-line indent 0.5 in, not numbered.
-- Headings: level 1 flush-left bold caps ("I.", "II." ...); level 2 flush-left bold ("A.", "B." ...); level 3 bold italic ("1.", "2." ...). Sticky.
-- Statement of questions: lettered paragraphs with a hard line break before the "Suggested Answer" line (the exemplar's convention).
-- Signature block: date at left; "Respectfully submitted," the firm, "By:" and a line, then the signer and the address at right, single-spaced.
+- Headings at the type size on the body pitch with no space of their own, kept with the next block: level 1 flush-left bold caps ("I.", "II." ...); level 2 flush-left bold ("A.", "B." ...); level 3 bold italic. A heading's own number ("1.  The ...") is text, not a list.
+- Single-spaced blocks (the Statement of Questions, each question with its "Suggested Answer" line after a hard break; the service list addresses): no first-line indent, a blank single line (16 pt) around each, kept whole.
+- Signature block, 32 pt below the last block: "Dated:" at the left of the first line; "Respectfully submitted," at 2.8 in (a tab in the docx), the firm 6 pt below, "By:" and a signature line to 3.2 in 32 pt below, the signer and the address 6 pt below, single-spaced; kept on one page.
 
 ## Markdown contract (for samples)
 
 - YAML frontmatter, then the body.
 - Frontmatter: `title` (cover title, caps applied by the template); `caption` (rows: `left`, optional `indent` in inches, optional `right`; one row per caption line; colons are generated); `date` (optional, shown as "Dated:"); `signature.firm` (single-spaced lines above "By:"), `signature.lines` (signer, address, email, role).
-- Body: blank-line-separated chunks. `#`, `##`, `###` headings (levels 1–3). A `1.` list is lettered (a), (b) ... A chunk whose lines end in a hard break (trailing `\`) is a single-spaced block with no first-line indent (service lists, addresses); no marker is written. Any other chunk is an unnumbered paragraph with a first-line indent.
+- Body: blank-line-separated chunks. `#`, `##`, `###` headings (levels 1–3). A chunk whose lines end in a hard break (trailing `\`) is a single-spaced block with no first-line indent (a lettered question "A.  ...\" is such a block). Any other chunk is a paragraph. Lists are not supported (the docx filter stops on one).
 - Hard line breaks inside a chunk: a trailing backslash at the end of the line.
 - Not supported: tables, footnotes, raw typst, forced line breaks in the template (the court title is stacked, not broken).
 
 ## Overlay
 
-`tools/overlay.sh` pairs each rendered page with the exemplar page that shares the most words. Pass the Orndorff exemplar explicitly (`sh tools/overlay.sh <dir> orndorff <exemplar.pdf>`), as the tool's default would pick the same file. Pages 1–7 pair with the same page number. Sample page 8 (the non-concurrence certificate) pairs with filed page 17, and pages 9–10 (service and signature) pair with filed pages 16–17, because the sample's argument and facts are partial. The map is in `OVERLAY-orndorff.txt`. The overlay is a diagnostic, not a score: word overlap runs 54–88% on the body pages.
+`just overlay <dir>` (`tools/overlay.sh`) pairs each rendered page with the exemplar page that shares the most words and writes `.overlay/<doc path>/OVERLAY-motion-brief.pdf` and `.txt` (not committed). A diagnostic, not a score.
 
 ## Known gaps and open choices
 
@@ -65,35 +65,42 @@ Not produced by this template (separate filings): the motion itself; the propose
 2. **No TOC, no TOA, no word-count certificate.** LR 7.8(a) requires a table of contents and a table of authorities when the brief is more than 15 pages; LR 7.8(b)(2) requires a word-count certificate for a brief over 15 pages (up to 5,000 words). The template produces neither, and does not check the page count. The sample is 10 pages, so it does not need them. **A brief over 15 pages cannot be built from this template as it stands.** Adding them (typst `outline()` for the TOC, and a manual or query-driven TOA) is a template change for David to schedule. The exemplar also has no TOC or TOA. Its body length was not counted against LR 7.8(b)(1) here, so whether it complies is not resolved.
 3. **Certificates are authored text.** The LR 7.1 certificate of non-concurrence and the certificate of service are body text in the sample, not generated. Their headings are flush-left (the exemplar centres them); a style difference, not a rule.
 4. **Partial sample.** The sample transcribes the Statement of the Case in full, the Statement of Questions, the Standard of Review, Argument A and A.1, the Conclusion, both certificates and the signature. Argument A.2–A.3 and B–D are not transcribed. The service certificate lists the first two counsel; the rest are omitted and marked in the sample. The sample's Statement of Questions is the exemplar's "Suggested Answer" convention, which is the filer's, not a rule.
-5. **Font.** As for the complaint: EB Garamond at 14 pt, not Times. The 14 pt minimum is met; the apparent size is smaller than the Times exemplar.
+5. **Font.** LR 5.1 names no face. Times New Roman 14 pt (vendored), the face of the filed exemplar and the house standard, in every engine.
 6. **Page limit not checked.** LR 7.8(b)(1) is not counted by the template (gap 2).
 7. **LR 7.5 deadline.** The 14-day window is not enforced; it is a calendar item for the filer.
 
 ## Review
 
-Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed. The caption and page 1 were re-checked after the two caption edits (shortened rows) and the cover edit (stacked court title). Pages 2–8 were re-viewed after the caption and service-list edits.
+Every page of `OUTPUT-motion-brief.typst.pdf` and `OUTPUT-motion-brief.docx.pdf` was rendered at 50 dpi and viewed side by side (2026-10-22); the two engines set every page alike.
 
-- Page 1: court title stacked; caption with colons and the judge at the right (the "COMMONWEALTH OF / PENNSYLVANIA –" rows fit after shortening); the title centred and bold caps across three lines; "I. PRELIMINARY STATEMENT" and the first paragraph. Pass.
-- Page 2: paragraphs of the preliminary statement; "II. PROCEDURAL HISTORY" and "III. RELEVANT FACTS" flush-left bold; paragraph indents. Pass.
-- Page 3: facts paragraphs with record citations (¶ and ¶¶). Pass.
-- Page 4: the end of the facts; "IV. STATEMENT OF QUESTIONS INVOLVED" with lettered questions and their "Suggested Answer" lines. Pass.
-- Page 5: "V. STANDARD OF REVIEW"; italic case names; the Iqbal quotation. Pass.
-- Page 6: the rest of the standard of review; "VI. ARGUMENT" and "A." (level 2, two lines, kept with its paragraph). Pass.
-- Page 7: the Monell paragraphs; "1." (level 3) heading kept with its paragraph. Pass.
-- Page 8: the rest of Argument A.1; "VII. CONCLUSION" with its paragraph; the certificate of non-concurrence starts mid-page with its heading and first paragraph kept together, and continues on page 9. Pass.
-- Page 9: the rest of the certificate; "CERTIFICATE OF SERVICE" with the first two counsel as single-spaced blocks. Pass.
-- Page 10: the omitted-counsel note; "Dated:", "Respectfully submitted," the firm, "By:" line, signer and address. Pass.
+| Page | What it is | Finding |
+|---|---|---|
+| 1 | Court title, caption (colons on every row, "CIVIL ACTION", the number and the judge at the right), title in three bold lines, "I. PRELIMINARY STATEMENT", its first paragraph | Pass. Ends three lines short: the next paragraph's first lines do not fit with its orphan rule. |
+| 2 | Preliminary statement; "II. PROCEDURAL HISTORY", "III. RELEVANT FACTS" | Pass. |
+| 3 | Facts with record citations (¶ and ¶¶) | Pass. |
+| 4 | The end of the facts; "IV. STATEMENT OF QUESTIONS INVOLVED", questions A–E single-spaced with their "Suggested Answer" lines | Pass. |
+| 5 | "V. STANDARD OF REVIEW"; italic case names; the Iqbal quotation | Pass. |
+| 6 | The rest of the standard; "VI. ARGUMENT"; heading A (two lines, kept with its paragraph) | Pass. |
+| 7 | The Monell paragraphs; heading "1. The policy and custom allegations ..." kept with its paragraph | Pass. |
+| 8 | The rest of A.1; "VII. CONCLUSION" | Pass. Ends short: the certificate heading stays with its paragraph. |
+| 9 | Certificate of non-concurrence (LR 7.1) | Pass. |
+| 10 | Certificate of service with two single-spaced addresses; the omitted-counsel note; the signature block with "By:" and its line | Pass. |
+
+The docx PDF breaks every line and page where the typst PDF does (XENG-001..003: 220/220 lines, 10/10 pages).
 
 ## Changes made during review
 
 - Caption rows overlapped: "COMMONWEALTH OF PENNSYLVANIA –" was wider than the party column. Fixed: split into "COMMONWEALTH OF" and "PENNSYLVANIA –".
-- The service list was double-spaced with a first-line indent on each name. Fixed: a `~` block convention (single-spaced, no indent).
+- The service list was double-spaced with a first-line indent on each name. Fixed: a single-spaced block (its lines end in a hard break), no indent.
 - The court title used a forced line break (`\`). Fixed: two stacked lines (CLAUDE.md bans forced line breaks in templates).
 - Headings rendered at typst's default heading size in the first draft of the complaint; the brief's headings were set at the 14 pt type size from the start.
+- The cross-engine port (fb-595.68.35): em leadings and fixed-height caption rows gave way to line boxes of the pitch; the docx named EB Garamond and set its own spacing (blank paragraphs of 32, 23 and 8 pt), now Times New Roman on the typst spaces; the level-3 heading "1. ..." was read by cmarker as a list inside a paragraph (a typst warning) and is now text; the title takes the sample's curly apostrophes, as the docx did.
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference for the form. Pages reviewed in this README above.
-- **latex**: not built in this pass.
-- **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/pamd.lua`; sample `usage/OUTPUT-motion-brief.docx`). Built with `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/pamd.lua usage/INPUT-motion-brief.md`. Matches the typst template: EB Garamond 14 pt (declared in the styles; the font must be installed on the machine that opens the file), exact 32 pt line pitch, 0.5 in first-line indent on body paragraphs, 1 in margins on letter paper, page number centred in a 12 pt footer, flush-left bold caps level-1 headings, flush-left bold level-2 and bold italic level-3 headings, the court title, the caption as a borderless table with 16 pt rows and a colon column, the title, the Statement of Questions with its "A.", "B." labels as text, `~` blocks (service lists) single-spaced without indent, and the signature block (date at left; firm, "By:" with an underline tab, and the signer at right). Differences: single-spaced blocks use exact 16 pt lines (typst uses its own leading), the "By:" rule is an underlined tab, and the page breaks are not measured. The table of contents, table of authorities and word-count certificate are not produced, as in the typst template (gap 2 above). The `.docx` was checked only for a valid zip and well-formed XML parts, and read back with pandoc. It was not opened in Word or LibreOffice.
-- **docx BLOCKED.** No checks file is readable for this court (no `checks.yaml` in the court folder), so there are no gate check IDs to list. The rule IDs measured on the `.docx.pdf` (PAMD-BRF-001 to PAMD-BRF-008, see the table above) are all BLOCKED: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked. The docx is not verified against Gates 0 to 3.
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and every page where the typst render does, and `eval.yaml` gates it (`params.cross_engine: gate`, fb-595.68.35).
+
+- **typst** (primary, `typst/pamd-motion-brief.typ`): the reference.
+- **docx** (`docx/`): `docx/reference.xml` (`base="xengine"`, the typst face `{font}` = Times New Roman, 14 pt; Body Text in exact 32 pt line boxes with a 0.5 in first-line indent, single lines 16 pt; the heading levels flush left at the type size on the body pitch; letter page, 1 in margins, the footer 0.5 in above the edge) and `docx/pamd-motion-brief.lua` on `lib/docx/xengine.lua`, which writes the court title, the caption table (one single line per row in each column), the title, the body, the single-spaced blocks with the author's line breaks (pandoc's "A." list read back as text), the signature (the "By:" line an underlined tab), the 12 pt page-number footer (`$FORMBOOK_FOOTERS`) and the last section (`$FORMBOOK_FINAL`). `fb render` builds the reference and runs the passes; no shell script (fb-595.68).
+- Checks (2026-10-22): typst 9 passed, 0 failed; docx 13 passed, 0 failed, XENG-001..003 PASS (220/220 lines, 10/10 pages).
+- Word: not available here. The file converts in LibreOffice with no error; Word may paginate slightly differently (docs/DOCX.md).
