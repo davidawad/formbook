@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails. LaTeX passes XENG-001..003 (432/432 lines).
+params:
+  cross_engine: gate
+  # docx: INPUT-reply-brief p15: the last line of the conclusion carries footnote 1; Word sets the line and the note on
+  # p15, typst (and LaTeX) move the line to p16 (the note does not fit below it in typst's footnote area, which is a
+  # few points taller than Word's: with footnote.clearance 4 typst keeps it on p15 too). A shared-model difference,
+  # docs/open-items/fb-595.54.66.md, item 1 (XENG-002, XENG-003).
+  cross_engine_docx: report

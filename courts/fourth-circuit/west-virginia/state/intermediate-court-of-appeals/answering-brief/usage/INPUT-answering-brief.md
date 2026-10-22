@@ -41,7 +41,7 @@ authorities:
       - cite: "W. Va. Code § 23-4-1"
         find: "23-4-1"
       - cite: "W. Va. Code § 23-4-1g(a)"
-        find: "23-4-1g"
+        find: "1g(a)"
       - cite: "W. Va. Code § 23-5-12(b)"
         find: "23-5-12(b)"
       - cite: "W. Va. Code § 23-5-12a(b)"
@@ -83,9 +83,9 @@ The Employer disagrees and has filed this appeal.
 
 # SUMMARY OF ARGUMENT
 
-This appeal is simply an occupational disease claim involving the application of W.Va. Code 23-4-1. As the West Virginia Supreme Court has previously stated when "studies and
+This appeal is simply an occupational disease claim involving the application of W.Va. Code 23-4-1. As the West Virginia Supreme Court has previously stated when “studies and
 
-research clearly link a disease (MDS) to a particular hazard of a workplace (benzene exposure), a prima facie case of causation arises upon a showing that the claimant was exposed to the hazard and is suffering from the disease to which it is connected." See Casdorph v. W. Va. Office Ins. Comm’r, 225 W.Va. 94, 100, 690 S.E.2d 102, 108 (2009) citing Syl. Pt. 5, Powell v. State Workmen's Compensation Commissioner, 166 W.Va. 327, 273 S.E.2d 832 (1980).
+research clearly link a disease (MDS) to a particular hazard of a workplace (benzene exposure), a prima facie case of causation arises upon a showing that the claimant was exposed to the hazard and is suffering from the disease to which it is connected.” See Casdorph v. W. Va. Office Ins. Comm’r, 225 W.Va. 94, 100, 690 S.E.2d 102, 108 (2009) citing Syl. Pt. 5, Powell v. State Workmen’s Compensation Commissioner, 166 W.Va. 327, 273 S.E.2d 832 (1980).
 
 Ronald Keller experienced frequent and intense exposure to the hazards of products that contained benzene for 15+ years in his employment as a roofer. The current state of the scientific literature supports a relationship between benzene exposure and myelodysplastic syndrome. As such, Mr. Keller met the requirements set forth in W. Va. Code § 23-4-1 and Powell v. State Workman’s Compensation Commission, supra. The Board of Review correctly weighed all of the evidence in accordance with the applicable statutes, and held the claim compensable. The Board’s decision was NOT clearly wrong in view of the reliable, probative, and substantial evidence on the whole record.
 
@@ -105,7 +105,7 @@ The Intermediate Court of Appeals may affirm the order or decision of the Worker
 
 W.Va. Code § 23-5-12a(b) (2022).
 
-Recently enacted W.Va. Code § 23-5-12a(b) contains exactly the same standard previously required of the former Board of Review in reviewing Office of Judges’ decisions. Given the review standards’ similarity, prior rulings of the West Virginia Supreme Court of Appeals discussing the former Board of Review’s obligations in considering decisions of the former Office of Judges are informative. As the Court has stated, "The legislature has seen the need to craft bright lines between rulings by the OOJ and review of those rulings by the Appeal Board. The legislature has determined by its enactment of W. Va. Code § 23-5-12(b) that the Appeal Board, in essence, must accord deference to decisions by the OOJ." Conley v. Workers' Compensation Div., 199 W.Va. 196, 483 S.E.2d 542, 549 (1997).
+Recently enacted W.Va. Code § 23-5-12a(b) contains exactly the same standard previously required of the former Board of Review in reviewing Office of Judges’ decisions. Given the review standards’ similarity, prior rulings of the West Virginia Supreme Court of Appeals discussing the former Board of Review’s obligations in considering decisions of the former Office of Judges are informative. As the Court has stated, “The legislature has seen the need to craft bright lines between rulings by the OOJ and review of those rulings by the Appeal Board. The legislature has determined by its enactment of W. Va. Code § 23-5-12(b) that the Appeal Board, in essence, must accord deference to decisions by the OOJ.” Conley v. Workers’ Compensation Div., 199 W.Va. 196, 483 S.E.2d 542, 549 (1997).
 
 ### 2. Weight of the Evidence.
 
@@ -119,11 +119,11 @@ Harris v. CSX Transportation, Inc., 223 W.Va. 617, 753 S.E.2d 275, 289 (2013).
 
 ### 3. Occupational Disease and Proving Causation.
 
-W.Va. Code § 23-4-1 distinguishes claims for injury, occupational pneumoconiosis and occupational disease. Hoult v. Workers' Compensation Com'r, 383 S.E.2d 516, 181 W.Va. 551 (1989). "[T]he causal connection for occupational diseases must be established by showing exposure at the workplace sufficient to cause the disease and that the disease actually resulted in the particular case." Marlin v. Bill Rich Const., Inc., 198 W.Va. 635, 646, 482 S.E.2d 620, 631 (1997) citing Syl. pt. 2, in part, Powell v. State Workmen's Compensation Commissioner, 166 W.Va. 327, 273 S.E.2d 832 (1980).
+W.Va. Code § 23-4-1 distinguishes claims for injury, occupational pneumoconiosis and occupational disease. Hoult v. Workers’ Compensation Com’r, 383 S.E.2d 516, 181 W.Va. 551 (1989). “[T]he causal connection for occupational diseases must be established by showing exposure at the workplace sufficient to cause the disease and that the disease actually resulted in the particular case.” Marlin v. Bill Rich Const., Inc., 198 W.Va. 635, 646, 482 S.E.2d 620, 631 (1997) citing Syl. pt. 2, in part, Powell v. State Workmen’s Compensation Commissioner, 166 W.Va. 327, 273 S.E.2d 832 (1980).
 
-However, the claimant is not required "to prove that the conditions of his employment were the exclusive or sole cause of the disease." Syl. pt. 3, Powell, supra. Hoult, Id., 181 W.Va. at 554, 383 S.E.2d at 519. Furthermore, "[a] claimant in an occupational disease case is not required to negative all possible non-occupational causes of the disease." Syl. pt. 4, Powell, supra. See Hoult, Id.
+However, the claimant is not required “to prove that the conditions of his employment were the exclusive or sole cause of the disease.” Syl. pt. 3, Powell, supra. Hoult, Id., 181 W.Va. at 554, 383 S.E.2d at 519. Furthermore, “[a] claimant in an occupational disease case is not required to negative all possible non-occupational causes of the disease.” Syl. pt. 4, Powell, supra. See Hoult, Id.
 
-Most importantly, "[i]f studies and research clearly link a disease to a particular hazard of a workplace, a prima facie case of causation arises upon a showing that the claimant was exposed to the hazard and is suffering from the disease to which it is connected." Casdorph v. W. Va. Office Ins. Comm’r, 225 W.Va. 94, 100, 690 S.E.2d 102, 108 (2009) citing Syl. Pt. 5, Powell v. State Workmen's Compensation Commissioner, 166 W.Va. 327, 273 S.E.2d 832 (1980); see also, Marlin, supra, 198 W.Va. at 647, 482 S.E.2d at 632. "It thus follows that if the claimant can establish the statutory criteria defining an occupational disease, the claim is to be held compensable." Powell, supra, 166 W.Va. at 334, 273 S.E.2d at 836.
+Most importantly, “[i]f studies and research clearly link a disease to a particular hazard of a workplace, a prima facie case of causation arises upon a showing that the claimant was exposed to the hazard and is suffering from the disease to which it is connected.” Casdorph v. W. Va. Office Ins. Comm’r, 225 W.Va. 94, 100, 690 S.E.2d 102, 108 (2009) citing Syl. Pt. 5, Powell v. State Workmen’s Compensation Commissioner, 166 W.Va. 327, 273 S.E.2d 832 (1980); see also, Marlin, supra, 198 W.Va. at 647, 482 S.E.2d at 632. “It thus follows that if the claimant can establish the statutory criteria defining an occupational disease, the claim is to be held compensable.” Powell, supra, 166 W.Va. at 334, 273 S.E.2d at 836.
 
 ## B. Board of Review’s Decision.
 
@@ -137,9 +137,9 @@ The Board of Review entered its August 4, 2022 Order finding that (1) The claima
 
 Petitioner asserts that the Board of Review was clearly wrong in ruling the claim compensable because according to the employer there is no casual nexus between the claimant’s MDS diagnosis and his work at Chaney’s Construction Renovations and Rentals (CCRR). Pet. at 6. Thus, the appeal is limited in scope. The Petitioner’s assertion is two-fold: (1) there was insignificant exposure to benzene during Mr. Keller’s employment with CCRR, and (2) presumably even if sufficient benzene exposure is demonstrated the latency period between Mr. Keller’s employment with CCRR and his development of MDS was inadequate to support a causal analysis – neither of which is correct.
 
-## D. The Board of Review was not clearly wrong – Respondent/Claimant was
+## D. The Board of Review was not clearly wrong – Respondent/Claimant was exposed to benzene-containing products while employed by CCRR contributing in his development of MDS.
 
-exposed to benzene-containing products while employed by CCRR contributing in his development of MDS. 1.      Respondent/Claimant demonstrated that he was significantly exposed to benzene while employed as a roofer with CCRR.
+### 1. Respondent/Claimant demonstrated that he was significantly exposed to benzene while employed as a roofer with CCRR.
 
 Claimant submitted into evidence his June 10, 2019 affidavit, January 17, 2020 deposition transcript, interrogatory answers verified December 2, 2019, and the affidavit of Vernon Rose, Ph.D. as well as Dr. Rose’s narrative report – all of which demonstrate that Claimant consistently worked in, with and around a myriad of tar-based and benzene-containing
 
@@ -185,7 +185,7 @@ It is also important to note that Dr. Rose indicated that “[b]enzene can enter
 
 [^19]: Martin Depo. pp. 38-39, R.A. 000159-000160.
 
-[^20]: Dr. Martin referenced an article by Wenchao Li and Robert Schnatter – Benzene risk assessment: does new evidence on myelodysplastic syndrome justify a new approach? Critical Reviews in Toxicology 48:417-432 (2018), R.A. 000189-000295, ("A higher production of hematotoxic metabolites from peak exposure provides a reasonable biological explanation for the increased MDS risk associated with repeated exposures to peaks graded in three parts per million as examined in the pooled petroleum study.") See Martin Depo. p. 38:15-20, R.A.000159. Support for peak benzene exposures significance is also found in the Australian petroleum industry study where Glass, et al reported “There is no evidence of a [cancer] threshold in their study.” See Smith Report p. 20 ¶ 57, R.A. 000106.
+[^20]: Dr. Martin referenced an article by Wenchao Li and Robert Schnatter – Benzene risk assessment: does new evidence on myelodysplastic syndrome justify a new approach? Critical Reviews in Toxicology 48:417-432 (2018), R.A. 000189-000295, (“A higher production of hematotoxic metabolites from peak exposure provides a reasonable biological explanation for the increased MDS risk associated with repeated exposures to peaks graded in three parts per million as examined in the pooled petroleum study.”) See Martin Depo. p. 38:15-20, R.A.000159. Support for peak benzene exposures significance is also found in the Australian petroleum industry study where Glass, et al reported “There is no evidence of a [cancer] threshold in their study.” See Smith Report p. 20 ¶ 57, R.A. 000106.
 
 creating “peak exposure” scenarios that increase the risk of MDS.
 
@@ -305,7 +305,7 @@ Dr. Mehta concluded that Mr. Keller developed high-grade MDS at a relatively you
 
 Even the employer’s expert’s deposition testimony supports Mr. Keller’s OD claim:
 
-C      Dr. Martin agreed that Mr. Keller’s age at diagnosis was approximately 20 years younger than is typically seen, it is thus more likely that his MDS is a secondary disease (caused by some external exposure).[^47] C      Dr. Martin’s review of Mr. Keller’s medical records revealed evidence of “bone marrow failure broadly – all cell lines were suppressed.” Q.      Is that important? A.      Yes. That's important because it's -- it's a recognized effect of benzene exposure.[^48] C      Dr. Martin found nothing in Mr. Keller’s medical background as a contributing cause of his development of MDS: no family history of MDS; no family history of blood diseases; no history of high BMI, autoimmune disorders, community-acquired infections, anemia, nor use of anti-
+C      Dr. Martin agreed that Mr. Keller’s age at diagnosis was approximately 20 years younger than is typically seen, it is thus more likely that his MDS is a secondary disease (caused by some external exposure).[^47] C      Dr. Martin’s review of Mr. Keller’s medical records revealed evidence of “bone marrow failure broadly – all cell lines were suppressed.” Q.      Is that important? A.      Yes. That’s important because it’s -- it’s a recognized effect of benzene exposure.[^48] C      Dr. Martin found nothing in Mr. Keller’s medical background as a contributing cause of his development of MDS: no family history of MDS; no family history of blood diseases; no history of high BMI, autoimmune disorders, community-acquired infections, anemia, nor use of anti-
 
 [^47]: Martin Depo. p. 31:11-13, R.A. 000152.
 
@@ -327,9 +327,7 @@ An evaluation of the entire record leads to one conclusion – Mr. Keller’s MD
 
 Under W. Va. Code § 23-5-12a(b), Petitioner has the burden to establish with satisfactory proof that the Board of Review’s decision was “clearly wrong in view of the reliable, probative, and substantial evidence on the whole record.” Petitioner’s attempt to meet that burden falls short of the mark. The above recitation of the evidence submitted by the Respondent (and to a certain extent by the Petitioner) in combination with the explanation of the facts and reasoning utilized by the Board of Review demonstrates that Mr. Keller’s MDS was incurred in the course of and as a result of his employment. Petitioner has failed in its attempt to undermine that decision, and has failed to establish that the reliable, probative, and substantial evidence when viewed as a whole record demonstrates that the Board of Review was “clearly wrong”.
 
-## F. After Five Extensions Over a Two and a Half Year Period, The Employer
-
-Has Failed To Justify a Reason to Remand this Claim.
+## F. After Five Extensions Over a Two and a Half Year Period, The Employer Has Failed To Justify a Reason to Remand this Claim.
 
 Although Petitioner does not pray to remand this claim, it makes mention of the fact that it filed a timely motion to extend the evidentiary deadline for the submission of an affidavit from the Employer but was unable to meet the applicable deadline due to illness and COVID-related problems. Pet. at 11 n. 1. Petitioner then suggests in its brief that the BOR’s Order should be reversed or “the issue remanded for additional evidence on the issue.” Id.
 
@@ -345,33 +343,21 @@ On June 28, 2022, the Employer filed its Motion for Reconsideration (re-arguing 
 
 [^54]: R.A. 000057-000058.
 
-G.        Mr. Keller has proven and the prevailing scientific evidence shows that he
-
-was exposed to benzene, and that such exposure contributed to a significant degree to his development of myelodysplastic syndrome.
+## G. Mr. Keller has proven and the prevailing scientific evidence shows that he was exposed to benzene, and that such exposure contributed to a significant degree to his development of myelodysplastic syndrome.
 
 Respondent met his burden of proof required by W.Va. Code § 23-4-1 and Powell, supra, demonstrating
 
-1. That there is a casual connection between Mr. Keller’ work exposure to benzene
+1. That there is a casual connection between Mr. Keller’ work exposure to benzene and his young-onset MDS;
 
-and his young-onset MDS;
-
-2. That can be seen to have followed as a natural incident of his work history as a
-
-result of the exposure occasioned by the nature of the employment;
+2. That can be seen to have followed as a natural incident of his work history as a result of the exposure occasioned by the nature of the employment;
 
 3. That can be fairly traced to the employment as the proximate cause;
 
-4. That it does not come from a hazard to which workmen would have been equally
+4. That it does not come from a hazard to which workmen would have been equally exposed outside of the employment;
 
-exposed outside of the employment;
+5. That it is incidental to the character of the business and not independent of the relation of employer and employee; and
 
-5. That it is incidental to the character of the business and not independent of the
-
-relation of employer and employee; and
-
-6. That it appears to have had its origin in a risk connected with the employment and
-
-to have flowed from that source as a natural consequence, though it was not foreseen or expected before contraction.
+6. That it appears to have had its origin in a risk connected with the employment and to have flowed from that source as a natural consequence, though it was not foreseen or expected before contraction.
 
 It is therefore readily apparent that after more than 15+ years of significant, intense, and frequent exposure to various benzene-containing materials used in the course of and as a result of his employment as a roofer, Mr. Keller developed myelodysplastic syndrome.
 

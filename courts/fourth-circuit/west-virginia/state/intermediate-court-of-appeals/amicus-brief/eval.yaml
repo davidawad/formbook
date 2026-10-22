@@ -1,6 +1,12 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex/ and docx/ are generated from typst/layout.yaml
+# (`fb engines gen`, fb-595.54.12) and render with tier 1 at 0 failed, but do not yet break every line where the typst
+# render does, for shared-model reasons recorded in docs/open-items/fb-595.54.66.md (fb-595.54.82 fixes them):
+# latex and docx: p7, typst keeps the widow rule on the paragraph that anchors footnote 11, LaTeX and Word do not
+# (open item 1).
 # RAP 38(c) (courtswv.gov Rules of Appellate Procedure, fetched 2026-10-21): amicus brief 25 pages maximum, excluding the
 # cover page, table of contents, table of authorities and certificate of service (rules.md WVACTAPP-LEN-005). DEF-LEN-001
 # counts every page of the PDF, front matter included, so 25 is conservative: it can fail a compliant filing, never pass a
 # non-compliant one.
 params:
   page_limit: 25
+  cross_engine: report

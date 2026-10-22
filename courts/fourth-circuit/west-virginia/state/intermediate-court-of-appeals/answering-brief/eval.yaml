@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex/ and docx/ are generated from typst/layout.yaml
+# (`fb engines gen`, fb-595.54.12) and render with tier 1 at 0 failed, but do not yet break every line where the typst
+# render does, for shared-model reasons recorded in docs/open-items/fb-595.54.66.md (fb-595.54.82 fixes them):
+# latex: p11, footnote 16 runs over the page in typst, not in LaTeX (open item 2); docx: p22, the typst authority mark
+# after the page's last word lands on p23 (open item 6).
+params:
+  cross_engine: report
