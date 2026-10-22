@@ -6,21 +6,31 @@
 // margins, 12 point, double spaced), the court's own filing standard for papers. See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")   // vendored in fonts/liberation-serif (Times New Roman substitute, metric-compatible); LR Civ P 7.02(a) names Times New Roman, Courier New or Arial (README, known gaps)
+#let font-family = ("Times New Roman", "Liberation Serif")   // LR Civ P 7.02(a) names Times New Roman, Courier New or Arial; Liberation Serif is the vendored, metric-compatible Times New Roman
 #let type-size = 12pt              // LR Civ P 7.02(a): 12 point proportionally spaced type
-#let page-w = 8.5in                // LR Civ P 7.02(a): 8 1/2 by 11 inch paper
-#let page-h = 11in
-#let margin = 1in                  // LR Civ P 7.02(a): one inch on all four sides
-#let text-width = page-w - 2 * margin
-#let body-leading = 1.345em        // double spacing: Liberation Serif's line box is 0.655em, so 1.345em leading gives a 24 pt pitch at 12 pt (measured, pdftotext -bbox)
-#let single-leading = 0.5em        // single spacing for caption, signature and quotations: about 13.8 pt at 12 pt
-#let para-indent = 0.5in           // first-line indent of numbered paragraphs
+#let margin = 1in                  // LR Civ P 7.02(a): one inch on all four sides, 8 1/2 by 11 inch paper
+#let para-indent = 0.5in           // first-line indent of paragraphs, and the box of a paragraph's number after it
+#let item-indent = 0.5in           // prayer items: the label stands half an inch in ...
+#let item-label = 0.5in            // ... in a box of this width; the text hangs after it
 #let caption-left = 3.6in          // width of the party column of the caption
+#let caption-gutter = 0.25in       // between the party column and the civil action number
+#let designation-indent = 1in      // "Plaintiff," / "Defendants." under the party names
 #let sig-left = 3.25in             // the signature block starts at the middle of the page
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-body = 24pt             // LR Civ P 7.02(a) double spacing: a 24 pt pitch at 12 pt (headings, title and court title too)
+#let pitch-single = 13.8pt         // single spacing (caption, signature lines, page number): Word's single line, 1.15 x 12 pt
+#let caption-gap = 6pt             // between the entries of the caption (party column, and the civil action number and judge lines)
+#let cover-gap = 12pt              // the court title to the caption, the caption to the rule, the rule to the title
+#let rule-height = 1.75pt          // the rule under the caption (docx: a 1 pt line and its 0.75 pt bottom border)
+#let rule-stroke = 0.75pt
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -36,63 +46,65 @@
 /// Inline markdown (case names in italics, links). Smart punctuation keeps the author's characters.
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
-/// Numbered paragraphs (Fed. R. Civ. P. 10(b)). The counter runs through the whole complaint.
-#let allegation = counter("wvnd-allegation")
-
 /// Split the body into blank-line-separated chunks: headings, lettered lists, numbered paragraphs.
-#let chunks-of(body) = body.split("\n\n").map(c => c.trim()).filter(c => c != "")
+#let chunks-of(body) = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim()).filter(c => c != "")
+
+/// One single-spaced paragraph with explicit space above and below it.
+#let line-block(above: 0pt, below: 0pt, left: 0pt, body) = block(width: 100%, above: above, below: below, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt, hanging-indent: 0pt)
+  pad(left: left, body)
+})
+
+/// A paragraph at the body pitch.
+#let body-par(sticky: false, content) = block(width: 100%, above: 0pt, below: 0pt, sticky: sticky,
+  breakable: not sticky, par(first-line-indent: 0pt, content))
+
+// ---------------------------------------------------------------------------
+// Caption
+// ---------------------------------------------------------------------------
 
 /// Caption: court title, parties (left) and the civil action number (right), closed by a rule.
 #let caption(meta) = {
-  align(center)[
-    UNITED STATES DISTRICT COURT \
-    FOR THE NORTHERN DISTRICT OF WEST VIRGINIA
-    #if "division" in meta [ \ #meta.division ]
-  ]
-  v(body-leading)
-  grid(
-    columns: (caption-left, 1fr),
-    column-gutter: 0.25in,
+  let title = ("UNITED STATES DISTRICT COURT", "FOR THE NORTHERN DISTRICT OF WEST VIRGINIA")
+  if "division" in meta { title.push(meta.division) }
+  for l in title { block(width: 100%, above: 0pt, below: 0pt, align(center, l)) }
+  // the party column: each name and designation its own single-spaced paragraph, "v." between the sides
+  let left = ()
+  for (i, side) in meta.caption.enumerate() {
+    for n in side.names { left.push((inl(n), 0pt)) }
+    left.push((side.designation, designation-indent))
+    if i < meta.caption.len() - 1 { left.push(([v.], 0pt)) }
+  }
+  let right = ("Civil Action No. " + meta.case_number,)
+  if "judge" in meta { right.push("Judge: " + meta.judge) }
+  block(width: 100%, above: cover-gap, below: 0pt, grid(
+    columns: (caption-left, caption-gutter, 1fr),
     {
-      // the party column is single spaced; each entry is its own paragraph so it flows, never overlaps
-      set par(leading: single-leading, spacing: single-leading)
-      for side in meta.caption {
-        for n in side.names {
-          inl(n)
-          parbreak()
-        }
-        pad(left: 1in, side.designation)
-        parbreak()
-        if side != meta.caption.last() {
-          "v."
-          parbreak()
-        }
+      for (k, (t, ind)) in left.enumerate() {
+        line-block(left: ind, below: if k < left.len() - 1 { caption-gap } else { 0pt }, t)
       }
     },
-    align(bottom, {
-      "Civil Action No. " + meta.case_number
-      if "judge" in meta { linebreak() + "Judge: " + meta.judge }
-    }),
-  )
-  v(0.5 * body-leading)
-  line(length: 100%, stroke: 0.75pt)
-  v(0.5 * body-leading)
+    [],
+    align(bottom, { for (k, l) in right.enumerate() { line-block(above: if k > 0 { caption-gap } else { 0pt }, l) } }),
+  ))
+  block(width: 100%, height: rule-height, above: cover-gap, below: cover-gap,
+    place(bottom, line(length: 100%, stroke: rule-stroke)))
 }
 
 /// The signature block, after the last paragraph (Fed. R. Civ. P. 11(a); LR Gen P 5.03(c)).
 #let signature-block(sig) = {
   assert(sig.lines.any(l => l.contains("@")), message: "wvnd-complaint: the signature lines need an e-mail address (Fed. R. Civ. P. 11(a))")
   assert(sig.lines.any(l => l.match(regex("\\(?\\d{3}\\)?[ .-]?\\d{3}[ .-]?\\d{4}")) != none), message: "wvnd-complaint: the signature lines need a telephone number (Fed. R. Civ. P. 11(a))")
-  block(sticky: true, above: body-leading, below: 0pt, [Dated: #sig.date])
-  block(sticky: true, above: body-leading, below: 0pt, pad(left: sig-left, {
-    sig.party
-    linebreak()
-    "By Counsel,"
-    v(body-leading)
-    "s/ " + sig.signer
-    v(single-leading)
-    for l in sig.lines { block(below: single-leading, inl(l)) }
-  }))
+  block(width: 100%, breakable: false, above: pitch-body, below: 0pt, {
+    block(width: 100%, above: 0pt, below: 0pt, [Dated: #sig.date])
+    pad(left: sig-left, {
+      block(width: 100%, above: 0pt, below: 0pt, sig.party)
+      block(width: 100%, above: 0pt, below: 0pt, [By Counsel,])
+    })
+    line-block(above: pitch-body, left: sig-left, "s/ " + sig.signer)
+    for (i, l) in sig.lines.enumerate() { line-block(above: if i == 0 { pitch-single } else { 0pt }, left: sig-left, inl(l)) }
+  })
 }
 
 // ---------------------------------------------------------------------------
@@ -105,59 +117,51 @@
   assert("title" in meta, message: "wvnd-complaint: frontmatter needs title (Fed. R. Civ. P. 10(a))")
   assert("signature" in meta, message: "wvnd-complaint: frontmatter needs signature")
 
-  set page(
-    width: page-w,
-    height: page-h,
-    margin: margin,
-    footer: context align(center, text(size: type-size, counter(page).display())),
-  )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(justify: false, leading: body-leading, spacing: body-leading, first-line-indent: 0pt)
-  // quotations and block quotations are single spaced (LR Civ P 7.02(a))
-  show quote: set par(leading: single-leading, spacing: single-leading)
+  // LR Civ P 7.02(a): letter paper, one-inch margins; the page number centered in the bottom margin, in a single-
+  // spaced line box (Word's footer).
+  set page(paper: "us-letter", margin: margin, footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
+  set text(font: font-family, size: type-size, lang: "en", fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch.
+  show: xengine.with(pitch: pitch-body, list-indent: none)
+  // A doubled sign stays with its number ("§§ 1331"), as a single one does in xengine.
+  show regex("[§¶]{2} \\S+"): it => box(it)
 
   caption(meta)
 
   // Fed. R. Civ. P. 10(a): the title of the complaint names the paper.
-  align(center, block(sticky: true, above: body-leading, below: body-leading, text(weight: "bold", meta.title)))
+  block(width: 100%, above: 0pt, below: 0pt, sticky: true, align(center, text(weight: "bold", inl(meta.title))))
 
-  if "lead_in" in meta {
-    [#h(para-indent)#inl(meta.lead_in)]
-    parbreak()
-  }
+  if "lead_in" in meta { body-par[#h(para-indent)#inl(meta.lead_in)] }
 
-  for c in chunks-of(body) {
+  let n = 0
+  let chunks = chunks-of(body)
+  for (k, c) in chunks.enumerate() {
+    // the last paragraph stays with the signature block, so the signature never stands alone on a page
+    let last = k == chunks.len() - 1
     if c.starts-with("#") {
       let level = c.match(regex("^#+")).text.len()
       let t = c.replace(regex("^#+\\s*"), "")
-      if level == 1 {
-        block(width: 100%, sticky: true, above: body-leading, below: body-leading, align(center, text(weight: "bold", inl(t))))
-      } else if level == 2 {
-        block(width: 100%, sticky: true, above: body-leading, below: body-leading, align(center, text(weight: "bold", inl(t))))
-      } else {
-        block(width: 100%, sticky: true, above: body-leading, below: body-leading, text(weight: "bold", style: "italic", inl(t)))
-      }
+      block(width: 100%, sticky: true, above: 0pt, below: 0pt, {
+        if level <= 2 { align(center, text(weight: "bold", inl(t))) }
+        else { text(weight: "bold", style: "italic", inl(t)) }
+      })
     } else if c.split("\n").all(l => l.match(regex("^[0-9]+\\. ")) != none) {
       // prayer and other lettered lists: (a), (b), ...
-      let letters = "abcdefghijklmnopqrstuvwxyz"
       let items = c.split("\n")
       for (i, l) in items.enumerate() {
-        let t = l.replace(regex("^[0-9]+\\. "), "")
-        block(width: 100%, below: body-leading, pad(left: 0.5in, grid(
-          columns: (0.5in, 1fr),
-          "(" + letters.at(i) + ")",
-          inl(t),
-        )))
+        block(width: 100%, above: 0pt, below: 0pt, sticky: last, breakable: not last,
+          par(hanging-indent: item-indent + item-label, first-line-indent: 0pt,
+            [#h(item-indent)#box(width: item-label, numbering("(a)", i + 1))#inl(l.replace(regex("^[0-9]+\\. "), ""))]))
       }
     } else if c.starts-with("~ ") {
       // an unnumbered paragraph (the introduction, notes outside the allegations)
-      [#h(para-indent)#inl(c.slice(2))]
-      parbreak()
+      body-par(sticky: last)[#h(para-indent)#inl(c.slice(2))]
     } else {
-      // a numbered paragraph (Fed. R. Civ. P. 10(b))
-      allegation.step()
-      context [#h(para-indent)#allegation.display().#h(0.25in)#inl(c)]
-      parbreak()
+      // a numbered paragraph (Fed. R. Civ. P. 10(b)); the number runs through the whole complaint
+      n += 1
+      body-par(sticky: last)[#h(para-indent)#box(width: para-indent)[#n.]#inl(c)]
     }
   }
 
