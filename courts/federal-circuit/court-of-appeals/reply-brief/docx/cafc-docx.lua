@@ -1,13 +1,17 @@
 -- cafc-docx.lua: the Federal Circuit reply brief, DOCX engine (docs/DOCX.md): the markdown contract -> a Word document
--- on reference.docx (docx/build-reference.sh). It lays the brief out as ../typst/cafc-reply-brief.typ does, on the
--- cross-engine layout model (lib/docx/xengine.lua): exact line boxes of the typst pitches (32.2 pt text, 16.1 pt
--- single), the typst spaces between blocks (twips = 20 x pt), first-fit breaking, typst's break opportunities.
--- The cover, the table of contents, the table of authorities, the signature block and the certificates (Form 19,
--- service) are written here as raw WordprocessingML paragraphs; the body keeps its markdown structure, its headings
--- get their labels (I. A. i. 1. a.) and a tab.
--- Sections (cover: no number; front matter: lower roman from i; body and certificates: arabic from 1) and the footers
--- are written by docx/render.sh, which also fills the page numbers of the contents and authorities from a first pass
--- (DOCX_MANIFEST and DOCX_PAGEMAP, see docx/pagemap.awk).
+-- on the reference document fb render builds from docx/reference.xml. It lays the brief out as
+-- ../typst/cafc-reply-brief.typ does, on the cross-engine layout model (lib/docx/xengine.lua): exact line boxes of the
+-- typst pitches (32.2 pt text, 16.1 pt single), the typst spaces between blocks (twips = 20 x pt), first-fit breaking,
+-- typst's break opportunities. The cover, the table of contents, the table of authorities, the signature block and the
+-- certificates (Form 19, service) are written here as raw WordprocessingML paragraphs; the body keeps its markdown
+-- structure, its headings get their labels (I. A. i. 1. a.) and a tab.
+-- Sections (cover: no number; front matter: lower roman from i; body and certificates: arabic from 1) are section
+-- breaks naming the footers this filter gives fb render (FORMBOOK_FOOTERS: rIdRomanFtr, rIdArabicFtr, a centered PAGE
+-- field in a 16.1 pt line); the last section goes to FORMBOOK_FINAL. The page numbers of the contents and
+-- authorities: fb render (tools/fb/src/docxpass.rs) renders the document once, finds the page of every heading and
+-- citation in that PDF (the needles this filter writes to FORMBOOK_NEEDLES), and renders again with those pages
+-- (FORMBOOK_PAGES) until they settle (were docx/render.sh and docx/pagemap.awk). Word may paginate slightly
+-- differently from the LibreOffice PDF the page numbers come from (docs/DOCX.md).
 
 local xe = require("docx.xengine")
 
@@ -25,7 +29,10 @@ local FORMCOL = 4820     -- Form 19's right column: (text width + 1 em) / 2 (typ
 local BODY, SINGLE = 644, 322   -- typst pitch-double (32.2 pt), pitch-single (16.1 pt)
 local TOC_COL, TOA_COL = 720, 1120   -- typst toc-page-col (36 pt), toa-page-col (56 pt)
 local SECT_COVER = '<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="686" w:gutter="0"/></w:sectPr>'
-local SECT_ROMAN = '<w:sectPr><w:footerReference w:type="default" r:id="RIDROMAN"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="686" w:gutter="0"/><w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>'
+local SECT_ROMAN = '<w:sectPr><w:footerReference w:type="default" r:id="rIdRomanFtr"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="686" w:gutter="0"/><w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>'
+-- the footers (a centered PAGE field in a 16.1 pt line) and the body's section (arabic from 1), which name them
+local FOOTER_P = '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="322" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p>'
+local SECT_BODY = '<w:sectPr><w:footerReference w:type="default" r:id="rIdArabicFtr"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="686" w:gutter="0"/><w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>'
 
 local TOA_GROUPS = {
   { "case", "Cases:" }, { "constitution", "Constitutional Provisions:" }, { "statute", "Statutes:" },
@@ -111,41 +118,60 @@ local function label_for(level, n)
   fail("headings deeper than level 5 are not supported")
 end
 
-local function norm_text(s)
-  return (s:gsub("\u{00A0}", " "):lower():gsub("%s+", " "):gsub("^ ", ""):gsub(" $", ""))
-end
-
--- the search key of a heading in the PDF: lower case, at most about 30 characters
-local function search_key(s)
-  s = norm_text(s)
-  if #s > 30 then s = s:sub(1, 30):match("^(.*)%s%S*$") or s:sub(1, 30) end
-  return s
-end
-
 -- ---------------------------------------------------------------------------
--- page numbers from a first pass (docx/render.sh): DOCX_PAGEMAP, DOCX_MANIFEST
+-- needles and pages (fb render's multi-pass build; the contract is in tools/fb/src/docxpages.rs)
 -- ---------------------------------------------------------------------------
 
-local PM = { H = {}, S = {}, T = {} }
-local pm_path = os.getenv("DOCX_PAGEMAP")
-local have_pm = pm_path ~= nil and pm_path ~= ""
-if have_pm then
-  local f = io.open(pm_path, "r")
-  if not f then fail("cannot read the page map " .. pm_path) end
+local NEEDLE_MAX = 60   -- a needle is a prefix of the text (letters and digits only)
+
+-- letters and digits only, lower case: fb render normalizes the PDF text the same way
+local function norm(s)
+  return (s:lower():gsub("[^a-z0-9]", ""))
+end
+
+-- a needle: { id, kind, needle, fallback }; kind B (body, in document order: moves the search on) or N (inside a
+-- footnote: searched from the page the body has reached, moves nothing); the fallback is the text alone (a needle
+-- that runs over a page end, with the footnotes between its halves)
+local needles = {}
+local function need_at(id, kind, text, context)
+  local short = norm(text):sub(1, NEEDLE_MAX)
+  local long = norm(text .. " " .. (context or "")):sub(1, NEEDLE_MAX)
+  if short == "" then short = long end
+  needles[#needles + 1] = {id = id, kind = kind, needle = long, fallback = short}
+end
+
+-- the text a block starts with, as the PDF prints it (a footnote's text is not there: the text stops at its mark)
+local function lead_text(b)
+  local d = pandoc.Pandoc({b}):walk({Note = function() return pandoc.Str("\1") end})
+  return (pandoc.utils.stringify(d):match("^[^\1]*"))
+end
+
+-- the pages of the previous pass: id -> printed page; empty on the first pass
+local labels, have_pages = {}, false
+local function load_pages()
+  local path = os.getenv("FORMBOOK_PAGES")
+  if not path or path == "" then return end
+  local f = io.open(path, "r")
+  if not f then return end
+  have_pages = true
   for line in f:lines() do
-    local k, a, b = line:match("^(%u)\t([^\t]*)\t(.*)$")
-    if k == "H" then PM.H[tonumber(a)] = b
-    elseif k == "S" then PM.S[a] = b
-    elseif k == "T" then PM.T[a] = b
-    end
+    local id, _, lab = line:match("^([^\t]+)\t([^\t]*)\t(.*)$")
+    if id then labels[id] = lab end
   end
   f:close()
 end
-local function pm_get(tbl, key, what)
-  if not have_pm then return "0" end
-  local v = tbl[key]
-  if v == nil then fail("no page for " .. what .. " in the page map") end
-  return v
+
+-- the printed page of a needle: "0" on the first pass
+local function label_of(id)
+  return labels[id] or "0"
+end
+
+local function write_file(env, text)
+  local path = os.getenv(env)
+  if not path or path == "" then return end
+  local f = assert(io.open(path, "w"))
+  f:write(text)
+  f:close()
 end
 
 -- ---------------------------------------------------------------------------
@@ -369,6 +395,7 @@ end
 
 function Pandoc(doc)
   local meta = doc.meta
+  load_pages()
   for _, k in ipairs({ "case_number", "caption", "proceeding", "brief_title", "short_caption", "counsel",
     "counsel_for", "signature", "date" }) do
     need(meta, k)
@@ -378,13 +405,13 @@ function Pandoc(doc)
     fail("the brief has " .. words .. " words; Fed. Cir. R. 32(b)(1) allows " .. WORD_LIMIT .. " for a reply brief")
   end
 
-  -- every toa: citation in document order, as a needle for the page map (docx/pagemap.awk): the link text and the
-  -- words after it in its paragraph (up to a footnote mark or a quotation), so that the same words elsewhere in the
-  -- brief, unlinked, are not taken for it. Kind B (body) moves the search on; N (in a footnote) is searched from the
-  -- page the body has reached.
-  local needles = {}
+  -- every toa: citation in document order, per top-level block, as a needle: the link text and the words after it
+  -- in its paragraph (up to a footnote mark or a quotation), so that the same words elsewhere in the brief,
+  -- unlinked, are not taken for it. Kind B (body) moves the search on; N (in a footnote) is searched from the page
+  -- the body has reached.
+  local cites = {}
   local scan_blocks
-  local function scan(inls, kind)
+  local function scan(inls, kind, list)
     for i, el in ipairs(inls) do
       if el.t == "Link" and el.target:match("^toa:") then
         local rest = {}
@@ -393,29 +420,28 @@ function Pandoc(doc)
           if t == "Note" or t == "Quoted" or t == "Link" then break end
           rest[#rest + 1] = inls[j]
         end
-        local lt = norm_text(plain(pandoc.Inlines(el.content)))
-        local tail = norm_text(plain(pandoc.Inlines(rest)))
-        if #tail > 20 then tail = tail:sub(1, 20):match("^(.*)%s%S*$") or "" end
-        local text = lt
-        if tail ~= "" then text = lt .. (tail:match("^[%.,;:%)]") and "" or " ") .. tail end
-        needles[#needles + 1] = { key = el.target:sub(5), kind = kind, text = text }
+        list[#list + 1] = { key = el.target:sub(5), kind = kind, text = plain(pandoc.Inlines(el.content)),
+          context = plain(pandoc.Inlines(rest)) }
       elseif el.t == "Note" then
-        scan_blocks(el.content, "N")
+        scan_blocks(el.content, "N", list)
       elseif el.content ~= nil and type(el.content) == "table" and el.t ~= "Code" then
-        scan(el.content, kind)
+        scan(el.content, kind, list)
       end
     end
   end
-  scan_blocks = function(blocks, kind)
+  scan_blocks = function(blocks, kind, list)
     for _, b in ipairs(blocks) do
-      if b.t == "Para" or b.t == "Plain" or b.t == "Header" then scan(b.content, kind)
-      elseif b.t == "BlockQuote" or b.t == "Div" then scan_blocks(b.content, kind)
+      if b.t == "Para" or b.t == "Plain" or b.t == "Header" then scan(b.content, kind, list)
+      elseif b.t == "BlockQuote" or b.t == "Div" then scan_blocks(b.content, kind, list)
       elseif b.t == "BulletList" or b.t == "OrderedList" then
-        for _, item in ipairs(b.content) do scan_blocks(item, kind) end
+        for _, item in ipairs(b.content) do scan_blocks(item, kind, list) end
       end
     end
   end
-  scan_blocks(doc.blocks, "B")
+  for bi, b in ipairs(doc.blocks) do
+    cites[bi] = {}
+    scan_blocks({ b }, "B", cites[bi])
+  end
 
   local auth = meta.authorities or {}
   local hits = {}
@@ -428,14 +454,38 @@ function Pandoc(doc)
       return el.content
     end,
   })
+  -- the text each block starts with, before the inline rules (they write some characters as raw runs): what a
+  -- heading's needle runs on into
+  local leads = {}
+  for bi, b in ipairs(doc.blocks) do leads[bi] = lead_text(pandoc.Div(xe.list_items(b))):sub(1, 40) end
   -- the break rules of typst on the text pandoc writes itself (body, footnotes)
   doc = doc:walk({ Inlines = xe.inlines })
   doc = doc:walk({ Str = function(e) return pandoc.Str(slash_breaks(e.text)) end })
 
   -- the body: headings get their labels; lists their label boxes
+  -- The body's page 1 is the page of its first block. A heading's needle is its label and title and the text after it
+  -- (the next block, as printed), so the same words earlier on the page are not taken for it.
+  local blocks = doc.blocks
+  local body_id = "S:body"
+  if blocks[1] and blocks[1].t ~= "Header" then need_at(body_id, "B", leads[1], "") end
+  local occurrences = {}
+  local function cite_needles(bi)
+    for _, c in ipairs(cites[bi] or {}) do
+      occurrences[#occurrences + 1] = {key = c.key, id = "T:" .. (#occurrences + 1)}
+      need_at(occurrences[#occurrences].id, c.kind, c.text, c.context)
+    end
+  end
+  local pending = nil   -- a heading waits for the text after it
+  local function flush(next_text)
+    if pending then
+      need_at(pending.id, "B", pending.text, next_text)
+      cite_needles(pending.bi)
+      pending = nil
+    end
+  end
   local heads, body = {}, {}
   local counters = { 0, 0, 0, 0, 0, 0 }
-  for _, b in ipairs(doc.blocks) do
+  for bi, b in ipairs(blocks) do
     if b.t == "Header" then
       counters[b.level] = counters[b.level] + 1
       for i = b.level + 1, 6 do counters[i] = 0 end
@@ -455,9 +505,13 @@ function Pandoc(doc)
           runs({ pandoc.Str(lab) }, o) .. "<w:r><w:tab/></w:r>" .. runs(b.content, o)))
       end
       local title = b.level == 1 and upper_il(b.content) or b.content
-      heads[#heads + 1] = { level = b.level, label = lab, title = title,
-        key = search_key(lab .. " " .. plain(title)) }
+      local id = "H:" .. (#heads + 1)
+      if bi == 1 then body_id = id end
+      flush(lab .. " " .. plain(title))
+      pending = { id = id, text = lab .. " " .. plain(title), bi = bi }
+      heads[#heads + 1] = { level = b.level, label = lab, title = title, id = id }
     else
+      flush(leads[bi])
       -- a paragraph that anchors a footnote has no widow control: typst's widow and orphan rules do not see the note,
       -- so a line whose note does not fit moves to the next page alone
       local note = false
@@ -467,17 +521,33 @@ function Pandoc(doc)
       else
         for _, x in ipairs(xe.list_items(b)) do body[#body + 1] = x end
       end
+      cite_needles(bi)
     end
   end
+  flush("")
 
-  -- manifest for the first pass of docx/render.sh
-  local man_path = os.getenv("DOCX_MANIFEST")
-  if man_path ~= nil and man_path ~= "" then
-    local f = assert(io.open(man_path, "w"))
-    for i, h in ipairs(heads) do f:write(string.format("H\t%d\t%d\t%s\n", i, h.level, h.key)) end
-    for _, n in ipairs(needles) do f:write(string.format("C\t%s\t%s\t%s\n", n.key, n.kind, n.text)) end
-    f:close()
+  -- the printed pages of an authority: its distinct pages in the order cited (every page is listed: "passim" is
+  -- not used, proposed Fed. Cir. R. 32(j); typst toa-section)
+  local function pages_of(key)
+    local ls, seen = {}, {}
+    for _, o in ipairs(occurrences) do
+      local l = label_of(o.id)
+      if o.key == key and not seen[l] then seen[l] = true; ls[#ls + 1] = l end
+    end
+    return table.concat(ls, ", ")
   end
+
+  -- the needles, in document order: the contents (its heading and the "Page" over its column), the body's
+  table.insert(needles, 1, { id = "S:toc", kind = "B", needle = norm("Table of Contents Page"),
+    fallback = norm("Table of Contents") })
+  local nl = {}
+  for _, n in ipairs(needles) do nl[#nl + 1] = table.concat({ n.id, n.kind, n.needle, n.fallback }, "\t") end
+  -- how fb render labels pages: the contents are page i, the body and the certificates from the body's first block
+  nl[#nl + 1] = "#section\tS:toc\tlower-roman\t"
+  nl[#nl + 1] = "#section\t" .. body_id .. "\tdecimal\t"
+  write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
+  write_file("FORMBOOK_FOOTERS", "rIdRomanFtr\t" .. FOOTER_P .. "\nrIdArabicFtr\t" .. FOOTER_P .. "\n")
+  write_file("FORMBOOK_FINAL", SECT_BODY)
 
   local out = {}
   local function add(b) out[#out + 1] = b end
@@ -490,10 +560,10 @@ function Pandoc(doc)
   -- section 2 (lower roman): the table of contents [toc-entry, listing-row]
   add(P({ "<w:keepNext/><w:keepLines/>", sp(0, 308), IND0, CENTER }, { pandoc.Str("TABLE OF CONTENTS") }, { b = true }))
   add(P({ "<w:keepNext/>", sp(84, 0), IND0, xe.jc("right") }, { pandoc.Str("Page") }, { b = true, u = true }))
-  for i, h in ipairs(heads) do
+  for _, h in ipairs(heads) do
     if h.level <= TOC_DEPTH then
       local ind = (h.level - 1) * 720
-      local page = pm_get(PM.H, i, "heading " .. i)
+      local page = label_of(h.id)
       local il = pandoc.Inlines({ pandoc.Str(h.label), TAB })
       il:extend(h.title)
       il:insert(pandoc.Str(xe.LEAD))
@@ -529,7 +599,7 @@ function Pandoc(doc)
         sp(first and 280 or 392, 56), IND0 }, head)))
       first = false
       for _, m in ipairs(members) do
-        local page = pm_get(PM.T, m.key, "authority " .. m.key)
+        local page = pages_of(m.key)
         local il = pandoc.Inlines({})
         if m.a.name ~= nil then
           local nm = minl(m.a.name)

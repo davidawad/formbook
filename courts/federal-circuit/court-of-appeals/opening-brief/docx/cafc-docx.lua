@@ -1,6 +1,6 @@
--- cafc-docx.lua: pandoc filter for the cafc .docx engine (docx/render.sh). It lays out the opening brief the way the
--- typst template does: cover, front matter (roman), body (arabic), addendum (Add-), certificates (arabic, continuing).
--- The styles come from docx/reference.docx (made from docx/styles.xml.in by docx/make-reference.sh).
+-- cafc-docx.lua: pandoc filter for the cafc .docx engine (fb render). It lays out the opening brief the way the typst
+-- template does: cover, front matter (roman), body (arabic), addendum (Add-), certificates (arabic, continuing).
+-- The styles come from docx/reference.xml (fb render builds the reference document from it).
 --
 -- Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): the document breaks every line and page where the
 -- typst render (the reference) breaks them. The break rules on every run come from lib/docx/xengine.lua (a no-break
@@ -9,9 +9,12 @@
 -- 20 x pt; [name] refers to the typst template), and the tables' rows wrap before a page column, a dot leader running
 -- from three spaces after the text to the page number.
 --
--- Page numbers in the contents and the table of authorities are not known to pandoc. render.sh runs the build
--- more than once: a run writes CAFC_PATTERNS (what to look for, and where), LibreOffice renders the .docx, pages.sh
--- finds the page labels, and the next run reads them from CAFC_PAGES. The first run writes placeholders.
+-- Page numbers in the contents and the table of authorities are not known to pandoc. fb render
+-- (tools/fb/src/docxpass.rs) runs the build more than once: a run writes its needles to FORMBOOK_NEEDLES (every
+-- heading and citation, in document order, and where the roman, arabic and Add- numbering start), LibreOffice renders
+-- the .docx, fb finds the pages, and the next run reads their labels from FORMBOOK_PAGES, until they settle (were
+-- docx/render.sh and docx/pages.sh). The first run writes placeholders. The footers (FORMBOOK_FOOTERS) and the last
+-- section, the certificates continuing the body's numbers (FORMBOOK_FINAL), are this filter's too.
 
 local xe = require("docx.xengine")
 
@@ -24,16 +27,17 @@ local HALF = 4680 -- [half-width]: signature, counsel and designation blocks sta
 local TAB = 720 -- [heading-tab], [para-indent]: 0.5 in
 
 -- ---------------------------------------------------------------------------
--- Inputs written by render.sh between runs
+-- Needles and pages (fb render's multi-pass build; the contract is in tools/fb/src/docxpages.rs)
 -- ---------------------------------------------------------------------------
 
+-- the page labels of the previous run: id -> label; empty on the first run
 local PAGES = {}
 do
-  local path = os.getenv("CAFC_PAGES")
-  local f = path and io.open(path, "r")
+  local path = os.getenv("FORMBOOK_PAGES")
+  local f = path and path ~= "" and io.open(path, "r")
   if f then
     for line in f:lines() do
-      local id, val = line:match("^([^\t]+)\t(.*)$")
+      local id, _, val = line:match("^([^\t]+)\t([^\t]*)\t(.*)$")
       if id then
         PAGES[id] = val
       end
@@ -46,7 +50,36 @@ local function pg(id)
   return PAGES[id] or "00"
 end
 
-local PATTERNS = {} -- lines "mode area id needle" for pages.sh
+local NEEDLE_MAX = 60 -- a needle is a prefix of the text (letters and digits only)
+
+-- letters and digits only, lower case: fb render normalizes the PDF text the same way
+local function key_norm(s)
+  return (s:lower():gsub("[^a-z0-9]", ""))
+end
+
+-- a needle: { id, kind, needle, fallback }; kind B (body, in document order: moves the search on) or N (inside a
+-- footnote: searched from the page the body has reached, moves nothing); the fallback is the text alone
+local NEEDLES = {}
+local function need_at(id, kind, s, context)
+  local short = key_norm(s):sub(1, NEEDLE_MAX)
+  local long = key_norm(s .. " " .. (context or "")):sub(1, NEEDLE_MAX)
+  if short == "" then short = long end
+  NEEDLES[#NEEDLES + 1] = { id = id, kind = kind, needle = long, fallback = short }
+end
+
+-- the text a block starts with, as the PDF prints it (a footnote's text is not there: the text stops at its mark)
+local function lead_text(b)
+  local d = pandoc.Pandoc({ b }):walk({ Note = function() return pandoc.Str("\1") end })
+  return (pandoc.utils.stringify(d):match("^[^\1]*"))
+end
+
+local function write_file(env, s)
+  local path = os.getenv(env)
+  if not path or path == "" then return end
+  local f = assert(io.open(path, "w"))
+  f:write(s)
+  f:close()
+end
 
 -- ---------------------------------------------------------------------------
 -- Helpers
@@ -56,16 +89,12 @@ local function text(x)
   return pandoc.utils.stringify(x)
 end
 
--- Upper case (ASCII), single spaces: the form pages.sh compares (it runs in the C locale).
+-- Upper case (ASCII), single spaces.
 local function norm(s)
   s = s:gsub("\194\160", " ")
   s = s:gsub("%s+", " ")
   s = s:gsub("^ ", ""):gsub(" $", "")
   return s:upper()
-end
-
-local function need_pattern(mode, area, id, needle)
-  PATTERNS[#PATTERNS + 1] = mode .. "\t" .. area .. "\t" .. id .. "\t" .. norm(needle)
 end
 
 -- Inlines of a metadata value, emphasis kept (YAML strings are read as markdown by pandoc).
@@ -121,7 +150,7 @@ local function PX(o, runs)
   return xe.raw(xe.para(props, runs))
 end
 
--- A paragraph in one of the court's styles (docx/styles.xml.in), its inlines written by pandoc.
+-- A paragraph in one of the court's styles (docx/reference.xml), its inlines written by pandoc.
 local function P(style, inls)
   return pandoc.Div({ pandoc.Para(xe.inlines(pandoc.Inlines(inls))) }, pandoc.Attr("", {}, { ["custom-style"] = style }))
 end
@@ -220,10 +249,24 @@ local function label_indent(level, in_arg)
 end
 
 -- ---------------------------------------------------------------------------
--- Citations: a toa: link is plain text here; its shown text is what the page search looks for
+-- Citations: a toa: link is plain text here; each one is a needle (Pandoc), its page is listed for its authority
 -- ---------------------------------------------------------------------------
 
 local cited, seen = {}, {}
+local ADD_NEEDLES = {} -- the addendum's headings: { id, title (its end), after }
+local OCC = {} -- every citation in the body, in document order: { key, id } (its needle's id)
+
+-- the printed pages of an authority: its distinct body pages in the order cited; passim from 7 pages
+local function pages_of(key)
+  local ls, got = {}, {}
+  for _, o in ipairs(OCC) do
+    local l = PAGES[o.id]
+    if o.key == key and l and not got[l] then got[l] = true; ls[#ls + 1] = l end
+  end
+  if next(PAGES) == nil then return "00" end
+  if #ls >= 7 then return "passim" end
+  return table.concat(ls, ", ")
+end
 
 local function link_filter(el)
   local key = el.target:match("^toa:(.+)$")
@@ -234,7 +277,6 @@ local function link_filter(el)
     seen[key] = true
     cited[#cited + 1] = key
   end
-  PATTERNS[#PATTERNS + 1] = "all\tbody\tt:" .. key .. "\t" .. norm(text(el.content))
   return pandoc.Span(el.content)
 end
 
@@ -309,8 +351,7 @@ local function toa_blocks(authorities)
           body = R(a.name, { i = g.kind == "case" }) .. xe.runs(",") .. xe.BR
         end
         body = body .. R(a.cite)
-        out[#out + 1] = listing_row({ left = 504, hanging = 504, before = 196, col = 1120 }, body, pg("t:" .. m.key))
-        need_pattern("all", "body", "t:" .. m.key, text(a.cite))
+        out[#out + 1] = listing_row({ left = 504, hanging = 504, before = 196, col = 1120 }, body, pages_of(m.key))
       end
     end
   end
@@ -487,9 +528,72 @@ function Pandoc(doc)
   local in_arg = false
   local contents = {}
   local body_blocks = {}
+  -- every toa: citation in document order, per top-level block, as a needle: the link text and the words after it
+  -- in its paragraph (up to a footnote mark or a quotation), so that the same words elsewhere in the brief,
+  -- unlinked, are not taken for it. Kind B (body) moves the search on; N (in a footnote) is searched from the page
+  -- the body has reached.
+  local cites = {}
+  local scan_blocks
+  local function scan(inls, kind, list)
+    for k, el in ipairs(inls) do
+      if el.t == "Link" and el.target:match("^toa:") then
+        local rest = {}
+        for j = k + 1, math.min(#inls, k + 12) do
+          local t = inls[j].t
+          if t == "Note" or t == "Quoted" or t == "Link" then break end
+          rest[#rest + 1] = inls[j]
+        end
+        list[#list + 1] = { key = el.target:sub(5), kind = kind, text = text(pandoc.Inlines(el.content)),
+          context = text(pandoc.Inlines(rest)) }
+      elseif el.t == "Note" then
+        scan_blocks(el.content, "N", list)
+      elseif el.content ~= nil and type(el.content) == "table" and el.t ~= "Code" then
+        scan(el.content, kind, list)
+      end
+    end
+  end
+  scan_blocks = function(blocks, kind, list)
+    for _, b in ipairs(blocks) do
+      if b.t == "Para" or b.t == "Plain" or b.t == "Header" then scan(b.content, kind, list)
+      elseif b.t == "BlockQuote" or b.t == "Div" then scan_blocks(b.content, kind, list)
+      elseif b.t == "BulletList" or b.t == "OrderedList" then
+        for _, it in ipairs(b.content) do scan_blocks(it, kind, list) end
+      end
+    end
+  end
+  -- the text each block starts with, as printed: what a heading's needle runs on into
+  local leads = {}
+  for bi, b in ipairs(body) do
+    cites[bi] = {}
+    scan_blocks({ b }, "B", cites[bi])
+    leads[bi] = lead_text(pandoc.Div(xe.list_items(b))):sub(1, 40)
+  end
+  local function cite_needles(bi)
+    for _, ct in ipairs(cites[bi] or {}) do
+      OCC[#OCC + 1] = { key = ct.key, id = "t:" .. (#OCC + 1) }
+      need_at(OCC[#OCC].id, ct.kind, ct.text, ct.context)
+    end
+  end
+  -- A heading's needle is its label and title and the text after it (the next block, as printed), so the same words
+  -- earlier on the page are not taken for it. The body's page 1 is the page of its first block.
+  local pending = nil
+  local function flush(next_text)
+    if pending then
+      need_at(pending.id, "B", pending.text, next_text)
+      cite_needles(pending.bi)
+      pending = nil
+    end
+  end
+  local body_id = "s:body"
+  if body[1] and body[1].t ~= "Header" then need_at(body_id, "B", leads[1], "") end
+  local hn = 0
+
   local bd = pandoc.Pandoc(body):walk({ Link = link_filter }):walk({ Inlines = xe.inlines })
 
   for i, b in ipairs(bd.blocks) do
+    if b.t ~= "Header" then
+      flush(leads[i])
+    end
     if b.t == "Header" then
       local level = b.level
       local title = text(b.content):lower()
@@ -507,8 +611,12 @@ function Pandoc(doc)
         end
         label = label_of(level, c, in_arg)
       end
-      local id = "h:" .. (#contents + 1)
-      need_pattern("line", "body", id, text(b.content))
+      hn = hn + 1
+      local id = "h:" .. hn
+      if i == 1 then body_id = id end
+      local shown = (label and (label .. " ") or "") .. text(b.content)
+      flush(shown)
+      pending = { id = id, text = shown, bi = i }
       if level <= 4 then
         contents[#contents + 1] = { level = level, label = label, title = b.content, id = id, in_arg = in_arg }
       end
@@ -537,7 +645,11 @@ function Pandoc(doc)
     else
       body_blocks[#body_blocks + 1] = b
     end
+    if b.t ~= "Header" then
+      cite_needles(i)
+    end
   end
+  flush("")
   -- [cafc-brief] the brief's last paragraph is kept with the signature block (one unbreakable block in typst)
   local last = body_blocks[#body_blocks]
   if last and last.t == "Para" then
@@ -554,7 +666,6 @@ function Pandoc(doc)
   end
   local ci = meta.interest
   front[#front + 1] = heading_1({ pandoc.Str("Certificate of Interest") }, true)
-  need_pattern("top", "front", "f:interest", "CERTIFICATE OF INTEREST")
   front[#front + 1] = PX({}, xe.runs("Counsel for ") .. R(ci["for"]) .. xe.runs(" certifies the following:"))
   local items = {
     { "The full name of every party or amicus represented by me is: ", ci.represented },
@@ -595,10 +706,7 @@ function Pandoc(doc)
   toc[#toc + 1] = entry(1, nil, upper_runs("Certificate of Interest"), "f:interest", 0)
   toc[#toc + 1] = entry(1, nil, upper_runs("Table of Contents"), "f:contents", 0)
   toc[#toc + 1] = entry(1, nil, upper_runs("Table of Authorities"), "f:authorities", 0)
-  need_pattern("top", "front", "f:contents", "TABLE OF CONTENTS")
-  need_pattern("top", "front", "f:authorities", "TABLE OF AUTHORITIES")
   toc[#toc + 1] = entry(1, nil, upper_runs("Statement of Related Cases"), "f:related", 0)
-  need_pattern("top", "front", "f:related", "STATEMENT OF RELATED CASES")
   for _, e in ipairs(contents) do
     if e.level == 1 then
       toc[#toc + 1] = entry(1, nil, xe.runs(norm(text(e.title))), e.id, 0)
@@ -610,7 +718,6 @@ function Pandoc(doc)
   end
   if has_addendum then
     toc[#toc + 1] = entry(1, nil, upper_runs("Addendum"), "f:addendum", 0)
-    need_pattern("top", "add", "f:addendum", "ADDENDUM")
   end
 
   -- ---- table of authorities ----
@@ -653,11 +760,14 @@ function Pandoc(doc)
     addendum[#addendum + 1] = heading_1({ pandoc.Str("Table of Contents") })
     local ad = pandoc.Pandoc(add):walk({ Link = link_filter }):walk({ Inlines = xe.inlines })
     local nadd = 0
-    for _, b in ipairs(ad.blocks) do
+    for k, b in ipairs(ad.blocks) do
       if b.t == "Header" and b.level == 2 then
         nadd = nadd + 1
         local id = "a:" .. nadd
-        need_pattern("notoc", "add", id, text(b.content))
+        -- the end of its title and the text after it: the addendum's own contents row has its title too
+        local nx = add[k + 1]
+        local after = nx and (nx.t == "Header" and text(nx.content) or lead_text(nx)) or ""
+        ADD_NEEDLES[#ADD_NEEDLES + 1] = { id = id, title = key_norm(text(b.content)):sub(-30), after = after:sub(1, 40) }
         addendum[#addendum + 1] = entry(2, nil, xe.inl(b.content), id, 0)
       end
     end
@@ -728,12 +838,49 @@ function Pandoc(doc)
   end
   append(result, certs)
 
-  local pf = os.getenv("CAFC_PATTERNS")
-  local f = pf and io.open(pf, "w")
-  if f then
-    f:write(table.concat(PATTERNS, "\n"), "\n")
-    f:close()
+  -- the needles, in document order: the front matter's headings (each with the text after it, so the contents'
+  -- rows are not taken for them), the body's, the signature (the certificates continue the numbers after its page),
+  -- the addendum's
+  local first_group = nil
+  for _, g in ipairs(groups) do
+    for _, key in ipairs(cited) do
+      local a = authorities[key]
+      if first_group == nil and a and text(a.kind) == g.kind then first_group = g.title end
+    end
   end
+  local front_needles = {
+    { "f:interest", "Certificate of Interest Counsel for" },
+    { "f:contents", "Table of Contents Page" },
+    { "f:authorities", "Table of Authorities" .. (first_group or "") },
+    { "f:related", "Statement of Related Cases Pursuant to" },
+  }
+  for k, fn in ipairs(front_needles) do
+    local n = key_norm(fn[2]):sub(1, NEEDLE_MAX)
+    table.insert(NEEDLES, k, { id = fn[1], kind = "B", needle = n, fallback = n })
+  end
+  need_at("s:sig", "B", "Respectfully submitted", "/s/ " .. text(sig.signer or ""))
+  if has_addendum then
+    need_at("f:addendum", "B", "Addendum Table of Contents", "")
+    for _, a in ipairs(ADD_NEEDLES) do need_at(a.id, "B", a.title, a.after) end
+  end
+  local nl = {}
+  for _, n in ipairs(NEEDLES) do nl[#nl + 1] = table.concat({ n.id, n.kind, n.needle, n.fallback }, "\t") end
+  -- how fb render labels pages: the front matter from page i, the body from its first block, the addendum Add-1
+  nl[#nl + 1] = "#section\tf:interest\tlower-roman\t"
+  nl[#nl + 1] = "#section\t" .. body_id .. "\tdecimal\t"
+  if has_addendum then nl[#nl + 1] = "#section\tf:addendum\tdecimal\tAdd-" end
+  write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
+  -- the footers (arabic, Add-; a PAGE field centered in a 19.95 pt line) and the last section: the certificates,
+  -- numbered on from the page after the signature's
+  local function footer(prefix)
+    return '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/><w:jc w:val="center"/>'
+      .. '</w:pPr><w:r><w:t xml:space="preserve">' .. prefix .. '</w:t></w:r><w:fldSimple w:instr=" PAGE "><w:r><w:t>1</w:t>'
+      .. '</w:r></w:fldSimple></w:p>'
+  end
+  write_file("FORMBOOK_FOOTERS", "rIdFooterArabic\t" .. footer("") .. "\nrIdFooterAdd\t" .. footer("Add-") .. "\n")
+  local start = tonumber(PAGES["s:sig"] or "") and (tonumber(PAGES["s:sig"]) + 1) or 1
+  write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdFooterArabic"/>' .. PG
+    .. '<w:pgNumType w:fmt="decimal" w:start="' .. start .. '"/></w:sectPr>')
   doc.blocks = result
   return doc
 end
