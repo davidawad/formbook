@@ -130,7 +130,9 @@
 
   // ---- Cover ----
   page(numbering: none)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
+    // Single-spaced throughout, paragraph spacing included: the body's double paragraph spacing between the caption's
+    // lines pushed the cover past one page (DEF-COVER-001; NCSUPERCT-CONT-002, caption and counsel on the cover).
+    #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
     #align(center)[
       #for l in need(meta, "court_lines") [ #text(weight: "bold")[#inl(l)] \ ]
       #v(0.3in)
@@ -146,16 +148,31 @@
       #set par(leading: single-leading, first-line-indent: 0pt)
       #text(weight: "bold", upper(inl(need(meta, "brief_title"))))
     ]
+    #v(0.2in)  // at least this much between the title and the counsel block when the cover is full
     #v(1fr)
     #{
       set par(leading: single-leading, first-line-indent: 0pt)
+      // One counsel group sits right of centre, as in the exemplars; several groups are set in two columns across the
+      // text width, in order down the left column then the right, each group kept whole, split where the two columns'
+      // line counts are closest, so a long counsel list stays on the one cover page (DEF-COVER-001).
+      let groups = need(meta, "counsel")
+      if groups.len() > 1 {
+        let size(g) = g.names.len() + g.lines.len()
+        let total = groups.map(size).sum()
+        let split = range(1, groups.len()).sorted(key: k => {
+          let left = groups.slice(0, k).map(size).sum()
+          calc.max(left, total - left)
+        }).first()
+        let column(gs) = gs.map(g => block(breakable: false, counsel-group(g))).join()
+        grid(columns: (1fr, 1fr), column-gutter: 0.3in, column(groups.slice(0, split)), column(groups.slice(split)))
+      }
       pad(left: sig-indent, {
-        for g in need(meta, "counsel") { counsel-group(g) }
+        if groups.len() == 1 { counsel-group(groups.first()) }
         if "counsel_for" in meta [ #emph(inl(meta.counsel_for)) \ ]
         if "date" in meta { inl(meta.date) }
       })
     }
-    #v(0.3in)  // keeps the last cover line inside the 1 in bottom margin
+    // No bottom pad after the last line: the page's bottom margin (page-margin + 4 pt) keeps its descenders inside 1 in.
   ]
 
   // ---- Front matter (roman numerals) ----
