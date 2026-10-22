@@ -6,13 +6,11 @@ Folder: `courts/sixth-circuit/tennessee/federal/western-district/motion-brief/`.
 | Item | Status |
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
-| typeface | **Times New Roman** named by the W.D. Tenn. CM/ECF manual, section "Setting up PDF Reader and Converting to PDF": "The court only allows use of the following fonts ... Times New Roman, Arial, and Courier New. Size of font must be (at least) 12 point." LR 7.1(b) itself names no face. Substitute: **Liberation Serif** (`docs/FONTS.md`, metric-compatible with Times New Roman). EB Garamond is not used. |
+| typeface | **Times New Roman** named by the W.D. Tenn. CM/ECF manual, section "Setting up PDF Reader and Converting to PDF": "The court only allows use of the following fonts ... Times New Roman, Arial, and Courier New. Size of font must be (at least) 12 point." LR 7.1(b) itself names no face. Both engines set the vendored Times New Roman (`fonts/`; Liberation Serif, metric-compatible, is only the declared fallback). EB Garamond is not used. |
 | sample md | `usage/INPUT-motion-brief.md` (the whole 9-page filing: caption, background, standard, argument I to IV, conclusion, signature block, certificate of service) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored Liberation Serif only (re-rendered 2026-10-15; `pdffonts`: only LiberationSerif embedded), no warnings |
-| overlay | ok: `usage/OVERLAY-gonzalez-memorandum.pdf` and `usage/OVERLAY-gonzalez-memorandum.txt` (page map) |
-| pages reviewed | 9 of 9 (every page of the 2026-10-15 render rasterized at 60 dpi and viewed)
-
-File names follow the tools' defaults (`render.sh` writes `usage/OUTPUT-<id>.pdf`; `overlay.sh` reads it and writes `usage/OVERLAY-<id>.pdf`/`.txt`), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief. `<id>` is `gonzalez-memorandum`.
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `usage/OUTPUT-motion-brief.docx` / `.docx.pdf`, 10 pages each, on the shared cross-engine layout model (fb-595.68.31): typst 0.15.0 and LibreOffice, vendored Times New Roman only, no warnings; the docx breaks every line and page as typst (XENG-001..003 gated, `eval.yaml`) |
+| overlay | `just overlay` writes `.overlay/.../OVERLAY-motion-brief.pdf` (not committed) |
+| pages reviewed | 10 of 10, typst and docx (every page of the 2026-10-22 renders rasterized at 60 dpi and viewed) |
 
 ## Governing rules
 
@@ -24,7 +22,7 @@ Primary sources, fetched and read 2026-10-14:
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LR 7.1(a) | 8½ × 11 inch white paper, one-inch margins on all sides; the paper shows the attorney's name, address, telephone, e-mail and Board of Professional Responsibility number. | `page-w`, `page-h`, `margin`; `signature` (name, `bar_number`, firm, lines). |
-| LR 7.1(b) | Double-spaced (quotations, headings and footnotes may be single-spaced); no smaller than 12 point, footnotes included. | `pitch = 27.6pt`, `body-leading`; `type-size = 12pt`; footnote entries set at 12 pt. |
+| LR 7.1(b) | Double-spaced (quotations, headings and footnotes may be single-spaced); no smaller than 12 point, footnotes included. | `pitch-body = 27.6pt` (Word's double line), `pitch-single = 13.8pt` for the court title, caption, title, headings, signature, certificate lines and footnotes; `type-size = 12pt`; footnote entries set at 12 pt. |
 | LR 7.1(d) | Page limits exclude captions, signature lines and certificates. | Applied by the reader (see gap 4). |
 | LR 7.2(a)(1) | A motion is accepted only with a supporting memorandum, "so identified". | The title: `MEMORANDUM IN SUPPORT OF ... MOTION TO DISMISS`. |
 | LR 7.2(a)(1)(A)-(B) | Proposed order and certificate of consultation: **not required** for motions under Rule 12. | Not produced (the rule exempts Rule 12 motions). |
@@ -42,15 +40,16 @@ Not produced by this template: the notice of motion itself (Gonzalez's motion is
 
 ## Layout
 
-- Court title single-spaced, centered; caption with the parties in a left column with a column of `)` marks, `v.` between the sides, designations indented, and `No.` with the case number on the right.
-- Title centered, bold, capitals (two lines in the exemplar).
-- Body double-spaced, 12 point, left-aligned, first-line indent of ½ inch. **Paragraphs are not numbered** (a brief is not).
-- Section headings (`#`): centered bold capitals (BACKGROUND, STANDARD, ARGUMENT, CONCLUSION).
-- Point headings (`##`): bold, the roman numeral or letter hung in a ½-inch label column and the text wrapping under it (I., II., III., IV.).
-- Block quotations single-spaced, indented ½ inch on both sides.
-- Signature block in the right half of the page, after the conclusion, single-spaced: `Respectfully submitted,`, firm name, `s/` name, `Attorney Bar No.`, address, telephone, e-mail, role.
-- Certificate of service on its own page (the block is kept together): title, method, the persons served, `DATE:`, firm and `s/` line.
-- Page numbers centered at the foot of each page.
+Both engines set it on the shared cross-engine model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): every line a box of its pitch, first-fit ragged-right breaking, no kerning, ligatures or hyphenation.
+
+- Court title single-spaced, centered, a blank double line below; caption: one row per party line (names, the designation 1.25 in in, a blank line, `v.`, a blank line, ...), a column of `)` marks, one per line of text, and `No.` with the case number opposite `v.`.
+- Title centered, bold, single-spaced, a blank double line above and below.
+- Body double-spaced (27.6 pt), 12 point, ragged right, first-line indent of ½ inch. **Paragraphs are not numbered** (a brief is not).
+- Headings single-spaced, a blank single line above and 6.9 pt below, kept with what follows. Section headings (`#`): centered bold. Point headings (`##`, `###`): bold, the typed roman numeral or letter in a ½-inch box and the text hanging after it (I., II., III., IV.).
+- Block quotations single-spaced, ½ inch in on both sides, 6.9 pt above and below. Footnotes 12 pt (LR 7.1(b)), single-spaced, 7 pt apart.
+- Signature block from the middle of the page (LR 11.1(b) order): `Respectfully submitted,`, `s/` name, `Attorney Bar No.`, firm, address, telephone, e-mail, role; kept on one page with the last paragraph.
+- Certificate of service on a page of its own (as filed), kept whole: title, the declaration double-spaced, the persons served, `DATE:`, firm and `s/` line.
+- Page numbers centered at the foot of each page, in a 13.8 pt line.
 
 ## Markdown contract (for samples)
 
@@ -59,19 +58,16 @@ Not produced by this template: the notice of motion itself (Gonzalez's motion is
 - Italic case names: `*Erie County, Ohio v. Morton Salt, Inc.*`, `*Id.*`, `*See*`.
 - Not supported: tables, raw typst.
 
-## Review of the rendered pages (final render, all pages)
+## Review of the rendered pages (2026-10-22, typst and docx, all pages)
 
-Each page was rasterized with `pdftoppm -r 60` after the last template change and viewed.
+Each page of both renders was rasterized with `pdftoppm -r 60` after the last change and viewed; the two renders break every line and page alike (XENG-001..003 PASS, 215/215 lines).
 
-- p. 1: court title; caption with `)` column (plaintiff, `v.`, the defendants' list, `Defendants.`) and `No. 1:26-cv-02199-STA-jay`; two-line bold title; opening paragraph; BACKGROUND heading; start of the background. Pass.
-- p. 2: background to the end of the STANDARD heading; the standard paragraph with italic citations. Pass.
-- p. 3: the standard's end; ARGUMENT heading; point I (hung label, text wraps at the left margin); point II heading on two lines, hung label. Pass.
-- p. 4: point II body; point III heading on two lines. Pass.
-- p. 5: point III end; point IV heading on two lines; body with signals and parentheticals. Pass.
-- p. 6: point IV body; the Monell paragraph. Pass.
-- p. 7: point IV continued (the rest of the *Monell* paragraph with its parenthetical quotation, the ratification argument, the state-law claim). Pass.
-- p. 8: CONCLUSION heading; the closing paragraph; `Respectfully submitted,`; firm; `s/ Nathan D. Tilly`, `Attorney Bar No. 031318`, address, telephone, facsimile, e-mail. Pass.
-- p. 9: CERTIFICATE OF SERVICE on its own page; the method sentence (`Motion to Dismiss` as the document); the served person's address; `DATE:`; firm; `s/ Nathan D. Tilly`. Pass.
+- p. 1: court title; caption with the `)` column (one per wrapped line of the long defendant name), `v.` and the file number; the two-line title; the lead-in; BACKGROUND. Pass.
+- pp. 2-3: background, STANDARD, ARGUMENT, point I. Pass.
+- pp. 4-5: points II. and III. (labels in the half-inch box, text hanging), the start of IV. Pass.
+- pp. 6-8: point IV. Page 8 ends about nine lines short: CONCLUSION, its paragraph and the signature block are kept together and open p. 9 (ACCEPTED, tier 2: the signature never stands alone). Pass.
+- p. 9: CONCLUSION, the paragraph, the signature block. Pass.
+- p. 10: the certificate of service on its own page. Pass.
 
 ## Known gaps and open choices
 
@@ -79,17 +75,16 @@ Each page was rasterized with `pdftoppm -r 60` after the last template change an
 2. **The exemplar's caption says WESTERN DIVISION** while the case number carries the `1:` prefix (the Eastern (Jackson) office in the docket numbering). The template takes the division from the frontmatter; the sample transcribes the filing as captioned. Not corrected.
 3. **Italic citations are inferred.** The filing's text layer has no italic markup. Case names and signals are italic by the citation convention (Bluebook), chosen by the transcriber; the render shows italic where the markdown says so.
 4. **Page limit not enforced.** LR 7.2(e) and LR 12.1(a) cap the memorandum at 20 pages, excluding caption, signature and certificates. The sample is 9 pages in all (about 8 with text and signature, the 9th the certificate). A longer memorandum must be checked by the filer; the template does not count pages.
-5. **Signature line.** The exemplar prints `By:` above `s/`; LR 11.1(b)'s sample has none, and the template follows the rule's sample. A `By:` line would be a one-line change in `typst/tnwd-motion-brief.typ`.
+5. **Signature line.** The exemplar prints `By:` above `s/`; LR 11.1(b)'s sample has none, and the template follows the rule's sample. A `By:` line would be a change in both `typst/tnwd-motion-brief.typ` and `docx/tnwd-motion-brief.lua`.
 6. **Certificate of service wording** is the exemplar's (ECF and U.S. Mail), reproduced from the frontmatter. FRCP 5(b)(2)(E) governs the ECF method; the mail method is the filer's choice and is not required.
-7. **Font.** Liberation Serif, the Times New Roman substitute, as the CM/ECF manual requires (see the complaint README, gap 3). The 12-point minimum is met.
-8. **Caption column count.** The number of `)` marks is computed from the height of the party column (one per line), so a party column that wraps differently from the filing shows a different count. Checked by eye against the filing's caption on page 1; the count was not compared mark for mark.
+7. **Font.** Times New Roman, as the CM/ECF manual allows; both engines set the vendored Times New Roman (`fonts/`), and the docx names it through `{font}`. The 12-point minimum is met.
+8. **Caption column count.** One `)` per line of text in the party column (typst measures each row; the docx filter counts the lines first fit on Times New Roman advances, breaking at spaces and after hyphens), so a party column that wraps differently from the filing shows a different count.
 9. **Overlay.** Pages pair in order (the sample is the whole filing); the overlay is a diagnostic, not a score.
-10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither, and the brief forbids touching `tools/`. Render and overlay were run; the review above is the visual check for this doc type.
+10. **Selftest.** `tools/check-selftest.sh` needs a court folder with `court.json`; this doc-type folder has none, so it is not run here. `tools/check.sh` runs on both engines.
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `tnwd-motion-brief.lua` sets the caption, point headings with hung labels, block quotations, the signature block and the certificate of service). Rendered with `sh tools/render.sh --engine docx motion-brief usage/INPUT-motion-brief.md` to `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice). Reviewed: all 9 pages of the `.docx.pdf` against all 9 pages of the typst output, at 60 dpi.
+typst (`typst/tnwd-motion-brief.typ`) is the reference; docx (`docx/reference.xml`, base="xengine" in the typst face `{font}`, and `docx/tnwd-motion-brief.lua`, which writes the court title, caption table, title, headings, signature and certificate of service with the typst spaces in twips and leaves body paragraphs, quotations and footnotes to pandoc in the reference styles). `sh tools/check.sh <dir>` and `--engine docx`: 0 failed; XENG-001..003 PASS (215/215 lines, 10 pages), `params.cross_engine: gate` in `eval.yaml`. No latex engine for this folder.
 
-- Matches typst: Liberation Serif 12 pt; double spacing 27.6 pt and single 13.8 pt; one-inch margins; caption and `No.` line; title; body unnumbered and double spaced with the ½-inch first-line indent; section headings centred; point headings (I., II., ...) with the label at the margin and the text wrapped under it; block quotations single spaced; the signature block on page 8 with the conclusion, and the certificate of service on page 9, as in typst; page numbers centred. Page count is 9 in both.
-- Differs (ACCEPTED, tier 2): the caption's `)` column is a cell rule (as in the complaint); a few lines break differently (the caption's party names, the bold title line, point heading II), and some pages hold one line more or fewer than typst (line counts per page are within three lines of typst); the signature block is not forced to a page, so Word may move it.
-- BLOCKED: none. `tools/check.sh --engine docx` cannot run: the court folder has no `checks.yaml`, so no check ID was evaluated. See the PR.
+- Differences: none in line or page breaks; widths of identical lines within 0.47 pt; the centered title's first line starts 1.1 pt apart (its width drift, halved by centering).
+- BLOCKED: none.
