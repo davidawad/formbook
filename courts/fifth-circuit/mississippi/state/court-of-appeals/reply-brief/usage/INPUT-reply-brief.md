@@ -80,6 +80,9 @@ authorities:
       - {cite: "Miss. Code Ann. § 49-17-17", find: "49-17-17"}
       - {cite: "Miss. Code Ann. § 49-17-28", find: "49-17-28"}
       - {cite: "Miss. Code Ann. § 49-17-29", find: "49-17-29"}
+      - {cite: "Miss. Code Ann. § 49-17-29(3)(a)", find: "49-17-29(3)(a)"}
+      - {cite: "Miss. Code Ann. § 49-17-29(3)(c)", find: "49-17-29(3)(c)"}
+      - {cite: "Miss. Code Ann. § 49-17-29(5)(a)-(b)", find: "49-17-29(5)"}
       - {cite: "Miss. Code Ann. § 49-17-3", find: "49-17-3"}
       - {cite: "Miss. Code Ann. § 49-2-7", find: "49-2-7"}
       - {cite: "Miss. Code Ann. §§ 49-17-1 through 49-17-43", find: "49-17-1 through"}
@@ -90,9 +93,15 @@ authorities:
       - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.1.3(B)(1)", find: "1.1.3(B)(1)"}
       - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.1.3(C)(1)(D)", find: "(C)(1)(D)"}
       - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.3.1(B)(2)", find: "1.3.1(B)(2)"}
+      - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.3.1(B)(2)(b)", find: "1.3.1(B)(2)(b)"}
       - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.3.2", find: "1.3.2"}
+      - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.3.2(A)", find: "1.3.2(A)"}
       - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.3.3", find: "1.3.3"}
       - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.3.4", find: "1.3.4"}
+      - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.3.4(A)", find: "1.3.4(A)"}
+      - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.3.4(A)(1)", find: "1.3.4(A)(1)"}
+      - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.3.4(B)", find: "1.3.4(B)"}
+      - {cite: "11 Miss. Admin. Code Pt. 6, R. 1.3.4(B)(2)", find: "1.3.4(B)(2)"}
       - {cite: "40 C.F.R. § 122.2", find: "122.2"}
       - {cite: "40 C.F.R. § 124.10(c)-(d)", find: "124.10"}
 ---
