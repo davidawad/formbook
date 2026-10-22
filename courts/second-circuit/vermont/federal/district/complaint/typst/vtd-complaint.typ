@@ -147,7 +147,7 @@
   block(width: 100%, above: pitch-double, below: 0pt, sticky: true, breakable: false,
     par(first-line-indent: (amount: para-indent, all: true), inl(s.date_line)))
   block(width: 100%, breakable: false, above: pitch-double, below: 0pt, pad(left: signature-indent, {
-    if "by" in s { line-block("By: /s/ " + s.by) } else { line-block("_" * 34) }
+    if "by" in s { line-block("By: /s/ " + s.by) } else { line-block([#("_" * 34)]) }
     for b in s.blocks {
       line-block("")
       for l in b { line-block(l) }

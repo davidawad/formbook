@@ -7,9 +7,9 @@ Folder: `courts/second-circuit/vermont/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: an excerpt of the 25-page memorandum, 9 rendered pages (caption, introduction and background, plaintiffs' allegations, legal standard, the opening of Argument I, all of Argument II, conclusion and signature). The omitted spans are marked in the sample. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, vendored Times New Roman only, no warnings, on the shared cross-engine layout model (fb-595.68.26) |
 | overlay | ok: `usage/OVERLAY-coulter-motion-brief.pdf` and `usage/OVERLAY-coulter-motion-brief.txt` (page map) |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed; see the review below) |
+| pages reviewed | 9 of 9 on typst and docx (every page of both renders viewed side by side at 45 dpi after the last template change, 2026-10-22; the review below was made on the earlier EB Garamond render) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`usage/INPUT-<id>.md` in; `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf|.txt` out). See the complaint README for why.
 
@@ -25,8 +25,8 @@ Federal rules: Fed. R. Civ. P. 5(d)(1)(B) and 10(a), fetched 2026-10-14 from htt
 | L.R. 7(a)(2) | A motion is accompanied by, or contains, a memorandum of law concisely stating the legal contentions and supporting authorities. | Content: the memorandum is the document this template produces. |
 | L.R. 7(a)(3)(A) | A motion to dismiss is a dispositive motion (the opposition is due 30 days after service). | Makes L.R. 7(a)(4)(A) apply. The opposition and reply are not templated here. |
 | L.R. 7(a)(4)(A) | A memorandum supporting or opposing a dispositive motion must not exceed 25 pages, excluding exhibits and attachments, unless the judge grants prior leave. | `page-limit = 25`. The template asserts the rendered length after layout (`counter(page).final()`). A mutant with a limit of 5 fails with "the memorandum is 9 pages; the limit is 5", so the check is live. It counts the sample, not the full filing. |
-| L.R. 10(a)(1)-(8) | As for the complaint: 8 1/2 x 11, legible, 1 inch margins, at least 12 point (footnotes included), consecutively numbered pages, double-spaced except quoted material, footnotes used sparingly. | Same parameters as the complaint template (see its README). Footnotes are set at the same 13 pt. |
-| Typeface (L.R. 10(a) names none) | Face required by the rule: **none** (plainly legible; 12 point or more; no face is named). Vendored substitute: **none needed**; EB Garamond is kept under `docs/FONTS.md` ("No face named"). Metric fit: n/a. | `font-family = "EB Garamond"` |
+| L.R. 10(a)(1)-(8) | As for the complaint: 8 1/2 x 11, legible, 1 inch margins, at least 12 point (footnotes included), consecutively numbered pages, double-spaced except quoted material, footnotes used sparingly. | Same parameters as the complaint template (see its README). Footnotes are set at the same 12 pt. |
+| Typeface (L.R. 10(a) names none) | Face required by the rule: **none** (plainly legible; 12 point or more; no face is named). The template sets Times New Roman (vendored), the house standard and the exemplar's face, on typst and docx alike (fb-595.68.26). | `font-family = ("Times New Roman", "Liberation Serif")`; the docx names it through `{font}` |
 | Fed. R. Civ. P. 10(a) | Caption with the court name, the title of the action, the file number, and the title of the paper. | `court-title()`, `caption()`: `Docket No.` (`case_label`) and the title. |
 | Fed. R. Civ. P. 5(d)(1)(B) | No certificate of service is required when a paper is served by filing it with the court's electronic-filing system. | No certificate of service in the template; the exemplar's certificate (attachment 9 to the motion) is not in the transcribed text. |
 
@@ -36,16 +36,17 @@ Not checked by the template: the content of the memorandum (the legal argument),
 
 - Letter paper, 1 inch margins; no pleading-paper line numbers.
 - No separate cover page: court title (two bold lines), caption (parties in a column closed by a rule; the docket number and the title on the right), then the body.
-- Headings: level 1 centered bold capitals (INTRODUCTION AND BACKGROUND, ARGUMENT, CONCLUSION); level 2 bold at the margin (argument headings I, II, ...); level 3 bold italic, indented 0.5 inch. Headings are kept with the text after them.
-- Body paragraphs: unnumbered, 0.5 inch first-line indent, double-spaced (2.0em baseline pitch, as measured in the complaint).
-- Footnotes: 13 pt, single-spaced, separated by a rule.
-- Signature: date line (`DATED at Burlington, Vermont this ...`), the firm, a signature line, and the counsel block, indented 2.9 inches, kept on one page.
+- Headings: level 1 centered bold capitals (INTRODUCTION AND BACKGROUND, ARGUMENT, CONCLUSION); level 2 bold at the margin (argument headings I, II, ...); level 3 bold italic, indented 0.5 inch. Single-spaced (13.8 pt lines), a single line above and below; kept with the text after them.
+- Body paragraphs: unnumbered, 0.5 inch first-line indent, double-spaced (24 pt lines), no space between paragraphs. The last block is kept with the signature block.
+- Footnotes: 12 pt (L.R. 10(a)(4)), single-spaced (13.8 pt lines), 7 pt apart, under a rule.
+- Signature, a double line below the body: the date line (`DATED at Burlington, Vermont this ...`) indented half an inch, a double line below it the firm, a signature line, and the counsel block, indented 2.9 inches, kept on one page.
 
 ## Markdown contract (for samples)
 
 - YAML frontmatter, then the body.
 - Frontmatter: `case_number`; `case_label` (optional, default `Civil Action No.`; this filing uses `Docket No.`); `caption.parties` (as for the complaint); `brief_title` (must contain "motion"); `signature` with `date_line`, `firm` (optional; a firm name above the signature line), `blocks` (a list of counsel blocks, each a list of lines) and `counsel_for` (optional). `by` is not used here.
 - Body: blank-line-separated chunks. `#` is level 1, `##` level 2, `###` level 3. Other chunks are paragraphs (unnumbered). A list (`1.` items) is numbered 1., 2., ...
+- A Westlaw star page is written `\*10` (an escaped asterisk), so that neither reader takes it for emphasis.
 - Footnotes: markdown `[^n]` references and `[^n]: text` definitions. A definition must follow the paragraph that refers to it; the template folds a definition chunk into the chunk before it, because each chunk is rendered separately.
 - Not supported: tables; raw typst.
 
@@ -53,13 +54,13 @@ Not checked by the template: the content of the memorandum (the legal argument),
 
 1. **Excerpt, not the whole memorandum.** The sample transcribes pages 1 to 7 (with the omission of the rest of Argument I, pages 8 to 11, marked in the text), pages 12 and 13 (Argument II, all of it; the Argument III heading starts on page 13 and is not transcribed), and page 25 (conclusion and signature). Pages 14 to 24 (Arguments III to V) are marked as not transcribed. The overlay therefore pairs the sample's pages with the exemplar's pages 1 to 7, 12, and 25, and the word overlap on the later sample pages is lower for that reason. The page-limit assertion counts the sample only; it does not show the full memorandum is within 25 pages (the exemplar is 25 pages, which is within the limit).
 2. **One exemplar, one filer, filed 2022.** The EVAL-LOOP tier-2 standard asks for two or three filers. The search (CourtListener RECAP API, `type=r`, `court=vtd`, `available_only=on`, query "memorandum in support" "motion to dismiss") found *Pharmaceutical Research and Manufacturers of America v. Arel*, No. 2:25-cv-00600 (ECF 21, memorandum as attachment 1), but its download returned no file, and *Bingham Brook, LLC v. Verdantas, LLC*, No. 2:26-cv-00223 (memorandum as attachment 1), which was not downloaded. The exemplar is from 2022, before the current local rules (April 20, 2026); L.R. 10(a) is the same text in both, but the page limit is taken from the current rules.
-3. **Type size and font.** Same as the complaint: the rule names no face and EB Garamond is kept; 13 pt against the rule's 12 point minimum, matched by eye to the exemplar's Times New Roman at 12 pt. The vendored `Liberation Serif` is metric-compatible with Times New Roman, so a switch is possible; whether to make it is a question for David (see the complaint README, Known gaps 2).
+3. **Type size and font (resolved).** The rule names no face; the template sets Times New Roman 12 pt, the house standard (David, 2026-10-17) and the exemplar's face, footnotes included.
 4. **Italics.** The text layer has no italic markup, so case names and signals (*Id.*, *See*) are transcribed in roman. The template supports `*...*` italics.
 5. **Argument heading style.** Argument headings are bold at the margin (level 2). The exemplar's heading style is not known from the text layer, so this is a style choice.
 6. **Certificate of service.** Not included (see the rules table). The exemplar filed one as an attachment.
-7. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court directory with `court.json` and `rules.md`, which this doc-type folder does not have, and `tools/` is not part of this work. Render, overlay, and the mutant check of the page limit were run; the review below is the per-page check.
+7. **Automated check.** `tools/check.sh` runs on this folder (typst and docx); the RESULT lines are under Engines.
 
-## Review of the rendered pages (`usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, viewed at 60 dpi, after the final template change)
+## Review of the rendered pages (made on the earlier 9-page EB Garamond render; the 9 pages of the current typst and docx renders were viewed side by side on 2026-10-22: the conclusion now opens page 9, kept with its last paragraph and the signature block; no defect found)
 
 - Page 1: court title; caption with `Docket No. 5:22-CV-98` and the bold title at the right; the opening paragraph; INTRODUCTION AND BACKGROUND; the first paragraph and the start of the second. Pass.
 - Page 2: the rest of the litigation-history paragraph, the Santa Clara paragraph, and the first part of the "After Plaintiffs filed..." paragraph, which ends at "in Vermont," (footnote 1's reference is on page 3). Pass.
@@ -77,8 +78,10 @@ Pages reviewed: 9 of 9.
 
 ## Engines
 
-DOCX engine (`docx/`: `build-reference.sh` makes `reference.docx`; `vtd-motion-brief.lua` is the filter; `render.sh` is the build, which escapes an asterisk before a digit so that the Westlaw star pages "at *10" keep their asterisks). The render is `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice conversion, no errors). The `.docx.pdf` has 10 pages; all 10 were viewed side by side with the typst render at 60 dpi. `render.sh` was run from `/` and from `/tmp` and gave the same bytes.
+The typst template is the reference; the docx breaks every line and page where it does (Gate 4 CROSS-ENGINE, `params.cross_engine: gate` in `eval.yaml`).
 
-- Matches the typst output: letter paper, 1 in margins; EB Garamond 13 pt; body text at an exact 26 pt pitch (double) with a 0.5 in first-line indent; footnotes at 13 pt, single-spaced, with a rule above them (native footnotes); the caption as a table with a right and a bottom rule, the docket number and the bold title at the right; the court title; headings (centered bold capitals; bold at the margin for the argument headings; bold italic indented 0.5 in); the list numbered 1., 2., ... with a hanging indent; the signature block (date line, firm, rule, counsel, "Attorneys for ..."), kept together; a centered arabic page number. The text of the `.docx.pdf` matches the typst PDF word for word (checked with `pdftotext`; the differences are reading order in the caption and footnotes, and the line-break hyphenation of "34-35").
-- Differs: the docx is one page longer (10 pages against 9). Line heights are exact, so each page of the docx carries about one line fewer of body text than the typst page. The last page of the docx holds the date line, the counsel block and the signature alone (kept together), where typst keeps them on page 9 with the CONCLUSION. This is OPEN for David: the fix would be a layout change to the template (the typst page is full), not a docx-only change. The caption's right column is a few points taller in the docx.
-- BLOCKED: `tools/check.sh <this folder> --engine docx` cannot run. It reads `court.json` from the folder it checks, and it needs a `checks.yaml` for Gate 1; neither exists here, and the court folder has no `checks.yaml`. So every Gate 1 check ID is not run, and the docx is BLOCKED until `vtd` has a `checks.yaml`. The page-limit rule (L.R. 7(a)(4)(A), 25 pages) is checked by the typst template only; the docx sample is 10 pages, well inside it. Gate 0 (content) was compared by hand with `pdftotext`, not by the gate. Gate 2 review rows are not written here; the page review above is the only visual check.
+DOCX (`docx/`): `reference.xml` (`base="xengine"`: the face is the typst template's through `{font}`, 12 pt, exact 24 pt body lines, 13.8 pt single lines and footnotes 7 pt apart, 1 in margins, the centered page-number footer; Body Text First, Body Text Note and Body Text Keep) and `vtd-motion-brief.lua` (on `lib/docx/xengine.lua`: the court title, the caption table with its right and bottom rule, the headings, the lists and the signature block in the typst template's line boxes and spaces; the paragraphs and their native footnotes as pandoc writes them, in those styles). `fb render` builds the reference document and runs pandoc; no shell script and no committed `reference.docx` (fb-595.68.26; `render.sh`'s escaping of a star page moved into the sample, where typst needs it too). Samples: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion; opened in LibreOffice, not Word). The L.R. 7(a)(4)(A) page limit is asserted by the typst template; the docx has the same page count.
+
+- `tools/check.sh <dir>`: RESULT: 9 checks passed, 0 failed (DEF-TOC-001, DEF-COVER-001 pass).
+- `tools/check.sh <dir> --engine docx`: RESULT: 13 checks passed, 0 failed; XENG-001..003 PASS (9 pages, 228/228 lines).
+- No latex engine for this folder.
