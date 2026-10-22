@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: typst boxes a
+# section sign with the whole word after it ("§ 44m—1–2,"), lib/pandoc/xengine.lua binds only the space after the
+# sign, so LaTeX and Word break before the em dash (p6); and LaTeX's note mark after ";" or "." is read as a word
+# of its own (p6, p7). Shared-model items (docs/open-items/fb-595.54.46.md).
+params:
+  cross_engine: report
