@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # Word's page lookup puts a keyed authority whose link starts on the last line of a page on the next page:
+  # INPUT-petition-for-writ, "Town of Front Royal ..." (the link opens on the last line of body page 34) is listed
+  # 35 in Word's table of authorities, 34 in typst and LaTeX (page v, XENG-003). Every page end and every other line
+  # is identical. A shared-model fix (lib/docx page needles); reported, not gated (docs/open-items/fb-595.54.35.md).
+  cross_engine_docx: report

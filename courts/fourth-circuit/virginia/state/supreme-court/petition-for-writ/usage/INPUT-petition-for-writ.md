@@ -251,166 +251,191 @@ authorities:
     kind: case
     name: "Bd. of Cnty. Supervisors v. Hylton Enters., Inc."
     cite: "216 Va. 582 (1976)"
+    sort: "bd of cnty supervisors v hylton enters inc 216 va 582 1976"
   brown:
     kind: case
     name: "Brown v. Saunders"
     cite: "159 Va. 28 (1932)"
+    sort: "brown v saunders 159 va 28 1932"
   burch:
     kind: case
     name: "Burch v. Hardwicke"
     cite: "64 Va. 51 (1873)"
+    sort: "burch v hardwicke 64 va 51 1873"
   clay:
     kind: case
     name: "Clay v. Ballard"
     cite: "87 Va. 787 (1891)"
+    sort: "clay v ballard 87 va 787 1891"
   coleman:
     kind: case
     name: "Coleman v. Pross"
     cite: "219 Va. 143 (1978)"
+    sort: "coleman v pross 219 va 143 1978"
   early-used-cars:
     kind: case
     name: "Early Used Cars, Inc. v. Province"
     cite: "218 Va. 605 (1977)"
+    sort: "early used cars inc v province 218 va 605 1977"
   goldman-landsidle:
     kind: case
     name: "Goldman v. Landsidle"
     cite: "262 Va. 364 (2001)"
+    sort: "goldman v landsidle 262 va 364 2001"
   goldman-state-board:
     kind: case
     name: "Goldman v. State Bd. of Elections"
     cite: "2020 Va. Unpub. LEXIS 21 (2020)"
+    sort: "goldman v state bd of elections 2020 va unpub lexis 21 2020"
   howell:
     kind: case
     name: "Howell v. McAuliffe"
     cite: "292 Va. 320 (2016)"
+    sort: "howell v mcauliffe 292 va 320 2016"
   jamerson:
     kind: case
     name: "Jamerson v. Womack"
     cite: "26 Va. Cir. 145, 146 (1991), aff'd, 244 Va. 506 (1992)"
+    sort: "jamerson v womack 26 va cir 145 146 1991 affd 244 va 506 1992"
   laroque:
     kind: case
     name: "LaRoque v. Holder"
     cite: "650 F.3d 777 (D.C. Cir. 2011)"
+    sort: "laroque v holder 650 f3d 777 dc cir 2011"
   liberty-mutual:
     kind: case
     name: "Liberty Mut. Ins. Co. v. Bishop"
     cite: "211 Va. 414 (1970)"
+    sort: "liberty mut ins co v bishop 211 va 414 1970"
   mclaugherty:
     kind: case
     name: "McLaugherty v. McLaugherty"
     cite: "180 Va. 51 (1942)"
+    sort: "mclaugherty v mclaugherty 180 va 51 1942"
   brooks:
     kind: case
     name: "Miss. Republican Exec. Comm. v. Brooks"
     cite: "469 U.S. 1002 (1984)"
+    sort: "miss republican exec comm v brooks 469 us 1002 1984"
   reynolds:
     kind: case
     name: "Reynolds v. Sims"
     cite: "377 U.S. 533 (1964)"
+    sort: "reynolds v sims 377 us 533 1964"
   staples:
     kind: case
     name: "Staples v. Gilmer"
     cite: "183 Va. 613 (1945)"
+    sort: "staples v gilmer 183 va 613 1945"
   front-royal:
     kind: case
     name: "Town of Front Royal v. Front Royal & Warren Cnty. Indus. Park Corp."
     cite: "248 Va. 581 (1994)"
+    sort: "town of front royal v front royal  warren cnty indus park corp 248 va 581 1994"
   wilkins-west:
     kind: case
     name: "Wilkins v. West"
     cite: "264 Va. 447 (2002)"
+    sort: "wilkins v west 264 va 447 2002"
   wilkins-davis:
     kind: case
     name: "Wilkins v. Davis"
     cite: "205 Va. 803 (1965)"
+    sort: "wilkins v davis 205 va 803 1965"
   archer:
     kind: case
     name: "Archer v. Mayes"
     cite: "213 Va. 633 (1973)"
+    sort: "archer v mayes 213 va 633 1973"
   va-const-art-i-6:
     kind: constitution
-    name: "Va. Const. art. I, § 6"
-    cite: ""
+    cite: "Va. Const. art. I, § 6"
+    sort: " va const art i  6"
   va-const-art-i-11:
     kind: constitution
-    name: "Va. Const. art. I, § 11"
-    cite: ""
+    cite: "Va. Const. art. I, § 11"
+    sort: " va const art i  11"
   va-const-art-ii-a:
     kind: constitution
-    name: "Va. Const. art. II, § A"
-    cite: ""
+    cite: "Va. Const. art. II, § A"
+    sort: " va const art ii  a"
   va-const-art-ii-6:
     kind: constitution
-    name: "Va. Const. art. II, § 6"
-    cite: ""
+    cite: "Va. Const. art. II, § 6"
+    sort: " va const art ii  6"
   va-const-art-vi-1:
     kind: constitution
-    name: "Va. Const. art. VI, § 1"
-    cite: ""
+    cite: "Va. Const. art. VI, § 1"
+    sort: " va const art vi  1"
   va-const-art-xii-1:
     kind: constitution
-    name: "Va. Const. art. XII, § 1"
-    cite: ""
+    cite: "Va. Const. art. XII, § 1"
+    sort: " va const art xii  1"
   va-code-8-01-4-3:
     kind: statute
-    name: "Va. Code Ann. § 8.01-4.3"
-    cite: ""
+    cite: "Va. Code Ann. § 8.01-4.3"
+    sort: " va code ann  80143"
   va-code-8-01-184:
     kind: statute
-    name: "Va. Code Ann. § 8.01-184"
-    cite: ""
+    cite: "Va. Code Ann. § 8.01-184"
+    sort: " va code ann  801184"
   va-code-8-01-186:
     kind: statute
-    name: "Va. Code Ann. § 8.01-186"
-    cite: ""
+    cite: "Va. Code Ann. § 8.01-186"
+    sort: " va code ann  801186"
   va-code-8-01-644:
     kind: statute
-    name: "Va. Code Ann. § 8.01-644"
-    cite: ""
+    cite: "Va. Code Ann. § 8.01-644"
+    sort: " va code ann  801644"
   va-code-8-01-648:
     kind: statute
-    name: "Va. Code Ann. § 8.01-648"
-    cite: ""
+    cite: "Va. Code Ann. § 8.01-648"
+    sort: " va code ann  801648"
   va-code-17-1-309:
     kind: statute
-    name: "Va. Code Ann. § 17.1-309"
-    cite: ""
+    cite: "Va. Code Ann. § 17.1-309"
+    sort: " va code ann  171309"
   va-code-24-2-103:
     kind: statute
-    name: "Va. Code Ann. § 24.2-103"
-    cite: ""
+    cite: "Va. Code Ann. § 24.2-103"
+    sort: " va code ann  242103"
   va-code-24-2-103-1:
     kind: statute
-    name: "Va. Code Ann. § 24.2-103.1"
-    cite: ""
+    cite: "Va. Code Ann. § 24.2-103.1"
+    sort: " va code ann  2421031"
   va-code-24-2-304-04:
     kind: statute
-    name: "Va. Code Ann. § 24.2-304.04"
-    cite: ""
+    cite: "Va. Code Ann. § 24.2-304.04"
+    sort: " va code ann  24230404"
   va-code-24-2-314:
     kind: statute
-    name: "Va. Code Ann. § 24.2-314"
-    cite: ""
+    cite: "Va. Code Ann. § 24.2-314"
+    sort: " va code ann  242314"
   cheslow:
     kind: other
     name: "Daniella Cheslow, In Virginia, Democrats Urge Voters to Reject Redistricting Reform They Once Backed"
     cite: "NPR (Oct. 12, 2020)"
+    sort: "daniella cheslow in virginia democrats urge voters to reject redistricting reform they once backed npr oct 12 2020"
   eo-55:
     kind: other
     name: "Office of the Governor, Executive Order Number 55: Temporary Stay at Home Order Due to Novel Coronavirus"
     cite: "(Mar. 30, 2020)"
+    sort: "office of the governor executive order number 55 temporary stay at home order due to novel coronavirus mar 30 2020"
   census-news:
     kind: other
     name: "U.S. Census Bureau, Census Bureau to Hold News Conference on Release of 2020 Redistricting Data"
     cite: "(Aug. 5, 2021)"
+    sort: "us census bureau census bureau to hold news conference on release of 2020 redistricting data aug 5 2021"
   virginia-prison-facilities:
     kind: other
     name: "Virginia Prison Facilities"
     cite: "available at: https://www.google.com/maps/d/u/0/viewer?msa=0&mid=1mx4YinSW8TrfOxCxxQbUB9_xaGk&ll=37.51521043292835%2C79.592327&z=7"
+    sort: "virginia prison facilities available at httpswwwgooglecommapsdu0viewermsa0mid1mx4yinsw8trfoxcxxqbub9xagkll37515210432928352c79592327z7"
   elections-proposed-amendments:
     kind: other
     name: "Dep't of Elections, Proposed Amendments for 2020"
     cite: "https://www.elections.virginia.gov/proposed-constitutional-amendment-2020/"
+    sort: "dept of elections proposed amendments for 2020 httpswwwelectionsvirginiagovproposedconstitutionalamendment2020"
 ---
 
 # VERIFIED PETITION FOR WRIT OF MANDAMUS
@@ -517,11 +542,11 @@ The Constitutional Criteria also reiterate the familiar requirements of federal 
 
 As evidenced by the 31-point margin by which the 2020 Amendment passed, the proposal to shift redistricting authority from the General Assembly to a new independent redistricting commission was extremely popular among Virginia voters—but not all voters supported the effort. Members of the General Assembly, for instance, many of whom voiced public support for the proposal, were unenthusiastic about the prospect of relinquishing their authority over the redistricting process.[^4] It was difficult, however, for Members of the General Assembly to openly oppose the creation of a redistricting commission given favorable public opinion on the matter, so they opted for the next best thing: rather than publicly oppose an amendment that was likely to be approved (or restart the entire process by passing an amendment that contained their preferred criteria), the General Assembly decided instead to simply strip the nascent Commission of its most meaningful power.
 
-[^2]: For the precise text of the ballot question approved by Virginia voters, see Va., Dep’t of Elections, Proposed Amendments for 2020, https://www.elections.virginia.gov/proposed-constitutional-amendment-2020/ (attached as Exhibit 1).
+[^2]: For the precise text of the ballot question approved by Virginia voters, see Va., [Dep’t of Elections, Proposed Amendments for 2020](toa:elections-proposed-amendments), https://www.elections.virginia.gov/proposed-constitutional-amendment-2020/ (attached as Exhibit 1).
 
 [^3]: *Id.* (emphasis added).
 
-[^4]: See Daniella Cheslow, In Virginia, Democrats Urge Voters to Reject Redistricting Reform They Once Backed, NPR (Oct. 12, 2020), https://www.npr.org/local/305/2020/10/12/922991632/in-virginia-democrats-urge-voters-to-reject-redistricting-reform-they-once-backed (noting that “[l]ast year, Democrats flipped the General Assembly, and now some have changed their stance [on establishing an independent commission].”
+[^4]: See [Daniella Cheslow](toa:cheslow), In Virginia, Democrats Urge Voters to Reject Redistricting Reform They Once Backed, NPR (Oct. 12, 2020), https://www.npr.org/local/305/2020/10/12/922991632/in-virginia-democrats-urge-voters-to-reject-redistricting-reform-they-once-backed (noting that “[l]ast year, Democrats flipped the General Assembly, and now some have changed their stance [on establishing an independent commission].”
 
 The General Assembly’s role in the constitutional amendment process can be summed up in a single sentence: each chamber of the legislature must approve a proposed amendment by a majority vote in two consecutive legislative sessions, after which the amendment is submitted to the people for final consideration and approval. With regard to the 2020 Amendment, the General Assembly initially performed its proper constitutional role before deviating wildly from script. The 2020 Amendment was first proposed and approved in the 2019 Regular Session. See Acts 2019, cc. 821 and 824). On November 5, 2019, the required intervening General Assembly election was held. On April 10, 2020, the General Assembly completed its role in the constitutional amendment process by formally submitting the 2020 Amendment to the voters for the November ballot. See Acts 2020, cc. 1070, 1071, 1196. At this point, the General Assembly’s engagement in the amendment process was finished and the 2020 Amendment should not have been subject to further legislative revision.
 
@@ -547,7 +572,7 @@ Even before voters amended the Virginia Constitution in 2020, it required that a
 
 Although incarcerated felons do not vote in Virginia, [Section 24.2-304.04(9)](toa:va-code-24-2-304-04) will still succeed in “unpacking” the population of districts in which prisons are located and thereby reduce the voting power and representation of permanent residents of such districts such as Petitioners. Virginia prisons are typically located in rural districts with greater Republican voting strength, particularly in the Southside and Southwest regions of the Commonwealth in which Petitioners are voting permanent residents (and, in Petitioner Hackworth’s case, an elected state senator).[^5] The people like Petitioners who reside in these communities often expend substantial local resources to support their local correctional facilities—including use of the local utility infrastructure (power, water, sewer) and healthcare infrastructure (such as local doctors, hospitals, and emergency rooms). Artificially reducing the populations of these areas to reassign their non-voting populations to other parts of the Commonwealth creates real and significant funding and planning problems for Petitioners’ rural communities. The General Assembly has thereby advanced a legal fiction—i.e., the fiction that incarcerated persons live somewhere other than the place they actually reside—that will have real-world consequences for Petitioners and the communities they live in and represent. Petitioners will still bear all of the responsibility to care for the people in their prisons, without any of the political representation they would otherwise be entitled to receive.
 
-[^5]: See Virginia Prison Facilities, available at: https://www.google.com/maps/d/u/0/viewer?msa=0&mid=1mx4YinSW8TrfOxCxxQbUB9_xaGk&ll=37.51521043292835%2C-79.592327&z=7.
+[^5]: See [Virginia Prison Facilities](toa:virginia-prison-facilities), available at: https://www.google.com/maps/d/u/0/viewer?msa=0&mid=1mx4YinSW8TrfOxCxxQbUB9_xaGk&ll=37.51521043292835%2C-79.592327&z=7.
 
 [Section 24.2-304.04(3)](toa:va-code-24-2-304-04) of the Statutory Criteria contains language that allegedly protects against vote dilution in a manner mirroring Section 2 of the federal Voting Rights Act. Buried within this provision, however, is the standard that must be used to establish a violation:
 
@@ -557,7 +582,7 @@ Although incarcerated felons do not vote in Virginia, [Section 24.2-304.04(9)](t
 
 This language goes further than the federal Voting Rights Act—and U.S. Supreme Court cases interpreting it—which is itself legislation designed to achieve the goals of the Fourteenth and Fifteenth Amendments. As explained, [Article I, Section 11](toa:va-const-art-i-11) of Virginia’s constitution goes no further than those federal constitutional protections. *See* [*Archer*, 213 Va. at 638](toa:archer). In addition, it is clear from U.S. Supreme Court precedent that the federal Voting Rights Act’s Section 2 requirements are presumed to satisfy strict scrutiny—but only after the adopting Congress and subsequent amendments established a substantial evidentiary record. *See, e.g.*, [*Miss. Republican Exec. Comm. v. Brooks*, 469 U.S. 1002 (1984)](toa:brooks) (summarily affirming lower court decision finding Section 2, as amended in 1982, constitutional). There is no indication that such a record was developed before the General Assembly adopted the Statutory Criteria, particularly since they were enacted at a time when the Commonwealth was subject to stay-at-home orders from the Governor.[^6]
 
-[^6]: See Office of the Governor, Executive Order Number 55: Temporary Stay at Home Order Due to Novel Coronavirus, (Mar. 30, 2020), available at: https://www.governor.virginia.gov/media/governorvirginiagov/executive-actions/EO-55-Temporary-Stay-at-Home-Order-Due-to-Novel-Coronavirus-(COVID-19).pdf.
+[^6]: See [Office of the Governor, Executive Order Number 55](toa:eo-55): Temporary Stay at Home Order Due to Novel Coronavirus, (Mar. 30, 2020), available at: https://www.governor.virginia.gov/media/governorvirginiagov/executive-actions/EO-55-Temporary-Stay-at-Home-Order-Due-to-Novel-Coronavirus-(COVID-19).pdf.
 
 The Statutory Criteria might be cloaked in vote dilution language, but in reality they provide the Commonwealth with a rationale for diluting minority votes and a defense for situations in which that rationale is challenged. The Statutory Criteria justify “cracking” majority-minority districts—in other words, deliberately targeting those districts for revision due to the race of the citizens who reside there—under the theory that, for example, a 65% minority population is unlawfully “excessive” under the Statutory Criteria, even though that may be the number required to elect that language or racial minority group’s candidate of choice.
 
@@ -607,7 +632,7 @@ This inquiry does not happen in a vacuum, particularly not in cases like this wh
 
 In this instance, the passage of time will work an irreparable injury unless this Court grants the relief sought. The Census Bureau released local-level data on August 12, 2021, which state entities such as the Respondent Commission will use to immediately commence the 2021 redistricting process.[^7] Unless this Court grants Petitioners’ requested relief, this redistricting process will proceed with the Statutory Criteria as its guiding light, leading the Commonwealth towards the rocky shoals of years of voting rights litigation (and depriving Petitioners of the political representation to which they are entitled for untold years to come). It is unlikely that Petitioners could conclude litigation in a circuit court and seek Supreme Court appellate review of this matter before such time as Respondents have formally adopted unconstitutional maps. It is difficult to imagine a more urgent matter, or one that would affect more Virginia citizens over a longer period of time, than the adoption of unconstitutional district maps that will govern all Virginia elections for the next decade.
 
-[^7]: U.S. Census Bureau, Census Bureau to Hold News Conference on Release of 2020 Redistricting Data, (Aug. 5, 2021), available at: https://www.census.gov/newsroom/press-releases/2021/news-conference-2020-census-redistricting-data.html.
+[^7]: [U.S. Census Bureau](toa:census-news), Census Bureau to Hold News Conference on Release of 2020 Redistricting Data, (Aug. 5, 2021), available at: https://www.census.gov/newsroom/press-releases/2021/news-conference-2020-census-redistricting-data.html.
 
 Given the foregoing, “[e]ven if other more leisurely proceedings may [be] available,” Petitioners are still entitled to mandamus “unless the other remedies [are] equally convenient, beneficial and effective.” [*Early Used Cars, Inc. v. Province*, 218 Va. 605, 610 (1977)](toa:early-used-cars). Here, the alternative remedies are manifestly inadequate. Moreover, the award of the relief sought in this case would not prejudice the Respondents. Petitioners seek to make Respondents’ legal obligations clearer, both for their benefit and that of the voting public, since Respondents are currently laboring under contrary commands emanating from two conflicting provisions of state law. If this Court provided a definitive answer as to which set of criteria Respondents should follow and enforce, all parties would benefit from that clarity.
 
