@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The W.D. Pa. Bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs;
+     docs/EVAL-LOOP.md, "Cross-engine gate") in the face of the typst template ({font}, Liberation Sans, the audited
+     exemplar's Arial metrics; LBR 5005-13(b)(4) names Courier only as the size benchmark, "12 Courier or an equivalent
+     font size") at 12 pt (size 24 half points); Body Text in exact 24 pt line boxes (480 twips, typst pitch-body:
+     double spaced) with a half-inch first-line indent (typst para-indent); single lines in 14 pt boxes (280 twips, typst pitch-single).
+     docx/pawb.lua writes every paragraph itself: the court title, the Form 416D caption (LBR 7010-1), the title, the
+     numbered paragraphs (LBR 5005-13(b)(3)), the headings, the addresses, the signature block (LBR 5005-6(d)), the
+     certificate of service, the footer (the page number, centred, LBR 5005-13(b)(2), its line box ending 0.5 in
+     above the edge: typst footer-descent) and the section (letter, 1 in margins). Twips: 20 x pt. pandoc-from:
+     CommonMark with smart punctuation, as typst's cmarker reads the body (a trailing backslash is a hard break). -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="commonmark+smart+yaml_metadata_block" size="24" body="480" single="280" indent="720" heading="480" heading-before="0" heading-after="0" footer="720">
+</reference>

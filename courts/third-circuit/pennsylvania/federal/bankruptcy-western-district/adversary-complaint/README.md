@@ -7,8 +7,8 @@ Folder: `courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/a
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md`: the whole complaint (Parties through Count VI, prayers, signature, certificate of service) |
-| typeface | face required: **none** (LBR 5005-13(b)(4) names Courier only as the size benchmark, "12 Courier or an equivalent font size"; no face is mandated). Substitute: none needed. Used: **EB Garamond** (vendored), 13 pt. Metric-compatible: n/a. See Known gaps 1. |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| typeface | face required: **none** (LBR 5005-13(b)(4) names Courier only as the size benchmark, "12 Courier or an equivalent font size"; no face is mandated). Used: **Liberation Sans** 12 pt (vendored), the audited exemplar's face (Arial metrics, `data/exemplar-fonts.json`), in typst and docx alike (EB Garamond 13 pt until fb-595.68.34). See Known gaps 1. |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf` and `.docx.pdf`, 11 pages each, vendored Liberation Sans only, no warnings; the docx breaks every line and page where typst does (XENG-001..003 gated, `eval.yaml`, fb-595.68.34) |
 | overlay | ok: `usage/OVERLAY-snyder-adversary-complaint.pdf` and `.txt` (page map) |
 | pages reviewed | 11 of 11 (every page of the final PDF rendered at 60 dpi and viewed) |
 | check gates | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this folder is a doc-type folder (see Known gaps) |
@@ -24,7 +24,7 @@ Kind: **M** mandated by a rule (tier 1), **C** convention seen in the exemplar (
 | PAWB-ADV-001 | M | 8½ × 11 inch paper. | W.PA LBR 5005-13(b)(1) | `paper: "us-letter"` in `typst/pawb-adversary-complaint.typ` |
 | PAWB-ADV-002 | M | Sequential page numbers on every page. | W.PA LBR 5005-13(b)(2) | `page-footer()`: centered, page 1 included |
 | PAWB-ADV-003 | M | Paragraphs sequentially numbered (complaint; the brief exception does not apply). | W.PA LBR 5005-13(b)(3) | `allegations()`: each body paragraph numbered from 1; see Known gaps 2 for the unnumbered WHEREFORE and certificate |
-| PAWB-ADV-004 | M | Font no smaller than "12 Courier or an equivalent font size", footnotes included. | W.PA LBR 5005-13(b)(4) | `type-size = 13pt` (EB Garamond); footnote entries use `type-size`. See Known gaps 1. |
+| PAWB-ADV-004 | M | Font no smaller than "12 Courier or an equivalent font size", footnotes included. | W.PA LBR 5005-13(b)(4) | `type-size = 12pt` (Liberation Sans). See Known gaps 1. |
 | PAWB-ADV-005 | M | Created directly to PDF (not scanned), flattened, fully text-searchable. | W.PA LBR 5005-13(b)(5), (d) | Typst output; `pdftotext` yields the full text (checked: every word of the sample markdown is in the PDF) |
 | PAWB-ADV-006 | M | Caption substantially conforms to Official Form 416D: court name; debtor and case number; chapter; plaintiff and defendant; Adv. Proc. No.; the title of the paper. | FRBP 7010 (FRCP 10 applies; caption per Form 416); FRBP 9004(b); W.PA LBR 7010-1(a); Form 416D | `caption(meta)`: boxed debtor and party column, case number and chapter on the right, Adv. Proc. No. blank until assigned |
 | PAWB-ADV-007 | M | The judge's initials appended to the bankruptcy case number. | W.PA LBR 7010-1(a) | Frontmatter `bankruptcy_case` (the initials are part of the number as written, e.g. `22-20823-GLT`); the template prints it as given |
@@ -32,7 +32,7 @@ Kind: **M** mandated by a rule (tier 1), **C** convention seen in the exemplar (
 | PAWB-ADV-009 | M | Jurisdiction allegation names the case, its number and chapter, the district and division (FRCP 8 via FRBP 7008(a)). | FRBP 7008(a) | Author content: ¶¶ 5 to 8 of the sample. Not enforced. |
 | PAWB-ADV-010 | M | Electronic signature: "/s/" before the name, then name, address, telephone, e-mail and state Bar registration number. | W.PA LBR 5005-6(d) | `signature-block()`: "/s/ NAME", name, PA I.D., firm, address, phone, e-mail |
 | PAWB-ADV-011 | A | Summons, adversary cover sheet, filing fee, FRBP 7007.1 disclosure, and any Judge-specific procedure (LBR 9013-5(a)). | FRBP 7004; Official Form 416A/B; W.PA LBR 9013-5(a) | Separate filings; not produced by this template |
-| PAWB-ADV-012 | C | Double spacing with first-line indent of ½ inch; body text justified, not hyphenated. | Both exemplars (no W.PA rule sets spacing) | `body-leading = 1.35em` (double at EB Garamond's measured line box), `para-indent = 0.5in`, `hyphenate: false` |
+| PAWB-ADV-012 | C | Double spacing with first-line indent of ½ inch; not hyphenated. | Both exemplars (no W.PA rule sets spacing) | `pitch-body = 24pt` (exact double), `para-indent = 0.5in`; ragged right, not hyphenated (the cross-engine model; the exemplar is justified, a tier-3 difference) |
 | PAWB-ADV-013 | C | 1-inch margins. | Both exemplars (no W.PA rule sets margins) | `margin = 1in` |
 | PAWB-ADV-014 | C | Court title in bold caps, centered, on two lines above the caption. | Both exemplars | `caption()`: "IN THE UNITED STATES BANKRUPTCY COURT / FOR THE WESTERN DISTRICT OF PENNSYLVANIA" |
 | PAWB-ADV-015 | C | Count headings centered and bold; the WHEREFORE clause after each count unnumbered; the certificate of service after the signature block. | Exemplar (Snyder) | `heading.where(level: 1)`; `allegations()`; `pawb-adversary-complaint()` splits the body at `# CERTIFICATE` |
@@ -67,33 +67,35 @@ sh tools/render.sh courts/third-circuit/pennsylvania/federal/bankruptcy-western-
 sh tools/overlay.sh courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/adversary-complaint snyder-adversary-complaint
 ```
 
-- `render.sh` fails on any typst warning. The render uses only the vendored EB Garamond (`pdffonts` lists EBGaramond-Regular and -Bold, embedded).
+- `render.sh` fails on any typst warning. The render uses only the vendored Liberation Sans.
 - The overlay (red = ours, blue = filed, black = both) pairs pages by word overlap: ours p.1 with filed p.1, p.2 with p.2, p.3 with p.4, p.4 with p.5, and so on to p.11 with p.12 (word overlap 51% to 92%). The pairing is coarse because the filing is 13 pages and its text flows differently; the overlay is a diagnostic, not a score. Differences that matter are in the review below.
 
-## Visual review (Gate 2 record: all 11 pages of the current PDF, rendered at 60 dpi and viewed)
+## Visual review (Gate 2 record: all 11 pages on each engine, rendered at 45 dpi and viewed, 2026-10-22)
 
-| Page | Compared with | Finding | Status |
+The typst and docx renders were viewed side by side; every page carries the same lines (XENG-003, 288/288).
+
+| Page | What it is | Finding | Status |
 |---|---|---|---|
-| 1 | exemplar p.1 | Court title, boxed caption (debtor, parties, case number with GLT, chapter, Adv. Proc. No.), title, lead-in, Parties heading, ¶¶ 1 to 4. | PASS |
-| 2 | exemplar p.2 | Jurisdiction and Venue (¶¶ 5 to 9, consent in ¶ 9), Facts heading, ¶¶ 10 to 16. Double spacing holds. | PASS |
-| 3 | exemplar p.3 | ¶¶ 17 to 26. Paragraph spacing equals the leading (fixed this pass; the first draft overlapped every paragraph). | PASS |
-| 4 | exemplar p.4 | ¶¶ 27 to 32; the insider paragraph ends the Facts section. | PASS |
-| 5 | exemplar p.5 | COUNT I heading centered bold caps; ¶¶ 33 to 40; WHEREFORE unnumbered; COUNT II heading and ¶¶ 41 to 42. | PASS |
-| 6 | exemplar p.6 | ¶¶ 43 to 50; COUNT III and COUNT IV headings, each kept with its first paragraph. | PASS |
-| 7 | exemplar p.7 | ¶¶ 51 to 60; COUNT V (§ 5104) heading wraps to two centered lines. | PASS |
-| 8 | exemplar p.8 | ¶¶ 61 to 68; COUNT V (§ 5105) heading. | PASS |
-| 9 | exemplar p.9 | ¶¶ 69 to 71; COUNT VI heading wraps ("§550" on the second line). Page ends with white space: the signature block did not fit and moved to p.10 whole. | ACCEPTED (heading wrap; the block is kept together by design) |
-| 10 | exemplar p.10 | "Respectfully submitted," date, two single-spaced attorney blocks with "/s/". | PASS |
-| 11 | exemplar p.11 | CERTIFICATE OF SERVICE: unnumbered, address blocks single-spaced with a blank line between them, date and signature. | PASS |
+| 1 | Court title, Form 416D caption (debtor row ruled at its top, party row at its foot), title, lead-in, Parties, ¶¶ 1 to 5 | Both engines alike. | PASS |
+| 2 | ¶¶ 5 to 16; Jurisdiction and Venue (consent in ¶ 9); Facts | "§§ 1408" kept with its number. | PASS |
+| 3 | ¶¶ 17 to 26 | | PASS |
+| 4 | ¶¶ 26 to 32 | | PASS |
+| 5 | COUNT I; ¶¶ 33 to 40; WHEREFORE unnumbered; COUNT II; ¶¶ 41 to 42 | Headings centered bold caps on the body pitch, kept with their paragraph. | PASS |
+| 6 | ¶¶ 43 to 49; COUNT III, COUNT IV | | PASS |
+| 7 | ¶¶ 50 to 59; COUNT V (§ 5104) on two centered lines | | PASS |
+| 8 | ¶¶ 60 to 69; COUNT V (§ 5105) | | PASS |
+| 9 | ¶¶ 69 to 71; COUNT VI | The page ends with white space: the last WHEREFORE is kept on one page with the signature block. | ACCEPTED (the signature never stands alone) |
+| 10 | The last WHEREFORE; "Respectfully submitted,", the date, two single-spaced attorney blocks with "/s/" | | PASS |
+| 11 | CERTIFICATE OF SERVICE: unnumbered, address blocks single-spaced with a blank line around each, date and signature | | PASS |
 
-Every row was checked against the final PDF (the render after the last change). Gate 2 rows are recorded here, not in `reviews/`, because this folder has no `reviews/` directory.
+Changes in this pass: body on the exact 24 pt pitch, ragged right (was justified, 1.345 em leading); a paragraph's number in a 0.5 in box at the indent (was 0.3 in after the number); headings on the body pitch with no space of their own; the caption rule the height of each row; the address and signature lines on a 14 pt single pitch.
 
 ## Known gaps and open choices
 
-1. **Type size and face (PAWB-ADV-004).** The rule reads "12 Courier or an equivalent font size". "Or an equivalent font size" makes Courier a size benchmark, not a required face, so no substitute from `docs/FONTS.md` (TeX Gyre Cursor, Liberation Mono) is used and EB Garamond stays. The template sets EB Garamond at 13 pt: the only vendored font is EB Garamond, whose x-height is smaller than Times or Courier at 12 pt, so 13 pt is the reading that cannot be faulted. A reading of "12 pt as typed" would allow 12 pt. This is a choice for David. At 12 pt the sample would be shorter; that render was not made.
+1. **Type size and face (PAWB-ADV-004).** The rule reads "12 Courier or an equivalent font size". "Or an equivalent font size" makes Courier a size benchmark, not a required face, so no substitute from `docs/FONTS.md` (TeX Gyre Cursor, Liberation Mono) is used. The template sets Liberation Sans 12 pt, the face of the audited exemplar (Arial metrics; `data/exemplar-fonts.json`, which `fb lint fonts` enforces); the house face, Times New Roman, would need a `template_face` ruling there. Liberation Sans at 12 pt is larger on the page than 12 pt Times, so the size reading is safe.
 2. **Unnumbered WHEREFORE and certificate (PAWB-ADV-003).** LBR 5005-13(b)(3) says "sequentially paragraph numbered except as to briefs". The exemplar leaves each WHEREFORE clause and the certificate unnumbered, and the template follows the exemplar. A literal reading would number them. Open reading for David.
 3. **Consent and jurisdiction (PAWB-ADV-008, -009).** FRBP 7008(a) requires the statement; the template does not generate or check it. A Gate 1 check (a required consent sentence) belongs in `checks.yaml` when this folder gets one.
-4. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md` (the court root has `court.json` but no `rules.md`, and this doc-type folder has neither). The gates were not run; the render and overlay were run and the review above is the Gate 2 equivalent. Gate 0 was checked by hand: every word of the sample markdown occurs in the PDF text (0 missing after the final render).
+4. **Gate scripts.** `tools/check.sh <this folder>`: `RESULT: 8 checks passed, 0 failed` (typst) and `RESULT: 12 checks passed, 0 failed` (docx, XENG-001..003 gated).
 5. **Tier 2 is judged against one filer only.** Second adversary complaints that the search found, not collected (the brief asks for one exemplar per doc type): Kyle S. Uhlman v. Cardona, Adv. 23-02118, doc 1 (3 pages, https://storage.courtlistener.com/recap/gov.uscourts.pawb.383454/gov.uscourts.pawb.383454.1.0.pdf); Dlubak v. Cuddy, Adv. 23-02016 (the complaint is doc 1 of RECAP docket 66812781; not downloaded). EVAL-LOOP's tier-2 rule (2 or 3 filers) is not met.
 6. **Layout not in the rules.** Margins, spacing, caption box and the title's placement are conventions from the one exemplar and the general practice seen in W.D. Pa. filings; no rule sets them. The pleading-paper numbered lines used by the N.D. Cal. template are not used here: no W.D. Pa. rule requires them and neither exemplar uses them.
 7. **Adversary number.** The number is blank until the clerk assigns it (as in the exemplar). Frontmatter `adversary_number` fills it.
@@ -101,8 +103,8 @@ Every row was checked against the final PDF (the render after the last change). 
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/reference.docx`, `docx/pawb.lua`, `docx/build-reference.sh`; output `usage/OUTPUT-adversary-complaint.docx`): pandoc 3.6.4 on the reference: EB Garamond 13 pt, exact 26 pt double and 14.95 pt single lines (the pitch measured on the typst render), 1 in margins on US Letter, 0.5 in first-line indent, page number centered in the footer. The Lua filter builds what the typst template builds: the court title, the Form 416D caption (a borderless table whose two left cells carry the rules), the title, the typed "N." paragraph numbers with a 1 in tab (not Word list numbering), the unnumbered lead-in, WHEREFORE clauses and certificate, the single-spaced address groups, the signature block from the frontmatter, and a new page for the certificate of service.
-- Differences from typst: paragraph numbers are text, not automatic numbering; the caption rules are cell borders, which Word and LibreOffice draw slightly differently; the page break before the certificate is a 1 pt paragraph; EB Garamond is not embedded, so the machine that opens the file needs it installed; line breaks and page count are whatever Word or LibreOffice produce from these styles, not measured.
-- Checked here: `ziptool` reads all 17 parts and `xmllint --noout` passes on every XML part; the docx was not rendered and has no visual review.
-- docx BLOCKED: no checks file is readable (this folder has no `checks.yaml` and no `rules.md`; the `PAWB-ADV-*` IDs in the rules table are rule IDs, not gate checks). Every gate check measured on `usage/<id>.docx.pdf` is BLOCKED: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+Engine status: typst `OUTPUT-adversary-complaint.typst.pdf`; docx `OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice), 11 pages each, every line and page as typst (XENG-001..003 gated); latex not built.
+
+- **typst** (primary, `typst/`): on `lib/typst/xengine.typ`: a 24 pt body pitch, 14 pt single lines (court title, caption, title, addresses, signature, footer), explicit block spaces.
+- **docx** (`docx/`): `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst face `{font}`: Liberation Sans 12 pt; Body Text in exact 24 pt lines with a 0.5 in first-line indent; single lines in 14 pt boxes) and `docx/pawb.lua` (on `lib/docx/xengine.lua`), which writes every paragraph: the court title, the Form 416D caption (a two-row table, the left cells bordered), the title, the numbered paragraphs (typed "N." and a tab to 1 in), the headings, the address lines, the signature block, the certificate of service on a new page, the footer (a centred PAGE field, `$FORMBOOK_FOOTERS`) and the section (letter, 1 in margins, `$FORMBOOK_FINAL`). No shell: `fb render` builds the reference document and packs the archive (were `docx/build-reference.sh` and a committed `reference.docx` in EB Garamond 13 pt). Not verified in Word (LibreOffice only); it opens and converts without a repair prompt (DEF-DOCX-OPEN).
+- **docx BLOCKED items:** none.
