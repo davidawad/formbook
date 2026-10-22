@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The E.D.N.Y. memorandum of law's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; no EDNY rule names a face) at
+     12 pt (size 24 half points, LCR 7.1(b)(1)); Body Text in exact 24 pt line boxes (480 twips, typst pitch-double;
+     LCR 7.1(b)(3) double spaced) with a half-inch first-line indent (typst para-indent); single lines in 13.8 pt boxes
+     (276 twips, typst pitch-single); footnotes at 10 pt (LCR 7.1(b)(1)) in 11.5 pt lines (230 twips, typst
+     pitch-note), 4 pt apart (typst note-gap). Added or replaced here, as the typst template sets them: "Body Text
+     Keep" (the last paragraph, kept whole with the signature block; typst: a sticky, unbreakable block), Footnote Text
+     without keepLines (typst splits a long note across pages). docx/nyed-motion-brief.lua writes the cover, the
+     headings, the tables, the signature block and the certificates with their own spacing, and the sections: the cover
+     unnumbered, the tables in lower roman from i, the body from 1 (letter page, 1 in margins, LCR 7.1(b)(2); the page
+     number in a single line box 0.5 in above the bottom edge). Twips: 20 x pt. pandoc-from: CommonMark with smart
+     punctuation and footnotes, as typst's cmarker reads the body. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" note="230" note-size="20" note-after="80" footer="720" pandoc-from="commonmark+smart+footnotes+yaml_metadata_block">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="80" w:line="230" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr></w:style>
+</reference>
