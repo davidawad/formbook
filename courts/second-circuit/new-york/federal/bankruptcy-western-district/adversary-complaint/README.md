@@ -6,9 +6,9 @@ Doc type: **adversary complaint** commencing an adversary proceeding in the Unit
 |---|---|
 | exemplar | yes, 1 filer: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (8 pages, text layer present; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md` (transcribed in full: caption, lead-in, every section, all five counts, prayer, signature) |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, letter size, typst 0.15.0, vendored EB Garamond only (embedded), no typst warnings |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, letter size, typst 0.15.0, vendored Times New Roman only (embedded), no typst warnings |
 | overlay | ok: `usage/OVERLAY-wallach-rothstein-complaint.pdf` and `.txt` (page map below) |
-| typeface | Face required by the rules: none named (LBR 9004-1 requires only "plainly and legibly written"; re-checked 2026-10-15). Vendored substitute: none needed, so EB Garamond is kept (`docs/FONTS.md`, "No face named"). Metric fit: n/a. |
+| typeface | Face required by the rules: none named (LBR 9004-1 requires only "plainly and legibly written"; re-checked 2026-10-15). Times New Roman (vendored), the house standard (`docs/FONTS.md`), in typst and docx alike. Metric fit: n/a. |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; see Gate 2 table) |
 | tier 2 | **not met**: EVAL-LOOP asks for 2 or 3 filers; only one was found (see Known gaps) |
 
@@ -30,10 +30,10 @@ Not checked mechanically: the layout values are conventions taken from the filed
 ## Layout and typography (conventions, tier 2)
 
 - Letter paper; one-inch margins; page numbers centered at the foot from the cover on (the exemplar numbers its cover too).
-- EB Garamond 12 pt (embedded). The exemplar is Helvetica 12 pt, non-embedded (its text lines are on a 27.6 pt pitch, measured from the text layer). The template uses double spacing at the same 27.6 pt pitch. The typeface differs from the exemplar: a tier 3 choice, since no W.D.N.Y. rule names a font (re-checked 2026-10-15 against LBR 9004-1 and 9004-2; no vendored substitute is needed).
+- Times New Roman 12 pt (embedded), headings at the same size. The exemplar is Helvetica 12 pt, non-embedded (its text lines are on a 27.6 pt pitch, measured from the text layer). The template uses double spacing at the same 27.6 pt pitch (exact line boxes, no extra space between paragraphs) and 13.8 pt single lines. The typeface differs from the exemplar: a tier 3 choice, since no W.D.N.Y. rule names a font (re-checked 2026-10-15 against LBR 9004-1 and 9004-2).
 - Caption: court title centered; a caption grid with the bankruptcy case (`In re:`, the debtor) above the adversary parties (`vs.`), a right rule and a bottom rule on the party column; on the right, `Case No.`, `Chapter`, `Hon.`, `Adv. Pro. No.` (a blank line if the clerk's number is not known, as in the exemplar), then the title in bold.
 - Lead-in ("... alleges as follows:") unnumbered, on page 1 after the caption.
-- Numbered paragraphs: number, then the text, first line indented 0.5 in, double-spaced.
+- Numbered paragraphs: the number at the 0.5 in first-line indent, the text from 1 in, double-spaced.
 - Headings: level 1 (`I. PROCEDURAL HISTORY`) centered bold caps; level 2 (`COUNT I`, count titles) centered bold; level 3 (`A. Lease & Consulting Agreements`) bold italic at the margin. Each heading is kept with the text after it.
 - Block quotations (a markdown `>` chunk): single-spaced, indented 0.5 in on both sides, not numbered.
 - Prayer: a `WHEREFORE` line (unnumbered, kept with the list), then the items as an upper-case lettered list (A., B., ...).
@@ -86,10 +86,10 @@ The exemplar pages were compared through their text layer (`pdftotext -bbox` for
 3. **No table of authorities or cover sheet.** The adversary cover sheet (Form 1040) is a separate filing; this template does not produce it. The sample has no table of authorities.
 4. **Adversary number.** The exemplar's caption leaves the `Adv. Pro. No.` blank; the template prints a blank line when `adv_number` is absent, and the sample follows the exemplar. The clerk assigns the number.
 5. **Italics.** The text layer of the exemplar has no italic markup, so case names are not italic in the sample. The template renders `*...*` italic.
-6. **Typeface.** No W.D.N.Y. font rule (re-checked 2026-10-15); EB Garamond (vendored) instead of the exemplar's Helvetica. Tier 3.
+6. **Typeface.** No W.D.N.Y. font rule (re-checked 2026-10-15); Times New Roman (vendored, the house standard) instead of the exemplar's Helvetica. Tier 3.
 7. **Local-rules version.** The only local-rules text found is a PDF whose creation date is 2013-08-14. Confirm that LBR 9004-1 and 9004-2 are current.
 8. **Exhibits.** Exhibits A to E are referenced in the sample and are not part of the template.
-9. **tools/check.sh not run.** The checker expects a court directory with `court.json` and `rules.md` at its root; this doc-type folder has neither, and the brief forbids editing `tools/`. Gate 0 and Gate 1 have not been run; the review above is the Gate 2 equivalent.
+9. **tools/check.sh.** Since fb-595.68.25: `sh tools/check.sh <this folder> --engine typst` and `--engine docx` both exit 0 (typst 9, docx 13 checks passed, 0 failed).
 10. **Page count.** The exemplar is 8 pages and the sample renders to 8 pages, within the 8-14 target.
 
 ## Build
@@ -105,8 +105,6 @@ File names follow the tools and CLAUDE.md contract (`INPUT-`, `OUTPUT-`, `OVERLA
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` (styles, footer, page setup into `reference.docx`), `nywb-adversary-complaint.lua` (cover, caption, numbered allegations, prayer, signature), `render.sh` (pandoc, then the court's styles, footer and section restored into the package). Output: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice conversion, 8 pages, letter). The `.docx` converts in LibreOffice without error or repair prompt (checked 2026-10-15); not opened in Word.
+docx (`docx/`): `reference.xml` (the Word styles: `base="xengine"` in the typst face `{font}`, 12 pt, 552-twip body and 276-twip single line boxes, the 10 pt page-number footer; `fb render` builds the reference document from it) and `nywb-adversary-complaint.lua` (cover, caption, numbered allegations, headings, block quotations, prayer, signature, every paragraph as WordprocessingML on `lib/docx/xengine.lua`). No script: `fb render` runs pandoc with the filter and packs the archive (fb-595.68.25). Output: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice conversion, 8 pages, letter).
 
-- Matches the typst output: letter paper, one-inch margins, EB Garamond 12 pt embedded (LibreOffice finds it from the user's font directory), 27.6 pt exact double spacing, 0.5 in first-line indent, numbered allegations at the same numbers, the caption grid (debtor, adversary parties, right rule and bottom rule, case number, chapter, judge, adversary number, bold title), block quotations, the lettered prayer, the signature block, page number centered from page 1. Page starts agree with typst for pages 1 to 4; by page 8 the docx is within two paragraphs of the typst page (typst p.8 starts at the prayer; docx p.8 also starts at the prayer).
-- Differs: headings are set at 12 pt bold (typst's heading elements are larger by default; the size is not a rule of the court). Caption row spacing is approximate (typst's stack spacing is reproduced with exact-height rows). Word may paginate differently.
-- Not run: `tools/check.sh <doc-type-folder> --engine docx` cannot run in this folder: it needs `court.json`, `checks.yaml` and `rules.md` at the court root, and the court root has no `checks.yaml` or `rules.md`. Gates 0 and 1 are therefore not verified for docx; Gate 2 is the page review above. No BLOCKED check IDs were recorded because no check ran.
+- Cross-engine (fb-595.68.25): typst and docx share the layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): Times New Roman 12 pt, 27.6 pt double pitch, 13.8 pt single lines, headings at 12 pt on the body pitch with no space of their own, an allegation's number (a prayer item's letter) in a 0.5 in box after the 0.5 in indent. `check.sh --engine docx`: XENG-001..003 PASS (202/202 typst lines break after the same word, 8 = 8 pages); `params.cross_engine: gate` in `eval.yaml`.
