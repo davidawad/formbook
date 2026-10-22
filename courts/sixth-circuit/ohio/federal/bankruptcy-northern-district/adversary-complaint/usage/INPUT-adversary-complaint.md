@@ -20,7 +20,8 @@ signature:
   signer-name-printed: "FREDERIC P. SCHWIEG (0030418)"
   lines:
     - "*Attorney at Law*"
-    - "19885 Detroit Rd #239, Rocky River, Ohio 44116"
+    - "19885 Detroit Rd #239"
+    - "Rocky River, Ohio 44116"
     - "(440) 499-4506"
     - "fschwieg@schwieglaw.com"
     - "*Attorney for Debtor*"

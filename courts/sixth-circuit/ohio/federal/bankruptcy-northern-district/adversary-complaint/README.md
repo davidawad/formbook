@@ -1,6 +1,6 @@
 # N.D. Ohio Bankruptcy Court: adversary complaint
 
-Status: template built, sample rendered, overlay run, every page reviewed (Gate 2 by eye). Engines: typst only; latex and docx not built.
+Status: template built, sample rendered on typst and docx, overlay run, every page reviewed on both engines (Gate 2 by eye, 2026-10-22). Engines: typst and docx on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; XENG gated in `eval.yaml`); latex not built.
 
 ## Governing rules (verified 2026-10-14)
 
@@ -13,8 +13,8 @@ Status: template built, sample rendered, overlay run, every page reviewed (Gate 
 | Signature block: typewritten name, firm, address, telephone, e-mail, bar number, "s/name" | M | LBR 5005-1(c) (same PDF) | 2026-10-14 | `signature` block; the sample carries the bar number |
 | Adversary cover sheet at commencement | M | LBR 7003-1 (same PDF) | 2026-10-14 | **Not generated** (see Known gaps) |
 | Complaint in numbered paragraphs, one set of circumstances each | M (via FRCP 10(b), which FRBP 7010 applies) | FRBP 7010 text, above | 2026-10-14 (the FRCP 10(b) text itself was not fetched) | Numbered paragraphs written as escaped markdown (`1\. `) |
-| Type size 12 pt | C | LBR 9013-2(a) sets 12 pt for motions and briefs only; complaints have no N.D. Ohio size rule | 2026-10-14 | 12 pt EB Garamond (convention) |
-| Margins, double spacing, heading style | C | No N.D. Ohio rule found; chosen from the filed exemplar | - | 1 in margins, 24 pt line pitch, centred bold caps headings |
+| Type size 12 pt | C | LBR 9013-2(a) sets 12 pt for motions and briefs only; complaints have no N.D. Ohio size rule | 2026-10-14 | 12 pt Times New Roman (convention; the face of both filed complaints) |
+| Margins, double spacing, heading style | C | No N.D. Ohio rule found; chosen from the filed exemplar | - | 1 in margins, 24 pt body pitch, 13.8 pt single lines (court lines, caption, title, signature), centred bold caps headings on the body pitch |
 
 Not verified in this session: FRBP 7001 (adversary categories) and FRCP 10(b) text. Nothing in the template depends on them beyond the citations above.
 
@@ -23,48 +23,53 @@ Not verified in this session: FRBP 7001 (adversary categories) and FRCP 10(b) te
 - `typst/main.typ`: entry point; reads `usage/<id>.md` (`--input sample=`).
 - `typst/ohnb-adversary-complaint.typ`: template `ohnb-adversary-complaint(meta, body)`.
 - `usage/`: two filed complaints (Alrachid, debtor counsel; Stone, U.S. Trustee). Sources in `usage/SOURCE.md`.
-- `usage/INPUT-adversary-complaint.md`: body of the Alrachid complaint (caption, jurisdiction, parties, background, Counts II to VI, prayer, signature). Exhibits are not transcribed.
-- `usage/OUTPUT-adversary-complaint.typst.pdf`: our render (5 pages).
-- `usage/OVERLAY-adversary-complaint.pdf` and `.txt`: red/blue overlay against the Alrachid exemplar (`tools/overlay.sh` default). The overlay file names follow the tool (`OVERLAY-<id>`), not `<id>-overlay`.
+- `usage/INPUT-adversary-complaint.md`: body of the Alrachid complaint (caption, jurisdiction, parties, background, Counts II to VI, prayer, signature). Exhibits are not transcribed. The signature address is two lines, as filed (was one line, 2026-10-22).
+- `usage/OUTPUT-adversary-complaint.typst.pdf`, `.docx`, `.docx.pdf`: our renders (6 pages each, the same lines and pages).
+- `docx/reference.xml`: the Word styles (`base="xengine"`, Times New Roman 12 pt, Body Text on 480 twips with a 720 twip first-line indent, single lines 276 twips; "Body Text Keep" for the last chunk).
+- `docx/ohnb-adversary-complaint.lua`: the docx filter (court lines, caption table, title, headings, body, signature, the footer and the section through `$FORMBOOK_FOOTERS` and `$FORMBOOK_FINAL`).
+- `eval.yaml`: `params.cross_engine: gate`.
+- Overlays: `just overlay <this folder>` writes `.overlay/.../OVERLAY-adversary-complaint.pdf` (gitignored).
 
 Build and check:
 
 ```sh
-export PATH="$HOME/tb/bin:$PATH"
 cd /work/repo
 sh tools/render.sh courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-adversary-complaint.md
+sh tools/render.sh --engine docx courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-adversary-complaint.md
+sh tools/check.sh courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/adversary-complaint --engine typst
+sh tools/check.sh courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/adversary-complaint --engine docx
 sh tools/overlay.sh courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/adversary-complaint adversary-complaint
 ```
 
-## Gate 2 review (by eye, every page of the current PDF)
+## Gate 2 review (by eye, every page of the current PDFs)
 
-Reviewed 2026-10-14 against the Alrachid exemplar pages.
+Reviewed 2026-10-22: every page of `usage/OUTPUT-adversary-complaint.typst.pdf` and of the LibreOffice PDF `usage/OUTPUT-adversary-complaint.docx.pdf` rendered at 60 dpi side by side and viewed; page 1 compared with page 1 of both filed complaints (Alrachid, Stone). The two engines set every line and page alike (XENG-001..003 gated: 6 = 6 pages, 157/157 lines), so one table serves both.
 
 | Page | Finding | Status |
 |---|---|---|
-| 1 | Caption: court name, debtor, plaintiff and defendant lines, numbers column, centred title. Parties and caption line up; the plaintiff name wraps onto two lines, as in the exemplar. | PASS |
-| 2 | Background paragraphs and the count II heading at the foot. Paragraph indent and double spacing match the exemplar's. | PASS |
-| 3 | Counts II to IV, headings centred and bold, numbering continuous. | PASS |
-| 4 | Counts VI, V; heading size matches body (fixed: headings had been rendered at the typst default size). | FIXED |
-| 5 | Prayer for relief, signature block with italic lines (fixed: the signature lines had shown literal asterisks). | FIXED |
+| 1 | Court lines centred bold capitals (as both filed complaints); caption: debtor, plaintiff and defendant lines at the left, the ")" column, case, chapter, judge and adversary numbers at the right, one single line per row; the bold centred title single-spaced; JURISDICTION, PARTIES; paragraphs 1 to 4. | PASS |
+| 2 | Paragraphs 5 to 11, BACKGROUND. Double spacing, 0.5 in first-line indent; the page ends two lines short (paragraph 12 kept whole: widow and orphan control). | PASS |
+| 3 | Paragraphs 12 to 22, Counts II to IV headings centred bold at the type size on the body pitch. | PASS |
+| 4 | Paragraphs 23 to 33, Count VI. "§§ 1336.04" kept with its number. | PASS |
+| 5 | Paragraphs 34 to 39, Count V, PRAYER FOR RELIEF, prayer items 1 to 5. | PASS |
+| 6 | Prayer item 6, the closing paragraph kept with the signature block, which stands single-spaced from the middle of the line as in both filed complaints (was at the left margin with double-spaced lines, alone on page 6). | FIXED |
+
+Open tier-2 rows: none. The .docx was opened in LibreOffice only (no repair prompt), not in Word.
 
 ## Known gaps
 
-- Length: the sample renders to 5 pages, short of the 8 to 14 page target. The transcription covers the whole body of the exemplar (paragraphs 1 to 39 and the prayer); the exemplar's extra length is the exhibit ledger (pp. 8 to 31), which is not transcribed.
+- Length: the sample renders to 6 pages, short of the 8 to 14 page target. The transcription covers the whole body of the exemplar (paragraphs 1 to 39 and the prayer); the exemplar's extra length is the exhibit ledger (pp. 8 to 31), which is not transcribed.
 - Adversary cover sheet (LBR 7003-1) is not generated. A court-issued form is required; the PR for this court must carry it separately.
 - FRBP 7008(a) requires the jurisdiction allegation to name the bankruptcy case, its number, chapter, district and division. The Alrachid exemplar does not do so in paragraph 1, and the sample transcribes it as filed. The template does not generate that sentence and no check enforces it yet: a tier-1 gap for a future check, to be closed before this doc type is marked done.
 - Count I's heading does not appear in the exemplar's text layer. The sample does not invent one.
 - Tier 2 (line spacing, caption ")" column, heading style) is judged against the Alrachid and Stone exemplars only by eye; the overlay is not a score. Stone's caption shows the adversary number blank.
-- LaTeX and docx engines are not built.
+- LaTeX is not built for this doc type.
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` makes `docx/reference.docx` (EB Garamond 12 pt, letter, 1 in margins, body double spacing at an exact 24.6 pt pitch, 0.5 in first-line indent, centered bold caps headings, a centered PAGE footer); `render.sh` and `ohnb-adversary-complaint.lua` build the caption table, the title and the signature block as in the typst template. Build: `sh docx/build-reference.sh "$PWD/docx/reference.docx"` from the court folder.
+docx (`docx/`): `docx/reference.xml` (fb render builds the styles from the cross-engine recipe, `base="xengine"`, in the typst face Times New Roman; was `build-reference.sh`, `render.sh` and a committed `reference.docx` in EB Garamond, fb-595.68.30) and `docx/ohnb-adversary-complaint.lua` on `lib/docx/xengine.lua`: every paragraph in exact line boxes of the typst pitches (480 and 276 twips), the caption a borderless fixed table of 5040, 432 and 3888 twips (typst 3.5, 0.3 and 2.7 in), the signature 4680 twips (3.25 in) from the margin, the footer's centred page number 720 twips from the bottom edge (typst footer-foot 0.5 in), the typst break rules on every run (no break inside ")(", a break after a slash before a letter, a doubled section sign bound to its number).
 
-- Matches typst, by measurement: page size (612 x 792 pt) and margins (72 pt); font family and size (EB Garamond 12 pt, the same three faces embedded in the typst PDF); body line pitch (24.6 pt on the typst render, exact in the docx).
-- Differs from typst: heading and signature spacing are set in twips by eye from the typst render, not measured line by line; no page count is measured (the docx has not been paginated); the NOTICE paragraph may split across a page break in Word (typst keeps the block together).
+- `sh tools/check.sh <this folder> --engine docx`: every gate green, XENG-001..003 PASS (6/6 pages, 157/157 lines).
+- `tools/check-selftest.sh` takes a court root with `court.json` and does not run on this doc-type folder.
 - Not generated by either engine: TOC, TOA, pleading line numbers (no N.D. Ohio rule requires them).
-- BLOCKED, docx.pdf and page review: `soffice` is not installed on this box, so `usage/OUTPUT-adversary-complaint.docx.pdf` does not exist. The docx checks (Gates 0 to 3 on the LibreOffice PDF) cannot run; no page was viewed.
-- BLOCKED, Word and LibreOffice open check: not done (no repair-prompt check was run).
-- Zip and XML: `OUTPUT-adversary-complaint.docx` passes the renderer's zip and well-formed-XML checks and has no duplicate entries.
-- Word counts: the docx and the typst PDF carry the same words (1527 and 1528 by `pandoc -t plain` and `pdftotext`; caption cells read in a different order).
+- The .docx was opened in LibreOffice only, not in Word.
