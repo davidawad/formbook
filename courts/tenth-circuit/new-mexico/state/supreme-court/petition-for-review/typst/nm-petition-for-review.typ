@@ -15,7 +15,7 @@
 
 #let font-family = ("Times New Roman", "Liberation Serif")     // Times New Roman is the standard face (docs/FONTS.md); Liberation Serif is its metric-compatible substitute.
 #let type-size = 14pt                      // NMRA 12-305(D)(1): proportionally spaced type 14-point or larger, footnotes included.
-#let caption-size = 14pt                   // NMRA 12-305(D)(1): the cover may use 11-point only if needed to fit; this template keeps 14-point.
+#let cover-sizes = (14pt, 13pt, 12pt, 11pt) // NMRA 12-305(D)(1): the cover is 14-point, or down to 11-point only if needed to fit it on one page.
 #let body-leading = 1.65em                 // NMRA 12-305(E): double-spaced text (about 2 x the single line of this face at 14 pt).
 #let single-leading = 0.45em               // NMRA 12-305(E): quotations, headings and footnotes may be single-spaced.
 #let cover-leading = 0.45em                // cover caption lines, single-spaced (NMRA 12-305(E)).
@@ -104,23 +104,21 @@
 // Cover (NMRA 12-305(F) caption, (G) cover contents)
 // ---------------------------------------------------------------------------
 
-#let cover(meta) = {
-  set par(leading: cover-leading, first-line-indent: 0pt, spacing: 0.5em)
-  set text(size: caption-size)
+#let cover-body(meta, size, counsel-cols) = {
+  set par(leading: cover-leading, first-line-indent: 0pt, spacing: cover-leading)
+  set block(spacing: cover-leading)
+  set text(size: size)
+  // Each metadata line is its own single-spaced paragraph (NMRA 12-305(E) allows single spacing on the cover).
+  let lines(items) = stack(spacing: cover-leading, ..items.map(l => par(l)))
   align(center, text(weight: "bold", court-name))
   v(0.8em)
   grid(
     columns: (1fr, docket-width),
     column-gutter: 0.3in,
-    [
-      #for p in need(meta, "parties") {
-        if "designation" in p [ #emph(inl(p.designation)) \ ]
-        if "names" in p {
-          for n in p.names [ #inl(n) \ ]
-        }
-        v(0.4em)
-      }
-    ],
+    stack(spacing: 0.8em, ..need(meta, "parties").map(p => lines(
+      (if "designation" in p { (emph(inl(p.designation)),) } else { () })
+        + p.at("names", default: ()).map(inl),
+    ))),
     [
       #if "case_number" in meta [ No. #inl(meta.case_number) ]
     ],
@@ -128,33 +126,39 @@
   v(0.8em)
   // Free lines under the caption (appeal line, oral-argument request; NMRA 12-305(G)(4)).
   if "cover_lines" in meta {
-    for l in meta.cover_lines [ #align(center, inl(l)) \ ]
+    align(center, lines(meta.cover_lines.map(inl)))
     v(0.8em)
   }
   // County or administrative body and trial judge (NMRA 12-305(G)(1)-(2)); omitted for 12-502 briefs.
   if "lower_court" in meta {
-    for l in meta.lower_court [ #inl(l) \ ]
+    lines(meta.lower_court.map(inl))
     v(0.8em)
   }
-  // Counsel groups in two columns so the cover stays on one page (NMRA 12-305(G)(3)).
+  // Counsel groups side by side (NMRA 12-305(G)(3)).
   grid(
-    columns: (1fr, 1fr),
+    columns: (1fr,) * counsel-cols,
     column-gutter: 0.3in,
-    row-gutter: 0.6em,
-    ..for c in need(meta, "counsel") {
-      (block(breakable: false, [
-        #set par(leading: cover-leading, first-line-indent: 0pt)
-        #if "heading" in c [ #emph(inl(c.heading)) \ ]
-        #for l in c.lines [ #inl(l) \ ]
-      ]),)
-    }
+    row-gutter: 0.8em,
+    ..need(meta, "counsel").map(c => lines(
+      (if "heading" in c { (emph(inl(c.heading)),) } else { () }) + c.lines.map(inl),
+    )),
   )
+  v(0.4em)
   line(length: 100%, stroke: 0.75pt)
   align(center, block(above: 0.8em, below: 0.8em)[
-    #text(weight: "bold", size: 16pt, upper(inl(need(meta, "brief_title"))))
+    #text(weight: "bold", size: size + 2pt, upper(inl(need(meta, "brief_title"))))
   ])
   line(length: 100%, stroke: 0.75pt)
 }
+
+// DEF-COVER-001: the cover is one page. It is set at 14 pt with counsel in two columns; if that does not fit,
+// the largest size down to 11 pt that fits (NMRA 12-305(D)(1) allows 11-point on the cover "if needed to fit all
+// required cover information on one page"), and at 11 pt three counsel columns as a last step.
+#let cover(meta) = layout(region => {
+  let tries = cover-sizes.map(s => (s, 2)) + ((cover-sizes.last(), 3),)
+  let pick = tries.find(t => measure(cover-body(meta, ..t), width: region.width).height <= region.height)
+  cover-body(meta, ..if pick == none { tries.last() } else { pick })
+})
 
 // Certificate of compliance (NMRA 12-318(F)): the attorney certifies the type-volume and size limits.
 // The statement and signature come from the frontmatter (compliance.statement, compliance.signature).
@@ -224,7 +228,8 @@
   }
 
   // ---- Cover (unnumbered) ----
-  page[#cover(meta)]
+  // The front matter after it is numbered from i, as the filed briefs print it (DEF-COVER-001).
+  page[#cover(meta)#counter(page).update(0)]
 
   // ---- Table of contents and table of authorities (roman numerals) ----
   if meta.at("toc", default: true) {
