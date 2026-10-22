@@ -7,19 +7,23 @@
 -- from reference.docx), headings as custom styles (JPML Heading 2..5: single spaced, hanging labels), footnotes
 -- as native footnotes. Everything else (caption, counsel blocks, signature block, tables of contents and
 -- authorities, certificate) is written here as OpenXML from the frontmatter, in the same styles' spacing.
--- Sections are set with sectPr paragraphs; the footers are reference.docx's footer1 (page number) and footer2 (empty).
+-- Sections are set with sectPr paragraphs (the last one through fb render's FORMBOOK_FINAL); the footers are
+-- reference.xml's rId100 (page number) and rId101 (empty).
 --
 -- Table of contents and table of authorities: static text (no TOC/TA field), so they show page numbers in any
--- viewer. The page numbers come from a first pass: docx/render.sh renders once, finds where each heading and each
--- authority's link text lands (docx/pages.awk, on the LibreOffice PDF), and runs this filter again with
--- JPML_PAGES set. JPML_NEEDLES receives the search list (one line per item, in document order).
+-- viewer. The page numbers: fb render (tools/fb/src/docxpass.rs) renders the document once, finds where each heading
+-- and each authority's link text lands in the LibreOffice PDF (the needles this filter writes to FORMBOOK_NEEDLES,
+-- in document order), and renders again with those pages (FORMBOOK_PAGES) until they settle (fb-595.68.4: were
+-- docx/render.sh and docx/pages.awk).
 --
 -- No case-specific text lives here: everything comes from the sample's frontmatter and markdown.
 
 local stringify = pandoc.utils.stringify
 
-local NEEDLES_OUT = os.getenv("JPML_NEEDLES")  -- written when set: "n<TAB>kind<TAB>needle"
-local PAGES_IN = os.getenv("JPML_PAGES")       -- read when set: "n<TAB>label" (label = printed body page)
+local NEEDLES_OUT = os.getenv("FORMBOOK_NEEDLES")  -- written when set: "I:n<TAB>B<TAB>needle<TAB>needle"
+local PAGES_IN = os.getenv("FORMBOOK_PAGES")       -- the previous pass's pages: "I:n<TAB>page<TAB>label"
+-- the memorandum body's last section (arabic from 1, the page-number footer): pandoc writes its own final sectPr
+local FINAL_SECT = '<w:sectPr><w:footerReference w:type="default" r:id="rId100"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/><w:pgNumType w:fmt="decimal" w:start="1"/><w:cols w:space="720"/></w:sectPr>'
 local MARKER = "<!-- memorandum -->"
 local PASSIM_AT = 7                            -- authority cited on this many pages or more: "passim"
 local TOC_LEVELS = 4                           -- typst: headings up to level 4 are in the table of contents
@@ -156,11 +160,11 @@ local function toa_key(el) return el.target:match("^toa:(.+)$") end
 -- ---------------------------------------------------------------------------
 
 local pages = {}
-if PAGES_IN then
+if PAGES_IN and PAGES_IN ~= "" then
   local f = io.open(PAGES_IN, "r")
-  if not f then error("jpml.lua: JPML_PAGES is set but cannot be read: " .. PAGES_IN) end
+  if not f then error("jpml.lua: FORMBOOK_PAGES is set but cannot be read: " .. PAGES_IN) end
   for line in f:lines() do
-    local n, label = line:match("^(%d+)\t(.*)$")
+    local n, label = line:match("^I:(%d+)\t[^\t]*\t(.*)$")
     if n then pages[tonumber(n)] = label end
   end
   f:close()
@@ -264,12 +268,21 @@ function Pandoc(doc)
     })
   end
 
-  if NEEDLES_OUT then
+  -- every item in document order, each searched after the one before; the body (kind B) is page 1
+  if NEEDLES_OUT and NEEDLES_OUT ~= "" then
     local f = io.open(NEEDLES_OUT, "w")
+    local body
     for _, it in ipairs(items) do
-      f:write(it.n, "\t", it.kind, "\t", (it.needle:gsub("[\r\n\t]", " ")), "\n")
+      local nd = it.needle:lower():gsub("[^a-z0-9]", "")
+      if nd == "" then error("jpml.lua: empty needle for item " .. it.n) end
+      f:write("I:", it.n, "\tB\t", nd, "\t", nd, "\n")
+      if it.kind == "B" then body = body or it.n end
     end
+    f:write("#section\tI:", body, "\tdecimal\t\n")
     f:close()
+    local g = assert(io.open(os.getenv("FORMBOOK_FINAL"), "w"))
+    g:write(FINAL_SECT)
+    g:close()
   end
 
   -- distinct printed pages of an authority, in order
