@@ -78,13 +78,13 @@ The Settlement and Release Agreement disposing of Points of Error Nos. 5, 6, and
 
 By this motion and as reflected in the Stipulation and Order for Partial Dismissal of Appeal With Prejudice and for Remand [JEFS Dkt. 154], the parties have agreed to partial dismissal, remand, and vacating of certain orders and partial final judgment. Therefore, Appellants respectfully request this court enter a partial dismissal of the appeal reflected in Points of Error Nos. 5, 6, and 7 raised in the Amended Opening Appellate Brief, and as related to the second circuit court’s following findings, conclusions, orders, and partial final judgment:
 
-a) Findings of Fact, Conclusions of Law; Order Granting Plaintiffs’ Motions for Partial Summary Judgment on Counts V, VI, VII and VIII of the Second Amended Complaint Filed August 12, 2016, Filed on December 1, 2016; and Denying Defendants County of Maui and the Maui County Council’s Motions for Partial Summary Judgment as to Count V of the Plaintiffs’ Second Amended Complaint Filed 2016-08-12, Filed on December 12, 2016, filed on August 9, 2017;
+a\) Findings of Fact, Conclusions of Law; Order Granting Plaintiffs’ Motions for Partial Summary Judgment on Counts V, VI, VII and VIII of the Second Amended Complaint Filed August 12, 2016, Filed on December 1, 2016; and Denying Defendants County of Maui and the Maui County Council’s Motions for Partial Summary Judgment as to Count V of the Plaintiffs’ Second Amended Complaint Filed 2016-08-12, Filed on December 12, 2016, filed on August 9, 2017;
 
-b) Order Granting in Part and Deferring in Part Plaintiffs’ Motion re Damages Related to Count VIII (42 U.S.C. § 1983) of the Second Amended Complaint Filed August 12, 2016, Filed on September 22, 2017, filed on January 23, 2018;
+b\) Order Granting in Part and Deferring in Part Plaintiffs’ Motion re Damages Related to Count VIII (42 U.S.C. § 1983) of the Second Amended Complaint Filed August 12, 2016, Filed on September 22, 2017, filed on January 23, 2018;
 
-c) Order Granting (1) Plaintiffs’ Motion for Further Hearing on Plaintiffs’ Request for Fees and Costs Relating to Count VIII of the Second Amended Complaint Filed August 12, 2016, Filed March 6, 2018; and (2) Plaintiffs’ Motion re Damages Related to Count VIII (42 U.S.C. § 1983) of the Second Amended Complaint Filed August 12, 2016, Filed September 22, 2017, Regarding Attorneys’ Fees and Costs, filed on May 30, 2018; and
+c\) Order Granting (1) Plaintiffs’ Motion for Further Hearing on Plaintiffs’ Request for Fees and Costs Relating to Count VIII of the Second Amended Complaint Filed August 12, 2016, Filed March 6, 2018; and (2) Plaintiffs’ Motion re Damages Related to Count VIII (42 U.S.C. § 1983) of the Second Amended Complaint Filed August 12, 2016, Filed September 22, 2017, Regarding Attorneys’ Fees and Costs, filed on May 30, 2018; and
 
-d) Final Judgment on Counts V, VI, VII, and VIII of the Second Amended Complaint Filed on August 12, 2016, filed July 2, 2018.
+d\) Final Judgment on Counts V, VI, VII, and VIII of the Second Amended Complaint Filed on August 12, 2016, filed July 2, 2018.
 
 The parties’ agreement for the vacating of these finding, conclusions, orders, and partial final judgment by the circuit court is provided for in ¶ 2.2.3 of the Settlement and Release Agreement:
 
