@@ -1,8 +1,11 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
 # the typst render does, so a difference fails.
-# Not gated yet (fb-595.54.75, docs/open-items/fb-595.54.75.md): a URL in a table of authorities row or the body
-# breaks after "http://" or a "/" in typst and elsewhere in LaTeX and Word (TOA p5, p6; body p14), and Word finds
-# one authority mark a page early (TOA p4 "Planned Parenthood of Kan. v. Nixon": 14, typst 15) (XENG-002, -003).
+# Not gated yet (fb-595.54.75, docs/open-items/fb-595.54.75.md; the URL breaks of pass 1 now match):
+# - LaTeX: lib/latex/xdoc.lua binds the token after "§" in an \mbox, and the token "1.205." carries footnote 4
+#   (p10: "§~\mbox{1.205.\footnote{...}}"); a footnote inside a box is lost, so note 4 is not set and its six
+#   authorities have no page in the table (TOA p5 "--"; XENG-003).
+# - Word splits footnote 2 between p8 and p9 and keeps the body line with mark 3 on p8; typst keeps note 2 whole
+#   and moves that line to p9 (XENG-002 from p9).
 params:
   cross_engine: report

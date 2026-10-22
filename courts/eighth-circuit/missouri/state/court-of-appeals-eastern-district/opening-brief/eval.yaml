@@ -1,10 +1,10 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
 # the typst render does, so a difference fails.
-# Not gated yet (fb-595.54.75, docs/open-items/fb-595.54.75.md): LaTeX sets a body line whose second footnote does
-# not fit on the next page with both notes (p6, notes 4 and 5), where typst splits them (XENG-002, -003); the docx
-# engine does not render: two authorities whose finds mark the same word ("610.021", "610.021(3)") write two
-# needles at one place and lib/docx/xdoc.lua cannot find the second (fb render: not found in the PDF), so this
-# folder has no docx/ until the shared model handles it.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LaTeX reported, not gated: a shared-model defect outside this folder's layout (fb-595.54.75): lib/latex/xdoc.lua
+  # binds the token after "§" in an \mbox, and on p6 that token carries footnote 4 ("§ 84.344.8[^4]"); a footnote
+  # inside a box is lost, so LaTeX never sets note 4 and the pages after it move (XENG-002, -003 from p6).
+  # docs/open-items/fb-595.54.75.md
+  cross_engine_latex: report
