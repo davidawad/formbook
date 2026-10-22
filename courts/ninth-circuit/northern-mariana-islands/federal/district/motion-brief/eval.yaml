@@ -4,3 +4,6 @@ params:
   margin_bottom_pt: 72
   margin_left_pt: 72
   margin_right_pt: 36
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+  # typst render does (fb-595.68.24, on the shared layout model lib/*/xengine*), so a difference fails.
+  cross_engine: gate
