@@ -5,8 +5,8 @@ Courts under `courts/tenth-circuit/utah/federal` (2).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Utah](bankruptcy-district) | `utb` | up for review | — | — | — | 14 |
-| [District Court, D. Utah](district) | `utd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Utah](bankruptcy-district) | `utb` | up for review | 2/2 | — | 0/2 | 14 |
+| [District Court, D. Utah](district) | `utd` | up for review | 2/2 | — | 0/2 | 14 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->

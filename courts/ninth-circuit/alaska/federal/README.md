@@ -5,8 +5,8 @@ Courts under `courts/ninth-circuit/alaska/federal` (2).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Alaska](bankruptcy-district) | `akb` | up for review | — | — | — | 14 |
-| [United States District Court for the District of Alaska](district) | `akd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Alaska](bankruptcy-district) | `akb` | up for review | 1/1 | — | 0/1 | 14 |
+| [United States District Court for the District of Alaska](district) | `akd` | up for review | 2/2 | — | 0/2 | 14 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->

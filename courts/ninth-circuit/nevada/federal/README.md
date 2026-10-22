@@ -5,8 +5,8 @@ Courts under `courts/ninth-circuit/nevada/federal` (2).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Nevada](bankruptcy-district) | `nvb` | up for review | — | — | — | 14 |
-| [District Court, D. Nevada](district) | `nvd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Nevada](bankruptcy-district) | `nvb` | up for review | 2/2 | — | 0/2 | 14 |
+| [District Court, D. Nevada](district) | `nvd` | up for review | 2/2 | — | 0/2 | 14 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->
