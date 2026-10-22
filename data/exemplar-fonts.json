@@ -635,6 +635,8 @@
       "class": "impossible",
       "face": "",
       "why": "no redistributable metric-compatible face for garamond",
+      "template_face": "Times New Roman",
+      "note": "PM decision fb-595.54.9 under David's 2026-10-17 ruling that Times New Roman is the standard: the template is set in Times New Roman on every engine (typst, latex newtxtext/newtxmath, docx), not in the one filer's Garamond; FRAP 32(a)(5)(A) requires a proportional serif face at 14 pt but names no family. The filed Garamond has no redistributable metric-compatible substitute, and its single-filer choice is tier 3.",
       "fonts": [
         "Arial-BoldMT",
         "ArialMT",
