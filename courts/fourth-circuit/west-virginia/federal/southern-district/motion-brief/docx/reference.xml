@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The S.D. W. Va. memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman, LR Civ P 7.1(a)(4)) at 12 pt (size 24 half points; footnotes too); Body
+     Text in exact 24 pt line boxes (typst pitch-body, LR Civ P 7.1(a)(3) double spacing) with a half-inch first-line
+     indent; Block Text (quotations) and Footnote Text in 13.8 pt boxes (typst pitch-single; LR Civ P 7.1(a)(3) allows
+     them single-spaced), quotations 12 pt above and below and indented half an inch on both sides, footnotes 7 pt
+     apart (typst note-gap); letter page with 1-inch margins (LR Civ P 7.1(a)(3)). docx/motion-brief.lua writes the
+     cover, the headings and the signature with their own spacing, the cover's empty footer and the body's page number
+     (a 13.8 pt line 36.6 pt above the page foot: 732 twips, where typst sets it, footer-descent 30 %). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="240" heading-after="240" quote="240" note-after="140" footer="732"/>
