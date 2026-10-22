@@ -213,97 +213,97 @@ authorities:
     cite: "313 So. 2d 898 (La. App. 2 Cir. 1975)"
   ccp3612:
     kind: statute
-    name: "La. Code Civ. P. art. 3612"
+    cite: "La. Code Civ. P. art. 3612"
   ccp2086:
     kind: statute
-    name: "La. Code Civ. P. art. 2086"
+    cite: "La. Code Civ. P. art. 2086"
   ccp1880:
     kind: statute
-    name: "La. Code Civ. P. art. 1880"
+    cite: "La. Code Civ. P. art. 1880"
   ccp2812:
     kind: statute
-    name: "La. Code Civ. P. art. 2812"
+    cite: "La. Code Civ. P. art. 2812"
   ccp5156:
     kind: statute
-    name: "La. Code Civ. P. art. 5156"
+    cite: "La. Code Civ. P. art. 5156"
   ccrim7297:
     kind: statute
-    name: "La. Code Crim. Pro. art. 729.7"
+    cite: "La. Code Crim. Pro. art. 729.7"
   civ9:
     kind: statute
-    name: "La. Civ. Code art. 9"
+    cite: "La. Civ. Code art. 9"
   civ13:
     kind: statute
-    name: "La. Civ. Code art. 13"
+    cite: "La. Civ. Code art. 13"
   rs1_1434:
     kind: statute
-    name: "La. R.S. 12:1-1434"
+    cite: "La. R.S. 12:1-1434"
   rs1_1436:
     kind: statute
-    name: "La. R.S. 12:1-1436"
+    cite: "La. R.S. 12:1-1436"
   rs1_1437:
     kind: statute
-    name: "La. R.S. 12:1-1437"
+    cite: "La. R.S. 12:1-1437"
   rs13_1818:
     kind: statute
-    name: "La. R.S. 13:1818"
+    cite: "La. R.S. 13:1818"
   rs13_3381:
     kind: statute
-    name: "La. R.S. 13:3381"
+    cite: "La. R.S. 13:3381"
   rs13_4244:
     kind: statute
-    name: "La. R.S. 13:4244"
+    cite: "La. R.S. 13:4244"
   rs13_4431:
     kind: statute
-    name: "La. R.S. 13:4431"
+    cite: "La. R.S. 13:4431"
   rs14_877:
     kind: statute
-    name: "La. R.S. 14:87.7"
+    cite: "La. R.S. 14:87.7"
   rs14_878:
     kind: statute
-    name: "La. R.S. 14:87.8"
+    cite: "La. R.S. 14:87.8"
   rs22_691:
     kind: statute
-    name: "La. R.S. 22:691.17"
+    cite: "La. R.S. 22:691.17"
   rs30_926:
     kind: statute
-    name: "La. R.S. 30:926"
+    cite: "La. R.S. 30:926"
   rs39_2158:
     kind: statute
-    name: "La. R.S. 39:2158"
+    cite: "La. R.S. 39:2158"
   rs40_1061:
     kind: statute
-    name: "La. R.S. 40:1061"
+    cite: "La. R.S. 40:1061"
   rs40_2175:
     kind: statute
-    name: "La. R.S. 40:2175.1-7"
+    cite: "La. R.S. 40:2175.1-7"
   rs40_2199:
     kind: statute
-    name: "La. R.S. 40:2199"
+    cite: "La. R.S. 40:2199"
   rs40_580:
     kind: statute
-    name: "La. R.S. 40:580.5"
+    cite: "La. R.S. 40:580.5"
   rs51_137:
     kind: statute
-    name: "La. R.S. 51:137"
+    cite: "La. R.S. 51:137"
   rs6_1314:
     kind: statute
-    name: "La. R.S. 6:1314"
+    cite: "La. R.S. 6:1314"
   rs9_4202:
     kind: statute
-    name: "La. R.S. 9:4202"
+    cite: "La. R.S. 9:4202"
   rule10:
     kind: rule
-    name: "La. Sup. Ct. R. X, § 1"
+    cite: "La. Sup. Ct. R. X, § 1"
   const2:
     kind: constitution
-    name: "La. Const. art I, § 2"
+    cite: "La. Const. art I, § 2"
   const13:
     kind: constitution
-    name: "La. Const. art I, § 13"
+    cite: "La. Const. art I, § 13"
   const4_8:
     kind: constitution
-    name: "La. Const. art IV § 8"
+    cite: "La. Const. art IV § 8"
 ---
 
 # INTRODUCTION
