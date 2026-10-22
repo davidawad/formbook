@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The vaed complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; was EB Garamond) at 12 pt (size
+     24 half points; L.R. 7(F)(3): 12 point Roman, footnotes included); Body Text in exact 24 pt line boxes (typst
+     pitch-body, L.R. 7(F)(3) double spacing) with a half-inch first-line indent (typst para-indent); single lines in
+     13.8 pt boxes (typst pitch-single); letter page, 1 in margins (L.R. 7(F)(3)). The footer: the page number centred
+     in a 13.8 pt line box whose foot is 0.5 in above the bottom edge (footer="720"; typst footer-descent 22.2 pt).
+     Court name, caption, title, headings, numbered paragraphs, prayer items and the signature block carry their own
+     spacing, indents and tabs (docx/vaed-complaint.lua). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="480" heading-before="0" heading-after="0" footer="720">
+<footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></footer>
+</reference>
