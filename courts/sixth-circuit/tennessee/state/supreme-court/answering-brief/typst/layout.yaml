@@ -28,7 +28,7 @@ cover:
   - {text: "{court_lines}", align: center}
   - {fill: 1}
   - columns:
-      - width: 230.4
+      - width: 216
         blocks:
           - each: caption
             between:
@@ -36,7 +36,7 @@ cover:
             blocks:
               - {each: names, blocks: [{text: "{.}", above: 8.4}]}
               - {text: "{designation}", left: 57.6, above: 8.4}
-      - width: 230.4
+      - width: 244.8
         valign: top
         blocks:
           - {text: "{case_number}", above: 8.4}

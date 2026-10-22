@@ -88,7 +88,7 @@ return require("latex.xdoc")({
     {
       ["columns"] = {
         {
-          ["width"] = 230.4,
+          ["width"] = 216,
           ["blocks"] = {
             {
               ["each"] = "caption",
@@ -120,7 +120,7 @@ return require("latex.xdoc")({
           },
         },
         {
-          ["width"] = 230.4,
+          ["width"] = 244.8,
           ["valign"] = "top",
           ["blocks"] = {
             {
