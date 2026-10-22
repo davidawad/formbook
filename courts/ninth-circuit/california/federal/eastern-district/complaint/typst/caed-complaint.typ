@@ -49,8 +49,10 @@
 /// Inline markdown (for names with *et al.*, etc.).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
-/// One single-spaced line block (a paragraph of its own) with explicit space above it.
-#let line-block(above: 0pt, body) = block(width: 100%, above: above, below: 0pt, {
+/// One single-spaced line block (a paragraph of its own) with explicit space above it; an empty line keeps its height
+/// (as an empty Word paragraph does).
+#let line-block(above: 0pt, body) = block(width: 100%, above: above, below: 0pt,
+  height: if body == "" { pitch-single } else { auto }, {
   set text(..edges(pitch-single))
   if type(body) == str { inl(body) } else { body }
 })
