@@ -1,0 +1,50 @@
+# Massachusetts Appeals Court (massappct): motion with supporting argument (motion-brief; MRAP 15, 20(b)). The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to MRAP 20(b)(2)(A) (../../rules.md, MASSAPPCT-MOT-*); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # MASSAPPCT-MOT-002 (MRAP 20(b)(2)(A)): 12 point or larger
+pitch:
+  body: 27.6              # MASSAPPCT-MOT-002: double-spaced (Word's double, 2 x 1.15 x 12 pt: 2.6 lines an inch)
+  single: 13.8            # caption, headings, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MASSAPPCT-MOT-002: top and side margins at least 1 inch
+indent: 36
+page_number: {align: center, from: 1}   # every page numbered at the foot
+footnote: {size: 12, gap: 7}
+quote: {left: 36, right: 36, above: 7.2, below: 10.8}
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 9.6}
+  - {bold: true, hang: 36, above: 12, below: 7.2}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 7.2}
+# MASSAPPCT-MOT-001 (MRAP 20(b)(2)(A)): on the first page, the court, the county and the docket number, the title of
+# the case, and the document's descriptive title.
+front:
+  - {text: "COMMONWEALTH OF MASSACHUSETTS", align: center, bold: true}
+  - columns:
+      - blocks:
+          - {text: "{county}"}
+      - blocks:
+          - {text: "{case_number}", align: right}
+    above: 3.6
+  - {text: "{caption}", left: 36, above: 7.2}
+  - {text: "{title}", align: center, bold: true, above: 7.2, below: 7.2}
+# The signature block right of centre, never split; then the certificate of service (MRAP 13(e)), signed.
+closing:
+  - group:
+      - {text: "{signature.intro}", left: 230.4, optional: true}
+      - each: signature.signers
+        blocks:
+          - {text: "{name}", underline: true, left: 230.4, above: 14.4}
+          - {text: "{lines}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 7.2}
+    above: 7.2
+  - when: service
+    blocks:
+      - group:
+          - {text: "Certification of Service", align: center, bold: true, upper: true, below: 9.6}
+          - {text: "{service.paragraphs}", pitch: body, indent: 36}
+          - each: service.signature.signers
+            blocks:
+              - {text: "{name}", underline: true, left: 230.4, above: 14.4}
+              - {text: "{lines}", left: 230.4}
+          - {text: "{service.signature.lines}", left: 230.4, optional: true, above: 7.2}
+        above: 28.8
