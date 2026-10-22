@@ -7,10 +7,10 @@ Folder: `courts/ninth-circuit/nevada/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer, see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (the whole 11-page motion: motion, memorandum, conclusion, signature, certificate of service) |
-| typeface | face required: **none** (LR IA 10-1(a)(3) sets size only: "Text must be size 12 font or larger"; read 2026-10-15 from the court's 2020 local rules PDF). Substitute: none needed; **EB Garamond** kept (no-face default, `docs/FONTS.md`). Fit: n/a. Embedded: EBGaramond Regular, Bold, Italic (`pdffonts`). |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| typeface | face required: **none** (LR IA 10-1(a)(3) sets size only: "Text must be size 12 font or larger"). Template face: **Times New Roman** 12 pt, the house face (docs/FONTS.md) and the filed exemplar's face and size; was 13 pt for EB Garamond. Embedded: Times New Roman Regular, Bold, Italic (`pdffonts`), the same faces in the typst and docx PDFs. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `usage/OUTPUT-motion-brief.docx.pdf`, 11 pages each, typst 0.15.0 and LibreOffice, vendored fonts only, no warnings (re-rendered 2026-10-22) |
 | overlay | ok: `usage/OVERLAY-lynch-motion-to-dismiss.pdf` and `.txt` (pairing by word overlap; see below; re-run 2026-10-15) |
-| pages reviewed | 11 of 11 (every page rasterized at 60 dpi and viewed on 2026-10-15) |
+| pages reviewed | 11 of 11 on each engine (rasterized at 60 dpi and viewed on 2026-10-22; see Visual review) |
 | BLOCKED | none. Tier-2 coverage is short of the eval loop's "two or three filers" (see Known gaps 1). |
 
 ## Governing rules
@@ -26,7 +26,7 @@ Federal rules: Fed. R. Civ. P. 12(b) (LII text, https://www.law.cornell.edu/rule
 | NVD-MOT-003 | LR 7-2(d) | Failure to file points and authorities in opposition constitutes consent. | Not a template matter; recorded for the author |
 | NVD-FORM-001 | LR IA 10-1(a)(1) | Double-spaced lines of text; lines numbered consecutively from 1 on the left margin of each page, no more than 28 per page. The caption, the court title, the case name and quotations are exempt from double spacing. | `lines-per-page = 28`, `pitch`, `line-numbers()` |
 | NVD-FORM-002 | LR IA 10-1(a)(2) | Legible, one side of each page. | PDF output is one-sided |
-| NVD-FORM-003 | LR IA 10-1(a)(3) | Text 12 point or larger. | `type-size = 13pt` (see Known gaps 2); footer 12 pt |
+| NVD-FORM-003 | LR IA 10-1(a)(3) | Text 12 point or larger. | `type-size = 12pt`; footer 12 pt |
 | NVD-FORM-004 | LR IA 10-1(a)(4) | Quotations over 50 words indented and single spaced. | `memorandum()`: a `>` quotation is single spaced and indented 0.5 in on both sides |
 | NVD-FORM-005 | LR IA 10-1(a)(5) | All pages numbered consecutively. | `footer-block()`, plain page number |
 | NVD-FORM-006 | LR IA 10-1(a)(6) | Margins at least one inch on all four sides. | `top-margin = 1in`, `bottom-margin = 1in`; `pitch` is set so the 28 lines fit between them (Known gaps 3) |
@@ -40,11 +40,11 @@ Not produced by this template: the proposed order (LR 7-2(f) applies only if the
 
 ## Layout
 
-- Numbered lines 1 to 28 down the left margin on a grid of 9 in / 28 = 23.14 pt, starting at the top margin. Double rule at the text's left edge, single rule at its right (the pleading form).
+- Numbered lines 1 to 28 down the left margin, one per 23 pt line box from the top margin (28 x 23 pt = 644 pt between the 1 in margins). Double rule at the text's left edge, single rule at its right (the pleading form).
 - First page: counsel block single-spaced from line 1; a blank numbered line; the court title (bold, two lines); a blank line; the caption box (parties at left with a rule at right and bottom, separator "vs."; "Case No." and the title at right). The motion begins on the same page, after a blank line, with no page break (as in the exemplar).
-- Memorandum: paragraphs double spaced with a 0.5 in first-line indent and not numbered. Headings: level 1 centered bold caps (MEMORANDUM OF POINTS AND AUTHORITIES); level 2 bold with its roman numeral, hanging when it wraps (I., II., III.); level 3 bold with its letter, hanging (A., B., C., D.). A heading is sticky: it stays with the block after it, so it never ends a page, and a long paragraph can still break across pages.
-- Quotations: single spaced, indented 0.5 in on both sides, measured at the indented width so the grid stays exact.
-- Signature block: "Dated this ..." then the firm, "By: /s/" the signer and the signer's lines, at 2.6 in from the left.
+- Memorandum: paragraphs double spaced with a 0.5 in first-line indent and not numbered. Headings: level 1 centered bold caps (MEMORANDUM OF POINTS AND AUTHORITIES); levels 2 and 3 bold, half an inch in, the label (I., A.) in a half-inch box and the text hanging after it. A heading is sticky: it stays with the block after it, so it never ends a page, and a long paragraph can still break across pages.
+- Quotations: single spaced (13.8 pt lines), indented 0.5 in on both sides, 4.6 pt clear above and below; a number opening a quoted paragraph is text.
+- Signature block, kept on one page with the last paragraph: "Dated this ...", a blank line, then the firm, "By: /s/" the signer and the signer's lines, at 2.6 in from the left.
 - Certificate of service: its own page after the signature; the paragraph, the service list (single spaced, indented) and the employee signature.
 
 ## Markdown contract (for samples)
@@ -69,44 +69,47 @@ Naming: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, with th
 
 ## Visual review (Gate 2 record: every page rendered at 60 dpi and viewed)
 
-| Page | What it is | Finding |
-|---|---|---|
-| 1 | Counsel block (lines 1 to 10), court title, caption with "vs.", title at right, motion opening | OK. |
-| 2 | MEMORANDUM heading, I. INTRODUCTION with A. and B., paragraphs | OK. Headings follow the exemplar's line-to-line spacing. |
-| 3 | II. heading (two lines, hanging), the 12(b) quotation, the standard of review | OK after the fix: the quotation's last line had overlapped the next paragraph (its height was measured at full width, not the indented width). Now measured at the indented width and re-checked. |
-| 4 | Standard of review continued; the Iqbal block quotation; "Id. at 1950." | OK. |
-| 5 | III. A. heading (three lines), NRS 38.310 quotation (numbered items 1 and 2), NRS 116.31181 quotation with items (a) to (c) | OK after the fix: the (a) to (c) items had overlapped; now measured and re-checked. |
-| 6 | Continuation of A.; B. heading and its first paragraph | OK. The earlier blank block at the foot of this page is gone (the sticky heading now stays with a breakable paragraph). |
-| 7 | B. continued (the facts paragraph) | OK. Four blank lines at the foot: the C. heading moved to the next page with its text (intended, heading kept with text). |
-| 8 | C. heading (three lines), statute quotation, the authority paragraphs | OK. |
-| 9 | C. continued; D. heading (two lines) and IIED paragraphs | OK. |
-| 10 | Continuation of D.; III. CONCLUSION; "Dated this 6th day of April, 2026."; firm and signature block | OK. |
-| 11 | CERTIFICATE OF SERVICE on its own page: paragraph, service list, employee signature | OK. |
+Re-done 2026-10-22 for the cross-engine port (fb-595.68.23): all 11 pages of `usage/OUTPUT-motion-brief.typst.pdf` and all 11 of `usage/OUTPUT-motion-brief.docx.pdf` rasterized at 60 dpi and viewed side by side.
 
-Reviewed pages: 11 of 11.
+| Page | What it is | Finding (typst and docx) | Status |
+|---|---|---|---|
+| 1 | Counsel (single lines from line 1, the blank line kept), court title on lines 9 and 10, caption with "vs." (the long party name wraps "I-" / "X,"), title at right; the motion's two paragraphs | OK on both. The motion's lines sit between the line numbers (the caption's height is a number of single lines, which the docx cannot round to a numbered line). | ACCEPTED (tier 2: the exemplar's own text does not sit on its numbers either) |
+| 2 | MEMORANDUM heading, I. INTRODUCTION with A. and B. (labels in half-inch boxes, text hanging), paragraphs | OK; every line on a numbered line. | OK |
+| 3 | II. heading (two lines), the 12(b) quotation (single spaced, 0.5 in in on both sides, 4.6 pt clear above and below), the standard of review | OK; the text after the quotation sits between the numbers, as on page 1. | ACCEPTED (as page 1) |
+| 4 | Standard of review continued; the Iqbal quotation; "Id. at 1950." | OK. | OK |
+| 5 | III. A. heading (three lines), the NRS 38.310 quotation (items "1." and "2." as typed), the NRS 116.31181 quotation with items (a) to (c), its closing quotation mark | OK (the closing mark was an opening one in typst before this port). | OK |
+| 6 | A. continued; B. heading (two lines) and its paragraphs | OK. | OK |
+| 7 | B. continued; C. heading (three lines) | OK. | OK |
+| 8 | C. continued | OK. | OK |
+| 9 | C. continued; D. heading (two lines) and the IIED paragraphs; five numbered lines left blank at the foot | OK: the conclusion moves on with the signature block. | OK |
+| 10 | III. CONCLUSION, its paragraph, "Dated this ...", firm and signature block at 2.6 in | OK; the signature no longer stands alone on its page. | OK |
+| 11 | CERTIFICATE OF SERVICE on its own page: paragraph, service list at 0.5 in, employee signature at 2.6 in | OK. | OK |
+
+Reviewed pages: 11 of 11 on each engine.
 
 ## Known gaps and open choices
 
 1. **One filer only.** The eval loop asks for two or three exemplars from different filers before tier 2 is judged. Searches (CourtListener RECAP API, `type=r`, `court=nvd`, motions to dismiss filed 2025-06 to 2026-10): Advanced Solution v. New Horizon (2:26-cv-00958, 9 pp., Wiley Petersen), Logan v. Citizen's Bank (2:26-cv-00887, 9 pp., Malcolm Cisneros), Browning v. Station Casinos (2:26-cv-00603, 31 pp.) and Riskon v. Zest Labs (2:25-cv-02042, 33 pp.) were found; only the first two are short enough to compare. Both were downloaded and checked for a text layer, but not saved as exemplars or compared in full. Tier 2 is therefore **not** judged against a second filer yet.
-2. **Type size.** The rule requires 12 pt or larger (LR IA 10-1(a)(3)). Body text is 13 pt EB Garamond (the rule names no face, so EB Garamond stays; see the typeface row), chosen so it reads at about the size of the exemplar's 12 pt Times New Roman. EB Garamond at 12 pt would be the minimum-compliant alternative.
-3. **Line pitch.** The exemplar uses a 24 pt grid, so its 28th line sits at about 10.3 in, which breaches the one-inch bottom margin (LR IA 10-1(a)(6)). This template fits the 28 lines between the one-inch margins (pitch 23.14 pt). **This departs from the exemplar's grid; David should confirm the reading.** The same choice is made in the complaint template.
+2. **Type size.** The rule requires 12 pt or larger (LR IA 10-1(a)(3)). Body text is 12 pt Times New Roman, the exemplar's size; the 13 pt of the earlier template was chosen for EB Garamond and was dropped with that face.
+3. **Line pitch.** The exemplar uses a 24 pt grid, so its 28th line sits at about 10.3 in, which breaches the one-inch bottom margin (LR IA 10-1(a)(6)). This template fits the 28 lines between the one-inch margins (pitch 23 pt, a whole number of twips so Word sets the same lines). **This departs from the exemplar's grid; David should confirm the reading.** The same choice is made in the complaint template.
 4. **Filed errors kept as filed.** The exemplar cites "Fed. R. Civ. P. 12(b)(5)" in I.B (the motion relies on 12(b)(6)), says "that tenant 'is inapplicable'" (for "tenet"), . The sample keeps them so that the overlay matches the filing. The author should correct them before filing a version of their own.
 5. **Case names italic.** Italics are applied to case names, *Id.*, and signals in the sample following standard citation form. The exemplar's text layer has no italic markup; the rendered page images show italics for case names in the exemplar. The italics in the sample are a transcription convention, not a check of every italic in the exemplar.
 6. **Page limit (LR 7-3(b)).** 24 pages for this motion; the template does not count pages. The sample is 11 pages.
 7. **Disclosure statement (LR 7.1-1).** Not generated; the defendant has already appeared in this action, so the statement is for the author to decide whether it is due with this filing.
 8. **Judge standing orders** can change the form. Not reflected.
 9. **Certificate language.** The exemplar's certificate cites NRCP 5(b) and NEFCR 9. Those rules are not in the D. Nev. Local Rules text reviewed; the sample reproduces the exemplar's text as filed and the template does not check the citation.
-10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this is a doc-type folder under the district court, so the gates were not run and no pass stamp is written. The brief also forbids editing `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
+10. **Check scripts.** `tools/check.sh` runs on this folder (typst and docx; the stamps are in `usage/`).
 
 [Parent: nevada/federal/district](../README.md)
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion-brief.lua` writes the cover, the memorandum, the signature block and the certificate of service; `docx/render.sh` (run by `tools/render-docx.sh`). Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8), 11 pages, all 11 rendered at 60 dpi and viewed.
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.68.23), and `eval.yaml` gates it (`params.cross_engine: gate`): the docx render breaks every line and every page where the typst render does (XENG-001..003, 374 of 374 lines).
 
-- Matches the typst output: the same page as the complaint (letter; margins; EB Garamond 13 pt; 28 numbers on a 462-twip grid; pleading rules); caption box with the separator "vs." and the title in bold; the memorandum on the grid after the caption on page 1; centered caps for level 1 headings and hanging bold for levels 2 and 3; the certificate of service on its own page, with the recipients at 0.5 in and the signature at 2.6 in; page number alone in the footer.
-- Differs from typst: the 28 numbers sit in a header text box (see the complaint's Engines note); block quotations are a borderless table cell indented 0.5 in on both sides, with the row at least the grid-rounded height of an estimate, so the text after a quotation stays on the grid (an over-estimate leaves a little white space under the quotation); a quotation's "(b)" and "(a)" markers are typed as the author wrote them; page breaks follow LibreOffice.
-- Fonts: as for the complaint, run with a `FONTCONFIG_FILE` that lists only the repo's `fonts/` directory.
-- Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML with every style it uses defined.
+- **Vertical model** (as the complaint's, see its Engines note): numbered lines in 23 pt boxes (460 twips), single lines in 13.8 pt boxes (276 twips), every other length a multiple of 4.6 pt, a run of single lines 0.5 pt down and 4.1 pt after, so each line number stays on the same text line in both PDFs. A quotation has 4.6 pt more above and below it.
+- **typst** (`typst/nvd-motion-brief.typ`): Times New Roman 12 pt (was 13 pt, chosen for EB Garamond); the last paragraph (the conclusion) and the signature block in one block that does not break.
+- **docx** (`docx/reference.xml`, `docx/nvd-motion-brief.lua`): the styles are the cross-engine recipe (`base="xengine"`) in the typst face (`{font}`); the filter writes every paragraph with its own spacing, the caption as a one-row table, a quotation as paragraphs (a list inside it as text, "1. ..."), the footer through `$FORMBOOK_FOOTERS` (the 28 line numbers in a text box anchored to the page, the page number) and the last section through `$FORMBOOK_FINAL`. No shell: `docx/render.sh`, `docx/build-reference.sh` and the committed `reference.docx` are gone. pandoc reads without `fancy_lists`, so a quotation's "(a)" and "(b)" stay text, as in typst.
+- **Differs from typst** (no text effect): the pleading rules are Word page borders, which run the height of the text area, not of the page.
+- Not verified in Word (only LibreOffice here).
 
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and a doc-type folder has neither (this change may not add them), so the gates did not run and `usage/.check-docx.txt` was not written.
+`sh tools/check.sh <dir>`: 9 passed, 0 failed (typst); `--engine docx`: 13 passed, 0 failed, XENG-001..003 PASS.

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Nev. motion to dismiss's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; LR IA 10-1(a)(3) names no face
+     and asks 12 pt or larger: size 24 half points); Body Text and the headings in exact 23 pt line boxes (460 twips,
+     typst pitch: the 28 numbered lines of LR IA 10-1(a)(1) between the 1 in margins of LR IA 10-1(a)(6)), with no
+     space of their own; single lines in 13.8 pt boxes (276 twips, typst pitch-single). docx/nvd-motion-brief.lua writes
+     every paragraph's own spacing, the footer (the 28 line numbers in a text box anchored to the page, the page number and any
+     paper's title, its last line box ending 0.5 in above the page foot: footer 720) and the last section (letter
+     page, margins 1 in top, bottom and right, 1.5 in left; the pleading rules as page borders). pandoc-from without
+     fancy_lists: a "(a)" at the start of a line is text, as typst's cmarker reads it. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="460" single="276" indent="720" heading="460" heading-before="0" heading-after="0" footer="720" pandoc-from="markdown+smart-fancy_lists"/>
