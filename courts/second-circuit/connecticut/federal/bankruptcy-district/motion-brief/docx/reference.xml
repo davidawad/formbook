@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The ctb motion-brief Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; no D. Conn. rule names a face)
+     at 12 pt (size 24 half points; D. Conn. L. Civ. R. 7(a)(5) via Local Bankr. R. 7007-1: at least 12 point); Body
+     Text in exact 24 pt line boxes (480 twips, typst pitch-body; L. Civ. R. 10 via Local Bankr. R. 5005-1: double
+     spaced) with a half-inch first-line indent (typst para-indent); single lines in 13.8 pt boxes (276 twips, typst
+     pitch-single). Replaced here, as the typst template sets them: the heading levels at the type size on the
+     body pitch with no space of their own (1 centred bold; 2 bold left; 3, unused, centred bold). The cover (caption,
+     title, the oral-argument legend in its footer), the tables of contents and authorities (lower roman), the body
+     (arabic from 1; the page number and the docket line in the footer; letter, 1 in margins, L. Civ. R. 10) and the
+     signature blocks are written by docx/ctb-motion-brief.lua. Twips: 20 x pt. pandoc-from: lettered sub-items ("a. ...")
+     stay paragraphs, as typst reads them. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="markdown+smart-fancy_lists" size="24" body="480" single="276" indent="720" footer="720">
+<w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="0"/></w:pPr><w:rPr><w:b/><w:bCs/><w:color w:val="000000"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:jc w:val="left"/><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/><w:bCs/><w:color w:val="000000"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:styleId="Heading3"><w:name w:val="heading 3"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="2"/></w:pPr><w:rPr><w:b/><w:bCs/><w:color w:val="000000"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+</reference>
