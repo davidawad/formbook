@@ -5,9 +5,9 @@ Doc type `motion-brief`: the memorandum of law that accompanies a motion under F
 ## Status
 
 - Exemplar: yes, one filer (American Honda Finance Corporation, *In re Martin*, Case 20-10454, filed 2021-01-08, 13 pp.). See `usage/SOURCE.md`.
-- Render: ok (`sh tools/render.sh <this dir> usage/INPUT-motion-brief.md`, 12 pages, no typst warnings, EB Garamond only).
+- Render: ok (`sh tools/render.sh <this dir> usage/INPUT-motion-brief.md`, 13 pages, no typst warnings, Times New Roman only; docx 13 pages, the same breaks).
 - Overlay: ok (`sh tools/overlay.sh <this dir> honda-707-memorandum`, `usage/OVERLAY-honda-707-memorandum.pdf` and `.txt`).
-- Pages reviewed: 12 of 12 (every page of `usage/OUTPUT-motion-brief.typst.pdf` rendered at 60 dpi and looked at, after the last template change).
+- Pages reviewed: 13 of 13 on both engines (every page of `usage/OUTPUT-motion-brief.typst.pdf` and `.docx.pdf` rendered at 50 dpi and looked at, after the cross-engine port, fb-595.68.27).
 - Second filer: not collected.
 
 ## Governing rules
@@ -19,12 +19,12 @@ Verified 2026-10-14. Rule text quoted from the sources; the court's local rules 
 | ILNB-CAP-001 | Fed. R. Bankr. P. 9004(b) (<https://www.law.cornell.edu/rules/frbp/rule_9004>) | A document filed must contain a caption with the court's name, the case's title, the case number and a brief designation of the document's character. | Court name, title block, debtor, case number, descriptive title. |
 | ILNB-CAP-002 | N.D. Ill. Bankr. L.R. 5005-2(C)(5) (<https://www.ilnb.uscourts.gov/sites/ilnb/files/Local-Rules-9-1-2024.pdf>, p. 20) | "The first page must contain at the top the case caption with the number of the case or proceeding, the chapter of the bankruptcy case, the name of the assigned judge, and a descriptive title." | Chapter, case number, judge (`caption.judge`), title. |
 | ILNB-CAP-003 | LBR 5005-1(C) (same PDF, p. 18) | "The caption of each document must identify the division of the court to which the case is assigned." | "EASTERN DIVISION" from `division` in the frontmatter. The Honda exemplar does not show a division line; the rule requires one. |
-| ILNB-FORM-002 | LBR 5005-2(C)(2) | "Typed documents must be double-spaced, and the font must be at least 12 points." | EB Garamond 13 pt (see Decisions). |
-| ILNB-FORM-003 | LBR 5005-2(C)(2) | Double spacing. | 24.0 pt baseline pitch at 13 pt, measured on page 2 of the render. |
+| ILNB-FORM-002 | LBR 5005-2(C)(2) | "Typed documents must be double-spaced, and the font must be at least 12 points." | Times New Roman 12 pt, footnotes included (see Decisions). |
+| ILNB-FORM-003 | LBR 5005-2(C)(2) | Double spacing. | 27.6 pt baseline pitch (Word's double line at 12 pt, as in the filed memorandum); caption, headings, quotations, footnotes and signature single (13.8 pt). |
 | ILNB-FORM-004 | LBR 5005-2(C)(3) | "Margins (top, bottom, right, and left) must be no less than one inch." | 1 in on all sides. |
 | ILNB-FORM-005 | LBR 5005-2(C)(4) | "Pages must be consecutively numbered." | Arabic page number, bottom centre, from page 1. |
 | ILNB-FORM-006 | LBR 5005-2(C)(11) | Paper: "on 8½x11-inch white paper". | US Letter. |
-| ILNB-LIMIT-001 | LBR 5005-2(D) (same PDF, p. 20) | "No motion, objection, application, brief, memorandum, response, or reply may exceed 15 pages without leave of court." | Every page counts (caption and signature pages included). The template asserts `counter(page).final() <= 15` and the build fails otherwise. Honda's memorandum is 13 pages. |
+| ILNB-LIMIT-001 | LBR 5005-2(D) (same PDF, p. 20) | "No motion, objection, application, brief, memorandum, response, or reply may exceed 15 pages without leave of court." | Every page counts (caption and signature pages included). The template asserts `counter(page).final() <= 15` and the build fails otherwise. `eval.yaml` sets `page_limit: 15`, so DEF-LEN-001 checks it on every engine. Honda's memorandum is 13 pages. |
 | ILNB-SIG-001 | LBR 5005-2(C)(6) | "The last page must contain the name, mailing address, email address, and telephone number of the attorney signing the document." | `signature.counsel` block at the end. |
 | ILNB-SIG-002 | LBR 5005-2(C)(9) | Electronic signature per the Administrative Procedures. | "/s/ Name" and "One of Its Attorneys" from `signature`. |
 | ILNB-HEAD-001 | Layout choice | (none) | Headings: level 1 "I.", level 2 "A.", level 3 "1.", level 4 "a."; bold; hanging. Never the last line of a page. |
@@ -55,10 +55,10 @@ Pages 1 to 5 pair one to one. From page 6 our pages pair one page later: the fil
 
 ## Decisions (left open by the rules, or interpreted)
 
-- **Font: EB Garamond, 13 pt.** Same reasoning as the adversary-complaint template: 12 pt minimum; EB Garamond sets smaller than Times at the same size; 13 pt is the size the cand motion template uses for the same face.
+- **Font: Times New Roman, 12 pt** (vendored), on every engine. The rule requires at least 12 pt; the filed memorandum is Times New Roman. Was EB Garamond 13 pt before the cross-engine port (fb-595.68.27).
 - **Footnotes, block quotations and the caption are single spaced.** LBR 5005-2(C)(2) says "typed documents must be double-spaced" with no exemption. The filed exemplar single-spaces its footnotes. **Literal-reading question for David**: if footnotes must be double spaced, change the footnote rule in `typst/ilnb-motion-brief.typ`.
 - **Headings.** The rules set no heading style. The template generates the numerals ("I.", "A.", "1.", "a.") from the heading level, as the exemplar does by hand. Level-1 headings are typed in capitals in the markdown (the exemplar's style); the template does not uppercase them because `upper()` cannot take italic case names.
-- **Signature block** follows the exemplar: "Respectfully submitted," the party, "/s/" and "One of Its Attorneys", then counsel. It is sticky with the closing text so it does not stand alone.
+- **Signature block** follows the exemplar: "Respectfully submitted," the party, "/s/" and "One of Its Attorneys", then counsel. "Dated" sits at the margin on the line of "Respectfully submitted,"; the block is kept together on one page.
 - **No table of contents or table of authorities.** The exemplar has none; the memorandum is under 15 pages. Not generated.
 
 ## Known gaps
@@ -81,11 +81,13 @@ Pages 1 to 5 pair one to one. From page 6 our pages pair one page later: the fil
 - Render 2: the Honda sample's section headings were in title case; changed to capitals as in the exemplar.
 - Render 3: paragraph spacing was zero, so paragraphs sat 17 pt apart instead of 24 pt; paragraph spacing is now the body leading.
 - Final pass: all 12 pages of the final render viewed; body pitch 24 pt within and between paragraphs (measured on page 2); no open defects beyond the Decisions above.
+- Cross-engine port (fb-595.68.27): Times New Roman 12 pt, 27.6 pt double pitch as filed (13 pages, as filed; was 12 at 24 pt), single 13.8 pt lines; heading labels bold, as filed. All 13 pages of both renders viewed: caption, title, headings, footnotes and signature look as intended; no open defects beyond the Decisions above.
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default; `ilnb.lua` lays out the cover, caption, heading labels and signature block). Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md`.
+Typst is the reference; the docx engine follows the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate") and breaks every line and page as typst does (`params.cross_engine: gate` in `eval.yaml`).
 
-- **Matches the typst form (in the styles and filter; not checked against a rendered page):** EB Garamond 13 pt; exact 24 pt line pitch; 0.5 in first-line indent for body text; US Letter with 1 in margins; centred 12 pt PAGE number in the footer; single-spaced block quotations; headings hang with labels "I.", "A.", "1.", "a." added by the filter as text (not list numbering), bold, not capitalised.
-- **Differs or unverified:** the caption is a two-column table whose party column is ruled on the right and bottom, with widths taken from the typst layout (3.4 in, 0.3 in gutter), but its borders are not verified against the typst layout. The signature block stacks the "Dated" line above the signature column (typst sets them side by side). The 15-page limit (ILNB-LIMIT-001) is asserted by the typst build only; the docx has no page count. The docx was validated (zip and XML well-formed; every `pStyle` defined; one footer relation resolves); it was not opened in Word.
-- **BLOCKED:** `docx.pdf` (`usage/OUTPUT-honda-707-memorandum.docx.pdf`) is not produced because `soffice` (LibreOffice) is not installed on this box, so `tools/render.sh --engine docx` stops after writing `usage/OUTPUT-motion-brief.docx`. Pages reviewed: 0. The docx gates (`tools/check.sh --engine docx`) cannot run; the 15-page check (ILNB-LIMIT-001) and the page-by-page review are not done. Pagination in Word may differ from LibreOffice.
+- **typst** (`typst/ilnb-motion-brief.typ`): pitches, not leadings: 27.6 pt body lines, 13.8 pt single lines, a single line (13.8 pt) around headings and quotations and between the caption's and the signature's groups, a double line (27.6 pt) around the caption and the title and before the signature; footnotes 12 pt in 13.8 pt lines, 7 pt apart, 12.6 pt clearance.
+- **docx** (`docx/reference.xml`, `base="xengine"` with the pitches in twips and `{font}`; `docx/ilnb-motion-brief.lua`): no shell, no committed `reference.docx` (`fb render` builds it). The filter writes the court lines, caption table (the party column ruled on the right and bottom), title, headings (label, tab, hanging text, an outline level), quotations and signature with `xe.spacing` in the typst pitches; pandoc writes the body paragraphs (Body Text) with their footnotes.
+- **Checks** (`fb check`): typst 9 passed, 0 failed; docx 13 passed, 0 failed, XENG-001..003 PASS (13 pages, 310/310 lines); DEF-LEN-001 13 of 15 pages.
+- **latex**: no latex template in this folder.

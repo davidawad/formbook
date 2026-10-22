@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The N.D. Ill. bankruptcy memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the
+     face of the typst template ({font}, Times New Roman) at 12 pt (ILNB-FORM-002, LBR 5005-2(C)(2): at least 12
+     points, footnotes included; size 24 half points); Body Text in exact 27.6 pt line boxes (typst pitch-body,
+     ILNB-FORM-003 double spacing, Word's double line as filed) with a half-inch first-line indent; the court lines,
+     caption, title, headings, quotations, footnotes and signature in 13.8 pt boxes (typst pitch-single), a heading a
+     single line from the text on either side; 7 pt after each footnote (typst note-gap), a note split over pages
+     where typst splits it (no keep-lines); letter page with 1-inch margins (ILNB-FORM-004, -006) and a centered page
+     number (ILNB-FORM-005), its line 36.75 pt above the page foot (735 twips: where typst sets it, footer-descent
+     30 %). docx/ilnb-motion-brief.lua writes the cover, headings, quotations and signature with their own spacing;
+     pandoc writes the body paragraphs and their footnotes. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="276" heading-before="276" heading-after="276" note="276" note-after="140" footer="735">
+  <w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="140" w:line="276" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+</reference>

@@ -7,6 +7,7 @@
 // same file (schema: ../README.md).
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
@@ -14,14 +15,28 @@
 
 #let font-family = ("Times New Roman", "Liberation Serif")         // ILNB-FORM-002: a proportionally spaced font; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                    // ILNB-FORM-002: at least 12 point, footnotes included (the rule floor).
-#let line-pitch = 24pt                   // ILNB-FORM-003: double spacing, a 24 pt baseline pitch.
-#let body-leading = 1.091em              // extra space between body lines: the ascender-to-descender box set below is 0.909em, so the pitch is 2.0em = line-pitch at 12 pt.
-#let single-leading = 0.596em            // caption, counsel, signature block, footnotes, quotations, headings (ILNB-FORM-003 exception, README.md) (1.505em pitch).
 #let page-margin = 1in                   // ILNB-FORM-004: no margin less than one inch.
 #let para-indent = 0.5in                 // first-line indent of body paragraphs.
-#let heading-tab = 0.5in                 // hanging indent of a heading's label.
+#let heading-tab = 0.5in                 // a heading's label box; each deeper level starts this much further in.
+#let quote-inset = 0.5in                 // block quotations, both sides.
+#let caption-left = 3.4in                // width of the party column of the caption (its rules on the right and bottom).
+#let caption-inset = 0.15in              // the party text stands off the column's right rule.
+#let caption-rule = 0.75pt               // the caption's rules; Word adds the bottom rule's width to the caption's height.
+#let caption-gutter = 0.3in              // the case column stands off the rule.
+#let designation-indent = 1.4in          // "Debtor." under the debtor's name.
+#let sig-column = 2.7in                  // the signature column starts this far in ("Dated" to its left).
 #let max-pages = 15                      // ILNB-LIMIT-001: no memorandum may exceed 15 pages without leave of court (LBR 5005-2(D)).
-#let footer-size = 12pt                  // page numbers (ILNB-FORM-005)
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-body = 27.6pt                 // ILNB-FORM-003: double spacing, Word's double line in this face at 12 pt (2 x 13.8 pt), as in the filed memorandum.
+#let pitch-single = 13.8pt               // a single line, 1.15 x the type size: court lines, caption, title, headings, quotations, footnotes, signature (ILNB-FORM-003 exception, README.md).
+#let gap = pitch-single                  // around headings and quotations, between the court lines and the division, the caption's groups and the signature's.
+#let small-gap = gap / 2                 // between the rows of the case column and between quoted paragraphs.
+#let big-gap = pitch-body                // around the caption and the title, before the signature.
+#let note-gap = 7pt                      // after each footnote (Word: Footnote Text's space after).
+#let note-clearance = 12.6pt             // between the text and the footnote rule (Word's separator line).
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -40,19 +55,15 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// Inline markdown (for names with *pro hac vice*, case names, etc.).
+/// Inline markdown (a frontmatter value): smart quotes and emphasis, as pandoc reads it in the docx engine.
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
-/// Several single-spaced lines, one block per item. Items are markdown strings or content.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: single-leading, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => if type(i) == str { inl(i) } else { i }))
-}
-
-/// A single-spaced paragraph whose continuation lines are indented by `indent`.
-#let hang(indent, body) = par(
-  hanging-indent: indent, first-line-indent: 0pt, leading: single-leading, justify: false, body,
-)
+/// One single-spaced paragraph with explicit space above and below it.
+#let line-block(above: 0pt, below: 0pt, left: 0pt, body) = block(width: 100%, above: above, below: below, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  pad(left: left, body)
+})
 
 // ---------------------------------------------------------------------------
 // Headings: numbering and styles (ILNB-HEAD-001). Level 1 "I.", level 2 "A.", level 3 "1.", level 4 "a.".
@@ -77,13 +88,9 @@
 // ---------------------------------------------------------------------------
 
 #let court-title(meta) = {
-  set par(leading: single-leading, spacing: single-leading, justify: false)
-  align(center, text(weight: "bold", line-stack((
-    "IN THE UNITED STATES BANKRUPTCY COURT",
-    "FOR THE NORTHERN DISTRICT OF ILLINOIS",
-  ))))
-  v(line-pitch * 0.5)
-  align(center, text(weight: "bold", upper(need(meta, "division"))))
+  line-block(align(center, strong[IN THE UNITED STATES BANKRUPTCY COURT]))
+  line-block(below: gap, align(center, strong[FOR THE NORTHERN DISTRICT OF ILLINOIS]))
+  line-block(below: big-gap, align(center, strong(upper(inl(need(meta, "division"))))))
 }
 
 /// The caption: the party column (the debtor, and the adversary parties when there are any) and the case
@@ -92,84 +99,56 @@
 #let caption(meta) = {
   let cap = need(meta, "caption")
   let party(p) = {
-    let rows = p.names
-    rows.push(pad(left: 1.4in, inl(p.designation)))
-    line-stack(rows)
+    for n in p.names { line-block(inl(n)) }
+    line-block(left: designation-indent, inl(p.designation))
   }
   let left = {
-    line-stack(("In re:",))
-    v(single-leading)
+    line-block(below: gap)[In re:]
     party(cap.in_re)
     if "adversary" in cap and cap.adversary != none {
-      v(line-pitch * 0.5)
       for (k, p) in cap.adversary.parties.enumerate() {
-        if k > 0 {
-          v(line-pitch * 0.5)
-          line-stack(("v.",))
-          v(line-pitch * 0.5)
-        }
-        party(p)
+        if k > 0 { line-block(above: gap)[v.] }
+        block(above: gap, below: 0pt, party(p))
       }
     }
   }
-  grid(
-    columns: (3.4in, 1fr),
-    column-gutter: 0.3in,
-    block(width: 3.4in, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 0.15in, bottom: 0.12in), left),
-    block(inset: (top: 0pt), {
-      set par(leading: single-leading, spacing: single-leading, justify: false)
-      let rows = ()
-      if "chapter" in cap { rows.push(cap.chapter) }
-      rows.push("Case No. " + cap.case_number)
-      if "adversary" in cap and cap.adversary != none {
-        rows.push("Adv. Pro. No. " + cap.adversary.number)
-      }
-      if "judge" in cap { rows.push(cap.judge) }
-      stack(dir: ttb, spacing: line-pitch * 0.5, ..rows.map(r => inl(r)))
+  let rows = ()
+  if "chapter" in cap { rows.push(inl(cap.chapter)) }
+  rows.push[Case No. #inl(cap.case_number)]
+  if "adversary" in cap and cap.adversary != none { rows.push[Adv. Pro. No. #inl(cap.adversary.number)] }
+  if "judge" in cap { rows.push(inl(cap.judge)) }
+  block(above: 0pt, below: 0pt, grid(
+    columns: (caption-left, 1fr),
+    block(width: 100%, stroke: (right: caption-rule, bottom: caption-rule),
+      inset: (right: caption-inset, bottom: gap + caption-rule), left),
+    pad(left: caption-gutter, for (i, r) in rows.enumerate() {
+      line-block(below: if i < rows.len() - 1 { small-gap } else { 0pt }, r)
     }),
-  )
+  ))
 }
 
 #let cover(meta) = {
   court-title(meta)
-  v(line-pitch)
   caption(meta)
-  v(line-pitch)
-  align(center, block(width: 100%, sticky: true, {
-    set par(leading: single-leading, spacing: single-leading, justify: false)
-    text(weight: "bold", upper(need(meta, "title")))
-  }))
-  v(line-pitch)
+  line-block(above: big-gap, below: big-gap, align(center, strong(upper(inl(need(meta, "title"))))))
 }
 
 // ---------------------------------------------------------------------------
 // Signature block (ILNB-SIG-001..002): signed by counsel, with the signing attorney's name, mailing
-// address, email and telephone on the last page (LBR 5005-2(C)(6)). Single spaced, as in the exemplar.
+// address, email and telephone on the last page (LBR 5005-2(C)(6)). Single spaced, as in the exemplar:
+// "Dated" at the margin, the signature column to its right, counsel at the margin below; kept together.
 // ---------------------------------------------------------------------------
 
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  block(width: 100%, sticky: true, {
-    grid(
-      columns: (2.5in, 1fr),
-      column-gutter: 0.2in,
-      line-stack(("Dated: " + sig.date,)),
-      {
-        line-stack(("Respectfully submitted,",))
-        v(line-pitch * 0.5)
-        line-stack((sig.party,))
-        v(line-pitch * 0.5)
-        line-stack(("/s/ " + sig.signer,))
-        line-stack((sig.role,))
-      },
-    )
+  block(width: 100%, breakable: false, above: big-gap, below: 0pt, {
+    line-block[#box(width: sig-column)[Dated: #inl(sig.date)]Respectfully submitted,]
+    line-block(above: gap, left: sig-column, inl(sig.party))
+    line-block(above: gap, left: sig-column)[/s/ #inl(sig.signer)]
+    line-block(left: sig-column, inl(sig.role))
     for (k, g) in sig.counsel.enumerate() {
-      if k > 0 {
-        v(line-pitch * 0.5)
-        line-stack(([#"- and -"],))
-      }
-      v(line-pitch * 0.5)
-      line-stack(g.names + g.lines)
+      if k > 0 { line-block(above: gap)[#"- and -"] }
+      block(above: gap, below: 0pt, for l in g.names + g.lines { line-block(inl(l)) })
     }
   })
 }
@@ -180,49 +159,56 @@
 
 #let ilnb-motion-brief(meta, md) = {
   set document(title: need(meta, "title"), author: need(meta, "signature").signer)
-  set page(
-    paper: "us-letter",
-    margin: page-margin,
-    footer: context align(center, text(size: footer-size, counter(page).display("1"))),
-  )
-  set text(
-    font: font-family, size: type-size, lang: "en", region: "us",
-    hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
-  )
-  set par(
-    leading: body-leading, spacing: body-leading,
-    first-line-indent: (amount: para-indent, all: true), justify: false,
-  )
-  // The numbering function is what steps the heading counter; the labels are drawn by the show rule below.
-  set heading(numbering: heading-num)
-  set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
-  show footnote.entry: set text(size: type-size)
-  show footnote.entry: set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em)
+  // ILNB-FORM-005: a centered page number on every page, in a single-spaced line box (Word's footer).
+  set page(paper: "us-letter", margin: page-margin, footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display("1"))))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch.
+  show: xengine.with(pitch: pitch-body)
+  // A doubled sign stays with its number ("§§ 707"), as a single one does in xengine.
+  show regex("[§¶]{2} \\S+"): it => box(it)
 
-  // Block quotations: indented on both sides, single spaced (ILNB-FORM-003 exception, README.md).
-  show quote.where(block: true): it => pad(x: para-indent, block(width: 100%, {
-    set par(leading: single-leading, first-line-indent: 0pt, spacing: line-pitch * 0.5)
+  // Footnotes: 12 pt (ILNB-FORM-002), single-spaced (the entry sets its own leading: it does not inherit the
+  // body's); the mark, a space, the note (Word's footnote layout). LibreOffice splits a note anywhere (it keeps no
+  // widow or orphan line in a footnote): so does typst here.
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
+  show footnote.entry: it => {
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    set text(size: type-size, ..edges(pitch-single), costs: (widow: 0%, orphan: 0%))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
+    [#super(num) #note.body]
+  }
+
+  // Block quotations: indented on both sides, single spaced (ILNB-FORM-003 exception, README.md), half a line
+  // between their paragraphs.
+  show quote.where(block: true): it => block(width: 100%, above: gap, below: gap, pad(x: quote-inset, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt, spacing: small-gap)
     it.body
   }))
 
+  // Headings (ILNB-HEAD-001): bold, single-spaced, a single line from the text on either side, kept with the text;
+  // the label in a half-inch box at the level's indent, the text hanging after it.
+  // The numbering function is what steps the heading counter; the labels are drawn by the show rule.
+  set heading(numbering: heading-num)
   show heading: it => context {
     let nums = counter(heading).at(it.location()).slice(0, it.level)
     let lab = if it.numbering == none { "" } else { numbering(it.numbering, ..nums) }
     let ind = label-indent(it.level)
-    block(width: 100%, above: line-pitch * 0.5, below: line-pitch * 0.5, sticky: true,
-      hang(ind + heading-tab, {
-        h(ind)
-        box(width: heading-tab, text(size: type-size, lab))
-        text(size: type-size, strong(it.body))
-      }))
+    block(width: 100%, above: gap, below: gap, sticky: true, {
+      set text(size: type-size, ..edges(pitch-single))
+      pad(left: ind, par(hanging-indent: heading-tab, first-line-indent: 0pt,
+        strong[#box(width: heading-tab, lab)#it.body]))
+    })
   }
 
   cover(meta)
 
   cmarker.render(md, raw-typst: false, smart-punctuation: true)
 
-  v(line-pitch)
   signature-block(meta)
 
   // The page limit (ILNB-LIMIT-001): every page of the memorandum counts. Stops the build when exceeded.
