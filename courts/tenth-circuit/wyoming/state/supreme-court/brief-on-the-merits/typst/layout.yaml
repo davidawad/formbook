@@ -1,0 +1,74 @@
+# Supreme Court of Wyoming (wyo): brief on the merits (the appellant's brief, W.R.A.P. 7.01; the appellee's, 7.02). The
+# whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file
+# by `fb engines gen`, fb-595.54.12). Numbers trace to W.R.A.P. 7.01 and 7.05 (../../rules.md, WYO-*); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # WYO-FORM-005: no smaller than 13 point (the size of all three filed exemplars, WYO-FORM-008)
+pitch:
+  body: 29.9              # WYO-FORM-004: double-spaced (Word's double, 2 x 1.15 x 13 pt, as filed)
+  single: 14.95           # quotations of more than 50 words, headings, cover, tables, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # WYO-FORM-003: not less than one inch on all sides
+indent: 36
+# WYO-FORM-008 (as filed): the cover counted as page i and unnumbered, the tables from ii in lower-case roman, the
+# brief in Arabic from 1, bottom center.
+page_number: {align: center, front: lower-roman, cover: counted}
+footnote: {size: 13, pitch: body, gap: 0}   # WYO-FORM-006: footnotes in the text's size, double-spaced
+quote: {left: 36, right: 36, above: 7.8, below: 13, gap: 10.4, pitch: single}   # WYO-FORM-004: long quotations single
+# Headings as filed: a section name centred, bold, upper case; a point bold, hanging; a sub-point bold, indented.
+heading:
+  - {align: center, bold: true, upper: true, above: 15, below: 15}
+  - {bold: true, hang: 36, above: 15, below: 15}
+  - {bold: true, left: 36, hang: 36, above: 15, below: 15}
+# The title page (WYO-MER-001): the court, the caption ruled at its right and foot beside the case number, the
+# proceeding, the brief's title (the party filing it), counsel with the Wyoming Bar number at the foot of the page.
+cover:
+  - {text: "IN THE SUPREME COURT, STATE OF WYOMING", align: center, bold: true}
+  - columns:
+      - width: 252
+        blocks:
+          - box:
+              - each: caption
+                between:
+                  - {text: "v.", above: 14.95, below: 14.95}
+                blocks:
+                  - {text: "{.}"}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {top: 6, right: 12, bottom: 12, left: 0}
+      - valign: center
+        blocks:
+          - {text: "{case_number}", left: 24}
+    gutter: 0
+    above: 14.95
+  - {text: "{on_review}", align: center, above: 29.9}
+  - {text: "{title}", align: center, bold: true, upper: true, above: 29.9}
+  - {fill: 1}
+  - {text: "{lead_counsel.name}"}
+  - {text: "WSB No. {lead_counsel.bar_number}"}
+  - {text: "{lead_counsel.address}"}
+  - {text: "{lead_counsel.phone}"}
+  - {text: "{lead_counsel.email}"}
+  - {text: "{filing_party}", italic: true, above: 14.95}
+  - when: oral_argument_requested
+    blocks:
+      - {text: "ORAL ARGUMENT REQUESTED", align: center, bold: true, above: 29.9}
+# WYO-MER-002, -003: the table of contents with page references, the table of authorities with every page.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 36, step: 18, above: 8}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 72
+  hang: 18
+  above: 8
+  group: {bold: true, align: center, above: 15, below: 5}
+# WYO-MER-005: the signature of counsel after the conclusion, right of centre, never split; the last paragraph (the
+# "Respectfully submitted" line) kept with it.
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "s/ {signature.name}", left: 252}
+      - {text: "{signature.name}", left: 252}
+      - {text: "{signature.bar}", left: 252, optional: true}
+      - {text: "{signature.office}", left: 252}
+      - {text: "{signature.for}", left: 252, italic: true, above: 14.95, optional: true}
+      - {text: "{signature.lines}", left: 252, italic: true, above: 14.95, optional: true}
+    above: 29.9
+# WYO-MER-005: the certificate of service after the signature, on a page of its own (as filed), double-spaced.
+tail: {at: "Certificate", break: true, pitch: body, indent: 36}

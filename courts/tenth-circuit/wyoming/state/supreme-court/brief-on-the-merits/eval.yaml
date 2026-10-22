@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+font:
+  size_pt: 13             # WYO-FORM-005: no smaller than 13 point
+params:
+  cross_engine: report
