@@ -14,15 +14,14 @@ Rules checked October 14, 2026. The official [Texas Rules of Appellate Procedure
 
 The markdown file begins with YAML frontmatter: `case_number`, `style_petitioner`, `style_respondent`, `filing_party`, `brief_title`, `appeal_from`, `lead_counsel`, `counsel_lines`, and optional `filed_date`. The body supplies the document-specific sections and text, including contents, authorities, signature, certificate of compliance, and proof of service.
 
-The template builds the cover and renders markdown with vendored cmarker. Body text is 14-point, double-spaced (32.2 pt baseline pitch in EB Garamond). Headings, identity blocks (bold labels), signature and address blocks (hard line breaks), and contents or index entries (dot leaders) are single-spaced; short single-spaced blocks do not break across pages. Footnotes are written `[^1]` with a `[^1]: text` definition, rendered at 12 point.
+The template builds the cover and renders markdown with vendored cmarker, on the shared cross-engine layout model (`lib/typst/xengine.typ`): Times New Roman (docs/FONTS.md rule 6), no kerning, ligatures or hyphenation, first-fit ragged-right lines, every line a box of its pitch. Body text is 14-point, double-spaced in 32.2 pt lines (Word's double line at 14 pt), every paragraph indented half an inch. Single lines are 16.1 pt: the cover (title 16 pt bold in 18.4 pt), headings (level 1 centered bold capitals a body line below the text and a single line above the next; level 2 bold; level 3 italic; kept with what follows), identity blocks (bold labels), signature and certificate blocks (hard line breaks; a blank single line around each, kept whole, and in the body a run of them kept together), and contents or index entries. A contents or index entry is typed `title ........ page`: the template sets its own dot leader and keeps the page reference in a column of its own (its width in Times New Roman plus 3.5 pt, the same table in both engines), the title wrapping before it with a half-inch hang. Footnotes are written `[^1]` with a `[^1]: text` definition, rendered at 12 point in 13.8 pt lines, 7 pt apart. The page number is centered in a 16.1 pt footer line.
 
-The front matter (identity, contents, index) is numbered in lower-case roman. The body starts at page 1 with the heading `# Statement Regarding Oral Argument`, which the template requires. The template does not create a table of contents or authorities.
+The front matter (identity, contents, index; each opens a page) is numbered in lower-case roman. The body starts at page 1 with the heading `# Statement Regarding Oral Argument`, which the template requires. The template does not create a table of contents or authorities.
 
 Build from the repository root:
 
 ```sh
 sh tools/render.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/opening-brief usage/INPUT-opening-brief.md
-sh tools/overlay.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/opening-brief becerra-merits
 ```
 
 ## Exemplar
@@ -33,27 +32,25 @@ This is one filer. Tier 2 calls for two or three filings from different filers, 
 
 ## Sample and overlay
 
-`usage/INPUT-opening-brief.md` is a transcription of an excerpt of the exemplar: the cover, identity of parties and counsel, table of contents, index of authorities, the statements of oral argument, the case, and procedural history, the statement of facts through Maria Nava's testimony, the prayer, and both certificates. The argument, summary, and response are omitted. The render is 11 pages (cover unnumbered, front matter i–iii, body 1–7).
+`usage/INPUT-opening-brief.md` is a transcription of an excerpt of the exemplar: the cover, identity of parties and counsel, table of contents, index of authorities, the statements of oral argument, the case, and procedural history, the statement of facts through Maria Nava's testimony, the prayer, and both certificates. The argument, summary, and response are omitted. The render is 13 pages in both engines (cover unnumbered, front matter i–iv, body 1–8).
 
-The red/blue overlay is `usage/OVERLAY-becerra-merits.pdf`; its page map is `usage/OVERLAY-becerra-merits.txt`.
+`just overlay <this folder>` writes the red/blue overlay to the gitignored `.overlay/` tree (not committed).
 
 ## Page review
 
-Every page of `usage/OUTPUT-opening-brief.typst.pdf` (11 pages) was rendered at 100 dpi and viewed on October 14, 2026, after the final render. Footer numbers are shown; the cover has none.
+Every page of `usage/OUTPUT-opening-brief.typst.pdf` and `usage/OUTPUT-opening-brief.docx.pdf` (13 pages each) was rendered at 60 dpi and viewed side by side on October 22, 2026, after the final render (the cross-engine port, fb-595.68.36). Footer numbers are shown; the cover has none.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
-| cover | exemplar p.1 | Case number, caption, title, counsel block, and date fit on one page. | PASS |
-| i | exemplar p.1–2 (identity) | Party and counsel blocks single-spaced and flush; a bold-label paragraph was indented. | FIXED |
-| ii | exemplar p.2–3 (contents, index) | Contents and first index entries single-spaced with dot leaders. | PASS |
-| iii | exemplar p.4–5 (index end) | Index continuation, constitutions, statutes, and rules. | PASS |
-| 1 | exemplar p.1 (body) | Oral argument, case, and procedural history. Footnote 1 printed as literal `[^1]` text and its definition was dropped; now a real 12-point footnote. | FIXED |
-| 2 | exemplar p.2 | Procedural history and facts. | PASS |
-| 3 | exemplar p.3–4 | Facts. | PASS |
-| 4 | exemplar p.4–5 | Facts. | PASS |
-| 5 | exemplar p.5–6 | Facts; footnote 2 now a real footnote. | FIXED |
-| 6 | exemplar p.6–7 | Facts; the prayer heading and "Respectfully submitted" were split from their signature block. | FIXED |
-| 7 | exemplar p.45–46 | Prayer signature block (kept together), certificate of service, certificate of compliance. | FIXED |
+| cover | exemplar PDF p.1 | Case number, court, parties, the court below, title, filing party, counsel block and date on one page, centered; the same in both engines. | PASS |
+| i | exemplar PDF p.2 (identity) | Party and counsel blocks single-spaced, flush, a blank line apart. | PASS |
+| ii | exemplar PDF p.3–4 (contents) | Contents on a page of its own (was run on after the identity blocks), rows a blank line apart, leader to the page column. | FIXED |
+| iii | exemplar PDF p.5–6 (index) | Index on a page of its own; wrapped entries hang half an inch, page lists in their own column. | FIXED |
+| iv | exemplar PDF p.6–7 (index end) | Last cases, constitutions, statutes and rules. | PASS |
+| 1 | exemplar PDF p.8 (body p.1) | Oral argument and the case; every paragraph indented (the first after a heading was flush); footnote 1 at 12 pt. | FIXED |
+| 2 | exemplar PDF p.9 (body p.2) | Procedural history, facts heading and subheading. | PASS |
+| 3–7 | exemplar PDF p.10–14 (body p.3–7) | Facts; footnote 2 on p.6; prayer heading, paragraph and signature blocks on p.7 kept together. | PASS |
+| 8 | exemplar body p.45–46 | Certificate of service and certificate of compliance with their signatures. | PASS |
 
 ## Known gaps
 
@@ -62,15 +59,10 @@ Every page of `usage/OUTPUT-opening-brief.typst.pdf` (11 pages) was rendered at 
 - The certificate of compliance's word count (11,214) is the exemplar's figure. It is not a count of this excerpt and does not verify any word limit. The template does not calculate word limits or certificate counts.
 - The transcription copies a citation year from the filed brief: *Williams v. Florida*, 399 U.S. 78 (1997), as printed. That is the filed brief's error, not verified here.
 - The template does not verify service details, create bookmarks, or check every Rule 38.1 requirement. Confirm case-specific requirements and the applicable length limit before use.
-- The sample is an excerpt, not the complete brief. No engine other than typst was run, and no automated rule-check suite (`checks.yaml`) exists for this folder.
+- The sample is an excerpt, not the complete brief. No automated rule-check suite (`checks.yaml`) exists for this folder, so there is no selftest; no latex template exists.
 
 ## Engines
 
-docx (`docx/render.sh`, `docx/reference.docx` built by `docx/build-reference.sh`, filter `docx/brief.lua`): `usage/OUTPUT-opening-brief.docx` and `OUTPUT-opening-brief.docx.pdf` were built. The LibreOffice conversion succeeded and the zip and XML checks passed. The template matches the typst form in its settings: EB Garamond 14 pt; exact 32.2 pt double spacing; 0.5 in first-line indent; 1 in margins on letter; 12 pt footnotes; single-spaced headings, cover, identity, contents and index; cover unnumbered; front matter in lower-case roman, body from page 1, as separate Word sections. Dot leaders and contents and index page numbers are literal text, as in typst.
-
-Page review (all 12 docx pages against the 11 typst pages, side by side): the front matter, body and certificates are in the same order. Differences: the body runs to 8 pages against typst's 7, because the signature block and the certificate of compliance spill onto body page 8; the body headings and the certificate headings are set smaller than typst's; the front matter's identity and contents layout differs from typst's. The font names in the docx PDF were not checked. Word was not available; the file was checked with LibreOffice only.
-
-BLOCKED: docx page count: body 8 pages vs typst 7 (the certificate of compliance spills onto body page 8).
-BLOCKED: docx headings: body and certificate headings are smaller than typst's (tier 2, not fixed).
+typst (`typst/texcrimapp-opening-brief.typ`, the reference) and docx. The docx template is declarative (`fb render`, docs/DOCX.md): `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst face `{font}`, with the line pitches above in twips: 644 body, 322 single, 276 footnotes; Head 1/2/3, Single Block and Body Text Note styles) and the filter `docx/texcrimapp-opening-brief.lua` on `docx.xengine` (the cover, the contents and index rows with the page column as right indent and a dot-leader tab, the three sections and their footers, the blocks in those styles). The former `docx/render.sh`, `build-reference.sh`, `reference.docx` and `brief.lua` (EB Garamond, which failed DEF-FONT-002) are gone. The docx breaks every line and page where typst does: `fb check --engine docx` passes XENG-001..003 (248/248 lines, 13 pages), and `eval.yaml` sets `params.cross_engine: gate`. Word was not available; the file was checked with LibreOffice only, which may paginate slightly differently from Word.
 
 [Formbook index](../../../../../../README.md)
