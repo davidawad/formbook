@@ -1,0 +1,73 @@
+# Supreme Court of Appeals of West Virginia (wva): petition for discretionary review of an ICA decision, filed as a Rule 10 brief (form per RAP 38). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to RAP 38(a), (b) and 10(c) (../../rules.md, WVA-*); lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # WVA-FORM-003: no smaller than 12-point proportionally spaced type
+pitch:
+  body: 27.6              # WVA-FORM-002: double-spaced text (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # WVA-FORM-005: no less than one inch on all sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
+footnote: {size: 11, pitch: 12.65, gap: 7}   # WVA-FORM-004: footnotes no smaller than 11 point, single spaced (1.15 x 11)
+quote: {left: 36, right: 36, above: 9.6, below: 14.4, gap: 6}   # WVA-FORM-002: indented quotations single spaced
+heading:
+  - {align: center, bold: true, above: 14.4, below: 12}
+  - {bold: true, hang: 36, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 7.2}
+# WVA-COVER-001 (RAP 38(b)): the docket number, the court, the caption, the proceeding below, the title, counsel's
+# name, bar number, address, telephone and e-mail.
+cover:
+  - {text: "{docket}", bold: true, optional: true}
+  - {text: "IN THE SUPREME COURT OF APPEALS<br>OF WEST VIRGINIA", align: center, bold: true, above: 14.4}
+  - each: caption
+    above: 19.2
+    between:
+      - {text: "v.", align: center, above: 7.2, below: 7.2}
+    blocks:
+      - {text: "{names}"}
+      - {text: "{designation}", align: right}
+  - {text: "{proceeding}", align: center, bold: true, above: 14.4, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, above: 19.2}
+  - each: counsel
+    above: 36
+    blocks:
+      - {text: "{names}", left: 210.6}
+      - {text: "{lines}", left: 210.6}
+# WVA-CONT-002, -003 (RAP 10(c)(1), (2)): the table of contents and the alphabetical table of authorities (cases,
+# statutes, other authorities, each with its pages), each on its own page.
+contents: {title: "TABLE OF CONTENTS", when: toc, depth: 3, col: 36, hang: 36, step: 18, above: 9.6}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 56
+  hang: 28.8
+  above: 7.2
+  passim: 7
+  group: {bold: true, above: 14.4, below: 4.8}
+  kinds:
+    - {kind: case, title: "CASES"}
+    - {kind: statute, title: "STATUTES"}
+    - {kind: constitution, title: "CONSTITUTIONAL PROVISIONS"}
+    - {kind: rule, title: "RULES"}
+    - {kind: other, title: "OTHER AUTHORITIES"}
+# WVA-CERT-001 (RAP 38A): "Respectfully submitted," and the signature blocks (the typographical signature, name, bar
+# number, address, telephone, e-mail), never split; WVA-CONT-010 (RAP 10(c)(9), 37(b)): the certificate of service
+# at the end, on its own page, signed again.
+keep_with_closing: true   # the conclusion's last paragraph stays on the page of the signature
+closing:
+  - group:
+      - {text: "Respectfully submitted,", pitch: body}
+      - &signature
+        each: signature
+        blocks:
+          - {text: "{lines}", left: 210.6, above: 12}
+    above: 14.4
+  - {break: true}
+  - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 14.4}
+  - {text: "I certify that I served the foregoing {service.document|____________} upon counsel of record {service.method|____________} on {service.date|____________}.", indent: 36, pitch: body}
+  - when: service.recipients
+    blocks:
+      - each: service.recipients
+        blocks:
+          - {text: "{lines}", above: 12}
+  - {group: [*signature], above: 28.8}

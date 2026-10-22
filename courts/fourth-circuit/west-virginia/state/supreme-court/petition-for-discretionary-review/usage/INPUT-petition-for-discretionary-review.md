@@ -10,20 +10,20 @@ proceeding: "ON APPEAL FROM THE INTERMEDIATE COURT OF APPEALS (CIVIL ACTION NO. 
 brief_title: "OPENING BRIEF OF PETITIONER, PFIZER INC. AND SUBSIDIARIES"
 toc: true
 authorities:
-  blankenship: {kind: case, name: "Blankenship v. City of Charleston", cite: "223 W.Va. 822, 679 S.E.2d 654 (2009)"}
-  frantz: {kind: case, name: "Frantz v. Palmer", cite: "211 W.Va. 188, 564 S.E.2d 398 (2001)"}
-  hudkins: {kind: case, name: "Hudkins v. State Consol. Public Retirement Board", cite: "220 W. Va. 275, 646 S.E.2d 711 (2007)"}
-  mcgraw: {kind: case, name: "State ex rel. McGraw v. Scott Runyan Pontiac-Buick, Inc.", cite: "194 W. Va. 770, 461 S.E.2d 516, Syl. Pts. 1 & 2"}
-  moebius: {kind: case, name: "Wisconsin Department of Revenue v. Moebius Printing Company", cite: "89 Wis.2d 610, 279 N.W.2d 213 (1979)"}
-  s11-10a-19d: {kind: statute, name: "W. Va. Code § 11-10A-19(d)"}
-  s11-10a-19e: {kind: statute, name: "W. Va. Code § 11-10A-19(e)"}
-  s11-24-6: {kind: statute, name: "W. Va. Code § 11-24-6"}
-  s11-24-6b6: {kind: statute, name: "W. Va. Code § 11-24-6(b)(6)"}
-  s11-24-6d: {kind: statute, name: "W. Va. Code § 11-24-6(d)"}
-  s11-24-13f: {kind: statute, name: "W. Va. Code § 11-24-13f"}
-  s11-24-13fa5: {kind: statute, name: "W. Va. Code § 11-24-13f(a)(5)"}
-  hd4305: {kind: other, name: "H.D. 4305, 75th Leg. Reg. Sess. (W.Va. 2002)"}
-  wvconst: {kind: constitution, name: "West Virginia Constitution. W.Va. Const. Art. III, §§ 10, 17"}
+  blankenship: {kind: case, name: "*Blankenship v. City of Charleston*", cite: "223 W.Va. 822, 679 S.E.2d 654 (2009)"}
+  frantz: {kind: case, name: "*Frantz v. Palmer*", cite: "211 W.Va. 188, 564 S.E.2d 398 (2001)"}
+  hudkins: {kind: case, name: "*Hudkins v. State Consol. Public Retirement Board*", cite: "220 W. Va. 275, 646 S.E.2d 711 (2007)"}
+  mcgraw: {kind: case, name: "*State ex rel. McGraw v. Scott Runyan Pontiac-Buick, Inc.*", cite: "194 W. Va. 770, 461 S.E.2d 516, Syl. Pts. 1 & 2"}
+  moebius: {kind: case, name: "*Wisconsin Department of Revenue v. Moebius Printing Company*", cite: "89 Wis.2d 610, 279 N.W.2d 213 (1979)"}
+  s11-10a-19d: {kind: statute, cite: "W. Va. Code § 11-10A-19(d)"}
+  s11-10a-19e: {kind: statute, cite: "W. Va. Code § 11-10A-19(e)"}
+  s11-24-6: {kind: statute, cite: "W. Va. Code § 11-24-6"}
+  s11-24-6b6: {kind: statute, cite: "W. Va. Code § 11-24-6(b)(6)"}
+  s11-24-6d: {kind: statute, cite: "W. Va. Code § 11-24-6(d)"}
+  s11-24-13f: {kind: statute, cite: "W. Va. Code § 11-24-13f"}
+  s11-24-13fa5: {kind: statute, cite: "W. Va. Code § 11-24-13f(a)(5)"}
+  hd4305: {kind: other, cite: "H.D. 4305, 75th Leg. Reg. Sess. (W.Va. 2002)"}
+  wvconst: {kind: constitution, cite: "West Virginia Constitution. W.Va. Const. Art. III, §§ 10, 17"}
 counsel:
   - names: ["Floyd McKinley Sayre, III (WVSB # 4342)"]
     lines: ["BOWLES RICE LLP", "101 South Queen Street", "Post Office Drawer 1419", "Martinsburg, West Virginia 25402-1419", "Tel: (304) 264-4226", "Fax: (304) 267-3822", "ksayre@bowlesrice.com", "*Counsel for Petitioner, Pfizer Inc., and Subsidiaries*"]
