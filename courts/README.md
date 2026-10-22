@@ -338,7 +338,7 @@ Courts under `courts` (346).
 | [Alabama Court of Criminal Appeals](eleventh-circuit/alabama/state/court-of-criminal-appeals) | `alacrimapp` | up for review | 3/3 | — | — | 29 |
 | [Supreme Court of Alabama](eleventh-circuit/alabama/state/supreme-court) | `ala` | up for review | 7/7 | — | — | 29 |
 | [Florida District Courts of Appeal](eleventh-circuit/florida/state/district-courts-of-appeal) | `fladistctapp` | up for review | 8/8 | — | — | 29 |
-| [Florida Fifth District Court of Appeal](eleventh-circuit/florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | up for review | 8/8 | — | — | 29 |
+| [Florida Fifth District Court of Appeal](eleventh-circuit/florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | up for review | 8/8 | 8/8 | 8/8 | 29 |
 | [Florida First District Court of Appeal](eleventh-circuit/florida/state/first-district-court-of-appeal) | `fladistctapp1` | up for review | 8/8 | — | — | 29 |
 | [Florida Fourth District Court of Appeal](eleventh-circuit/florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | up for review | 8/8 | — | — | 29 |
 | [Florida Second District Court of Appeal](eleventh-circuit/florida/state/second-district-court-of-appeal) | `fladistctapp2` | up for review | 8/8 | — | — | 29 |
