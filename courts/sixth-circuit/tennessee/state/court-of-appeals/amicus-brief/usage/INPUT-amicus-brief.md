@@ -23,56 +23,56 @@ signature:
   lines: ["TN B.P.R. No. 021399", "BEACON CENTER", "P.O. Box 198646", "Nashville, TN 37219", "Tel.: 615/383.6431", "Fax: 615/383.6432", "braden@beacontn.org", "*Counsel for Amicus Curiae*"]
 service:
   date: "November 30, 2020"
-  method: "by the Court’s electronic filing system and by email, to"
+  method: "by the Court’s electronic filing system and by email"
   recipients:
     - ["Jeff Campbell, Assistant Metropolitan Attorneys", "Metro Legal", "Historic Metropolitan Courthouse, Suite 108", "P.O. Box 196300", "Nashville, Tennessee 37219-6300", "Pauljefferson.campbell@nashville.gov", "615/862.6341", "Counsel for Plaintiff"]
     - ["Seth N. Cline", "414 Union Street Suite 1110", "Nashville, TN 37219", "seth@collins.legal", "615/736.9596", "Counsel for Defendant"]
 authorities:
   - heading: "Constitutional Provisions"
     entries:
-      - {cite: "Tenn. Const. Art. I § 10", find: ["Art. I § 10"]}
-      - {cite: "Tenn. Const. Art. VI, section 14", find: ["Art. VI, section 14"]}
+      - {cite: "Tenn. Const. Art. I § 10", find: "Art. I § 10"}
+      - {cite: "Tenn. Const. Art. VI, section 14", find: "Art. VI, section 14"}
   - heading: "Statutes"
     entries:
-      - {cite: "28 U.S.C. § 2332(i)", find: ["2332(i)"]}
-      - {cite: "Tenn. Code Ann. § 39-13-202", find: ["39-13-202"]}
-      - {cite: "Tenn. Code Ann. § 40-7-118(b)(1)", find: ["40-7-118"]}
-      - {cite: "Tenn. Code Ann. § 40-35-110(d)", find: ["40-35-110(d)"]}
-      - {cite: "Tenn. Code Ann. § 40-35-111(e)", find: ["40-35-111"]}
-      - {cite: "Tenn. Code Ann. § 55-8-152(f)(2)", find: ["55-8-152"]}
+      - {cite: "28 U.S.C. § 2332(i)", find: "2332(i)"}
+      - {cite: "Tenn. Code Ann. § 39-13-202", find: "39-13-202"}
+      - {cite: "Tenn. Code Ann. § 40-7-118(b)(1)", find: "40-7-118"}
+      - {cite: "Tenn. Code Ann. § 40-35-110(d)", find: "40-35-110(d)"}
+      - {cite: "Tenn. Code Ann. § 40-35-111(e)", find: "40-35-111"}
+      - {cite: "Tenn. Code Ann. § 55-8-152(f)(2)", find: "55-8-152"}
   - heading: "Federal Cases"
     entries:
-      - {cite: "*Breed v. Jones*, 421 U.S. 519 (1975)", find: ["Breed"]}
-      - {cite: "*Ex parte Lange*, 85 U.S. 163 (1873)", find: ["Lange"]}
-      - {cite: "*Giaccio v. Pennsylvania*, 382 U.S. 399 (1966)", find: ["Giaccio"]}
-      - {cite: "*Green v. United States*, 355 U.S. 184 (1957)", find: ["Green v. United States"]}
-      - {cite: "*Pennywell v. McCarrey*, 9 Cir., 255 F.2d 735 (9th Cir. 1958)", find: ["Pennywell"]}
-      - {cite: "*Price v. Georgia*, 398 U.S. 323 (1970)", find: ["Price v. Georgia"]}
-      - {cite: "*Sessions v. Dimaya*, 138 S. Ct. 1204 (2017)", find: ["Dimaya"]}
-      - {cite: "*United States v. Dickerson*, 168 F. Supp. 899 (D.C. Cir. 1958)", find: ["Dickerson"]}
+      - {cite: "*Breed v. Jones*, 421 U.S. 519 (1975)", find: "Breed"}
+      - {cite: "*Ex parte Lange*, 85 U.S. 163 (1873)", find: "Lange"}
+      - {cite: "*Giaccio v. Pennsylvania*, 382 U.S. 399 (1966)", find: "Giaccio"}
+      - {cite: "*Green v. United States*, 355 U.S. 184 (1957)", find: "Green v. United States"}
+      - {cite: "*Pennywell v. McCarrey*, 9 Cir., 255 F.2d 735 (9th Cir. 1958)", find: "Pennywell"}
+      - {cite: "*Price v. Georgia*, 398 U.S. 323 (1970)", find: "Price v. Georgia"}
+      - {cite: "*Sessions v. Dimaya*, 138 S. Ct. 1204 (2017)", find: "Dimaya"}
+      - {cite: "*United States v. Dickerson*, 168 F. Supp. 899 (D.C. Cir. 1958)", find: "Dickerson"}
   - heading: "Tennessee Supreme Court Cases"
     entries:
-      - {cite: "*City of Chattanooga v. Davis*, 54 S.W.3d 248 (Tenn. 2001)", find: ["Davis"], passim: true}
-      - {cite: "*Colonial Pipeline Co. v. Morgan*, 263 S.W.3d 827 (Tenn. 2008)", find: ["Colonial Pipeline"]}
-      - {cite: "*Hayes v. Gibson Cty.*, 288 S.W.3d 334 (Tenn. 2009)", find: ["Hayes v. Gibson"]}
-      - {cite: "*Hughes v. New Life Dev. Corp.*, 387 S.W.3d 453 (Tenn. 2012)", find: ["Hughes v. New Life"]}
-      - {cite: "*Livesay v. Tennessee Bd. of Exam’rs in Watchmaking*, 322 S.W.2d 209 (Tenn. 1959)", find: ["Livesay"]}
-      - {cite: "*Metro Gov’t of Nashville & Davidson Cty. v. Miles*, 524 S.W.2d 656 (Tenn. 1975)", find: ["Miles"], passim: true}
-      - {cite: "*Seals v. H & F, Inc.*, 301 S.W.3d 237 (Tenn. 2010)", find: ["Seals v. H"]}
-      - {cite: "*State v. Pennington*, 952 S.W.2d 420 (Tenn. 1992)", find: ["Pennington"]}
-      - {cite: "*State v. Walker*, 12 S.W.3d 460 (Tenn. 2000)", find: ["Walker"]}
+      - {cite: "*City of Chattanooga v. Davis*, 54 S.W.3d 248 (Tenn. 2001)", pages: "passim"}
+      - {cite: "*Colonial Pipeline Co. v. Morgan*, 263 S.W.3d 827 (Tenn. 2008)", find: "Colonial Pipeline"}
+      - {cite: "*Hayes v. Gibson Cty.*, 288 S.W.3d 334 (Tenn. 2009)", find: "Hayes v. Gibson"}
+      - {cite: "*Hughes v. New Life Dev. Corp.*, 387 S.W.3d 453 (Tenn. 2012)", find: "Hughes v. New Life"}
+      - {cite: "*Livesay v. Tennessee Bd. of Exam’rs in Watchmaking*, 322 S.W.2d 209 (Tenn. 1959)", find: "Livesay"}
+      - {cite: "*Metro Gov’t of Nashville & Davidson Cty. v. Miles*, 524 S.W.2d 656 (Tenn. 1975)", pages: "passim"}
+      - {cite: "*Seals v. H & F, Inc.*, 301 S.W.3d 237 (Tenn. 2010)", find: "Seals v. H"}
+      - {cite: "*State v. Pennington*, 952 S.W.2d 420 (Tenn. 1992)", find: "Pennington"}
+      - {cite: "*State v. Walker*, 12 S.W.3d 460 (Tenn. 2000)", find: "Walker"}
   - heading: "Court of Appeals (Unpublished)"
     entries:
-      - {cite: "*Smith v. Metro Gov’t of Nashville & Davidson Cty.*, 2015 Tenn. App. LEXIS 219 (Tenn. Ct. App. Apr. 13, 2015)", find: ["Smith v. Metro"]}
-      - {cite: "*State v. Tommy R. Powell*, No. M2001-02955-CCA-R3-CD, 2002 Tenn. Crim. App. LEXIS 367 (Tenn. Crim. App. Apr. 24, 2002)", find: ["Tommy R. Powell"]}
+      - {cite: "*Smith v. Metro Gov’t of Nashville & Davidson Cty.*, 2015 Tenn. App. LEXIS 219 (Tenn. Ct. App. Apr. 13, 2015)", find: "Smith v. Metro"}
+      - {cite: "*State v. Tommy R. Powell*, No. M2001-02955-CCA-R3-CD, 2002 Tenn. Crim. App. LEXIS 367 (Tenn. Crim. App. Apr. 24, 2002)", find: "Tommy R. Powell"}
   - heading: "Other Authorities"
     entries:
-      - {cite: "Metro Code § 17.16.070.U.4.l.vi", find: ["17.16.070"]}
-      - {cite: "Metro Code § 17.40.610", find: ["17.40.610"]}
+      - {cite: "Metro Code § 17.16.070.U.4.l.vi", find: "17.16.070"}
+      - {cite: "Metro Code § 17.40.610", find: "17.40.610"}
   - heading: "Rules"
     entries:
-      - {cite: "Tenn. R. App. P. 27", find: ["Tenn. R. App. P. 27"]}
-      - {cite: "Tenn. R. App. P. 31(a), (b)", find: ["Tenn. R. App. P. 31"]}
+      - {cite: "Tenn. R. App. P. 27", find: "Tenn. R. App. P. 27"}
+      - {cite: "Tenn. R. App. P. 31(a), (b)", find: "Tenn. R. App. P. 31"}
 ---
 
 # INTEREST OF THE AMICUS CURIAE
