@@ -2,8 +2,8 @@
 font:
   size_pt: 12
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) but not gated yet: the engines list different pages for authorities marked near a
-# page end or in notes (25 U.S.C. § 1301: 3 in typst, 2 in LaTeX and Word; Bittle v. Bahe, p3-p4)
-# (docs/open-items/fb-595.54.53.md, shared-model requests).
+# (`fb engines gen`, fb-595.54.12) but not gated yet: typst keeps "§2710(b)(2)(B)(i)-(v)" (a section sign with no
+# space before its number) whole, LaTeX and Word break after its hyphen (p12); Word misses "Bittle" in note 5 (p2 of
+# the table of authorities' list, p3) (docs/open-items/fb-595.54.53.md, shared-model requests).
 params:
   cross_engine: report

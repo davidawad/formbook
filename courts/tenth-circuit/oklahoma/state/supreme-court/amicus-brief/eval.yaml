@@ -2,8 +2,8 @@
 font:
   size_pt: 12
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) but not gated yet: LaTeX never splits a footnote (lib/latex/xengine.sty) where
-# typst does (p5, note 2); Word breaks inside a spaced ellipsis (". | . . subject", p9) that typst keeps whole
-# (docs/open-items/fb-595.54.53.md, shared-model requests).
+# (`fb engines gen`, fb-595.54.12) but not gated yet: LaTeX breaks after an en dash before an opening quote
+# ("here– | “court", p22) where typst does not (UAX #14 LB19); LibreOffice sets a note that does not fit under its
+# anchor line on the next page and keeps the line (p21-22) (docs/open-items/fb-595.54.53.md, shared-model requests).
 params:
   cross_engine: report

@@ -212,8 +212,3 @@ For the reasons stated herein, Amici Nations--the Choctaw Nation of Oklahoma and
 # Certificate of Mailing
 
 I hereby certify that on February 13, 2008, I caused true copies of the foregoing Brief Amici Curiae of the Choctaw Nation of Oklahoma and the Chickasaw Nation in Support of Defendant-Petitioner Cherokee Nation Enterprises, L.L.C. to be separately served on Larry A. Tawwater and Darren M. Tawwater of the Tawwater Law Firm, P.L.L.C., at One Leadership Square, 211 N. Robinson, Suite 1950, Oklahoma City, OK 73102; and Stratton Taylor, Sean Burrage, Bradley H. Mallett, and Mark H. Ramsey, attorneys at P.O. Box 309, Claremore, OK 74018.
-
-Robert L. Rabon
-
-Stephen H. Greetham
-

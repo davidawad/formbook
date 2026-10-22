@@ -265,6 +265,3 @@ On the other hand, if the state court is allowed to exercise civil adjudicatory 
 # Certificate of Mailing
 
 I hereby certify that a true and correct copy of the above and foregoing Entry of Appearance was mailed this ____ day of ________, 2007, to: Larry Tawwater, Darren M. Tawwater, The Tawwater Law Firm, P.L.L.C., One Leadership Square, 211 North Robinson, Suite 1950, Oklahoma City, Oklahoma 73102, by depositing it in the U.S. Mails, postage prepaid.
-
-Mark H. Ramsey
-

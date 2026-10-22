@@ -1,8 +1,11 @@
 # Okla. Sup. Ct. R. 1.11 (OKLA-FORM-002, ../rules.md): clear type not less than 12 point (footnotes 11 point).
 font:
   size_pt: 12
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) but not gated yet: LaTeX fits more on an upper-case cover line ("F.H. | AND", p1);
-# typst breaks between two pilcrows ("Decl. ¶ | ¶ 9", p12) (docs/open-items/fb-595.54.53.md, shared-model requests).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails. latex is held back: on the cover's upper-case bold caption LaTeX
+# fits "F.H. AND" on a line typst ends after "F.H." (the LaTeX line 450.02 pt on a 450 pt measure; p1), the line-fit
+# tolerance the model lacks (docs/open-items/fb-595.54.53.md, shared-model requests).
 params:
-  cross_engine: report
+  cross_engine: gate
+  cross_engine_latex: report

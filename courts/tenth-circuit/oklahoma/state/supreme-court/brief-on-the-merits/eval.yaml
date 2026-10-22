@@ -2,7 +2,8 @@
 font:
   size_pt: 12
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) but not gated yet: typst breaks inside a URL in a footnote ("https://www.sos. |
-# ok.gov", p3), LaTeX and Word do not (docs/open-items/fb-595.54.53.md, shared-model requests).
+# (`fb engines gen`, fb-595.54.12) but not gated yet: a note that does not fit under its anchor line is set on the
+# next page while the line stays, by LaTeX (note 8, p17) and by LibreOffice (note 7, p16), where typst moves the line
+# with it (docs/open-items/fb-595.54.53.md, shared-model requests).
 params:
   cross_engine: report

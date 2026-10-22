@@ -151,6 +151,7 @@ return require("latex.xdoc")({
     ["above"] = 12,
     ["group"] = {
       ["bold"] = true,
+      ["upper"] = true,
       ["above"] = 19.2,
       ["below"] = 7.2,
     },

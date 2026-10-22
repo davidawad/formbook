@@ -42,7 +42,7 @@ authorities:
   col: 56
   hang: 18
   above: 12
-  group: {bold: true, above: 19.2, below: 7.2}
+  group: {bold: true, upper: true, above: 19.2, below: 7.2}   # OKLA-EX-003: the group headings in capitals
 # The signature block after the body (OKLA-EX-004): single spaced in the right half of the page, never split.
 closing:
   - when: signature
@@ -52,3 +52,10 @@ closing:
         above: 19.2
 # The certificate of service or mailing, set after the signature in the body's form (OKLA-EX-004).
 tail: {at: "Certificate", pitch: body, indent: 36, above: 25.2}
+# The certificate's signer, after its text in the right half of the page (OKLA-EX-004).
+after_tail:
+  - when: signer
+    blocks:
+      - group:
+          - {text: "{signer}", left: 216}
+        above: 19.2

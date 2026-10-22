@@ -2,8 +2,8 @@
 font:
   size_pt: 12
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) but not gated yet: LaTeX and Word drop widow control in a paragraph that anchors a
-# footnote and typst keeps it (p7 ends a line earlier in typst); Word lists one page fewer for an authority marked in
-# a note (Dixon, p3) (docs/open-items/fb-595.54.53.md, shared-model requests).
+# (`fb engines gen`, fb-595.54.12) but not gated yet: typst breaks after a slash inside a word outside a URL; LaTeX
+# does not ("Plaintiff/ | Respondent", note 8, p19: every page from p20 differs), nor Word in "(newsok.com/ |
+# article/..)" (p11) (docs/open-items/fb-595.54.53.md, shared-model requests).
 params:
   cross_engine: report

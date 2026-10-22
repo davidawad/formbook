@@ -151,6 +151,7 @@ return require("latex.xdoc")({
     ["above"] = 12,
     ["group"] = {
       ["bold"] = true,
+      ["upper"] = true,
       ["above"] = 19.2,
       ["below"] = 7.2,
     },
@@ -176,6 +177,22 @@ return require("latex.xdoc")({
     ["pitch"] = "body",
     ["indent"] = 36,
     ["above"] = 25.2,
+  },
+  ["after_tail"] = {
+    {
+      ["when"] = "signer",
+      ["blocks"] = {
+        {
+          ["group"] = {
+            {
+              ["text"] = "{signer}",
+              ["left"] = 216,
+            },
+          },
+          ["above"] = 19.2,
+        },
+      },
+    },
   },
   ["latex_bias"] = 0.05,
 })
