@@ -59,8 +59,8 @@ Read from the court's PDF (Mont. LBR, December 1, 2025) on 2026-10-15:
 
 | Doc type | Face required by the rules | Vendored substitute (`docs/FONTS.md`) | Fit | Used |
 |---|---|---|---|---|
-| `adversary-complaint` | none | n/a | n/a | EB Garamond |
-| `motion-brief` | none | n/a | n/a | EB Garamond |
+| `adversary-complaint` | none | n/a | n/a | Times New Roman 12 pt (house standard; the exemplar's face) |
+| `motion-brief` | none | n/a | n/a | Times New Roman 12 pt (house standard; the exemplar's face) |
 | (proposed order, no template here) | Times New Roman 12 | `Liberation Serif` | metric-compatible | not built |
 
-A proposed-order template, if one is added, uses `Liberation Serif` (not EB Garamond).
+A proposed-order template, if one is added, uses Times New Roman 12 pt too (`("Times New Roman", "Liberation Serif")`).

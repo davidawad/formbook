@@ -15,8 +15,8 @@ Sources, all read on 2026-10-14:
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
 | MTB-FORM-001 | Mont. LBR 5005-2(a)(1), (6) | Electronically filed PDF; one-sided. Letter paper (8½ × 11 in) for self-represented litigants; the template uses letter for all. | `set page(paper: "us-letter")` |
-| MTB-FORM-002 | Mont. LBR 5005-2(a)(2) | Legible, "at least 12-point font size." | `type-size` = 13 pt |
-| MTB-FORM-003 | Mont. LBR 5005-2(a)(5) | "double-spaced, except for quoted material and footnotes." Body pitch 24 pt. | `body-leading`; the body block sets it, the counsel block and caption are single-spaced (block-level exceptions, see gaps) |
+| MTB-FORM-002 | Mont. LBR 5005-2(a)(2) | Legible, "at least 12-point font size." | `type-size` = 12 pt (Times New Roman, the exemplar's size) |
+| MTB-FORM-003 | Mont. LBR 5005-2(a)(5) | "double-spaced, except for quoted material and footnotes." Body pitch 24 pt. | `pitch-double` (24 pt line boxes); the counsel block, caption, signature and certificate lines are single-spaced at `pitch-single` (14 pt; block-level exceptions, see gaps) |
 | MTB-FORM-004 | Mont. LBR 5005-2(a)(3) | "no less than one-inch margins, exclusive of page numbers." | `margins` |
 | MTB-FORM-005 | Mont. LBR 5005-2(a)(4) | Consecutive page numbers at the bottom of each page. | page footer, `counter(page)` |
 | MTB-FIRST-001 | Mont. LBR 5005-2(b)(1)-(6) | Upper left of the first page: name, office mailing address, telephone, email, state bar I.D., and the party represented (e.g., "Attorney for Plaintiff"). | `counsel`, `counsel_role` |
@@ -48,24 +48,24 @@ sh tools/render.sh courts/ninth-circuit/montana/federal/bankruptcy-district/adve
 sh tools/overlay.sh courts/ninth-circuit/montana/federal/bankruptcy-district/adversary-complaint bache-noble-complaint
 ```
 
-- `usage/OUTPUT-adversary-complaint.typst.pdf`: 4 pages. `render.sh` fails on any typst warning; none. Fonts (`pdffonts`): EB Garamond Regular, Italic, Bold, all embedded (vendored).
-- `usage/OVERLAY-bache-noble-complaint.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map (word-overlap pairing, coarse): ours p.1 ↔ filed p.1 (73.0%), p.2 ↔ p.2 (68.2%), p.3 ↔ p.3 (71.8%), p.4 ↔ p.4 (84.0%). The layers will not coincide on text lines: the font is different (EB Garamond vs Times), so the overlay is a diagnostic, not a score.
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 4 pages. `render.sh` fails on any typst warning; none. Fonts (`pdffonts`): Times New Roman Regular, Italic, Bold, all embedded (vendored).
+- `usage/OVERLAY-bache-noble-complaint.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map (word-overlap pairing, coarse): ours p.1 ↔ filed p.1 (73.0%), p.2 ↔ p.2 (68.2%), p.3 ↔ p.3 (71.8%), p.4 ↔ p.4 (84.0%). (Measured with the earlier EB Garamond render; the overlay is a diagnostic, not a score.)
 
-## Visual review (all 4 pages rendered at 60 dpi and looked at)
+## Visual review (all 4 pages of the typst and the docx render, 60 dpi, looked at; 2026-10-22, fb-595.68.23)
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Counsel block upper left, court title, caption (two rows: bankruptcy case, adversary), title, opening sentence | OK. Caption rule drawn right and bottom of the party column. Case no. and adversary no. on the right. |
-| 2 | ¶¶ 1-12, GENERAL ALLEGATIONS heading | OK after fix: the body was single-spaced at first (the counsel block's `set par` leaked into the body; it is now scoped). Double-spaced at 24 pt pitch, first-line indent on each paragraph. |
-| 3 | VIOLATION OF THE AUTOMATIC STAY heading (two lines, centered), ¶¶ 13-25, UNAUTHORIZED POST PETITION TRANSFER heading | OK. |
-| 4 | ¶¶ 26-27, WHEREFORE and prayer 1-3, DATED and signature block, CERTIFICATE OF MAILING with addressee and conformed signature | OK. Signature block on the right; "Dated" on the left. |
+| 1 | Counsel block upper left, court title, caption (two rows: bankruptcy case, adversary), title, opening sentence, ¶ 1 | OK on both engines. Caption rule right and bottom of the party column; case no. and adversary no. on the right. |
+| 2 | ¶¶ 2-14, GENERAL ALLEGATIONS and VIOLATION OF THE AUTOMATIC STAY headings | OK. Double-spaced at a 24 pt pitch (the paragraphs no longer close up: each line is a 24 pt box), first-line indent on each paragraph; the same lines on both engines. |
+| 3 | ¶¶ 15-27, UNAUTHORIZED POST PETITION TRANSFER heading | OK. |
+| 4 | WHEREFORE and prayer 1-3, DATED and signature block, CERTIFICATE OF MAILING with addressee and conformed signature | OK. Signature block in the right column, the date at the left. |
 
-Reviewed pages: 4 of 4.
+Reviewed pages: 4 of 4 (typst) and 4 of 4 (docx).
 
 ## Known gaps and open choices
 
 1. **Tier 2 exemplars.** One exemplar, one filer. The eval-loop rule asks for two or three filed exemplars from different filers. A second public Montana adversary complaint with an archived copy was not found on CourtListener's RECAP search (most 2026 complaints are listed as unavailable).
-2. **Font.** EB Garamond at 13 pt, not Times. The LBR sets only the 12-point floor for complaints; the Times New Roman requirement in LBR 9013-1(k)(6)(A) covers proposed orders only, so no face is required here and EB Garamond stays (see the court README, "Typeface"). The exemplar is set in Times, so a Times-metric stand-in (`Liberation Serif`) would match its line breaks better; that is a visual choice, not a rule.
+2. **Font.** Times New Roman 12 pt, the house standard and the exemplar's face and size. The LBR sets only the 12-point floor for complaints; the Times New Roman requirement in LBR 9013-1(k)(6)(A) covers proposed orders only (see the court README, "Typeface").
 3. **Caption and counsel block are single-spaced.** The LBR's double-spacing rule (5005-2(a)(5)) exempts only quoted material and footnotes. The filed exemplar single-spaces its counsel block and caption too, and the template follows that. Flagged as a convention, not a rule reading.
 4. **Length.** The exemplar is 4 pages, so the sample is 4 pages. The 8-14 page target applies only when the exemplar is that long.
 5. **Paragraph numbering** is typed in the sample (`1\.`), not generated. The template does not check consecutive numbering.
@@ -77,10 +77,10 @@ Reviewed pages: 4 of 4.
 
 ## Engines
 
-The docx engine is in `docx/`: `make-reference.sh` builds `docx/reference.docx` (run once; committed), and `docx/mtb.lua` writes the first-page blocks, the signature and the certificate of mailing from the sample's frontmatter. The body is pandoc's.
+Both engines follow the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): first-fit ragged-right lines, no kerning, ligatures or hyphenation, every line an exact box of its pitch (24 pt body, 14 pt single lines), the same spaces between blocks in pt and twips.
 
-- **Set in styles.xml, sectPr and footer1.xml (not rendered here):** EB Garamond 13 pt (MTB-FORM-002); body lines exact 24 pt, double (MTB-FORM-003); first-line indent 0.5 in and no space between paragraphs; headings centered, bold, capitals; block quotes and footnotes single-spaced; US Letter with 1 in margins (MTB-FORM-004); centered PAGE field in the footer (MTB-FORM-005).
-- **Built in XML by the filter, not rendered:** counsel block, court title, caption table (party column with right and bottom rules), title, signature table, certificate of mailing.
-- **Differs from typst:** line breaks and table row heights are Word's and LibreOffice's, not typst's. The caption cell padding is approximated in twips. Pandoc's paragraph handling (smart quotes, list items) differs from cmarker's. Page count is not verified.
-- **BLOCKED (docx.pdf gates 0-3):** LibreOffice (`soffice`) is not installed on the build box, so no `OUTPUT-mtb-adversary-complaint-bachenoblecomplaint.docx.pdf` was made and no docx page was looked at (pages reviewed for docx: 0). The `.docx` itself was checked as a valid zip with well-formed XML parts only.
-- **Not applicable to this doc type:** no table of contents or table of authorities, so no field-update limit applies.
+- `typst/mtb-adversary-complaint.typ`: the reference render.
+- `docx/reference.xml`: the Word styles (`base="xengine"`, the typst face through `{font}`, 12 pt, 480/280 twip pitches, centered page-number footer at 735 twips); `fb render` builds the reference document from it. No shell builder and no committed `reference.docx`.
+- `docx/mtb.lua`: writes every paragraph (counsel block, court title, caption table with the party column ruled at right and foot, title, body paragraphs and headings, signature table, certificate of mailing) with the typst template's spacing in twips.
+- Gate 4: `eval.yaml` sets `params.cross_engine: gate`; the docx render breaks every line and page as typst does (XENG-001..003 PASS, 105/105 lines).
+- Not applicable to this doc type: no table of contents or table of authorities.

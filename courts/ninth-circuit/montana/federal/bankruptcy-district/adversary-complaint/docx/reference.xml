@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Mont. Bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs;
+     docs/EVAL-LOOP.md, "Cross-engine gate") in the face of the typst template ({font}, Times New Roman) at 12 pt
+     (size 24 half points; LBR 5005-2(a)(2), at least 12 point); Body Text in exact 24 pt line boxes (480 twips, typst
+     pitch-double; LBR 5005-2(a)(5), double-spaced) with a half-inch first-line indent; single lines in 14 pt boxes
+     (280 twips, typst pitch-single); letter page (LBR 5005-2(a)(1)) with 1-inch margins (LBR 5005-2(a)(3)) and a
+     centered page number (LBR 5005-2(a)(4)), its line 36.75 pt above the page foot (735 twips: where typst sets it,
+     footer-descent 30 %). docx/mtb.lua writes every paragraph with its own spacing. pandoc-from: CommonMark with
+     smart punctuation and the YAML frontmatter, so pandoc pairs quotation marks as typst's cmarker does.
+     Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="280" indent="720" footer="735" pandoc-from="commonmark+smart+yaml_metadata_block"/>
