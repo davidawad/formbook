@@ -46,6 +46,7 @@ authorities:
   group: {bold: true, above: 15.4, below: 7}
 # The closing and signature block (VA-CERT-001, Rule 5:1B(f)), never split; then the certificate of compliance (Rule
 # 5:26(g)) and the certificate of filing and e-mail service (Rule 5:1B(c), VA-ELEC-002), each on a page of its own.
+keep_with_closing: true   # the closing is never alone on a page: the last paragraph goes with it (tier 2)
 closing:
   - group:
       - {text: "Respectfully submitted,", pitch: body}

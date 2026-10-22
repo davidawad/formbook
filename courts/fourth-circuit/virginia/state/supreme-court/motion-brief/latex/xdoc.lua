@@ -129,6 +129,7 @@ return require("latex.xdoc")({
       ["below"] = 7,
     },
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {
