@@ -1,35 +1,71 @@
 #!/bin/sh
-# Builds docx/reference.docx from pandoc's default reference: EB Garamond 14 pt, exact 31.4 pt
-# (double) line spacing, first-line indent, letter page with 1 in margins, centered page number.
-# Usage: sh docx/build-reference.sh <out.docx>   (needs pandoc, unzip, zip on PATH)
+# Builds docx/reference.docx: the shared style recipe of the cross-engine layout model
+# (lib/docx/xengine-reference.sh: Gelasio 14 pt, Body Text in 28 pt line boxes with a half-inch indent,
+# footnotes in 17 pt boxes, 7 pt after each, exact line spacing; typst pitch-double, pitch-single), plus the "CA ..."
+# paragraph styles ca8.lua writes the cover, headings, tables, signature and certificates in: single-spaced (17 pt
+# boxes), with the typst template's spaces (twips = 20 x pt). Page setup and the footers are NOT taken from here:
+# pandoc does not carry a reference's section properties into its output, so docx/render.sh writes them.
+# Usage: sh docx/build-reference.sh [out.docx]    (needs pandoc, unzip, zip, perl, xmllint)
 set -eu
-OUT=$1
+ITAL=99        # no heading style is italic: the filter sets the titles of levels 4 and 5 in italics, never the label
+D=$(cd "$(dirname "$0")" && pwd)
+OUT=${1:-$D/reference.docx}
+case $OUT in /*) ;; *) OUT=$PWD/$OUT ;; esac
 W=$(mktemp -d)
 trap 'rm -rf "$W"' EXIT
-pandoc -o "$W/ref.docx" --print-default-data-file reference.docx
-cd "$W" && mkdir pkg && cd pkg && unzip -q ../ref.docx
-# styles: body font and size, exact double spacing, first-line indent; footnote text single 14 pt
-sed -i \
-  -e 's|<w:rFonts w:asciiTheme="minorHAnsi" w:eastAsiaTheme="minorEastAsia" w:hAnsiTheme="minorHAnsi" w:cstheme="minorBidi"/>|<w:rFonts w:ascii="EB Garamond" w:hAnsi="EB Garamond" w:eastAsia="EB Garamond" w:cs="EB Garamond"/>|' \
-  -e 's|<w:sz w:val="24"/>|<w:sz w:val="28"/>|' \
-  -e 's|<w:szCs w:val="24"/>|<w:szCs w:val="28"/>|' \
-  -e 's|<w:spacing w:after="200"/>|<w:spacing w:after="0" w:line="628" w:lineRule="exact"/><w:ind w:firstLine="720"/>|' \
-  word/styles.xml
-# footnotes: single spaced, 14 pt
-sed -i -e '/w:styleId="FootnoteText"/,/<\/w:style>/{s|<w:spacing [^/]*/>|<w:spacing w:after="100" w:line="240" w:lineRule="auto"/>|}' word/styles.xml
-# custom styles for the front matter: centered, single spaced (the cover, TOC and TOA lines)
-perl -0pi -e 's{</w:styles>}{<w:style w:type="paragraph" w:customStyle="1" w:styleId="Centered"><w:name w:val="Centered"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/><w:jc w:val="center"/></w:pPr></w:style><w:style w:type="paragraph" w:customStyle="1" w:styleId="Single"><w:name w:val="Single"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:spacing w:after="200" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/></w:pPr></w:style></w:styles>}' word/styles.xml
-# footer with the page number (PAGE field, cached result 1)
-cat > word/footer1.xml <<'XML'
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:ftr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><w:p><w:pPr><w:pStyle w:val="Footer"/><w:jc w:val="center"/><w:spacing w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></w:ftr>
-XML
-sed -i 's|</Relationships>|<Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Id="rId100" Target="footer1.xml" /></Relationships>|' word/_rels/document.xml.rels
-sed -i 's|</Types>|<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml" /></Types>|' '[Content_Types].xml'
-# body section: letter, 1 in margins, the page-number footer
-sed -i 's|</w:body>|<w:sectPr><w:footerReference w:type="default" r:id="rId100"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:body>|' word/document.xml
-for part in word/styles.xml word/document.xml word/footer1.xml; do xmllint --noout "$part"; done
-case $OUT in /*) ;; *) OUT=$(cd "$(dirname "$OUT")" && pwd)/$(basename "$OUT") ;; esac
+sh "$D/../../../../../lib/docx/xengine-reference.sh" "$W/ref.docx" font="Gelasio" size=28 body=560 \
+  single=340 indent=720 note_after=140 quote=280 >/dev/null
+mkdir "$W/pkg" && cd "$W/pkg" && unzip -q ../ref.docx
+cat > "$W/styles.pl" <<'PL'
+# Appends the court's own styles to word/styles.xml.
+my ($file) = @ARGV;
+my $ITAL = $ENV{ITAL};
+my $TEXTW = 9360;   # 6.5 in, the text width (letter, 1 in margins)
+my $PCOL = 720;     # the contents' page column (typst toc-page-col, 36 pt)
+my $ACOL = 1120;    # the authorities' page column (typst toa-page-col, 56 pt)
+open my $fh, '<:encoding(UTF-8)', $file or die "styles: $!";
+local $/; my $s = <$fh>; close $fh;
+sub sp { my ($b, $a) = @_; qq{<w:spacing w:before="$b" w:after="$a" w:line="340" w:lineRule="exact"/>} }
+my @st;
+sub style {   # style(id, name, basedOn, pPr, rPr)
+  my ($id, $name, $based, $ppr, $rpr) = @_;
+  my $b = $based ? qq{<w:basedOn w:val="$based"/>} : '';
+  push @st, qq{<w:style w:type="paragraph" w:customStyle="1" w:styleId="$id"><w:name w:val="$name"/>$b<w:qFormat/><w:pPr>$ppr</w:pPr><w:rPr>$rpr</w:rPr></w:style>};
+}
+style('CABodyLast', 'CA Body Last', 'BodyText', '<w:keepNext/><w:keepLines/>', '');
+# [style-heading]: section headings 21 pt above, 15.4 pt below; numbered headings
+# 15.4 / 12.6 pt, the label at S half-inches, the text hanging a half inch more
+style('CASection', 'CA Section', 'Normal', '<w:keepNext/><w:keepLines/>' . sp(420, 308) . '<w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="0"/>', '<w:b/><w:caps/>');
+for my $l (2..5) { for my $sx (0..4) {
+  my $ind = ($sx + 1) * 720;
+  my $i = $l >= $ITAL ? '<w:i/>' : '';
+  style("CAHeadL${l}S$sx", "CA Heading L${l} S$sx", 'Normal',
+    qq{<w:keepNext/><w:keepLines/><w:tabs><w:tab w:val="left" w:pos="$ind"/></w:tabs>} . sp(308, 252) . qq{<w:ind w:left="$ind" w:hanging="720"/><w:jc w:val="left"/><w:outlineLvl w:val="}.($l-1).q{"/>},
+    qq{<w:b/>$i});
+} }
+# [cover-body]: centered, single-spaced
+style('CACentered', 'CA Centered', 'Normal', sp(0, 0) . '<w:ind w:firstLine="0"/><w:jc w:val="center"/>', '');
+# single-spaced lines at the margin, or indented (cover counsel, signature, certificates)
+style('CACounsel', 'CA Counsel', 'Normal', sp(0, 0) . '<w:ind w:firstLine="0"/><w:jc w:val="left"/>', '');
+# contents rows (typst listing-row): the text wraps before the page column (right indent), a dot leader runs to a
+# right tab at the margin, beyond the indent; 8.4 pt above a section's row, 4.9 pt above the others
+my $rt = $TEXTW;
+style('CATocTop', 'CA TOC 1', 'Normal', qq{<w:keepLines/><w:tabs><w:tab w:val="right" w:leader="dot" w:pos="$rt"/></w:tabs>} . sp(168, 0) . qq{<w:ind w:left="720" w:right="$PCOL" w:hanging="720"/>}, '');
+for my $sx (0..4) { my $ind = ($sx + 1) * 720;
+  style("CATocS$sx", "CA TOC Entry S$sx", 'Normal', qq{<w:keepLines/><w:tabs><w:tab w:val="left" w:leader="none" w:pos="$ind"/><w:tab w:val="right" w:leader="dot" w:pos="$rt"/></w:tabs>} . sp(98, 0) . qq{<w:ind w:left="$ind" w:right="$PCOL" w:hanging="720"/>}, ''); }
+# the underlined "Page" over the contents' page column, 4.2 pt below the heading
+style('CATocPage', 'CA TOC Page', 'Normal', '<w:keepNext/>' . sp(84, 0) . '<w:ind w:firstLine="0"/><w:jc w:val="right"/>', '<w:b/><w:u w:val="single"/>');
+# [toa-section]: group heads 19.6 pt above (the first 14 pt, with "Page(s)" at a right tab), 2.8 pt below; entries
+# 7 pt above, hanging 0.35 in
+style('CAToaGroup', 'CA TOA Group', 'Normal', qq{<w:keepNext/><w:tabs><w:tab w:val="right" w:pos="$TEXTW"/></w:tabs>} . sp(392, 56) . '<w:ind w:firstLine="0"/>', '<w:b/>');
+style('CAToaEntry', 'CA TOA Entry', 'Normal', qq{<w:keepLines/><w:tabs><w:tab w:val="right" w:leader="dot" w:pos="$TEXTW"/></w:tabs>} . sp(140, 0) . qq{<w:ind w:left="504" w:right="$ACOL" w:hanging="504"/>}, '');
+my $add = join('', @st);
+$s =~ s{</w:styles>}{$add</w:styles>} or die "styles: no end tag";
+open my $out, '>:encoding(UTF-8)', $file or die "styles: $!";
+print $out $s; close $out;
+PL
+ITAL=$ITAL perl "$W/styles.pl" word/styles.xml
+xmllint --noout word/styles.xml
 rm -f "$OUT"
 zip -q -X "$OUT" '[Content_Types].xml'
 zip -q -X -r "$OUT" _rels docProps word

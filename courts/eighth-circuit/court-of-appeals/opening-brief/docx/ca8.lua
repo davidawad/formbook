@@ -94,10 +94,12 @@ local function xesc(s) return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", 
 -- Break opportunities as typst has them, where LibreOffice and Word have others: a word joiner between ")" and "("
 -- (no break inside "32(a)(5)": typst boxes the token), a zero-width space after a slash that neither a digit nor a
 -- second slash follows (a line may end after "Meta/", as Unicode line breaking lets typst end it), and in a URL also
--- after "?", "=" and "&" (the typst template boxes a URL's parts there).
+-- after "?", "=" and "&", never after the "//" of its scheme (a word joiner there; the typst template boxes a URL's
+-- parts at these points).
 local function typst_breaks(text)
   text = text:gsub("https?://%S+", function(u) return (u:gsub("([%?=&])(.)", "%1\u{200B}%2")) end)
-  return (text:gsub("%)%(", ")\u{2060}("):gsub("/([^%d/])", "/\u{200B}%1"))
+  text = text:gsub("%)%(", ")\u{2060}("):gsub("/([^%d/])", "/\u{200B}%1")
+  return (text:gsub("://\u{200B}", "://\u{2060}"))
 end
 local function run(text, f)
   local rpr = (f.b and "<w:b/>" or "") .. (f.i and "<w:i/>" or "")
@@ -423,6 +425,10 @@ function Pandoc(doc)
         if #tail > 20 then tail = tail:sub(1, 20):match("^(.*)%s%S*$") or "" end
         local text = lt
         if tail ~= "" then text = lt .. (tail:match("^[%.,;:%)]") and "" or " ") .. tail end
+        -- a URL may break at its break points (typst_breaks), and the PDF text then has a space there: the needle is
+        -- the URL up to its first break point, which no line can split
+        local u = lt:match("^https?://[^/]*/") or lt:match("^https?://%S-[%?=&%-]")
+        if u then text = u end
         needles[#needles + 1] = {key = el.target:sub(5), kind = kind, text = text}
       elseif el.t == "Note" then
         scan_blocks(el.content, "N")

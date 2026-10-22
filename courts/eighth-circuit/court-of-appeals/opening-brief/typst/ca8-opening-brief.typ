@@ -550,6 +550,9 @@
   // boxes of the body pitch, footnote marks at 58 %, lists with the number in a half-inch box, a section sign or
   // pilcrow kept with its number, no break inside "60(b)(5)".
   show: xengine.with(pitch: pitch-double, list-indent: para-indent)
+  // No widows or orphans, as LaTeX (\widowpenalty 10000) and Word's widow control forbid them; typst's default only
+  // charges for one, and a long footnote could make it take a widow the other engines refuse.
+  set text(costs: (widow: 10000%, orphan: 10000%))
   set heading(numbering: none)
   // Footnotes: 8.5 pt from the text to the separator and 7 pt from it to each note, 15.5 pt in all.
   set footnote.entry(
@@ -570,7 +573,8 @@
     set par(first-line-indent: 0pt, leading: single-leading, spacing: 12.6pt)
     it.body
   }))
-  // A URL breaks only after "?", "=", "&", a hyphen or a slash that no digit (nor a second slash) follows: each part is
+  // A URL breaks only after "?", "=", "&", a hyphen or a slash that no digit (nor a second slash) follows, never after
+  // the "//" of its scheme: each part is
   // a box, so the PDF text keeps the author's characters. Without this typst breaks an overlong URL at any character,
   // which TeX and Word do not; the LaTeX and Word filters set the same break points (docs/EVAL-LOOP.md).
   show regex("https?://\\S+"): it => {
@@ -579,7 +583,9 @@
     for (i, c) in cs.enumerate() {
       parts.last() += c
       let next = cs.at(i + 1, default: "")
-      if c in ("?", "=", "&") or (c in ("/", "-") and next != "/" and next.match(regex("^[0-9]$")) == none) { parts.push("") }
+      let prev = cs.at(i - 1, default: "")
+      if c in ("?", "=", "&") or (c in ("/", "-") and next != "/" and not (c == "/" and prev == "/")
+        and next.match(regex("^[0-9]$")) == none) { parts.push("") }
     }
     parts.filter(p => p != "").map(p => box(p)).join()
   }

@@ -36,6 +36,8 @@
 \normalsize
 \setlength{\parindent}{0.5in} % after xengine.sty's \raggedright, which sets it to zero
 \setcounter{secnumdepth}{-\maxdimen}
+% No italic correction after \emph or \textit (typst and Word add none: a line with an italic word would be wider).
+\def\check@icl{}\def\check@icr{}
 \xe@lists{0.5in}
 % The page number in the 14 bp type, single-spaced.
 \def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty

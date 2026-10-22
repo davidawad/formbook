@@ -28,7 +28,8 @@ local xe_texify = require('latex.xengine').inlines
 -- (\textellipsis is three periods, 0.75 em): template.tex's \caellipsis sets the three dots across 1 em and keeps
 -- U+2026 as the PDF text. A line may end after a slash that a digit or a second slash does not follow ("Meta/Spill",
 -- not "1/2"), as Unicode line breaking lets typst and Word end it; TeX breaks at spaces only.
--- A URL breaks only after "?", "=", "&", a hyphen or a slash that no digit (nor a second slash) follows, as the typst
+-- A URL breaks only after "?", "=", "&", a hyphen or a slash that no digit (nor a second slash) follows, never after
+-- the "//" of its scheme, as the typst
 -- template boxes its parts (xengine.sty makes a break after a hyphen free; one before a digit is kept whole).
 local function url_breaks(text, out)
   local cur = ""
@@ -37,7 +38,7 @@ local function url_breaks(text, out)
   for i, c in ipairs(cs) do
     cur = cur .. c
     local nx = cs[i + 1] or ""
-    if i < #cs and (c == "?" or c == "=" or c == "&" or (c == "/" and nx ~= "/" and not nx:match("^%d$"))) then
+    if i < #cs and (c == "?" or c == "=" or c == "&" or (c == "/" and nx ~= "/" and cs[i - 1] ~= "/" and not nx:match("^%d$"))) then
       out:insert(pandoc.Str(cur))
       out:insert(pandoc.RawInline("latex", "\\allowbreak{}"))
       cur = ""
