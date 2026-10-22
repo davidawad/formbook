@@ -46,7 +46,7 @@ authorities:
   - heading: "Cases"
     entries:
       - {cite: "*Black v. McGuffage*, 209 F. Supp. 2d 889 (N.D. Ill. 2002)", find: "Black v. McGuffage"}
-      - {cite: "*Bush v. Gore*, 531 U.S. 98 (2000)", find: "Bush"}
+      - {cite: "*Bush v. Gore*, 531 U.S. 98 (2000)", find: "531 U.S."}
       - {cite: "*City of Sparks v. Sparks Mun. Ct.*, 129 Nev. 348, 302 P.3d 1118 (2013)", find: "129 Nev. 348"}
       - {cite: "*Common Cause S. Christian Leadership Conf. of Greater L.A. v. Jones*, 213 F. Supp. 2d 1106 (C.D. Cal. 2001)", find: "213 F. Supp. 2d 1106"}
       - {cite: "*Excellence Cmty. Mgmt. v. Gilmore*, 131 Nev. 347, 351 P.3d 720 (2015)", find: "Gilmore"}

@@ -1,5 +1,0 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Every engine matches typst line for
-# line; DEF-CONT-001 fails on all three by checker defect C1 (docs/open-items/fb-595.54.18.md).
-params:
-  cross_engine: report

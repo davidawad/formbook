@@ -1,7 +1,0 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not landed: Arabic numbering starts at
-# the jurisdictional statement, where NEV-FORM-006 (NRAP 32(a)(4)) wants it from the statement of the case, the
-# sections before it after the tables in Roman (docs/open-items/fb-595.54.18.md). LaTeX matches typst line for line;
-# Word breaks one long URL a character earlier (p11).
-params:
-  cross_engine: report
