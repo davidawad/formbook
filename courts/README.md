@@ -217,7 +217,7 @@ Courts under `courts` (346).
 | [Missouri Court of Appeals, Eastern District](eighth-circuit/missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 3/3 | 29 |
 | [Missouri Court of Appeals, Southern District](eighth-circuit/missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Missouri Court of Appeals, Western District](eighth-circuit/missouri/state/court-of-appeals-western-district) | `moctappwd` | up for review | 5/5 | 5/5 | 5/5 | 29 |
-| [Supreme Court of Missouri](eighth-circuit/missouri/state/supreme-court) | `mo` | up for review | 6/6 | 4/4 | 4/4 | 29 |
+| [Supreme Court of Missouri](eighth-circuit/missouri/state/supreme-court) | `mo` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [Nebraska Court of Appeals](eighth-circuit/nebraska/state/court-of-appeals) | `nebctapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Nebraska Supreme Court](eighth-circuit/nebraska/state/supreme-court) | `neb` | up for review | 5/5 | — | — | 29 |
 | [North Dakota Court of Appeals](eighth-circuit/north-dakota/state/court-of-appeals) | `ndctapp` | up for review | 3/3 | 3/3 | 2/2 | 29 |
@@ -345,7 +345,7 @@ Courts under `courts` (346).
 | [Florida Sixth District Court of Appeal](eleventh-circuit/florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Florida Supreme Court](eleventh-circuit/florida/state/supreme-court) | `fla` | up for review | 9/9 | — | — | 29 |
 | [Florida Third District Court of Appeal](eleventh-circuit/florida/state/third-district-court-of-appeal) | `fladistctapp3` | up for review | 8/8 | 1/1 | 1/1 | 29 |
-| [Georgia Court of Appeals](eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | 3/3 | 6/6 | 29 |
+| [Georgia Court of Appeals](eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [Georgia Supreme Court](eleventh-circuit/georgia/state/supreme-court) | `ga` | up for review | 8/8 | 1/1 | 5/5 | 29 |
 | [Court of Appeals for the D.C. Circuit](dc-circuit/court-of-appeals) | `cadc` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, District of Columbia](dc-circuit/district-of-columbia/federal/bankruptcy-district) | `dcb` | up for review | 2/2 | — | 2/2 | 14 |

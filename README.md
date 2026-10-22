@@ -499,7 +499,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [Missouri Court of Appeals, Eastern District](courts/eighth-circuit/missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 3/3 | 29 |
 | [Missouri Court of Appeals, Southern District](courts/eighth-circuit/missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Missouri Court of Appeals, Western District](courts/eighth-circuit/missouri/state/court-of-appeals-western-district) | `moctappwd` | up for review | 5/5 | 5/5 | 5/5 | 29 |
-| [Supreme Court of Missouri](courts/eighth-circuit/missouri/state/supreme-court) | `mo` | up for review | 6/6 | 4/4 | 4/4 | 29 |
+| [Supreme Court of Missouri](courts/eighth-circuit/missouri/state/supreme-court) | `mo` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 
 ### Nebraska
 
@@ -768,7 +768,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court for the Middle District of Georgia](courts/eleventh-circuit/georgia/federal/middle-district) | `gamd` | up for review | 2/2 | — | 0/2 | 14 |
 | [United States District Court for the Northern District of Georgia](courts/eleventh-circuit/georgia/federal/northern-district) | `gand` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Southern District of Georgia](courts/eleventh-circuit/georgia/federal/southern-district) | `gasd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Georgia Court of Appeals](courts/eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | 3/3 | 6/6 | 29 |
+| [Georgia Court of Appeals](courts/eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [Georgia Supreme Court](courts/eleventh-circuit/georgia/state/supreme-court) | `ga` | up for review | 8/8 | 1/1 | 5/5 | 29 |
 
 ## D.C. Circuit

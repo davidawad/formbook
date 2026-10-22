@@ -37,7 +37,7 @@ Courts under `courts/eighth-circuit` (38).
 | [Missouri Court of Appeals, Eastern District](missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 3/3 | 29 |
 | [Missouri Court of Appeals, Southern District](missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Missouri Court of Appeals, Western District](missouri/state/court-of-appeals-western-district) | `moctappwd` | up for review | 5/5 | 5/5 | 5/5 | 29 |
-| [Supreme Court of Missouri](missouri/state/supreme-court) | `mo` | up for review | 6/6 | 4/4 | 4/4 | 29 |
+| [Supreme Court of Missouri](missouri/state/supreme-court) | `mo` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [Nebraska Court of Appeals](nebraska/state/court-of-appeals) | `nebctapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Nebraska Supreme Court](nebraska/state/supreme-court) | `neb` | up for review | 5/5 | — | — | 29 |
 | [North Dakota Court of Appeals](north-dakota/state/court-of-appeals) | `ndctapp` | up for review | 3/3 | 3/3 | 2/2 | 29 |
