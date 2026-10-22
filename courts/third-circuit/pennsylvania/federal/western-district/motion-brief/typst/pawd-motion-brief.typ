@@ -5,14 +5,37 @@
 // PA bar number prefix), LCvR 7.D (a proposed order accompanies every motion, filed separately).
 // Content-agnostic: no case text here. The sample supplies the frontmatter and the markdown body.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---- LCvR 5.1 format ----
-#let type-size = 12pt // LCvR 5.1.B: not smaller than 12 pt.
-#let double = 24pt // LCvR 5.1.B: double-spaced, a baseline pitch of two type sizes (0.655 em line + 1.345 em leading).
-#let para-indent = 0.5in
-#let single-leading = 0.6em // headings, block quotations, footnotes, the caption and the signature block may be single-spaced.
+#let font-family = ("Times New Roman", "Liberation Serif") // LCvR 5.1.B names no face; the exemplar's (vendored, docs/FONTS.md)
+#let type-size = 12pt                   // LCvR 5.1.B: not smaller than 12 pt, footnotes included
+#let margin = 1in                       // LCvR 5.1.B: at least one inch on all four sides
+#let para-indent = 0.5in                // first-line indent; a heading's and a contents row's label box; a level's step
+#let caption-paren = 0.4in              // the ")" column between the parties and the right column
+#let caption-right = 2.9in              // the right column: case number, judge, "Electronically Filed"
+#let toc-page-col = 36pt                // contents: the page numbers keep the last 36 pt of the line
+#let sig-col = 3.0in                    // the signature's column starts here
 
-#let md(s) = cmarker.render(s, smart-punctuation: true, raw-typst: false)
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; docx/pawd-motion-brief.lua and docx/reference.xml
+// set the same twips: 20 x pt).
+#let pitch-body = 24pt                  // LCvR 5.1.B: double-spaced
+#let pitch-single = 13.8pt              // LCvR 5.1.B: headings, quotations and footnotes may be single-spaced; also the
+                                        // court title, caption, contents, signature and footer
+#let caption-above = 24pt               // the court title to the caption
+#let title-above = 24pt                 // the caption to the title of the memorandum
+#let toc-page-above = 24pt              // the contents' title to its "Page" label
+#let row-gap = 12pt                     // above every row of the contents
+#let heading-above = 24pt               // above a heading
+#let heading-below = 12pt               // below a heading
+#let quote-gap = 12pt                   // above and below a block quotation
+#let note-gap = 7pt                     // between two footnotes (Word: Footnote Text's space after)
+#let note-clearance = 7.5pt             // from the text to the footnote rule (the space LibreOffice keeps above it)
+#let sig-above = 24pt                   // the last paragraph to the signature block; the gaps inside it
+// The footer's single-pitch line box ends half an inch above the bottom edge (docx: footer 720 twips).
+#let footer-descent = margin - 0.5in - pitch-single
 
 /// Split "---\nyaml\n---\nbody" into (meta, body).
 #let split-frontmatter(src) = {
@@ -21,8 +44,42 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// The caption: parties in a left column with a ")" column, the case number and the judge in a
-/// right column that spans the rows. Names are plain text (no markdown).
+/// Inline content without the paragraph breaks cmarker may put around it (they may not occur inside a paragraph).
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
+}
+
+/// Inline markdown (names with *et al.*, the counsel line in italics).
+#let md(s) = unloose(cmarker.render(s, smart-punctuation: true, raw-typst: false))
+
+/// Single-spaced lines, one paragraph each. `above`: the space before the first line. An item is a string
+/// (markdown) or content; `align`: the lines' alignment.
+#let line-stack(items, above: 0pt, align: left) = {
+  set text(..edges(pitch-single))
+  set std.align(align)
+  set par(first-line-indent: 0pt)
+  for (k, i) in items.enumerate() {
+    block(width: 100%, above: if k == 0 { above } else { 0pt }, below: 0pt, par(if type(i) == str { md(i) } else { i }))
+  }
+}
+
+/// Heading numbers: I. (level 1), A. (level 2), 1. (level 3), a. (level 4). Numbers are never typed in the sample.
+#let brief-numbering(..nums) = {
+  let lvl = nums.pos().len()
+  let n = nums.pos().last()
+  if lvl == 1 { numbering("I.", n) } else if lvl == 2 { numbering("A.", n) } else if lvl == 3 { numbering("1.", n) } else { numbering("a.", n) }
+}
+
+// ---------------------------------------------------------------------------
+// Cover: court title, caption, title (Fed. R. Civ. P. 10(a))
+// ---------------------------------------------------------------------------
+
+/// The caption: parties in a left column with a ")" per single line; on the right the case number, the judge and
+/// "Electronically Filed", a blank single line apart.
 #let caption(meta) = {
   let rows = ()
   for (i, p) in meta.caption.enumerate() {
@@ -30,126 +87,143 @@
     for n in p.names { rows.push(n) }
     rows.push(p.designation)
   }
-  let right = block(width: 100%)[
-    #set par(leading: single-leading)
-    #meta.at("case_label", default: "Civil Action No.") #meta.case_number
-    #if meta.at("judge", default: none) != none [
-      #v(double)
-      #meta.judge
-    ]
-    #if meta.at("electronically_filed", default: false) [
-      #v(double)
-      Electronically Filed
-    ]
-  ]
-  let cells = ()
-  for (k, r) in rows.enumerate() {
-    cells.push(block(width: 100%)[#set par(leading: single-leading); #r])
-    cells.push(block(width: 100%)[#set par(leading: single-leading); #align(center)[)]])
-    if k == 0 {
-      cells.push(grid.cell(rowspan: rows.len(), align: horizon, right))
-    }
+  let right = {
+    line-stack(([#meta.at("case_label", default: "Civil Action No.") #meta.case_number],))
+    if meta.at("judge", default: none) != none { line-stack(above: pitch-single, (meta.judge,)) }
+    if meta.at("electronically_filed", default: false) { line-stack(above: pitch-single, ([Electronically Filed],)) }
   }
-  grid(
-    columns: (1fr, 0.4in, 2.9in),
-    row-gutter: single-leading,
-    ..cells,
-  )
+  block(width: 100%, above: caption-above, below: 0pt, breakable: false, grid(
+    columns: (1fr, caption-paren, caption-right),
+    line-stack(rows),
+    line-stack(rows.map(_ => ")"), align: center),
+    right,
+  ))
 }
 
-/// Each chunk of the markdown body is a block of text between blank lines.
-#let chunks(body) = body.split("\n\n").map(s => s.trim()).filter(s => s != "")
-
-/// The heading level and text of a chunk: "# " is level 1 (a section), "## " level 2, and so on.
-#let heading-level(c) = {
-  let level = 0
-  while c.starts-with("#") and c.len() > level and c.at(level) == "#" { level += 1 }
-  level
+#let cover(meta) = {
+  line-stack(([*IN THE UNITED STATES DISTRICT COURT*], [*FOR THE WESTERN DISTRICT OF PENNSYLVANIA*]), align: center)
+  caption(meta)
+  block(width: 100%, above: title-above, below: 0pt, align(center, par(first-line-indent: 0pt, strong(md(meta.title)))))
 }
 
-/// Front matter and the body. Section headings are numbered by the template, not the sample:
-/// level 1 I., II. (centered); level 2 A., B.; level 3 1., 2.; level 4 a., b. Each heading is a
-/// real heading element, so the table of contents built from them carries the same numbers.
-#let body-content(body) = {
-  let c1 = 0
-  let c2 = 0
-  let c3 = 0
-  let c4 = 0
-  // A footnote is defined by a line "[^key]: text". Each paragraph carries the definitions of the keys it cites,
-  // so cmarker can resolve the reference; definition lines are not paragraphs of their own.
-  let defs = body.split("\n").filter(l => l.starts-with("[^")).map(l => l.trim())
-  for c in chunks(body).filter(c => not c.starts-with("[^")) {
-    let level = heading-level(c)
-    if level > 0 {
-      if level == 1 { c1 += 1; c2 = 0; c3 = 0; c4 = 0 }
-      else if level == 2 { c2 += 1; c3 = 0; c4 = 0 }
-      else if level == 3 { c3 += 1; c4 = 0 }
-      else { c4 += 1 }
-      let text = c.slice(level).trim()
-      let prefix = if level == 1 { numbering("I.", c1) } else if level == 2 { numbering("A.", c2) } else if level == 3 { numbering("1.", c3) } else { numbering("a.", c4) }
-      heading(level: level, outlined: true, numbering: none)[#prefix #h(0.5in) #text]
-    } else if c.starts-with("> ") {
-      // A block quotation: single-spaced, indented on both sides (LCvR 5.1.B).
-      block(width: 100%, above: double, below: double)[
-        #pad(left: 1in, right: 1in)[#set par(leading: single-leading); #md(c.slice(2))]
-      ]
-    } else {
-      let cited = defs.filter(d => c.contains(d.slice(0, d.position(":"))))
-      let src = c + cited.map(d => "\n\n" + d).join("")
-      block(width: 100%)[#h(para-indent)#md(src)]
-    }
+// ---------------------------------------------------------------------------
+// Table of contents (generated from the headings, levels 1 and 2)
+// ---------------------------------------------------------------------------
+
+/// A contents row: the label in a half-inch box after the level's step, the title hanging after it, a dot leader
+/// to the page in the page column.
+#let toc-entry(it) = {
+  let hd = it.element
+  let ind = (hd.level - 1) * para-indent
+  let num = numbering(brief-numbering, ..counter(heading).at(hd.location()))
+  block(width: 100%, above: row-gap, below: 0pt, {
+    set text(..edges(pitch-single))
+    listing-row(hd.location(), { h(ind); box(width: para-indent, num); hd.body }, it.page(), toc-page-col,
+      ind + para-indent, 0pt)
+  })
+}
+
+#let contents() = {
+  line-stack((strong[TABLE OF CONTENTS],), align: center)
+  line-stack(above: toc-page-above, (strong[Page],), align: right)
+  show outline.entry: toc-entry
+  outline(title: none, depth: 2, indent: 0pt)
+}
+
+// ---------------------------------------------------------------------------
+// Body and signature
+// ---------------------------------------------------------------------------
+
+/// A heading, single-spaced at the type size, bold, kept with the next block: level 1 centred, its number and a space
+/// before the text; the lower levels the label in a half-inch box after the level's step, the text hanging after it.
+#let style-heading(it) = {
+  let num = numbering(it.numbering, ..counter(heading).at(it.location()))
+  let ind = (calc.min(it.level, 4) - 2) * para-indent
+  block(width: 100%, breakable: false, sticky: true, above: heading-above, below: heading-below, {
+    set text(size: type-size, weight: "bold", ..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    if it.level == 1 { align(center, par[#num #it.body]) }
+    else { pad(left: ind, par(hanging-indent: para-indent, [#box(width: para-indent, num)#it.body])) }
+  })
+}
+
+/// The signature block, single-spaced: "Date:" at the margin, then "Respectfully submitted," the firm, the signer's
+/// "s/" line and the attorney lines in a column from `sig-col`, 24 pt between the groups.
+#let signature-block(meta) = block(width: 100%, above: sig-above, below: 0pt, breakable: false, {
+  let sig = meta.signature
+  let date = meta.at("date", default: none)
+  if date != none { line-stack(([Date: #date],)); v(sig-above) }
+  pad(left: sig-col, {
+    line-stack((sig.lead,))
+    if sig.at("firm", default: none) != none { line-stack(above: sig-above, sig.firm) }
+    line-stack(above: sig-above, (sig.signer,) + sig.lines)
+  })
+})
+
+/// The memorandum's body, then the signature block. The last paragraph is kept on the same page as the signature (a
+/// signature never stands alone on a page); when the body ends in a heading, nothing is moved. Footnote definitions
+/// stay in the first part, with their references.
+#let body-with-signature(meta, body-md) = {
+  let parts = body-md.trim(at: end).split(regex("\n[ \t]*\n"))
+  let tail = none
+  for (i, p) in parts.enumerate() {
+    if not p.starts-with("[^") { tail = i }
   }
-}
-
-/// The signature block after the body. Single-spaced, set at the right half of the page.
-#let signature(sig, date) = {
-  block(breakable: false, width: 100%, above: double)[
-    #set par(leading: single-leading)
-    #if date != none [Date: #date \ ]
-    #v(double)
-    #pad(left: 3.0in)[
-      #sig.lead
-      #v(double)
-      #if sig.at("firm", default: none) != none [#for f in sig.firm [#f \ ]]
-      #v(double)
-      #sig.signer \
-      #for l in sig.lines [#md(l) \ ]
-    ]
-  ]
+  let render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
+  if tail == none or parts.at(tail).starts-with("#") {
+    render(body-md)
+    signature-block(meta)
+  } else {
+    let head = parts.enumerate().filter(e => e.first() != tail).map(e => e.last()).join("\n\n")
+    render(head)
+    block(width: 100%, breakable: false, above: 0pt, below: 0pt, {
+      render(parts.at(tail))
+      signature-block(meta)
+    })
+  }
 }
 
 /// The memorandum. Page 1 is the caption page (no number). The table of contents is numbered in
-/// roman numerals, and the body in arabic from 1 at the Introduction.
+/// roman numerals from ii (the caption page counts as i), and the body in arabic from 1.
 #let pawd-motion-brief(meta, body) = {
   set document(title: meta.title)
-  set page(paper: "us-letter", margin: 1in, numbering: none)
-  set text(font: ("Times New Roman", "Liberation Serif"), size: type-size, lang: "en", ligatures: true)
-  set par(leading: 1.345em, justify: false, spacing: 0pt) // 0.655 em line (Liberation Serif) + 1.345 em leading = a 24 pt pitch at 12 pt
-  set block(spacing: 1.345em) // the gap between blocks is the leading again, so the pitch stays 24 pt
-  // LCvR 5.1.B: footnotes are single-spaced and in the same type size as the body.
-  show footnote.entry: set text(size: type-size)
-  show footnote.entry: set par(leading: single-leading)
-  // Headings: sections centered in capitals; the lower levels flush left, indented by level.
-  show heading: it => block(width: 100%, above: double, below: 0pt, sticky: true)[
-    #set par(leading: single-leading)
-    #set text(size: type-size)
-    #if it.level == 1 [#align(center, strong(it.body))] else [#set par(hanging-indent: 0.5in); #pad(left: (it.level - 2) * 0.5in, strong(it.body))]
-  ]
+  let footer-num = context align(center, par(first-line-indent: 0pt, text(..edges(pitch-single), counter(page).display())))
+  set page(paper: "us-letter", margin: margin, footer-descent: footer-descent, footer: none)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch (LCvR 5.1.B: double-spaced), a section sign kept with its number; lists with their label in a
+  // half-inch box.
+  show: xengine.with(pitch: pitch-body, list-indent: para-indent)
+  // A doubled section sign or pilcrow stays with its number ("¶¶ 26, 30"), as the docx binds it.
+  show regex("[§¶]{2,} \\S+"): it => box(it)
+  // LCvR 5.1.B: footnotes single-spaced in the body's type size, under a 30 % rule, 7 pt between notes; the mark and
+  // a space before the text (Word's footnote). A note is kept whole on the page of its mark (typst would otherwise
+  // start a split note on the page before its mark when the mark's line moves on; docx: Footnote Text keepLines).
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
+  show footnote.entry: it => {
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    block(breakable: false, [#super(num)#h(0.25em)#note.body])
+  }
+  // LCvR 5.1.B: quotations single-spaced and indented, half an inch in on both sides.
+  show quote.where(block: true): it => block(width: 100%, above: quote-gap, below: quote-gap, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    pad(x: para-indent, it.body)
+  })
+  set heading(numbering: brief-numbering)
+  show heading: style-heading
 
-  block(width: 100%, align(center)[*IN THE UNITED STATES DISTRICT COURT*])
-  block(width: 100%, above: 0pt, align(center)[*FOR THE WESTERN DISTRICT OF PENNSYLVANIA*])
-  block(width: 100%, above: double, caption(meta))
-  block(width: 100%, above: double, align(center, strong(meta.title)))
-
+  cover(meta)
   pagebreak()
-  set page(numbering: "i")
+  set page(numbering: "i", footer: footer-num)
   counter(page).update(2) // the caption page is i and is not printed
-  align(center, strong[TABLE OF CONTENTS])
-  block(width: 100%, above: double, outline(title: none, indent: n => 0.5in * n))
-
+  contents()
   pagebreak()
-  set page(numbering: "1")
+  set page(numbering: "1", footer: footer-num)
   counter(page).update(1)
-  body-content(body)
-  signature(meta.signature, meta.at("date", default: none))
+  body-with-signature(meta, body)
 }
