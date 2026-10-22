@@ -22,7 +22,7 @@ Doc type `reply-brief` of `courts/sixth-circuit/bankruptcy-appellate-panel`. Sel
 | `usage/OVERLAY-chieftain-steel-19-8005.pdf`, `.txt` | `tools/overlay.sh` output: red = ours, blue = filed, black = both. The `.txt` maps each of our pages to its best-matching filed page. |
 | `typst/main.typ`, `typst/bap6-reply-brief.typ` | Entry point and template. |
 
-Build (from the repo root, toolchain on PATH): `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief usage/INPUT-reply-brief.md`. The render uses only the vendored EB Garamond (`--ignore-system-fonts`); any typst warning fails it.
+Build (from the repo root, toolchain on PATH): `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief usage/INPUT-reply-brief.md`. The render uses only vendored fonts (Times New Roman) (`--ignore-system-fonts`); any typst warning fails it.
 
 ## Governing rules
 
@@ -115,30 +115,27 @@ Every page of `usage/OUTPUT-reply-brief.typst.pdf` (10 pages) was rasterised at 
 
 ## Engines
 
-Docx engine (`docx/`, built per `docs/EVAL-LOOP.md` "Engines"). `docx/build-reference.sh` makes `docx/reference.docx` from pandoc's default reference; `docx/render.sh` runs pandoc with `docx/reference.docx` and `docx/bap6-brief.lua` (cover, front matter, certificates, TOC/TOA/TA fields, the rules checks). Build: `sh tools/render.sh --engine docx courts/sixth-circuit/bankruptcy-appellate-panel/<doc-type> usage/INPUT-reply-brief.md`. Needs pandoc, unzip, zip, xmllint, perl.
+Docx engine (`docx/`, built per `docs/EVAL-LOOP.md` "Engines"). `docx/reference.xml` holds the Word styles, from which fb render builds `reference.docx` on pandoc's default reference (`tools/fb/src/docxref.rs`); `docx/bap6-brief.lua` builds the cover, the front matter, the signature block and the certificates from the frontmatter and applies the rules checks (required sections, oral-argument statement, word limit, every registered authority cited). There is no `docx/render.sh`: fb render's multi-pass docx engine (`tools/fb/src/docxpass.rs`, `docxpages.rs`) adds the footers and the last section. Build: `sh tools/render.sh --engine docx courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief usage/INPUT-reply-brief.md`; output `usage/OUTPUT-reply-brief.docx` and `.docx.pdf`. Needs pandoc and LibreOffice (`soffice`).
 
-**Matches the typst reference** (typst values measured on `/work/artifacts/bap6/<doc-type>/OUTPUT-chieftain-steel-19-8005.pdf` with `pdftohtml -xml` and `pdftotext -bbox`; docx values read from `styles.xml` and `sectPr`):
+**Matches the typst form** (typst values measured on `usage/OUTPUT-reply-brief.typst.pdf` with `pdftohtml -xml` and `pdftotext -bbox-layout`):
 
-- Font: EB Garamond (family name confirmed from `fonts/eb-garamond/*.otf`), body 14 pt (`sz` 28). Typst embeds EB Garamond Regular, Bold and Italic.
-- Body spacing: exact 36.4 pt line pitch (typst measures 36.4 pt between body lines). Block quotations, cover, TOC, TOA, signature and certificates: exact 18.2 pt.
-- Page: US Letter (12240 x 15840 twips), 1 in margins on all four sides (typst body text starts at x = 72 pt).
-- First-line indent 0.5 in; the first paragraph after a heading is not indented (typst measures the same).
-- Headings: bold; level 1 and the front-matter titles 19.5 pt (typst 19.6 pt, Word rounds to half points); level 2 17 pt (typst 16.8 pt); level 3 indented 0.5 in; level 4 italic, indented 1 in.
-- Footer: centered PAGE field. Cover without footer; front matter lower-roman; brief arabic from 1 (as in typst).
-- Word count in the certificate of compliance equals typst's count: 1,093 words (opening brief), 1,185 (answering brief), 970 (reply brief), the same figures typst prints.
+- Font: Times New Roman 14 pt, the typst face; the PDF embeds TimesNewRomanPSMT, -BoldMT and -ItalicMT only. The font name is declared in the styles; it must be installed where the file is opened.
+- Spacing: double spacing as the typst body pitch, exact 37.1 pt (typst 37.08 pt); single spacing (cover, contents, authorities, signature) exact 18.8 pt (typst 18.81 pt); first-line indent 0.5 in, none on the first paragraph after a heading.
+- Page: US Letter, 1 in margins on all four sides.
+- Headings: level 1 and the front-matter titles bold 19.5 pt centered (typst 19.6 pt), level 2 bold 17 pt (typst 16.8 pt), level 3 bold indented 0.5 in, level 4 italic indented 1 in; the space above a heading is the typst gap, none at the top of a page.
+- Sections: cover without a number; front matter lower roman from i; the brief arabic from 1, as typst.
+- Table of contents (every heading, as typst) and table of authorities (dot leaders, pages in page order, `passim` from 7 pages) with page numbers, FRBP 8014(a)(2)-(3): the filter writes a needle for every heading and citation, fb render finds them in the LibreOffice PDF and renders again with those pages until they settle (fb-595.63). Every entry was checked against the body pages.
+- Certificate of compliance: the word count equals typst's (970 words) and it names the typeface used, Times New Roman at 14-point, as typst; certificate of service with the same wording.
 
-**Differs from typst (not measured against a rendered docx):**
+**Differs from typst (tier 2, not chased):**
 
-- Cover: the counsel block sits after a fixed gap, not pinned to the bottom of the page as in typst (`v(1fr)`). The gap is an estimate.
-- Table of contents and table of authorities: the TOC is a TOC field and each citation carries a TA field; the TOA is one TOA field per kind. Their cached results list the headings and authorities without page numbers. Word fills in the page numbers when fields update (`updateFields` is set, so Word asks on open). LibreOffice does not.
-- Cover title is printed with `caps` (typst uses `upper()`); the text is the same.
+- 11 pages (typst 12). The typst cover runs over (its date falls on an unnumbered second page); the docx cover does not. Line and page breaks follow LibreOffice; Word may paginate slightly differently from the LibreOffice PDF the contents and authorities pages come from (`docs/DOCX.md`).
+- Cover: the counsel block follows a fixed gap, not pinned to the foot of the page (`v(1fr)` in typst); the whole cover, date included, stays on page 1.
+- Below a heading the first body line sits about 3 pt (level 1) to 14 pt (level 3) lower than in typst: an exact Word line puts its extra height above the text.
+- Contents: a wrapped entry is indented under its title and its page number is set on the last line (typst sets it on the first line and starts the wrapped line at the margin).
 
-**BLOCKED (docx):**
+docx check (fb-595.63, 2026-10-21): `sh tools/check.sh courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief --engine docx`: RESULT: 9 checks passed, 0 failed (TNR-EMBEDDED and DEF-FONT-002 failed before, when the reference named EB Garamond). Every page of `usage/OUTPUT-reply-brief.docx.pdf` was viewed. The .docx passes DEF-DOCX-OPEN (valid zip, well-formed XML, every relationship resolves, LibreOffice converts it headless); it has not been opened in Word.
 
-- `docx.pdf` and page review: `soffice` (LibreOffice) is not installed on this box and cannot be installed here. No `OUTPUT-<id>.docx.pdf` exists, so Gates 0 to 3 on the LibreOffice PDF did not run, and no page was rendered or viewed (pages reviewed: 0). `tools/check.sh --engine docx` was not run for the same reason.
-- Opening in Word and LibreOffice without a repair prompt: not verified. Only the zip structure and XML well-formedness were checked (`tools/render-docx.sh`).
-- TOC page numbers: Word-native field, computed by Word on update; not computed by LibreOffice (`docs/DOCX.md`, "Fields"). Needs a populated result to pass a page-number check.
-- TOA page numbers: TA/TOA fields; LibreOffice does not honor them (`docs/DOCX.md`, "Table of authorities"). Needs a populated result to pass.
-- Fonts: EB Garamond must be installed where the file is opened, or Word substitutes silently (`docs/DOCX.md`, "Fonts").
+**BLOCKED (docx):** none.
 
 [Formbook index](../../../../README.md) | [Court README](../README.md)
