@@ -337,16 +337,6 @@ fn doc_dir(spec_path: &Path) -> Option<&Path> {
 }
 
 /// Build the reference document of `spec_path` into `work/reference.docx`.
-/// The footer parts of the reference: the spec's, after the recipe's centered page number (`rIdFooter1`) on an
-/// xengine base unless the spec writes its own footer under that id.
-pub(crate) fn footer_parts(spec: &Spec) -> Vec<(String, String)> {
-    let mut footers = spec.footers.clone();
-    if spec.xengine.is_some() && !footers.iter().any(|(id, _)| id == "rIdFooter1") {
-        footers.insert(0, ("rIdFooter1".into(), crate::docxxengine::FOOTER.into()));
-    }
-    footers
-}
-
 pub fn build(spec_path: &Path, work: &Path) -> Res<PathBuf> {
     let face = doc_dir(spec_path).and_then(crate::typstface::face);
     let spec = parse(&read(spec_path)?, face.as_deref())?;
@@ -354,7 +344,7 @@ pub fn build(spec_path: &Path, work: &Path) -> Res<PathBuf> {
     pandoc_reference(work, &x)?;
     let sp = x.join("word/styles.xml");
     let dp = x.join("word/document.xml");
-    let footers = footer_parts(&spec);
+    let footers = crate::docxxengine::footers(&spec.footers, spec.xengine.as_ref());
     if let Some(r) = &spec.xengine {
         write(
             &sp,

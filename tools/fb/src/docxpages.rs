@@ -211,7 +211,11 @@ pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
                 .unwrap_or(0)
         };
         let pos = find(&n.needle, from)
-            .or_else(|| (n.place == Place::Body).then(|| split(&n.needle, from)).flatten())
+            .or_else(|| {
+                (n.place == Place::Body)
+                    .then(|| split(&n.needle, from))
+                    .flatten()
+            })
             .or_else(|| find(&n.fallback, from));
         if let (Some(p), true) = (pos, n.place == Place::Body) {
             cur = p + 1;

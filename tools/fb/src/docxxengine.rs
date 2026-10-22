@@ -233,6 +233,16 @@ pub fn document(doc: &str, r: &Recipe) -> Result<String, String> {
 /// The recipe's footer (relationship id `rIdFooter1`): a centered PAGE field.
 pub const FOOTER: &str = r#"<w:p><w:pPr><w:jc w:val="center" /></w:pPr><w:r><w:fldChar w:fldCharType="begin" /></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate" /></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end" /></w:r></w:p>"#;
 
+/// The footer parts of a reference: `own` (the spec's), after the recipe's centered page number (`rIdFooter1`) when
+/// there is a recipe (an xengine base), unless `own` writes a footer under that id.
+pub fn footers(own: &[(String, String)], recipe: Option<&Recipe>) -> Vec<(String, String)> {
+    let mut footers = own.to_vec();
+    if recipe.is_some() && !footers.iter().any(|(id, _)| id == "rIdFooter1") {
+        footers.insert(0, ("rIdFooter1".into(), FOOTER.into()));
+    }
+    footers
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
