@@ -35,7 +35,7 @@ Courts under `courts/tenth-circuit` (31).
 | [Supreme Court of Oklahoma](oklahoma/state/supreme-court) | `okla` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [Court of Appeals of Utah](utah/state/court-of-appeals) | `utahctapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Utah Supreme Court](utah/state/supreme-court) | `utah` | up for review | 7/7 | 7/7 | 7/7 | 29 |
-| [Wyoming Supreme Court](wyoming/state/supreme-court) | `wyo` | up for review | 3/3 | — | — | 29 |
+| [Wyoming Supreme Court](wyoming/state/supreme-court) | `wyo` | up for review | 3/3 | 2/2 | 2/2 | 29 |
 
 [Formbook index](../../README.md)
 <!-- fb:generated:end -->

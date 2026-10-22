@@ -9,7 +9,7 @@ Courts under `courts/eighth-circuit/iowa` (6).
 | [United States Bankruptcy Court, S.D. Iowa](federal/bankruptcy-southern-district) | `iasb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, N.D. Iowa](federal/northern-district) | `iand` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, S.D. Iowa](federal/southern-district) | `iasd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Appeals of Iowa](state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 3/3 | 3/3 | 29 |
+| [Court of Appeals of Iowa](state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Supreme Court of Iowa](state/supreme-court) | `iowa` | up for review | 8/8 | 6/6 | 6/6 | 29 |
 
 [Formbook index](../../../README.md)
