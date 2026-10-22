@@ -7,11 +7,11 @@ Folder: `courts/sixth-circuit/tennessee/federal/middle-district/motion-brief/` (
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: excerpt of the 27-page memorandum (pages 1 to 5, the start of Section IV and IV.B, and pages 26 to 27). Pages 6 to 10 and 13 to 25 are not transcribed; see Known gaps 3. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `usage/OVERLAY-veris-motion-brief.pdf` and `usage/OVERLAY-veris-motion-brief.txt` (sample page 6 pairs with exemplar page 5 and page 7 with exemplar page 12, because the transcription skips pages) |
-| typeface | face required: none. LR 7.03(a) (applies to LCrR 57.01 too) requires "at least 12-point font" and names no face, so the court-named-face substitute does not apply. Stays EB Garamond (vendored, visual only), per `docs/FONTS.md` ("No face named"). |
-| pages reviewed | 9 of 9 (re-rendered 2026-10-15 with vendored fonts only, zero warnings; every page rendered at 60 dpi and viewed) |
-| tier 1 | not gated: `tools/check.sh` expects a court folder with `court.json` and `rules.md`, which this doc-type folder is not, and the brief forbids touching `tools/`. The rule rows below are the tier-1 record. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `usage/OUTPUT-motion-brief.docx(.pdf)`, 9 pages each, vendored Times New Roman only, no warnings |
+| overlay | `just overlay` writes `.overlay/.../OVERLAY-motion-brief.pdf` (not committed; the sample skips filed pages, so pages pair loosely) |
+| typeface | face required: none. LR 7.03(a) requires "at least 12-point font" and names no face. Times New Roman 12 pt (vendored), the exemplar's face. |
+| pages reviewed | 9 of 9, typst and docx (2026-10-22, 60 dpi, every page viewed) |
+| tier 1 | `sh tools/check.sh <dir>`: typst 10 passed, 0 failed (with the 25-page limit, `eval.yaml`); `--engine docx` 14 passed, 0 failed (XENG-001..003 gated). |
 
 ## Governing rules
 
@@ -23,17 +23,17 @@ Primary sources, fetched 2026-10-14.
 | ID | Rule | Requirement | Where it is in the template |
 |---|---|---|---|
 | TNMD-FORM-001 | LR 7.03(a) | 8½ × 11 paper, one-inch margins. | `page` settings. |
-| TNMD-FORM-002 | LR 7.03(a) | At least 12-point font. Footnotes at least 12-point. | `type-size = 13pt` (Known gaps 2); footnotes use `type-size`. |
-| TNMD-FORM-003 | LR 7.03(a) | All material except headings, footnotes and quotations double spaced; footnotes single-spaced. | `body-leading` (27.6 pt pitch); headings, caption, footnotes and signature at `single-pitch` (15 pt). |
+| TNMD-FORM-002 | LR 7.03(a) | At least 12-point font. Footnotes at least 12-point. | `type-size = 12pt`; footnotes use `type-size`. |
+| TNMD-FORM-003 | LR 7.03(a) | All material except headings, footnotes and quotations double spaced; footnotes single-spaced. | `pitch-body` (27.6 pt pitch, Word's double line at 12 pt, the exemplar's pitch); headings, caption, footnotes and signature at `pitch-single` (13.8 pt). |
 | TNMD-FORM-004 | LR 7.03(a) | All pages numbered at the bottom. | `footer` (centered page number). |
 | TNMD-FORM-005 | LR 7.03(a) | The District Judge and Magistrate Judge names placed below the case number on filings after the initial filing. | `judges` (caption right column). |
 | TNMD-MEMO-001 | Fed. R. Civ. P. 10(a); LR 7.03(a) | Caption: court, title of the action, file number, judges. | `caption-block`, with a ")" column measured per row. |
 | TNMD-MEMO-002 | LR 7.01(a)(2) | A motion requiring a determination of law must be accompanied by a memorandum citing authorities. | Author content. The memorandum is a body of unnumbered paragraphs (briefs are not numbered); each paragraph is indented 0.5 in. |
 | TNMD-MEMO-003 | LR 7.01(a)(2) | The memorandum may be separately filed or incorporated. A memorandum incorporated into the motion must be titled "MOTION AND MEMORANDUM OF LAW". | Title in frontmatter. The template does not check the title. |
 | TNMD-MEMO-004 | LR 7.03(c) | "JURY DEMAND" appears immediately opposite the style of the case on the first page of the pleading and all subsequent filings, when a jury demand is made in the complaint. | `jury_demand: true` (the complaint's demand carries into this filing). |
-| TNMD-MEMO-005 | LR 7.03(a); Fed. R. Civ. P. 11(a) | Names typed or printed beneath signature lines; page limits exclusive of caption, signature and certificate of service. | `signature` frontmatter and the `@signature` marker. |
-| TNMD-MEMO-006 | LR 5.01 | A certificate of service identifying by name the person served, what was served, the method and the date, for any filing not served through CM/ECF. | `certificate` frontmatter, `@service` marker. |
-| TNMD-MEMO-007 | LR 7.01(a)(2) | No memorandum or combined motion and memorandum shall exceed 25 pages without leave of Court. | Not enforced by the template (page count is a filing check). The rendered sample is 9 pages of the 27-page filing. |
+| TNMD-MEMO-005 | LR 7.03(a); Fed. R. Civ. P. 11(a) | Names typed or printed beneath signature lines; page limits exclusive of caption, signature and certificate of service. | `signature` frontmatter and the `<!-- signature -->` marker. |
+| TNMD-MEMO-006 | LR 5.01 | A certificate of service identifying by name the person served, what was served, the method and the date, for any filing not served through CM/ECF. | `certificate` frontmatter, `<!-- service -->` marker. |
+| TNMD-MEMO-007 | LR 7.01(a)(2) | No memorandum or combined motion and memorandum shall exceed 25 pages without leave of Court. | `params.page_limit: 25` in `eval.yaml` (DEF-LEN-001 checks every render). The rendered sample is 9 pages of the 27-page filing. |
 | TNMD-MEMO-008 | LR 7.01(a)(1) | Conferral with counsel is not required for motions under Rule 12. | Author content; no template element. |
 | TNMD-MEMO-009 | LR 7.03(b) | Citation form: U.S. reports for Supreme Court decisions; Westlaw or Lexis for unreported decisions; authorities not in a reporter attached as exhibits. | Author content. The template does not check citations. |
 | TNMD-MEMO-010 | Fed. R. Civ. P. 12(b)(1), (2), (3), (6) | Defenses by motion, with the alternative and conditional grounds stated. | Author content (the sample's conditional structure is the filer's). |
@@ -42,52 +42,58 @@ Not produced by this template: the motion itself (a separate document), any prop
 
 ## Layout
 
-- Court name and division centered on three single-spaced lines; caption with the ")" column; "Case No." and "JURY DEMAND" with the judge lines in the right column.
-- Title centered and bold below the caption.
-- Body paragraphs: double spaced, first-line indent 0.5 in on every paragraph (including the first after a heading), ragged right.
-- Headings: level 1 centered bold (ARGUMENT, CONCLUSION); level 2 bold, flush left (the argument points, I, IV); level 3 bold, indented 0.5 in (A, B). Each heading has a blank double-spaced line above and below.
-- Footnotes at the foot of the page, single-spaced, 13 pt.
-- Signature block on the right half of the page, opening "Respectfully submitted," then the signer and the counsel lines.
-- Certificate of service: centered heading, paragraph, service entries single-spaced one after another, then the signer's line (no "Respectfully submitted," opening).
+Cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): Times New Roman 12 pt, ragged right, first-fit line breaks, no kerning, ligatures or hyphenation; every line a box of its pitch (27.6 pt body, double spacing; 13.8 pt single lines: Word's single line at 12 pt).
+
+- Court name and division centered on three single lines, a 27.6 pt gap, then the caption: one row per party line (names, a blank line, the designation italic 0.5 in in, a blank line, "v.", a blank line, ...) in a 3.3 in column, a 0.3 in column of ")" marks (one per line of text), and on the right, line by line from the "v." row down, "Case No.", a blank line, "JURY DEMAND", a blank line and the judge lines (was a column vertically centered on the caption, which Word cannot do alike).
+- Title centered and bold, 27.6 pt below the caption and a blank single line above the body.
+- Body paragraphs: double spaced, first-line indent 0.5 in on every paragraph, ragged right.
+- Headings single-spaced, kept with what follows, a blank single line above and 6.9 pt below: level 1 centered bold (ARGUMENT, CONCLUSION); level 2 the typed label ("I.") in a half-inch box at the margin, the text bold and underlined, hanging (as filed); level 3 the same half an inch in, bold italic (as filed).
+- Footnotes 12 pt in 13.8 pt lines, 7 pt apart, 7 pt between the text and the rule.
+- Signature block at 3.25 in, kept on one page with the conclusion's last paragraph: "Respectfully submitted,", a blank line, the signer, 6.9 pt, the counsel lines.
+- Certificate of service on its own page (as filed): centered heading, paragraph, service entries 0.5 in in, single-spaced, a blank line apart, each kept whole, then the signer's lines at 3.25 in (no "Respectfully submitted,").
+- Page number centered at the foot in a 13.8 pt line (footer-descent 30 %).
 
 ## Markdown contract (for samples)
 
 - YAML frontmatter, then the body.
 - Frontmatter fields: `title` (the title, centered bold), `division` (required), `case_number`, `caption.parties` (list of `{names, designation}`; "v." between parties), `jury_demand`, `judges` (judge lines), `signature` (`signer`, `lines`), `certificate` (`service`: a list of entries, each a list of lines; `signer`; `lines`).
 - Body: paragraphs and headings in markdown; footnotes as `[^n]` with `[^n]:` definitions in the same run of text.
-- Markers: a line `@signature` places the signature block; a line `@service` places the certificate's service entries and signer line (the certificate's own heading and paragraph are ordinary markdown above it).
+- Markers: a line `<!-- signature -->` places the signature block; a line `<!-- service -->` places the certificate's service entries and signer lines (the certificate's own heading and paragraph are ordinary markdown between them; the heading after the signature opens a new page).
 - Heading levels: `#` = level 1 (centered), `##` = level 2 (flush-left argument point), `###` = level 3 (indented sub-point).
 - Not supported: numbered paragraphs (briefs do not number them), tables, raw typst.
 
 ## Known gaps and open choices
 
 1. **Only one exemplar.** The brief asks for one per doc type; EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The RECAP search (`type=r&court=tnmd`, "motion to dismiss" "memorandum") also found other memoranda in support of Rule 12 motions (*Doe v. HCA Healthcare, Inc.*, No. 3:26-cv-00993; *Lucy v. Skrmetti*, No. 3:26-cv-00998; *Martin v. Western Express, Inc.*, No. 3:26-cv-01178). They were not saved. Tier 2 is therefore **not** judged against two filers yet. Recorded as an open tier-2 item.
-2. **Font size.** The rule requires at least 12 point and names no font. The template uses EB Garamond (vendored) at 13 pt, for the same reason as the complaint (see `../complaint/README.md`, Known gaps 2). Footnotes are 13 pt as well.
+2. **Font.** Times New Roman 12 pt (vendored), the exemplar's face; the rule names no face. Footnotes are 12 pt (LR 7.03(a)); the exemplar's are smaller. The docx was EB Garamond 13 pt until fb-595.68.31; it now names the typst face.
 3. **Sample is an excerpt.** The sample transcribes the caption and title, filed pages 1 to 5 (the background and Section I), filed page 11 (Section IV and IV.A) and the first part of page 12 (IV.B), and filed pages 26 to 27 (conclusion, signature, certificate of service). Filed pages 6 to 10 (the rest of Section I, Sections II and III) and 13 to 25 (the rest of Section IV, Counts II to VII) are not transcribed. The overlay therefore pairs sample page 6 with the exemplar's page 5 (the closest text) and sample page 7 with page 12. The overlay is a diagnostic, not a score.
 4. **No table of contents or table of authorities.** The exemplar has neither (it is a 27-page memorandum with a caption, body, conclusion and certificate). A longer memorandum with a table of contents is not covered by this template; adding one is a template change.
-5. **Justification.** The body is ragged right. The rules are silent on justification and the exemplar's justification could not be read from the text layer. Tier-2 convention choice; not asserted.
+5. **Justification.** The body is ragged right (the cross-engine model: Word and typst break ragged text alike). The rules are silent on justification; the exemplar is justified.
 6. **Paragraph indent.** Every body paragraph carries a 0.5 in first-line indent, including the first paragraph after a heading. The exemplar's indent on the first paragraph after a heading could not be confirmed from the text layer; this is a convention choice.
 7. **Certificate signature.** The certificate's signer line is printed without "Respectfully submitted," (the exemplar's certificate ends with the signer's name, as rendered here).
-8. **Page limit.** LR 7.01(a)(2) limits a memorandum to 25 pages (exclusive of caption, signature and certificate). The template does not enforce this; the filing's own page count must be checked before filing.
+8. **Page limit.** LR 7.01(a)(2) limits a memorandum to 25 pages (exclusive of caption, signature and certificate); `eval.yaml` sets `page_limit: 25`, which counts every page, so it is the stricter reading.
+9. **Exemplar conventions not followed** (tier 3): the exemplar justifies the body, sets rules above and below the title, a signature line under "/s/", "Page X of Y" in the footer and smaller footnotes.
 
-## Review of the rendered pages (current PDF, 60 dpi, every page viewed)
+## Review of the rendered pages (2026-10-22, typst and docx, 60 dpi, every page viewed)
 
-- Page 1: court name and division; caption with the ")" column, "Case No. 3:26-cv-00918", "JURY DEMAND", the two judge lines; the title centered in bold; the opening paragraph with footnote 1 at the foot of the page. Pass.
-- Page 2: opening paragraph continued (ending with footnote 2 at the foot); "BRIEF FACTUAL & PROCEDURAL HISTORY" centered; two paragraphs, footnote 2 at single spacing. Pass.
-- Page 3: the paragraph continued; "ARGUMENT" centered; "I. The Court Should Dismiss…" (level 2, wraps to two lines); paragraph; "A. Standard of Law." (level 3) with its paragraph. Pass.
-- Page 4: "B. Veris Pleads…" (level 3) and its paragraphs; the "Here, the Complaint…" paragraph with footnote 3 reference. Pass.
-- Page 5: the paragraph continued; "Per the Complaint…"; "Veris argues…"; footnote 3 at the foot of the page, single-spaced. Pass.
-- Page 6: the "The Court should reach the same result here…" paragraph; "IV. In the Alternative…" (level 2, two lines); the conditional paragraph; "A. Standard of Law." Pass.
-- Page 7: the standard-of-law paragraphs (Iqbal, Carper, Hill). Pass.
-- Page 8: "B. Veris Fails to Plausibly State a Defamation Claim…" (level 3) and its paragraph; "CONCLUSION" centered; conclusion paragraph; "Respectfully submitted," signature block on the right half, with the counsel lines. Pass.
-- Page 9: "CERTIFICATE OF SERVICE" centered; certificate paragraph; the three service entries single-spaced; the certificate signer line (no opening line). Pass.
+The typst and docx renders break every line and page alike (XENG-001..003), so one review covers both; each page was viewed in both PDFs.
 
-Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+| Page | Compared with | Finding | Status |
+|---|---|---|---|
+| 1 | exemplar p.1 | Court and division lines; caption with the ")" column, "Case No. 3:26-cv-00918" on the "v." row, "JURY DEMAND" and the two judge lines below it; title centered bold; opening paragraph; footnote 1. | PASS |
+| 2 | exemplar p.2 | Opening paragraph ends with footnote 2; BRIEF FACTUAL & PROCEDURAL HISTORY centered; two paragraphs. | PASS |
+| 3 | exemplar p.3 | ARGUMENT; "I." heading (label boxed, text underlined, as filed); "A." and "B." headings bold italic half an inch in. | PASS |
+| 4 | exemplar p.4 | Paragraphs; footnote 3 at the foot. | PASS |
+| 5 | exemplar p.5 | "Per the Complaint…", "Veris argues…". | PASS |
+| 6 | exemplar p.5, p.11 | "The Court should reach…"; "IV." heading on two lines, hanging; IV.A. | PASS |
+| 7 | exemplar p.11, p.12 | Standard-of-law paragraphs; IV.B heading. | PASS |
+| 8 | exemplar p.26 | CONCLUSION; signature block at 3.25 in with the last paragraph. | PASS |
+| 9 | exemplar p.27 | CERTIFICATE OF SERVICE on its own page; paragraph; three service entries; signer lines. | PASS |
+
+Reviewed pages: 9 of 9 (typst and docx).
 
 ## Engines
 
-docx: `docx/build-reference.sh` (builds `docx/reference.docx`) and `docx/tnmd.lua` (caption, signature, certificate of service, prayer lettering, footnotes). Output: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.1 conversion). Typst output for comparison: `usage/OUTPUT-motion-brief.typst.pdf`. The docx is 10 pages; the typst output is 9. Every page of both was rasterized at 60 dpi and viewed (docx pages 1 to 7 before the last two changes, which only moved the signature and certificate; pages 8 to 10 after).
-
-- Matches typst: letter paper, one-inch margins, EB Garamond 13 pt (embedded), double spacing as an exact 27.6 pt pitch, single spacing at 15 pt for the caption, headings, footnotes and signature, centered page number (TNMD-FORM-001 to 004). Caption with the ")" column and the judge lines on the right; the title block; footnotes single-spaced at 13 pt; headings (centered level 1, flush-left level 2, indented level 3) at the typst default sizes; the signature block at 3.25 in; the certificate of service entries, kept together, with the signer block that has no opening line.
-- Differs: the docx runs one page longer (10 against 9). Exact line spacing in Word and LibreOffice puts each line's text about 12 pt lower in its line box than typst, so each page holds about one line less; the line pitch is identical. Headings keep with the text after them, which moves a few lines. The ")" column is one ")" per estimated caption line, as in the complaint. The page-count difference is a renderer effect, not a rule (LR 7.01(a)(2) allows 25 pages).
-- BLOCKED: none for the docx. `tools/check.sh` cannot run on this folder (no `court.json` or `checks.yaml`); the docx gate was not run. Word was not available; the file was checked with `unzip -t`, `xmllint` and the LibreOffice conversion only.
+- typst (`typst/tnmd-motion-brief.typ`, the reference).
+- docx (ported to the cross-engine layout model 2026-10-22, fb-595.68.31): `docx/reference.xml` (the Word styles: `base="xengine"` in the typst face `{font}`, Times New Roman 12 pt; Body Text in exact 27.6 pt line boxes with a 0.5 in first-line indent, Body Keep for the last paragraph before the signature, Footnote Text 12 pt in 13.8 pt lines 7 pt apart, the page number in a 13.8 pt footer line; `fb render` builds `reference.docx` from it) and `docx/tnmd-motion-brief.lua` (court name, caption table, title, headings, signature block and certificate of service as WordprocessingML with the typst pitches and spaces in twips; body paragraphs and footnotes written by pandoc in the styles above). No shell script and no committed `reference.docx` (were `build-reference.sh`, which set EB Garamond 13 pt, `reference.docx` and `tnmd.lua`, which looked for `@signature` and `@service` markers the sample does not use, so the signature and service entries were missing). XENG-001..003 PASS (231/231 lines, 9 pages), gated (`eval.yaml`: `params.cross_engine: gate`).
+- latex: none for this doc type.
