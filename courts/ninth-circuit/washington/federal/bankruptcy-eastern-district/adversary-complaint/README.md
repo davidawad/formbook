@@ -7,10 +7,10 @@ Folder: `courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/adv
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (Bush Kornfeld LLP for co-trustees, 2025-09-26) and `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (Stoel Rives LLP for the City of Cle Elum, Chapter 9, 2025-08-13). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-adversary-complaint.md`: caption, paragraphs 1 to 35 (Counts I and II), prayer, signature, Exhibit 1 and Exhibit 2 (full tables). Counts III and IV are not transcribed (see Known gaps). |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 17 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-adversary-complaint.md usage/OUTPUT-adversary-complaint.typst.pdf`). |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 17 pages, typst 0.15.0, vendored Times New Roman only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-adversary-complaint.md usage/OUTPUT-adversary-complaint.typst.pdf`). |
 | overlay | ok: `usage/OVERLAY-icap-adversary-complaint.pdf` and `usage/OVERLAY-icap-adversary-complaint.txt` (`tools/overlay.sh` with the iCap exemplar as third argument, 2026-10-15; see Overlay). The exemplar PDF is not in the checkout; it was fetched from its CourtListener URL in `usage/SOURCE.md` into a scratch directory for the run. |
-| pages reviewed | 17 of 17 (2026-10-15: every page rasterized at 70 dpi and viewed as a contact sheet, unchanged font; earlier 60 dpi review 2026-10-14). |
-| typeface | LBR 9004-1(a)(3) names no face; EB Garamond kept (2026-10-15 check of the rule text). See Typeface. |
+| pages reviewed | every page, typst and docx (2026-10-22, fb-595.68.24: both renders at 50 dpi as contact sheets; `reviews/docx.md`). |
+| typeface | LBR 9004-1(a)(3) names no face; Times New Roman (vendored), the house standard, in typst and docx alike. See Typeface. |
 
 ## Governing rules
 
@@ -19,7 +19,7 @@ Primary sources, fetched 2026-10-14 (the rule text in each source is quoted from
 | Rule | Requirement | Template |
 |---|---|---|
 | LBR 9004-1(a)(1) (Complete Set of Local Rules, https://www.waeb.uscourts.gov/sites/waeb/files/Complete_Set_Local%20Rules_20260717.pdf, rule dated AUGUST 1, 2020) | Documents prepared letter size, 8 " x 11". | `paper: "us-letter"` (WAEB-AC-FORM-003). |
-| LBR 9004-1(a)(3) (same source) | Double-spaced; "a proportionately spaced typeface of 14 points or more"; roman type; footnotes double-spaced; quotations may be single-spaced; average of no more than 280 words per page. | `type-size = 14pt`, `body-leading = 0.94em` (about 2.2 x type size), EB Garamond (WAEB-AC-FORM-001, -002). Words per page measured on the render: 210 to 260 on pages 3 to 12. |
+| LBR 9004-1(a)(3) (same source) | Double-spaced; "a proportionately spaced typeface of 14 points or more"; roman type; footnotes double-spaced; quotations may be single-spaced; average of no more than 280 words per page. | `type-size = 14pt`, `pitch-body = 28pt` (double spacing: every body line, heading and footnote line in a 28 pt box), Times New Roman (WAEB-AC-FORM-001, -002); footnotes at 14 pt and double-spaced. Words per page on the render: 224 on average over pages 2 to 12 (2,459 words). |
 | LBR 9004-1(a)(4) (same source) | Title of the Court on or below the fifth line of the first page; names typed under each signature line. | `court-heading()` after the counsel block (WAEB-AC-CAP-003); `signature-block()` (WAEB-AC-SIG-001). |
 | LBR 9004-1(a)(5)(A)-(D) (same source) | Right of centre opposite the caption: case number and related case number above the adversary number; nature of the document; party status; "Demand for Jury Trial" when demanded. | `caption()`: `related_case`, `adversary_no`, `title`, `jury_demand` (WAEB-AC-CAP-004). |
 | LBR 9004-1(a)(6) (same source) | Attorney name, mailing address and telephone on the left side above line five. | `counsel-block()` (WAEB-AC-CAP-002). |
@@ -29,22 +29,22 @@ Primary sources, fetched 2026-10-14 (the rule text in each source is quoted from
 | FRBP 7010 (https://www.law.cornell.edu/rules/frbp/rule_7010, eff. Dec. 1, 2024) | "Fed. R. Civ. P. 10 applies in an adversary proceeding"; the caption substantially conforms to Form 416. | Caption and numbering follow FRCP 10 (below). |
 | FRCP 10(a) (https://www.law.cornell.edu/rules/frcp/rule_10, as amended Apr. 30, 2007, eff. Dec. 1, 2007) | "Every pleading must have a caption with the court's name, a title, a file number, and a Rule 7(a) designation." | `court-title` constant, `caption()`, `related_case`. |
 | FRCP 10(b) (same source) | "A party must state its claims or defenses in numbered paragraphs, each limited as far as practicable to a single set of circumstances." | Numbered paragraphs by the template (WAEB-AC-BODY-001). Unnumbered paragraphs need the `~ ` marker (see contract). |
-| FRBP 9004(a) (https://www.law.cornell.edu/rules/frbp/rule_9004, eff. Dec. 1, 2024) | "A petition, pleading, schedule, or other document must be clearly legible." | Text in EB Garamond, 14 pt, roman; no fallback font (`fallback: false`). |
+| FRBP 9004(a) (https://www.law.cornell.edu/rules/frbp/rule_9004, eff. Dec. 1, 2024) | "A petition, pleading, schedule, or other document must be clearly legible." | Text in Times New Roman, 14 pt, roman; no fallback font (`fallback: false`). |
 
 Not produced by this template (separate filings, may be required with the first filing): the adversary cover sheet (Official Form 1040, LBR 7003-1(a)), the summons, and the disclosure statement.
 
 ## Typeface
 
 - Court rule: LBR 9004-1(a)(3) requires "a proportionately spaced typeface of 14 points or more" and roman type. It names no face (checked 2026-10-15 against the text of the Complete Set of Local Rules, dated 2026-07-17 on the court's site).
-- Substitution: none. The rule names no face, so the template keeps EB Garamond (`docs/FONTS.md`, "No face named"). No other typeface is used in the template.
-- Times New Roman in the filed exemplar is the filer's choice, not a rule requirement, and is not copied.
+- Choice: the rule names no face; the template sets Times New Roman (vendored, `docs/FONTS.md`), the face of both filed exemplars and the house standard, and the docx names the same face (`{font}` in `docx/reference.xml`; it named EB Garamond before fb-595.68.24, a DEF-FONT-002 failure). No other typeface is used.
+- The size is the rule's: 14 pt everywhere (the exemplars' 12 pt Times is below it).
 
 ## Layout
 
 - Page 1: counsel block in side-by-side columns (one column per firm); court title below it; caption in two columns: debtor, parties and "v." on the left with a rule on the right and bottom, case numbers, adversary number, title and jury demand on the right. The caption is an unbreakable block, so it never splits across pages.
 - Body: numbered paragraphs (1, 2, ...) with a 0.5 inch first-line indent; level-1 `#` headings centered bold caps; level-2 `##` headings bold, lettered A., B., ... (restart under each level-1 heading); bold-only lines centered (cause-of-action subtitles); lettered list items (a), (b), ...
 - Signature block after the prayer: date and firm on one line, `/s/` signer, names under the line (WAEB-AC-SIG-001).
-- Exhibits: each `# EXHIBIT ...` starts a new page; markdown tables render as bordered tables with the header row repeated on each page.
+- Exhibits: each `# EXHIBIT ...` starts a new page; markdown tables render as bordered tables with a bold header row, not repeated.
 
 ## Markdown contract (for samples)
 
@@ -69,11 +69,11 @@ Not produced by this template (separate filings, may be required with the first 
 
 ## Overlay
 
-`usage/OVERLAY-icap-adversary-complaint.pdf` is the red/blue comparison of our render (red) with the filed exemplar (blue), page by page; `-overlay.txt` is the page map. Pairing by text gives: ours 1 to 11 with filed 1 to 11 (word overlap 47 to 89 per cent), ours 12 to 17 with filed 13 to 18 (the exemplar has counts III and IV and the Exhibit 1 table on different pages). The overlay is diagnostic, not a score: the red and blue differ in font size (EB Garamond 14 pt against Times 12 pt in the exemplar), so the text does not line up by eye.
+`usage/OVERLAY-icap-adversary-complaint.pdf` is the red/blue comparison of our render (red) with the filed exemplar (blue), page by page; `-overlay.txt` is the page map. Pairing by text gives: ours 1 to 11 with filed 1 to 11 (word overlap 47 to 89 per cent), ours 12 to 17 with filed 13 to 18 (the exemplar has counts III and IV and the Exhibit 1 table on different pages). The overlay is diagnostic, not a score: the red and blue differ in font size (Times 14 pt against Times 12 pt in the exemplar), so the text does not line up by eye.
 
 ## Known gaps
 
-1. **Font size look.** The rule names no face, so EB Garamond at 14 pt is compliant. The exemplar's Times at 12 pt looks larger; that is the filer's choice, not a requirement, so no Times substitute is used (see Typeface).
+1. **Font size.** The rule's 14 pt minimum makes the render longer than the exemplar (Times 12 pt); that is the rule, not a defect.
 2. **Exemplar coverage.** The sample transcribes paragraphs 1 to 35 (Counts I and II), not Counts III and IV (paragraphs 36 to 45 of the filing). The sample's own excerpt note says so. The exemplar is 18 pages and the render is 17; the target of 8 to 14 pages is not met because the sample keeps the full caption, both exhibits and the signature at 14 pt.
 3. **Second filer.** Two filers are saved (iCap and Cle Elum). Only iCap is transcribed and overlaid. Tier 2 (conventions) has not been judged against the Cle Elum caption (a two-column caption with the Chapter 9 case number and a different counsel layout) yet.
 4. **Adversary number.** The iCap filed caption leaves "Adv. Pro. No." blank; the sample takes the number (25-80041-WLH) from the footer of the filed pages. This is sample content, not template content.
@@ -94,14 +94,12 @@ Not produced by this template (separate filings, may be required with the first 
 
 ## Engines
 
-docx (`docx/`): `reference.docx` (built by `docx/build-reference.sh`), `complaint.lua` (the markdown contract to cover, caption, numbered paragraphs, lettered lists, signature block and exhibits), `render.sh` (pandoc, then the footer title). Render: `sh tools/render.sh --engine docx <this dir> usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and `usage/OUTPUT-adversary-complaint.docx.pdf` (LibreOffice 26.8; `pdffonts` shows EB Garamond only). Pages: docx 17, typst 17.
+docx (`docx/`, fb-595.68.24): declarative inputs only. `docx/reference.xml` (the cross-engine style recipe, `base="xengine"`, in the typst face through `{font}`: Times New Roman 14 pt, Body Text in exact 28 pt lines, single lines 16.1 pt, footnotes double-spaced in 28 pt lines; pandoc reads the body as CommonMark, as cmarker does) and `docx/waeb.lua` (the same file in the motion-brief folder): cover, caption, headings, numbered paragraphs, lettered lists, exhibit tables and signature block as WordprocessingML on the shared layout model (`lib/docx/xengine.lua`), the footer `COMPLAINT n` from `footer_title` (`$FORMBOOK_FOOTERS`) and the section (`$FORMBOOK_FINAL`). `fb render` builds the reference document, runs pandoc and LibreOffice: `sh tools/render.sh --engine docx <this dir> usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf`. The former `docx/build-reference.sh`, `docx/render.sh`, `docx/reference.docx`, `docx/complaint.lua` and an unused `docx/motion-brief.lua` (a copy of the motion filter that `render.sh` never loaded) are gone; `fb render` would run every top-level `docx/*.lua`.
 
-What matches the typst output (`typst/`): letter, 1 in margins; EB Garamond 14 pt throughout; body lines on the typst line pitch (31.4 pt, exact spacing); counsel, caption, signature and table lines single-spaced (about 20 pt); footnotes single-spaced as in the typst complaint template; footer `COMPLAINT n`; counsel side by side and the caption with its rules on page 1; court title with the typst blank lines; numbered paragraphs, (a) lists and A. headings; each exhibit on its own page with the header row repeated; signature block after the prayer, kept with the closing paragraph and the date.
+Cross-engine gate (`eval.yaml`: `params.cross_engine: gate`): the docx breaks every line and page as the typst render does (XENG-001..003 PASS, 17 pages, 375/375 lines, 2026-10-22). Choices made for it, in both engines:
+- every line a box of its pitch (28 pt body, 16.1 pt single), spaces between blocks explicit; numbers, letters and heading letters in 0.5 in boxes (docx: tabs);
+- exhibit columns from the longest cell (7 pt a character plus one; the last column takes the rest); LibreOffice's 0.5 pt row rules are taken off the cell padding below, and the document ends in a 1 pt paragraph (a closing table was set half a cell padding to the left);
+- footnote clearance 12 pt: at 8 pt typst 0.15 set the first part of footnote 1 on page 2 and moved its reference line to page 3, where Word keeps the line and splits the note;
+- the footer's gap is a space widened to 1 em (typst `h(1em)`); an em space character made LibreOffice's PDF read every footnote space as an em space (DEF-CONT-001 failed on docx).
 
-What differs (checked page by page, `reviews/docx.md`):
-- Exact line spacing puts the extra leading above each line, so text starts about 11 pt lower on every page than in typst. The pitch is the same, but a full page holds about one body line fewer, so page breaks differ from the typst render on pages 2 to 13. Total length is the same (17 pages).
-- Exhibit tables run the full 6.5 in text width; the typst tables are sized to their content. Column shares are set in `complaint.lua`.
-- "/s/ JASON EDWARD WAX (WSBA #41944)" wraps in LibreOffice inside the 3.5 in signature column; typst keeps it on one line.
-- Word was not run here (no Word on this machine). Word may paginate slightly differently (docs/DOCX.md).
-
-BLOCKED: check.sh gates 0-3: `tools/check.sh <this dir> --engine docx` cannot run on a doc-type folder. It reads `court.json` and `checks.yaml` from the court dir; this folder has neither, and the court folder has `court.json` but no `checks.yaml`. No `usage/.check-docx.txt` is written. The pages were checked by hand (see `reviews/docx.md`), not by the gates.
+Word was not run here (no Word on this machine); Word may paginate slightly differently from LibreOffice (docs/DOCX.md).

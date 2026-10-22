@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The waeb adversary-complaint Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman) at 14 pt (LBR 9004-1(a)(3): a
+     proportionately spaced face of 14 points or more; size 28 half points); Body Text in exact 28 pt line boxes (typst
+     pitch-body, double spaced, LBR 9004-1(a)(3)) with a half-inch first-line indent (typst para-indent); single lines
+     in 16.1 pt boxes (typst pitch-single); footnotes at the type size and double-spaced as the rule requires (28 pt
+     boxes, no space between notes; typst footnote.entry). Replaced or added here, as the typst template sets them:
+     "Body Text Keep" (a `~` paragraph, kept with the next block: typst sticky), "Numbered Paragraph" (FRCP 10(b): the
+     number at the indent, a tab 1 in from the margin, the text; typst number-box), "Lettered" (the label at the
+     indent, the text hanging at 1 in; typst letter-box), the "Note" variants without widow control for a paragraph
+     that anchors a footnote, and Footnote Text without keepLines (typst splits a long note across pages). The footer
+     (the abbreviated title from the frontmatter and the page number, LBR 9004-1(a)(7)) and the last section (letter,
+     1 in margins, the footer's single-pitch line box ending 0.5 in above the page edge: typst footer-distance) are
+     written by docx/waeb.lua. Cover, caption, headings, signature and exhibit tables carry their own spacing
+     (docx/waeb.lua). pandoc reads the body as CommonMark, as cmarker does (a footnote definition or a heading on the
+     line after a paragraph; `~ ` is text). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="commonmark+smart+footnotes+pipe_tables+yaml_metadata_block" size="28" body="560" single="322" indent="720" heading="560" heading-before="0" heading-after="0" note="560" note-after="0" footer="720">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeepNote"><w:name w:val="Body Text Keep Note"/><w:basedOn w:val="BodyTextKeep"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraph"><w:name w:val="Numbered Paragraph"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="560" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraphNote"><w:name w:val="Numbered Paragraph Note"/><w:basedOn w:val="NumberedParagraph"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Lettered"><w:name w:val="Lettered"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="560" w:lineRule="exact"/><w:ind w:left="1440" w:hanging="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="LetteredNote"><w:name w:val="Lettered Note"/><w:basedOn w:val="Lettered"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="0" w:line="560" w:lineRule="exact"/><w:ind w:firstLine="0"/></w:pPr></w:style>
+</reference>
