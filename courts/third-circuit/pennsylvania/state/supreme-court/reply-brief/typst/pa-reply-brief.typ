@@ -64,20 +64,20 @@
   block(width: 100%, [#h(0.5in)#side.designation])
 }
 
-#let cover(meta) = {
+#let cover-body(meta, g) = {
   set par(leading: leading-single, spacing: leading-single, first-line-indent: 0pt)
   align(center, text(weight: "bold", court-line))
-  v(0.3in)
+  v(0.3in * g)
   align(center, text(weight: "bold", [No. #meta.case_number]))
-  v(1.2em)
+  v(1.2em * g)
   grid(
     columns: (1fr, 1fr),
     gutter: 0.4in,
     [
       #caption-side(meta.caption.at(0))
-      #v(0.8em)
+      #v(0.8em * g)
       #block(width: 100%, [#h(0.5in) v.])
-      #v(0.8em)
+      #v(0.8em * g)
       #caption-side(meta.caption.at(1))
     ],
     [
@@ -86,22 +86,31 @@
       ]
     ],
   )
-  v(2.2em)
+  v(2.2em * g)
   align(center, text(weight: "bold", meta.brief_title))
-  v(2.4em)
+  v(2.4em * g)
   grid(
     columns: range(meta.counsel.len()).map(_ => 1fr),
     gutter: 0.3in,
-    ..meta.counsel.map(g => {
-      lines-of(g.names)
-      lines-of(g.lines, italic: true)
+    ..meta.counsel.map(c => {
+      lines-of(c.names)
+      lines-of(c.lines, italic: true)
     }),
   )
   if "date" in meta [
-    #v(1.6em)
+    #v(1.6em * g)
     #align(center)[Dated: #meta.date]
   ]
 }
+
+// The cover is one page (DEF-COVER-001): the gaps between its parts are the only thing that gives, the largest
+// scale at which the whole cover fits under the Pa.R.A.P. 124(a)(2) three-inch space is used (type size never shrinks).
+#let cover(meta) = layout(size => {
+  let fits(g) = measure(block(width: size.width, cover-body(meta, g))).height <= size.height
+  let g = (1.0, 0.8, 0.6, 0.45, 0.3, 0.2, 0.1, 0.0).find(fits)
+  if g == none { panic("pa-brief: the cover does not fit on one page; shorten the counsel or party lines") }
+  cover-body(meta, g)
+})
 
 // ---- Table of citations (Pa.R.A.P. 2111(a)) -------------------------------------------------
 // A link whose target is `toa:KEY` in the body is recorded with its page; the table is built
