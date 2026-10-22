@@ -1,6 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Report only, not gated: the token
-# after a pilcrow ("¶ 15.") is bound in LaTeX and Word together with the footnote that follows it, so the note's URL
-# loses its break points there (docs/open-items/fb-595.54.50.md, shared-model requests).
+# after a pilcrow ("¶ 15.") is bound in LaTeX and Word together with the footnote that follows it: LaTeX drops the
+# note's text (an insert inside an \mbox), Word's note URL loses its break points (page 4, note 1)
+# (docs/open-items/fb-595.54.50.md, shared-model request 19).
 params:
   cross_engine: report

@@ -1,3 +1,4 @@
 PASS
-e5ae8d21ca496e7b2ac14ed8ed60d35d404766fbd353c4f31d7827dbe0c68bf0  usage/OUTPUT-petition-for-rehearing.docx
-25be6a1684871bb33c91a7d004b81f099b4fc7759d3592a526cccc001d2b2f0a  usage/OUTPUT-petition-for-rehearing.docx.pdf
+ad3c3490b208c28ffbbd52c9fcf3d6e112e6eda79f4654a4ea49c2c881e0d552  usage/OUTPUT-petition-for-rehearing.docx
+b4fb846dc13ab32a549b5642ffae6cbb06f33de02d65909f6a4dd3be6a687eda  usage/OUTPUT-petition-for-rehearing.docx.pdf
+c9dd227a081026a88f1c823cc6658c1f5bd38d05b00aa94af92959580912030a  usage/OUTPUT-petition-for-rehearing.typst.pdf

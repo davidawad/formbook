@@ -1,5 +1,8 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Report only, not gated: typst breaks after a slash inside a word ("Clerk/Warden"), LaTeX does not (Word matches typst)
-# (docs/open-items/fb-595.54.50.md, shared-model requests).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # A slash inside a word ("Clerk/Warden"): typst and Word may break after it, LaTeX does not (page 3 line 18;
+  # docs/open-items/fb-595.54.50.md, request 12). Reported, not gated.
+  cross_engine_latex: report

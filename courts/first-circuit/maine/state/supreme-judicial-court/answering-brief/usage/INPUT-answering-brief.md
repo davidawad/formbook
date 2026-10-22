@@ -86,7 +86,7 @@ authorities:
       - cite: "*Lewisohn v. State*, 433 A.2d 351 (Me 1981)"
         find: "A.2d 351"
       - cite: "*Marbury v. Madison*, 5 U.S. 137 (1803)"
-        pages: "--"
+        pages: "–"
       - cite: "*In re Opinion of the Justs.*, 157 Me. 187, 170 A.2d 660 (1961)"
         find: "Justs"
       - cite: "*Peterson v. Johnson*, No. SJC-23-2 (Me. Jan. 12, 2024)"

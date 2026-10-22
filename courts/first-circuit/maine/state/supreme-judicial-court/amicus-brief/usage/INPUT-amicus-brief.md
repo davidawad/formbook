@@ -137,7 +137,7 @@ authorities:
   - heading: "STATUTES"
     entries:
       - cite: "1 M.R.S. § 5"
-        pages: "--"
+        pages: "–"
       - cite: "12 M.R.S. §§ 1862-1865, Submerged and Intertidal Lands"
         find: "Lands"
       - cite: "12 M.R.S. §§ 571-573, The Public Trust in Intertidal Land Act"

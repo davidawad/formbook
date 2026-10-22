@@ -177,9 +177,9 @@ authorities:
   - heading: "STATUTES"
     entries:
       - cite: "1 M.R.S. § 2-A"
-        pages: "--"
+        pages: "–"
       - cite: "1 M.R.S. § 5"
-        pages: "--"
+        pages: "–"
       - cite: "12 M.R.S. § 571"
         find: "§ 571"
       - cite: "12 M.R.S. § 6001"

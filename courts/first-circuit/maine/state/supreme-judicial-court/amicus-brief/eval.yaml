@@ -1,5 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Report only, not gated: a footnote that runs over a page end is split in typst and moved whole in LaTeX; Word's notes take a little more room and a page holds one line fewer
-# (docs/open-items/fb-595.54.50.md, shared-model requests).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Report only, not gated: a slash inside
+# a word ("public/private"): typst and Word may break after it, LaTeX does not (page 28 line 3); Word fits a note's
+# line typst fills to 540.02 pt of 540 (page 12, note 11), and the page ends drift from there
+# (docs/open-items/fb-595.54.50.md, shared-model request 12; fb-595.54.82.md, the line-fit tolerance).
 params:
   cross_engine: report

@@ -1,5 +1,9 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Report only, not gated: a footnote that does not fit below its line: typst moves the line and the note on, LaTeX and Word split the note across the page end
-# (docs/open-items/fb-595.54.50.md, shared-model requests).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # The token after "§" is bound in LaTeX in an \mbox together with the footnote that follows it ("§ 559.[^19]"),
+  # and TeX drops an insert inside a nested box: note 19 is not set (page 43, its text missing; the page ends of
+  # pages 44-47 shift). A shared-model defect (docs/open-items/fb-595.54.50.md, request 19); reported, not gated.
+  cross_engine_latex: report
