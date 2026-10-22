@@ -96,9 +96,9 @@ service:
 
 # STATEMENT OF THE ISSUES
 
-I.  Whether Summary Judgment Was Improperly Entered and Whether Defendants are Entitled to a Trial by Jury as to Liability
+I\.  Whether Summary Judgment Was Improperly Entered and Whether Defendants are Entitled to a Trial by Jury as to Liability
 
-II.  Whether Defendants are Entitled to a Trial by Jury as to Remedies
+II\.  Whether Defendants are Entitled to a Trial by Jury as to Remedies
 
 # STATEMENT OF THE CASE
 

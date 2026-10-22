@@ -1,0 +1,62 @@
+# District of Columbia Court of Appeals (dc): motion. The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to the Rules of the District of Columbia Court of Appeals, revised effective December 1, 2021 (../rules.md, DC-*);
+# lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field}).
+size: 12                  # DC-FORM-005 (Rule 27 (d) (1) (C)): 12 point or larger, footnotes included
+pitch:
+  body: 27.6              # DC-FORM-002 (Rule 27 (d) (1) (C)): double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # DC-FORM-002: quotations, headings and footnotes may be single spaced (1.15 x 12 pt)
+# DC-FORM-003 (Rule 27 (d) (1) (C)): at least one inch on all four sides; 4 pt more above and below so a superscript
+# note mark or a descender stays inside the inch
+margin: {top: 76, bottom: 76, left: 72, right: 72}
+indent: 36
+page_number: {align: center, from: 1}   # Rule 24 (e): every page numbered in sequence at the bottom
+footnote: {size: 12, pitch: single, gap: 6}   # DC-FORM-005: 12 point; DC-FORM-002: footnotes single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # DC-FORM-002: long quotations indented, single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 16.8, below: 12}
+  - {bold: true, hang: 36, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# DC-MOT-001 (Rule 27 (d) (1) (B)): the caption, with the case number, the title of the case and a descriptive title
+# stating the purpose of the motion and the party for whom it is filed, on a page of its own (both filed exemplars use
+# one). Set as the top of the body's first page and closed by a page break (the model writes a `cover` in Word only
+# before tables, and a motion has none).
+front:
+  - {text: "{court}", align: center, bold: true, upper: true}
+  - {text: "Case No. {case_number}", align: center, bold: true, above: 9.6}
+  - each: parties
+    above: 14.4
+    blocks:
+      - {text: "{name}", align: center, above: 6}
+      - {text: "{role}", align: center, italic: true, left: 108, optional: true}
+  - {text: "{lower_court_case}", align: center, above: 7.2, optional: true}
+  - {text: "{title}", align: center, bold: true, upper: true, left: 36, right: 36, above: 72}
+  - when: counsel
+    blocks:
+      - each: counsel
+        above: 72
+        blocks:
+          - {text: "{names}", bold: true, left: 180, above: 9.6}
+          - {text: "{lines}", left: 180}
+  - {break: true}
+# DC-FORM-006 (Rule 32 (d); Rule 25 (a) (2) (F)): signed by counsel; the lines before the signer kept with them.
+closing:
+  - {text: "Respectfully submitted this {signature.date}.", indent: 36, pitch: body, optional: true, keep: true,
+     above: 14.4}
+  - {text: "{signature.lines}", left: 234, optional: true, keep: true, above: 14.4}
+  - {text: "{signature.signer_line}", underline: true, left: 234, optional: true, keep: true, above: 13.8}
+  - {text: "{signature.name}", left: 234, optional: true, keep: true, above: 13.8}
+  - {text: "{signature.signer}", left: 234}
+  # The certificate of service (DC-SVC-002, Rule 25 (d) (1) (B)) opens a page: the statement, the persons served,
+  # the signature of the person who served.
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 12}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - each: service.recipients
+        blocks:
+          - {text: "{.}", left: 72, above: 12}
+      - {text: "{service.closing}", pitch: body, indent: 36, optional: true, above: 12}
+      - {text: "{service.signature.signer_line}", underline: true, left: 234, optional: true, above: 20.7}
+      - {text: "{service.signature.name}", left: 234, above: 20.7}

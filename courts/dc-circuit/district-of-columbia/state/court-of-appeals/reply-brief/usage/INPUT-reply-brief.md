@@ -80,8 +80,6 @@ authorities:
         find: "Wallace v."
       - cite: "*Warth v. Seldin*, 422 U.S. 490, 501 (1974)"
         find: "Warth"
-      - cite: "*Massachusetts v. EPA*, 549 U.S. 497 (2007)"
-        find: "Massachusetts v. EPA"
   - heading: "Statutes and Regulations"
     entries:
       - cite: "District of Columbia Environmental Policy Act of 1989, D.C. Code § 8-109 et seq. (2001 Edition, as amended)"

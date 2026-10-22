@@ -6,7 +6,6 @@ parties:
   - name: "DISTRICT OF COLUMBIA,"
     role: "Appellant,"
   - name: "v."
-    role: ""
   - name: "MARY OATES WALKER, et al.,"
     role: "Appellees."
 lower_court_case: "On Appeal from an Order of the Superior Court of the District of Columbia"
@@ -15,18 +14,14 @@ cover_page: true
 toc: false
 signature:
   lines: ["Respectfully submitted,"]
-  signer_line: ""
   name: "IRVIN B. NATHAN"
   signer:
     - "Attorney General for the District of Columbia"
-    - ""
     - "TODD S. KIM"
     - "Solicitor General"
-    - ""
     - "LOREN L. ALIKHAN"
     - "Deputy Solicitor General"
     - "Office of the Solicitor General"
-    - ""
     - "Office of the Attorney General"
     - "441 4th Street, NW, Suite 630S"
     - "Washington, D.C. 20001"
@@ -39,7 +34,6 @@ service:
     - ["James F. Hibey (jhibey@steptoe.com)", "Steptoe & Johnson LLP", "1330 Connecticut Avenue, NW", "Washington, DC 20036", "(202) 429-6407"]
     - ["William R. Martin (billy.martin@martingitnerlaw.com)", "Martin & Gitner PLLC", "2121 K Street, NW, Suite 850", "Washington, DC 20037", "(202) 331-2121"]
   signature:
-    signer_line: ""
     name: "LOREN L. ALIKHAN"
     signer: []
 ---

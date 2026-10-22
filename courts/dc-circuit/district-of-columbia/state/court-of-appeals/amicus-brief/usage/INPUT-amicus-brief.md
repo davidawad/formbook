@@ -10,7 +10,7 @@ proceeding: "Appeal from the Superior Court of the District of Columbia, Civil D
 brief_title: "BRIEF AMICUS CURIAE OF EMPOWER DC IN SUPPORT OF APPELLANTS KIESHA STALEY, ET AL. IN SUPPORT OF REVERSAL"
 counsel:
   - names: ["Shailesh Sahay, Bar No. 1003612", "Seth Jaffe*", "Sarah Main*"]
-    lines: ["FOLEY HOAG LLP", "1717 K Street NW", "Washington, DC 20006-5342", "(202) 261-7314", "ssahay@foleyhoag.com", "Counsel for Amicus Curiae", "* Not Admitted to D.C. Bar; Supervised by D.C. Bar Member"]
+    lines: ["FOLEY HOAG LLP", "1717 K Street NW", "Washington, DC 20006-5342", "(202) 261-7314", "ssahay@foleyhoag.com", "Counsel for Amicus Curiae", "\\* Not Admitted to D.C. Bar; Supervised by D.C. Bar Member"]
 front_matter:
   - heading: "Rule 26.1(a) Disclosure Statement"
     paragraphs:
@@ -88,10 +88,10 @@ authorities:
       - cite: "87 Fed. Reg. 23,453 (April 20, 2022)"
         find: "87 Fed. Reg."
 signature:
-  before: ["Dated: September 26, 2022", "", "Respectfully submitted,"]
+  before: ["Dated: September 26, 2022", "Respectfully submitted,"]
   signers:
     - name: "Shailesh Sahay"
-      lines: ["Bar No. 1003612", "Seth Jaffe*", "Sarah Main*", "FOLEY HOAG LLP", "1717 K Street NW", "Washington, DC 20006-5342", "(202) 261-7314", "Counsel for Amicus Curiae", "* Not Admitted to D.C. Bar; Supervised by D.C. Bar Member"]
+      lines: ["Bar No. 1003612", "Seth Jaffe*", "Sarah Main*", "FOLEY HOAG LLP", "1717 K Street NW", "Washington, DC 20006-5342", "(202) 261-7314", "Counsel for Amicus Curiae", "\\* Not Admitted to D.C. Bar; Supervised by D.C. Bar Member"]
 service:
   paragraphs:
     - "I hereby certify that I have served the foregoing Motion for Leave to File Amicus Curiae Brief of Empower DC with the attached Amicus Brief on all parties through the Court’s electronic case filing system."

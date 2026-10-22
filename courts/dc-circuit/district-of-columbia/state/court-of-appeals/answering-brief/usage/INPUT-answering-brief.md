@@ -160,10 +160,10 @@ authorities:
       - cite: "*Traffic Impact Study* (May 2019), https://bit.ly/3DEyaU1"
         find: "Traffic Impact Study"
 signature:
-  before: ["Respectfully submitted,", "", "KARL A. RACINE", "Attorney General for the District of Columbia", "", "CAROLINE S. VAN ZILE", "Solicitor General", "", "ASHWIN P. PHATAK", "Principal Deputy Solicitor General", "", "GRAHAM E. PHILLIPS", "Deputy Solicitor General", ""]
+  before: ["Respectfully submitted,", "KARL A. RACINE", "Attorney General for the District of Columbia", "CAROLINE S. VAN ZILE", "Solicitor General", "ASHWIN P. PHATAK", "Principal Deputy Solicitor General", "GRAHAM E. PHILLIPS", "Deputy Solicitor General"]
   signers:
     - name: "JEREMY R. GIRTON"
-      lines: ["Assistant Attorney General", "Bar Number 888304147", "Office of the Solicitor General", "", "Office of the Attorney General", "400 6th Street, NW, Suite 8100", "Washington, D.C. 20001", "(202) 724-2029", "(202) 741-8786 (fax)", "jeremy.girton@dc.gov"]
+      lines: ["Assistant Attorney General", "Bar Number 888304147", "Office of the Solicitor General", "Office of the Attorney General", "400 6th Street, NW, Suite 8100", "Washington, D.C. 20001", "(202) 724-2029", "(202) 741-8786 (fax)", "jeremy.girton@dc.gov"]
 date: "December 2022"
 service:
   paragraphs:

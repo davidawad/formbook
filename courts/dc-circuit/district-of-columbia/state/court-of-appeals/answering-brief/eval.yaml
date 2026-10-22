@@ -1,6 +1,12 @@
 # DCCA Rule 32 (a) (4): the font size, including footnotes, must be 14-point or larger, in Times New Roman, Arial, or similarly readable typeface.
 font:
   size_pt: 14
-# DCCA Rule 32 (a) (5): a principal brief may not exceed 50 pages; the tables required by Rule 28 (a) (1)-(4) do not count, so the whole-file count is a safe upper bound.
+# DCCA Rule 32 (a) (5): a principal brief may not exceed 50 pages; the title page, the Rule 28 (a) (2) statement and the
+# tables (Rule 28 (a) (1)-(4)) do not count. DEF-LEN-001 counts the whole file, so the limit here is 50 plus the 6
+# pages this sample's title page and tables take (cover 1, contents 1, authorities 4; Word's double spacing, 32.2 pt).
 params:
-  page_limit: 50
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
+  # (`fb engines gen`, fb-595.54.12) but not gated yet: typst breaks inside a bare URL ("https://bit.ly/3 | gtaoBD",
+  # p6, p9), LaTeX and Word do not (docs/open-items/fb-595.54.53.md, shared-model requests).
+  cross_engine: report
+  page_limit: 56

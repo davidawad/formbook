@@ -3,4 +3,8 @@ font:
   size_pt: 14
 # DCCA Rule 32 (a) (5): a principal brief may not exceed 50 pages; the tables required by Rule 28 (a) (1)-(4) do not count, so the whole-file count is a safe upper bound.
 params:
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+  # the typst render does, so a difference fails.
+  cross_engine: gate
   page_limit: 50

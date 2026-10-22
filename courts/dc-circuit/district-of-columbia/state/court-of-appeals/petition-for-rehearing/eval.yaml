@@ -1,3 +1,9 @@
 # DCCA Rule 32 (c) (2) and Rule 40 (d) (2): a petition for rehearing must comply with Rule 32 (a), so the font size, including footnotes, is 14-point or larger (Rule 32 (a) (4)).
 font:
   size_pt: 14
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
+# (`fb engines gen`, fb-595.54.12) but not gated yet: typst breaks after an ellipsis inside a word ("emails… |
+# contained", p22), LaTeX does not; docx passes XENG-001..003 (docs/open-items/fb-595.54.53.md, shared-model
+# requests).
+params:
+  cross_engine: report

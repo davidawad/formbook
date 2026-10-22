@@ -1,3 +1,9 @@
 # DCCA Rule 32 (a) (4): the font size, including footnotes, must be 14-point or larger, in Times New Roman, Arial, or similarly readable typeface.
 font:
   size_pt: 14
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
+# (`fb engines gen`, fb-595.54.12) but not gated yet: LaTeX never splits a footnote (lib/latex/xengine.sty,
+# \interfootnotelinepenalty=10000) where typst and Word do (p21, note 2); docx passes XENG-001..003
+# (docs/open-items/fb-595.54.53.md, shared-model requests).
+params:
+  cross_engine: report

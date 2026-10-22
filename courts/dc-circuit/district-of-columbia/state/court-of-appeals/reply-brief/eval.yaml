@@ -3,4 +3,9 @@ font:
   size_pt: 14
 # DCCA Rule 32 (a) (5): a principal brief may not exceed 50 pages; the tables required by Rule 28 (a) (1)-(4) do not count, so the whole-file count is a safe upper bound.
 params:
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
+  # (`fb engines gen`, fb-595.54.12) but not gated yet: LaTeX and Word drop widow control in a paragraph that anchors a
+  # footnote and typst keeps it (lib/typst/xdoc.typ does not set footnote-widows: false), so p19 ends a line earlier in
+  # typst (docs/open-items/fb-595.54.53.md, shared-model requests).
+  cross_engine: report
   page_limit: 50

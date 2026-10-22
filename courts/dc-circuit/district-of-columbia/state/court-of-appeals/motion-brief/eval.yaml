@@ -1,3 +1,7 @@
 # DCCA Rule 27 (d) (2): a motion or a response to a motion must not exceed 20 pages, exclusive of accompanying documents, unless the court permits or directs otherwise.
 params:
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
+  # (`fb engines gen`, fb-595.54.12) but not gated yet: typst breaks between two pilcrows ("Compl. ¶ | ¶ 8, 9", p3),
+  # LaTeX and Word bind them to the number (docs/open-items/fb-595.54.53.md, shared-model requests).
+  cross_engine: report
   page_limit: 20
