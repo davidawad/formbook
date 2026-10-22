@@ -1,7 +1,7 @@
 {
   "about": "fb-595.54 cross-engine baseline: typst render (reference) vs latex and docx renders of the same INPUT; regenerate with `fb cross-engine --write` (docs/EVAL-LOOP.md, Cross-engine gate)",
-  "pairs": 731,
-  "pairs_pass": 618,
+  "pairs": 933,
+  "pairs_pass": 698,
   "rows": [
     {
       "folder": "courts/dc-circuit/court-of-appeals/answering-brief",
@@ -181,6 +181,258 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.44,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        29,
+        29
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 7,
+      "lines": 567,
+      "lines_same": 548,
+      "pct_same": 96.6,
+      "first_differing": "p5 line 24",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        29,
+        29
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 567,
+      "lines_same": 567,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.39,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        51,
+        51
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 2,
+      "lines": 1056,
+      "lines_same": 1033,
+      "pct_same": 97.8,
+      "first_differing": "p6 line 3",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/answering-brief",
+      "id": "answering-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        51,
+        51
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 2,
+      "lines": 1056,
+      "lines_same": 1033,
+      "pct_same": 97.8,
+      "first_differing": "p6 line 3",
+      "width_drift_pt": 0.38,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        26,
+        26
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 456,
+      "lines_same": 456,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        26,
+        26
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 456,
+      "lines_same": 456,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.36,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        10,
+        10
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 223,
+      "lines_same": 212,
+      "pct_same": 95.1,
+      "first_differing": "p3 line 5",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        10,
+        10
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 223,
+      "lines_same": 220,
+      "pct_same": 98.7,
+      "first_differing": "p3 line 5",
+      "width_drift_pt": 0.44,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        27,
+        27
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 541,
+      "lines_same": 539,
+      "pct_same": 99.6,
+      "first_differing": "p22 line 17",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        27,
+        27
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 541,
+      "lines_same": 541,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.39,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        3,
+        3
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 75,
+      "lines_same": 75,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.07,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        3,
+        3
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 75,
+      "lines_same": 75,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.44,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        27,
+        27
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 6,
+      "lines": 514,
+      "lines_same": 494,
+      "pct_same": 96.1,
+      "first_differing": "p3 line 10",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/dc-circuit/district-of-columbia/state/court-of-appeals/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        27,
+        27
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 6,
+      "lines": 514,
+      "lines_same": 494,
+      "pct_same": 96.1,
+      "first_differing": "p3 line 10",
+      "width_drift_pt": 0.4,
       "source": "committed"
     },
     {
@@ -1138,6 +1390,78 @@
       "source": "committed"
     },
     {
+      "folder": "courts/eighth-circuit/minnesota/state/court-of-appeals/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        9,
+        9
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 217,
+      "lines_same": 217,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/minnesota/state/court-of-appeals/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        9,
+        9
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 217,
+      "lines_same": 217,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.34,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/minnesota/state/court-of-appeals/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        13,
+        13
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 283,
+      "lines_same": 281,
+      "pct_same": 99.3,
+      "first_differing": "p3 line 24",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/minnesota/state/court-of-appeals/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        13,
+        13
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 283,
+      "lines_same": 281,
+      "pct_same": 99.3,
+      "first_differing": "p3 line 24",
+      "width_drift_pt": 0.37,
+      "source": "committed"
+    },
+    {
       "folder": "courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/adversary-complaint",
       "id": "adversary-complaint",
       "engine": "docx",
@@ -1347,9 +1671,9 @@
       "pages_equal": true,
       "page_ends_differ": 0,
       "lines": 522,
-      "lines_same": 519,
-      "pct_same": 99.4,
-      "first_differing": "p3 line 19",
+      "lines_same": 520,
+      "pct_same": 99.6,
+      "first_differing": "p18 line 9",
       "width_drift_pt": 0.09,
       "source": "committed"
     },
@@ -1363,10 +1687,10 @@
         20
       ],
       "pages_equal": true,
-      "page_ends_differ": 0,
+      "page_ends_differ": 1,
       "lines": 522,
-      "lines_same": 521,
-      "pct_same": 99.8,
+      "lines_same": 520,
+      "pct_same": 99.6,
       "first_differing": "p3 line 19",
       "width_drift_pt": 0.4,
       "source": "committed"
@@ -1383,9 +1707,9 @@
       "pages_equal": true,
       "page_ends_differ": 1,
       "lines": 850,
-      "lines_same": 844,
-      "pct_same": 99.3,
-      "first_differing": "p20 line 27",
+      "lines_same": 847,
+      "pct_same": 99.6,
+      "first_differing": "p26 line 32",
       "width_drift_pt": 0.09,
       "source": "committed"
     },
@@ -1441,6 +1765,150 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.44,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/missouri/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        38,
+        38
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 22,
+      "lines": 1050,
+      "lines_same": 984,
+      "pct_same": 93.7,
+      "first_differing": "p2 line 8",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/missouri/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        38,
+        38
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 1050,
+      "lines_same": 1041,
+      "pct_same": 99.1,
+      "first_differing": "p10 line 3",
+      "width_drift_pt": 0.37,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/missouri/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        3,
+        3
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 67,
+      "lines_same": 67,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.07,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/missouri/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        3,
+        3
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 67,
+      "lines_same": 67,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.31,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/missouri/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        19,
+        19
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 510,
+      "lines_same": 496,
+      "pct_same": 97.3,
+      "first_differing": "p6 line 1",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/missouri/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        19,
+        19
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 510,
+      "lines_same": 503,
+      "pct_same": 98.6,
+      "first_differing": "p6 line 1",
+      "width_drift_pt": 0.36,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/missouri/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        28,
+        28
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 743,
+      "lines_same": 726,
+      "pct_same": 97.7,
+      "first_differing": "p4 line 5",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/missouri/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        28,
+        28
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 743,
+      "lines_same": 742,
+      "pct_same": 99.9,
+      "first_differing": "p4 line 5",
+      "width_drift_pt": 425.5,
       "source": "committed"
     },
     {
@@ -1657,6 +2125,204 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.39,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/north-dakota/state/supreme-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        20,
+        20
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 467,
+      "lines_same": 458,
+      "pct_same": 98.1,
+      "first_differing": "p3 line 30",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/north-dakota/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        33,
+        33
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 772,
+      "lines_same": 757,
+      "pct_same": 98.1,
+      "first_differing": "p16 line 13",
+      "width_drift_pt": 4.65,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/north-dakota/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        33,
+        33
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 772,
+      "lines_same": 757,
+      "pct_same": 98.1,
+      "first_differing": "p16 line 13",
+      "width_drift_pt": 5.04,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/north-dakota/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        4,
+        4
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 97,
+      "lines_same": 97,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.07,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/north-dakota/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        4,
+        4
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 97,
+      "lines_same": 97,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.38,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/north-dakota/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        10,
+        10
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 220,
+      "lines_same": 218,
+      "pct_same": 99.1,
+      "first_differing": "p7 line 12",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/north-dakota/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        10,
+        10
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 220,
+      "lines_same": 218,
+      "pct_same": 99.1,
+      "first_differing": "p7 line 12",
+      "width_drift_pt": 0.41,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/north-dakota/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        35,
+        35
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 823,
+      "lines_same": 823,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/north-dakota/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        35,
+        35
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 823,
+      "lines_same": 823,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.43,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/north-dakota/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        12,
+        12
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 273,
+      "lines_same": 273,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eighth-circuit/north-dakota/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        12,
+        12
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 273,
+      "lines_same": 273,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.48,
       "source": "committed"
     },
     {
@@ -2524,6 +3190,60 @@
       "source": "committed"
     },
     {
+      "folder": "courts/eleventh-circuit/georgia/state/court-of-appeals/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        31,
+        31
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 655,
+      "lines_same": 650,
+      "pct_same": 99.2,
+      "first_differing": "p21 line 5",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eleventh-circuit/georgia/state/court-of-appeals/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        31,
+        31
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 655,
+      "lines_same": 650,
+      "pct_same": 99.2,
+      "first_differing": "p21 line 5",
+      "width_drift_pt": 0.47,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eleventh-circuit/georgia/state/court-of-appeals/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        10,
+        10
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 212,
+      "lines_same": 212,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.07,
+      "source": "committed"
+    },
+    {
       "folder": "courts/eleventh-circuit/georgia/state/court-of-appeals/answering-brief",
       "id": "answering-brief",
       "engine": "docx",
@@ -2534,8 +3254,8 @@
       ],
       "pages_equal": true,
       "page_ends_differ": 0,
-      "lines": 213,
-      "lines_same": 213,
+      "lines": 212,
+      "lines_same": 212,
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.38,
@@ -2598,6 +3318,24 @@
     {
       "folder": "courts/eleventh-circuit/georgia/state/court-of-appeals/reply-brief",
       "id": "reply-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        10,
+        10
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 234,
+      "lines_same": 234,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/eleventh-circuit/georgia/state/court-of-appeals/reply-brief",
+      "id": "reply-brief",
       "engine": "docx",
       "mode": "gate",
       "pages": [
@@ -2606,8 +3344,8 @@
       ],
       "pages_equal": true,
       "page_ends_differ": 0,
-      "lines": 236,
-      "lines_same": 236,
+      "lines": 234,
+      "lines_same": 234,
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.35,
@@ -3541,11 +4279,11 @@
         8
       ],
       "pages_equal": true,
-      "page_ends_differ": 2,
+      "page_ends_differ": 0,
       "lines": 185,
-      "lines_same": 175,
-      "pct_same": 94.6,
-      "first_differing": "p5 line 1",
+      "lines_same": 185,
+      "pct_same": 100.0,
+      "first_differing": "-",
       "width_drift_pt": 0.08,
       "source": "committed"
     },
@@ -3559,12 +4297,12 @@
         8
       ],
       "pages_equal": true,
-      "page_ends_differ": 4,
+      "page_ends_differ": 0,
       "lines": 185,
-      "lines_same": 174,
-      "pct_same": 94.1,
-      "first_differing": "p5 line 1",
-      "width_drift_pt": 0.51,
+      "lines_same": 183,
+      "pct_same": 98.9,
+      "first_differing": "p5 line 28",
+      "width_drift_pt": 0.5,
       "source": "committed"
     },
     {
@@ -3957,8 +4695,8 @@
       "pages_equal": false,
       "page_ends_differ": 9,
       "lines": 258,
-      "lines_same": 201,
-      "pct_same": 77.9,
+      "lines_same": 226,
+      "pct_same": 87.6,
       "first_differing": "p2 line 1",
       "width_drift_pt": 124.83,
       "source": "committed"
@@ -4270,6 +5008,222 @@
       "source": "committed"
     },
     {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        42,
+        42
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 14,
+      "lines": 987,
+      "lines_same": 935,
+      "pct_same": 94.7,
+      "first_differing": "p3 line 15",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        42,
+        43
+      ],
+      "pages_equal": false,
+      "page_ends_differ": 34,
+      "lines": 987,
+      "lines_same": 889,
+      "pct_same": 90.1,
+      "first_differing": "p2 line 7",
+      "width_drift_pt": 0.48,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        48,
+        48
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 17,
+      "lines": 1031,
+      "lines_same": 996,
+      "pct_same": 96.6,
+      "first_differing": "p3 line 3",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        48,
+        48
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 13,
+      "lines": 1031,
+      "lines_same": 1006,
+      "pct_same": 97.6,
+      "first_differing": "p2 line 22",
+      "width_drift_pt": 0.48,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        87,
+        87
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 16,
+      "lines": 1881,
+      "lines_same": 1843,
+      "pct_same": 98.0,
+      "first_differing": "p4 line 7",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        87,
+        87
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 31,
+      "lines": 1881,
+      "lines_same": 1803,
+      "pct_same": 95.9,
+      "first_differing": "p2 line 20",
+      "width_drift_pt": 0.51,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        22,
+        22
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 13,
+      "lines": 470,
+      "lines_same": 447,
+      "pct_same": 95.1,
+      "first_differing": "p2 line 14",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        22,
+        22
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 11,
+      "lines": 470,
+      "lines_same": 455,
+      "pct_same": 96.8,
+      "first_differing": "p12 line 1",
+      "width_drift_pt": 0.55,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        19,
+        19
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 5,
+      "lines": 411,
+      "lines_same": 404,
+      "pct_same": 98.3,
+      "first_differing": "p12 line 20",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        19,
+        19
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 5,
+      "lines": 411,
+      "lines_same": 405,
+      "pct_same": 98.5,
+      "first_differing": "p12 line 20",
+      "width_drift_pt": 0.46,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        12,
+        12
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 221,
+      "lines_same": 219,
+      "pct_same": 99.1,
+      "first_differing": "p3 line 18",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        12,
+        12
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 221,
+      "lines_same": 221,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.41,
+      "source": "committed"
+    },
+    {
       "folder": "courts/first-circuit/maine/state/supreme-judicial-court/petition-for-writ",
       "id": "petition-for-writ",
       "engine": "latex",
@@ -4303,6 +5257,42 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.38,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        41,
+        41
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 3,
+      "lines": 852,
+      "lines_same": 849,
+      "pct_same": 99.6,
+      "first_differing": "p34 line 1",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/maine/state/supreme-judicial-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        41,
+        41
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 3,
+      "lines": 852,
+      "lines_same": 849,
+      "pct_same": 99.6,
+      "first_differing": "p34 line 1",
+      "width_drift_pt": 0.48,
       "source": "committed"
     },
     {
@@ -4447,6 +5437,150 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.45,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/new-hampshire/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        6,
+        6
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 134,
+      "lines_same": 134,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/new-hampshire/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        6,
+        6
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 134,
+      "lines_same": 134,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.35,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/new-hampshire/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        11,
+        11
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 4,
+      "lines": 253,
+      "lines_same": 228,
+      "pct_same": 90.1,
+      "first_differing": "p6 line 24",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/new-hampshire/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        11,
+        10
+      ],
+      "pages_equal": false,
+      "page_ends_differ": 2,
+      "lines": 253,
+      "lines_same": 244,
+      "pct_same": 96.4,
+      "first_differing": "p6 line 24",
+      "width_drift_pt": 0.4,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/new-hampshire/state/supreme-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        24,
+        24
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 575,
+      "lines_same": 573,
+      "pct_same": 99.7,
+      "first_differing": "p18 line 9",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/new-hampshire/state/supreme-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        24,
+        24
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 575,
+      "lines_same": 575,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.4,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/new-hampshire/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        20,
+        20
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 9,
+      "lines": 497,
+      "lines_same": 478,
+      "pct_same": 96.2,
+      "first_differing": "p5 line 1",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/first-circuit/new-hampshire/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        20,
+        20
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 497,
+      "lines_same": 497,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.36,
       "source": "committed"
     },
     {
@@ -5260,6 +6394,474 @@
       "source": "committed"
     },
     {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        19,
+        19
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 440,
+      "lines_same": 431,
+      "pct_same": 98.0,
+      "first_differing": "p9 line 20",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        19,
+        19
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 440,
+      "lines_same": 434,
+      "pct_same": 98.6,
+      "first_differing": "p14 line 17",
+      "width_drift_pt": 0.46,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        63,
+        63
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 15,
+      "lines": 1518,
+      "lines_same": 1468,
+      "pct_same": 96.7,
+      "first_differing": "p2 line 30",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/answering-brief",
+      "id": "answering-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        63,
+        63
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 13,
+      "lines": 1518,
+      "lines_same": 1411,
+      "pct_same": 93.0,
+      "first_differing": "p2 line 3",
+      "width_drift_pt": 0.5,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        8,
+        8
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 169,
+      "lines_same": 169,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        8,
+        8
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 169,
+      "lines_same": 169,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.46,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/opening-brief",
+      "id": "opening-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        26,
+        26
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 590,
+      "lines_same": 587,
+      "pct_same": 99.5,
+      "first_differing": "p15 line 1",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/opening-brief",
+      "id": "opening-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        26,
+        26
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 590,
+      "lines_same": 540,
+      "pct_same": 91.5,
+      "first_differing": "p2 line 3",
+      "width_drift_pt": 0.45,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        26,
+        26
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 640,
+      "lines_same": 635,
+      "pct_same": 99.2,
+      "first_differing": "p5 line 4",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        26,
+        26
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 640,
+      "lines_same": 638,
+      "pct_same": 99.7,
+      "first_differing": "p5 line 4",
+      "width_drift_pt": 0.48,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        9,
+        9
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 200,
+      "lines_same": 200,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.07,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        9,
+        9
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 200,
+      "lines_same": 200,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.44,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        11,
+        11
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 251,
+      "lines_same": 249,
+      "pct_same": 99.2,
+      "first_differing": "p4 line 22",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/court-of-appeals/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        11,
+        11
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 251,
+      "lines_same": 249,
+      "pct_same": 99.2,
+      "first_differing": "p4 line 22",
+      "width_drift_pt": 0.47,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        38,
+        38
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 10,
+      "lines": 916,
+      "lines_same": 863,
+      "pct_same": 94.2,
+      "first_differing": "p2 line 3",
+      "width_drift_pt": 3.01,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        17,
+        17
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 2,
+      "lines": 373,
+      "lines_same": 348,
+      "pct_same": 93.3,
+      "first_differing": "p5 line 18",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        17,
+        17
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 2,
+      "lines": 373,
+      "lines_same": 354,
+      "pct_same": 94.9,
+      "first_differing": "p5 line 18",
+      "width_drift_pt": 0.48,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        48,
+        48
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 19,
+      "lines": 1126,
+      "lines_same": 1098,
+      "pct_same": 97.5,
+      "first_differing": "p2 line 8",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        48,
+        48
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 19,
+      "lines": 1126,
+      "lines_same": 1100,
+      "pct_same": 97.7,
+      "first_differing": "p2 line 8",
+      "width_drift_pt": 0.6,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/opening-brief",
+      "id": "opening-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        33,
+        34
+      ],
+      "pages_equal": false,
+      "page_ends_differ": 26,
+      "lines": 786,
+      "lines_same": 720,
+      "pct_same": 91.6,
+      "first_differing": "p2 line 19",
+      "width_drift_pt": 0.44,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        8,
+        8
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 166,
+      "lines_same": 166,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.07,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        8,
+        8
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 166,
+      "lines_same": 166,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.44,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        8,
+        8
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 141,
+      "lines_same": 141,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        8,
+        8
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 141,
+      "lines_same": 141,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.41,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        43,
+        43
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 11,
+      "lines": 1018,
+      "lines_same": 985,
+      "pct_same": 96.8,
+      "first_differing": "p1 line 23",
+      "width_drift_pt": 4.65,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/north-carolina/state/superior-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        43,
+        43
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 30,
+      "lines": 1018,
+      "lines_same": 961,
+      "pct_same": 94.4,
+      "first_differing": "p1 line 23",
+      "width_drift_pt": 4.88,
+      "source": "committed"
+    },
+    {
       "folder": "courts/fourth-circuit/south-carolina/federal/bankruptcy-district/adversary-complaint",
       "id": "adversary-complaint",
       "engine": "docx",
@@ -5329,6 +6931,150 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.43,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/south-carolina/state/supreme-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        17,
+        17
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 398,
+      "lines_same": 396,
+      "pct_same": 99.5,
+      "first_differing": "p13 line 23",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/south-carolina/state/supreme-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        17,
+        17
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 2,
+      "lines": 398,
+      "lines_same": 392,
+      "pct_same": 98.5,
+      "first_differing": "p4 line 22",
+      "width_drift_pt": 0.48,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/south-carolina/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        2,
+        2
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 39,
+      "lines_same": 39,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.06,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/south-carolina/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        2,
+        2
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 39,
+      "lines_same": 39,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.39,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/south-carolina/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        27,
+        27
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 650,
+      "lines_same": 650,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/south-carolina/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        27,
+        27
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 650,
+      "lines_same": 650,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.45,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/south-carolina/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        22,
+        22
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 503,
+      "lines_same": 503,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/fourth-circuit/south-carolina/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        22,
+        22
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 503,
+      "lines_same": 503,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.47,
       "source": "committed"
     },
     {
@@ -5499,15 +7245,15 @@
       "engine": "latex",
       "mode": "report",
       "pages": [
-        51,
+        52,
         52
       ],
-      "pages_equal": false,
-      "page_ends_differ": 17,
-      "lines": 1090,
-      "lines_same": 1014,
-      "pct_same": 93.0,
-      "first_differing": "p2 line 27",
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 1091,
+      "lines_same": 1086,
+      "pct_same": 99.5,
+      "first_differing": "p18 line 2",
       "width_drift_pt": 0.09,
       "source": "committed"
     },
@@ -5517,15 +7263,15 @@
       "engine": "docx",
       "mode": "report",
       "pages": [
-        51,
-        51
+        52,
+        52
       ],
       "pages_equal": true,
-      "page_ends_differ": 14,
-      "lines": 1090,
-      "lines_same": 1042,
-      "pct_same": 95.6,
-      "first_differing": "p2 line 24",
+      "page_ends_differ": 17,
+      "lines": 1091,
+      "lines_same": 1061,
+      "pct_same": 97.3,
+      "first_differing": "p3 line 4",
       "width_drift_pt": 0.4,
       "source": "committed"
     },
@@ -5539,10 +7285,10 @@
         24
       ],
       "pages_equal": true,
-      "page_ends_differ": 3,
+      "page_ends_differ": 2,
       "lines": 476,
-      "lines_same": 462,
-      "pct_same": 97.1,
+      "lines_same": 471,
+      "pct_same": 98.9,
       "first_differing": "p2 line 15",
       "width_drift_pt": 0.09,
       "source": "committed"
@@ -5559,8 +7305,8 @@
       "pages_equal": true,
       "page_ends_differ": 0,
       "lines": 476,
-      "lines_same": 469,
-      "pct_same": 98.5,
+      "lines_same": 474,
+      "pct_same": 99.6,
       "first_differing": "p4 line 4",
       "width_drift_pt": 0.37,
       "source": "committed"
@@ -5575,11 +7321,11 @@
         35
       ],
       "pages_equal": true,
-      "page_ends_differ": 9,
+      "page_ends_differ": 4,
       "lines": 714,
-      "lines_same": 689,
-      "pct_same": 96.5,
-      "first_differing": "p2 line 29",
+      "lines_same": 701,
+      "pct_same": 98.2,
+      "first_differing": "p3 line 6",
       "width_drift_pt": 0.1,
       "source": "committed"
     },
@@ -5593,11 +7339,11 @@
         35
       ],
       "pages_equal": true,
-      "page_ends_differ": 13,
+      "page_ends_differ": 3,
       "lines": 714,
-      "lines_same": 662,
-      "pct_same": 92.7,
-      "first_differing": "p2 line 29",
+      "lines_same": 699,
+      "pct_same": 97.9,
+      "first_differing": "p4 line 20",
       "width_drift_pt": 0.39,
       "source": "committed"
     },
@@ -5770,14 +7516,14 @@
       "mode": "report",
       "pages": [
         30,
-        30
+        31
       ],
-      "pages_equal": true,
-      "page_ends_differ": 15,
+      "pages_equal": false,
+      "page_ends_differ": 21,
       "lines": 757,
-      "lines_same": 659,
-      "pct_same": 87.1,
-      "first_differing": "p3 line 3",
+      "lines_same": 620,
+      "pct_same": 81.9,
+      "first_differing": "p2 line 15",
       "width_drift_pt": 0.09,
       "source": "committed"
     },
@@ -5791,11 +7537,11 @@
         30
       ],
       "pages_equal": true,
-      "page_ends_differ": 7,
+      "page_ends_differ": 9,
       "lines": 757,
-      "lines_same": 736,
-      "pct_same": 97.2,
-      "first_differing": "p4 line 21",
+      "lines_same": 699,
+      "pct_same": 92.3,
+      "first_differing": "p3 line 3",
       "width_drift_pt": 0.45,
       "source": "committed"
     },
@@ -5841,15 +7587,15 @@
       "engine": "latex",
       "mode": "report",
       "pages": [
-        27,
+        28,
         28
       ],
-      "pages_equal": false,
-      "page_ends_differ": 21,
-      "lines": 709,
-      "lines_same": 595,
-      "pct_same": 83.9,
-      "first_differing": "p2 line 12",
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 710,
+      "lines_same": 710,
+      "pct_same": 100.0,
+      "first_differing": "-",
       "width_drift_pt": 0.08,
       "source": "committed"
     },
@@ -5859,15 +7605,15 @@
       "engine": "docx",
       "mode": "report",
       "pages": [
-        27,
+        28,
         27
       ],
-      "pages_equal": true,
-      "page_ends_differ": 15,
-      "lines": 709,
-      "lines_same": 676,
-      "pct_same": 95.3,
-      "first_differing": "p2 line 15",
+      "pages_equal": false,
+      "page_ends_differ": 21,
+      "lines": 710,
+      "lines_same": 605,
+      "pct_same": 85.2,
+      "first_differing": "p2 line 6",
       "width_drift_pt": 0.46,
       "source": "committed"
     },
@@ -6261,8 +8007,8 @@
       "pages_equal": false,
       "page_ends_differ": 4,
       "lines": 224,
-      "lines_same": 180,
-      "pct_same": 80.4,
+      "lines_same": 183,
+      "pct_same": 81.7,
       "first_differing": "p1 line 16",
       "width_drift_pt": 4.48,
       "source": "committed"
@@ -6418,14 +8164,14 @@
       "mode": "report",
       "pages": [
         19,
-        18
+        19
       ],
-      "pages_equal": false,
-      "page_ends_differ": 6,
+      "pages_equal": true,
+      "page_ends_differ": 0,
       "lines": 443,
-      "lines_same": 411,
-      "pct_same": 92.8,
-      "first_differing": "p9 line 24",
+      "lines_same": 443,
+      "pct_same": 100.0,
+      "first_differing": "-",
       "width_drift_pt": 0.1,
       "source": "committed"
     },
@@ -6439,12 +8185,156 @@
         19
       ],
       "pages_equal": true,
-      "page_ends_differ": 6,
+      "page_ends_differ": 0,
       "lines": 443,
-      "lines_same": 422,
-      "pct_same": 95.3,
-      "first_differing": "p9 line 24",
+      "lines_same": 443,
+      "pct_same": 100.0,
+      "first_differing": "-",
       "width_drift_pt": 0.45,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/alaska/state/supreme-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        35,
+        35
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 9,
+      "lines": 824,
+      "lines_same": 794,
+      "pct_same": 96.4,
+      "first_differing": "p14 line 19",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/alaska/state/supreme-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        35,
+        35
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 7,
+      "lines": 824,
+      "lines_same": 803,
+      "pct_same": 97.5,
+      "first_differing": "p2 line 17",
+      "width_drift_pt": 0.41,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/alaska/state/supreme-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        57,
+        57
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 32,
+      "lines": 1343,
+      "lines_same": 1158,
+      "pct_same": 86.2,
+      "first_differing": "p2 line 25",
+      "width_drift_pt": 17.67,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/alaska/state/supreme-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        57,
+        57
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 35,
+      "lines": 1343,
+      "lines_same": 1056,
+      "pct_same": 78.6,
+      "first_differing": "p2 line 25",
+      "width_drift_pt": 17.38,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/alaska/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        47,
+        47
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 30,
+      "lines": 1124,
+      "lines_same": 999,
+      "pct_same": 88.9,
+      "first_differing": "p2 line 23",
+      "width_drift_pt": 17.64,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/alaska/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        47,
+        47
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 7,
+      "lines": 1124,
+      "lines_same": 1087,
+      "pct_same": 96.7,
+      "first_differing": "p2 line 14",
+      "width_drift_pt": 17.36,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/alaska/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        38,
+        38
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 24,
+      "lines": 971,
+      "lines_same": 829,
+      "pct_same": 85.4,
+      "first_differing": "p6 line 1",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/alaska/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        21,
+        21
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 12,
+      "lines": 480,
+      "lines_same": 429,
+      "pct_same": 89.4,
+      "first_differing": "p9 line 9",
+      "width_drift_pt": 2.14,
       "source": "committed"
     },
     {
@@ -6898,6 +8788,42 @@
       "source": "committed"
     },
     {
+      "folder": "courts/ninth-circuit/california/state/court-of-appeal-fifth-district/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        3,
+        3
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 81,
+      "lines_same": 70,
+      "pct_same": 86.4,
+      "first_differing": "p1 line 9",
+      "width_drift_pt": 13.28,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/california/state/court-of-appeal-fifth-district/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        3,
+        3
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 81,
+      "lines_same": 81,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 3.16,
+      "source": "committed"
+    },
+    {
       "folder": "courts/ninth-circuit/california/state/court-of-appeal-sixth-district/motion-brief",
       "id": "motion-brief",
       "engine": "latex",
@@ -7089,8 +9015,8 @@
       "pages_equal": true,
       "page_ends_differ": 5,
       "lines": 402,
-      "lines_same": 347,
-      "pct_same": 86.3,
+      "lines_same": 367,
+      "pct_same": 91.3,
       "first_differing": "p1 line 3",
       "width_drift_pt": 3.56,
       "source": "committed"
@@ -7339,11 +9265,11 @@
         36
       ],
       "pages_equal": true,
-      "page_ends_differ": 27,
+      "page_ends_differ": 0,
       "lines": 737,
-      "lines_same": 683,
-      "pct_same": 92.7,
-      "first_differing": "p3 line 17",
+      "lines_same": 735,
+      "pct_same": 99.7,
+      "first_differing": "p30 line 5",
       "width_drift_pt": 0.09,
       "source": "committed"
     },
@@ -7357,11 +9283,11 @@
         36
       ],
       "pages_equal": true,
-      "page_ends_differ": 3,
+      "page_ends_differ": 0,
       "lines": 737,
-      "lines_same": 732,
-      "pct_same": 99.3,
-      "first_differing": "p26 line 14",
+      "lines_same": 737,
+      "pct_same": 100.0,
+      "first_differing": "-",
       "width_drift_pt": 0.36,
       "source": "committed"
     },
@@ -7375,11 +9301,11 @@
         24
       ],
       "pages_equal": true,
-      "page_ends_differ": 16,
+      "page_ends_differ": 0,
       "lines": 504,
-      "lines_same": 477,
-      "pct_same": 94.6,
-      "first_differing": "p5 line 14",
+      "lines_same": 504,
+      "pct_same": 100.0,
+      "first_differing": "-",
       "width_drift_pt": 0.09,
       "source": "committed"
     },
@@ -7393,11 +9319,11 @@
         24
       ],
       "pages_equal": true,
-      "page_ends_differ": 11,
+      "page_ends_differ": 16,
       "lines": 504,
-      "lines_same": 492,
-      "pct_same": 97.6,
-      "first_differing": "p8 line 1",
+      "lines_same": 474,
+      "pct_same": 94.0,
+      "first_differing": "p6 line 1",
       "width_drift_pt": 0.4,
       "source": "committed"
     },
@@ -7555,11 +9481,11 @@
         23
       ],
       "pages_equal": true,
-      "page_ends_differ": 17,
+      "page_ends_differ": 2,
       "lines": 593,
-      "lines_same": 508,
-      "pct_same": 85.7,
-      "first_differing": "p2 line 22",
+      "lines_same": 589,
+      "pct_same": 99.3,
+      "first_differing": "p2 line 34",
       "width_drift_pt": 0.09,
       "source": "committed"
     },
@@ -7573,11 +9499,11 @@
         23
       ],
       "pages_equal": true,
-      "page_ends_differ": 2,
+      "page_ends_differ": 3,
       "lines": 593,
-      "lines_same": 582,
-      "pct_same": 98.1,
-      "first_differing": "p2 line 30",
+      "lines_same": 588,
+      "pct_same": 99.2,
+      "first_differing": "p10 line 1",
       "width_drift_pt": 0.44,
       "source": "committed"
     },
@@ -7996,6 +9922,330 @@
       "source": "committed"
     },
     {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        34,
+        34
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 779,
+      "lines_same": 776,
+      "pct_same": 99.6,
+      "first_differing": "p15 line 15",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        34,
+        34
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 779,
+      "lines_same": 777,
+      "pct_same": 99.7,
+      "first_differing": "p15 line 15",
+      "width_drift_pt": 0.37,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        86,
+        86
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 79,
+      "lines": 1799,
+      "lines_same": 1610,
+      "pct_same": 89.5,
+      "first_differing": "p2 line 16",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        86,
+        86
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 10,
+      "lines": 1799,
+      "lines_same": 1785,
+      "pct_same": 99.2,
+      "first_differing": "p11 line 1",
+      "width_drift_pt": 0.41,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        48,
+        48
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 996,
+      "lines_same": 986,
+      "pct_same": 99.0,
+      "first_differing": "p21 line 18",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        48,
+        48
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 996,
+      "lines_same": 992,
+      "pct_same": 99.6,
+      "first_differing": "p21 line 18",
+      "width_drift_pt": 0.39,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        19,
+        19
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 432,
+      "lines_same": 432,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        19,
+        19
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 432,
+      "lines_same": 432,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.35,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/petition-for-discretionary-review",
+      "id": "petition-for-discretionary-review",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        24,
+        24
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 6,
+      "lines": 541,
+      "lines_same": 521,
+      "pct_same": 96.3,
+      "first_differing": "p3 line 18",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/petition-for-discretionary-review",
+      "id": "petition-for-discretionary-review",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        24,
+        24
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 10,
+      "lines": 541,
+      "lines_same": 512,
+      "pct_same": 94.6,
+      "first_differing": "p1 line 3",
+      "width_drift_pt": 0.4,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        14,
+        14
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 282,
+      "lines_same": 282,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        14,
+        14
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 282,
+      "lines_same": 282,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.38,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        18,
+        18
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 359,
+      "lines_same": 359,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        18,
+        18
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 359,
+      "lines_same": 359,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.36,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        4,
+        4
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 80,
+      "lines_same": 80,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        4,
+        4
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 80,
+      "lines_same": 80,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.32,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        29,
+        29
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 618,
+      "lines_same": 610,
+      "pct_same": 98.7,
+      "first_differing": "p5 line 7",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/montana/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        29,
+        29
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 618,
+      "lines_same": 609,
+      "pct_same": 98.5,
+      "first_differing": "p16 line 18",
+      "width_drift_pt": 0.36,
+      "source": "committed"
+    },
+    {
       "folder": "courts/ninth-circuit/nevada/federal/bankruptcy-district/adversary-complaint",
       "id": "adversary-complaint",
       "engine": "docx",
@@ -8065,6 +10315,186 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.6,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/nevada/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        16,
+        16
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 2,
+      "lines": 363,
+      "lines_same": 359,
+      "pct_same": 98.9,
+      "first_differing": "p8 line 16",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/nevada/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        16,
+        16
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 363,
+      "lines_same": 363,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.42,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/nevada/state/supreme-court/petition-for-discretionary-review",
+      "id": "petition-for-discretionary-review",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        21,
+        20
+      ],
+      "pages_equal": false,
+      "page_ends_differ": 13,
+      "lines": 464,
+      "lines_same": 416,
+      "pct_same": 89.7,
+      "first_differing": "p2 line 10",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/nevada/state/supreme-court/petition-for-discretionary-review",
+      "id": "petition-for-discretionary-review",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        21,
+        20
+      ],
+      "pages_equal": false,
+      "page_ends_differ": 11,
+      "lines": 464,
+      "lines_same": 418,
+      "pct_same": 90.1,
+      "first_differing": "p2 line 10",
+      "width_drift_pt": 0.4,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/nevada/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        20,
+        20
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 404,
+      "lines_same": 402,
+      "pct_same": 99.5,
+      "first_differing": "p4 line 1",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/nevada/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        20,
+        20
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 404,
+      "lines_same": 402,
+      "pct_same": 99.5,
+      "first_differing": "p4 line 1",
+      "width_drift_pt": 0.38,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/nevada/state/supreme-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        21,
+        21
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 453,
+      "lines_same": 453,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/nevada/state/supreme-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        21,
+        21
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 453,
+      "lines_same": 453,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.35,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/nevada/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        23,
+        23
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 4,
+      "lines": 454,
+      "lines_same": 441,
+      "pct_same": 97.1,
+      "first_differing": "p2 line 3",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/ninth-circuit/nevada/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        23,
+        23
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 13,
+      "lines": 454,
+      "lines_same": 402,
+      "pct_same": 88.5,
+      "first_differing": "p2 line 3",
+      "width_drift_pt": 0.38,
       "source": "committed"
     },
     {
@@ -9279,14 +11709,14 @@
       "engine": "latex",
       "mode": "report",
       "pages": [
-        31,
+        30,
         30
       ],
-      "pages_equal": false,
-      "page_ends_differ": 3,
-      "lines": 740,
-      "lines_same": 721,
-      "pct_same": 97.4,
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 739,
+      "lines_same": 736,
+      "pct_same": 99.6,
       "first_differing": "p15 line 8",
       "width_drift_pt": 0.08,
       "source": "committed"
@@ -9297,15 +11727,15 @@
       "engine": "docx",
       "mode": "report",
       "pages": [
-        31,
+        30,
         30
       ],
-      "pages_equal": false,
-      "page_ends_differ": 3,
-      "lines": 740,
-      "lines_same": 733,
-      "pct_same": 99.1,
-      "first_differing": "p25 line 23",
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 739,
+      "lines_same": 739,
+      "pct_same": 100.0,
+      "first_differing": "-",
       "width_drift_pt": 0.54,
       "source": "committed"
     },
@@ -9667,6 +12097,222 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 1.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        37,
+        37
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 25,
+      "lines": 895,
+      "lines_same": 857,
+      "pct_same": 95.8,
+      "first_differing": "p2 line 4",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        37,
+        37
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 25,
+      "lines": 895,
+      "lines_same": 856,
+      "pct_same": 95.6,
+      "first_differing": "p2 line 4",
+      "width_drift_pt": 0.41,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        18,
+        18
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 5,
+      "lines": 403,
+      "lines_same": 378,
+      "pct_same": 93.8,
+      "first_differing": "p3 line 18",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        18,
+        18
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 403,
+      "lines_same": 394,
+      "pct_same": 97.8,
+      "first_differing": "p12 line 13",
+      "width_drift_pt": 0.43,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        7,
+        7
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 159,
+      "lines_same": 159,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.07,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        7,
+        7
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 159,
+      "lines_same": 159,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.36,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/opening-brief",
+      "id": "opening-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        79,
+        78
+      ],
+      "pages_equal": false,
+      "page_ends_differ": 60,
+      "lines": 1971,
+      "lines_same": 1844,
+      "pct_same": 93.6,
+      "first_differing": "p2 line 7",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/opening-brief",
+      "id": "opening-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        79,
+        78
+      ],
+      "pages_equal": false,
+      "page_ends_differ": 34,
+      "lines": 1971,
+      "lines_same": 1899,
+      "pct_same": 96.3,
+      "first_differing": "p4 line 17",
+      "width_drift_pt": 0.44,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        3,
+        3
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 83,
+      "lines_same": 83,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        3,
+        3
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 83,
+      "lines_same": 83,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.48,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        22,
+        22
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 583,
+      "lines_same": 580,
+      "pct_same": 99.5,
+      "first_differing": "p7 line 1",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/seventh-circuit/illinois/state/appellate-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        22,
+        22
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 1,
+      "lines": 583,
+      "lines_same": 580,
+      "pct_same": 99.5,
+      "first_differing": "p7 line 1",
+      "width_drift_pt": 0.44,
       "source": "committed"
     },
     {
@@ -10282,6 +12928,114 @@
       "source": "committed"
     },
     {
+      "folder": "courts/sixth-circuit/kentucky/state/court-of-appeals/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        7,
+        7
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 184,
+      "lines_same": 177,
+      "pct_same": 96.2,
+      "first_differing": "p2 line 18",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/kentucky/state/court-of-appeals/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        7,
+        7
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 184,
+      "lines_same": 178,
+      "pct_same": 96.7,
+      "first_differing": "p2 line 18",
+      "width_drift_pt": 0.4,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/kentucky/state/court-of-appeals/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        28,
+        28
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 15,
+      "lines": 696,
+      "lines_same": 661,
+      "pct_same": 95.0,
+      "first_differing": "p10 line 25",
+      "width_drift_pt": 1.31,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/kentucky/state/court-of-appeals/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        28,
+        28
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 696,
+      "lines_same": 696,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 1.71,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/kentucky/state/court-of-appeals/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        5,
+        5
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 113,
+      "lines_same": 113,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.07,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/kentucky/state/court-of-appeals/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        5,
+        5
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 113,
+      "lines_same": 113,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.39,
+      "source": "committed"
+    },
+    {
       "folder": "courts/sixth-circuit/michigan/federal/bankruptcy-eastern-district/adversary-complaint",
       "id": "adversary-complaint",
       "engine": "docx",
@@ -10435,11 +13189,11 @@
         21
       ],
       "pages_equal": true,
-      "page_ends_differ": 10,
+      "page_ends_differ": 0,
       "lines": 586,
-      "lines_same": 541,
-      "pct_same": 92.3,
-      "first_differing": "p2 line 11",
+      "lines_same": 577,
+      "pct_same": 98.5,
+      "first_differing": "p13 line 5",
       "width_drift_pt": 0.1,
       "source": "committed"
     },
@@ -10453,11 +13207,11 @@
         21
       ],
       "pages_equal": true,
-      "page_ends_differ": 0,
+      "page_ends_differ": 10,
       "lines": 586,
-      "lines_same": 584,
-      "pct_same": 99.7,
-      "first_differing": "p17 line 5",
+      "lines_same": 549,
+      "pct_same": 93.7,
+      "first_differing": "p3 line 18",
       "width_drift_pt": 0.49,
       "source": "committed"
     },
@@ -10657,6 +13411,222 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.53,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        21,
+        21
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 7,
+      "lines": 511,
+      "lines_same": 477,
+      "pct_same": 93.3,
+      "first_differing": "p6 line 18",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        21,
+        21
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 6,
+      "lines": 511,
+      "lines_same": 486,
+      "pct_same": 95.1,
+      "first_differing": "p3 line 11",
+      "width_drift_pt": 0.45,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        38,
+        38
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 972,
+      "lines_same": 939,
+      "pct_same": 96.6,
+      "first_differing": "p6 line 13",
+      "width_drift_pt": 1.98,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/answering-brief",
+      "id": "answering-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        38,
+        38
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 972,
+      "lines_same": 947,
+      "pct_same": 97.4,
+      "first_differing": "p2 line 2",
+      "width_drift_pt": 2.33,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        28,
+        28
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 655,
+      "lines_same": 645,
+      "pct_same": 98.5,
+      "first_differing": "p1 line 18",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        28,
+        28
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 655,
+      "lines_same": 649,
+      "pct_same": 99.1,
+      "first_differing": "p20 line 22",
+      "width_drift_pt": 0.46,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/opening-brief",
+      "id": "opening-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        46,
+        46
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 25,
+      "lines": 1129,
+      "lines_same": 1051,
+      "pct_same": 93.1,
+      "first_differing": "p3 line 13",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/opening-brief",
+      "id": "opening-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        46,
+        46
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 5,
+      "lines": 1129,
+      "lines_same": 1113,
+      "pct_same": 98.6,
+      "first_differing": "p3 line 12",
+      "width_drift_pt": 0.48,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        33,
+        33
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 753,
+      "lines_same": 749,
+      "pct_same": 99.5,
+      "first_differing": "p6 line 22",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        33,
+        33
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 753,
+      "lines_same": 749,
+      "pct_same": 99.5,
+      "first_differing": "p6 line 22",
+      "width_drift_pt": 0.45,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        11,
+        11
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 4,
+      "lines": 254,
+      "lines_same": 249,
+      "pct_same": 98.0,
+      "first_differing": "p6 line 24",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/sixth-circuit/ohio/state/court-of-appeals/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        11,
+        10
+      ],
+      "pages_equal": false,
+      "page_ends_differ": 10,
+      "lines": 254,
+      "lines_same": 216,
+      "pct_same": 85.0,
+      "first_differing": "p1 line 1",
+      "width_drift_pt": 0.43,
       "source": "committed"
     },
     {
@@ -11281,11 +14251,11 @@
         17
       ],
       "pages_equal": true,
-      "page_ends_differ": 2,
+      "page_ends_differ": 0,
       "lines": 344,
-      "lines_same": 326,
-      "pct_same": 94.8,
-      "first_differing": "p3 line 17",
+      "lines_same": 344,
+      "pct_same": 100.0,
+      "first_differing": "-",
       "width_drift_pt": 0.44,
       "source": "committed"
     },
@@ -11521,6 +14491,132 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.45,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/new-mexico/state/court-of-appeals/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        35,
+        35
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 20,
+      "lines": 725,
+      "lines_same": 681,
+      "pct_same": 93.9,
+      "first_differing": "p2 line 16",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/new-mexico/state/court-of-appeals/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        35,
+        35
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 725,
+      "lines_same": 723,
+      "pct_same": 99.7,
+      "first_differing": "p9 line 19",
+      "width_drift_pt": 0.35,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/new-mexico/state/court-of-appeals/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        19,
+        19
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 382,
+      "lines_same": 378,
+      "pct_same": 99.0,
+      "first_differing": "p9 line 18",
+      "width_drift_pt": 0.41,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/new-mexico/state/court-of-appeals/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        13,
+        13
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 8,
+      "lines": 307,
+      "lines_same": 291,
+      "pct_same": 94.8,
+      "first_differing": "p3 line 19",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/new-mexico/state/court-of-appeals/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        13,
+        13
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 307,
+      "lines_same": 307,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.36,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/new-mexico/state/court-of-appeals/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        24,
+        24
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 11,
+      "lines": 478,
+      "lines_same": 463,
+      "pct_same": 96.9,
+      "first_differing": "p3 line 3",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/new-mexico/state/court-of-appeals/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        24,
+        24
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 11,
+      "lines": 478,
+      "lines_same": 463,
+      "pct_same": 96.9,
+      "first_differing": "p3 line 3",
+      "width_drift_pt": 0.41,
       "source": "committed"
     },
     {
@@ -11809,6 +14905,222 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.45,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        24,
+        24
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 19,
+      "lines": 652,
+      "lines_same": 570,
+      "pct_same": 87.4,
+      "first_differing": "p2 line 4",
+      "width_drift_pt": 0.08,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        24,
+        24
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 652,
+      "lines_same": 647,
+      "pct_same": 99.2,
+      "first_differing": "p9 line 1",
+      "width_drift_pt": 0.48,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        32,
+        33
+      ],
+      "pages_equal": false,
+      "page_ends_differ": 14,
+      "lines": 815,
+      "lines_same": 765,
+      "pct_same": 93.9,
+      "first_differing": "p2 line 25",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        32,
+        32
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 9,
+      "lines": 815,
+      "lines_same": 789,
+      "pct_same": 96.8,
+      "first_differing": "p3 line 8",
+      "width_drift_pt": 0.57,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        20,
+        21
+      ],
+      "pages_equal": false,
+      "page_ends_differ": 16,
+      "lines": 498,
+      "lines_same": 409,
+      "pct_same": 82.1,
+      "first_differing": "p2 line 8",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        20,
+        20
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 15,
+      "lines": 498,
+      "lines_same": 428,
+      "pct_same": 85.9,
+      "first_differing": "p3 line 20",
+      "width_drift_pt": 0.48,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        8,
+        8
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 184,
+      "lines_same": 181,
+      "pct_same": 98.4,
+      "first_differing": "p3 line 13",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        8,
+        8
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 184,
+      "lines_same": 181,
+      "pct_same": 98.4,
+      "first_differing": "p3 line 13",
+      "width_drift_pt": 0.52,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        50,
+        50
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 5,
+      "lines": 1173,
+      "lines_same": 1124,
+      "pct_same": 95.8,
+      "first_differing": "p1 line 5",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        50,
+        50
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 5,
+      "lines": 1173,
+      "lines_same": 1128,
+      "pct_same": 96.2,
+      "first_differing": "p12 line 15",
+      "width_drift_pt": 0.34,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        24,
+        24
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 5,
+      "lines": 581,
+      "lines_same": 562,
+      "pct_same": 96.7,
+      "first_differing": "p4 line 12",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/tenth-circuit/oklahoma/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        24,
+        24
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 5,
+      "lines": 581,
+      "lines_same": 565,
+      "pct_same": 97.2,
+      "first_differing": "p3 line 3",
+      "width_drift_pt": 0.44,
       "source": "committed"
     },
     {
@@ -13087,6 +16399,330 @@
       "pct_same": 100.0,
       "first_differing": "-",
       "width_drift_pt": 0.43,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        27,
+        27
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 582,
+      "lines_same": 582,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/amicus-brief",
+      "id": "amicus-brief",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        27,
+        27
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 9,
+      "lines": 582,
+      "lines_same": 552,
+      "pct_same": 94.8,
+      "first_differing": "p17 line 1",
+      "width_drift_pt": 0.44,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        45,
+        45
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 916,
+      "lines_same": 916,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/answering-brief",
+      "id": "answering-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        45,
+        45
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 916,
+      "lines_same": 916,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.39,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        77,
+        77
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 1554,
+      "lines_same": 1554,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/brief-on-the-merits",
+      "id": "brief-on-the-merits",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        77,
+        77
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 1554,
+      "lines_same": 1554,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.39,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        35,
+        35
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 691,
+      "lines_same": 691,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/motion-brief",
+      "id": "motion-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        35,
+        35
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 691,
+      "lines_same": 691,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.41,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/petition-for-discretionary-review",
+      "id": "petition-for-discretionary-review",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        27,
+        27
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 519,
+      "lines_same": 519,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/petition-for-discretionary-review",
+      "id": "petition-for-discretionary-review",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        27,
+        27
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 519,
+      "lines_same": 519,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.38,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        5,
+        5
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 95,
+      "lines_same": 95,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/petition-for-rehearing",
+      "id": "petition-for-rehearing",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        5,
+        5
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 95,
+      "lines_same": 95,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.34,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "latex",
+      "mode": "report",
+      "pages": [
+        44,
+        44
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 864,
+      "lines_same": 860,
+      "pct_same": 99.5,
+      "first_differing": "p23 line 6",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/petition-for-review",
+      "id": "petition-for-review",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        44,
+        44
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 864,
+      "lines_same": 864,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.34,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        70,
+        70
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 1450,
+      "lines_same": 1450,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.1,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/petition-for-writ",
+      "id": "petition-for-writ",
+      "engine": "docx",
+      "mode": "report",
+      "pages": [
+        70,
+        70
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 10,
+      "lines": 1450,
+      "lines_same": 1426,
+      "pct_same": 98.3,
+      "first_differing": "p31 line 20",
+      "width_drift_pt": 0.44,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        21,
+        21
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 412,
+      "lines_same": 412,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/third-circuit/pennsylvania/state/supreme-court/reply-brief",
+      "id": "reply-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        21,
+        21
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 412,
+      "lines_same": 412,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.42,
       "source": "committed"
     },
     {

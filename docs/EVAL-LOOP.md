@@ -326,160 +326,205 @@ The reported motion-brief difference is footnote 2: typst keeps the final two no
 
 **Reference breaker each engine follows** (shown on ca9: both samples, typst↔latex and typst↔docx, 100 % of lines and every page alike; `fb check --engine latex|docx` gates it, and the selftest mutant `latex-kerning` turns kerning back on and must fail `XENG-003`): first fit on Unicode break opportunities, no hyphenation, no kerning or ligatures, rigid spaces, Word's exact-line-spacing boxes. The model is shared code since fb-595.54.1 (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; the checklist at the end of this section); ca9 (`courts/ninth-circuit/court-of-appeals`: `typst/ca9-brief.typ`, `latex/template.tex`, `latex/ca9.lua`, `docx/ca9.lua`, `docx/make-reference.sh`) is the worked example.
 
-**Baseline** (`fb cross-engine --write` writes `data/cross-engine-baseline.json`; committed renders, a `.docx` without its committed PDF converted with LibreOffice into `out/cross-engine/`). Current measurement: 731 engine pairs in 490 folders; 618 pairs pass. The 19 measured engine pairs for fb-595.54.5 now show 18/19 at 100% with equal page counts; the remaining pair is the second sample of `tenth-circuit/court-of-appeals/reply-brief` (docx 99.2%, because LibreOffice moves the whole footnote; that folder stays `report`). Every other adopted pair passes XENG-001..003 and gates. Earlier measurements: on master 97737ac6 (2026-10-21), LibreOffice conversion with vendored fonts in view (fb-595.52) moved docx from a mean 27.7% to 34.2% of lines alike and from 139 to 222 of 502 page counts equal; latex was 58.1%, with 16 of 41 page counts equal. For fb-595.54.1, besides the ca7 opening brief (latex 40.0% to 100%, docx 42.3% to 100%), five rows moved with renders committed on master since that measurement. For fb-595.54.6, the federal-circuit rows went from 0/17 measured pairs passing (latex mean 67.9%, docx 43.0%, 3/17 page counts equal) to 18/18; besides them, 25 rows moved with renders committed on master since, including `eleventh-circuit/court-of-appeals/reply-brief`, `first-circuit/bankruptcy-appellate-panel/reply-brief`, `first-circuit/puerto-rico/federal/district/motion-brief`, `eleventh-circuit/georgia/state/court-of-appeals/motion-brief` docx, and all three `fourth-circuit/court-of-appeals` briefs. The 549-row table below is the snapshot before fb-595.54.5; `data/cross-engine-baseline.json` is the current measurement. By circuit (pairs; not measured; page count equal; mean % of lines with the same break; passing):
+**Baseline** (`fb cross-engine --write` writes `data/cross-engine-baseline.json`; committed renders, a `.docx` without its committed PDF converted with LibreOffice into `out/cross-engine/`). Current measurement: 933 engine pairs in 677 folders; 698 pairs pass. The 19 measured engine pairs for fb-595.54.5 show 18/19 at 100% with equal page counts; the remaining pair is the second sample of `tenth-circuit/court-of-appeals/reply-brief` (docx 99.2%, because LibreOffice moves the whole footnote; that folder stays `report`). Every other adopted pair passes XENG-001..003 and gates. Earlier measurements: on master 97737ac6 (2026-10-21), LibreOffice conversion with vendored fonts in view (fb-595.52) moved docx from a mean 27.7% to 34.2% of lines alike and from 139 to 222 of 502 page counts equal; latex was 58.1%, with 16 of 41 page counts equal. For fb-595.54.1, besides the ca7 opening brief (latex 40.0% to 100%, docx 42.3% to 100%), five rows moved with renders committed on master since that measurement. For fb-595.54.6, the federal-circuit rows went from 0/17 measured pairs passing (latex mean 67.9%, docx 43.0%, 3/17 page counts equal) to 18/18; besides them, 25 rows moved with renders committed on master since, including `eleventh-circuit/court-of-appeals/reply-brief`, `first-circuit/bankruptcy-appellate-panel/reply-brief`, `first-circuit/puerto-rico/federal/district/motion-brief`, `eleventh-circuit/georgia/state/court-of-appeals/motion-brief` docx, and all three `fourth-circuit/court-of-appeals` briefs. The detailed table is generated from the current measurement; `data/cross-engine-baseline.json` is the source of truth.
 
-| circuit | engine | pairs | not measured | pages equal | % lines same break (mean) | pass |
-|---|---|---|---|---|---|---|
-| dc-circuit | docx | 7 | 0 | 3 | 35.0 | 0 |
-| dc-circuit | latex | 3 | 0 | 2 | 59.2 | 0 |
-| eighth-circuit | docx | 48 | 0 | 28 | 38.0 | 0 |
-| eighth-circuit | latex | 3 | 0 | 1 | 61.9 | 0 |
-| eleventh-circuit | docx | 49 | 0 | 21 | 43.0 | 0 |
-| eleventh-circuit | latex | 3 | 0 | 2 | 69.1 | 0 |
-| federal-circuit | docx | 15 | 0 | 15 | 100.0 | 15 |
-| federal-circuit | latex | 3 | 0 | 3 | 100.0 | 3 |
-| fifth-circuit | docx | 48 | 0 | 19 | 29.8 | 0 |
-| fifth-circuit | latex | 3 | 0 | 3 | 38.2 | 0 |
-| first-circuit | docx | 28 | 0 | 11 | 33.8 | 0 |
-| first-circuit | latex | 3 | 0 | 2 | 77.0 | 0 |
-| fourth-circuit | docx | 41 | 0 | 21 | 41.7 | 0 |
-| fourth-circuit | latex | 3 | 0 | 0 | 64.6 | 0 |
-| military | docx | 14 | 0 | 5 | 44.3 | 0 |
-| national | docx | 7 | 0 | 4 | 42.6 | 0 |
-| ninth-circuit | docx | 73 | 0 | 18 | 24.3 | 2 |
-| ninth-circuit | latex | 4 | 0 | 2 | 80.0 | 2 |
-| second-circuit | docx | 33 | 0 | 14 | 30.0 | 0 |
-| second-circuit | latex | 3 | 0 | 0 | 39.7 | 0 |
-| seventh-circuit | docx | 31 | 0 | 12 | 33.2 | 1 |
-| seventh-circuit | latex | 4 | 0 | 2 | 50.6 | 1 |
-| sixth-circuit | docx | 43 | 0 | 30 | 39.2 | 0 |
-| sixth-circuit | latex | 3 | 0 | 0 | 75.6 | 0 |
-| supreme-court-of-the-united-states | docx | 3 | 0 | 2 | 38.5 | 0 |
-| supreme-court-of-the-united-states | latex | 2 | 0 | 1 | 32.0 | 0 |
-| tenth-circuit | docx | 40 | 0 | 18 | 36.1 | 0 |
-| tenth-circuit | latex | 1 | 0 | 0 | 41.7 | 0 |
-| third-circuit | docx | 28 | 0 | 14 | 34.8 | 0 |
-| third-circuit | latex | 3 | 0 | 2 | 46.6 | 0 |
 
-Folders that fail the gate, by circuit: every folder in the table below except `courts/ninth-circuit/court-of-appeals` (both samples, both engines PASS), `courts/seventh-circuit/court-of-appeals/opening-brief` (both engines PASS; fb-595.54.1) and the 14 `courts/federal-circuit` folders (every pair PASS; fb-595.54.6), and the fb-595.54.5 folders named above (not yet in the rows). Per pair: folder | id | engine | mode | pages equal | % lines same break | first differing page/line.
-
-<details><summary>Full baseline table (549 rows)</summary>
+<details><summary>Full baseline table (933 rows)</summary>
 
 | folder | id | engine | mode | pages equal | % lines same break | first differing page/line |
 |---|---|---|---|---|---|---|
-| courts/dc-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | yes (13) | 65.2 | p2 line 3 |
-| courts/dc-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (13 vs 11) | 64.4 | p2 line 1 |
-| courts/dc-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | yes (15) | 59.6 | p1 line 10 |
-| courts/dc-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | no (15 vs 14) | 17.2 | p1 line 10 |
-| courts/dc-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | no (15 vs 13) | 52.9 | p1 line 11 |
-| courts/dc-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | no (15 vs 9) | 43.5 | p1 line 1 |
-| courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (13 vs 12) | 31.5 | p1 line 27 |
-| courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (8) | 40.7 | p1 line 26 |
-| courts/dc-circuit/district-of-columbia/federal/district/complaint | complaint | docx | report | yes (12) | 23.0 | p1 line 5 |
-| courts/dc-circuit/district-of-columbia/federal/district/motion-brief | motion-brief | docx | report | yes (14) | 24.5 | p2 line 2 |
-| courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | yes (6) | 42.3 | p1 line 10 |
-| courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | yes (7) | 29.6 | p1 line 10 |
-| courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | yes (9) | 30.0 | p1 line 7 |
-| courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | no (8 vs 9) | 25.3 | p1 line 8 |
-| courts/eighth-circuit/arkansas/federal/eastern-district/complaint | complaint | docx | report | yes (9) | 78.9 | p1 line 15 |
-| courts/eighth-circuit/arkansas/federal/eastern-district/motion-brief | motion-brief | docx | report | no (7 vs 9) | 11.4 | p1 line 4 |
-| courts/eighth-circuit/arkansas/federal/western-district/complaint | complaint | docx | report | no (11 vs 10) | 16.5 | p1 line 8 |
-| courts/eighth-circuit/arkansas/federal/western-district/motion-brief | motion-brief | docx | report | yes (11) | 19.1 | p1 line 10 |
-| courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | report | yes (20) | 91.0 | p2 line 9 |
-| courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief | docx | report | yes (9) | 83.3 | p1 line 1 |
-| courts/eighth-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (13 vs 14) | 55.8 | p2 line 4 |
-| courts/eighth-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (13 vs 11) | 13.3 | p1 line 2 |
-| courts/eighth-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | yes (15) | 65.3 | p2 line 5 |
-| courts/eighth-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | no (15 vs 14) | 9.3 | p1 line 8 |
-| courts/eighth-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | no (20 vs 21) | 64.5 | p2 line 4 |
-| courts/eighth-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | no (20 vs 14) | 20.1 | p1 line 2 |
-| courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | yes (4) | 63.6 | p1 line 3 |
-| courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint-2 | docx | report | yes (5) | 77.0 | p1 line 3 |
-| courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | yes (3) | 39.5 | p1 line 3 |
-| courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief | motion-brief-2 | docx | report | no (6 vs 7) | 13.9 | p1 line 3 |
-| courts/eighth-circuit/iowa/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | no (5 vs 6) | 37.9 | p1 line 17 |
-| courts/eighth-circuit/iowa/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | yes (11) | 19.6 | p1 line 13 |
-| courts/eighth-circuit/iowa/federal/northern-district/complaint | complaint | docx | report | yes (8) | 32.1 | p1 line 6 |
-| courts/eighth-circuit/iowa/federal/northern-district/motion-brief | motion-brief | docx | report | no (16 vs 12) | 78.3 | p1 line 6 |
-| courts/eighth-circuit/iowa/federal/southern-district/complaint | complaint | docx | report | no (10 vs 11) | 31.3 | p1 line 6 |
+| courts/dc-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (14) | 100.0 | - |
+| courts/dc-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/dc-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (15) | 100.0 | - |
+| courts/dc-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/dc-circuit/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (16) | 100.0 | - |
+| courts/dc-circuit/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (16) | 100.0 | - |
+| courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/dc-circuit/district-of-columbia/federal/district/complaint | complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/dc-circuit/district-of-columbia/federal/district/motion-brief | motion-brief | docx | gate | yes (16) | 100.0 | - |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/amicus-brief | amicus-brief | latex | report | yes (29) | 96.6 | p5 line 24 |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/amicus-brief | amicus-brief | docx | report | yes (29) | 100.0 | - |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/answering-brief | answering-brief | latex | report | yes (51) | 97.8 | p6 line 3 |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/answering-brief | answering-brief | docx | report | yes (51) | 97.8 | p6 line 3 |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/brief-on-the-merits | brief-on-the-merits | latex | gate | yes (26) | 100.0 | - |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/brief-on-the-merits | brief-on-the-merits | docx | gate | yes (26) | 100.0 | - |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/motion-brief | motion-brief | latex | report | yes (10) | 95.1 | p3 line 5 |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/motion-brief | motion-brief | docx | report | yes (10) | 98.7 | p3 line 5 |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/petition-for-rehearing | petition-for-rehearing | latex | report | yes (27) | 99.6 | p22 line 17 |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/petition-for-rehearing | petition-for-rehearing | docx | report | yes (27) | 100.0 | - |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/petition-for-review | petition-for-review | latex | gate | yes (3) | 100.0 | - |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/petition-for-review | petition-for-review | docx | gate | yes (3) | 100.0 | - |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/reply-brief | reply-brief | latex | report | yes (27) | 96.1 | p3 line 10 |
+| courts/dc-circuit/district-of-columbia/state/court-of-appeals/reply-brief | reply-brief | docx | report | yes (27) | 96.1 | p3 line 10 |
+| courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (6) | 100.0 | - |
+| courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/eighth-circuit/arkansas/federal/eastern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/eighth-circuit/arkansas/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/eighth-circuit/arkansas/federal/western-district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/eighth-circuit/arkansas/federal/western-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/eighth-circuit/arkansas/state/court-of-appeals/amicus-brief | amicus-brief | latex | gate | yes (12) | 100.0 | - |
+| courts/eighth-circuit/arkansas/state/court-of-appeals/amicus-brief | amicus-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/eighth-circuit/arkansas/state/court-of-appeals/motion-brief | motion-brief | latex | gate | yes (11) | 100.0 | - |
+| courts/eighth-circuit/arkansas/state/court-of-appeals/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/eighth-circuit/arkansas/state/court-of-appeals/petition-for-writ | petition-for-writ | latex | gate | yes (4) | 100.0 | - |
+| courts/eighth-circuit/arkansas/state/court-of-appeals/petition-for-writ | petition-for-writ | docx | gate | yes (4) | 100.0 | - |
+| courts/eighth-circuit/arkansas/state/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (12) | 100.0 | - |
+| courts/eighth-circuit/arkansas/state/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/eighth-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief | docx | report | no (20 vs 22) | 68.8 | p1 line 2 |
+| courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | gate | yes (20) | 100.0 | - |
+| courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/eighth-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (14) | 100.0 | - |
+| courts/eighth-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/eighth-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (15) | 100.0 | - |
+| courts/eighth-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/eighth-circuit/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (18) | 100.0 | - |
+| courts/eighth-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | yes (18) | 99.3 | p9 line 14 |
+| courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (4) | 100.0 | - |
+| courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint-2 | docx | gate | yes (5) | 100.0 | - |
+| courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | gate | yes (3) | 100.0 | - |
+| courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief | motion-brief-2 | docx | gate | yes (6) | 100.0 | - |
+| courts/eighth-circuit/iowa/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (6) | 100.0 | - |
+| courts/eighth-circuit/iowa/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | yes (12) | 99.7 | p8 line 25 |
+| courts/eighth-circuit/iowa/federal/northern-district/complaint | complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/eighth-circuit/iowa/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/eighth-circuit/iowa/federal/southern-district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
 | courts/eighth-circuit/iowa/federal/southern-district/motion-brief | motion-brief | docx | report | yes (8) | 83.4 | p1 line 6 |
-| courts/eighth-circuit/minnesota/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (11 vs 10) | 25.0 | p1 line 15 |
-| courts/eighth-circuit/minnesota/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (12 vs 11) | 24.2 | p1 line 6 |
-| courts/eighth-circuit/minnesota/federal/district/complaint | complaint | docx | report | yes (14) | 37.8 | p1 line 3 |
-| courts/eighth-circuit/minnesota/federal/district/motion-brief | motion-brief | docx | report | yes (14) | 35.8 | p1 line 3 |
-| courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | yes (6) | 44.0 | p1 line 14 |
-| courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/motion-brief | motion-brief-2 | docx | report | yes (6) | 31.4 | p1 line 18 |
-| courts/eighth-circuit/missouri/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | no (10 vs 12) | 51.0 | p1 line 18 |
-| courts/eighth-circuit/missouri/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | no (4 vs 5) | 40.3 | p1 line 28 |
-| courts/eighth-circuit/missouri/federal/eastern-district/complaint | complaint | docx | report | yes (11) | 32.2 | p1 line 6 |
-| courts/eighth-circuit/missouri/federal/eastern-district/motion-brief | motion-brief | docx | report | yes (10) | 17.6 | p1 line 9 |
-| courts/eighth-circuit/missouri/federal/western-district/complaint | complaint | docx | report | yes (11) | 43.0 | p1 line 5 |
-| courts/eighth-circuit/missouri/federal/western-district/motion-brief | motion-brief | docx | report | yes (10) | 35.5 | p1 line 9 |
-| courts/eighth-circuit/nebraska/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (9 vs 8) | 35.8 | p1 line 3 |
-| courts/eighth-circuit/nebraska/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (13 vs 11) | 10.1 | p1 line 3 |
-| courts/eighth-circuit/nebraska/federal/district/complaint | complaint | docx | report | no (11 vs 12) | 27.0 | p1 line 15 |
-| courts/eighth-circuit/nebraska/federal/district/motion-brief | motion-brief | docx | report | yes (14) | 17.7 | p1 line 12 |
-| courts/eighth-circuit/north-dakota/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (9) | 30.6 | p1 line 6 |
-| courts/eighth-circuit/north-dakota/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (10) | 21.9 | p1 line 7 |
-| courts/eighth-circuit/north-dakota/federal/district/complaint | complaint | docx | report | no (10 vs 9) | 41.5 | p1 line 6 |
-| courts/eighth-circuit/north-dakota/federal/district/motion-brief | motion-brief | docx | report | yes (10) | 27.1 | p1 line 10 |
-| courts/eighth-circuit/south-dakota/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (2 vs 3) | 58.9 | p1 line 23 |
-| courts/eighth-circuit/south-dakota/federal/bankruptcy-district/adversary-complaint | adversary-complaint-2 | docx | report | yes (3) | 75.3 | p1 line 25 |
-| courts/eighth-circuit/south-dakota/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (9) | 19.9 | p1 line 17 |
-| courts/eighth-circuit/south-dakota/federal/district/complaint | complaint | docx | report | yes (3) | 76.8 | p1 line 6 |
-| courts/eighth-circuit/south-dakota/federal/district/motion-brief | motion-brief | docx | report | no (9 vs 11) | 17.2 | p1 line 6 |
-| courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | report | yes (12) | 44.3 | p1 line 6 |
-| courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district/motion-brief | motion-brief-2 | docx | report | no (5 vs 6) | 52.9 | p1 line 5 |
-| courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | no (6 vs 7) | 33.7 | p1 line 20 |
-| courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | no (9 vs 10) | 32.2 | p1 line 22 |
-| courts/eleventh-circuit/alabama/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | no (5 vs 6) | 48.5 | p1 line 5 |
-| courts/eleventh-circuit/alabama/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint-2 | docx | report | no (4 vs 6) | 69.3 | p1 line 4 |
-| courts/eleventh-circuit/alabama/federal/middle-district/complaint | complaint | docx | report | no (14 vs 16) | 41.7 | p1 line 14 |
-| courts/eleventh-circuit/alabama/federal/middle-district/motion-brief | motion-brief | docx | report | no (10 vs 11) | 27.0 | p1 line 20 |
-| courts/eleventh-circuit/alabama/federal/northern-district/complaint | complaint | docx | report | yes (10) | 35.5 | p1 line 4 |
-| courts/eleventh-circuit/alabama/federal/northern-district/motion-brief | motion-brief | docx | report | yes (10) | 41.5 | p1 line 11 |
-| courts/eleventh-circuit/alabama/federal/southern-district/complaint | complaint | docx | report | yes (11) | 35.3 | p1 line 15 |
-| courts/eleventh-circuit/alabama/federal/southern-district/motion-brief | motion-brief | docx | report | yes (8) | 28.1 | p1 line 14 |
-| courts/eleventh-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | yes (14) | 59.9 | p1 line 10 |
-| courts/eleventh-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | yes (14) | 36.0 | p1 line 10 |
-| courts/eleventh-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | no (15 vs 16) | 83.1 | p2 line 16 |
-| courts/eleventh-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | no (15 vs 16) | 60.9 | p2 line 4 |
-| courts/eleventh-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | yes (14) | 64.3 | p2 line 7 |
-| courts/eleventh-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | no (14 vs 15) | 76.9 | p2 line 5 |
-| courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | report | no (10 vs 11) | 72.6 | p2 line 3 |
-| courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | report | no (15 vs 16) | 38.6 | p1 line 18 |
-| courts/eleventh-circuit/florida/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | yes (10) | 50.8 | p1 line 17 |
-| courts/eleventh-circuit/florida/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | yes (5) | 47.6 | p1 line 11 |
-| courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | no (5 vs 6) | 39.3 | p1 line 8 |
-| courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | yes (11) | 21.4 | p1 line 8 |
-| courts/eleventh-circuit/florida/federal/middle-district/complaint | complaint | docx | report | yes (10) | 80.2 | p1 line 16 |
-| courts/eleventh-circuit/florida/federal/middle-district/motion-brief | motion-brief | docx | report | yes (14) | 20.6 | p1 line 5 |
-| courts/eleventh-circuit/florida/federal/northern-district/complaint | complaint | docx | report | no (10 vs 9) | 34.9 | p1 line 11 |
-| courts/eleventh-circuit/florida/federal/northern-district/motion-brief | motion-brief | docx | report | no (13 vs 12) | 23.8 | p1 line 10 |
-| courts/eleventh-circuit/florida/federal/southern-district/complaint | complaint | docx | report | yes (7) | 48.7 | p1 line 12 |
-| courts/eleventh-circuit/florida/federal/southern-district/motion-brief | motion-brief | docx | report | no (13 vs 12) | 25.3 | p1 line 16 |
-| courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | report | no (13 vs 16) | 48.6 | p1 line 7 |
-| courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | report | no (9 vs 10) | 43.4 | p1 line 21 |
-| courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | no (5 vs 6) | 73.3 | p1 line 22 |
-| courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | no (7 vs 8) | 41.2 | p1 line 26 |
-| courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | yes (8) | 51.5 | p1 line 7 |
-| courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | yes (7) | 44.3 | p1 line 18 |
+| courts/eighth-circuit/iowa/state/supreme-court/amicus-brief | amicus-brief | latex | report | yes (27) | 98.4 | p5 line 20 |
+| courts/eighth-circuit/iowa/state/supreme-court/amicus-brief | amicus-brief | docx | report | yes (27) | 99.1 | p4 line 12 |
+| courts/eighth-circuit/iowa/state/supreme-court/brief-on-the-merits | brief-on-the-merits | latex | report | yes (46) | 99.5 | p29 line 21 |
+| courts/eighth-circuit/iowa/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | report | yes (46) | 99.5 | p29 line 21 |
+| courts/eighth-circuit/iowa/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (10) | 100.0 | - |
+| courts/eighth-circuit/iowa/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/eighth-circuit/iowa/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | latex | report | yes (23) | 100.0 | - |
+| courts/eighth-circuit/iowa/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | docx | report | yes (23) | 98.7 | p12 line 3 |
+| courts/eighth-circuit/iowa/state/supreme-court/petition-for-rehearing | petition-for-rehearing | latex | report | yes (18) | 99.7 | p17 line 18 |
+| courts/eighth-circuit/iowa/state/supreme-court/petition-for-rehearing | petition-for-rehearing | docx | report | no (18 vs 19) | 98.4 | p2 line 17 |
+| courts/eighth-circuit/iowa/state/supreme-court/reply-brief | reply-brief | latex | gate | yes (19) | 100.0 | - |
+| courts/eighth-circuit/iowa/state/supreme-court/reply-brief | reply-brief | docx | gate | yes (19) | 100.0 | - |
+| courts/eighth-circuit/minnesota/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/eighth-circuit/minnesota/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/eighth-circuit/minnesota/federal/district/complaint | complaint | docx | gate | yes (14) | 100.0 | - |
+| courts/eighth-circuit/minnesota/federal/district/motion-brief | motion-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/eighth-circuit/minnesota/state/court-of-appeals/motion-brief | motion-brief | latex | gate | yes (10) | 100.0 | - |
+| courts/eighth-circuit/minnesota/state/court-of-appeals/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/eighth-circuit/minnesota/state/court-of-appeals/petition-for-review | petition-for-review | latex | gate | yes (9) | 100.0 | - |
+| courts/eighth-circuit/minnesota/state/court-of-appeals/petition-for-review | petition-for-review | docx | gate | yes (9) | 100.0 | - |
+| courts/eighth-circuit/minnesota/state/court-of-appeals/petition-for-writ | petition-for-writ | latex | report | yes (13) | 99.3 | p3 line 24 |
+| courts/eighth-circuit/minnesota/state/court-of-appeals/petition-for-writ | petition-for-writ | docx | report | yes (13) | 99.3 | p3 line 24 |
+| courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (6) | 100.0 | - |
+| courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (16) | 100.0 | - |
+| courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/motion-brief | motion-brief-2 | docx | gate | yes (6) | 100.0 | - |
+| courts/eighth-circuit/missouri/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/eighth-circuit/missouri/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (4) | 100.0 | - |
+| courts/eighth-circuit/missouri/federal/eastern-district/complaint | complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/eighth-circuit/missouri/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/eighth-circuit/missouri/federal/western-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/eighth-circuit/missouri/federal/western-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/eighth-circuit/missouri/state/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (19) | 100.0 | - |
+| courts/eighth-circuit/missouri/state/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (19) | 100.0 | - |
+| courts/eighth-circuit/missouri/state/court-of-appeals-southern-district/answering-brief | answering-brief | latex | report | yes (20) | 99.6 | p18 line 9 |
+| courts/eighth-circuit/missouri/state/court-of-appeals-southern-district/answering-brief | answering-brief | docx | report | yes (20) | 99.6 | p3 line 19 |
+| courts/eighth-circuit/missouri/state/court-of-appeals-southern-district/opening-brief | opening-brief | latex | report | yes (31) | 99.6 | p26 line 32 |
+| courts/eighth-circuit/missouri/state/court-of-appeals-southern-district/opening-brief | opening-brief | docx | report | yes (31) | 99.8 | p20 line 28 |
+| courts/eighth-circuit/missouri/state/court-of-appeals-southern-district/reply-brief | reply-brief | latex | gate | yes (15) | 100.0 | - |
+| courts/eighth-circuit/missouri/state/court-of-appeals-southern-district/reply-brief | reply-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/eighth-circuit/missouri/state/supreme-court/brief-on-the-merits | brief-on-the-merits | latex | report | yes (38) | 93.7 | p2 line 8 |
+| courts/eighth-circuit/missouri/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | report | yes (38) | 99.1 | p10 line 3 |
+| courts/eighth-circuit/missouri/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (3) | 100.0 | - |
+| courts/eighth-circuit/missouri/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (3) | 100.0 | - |
+| courts/eighth-circuit/missouri/state/supreme-court/petition-for-writ | petition-for-writ | latex | report | yes (19) | 97.3 | p6 line 1 |
+| courts/eighth-circuit/missouri/state/supreme-court/petition-for-writ | petition-for-writ | docx | report | yes (19) | 98.6 | p6 line 1 |
+| courts/eighth-circuit/missouri/state/supreme-court/reply-brief | reply-brief | latex | report | yes (28) | 97.7 | p4 line 5 |
+| courts/eighth-circuit/missouri/state/supreme-court/reply-brief | reply-brief | docx | report | yes (28) | 99.9 | p4 line 5 |
+| courts/eighth-circuit/nebraska/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/eighth-circuit/nebraska/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/eighth-circuit/nebraska/federal/district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/eighth-circuit/nebraska/federal/district/motion-brief | motion-brief | docx | gate | yes (16) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/federal/district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/federal/district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/state/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (8) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/state/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (11) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/state/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (7) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/state/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/state/supreme-court/answering-brief | answering-brief | latex | report | yes (20) | 98.1 | p3 line 30 |
+| courts/eighth-circuit/north-dakota/state/supreme-court/brief-on-the-merits | brief-on-the-merits | latex | report | yes (33) | 98.1 | p16 line 13 |
+| courts/eighth-circuit/north-dakota/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | report | yes (33) | 98.1 | p16 line 13 |
+| courts/eighth-circuit/north-dakota/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (4) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (4) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/state/supreme-court/petition-for-rehearing | petition-for-rehearing | latex | report | yes (10) | 99.1 | p7 line 12 |
+| courts/eighth-circuit/north-dakota/state/supreme-court/petition-for-rehearing | petition-for-rehearing | docx | report | yes (10) | 99.1 | p7 line 12 |
+| courts/eighth-circuit/north-dakota/state/supreme-court/petition-for-writ | petition-for-writ | latex | gate | yes (35) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/state/supreme-court/petition-for-writ | petition-for-writ | docx | gate | yes (35) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/state/supreme-court/reply-brief | reply-brief | latex | gate | yes (12) | 100.0 | - |
+| courts/eighth-circuit/north-dakota/state/supreme-court/reply-brief | reply-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/eighth-circuit/south-dakota/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (3) | 100.0 | - |
+| courts/eighth-circuit/south-dakota/federal/bankruptcy-district/adversary-complaint | adversary-complaint-2 | docx | gate | yes (3) | 100.0 | - |
+| courts/eighth-circuit/south-dakota/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (10) | 99.7 | p1 line 20 |
+| courts/eighth-circuit/south-dakota/federal/district/complaint | complaint | docx | gate | yes (3) | 100.0 | - |
+| courts/eighth-circuit/south-dakota/federal/district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district/motion-brief | motion-brief-2 | docx | gate | yes (5) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (7) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (6) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint-2 | docx | gate | yes (5) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/middle-district/complaint | complaint | docx | gate | yes (14) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/middle-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/northern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/southern-district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/eleventh-circuit/alabama/federal/southern-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/eleventh-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (15) | 100.0 | - |
+| courts/eleventh-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/eleventh-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (16) | 100.0 | - |
+| courts/eleventh-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (16) | 100.0 | - |
+| courts/eleventh-circuit/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (15) | 100.0 | - |
+| courts/eleventh-circuit/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | gate | yes (18) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | gate | yes (5) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (6) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/middle-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/middle-district/motion-brief | motion-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/northern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/southern-district/complaint | complaint | docx | gate | yes (7) | 100.0 | - |
+| courts/eleventh-circuit/florida/federal/southern-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | gate | yes (15) | 100.0 | - |
+| courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (6) | 100.0 | - |
+| courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
 | courts/eleventh-circuit/georgia/federal/middle-district/complaint | complaint | docx | report | yes (10) | 49.3 | p1 line 4 |
 | courts/eleventh-circuit/georgia/federal/middle-district/motion-brief | motion-brief | docx | report | yes (9) | 32.7 | p1 line 4 |
-| courts/eleventh-circuit/georgia/federal/northern-district/complaint | complaint | docx | report | yes (13) | 83.0 | p1 line 5 |
-| courts/eleventh-circuit/georgia/federal/northern-district/motion-brief | motion-brief | docx | report | no (10 vs 11) | 84.1 | p1 line 8 |
-| courts/eleventh-circuit/georgia/federal/southern-district/complaint | complaint | docx | report | no (8 vs 9) | 28.3 | p1 line 17 |
-| courts/eleventh-circuit/georgia/federal/southern-district/motion-brief | motion-brief | docx | report | no (11 vs 12) | 27.6 | p1 line 16 |
-| courts/eleventh-circuit/georgia/state/court-of-appeals/answering-brief | answering-brief | docx | report | no (11 vs 6) | 2.6 | p1 line 2 |
-| courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief | motion-brief | docx | report | no (18 vs 14) | 45.4 | p1 line 2 |
-| courts/eleventh-circuit/georgia/state/court-of-appeals/opening-brief | opening-brief | docx | report | no (17 vs 9) | 2.0 | p1 line 2 |
-| courts/eleventh-circuit/georgia/state/court-of-appeals/petition-for-rehearing | petition-for-rehearing | docx | report | no (12 vs 6) | 0.4 | p1 line 1 |
-| courts/eleventh-circuit/georgia/state/court-of-appeals/reply-brief | reply-brief | docx | report | no (9 vs 4) | 0.4 | p1 line 2 |
-| courts/eleventh-circuit/georgia/state/supreme-court/answering-brief | answering-brief | docx | report | yes (12) | 90.4 | p2 line 2 |
-| courts/eleventh-circuit/georgia/state/supreme-court/motion-brief | motion-brief | docx | report | no (9 vs 10) | 17.8 | p1 line 4 |
-| courts/eleventh-circuit/georgia/state/supreme-court/opening-brief | opening-brief | docx | report | yes (15) | 71.4 | p1 line 4 |
-| courts/eleventh-circuit/georgia/state/supreme-court/petition-for-review | petition-for-review | docx | report | yes (12) | 17.7 | p1 line 4 |
-| courts/eleventh-circuit/georgia/state/supreme-court/reply-brief | reply-brief | docx | report | yes (14) | 85.7 | p1 line 4 |
+| courts/eleventh-circuit/georgia/federal/northern-district/complaint | complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/eleventh-circuit/georgia/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/georgia/federal/southern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/georgia/federal/southern-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/court-of-appeals/amicus-brief | amicus-brief | latex | report | yes (31) | 99.2 | p21 line 5 |
+| courts/eleventh-circuit/georgia/state/court-of-appeals/amicus-brief | amicus-brief | docx | report | yes (31) | 99.2 | p21 line 5 |
+| courts/eleventh-circuit/georgia/state/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief | motion-brief | docx | gate | yes (18) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (17) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/court-of-appeals/petition-for-rehearing | petition-for-rehearing | docx | gate | yes (12) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/supreme-court/answering-brief | answering-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (9) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/supreme-court/opening-brief | opening-brief | docx | report | yes (15) | 99.4 | p10 line 1 |
+| courts/eleventh-circuit/georgia/state/supreme-court/petition-for-review | petition-for-review | docx | gate | yes (12) | 100.0 | - |
+| courts/eleventh-circuit/georgia/state/supreme-court/reply-brief | reply-brief | docx | gate | yes (14) | 100.0 | - |
 | courts/federal-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (15) | 100.0 | - |
 | courts/federal-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (15) | 100.0 | - |
 | courts/federal-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (22) | 100.0 | - |
@@ -498,425 +543,729 @@ Folders that fail the gate, by circuit: every folder in the table below except `
 | courts/federal-circuit/trademark-trial-and-appeal-board/answer | answer-3 | docx | gate | yes (4) | 100.0 | - |
 | courts/federal-circuit/trademark-trial-and-appeal-board/notice-of-opposition | notice-of-opposition | docx | gate | yes (9) | 100.0 | - |
 | courts/federal-circuit/trademark-trial-and-appeal-board/trial-brief | trial-brief | docx | gate | yes (9) | 100.0 | - |
-| courts/fifth-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | yes (13) | 27.5 | p1 line 2 |
-| courts/fifth-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (13 vs 5) | 6.1 | p1 line 1 |
-| courts/fifth-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | yes (15) | 47.9 | p2 line 2 |
-| courts/fifth-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | no (15 vs 9) | 17.7 | p1 line 1 |
-| courts/fifth-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | yes (11) | 39.3 | p1 line 8 |
-| courts/fifth-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | no (11 vs 5) | 11.4 | p1 line 1 |
-| courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | no (9 vs 8) | 25.4 | p1 line 6 |
-| courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | yes (8) | 53.6 | p1 line 7 |
-| courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | report | no (5 vs 6) | 16.7 | p1 line 4 |
-| courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | report | yes (18) | 21.9 | p1 line 8 |
-| courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | yes (7) | 50.0 | p1 line 5 |
-| courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | no (7 vs 8) | 29.1 | p1 line 3 |
-| courts/fifth-circuit/louisiana/federal/eastern-district/complaint | complaint | docx | report | yes (11) | 26.9 | p1 line 11 |
-| courts/fifth-circuit/louisiana/federal/eastern-district/motion-brief | motion-brief | docx | report | no (8 vs 10) | 15.2 | p1 line 11 |
-| courts/fifth-circuit/louisiana/federal/middle-district/complaint | complaint | docx | report | yes (5) | 41.4 | p1 line 4 |
-| courts/fifth-circuit/louisiana/federal/middle-district/motion-brief | motion-brief | docx | report | no (12 vs 11) | 25.2 | p1 line 4 |
-| courts/fifth-circuit/louisiana/federal/western-district/complaint | complaint | docx | report | yes (5) | 35.4 | p1 line 13 |
-| courts/fifth-circuit/louisiana/federal/western-district/motion-brief | motion-brief | docx | report | yes (10) | 29.7 | p1 line 6 |
-| courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | yes (3) | 33.8 | p1 line 6 |
-| courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | yes (13) | 21.0 | p1 line 7 |
-| courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district/motion-brief | motion-brief-2 | docx | report | yes (3) | 45.7 | p1 line 6 |
-| courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | yes (16) | 33.9 | p1 line 18 |
-| courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | no (10 vs 11) | 30.8 | p1 line 16 |
-| courts/fifth-circuit/mississippi/federal/northern-district/complaint | complaint | docx | report | yes (12) | 23.5 | p1 line 6 |
-| courts/fifth-circuit/mississippi/federal/northern-district/motion-brief | motion-brief | docx | report | yes (11) | 17.9 | p1 line 12 |
-| courts/fifth-circuit/mississippi/federal/southern-district/complaint | complaint | docx | report | yes (10) | 69.0 | p1 line 21 |
-| courts/fifth-circuit/mississippi/federal/southern-district/motion-brief | motion-brief | docx | report | no (7 vs 8) | 49.7 | p1 line 13 |
-| courts/fifth-circuit/texas/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | no (14 vs 13) | 23.7 | p1 line 19 |
-| courts/fifth-circuit/texas/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | no (7 vs 9) | 13.2 | p1 line 19 |
-| courts/fifth-circuit/texas/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | no (12 vs 11) | 27.6 | p1 line 28 |
-| courts/fifth-circuit/texas/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | yes (9) | 23.3 | p1 line 11 |
-| courts/fifth-circuit/texas/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | yes (13) | 24.4 | p1 line 5 |
-| courts/fifth-circuit/texas/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | no (13 vs 12) | 31.1 | p1 line 5 |
-| courts/fifth-circuit/texas/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | yes (9) | 39.4 | p1 line 16 |
-| courts/fifth-circuit/texas/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | no (9 vs 8) | 49.4 | p1 line 40 |
-| courts/fifth-circuit/texas/federal/eastern-district/complaint | complaint | docx | report | no (7 vs 12) | 15.9 | p1 line 6 |
-| courts/fifth-circuit/texas/federal/eastern-district/motion-brief | motion-brief | docx | report | no (11 vs 13) | 21.7 | p1 line 6 |
-| courts/fifth-circuit/texas/federal/eastern-district/motion-brief | motion-brief-2 | docx | report | no (10 vs 13) | 23.6 | p1 line 9 |
-| courts/fifth-circuit/texas/federal/northern-district/complaint | complaint | docx | report | no (11 vs 10) | 19.6 | p1 line 11 |
-| courts/fifth-circuit/texas/federal/northern-district/motion-brief | motion-brief | docx | report | no (11 vs 12) | 27.4 | p2 line 2 |
-| courts/fifth-circuit/texas/federal/southern-district/complaint | complaint | docx | report | no (9 vs 8) | 33.0 | p1 line 5 |
-| courts/fifth-circuit/texas/federal/southern-district/motion-brief | motion-brief | docx | report | yes (10) | 27.6 | p1 line 10 |
-| courts/fifth-circuit/texas/federal/western-district/complaint | complaint | docx | report | no (8 vs 10) | 36.4 | p1 line 18 |
-| courts/fifth-circuit/texas/federal/western-district/motion-brief | motion-brief | docx | report | no (13 vs 14) | 33.4 | p2 line 2 |
-| courts/fifth-circuit/texas/state/court-of-civil-appeals/answering-brief | answering-brief | docx | report | no (18 vs 8) | 10.6 | p1 line 19 |
-| courts/fifth-circuit/texas/state/court-of-civil-appeals/opening-brief | opening-brief | docx | report | no (17 vs 8) | 8.0 | p1 line 13 |
-| courts/fifth-circuit/texas/state/court-of-civil-appeals/reply-brief | reply-brief | docx | report | no (10 vs 7) | 30.2 | p1 line 13 |
-| courts/fifth-circuit/texas/state/court-of-criminal-appeals/opening-brief | opening-brief | docx | report | yes (12) | 46.8 | p1 line 6 |
-| courts/fifth-circuit/texas/state/court-of-criminal-appeals/petition-for-discretionary-review | petition-for-discretionary-review | docx | report | no (12 vs 13) | 77.9 | p2 line 1 |
-| courts/fifth-circuit/texas/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | report | no (18 vs 12) | 26.8 | p1 line 8 |
-| courts/fifth-circuit/texas/state/supreme-court/petition-for-review | petition-for-review | docx | report | no (16 vs 10) | 27.3 | p1 line 10 |
-| courts/first-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief-2 | docx | report | no (9 vs 8) | 38.6 | p1 line 4 |
-| courts/first-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief-2 | docx | report | no (12 vs 11) | 30.4 | p1 line 4 |
-| courts/first-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief | docx | report | no (11 vs 10) | 49.5 | p1 line 4 |
-| courts/first-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | yes (11) | 79.8 | p2 line 9 |
-| courts/first-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (11 vs 10) | 37.8 | p1 line 2 |
-| courts/first-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | no (14 vs 13) | 73.1 | p2 line 6 |
-| courts/first-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | yes (14) | 34.7 | p1 line 2 |
-| courts/first-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | yes (10) | 78.0 | p2 line 7 |
-| courts/first-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | no (10 vs 9) | 35.2 | p1 line 2 |
-| courts/first-circuit/maine/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (4) | 44.0 | p1 line 14 |
-| courts/first-circuit/maine/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (11) | 31.3 | p1 line 6 |
-| courts/first-circuit/maine/federal/district/complaint | complaint | docx | report | no (9 vs 10) | 53.7 | p1 line 13 |
-| courts/first-circuit/maine/federal/district/motion-brief | motion-brief | docx | report | yes (10) | 38.0 | p1 line 3 |
-| courts/first-circuit/massachusetts/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (5) | 61.5 | p1 line 17 |
-| courts/first-circuit/massachusetts/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (14 vs 12) | 22.2 | p1 line 15 |
-| courts/first-circuit/massachusetts/federal/district/complaint | complaint | docx | report | no (14 vs 15) | 37.8 | p1 line 4 |
-| courts/first-circuit/massachusetts/federal/district/motion-brief | motion-brief | docx | report | no (12 vs 11) | 18.6 | p1 line 12 |
-| courts/first-circuit/new-hampshire/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (9) | 36.7 | p1 line 6 |
-| courts/first-circuit/new-hampshire/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (15) | 17.5 | p1 line 10 |
-| courts/first-circuit/new-hampshire/federal/district/complaint | complaint | docx | report | no (15 vs 14) | 38.1 | p1 line 11 |
-| courts/first-circuit/new-hampshire/federal/district/motion-brief | motion-brief | docx | report | no (20 vs 18) | 21.9 | p1 line 13 |
-| courts/first-circuit/puerto-rico/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (11 vs 8) | 10.9 | p1 line 3 |
-| courts/first-circuit/puerto-rico/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (9 vs 8) | 18.6 | p1 line 17 |
-| courts/first-circuit/puerto-rico/federal/bankruptcy-district/motion-brief | motion-brief-2 | docx | report | yes (9) | 22.0 | p1 line 17 |
-| courts/first-circuit/puerto-rico/federal/district/complaint | complaint | docx | report | no (9 vs 10) | 26.1 | p1 line 5 |
-| courts/first-circuit/puerto-rico/federal/district/motion-brief | motion-brief | docx | report | yes (11) | 74.4 | p1 line 7 |
-| courts/first-circuit/rhode-island/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (10 vs 9) | 29.8 | p1 line 5 |
-| courts/first-circuit/rhode-island/federal/bankruptcy-district/adversary-complaint | adversary-complaint-2 | docx | report | no (8 vs 7) | 39.8 | p1 line 5 |
-| courts/first-circuit/rhode-island/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (9) | 36.1 | p1 line 5 |
-| courts/first-circuit/rhode-island/federal/district/complaint | complaint | docx | report | no (12 vs 11) | 25.2 | p1 line 5 |
-| courts/first-circuit/rhode-island/federal/district/motion-brief | motion-brief | docx | report | yes (15) | 16.5 | p1 line 6 |
-| courts/fourth-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (13 vs 14) | 61.0 | p1 line 2 |
-| courts/fourth-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (13 vs 17) | 73.6 | p1 line 2 |
-| courts/fourth-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | no (12 vs 14) | 71.2 | p1 line 11 |
-| courts/fourth-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | no (12 vs 16) | 21.2 | p1 line 8 |
-| courts/fourth-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | no (10 vs 11) | 61.7 | p1 line 2 |
-| courts/fourth-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | no (10 vs 12) | 78.2 | p1 line 2 |
-| courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (14 vs 13) | 28.5 | p1 line 6 |
-| courts/fourth-circuit/maryland/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (12) | 32.2 | p1 line 21 |
-| courts/fourth-circuit/maryland/federal/district/complaint | complaint | docx | report | no (11 vs 12) | 86.5 | p1 line 22 |
-| courts/fourth-circuit/maryland/federal/district/motion-brief | motion-brief | docx | report | yes (12) | 72.2 | p1 line 9 |
-| courts/fourth-circuit/north-carolina/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | no (10 vs 9) | 18.6 | p1 line 5 |
-| courts/fourth-circuit/north-carolina/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | yes (11) | 27.5 | p1 line 6 |
-| courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | report | yes (9) | 25.9 | p1 line 23 |
-| courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | report | no (10 vs 11) | 35.6 | p1 line 24 |
-| courts/fourth-circuit/north-carolina/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | no (8 vs 10) | 51.4 | p1 line 29 |
-| courts/fourth-circuit/north-carolina/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | yes (11) | 47.4 | p1 line 7 |
-| courts/fourth-circuit/north-carolina/federal/eastern-district/complaint | complaint | docx | report | no (11 vs 9) | 15.4 | p1 line 12 |
-| courts/fourth-circuit/north-carolina/federal/eastern-district/motion-brief | motion-brief | docx | report | yes (8) | 33.2 | p1 line 10 |
-| courts/fourth-circuit/north-carolina/federal/middle-district/complaint | complaint | docx | report | yes (12) | 13.8 | p1 line 11 |
-| courts/fourth-circuit/north-carolina/federal/middle-district/motion-brief | motion-brief | docx | report | yes (10) | 37.1 | p1 line 3 |
-| courts/fourth-circuit/north-carolina/federal/western-district/complaint | complaint | docx | report | no (9 vs 8) | 40.0 | p1 line 9 |
-| courts/fourth-circuit/north-carolina/federal/western-district/motion-brief | motion-brief | docx | report | yes (9) | 44.8 | p1 line 22 |
-| courts/fourth-circuit/south-carolina/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (7 vs 9) | 50.0 | p1 line 8 |
-| courts/fourth-circuit/south-carolina/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (7 vs 8) | 54.2 | p1 line 12 |
+| courts/fifth-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (15) | 100.0 | - |
+| courts/fifth-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/fifth-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (15) | 100.0 | - |
+| courts/fifth-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/fifth-circuit/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (10) | 100.0 | - |
+| courts/fifth-circuit/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | gate | yes (5) | 100.0 | - |
+| courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | gate | yes (18) | 100.0 | - |
+| courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (7) | 100.0 | - |
+| courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | yes (7) | 98.9 | p4 line 26 |
+| courts/fifth-circuit/louisiana/federal/eastern-district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/fifth-circuit/louisiana/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/fifth-circuit/louisiana/federal/middle-district/complaint | complaint | docx | gate | yes (5) | 100.0 | - |
+| courts/fifth-circuit/louisiana/federal/middle-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/fifth-circuit/louisiana/federal/western-district/complaint | complaint | docx | gate | yes (6) | 100.0 | - |
+| courts/fifth-circuit/louisiana/federal/western-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (4) | 100.0 | - |
+| courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | gate | yes (16) | 100.0 | - |
+| courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district/motion-brief | motion-brief-2 | docx | gate | yes (3) | 100.0 | - |
+| courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (19) | 100.0 | - |
+| courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/fifth-circuit/mississippi/federal/northern-district/complaint | complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/fifth-circuit/mississippi/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/fifth-circuit/mississippi/federal/southern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/fifth-circuit/mississippi/federal/southern-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/fifth-circuit/mississippi/state/supreme-court/motion-brief | motion-brief | latex | report | yes (8) | 100.0 | - |
+| courts/fifth-circuit/mississippi/state/supreme-court/motion-brief | motion-brief | docx | report | yes (8) | 98.9 | p5 line 28 |
+| courts/fifth-circuit/texas/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (16) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/eastern-district/complaint | complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/eastern-district/motion-brief | motion-brief-2 | docx | gate | yes (10) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/northern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/southern-district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/southern-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/western-district/complaint | complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/fifth-circuit/texas/federal/western-district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/fifth-circuit/texas/state/court-of-civil-appeals/answering-brief | answering-brief | docx | gate | yes (18) | 100.0 | - |
+| courts/fifth-circuit/texas/state/court-of-civil-appeals/opening-brief | opening-brief | docx | gate | yes (17) | 100.0 | - |
+| courts/fifth-circuit/texas/state/court-of-civil-appeals/reply-brief | reply-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/fifth-circuit/texas/state/court-of-criminal-appeals/opening-brief | opening-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/fifth-circuit/texas/state/court-of-criminal-appeals/petition-for-discretionary-review | petition-for-discretionary-review | docx | report | no (12 vs 13) | 87.6 | p2 line 1 |
+| courts/fifth-circuit/texas/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | gate | yes (18) | 100.0 | - |
+| courts/fifth-circuit/texas/state/supreme-court/petition-for-review | petition-for-review | docx | gate | yes (17) | 100.0 | - |
+| courts/first-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief | docx | gate | yes (20) | 100.0 | - |
+| courts/first-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief-2 | docx | gate | yes (9) | 100.0 | - |
+| courts/first-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | gate | yes (23) | 100.0 | - |
+| courts/first-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief-2 | docx | gate | yes (13) | 100.0 | - |
+| courts/first-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/first-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (11) | 100.0 | - |
+| courts/first-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/first-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (14) | 100.0 | - |
+| courts/first-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/first-circuit/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (10) | 100.0 | - |
+| courts/first-circuit/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/first-circuit/maine/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (4) | 100.0 | - |
+| courts/first-circuit/maine/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/first-circuit/maine/federal/district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/first-circuit/maine/federal/district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/first-circuit/maine/state/supreme-judicial-court/amicus-brief | amicus-brief | latex | report | yes (42) | 94.7 | p3 line 15 |
+| courts/first-circuit/maine/state/supreme-judicial-court/amicus-brief | amicus-brief | docx | report | no (42 vs 43) | 90.1 | p2 line 7 |
+| courts/first-circuit/maine/state/supreme-judicial-court/answering-brief | answering-brief | latex | report | yes (48) | 96.6 | p3 line 3 |
+| courts/first-circuit/maine/state/supreme-judicial-court/answering-brief | answering-brief | docx | report | yes (48) | 97.6 | p2 line 22 |
+| courts/first-circuit/maine/state/supreme-judicial-court/brief-on-the-merits | brief-on-the-merits | latex | report | yes (87) | 98.0 | p4 line 7 |
+| courts/first-circuit/maine/state/supreme-judicial-court/brief-on-the-merits | brief-on-the-merits | docx | report | yes (87) | 95.9 | p2 line 20 |
+| courts/first-circuit/maine/state/supreme-judicial-court/motion-brief | motion-brief | latex | report | yes (22) | 95.1 | p2 line 14 |
+| courts/first-circuit/maine/state/supreme-judicial-court/motion-brief | motion-brief | docx | report | yes (22) | 96.8 | p12 line 1 |
+| courts/first-circuit/maine/state/supreme-judicial-court/petition-for-rehearing | petition-for-rehearing | latex | report | yes (19) | 98.3 | p12 line 20 |
+| courts/first-circuit/maine/state/supreme-judicial-court/petition-for-rehearing | petition-for-rehearing | docx | report | yes (19) | 98.5 | p12 line 20 |
+| courts/first-circuit/maine/state/supreme-judicial-court/petition-for-review | petition-for-review | latex | report | yes (12) | 99.1 | p3 line 18 |
+| courts/first-circuit/maine/state/supreme-judicial-court/petition-for-review | petition-for-review | docx | report | yes (12) | 100.0 | - |
+| courts/first-circuit/maine/state/supreme-judicial-court/petition-for-writ | petition-for-writ | latex | gate | yes (12) | 100.0 | - |
+| courts/first-circuit/maine/state/supreme-judicial-court/petition-for-writ | petition-for-writ | docx | gate | yes (12) | 100.0 | - |
+| courts/first-circuit/maine/state/supreme-judicial-court/reply-brief | reply-brief | latex | report | yes (41) | 99.6 | p34 line 1 |
+| courts/first-circuit/maine/state/supreme-judicial-court/reply-brief | reply-brief | docx | report | yes (41) | 99.6 | p34 line 1 |
+| courts/first-circuit/massachusetts/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (5) | 100.0 | - |
+| courts/first-circuit/massachusetts/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/first-circuit/massachusetts/federal/district/complaint | complaint | docx | gate | yes (15) | 100.0 | - |
+| courts/first-circuit/massachusetts/federal/district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/first-circuit/new-hampshire/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/first-circuit/new-hampshire/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/first-circuit/new-hampshire/federal/district/complaint | complaint | docx | gate | yes (14) | 100.0 | - |
+| courts/first-circuit/new-hampshire/federal/district/motion-brief | motion-brief | docx | gate | yes (18) | 100.0 | - |
+| courts/first-circuit/new-hampshire/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (6) | 100.0 | - |
+| courts/first-circuit/new-hampshire/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (6) | 100.0 | - |
+| courts/first-circuit/new-hampshire/state/supreme-court/petition-for-rehearing | petition-for-rehearing | latex | report | yes (11) | 90.1 | p6 line 24 |
+| courts/first-circuit/new-hampshire/state/supreme-court/petition-for-rehearing | petition-for-rehearing | docx | report | no (11 vs 10) | 96.4 | p6 line 24 |
+| courts/first-circuit/new-hampshire/state/supreme-court/petition-for-review | petition-for-review | latex | report | yes (24) | 99.7 | p18 line 9 |
+| courts/first-circuit/new-hampshire/state/supreme-court/petition-for-review | petition-for-review | docx | report | yes (24) | 100.0 | - |
+| courts/first-circuit/new-hampshire/state/supreme-court/petition-for-writ | petition-for-writ | latex | report | yes (20) | 96.2 | p5 line 1 |
+| courts/first-circuit/new-hampshire/state/supreme-court/petition-for-writ | petition-for-writ | docx | report | yes (20) | 100.0 | - |
+| courts/first-circuit/puerto-rico/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/first-circuit/puerto-rico/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/first-circuit/puerto-rico/federal/bankruptcy-district/motion-brief | motion-brief-2 | docx | gate | yes (9) | 100.0 | - |
+| courts/first-circuit/puerto-rico/federal/district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/first-circuit/puerto-rico/federal/district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/first-circuit/puerto-rico/state/court-of-appeals/amicus-brief | amicus-brief | latex | gate | yes (13) | 100.0 | - |
+| courts/first-circuit/puerto-rico/state/court-of-appeals/amicus-brief | amicus-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/first-circuit/rhode-island/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/first-circuit/rhode-island/federal/bankruptcy-district/adversary-complaint | adversary-complaint-2 | docx | gate | yes (8) | 100.0 | - |
+| courts/first-circuit/rhode-island/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/first-circuit/rhode-island/federal/district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/first-circuit/rhode-island/federal/district/motion-brief | motion-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/fourth-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (14) | 100.0 | - |
+| courts/fourth-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/fourth-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (13) | 100.0 | - |
+| courts/fourth-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/fourth-circuit/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (10) | 100.0 | - |
+| courts/fourth-circuit/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (14) | 100.0 | - |
+| courts/fourth-circuit/maryland/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/fourth-circuit/maryland/federal/district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/fourth-circuit/maryland/federal/district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/fourth-circuit/maryland/state/court-of-appeals/amicus-brief | amicus-brief | docx | report | yes (35) | 98.1 | p5 line 4 |
+| courts/fourth-circuit/maryland/state/court-of-appeals/answering-brief | answering-brief | docx | report | yes (50) | 86.1 | p13 line 11 |
+| courts/fourth-circuit/maryland/state/court-of-appeals/motion-brief | motion-brief | latex | report | yes (20) | 96.4 | p9 line 3 |
+| courts/fourth-circuit/maryland/state/court-of-appeals/motion-brief | motion-brief | docx | report | yes (20) | 96.4 | p9 line 3 |
+| courts/fourth-circuit/maryland/state/court-of-appeals/petition-for-discretionary-review | petition-for-discretionary-review | latex | report | yes (22) | 97.4 | p19 line 11 |
+| courts/fourth-circuit/maryland/state/court-of-appeals/petition-for-discretionary-review | petition-for-discretionary-review | docx | report | yes (22) | 97.4 | p19 line 11 |
+| courts/fourth-circuit/maryland/state/court-of-appeals/petition-for-rehearing | petition-for-rehearing | latex | gate | yes (6) | 100.0 | - |
+| courts/fourth-circuit/maryland/state/court-of-appeals/petition-for-rehearing | petition-for-rehearing | docx | gate | yes (6) | 100.0 | - |
+| courts/fourth-circuit/maryland/state/court-of-appeals/petition-for-writ | petition-for-writ | docx | report | no (63 vs 64) | 86.2 | p2 line 27 |
+| courts/fourth-circuit/maryland/state/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (17) | 100.0 | - |
+| courts/fourth-circuit/maryland/state/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (17) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/eastern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/middle-district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/middle-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/western-district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/federal/western-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/amicus-brief | amicus-brief | latex | report | yes (19) | 98.0 | p9 line 20 |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/amicus-brief | amicus-brief | docx | report | yes (19) | 98.6 | p14 line 17 |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/answering-brief | answering-brief | latex | report | yes (63) | 96.7 | p2 line 30 |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/answering-brief | answering-brief | docx | report | yes (63) | 93.0 | p2 line 3 |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/motion-brief | motion-brief | latex | gate | yes (8) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/opening-brief | opening-brief | latex | report | yes (26) | 99.5 | p15 line 1 |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/opening-brief | opening-brief | docx | report | yes (26) | 91.5 | p2 line 3 |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/petition-for-review | petition-for-review | latex | report | yes (26) | 99.2 | p5 line 4 |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/petition-for-review | petition-for-review | docx | report | yes (26) | 99.7 | p5 line 4 |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/petition-for-writ | petition-for-writ | latex | gate | yes (9) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/petition-for-writ | petition-for-writ | docx | gate | yes (9) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/reply-brief | reply-brief | latex | report | yes (11) | 99.2 | p4 line 22 |
+| courts/fourth-circuit/north-carolina/state/court-of-appeals/reply-brief | reply-brief | docx | report | yes (11) | 99.2 | p4 line 22 |
+| courts/fourth-circuit/north-carolina/state/superior-court/amicus-brief | amicus-brief | docx | report | yes (38) | 94.2 | p2 line 3 |
+| courts/fourth-circuit/north-carolina/state/superior-court/answering-brief | answering-brief | latex | report | yes (17) | 93.3 | p5 line 18 |
+| courts/fourth-circuit/north-carolina/state/superior-court/answering-brief | answering-brief | docx | report | yes (17) | 94.9 | p5 line 18 |
+| courts/fourth-circuit/north-carolina/state/superior-court/motion-brief | motion-brief | latex | report | yes (48) | 97.5 | p2 line 8 |
+| courts/fourth-circuit/north-carolina/state/superior-court/motion-brief | motion-brief | docx | report | yes (48) | 97.7 | p2 line 8 |
+| courts/fourth-circuit/north-carolina/state/superior-court/opening-brief | opening-brief | docx | report | no (33 vs 34) | 91.6 | p2 line 19 |
+| courts/fourth-circuit/north-carolina/state/superior-court/petition-for-review | petition-for-review | latex | gate | yes (8) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/state/superior-court/petition-for-review | petition-for-review | docx | gate | yes (8) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/state/superior-court/petition-for-writ | petition-for-writ | latex | gate | yes (8) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/state/superior-court/petition-for-writ | petition-for-writ | docx | gate | yes (8) | 100.0 | - |
+| courts/fourth-circuit/north-carolina/state/superior-court/reply-brief | reply-brief | latex | report | yes (43) | 96.8 | p1 line 23 |
+| courts/fourth-circuit/north-carolina/state/superior-court/reply-brief | reply-brief | docx | report | yes (43) | 94.4 | p1 line 23 |
+| courts/fourth-circuit/south-carolina/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/fourth-circuit/south-carolina/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
 | courts/fourth-circuit/south-carolina/federal/district/complaint | complaint | docx | report | no (8 vs 9) | 93.8 | p1 line 27 |
-| courts/fourth-circuit/south-carolina/federal/district/motion-brief | motion-brief | docx | report | yes (7) | 36.4 | p1 line 10 |
-| courts/fourth-circuit/virginia/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | no (10 vs 9) | 31.2 | p1 line 23 |
-| courts/fourth-circuit/virginia/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | yes (13) | 21.0 | p1 line 20 |
-| courts/fourth-circuit/virginia/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | yes (4) | 28.7 | p1 line 6 |
-| courts/fourth-circuit/virginia/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | no (11 vs 10) | 20.4 | p1 line 7 |
-| courts/fourth-circuit/virginia/federal/eastern-district/complaint | complaint | docx | report | yes (8) | 34.4 | p1 line 7 |
-| courts/fourth-circuit/virginia/federal/eastern-district/motion-brief | motion-brief | docx | report | no (10 vs 9) | 35.8 | p1 line 14 |
-| courts/fourth-circuit/virginia/federal/western-district/complaint | complaint | docx | report | no (8 vs 9) | 56.4 | p1 line 7 |
-| courts/fourth-circuit/virginia/federal/western-district/motion-brief | motion-brief | docx | report | no (9 vs 12) | 26.3 | p1 line 11 |
-| courts/fourth-circuit/virginia/federal/western-district/motion-brief | motion-brief-2 | docx | report | yes (12) | 27.0 | p1 line 6 |
-| courts/fourth-circuit/west-virginia/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | yes (5) | 58.9 | p1 line 3 |
-| courts/fourth-circuit/west-virginia/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | yes (4) | 42.2 | p1 line 12 |
-| courts/fourth-circuit/west-virginia/federal/bankruptcy-northern-district/motion-brief | motion-brief-2 | docx | report | yes (12) | 17.0 | p1 line 5 |
-| courts/fourth-circuit/west-virginia/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | no (11 vs 14) | 44.8 | p1 line 5 |
-| courts/fourth-circuit/west-virginia/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | no (13 vs 15) | 31.7 | p1 line 5 |
-| courts/fourth-circuit/west-virginia/federal/northern-district/complaint | complaint | docx | report | yes (9) | 81.5 | p1 line 15 |
-| courts/fourth-circuit/west-virginia/federal/northern-district/motion-brief | motion-brief | docx | report | yes (8) | 80.6 | p1 line 15 |
-| courts/fourth-circuit/west-virginia/federal/southern-district/complaint | complaint | docx | report | yes (10) | 32.0 | p2 line 2 |
-| courts/fourth-circuit/west-virginia/federal/southern-district/motion-brief | motion-brief | docx | report | yes (13) | 20.3 | p2 line 2 |
-| courts/military/air-force-court-of-criminal-appeals/answering-brief | answering-brief | docx | report | no (8 vs 10) | 19.3 | p1 line 6 |
-| courts/military/air-force-court-of-criminal-appeals/answering-brief | answering-brief-2 | docx | report | yes (3) | 51.3 | p1 line 2 |
-| courts/military/air-force-court-of-criminal-appeals/opening-brief | opening-brief | docx | report | no (11 vs 13) | 25.3 | p1 line 6 |
-| courts/military/air-force-court-of-criminal-appeals/opening-brief | opening-brief-2 | docx | report | yes (7) | 53.2 | p1 line 6 |
-| courts/military/army-court-of-criminal-appeals/answering-brief | answering-brief-2 | docx | report | no (4 vs 6) | 20.5 | p1 line 2 |
-| courts/military/army-court-of-criminal-appeals/opening-brief | opening-brief-2 | docx | report | yes (6) | 26.0 | p1 line 2 |
-| courts/military/coast-guard-court-of-criminal-appeals/answering-brief | answering-brief-2 | docx | report | no (2 vs 3) | 44.4 | p1 line 1 |
-| courts/military/coast-guard-court-of-criminal-appeals/opening-brief | opening-brief-2 | docx | report | no (2 vs 3) | 47.4 | p1 line 1 |
-| courts/military/court-of-appeals-for-the-armed-forces/opening-brief | opening-brief | docx | report | no (13 vs 15) | 44.4 | p2 line 8 |
-| courts/military/court-of-appeals-for-the-armed-forces/petition-supplement | petition-supplement | docx | report | no (11 vs 12) | 45.8 | p1 line 15 |
-| courts/military/court-of-military-commission-review/answering-brief | answering-brief | docx | report | yes (10) | 67.5 | p2 line 2 |
-| courts/military/court-of-military-commission-review/opening-brief | opening-brief | docx | report | yes (13) | 71.3 | p2 line 2 |
-| courts/military/navy-marine-corps-court-of-criminal-appeals/answering-brief | answering-brief | docx | report | no (8 vs 9) | 81.9 | p1 line 5 |
-| courts/military/navy-marine-corps-court-of-criminal-appeals/opening-brief | opening-brief | docx | report | no (16 vs 13) | 21.9 | p1 line 5 |
-| courts/national/board-of-immigration-appeals/brief-on-appeal | brief-on-appeal | docx | report | yes (13) | 67.4 | p1 line 1 |
-| courts/national/foreign-intelligence-surveillance-court/motion-brief | motion-brief | docx | report | yes (4) | 24.4 | p1 line 4 |
-| courts/national/foreign-intelligence-surveillance-court/motion-brief | motion-brief-2 | docx | report | yes (5) | 40.2 | p1 line 8 |
-| courts/national/foreign-intelligence-surveillance-court-of-review/amicus-brief | amicus-brief | docx | report | no (12 vs 13) | 33.5 | p1 line 7 |
-| courts/national/judicial-panel-on-multidistrict-litigation/motion-brief | motion-brief | docx | report | no (11 vs 12) | 43.4 | p1 line 9 |
-| courts/national/tax-court/petition | petition-2 | docx | report | no (4 vs 3) | 31.0 | p1 line 13 |
-| courts/national/tax-court/pretrial-memorandum | pretrial-memorandum-2 | docx | report | yes (3) | 58.4 | p1 line 14 |
-| courts/ninth-circuit/alaska/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (3) | 71.3 | p1 line 23 |
-| courts/ninth-circuit/alaska/federal/district/complaint | complaint | docx | report | no (8 vs 11) | 32.5 | p1 line 24 |
-| courts/ninth-circuit/alaska/federal/district/motion-brief | motion-brief | docx | report | no (10 vs 11) | 32.8 | p1 line 19 |
-| courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint | adversary-complaint-2 | docx | report | no (5 vs 4) | 8.2 | p1 line 3 |
-| courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (10 vs 9) | 7.1 | p1 line 3 |
-| courts/ninth-circuit/arizona/federal/district/complaint | complaint | docx | report | no (9 vs 8) | 3.8 | p1 line 3 |
-| courts/ninth-circuit/arizona/federal/district/motion-brief | motion-brief | docx | report | no (20 vs 17) | 2.0 | p1 line 3 |
-| courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief-2 | docx | report | no (9 vs 10) | 38.9 | p2 line 2 |
-| courts/ninth-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | report | no (14 vs 15) | 68.6 | p2 line 2 |
-| courts/ninth-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief-2 | docx | report | no (6 vs 7) | 51.2 | p2 line 2 |
-| courts/ninth-circuit/california/federal/bankruptcy-central-district/adversary-complaint | adversary-complaint | docx | report | no (12 vs 11) | 9.0 | p1 line 1 |
-| courts/ninth-circuit/california/federal/bankruptcy-central-district/motion-brief | motion-brief | docx | report | no (13 vs 12) | 22.4 | p1 line 1 |
-| courts/ninth-circuit/california/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | no (10 vs 9) | 7.9 | p1 line 1 |
-| courts/ninth-circuit/california/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | no (10 vs 9) | 9.5 | p1 line 1 |
-| courts/ninth-circuit/california/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | no (12 vs 11) | 5.1 | p1 line 1 |
-| courts/ninth-circuit/california/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | yes (5) | 14.4 | p1 line 1 |
-| courts/ninth-circuit/california/federal/central-district/complaint | complaint | docx | report | no (9 vs 8) | 13.5 | p1 line 3 |
-| courts/ninth-circuit/california/federal/central-district/motion-brief | motion-brief | docx | report | no (11 vs 9) | 21.7 | p1 line 7 |
-| courts/ninth-circuit/california/federal/eastern-district/complaint | complaint | docx | report | no (13 vs 12) | 10.3 | p1 line 1 |
-| courts/ninth-circuit/california/federal/eastern-district/motion-brief | motion-brief | docx | report | no (9 vs 8) | 20.1 | p1 line 1 |
-| courts/ninth-circuit/california/federal/northern-district/complaint | complaint | docx | report | no (11 vs 10) | 3.1 | p1 line 1 |
-| courts/ninth-circuit/california/federal/northern-district/motion-brief | motion-brief | docx | report | no (10 vs 8) | 52.1 | p1 line 16 |
-| courts/ninth-circuit/california/federal/southern-district/complaint | complaint | docx | report | no (9 vs 8) | 2.5 | p1 line 2 |
-| courts/ninth-circuit/california/federal/southern-district/motion-brief | motion-brief | docx | report | yes (9) | 1.4 | p1 line 2 |
-| courts/ninth-circuit/california/state/courts-of-appeal/answering-brief | answering-brief | docx | report | no (15 vs 12) | 5.5 | p1 line 2 |
-| courts/ninth-circuit/california/state/courts-of-appeal/opening-brief | opening-brief | docx | report | no (14 vs 10) | 43.1 | p1 line 3 |
-| courts/ninth-circuit/california/state/courts-of-appeal/reply-brief | reply-brief | docx | report | no (13 vs 10) | 10.7 | p1 line 3 |
-| courts/ninth-circuit/california/state/superior-court/complaint | complaint | docx | report | yes (5) | 22.6 | p1 line 2 |
-| courts/ninth-circuit/california/state/superior-court/motion-brief | motion-brief | docx | report | no (9 vs 6) | 5.5 | p1 line 2 |
-| courts/ninth-circuit/california/state/superior-court/san-diego-county/complaint | complaint | docx | report | yes (10) | 11.4 | p1 line 1 |
-| courts/ninth-circuit/california/state/superior-court/san-diego-county/motion-brief | motion-brief-2 | docx | report | yes (2) | 12.3 | p1 line 1 |
-| courts/ninth-circuit/california/state/supreme-court/opening-brief-on-the-merits | opening-brief-on-the-merits | docx | report | no (15 vs 9) | 57.2 | p1 line 1 |
-| courts/ninth-circuit/california/state/supreme-court/petition-for-review | petition-for-review | docx | report | no (12 vs 9) | 8.2 | p1 line 5 |
-| courts/ninth-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (14 vs 16) | 60.6 | p1 line 18 |
-| courts/ninth-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (14 vs 10) | 7.7 | p1 line 1 |
-| courts/ninth-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | no (12 vs 14) | 59.3 | p2 line 10 |
-| courts/ninth-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | no (12 vs 8) | 5.4 | p1 line 1 |
+| courts/fourth-circuit/south-carolina/federal/district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/fourth-circuit/south-carolina/state/supreme-court/amicus-brief | amicus-brief | latex | report | yes (17) | 99.5 | p13 line 23 |
+| courts/fourth-circuit/south-carolina/state/supreme-court/amicus-brief | amicus-brief | docx | report | yes (17) | 98.5 | p4 line 22 |
+| courts/fourth-circuit/south-carolina/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (2) | 100.0 | - |
+| courts/fourth-circuit/south-carolina/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (2) | 100.0 | - |
+| courts/fourth-circuit/south-carolina/state/supreme-court/petition-for-rehearing | petition-for-rehearing | latex | gate | yes (27) | 100.0 | - |
+| courts/fourth-circuit/south-carolina/state/supreme-court/petition-for-rehearing | petition-for-rehearing | docx | gate | yes (27) | 100.0 | - |
+| courts/fourth-circuit/south-carolina/state/supreme-court/petition-for-writ | petition-for-writ | latex | gate | yes (22) | 100.0 | - |
+| courts/fourth-circuit/south-carolina/state/supreme-court/petition-for-writ | petition-for-writ | docx | gate | yes (22) | 100.0 | - |
+| courts/fourth-circuit/virginia/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/fourth-circuit/virginia/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/fourth-circuit/virginia/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (4) | 100.0 | - |
+| courts/fourth-circuit/virginia/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/fourth-circuit/virginia/federal/eastern-district/complaint | complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/fourth-circuit/virginia/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/fourth-circuit/virginia/federal/western-district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/fourth-circuit/virginia/federal/western-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/fourth-circuit/virginia/federal/western-district/motion-brief | motion-brief-2 | docx | gate | yes (12) | 100.0 | - |
+| courts/fourth-circuit/virginia/state/supreme-court/answering-brief | answering-brief | latex | report | yes (52) | 99.5 | p18 line 2 |
+| courts/fourth-circuit/virginia/state/supreme-court/answering-brief | answering-brief | docx | report | yes (52) | 97.3 | p3 line 4 |
+| courts/fourth-circuit/virginia/state/supreme-court/motion-brief | motion-brief | latex | report | yes (24) | 98.9 | p2 line 15 |
+| courts/fourth-circuit/virginia/state/supreme-court/motion-brief | motion-brief | docx | report | yes (24) | 99.6 | p4 line 4 |
+| courts/fourth-circuit/virginia/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | latex | report | yes (35) | 98.2 | p3 line 6 |
+| courts/fourth-circuit/virginia/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | docx | report | yes (35) | 97.9 | p4 line 20 |
+| courts/fourth-circuit/west-virginia/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (5) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | gate | yes (4) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/federal/bankruptcy-northern-district/motion-brief | motion-brief-2 | docx | gate | yes (12) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/federal/northern-district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/federal/southern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/federal/southern-district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/state/supreme-court/amicus-brief | amicus-brief | latex | report | no (30 vs 31) | 81.9 | p2 line 15 |
+| courts/fourth-circuit/west-virginia/state/supreme-court/amicus-brief | amicus-brief | docx | report | yes (30) | 92.3 | p3 line 3 |
+| courts/fourth-circuit/west-virginia/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (6) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (6) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/state/supreme-court/reply-brief | reply-brief | latex | report | yes (28) | 100.0 | - |
+| courts/fourth-circuit/west-virginia/state/supreme-court/reply-brief | reply-brief | docx | report | no (28 vs 27) | 85.2 | p2 line 6 |
+| courts/military/air-force-court-of-criminal-appeals/answering-brief | answering-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/military/air-force-court-of-criminal-appeals/answering-brief | answering-brief-2 | docx | gate | yes (3) | 100.0 | - |
+| courts/military/air-force-court-of-criminal-appeals/opening-brief | opening-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/military/air-force-court-of-criminal-appeals/opening-brief | opening-brief-2 | docx | gate | yes (7) | 100.0 | - |
+| courts/military/army-court-of-criminal-appeals/answering-brief | answering-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/military/army-court-of-criminal-appeals/answering-brief | answering-brief-2 | docx | gate | yes (5) | 100.0 | - |
+| courts/military/army-court-of-criminal-appeals/opening-brief | opening-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/military/army-court-of-criminal-appeals/opening-brief | opening-brief-2 | docx | gate | yes (6) | 100.0 | - |
+| courts/military/coast-guard-court-of-criminal-appeals/answering-brief | answering-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/military/coast-guard-court-of-criminal-appeals/answering-brief | answering-brief-2 | docx | gate | yes (2) | 100.0 | - |
+| courts/military/coast-guard-court-of-criminal-appeals/opening-brief | opening-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/military/coast-guard-court-of-criminal-appeals/opening-brief | opening-brief-2 | docx | gate | yes (3) | 100.0 | - |
+| courts/military/court-of-appeals-for-the-armed-forces/opening-brief | opening-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/military/court-of-appeals-for-the-armed-forces/petition-supplement | petition-supplement | docx | gate | yes (11) | 100.0 | - |
+| courts/military/court-of-military-commission-review/answering-brief | answering-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/military/court-of-military-commission-review/opening-brief | opening-brief | docx | gate | yes (16) | 100.0 | - |
+| courts/military/navy-marine-corps-court-of-criminal-appeals/answering-brief | answering-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/military/navy-marine-corps-court-of-criminal-appeals/opening-brief | opening-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/national/board-of-immigration-appeals/brief-on-appeal | brief-on-appeal | docx | report | yes (13) | 69.4 | p1 line 1 |
+| courts/national/foreign-intelligence-surveillance-court/motion-brief | motion-brief | docx | report | yes (4) | 97.8 | p1 line 4 |
+| courts/national/foreign-intelligence-surveillance-court/motion-brief | motion-brief-2 | docx | report | yes (5) | 91.6 | p1 line 2 |
+| courts/national/foreign-intelligence-surveillance-court-of-review/amicus-brief | amicus-brief | docx | report | no (12 vs 13) | 81.7 | p1 line 16 |
+| courts/national/judicial-panel-on-multidistrict-litigation/motion-brief | motion-brief | docx | report | no (11 vs 12) | 79.0 | p1 line 7 |
+| courts/national/tax-court/petition | petition | docx | report | yes (9) | 83.8 | p2 line 28 |
+| courts/national/tax-court/petition | petition-2 | docx | report | yes (4) | 100.0 | - |
+| courts/national/tax-court/pretrial-memorandum | pretrial-memorandum | docx | report | yes (8) | 81.8 | p1 line 27 |
+| courts/national/tax-court/pretrial-memorandum | pretrial-memorandum-2 | docx | report | yes (3) | 87.0 | p1 line 28 |
+| courts/ninth-circuit/alaska/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (4) | 100.0 | - |
+| courts/ninth-circuit/alaska/federal/district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/ninth-circuit/alaska/federal/district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/ninth-circuit/alaska/state/court-of-appeals/amicus-brief | amicus-brief | latex | report | yes (19) | 100.0 | - |
+| courts/ninth-circuit/alaska/state/court-of-appeals/amicus-brief | amicus-brief | docx | report | yes (19) | 100.0 | - |
+| courts/ninth-circuit/alaska/state/supreme-court/amicus-brief | amicus-brief | latex | report | yes (35) | 96.4 | p14 line 19 |
+| courts/ninth-circuit/alaska/state/supreme-court/amicus-brief | amicus-brief | docx | report | yes (35) | 97.5 | p2 line 17 |
+| courts/ninth-circuit/alaska/state/supreme-court/answering-brief | answering-brief | latex | report | yes (57) | 86.2 | p2 line 25 |
+| courts/ninth-circuit/alaska/state/supreme-court/answering-brief | answering-brief | docx | report | yes (57) | 78.6 | p2 line 25 |
+| courts/ninth-circuit/alaska/state/supreme-court/brief-on-the-merits | brief-on-the-merits | latex | report | yes (47) | 88.9 | p2 line 23 |
+| courts/ninth-circuit/alaska/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | report | yes (47) | 96.7 | p2 line 14 |
+| courts/ninth-circuit/alaska/state/supreme-court/motion-brief | motion-brief | latex | report | yes (38) | 85.4 | p6 line 1 |
+| courts/ninth-circuit/alaska/state/supreme-court/reply-brief | reply-brief | latex | report | yes (21) | 89.4 | p9 line 9 |
+| courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint | adversary-complaint-2 | docx | gate | yes (5) | 100.0 | - |
+| courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/ninth-circuit/arizona/federal/district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/arizona/federal/district/motion-brief | motion-brief | docx | gate | yes (20) | 100.0 | - |
+| courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief-2 | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief-3 | docx | gate | yes (19) | 100.0 | - |
+| courts/ninth-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/ninth-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/ninth-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief-2 | docx | gate | yes (6) | 100.0 | - |
+| courts/ninth-circuit/california/federal/bankruptcy-central-district/adversary-complaint | adversary-complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/ninth-circuit/california/federal/bankruptcy-central-district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/ninth-circuit/california/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/ninth-circuit/california/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/ninth-circuit/california/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/ninth-circuit/california/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | gate | yes (5) | 100.0 | - |
+| courts/ninth-circuit/california/federal/central-district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/california/federal/central-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/ninth-circuit/california/federal/eastern-district/complaint | complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/ninth-circuit/california/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/california/federal/northern-district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/ninth-circuit/california/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/ninth-circuit/california/federal/southern-district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/california/federal/southern-district/motion-brief | motion-brief | docx | report | yes (9) | 9.6 | p1 line 2 |
+| courts/ninth-circuit/california/state/court-of-appeal-fifth-district/motion-brief | motion-brief | latex | report | yes (3) | 86.4 | p1 line 9 |
+| courts/ninth-circuit/california/state/court-of-appeal-fifth-district/motion-brief | motion-brief | docx | gate | yes (3) | 100.0 | - |
+| courts/ninth-circuit/california/state/court-of-appeal-sixth-district/motion-brief | motion-brief | latex | report | yes (4) | 87.3 | p1 line 5 |
+| courts/ninth-circuit/california/state/court-of-appeal-sixth-district/motion-brief | motion-brief | docx | report | yes (4) | 100.0 | - |
+| courts/ninth-circuit/california/state/courts-of-appeal/answering-brief | answering-brief | docx | report | no (15 vs 17) | 78.0 | p2 line 5 |
+| courts/ninth-circuit/california/state/courts-of-appeal/opening-brief | opening-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/ninth-circuit/california/state/courts-of-appeal/reply-brief | reply-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/ninth-circuit/california/state/superior-court/complaint | complaint | docx | gate | yes (5) | 100.0 | - |
+| courts/ninth-circuit/california/state/superior-court/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/california/state/superior-court/san-diego-county/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/ninth-circuit/california/state/superior-court/san-diego-county/motion-brief | motion-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/ninth-circuit/california/state/superior-court/san-diego-county/motion-brief | motion-brief-2 | docx | gate | yes (2) | 100.0 | - |
+| courts/ninth-circuit/california/state/supreme-court/opening-brief-on-the-merits | opening-brief-on-the-merits | docx | report | yes (15) | 91.3 | p1 line 3 |
+| courts/ninth-circuit/california/state/supreme-court/petition-for-review | petition-for-review | docx | gate | yes (13) | 100.0 | - |
+| courts/ninth-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (15) | 100.0 | - |
+| courts/ninth-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/ninth-circuit/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (14) | 100.0 | - |
+| courts/ninth-circuit/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (14) | 100.0 | - |
 | courts/ninth-circuit/court-of-appeals | opening-brief | latex | gate | yes (24) | 100.0 | - |
 | courts/ninth-circuit/court-of-appeals | opening-brief | docx | gate | yes (24) | 100.0 | - |
 | courts/ninth-circuit/court-of-appeals | opening-brief-2 | latex | gate | yes (19) | 100.0 | - |
 | courts/ninth-circuit/court-of-appeals | opening-brief-2 | docx | gate | yes (19) | 100.0 | - |
-| courts/ninth-circuit/guam/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (4) | 2.3 | p1 line 2 |
-| courts/ninth-circuit/guam/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (12 vs 13) | 23.3 | p1 line 1 |
-| courts/ninth-circuit/guam/federal/district/complaint | complaint | docx | report | no (10 vs 12) | 37.3 | p1 line 12 |
-| courts/ninth-circuit/guam/federal/district/motion-brief | motion-brief | docx | report | no (11 vs 13) | 24.8 | p1 line 19 |
-| courts/ninth-circuit/hawaii/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (8 vs 12) | 43.5 | p1 line 17 |
-| courts/ninth-circuit/hawaii/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (11) | 23.7 | p1 line 18 |
-| courts/ninth-circuit/hawaii/federal/district/complaint | complaint | docx | report | no (8 vs 9) | 34.4 | p1 line 8 |
-| courts/ninth-circuit/hawaii/federal/district/motion-brief | motion-brief | docx | report | no (14 vs 12) | 76.0 | p1 line 17 |
-| courts/ninth-circuit/idaho/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (9 vs 15) | 37.9 | p1 line 15 |
-| courts/ninth-circuit/idaho/federal/bankruptcy-district/motion-brief | motion-brief-2 | docx | report | no (9 vs 13) | 18.1 | p1 line 23 |
-| courts/ninth-circuit/idaho/federal/district/complaint | complaint | docx | report | yes (10) | 36.7 | p1 line 20 |
-| courts/ninth-circuit/idaho/federal/district/motion-brief | motion-brief | docx | report | yes (12) | 15.5 | p1 line 19 |
-| courts/ninth-circuit/montana/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (4 vs 5) | 58.7 | p1 line 24 |
-| courts/ninth-circuit/montana/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (6 vs 8) | 51.5 | p1 line 17 |
-| courts/ninth-circuit/montana/federal/district/complaint | complaint | docx | report | no (10 vs 9) | 25.5 | p1 line 2 |
-| courts/ninth-circuit/montana/federal/district/motion-brief | motion-brief | docx | report | no (13 vs 11) | 21.6 | p1 line 12 |
-| courts/ninth-circuit/nevada/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (11 vs 10) | 3.8 | p1 line 4 |
-| courts/ninth-circuit/nevada/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (12 vs 11) | 8.9 | p1 line 5 |
-| courts/ninth-circuit/nevada/federal/district/complaint | complaint | docx | report | no (15 vs 14) | 6.1 | p1 line 3 |
-| courts/ninth-circuit/nevada/federal/district/motion-brief | motion-brief | docx | report | yes (11) | 14.8 | p1 line 3 |
-| courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (3) | 6.0 | p1 line 1 |
-| courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (8 vs 9) | 5.9 | p1 line 2 |
-| courts/ninth-circuit/northern-mariana-islands/federal/district/complaint | complaint | docx | report | yes (11) | 10.9 | p1 line 4 |
-| courts/ninth-circuit/northern-mariana-islands/federal/district/motion-brief | motion-brief | docx | report | yes (10) | 31.2 | p1 line 4 |
-| courts/ninth-circuit/oregon/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (13 vs 14) | 16.1 | p1 line 18 |
-| courts/ninth-circuit/oregon/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (5 vs 6) | 41.2 | p1 line 14 |
-| courts/ninth-circuit/oregon/federal/district/complaint | complaint | docx | report | yes (9) | 38.1 | p1 line 14 |
-| courts/ninth-circuit/oregon/federal/district/motion-brief | motion-brief | docx | report | yes (12) | 24.9 | p1 line 23 |
-| courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | no (15 vs 17) | 48.2 | p1 line 21 |
-| courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | no (12 vs 14) | 22.3 | p1 line 20 |
-| courts/ninth-circuit/washington/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | no (10 vs 9) | 11.3 | p1 line 1 |
-| courts/ninth-circuit/washington/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | no (14 vs 12) | 2.5 | p1 line 1 |
-| courts/ninth-circuit/washington/federal/eastern-district/complaint | complaint | docx | report | no (10 vs 9) | 12.1 | p1 line 14 |
-| courts/ninth-circuit/washington/federal/eastern-district/motion-brief | motion-brief | docx | report | no (17 vs 11) | 13.5 | p1 line 16 |
-| courts/ninth-circuit/washington/federal/western-district/complaint | complaint | docx | report | no (11 vs 10) | 12.3 | p1 line 11 |
-| courts/ninth-circuit/washington/federal/western-district/motion-brief | motion-brief | docx | report | no (13 vs 12) | 12.7 | p1 line 11 |
-| courts/second-circuit/connecticut/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (8) | 32.9 | p1 line 18 |
-| courts/second-circuit/connecticut/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (9) | 27.7 | p2 line 3 |
-| courts/second-circuit/connecticut/federal/district/complaint | complaint | docx | report | no (12 vs 11) | 31.6 | p1 line 6 |
-| courts/second-circuit/connecticut/federal/district/motion-brief | motion-brief | docx | report | yes (11) | 39.5 | p1 line 4 |
-| courts/second-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (12 vs 13) | 36.2 | p1 line 11 |
-| courts/second-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (12 vs 13) | 28.5 | p1 line 1 |
-| courts/second-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | no (18 vs 20) | 41.6 | p2 line 6 |
-| courts/second-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | no (18 vs 19) | 28.4 | p1 line 1 |
-| courts/second-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | no (13 vs 14) | 41.2 | p1 line 2 |
-| courts/second-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | no (13 vs 14) | 30.0 | p1 line 1 |
-| courts/second-circuit/new-york/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | yes (9) | 30.1 | p1 line 3 |
-| courts/second-circuit/new-york/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | no (10 vs 9) | 22.8 | p1 line 12 |
-| courts/second-circuit/new-york/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | yes (6) | 44.4 | p1 line 18 |
-| courts/second-circuit/new-york/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | no (8 vs 7) | 21.2 | p1 line 4 |
-| courts/second-circuit/new-york/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | yes (11) | 33.2 | p1 line 14 |
-| courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | yes (10) | 25.9 | p1 line 27 |
-| courts/second-circuit/new-york/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | no (9 vs 8) | 38.7 | p1 line 4 |
-| courts/second-circuit/new-york/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | no (11 vs 10) | 24.6 | p1 line 4 |
-| courts/second-circuit/new-york/federal/eastern-district/complaint | complaint | docx | report | yes (10) | 36.2 | p1 line 17 |
-| courts/second-circuit/new-york/federal/eastern-district/motion-brief | motion-brief | docx | report | yes (10) | 38.3 | p1 line 5 |
-| courts/second-circuit/new-york/federal/northern-district/complaint | complaint | docx | report | no (9 vs 8) | 37.2 | p1 line 6 |
-| courts/second-circuit/new-york/federal/northern-district/motion-brief | motion-brief | docx | report | no (11 vs 10) | 19.1 | p2 line 2 |
-| courts/second-circuit/new-york/federal/southern-district/complaint | complaint | docx | report | yes (9) | 25.6 | p1 line 3 |
-| courts/second-circuit/new-york/federal/southern-district/motion-brief | motion-brief | docx | report | no (15 vs 16) | 29.5 | p1 line 14 |
-| courts/second-circuit/new-york/federal/western-district/complaint | complaint | docx | report | yes (9) | 56.0 | p1 line 5 |
-| courts/second-circuit/new-york/federal/western-district/motion-brief | motion-brief | docx | report | no (14 vs 13) | 17.4 | p1 line 3 |
-| courts/second-circuit/new-york/state/court-of-appeals/answering-brief | answering-brief | docx | report | no (13 vs 12) | 4.4 | p1 line 1 |
-| courts/second-circuit/new-york/state/court-of-appeals/opening-brief | opening-brief | docx | report | no (14 vs 11) | 24.4 | p1 line 2 |
-| courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/opening-brief | opening-brief | docx | report | yes (11) | 18.6 | p1 line 1 |
-| courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/reply-brief | reply-brief | docx | report | no (13 vs 15) | 23.5 | p1 line 1 |
-| courts/second-circuit/new-york/state/supreme-court/complaint | complaint | docx | report | no (10 vs 11) | 25.8 | p1 line 3 |
-| courts/second-circuit/new-york/state/supreme-court/motion-brief | motion-brief | docx | report | no (14 vs 16) | 21.8 | p1 line 2 |
-| courts/second-circuit/vermont/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (15) | 28.9 | p1 line 14 |
-| courts/second-circuit/vermont/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (10) | 45.3 | p1 line 6 |
-| courts/second-circuit/vermont/federal/district/complaint | complaint | docx | report | no (11 vs 12) | 52.0 | p1 line 4 |
-| courts/second-circuit/vermont/federal/district/motion-brief | motion-brief | docx | report | no (8 vs 10) | 25.8 | p1 line 3 |
-| courts/seventh-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (15 vs 14) | 30.9 | p1 line 2 |
-| courts/seventh-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (15 vs 14) | 43.2 | p2 line 8 |
+| courts/ninth-circuit/guam/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (4) | 100.0 | - |
+| courts/ninth-circuit/guam/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/ninth-circuit/guam/federal/district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/ninth-circuit/guam/federal/district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/ninth-circuit/guam/state/supreme-court/answering-brief | answering-brief | latex | report | yes (36) | 99.7 | p30 line 5 |
+| courts/ninth-circuit/guam/state/supreme-court/answering-brief | answering-brief | docx | report | yes (36) | 100.0 | - |
+| courts/ninth-circuit/guam/state/supreme-court/petition-for-rehearing | petition-for-rehearing | latex | report | yes (24) | 100.0 | - |
+| courts/ninth-circuit/guam/state/supreme-court/petition-for-rehearing | petition-for-rehearing | docx | report | yes (24) | 94.0 | p6 line 1 |
+| courts/ninth-circuit/hawaii/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/ninth-circuit/hawaii/federal/bankruptcy-district/adversary-complaint | adversary-complaint-2 | docx | gate | yes (10) | 100.0 | - |
+| courts/ninth-circuit/hawaii/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/ninth-circuit/hawaii/federal/district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/hawaii/federal/district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/ninth-circuit/hawaii/state/supreme-court/brief-on-the-merits | brief-on-the-merits | latex | gate | yes (12) | 100.0 | - |
+| courts/ninth-circuit/hawaii/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | gate | yes (12) | 100.0 | - |
+| courts/ninth-circuit/hawaii/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/ninth-circuit/hawaii/state/supreme-court/reply-brief | reply-brief | latex | report | yes (23) | 99.3 | p2 line 34 |
+| courts/ninth-circuit/hawaii/state/supreme-court/reply-brief | reply-brief | docx | report | yes (23) | 99.2 | p10 line 1 |
+| courts/ninth-circuit/idaho/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/ninth-circuit/idaho/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (6) | 100.0 | - |
+| courts/ninth-circuit/idaho/federal/bankruptcy-district/motion-brief | motion-brief-2 | docx | gate | yes (10) | 100.0 | - |
+| courts/ninth-circuit/idaho/federal/district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/ninth-circuit/idaho/federal/district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/ninth-circuit/idaho/state/supreme-court/brief-on-the-merits | brief-on-the-merits | latex | gate | yes (17) | 100.0 | - |
+| courts/ninth-circuit/idaho/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | gate | yes (17) | 100.0 | - |
+| courts/ninth-circuit/idaho/state/supreme-court/motion-brief | motion-brief | latex | report | yes (18) | 98.7 | p8 line 27 |
+| courts/ninth-circuit/idaho/state/supreme-court/motion-brief | motion-brief | docx | report | no (18 vs 19) | 94.9 | p8 line 26 |
+| courts/ninth-circuit/idaho/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | latex | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/idaho/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/idaho/state/supreme-court/petition-for-rehearing | petition-for-rehearing | latex | report | yes (9) | 97.2 | p6 line 1 |
+| courts/ninth-circuit/idaho/state/supreme-court/petition-for-rehearing | petition-for-rehearing | docx | report | yes (9) | 99.5 | p6 line 1 |
+| courts/ninth-circuit/idaho/state/supreme-court/petition-for-review | petition-for-review | latex | gate | yes (20) | 100.0 | - |
+| courts/ninth-circuit/idaho/state/supreme-court/petition-for-review | petition-for-review | docx | gate | yes (20) | 100.0 | - |
+| courts/ninth-circuit/idaho/state/supreme-court/petition-for-writ | petition-for-writ | latex | report | yes (20) | 98.8 | p15 line 17 |
+| courts/ninth-circuit/idaho/state/supreme-court/petition-for-writ | petition-for-writ | docx | gate | yes (20) | 100.0 | - |
+| courts/ninth-circuit/idaho/state/supreme-court/reply-brief | reply-brief | latex | gate | yes (12) | 100.0 | - |
+| courts/ninth-circuit/idaho/state/supreme-court/reply-brief | reply-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/ninth-circuit/montana/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (4) | 100.0 | - |
+| courts/ninth-circuit/montana/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/ninth-circuit/montana/federal/district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/montana/federal/district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/ninth-circuit/montana/state/supreme-court/amicus-brief | amicus-brief | latex | report | yes (34) | 99.6 | p15 line 15 |
+| courts/ninth-circuit/montana/state/supreme-court/amicus-brief | amicus-brief | docx | report | yes (34) | 99.7 | p15 line 15 |
+| courts/ninth-circuit/montana/state/supreme-court/answering-brief | answering-brief | latex | report | yes (86) | 89.5 | p2 line 16 |
+| courts/ninth-circuit/montana/state/supreme-court/answering-brief | answering-brief | docx | report | yes (86) | 99.2 | p11 line 1 |
+| courts/ninth-circuit/montana/state/supreme-court/brief-on-the-merits | brief-on-the-merits | latex | report | yes (48) | 99.0 | p21 line 18 |
+| courts/ninth-circuit/montana/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | report | yes (48) | 99.6 | p21 line 18 |
+| courts/ninth-circuit/montana/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (19) | 100.0 | - |
+| courts/ninth-circuit/montana/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (19) | 100.0 | - |
+| courts/ninth-circuit/montana/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | latex | report | yes (24) | 96.3 | p3 line 18 |
+| courts/ninth-circuit/montana/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | docx | report | yes (24) | 94.6 | p1 line 3 |
+| courts/ninth-circuit/montana/state/supreme-court/petition-for-rehearing | petition-for-rehearing | latex | gate | yes (14) | 100.0 | - |
+| courts/ninth-circuit/montana/state/supreme-court/petition-for-rehearing | petition-for-rehearing | docx | gate | yes (14) | 100.0 | - |
+| courts/ninth-circuit/montana/state/supreme-court/petition-for-review | petition-for-review | latex | gate | yes (18) | 100.0 | - |
+| courts/ninth-circuit/montana/state/supreme-court/petition-for-review | petition-for-review | docx | gate | yes (18) | 100.0 | - |
+| courts/ninth-circuit/montana/state/supreme-court/petition-for-writ | petition-for-writ | latex | gate | yes (4) | 100.0 | - |
+| courts/ninth-circuit/montana/state/supreme-court/petition-for-writ | petition-for-writ | docx | gate | yes (4) | 100.0 | - |
+| courts/ninth-circuit/montana/state/supreme-court/reply-brief | reply-brief | latex | report | yes (29) | 98.7 | p5 line 7 |
+| courts/ninth-circuit/montana/state/supreme-court/reply-brief | reply-brief | docx | report | yes (29) | 98.5 | p16 line 18 |
+| courts/ninth-circuit/nevada/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/ninth-circuit/nevada/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/ninth-circuit/nevada/federal/district/complaint | complaint | docx | gate | yes (14) | 100.0 | - |
+| courts/ninth-circuit/nevada/federal/district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/ninth-circuit/nevada/state/supreme-court/motion-brief | motion-brief | latex | report | yes (16) | 98.9 | p8 line 16 |
+| courts/ninth-circuit/nevada/state/supreme-court/motion-brief | motion-brief | docx | report | yes (16) | 100.0 | - |
+| courts/ninth-circuit/nevada/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | latex | report | no (21 vs 20) | 89.7 | p2 line 10 |
+| courts/ninth-circuit/nevada/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | docx | report | no (21 vs 20) | 90.1 | p2 line 10 |
+| courts/ninth-circuit/nevada/state/supreme-court/petition-for-rehearing | petition-for-rehearing | latex | report | yes (20) | 99.5 | p4 line 1 |
+| courts/ninth-circuit/nevada/state/supreme-court/petition-for-rehearing | petition-for-rehearing | docx | report | yes (20) | 99.5 | p4 line 1 |
+| courts/ninth-circuit/nevada/state/supreme-court/petition-for-review | petition-for-review | latex | gate | yes (21) | 100.0 | - |
+| courts/ninth-circuit/nevada/state/supreme-court/petition-for-review | petition-for-review | docx | gate | yes (21) | 100.0 | - |
+| courts/ninth-circuit/nevada/state/supreme-court/reply-brief | reply-brief | latex | report | yes (23) | 97.1 | p2 line 3 |
+| courts/ninth-circuit/nevada/state/supreme-court/reply-brief | reply-brief | docx | report | yes (23) | 88.5 | p2 line 3 |
+| courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (3) | 100.0 | - |
+| courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/northern-mariana-islands/federal/district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/ninth-circuit/northern-mariana-islands/federal/district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/ninth-circuit/northern-mariana-islands/state/supreme-court/answering-brief | answering-brief | latex | report | yes (30) | 98.6 | p21 line 28 |
+| courts/ninth-circuit/northern-mariana-islands/state/supreme-court/answering-brief | answering-brief | docx | gate | yes (30) | 100.0 | - |
+| courts/ninth-circuit/oregon/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (14) | 100.0 | - |
+| courts/ninth-circuit/oregon/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (5) | 100.0 | - |
+| courts/ninth-circuit/oregon/federal/district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/oregon/federal/district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (17) | 100.0 | - |
+| courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/ninth-circuit/washington/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/ninth-circuit/washington/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/ninth-circuit/washington/federal/eastern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/ninth-circuit/washington/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/ninth-circuit/washington/federal/western-district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/ninth-circuit/washington/federal/western-district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/ninth-circuit/washington/state/court-of-appeals/motion-brief | motion-brief | latex | report | yes (52) | 99.3 | p33 line 15 |
+| courts/ninth-circuit/washington/state/court-of-appeals/motion-brief | motion-brief | docx | report | yes (52) | 98.1 | p24 line 6 |
+| courts/ninth-circuit/washington/state/court-of-appeals/petition-for-discretionary-review | petition-for-discretionary-review | latex | report | yes (38) | 98.2 | p17 line 13 |
+| courts/ninth-circuit/washington/state/court-of-appeals/petition-for-discretionary-review | petition-for-discretionary-review | docx | report | yes (38) | 98.4 | p17 line 13 |
+| courts/ninth-circuit/washington/state/court-of-appeals/reply-brief | reply-brief | latex | report | yes (18) | 98.2 | p18 line 5 |
+| courts/ninth-circuit/washington/state/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (18) | 100.0 | - |
+| courts/ninth-circuit/washington/state/supreme-court/motion-brief | motion-brief | latex | report | yes (14) | 100.0 | - |
+| courts/ninth-circuit/washington/state/supreme-court/motion-brief | motion-brief | docx | report | yes (14) | 99.2 | p8 line 10 |
+| courts/ninth-circuit/washington/state/supreme-court/petition-for-rehearing | petition-for-rehearing | latex | gate | yes (6) | 100.0 | - |
+| courts/ninth-circuit/washington/state/supreme-court/petition-for-rehearing | petition-for-rehearing | docx | gate | yes (6) | 100.0 | - |
+| courts/second-circuit/connecticut/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/second-circuit/connecticut/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/second-circuit/connecticut/federal/district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/second-circuit/connecticut/federal/district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/second-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (13) | 100.0 | - |
+| courts/second-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/second-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (20) | 100.0 | - |
+| courts/second-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (20) | 100.0 | - |
+| courts/second-circuit/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (14) | 100.0 | - |
+| courts/second-circuit/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/second-circuit/new-york/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/second-circuit/new-york/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/second-circuit/new-york/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (6) | 100.0 | - |
+| courts/second-circuit/new-york/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/second-circuit/new-york/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/second-circuit/new-york/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/second-circuit/new-york/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/second-circuit/new-york/federal/eastern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/second-circuit/new-york/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/second-circuit/new-york/federal/northern-district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/second-circuit/new-york/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/second-circuit/new-york/federal/southern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/second-circuit/new-york/federal/southern-district/motion-brief | motion-brief | docx | gate | yes (16) | 100.0 | - |
+| courts/second-circuit/new-york/federal/western-district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/second-circuit/new-york/federal/western-district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/second-circuit/new-york/state/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/second-circuit/new-york/state/court-of-appeals/motion-brief | motion-brief | latex | gate | yes (7) | 100.0 | - |
+| courts/second-circuit/new-york/state/court-of-appeals/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/second-circuit/new-york/state/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/answering-brief | answering-brief | docx | gate | yes (17) | 100.0 | - |
+| courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/opening-brief | opening-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/reply-brief | reply-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/second-circuit/new-york/state/supreme-court/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/second-circuit/new-york/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/second-circuit/vermont/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (15) | 100.0 | - |
+| courts/second-circuit/vermont/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/second-circuit/vermont/federal/district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/second-circuit/vermont/federal/district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/second-circuit/vermont/state/supreme-court/answering-brief | answering-brief | latex | report | yes (30) | 99.6 | p15 line 8 |
+| courts/second-circuit/vermont/state/supreme-court/answering-brief | answering-brief | docx | report | yes (30) | 100.0 | - |
+| courts/seventh-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (16) | 100.0 | - |
+| courts/seventh-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (16) | 100.0 | - |
 | courts/seventh-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (15) | 100.0 | - |
 | courts/seventh-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (15) | 100.0 | - |
-| courts/seventh-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | yes (12) | 34.2 | p1 line 1 |
-| courts/seventh-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | yes (12) | 30.0 | p1 line 21 |
-| courts/seventh-circuit/court-of-appeals/reply-brief | reply-brief-2 | latex | report | no (14 vs 16) | 37.4 | p1 line 1 |
-| courts/seventh-circuit/illinois/federal/bankruptcy-central-district/adversary-complaint | adversary-complaint | docx | report | no (9 vs 10) | 55.8 | p1 line 21 |
-| courts/seventh-circuit/illinois/federal/bankruptcy-central-district/motion-brief | motion-brief | docx | report | no (13 vs 15) | 29.0 | p1 line 20 |
-| courts/seventh-circuit/illinois/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | yes (13) | 39.7 | p1 line 5 |
-| courts/seventh-circuit/illinois/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | yes (12) | 28.9 | p1 line 5 |
-| courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | yes (8) | 33.8 | p1 line 23 |
-| courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | no (11 vs 12) | 19.0 | p1 line 21 |
-| courts/seventh-circuit/illinois/federal/central-district/complaint | complaint | docx | report | no (12 vs 11) | 42.6 | p1 line 10 |
-| courts/seventh-circuit/illinois/federal/central-district/motion-brief | motion-brief | docx | report | no (10 vs 8) | 26.7 | p1 line 8 |
-| courts/seventh-circuit/illinois/federal/northern-district/complaint | complaint | docx | report | no (11 vs 12) | 37.1 | p1 line 6 |
-| courts/seventh-circuit/illinois/federal/northern-district/motion-brief | motion-brief | docx | report | no (10 vs 11) | 32.0 | p1 line 4 |
-| courts/seventh-circuit/illinois/federal/southern-district/complaint | complaint | docx | report | no (12 vs 15) | 23.2 | p1 line 7 |
-| courts/seventh-circuit/illinois/federal/southern-district/motion-brief | motion-brief | docx | report | no (7 vs 9) | 17.0 | p1 line 6 |
-| courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | yes (9) | 30.2 | p1 line 6 |
-| courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | yes (13) | 21.9 | p1 line 6 |
-| courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | no (6 vs 7) | 41.8 | p1 line 14 |
-| courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | yes (8) | 22.4 | p1 line 8 |
-| courts/seventh-circuit/indiana/federal/northern-district/complaint | complaint | docx | report | no (14 vs 16) | 28.5 | p1 line 4 |
-| courts/seventh-circuit/indiana/federal/northern-district/motion-brief | motion-brief | docx | report | no (15 vs 16) | 15.5 | p1 line 14 |
-| courts/seventh-circuit/indiana/federal/southern-district/complaint | complaint | docx | report | no (7 vs 9) | 27.7 | p1 line 17 |
-| courts/seventh-circuit/indiana/federal/southern-district/motion-brief | motion-brief | docx | report | no (8 vs 6) | 15.9 | p1 line 12 |
-| courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | no (9 vs 10) | 64.3 | p1 line 4 |
-| courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | no (12 vs 13) | 32.9 | p1 line 3 |
-| courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | yes (3) | 55.0 | p1 line 4 |
-| courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | no (20 vs 19) | 10.0 | p1 line 3 |
-| courts/seventh-circuit/wisconsin/federal/eastern-district/complaint | complaint | docx | report | yes (12) | 37.0 | p1 line 16 |
-| courts/seventh-circuit/wisconsin/federal/eastern-district/motion-brief | motion-brief | docx | report | yes (12) | 19.0 | p1 line 22 |
-| courts/seventh-circuit/wisconsin/federal/western-district/complaint | complaint | docx | report | yes (10) | 40.7 | p1 line 11 |
-| courts/seventh-circuit/wisconsin/federal/western-district/motion-brief | motion-brief | docx | report | no (9 vs 7) | 9.0 | p1 line 6 |
-| courts/sixth-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief | docx | report | yes (13) | 36.5 | p2 line 2 |
-| courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | report | no (14 vs 15) | 39.8 | p3 line 4 |
-| courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief | docx | report | yes (12) | 38.7 | p3 line 2 |
-| courts/sixth-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (15 vs 17) | 80.8 | p2 line 6 |
-| courts/sixth-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | yes (15) | 25.4 | p1 line 4 |
-| courts/sixth-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | no (18 vs 19) | 73.7 | p1 line 13 |
-| courts/sixth-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | no (18 vs 19) | 44.3 | p1 line 10 |
-| courts/sixth-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | no (11 vs 12) | 72.2 | p2 line 5 |
-| courts/sixth-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | no (11 vs 12) | 32.5 | p1 line 9 |
-| courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | no (13 vs 15) | 37.9 | p1 line 5 |
-| courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief | motion-brief-2 | docx | report | yes (3) | 33.3 | p1 line 4 |
-| courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | yes (7) | 58.8 | p1 line 14 |
-| courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | no (9 vs 11) | 38.8 | p1 line 11 |
-| courts/sixth-circuit/kentucky/federal/eastern-district/complaint | complaint | docx | report | no (9 vs 10) | 36.4 | p1 line 7 |
-| courts/sixth-circuit/kentucky/federal/eastern-district/motion-brief | motion-brief | docx | report | yes (11) | 30.8 | p1 line 11 |
-| courts/sixth-circuit/kentucky/federal/western-district/complaint | complaint | docx | report | yes (10) | 36.0 | p1 line 15 |
-| courts/sixth-circuit/kentucky/federal/western-district/motion-brief | motion-brief | docx | report | no (17 vs 16) | 9.9 | p1 line 12 |
-| courts/sixth-circuit/michigan/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | yes (9) | 46.7 | p1 line 9 |
-| courts/sixth-circuit/michigan/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | no (8 vs 9) | 50.3 | p1 line 11 |
-| courts/sixth-circuit/michigan/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | yes (9) | 53.6 | p1 line 7 |
-| courts/sixth-circuit/michigan/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | no (7 vs 8) | 36.5 | p1 line 7 |
-| courts/sixth-circuit/michigan/federal/eastern-district/complaint | complaint | docx | report | yes (13) | 41.0 | p1 line 10 |
-| courts/sixth-circuit/michigan/federal/eastern-district/motion-brief | motion-brief | docx | report | yes (16) | 44.1 | p1 line 13 |
-| courts/sixth-circuit/michigan/federal/western-district/complaint | complaint | docx | report | yes (8) | 46.7 | p1 line 8 |
-| courts/sixth-circuit/michigan/federal/western-district/motion-brief | motion-brief | docx | report | yes (9) | 22.8 | p1 line 5 |
-| courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | yes (6) | 43.6 | p1 line 19 |
-| courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | no (7 vs 8) | 32.2 | p1 line 19 |
-| courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/motion-brief | motion-brief-2 | docx | report | yes (5) | 27.8 | p1 line 18 |
-| courts/sixth-circuit/ohio/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | report | yes (8) | 35.4 | p1 line 26 |
-| courts/sixth-circuit/ohio/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | report | yes (7) | 42.1 | p1 line 11 |
-| courts/sixth-circuit/ohio/federal/northern-district/complaint | complaint | docx | report | yes (11) | 26.0 | p1 line 6 |
-| courts/sixth-circuit/ohio/federal/northern-district/motion-brief | motion-brief | docx | report | yes (15) | 12.5 | p1 line 7 |
-| courts/sixth-circuit/ohio/federal/southern-district/complaint | complaint | docx | report | yes (8) | 64.7 | p1 line 24 |
-| courts/sixth-circuit/ohio/federal/southern-district/motion-brief | motion-brief | docx | report | yes (7) | 32.1 | p1 line 15 |
-| courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | yes (7) | 38.7 | p1 line 21 |
-| courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | no (11 vs 10) | 16.5 | p1 line 13 |
-| courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | report | yes (4) | 46.6 | p1 line 18 |
-| courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | report | yes (7) | 24.1 | p1 line 19 |
-| courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | yes (11) | 49.8 | p1 line 22 |
-| courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | yes (6) | 34.5 | p1 line 20 |
-| courts/sixth-circuit/tennessee/federal/eastern-district/complaint | complaint | docx | report | yes (10) | 42.7 | p1 line 5 |
-| courts/sixth-circuit/tennessee/federal/eastern-district/motion-brief | motion-brief | docx | report | no (9 vs 8) | 21.0 | p1 line 7 |
-| courts/sixth-circuit/tennessee/federal/middle-district/complaint | complaint | docx | report | yes (13) | 50.7 | p1 line 5 |
-| courts/sixth-circuit/tennessee/federal/middle-district/motion-brief | motion-brief | docx | report | no (9 vs 10) | 36.5 | p1 line 6 |
-| courts/sixth-circuit/tennessee/federal/western-district/complaint | complaint | docx | report | yes (14) | 88.9 | p1 line 4 |
-| courts/sixth-circuit/tennessee/federal/western-district/motion-brief | motion-brief | docx | report | yes (9) | 77.8 | p1 line 4 |
-| courts/supreme-court-of-the-united-states/amicus-brief | amicus-brief | latex | report | yes (14) | 32.8 | p1 line 7 |
-| courts/supreme-court-of-the-united-states/amicus-brief | amicus-brief | docx | report | yes (14) | 61.5 | p2 line 2 |
-| courts/supreme-court-of-the-united-states/cert-petition | cert-petition | docx | report | yes (14) | 33.1 | p1 line 19 |
-| courts/supreme-court-of-the-united-states/merits-brief | merits-brief | latex | report | no (16 vs 17) | 31.2 | p1 line 3 |
-| courts/supreme-court-of-the-united-states/merits-brief | merits-brief | docx | report | no (16 vs 17) | 20.9 | p1 line 3 |
-| courts/tenth-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief | docx | report | yes (7) | 56.8 | p1 line 13 |
-| courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | report | no (11 vs 12) | 34.9 | p1 line 13 |
-| courts/tenth-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief | docx | report | yes (7) | 57.7 | p1 line 13 |
-| courts/tenth-circuit/colorado/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (6 vs 7) | 69.9 | p1 line 7 |
-| courts/tenth-circuit/colorado/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (13 vs 14) | 34.2 | p1 line 11 |
-| courts/tenth-circuit/colorado/federal/district/complaint | complaint | docx | report | yes (10) | 48.1 | p1 line 10 |
-| courts/tenth-circuit/colorado/federal/district/motion-brief | motion-brief | docx | report | no (9 vs 8) | 21.6 | p1 line 12 |
+| courts/seventh-circuit/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (13) | 100.0 | - |
+| courts/seventh-circuit/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/seventh-circuit/court-of-appeals/reply-brief | reply-brief-2 | latex | gate | yes (15) | 100.0 | - |
+| courts/seventh-circuit/court-of-appeals/reply-brief | reply-brief-2 | docx | gate | yes (15) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/bankruptcy-central-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/bankruptcy-central-district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (14) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/central-district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/central-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/northern-district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/southern-district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/seventh-circuit/illinois/federal/southern-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/seventh-circuit/illinois/state/appellate-court/amicus-brief | amicus-brief | latex | report | yes (37) | 95.8 | p2 line 4 |
+| courts/seventh-circuit/illinois/state/appellate-court/amicus-brief | amicus-brief | docx | report | yes (37) | 95.6 | p2 line 4 |
+| courts/seventh-circuit/illinois/state/appellate-court/answering-brief | answering-brief | latex | report | yes (18) | 93.8 | p3 line 18 |
+| courts/seventh-circuit/illinois/state/appellate-court/answering-brief | answering-brief | docx | report | yes (18) | 97.8 | p12 line 13 |
+| courts/seventh-circuit/illinois/state/appellate-court/motion-brief | motion-brief | latex | gate | yes (7) | 100.0 | - |
+| courts/seventh-circuit/illinois/state/appellate-court/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/seventh-circuit/illinois/state/appellate-court/opening-brief | opening-brief | latex | report | no (79 vs 78) | 93.6 | p2 line 7 |
+| courts/seventh-circuit/illinois/state/appellate-court/opening-brief | opening-brief | docx | report | no (79 vs 78) | 96.3 | p4 line 17 |
+| courts/seventh-circuit/illinois/state/appellate-court/petition-for-review | petition-for-review | latex | gate | yes (3) | 100.0 | - |
+| courts/seventh-circuit/illinois/state/appellate-court/petition-for-review | petition-for-review | docx | gate | yes (3) | 100.0 | - |
+| courts/seventh-circuit/illinois/state/appellate-court/reply-brief | reply-brief | latex | report | yes (22) | 99.5 | p7 line 1 |
+| courts/seventh-circuit/illinois/state/appellate-court/reply-brief | reply-brief | docx | report | yes (22) | 99.5 | p7 line 1 |
+| courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (7) | 100.0 | - |
+| courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/seventh-circuit/indiana/federal/northern-district/complaint | complaint | docx | gate | yes (16) | 100.0 | - |
+| courts/seventh-circuit/indiana/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (16) | 100.0 | - |
+| courts/seventh-circuit/indiana/federal/southern-district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/seventh-circuit/indiana/federal/southern-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (3) | 100.0 | - |
+| courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (20) | 100.0 | - |
+| courts/seventh-circuit/wisconsin/federal/eastern-district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/seventh-circuit/wisconsin/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/seventh-circuit/wisconsin/federal/western-district/complaint | complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/seventh-circuit/wisconsin/federal/western-district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/sixth-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/sixth-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (16) | 100.0 | - |
+| courts/sixth-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (16) | 100.0 | - |
+| courts/sixth-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (19) | 100.0 | - |
+| courts/sixth-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (19) | 100.0 | - |
+| courts/sixth-circuit/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (12) | 100.0 | - |
+| courts/sixth-circuit/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (14) | 100.0 | - |
+| courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (3) | 100.0 | - |
+| courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief | motion-brief-2 | docx | gate | yes (2) | 100.0 | - |
+| courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (7) | 100.0 | - |
+| courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/sixth-circuit/kentucky/federal/eastern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/sixth-circuit/kentucky/federal/eastern-district/motion-brief | motion-brief | docx | report | no (11 vs 12) | 97.0 | p4 line 25 |
+| courts/sixth-circuit/kentucky/federal/western-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/sixth-circuit/kentucky/federal/western-district/motion-brief | motion-brief | docx | gate | yes (17) | 100.0 | - |
+| courts/sixth-circuit/kentucky/state/court-of-appeals/motion-brief | motion-brief | latex | report | yes (7) | 96.2 | p2 line 18 |
+| courts/sixth-circuit/kentucky/state/court-of-appeals/motion-brief | motion-brief | docx | report | yes (7) | 96.7 | p2 line 18 |
+| courts/sixth-circuit/kentucky/state/court-of-appeals/petition-for-writ | petition-for-writ | latex | report | yes (28) | 95.0 | p10 line 25 |
+| courts/sixth-circuit/kentucky/state/court-of-appeals/petition-for-writ | petition-for-writ | docx | report | yes (28) | 100.0 | - |
+| courts/sixth-circuit/kentucky/state/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (5) | 100.0 | - |
+| courts/sixth-circuit/kentucky/state/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (5) | 100.0 | - |
+| courts/sixth-circuit/michigan/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/sixth-circuit/michigan/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/sixth-circuit/michigan/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/sixth-circuit/michigan/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/sixth-circuit/michigan/federal/eastern-district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/sixth-circuit/michigan/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (16) | 100.0 | - |
+| courts/sixth-circuit/michigan/federal/western-district/complaint | complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/sixth-circuit/michigan/federal/western-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/sixth-circuit/michigan/state/court-of-appeals/motion-brief | motion-brief | latex | report | yes (21) | 98.5 | p13 line 5 |
+| courts/sixth-circuit/michigan/state/court-of-appeals/motion-brief | motion-brief | docx | report | yes (21) | 93.7 | p3 line 18 |
+| courts/sixth-circuit/michigan/state/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (9) | 100.0 | - |
+| courts/sixth-circuit/michigan/state/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | gate | yes (6) | 100.0 | - |
+| courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/sixth-circuit/ohio/federal/bankruptcy-northern-district/motion-brief | motion-brief-2 | docx | gate | yes (5) | 100.0 | - |
+| courts/sixth-circuit/ohio/federal/bankruptcy-southern-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/sixth-circuit/ohio/federal/bankruptcy-southern-district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/sixth-circuit/ohio/federal/northern-district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/sixth-circuit/ohio/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/sixth-circuit/ohio/federal/southern-district/complaint | complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/sixth-circuit/ohio/federal/southern-district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/sixth-circuit/ohio/state/court-of-appeals/amicus-brief | amicus-brief | latex | report | yes (21) | 93.3 | p6 line 18 |
+| courts/sixth-circuit/ohio/state/court-of-appeals/amicus-brief | amicus-brief | docx | report | yes (21) | 95.1 | p3 line 11 |
+| courts/sixth-circuit/ohio/state/court-of-appeals/answering-brief | answering-brief | latex | report | yes (38) | 96.6 | p6 line 13 |
+| courts/sixth-circuit/ohio/state/court-of-appeals/answering-brief | answering-brief | docx | report | yes (38) | 97.4 | p2 line 2 |
+| courts/sixth-circuit/ohio/state/court-of-appeals/motion-brief | motion-brief | latex | report | yes (28) | 98.5 | p1 line 18 |
+| courts/sixth-circuit/ohio/state/court-of-appeals/motion-brief | motion-brief | docx | report | yes (28) | 99.1 | p20 line 22 |
+| courts/sixth-circuit/ohio/state/court-of-appeals/opening-brief | opening-brief | latex | report | yes (46) | 93.1 | p3 line 13 |
+| courts/sixth-circuit/ohio/state/court-of-appeals/opening-brief | opening-brief | docx | report | yes (46) | 98.6 | p3 line 12 |
+| courts/sixth-circuit/ohio/state/court-of-appeals/petition-for-writ | petition-for-writ | latex | report | yes (33) | 99.5 | p6 line 22 |
+| courts/sixth-circuit/ohio/state/court-of-appeals/petition-for-writ | petition-for-writ | docx | report | yes (33) | 99.5 | p6 line 22 |
+| courts/sixth-circuit/ohio/state/court-of-appeals/reply-brief | reply-brief | latex | report | yes (11) | 98.0 | p6 line 24 |
+| courts/sixth-circuit/ohio/state/court-of-appeals/reply-brief | reply-brief | docx | report | no (11 vs 10) | 85.0 | p1 line 1 |
+| courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (7) | 100.0 | - |
+| courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | gate | yes (4) | 100.0 | - |
+| courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/sixth-circuit/tennessee/federal/eastern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/sixth-circuit/tennessee/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/sixth-circuit/tennessee/federal/middle-district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/sixth-circuit/tennessee/federal/middle-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/sixth-circuit/tennessee/federal/western-district/complaint | complaint | docx | gate | yes (14) | 100.0 | - |
+| courts/sixth-circuit/tennessee/federal/western-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/supreme-court-of-the-united-states/amicus-brief | amicus-brief | latex | gate | yes (14) | 100.0 | - |
+| courts/supreme-court-of-the-united-states/amicus-brief | amicus-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/supreme-court-of-the-united-states/cert-petition | cert-petition | docx | gate | yes (14) | 100.0 | - |
+| courts/supreme-court-of-the-united-states/merits-brief | merits-brief | latex | gate | yes (17) | 100.0 | - |
+| courts/supreme-court-of-the-united-states/merits-brief | merits-brief | docx | gate | yes (17) | 100.0 | - |
+| courts/tenth-circuit/bankruptcy-appellate-panel/answering-brief | answering-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief | opening-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/tenth-circuit/bankruptcy-appellate-panel/reply-brief | reply-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/tenth-circuit/colorado/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (7) | 100.0 | - |
+| courts/tenth-circuit/colorado/federal/bankruptcy-district/adversary-complaint | adversary-complaint-2 | docx | gate | yes (9) | 100.0 | - |
+| courts/tenth-circuit/colorado/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
+| courts/tenth-circuit/colorado/federal/district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/tenth-circuit/colorado/federal/district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
 | courts/tenth-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (14) | 100.0 | - |
 | courts/tenth-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (14) | 100.0 | - |
 | courts/tenth-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (14) | 100.0 | - |
 | courts/tenth-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | yes (14) | 100.0 | - |
 | courts/tenth-circuit/court-of-appeals/reply-brief | reply-brief-2 | docx | report | yes (14) | 99.2 | p9 line 1 |
-| courts/tenth-circuit/kansas/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (10) | 41.8 | p1 line 4 |
-| courts/tenth-circuit/kansas/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (14) | 36.7 | p1 line 21 |
+| courts/tenth-circuit/kansas/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (9) | 100.0 | - |
+| courts/tenth-circuit/kansas/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (14) | 100.0 | - |
 | courts/tenth-circuit/kansas/federal/district/complaint | complaint | docx | report | no (14 vs 16) | 37.8 | p1 line 3 |
 | courts/tenth-circuit/kansas/federal/district/motion-brief | motion-brief | docx | report | yes (12) | 88.8 | p1 line 3 |
-| courts/tenth-circuit/new-mexico/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (10) | 26.4 | p1 line 16 |
-| courts/tenth-circuit/new-mexico/federal/bankruptcy-district/motion-brief | motion-brief-2 | docx | report | yes (3) | 69.8 | p1 line 14 |
-| courts/tenth-circuit/new-mexico/federal/district/complaint | complaint | docx | report | no (9 vs 10) | 40.1 | p1 line 17 |
-| courts/tenth-circuit/new-mexico/federal/district/motion-brief | motion-brief | docx | report | yes (12) | 25.6 | p1 line 14 |
-| courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | yes (7) | 38.2 | p1 line 4 |
-| courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | yes (4) | 40.2 | p1 line 8 |
-| courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/motion-brief | motion-brief-2 | docx | report | yes (12) | 28.3 | p1 line 6 |
+| courts/tenth-circuit/kansas/state/court-of-appeals/amicus-brief | amicus-brief | docx | report | yes (17) | 100.0 | - |
+| courts/tenth-circuit/kansas/state/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (27) | 100.0 | - |
+| courts/tenth-circuit/kansas/state/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (27) | 100.0 | - |
+| courts/tenth-circuit/kansas/state/court-of-appeals/motion-brief | motion-brief | latex | gate | yes (11) | 100.0 | - |
+| courts/tenth-circuit/kansas/state/court-of-appeals/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/tenth-circuit/kansas/state/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (34) | 100.0 | - |
+| courts/tenth-circuit/kansas/state/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (34) | 100.0 | - |
+| courts/tenth-circuit/kansas/state/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (10) | 100.0 | - |
+| courts/tenth-circuit/kansas/state/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/tenth-circuit/new-mexico/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/tenth-circuit/new-mexico/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/tenth-circuit/new-mexico/federal/bankruptcy-district/motion-brief | motion-brief-2 | docx | gate | yes (3) | 100.0 | - |
+| courts/tenth-circuit/new-mexico/federal/district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/tenth-circuit/new-mexico/federal/district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/tenth-circuit/new-mexico/state/court-of-appeals/amicus-brief | amicus-brief | latex | report | yes (35) | 93.9 | p2 line 16 |
+| courts/tenth-circuit/new-mexico/state/court-of-appeals/amicus-brief | amicus-brief | docx | report | yes (35) | 99.7 | p9 line 19 |
+| courts/tenth-circuit/new-mexico/state/court-of-appeals/motion-brief | motion-brief | docx | report | yes (19) | 99.0 | p9 line 18 |
+| courts/tenth-circuit/new-mexico/state/court-of-appeals/petition-for-writ | petition-for-writ | latex | report | yes (13) | 94.8 | p3 line 19 |
+| courts/tenth-circuit/new-mexico/state/court-of-appeals/petition-for-writ | petition-for-writ | docx | gate | yes (13) | 100.0 | - |
+| courts/tenth-circuit/new-mexico/state/court-of-appeals/reply-brief | reply-brief | latex | report | yes (24) | 96.9 | p3 line 3 |
+| courts/tenth-circuit/new-mexico/state/court-of-appeals/reply-brief | reply-brief | docx | report | yes (24) | 96.9 | p3 line 3 |
+| courts/tenth-circuit/new-mexico/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (5) | 100.0 | - |
+| courts/tenth-circuit/new-mexico/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (5) | 100.0 | - |
+| courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (7) | 100.0 | - |
+| courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (4) | 100.0 | - |
+| courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/motion-brief | motion-brief-2 | docx | gate | yes (12) | 100.0 | - |
 | courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/adversary-complaint | adversary-complaint | docx | report | yes (7) | 13.8 | p1 line 1 |
 | courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/motion-brief | motion-brief | docx | report | no (10 vs 9) | 18.0 | p1 line 1 |
 | courts/tenth-circuit/oklahoma/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | no (10 vs 11) | 38.7 | p1 line 6 |
 | courts/tenth-circuit/oklahoma/federal/district/complaint | complaint | docx | report | no (11 vs 13) | 26.7 | p1 line 13 |
 | courts/tenth-circuit/oklahoma/federal/district/motion-brief | motion-brief | docx | report | no (9 vs 10) | 24.3 | p1 line 4 |
-| courts/tenth-circuit/oklahoma/federal/eastern-district/complaint | complaint | docx | report | no (10 vs 11) | 25.4 | p1 line 26 |
-| courts/tenth-circuit/oklahoma/federal/eastern-district/motion-brief | motion-brief | docx | report | yes (11) | 21.9 | p1 line 4 |
-| courts/tenth-circuit/oklahoma/federal/northern-district/complaint | complaint | docx | report | no (12 vs 17) | 55.2 | p1 line 3 |
-| courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief | motion-brief | docx | report | no (12 vs 16) | 33.8 | p1 line 6 |
-| courts/tenth-circuit/oklahoma/federal/western-district/complaint | complaint | docx | report | yes (18) | 9.5 | p1 line 11 |
-| courts/tenth-circuit/oklahoma/federal/western-district/motion-brief | motion-brief | docx | report | no (8 vs 9) | 25.1 | p1 line 11 |
-| courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (10) | 27.6 | p1 line 29 |
-| courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (13) | 25.1 | p1 line 31 |
-| courts/tenth-circuit/utah/federal/district/complaint | complaint | docx | report | no (8 vs 11) | 68.8 | p1 line 14 |
-| courts/tenth-circuit/utah/federal/district/motion-brief | motion-brief | docx | report | no (11 vs 14) | 48.4 | p1 line 17 |
+| courts/tenth-circuit/oklahoma/federal/eastern-district/complaint | complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/tenth-circuit/oklahoma/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/tenth-circuit/oklahoma/federal/northern-district/complaint | complaint | docx | gate | yes (15) | 100.0 | - |
+| courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/tenth-circuit/oklahoma/federal/western-district/complaint | complaint | docx | gate | yes (17) | 100.0 | - |
+| courts/tenth-circuit/oklahoma/federal/western-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/tenth-circuit/oklahoma/state/supreme-court/amicus-brief | amicus-brief | latex | report | yes (24) | 87.4 | p2 line 4 |
+| courts/tenth-circuit/oklahoma/state/supreme-court/amicus-brief | amicus-brief | docx | report | yes (24) | 99.2 | p9 line 1 |
+| courts/tenth-circuit/oklahoma/state/supreme-court/answering-brief | answering-brief | latex | report | no (32 vs 33) | 93.9 | p2 line 25 |
+| courts/tenth-circuit/oklahoma/state/supreme-court/answering-brief | answering-brief | docx | report | yes (32) | 96.8 | p3 line 8 |
+| courts/tenth-circuit/oklahoma/state/supreme-court/brief-on-the-merits | brief-on-the-merits | latex | report | no (20 vs 21) | 82.1 | p2 line 8 |
+| courts/tenth-circuit/oklahoma/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | report | yes (20) | 85.9 | p3 line 20 |
+| courts/tenth-circuit/oklahoma/state/supreme-court/motion-brief | motion-brief | latex | report | yes (8) | 98.4 | p3 line 13 |
+| courts/tenth-circuit/oklahoma/state/supreme-court/motion-brief | motion-brief | docx | report | yes (8) | 98.4 | p3 line 13 |
+| courts/tenth-circuit/oklahoma/state/supreme-court/petition-for-writ | petition-for-writ | latex | report | yes (50) | 95.8 | p1 line 5 |
+| courts/tenth-circuit/oklahoma/state/supreme-court/petition-for-writ | petition-for-writ | docx | report | yes (50) | 96.2 | p12 line 15 |
+| courts/tenth-circuit/oklahoma/state/supreme-court/reply-brief | reply-brief | latex | report | yes (24) | 96.7 | p4 line 12 |
+| courts/tenth-circuit/oklahoma/state/supreme-court/reply-brief | reply-brief | docx | report | yes (24) | 97.2 | p3 line 3 |
+| courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (13) | 100.0 | - |
+| courts/tenth-circuit/utah/federal/district/complaint | complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/tenth-circuit/utah/federal/district/motion-brief | motion-brief | docx | gate | yes (11) | 100.0 | - |
+| courts/tenth-circuit/utah/state/court-of-appeals/amicus-brief | amicus-brief | latex | gate | yes (32) | 100.0 | - |
+| courts/tenth-circuit/utah/state/court-of-appeals/amicus-brief | amicus-brief | docx | report | yes (32) | 93.3 | p2 line 4 |
+| courts/tenth-circuit/utah/state/court-of-appeals/answering-brief | answering-brief | latex | report | yes (65) | 96.3 | p4 line 4 |
+| courts/tenth-circuit/utah/state/court-of-appeals/answering-brief | answering-brief | docx | report | yes (65) | 96.7 | p4 line 4 |
+| courts/tenth-circuit/utah/state/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (58) | 100.0 | - |
+| courts/tenth-circuit/utah/state/court-of-appeals/opening-brief | opening-brief | docx | report | yes (58) | 99.7 | p11 line 15 |
+| courts/tenth-circuit/utah/state/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (15) | 100.0 | - |
+| courts/tenth-circuit/utah/state/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (15) | 100.0 | - |
+| courts/tenth-circuit/utah/state/supreme-court/amicus-brief | amicus-brief | latex | report | yes (17) | 95.7 | p7 line 17 |
+| courts/tenth-circuit/utah/state/supreme-court/amicus-brief | amicus-brief | docx | report | yes (17) | 91.1 | p2 line 13 |
+| courts/tenth-circuit/utah/state/supreme-court/brief-on-the-merits | brief-on-the-merits | latex | report | no (34 vs 33) | 85.1 | p2 line 21 |
+| courts/tenth-circuit/utah/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | report | no (34 vs 33) | 85.1 | p2 line 21 |
+| courts/tenth-circuit/utah/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (9) | 100.0 | - |
+| courts/tenth-circuit/utah/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/tenth-circuit/utah/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | latex | gate | yes (8) | 100.0 | - |
+| courts/tenth-circuit/utah/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | docx | gate | yes (8) | 100.0 | - |
+| courts/tenth-circuit/utah/state/supreme-court/petition-for-rehearing | petition-for-rehearing | latex | report | no (20 vs 21) | 77.8 | p2 line 27 |
+| courts/tenth-circuit/utah/state/supreme-court/petition-for-rehearing | petition-for-rehearing | docx | report | yes (20) | 84.3 | p2 line 27 |
+| courts/tenth-circuit/utah/state/supreme-court/petition-for-writ | petition-for-writ | latex | report | yes (30) | 97.6 | p21 line 10 |
+| courts/tenth-circuit/utah/state/supreme-court/petition-for-writ | petition-for-writ | docx | report | yes (30) | 97.6 | p21 line 10 |
+| courts/tenth-circuit/utah/state/supreme-court/reply-brief | reply-brief | latex | report | yes (16) | 92.3 | p3 line 5 |
+| courts/tenth-circuit/utah/state/supreme-court/reply-brief | reply-brief | docx | report | yes (16) | 93.5 | p3 line 5 |
 | courts/tenth-circuit/wyoming/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (5 vs 6) | 24.2 | p1 line 11 |
 | courts/tenth-circuit/wyoming/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (14 vs 13) | 14.2 | p1 line 13 |
-| courts/tenth-circuit/wyoming/federal/district/complaint | complaint | docx | report | no (11 vs 12) | 28.5 | p1 line 18 |
-| courts/tenth-circuit/wyoming/federal/district/motion-brief | motion-brief | docx | report | no (10 vs 9) | 16.7 | p1 line 15 |
-| courts/third-circuit/court-of-appeals/answering-brief | answering-brief | latex | report | no (21 vs 23) | 46.4 | p2 line 2 |
-| courts/third-circuit/court-of-appeals/answering-brief | answering-brief | docx | report | no (21 vs 20) | 13.5 | p1 line 9 |
-| courts/third-circuit/court-of-appeals/opening-brief | opening-brief | latex | report | yes (17) | 51.1 | p1 line 2 |
-| courts/third-circuit/court-of-appeals/opening-brief | opening-brief | docx | report | no (17 vs 19) | 27.3 | p1 line 2 |
-| courts/third-circuit/court-of-appeals/reply-brief | reply-brief | latex | report | yes (10) | 42.4 | p1 line 4 |
-| courts/third-circuit/court-of-appeals/reply-brief | reply-brief | docx | report | no (10 vs 11) | 17.6 | p1 line 13 |
-| courts/third-circuit/delaware/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (11 vs 13) | 21.9 | p1 line 19 |
-| courts/third-circuit/delaware/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (12 vs 13) | 67.4 | p1 line 15 |
-| courts/third-circuit/delaware/federal/district/complaint | complaint | docx | report | no (8 vs 11) | 23.4 | p1 line 3 |
-| courts/third-circuit/delaware/federal/district/motion-brief | motion-brief | docx | report | yes (12) | 27.1 | p1 line 3 |
-| courts/third-circuit/new-jersey/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | yes (9) | 24.2 | p1 line 1 |
-| courts/third-circuit/new-jersey/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | yes (8) | 23.3 | p1 line 1 |
-| courts/third-circuit/new-jersey/federal/district/complaint | complaint | docx | report | yes (12) | 33.6 | p1 line 12 |
-| courts/third-circuit/new-jersey/federal/district/motion-brief | motion-brief | docx | report | no (11 vs 12) | 72.0 | p1 line 20 |
-| courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | report | yes (12) | 41.6 | p1 line 16 |
-| courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint-2 | docx | report | yes (9) | 39.5 | p1 line 18 |
-| courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | report | yes (9) | 22.8 | p1 line 18 |
-| courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | report | yes (3) | 69.3 | p1 line 14 |
-| courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | report | yes (7) | 35.7 | p1 line 8 |
-| courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | report | no (10 vs 11) | 45.8 | p1 line 6 |
-| courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | report | no (9 vs 11) | 24.8 | p1 line 6 |
-| courts/third-circuit/pennsylvania/federal/eastern-district/complaint | complaint | docx | report | no (11 vs 10) | 31.6 | p1 line 3 |
-| courts/third-circuit/pennsylvania/federal/eastern-district/motion-brief | motion-brief | docx | report | yes (9) | 39.0 | p1 line 3 |
-| courts/third-circuit/pennsylvania/federal/middle-district/complaint | complaint | docx | report | yes (13) | 41.9 | p1 line 11 |
-| courts/third-circuit/pennsylvania/federal/middle-district/motion-brief | motion-brief | docx | report | yes (10) | 34.5 | p1 line 17 |
-| courts/third-circuit/pennsylvania/federal/western-district/complaint | complaint | docx | report | no (11 vs 13) | 59.0 | p1 line 5 |
-| courts/third-circuit/pennsylvania/federal/western-district/motion-brief | motion-brief | docx | report | yes (7) | 36.8 | p1 line 10 |
-| courts/third-circuit/virgin-islands/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | report | no (12 vs 11) | 34.9 | p1 line 4 |
-| courts/third-circuit/virgin-islands/federal/bankruptcy-district/motion-brief | motion-brief | docx | report | no (10 vs 9) | 27.0 | p1 line 4 |
-| courts/third-circuit/virgin-islands/federal/district/complaint | complaint | docx | report | yes (12) | 19.9 | p1 line 8 |
-| courts/third-circuit/virgin-islands/federal/district/motion-brief | motion-brief | docx | report | no (9 vs 10) | 20.4 | p1 line 12 |
+| courts/tenth-circuit/wyoming/federal/district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/tenth-circuit/wyoming/federal/district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/tenth-circuit/wyoming/federal/district/motion-brief | motion-brief-2 | docx | gate | yes (9) | 100.0 | - |
+| courts/third-circuit/court-of-appeals/answering-brief | answering-brief | latex | gate | yes (23) | 100.0 | - |
+| courts/third-circuit/court-of-appeals/answering-brief | answering-brief | docx | gate | yes (23) | 100.0 | - |
+| courts/third-circuit/court-of-appeals/opening-brief | opening-brief | latex | gate | yes (19) | 100.0 | - |
+| courts/third-circuit/court-of-appeals/opening-brief | opening-brief | docx | gate | yes (19) | 100.0 | - |
+| courts/third-circuit/court-of-appeals/reply-brief | reply-brief | latex | gate | yes (10) | 100.0 | - |
+| courts/third-circuit/court-of-appeals/reply-brief | reply-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/third-circuit/delaware/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/third-circuit/delaware/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/third-circuit/delaware/federal/district/complaint | complaint | docx | gate | yes (8) | 100.0 | - |
+| courts/third-circuit/delaware/federal/district/motion-brief | motion-brief | docx | gate | yes (12) | 100.0 | - |
+| courts/third-circuit/new-jersey/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (10) | 100.0 | - |
+| courts/third-circuit/new-jersey/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/third-circuit/new-jersey/federal/district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/third-circuit/new-jersey/federal/district/motion-brief | motion-brief | docx | report | no (11 vs 12) | 77.4 | p2 line 8 |
+| courts/third-circuit/new-jersey/state/supreme-court/amicus-brief | amicus-brief | latex | report | yes (15) | 96.9 | p11 line 21 |
+| courts/third-circuit/new-jersey/state/supreme-court/amicus-brief | amicus-brief | docx | report | yes (15) | 96.9 | p11 line 21 |
+| courts/third-circuit/new-jersey/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (8) | 100.0 | - |
+| courts/third-circuit/new-jersey/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/third-circuit/new-jersey/state/supreme-court/petition-for-writ | petition-for-writ | latex | report | yes (20) | 96.8 | p6 line 20 |
+| courts/third-circuit/new-jersey/state/supreme-court/petition-for-writ | petition-for-writ | docx | gate | yes (20) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/adversary-complaint | adversary-complaint-2 | docx | gate | yes (9) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/adversary-complaint | adversary-complaint | docx | gate | yes (3) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief | motion-brief | docx | gate | yes (7) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/adversary-complaint | adversary-complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/eastern-district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/eastern-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/middle-district/complaint | complaint | docx | gate | yes (13) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/middle-district/motion-brief | motion-brief | docx | gate | yes (10) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/western-district/complaint | complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/third-circuit/pennsylvania/federal/western-district/motion-brief | motion-brief | docx | gate | yes (8) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/commonwealth-court/amicus-brief | amicus-brief | docx | report | yes (19) | 98.7 | p4 line 11 |
+| courts/third-circuit/pennsylvania/state/commonwealth-court/motion-brief | motion-brief | latex | report | yes (11) | 98.0 | p3 line 17 |
+| courts/third-circuit/pennsylvania/state/commonwealth-court/motion-brief | motion-brief | docx | report | yes (11) | 98.4 | p3 line 17 |
+| courts/third-circuit/pennsylvania/state/commonwealth-court/petition-for-review | petition-for-review | latex | report | yes (26) | 98.1 | p8 line 19 |
+| courts/third-circuit/pennsylvania/state/commonwealth-court/petition-for-review | petition-for-review | docx | report | yes (26) | 97.9 | p10 line 16 |
+| courts/third-circuit/pennsylvania/state/commonwealth-court/petition-for-writ | petition-for-writ | latex | report | yes (29) | 94.1 | p5 line 18 |
+| courts/third-circuit/pennsylvania/state/commonwealth-court/petition-for-writ | petition-for-writ | docx | report | yes (29) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/amicus-brief | amicus-brief | latex | gate | yes (27) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/amicus-brief | amicus-brief | docx | report | yes (27) | 94.8 | p17 line 1 |
+| courts/third-circuit/pennsylvania/state/supreme-court/answering-brief | answering-brief | latex | gate | yes (45) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/answering-brief | answering-brief | docx | gate | yes (45) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/brief-on-the-merits | brief-on-the-merits | latex | gate | yes (77) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/brief-on-the-merits | brief-on-the-merits | docx | gate | yes (77) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/motion-brief | motion-brief | latex | gate | yes (35) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/motion-brief | motion-brief | docx | gate | yes (35) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | latex | gate | yes (27) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/petition-for-discretionary-review | petition-for-discretionary-review | docx | gate | yes (27) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/petition-for-rehearing | petition-for-rehearing | latex | gate | yes (5) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/petition-for-rehearing | petition-for-rehearing | docx | gate | yes (5) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/petition-for-review | petition-for-review | latex | report | yes (44) | 99.5 | p23 line 6 |
+| courts/third-circuit/pennsylvania/state/supreme-court/petition-for-review | petition-for-review | docx | gate | yes (44) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/petition-for-writ | petition-for-writ | latex | gate | yes (70) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/petition-for-writ | petition-for-writ | docx | report | yes (70) | 98.3 | p31 line 20 |
+| courts/third-circuit/pennsylvania/state/supreme-court/reply-brief | reply-brief | latex | gate | yes (21) | 100.0 | - |
+| courts/third-circuit/pennsylvania/state/supreme-court/reply-brief | reply-brief | docx | gate | yes (21) | 100.0 | - |
+| courts/third-circuit/virgin-islands/federal/bankruptcy-district/adversary-complaint | adversary-complaint | docx | gate | yes (11) | 100.0 | - |
+| courts/third-circuit/virgin-islands/federal/bankruptcy-district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
+| courts/third-circuit/virgin-islands/federal/district/complaint | complaint | docx | gate | yes (12) | 100.0 | - |
+| courts/third-circuit/virgin-islands/federal/district/motion-brief | motion-brief | docx | gate | yes (9) | 100.0 | - |
 
 </details>
 
