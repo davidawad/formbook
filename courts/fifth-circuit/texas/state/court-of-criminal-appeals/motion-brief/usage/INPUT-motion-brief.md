@@ -1,6 +1,5 @@
 ---
 court: "IN THE COURT OF CRIMINAL APPEALS OF TEXAS"
-case_number: ""
 caption:
   - names: ["EX PARTE", "ROBERT LESLIE ROBERSON III"]
     designation: "APPLICANT."

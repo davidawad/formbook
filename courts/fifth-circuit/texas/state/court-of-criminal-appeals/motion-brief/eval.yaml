@@ -1,0 +1,5 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the shared filters drop
+# widow and orphan control in a paragraph that anchors a footnote and typst keeps it (docs/open-items/fb-595.54.68.md).
+params:
+  cross_engine: report
