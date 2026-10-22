@@ -2,7 +2,7 @@
 
 Doc type: **adversary complaint** (the debtor's complaint commencing an adversary proceeding, here under Fed. R. Bankr. P. 7001(2): determining the validity of a claimed lien). Court: United States Bankruptcy Court, Western District of Wisconsin (`wiwb`). Folder: `courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/adversary-complaint/`.
 
-Status: exemplar=yes (one filed exemplar, from 2015), render=ok, overlay=ok, pages reviewed 3 of 3. Nothing here sets `court.json` status.
+Status: exemplar=yes (one filed exemplar, from 2015), render=ok, overlay=ok, pages reviewed 3 of 3 (typst and docx). Nothing here sets `court.json` status.
 
 ## Governing rules
 
@@ -30,8 +30,8 @@ The court's published local rules page (`https://ecf.wiwb.uscourts.gov/wiwb/Deci
 | Parameter | Value | Basis |
 |---|---|---|
 | Paper | 8½ × 11 in, 1 in margins | Convention (no W.D. Wis. rule found). |
-| Typeface | Face required: none. Vendored substitute: none, EB Garamond kept (OFL), 12 pt. Fit: n/a. | No face is named by a rule that governs a complaint. The W.D. Wis. LBR 1007-2 names Arial, Times New Roman or Courier, but only for the creditor matrix of a voluntary petition. Per `docs/FONTS.md` ("No face named"), EB Garamond stays. The exemplar is Times; the template does not follow it. |
-| Line spacing | 24 pt baseline pitch in the body (leading 1.35em, paragraph gap 1.35em; EB Garamond's line box is 0.65em) | Convention, measured on the render with `pdftotext -bbox-layout` (page 2: 24.0 pt between body lines). Not a rule. |
+| Typeface | Face required: none. Times New Roman 12 pt (vendored), the house standard, in typst and docx. Fit: n/a. | No face is named by a rule that governs a complaint. The W.D. Wis. LBR 1007-2 names Arial, Times New Roman or Courier, but only for the creditor matrix of a voluntary petition. The exemplar is Adobe Times (audited as TeX Gyre Termes metrics); Times New Roman is used, not Termes (fb-595.68.28). |
+| Line spacing | 24 pt baseline pitch in the body, 13.8 pt single lines (caption, headings, signature), exact line boxes on the shared cross-engine model (`lib/typst/xengine.typ`) | Convention. Not a rule. |
 | Numbered paragraphs | 1., 2., ... with a 0.5 in first-line indent | Fed. R. Civ. P. 10(b). |
 | Caption | Court title centered and bold; party column with a right and bottom rule; "Adversary Case No." to the right, blank line for the clerk unless the sample gives it | Fed. R. Bankr. P. 9004(b); Official Form 416 series (the exact form text was not fetched). |
 | Section headings | Centered, bold, capitals (`#`), unnumbered, as in the exemplar | Convention, from the exemplar. |
@@ -57,25 +57,25 @@ sh tools/overlay.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-western-
 ```
 
 - File names follow the repo's tools, not the brief's shorthand: `usage/INPUT-adversary-complaint.md` (the sample), `usage/OUTPUT-adversary-complaint.typst.pdf` (our render, default name from `tools/render.sh`), `usage/OVERLAY-wenzel-complaint.pdf` and `.txt` (from `tools/overlay.sh`).
-- Typst compiled with no warnings (`render.sh` fails on any). `pdffonts` shows only the vendored EB Garamond (regular and bold, embedded as Identity-H).
+- Typst compiled with no warnings (`render.sh` fails on any). `pdffonts` shows only the vendored Times New Roman (regular and bold, embedded).
 - The overlay pairs pages by word overlap: ours p.1–3 ↔ filed p.1–3 (word overlap 77%, 77%, 74%). Red is our render, blue the exemplar, black both. The pages do not line up exactly because the exemplar's text is set in Times and the caption and paragraph breaks differ. It is a diagnostic, not a score.
 
-## Visual review (Gate 2 record, all 3 pages, rendered at 60 dpi and looked at)
+## Visual review (Gate 2 record, all 3 pages, typst and docx, rendered at 60 dpi and looked at; fb-595.68.28)
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Court title, caption (In re block, party column with "Plaintiff," / "Defendant." designations, "v."), title, PARTIES, JURISDICTION (¶¶ 1–3) | OK after two fixes: (a) numbered paragraphs were overlapping because paragraph blocks had no gap (fixed by using normal paragraph flow); (b) the court-name lines were touching (now a single stack with leading). |
-| 2 | ¶¶ 4–15 (jurisdiction end, FACTUAL ALLEGATIONS) | OK. Paragraph gaps match the line pitch (24 pt, measured). |
-| 3 | ¶¶ 16–18, WHEREFORE, prayer (a)–(c), date, firm, /s/ line, signer, bar number, address, phone | OK. The signature block sits on the page with the last paragraphs, not alone. |
+| 1 | Court title, caption (In re block, party column with "Plaintiff," / "Defendant." designations, "v."; "Adversary Case No." and its blank at the right), title, PARTIES, JURISDICTION (¶¶ 1–4) | OK. Party column ruled at right and foot; the title wraps to two centred lines. |
+| 2 | ¶¶ 5–14 (jurisdiction end, FACTUAL ALLEGATIONS) | OK. Numbers at 0.5 in, text from 1 in, 24 pt pitch. |
+| 3 | ¶¶ 15–18, WHEREFORE, prayer (a)–(c), date beside the firm, "Respectfully submitted,", /s/ line, signer, bar number, address, phone | OK. WHEREFORE kept with the prayer; prayer lines hang at 0.9 in; the signature block stays whole on the page with the last paragraphs. |
 
-Reviewed pages: 3 of 3.
+Reviewed pages: 3 of 3 on both engines; the docx breaks every line and page as typst does (XENG-001..003).
 
 ## Known gaps and open choices
 
 1. **Second exemplar.** One filing only (see Exemplar). Needs a second filed adversary complaint from a different filer, with a text layer, to meet the eval-loop tier-2 rule.
 2. **Consent paragraph.** The exemplar has none. The template asserts one (Rule 7008(a), since December 1, 2016); the sample adds it as paragraph 5. Confirm the sample's choice ("does not consent") with the filer's counsel or with David before any real use.
 3. **Local rules.** The seven published LBRs say nothing on caption or form. The current W.D. Wis. bankruptcy local rules text was not found. If a current LBR sets type size, margins, spacing or caption format, the parameters table must follow it.
-4. **Typeface and size.** EB Garamond at 12 pt, not Times New Roman. The rules give no typeface for bankruptcy pleadings; the choice is the vendored font.
+4. **Typeface and size.** Times New Roman at 12 pt, the house standard. The rules give no typeface for bankruptcy pleadings.
 5. **Caption layout.** The party column and rules are a convention drawn from the exemplar's layout, not from Official Form 416's exact text (not fetched).
 6. **Rule 9011 and 7001(2) text.** Cited from the exemplar and general knowledge, not fetched. Check the verbatim text before a rule-level claim is published.
 7. **Not generated:** cover sheet (Official Form 104), summons, exhibits, certificate of service (none in the exemplar), ECF header.
@@ -83,10 +83,8 @@ Reviewed pages: 3 of 3.
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/wiwb.lua` lays out the cover, caption, numbered allegations, prayer and signature. Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-adversary-complaint.md`, which writes `usage/OUTPUT-adversary-complaint.docx`.
+DOCX (`docx/`): `docx/reference.xml` holds the Word styles: `base="xengine"` in the typst face (`{font}`, Times New Roman), 12 pt, 480-twip body and 276-twip single line boxes, and the 11 pt page-number footer 0.5 in above the page edge; `fb render` builds the reference document from it. `docx/wiwb.lua` reads the sample's body chunk by chunk, as the typst template does, and writes every paragraph as WordprocessingML on `lib/docx/xengine.lua`: the cover, the caption table, numbered allegations, headings, the lettered prayer and the signature. No script: `fb render` runs pandoc with the filter and packs the archive (fb-595.68.28; were `build-reference.sh` and a committed `reference.docx` naming EB Garamond against a TeX Gyre Termes typst face).
 
-- **Matches the typst form (by its parameters, not seen on a page):** EB Garamond 12 pt; body lines at 24 pt exact (the typst baseline pitch); first-line indent 0.5 in; allegations numbered 1., 2., ... with the text at 1 in; prayer items (a), (b), ... with a hanging label; level-1 headings bold capitals, centred; caption with a 3.4 in party column, right and bottom rules on it, and "Adversary Case No." at the right; title centred bold; signature block in the right 3.1 in column that does not break across pages; 11 pt centred page number; letter paper, 1 in margins. The court name and "Respectfully submitted," are the template's text, as in the typst form.
-- **Differs or unverified:** the numbers are typed text, not Word list numbering (they do not renumber on edit). The caption rules are table borders, and the "Adversary Case No." and "/s/" blanks are underscores, so their length depends on the font. The title and date metadata are printed once, on the cover and in the signature block (pandoc's own title block is suppressed). Word and LibreOffice may space the caption table differently from typst; not compared.
-- **BLOCKED (docx.pdf and page review):** `soffice` is not installed on this box (no conda package, no root), so `usage/OUTPUT-wenzel-complaint.docx.pdf` was not produced, `tools/check.sh --engine docx` cannot run, and no page was rendered or reviewed (pages reviewed for docx: 0). The render script fails at the soffice step after writing the .docx; the .docx itself is valid (zip and every XML part well-formed).
-- **BLOCKED (not verified):** the .docx has not been opened in Word or LibreOffice (whether it opens without a repair prompt is not confirmed); the font name "EB Garamond" is declared, so the font must be installed for the file to show it; pagination is not measured.
-- **TOC, TOA:** none, because the typst form has none; no field update is needed.
+- Cross-engine (fb-595.68.28): typst and docx share the layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`). `sh tools/check.sh <this folder> --engine docx`: XENG-001..003 PASS (80/80 lines, 3 = 3 pages); `params.cross_engine: gate` in `eval.yaml`.
+- The "Adversary Case No." and "/s/" blanks are underscores in both engines (the typst form had drawn rules). The `.docx` converts in LibreOffice without error (the check's conversion); not opened in Word.
+- TOC, TOA: none.
