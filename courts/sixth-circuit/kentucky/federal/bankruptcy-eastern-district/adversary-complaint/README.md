@@ -78,7 +78,7 @@ Pages reviewed: 14 of 14.
 
 ## Known gaps and open choices
 
-1. **Typeface (KYEB-FORM-001).** No face is named by a rule, and `docs/FONTS.md` says a court that names none keeps EB Garamond (fonts pass, 2026-10-15). The template stays EB Garamond 13 pt. Both exemplars are set in Times, and `fonts/liberation-serif/` (the Times substitute, metric-compatible) is vendored, so switching `font-family` to `"Liberation Serif"` is a one-line change if David prefers to match the exemplars. That is a style choice, not a rule, and is left open. **Needs David's call.**
+1. **Typeface (KYEB-FORM-001).** No face is named by a rule. The template is set in Times New Roman 12 pt (vendored), the house standard (docs/FONTS.md, fb-9fyu), which also matches both exemplars. Resolved.
 2. **Pleading paper.** Neither exemplar uses numbered pleading lines; no E.D. Ky. rule requires them in this court (LR 5.1 is not in the APM list). Not drawn.
 3. **Adversary cover sheet (Official Form 1040).** Not verified in this session. If FRBP 7003 or the APM requires it with the complaint, the filing needs it separately. Not generated.
 4. **Summons (FRBP 7004; Official Form 2600 series).** Issued separately; not generated.
@@ -91,7 +91,7 @@ Pages reviewed: 14 of 14.
 
 ## Engines
 
-- **typst** (primary): `typst/`, unchanged.
-- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 13 pt, exact 24 pt body line pitch, 0.5 in first-line indent, 1 in margins on US Letter, single-spaced caption, signature and footnotes, 12 pt centered PAGE footer). `docx/kyeb-adversary-complaint.lua` builds the caption table, court and title lines, the signature block and the template's paragraph numbering (typed "N." plus a tab; the author types no numbers); lists are lettered a., b., c. Font, size, line pitch, margins, footer and caption layout match the typst form.
+- **typst** (primary): `typst/`, on the shared cross-engine layout model (`lib/typst/xengine.typ`, fb-595.68.29): Times New Roman 12 pt, 24 pt body lines, 14 pt single lines (caption, title, footnotes, signature), the debtors' note at 10 pt in 12 pt lines; the allegation number in a half-inch box after the indent, lettered items hanging at 1 in; the last block kept with the signature block.
+- **docx**: `docx/reference.xml` (base="xengine", `{font}` = the typst face; `fb render` builds the reference document) and `docx/kyeb-adversary-complaint.lua` (on `lib/docx/xengine.lua`): the same twips as the typst pitches and spaces, the caption a fixed-width table with the rules in cell borders, typed numbers and letters. No shell scripts. `params.cross_engine: gate` (`eval.yaml`): XENG-001..003 pass, every line and page as in typst.
 - **Differs from typst**: (a) the caption rules come from the table style, so the rule under the right column and the rule between the two caption rows are drawn too (typst draws them under the left column only). (b) Paragraph numbers are literal text, not a list, so Word and LibreOffice do not renumber them if the text is edited. (c) Line breaks and page breaks follow Word or LibreOffice font metrics, not typst's.
 - **BLOCKED (docx.pdf gates, Gates 0 to 3 on `OUTPUT-<id>.docx.pdf`)**: LibreOffice (`soffice`) is not installed on the box used for this build, so the LibreOffice PDF was not produced and no page was reviewed in the docx engine. `usage/OUTPUT-adversary-complaint.docx` was produced and checked only for a valid zip and well-formed XML parts; it has not been opened in Word or LibreOffice (no repair-prompt check).
