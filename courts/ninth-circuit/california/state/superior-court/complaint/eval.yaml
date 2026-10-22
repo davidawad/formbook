@@ -1,0 +1,8 @@
+# The footer (CRC 2.109, 2.110: the page number, a printed line, the paper's title) is the space below the 28th
+# numbered line, 48 pt above the page edge (typst bottom-margin); the court folder's 1 in is the body's limit
+# elsewhere (CRC 2.107 sets no top or bottom margin).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (fb-595.68.37, on the shared layout model lib/*/xengine*), so a difference fails.
+params:
+  margin_bottom_pt: 48
+  cross_engine: gate

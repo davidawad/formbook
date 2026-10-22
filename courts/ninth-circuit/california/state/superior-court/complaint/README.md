@@ -2,7 +2,7 @@
 
 Doc type `complaint` for the California Superior Courts (court alias `calsuperct`). A civil complaint on pleading paper, filed in a superior court. Template: `typst/calsuperct-complaint.typ`, entry `typst/main.typ`.
 
-Status: **typst only**. latex and docx are not built for this doc type. The first-page layout, the pleading grid and the caption are done; the tier-2 review is recorded below and has open items.
+Status: **typst and docx** (no latex). Both engines on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): the docx breaks every line and page where typst does (`eval.yaml`: `cross_engine: gate`).
 
 ## Governing rules
 
@@ -13,14 +13,14 @@ Verified 2026-10-13 against the Judicial Council rule pages. Quotations are from
 | CRC 2.100-2.119 | Format of papers (scope) | whole document | https://www.courts.ca.gov/cms/rules/index/two/rule2_100 |
 | CRC 2.103 | Papers 8½ × 11 inches; opaque white or unbleached, 20 lb (not e-filed) | page size (`us-letter`) | https://www.courts.ca.gov/cms/rules/index/two/rule2_103 |
 | CRC 2.104 | Font size not smaller than 12 points | `type-size = 12pt` | https://www.courts.ca.gov/cms/rules/index/two/rule2_104 |
-| CRC 2.105 | Font style essentially equivalent to Courier, Times New Roman, or Arial | Times New Roman named; substitute `Liberation Serif` (vendored, metric-compatible; `docs/FONTS.md`). Typeface row: face required → vendored substitute → metric-compatible. See Known gaps 1. | https://www.courts.ca.gov/cms/rules/index/two/rule2_105 |
+| CRC 2.105 | Font style essentially equivalent to Courier, Times New Roman, or Arial | Times New Roman (typst: `("Times New Roman", "Liberation Serif")`, the vendored metric twin; the docx names Times New Roman through `{font}` in `docx/reference.xml`) | https://www.courts.ca.gov/cms/rules/index/two/rule2_105 |
 | CRC 2.107 | Left margin at least 1 inch; right margin at least ½ inch | `left-margin = 1.5in`, `right-margin = 0.5in` | https://www.courts.ca.gov/cms/rules/index/two/rule2_107 |
 | CRC 2.108 | Lines one-and-one-half or double spaced and numbered consecutively; numbers at the left margin, separated from the text by a space of at least ⅕ inch or a single or double vertical line; at least 3 numbers per vertical inch | double spacing (24 pt pitch), 28 numbers, double rule | https://www.courts.ca.gov/cms/rules/index/two/rule2_108 |
 | CRC 2.109 | Pages numbered consecutively at the bottom, Arabic numerals only, starting with the first page | footer page number, no roman numerals | https://www.courts.ca.gov/cms/rules/index/two/rule2_109 |
 | CRC 2.110 | Footer below the page number, divided from the page by a printed line; the title of the paper in at least 10-point type | footer | https://www.courts.ca.gov/cms/rules/index/two/rule2_110 |
-| CRC 2.111(1) | Attorney information starting at line 1, 1 inch from the top, left of center | attorney block, lines 1-7 | https://www.courts.ca.gov/cms/rules/index/two/rule2_111 |
+| CRC 2.111(1) | Attorney information starting at line 1, 1 inch from the top, left of center | attorney block from line 1, each line left of center (the template stops on a line that does not fit) | https://www.courts.ca.gov/cms/rules/index/two/rule2_111 |
 | CRC 2.111(2) | Blank space for the clerk, first 2 inches between lines 1 and 7, right of center | left clear | same |
-| CRC 2.111(3) | Title of the court on line 8, at or below 3⅓ inches from the top | court title on line 8 (240 pt = 3⅓ in) | same |
+| CRC 2.111(3) | Title of the court on line 8, at or below 3⅓ inches from the top | court title on line 8 (240 pt = 3⅓ in), or the first numbered line below a longer attorney block | same |
 | CRC 2.111(4)-(6) | Case title below the court title on the left; case number to the right; nature of the paper below the case number (complaints also state the type of action) | caption | same |
 | CRC 2.111(7) | Judge and department below the nature of the paper, if assigned | not used in a complaint (no judge assigned) | same |
 | CRC 2.111(9) | Limited civil complaint: statement of the amount demanded ("Amount demanded exceeds …" / "does not exceed …") | optional `amount_demanded` in the caption; wording comes from the filer | same. The fetched text reads "$10,000". CCP § 85 has set the limited civil ceiling at $35,000 for cases filed on or after 2024-01-01 (see the Known gaps). |
@@ -31,14 +31,16 @@ The caption and the first-page rules come from CRC 2.111. The complaint's substa
 
 ## Layout
 
-- **Pleading grid.** Lines are 24 pt apart (double spacing). Each text line is a 1 em box (`top-edge: 0.7em`, `bottom-edge: -0.3em`), so the leading sets the pitch: 12 pt is single spacing, 24 pt is double spacing. The 28 line numbers in the background use the same box settings, so each number's baseline is the baseline of its text line. Checked with `pdftotext -bbox`: line 1 is at y = 68.3 pt, line 28 at y = 716.3 pt, and 28 body lines fit on each page.
-- **Bottom margin.** 46 pt. 28 lines (672 pt) fit and 29 lines (696 pt) do not. The footer sits 14 pt above the page edge.
-- **Rules.** A double vertical rule at 1.22-1.25 in, between the numbers and the text. A single rule at 8.1 in, outside the right margin.
-- **First page.** Attorney block in a fixed 168 pt box (lines 1-7); the template panics if the block is taller. Court title in a 48 pt box (lines 8-9). Caption starts on line 11. The caption's left column is 3.6 in, with a right rule and a bottom rule. The right column holds the case number, the title (bold), the optional details line and the optional amount-demanded line.
-- **Body.** Paragraphs first-line-indent 0.5 in, including the first paragraph after a heading. Headings are centered and bold (levels 1 and 2, uppercase), or bold left (level 3), or bold italic left (level 4). Footnotes are 12 pt, single-spaced.
-- **Signature.** "Dated:" at the left; the signature block at 3.1 in; the "By:" line with the signer's name and role below it.
+Every number is in `typst/calsuperct-complaint.typ` (parameters at the top) and, in twips, in `docx/calsuperct.lua`.
 
-No case-specific text is in the template; the parties, the court, the title and the attorney block come from the frontmatter of the sample. No coordinate was measured off the exemplar. The template inserts line breaks only between the lines of the attorney block, court title, caption and signature block, never inside body text.
+- **Pleading grid (CRC 2.108).** 28 numbered lines of 24 pt from 1 in below the top edge (double spacing); single-spaced lines (attorney block, caption, signature, footnotes; CRC 2.108(3)) are 12 pt, two to a numbered line, each group starting 9.6 pt below a numbered line's top so every other single line stands level with a number. The bottom margin is the 48 pt left under the 28th line. Every line is a box of its pitch with the baseline at 0.8 of it (the cross-engine model).
+- **Numbers and rules.** The numbers 1-28 right-aligned 1 in from the page edge on the body's line boxes (typst: `lib/typst/pleading-paper.typ`; docx: a page-anchored frame in the footer); a double rule left of the text and a single rule right of it (docx: page borders).
+- **Footer (CRC 2.109, 2.110).** 2 pt below the 28th line: the page number (12 pt), a printed line, the paper's title in capitals at 10 pt. In the docx both sit in a page-anchored frame (in the footer's flow, LibreOffice grows the footer into the 28th line), the line an underlined tab (LibreOffice drops a framed paragraph's border).
+- **First page (CRC 2.111).** The attorney block from line 1, one line per item, left of center (the template stops on an item that does not fit, so the clerk's space stays clear); the court title, bold and centered, on line 8 or on the first numbered line after a longer block; one numbered line below it the caption: the case title in the left half, ruled at its right and foot (it may run over a page end, as the exemplar's does); in the right column the case number, the nature of the paper (bold), the details and the amount demanded, a numbered line apart. The body starts on the first numbered line at least 12 pt below the caption's foot (typst measures where the caption ended; the docx filter counts the party column's lines with the vendored face's advances, `docx/lib/measure.lua`).
+- **Body.** Each blank-line-separated chunk is a heading or a paragraph (the author numbers the allegations, `1\.`). Paragraphs indent their first line 0.5 in. Headings sit on one numbered line with no space of their own, kept with the text: levels 1 and 2 centered bold capitals, level 3 bold, level 4 bold italic. Footnotes at 12 pt in 12 pt lines, 6 pt apart, under a 2 in rule; a paragraph that anchors one has no widow or orphan rule on either engine (docx: Body Text Note).
+- **Signature.** A numbered line below the last paragraph, kept on one page with it: "Dated:" at the margin, the signature lines from 3.1 in, a numbered line lower "By:" and a 2.7 in signature line, the signer (bold capitals) and role 0.3 in further in.
+
+No case-specific text, no coordinate measured off the exemplar, no forced line break: the attorney lines, the court lines and the caption lines are the frontmatter's own list items.
 
 ## Markdown contract
 
@@ -47,7 +49,7 @@ A sample is one `.md` file: a YAML frontmatter block, then the body.
 | Field | Required | Feeds |
 |---|---|---|
 | `footer_title` | yes | Footer title, at least 10 pt (CRC 2.110) |
-| `attorney` | yes | List of lines, starting at line 1 (CRC 2.111(1)). Inline markdown is allowed. |
+| `attorney` | yes | List of lines, starting at line 1 (CRC 2.111(1)); each must fit left of center (split a long one). Inline markdown is allowed. |
 | `court` | yes | List of lines for the court title on line 8 (CRC 2.111(3)) |
 | `caption.left` | yes | List of lines for the parties. Leading spaces become an indent (0.25 em per space). |
 | `caption.case_number` | no | Case number, right column (CRC 2.111(5)) |
@@ -59,90 +61,49 @@ A sample is one `.md` file: a YAML frontmatter block, then the body.
 
 Body: a paragraph whose first characters are a number followed by a period must escape the period (`1\.`), so the number is kept as typed. Headings: `#` for level 1 and `##` for level 2 (both centered), `###` for level 3, `####` for level 4. Footnotes: `[^key]` and `[^key]: text`.
 
+
 ## Build and check
 
 From the repo root:
 
 ```sh
-export PATH=/work/artifacts/bin:$PATH   # only if typst, poppler and magick are not installed system-wide
-sh tools/render.sh courts/ninth-circuit/california/state/superior-court/complaint usage/INPUT-complaint.md
-sh tools/overlay.sh courts/ninth-circuit/california/state/superior-court/complaint sweetwater-complaint
+sh tools/check.sh courts/ninth-circuit/california/state/superior-court/complaint                 # typst
+sh tools/check.sh courts/ninth-circuit/california/state/superior-court/complaint --engine docx   # docx, XENG gated
+just overlay courts/ninth-circuit/california/state/superior-court/complaint
 ```
 
-The render fails on any typst warning. The font is the vendored `Liberation Serif` (`fonts/liberation-serif`), the substitute for Times New Roman; `--ignore-system-fonts` is used, so nothing falls back to a system font. `pdffonts` on the output lists `LiberationSerif` and `LiberationSerif-Bold`, both embedded. The page count is 5 with both EB Garamond and Liberation Serif (checked before and after the switch).
+Typst renders with the vendored fonts only (`--ignore-system-fonts`; any warning fails): Liberation Serif, the metric twin of Times New Roman. The docx names Times New Roman; its LibreOffice PDF embeds it.
 
 ## Samples and exemplar
 
-- `usage/INPUT-complaint.md`: transcribed from the exemplar: caption, first page, the introduction (paragraphs 1-3), the first and second causes of action (paragraphs 75-80, abridged), the prayer (items 1-12) and the signature. Paragraphs 4-74 and the rest of the causes of action are not transcribed. Footnote 10 of the exemplar is transcribed as a footnote.
-- `usage/OUTPUT-complaint.typst.pdf`: the render, 5 pages.
-- `usage/OVERLAY-sweetwater-complaint.pdf` and `-overlay.txt`: the red/blue overlay against `usage/FILED-EXAMPLE-complaint.pdf`. The page map from `overlay.sh`:
+- `usage/INPUT-complaint.md`: transcribed from the exemplar: the attorney block (line for line as filed), the caption, the introduction (paragraphs 1-3), the first and second causes of action (paragraphs 75-80, abridged), the prayer (items 1-12) and the signature. Footnote 10 of the exemplar is transcribed as a footnote.
+- `usage/OUTPUT-complaint.typst.pdf`, `usage/OUTPUT-complaint.docx`, `usage/OUTPUT-complaint.docx.pdf`: 5 pages each.
+- Exemplar and source: `usage/FILED-EXAMPLE-complaint.pdf`, `usage/SOURCE.md` (Office of the Attorney General, 2025).
 
-  ```
-  ours p.1  filed p.1   word-overlap 72.1%
-  ours p.2  filed p.2   word-overlap 87.5%
-  ours p.3  filed p.36  word-overlap 56.7%
-  ours p.4  filed p.38  word-overlap 62.8%
-  ours p.5  filed p.39  word-overlap 65.4%
-  ```
-
-  The map is a text-similarity pairing, not a score. Pages 3-5 pair with the exemplar's later pages because the sample is an excerpt. The overlay is a diagnostic (tier 3). The exemplar PDF is not stored in the repo (`usage/` holds `SOURCE.md` only); this overlay was run against a copy fetched from the URL in `usage/SOURCE.md` on 2026-10-15, kept outside the repo.
-
-- Exemplar and sources: `usage/SOURCE.md`.
-
-## Gate 2: page review (sample `sweetwater-complaint`, 5 pages, `pdftoppm -r 70`, Liberation Serif)
-
-Each page of the current PDF was rendered and viewed. Compared with: the exemplar's page 1 for the caption, page 2 for the body, pages 37-39 for the causes of action, the prayer and the signature.
+## Gate 2: page review (typst and docx, 5 pages each, `pdftoppm -r 60`)
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
-| 1 | exemplar p.1 | Attorney block on lines 1-7; court title on lines 8-9; caption begins on line 11; the parties' list fits on the page and "Defendants." is on page 1. Left rule clear of the text. | PASS |
-| 2 | exemplar p.2 | Body text on the grid; the first paragraph after the heading is indented (fixed by `first-line-indent: (all: true)`); the centered "I. INTRODUCTION" heading is bold caps. | PASS |
-| 3 | exemplar p.36-37 | Both cause headings are centered, bold caps, and set on the grid. Paragraph 79's footnote sits at the foot of the page, and the body above it stays on the grid. | PASS |
-| 4 | exemplar p.38 | Prayer items 1-7 are on the grid, each item first-line-indented; the page ends at item 7. | PASS |
-| 5 | exemplar p.39 | Prayer items 8-12, then "Dated", "Respectfully Submitted", "By:" with the signer and role, on the page. With Liberation Serif the signature no longer stands alone (the earlier EB Garamond render left it alone on page 5). | PASS |
-
-Every page passes. CRC 2.111 is met on every page.
+| 1 | exemplar p.1 | Attorney block lines 1-10, left of center, as the exemplar's; court title on line 11 (the exemplar's); caption from line 14, the party column ruled at its right and foot, running over to page 2 as the exemplar's does. docx alike line for line. | PASS |
+| 2 | exemplar p.2 | Caption's last lines and rule, the body from line 4 on the numbered lines, "I. INTRODUCTION" on its line with no space around it (as the exemplar). docx alike. | PASS |
+| 3 | exemplar p.36-37 | Cause headings, "[By Plaintiff against All Defendants]", paragraphs 75-79; footnote under a 2 in rule at the foot. docx alike. | PASS |
+| 4 | exemplar p.38 | Paragraph 80, the prayer heading, items 1-7. docx alike. | PASS |
+| 5 | exemplar p.39 | Items 8-12, then the signature block a numbered line below. docx alike. | PASS |
+| all | | docx: the pleading rules are page borders, which LibreOffice draws from the top margin to the footer, not the full page height as typst draws them. | ACCEPTED |
 
 ## Known gaps
 
-1. **Font style (CRC 2.105): Times New Roman, substituted.** CRC 2.105 allows Courier, Times New Roman, or Arial. The template uses Times New Roman's vendored substitute, `Liberation Serif` (`fonts/liberation-serif`, SIL OFL 1.1, metric-compatible; `docs/FONTS.md`), set in `typst/calsuperct-complaint.typ` (`font-family`). Times New Roman was chosen because it is a proportional serif that keeps the template's serif look; the rule allows Courier or Arial equally, and switching to either is a one-line change. EB Garamond remains in `fonts/` for other courts; it is not used here.
-2. **Amount demanded (CRC 2.111(9)).** The fetched rule text reads "$10,000", but CCP § 85 (as amended by Stats. 2023, ch. 861) has set the limited civil ceiling at $35,000 for cases filed on or after 2024-01-01. The template takes the wording from the frontmatter and does not print a threshold; the sample has no `amount_demanded`.
-3. **"Limited Civil Case" (CRC 2.111(10))** is not printed; the template has no field for it.
-4. **"EXEMPT FROM FEES" line** (the exemplar's right-hand note on line 1) is not implemented.
-5. **Page 5 signature** was an orphan under EB Garamond; under Liberation Serif it is on the page with prayer items 8-12 (see Gate 2).
-6. **Exemplars: one.** The brief asks for one exemplar per doc type. The EFF complaint options were not searched for in depth; a second filer's complaint would let tier-2 choices be judged against two filers.
-7. **Verification, proof of service and summons** are not generated. Only the complaint body and caption are covered.
-8. **Footnotes** shift the body above them; the body lines below a footnote stay on the grid, but a footnote that splits across pages is not checked.
-9. **Tier-1 checks** are not in `checks.yaml` form for this doc type (the brief did not ask for them). The only mechanical guard is the attorney-block height panic.
-
-[Court folder](../README.md) | [Formbook index](../../../../../../README.md)
+1. **Amount demanded (CRC 2.111(9)).** The fetched rule text reads "$10,000", but CCP § 85 (as amended by Stats. 2023, ch. 861) has set the limited civil ceiling at $35,000 for cases filed on or after 2024-01-01. The template takes the wording from the frontmatter and does not print a threshold; the sample has no `amount_demanded`.
+2. **"Limited Civil Case" (CRC 2.111(10))** is not printed; the template has no field for it.
+3. **"EXEMPT FROM FEES" line** (the exemplar's right-hand note on line 1) is not implemented.
+4. **Exemplars: one.** A second filer's complaint would let tier-2 choices be judged against two filers.
+5. **Verification, proof of service and summons** are not generated.
+6. **docx caption line count.** The filter counts the party column's lines from the face's advances, breaking at spaces only; a party name that typst breaks elsewhere (inside a long word) would put the body off the numbered lines in the docx (XENG would show it).
 
 ## Engines
 
-### docx (built, not rendered here)
+- **typst** (primary): `typst/main.typ`, `typst/calsuperct-complaint.typ`.
+- **docx**: `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst face) and `docx/calsuperct.lua` (every paragraph, the caption table, the signature, the footers via `FORMBOOK_FOOTERS` and the page via `FORMBOOK_FINAL`), `docx/lib/measure.lua`. `fb render` builds the reference document and the archive; no shell script. Gated against typst (XENG-001..003).
+- **latex**: not built for this doc type.
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once) and the Lua filter `docx/calsuperct.lua`. `tools/render.sh --engine docx` writes `usage/OUTPUT-<id>.docx`; the LibreOffice PDF step is BLOCKED on this box (see below).
-
-What the docx sets (in `styles.xml`, `sectPr`, `footer1.xml`, or the filter). Set in styles.xml/sectPr, not rendered:
-
-- Font: Liberation Serif 12 pt in every style; text black.
-- Body: exact 24 pt line spacing, no paragraph spacing, 0.5 in first-line indent. Headings: exact 24 pt, bold; levels 1-2 centered; level 4 bold italic. Footnote Text single-spaced. Block quotes 0.5 in both sides, exact 12 pt.
-- Page: US Letter; top 1 in, bottom 48 pt (28 lines of 24 pt fit), left 1.5 in, right 0.5 in; footer 14.4 pt from the bottom edge.
-- Pleading rules: page borders (double rule 18 pt left of the text, single rule 7 pt right of it). Word line numbering: every line of body text, restarted each page, 0.45 in left of the text.
-- Footer: a printed rule, the PAGE field at 12 pt, then the SUBJECT field at 10 pt. The filter copies `footer_title` into the document subject, so no case text is in the template.
-- First page (filter): attorney block single-spaced from line 1; court title at line 8 (space computed from the number of attorney lines); caption as a borderless table, 3.6 in left cell with bottom and right rules, 2.9 in right cell. Leading spaces in `caption.left` are read from the sample's raw frontmatter (Pandoc drops them) and become 60 twips per space, as in the typst template.
-- Signature block at 3.1 in; the "By:" line is a tab with an underscore leader.
-
-Differs from typst:
-
-- Line numbers are Word's, not drawn: Word numbers the body paragraphs (including the attorney block lines) and skips the caption table, so 1-28 may not line up with the typst grid. Typst draws 28 fixed numbers in the margin.
-- Rules are page borders spanning the text area, not the full-height drawn lines of the typst template.
-- Caption cell padding and the gaps between caption groups are approximate.
-- The footer subject depends on the application updating fields (SUBJECT).
-- Pagination follows Word or LibreOffice, not typst.
-
-BLOCKED:
-
-- docx.pdf gates 0-3: BLOCKED. soffice is not installed on the build box, so no LibreOffice PDF exists and no docx page was viewed (pages_reviewed = 0 for docx).
-- Pleading line numbers on 28 lines per page (CRC 2.108): BLOCKED, as above, until a LibreOffice render confirms the numbering.
-- Footer SUBJECT field (CRC 2.110 title on every page): BLOCKED until a LibreOffice render shows the title.
+[Court folder](../README.md) | [Formbook index](../../../../../../README.md)
