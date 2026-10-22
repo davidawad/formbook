@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the typst template is on the shared document model
+# (typst/layout.yaml, fb-595.54.12). Reported, not gated, and no latex or docx engine yet: the INPUT's statement of
+# facts holds a markdown table (the sentences, page 8), and the model's pandoc engines set no table in the body
+# ("xdoc: unsupported block Table"; docs/open-items/fb-595.54.35.md, shared-model requests).
+params:
+  cross_engine: report
