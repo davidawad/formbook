@@ -14,10 +14,10 @@ Governing rules for a petition for certiorari to the Supreme Court of Georgia (G
 |---|---|---|---|
 | GA-SC-FONT-001 | Rule 16(1) | Proportionally spaced serif body font; monospaced not allowed; Century family given as an example. | `typst/ga-petition-for-review.typ` (`font-family`) |
 | GA-SC-FONT-002 | Rule 16(2) | Body and headings no smaller than 13-pt Century Schoolbook; footnotes no smaller than 11-pt. | `type-size`, `note-size` |
-| GA-SC-SPACE-001 | Rule 16(4); Rule 17(2) | Line spacing between 1.2x and double; block quotations, headings, captions and footnotes may be single-spaced. Everything else (body, counsel, signature, service list, TOC) must keep at least 1.2x. | `body-leading` = 0.78 em (measured pitch 19.5 pt = 1.5x at 13 pt). `single-leading` = 0.5 em (measured pitch 15.9 pt = 1.22x), so even the single-spaced parts meet the floor. |
+| GA-SC-SPACE-001 | Rule 16(4); Rule 17(2) | Line spacing between 1.2x and double; block quotations, headings, captions and footnotes may be single-spaced. Everything else (body, counsel, signature, service list, TOC) must keep at least 1.2x. | `pitch-body` 19.5 pt (1.5x); `pitch-single` 15.9 pt (1.22x) for the cover, headings, quotations, signature, certificate lines and contents title; `pitch-note` 13.5 pt for the 11-pt footnotes |
 | GA-SC-MARGIN-001 | Rule 16(5); Rule 17(2) | Margins at least one inch, top, bottom and sides. Letter paper: Rule 17(1). | `page-margin` = 1 in |
-| GA-SC-ELEC-001 | Rule 17(3) | E-filed documents carry no hyperlinks to other documents or external sites. | `show link: it => it.body` |
-| GA-SC-PAGE-001 | Rule 21 | Pages counted toward the limit are numbered sequentially in Arabic numerals. The cover is the only unnumbered page. | `set page(numbering: "1")` after the cover |
+| GA-SC-ELEC-001 | Rule 17(3) | E-filed documents carry no hyperlinks to other documents or external sites. | `show link` keeps the text and drops the target |
+| GA-SC-PAGE-001 | Rule 21 | Pages counted toward the limit are numbered sequentially in Arabic numerals. The cover is the only unnumbered page. | the page-number footer starts after the cover, `counter(page).update(1)` |
 | GA-SC-ORDER-001 | Rule 41(2) | The question or questions presented go under a separate heading at the beginning, before the table of contents and the introduction. | `questions-page` (from frontmatter `questions_presented`) |
 | GA-SC-LIMIT-001 | Rule 20(3) | Petitions for certiorari are limited to 7,000 words. | **Not enforced by the template** (see gaps). Sample body: 2,447 words. |
 | GA-SC-LIMIT-002 | Rule 20(6) | Cover, table of contents, table of citations, certificate of service, signature block and the word-count statement are not counted. | Template layout |
@@ -31,9 +31,9 @@ The Rule 41 petition is judged against Rule 41 and Rules 14–22. Rule 19(1)(a) 
 
 ## Typeface and substitute
 
-- Rule-named face: Rule 16(1) names the **Century family (e.g., Century Schoolbook)** as permissible, and Rule 16(2) states the size in 13-point Century Schoolbook. The rule does not mandate a single face.
-- Substitute (docs/FONTS.md, "Century family, New Century Schoolbook"): **TeX Gyre Schola** (`fonts/tex-gyre-schola/`, GUST Font License), a metric-compatible New Century Schoolbook clone. The template declares `TeX Gyre Schola`. `pdffonts` on the sample shows only `TeXGyreSchola-{Regular,Bold,Italic,BoldItalic}`, all embedded.
-- EB Garamond is not used. It appears only in the overlay's red/blue label text, which `tools/overlay.sh` draws itself.
+- Rule-named face: Rule 16(1) asks for a proportionally spaced serif face and names examples (the **Century family, e.g. Century Schoolbook**, Baskerville, Book Antiqua and others); Rule 16(2) states the size as 13-point Century Schoolbook. The rule does not mandate a single face.
+- Face set: **Times New Roman** (vendored, `fonts/`; docs/FONTS.md rule 6, the house standard; the filed exemplars are set in Times New Roman), declared `("Times New Roman", "Liberation Serif")`. The docx names the same face through `{font}` in `docx/reference.xml`. `pdffonts` on both renders shows only `TimesNewRomanPS{MT,-BoldMT,-ItalicMT,-BoldItalicMT}`, all embedded.
+- Size: 13 pt body and headings, 11 pt footnotes, the Rule 16(2) minimums in points (DEF-FORM-003 checks 13 pt, `../eval.yaml`). Times New Roman sets narrower than Century Schoolbook at the same size; the rule states sizes, not widths, and the template keeps the 13 pt it had.
 
 ## Markdown contract (sample frontmatter)
 
@@ -56,7 +56,7 @@ The body is markdown: `#` is a section (centered bold), `##` a sub-section (bold
 
 - `usage/INPUT-petition-for-review.md`: transcribed from `usage/FILED-EXAMPLE-petition-for-review.pdf`. Frontmatter from the cover, counsel, certificate and signature. Body is an **excerpt**: Introduction; Jurisdiction; Factual and Procedural Background; Enumeration of Errors; Legal Standard; Argument through the first two sub-sections (a, b); the closing "important issues" paragraph; Conclusion. Omitted: Argument sub-sections c–e and the middle of "Plaintiffs' interpretation". Footnote URLs (perma.cc, twitter) are dropped (Rule 17(3)). Footnotes are condensed to their text.
 - The filed petition has no Questions Presented page before the TOC (its "Enumeration of Errors" carries the question). The sample adds `questions_presented` from that same question text to satisfy Rule 41(2), so the template's page is a rule-driven addition, not an exemplar copy.
-- Render: `usage/OUTPUT-petition-for-review.typst.pdf`, 12 PDF pages: cover (unnumbered), questions presented (printed 1), TOC (2), body (3–9), Conclusion with the Rule 20(7) statement and signature (10), certificate of service (11).
+- Render: `usage/OUTPUT-petition-for-review.typst.pdf` (and `.docx.pdf`), 12 PDF pages: cover (unnumbered), questions presented (printed 1), TOC (2), body (3–9), Conclusion with the Rule 20(7) statement and signature (10), certificate of service (11).
 
 ## Exemplar
 
@@ -65,30 +65,22 @@ The body is markdown: `#` is a section (centered bold), `##` a sub-section (bold
 
 ## Overlay
 
-`usage/OVERLAY-dpg-emergency-petition.pdf` and `usage/OVERLAY-dpg-emergency-petition.txt` (from `sh tools/overlay.sh`). Red is our render, blue is the filed exemplar page paired by word overlap, black is where they agree. The page map is in the `.txt`. The page map pairs ours p.2 (questions presented) with filed p.13 at 30.6%, which is expected: the filed petition has no questions page before the TOC. Body pages (ours 3–9) pair at 57–78% word overlap. The overlap measures transcription coverage (the sample is an excerpt), not layout. Pages 10–12 (conclusion, certificate) pair at 31–59%, mostly names and addresses.
+`just overlay courts/eleventh-circuit/georgia/state/supreme-court/petition-for-review` writes `.overlay/<this folder>/OVERLAY-petition-for-review.pdf` and `.txt` (not committed). Page map of the typst render (ours → filed, word overlap): 1→1 100%, 2→13 31%, 3→2 69%, 4→7 63%, 5→9 59%, 6→11 64%, 7→12 59%, 8→14 65%, 9→16 42%, 10→18 24%, 11→31 34%, 12→33 59%. Ours p.2 (questions presented) has no counterpart: the filed petition has no questions page before the TOC. Overlap measures transcription coverage (the sample is an excerpt), not layout.
 
 ## Gate 2: page review (Gate 2 record)
 
-Every page of `usage/OUTPUT-petition-for-review.typst.pdf` was rasterized at 60 dpi and read. Pages 1–12 reviewed (12 of 12).
+All 12 PDF pages of `usage/OUTPUT-petition-for-review.typst.pdf` and of `usage/OUTPUT-petition-for-review.docx.pdf` were rasterized (50 to 60 dpi) and read, side by side, after the final render (fb-595.68.36: the cross-engine layout model, Times New Roman on both engines). XENG-001..003 pass (295/295 lines, 12 pages alike).
 
 | Page (PDF) | Printed | Result |
 |---|---|---|
-| 1 | cover (none) | OK after fix: "IN THE" and "SUPREME COURT OF GEORGIA" now on separate lines; counsel lines show italics, not literal asterisks. |
-| 2 | 1 | Questions presented. OK. |
-| 3 | 2 | TOC. OK. Entries match the printed page numbers. |
-| 4–10 | 3–9 | Body. OK after fixes: first-line indents and paragraph gaps restored; headings single-spaced; no orphaned headings (level-1 headings are sticky). |
-| 10 | 9 | "This case presents…" sub-heading and the start of the Conclusion. OK. |
-| 11 | 10 | Conclusion, Rule 20(7) statement, signature block, all on one page. OK. |
-| 12 | 11 | Certificate of service. OK. |
+| 1 | cover (none) | OK. Case number, court, caption, title in capitals between rules with the filer line, counsel in two columns, party line. Same in both engines. |
+| 2 | 1 | Questions presented: the number in a half-inch box, the question hanging, 1.5 spaced. OK. |
+| 3 | 2 | Table of contents. OK. Every entry's page matches the page the heading is on in each engine; a two-line entry wraps before the page column. |
+| 4–10 | 3–9 | Body. OK. Headings single-spaced and kept with the text; paragraphs indented after a paragraph, flush after a heading; footnotes at 11 pt on printed pages 3, 4, 5 and 6. |
+| 11 | 10 | Conclusion, the Rule 20(7) statement, date and signature block on one page. OK. |
+| 12 | 11 | Certificate of service: statement, the served in two columns (the third group on a second row), the agreement note, the /s/ signature. OK. |
 
-Defects found and fixed during the review (not present in the final render):
-1. Cover: "IN THE" ran into "SUPREME COURT OF GEORGIA" (no paragraph break).
-2. Cover: counsel lines printed literal `*` marks (italics were not parsed).
-3. Questions presented and TOC were unnumbered; Rule 21 requires Arabic numerals on counted pages.
-4. Body paragraphs had no first-line indent and no gap: a later `set par(first-line-indent: 0pt)` leaked into the body (fixed by scoping it to the TOC).
-5. Level-1 headings could be stranded at the foot of a page (`block(sticky: true)`).
-6. Single-spaced text (counsel, signature, service list, TOC) measured 0.92x (`single-leading` = 0.2 em), under the Rule 16(4) 1.2x floor, and the rule's single-spacing exceptions do not cover it. Raised to 0.5 em (1.22x).
-7. Signature block was 3.4 in wide and split the firm address; widened to 4.2 in.
+No OPEN rows. ACCEPTED: the caption's designations and "v." sit 2.5 pt and 1.2 pt further right in typst than in Word (cover only, diagnostic); Word's footnote separator is longer than typst's 30 % rule.
 
 ## Gaps (not done here, and why)
 
@@ -102,33 +94,22 @@ Defects found and fixed during the review (not present in the final render):
 ## Commands
 
 ```sh
-export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (conda-forge)
+export PATH="$HOME/.local/share/formbook/env/bin:$PATH"   # the toolchain of tools/bootstrap.sh
 sh tools/render.sh courts/eleventh-circuit/georgia/state/supreme-court/petition-for-review usage/INPUT-petition-for-review.md
-sh tools/overlay.sh courts/eleventh-circuit/georgia/state/supreme-court/petition-for-review dpg-emergency-petition
+sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/state/supreme-court/petition-for-review usage/INPUT-petition-for-review.md
+just overlay courts/eleventh-circuit/georgia/state/supreme-court/petition-for-review
 ```
 
 The render fails on any typst warning and on any font outside the vendored set (`--ignore-system-fonts`).
 
 ## Engines
 
-Typst is the primary engine (above). The DOCX engine is `docx/`, the same files as `motion-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-motion.lua` builds the cover, the questions presented (Rule 41(2), before the TOC), the TOC, closing and certificate; `render.sh` makes two renders so the TOC numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-petition-for-review.md`: `usage/OUTPUT-petition-for-review.docx` and `.docx.pdf` (LibreOffice 26.8.1).
+Typst is the reference engine; the docx engine (`docx/`, the same files in `motion-brief/` and `petition-for-review/`) breaks every line and every page where typst does, on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"). `eval.yaml` sets `params.cross_engine: gate`.
 
-| | docx | typst |
-|---|---|---|
-| Pages | 12 | 12 |
-| Font | TeX Gyre Schola only | TeX Gyre Schola only |
-| Line pitch | 19.5 pt; 7.8 pt after paragraphs | same |
-| Questions presented | hanging indent, page 1 | same |
-| Cover | same layout | same |
-| TOC | numbers equal the typst output on all twelve entries | same |
-| Closing | the signature kept on one page | same |
-| Certificate | same; recipients in two columns, the third and later wrapping | same |
+- `docx/reference.xml`: the cross-engine recipe (`base="xengine"`) in `{font}` at 13 pt, with the typst pitches in twips (20 x pt): Body Text 390 (19.5 pt) with 156 (7.8 pt) above and below and a half-inch first-line indent; single lines 318 (15.9 pt); Block Text 195 (9.75 pt) around quotations; footnotes 11 pt in 270 (13.5 pt) lines, 120 (6 pt) apart; Body Flush, the Note (no widow control) and Keep variants.
+- `docx/ga-motion.lua`: the cover (caption and counsel as fixed-width borderless tables, the rules as paragraph borders), the questions presented (a petition), the table of contents (a dot leader to the page in a 36 pt column, as typst's `listing-row`), the headings, the Rule 20(7) statement and signature block, and the certificate of service; body paragraphs, quotations, lists and footnotes are written by pandoc in the reference styles. Contents page numbers come from `fb render`'s needles (a needle per heading, its text and the words after it); the page-number footer (a 15.9 pt line) and the sections (the cover unnumbered, arabic from 1 after it) are given to `fb render` (FORMBOOK_FOOTERS, FORMBOOK_FINAL).
+- The last body paragraph is kept with the signature block in both engines (typst: one unbreakable block; Word: Body Keep and keep-with-next), so the closing never stands alone on a page.
 
-Checked: every page of `OUTPUT-ga-petition-for-review-dpgemergencypetition.docx.pdf` was rendered (60 dpi) and set beside the typst page; line positions were measured with `pdftotext -bbox`.
-
-What differs:
-
-- **Caption.** The close-parenthesis column and the docket are top-aligned in the table, as in the motion (typst centres them).
-- Run-in spacing and Word: see motion-brief.
+Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-<id>.md`: `usage/OUTPUT-<id>.docx` and `.docx.pdf` (LibreOffice). The latex engine is not built for this folder.
 
 BLOCKED: none.

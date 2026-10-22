@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Supreme Court of Georgia motion's (and petition's) Word styles: the cross-engine recipe
+     (tools/fb/src/docxxengine.rs) in the face of the typst template ({font}, Times New Roman: Rule 16(1) asks for a
+     proportionally spaced serif and names examples, none required; the filed exemplars' face) at 13 pt (size 26 half
+     points; Rule 16(2), body and headings no smaller than 13 point); single lines 15.9 pt (318 twips: typst
+     pitch-single, 1.22 x the size, Rule 16(4)'s 1.2 floor) for headings, quotations, the cover, the signature and the
+     certificate lines; Block Text (quotations) half an inch in on both sides, 9.75 pt (195 twips: typst quote-gap)
+     around a quotation and between its paragraphs; List Item the label in a half-inch box; headings 19.5 pt above and
+     9.75 pt below (390 and 195 twips: typst h1-above, h1-below; the filter writes each heading with its own spacing);
+     footnotes 11 pt (size 22; Rule 16(2), no smaller than 11 point) in 13.5 pt lines (270 twips: typst pitch-note),
+     6 pt after each (120 twips: typst note-gap). Replaced here: "Body Text" in exact 19.5 pt line boxes (390 twips:
+     typst pitch-body, 1.5 spacing, Rule 16(4)) with a half-inch first-line indent (typst para-indent) and 7.8 pt
+     (156 twips: typst para-gap) above and below; "Footnote Text" without the recipe's keep-lines (typst splits a note
+     where LibreOffice does). Added: "Body Flush" (a paragraph after a heading, a quotation or a list: typst indents a
+     paragraph only after a paragraph); the "Note" variants without widow control (a paragraph that anchors a
+     footnote: typst may move its last line on alone); the "Keep" variants (the last paragraph, kept with the
+     signature block: typst sets them in one unbreakable block). Letter page, 1-inch margins (Rule 16(5)); the
+     sections and the page-number footer (a 15.9 pt line, 690 twips from the page edge: 1 in - typst footer-descent
+     21.6 pt - 15.9 pt) are written by docx/ga-motion.lua. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="26" body="390" single="318" indent="720" list="720" heading="318" heading-before="390" heading-after="195" quote="195" note="270" note-size="22" note-after="120" footer="690">
+<w:style w:type="paragraph" w:styleId="BodyText"><w:name w:val="Body Text"/><w:basedOn w:val="Normal"/><w:link w:val="BodyTextChar"/><w:qFormat/><w:pPr><w:spacing w:before="156" w:after="156" w:line="390" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="120" w:line="270" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyFlush"><w:name w:val="Body Flush"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:ind w:firstLine="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyFlushNote"><w:name w:val="Body Flush Note"/><w:basedOn w:val="BodyFlush"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyKeep"><w:name w:val="Body Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyFlushKeep"><w:name w:val="Body Flush Keep"/><w:basedOn w:val="BodyFlush"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>
