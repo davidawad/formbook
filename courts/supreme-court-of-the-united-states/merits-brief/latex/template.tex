@@ -1,110 +1,130 @@
-% Supreme Court of the United States: amicus curiae brief (booklet format), LaTeX engine.
-% Same rule parameters as typst/scotus-amicus-brief-amicus-brief.typ (Rules 33.1, 34, 37).
-% The body and every front-matter block are produced by latex/brief.lua as raw LaTeX; this file
-% holds the page, type and macro definitions.
+% Supreme Court of the United States: brief on the merits (booklet format), LaTeX engine.
+% Same rule parameters and form as typst/merits-brief.typ (Rules 24, 33.1, 34). The body and every front-matter
+% block are produced by latex/brief.lua as raw LaTeX; this file holds the page, type and macro definitions.
+%
+% Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): this template sets every line and page break where
+% the typst template (the reference) sets them. The model itself (no kerning or ligatures, first-fit breaking, fixed
+% line boxes, no widows, footnote marks, list labels, contents rows) is the shared package lib/latex/xengine.sty, and
+% lib/latex/xeschola.sty sets Schola at the advances of the vendored font; fb render inlines both into the generated
+% .tex. The inline rules are lib/latex/xengine.lua and xeschola.lua, run by brief.lua. Every size and space here is
+% in bp (12 bp = typst's 12 pt), and blocks are spaced with \addvspace (the larger of the space below one and above
+% the next).
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
 % Rule 33.1(b): Century family. docs/FONTS.md substitute: TeX Gyre Schola (same face as typst/). tgschola ships with
 % every TeX Live (package tex-gyre), so the generated .tex compiles with stock pdflatex and no repo-local file.
 \usepackage{tgschola}
 % Rule 33.1(c): the text field 4 1/8 by 7 1/8 in. No running head: its height and separation are zero here, in
-% geometry, so the top margin is the text's (zeroed after geometry they moved the text block up by their sum).
-\usepackage[paperwidth=6.125in,paperheight=9.25in,left=1in,right=1in,top=1in,bottom=1.125in,footskip=0.45in,headheight=0pt,headsep=0pt]{geometry}
-\usepackage{changepage}
-\usepackage{setspace}
+% geometry, so the top margin is the text's. The page number sits where typst sets it.
+\usepackage[paperwidth=6.125in,paperheight=9.25in,left=1in,right=1in,top=1in,bottom=1.125in,footskip=36.3bp,headheight=0pt,headsep=0pt]{geometry}
 \usepackage[hidelinks,breaklinks]{hyperref}
-\usepackage{microtype}
-\usepackage{etoolbox}
-\usepackage{ragged2e}
-\usepackage{needspace}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{xengine} % lib/latex/xengine.sty, inlined by fb render
+\usepackage{xeschola} % lib/latex/xeschola.sty: Schola at the advances of the vendored font, inlined by fb render
 \makeatletter
 
-% Rule 33.1(b): 12-point type, 14-point baselines (2 points of leading); notes 10/12.
-\renewcommand{\normalsize}{\fontsize{12pt}{14pt}\selectfont}
-\setlength{\parindent}{0.4in}
-\setlength{\parskip}{1em}
+% Rule 33.1(b): 12-point type with 2 points of leading: 14 bp line boxes; notes (and the cover's counsel, Rule
+% 34.1(g)) 10 bp in 12 bp boxes.
+\renewcommand\normalsize{\xe@lines{12}{14}}
+\renewcommand\footnotesize{\xe@lines{10}{12}}
+\normalsize
+\setlength{\parindent}{0.3in} % after xengine.sty's \raggedright, which sets it to zero
+\xe@lists{0.3in}
 \pagestyle{plain}
-\raggedbottom
-\sloppy
-\renewcommand{\footnotesize}{\fontsize{10pt}{12pt}\selectfont}
-\setlength{\footnotesep}{0.5em}
-\setlength{\skip\footins}{1.2em}
-\renewcommand{\footnoterule}{\kern -3pt \hrule width 0.9in \kern 2pt}
 \setcounter{secnumdepth}{0}
-\setcounter{tocdepth}{0}
 
-% Notes: superscript marks in the text, flush numbers in the note area.
-\renewcommand{\thefootnote}{\arabic{footnote}}
-\renewcommand\@makefntext[1]{\parindent 1em\noindent\hb@xt@1.8em{\hss\@makefnmark\ }#1}
+% Footnotes [footnote.entry]: 12 bp clear of the text, a 0.9 in rule, 6 bp between notes; the mark (58 % of the
+% 10 bp note type, raised 29 %) and a quarter em before the text. LaTeX resets the right skip inside a footnote:
+% it is set back here.
+\xe@footnotemarks{12}
+\setlength{\skip\footins}{12bp}
+\renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.9in height 0.5bp\kern-0.25bp}
+\newcommand\scotus@notemark[1]{\raisebox{2.9bp}{\fontsize{5.8bp}{0bp}\selectfont #1}}
+\renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=6bp\relax
+  \vskip 0pt\noindent\scotus@notemark{\@thefnmark}\hskip 0.25em #1}
 
-% Block quotations over 50 words are indented on both sides (Rule 33.1(b)).
-\renewenvironment{quote}{\begin{adjustwidth}{0.4in}{0.4in}\noindent\ignorespaces}{\end{adjustwidth}}
-
-% Lists (pandoc tight lists) keep the body leading.
+% Block quotations (Rule 33.1(b)): 0.4 in in from both margins, 9 bp above and below; their paragraphs not indented.
+% A list of its own, so that a list inside it is indented from the quotation's margins (no space of its own).
+\renewenvironment{quote}{%
+  \par\addvspace{9bp}%
+  \list{}{\leftmargin=0.4in\rightmargin=0.4in\topsep=0pt\partopsep=0pt\parsep=0pt\itemsep=0pt
+    \listparindent=0pt\itemindent=0pt\labelwidth=0pt\labelsep=0pt}\item\relax
+}{%
+  \endlist\addvspace{9bp}%
+}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-% Front matter (roman) and body (arabic restarting at 1). Page numbers are centred in the footer.
-\pagenumbering{arabic}
-\def\scotus@pagefooter{\hfill\thepage\hfill}
+% The page number: centered, in the 14 bp line box.
+\def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
+  \def\@oddfoot{\reset@font\normalsize\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}
 
-\makeatletter
-% Headings. Section: centred bold capitals. Points: label in a hanging box; the text hangs under the text.
-\newcommand{\scotussection}[1]{%
-  \par\addvspace{1.4em}\needspace{4\baselineskip}%
-  \begin{center}\textbf{\MakeUppercase{#1}}\end{center}\par\nopagebreak\addvspace{0.2em}\nopagebreak\noindent}
-\newcommand{\scotuspoint}[3]{%
-  % #1 indent, #2 printed label, #3 text
-  \par\addvspace{0.9em}\needspace{3\baselineskip}%
-  {\leftskip=#1\relax\hangindent=0.4in\hangafter=1\relax
-   \ifstrempty{#2}{}{\makebox[0.4in][l]{\textbf{#2}}}\textbf{#3}\par}\nopagebreak\addvspace{0.3em}\nopagebreak\noindent}
+% Space between two paragraphs (0.75 em; a heading's own space wins next to one, as in typst).
+\newcommand\scotuspar{\par\addvspace{9bp}}
 
-% Dot leaders and the page reference that end a TOC or TOA entry (fb-595.53): the title lines stop short of a
-% right margin as wide as the reference, which hangs into it on the last line after at least 1.5em of leaders,
-% so it never wraps onto a line of its own.
-\newcommand{\leaderpage}[1]{{\setbox0=\hbox{#1}\rightskip=\dimexpr\wd0+2.3em\relax plus 1fil\parfillskip=-\rightskip
-  \unskip\nobreak\hskip 0.3em\leaders\hbox to .44em{\hss.\hss}\hskip 1.5em plus 1fill\nobreak\hskip 0.5em\box0\par}}
-% Table of contents lines (Rule 34.2). #1 indent, #2 label, #3 title, #4 page.
-\newcommand{\tocsection}[2]{%
-  \noindent\hangindent=0.4in\hangafter=1\relax\MakeUppercase{#1}\leaderpage{#2}\vspace{0.5em}}
-\newcommand{\tocpoint}[4]{%
-  \noindent{\leftskip=#1\relax\hangindent=0.4in\hangafter=1\relax
-   \ifstrempty{#2}{}{\makebox[0.4in][l]{#2}}#3\leaderpage{#4}}\vspace{0.5em}}
-% Table of authorities lines: #1 entry, #2 pages.
+% Headings (typst: show heading). A heading never ends a page; the paragraph after it is not indented.
+\@clubpenalty=\clubpenalty % \@afterheading restores the club penalty from it: no orphans (xengine.sty)
+% Level 1: centred bold, 13.2 bp above, 10.8 bp below. #1 text, #2 label (and contents entry) inside the paragraph.
+\newcommand{\scotussection}[2]{%
+  \par\addvspace{13.2bp}%
+  \begingroup\centering\bfseries\leavevmode#2#1\par\endgroup
+  \nobreak\addvspace{10.8bp}\@afterindentfalse\@afterheading}
+% Levels 2 and 3: bold, wrapped lines hanging 0.4 in; #1 above, #2 below, #3 text, #4 label.
+\newcommand{\scotuspoint}[4]{%
+  \par\addvspace{#1bp}%
+  \begingroup\noindent\hangindent=0.4in\hangafter=1\relax\bfseries#4#3\par\endgroup
+  \nobreak\addvspace{#2bp}\@afterindentfalse\@afterheading}
+
+% Table of contents rows (Rule 24.1(c); typst: toc-section, listing-row): 4.8 bp above, the text wraps before a 24 bp
+% page column, its wrapped lines at the row's indent; a dot leader runs to the page. #1 indent, #2 title, #3 page.
+\newcommand{\tocrow}[3]{%
+  \begingroup\setlength{\xe@col}{24bp}\xe@row{4.8bp}{#1}{\hspace*{#1}#2}{#3}\endgroup}
+% Table of authorities: a kind's title 12 bp above, 4.8 bp below; each entry 6 bp above, hanging 0.25 in, the
+% page column 40 bp or the width of a longer page list. #1 entry, #2 pages.
+\newlength\scotus@w
 \newcommand{\toaline}[2]{%
-  \noindent\hangindent=0.4in\hangafter=1\relax #1\leaderpage{#2}\vspace{0.6em}}
-\newcommand{\toaheading}[1]{\par\addvspace{1.1em}\needspace{3\baselineskip}\noindent\textbf{#1}\par\vspace{0.7em}}
+  \begingroup\settowidth{\scotus@w}{#2}\setlength{\xe@col}{40bp}\ifdim\scotus@w>\xe@col\setlength{\xe@col}{\scotus@w}\fi
+  \xe@row{6bp}{0.25in}{#1}{#2}\endgroup}
+\newcommand{\toaheading}[1]{\par\addvspace{12bp}\noindent\textbf{#1}\par\nobreak\addvspace{4.8bp}}
 
-% Pages of one authority: #1 its citation labels (comma list, in document order, so the pages come out in
-% order and a repeated page is always the last one printed). Six or more pages print "passim"
-% (passim-threshold in the typst template).
-\newcounter{toapages}
-\def\toalast{-1}
+% Pages of one authority: #1 its citation labels (a comma list). Each distinct page once, in page order (typst:
+% dedup, sorted); every page is listed (no "passim").
+\newcount\toa@n
 \def\toaout{}
 \def\toapageone#1{%
-  \@ifundefined{r@#1}{\def\toapg{0}}{\edef\toapg{\getpagerefnumber{#1}}}%
-  \ifnum\toapg=\toalast\else
-    \ifx\toaout\empty\edef\toaout{\toapg}\else\edef\toaout{\toaout, \toapg}\fi
-    \stepcounter{toapages}%
-    \xdef\toalast{\toapg}%
-  \fi}
+  \@ifundefined{r@#1}{}{\expandafter\gdef\csname toa@on@\getpagerefnumber{#1}\endcsname{}}}
 \def\toapagesloop#1,{%
   \ifx\relax#1\else
     \toapageone{#1}%
     \expandafter\toapagesloop
   \fi}
 \newcommand{\toapages}[1]{%
-  \setcounter{toapages}{0}%
-  \def\toalast{-1}%
-  \def\toaout{}%
+  \begingroup
   \toapagesloop#1,\relax,%
-  \ifnum\value{toapages}>5 passim\else\toaout\fi}
+  \def\toaout{}\toa@n=0
+  \loop\advance\toa@n by 1
+    \@ifundefined{toa@on@\the\toa@n}{}{%
+      \ifx\toaout\empty\edef\toaout{\the\toa@n}\else\edef\toaout{\toaout, \the\toa@n}\fi
+      \global\expandafter\let\csname toa@on@\the\toa@n\endcsname\relax}%
+  \ifnum\toa@n<999 \repeat
+  \toaout
+  \endgroup}
 % Zero-width label on a citation: its page is the page of the citation.
 \newcommand{\toacite}[1]{\label{#1}}
-% Cover (Rule 34.1): the blocks of the cover are composed by brief.lua.
-\newenvironment{scotuscover}{\begin{center}\ignorespaces}{\end{center}}
+% One line of the cover or the signature: #1 space above (bp), #2 the text. \scotusline centres it.
+\newcommand{\scotusline}[2]{\par\addvspace{#1bp}\begingroup\centering #2\par\endgroup}
+\newcommand{\scotusleft}[2]{\par\addvspace{#1bp}\noindent #2\par}
+% A 0.6 bp rule across the text, #1 bp above it (the cover).
+\newcommand{\scotusrule}[1]{\par\addvspace{#1bp}\nointerlineskip\hrule height 0.6bp\relax}
+% The cover's counsel: two columns 0.25 in apart (typst: grid), each group in 10 bp type, 12 bp lines.
+\newlength\scotus@col
+\newcommand{\scotuscounsel}[2]{%
+  \setlength{\scotus@col}{\dimexpr(\textwidth-0.25in)/2\relax}%
+  \par\xe@natural\noindent\hbox to\textwidth{%
+  \begin{minipage}[t]{\scotus@col}\raggedright\footnotesize #1\end{minipage}\hss
+  \begin{minipage}[t]{\scotus@col}\raggedright\footnotesize #2\end{minipage}}\par\normalsize}
 
 \makeatother
-\raggedright
 \begin{document}
 $body$
 \end{document}

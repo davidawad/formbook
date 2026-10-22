@@ -2,6 +2,7 @@
 // The template is content-agnostic: every number below is a named parameter that traces to a rule.
 // The sample (markdown with a YAML frontmatter) supplies all text.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Rule parameters
@@ -15,9 +16,15 @@
 #let body-size = 12pt                 // Rule 33.1(b): 12-point text
 #let note-size = 10pt                 // Rule 33.1(b): 10-point footnotes
 #let counsel-size = 10pt              // Rule 34.1(g): identification of counsel is exempt from the 11-point floor
-#let min-leading = 2pt                // Rule 33.1(b): at least 2-point leading
-#let leading-value = 2pt              // Rule 33.1(b): 2-point leading; with the 1em line box below, baseline pitch is 14pt
-#let line-box = (top-edge: 0.75em, bottom-edge: -0.25em)  // line box = 1em, so pitch = 1em + leading for any face
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; LaTeX \pdfeachlineheight). The same layout in the
+// latex (latex/template.tex) and docx (docx/brief.lua) engines.
+#let pitch-body = 14pt                // Rule 33.1(b): 12-point type with 2-point leading
+#let pitch-note = 12pt                // Rule 33.1(b): 10-point notes with 2-point leading (counsel on the cover too)
+#let para-space = 9pt                 // between paragraphs (0.75 em)
+#let toc-page-col = 24pt              // the contents' page numbers keep this column to themselves
+#let toa-page-col = 40pt              // the authorities' page lists; a longer list widens its row's column
 #let booklet-width = 6.125in          // Rule 33.1(a): 6 1/8 by 9 1/4 inch booklet
 #let booklet-height = 9.25in
 #let text-width = 4.125in             // Rule 33.1(c): text field, footnotes included, at most 4 1/8 by 7 1/8 inches
@@ -107,46 +114,42 @@
 // Blocks
 // ---------------------------------------------------------------------------
 
+/// A line (or wrapped paragraph) of the cover, `above` the space before it.
+#let cover-line(above, body) = block(width: 100%, above: above, below: 0pt, align(center, body))
+#let cover-rule(above) = block(width: 100%, above: above, below: 0pt, line(length: 100%, stroke: 0.6pt))
+
 /// Cover, Rule 34.1: docket number, court, caption, nature of the proceeding, title, counsel.
-/// Counsel of record sits first and carries its own notation (Rule 34.1(f)).
+/// Counsel of record sits first and carries its own notation (Rule 34.1(f)); counsel in two columns at the foot.
 #let cover(meta) = {
   let counsel-group(g) = block(width: 100%, {
-    set text(size: counsel-size)
-    set par(justify: false, leading: min-leading, first-line-indent: 0pt)
-    for n in g.names { [#inl(n) \ ] }
-    for l in g.at("lines", default: ()) { [#text(style: "italic")[#inl(l)] \ ] }
+    set text(size: counsel-size, ..edges(pitch-note))
+    set par(justify: false, first-line-indent: 0pt)
+    for n in g.names { block(above: 0pt, below: 0pt, inl(n)) }
+    for l in g.at("lines", default: ()) { block(above: 0pt, below: 0pt, emph(inl(l))) }
   })
   let counsel = need(meta, "counsel")
   block(height: text-height, width: 100%, {
-    set par(justify: false, first-line-indent: 0pt, leading: min-leading)
-    align(center)[
-      #text(size: body-size)[#need(meta, "docket")]
-      #v(0.9in)
-      #text(size: body-size)[IN THE]
-      #v(0.2em)
-      #text(size: 14pt)[#court-name]
-      #v(0.6em)
-      #line(length: 100%, stroke: 0.6pt)
-      #v(0.6em)
-      #for l in need(meta, "caption") [#text(size: body-size)[#inl(l)] \ ]
-      #v(0.6em)
-      #line(length: 100%, stroke: 0.6pt)
-      #v(0.6em)
-      #text(size: body-size)[#inl(need(meta, "proceeding"))]
-      #v(0.6em)
-      #text(size: body-size, weight: "bold")[#inl(need(meta, "brief_title"))]
-    ]
+    set par(justify: false, first-line-indent: 0pt)
+    cover-line(0pt, need(meta, "docket"))
+    cover-line(64.8pt)[IN THE]
+    cover-line(2.4pt, court-name)
+    cover-rule(7.2pt)
+    for (i, l) in need(meta, "caption").enumerate() { cover-line(if i == 0 { 7.2pt } else { 0pt }, inl(l)) }
+    cover-rule(7.2pt)
+    cover-line(7.2pt, inl(need(meta, "proceeding")))
+    cover-line(7.2pt, strong(inl(need(meta, "brief_title"))))
     v(1fr)
-    align(left, {
-      grid(
-        columns: (1fr, 1fr),
-        column-gutter: 0.25in,
-        row-gutter: 0.9em,
-        ..counsel.map(counsel-group),
-      )
-    })
+    grid(
+      columns: (1fr, 1fr),
+      column-gutter: 0.25in,
+      row-gutter: 10.8pt,
+      ..counsel.map(counsel-group),
+    )
   })
 }
+
+/// A heading-like title that is not in the table of contents (Rule 24.1 front pages are; these are not).
+#let front-title(body) = heading(level: 1, numbering: none, outlined: false, body)
 
 /// Questions Presented page (Rule 24.1(a)): the questions and nothing else.
 #let questions-page(meta) = {
@@ -165,11 +168,19 @@
   }
 }
 
-/// Table of contents (Rule 24.1(c)): generated from the body headings.
+/// Table of contents (Rule 24.1(c)): generated from the headings, levels 1 to 3; each row 4.8 pt below the one
+/// before, the text wrapping before the page column (listing-row), its wrapped lines at the row's indent.
 #let toc-section() = {
-  heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  align(right)[#text(size: note-size)[Page]]
-  outline(title: none, depth: 3, indent: 0pt)
+  front-title[Table of Contents]
+  block(width: 100%, above: 0pt, below: 0pt, align(right, text(size: note-size, ..edges(pitch-note))[Page]))
+  context for hd in query(heading.where(outlined: true)) {
+    if hd.level <= 3 {
+      let ind = (hd.level - 1) * para-indent
+      let loc = hd.location()
+      let pg = numbering(loc.page-numbering(), ..counter(page).at(loc))
+      listing-row(loc, [#h(ind)#hd.body], pg, toc-page-col, ind, 4.8pt)
+    }
+  }
 }
 
 #let toa-groups = (
@@ -184,7 +195,7 @@
 /// Table of authorities (Rule 34.2): every page on which an authority is cited, no "passim".
 /// Pages come from the `toa:` links in the body; the key must be in the frontmatter `authorities`.
 #let toa-section(authorities) = {
-  heading(level: 1, numbering: none, outlined: false)[Table of Authorities]
+  front-title[Table of Authorities]
   context {
     let hits = query(<toa-hit>)
     let pages = (:)
@@ -200,7 +211,7 @@
       let keys = authorities.keys().filter(k => authorities.at(k).kind == kind)
       if keys.len() == 0 { continue }
       keys = keys.sorted(key: k => lower(authorities.at(k).at("sort", default: authorities.at(k).name)))
-      block(above: 1em, below: 0.4em, sticky: true, text(weight: "bold")[#title])
+      block(width: 100%, above: 12pt, below: 4.8pt, sticky: true, strong(title))
       for k in keys {
         let a = authorities.at(k)
         let name = inl(a.name)
@@ -208,41 +219,32 @@
         let cite = a.at("cite", default: none)
         let line = if cite == none { shown } else { [#shown, #inl(cite)] }
         let ps = pages.at(k).sorted().map(str).join(", ")
-        block(width: 100%, below: 0.5em, grid(
-          columns: (1fr, auto),
-          column-gutter: 0.5em,
-          par(first-line-indent: 0pt, hanging-indent: 0.25in, leading: min-leading, line),
-          align(right, text(size: body-size)[#ps]),
-        ))
+        // one row: the citation hangs 0.25 in and wraps before the page column, a dot leader to the pages
+        listing-row(none, line, ps, calc.max(toa-page-col, measure(ps).width), 0.25in, 6pt)
       }
     }
   }
 }
 
-/// Signature block, Rule 34.3: counsel's name at the close of the body.
-#let signature-block(meta) = {
+/// Signature block, Rule 34.3: counsel's name at the close of the body; never split.
+#let signer-lines(meta) = {
   let sig = need(meta, "signature")
-  block(breakable: false, width: 100%, {
-    v(1.2em)
-    par(first-line-indent: 0pt)[Respectfully submitted,]
-    v(2em)
-    par(first-line-indent: 0pt, leading: min-leading)[
-      #sig.signer \
-      #for l in sig.lines [#inl(l) \ ]
-    ]
-    if "date" in meta { v(0.8em); par(first-line-indent: 0pt)[#inl(meta.date)] }
-  })
+  block(above: 0pt, below: 0pt, sig.signer)
+  for l in sig.lines { block(above: 0pt, below: 0pt, inl(l)) }
+  if "date" in meta { block(above: 9.6pt, below: 0pt, inl(meta.date)) }
 }
+
+#let signature-block(meta) = block(breakable: false, width: 100%, above: 14.4pt, below: 0pt, {
+  set par(first-line-indent: 0pt, justify: false)
+  block(above: 0pt, below: 24pt)[Respectfully submitted,]
+  signer-lines(meta)
+})
 
 /// Certificate of word count, Rule 33.1(h). The count is the template's mechanical count of the
 /// sample body; a filer substitutes the count from the word processor used to prepare the brief.
 #let word-certificate(meta, words) = {
-  heading(level: 1, numbering: none, outlined: false)[Certificate of Compliance]
-  par(first-line-indent: 0pt)[
-    I certify that this brief complies with the word limit of Supreme Court Rule 33.1(g),
-    #group-digits(word-limit) words for a brief on the merits for a petitioner or appellant,
-    and that it contains #group-digits(words) words, excluding the parts that Rule 33.1(d) excludes.
-  ]
+  front-title[Certificate of Compliance]
+  par(first-line-indent: 0pt)[I certify that this brief complies with the word limit of Supreme Court Rule 33.1(g), #group-digits(word-limit) words for a brief on the merits for a petitioner or appellant, and that it contains #group-digits(words) words, excluding the parts that Rule 33.1(d) excludes.]
   signature-block(meta)
 }
 
@@ -264,45 +266,51 @@
   }
 
   set document(title: need(meta, "docket") + " " + need(meta, "brief_title"))
+  // The page number: centered in a line box of the body pitch, the same on every page.
   set page(
     width: booklet-width,
     height: booklet-height,
     margin: (x: margin-x, top: margin-top, bottom: margin-bottom),
     numbering: none,
+    footer-descent: 30%,
+    footer: context if page.numbering != none {
+      align(center, text(..edges(pitch-body), counter(page).display(page.numbering)))
+    },
   )
-  set text(font: font-family, size: body-size, lang: "en", fallback: false, ..line-box)
-  set par(justify: true, leading: leading-value, spacing: 0.75em, first-line-indent: para-indent)
+  set text(font: font-family, size: body-size, lang: "en", fallback: false)
+  set par(first-line-indent: para-indent)
+  // The cross-engine layout model (lib/typst/xengine.typ): first fit, no kerning or ligatures, no hyphenation, line
+  // boxes of the body pitch, footnote marks at 58 %, lists with the bullet in a 0.3 in box, a section sign kept with
+  // its number, no break inside "60(b)(5)".
+  show: xengine.with(pitch: pitch-body, list-indent: para-indent)
+  // Ragged right, as the court's other templates here: a justified 4 1/8 in measure without hyphenation (which no two
+  // engines share) opens wide gaps between words.
+  set par(spacing: para-space)
 
-  show heading.where(level: 1): it => block(above: 1.1em, below: 0.9em, width: 100%, sticky: true,
+  // Rule 33.1(b): 12-point type, headings too (typst would enlarge them).
+  show heading: set text(size: body-size, ..edges(pitch-body))
+  show heading.where(level: 1): it => block(above: 13.2pt, below: 10.8pt, width: 100%, sticky: true,
     {
       set par(justify: false)
-      align(center, text(weight: "bold", hyphenate: false, it.body))
+      align(center, strong(it.body))
     })
-  show heading.where(level: 2): it => block(above: 0.9em, below: 0.7em, sticky: true,
-    par(first-line-indent: 0pt, justify: false, hanging-indent: heading-indent, text(weight: "bold", hyphenate: false, it.body)))
-  show heading.where(level: 3): it => block(above: 0.8em, below: 0.6em, sticky: true,
-    par(first-line-indent: 0pt, justify: false, hanging-indent: heading-indent, text(weight: "bold", hyphenate: false, it.body)))
+  show heading.where(level: 2): it => block(above: 10.8pt, below: 8.4pt, sticky: true,
+    par(first-line-indent: 0pt, justify: false, hanging-indent: heading-indent, strong(it.body)))
+  show heading.where(level: 3): it => block(above: 9.6pt, below: 7.2pt, sticky: true,
+    par(first-line-indent: 0pt, justify: false, hanging-indent: heading-indent, strong(it.body)))
 
-  show quote.where(block: true): it => pad(left: 0.4in, right: 0.4in, {
-    set par(first-line-indent: 0pt, leading: min-leading, justify: true)
+  show quote.where(block: true): it => block(above: para-space, below: para-space, pad(left: 0.4in, right: 0.4in, {
+    set par(first-line-indent: 0pt)
     it.body
-  })
+  }))
+  set footnote.entry(gap: 6pt, clearance: 12pt, indent: 0pt, separator: line(length: 0.9in, stroke: 0.5pt))
   show footnote.entry: it => {
-    set text(size: note-size)
-    set par(leading: min-leading + 0.5pt, first-line-indent: 0pt, justify: true)
-    it
-  }
-
-  show outline.entry: it => context {
-    let loc = it.element.location()
-    let pg = numbering(loc.page-numbering(), ..counter(page).at(loc))
-    link(loc, pad(left: (it.level - 1) * 0.3in, block(width: 100%, {
-      it.element.body
-      h(0.2em)
-      box(width: 1fr, repeat[.])
-      h(0.2em)
-      pg
-    })))
+    set text(size: note-size, ..edges(pitch-note))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt, spacing: 6pt)
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    // A note is not split across pages (Word keeps its lines together; LaTeX: \interfootnotelinepenalty 10000).
+    block(breakable: false, [#super(num)#h(0.25em)#note.body])
   }
 
   // Citations: [text](toa:key) is recorded for the table of authorities; the key must be listed.

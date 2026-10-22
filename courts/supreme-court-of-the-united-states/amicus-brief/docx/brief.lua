@@ -23,15 +23,16 @@
 local WORD_LIMITS = { government = 9000, other = 8000 } -- Rule 33.1(g): amicus briefs on the merits
 local PASSIM = 6          -- an authority cited on this many pages or more is "passim" (typst: passim-threshold)
 local TOC_DEPTH = 3       -- heading levels in the table of contents (typst: toc-row for levels 1 to 3)
--- The text width, 4 1/8 in (Rule 33.1(c)) less 5 twips: LibreOffice sets Schola 0.088 % narrower than typst (mean of
--- 203 identical full lines of the sample, -0.24 pt each; its glyph positions are rounded) and starts each line 0.1 pt
--- right of the margin: a full line ends 0.16 pt short of typst's, so a line typst overflows by less than that would
--- fit here and break elsewhere. The right margin takes 4 twips (1 in + 0.2 pt); the contents rows, whose text is
--- shorter, give 3 twips back (TOC_COL).
-local TEXT_W = 5936
-local MARGIN_R = 1444
+-- The text width, 4 1/8 in (Rule 33.1(c)), less what the right margin takes beyond 1 in (MARGIN_R). LibreOffice sets
+-- Schola a little narrower than typst (0.088 % on the mean of 203 identical full lines of the amicus sample; its glyph
+-- positions are rounded, unevenly: a no-break-hyphen run of 13 characters comes out 0.11 pt short) and starts each
+-- line 0.1 pt in, so a line typst overflows by a hair would fit here. The margin is the measured one at which every
+-- line of this folder's sample breaks as in typst (amicus-brief 1443 twips, merits-brief 1441: one twip either side
+-- moves a line); a line of other text within 0.1 pt of the measure may still break differently (docs/EVAL-LOOP.md).
+local TEXT_W = 5937
+local MARGIN_R = 1443
 local PITCH = 280         -- typst pitch-body: 14 pt (12-point type, 2-point leading; Rule 33.1(b))
-local TOC_COL = 477       -- typst toc-page-col: 24 pt kept for the contents' page numbers, less 3 twips (TEXT_W)
+local TOC_COL = 477       -- typst toc-page-col: 24 pt kept for the contents' page numbers, less the margin's extra
 local TOA_COL = 800       -- typst toa-page-col: 40 pt (a longer page list widens its own row's column)
 local LABEL = 576         -- the label box of point headings, 0.4 in (typst: label-tab)
 local QUOTE_L = 576       -- reference.docx Block Text indent (typst: para-indent)
@@ -44,7 +45,12 @@ local stringify = pandoc.utils.stringify
 -- ---------------------------------------------------------------------------
 
 local xe = require("docx.xengine")
-local raw, para, jc, KEEP, LINES, BREAK, LEAD = xe.raw, xe.para, xe.jc, xe.KEEP, xe.LINES, xe.BREAK, xe.LEAD
+local raw, para, jc, KEEP, LINES, BREAK = xe.raw, xe.para, xe.jc, xe.KEEP, xe.LINES, xe.BREAK
+-- Before the leader tab of a table row: no-break spaces as wide as typst's 0.75 em (9 pt) between the text and the
+-- leader. Schola's space is 0.278 em, so xe.LEAD's three are 10 pt (LibreOffice ignores character spacing on them):
+-- two at 12 pt and one at 8.5 pt, 9.04 pt.
+local LEAD_XML = '<w:r><w:t xml:space="preserve">\u{00A0}\u{00A0}</w:t></w:r><w:r><w:rPr><w:sz w:val="17"/></w:rPr>'
+  .. '<w:t xml:space="preserve">\u{00A0}</w:t></w:r><w:r><w:tab/></w:r>'
 
 local function spacing(before, after, line)
   return xe.spacing(before or 0, after or 0, line or PITCH)
@@ -425,7 +431,7 @@ end
 -- the page column `col`; a dot leader from three spaces after the text runs to the page at the margin.
 local function row(before, left, hang, col, body, page)
   return para({ LINES, xe.leader_tab(TEXT_W), spacing(before, 0), ind(left + (hang or 0), hang, col) },
-    body .. runs(LEAD .. page))
+    body .. LEAD_XML .. runs(page))
 end
 
 -- The width of a page list in twips (Schola advances at 12 pt): the authorities' page column is as wide as a longer

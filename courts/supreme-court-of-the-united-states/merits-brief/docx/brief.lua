@@ -1,110 +1,117 @@
--- Supreme Court of the United States: brief on the merits (booklet format), docx engine (typst: merits-brief.typ).
--- pandoc writes the body (paragraphs, quotations, footnotes) with docx/reference.docx (page setup, Schola 12/14 pt,
--- 10/12 pt notes); this filter writes what needs Word formatting:
---   * the cover (Rule 34.1), the Question Presented and Parties pages (Rule 24.1(a), (b)), the table of contents and
---     the table of authorities (Rule 34.2), the headings, the signature block (Rule 34.3) and the certificate of
---     compliance (Rule 33.1(h)), as paragraphs with explicit spacing, indents and tabs;
+-- Supreme Court of the United States: brief on the merits (booklet format), docx engine
+-- (typst: merits-brief.typ). pandoc writes the body (paragraphs, quotations, footnotes) with
+-- docx/reference.docx (docx/build-reference.sh: Schola 12 pt in 14 pt lines, 10 pt notes in 12 pt lines); this
+-- filter writes what needs Word formatting:
+--   * the cover (Rule 34.1), the questions and parties pages (Rule 24.1), the tables (Rules 24.1(c), 34.2), the
+--     headings, the block quotations, the signature block (Rule 34.3) and the certificate of compliance (Rule 33.1(h)),
+--     as paragraphs with explicit spacing, indents and tabs;
 --   * list items as paragraphs whose bullet is a character of the body face (pandoc's list numbering would make
 --     LibreOffice draw the bullet in OpenSymbol, DEF-FONT-002);
 --   * the pages in the two tables: fb render (tools/fb/src/docxpass.rs) renders the document, finds the page of
 --     every heading and citation in the LibreOffice PDF (the needles this filter writes) and renders again with
---     those pages (FORMBOOK_PAGES), until they settle;
---   * the sections whose footers number the pages: cover (none), front matter (i, ii ...), body and signature
---     (1, 2 ...), certificate (none). fb render writes the footers; this filter writes the last section (FORMBOOK_FINAL).
+--     those pages (FORMBOOK_PAGES), until they settle. A citation is a `[text](toa:key)` link (typst: the link
+--     show rule);
+--   * the sections whose footers number the pages: cover (none), front matter (i, ii ...), body and signature (1, 2 ...),
+--     certificate (none). fb render writes the footers; this filter writes the last section (FORMBOOK_FINAL).
 -- Word may paginate slightly differently from the LibreOffice PDF the page numbers come from (docs/DOCX.md).
+--
+-- Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): every line and page breaks where the typst render
+-- breaks it. The model is lib/docx/xengine.lua (the break rules of typst on every run, exact line spacing: each line
+-- a box of its pitch, the space between paragraphs the larger of the two); the pitches and spaces below are the
+-- typst template's, in twips (20 x pt).
 
-local WORD_LIMIT = 13000  -- Rule 33.1(g): brief on the merits for a petitioner or appellant
-local TOC_DEPTH = 3       -- heading levels in the table of contents (typst: outline depth 3)
-local TEXT_W = 5940       -- the text width, 4 1/8 in (Rule 33.1(c)), in twips
-local PNUM = 576          -- the column the tables' page numbers keep to themselves
-local STEP = 432          -- a heading level's indent in the contents, 0.3 in (typst: 0.3in)
-local HEAD_HANG = 576     -- the hanging indent of point headings, 0.4 in (typst: heading-indent)
-local QUOTE_L = 480       -- reference.docx Block Text indent
+local WORD_LIMIT = 13000  -- Rule 33.1(g)(v): brief on the merits for a petitioner or appellant
+local TOC_DEPTH = 3       -- heading levels in the table of contents (typst: levels 1 to 3)
+-- The text width, 4 1/8 in (Rule 33.1(c)), less what the right margin takes beyond 1 in (MARGIN_R). LibreOffice sets
+-- Schola a little narrower than typst (0.088 % on the mean of 203 identical full lines of the amicus sample; its glyph
+-- positions are rounded, unevenly: a no-break-hyphen run of 13 characters comes out 0.11 pt short) and starts each
+-- line 0.1 pt in, so a line typst overflows by a hair would fit here. The margin is the measured one at which every
+-- line of this folder's sample breaks as in typst (amicus-brief 1443 twips, merits-brief 1441: one twip either side
+-- moves a line); a line of other text within 0.1 pt of the measure may still break differently (docs/EVAL-LOOP.md).
+local TEXT_W = 5939
+local MARGIN_R = 1441
+local PITCH = 280         -- typst pitch-body: 14 pt (12-point type, 2-point leading; Rule 33.1(b))
+local NOTE = 240          -- typst pitch-note: 12 pt (10-point counsel on the cover)
+local TOC_COL = 479       -- typst toc-page-col: 24 pt kept for the contents' page numbers, less the margin's extra
+local TOA_COL = 800       -- typst toa-page-col: 40 pt (a longer page list widens its own row's column)
+local STEP = 432          -- a heading level's indent in the contents, 0.3 in (typst: para-indent)
+local HEAD_HANG = 576     -- the hanging indent of level 2 and 3 headings, 0.4 in (typst: heading-indent)
+local QUOTE = 576         -- a block quotation's indent on both sides, 0.4 in (typst: pad)
+local LIST = 432          -- the bullet's box, 0.3 in (typst: xengine list-indent)
 local NEEDLE_MAX = 60     -- a needle is a prefix of the text (letters and digits only)
 
 local stringify = pandoc.utils.stringify
 
 -- ---------------------------------------------------------------------------
--- WordprocessingML
+-- WordprocessingML: the shared helpers of the cross-engine layout model (lib/docx/xengine.lua)
 -- ---------------------------------------------------------------------------
 
-local KEEP = "<w:keepNext/><w:keepLines/>"
-local BREAK = "<w:pageBreakBefore/>"
-
-local function esc(s)
-  return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
-end
-
-local function raw(xml) return pandoc.RawBlock("openxml", xml) end
+local xe = require("docx.xengine")
+local raw, para, jc, KEEP, LINES, BREAK = xe.raw, xe.para, xe.jc, xe.KEEP, xe.LINES, xe.BREAK
+-- Before the leader tab of a table row: no-break spaces as wide as typst's 0.75 em (9 pt) between the text and the
+-- leader. Schola's space is 0.278 em, so xe.LEAD's three are 10 pt (LibreOffice ignores character spacing on them):
+-- two at 12 pt and one at 8.5 pt, 9.04 pt.
+local LEAD_XML = '<w:r><w:t xml:space="preserve">\u{00A0}\u{00A0}</w:t></w:r><w:r><w:rPr><w:sz w:val="17"/></w:rPr>'
+  .. '<w:t xml:space="preserve">\u{00A0}</w:t></w:r><w:r><w:tab/></w:r>'
 
 local function spacing(before, after, line)
-  return '<w:spacing w:before="' .. (before or 0) .. '" w:after="' .. (after or 0) .. '" w:line="' .. (line or 280)
-    .. '" w:lineRule="exact"/>'
+  return xe.spacing(before or 0, after or 0, line or PITCH)
 end
 
 local function ind(left, hanging, right)
-  return '<w:ind w:left="' .. (left or 0) .. '" w:right="' .. (right or 0) .. '"'
-    .. (hanging and (' w:hanging="' .. hanging .. '"') or ' w:firstLine="0"') .. "/>"
+  return xe.ind(left or 0, hanging, hanging == nil and 0 or nil, right)
 end
 
-local function jc(v) return '<w:jc w:val="' .. v .. '"/>' end
+local function runs(text, o) return xe.runs(text, o or {}) end
 
--- the tables' dot leader to the page number at the right margin
-local LEADER = '<w:tabs><w:tab w:val="right" w:leader="dot" w:pos="' .. TEXT_W .. '"/></w:tabs>'
-
--- pPr parts in schema order: keep, page break, tabs, spacing, indent, justification
-local function para(ppr, body)
-  return "<w:p><w:pPr>" .. table.concat(ppr) .. "</w:pPr>" .. (body or "") .. "</w:p>"
+-- typst never breaks inside a token of adjacent parentheses ("922(o)(1)": lib/typst/xengine.typ boxes it); LibreOffice
+-- would break between ")" and "(": a word joiner (U+2060) between every two characters of such a token.
+local function bind_parens(s)
+  return (s:gsub("%S+", function(tok)
+    if not tok:find(")(", 1, true) then return tok end
+    local cs = {}
+    for _, c in utf8.codes(tok) do cs[#cs + 1] = utf8.char(c) end
+    return table.concat(cs, "\u{2060}")
+  end))
 end
+-- A line may end after a slash before a letter, as typst breaks a web address (Unicode line breaking); LibreOffice
+-- would not: a zero-width space there.
+local function slash_breaks(s)
+  return (s:gsub("/(%a)", "/\u{200B}%1"))
+end
+local BIND = { Str = function(s) return pandoc.Str(slash_breaks(bind_parens(s.text))) end }
 
-local function runs(text, o)
-  o = o or {}
-  local rpr = (o.b and "<w:b/><w:bCs/>" or "") .. (o.i and "<w:i/><w:iCs/>" or "")
-    .. (o.sz and ('<w:sz w:val="' .. o.sz .. '"/><w:szCs w:val="' .. o.sz .. '"/>') or "")
-  local out = {}
-  for piece, tab in (text .. "\0"):gmatch("([^\t%z]*)([\t%z])") do
-    if piece ~= "" then
-      out[#out + 1] = "<w:r>" .. (rpr ~= "" and ("<w:rPr>" .. rpr .. "</w:rPr>") or "")
-        .. '<w:t xml:space="preserve">' .. esc(piece) .. "</w:t></w:r>"
+-- A value that reads as a list item ("(202) 787-1060") is a line of text with its marker as written (typst).
+local function unlist(x)
+  if pandoc.utils.type(x) ~= "Blocks" then return x end
+  local out = pandoc.Inlines({})
+  for i, b in ipairs(x) do
+    if i > 1 then out:insert(pandoc.Space()) end
+    if b.t == "OrderedList" and #b.content == 1 and #b.content[1] == 1 then
+      local a, n = b.listAttributes, tostring(b.listAttributes.start)
+      local lab = a.delimiter == "TwoParens" and ("(" .. n .. ")") or a.delimiter == "OneParen" and (n .. ")") or (n .. ".")
+      out:insert(pandoc.Str(lab))
+      out:insert(pandoc.Space())
+      out:extend(b.content[1][1].content)
+    elseif b.content and type(b.content) == "table" then
+      out:extend(b.content)
     end
-    if tab == "\t" then out[#out + 1] = "<w:r><w:tab/></w:r>" end
   end
-  return table.concat(out)
+  return out
 end
 
--- Inlines (or a metadata value) as runs: Emph is italic, Strong bold, quotes curly.
+-- Inlines (or a metadata value) as runs: Emph is italic, Strong bold, quotes curly; typst's break rules.
 local function inl(x, o)
-  o = o or {}
   if x == nil then return "" end
-  local ty = pandoc.utils.type(x)
-  if ty == "string" then return runs(x, o) end
-  if ty == "Blocks" then
-    local out = {}
-    for _, b in ipairs(x) do out[#out + 1] = inl(b.content or {}, o) end
-    return table.concat(out, runs(" ", o))
-  end
-  local out = {}
-  for _, el in ipairs(x) do
-    local t = el.t
-    if t == "Str" then out[#out + 1] = runs(el.text, o)
-    elseif t == "Space" or t == "SoftBreak" or t == "LineBreak" then out[#out + 1] = runs(" ", o)
-    elseif t == "Emph" then out[#out + 1] = inl(el.content, { b = o.b, i = not o.i, sz = o.sz })
-    elseif t == "Strong" then out[#out + 1] = inl(el.content, { b = true, i = o.i, sz = o.sz })
-    elseif t == "Quoted" then
-      local q = el.quotetype == "DoubleQuote" and { "\u{201C}", "\u{201D}" } or { "\u{2018}", "\u{2019}" }
-      out[#out + 1] = runs(q[1], o) .. inl(el.content, o) .. runs(q[2], o)
-    elseif t == "Note" then error("brief.lua: a footnote is not supported here (list item or metadata)")
-    elseif el.content and type(el.content) ~= "string" then out[#out + 1] = inl(el.content, o)
-    else out[#out + 1] = runs(stringify(el), o) end
-  end
-  return table.concat(out)
+  if pandoc.utils.type(x) == "string" then return runs(bind_parens(x), o) end
+  return xe.inl(pandoc.Inlines(unlist(x)):walk(BIND), o or {})
 end
 
 -- A section's properties: its footer (rIdFtrNone or rIdFtrPage, written by fb render) and page numbers, on the
--- booklet page of reference.docx (Rule 33.1(a), (c)).
+-- booklet page (Rule 33.1(a), (c)).
 local function sect_pr(footer, fmt)
   return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/>'
-    .. '<w:pgSz w:w="8820" w:h="13320"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1620" w:left="1440" '
+    .. '<w:pgSz w:w="8820" w:h="13320"/><w:pgMar w:top="1440" w:right="' .. MARGIN_R .. '" w:bottom="1620" w:left="1440" '
     .. 'w:header="0" w:footer="540" w:gutter="0"/>'
     .. (fmt and ('<w:pgNumType w:fmt="' .. fmt .. '" w:start="1"/>') or "") .. "</w:sectPr>"
 end
@@ -115,7 +122,6 @@ local function section(footer, fmt)
     .. sect_pr(footer, fmt) .. "</w:pPr></w:p>")
 end
 
--- ---------------------------------------------------------------------------
 -- Needles and pages
 -- ---------------------------------------------------------------------------
 
@@ -246,69 +252,61 @@ local function need_meta(meta, k)
   return meta[k]
 end
 
--- A section heading: bold capitals, centered; `brk` opens a new page.
-local function section_heading(text, brk)
-  return para({ KEEP, brk and BREAK or "", spacing(brk and 0 or 240, 240), ind(0), jc("center") },
-    runs(text:upper(), { b = true }))
+-- A heading (typst: show heading), bold, 12 pt: level 1 centred, 13.2 pt above and 10.8 below; levels 2 and 3 with
+-- their wrapped lines hanging 0.4 in, 10.8 / 8.4 and 9.6 / 7.2 pt. One that opens a page has no space above (typst
+-- drops it there; Word keeps it after a page or section break).
+local function heading_xml(level, content, top)
+  if level == 1 then
+    return para({ KEEP, spacing(top and 0 or 264, 216), ind(0), jc("center") }, inl(content, { b = true }))
+  end
+  local sp = level == 2 and spacing(top and 0 or 216, 168) or spacing(top and 0 or 192, 144)
+  return para({ KEEP, sp, ind(HEAD_HANG, HEAD_HANG) }, inl(content, { b = true }))
 end
 
--- A body heading: level 1 a section heading; points (the sample writes their numerals) hang at 0.4 in.
-local function heading_xml(h)
-  if h.level == 1 then return section_heading(stringify(h.content), false) end
-  return para({ KEEP, spacing(120, 240), ind((h.level - 2) * HEAD_HANG + HEAD_HANG, HEAD_HANG) },
-    inl(h.content, { b = true }))
-end
-
--- Bullet list items: "•", a tab, the text, hanging at the tab (inside a quotation: in its indents).
-local function bullets(list, quoted)
-  local left = (quoted and QUOTE_L or 0) + 720
-  local out = {}
-  for _, item in ipairs(list.content) do
-    for k, b in ipairs(item) do
-      if b.t ~= "Plain" and b.t ~= "Para" then error("brief.lua: a list item holds only text") end
-      local lead = k == 1 and runs("\u{2022}\t") or runs("\t")
-      out[#out + 1] = raw(para({ '<w:pStyle w:val="' .. (quoted and "BlockText" or "BodyText") .. '"/>',
-        spacing(60, 60), ind(left, 360, quoted and QUOTE_L or 0) }, lead .. inl(b.content)))
+-- A block quotation (typst: quote): 0.4 in in on both sides, 9 pt above and below; its paragraphs 9 pt apart, its
+-- list items (the bullet in a 0.3 in box, the text hanging) with no space of their own.
+local function quotation(q)
+  local items = {}
+  for _, b in ipairs(q.content) do
+    if b.t == "BulletList" then
+      for _, it in ipairs(b.content) do
+        if #it ~= 1 or (it[1].t ~= "Plain" and it[1].t ~= "Para") then error("brief.lua: a list item holds only text") end
+        items[#items + 1] = { list = true, body = runs("\u{2022}\t") .. inl(it[1].content) }
+      end
+    elseif b.t == "Para" or b.t == "Plain" then
+      items[#items + 1] = { list = false, body = inl(b.content) }
+    else
+      error("brief.lua: a block quotation holds paragraphs and bullet lists only")
     end
   end
-  return out
+  local out = {}
+  for i, it in ipairs(items) do
+    local prev, nxt = items[i - 1], items[i + 1]
+    local before = (i == 1 and 180) or ((it.list or prev.list) and 0) or 180
+    local after = (i == #items and 180) or ((it.list or nxt.list) and 0) or 180
+    local indent = it.list and ind(QUOTE + LIST, LIST, QUOTE) or ind(QUOTE, nil, QUOTE)
+    local tabs = it.list and ('<w:tabs><w:tab w:val="left" w:pos="' .. (QUOTE + LIST) .. '"/></w:tabs>') or ""
+    out[#out + 1] = para({ tabs, spacing(before, after), indent }, it.body)
+  end
+  return raw(table.concat(out))
 end
 
--- The body's lists, at the top level and in quotations.
-local function fix_lists(blocks, quoted)
+-- A paragraph pandoc reads as a list and typst does not ("b. The ...": letters as list markers): a paragraph with
+-- the marker as written.
+local function unlist_blocks(blocks)
   local out = {}
   for _, b in ipairs(blocks) do
-    if b.t == "BulletList" then
-      for _, x in ipairs(bullets(b, quoted)) do out[#out + 1] = x end
-    elseif b.t == "BlockQuote" then
-      local run = {}
-      local function flush()
-        if #run > 0 then out[#out + 1] = pandoc.BlockQuote(run); run = {} end
-      end
-      for _, c in ipairs(b.content) do
-        if c.t == "BulletList" then
-          flush()
-          for _, x in ipairs(bullets(c, true)) do out[#out + 1] = x end
-        else
-          run[#run + 1] = c
-        end
-      end
-      flush()
-    elseif b.t == "OrderedList" then
-      -- a paragraph that opens with its own letter ("b. The ...") reads as a list: it stays a body paragraph
-      -- with the letter as written (typst's markdown reader does not make lists of letters)
+    if b.t == "OrderedList" and (b.listAttributes.style == "LowerAlpha" or b.listAttributes.style == "UpperAlpha") then
       local a = b.listAttributes
       for k, item in ipairs(b.content) do
         local n = a.start + k - 1
-        local lab = tostring(n)
-        if a.style == "LowerAlpha" then lab = string.char(96 + n)
-        elseif a.style == "UpperAlpha" then lab = string.char(64 + n) end
+        local lab = a.style == "LowerAlpha" and string.char(96 + n) or string.char(64 + n)
         lab = lab .. (a.delimiter == "OneParen" and ")" or ".")
         for j, c in ipairs(item) do
           if j == 1 and (c.t == "Para" or c.t == "Plain") then
-            local content = pandoc.Inlines({ pandoc.Str(lab), pandoc.Space() })
-            content:extend(c.content)
-            out[#out + 1] = pandoc.Para(content)
+            local il = pandoc.Inlines({ pandoc.Str(lab), pandoc.Space() })
+            il:extend(c.content)
+            out[#out + 1] = pandoc.Para(il)
           else
             out[#out + 1] = c
           end
@@ -321,54 +319,86 @@ local function fix_lists(blocks, quoted)
   return out
 end
 
-local function strip_links(blocks)
-  return pandoc.Pandoc(blocks):walk({
-    Link = function(el)
-      if el.target:match("^toa:") then return el.content end
-      return nil
-    end,
-  }).blocks
+local function has_note(el)
+  local found = false
+  pandoc.Pandoc({ el }):walk({ Note = function() found = true end })
+  return found
 end
 
+-- The cover (typst: cover): centred lines and two rules; the counsel in two columns (a table of 139.5 pt columns,
+-- 0.25 in apart) at the foot of the page, 10-point type in 12 pt lines (Rule 34.1(g)).
 local function cover(meta)
   local x = {}
-  local function add(body, o)
-    o = o or {}
-    x[#x + 1] = para({ spacing(o.before, o.after), ind(0), jc(o.jc or "center") }, body)
+  local function line(before, body)
+    x[#x + 1] = para({ spacing(before, 0), ind(0), jc("center") }, body)
   end
-  add(inl(need_meta(meta, "docket")), { jc = "left" })
-  add(runs("IN THE"), { before = 1000 })
-  add(runs("SUPREME COURT OF THE UNITED STATES", { b = true }), { after = 280 })
-  for _, c in ipairs(need_meta(meta, "caption")) do add(inl(c)) end
-  add(inl(need_meta(meta, "proceeding")), { before = 280, after = 280 })
-  add(inl(need_meta(meta, "brief_title"), { b = true }), { after = 400 })
-  -- counsel (Rule 34.1(f), (g)): 10 pt, exempt from the 11-point floor
-  for gi, g in ipairs(need_meta(meta, "counsel")) do
-    for k, n in ipairs(g.names) do
-      x[#x + 1] = para({ spacing((k == 1 and gi > 1) and 160 or 0, 0, 240), ind(0), jc("center") }, inl(n, { sz = 20 }))
-    end
-    for _, l in ipairs(g.lines or {}) do
-      x[#x + 1] = para({ spacing(0, 0, 240), ind(0), jc("center") }, inl(l, { sz = 20 }))
-    end
+  local function rule(before)
+    x[#x + 1] = para({ '<w:pBdr><w:bottom w:val="single" w:sz="5" w:space="0" w:color="000000"/></w:pBdr>',
+      spacing(before, 0, 20), ind(0) }, "")
   end
-  if meta.date then add(inl(meta.date), { before = 280 }) end
+  line(0, inl(need_meta(meta, "docket")))
+  line(1296, runs("IN THE"))
+  line(48, runs("Supreme Court of the United States"))
+  rule(144)
+  for i, c in ipairs(need_meta(meta, "caption")) do line(i == 1 and 144 or 0, inl(c)) end
+  rule(144)
+  line(144, inl(need_meta(meta, "proceeding")))
+  line(144, inl(need_meta(meta, "brief_title"), { b = true }))
+  local cells = {}
+  for _, g in ipairs(need_meta(meta, "counsel")) do
+    local ps = {}
+    for _, n in ipairs(g.names) do ps[#ps + 1] = { body = inl(n, { sz = 20 }) } end
+    for _, l in ipairs(g.lines or {}) do ps[#ps + 1] = { body = inl(l, { sz = 20, i = true }) } end
+    cells[#cells + 1] = ps
+  end
+  local COL = 2790
+  local function cell(ps, first_row)
+    local body = {}
+    for k, p in ipairs(ps or {}) do
+      body[#body + 1] = para({ spacing((k == 1 and not first_row) and 216 or 0, 0, NOTE), ind(0) }, p.body)
+    end
+    if #body == 0 then body[1] = para({ spacing(0, 0, NOTE) }, "") end
+    return '<w:tc><w:tcPr><w:tcW w:w="' .. COL .. '" w:type="dxa"/></w:tcPr>' .. table.concat(body) .. "</w:tc>"
+  end
+  local rows = {}
+  for i = 1, #cells, 2 do
+    rows[#rows + 1] = '<w:tr><w:trPr><w:cantSplit/></w:trPr>' .. cell(cells[i], i == 1)
+      .. '<w:tc><w:tcPr><w:tcW w:w="360" w:type="dxa"/></w:tcPr><w:p><w:pPr>' .. spacing(0, 0, NOTE) .. '</w:pPr></w:p></w:tc>'
+      .. cell(cells[i + 1], i == 1) .. "</w:tr>"
+  end
+  -- the counsel table floats at the foot of the text block (typst: v(1fr))
+  x[#x + 1] = '<w:tbl><w:tblPr><w:tblpPr w:leftFromText="0" w:rightFromText="0" w:vertAnchor="margin" w:horzAnchor="margin" '
+    .. 'w:tblpYSpec="bottom"/><w:tblW w:w="' .. (2 * COL + 360) .. '" w:type="dxa"/><w:tblLayout w:type="fixed"/>'
+    .. '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/>'
+    .. '<w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="' .. COL .. '"/>'
+    .. '<w:gridCol w:w="360"/><w:gridCol w:w="' .. COL .. '"/></w:tblGrid>' .. table.concat(rows) .. "</w:tbl>"
   return raw(table.concat(x))
 end
 
+-- typst: signature-block. 14.4 pt above, "Respectfully submitted," 24 pt above the signer, the date 9.6 pt below the
+-- lines; never split.
 local function signature(meta)
   local sig = need_meta(meta, "signature")
-  local out = { para({ KEEP, spacing(280, 280), ind(0) }, runs("Respectfully submitted,")),
-    para({ KEEP, spacing(0, 0), ind(0) }, runs(stringify(need_meta(sig, "signer")))) }
+  local out = { para({ KEEP, spacing(288, 480), ind(0) }, runs("Respectfully submitted,")),
+    para({ KEEP, spacing(0, 0), ind(0) }, inl(need_meta(sig, "signer"))) }
   for _, l in ipairs(sig.lines or {}) do out[#out + 1] = para({ KEEP, spacing(0, 0), ind(0) }, inl(l)) end
-  if meta.date then out[#out + 1] = para({ "<w:keepLines/>", spacing(240, 0), ind(0) }, inl(meta.date)) end
-  -- the last line keeps no next: the block moves to the next page whole, never split
+  if meta.date then out[#out + 1] = para({ LINES, spacing(192, 0), ind(0) }, inl(meta.date)) end
   return table.concat(out)
 end
 
--- One row of a table: the text, a dot leader and the page, the text hanging at `hang`.
-local function row(left, hang, body, page, before)
-  return para({ "<w:keepLines/>", LEADER, spacing(before or 60, 0), ind(left + (hang or 0), hang, PNUM) },
-    body .. runs(" \t") .. runs(page))
+-- One row of a table (typst listing-row): `before` above it; the text from `left`, its wrapped lines at `left` +
+-- `hang`, wraps before the page column `col`; a dot leader from three spaces after the text runs to the page.
+local function row(before, left, hang, col, body, page)
+  return para({ LINES, xe.leader_tab(TEXT_W), spacing(before, 0), ind(left + (hang or 0), hang, col) },
+    body .. LEAD_XML .. runs(page))
+end
+
+-- The width of a page list in twips (Schola advances at 12 pt): the authorities' page column is as wide as a longer
+-- list (typst: calc.max(toa-page-col, measure(ps).width)).
+local function list_width(s)
+  local u = 0
+  for c in s:gmatch(".") do u = u + ((c == "," or c == " ") and 278 or 556) end
+  return math.ceil(u * 240 / 1000)
 end
 
 local GROUPS = {
@@ -376,24 +406,28 @@ local GROUPS = {
   { "regulation", "Regulations" }, { "rule", "Rules" }, { "other", "Other Authorities" },
 }
 
-local function sort_key(a)
-  return (stringify(a.sort or a.name):lower():gsub("[^a-z0-9 ]", ""))
-end
-
--- Rule 34.2: every page on which an authority is cited, no "passim" (typst: toa-section).
+-- Every page on which an authority is cited, in page order (typst: toa-section; no "passim").
 local function toa_rows(authorities)
+  local used = {}
+  for _, o in ipairs(occurrences) do used[o.key] = true end
+  for key in pairs(authorities) do
+    if not used[key] then error("brief.lua: authority `" .. key .. "` is listed in the frontmatter but never cited") end
+  end
   local out = {}
   for _, g in ipairs(GROUPS) do
     local members = {}
     for key, a in pairs(authorities) do
-      if stringify(a.kind) == g[1] then members[#members + 1] = { key = key, a = a, sort = sort_key(a) } end
+      if stringify(a.kind) == g[1] then
+        members[#members + 1] = { key = key, a = a, sort = stringify(a.sort or a.name):lower() }
+      end
     end
     table.sort(members, function(p, q)
       if p.sort ~= q.sort then return p.sort < q.sort end
       return p.key < q.key
     end)
     if #members > 0 then
-      out[#out + 1] = para({ KEEP, spacing(200, 60), ind(0) }, runs(g[2], { b = true }))
+      -- the kind's title: 12 pt above, 4.8 below, kept with its first entry
+      out[#out + 1] = para({ KEEP, spacing(240, 96), ind(0) }, runs(g[2], { b = true }))
       for _, m in ipairs(members) do
         local pages, seen = {}, {}
         for _, o in ipairs(occurrences) do
@@ -406,13 +440,13 @@ local function toa_rows(authorities)
             end
           end
         end
-        if #pages == 0 then error("brief.lua: authority `" .. m.key .. "` is listed but never cited") end
         table.sort(pages, function(p, q) return p.page < q.page end)
         local list = {}
         for _, p in ipairs(pages) do list[#list + 1] = p.label end
+        local where = table.concat(list, ", ")
         local body = inl(m.a.name, { i = g[1] == "case" })
-        if m.a.cite then body = body .. runs(", ") .. inl(m.a.cite) end
-        out[#out + 1] = row(0, 288, body, table.concat(list, ", "))
+        if m.a.cite and stringify(m.a.cite) ~= "" then body = body .. runs(", ") .. inl(m.a.cite) end
+        out[#out + 1] = row(120, 0, 360, math.max(TOA_COL, list_width(where)), body, where)
       end
     end
   end
@@ -445,23 +479,43 @@ function Pandoc(doc)
   need("S:toc", "B", "Table of Contents", "Page")
   need("S:toa", "B", "Table of Authorities", "")
 
-  -- the body: headings (needles, contents entries) and citations (needles)
-  local items = { { id = "S:qp", level = 1, title = qp_title },
-    { id = "S:parties", level = 1, title = "Parties to the Proceedings" } }
-  if meta.disclosure then items[#items + 1] = { id = "S:disclosure", level = 1, title = "Corporate Disclosure Statement" } end
+  -- the body: headings (needles, contents entries), citations (needles), paragraphs with their styles: the one after
+  -- a heading not indented (typst indents a paragraph only after a paragraph), one with a footnote mark without
+  -- widow control (typst keeps two lines together by their height alone: when a line's footnote does not fit, that
+  -- line moves on and the one before it stays behind alone)
+  local items = { { id = "S:qp", level = 1, title = pandoc.Inlines({ pandoc.Str(qp_title) }) },
+    { id = "S:parties", level = 1, title = pandoc.Inlines({ pandoc.Str("Parties to the Proceedings") }) } }
+  if meta.disclosure then
+    items[#items + 1] = { id = "S:disclosure", level = 1, title = pandoc.Inlines({ pandoc.Str("Corporate Disclosure Statement") }) }
+  end
+  local blocks = unlist_blocks(doc.blocks)
   local body = {}
-  for i, b in ipairs(doc.blocks) do
+  local after_heading = false
+  for i, b in ipairs(blocks) do
     if b.t == "Header" then
+      if b.level > 3 then error("brief.lua: headings deeper than level 3 are not supported") end
       local id = "H:" .. i
-      local nxt = doc.blocks[i + 1] and stringify(doc.blocks[i + 1]):sub(1, 40) or ""
+      local nxt = blocks[i + 1] and stringify(blocks[i + 1]):sub(1, 40) or ""
       need(id, "B", stringify(b.content), nxt)
-      if b.level <= TOC_DEPTH then
-        items[#items + 1] = { id = id, level = b.level, title = stringify(b.content) }
-      end
-      body[#body + 1] = raw(heading_xml(b))
+      if b.level <= TOC_DEPTH then items[#items + 1] = { id = id, level = b.level, title = b.content } end
+      body[#body + 1] = raw(heading_xml(b.level, b.content, #body == 0))
+      after_heading = true
     else
       scan_blocks({ b }, false)
-      body[#body + 1] = b
+      b = pandoc.Pandoc({ b }):walk({
+        Link = function(el) if el.target:match("^toa:") then return el.content end end,
+      }).blocks[1]
+      -- the break rules of typst on the text pandoc writes itself (body, footnotes)
+      b = b:walk({ Inlines = xe.inlines }):walk(BIND)
+      if b.t == "Para" then
+        local style = (after_heading and "First Paragraph" or "Body Text") .. (has_note(b) and " Note" or "")
+        body[#body + 1] = pandoc.Div({ b }, { ["custom-style"] = style })
+      elseif b.t == "BlockQuote" then
+        body[#body + 1] = quotation(b)
+      else
+        for _, x in ipairs(xe.list_items(b)) do body[#body + 1] = x end
+      end
+      after_heading = false
     end
   end
   for _, o in ipairs(occurrences) do
@@ -469,7 +523,6 @@ function Pandoc(doc)
       error("brief.lua: link `toa:" .. o.key .. "` has no entry under `authorities:` in the frontmatter")
     end
   end
-  body = fix_lists(strip_links(body))
 
   local nl = {}
   for _, n in ipairs(needles) do nl[#nl + 1] = table.concat({ n.id, n.kind, n.needle, n.fallback }, "\t") end
@@ -484,40 +537,48 @@ function Pandoc(doc)
 
   local out = {}
   local function add(x) out[#out + 1] = x end
+  local function front_para(before, x)
+    add(raw(para({ spacing(before, 180), ind(0) }, inl(x))))
+  end
 
   -- Section 1: the cover (no page number)
   add(cover(meta))
   add(section("rIdFtrNone"))
 
   -- Section 2: the front matter (i, ii ...), each part on its own page
-  add(raw(section_heading(qp_title, false)))
-  for _, q in ipairs(qs) do add(raw(para({ spacing(0, 240), ind(0), jc("both") }, inl(q)))) end
-  add(raw(section_heading("Parties to the Proceedings", true)))
-  add(raw(para({ spacing(0, 240), ind(0), jc("both") }, inl(meta.parties))))
+  add(raw(heading_xml(1, pandoc.Inlines({ pandoc.Str(qp_title) }), true)))
+  for _, q in ipairs(qs) do front_para(0, q) end
+  add(raw(para({ BREAK, spacing(0, 0, 20) }, "")))
+  add(raw(heading_xml(1, pandoc.Inlines({ pandoc.Str("Parties to the Proceedings") }), true)))
+  front_para(0, meta.parties)
   if meta.disclosure then
-    add(raw(section_heading("Corporate Disclosure Statement", false)))
-    add(raw(para({ spacing(0, 240), ind(0), jc("both") }, inl(meta.disclosure))))
+    add(raw(heading_xml(1, pandoc.Inlines({ pandoc.Str("Corporate Disclosure Statement") }), false)))
+    front_para(0, meta.disclosure)
   end
-  add(raw(section_heading("Table of Contents", true)))
-  add(raw(para({ KEEP, spacing(0, 60), ind(0), jc("right") }, runs("Page", { sz = 20 }))))
+  add(raw(para({ BREAK, spacing(0, 0, 20) }, "")))
+  add(raw(heading_xml(1, pandoc.Inlines({ pandoc.Str("Table of Contents") }), true)))
+  add(raw(para({ KEEP, spacing(0, 0, NOTE), ind(0), jc("right") }, runs("Page", { sz = 20 }))))
   for _, it in ipairs(items) do
-    add(raw(row((it.level - 1) * STEP, it.level > 1 and STEP or nil, runs(it.title), label_of(it.id))))
+    if it.level <= TOC_DEPTH then
+      add(raw(row(96, (it.level - 1) * STEP, nil, TOC_COL, inl(it.title), label_of(it.id))))
+    end
   end
-  add(raw(section_heading("Table of Authorities", true)))
+  add(raw(para({ BREAK, spacing(0, 0, 20) }, "")))
+  add(raw(heading_xml(1, pandoc.Inlines({ pandoc.Str("Table of Authorities") }), true)))
   add(raw(toa_rows(authorities)))
   add(section("rIdFtrPage", "lowerRoman"))
 
-  -- Section 3: the body (1, 2 ...) and the signature block, kept together
+  -- Section 3: the body (1, 2 ...) and the signature block
   for _, x in ipairs(body) do add(x) end
   add(raw(signature(meta)))
   add(section("rIdFtrPage", "decimal"))
 
   -- Section 4: the certificate of compliance (Rule 33.1(h)), unnumbered; FORMBOOK_FINAL closes it
-  add(raw(section_heading("Certificate of Compliance", false)))
-  add(raw(para({ spacing(0, 240), ind(0), jc("both") }, runs("I certify that this brief complies with the word "
-    .. "limit of Supreme Court Rule 33.1(g), " .. group_digits(WORD_LIMIT) .. " words for a brief on the merits for "
-    .. "a petitioner or appellant, and that it contains " .. group_digits(words) .. " words, excluding the parts "
-    .. "that Rule 33.1(d) excludes."))))
+  add(raw(heading_xml(1, pandoc.Inlines({ pandoc.Str("Certificate of Compliance") }), true)))
+  add(raw(para({ spacing(0, 180), ind(0) }, runs("I certify that this brief complies with the word limit of Supreme "
+    .. "Court Rule 33.1(g), " .. group_digits(WORD_LIMIT) .. " words for a brief on the merits for a petitioner or "
+    .. "appellant, and that it contains " .. group_digits(words) .. " words, excluding the parts that Rule 33.1(d) "
+    .. "excludes."))))
   add(raw(signature(meta)))
 
   -- empty metadata: pandoc would otherwise print the date as a title block above the cover
