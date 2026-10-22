@@ -3,8 +3,3 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # LaTeX reported, not gated: a shared-model limitation outside this folder's layout (fb-595.54.75):
-  # a hard line break (markdown backslash) in the certificates is \\ under \raggedright, which ends the paragraph
-  # in LaTeX: p20-p21 address lines lose widow control and the page ends move (XENG-002, -003).
-  # docs/open-items/fb-595.54.75.md
-  cross_engine_latex: report
