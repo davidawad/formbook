@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The W.D.N.Y. memorandum of law's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of
+     the typst template ({font}, Times New Roman; no W.D.N.Y. rule names a face) at 12 pt (size 24 half points, Local
+     Rule 10(a)(1)); Body Text in exact 24 pt line boxes (typst pitch-double, Local Rule 10(a)(2) double spaced) with a
+     half-inch first-line indent; the court title, caption, cover title, counsel, heading, quotation and signature
+     lines in 13.8 pt boxes (typst pitch-single); letter page with 1-inch margins on all sides (Local Rule 10(a)(4)).
+     docx/nywd-motion-brief.lua writes every paragraph's own spacing and the sections: the cover unnumbered, the table
+     of contents in lower roman from i, the body from 1, each page number centered at the bottom, its line 36 pt above
+     the page foot (720 twips: where typst sets it, footer-descent 30 %). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="276" heading-after="276" footer="720"/>
