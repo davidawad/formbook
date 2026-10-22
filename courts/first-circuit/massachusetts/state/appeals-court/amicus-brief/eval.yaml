@@ -1,4 +1,10 @@
-# Massachusetts Appeals Court, reply brief (Mass. R.A.P. 16(c), 20(a)(4)(B)): a proportionally spaced font of 14 point
+# Massachusetts Appeals Court, amicus brief (Mass. R.A.P. 17, 20(a)(4)(B)): a proportionally spaced font of 14 point
 # or larger, footnotes included. Margins of 1 inch (the default) are the minimum under Rule 20(a)(4)(A).
 font:
   size_pt: 14
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx engine is generated from the typst layout
+# (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the shared filters drop widow control in a
+# paragraph that anchors a footnote and typst keeps it; the latex engine is BLOCKED (a long URL in a note runs into the
+# margin, DEF-FORM-002). See docs/open-items/fb-595.54.68.md.
+params:
+  cross_engine: report

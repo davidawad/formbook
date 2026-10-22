@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "massappct-amicus-brief.typ": massappct-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-opening-brief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-amicus-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #massappct-brief(meta, body)
