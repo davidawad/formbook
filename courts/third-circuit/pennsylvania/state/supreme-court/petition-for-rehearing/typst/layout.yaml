@@ -1,0 +1,69 @@
+# Supreme Court of Pennsylvania (pa): application for reargument or reconsideration (Pa.R.A.P. 2543, 2544). The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to Pa.R.A.P. 124, 127 and 2544 (../rules.md, PA-FORM-*, PA-LEN-004,
+# PA-CERT-007, PA-CONT-019); lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant (the court's name, the certificates' form text).
+size: 14                  # PA-FORM-004 (Pa.R.A.P. 124(a)(4)): lettering no smaller than 14 point in the text
+pitch:
+  body: 32.2              # PA-FORM-003 (124(a)(3)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # caption, headings, quotations, footnotes, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # PA-FORM-002 (124(a)(3)): at least one inch on all four sides
+indent: 36
+page_number: {align: center, from: 1}   # PA-FORM-007: the page number in the bottom margin, from page 1
+footnote: {size: 14, gap: 7}   # PA-FORM-003, -004: footnotes single spaced, here at the text's 14 point
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # PA-FORM-003: quotations indented and single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 19.6, below: 14}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The top of page 1, under the three-inch space PA-FORM-002 keeps there (72 + 144 pt), as the filed application sets
+# it: the court, the parties beside the docket number, the title of the application (PA-CONT-019: it identifies the
+# order and its date).
+front:
+  - {text: "{court}", align: center, bold: true, upper: true, above: 144}
+  - columns:
+      - width: 252
+        blocks:
+          - each: parties
+            blocks:
+              - {text: "{name}", above: 8.4}
+              - {text: "{role}", italic: true, left: 108, optional: true}
+      - valign: center
+        blocks:
+          - {text: "No. {case_number}", bold: true}
+    gutter: 28.8
+    above: 11.2
+  - {text: "{title}", align: center, bold: true, upper: true, left: 36, right: 36, above: 22.4, below: 16.1}
+# The date and the signature block, never split; the certificate of compliance on a page of its own (Pa.R.A.P.
+# 2544(d): the word count, here the template's count of the body, {body_words}; Pa.R.A.P. 127 and its Comment: the
+# Public Access Policy form, PA-CERT-007); the certificate of service when there is one.
+closing:
+  - group:
+      - {text: "Date: {signature.date}", optional: true}
+      - {text: "Respectfully submitted,", above: 8.4}
+      - {text: "{signature.lines}", left: 234, optional: true, above: 5.6}
+      - {text: "{signature.signer_line}", underline: true, left: 234, above: 16.1}
+      - {text: "{signature.name}", left: 234, optional: true}
+      - {text: "{signature.signer}", left: 234, optional: true}
+    above: 16.8
+  - {break: true}
+  - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true, below: 14}
+  - {text: "I hereby certify that this application complies with the word-count limit of Pa.R.A.P. 2544(c) and that, excluding the cover, tables, proof of service and signature block, it contains {body_words} words.", pitch: body, indent: 36}
+  - {text: "I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial System of Pennsylvania that require filing confidential information and documents differently than non-confidential information and documents.", pitch: body, indent: 36}
+  - group:
+      - {text: "{signature.signer_line}", underline: true, left: 234}
+      - {text: "{signature.name}", left: 234, optional: true}
+    above: 8.4
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 14}
+      - {text: "I certify that on {service.date} I served a true and correct copy of this application for reargument on the following counsel of record by {service.method}:", pitch: body, indent: 36}
+      - each: service.recipients
+        blocks:
+          - {text: "{names}", left: 72, above: 14}
+          - {text: "{lines}", left: 72, optional: true}
+      - group:
+          - {text: "{signature.signer_line}", underline: true, left: 234}
+          - {text: "{signature.name}", left: 234, optional: true}
+        above: 8.4

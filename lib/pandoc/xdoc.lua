@@ -30,8 +30,8 @@ function M.meta()
   return m
 end
 
--- The value at a dotted path ("a.b"; "." the context itself), or nil; "a.b|text": the text when there is none
--- (lib/typst/xdoc.typ lookup alike).
+-- The value at a dotted path ("a.b"; "." the context itself), or nil (an empty string too); "a.b|text": the text when
+-- there is none (lib/typst/xdoc.typ lookup alike).
 function M.lookup(ctx, path)
   local bar = path:find("|", 1, true)
   if bar then
@@ -45,6 +45,8 @@ function M.lookup(ctx, path)
     if type(v) ~= "table" then return nil end
     v = v[k]
   end
+  -- an empty string prints nothing: it is missing
+  if v == "" then return nil end
   return v
 end
 
