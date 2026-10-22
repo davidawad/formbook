@@ -1,7 +1,7 @@
 //! The manifest's flag characters: which artifacts a court or doc-type folder holds.
 //!
 //! Every flag keys on committed TEXT artifacts, never on whether a PDF is on disk, so a checkout without
-//! the binaries (a box snapshot) produces the same manifest as a full one:
+//! the binaries produces the same manifest as a full one:
 //!   sources    the filed examples named in usage/SOURCE.md (`FILED-EXAMPLE-<id>.pdf`)
 //!   inputs     usage/INPUT-<id>.md
 //!   render     the inputs of a render are committed: a template (typst/main.typ for doc types, any
