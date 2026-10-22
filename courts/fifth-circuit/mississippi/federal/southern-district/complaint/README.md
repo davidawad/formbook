@@ -7,7 +7,7 @@ Folder: `courts/fifth-circuit/mississippi/federal/southern-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (plaintiff's counsel; see `usage/SOURCE.md`). A second filer is saved too: `usage/FILED-EXAMPLE-complaint-2.pdf` (19 pp., not transcribed). |
 | sample md | `usage/INPUT-complaint.md`: the whole filing transcribed (10 pages, paragraphs 1 to 56, the prayer, the jury demand and the signature block). |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0 via `tools/render.sh`, vendored Times New Roman only, no typst warnings. |
 | overlay | ok: `usage/OVERLAY-mariano-complaint.pdf` and `usage/OVERLAY-mariano-complaint.txt` (`tools/overlay.sh`). |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; see the review below). |
 
@@ -52,7 +52,7 @@ Sources, fetched 2026-10-14:
 
 ## Known gaps and open choices
 
-1. **Typeface.** The exemplar is Times New Roman, but no rule names a face for a complaint. Fed. R. Civ. P. 10 sets none; L.U.Civ.R. 7(b)(5)(B) governs memoranda only and names no face ("either a proportionally spaced or a monospaced face"; serifs for proportional type), read in the 2024 Local Civil Rules PDF on 2026-10-14. So the template keeps EB Garamond (`fonts/eb-garamond/`), the default `docs/FONTS.md` gives a court that names no face. It is used at 13 pt, the size the CAND motion template uses to approximate Times 12 pt; the size was chosen by eye against the exemplar, not measured. EB Garamond is not metric-compatible with Times New Roman, so line breaks differ from the filed version. If a Times-metric face is wanted, the substitute is Liberation Serif (`docs/FONTS.md`), a template change, not a rule change.
+1. **Typeface.** The exemplar is Times New Roman, but no rule names a face for a complaint. Fed. R. Civ. P. 10 sets none; L.U.Civ.R. 7(b)(5)(B) governs memoranda only and names no face ("either a proportionally spaced or a monospaced face"; serifs for proportional type), read in the 2024 Local Civil Rules PDF on 2026-10-14. So the template uses Times New Roman 12 pt (vendored, `docs/FONTS.md`), the house standard and the exemplar's face, in both engines.
 2. **Fax number.** L.U.Civ.R. 11(a) requires a fax number. The exemplar's counsel block has none. The sample says `fax: "None"`, which renders as "Facsimile: None". The template checks that the key is present, not that the value is a real number; counsel must supply one or the sample must say what they use.
 3. **Counsel role line.** Optional (`role`). The exemplar prints "ATTORNEY FOR PLAINTIFF"; the sample uses it.
 4. **Date line.** The exemplar has no date, so the template prints no "Dated:" line. The template takes no date field.
@@ -80,8 +80,8 @@ Overlay: the overlay pairs each page of our render with the exemplar page sharin
 
 ## Engines
 
-- **docx** (`docx/reference.docx`, built by `docx/build-reference.sh`; filter `docx/mssd-complaint.lua`). Samples: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (10 pages, the same as typst). Checked by hand: the LibreOffice PDF was viewed page by page (10 of 10) against the typst render (10 of 10). Opened with LibreOffice only: the conversion succeeds and the parts are well-formed XML; Word was not available and was not checked.
-- Matches typst: EB Garamond 13 pt (embedded in the PDF, no other face), US Letter, 1 in margins, exact 27.6 pt double spacing (the typst pitch is 27.56 pt), 0.5 in first-line indent, single-spaced court title, caption, headings and signature block (exact 11.7 pt, the typst pitch), the caption table with "CIVIL ACTION NO." on the right, centered bold caps section headings, centered bold count headings, the page number centered in the footer, lettered lists a., b., ... with a hanging indent, the signature block at 3 in.
-- Differs, and why: (1) Paragraph numbers 1 to 56 and list letters are typed text followed by a tab to a style tab stop. pandoc drops the numbering part of a reference.docx, so Word auto-numbering is not available; inserting a paragraph does not renumber the ones after it. (2) Pagination: LibreOffice puts exact-spacing leading above the text, so a page holds 23 double-spaced lines where typst holds 24. The page count matches here (10), but page breaks fall elsewhere; Word may differ again.
+Both engines follow the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): first-fit line breaking, ragged right, no kerning, ligatures or hyphenation, every line a box of its pitch (27.6 pt double for the body, 13.8 pt single for the court title, caption, headings and signature block). `eval.yaml` sets `params.cross_engine: gate`.
+
+- **typst** (`typst/mssd-complaint.typ`): the reference render, `usage/OUTPUT-complaint.typst.pdf` (10 pages).
+- **docx** (`docx/reference.xml`, the cross-engine recipe in the typst face, built by `fb render`; filter `docx/mssd-complaint.lua`). Samples: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (10 pages). XENG-001..003 pass: every page and every line breaks where typst breaks it. Paragraph numbers and list letters are typed text and a tab (pandoc drops a reference's numbering part), so inserting a paragraph in Word does not renumber the ones after it.
 - BLOCKED: none.
-- `tools/check.sh` was not run on this folder: it needs the court's `court.json` and `checks.yaml`, which this doc-type folder does not have.
