@@ -142,3 +142,7 @@ Reviewed pages: 7 of 7.
 11. **Local practice not checked:** judge-specific standing orders, and the signature style (`/s/`) beyond the exemplar.
 12. **Exemplar PDF not in the repo.** Only `usage/SOURCE.md` is committed. For the 2026-10-14 overlay the RECAP copy was fetched from the URL in `SOURCE.md` into a scratch directory and passed to `tools/overlay.sh` as its third argument. Committing the PDF is a repo decision, not made here.
 13. **BLR 5005-1 subsection (f) and the 2019 PDF not retrieved (2026-10-14).** courtrules.net returns HTTP 403; the court's 2019 local-rules PDF returns an 855-byte error page. The font conclusion rests on the excerpts, which name no face; re-check subsection (f) against the court's PDF.
+
+## Shared-engine adoption status (verified 2026-10-22)
+
+This verification supersedes older DOCX-blocked status notes above. The current typst and DOCX check runs pass with zero failed checks, including `DEF-COVER-001` and `DEF-TOC-001`; DOCX passes XENG-001..003 against typst. The DOCX face resolves from `docx/reference.xml` through `{font}` to the typst template's declared face. The folder has no LaTeX template, no per-court DOCX shell builder or script-only artifact, and no `.shell-safety-baseline.json` entry. There are no remaining engine-match exceptions for this folder.

@@ -75,3 +75,7 @@ Typst (`typst/`) is the reference. The docx engine is `docx/`: `reference.docx` 
 - **docx BLOCKED**: the `.docx.pdf` gates (Gate 0 content, Gate 1 rules, Gate 2 page review, Gate 3 generalization, all measured on the LibreOffice PDF) cannot run. `soffice` is not installable here (no conda-forge package, no root), so `tools/render.sh --engine docx` stops after writing the `.docx`, and `tools/check.sh --engine docx` also needs the court's `checks.yaml`, which this court does not have yet. Word or LibreOffice opening the `.docx` without a repair prompt has not been checked. Pages reviewed for docx: 0.
 
 [Formbook index](../../../../../../README.md) | [Federal courts in Georgia](../../README.md)
+
+## Shared-engine adoption status (verified 2026-10-22)
+
+This verification supersedes older DOCX-blocked status notes above. The current typst and DOCX check runs pass with zero failed checks, including `DEF-COVER-001` and `DEF-TOC-001`; DOCX passes XENG-001..003 against typst. The DOCX face resolves from `docx/reference.xml` through `{font}` to the typst template's declared face. The folder has no LaTeX template, no per-court DOCX shell builder or script-only artifact, and no `.shell-safety-baseline.json` entry. There are no remaining engine-match exceptions for this folder.

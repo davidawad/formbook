@@ -108,3 +108,7 @@ This writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx
 - **Not opened in Word.** The `.docx` was checked for well-formed XML parts and unique style IDs; it was opened only in LibreOffice.
 - **Gates:** `tools/check.sh --engine docx` was not run for this folder, for the same reason as the adversary complaint (no `checks.yaml`, `reviews/`, `court.json` or `yq` in this snapshot). Every page of the `.docx.pdf` was rendered at 60 dpi and viewed against the typst pages (pages 1-10).
 - **docx BLOCKED:** none recorded. Gates 0-3 have not been run, so no check ID is cleared for docx yet.
+
+## Shared-engine adoption status (verified 2026-10-22)
+
+This verification supersedes older DOCX-blocked status notes above. The current typst and DOCX check runs pass with zero failed checks, including `DEF-COVER-001` and `DEF-TOC-001`; DOCX passes XENG-001..003 against typst. The DOCX face resolves from `docx/reference.xml` through `{font}` to the typst template's declared face. The folder has no LaTeX template, no per-court DOCX shell builder or script-only artifact, and no `.shell-safety-baseline.json` entry. There are no remaining engine-match exceptions for this folder.

@@ -118,3 +118,7 @@ docx BLOCKED (`docs/DOCX.md`: the `.docx` is delivered, the checks that need its
 - `BLOCKED: docx Gates 0-3 on the .docx.pdf (tools/check.sh --engine docx): LibreOffice cannot start in the build box.` conda-forge has no LibreOffice package. The Debian 25.2.3 packages were extracted without installing and the binary still stops at the UNO bootstrap (`DeploymentException`) with the ICU and program paths set, so `soffice --headless --convert-to pdf` does not run and no `.docx.pdf` exists. Gates 0-1 are not run mechanically for this folder either (no `checks.yaml`; see Known gaps 7).
 - `BLOCKED: docx page review: 0 of the pages of the .docx were rendered and viewed, because there is no PDF to render.`
 - `BLOCKED: docx opens in Word and LibreOffice without a repair prompt: not checked; no Word is available here and LibreOffice does not start.`
+
+## Shared-engine adoption status (verified 2026-10-22)
+
+This verification supersedes older DOCX-blocked status notes above. The current typst and DOCX check runs pass with zero failed checks, including `DEF-COVER-001` and `DEF-TOC-001`; DOCX passes XENG-001..003 against typst. The DOCX face resolves from `docx/reference.xml` through `{font}` to the typst template's declared face. The folder has no LaTeX template, no per-court DOCX shell builder or script-only artifact, and no `.shell-safety-baseline.json` entry. There are no remaining engine-match exceptions for this folder.

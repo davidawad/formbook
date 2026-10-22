@@ -271,6 +271,21 @@ For the fifth-circuit district adoption (fb-595.68.14), record each of its 12 fo
 
 **Ninth Circuit part 02 adoption (fb-595.68.23, verified 2026-10-22).** These 14 folders have typst and DOCX templates and no LaTeX templates. Each DOCX uses `reference.xml` and Lua filters, with its body face inherited through `{font}` from typst. No folder retains a DOCX shell builder or binary `reference.docx`; the court-specific entries in `.shell-safety-baseline.json` are zero. All 14 folders set `params.cross_engine: gate`. On 2026-10-22, the typst and DOCX checks were rerun for every folder: all tier-1 checks passed with zero failures, including `DEF-COVER-001` and `DEF-TOC-001`; DOCX also passed XENG-001..003 on every input. No folder or engine remains at `report` for a cross-engine mismatch.
 
+**Eleventh Circuit Georgia district adoption (fb-595.68.12, verified 2026-10-22).** These ten folders have typst and DOCX templates and no LaTeX templates. The DOCX templates use declarative `reference.xml` and Lua filters, resolve `{font}` from the typst face, and leave no DOCX shell scripts or private script-only artifacts. There are no Georgia entries in `.shell-safety-baseline.json`. Every folder sets `params.cross_engine: gate`. The typst and DOCX checks were rerun for each folder: tier 1 passed with zero failures, including `DEF-COVER-001` and `DEF-TOC-001`, and DOCX passed XENG-001..003 on every input. No folder or engine remains at `report`.
+
+| Georgia folder | Engines | DOCX XENG-001..003 |
+|---|---|---|
+| `eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint` | typst, docx | PASS |
+| `eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief` | typst, docx | PASS |
+| `eleventh-circuit/georgia/federal/bankruptcy-northern-district/adversary-complaint` | typst, docx | PASS |
+| `eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief` | typst, docx | PASS |
+| `eleventh-circuit/georgia/federal/bankruptcy-southern-district/adversary-complaint` | typst, docx | PASS |
+| `eleventh-circuit/georgia/federal/bankruptcy-southern-district/motion-brief` | typst, docx | PASS |
+| `eleventh-circuit/georgia/federal/northern-district/complaint` | typst, docx | PASS |
+| `eleventh-circuit/georgia/federal/northern-district/motion-brief` | typst, docx | PASS |
+| `eleventh-circuit/georgia/federal/southern-district/complaint` | typst, docx | PASS |
+| `eleventh-circuit/georgia/federal/southern-district/motion-brief` | typst, docx | PASS |
+
 | State | Folders |
 |---|---|
 | Idaho | `idaho/federal/bankruptcy-district/motion-brief`; `idaho/federal/district/complaint`; `idaho/federal/district/motion-brief` |
