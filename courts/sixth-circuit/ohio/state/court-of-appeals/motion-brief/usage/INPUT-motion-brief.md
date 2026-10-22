@@ -1,5 +1,5 @@
 ---
-# Transcribed from usage/FILED-EXAMPLE-motion-brief.pdf (Moe v. Yost, 10th Dist. Franklin No. 24AP-000483; 47 pp.: motion pp. 1-3, memorandum pp. 1-44). Body is the motion, then `* * *`, then the memorandum.
+# Transcribed from usage/FILED-EXAMPLE-motion-brief.pdf (Moe v. Yost, 10th Dist. Franklin No. 24AP-000483; 47 pp.: motion pp. 1-3, memorandum pp. 1-44). Body is the motion, then the memorandum under its title as a level-1 heading; the template sets one caption, one signature block and the certificate of service after the memorandum (the filed example repeats the caption and the signature for the memorandum and restarts its page numbers).
 court: "IN THE COURT OF APPEALS OF OHIO"
 district: "TENTH APPELLATE DISTRICT"
 county: "FRANKLIN COUNTY, OHIO"
@@ -12,7 +12,6 @@ against:
   - name: "DAVID YOST, et al."
     role: "Defendants-Appellees."
 motion_title: "MOTION OF APPELLANTS TO RESTORE AND/OR GRANT INJUNCTION PENDING APPEAL"
-memorandum_title: "MEMORANDUM IN SUPPORT OF MOTION OF APPELLANTS TO RESTORE AND/OR GRANT INJUNCTION PENDING APPEAL"
 counsel:
   left:
     - names: ["Freda J. Levenson (45916)", "Counsel of Record"]
@@ -41,7 +40,7 @@ Pursuant to Ohio Rule of Appellate Procedure 7 and applicable case law, Appellan
 
 A memorandum in support is attached.
 
-* * *
+# MEMORANDUM IN SUPPORT OF MOTION OF APPELLANTS TO RESTORE AND/OR GRANT INJUNCTION PENDING APPEAL
 
 # INTRODUCTION
 
@@ -103,7 +102,7 @@ Under H.B. 68, Madeline will be unable to obtain hormone therapy. *Id.* at 270:1
 
 Ohio Rule of Appellate Procedure 7(A) permits a party to apply for “an order … restoring or granting an injunction during the pendency of an appeal.” *Oxford Oil Co. v. West*, 2016-Ohio-5684, ¶ 32 (7th Dist.); *see also, e.g.*, *State ex rel. Dewey v. McCullion*, 61 Ohio St.3d 79, 80 (1991) (“App.R. 7(A) permits relator to apply for a stay or injunction pending appeal.”). Unlike a request for a stay, a motion for an injunction pending appeal need not be brought in the trial court first. *Oxford Oil Co.* at ¶ 32; *see also* App.R. 7(A) (requiring an initial request to the trial court “except in cases of injunction pending appeal”).
 
-As with any preliminary injunction, the purpose of a Rule 7(A) injunction is “to preserve the status quo between the parties pending the decision on the merits.” *Watson v. Caldwell Hotel, LLC*, 2017-Ohio-4007, ¶ 35 (7th Dist.); *see also, e.g.*, *Dayton City Sch. Dist. Bd. of Educ. v. Dayton Educ. Ass’n*, 80 Ohio App. 3d 758, 761−62 (2d Dist. 1992) (granting “essentially an affirmative injunction”). The movant must demonstrate: (1) a substantial likelihood of success on the merits; (2) that the party will suffer irreparable harm absent relief; (3) that no third parties will be unjustifiably harmed by an injunction; and (4) that the public interest will be served by the injunction. *Watson* at ¶ 34. “No one factor is dispositive as the court is to balance the factors and weigh the equities.” *Id.* The required showing “as to the degree of irreparable harm varies inversely with what [the movant] demonstrates as to its likelihood of success on the merits.” *AIDS Taskforce of Greater Cleveland v. Ohio Dep’t of Health*, 2018-Ohio-2727, ¶ 23 (8th Dist.).
+As with any preliminary injunction, the purpose of a Rule 7(A) injunction is “to preserve the status quo between the parties pending the decision on the merits.” *Watson v. Caldwell Hotel, LLC*, 2017-Ohio-4007, ¶ 35 (7th Dist.); *see also, e.g.*, *Dayton City Sch. Dist. Bd. of Educ. v. Dayton Educ. Ass’n*, 80 Ohio App. 3d 758, 761–62 (2d Dist. 1992) (granting “essentially an affirmative injunction”). The movant must demonstrate: (1) a substantial likelihood of success on the merits; (2) that the party will suffer irreparable harm absent relief; (3) that no third parties will be unjustifiably harmed by an injunction; and (4) that the public interest will be served by the injunction. *Watson* at ¶ 34. “No one factor is dispositive as the court is to balance the factors and weigh the equities.” *Id.* The required showing “as to the degree of irreparable harm varies inversely with what [the movant] demonstrates as to its likelihood of success on the merits.” *AIDS Taskforce of Greater Cleveland v. Ohio Dep’t of Health*, 2018-Ohio-2727, ¶ 23 (8th Dist.).
 
 ## I. An Injunction Is Warranted to Restore the Status Quo
 
@@ -167,9 +166,9 @@ H.B. 68 is not susceptible to severing any one offending portion, as no “prima
 
 Article I, Section 21 of the Ohio Constitution, the Health Care Freedom Amendment (“HCFA”), was enacted through a citizen-led ballot initiative in 2011. In relevant part, it provides:
 
-> (B) No federal, state, or local law or rule shall prohibit the purchase or sale of health care or health insurance.
+> \(B) No federal, state, or local law or rule shall prohibit the purchase or sale of health care or health insurance.
 >
-> (C) No federal, state, or local law or rule shall impose a penalty or fine for the sale or purchase of health care or health insurance.
+> \(C) No federal, state, or local law or rule shall impose a penalty or fine for the sale or purchase of health care or health insurance.
 
 The HCFA contains only a handful of limited exemptions: laws that were already “in effect as of March 19, 2010,” laws affecting which services a health care provider is “required to” provide, the “terms and conditions of government employment,” or “any laws calculated to deter fraud or punish wrongdoing in the health care industry.” Ohio Const., art. I, § 21(D).
 

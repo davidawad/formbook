@@ -1,0 +1,53 @@
+# Court of Appeals of Ohio (ohioctapp): petition for writ (original action, R.C. Chapter 2731). The whole layout, as
+# data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). No App.R. rule prescribes a petition (App.R. 1 (A) limits the rules to appeals):
+# App.R. 19 (A) and (B) apply by analogy (../../rules.md OHIOCTAPP-WRIT-001, -002, kind C). Lengths in points. No case
+# text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+# A petition has no cover, contents or authorities: the caption and the title open page 1 and the text follows.
+size: 12                  # OHIOCTAPP-FORM-002: all printed matter, footnotes and captions included, at least 12-point type
+pitch:
+  body: 27.6              # OHIOCTAPP-FORM-003: double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # OHIOCTAPP-FORM-003: quoted matter single spaced; caption, headings, notes, signature too
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # OHIOCTAPP-FORM-001: at least one inch at each side, top and bottom
+indent: 36                # paragraphs indented half an inch (convention)
+page_number: {align: center}   # OHIOCTAPP-FORM-005: numbering conventional, consecutive from page 1
+footnote: {size: 12, gap: 6}   # OHIOCTAPP-FORM-002, -003: notes 12 point, single spaced
+quote: {left: 36, right: 36, above: 7.2, below: 12, gap: 9.6}   # OHIOCTAPP-FORM-003: quoted matter single spaced
+# Level 1 a section ("PRELIMINARY STATEMENT"), centered; level 2 a sub-heading, indented half an inch, its turnovers
+# an inch in; level 3 bold italic. Single spaced (OHIOCTAPP-FORM-003 by convention for headings).
+heading:
+  - {align: center, bold: true, above: 14.4, below: 12}
+  - {bold: true, left: 36, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# OHIOCTAPP-WRIT-001 (App.R. 19 (A) (1)-(4) by analogy): the court, the case number, the title of the case with each
+# party's designation, the nature of the proceeding and the title of the document, on page 1.
+front:
+  - {text: "{court_line}", align: center, bold: true, upper: true}
+  - columns:
+      - width: 237.6
+        blocks:
+          - each: caption
+            between:
+              - {text: "-vs-", left: 36, above: 13.8, below: 13.8}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36}
+      - blocks:
+          # the case number is assigned by the clerk when the original action is filed: a blank for it, two single
+          # lines down so that every line of this column shares a baseline with a line of the caption
+          - {text: "Case No. ______________________", above: 27.6}
+          - {text: "{proceeding}"}
+    gutter: 18
+    above: 10.8
+  - {text: "{title}", align: center, bold: true, upper: true, underline: true, above: 21.6, below: 10.8}
+# OHIOCTAPP-WRIT-001 (App.R. 19 (A) by analogy): the closing words and each counsel's block, right of center; the
+# closing words kept with the first block, each block never split (the blocks may run onto the next page rather than
+# leave the last page of text with a quarter page empty and the signatures alone on a page).
+closing:
+  - {text: "{closing}", left: 230.4, optional: true, keep: true, above: 28.8}
+  - each: signature
+    blocks:
+      - group: [{text: "{.}", left: 230.4}]
+        above: 10.8
+# The verification (R.C. 2731.04) and the index of exhibits follow the signature, from a new page, in the body's form.
+tail: {at: "VERIFICATION", break: true, pitch: body, indent: 36}

@@ -1,12 +1,12 @@
 ---
-# Transcription of FILED-EXAMPLE-petition-for-writ.pdf (Verified Petition for Writ of Mandamus, 10th Dist. Franklin No. 25AP-896), 50 pages. The text was read from the text layer and checked against the page images for the caption, the verification and the exhibit index. Handwritten entries on the verification (county, day) are transcribed as written. Headers, footers, clerk file stamps and page numbers are not transcribed.
+# Transcription of FILED-EXAMPLE-petition-for-writ.pdf (Verified Petition for Writ of Mandamus, 10th Dist. Franklin No. 25AP-896), 50 pages. The text was read from the text layer and checked against the page images for the caption, the verification and the exhibit index. Handwritten entries on the verification (county, day) are transcribed as written. The exhibit index (a two-column table in the filing) is transcribed as one paragraph per exhibit ("Exhibit A: ..."), since the shared document model sets no tables; the blank case-number line of the caption is a court constant of the template. Paragraph labels "(i)" and "(a)" are escaped so every engine reads them as text. Headers, footers, clerk file stamps and page numbers are not transcribed.
 court_line: ["IN THE COURT OF APPEALS FOR THE STATE OF OHIO", "TENTH APPELLATE DISTRICT"]
 caption:
   - names: ["State of Ohio, ex. rel. Buckeye Environmental Network,", "P.O. Box 82314", "Columbus, Ohio 43202"]
     designation: "Relator,"
   - names: ["Mary Mertz, Director, in her official capacity", "Ohio Department of Natural Resources", "2045 Morse Rd.", "Columbus, OH 43229-6693", "and", "Eric Vendel, Chief, in his official capacity", "Ohio Department of Natural Resources, Division of Oil and Gas Resource Management", "2045 Morse Rd., Bldg. F2", "Columbus, OH 43229-6693"]
     designation: "Respondents."
-proceeding: ["Original Action in Mandamus", "", "ORAL ARGUMENT REQUESTED"]
+proceeding: ["Original Action in Mandamus", "ORAL ARGUMENT REQUESTED"]
 title: "Verified Petition for Writ of Mandamus"
 closing: "Respectfully submitted,"
 signature:
@@ -184,9 +184,9 @@ g\. Enhanced standards and requirements regarding seismic events near Class II w
 
 > For a permit to drill a new Class II disposal well or to convert a well to a Class II disposal well, in which the injection formation will be located in a formation that has a producing well within the area of review either of the following apply:
 >
-> (a) The average disposal volume cannot exceed 200 barrels per day per year; or
+> \(a) The average disposal volume cannot exceed 200 barrels per day per year; or
 >
-> (b) The Class II disposal well owner must own each producing well in the area of review as long as the owner operates the Class II disposal well.
+> \(b) The Class II disposal well owner must own each producing well in the area of review as long as the owner operates the Class II disposal well.
 
 68\. The Old Regulations did not restrict disposal volumes based on the location and producing formation for production wells within the area of review.
 
@@ -472,13 +472,13 @@ The Court should issue a Writ of Mandamus directing Respondents to vacate the pe
 
 WHEREFORE, Relator prays the Court issue a writ of mandamus under R.C. Ch. 2731 ordering DOGRM to:
 
-(i) Vacate the final permit to drill American Growers #4;
+\(i) Vacate the final permit to drill American Growers #4;
 
-(ii) Vacate the final permit to drill Stephan #1;
+\(ii) Vacate the final permit to drill Stephan #1;
 
-(iii) Apply the current Ohio Class II well regulations to the applications and permits for American Growers #4 and Stephan #1 wells; and
+\(iii) Apply the current Ohio Class II well regulations to the applications and permits for American Growers #4 and Stephan #1 wells; and
 
-(iv) Reject the applications for permits to drill American Growers #4 and Stephan #1 as incomplete under Ohio's Class II well regulations.
+\(iv) Reject the applications for permits to drill American Growers #4 and Stephan #1 as incomplete under Ohio's Class II well regulations.
 
 Relator requests to be rewarded its costs and such other relief at law or equity as the Court may deem necessary and proper.
 
@@ -499,26 +499,45 @@ Matthew Allen Puterbaugh, Notary Public, State of Ohio, My Comm. Expires August 
 
 # INDEX OF EXHIBITS
 
-| Exhibit | Description |
-|---|---|
-| A | Stephan No. 1 Permit |
-| B | American Growers No. 4 Permit |
-| C | Declaration of Dawn Hewitt |
-| D | Declaration of Dee Arnold |
-| E | Declaration of Betty Malcolm |
-| F | Declaration of Catherine M. Helm-Clark w/ Exhibits 1 & 2 |
-| G | Zuckerman, J., Ohio landowners say fracking wastewater is leaking underground, threatening their oil wells and drinking water, Signal (June 5, 2025) |
-| H1 | City of Marietta Comments and Exhibits 1-1A |
-| H2 | City of Marietta Exhibits 2-10A |
-| H3 | City of Marietta Exhibits 11-18 |
-| H4 | City of Marietta Exhibits 19-23 |
-| I | ODNR Chief Order No. 2023-139 (June 26, 2023) |
-| J | Buckeye Environmental Network Objection & Comment of Stephan #1 Well |
-| K | ODNR Draft Rewrite of Regulations for Interested Party Review |
-| L | DeepRock Disposal Solutions, LLC Permit Application for Stephan #1 Well (Dec. 8, 2021) |
-| M | DOGRM Response to Comments of Stephan #1 Well |
-| N | DOGRM Response to Washington City Officials |
-| O | DeepRock Disposal Solutions, LLC Permit Application for American Growers #4 Well |
-| P | ODNR's Well Summary Card for the Elkem Price #3 |
-| Q | DOGRM Response to Comments for American Growers #4 (Mar. 11, 2025) |
-| R | Email from DeepRock Consultant to OH EPA (June 30, 2025) |
+Exhibit A: Stephan No. 1 Permit
+
+Exhibit B: American Growers No. 4 Permit
+
+Exhibit C: Declaration of Dawn Hewitt
+
+Exhibit D: Declaration of Dee Arnold
+
+Exhibit E: Declaration of Betty Malcolm
+
+Exhibit F: Declaration of Catherine M. Helm-Clark w/ Exhibits 1 & 2
+
+Exhibit G: Zuckerman, J., Ohio landowners say fracking wastewater is leaking underground, threatening their oil wells and drinking water, Signal (June 5, 2025)
+
+Exhibit H1: City of Marietta Comments and Exhibits 1-1A
+
+Exhibit H2: City of Marietta Exhibits 2-10A
+
+Exhibit H3: City of Marietta Exhibits 11-18
+
+Exhibit H4: City of Marietta Exhibits 19-23
+
+Exhibit I: ODNR Chief Order No. 2023-139 (June 26, 2023)
+
+Exhibit J: Buckeye Environmental Network Objection & Comment of Stephan #1 Well
+
+Exhibit K: ODNR Draft Rewrite of Regulations for Interested Party Review
+
+Exhibit L: DeepRock Disposal Solutions, LLC Permit Application for Stephan #1 Well (Dec. 8, 2021)
+
+Exhibit M: DOGRM Response to Comments of Stephan #1 Well
+
+Exhibit N: DOGRM Response to Washington City Officials
+
+Exhibit O: DeepRock Disposal Solutions, LLC Permit Application for American Growers #4 Well
+
+Exhibit P: ODNR's Well Summary Card for the Elkem Price #3
+
+Exhibit Q: DOGRM Response to Comments for American Growers #4 (Mar. 11, 2025)
+
+Exhibit R: Email from DeepRock Consultant to OH EPA (June 30, 2025)
+

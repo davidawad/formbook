@@ -1,0 +1,60 @@
+# Court of Appeals of Ohio (ohioctapp): reply brief (App.R. 16 (C)). The whole layout, as
+# data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to App.R. 19 (A) (../../rules.md, OHIOCTAPP-*); lengths in points. No
+# case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # OHIOCTAPP-FORM-002: all printed matter, footnotes and captions included, at least 12-point type
+pitch:
+  body: 27.6              # OHIOCTAPP-FORM-003: double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # OHIOCTAPP-FORM-003: quoted matter single spaced; cover, headings, tables, notes, signature too
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # OHIOCTAPP-FORM-001: type matter at most 6 1/2 by 9 1/2 inches
+indent: 36
+page_number: {align: center}   # OHIOCTAPP-FORM-005: numbering conventional; the cover is page 1, as filed
+footnote: {size: 12, gap: 6}   # OHIOCTAPP-FORM-002, -003: notes 12 point, single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # OHIOCTAPP-FORM-003: quoted matter single spaced
+# The author numbers the headings ("I.", "A."): level 1 a section, flush left; level 2 a point heading; level 3 below it.
+heading:
+  - {bold: true, above: 14.4, below: 9.6}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# OHIOCTAPP-COV-001 (App.R. 19 (A) (1)-(5)): the court and the case number, the title of the case, the proceeding and the
+# court below, the title of the document, counsel's names and addresses.
+cover:
+  - {text: "IN THE COURT OF APPEALS", align: center, bold: true}
+  - {text: "{district}", align: center, bold: true, upper: true, optional: true}
+  - {text: "STATE OF OHIO", align: center, bold: true}
+  - {text: "Appellate Case No. {case_number}", align: center, bold: true, above: 21.6}
+  - {text: "Trial Court Case No. {trial_court_case}", align: center, bold: true, optional: true}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 43.2}
+  - each: counsel
+    above: 36
+    blocks:
+      - {text: "{names}", bold: true, left: 230.4, above: 13.8}
+      - {text: "{lines}", left: 230.4}
+# OHIOCTAPP-CONT-003 (App.R. 16 (C)) prescribes no tables for a reply brief; this one carries none.
+# OHIOCTAPP-CERT-001 (App.R. 19 (A)): the signature; OHIOCTAPP-SVC-001 (App.R. 13 (C)): the certificate of service, on a
+# page of its own.
+closing:
+  - group:
+      - {text: "Respectfully submitted,"}
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 13.8}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4}
+    above: 27.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 9.6}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - each: service.recipients
+        blocks: [{text: "{.}", left: 36, above: 12}]
+      - {text: "/s/ *{service.signature.signer}*", underline: true, left: 230.4, above: 13.8}
+      - {text: "{service.signature.signer}", left: 230.4}
+      - {text: "{service.signature.lines}", left: 230.4}

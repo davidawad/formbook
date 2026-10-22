@@ -1,2 +1,2 @@
 PASS
-d43a9508bae21af698a089976f79fa4f30bf40582f55381459e882a982f8c694  usage/OUTPUT-amicus-brief.typst.pdf
+54bdfd89398726e038a6b4e10f43c864f7390a2d39dd3f973b96fef3135fcb03  usage/OUTPUT-amicus-brief.typst.pdf
