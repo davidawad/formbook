@@ -178,7 +178,7 @@ authorities:
     cite: "140 S. Ct. 2246 (2020) (Alito, J., concurring)"
   aiello:
     kind: other
-    name: "T. Aiello, Jim Crow’s Last Stand: Nonunanimous Criminal Jury Verdicts in Louisiana (2015)"
+    cite: "T. Aiello, Jim Crow’s Last Stand: Nonunanimous Criminal Jury Verdicts in Louisiana (2015)"
   mills:
     kind: case
     name: "Mills v. Maryland"
@@ -461,7 +461,7 @@ authorities:
     cite: "577 U.S. 190 (2016)"
   promise-amicus:
     kind: other
-    name: "Amici Curiae The Promise of Justice Initiative et al, Edwards v. Vannoy, No. 19–5807 (U.S. Sup. Ct., July 21, 2020)"
+    cite: "Amici Curiae The Promise of Justice Initiative et al, Edwards v. Vannoy, No. 19–5807 (U.S. Sup. Ct., July 21, 2020)"
   sibley:
     kind: case
     name: "Sibley v. Bd. of Supervisors of La. State Univ."
@@ -476,7 +476,7 @@ authorities:
     cite: "95-2621 (La. 02/28/96); 668 So.2d 1135"
   hargrave:
     kind: other
-    name: "Lee Hargrave, The Louisiana Constitution, A Reference Guide (1991)"
+    cite: "Lee Hargrave, The Louisiana Constitution, A Reference Guide (1991)"
   baxley:
     kind: case
     name: "State v. Baxley"
@@ -491,13 +491,13 @@ authorities:
     cite: "21 LOY. L. REV. 9 (1975)"
   la-const-3:
     kind: constitution
-    name: "LA. CONST. art. 1, § 3"
+    cite: "LA. CONST. art. 1, § 3"
   la-const-1973-17:
     kind: constitution
-    name: "LA. CONST. OF 1973 art. 1, § 17"
+    cite: "LA. CONST. OF 1973 art. 1, § 17"
   la-const-1898-116:
     kind: constitution
-    name: "LA. CONST. OF 1898 art. 116"
+    cite: "LA. CONST. OF 1898 art. 116"
   edwards-oral:
     kind: other
     name: "Edwards v. Vannoy No. 19–5807 Oral Argument Transcript"
@@ -508,10 +508,10 @@ authorities:
     cite: "401 U.S. 667 (1971)"
   la-evid-804:
     kind: statute
-    name: "LA. CODE EVID. ANN. art. 804(1)"
+    cite: "LA. CODE EVID. ANN. art. 804(1)"
   la-evid-612:
     kind: statute
-    name: "LA. CODE EVID. ANN. art. 612(B)"
+    cite: "LA. CODE EVID. ANN. art. 612(B)"
   time-gideon:
     kind: other
     name: "Trials: And the Court Said unto Gideon, TIME MAGAZINE"
@@ -686,35 +686,35 @@ authorities:
     cite: "2019-01815 (La. 06/03/20); 296 So. 3d 1051 (Johnson, J., dissenting)"
   tcr-report:
     kind: other
-    name: "TCR Staff, Louisiana Leads Nation in Life Without Parole Terms, THE CRIME REPORT (Dec. 12, 2019)"
+    cite: "TCR Staff, Louisiana Leads Nation in Life Without Parole Terms, THE CRIME REPORT (Dec. 12, 2019)"
   johnson-macmath:
     kind: other
     name: "Jamila Johnson & Talia MacMath, State Courts Must Combat Mass Incarceration by Granting Broader Retroactivity to New Rules Than is Provided Under the Federal Teague v. Lane Test"
     cite: "111 J. CRIM. L. & CRIMINOLOGY ONLINE 33 (2021)"
   la-const-1812:
     kind: constitution
-    name: "LA. CONST. OF 1812 art. 6, § 18"
+    cite: "LA. CONST. OF 1812 art. 6, § 18"
   la-const-1845:
     kind: constitution
-    name: "LA. CONST. OF 1845 Title VI, art. 107"
+    cite: "LA. CONST. OF 1845 Title VI, art. 107"
   la-const-1852:
     kind: constitution
-    name: "LA. CONST. OF 1852 Title VI, art. 103"
+    cite: "LA. CONST. OF 1852 Title VI, art. 103"
   la-const-1864:
     kind: constitution
-    name: "LA. CONST. OF 1864 Title VI, art. 105"
+    cite: "LA. CONST. OF 1864 Title VI, art. 105"
   la-const-1868:
     kind: constitution
-    name: "LA. CONST. OF 1868 Title I, art. 6"
+    cite: "LA. CONST. OF 1868 Title I, art. 6"
   la-const-1879:
     kind: constitution
-    name: "LA. CONST. OF 1879 art. 7"
+    cite: "LA. CONST. OF 1879 art. 7"
   or-const:
     kind: constitution
-    name: "OR. CONST. art. I, § 11"
+    cite: "OR. CONST. art. I, § 11"
   or-rev-stat:
     kind: statute
-    name: "OR. REV. STAT. §§ 136.450(1), 163.105, 163.07"
+    cite: "OR. REV. STAT. §§ 136.450(1), 163.105, 163.07"
 ---
 
 # INTRODUCTION

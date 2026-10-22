@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "la-answering-brief.typ": la-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-reply-brief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answering-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #la-brief(meta, body)
