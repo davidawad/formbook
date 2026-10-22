@@ -18,7 +18,7 @@
 - [ ] docx engine passes (`usage/.check-docx.txt` valid)
 - [ ] a review file in `reviews/`
 
-Engines (doc folders passing / with that template): typst `5/5`, latex `—`, docx `—`.
+Engines (doc folders passing / with that template): typst `5/5`, latex `3/3`, docx `3/3`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and every doc folder under it with a `usage/INPUT-*.md` has a valid `usage/.check-typst.txt` stamp (`just eval` writes them; the default checks are `data/checks-default.yaml`).
@@ -31,9 +31,9 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 |---|---|---|---|---|
 | [amicus-brief](amicus-brief) | up for review | pass | — | — |
 | [motion-brief](motion-brief) | up for review | pass | — | — |
-| [opening-brief](opening-brief) | up for review | pass | — | — |
-| [petition-for-writ](petition-for-writ) | up for review | pass | — | — |
-| [reply-brief](reply-brief) | up for review | pass | — | — |
+| [opening-brief](opening-brief) | up for review | pass | pass | pass |
+| [petition-for-writ](petition-for-writ) | up for review | pass | pass | pass |
+| [reply-brief](reply-brief) | up for review | pass | pass | pass |
 
 ## Folders
 
