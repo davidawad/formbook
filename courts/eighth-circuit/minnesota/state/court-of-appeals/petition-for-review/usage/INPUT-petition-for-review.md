@@ -47,7 +47,7 @@ b\. "the voter's Minnesota driver's license, state identification number, or the
 
 9\. If a majority of the members of the ballot board examining a signature envelope determine that it meets the requirements of Subdivision 2(b), it is marked "Accepted" and treated as such. Minn. Stat. § 203B.121, Subds. 2(b), 4.
 
-10\. However, Subdivision 2(c)(1) requires that if "a majority of the members of the ballot board examining a signature envelope find that an absentee voter has failed to meet one of the requirements provided in paragraph (b), they shall mark the signature envelope "Rejected," initial or sign it below the word "Rejected," list the reason for the rejection on the envelope, and return it to the county auditor."
+10\. However, Subdivision 2(c)(1) requires that if "a majority of the members of the ballot board examining a signature envelope find that an absentee voter has failed to meet one of the requirements provided in paragraph (b), they shall mark the signature envelope “Rejected,” initial or sign it below the word “Rejected,” list the reason for the rejection on the envelope, and return it to the county auditor.”
 
 11\. The statute does not limit the reasons for which a ballot board may determine that a signature is not the voter's signature. The statute expressly requires rejection of a ballot if the ballot board determines that the signature on the envelope is not the voter's signature.
 
