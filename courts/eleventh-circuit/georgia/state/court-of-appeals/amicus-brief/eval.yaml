@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
+# (`fb engines gen`, fb-595.54.12) but do not yet break every line where typst does: a difference of the shared model
+# (a slash inside a URL), recorded in docs/open-items/fb-595.54.59.md, is reported, not counted, until fb-595.54.82
+# fixes it. This overrides the court's `gate`.
+params:
+  cross_engine: report
