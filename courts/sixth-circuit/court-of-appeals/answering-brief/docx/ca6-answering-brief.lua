@@ -1,13 +1,15 @@
 -- U.S. Court of Appeals for the Sixth Circuit: appellee's brief (answering brief), Word (docx) engine.
 -- A pandoc filter. It writes the brief from the sample's frontmatter and body with the paragraph styles of
--- reference.docx (reference-src/styles.xml), with the same rules and numbers as ../typst/ca6-answering-brief.typ.
--- Page numbers (TOC, TOA) are plain text. docx/render.sh gets them from the rendered PDF (docx/pages.lua) and
--- builds again with them until they stop changing. Environment: CA6_DOCX_PAGES=<pagemap file> supplies the
--- numbers (absent: placeholders); CA6_DOCX_LIST=<file> writes the list of headings and citations to match.
+-- reference.docx (built by fb render from docx/reference.xml), with the same rules and numbers as ../typst/ca6-answering-brief.typ.
+-- Page numbers (TOC, TOA) are plain text: fb render's multi-pass build (tools/fb/src/docxpass.rs) renders the
+-- brief, finds the needles this filter writes (FORMBOOK_NEEDLES) in the LibreOffice PDF, and renders again with
+-- their pages (FORMBOOK_PAGES) until they settle. The section breaks name fb render's footers (rIdFtrNone,
+-- rIdFtrPage, rIdFtrAdd); the last section is FORMBOOK_FINAL. Word may paginate slightly differently.
 -- Rules: ../README.md.
 
 local TOC_DEPTH = 4                     -- typst: toc-depth
 local PASSIM = 7                        -- typst: passim-threshold
+local FONT = 'TeX Gyre Schola'            -- typst: font-family (the face docx/reference.xml names)
 -- typst: word-limits and word-limit-rule (FRAP 32(a)(7)(B); FRAP 28.1(e)(2)), keyed by word_limit_basis
 local WORD_LIMITS = { standard = 13000, ['cross-appeal'] = 15300, reply = 6500, ['cross-appeal-reply'] = 6500 }
 local WORD_LIMIT_RULE = {
@@ -15,19 +17,78 @@ local WORD_LIMIT_RULE = {
   ['cross-appeal-reply'] = '28.1(e)(2)(C)',
 }
 
-local PAGES = {}   -- tag -> printed page label: h<id> (heading), k<k> (citation k)
-local pages_file = os.getenv('CA6_DOCX_PAGES')
+-- Pages of the previous pass (fb render's multi-pass build, tools/fb/src/docxpass.rs): FORMBOOK_PAGES holds
+-- "id <TAB> page <TAB> label" for every needle this filter wrote; absent on the first pass (placeholders).
+local PAGES = {}   -- needle id -> printed page label: h<id> (heading), k<k> (citation k)
+local pages_file = os.getenv('FORMBOOK_PAGES')
 if pages_file and pages_file ~= '' then
-  local f = assert(io.open(pages_file, 'r'))
-  for line in f:lines() do
-    local tag, label = line:match('^(%S+)%s+(%S+)$')
-    if tag then PAGES[tag] = label end
+  for line in io.lines(pages_file) do
+    local id, _, label = line:match('^([^\t]+)\t([^\t]*)\t(.*)$')
+    if id then PAGES[id] = label end
   end
-  f:close()
 end
 local function page_of(tag) return PAGES[tag] or '0' end
 
--- Paragraph styles are named in the document ("CA Section"); the ids are what reference-src/styles.xml calls them.
+-- The needles (tools/fb/src/docxpages.rs): one per heading (a Div marked ca6-h), citation (a Span marked ca6-k)
+-- and numbered section start (ca6-s), in document order, each the text from that point on reduced to lower-case
+-- letters and digits, so a heading is found in the body, not at its entry in the table of contents. A citation
+-- in a footnote is kind N (searched from the page the body has reached). The text alone is the fallback.
+local NEEDLE_MAX = 60
+local function norm(s) return (s:lower():gsub('[^%w]', '')) end
+local function write_file(var, text)
+  local path = os.getenv(var)
+  if not path or path == '' then return end
+  local f = assert(io.open(path, 'w'))
+  f:write(text)
+  f:close()
+end
+
+-- sections: { { name, format, prefix }, ... } (the ca6-s marks); final: the document's last sectPr.
+local function write_needles(blocks, sections, final)
+  local events, sec_id = {}, {}
+  local function walker(buf, kind)
+    local function event(id, el)
+      events[#events + 1] = { id = id, kind = kind, buf = buf, at = #table.concat(buf),
+        alone = norm(pandoc.utils.stringify(el)):sub(1, NEEDLE_MAX) }
+    end
+    return {
+      traverse = 'topdown',
+      Div = function(d)
+        local h, s = d.attributes['ca6-h'], d.attributes['ca6-s']
+        local id = h and ('h' .. h) or (s and ('S:' .. s))
+        if id then event(id, d) end
+        if s then sec_id[s] = id end
+      end,
+      Span = function(sp)
+        if sp.attributes['ca6-k'] then event('k' .. sp.attributes['ca6-k'], sp) end
+      end,
+      Str = function(s) buf[#buf + 1] = norm(s.text) end,
+      Code = function(c) buf[#buf + 1] = norm(c.text) end,
+      Note = function(n)
+        pandoc.Blocks(n.content):walk(walker({}, 'N'))
+        return nil, false
+      end,
+    }
+  end
+  pandoc.Blocks(blocks):walk(walker({}, 'B'))
+  local lines = {}
+  for _, e in ipairs(events) do
+    local text = table.concat(e.buf)
+    lines[#lines + 1] = table.concat({ e.id, e.kind, text:sub(e.at + 1, e.at + NEEDLE_MAX), e.alone }, '\t')
+  end
+  for _, s in ipairs(sections) do
+    lines[#lines + 1] = table.concat({ '#section', assert(sec_id[s[1]], 'no section start ' .. s[1]), s[2], s[3] or '' }, '\t')
+  end
+  write_file('FORMBOOK_NEEDLES', table.concat(lines, '\n') .. '\n')
+  write_file('FORMBOOK_FINAL', final)
+end
+
+-- A heading's title as its table-of-contents entry prints it: citation marks dropped (an entry is not a needle).
+local function unmarked(inlines)
+  return pandoc.Inlines(inlines):walk({ Span = function(sp) if sp.attributes['ca6-k'] then return sp.content end end })
+end
+
+-- Paragraph styles are named in the document ("CA Section"); the ids are what docx/reference.xml calls them.
 local NAME = {
   CASection = 'CA Section', CASectionNewPage = 'CA Section New Page', CAPoint = 'CA Point',
   CASub1 = 'CA Sub 1', CASub2 = 'CA Sub 2', CASub3 = 'CA Sub 3', CASub4 = 'CA Sub 4',
@@ -73,7 +134,7 @@ local function cat(...)
 end
 
 -- Section breaks. Each section's properties go in the paragraph that ends it; the last section's come from
--- reference.docx (footer with arabic numbers, or the addendum reference with Add- numbers).
+-- FORMBOOK_FINAL (footer with arabic numbers, or Add- numbers after an addendum).
 local PG = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>'
 local function section_break(footer_rid, numfmt)
   local pg = numfmt and ('<w:pgNumType w:fmt="' .. numfmt .. '" w:start="1"/>') or ''
@@ -211,7 +272,8 @@ function Pandoc(doc)
       end
       occ[#occ + 1] = key
       occ_text[#occ] = pandoc.utils.stringify(l.content)
-      return l.content
+      -- marked for the needles (write_needles); the docx writer prints only the content
+      return pandoc.Span(l.content, pandoc.Attr('', {}, { { 'ca6-k', tostring(#occ) } }))
     end,
   })
 
@@ -242,7 +304,16 @@ function Pandoc(doc)
     if seen <= prelim_n then prelim_blocks:insert(b) else body_blocks:insert(b) end
   end
 
-  local words = count_words(main)
+  -- FRAP 32(f) excludes the statement regarding oral argument from the count (typst: counted-md): any top-level
+  -- section whose heading names oral argument is left out.
+  local counted, skipping = pandoc.List(), false
+  for _, b in ipairs(main) do
+    if b.t == 'Header' and b.level == 1 then
+      skipping = pandoc.utils.stringify(b.content):lower():match('oral argument') ~= nil
+    end
+    if not skipping then counted:insert(b) end
+  end
+  local words = count_words(counted)
   local limit = WORD_LIMITS[basis]
   if words > limit then
     error('ca6-brief: the brief has ' .. words .. ' words; the ' .. basis .. ' limit is ' .. limit)
@@ -315,46 +386,39 @@ function Pandoc(doc)
     for _, it in ipairs(addendum) do if it.kind == 'head' and it.level == 2 then add_toc[#add_toc + 1] = it end end
   end
 
-  -- ---- the list for the page finder (docx/pages.lua): one line per TOC heading and per citation ----
-  local list_file = os.getenv('CA6_DOCX_LIST')
-  if list_file and list_file ~= '' then
-    local f = assert(io.open(list_file, 'w'))
-    for _, list in ipairs({ toc, add_toc }) do
-      for _, e in ipairs(list) do
-        f:write('h' .. e.id, '\t', e.where, '\t', pandoc.utils.stringify(e.title), '\n')
+  -- The TOC is one table, a row per entry: the label in a cell as wide as its indent, the title and page in the
+  -- next cell (a single dot-leader tab, so no tab sits between label and title). One table, not one per entry:
+  -- pandoc puts an empty paragraph after every table, a blank line between entries. The grid is four 0.5 in label
+  -- columns and the rest; a label at depth d spans d + 1 of them, its title the others; an entry without a label
+  -- spans the row. Section titles are capitals; the page number is left alone. Point headings (Argument) have a
+  -- label at the margin, sub-headings at d * 0.5 in.
+  local TEXT_W = 9360
+  local LABEL_COLS = 4
+  local function toc_table(entries)
+    local rows = {}
+    for _, e in ipairs(entries) do
+      local title = pandoc.List()
+      for _, x in ipairs(unmarked(e.title)) do
+        if e.level == 1 and x.t == 'Str' then title:insert(pandoc.Str(x.text:upper())) else title:insert(x) end
+      end
+      title:insert(TAB())
+      title:insert(pandoc.Str(page_of('h' .. e.id)))
+      local tstyle = e.level == 1 and 'CATOCTextTop' or ('CATOCText' .. (e.depth or 0))
+      local function cell(blocks, span) return pandoc.Cell(blocks, pandoc.AlignDefault, 1, span) end
+      if e.level == 1 or not e.label then
+        rows[#rows + 1] = pandoc.Row({ cell({ pandoc.Div({ pandoc.Para(title) }, attr(tstyle)) }, LABEL_COLS + 1) })
+      else
+        local d = e.depth or 0
+        if d >= LABEL_COLS then error('ca6-brief: a contents entry deeper than ' .. LABEL_COLS .. ' label columns') end
+        rows[#rows + 1] = pandoc.Row({
+          cell({ pandoc.Div({ pandoc.Para({ pandoc.Str(e.label) }) }, attr('CATOCLabel' .. d)) }, d + 1),
+          cell({ pandoc.Div({ pandoc.Para(title) }, attr(tstyle)) }, LABEL_COLS - d),
+        })
       end
     end
-    for k, text in ipairs(occ_text) do
-      f:write('k' .. k, '\tbody\t', text, '\n')
-    end
-    f:close()
-  end
-
-  -- A TOC entry is a one-row table: the label in a cell as wide as its indent, the title and page in the next
-  -- cell (a single dot-leader tab, so no tab sits between label and title). Section titles are capitals; the
-  -- page number is left alone. Point headings (Argument) have a label at the margin, sub-headings at d * 0.5 in.
-  local TEXT_W = 9360
-  local function toc_table(e)
-    local title = pandoc.List()
-    for _, x in ipairs(e.title) do
-      if e.level == 1 and x.t == 'Str' then title:insert(pandoc.Str(x.text:upper())) else title:insert(x) end
-    end
-    title:insert(TAB())
-    title:insert(pandoc.Str(page_of('h' .. e.id)))
-    local tstyle = e.level == 1 and 'CATOCTextTop' or ('CATOCText' .. (e.depth or 0))
-    local colspecs, rows
-    if e.level == 1 or not e.label then
-      colspecs = { { pandoc.AlignDefault, 1.0 } }
-      rows = { pandoc.Row({ pandoc.Cell({ pandoc.Div({ pandoc.Para(title) }, attr(tstyle)) }) }) }
-    else
-      local d = e.depth or 0
-      local lw = (d + 1) * 720
-      colspecs = { { pandoc.AlignDefault, lw / TEXT_W }, { pandoc.AlignDefault, (TEXT_W - lw) / TEXT_W } }
-      rows = { pandoc.Row({
-        pandoc.Cell({ pandoc.Div({ pandoc.Para({ pandoc.Str(e.label) }) }, attr('CATOCLabel' .. d)) }),
-        pandoc.Cell({ pandoc.Div({ pandoc.Para(title) }, attr(tstyle)) }),
-      }) }
-    end
+    local colspecs = {}
+    for i = 1, LABEL_COLS do colspecs[i] = { pandoc.AlignDefault, 720 / TEXT_W } end
+    colspecs[LABEL_COLS + 1] = { pandoc.AlignDefault, (TEXT_W - LABEL_COLS * 720) / TEXT_W }
     return pandoc.Table(pandoc.Caption(''), colspecs, pandoc.TableHead({}), { pandoc.TableBody(rows) }, pandoc.TableFoot({}))
   end
 
@@ -375,7 +439,9 @@ function Pandoc(doc)
   end
 
   local function toa_blocks()
-    local out = { para('CASectionNewPage', { pandoc.Str('Table of Authorities') }) }
+    local title = para('CASectionNewPage', { pandoc.Str('Table of Authorities') })
+    title.attributes['ca6-h'] = tostring(h_toa.id)
+    local out = { title }
     local first = true
     for _, g in ipairs(KINDS) do
       local members, seen = {}, {}
@@ -468,7 +534,9 @@ end
       end
     end
     for _, x in ipairs(e.title) do inl:insert(x) end
-    return para(e.style, inl)
+    local d = para(e.style, inl)
+    d.attributes['ca6-h'] = tostring(e.id)
+    return d
   end
 
   local out = {}
@@ -476,31 +544,38 @@ end
 
   -- ---- section 1: the cover (no page number) ----
   for _, b in ipairs(cover()) do push(b) end
-  push(section_break('rIdFtr0', nil))
+  push(section_break('rIdFtrNone', nil))
 
   -- ---- section 2: the corporate disclosure, when the frontmatter has one (no page number) ----
   if meta.disclosure then
     for _, b in ipairs(disclosure()) do push(b) end
-    push(section_break('rIdFtr0', nil))
+    push(section_break('rIdFtrNone', nil))
   end
 
   -- ---- section 3: front matter, lowercase roman numerals ----
-  push(para('CATOCTitle', { pandoc.Str('Table of Contents') }))
+  local toc_title = para('CATOCTitle', { pandoc.Str('Table of Contents') })
+  toc_title.attributes['ca6-s'] = 'front'
+  push(toc_title)
   push(para('CATOCPage', { pandoc.Strong({ pandoc.Underline({ pandoc.Str('Page') }) }) }))
-  for _, e in ipairs(toc) do push(toc_table(e)) end
+  push(toc_table(toc))
   for _, b in ipairs(toa_blocks()) do push(b) end
   for _, it in ipairs(prelim) do
     if it.kind == 'head' then push(heading_block(it)) else push(it) end
   end
-  push(section_break('rIdFtr1', 'lowerRoman'))
+  push(section_break('rIdFtrPage', 'lowerRoman'))
 
   -- ---- section 4: the body (arabic from 1), the certificates ----
-  for _, it in ipairs(body) do
-    if it.kind == 'head' then push(heading_block(it)) else push(it) end
-  end
   -- The last paragraph is kept with the signature block (CABodyKeep keeps it with the next paragraph).
   local last = body[#body]
   if last and last.t == 'Para' then body[#body] = styled('CABodyKeep', { last }) end
+  for i, it in ipairs(body) do
+    local b = it.kind == 'head' and heading_block(it) or it
+    if i == 1 then
+      if b.t ~= 'Div' then b = pandoc.Div({ b }) end
+      b.attributes['ca6-s'] = 'body'
+    end
+    push(b)
+  end
   for _, b in ipairs(signature_blocks(meta)) do push(b) end
 
   -- Certificate of Compliance (FRAP 32(g)(1); typst certificate-of-compliance).
@@ -508,7 +583,7 @@ end
   push(para('CAKeep', { pandoc.Str('I certify that this brief complies with the type-volume limitation of Fed. R. App. P. ' ..
     WORD_LIMIT_RULE[basis] .. '. Exclusive of the items exempted by Fed. R. App. P. 32(f), the brief contains ' ..
     group_digits(words) .. ' words.') }))
-  push(para('CAKeep', { pandoc.Str('The brief has been prepared in a proportionally spaced typeface, EB Garamond in 14-point type, ' ..
+  push(para('CAKeep', { pandoc.Str('The brief has been prepared in a proportionally spaced typeface, ' .. FONT .. ' in 14-point type, ' ..
     'which complies with Fed. R. App. P. 32(a)(5) and (6).') }))
   for _, b in ipairs(signature_compact(meta)) do push(b) end
 
@@ -525,15 +600,23 @@ end
 
   -- ---- section 5: the addendum (6 Cir. R. 28(b)(1)(A)(i)), numbered Add-1, Add-2 ----
   if add then
-    push(section_break('rIdFtr1', 'decimal'))
-    push(heading_block(h_add))
+    push(section_break('rIdFtrPage', 'decimal'))
+    local hb = heading_block(h_add)
+    hb.attributes['ca6-s'] = 'add'
+    push(hb)
     push(para('CATOCTitle', { pandoc.Str('Table of Contents') }))
-    for _, e in ipairs(add_toc) do push(toc_table(e)) end
+    if #add_toc > 0 then push(toc_table(add_toc)) end
     push(page_break_block())
     for _, it in ipairs(addendum) do
       if it.kind == 'head' then push(heading_block(it)) else push(it) end
     end
   end
+
+  -- the needles and the last section for fb render (tools/fb/src/docxpass.rs)
+  local sections = { { 'front', 'lower-roman' }, { 'body', 'decimal' } }
+  if add then sections[#sections + 1] = { 'add', 'decimal', 'Add-' } end
+  write_needles(out, sections, '<w:sectPr><w:footerReference w:type="default" r:id="' ..
+    (add and 'rIdFtrAdd' or 'rIdFtrPage') .. '"/>' .. PG .. '<w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>')
 
   -- Pandoc would print the date metadata as a title block at the top of the first page; the date is in the
   -- signature and the certificate of service already.

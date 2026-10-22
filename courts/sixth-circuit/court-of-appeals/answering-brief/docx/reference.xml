@@ -1,12 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Styles for the ca6 docx engine. Measures are the ones the typst template gets from the 14-pt EB Garamond
-     render (see ../../latex/template.tex): body lines 31.43 pt apart (w:line 629 exact), single-spaced
-     blocks 19.95 pt (399 exact), paragraphs first-line indent 0.5 in, no space between paragraphs. -->
-<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The ca6 answering brief's Word styles; fb render builds docx/reference.docx from pandoc's default reference with
+     them (tools/fb/src/docxref.rs), matching ../typst/ca6-answering-brief.typ: TeX Gyre Schola 14 pt everywhere
+     (the typst face, vendored in fonts/; footnotes included); body lines exact at 637 twips (31.85 pt, the typst body
+     pitch: Schola's 0.939 em line box plus 1.336 em leading, double spacing), single-spaced blocks (headings, TOC,
+     TOA, cover, certificates, footnotes) exact at 407 twips (20.37 pt, 0.939 + 0.516 em); first-line indent 0.5 in,
+     no space between paragraphs; 16 pt section titles exact at 466 twips (Schola's line box at 16 pt, so a
+     title at the top of a page stays inside the 1 in margin), no space after a heading (typst sets the next line on
+     its single leading); cover lines exact at 380 twips so the cover keeps to one page (typst shrinks its cover
+     spacing to fit). Hanging indents carry no firstLine attribute (LibreOffice let w:firstLine="0" cancel
+     w:hanging). The footers and the page setup of every section (letter paper, 1 in margins) are
+     fb render's and the filter's: rIdFtrNone, rIdFtrPage, rIdFtrAdd; docx/ca6-answering-brief.lua writes the
+     section breaks and FORMBOOK_FINAL. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" styles="replace" theme-font="TeX Gyre Schola">
   <w:docDefaults>
     <w:rPrDefault>
       <w:rPr>
-        <w:rFonts w:ascii="EB Garamond" w:hAnsi="EB Garamond" w:eastAsia="EB Garamond" w:cs="EB Garamond"/>
+        <w:rFonts w:ascii="TeX Gyre Schola" w:hAnsi="TeX Gyre Schola" w:eastAsia="TeX Gyre Schola" w:cs="TeX Gyre Schola"/>
         <w:sz w:val="28"/>
         <w:szCs w:val="28"/>
         <w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/>
@@ -22,7 +31,7 @@
     <w:name w:val="Normal"/>
     <w:qFormat/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
     </w:pPr>
   </w:style>
   <w:style w:type="character" w:default="1" w:styleId="DefaultParagraphFont">
@@ -69,7 +78,7 @@
     <w:basedOn w:val="Normal"/>
     <w:qFormat/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="629" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="637" w:lineRule="exact"/>
       <w:ind w:firstLine="720"/>
     </w:pPr>
   </w:style>
@@ -84,7 +93,7 @@
     <w:basedOn w:val="Normal"/>
     <w:qFormat/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
     </w:pPr>
   </w:style>
@@ -92,7 +101,7 @@
     <w:name w:val="Footnote Text"/>
     <w:basedOn w:val="Normal"/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="140" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="140" w:line="407" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
     </w:pPr>
     <w:rPr>
@@ -110,7 +119,7 @@
     <w:name w:val="footer"/>
     <w:basedOn w:val="Normal"/>
     <w:pPr>
-      <w:spacing w:line="399" w:lineRule="exact"/>
+      <w:spacing w:line="407" w:lineRule="exact"/>
       <w:jc w:val="center"/>
     </w:pPr>
   </w:style>
@@ -124,7 +133,7 @@
     <w:pPr>
       <w:keepNext/>
       <w:keepLines/>
-      <w:spacing w:before="420" w:after="308" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="200" w:after="0" w:line="466" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
       <w:jc w:val="center"/>
       <w:outlineLvl w:val="0"/>
@@ -152,7 +161,7 @@
     <w:pPr>
       <w:keepNext/>
       <w:keepLines/>
-      <w:spacing w:before="336" w:after="280" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="336" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
       <w:jc w:val="center"/>
       <w:outlineLvl w:val="1"/>
@@ -171,8 +180,8 @@
       <w:tabs><w:tab w:val="left" w:pos="1441"/></w:tabs>
       <w:keepNext/>
       <w:keepLines/>
-      <w:spacing w:before="308" w:after="252" w:line="399" w:lineRule="exact"/>
-      <w:ind w:left="1440" w:hanging="720" w:firstLine="0"/>
+      <w:spacing w:before="308" w:after="0" w:line="407" w:lineRule="exact"/>
+      <w:ind w:left="1440" w:hanging="720"/>
       <w:outlineLvl w:val="2"/>
     </w:pPr>
     <w:rPr>
@@ -186,7 +195,7 @@
     <w:next w:val="BodyText"/>
     <w:pPr>
       <w:tabs><w:tab w:val="left" w:pos="2161"/></w:tabs>
-      <w:ind w:left="2160" w:hanging="720" w:firstLine="0"/>
+      <w:ind w:left="2160" w:hanging="720"/>
       <w:outlineLvl w:val="3"/>
     </w:pPr>
   </w:style>
@@ -196,7 +205,7 @@
     <w:next w:val="BodyText"/>
     <w:pPr>
       <w:tabs><w:tab w:val="left" w:pos="2881"/></w:tabs>
-      <w:ind w:left="2880" w:hanging="720" w:firstLine="0"/>
+      <w:ind w:left="2880" w:hanging="720"/>
       <w:outlineLvl w:val="4"/>
     </w:pPr>
   </w:style>
@@ -206,7 +215,7 @@
     <w:next w:val="BodyText"/>
     <w:pPr>
       <w:tabs><w:tab w:val="left" w:pos="3601"/></w:tabs>
-      <w:ind w:left="3600" w:hanging="720" w:firstLine="0"/>
+      <w:ind w:left="3600" w:hanging="720"/>
       <w:outlineLvl w:val="5"/>
     </w:pPr>
   </w:style>
@@ -217,7 +226,7 @@
     <w:pPr>
       <w:keepNext/>
       <w:keepLines/>
-      <w:spacing w:before="336" w:after="252" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="336" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
       <w:outlineLvl w:val="1"/>
     </w:pPr>
@@ -237,7 +246,7 @@
     <w:name w:val="CA Single"/>
     <w:basedOn w:val="Normal"/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="280" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="280" w:line="407" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
     </w:pPr>
   </w:style>
@@ -245,7 +254,7 @@
     <w:name w:val="CA Cover"/>
     <w:basedOn w:val="Normal"/>
     <w:pPr>
-      <w:spacing w:before="10" w:after="10" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="380" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
       <w:jc w:val="center"/>
     </w:pPr>
@@ -262,7 +271,7 @@
     <w:name w:val="CA Cover Left"/>
     <w:basedOn w:val="CACover"/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="380" w:lineRule="exact"/>
       <w:ind w:left="4680" w:firstLine="0"/>
       <w:jc w:val="left"/>
     </w:pPr>
@@ -317,7 +326,7 @@
       <w:pBdr>
         <w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/>
       </w:pBdr>
-      <w:spacing w:before="0" w:after="100" w:line="200" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="60" w:line="200" w:lineRule="exact"/>
       <w:ind w:left="3240" w:right="3240" w:firstLine="0"/>
     </w:pPr>
     <w:rPr>
@@ -338,7 +347,7 @@
     <w:name w:val="CA Signature Gap"/>
     <w:basedOn w:val="CASig"/>
     <w:pPr>
-      <w:spacing w:before="392" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="392" w:after="0" w:line="407" w:lineRule="exact"/>
     </w:pPr>
   </w:style>
   <w:style w:type="paragraph" w:customStyle="1" w:styleId="CASignatureLine">
@@ -368,7 +377,7 @@
       <w:tabs>
         <w:tab w:val="left" w:pos="4680"/>
       </w:tabs>
-      <w:spacing w:before="280" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="280" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
     </w:pPr>
   </w:style>
@@ -383,7 +392,7 @@
     <w:name w:val="CA TOC Page"/>
     <w:basedOn w:val="Normal"/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
       <w:jc w:val="right"/>
     </w:pPr>
@@ -393,7 +402,7 @@
       <w:u w:val="single"/>
     </w:rPr>
   </w:style>
-  <!-- TOC entries are one-row tables (see ca6-opening-brief.lua): a label cell indented to its level, and a title
+  <!-- TOC entries are the rows of one table (see ca6-answering-brief.lua): a label cell indented to its level, and a title
        cell with the dot-leader tab for the page number. A tab after a label in a paragraph with a hanging indent
        would take the dot leader too, so the label gets its own cell. -->
   <w:style w:type="paragraph" w:customStyle="1" w:styleId="CATOCTextTop">
@@ -403,8 +412,8 @@
       <w:tabs>
         <w:tab w:val="right" w:leader="dot" w:pos="9245"/>
       </w:tabs>
-      <w:spacing w:before="84" w:after="0" w:line="399" w:lineRule="exact"/>
-      <w:ind w:left="0" w:firstLine="0"/>
+      <w:spacing w:before="84" w:after="0" w:line="407" w:lineRule="exact"/>
+      <w:ind w:left="0" w:right="576" w:firstLine="0"/>
     </w:pPr>
   </w:style>
   <w:style w:type="paragraph" w:customStyle="1" w:styleId="CATOCText0">
@@ -414,8 +423,8 @@
       <w:tabs>
         <w:tab w:val="right" w:leader="dot" w:pos="8525"/>
       </w:tabs>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
-      <w:ind w:left="0" w:firstLine="0"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
+      <w:ind w:left="0" w:right="576" w:firstLine="0"/>
     </w:pPr>
   </w:style>
   <w:style w:type="paragraph" w:customStyle="1" w:styleId="CATOCText1">
@@ -425,8 +434,8 @@
       <w:tabs>
         <w:tab w:val="right" w:leader="dot" w:pos="7805"/>
       </w:tabs>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
-      <w:ind w:left="0" w:firstLine="0"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
+      <w:ind w:left="0" w:right="576" w:firstLine="0"/>
     </w:pPr>
   </w:style>
   <w:style w:type="paragraph" w:customStyle="1" w:styleId="CATOCText2">
@@ -436,8 +445,8 @@
       <w:tabs>
         <w:tab w:val="right" w:leader="dot" w:pos="7085"/>
       </w:tabs>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
-      <w:ind w:left="0" w:firstLine="0"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
+      <w:ind w:left="0" w:right="576" w:firstLine="0"/>
     </w:pPr>
   </w:style>
   <w:style w:type="paragraph" w:customStyle="1" w:styleId="CATOCText3">
@@ -447,15 +456,15 @@
       <w:tabs>
         <w:tab w:val="right" w:leader="dot" w:pos="6365"/>
       </w:tabs>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
-      <w:ind w:left="0" w:firstLine="0"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
+      <w:ind w:left="0" w:right="576" w:firstLine="0"/>
     </w:pPr>
   </w:style>
   <w:style w:type="paragraph" w:customStyle="1" w:styleId="CATOCLabel0">
     <w:name w:val="CA TOC Label 0"/>
     <w:basedOn w:val="Normal"/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:left="0" w:firstLine="0"/>
     </w:pPr>
   </w:style>
@@ -463,7 +472,7 @@
     <w:name w:val="CA TOC Label 1"/>
     <w:basedOn w:val="Normal"/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:left="720" w:firstLine="0"/>
     </w:pPr>
   </w:style>
@@ -471,7 +480,7 @@
     <w:name w:val="CA TOC Label 2"/>
     <w:basedOn w:val="Normal"/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:left="1440" w:firstLine="0"/>
     </w:pPr>
   </w:style>
@@ -479,7 +488,7 @@
     <w:name w:val="CA TOC Label 3"/>
     <w:basedOn w:val="Normal"/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:left="2160" w:firstLine="0"/>
     </w:pPr>
   </w:style>
@@ -491,7 +500,7 @@
       <w:tabs>
         <w:tab w:val="right" w:pos="9360"/>
       </w:tabs>
-      <w:spacing w:before="280" w:after="60" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="280" w:after="60" w:line="407" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
     </w:pPr>
     <w:rPr>
@@ -507,15 +516,15 @@
       <w:tabs>
         <w:tab w:val="right" w:leader="dot" w:pos="9360"/>
       </w:tabs>
-      <w:spacing w:before="140" w:after="0" w:line="399" w:lineRule="exact"/>
-      <w:ind w:left="504" w:hanging="504" w:firstLine="0"/>
+      <w:spacing w:before="140" w:after="0" w:line="407" w:lineRule="exact"/>
+      <w:ind w:left="504" w:right="576" w:hanging="504"/>
     </w:pPr>
   </w:style>
   <w:style w:type="paragraph" w:customStyle="1" w:styleId="CATable">
     <w:name w:val="CA Table Text"/>
     <w:basedOn w:val="Compact"/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
       <w:jc w:val="left"/>
     </w:pPr>
@@ -547,7 +556,7 @@
     <w:pPr>
       <w:keepNext/>
       <w:keepLines/>
-      <w:spacing w:before="336" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="336" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:left="0" w:firstLine="0"/>
     </w:pPr>
   </w:style>
@@ -555,7 +564,7 @@
     <w:name w:val="CA Cert Signature Line"/>
     <w:basedOn w:val="CACertSig"/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:left="140" w:firstLine="0"/>
     </w:pPr>
     <w:rPr>
@@ -567,7 +576,7 @@
     <w:name w:val="CA Date"/>
     <w:basedOn w:val="Normal"/>
     <w:pPr>
-      <w:spacing w:before="224" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="224" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:left="0" w:firstLine="0"/>
     </w:pPr>
   </w:style>
@@ -577,7 +586,7 @@
     <w:pPr>
       <w:keepNext/>
       <w:keepLines/>
-      <w:spacing w:before="160" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="160" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:left="720" w:firstLine="0"/>
     </w:pPr>
   </w:style>
@@ -586,7 +595,7 @@
     <w:basedOn w:val="CASingle"/>
     <w:pPr>
       <w:keepNext/>
-      <w:spacing w:before="0" w:after="280" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="280" w:line="407" w:lineRule="exact"/>
       <w:ind w:firstLine="0"/>
       <w:jc w:val="center"/>
     </w:pPr>
@@ -603,15 +612,15 @@
       <w:tabs>
         <w:tab w:val="left" w:pos="448"/>
       </w:tabs>
-      <w:spacing w:before="280" w:after="0" w:line="399" w:lineRule="exact"/>
-      <w:ind w:left="448" w:hanging="448" w:firstLine="0"/>
+      <w:spacing w:before="280" w:after="0" w:line="407" w:lineRule="exact"/>
+      <w:ind w:left="448" w:hanging="448"/>
     </w:pPr>
   </w:style>
   <w:style w:type="paragraph" w:customStyle="1" w:styleId="CADisclosureAnswer">
     <w:name w:val="CA Disclosure Answer"/>
     <w:basedOn w:val="CASingle"/>
     <w:pPr>
-      <w:spacing w:before="0" w:after="0" w:line="399" w:lineRule="exact"/>
+      <w:spacing w:before="0" w:after="0" w:line="407" w:lineRule="exact"/>
       <w:ind w:left="448" w:firstLine="0"/>
     </w:pPr>
   </w:style>
@@ -622,4 +631,4 @@
       <w:ind w:left="3744" w:firstLine="0"/>
     </w:pPr>
   </w:style>
-</w:styles>
+</reference>
