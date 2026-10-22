@@ -13,7 +13,7 @@ Courts under `courts/sixth-circuit/tennessee` (9).
 | [District Court, W.D. Tennessee](federal/western-district) | `tnwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Tennessee](state/court-of-appeals) | `tennctapp` | up for review | 5/5 | — | — | 29 |
 | [Court of Criminal Appeals of Tennessee](state/court-of-criminal-appeals) | `tenncrimapp` | up for review | 4/4 | — | — | 29 |
-| [Tennessee Supreme Court](state/supreme-court) | `tenn` | up for review | 6/6 | — | — | 29 |
+| [Tennessee Supreme Court](state/supreme-court) | `tenn` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

@@ -163,7 +163,7 @@ Courts under `courts` (346).
 | [Ohio Supreme Court](sixth-circuit/ohio/state/supreme-court) | `ohio` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals of Tennessee](sixth-circuit/tennessee/state/court-of-appeals) | `tennctapp` | up for review | 5/5 | — | — | 29 |
 | [Court of Criminal Appeals of Tennessee](sixth-circuit/tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | up for review | 4/4 | — | — | 29 |
-| [Tennessee Supreme Court](sixth-circuit/tennessee/state/supreme-court) | `tenn` | up for review | 6/6 | — | — | 29 |
+| [Tennessee Supreme Court](sixth-circuit/tennessee/state/supreme-court) | `tenn` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [Court of Appeals for the Seventh Circuit](seventh-circuit/court-of-appeals) | `ca7` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, C.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-central-district) | `ilcb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-northern-district) | `ilnb` | up for review | 2/2 | — | 2/2 | 14 |
@@ -307,7 +307,7 @@ Courts under `courts` (346).
 | [Colorado Supreme Court](tenth-circuit/colorado/state/supreme-court) | `colo` | up for review | 8/8 | — | — | 29 |
 | [Court of Appeals of Kansas](tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
 | [Supreme Court of Kansas](tenth-circuit/kansas/state/supreme-court) | `kan` | up for review | 9/9 | — | — | 29 |
-| [New Mexico Court of Appeals](tenth-circuit/new-mexico/state/court-of-appeals) | `nmctapp` | up for review | 6/6 | 4/4 | 4/4 | 29 |
+| [New Mexico Court of Appeals](tenth-circuit/new-mexico/state/court-of-appeals) | `nmctapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [New Mexico Supreme Court](tenth-circuit/new-mexico/state/supreme-court) | `nm` | up for review | 8/8 | 1/1 | 1/1 | 29 |
 | [Court of Civil Appeals of Oklahoma](tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | up for review | 1/1 | — | — | 14 |
 | [Court of Criminal Appeals of Oklahoma](tenth-circuit/oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
