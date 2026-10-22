@@ -215,9 +215,10 @@ fn wants_tnr(record: &Value) -> bool {
 }
 
 /// Metric-compatible Times faces the latex engine may embed instead of Times New Roman (fb-595.45): newtxtext
-/// and newtxmath (TeXGyreTermesX, NewTX) and TeX Gyre Termes, all in stock TeX Live, so the .tex compiles with
+/// and newtxmath (TeXGyreTermesX, NewTX; txsys, its symbols: a minus or an arrow, lib/latex/xdoc.lua) and TeX Gyre
+/// Termes, all in stock TeX Live, so the .tex compiles with
 /// stock pdflatex. Scoped to latex; typst and docx stay Times New Roman.
-pub const LATEX_TIMES: [&str; 3] = ["TeXGyreTermesX", "TeXGyreTermes", "NewTX"];
+pub const LATEX_TIMES: [&str; 4] = ["TeXGyreTermesX", "TeXGyreTermes", "NewTX", "txsys"];
 
 /// The `pdffonts` names (subset tag removed) of `fonts_txt`, its two header lines skipped.
 fn pdffonts_names(fonts_txt: &str) -> impl Iterator<Item = &str> {
@@ -238,13 +239,19 @@ pub fn times_embedded<'a>(fonts_txt: &'a str, engine: &str) -> Option<&'a str> {
 
 /// The extra pdf_prefix alternatives (`a|b`) the engine accepts for a declared `prefix`: on latex, a template
 /// that declares Times New Roman, or Liberation Serif (its metric twin, absent from stock TeX Live), may embed a
-/// metric-compatible Times; nothing otherwise.
+/// metric-compatible Times; one that declares Arial or Liberation Sans, TeX Gyre Heros (Helvetica's advances, which
+/// are Arial's; tools/fb/src/enginegen/gen.rs latex_face); nothing otherwise.
 pub fn latex_alt_prefix(engine: &str, prefix: &str) -> String {
     let times = |p: &str| p == "TimesNewRoman" || p == "LiberationSerif";
-    match engine == "latex" && prefix.split('|').any(times) {
-        true => LATEX_TIMES.join("|"),
-        false => String::new(),
+    let arial = |p: &str| p == "Arial" || p == "LiberationSans";
+    let mut alt: Vec<&str> = vec![];
+    if engine == "latex" && prefix.split('|').any(times) {
+        alt.extend(LATEX_TIMES);
     }
+    if engine == "latex" && prefix.split('|').any(arial) {
+        alt.push("TeXGyreHeros");
+    }
+    alt.join("|")
 }
 
 /// The face the template of an audited exemplar declares: the record's `template_face` when one is set (a
@@ -445,18 +452,20 @@ mod tests {
     fn latex_alternatives_only_for_a_declared_times() {
         assert_eq!(
             latex_alt_prefix("latex", "TimesNewRoman"),
-            "TeXGyreTermesX|TeXGyreTermes|NewTX"
+            "TeXGyreTermesX|TeXGyreTermes|NewTX|txsys"
         );
         assert_eq!(
             latex_alt_prefix("latex", "TimesNewRoman|LiberationSerif"),
-            "TeXGyreTermesX|TeXGyreTermes|NewTX"
+            "TeXGyreTermesX|TeXGyreTermes|NewTX|txsys"
         );
         assert_eq!(
             latex_alt_prefix("latex", "LiberationSerif"),
-            "TeXGyreTermesX|TeXGyreTermes|NewTX"
+            "TeXGyreTermesX|TeXGyreTermes|NewTX|txsys"
         );
         assert_eq!(latex_alt_prefix("typst", "TimesNewRoman"), "");
         assert_eq!(latex_alt_prefix("latex", "EBGaramond"), "");
+        assert_eq!(latex_alt_prefix("latex", "LiberationSans"), "TeXGyreHeros");
+        assert_eq!(latex_alt_prefix("docx", "LiberationSans"), "");
     }
 
     #[test]

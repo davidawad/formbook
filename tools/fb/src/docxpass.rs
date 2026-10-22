@@ -190,16 +190,55 @@ pub(crate) fn write_meta(sample: &Path, work: &Path) -> Res<()> {
     write(&work.join("meta.json"), &json)
 }
 
+/// The LibreOffice export filter that writes Word bookmarks as named destinations (the destination needles).
+const PDF_DESTS: &str = r#"pdf:writer_pdf_Export:{"ExportBookmarksToPDFDestination":{"type":"boolean","value":"true"}}"#;
+
 /// The pages file of the LibreOffice PDF of `docx`.
 fn pages_of(docx: &Path, n: usize, work: &Path) -> Res<String> {
     let pdf = work.join(format!("pages{n}.pdf"));
-    crate::engines::convert(docx, &pdf, work)?;
+    let needles = read(&work.join("needles.tsv"))?;
+    // the bookmarks as named destinations when a needle asks for one (docxpages.rs); the layout is the same
+    let filter = if crate::docxpages::wants_dests(&needles) {
+        PDF_DESTS
+    } else {
+        "pdf"
+    };
+    crate::engines::convert_with(docx, &pdf, work, filter)?;
     let o = capture(Command::new("pdftotext").arg(&pdf).arg("-"))?;
     if !o.status.success() {
         return Err(fail(1, "fb render: pdftotext failed"));
     }
     let pages = crate::docxpages::page_texts(&String::from_utf8_lossy(&o.stdout));
-    crate::docxpages::lookup(&read(&work.join("needles.tsv"))?, &pages).map_err(|e| fail(1, e))
+    // the lines' places, for the position needles of fills (docxpages.rs)
+    let lines = if crate::docxpages::wants_lines(&needles) {
+        let o = capture(
+            Command::new("pdftotext")
+                .arg("-bbox-layout")
+                .arg(&pdf)
+                .arg("-"),
+        )?;
+        if !o.status.success() {
+            return Err(fail(1, "fb render: pdftotext -bbox-layout failed"));
+        }
+        crate::docxpages::bbox_lines(&String::from_utf8_lossy(&o.stdout))
+    } else {
+        vec![]
+    };
+    let dests = if crate::docxpages::wants_dests(&needles) {
+        let o = capture(Command::new("pdfinfo").arg("-dests").arg(&pdf))?;
+        let info = capture(Command::new("pdfinfo").arg(&pdf))?;
+        let height = String::from_utf8_lossy(&info.stdout)
+            .lines()
+            .find_map(|l| l.strip_prefix("Page size:"))
+            .and_then(|s| s.split_whitespace().nth(2))
+            .and_then(|h| h.parse().ok())
+            .unwrap_or(792.0);
+        let raw = std::fs::read(&pdf).map_err(|e| io(&pdf, e))?;
+        crate::docxpages::dests(&String::from_utf8_lossy(&o.stdout), &raw, height)
+    } else {
+        Default::default()
+    };
+    crate::docxpages::lookup_all(&needles, &pages, &lines, &dests).map_err(|e| fail(1, e))
 }
 
 /// Build `sample` into `out` (a .docx): one pass for a filter without needles, otherwise passes until the pages

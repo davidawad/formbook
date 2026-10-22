@@ -8,7 +8,8 @@
 %   \xeglyph{<glyph>}{<regular>}{<bold>}{<italic>}{<bold italic>}   the 2.609 advances, in thousandths of an em:
 %       a glyph narrower in 2.609 is scaled to its advance (| is 606 in 2.005, 225 in 2.609); a wider one is set as
 %       it is and the difference is kept for the segment's end (a space inside a word would read as a word break);
-%   \xeflush   the kept difference as a kern (nothing when there is none).
+%   \xeflush   the kept difference as an empty box (nothing when there is none); and the bold space at the
+%              vendored advance.
 % fb render inlines this file in place of \usepackage{xeschola}. Needs graphicx (\resizebox).
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{xeschola}[2026/10/22 TeX Gyre Schola 2.609 advances]
@@ -36,4 +37,26 @@
 % \xeglyphscaled: the glyph scaled to its advance either way (the slash: a line may end after it, so its width cannot
 % wait for the end of the segment).
 \newcommand\xeglyphscaled[5]{\leavevmode\xe@width{#2}{#3}{#4}{#5}\resizebox{\xe@target}{\height}{#1}}
-\newcommand\xeflush{\ifdim\xe@pend=\z@\else\kern\xe@pend\global\xe@pend=\z@\fi}
+% The kept width is an empty box, not a kern: a kern followed by a space is a place to break the line, and a kern
+% at a break is dropped, so a segment that ends a line would come out narrower than typst sets it (the line fits a
+% word more).
+\newcommand\xeflush{\ifdim\xe@pend=\z@\else\hbox to\xe@pend{}\global\xe@pend=\z@\fi}
+% The bold space: 287/1000 em in TeX Live's bold Schola, 278 in the vendored bold (and in every other shape).
+\AddToHook{selectfont}[xeschola]{\edef\xe@fam{\f@family}\def\xe@qcs{qcs}\ifx\xe@fam\xe@qcs
+  \in@{b}{\f@series}\ifin@\fontdimen2\font=0.278\fontdimen6\font\fi\fi}
+% \xeglyphcentered: as \xeglyph, but a glyph narrower in TeX Live's Schola takes up to 0.09 em of the difference where
+% it stands, centered (0.045 em a side: two such glyphs together stay under pdftotext's word gap of 0.1 em), and only
+% the rest waits for the end of its segment: a parenthesis (333 against 483/1000 em) leaves 0.06 em there instead of
+% 0.15. The shared document model sets it (`\let\xeglyph\xeglyphcentered`, tools/fb/src/enginegen/tex.rs).
+\newdimen\xe@here
+\newcommand\xeglyphcentered[5]{\leavevmode
+  \xe@width{#2}{#3}{#4}{#5}%
+  \setbox\z@\hbox{#1}%
+  \ifdim\xe@target<\wd\z@
+    \resizebox{\xe@target}{\height}{#1}%
+  \else
+    \xe@here=\dimexpr\xe@target-\wd\z@\relax
+    \ifdim\xe@here>0.09\fontdimen6\font \xe@here=0.09\fontdimen6\font\fi
+    \global\advance\xe@pend by \dimexpr\xe@target-\wd\z@-\xe@here\relax
+    \hbox to\dimexpr\wd\z@+\xe@here\relax{\hss\box\z@\hss}%
+  \fi}

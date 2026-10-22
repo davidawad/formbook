@@ -2,9 +2,8 @@
 # ... excluding any addendum." Pages are counted including the cover (32(a)(4)).
 params:
   page_limit: 38
-  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md): latex is generated from typst/layout.yaml (`fb engines gen`, fb-595.54.12)
-  # and breaks every line and page where typst does, so a difference fails. docx held back (report): two authorities
-  # mark the same word ("39-08-01" inside "39-08-01.2"), two identical page needles the docx page lookup cannot both
-  # place (docs/open-items/fb-595.54.77.md).
-  cross_engine_latex: gate
-  cross_engine_docx: report
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md): latex and docx are generated from typst/layout.yaml (`fb engines gen`,
+  # fb-595.54.12) and break every line and page where typst does, so a difference fails. (docx was held back while
+  # the page lookup could not place two authorities marking the same word, "39-08-01" inside "39-08-01.2":
+  # fb-595.54.82 finds such a needle at the same place.)
+  cross_engine: gate

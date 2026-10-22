@@ -1,0 +1,60 @@
+# California Courts of Appeal (calctapp): motion with memorandum (Cal. Rules of Court 8.54, 8.74). The whole layout,
+# as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to rule 8.74(a)-(b) (../rules.md, CALCTAPP-*); lengths in points. No
+# case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # CALCTAPP-FORM-003: 13-point or larger, footnotes included (8.74(b)(1))
+pitch:
+  body: 23.4              # CALCTAPP-FORM-004: lines 1.5 spaced (8.74(b)(2)): 1.5 x 1.2 x 13 pt, Schola's single line
+  single: 15.6            # headings, caption, quotations, footnotes, signature: single spaced (8.74(b)(2))
+margin: {top: 72, bottom: 72, left: 108, right: 108}   # CALCTAPP-FORM-005: 1 in top and bottom, 1-1/2 in at the sides
+indent: 36
+# CALCTAPP-FORM-007: pages numbered consecutively in Arabic numerals, the cover being page 1 (8.74(a)(2)).
+page_number: {align: center, from: 1}
+footnote: {size: 13, gap: 6.5}   # CALCTAPP-FORM-003: footnotes 13-point too, single spaced
+quote: {left: 36, right: 36, above: 10.4, below: 15.6}   # CALCTAPP-FORM-005: quotations block indented, single spaced
+# Headings (single spaced, 8.74(b)(2)), kept with their text: level 1 centered bold capitals, 2 bold, 3 bold italic,
+# their later lines hung half an inch.
+heading:
+  - {align: center, bold: true, upper: true, above: 18.2, below: 13}
+  - {bold: true, hang: 36, above: 15.6, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# CALCTAPP-COVER-001, -002 (8.74(a)(9), 8.204(b)(10)): the court and district, the Court of Appeal number, the
+# caption (each party's role set to the right), the trial court, its number and judge, the title halfway down the
+# rest of the page and counsel (name, State Bar number, address, telephone, e-mail, party represented) at its foot.
+cover:
+  - {text: "{court}", align: center, bold: true, upper: true}
+  - {text: "{district}", align: center, bold: true, upper: true, optional: true}
+  - {text: "Case No. {case_number}", align: center, bold: true, above: 10.4}
+  - each: parties
+    above: 15.6
+    blocks:
+      - {text: "{name}", align: center, above: 6.5}
+      - {text: "{role}", align: center, italic: true, left: 108, optional: true}
+  - {text: "{lower_court_case}", align: center, optional: true, above: 14.3}
+  - {fill: 1}
+  - {text: "{title}", align: center, bold: true, upper: true, left: 29.7, right: 29.7}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - {text: "{names}", bold: true, left: 180, above: 10.4}
+      - {text: "{lines}", left: 180}
+# The signature block (8.74 applies; no rule sets its form): the date, then at the right the firm, a blank line and
+# the "s/" signature underlined, the typed name and the party; never split. Then CALCTAPP-SERV-001 (8.25(a)): the
+# proof of service on its own page, from the frontmatter.
+closing:
+  - group:
+      - {text: "Respectfully submitted this {signature.date}.", optional: true, pitch: body, indent: 36}
+      - {text: "{signature.lines}", left: 234, above: 7.8}
+      - {text: "{signature.signer_line}", underline: true, left: 234, above: 15.6}
+      - {text: "{signature.name}", optional: true, left: 234}
+      - {text: "{signature.signer}", left: 234}
+    above: 15.6
+  - {break: true}
+  - {text: "{service.heading}", align: center, bold: true, upper: true, below: 13}
+  - {text: "{service.paragraphs}", pitch: body, indent: 36}
+  - each: service.recipients
+    blocks:
+      - {text: "{.}", left: 72, above: 13, below: 13}
+  - {text: "{service.closing}", optional: true, pitch: body, indent: 36}
+  - {text: "{service.declarant.signer_line}", underline: true, left: 234, above: 7.8}
+  - {text: "{service.declarant.signer}", left: 234}

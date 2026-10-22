@@ -58,10 +58,10 @@ All 9 PDF pages of `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf` and `.doc
 | 1 | cover | OK. Case number, court, caption (parenthesis and docket centered on the parties), rules around the title, counsel two columns, italics where written. Same in the three engines. |
 | 2 | i | Table of contents. OK. Every entry's page matches the page the heading is on in each engine (typst and LaTeX: the leader stops before the 36 pt page column; Word: the leader runs to the number). |
 | 3–7 | 1–5 | Body. OK. Headings single-spaced (level 1 centered bold, level 2 bold, level 3 bold italic) and kept with the text; paragraphs indented; the block quotation single-spaced half an inch in on both sides; footnote 1 at 11 pt under a short rule on printed page 1. |
-| 8 | 6 | The Rule 20(7) statement, date and signature block. ACCEPTED: the block stands alone on its page (the shared model keeps the closing whole, not with the last paragraph; requested in docs/open-items/fb-595.54.36.md). |
+| 8 | 6 | The conclusion (heading and paragraph), the Rule 20(7) statement, date and signature block. OK: the last paragraph is kept whole with the closing (layout.yaml `keep_with_closing`, fb-595.54.82), as the old template set them in one block; the contents give the conclusion page 6 in the three engines. |
 | 9 | 7 | Certificate of service on its own page. OK. |
 
-No OPEN rows. ACCEPTED: page 8 above; body paragraphs touch at the 19.5 pt pitch (the shared model has no space between body paragraphs; the template had 7.8 pt), the first-line indent marks them; the certificate of service is no longer a row of the table of contents (it is set by the closing, not a body heading).
+No OPEN rows. ACCEPTED: body paragraphs touch at the 19.5 pt pitch (the shared model has no space between body paragraphs; the template had 7.8 pt), the first-line indent marks them; the certificate of service is no longer a row of the table of contents (it is set by the closing, not a body heading).
 
 ## Gaps
 

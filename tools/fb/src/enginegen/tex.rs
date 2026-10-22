@@ -47,12 +47,16 @@ fn markers(l: &Value) -> String {
 
 pub fn template(l: &Value, face: &str) -> Result<String, String> {
     let (pkg, ellipsis) = latex_face(face)?;
-    // three periods (newtx: 0.25 em each) kerned to the face's ellipsis, read as one "…" (/ActualText)
+    // three periods (newtx: 0.25 em each; latex_period) kerned to the face's ellipsis, read as one "…" (/ActualText)
     let ellipsis = match ellipsis {
         Some(adv) => format!(
             "\\newcommand\\xd@ellipsis{{\\pdfliteral page{{/Span<</ActualText<FEFF2026>>>BDC}}.\\kern{k}em.\\kern{k}em.\\pdfliteral page{{EMC}}}}",
-            k = fmt((adv - 0.75) / 2.0)
+            k = fmt((adv - 3.0 * super::gen::latex_period(face)) / 2.0)
         ),
+        // Schola: three periods as one glyph at the vendored font's ellipsis advances (lib/latex/xeschola.lua's)
+        // EB Garamond: three periods spread in a box of the vendored ellipsis's advance in the current shape (xdoc.sty)
+        None if face == "EB Garamond" => "\\newcommand\\xd@ellipsis{\\xd@glyph{2026}{.\\hfil.\\hfil.}{0.686}{0.746}{0.671}{0.764}}".into(),
+        None if super::gen::latex_glyphs(face) == Some("schola") => "% Schola: each glyph at the vendored advance where it stands (lib/latex/xeschola.sty)\n\\let\\xeglyph\\xeglyphcentered\n\\newcommand\\xd@ellipsis{\\pdfliteral page{/Span<</ActualText<FEFF2026>>>BDC}\\xeglyph{...}{860}{1000}{860}{1000}\\pdfliteral page{EMC}}".into(),
         None => "\\newcommand\\xd@ellipsis{\\textellipsis}".into(),
     };
     let size = num(l, "size", None)?;
@@ -75,10 +79,27 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
         .and_then(|p| p.get("align"))
         .and_then(Value::as_str)
         .unwrap_or("center");
+    // the number alone, or the layout's `page_number.text` ("Page {page} of {pages}": {pages} the last page's number,
+    // \pageref* of the label lib/latex/xdoc.lua sets at the end)
+    let shown = match l
+        .get("page_number")
+        .and_then(|p| p.get("text"))
+        .and_then(Value::as_str)
+    {
+        // (after an \hfil: a brace ends the control word before the text)
+        Some(t) => {
+            "{}".to_string()
+                + &t.replace('\\', "\\textbackslash{}")
+                    .replace(['&', '%', '$', '#', '_'], "")
+                    .replace("{pages}", "\\pageref*{xd@lastpage}")
+                    .replace("{page}", "\\thepage{}")
+        }
+        None => "\\thepage".to_string(),
+    };
     let number = match align {
-        "left" => "\\thepage\\hfil",
-        "right" => "\\hfil\\thepage",
-        _ => "\\hfil\\thepage\\hfil",
+        "left" => format!("{shown}\\hfil"),
+        "right" => format!("\\hfil{shown}"),
+        _ => format!("\\hfil{shown}\\hfil"),
     };
     let style = if l.get("page_number").is_some_and(Value::is_null) {
         "empty"
@@ -86,6 +107,8 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
         "plain"
     };
     let _ = from; // pages before `from` are unnumbered: lib/latex/xdoc.lua sets \thispagestyle{empty}
+    let (paper, _) = super::gen::paper(l)?;
+    let justify = l.get("justify").and_then(Value::as_bool).unwrap_or(false);
     Ok(format!(
         r#"% {head}
 % The shared document model in LaTeX (lib/latex/xdoc.lua writes $$body$$) on the cross-engine layout model
@@ -97,10 +120,10 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
 {pkg}
 % the page (layout.yaml margin); the page number's baseline {skip} bp below the text, where typst sets it; the text
 % block {bias} bp wider at the right than typst's, the measured drift of the face's advances (gen.rs latex_bias)
-\usepackage[letterpaper,top={t}bp,bottom={b}bp,left={le}bp,right={r}bp,headheight=0pt,headsep=0pt,footskip={skip}bp]{{geometry}}
+\usepackage[{paper},top={t}bp,bottom={b}bp,left={le}bp,right={r}bp,headheight=0pt,headsep=0pt,footskip={skip}bp]{{geometry}}
 \usepackage{{enumitem}}
 \usepackage[hidelinks]{{hyperref}}
-\usepackage{{xengine}} % lib/latex/xengine.sty, inlined by fb render
+{xcolor}\usepackage{{xengine}} % lib/latex/xengine.sty, inlined by fb render
 \usepackage{{xdoc}} % lib/latex/xdoc.sty (page bookkeeping), inlined by fb render
 \makeatletter
 % the body: {size} bp type in {body} bp line boxes, the first line indented {indent} bp (layout.yaml size, pitch.body,
@@ -108,7 +131,7 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
 \renewcommand\normalsize{{\xe@lines{{{size}}}{{{body}}}}}
 \normalsize
 \setlength{{\parindent}}{{{indent}bp}}
-% the page number: centered (layout.yaml page_number) in a single line box
+{justify}% the page number: centered (layout.yaml page_number) in a single line box
 \def\ps@plain{{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
   \def\@oddfoot{{\reset@font\xe@lines{{{size}}}{{{single}}}{number}}}\let\@evenfoot\@oddfoot}}
 \pagestyle{{{style}}}
@@ -122,7 +145,7 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
 \setlength{{\skip\footins}}{{{clear}bp}}
 \renewcommand\footnoterule{{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}}
 \xe@footnotemarks{{{size}}}
-\renewcommand\@makefntext[1]{{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip={gap}bp\relax
+\renewcommand\@makefntext[1]{{\rightskip={fnright}\relax\parfillskip=0pt plus 1{fnfill}\relax\parskip={gap}bp\relax
   \vskip 0pt\noindent\raisebox{{{nraise}bp}}{{\fontsize{{{nmark}bp}}{{0bp}}\selectfont\@thefnmark}}\hskip 0.25em #1}}
 % an ellipsis as typst and Word set it (lib/latex/xdoc.lua writes \xd@ellipsis for "…")
 {ellipsis}
@@ -153,5 +176,20 @@ $body$
         nmark = fmt(0.58 * nsize),
         markers = markers(l),
         ellipsis = ellipsis,
+        justify = if justify { JUSTIFY } else { "" },
+        fnright = if justify { "0pt" } else { "0pt plus 1fil" },
+        xcolor = if l.get("cover_fill").is_some() {
+            "% a coloured cover (layout.yaml cover_fill): \\pagecolor on its pages (lib/latex/xdoc.lua)\n\\usepackage{xcolor}\n"
+        } else {
+            ""
+        },
+        fnfill = if justify { "fill" } else { "fil" },
     ))
 }
+
+/// Justified text (layout.yaml `justify: true`; lib/typst/xdoc.typ justified): every line of the body (lib/latex/xdoc.lua
+/// sets it with \xd@justtrue) but a paragraph's last at the full measure. Its interword spaces stretch by 1fil and never
+/// shrink: every line's badness is 0, so TeX's breaks stay the first-fit ones (a finite stretch large enough for that
+/// overflows TeX's glue totals); the last line keeps its natural spaces (\parfillskip 1fill outranks them); the
+/// layout's blocks (cover, headings, tables) set \xd@justfalse and stay ragged.
+const JUSTIFY: &str = "% justified text (layout.yaml justify): in the body, spaces that stretch and never shrink; the lines break where\n% they do ragged\n\\newif\\ifxd@just\n\\AddToHook{selectfont}[xdjustify]{\\ifxd@just\\spaceskip=\\fontdimen2\\font plus 1fil\\relax\\fi}\n\\DeclareHookRule{selectfont}{xengine}{before}{xdjustify}\n\\@rightskip=0pt\\rightskip=0pt\\parfillskip=0pt plus 1fill\n";

@@ -15,17 +15,23 @@
 
 \newcommand\xd@amark[1]{\protected@write\@auxout{}{\string\xd@aat{#1}{\thepage}}}
 % A page joins authority k's list unless it is the last one there (the marks come in page order).
+% xd@an@k counts the pages of the list.
 \newcommand\xd@aat[2]{%
   \@ifundefined{xd@a@#1}{%
     \expandafter\xdef\csname xd@a@#1\endcsname{#2}%
+    \expandafter\xdef\csname xd@an@#1\endcsname{1}%
   }{%
     \edef\xd@last{\csname xd@al@#1\endcsname}\edef\xd@this{#2}%
     \ifx\xd@last\xd@this\else
       \expandafter\xdef\csname xd@a@#1\endcsname{\csname xd@a@#1\endcsname, #2}%
+      \expandafter\xdef\csname xd@an@#1\endcsname{\the\numexpr\csname xd@an@#1\endcsname+1\relax}%
     \fi
   }%
   \expandafter\xdef\csname xd@al@#1\endcsname{#2}}
 \newcommand\xd@apages[1]{\@ifundefined{xd@a@#1}{--}{\csname xd@a@#1\endcsname}}
+% \xd@apagesp{<k>}{<n>}: \xd@apages, or "passim" in italics for a list of n pages or more (authorities.passim).
+\newcommand\xd@apagesp[2]{\@ifundefined{xd@a@#1}{--}{%
+  \ifnum\csname xd@an@#1\endcsname<#2 \csname xd@a@#1\endcsname\else{\itshape passim}\fi}}
 
 % \xd@row{<above>}{<hang>}{<text>}{<page>}: lib/latex/xengine.sty's \xe@row (the text wraps before a column of \xe@col
 % kept for the page, a leader from three spaces after it to the page), with the room LibreOffice keeps before the page
@@ -40,3 +46,23 @@
 % \xd@ul{<text>}: underlined as typst and Word underline (Times New Roman's underline 0.109 em below the baseline,
 % 0.049 em thick); \underline draws below the box's depth, through the next line's box.
 \newcommand\xd@ul[1]{\setbox0=\hbox{#1}\rlap{\vrule height -0.0845em depth 0.1335em width \wd0}\box0}
+% \xd@ulp{<text>}{<words>}: underlined text that may break: <text> as \xd@ul when it fits the line, else <words>,
+% each word in \xd@ul and the spaces between them \xd@ulsp (lib/latex/xdoc.lua underlined).
+\newcommand\xd@ulp[2]{\setbox0=\hbox{#1}%
+  \ifdim\wd0>\dimexpr\hsize-\leftskip-\rightskip\relax #2\else\rlap{\vrule height -0.0845em depth 0.1335em width \wd0}\box0\fi}
+% \xd@ulsp: an underlined interword space: a rule leader as wide as the space, a place to break (and dropped there).
+\newcommand\xd@ulsp{\leaders\vrule height -0.0845em depth 0.1335em\hskip\fontdimen2\font\relax}
+
+% \xd@em: emphasis toggles italics, as typst's emph does: upright inside a slanted face, italic otherwise.
+\newcommand\xd@em{\ifdim\fontdimen1\font>\z@\upshape\else\itshape\fi}
+
+% \xd@glyph{<hex>}{<glyph>}{<regular>}{<bold>}{<italic>}{<bold italic>}: a character pdfLaTeX's face lacks (an okina,
+% a minus, an arrow), set as a glyph of the face centred in a box of the typst face's advance in the current shape
+% (the four advances in em), the PDF text the character itself (/ActualText U+<hex>).
+\newcommand\xd@glyph[6]{\begingroup
+  \if b\expandafter\@car\f@series\@nil
+    \ifdim\fontdimen1\font>\z@\dimen0=#6\fontdimen6\font\else\dimen0=#4\fontdimen6\font\fi
+  \else
+    \ifdim\fontdimen1\font>\z@\dimen0=#5\fontdimen6\font\else\dimen0=#3\fontdimen6\font\fi
+  \fi
+  \pdfliteral page{/Span<</ActualText<FEFF#1>>>BDC}\hbox to\dimen0{\hss#2\hss}\pdfliteral page{EMC}\endgroup}

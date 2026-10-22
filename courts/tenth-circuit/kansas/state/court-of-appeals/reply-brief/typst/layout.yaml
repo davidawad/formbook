@@ -30,9 +30,11 @@ cover:
       - {text: "{designation}", align: center, italic: true}
   - {text: "{proceeding}", align: center, above: 21.6}
   - {text: "{trial_court_case}", align: center, optional: true}
-  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 72}
+  # the title halfway between the caption and counsel, counsel at the foot of the cover (the exemplars)
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4}
+  - {fill: 1}
   - each: counsel
-    above: 72
     blocks:
       - {text: "{names}", bold: true, left: 230.4, above: 7.8}
       - {text: "{lines}", left: 230.4, optional: true}

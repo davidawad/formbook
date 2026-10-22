@@ -103,7 +103,8 @@ local function inl(x, o)
     elseif t == "Space" or t == "SoftBreak" or t == "LineBreak" then
       out[#out + 1] = runs(" ", o)
     elseif t == "Emph" then
-      out[#out + 1] = inl(el.content, merge(o, { i = true }))
+      -- emphasis toggles italics, as typst's emph does (roman inside italic text)
+      out[#out + 1] = inl(el.content, merge(o, { i = not o.i }))
     elseif t == "Strong" then
       out[#out + 1] = inl(el.content, merge(o, { b = true }))
     elseif t == "Quoted" then

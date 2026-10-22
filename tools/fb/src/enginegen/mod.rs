@@ -173,6 +173,6 @@ fn row(n: usize, f: &[usize], ts: &[Template]) -> String {
 }
 
 #[cfg(test)]
-mod model_tests;
+pub mod model_tests;
 #[cfg(test)]
 mod tests;

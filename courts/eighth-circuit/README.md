@@ -40,7 +40,7 @@ Courts under `courts/eighth-circuit` (38).
 | [Supreme Court of Missouri](missouri/state/supreme-court) | `mo` | up for review | 6/6 | 4/4 | 4/4 | 29 |
 | [Nebraska Court of Appeals](nebraska/state/court-of-appeals) | `nebctapp` | up for review | 4/4 | — | — | 29 |
 | [Nebraska Supreme Court](nebraska/state/supreme-court) | `neb` | up for review | 5/5 | — | — | 29 |
-| [North Dakota Court of Appeals](north-dakota/state/court-of-appeals) | `ndctapp` | up for review | 3/3 | 3/3 | 1/1 | 29 |
+| [North Dakota Court of Appeals](north-dakota/state/court-of-appeals) | `ndctapp` | up for review | 3/3 | 3/3 | 2/2 | 29 |
 | [North Dakota Supreme Court](north-dakota/state/supreme-court) | `nd` | up for review | 7/7 | 6/6 | 5/5 | 29 |
 | [Supreme Court of South Dakota](south-dakota/state/supreme-court) | `sd` | up for review | 4/4 | — | — | 29 |
 

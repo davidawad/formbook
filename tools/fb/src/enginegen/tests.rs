@@ -108,8 +108,19 @@ fn one_latex_face_per_typst_face() {
         "\\usepackage{newtxtext,newtxmath}"
     );
     assert_eq!(latex_face("Times New Roman").unwrap().1, Some(1.0));
-    assert!(latex_face("TeX Gyre Schola").is_err());
+    let (pkg, _) = latex_face("TeX Gyre Schola").unwrap();
+    assert!(pkg.contains("\\usepackage{tgschola}") && pkg.contains("\\usepackage{xeschola}"));
+    assert_eq!(super::gen::latex_glyphs("TeX Gyre Schola"), Some("schola"));
+    assert_eq!(super::gen::latex_glyphs("Times New Roman"), None);
     assert!(latex_face("Comic Sans").is_err());
+    // Arial and Liberation Sans: TeX Gyre Heros, sans serif by default, the period 278/1000 em
+    let (pkg, ell) = latex_face("Liberation Sans").unwrap();
+    assert!(pkg.contains("\\usepackage{tgheros}") && pkg.contains("\\familydefault{\\sfdefault}"));
+    assert_eq!((ell, super::gen::latex_period("Arial")), (Some(1.0), 0.278));
+    assert_eq!(
+        super::gen::face_advances("Liberation Sans"),
+        Some([0.556, 0.278, 0.278, 0.333])
+    );
 }
 
 #[test]
@@ -145,4 +156,18 @@ fn generates_the_four_engine_files() {
     assert!(files[3].1.contains("return require(\"docx.xdoc\")({"));
     assert!(files[1].1.contains("[\"rule\"] = 0.5,"));
     assert!(super::gen::generate(&layout("size: 13\n"), "Times New Roman").is_err());
+}
+
+#[test]
+fn the_ellipsis_is_kerned_to_the_face_s_advance() {
+    // three periods kerned to 1 em: newtx's period 0.25 em leaves 0.125 em twice, Heros's 0.278 em 0.083
+    let l = layout(LAYOUT);
+    let tnr = super::gen::generate(&l, "Times New Roman").unwrap();
+    assert!(tnr[0].1.contains(".\\kern0.125em.\\kern0.125em."));
+    let sans = super::gen::generate(&l, "Liberation Sans").unwrap();
+    assert!(
+        sans[0].1.contains(".\\kern0.083em.\\kern0.083em."),
+        "{}",
+        sans[0].1
+    );
 }

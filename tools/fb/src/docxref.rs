@@ -438,18 +438,28 @@ pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
     Ok(std::process::ExitCode::SUCCESS)
 }
 
-/// The reader of every pandoc pass for the court's docx folder `d` (`pandoc-from`, default `markdown+smart`).
+/// The reader of a folder on the shared document model (a generated `xdoc.lua`): pandoc's markdown as CommonMark reads
+/// a heading (typst's cmarker): one may follow a paragraph line without a blank line.
+pub const MODEL_FROM: &str = "markdown+smart-blank_before_header";
+
+/// The reader of every pandoc pass for the court's docx folder `d` (`pandoc-from`, default `markdown+smart`, or
+/// MODEL_FROM for a folder on the shared document model).
 pub fn pandoc_from(d: &Path) -> Res<String> {
+    let default = if d.join("xdoc.lua").is_file() {
+        MODEL_FROM
+    } else {
+        "markdown+smart"
+    };
     let spec = d.join("reference.xml");
     if !spec.is_file() {
-        return Ok("markdown+smart".into());
+        return Ok(default.into());
     }
     let text = read(&spec)?;
     let root = text
         .find("<reference")
         .and_then(|i| text[i..].find('>').map(|j| &text[i..i + j]))
         .ok_or_else(|| bad("no <reference> element"))?;
-    Ok(attr(root, "pandoc-from").unwrap_or_else(|| "markdown+smart".into()))
+    Ok(attr(root, "pandoc-from").unwrap_or_else(|| default.into()))
 }
 
 /// The court's docx folder as the engine runs it: `d` itself, or, when `d` has a `reference.xml`, a copy of it

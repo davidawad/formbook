@@ -66,7 +66,15 @@ fn pandoc(court: &Path, args: &[String], meta: Option<&Path>) -> Res<()> {
     }
     let st = cmd
         .current_dir(court)
-        .args(["--from", "markdown+smart"])
+        // a folder on the shared document model reads headings as typst does (docxref.rs MODEL_FROM)
+        .args([
+            "--from",
+            if court.join("latex/xdoc.lua").is_file() {
+                crate::docxref::MODEL_FROM
+            } else {
+                "markdown+smart"
+            },
+        ])
         .args(args)
         .status()
         .map_err(|e| fail(2, format!("fb render: cannot run pandoc: {e}")))?;
@@ -370,6 +378,11 @@ fn check_docx(docx: &Path, work: &Path) -> Res<()> {
 
 /// LibreOffice headless conversion of the docx to `out_pdf`.
 pub(crate) fn convert(docx: &Path, out_pdf: &Path, work: &Path) -> Res<()> {
+    convert_with(docx, out_pdf, work, "pdf")
+}
+
+/// `convert` with LibreOffice's `--convert-to` argument `filter` (the PDF export and its options).
+pub(crate) fn convert_with(docx: &Path, out_pdf: &Path, work: &Path, filter: &str) -> Res<()> {
     // a document that turns ligatures off (Word's w14:ligatures) is converted from a copy that says so to LibreOffice
     let docx = &crate::doclig::for_libreoffice(docx, work)?;
     let soffice = std::env::var_os("SOFFICE")
@@ -387,7 +400,7 @@ pub(crate) fn convert(docx: &Path, out_pdf: &Path, work: &Path) -> Res<()> {
             "-env:UserInstallation=file://{}/profile",
             work.display()
         ))
-        .args(["--headless", "--convert-to", "pdf", "--outdir"])
+        .args(["--headless", "--convert-to", filter, "--outdir"])
         .arg(work)
         .arg(docx),
     )?;

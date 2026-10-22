@@ -124,7 +124,7 @@ fn without_leaders(m: &Measured) -> Measured {
                 .words
                 .iter()
                 .flat_map(|w| {
-                    // a no-break space is a space: Word's keeps "§ 1331" in one pdftotext word; zero-width characters
+                    // a no-break space is a space: Word's keeps "Â§ 1331" in one pdftotext word; zero-width characters
                     // (the break rules of a URL: lib/pandoc/xengine.lua urls) are not text
                     w.t.replace(['\u{200b}', '\u{2060}', '\u{feff}'], "")
                         .split('\u{a0}')
@@ -135,10 +135,38 @@ fn without_leaders(m: &Measured) -> Measured {
                         .collect::<Vec<_>>()
                 })
                 .collect();
+            l.words = join_after_slash(std::mem::take(&mut l.words));
         }
         p.lines.retain(|l| !l.words.is_empty());
     }
     m
+}
+
+/// Characters LibreOffice sets from a fallback face, which its PDF text splits a word at.
+const FALLBACK: [char; 3] = ['\u{2bb}', '\u{2bc}', '\u{b4}'];
+
+/// The words of a line with a word that ends in a slash (or another break character of a URL: . ? & = # - _)
+/// joined to the next when the two touch: the zero-width space lib/docx/xdoc.lua writes there (typst may break a
+/// line after the slash of "s/Anna", every engine between the pieces of a URL) is a word boundary in LibreOffice's
+/// PDF text, not a space. So is a character LibreOffice sets from a fallback face (an okina, a modifier apostrophe,
+/// an acute: Times New Roman lacks them), on either side of the boundary.
+fn join_after_slash(words: Vec<crate::measure::Word>) -> Vec<crate::measure::Word> {
+    let mut out: Vec<crate::measure::Word> = Vec::with_capacity(words.len());
+    for w in words {
+        match out.last_mut() {
+            Some(prev)
+                if (prev.t.ends_with(['/', '.', '?', '&', '=', '#', '-', '_'])
+                    || prev.t.ends_with(FALLBACK)
+                    || w.t.starts_with(FALLBACK))
+                    && (w.x0 - prev.x1).abs() < 0.5 =>
+            {
+                prev.t.push_str(&w.t);
+                prev.x1 = w.x1;
+            }
+            _ => out.push(w),
+        }
+    }
+    out
 }
 
 pub fn compare(reference: &Measured, other: &Measured) -> Cross {
@@ -252,6 +280,32 @@ pub fn render(c: &Cross) -> String {
 mod tests {
     use super::*;
     use crate::diff::tests::doc;
+
+    #[test]
+    fn a_word_split_after_a_slash_is_one_word() {
+        // LibreOffice's text of "s/Anna" with the zero-width space after the slash: two words that touch
+        let a = doc(&[&["by s/Anna Barvir"]]);
+        let mut b = doc(&[&["by s/ Anna Barvir"]]);
+        let w = &mut b.pages[0].lines[0].words;
+        w[2].x0 = w[1].x1;
+        let c = compare(&a, &b);
+        assert_eq!((c.lines, c.same), (1, 1), "{c:?}");
+        // a space after the slash stays a word boundary
+        let c = compare(&a, &doc(&[&["by s/ Anna Barvir"]]));
+        assert_eq!(c.same, 0);
+    }
+
+    #[test]
+    fn a_word_split_at_an_okina_is_one_word() {
+        // LibreOffice sets the okina of "Hawaiʻi" from a fallback face: three words that touch in its text
+        let a = doc(&[&["in Hawai\u{2bb}i law"]]);
+        let mut b = doc(&[&["in Hawai \u{2bb} i law"]]);
+        let w = &mut b.pages[0].lines[0].words;
+        w[2].x0 = w[1].x1;
+        w[3].x0 = w[2].x1;
+        let c = compare(&a, &b);
+        assert_eq!((c.lines, c.same), (1, 1), "{c:?}");
+    }
 
     #[test]
     fn identical_renders_pass() {

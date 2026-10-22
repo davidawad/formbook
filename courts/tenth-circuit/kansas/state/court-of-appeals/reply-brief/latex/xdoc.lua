@@ -96,17 +96,21 @@ return require("latex.xdoc")({
       ["optional"] = true,
     },
     {
+      ["fill"] = 1,
+    },
+    {
       ["text"] = "{brief_title}",
       ["align"] = "center",
       ["bold"] = true,
       ["upper"] = true,
       ["size"] = 16,
       ["pitch"] = 18.4,
-      ["above"] = 72,
+    },
+    {
+      ["fill"] = 1,
     },
     {
       ["each"] = "counsel",
-      ["above"] = 72,
       ["blocks"] = {
         {
           ["text"] = "{names}",

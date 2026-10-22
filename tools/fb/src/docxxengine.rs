@@ -30,6 +30,8 @@ pub struct Recipe {
     pub note: String,
     pub note_size: String,
     pub footer: String,
+    /// Body Text justified (`justify="true"`; layout.yaml justify): every line but the last at the full measure
+    pub justify: bool,
 }
 
 /// The parameters from the `<reference>` start tag (`attr` reads one attribute); `font` is the typst face.
@@ -49,6 +51,7 @@ pub fn recipe(attr: impl Fn(&str) -> Option<String>, font: &str) -> Result<Recip
         note: or("note", &single),
         note_size: or("note-size", &size),
         footer: or("footer", "432"),
+        justify: attr("justify").as_deref() == Some("true"),
         size,
         single,
         indent,
@@ -130,9 +133,14 @@ fn edit(styles: &str, r: &Recipe) -> Result<String, String> {
         &mut s,
         "BodyText",
         &format!(
-            r#"<w:pPr>{}<w:ind w:firstLine="{}"/></w:pPr>"#,
+            r#"<w:pPr>{}<w:ind w:firstLine="{}"/>{}</w:pPr>"#,
             exact("0", "0", &r.body),
-            r.indent
+            r.indent,
+            if r.justify {
+                r#"<w:jc w:val="both"/>"#
+            } else {
+                ""
+            }
         ),
     )?;
     for n in 1..=5 {

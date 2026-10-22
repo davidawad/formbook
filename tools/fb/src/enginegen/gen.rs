@@ -94,8 +94,10 @@ pub fn validate(l: &Value, path: &str, errs: &mut Vec<String>) {
     }
 }
 
-/// A heading style with a `number` (lib/pandoc/xdoc.lua number_headings) sets the label in a box of its hanging indent
-/// (typst), `\hbox to` it (LaTeX) or a tab to it (Word): it needs a `hang` and a left-aligned heading.
+/// A heading style with a `number` (lib/pandoc/xdoc.lua heading_labels) has one counting symbol in it (a literal before
+/// it goes in `number_prefix`); a label in a box (`label_box`, else a `hang` over 0: lib/pandoc/xdoc.lua label_width)
+/// sets the label in a box that wide (typst), `\hbox to` it (LaTeX) or a tab to it (Word), which needs a left-aligned
+/// heading unless the label has a line of its own (`label_line`).
 pub fn validate_numbers(l: &Value, errs: &mut Vec<String>) {
     let Some(hs) = l.get("heading").and_then(Value::as_sequence) else {
         return;
@@ -108,19 +110,29 @@ pub fn validate_numbers(l: &Value, errs: &mut Vec<String>) {
                 "layout.yaml: `heading[{i}].number` = {pat:?}: one counting symbol (1, I, i, A or a)"
             ));
         }
-        if h.get("hang").and_then(Value::as_f64).unwrap_or(0.0) <= 0.0 {
-            errs.push(format!(
-                "layout.yaml: `heading[{i}].number` needs a `hang` (the label's box)"
-            ));
-        }
-        if h.get("align")
-            .and_then(Value::as_str)
-            .is_some_and(|a| a != "left")
+        let boxed = h.get("label_box").is_some()
+            || h.get("hang").and_then(Value::as_f64).unwrap_or(0.0) > 0.0;
+        let own_line = h.get("label_line").and_then(Value::as_bool) == Some(true);
+        if boxed
+            && !own_line
+            && h.get("align")
+                .and_then(Value::as_str)
+                .is_some_and(|a| a != "left")
         {
             errs.push(format!(
-                "layout.yaml: `heading[{i}].number` needs a left-aligned heading"
+                "layout.yaml: `heading[{i}].number` in a box needs a left-aligned heading"
             ));
         }
+    }
+}
+
+/// The paper (layout.yaml `paper`: `letter`, the default, 612 x 792 pt, or `legal`, 612 x 1008 pt): its LaTeX geometry
+/// option and its height in twips (the width is 8.5 in, 12240 twips, on both).
+pub fn paper(l: &Value) -> Result<(&'static str, u32), String> {
+    match l.get("paper").map(|p| p.as_str().unwrap_or("?")) {
+        None | Some("letter") => Ok(("letterpaper", 15840)),
+        Some("legal") => Ok(("legalpaper", 20160)),
+        Some(p) => Err(format!("layout.yaml: `paper` = {p:?}: letter or legal")),
     }
 }
 
@@ -179,15 +191,82 @@ pub fn latex_face(face: &str) -> Result<(&'static str, Option<f64>), String> {
         "Times New Roman" | "Liberation Serif" | "TeX Gyre Termes" => {
             Ok(("\\usepackage{newtxtext,newtxmath}", Some(1.0)))
         }
-        "EB Garamond" => Ok(("\\usepackage{ebgaramond}", None)),
+        // EB Garamond: lining tabular figures (the vendored font's defaults; the package's are old-style and
+        // proportional), its advances then the vendored font's but a regular T (latex_specials) and the ellipsis (tex.rs:
+        // \\xd@glyph at its four advances)
+        "EB Garamond" => Ok(("\\usepackage[lining,tabular]{ebgaramond}", None)),
         "Gelasio" => Ok(("\\usepackage{gelasio}", None)),
-        // lib/latex/xeschola.lua (the vendored Schola's advances) is not yet run by lib/latex/xdoc.lua
-        "TeX Gyre Schola" | "Century Schoolbook" => Err(format!(
-            "`{face}`: the shared document model does not set Schola in LaTeX yet (lib/latex/xeschola.lua)"
+        // TeX Live's Type 1 Schola, with the advances of the vendored TeX Gyre Schola 2.609 where they differ
+        // (lib/latex/xeschola.sty, which needs graphicx; lib/latex/xdoc.lua runs lib/latex/xeschola.lua: latex_glyphs);
+        // the ellipsis is xeschola's glyph (\xd@ellipsis, tex.rs)
+        // Arial (Fla. R. App. P. 9.045(b)) and its metric twin Liberation Sans: TeX Gyre Heros, a Helvetica clone, whose
+        // advances (and Arial's) are Liberation Sans's in all four shapes, spaces included (measured: within 0.0002 em);
+        // the ellipsis 1000/1000 em, the period 278
+        "Liberation Sans" | "Arial" | "TeX Gyre Heros" => Ok((
+            "\\usepackage{tgheros}\n\\renewcommand\\familydefault{\\sfdefault}",
+            Some(1.0),
+        )),
+        // Bookman Old Style (Fla. R. App. P. 9.045(b)) as TeX Gyre Bonum: TeX Live's Type 1 tgbonum has the vendored
+        // Bonum's advances in all four shapes (the printable ASCII, quotes, dashes, § and ¶ measured at 1000 pt: within
+        // 0.0005 em); its \\textellipsis is three spaced periods (1.44 em), the font's glyph 1 em: \\xd@ellipsis
+        "TeX Gyre Bonum" | "Bookman Old Style" => Ok(("\\usepackage{tgbonum}", Some(1.0))),
+        "TeX Gyre Schola" | "Century Schoolbook" => Ok((
+            "\\usepackage{tgschola}\n\\usepackage{graphicx}\n\\usepackage{xeschola} % lib/latex/xeschola.sty, inlined by fb render",
+            None,
         )),
         f => Err(format!(
-            "no LaTeX face for `{f}` (one face per template: newtx, tgschola, ebgaramond, gelasio)"
+            "no LaTeX face for `{f}` (one face per template: newtx, tgschola, tgheros, tgbonum, ebgaramond, gelasio)"
         )),
+    }
+}
+
+/// The glyph filter lib/latex/xdoc.lua runs for a face whose TeX Live advances differ from the vendored font's
+/// (layout key `latex_glyphs` of the generated latex/xdoc.lua): Schola's (lib/latex/xeschola.lua).
+pub fn latex_glyphs(face: &str) -> Option<&'static str> {
+    match face {
+        "TeX Gyre Schola" | "Century Schoolbook" => Some("schola"),
+        _ => None,
+    }
+}
+
+/// The characters whose TeX Live advance differs from the vendored font's and that lib/latex/xdoc.lua sets in a box of
+/// the vendored advance (the generated latex/xdoc.lua's `latex_specials`: character -> code point, LaTeX, the regular,
+/// bold, italic and bold italic advances in em; measured with typst and pdfLaTeX at 1000 pt); None for the faces that
+/// need none (Times New Roman has lib/latex/xdoc.lua's own table).
+pub fn latex_specials(face: &str) -> Option<Value> {
+    let table: &[(&str, &str, &str, [f64; 4])] = match face {
+        // ebgaramond's regular T is 0.667 em, the vendored font's 0.670
+        "EB Garamond" => &[("T", "0054", "T", [0.67, 0.695, 0.622, 0.676])],
+        _ => return None,
+    };
+    let mut m = serde_yaml::Mapping::new();
+    for (c, hex, tex, adv) in table {
+        let mut row: Vec<Value> = vec![(*hex).into(), (*tex).into()];
+        row.extend(adv.iter().map(|a| Value::from(*a)));
+        m.insert((*c).into(), Value::Sequence(row));
+    }
+    Some(Value::Mapping(m))
+}
+
+/// The advances (em) of a face's digit, comma, space and hyphen, which set the width of a page list in Word (the
+/// generated docx/xdoc.lua's `face_advances`, lib/docx/xdoc.lua list_width), as typst measures the vendored font;
+/// None for Times New Roman, lib/docx/xdoc.lua's own.
+pub fn face_advances(face: &str) -> Option<[f64; 4]> {
+    match face {
+        "TeX Gyre Schola" | "Century Schoolbook" => Some([0.556, 0.278, 0.278, 0.333]),
+        "Liberation Sans" | "Arial" | "TeX Gyre Heros" => Some([0.556, 0.278, 0.278, 0.333]),
+        "TeX Gyre Bonum" | "Bookman Old Style" => Some([0.62, 0.32, 0.32, 0.4]),
+        "EB Garamond" => Some([0.48, 0.23, 0.2, 0.274]),
+        _ => None,
+    }
+}
+
+/// The period's advance (em) of a face's LaTeX package: \\xd@ellipsis kerns three of them to the face's ellipsis.
+pub fn latex_period(face: &str) -> f64 {
+    match face {
+        "Liberation Sans" | "Arial" | "TeX Gyre Heros" => 0.278,
+        "TeX Gyre Bonum" | "Bookman Old Style" => 0.32,
+        _ => 0.25,
     }
 }
 
@@ -216,14 +295,34 @@ pub fn generate(l: &Value, face: &str) -> Result<Files, String> {
     let mut errs = Vec::new();
     validate(l, "", &mut errs);
     validate_numbers(l, &mut errs);
+    if let Err(e) = paper(l) {
+        errs.push(e);
+    }
     if !errs.is_empty() {
         return Err(errs.join("\n"));
     }
-    let spec = lua(l, 0);
-    // the LaTeX text block is wider by the face's measured bias (latex_bias), and lib/latex/xdoc.lua must know it
+    // Word measures a page list with the face's advances (Times New Roman's unless given)
+    let mut wl = l.clone();
+    if let (Some(m), Some(a)) = (wl.as_mapping_mut(), face_advances(face)) {
+        let adv: serde_yaml::Mapping = ["digit", "comma", "space", "hyphen"]
+            .iter()
+            .zip(a)
+            .map(|(k, v)| (Value::from(*k), Value::from(v)))
+            .collect();
+        m.insert("face_advances".into(), Value::Mapping(adv));
+    }
+    let spec = lua(&wl, 0);
+    // the LaTeX text block is wider by the face's measured bias (latex_bias), and lib/latex/xdoc.lua must know it,
+    // and the glyph filter of the face (latex_glyphs)
     let mut lt = l.clone();
     if let Some(m) = lt.as_mapping_mut() {
         m.insert("latex_bias".into(), latex_bias(face).into());
+        if let Some(g) = latex_glyphs(face) {
+            m.insert("latex_glyphs".into(), g.into());
+        }
+        if let Some(s) = latex_specials(face) {
+            m.insert("latex_specials".into(), s);
+        }
     }
     let latex_spec = lua(&lt, 0);
     let latex_lua = format!(

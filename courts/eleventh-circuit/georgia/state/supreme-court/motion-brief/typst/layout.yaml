@@ -50,6 +50,9 @@ cover:
     above: 15.6
   - {text: "{attorneys_for}", align: center, bold: true, above: 15.6}
 contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 0, step: 0, pitch: body}
+# The body's last paragraph is kept whole with the closing, as the old template set them in one block (no rule; the
+# signature block does not stand alone on a page).
+keep_with_closing: true
 # GA-SC-CERT-001, SCt R 20(7): the word-count statement immediately above the signature block; the date, the
 # statement and the signature never split. Then GA-SC-SERVE-001, SCt R 14: the certificate of service on its own page.
 closing:

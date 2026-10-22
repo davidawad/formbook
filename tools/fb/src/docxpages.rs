@@ -13,6 +13,13 @@
 //! page) and moves nothing. When NEEDLE runs over a page break with footnotes between, it is found by its halves: a
 //! body needle's head on a page and its tail where the next page starts (the longest head first); failing that,
 //! FALLBACK (the text alone) is tried.
+//!
+//! A position needle (kind `T` or `Y`, lib/docx/xdoc.lua's fills) asks where a line is, not its page: NEEDLE is found in
+//! the words of the PDF's lines (`pdftotext -bbox-layout`, bbox_lines), on the page the body has reached or a later
+//! one, and its label is the yMax of the line (points from the page top) that holds the needle's first character
+//! (`T`: the topmost such line on the page) or its last (`Y`: the lowest). It moves nothing. A destination needle (kind
+//! `D`) names a Word bookmark, which LibreOffice exports as a named destination: its label is the top of the line the
+//! bookmark stands in (dests).
 
 /// The shortest tail of a needle that runs over a page end (docs in the module comment).
 const MIN_TAIL: usize = 4;
@@ -110,6 +117,12 @@ impl std::fmt::Display for NeedleId {
 enum Place {
     Body,
     Note,
+    /// a line's place: the line of the needle's first character
+    Top,
+    /// a line's place: the line of the needle's last character
+    Bottom,
+    /// a named destination's place: NEEDLE is its name
+    Dest,
 }
 
 /// How a section numbers its pages.
@@ -132,9 +145,155 @@ struct Section {
     prefix: String,
 }
 
+/// One page of a PDF as lines (bbox_lines): the reduced text of its words, and for every byte of it the yMax of its
+/// line (points from the page top).
+#[derive(Debug, Default)]
+pub struct PageLines {
+    pub text: String,
+    pub ymax: Vec<f64>,
+}
+
+/// Whether the needles ask for a line's place (kind T or Y): the pages are then read as lines too.
+pub fn wants_lines(needles: &str) -> bool {
+    needles
+        .lines()
+        .any(|l| matches!(l.split('\t').nth(1), Some("T" | "Y")))
+}
+
+fn unescape(s: &str) -> String {
+    s.replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&quot;", "\"")
+        .replace("&#39;", "'")
+        .replace("&amp;", "&")
+}
+
+/// The pages of `pdftotext -bbox-layout` output (XHTML: page, line with yMin/yMax, word), each as its lines' words
+/// reduced as `norm` reduces them.
+pub fn bbox_lines(xhtml: &str) -> Vec<PageLines> {
+    let mut pages: Vec<PageLines> = vec![];
+    let mut y = 0.0;
+    let mut rest = xhtml;
+    while let Some(i) = rest.find('<') {
+        rest = &rest[i..];
+        if rest.starts_with("<page ") {
+            pages.push(PageLines::default());
+        } else if rest.starts_with("<line ") {
+            let tag = &rest[..rest.find('>').unwrap_or(rest.len())];
+            y = tag
+                .split("yMax=\"")
+                .nth(1)
+                .and_then(|v| v.split('"').next())
+                .and_then(|v| v.parse().ok())
+                .unwrap_or(0.0);
+        } else if rest.starts_with("<word ") {
+            let open = rest.find('>').map_or(rest.len(), |j| j + 1);
+            let close = rest[open..]
+                .find("</word>")
+                .map_or(rest.len(), |j| open + j);
+            let w = norm(&unescape(&rest[open..close]));
+            if let Some(p) = pages.last_mut() {
+                p.ymax.extend(std::iter::repeat_n(y, w.len()));
+                p.text.push_str(&w);
+            }
+            rest = &rest[close..];
+            continue;
+        }
+        rest = &rest[1..];
+    }
+    pages
+}
+
+/// The place of a position needle on the first page from `from` (1-based) whose lines hold it: (page, yMax).
+fn place(lines: &[PageLines], from: usize, needle: &str, top: bool) -> Option<(usize, f64)> {
+    if needle.is_empty() {
+        return None;
+    }
+    for (i, p) in lines.iter().enumerate().skip(from.saturating_sub(1)) {
+        let ys = p.text.match_indices(needle).map(|(at, _)| {
+            if top {
+                p.ymax[at]
+            } else {
+                p.ymax[at + needle.len() - 1]
+            }
+        });
+        let y = if top {
+            ys.reduce(f64::min)
+        } else {
+            ys.reduce(f64::max)
+        };
+        if let Some(y) = y {
+            return Some((i + 1, y));
+        }
+    }
+    None
+}
+
 /// `id <TAB> page <TAB> label` for every needle of `needles` (the file the filter wrote) in the pages `pages`;
 /// Err names the needles that were not found.
+#[cfg(test)]
 pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
+    lookup_lines(needles, pages, &[])
+}
+
+/// Whether the needles ask for a named destination's place (kind D): the PDF is then made with them.
+pub fn wants_dests(needles: &str) -> bool {
+    needles.lines().any(|l| l.split('\t').nth(1) == Some("D"))
+}
+
+/// The named destinations of a PDF (LibreOffice exports Word bookmarks as them): name -> (page, the top of the line
+/// they stand in, in points from the page top). `listing` is `pdfinfo -dests` (the page of each name; its places are
+/// rounded), `raw` the PDF itself, whose entries `/name[<page> 0 R/XYZ x y z]` (or `(name)[..]`) give the place exactly, `height` the
+/// page height.
+pub fn dests(
+    listing: &str,
+    raw: &[u8],
+    height: f64,
+) -> std::collections::HashMap<String, (usize, f64)> {
+    let raw = String::from_utf8_lossy(raw);
+    let mut out = std::collections::HashMap::new();
+    for line in listing.lines() {
+        let (Some(page), Some(name)) = (
+            line.split_whitespace()
+                .next()
+                .and_then(|p| p.parse::<usize>().ok()),
+            line.rsplit_once('"')
+                .and_then(|(a, _)| a.rsplit_once('"'))
+                .map(|(_, n)| n),
+        ) else {
+            continue;
+        };
+        let y = [format!("/{name}["), format!("({name})[")]
+            .iter()
+            .find_map(|k| raw.split(k.as_str()).nth(1))
+            .and_then(|r| r.split("/XYZ").nth(1))
+            .and_then(|r| r.split_whitespace().nth(1))
+            .and_then(|y| y.parse::<f64>().ok());
+        if let Some(y) = y {
+            out.insert(name.to_string(), (page, height - y));
+        }
+    }
+    out
+}
+
+/// `lookup`, with the pages also as lines (bbox_lines) for the position needles.
+#[cfg(test)]
+pub fn lookup_lines(
+    needles: &str,
+    pages: &[String],
+    lines: &[PageLines],
+) -> Result<String, String> {
+    lookup_all(needles, pages, lines, &Default::default())
+}
+
+/// `lookup`, with the pages as lines (bbox_lines) for the position needles and the PDF's named destinations (dests)
+/// for the destination needles.
+pub fn lookup_all(
+    needles: &str,
+    pages: &[String],
+    lines: &[PageLines],
+    dests: &std::collections::HashMap<String, (usize, f64)>,
+) -> Result<String, String> {
     let mut ns = vec![];
     let mut secs = vec![];
     for line in needles.lines().filter(|l| !l.is_empty()) {
@@ -153,10 +312,12 @@ pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
         } else {
             ns.push(Needle {
                 id: NeedleId(at(0)),
-                place: if at(1) == "N" {
-                    Place::Note
-                } else {
-                    Place::Body
+                place: match at(1).as_str() {
+                    "N" => Place::Note,
+                    "T" => Place::Top,
+                    "Y" => Place::Bottom,
+                    "D" => Place::Dest,
+                    _ => Place::Body,
                 },
                 needle: at(2),
                 fallback: at(3),
@@ -200,16 +361,49 @@ pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
         None
     };
     let mut cur = 0;
+    // the last body needle found, where, and its id: a needle equal to it is found at the same place, not after it,
+    // when the two are two authorities' (their finds mark the same word) or the last one a section's start (the
+    // tables' numbering starts at the first text after the cover, a heading's); the same authority's next mark is
+    // another occurrence, searched after it
+    let authority = |id: &str| {
+        id.strip_prefix('a')
+            .and_then(|r| r.split_once('.'))
+            .map(|(k, _)| k.to_string())
+    };
+    let section = |id: &str| id == "front" || id == "start";
+    let mut last: Option<(&str, usize, &str)> = None;
     // the end of the last heading's own text: a heading is searched from there (below)
     let mut past_heading = 0;
     let mut found = vec![];
+    let mut ys: Vec<Option<f64>> = vec![];
     for n in &ns {
+        if n.place == Place::Dest {
+            let at = dests.get(&n.needle);
+            found.push(at.map_or(0, |a| a.0));
+            ys.push(at.map(|a| a.1));
+            continue;
+        }
+        if matches!(n.place, Place::Top | Place::Bottom) {
+            let at = place(lines, page_at(cur).max(1), &n.needle, n.place == Place::Top);
+            found.push(at.map_or(0, |a| a.0));
+            ys.push(at.map(|a| a.1));
+            continue;
+        }
+        ys.push(None);
         let heading = n.id.0.starts_with('h') || n.id.0.starts_with('H');
         let from = if n.place == Place::Body {
-            if heading {
-                cur.max(past_heading)
-            } else {
-                cur
+            match &last {
+                Some((t, p, id))
+                    if *t == n.needle
+                        && (section(id)
+                            || authority(id)
+                                .zip(authority(&n.id.0))
+                                .is_some_and(|(a, b)| a != b)) =>
+                {
+                    *p
+                }
+                _ if heading => cur.max(past_heading),
+                _ => cur,
             }
         } else {
             starts
@@ -225,7 +419,8 @@ pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
             })
             .or_else(|| find(&n.fallback, from));
         if let (Some(p), true) = (pos, n.place == Place::Body) {
-            cur = p + 1;
+            cur = cur.max(p + 1);
+            last = Some((&n.needle, p, &n.id.0));
             // the next heading is searched past this one's own text (its fallback), not past what follows it: its
             // needle "argument" + the next paragraph is found again inside "summary of argument" + the same words
             // otherwise; any other needle (an authority cited in the heading) is searched from the next character
@@ -233,7 +428,16 @@ pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
                 past_heading = p + n.fallback.len().min(n.needle.len()).max(1);
             }
         }
-        found.push(pos.map_or(0, page_at));
+        // an authority's mark is where its find ends (its fallback, the find alone), as LaTeX writes it and typst sets it:
+        // a citation over a page end counts on the later page
+        let end = |p: usize| {
+            if n.id.0.starts_with('a') && !n.fallback.is_empty() {
+                p + n.fallback.len() - 1
+            } else {
+                p
+            }
+        };
+        found.push(pos.map_or(0, |p| page_at(end(p))));
     }
     let page_of = |id: &NeedleId| ns.iter().position(|n| n.id == *id).map_or(0, |i| found[i]);
     let mut bounds: Vec<(usize, &Section)> = secs.iter().map(|s| (page_of(&s.id), s)).collect();
@@ -256,11 +460,12 @@ pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
     };
     let mut out = String::new();
     let mut missing = vec![];
-    for (n, &p) in ns.iter().zip(&found) {
+    for ((n, &p), y) in ns.iter().zip(&found).zip(&ys) {
         if p == 0 {
             missing.push(n.id.to_string());
         }
-        out.push_str(&format!("{}\t{}\t{}\n", n.id, p, label(p)));
+        let l = y.map_or_else(|| label(p), |y| format!("{y:.3}"));
+        out.push_str(&format!("{}\t{}\t{}\n", n.id, p, l));
     }
     if missing.is_empty() {
         Ok(out)
@@ -322,6 +527,62 @@ mod tests {
         // a footnote needle is not split; its fallback still finds it
         let notes = "T:1\tN\t18usc2710onlyaperson\t18usc2710\n";
         assert_eq!(lookup(notes, &p).unwrap(), "T:1\t2\t-\n");
+    }
+
+    #[test]
+    fn a_position_needle_reads_the_line_of_its_text() {
+        let x = r#"<doc><page width="612" height="792"><flow><block>
+<line xMin="1" yMin="84.3" xMax="9" yMax="98.708"><word xMin="1" yMin="1" xMax="2" yMax="2">STATE</word><word xMin="1" yMin="1" xMax="2" yMax="2">OF</word></line>
+<line xMin="1" yMin="1" xMax="9" yMax="128.6"><word xMin="1" yMin="1" xMax="2" yMax="2">A&amp;B</word></line>
+<line xMin="1" yMin="1" xMax="9" yMax="700.5"><word xMin="1" yMin="1" xMax="2" yMax="2">Counsel</word><word xMin="1" yMin="1" xMax="2" yMax="2">for</word></line>
+<line xMin="1" yMin="1" xMax="9" yMax="714"><word xMin="1" yMin="1" xMax="2" yMax="2">Appellant</word></line>
+</block></flow></page><page width="612" height="792"><line xMin="1" yMin="1" xMax="9" yMax="90"><word xMin="1" yMin="1" xMax="2" yMax="2">Body</word></line></page></doc>"#;
+        let lines = bbox_lines(x);
+        assert_eq!(lines.len(), 2);
+        assert_eq!(lines[0].text, "stateofabcounselforappellant");
+        let pages = vec![lines[0].text.clone(), lines[1].text.clone()];
+        let needles = "T1\tT\tstateof\t\nY1.1:20\tY\tforappellant\t\nH\tB\tbody\tbody\n";
+        assert!(wants_lines(needles) && !wants_lines("H\tB\tbody\tbody\n"));
+        // T: the line of the needle's first character; Y: the line of its last (here the needle runs over two)
+        assert_eq!(
+            lookup_lines(needles, &pages, &lines).unwrap(),
+            "T1\t1\t98.708\nY1.1:20\t1\t714.000\nH\t2\t-\n"
+        );
+        assert!(lookup_lines("Y1\tY\tnowhere\t\n", &pages, &lines).is_err());
+    }
+
+    #[test]
+    fn two_finds_of_the_same_word_are_found_at_the_same_place() {
+        // "RCW 10.77" and "RCW 10.77.010" both mark the word "10.77.010": two needles alike; the later citations
+        // are still found after them
+        let pages = page_texts("See RCW 10.77.010 for it. Later RCW 10.77 again.\n1\n\u{c}");
+        let needles = "a1.1\tB\t1077010forit\t1077\na2.1\tB\t1077010forit\t1077010\na1.2\tB\t1077again\t1077\n";
+        assert_eq!(
+            lookup(needles, &pages).unwrap(),
+            "a1.1\t1\t-\na2.1\t1\t-\na1.2\t1\t-\n"
+        );
+        // the same authority marked twice where its needle reads alike: two occurrences, the second on its own page
+        let pages = page_texts(
+            "Weiss v. Cent, 326 Ark. 685.\n8\n\u{c}Weiss v. Cent, 326 Ark. 685.\n9\n\u{c}",
+        );
+        let needles = "a1.1\tB\tweissvcent326ark685\tweiss\na1.2\tB\tweissvcent326ark685\tweiss\n";
+        assert_eq!(lookup(needles, &pages).unwrap(), "a1.1\t1\t-\na1.2\t2\t-\n");
+    }
+
+    #[test]
+    fn an_authority_over_a_page_end_counts_on_the_later_page() {
+        // the citation "Doe v. Roe" runs from page 1 onto page 2: its mark is where it ends, as in LaTeX and typst
+        let p = page_texts("See Doe v.\n1\n\u{c}Roe holds it.\n2\n\u{c}");
+        let needles = "a1.1\tB\tdoevroeholdsit\tdoevroe\n";
+        assert_eq!(lookup(needles, &p).unwrap(), "a1.1\t2\t-\n");
+    }
+
+    #[test]
+    fn a_heading_that_starts_a_section_is_found_where_the_section_starts() {
+        // the tables' numbering starts at the first text after the cover, which is a heading's: both needles alike
+        let p = page_texts("COURT\n\u{c}DISCLOSURE STATEMENT\nNone.\ni\n\u{c}CONTENTS\nDisclosure Statement i\nii\n\u{c}");
+        let needles = "front\tB\tdisclosurestatement\tdisclosurestatement\nh1\tB\tdisclosurestatement\tdisclosurestatement\n";
+        assert_eq!(lookup(needles, &p).unwrap(), "front\t2\t-\nh1\t2\t-\n");
     }
 
     #[test]

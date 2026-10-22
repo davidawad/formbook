@@ -58,7 +58,7 @@ function M.texify(inlines)
           flush()
           res:insert(pandoc.Space())
         elseif c == "\u{200B}" then
-          -- a break opportunity of no width (lib/pandoc/xengine.lua urls)
+          -- a break opportunity of no width
           flush()
           res:insert(raw("\\hskip0pt\\relax{}"))
         elseif c == "-" and chars[i + 1] and chars[i + 1]:match("^%d$") then

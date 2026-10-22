@@ -168,6 +168,7 @@ return require("latex.xdoc")({
     ["step"] = 0,
     ["pitch"] = "body",
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {

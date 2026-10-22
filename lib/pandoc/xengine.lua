@@ -15,17 +15,6 @@ function M.bind_signs(inlines)
   return inlines
 end
 
--- Inside a URL ("https://..", "www...") a line may end after every slash not followed by another, after every dot
--- before a letter or digit and after every hyphen before a letter, in every engine alike: a zero-width space after each
--- (lib/typst/xdoc.typ sets the same; typst breaks after some of them by itself, pdfTeX after a hyphen only,
--- LibreOffice after a slash before a letter only, and not after a URL's hyphens).
-function M.urls(inlines)
-  return inlines:walk({ Str = function(s)
-    if not (s.text:find("://", 1, true) or s.text:find("^%(?www%.")) then return nil end
-    return pandoc.Str((s.text:gsub("/([^/])", "/\u{200B}%1"):gsub("%.(%w)", ".\u{200B}%1"):gsub("%-(%a)", "-\u{200B}%1")))
-  end })
-end
-
 -- pandoc's smart reading puts a no-break space after an abbreviation ("v. Jones", "ed. 2020"); typst's markdown
 -- reader does not, so the space after a period is an ordinary one again (the engines must break lines alike).
 function M.unabbrev(inlines)

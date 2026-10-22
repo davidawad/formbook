@@ -32,6 +32,15 @@ pub fn reference(l: &Value, _face: &str) -> Result<String, String> {
     let half = (size * 2.0).round() as i64;
     let body = tw(num(l, "pitch.body", None)?, "pitch.body")?;
     let (single_pt, _, dist) = footer(l)?;
+    let (_, page_h) = super::gen::paper(l)?;
+    // justified text (layout.yaml justify): Body Text (the recipe's `justify`) and the styles of the body's quotations,
+    // lists, tail and notes
+    let justify = l.get("justify").and_then(Value::as_bool).unwrap_or(false);
+    let jc_both = if justify {
+        r#"<w:jc w:val="both"/>"#
+    } else {
+        ""
+    };
     let single = tw(single_pt, "pitch.single")?;
     let indent = tw(num(l, "indent", None)?, "indent")?;
     let list = tw(
@@ -74,10 +83,16 @@ pub fn reference(l: &Value, _face: &str) -> Result<String, String> {
         "the page number's distance from the page foot",
     )?;
     let fld = r#"<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r>"#;
+    // the page number alone, or the layout's `page_number.text` ("Page {page} of {pages}") with its fields
+    let ptext = pn.and_then(|p| p.get("text")).and_then(Value::as_str);
+    let number = match ptext {
+        Some(t) => page_text_runs(t, "NUMPAGES"),
+        None => fld.to_string(),
+    };
     let footer_p = format!(
         r#"<w:p><w:pPr>{}<w:jc w:val="{jc}"/></w:pPr>{}</w:p>"#,
         exact(0, 0, single),
-        if numbered { fld } else { "" }
+        if numbered { number.as_str() } else { "" }
     );
     let first = if numbered && from > 1.0 {
         r#"<w:footerReference w:type="first" r:id="rIdFooterFirst"/>"#
@@ -103,7 +118,8 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
         fmt(foot as f64 / 20.0),
     ));
     out.push_str(&format!(
-        r#"<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="{half}" body="{body}" single="{single}" indent="{indent}" list="{list}" note="{note}" note-size="{nsize}" note-after="{gap}" footer="{foot}">"#
+        r#"<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="{half}" body="{body}" single="{single}" indent="{indent}" list="{list}" note="{note}" note-size="{nsize}" note-after="{gap}" footer="{foot}"{just}>"#,
+        just = if justify { r#" justify="true""# } else { "" }
     ));
     out.push('\n');
     for s in [
@@ -114,41 +130,54 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
             r#"<w:widowControl w:val="0"/>"#,
         ),
         format!(
-            r#"<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:keepLines/>{}</w:pPr><w:rPr><w:sz w:val="{nsize}"/><w:szCs w:val="{nsize}"/></w:rPr></w:style>"#,
+            r#"<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:keepLines/>{}{jc_both}</w:pPr><w:rPr><w:sz w:val="{nsize}"/><w:szCs w:val="{nsize}"/></w:rPr></w:style>"#,
             exact(0, gap, note)
         ),
         style(
             "XdQuote",
             "Xd Quote",
             "Normal",
-            &(exact(qg, qg, qp) + &qind),
+            &(exact(qg, qg, qp) + &qind + jc_both),
         ),
         style(
             "XdQuoteFirst",
             "Xd Quote First",
             "Normal",
-            &(exact(qa, qg, qp) + &qind),
+            &(exact(qa, qg, qp) + &qind + jc_both),
         ),
         style(
             "XdQuoteLast",
             "Xd Quote Last",
             "Normal",
-            &(exact(qg, qb, qp) + &qind),
+            &(exact(qg, qb, qp) + &qind + jc_both),
         ),
         style(
             "XdQuoteOnly",
             "Xd Quote Only",
             "Normal",
-            &(exact(qa, qb, qp) + &qind),
+            &(exact(qa, qb, qp) + &qind + jc_both),
         ),
         style(
             "XdTail",
             "Xd Tail",
             "Normal",
-            &(exact(0, tg, tp) + &format!(r#"<w:ind w:firstLine="{ti}"/>"#)),
+            &(exact(0, tg, tp) + &format!(r#"<w:ind w:firstLine="{ti}"/>"#) + jc_both),
         ),
     ] {
         out.push_str(&s);
+        out.push('\n');
+    }
+    // keep_with_closing: the body's last paragraph whole and on the page of the closing (lib/docx/xdoc.lua)
+    if l.get("keep_with_closing")
+        .and_then(Value::as_bool)
+        .unwrap_or(false)
+    {
+        out.push_str(&style(
+            "BodyTextKeep",
+            "Body Text Keep",
+            "BodyText",
+            "<w:keepNext/><w:keepLines/>",
+        ));
         out.push('\n');
     }
     // list items per nesting level, in the body and in the tail: the label at the level's indent, the text hanging
@@ -159,10 +188,55 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
                 &format!("{base}{lv}"),
                 &format!("{base} {lv}"),
                 "Normal",
-                &(exact(0, 0, line) + &ind),
+                &(exact(0, 0, line) + &ind + jc_both),
             ));
             out.push('\n');
         }
+    }
+    // the space between two body paragraphs, a paragraph and a list, two lists (layout.yaml paragraph_gap): the
+    // styles of a body paragraph or a list's first item after one of them, the space before (lib/docx/xdoc.lua)
+    if l.get("paragraph_gap").is_some() {
+        let g = tw(num(l, "paragraph_gap", None)?, "paragraph_gap")?;
+        let mut bases = vec![
+            ("BodyText", "Body Text", body),
+            ("BodyTextNote", "Body Text Note", body),
+        ];
+        if l.get("keep_with_closing")
+            .and_then(Value::as_bool)
+            .unwrap_or(false)
+        {
+            bases.push(("BodyTextKeep", "Body Text Keep", body));
+        }
+        for (id, name, line) in bases {
+            out.push_str(&style(
+                &format!("{id}Gap"),
+                &format!("{name} Gap"),
+                id,
+                &exact(g, 0, line),
+            ));
+            out.push('\n');
+        }
+        out.push_str(&style(
+            "XdList1Gap",
+            "XdList 1 Gap",
+            "XdList1",
+            &exact(g, 0, body),
+        ));
+        out.push('\n');
+    }
+    // list items inside a quotation: the quote's indents and pitch, the label at the level's indent past the quote's
+    for lv in 1..=3i64 {
+        let ind = format!(
+            r#"<w:ind w:left="{}" w:right="{qr}" w:hanging="{list}"/>"#,
+            ql + lv * list
+        );
+        out.push_str(&style(
+            &format!("XdQuoteList{lv}"),
+            &format!("Xd Quote List {lv}"),
+            "Normal",
+            &(exact(0, 0, qp) + &ind + jc_both),
+        ));
+        out.push('\n');
     }
     out.push_str(&format!(r#"<footer id="rIdFooter1">{footer_p}</footer>"#));
     out.push('\n');
@@ -174,7 +248,7 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
         out.push('\n');
     }
     out.push_str(&format!(
-        r#"<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/>{first}<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="{}" w:right="{}" w:bottom="{}" w:left="{}" w:header="720" w:footer="{foot}" w:gutter="0"/>{title_pg}</w:sectPr>"#,
+        r#"<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/>{first}<w:pgSz w:w="12240" w:h="{page_h}"/><w:pgMar w:top="{}" w:right="{}" w:bottom="{}" w:left="{}" w:header="720" w:footer="{foot}" w:gutter="0"/>{title_pg}</w:sectPr>"#,
         m("top")?,
         m("right")?,
         m("bottom")?,
@@ -182,4 +256,44 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
     ));
     out.push_str("\n</reference>\n");
     Ok(out)
+}
+
+/// Word runs of a page-number text (layout.yaml `page_number.text`, "Page {page} of {pages}"): its text as runs,
+/// `{page}` the PAGE field, `{pages}` the field `pages` names (NUMPAGES; SECTIONPAGES for a body numbered apart:
+/// lib/docx/xdoc.lua page_text).
+pub fn page_text_runs(text: &str, pages: &str) -> String {
+    let field = |name: &str, shown: &str| {
+        format!(
+            r#"<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> {name} </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>{shown}</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r>"#
+        )
+    };
+    let run = |s: &str| {
+        let s = s
+            .replace('&', "&amp;")
+            .replace('<', "&lt;")
+            .replace('>', "&gt;");
+        format!(r#"<w:r><w:t xml:space="preserve">{s}</w:t></w:r>"#)
+    };
+    let mut out = String::new();
+    let mut rest = text;
+    while let Some(at) = rest.find('{') {
+        let (pre, tail) = rest.split_at(at);
+        if !pre.is_empty() {
+            out.push_str(&run(pre));
+        }
+        if let Some(t) = tail.strip_prefix("{pages}") {
+            out.push_str(&field(pages, "1"));
+            rest = t;
+        } else if let Some(t) = tail.strip_prefix("{page}") {
+            out.push_str(&field("PAGE", "1"));
+            rest = t;
+        } else {
+            out.push_str(&run("{"));
+            rest = &tail[1..];
+        }
+    }
+    if !rest.is_empty() {
+        out.push_str(&run(rest));
+    }
+    out
 }
