@@ -239,8 +239,14 @@ local function write_file(var, s)
 end
 
 local function furniture(meta)
+  -- the footer title as written in the frontmatter (typst reads the string, not markdown)
+  local f = io.open(os.getenv("FORMBOOK_META") or "", "r")
+  local s = f and f:read("a") or ""
+  if f then f:close() end
+  local raw = s ~= "" and pandoc.json.decode(s, false) or {}
+  local title = raw.footer_title or text(meta.footer_title)
   write_file("FORMBOOK_FOOTERS", "rIdArbFooter\t" ..
-    footer(pandoc.text.upper(text(meta.footer_title)), text(meta.adversary_number)) .. "\n")
+    footer(pandoc.text.upper(title), text(meta.adversary_number)) .. "\n")
   write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdArbFooter"/>' ..
     '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="2160"' ..
     ' w:header="720" w:footer="' .. FOOTER_DIST .. '" w:gutter="0"/><w:pgBorders w:offsetFrom="text">' ..
