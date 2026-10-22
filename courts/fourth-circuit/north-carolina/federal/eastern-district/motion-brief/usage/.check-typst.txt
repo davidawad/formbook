@@ -1,2 +1,2 @@
 PASS
-e4cf19e52a09071aaf3ca46a08223bee27fe8d6ca405883b36d642f2382bc6b0  usage/OUTPUT-motion-brief.typst.pdf
+732896c279a4ff154d46d01be596af2ea586f9054ee101d628fab644eb9c9a86  usage/OUTPUT-motion-brief.typst.pdf

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The E.D.N.C. memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman) at 12 pt (LR 10.1(a): at least 11 point; size 24 half points); Body
+     Text in exact 27.6 pt line boxes (typst pitch-double; LR 10.1(a) double spacing) with a half-inch first-line
+     indent, the headings in them with a 13.8 pt line above and below; the court lines, caption, signature, service
+     list and footnotes (12 pt, LR 10.1(a) typed matter, 7 pt apart) in 13.8 pt boxes (typst pitch-single); letter
+     page with 1-inch margins (LR 10.1(a)) and the page number centered at the foot (LR 10.1(j)), its line 36.75 pt
+     above the page foot (735 twips: where typst sets it, footer-descent 30 %).
+     One style of its own: "Body Text Note", Body Text without widow control, for a paragraph that carries a footnote
+     mark (typst keeps a paragraph's last two lines together by their height alone; when the line's footnote does
+     not fit, that line moves on and the one before stays behind; with widow control off Word does the same).
+     docx/nced-motion-brief.lua writes every paragraph's own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="552" heading-before="276" heading-after="276" note-after="140" footer="735">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+</reference>
