@@ -11,18 +11,26 @@
 // case style, signature block and certificate of service do not count). See ../README.md.
 // Content-agnostic: case-specific words come from the sample's frontmatter or body.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif") // District LR 5.1 names no face; Times New Roman substitute, the default per docs/FONTS.md
-#let type-size = 14pt              // District LR 5.1(C): at least 14-point font
-#let body-leading = 1.65em         // District LR 5.1(C): double spaced (baseline pitch about 32 pt at 14 pt)
-#let single-leading = 0.45em       // caption, counsel block, signature block
+#let font-family = ("Times New Roman", "Liberation Serif") // District LR 5.1 names no face; Times New Roman, the house standard and the filed exemplar's face
+#let type-size = 14pt              // District LR 5.1(C): at least 14-point font (footnotes too)
 #let margin = 1in                  // District LR 5.1(C): at least one inch on all four sides
-#let text-width = 8.5in - 2 * margin
+#let para-indent = 0.5in           // first-line indent of every body paragraph (the filing)
+#let caption-left = 3.95in         // the case-style column of the caption (its longest line, the rule, fits)
+#let caption-gutter = 0.1in        // between the case style and the case numbers
+#let sig-left = 2.9in              // the signature block's left edge (right half of the page, as filed)
 #let word-limit = 8000             // District LR 7.1(F): memorandum limit
 #let motion-words-threshold = 500  // District LR 7.1(F): motion words count toward the memorandum only above 500
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-single = 16.1pt              // a single line: 1.15 x the type size (Word's single line in this face)
+#let pitch-double = 2 * pitch-single    // District LR 5.1(C) double spacing: 32.2 pt, the filed exemplar's pitch
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -36,7 +44,7 @@
 }
 
 /// Inline markdown (case names in *italics*, etc.).
-#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
 /// Whitespace-delimited words of a markdown fragment, markup and paragraph numbers removed.
 #let count-words(md) = {
@@ -87,36 +95,38 @@
   }
 }
 
-/// One caption block: a stack of single-spaced lines, each taken from the frontmatter.
-#let lines-block(items) = stack(dir: ttb, spacing: single-leading, ..items.map(t => [#t]))
+/// One single-spaced line (a paragraph of its own); an empty one keeps its line box.
+#let line-block(above: 0pt, below: 0pt, body) = block(width: 100%, above: above, below: below, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  if body == "" { block(height: pitch-single) } else { body }
+})
 
-/// The caption (LBR 9004-1(A)): court name, then the case style (debtor case, then adversary).
+/// The case style on the left and its numbers on the right, one grid row per line so the numbers stand at the
+/// style's lines.
+#let case-grid(left, right, above, below) = {
+  let n = calc.max(left.len(), right.len())
+  let at(list, i) = if i < list.len() { list.at(i) } else { "" }
+  block(width: 100%, above: above, below: below, grid(
+    columns: (caption-left, caption-gutter, 1fr),
+    ..range(n).map(i => (line-block(at(left, i)), [], line-block(at(right, i)))).flatten(),
+  ))
+}
+
+/// The caption (LBR 9004-1(A)): court name, the case style (debtor case, then adversary), and the title, which
+/// states that the paper contains a memorandum.
 #let caption(meta) = {
-  set par(leading: single-leading, first-line-indent: 0pt)
-  align(center, lines-block(meta.court.map(t => upper(t))))
-  v(1.5em)
-  grid(
-    columns: (text-width * 0.62, 1fr),
-    gutter: 1em,
-    lines-block(meta.debtor_style),
-    lines-block(meta.debtor_numbers),
-  )
-  v(1em)
-  grid(
-    columns: (text-width * 0.62, 1fr),
-    gutter: 1em,
-    lines-block(meta.adversary_style),
-    lines-block(meta.adversary_numbers),
-  )
-  v(1.5em)
+  for l in meta.court { line-block(align(center, upper(l))) }
+  case-grid(meta.debtor_style, meta.debtor_numbers, pitch-double, 0pt)
+  case-grid(meta.adversary_style, meta.adversary_numbers, pitch-single, 0pt)
+  for (i, l) in meta.title_lines.enumerate() {
+    line-block(above: if i == 0 { pitch-double } else { 0pt }, align(center, text(weight: "bold", l)))
+  }
 }
 
-/// Signature block (District LR 5.1(D)): the attorney's signature and bar details.
-#let signature(meta) = {
-  set par(leading: single-leading, first-line-indent: 0pt)
-  v(1.5em)
-  pad(left: text-width * 0.45, lines-block(meta.signature))
-}
+/// Signature block (District LR 5.1(D)): the attorney's signature and bar details, a single line below the text.
+#let signature(meta) = block(width: 100%, breakable: false, above: pitch-single, below: 0pt,
+  pad(left: sig-left, for l in meta.signature { line-block(l) }))
 
 // ---------------------------------------------------------------------------
 // Document
@@ -132,46 +142,48 @@
   if parts.len() != 2 { panic("flnb-motion-brief: the sample must contain one {{SIGNATURE}} marker") }
 
   set document(title: meta.title)
+  // District LR 5.1(C): pages numbered; centered in a single line box (Word's footer).
   set page(
     paper: "us-letter",
     margin: margin,
-    numbering: "1",
-    number-align: center + bottom,         // District LR 5.1(C): pages must be numbered
+    footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(justify: false, leading: body-leading, spacing: body-leading, first-line-indent: 0.5in)
-  // Headings stay with the paragraph that follows them (sticky), so none is left alone at a page foot.
-  show heading.where(level: 2): it => block(sticky: true, {
-    set par(leading: single-leading, first-line-indent: 0pt)
-    v(0.8em)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch (double spaced).
+  show: xengine.with(pitch: pitch-double, list-indent: none)
+  // Headings: centered bold single-spaced lines a single line below the text before them; kept with the text after.
+  show heading: it => block(sticky: true, width: 100%, above: pitch-single, below: 0pt, {
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt)
     align(center, text(weight: "bold", it.body))
-    v(0.4em)
   })
-  show heading.where(level: 3): it => block(sticky: true, {
-    set par(leading: single-leading, first-line-indent: 0pt)
-    v(0.6em)
-    align(center, text(weight: "bold", it.body))
-    v(0.3em)
-  })
-  show heading.where(level: 4): it => block(sticky: true, {
-    set par(leading: single-leading, first-line-indent: 0pt)
-    align(center, it.body)
-    v(0.6em)
-  })
+  // Footnotes at the body's 14 pt (LR 5.1(C)), single-spaced: the mark, a space, the note.
+  set footnote.entry(gap: 0pt, clearance: 12.6pt, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
+  show footnote.entry: it => {
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    [#super(num)#h(0.25em)#note.body]
+  }
 
   caption(meta)
 
-  // Title (LBR 9004-1(A)): designation, contents, and "MEMORANDUM" when the paper contains one.
-  set par(leading: single-leading, first-line-indent: 0pt)
-  align(center, text(weight: "bold", lines-block(meta.title_lines)))
-  v(1.5em)
-
-  set par(leading: body-leading, spacing: body-leading, first-line-indent: 0.5in)
   let defs = footnote-defs(filled)
-  render-md(parts.at(0), defs)
+  // The paragraph before the marker (the WHEREFORE paragraph) stays with the signature block (one unbreakable
+  // block), so the signature never stands alone on a page.
+  let strip(s) = s.replace(regex("(?m)^\\[\\^[^\\]]+\\]:[ \\t]*.+$\\n?"), "")
+  let chunks = strip(parts.at(0)).trim().split(regex("\\r?\\n[ \\t]*\\r?\\n"))
+  let last = chunks.last()
+  let keep = not last.starts-with("#")
+  let head = if keep { chunks.slice(0, -1).join("\n\n") } else { parts.at(0) }
+  block(width: 100%, above: pitch-single, below: 0pt, render-md(head, defs))
+  if keep {
+    block(width: 100%, breakable: false, above: 0pt, below: 0pt, { render-md(last, defs); signature(meta) })
+  } else { signature(meta) }
 
-  signature(meta)
-
-  set par(leading: body-leading, spacing: body-leading, first-line-indent: 0.5in)
   render-md(parts.at(1), defs)
 }

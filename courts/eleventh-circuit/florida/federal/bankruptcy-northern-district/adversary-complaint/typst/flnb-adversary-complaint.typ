@@ -7,16 +7,24 @@
 // 5.1(B)-(D) (case style, heading, 14-point double-spaced, 1-inch margins, numbered pages, signature block).
 // See ../README.md. Content-agnostic: every case-specific word comes from the sample's frontmatter or body.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif") // District LR 5.1 names no face; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif") // District LR 5.1 names no face; Times New Roman, the house standard and the filed exemplar's face
 #let type-size = 14pt              // District LR 5.1(C): at least 14-point font
-#let body-leading = 1.65em         // District LR 5.1(C): double spaced; baseline pitch about 32 pt at 14 pt, as in the filed exemplar
-#let single-leading = 0.45em       // caption, counsel block, signature block
 #let margin = 1in                  // District LR 5.1(C): at least one inch on all four sides
-#let text-width = 8.5in - 2 * margin
+#let para-indent = 0.5in           // first-line indent of every body paragraph (the filing)
+#let caption-left = 3.95in         // the case-style column of the caption (its longest line, the rule, fits)
+#let caption-gutter = 0.1in        // between the case style and the case numbers
+#let sig-left = 2.9in              // the signature block's left edge (right half of the page, as filed)
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-single = 16.1pt              // a single line: 1.15 x the type size (Word's single line in this face)
+#let pitch-double = 2 * pitch-single    // District LR 5.1(C) double spacing: 32.2 pt, the filed exemplar's pitch
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -29,39 +37,41 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// Inline markdown (case names in *italics*, etc.).
-#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+/// Inline and block markdown (case names in *italics*, headings, paragraphs).
+#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// One caption block: a stack of single-spaced lines, each taken from the frontmatter.
-#let lines-block(items) = stack(dir: ttb, spacing: single-leading, ..items.map(t => [#t]))
+/// One single-spaced line (a paragraph of its own); an empty one keeps its line box.
+#let line-block(above: 0pt, below: 0pt, body) = block(width: 100%, above: above, below: below, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  if body == "" { block(height: pitch-single) } else { body }
+})
 
-/// The caption (LBR 9004-1(A); Official Form B 416D layout): court name, then the case style.
+/// The caption (LBR 9004-1(A); Official Form 416D layout): the case style on the left and its numbers on the
+/// right, one grid row per line so the numbers stand at the style's lines.
+#let case-grid(left, right, above, below) = {
+  let n = calc.max(left.len(), right.len())
+  let at(list, i) = if i < list.len() { list.at(i) } else { "" }
+  block(width: 100%, above: above, below: below, grid(
+    columns: (caption-left, caption-gutter, 1fr),
+    ..range(n).map(i => (line-block(at(left, i)), [], line-block(at(right, i)))).flatten(),
+  ))
+}
+
+/// Court name, case styles and the title of the paper (LBR 9004-1(A)).
 #let caption(meta) = {
-  set par(leading: single-leading, first-line-indent: 0pt)
-  align(center, lines-block(meta.court.map(t => upper(t))))
-  v(1.5em)
-  grid(
-    columns: (text-width * 0.62, 1fr),
-    gutter: 1em,
-    lines-block(meta.debtor_style),
-    lines-block(meta.debtor_numbers),
-  )
-  v(1em)
-  grid(
-    columns: (text-width * 0.62, 1fr),
-    gutter: 1em,
-    lines-block(meta.adversary_style),
-    lines-block(meta.adversary_numbers),
-  )
-  v(1.5em)
+  for l in meta.court { line-block(align(center, upper(l))) }
+  case-grid(meta.debtor_style, meta.debtor_numbers, pitch-double, 0pt)
+  case-grid(meta.adversary_style, meta.adversary_numbers, pitch-single, 0pt)
+  for (i, l) in meta.title_lines.enumerate() {
+    line-block(above: if i == 0 { pitch-double } else { 0pt }, align(center, text(weight: "bold", l)))
+  }
 }
 
-/// Signature block (District LR 5.1(D)): counsel block plus the attorney's signature and bar details.
-#let signature(meta) = {
-  set par(leading: single-leading, first-line-indent: 0pt)
-  v(1.5em)
-  pad(left: text-width * 0.45, lines-block(meta.signature))
-}
+/// Signature block (District LR 5.1(D)): counsel block plus the attorney's signature and bar details; one
+/// unbreakable block, so it never splits over a page.
+#let signature(meta) = block(width: 100%, breakable: false, above: pitch-single, below: 0pt,
+  pad(left: sig-left, for l in meta.signature { line-block(l) }))
 
 // ---------------------------------------------------------------------------
 // Document
@@ -69,42 +79,36 @@
 
 #let complaint(meta, body) = {
   set document(title: meta.title)
+  // District LR 5.1(C): pages numbered; centered in a single line box (Word's footer).
   set page(
     paper: "us-letter",
     margin: margin,
-    numbering: "1",
-    number-align: center + bottom,         // District LR 5.1(C): pages must be numbered
+    footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(justify: false, leading: body-leading, spacing: body-leading, first-line-indent: 0.5in)
-  // Headings stay with the paragraph that follows them (sticky), so none is left alone at a page foot.
-  show heading.where(level: 2): it => block(sticky: true, {
-    set par(leading: single-leading, first-line-indent: 0pt)
-    v(0.8em)
-    align(center, text(weight: "bold", it.body))
-    v(0.4em)
-  })
-  show heading.where(level: 3): it => block(sticky: true, {
-    set par(leading: single-leading, first-line-indent: 0pt)
-    v(0.6em)
-    align(center, text(weight: "bold", it.body))
-    v(0.3em)
-  })
-  show heading.where(level: 4): it => block(sticky: true, {
-    set par(leading: single-leading, first-line-indent: 0pt)
-    align(center, it.body)
-    v(0.6em)
-  })
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch (double spaced).
+  show: xengine.with(pitch: pitch-double, list-indent: none)
+  // Headings: centered single-spaced lines, the section headings (##) bold a single line below the text before
+  // them, the claim subtitles (####) regular right under them; kept with the text after them.
+  show heading: it => block(sticky: true, width: 100%, above: if it.level <= 2 { pitch-single } else { 0pt },
+    below: 0pt, {
+      set text(size: type-size, ..edges(pitch-single))
+      set par(first-line-indent: 0pt)
+      align(center, text(weight: if it.level <= 2 { "bold" } else { "regular" }, it.body))
+    })
 
   caption(meta)
-
-  // Title (LBR 9004-1(A)): designation, the contents of the paper, and the required words.
-  set par(leading: single-leading, first-line-indent: 0pt)
-  align(center, text(weight: "bold", lines-block(meta.title_lines)))
-  v(1.5em)
-
-  set par(leading: body-leading, spacing: body-leading, first-line-indent: 0.5in)
-  inl(body)
-
-  signature(meta)
+  // The last paragraph of the body stays with the signature block (one unbreakable block), so the signature never
+  // stands alone on a page.
+  let chunks = body.trim().split(regex("\\r?\\n[ \\t]*\\r?\\n"))
+  let last = chunks.last()
+  let keep = not last.starts-with("#")
+  let head = if keep { chunks.slice(0, -1).join("\n\n") } else { body }
+  block(width: 100%, above: pitch-single, below: 0pt, md(head))
+  if keep {
+    block(width: 100%, breakable: false, above: 0pt, below: 0pt, { md(last); signature(meta) })
+  } else { signature(meta) }
 }

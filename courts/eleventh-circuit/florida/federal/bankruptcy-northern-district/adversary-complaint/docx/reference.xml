@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The N.D. Fla. Bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs)
+     in the face of the typst template ({font}, Times New Roman) at 14 pt (District LR 5.1(C), through LBR 1001-1(C);
+     size 28 half points); Body Text in exact 32.2 pt line boxes (644 twips: typst pitch-double, LR 5.1(C) double
+     spacing, the filed exemplar's pitch) with a half-inch first-line indent; the caption, headings and signature
+     lines in 16.1 pt boxes (322 twips: typst pitch-single); "Body Text Keep Next" for the last paragraph, kept with
+     the signature block; letter page with 1-inch margins (LR 5.1(C)) and a centered page number, its line 34.45 pt
+     above the page foot (689 twips: where typst sets it, footer-descent 30 %). docx/flnb-adversary-complaint.lua
+     writes the caption, headings and signature with their own spacing. pandoc reads the sample without fancy lists
+     (the lettered sub-items "a)" stay paragraphs, as in typst). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="644" single="322" indent="720" heading="322" heading-before="322" heading-after="0" footer="689" pandoc-from="markdown-fancy_lists+smart">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeepNext"><w:name w:val="Body Text Keep Next"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>
