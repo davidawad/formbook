@@ -5,8 +5,8 @@ font:
 # tables (Rule 28 (a) (1)-(4)) do not count. DEF-LEN-001 counts the whole file, so the limit here is 50 plus the 6
 # pages this sample's title page and tables take (cover 1, contents 1, authorities 4; Word's double spacing, 32.2 pt).
 params:
-  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
-  # (`fb engines gen`, fb-595.54.12) but not gated yet: typst breaks inside a bare URL ("https://bit.ly/3 | gtaoBD",
-  # p6, p9), LaTeX and Word do not (docs/open-items/fb-595.54.53.md, shared-model requests).
-  cross_engine: report
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+  # the typst render does, so a difference fails.
+  cross_engine: gate
   page_limit: 56
