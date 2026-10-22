@@ -1,0 +1,54 @@
+# Supreme Court of Hawaii (haw): application for writ of certiorari (HRAP 40.1; `petition-for-review`). The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to HRAP 32 (../../rules.md, HAW-*); lengths in points. No case text
+# here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # HAW-FORM-003, -004: 12 point, footnotes and quotations the same size
+pitch:
+  body: 27.6              # HAW-FORM-005: double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # flyleaf, headings, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # HAW-FORM-002: not less than 1 inch on all sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # HAW-FORM-007: bottom center; as the exemplar: the flyleaf unnumbered, the tables i, ii .., the brief from 1
+footnote: {size: 12, gap: 7}             # HAW-FORM-004, -005: same size as the text, single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # HAW-FORM-005: quotations single spaced, indented
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 14.4}   # HAW-FORM-005: headings single spaced
+  - {bold: true, hang: 36, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# The flyleaf (HAW-COVER-001, -002): 3 inches clear at the top (the 1-inch margin and 2 inches more), the case
+# number, the court and the appeal below, the caption line by line beside a column of ")" with the proceedings below
+# and the judge, the character of the document, then counsel (HAW-COVER-003: the arrangement is the exemplar's).
+cover:
+  - {text: "{case_number}", above: 144}
+  - {text: "IN THE SUPREME COURT OF THE STATE OF HAWAII", align: center, bold: true, above: 21.6}
+  - {text: "(NO. {ica_case_number} in the Intermediate Court of Appeals)", align: center, optional: true}
+  - each: caption
+    above: 14.4
+    blocks:
+      - columns:
+          - width: 223.2
+            blocks: [{text: "{left}"}]
+          - width: 21.6
+            blocks: [{text: ")"}]
+          - blocks: [{text: "{right}"}]
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 21.6}
+  - each: counsel
+    above: 21.6
+    blocks:
+      - {text: "{names}", bold: true, above: 7.2}
+      - {text: "{lines}"}
+  - {text: "{phone}", optional: true}
+# The subject index with page references (as the exemplar), on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 10.8}
+# The application's title at the top of its first page.
+front:
+  - {text: "{body_title}", align: center, bold: true, upper: true, optional: true, below: 14.4}
+# The date and the signature block (HAW-SIG-001: the name typed under the signature), never split.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, optional: true}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 9.6}
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 19.2}
+      - {text: "{signature.typed}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, above: 7.2}
+    above: 21.6
