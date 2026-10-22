@@ -1,0 +1,6 @@
+# MCR 1.109(D)(1)(b)(ii), (v) (rules.md MSC-FORM-005, MSC-COVER-004): the caption names the parties and gives each
+# attorney's name, business address, telephone number and bar number. This motion's caption names some thirty
+# plaintiffs and eleven attorneys, which do not fit one page; the filed motion's cover runs two unnumbered pages and
+# its text starts at 1 on page 3, as ours does (cover_pages 2).
+params:
+  cover_pages: 2
