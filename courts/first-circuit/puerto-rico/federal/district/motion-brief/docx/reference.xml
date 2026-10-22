@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D.P.R. memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the typst
+     template ({font}, Times New Roman) at 12 pt (size 24 half points, PRD-FORM-002, L.Civ.R. 7, footnotes too); Body
+     Text in exact 24 pt line boxes (typst pitch-double, PRD-FORM-003 double spacing) with a half-inch first-line
+     indent; headings, tables, caption, counsel, signature, footnote and footer lines in 13.8 pt boxes (typst
+     pitch-single), footnotes 7 pt apart (typst note-gap); letter page with 1-inch margins (PRD-FORM-004) and a centered
+     page number (PRD-FORM-005), its line 36.6 pt above the page foot (732 twips: where typst sets it, footer-descent
+     30 %). docx/prd-motion-brief.lua writes every other paragraph's own spacing, the sections and the page numbers of
+     the tables. Twips: 20 x pt.
+     Body paragraphs keep widow control, footnote or not: typst keeps two lines of a paragraph together on each side
+     of a page break when the note fits, as Word does. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="480" heading-after="240" note="276" note-after="140" footer="732">
+</reference>

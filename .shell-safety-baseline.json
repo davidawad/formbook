@@ -3,7 +3,6 @@
   "branches": {
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/make-reference.sh": 6,
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/render.sh": 31,
-    "courts/first-circuit/puerto-rico/federal/district/motion-brief/docx/make-reference.sh": 8,
     "tools/check/_lib/lib-helpers.sh": 97,
     "tools/check/lib.sh": 147,
     "tools/gen_tree.sh": 8
