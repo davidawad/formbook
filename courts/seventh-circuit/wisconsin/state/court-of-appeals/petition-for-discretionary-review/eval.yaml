@@ -1,0 +1,9 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # typst and LibreOffice keep an opening bracket with what follows it across a space (Unicode LB14: "plaintiff[ ]"),
+  # pdfTeX breaks after the "[" (p10 line 14, the paragraph's later lines move); a shared-model item
+  # (docs/open-items/fb-595.54.46.md). Reported, not gated.
+  cross_engine_latex: report

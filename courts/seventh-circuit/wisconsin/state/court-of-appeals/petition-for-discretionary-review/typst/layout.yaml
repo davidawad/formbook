@@ -1,0 +1,58 @@
+# Court of Appeals of Wisconsin (wisctapp): petition for leave to appeal (Wis. Stat. 809.50). The whole layout, as data for the
+# shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to Wis. Stat. 809.81 and 809.19(8)(b) (../../rules.md, WISCTAPP-*); lengths in points.
+# No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # WISCTAPP-FORM-003: proportional serif body text, 13 point
+pitch:
+  body: 29.9              # WISCTAPP-FORM-004 (809.81(4)): double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # cover, headings, contents, quotations, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 90, right: 90}   # WISCTAPP-FORM-005 (809.81(4)): 1 in top and bottom, 1.25 in sides
+indent: 36
+page_number: {align: center, from: 1}   # WISCTAPP-FORM-006 (809.81(5)): Arabic, from "1" on the first page, centered
+footnote: {size: 11, pitch: 12.65, gap: 7}   # WISCTAPP-FORM-003: footnotes 11 point, single spaced
+quote: {left: 36, right: 36, above: 10.4, below: 15.6}   # block quotations indented, single spaced
+# Level 1 a section (bold, capitals, centered); levels 2 to 4 argument headings the template numbers I., A., 1.
+heading:
+  - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
+  - {bold: true, number: "I.", hang: 36, above: 15.6, below: 10.4}
+  - {bold: true, number: "A.", hang: 36, above: 13, below: 10.4}
+  - {bold: true, italic: true, number: "1.", hang: 36, above: 11.7, below: 9.1}
+# The cover (809.81(9) caption; WISCTAPP-CAPT-001): the court, the case number, the caption, the proceeding below,
+# the title, counsel. The cover is page 1 and carries its number.
+cover:
+  - {text: "STATE OF WISCONSIN", align: center, bold: true}
+  - {text: "COURT OF APPEALS", align: center, bold: true}
+  - {text: "DISTRICT {district}", align: center, bold: true}
+  - {text: "Case No. {case_number}", align: center, above: 14.4}
+  - each: caption
+    above: 14.4
+    between:
+      - {text: "v.", align: center, above: 7.2, below: 7.2}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 14.4}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 21.6}
+  - each: counsel
+    above: 14.4
+    blocks:
+      - group:
+          - {text: "{names}", bold: true, left: 230.4}
+          - {text: "{lines}", left: 230.4, optional: true}
+        above: 7.8
+  - {text: "{phone}", left: 230.4, optional: true}
+# 809.19(1)(a) as the court's practice for a long paper: the table of contents on its own page.
+contents: {title: "Table of Contents", depth: 4, col: 36, hang: 19.5, step: 19.5, above: 11.7}
+# The date and, beside it, the signature block (809.81), never split.
+closing:
+  - group:
+      - columns:
+          - blocks:
+              - {text: "{date}"}
+          - width: 201.6
+            blocks:
+              - {text: "Signed:"}
+              - {rule: 0.5, above: 28.6}
+              - {text: "{signature.signer}", above: 3.9}
+              - {text: "{signature.lines}"}
+    above: 21.6
