@@ -3,8 +3,10 @@
 font:
   size_pt: 14
   pdf_prefix: "LiberationSans"
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. The typst template is on the
-# shared document model (typst/layout.yaml), but `fb engines gen` has no LaTeX face for Arial / Liberation Sans
-# (FLADISTCTAPP5-FORM-005), so latex/ and docx/ are not generated yet (docs/open-items/fb-595.54.41.md).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. latex/ and docx/ are generated
+# (tier 1 0 failed in every engine, 52 pages each), but (docs/open-items/fb-595.54.41.md): typst sets a footnote mark
+# in Liberation Sans as the face's own superior figure (`super` typographic), 1.5 pt wider per note number than the
+# 58 % digit LaTeX and Word set, which splits "227-242).4" for the diff (page 17, docx and latex); and typst keeps the
+# line that anchors note 6 on page 26 and sets the note on page 27, LaTeX moves the line with its note (pages 26-33).
 params:
   cross_engine: report
