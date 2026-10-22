@@ -1,0 +1,77 @@
+# Supreme Court of Hawaii (haw): petition for an extraordinary writ (HRAP 21). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12).
+# Numbers trace to HRAP 32 (../../rules.md, HAW-*; HAW-WRIT-002: the petition conforms to HRAP 32); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}).
+size: 12                  # HAW-FORM-003, -004: 12 point, footnotes and quotations the same size
+pitch:
+  body: 27.6              # HAW-FORM-005: double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # flyleaf, headings, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # HAW-FORM-002: not less than 1 inch on all sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # HAW-FORM-007: bottom center; the flyleaf unnumbered, its counsel page and the contents i, ii, the petition from 1
+footnote: {size: 12, gap: 7}             # HAW-FORM-004, -005: same size as the text, single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # HAW-FORM-005: quotations single spaced, indented
+heading:
+  - {align: center, bold: true, upper: true, above: 19.2, below: 14.4}   # HAW-FORM-005: headings single spaced
+  - {bold: true, hang: 36, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# The flyleaf (HAW-COVER-001, -002): 3 inches clear at the top (the 1-inch margin and 2 inches more), the case
+# number, the court, the cause beside the proceeding, the character of the document (HAW-COVER-003: the arrangement
+# is the exemplar's).
+cover:
+  - {text: "S. C. No. {case_number}", align: center, bold: true, above: 144}
+  - {text: "{court_title}", align: center, bold: true, above: 21.6}
+  - columns:
+      - width: 223.2
+        blocks:
+          - each: caption
+            blocks:
+              - {text: "{names}", optional: true, above: 10.8}
+              - when: indent
+                blocks: [{text: "{designation}", italic: true, left: 108}]
+              - unless: indent
+                blocks: [{text: "{designation}", italic: true}]
+      - blocks: [{text: "{caption_right}"}]
+    gutter: 14.4
+    above: 28.8
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 43.2}
+# The flyleaf continued (HAW-COVER-002: the names of counsel and of the judges who participated): the counsel of the
+# petitioners do not fit under the flyleaf's 3 inches, so they and the judges take the page before the contents,
+# numbered with it (i), as the exemplar's flyleaf runs to a second page.
+before_tables:
+  - columns: {each: counsel, per_row: 2, row_gap: 16.8, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 21.6
+  - {text: "{judges}", optional: true, above: 16.8}
+# The table of contents, on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 7.2}
+# Page 1 of the petition: the court, the cause and the title again (the exemplar's caption page).
+front:
+  - {text: "S. C. No. {case_number}", align: center, bold: true}
+  - {text: "{court_title}", align: center, bold: true, above: 21.6}
+  - columns:
+      - width: 223.2
+        blocks:
+          - each: body_caption
+            blocks:
+              - {text: "{names}", optional: true, above: 10.8}
+              - when: indent
+                blocks: [{text: "{designation}", italic: true, left: 108}]
+              - unless: indent
+                blocks: [{text: "{designation}", italic: true}]
+      - blocks: [{text: "{caption_right}"}]
+    gutter: 14.4
+    above: 28.8
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 43.2, below: 14.4}
+# Each petitioner's date and signature block (HAW-SIG-001: the name typed under the signature), each never split;
+# the last paragraph kept with the first (HAW-SIG-002: text on the page that carries a signature). The later blocks
+# follow on the next page as in the exemplar (four signers).
+keep_with_closing: true
+closing:
+  - each: signatures
+    blocks:
+      - group:
+          - {text: "{date}", indent: 36, optional: true}
+          - {text: "{firm_lines}", left: 234, above: 7.2}
+          - {text: "By /s/ {signer}", left: 234, above: 7.2}
+          - {text: "{lines}", left: 234}
+        above: 21.6
