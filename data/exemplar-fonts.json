@@ -11353,6 +11353,8 @@
       "class": "approximate",
       "face": "TeX Gyre Schola",
       "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.28 under David's 2026-10-17 ruling that Times New Roman is the standard: no W.D. Wis. rule names a face (rules.md WIWD-LEN-001: no typeface asserted), and the one exemplar's Century Schoolbook is that filer's style (tier 3), so the template is set in Times New Roman on typst and docx (the docx had named EB Garamond against a Schola typst face), not in Century Schoolbook's stand-in TeX Gyre Schola; face stays the audited match.",
       "fonts": [
         "Aptos",
         "ArialMT",
