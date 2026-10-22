@@ -363,6 +363,8 @@ fn check_docx(docx: &Path, work: &Path) -> Res<()> {
 
 /// LibreOffice headless conversion of the docx to `out_pdf`.
 pub(crate) fn convert(docx: &Path, out_pdf: &Path, work: &Path) -> Res<()> {
+    // a document that turns ligatures off (Word's w14:ligatures) is converted from a copy that says so to LibreOffice
+    let docx = &crate::doclig::for_libreoffice(docx, work)?;
     let soffice = std::env::var_os("SOFFICE")
         .map(PathBuf::from)
         .or_else(|| which("soffice"))

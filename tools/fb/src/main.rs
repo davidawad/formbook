@@ -7,6 +7,7 @@ mod claim;
 mod contribute;
 mod diff;
 mod diffselftest;
+mod doclig;
 mod docxdedupe;
 mod docxopen;
 mod docxpages;

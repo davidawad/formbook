@@ -1,0 +1,39 @@
+% lib/latex/xeschola.sty: TeX Gyre Schola at the vendored font's advance widths, for a template on the cross-engine
+% layout model (docs/EVAL-LOOP.md, "Cross-engine gate"; lib/latex/xengine.sty) that sets Schola with tgschola.
+% typst and Word set the vendored TeX Gyre Schola 2.609 (fonts/tex-gyre-schola); pdfLaTeX sets TeX Live's Type 1
+% Schola (2.005), whose advances differ in 16 glyphs: ( ) [ ] { } / \ | * + < = >, the ellipsis and the bullet
+% (a parenthesis is 333/1000 em in 2.005, 483 in 2.609). Every other glyph is as wide in all four faces.
+% lib/latex/xeschola.lua writes each of those glyphs as \xeglyph and ends every segment of text (before a space, a
+% footnote, a break opportunity, at the end of a paragraph) with \xeflush, so every segment is as wide as typst's:
+%   \xeglyph{<glyph>}{<regular>}{<bold>}{<italic>}{<bold italic>}   the 2.609 advances, in thousandths of an em:
+%       a glyph narrower in 2.609 is scaled to its advance (| is 606 in 2.005, 225 in 2.609); a wider one is set as
+%       it is and the difference is kept for the segment's end (a space inside a word would read as a word break);
+%   \xeflush   the kept difference as a kern (nothing when there is none).
+% fb render inlines this file in place of \usepackage{xeschola}. Needs graphicx (\resizebox).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{xeschola}[2026/10/22 TeX Gyre Schola 2.609 advances]
+
+\newdimen\xe@pend
+\newdimen\xe@target
+% \xe@width{<regular>}{<bold>}{<italic>}{<bold italic>}: \xe@target, the advance of the current face.
+\newcommand\xe@width[4]{%
+  \in@{b}{\f@series}\let\xe@isbold\ifin@
+  \edef\xe@shape{\f@shape}\def\xe@n{n}%
+  \ifx\xe@shape\xe@n
+    \xe@isbold\count@=#2\relax\else\count@=#1\relax\fi
+  \else
+    \xe@isbold\count@=#4\relax\else\count@=#3\relax\fi
+  \fi
+  \xe@target=\dimexpr\fontdimen6\font*\count@/1000\relax}
+\newcommand\xeglyph[5]{\leavevmode
+  \xe@width{#2}{#3}{#4}{#5}%
+  \setbox\z@\hbox{#1}%
+  \ifdim\xe@target<\wd\z@
+    \resizebox{\xe@target}{\height}{#1}%
+  \else
+    \global\advance\xe@pend by \dimexpr\xe@target-\wd\z@\relax\box\z@
+  \fi}
+% \xeglyphscaled: the glyph scaled to its advance either way (the slash: a line may end after it, so its width cannot
+% wait for the end of the segment).
+\newcommand\xeglyphscaled[5]{\leavevmode\xe@width{#2}{#3}{#4}{#5}\resizebox{\xe@target}{\height}{#1}}
+\newcommand\xeflush{\ifdim\xe@pend=\z@\else\kern\xe@pend\global\xe@pend=\z@\fi}

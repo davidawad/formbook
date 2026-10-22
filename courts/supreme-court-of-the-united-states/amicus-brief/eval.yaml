@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx renders break every line and page
+# where the typst render does (fb-595.54.5, on the shared layout model lib/*/xengine*, Schola at the vendored
+# advances in latex: lib/latex/xeschola.*), so a difference fails. The court's own parameters (booklet page) are in
+# ../eval.yaml.
+params:
+  cross_engine: gate
