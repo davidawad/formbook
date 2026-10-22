@@ -59,8 +59,8 @@ Courts under `courts` (346).
 | [Connecticut Court of Appeals](second-circuit/connecticut/state/court-of-appeals) | `connappct` | up for review | 6/6 | — | — | 29 |
 | [Connecticut Supreme Court](second-circuit/connecticut/state/supreme-court) | `conn` | up for review | 7/7 | — | — | 29 |
 | [Appellate Terms of the Supreme Court of New York](second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | up for review | 3/3 | — | — | 29 |
-| [New York Court of Appeals](second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | — | 0/2 | 29 |
-| [The Four Departments of the Appellate Division](second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 0/3 | 29 |
+| [New York Court of Appeals](second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | — | 2/2 | 29 |
+| [The Four Departments of the Appellate Division](second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 3/3 | 29 |
 | [Supreme Court of Vermont](second-circuit/vermont/state/supreme-court) | `vt` | in progress | 4/4 | — | — | 14 |
 | [Court of Appeals for the Third Circuit](third-circuit/court-of-appeals) | `ca3` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, D. Delaware](third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 2/2 | 14 |
@@ -266,11 +266,11 @@ Courts under `courts` (346).
 | [California Court of Appeal, Second Appellate District](ninth-circuit/california/state/court-of-appeal-second-district) | `calctapp2d` | up for review | 5/5 | — | — | 29 |
 | [California Court of Appeal, Sixth Appellate District](ninth-circuit/california/state/court-of-appeal-sixth-district) | `calctapp6d` | up for review | 7/7 | — | — | 29 |
 | [California Court of Appeal, Third Appellate District](ninth-circuit/california/state/court-of-appeal-third-district) | `calctapp3d` | up for review | 2/2 | — | — | 29 |
-| [California Courts of Appeal](ninth-circuit/california/state/courts-of-appeal) | `calctapp` | up for review | 5/5 | — | 1/3 | 29 |
-| [California Superior Court](ninth-circuit/california/state/superior-court) | `calsuperct` | up for review | 2/2 | — | 0/2 | 14 |
-| [California Superior Court, San Diego County](ninth-circuit/california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | up for review | 2/2 | — | 0/2 | 14 |
+| [California Courts of Appeal](ninth-circuit/california/state/courts-of-appeal) | `calctapp` | up for review | 5/5 | — | 3/3 | 29 |
+| [California Superior Court](ninth-circuit/california/state/superior-court) | `calsuperct` | up for review | 2/2 | — | 2/2 | 14 |
+| [California Superior Court, San Diego County](ninth-circuit/california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | up for review | 2/2 | — | 2/2 | 14 |
 | [California Superior Court, Appellate Division](ninth-circuit/california/state/superior-court-appellate-division) | `calappdeptsuper` | in progress | — | — | — | 14 |
-| [California Supreme Court](ninth-circuit/california/state/supreme-court) | `cal` | up for review | 5/5 | — | 1/2 | 29 |
+| [California Supreme Court](ninth-circuit/california/state/supreme-court) | `cal` | up for review | 5/5 | — | 2/2 | 29 |
 | [Supreme Court of Guam](ninth-circuit/guam/state/supreme-court) | `guam` | up for review | 2/2 | — | — | 29 |
 | [Hawaii Intermediate Court of Appeals](ninth-circuit/hawaii/state/intermediate-court-of-appeals) | `hawapp` | up for review | 5/5 | — | — | 29 |
 | [Supreme Court of Hawaii](ninth-circuit/hawaii/state/supreme-court) | `haw` | up for review | 9/9 | — | — | 29 |
