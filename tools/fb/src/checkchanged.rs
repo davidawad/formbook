@@ -29,13 +29,17 @@ pub fn doc_folders<F: Fn(&str) -> bool>(paths: &[String], is_doc: F) -> BTreeSet
 }
 
 /// The (folder, engine) pairs to check: every engine directory the folder has.
-pub fn jobs<F: Fn(&str) -> bool>(folders: &BTreeSet<String>, has_dir: F) -> Vec<(String, &'static str)> {
+pub fn jobs<F: Fn(&str) -> bool>(
+    folders: &BTreeSet<String>,
+    has_dir: F,
+) -> Vec<(String, &'static str)> {
+    let has_dir = &has_dir;
     folders
         .iter()
         .flat_map(|f| {
             ENGINES
                 .iter()
-                .filter(|e| has_dir(&format!("{f}/{e}")))
+                .filter(move |e| has_dir(&format!("{f}/{e}")))
                 .map(move |e| (f.clone(), *e))
         })
         .collect()
@@ -49,7 +53,12 @@ fn changed(root: &Path, base: &str) -> Res<Vec<String>> {
         .map_err(|e| fail(2, format!("fb check-changed: git: {e}")))?;
     out.status
         .success()
-        .then(|| String::from_utf8_lossy(&out.stdout).lines().map(str::to_string).collect())
+        .then(|| {
+            String::from_utf8_lossy(&out.stdout)
+                .lines()
+                .map(str::to_string)
+                .collect()
+        })
         .ok_or_else(|| {
             fail(
                 2,
@@ -120,18 +129,29 @@ mod tests {
             ]),
             |d| docs.contains(&d),
         );
-        assert_eq!(got, ["courts/c", "courts/c/x/brief"].iter().map(|x| x.to_string()).collect());
+        assert_eq!(
+            got,
+            ["courts/c", "courts/c/x/brief"]
+                .iter()
+                .map(|x| x.to_string())
+                .collect()
+        );
     }
 
     #[test]
     fn a_path_outside_any_doc_folder_and_non_court_paths_check_nothing() {
-        assert!(doc_folders(&s(&["docs/EVAL-LOOP.md", "courts/z/README.md"]), |_| false).is_empty());
+        assert!(
+            doc_folders(&s(&["docs/EVAL-LOOP.md", "courts/z/README.md"]), |_| false).is_empty()
+        );
     }
 
     #[test]
     fn every_engine_directory_of_a_folder_is_checked_and_only_those() {
         let dirs = ["courts/a/typst", "courts/a/docx", "courts/b/typst"];
-        let folders: BTreeSet<String> = ["courts/a", "courts/b"].iter().map(|x| x.to_string()).collect();
+        let folders: BTreeSet<String> = ["courts/a", "courts/b"]
+            .iter()
+            .map(|x| x.to_string())
+            .collect();
         assert_eq!(
             jobs(&folders, |d| dirs.contains(&d)),
             vec![
