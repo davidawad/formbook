@@ -26,7 +26,7 @@
 #let page-margin = 1in                 // FRAP 32(a)(4): at least one inch on all four sides.
 #let para-indent = 0.5in
 #let counsel-gutter = 16.8pt           // cover: the gap between the two counsel columns
-#let cover-gap = 10pt                  // cover: the space between its parts (FRAP 32(a)(2)(A)-(F)), a third more around the caption, two fifths more around the title (the longest sample cover fills the page)
+#let cover-gap = 12pt                  // cover: the space between its parts (FRAP 32(a)(2)(A)-(F)), a third more around the caption, two fifths more around the title (the longest sample cover fills the page)
 #let counsel-columns = 2               // cover counsel groups per row (a layout choice; FRAP 32(a)(2)(F) sets only the contents)
 #let toc-page-col = 36pt               // TOC: the page numbers keep the last 36 pt of the line to themselves
 #let toa-page-col = 36pt               // TOA: the page list's column (a longer list widens its own row's column)
@@ -129,8 +129,11 @@
 #let counsel-group(g) = block(width: 100%, above: 0pt, below: 0pt, {
   set par(first-line-indent: 0pt, hanging-indent: 0pt)
   for n in g.names { par(inl(n)) }
-  for l in g.lines { par(emph(inl(l))) }
+  for l in g.lines { par(inl(l)) }
 })
+
+/// A cover gap of height `h` with the filed covers' short rule centered in it (a rule never changes the flow).
+#let rule-gap(h) = block(width: 100%, height: h, above: 0pt, below: 0pt, place(horizon + center, line(length: 1.5in, stroke: 0.8pt)))
 
 #let cover-body(meta) = { set text(..edges(pitch-cover)); {
   set par(first-line-indent: 0pt)
@@ -138,14 +141,14 @@
   let major = cover-gap * 1.4        // around the brief's title and before the date
   let caption-gap = cover-gap * 1.12 // around the caption
   // Circuit Rule 28(a)(8): capital letters at the top of the front cover.
-  par(strong(inl(upper(need(meta, "oral_argument")))))
+  par(inl(upper(need(meta, "oral_argument"))))
   v(cover-gap)
-  par[No. #need(meta, "case_number")]
-  v(cover-gap)
+  par(strong[No. #need(meta, "case_number")])
+  rule-gap(cover-gap)
   par[UNITED STATES COURT OF APPEALS]
   v(2.8pt)
   par[FOR THE DISTRICT OF COLUMBIA CIRCUIT]
-  v(caption-gap)
+  rule-gap(caption-gap)
   for (i, side) in need(meta, "caption").enumerate() {
     if i > 0 {
       v(5.6pt)
@@ -154,15 +157,15 @@
     }
     for n in side.names { par(inl(n)) }
     v(4.2pt)
-    par(inl(side.designation))
+    block(width: 100%, above: 0pt, below: 0pt, pad(left: 3.4in, align(left, par(inl(side.designation)))))
   }
-  v(caption-gap)
+  rule-gap(caption-gap)
   par(inl(need(meta, "proceeding")))
   if "district_court_case" in meta { v(4.2pt); par(inl(meta.district_court_case)) }
   if "judge" in meta { v(4.2pt); par(inl(meta.judge)) }
-  v(major)
+  rule-gap(major)
   par(strong(upper(inl(need(meta, "brief_title")))))
-  v(major)
+  rule-gap(major)
   set align(left)
   for (ri, row) in need(meta, "counsel").chunks(counsel-columns).enumerate() {
     if ri > 0 { v(8.4pt) }

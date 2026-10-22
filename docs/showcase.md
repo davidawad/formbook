@@ -12,7 +12,7 @@ Labels and layout are typeset by typst with its bundled fonts, so the output doe
 
 ![hero](showcase/hero.png)
 
-Markdown input (first lines of the YAML header of `courts/third-circuit/court-of-appeals/opening-brief/usage/INPUT-opening-brief.md`), formbook's rendered cover page (`usage/OUTPUT-opening-brief.typst.pdf`, page 1), and the cover page of the brief actually filed (`usage/FILED-EXAMPLE-opening-brief.pdf`, page 1).
+The target is the filed brief: the court's cover is what formbook is built to reproduce. Left, the first lines of the YAML header of `courts/dc-circuit/court-of-appeals/opening-brief/usage/INPUT-opening-brief.md` (your markdown); middle, formbook's rendered cover page from that file (`usage/OUTPUT-opening-brief.typst.pdf`, page 1); right, the cover page of the brief actually filed (`usage/FILED-EXAMPLE-opening-brief.pdf`, page 1, with the court's electronic-filing stamp). The two covers share their layout: centered oral-argument line, bold case number, short rules between blocks, caption with the designations set to the right, two-column counsel block, date at the margin. They differ in type (small caps on the court name, upper-case party names) and in how the third counsel group flows.
 
 Regenerate all images, including this one: `just showcase`
 
@@ -28,7 +28,7 @@ Regenerate: `just showcase`
 
 ![pages](showcase/pages.png)
 
-Eight pages of one rendered brief (`courts/third-circuit/court-of-appeals/opening-brief/usage/OUTPUT-ca3-opening-brief-tresslar.typst.pdf`, pages 1, 2, 3, 6, 11, 14, 15 and 18): cover, table of contents, table of authorities, statement, argument, conclusion, certificate of compliance, certificate of service. All generated from the markdown.
+Eight pages of one rendered brief (`courts/dc-circuit/court-of-appeals/opening-brief/usage/OUTPUT-opening-brief.typst.pdf`, pages 1, 2, 4, 5, 7, 11, 14 and 15): cover, certificate as to parties, table of contents, table of authorities, introduction, summary of argument, certificate of compliance, certificate of service. All generated from the markdown.
 
 Regenerate: `just showcase`
 

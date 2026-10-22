@@ -10,6 +10,7 @@ use crate::{fail, repo_root, Res};
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
+const HERO: &str = "courts/dc-circuit/court-of-appeals/opening-brief";
 const TRES: &str = "courts/third-circuit/court-of-appeals/opening-brief";
 const NYS: &str = "courts/second-circuit/new-york/state/supreme-court/motion-brief";
 const CAND: &str = "courts/ninth-circuit/california/federal/northern-district/complaint";
@@ -24,15 +25,16 @@ const HERO_TYP: &str = r####"#let bx = eval("bo" + "x", mode: "code")  // typst'
 #set text(font: "Libertinus Serif", size: 15pt, fill: rgb("#222"))
 #let lab(t) = align(center, text(weight: "bold", size: 17pt)[#t])
 #let arrow = align(horizon + center, text(size: 40pt, fill: rgb("#888"))[→])
+#let same = align(horizon + center, text(size: 40pt, weight: "bold", fill: rgb("#2a7d3f"))[≈])
 #let frame(body) = bx(stroke: 0.8pt + rgb("#999"), fill: white, body)
 #grid(columns: (1fr, 34pt, auto, 34pt, auto), rows: (1fr, auto), column-gutter: 4pt, row-gutter: 10pt,
   frame(bx(width: 100%, height: 100%, inset: 9pt, clip: true,
     text(font: "DejaVu Sans Mono", size: 9.6pt, fill: rgb("#223"), raw(read("input.txt"), lang: none)))),
   arrow,
   frame(image("h-ours.png", height: 100%)),
-  arrow,
+  same,
   frame(image("h-filed.png", height: 100%)),
-  lab[markdown in], [], lab[formbook (Typst)], [], lab[filed with the court])
+  lab[your markdown], [], lab[formbook render], [], lab[filed with the court (the target)])
 "####;
 
 const OVERLAY_TYP: &str = r####"#let bx = eval("bo" + "x", mode: "code")  // typst's inline layout primitive
@@ -48,7 +50,7 @@ const OVERLAY_TYP: &str = r####"#let bx = eval("bo" + "x", mode: "code")  // typ
 const PAGES_TYP: &str = r####"#let bx = eval("bo" + "x", mode: "code")  // typst's inline layout primitive
 #set page(width: auto, height: auto, margin: 14pt, fill: rgb("#f6f4ee"))
 #set text(font: "Libertinus Serif", size: 13pt, fill: rgb("#222"))
-#let names = ("cover", "table of contents", "table of authorities", "statement", "argument", "conclusion", "certificate of compliance", "certificate of service")
+#let names = ("cover", "certificate as to parties", "table of contents", "table of authorities", "introduction", "summary of argument", "certificate of compliance", "certificate of service")
 #grid(columns: 4, column-gutter: 10pt, row-gutter: 12pt,
   ..range(8).map(i => align(center, stack(spacing: 5pt,
     bx(stroke: 0.8pt + rgb("#999"), image("p" + str(i + 1) + ".png", width: 215pt)),
@@ -203,9 +205,9 @@ impl Shots {
     }
 
     fn hero(&self) -> Res<()> {
-        let t_out = format!("{TRES}/usage/OUTPUT-opening-brief.typst.pdf");
-        let t_filed = format!("{TRES}/usage/FILED-EXAMPLE-opening-brief.pdf");
-        let md = std::fs::read_to_string(self.root.join(TRES).join("usage/INPUT-opening-brief.md"))
+        let t_out = format!("{HERO}/usage/OUTPUT-opening-brief.typst.pdf");
+        let t_filed = format!("{HERO}/usage/FILED-EXAMPLE-opening-brief.pdf");
+        let md = std::fs::read_to_string(self.root.join(HERO).join("usage/INPUT-opening-brief.md"))
             .map_err(|e| fail(2, format!("fb showcase: {e}")))?;
         std::fs::write(self.w("input.txt"), input_excerpt(&md, 30, 52))
             .map_err(|e| fail(2, format!("fb showcase: {e}")))?;
@@ -230,8 +232,8 @@ impl Shots {
     }
 
     fn pages(&self) -> Res<()> {
-        let t_out = format!("{TRES}/usage/OUTPUT-opening-brief.typst.pdf");
-        for (i, p) in [1, 2, 3, 6, 11, 14, 15, 17].iter().enumerate() {
+        let t_out = format!("{HERO}/usage/OUTPUT-opening-brief.typst.pdf");
+        for (i, p) in [1, 2, 4, 5, 7, 11, 14, 15].iter().enumerate() {
             self.page(&t_out, *p, &format!("p{}", i + 1), 70)?;
         }
         self.compose("pages.typ", PAGES_TYP, "pages.png", 48)

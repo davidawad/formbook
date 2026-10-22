@@ -88,7 +88,7 @@ Re-reviewed 2026-10-15 after the font change to TeX Gyre Schola: every page of `
 
 | Page | Content | Finding |
 |---|---|---|
-| 1 | Cover | Fits one page. Oral-argument line, case number, court, caption, proceeding, title, three counsel groups, date. Changed 2026-10-16: three counsel columns broke names ("Michael T. / Kirkpatrick"); groups are now set two to a row, as in the exemplar. |
+| 1 | Cover | Fits one page. Oral-argument line, case number, court, caption, proceeding, title, three counsel groups, date. Changed 2026-10-16: three counsel columns broke names ("Michael T. / Kirkpatrick"); groups are now set two to a row, as in the exemplar. Changed 2026-10-22 (fb-595.77, the README hero): the exemplar's short rules between the cover blocks (typst only; a rule never changes the flow), bold case number, oral-argument line and counsel in roman, designations set to the right, cover gaps 12 pt (was 10) on all three engines. |
 | 2 | Rule 28(a)(1) certificate, parties, rulings (i) | Heading two lines, single-spaced. Paragraphs had no indent and no gap, so consecutive paragraphs read as one; fixed 2026-10-16 (first-line indent). |
 | 3 | Certificate cont. (related cases, Rule 26.1) (ii) | OK. |
 | 4 | Table of contents (iii) | Page numbers match the layout. OK. |

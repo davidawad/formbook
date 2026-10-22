@@ -2,7 +2,7 @@
 
 **Court-filing templates for markdown-first lawyers: write your brief in markdown, get a PDF that meets the court's rules, checked against a real filed example.**
 
-![markdown input, formbook's rendered cover page, and the cover page of the brief actually filed with the court](docs/showcase/hero.png)
+![your markdown, formbook's rendered cover page, and the cover page of the brief actually filed with the court (the target): the two covers share their layout](docs/showcase/hero.png)
 
 formbook is an open collection of court-filing templates, one folder per court and document type (opening brief, complaint, motion brief, and so on). Templates are written in [Typst](https://typst.app) and take markdown with a YAML header; the template generates the cover or caption, tables of contents and authorities, spacing, fonts, certificates and signature block that the court's rules call for.
 

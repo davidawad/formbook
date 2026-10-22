@@ -321,7 +321,7 @@ end
 -- ---------------------------------------------------------------------------
 
 local function cover(meta)
-  local gap, caption, major = 200, 224, 280
+  local gap, caption, major = 240, 269, 336
   local function spacing(before, after) return xe.spacing(before, after, COVER) end
   local out = {}
   local function add(x) out[#out + 1] = x end
@@ -329,8 +329,8 @@ local function cover(meta)
     add(para({ KEEP, spacing(before or 0, 0), ind(0, nil, 0), jc("center") }, x))
   end
   -- the first line moves down into place (DROP.cover), the gap after it gives that back
-  center(inl(stringify(need_meta(meta, "oral_argument")):upper(), { b = true }), DROP.cover)
-  center(runs("No. ", {}) .. inl(need_meta(meta, "case_number"), {}), gap - DROP.cover)
+  center(inl(stringify(need_meta(meta, "oral_argument")):upper(), {}), DROP.cover)
+  center(runs("No. ", { b = true }) .. inl(need_meta(meta, "case_number"), { b = true }), gap - DROP.cover)
   center(runs("UNITED STATES COURT OF APPEALS", {}), gap)
   center(runs("FOR THE DISTRICT OF COLUMBIA CIRCUIT", {}), 56)
   for i, side in ipairs(need_meta(meta, "caption")) do
@@ -349,7 +349,7 @@ local function cover(meta)
     if g then
       local ls = {}
       for _, n in ipairs(g.names) do ls[#ls + 1] = inl(n, {}) end
-      for _, l in ipairs(g.lines or {}) do ls[#ls + 1] = inl(l, { i = true }) end
+      for _, l in ipairs(g.lines or {}) do ls[#ls + 1] = inl(l, {}) end
       for li, x in ipairs(ls) do xml[#xml + 1] = para({ spacing(li == 1 and before or 0, 0), ind(0, nil, 0) }, x) end
     else
       xml[1] = para({ spacing(0, 0) }, "")
@@ -411,7 +411,7 @@ local function signature(meta)
   local ls = sig.lines or {}
   add(para({ #ls > 0 and KEEP or LINES, spacing(0, 0), ind(SIG_COL, nil, 0) }, inl(signer, {})))
   for i, l in ipairs(ls) do
-    add(para({ i == #ls and LINES or KEEP, spacing(i == 1 and 20 or 0, 0), ind(SIG_COL, nil, 0) }, inl(l, { i = true })))
+    add(para({ i == #ls and LINES or KEEP, spacing(i == 1 and 20 or 0, 0), ind(SIG_COL, nil, 0) }, inl(l, {})))
   end
   return table.concat(out)
 end

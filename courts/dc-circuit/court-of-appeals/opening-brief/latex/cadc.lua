@@ -210,15 +210,15 @@ end
 -- Cover [cover-body]
 -- ---------------------------------------------------------------------------
 
-local GAP = 10 -- typst cover-gap; caption 1.12 x, title and date 1.4 x
+local GAP = 12 -- typst cover-gap; caption 1.12 x, title and date 1.4 x
 
 local function cover(m)
   local out = { "\\thispagestyle{empty}\\begingroup\\dccover\\centering\\parindent=0pt\\relax" }
   local function add(s) out[#out + 1] = s end
   local function gap(x) add(string.format("\\dcgap{%.2f}", x)) end
-  add("{\\bfseries\\MakeUppercase{" .. tex(need(m, "oral_argument")) .. "}\\par}")
+  add("{\\MakeUppercase{" .. tex(need(m, "oral_argument")) .. "}\\par}")
   gap(GAP)
-  add("No. " .. tex(need(m, "case_number")) .. "\\par")
+  add("{\\bfseries No. " .. tex(need(m, "case_number")) .. "\\par}")
   gap(GAP)
   add("UNITED STATES COURT OF APPEALS\\par")
   gap(2.8)
@@ -242,7 +242,7 @@ local function cover(m)
     if not g then return "" end
     local ls = {}
     for _, n in ipairs(g.names) do ls[#ls + 1] = tex(n) .. "\\par" end
-    for _, l in ipairs(g.lines or {}) do ls[#ls + 1] = "\\emph{" .. tex(l) .. "}\\par" end
+    for _, l in ipairs(g.lines or {}) do ls[#ls + 1] = tex(l) .. "\\par" end
     return table.concat(ls, " ")
   end
   for i = 1, #groups, 2 do
@@ -340,7 +340,7 @@ local function signature(m, keep)
   add("\\leftskip=\\dcsigcol\\relax\\addvspace{7bp}")
   add(tex("/s/ " .. plain(sig.signer)) .. "\\par\\nobreak " .. tex(sig.signer) .. "\\par\\nobreak\\addvspace{1bp}")
   local ls = {}
-  for _, l in ipairs(sig.lines or {}) do ls[#ls + 1] = "\\emph{" .. tex(l) .. "}\\par" end
+  for _, l in ipairs(sig.lines or {}) do ls[#ls + 1] = tex(l) .. "\\par" end
   add(table.concat(ls, "\\nobreak "))
   add("\\endgroup")
   return table.concat(out, "\n")
