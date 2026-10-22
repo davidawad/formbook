@@ -106,16 +106,13 @@ An appellate court’s review in election contest cases is limited to examinatio
 
 # Statement of Questions Involved
 
-1. Whether Mr. Cabell’s appeal should be dismissed as moot where his challenges to two provisional ballots are not capable of altering the outcome of the election?
-
+1. Whether Mr. Cabell’s appeal should be dismissed as moot where his challenges to two provisional ballots are not capable of altering the outcome of the election?\
    Suggested Answer: Yes.
 
-2. Whether the trial court correctly held that the Wagner provisional ballot should be counted where the evidence showed that Mr. Wagner appeared in person at his polling place, followed the directions of a poll worker when completing his ballot, and unmistakably demonstrated intention to vote and there was no evidence of fraud?
-
+2. Whether the trial court correctly held that the Wagner provisional ballot should be counted where the evidence showed that Mr. Wagner appeared in person at his polling place, followed the directions of a poll worker when completing his ballot, and unmistakably demonstrated intention to vote and there was no evidence of fraud?\
    Suggested Answer: Yes.
 
-3. Whether the trial court correctly held that the O’Donnell provisional ballot should not be counted where Mr. O’Donnell was registered to vote in Schuylkill County as of December 2023 when he changed his address on his vehicle registration and had the ability to vote in the precinct in which he lived and was registered in Schuylkill County on election day?
-
+3. Whether the trial court correctly held that the O’Donnell provisional ballot should not be counted where Mr. O’Donnell was registered to vote in Schuylkill County as of December 2023 when he changed his address on his vehicle registration and had the ability to vote in the precinct in which he lived and was registered in Schuylkill County on election day?\
    Suggested Answer: Yes.
 
 # Statement of the Case

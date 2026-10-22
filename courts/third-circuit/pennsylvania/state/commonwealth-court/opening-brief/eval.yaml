@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: typst wraps a list
+# item inside a quotation a word early (the order's item 4, page 6: "outer" fits the 324 pt measure by 1 pt in LaTeX
+# and Word), and LaTeX does not break after a slash inside a word ("(MM/DD/YYYY)", page 14), gaps of the shared model
+# (docs/open-items/fb-595.54.45.md, second pass).
+params:
+  cross_engine: report
