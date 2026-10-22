@@ -75,35 +75,35 @@ service:
     - "An Employee of the"
     - "Federal Public Defender"
 authorities:
-  youngblood: {kind: us-case, name: "Arizona v. Youngblood", cite: "488 U.S. 51 (1988)"}
-  barker: {kind: us-case, name: "Barker v. Wingo", cite: "407 U.S. 514 (1972)"}
-  brady: {kind: us-case, name: "Brady v. Maryland", cite: "373 U.S. 83 (1963)"}
-  bagley: {kind: us-case, name: "United States v. Bagley", cite: "473 U.S. 667 (1985)"}
-  fox: {kind: us-case, name: "Fox v. Vice", cite: "563 U.S. 826 (2011)"}
-  slappy: {kind: us-case, name: "Morris v. Slappy", cite: "461 U.S. 1 (1983)"}
-  ungar: {kind: us-case, name: "Ungar v. Sarafite", cite: "376 U.S. 575 (1964)"}
-  davenport: {kind: fed-case, name: "United States v. Davenport", cite: "753 F.2d 1460 (9th Cir. 1985)"}
-  knight: {kind: fed-case, name: "United States v. Knight", cite: "342 F.3d 697 (7th Cir. 2003)"}
-  leka: {kind: fed-case, name: "Leka v. Portuondo", cite: "257 F.3d 89 (2d Cir. 2001)"}
-  lopez: {kind: fed-case, name: "Lopez v. Massachusetts", cite: "480 F.3d 591 (1st Cir. 2007)"}
-  mcpartlin: {kind: fed-case, name: "United States v. McPartlin", cite: "595 F.2d 1321 (7th Cir. 1979)"}
-  miller: {kind: fed-case, name: "United States v. Miller", cite: "529 F.2d 1125 (9th Cir. 1976)"}
-  rittweger: {kind: fed-case, name: "United States v. Rittweger", cite: "524 F.3d 171 (2d Cir. 2008)"}
-  rodriguez: {kind: fed-case, name: "United States v. Rodriguez", cite: "496 F.3d 221 (2d Cir. 2007)"}
-  brass: {kind: state-case, name: "Brass v. State", cite: "138 Nev. 180, 507 P.3d 208 (2022)"}
-  coddington: {kind: state-case, name: "Coddington v. State", cite: "No. 71835, 2018 WL 1129659 (Nev. Feb. 26, 2018) (Order of Affirmance)"}
-  daniels: {kind: state-case, name: "Daniels v. State", cite: "114 Nev. 261, 956 P.2d 111 (1998)"}
-  indc: {kind: state-case, name: "In re D.C.", cite: "140 Nev. Adv. Op. 25, 546 P.3d 810 (2024)"}
-  jones: {kind: state-case, name: "Jones v. State", cite: "113 Nev. 454, 937 P.2d 55 (1997)"}
-  langford: {kind: state-case, name: "Langford v. State", cite: "95 Nev. 631, 600 P.2d 231 (1979)"}
-  lvrj: {kind: state-case, name: "Las Vegas Review-Journal v. Clark Cty. Office of the Coroner/Med. Exam’r", cite: "138 Nev. Adv. Op. 80, 521 P.3d 1169 (2022)"}
-  maginnis: {kind: state-case, name: "Maginnis v. State", cite: "93 Nev. 173, 561 P.2d 922 (1977)"}
-  gonzalez: {kind: state-case, name: "State v. Gonzalez", cite: "139 Nev. Adv. Op. 33, 535 P.3d 248 (2023)"}
-  ware: {kind: state-case, name: "State v. Ware", cite: "881 P.2d 679 (N.M. 1994)"}
-  thomas: {kind: state-case, name: "Thomas v. Eighth Judicial Dist. Court", cite: "133 Nev. 468, 402 P.3d 619 (2017)"}
-  nrs234: {kind: statute, name: "NRS 174.234"}
-  nrs235: {kind: statute, name: "NRS 174.235"}
-  nrs295: {kind: statute, name: "NRS 174.295"}
+  youngblood: {kind: us-case, cite: "*Arizona v. Youngblood*, 488 U.S. 51 (1988)"}
+  barker: {kind: us-case, cite: "*Barker v. Wingo*, 407 U.S. 514 (1972)"}
+  brady: {kind: us-case, cite: "*Brady v. Maryland*, 373 U.S. 83 (1963)"}
+  bagley: {kind: us-case, cite: "*United States v. Bagley*, 473 U.S. 667 (1985)"}
+  fox: {kind: us-case, cite: "*Fox v. Vice*, 563 U.S. 826 (2011)"}
+  slappy: {kind: us-case, cite: "*Morris v. Slappy*, 461 U.S. 1 (1983)"}
+  ungar: {kind: us-case, cite: "*Ungar v. Sarafite*, 376 U.S. 575 (1964)"}
+  davenport: {kind: fed-case, cite: "*United States v. Davenport*, 753 F.2d 1460 (9th Cir. 1985)"}
+  knight: {kind: fed-case, cite: "*United States v. Knight*, 342 F.3d 697 (7th Cir. 2003)"}
+  leka: {kind: fed-case, cite: "*Leka v. Portuondo*, 257 F.3d 89 (2d Cir. 2001)"}
+  lopez: {kind: fed-case, cite: "*Lopez v. Massachusetts*, 480 F.3d 591 (1st Cir. 2007)"}
+  mcpartlin: {kind: fed-case, cite: "*United States v. McPartlin*, 595 F.2d 1321 (7th Cir. 1979)"}
+  miller: {kind: fed-case, cite: "*United States v. Miller*, 529 F.2d 1125 (9th Cir. 1976)"}
+  rittweger: {kind: fed-case, cite: "*United States v. Rittweger*, 524 F.3d 171 (2d Cir. 2008)"}
+  rodriguez: {kind: fed-case, cite: "*United States v. Rodriguez*, 496 F.3d 221 (2d Cir. 2007)"}
+  brass: {kind: state-case, cite: "*Brass v. State*, 138 Nev. 180, 507 P.3d 208 (2022)"}
+  coddington: {kind: state-case, cite: "*Coddington v. State*, No. 71835, 2018 WL 1129659 (Nev. Feb. 26, 2018) (Order of Affirmance)"}
+  daniels: {kind: state-case, cite: "*Daniels v. State*, 114 Nev. 261, 956 P.2d 111 (1998)"}
+  indc: {kind: state-case, cite: "*In re D.C.*, 140 Nev. Adv. Op. 25, 546 P.3d 810 (2024)"}
+  jones: {kind: state-case, cite: "*Jones v. State*, 113 Nev. 454, 937 P.2d 55 (1997)"}
+  langford: {kind: state-case, cite: "*Langford v. State*, 95 Nev. 631, 600 P.2d 231 (1979)"}
+  lvrj: {kind: state-case, cite: "*Las Vegas Review-Journal v. Clark Cty. Office of the Coroner/Med. Exam’r*, 138 Nev. Adv. Op. 80, 521 P.3d 1169 (2022)"}
+  maginnis: {kind: state-case, cite: "*Maginnis v. State*, 93 Nev. 173, 561 P.2d 922 (1977)"}
+  gonzalez: {kind: state-case, cite: "*State v. Gonzalez*, 139 Nev. Adv. Op. 33, 535 P.3d 248 (2023)"}
+  ware: {kind: state-case, cite: "*State v. Ware*, 881 P.2d 679 (N.M. 1994)"}
+  thomas: {kind: state-case, cite: "*Thomas v. Eighth Judicial Dist. Court*, 133 Nev. 468, 402 P.3d 619 (2017)"}
+  nrs234: {kind: statute, cite: "NRS 174.234"}
+  nrs235: {kind: statute, cite: "NRS 174.235"}
+  nrs295: {kind: statute, cite: "NRS 174.295"}
 ---
 
 # ABOUT THE BRIEF AND AMICI CURIAE

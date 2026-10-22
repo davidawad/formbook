@@ -1,0 +1,95 @@
+# Nevada Supreme Court (nev): amicus curiae brief (NRAP 29). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to NRAP 26.1, 28, 29 and 32 (../../rules.md, NEV-*); lengths in points. No case text here: every string printed comes
+# from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # NEV-FORM-004 (NRAP 32(a)(5)(A)): proportionally spaced type, 14 points or larger
+pitch:
+  body: 32.2              # NEV-FORM-003 (NRAP 32(a)(4)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NEV-FORM-002 (NRAP 32(a)(4)): at least one inch on all four sides
+indent: 36                # convention: a half-inch first-line indent
+page_number: {align: center, front: lower-roman}   # NEV-FORM-006 (NRAP 32(a)(4)): at the bottom; the tables i, ii .., the brief 1, 2 ..
+footnote: {size: 14, gap: 7}             # NEV-FORM-004 (NRAP 32(a)(5)): footnotes in the body's size and face; single spaced (NEV-FORM-003); gap: convention
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # NEV-FORM-003: quotations of more than two lines indented, single spaced; space: convention
+heading:                  # NEV-FORM-003: headings single spaced; their spacing and style convention (as the court's answering brief)
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The cover (NEV-COVER-001, NRAP 32(a)(2)(A)-(E); NEV-COVER-002, NRAP 29(d)): the court, the title of the case beside
+# the case number and the court below, the document's title (naming the party supported) and counsel. Spacing:
+# convention.
+cover:
+  - {text: "IN THE NEVADA SUPREME COURT", align: center, bold: true}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 36, above: 11.2, below: 11.2}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36}
+      - blocks:
+          - {text: "No. {case_number}"}
+          - {text: "On Appeal from {proceeding}", optional: true, above: 11.2}
+    gutter: 28.8
+    above: 22.4
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 36}
+  - columns: {each: counsel, per_row: 2, row_gap: 11.2, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 36
+# NEV-ORDER-004 (NRAP 26.1(b)): the disclosure statement, titled "NRAP 26.1 Disclosure", on a page of its own before
+# the table of contents, numbered i with the tables (NEV-FORM-006). Its title is not a heading, so the contents do not
+# list it (the filed exemplar does): Word's page lookup gives a heading there the contents' own page
+# (docs/open-items/fb-595.54.18.md).
+before_tables:
+  - when: disclosure
+    blocks:
+      - {text: "NRAP 26.1 Disclosure", align: center, bold: true, upper: true}
+      - {markdown: "{disclosure.text}", pitch: body, indent: 36, above: 16.8}
+      - {text: "{disclosure.signature}", left: 230.4, above: 16.8}
+# NEV-ORDER-003 (NRAP 29(d)(1), (2)): the table of contents and the table of authorities (NEV-ORDER-001: cases
+# alphabetically arranged, statutes, with the pages where cited), each from a page of its own. Columns: convention.
+# The authorities are keyed in the frontmatter (`kind`) and cited by `[text](toa:key)` links; seven pages or more
+# print as passim (convention, as the old template). A case's `cite` holds its italic name (Bluebook: name, comma,
+# citation; the model's `italic` group would drop the comma).
+contents: {title: "Table of Contents", depth: 2, col: 36, hang: 21, step: 21, above: 12.6}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 12.6
+  passim: 7
+  group: {bold: true, above: 16.8, below: 2.8}
+  kinds:
+    - {kind: us-case, title: "SUPREME COURT CASES"}
+    - {kind: fed-case, title: "FEDERAL CASES"}
+    - {kind: state-case, title: "STATE CASES"}
+    - {kind: statute, title: "STATUTES"}
+# The date and the signature blocks (NRAP 32(d)), never split; then the certificate of compliance (NEV-CERT-001,
+# NEV-CERT-002, NRAP 28.2, 32(a)(9); its statements the court's own, the word count the filer's) and the certificate
+# of service (NEV-CERT-003, NRAP 25(d)), each from a page of its own, titled as headings so the contents list them
+# (as the old template and the filed exemplar).
+closing:
+  - &sign
+    group:
+      - {text: "Dated {date}."}
+      - {text: "Respectfully submitted,", above: 16.1}
+      - columns: {each: signature, per_row: 2, row_gap: 11.2, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 16.1
+    above: 21.6
+  - {break: true}
+  - {text: "Certificate of Compliance", heading: 1}
+  - {text: '1\. I hereby certify that this brief complies with the formatting requirements of NRAP 32(a)(4), the typeface requirements of NRAP 32(a)(5) and the type style requirements of NRAP 32(a)(6) because this brief has been prepared in a proportionally spaced typeface, Times New Roman, 14 point font.', pitch: body, indent: 36, above: 16.8}
+  - {text: '2\. I further certify that this brief complies with the page- or type-volume limitations of NRAP 32(a)(7) because, excluding the parts of the brief exempted by NRAP 32(a)(7)(C), it is proportionately spaced, has a typeface of 14 points or more, and contains {word_count} words.', pitch: body, indent: 36}
+  - group:
+      - {text: '3\. I hereby certify that I have read this appellate brief, and to the best of my knowledge, information, and belief, it is not frivolous or interposed for any improper purpose. I further certify that this brief complies with all applicable Nevada Rules of Appellate Procedure, in particular NRAP 28(e)(1), which requires every assertion in the brief regarding matters in the record to be supported by a reference to the page and volume number, if any, of the transcript or appendix where the matter relied on is to be found. I understand that I may be subject to sanctions in the event that the accompanying brief is not in conformity with the requirements of the Nevada Rules of Appellate Procedure.', pitch: body, indent: 36}
+      - *sign
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", heading: 1}
+      - {text: "I hereby certify that on {date}, I electronically filed the foregoing with the Clerk of the Nevada Supreme Court by using the appellate electronic filing system. Participants in the case who are registered users in the appellate electronic filing system will be served by the system and include:", pitch: body, indent: 36, above: 16.8}
+      - each: service.recipients
+        blocks: [{text: "{names}", above: 16.1}, {text: "{lines}"}]
+      - {text: "{service.signature}", left: 230.4, above: 22.4}
