@@ -15,8 +15,8 @@ Sources, all read on 2026-10-14:
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
 | MTB-FORM-001 | Mont. LBR 5005-2(a)(1), (6) | Electronically filed PDF; one-sided. The template uses letter paper. | `set page(paper: "us-letter")` |
-| MTB-FORM-002 | Mont. LBR 5005-2(a)(2) | Legible, "at least 12-point font size." | `type-size` = 13 pt |
-| MTB-FORM-003 | Mont. LBR 5005-2(a)(5) | "double-spaced, except for quoted material and footnotes." Body pitch 24 pt. Block quotations and footnotes are single-spaced; tables are single-spaced. | `body-leading`; the body block sets it; `show quote` and `show table` |
+| MTB-FORM-002 | Mont. LBR 5005-2(a)(2) | Legible, "at least 12-point font size." | `type-size` = 12 pt (Times New Roman, the exemplar's size) |
+| MTB-FORM-003 | Mont. LBR 5005-2(a)(5) | "double-spaced, except for quoted material and footnotes." Body pitch 24 pt. Block quotations and footnotes are single-spaced; tables are single-spaced. | `pitch-double` (24 pt line boxes) for the body and headings; quotations, the table and the cover, signature, notice and certificate lines at `pitch-single` (14 pt) |
 | MTB-FORM-004 | Mont. LBR 5005-2(a)(3) | "no less than one-inch margins, exclusive of page numbers." | `margins` |
 | MTB-FORM-005 | Mont. LBR 5005-2(a)(4) | Consecutive page numbers at the bottom of each page. | page footer, `counter(page)` |
 | MTB-FIRST-001 | Mont. LBR 5005-2(b)(1)-(6) | Upper left of the first page: name, office mailing address, telephone, email, state bar I.D., and the party represented. | `counsel`, `counsel_role` |
@@ -50,30 +50,29 @@ sh tools/render.sh courts/ninth-circuit/montana/federal/bankruptcy-district/moti
 sh tools/overlay.sh courts/ninth-circuit/montana/federal/bankruptcy-district/motion-brief mohler-trustee-sale-motion
 ```
 
-- `usage/OUTPUT-motion-brief.typst.pdf`: 8 pages. `render.sh` fails on any typst warning; none. Fonts (`pdffonts`): EB Garamond Regular, Italic, Bold, all embedded (vendored).
-- `usage/OVERLAY-mohler-trustee-sale-motion.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map (word-overlap pairing, coarse): ours p.1 ↔ filed p.1 (79.0%), p.2 ↔ p.2 (65.4%), p.3 ↔ p.3 (73.1%), p.4 ↔ p.4 (75.5%), p.5 ↔ p.5 (62.5%); ours p.6-8 pair with filed p.6 at low overlap (29.7%, 37.2%, 24.1%), because our notice and the certificate run longer than the exemplar's last page. The layers will not coincide on text lines: the font differs (EB Garamond vs Times). The overlay is a diagnostic, not a score.
+- `usage/OUTPUT-motion-brief.typst.pdf`: 7 pages. `render.sh` fails on any typst warning; none. Fonts (`pdffonts`): Times New Roman Regular, Italic, Bold, all embedded (vendored).
+- `usage/OVERLAY-mohler-trustee-sale-motion.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map (word-overlap pairing, coarse): ours p.1 ↔ filed p.1 (79.0%), p.2 ↔ p.2 (65.4%), p.3 ↔ p.3 (73.1%), p.4 ↔ p.4 (75.5%), p.5 ↔ p.5 (62.5%); ours p.6-8 pair with filed p.6 at low overlap (29.7%, 37.2%, 24.1%), because our notice and the certificate run longer than the exemplar's last page. (Measured with the earlier 8-page EB Garamond render; the overlay is a diagnostic, not a score.)
 
-## Visual review (all 8 pages rendered at 60 dpi and looked at)
+## Visual review (all 7 pages of the typst and the docx render, 60 dpi, looked at; 2026-10-22, fb-595.68.23)
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Counsel block upper left, court title, caption (one row), title, opening paragraph | OK. Caption rule right and bottom of the party column. |
-| 2 | JURISDICTION (¶¶ 1-3), BACKGROUND (¶¶ 4-6) with the block quotation of the legal description | OK. Quotation single-spaced, indented both sides. |
-| 3 | ¶¶ 7-11, RELIEF REQUESTED heading, start of ¶ 11 | OK. |
-| 4 | Settlement table (¶ 11) and ¶¶ 12-16 start | OK after fix: the table had no space above it and touched ¶ 11's text; now spaced half a line either side. |
-| 5 | ¶ 16 end, WHEREFORE, the date and the signature block | OK. |
-| 6 | NOTICE OF OPPORTUNITY TO RESPOND (boxed, bold), CERTIFICATE OF SERVICE begins with the first addressees | OK after fix: the certificate was set unbreakable and ran into the footer; it now flows across pages. The notice is 21 days per `response_days`. |
-| 7 | Addressee list (continued) | OK. Address blocks are kept together. |
-| 8 | Addressee list (end), conformed signature and date of the certificate | OK. |
+| 1 | Counsel block upper left, court title, caption (one row), title (four lines), opening paragraph, JURISDICTION, ¶¶ 1-2 | OK on both engines. Caption rule right and bottom of the party column. |
+| 2 | ¶¶ 3-7, BACKGROUND, the block quotation of the legal description | OK. Quotation single-spaced, indented both sides; the body double-spaced at a 24 pt pitch (the paragraphs no longer close up). |
+| 3 | ¶¶ 7-11, RELIEF REQUESTED, the settlement table | OK. Table ruled, single-spaced, amounts flush right; 12 pt clear of the text. |
+| 4 | ¶¶ 12-16, WHEREFORE begins | OK. |
+| 5 | WHEREFORE ends, the date and signature block, NOTICE OF OPPORTUNITY TO RESPOND (boxed, bold, 21 days per `response_days`), CERTIFICATE OF SERVICE with the first addressee | OK. The notice box kept whole. |
+| 6 | Addressee list (continued) | OK. |
+| 7 | Addressee list (end), conformed signature and date of the certificate | OK. |
 
-Reviewed pages: 8 of 8. Pages 2-3 were looked at in the first render; the later edits (table spacing, certificate breaking, notice text) do not reach them, and the text on both pages is unchanged.
+Reviewed pages: 7 of 7 (typst) and 7 of 7 (docx).
 
 ## Known gaps and open choices
 
 1. **Tier 2 exemplars.** One exemplar, one filer. The eval-loop rule asks for two or three filed exemplars from different filers. Not found: most archived `mtb` memoranda are court opinions.
 2. **No memorandum of law.** LBR 9013-2(a) says a motion "shall be supported by a memorandum of law filed with, or as a part of the motion." The exemplar has none; its legal basis is stated in the body (¶¶ 1-3, 12-13), which the rule allows "as a part of the motion." The template does not generate a separate memorandum, and does not count the 15-page limit. **Needs David's call** whether this doc type should require a separate memorandum section.
 3. **Case number format.** LBR 9004-1 requires `0:12-bk-34567-ABC` (division digit, year, bk, number, judge). The exemplar's caption reads `19-60025-BPH`. The sample keeps the exemplar's value; the template prints whatever the sample says. A compliant caption would read `<division>:19-bk-60025-BPH`; the division digit is not recorded in the exemplar, so it is not invented here.
-4. **Font.** EB Garamond at 13 pt, not Times. The LBR sets only the 12-point floor for motions; the Times New Roman requirement in LBR 9013-1(k)(6)(A) covers proposed orders only, so no face is required here and EB Garamond stays (see the court README, "Typeface"). The exemplar is set in Times, so `Liberation Serif` would match its line breaks better; that is a visual choice, not a rule.
+4. **Font.** Times New Roman 12 pt, the house standard and the exemplar's face and size. The LBR sets only the 12-point floor for motions; the Times New Roman requirement in LBR 9013-1(k)(6)(A) covers proposed orders only (see the court README, "Typeface").
 5. **Caption and counsel block** are single-spaced; the LBR's double-spacing rule exempts only quoted material and footnotes. The exemplar single-spaces them too; the template follows it. A convention, not a rule reading.
 6. **Response period.** The notice's 14-day text is LBR 9013-1(f) for ordinary motions. For a § 363 sale, FRBP 2002(a)(2) (cited from memory, not fetched: 21 days' notice of a sale outside the ordinary course) and LBR 9013-1(g) require the notice to carry the longer period. The sample sets `response_days: 21`. The template does not look the period up; the author sets it. **Verify the Rule 2002(a)(2) period before this template is called complete.**
 7. **Exemplar predates the current LBR.** The exemplar was filed in 2019 under the earlier rules; its notice wording (21-day shortened-time text) is not the current 9013-1(f) text, and the template uses the current text.
@@ -83,10 +82,10 @@ Reviewed pages: 8 of 8. Pages 2-3 were looked at in the first render; the later 
 
 ## Engines
 
-The docx engine is in `docx/`: `make-reference.sh` builds `docx/reference.docx` (run once; committed), and `docx/mtb.lua` writes the first-page blocks, the signature, the notice of opportunity to respond (LBR 9013-1(f), with `response_days` from the frontmatter) and the certificate of service from the sample's frontmatter. The body is pandoc's.
+Both engines follow the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): first-fit ragged-right lines, no kerning, ligatures or hyphenation, every line an exact box of its pitch (24 pt body, 14 pt single lines), the same spaces between blocks in pt and twips.
 
-- **Set in styles.xml, sectPr and footer1.xml (not rendered here):** EB Garamond 13 pt (MTB-FORM-002); body lines exact 24 pt, double (MTB-FORM-003); first-line indent 0.5 in and no space between paragraphs; headings centered, bold, capitals; block quotes and footnotes single-spaced; US Letter with 1 in margins (MTB-FORM-004); centered PAGE field in the footer (MTB-FORM-005).
-- **Built in XML by the filter, not rendered:** counsel block, court title, caption table (party column with right and bottom rules), title, signature table, the bordered notice box (paragraph borders), certificate of service. The Date, Time and Location lines of the notice are blank, as in the typst template.
-- **Differs from typst:** line breaks, table row heights and the notice box edges are Word's and LibreOffice's, not typst's. The caption cell padding is approximated in twips. Pandoc's paragraph handling (smart quotes, the list in the body, footnotes) differs from cmarker's. Page count is not verified.
-- **BLOCKED (docx.pdf gates 0-3):** LibreOffice (`soffice`) is not installed on the build box, so no `OUTPUT-mtb-motion-brief-mohlertrusteesalemotion.docx.pdf` was made and no docx page was looked at (pages reviewed for docx: 0). The `.docx` itself was checked as a valid zip with well-formed XML parts only.
-- **Not applicable to this doc type:** no table of contents or table of authorities, so no field-update limit applies.
+- `typst/mtb-motion-brief.typ`: the reference render.
+- `docx/reference.xml`: the Word styles (`base="xengine"`, the typst face through `{font}`, 12 pt, 480/280 twip pitches, centered page-number footer at 735 twips); `fb render` builds the reference document from it. No shell builder and no committed `reference.docx`.
+- `docx/mtb.lua`: writes every paragraph (counsel block, court title, caption table, title, body paragraphs, headings, block quotations, the ruled pipe table with the typst column arithmetic, signature table, the notice as a one-cell ruled table kept whole, certificate of service) with the typst template's spacing in twips.
+- Gate 4: `eval.yaml` sets `params.cross_engine: gate`; the docx render breaks every line and page as typst does (XENG-001..003 PASS, 196/196 lines, 7/7 pages).
+- Not applicable to this doc type: no table of contents or table of authorities.

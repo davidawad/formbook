@@ -101,7 +101,7 @@
 #let title-block(t) = block(width: 100%, above: title-above, below: title-below, {
   set text(..edges(pitch-single))
   set par(first-line-indent: 0pt)
-  align(center, strong(upper(t)))
+  align(center, strong(upper(inl(t))))
 })
 
 // ---------------------------------------------------------------------------

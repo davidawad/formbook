@@ -114,7 +114,9 @@ local function cover(meta, out)
   end
   out[#out + 1] = space(CAPTION_ABOVE)
   out[#out + 1] = caption(meta)
-  out[#out + 1] = p(xe.runs(pandoc.text.upper(plain(need(meta, "title"))), { b = true }),
+  -- the title in capitals as typst upper() sets it; a section sign kept with its number (a no-break space, as xe.inl)
+  local title = pandoc.text.upper(plain(need(meta, "title"))):gsub("\u{00A7} ", "\u{00A7}\u{00A0}")
+  out[#out + 1] = p(xe.runs(title, { b = true }),
     { jc = "center", before = TITLE_ABOVE, after = TITLE_BELOW })
 end
 
