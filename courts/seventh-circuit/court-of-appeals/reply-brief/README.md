@@ -156,3 +156,30 @@ in the word processor the brief was typed in.
 - **latex** (`latex/template.tex`, `latex/ca7-reply-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 27.7 pt double spacing, one-inch margins, no hyphenation. TOC lists point headings down to level 3 (`toc_depth` 3). Counsel groups with `column: right` and `counsel_note` are handled; the certificates include the paper-copy and unregistered-participant paragraphs. Output `usage/OUTPUT-reply-brief.latex.pdf`, 12 pages (typst: 12; re-rendered 2026-10-16 from the sample with the added headings, pages not viewed). Differences: the cover spacing is hand-set; the certificate of compliance wording is written for LaTeX rather than copied from the typst text. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
 - **docx** (`docx/`): `reference.xml` (the Word styles; `fb render` builds `reference.docx` from it: Times New Roman 12 pt body and 11 pt footnotes (Cir. R. 32(b)), exact 27.65 pt double spacing with a 0.5 in first-line indent, single-spaced headings, footnotes, quotations, cover and tables; were `build-reference.sh`'s, with EB Garamond) and `ca7-reply-brief.lua` (cover with the counsel in two columns and the closing double rule, TOC of the body headings, TOA, signature and certificates; the sections name `fb render`'s footers `rIdFtrNone`/`rIdFtrPage` and the filter writes the last one to `FORMBOOK_FINAL`). The TOC and TOA page numbers come from `fb render`'s multi-pass engine (needles for every heading and `toa:` citation, footnote citations searched on their page; tools/fb/src/docxpass.rs), which replaces the folder's own `render.sh`, `pagemap.awk` and `footer.xml`. Outputs `usage/OUTPUT-reply-brief.docx`/`.docx.pdf` (12 pages; typst 12) and `usage/OUTPUT-reply-brief-2.docx`/`.docx.pdf` (14 pages; typst 14); certificate word counts 2,160 and 2,155, the same as typst. Fonts embedded: Times New Roman Regular, Bold, Italic (the typst face). The certificate of compliance names the face actually used: "using Microsoft Word in 12-point Times New Roman for the body text and 11-point Times New Roman for the footnotes" (typst: "using Typst ..."). Matches typst: face and sizes, spacing, margins, cover and its numbering (the cover counts as i), TOC (body headings only, as typst), TOA with page numbers (checked against the pages of both samples), certificates and the service page break. Differs: single-spaced parts use Word's auto single spacing (13.8 pt at 12 pt), tighter than typst's 17.1 pt pitch; the cover is spaced by hand; Word may paginate slightly differently from the LibreOffice PDF (docs/DOCX.md). `check.sh --engine docx`: 20 passed, 0 failed. BLOCKED: none (the addendum is not rendered by the docx engine; the filter stops with an error if a sample has one).
 
+
+## Cross-engine layout (fb-595.54.4, 2026-10-22)
+
+The three engines are on the shared layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty`/`.lua`,
+`lib/docx/xengine-reference.sh`/`.lua`; docs/EVAL-LOOP.md, "Cross-engine gate") and `eval.yaml` sets
+`params.cross_engine: gate`: latex and docx break every line and page where typst does, on both samples
+(XENG-001..003 PASS: `reply-brief` 258 of 258 lines, 13 pages; `reply-brief-2` 323 of 323 lines, 15 pages; the docx
+of `reply-brief-2` is rendered now too). This supersedes the engine and typeface notes above: all three engines set
+Times New Roman metrics, 12 pt in 27.7 pt line boxes, single-spaced parts in 17 pt boxes, footnotes 11 pt in 15.5 pt
+boxes (the docx had EB Garamond and failed DEF-FONT-002). Changes to the typst reference: `lib/typst/word-compat.typ`
+is no longer applied, so the INPUT's `word:` map (`reply-brief-2`: justify, shrink 0.76) is not read and the body is
+ragged right in every engine; the certificate of compliance names the typeface, not the program; the signature
+starts at mid-page (`right-half`); footnotes are never split and sit 13.29 pt below the text; the rule under "Page"
+and "Page(s)" sits 3 pt below the baseline, clear of the "g" (DEF-TOC-001). INPUT-reply-brief.md: one ASCII closing
+quote after "available to it." written as ” (typst's smart quotes read it as an opening one; the text is unchanged).
+
+Gate 2 review of the new renders (`pdftoppm -r 45`, every page of both typst PDFs, and the cover, contents,
+conclusion and certificate pages of the latex and docx PDFs): no tier-1 defect. Tier 2, ACCEPTED: `reply-brief-2` is
+ragged right where the filer justified (tier 3, the filer's choice); the cover's gaps differ between engines.
+
+On the rebase onto fb-595.63 (2026-10-22), the docx keeps master's build: `docx/reference.xml` now holds the
+cross-engine styles (those `lib/docx/xengine-reference.sh` and the CA styles build, XML-identical), and the TOC and
+TOA page numbers come from `fb render`'s multi-pass engine, not the retired `render.sh`/`pagemap.awk`. The docx
+certificate of compliance is worded as the typst and latex ones ("a proportionally spaced typeface, Times New Roman,
+in 12-point type for the body text and 11-point type for the footnotes"), not "using Microsoft Word in ...", which
+broke its two lines apart from typst's (XENG-003). Both `.docx.pdf` renders are pixel-identical at 50 dpi, page by
+page, to the ones reviewed above; `check.sh --engine docx` 26 passed, 0 failed.

@@ -1,3 +1,5 @@
 PASS
-e3b5c786a2efa9ebade5cc007208c385a95cb939715a79a9b583e2d667d8e7cb  usage/OUTPUT-reply-brief-2.latex.pdf
-4777ea4f4d4842396ebf51c8f11bb8e8848744d78f0730dd19db851b881d6ad9  usage/OUTPUT-reply-brief.latex.pdf
+3843edba04872a2333bcd07443d307b54cca8a1621e7eb5907286b134646b8f9  usage/OUTPUT-reply-brief-2.latex.pdf
+4cfda8505f880b4eb7d5af6b6a336fc192607f90eb5d2eabeacf14edfc5a08f9  usage/OUTPUT-reply-brief-2.typst.pdf
+f3ec984e2ff4ce43ddc4789f2e2e7c7a80893e65ba29db3a300ee10b6d3a1f43  usage/OUTPUT-reply-brief.latex.pdf
+6dc078addc5f5a4545494089e9bc7c24de2f032b75815eebc560463d84f21d7b  usage/OUTPUT-reply-brief.typst.pdf

@@ -3,22 +3,60 @@
 -- certificates from the YAML frontmatter (same fields as the typst template), numbers the headings
 -- and turns each [text](toa:key) citation into a counted hit for the table of authorities.
 -- Typesetting macros are in template.tex. No case-specific text lives here.
+--
+-- Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): every block is built as the typst template builds
+-- it (the names in [brackets] are its functions), with its spaces in bp, so the lines and pages break alike.
 
 -- Per-brief settings, taken from ca7-answering-brief.typ (the same numbers, with the rule each traces to).
 local CONFIG = {
-  answering = true,    -- answering brief: "Argument" point headings are centered; A./1./a./(1) elsewhere
+  answering = true,     -- answering brief: "Argument" point headings are centered; A./1./a./(1) elsewhere
   base = 1,             -- label indent: a level-2 heading sits at 0.5 in when base = 2, at 0 when base = 1
   italic_from = 4,      -- headings from this level are italic (typst style-heading)
-  toc_depth = 5,        -- deepest heading level listed in the table of contents
+  toc_depth = 4,        -- deepest heading level listed in the table of contents (typst toc-depth)
   word_limit = 14000,   -- Cir. R. 32(c)
-  cert_sizes = '12-point',  -- body size in the certificate of compliance (FRAP 32(a)(5)(A))
 }
+
+-- The inline rules of the cross-engine layout model (lib/latex/xengine.lua): break opportunities as typst has them,
+-- ligature characters as commands, a section sign bound to its number. Run on the body and on every metadata value.
+local xe_texify = require('latex.xengine').inlines
+
+-- Two more rules of this template's text: an ellipsis is one glyph of 1 em in typst and Word, and T1 Times has none
+-- (\textellipsis is three periods, 0.75 em): template.tex's \caellipsis sets the three dots across 1 em and keeps
+-- U+2026 as the PDF text. A line may end after a slash that a digit does not follow ("Meta/Spill", not "1/2"), as
+-- Unicode line breaking lets typst and Word end it; TeX breaks at spaces only.
+local function xe_inlines(l)
+  local out = pandoc.Inlines({})
+  for _, el in ipairs(l) do
+    if el.t == 'Str' and (el.text:find('\u{2026}', 1, true) or el.text:find('/[^%d]')) then
+      local rest = el.text
+      while true do
+        local s, e = rest:find('\u{2026}', 1, true)
+        local t = rest:find('/[^%d]')
+        if t and (not s or t < s) then
+          out:insert(pandoc.Str(rest:sub(1, t)))
+          out:insert(pandoc.RawInline('latex', '\\allowbreak{}'))
+          rest = rest:sub(t + 1)
+        elseif s then
+          if s > 1 then out:insert(pandoc.Str(rest:sub(1, s - 1))) end
+          out:insert(pandoc.RawInline('latex', '\\caellipsis{}'))
+          rest = rest:sub(e + 1)
+        else
+          break
+        end
+      end
+      if rest ~= '' then out:insert(pandoc.Str(rest)) end
+    else
+      out:insert(el)
+    end
+  end
+  return xe_texify(out)
+end
 
 -- Inline markdown in a metadata value -> LaTeX.
 local function tex(v)
   if v == nil then return '' end
   if type(v) == 'string' then v = pandoc.Inlines({pandoc.Str(v)}) end
-  local s = pandoc.write(pandoc.Pandoc({pandoc.Plain(v)}), 'latex')
+  local s = pandoc.write(pandoc.Pandoc({pandoc.Plain(xe_inlines(pandoc.Inlines(v)))}), 'latex')
   return (s:gsub('^%s+', ''):gsub('%s+$', ''))
 end
 
@@ -63,13 +101,13 @@ end
 local function raw(s) return pandoc.RawBlock('latex', s) end
 
 -- ---------------------------------------------------------------------------
--- Cover (FRAP 32(a)(2)(A)-(F); CA7-COVER-001 to -005)
+-- Cover (FRAP 32(a)(2); CA7-COVER-001 to -005)
 -- ---------------------------------------------------------------------------
 
 -- Rules in vertical mode with no interline glue: they cost their own height, as in typst.
 local SHORT = '\\nointerlineskip\\hbox to\\linewidth{\\hss\\rule{2in}{0.7pt}\\hss}\\nointerlineskip'
-local DOUBLE = '\\nointerlineskip\\hbox to\\linewidth{\\rule{\\linewidth}{1.6pt}}\\nointerlineskip\\vspace{2.5pt}\\nointerlineskip\\hbox to\\linewidth{\\rule{\\linewidth}{0.5pt}}\\nointerlineskip'
 
+-- [cover-body]: single-spaced and centered, 4.2 bp between paragraphs; the gaps between the parts give.
 local function cover(meta)
   local L = {}
   local function add(s) L[#L + 1] = s end
@@ -77,50 +115,43 @@ local function cover(meta)
     if meta[k] == nil then error('ca7-answering-brief: missing required metadata field `' .. k .. '`') end
     return meta[k]
   end
-  add('\\thispagestyle{empty}\\begin{center}\\singlespacing')
-  add('\\textbf{No.\\ ' .. tex(need('case_number')) .. '}\\par\\vspace{0.5em}')
-  add(DOUBLE .. '\\par\\vspace{0.5em}')
-  add('\\textbf{IN THE UNITED STATES COURT OF APPEALS\\\\FOR THE SEVENTH CIRCUIT}\\par\\vspace{0.5em}')
-  add(SHORT .. '\\vspace{0.5em}')
+  local P = '\\par\\addvspace{4.2bp}'
+  add('\\thispagestyle{empty}\\begingroup\\centering\\singlespacing\\parindent=0pt\\relax')
+  add('\\textbf{No.\\ ' .. tex(need('case_number')) .. '}\\par\\cagap{}')
+  add('\\textbf{IN THE UNITED STATES COURT OF APPEALS FOR THE SEVENTH CIRCUIT}\\par\\cagap{}')
   local sides = need('caption')
   for i, side in ipairs(sides) do
-    for _, name in ipairs(side.names) do
-      add(tex(name) .. '\\par\\addvspace{0.35em}')
-    end
-    add('\\makebox[\\linewidth][l]{\\hspace*{0.5\\linewidth}' .. tex(side.designation) .. '}\\par')
-    if i < #sides then add('\\vspace{0.5em}v.\\par\\vspace{0.5em}') end
+    for _, name in ipairs(side.names) do add(tex(name) .. P) end
+    add('{\\raggedright\\leftskip=0.5\\linewidth\\noindent ' .. tex(side.designation) .. P .. '}')
+    if i < #sides then add('\\cagap{}v.\\par\\cagap{}') end
   end
-  add('\\vspace{0.5em}' .. SHORT .. '\\vspace{0.5em}')
-  add(tex(need('proceeding')) .. '\\par')
-  if meta.district_court_case ~= nil or meta.judge ~= nil then
-    local parts = {}
-    if meta.district_court_case ~= nil then parts[#parts + 1] = tex(meta.district_court_case) end
-    if meta.judge ~= nil then parts[#parts + 1] = tex(meta.judge) end
-    add('\\addvspace{0.35em}' .. table.concat(parts, '; ') .. '\\par')
-  end
-  add('\\vspace{0.5em}' .. SHORT .. '\\vspace{0.5em}')
-  add('\\textbf{\\MakeUppercase{' .. tex(need('brief_title')) .. '}}\\par\\vspace{0.5em}')
-  add(SHORT .. '\\vspace{0.5em}')
-  -- Counsel (FRAP 32(a)(2)(F)): one column at mid-page, the firm's lines in italics; the last group
-  -- carries the telephone line, then the role and the date (typst cover-body, answering brief).
+  add('\\cagap{}' .. SHORT .. '\\cagap{}')
+  add(tex(need('proceeding')) .. P)
+  if meta.district_court_case ~= nil then add(tex(meta.district_court_case) .. P) end
+  if meta.judge ~= nil then add(tex(meta.judge) .. P) end
+  add('\\cagap{}' .. SHORT .. '\\cagap{}')
+  add('\\textbf{\\MakeUppercase{' .. tex(need('brief_title')) .. '}}\\par\\cagap{}')
+  add(SHORT .. '\\cagap{}')
+  -- Counsel (FRAP 32(a)(2)(F): name, office address, telephone number): in the right half, the names, then the
+  -- lines 0.5 em in; the last group carries the telephone line; then the role, in italics.
   local counsel = need('counsel')
+  add('\\begingroup\\raggedright\\leftskip=0.5\\linewidth\\noindent')
   for gi, g in ipairs(counsel) do
     local b = {}
-    for _, n in ipairs(g.names) do b[#b + 1] = tex(n) .. '\\\\' end
-    for _, l in ipairs(g.lines or {}) do b[#b + 1] = '\\hspace*{0.5em}\\emph{' .. tex(l) .. '}\\\\' end
-    if gi == #counsel and meta.phone ~= nil then b[#b + 1] = '\\hspace*{0.5em}\\emph{' .. tex(meta.phone) .. '}\\\\' end
-    add('\\makebox[\\linewidth][l]{\\hspace*{0.5\\linewidth}\\begin{minipage}[t]{0.5\\linewidth}\\raggedright ' ..
-      table.concat(b, '\n') .. '\\end{minipage}}\\par\\vspace{0.5em}')
+    for _, n in ipairs(g.names) do b[#b + 1] = tex(n) end
+    for _, l in ipairs(g.lines or {}) do b[#b + 1] = '\\hspace*{0.5em}' .. tex(l) end
+    if gi == #counsel then b[#b + 1] = '\\hspace*{0.5em}' .. tex(need('phone')) end
+    add((gi > 1 and '\\noindent ' or '') .. table.concat(b, '\\newline\n') .. '\\par\\addvspace{6bp}')
   end
-  if meta.role ~= nil then add('\\makebox[\\linewidth][l]{\\hspace*{0.5\\linewidth}\\emph{' .. tex(meta.role) .. '}}\\par') end
-  if meta.date ~= nil then add('\\vspace{0.5em}' .. tex(meta.date) .. '\\par') end
-  add('\\vspace{0.5em}' .. DOUBLE)
-  add('\\end{center}')
+  if meta.role ~= nil then add('\\noindent\\emph{' .. tex(meta.role) .. '}\\par') end
+  add('\\endgroup\\cagap{}')
+  if meta.date ~= nil then add(tex(meta.date) .. '\\par') end
+  add('\\endgroup')
   return table.concat(L, '\n')
 end
 
 -- ---------------------------------------------------------------------------
--- Certificates and signature (Form 6; FRAP 25 service)
+-- Certificates and signature
 -- ---------------------------------------------------------------------------
 
 local function group_digits(n)
@@ -129,38 +160,35 @@ local function group_digits(n)
   return (out:gsub('^,', ''))
 end
 
--- Signers as "/s/ Name" over "Name (No. X)" (as in the exemplar), then the firm's lines (typst signers-block).
-local function signers_tex(meta)
+-- [signers-block]: "/s/ Name" over "Name (No. X)" for each signer (10.8 bp between signers), then 7.2 bp and the
+-- firm's lines; never split. Its start takes the paragraph spacing of where it stands (`above`).
+local function signers_tex(meta, above)
   local sig = meta.signature
-  local L = {}
-  for _, s in ipairs(sig.signers) do
+  local L = {'\\par\\addvspace{' .. above .. '}\\begingroup\\interlinepenalty=10000\\relax\\parindent=0pt\\relax'}
+  for i, s in ipairs(sig.signers) do
     local num = s.number ~= nil and (' (No. ' .. tex(s.number) .. ')') or ''
-    L[#L + 1] = '\\par\\addvspace{0.9em}\\noindent s/ ' .. tex(s.name) .. '\\\\' .. tex(s.name) .. num .. '\\par'
+    L[#L + 1] = (i > 1 and '\\par\\nobreak\\addvspace{10.8bp}' or '') ..
+      '/s/ ' .. tex(s.name) .. '\\newline ' .. tex(s.name) .. num .. '\\par\\nobreak'
   end
   local lines = {}
-  for _, l in ipairs(sig.lines or {}) do lines[#lines + 1] = '\\emph{' .. tex(l) .. '}\\\\' end
-  L[#L + 1] = '\\par\\addvspace{0.6em}\\noindent' .. table.concat(lines, '\n')
-  return table.concat(L, '\n')
-end
-
-local function signature(meta)
-  local L = {}
-  L[#L + 1] = '\\par\\needspace{8\\baselineskip}\\addvspace{1.4em}\\begingroup\\singlespacing\\noindent'
-  L[#L + 1] = '\\hspace*{0.5\\linewidth}\\begin{minipage}[t]{0.5\\linewidth}\\raggedright'
-  L[#L + 1] = 'Respectfully submitted,'
-  L[#L + 1] = signers_tex(meta)
-  L[#L + 1] = '\\end{minipage}'
-  if meta.date ~= nil then L[#L + 1] = '\\par\\addvspace{0.8em}\\noindent ' .. tex(meta.date) .. '\\par' end
+  for _, l in ipairs(sig.lines or {}) do lines[#lines + 1] = tex(l) end
+  if #lines > 0 then L[#L + 1] = '\\addvspace{7.2bp}' .. table.concat(lines, '\\newline\n') .. '\\par' end
   L[#L + 1] = '\\endgroup'
   return table.concat(L, '\n')
 end
 
--- A signature line with its caption underneath, two columns (typst form-sig-line).
-local function form_sig_line(meta, date)
-  local d = date or plain(meta.date)
-  return '\\par\\addvspace{1.6em}\\begingroup\\singlespacing\\noindent\\begin{minipage}[t]{0.5\\linewidth}' ..
-    's/ ' .. tex(meta.signature.signer) .. '\\\\Signature\\end{minipage}' ..
-    '\\begin{minipage}[t]{0.45\\linewidth}' .. tex(d) .. '\\\\Date\\end{minipage}\\par\\endgroup'
+-- [signature-block]: 16.8 bp, then in the right half "Respectfully submitted," and the signers, then 9.6 bp and the
+-- date at the margin; one unbreakable block.
+local function signature(meta)
+  local L = {}
+  L[#L + 1] = '\\par\\addvspace{16.8bp}\\begingroup\\singlespacing\\interlinepenalty=10000\\relax'
+  L[#L + 1] = '\\begingroup\\raggedright\\leftskip=0.5\\linewidth\\parindent=0pt\\relax'
+  L[#L + 1] = 'Respectfully submitted,\\par\\nobreak'
+  L[#L + 1] = signers_tex(meta, '0bp')
+  L[#L + 1] = '\\endgroup'
+  if meta.date ~= nil then L[#L + 1] = '\\nobreak\\vspace{9.6bp}\\nobreak\\noindent ' .. tex(meta.date) .. '\\par' end
+  L[#L + 1] = '\\endgroup'
+  return table.concat(L, '\n')
 end
 
 -- ---------------------------------------------------------------------------
@@ -212,10 +240,51 @@ end
 -- Words (Cir. R. 32(c)): whitespace-delimited words of the body, footnotes included
 -- ---------------------------------------------------------------------------
 
-local function count_words(doc)
+-- Block by block (stringify of the whole document would run the last word of one block into the first of the
+-- next), footnote text included, footnote marks and list markers not counted: the typst template's count.
+local function words_in(s)
   local n = 0
-  for _ in pandoc.utils.stringify(doc.blocks):gmatch('%S+') do n = n + 1 end
+  for _ in s:gsub('\194\160', ' '):gmatch('%S+') do n = n + 1 end
   return n
+end
+
+local function count_blocks(blocks)
+  local n = 0
+  for _, b in ipairs(blocks) do
+    if b.t == 'BulletList' or b.t == 'OrderedList' then
+      for _, item in ipairs(b.content) do n = n + count_blocks(item) end
+    elseif b.t == 'BlockQuote' or b.t == 'Div' then
+      n = n + count_blocks(b.content)
+    elseif b.t ~= 'RawBlock' then
+      local notes = {}
+      local without = pandoc.Pandoc({ b }):walk({
+        Note = function(note) notes[#notes + 1] = note.content; return {} end,
+      })
+      n = n + words_in(pandoc.utils.stringify(without.blocks))
+      for _, c in ipairs(notes) do n = n + count_blocks(c) end
+    end
+  end
+  return n
+end
+
+-- [ca7-brief]: the brief's last paragraph travels with the signature unless the markdown's last block (after the
+-- last blank line) is a heading or a footnote definition. The rule reads the source as typst does.
+local function keeps_tail()
+  local f = PANDOC_STATE.input_files[1]
+  local h = f and io.open(f, 'r')
+  if not h then return true end
+  local src = h:read('a')
+  h:close()
+  src = src:gsub('^%-%-%-\r?\n.-\r?\n%-%-%-[ \t]*\r?\n', '', 1):gsub('%s+$', '')
+  local tail = src
+  local pos = 1
+  while true do
+    local s, e = src:find('\n[ \t]*\n', pos)
+    if not s then break end
+    tail = src:sub(e + 1)
+    pos = e
+  end
+  return #tail > 0 and tail:sub(1, 1) ~= '#' and tail:sub(1, 2) ~= '[^'
 end
 
 -- ---------------------------------------------------------------------------
@@ -238,6 +307,23 @@ function Pandoc(doc)
     end,
   })
 
+  -- the words, counted before the inline rules (they turn dashes and quotes into raw LaTeX, which stringify drops);
+  -- then the cross-engine inline rules over the body text
+  local words = count_blocks(doc.blocks)
+  doc = doc:walk({Inlines = xe_inlines})
+  -- [quote]: 10.8 bp between the paragraphs of a block quotation
+  doc = doc:walk({
+    BlockQuote = function(q)
+      local c = pandoc.Blocks({})
+      for i, b in ipairs(q.content) do
+        if i > 1 then c:insert(raw('\\caquotepar')) end
+        c:insert(b)
+      end
+      q.content = c
+      return q
+    end,
+  })
+
   -- pass 2: headings. Level 1 is an unnumbered section; levels 2 to 5 number as in typst.
   local counters = {0, 0, 0, 0, 0, 0}
   local in_arg = false
@@ -247,7 +333,6 @@ function Pandoc(doc)
       steps = steps_for(level, in_arg), centered = CONFIG.answering and in_arg and level == 2}
     return #heads
   end
-  local words = count_words(doc)
   if words > CONFIG.word_limit then
     error('ca7-answering-brief: the brief has ' .. words .. ' words; Circuit Rule 32(c) allows ' .. CONFIG.word_limit)
   end
@@ -275,17 +360,18 @@ function Pandoc(doc)
     end,
   })
 
-  -- front matter: cover (i), table of contents (ii), table of authorities (iii)
+  -- front matter: cover, then the table of contents and of authorities numbered from i
   local front = {}
-  front[#front + 1] = raw('\\pagenumbering{roman}')
+  front[#front + 1] = raw('\\singlespacing')
   front[#front + 1] = raw(cover(meta))
-  front[#front + 1] = raw('\\clearpage\\cahead{1}{0}{}{Table of Contents}{toc}{99}' ..
-    '\n\\begin{flushright}\\textbf{\\underline{Page}}\\end{flushright}')
+  front[#front + 1] = raw('\\clearpage\\pagenumbering{roman}\\cahead{1}{0}{}{Table of Contents}{toc}{99}' ..
+    '\n\\par\\addvspace{3.6bp}\\begingroup\\raggedleft\\singlespacing\\bfseries Page\\par\\endgroup')
 
   -- table of contents: the table of authorities, every heading up to toc_depth, the certificates
   local function tocline(level, steps, label, title, idx)
     return string.format('\\tocline{%d}{%d}{%s}{%s}{%s}', level, steps, label, title, idx)
   end
+  local CC = 'Certificate of Compliance with Type-Volume Limit, Typeface Requirements, and Type-Style Requirements'
   local toc = {tocline(1, 0, '', 'Table of Authorities', 'toa')}
   for _, h in ipairs(heads) do
     if h.level <= CONFIG.toc_depth then
@@ -293,50 +379,61 @@ function Pandoc(doc)
       toc[#toc + 1] = tocline(h.level, steps, h.label, h.title, 'h' .. h.idx)
     end
   end
-  toc[#toc + 1] = tocline(1, 0, '', 'Certificate of Compliance', 'cc')
+  toc[#toc + 1] = tocline(1, 0, '', CC, 'cc')
   local svc = meta.service
-  if svc ~= nil and svc.certificate then toc[#toc + 1] = tocline(1, 0, '', 'Certificate of Service', 'cs') end
+  if svc ~= nil then toc[#toc + 1] = tocline(1, 0, '', 'Certificate of Service', 'cs') end
   front[#front + 1] = raw(table.concat(toc, '\n'))
 
   local toa_lines = toa(meta, hits)
   front[#front + 1] = raw('\\clearpage\n' .. table.concat(toa_lines, '\n'))
-  front[#front + 1] = raw('\\clearpage\\pagenumbering{arabic}')
+  front[#front + 1] = raw('\\clearpage\\pagenumbering{arabic}\\normalsize')
 
-  -- back matter: signature, then the certificates on a new page (typst pagebreak(weak))
+  -- back matter: signature, then the certificates, each on a new page (typst pagebreak(weak))
   local back = {raw(signature(meta))}
-  back[#back + 1] = raw('\\clearpage\\cahead{1}{0}{}{Certificate of Compliance with Type-Volume Limit, ' ..
-    'Typeface Requirements, and Type-Style Requirements}{cc}{99}')
-  local tot = count_words(doc)
-  back[#back + 1] = raw('\\begingroup\\singlespacing\\noindent 1.\\ This document complies with the page and word ' ..
-    'limitation of Fed. R. App. P. 32(a)(7)(B) and Circuit Rule 32(c) and, excluding the portions of the filing ' ..
-    'exempted by Fed. R. App. P. 32(f), contains ' .. group_digits(tot) .. ' words (including footnotes).' ..
-    '\\par\\addvspace{1em}2.\\ This document complies with the typeface requirements and the type-style ' ..
-    'requirements of Fed. R. App. P. 32(a)(5) and (6) and Circuit Rule 32(b) because it has been prepared in a ' ..
-    'proportionally spaced typeface, ' .. tex(meta.typeface) .. ', in ' .. CONFIG.cert_sizes ..
-    ' text and 11-point footnotes.\\endgroup')
-  back[#back + 1] = raw(signers_tex(meta))
-  if svc ~= nil and svc.certificate then
-    back[#back + 1] = raw('\\cahead{1}{0}{}{Certificate of Service}{cs}{99}')
-    -- the counsel served, each group in the margin-indented block of typst certificate-of-service
-    local served = {}
-    served[#served + 1] = '\\begingroup\\singlespacing\\noindent I hereby certify that on ' .. tex(meta.date) ..
+  back[#back + 1] = raw('\\clearpage\\cahead{1}{0}{}{' .. CC .. '}{cc}{99}')
+  -- [certificate-of-compliance]: two paragraphs 12 bp apart, then the signers
+  back[#back + 1] = raw('\\begingroup\\singlespacing\\parindent=0pt\\relax 1.\\ This document complies with the ' ..
+    'page and word limitation of Fed. R. App. P. 32(a)(7)(B) and Circuit Rule 32(c) and, excluding the portions ' ..
+    'of the filing exempted by Fed. R. App. P. 32(f), contains ' .. group_digits(words) ..
+    ' words (including footnotes).\\par\\addvspace{12bp}2.\\ This document complies with the typeface ' ..
+    'requirements and the type-style requirements of Fed. R. App. P. 32(a)(5) and (6) and Circuit Rule 32(b) ' ..
+    'because it has been prepared in a proportionally spaced typeface, ' .. tex(meta.typeface) ..
+    ', in 12-point text and 11-point footnotes.\\par')
+  back[#back + 1] = raw(signers_tex(meta, '12bp') .. '\\endgroup')
+  if svc ~= nil then
+    -- [certificate-of-service]: the statement, then each group served 0.5 in in (9.6 bp above; lines set as given);
+    -- the last group travels with the signers.
+    back[#back + 1] = raw('\\clearpage\\cahead{1}{0}{}{Certificate of Service}{cs}{99}')
+    local L = {}
+    L[#L + 1] = '\\begingroup\\singlespacing\\parindent=0pt\\relax I hereby certify that on ' .. tex(meta.date) ..
       ', the foregoing ' .. tex(meta.brief_title) ..
       ' was submitted for filing with the Clerk of Court of the United States Court of Appeals for the Seventh ' ..
       'Circuit ' .. tex(svc.method or 'using the CM/ECF system') ..
       (svc.served_by ~= nil and (' and served by ' .. tex(svc.served_by)) or '') ..
-      ' on the following counsel of record:\\endgroup'
-    for _, g in ipairs(svc.counsel or {}) do
+      ' on the following counsel of record:\\par'
+    local groups = svc.counsel or {}
+    for gi, g in ipairs(groups) do
       local b = {}
-      for _, n in ipairs(g.names) do b[#b + 1] = tex(n) .. '\\\\' end
-      for _, l in ipairs(g.lines or {}) do b[#b + 1] = '\\emph{' .. tex(l) .. '}\\\\' end
-      served[#served + 1] = '\\par\\addvspace{0.8em}\\begingroup\\singlespacing\\noindent\\hspace*{0.5in}' ..
-        '\\begin{minipage}[t]{\\dimexpr\\linewidth-0.5in\\relax}\\raggedright ' .. table.concat(b, '\n') ..
-        '\\end{minipage}\\endgroup'
+      for _, n in ipairs(g.names) do b[#b + 1] = tex(n) end
+      for _, l in ipairs(g.lines or {}) do b[#b + 1] = tex(l) end
+      local last = gi == #groups
+      L[#L + 1] = '\\addvspace{9.6bp}' .. (last and '\\begingroup\\interlinepenalty=10000\\relax' or '') ..
+        '{\\leftskip=0.5in\\interlinepenalty=10000\\relax ' .. table.concat(b, '\\newline\n') .. '\\par}' ..
+        (last and '\\nobreak' or '')
     end
-    for _, s in ipairs(served) do back[#back + 1] = raw(s) end
-    back[#back + 1] = raw(signers_tex(meta))
+    L[#L + 1] = signers_tex(meta, '12bp')
+    if #groups > 0 then L[#L + 1] = '\\endgroup' end
+    L[#L + 1] = '\\endgroup'
+    back[#back + 1] = raw(table.concat(L, '\n'))
   end
 
+  -- The signature never stands alone: the brief's last paragraph is not broken across pages and stays with the
+  -- signature block (typst: one unbreakable block), unless the markdown ends with a heading or footnote definition.
+  local n = #doc.blocks
+  if n > 0 and doc.blocks[n].t ~= 'RawBlock' and keeps_tail() then
+    doc.blocks:insert(n, raw('\\begingroup\\interlinepenalty=10000\\relax'))
+    doc.blocks:insert(raw('\\par\\nobreak\\endgroup'))
+  end
   local blocks = pandoc.Blocks({})
   for _, b in ipairs(front) do blocks:insert(b) end
   for _, b in ipairs(doc.blocks) do blocks:insert(b) end

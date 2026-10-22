@@ -7,7 +7,9 @@
 -- The TOC and TOA page numbers: fb render (tools/fb/src/docxpass.rs) renders the document once, finds the page
 -- of every heading and citation in that PDF (the needles this filter writes to FORMBOOK_NEEDLES), and renders
 -- again with those pages (FORMBOOK_PAGES) until they settle. Word may paginate slightly differently from the
--- LibreOffice PDF the page numbers come from (docs/DOCX.md). Styles: docx/reference.xml. The only part of this file that differs between the three copies is CFG.
+-- LibreOffice PDF the page numbers come from (docs/DOCX.md). Styles: docx/reference.xml.
+-- The answering and reply copies were one text in the cross-engine layout model (fb-595.54.4, the typst template's
+-- spaces in CFG.tw); this copy reads its pages from fb render's multi-pass build instead of docx/render.sh.
 
 local CFG = {
   kind = "reply-brief",
@@ -15,10 +17,10 @@ local CFG = {
   answering = false,       -- I. A. 1. a. at every level (typst label scheme)
   off_out = 1,             -- label indent in half inches: level - off (typst label-indent: level - 1)
   off_in = 1,
+  toc_off = 2,             -- in the table of contents: level - 2 (typst toc-entry: point headings at the margin)
   toc_depth = 3,           -- point headings and their sub-headings only
   word_limit = 7000,       -- Cir. R. 32(c): a reply brief
   face = "Times New Roman", -- the typeface reference.xml sets (typst font-family); the certificate names it
-  software = "Microsoft Word", -- the program the .docx is made for (typst names Typst)
   size = 12, fn = 11,      -- body and footnote size in points (typst: 12 pt body, 11 pt footnotes)
   court = {{{"In the United States Court of Appeals", false}}, {{"FOR THE SEVENTH CIRCUIT", true}}},
   court_rule = false,
@@ -26,7 +28,7 @@ local CFG = {
   double_bottom = true,    -- a double rule at the foot of the cover
   district = "paren",      -- "No. X (Y)"
   cover_grid = true,       -- counsel in two columns; `column: right` puts a group on the right
-  lines_italic = true,
+  lines_italic = false,    -- names and lines as given (typst counsel-cell)
   phone_last = false,
   counsel_for = false,
   cover_role = false,
@@ -36,7 +38,7 @@ local CFG = {
   cert_heading = "Certificate of Compliance",
   cert = {
     "I certify that this brief complies with the type-volume limit of Fed. R. App. P. 32(a)(7)(B), as modified by Cir. R. 32(c). Excluding the parts of the brief exempted by Fed. R. App. P. 32(f), this brief contains {words} words.",
-    "I further certify that this brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6), as modified by Cir. R. 32(b). This brief has been prepared in a proportionally spaced typeface using {software} in {size}-point {typeface} for the body text and {fn}-point {typeface} for the footnotes.",
+    "I further certify that this brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6), as modified by Cir. R. 32(b). This brief has been prepared in a proportionally spaced typeface, {typeface}, in {size}-point type for the body text and {fn}-point type for the footnotes.",   -- worded as typst and latex word it (the face, not the program), so its lines break alike
   },
   cert_form_sig = true,
   sig = "single",
@@ -45,6 +47,16 @@ local CFG = {
   svc = "reply",
   svc_break = true,
   cover_counts = true,     -- the cover counts as page i: the contents are ii (typst reply)
+  underline_pages = true,  -- "Page(s)" over the authorities underlined (typst toa-section)
+  keep_rule = "body",      -- the last paragraph stays with the signature unless the body ends with a heading
+  -- The typst template's line boxes and spaces, in twips (20 x pt): the single pitch (17 pt); the space below a
+  -- section heading (13.2 pt); above the first authorities group and below every group head (12 pt, 2.4 pt);
+  -- [signature-block] 14.4 pt after "Respectfully submitted,", the signer's lines 0.5 em in, 9.6 pt before the
+  -- date; [form-sig-line] 19.2 pt above, its second column at (text width + 1 em) / 2; the right half of the text
+  -- block (234 pt); the cover's counsel grid (two columns, a 0.3 in gutter as the left cell's right margin, 8.4 pt
+  -- after each group); 8.4 pt before each unregistered participant [certificate-of-service].
+  tw = {single = 340, sect_after = 264, toa_first = 240, toa_after = 48, sig_gap = 288, step = 120, date_gap = 192,
+    form_sig = 384, form_col = 4800, half = 4680, cols = {{4896, 432}, {4464, 0}}, cell_gap = 168, unreg_gap = 168},
 }
 
 local TOA_GROUPS = {
@@ -52,6 +64,11 @@ local TOA_GROUPS = {
   {"regulation", "Regulations:"}, {"rule", "Rules:"}, {"other", "Other Authorities:"},
 }
 
+-- The cross-engine layout model (lib/docx/xengine.lua): the break rules of typst on every run (a no-break hyphen
+-- before a digit, pandoc's abbreviation no-break spaces undone, a section sign bound to its number).
+local xe = require("docx.xengine")
+-- Before the page number of a table row: three no-break spaces, so the leader is never shorter than that.
+local LEAD = pandoc.Str("\u{00A0}\u{00A0}\u{00A0}")
 local TEXTW = 9360
 local ITAL_FROM = 4
 local TAB = pandoc.RawInline("openxml", '<w:r><w:tab/></w:r>')
@@ -112,10 +129,17 @@ end
 
 -- inline content as WordprocessingML runs (emphasis, strong, small caps, line breaks, raw openxml)
 local function xesc(s) return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;")) end
+-- Break opportunities as typst has them, where LibreOffice and Word have others: a word joiner between ")" and "("
+-- (no break inside "32(a)(5)": typst boxes the token, TeX breaks at spaces only), a zero-width space after a slash
+-- that a digit does not follow (a line may end after "Meta/", as Unicode line breaking lets typst end it).
+local function typst_breaks(text)
+  return (text:gsub("%)%(", ")\u{2060}("):gsub("/([^%d])", "/\u{200B}%1"))
+end
 local function run(text, f)
   local rpr = (f.b and "<w:b/>" or "") .. (f.i and "<w:i/>" or "") .. (f.sc and "<w:smallCaps/>" or "")
+    .. (f.u and '<w:u w:val="single"/>' or "")
   if rpr ~= "" then rpr = "<w:rPr>" .. rpr .. "</w:rPr>" end
-  return "<w:r>" .. rpr .. '<w:t xml:space="preserve">' .. xesc(text) .. "</w:t></w:r>"
+  return "<w:r>" .. rpr .. '<w:t xml:space="preserve">' .. xesc(typst_breaks(text)) .. "</w:t></w:r>"
 end
 local function inl_xml(il, f, out)
   for _, el in ipairs(il) do
@@ -123,9 +147,10 @@ local function inl_xml(il, f, out)
     if t == "Str" then out[#out + 1] = run(el.text, f)
     elseif t == "Space" or t == "SoftBreak" then out[#out + 1] = run(" ", f)
     elseif t == "LineBreak" then out[#out + 1] = "<w:r><w:br/></w:r>"
-    elseif t == "Emph" then inl_xml(el.content, {b = f.b, i = true, sc = f.sc}, out)
-    elseif t == "Strong" then inl_xml(el.content, {b = true, i = f.i, sc = f.sc}, out)
-    elseif t == "SmallCaps" then inl_xml(el.content, {b = f.b, i = f.i, sc = true}, out)
+    elseif t == "Emph" then inl_xml(el.content, {b = f.b, i = true, sc = f.sc, u = f.u}, out)
+    elseif t == "Strong" then inl_xml(el.content, {b = true, i = f.i, sc = f.sc, u = f.u}, out)
+    elseif t == "SmallCaps" then inl_xml(el.content, {b = f.b, i = f.i, sc = true, u = f.u}, out)
+    elseif t == "Underline" then inl_xml(el.content, {b = f.b, i = f.i, sc = f.sc, u = true}, out)
     elseif t == "Span" or t == "Link" then inl_xml(el.content, f, out)
     elseif t == "RawInline" then
       if el.format == "openxml" then out[#out + 1] = el.text end
@@ -136,28 +161,41 @@ end
 -- one paragraph as WordprocessingML (an XML string): style, inlines, optional extra pPr elements in schema order
 local function P_xml(style, il, extra)
   local out = {}
-  inl_xml(il, {}, out)
+  inl_xml(xe.inlines(pandoc.Inlines(il)), {}, out)
   return '<w:p><w:pPr><w:pStyle w:val="' .. style .. '"/>' .. (extra or "") .. "</w:pPr>" .. table.concat(out) .. "</w:p>"
 end
 local function P(style, il, extra) return pandoc.RawBlock("openxml", P_xml(style, il, extra)) end
 local function raw_p(xml) return pandoc.RawBlock("openxml", xml) end
 local KEEP = "<w:keepNext/>"
+local NOKEEP = '<w:keepNext w:val="0"/>'   -- against a style that keeps with the next paragraph
+-- the empty paragraph that ends a section takes no room (it would push a full page's last line on)
+local SECT_LINE = '<w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>'
 local BREAK_BEFORE = "<w:pageBreakBefore/>"
+-- a section heading that opens a page has no space above it (typst drops it at the top of a page; Word keeps it
+-- after a section or page break)
+-- single-spaced line boxes with the given spaces above and below (twips)
+local function SP(before, after)
+  return '<w:spacing w:before="' .. before .. '" w:after="' .. after .. '" w:line="' .. CFG.tw.single .. '" w:lineRule="exact"/>'
+end
+local TOP = SP(0, CFG.tw.sect_after)
 
 local function rule(style) return raw_p('<w:p><w:pPr><w:pStyle w:val="' .. style .. '"/></w:pPr></w:p>') end
 local function gap() return raw_p('<w:p><w:pPr><w:pStyle w:val="CAGap"/></w:pPr></w:p>') end
 
--- a borderless two-column table of paragraphs (XML strings); rows: list of {xml, xml}
+-- a borderless two-column table of paragraphs (XML strings); rows: list of {xml, xml}. The columns are typst's
+-- grid: two halves of the text width less the gutter, the gutter a right margin of the left cell (CFG.tw.cols).
 local function grid(rows)
+  local COLS = CFG.tw.cols
   local out = {'<w:tbl><w:tblPr><w:tblW w:w="' .. TEXTW .. '" w:type="dxa"/><w:tblBorders>'
     .. '<w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/>'
     .. '<w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders><w:tblLayout w:type="fixed"/>'
-    .. '<w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="115" w:type="dxa"/></w:tblCellMar></w:tblPr>'
-    .. '<w:tblGrid><w:gridCol w:w="4680"/><w:gridCol w:w="4680"/></w:tblGrid>'}
+    .. '<w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr>'
+    .. '<w:tblGrid><w:gridCol w:w="' .. COLS[1][1] .. '"/><w:gridCol w:w="' .. COLS[2][1] .. '"/></w:tblGrid>'}
   for _, row in ipairs(rows) do
     out[#out + 1] = '<w:tr><w:trPr><w:cantSplit/></w:trPr>'
     for c = 1, 2 do
-      out[#out + 1] = '<w:tc><w:tcPr><w:tcW w:w="4680" w:type="dxa"/></w:tcPr>' .. (row[c] or '<w:p/>') .. '</w:tc>'
+      out[#out + 1] = '<w:tc><w:tcPr><w:tcW w:w="' .. COLS[c][1] .. '" w:type="dxa"/><w:tcMar><w:right w:w="'
+        .. COLS[c][2] .. '" w:type="dxa"/></w:tcMar></w:tcPr>' .. (row[c] or '<w:p/>') .. '</w:tc>'
     end
     out[#out + 1] = '</w:tr>'
   end
@@ -255,7 +293,7 @@ local function cover(meta)
   local B = {}
   local function add(b) B[#B + 1] = b end
   if CFG.case_no then
-    add(P("CACentered", cat({pandoc.Strong({pandoc.Str("No. ")})}, minl(need(meta, "case_number")))))
+    add(P("CACentered", {pandoc.Strong(cat("No. ", minl(need(meta, "case_number"))))}))   -- typst: all bold
   else
     add(P("CACentered", minl(need(meta, "case_number"))))
   end
@@ -268,7 +306,7 @@ local function cover(meta)
       local s = pandoc.Str(t[1])
       il:insert(t[2] and pandoc.Strong({s}) or s)
     end
-    add(P("CACoverCourt", il))
+    add(P("CACentered", il, KEEP))   -- the bold parts are Strong (CFG.court); the rest is roman
   end
   if CFG.court_rule then add(rule("CARule")) end
   local sides = need(meta, "caption")
@@ -319,34 +357,55 @@ local function cover(meta)
     -- two columns: the groups marked `column: right` go on the right, the others on the left (in order);
     -- without marks the groups fill the cells in pairs
     local split = false
-    for _, g in ipairs(groups) do if g.column == "right" then split = true end end
+    for _, g in ipairs(groups) do if plain(g.column) == "right" then split = true end end
     local left, right = {}, {}
     for gi, g in ipairs(groups) do
       if split then
-        if g.column == "right" then right[#right + 1] = gi else left[#left + 1] = gi end
+        if plain(g.column) == "right" then right[#right + 1] = gi else left[#left + 1] = gi end
       else
         if gi % 2 == 1 then left[#left + 1] = gi else right[#right + 1] = gi end
       end
     end
-    local rows = {}
-    for r = 1, math.max(#left, #right) do
-      local lc = left[r] and P_xml("CACounsel", group_il(left[r], groups[left[r]]), KEEP) or nil
-      local rc = right[r] and P_xml("CACounsel", group_il(right[r], groups[right[r]]), KEEP) or nil
-      if r == #right and meta.counsel_note ~= nil then
-        rc = P_xml("CACounsel", cat(group_il(right[r], groups[right[r]]), LB, pandoc.Emph(minl(meta.counsel_note))), KEEP)
+    -- typst cover-body: each column a stack of groups (the names, then the lines, as given), 8.4 pt after each;
+    -- `counsel_note` closes the right column. A paragraph a line.
+    local function column(gis, note)
+      local x = {}
+      for k, gi in ipairs(gis) do
+        local g = groups[gi]
+        local il = {}
+        for _, n in ipairs(g.names) do il[#il + 1] = minl(n) end
+        for _, l in ipairs(g.lines or {}) do il[#il + 1] = CFG.lines_italic and {pandoc.Emph(minl(l))} or minl(l) end
+        for li, t in ipairs(il) do
+          x[#x + 1] = P_xml("CACounsel", t, KEEP .. ((k > 1 and li == 1) and SP(CFG.tw.cell_gap, 0) or ""))
+        end
       end
-      rows[#rows + 1] = {lc, rc}
+      if note ~= nil then
+        x[#x + 1] = P_xml("CACounsel", {pandoc.Emph(minl(note))}, KEEP .. (#gis > 0 and SP(CFG.tw.cell_gap, 0) or ""))
+      end
+      return #x > 0 and table.concat(x) or nil
     end
     add(gap())
-    add(grid(rows))
+    add(grid({{column(left), column(right, meta.counsel_note)}}))
   else
+    -- typst cover-body: in the right half, each group a block (the names, then its lines 0.5 em in; the last group
+    -- also the telephone), then the role 6 pt below, in italics; a paragraph a line, so a wrapped line keeps its step
+    add(gap())
+    local step = '<w:ind w:left="' .. (CFG.tw.half + CFG.tw.step) .. '" w:firstLine="0"/>'
     for gi, g in ipairs(groups) do
-      add(gap())
-      add(P("CACaption", group_il(gi, g), KEEP))
+      local lines = {}
+      for _, l in ipairs(g.lines or {}) do lines[#lines + 1] = minl(l) end
+      if CFG.phone_last and gi == #groups and meta.phone ~= nil then lines[#lines + 1] = minl(meta.phone) end
+      for ni, n in ipairs(g.names) do
+        add(P("CACaption", minl(n), KEEP .. ((gi > 1 and ni == 1) and SP(CFG.tw.para, 0) or "")))
+      end
+      for _, t in ipairs(lines) do add(P("CACaption", CFG.lines_italic and {pandoc.Emph(t)} or t, KEEP .. step)) end
+    end
+    if CFG.cover_role and meta.role ~= nil then
+      add(P("CACaption", {pandoc.Emph(minl(meta.role))}, SP(CFG.tw.para, 0)))
     end
   end
   if CFG.counsel_for and meta.counsel_for ~= nil then add(gap()); add(P("CACaption", minl(meta.counsel_for))) end
-  if CFG.cover_role and meta.role ~= nil then add(gap()); add(P("CACaption", {pandoc.Emph(minl(meta.role))})) end
+  if CFG.cover_grid and CFG.cover_role and meta.role ~= nil then add(gap()); add(P("CACaption", {pandoc.Emph(minl(meta.role))})) end
   if CFG.double_bottom then add(rule("CADoubleRule")) end
   if CFG.cover_date and meta.date ~= nil then add(gap()); add(P("CACentered", minl(meta.date))) end
   -- the cover's section: no page number; lower roman from 1 when the cover counts as page i
@@ -365,34 +424,58 @@ local function signature(meta, keep_all, head)
   local B = {}
   if head then B[#B + 1] = P("CASigHead", {pandoc.Str("Respectfully submitted,")}, KEEP) end
   if CFG.sig == "signers" then
-    for _, s in ipairs(sig.signers) do
-      local il = cat(pandoc.Str(CFG.slash), minl(s.name))
-      il:insert(LB); il:extend(minl(s.name))
-      if s.number ~= nil then il:extend(cat(" (No. ", minl(s.number), ")")) end
-      B[#B + 1] = P("CASignature", il, KEEP)
+    -- typst signers-block: "/s/ Name" over "Name (No. X)", 10.8 pt between signers, then 7.2 pt and the firm's lines
+    -- as given; under "Respectfully submitted," in the right half, in a certificate at the margin, 12 pt below the
+    -- text. A paragraph a line; all kept together.
+    local ind = '<w:ind w:left="' .. (head and CFG.tw.half or 0) .. '" w:firstLine="0"/>'
+    for si, s in ipairs(sig.signers) do
+      local before = si > 1 and CFG.tw.signer_gap or (head and 0 or CFG.tw.cert_signers)
+      B[#B + 1] = P("CASignature", cat(pandoc.Str(CFG.slash), minl(s.name)), KEEP .. SP(before, 0) .. ind)
+      local il = minl(s.name)
+      if s.number ~= nil then il = cat(il, " (No. ", minl(s.number), ")") end
+      B[#B + 1] = P("CASignature", il, KEEP .. ind)
     end
-    local lines = sig.lines or {}
-    for _, l in ipairs(lines) do B[#B + 1] = P("CASignature", {pandoc.Emph(minl(l))}, KEEP) end
+    for li, l in ipairs(sig.lines or {}) do
+      local last = li == #(sig.lines) and not (head and meta.date ~= nil)
+      B[#B + 1] = P("CASignature", minl(l), (last and NOKEEP or KEEP) .. (li == 1 and SP(CFG.tw.lines_gap, 0) or "") .. ind)
+    end
+    if head and meta.date ~= nil then
+      B[#B + 1] = P("CASignature", cat(CFG.dated, minl(meta.date)),
+        NOKEEP .. SP(CFG.tw.date_gap, 0) .. '<w:ind w:left="0" w:firstLine="0"/>')
+    end
+    return B
   else
-    local il = cat(pandoc.Str(CFG.slash .. plain(sig.signer)), LB, pandoc.Str(plain(sig.signer):upper()))
-    for _, l in ipairs(sig.lines or {}) do il:insert(LB); il:insert(pandoc.Emph(minl(l))) end
-    B[#B + 1] = P("CASignature", il, KEEP)
+    -- typst signature-block: CFG.tw.sig_gap after "Respectfully submitted,", the signer twice, the lines 0.5 em in
+    B[#B + 1] = P("CASignature", cat(pandoc.Str(CFG.slash .. plain(sig.signer)), LB, pandoc.Str(plain(sig.signer):upper())),
+      KEEP .. (head and SP(CFG.tw.sig_gap, 0) or ""))
+    for li, l in ipairs(sig.lines or {}) do
+      local last = li == #(sig.lines) and not (head and meta.date ~= nil)
+      B[#B + 1] = P("CASignature", minl(l), (last and NOKEEP or KEEP)
+        .. '<w:ind w:left="' .. (CFG.tw.half + CFG.tw.step) .. '" w:firstLine="0"/>')
+    end
   end
-  if head and meta.date ~= nil then B[#B + 1] = P("CASignature", cat(CFG.dated, minl(meta.date)), keep_all and "" or nil) end
+  -- the date at the margin, CFG.tw.date_gap below
+  if head and meta.date ~= nil then
+    B[#B + 1] = P("CASignature", cat(CFG.dated, minl(meta.date)),
+      NOKEEP .. SP(CFG.tw.date_gap, 0) .. '<w:ind w:left="0" w:firstLine="0"/>')
+  end
   return B
 end
 
--- a signature line with its caption (opening and reply): "s/ Name" over "Signature", date over "Date"
+-- a signature line with its caption (opening and reply): "/s/ Name" over "Signature", date over "Date"
 local function form_sig_line(sig_name, date_il)
-  local left = cat(pandoc.Str(CFG.slash .. sig_name), LB, pandoc.Str("Signature"))
-  local right = cat(date_il, LB, pandoc.Str("Date"))
-  return {gap(), grid({{P_xml("CACounsel", left), P_xml("CACounsel", right)}})}
+  -- typst form-sig-line: CFG.tw.form_sig above; the right column starts (text width + 1 em) / 2 in, at a left tab
+  local tabs = '<w:tabs><w:tab w:val="left" w:pos="' .. CFG.tw.form_col .. '"/></w:tabs>'
+  return {
+    P("CACounsel", cat(pandoc.Str(CFG.slash .. sig_name), TAB, date_il), KEEP .. tabs .. SP(CFG.tw.form_sig, 0)),
+    P("CACounsel", cat(pandoc.Str("Signature"), TAB, pandoc.Str("Date")), tabs),
+  }
 end
 
 local function certificate_of_compliance(meta, words, out)
-  out[#out + 1] = P("CASection", {pandoc.Str(CFG.cert_heading)}, BREAK_BEFORE)
+  out[#out + 1] = P("CASection", {pandoc.Str(CFG.cert_heading)}, BREAK_BEFORE .. TOP)
   local function sub(s)
-    return (s:gsub("{words}", group_digits(words)):gsub("{typeface}", CFG.face):gsub("{software}", meta.software ~= nil and plain(meta.software) or CFG.software)
+    return (s:gsub("{words}", group_digits(words)):gsub("{typeface}", CFG.face)
       :gsub("{size}", tostring(CFG.size)):gsub("{fn}", tostring(CFG.fn)))
   end
   out[#out + 1] = P("CACertificate", {pandoc.Str(sub(CFG.cert[1]))})
@@ -406,33 +489,37 @@ end
 
 local function certificate_of_service(meta, out)
   local svc = need(meta, "service")
-  out[#out + 1] = P("CASection", {pandoc.Str("Certificate of Service")}, CFG.svc_break and BREAK_BEFORE or nil)
+  out[#out + 1] = P("CASection", {pandoc.Str("Certificate of Service")}, CFG.svc_break and (BREAK_BEFORE .. TOP) or nil)   -- no space above at the top of a page
   if CFG.svc == "answering" then
     local il = cat("I hereby certify that on ", minl(need(meta, "date")), ", the foregoing ",
       minl(need(meta, "brief_title")), " was submitted for filing with the Clerk of Court of the United States Court of Appeals for the Seventh Circuit ",
       svc.method or "using the CM/ECF system", (svc.served_by ~= nil and (" and served by " .. plain(svc.served_by)) or ""),
       " on the following counsel of record:")
-    out[#out + 1] = P("CACertificate", il)
-    for _, g in ipairs(svc.counsel or {}) do
+    out[#out + 1] = P("CACertificate", il, SP(0, 0))   -- the groups bring their own space
+    -- typst certificate-of-service: each group 0.5 in in, 9.6 pt above, never split, its lines as given; the last
+    -- group travels with the signers
+    local groups = svc.counsel or {}
+    for gi, g in ipairs(groups) do
       local gil = pandoc.Inlines({})
       for _, n in ipairs(g.names) do gil:extend(minl(n)); gil:insert(LB) end
-      for _, l in ipairs(g.lines or {}) do gil:insert(pandoc.Emph(minl(l))); gil:insert(LB) end
+      for _, l in ipairs(g.lines or {}) do gil:extend(minl(l)); gil:insert(LB) end
       gil:remove(#gil)
-      out[#out + 1] = P("CACounsel", gil, '<w:ind w:left="720" w:firstLine="0"/>')
+      out[#out + 1] = P("CACounsel", gil, (gi == #groups and KEEP or "") .. '<w:keepLines/>'
+        .. SP(CFG.tw.svc_group, 0) .. '<w:ind w:left="720" w:firstLine="0"/>')
     end
     for _, b in ipairs(signature(meta, false)) do out[#out + 1] = b end
   elseif CFG.svc == "reply" then
     out[#out + 1] = P("CACertificate", cat("I hereby certify that on ", minl(need(meta, "date")),
       ", I electronically filed the foregoing with the Clerk of the Court for the United States Court of Appeals for the Seventh Circuit by using the CM/ECF system, which will send notice of such filing to all registered CM/ECF users."))
     if svc.paper_copies ~= nil then
-      out[#out + 1] = P("CACertificate", cat("Pursuant to Circuit Rule 31(b), upon notice of this Court's acceptance of the electronic brief for filing, I certify that I will cause ",
+      out[#out + 1] = P("CACertificate", cat("Pursuant to Circuit Rule 31(b), upon notice of this Court’s acceptance of the electronic brief for filing, I certify that I will cause ",
         plain(svc.paper_copies), " copies of the above-named brief to be delivered to the Clerk of the Court."))
     end
     local unreg = svc.unregistered or {}
     if #unreg > 0 then
       out[#out + 1] = P("CACertificate", {pandoc.Strong({pandoc.Str("Service on case participants who are not registered for electronic filing:")})})
       out[#out + 1] = P("CACertificate", {pandoc.Str("I certify that I served the foregoing on this date by hand delivery, mail, third-party commercial carrier, or, having obtained prior consent, by email, to the following unregistered participants:")})
-      for _, u in ipairs(unreg) do out[#out + 1] = P("CACounsel", cat(minl(u.name), ", ", minl(u.address)), '<w:ind w:left="720" w:firstLine="0"/>') end
+      for _, u in ipairs(unreg) do out[#out + 1] = P("CACounsel", cat(minl(u.name), ", ", minl(u.address)), SP(CFG.tw.unreg_gap, 0) .. '<w:ind w:left="720" w:firstLine="0"/>') end
     end
     for _, b in ipairs(form_sig_line(plain(meta.signature.signer), minl(meta.date))) do out[#out + 1] = b end
   else
@@ -465,6 +552,14 @@ function Pandoc(doc)
   if words > CFG.word_limit then
     fail("the brief has " .. words .. " words; Circuit Rule 32(c) allows " .. CFG.word_limit)
   end
+  -- the break rules of typst on the text pandoc writes itself (body, footnotes), after the count: they write some
+  -- characters as raw runs, which stringify leaves out
+  doc = doc:walk({Inlines = xe.inlines})
+  -- and typst's break opportunities around parentheses and slashes (typst_breaks, above)
+  doc = doc:walk({Str = function(s)
+    local t = typst_breaks(s.text)
+    if t ~= s.text then return pandoc.Str(t) end
+  end})
 
   -- citations, in document order: each `toa:` link is an occurrence and a needle (kind N inside a footnote)
   local hits, occurrences = {}, {}
@@ -527,7 +622,7 @@ function Pandoc(doc)
       if b.level == 1 then
         h.label, h.steps, h.centered = "", 0, false
         need_at(id, "B", text, nxt)
-        body[#body + 1] = P("CASection", b.content, KEEP)
+        body[#body + 1] = P("CASection", b.content, KEEP .. (#body == 0 and TOP or ""))
       else
         h.label = label_for(b.level, counters[b.level], in_arg)
         h.steps = steps_for(b.level, in_arg)
@@ -552,8 +647,25 @@ function Pandoc(doc)
     end,
   }).blocks
 
-  -- the last paragraph stays with the signature block (typst keeps them together)
-  if #body > 0 and body[#body].t == "Para" then
+  -- the last paragraph stays with the signature block (typst keeps them together). CFG.keep_rule "source": unless
+  -- the markdown's last block (after the last blank line) is a heading or a footnote definition, read from the source
+  -- as typst reads it; "body": unless the body ends with a heading (typst sets the footnote definitions apart)
+  local function keeps_tail()
+    local f = PANDOC_STATE.input_files[1]
+    local h = f and io.open(f, "r")
+    if not h then return true end
+    local src = h:read("a")
+    h:close()
+    src = src:gsub("^%-%-%-\r?\n.-\r?\n%-%-%-[ \t]*\r?\n", "", 1):gsub("%s+$", "")
+    local tail, pos = src, 1
+    while true do
+      local s, e = src:find("\n[ \t]*\n", pos)
+      if not s then break end
+      tail, pos = src:sub(e + 1), e
+    end
+    return #tail > 0 and tail:sub(1, 1) ~= "#" and tail:sub(1, 2) ~= "[^"
+  end
+  if #body > 0 and body[#body].t == "Para" and (CFG.keep_rule == "body" or keeps_tail()) then
     body[#body] = pandoc.Div({body[#body]}, pandoc.Attr("", {}, {["custom-style"] = "CA Body Last"}))
   end
 
@@ -582,33 +694,33 @@ function Pandoc(doc)
   addall(cover(meta))
 
   -- section 2 (lower roman): the table of contents
-  add(P("CASection", {pandoc.Str("Table of Contents")}))
-  add(P("CAToaGroup", {TAB, pandoc.Strong({pandoc.Str("Page")})}))
+  add(P("CASection", {pandoc.Str("Table of Contents")}, TOP))
+  add(P("CATocPage", {pandoc.Str("Page")}))
   local function folio_il(v)
     if v == "passim" then return {pandoc.Emph({pandoc.Str("passim")})} end
     return {pandoc.Str(v)}
   end
-  if CFG.toc_front then add(P("CATocTop", cat(pandoc.Str("TABLE OF AUTHORITIES"), TAB, folio_il(label_of("S:toa"))))) end
+  if CFG.toc_front then add(P("CATocTop", cat(pandoc.Str("TABLE OF AUTHORITIES"), LEAD, TAB, folio_il(label_of("S:toa"))))) end
   for _, h in ipairs(heads) do
     if h.level <= CFG.toc_depth then
       local page = label_of(h.id)
       if h.level == 1 then
-        add(P("CATocTop", cat(upper_il(h.title), TAB, folio_il(page))))
+        add(P("CATocTop", cat(upper_il(h.title), LEAD, TAB, folio_il(page))))
       else
-        local s = h.centered and 0 or h.steps
-        add(P("CATocS" .. s, cat(h.label, TAB, h.title, TAB, folio_il(page))))
+        local s = h.centered and 0 or (CFG.toc_off and (h.level - CFG.toc_off) or h.steps)
+        add(P("CATocS" .. s, cat(h.label, TAB, h.title, LEAD, TAB, folio_il(page))))
       end
     end
   end
   if CFG.toc_certs then
-    add(P("CATocTop", cat(pandoc.Str(CFG.toc_cert_title or CFG.cert_heading:upper()), TAB, folio_il(label_of("C:compliance")))))
+    add(P("CATocTop", cat(pandoc.Str(CFG.toc_cert_title or CFG.cert_heading:upper()), LEAD, TAB, folio_il(label_of("C:compliance")))))
     if has_svc(meta) then
-      add(P("CATocTop", cat(pandoc.Str("CERTIFICATE OF SERVICE"), TAB, folio_il(label_of("C:service")))))
+      add(P("CATocTop", cat(pandoc.Str("CERTIFICATE OF SERVICE"), LEAD, TAB, folio_il(label_of("C:service")))))
     end
   end
 
   -- table of authorities (its own page)
-  add(P("CASection", {pandoc.Str("Table of Authorities")}, BREAK_BEFORE))
+  add(P("CASection", {pandoc.Str("Table of Authorities")}, BREAK_BEFORE .. TOP))
   local first = true
   for _, g in ipairs(TOA_GROUPS) do
     local members = {}
@@ -622,8 +734,12 @@ function Pandoc(doc)
     table.sort(members, function(x, y) return sk(x.a) < sk(y.a) end)
     if #members > 0 then
       local head = {pandoc.Str(g[2])}
-      if first then head[#head + 1] = TAB; head[#head + 1] = pandoc.Strong({pandoc.Str("Page(s)")}) end
-      add(P("CAToaGroup", head))
+      if first then
+        local pg = pandoc.Str("Page(s)")
+        head[#head + 1] = TAB; head[#head + 1] = pandoc.Strong({CFG.underline_pages and pandoc.Underline({pg}) or pg})
+      end
+      -- the first group 9.6 pt below the heading, the others 12 pt (the style) below the last entry
+      add(P("CAToaGroup", head, first and SP(CFG.tw.toa_first, CFG.tw.toa_after) or nil))
       first = false
       for _, m in ipairs(members) do
         local il = pandoc.Inlines({})
@@ -633,6 +749,7 @@ function Pandoc(doc)
           il:insert(pandoc.Str(",")); il:insert(LB)
         end
         il:extend(minl(m.a.cite))
+        il:insert(LEAD)
         il:insert(TAB)
         -- the distinct pages of the authority, in page order; passim from PASSIM pages
         local pages, seen = {}, {}

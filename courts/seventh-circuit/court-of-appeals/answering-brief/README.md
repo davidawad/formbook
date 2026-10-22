@@ -126,3 +126,24 @@ Fonts pass, 2026-10-15: the sample was re-rendered (14 pages, `pdffonts`: EB Gar
 - **latex** (`latex/template.tex`, `latex/ca7-answering-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 26.9 pt double spacing, one-inch margins, no hyphenation. The Argument's point headings are centered small capitals; other headings use A. / 1. / a. / (1). Cover, TOC, TOA, signers block (`/s/` and bar numbers) and both certificates follow the typst frontmatter fields. Output `usage/OUTPUT-answering-brief.latex.pdf`, 14 pages (typst: 14). Differences: the cover is not fitted to the page, so its final date line and rule may sit differently; the TOC shows the short certificate title, not the full typst heading. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
 - **docx** (`docx/`): `build-reference.sh` (reference styles, EB Garamond 12 pt, exact 26.9 pt double spacing, 11 pt footnotes), `ca7-answering-brief.lua` (cover, TOC, TOA, signature and certificates as styled paragraphs), `render.sh` (sections with roman front matter and arabic body, PAGE footers, and a two-pass TOC/TOA page map read from the LibreOffice PDF), `pagemap.awk`. Output `usage/OUTPUT-answering-brief.docx` and `.docx.pdf`, 14 pages (typst: 14); the certificate word count is 2,579, the same as typst. Matches typst: the face, sizes, spacing, one-inch margins, cover lines and counsel, roman and arabic folios, the centered Argument point headings, the TOC and TOA entries with page numbers, both certificates. Differences: the cover is spaced by hand (typst fits it to the page); the TOA page list comes from a text search of the PDF, so a short-form cite (`Allen`) also counts unlinked mentions (Allen: 1, 4, 5, 6, 7; typst 1, 4, 5, 6); the TOC and TOA are static text, not fields, and Word may paginate a page number differently; the compliance certificate omits the typst "using Typst" clause (no word processor is named in the frontmatter). Opened in LibreOffice without error; not opened in Word. BLOCKED: `tools/check.sh --engine docx` cannot run: no `checks.yaml` and no `court.json` in this folder or the court (exit 2), so no Gate 1 check ID can be reported; Gate 2 has no `reviews/` file.
 
+
+## Cross-engine layout (fb-595.54.4, 2026-10-22)
+
+The three engines are on the shared layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty`/`.lua`,
+`lib/docx/xengine-reference.sh`/`.lua`; docs/EVAL-LOOP.md, "Cross-engine gate") and `eval.yaml` sets
+`params.cross_engine: gate`: latex and docx break every line and page where typst does (XENG-001..003 PASS, 377 of
+377 lines, 16 pages each). This supersedes the engine and typeface notes above: all three engines set Times New
+Roman metrics (typst's Times New Roman/Liberation Serif, newtx, Times New Roman in Word), 12 pt in 27 pt line boxes,
+single-spaced parts in 17 pt boxes, footnotes 11 pt in 15.5 pt boxes. Changes to the typst reference: point headings
+are bold, not small capitals (Word and LaTeX synthesize small capitals differently); the cover's counsel and the
+signature start at mid-page (`right-half`; `pad(left: 50%)` measured half the content's own width); the
+certificate's items are text, not a list; footnotes are never split and sit 13.29 pt below the text (the room
+LibreOffice keeps above a Word document's notes). The latex word count is taken before the inline rules (it had
+dropped 4 words); latex sets an ellipsis as one 1 em glyph; Word gets typst's break opportunities (no break inside
+"1332(d)(11)", a break after a slash before a letter).
+
+Gate 2 review of the new renders (`pdftoppm -r 50`, every page of the typst PDF, and the cover, contents,
+authorities and signature pages of the latex and docx PDFs): no tier-1 defect. Tier 2, ACCEPTED: the table of
+authorities runs onto a third page (two statute rows on iii); the signature block stands alone on body page 9 (the
+markdown ends with footnote definitions, so the last paragraph is not kept with it, as before the port); the cover's
+gaps differ between engines (typst picks the largest gap that fits, LaTeX stretches, Word sets fixed gaps).
