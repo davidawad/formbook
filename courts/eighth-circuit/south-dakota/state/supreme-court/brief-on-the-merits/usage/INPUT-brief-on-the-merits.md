@@ -57,15 +57,15 @@ authorities:
     entries:
       - {cite: "SDCL 1-26-1(8)", find: "1-26-1(8)"}
       - {cite: "SDCL 1-26-36", find: "1-26-36"}
-      - {cite: "SDCL 15-26A-3", find: "re:15-26A-3\\b"}
+      - {cite: "SDCL 15-26A-3", find: "15-26A-3"}
       - {cite: "SDCL 15-26A-66(b)(4)", find: "15-26A-66"}
-      - {cite: "SDCL 21-10-1 and -2", find: "re:21-10-[12]"}
+      - {cite: "SDCL 21-10-1 and -2", find: "21-10-"}
       - {cite: "SDCL 21-35-31", find: "21-35-31"}
       - {cite: "SDCL 43-13-2", pages: "passim"}
       - {cite: "SDCL 43-13-4", find: "43-13-4"}
       - {cite: "SDCL 49-41B-1", pages: "passim"}
-      - {cite: "SDCL 49-41B-2", find: "re:49-41B-2\\b"}
-      - {cite: "SDCL 49-41B-22", find: "re:49-41B-22\\b"}
+      - {cite: "SDCL 49-41B-2", find: "49-41B-2)"}
+      - {cite: "SDCL 49-41B-22", find: "49-41B-22"}
       - {cite: "SDCL 49-41B-25", find: "49-41B-25"}
       - {cite: "SDCL 49-41B-35", find: "49-41B-35"}
       - {cite: "SDCL 49-41B-36", find: "49-41B-36"}

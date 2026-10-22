@@ -1,0 +1,46 @@
+# Supreme Court of South Dakota (sd): motion (motion-brief). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). SDCL
+# 15-26A-87.2 sets service and filing of motions but no layout; paper, type and margins follow the brief rules
+# (../../rules.md, SD-FORM-*, SD-MOT-004); lengths in points. No case text here: every string printed comes from the
+# sample's frontmatter ({field}).
+size: 12                  # SD-FORM-006: 12-point or larger
+pitch:
+  body: 27.6              # SD-FORM-002: double-spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # caption, quotations, signatures, certificate: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 108, right: 72}   # SD-FORM-003: left 1.5 in, all others 1 in
+indent: 36
+list_indent: 36           # the numbered statements: the number in half an inch, the text hanging after it
+page_number: {align: center, from: 1}   # SD-FORM-005: Arabic figures, centred at the bottom of every page
+footnote: {size: 12, pitch: single, gap: 7}   # SD-FORM-006
+quote: {left: 36, right: 36, above: 7.2, below: 12, gap: 9.6}   # SD-FORM-002: quotations indented, single-spaced
+heading:
+  - {align: center, bold: true, above: 14.4, below: 12}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+# The top of page 1 (SD-MOT-004, as filed): the court, then between rules the parties on the left and the case number
+# and the motion's title on the right.
+front:
+  - {text: "{court_line}", align: center, bold: true}
+  - {rule: 0.75, above: 21.6}
+  - columns:
+      - blocks:
+          - each: parties
+            blocks:
+              - {text: "{names}", above: 12}
+              - {text: "{designation}", left: 36, optional: true, above: 12}
+      - width: 165.6
+        blocks:
+          - {text: "{case_number}"}
+          - {text: "{title}", bold: true, above: 12}
+    gutter: 21.6
+    above: 8.6
+  - {rule: 0.75, above: 9.6, below: 14.4}
+# After the request: each signer's "Dated" line, then the signature lines right of centre, never split.
+closing:
+  - each: signatures
+    blocks:
+      - group:
+          - {text: "{dated}"}
+          - {text: "{lines}", left: 216, above: 19.2}
+        above: 12
+# The certificate of service starts a new page after the signatures (as filed), single-spaced.
+tail: {at: "CERTIFICATE", break: true, pitch: single, indent: 36, gap: 9.6}

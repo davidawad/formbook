@@ -43,7 +43,7 @@ authorities:
       - {cite: "SDCL 15-26A-66(b)(4)", find: "15-26A-66"}
       - {cite: "SDCL 21-10-1 and -2", find: "21-10-1"}
       - {cite: "SDCL 43-13-1 to -13", find: "43-13-1 to"}
-      - {cite: "SDCL 49-41B-1", find: "re:49-41B-1\\b"}
+      - {cite: "SDCL 49-41B-1", find: "49-41B-1"}
       - {cite: "SDCL 49-41B-35", find: "49-41B-35"}
   - heading: "Other Authorities"
     entries:

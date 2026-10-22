@@ -4,7 +4,7 @@ court_line: ["IN THE SUPREME COURT", "OF THE STATE OF SOUTH DAKOTA"]
 parties:
   - names: "AMBER KAYE CHRISTENSON, ALLEN ROBISH, KRISTI MOGEN, AND PATRICK LYNCH"
     designation: "Appellants,"
-  - "vs."
+  - names: "vs."
   - names: "CROWNED RIDGE WIND, LLC AND SOUTH DAKOTA PUBLIC UTILITIES COMMISSION STAFF"
     designation: "Appellees."
 case_number: "Supreme Court #29334"

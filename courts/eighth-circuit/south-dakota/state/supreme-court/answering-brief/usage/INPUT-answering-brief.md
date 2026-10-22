@@ -35,7 +35,7 @@ authorities:
       - {cite: "*Citibank, N.A. v. S.D. Dep’t of Revenue*, 2015 S.D. 67, 868 N.W.2d 381", find: "Citibank"}
       - {cite: "*City of Aberdeen v. Meidinger*, 233 N.W.2d 331 (1975)", find: "Aberdeen"}
       - {cite: "*Dakota Trailer Mfg., Inc. v. United Fire & Cas. Co.*, 2015 S.D. 55, 866 N.W.2d 545", find: "Dakota Trailer"}
-      - {cite: "*In re Application of Dakota Transp., Inc.*, 291 N.W. 589 (S.D. 1940)", find: "re:Dakota Transp|Application of Dakota,"}
+      - {cite: "*In re Application of Dakota Transp., Inc.*, 291 N.W. 589 (S.D. 1940)", find: "Application of Dakota"}
       - {cite: "*In re Application of Midwest Motor Express*, 431 N.W.2d 160 (S.D. 1988)", find: "Midwest Motor"}
       - {cite: "*In re Application of Otter Tail Power Co.*, 2008 S.D. 5, 744 N.W.2d 594", find: "Otter Tail"}
       - {cite: "*In re Application of Svoboda*, 54 N.W.2d 325 (S.D. 1952)", find: "Svoboda"}
@@ -49,8 +49,8 @@ authorities:
       - {cite: "*Muscarello v. Ogle County Bd. of Commissioners*, 610 F.3d 416 (7th Cir. 2010)", find: "Ogle County"}
       - {cite: "*Muscarello v. Winnebago County Bd.*, 702 F.3d 909 (7th Cir. 2012)", find: "Winnebago"}
       - {cite: "*Northwestern Bell Tel. Co. v. Chicago & N.W. Transp.*, 245 N.W.2d 639 (S.D. 1976)", find: "Northwestern Bell"}
-      - {cite: "*Presell v. Mont. Dakota Utils., Co.*, 2015 S.D. 81, 871 N.W.2d 649", find: "re:Presell|Pesell"}
-      - {cite: "*Smith v. Canton Sch. Dist. 41-1*, 599 N.W.2d 637 (S.D. 1999)", find: "re:\\bSmith\\b"}
+      - {cite: "*Presell v. Mont. Dakota Utils., Co.*, 2015 S.D. 81, 871 N.W.2d 649", find: "esell"}
+      - {cite: "*Smith v. Canton Sch. Dist. 41-1*, 599 N.W.2d 637 (S.D. 1999)", find: "Smith"}
       - {cite: "*Sorensen v. Harbor Bar, LLC.*, 2015 S.D. 88, 871 N.W.2d 851", find: "Sorensen"}
       - {cite: "*State v. Geise*, 2020 S.D. 161, 656 N.W.2d 30", find: "Geise"}
       - {cite: "*Steinkruger v. Miller*, 2000 S.D. 83, 612 N.W.2d 591", find: "Steinkruger"}
@@ -59,21 +59,21 @@ authorities:
       - {cite: "*Williams v. South Dakota Dep’t of Agric.*, 2010 S.D. 19, 779 N.W.2d 397", find: "Williams v"}
   - heading: "South Dakota Constitution"
     entries:
-      - {cite: "Article VI, § 18", find: "re:Article VI, § 18"}
+      - {cite: "Article VI, § 18", find: "Article VI, § 18"}
   - heading: "Federal Constitution"
     entries:
       - {cite: "ConstAmend XIV, § 1", find: "ConstAmend XIV"}
   - heading: "Statutes"
     entries:
-      - {cite: "SDCL § 1-26-1(9)", find: "re:1-26-1\\(9\\)|1-26-1\\(9"}
-      - {cite: "SDCL § 1-26-36", find: "re:1-26-?\\s?36"}
+      - {cite: "SDCL § 1-26-1(9)", find: "1-26-1(9"}
+      - {cite: "SDCL § 1-26-36", find: "1-26-36"}
       - {cite: "SDCL § 43-13-2(8)", pages: "passim"}
-      - {cite: "SDCL § 49-41B-1", find: "re:49-41B-1\\b"}
-      - {cite: "SDCL § 49-41B-15", find: "re:49-41B-15\\b"}
-      - {cite: "SDCL § 49-41B-16", find: "re:49-41B-16\\b"}
-      - {cite: "SDCL § 49-41B-22", find: "re:49-41B-22\\b"}
+      - {cite: "SDCL § 49-41B-1", find: "SDCL § 49-41B-1"}
+      - {cite: "SDCL § 49-41B-15", find: "49-41B-15"}
+      - {cite: "SDCL § 49-41B-16", find: "49-41B-16"}
+      - {cite: "SDCL § 49-41B-22", find: "49-41B-22"}
       - {cite: "SDCL § 49-41B-22(3)", pages: "passim"}
-      - {cite: "SDCL § 49-41B-35", find: "re:49-41B-35\\b"}
+      - {cite: "SDCL § 49-41B-35", find: "49-41B-35"}
   - heading: "Other Authorities"
     entries:
       - {cite: "*Lindgren v. Codington County*, 14CIV1-000303, Order Granting Motion to Dismiss and Granting Motion for Costs", find: "Lindgren"}

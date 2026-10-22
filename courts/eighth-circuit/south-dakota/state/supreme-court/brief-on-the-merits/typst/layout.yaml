@@ -1,0 +1,66 @@
+# Supreme Court of South Dakota (sd): appellant's brief (brief-on-the-merits). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12).
+# Numbers trace to SDCL ch. 15-26A (../../rules.md, SD-*); lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # SD-FORM-006: 12-point or larger, body text and footnotes
+pitch:
+  body: 27.6              # SD-FORM-002: double-spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 108, right: 72}   # SD-FORM-003: left 1.5 in, all others 1 in
+indent: 36
+# SD-FORM-005: every page but the front index numbered in Arabic figures, centred at the bottom; the cover unnumbered,
+# the tables in lower-case roman (SD-FORM-011, as filed), the brief from 1.
+page_number: {align: center, front: lower-roman}
+footnote: {size: 12, pitch: single, gap: 7}   # SD-FORM-006: footnotes 12-point too; single-spaced as filed
+quote: {left: 36, right: 36, above: 7.2, below: 12, gap: 9.6}   # SD-FORM-002: lengthy quotations indented, single-spaced
+# SD-FORM-007: boldface for section names and argument headings. Level 1 a section name, centred; level 2 an argument
+# heading, hanging; level 3 bold italic.
+heading:
+  - {align: center, bold: true, above: 14.4, below: 12}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# The cover (SD-COVER-001, SDCL 15-26A-69(5)): the court, the title of the action with the party designations, the
+# appeal number, the court and judge appealed from, the brief's title, counsel for each party, the date of the notice of
+# appeal; ruled off as filed.
+cover:
+  - {text: "{court_line}", align: center, bold: true}
+  - {rule: 0.75, above: 12.2}
+  - {text: "{caption}", align: center, above: 12.2}
+  - {rule: 0.75, above: 12.2}
+  - {text: "{appeal_number}", align: center, above: 12.2}
+  - {rule: 0.75, above: 12.2}
+  - {text: "{appeal_from}", align: center, above: 12.2}
+  - {rule: 0.75, above: 12.2}
+  - {text: "{brief_title}", align: center, bold: true, above: 12.2}
+  - {rule: 0.75, above: 12.2}
+  - columns:
+      - blocks:
+          - each: counsel_left
+            blocks:
+              - {text: "{.}", above: 12}
+      - blocks:
+          - each: counsel_right
+            blocks:
+              - {text: "{.}", above: 12}
+    gutter: 18
+    above: 12.2
+  - {rule: 0.5, above: 6}
+  - {text: "{notice}", align: center, above: 12.2}
+# SDCL 15-26A-60(1): a table of contents and a table of cases, statutes and other authorities, with page references.
+contents: {title: "TABLE OF CONTENTS", depth: 2, col: 36, hang: 36, step: 36, above: 8.4}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 56
+  hang: 36
+  above: 7.2
+  group: {bold: true, above: 13.2, below: 4.8}
+# After the conclusion: the closing line, then each signature block right of centre, never split.
+closing:
+  - group:
+      - {text: "{closing}", indent: 36, optional: true}
+      - each: signature
+        blocks:
+          - {text: "{.}", left: 216, above: 10.8}
+    above: 21.6
+# SD-CERT-001: the certificates start a new page after the signature (as filed), single-spaced.
+tail: {at: "CERTIFICATE", break: true, pitch: single, indent: 36, gap: 13.2, above: 0}
