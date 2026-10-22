@@ -617,7 +617,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Nevada](courts/ninth-circuit/nevada/federal/bankruptcy-district) | `nvb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Nevada](courts/ninth-circuit/nevada/federal/district) | `nvd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Nevada](courts/ninth-circuit/nevada/state/court-of-appeals) | `nevapp` | up for review | 5/5 | 1/1 | 1/1 | 29 |
-| [Nevada Supreme Court](courts/ninth-circuit/nevada/state/supreme-court) | `nev` | up for review | 9/9 | 7/7 | 7/7 | 29 |
+| [Nevada Supreme Court](courts/ninth-circuit/nevada/state/supreme-court) | `nev` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 
 ### Northern Mariana Islands
 
