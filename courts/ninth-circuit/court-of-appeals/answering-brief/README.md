@@ -107,12 +107,12 @@ sh tools/render.sh --engine typst|latex|docx courts/ninth-circuit/court-of-appea
 sh tools/check.sh courts/ninth-circuit/court-of-appeals/answering-brief --engine typst|latex|docx
 ```
 
-**The port.** The three templates are copies of the court root's, which pass the gate (`../typst/ca9-brief.typ`, `../latex/template.tex` and `ca9.lua`, `../docx/ca9.lua` and `make-reference.sh`), changed only where this brief differs:
+**The port.** The three templates are copies of the court root's, which pass the gate (`../typst/ca9-brief.typ`, `../latex/template.tex` and `ca9.lua`, `../docx/ca9.lua` and `reference.xml`), changed only where this brief differs:
 
 - *all engines:* five heading levels in the table of contents (latex: `tocAFive`/`tocOFive` entries; docx: `TOC_DEPTH = 5`); the Statement of Related Cases only when the metadata has `related_cases` (Circuit Rule 28-2.6); the 14,000-word limit (Circuit Rule 32-1(a)) stops the build in every engine.
 - *typst:* the word count drops emphasis underscores before it reads backslash escapes, so an escaped blank (`\_\_`) is a word, as the pandoc engines count it.
 - *latex:* a counsel group's own `phone` after its lines (`ca9.lua` gives the last group the brief's `phone`, as the typst cover does); the table of authorities sorts by the citation as written (the inline rules bind "§" to its number with a no-break space, which the sort key dropped, so "§ 12406" sorted after "§§ 251-255"); an ellipsis (U+2026) set as one 1 em glyph whose PDF text is the character (T1 newtx has none).
-- *docx:* `docx/reference.docx` rebuilt by `docx/make-reference.sh` on `lib/docx/xengine-reference.sh` (Times New Roman 14 pt; before, EB Garamond, so DEF-FONT-002 failed for a Times template); the cover, tables, signature and certificates are built (before: BLOCKED, pandoc's body only).
+- *docx:* `docx/reference.xml` defines the styles from which fb render builds the reference DOCX (Times New Roman 14 pt; before, EB Garamond, so DEF-FONT-002 failed for a Times template); the cover, tables, signature and certificates are built (before: BLOCKED, pandoc's body only).
 
 Typst moved with the port (it is the reference, so every page was looked at again): Times New Roman 14 pt (was EB Garamond), the root's line pitches (29.4 pt body, 17 pt single, 20 pt section headings), contents and authorities rows with the page column, no kerning or ligatures. Before the port: latex 14 vs 16 pages, 60.6 % of lines alike; docx 14 vs 10 pages, 7.7 %.
 

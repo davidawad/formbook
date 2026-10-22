@@ -79,7 +79,7 @@ Run 2026-10-21: exits 1 (`no FILED-EXAMPLE-reply-brief.pdf`). No overlay is writ
 
 ## Engines
 
-**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `front.jq`, `brief.lua`, `render.sh`). `usage/OUTPUT-reply-brief.docx` and `.docx.pdf` (LibreOffice), rebuilt 2026-10-22 (fb-595.54.4). 9 pages, as typst. Times New Roman only.
+**docx** (`docx/`: `reference.xml`, `front.jq`, `brief.lua`). fb render builds the reference DOCX from `reference.xml`; `usage/OUTPUT-reply-brief.docx` and `.docx.pdf` are rendered through LibreOffice. 9 pages, as typst. Times New Roman only.
 
 - Cross-engine layout model, as `../opening-brief/README.md` ("Engines") describes: `lib/typst/xengine.typ`, `lib/docx/xengine-reference.sh` and `lib/docx/xengine.lua`, the same pitches (32.2 / 16.1 / 18.4 pt) and spaces in both engines. Gate 4 is gated (`eval.yaml`: `params.cross_engine: gate`): XENG-001..003 PASS, 104 of 104 lines alike.
 - `front.jq` now writes what the typst template writes: the 8014A(b)(1) lead sentence, `appeal_title`, `caption[].v: false` and an empty designation, and the court name kept together from "for the Eighth Circuit" on (no-break spaces, as typst).
