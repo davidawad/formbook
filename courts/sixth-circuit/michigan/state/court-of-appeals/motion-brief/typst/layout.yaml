@@ -46,8 +46,9 @@ authorities:
   hang: 18
   above: 10.8
   group: {bold: true, above: 14.4, below: 2.4}
-# The date, the signature block and the MCR 7.212(B)(3) word-count statement, never split; then the certificate of
-# service on a page of its own.
+# The date, the signature block and the MCR 7.212(B)(3) word-count statement, never split, with the last paragraph;
+# then the certificate of service on a page of its own.
+keep_with_closing: true   # the last paragraph goes with the signature, never the signature alone on a page
 closing:
   - group:
       - {text: "DATED: {date}", optional: true}
