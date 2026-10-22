@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The N.D. Cal. motion's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman; CAND-FORM-002, Civil L.R. 3-4(c)(2)(A)) at 12 pt (size 24 half points,
+     footnotes too); Body Text in exact 24 pt line boxes (typst pitch-double, CAND-FORM-001 double spacing) with a
+     half-inch first-line indent; headings, tables, caption, counsel, signature and footnote lines in 13.8 pt boxes
+     (typst pitch-single), footnotes 7 pt apart (typst note-gap). docx/cand.lua writes every other paragraph's own
+     spacing, the sections (letter paper with 1-inch margins, Civil L.R. 3-4(c)(1)), the footer with the page number,
+     the paper's title and the case number (CAND-FORM-003) and the page numbers of the tables. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="240" heading-after="240" note="276" note-after="140"/>
