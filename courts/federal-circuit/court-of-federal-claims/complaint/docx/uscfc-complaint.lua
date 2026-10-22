@@ -204,7 +204,7 @@ local function items(lst, depth, out)
   return out
 end
 
--- A body paragraph that anchors a footnote has no widow control ("Body Text Note", docx/make-reference.sh): its last
+-- A body paragraph that anchors a footnote has no widow control ("Body Text Note", docx/reference.xml): its last
 -- line goes to the next page with the note when the note does not fit, as typst lays it out.
 local function Para(el)
   local note = false

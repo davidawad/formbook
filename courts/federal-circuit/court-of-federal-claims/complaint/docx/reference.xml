@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The CFC complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template (Times New Roman) at 12 pt (RCFC 5.5(c)(2); size 24 half
+     points); Body Text in exact 27.6 pt line boxes (RCFC 5.5(c)(4), double spaced; typst pitch-double) with a
+     half-inch first-line indent; headings, footnotes and quotations in 13.8 pt boxes (typst pitch-single), a heading
+     27.6 pt below the text before it and 13.8 pt above the text after it; letter page with 1-inch margins (RCFC
+     5.5(c)(1)(A), (c)(3)) and a centred page-number footer (RCFC 5.5(c)(6)). Twips = 20 x the typst points. The
+     caption, signature, certificate and prayer paragraphs carry their own spacing (docx/uscfc-complaint.lua).
+     One style of this template's own: "Body Text Note", Body Text without widow control, for a paragraph that anchors
+     a footnote. typst moves the line that holds a footnote mark to the next page with its note when the note does not
+     fit, even if that leaves the line alone there; Word would move the whole paragraph (docx/uscfc-complaint.lua). -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="276" heading-before="552" heading-after="276" quote="276" note-after="120">
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+</reference>

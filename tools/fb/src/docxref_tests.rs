@@ -149,3 +149,22 @@ fn extra_namespaces_go_on_the_styles_part() {
         .ns
         .is_empty());
 }
+
+#[test]
+fn an_xengine_spec_may_replace_the_recipes_footer() {
+    let base = "<reference base=\"xengine\" size=\"24\" body=\"480\" single=\"280\">";
+    let s = parse(&format!("{base}</reference>"), Some("X")).unwrap();
+    let f = footer_parts(&s);
+    assert_eq!(f.len(), 1);
+    assert_eq!(
+        (f[0].0.as_str(), f[0].1.as_str()),
+        ("rIdFooter1", crate::docxxengine::FOOTER)
+    );
+    let own = format!("{base}<footer id=\"rIdFooter1\"><w:p/></footer><footer id=\"rIdF\"><w:p/></footer></reference>");
+    let ids: Vec<String> = footer_parts(&parse(&own, Some("X")).unwrap())
+        .into_iter()
+        .map(|(id, _)| id)
+        .collect();
+    assert_eq!(ids, ["rIdFooter1", "rIdF"]);
+    assert!(footer_parts(&parse(SPEC, None).unwrap()).len() == 1);
+}
