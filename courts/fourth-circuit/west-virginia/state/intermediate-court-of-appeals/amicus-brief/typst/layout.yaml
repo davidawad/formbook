@@ -34,8 +34,8 @@ cover:
     gutter: 21.6
     above: 36
   - {text: "{brief_title}", align: center, bold: true, upper: true, above: 43.2}
+  - {fill: 1}              # the counsel at the foot of the cover (the space the page leaves, as the exemplars)
   - each: counsel
-    above: 86.4
     blocks:
       - {text: "{names}", bold: true, left: 230.4, above: 7.2}
       - {text: "{lines}", left: 230.4}
@@ -49,6 +49,8 @@ authorities:
   group: {bold: true, above: 14.4, below: 2.4}
 # The date and the signature block (RAP 38A(j), WVACTAPP-CERT-002: "/s/" signature, address, telephone, e-mail, bar
 # number), never split; then the certificate of service (RAP 37, 10(c)(9), WVACTAPP-CERT-001) on a page of its own.
+# The body's last paragraph kept on the page of the signature block (tier 2: the exemplars never sign on a page alone).
+keep_with_closing: true
 closing:
   - group:
       - {text: "{date}", optional: true, pitch: body, indent: 36}
