@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Mont. complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman; MT-FONT-001: L.R. 1.5(a)(2) names no face); 14 pt everywhere, footnotes
+     included (MT-FORM-002, L.R. 1.5(a)(2); size 28 half points); Body Text in exact 32 pt line boxes (typst
+     pitch-double; double-spaced) with a half-inch indent, and the headings in them; counsel, court title, caption,
+     signature, footnote and footer lines in 16 pt boxes (typst pitch-single), footnotes 7 pt apart (typst note-gap).
+     A style of its own for a paragraph pandoc writes because it carries a footnote: "Body Text Note" (Body Text with
+     the paragraph number's tab at 1 in; widow control on, as typst keeps two lines of it together). Letter page with
+     1-inch margins (MT-FORM-001, L.R. 1.5(a)(1)) and a centered page number on every page (MT-FORM-004), its line
+     34.4 pt above the page foot (688 twips: where typst sets it, footer-descent 30 %).
+     docx/mtd-complaint.lua writes every other paragraph's own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="640" single="320" indent="720" heading="640" heading-before="0" heading-after="0" note="320" note-size="28" note-after="140" footer="688">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="640" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+</reference>

@@ -18,10 +18,10 @@ Federal Rules: Fed. R. Civ. P. 8(a), 10(a)-(b), 11(a), read from the Cornell LII
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
 | MT-FORM-001 | D. Mont. L.R. 1.5(a)(1) | 8½ × 11 inch, printed on one side, one-inch top, bottom and side margins, no shading. | `page` margins in `typst/mtd-complaint.typ` |
-| MT-FORM-002 | L.R. 1.5(a)(2) | Typewritten in **14-point** font, double-spaced except quoted material and footnotes. | `type-size = 14pt`; `line-pitch = 32pt`; footnotes at 14 pt |
-| MT-FORM-003 | L.R. 1.5(a)(2) | Double-spacing: 32 pt baseline pitch at 14 pt (measured, see Sample). | `line-pitch`, `body-leading`, `gap` |
+| MT-FORM-002 | L.R. 1.5(a)(2) | Typewritten in **14-point** font, double-spaced except quoted material and footnotes. | `type-size = 14pt`; `pitch-double = 32pt`; footnotes at 14 pt on `pitch-single` |
+| MT-FORM-003 | L.R. 1.5(a)(2) | Double-spacing: 32 pt line boxes at 14 pt (twice the 16 pt single line), on the shared cross-engine model (`lib/typst/xengine.typ`). | `pitch-double`, `pitch-single` |
 | MT-FORM-004 | L.R. 1.5(a)(3) | Consecutively numbered at the bottom of each page. The cover is page 1. | `footer` of the page |
-| MT-FONT-001 | L.R. 1.5(a)(2) (2025 text read 2026-10-15: "typewritten in 14-point font size") | **No typeface is named.** Face required: none. Font: EB Garamond (vendored, OFL), kept; no court-named substitute applies. Metric-compatibility: n/a. | `font-family` in `typst/mtd-complaint.typ` |
+| MT-FONT-001 | L.R. 1.5(a)(2) (2025 text read 2026-10-15: "typewritten in 14-point font size") | **No typeface is named.** Face required: none. Font: Times New Roman, the house face (docs/FONTS.md; the exemplar's face too), Liberation Serif as its vendored metric twin; the docx names the same face through `{font}`. | `font-family` in `typst/mtd-complaint.typ` |
 | MT-CAP-001 | L.R. 1.5(a)(4) and Appendix C, Form A | Counsel block at upper left; court title "IN THE UNITED STATES DISTRICT COURT / FOR THE DISTRICT OF MONTANA / [division]"; caption with the party names, "Plaintiffs," "v.", "Defendant."; case number and document title on the right. | `counsel-block`, `court-title`, `caption-table` |
 | MT-DIV-001 | L.R. 1.2 (divisions) | The division name is printed under the court title (here MISSOULA DIVISION, from the frontmatter). | `court-title` |
 | MT-JURY-001 | L.R. 38.1 | A pleading that carries a jury demand must say so in its title. The template fails the build if `jury_demand: true` and the title does not contain "JURY TRIAL". | `mtd-complaint` assertion |
@@ -50,7 +50,7 @@ Not used: L.R. 7.1 (motions and briefs) applies to motions, not to the complaint
 
 - Frontmatter: `case_number` (blank on an initial filing: prints "Case No. ______"), `division` (required), `counsel` (list of groups; each group is a list of lines, shown in two columns), `counsel_role` (italic line), `lead_in` (optional, unnumbered), `caption` (two sides, each with `names` and `designation`), `title` (must contain "JURY TRIAL" when `jury_demand` is true), `jury_demand`, `date`, `signature` (`firm`, `signer`, `lines`).
 - Body: blank-line-separated paragraphs are numbered automatically. `#` is a centered section heading (bold capitals). `##` is a bold sub-heading (the author types the numeral: "I. Plaintiffs"). `1. ` items are a lettered list (A., B., ...), not numbered paragraphs, used for the prayer.
-- A paragraph that starts with `%` is printed unnumbered (the prayer's "WHEREFORE" lead-in, the jury-demand sentence). `%` is removed from the output.
+- A paragraph that starts with `~ ` is printed unnumbered (the prayer's "WHEREFORE" lead-in, the jury-demand sentence). The marker is removed from the output.
 - Footnotes: `text[^1]` in a paragraph and `[^1]: text` anywhere in the file. The definition is printed at the reference; it is not a paragraph.
 - Case names in italic: `*Reno v. ACLU*`. The template does not guess what a case name is.
 
@@ -62,8 +62,8 @@ sh tools/render.sh courts/ninth-circuit/montana/federal/district/complaint usage
 sh tools/overlay.sh courts/ninth-circuit/montana/federal/district/complaint fsc-knudsen-complaint
 ```
 
-- `usage/OUTPUT-complaint.typst.pdf`: 9 pages. Typst compiled with no warnings (`render.sh` fails on any warning). Only the vendored font: `pdffonts` shows EBGaramond-Regular, -Italic and -Bold, all embedded.
-- Line pitch (measured with `pdftotext -bbox`, page 2): 32.06 pt between body lines, the double-spacing of a 14-point line. EB Garamond's line box is 0.65 em, so `body-leading = 1.64em` gives the pitch and `gap = line-pitch - 0.65em` separates blocks.
+- `usage/OUTPUT-complaint.typst.pdf`: 9 pages. Typst compiled with no warnings (`render.sh` fails on any warning). Only the vendored font: `pdffonts` shows Times New Roman (regular, italic, bold), all embedded.
+- Line pitch: 32 pt line boxes for the body (`pitch-double`), 16 pt for counsel, court title, caption, signature and footnotes (`pitch-single`); every space between blocks is explicit (fb-595.68.23).
 - `usage/OVERLAY-fsc-knudsen-complaint.pdf` and `.txt` (the tools' naming: `OVERLAY-<id>` and `OUTPUT-<id>`, the same convention as the other courts; red = our render, blue = exemplar, black = both). The page map: ours p.1–7 ↔ filed p.1–7 (word overlap 67–89%); ours p.8–9 ↔ filed p.47 (the prayer and signature), since the sample's last pages are the filed prayer and signature. The overlay is a diagnostic, not a score: the exemplar's cover uses a different counsel layout (two columns) and the filed body is Times New Roman, so the text lines will not coincide.
 
 ## Visual review (Gate 2 record)
@@ -91,10 +91,10 @@ Reviewed pages: 9 of 9.
 
 ## Known gaps and open choices
 
-1. **Font.** EB Garamond (vendored, OFL) at 14 pt, not Times New Roman as in the exemplar. The rules require 14-point type and name no face (checked in the 2025 text on 2026-10-15), so the court-named-face substitution (`docs/FONTS.md`) does not apply and the default face stays. If David prefers the exemplar's look, the vendored Times substitute is Liberation Serif (`font-family` change only; line counts would need a re-check). Style choice: noted for David.
+1. **Font.** Times New Roman 14 pt on typst and docx (the house face; the rules require 14-point type and name no face, checked in the 2025 text on 2026-10-15). The docx had named EB Garamond until fb-595.68.23.
 2. **Tier-2 exemplars.** One exemplar only (the complaint in *Free Speech Coalition v. Knudsen*). The eval loop asks for two or three from different filers before tier 2 is judged. Searched without success for a second public D. Mont. complaint in a text-based PDF (see `usage/SOURCE.md`).
 3. **Partial sample.** Paragraphs 17–102 and Counts 1–5 are not transcribed (see Sample). The sample ends at the prayer and signature from the exemplar's last pages.
-4. **Counsel layout.** Two columns (as the exemplar sets it), not the single column of Form A. Substantial compliance with Appendix C is the rule's standard; the two-column layout was chosen so the cover fits on page 1.
+4. **Counsel layout.** Two columns (as the exemplar sets it), not the single column of Form A. Substantial compliance with Appendix C is the rule's standard; the two-column layout was chosen so the cover fits on page 1. The groups split where the taller column has the fewest lines; the role line stands at the foot of the left column.
 5. **Page number on the cover.** The rule says every page is numbered at the bottom (L.R. 1.5(a)(3)); the cover shows "1". The exemplar's cover shows no visible page number. The rule governs.
 6. **Filing items not generated.** Civil cover sheet, filing fee or IFP motion (L.R. 3.1(a)) and the summons are separate documents.
 7. **Counts and jury demand.** The sample has the jury demand; counts are not transcribed, so the count headings and the cover-title assertion are exercised only through the prayer and demand.
@@ -104,10 +104,9 @@ Reviewed pages: 9 of 9.
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from `reference-styles.xml`), `mtd-complaint.lua` (cover, caption, numbered paragraphs, prayer letters, signature), `fonts.conf`.
+**docx** (`docx/`): `reference.xml` (the Word styles: the cross-engine recipe, `base="xengine"`, in the typst face through `{font}`; tools/fb/src/docxref.rs builds `reference.docx` from it) and `mtd-complaint.lua` (cover, caption, numbered paragraphs, prayer letters, signature, on `lib/docx/xengine.lua`). No shell, no committed `reference.docx` (fb-595.68.23; `build-reference.sh`, `merge-styles.pl`, `reference-styles.xml` and `fonts.conf` retired).
 
-Render: `export FONTCONFIG_FILE=$PWD/docx/fonts.conf` (the LibreOffice conversion must see the vendored EB Garamond; without it LibreOffice substitutes another serif), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`. Output: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (9 pages).
+Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`. Output: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (9 pages).
 
-- Matches the typst output: EB Garamond 14 pt; exact 32 pt double spacing; 1 in margins on Letter; page number centred at the foot from the cover; two-column counsel block; court title; caption with a right and bottom rule on the party cell; numbered paragraphs with the number at 0.5 in; prayer items lettered A. to D. at 0.5 in; unnumbered `%` paragraphs; footnotes at 14 pt single-spaced; signature block. Page count: 9, as typst.
-- Differs: pagination is LibreOffice's (prayer item D starts p.9; typst keeps A. to D. on p.8). Exact line spacing puts each text line about 5 to 9 pt lower than typst. Word may paginate differently.
-- BLOCKED: GATE-RUN (`tools/check.sh <this folder> --engine docx`): exits 2 before any gate runs, because this folder has no `court.json` and no `checks.yaml` (the court folder has neither either). No docx gate result is recorded. The rule checks (MT-FORM-001 to MT-SIG-001) are therefore not run by the tool; the visual review is in `reviews/2026-10-15-docx.md`.
+- Cross-engine gate (`eval.yaml`: `params.cross_engine: gate`): the docx breaks every line and page as the typst render does (XENG-001..003 PASS, 196/196 lines). A paragraph that carries a footnote is written by pandoc in the "Body Text Note" style (the same layout as a numbered paragraph).
+- `sh tools/check.sh <this folder> --engine docx`: 13 passed, 0 failed. The visual review is in `reviews/2026-10-22.md`.
