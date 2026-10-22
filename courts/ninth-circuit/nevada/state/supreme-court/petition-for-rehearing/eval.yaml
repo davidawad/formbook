@@ -1,7 +1,8 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated yet: two differences are the
-# shared model's, not this folder's (docs/open-items/fb-595.54.18.md): typst never breaks a line inside a spaced
-# ellipsis "[. . .]" (no break before a period after a space) where LaTeX and Word do (p4 lines 1-2, latex and docx),
-# and LaTeX does not break after "/" where typst and Word do ("Coroner/Medical", p14 lines 18-19, latex).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). The INPUT carries a zero-width space
+# after each slash inside a word ("Coroner/Medical"), typst's and Word's break point, which the model gives LaTeX
+# none. Not gated yet: one difference is the shared model's, not this folder's (docs/open-items/fb-595.54.18.md):
+# typst never breaks a line inside a spaced ellipsis "[. . .]" (no break before a period after a space) where LaTeX
+# and Word do (p4 lines 1-2, latex and docx).
 params:
   cross_engine: report

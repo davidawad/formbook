@@ -114,7 +114,7 @@ emergency_certificate:
       - "Fax: (702) 341-5300"
       - "bschrager@wrslawyers.com"
       - "dbravo@wrslawyers.com"
-      - "Attorneys for Intervenor-Respondents, DNC Services Corporation/Democratic National Committee and Nevada State Democratic Party"
+      - "Attorneys for Intervenor-Respondents, DNC Services Corporation/​Democratic National Committee and Nevada State Democratic Party"
   closing_paragraphs:
     - "According to the attached certificate of service, all parties through their counsel of record have been served electronically though this Court's electronic filing system, and by email as indicated. Furthermore, the undersigned notified the parties by email on November 2, 2020 of the pending appeal and on November 3, 2020 of the emergency motion and the basis for the same. The undersigned's office also informed the Clerk of the emergency motion on the same day."
   date: "3rd day of November, 2020"
@@ -136,7 +136,7 @@ service:
       - "Daniel Bravo, Esq."
       - "bschrager@wrslawyers.com"
       - "DBravo@wrslawyers.com"
-      - "Attorneys for Intervenor-Respondents, DNC Services Corporation/Democratic National Committee and Nevada State Democratic Party"
+      - "Attorneys for Intervenor-Respondents, DNC Services Corporation/​Democratic National Committee and Nevada State Democratic Party"
   closing_paragraphs:
     - "I further certify that I served a copy of this document by emailing a true and correct copy thereof due to the exigency of the requested relief:"
   closing_recipients:
@@ -159,7 +159,7 @@ service:
       - "Las Vegas, NV 89120"
       - "bschrager@wrslawyers.com"
       - "dbravo@wrslawyers.com"
-      - "Attorneys for Intervenor-Respondents, DNC Services Corporation/Democratic National Committee and Nevada State Democratic Party"
+      - "Attorneys for Intervenor-Respondents, DNC Services Corporation/​Democratic National Committee and Nevada State Democratic Party"
   signature:
     signers:
       - name: "Leah Dell"
@@ -231,7 +231,7 @@ For the forgoing reasons, Appellants respectfully request that this Court issue 
 [^8]: *See* Nev. R. App. P. 8(a).
 [^9]: *See e.g. Bd. Of County Comm'rs v. Las Vegas Disc. Golf & Tennis, Inc.*, 110 Nev. 567, 568-69 (1994).
 [^10]: *See* NRS 293B.330, .335, .353, and 354.
-[^11]: Merriam Webster's Online Dictionary, https://www.merriam-webster.com/dictionary/ observe (emphasis added). This definition is also consistent with the Election Observation Handbook (6th Ed.), published by the OSCE Office for Democratic Institutions and Human Rights.
+[^11]: Merriam Webster's Online Dictionary, https://www.merriam-webster.com/​dictionary/ observe (emphasis added). This definition is also consistent with the Election Observation Handbook (6th Ed.), published by the OSCE Office for Democratic Institutions and Human Rights.
 [^12]: *See, e.g.*, OBSERVE, Black's Law Dictionary (11th ed. 2019).
 [^13]: *See* **Exhibit 3 -** Diagram of Greystone, which is Exhibit 5 from the Evidentiary Hearing.
 [^14]: This machine is only being used in Clark County and a similar device is not being used in any other county in this state which appears inconsistent with the Nevada Voters Bill of Rights which assure uniformity in the counting of votes. *See* NRS 293.2546(10).

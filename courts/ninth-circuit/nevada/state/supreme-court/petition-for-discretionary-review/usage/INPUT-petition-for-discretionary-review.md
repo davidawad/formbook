@@ -25,7 +25,7 @@ signature:
 service:
   heading: "CERTIFICATE OF SERVICE"
   paragraphs:
-    - "Pursuant to NRCP 5(b), I certify that I am an employee of the WILLICK LAW GROUP and that on this 3rd day of December, 2021, the document entitled Petition for Review was filed electronically with the Clerk of the Nevada Supreme Court, and therefore electronic service was made in accordance with the master service list as follows, to the attorneys listed below at the address, email address, and/or facsimile number indicated below:"
+    - "Pursuant to NRCP 5(b), I certify that I am an employee of the WILLICK LAW GROUP and that on this 3rd day of December, 2021, the document entitled Petition for Review was filed electronically with the Clerk of the Nevada Supreme Court, and therefore electronic service was made in accordance with the master service list as follows, to the attorneys listed below at the address, email address, and/​or facsimile number indicated below:"
   recipients:
     - ["Attorneys for Appellant:", "Chad F. Clement, Esq.", "Kathleen A. Wilde, Esq.", "MARQUIS AURBACH COFFING", "10001 Park Run Drive", "Las Vegas, Nevada 89145", "Telephone: (702) 382-0711", "Facsimile: (702) 382-5816", "Cclement@maclaw.com", "Kwilde@maclaw.com"]
   signature:
@@ -192,7 +192,7 @@ Raina Martin requests that the decision made by the Court of Appeals be reviewed
 [^29]: *Shelton v. Shelton*, 119 Nev. 492, 78 P.3d 507 (2003).
 [^30]: See, e.g., *Stojka v. Stojka*, 2017 Md. App. LEXIS 1095, 2017 WL 5036322 (even after *Hurt v. Hurt-Jones*, 168 A.3d 992 (Md. 2017) (compensation to wife through other property or support should be considered), trial court could not indemnify wife if the parties waived their right to have a court adjust the equities between them by way of monetary award, but could do so if they contracted to retain jurisdiction to do so.
 [^31]: Col. Mark E. Sullivan (USA-Retirement.) is a national expert in military retirement benefits in Raleigh, N.C. Col. Sullivan is the author of *The Military Divorce Handbook* (American Bar Association, 2nd Ed. 2011).
-[^32]: See https://www.nclamp.gov/publications/silent-partners/the-death-of-indemnification/. See also Victoria Arends, Military Pension Division Cases Post-Howell: Missing the Mark, or Hitting the Target 31 JOURNAL OF THE AMERICAN ACADEMY OF MATRIMONIAL LAWYERS, at 513 (AAML 2019); State Court Treatment of Military and Veteran’s Disability Benefits: A 2004 Update, National Research Group, Inc., at https://www.divorcesource.com/research/dl/military/04may76.shtml.
+[^32]: See https://www.nclamp.gov/​publications/​silent-partners/​the-death-of-indemnification/. See also Victoria Arends, Military Pension Division Cases Post-Howell: Missing the Mark, or Hitting the Target 31 JOURNAL OF THE AMERICAN ACADEMY OF MATRIMONIAL LAWYERS, at 513 (AAML 2019); State Court Treatment of Military and Veteran’s Disability Benefits: A 2004 Update, National Research Group, Inc., at https://www.divorcesource.com/​research/​dl/​military/04may76.shtml.
 [^33]: See *Cassinelli v. Cassinelli*, 20 Cal. App. 5th 1267, 229 Cal. Rptr. 3d 801 (Cal. Ct. App., Mar. 2, 2018); *Hurt v. Jones-Hurt*, 168 A.3d 992 (Md. Ct. Spec. App. 2017).
 [^34]: *Grisham v. Grisham*, 128 Nev. 679, 289 P.3d 230, 234 (2012); *Anderson v. Sanchez*, 132 Nev. 357, 373 P.3d 860 (2016); see also *Holyoak v. Holyoak*, No: 67490, Order of Affirmance (Unpublished Disposition, May 19, 2016).
 [^35]: *Holyoak*, *supra*, citing *Rivero v. Rivero*, 125 Nev. 410, 429, 216 P.3d 213, 226 (2009).
