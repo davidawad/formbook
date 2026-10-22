@@ -10,7 +10,7 @@ No American Samoa rule has been retrieved, so this file records **no `M` (mandat
 
 - Appellate Court Rules (ACR 28 on briefs, ACR 31 on form, ACR 27 on motions, ACR 40 on rehearing), published by the American Samoa Bar Association: `https://asbar.org/appellate-court-rules/`. Not retrieved: HTTP 401 to curl with a browser user agent, 2026-10-22. The 2025 Wayback copy used by the exemplar's SOURCE.md was not used as a source here because it is not a current primary copy.
 - High Court of American Samoa official website (court rules and clerk's office): not located. `https://www.americansamoa.gov/judiciary` returned HTTP 404 and `https://www.americansamoa.gov/` returned HTTP 200 (its links were not followed), 2026-10-22. `https://www.amsamoa.gov/` and `https://www.courts.as.gov/` did not resolve (HTTP 000), 2026-10-22.
-- Third-party mirror copies (`https://paclii.org/as/legis/consol_act/j61`, `https://www.courtrules.net/american_samoa/practice-guide`) returned HTTP 403, 2026-10-22.
+- Third-party mirror copies (`https://paclii.org/as/legis/consol_act/j61`, `https://www.courtrules.net/american_samoa/practice-guide`) returned HTTP 403, 2026-10-22. `https://www.courtrules.net/american_samoa/american-samoa-appellate-procedure/rule-28` returned HTTP 403 with a Cloudflare challenge page, and `https://asbar.org/?p=16557` and `https://asbar.org/?p=16553` returned HTTP 401, 2026-10-22. A web search for the ACR text returned only these same hosts and federal rules.
 
 Retry the asbar.org ACR pages and the High Court's official site, and add the rows (ID, requirement, source, kind) before any template is judged against a mandated form. Until then `fb check` runs the default tier-1 set only.
 
