@@ -11,8 +11,9 @@
      signature block, kept with it and a double line above it (typst sig-above); "Lettered" and "Lettered Keep", a
      prayer item: the label at the indent, the text hanging at 1 in (typst letter-box). docx/nysb-adversary-complaint.lua
      writes the cover, the caption table, the headings and the signature with their own spacing, and the sections
-     (the cover without a page number, its note in its footer; the body from 1). Twips: 20 x pt. -->
-<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" note="276" note-size="24" note-after="140" footer="735">
+     (the cover without a page number, its note in its footer; the body from 1). The sample is read as CommonMark, as
+     typst's cmarker reads it. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="commonmark+smart+footnotes+yaml_metadata_block" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" note="276" note-size="24" note-after="140" footer="735">
 <w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyNumber"><w:name w:val="Body Number"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="552" w:lineRule="exact"/></w:pPr></w:style>
 <w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyKeep"><w:name w:val="Body Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="552" w:line="552" w:lineRule="exact"/></w:pPr></w:style>
 <w:style w:type="paragraph" w:customStyle="1" w:styleId="Lettered"><w:name w:val="Lettered"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="552" w:lineRule="exact"/><w:ind w:left="1440" w:hanging="720"/></w:pPr></w:style>
