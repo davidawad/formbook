@@ -1,2 +1,8 @@
 params:
   page_limit: 35   # NMI SUP. CT. R. 32(a)(7) (2015 edition), NMI-LEN-001: a brief may not exceed 35 pages total, inclusive of the caption, headings, table of contents and the rest. Rule 28.1(e) applies the same cap to cross-appeal briefs.
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+  # the typst render does, so a difference fails. LaTeX is reported only: the shared model has no break after a
+  # slash inside a word there (docs/open-items/fb-595.54.79.md, shared-model request 1).
+  cross_engine: gate
+  cross_engine_latex: report

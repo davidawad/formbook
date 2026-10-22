@@ -265,7 +265,7 @@ Of next importance and number three, Section 1104(a) provides "that notice of th
 
 Fourth, 1104(a) says nothing about satisfaction of the court and nothing to allow a court's discretion on what constitutes service in terms of a certified mailing, return receipt.
 
-Actually, for a certified mailing per 1104(a), the plaintiff must file an affidavit with the Clerk of Court showing that the summons and complaint "were served or sent by certified or registered mail...." The return receipt signed by the defendant shall be filed with the affidavit. The service shall be deemed complete upon delivery of the required papers to the defendant outside the Commonwealth, personally or by mail as provided." Note the words "return receipt signed by the defendant shall be filed." This leaves no option on service, short of a signed return receipt.
+Actually, for a certified mailing per 1104(a), the plaintiff must file an affidavit with the Clerk of Court showing that the summons and complaint "were served or sent by certified or registered mail...." The return receipt signed by the defendant shall be filed with the affidavit. The service shall be deemed complete upon delivery of the required papers to the defendant outside the Commonwealth, personally or by mail as provided.” Note the words "return receipt signed by the defendant shall be filed." This leaves no option on service, short of a signed return receipt.
 
 The CNMI law does not allow any discretion in the service of process by mail or in the documents which must be filed with the Clerk of Court upon completion of service. It is all fixed by law.
 

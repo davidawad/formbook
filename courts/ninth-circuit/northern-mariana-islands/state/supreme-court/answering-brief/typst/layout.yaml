@@ -1,0 +1,68 @@
+# Supreme Court of the Commonwealth of the Northern Mariana Islands (nmi): answering brief (appellee's principal and
+# response brief, NMI Sup. Ct. R. 28(b), 32). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to ../rules.md (NMI-* ids); lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant.
+size: 12                  # NMI-FORM-005: 11-point "should" (advisory); 12 pt is never smaller (DEF-FORM-003)
+pitch:
+  body: 20.7              # NMI-FORM-003: 1 1/2 line spacing (Word's 1.5 lines, 1.5 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 79.2, left: 72, right: 72}   # NMI-FORM-002: at least one inch; the bottom 0.1 in deeper
+indent: 36
+page_number: {align: center, from: 1}   # NMI-FORM-002: page numbers may sit in the margin; the cover is page 1
+footnote: {size: 12, gap: 7}             # NMI-FORM-004: footnotes may be single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # NMI-FORM-003: quotations indented and single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 19.2, below: 14.4}
+  - {bold: true, hang: 36, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# NMI-COVER-001: the case number centered at the top, the name of this Court, the title of the case, the nature of
+# the proceeding and the court below, the title of the brief, and counsel.
+cover:
+  - {text: "{case_number}", align: center, bold: true}
+  - {text: "IN THE SUPREME COURT OF THE COMMONWEALTH OF THE NORTHERN MARIANA ISLANDS", align: center, bold: true,
+     above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 100.8}
+  - columns: {each: counsel, per_row: 2, row_gap: 9.6, blocks: [{text: "{names}", bold: true}, {text: "{lines}"}]}
+    gutter: 28.8
+    above: 100.8
+# NMI-ORDER-001, -002: the table of contents with page references and the table of authorities (cases, statutes and
+# other authorities, with the pages where cited), each on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 7.2}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 18
+  above: 7.2
+  group: {bold: true, above: 14.4, below: 2.4}
+# The date, the word count when the sample gives one (NMI-CERT-002: none is required) and the signature block
+# (NMI-SIG-001), never split; then the certificate of service (NMI-CERT-001) on a page of its own.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, optional: true}
+      - {text: "This brief contains {word_count} words.", indent: 36, optional: true, above: 4.8}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 9.6}
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 9.6}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 7.2}
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.heading}", align: center, bold: true, upper: true}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36, above: 14.4}
+      - each: service.recipients
+        blocks: [{text: "{.}", left: 72, above: 12}]
+      - {text: "{service.closing}", optional: true, pitch: body, indent: 36, above: 12}
+      - {text: "/s/ *{service.signature.signer}*", underline: true, left: 230.4, above: 14.4}
+      - {text: "{service.signature.signer}", left: 230.4}
+      - {text: "{service.signature.lines}", left: 230.4, optional: true, above: 7.2}
