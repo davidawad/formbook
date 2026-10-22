@@ -1,0 +1,5 @@
+# Texas Rules of Appellate Procedure 9.4(e) (text dated 02/06/2026, https://web.archive.org/web/2026id_/https://www.txcourts.gov/media/1463134/texas-rules-of-appellate-procedure-02062026.pdf):
+# a document produced on a computer must be printed in a conventional typeface no smaller than 14-point (footnotes no smaller than 12-point).
+# Applied to Special Court of Review papers per the scope note in rules.md (TEXREVIEW-FORM-005). A stricter number than the 12-point default is always allowed.
+font:
+  size_pt: 14

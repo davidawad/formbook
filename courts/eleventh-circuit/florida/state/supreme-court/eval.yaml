@@ -1,0 +1,5 @@
+# Florida Rule of Appellate Procedure 9.045(b) (October 1, 2026 edition, https://www-media.floridabar.org/uploads/2026/10/Appellate-Court-Rules-10-01-26.pdf):
+# computer-generated documents must be filed in Arial 14-point font or Bookman Old Style 14-point font, footnotes and quotations included.
+# The template uses Arial (Liberation Sans, the metric-compatible clone shipped in fonts/). Rule 2.520(a)(5) (12-point minimum) is the floor.
+font:
+  size_pt: 14

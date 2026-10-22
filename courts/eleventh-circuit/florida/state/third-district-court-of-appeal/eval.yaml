@@ -1,0 +1,6 @@
+# Fla. R. App. P. 9.045(b) (Form of Documents; text copied at https://coxlawflorida.com/florida-appellate-rules/rule-9-045-form-of-documents/,
+# read 2026-10-21): computer-generated documents shall be filed in either Arial 14-point font or Bookman Old Style 14-point font.
+# The template sets Arial 14 (Liberation Sans, metric-compatible). Footnotes and quotations are 14 point too (9.045(b)).
+font:
+  size_pt: 14
+  pdf_prefix: "LiberationSans|Arial"

@@ -1,0 +1,4 @@
+# Public filed exemplars — Florida Supreme Court, petition-for-discretionary-review
+
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+| `petition-for-discretionary-review` — Petition for discretionary review | COLLECTED: 24 pp., text layer verified 2026-10-17; petitioner's jurisdictional brief (Fla. R. App. P. 9.120 discretionary review); ACIS public docket | `FILED-EXAMPLE-petition-for-discretionary-review.pdf` | Trustee Corp. of King Street Baptist Church (petitioner, Shannin Law Firm / Widerman Malek) | Trustee Corp. of King Street Baptist Church v. Northwest Baptist Church of Cocoa, No. SC2026-1501 | 2026-10-12 | https://acis.flcourts.gov/portal/court/68f021c4-6a44-4735-9a76-5360b2e8af13/case/d01a2efa-a231-4540-9c0b-39900811b004 (ACIS doc f0360ba7-3871-42e7-a39f-da8833533676) | `adfbc7970fc0cf338f0156b8983f5f74396453abee55f3948446fcc357ae476f` |

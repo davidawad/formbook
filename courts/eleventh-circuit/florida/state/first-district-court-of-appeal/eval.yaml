@@ -1,0 +1,6 @@
+# Fla. R. App. P. 9.045(b) (text reproduced in the Florida Supreme Court opinion amending Rules 9.020, 9.045, 9.200, 9.420 (2026),
+# https://flexlaw.co/case/1528213/2026-in-re-procedure): "Computer-generated documents shall be filed in
+# either Arial 14-point font or Bookman Old Style 14-point font." Footnotes and quotations must be in the
+# same size type as the body. Rule 9.045 governs every document filed in this court (9.045(a)).
+font:
+  size_pt: 14

@@ -15,6 +15,7 @@
 #let type-size = 14pt                      // NRAP 32(a)(5)(A): 14-point or larger (eval.yaml font.size_pt: 14). Footnotes are the same size (NRAP 32(a)(5)(B)).
 #let body-leading = 1.65em                 // NRAP 32(a)(4): double spaced. With typst's default line box this gives a
                                            // baseline pitch of about 32.3 pt = 2 x the 1.15 em single line of this face at 14 pt.
+#import "../../../../../../../lib/typst/tables.typ": leader-row
 #let single-leading = 0.45em               // NRAP 32(a)(4) allows single spacing for headings, footnotes and quotations of more than two lines.
 #let page-margin = (top: 1in, bottom: 1.1in, left: 1in, right: 1in)  // NRAP 32(a)(4): at least one inch on all four sides. The bottom is 0.1 in deeper so 14 pt footnote descenders stay inside the 1 in line (DEF-FORM-002).
 #let para-indent = 0.5in
@@ -123,7 +124,7 @@
     block(above: 1.2em, below: 0.8em, sticky: true, strong(group.heading))
     for e in group.entries {
       block(above: 0.9em, below: 0.9em, breakable: false)[
-        #inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)]) #h(4pt) #if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+        #leader-row(inl(e.cite), if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }, hang: 1.5em)
       ]
     }
   }

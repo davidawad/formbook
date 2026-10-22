@@ -1,0 +1,5 @@
+# Fla. R. App. P. 9.045(b): computer-generated documents in Arial 14-point or Bookman Old Style 14-point. This folder
+# declares Arial (Liberation Sans, the vendored metric clone), so the embedded font names carry LiberationSans.
+font:
+  size_pt: 14
+  pdf_prefix: "LiberationSans"

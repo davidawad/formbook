@@ -1,0 +1,3 @@
+# NMRA 12-305(D)(1): a proportionally spaced type style or typeface, such as Times New Roman, must be 14-point or larger (footnotes included). Margins are the default one inch on all sides (NMRA 12-305(B)(2)).
+font:
+  size_pt: 14

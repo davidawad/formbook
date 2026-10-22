@@ -1,0 +1,5 @@
+# Public filed exemplars — Supreme Court of Louisiana
+
+Index alias: `la`  
+Indexed level: `state-supreme`
+| `motion-brief` — Motion and supporting memorandum | COLLECTED: 24 pp., text layer verified 2026-10-17; born-digital; motion for leave to file amicus brief under La. Sup. Ct. Rule VII, sec. 12, with certificate of service, proposed order and the attached brief (merits stage); letter-size; no public party motion with memorandum found (the AG's omnibus opposition to amicus motions in June Medical, No. 2022-OC-1198, is a response, not a motion) (fb-l129.3) | `FILED-EXAMPLE-motion-brief.pdf` | Chamber of Commerce of the United States of America (movant/amicus, McDermott Will & Emery LLP) | State of Louisiana v. Louisiana Land and Exploration Co., No. 2020-C-00685 | 2020-11-17 | https://www.uschamber.com/assets/documents/U.S.20Chamber20Motion20and20Amicus20Brief2028merits2920-20State20of20Louisiana20v.20Louisiana20Land202620Exploration20Co.2028Louisiana20Supreme20Court29.pdf | `689a82936df7dbf2df6125e98e31dde102def828732fa17ef87a0a83a9b50809` |

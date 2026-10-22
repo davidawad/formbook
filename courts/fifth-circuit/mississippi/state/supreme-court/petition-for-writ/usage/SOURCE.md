@@ -1,0 +1,4 @@
+# Public filed exemplars — Mississippi Supreme Court
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | COLLECTED: 17 pp., text layer verified 2026-10-17; Petition for interlocutory appeal or alternatively writ of mandamus; filed copy per Center for Reproductive Rights (no file stamp) | `FILED-EXAMPLE-petition-for-writ.pdf` | Jackson Women's Health Organization et al. (petitioners; Center for Reproductive Rights, Mississippi Center for Justice, Paul Weiss) | Jackson Women's Health Organization v. Dobbs, Supreme Court of Mississippi (docket no. not on copy) | 2022-07-07 | https://reproductiverights.org/wp-content/uploads/2022/07/2022-07-07-JWHO-Mississippi-Supreme-Court-Petition_FINAL.pdf | `1857f506e0822832b76e2adbb771e45efb277b739b8c2cbf6c48c8627942c1ab` |

@@ -1,0 +1,5 @@
+# Fla. R. App. P. 9.045(b) (as amended, No. SC2025-1458): computer-generated documents must be filed in Arial 14-point or
+# Bookman Old Style 14-point. Text size 14 pt is the floor for every doc type under this court (FLADISTCTAPP-FORM-003).
+# Arial is declared by the templates; Liberation Sans is its metric-compatible substitute (fonts/liberation-sans).
+font:
+  size_pt: 14

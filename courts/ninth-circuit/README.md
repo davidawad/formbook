@@ -38,7 +38,7 @@ Courts under `courts/ninth-circuit` (61).
 | [District Court, E.D. Washington](washington/federal/eastern-district) | `waed` | up for review | — | — | — | 14 |
 | [District Court, W.D. Washington](washington/federal/western-district) | `wawd` | up for review | — | — | — | 14 |
 | [Alaska Court of Appeals](alaska/state/court-of-appeals) | `alaskactapp` | up for review | — | — | — | 14 |
-| [Alaska Supreme Court](alaska/state/supreme-court) | `alaska` | in progress | — | — | — | 14 |
+| [Alaska Supreme Court](alaska/state/supreme-court) | `alaska` | up for review | — | — | — | 29 |
 | [High Court of American Samoa](american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |
 | [Arizona Court of Appeals](arizona/state/court-of-appeals) | `arizctapp` | in progress | — | — | — | 14 |
 | [Arizona Supreme Court](arizona/state/supreme-court) | `ariz` | in progress | — | — | — | 14 |

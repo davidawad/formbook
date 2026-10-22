@@ -1,0 +1,5 @@
+# Fla. R. App. P. 9.045(b): computer-generated documents in Arial 14-point or Bookman Old Style 14-point. This folder
+# declares Bookman Old Style (TeX Gyre Bonum, the vendored clone), so the embedded font names carry TeXGyreBonum.
+font:
+  size_pt: 14
+  pdf_prefix: "TeXGyreBonum"

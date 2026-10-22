@@ -1,0 +1,5 @@
+# Public filed exemplars — Supreme Court of Louisiana
+
+Index alias: `la`  
+Indexed level: `state-supreme`
+| `petition-for-discretionary-review` — Petition for discretionary review | COLLECTED: 42 pp., text layer verified 2026-10-17; application for supervisory writ (Rule X) seeking review of the Fourth Circuit's ruling in No. 2021-C-0249; born-digital body (pp. 1-37) with scanned lower-court rulings in the appendix; docket number blank on face; date from PDF creation date; replaces former exemplar earthjustice-rise-v-ldeq-2024-petition-for-discretionary-review (8.4 MB, 143 pp.; FILED-EXAMPLE prefix omitted here so fb fetch does not read it as this row's file) (fb-l129.3) | `FILED-EXAMPLE-petition-for-discretionary-review.pdf` | Jerome Morgan (plaintiff-applicant, Southern Poverty Law Center / Loyola University New Orleans) | Morgan v. Blair's Bail Bonds, Inc., La. Sup. Ct. writ application from La. App. 4 Cir. No. 2021-C-0249 | 2021-07-08 | https://www.macarthurjustice.org/wp-content/uploads/2021/09/Louisiana-Supreme-Court-Writ-Application.pdf | `8a221ce97fc623bd96568cd8938ced938874ee773bdaaec1c3e1e6e45b8ccb38` |

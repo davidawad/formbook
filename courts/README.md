@@ -128,10 +128,10 @@ Courts under `courts` (346).
 | [District Court, N.D. Texas](fifth-circuit/texas/federal/northern-district) | `txnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Texas](fifth-circuit/texas/federal/southern-district) | `txsd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Texas](fifth-circuit/texas/federal/western-district) | `txwd` | up for review | — | — | — | 14 |
-| [Louisiana Court of Appeal](fifth-circuit/louisiana/state/court-of-appeal) | `lactapp` | in progress | — | — | — | 14 |
-| [Supreme Court of Louisiana](fifth-circuit/louisiana/state/supreme-court) | `la` | in progress | — | — | — | 14 |
+| [Louisiana Court of Appeal](fifth-circuit/louisiana/state/court-of-appeal) | `lactapp` | up for review | — | — | — | 29 |
+| [Supreme Court of Louisiana](fifth-circuit/louisiana/state/supreme-court) | `la` | up for review | — | — | — | 29 |
 | [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | in progress | — | — | — | 14 |
-| [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | in progress | — | — | — | 14 |
+| [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | — | — | — | 29 |
 | [Court of Civil Appeals of Texas](fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | — | — | — | 29 |
 | [Court of Criminal Appeals of Texas](fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | — | — | — | 29 |
 | [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | up for review | — | — | — | 29 |
@@ -256,7 +256,7 @@ Courts under `courts` (346).
 | [District Court, E.D. Washington](ninth-circuit/washington/federal/eastern-district) | `waed` | up for review | — | — | — | 14 |
 | [District Court, W.D. Washington](ninth-circuit/washington/federal/western-district) | `wawd` | up for review | — | — | — | 14 |
 | [Alaska Court of Appeals](ninth-circuit/alaska/state/court-of-appeals) | `alaskactapp` | up for review | — | — | — | 14 |
-| [Alaska Supreme Court](ninth-circuit/alaska/state/supreme-court) | `alaska` | in progress | — | — | — | 14 |
+| [Alaska Supreme Court](ninth-circuit/alaska/state/supreme-court) | `alaska` | up for review | — | — | — | 29 |
 | [High Court of American Samoa](ninth-circuit/american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |
 | [Arizona Court of Appeals](ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | in progress | — | — | — | 14 |
 | [Arizona Supreme Court](ninth-circuit/arizona/state/supreme-court) | `ariz` | in progress | — | — | — | 14 |
@@ -308,7 +308,7 @@ Courts under `courts` (346).
 | [Court of Appeals of Kansas](tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Kansas](tenth-circuit/kansas/state/supreme-court) | `kan` | in progress | — | — | — | 14 |
 | [New Mexico Court of Appeals](tenth-circuit/new-mexico/state/court-of-appeals) | `nmctapp` | up for review | — | — | — | 29 |
-| [New Mexico Supreme Court](tenth-circuit/new-mexico/state/supreme-court) | `nm` | in progress | — | — | — | 14 |
+| [New Mexico Supreme Court](tenth-circuit/new-mexico/state/supreme-court) | `nm` | up for review | — | — | — | 29 |
 | [Court of Civil Appeals of Oklahoma](tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | in progress | — | — | — | 0 |
 | [Court of Criminal Appeals of Oklahoma](tenth-circuit/oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Oklahoma](tenth-circuit/oklahoma/state/supreme-court) | `okla` | in progress | — | — | — | 14 |
@@ -337,14 +337,14 @@ Courts under `courts` (346).
 | [Alabama Court of Civil Appeals](eleventh-circuit/alabama/state/court-of-civil-appeals) | `alacivapp` | up for review | — | — | — | 29 |
 | [Alabama Court of Criminal Appeals](eleventh-circuit/alabama/state/court-of-criminal-appeals) | `alacrimapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Alabama](eleventh-circuit/alabama/state/supreme-court) | `ala` | up for review | — | — | — | 29 |
-| [Florida District Courts of Appeal](eleventh-circuit/florida/state/district-courts-of-appeal) | `fladistctapp` | in progress | — | — | — | 29 |
-| [Florida Fifth District Court of Appeal](eleventh-circuit/florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | in progress | — | — | — | 14 |
-| [Florida First District Court of Appeal](eleventh-circuit/florida/state/first-district-court-of-appeal) | `fladistctapp1` | in progress | — | — | — | 14 |
+| [Florida District Courts of Appeal](eleventh-circuit/florida/state/district-courts-of-appeal) | `fladistctapp` | up for review | — | — | — | 29 |
+| [Florida Fifth District Court of Appeal](eleventh-circuit/florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | up for review | — | — | — | 29 |
+| [Florida First District Court of Appeal](eleventh-circuit/florida/state/first-district-court-of-appeal) | `fladistctapp1` | up for review | — | — | — | 29 |
 | [Florida Fourth District Court of Appeal](eleventh-circuit/florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | in progress | — | — | — | 14 |
-| [Florida Second District Court of Appeal](eleventh-circuit/florida/state/second-district-court-of-appeal) | `fladistctapp2` | in progress | — | — | — | 14 |
-| [Florida Sixth District Court of Appeal](eleventh-circuit/florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | in progress | — | — | — | 14 |
-| [Florida Supreme Court](eleventh-circuit/florida/state/supreme-court) | `fla` | in progress | — | — | — | 14 |
-| [Florida Third District Court of Appeal](eleventh-circuit/florida/state/third-district-court-of-appeal) | `fladistctapp3` | in progress | — | — | — | 14 |
+| [Florida Second District Court of Appeal](eleventh-circuit/florida/state/second-district-court-of-appeal) | `fladistctapp2` | up for review | — | — | — | 29 |
+| [Florida Sixth District Court of Appeal](eleventh-circuit/florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | up for review | — | — | — | 29 |
+| [Florida Supreme Court](eleventh-circuit/florida/state/supreme-court) | `fla` | up for review | — | — | — | 29 |
+| [Florida Third District Court of Appeal](eleventh-circuit/florida/state/third-district-court-of-appeal) | `fladistctapp3` | up for review | — | — | — | 29 |
 | [Georgia Court of Appeals](eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | up for review | — | — | — | 29 |
 | [Georgia Supreme Court](eleventh-circuit/georgia/state/supreme-court) | `ga` | up for review | — | — | — | 29 |
 | [Court of Appeals for the D.C. Circuit](dc-circuit/court-of-appeals) | `cadc` | up for review | — | — | — | 14 |

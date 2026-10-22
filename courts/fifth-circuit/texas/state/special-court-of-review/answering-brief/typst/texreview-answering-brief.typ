@@ -13,9 +13,9 @@
 // Parameters (the only numbers in this file; each traces to a rule, an exemplar, or a choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = ("Times New Roman", "Liberation Serif") // no rule names a face; exemplars use Times New Roman
-#let type-size = 12pt              // exemplars (all three doc types): 12-point Times New Roman, double-spaced; no retrieved rule sets a size (rules.md TEXREVIEW-FORM-006)
-#let footnote-size = 12pt          // footnotes at body size in the exemplars
+#let font-family = ("Times New Roman", "Liberation Serif") // TEXREVIEW-FORM-006: exemplars use Times; TNR first, Liberation Serif fallback (docs/FONTS.md)
+#let type-size = 14pt              // TRAP 9.4(e): conventional typeface no smaller than 14-point (TEXREVIEW-FORM-005; applied per rules.md scope note)
+#let footnote-size = 12pt          // TRAP 9.4(e): footnotes no smaller than 12-point (TEXREVIEW-FORM-005)
 #let body-leading = 0.9em          // double-spaced text: natural line (about 1.1 em) + 0.9 em = about 24 pt pitch
 #let single-leading = 0.2em        // single-spaced text: footnotes, block quotations, headings, cover, counsel
 #let page-margin = 1in             // TRAP 9.4(c), applied by convention: at least 1 inch on all sides

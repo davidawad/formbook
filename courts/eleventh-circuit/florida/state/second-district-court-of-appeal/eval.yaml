@@ -1,0 +1,7 @@
+# Florida Rule of Appellate Procedure 9.045(b) (Supreme Court of Florida, No. SC2025-1458, effective July 1, 2026):
+# computer-generated documents are filed in Arial 14-point or Bookman Old Style 14-point (FLADISTCTAPP2-FORM-003).
+# Arial is set here; its metric-compatible vendored face is Liberation Sans (docs/FONTS.md), so the embedded name is LiberationSans.
+# Bookman Old Style is not vendored (TeX Gyre Bonum is visual only), so no template uses it.
+font:
+  size_pt: 14
+  pdf_prefix: "LiberationSans"

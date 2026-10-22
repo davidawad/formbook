@@ -29,7 +29,7 @@ Courts under `courts/tenth-circuit` (31).
 | [Court of Appeals of Kansas](kansas/state/court-of-appeals) | `kanctapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Kansas](kansas/state/supreme-court) | `kan` | in progress | — | — | — | 14 |
 | [New Mexico Court of Appeals](new-mexico/state/court-of-appeals) | `nmctapp` | up for review | — | — | — | 29 |
-| [New Mexico Supreme Court](new-mexico/state/supreme-court) | `nm` | in progress | — | — | — | 14 |
+| [New Mexico Supreme Court](new-mexico/state/supreme-court) | `nm` | up for review | — | — | — | 29 |
 | [Court of Civil Appeals of Oklahoma](oklahoma/state/court-of-civil-appeals) | `oklacivapp` | in progress | — | — | — | 0 |
 | [Court of Criminal Appeals of Oklahoma](oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Oklahoma](oklahoma/state/supreme-court) | `okla` | in progress | — | — | — | 14 |

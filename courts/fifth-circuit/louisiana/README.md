@@ -11,8 +11,8 @@ Courts under `courts/fifth-circuit/louisiana` (8).
 | [United States District Court Eastern District of Louisiana](federal/eastern-district) | `laed` | up for review | — | — | — | 14 |
 | [District Court, M.D. Louisiana](federal/middle-district) | `lamd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Louisiana](federal/western-district) | `lawd` | up for review | — | — | — | 14 |
-| [Louisiana Court of Appeal](state/court-of-appeal) | `lactapp` | in progress | — | — | — | 14 |
-| [Supreme Court of Louisiana](state/supreme-court) | `la` | in progress | — | — | — | 14 |
+| [Louisiana Court of Appeal](state/court-of-appeal) | `lactapp` | up for review | — | — | — | 29 |
+| [Supreme Court of Louisiana](state/supreme-court) | `la` | up for review | — | — | — | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

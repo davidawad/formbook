@@ -1,0 +1,4 @@
+# Public filed exemplars — Mississippi Supreme Court
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `motion-brief` — Motion and supporting memorandum | COLLECTED: 25 pp., text layer verified 2026-10-17; Motion for temporary adoption of rule (eviction moratorium) under M.R.A.P. 27(f), alternatively Rule 21 petition, with argument; clerk file-stamped scan with OCR text layer; Wayback copy of mscenterforjustice.org | `FILED-EXAMPLE-motion-brief.pdf` | Mississippi Center for Justice (movant) | In re Motion for Emergency Order Related to COVID-19, No. 2020-AD-00001-SCT (Miss.) | 2020-04-24 | https://web.archive.org/web/20200510124242id_/https://www.mscenterforjustice.org/sites/default/files/pdfs/Filed%20Copy%20Emergency%20Motion%20for%20Emergency%20Order%20related%20to%20COVID-19.pdf | `bc451c2414d7eeae4723f30d04136892afd1818e7714921a658e3e4387af1b8d` |
