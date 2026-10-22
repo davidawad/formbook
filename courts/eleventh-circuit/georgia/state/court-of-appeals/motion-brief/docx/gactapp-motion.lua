@@ -566,6 +566,8 @@ function Pandoc(doc)
     elseif b.t == "BlockQuote" then
       add(b)
     elseif b.t == "OrderedList" or b.t == "BulletList" then
+      -- typst (cmarker) numbers every ordered list "1.", whatever the markdown's delimiter ("1)")
+      if b.t == "OrderedList" then b.listAttributes.delimiter = "Period" end
       for _, x in ipairs(xe.list_items(b)) do add(x) end
     elseif b.t == "HorizontalRule" then
       -- nothing
