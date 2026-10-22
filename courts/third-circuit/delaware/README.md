@@ -7,7 +7,7 @@ Courts under `courts/third-circuit/delaware` (3).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Delaware](federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Delaware](federal/district) | `ded` | up for review | 2/2 | — | 2/2 | 14 |
-| [Delaware Supreme Court](state/supreme-court) | `del` | up for review | 5/5 | — | — | 29 |
+| [Delaware Supreme Court](state/supreme-court) | `del` | up for review | 5/5 | 1/1 | 1/1 | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

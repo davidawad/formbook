@@ -218,7 +218,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Delaware](courts/third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Delaware](courts/third-circuit/delaware/federal/district) | `ded` | up for review | 2/2 | — | 2/2 | 14 |
-| [Delaware Supreme Court](courts/third-circuit/delaware/state/supreme-court) | `del` | up for review | 5/5 | — | — | 29 |
+| [Delaware Supreme Court](courts/third-circuit/delaware/state/supreme-court) | `del` | up for review | 5/5 | 1/1 | 1/1 | 29 |
 
 ### New Jersey
 
@@ -813,7 +813,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 5 | 0 | 5 | 14.0% |
 | First Circuit | 20 | 0 | 19 | 1 | 0 | 0.0% | 95.0% | 19 | 7 | 18 | 19.2% |
 | Second Circuit | 19 | 0 | 19 | 0 | 0 | 0.0% | 100.0% | 19 | 4 | 17 | 18.7% |
-| Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 4 | 16 | 18.1% |
+| Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 5 | 17 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 10 | 28 | 19.1% |
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 7 | 24 | 18.0% |
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 5 | 24 | 18.6% |
@@ -823,7 +823,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 8 | 21 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 7 | 24 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 2 | 4 | 17.7% |
-| **Total** | 376 | 0 | 353 | 23 | 0 | 0.0% | 93.8% | 352 | 96 | 304 | 19.0% |
+| **Total** | 376 | 0 | 353 | 23 | 0 | 0.0% | 93.8% | 352 | 97 | 305 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
