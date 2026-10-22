@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The scb adversary-complaint Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}) at 12 pt (size 24 half points; no SC bankruptcy
+     rule sets a size, FRBP 9004(a) asks for legibility, 12 pt is the convention); Body Text in exact 24 pt line boxes
+     (typst pitch-body, double spaced) with no first-line indent (an allegation's number sits at the margin); single
+     lines in 16.2 pt boxes (typst pitch-single: court title, caption, block quotations, signature); headings on the
+     body pitch with 12 pt above and none below (typst heading-above); letter page, 1 in margins and the recipe's
+     centred page-number footer whose line box ends 697 twips (34.85 pt) above the edge, where typst (footer-descent 30 %)
+     sets the number. The markdown is read without
+     fancy lists, as typst (CommonMark) reads it: "(1)" and "(A)" in a quotation are text. Every paragraph the filter writes
+     carries its own spacing and indents (docx/scb-adversary-complaint.lua). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="324" indent="0" heading="480" heading-before="240" heading-after="0" quote="216" footer="697" pandoc-from="markdown-fancy_lists">
+</reference>
