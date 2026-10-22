@@ -1,0 +1,70 @@
+# New Mexico Court of Appeals (nmctapp): petition for writ of error (NMRA 12-503). The whole layout, as data for the shared document
+# model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to NMRA 12-305 and 12-318 (../rules.md, NMCTAPP-*); lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # NMCTAPP-FORM-004: proportionally spaced, serifs, 14-point or larger
+pitch:
+  body: 32.2              # NMCTAPP-FORM-006: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # NMCTAPP-FORM-006: headings, tables, footnotes, quotations, signature blocks may be single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NMCTAPP-FORM-002: one inch on every side
+indent: 36
+page_number: {align: center, from: 2}   # NMCTAPP-FORM-003: consecutive numbers at the bottom; the cover is page one, unnumbered
+footnote: {size: 14, gap: 7}                        # NMCTAPP-FORM-004, -006: 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # NMCTAPP-FORM-006: quotations single spaced, indented
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+  - {bold: true, hang: 36, above: 12.6, below: 9.8}
+# The cover (NMRA 12-305(F), (G); NMCTAPP-CAP-*): the court, the parties beside the case number, the court or body below
+# and its judge, the title, the oral-argument request, counsel two to a row; 12 point, single spaced, so it holds on one
+# page (NMCTAPP-FORM-005: the cover may be 11 point or larger). With no tables the cover is the top of page one
+# (front) and a page break.
+front:
+  - {text: "IN THE COURT OF APPEALS OF THE STATE OF NEW MEXICO", align: center, bold: true, size: 12, pitch: 13.8}
+  - columns:
+      - blocks:
+          - each: parties
+            blocks:
+              - {text: "{designation}", italic: true, optional: true, size: 12, pitch: 13.8, above: 4.8}
+              - {text: "{names}", optional: true, size: 12, pitch: 13.8}
+      - width: 158.4
+        blocks:
+          - {text: "No. {case_number}", bold: true, size: 12, pitch: 13.8, above: 18.6}
+    gutter: 21.6
+    above: 9.6
+  - {text: "{lower_court}", size: 12, pitch: 13.8, above: 12}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 12, pitch: 13.8, above: 12}
+  - {text: "{oral_argument}", align: center, bold: true, optional: true, size: 12, pitch: 13.8, above: 7.2}
+  - columns: {each: counsel, per_row: 2, row_gap: 7.2, blocks: [{text: "{heading}", italic: true, optional: true, size: 12, pitch: 13.8}, {text: "{lines}", size: 12, pitch: 13.8}]}
+    gutter: 21.6
+    above: 12
+  - {break: true}
+# The date line and the signature block, never split; the statement of compliance
+# (NMRA 12-503(G); NMCTAPP-CERT-002) after it, as the petition exemplar prints it; the certificate of service on a page
+# of its own. No tables: the sample asks for none (toc: false), and 12-503 requires none.
+closing:
+  - group:
+      - {text: "{date}", optional: true, pitch: body, indent: 36}
+      - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 5.6}
+      - {text: "{signature.lines}", left: 230.4}
+      - {text: "{signature.role}", bold: true, optional: true, left: 230.4}
+    above: 21.6
+  - when: compliance
+    blocks:
+      - {text: "Statement of Compliance", align: center, bold: true, upper: true, keep: true, above: 22.4, below: 16.8}
+      - {text: "I certify that this brief complies with the type-volume limitation of Rule {compliance.rules} NMRA. According to {compliance.program}, the body of this brief, as defined by Rule {compliance.definition} NMRA, contains {compliance.words} words.", pitch: body, indent: 36}
+      - group:
+          - {text: "s/ {signature.signer}", underline: true, left: 230.4}
+          - {text: "{signature.lines}", left: 230.4}
+          - {text: "{signature.role}", bold: true, optional: true, left: 230.4}
+        above: 5.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, keep: true, below: 16.8}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - group:
+          - {text: "s/ {service.signature.signer}", underline: true, left: 230.4}
+          - {text: "{service.signature.lines}", left: 230.4}
+        above: 5.6

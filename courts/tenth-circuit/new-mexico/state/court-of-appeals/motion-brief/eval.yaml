@@ -1,3 +1,9 @@
 # NMRA 12-305(D)(1): 14-point or larger, serif (e.g. Times New Roman), for the body of the motion.
 font:
   size_pt: 14
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated: a bare URL in a footnote
+# breaks after a period in typst ("http://www.ose." / "state.nm.us"), where LaTeX and Word do not break it; the shared
+# model has no URL rule (docs/open-items/fb-595.54.54.md).
+params:
+  cross_engine: report
