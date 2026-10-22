@@ -1,0 +1,9 @@
+# ORAP 5.05(3)(a)(ii) (OR-FORM-002): printed area within 6 1/4 x 9 1/2 inches; top and bottom margins 3/4 inch,
+# inside (left) 1 1/4 inch, outside (right) 1 inch. The court-level eval.yaml carries the 14 pt type size.
+# cover_pages: the cover and the page behind it that lists counsel carry no page number (ORAP 5.05(3)(d)).
+params:
+  margin_top_pt: 54
+  margin_bottom_pt: 54
+  margin_left_pt: 90
+  margin_right_pt: 72
+  cover_pages: 3

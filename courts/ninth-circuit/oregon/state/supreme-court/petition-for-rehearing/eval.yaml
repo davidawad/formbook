@@ -1,0 +1,11 @@
+# ORAP 5.05(3)(a)(ii) (OR-FORM-002): printed area within 6 1/4 x 9 1/2 inches; top and bottom margins 3/4 inch, inside (left)
+# 1 1/4 inch, outside (right) 1 inch. The court-level eval.yaml carries the 14 pt type size (OR-FORM-003).
+# cover_pages 2: ORAP 5.05(3)(d) puts the full case title, the party designations, the lower-court and appellate case
+# numbers, the judge and decision details and, under ORAP 1.30, every litigant's contact information on the cover; the
+# exemplars set the counsel on the back of the cover, so the cover is two unnumbered pages.
+params:
+  margin_top_pt: 54
+  margin_bottom_pt: 54
+  margin_left_pt: 90
+  margin_right_pt: 72
+  cover_pages: 2

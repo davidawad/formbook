@@ -53,12 +53,11 @@
 #let caption-left(meta) = {
   set par(leading: single-leading, first-line-indent: 0pt, spacing: 0pt)
   for (i, e) in need(meta, "caption").enumerate() {
-    if i > 0 { v(0.9em) }
+    if i > 0 { v(1.1em) }
     if "connector" in e {
       pad(left: 0.5in, inl(e.connector))
     } else {
-      block(width: 100%)[#for n in e.names [ #inl(n) \ ]]
-      pad(left: 0.5in, lines-of(e.designation))
+      stack(dir: ttb, spacing: 0pt, block(width: 100%, inset: (bottom: 0.3em), text(weight: if meta.at("caption_bold", default: false) { "bold" } else { "regular" }, e.names.join(linebreak()))), block(width: 100%, inset: (left: 0.5in), e.designation.join(linebreak())))
     }
   }
 }
@@ -67,7 +66,7 @@
 #let caption-right(meta) = {
   set par(leading: single-leading, first-line-indent: 0pt, spacing: 0pt)
   for (i, g) in need(meta, "case_lines").enumerate() {
-    if i > 0 { v(0.9em) }
+    if i > 0 { v(1.1em) }
     lines-of(g)
   }
 }
@@ -80,9 +79,9 @@
 }
 
 #let signer-entry(s) = {
-  underline[/s/ #emph(s.name)] + linebreak()
-  [#s.name]
-  for l in s.at("lines", default: ()) { linebreak() + inl(l) }
+  underline[/s/ #emph(s.name)]
+  if not s.at("bare", default: false) { linebreak(); [#s.name] }
+  for l in s.at("lines", default: ()) { linebreak(); inl(l) }
 }
 
 #let signature-block(sig, first-only: false) = {
@@ -93,7 +92,7 @@
     #if "closing" in sig [ #inl(sig.closing) #v(0.8em) ]
     #if "firm" in sig [ #strong(sig.firm) #v(0.8em) ]
     #for (i, s) in list.enumerate() {
-      if i > 0 { v(0.9em) }
+      if i > 0 { v(1.1em) }
       signer-entry(s)
     }
     #if sig.at("lines", default: ()).len() > 0 {
@@ -196,7 +195,7 @@
     #align(center, text(weight: "bold")[IN THE SUPREME COURT OF THE STATE OF OREGON])
     #v(0.3in)
     #grid(
-      columns: (1.45fr, 1fr),
+      columns: (3.6in, 1fr),
       column-gutter: 0pt,
       block(inset: (right: 0.15in, bottom: 0.2in), stroke: (right: rule-width, bottom: rule-width), width: 100%, caption-left(meta)),
       block(inset: (left: 0.15in), caption-right(meta)),
@@ -216,7 +215,7 @@
     #v(1fr)
     #if "cover_note" in meta [ #lines-of(meta.cover_note) \ ]
     #if "counsel_note" in meta [ #emph(meta.counsel_note) ]
-    #h(1fr) #inl(need(meta, "filed_month_year"))
+    #align(right, block(inset: (bottom: 0.08in), inl(need(meta, "filed_month_year"))))
   ]
 
   // ---- Back of the cover: counsel (ORAP 1.30 litigant contact information) ----
@@ -232,6 +231,7 @@
   let front = meta.at("toc", default: false) or "authorities" in meta
   if front {
     set page(numbering: "i")
+    pagebreak(weak: true)
     counter(page).update(1)
     if meta.at("toc", default: false) {
       page[
@@ -248,6 +248,7 @@
 
   // ---- Body, arabic numerals from 1 ----
   set page(numbering: "1")
+  pagebreak(weak: true)
   counter(page).update(1)
   mark-authorities(meta, cmarker.render(body, raw-typst: false, smart-punctuation: true))
 

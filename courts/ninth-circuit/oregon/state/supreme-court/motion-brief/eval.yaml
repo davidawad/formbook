@@ -1,0 +1,8 @@
+# ORAP 5.05(3)(a)(ii) (OR-FORM-002), applied to every document under this court: printed area within
+# 6 1/4 x 9 1/2 inches; top and bottom margins 3/4 inch, inside (left) 1 1/4 inch, outside (right) 1 inch.
+# The court-level eval.yaml carries the 14 pt type size. Page numbers sit in the bottom margin (see the template).
+params:
+  margin_top_pt: 54
+  margin_bottom_pt: 54
+  margin_left_pt: 90
+  margin_right_pt: 72

@@ -39,6 +39,7 @@ signature:
   firm: "HARRANG LONG GARY RUDNICK P.C."
   signers:
     - name: "Sharon A. Rudnick"
+      bare: true
       lines: ["William F. Gary, OSB #770325", "william.f.gary@harrang.com", "Sharon A. Rudnick, OSB #830835", "sharon.rudnick@harrang.com"]
   lines: ["Of Attorneys for Defendant-Respondent, Cross-Respondent Philip Morris, Inc., nka Philip Morris USA, Inc."]
 compliance:

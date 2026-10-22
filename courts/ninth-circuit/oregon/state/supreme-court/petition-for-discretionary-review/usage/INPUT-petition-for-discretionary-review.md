@@ -1,5 +1,5 @@
 ---
-# Transcribed from FILED-EXAMPLE-petition-for-discretionary-review.pdf (text layer). An excerpt: the petition from the Introduction through Argument A and Argument D, then the Conclusion (Arguments B and C, pages 11-14 of the filing, are omitted). The cover, counsel page, table of contents, table of authorities, signature block and certificate of filing and service are generated from the fields below; the footnote-free body is verbatim.
+# Transcribed from FILED-EXAMPLE-petition-for-discretionary-review.pdf (text layer). An excerpt (the table of authorities lists only the authorities of the excerpt): the petition from the Introduction through Argument A and Argument D, then the Conclusion (Arguments B and C, pages 11-14 of the filing, are omitted). The cover, counsel page, table of contents, table of authorities, signature block and certificate of filing and service are generated from the fields below; the footnote-free body is verbatim.
 title:
   - "AMENDED PETITION FOR REVIEW"
   - "OF PLAINTIFF JOHN STUART"
@@ -35,11 +35,7 @@ toc: true
 authorities:
   - heading: "Cases"
     entries:
-      - {cite: "*Bernard v. Vatheuer*, 303 Or 410, 737 P2d 128 (1987)", find: "Bernard v. Vatheuer"}
-      - {cite: "*Dodd v. Home Mut. Ins. Co.*, 22 Or 3, 28 P 881", find: "Dodd v. Home Mut. Ins. Co."}
-      - {cite: "*Riley Hill Gen. Contractor v. Tandy Corp.*, 303 Or 390, 737 P2d 595 (1987)", find: "Riley Hill Gen. Contractor v. Tandy Corp."}
       - {cite: "*Stuart v. Pittman and Country Mut. Ins. Co.*, 235 Or App 196, \\_\\_\\_ P3d \\_\\_\\_ (2010)", find: "235 Or App"}
-      - {cite: "*Zockert v. Fanning*, 310 Or 514, 800 P2d 773 (1990)", find: "Zockert v. Fanning"}
   - heading: "Statutes"
     entries:
       - {cite: "ORS 174.010", find: "ORS 174.010"}
@@ -51,7 +47,8 @@ signature:
   firm: "HARRANG LONG GARY RUDNICK P.C."
   signers:
     - name: "Susan D. Marmaduke"
-      lines: ["OSB 841458", "Jona J. Maukonen, OSB 043540"]
+      bare: true
+      lines: ["Susan D. Marmaduke, OSB 841458", "Jona J. Maukonen, OSB 043540"]
   lines: ["Of Attorneys for Plaintiff-Respondent and Cross-Appellant, Petitioner on Review John Stuart"]
 service:
   heading: "Certificate of Filing and Service"
