@@ -81,6 +81,7 @@ Alias `va`. Scope: filings in the Supreme Court of Virginia (appeals, petitions 
 | VA-WRIT-001 | Petition is notarized and states whether the petitioner believes taking evidence is necessary; a memorandum of law citing authorities accompanies it. | RULES 5:7(a)(2), 5:7(b)(1) | M |
 | VA-WRIT-002 | Length, including the memorandum of law: the longer of 50 printed pages or 8,750 words. | RULES 5:7(b)(7) (mandamus and prohibition) | M |
 | VA-WRIT-003 | Return of service or acceptance of service by the respondent accompanies the petition (for public officials, service on the Attorney General as well). | RULES 5:7(a)(3), 5:7(b)(2) | M |
+| VA-WRIT-004 | Pagination from the first page: the filed petition (petition-for-writ/usage/FILED-EXAMPLE-petition-for-writ.pdf) styles every respondent, so its caption runs over pages 1 to 4, and it numbers every page from i (title on v, contents on vi), with no unnumbered cover. The template does the same, so a caption of any length keeps every page numbered (DEF-COVER-001). Rule 5:6(a) requires page numbers but does not say where they start. | exemplar; RULES 5:6(a) | C |
 
 ## Motions
 

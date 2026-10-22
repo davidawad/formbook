@@ -80,12 +80,19 @@
   align(center, text(weight: "bold", meta.brief_title))
   v(2.4em)
   // Counsel name, VSB number, mailing address, telephone, fax (if any), e-mail (Rule 5:6(b)).
-  // Counsel blocks stack one under another: two columns overflow the right margin with long e-mail addresses.
-  for g in meta.counsel [
-    #lines-of(g.names)
-    #lines-of(g.lines)
-    #v(1.2em)
-  ]
+  // Counsel blocks sit side by side in two columns, as the filed exemplars set them (tier 2): stacked one under
+  // another at 14 pt (Rule 5:6(a)(3)), three counsel blocks ran the cover onto a second page (DEF-COVER-001). Each
+  // column is a fixed half of the text width, so a long line wraps inside its column, never into the one-inch right
+  // margin (Rule 5:6(a)(2)).
+  grid(
+    columns: (1fr, 1fr),
+    column-gutter: 0.3in,
+    row-gutter: 1.2em,
+    ..meta.counsel.map(g => {
+      lines-of(g.names)
+      lines-of(g.lines)
+    }),
+  )
 }
 
 // ---- Table of authorities (Rule 5:28(a); year of each citation in the cite text) ----------------
@@ -227,8 +234,11 @@
   set document(title: "RECORD NO. " + meta.record_number + " " + meta.brief_title)
   set page(paper: "us-letter", margin: margin, footer-descent: 0.4in)
   set text(font: font-family, size: body-size, lang: "en")
-  // Cover: no folio. Front matter: roman numerals. Body: restarts at 1 in arabic numerals.
-  page(numbering: none, footer: none)[
+  // Caption and front matter: roman numerals from i on the first page (VA-WRIT-004). The caption styles the case
+  // (Rule 5:6(b), VA-FORM-007) with every party the INPUT lists, so a long one runs over several pages; the filed
+  // petition numbers each of them, i to iv, before the title on v. An unnumbered first page would leave the
+  // caption's continuation pages unnumbered too (DEF-COVER-001). Body: restarts at 1 in arabic numerals.
+  page(numbering: "i", footer: folio)[
     #show: style-body
     #cover(meta)
   ]
