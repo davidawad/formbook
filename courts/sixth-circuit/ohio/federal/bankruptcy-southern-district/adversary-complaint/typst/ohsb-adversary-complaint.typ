@@ -39,7 +39,7 @@
 #let sig-above = 12pt                   // the last paragraph to the signature block
 #let table-space = 12pt                 // an exhibit heading to its table
 #let note-gap = 7pt                     // between two footnotes (docx: Footnote Text 140 twips after)
-#let note-clearance = 6pt            // the text to the footnote rule
+#let note-clearance = 6pt               // the text to the footnote rule (LibreOffice reserves no more above a note)
 // The footer's single-pitch line box ends half an inch above the bottom edge (docx: footer 720 twips).
 #let footer-descent = margin - 0.5in - pitch-single
 
