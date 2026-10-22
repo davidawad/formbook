@@ -7,10 +7,10 @@ Folder: `courts/third-circuit/new-jersey/federal/bankruptcy-district/adversary-c
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md` (excerpt: caption, parties, jurisdiction, paragraphs 6 to 23, paragraphs 198 to 214, WHEREFORE and signature; see Known gaps) |
-| typeface | face required: none. Substitute: none needed; EB Garamond (`docs/FONTS.md`, "No face named"). Metric: n/a. Checked 2026-10-15 against the D.N.J. Local Bankruptcy Rules package (as posted, 2025): no typeface or point-size text in it, and LBR 1001-1's 2015 comment says an unincorporated Local Civil Rule does not apply. Judges' preferences (Judges' Info tab) were not checked. |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, embedded fonts EB Garamond only (`pdffonts`), no warnings (re-rendered 2026-10-15) |
-| overlay | ok: `usage/OVERLAY-supor-adversary-complaint.pdf` and `OVERLAY-supor-adversary-complaint.txt` (re-run 2026-10-15) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed on 2026-10-15; the only later edit is a comment in the template, and the text of the render is unchanged) |
+| typeface | face required: none. Times New Roman 14 pt, the house face (`docs/FONTS.md`, "No face named"), vendored, in typst and docx alike (was EB Garamond until fb-595.68.34). Checked 2026-10-15 against the D.N.J. Local Bankruptcy Rules package (as posted, 2025): no typeface or point-size text in it, and LBR 1001-1's 2015 comment says an unincorporated Local Civil Rule does not apply. Judges' preferences (Judges' Info tab) were not checked. |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 10 pages; `OUTPUT-adversary-complaint.docx` and `.docx.pdf`, 10 pages, every line and page as typst (XENG-001..003 gated, `eval.yaml`; fb-595.68.34) |
+| overlay | earlier render only (`just overlay` writes to the gitignored `.overlay/`; not re-run for fb-595.68.34) |
+| pages reviewed | 10 of 10 on each engine (2026-10-22, below) |
 
 File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf/.txt`, so the brief's `<id>.pdf` and `<id>-overlay.pdf` are named that way here. The sample is `INPUT-<id>.md` for the same reason.
 
@@ -33,10 +33,11 @@ Not produced by this template (separate filings): the adversary cover sheet (LBR
 
 - US Letter, one-inch margins, page number centered in the footer.
 - Counsel block single-spaced at the top left (LBR 9004-1(a)).
-- Court name centered and bold, then "Caption in Compliance with D.N.J. LBR 9004-1" (right) and the caption: a left column for the debtor and the parties, a right column for the case number, chapter, judge and adversary number. The title is centered and bold below the caption; the body starts on the same page (the cover is not a separate page).
-- Paragraphs are numbered 1, 2, ... by the template (FRCP 10(b)), first-line indent 0.5 in. Headings are not numbered. Chunks that start with `WHEREFORE` and chunks in square brackets (`[...]`, a transcription note) are unnumbered.
-- Prayer items (markdown `1.` list) are lettered (a), (b), ... .
-- Signature block: "Dated:" left, "Respectfully submitted," with the firm block and `/s/` signer on the right; kept together.
+- Court name centered and bold, then "Caption in Compliance with D.N.J. LBR 9004-1" (right) and the caption: a left column for the debtor and the parties, a right column for the case number, chapter, judge and adversary number, each block ruled at the right and foot of its left column (the rule the height of the row). The caption fills page 1; the title opens page 2, centered and bold, as filed.
+- Cross-engine layout model (`lib/typst/xengine.typ`): body on a 28 pt pitch (double spaced at 14 pt), single lines (counsel, court, caption, signature, footer) on a 16 pt pitch, explicit block spaces; headings at the type size on the body pitch with no space of their own.
+- Paragraphs are numbered 1, 2, ... by the template (FRCP 10(b)): the number at the 0.5 in indent in a 0.5 in box, the text from 1 in. Headings are not numbered. Chunks that start with `WHEREFORE` and chunks in square brackets (`[...]`, a transcription note, centered italic) are unnumbered.
+- Prayer items (markdown `1.` items) are lettered (a), (b), ... by their number, the letter 0.5 in in, the text hanging at 0.9 in.
+- Signature block: "Dated:" left of the first line, "Respectfully submitted," the firm block and the `/s/` signer from 3.1 in, single lines; kept on one page with the last paragraph.
 
 ## Markdown contract (for samples)
 
@@ -48,32 +49,39 @@ Not produced by this template (separate filings): the adversary cover sheet (LBR
 ## Known gaps and open choices
 
 1. **One exemplar.** Tier 2 of EVAL-LOOP asks for two or three filers from different firms. The search (CourtListener RECAP, `court=njb`, adversary complaints filed 2026-07 to 2026-10) found Murray v. Santander Consumer USA Inc. (26-01342, 11 pages, docket 73663852), Avrumi Lubin (26-01435, 13 pages) and Stanger v. Unison Agreement Corp. (26-01384). Those were not downloaded for comparison. Tier 2 is therefore **not** judged against two filers yet.
-2. **Typeface and size are a convention, not a mandate.** No bankruptcy rule in the package sets a typeface or a size. The District's Local Civil Rule 7.2(d) (12 pt non-proportional or 14 pt proportional, e.g. Times New Roman 14) is the nearest rule, but it is not incorporated into the bankruptcy rules (LBR 1001-1, 2015 comment). The exemplar's body measures about 14 pt Times New Roman (word boxes, `pdftotext -bbox`). The template uses EB Garamond 14 pt because no rule in the package names a face (checked 2026-10-15), so `docs/FONTS.md` ("No face named") gives EB Garamond. A court-named face would get its substitute from that table instead; Liberation Serif is the Times New Roman substitute and is not used here, since no rule requires it. EB Garamond has a smaller x-height than Times, so it looks smaller than the exemplar at the same size. Whether a larger face is needed is for David to decide.
+2. **Typeface and size are a convention, not a mandate.** No bankruptcy rule in the package sets a typeface or a size. The District's Local Civil Rule 7.2(d) (12 pt non-proportional or 14 pt proportional, e.g. Times New Roman 14) is the nearest rule, but it is not incorporated into the bankruptcy rules (LBR 1001-1, 2015 comment). The exemplar's body measures about 14 pt Times New Roman (word boxes, `pdftotext -bbox`). The template uses Times New Roman 14 pt, the house face where no rule in the package names one (checked 2026-10-15), which is also the exemplar's face and size.
 3. **Hearing date.** LBR 9004-1(b) asks for the applicable hearing date. A complaint has no motion hearing, so the caption carries none; the template does not require one here (the `motion-brief` template does).
 4. **Excerpt, not the whole filing.** The sample transcribes paragraphs 1 to 23 and 198 to 214 with the WHEREFORE and the signature, and says so with a bracketed note. The exemplar's paragraph numbers are not reproduced; the template renumbers from 1. The exemplar repeats paragraph 19 in its text layer; the sample keeps the first one.
 5. **Filer's text kept as filed.** The exemplar's own errors (for example, "Secured Creditors" in the singular, "Mr. Wu" with no introduction) appear in the sample because it is a transcription. They are not template defects.
 6. **Caption layout.** The party column is closed by a rule on the right and bottom, not the column of ")" marks sometimes used; the exemplar's own debtor block is a boxed layout. Recorded as a layout choice, not a rule requirement.
-7. **Line spacing** is set by eye against the exemplar's page pitch (`body-leading`). It was not measured against the exemplar's baseline grid.
+7. **Line spacing** is double spacing at the type size (`pitch-body` 28 pt); it was a 25.2 pt pitch with a 9.8 pt paragraph gap set by eye before fb-595.68.34. It was not measured against the exemplar's baseline grid.
 8. **Italics.** The exemplar's text layer has no italic markup, so case names are roman in the sample. The template italicizes `*...*` when a sample carries it.
-9. **Check scripts not run.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
+9. **Tool checks.** `tools/check.sh <this folder>`: `RESULT: 9 checks passed, 0 failed` (typst) and `RESULT: 13 checks passed, 0 failed` (`--engine docx`, XENG-001..003 gated).
+10. **Title page.** The old render set the title alone on page 2 (the cover ran over) and the body from page 3; the title now opens page 2 and the body follows it, as filed.
 
-## Review of the rendered pages (OUTPUT-adversary-complaint.typst.pdf, 8 pages)
+## Review of the rendered pages (Gate 2 record, all 10 pages on each engine, rendered at 45 dpi and looked at, 2026-10-22)
 
-- Page 1: counsel block top left, court name, the LBR 9004-1 caption note, the debtor block and case data, the adversary block, and the title "COMPLAINT". Nothing spills. Pass.
-- Page 2: lead-in (unnumbered), THE PARTIES heading, paragraphs 1 to 5, JURISDICTION AND VENUE heading with the start of paragraph 6 on the same page (the heading is kept with its paragraph; the paragraph breaks across the page). Pass.
-- Page 3: paragraphs 6 to 10 and the end of paragraph 9. No heading at a page foot. Pass.
-- Page 4: ALLEGATIONS COMMON TO ALL CLAIMS FOR RELIEF on one line, the sub-heading "A." in bold italic, paragraphs 11 to 15. Pass.
-- Page 5: paragraphs 15 to 23, the "B. The Sale Process." sub-heading, and the excerpt note. Pass.
-- Page 6: the excerpt note, paragraphs 22 to 32. Pass.
-- Page 7: paragraphs 33 to 38, WHEREFORE (unnumbered) and item (a)-(c). Pass.
-- Page 8: item (d), "Dated: October 12, 2026", the signature block with the firm and "/s/" line. Pass.
+The typst and docx renders were viewed side by side; every page carries the same lines (XENG-003, 228/228).
 
-Overlay (`OVERLAY-supor-adversary-complaint.txt`): pages 1 to 5 pair with the same exemplar pages (word overlap 64 to 84 percent). Pages 6 to 8 pair with exemplar pages 32 to 34 because the sample's paragraphs 198 to 214 sit at the end of the filing. The overlay is a diagnostic, not a score.
+| Page | What it is | Finding |
+|---|---|---|
+| 1 | Counsel block, court name, LBR 9004-1 note, the debtor and adversary captions | OK: each left column ruled at its right and foot; nothing spills. |
+| 2 | Title, lead-in, THE PARTIES, paragraphs 1 to 4 | OK. |
+| 3 | Paragraphs 5 to 8; JURISDICTION AND VENUE | OK. |
+| 4 | Paragraphs 9 to 11; ALLEGATIONS COMMON TO ALL CLAIMS FOR RELIEF; sub-heading A | OK: "§§ 1408" kept with its number. |
+| 5 | Paragraphs 12 to 16 | OK. |
+| 6 | Paragraphs 17 to 23; sub-heading B; the excerpt note | OK. |
+| 7 | Paragraphs 24 to 30 | OK. |
+| 8 | Paragraphs 31 to 37 | OK. |
+| 9 | Paragraph 38; WHEREFORE; items (a) to (c) | OK: the page ends short because item (d) is kept with the signature. |
+| 10 | Item (d); "Dated:" and the signature block | OK. |
+
+No open tier-2 finding.
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/njb.lua`): pandoc on `reference.docx`. Matches the typst template: EB Garamond 14 pt, exact 25.2 pt line pitch and 9.8 pt paragraph gap (both measured on the typst output, not on a filed PDF), 0.5 in first-line indent, 1 in margins on letter paper, 12 pt centered page number in the footer, the cover (counsel block, court name, LBR 9004-1 note, caption tables with the right and bottom rules, title, page break before the body), body paragraphs numbered 1 to n, prayer items lettered (a) to (d), bracketed notes centered and italic, signature block in a borderless table.
-- Differs from typst: paragraph numbers and prayer letters are typed text written by the filter, not Word numbering (a paragraph inserted in Word does not renumber the rest); cover and signature text is plain (italics in the frontmatter are dropped there); caption and signature rules are Word table borders, which Word and LibreOffice draw slightly differently; line breaks and page numbers may differ in Word from the typst pages.
-- Not built on the docx: no TOC or TOA (none in this template).
-- BLOCKED: LibreOffice (`soffice`) is not installed in the build box, so `usage/OUTPUT-supor-adversary-complaint.docx.pdf` cannot be produced, and the Gate 0 CONTENT, Gate 1 RULES, Gate 2 VISUAL REVIEW and Gate 3 GENERALIZATION checks cannot be run on it. No `checks.yaml` exists for `njb` yet, so there are no check IDs to list. Reason for every item: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked. The `.docx` passes the zip and XML well-formedness checks; it has not been rendered or viewed.
+Engine status: typst `OUTPUT-adversary-complaint.typst.pdf`; docx `OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice), 10 pages each, every line and page as typst (XENG-001..003 gated); latex not built.
+
+- **typst** (primary, `typst/`): the reference for the form, on `lib/typst/xengine.typ`.
+- **docx** (`docx/`): `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst face `{font}`: Times New Roman 14 pt; Body Text in exact 28 pt lines with a 0.5 in first-line indent; single lines in 16 pt boxes) and `docx/njb-adversary-complaint.lua` (on `lib/docx/xengine.lua`), which writes every paragraph: the counsel block, court, note, caption tables, title (opening page 2), numbered allegations, headings, lettered prayer items, notes, the signature block, the footer (a centred 12 pt PAGE field, `$FORMBOOK_FOOTERS`) and the section (letter, 1 in margins, `$FORMBOOK_FINAL`). No shell: `fb render` builds the reference document and packs the archive (were `docx/build-reference.sh`, `docx/njb.lua` and a committed `reference.docx` in EB Garamond). Paragraph numbers and prayer letters are typed text, not Word numbering. Not verified in Word (LibreOffice only); it opens and converts without a repair prompt (DEF-DOCX-OPEN).
+- **docx BLOCKED items:** none. No TOC or TOA in this template.
