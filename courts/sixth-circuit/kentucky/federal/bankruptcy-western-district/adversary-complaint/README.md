@@ -10,7 +10,7 @@ The rules below are the federal rules that govern an adversary complaint in this
 
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
-| KYWB-FORM-001 | Fed. R. Bankr. P. 9004(a) (as amended eff. Dec. 1, 2024) | "A petition, pleading, schedule, or other document must be clearly legible." | `typst/kywb-adversary-complaint.typ` (EB Garamond, 13 pt, black on white) |
+| KYWB-FORM-001 | Fed. R. Bankr. P. 9004(a) (as amended eff. Dec. 1, 2024) | "A petition, pleading, schedule, or other document must be clearly legible." | `typst/kywb-adversary-complaint.typ` (Times New Roman, 12 pt, black on white) |
 | KYWB-FORM-002 | Fed. R. Bankr. P. 9004(b) | A document presented for filing must have a caption that sets forth the court's name, the case title, the case number and any adversary-proceeding number, and a brief designation of the document. | `caption()`: court title, debtor block (`caption.debtor_names`, `bankruptcy_lines`), adversary block (`caption.adversary_number`), title (`title`) |
 | KYWB-FORM-003 | Fed. R. Bankr. P. 7010 | "Fed. R. Civ. P. 10 applies in an adversary proceeding—except that a pleading's caption must substantially conform to the appropriate version of Form 416." The template uses the full-caption layout of Form 416 (court, debtor block, adversary block, title); the official form text was not retrieved (see gaps). | caption layout |
 | KYWB-FORM-004 | Fed. R. Civ. P. 10(b) (applied by Fed. R. Bankr. P. 7010) | A party must state its claims or defenses in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | `allegations()`: one number per blank-line-separated chunk; headings and "~ " paragraphs are unnumbered |
@@ -45,7 +45,7 @@ sh tools/render.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-dist
 sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/adversary-complaint keats-v-specialized
 ```
 
-- `usage/OUTPUT-adversary-complaint.typst.pdf`: 7 pages. Typst compiled with no warnings (`render.sh` fails on any warning). `pdffonts`: EBGaramond-Regular and -Bold only, embedded. Named `OUTPUT-` (the name `tools/render.sh` writes by default and `tools/overlay.sh` reads); the brief's `<id>.pdf` name was not used because the tool contract is fixed.
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 7 pages. Typst compiled with no warnings (`render.sh` fails on any warning). `pdffonts`: TimesNewRomanPSMT and its bold only, embedded. Named `OUTPUT-` (the name `tools/render.sh` writes by default and `tools/overlay.sh` reads); the brief's `<id>.pdf` name was not used because the tool contract is fixed.
 - `usage/OVERLAY-keats-v-specialized.pdf` and `OVERLAY-keats-v-specialized.txt`: red = our render, blue = exemplar, black = both. The page map pairs pages by word overlap: ours p.1–3 ↔ filed p.1–3 (76–83%); ours p.4 ↔ p.4 (55%); p.5–6 ↔ p.5–6 (49%, 48%); p.7 ↔ p.8 (63%, our page 7 is the exhibit, the filed exhibit is page 8). The overlay is a diagnostic, not a score: the filing is set in a different face and at a different line length, so text lines will not coincide.
 
 ## Visual review (Gate 2 record: all 7 pages, final render at 60 dpi, looked at)
@@ -68,34 +68,17 @@ sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-dis
 4. **Adversary cover sheet, summons, corporate ownership statement:** not generated (see Governing rules).
 5. **Local rules status.** The W.D. Ky. local rules file is a draft with a blank effective date. Every LBR citation above is to that draft.
 6. **Exhibit A total does not add up in the filing.** The five transfers sum to $245,955.65; the filing prints the total as "$245,955.065". Transcribed as printed; flagged, not corrected.
-7. **Page count.** 7 pages against the filing's 8 (the exhibit is page 7 here). The sample is complete, so the difference is the typeface (EB Garamond 13 pt, not the filer's Times) and the filer's own spacing.
-8. **Typeface and spacing are style choices**, not rules. EB Garamond (vendored, OFL) at 13 pt; 24 pt double-spaced lines, as the filed exemplar.
+7. **Page count.** 7 pages against the filing's 8 (the exhibit is page 7 here). The sample is complete, so the difference is the filer's own spacing.
+8. **Typeface and spacing are style choices**, not rules. Times New Roman (vendored) at 12 pt, the exemplar's size; 24 pt double-spaced lines, as the filed exemplar.
 9. **Page numbers** are plain, centered, bottom of page. The filing's ECF header (case number and filing stamp on each page) is system output and is not reproduced.
 10. **Caption wrap.** "ROBERT W. KEATS, CHAPTER 7 TRUSTEE" wraps in the party column (see review, page 1).
 
 ## Engines
 
-The docx engine (`docx/`) is built, and its `.docx` renders, but its LibreOffice PDF was not made (see BLOCKED). Build: `sh docx/build-reference.sh docx/reference.docx` (pandoc default reference, styles and footer replaced). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`, which writes `usage/OUTPUT-adversary-complaint.docx` and then fails at the `soffice` step. `docx/render.sh` (called by `tools/render-docx.sh`) runs pandoc with `docx/kywb-adversary-complaint.lua`, puts back the reference's styles and page setup, and checks the zip and XML parts.
+typst (`typst/`, the reference) and docx (`docx/`) are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"), and `eval.yaml` sets `params.cross_engine: gate` (fb-595.68.29). There is no latex engine for this folder.
 
-What matches the typst form (set in `docx/reference.docx`; read from its XML, not from a rendering):
-
-- Page: US letter, 1 in margins on all sides (`w:pgSz` 12240 x 15840, `w:pgMar` 1440).
-- Font and size: EB Garamond (vendored, `fonts/eb-garamond`), 13 pt (`w:sz` 26) in the body, headings and footnotes; page number 11 pt, centered, in a PAGE field.
-- Spacing: body lines exact 24 pt, first-line indent 0.5 in; headings centered, bold, keep with next; caption, counsel and signature lines single spaced.
-- Caption: court title, debtor block and adversary block; the party cell carries the right and bottom rule as cell borders; title centered and bold.
-- Allegations numbered 1 to 26 by the filter (a paragraph starting `~ ` is not numbered); relief items lettered A. to C. (UpperAlpha).
-- Signature block indented 3 in; each exhibit starts on a new page (`pageBreakBefore`), as a bordered table, amount columns right aligned, total row bold.
-
-What differs from typst:
-
-- Paragraph spacing: on the typst render (7 pages, `/work/artifacts/kywb/adversary-complaint/OUTPUT-keats-v-specialized.pdf`, outside the court folder) the line pitch measured with `pdftotext -bbox` on page 2 is 24 pt within a paragraph and 29 pt between paragraphs. The docx sets no gap between paragraphs, so its paragraph pitch is 24 pt. Which one the court expects is not decided here.
-- Page count: not measured for the docx (no LibreOffice); the typst render is 7 pages.
-- Caption rule and column widths are Word table borders; Word and LibreOffice draw table borders slightly differently.
-- Hyphenation, kerning and ligatures are the application defaults for the docx; they are not asserted.
-
-docx BLOCKED (the checks that run on the `.docx.pdf` cannot run):
-
-- `docx.pdf` and the Gate 0 and Gate 1 checks: `soffice` (LibreOffice) is not installed on this box, so `usage/OUTPUT-keats-v-specialized.docx.pdf` was not produced. Not passed.
-- Gate 2 page review of the docx: no PDF to look at, so no pages reviewed. Not passed.
-- Opening the `.docx` in LibreOffice or Word (no repair prompt): not done. Only the zip, the XML well-formedness and a pandoc read-back were checked.
-- Word limits in `docs/DOCX.md` that apply to this form: none. The form has no table of contents, table of authorities or pleading line numbers.
+- Face and size: Times New Roman 12 pt in both (the docx names the typst face through `{font}` in `docx/reference.xml`).
+- Pitches: body lines in exact 24 pt boxes (480 twips), single lines (caption, title, signature, exhibit tables) in 14 pt boxes (280 twips); headings centred bold capitals with 12 pt above and below; no space between paragraphs.
+- Allegation numbers in a half-inch box after the half-inch indent (docx: a tab stop at 1 in); relief items lettered A., B., C., hanging in a half-inch box half an inch in (docx style Prayer Item); the signature block 3 in in, kept whole; each exhibit on its own page as a ruled table with a repeated header row.
+- The docx is built by `fb render` from `docx/reference.xml` (base="xengine") and `docx/kywb-adversary-complaint.lua`; no shell script and no committed reference.docx.
+- `sh tools/check.sh <this folder> --engine docx`: 13 passed, 0 failed; XENG-001..003 PASS (7 pages, 166/166 lines break alike). The page number sits a little lower in the LibreOffice PDF than in typst (footer position; not compared).
