@@ -158,6 +158,8 @@
   // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
   // the body pitch (Gen. L.R. 5(a)(1): double-spaced).
   show: xengine.with(pitch: pitch-double, list-indent: item-label)
+  // A doubled sign stays with its number ("§§ 157"), as the Word filter binds it (xengine binds one sign).
+  show regex("[§¶]{2,} \\S+"): it => box(it)
   set enum(numbering: "(a)")
 
   // Headings at the type size and the body pitch: level 1 a centered section in capitals, level 2 a centered

@@ -195,8 +195,19 @@ local function breaks(s)
   return pandoc.Str((s.text:gsub("%)%(", ")\u{2060}("):gsub("/([^%d])", "/\u{200B}%1")))
 end
 
+-- A doubled sign stays with its number ("§§ 157"), as the typst template boxes it (xe.inl binds a single sign).
+local function signs(inlines)
+  for i = 1, #inlines - 1 do
+    local a, b = inlines[i], inlines[i + 1]
+    if a.t == "Str" and b.t == "Space" and #a.text >= 4 and a.text:gsub("\u{00A7}", ""):gsub("\u{00B6}", "") == "" then
+      inlines[i + 1] = pandoc.Str("\u{00A0}")
+    end
+  end
+  return inlines
+end
+
 function Pandoc(doc)
-  doc = doc:walk({ Str = breaks })
+  doc = doc:walk({ Str = breaks }):walk({ Inlines = signs })
   local meta = doc.meta
   local out = {}
   cover(meta, out)

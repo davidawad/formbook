@@ -135,6 +135,8 @@
   // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
   // the body pitch (double-spaced); bullets in a box of the paragraph indent, the text hanging after it.
   show: xengine.with(pitch: pitch-double, list-indent: para-indent)
+  // A doubled sign stays with its number ("§§ 157"), as the Word filter binds it (xengine binds one sign).
+  show regex("[§¶]{2,} \\S+"): it => box(it)
 
   // Level 1 = centered caps section heading; level 2 = bold heading at the margin. Both in a line of the body
   // pitch, with no space of their own; sticky: a heading never ends a page. Not numbered by the template.
