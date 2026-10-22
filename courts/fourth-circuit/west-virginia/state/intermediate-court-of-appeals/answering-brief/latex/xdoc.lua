@@ -104,8 +104,10 @@ return require("latex.xdoc")({
       ["above"] = 43.2,
     },
     {
+      ["fill"] = 1,
+    },
+    {
       ["each"] = "counsel",
-      ["above"] = 86.4,
       ["blocks"] = {
         {
           ["text"] = "{names}",
@@ -139,6 +141,7 @@ return require("latex.xdoc")({
       ["below"] = 2.4,
     },
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {
