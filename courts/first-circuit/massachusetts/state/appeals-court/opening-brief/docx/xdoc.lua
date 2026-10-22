@@ -207,17 +207,18 @@ return require("docx.xdoc")({
           ["heading"] = 1,
         },
         {
-          ["text"] = "{compliance.paragraphs}",
-          ["pitch"] = "body",
-          ["indent"] = 36,
-        },
-        {
           ["group"] = {
+            {
+              ["text"] = "{compliance.paragraphs}",
+              ["pitch"] = "body",
+              ["indent"] = 36,
+            },
             {
               ["text"] = "{compliance.signature.firm}",
               ["bold"] = true,
               ["left"] = 230.4,
               ["optional"] = true,
+              ["above"] = 5.6,
             },
             {
               ["each"] = "compliance.signature.signers",
@@ -253,17 +254,18 @@ return require("docx.xdoc")({
           ["heading"] = 1,
         },
         {
-          ["text"] = "{service.paragraphs}",
-          ["pitch"] = "body",
-          ["indent"] = 36,
-        },
-        {
           ["group"] = {
+            {
+              ["text"] = "{service.paragraphs}",
+              ["pitch"] = "body",
+              ["indent"] = 36,
+            },
             {
               ["text"] = "{service.signature.firm}",
               ["bold"] = true,
               ["left"] = 230.4,
               ["optional"] = true,
+              ["above"] = 5.6,
             },
             {
               ["each"] = "service.signature.signers",
