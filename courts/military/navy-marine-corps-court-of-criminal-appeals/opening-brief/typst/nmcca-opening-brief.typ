@@ -17,7 +17,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Mono"       // the face data/exemplar-fonts.json audits for the filed exemplar (Courier New metrics; `fb lint fonts` requires it). NMCCA-FORM-001 (Rule 17(c)) bars Courier and similar non-proportional type: an open question for David (README).
+#let font-family = ("Times New Roman", "Liberation Serif")   // NMCCA-FORM-001 (Rule 17(c)): 14-point proportional type; Times New Roman is a face the rule names (house standard, docs/FONTS.md), Liberation Serif its metric fallback. Courier and similar non-proportional faces are barred, so the rule overrides the filed exemplar's Courier New.
 #let type-size = 14pt                      // NMCCA-FORM-001: 14-point type, footnotes included.
 #let pitch-double = 33.6pt                 // NMCCA-FORM-002: double-spaced body, 2 x the single pitch.
 #let pitch-single = 16.8pt                 // single pitch (1.2 em): caption, headings, index, quotations, footnotes, signature blocks.
@@ -34,7 +34,7 @@
   sub: 15.4pt,                             // above a deeper heading
   quote: 11.2pt,                           // above and below a block quotation
   note-gap: 7pt,                           // between two footnotes
-  note-clearance: 12.6pt,                  // between the body and the footnote rule
+  note-clearance: 9.8pt,                   // between the body and the footnote rule; with note-gap above the first note, 16.8 pt: LibreOffice keeps the separator paragraph of a Word document (a single-spaced Normal line, 16.8 pt) above the notes
   toc-row: 8.4pt,                          // between two index entries
   cover-small: 16.8pt,                     // between the parts of the caption: a blank single line, so both columns keep one line grid
   cover-mid: 16.8pt,                       // after the court name, before the tried-at paragraph
@@ -268,7 +268,7 @@
   // pitch, footnote marks at 58 %, lists with the number in a half-inch box.
   show: xengine.with(pitch: pitch-double, list-indent: para-indent)
   // LibreOffice (the docx engine's PDF) sets a face's standard ligatures and ignores w14:ligatures, so typst sets them
-  // too (Liberation Mono has none); footnote marks are scaled and raised as LibreOffice does, not a face's sups glyphs.
+  // too; footnote marks are scaled and raised as LibreOffice does, not a face's sups glyphs.
   set text(ligatures: true)
   set super(typographic: false)
   // No widow or orphan control in either engine: typst's is a cost that footnotes can override, LibreOffice's a rule,

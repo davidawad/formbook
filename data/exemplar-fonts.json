@@ -6804,8 +6804,9 @@
       "body": "couriernew",
       "body_share": 1.000,
       "class": "metric-exact",
-      "face": "Liberation Mono",
-      "why": "Courier New metrics",
+      "face": "Times New Roman",
+      "why": "rule override: the exemplar is Courier New (Liberation Mono metrics), but NMCCA Rule 17(c) requires 14-point proportional type and bars Courier and Courier New, so the template uses Times New Roman, a face the rule names",
+      "note": "The court rule overrides the exemplar face (CLAUDE.md: the rules decide the layout). NMCCA Rules of Appellate Procedure (2022), Rule 17(c), https://www.jag.navy.mil/documents/4691/2022_NMCCA_Rules_of_App_Proc.pdf, verified 2026-10-22; see courts/military/navy-marine-corps-court-of-criminal-appeals/rules.md (fb-595.74).",
       "fonts": [
         "Arial",
         "Courier",

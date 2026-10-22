@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- The NMCCA brief's Word styles; fb render builds docx/reference.docx from pandoc's default reference with them
      (tools/fb/src/docxref.rs), on the cross-engine layout model of ../typst/nmcca-*.typ (lib/typst/xengine.typ,
-     lib/docx/xengine.lua): Liberation Mono 14 pt everywhere, footnotes included (the typst face, vendored in fonts/: the
-     audited exemplar face, see the README on NMCCA-FORM-001); exact line spacing at the typst pitches: body 672 twips (33.6 pt, double, NMCCA-FORM-002),
+     lib/docx/xengine.lua): Times New Roman 14 pt everywhere, footnotes included (the typst face: the pinned Times New Roman install,
+     docs/FONTS.md; Rule 17(c) proportional type, NMCCA-FORM-001); exact line spacing at the typst pitches: body 672 twips (33.6 pt, double, NMCCA-FORM-002),
      single-spaced blocks (cover, headings, index, quotations, footnotes, signature) 336 twips (16.8 pt); first-line
      indent 0.5 in for a paragraph that follows a paragraph (First Paragraph: none); list items with the number in a
      0.5 in box; block quotations indented 0.5 in both sides, 224 twips above and below; footnotes 140 twips apart
      (typst footnote.entry gap 7 pt). Hanging indents carry no firstLine attribute (LibreOffice lets w:firstLine="0"
      cancel w:hanging). The footers (rIdFtrNone, rIdFtrPage) and every section's page setup are fb render's and the
      filter's (docx/nmcca.lua writes the section breaks and FORMBOOK_FINAL). -->
-<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" styles="merge" theme-font="Liberation Mono" strip-theme-fonts="true">
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" styles="merge" theme-font="Times New Roman" strip-theme-fonts="true">
   <w:docDefaults>
     <w:rPrDefault>
       <w:rPr>
-        <w:rFonts w:ascii="Liberation Mono" w:hAnsi="Liberation Mono" w:eastAsia="Liberation Mono" w:cs="Liberation Mono"/>
+        <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
         <w:sz w:val="28"/>
         <w:szCs w:val="28"/>
         <w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/>
@@ -34,7 +34,7 @@
       <w:spacing w:before="0" w:after="0" w:line="336" w:lineRule="exact"/>
     </w:pPr>
     <w:rPr>
-      <w:rFonts w:ascii="Liberation Mono" w:hAnsi="Liberation Mono" w:eastAsia="Liberation Mono" w:cs="Liberation Mono"/>
+      <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
       <w:sz w:val="28"/>
       <w:szCs w:val="28"/>
     </w:rPr>

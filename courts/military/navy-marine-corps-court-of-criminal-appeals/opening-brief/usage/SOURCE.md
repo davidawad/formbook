@@ -8,5 +8,5 @@ Notes on provenance:
 
 - The PDF is the appellant's brief and assignments of error as filed, 63 pages, text-based (`pdftotext` yields the text).
 - It is hosted by a third party (ncsfreedom.org, upload dated 2019/12), not by the NMCCA. I did not check it against the NMCCA docket; the caption, the case number, panel, counsel and certificate are as printed on the document itself.
-- The filing predates the current NMCCA Rules of Appellate Procedure (2022). It is set in 12-point Times New Roman, single-spaced (measured from the text: about 13.9 pt baseline pitch), which the 2022 rules do not allow (Rule 17(c): 14-point proportional type, double-spaced). The exemplar therefore shows the structure of the filing, not its type size or spacing.
+- The filing predates the current NMCCA Rules of Appellate Procedure (2022). It is set in 12-point Courier New, single-spaced (`pdffonts`: embedded Courier New, Bold and Italic; 7.2 pt per character; about 13.9 pt baseline pitch; corrected 2026-10-22, this note said Times New Roman), which the 2022 rules do not allow (Rule 17(c): 14-point proportional type, double-spaced; Courier New named as not acceptable). The exemplar therefore shows the structure of the filing, not its typeface, type size or spacing.
 - Only one NMCCA opening brief was found in public sources (see `../README.md`, "Exemplar search").

@@ -1,3 +1,11 @@
+
+## Typeface (Rule 17(c))
+
+Rule 17(c) text, read with `pdftotext` from the 2022 rules (printed page 28, PDF page 34; https://www.jag.navy.mil/documents/4691/2022_NMCCA_Rules_of_App_Proc.pdf, the same file, SHA-256 `2ae7408f6a85bb739894cac79421e85250d2dc35f1c8004399b817182f625b9c`, as https://stjececmsdusgva001.blob.core.usgovcloudapi.net/public/documents/2022_NMCCA_Rules_of_App_Proc.pdf; both HTTP 200, verified 2026-10-22):
+
+> All printed matter, including footnotes, must appear in 14-point proportional type, e.g., Times New Roman, Century Schoolbook, etc. Courier, Courier New, and similar non-proportional fonts are not acceptable.
+
+The rule decides the face, not the filed exemplar. The opening brief's exemplar (2013, before the 2022 rules) is set in Courier New, which Rule 17(c) now bars; the opening-brief template uses Times New Roman, a face the rule names and the house standard (docs/FONTS.md), with Liberation Serif as its metric fallback. `data/exemplar-fonts.json` records the override in the exemplar's entry (fb-595.74).
 # Navy-Marine Corps Court of Criminal Appeals: briefs
 
 Alias `nmcca`. Scope: opening and answering briefs. Verified against the NMCCA Rules of Appellate Procedure (2022, "Effective 1 June 2022", https://www.jag.navy.mil/documents/4691/2022_NMCCA_Rules_of_App_Proc.pdf), Rule 17, on 2026-10-20.

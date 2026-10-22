@@ -41,8 +41,8 @@ local FOOTER = 727          -- the page number sits where typst puts it (footer-
 local NEEDLE_MAX = 60
 -- Before an index row's leader tab: a no-break space widened to 0.75 em (10.5 pt, 210 twips), the least leader typst's
 -- listing-row keeps after the text (h(0.75em)); xe.LEAD's three no-break spaces are 0.75 em only in a face whose
--- space is 0.25 em. Liberation Mono's no-break space is 8.4 pt (168 twips).
-local SPACE_W = 168
+-- space is 0.25 em. Times New Roman's no-break space is 3.5 pt (70 twips).
+local SPACE_W = 70
 local LEAD_RUN = '<w:r><w:rPr><w:spacing w:val="' .. (210 - SPACE_W) .. '"/></w:rPr><w:t xml:space="preserve">\u{00A0}</w:t></w:r><w:r><w:tab/></w:r>'
 
 local META = {}
