@@ -5,7 +5,7 @@
 -- break rules. The motion cover with the motion's paragraphs and signature, the memorandum cover with the counsel
 -- block, the table of contents and the table of authorities (Rule 56.2(c)(2)), the memorandum body, the signature
 -- block and the Chambers word-count certificate. pandoc writes the body's paragraphs, quotations and footnotes in
--- the styles of reference.docx (make-reference.sh); this filter writes the rest as raw WordprocessingML.
+-- the styles of reference.docx (docx/reference.xml); this filter writes the rest as raw WordprocessingML.
 --
 -- Page numbers of the two tables: fb render (tools/fb/src/docxpass.rs) renders the document, finds the page of every
 -- heading and citation in the LibreOffice PDF (the needles this filter writes to FORMBOOK_NEEDLES) and renders again

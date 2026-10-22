@@ -7,7 +7,7 @@
 //
 // Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
 // its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
-// below the one and above the other (Word's exact line spacing). docx/ttab-answer.lua and docx/make-reference.sh
+// below the one and above the other (Word's exact line spacing). docx/ttab-answer.lua and docx/reference.xml
 // set the same pitches and spaces (twips = 20 x pt), so the docx breaks every line and page where this does.
 
 #import "@preview/cmarker:0.1.10"

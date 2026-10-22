@@ -1,6 +1,6 @@
 -- ttab-notice.lua (docx engine, notice of opposition). Builds the front matter and the trailing blocks of the
 -- notice as WordprocessingML, from the same YAML frontmatter the typst template reads (../README.md, "Markdown
--- contract"), and leaves the body paragraphs to pandoc (Body Text from reference.docx, see make-reference.sh).
+-- contract"), and leaves the body paragraphs to pandoc (Body Text from reference.docx, see reference.xml).
 --   * the USPTO heading and the "In re Application of" block (a tab stop, a hanging indent);
 --   * the party caption as a borderless table: names, a ")" column, and the opposition number on the middle row;
 --   * the title, the count headings, the signature block (left indent 3 in.) kept with the last paragraph, one slip
