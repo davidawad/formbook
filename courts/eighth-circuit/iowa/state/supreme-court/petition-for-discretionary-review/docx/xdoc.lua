@@ -112,6 +112,7 @@ return require("docx.xdoc")({
     ["hang"] = 0,
     ["step"] = 14,
     ["above"] = 9.8,
+    ["break"] = false,
   },
   ["authorities"] = {
     ["title"] = "Table of Authorities",

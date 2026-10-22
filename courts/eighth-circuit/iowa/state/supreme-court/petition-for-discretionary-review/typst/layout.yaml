@@ -35,9 +35,9 @@ cover:
     gutter: 14.4
     above: 14.4
   - {text: "{intro}", indent: 36, above: 21.6}
-# The table of contents with page references, then the table of authorities (6.903(2)(a)(1), (2) form; the filed
-# application sets the contents under the introduction on page 1, the model opens a page for it).
-contents: {title: "Table of Contents", depth: 2, col: 36, hang: 0, step: 14, above: 9.8}
+# The table of contents with page references, then the table of authorities (6.903(2)(a)(1), (2) form); the contents
+# under the introduction on the caption page, as the filed application sets them.
+contents: {title: "Table of Contents", depth: 2, col: 36, hang: 0, step: 14, above: 9.8, break: false}
 authorities:
   title: "Table of Authorities"
   col: 56
