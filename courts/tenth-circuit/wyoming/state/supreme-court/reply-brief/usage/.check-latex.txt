@@ -1,0 +1,3 @@
+PASS
+3f33ebfaec17a5b5f82180f361b59d94984cc8e98eca9aeb01e0de6d6ca08c84  usage/OUTPUT-reply-brief.latex.pdf
+a30aac2f3c8df105508614fe8b3db1260a6b9a0f8ea2d48ef79a9c9dda9be82f  usage/OUTPUT-reply-brief.typst.pdf

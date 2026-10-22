@@ -1,0 +1,11 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+font:
+  size_pt: 13             # WYO-FORM-005: no smaller than 13 point
+params:
+  cross_engine: gate
+  # Word reported, not gated: a shared-model limitation outside this folder's layout (fb-595.54.75): with
+  # double-spaced footnotes (WYO-FORM-006) Word sets another number of body lines above a note than typst (p5, note 1:
+  # the page ends two lines early; XENG-002, -003 from p6). docs/open-items/fb-595.54.75.md
+  cross_engine_docx: report

@@ -1,0 +1,65 @@
+# Supreme Court of Wyoming (wyo): the appellant's reply brief (W.R.A.P. 7.03). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12).
+# Numbers trace to W.R.A.P. 7.01, 7.03 and 7.05 (../../rules.md, WYO-*); lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # WYO-FORM-005: no smaller than 13 point (the size of all three filed exemplars, WYO-FORM-008)
+pitch:
+  body: 29.9              # WYO-FORM-004: double-spaced (Word's double, 2 x 1.15 x 13 pt, as filed)
+  single: 14.95           # quotations of more than 50 words, headings, cover, tables, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # WYO-FORM-003: not less than one inch on all sides
+indent: 36
+# WYO-FORM-008 (as filed): the cover counted as page i and unnumbered, the tables from ii in lower-case roman, the
+# brief in Arabic from 1, bottom center.
+page_number: {align: center, front: lower-roman, cover: counted}
+footnote: {size: 13, pitch: body, gap: 0}   # WYO-FORM-006: footnotes in the text's size, double-spaced
+quote: {left: 36, right: 36, above: 7.8, below: 13, gap: 10.4, pitch: single}   # WYO-FORM-004: long quotations single
+# Headings as filed: a section name centred, bold, upper case; a point bold, hanging; a sub-point bold, indented.
+heading:
+  - {align: center, bold: true, upper: true, above: 15, below: 15}
+  - {bold: true, hang: 36, above: 15, below: 15}
+  - {bold: true, left: 36, hang: 36, above: 15, below: 15}
+# The title page (WYO-MER-001): the court, the caption ruled at its right and foot beside the case number, the
+# proceeding, the brief's title (the party filing it), counsel with the Wyoming Bar number at the foot of the page.
+# The title page (WYO-REP-001, WYO-MER-001): the court, the caption ruled at its right and foot beside the case number
+# (the appellant files the reply, so the designations are the court's constants), the brief's title, counsel with the
+# Wyoming Bar number at the foot of the page.
+cover:
+  - {text: "IN THE SUPREME COURT, STATE OF WYOMING", align: center, bold: true}
+  - columns:
+      - width: 252
+        blocks:
+          - box:
+              - {text: "{appellant},"}
+              - {text: "Appellant,", above: 14.95}
+              - {text: "v.", above: 14.95, below: 14.95}
+              - {text: "{appellee},"}
+              - {text: "Appellee.", above: 14.95}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {top: 6, right: 12, bottom: 12, left: 0}
+      - valign: center
+        blocks:
+          - {text: "{case_number}", left: 24}
+    gutter: 0
+    above: 14.95
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 29.9}
+  - {fill: 1}
+  - {text: "{counsel}"}
+# WYO-REP-001 (7.01(b), (c)): the table of contents with page references, the table of authorities with every page.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 36, step: 18, above: 8}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 72
+  hang: 18
+  above: 8
+  group: {bold: true, align: center, above: 15, below: 5}
+# WYO-REP-001 (7.01(i)): the closing line, then the signature of counsel right of centre, never split; the conclusion's
+# last paragraph kept with it.
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "{signature.0}", indent: 36}
+      - {text: "{signature.1}", left: 252, above: 14.95}
+      - {text: "{counsel}", left: 252}
+    above: 14.95
+# WYO-REP-001 (7.01(j)): the certificate of service after the signature, on a page of its own (as filed), double-spaced.
+tail: {at: "Certificate", break: true, pitch: body, indent: 36}
