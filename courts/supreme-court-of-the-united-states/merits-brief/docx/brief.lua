@@ -1,6 +1,6 @@
 -- Supreme Court of the United States: brief on the merits (booklet format), docx engine
 -- (typst: merits-brief.typ). pandoc writes the body (paragraphs, quotations, footnotes) with
--- docx/reference.docx (docx/build-reference.sh: Schola 12 pt in 14 pt lines, 10 pt notes in 12 pt lines); this
+-- docx/reference.docx (docx/reference.xml: Schola 12 pt in 14 pt lines, 10 pt notes in 12 pt lines); this
 -- filter writes what needs Word formatting:
 --   * the cover (Rule 34.1), the questions and parties pages (Rule 24.1), the tables (Rules 24.1(c), 34.2), the
 --     headings, the block quotations, the signature block (Rule 34.3) and the certificate of compliance (Rule 33.1(h)),

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Word styles: the shared style recipe of the cross-engine layout model
+     (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md, "Cross-engine gate"): TeX Gyre Schola 12 pt (Rule 33.1(b);
+     the face the typst template sets) in 14 pt line boxes (12-point type, 2-point leading); Body Text with a 0.3 in
+     indent and 9 pt (0.75 em) after each paragraph (typst: par spacing), First Paragraph (after a heading) without the
+     indent; list items with the bullet in a 0.3 in box; footnotes 10 pt in 12 pt boxes, 6 pt apart (footnote.entry).
+     brief.lua writes the block quotations (0.4 in in on both sides, 9 pt above and below) with their own spacing. Two
+     styles of its own, "Body Text Note" and "First Paragraph Note": without widow control, for a paragraph with a
+     footnote mark (typst keeps two lines together by their height alone; a line whose footnote does not fit moves on).
+     The page (booklet, Rule 33.1(a), (c)), the sections and the footers come from docx/brief.lua and fb render; the
+     cover, headings, tables, signature and certificate are written by brief.lua with their own spacing. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" mc:Ignorable="w14" base="xengine" size="24" body="280" single="280" indent="432" list="432" quote="180" note="240" note-size="20" note-after="120">
+<w:docDefaults>
+    <w:rPrDefault>
+      <w:rPr>
+        <w:rFonts w:ascii="{font}" w:hAnsi="{font}" w:eastAsia="{font}" w:cs="{font}"/>
+        <w:sz w:val="24"/>
+        <w:szCs w:val="24"/>
+        <w:lang w:val="en-US" w:eastAsia="zh-CN" w:bidi="ar-SA"/>
+      <w14:ligatures w14:val="none"/></w:rPr>
+    </w:rPrDefault>
+    <w:pPrDefault>
+      <w:pPr>
+        <w:widowControl/>
+        <w:spacing w:after="0"/>
+      </w:pPr>
+    </w:pPrDefault>
+  </w:docDefaults>
+<w:style w:type="paragraph" w:styleId="BodyText">
+    <w:name w:val="Body Text"/>
+    <w:basedOn w:val="Normal"/>
+    <w:link w:val="BodyTextChar"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:before="0" w:after="180" w:line="280" w:lineRule="exact"/>
+      <w:ind w:firstLine="432"/>
+    </w:pPr>
+  </w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="FirstParagraph">
+    <w:name w:val="First Paragraph"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:next w:val="BodyText"/>
+    <w:qFormat/><w:pPr><w:ind w:firstLine="0"/></w:pPr>
+  </w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="FirstParagraphNote"><w:name w:val="First Paragraph Note"/><w:basedOn w:val="FirstParagraph"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+</reference>
