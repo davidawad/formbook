@@ -2,9 +2,12 @@
 -- The cover, table of contents, table of authorities, signature block and certificates are written here as
 -- paragraphs in the "CA ..." styles of reference.docx (raw WordprocessingML, one paragraph per call to P);
 -- the body keeps its markdown structure. Headings get their labels (I. A. 1. a.) as text, with a tab.
--- Sections (cover: no number; front matter: lower roman; body: arabic from 1) and the footers are written by
--- docx/render.sh, which also fills the page numbers of the TOC and TOA from a first pass (DOCX_MANIFEST and
--- DOCX_PAGEMAP, see docx/pagemap.awk). The only part of this file that differs between the three copies is CFG.
+-- Sections (cover: no number; front matter: lower roman; body: arabic from 1) are section breaks naming the
+-- footers fb render writes (rIdFtrNone, rIdFtrPage); this filter writes the last section to FORMBOOK_FINAL.
+-- The TOC and TOA page numbers: fb render (tools/fb/src/docxpass.rs) renders the document once, finds the page
+-- of every heading and citation in that PDF (the needles this filter writes to FORMBOOK_NEEDLES), and renders
+-- again with those pages (FORMBOOK_PAGES) until they settle. Word may paginate slightly differently from the
+-- LibreOffice PDF the page numbers come from (docs/DOCX.md). Styles: docx/reference.xml. The only part of this file that differs between the three copies is CFG.
 
 local CFG = {
   kind = "reply-brief",
@@ -14,7 +17,8 @@ local CFG = {
   off_in = 1,
   toc_depth = 3,           -- point headings and their sub-headings only
   word_limit = 7000,       -- Cir. R. 32(c): a reply brief
-  face = "EB Garamond",    -- the typeface the template sets (typst font-family)
+  face = "Times New Roman", -- the typeface reference.xml sets (typst font-family); the certificate names it
+  software = "Microsoft Word", -- the program the .docx is made for (typst names Typst)
   size = 12, fn = 11,      -- body and footnote size in points (typst: 12 pt body, 11 pt footnotes)
   court = {{{"In the United States Court of Appeals", false}}, {{"FOR THE SEVENTH CIRCUIT", true}}},
   court_rule = false,
@@ -32,7 +36,7 @@ local CFG = {
   cert_heading = "Certificate of Compliance",
   cert = {
     "I certify that this brief complies with the type-volume limit of Fed. R. App. P. 32(a)(7)(B), as modified by Cir. R. 32(c). Excluding the parts of the brief exempted by Fed. R. App. P. 32(f), this brief contains {words} words.",
-    "I further certify that this brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6), as modified by Cir. R. 32(b). This brief has been prepared in a proportionally spaced typeface, {typeface}, in {size}-point type for the body text and {fn}-point type for the footnotes.",
+    "I further certify that this brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6), as modified by Cir. R. 32(b). This brief has been prepared in a proportionally spaced typeface using {software} in {size}-point {typeface} for the body text and {fn}-point {typeface} for the footnotes.",
   },
   cert_form_sig = true,
   sig = "single",
@@ -52,8 +56,13 @@ local TEXTW = 9360
 local ITAL_FROM = 4
 local TAB = pandoc.RawInline("openxml", '<w:r><w:tab/></w:r>')
 local LB = pandoc.LineBreak()
-local SECT_COVER = '<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>'
-local SECT_ROMAN = '<w:sectPr><w:footerReference w:type="default" r:id="RIDROMAN"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/><w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>'
+local PAGE_SETUP = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>'
+-- a section's properties: the footer fb render writes (rIdFtrNone: empty, rIdFtrPage: the centered PAGE field),
+-- the page setup and the page numbering
+local function sect_pr(footer, pgnum)
+  return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/><w:type w:val="nextPage"/>'
+    .. PAGE_SETUP .. (pgnum or "") .. '</w:sectPr>'
+end
 
 -- ---------------------------------------------------------------------------
 -- helpers
@@ -187,43 +196,55 @@ local function steps_for(level, in_arg)
   return level - (in_arg and CFG.off_in or CFG.off_out)
 end
 
--- a whole link text, for the search in the PDF (no cut)
-local function norm_text(s)
-  return (s:gsub("\u{00A0}", " "):lower():gsub("%s+", " "):gsub("^ ", ""):gsub(" $", ""))
-end
-
--- the search key of a heading or an authority in the PDF text: lower case, at most about 30 characters
-local function search_key(s)
-  s = s:gsub("\u{00A0}", " "):lower():gsub("%s+", " "):gsub("^ ", ""):gsub(" $", "")
-  if #s > 30 then s = s:sub(1, 30):match("^(.*)%s%S*$") or s:sub(1, 30) end
-  return s
-end
-
 -- ---------------------------------------------------------------------------
--- page numbers from a first pass (docx/render.sh): DOCX_PAGEMAP, DOCX_MANIFEST
+-- needles and pages (fb render's multi-pass build; the contract is in tools/fb/src/docxpages.rs)
 -- ---------------------------------------------------------------------------
 
-local PM = {H = {}, S = {}, T = {}}
-local pm_path = os.getenv("DOCX_PAGEMAP")
-local have_pm = pm_path ~= nil and pm_path ~= ""
-if have_pm then
-  local f = io.open(pm_path, "r")
-  if not f then fail("cannot read the page map " .. pm_path) end
+local NEEDLE_MAX = 60   -- a needle is a prefix of the text (letters and digits only)
+local PASSIM = 7        -- an authority cited on this many pages or more is "passim" (typst passim-threshold)
+
+-- letters and digits only, lower case: fb render normalizes the PDF text the same way
+local function norm(s)
+  return (s:lower():gsub("[^a-z0-9]", ""))
+end
+
+-- a needle: { id, kind, needle, fallback }; kind B (body, in document order: moves the search on) or N (inside a
+-- footnote: searched from the page the body has reached, moves nothing)
+local needles = {}
+local function need_at(id, kind, text, context)
+  local short = norm(text):sub(1, NEEDLE_MAX)
+  local long = norm(text .. " " .. (context or "")):sub(1, NEEDLE_MAX)
+  if short == "" then short = long end
+  needles[#needles + 1] = {id = id, kind = kind, needle = long, fallback = short}
+end
+
+-- the pages of the previous pass: id -> { page, label }; empty on the first pass
+local labels = {}
+local function load_pages()
+  local path = os.getenv("FORMBOOK_PAGES")
+  if not path or path == "" then return end
+  local f = io.open(path, "r")
+  if not f then return end
   for line in f:lines() do
-    local k, a, b = line:match("^(%u)\t([^\t]*)\t(.*)$")
-    if k == "H" then PM.H[tonumber(a)] = b
-    elseif k == "S" then PM.S[a] = b
-    elseif k == "T" then PM.T[a] = b
-    end
+    local id, page, lab = line:match("^([^\t]+)\t([^\t]*)\t(.*)$")
+    if id then labels[id] = {page = tonumber(page) or 0, label = lab} end
   end
   f:close()
 end
--- the page for a key of the page map: "0" on the first pass, the first pass's value afterwards
-local function pm_get(tbl, key, what)
-  if not have_pm then return "0" end
-  local v = tbl[key]
-  if v == nil then fail("no page for " .. what .. " in the page map") end
-  return v
+
+-- the printed page of a needle: a placeholder of the final width on the first pass
+local function label_of(id)
+  local l = labels[id]
+  if l then return l.label end
+  return "00"
+end
+
+local function write_file(env, text)
+  local path = os.getenv(env)
+  if not path or path == "" then return end
+  local f = assert(io.open(path, "w"))
+  f:write(text)
+  f:close()
 end
 
 -- ---------------------------------------------------------------------------
@@ -328,9 +349,9 @@ local function cover(meta)
   if CFG.cover_role and meta.role ~= nil then add(gap()); add(P("CACaption", {pandoc.Emph(minl(meta.role))})) end
   if CFG.double_bottom then add(rule("CADoubleRule")) end
   if CFG.cover_date and meta.date ~= nil then add(gap()); add(P("CACentered", minl(meta.date))) end
-  local cover_sect = SECT_COVER
-  if CFG.cover_counts then cover_sect = cover_sect:gsub("</w:sectPr>", '<w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>') end
-  add(raw_p('<w:p><w:pPr>' .. cover_sect .. '</w:pPr></w:p>'))
+  -- the cover's section: no page number; lower roman from 1 when the cover counts as page i
+  add(raw_p('<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>'
+    .. sect_pr("rIdFtrNone", CFG.cover_counts and '<w:pgNumType w:fmt="lowerRoman" w:start="1"/>' or nil) .. '</w:pPr></w:p>'))
   return B
 end
 
@@ -371,7 +392,7 @@ end
 local function certificate_of_compliance(meta, words, out)
   out[#out + 1] = P("CASection", {pandoc.Str(CFG.cert_heading)}, BREAK_BEFORE)
   local function sub(s)
-    return (s:gsub("{words}", group_digits(words)):gsub("{typeface}", meta.typeface ~= nil and plain(meta.typeface) or CFG.face)
+    return (s:gsub("{words}", group_digits(words)):gsub("{typeface}", CFG.face):gsub("{software}", meta.software ~= nil and plain(meta.software) or CFG.software)
       :gsub("{size}", tostring(CFG.size)):gsub("{fn}", tostring(CFG.fn)))
   end
   out[#out + 1] = P("CACertificate", {pandoc.Str(sub(CFG.cert[1]))})
@@ -427,23 +448,8 @@ end
 -- ---------------------------------------------------------------------------
 
 function Pandoc(doc)
+  load_pages()
   local meta = doc.meta
-
-  -- every toa: citation: the authority key, and the distinct link texts (searched in the PDF on pass 1)
-  local hits, texts, order = {}, {}, {}
-  doc = doc:walk({
-    Link = function(el)
-      local key = el.target:match("^toa:(.+)$")
-      if not key then return nil end
-      local auth = meta.authorities or {}
-      if auth[key] == nil then fail("link `toa:" .. key .. "` has no entry under `authorities:` in the frontmatter") end
-      hits[key] = true
-      texts[key] = texts[key] or {}
-      local t = plain(pandoc.Inlines(el.content))
-      if not texts[key][t] then texts[key][t] = true; texts[key][#texts[key] + 1] = t end
-      return el.content
-    end,
-  })
   local auth = meta.authorities or {}
 
   -- Cir. R. 32(c): the words of the body, footnotes included (pandoc's stringify leaves the notes out)
@@ -460,63 +466,113 @@ function Pandoc(doc)
     fail("the brief has " .. words .. " words; Circuit Rule 32(c) allows " .. CFG.word_limit)
   end
 
-  -- the body: headings get their labels; the addendum is not produced by this engine
+  -- citations, in document order: each `toa:` link is an occurrence and a needle (kind N inside a footnote)
+  local hits, occurrences = {}, {}
+  local scan_blocks
+  local function scan_inlines(list, in_note)
+    for i, el in ipairs(list) do
+      if el.t == "Link" and el.target:match("^toa:") then
+        local key = el.target:sub(5)
+        if auth[key] == nil then fail("link `toa:" .. key .. "` has no entry under `authorities:` in the frontmatter") end
+        hits[key] = true
+        occurrences[#occurrences + 1] = {key = key, id = "T:" .. (#occurrences + 1)}
+        local rest = {}
+        for j = i + 1, #list do rest[#rest + 1] = list[j] end
+        need_at(occurrences[#occurrences].id, in_note and "N" or "B", plain(el.content), pandoc.utils.stringify(rest))
+      elseif el.t == "Note" then
+        scan_blocks(el.content, true)
+      elseif el.content and type(el.content) ~= "string" then
+        scan_inlines(el.content, in_note)
+      end
+    end
+  end
+  scan_blocks = function(list, in_note)
+    for _, b in ipairs(list) do
+      if b.t == "Para" or b.t == "Plain" then
+        scan_inlines(b.content, in_note)
+      elseif b.t == "BlockQuote" or b.t == "Div" then
+        scan_blocks(b.content, in_note)
+      elseif b.t == "BulletList" or b.t == "OrderedList" then
+        for _, item in ipairs(b.content) do scan_blocks(item, in_note) end
+      end
+    end
+  end
+
+  -- the body: headings get their labels and needles; the addendum is not produced by this engine. The body's
+  -- page 1 is the page of its first block.
+  local blocks = doc.blocks
+  local body_id = "S:body"
+  if blocks[1] and blocks[1].t ~= "Header" then
+    need_at(body_id, "B", pandoc.utils.stringify(blocks[1]):sub(1, NEEDLE_MAX), "")
+  end
   local heads, body = {}, {}
   local counters, in_arg = {0, 0, 0, 0, 0, 0}, false
-  for _, b in ipairs(doc.blocks) do
+  for bi, b in ipairs(blocks) do
     if b.t == "Header" then
       local text = plain(b.content)
       if b.level == 1 and text:lower():match("^%s*addendum%s*$") then
         fail("the DOCX engine does not yet render an addendum (FRAP 28(f)); see the Engines section of the README")
       end
+      if b.level > 5 then fail("headings deeper than level 5 are not supported") end
       if b.level == 1 then
         in_arg = text:lower():match("^%s*argument%s*$") ~= nil
         counters = {0, 0, 0, 0, 0, 0}
       end
       counters[b.level] = counters[b.level] + 1
       for i = b.level + 1, 6 do counters[i] = 0 end
-      local idx = #heads + 1
-      local h = {level = b.level, title = b.content, idx = idx, key = search_key(text)}
+      local id = "H:" .. (#needles + 1)
+      if bi == 1 then body_id = id end
+      local nxt = blocks[bi + 1] and pandoc.utils.stringify(blocks[bi + 1]):sub(1, 40) or ""
+      local h = {level = b.level, title = b.content, id = id}
       if b.level == 1 then
         h.label, h.steps, h.centered = "", 0, false
+        need_at(id, "B", text, nxt)
         body[#body + 1] = P("CASection", b.content, KEEP)
       else
         h.label = label_for(b.level, counters[b.level], in_arg)
         h.steps = steps_for(b.level, in_arg)
         h.centered = CFG.answering and in_arg and b.level == 2
+        need_at(id, "B", h.label .. " " .. text, nxt)
         if h.centered then
           body[#body + 1] = P("CAPoint", cat(h.label, " ", b.content), KEEP)
         else
           body[#body + 1] = P("CAHeadL" .. b.level .. "S" .. h.steps, cat(h.label, TAB, b.content), KEEP)
         end
       end
-      heads[idx] = h
+      heads[#heads + 1] = h
     else
+      scan_blocks({b}, false)
       body[#body + 1] = b
     end
   end
+  body = pandoc.Pandoc(body):walk({
+    Link = function(el)
+      if el.target:match("^toa:") then return el.content end
+      return nil
+    end,
+  }).blocks
 
   -- the last paragraph stays with the signature block (typst keeps them together)
   if #body > 0 and body[#body].t == "Para" then
     body[#body] = pandoc.Div({body[#body]}, pandoc.Attr("", {}, {["custom-style"] = "CA Body Last"}))
   end
 
-  -- manifest for the first pass of docx/render.sh
-  local man_path = os.getenv("DOCX_MANIFEST")
-  if man_path ~= nil and man_path ~= "" then
-    local f = assert(io.open(man_path, "w"))
-    for _, h in ipairs(heads) do f:write(string.format("H\t%d\t%d\t%s\n", h.idx, h.level, h.key)) end
-    f:write("S\ttoa\troman\ttable of authorities\n")
-    f:write("S\tcc\tbody\tcertificate of compliance\n")
-    if has_svc(meta) then f:write("S\tcs\tbody\tcertificate of service\n") end
-    local keys = {}
-    for key, _ in pairs(hits) do keys[#keys + 1] = key end
-    table.sort(keys)
-    for _, key in ipairs(keys) do
-      for _, t in ipairs(texts[key]) do f:write(string.format("T\t%s\t%s\n", key, norm_text(t))) end
-    end
-    f:close()
+  -- the needles, in document order: the table of authorities first, then the body's, then the certificates'
+  need_at("C:compliance", "B", CFG.cert_heading, CFG.cert[1]:sub(1, 30))
+  if has_svc(meta) then need_at("C:service", "B", "Certificate of Service", "I hereby certify") end
+  table.insert(needles, 1, {id = "S:toc", kind = "B", needle = norm("Table of Contents"), fallback = norm("Table of Contents")})
+  table.insert(needles, 2, {id = "S:toa", kind = "B", needle = norm("Table of Authorities"), fallback = norm("Table of Authorities")})
+  local nl = {}
+  for _, n in ipairs(needles) do nl[#nl + 1] = table.concat({n.id, n.kind, n.needle, n.fallback}, "\t") end
+  -- how fb render labels pages: the cover is page i (cover_counts) or the contents are, the body and the
+  -- certificates from the body's first block (1, 2 ...)
+  nl[#nl + 1] = CFG.cover_counts and "#section\tS:cover\tlower-roman\t" or "#section\tS:toc\tlower-roman\t"
+  nl[#nl + 1] = "#section\t" .. body_id .. "\tdecimal\t"
+  if CFG.cover_counts then
+    table.insert(nl, 1, table.concat({"S:cover", "B", norm(plain(need(meta, "case_number"))), norm(plain(need(meta, "case_number")))}, "\t"))
   end
+  write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
+  write_file("FORMBOOK_FINAL", sect_pr("rIdFtrPage", '<w:pgNumType w:fmt="decimal" w:start="1"/>'))
 
   local out = {}
   local function add(b) out[#out + 1] = b end
@@ -532,10 +588,10 @@ function Pandoc(doc)
     if v == "passim" then return {pandoc.Emph({pandoc.Str("passim")})} end
     return {pandoc.Str(v)}
   end
-  if CFG.toc_front then add(P("CATocTop", cat(pandoc.Str("TABLE OF AUTHORITIES"), TAB, folio_il(pm_get(PM.S, "toa", "the table of authorities"))))) end
+  if CFG.toc_front then add(P("CATocTop", cat(pandoc.Str("TABLE OF AUTHORITIES"), TAB, folio_il(label_of("S:toa"))))) end
   for _, h in ipairs(heads) do
     if h.level <= CFG.toc_depth then
-      local page = pm_get(PM.H, h.idx, "heading " .. h.idx)
+      local page = label_of(h.id)
       if h.level == 1 then
         add(P("CATocTop", cat(upper_il(h.title), TAB, folio_il(page))))
       else
@@ -545,9 +601,9 @@ function Pandoc(doc)
     end
   end
   if CFG.toc_certs then
-    add(P("CATocTop", cat(pandoc.Str(CFG.toc_cert_title or CFG.cert_heading:upper()), TAB, folio_il(pm_get(PM.S, "cc", "the certificate of compliance")))))
+    add(P("CATocTop", cat(pandoc.Str(CFG.toc_cert_title or CFG.cert_heading:upper()), TAB, folio_il(label_of("C:compliance")))))
     if has_svc(meta) then
-      add(P("CATocTop", cat(pandoc.Str("CERTIFICATE OF SERVICE"), TAB, folio_il(pm_get(PM.S, "cs", "the certificate of service")))))
+      add(P("CATocTop", cat(pandoc.Str("CERTIFICATE OF SERVICE"), TAB, folio_il(label_of("C:service")))))
     end
   end
 
@@ -578,14 +634,34 @@ function Pandoc(doc)
         end
         il:extend(minl(m.a.cite))
         il:insert(TAB)
-        il:extend(folio_il(pm_get(PM.T, m.key, "authority " .. m.key)))
+        -- the distinct pages of the authority, in page order; passim from PASSIM pages
+        local pages, seen = {}, {}
+        for oi, o in ipairs(occurrences) do
+          if o.key == m.key then
+            local l = labels[o.id]
+            local p = l and l.page or -oi
+            if not seen[p] then
+              seen[p] = true
+              pages[#pages + 1] = {page = l and l.page or 0, label = l and l.label or "00"}
+            end
+          end
+        end
+        table.sort(pages, function(x, y) return x.page < y.page end)
+        if #pages >= PASSIM then
+          il:insert(pandoc.Emph({pandoc.Str("passim")}))
+        else
+          local ls = {}
+          for _, p in ipairs(pages) do ls[#ls + 1] = p.label end
+          il:insert(pandoc.Str(table.concat(ls, ", ")))
+        end
         add(P("CAToaEntry", il))
       end
     end
   end
-  local roman_sect = SECT_ROMAN
-  if CFG.cover_counts then roman_sect = roman_sect:gsub(' w:start="1"', '') end   -- the count goes on from the cover
-  add(raw_p('<w:p><w:pPr>' .. roman_sect .. '</w:pPr></w:p>'))
+  -- the end of the front matter: lower roman, the count going on from the cover when the cover counts
+  add(raw_p('<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>'
+    .. sect_pr("rIdFtrPage", CFG.cover_counts and '<w:pgNumType w:fmt="lowerRoman"/>' or '<w:pgNumType w:fmt="lowerRoman" w:start="1"/>')
+    .. '</w:pPr></w:p>'))
 
   -- section 3 (arabic from 1): the body, the signature block, the certificates
   addall(body)
