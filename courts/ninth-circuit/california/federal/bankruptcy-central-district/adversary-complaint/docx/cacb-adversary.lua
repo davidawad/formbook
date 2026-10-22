@@ -26,6 +26,7 @@ local CAP_PAD = 145                      -- typst caption-pad 8 pt, less the 0.7
 local RIGHT_INSET = 144                  -- typst right-inset 0.1 in
 local SIG_LEFT = 3744                    -- typst sig-left 2.6 in
 local COUNSEL_LINES = 7                  -- typst counsel-lines (Central Guide 9004-1(c)(1)(B))
+local COUNSEL_DROP = 192                 -- typst counsel-drop 9.6 pt: the first counsel line on line 1's baseline
 local RULE = 'w:val="single" w:sz="6" w:space="0" w:color="000000"'       -- 0.75 pt
 local CANT_SPLIT = "<w:trPr><w:cantSplit/></w:trPr>"
 
@@ -80,12 +81,12 @@ local function cover(meta, out)
   -- counsel: single lines from line 1, filling at least lines 1-7; more lines push the court title down by whole
   -- numbered lines, half a line kept below the last (typst counsel-block)
   local counsel = list(meta.counsel)
-  for _, l in ipairs(counsel) do out[#out + 1] = p(xe.inl(l)) end
+  for j, l in ipairs(counsel) do out[#out + 1] = p(xe.inl(l), { before = j == 1 and COUNSEL_DROP or 0 }) end
   local rows = math.max(COUNSEL_LINES, math.ceil((#counsel + 1) / 2))
   local court = { COURT[1], COURT[2], pandoc.text.upper(text(meta.division)) }
   for i, l in ipairs(court) do
     out[#out + 1] = p(xe.runs(l, { b = true }),
-      { line = BODY, jc = "center", keep = true, before = i == 1 and (rows * BODY - #counsel * SINGLE) or 0 })
+      { line = BODY, jc = "center", keep = true, before = i == 1 and (rows * BODY - COUNSEL_DROP - #counsel * SINGLE) or 0 })
   end
   -- The caption stands a numbered line (less 2.4 pt, typst to-grid) below the court title: Word has no space before a table, so the first
   -- paragraph of each cell carries it.

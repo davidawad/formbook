@@ -40,6 +40,8 @@
 #let half-gap = 12pt                    // a blank single line in the caption and the signature block
 #let to-grid = pitch - 2.4pt          // the space above a block of single lines after a numbered line: every second single line
                                         // then stands on a numbered line's baseline (0.8 x 24 pt; a single line's is 0.8 x 12 pt)
+#let counsel-drop = 9.6pt              // the counsel lines start 9.6 pt down, so the first stands on line 1's baseline (0.8 x 24 pt) and every
+                                        // second one on a numbered line's
 #let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: the page number and footer line
 
 // ---------------------------------------------------------------------------
@@ -113,7 +115,8 @@
 #let counsel-block(meta) = {
   let lines = as-list(meta.counsel)
   let rows = calc.max(counsel-lines, calc.ceil((lines.len() + 1) / 2))
-  block(width: 100%, height: rows * pitch, above: 0pt, below: 0pt, for l in lines { line-block(inl(l)) })
+  block(width: 100%, height: rows * pitch, above: 0pt, below: 0pt, inset: (top: counsel-drop),
+    for l in lines { line-block(inl(l)) })
 }
 
 #let court-title(meta) = {
