@@ -23,7 +23,7 @@ Courts under `courts/first-circuit` (20).
 | [Massachusetts Supreme Judicial Court](massachusetts/state/supreme-judicial-court) | `mass` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 | [Supreme Court of New Hampshire](new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | 8/8 | 6/6 | 29 |
 | [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](puerto-rico/state/court-of-appeals) | `prapp` | up for review | 1/1 | 1/1 | 1/1 | 29 |
-| [Supreme Court of Puerto Rico](puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | — | — | 29 |
+| [Supreme Court of Puerto Rico](puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Supreme Court of Rhode Island](rhode-island/state/supreme-court) | `ri` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 
 [Formbook index](../../README.md)
