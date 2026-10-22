@@ -1,0 +1,99 @@
+# Supreme Court of New Hampshire (nh): answering brief (SCR 16). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to ../../rules.md (NH-*); lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant ("Respectfully submitted,", "/s/").
+size: 13                  # NH-FORM-003, NH-MOT-001: size 13 font (SCR 16(11), 21(1), 26(1))
+pitch:
+  body: 22.45             # NH-FORM-004: lines spaced at a setting of 1.5 (Word's 1.5 lines, 1.5 x 1.15 x 13 pt, to the twip)
+  single: 14.95           # cover, signature block: single (1.15 x 13 pt)
+margin: {top: 108, bottom: 108, left: 108, right: 108}   # NH-FORM-002: at least one and one-half inches on all sides
+indent: 36                # first-line indent, half an inch (style choice)
+list_indent: 21.6         # a list label's box (style choice)
+page_number: {align: center, from: 2}   # NH-FORM-005: numbered from the cover as page 1, its number suppressed
+footnote: {size: 13, gap: 7.5}   # NH-FORM-003: footnotes keep the 13-point size; single spaced, as every exemplar sets them
+quote: {left: 36, right: 36, above: 7.5, below: 7.5, pitch: body}   # NH-FORM-004: quotations indented, at 1.5
+heading:                  # NH-CONV-001: proper headings; level 1 centered, 2 bold, 3 bold italic, at 1.5
+  - {align: center, bold: true, pitch: body, above: 7.5, below: 7.5}
+  - {bold: true, pitch: body, above: 7.5, below: 7.5}
+  - {bold: true, italic: true, pitch: body, above: 7.5, below: 7.5}
+# NH-COVER-001 (SCR 16(2)): the cover: the court and docket, the case title, the proceeding, the document's title,
+# who files it and counsel, two to a row, and the oral argument statement.
+cover:
+  - {text: "{court}", align: center, bold: true}
+  - {text: "{docket}", align: center, above: 15.6}
+  - {text: "{case_title}", align: center, above: 19.5}
+  - {text: "{proceeding}", align: center, above: 15.6}
+  - {text: "{title}", align: center, bold: true, above: 31.2}
+  - when: filed_by
+    blocks:
+      - {text: "{filed_by}", align: center, above: 19.5}
+  - columns: {each: counsel, per_row: 2, row_gap: 15.6, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 15.6
+    above: 19.5
+  - when: argument
+    blocks:
+      - {text: "{argument}", align: center, above: 19.5}
+# NH-SEC-001 (SCR 16(3)(a)): the table of contents with page references, on its own page.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 18, step: 26, above: 0, pitch: body}
+# NH-SEC-001 (SCR 16(3)(a)): a table of cases, statutes and other authorities, with the pages each is cited on, on its
+# own page after the contents. The frontmatter keys each authority (`{kind, cite, sort}`; `sort` keeps the filer's
+# order); a body link [text](toa:key) marks its page. Six pages or more print "passim" (style choice).
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 56
+  hang: 18
+  above: 0
+  pitch: body
+  passim: 6
+  group: {bold: true, above: 7.5, below: 0}
+  kinds:
+    - {kind: cases, title: "Cases"}
+    - {kind: statutes, title: "Statutes"}
+    - {kind: rules, title: "Rules"}
+    - {kind: other, title: "Other Authorities"}
+# NH-SEC-003 (SCR 16(3)(i)), SCR 16(11): every certificate but the certificate of service (the decisions-below
+# certification, the certificate of compliance) immediately before the signature line, never split; NH-SIG-001
+# (SCR 16(10)): the date, the party's and the lawyer's names at the end, the lawyer's /s/ signature, the block four
+# inches wide, never split; then NH-CERT-001 (SCR 16(10), 26(7)): the certificate of service, never split.
+closing:
+  - when: certificates
+    blocks:
+      - each: certificates
+        blocks:
+          - unless: type
+            is: service
+            blocks:
+              - group:
+                  - {text: "{heading}", align: center, bold: true, below: 7.8}
+                  - {text: "{text}", pitch: body}
+                  - when: lines
+                    blocks:
+                      - {text: "{lines}", above: 7.8}
+                  - when: signer
+                    blocks:
+                      - {text: "/s/ {signer}", right: 108, above: 15.6}
+                above: 15.6
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "Respectfully submitted,", above: 10.4}
+      - {text: "{signature.party}", right: 108, above: 10.4, optional: true}
+      - {text: "/s/ {signature.signer}", right: 108, above: 15.6}
+      - {text: "{signature.lines}", right: 108}
+    above: 15.6
+  - when: certificates
+    blocks:
+      - each: certificates
+        blocks:
+          - when: type
+            is: service
+            blocks:
+              - group:
+                  - {text: "{heading}", align: center, bold: true, below: 7.8}
+                  - {text: "{text}", pitch: body}
+                  - when: lines
+                    blocks:
+                      - {text: "{lines}", above: 7.8}
+                  - when: signer
+                    blocks:
+                      - {text: "/s/ {signer}", right: 108, above: 15.6}
+                above: 15.6

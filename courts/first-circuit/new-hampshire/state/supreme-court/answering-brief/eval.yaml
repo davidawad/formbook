@@ -1,4 +1,7 @@
-# Gate 4 CROSS-ENGINE: typst only. Not on the shared document model yet: the frontmatter's authorities
-# ({key, category, text}, cited by toa: links) are a shape the model does not read (docs/open-items/fb-595.54.24.md).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex engine is generated from the typst
+# template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: latex meets a line typst
+# fills to 503.9985 of 504 pt (p20 line 17), the line-fit tolerance the shared model has not settled; the docx engine
+# is not delivered (BLOCKED): its page lookup stops on a citation split over a page end with a note mark after it
+# (a27.1, p. 26-27). Both only lib/ or tools/ can fix (docs/open-items/fb-595.54.24.md).
 params:
   cross_engine: report

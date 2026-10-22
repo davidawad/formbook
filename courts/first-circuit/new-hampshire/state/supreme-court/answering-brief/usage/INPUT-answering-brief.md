@@ -57,35 +57,35 @@ certificates:
     text: "I, Sam M. Gonyea, hereby certify that a copy of the State’s brief shall be served on Christopher Johnson, Esq., counsel for the defendant, through the New Hampshire Supreme Court’s electronic filing system."
     signer: "Sam M. Gonyea"
 authorities:
-  - {key: plantier, category: cases, text: "*Appeal of Plantier*, 126 N.H. 500 (1985)"}
-  - {key: hood, category: cases, text: "*Attorney General v. Hood*, 2025 N.H. 3"}
-  - {key: visteon, category: cases, text: "*IUE-CWA v. Visteon Corp. (In re Visteon Corp.)*, 612 F.3d 210 (3d Cir. 2010)"}
-  - {key: poulicakos, category: cases, text: "*Petition of Poulicakos*, 160 N.H. 438 (2010)"}
-  - {key: cooper, category: cases, text: "*State v. Cooper*, 168 N.H. 161 (2015)"}
-  - {key: foss, category: cases, text: "*State v. Foss*, 148 N.H. 209 (2002)"}
-  - {key: hollenbeck, category: cases, text: "*State v. Hollenbeck*, 164 N.H. 154 (2012)"}
-  - {key: macelman, category: cases, text: "*State v. MacElman*, 154 N.H. 304 (2006)"}
-  - {key: parr, category: cases, text: "*State v. Parr*, 175 N.H. 52 (2022)"}
-  - {key: paul, category: cases, text: "*State v. Paul*, 167 N.H. 39 (2014)"}
-  - {key: ramos, category: cases, text: "*State v. Ramos*, 149 N.H. 272 (2003)"}
-  - {key: smagula, category: cases, text: "*State v. Smagula*, 117 N.H. 663 (1977)"}
-  - {key: working-stiff, category: cases, text: "*Working Stiff Partners, LLC v. City of Portsmouth*, 172 N.H. 611 (2019)"}
-  - {key: rsa-326b-1, category: statutes, text: "RSA 326-B:1"}
-  - {key: rsa-326b-37, category: statutes, text: "RSA 326-B:37"}
-  - {key: rsa-326l, category: statutes, text: "RSA 326-L"}
-  - {key: rsa-328d, category: statutes, text: "RSA 328-D"}
-  - {key: rsa-329, category: statutes, text: "RSA 329"}
-  - {key: rsa-329b-30, category: statutes, text: "RSA 329-B:30"}
-  - {key: rsa-330a-2, category: statutes, text: "RSA 330-A:2"}
-  - {key: rsa-330a-36, category: statutes, text: "RSA 330-A:36"}
-  - {key: rsa-626-6, category: statutes, text: "RSA 626:6"}
-  - {key: rsa-632a-2, category: statutes, text: "RSA 632-A:2"}
-  - {key: rsa-632a-4, category: statutes, text: "RSA 632-A:4"}
-  - {key: rsa-chapter-326b, category: statutes, text: "RSA chapter 326-B"}
-  - {key: admin-med-101, category: rules, text: "N.H. Admin. R. Med. 101.01(a)"}
-  - {key: admin-med-501, category: rules, text: "N.H. Admin. R. Med. 501.02(h)"}
-  - {key: ama-opinion, category: other, text: "AMA Code of Medical Ethics, Opinion 9.1.1 Romantic or Sexual Relationships with Patients"}
-  - {key: ama-code, category: other, text: "Code of Medical Ethics: Current Opinions With Annotations (June 2016 Edition)"}
+  plantier: {kind: cases, cite: "*Appeal of Plantier*, 126 N.H. 500 (1985)", sort: "001"}
+  hood: {kind: cases, cite: "*Attorney General v. Hood*, 2025 N.H. 3", sort: "002"}
+  visteon: {kind: cases, cite: "*IUE-CWA v. Visteon Corp. (In re Visteon Corp.)*, 612 F.3d 210 (3d Cir. 2010)", sort: "003"}
+  poulicakos: {kind: cases, cite: "*Petition of Poulicakos*, 160 N.H. 438 (2010)", sort: "004"}
+  cooper: {kind: cases, cite: "*State v. Cooper*, 168 N.H. 161 (2015)", sort: "005"}
+  foss: {kind: cases, cite: "*State v. Foss*, 148 N.H. 209 (2002)", sort: "006"}
+  hollenbeck: {kind: cases, cite: "*State v. Hollenbeck*, 164 N.H. 154 (2012)", sort: "007"}
+  macelman: {kind: cases, cite: "*State v. MacElman*, 154 N.H. 304 (2006)", sort: "008"}
+  parr: {kind: cases, cite: "*State v. Parr*, 175 N.H. 52 (2022)", sort: "009"}
+  paul: {kind: cases, cite: "*State v. Paul*, 167 N.H. 39 (2014)", sort: "010"}
+  ramos: {kind: cases, cite: "*State v. Ramos*, 149 N.H. 272 (2003)", sort: "011"}
+  smagula: {kind: cases, cite: "*State v. Smagula*, 117 N.H. 663 (1977)", sort: "012"}
+  working-stiff: {kind: cases, cite: "*Working Stiff Partners, LLC v. City of Portsmouth*, 172 N.H. 611 (2019)", sort: "013"}
+  rsa-326b-1: {kind: statutes, cite: "RSA 326-B:1", sort: "014"}
+  rsa-326b-37: {kind: statutes, cite: "RSA 326-B:37", sort: "015"}
+  rsa-326l: {kind: statutes, cite: "RSA 326-L", sort: "016"}
+  rsa-328d: {kind: statutes, cite: "RSA 328-D", sort: "017"}
+  rsa-329: {kind: statutes, cite: "RSA 329", sort: "018"}
+  rsa-329b-30: {kind: statutes, cite: "RSA 329-B:30", sort: "019"}
+  rsa-330a-2: {kind: statutes, cite: "RSA 330-A:2", sort: "020"}
+  rsa-330a-36: {kind: statutes, cite: "RSA 330-A:36", sort: "021"}
+  rsa-626-6: {kind: statutes, cite: "RSA 626:6", sort: "022"}
+  rsa-632a-2: {kind: statutes, cite: "RSA 632-A:2", sort: "023"}
+  rsa-632a-4: {kind: statutes, cite: "RSA 632-A:4", sort: "024"}
+  rsa-chapter-326b: {kind: statutes, cite: "RSA chapter 326-B", sort: "025"}
+  admin-med-101: {kind: rules, cite: "N.H. Admin. R. Med. 101.01(a)", sort: "026"}
+  admin-med-501: {kind: rules, cite: "N.H. Admin. R. Med. 501.02(h)", sort: "027"}
+  ama-opinion: {kind: other, cite: "AMA Code of Medical Ethics, Opinion 9.1.1 Romantic or Sexual Relationships with Patients", sort: "028"}
+  ama-code: {kind: other, cite: "Code of Medical Ethics: Current Opinions With Annotations (June 2016 Edition)", sort: "029"}
 ---
 
 # ISSUES PRESENTED
