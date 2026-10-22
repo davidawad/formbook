@@ -1,0 +1,13 @@
+# DEF-COVER-001: the cover and the NRAP 26.1 disclosure statement (NEV-ORDER-004, NRAP 26.1(d): before the table of
+# contents) are the two pages before the tables. The shared model has no numbered front page before the tables, so the
+# disclosure is set as a second, unnumbered cover page (NEV-FORM-006 wants it numbered i: a recorded deviation).
+#
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated yet: two differences are the
+# shared model's, not this folder's (docs/open-items/fb-595.54.18.md): LaTeX numbers the second cover page ("2" on the
+# disclosure page; lib/latex/xdoc.lua empties the style of the cover's first page only), and Word finds an authority
+# cited in a footnote on the page before the footnote (Brady v. Maryland and Thomas lose page 7 in the docx table of
+# authorities, p4 and p5).
+params:
+  cover_pages: 2
+  cross_engine: report
