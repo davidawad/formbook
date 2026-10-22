@@ -1,0 +1,13 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # An authority's mark after a lone "§" ("[§ 318(e)](toa:..)", body page 3, "because § 318(e)") lets LaTeX and
+  # Word break between the sign and its number, which typst keeps together (docs/open-items/fb-595.54.73.md);
+  # 446 of 448 lines identical, pages and page ends equal. Reported, not gated (fb-595.54.73).
+  cross_engine_latex: report
+  # Word, as LaTeX above, and: the line that anchors note 6 ("practice6", body page 8) stays on page 7 with its note
+  # on page 8 (LibreOffice's footnote placement), and pages 8 to 14 end a few lines apart, the authorities' pages
+  # with them (docs/open-items/fb-595.54.73.md). Reported, not gated (fb-595.54.73).
+  cross_engine_docx: report

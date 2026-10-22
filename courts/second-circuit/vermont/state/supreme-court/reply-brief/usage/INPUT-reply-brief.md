@@ -82,41 +82,41 @@ compliance:
         - "(802) 223-6304"
         - "jdiaz@acluvt.org"
 authorities:
-  jw: { kind: "case", name: "Judicial Watch, Inc. v. State", cite: "2005 VT 108, 179 Vt. 214, 892 A.2d 191" }
-  herald: { kind: "case", name: "Herald Ass’n v. Dean", cite: "174 Vt. 350, 816 A.2d 469 (2002)" }
-  norman: { kind: "case", name: "Norman v. Vt. Office of Court Adm’r", cite: "2004 VT 13, 176 Vt. 593, 844 A.2d 769" }
-  sawyer-sp: { kind: "case", name: "Sawyer v. Spaulding", cite: "2008 VT 63, 184 Vt. 545, 955 A.2d 532" }
-  state-sawyer: { kind: "case", name: "State v. Sawyer", cite: "2018 VT 43, __ Vt. __, 187 A.3d 377" }
-  suhr: { kind: "case", name: "State v. Suhr", cite: "2018 VT 49, __ Vt. __, 189 A.3d 552" }
-  brisson: { kind: "case", name: "Town of Milton Bd. of Health v. Brisson", cite: "2016 VT 56, 202 Vt. 121, 147 A.3d 990" }
-  vhrc: { kind: "case", name: "Vt. Human Rights Comm’n v. State", cite: "2012 VT 45, 191 Vt. 485, 49 A.3d 149" }
-  dept-corrs: { kind: "case", name: "Dep’t of Corrs. v. Human Rights Comm’n", cite: "2006 VT 134, 181 Vt. 225, 917 A.2d 451" }
-  vsea: { kind: "case", name: "Vt. State Employees’ Ass’n v. Vt. Agency of Natural Resources", cite: "No. 517-7-10 Wncv, 2011 WL 121649 (Vt. Super. Ct. Jan. 6, 2011)" }
-  s315a: { kind: "statute", name: "1 V.S.A. § 315(a)" }
-  s316a: { kind: "statute", name: "1 V.S.A. § 316(a)" }
-  s316c: { kind: "statute", name: "1 V.S.A. § 316(c)" }
-  s316g: { kind: "statute", name: "1 V.S.A. § 316(g)" }
-  s316h: { kind: "statute", name: "1 V.S.A. § 316(h)" }
-  s316i: { kind: "statute", name: "1 V.S.A. § 316(i)" }
-  s317b: { kind: "statute", name: "1 V.S.A. § 317(b)" }
-  s318a: { kind: "statute", name: "1 V.S.A. § 318(a)" }
-  s318d: { kind: "statute", name: "1 V.S.A. § 318(d)" }
-  s318e: { kind: "statute", name: "1 V.S.A. § 318(e)" }
-  black: { kind: "other", name: "Black’s Law Dictionary (10th ed. 2014)" }
-  merriam: { kind: "other", name: "Merriam-Webster Online Dictionary" }
-  oxford: { kind: "other", name: "English Oxford Living Online Dictionary" }
-  act159: { kind: "other", name: "1995 Acts & Resolves, No. 159 (Adj. Sess.)" }
-  act59: { kind: "other", name: "2011 Acts & Resolves, No. 59 (Adj. Sess.)" }
-  h73: { kind: "other", name: "H. 73 (2011)" }
-  h910: { kind: "other", name: "H. 910 (2018)" }
-  s229: { kind: "other", name: "S. 229 (2008)" }
-  h73-cd11061: { kind: "other", name: "Hearings on H. 73, House Comm. on Gov’t Operations, CD 11-061 (Mar. 3, 2011)" }
-  h73-cd11068: { kind: "other", name: "Hearings on H. 73, House Comm. on Gov’t Operations, CD 11-068 (March 10, 2011)" }
-  h73-cd11070: { kind: "other", name: "Hearings on H. 73, House Comm. on Gov’t Operations, CD 11-070 (March 10, 2011)" }
-  h910-senate: { kind: "other", name: "Hearings on H. 910, Senate Comm. on Gov’t Operations (April 20, 2018)" }
-  dbh-feb27: { kind: "other", name: "Hearings on Draft Bill 18-0015, House Committee on Gov’t Operations (February 27, 2018)" }
-  dbh-jan31: { kind: "other", name: "Hearings on Draft Bill 18-0015, House Committee on Gov’t Operations (January 31, 2018)" }
-  senate-d4t1: { kind: "other", name: "Recording of Vermont Senate, Disc 4, Track 1" }
+  jw: { kind: "case", name: "*Judicial Watch, Inc. v. State*", cite: "2005 VT 108, 179 Vt. 214, 892 A.2d 191" }
+  herald: { kind: "case", name: "*Herald Ass’n v. Dean*", cite: "174 Vt. 350, 816 A.2d 469 (2002)" }
+  norman: { kind: "case", name: "*Norman v. Vt. Office of Court Adm’r*", cite: "2004 VT 13, 176 Vt. 593, 844 A.2d 769" }
+  sawyer-sp: { kind: "case", name: "*Sawyer v. Spaulding*", cite: "2008 VT 63, 184 Vt. 545, 955 A.2d 532" }
+  state-sawyer: { kind: "case", name: "*State v. Sawyer*", cite: "2018 VT 43, __ Vt. __, 187 A.3d 377" }
+  suhr: { kind: "case", name: "*State v. Suhr*", cite: "2018 VT 49, __ Vt. __, 189 A.3d 552" }
+  brisson: { kind: "case", name: "*Town of Milton Bd. of Health v. Brisson*", cite: "2016 VT 56, 202 Vt. 121, 147 A.3d 990" }
+  vhrc: { kind: "case", name: "*Vt. Human Rights Comm’n v. State*", cite: "2012 VT 45, 191 Vt. 485, 49 A.3d 149" }
+  dept-corrs: { kind: "case", name: "*Dep’t of Corrs. v. Human Rights Comm’n*", cite: "2006 VT 134, 181 Vt. 225, 917 A.2d 451" }
+  vsea: { kind: "case", name: "*Vt. State Employees’ Ass’n v. Vt. Agency of Natural Resources*", cite: "No. 517-7-10 Wncv, 2011 WL 121649 (Vt. Super. Ct. Jan. 6, 2011)" }
+  s315a: { kind: "statute", cite: "1 V.S.A. § 315(a)" }
+  s316a: { kind: "statute", cite: "1 V.S.A. § 316(a)" }
+  s316c: { kind: "statute", cite: "1 V.S.A. § 316(c)" }
+  s316g: { kind: "statute", cite: "1 V.S.A. § 316(g)" }
+  s316h: { kind: "statute", cite: "1 V.S.A. § 316(h)" }
+  s316i: { kind: "statute", cite: "1 V.S.A. § 316(i)" }
+  s317b: { kind: "statute", cite: "1 V.S.A. § 317(b)" }
+  s318a: { kind: "statute", cite: "1 V.S.A. § 318(a)" }
+  s318d: { kind: "statute", cite: "1 V.S.A. § 318(d)" }
+  s318e: { kind: "statute", cite: "1 V.S.A. § 318(e)" }
+  black: { kind: "other", cite: "Black’s Law Dictionary (10th ed. 2014)" }
+  merriam: { kind: "other", cite: "Merriam-Webster Online Dictionary" }
+  oxford: { kind: "other", cite: "English Oxford Living Online Dictionary" }
+  act159: { kind: "other", cite: "1995 Acts & Resolves, No. 159 (Adj. Sess.)" }
+  act59: { kind: "other", cite: "2011 Acts & Resolves, No. 59 (Adj. Sess.)" }
+  h73: { kind: "other", cite: "H. 73 (2011)" }
+  h910: { kind: "other", cite: "H. 910 (2018)" }
+  s229: { kind: "other", cite: "S. 229 (2008)" }
+  h73-cd11061: { kind: "other", cite: "Hearings on H. 73, House Comm. on Gov’t Operations, CD 11-061 (Mar. 3, 2011)" }
+  h73-cd11068: { kind: "other", cite: "Hearings on H. 73, House Comm. on Gov’t Operations, CD 11-068 (March 10, 2011)" }
+  h73-cd11070: { kind: "other", cite: "Hearings on H. 73, House Comm. on Gov’t Operations, CD 11-070 (March 10, 2011)" }
+  h910-senate: { kind: "other", cite: "Hearings on H. 910, Senate Comm. on Gov’t Operations (April 20, 2018)" }
+  dbh-feb27: { kind: "other", cite: "Hearings on Draft Bill 18-0015, House Committee on Gov’t Operations (February 27, 2018)" }
+  dbh-jan31: { kind: "other", cite: "Hearings on Draft Bill 18-0015, House Committee on Gov’t Operations (January 31, 2018)" }
+  senate-d4t1: { kind: "other", cite: "Recording of Vermont Senate, Disc 4, Track 1" }
 ---
 
 # STATEMENT OF THE ISSUE
@@ -185,7 +185,7 @@ In 2018,[^10] the House and Senate Committees on Government Operations left § 3
 
 [^11]: Regarding potential voluminous requests, Chief Whipple notes that “we don’t see it often” and “we have not seen significant numbers of large requests, but it’s possible.” Id.
 
-# II. THE LEGISLATURE HAS ALREADY REJECTED APPELLEE’S POLICY ARGUMENTS
+## II. THE LEGISLATURE HAS ALREADY REJECTED APPELLEE’S POLICY ARGUMENTS
 
 This Court has repeatedly recognized that, in matters of statutory interpretation, it does not have “license to substitute this Court’s policy judgments for those of the Legislature.” [Judicial Watch, 2005 VT 108, ¶ 16](toa:jw); see also [State v. Suhr, 2018 VT 49, ¶ 21 n.6, __ Vt. __, 189 A.3d 552](toa:suhr) (“[W]e cannot re-order the Legislature’s priorities.”). Yet, Appellee and its amicus invite the Court to take such license when it comes to policy judgments the Legislature has made in favor of “free and open examination” of public records. They do so by raising the specter of extreme scenarios they fear would occur if the trial court is not upheld. Specifically, they speculate that a citizen could “weaponize” the PRA by filing voluminous requests that were either intended to or had the effect of preventing an agency from performing its other functions. VLCT Br. 20; Appellee’s Br. 21. They argue that “[t]he ability to collect fees is necessary to limit burdensome public records requests,” PC 43, and that “staff time fee recovery also places a reasonable restraint” on such requests, VLCT Br. 20. But, in 2011, the Legislature statutorily responded to agencies’ concerns regarding “voluminous” requests by passing the current language of [§ 318(d)](toa:s318d). That section allows agencies “[i]n unusual circumstances . . . [to] request that a person seeking a voluminous amount of separate and distinct records narrow the scope of [their] public records request.” See [Recording of Vermont Senate, Disc 4, Track 1, 1:10—2:10](toa:senate-d4t1) (Senator White explaining the purpose of § 318(d) as giving public agencies the ability to ask requestors to narrow voluminous requests and giving requestors the opportunity to disagree). In 2018, after many municipal and state officials rehashed arguments regarding the potential for voluminous requests, the Legislature again chose to leave the VSEA decision intact, taking no action regarding § 316(c) or 318(d).[^12] [Hearings on Draft Bill 18-0015, House Comm. on Gov’t Operations, 2:27:00—2:29:00 (February 27, 2018)](toa:dbh-feb27).
 
