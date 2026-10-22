@@ -1,14 +1,31 @@
 // N.D. W. Va. Bankruptcy Court: adversary complaint (FRBP 7001 et seq.).
 // Every number below traces to a rule; README.md has the rule, URL and date verified.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---- parameters ----
 #let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute per docs/FONTS.md, vendored in /fonts; no system font is ever used
 #let type-size = 12pt              // LBR 9004-1 (search excerpt, see README): minimum 10 pt; 12 pt used
-#let body-leading = 1.645em        // double spacing (27.6 pt line pitch at 12 pt), as in the filed complaints; LBR 9004-1 allows up to double
-#let single-leading = 0.3em        // caption, counsel block, signature, footer
-#let para-indent = 0.5in           // FRCP 10(b) numbered paragraphs; indent is presentation only
+#let para-indent = 0.5in           // FRCP 10(b) numbered paragraphs: the number at the first-line indent
+#let number-box = 0.5in            // the paragraph number's box; the text then wraps to the margin
 #let margins = (top: 1in, bottom: 1in, left: 1in, right: 1in)  // LBR 9004-1 is silent on margins; 1 in is the convention
+#let caption-left = 3.2in          // caption: the party column (rule on its right and bottom); the case column is the rest
+#let caption-inset = 0.15in        // the party text stands off the caption's right rule
+#let caption-rule = 0.75pt         // the caption's rules; Word adds the bottom rule's width to the caption's height
+#let right-inset = 0.25in          // the case information stands off the rule
+#let debtor-indent = 0.4in         // "Debtor." under the debtor's name
+#let role-indent = 0.1in           // a side's designation ("Plaintiffs,") under its names
+#let v-indent = 1.5in              // "v." in the party column
+#let sig-column = 3.2in            // the signature's right-hand column starts this far in
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-body = 27.6pt           // double spacing: Word's double line in this face at 12 pt (2 x 13.8 pt), as in the filed complaint; LBR 9004-1 allows up to double
+#let pitch-single = 13.8pt         // a single line: 1.15 x the type size (caption, headings, signature, schedule, footer)
+#let gap = pitch-single            // between the caption's groups, around the title and the headings
+#let cell-inset = 5.4pt            // a schedule table cell's text stands off its rules (Word's 108-twip cell margin)
+#let rule = 0.5pt                  // a schedule table rule; Word sets each row a rule below the one above it
 
 // ---- helpers ----
 #let need(meta, key) = {
@@ -22,87 +39,79 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
+/// One single-spaced paragraph with explicit space above and below it.
+#let line-block(above: 0pt, below: 0pt, left: 0pt, body) = block(width: 100%, above: above, below: below, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  pad(left: left, body)
+})
+
 // FRCP 10(a): caption has the court name, a title, a file number, and a Rule 7(a) designation.
 // FRBP 9004(b): caption names the court, the case title, the case and adversary-proceeding numbers,
 // and a brief designation of the document. FRBP 7010: the caption substantially conforms to Form 416.
 #let court-caption(meta) = {
-  set par(first-line-indent: 0pt, leading: single-leading)
-  stack(dir: ttb, spacing: 0.3em, ..need(meta, "court").map(line => align(center, upper(line))))
-  v(1.2em)
+  let court = need(meta, "court")
+  for (i, l) in court.enumerate() {
+    line-block(below: if i == court.len() - 1 { gap } else { 0pt }, align(center, strong(upper(l))))
+  }
   let sides = need(meta, "caption")
-  table(
-    columns: (3.2in, 3.3in),
-    stroke: none,
-    inset: (x: 0.1in, y: 0.25em),
-    table.cell(stroke: (right: 0.75pt + black, bottom: 0.75pt + black), inset: (bottom: 0.9em, right: 0.15in))[
-      #if "debtor" in meta [
-        In re: #meta.debtor.name,\
-        #h(0.4in)Debtor.
-        #v(0.8em)
-      ]
-      #for side in sides.slice(0, 1) {
-        for n in side.names { [#n\ ] }
-        h(0.6em)
-        [#side.designation]
-        v(0.8em)
-      }
-      #h(1.5in) v.
-      #v(0.8em)
-      #for side in sides.slice(1) {
-        for n in side.names { [#n\ ] }
-        h(0.6em)
-        [#side.designation]
-      }
-      #v(0.6em)
-    ],
-    table.cell(inset: (left: 0.25in))[
-      #v(0.6em)
-      Chapter #need(meta, "chapter")\
-      #v(0.6em)
-      Case No. #need(meta, "case_number")\
-      #if "judge" in meta [Judge #meta.judge\ ]
-      #v(0.6em)
-      Adv. Pro. No. #need(meta, "adversary_number")\
-      #if "adversary_title" in meta [#meta.adversary_title\ ]
-    ],
-  )
-  v(1.2em)
-  align(center, strong(upper(need(meta, "complaint_title"))))
-  v(0.6em)
+  let left = {
+    if "debtor" in meta {
+      line-block[In re: #meta.debtor.name,]
+      line-block(left: debtor-indent, below: gap)[Debtor.]
+    }
+    for (i, side) in sides.enumerate() {
+      if i > 0 { line-block(left: v-indent, below: gap)[v.] }
+      for n in side.names { line-block(n) }
+      line-block(left: role-indent, below: gap, side.designation)
+    }
+  }
+  let right = {
+    line-block(below: gap)[Chapter #need(meta, "chapter")]
+    line-block[Case No. #need(meta, "case_number")]
+    if "judge" in meta { line-block[Judge #meta.judge] }
+    line-block(above: gap)[Adv. Pro. No. #need(meta, "adversary_number")]
+    if "adversary_title" in meta { line-block(meta.adversary_title) }
+  }
+  block(above: 0pt, below: 0pt, grid(
+    columns: (caption-left, 1fr),
+    block(width: 100%, stroke: (right: caption-rule, bottom: caption-rule), inset: (right: caption-inset, bottom: gap + caption-rule), left),
+    pad(left: right-inset, top: gap, right),
+  ))
+  line-block(above: gap, below: gap, align(center, strong(upper(need(meta, "complaint_title")))))
 }
 
-// Counsel block, upper left, only when the filing has one. The two WVNB complaints read
-// (Protea 2019, see usage/SOURCE.md) put counsel at the signature only, so it is optional here.
+// Counsel block, upper left, only when the filing has one. The filed WVNB complaint (Protea 2019, see
+// usage/SOURCE.md) puts counsel at the signature only, so it is optional here.
 #let counsel-block(meta) = {
   if "counsel" in meta {
-    set par(first-line-indent: 0pt, leading: single-leading)
-    for line in meta.counsel {
-      [#line\ ]
+    for (i, l) in meta.counsel.enumerate() {
+      line-block(below: if i == meta.counsel.len() - 1 { gap } else { 0pt }, l)
     }
-    v(1.2em)
   }
 }
 
 // Paragraphs of the complaint are numbered continuously across the whole document (FRCP 10(b)).
 #let para-no = counter("wvnb-para")
 
+// "Dated" at the margin and the signer's block in the right-hand column, single-spaced, kept together.
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  set par(first-line-indent: 0pt, leading: single-leading)
-  v(1.2em)
-  // "Dated" at left, signer block in a right column so long lines wrap inside it.
-  block(width: 100%, breakable: false)[
-    #grid(
-      columns: (3.2in, 3.3in),
-      [#if "date" in meta [Dated: #meta.date]],
-      [
-        Respectfully submitted,\
-        #v(0.8em)
-        #strong[s/ #sig.signer]\
-        #for line in sig.lines [#line\ ]
-      ],
-    )
-  ]
+  block(width: 100%, breakable: false, above: pitch-body, below: 0pt, {
+    line-block[#box(width: sig-column, if "date" in meta [Dated: #meta.date])Respectfully submitted,]
+    line-block(above: gap, left: sig-column, strong[s/ #sig.signer])
+    for l in sig.lines { line-block(left: sig-column, l) }
+  })
+}
+
+// An item of a loose list (blank lines between the items) ends in a paragraph break; inside the numbered paragraph it
+// means nothing, so it is dropped.
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
 }
 
 #let wvnb-adversary-complaint(meta, md) = {
@@ -110,39 +119,44 @@
     let _ = need(meta, k)
   }
 
-  set page(paper: "us-letter", margin: margins)
+  // A centered page number on every page, in a single-spaced line box (Word's footer).
+  set page(paper: "us-letter", margin: margins, footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
   set document(
     title: need(meta, "complaint_title") + ", Adv. Pro. No. " + need(meta, "adversary_number"),
     author: need(meta, "signature").signer,
   )
-  set text(font: font-family, size: type-size, lang: "en", region: "us", hyphenate: false, fallback: false)
-  set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: false)
-  // Numbered paragraphs: the number sits on the first-line indent and the text wraps to the
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch.
+  show: xengine.with(pitch: pitch-body, list-indent: none)
+  // A doubled sign stays with its number ("§§ 547"), as a single one does in xengine.
+  show regex("[§¶]{2} \\S+"): it => box(it)
+
+  // Numbered paragraphs: the number in a half-inch box at the first-line indent, the text after it, wrapping to the
   // margin (as in the filed Protea complaint). One counter runs through the whole document.
-  show enum.item: it => block(width: 100%, {
+  show enum: it => for item in it.children {
+    block(width: 100%, above: 0pt, below: 0pt, par[#box(width: number-box)[#para-no.step()#context para-no.display("1.")]#unloose(item.body)])
+  }
+
+  // Headings in a complaint are centered and bold (parts in capitals), single-spaced, a single line from the text on
+  // either side, kept with the text after them.
+  show heading: it => block(width: 100%, above: gap, below: gap, sticky: true, {
+    set text(size: type-size, ..edges(pitch-single))
     set par(first-line-indent: 0pt)
-    h(para-indent)
-    para-no.step()
-    context para-no.display() + "."
-    h(0.25in)
-    it.body
+    align(center, strong(if it.level == 1 { upper(it.body) } else { it.body }))
   })
-  set footnote.entry(separator: line(length: 30%, stroke: 0.5pt))
-  show footnote.entry: set text(size: 10pt)
-  show footnote.entry: set par(first-line-indent: 0pt)
 
-  // Headings in a complaint are centered capitals (parts) or bold centered (counts and subparts),
-  // set at body size as in the filed complaint.
-  show heading.where(level: 1): it => block(width: 100%, above: 1.2em, below: 0.8em, sticky: true,
-    align(center, strong(text(size: type-size, upper(it.body)))))
-  show heading.where(level: 2): it => block(width: 100%, above: 1em, below: 0.6em, sticky: true,
-    align(center, strong(text(size: type-size, it.body))))
-
-  // Running footer: page number on every page.
-  set page(footer: context {
-    set text(size: 10pt)
-    align(center, counter(page).display())
-  })
+  // A schedule table (cmarker sets its columns auto): equal columns across the text width, ruled, single-spaced
+  // cells, the header row bold.
+  show table: it => if not it.columns.all(c => c == auto) { it } else {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    show table.cell.where(y: 0): strong
+    table(columns: (1fr,) * it.columns.len(), inset: (x: cell-inset, top: rule, bottom: 0pt), stroke: rule, align: left,
+      ..it.children)
+  }
 
   counsel-block(meta)
   court-caption(meta)
