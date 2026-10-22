@@ -1,0 +1,82 @@
+# Supreme Court of Pennsylvania (pa): reply brief (Pa.R.A.P. 2113). The whole layout, as data for the shared document
+# model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to Pa.R.A.P. 124, 2135 and 2171-2174 (../rules.md, PA-*); lengths in points. No case text here: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant (the court's name, certificate forms).
+size: 14                  # PA-FORM-004 (Pa.R.A.P. 124(a)(4)): text no smaller than 14 point
+pitch:
+  body: 32.2              # PA-FORM-003 (124(a)(3)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # cover, headings, tables, quotations, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # PA-FORM-002 (124(a)(3)): at least one inch on all four sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
+footnote: {size: 12, pitch: 13.8, gap: 7}   # PA-FORM-003, -004: footnotes 12 point, single spaced (1.15 x 12 pt)
+quote: {left: 36, right: 36, above: 14, below: 14}   # PA-FORM-003: quotations indented and single spaced
+list: {markers: ["•"]}
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, above: 15.4, below: 8.4}
+# PA-COVER-001 (Pa.R.A.P. 2172(a)): the court, the docket number, the caption beside the proceeding below, the title and
+# counsel and the date, under the three-inch space PA-FORM-002 keeps at the top of the first page (72 + 144 pt).
+cover:
+  - {text: "IN THE SUPREME COURT OF PENNSYLVANIA", align: center, bold: true, above: 144}
+  - {text: "No. {case_number}", align: center, bold: true, above: 21.6}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 36, above: 11.2, below: 11.2}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36}
+      - blocks:
+          - {text: "{proceeding}", optional: true}
+    gutter: 28.8
+    above: 16.8
+  - {text: "{brief_title}", align: center, bold: true, above: 30.8}
+  - columns: {each: counsel, blocks: [{text: "{names}"}, {text: "{lines}", italic: true, optional: true}]}
+    gutter: 21.6
+    above: 33.6
+  - {text: "Dated: {date}", align: center, optional: true, above: 22.4}
+# Pa.R.A.P. 2174: the table of contents (and the table of citations when the brief lists its authorities).
+contents: {title: "TABLE OF CONTENTS", depth: 2, col: 36, hang: 36, step: 21, above: 12.6}
+authorities:
+  title: "TABLE OF CITATIONS"
+  col: 56
+  hang: 28.8
+  above: 7
+  group: {bold: true, above: 15.4, below: 7}
+# The date and the signature blocks side by side, never split; the Rule 2135(d) word-count certificate (the template
+# counts the body's words: {body_words}) and the Rule 127 Public Access certificate; the proof of service (Pa.R.A.P.
+# 121(d)) when there is one. Certificate forms: the Rule 127 Comment, the filed exemplar.
+closing:
+  - group:
+      - {text: "Dated: {date}", pitch: body}
+      - {text: "Respectfully submitted,", pitch: body}
+      - columns: {each: signature, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 16.1
+    above: 16.1
+  - {break: true}
+  - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true, below: 16.8}
+  - {text: "I hereby certify that this brief complies with the word-count limit of Pa.R.A.P. 2135(a)(1). Excluding the cover, tables, proof of service and signature block, it contains {body_words} words, as computed by the word-processing template that prepared it.", pitch: body, indent: 36}
+  - {text: "I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial System of Pennsylvania that require filing confidential information and documents differently than non-confidential information and documents.", pitch: body, indent: 36}
+  - group:
+      - {text: "Dated: {date}", pitch: body}
+      - columns: {each: signature, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 16.1
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 16.8}
+      - {text: "I certify that I have on this day served a true and correct copy of the foregoing upon the following counsel of record by {service.method}:", pitch: body, indent: 36}
+      - columns: {each: service.recipients, blocks: [{text: "{names}"}, {text: "{lines}", optional: true}]}
+        gutter: 21.6
+        above: 16.8
+      - group:
+          - {text: "Dated: {date}", pitch: body}
+          - columns: {each: signature, blocks: [{text: "{lines}"}]}
+            gutter: 21.6
+            above: 16.1
+        above: 19.6
