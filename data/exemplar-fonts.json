@@ -11230,6 +11230,8 @@
       "class": "metric-exact",
       "face": "TeX Gyre Termes",
       "why": "Adobe Times metrics (Nimbus Roman lineage)",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.28 under David's 2026-10-17 ruling that Times New Roman is the standard: no W.D. Wis. bankruptcy rule names a face (rules.md WIWB-LEN-001: no typeface asserted), and the exemplar is Adobe Times, so the template is set in Times New Roman on typst and docx (the docx had named EB Garamond against a Termes typst face), not in Adobe Times's twin TeX Gyre Termes; face stays the audited match.",
       "fonts": [
         "Helvetica",
         "LiberationSans",
