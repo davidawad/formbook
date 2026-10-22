@@ -130,6 +130,7 @@ Defendants claim Wooff was offered two jobs in August of 2021, one as an estimat
 > A. Training. There's the word, yes, training.
 
 (Tr., pp. 41-42).
+
 >
 > Q. What was the other position that you were offered?
 >
@@ -140,6 +141,7 @@ Defendants claim Wooff was offered two jobs in August of 2021, one as an estimat
 > A. You are in charge of manning the jobs and then checking on the jobs, making sure you're staying up-to-date and on schedule, plus answering questions from the contractors as well as the employees.
 
 (Tr., pp. 42-43).
+
 >
 > Q. And did you feel capable of performing that job?
 >
