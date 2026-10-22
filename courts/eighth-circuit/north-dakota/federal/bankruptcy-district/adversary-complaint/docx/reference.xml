@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D.N.D. Bankruptcy court form's Word styles (adversary complaint and motion brief): the cross-engine recipe
+     (tools/fb/src/docxxengine.rs) in the face of the typst template ({font}, Times New Roman) at 12 pt (size 24 half
+     points; FRBP 9004(a) legibility, the exemplar's size); Body Text in exact 27.6 pt line boxes (typst
+     pitch-double, the exemplar's double spacing) with a half-inch first-line indent; quotations (Block Text),
+     footnotes, caption, court name and signature lines in 13.8 pt boxes (typst pitch-single), a quotation a single
+     line from the text on either side, 7 pt between two footnotes; letter page with 1-inch margins and a centered
+     page number, its line 36.75 pt above the page foot (735 twips: where typst sets it, footer-descent 30 %).
+     Added: Body Text Flush (a "~" continuation, no indent), Body Text Keep and Body Text Flush Keep (the paragraph
+     kept with the signature block). docx/ndb-court-form.lua writes the cover, headings and signature with their own
+     spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" quote="276" note-after="140" footer="735">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextFlush"><w:name w:val="Body Text Flush"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:ind w:firstLine="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextFlushKeep"><w:name w:val="Body Text Flush Keep"/><w:basedOn w:val="BodyTextFlush"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>
