@@ -1,0 +1,70 @@
+# Nevada Supreme Court (nev): petition for review of a Court of Appeals decision (NRAP 40B). The whole layout, as data for
+# the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to NRAP 32 and 40B (../../rules.md, NEV-*); lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # NEV-FORM-004 (NRAP 32(a)(5)(A)): proportionally spaced type, 14 points or larger
+pitch:
+  body: 32.2              # NEV-FORM-003 (NRAP 32(a)(4)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # cover, headings, quotations, footnotes, signature: single (1.15 x 14 pt; NEV-FORM-003)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NEV-FORM-002 (NRAP 32(a)(4)): at least one inch on all four sides
+indent: 36                # convention: a half-inch first-line indent
+# NEV-FORM-006 (NRAP 32(a)(4)): consecutively numbered at the bottom. A petition for review has no tables (NRAP 40B
+# lists none), so no page falls before the body's Arabic run: the cover is page 1, as in the filed exemplar.
+page_number: {align: center}
+footnote: {size: 14, gap: 7}             # NEV-FORM-004 (NRAP 32(a)(5)): footnotes in the body's size and face; single spaced (NEV-FORM-003)
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # NEV-FORM-003: quotations of more than two lines indented (convention: 0.5 in each side), single spaced
+heading:                  # NEV-FORM-003: headings single spaced; their style and space convention
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The cover (NEV-COVER-001, NRAP 32(a)(2)(A)-(E), applied by NRAP 40B(d) / NEV-REV-001 "complies in form with NRAP 32"):
+# the court and the case number, the title of the case, the proceeding and the court below, the document's title and
+# counsel. Spaces between the parts are convention. Set as `front` (the top of page 1) closed by a page break, not as
+# `cover`: the cover is page 1 of the consecutive numbering (NEV-FORM-006, as filed), and the docx engine sets a `cover`
+# only with tables after it (lib/docx/xdoc.lua; docs/open-items/fb-595.54.18.md).
+front:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF NEVADA", align: center, bold: true}
+  - {text: "{case_number}", align: center, bold: true, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true, above: 5.6}
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 72}   # convention: the title set off, 16 pt
+  - columns: {each: counsel, per_row: 2, row_gap: 8.4, blocks: [{text: "{names}", bold: true}, {text: "{lines}"}]}
+    gutter: 28.8            # convention: 0.4 in between the counsel columns
+    above: 72
+  - {break: true}
+# The date, the certificate of compliance (NRAP 32(a)(9), 40B(d); NEV-CERT-001 and NEV-CERT-002, its statements the
+# court's own; the word count the filer's, NEV-REV-001's 4,667 words) and the signature block (NRAP 32(d)), never split.
+closing:
+  - group:
+      - {text: "{date}", pitch: body, indent: 36, optional: true}
+      - {text: "I hereby certify that this petition complies with the formatting requirements of NRAP 32(a)(4), the typeface requirements of NRAP 32(a)(5) and the type-style requirements of NRAP 32(a)(6). It is proportionally spaced, has a typeface of Times New Roman at 14-point, and contains {word_count} words. I further certify that this petition complies with the word limit of NRAP 40B(d). I have read this petition; it is not frivolous or interposed for any improper purpose; and it complies with the Nevada Rules of Appellate Procedure, including NRAP 28(e), which requires every assertion regarding matters in the record to be supported by a reference to the page and volume number, if any, of the transcript or appendix where the matter relied on is found. I understand that I may be subject to sanctions if the petition does not conform to the Nevada Rules of Appellate Procedure.", pitch: body, indent: 36}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 11.2}   # convention: the signature 3.2 in from the margin, right of centre
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 11.2}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, above: 8.4}
+    above: 21.6
+  # NRAP 25(d) (NEV-CERT-003): proof of service, from a page of its own, when the sample carries one.
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.heading}", align: center, bold: true, upper: true}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36, above: 16.8}
+      - when: service.recipients
+        blocks:
+          - each: service.recipients
+            blocks: [{text: "{.}", left: 72, above: 14}]
+      - {text: "{service.closing}", pitch: body, indent: 36, optional: true}
+      - each: service.signature.signers
+        above: 21.6
+        blocks:
+          - {text: "/s/ *{name}*", underline: true, left: 230.4}
+          - {text: "{name}", left: 230.4}
+          - {text: "{lines}", left: 230.4}
+      - {text: "{service.signature.lines}", left: 230.4, optional: true}
