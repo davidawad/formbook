@@ -1,6 +1,9 @@
 # NMID-FORM-002 (LR 5.2(a)): margins top 1.5 in, bottom 1 in, right 0.5 in, left 1 in. The footer sits in the bottom margin, below the 1 in line.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (fb-595.68.23, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   margin_top_pt: 108
   margin_bottom_pt: 72
   margin_left_pt: 72
   margin_right_pt: 36
+  cross_engine: gate
