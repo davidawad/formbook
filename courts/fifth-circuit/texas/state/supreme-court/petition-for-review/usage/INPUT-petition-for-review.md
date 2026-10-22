@@ -33,25 +33,20 @@ signature:
     - "Texas Bar No. 24105239"
   for: "Attorney for Petitioner"
 authorities:
-  - group: "Cases"
-    items:
-      - name: "In re F.M.V."
-        italic: true
-        rest: ", No. 08-24-00077-CV, 2025 WL 2146682 (Tex. App.—El Paso July 29, 2025)"
-        pages: "2, 6, 7, 9, 10"
-  - group: "Statutes"
-    items:
-      - name: "Tex. Fam. Code § 51.095"
-        rest: ""
-        pages: "2, 7, 8, 9, 10"
-      - name: "Tex. Gov’t Code § 22.001"
-        rest: ""
-        pages: "2"
-  - group: "Rules"
-    items:
-      - name: "Tex. R. App. P. 56.1"
-        rest: ""
-        pages: "2"
+  - heading: "Cases"
+    entries:
+      - cite: "*In re F.M.V.*, No. 08-24-00077-CV, 2025 WL 2146682 (Tex. App.—El Paso July 29, 2025)"
+        find: "2025 WL 2146682"
+  - heading: "Statutes"
+    entries:
+      - cite: "Tex. Fam. Code § 51.095"
+        find: "51.095"
+      - cite: "Tex. Gov’t Code § 22.001"
+        find: "§ 22.001"
+  - heading: "Rules"
+    entries:
+      - cite: "Tex. R. App. P. 56.1"
+        find: "56.1"
 ---
 # IDENTITIES OF PARTIES AND COUNSEL
 
@@ -187,10 +182,6 @@ There was understandable error below. This Court has never had the opportunity t
 # CERTIFICATE OF SERVICE
 
 I hereby certify that a true and correct copy of the foregoing document was sent to the attorney for the Appellant, Kelli Childress, 500 E. San Antonio, Room 501, El Paso, Texas 79901 via electronic mail at ReVargas@epcounty.com, on this 10th day of October 2025.
-
-# CERTIFICATE OF COMPLIANCE
-
-Pursuant to the Texas Rule of Appellate Procedure 9.4(i)(1), (3), I hereby certify that this Appellate Brief contains {{word-count}} words. This is a computer-generated document using 14-point typeface for all text and 12-point footnotes.
 
 # APPENDIX
 

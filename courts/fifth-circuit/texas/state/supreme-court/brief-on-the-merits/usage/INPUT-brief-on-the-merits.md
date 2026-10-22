@@ -32,66 +32,43 @@ signature:
     - "Texas Bar No. 24046381"
   for: "Attorneys for Petitioner"
 authorities:
-  - group: "Cases"
-    items:
-      - name: "Baptist Vie Le v. State"
-        italic: true
-        rest: ", 993 S.W.2d 650 (Tex. Crim. App. 1999)"
-        pages: "11"
-      - name: "Guzman v. State"
-        italic: true
-        rest: ", 955 S.W.2d 85 (Tex. Crim. App. 1997)"
-        pages: "10"
-      - name: "Hereford v. State"
-        italic: true
-        rest: ", 339 S.W.3d 111 (Tex. Crim. App. 2011)"
-        pages: "10"
-      - name: "In re L.J."
-        italic: true
-        rest: ", No. 03-04-00807-CV, 2005 WL 3338302 (Tex. App.—Austin Dec. 9, 2005, no pet.)"
-        pages: "9"
-      - name: "In re R.J.H."
-        italic: true
-        rest: ", 79 S.W.3d 1 (Tex. 2002)"
-        pages: "9"
-      - name: "Le v. State"
-        italic: true
-        rest: ", No. 14-94-01265-CR, 2000 WL 1335290 (Tex. App.—Houston [14th Dist.] Sept. 14, 2000, pet. ref’d)"
-        pages: "11"
-      - name: "Matter of F.M.V."
-        italic: true
-        rest: ", 720 S.W.3d 494 (Tex. App.—El Paso 2025, pet. filed)"
-        pages: "2, 10, 11"
-      - name: "McIntyre v. State"
-        italic: true
-        rest: ", 619 S.W.3d 311 (Tex. App.—Fort Worth 2021, pet. ref’d)"
-        pages: "10"
-      - name: "Williams v. State"
-        italic: true
-        rest: ", 995 S.W.2d 754 (Tex. App.—San Antonio 1999, no pet.)"
-        pages: "10"
-  - group: "Statutes"
-    items:
-      - name: "Tex. Fam. Code § 51.01"
-        rest: ""
-        pages: "9"
-      - name: "Tex. Fam. Code § 51.095"
-        rest: ""
-        pages: "2, 4, 5, 7, 8, 9, 10"
-      - name: "Tex. Fam. Code § 51.12(f)"
-        rest: ""
-        pages: "3"
-      - name: "Tex. Gov’t Code § 22.001(a), (b)"
-        rest: ""
-        pages: "2"
-  - group: "Rules"
-    items:
-      - name: "Tex. R. App. P. 56.1(a)(5)"
-        rest: ""
-        pages: "4"
-      - name: "Tex. R. App. P. 56.1(a)(6)"
-        rest: ""
-        pages: "5"
+  - heading: "Cases"
+    entries:
+      - cite: "*Baptist Vie Le v. State*, 993 S.W.2d 650 (Tex. Crim. App. 1999)"
+        find: "993 S.W.2d 650"
+      - cite: "*Guzman v. State*, 955 S.W.2d 85 (Tex. Crim. App. 1997)"
+        find: "955 S.W.2d 85"
+      - cite: "*Hereford v. State*, 339 S.W.3d 111 (Tex. Crim. App. 2011)"
+        find: "339 S.W.3d 111"
+      - cite: "*In re L.J.*, No. 03-04-00807-CV, 2005 WL 3338302 (Tex. App.—Austin Dec. 9, 2005, no pet.)"
+        find: "2005 WL 3338302"
+      - cite: "*In re R.J.H.*, 79 S.W.3d 1 (Tex. 2002)"
+        find: "79 S.W.3d 1"
+      - cite: "*Le v. State*, No. 14-94-01265-CR, 2000 WL 1335290 (Tex. App.—Houston [14th Dist.] Sept. 14, 2000, pet. ref’d)"
+        find: "2000 WL 1335290"
+      - cite: "*Matter of F.M.V.*, 720 S.W.3d 494 (Tex. App.—El Paso 2025, pet. filed)"
+        find: "720 S.W.3d 494"
+      - cite: "*McIntyre v. State*, 619 S.W.3d 311 (Tex. App.—Fort Worth 2021, pet. ref’d)"
+        find: "619 S.W.3d 311"
+      - cite: "*Williams v. State*, 995 S.W.2d 754 (Tex. App.—San Antonio 1999, no pet.)"
+        find: "995 S.W.2d 754"
+  - heading: "Statutes"
+    entries:
+      - cite: "Tex. Fam. Code § 51.01"
+        find: "Section 51.01"
+      - cite: "Tex. Fam. Code § 51.095"
+        find: "Family Code § 51.095"
+        finds: ["Family Code § 51.095", "Section 51.095"]
+      - cite: "Tex. Fam. Code § 51.12(f)"
+        find: "§ 51.12(f)"
+      - cite: "Tex. Gov’t Code § 22.001(a), (b)"
+        find: "Code § 22.001"
+  - heading: "Rules"
+    entries:
+      - cite: "Tex. R. App. P. 56.1(a)(5)"
+        find: "56.1(a)(5)"
+      - cite: "Tex. R. App. P. 56.1(a)(6)"
+        find: "56.1(a)(6)"
 ---
 # IDENTITIES OF PARTIES AND COUNSEL
 
@@ -215,9 +192,8 @@ For all these reasons, Petitioner, the State of Texas, prays that this Court rev
 
 I certify that on July 29, 2026, a true and correct copy of the foregoing pleading was filed electronically through EFile.TXCourts electronic filing system and electronically served upon the attorney for the Juvenile, Kelli Childress at k.childress@epcountytx.gov via electronic mail, Rene Vargas at ReVargas@epcountytx.gov, and Todd D. Morten t.morten@epcountytx.gov.
 
-# CERTIFICATE OF COMPLIANCE
-
-Pursuant to the Texas Rule of Appellate Procedure 9.4(i)(1), (3), I hereby certify that this Appellate Brief contains {{word-count}} words. This is a computer-generated document using 14-point typeface for all text and 12-point footnotes.
+/s/ Kevin McCary\
+Kevin McCary
 
 # APPENDIX
 

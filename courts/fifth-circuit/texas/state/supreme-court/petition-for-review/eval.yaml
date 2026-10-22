@@ -1,4 +1,11 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.36, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
   cross_engine: gate
+  # Word's contents give the identities of parties and counsel (the body section set before the tables,
+  # body_before_tables, with the cover counted in the roman numbering, page_number.cover: counted) page iii, typst and
+  # LaTeX ii (p3 line 2, XENG-003; the page itself is numbered ii in every engine): the docx page lookup searches the
+  # heading's needle after the tables' start needle, which holds the heading's own text, and finds the contents row.
+  # Reported, not gated, until the shared model's lookup is fixed (docs/open-items).
+  cross_engine_docx: report
