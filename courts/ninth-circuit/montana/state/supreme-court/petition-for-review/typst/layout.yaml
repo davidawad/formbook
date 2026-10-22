@@ -1,0 +1,71 @@
+# Montana Supreme Court (mont): petition for review and original-proceeding petition (MRAP 14; form under MRAP 11). The
+# whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file
+# by `fb engines gen`, fb-595.54.12). Numbers trace to M.R.App.P. 11 and 14 (../../rules.md, MONT-*); lengths in points.
+# The court's doc types share these numbers (../../answering-brief/typst/layout.yaml). No case text here: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # MONT-FORM-003 (MRAP 11(2)): a proportionately spaced typeface of 14 points or more
+pitch:
+  body: 32.2              # MONT-FORM-004 (MRAP 11(3)(b)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # MRAP 11(3)(b): footnotes, quotations, headings, tables, cover, signature single (1.15 x 14 pt)
+# MONT-FORM-002 (MRAP 11(3)(a)): at least 1 inch on every side; the bottom 0.1 in deeper so the last footnote line's
+# descenders stay inside the 1 inch line.
+margin: {top: 72, bottom: 79.2, left: 72, right: 72}
+indent: 36
+page_number: {align: center, from: 1}   # MONT-FORM-004: pages are numbered; the cover is page 1
+footnote: {size: 14, gap: 7}            # MRAP 11(2): footnotes 14 points; 11(3)(b): single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # MRAP 11(3)(b): indented material single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, left: 36, hang: 36, above: 14, below: 11.2}   # one step in; not italic (an italic case name in it)
+# MONT-COVER-001 (MRAP 11(6)(b)): the court, the cause number (blank for a first filing), the caption with designations,
+# the lower tribunal when there is one, the document title, and counsel for each party. MRAP 11(2) exempts the cover from
+# the 14-point size: the title is 16 points, counsel 12 points, two groups to a row.
+cover:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF MONTANA", align: center, bold: true}
+  - {text: "{case_number}", align: center, bold: true, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 36}
+  - columns: {each: counsel, per_row: 2, row_gap: 7.2, blocks: [{text: "{names}", bold: true, size: 12, pitch: 13.8}, {text: "{lines}", size: 12, pitch: 13.8}]}
+    gutter: 28.8
+    above: 36
+# A table of contents with page references, on its own page (MRAP 14(9)(b) puts a petition under the form rules of
+# MRAP 11; the court's briefs carry one, MONT-ORDER-001). The model sets it whenever the layout has it: the sample's
+# `toc: true` is the old template's default, and the model has no field to switch it off.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 7.2}
+# The date, the MONT-CERT-001 (MRAP 11(4)(e)) certificate of compliance (line spacing, typeface and size, word count;
+# MONT-PET-002, MRAP 14(9)(b): the word limit of a petition) and every signer's block (right of center), never split.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, optional: true}
+      - {text: "This petition is double-spaced, except for footnotes and quoted or indented material, is set in 14-point Times New Roman typeface, and contains {word_count} words, which complies with the word limit of M.R.App.P. 14(9)(b) and 11(4).", pitch: body, indent: 36, above: 5.6}
+      - each: signature.signers
+        blocks:
+          - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 12.6}
+          - {text: "{name}", left: 230.4}
+          - {text: "{lines}", left: 230.4}
+    above: 21.6
+  # MONT-PET-003 (MRAP 14(6)): the petition is served on all parties: the certificate of service on a page of its own,
+  # its paragraphs double spaced, each recipient's address one inch in, the first signer's signature.
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.heading}", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - each: service.recipients
+        blocks:
+          - {text: "{.}", left: 72, above: 14}
+      - {text: "{service.closing}", pitch: body, indent: 36, optional: true, above: 14}
+      - group:
+          - {text: "/s/ *{service.signature.signer}*", underline: true, left: 230.4}
+          - {text: "{service.signature.signer}", left: 230.4}
+          - {text: "{service.signature.lines}", left: 230.4}
+        above: 14
