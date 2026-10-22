@@ -93,6 +93,9 @@ return require("docx.xdoc")({
       ["above"] = 28.8,
     },
     {
+      ["fill"] = 1,
+    },
+    {
       ["columns"] = {
         ["each"] = "counsel",
         ["per_row"] = 2,
@@ -107,7 +110,6 @@ return require("docx.xdoc")({
         },
       },
       ["gutter"] = 21.6,
-      ["above"] = 36,
     },
     {
       ["text"] = "{counsel_for}",
@@ -139,6 +141,7 @@ return require("docx.xdoc")({
       ["below"] = 2.8,
     },
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {

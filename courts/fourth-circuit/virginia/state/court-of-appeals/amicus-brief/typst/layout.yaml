@@ -28,8 +28,9 @@ cover:
       - {text: "{names}", align: center, above: 14.4}
       - {text: "{designation}", align: center, italic: true, above: 4.8}
   - {text: "{brief_title}", align: center, bold: true, upper: true, above: 28.8}
+  # counsel at the foot of the page (the old template's v(1fr) after the title)
+  - {fill: 1}
   - each: counsel
-    above: 72
     blocks:
       - {text: "{names}", left: 230.4, above: 7.2}
       - {text: "{lines}", left: 230.4}

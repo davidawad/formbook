@@ -93,8 +93,10 @@ return require("latex.xdoc")({
       ["above"] = 28.8,
     },
     {
+      ["fill"] = 1,
+    },
+    {
       ["each"] = "counsel",
-      ["above"] = 72,
       ["blocks"] = {
         {
           ["text"] = "{names}",

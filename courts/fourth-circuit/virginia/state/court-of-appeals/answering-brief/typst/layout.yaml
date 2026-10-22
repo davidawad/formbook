@@ -29,10 +29,11 @@ cover:
       - {text: "{designation}", align: center, italic: true, above: 4.8}
   - {text: "{brief_title}", align: center, bold: true, upper: true, above: 28.8}
   # many counsel (an Attorney General's office lists each lawyer and title; VACTAPP-FORM-006): two columns across the
-  # full width, as in the exemplars (VACTAPP-TMPL-002); one column at 14 pt runs off the page
+  # full width, as in the exemplars (VACTAPP-TMPL-002); one column at 14 pt runs off the page. Counsel at the foot of
+  # the page (the old template's v(1fr) after the title).
+  - {fill: 1}
   - columns: {each: counsel, per_row: 2, row_gap: 7.2, blocks: [{text: "{names}"}, {text: "{lines}"}]}
     gutter: 21.6
-    above: 36
   - {text: "{counsel_for}", italic: true, optional: true, above: 7.2}
   - {text: "{date}", optional: true}
 # Rule 5A:20(a): a table of contents and a table of authorities (cases alphabetical, the year of each citation;
@@ -47,6 +48,8 @@ authorities:
 # The signature block (Rule 5A:20(g); VACTAPP-OPEN-003: name, bar number, address, telephone, e-mail), never split;
 # then the certificate on a page of its own (Rule 5A:20(h), 5A:4(d); VACTAPP-OPEN-004: service, oral argument, the
 # word count), signed again.
+# the last paragraph kept with the signature block, which never takes a page alone (tier 2)
+keep_with_closing: true
 closing:
   - group:
       - {text: "{signature.firm}", bold: true, left: 230.4, optional: true}
