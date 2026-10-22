@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The M.D.N.C. Bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs)
+     in the face of the typst template ({font}, Times New Roman: the house standard, template_face in data/exemplar-fonts.json) at 12 pt (no local size rule; size 24 half points);
+     Body Text in exact 24 pt line boxes (typst pitch-double, the exemplar's double spacing) with a half-inch
+     first-line indent; the court lines, title, headings, quotations, signature and footnotes in 13.8 pt boxes
+     (typst pitch-single), a heading or quotation 12 pt (240 twips) from the text on either side, footnotes 7 pt
+     apart (typst note-gap); letter page with 1-inch margins and a centered page number, its line 36.75 pt above the
+     page foot (735 twips: where typst sets it, footer-descent 30 %). docx/ncmb-adversary-complaint.lua writes every
+     paragraph's own spacing. Twips: 20 x pt.
+     Two styles of its own for a paragraph that carries a footnote mark (pandoc writes those, with the note): "Body
+     Text Note", Body Text without widow control, and "Numbered Note", the same with the tab after the paragraph
+     number at 1 in (typst keeps a paragraph's last two lines together by their height alone; when the line's
+     footnote does not fit, that line moves on and the one before stays behind; with widow control off Word does the
+     same). -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="240" heading-after="240" quote="240" note-after="140" footer="735" pandoc-from="markdown+smart-fancy_lists">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedNote"><w:name w:val="Numbered Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs></w:pPr></w:style>
+</reference>

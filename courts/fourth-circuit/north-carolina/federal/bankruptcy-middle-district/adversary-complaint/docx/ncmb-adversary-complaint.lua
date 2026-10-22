@@ -1,84 +1,170 @@
--- ncmb-adversary-complaint.lua (docx engine). Builds what pandoc does not write for the typst template
--- (../typst/ncmb-adversary-complaint.typ), from the frontmatter of the sample, so no case text is in this file:
---   * the cover: court lines, the caption (a table: parties, a ")" column, case numbers, closed by a rule), the title;
---   * the lead-in, and the body: numbered paragraphs (1, 2, ...; a WHEREFORE chunk is not numbered), headings
---     (pandoc's Heading 1 and 2, styled in reference.docx), the prayer lettered A., B., ..., the unnumbered
---     sub-items of a bulleted list, block quotations;
---   * footnotes: a [^n] marker becomes a native Word footnote whose text is footnotes.n in the frontmatter;
---   * the signature block (kept together, at 3.25 in).
--- The styles named here ("NCMB ...") are defined in docx/make-reference.sh.
+-- ncmb-adversary-complaint.lua (docx engine): the M.D.N.C. Bankruptcy adversary complaint as Word paragraphs, so
+-- that it reads and breaks as typst/ncmb-adversary-complaint.typ does: the court lines, the caption (Form 416D; one
+-- table row per line: the parties, a ")" column, the case numbers, closed by a rule), the title, the unnumbered
+-- lead-in, the numbered paragraphs (Fed. R. Civ. P. 10(b); a WHEREFORE chunk is not numbered), headings, block
+-- quotations, a paragraph's (i), (ii) sub-items, the prayer lettered A., B., ..., the footnotes (a [^n] marker
+-- becomes a Word footnote whose text is footnotes.n in the frontmatter) and the signature block (LR 9011-4).
+-- Everything printed comes from the sample's frontmatter and body: no case text lives in this file.
+--
+-- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
+-- exact line boxes of the typst pitch (twips = 20 x pt: 480 the double-spaced body, 276 a single line, 320 a caption
+-- row), the spaces between blocks those of the typst template, and the break rules of typst on every run. A body
+-- paragraph that carries a footnote is left to pandoc (it writes the note) in the style "Body Text Note" or
+-- "Numbered Note" (reference.xml); every other one is written here. pandoc reads the sample without fancy lists
+-- (reference.xml pandoc-from), so "- (i) ..." is a bullet item holding the text "(i) ...", as typst reads it.
 
-local function esc(s)
-  s = s:gsub("&", "&amp;")
-  s = s:gsub("<", "&lt;")
-  s = s:gsub(">", "&gt;")
-  return s
-end
+local xe = require("docx.xengine")
 
-local function roman(n)
-  local out = ""
-  for _, v in ipairs({ { 10, "X" }, { 9, "IX" }, { 5, "V" }, { 4, "IV" }, { 1, "I" } }) do
-    while n >= v[1] do
-      out = out .. v[2]
-      n = n - v[1]
-    end
-  end
-  return string.lower(out)
-end
+local BODY, SINGLE, ROW = 480, 276, 320  -- typst pitch-double, pitch-single, cap-row
+local GAP = 240                          -- typst gap-half, 12 pt
+local RULE_GAP = 180                     -- typst caption-rule-gap, 9 pt
+local INDENT = 720                       -- typst para-indent and item-indent, 0.5 in
+local SUB = 1440                         -- typst sub-indent, 1 in
+local QUOTE = 720                        -- typst quote-inset, 0.5 in
+local TEXTW = 9360                       -- 6.5 in
+local CAP_LEFT, CAP_PAREN = 4608, 504    -- typst caption-left 3.2 in, caption-paren 0.35 in
+local CAP_INSET = 360                    -- typst caption-inset, 0.25 in
+local SIG = 4680                         -- typst signature-indent, 3.25 in
+local TAB2 = '<w:tabs><w:tab w:val="left" w:pos="' .. (2 * INDENT) .. '"/></w:tabs>'
 
-local TAB = pandoc.RawInline("openxml", '<w:r><w:tab/></w:r>')
+local stringify = pandoc.utils.stringify
 
-local function text(v)
-  return pandoc.utils.stringify(v)
-end
-
--- A frontmatter value (markdown inlines) as an Inlines list.
-local function inlines(v)
-  if type(v) == "string" then
-    return pandoc.Inlines({ pandoc.Str(v) })
-  end
-  local out = pandoc.Inlines({})
-  for _, el in ipairs(v) do
-    out:insert(el)
-  end
-  return out
-end
-
-local function plain(s)
-  return pandoc.Inlines({ pandoc.Str(s) })
-end
-
-local function para(inl, style)
-  return pandoc.Div({ pandoc.Para(inl) }, { ["custom-style"] = style })
+local function plain(m)
+  if m == nil then return "" end
+  if type(m) == "string" then return m end
+  return stringify(m)
 end
 
 local function need(m, key)
-  if m[key] == nil then
-    error("ncmb-adversary-complaint.lua: missing required frontmatter field `" .. key .. "`")
-  end
+  if m[key] == nil then error("ncmb-adversary-complaint.lua: missing required frontmatter field `" .. key .. "`") end
   return m[key]
 end
 
-local function is_map(v)
-  return type(v) == "table" and v.t ~= nil
+-- A paragraph: o = { before, after, line, left, right, first, hanging, jc, keep, tabs }.
+local function p(body, o)
+  o = o or {}
+  local props = {}
+  if o.keep then props[#props + 1] = xe.KEEP end
+  if o.tabs then props[#props + 1] = o.tabs end
+  props[#props + 1] = xe.spacing(o.before or 0, o.after or 0, o.line or SINGLE)
+  local first = o.first
+  if first == nil and not o.hanging then first = 0 end
+  props[#props + 1] = xe.ind(o.left or 0, o.hanging, first, o.right)
+  props[#props + 1] = xe.jc(o.jc or "left")
+  return xe.para(props, body)
 end
 
--- Footnote markers: pandoc leaves "[^n]" as text when its definition is not in the body, so split the Str.
+local TBL_PR = '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/>' ..
+  '<w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>' ..
+  '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="0"/>'
+
+-- A borderless table of rows of exact height: rows = { { h = twips, cells = { { w, xml, rule } ... } } }; a cell
+-- with `rule` (eighths of a point) has a bottom border, and a row with one cell spans every column.
+local function tbl(widths, rows)
+  local grid, trs = {}, {}
+  for _, w in ipairs(widths) do grid[#grid + 1] = '<w:gridCol w:w="' .. w .. '"/>' end
+  for _, row in ipairs(rows) do
+    local tcs = {}
+    for _, c in ipairs(row.cells) do
+      local span = #row.cells == 1 and #widths > 1 and ('<w:gridSpan w:val="' .. #widths .. '"/>') or ""
+      local rule = c[3] and ('<w:tcBorders><w:bottom w:val="single" w:sz="' .. c[3] ..
+        '" w:space="0" w:color="000000"/></w:tcBorders>') or ""
+      tcs[#tcs + 1] = '<w:tc><w:tcPr><w:tcW w:w="' .. c[1] .. '" w:type="dxa"/>' .. span .. rule .. '</w:tcPr>' ..
+        (c[2] or p("", { line = row.h })) .. '</w:tc>'
+    end
+    trs[#trs + 1] = '<w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="' .. row.h .. '" w:hRule="exact"/></w:trPr>' ..
+      table.concat(tcs) .. '</w:tr>'
+  end
+  return '<w:tbl><w:tblPr><w:tblW w:w="' .. TEXTW .. '" w:type="dxa"/>' .. TBL_PR .. '</w:tblPr><w:tblGrid>' ..
+    table.concat(grid) .. '</w:tblGrid>' .. table.concat(trs) .. '</w:tbl>'
+end
+
+-- ---------------------------------------------------------------------------
+-- Cover: court lines, caption (Form 416D), title
+-- ---------------------------------------------------------------------------
+
+local JC = { l = "left", c = "center", r = "right" }
+
+-- A caption row is a string, or a map {t: text, a: "l" | "c" | "r"}.
+local function cap_cell(item, left)
+  local t, a = item, "l"
+  if type(item) == "table" and item[1] == nil and type(item.t) == "table" then
+    t = item["t"]
+    a = item["a"] and plain(item["a"]) or "l"
+  end
+  return p(xe.inl(t), { line = ROW, left = left, jc = JC[a] })
+end
+
+local function caption(meta)
+  local cap = need(meta, "caption")
+  local left = need(cap, "left")
+  local right = cap.right or {}
+  local n = math.max(#left, #right)
+  local rows = {}
+  for i = 1, n do
+    rows[#rows + 1] = { h = ROW, cells = {
+      { CAP_LEFT, cap_cell(left[i] or "") },
+      { CAP_PAREN, p(xe.runs(")"), { line = ROW, jc = "center" }) },
+      { TEXTW - CAP_LEFT - CAP_PAREN, cap_cell(right[i] or "", CAP_INSET) },
+    } }
+  end
+  -- the rule under the caption (typst: a block of caption-rule-gap with a bottom stroke)
+  rows[#rows + 1] = { h = RULE_GAP, cells = { { TEXTW, nil, 6 } } }
+  return tbl({ CAP_LEFT, CAP_PAREN, TEXTW - CAP_LEFT - CAP_PAREN }, rows)
+end
+
+local function cover(meta)
+  local out = {}
+  for _, l in ipairs(need(meta, "court")) do out[#out + 1] = p(xe.inl(l), { jc = "center" }) end
+  -- typst: the caption block stands a double line below the court lines
+  out[#out + 1] = p("", { line = BODY })
+  out[#out + 1] = caption(meta)
+  out[#out + 1] = p(xe.inl(need(meta, "title"), { b = true }), { jc = "center", before = GAP, after = GAP })
+  return out
+end
+
+-- ---------------------------------------------------------------------------
+-- Signature block (LR 9011-4): kept together
+-- ---------------------------------------------------------------------------
+
+local function signature(meta)
+  local sig = need(meta, "signature")
+  local rows = { { xe.inl(need(sig, "dated")), 0, BODY } }
+  local function group(items)
+    for i, l in ipairs(items) do rows[#rows + 1] = { type(l) == "string" and xe.runs(l) or xe.inl(l), SIG, i == 1 and GAP or 0 } end
+  end
+  group(need(sig, "firm"))
+  group({ "/s/ " .. plain(need(sig, "signed_by")) })
+  for _, s in ipairs(need(sig, "signers")) do
+    group({ plain(s.name), "N.C. State Bar No. " .. plain(s.bar), "Email: " .. plain(s.email) })
+  end
+  local tail = {}
+  for _, l in ipairs(need(sig, "address")) do tail[#tail + 1] = l end
+  tail[#tail + 1] = "Telephone: " .. plain(need(sig, "phone"))
+  for _, l in ipairs(need(sig, "role")) do tail[#tail + 1] = l end
+  group(tail)
+  local out = {}
+  for i, r in ipairs(rows) do out[#out + 1] = p(r[1], { left = r[2], before = r[3], keep = i < #rows }) end
+  return out
+end
+
+-- ---------------------------------------------------------------------------
+-- Body
+-- ---------------------------------------------------------------------------
+
+-- Footnote markers: pandoc leaves "[^n]" as text when its definition is not in the body, so the Str is split and
+-- each marker becomes a Note holding footnotes.n.
 local function expand(inls, notes)
   local out = pandoc.Inlines({})
   for _, el in ipairs(inls) do
     if el.t == "Str" and el.text:find("%[%^%d+%]") then
-      local s = el.text
-      local pos = 1
+      local s, pos = el.text, 1
       while true do
         local a, b, k = s:find("%[%^(%d+)%]", pos)
         if not a then break end
         if a > pos then out:insert(pandoc.Str(s:sub(pos, a - 1))) end
-        local note = notes[k]
-        if note == nil then
-          error("ncmb-adversary-complaint.lua: footnote [^" .. k .. "] has no text under `footnotes:`")
-        end
-        out:insert(pandoc.Note({ pandoc.Para(inlines(note)) }))
+        if notes[k] == nil then error("ncmb-adversary-complaint.lua: footnote [^" .. k .. "] has no text under `footnotes:`") end
+        out:insert(pandoc.Note({ pandoc.Para(pandoc.Inlines(notes[k])) }))
         pos = b + 1
       end
       if pos <= #s then out:insert(pandoc.Str(s:sub(pos))) end
@@ -89,132 +175,105 @@ local function expand(inls, notes)
   return out
 end
 
--- Caption: a fixed-layout table, 9360 twips wide: party column 3.2 in, ")" column 0.35 in, case numbers the rest.
-local W_LEFT, W_PAREN, W_RIGHT = 4608, 504, 4248
-local JC = { l = "left", c = "center", r = "right" }
-
-local function cap_cell_xml(item, style, width, jc)
-  local t, a = item, "l"
-  if is_map(item) then
-    t = item.t
-    a = item.a and text(item.a) or "l"
-  end
-  if jc then a = jc end
-  local ppr = '<w:pPr><w:pStyle w:val="' .. style .. '"/><w:jc w:val="' .. JC[a] .. '"/></w:pPr>'
-  local s = esc(text(t))
-  local run = s ~= "" and ('<w:r><w:t xml:space="preserve">' .. s .. '</w:t></w:r>') or ""
-  return '<w:tc><w:tcPr><w:tcW w:w="' .. width .. '" w:type="dxa"/></w:tcPr><w:p>' .. ppr .. run .. '</w:p></w:tc>'
+local function has_note(inls)
+  for _, el in ipairs(inls) do if el.t == "Note" then return true end end
+  return false
 end
 
-local function caption_table(m)
-  local cap = need(m, "caption")
-  local left = need(cap, "left")
-  local right = cap.right or {}
-  local n = math.max(#left, #right)
-  local rows = {}
-  for i = 1, n do
-    local l = left[i] or ""
-    local r = right[i] or ""
-    rows[#rows + 1] = '<w:tr><w:trPr><w:trHeight w:val="320" w:hRule="atLeast"/></w:trPr>'
-      .. cap_cell_xml(l, "NCMBCaption", W_LEFT)
-      .. cap_cell_xml(")", "NCMBCaption", W_PAREN, "c")
-      .. cap_cell_xml(r, "NCMBCaptionRight", W_RIGHT)
-      .. '</w:tr>'
+-- Headings: single-spaced, 12 pt above and below, kept with the text; level 1 centered bold capitals, level 2
+-- centered bold, level 3 bold italic at the margin. The Heading styles give the outline level.
+local function heading(b)
+  local content = b.content
+  if b.level == 1 then
+    content = pandoc.Inlines(content):walk({ Str = function(s) return pandoc.Str(pandoc.text.upper(s.text)) end })
   end
-  local tbl = '<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/><w:tblInd w:w="0" w:type="dxa"/>'
-    .. '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/>'
-    .. '<w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:right w:val="nil"/>'
-    .. '<w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>'
-    .. '<w:tblLayout w:type="fixed"/>'
-    .. '<w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
-    .. '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="1" w:noVBand="1"/>'
-    .. '</w:tblPr><w:tblGrid><w:gridCol w:w="' .. W_LEFT .. '"/><w:gridCol w:w="' .. W_PAREN .. '"/><w:gridCol w:w="' .. W_RIGHT .. '"/></w:tblGrid>'
-    .. table.concat(rows) .. '</w:tbl>'
-  return pandoc.RawBlock("openxml", tbl)
+  local lvl = math.min(b.level, 3)
+  return xe.para({ xe.style("Heading" .. lvl), xe.KEEP, xe.spacing(GAP, GAP, SINGLE), xe.ind(0, nil, 0),
+    xe.jc(lvl <= 2 and "center" or "left") }, xe.inl(content, { b = true, i = lvl == 3 }))
+end
+
+-- A body paragraph at the double pitch, first line indented: unnumbered, or the number, a tab to the end of its
+-- half-inch box (typst: box(width: para-indent)), the text. One with a footnote is written by pandoc.
+local function body_par(label, inls)
+  if has_note(inls) then
+    local c = pandoc.Inlines({})
+    if label then c:extend({ pandoc.Str(label), pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>") }) end
+    c:extend(inls)
+    local para = pandoc.Para(c):walk({ Inlines = xe.inlines })
+    return pandoc.Div({ para }, { ["custom-style"] = label and "Numbered Note" or "Body Text Note" })
+  end
+  if label == nil then return p(xe.inl(inls), { line = BODY, first = INDENT }) end
+  return p(xe.runs(label .. "\t") .. xe.inl(inls), { line = BODY, first = INDENT, tabs = TAB2 })
+end
+
+-- Footnotes are written by pandoc in a body paragraph only.
+local function no_note(inls, where)
+  if has_note(inls) then error("ncmb-adversary-complaint.lua: a footnote in " .. where .. " is not supported") end
+  return inls
+end
+
+-- typst's break opportunities that LibreOffice does not share: none inside ")(" (a word joiner), one after a
+-- slash before a letter (a zero-width space). Neither shows in the PDF text.
+local function breaks(s)
+  return pandoc.Str((s.text:gsub("%)%(", ")\u{2060}("):gsub("/([^%d%s])", "/\u{200B}%1")))
+end
+
+-- A doubled sign stays with its number ("§§ 1408"; typst boxes "[§¶]+ \S+", xe.inl binds a single sign).
+local function bind_doubled(inl)
+  for i = 1, #inl - 1 do
+    local a, b = inl[i], inl[i + 1]
+    if a.t == "Str" and a.text:match("^[\u{00A7}\u{00B6}][\u{00A7}\u{00B6}]+$") and b.t == "Space" then
+      inl[i + 1] = pandoc.Str("\u{00A0}")
+    end
+  end
+  return inl
 end
 
 function Pandoc(doc)
-  local m = doc.meta
-  for _, k in ipairs({ "court", "caption", "title", "lead_in", "signature", "footnotes" }) do
-    need(m, k)
+  local fix = { Str = breaks }
+  doc = doc:walk(fix):walk({ Inlines = bind_doubled })
+  local meta = doc.meta
+  for _, k in ipairs({ "court", "caption", "title", "lead_in", "signature" }) do need(meta, k) end
+  local notes = {}
+  for k, v in pairs(meta.footnotes or {}) do
+    notes[k] = pandoc.Inlines(v):walk(fix):walk({ Inlines = bind_doubled })
   end
-  local notes = m.footnotes
-  local out = {}
-
-  -- Cover
-  local courts = m.court
-  for i, line in ipairs(courts) do
-    out[#out + 1] = para(inlines(line), i == #courts and "NCMB Court Last" or "NCMB Court")
-  end
-  out[#out + 1] = caption_table(m)
-  out[#out + 1] = para(inlines(m.title), "NCMB Title")
-
-  -- Lead-in (unnumbered) and body
-  out[#out + 1] = para(expand(inlines(m.lead_in), notes), "NCMB Body")
+  local out = cover(meta)
+  out[#out + 1] = body_par(nil, expand(pandoc.Inlines(meta.lead_in), notes))
   local n = 0
   for _, b in ipairs(doc.blocks) do
-    if b.t == "Para" or b.t == "Plain" then
-      if text(b):match("^WHEREFORE") then
-        out[#out + 1] = para(expand(b.content, notes), "NCMB Body")
-      else
-        n = n + 1
-        local c = pandoc.Inlines({ pandoc.Str(tostring(n) .. "."), TAB })
-        for _, x in ipairs(expand(b.content, notes)) do c:insert(x) end
-        out[#out + 1] = para(c, "NCMB Numbered")
+    if b.t == "Header" then
+      out[#out + 1] = heading(b)
+    elseif b.t == "BlockQuote" then
+      for _, q in ipairs(b.content) do
+        out[#out + 1] = p(xe.inl(no_note(expand(q.content, notes), "a quotation")),
+          { before = GAP, after = GAP, left = QUOTE, right = QUOTE })
       end
     elseif b.t == "OrderedList" then
-      for j, item in ipairs(b.content) do
-        local c = pandoc.Inlines({ pandoc.Str(string.char(64 + j) .. "."), TAB })
-        for _, x in ipairs(expand(item[1].content, notes)) do c:insert(x) end
-        out[#out + 1] = para(c, "NCMB Prayer")
-        for k = 2, #item do out[#out + 1] = item[k] end
+      -- the prayer, lettered: the letter at the item indent in a box of its width, the text hanging after it
+      for i, item in ipairs(b.content) do
+        out[#out + 1] = p(xe.runs(string.char(64 + i) .. ".\t") .. xe.inl(no_note(expand(item[1].content, notes), "the prayer")),
+          { line = BODY, left = 2 * INDENT, hanging = INDENT })
       end
     elseif b.t == "BulletList" then
-      -- A "- (i) text" item is parsed by pandoc as a one-item roman list inside the bullet; the marker is written
-      -- back as text, as the typst template prints it (no bullet, the (i) label kept).
+      -- a paragraph's sub-items, with their own (i), (ii) labels and no bullet
       for _, item in ipairs(b.content) do
-        if item[1].t == "OrderedList" then
-          -- each "- (i)" item is its own one-item list whose start number is the roman numeral.
-          local start = item[1].listAttributes.start
-          for k, sub in ipairs(item[1].content) do
-            local c = pandoc.Inlines({ pandoc.Str("(" .. roman(start + k - 1) .. ")"), pandoc.Space() })
-            for _, x in ipairs(expand(sub[1].content, notes)) do c:insert(x) end
-            out[#out + 1] = para(c, "NCMB Sub")
-          end
-        else
-          out[#out + 1] = para(expand(item[1].content, notes), "NCMB Sub")
-        end
+        out[#out + 1] = p(xe.inl(no_note(expand(item[1].content, notes), "a sub-item")), { line = BODY, left = SUB })
       end
-    elseif b.t == "BlockQuote" then
-      for _, p in ipairs(b.content) do
-        out[#out + 1] = pandoc.Div({ pandoc.Para(expand(p.content, notes)) }, { ["custom-style"] = "Block Text" })
+    elseif b.t == "Para" or b.t == "Plain" then
+      local inls = expand(b.content, notes)
+      if stringify(b):match("^WHEREFORE") then
+        out[#out + 1] = body_par(nil, inls)
+      else
+        n = n + 1
+        out[#out + 1] = body_par(n .. ".", inls)
       end
     else
-      out[#out + 1] = b
+      error("ncmb-adversary-complaint.lua: unsupported block " .. b.t)
     end
   end
-
-  -- Signature block (LR 9011-4): kept together; 3.25 in from the left margin.
-  local S = need(m, "signature")
-  out[#out + 1] = para(inlines(S.dated), "NCMB Sig Left First")
-  for i, v in ipairs(S.firm) do
-    out[#out + 1] = para(inlines(v), i == 1 and "NCMB Sig Right Gap" or "NCMB Sig Right")
-  end
-  out[#out + 1] = para(plain("/s/ " .. text(S.signed_by)), "NCMB Sig Right Gap")
-  for _, s in ipairs(S.signers) do
-    out[#out + 1] = para(plain(text(s.name)), "NCMB Sig Right Gap")
-    out[#out + 1] = para(plain("N.C. State Bar No. " .. text(s.bar)), "NCMB Sig Right")
-    out[#out + 1] = para(plain("Email: " .. text(s.email)), "NCMB Sig Right")
-  end
-  for i, v in ipairs(S.address) do
-    out[#out + 1] = para(inlines(v), i == 1 and "NCMB Sig Right Gap" or "NCMB Sig Right")
-  end
-  out[#out + 1] = para(plain("Telephone: " .. text(S.phone)), "NCMB Sig Right")
-  for _, v in ipairs(S.role) do
-    out[#out + 1] = para(inlines(v), "NCMB Sig Right")
-  end
-
-  -- The title is printed by the cover above; pandoc must not write its own Title paragraph from the metadata.
-  m.title = nil
-  return pandoc.Pandoc(out, m)
+  for _, x in ipairs(signature(meta)) do out[#out + 1] = x end
+  local res = {}
+  for _, x in ipairs(out) do res[#res + 1] = type(x) == "string" and xe.raw(x) or x end
+  return pandoc.Pandoc(res, pandoc.Meta({}))
 end
