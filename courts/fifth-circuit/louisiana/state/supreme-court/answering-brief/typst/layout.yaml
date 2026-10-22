@@ -68,7 +68,9 @@ closing:
       - {text: "{certificate.title}", align: center, bold: true, below: 14.4}
       - {markdown: "{certificate.text}", pitch: body, indent: 36}
       # the persons served, one after another (a list may run past a page)
-      - each: certificate.recipients
-        above: 14.4
-        blocks: [{text: "{names}"}, {text: "{lines}", optional: true}]
+      - when: certificate.recipients
+        blocks:
+          - each: certificate.recipients
+            above: 14.4
+            blocks: [{text: "{names}"}, {text: "{lines}", optional: true}]
       - {text: "{certificate.signature.lines}", left: 230.4, above: 16.8, optional: true}

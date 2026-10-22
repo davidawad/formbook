@@ -197,15 +197,20 @@ return require("latex.xdoc")({
           ["indent"] = 36,
         },
         {
-          ["each"] = "certificate.recipients",
-          ["above"] = 14.4,
+          ["when"] = "certificate.recipients",
           ["blocks"] = {
             {
-              ["text"] = "{names}",
-            },
-            {
-              ["text"] = "{lines}",
-              ["optional"] = true,
+              ["each"] = "certificate.recipients",
+              ["above"] = 14.4,
+              ["blocks"] = {
+                {
+                  ["text"] = "{names}",
+                },
+                {
+                  ["text"] = "{lines}",
+                  ["optional"] = true,
+                },
+              },
             },
           },
         },
