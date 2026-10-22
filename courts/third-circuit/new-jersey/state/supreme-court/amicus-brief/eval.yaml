@@ -1,6 +1,5 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: typst breaks a URL
-# link inside a word ("https://en.wikipedia.org/wiki/The_" / "Wire", footnote 2) where LaTeX and Word do not; the
-# shared model has no URL break rule (docs/open-items/fb-595.54.72.md). Every other line matches.
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Both break every line and page where
+# typst does (324/324 lines; the URL in footnote 2 breaks by the model's shared rule since fb-595.54.82).
 params:
-  cross_engine: report
+  cross_engine: gate
