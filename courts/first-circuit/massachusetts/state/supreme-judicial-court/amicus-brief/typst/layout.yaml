@@ -1,0 +1,87 @@
+# Massachusetts Supreme Judicial Court (mass): amicus curiae brief (Mass. R. A. P. 17). The whole layout, as data for
+# the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to Mass. R. A. P. 16, 17 and 20 (../../rules.md, MASS-*); lengths in points. No case
+# text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # MASS-FORM-002 (MRAP 20(a)(4)(B)): 14 point or larger, footnotes included
+pitch:
+  body: 32.2              # MASS-FORM-004 (20(a)(4)(C)): double spaced, at most 3 lines an inch (Word's double, 2 x 1.15 x 14)
+  single: 16.1            # headings, footnotes, quotations, cover, signature: single (1.15 x 14 pt)
+# MASS-FORM-003 (20(a)(4)(A)): margins at least 1 inch; top and bottom 1 inch + 4 pt keep a raised note mark inside
+margin: {top: 76, bottom: 76, left: 72, right: 72}
+indent: 36                # style: half-inch first-line indent
+page_number: {align: center}   # MASS-FORM-005 (20(a)(4)(A), 20(a)(6)(B)(vii)): the cover is page 1, numbered through
+footnote: {size: 14, pitch: 16.1, gap: 7}   # MASS-FORM-002, -004: notes 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # MASS-FORM-004: indented quotations single spaced
+# Sections centered in capitals; argument points bold (level 3 bold italic), hanging half an inch (numbered in the text).
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# MASS-FORM-006 (20(a)(6)(B)), MASS-AMI-003 (17(c)): the court, the case number, the title of the case, the proceeding
+# below, the date, the title, the party supported and the disposition urged, counsel; then the corporate disclosure
+# statement (MASS-AMI-004, 17(c); S.J.C. Rule 1:21) on its own page before the tables (MASS-OPEN-001, 16(a)).
+cover:
+  - {text: "COMMONWEALTH OF MASSACHUSETTS", align: center, bold: true}
+  - {text: "Supreme Judicial Court", align: center}
+  - {text: "No. {case_number}", align: center, bold: true, above: 11.2}
+  - each: caption
+    above: 11.2
+    between:
+      - {text: "v.", align: center, above: 7, below: 7}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{lower_court}", align: center, above: 11.2}
+  - {text: "{date}", align: center, above: 11.2}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 72}
+  - {text: "In support of {supports}, urging {position}", align: center, bold: true, upper: true, above: 14}
+  - group:
+      - each: counsel
+        blocks:
+          - {text: "{names}", bold: true, left: 230.4}
+          - {text: "{lines}", left: 230.4}
+    above: 72
+  - when: disclosure
+    blocks:
+      - {break: true}
+      - {text: "Corporate Disclosure Statement", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{disclosure.paragraphs}", pitch: body, indent: 36}
+# MASS-FORM-008 (16(a)(3), (4)): the table of contents and the table of authorities.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 21, above: 12.6}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 5.6}
+# MASS-FORM-012 (16(a)(12)): the signature block right of center, never split; MASS-FORM-010 (16(k)): the certificate
+# of compliance; MASS-FORM-011 (13(e)): the certificate of service, each with its signature.
+closing:
+  - group:
+      - {text: "{signature.intro}", left: 230.4, optional: true}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 8.4}
+      - each: signature.signers
+        blocks:
+          - {text: "{name}", underline: true, left: 230.4, above: 16.8}
+          - {text: "{lines}", left: 230.4, optional: true}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 8.4}
+    above: 16.8
+  - when: compliance
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Compliance", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{compliance.paragraphs}", pitch: body, indent: 36}
+      - group:
+          - each: compliance.signature.signers
+            blocks:
+              - {text: "{name}", underline: true, left: 230.4, above: 16.8}
+              - {text: "{lines}", left: 230.4, optional: true}
+  - when: service
+    blocks:
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, keep: true, above: 22.4, below: 16.8}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - group:
+          - each: service.signature.signers
+            blocks:
+              - {text: "{name}", underline: true, left: 230.4, above: 16.8}
+              - {text: "{lines}", left: 230.4, optional: true}
