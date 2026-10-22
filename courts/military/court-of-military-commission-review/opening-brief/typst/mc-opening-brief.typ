@@ -123,9 +123,14 @@
     align(center, text(weight: "bold", honorable-line))
     counsel-block(meta.counsel)
   }
-  pagebreak()
+  // The page number: centered in a single-spaced line box, 0.5 in from the foot of the page (Word's footer).
+  // Every page after the cover is numbered, as the filed briefs number theirs (FILED-EXAMPLE-opening-brief: i on the
+  // contents; no rule leaves it blank): the contents in roman from i, the body in arabic from 1 (DEF-COVER-001).
+  set page(numbering: "i", footer-descent: 21.7pt,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
+  counter(page).update(1)
 
-  // ---- Table of contents, generated from the headings (unnumbered page) ----
+  // ---- Table of contents, generated from the headings (numbered i) ----
   {
     set text(..edges(pitch-single))
     set par(first-line-indent: 0pt)
@@ -135,9 +140,7 @@
   }
 
   // ---- Body (numbered from 1) ----
-  // The page number: centered in a single-spaced line box, 0.5 in from the foot of the page (Word's footer).
-  set page(numbering: "1", footer-descent: 21.7pt,
-    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
+  set page(numbering: "1")   // a new page, numbered from 1
   counter(page).update(1)
 
   show heading: it => {

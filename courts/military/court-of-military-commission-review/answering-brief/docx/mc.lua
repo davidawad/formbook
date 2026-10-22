@@ -6,8 +6,9 @@
 -- signature block and the two certificates; pandoc writes the body paragraphs and footnotes.
 -- Page numbers: fb render (tools/fb/src/docxpass.rs) renders the document, finds the needles this filter writes
 -- (FORMBOOK_NEEDLES) in the LibreOffice PDF, and renders again with their pages (FORMBOOK_PAGES) until they settle.
--- The cover and the contents are one section with no footer (rIdFtrNone); the body numbers its pages from 1
--- (FORMBOOK_FINAL, rIdFtrPage). Word may paginate slightly differently from LibreOffice.
+-- The cover is a section with no footer (rIdFtrNone); the contents numbers its pages in roman from i (rIdFtrPage,
+-- lowerRoman, as the typst copy and the filed briefs); the body numbers its pages from 1 (FORMBOOK_FINAL,
+-- rIdFtrPage). Word may paginate slightly differently from LibreOffice.
 
 -- Rules cited by the certificates (the typst template's constants; APP-1's certificate form).
 local TYPE_VOLUME_RULE = "Rule 14(i)"
@@ -326,15 +327,16 @@ function Pandoc(doc)
   local out = {}
   local function add(x) out[#out + 1] = x end
 
-  -- ---- cover and contents (one section, no page number) ----
+  -- ---- cover (its own section, no page number), then the contents (numbered i) ----
   add(raw(cover(meta)))
+  add(section("rIdFtrNone"))
   add(raw(para({ BREAK, spacing(0, 240), ind(0, nil, 0), jc("center") }, runs("TABLE OF CONTENTS", { b = true }))))
   for _, e in ipairs(entries) do
     local left = e.level >= 2 and TOC_STEP or 0
     add(raw(para({ LINES, xe.leader_tab(TEXT_W), spacing(0, 0), ind(left, nil, nil, PNUM) },
       inl(e.title) .. runs(LEAD .. label_of(e.id)))))
   end
-  add(section("rIdFtrNone"))
+  add(section("rIdFtrPage", "lowerRoman", 1))
 
   -- ---- body (numbered from 1) ----
   for _, x in ipairs(body) do add(x) end
