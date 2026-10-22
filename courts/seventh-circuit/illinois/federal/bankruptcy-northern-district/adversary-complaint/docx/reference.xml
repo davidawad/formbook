@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The N.D. Ill. bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs)
+     in the face of the typst template ({font}, Times New Roman) at 12 pt (ILNB-FORM-002, LBR 5005-2(C)(2): at least
+     12 points, footnotes included; size 24 half points); Body Text in exact 27.6 pt line boxes (typst pitch-body,
+     ILNB-FORM-003 double spacing, Word's double line as filed) with a half-inch first-line indent; the court lines,
+     caption, title, headings, footnotes and signature in 13.8 pt boxes (typst pitch-single), a heading a single line
+     from the text on either side; 7 pt after each footnote (typst note-gap), a note split over pages where typst
+     splits it (no keep-lines); letter page with 1-inch margins (ILNB-FORM-004, -006) and a centered page number
+     (ILNB-FORM-005), its line 36.75 pt above the page foot (735 twips: where typst sets it, footer-descent 30 %).
+     Style added: Numbered Paragraph, Body Text with a tab stop 0.9 in from the margin (the number's 0.4 in box
+     after the half-inch indent). The right margin is 1 in and 2 twips (0.1 pt): LibreOffice sets this face's lines
+     up to 0.3 pt narrower than typst over the measure, and two lines typst overflows by 0.04 pt (p2: "claims",
+     footnote 1: "Loan") fit at 1 in; one twip either side moves a line (docs/EVAL-LOOP.md, the SCOTUS docx do the
+     same). docx/ilnb-adversary-complaint.lua writes the cover, headings, prayer and signature with their own
+     spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="276" heading-before="276" heading-after="276" note="276" note-after="140" footer="735">
+  <w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="140" w:line="276" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraph"><w:name w:val="Numbered Paragraph"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1296"/></w:tabs></w:pPr></w:style>
+  <w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1442" w:bottom="1440" w:left="1440" w:header="720" w:footer="735" w:gutter="0"/></w:sectPr>
+</reference>

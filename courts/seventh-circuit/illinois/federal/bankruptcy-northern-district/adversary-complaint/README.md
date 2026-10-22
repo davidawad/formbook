@@ -5,9 +5,9 @@ Doc type `adversary-complaint` (FRBP 7001 adversary proceeding, commenced by com
 ## Status
 
 - Exemplar: yes, one filer (RMW Acquisition Company, LLC, Adv. 13-01437, filed 2013-12-27, 14 pp.). See `usage/SOURCE.md`.
-- Render: ok (`sh tools/render.sh <this dir> usage/INPUT-adversary-complaint.md`, 13 pages, no typst warnings, EB Garamond only).
+- Render: ok (`sh tools/render.sh <this dir> usage/INPUT-adversary-complaint.md`, 14 pages, no typst warnings, Times New Roman only; docx 14 pages, the same breaks).
 - Overlay: ok (`sh tools/overlay.sh <this dir> rmw-complaint`, `usage/OVERLAY-rmw-complaint.pdf` and `.txt`).
-- Pages reviewed: 13 of 13 (every page of `usage/OUTPUT-adversary-complaint.typst.pdf` rendered at 60 dpi and looked at, after the last template change).
+- Pages reviewed: 14 of 14 on both engines (every page of `usage/OUTPUT-adversary-complaint.typst.pdf` and `.docx.pdf` rendered at 50 dpi and looked at, after the cross-engine port, fb-595.68.27).
 - Second filer: not collected. A candidate is listed in `usage/SOURCE.md` but was not downloaded.
 
 ## Governing rules
@@ -19,8 +19,8 @@ Verified 2026-10-14 against the primary text. Rule text quoted from the sources;
 | ILNB-CAP-001 | Fed. R. Bankr. P. 7010 (<https://www.law.cornell.edu/rules/frbp/rule_7010>) and Rule 9004(b) (<https://www.law.cornell.edu/rules/frbp/rule_9004>) | Rule 7010: Fed. R. Civ. P. 10 applies "except that a pleading's caption must substantially conform to the appropriate version of Form 416." Rule 9004(b): a caption sets forth the court's name, the case's title, the case number and adversary-proceeding number, and a brief designation of the document. | Court name, title block, debtor and adversary parties, case number, adversary number, descriptive title. |
 | ILNB-CAP-002 | N.D. Ill. Bankr. L.R. 5005-2(C)(5) (<https://www.ilnb.uscourts.gov/sites/ilnb/files/Local-Rules-9-1-2024.pdf>, p. 20) | "The first page must contain at the top the case caption with the number of the case or proceeding, the chapter of the bankruptcy case, the name of the assigned judge, and a descriptive title." | Chapter, case number, judge (`caption.judge`), title on page 1. |
 | ILNB-CAP-003 | LBR 5005-1(C) (same PDF, p. 18) | "The caption of each document must identify the division of the court to which the case is assigned." | "EASTERN DIVISION" line from `division` in the frontmatter. The RMW exemplar omits it; the rule does not. |
-| ILNB-FORM-002 | LBR 5005-2(C)(2) | "Typed documents must be double-spaced, and the font must be at least 12 points." | EB Garamond 13 pt (see Decisions). |
-| ILNB-FORM-003 | LBR 5005-2(C)(2) | Double spacing. | 24.0 pt baseline pitch at 13 pt, measured on page 2 of the render. |
+| ILNB-FORM-002 | LBR 5005-2(C)(2) | "Typed documents must be double-spaced, and the font must be at least 12 points." | Times New Roman 12 pt, footnotes included (see Decisions). |
+| ILNB-FORM-003 | LBR 5005-2(C)(2) | Double spacing. | 27.6 pt baseline pitch (Word's double line at 12 pt, as in the filed complaint); caption, headings, footnotes and signature single (13.8 pt). |
 | ILNB-FORM-004 | LBR 5005-2(C)(3) | "Margins (top, bottom, right, and left) must be no less than one inch." | 1 in on all sides. |
 | ILNB-FORM-005 | LBR 5005-2(C)(4) | "Pages must be consecutively numbered." | Arabic page number, bottom centre, from page 1. |
 | ILNB-FORM-006 | LBR 5005-2(C)(11) | Paper: "on 8½x11-inch white paper". | US Letter. |
@@ -54,12 +54,12 @@ Pages 1 to 7 pair one to one. From page 8 the pairing is one page later: our pag
 
 ## Decisions (left open by the rules, or interpreted)
 
-- **Font: EB Garamond, 13 pt.** The rule requires at least 12 pt. EB Garamond is the only vendored face, and it sets smaller than Times at the same point size; 13 pt is the size the cand complaint and motion templates use for the same face. This is a style choice, not a rule.
+- **Font: Times New Roman, 12 pt** (vendored), on every engine. The rule requires at least 12 pt; the filed complaint is Times New Roman. Was EB Garamond 13 pt before the cross-engine port (fb-595.68.27).
 - **Footnotes and the caption are single spaced.** LBR 5005-2(C)(2) says "typed documents must be double-spaced" with no exemption. The filed exemplar single-spaces its footnotes and the caption, and the template does the same. **This is a literal-reading question for David**: if footnotes must be double spaced, change `show footnote.entry` in `typst/ilnb-adversary-complaint.typ`.
 - **Count statement is numbered.** The RMW exemplar leaves its count statement ("I. RMW requests the entry of ...") unnumbered and numbers the next paragraph 34. The template numbers every body paragraph, so the count statement is ¶ 34 here and the paragraphs after it run one higher than the exemplar (exemplar ¶ 34 "Plaintiff restates" is ¶ 35 here). Accepted as a tier-2 difference.
 - **Division line.** Printed from the frontmatter because LBR 5005-1(C) requires it. The RMW filed copy does not show one.
 - **No ECF header.** The filed copy carries the court's ECF header ("Case 13-01437 Doc 1 Filed ..."). The filer does not generate it, so the template does not.
-- **Prayer as frontmatter.** The WHEREFORE paragraph and its lettered items are frontmatter fields, not body text, so the paragraph numbering stays clean. The last prayer item is sticky so the signature block never stands alone on a page.
+- **Prayer as frontmatter.** The WHEREFORE paragraph and its lettered items are frontmatter fields, not body text, so the paragraph numbering stays clean. Each item is set like a numbered paragraph (the letter in the 0.4 in box after the half-inch indent, the text wrapping to the margin, as filed); the last item is kept with the signature block so the signature never stands alone on a page.
 
 ## Known gaps
 
@@ -83,11 +83,13 @@ Pages 1 to 7 pair one to one. From page 8 the pairing is one page later: our pag
 - Render 5: the first line of each numbered paragraph sat 17 pt below the previous paragraph instead of 24 pt (paragraph spacing was zero). Paragraph blocks now have `below: body-leading`.
 - Render 6: the paragraph numbers lost their 0.5 in first-line indent. A block-first paragraph did not take `first-line-indent` even with `all: true` (checked in a scratch compile, since removed). The indent and number are now inline text at the start of each paragraph block.
 - Final pass: all 13 pages of the final render viewed; body pitch 24 pt within and between paragraphs (measured on pages 2, 3 and 5); no open defects beyond the Decisions above.
+- Cross-engine port (fb-595.68.27): Times New Roman 12 pt, 27.6 pt double pitch as filed, single 13.8 pt lines; the old prayer grid let item d overlap item c on page 12 (fixed: items are paragraphs); typst moved footnote 1 to page 2 while its mark stayed on page 1 (fixed: numbered paragraphs are no longer wrapped in blocks). All 14 pages of both renders viewed: caption, title, headings, footnotes, prayer and signature look as intended; no open defects beyond the Decisions above.
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default; `ilnb.lua` lays out the cover, caption, numbered paragraphs, prayer and signature). Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-adversary-complaint.md`.
+Typst is the reference; the docx engine follows the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate") and breaks every line and page as typst does (`params.cross_engine: gate` in `eval.yaml`).
 
-- **Matches the typst form (in the styles and filter; not checked against a rendered page):** EB Garamond 13 pt; exact 24 pt line pitch; 0.5 in first-line indent; US Letter with 1 in margins; centred 12 pt PAGE number in the footer; level-1 headings centred bold capitals, level-2 bold, level-3 bold italic; numbered body paragraphs; lettered prayer items.
-- **Differs or unverified:** the caption is a two-column table whose party column is ruled on the right and bottom, with widths taken from the typst layout (3.4 in, 0.3 in gutter), but its borders are not verified against the typst layout. The signature block stacks the "Dated" and city lines above the signature column (typst sets them side by side). Footnotes and body text are pandoc's own footnote and paragraph handling. The docx `.docx` was validated (zip and XML well-formed; every `pStyle` defined; one footer relation resolves); it was not opened in Word.
-- **BLOCKED:** `docx.pdf` (`usage/OUTPUT-rmw-complaint.docx.pdf`) is not produced because `soffice` (LibreOffice) is not installed on this box, so `tools/render.sh --engine docx` stops after writing `usage/OUTPUT-adversary-complaint.docx`. Pages reviewed: 0. The docx gates (`tools/check.sh --engine docx`) cannot run. Pagination in Word may differ from LibreOffice.
+- **typst** (`typst/ilnb-adversary-complaint.typ`): pitches, not leadings: 27.6 pt body lines, 13.8 pt single lines, a single line (13.8 pt) around headings and between the caption's groups, half of it between the case column's rows and the counsel groups, a double line (27.6 pt) around the caption and the title and before the signature; footnotes 12 pt in 13.8 pt lines, 7 pt apart, 12.6 pt clearance. Each numbered paragraph is a paragraph of its own (not wrapped in a block), so typst moves a line whose footnote does not fit to the next page with the note, as Word does.
+- **docx** (`docx/reference.xml`, `base="xengine"` with the pitches in twips and `{font}`; `docx/ilnb-adversary-complaint.lua`): no shell, no committed `reference.docx` (`fb render` builds it). The filter writes the court lines, caption table (the party column ruled on the right and bottom), title, headings, prayer and signature with `xe.spacing` in the typst pitches; pandoc writes the numbered paragraphs (style Numbered Paragraph, a tab stop at 0.9 in) with their footnotes. The page's right margin is 1 in and 2 twips: LibreOffice sets these lines up to 0.3 pt narrower than typst, and two lines that typst overflows by 0.04 pt fit at exactly 1 in (see the comment in `reference.xml`).
+- **Checks** (`fb check`): typst 9 passed, 0 failed; docx 13 passed, 0 failed, XENG-001..003 PASS (14 pages, 338/338 lines).
+- **latex**: no latex template in this folder.
