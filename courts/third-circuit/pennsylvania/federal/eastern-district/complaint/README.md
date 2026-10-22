@@ -6,10 +6,10 @@ Doc type: **complaint** (complaint and jury demand) in the United States Distric
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer, counsel-filed; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (a portion of the 22-page filing; see the frontmatter comment) |
-| typeface | face required: **none** (the E.D. Pa. local civil rules name no face; see Governing rules). Font: **EB Garamond** (vendored), kept under `docs/FONTS.md` "No face named"; no substitution made. `pdffonts` on the 2026-10-15 render: only EB Garamond embedded (Regular, Bold, BoldItalic) |
-| render | ok (re-run 2026-10-15): `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings |
-| overlay | **fail** (re-run 2026-10-15): `tools/overlay.sh` exits 1 because `usage/` holds only `SOURCE.md`; the filed PDF named there is not in this snapshot. `usage/OVERLAY-murphy-complaint.txt` is the earlier page map, not regenerated; no `OVERLAY-murphy-complaint.pdf` exists |
-| pages reviewed | 10 of 10 (re-rendered 2026-10-15 at 60 dpi; every page looked at, none changed) |
+| typeface | face required: **none** (the E.D. Pa. local civil rules name no face; see Governing rules). Font: **Times New Roman** 12 pt (vendored, docs/FONTS.md), the exemplar's face and the house standard; the typst, docx and LibreOffice PDF all name it (`fb lint fonts` does not report the folder) |
+| render | ok (2026-10-22): `usage/OUTPUT-complaint.typst.pdf`, 11 pages, and `usage/OUTPUT-complaint.docx` with its LibreOffice PDF, 11 pages; `fb render`, vendored fonts only, no warnings |
+| overlay | `just overlay` writes `.overlay/<doc path>/OVERLAY-complaint.pdf` (not committed); a diagnostic, not a score |
+| pages reviewed | 11 of 11, both engines, side by side at 50 dpi (2026-10-22, the renders of fb-595.68.35) |
 | tier 1 (mandated form) | checked against the rules below; no mandated typography exists in the E.D. Pa. local rules |
 | tier 2 (professional convention) | judged against one filer only (see Known gaps 1) |
 
@@ -28,20 +28,21 @@ Primary source: **Local Rules of Civil Procedure, E.D. Pa.** (the consolidated c
 | EDPA-COMP-005 | E.D. Pa. Local Civil Rule 40.1 (b) | Attorneys must indicate relatedness on the Civil Cover Sheet and the Designation Form that accompany the complaint. | not generated: separate filings, listed under "Not produced" |
 | EDPA-COMP-006 | E.D. Pa. Local Civil Rule 5.1.2(7) | Certificate of service for documents filed through ECF. Applies to documents served by ECF; the initial complaint is served with a summons under Fed. R. Civ. P. 4, so it carries no certificate in the exemplar, and the template does not add one. | `motion-brief/` carries the certificate for filed motions |
 
-Local typography and margin rules: **none in the E.D. Pa. local civil rules text above.** Re-checked 2026-10-15 by extracting the full text of the 05/08/2023 PDF (poppler `pdftotext`): no typeface, font size, spacing or margin rule in Rules 5.1, 5.1.1, 5.1.2 or elsewhere. So no face is named and EB Garamond stays. The only page limits in that text are for habeas petitions and responses (30 and 150 pages), and Local Civil Rule 7.1(c) directs counsel to each judge's policies. The typeface, size, spacing and margins below are therefore convention, not rule; they are chosen to match the filed exemplar where the exemplar is readable (double spacing, 12 point, 1-inch margins).
+Local typography and margin rules: **none in the E.D. Pa. local civil rules text above.** Re-checked 2026-10-15 by extracting the full text of the 05/08/2023 PDF (poppler `pdftotext`): no typeface, font size, spacing or margin rule in Rules 5.1, 5.1.1, 5.1.2 or elsewhere. So no face is named; the template sets Times New Roman, the face of the filed exemplar and the house standard. The only page limits in that text are for habeas petitions and responses (30 and 150 pages), and Local Civil Rule 7.1(c) directs counsel to each judge's policies. The typeface, size, spacing and margins below are therefore convention, not rule; they are chosen to match the filed exemplar where the exemplar is readable (double spacing, 12 point, 1-inch margins).
 
 Not produced by this template (separate filings the Clerk needs with the complaint): the Civil Cover Sheet (JS-44C) and the Designation Form (LR 40.1(b)); the Rule 7.1 disclosure statement if the party is a corporation; the summons. The exemplar's docket entry lists its Civil Cover Sheet and Designation Form as ECF attachments (# 1 and # 2).
 
 ## Layout (the convention, from the exemplar)
 
-- Letter paper, 1-inch margins on all sides. Footer: centered page number, no ECF header.
-- Caption: court title in two bold centered lines (`court_lines`); then the party block in single spacing, a column of `:` marks, and `Civil Action No.` on the right. A blank case number prints as a line for the Clerk.
-- Title of the pleading bold and centered, below the caption.
-- Body double-spaced (24 pt baseline pitch at 12 pt), first-line indent, numbered paragraphs.
-- Section headings: level 1 centered bold capitals; level 2 centered bold; level 3 bold italic at the left margin.
-- Lettered lists `(a)`, `(b)`, ... (markdown `1.` items).
+- Letter paper, 1-inch margins on all sides, Times New Roman 12 pt. Footer: centered page number in a single-pitch line ending 0.5 in above the page edge, no ECF header.
+- The cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): every line a box of its pitch, 24 pt for the body (double spacing, as the exemplar), 13.8 pt for single lines (court title, caption, title, signature, footer); the spaces between blocks explicit.
+- Caption: court title in bold centered single lines (`court_lines`), a blank single line, then the party block in single lines, a column of `:` marks (one per party line), and `Civil Action No.` on the middle line of the party column (the upper middle when the count is even) at the right. A blank case number prints as a line for the Clerk.
+- Title of the pleading bold and centered, a blank single line below the caption and above the text.
+- Body: numbered paragraphs, the number at the half-inch indent in a 0.5 in box (the text starts 1 in from the margin; a tab in the docx).
+- Section headings at the type size on the body pitch with no space of their own, kept with the next block: level 1 centered bold capitals; level 2 centered bold; level 3 bold italic at the left margin.
+- Lettered lists `(a)`, `(b)`, ... (markdown `1.` items): the letter half an inch in, the text hanging at 0.9 in.
 - A paragraph opening with `WHEREFORE` is the request for relief and is not numbered.
-- Signature block: firm, `BY: /s/` the signer, the signer's name and address lines, `Date:` line.
+- Signature block, single-spaced at the margin, 24 pt below the last paragraph and kept with it: firm, `BY: /s/` the signer and the signer's lines, `Date:` line, 12 pt apart.
 
 ## Markdown contract (for samples)
 
@@ -52,50 +53,51 @@ Not produced by this template (separate filings the Clerk needs with the complai
 ## Render and overlay
 
 ```sh
-export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
 sh tools/render.sh courts/third-circuit/pennsylvania/federal/eastern-district/complaint usage/INPUT-complaint.md
-sh tools/overlay.sh courts/third-circuit/pennsylvania/federal/eastern-district/complaint murphy-complaint
+sh tools/render.sh --engine docx courts/third-circuit/pennsylvania/federal/eastern-district/complaint usage/INPUT-complaint.md
+just overlay courts/third-circuit/pennsylvania/federal/eastern-district/complaint
 ```
 
-- `usage/OVERLAY-murphy-complaint.pdf`: red = our render, blue = exemplar, black = both. `OVERLAY-murphy-complaint.txt` is the page map (our page to the filed page with the most shared words). The overlay is a diagnostic, not a score: the filed exemplar is Times with an ECF header and a different line breaking, so text lines will not coincide.
+The overlay (red = our render, blue = exemplar, black = both) is a diagnostic, not a score: the filed exemplar has an ECF header and its own line breaking, so text lines will not coincide.
 
-## Visual review (all 10 pages rendered at 60 dpi and looked at, final render)
+## Visual review (all 11 pages, typst and docx side by side at 50 dpi, 2026-10-22)
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Caption, title, lead-in, Introduction, paragraphs 1 to 4 | OK. Caption colon column aligned; "Civil Action No." blank line. |
-| 2 | Paragraphs 5 to 11: the introduction's end, jurisdiction and venue, parties | OK. |
-| 3 | FACTS, consumer-reports heading, paragraphs 12 to 17 | OK. |
-| 4 | Mixed-file section, paragraphs 18 to 25 | OK. |
-| 5 | Case background, Two Different Consumers, paragraphs 26 to 29, list (a) to (e) | OK. |
-| 6 | List (f) to (j), paragraphs 30 to 33 | OK. |
-| 7 | Mr. Murphy's disputes, paragraphs 34 to 39 | OK. |
-| 8 | Paragraphs 40 to 46 | OK. |
-| 9 | Paragraphs 47 to 53, Count One heading | OK. |
-| 10 | Paragraphs 54 and 55, jury demand, prayer (a) to (e), signature | OK. |
+| 1 | Caption, title, lead-in, Introduction, paragraphs 1 to 4 | OK, both engines alike. Caption colon column aligned; "Civil Action No." blank line on the "v." line. |
+| 2 | Paragraphs 4 to 9: the introduction's end, jurisdiction and venue | OK. Ends three lines short: the PARTIES heading stays with paragraph 10. |
+| 3 | PARTIES, FACTS, consumer-reports heading, paragraphs 10 to 15 | OK. |
+| 4 | Insurance-reporting and mixed-file sections, paragraphs 16 to 22 | OK. |
+| 5 | Paragraphs 23 to 29, Case Background, Two Different Consumers, list (a) and (b) | OK. |
+| 6 | List (c) to (j), paragraph 30 | OK; the hanging text of each item at 0.9 in. |
+| 7 | Paragraphs 31 to 38, the insurance and disputes headings | OK. |
+| 8 | Paragraphs 39 to 44 | OK. |
+| 9 | Paragraphs 44 to 51, Count One heading | OK. |
+| 10 | Paragraphs 52 to 55, jury demand, prayer, (a) to (d) | OK. Ends short: item (e) is kept with the signature. |
+| 11 | Item (e), signature block | OK; the signature never stands alone. |
 
-Defects found during review and fixed in the template:
+The docx PDF breaks every line and page where the typst PDF does (XENG-001..003: 280/280 lines, 11/11 pages).
 
-1. Numbered paragraphs and headings overlapped one another on the first render (no fixed block height). Fixed by snapping every paragraph, heading and the request for relief to whole pitch rows (`on-grid`, the same device the CAND complaint uses).
-2. Level-1 and level-2 headings printed at the default heading size (about 1.4 em). Fixed by setting `size: type-size` in the heading show rules.
-3. A paragraph that broke across a page could overlap the paragraph after it (a fixed-height block that splits). Fixed by making paragraph blocks unbreakable (`on-grid(breakable: false)`): a paragraph moves whole to the next page, which can leave a short gap at the foot of a page.
+Defects of the earlier template (fixed by the cross-engine port, fb-595.68.35): blocks snapped to whole 24 pt rows by measuring (`on-grid`), unbreakable paragraphs that left gaps at page foot, the number 0.3 in before the text (the docx used a tab), and a docx in EB Garamond with one blank 24 pt paragraph where typst set 16 pt.
 
 ## Known gaps and open choices
 
 1. **One filer only.** The tier-2 rule asks for two or three exemplars from different filers. Two more E.D. Pa. complaints with text layers were located and checked (Evenstad v. CoilPlus, 2:26-cv-07849, Gurmankin; Johnson v. La Academia, 5:26-cv-07834, Zeff) but not saved, per the brief's one-exemplar-per-doc-type rule. Tier 2 is therefore not yet judged against the 2-to-3-filer standard. **Needs a call from David**: save both as further exemplars.
-2. **Typeface.** The local rules name no face, so EB Garamond stays (`docs/FONTS.md`, "No face named"). The filed exemplar is Times New Roman, which is a choice by its filer, not a requirement. EB Garamond sets smaller at 12 pt than Times, so the text looks smaller than the exemplar. The 12-point size is met; the difference is visible, not a rule defect.
+2. **Typeface.** The local rules name no face. Times New Roman 12 pt, the face of the filed exemplar and the house standard, in every engine.
 3. **Margins and spacing.** The local rules set none; 1-inch margins and double spacing match the exemplar.
 4. **Arbitration statement (LR 5.1.1).** The rule requires the complaint to reveal whether the case is subject to arbitration under LR 53.2. The sample's jurisdiction and venue section does not carry that statement, because the full text of the exemplar has no such statement (a search of the whole text layer finds none, so the filed complaint omits it); a real filing needs it. The template does not check for it. Author content.
 5. **ECF header.** Not reproduced; court-generated.
 6. **Paragraph numbers.** The sample numbers from 1; the filed numbers are not transcribed, so the overlay's paragraph numbers do not match.
 7. **Partial transcription.** The sample is a portion of the 22-page filing (introduction, jurisdiction, parties, selected facts, Count One, prayer, signature); passages are omitted without ellipses (see the frontmatter comment).
 8. **Civil Cover Sheet, Designation Form, Rule 7.1 statement, summons** are not generated (see Governing rules).
-9. **Shared tools not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape. The brief forbids editing `tools/`, so the gates were not run. Render and overlay were run; the review above is the Gate 2 record for this doc type.
+9. **Selftest.** `tools/check-selftest.sh` needs a `court.json`, which this doc-type folder does not have; `tools/check.sh` runs on it (typst and docx, 0 failed).
 10. **Citations to Fed. R. Civ. P. 10 and 8** were not fetched in this run; only the E.D. Pa. local rules PDF was downloaded and read.
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/paed.lua`): pandoc on a reference with the template's typography (EB Garamond 12 pt, exact 24 pt line pitch, 0.5 in first-line indent, 1 in margins on US Letter, centered page number, centered and bold headings with level 3 in bold italic at the margin, single-spaced caption and counsel block). The Lua filter builds what pandoc cannot write from the markdown contract: the cover (court title, caption table with its column of colons, title of the pleading), the lead-in, the numbered allegations (numbers typed by the filter, so the numbering runs from 1; a paragraph opening with WHEREFORE is not numbered), the lettered lists `(a)`, and the signature block. Output: `usage/OUTPUT-complaint.docx`. Built with `sh docx/build-reference.sh docx/reference.docx` and `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/paed.lua usage/INPUT-complaint.md -o usage/OUTPUT-complaint.docx`. Checked only as a zip of well-formed XML (every entry read, every XML part passes `xmllint --noout`). Not opened in Word or LibreOffice.
-- **docx differs from typst**: the caption's right cell is top-aligned (typst centers it vertically); the numbers are typed text, so Word does not renumber them when a paragraph is inserted; the space between blocks is one 24 pt line where typst uses 16.2 pt; pagination is Word's, so page breaks and the gaps that typst's unbreakable paragraphs leave at page foot differ.
-- **docx BLOCKED**: this court folder has no checks file (no `checks.yaml`), so no gate check ID can be listed. Gates 0 to 3 on `usage/OUTPUT-murphy-complaint.docx.pdf` are BLOCKED. Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and every page where the typst render does, and `eval.yaml` gates it (`params.cross_engine: gate`, fb-595.68.35).
+
+- **typst** (primary, `typst/paed-complaint.typ`): the reference.
+- **docx** (`docx/`): `docx/reference.xml` (`base="xengine"`, the typst face `{font}` = Times New Roman, 12 pt; Body Text in exact 24 pt line boxes with a 0.5 in first-line indent, single lines 13.8 pt; the heading levels at the type size on the body pitch; "Numbered Paragraph" with a tab 1 in from the margin; "Lettered" hanging at 0.9 in; letter page, 1 in margins, the footer 0.5 in above the edge) and `docx/paed-complaint.lua` on `lib/docx/xengine.lua`, which writes the court title, the caption table, the title, the lead-in, the numbered paragraphs and lettered items (numbers typed, as typst types them), the signature kept with the last item, the footer (`$FORMBOOK_FOOTERS`) and the last section (`$FORMBOOK_FINAL`). `fb render` builds the reference and runs the passes; no shell script (fb-595.68).
+- Checks (2026-10-22): typst 9 passed, 0 failed; docx 13 passed, 0 failed, XENG-001..003 PASS (280/280 lines, 11/11 pages).
+- Word: not available here. The file converts in LibreOffice with no error; Word may paginate slightly differently (docs/DOCX.md).
