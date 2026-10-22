@@ -1,0 +1,84 @@
+# Supreme Court of Alabama (ala): petition for writ of certiorari to a court of appeals (ARAP 39(d)). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to the Alabama Rules of Appellate Procedure (../rules.md, ALA-*); lengths in points. No case text here: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant (the court's name, the certificates' form
+# text).
+size: 14                  # ALA-FORM-004 (ARAP 32(a)(7)): Century Schoolbook 14 point, footnotes included
+pitch:
+  body: 33.6              # ALA-FORM-002 (ARAP 32(a)(6)): text double spaced (2 x 1.2 x 14 pt, Schola's single line)
+  single: 16.8            # headings, footnotes, quotations, cover, tables and signature single spaced (32(a)(6))
+# ALA-FORM-003 (32(a)(6)): at least one inch on all four sides; the top a little deeper, so the first line's glyph
+# boxes (taller in Word's PDF, 23.1 pt at 14 pt) and a footnote mark raised above it stay inside the inch.
+margin: {top: 75.6, bottom: 72, left: 72, right: 72}
+indent: 36
+justify: true             # ALA-FORM-004 (32(a)(7)): text and footnotes fully justified
+# ALA-LEN-004 (ARAP 28(j)(1)): pages numbered in Arabic numerals from the cover; the cover shows no number.
+page_number: {align: center, from: 2}
+footnote: {size: 14, gap: 8.4}   # ALA-FORM-002, -004: footnotes 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8, gap: 8.4}   # ALA-FORM-002: quotations indented, single spaced
+# Headings single spaced (32(a)(6)) and kept with their text: level 1 a section, centred bold capitals, unnumbered;
+# levels 2 to 5 the argument's points, numbered by the template I., A., 1., a., the title hung half an inch.
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, number: "I.", label_box: 36, above: 16.8, below: 11.2}
+  - {bold: true, number: "A.", label_box: 36, above: 14, below: 11.2}
+  - {bold: true, number: "1.", label_box: 36, above: 14, below: 11.2}
+  - {bold: true, italic: true, number: "a.", label_box: 36, above: 14, below: 11.2}
+# ALA-COV-001 (ARAP 28(d)(1)-(6)): the docket number centred at the top, the court, the style of the case, the
+# proceeding and the court below, the title naming the party, counsel; ALA-COV-002 (28(d)(7)): "Oral Argument
+# Requested" when it is. The title halfway down what the caption leaves, counsel at the foot. The cover's colour
+# (ALA-COV-004) is the paper's: the PDF is filed on white.
+cover:
+  - {text: "No. {case_number}", align: center, bold: true}
+  - {text: "IN THE SUPREME COURT OF ALABAMA", align: center, bold: true, above: 16.8}
+  - {text: "{caption.0.names}", align: center, above: 22.4}
+  - {text: "{caption.0.designation}", align: center, italic: true}
+  - when: caption.1
+    blocks:
+      - {text: "v.", align: center, above: 11.2, below: 11.2}
+      - {text: "{caption.1.names}", align: center}
+      - {text: "{caption.1.designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 22.4}
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true, upper: true}
+  - when: oral_argument
+    blocks:
+      - {text: "ORAL ARGUMENT REQUESTED", align: center, bold: true, above: 16.8}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - {text: "{names}", bold: true, left: 230.4, above: 8.4}
+      - {text: "{lines}", left: 230.4, optional: true}
+# ALA-CERT-001 (ARAP 32(d)): the words of the body (it has no statement of the case to count from), for the certificate.
+words: {}
+# ALA-SEC-001 (ARAP 28(a)(2), (4)): the table of contents and the table of authorities.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 36, step: 21, above: 12.6}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 72
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 4.2}
+# The date and the signature (ARAP 32(a)(4): counsel's name, address, telephone and e-mail), right of centre, never
+# split; then ALA-CERT-001 (ARAP 28(a)(12), 32(d)): the certificate of compliance, its word count computed, the face and
+# size, on a page of its own; ALA-CERT-002 (28(a)(13), 31(b)): the certificate of service; each signed and kept whole.
+closing:
+  - group:
+      - {text: "{date}", optional: true, pitch: body, indent: 36}
+      - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 5.6}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true}
+    above: 21.6
+  - {break: true}
+  - group:
+      - {text: "Certificate of Compliance", heading: 1}
+      - {text: "I hereby certify that this petition complies with the form and word limitations of Alabama Rules of Appellate Procedure 39(d) and 32(b)(2). This document is submitted in Century Schoolbook font, size 14, and contains {xd.words} words.", pitch: body, indent: 36}
+      - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 5.6}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true}
+  - group:
+      - {text: "Certificate of Service", heading: 1}
+      - {text: "I hereby certify that I electronically filed the foregoing with the Court using the Alabama Appeals e-File system, which will send notification of such filing to all counsel of record, and that a copy has been served on each party to the proceeding in the court of appeals, as Alabama Rules of Appellate Procedure 39(e) requires.", pitch: body, indent: 36}
+      - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 5.6}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true}

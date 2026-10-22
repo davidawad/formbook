@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # Word: LibreOffice fits a justified Schola line typst fills to within a few tenths of a point (its twip rounding),
+  # and fb measure merges two single-spaced lines of a LibreOffice PDF whose Schola glyph boxes (23.1 pt at 14 pt)
+  # overlap; both are shared-model or tool items (docs/open-items/fb-595.54.52.md). Reported, not gated
+  # (fb-595.54.52).
+  cross_engine_docx: report
