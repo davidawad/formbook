@@ -2,116 +2,187 @@
 % the same form (FRAP 32(a)): Times (newtx) 14 pt, double-spaced body, 1 inch margins, roman front matter,
 % arabic body, Add-N addendum. The content (cover, TOC, TOA, certificates, headings) is built by ca1.lua
 % from the markdown and its frontmatter; this file only holds the page layout and the macros it calls.
+% Compiled with stock pdflatex: the fonts are TeX Live packages (no repo-local file, no system font).
+%
+% Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): this template sets every line and page break where
+% the typst template (the reference) sets them. The model itself (no kerning or ligatures, first-fit breaking, fixed
+% line boxes, no widows, footnote marks, list labels, contents rows) is the shared package lib/latex/xengine.sty,
+% which fb render inlines into the generated .tex in place of \usepackage{xengine}; the inline rules are
+% lib/latex/xengine.lua, run by ca1.lua. Every size and space here is in bp (14 bp = typst's 14 pt), and blocks are
+% spaced with \addvspace (the larger of the space below one and above the next).
 \documentclass[14pt,letterpaper]{extarticle}
 \usepackage[T1]{fontenc}
 % FRAP 32(a)(5)(A): proportionally spaced serif, Times. newtxtext/newtxmath ship with every TeX Live, so the generated
 % .tex compiles with stock pdflatex and no repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible
 % with Times New Roman.
 \usepackage{newtxtext,newtxmath}
-\usepackage[letterpaper,margin=1in,footskip=0.5in]{geometry}   % FRAP 32(a)(4)
-\usepackage{indentfirst}     % every paragraph is indented, including the first after a heading
-\usepackage{needspace}
+% FRAP 32(a)(4): letter, 1 in margins; the page number in the bottom margin, as typst sets it.
+\usepackage[letterpaper,margin=1in,headheight=0pt,headsep=0pt,footskip=37.6bp]{geometry}
+\usepackage{enumitem}
 \usepackage{longtable,booktabs}
-\usepackage{tikz}            % check boxes of the certificates (drawn, no glyph needed)
+\usepackage{xengine} % lib/latex/xengine.sty, inlined by fb render
+% Links in the brief are citations (toa:) or none; the fallbacks keep pandoc's output valid.
 \providecommand{\href}[2]{#2}
 \providecommand{\url}[1]{\texttt{#1}}
-\usepackage{etoolbox}
-\raggedright                 % typst: justify: false
-\hyphenpenalty=10000 \exhyphenpenalty=10000   % typst: hyphenate: false
-\setlength{\parindent}{0.5in}  % typst: para-indent
-\setlength{\parskip}{0pt}
-\setlength{\emergencystretch}{0pt}
-\pagestyle{plain}
+\providecommand{\hypertarget}[2]{#2}
+\providecommand{\hyperlink}[2]{#2}
+
 \makeatletter
-\AtBeginDocument{%
-  \renewcommand\normalsize{\@setfontsize\normalsize{14pt}{31.5pt}}%   double spacing (typst body-leading, 31.4 bp pitch)
-  \normalsize
-}
-\renewcommand\footnotesize{\@setfontsize\footnotesize{14pt}{16pt}}   % FRAP 32(a)(5)(A): footnotes 14 pt too
-\renewcommand\footnoterule{\kern-3pt\hrule width 0.3\textwidth height 0.5pt\kern2.6pt}
-\setlength{\footnotesep}{0.5em}
-\renewcommand\@makefntext[1]{\noindent\setlength{\parindent}{0pt}\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
-\renewenvironment{quote}{%
-  \par\begingroup\leftskip=0.5in\rightskip=0.5in\parindent=0pt
-  \fontsize{14pt}{16pt}\selectfont\vspace{1em}%
-}{\par\vspace{1em}\endgroup}
+% Line boxes [typst pitch-double, pitch-single]: FRAP 32(a)(4) double spacing, 31.4 bp, for the body; single spacing,
+% 20 bp, for headings, quotations, footnotes (14 pt too, FRAP 32(a)(5)(A)), the TOC/TOA, the cover and the
+% certificates.
+\renewcommand\normalsize{\xe@lines{14}{31.4}}
+\newcommand\singlespacing{\xe@lines{14}{20}}
+\renewcommand\footnotesize{\xe@lines{14}{20}}
+\newcommand\caoneheadsize{\xe@lines{16}{20}}   % section headings: 16 pt [heading-size]
+\normalsize
+\setlength{\parindent}{0.5in} % after xengine.sty's \raggedright, which sets it to zero [para-indent]
+\setcounter{secnumdepth}{-\maxdimen}
+\xe@lists{0.5in}
+% The page number in the 14 bp type, single-spaced.
+\def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
+  \def\@oddfoot{\reset@font\singlespacing\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}
+\pagestyle{plain}
 \providecommand\tightlist{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\pandocbounded}[1]{#1}
 
-% ---- Headings (typst style-heading) ----
-\newcommand{\caonesingle}{\fontsize{14pt}{16pt}\selectfont}
-% One TOC/TOA line: the entry text (wrapped lines hang under the title), dot leader, page.
-\newcommand{\caonetocentry}[3]{\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\hspace*{#1}\makebox[0.5in][l]{#2}#3}
-\newcommand\l@caonetoc[2]{\par\addvspace{0.4em}\begingroup\caonesingle\setlength{\parfillskip}{0pt}\noindent#1\nobreak\ %
-  \leaders\hbox{.\hspace{0.16em}}\hfill\nobreak\hbox to 2.6em{\hfill#2}\par\endgroup}
-% Section heading (level 1): centered, bold, capitals. Listed in the TOC unless the caller says otherwise.
-\newcommand{\caonesec}[1]{%
-  \par\addvspace{21pt}%
-  \addcontentsline{toc}{caonetoc}{\caonetocentry{0pt}{}{\uppercase{#1}}}%
-  \begingroup\centering\fontsize{16.1pt}{19pt}\selectfont\bfseries\MakeUppercase{#1}\par\endgroup
-  \nobreak\vspace{15pt}\par\nobreak}
-\newcommand{\caonesecnotoc}[1]{%
-  \par\addvspace{21pt}%
-  \begingroup\centering\fontsize{16.1pt}{19pt}\selectfont\bfseries\MakeUppercase{#1}\par\endgroup
-  \nobreak\vspace{15pt}\par\nobreak}
-% Point heading in the Argument (level 2): centered, bold, with its numeral. Not small capitals: Times New Roman has
-% none, and newtx bold small capitals share a font descriptor with the upright bold whose ascent and descent they
-% would shrink (the word heights the type-size check measures). A heading of several lines is never broken
-% across pages (\interlinepenalty); the \nobreak after it keeps it with the text. The contents entry is written
-% inside the heading's paragraph: written between the headings, it would be a place to break the page.
-\newcommand{\caonepoint}[2]{%
-  \par\addvspace{16.8pt}%
-  \begingroup\caonesingle\centering\bfseries\interlinepenalty=10000
-  \leavevmode\addcontentsline{toc}{caonetoc}{\caonetocentry{0pt}{#1}{#2}}#1\ #2\par\endgroup
-  \nobreak\vspace{14pt}\par\nobreak}
-% Sub-heading (levels 2-5 outside the point headings): label in a 0.5 in box, text hangs under it.
-% Args: indent, label, title, level. Levels 4 and 5 are bold italic; levels 4-5 are not in the TOC.
-\newcommand{\caonesub}[4]{%
-  \par\addvspace{1.1em}%
-  \ifnum#4<5 \addcontentsline{toc}{caonetoc}{\caonetocentry{#1}{#2}{#3}}\fi
-  \begingroup\caonesingle\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\noindent\hspace*{#1}%
-  \ifnum#4>3 \itshape\fi\bfseries
-  \makebox[0.5in][l]{#2}#3\par\endgroup
-  \nobreak\vspace{0.9em}\par\nobreak}
-% Unnumbered sub-heading in the addendum: bold, left. Its label records the page for the addendum's contents.
+% Footnotes [footnote.entry]: 12.6 bp clear of the text, a 30 % rule; the mark (58 % of 14 pt) and a quarter em
+% before the text, 7 bp between paragraphs. LaTeX resets the right skip inside a footnote: it is set back here.
+\setlength{\skip\footins}{12.6bp}
+\renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
+\xe@footnotemarks{14}
+\renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
+  \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25em #1}
+
+% The brief's last block (a paragraph or a list) is not broken across pages and stays with the signature block
+% (typst: one unbreakable block): no break between its lines, between its items, or after it.
+\newcommand\caonekeep{\interlinepenalty=10000\relax\@itempenalty=10000\relax\@endparpenalty=10000\relax}
+
+% An ellipsis (U+2026) as Times New Roman sets it, one glyph a full em wide; its text is the one character (an
+% ActualText span), not the three periods T1 encoding (which has no ellipsis) would leave in the PDF.
+\newcommand\caoneellipsis{\pdfliteral page{/Span<</ActualText<FEFF2026>>>BDC}\hbox to 1em{\hfil.\hfil.\hfil.\hfil}%
+  \pdfliteral page{EMC}}
+
+% The gaps between the cover's parts: 7 bp, more to fill the page, none when the page is full (typst: the largest
+% gap at which the cover fits one page).
+\newcommand\cagap{\vskip 7bp plus 1fill minus 7bp}
+\newcommand\cahalfgap{\vskip 2.1bp plus 0.3fill minus 2.1bp}
+
+% Block quotations [quote]: 0.5 in in from both margins, single-spaced, 14 bp above and below, 12.6 bp between
+% paragraphs.
+\renewenvironment{quote}{%
+  \par\addvspace{14bp}%
+  \begingroup\leftskip=0.5in\rightskip=\dimexpr0.5in\relax plus 1fil\relax\singlespacing\parindent=0pt\relax
+  \parskip=12.6bp\relax
+}{%
+  \par\endgroup\addvspace{14bp}%
+}
+
+% ---- Headings [style-heading] ----
+% A section heading (level 1): centered, bold capitals, 16 pt; 21 bp above, 15.4 bp below. #1 title, #2 label name.
+% A heading never ends a page (\nobreak, and no orphans after it); the label sits inside the heading's paragraph.
+\newcommand{\caonesec}[2]{%
+  \par\addvspace{21bp}%
+  \begingroup\centering\caoneheadsize\bfseries\leavevmode\label{#2}\MakeUppercase{#1}\par\endgroup
+  \nobreak\addvspace{15.4bp}}
+% A point heading in the Argument (level 2): centered, bold, with its numeral; 16.8 bp above, 14 bp below. Not small
+% capitals: Times New Roman has none, and the engines would synthesize them differently. #1 label, #2 title,
+% #3 label name.
+\newcommand{\caonepoint}[3]{%
+  \par\addvspace{16.8bp}%
+  \begingroup\centering\singlespacing\bfseries\interlinepenalty=10000\relax
+  \leavevmode\label{#3}#1 #2\par\endgroup
+  \nobreak\addvspace{14bp}}
+% A sub-heading (levels 2-5 outside the point headings): the label in a 0.5 in box at #1 half inches, the text hanging
+% under the text; bold, bold italic from level 4; 15.4 bp above, 12.6 bp below. #1 steps, #2 label, #3 title, #4 level,
+% #5 label name.
+\newcommand{\caonesub}[5]{%
+  \par\addvspace{15.4bp}%
+  \begingroup\singlespacing\noindent\interlinepenalty=10000\relax
+  \hangindent=\dimexpr0.5in*(#1+1)\relax\hangafter=1\relax
+  \hspace*{\dimexpr0.5in*#1\relax}\label{#5}%
+  \ifnum#4>3 \makebox[0.5in][l]{\textbf{\emph{#2}}}\textbf{\emph{#3}}\else\makebox[0.5in][l]{\textbf{#2}}\textbf{#3}\fi
+  \par\endgroup\nobreak\addvspace{12.6bp}}
+% An unnumbered sub-heading (the addendum's entries): bold, at the margin; 16.8 bp above, 12.6 bp below.
 \newcommand{\caoneaddsub}[2]{%
-  \par\addvspace{1.2em}\label{#2}%
-  \begingroup\caonesingle\noindent\bfseries#1\par\endgroup\nobreak\vspace{0.9em}\par\nobreak}
+  \par\addvspace{16.8bp}%
+  \begingroup\singlespacing\noindent\interlinepenalty=10000\relax\label{#2}\textbf{#1}\par\endgroup
+  \nobreak\addvspace{12.6bp}}
 
-% ---- Table of contents and of authorities ----
-\newcommand{\caonetocprint}{\@starttoc{toc}}
-% One line of the addendum's contents, its page from the label (\pageref, so LaTeX reruns it).
-\newcommand{\caoneaddtocline}[2]{\l@caonetoc{\caonetocentry{0pt}{}{#1}}{\pageref{#2}}}
-% Citation: the text, plus a record of its page in the aux file (read on the next pass).
-\newcommand{\toahit}[2]{#2\protected@write\@auxout{}{\string\caonetoaref{#1}{\thepage}}}
-\newcommand{\caonetoaref}[2]{%
-  \@ifundefined{caonetoaseen@#1@#2}{%
-    \expandafter\gdef\csname caonetoaseen@#1@#2\endcsname{}%
-    \@ifundefined{caonetoapl@#1}{%
-      \expandafter\gdef\csname caonetoapl@#1\endcsname{#2}%
-      \expandafter\gdef\csname caonetoan@#1\endcsname{1}%
-    }{%
-      \expandafter\xdef\csname caonetoapl@#1\endcsname{\csname caonetoapl@#1\endcsname, #2}%
-      \expandafter\xdef\csname caonetoan@#1\endcsname{\number\numexpr\csname caonetoan@#1\endcsname+1\relax}%
+% ---- Table of contents [toc-entry, listing-row] ----
+% One row: the text wraps before a 36 bp page column, a dot leader runs to the page. #1 level (1: a section, 8.4 bp
+% above; else 4.9 bp), #2 indent of the label in half inches, #3 label (empty: none), #4 title, #5 label name.
+\newcommand{\caonetocline}[5]{%
+  \begingroup\singlespacing\setlength{\xe@col}{36bp}%
+  \def\ca@lab{#3}%
+  \xe@row{\ifnum#1=1 8.4bp\else 4.9bp\fi}{\dimexpr0.5in*(#2+1)\relax}{%
+    \hspace*{\dimexpr0.5in*#2\relax}\ifx\ca@lab\@empty\else\makebox[0.5in][l]{#3}\fi
+    \ifnum#1=1 \MakeUppercase{#4}\else#4\fi}{\pageref{#5}}%
+  \endgroup}
+% The "Page" column head [toc-section]: bold, underlined, at the right margin, 4.2 bp below the title.
+\newcommand{\caonetocpage}{\par\addvspace{4.2bp}\begingroup\raggedleft\singlespacing\bfseries\underline{Page}\par\endgroup}
+
+% ---- Table of authorities [toa-section] ----
+% Each citation writes its page to the .aux file (\toahit, at shipout time, before its first word); the next run reads
+% them back as \toapg@<key> = "p1,p2,...". \toapages prints the distinct pages in document order; 7 or more distinct
+% pages print as "passim" (typst passim-threshold).
+\newcommand{\toahit}[1]{\protected@write\@auxout{}{\string\toarec{#1}{\thepage}}}
+\newcommand{\toarec}[2]{%
+  \@ifundefined{toapg@#1}%
+    {\expandafter\gdef\csname toapg@#1\endcsname{#2,}}%
+    {\expandafter\xdef\csname toapg@#1\endcsname{\csname toapg@#1\endcsname#2,}}}
+\newcounter{toacnt}
+\newcommand{\toapages}[1]{%
+  \setcounter{toacnt}{0}\gdef\toapgs{}\def\toalast{}%
+  \@ifundefined{toapg@#1}{}{%
+    \expandafter\let\expandafter\toalist\csname toapg@#1\endcsname
+    \@for\toap:=\toalist\do{%
+      \ifx\toap\empty\else
+        \ifx\toap\toalast\else
+          \ifnum\value{toacnt}>0 \xdef\toapgs{\toapgs, }\fi
+          \xdef\toapgs{\toapgs\toap}\stepcounter{toacnt}%
+        \fi
+        \edef\toalast{\toap}%
+      \fi
     }%
-  }{}}
-% Page list for one authority: "passim" at seven pages or more (typst passim-threshold).
-\newcommand{\caonetoapages}[1]{%
-  \@ifundefined{caonetoan@#1}{}{%
-    \ifnum\csname caonetoan@#1\endcsname>6 \emph{passim}\else\csname caonetoapl@#1\endcsname\fi}}
-\newcommand{\caonetoaentry}[2]{% display text, key
-  \par\addvspace{0.7em}\begingroup\caonesingle\noindent\hangindent=0.35in\hangafter=1 #1\ %
-  \leaders\hbox{.\hspace{0.16em}}\hfill\ \caonetoapages{#2}\par\endgroup}
-\newcommand{\caonetoahead}[1]{\par\addvspace{1em}\noindent\textbf{#1}\par\nobreak}
-\newcommand{\caonetoaheadpages}[1]{\par\addvspace{1em}\noindent\textbf{#1}\hfill\textbf{\underline{Page(s)}}\par\nobreak}
+  }%
+  \ifnum\value{toacnt}>6 \emph{passim}\else\toapgs\fi}
+% One authority [listing-row]: #1 name (empty for a statute etc.), #2 cite, #3 1 for a case, #4 key; the text hangs
+% 0.35 in, the page column is 56 bp, or the width of a longer page list; 9.8 bp above.
+\newlength\ca@w
+\newcommand{\toaitem}[4]{%
+  \begingroup\singlespacing
+  \settowidth{\ca@w}{\toapages{#4}}%
+  \setlength{\xe@col}{56bp}\ifdim\ca@w>\xe@col\setlength{\xe@col}{\ca@w}\fi
+  \def\toaname{#1}%
+  \xe@row{9.8bp}{0.35in}{\ifx\toaname\empty\else\ifnum#3=1 \emph{#1},\else#1,\fi\newline\fi #2}{\toapages{#4}}%
+  \endgroup}
+% A group heading: #1 title, #2 1 for the first group (carries the "Page(s)" column head); 14 / 19.6 bp above,
+% 2.8 bp below. It stays with its first entry.
+\newcommand{\toagroup}[2]{%
+  \par\ifnum#2=1 \addvspace{14bp}\else\addvspace{19.6bp}\fi
+  \begingroup\singlespacing\noindent\textbf{#1}%
+  \ifnum#2=1 \hskip 0pt plus 1fill\textbf{\underline{Page(s)}}\fi\par\endgroup\nobreak\addvspace{2.8bp}}
 
-% ---- Cover (FRAP 32(a)(2)) ----
-\newcommand{\caonedoublerule}{\par\noindent\rule{\textwidth}{1.6pt}\par\vspace{2.5pt}\noindent\rule{\textwidth}{0.5pt}\par}
-\newcommand{\caoneshortrule}{\par\begin{center}\rule{2in}{0.7pt}\end{center}\par}
-\newcommand{\caonecheckbox}[1]{%
-  \begin{tikzpicture}[baseline=-0.55ex,line width=0.7pt]
-    \draw (0,0) rectangle (0.72em,0.72em);
-    \ifnum#1=1 \draw (0,0) -- (0.72em,0.72em) (0,0.72em) -- (0.72em,0);\fi
-  \end{tikzpicture}}
+% ---- Cover (FRAP 32(a)(2)) [cover-body] ----
+% Rules in vertical mode with no interline glue: they cost their own height, as in typst.
+\newcommand{\caonedoublerule}{\par\nointerlineskip\hbox to\linewidth{\rule{\linewidth}{1.6pt}}\nointerlineskip
+  \vspace{2.5pt}\nointerlineskip\hbox to\linewidth{\rule{\linewidth}{0.5pt}}\nointerlineskip}
+\newcommand{\caoneshortrule}{\par\nointerlineskip\hbox to\linewidth{\hss\rule{2in}{0.7pt}\hss}\nointerlineskip}
+
+% ---- Certificates [checkbox, check-row] ----
+% A check box: a ruled box around a literal X, as tall as the face's ascender and descender.
+\newcommand\ca@box[1]{{\fboxsep=0pt\fboxrule=0.6bp\fbox{\vrule height 12.6bp depth 3bp width 0pt\hskip1bp #1\hskip1bp}}}
+% A row of a form: the box in a 22.4 bp column, 22.4 bp in from the margin; the text hangs after the box; 11.2 bp
+% above and below.
+\newcommand\caonecheckrow[1]{%
+  \par\addvspace{11.2bp}\begingroup\singlespacing\interlinepenalty=10000\relax
+  \noindent\hangindent=44.8bp\hangafter=1\relax
+  \hspace*{22.4bp}\makebox[22.4bp][l]{\ca@box{X}}#1\par\endgroup\addvspace{11.2bp}}
+% A numbered paragraph of a form [enum, list-indent 0.5 in]: the number in a 0.5 in box, the text hanging after it.
+\newcommand\caonenumpar[2]{%
+  \par\begingroup\singlespacing\interlinepenalty=10000\relax
+  \noindent\hangindent=0.5in\hangafter=1\relax\makebox[0.5in][l]{#1}#2\par\endgroup}
 
 \makeatother
 \begin{document}

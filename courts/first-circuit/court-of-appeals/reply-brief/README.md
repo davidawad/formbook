@@ -49,7 +49,7 @@ This run (2026-10-14): `tools/overlay.sh` could not write the PDF, because `usag
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-reply-brief.typst.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-reply-brief.typst.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: Times New Roman (vendored) only.
 
 | Page | Content | Result |
 |---|---|---|
@@ -57,7 +57,7 @@ Every page of `OUTPUT-reply-brief.typst.pdf` was rendered at 60 dpi and viewed (
 | 2 | Table of contents (roman "I." and "II." point headings with hanging indent) | OK. |
 | 3 | Table of authorities (two cases, page 3) | OK. |
 | 4 | Introduction; reply argument | OK. |
-| 5 | Point I heading (centered, small caps); text; bullet list | OK. |
+| 5 | Point I heading (centered, bold); text; bullet list | OK. |
 | 6 | Point I (continued): bullets; the *Taite* and *Ahmed* citations | OK. |
 | 7 | Point II heading; paragraph; "CONCLUSION" heading and its lead-in | OPEN (minor): the lead-in "should:" falls at the foot of page 7 and the bullets start on page 8. Nothing forces them together. |
 | 8 | Conclusion bullets; signature block | OK. |
@@ -77,26 +77,41 @@ Tier-2 findings (OPEN or ACCEPTED): the page-7 lead-in finding above (OPEN); the
 
 ## Engines
 
-The typst template is the reference. The same sample is rendered in two more engines; each has its own output in `usage/`.
+The typst template is the reference; the latex and docx engines render the same sample, each into `usage/`. All three
+set Times New Roman 14 pt (latex: newtx, its metric twin), the face the typst template names; the notes above that call
+the face EB Garamond are superseded (the docx engine set EB Garamond until fb-595.54.2 and failed `DEF-FONT-002`).
 
 | Engine | Folder | Output | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `usage/OUTPUT-reply-brief.typst.pdf` (10 pages) | unchanged |
-| latex | `latex/` (`template.tex` + `ca1.lua`, pdflatex) | `usage/OUTPUT-reply-brief.latex.pdf` (10 pages) | renders; checked by eye, see below |
-| docx | `docx/` (`reference.docx` + `ca1.lua`, pandoc) | `usage/OUTPUT-reply-brief.docx` | builds and validates; `.docx.pdf` BLOCKED (no LibreOffice) |
+| typst (primary) | `typst/` | `usage/OUTPUT-reply-brief.typst.pdf` (10 pages) | tier 1 green |
+| latex | `latex/` (`template.tex` + `ca1.lua`, pdflatex) | `usage/OUTPUT-reply-brief.latex.pdf` (10 pages) | tier 1 green; XENG-001..003 PASS |
+| docx | `docx/` (`reference.docx` + `ca1.lua`, pandoc, LibreOffice) | `usage/OUTPUT-reply-brief.docx`, `.docx.pdf` (10 pages) | tier 1 green; XENG-001..003 PASS |
 
-**LaTeX matches** (tier 1): Times 14 pt (newtx, stock TeX Live), body double-spaced at the typst pitch (31.5 pt), 1 inch margins, footnotes 14 pt, roman front matter, arabic body, the cover (FRAP 32(a)(2)), the TOC and TOA with page numbers from the aux file, the certificates (Form 6 wording and the word count, 901 words, equal to typst), the signature and the addendum with `Add-N` pages. No addendum in the sample; the addendum is optional here (1st Cir. R. 28.0(b)(1)), so none is rendered.
+Build: `sh docx/make-reference.sh` once (the output is committed), then `sh tools/check.sh <doc-dir> --engine typst|latex|docx`.
+The docx contents and authorities carry page numbers from a first LibreOffice pass (`fb render`, docxpass.rs: the
+needles `ca1.lua` writes).
 
-**LaTeX differs** (tier 2): the body breaks lines and pages a little differently, so the sample is 10 pages against typst's 10. The sub-heading paragraphs keep with the text below them by `\nobreak` only (`needspace` misfired in this box). The signature block is not kept with the last paragraph. Tectonic fetches TeX packages on its first run (cached afterwards).
+### Cross-engine (fb-595.54.2)
 
-**DOCX** (`usage/OUTPUT-reply-brief.docx`): the word count is 901, equal to typst. The cover, certificates and signature use the custom styles in `reference.docx`; the sections give roman front matter, arabic body and (addendum briefs) `Add-N`.
+The three engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and
+`xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Cross-engine gate"), and
+`eval.yaml` sets `params.cross_engine: gate`.
 
-BLOCKED (docx):
-- `docx.pdf` checks (every gate on the LibreOffice PDF): BLOCKED, no `soffice` on this box (LibreOffice has no conda-forge package; `docs/DOCX.md`). No `usage/.check-docx.txt` stamp is written.
-- Contents and authorities page numbers: no page numbers are printed. They need a first-pass layout, which needs LibreOffice. The entries list the headings and authorities only.
-- Point headings of the Argument are Heading 2 (left), not centered small capitals.
-- Check boxes are the text "[X]" (EB Garamond has no check-box glyph).
-- Cover rule lines are not drawn in the docx.
-- The `.docx` is not yet opened in Word or LibreOffice (no LibreOffice here), so the no-repair check is not done.
-
-Build: `sh docx/make-reference.sh none` once (the output is committed), then `sh tools/render.sh --engine latex|docx <court-dir> usage/INPUT-reply-brief.md`. The docx command exits non-zero at the LibreOffice step after writing the `.docx`.
+- typst: pitches 31.4 pt (body) and 20 pt (headings, quotations, footnotes, tables, cover, certificates) instead of
+  leadings; spaces between blocks in pt; `listing-row` contents (36 pt page column) and authorities (56 pt, or the page
+  list); section headings 16 pt (was 1.15 em, 16.1 pt: Word has only half points); point headings bold, not small
+  capitals; the check boxes a ruled box around an X; the designations, counsel and signature blocks start at the middle
+  of the text (`pad(left: 50%)` inside `align` had put them at their own width).
+- latex: `\usepackage{xengine}`, `\xe@lines`, `\addvspace`, `\xe@row`, `\xe@footnotemarks`, `\xe@lists`; the
+  contents from `\label`/`\pageref`; an ellipsis (U+2026) one em wide with its own text (T1 has no ellipsis glyph);
+  no break before a closing mark after a space (". . .,", UAX #14 LB13/LB15d, as typst).
+- docx: `reference.docx` from `xengine-reference.sh` (Times New Roman, exact 31.4/20 pt lines); every paragraph with
+  exact spacing; contents and authorities rows with a right indent and a leader tab; page numbers by needles; a word
+  joiner between ")(" ("32(a)(7)(B)": LibreOffice would break there, typst does not); the closing-mark rule above.
+- Before (fresh render on master, /work/artifacts/baseline): latex 10 pages, 124/159 typst lines with the same break (78.0 %); docx 9 pages against typst's 10, 56/159 lines (35.2 %), tier 1 2 failed (TNR-EMBEDDED, DEF-FONT-002: EB Garamond).
+- After: latex and docx 10 pages, 160/160 typst lines break after the same word (100 %), every page starts and ends
+  on the same word; tier 1 0 failed on all three engines.
+- Pages reviewed (60 dpi, every page of the typst, latex and docx PDFs, 10 each): cover, contents and authorities
+  (leaders, page numbers), headings, footnotes, signature block, certificates. No overlapping or clipped text, nothing
+  in the margins. Remaining tier-2 differences: the cover's gaps differ between engines (each fits the cover to its
+  page); the docx cover's closing rule is one thick line; Word's leaders run up to the page number.
