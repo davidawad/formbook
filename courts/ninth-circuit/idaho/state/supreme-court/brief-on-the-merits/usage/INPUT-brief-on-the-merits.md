@@ -63,9 +63,9 @@ Appellant Aspen Park, Inc. ("Aspen") is an I.R.C. 501(c)(3) tax exempt organizat
 
 All of Aspen's apartments are dedicated to low income housing. Rentals are made based on applications submitted to Aspen in accordance with Idaho Code § 63-602GG(3)(c) which provides:
 
-> (3) In order to qualify for the exemption provided in this section, the low-income housing property shall meet the following qualifications:
+> \(3) In order to qualify for the exemption provided in this section, the low-income housing property shall meet the following qualifications:
 >
-> (c) Except for a manager's unit, all of the housing units in the low-income housing property are dedicated to low-income housing in the following manner: Fifty-five percent (55%) of the units shall be rented to those earning sixty percent (60%) or less of the median income for the county in which the housing is located; twenty percent (20%) of the units shall be rented to those earning fifty percent (50%) or less of the median income of the county in which the housing is located; and twenty-five percent (25%) of the units shall be rented to those earning thirty percent (30%) or less of the median income for the county in which the housing is located.
+> \(c) Except for a manager's unit, all of the housing units in the low-income housing property are dedicated to low-income housing in the following manner: Fifty-five percent (55%) of the units shall be rented to those earning sixty percent (60%) or less of the median income for the county in which the housing is located; twenty percent (20%) of the units shall be rented to those earning fifty percent (50%) or less of the median income of the county in which the housing is located; and twenty-five percent (25%) of the units shall be rented to those earning thirty percent (30%) or less of the median income for the county in which the housing is located.
 
 All qualified applicants who meet the prescribed income levels are accepted for rentals. However, there have often been more apartments available for rent than there have been qualified applicants. (R., p. 472).
 
@@ -111,7 +111,7 @@ The Idaho Legislature has given the Idaho Housing and Finance Association, (IHFA
 
 > "An organization will be considered charitable as described in § 501(c)(3) if it satisfies the following requirements:
 >
-> (1) The organization establishes for each project that (a) at least 75 percent of the units are occupied by residents that qualify as low-income; and (b) either at least 20 percent of the units are occupied by residents that also meet the very low-income limit for the area or 40 percent of the units are occupied by residents that also do not exceed 120 percent of the area's very low-income limit. Up to 25 percent of the units may be provided at market rates to persons who have incomes in excess of the low-income limit."
+> \(1) The organization establishes for each project that (a) at least 75 percent of the units are occupied by residents that qualify as low-income; and (b) either at least 20 percent of the units are occupied by residents that also meet the very low-income limit for the area or 40 percent of the units are occupied by residents that also do not exceed 120 percent of the area's very low-income limit. Up to 25 percent of the units may be provided at market rates to persons who have incomes in excess of the low-income limit.”
 
 I.R.S. REV. PROC. 96-32, Sec. 3.01(1) (emphasis added).[^1]
 
