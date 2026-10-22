@@ -8,8 +8,8 @@ pitch:
   single: 13.8            # quotations, footnotes, headings, cover and signature: single (1.15 x 12 pt)
 margin: {top: 72, bottom: 54, left: 108, right: 36}   # MISS-FORM-003: 1 in top, 3/4 in bottom, 1 1/2 in left, 1/2 in right
 indent: 36
-# MISS-FORM-001: every page numbered; the cover is page 1 and carries no number, the body is numbered from 2.
-page_number: {align: center, from: 2}
+# MISS-FORM-001: every page numbered: the cover unnumbered, the body from 1 (as the filed motion and petitions).
+page_number: {align: center, front: lower-roman}
 footnote: {size: 11, pitch: 12.65, gap: 6}   # MISS-FORM-002, -004: footnotes at least 11-point, single spaced (1.15 x 11 pt)
 quote: {left: 36, right: 36, above: 12, below: 12}   # MISS-FORM-004: quotations single spaced, indented
 heading:
@@ -18,9 +18,9 @@ heading:
   - {bold: true, italic: true, above: 13.2, below: 7.2}
   - {bold: true, above: 13.2, below: 7.2}
   - {italic: true, above: 13.2, below: 7.2}
-# The cover, page 1, closed by a page break (MRAP 32(a)(1)-(6), 32(b); MISS-COV-001, MISS-MOT-002): the court, the
+# The cover, a page of its own (MRAP 32(a)(1)-(6), 32(b); MISS-COV-001, MISS-MOT-002): the court, the
 # case number, the style of the case (one line per entry), the title, the nature of the proceeding, the oral-argument statement and counsel, side by side.
-front:
+cover:
   - {text: "IN THE SUPREME COURT OF MISSISSIPPI", align: center, bold: true}
   - {text: "No. {case_number}", align: center, above: 9.6, below: 19.2}
   - {text: "{caption}"}
@@ -33,7 +33,6 @@ front:
         - {text: "{names}"}
         - {text: "{lines}"}
     gutter: 21.6
-  - {break: true}
 # The date and the signature blocks (MISS-CERT-002), never split.
 closing:
   - group:

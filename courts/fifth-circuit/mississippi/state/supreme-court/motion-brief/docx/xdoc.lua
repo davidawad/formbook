@@ -15,7 +15,7 @@ return require("docx.xdoc")({
   ["indent"] = 36,
   ["page_number"] = {
     ["align"] = "center",
-    ["from"] = 2,
+    ["front"] = "lower-roman",
   },
   ["footnote"] = {
     ["size"] = 11,
@@ -57,7 +57,7 @@ return require("docx.xdoc")({
       ["below"] = 7.2,
     },
   },
-  ["front"] = {
+  ["cover"] = {
     {
       ["text"] = "IN THE SUPREME COURT OF MISSISSIPPI",
       ["align"] = "center",
@@ -105,9 +105,6 @@ return require("docx.xdoc")({
         },
       },
       ["gutter"] = 21.6,
-    },
-    {
-      ["break"] = true,
     },
   },
   ["closing"] = {

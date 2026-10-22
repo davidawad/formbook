@@ -1,6 +1,9 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) but do not yet break every line where
-# typst does: long bare URLs and over-long words in footnotes and narrow columns, and a footnote split across pages,
-# are set apart by the shared model (docs/open-items/fb-595.54.51.md, shared-model requests). Reported, not gated.
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LibreOffice fits a line typst does not: INPUT-motion-brief p5 footnote 6, the URL piece "coronavirus-" ends at
+  # 575.89 pt of a 576 pt measure in Word (183/185 lines identical; pages and page ends equal). The line-fit
+  # tolerance is an open shared-model item (docs/open-items/fb-595.54.82.md); reported, not gated (fb-595.54.51).
+  cross_engine_docx: report
