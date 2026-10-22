@@ -1,0 +1,80 @@
+# Court of Appeals of Georgia (gactapp): appellant's brief (Rule 25 (a)). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to the Court of Appeals of Georgia Rules, effective March 26, 2026 (../rules.md,
+# GACTAPP-*); lengths in points. No case text here: every string printed comes from the sample's frontmatter
+# ({field}) or is a court constant (the court's name, the Rule 24 (f) (1) sentence).
+size: 14                  # GACTAPP-FORM-002: serif, proportionally spaced, 14 point or larger, footnotes included
+pitch:
+  body: 32.2              # GACTAPP-FORM-005: no less than double spacing (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # GACTAPP-FORM-005 exclusions: quotations, headings, captions, footnotes; cover, tables, signature
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # GACTAPP-FORM-004: not less than one inch at top, sides, bottom
+indent: 36
+page_number: {align: center, from: 1}   # GACTAPP-FORM-006: every page numbered in Arabic numerals, the cover is 1
+footnote: {size: 14, gap: 8, clearance: 8.1}   # GACTAPP-FORM-002, -005: footnotes 14 point, single spaced
+quote: {left: 36, right: 36, above: 16.1, below: 16.1, gap: 16.1}   # GACTAPP-FORM-005: block quotations single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 24, below: 16}
+  - {bold: true, hang: 36, above: 16, below: 12}
+  - {bold: true, italic: true, hang: 36, above: 16, below: 12}
+# The cover (as filed; Rules 25 and 41 set no cover contents beyond Rule 2 (a)): the court, the case number, the
+# parties, the court below, the title, counsel.
+cover:
+  - {text: "IN THE COURT OF APPEALS OF THE STATE OF GEORGIA", align: center, bold: true}
+  - {text: "Case No. {case_number}", align: center, bold: true, above: 21.6}
+  - each: caption
+    between:
+      - {text: "v.", align: center, above: 21.6}
+    blocks:
+      - {text: "{names}", align: center, above: 21.6}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 72}
+  - each: counsel
+    above: 72
+    blocks:
+      - {text: "{names}", bold: true, left: 230.4, above: 8}
+      - {text: "{lines}", optional: true, left: 230.4}
+  - {text: "{phone}", optional: true, left: 230.4, above: 8}
+# GACTAPP-CONT-002 (Rule 25 (a) (1)): the table of contents and the table of cited authorities, each on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 36, above: 8}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 8
+  group: {bold: true, above: 16.1}
+# GACTAPP-CERT-001: the Rule 24 (f) (1) sentence just above the signature block, the date, the signature block
+# (GACTAPP-SIG-001, -002: "/s/" and the typed name underlined, the name again below it), never split; then the
+# certificate of service (GACTAPP-SVC-001, -002) on a page of its own.
+closing:
+  - group:
+      - {text: "This submission does not exceed the word count limit imposed by Rule 24.", pitch: body, indent: 36}
+      - {text: "{date}", optional: true, pitch: body, indent: 36}
+      - {text: "{signature.firm}", optional: true, bold: true, left: 230.4, above: 8}
+      - each: signature.signers
+        blocks:
+          - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 12}
+          - {text: "{name}", left: 230.4}
+          - {text: "{lines}", optional: true, left: 230.4}
+      - {text: "{signature.lines}", optional: true, left: 230.4, above: 8}
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", heading: 1}   # a level-1 heading: listed in the contents, as filed
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - each: service.recipients
+        blocks:
+          - group: [{text: "{.}", left: 72}]
+            above: 16.1
+            below: 16.1
+      # the closing words kept with the signature they introduce (tier 2: a signature alone on a page)
+      - group:
+          - {text: "{service.closing}", optional: true, pitch: body, indent: 36}
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 12}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", optional: true, left: 230.4}
+          - {text: "{signature.lines}", optional: true, left: 230.4, above: 8}
+        above: 8
