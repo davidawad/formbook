@@ -1,0 +1,54 @@
+# Supreme Court of New Jersey (nj): complaint in lieu of prerogative writs under the Court's original jurisdiction
+# (petition-for-writ; a paper under R. 2:6-10, the cover contents of R. 2:6-6(a)). The whole layout, as data for the
+# shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to ../rules.md (NJ-* ids); lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # NJ-FORM-003: no smaller than 12-point; 14 pt, stricter (see the OPEN item in rules.md)
+pitch:
+  body: 32.2              # NJ-FORM-002: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # counsel, caption, headings, quotations, signatures: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NJ-FORM-004: approximately one inch
+indent: 36
+list_indent: 36           # NJ-CONV-005: the numbered paragraphs, the number in the first half inch
+page_number: {align: center, from: 2}   # the first page carries counsel and the caption, no number
+footnote: {size: 14, gap: 7}            # NJ-FORM-002: footnotes may be single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # NJ-FORM-002: indented quotations may be single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 16.8, below: 14}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The first page (NJ-FORM-007, R. 2:6-6(a); NJ-CONV-005): counsel, then the caption: the Court and the docket number at
+# the right, the parties with their designations (a caption of any length runs on, never as one unbreakable box), the
+# title and the jurisdiction it is brought under between rules; the body follows on the page.
+front:
+  - {text: "{counsel}"}
+  - {rule: 0.75, above: 16.8}
+  - {text: "SUPREME COURT OF NEW JERSEY", bold: true, left: 198, above: 11.2}
+  - {text: "DOCKET NO.: {docket_number}", left: 198, above: 5.6}
+  - each: caption
+    above: 11.2
+    between:
+      - {text: "vs.", left: 108, above: 11.2}
+    blocks:
+      - {text: "{names}", above: 8.4}
+      - {text: "{designation}", left: 216, above: 8.4}
+  - {rule: 0.75, above: 11.2}
+  - {text: "{brief_title}", align: center, bold: true, above: 11.2}
+  - {text: "{subtitle}", align: center, bold: true, optional: true, above: 8.4}
+  - {rule: 0.75, above: 11.2, below: 16.8}
+# After the body (R. 4:5-1; R. 1:38-7(b)): each certification with its heading, paragraphs and signature lines (the
+# filer's own: firm, "s/" signature, name, date), each certification never split; then each exhibit's slip sheet, its
+# heading a third of the way down a page of its own.
+closing:
+  - each: certifications
+    blocks:
+      - group:
+          - {text: "{heading}", align: center, bold: true, upper: true, optional: true, below: 14}
+          - {text: "{paragraphs}", pitch: body, indent: 36}
+          - {text: "{signature.lines}", left: 230.4, above: 16.8}
+        above: 22.4
+  - each: exhibits
+    blocks:
+      - {break: true}
+      - {text: "{heading}", align: center, bold: true, upper: true, above: 216}
+      - {text: "{note}", italic: true, optional: true, left: 46.8, right: 46.8, above: 28}

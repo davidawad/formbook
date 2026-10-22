@@ -56,7 +56,7 @@ Amicus American Civil Liberties Union of New Jersey accepts the statement of fac
 
 # ARGUMENT
 
-## The Prosecutor’s Opening Statement Was Prejudicial and Denied Mr. Butler a Fair Trial.
+## I. The Prosecutor’s Opening Statement Was Prejudicial and Denied Mr. Butler a Fair Trial.
 
 A prosecutor’s fundamental obligation to the criminal justice system is not to obtain convictions, but “to see that justice is done.” *State v. Smith*, 167 N.J. 158, 177 (2001); *State v. Frost*, 158 N.J. 76, 83 (1999); *State v. Goode*, 278 N.J. Super. 85, 91-92 (App. Div. 1994). After all, “[i]f fairness and justice are forgotten in the pursuit of a guilty verdict, the integrity and authority of our criminal justice system is challenged.” *Goode*, 278 N.J. Super. at 91-92.
 
@@ -97,7 +97,7 @@ Because of this prejudice, reversal of Mr. Butler’s conviction is required. It
 
 [^3]: Mr. Butler has raised these points as separate and cumulative errors, some of which are raised as plain error. Whether or not the Court finds that these points rise to the level of reversible error in themselves, they provide additional support for this Court to rule that the references to The Wire in the prosecutor’s opening statement constituted prejudicial error.
 
-## This Court Should Caution Prosecutors Not to Tell Juries That the Case Before Them Is Analogous to Other Cases, Particularly Works of Fiction and in Popular Culture.
+## II. This Court Should Caution Prosecutors Not to Tell Juries That the Case Before Them Is Analogous to Other Cases, Particularly Works of Fiction and in Popular Culture.
 
 By definition, when a prosecutor tells jurors that the case before them is “similar” to some other case, particularly a work in the popular culture – be it a movie, play, book, or TV show, including pure fiction, documentaries, docudramas, or reality shows – the prosecutor is going beyond the evidence in the case. This is so whether it is telling jurors in closing that they should use the example of ultimately axe-wielding Jack Nicholson in The Shining to understand that people saying seemingly innocent things (like “Here’s Johnny”) may hide more sinister meanings, *State v. Williams*, 244 N.J. at 599, or telling jurors in opening that a case against a single defendant not charged with gang-related crimes is “the same as” the violent gang-ridden world of The Wire. Whatever was dramatized in that fictional work necessarily is not evidential at trial. More important, the chance for prejudice is great, as the jurors are likely to view the evidence through the prism of the fictional work – indeed, that is precisely what the prosecutor is asking them to do. The same is true for other works in the popular culture such as “true crime” documentaries or docudramas, or “reality shows.”
 

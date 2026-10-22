@@ -1,0 +1,47 @@
+# Supreme Court of New Jersey (nj): amicus curiae letter brief (R. 2:6-2(b)). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12).
+# Letter form: the R. 2:6-6(a) information is in the heading of the letter, so no separate cover is printed
+# (NJ-LEN-003, NJ-CONV-003); the letter page stands first, unnumbered, the table of contents on page i, the brief from
+# page 1. Numbers trace to ../rules.md (NJ-* ids); lengths in points. No case text here: every string printed comes from
+# the sample's frontmatter ({field}) or is a court constant (the Court's address and salutation).
+size: 14                  # NJ-FORM-003: no smaller than 12-point; 14 pt, stricter (see the OPEN item in rules.md)
+pitch:
+  body: 32.2              # NJ-FORM-002: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # letter heading, headings, tables, quotations, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NJ-FORM-004: approximately one inch
+indent: 36
+page_number: {align: center, front: lower-roman}     # NJ-CONV-002: tables roman, the brief arabic from 1
+footnote: {size: 12, pitch: 13.8, gap: 7}            # NJ-FORM-002, -003: single spaced, 12-point (1.15 x 12 pt)
+quote: {left: 72, right: 72, above: 11.2, below: 16.8}   # NJ-FORM-002: indented quotations may be single spaced
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The letter (R. 2:6-2(b)): the letterhead lines at 12 pt (the sender's, then the signer's set right), the date,
+# the Court's address, the "Re:" lines (the docket numbers and the case title), the salutation and the opening paragraph.
+cover:
+  - {text: "{letterhead.left}", size: 12, pitch: 13.8}
+  - {text: "{letterhead.right}", size: 12, pitch: 13.8, align: right, above: 2.8}
+  - {text: "{date}", above: 22.4}
+  - {text: "Honorable Chief Justice and Associate Justices", above: 19.6}
+  - {text: "Supreme Court of New Jersey"}
+  - {text: "25 Market Street"}
+  - {text: "Trenton, New Jersey 08625"}
+  - columns:
+      - width: 36
+        blocks: [{text: "Re:", bold: true}]
+      - blocks: [{text: "{re}", bold: true}]
+    gutter: 0
+    left: 36
+    above: 14
+  - {text: "Honorable Chief Justice and Associate Justices:", above: 14}
+  - {text: "{intro}", pitch: body, indent: 36, above: 2.8}
+# R. 2:6-2(a)(1), kept by R. 2:6-2(b): the table of contents with the point headings.
+contents: {title: "TABLE OF CONTENTS", depth: 2, col: 36, hang: 36, above: 8.4}
+# The closing and the signature groups, right of centre, never split (letter form: no certificate).
+closing:
+  - group:
+      - {text: "Respectfully submitted,", pitch: body}
+      - each: signature
+        blocks: [{text: "{lines}", left: 230.4, above: 16.8}]
+    above: 8.4
