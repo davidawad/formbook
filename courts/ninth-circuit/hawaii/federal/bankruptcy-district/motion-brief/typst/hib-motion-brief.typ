@@ -237,7 +237,13 @@
   )
 }
 
-#let cover(meta) = page(numbering: none, footer: none, margin: margin, {
+// DEF-COVER-001: a long caption runs onto page 2, which prints its page number "2" (page 1's is suppressed), as the filed example does.
+#let cover(meta) = page(numbering: "1", margin: margin, footer: context {
+  if counter(page).get().first() > 1 {
+    set text(size: page-number-size)
+    align(center, numbering("1", ..counter(page).get()))
+  }
+}, {
   counsel-block(meta)
   v(blank-line)
   set par(first-line-indent: 0pt, leading: single-leading, justify: false)
