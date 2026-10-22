@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The kywb motion-brief Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}) at 12 pt (size 24 half points, the exemplar's
+     size, footnotes too); Body Text in exact 24 pt line boxes (480 twips, typst pitch-body: double spacing, the filed
+     exemplar's convention) with a half-inch first-line indent (typst para-indent); single lines in 14 pt boxes
+     (280 twips, typst pitch-single); footnotes at 12 pt in single lines, 6 pt apart (typst note-gap); letter page,
+     1 in margins. Added or replaced here, as the typst template sets them: "Body Text Note" (no widow control, for a
+     paragraph that anchors a footnote), Heading 2 centred bold and Heading 3 bold, half an inch in with its later
+     lines hanging half an inch more (typst subheading-indent), both on the body pitch with half a line (240 twips)
+     above and below (the filter writes Heading 2's capitals); Footnote Text (the recipe's, without keepLines: typst
+     splits a long note across pages); the footer "- n -" at 11 pt in a single line (typst footer-size). Caption,
+     title, signing blocks and certificate carry their own spacing (docx/kywb-motion-brief.lua). Twips: 20 x pt.
+     pandoc-from: CommonMark with smart punctuation and footnotes, so pandoc reads the sample as typst's cmarker
+     does. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="280" indent="720" heading="480" heading-before="240" heading-after="240" note="280" note-after="120" pandoc-from="commonmark+smart+footnotes+yaml_metadata_block">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="240" w:after="240" w:line="480" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:jc w:val="center"/><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/><w:bCs/><w:color w:val="000000"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:styleId="Heading3"><w:name w:val="heading 3"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="240" w:after="240" w:line="480" w:lineRule="exact"/><w:ind w:left="1440" w:hanging="720"/><w:outlineLvl w:val="2"/></w:pPr><w:rPr><w:b/><w:bCs/><w:color w:val="000000"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="120" w:line="280" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+<footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="280" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t xml:space="preserve">- </w:t></w:r><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t>1</w:t></w:r><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:fldChar w:fldCharType="end"/></w:r><w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t xml:space="preserve"> -</w:t></w:r></w:p></footer>
+</reference>

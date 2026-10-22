@@ -10,7 +10,7 @@ Fetched 2026-10-14 from the Legal Information Institute (law.cornell.edu) and fr
 
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
-| KYWB-FORM-001 | Fed. R. Bankr. P. 9004(a) (as amended eff. Dec. 1, 2024) | "A petition, pleading, schedule, or other document must be clearly legible." | `typst/kywb-motion-brief.typ` (EB Garamond 13 pt, black on white) |
+| KYWB-FORM-001 | Fed. R. Bankr. P. 9004(a) (as amended eff. Dec. 1, 2024) | "A petition, pleading, schedule, or other document must be clearly legible." | `typst/kywb-motion-brief.typ` (Times New Roman 12 pt, black on white) |
 | KYWB-FORM-002 | Fed. R. Bankr. P. 9004(b) | A document presented for filing must have a caption that sets forth the court's name, the case title, the case number and any adversary-proceeding number, and a brief designation of the document. | `caption()`: court title, debtor block (`caption.debtor_names`, `bankruptcy_lines`), adversary block (`caption.adversary_number`, `caption.judge`), title (`title`) |
 | KYWB-FORM-003 | Fed. R. Bankr. P. 7010 (in an adversary proceeding, the caption of a pleading must substantially conform to Form 416) | Applies to pleadings; the memorandum is not a pleading, so the caption follows the filed exemplar's layout, which is the Form 416 layout. | caption layout |
 | KYWB-MOT-001 | Fed. R. Bankr. P. 9013(a) | "A request for an order must be made by written motion unless: (1) an application is authorized by these rules; or (2) the request is made during a hearing." | Not generated: the motion is a separate document (see gaps). |
@@ -54,22 +54,22 @@ sh tools/render.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-dist
 sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/motion-brief insight-terminal-city-of-oakland
 ```
 
-- `usage/OUTPUT-motion-brief.typst.pdf`: 10 pages. Typst compiled with no warnings. `pdffonts`: EBGaramond-Regular and -Bold only, embedded. Named `OUTPUT-` (the name `tools/render.sh` writes by default and `tools/overlay.sh` reads).
+- `usage/OUTPUT-motion-brief.typst.pdf`: 10 pages. Typst compiled with no warnings. `pdffonts`: TimesNewRomanPSMT and its bold only, embedded. Named `OUTPUT-` (the name `tools/render.sh` writes by default and `tools/overlay.sh` reads).
 - `usage/OVERLAY-insight-terminal-city-of-oakland.pdf` and `.txt`: red = our render, blue = exemplar (the 77-page attachment), black = both. The page map pairs pages by word overlap: ours p.1–4 ↔ filed p.2–5 (66–90%); p.5–7 ↔ filed p.6–8 (41–59%); p.8 ↔ filed p.9 (23%, the page where the transcription stops at ¶25 and the filing runs on to the Argument); p.9 ↔ filed p.27 (90%, the signature page); p.10 ↔ filed p.28 (83%, the certificate). The overlay is a diagnostic, not a score: the render is in a different face and line length from the filing, so lines will not coincide.
 
-## Visual review (Gate 2 record: all 10 pages, final render at 60 dpi, looked at)
+## Visual review (Gate 2 record: all 10 pages, typst and docx renders side by side at 55 dpi, looked at; fb-595.68.29)
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Caption (court title, debtor block, adversary block with adversary number and judge), title (two lines), heading I, ¶1 | OK. The heading size was pinned to body size after it rendered larger than the text. |
-| 2 | ¶¶2–4 | OK. Double spacing at a 24 pt pitch. |
-| 3 | Heading II, ¶¶5–6, sub-heading A, ¶¶7–8 | OK. Sub-heading hangs at 0.5 in. |
-| 4 | ¶¶8–12 | OK. |
-| 5 | Sub-heading B, ¶¶13–15, footnote 1 (Request for Judicial Notice, with its citations) at foot of page | OK. The footnote reference after "RJN" is superscript. |
-| 6 | ¶¶16–19 | OK. |
-| 7 | Sub-heading C, ¶¶20–24 | OK. Bracketed alterations in ¶23 ("[Mr. John]", "[the former non-member Manager…]") are kept as filed. |
-| 8 | ¶25, heading V, ¶69 (the conclusion), blank lower half | OK. The body ends here: the filed Argument (Part III) is not transcribed. |
-| 9 | Signature page: "Dated" and "By: /s/" with four counsel groups and "Attorneys for Defendant, CITY OF OAKLAND" | OK after two fixes. First render: the counsel block was unbreakable at normal leading and overflowed the bottom margin into the page number, dropping the last lines. Fixed by zero leading inside the block and smaller gaps between groups; it now sits on one page. |
+| 1 | Caption (court title, debtor block, adversary block with adversary number and judge), title (two lines), heading I, ¶1 | OK in both engines. The party column is ruled at its right and foot. |
+| 2 | ¶¶2–4, heading II, ¶5 begins | OK. Double spacing at a 24 pt pitch, no extra space between paragraphs. |
+| 3 | ¶¶5–6, sub-heading A, ¶¶7–8 | OK. Sub-heading half an inch in, bold. |
+| 4 | ¶¶8–13 | OK. |
+| 5 | ¶13 ends, sub-heading B, ¶¶14–16, footnote 1 (Request for Judicial Notice) at the foot | OK. The footnote reference after "RJN" is superscript; the note single-spaced under a short rule. |
+| 6 | ¶¶16–19, sub-heading C, ¶20 begins | OK. |
+| 7 | ¶¶20–25 | OK. Bracketed alterations in ¶23 kept as filed. |
+| 8 | Heading V, ¶69 (the conclusion), blank lower part | OK. The signing block (36 single lines) is kept whole and does not fit below the conclusion, so it opens page 9 (in both engines). |
+| 9 | Signature page: "Dated" and "By: /s/" with four counsel groups and "Attorneys for Defendant, CITY OF OAKLAND" | OK. Groups 6 pt apart. |
 | 10 | Certificate of service with signing block | OK. |
 
 ## Known gaps and open choices
@@ -77,7 +77,7 @@ sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-dis
 1. **Tier 2 (exemplars).** One exemplar. The eval-loop tier-2 rule asks for two or three from different filers. Not done.
 2. **The motion is not in the exemplar.** The filed motion (Dkt. 25) is not in RECAP (the RECAP copy of Dkt. 25 is a 404; only the attachment is available). The template therefore covers the memorandum; the notice and motion, and the proposed order required by L.B.R. 9013-1(a)(1), are separate documents not generated.
 3. **Local rules status.** The W.D. Ky. local rules file is a draft with a blank effective date; no memorandum format rule was found in it. Every LBR citation above is to that draft.
-4. **Typeface and spacing are style choices**, not rules: EB Garamond (vendored, OFL) at 13 pt; 24 pt double-spaced lines, as the filed memorandum. The filer used Times.
+4. **Typeface and spacing are style choices**, not rules: Times New Roman (vendored) at 12 pt, as the filer; 24 pt double-spaced lines, as the filed memorandum.
 5. **Partial sample.** ¶¶26–68 and Parts III–IV are not transcribed, so the sample is 10 pages against the filed 27 (and the overlay's page 8 shows where the transcription stops).
 6. **Italics.** Case names and signals are not italic in the sample (see Sample).
 7. **Certificate of service.** A convention drawn from the exemplar; the rule that requires service of a motion is not cited here because its text was not retrieved this session.
@@ -87,27 +87,11 @@ sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-dis
 
 ## Engines
 
-The docx engine (`docx/`) is built, and its `.docx` renders, but its LibreOffice PDF was not made (see BLOCKED). Build: `sh docx/build-reference.sh docx/reference.docx`. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx` and then fails at the `soffice` step. `docx/render.sh` (called by `tools/render-docx.sh`) runs pandoc with `docx/kywb-motion-brief.lua`, puts back the reference's styles and page setup, and checks the zip and XML parts.
+typst (`typst/`, the reference) and docx (`docx/`) are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"), and `eval.yaml` sets `params.cross_engine: gate` (fb-595.68.29). There is no latex engine for this folder.
 
-What matches the typst form (set in `docx/reference.docx`; read from its XML, not from a rendering):
-
-- Page: US letter, 1 in margins on all sides.
-- Font and size: EB Garamond (vendored), 13 pt in the body, headings and footnotes; footer "- n -" at 11 pt, centered, in a PAGE field.
-- Spacing: body lines exact 24 pt, first-line indent 0.5 in; Heading 1 and 2 centered and bold; Heading 3 hangs 0.5 in; footnote text single spaced at 13 pt.
-- Caption as in the adversary complaint (court, debtor block, adversary block with the number and judge, title).
-- Signing block as a borderless two-column table (Dated on the left, By: /s/ and the counsel groups on the right); certificate of service on its own page (`pageBreakBefore`) with its signing block.
-- Paragraph and heading numerals are typed in the sample and are not added by the filter, as in typst.
-
-What differs from typst:
-
-- Paragraph spacing: on the typst render (10 pages, `/work/artifacts/kywb/motion-brief/OUTPUT-insight-terminal-city-of-oakland.pdf`, outside the court folder) the pitch measured with `pdftotext -bbox` on page 2 is 24 pt within a paragraph and about 17 pt between paragraphs (for example between ¶2 and ¶3). The typst source says double spacing at 24 pt. The docx keeps 24 pt everywhere. The typst gap is a template question; it is not changed here.
-- Footnote and body pagination: not measured for the docx (no LibreOffice); the typst render is 10 pages.
-- Italics: the sample has none (as in typst).
-- Hyphenation, kerning and ligatures: application defaults in the docx; not asserted.
-
-docx BLOCKED (the checks that run on the `.docx.pdf` cannot run):
-
-- `docx.pdf` and the Gate 0 and Gate 1 checks: `soffice` (LibreOffice) is not installed on this box, so `usage/OUTPUT-insight-terminal-city-of-oakland.docx.pdf` was not produced. Not passed.
-- Gate 2 page review of the docx: no PDF to look at, so no pages reviewed. Not passed.
-- Opening the `.docx` in LibreOffice or Word (no repair prompt): not done. Only the zip, the XML well-formedness and a pandoc read-back were checked.
+- Face and size: Times New Roman 12 pt in both, footnotes too (the docx names the typst face through `{font}` in `docx/reference.xml`); the footer "- n -" at 11 pt.
+- Pitches: body lines in exact 24 pt boxes (480 twips); single lines (caption, title, signing blocks, footnotes) in 14 pt boxes (280 twips); headings on the body pitch with 12 pt above and below, kept with the next block; footnotes 6 pt apart, 12 pt below the text.
+- A paragraph that anchors a footnote has no widow control in the docx ("Body Text Note"), as typst may set its last line alone.
+- The docx is built by `fb render` from `docx/reference.xml` (base="xengine", pandoc-from CommonMark as typst's cmarker reads it) and `docx/kywb-motion-brief.lua`; no shell script and no committed reference.docx.
+- `sh tools/check.sh <this folder> --engine docx`: 13 passed, 0 failed; XENG-001..003 PASS (10 pages, 250/250 lines break alike). The page number sits a little lower in the LibreOffice PDF than in typst (footer position; not compared).
 - Word limits in `docs/DOCX.md` that apply to this form: none. The form has no table of contents, table of authorities or pleading line numbers.
