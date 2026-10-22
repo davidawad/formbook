@@ -1,216 +1,164 @@
-% Eighth Circuit opening brief, LaTeX engine (docs/EVAL-LOOP.md, "Engines").
-% Mirrors ../typst/ca8-opening-brief.typ: page order, 14 pt type, double spacing, margins, headings,
-% table of contents and authorities, certificates. ca8.lua turns the markdown contract into the
-% macros defined here (cover, front matter, TOC and TOA entries, certificates); the body keeps its
-% markdown structure. Compiled by fb render with stock pdflatex (docs/EVAL-LOOP.md); the
-% fonts are TeX Live packages, so the .tex needs no repo-local file and no system font.
+% Eighth Circuit appellee's (answering) brief, LaTeX engine (docs/EVAL-LOOP.md, "Engines").
+% Mirrors ../typst/ca8-answering-brief.typ: page order, Times (newtx) 14 pt type everywhere, double spacing (28 bp line
+% boxes), one-inch margins, no hyphenation, left alignment. ca8.lua builds the cover, the front matter, the tables,
+% the signature block and the certificates from the YAML frontmatter; this file holds the page setup and the macros
+% that filter emits. Compiled by fb render with stock pdflatex: the fonts are TeX Live packages (no repo-local file,
+% no system font).
+%
+% Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): this template sets every line and page break where
+% the typst template (the reference) sets them. The model itself (no kerning or ligatures, first-fit breaking, fixed
+% line boxes, no widows, footnote marks, list labels, contents rows) is the shared package lib/latex/xengine.sty,
+% which fb render inlines into the generated .tex in place of \usepackage{xengine}; the inline rules are
+% lib/latex/xengine.lua, run by ca8.lua. Every size and space here is in bp (14 bp = typst's 14 pt), and blocks are
+% spaced with \addvspace (the larger of the space below one and above the next). The names in [brackets] are the
+% typst template's functions.
 \documentclass[14pt,letterpaper]{extarticle}
-% The bottom margin is a little deeper than 1 in so that the descent of the last line stays out of it; the footskip
-% shrinks by as much, so the page number does not move.
-\usepackage[letterpaper,left=1in,right=1in,top=1in,bottom=78bp,footskip=30bp]{geometry}
+% FRAP 32(a)(5)(A): proportionally spaced serif, 14 point.
 \usepackage[T1]{fontenc}
 % Times: newtxtext/newtxmath ship with every TeX Live, so the generated .tex compiles with stock pdflatex and no
 % repo-local file; the faces (TeXGyreTermesX, NewTX) are metric-compatible with Times New Roman.
 \usepackage{newtxtext,newtxmath}
-\usepackage{indentfirst,etoolbox,needspace,fancyhdr,enumitem,tikz,hyperref}
-\hypersetup{hidelinks,unicode,bookmarks=false}
-\newcounter{briefAnchor}
-% PDF outline entry (typst writes one per outlined heading); the anchor is a plain named destination.
-\newcommand{\BriefMark}[2]{\stepcounter{briefAnchor}\hypertarget{brief\thebriefAnchor}{}\pdfbookmark[#1]{#2}{brief\thebriefAnchor}}
+% FRAP 32(a)(4): letter, 1 in margins; the page number in the bottom margin, as typst sets it.
+\usepackage[letterpaper,margin=1in,headheight=0pt,headsep=0pt,footskip=36bp]{geometry}
+\usepackage{enumitem}
+\usepackage{xengine} % lib/latex/xengine.sty, inlined by fb render
+% Links in the brief are citations (toa:) or none; the fallbacks keep pandoc's output valid.
+\providecommand{\href}[2]{#2}
+\providecommand{\hypertarget}[2]{#2}
+\providecommand{\hyperlink}[2]{#2}
+
 \makeatletter
+% Line boxes [typst pitch-double, pitch-single]: FRAP 32(a)(4) double spacing, 28 bp, for the body and the
+% certificates; single spacing, 17 bp, for headings, quotations, footnotes, the TOC/TOA, the cover and the signature.
+\renewcommand\normalsize{\xe@lines{14}{28}}
+\newcommand\singlespacing{\xe@lines{14}{17}}
+\renewcommand\footnotesize{\xe@lines{14}{17}}
+\normalsize
+\setlength{\parindent}{0.5in} % after xengine.sty's \raggedright, which sets it to zero
+\setcounter{secnumdepth}{-\maxdimen}
+\xe@lists{0.5in}
+% The page number in the 14 bp type, single-spaced.
+\def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
+  \def\@oddfoot{\reset@font\singlespacing\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}
+\pagestyle{plain}
 
-% ---------------------------------------------------------------------------
-% Type, leading, paragraphs (FRAP 32(a)(4)-(6): 14 pt everywhere; double spaced body; ragged right)
-% ---------------------------------------------------------------------------
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\renewcommand{\normalsize}{\fontsize{14}{31.4pt}\selectfont}
-\renewcommand{\footnotesize}{\fontsize{14}{20pt}\selectfont}
-\newcommand{\BriefSingle}{\fontsize{14}{20pt}\selectfont}
-\AtBeginDocument{\normalsize}
-\raggedright
-\setlength{\parindent}{0.5in}
-\setlength{\parskip}{0pt}
-\hyphenpenalty=10000
-\exhyphenpenalty=10000
-\newlength{\BriefTab}\setlength{\BriefTab}{0.5in}
+\providecommand{\pandocbounded}[1]{#1}
 
-% Single-spaced group (headings, quotations, footnotes, TOC/TOA, certificates).
-\newenvironment{BriefSingleSpace}{\begingroup\BriefSingle\setlength{\parskip}{0pt}}{\par\endgroup}
+% Footnotes [footnote.entry]: 8.5 bp clear of the text, a 30 % rule, 7 bp above each note (15.5 bp in all: the room
+% LibreOffice keeps above a Word document's notes); the mark (58 % of the note's 14 pt) and a quarter em before the
+% text. LaTeX resets the right skip inside a footnote: it is set back here.
+\setlength{\skip\footins}{8.5bp}
+\renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
+\xe@footnotemarks{14}
+\renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
+  \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25em #1}
 
-% Block quotations: 0.5 in in from both margins, single spaced.
-\renewenvironment{quote}{\begingroup\BriefSingle\setlength{\parindent}{0pt}\par
-  \leftskip=0.5in\rightskip=0.5in\setlength{\parskip}{0.9em}}{\par\endgroup}
+% An ellipsis: one 1 em glyph in typst and Word; here three periods spread over 1 em, U+2026 in the PDF text.
+\newcommand\caellipsis{\pdfliteral page{/Span<</ActualText<FEFF2026>>>BDC}%
+  \makebox[1em]{\hfil.\hfil.\hfil.\hfil}\pdfliteral page{EMC}}
 
-% Footnotes: 14 pt, single spaced, superscript number, a thin space, then the note; 30% rule.
-\renewcommand{\footnoterule}{\kern-3pt{\hrule width 0.3\columnwidth height 0.5pt}\kern2.5pt}
-\long\def\@makefntext#1{\BriefSingle\setlength{\parindent}{0pt}\noindent
-  \textsuperscript{\@thefnmark}\hspace{0.25em}#1}
-\setlength{\footnotesep}{0.5em}
+% [cover-body]: the gaps between the cover's parts: 14 bp, more to fill the page, none when the page is full (typst:
+% the largest gap at which the cover fits one page); #1 the share of a gap (0.6 at the top, 0.3 around "v.").
+\newcommand\cagap[1][1]{\vskip #1\dimexpr14bp\relax plus #1fill minus #1\dimexpr14bp\relax}
+% [double-rule]: 1.6 bp, 2.5 bp apart, 0.5 bp; the rules cost their own height (no interline glue).
+\newcommand\cadoublerule{\par\nointerlineskip\hrule height 1.6bp\nointerlineskip\vskip 2.5bp\nointerlineskip
+  \hrule height 0.5bp\nointerlineskip}
 
-% Enumerated lists (the statement of issues, enumerated arguments).
-\setlist[enumerate]{leftmargin=0.5in,labelsep=0.5em,itemsep=0pt,topsep=0pt,parsep=0pt,partopsep=0pt}
+% Block quotations [quote]: 0.5 in in from both margins, single-spaced, 14 bp above and below, 12.6 bp between
+% paragraphs (the filter puts \caquotepar between them).
+\newcommand\caquotepar{\par\addvspace{12.6bp}}
+\renewenvironment{quote}{%
+  \par\addvspace{14bp}%
+  \begingroup\leftskip=0.5in\rightskip=\dimexpr0.5in\relax plus 1fil\relax\singlespacing\parindent=0pt\relax
+}{%
+  \par\endgroup\addvspace{14bp}%
+}
 
-% Page furniture: centered page number in the footer, no header rule.
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfoot[C]{\BriefSingle\thepage}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\BriefSingle\thepage}\renewcommand{\headrulewidth}{0pt}}
-
-% ---------------------------------------------------------------------------
-% Headings. Section (level 1): bold capitals, centered. Argument point headings (level 2) are bold
-% small capitals, centered, with a roman numeral. Elsewhere, and below the point, the labels are
-% A. / 1. / a. / (1), each one step (0.5 in) in from the last; the label sits in a 0.5 in box and the
-% text hangs under the text.
-% ---------------------------------------------------------------------------
-\newif\ifinargument
-\newcounter{briefTwo}
-\newcounter{briefThree}
-\newcounter{briefFour}
-\newcounter{briefFive}
-\newcommand{\BriefLabelText}[1]{%
-  \ifnum#1=2 \ifinargument\Roman{briefTwo}.\else\Alph{briefTwo}.\fi\fi
-  \ifnum#1=3 \ifinargument\Alph{briefThree}.\else\arabic{briefThree}.\fi\fi
-  \ifnum#1=4 \ifinargument\arabic{briefFour}.\else\alph{briefFour}.\fi\fi
-  \ifnum#1=5 \ifinargument\alph{briefFive}.\else(\arabic{briefFive})\fi\fi}
-
-% Section heading (level 1): centered, bold capitals, in the table of contents.
-\newcommand{\BriefSection}[2]{%
-  \setcounter{briefTwo}{0}\setcounter{briefThree}{0}\setcounter{briefFour}{0}\setcounter{briefFive}{0}%
-  \BriefMark{1}{#2}\BriefFrontHeading{#1}%
-  \addcontentsline{toc}{tocLevelOne}{\uppercase{#1}}}
-% Front-matter heading: the same look, not in the table of contents.
-\newcommand{\BriefFrontHeading}[1]{%
-  \par\Needspace{5\baselineskip}\addvspace{1.5em}
-  \begin{BriefSingleSpace}\centering\textbf{\MakeUppercase{#1}}\par\end{BriefSingleSpace}%
-  \nopagebreak\vspace{1.1em}\nopagebreak\par\nopagebreak}
-
-% Sub-heading at level n (2 to 5).
-\newcommand{\BriefSub}[3]{%
-  \BriefMark{#1}{#3}%
-  \ifnum#1=2 \stepcounter{briefTwo}\setcounter{briefThree}{0}\setcounter{briefFour}{0}\setcounter{briefFive}{0}\fi
-  \ifnum#1=3 \stepcounter{briefThree}\setcounter{briefFour}{0}\setcounter{briefFive}{0}\fi
-  \ifnum#1=4 \stepcounter{briefFour}\setcounter{briefFive}{0}\fi
-  \ifnum#1=5 \stepcounter{briefFive}\fi
-  \edef\BriefLabel{\BriefLabelText{#1}}%
-  \ifnum#1=2 \ifinargument
-    \par\Needspace{5\baselineskip}\addvspace{1.2em}
-    \begin{BriefSingleSpace}\centering\textbf{\BriefLabel\ #2}\par\end{BriefSingleSpace}%
-    \nopagebreak\vspace{1em}\nopagebreak\par\nopagebreak
-    \edef\BriefEntry{\noexpand\addcontentsline{toc}{tocLevelTwo}{\noexpand\BriefTocEntry{0pt}{\BriefLabel}{#2}}}%
-    \BriefEntry
+% Section headings (level 1: centered, bold capitals) and numbered headings. #1 level, #2 indent in
+% half inches (the label sits at #2 x 0.5 in), #3 label, #4 title, #5 index (the TOC refers to
+% ca-hd-<index>), #6 the level from which the text is italic. [style-heading]: 21 / 15.4 bp around a section heading,
+% 15.4 / 12.6 bp around a numbered one; a heading never ends a page (\nobreak, and no orphans after it).
+\newcommand{\cahead}[6]{%
+  \ifnum#1=1
+    \par\addvspace{21bp}%
+    \begingroup\centering\singlespacing\bfseries\leavevmode\label{ca-hd-#5}\MakeUppercase{#4}\par\endgroup
+    \nobreak\addvspace{15.4bp}%
   \else
-    \BriefHang{#1}{#2}%
-  \fi\else
-    \BriefHang{#1}{#2}%
+    \par\addvspace{15.4bp}%
+    \begingroup\singlespacing\noindent
+    \hangindent=\dimexpr0.5in*(#2+1)\relax\hangafter=1\relax
+    \hspace*{\dimexpr0.5in*#2\relax}\label{ca-hd-#5}%
+    \makebox[0.5in][l]{\ifnum#1<#6 \textbf{#3}\else\textbf{\emph{#3}}\fi}%
+    \ifnum#1<#6 \textbf{#4}\else\textbf{\emph{#4}}\fi\par
+    \endgroup\nobreak\addvspace{12.6bp}%
   \fi}
-\newcommand{\BriefHang}[2]{%
-  \dimen0=\dimexpr\BriefTab*(#1-\ifinargument3\else2\fi+1)\relax
-  \par\Needspace{5\baselineskip}\addvspace{1.1em}
-  \begin{BriefSingleSpace}%
-    \hangindent=\dimexpr\dimen0+\BriefTab\relax\hangafter=1
-    \noindent\hspace*{\dimen0}\makebox[\BriefTab][l]{\ifnum#1>3 \textbf{\textit{\BriefLabel}}\else\textbf{\BriefLabel}\fi}%
-    \ifnum#1>3 \textbf{\textit{#2}}\else\textbf{#2}\fi\par
-  \end{BriefSingleSpace}%
-  \nopagebreak\vspace{0.9em}\nopagebreak\par\nopagebreak
-  \edef\BriefEntry{\noexpand\addcontentsline{toc}{\BriefTocName{#1}}{\noexpand\BriefTocEntry{\the\dimen0}{\BriefLabel}{#2}}}%
-  \BriefEntry}
+% A centered point heading (the Argument): bold; 16.8 / 14 bp.
+\newcommand{\cacenter}[3]{%
+  \par\addvspace{16.8bp}%
+  \begingroup\centering\singlespacing\bfseries\leavevmode\label{ca-hd-#3}#1 #2\par\endgroup
+  \nobreak\addvspace{14bp}}
 
-\newcommand{\BriefTocName}[1]{\ifcase#1 tocLevelOne\or tocLevelOne\or tocLevelTwo\or tocLevelThree\or tocLevelFour\or tocLevelFour\fi}
-% ---------------------------------------------------------------------------
-% Table of contents: \addcontentsline entries, levels 1 to 4 (level 5 is not listed).
-% ---------------------------------------------------------------------------
-\protected\def\BriefTocEntry#1#2#3{\hangindent=\dimexpr#1+\BriefTab\relax\hangafter=1
-  \hspace*{#1}\makebox[\BriefTab][l]{#2}#3}
-\newcommand{\BriefTocLine}[3]{\par\addvspace{#1}\noindent#2%
-  \hspace{0.8em}\leaders\hbox{.\hspace{0.16em}}\hfill\hbox to 2.6em{\hss#3}\par}
-\newcommand{\l@tocLevelOne}[2]{\BriefTocLine{0.6em}{#1}{#2}}
-\newcommand{\l@tocLevelTwo}[2]{\BriefTocLine{0.35em}{#1}{#2}}
-\newcommand{\l@tocLevelThree}[2]{\BriefTocLine{0.35em}{#1}{#2}}
-\newcommand{\l@tocLevelFour}[2]{\BriefTocLine{0.35em}{#1}{#2}}
-\newcommand{\BriefTOC}{%
-  \BriefFrontHeading{Table of Contents}%
-  \begin{BriefSingleSpace}\raggedleft\underline{\textbf{Page}}\par\end{BriefSingleSpace}%
-  \begin{BriefSingleSpace}\@starttoc{toc}\end{BriefSingleSpace}}
+% One table-of-contents row [listing-row]: the text wraps before a 36 bp page column, a dot leader runs to the page.
+% #1 level, #2 indent in half inches, #3 label, #4 title, #5 index.
+\newcommand{\tocline}[5]{%
+  \begingroup\singlespacing\setlength{\xe@col}{36bp}%
+  \xe@row{\ifnum#1=1 8.4bp\else 4.9bp\fi}{\dimexpr0.5in*(#2+1)\relax}{%
+    \ifnum#1>1 \hspace*{\dimexpr0.5in*#2\relax}\makebox[0.5in][l]{#3}\fi
+    \ifnum#1=1 \MakeUppercase{#4}\else#4\fi}{\pageref{ca-hd-#5}}%
+  \endgroup}
 
-% ---------------------------------------------------------------------------
-% Table of authorities. Each citation writes its page (as printed) to the .aux file at shipout;
-% the next run collects the distinct pages of each authority. Seven or more pages: "passim".
-% ---------------------------------------------------------------------------
-\newcommand{\toarecord}[1]{\protected@write\@auxout{}{\string\toarec{#1}{\thepage}}}
+% Table of authorities. Each citation writes its page to the .aux file (\toahit, at shipout time);
+% the next run reads them back as \toapg@<key> = "p1,p2,...". \toapages prints the distinct pages in
+% document order. No \pageref is expanded here, so the page numbers come from the same aux pass that LaTeX already
+% reruns for.
+\newcommand{\toahit}[1]{\protected@write\@auxout{}{\string\toarec{#1}{\thepage}}}
 \newcommand{\toarec}[2]{%
-  \@ifundefined{toapg@#1@#2}{%
-    \expandafter\gdef\csname toapg@#1@#2\endcsname{}%
-    \@ifundefined{toacount@#1}{\expandafter\gdef\csname toacount@#1\endcsname{0}\expandafter\gdef\csname toalist@#1\endcsname{}}{}%
-    \expandafter\xdef\csname toalist@#1\endcsname{\ifnum\csname toacount@#1\endcsname=0 \else\csname toalist@#1\endcsname, \fi#2}%
-    \expandafter\xdef\csname toacount@#1\endcsname{\number\numexpr\csname toacount@#1\endcsname+1\relax}%
-  }{}}
+  \@ifundefined{toapg@#1}%
+    {\expandafter\gdef\csname toapg@#1\endcsname{#2,}}%
+    {\expandafter\xdef\csname toapg@#1\endcsname{\csname toapg@#1\endcsname#2,}}}
+\newcounter{toacnt}
 \newcommand{\toapages}[1]{%
-  \@ifundefined{toacount@#1}{??}{%
-    \ifnum\csname toacount@#1\endcsname>6 \emph{passim}\else\csname toalist@#1\endcsname\fi}}
-% Group heading: the first group carries the "Page(s)" column head.
-\newcommand{\BriefToaGroup}[3]{% title, space above, first group?
-  \par\addvspace{#2}\noindent\textbf{#1}\ifnum#3=1 \hfill\textbf{\underline{Page(s)}}\fi\par}
-% Entry: name line (optional, already ending in a line break), citation, leader, pages.
-\newcommand{\BriefToaEntry}[3]{%
-  \par\addvspace{0.7em}\begingroup\BriefSingle\noindent\hangindent=0.35in\hangafter=1
-  #2#3\hspace{0.8em}\leaders\hbox{.\hspace{0.16em}}\hfill\hspace{0.3em}\toapages{#1}\par\endgroup}
+  \setcounter{toacnt}{0}\gdef\toapgs{}\def\toalast{}%
+  \@ifundefined{toapg@#1}{}{%
+    \expandafter\let\expandafter\toalist\csname toapg@#1\endcsname
+    \@for\toap:=\toalist\do{%
+      \ifx\toap\empty\else
+        \ifx\toap\toalast\else
+          \ifnum\value{toacnt}>0 \xdef\toapgs{\toapgs, }\fi
+          \xdef\toapgs{\toapgs\toap}\stepcounter{toacnt}%
+        \fi
+        \edef\toalast{\toap}%
+      \fi
+    }%
+  }%
+  \toapgs}
+% One authority [listing-row]: #1 name (empty for a statute etc.), #2 cite, #3 1 for a case, #4 key; 9.8 bp above;
+% the page column is 56 bp, or the width of a longer page list.
+\newlength\ca@w
+\newcommand{\toaitem}[4]{%
+  \begingroup\singlespacing
+  \settowidth{\ca@w}{\toapages{#4}}%
+  \setlength{\xe@col}{56bp}\ifdim\ca@w>\xe@col\setlength{\xe@col}{\ca@w}\fi
+  \def\toaname{#1}%
+  \xe@row{9.8bp}{0.35in}{\ifx\toaname\empty\else\ifnum#3=1 \emph{#1},\else#1,\fi\newline\fi #2}{\toapages{#4}}%
+  \endgroup}
+% A group heading: 15.4 bp above, 2.8 bp below; it stays with its first entry.
+\newcommand{\toagroup}[1]{%
+  \par\addvspace{15.4bp}%
+  \begingroup\singlespacing\noindent\textbf{#1}\par\endgroup\nobreak\addvspace{2.8bp}}
 
-% Cover (FRAP 32(a)(2)(A)-(F)). The cover is one page. Reply layout: court name in two lines, caption
-% designations at the middle, counsel stacked one group under another at a quarter of the width.
-% Arguments: case number, caption (CaptionSide, CaptionVs), proceeding (with the court below),
-% brief title, counsel (CounselRow).
-% ---------------------------------------------------------------------------
-\newlength{\CoverGap}\setlength{\CoverGap}{0.8em}
-\newcommand{\BriefRuleDouble}{\par\nointerlineskip\hrule height 1.6pt\nointerlineskip\vspace{2.5pt}\nointerlineskip\hrule height 0.5pt\par}
-\newcommand{\BriefRuleShort}{\par\nointerlineskip\hbox to\linewidth{\hss\rule{2in}{0.7pt}\hss}\par}
-\long\def\CaptionSide#1#2{#1\par\emph{#2}\par\vspace{0.6\CoverGap}}
-\newcommand{\CaptionVs}{\par\vspace{0.6\CoverGap}v.\par\vspace{0.6\CoverGap}}
-\newenvironment{CounselRow}{\par\noindent\begingroup\begin{flushleft}}{\end{flushleft}\endgroup\par}
-% One counsel group, stacked: names, then the address and contact lines indented 0.5 em.
-\newcommand{\CounselCell}[3]{\begin{minipage}[t]{#1}\BriefSingle\centering\textsc{#2}\par\emph{#3}\end{minipage}}
-\long\def\BriefCover#1#2#3#4#5{%
-  \thispagestyle{empty}%
-  \begin{BriefSingleSpace}\centering
-  No. #1\par\vspace{\CoverGap}
-  \BriefRuleDouble\vspace{\CoverGap}
-  \textbf{IN THE UNITED STATES COURT OF APPEALS\\ FOR THE EIGHTH CIRCUIT}\par\vspace{\CoverGap}
-  \BriefRuleDouble\vspace{\CoverGap}
-  #2
-  \BriefRuleDouble\vspace{\CoverGap}
-  #3\par
-  \BriefRuleDouble\vspace{\CoverGap}
-  \textbf{#4}\par\vspace{\CoverGap}
-  \BriefRuleDouble\vspace{\CoverGap}
-  #5
-  \BriefRuleDouble
-  \end{BriefSingleSpace}}
-
-% Signature block after the brief's last paragraph: date on the left, "Respectfully submitted," on the
-% right (FRAP 32(d)). #1 signer, #2 further lines, #3 date, #4 anything printed after the block.
-\newcommand{\BriefSignature}[4]{%
-  \par\addvspace{1.4em}\noindent\begin{BriefSingleSpace}
-  \begin{minipage}[t]{0.5\linewidth}\raggedright\ifx\relax#3\relax\else Dated: #3\fi\end{minipage}%
-  \begin{minipage}[t]{0.5\linewidth}\raggedright
-  Respectfully submitted,\par\vspace{1.2em}
-  \emph{/s/ #1}\\\textsc{#1}#2
-  \end{minipage}\end{BriefSingleSpace}%
-  #4}
-\newcommand{\BriefCheck}{}
-\newcommand{\BriefCertCompliance}[4]{% words, word processor, typeface, virus-check statement
-  \BriefSection{Certificate of Compliance}{Certificate of Compliance}%
-  \begin{BriefSingleSpace}\setlength{\parskip}{0pt}\setlength{\parindent}{0.5in}
-  This brief complies with the type-volume limitations imposed by Federal Rule of Appellate Procedure 32(a)(7)(B)(i) because it contains #1 words, excluding the parts of the brief exempted by Rule 32(f). This brief complies with the typeface and typestyle requirements of Federal Rules of Appellate Procedure 32(a)(5) and 32(a)(6) because it has been prepared in a proportionally spaced typeface, 14-point EB Garamond. This brief complies with the electronic-filing requirements of Local Rule 28A(h)(2) because it was #4.\par
-  \end{BriefSingleSpace}}
-\newcommand{\BriefFormSig}[3]{% signer, for whom, date
-  \par\addvspace{1.6em}\noindent\begin{BriefSingleSpace}
-  \begin{minipage}[t]{0.5\linewidth}\raggedright\ifx\relax#3\relax\else Dated: #3\fi\end{minipage}%
-  \begin{minipage}[t]{0.5\linewidth}\raggedright\emph{/s/ #1}\\\textsc{#1}\end{minipage}\end{BriefSingleSpace}}
-\long\def\BriefServiceCert#1{\BriefSection{Certificate of Service}{Certificate of Service}%
-  \begin{BriefSingleSpace}\setlength{\parskip}{0pt}\setlength{\parindent}{0.5in}#1\par\end{BriefSingleSpace}}
-
-\newenvironment{BriefKeep}{\begin{samepage}}{\end{samepage}}
+% Two columns [grid(columns: (1fr, 1fr), column-gutter: #1)]: #2 and #3 side by side, each set single-spaced in
+% half the text width less the gutter, top-aligned on their first lines. The line that holds them keeps its natural
+% height (\xe@natural); the cells set their own line boxes. One box: the line cannot break between them.
+\newlength\ca@cell
+\newcommand{\cacols}[3]{%
+  \begingroup\setlength{\ca@cell}{\dimexpr(\linewidth-#1)/2\relax}\parindent=0pt\relax\xe@natural
+  \noindent\hbox to\linewidth{%
+    \begin{minipage}[t]{\ca@cell}\singlespacing\raggedright\parindent=0pt\relax #2\end{minipage}\hfil
+    \begin{minipage}[t]{\ca@cell}\singlespacing\raggedright\parindent=0pt\relax #3\end{minipage}}\par
+  \endgroup}
+\makeatother
 
 \begin{document}
 $body$

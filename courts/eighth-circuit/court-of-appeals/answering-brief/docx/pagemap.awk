@@ -1,0 +1,116 @@
+# pagemap.awk: the TOC and TOA page numbers, read from the LibreOffice PDF of a first pass (docx/render.sh).
+# Usage: awk -v man=<manifest> -f pagemap.awk page-1.txt page-2.txt ...   (pdftotext -layout, one file per page)
+# Output: H<TAB>idx<TAB>folio (headings), S<TAB>name<TAB>folio (table of authorities, certificates),
+#         T<TAB>key<TAB>pages (authorities, from the C needles of the manifest; every distinct page, as typst lists them), and MISSING<TAB>... where a search failed.
+# A page belongs to the body when its last text line is an arabic folio; the front matter has roman folios.
+# true when text t occurs in s starting at or before position last (so it begins on this page)
+function starts_here(s, t, last,    start, pos, abs) {
+  start = 1
+  while ((pos = index(substr(s, start), t)) > 0) {
+    abs = start + pos - 1
+    if (abs <= last) return 1
+    start = abs + 1
+  }
+  return 0
+}
+function norm(s) {
+  gsub(/\302\240/, " ", s)   # no-break spaces, as the PDF text has them or not
+  s = tolower(s); gsub(/[ \t\r\f]+/, " ", s); sub(/^ /, "", s); sub(/ $/, "", s); return s
+}
+BEGIN {
+  while ((getline line < man) > 0) {
+    n = split(line, f, "\t")
+    if (f[1] == "H") { nh++; hid[nh] = f[2]; hkey[nh] = f[4] }
+    else if (f[1] == "S") { ns++; sname[ns] = f[2]; smode[ns] = f[3]; skey[ns] = f[4] }
+    else if (f[1] == "C") { nc++; ckey[nc] = f[2]; ckind[nc] = f[3]; ctext[nc] = f[4] }
+  }
+  close(man); pno = 0
+}
+FNR == 1 { pno++; nl[pno] = 0 }
+{ nl[pno]++; L[pno, nl[pno]] = $0 }
+END {
+  for (p = 1; p <= pno; p++) {
+    folio[p] = ""; joined[p] = " "
+    for (k = nl[p]; k >= 1; k--) { t = norm(L[p, k]); if (t != "") { folio[p] = t; break } }
+    for (k = 1; k <= nl[p]; k++) { t = norm(L[p, k]); if (t != "") joined[p] = joined[p] t " " }
+    body[p] = (folio[p] ~ /^[0-9]+$/)
+    roman[p] = (folio[p] ~ /^[ivxlc]+$/)
+  }
+  cur = 1
+  for (h = 1; h <= nh; h++) {
+    found = 0
+    if (hkey[h] != "") {
+      for (p = cur; p <= pno && !found; p++) {
+        if (!body[p]) continue
+        for (k = 1; k <= nl[p]; k++) {
+          t = norm(L[p, k]); pos = index(t, hkey[h])
+          if (pos == 1) { found = 1; hf = folio[p]; cur = p; break }
+        }
+      }
+    }
+    if (found) print "H\t" hid[h] "\t" hf
+    else print "MISSING\theading\t" hid[h] "\t" hkey[h]
+  }
+  for (s = 1; s <= ns; s++) {
+    found = 0
+    for (p = 1; p <= pno && !found; p++) {
+      if (smode[s] == "roman" && !roman[p]) continue
+      if (smode[s] == "body" && !body[p]) continue
+      for (k = 1; k <= nl[p]; k++) {
+        t = norm(L[p, k])
+        if (smode[s] == "roman") { if (t == skey[s]) { found = 1; sf = folio[p]; break } }
+        else if (index(t, skey[s]) == 1) { found = 1; sf = folio[p]; break }
+      }
+    }
+    if (found) print "S\t" sname[s] "\t" sf
+    else print "MISSING\tsection\t" sname[s]
+  }
+  for (p = 1; p <= pno; p++) {
+    joined2[p] = joined[p]
+    if (p < pno) joined2[p] = joined[p] substr(joined[p + 1], 1, 400)   # a citation may run over the page end
+  }
+  # citations, in document order: a body needle (B) is searched from where the last one was found and moves the
+  # search on; a footnote needle (N) is searched from the start of the page the body has reached
+  cp = 1; cpos = 1
+  # Page by page from there, the first page that holds the needle whole, or (a body needle that runs over a page
+  # end, with the footnotes and the folio between its halves) its first words at the place where the next page
+  # starts with the rest of it; failing both, its first two words alone.
+  for (c = 1; c <= nc; c++) {
+    found = 0
+    nw = split(ctext[c], w, " ")
+    for (try = 1; try <= 2 && !found; try++) {
+      needle = (try == 1) ? ctext[c] : w[1] " " w[2]
+      for (p = cp; p <= pno && !found; p++) {
+        if (!body[p]) continue
+        start = (ckind[c] == "B" && p == cp) ? cpos : 1
+        pos = index(substr(joined2[p], start), needle)
+        abs = start + pos - 1
+        if (pos > 0 && abs <= length(joined[p])) {   # (one that begins on the next page is found there)
+          found = 1; cf = folio[p]
+          if (ckind[c] == "B") { cp = p; cpos = abs + 1 }
+          break
+        }
+        if (try == 2 || ckind[c] != "B" || p == pno || !body[p + 1]) continue
+        for (k = nw - 1; k >= 1 && !found; k--) {
+          pre = w[1]; for (i = 2; i <= k; i++) pre = pre " " w[i]
+          suf = w[k + 1]; for (i = k + 2; i <= nw; i++) suf = suf " " w[i]
+          if (index(joined[p + 1], " " suf) != 1) continue
+          pos = index(substr(joined[p], start), " " pre " ")
+          if (pos == 0) continue
+          found = 1; cf = folio[p]; cp = p; cpos = start + pos
+        }
+      }
+    }
+    key = ckey[c]
+    if (!found) { print "MISSING\tcitation\t" key "\t" ctext[c]; continue }
+    if (!(key in npg)) { nk++; korder[nk] = key; npg[key] = 0 }
+    dup = 0
+    for (i = 1; i <= npg[key]; i++) if (pg[key, i] == cf) dup = 1
+    if (!dup) { npg[key]++; pg[key, npg[key]] = cf }
+  }
+  for (k = 1; k <= nk; k++) {
+    key = korder[k]
+    s = pg[key, 1]; for (i = 2; i <= npg[key]; i++) s = s ", " pg[key, i]
+    print "T\t" key "\t" s
+  }
+}
