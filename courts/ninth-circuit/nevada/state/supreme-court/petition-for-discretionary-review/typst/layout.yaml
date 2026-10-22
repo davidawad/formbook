@@ -1,0 +1,78 @@
+# Nevada Supreme Court (nev): petition for review of a Court of Appeals decision (NRAP 40B). The whole layout, as data
+# for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to NRAP 32 and 40B (../../rules.md, NEV-*); lengths in points. No
+# case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # NEV-FORM-004 (NRAP 32(a)(5)(A)): proportionally spaced type, 14 points or larger
+pitch:
+  body: 32.2              # NEV-FORM-003 (NRAP 32(a)(4)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # caption page, headings, tables, quotations, footnotes, signature: single (1.15 x 14 pt; NEV-FORM-003)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NEV-FORM-002 (NRAP 32(a)(4)): at least one inch on all four sides
+indent: 36                # convention: half-inch first-line indent
+page_number: {align: center, front: lower-roman}   # NEV-FORM-006 (NRAP 32(a)(4)): at the bottom; the caption page unnumbered, the contents i .., the petition 1, 2 ..
+footnote: {size: 14, gap: 7}             # NEV-FORM-004 (NRAP 32(a)(5)): footnotes in the body's size and face; single spaced (NEV-FORM-003); gap: convention (0.5 em)
+quote: {left: 36, right: 36, above: 11.2, below: 16.8, gap: 11.2}   # NEV-FORM-003: quotations of more than two lines indented (convention: a half inch each side), single spaced; 0.8 em between quoted paragraphs, convention
+heading:   # NEV-FORM-003: headings single spaced; spacing around them convention (1.6/1.2 em, 1.2/0.8 em, 1/0.8 em)
+  - {align: center, bold: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The caption page (NEV-REV-001: the petition complies in form with NRAP 32; NEV-COVER-001, NRAP 32(a)(2)(A)-(E); the
+# caption of NEV-COVER-003, NRAP 32(c)(2)): counsel's names, bar numbers, addresses and telephone numbers, the court,
+# the title of the case, the court numbers and the title of the document (`caption_right`). Single spaced.
+cover:
+  - each: counsel
+    between:
+      - {text: "", above: 8.4}   # convention: 0.6 em between counsel groups
+    blocks:
+      - {text: "{names}"}
+      - {text: "{lines}"}
+  - {text: "IN THE SUPREME COURT OF THE STATE OF NEVADA", align: center, bold: true, above: 21.6}   # NEV-COVER-001 (NRAP 32(a)(2)(A)): the court; 0.3 in above, convention
+  - columns:   # NEV-COVER-001 (NRAP 32(a)(2)(A)-(B), (D)): the title of the case at left, the court numbers and the title of the document at right (convention: 3.4 in and the rest)
+      - width: 252
+        blocks:
+          - each: caption
+            between:
+              - {text: "vs.", above: 16.1, below: 16.1}   # convention: a blank single line above and below, so the rows keep the right column's line pitch
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", italic: true, left: 72}   # convention: the party's designation an inch in
+      - blocks:
+          - {text: "{caption_right}"}
+    gutter: 14.4
+    above: 21.6
+# NRAP 40B(d) and NRAP 32 (NEV-REV-001): the table of contents, from a page of its own; the table of authorities when
+# the frontmatter lists them.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 21, step: 21, above: 12.6}   # convention: 1.5 em per level, 0.9 em between rows
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 56
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 2.8}
+# After the petition: the certificate of compliance with the date and the signature (NRAP 32(a)(9), 32(d); NEV-CERT-001,
+# NEV-CERT-002; the word count the filer's, NEV-REV-001: 4,667 words), never split; then the certificate of service
+# (NRAP 25(d), NEV-CERT-003) from a page of its own.
+closing:
+  - group:
+      - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true}
+      - {text: "{date}", pitch: body, indent: 36, optional: true, above: 8.4}
+      - {text: "I certify that this brief complies with the formatting, typeface, and type-style requirements of NRAP 32(a)(4)–(6) because it is prepared in a proportionally spaced typeface, 14-point Times New Roman, double-spaced.", pitch: body, indent: 36}
+      - {text: "I certify that this brief complies with the type-volume limitation of NRAP 40B(f) because it contains {word_count} words, excluding the parts exempted by NRAP 32(a)(7)(C).", pitch: body, indent: 36}
+      - {text: "I certify that I have read this brief, that it is not frivolous or interposed for any improper purpose, that it complies with the Nevada Rules of Appellate Procedure, including NRAP 28(e), and that if it does not, I may be subject to sanctions.", pitch: body, indent: 36}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 5.6}   # convention: the signature right of centre (3.2 in)
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 11.2}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4}
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.heading}", align: center, bold: true}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36, above: 8.4}
+      - when: service.recipients
+        blocks:
+          - each: service.recipients
+            blocks: [{text: "{.}", left: 72, above: 14}]   # convention: each recipient an inch in, single spaced
+      - {text: "{service.closing}", pitch: body, indent: 36, optional: true, above: 14}
+      - {text: "/s/ *{service.signature.signer}*", underline: true, left: 230.4, above: 19.6}
+      - {text: "{service.signature.signer}", left: 230.4}
+      - {text: "{service.signature.lines}", left: 230.4, optional: true}

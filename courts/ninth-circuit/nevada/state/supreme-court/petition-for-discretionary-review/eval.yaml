@@ -1,0 +1,8 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated yet: the differences are the
+# shared model's, not this folder's (docs/open-items/fb-595.54.18.md): typst carries a paragraph's first lines over
+# with its last when that last line would stand alone, where LaTeX and Word leave a widow in a paragraph with a note
+# (p5-p6, and the note 17 stays on p5 in typst); LaTeX sets a quotation's first line alone at a page foot (an orphan
+# in a paragraph with a note, p3-p4) where typst and Word carry it over.
+params:
+  cross_engine: report

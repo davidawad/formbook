@@ -10,7 +10,6 @@ caption:
 caption_right:
   - "S.C. NO. 81810/82517"
   - "D.C. NO: D-15-509045-D"
-  - ""
   - "**PETITION FOR REVIEW**"
 counsel:
   - names: ["Marshal S. Willick, Esq.", "Nevada Bar No. 2515"]
@@ -205,7 +204,7 @@ Raina Martin requests that the decision made by the Court of Appeals be reviewed
 [^41]: NRS 125.182-184.
 [^42]: *Day v. Day*, 80 Nev. 386, 389-90, 395 P.2d 321, 322-23 (1964).
 [^43]: VII RA 1325-1329.
-[^44]: The COA relied heavily on its recent decision in *Byrd v. Byrd*, 137 Nev. ___, ___P.3d ___ (Ct. App. Adv. Opn. 60, Sep. 30, 2021). However, that decision was distinguishable on several relevant points and has its own errors, which also can be addressed and corrected if this Court accepts this Petition for Review.
+[^44]: The COA relied heavily on its recent decision in *Byrd v. Byrd*, 137 Nev. \_\_\_, \_\_\_P.3d \_\_\_ (Ct. App. Adv. Opn. 60, Sep. 30, 2021). However, that decision was distinguishable on several relevant points and has its own errors, which also can be addressed and corrected if this Court accepts this Petition for Review.
 [^45]: NRS 125.150(b).
 [^46]: See *Blanco v. Blanco*, 129 Nev. 723, 311 P.3d 1170 (2013); *Gemma v. Gemma*, 105 Nev. 458, 778 P.2d 429 (1989); *Wolff v. Wolff*, 112 Nev. 1355, 929 P.2d 916 (1996).
 [^47]: *Mansell v. Mansell*, 490 U.S. 581, 587, 109 S. Ct. 2023, 2028 (1989), quoting *Hisquierdo v. Hisquierdo*, 439 U.S. 572, 581, 99 S. Ct. 802, 808, 59 L. Ed. 2d 1 (1979).
