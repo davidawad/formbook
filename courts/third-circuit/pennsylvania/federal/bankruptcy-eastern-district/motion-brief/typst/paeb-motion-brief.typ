@@ -5,18 +5,34 @@
 // L.B.R. 9004-1(b) (8 1/2 x 11 inch paper). See ../README.md.
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")        // no E.D. Pa. rule names a font; Times New Roman substitute per docs/FONTS.md (README.md)
+#let font-family = ("Times New Roman", "Liberation Serif") // no E.D. Pa. rule names a font: the house face (README.md)
 #let type-size = 12pt                   // convention; the Henry exemplar is 12 point
-#let body-leading = 1.345em             // double spacing: 24 pt baseline pitch at 12 pt (README.md)
-#let single-leading = 0.5em             // single spacing for the caption, the signature block and the service list
 #let margin = 1in                       // convention (no E.D. Pa. margin rule)
 #let para-indent = 0.5in                // first-line indent of memorandum paragraphs
+#let list-indent = 0.5in                // a list item's label starts here ...
+#let list-box = 0.5in                   // ... in a box this wide; the text hangs at 1 in (docx: the same)
 #let designation-indent = 1.2in         // "Plaintiff," and "Defendant." sit under the names
 #let caption-cols = (3.4in, 0.35in, 2.75in)  // party column, colon column, case column (6.5 in text width)
+#let sig-col = 3in                      // the signature column; "Dated:" sits left of it
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; docx/paeb-motion-brief.lua and docx/reference.xml
+// set the same twips: 20 x pt).
+#let pitch-body = 24pt                  // double spaced: the text and the title (docx 480)
+#let pitch-single = 14pt                // court title, caption, signature, certificate lists, footer (docx 280)
+#let cover-gap = 14pt                   // a blank single line: court title to caption, caption to title, title to text
+#let heading-space = 12pt               // above and below a heading (docx 240)
+#let sig-above = 24pt                   // the last paragraph to the signature block
+#let cert-above = 24pt                  // the signature block to the certificate of service
+#let cert-gap = 14pt                    // in the certificate: between its parts and between the served parties
+// The footer's single-pitch line box ends half an inch above the bottom edge (docx: footer 720 twips).
+#let footer-descent = margin - 0.5in - pitch-single
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -29,140 +45,157 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// Markdown to content (inline names, quotations, headings, lists).
-#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
+/// Inline content without the paragraph breaks cmarker may put around it (they may not occur inside a paragraph).
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
+}
+
+/// Inline markdown.
+#let inl(s) = unloose(cmarker.render(s, raw-typst: false, smart-punctuation: true))
+
+/// A single-pitch line (one paragraph; it wraps on single lines). `above`: the space before it.
+#let sline(content, above: 0pt, align-to: left) = block(width: 100%, above: above, below: 0pt,
+  align(align-to, par(first-line-indent: 0pt, content)))
+
+/// A body paragraph on the double pitch; `indent: false` sets it flush (a lead-in).
+#let body-par(content, indent: true) = block(width: 100%, above: 0pt, below: 0pt,
+  par(first-line-indent: if indent { para-indent } else { 0pt }, content))
+
+/// Headings at the type size on the body pitch, bold, at the margin, `heading-space` above and below, kept with the
+/// block after them: level 1 in capitals. `centered`: the certificate's heading.
+#let heading-block(level, s, centered: false) = block(width: 100%, above: heading-space, below: heading-space,
+  sticky: true, align(if centered { center } else { left }, par(first-line-indent: 0pt,
+    text(weight: "bold", if level == 1 { upper(inl(s)) } else { inl(s) }))))
 
 // ---------------------------------------------------------------------------
 // Cover: court, caption, title (Fed. R. Bankr. P. 9004(b))
 // ---------------------------------------------------------------------------
 
-#let court-title(meta) = align(center, stack(
-  dir: ttb,
-  spacing: single-leading,
-  text(weight: "bold", upper(meta.court)),
-  text(weight: "bold", upper(meta.district)),
-))
-
 /// Caption rows: (party column, case column). The case column carries the chapter, the case number
 /// and the adversary number; the party column carries the debtor, the parties and "v.".
 #let caption-rows(meta) = {
+  let desig(s) = [#h(designation-indent)#inl(s)]
   let rows = ()
   rows.push(("IN RE:", "Chapter " + meta.chapter))
   rows.push((meta.debtor.name, "Case No. " + meta.case_number))
-  if meta.debtor.designation != "" {
-    rows.push(([#h(designation-indent)#meta.debtor.designation], ""))
-  }
+  if meta.debtor.designation != "" { rows.push((desig(meta.debtor.designation), "")) }
   rows.push(("", ""))
   for (k, p) in meta.parties.enumerate() {
-    if k > 0 {
-      rows.push(("", ""))
-      rows.push(("v.", ""))
-      rows.push(("", ""))
-    }
+    if k > 0 { rows += (("", ""), ("v.", ""), ("", "")) }
     for (j, name) in p.names.enumerate() {
-      let case-cell = if k == 0 and j == 0 { "Adv. Proc. No. " + meta.adversary_number } else { "" }
-      rows.push((name, case-cell))
+      rows.push((name, if k == 0 and j == 0 { "Adv. Proc. No. " + meta.adversary_number } else { "" }))
     }
-    if p.designation != "" {
-      rows.push(([#h(designation-indent)#p.designation], ""))
-    }
+    if p.designation != "" { rows.push((desig(p.designation), "")) }
   }
   rows
 }
 
+/// The caption: one row per single line, a colon beside every line (docx: a borderless table, one row per line).
 #let caption(meta) = {
-  set par(leading: single-leading, spacing: 0pt)
-  let cells = ()
-  for (l, r) in caption-rows(meta) {
-    cells.push(l)
-    cells.push([:])
-    cells.push(r)
+  let cell(s) = if s == "" { block(height: pitch-single) } else {
+    block(width: 100%, par(if type(s) == str { inl(s) } else { s }))
   }
-  // Cells hold plain text, not paragraphs, so the single leading is supplied by the row gutter.
-  grid(columns: caption-cols, row-gutter: single-leading, ..cells)
+  block(width: 100%, above: cover-gap, below: 0pt, breakable: false,
+    grid(columns: caption-cols, ..caption-rows(meta).map(((l, r)) => (cell(l), par[:], cell(r))).flatten()))
+}
+
+#let cover(meta) = {
+  {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    sline(align-to: center, text(weight: "bold", upper(inl(meta.court))))
+    sline(align-to: center, text(weight: "bold", upper(inl(meta.district))))
+    caption(meta)
+  }
+  // the title centered bold on the body pitch
+  block(width: 100%, above: cover-gap, below: cover-gap, align(center, par(first-line-indent: 0pt,
+    text(weight: "bold", inl(meta.title)))))
+}
+
+// ---------------------------------------------------------------------------
+// Signature and certificate
+// ---------------------------------------------------------------------------
+
+/// Single lines from `sig-col`; `left` (one entry per line) set left of the first lines.
+#let column-lines(rows, left) = {
+  let gap = 0pt
+  for (n, r) in rows.enumerate() {
+    if r == "" and n >= left.len() { gap += pitch-single } else {
+      block(width: 100%, above: gap, below: 0pt, par(first-line-indent: 0pt, hanging-indent: sig-col,
+        [#box(width: sig-col, left.at(n, default: []))#inl(r)]))
+      gap = 0pt
+    }
+  }
+}
+
+/// "Dated:" at the left; the firm, "By: /s/" and the signer's lines in the column.
+#let signature-block(meta) = {
+  let s = meta.signature
+  block(width: 100%, above: sig-above, below: 0pt, breakable: false, {
+    set text(..edges(pitch-single))
+    column-lines((s.firm, "By: /s/ " + s.signer) + s.lines, ([Dated: #inl(s.date)],))
+  })
+}
+
+/// The certificate of service (L.B.R. 9014-4), kept on one page: the heading, the statement, the method and the
+/// parties served (single lines, a blank line between parties), then "Date:" and "By: /s/".
+#let certificate(meta) = {
+  let c = meta.certificate
+  block(width: 100%, above: cert-above, below: 0pt, breakable: false, {
+    heading-block(1, "Certificate of Service", centered: true)
+    body-par([I, #inl(c.signer), hereby certify that I served a true and correct copy of the foregoing document upon the following parties in the manner indicated:])
+    set text(..edges(pitch-single))
+    sline(above: cert-gap, inl(c.method + ":"))
+    for (k, lines) in c.served.enumerate() {
+      for (i, l) in lines.enumerate() { sline(above: if i == 0 { cert-gap } else { 0pt }, inl(l)) }
+    }
+    block(width: 100%, above: cert-gap, below: 0pt, column-lines(("By: /s/ " + c.signer,), ([Date: #inl(c.date)],)))
+  })
 }
 
 // ---------------------------------------------------------------------------
 // Body: memorandum paragraphs (unnumbered), headings, lists
 // ---------------------------------------------------------------------------
 
-/// Each markdown chunk becomes one piece: (keep, content). Headings and a list's lead-in are kept with
-/// the piece after them. A chunk that starts with ">" is a lead-in, drawn flush (no first-line indent).
-/// Memorandum paragraphs are not numbered (the rules of this court do not number them; see README.md).
-#let body-pieces(body, meta) = {
-  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
-  let pieces = ()
-  for c in chunks {
-    let t = c.trim()
-    if t.starts-with("#") {
-      pieces.push((keep: true, content: md(t)))
-    } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
-      pieces.push((keep: false, content: {
-        set enum(numbering: meta.at("list_numbering", default: "(a)"), indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-        block(width: 100%, below: body-leading, md(t))
-      }))
-    } else if t.starts-with(">") {
-      pieces.push((keep: true, content: block(width: 100%, below: body-leading, md(t.slice(1).trim()))))
-    } else {
-      pieces.push((keep: false, content: block(width: 100%, below: body-leading, [#h(para-indent)#md(t)])))
-    }
+/// A list chunk ("1. ..." items): one paragraph per item, the label (the sample's `list_numbering`, "(a)" by
+/// default) `list-indent` in, in a `list-box`, the text hanging after it; `last` wraps the last item.
+#let list-items(t, meta, last) = {
+  let items = ()
+  for l in t.split(regex("\\r?\\n")) {
+    let m = l.match(regex("^(?:\\d+\\.|[-*+])[ \\t]+([\\s\\S]*)$"))
+    if m != none { items.push(m.captures.at(0)) } else if items.len() > 0 { items.at(-1) += " " + l.trim() }
   }
-  pieces
+  for (k, item) in items.enumerate() {
+    let b = block(width: 100%, above: 0pt, below: 0pt, pad(left: list-indent, par(first-line-indent: 0pt,
+      hanging-indent: list-box,
+      [#box(width: list-box, numbering(meta.at("list_numbering", default: "(a)"), k + 1))#inl(item)])))
+    if k + 1 == items.len() { last(b) } else { b }
+  }
 }
 
-// ---------------------------------------------------------------------------
-// Consent statement, signature and certificate
-// ---------------------------------------------------------------------------
-
-/// L.B.R. 9014-3(b)(2): the motion states whether the movant consents to final orders. Printed only when
-/// the sample gives the statement (the motion half of the doc type); the memorandum exemplar has none.
-#let consent-block(meta) = block(width: 100%, below: body-leading, [#h(para-indent)#md(meta.consent)])
-
-#let signature-block(meta) = {
-  let s = meta.signature
-  block(breakable: false, width: 100%, {
-    grid(
-      columns: (3in, 1fr),
-      [Dated: #s.date],
-      {
-        set par(leading: single-leading, spacing: 0pt)
-        [#s.firm]
-        v(single-leading)
-        [By: /s/ #s.signer]
-        for line in s.lines {
-          linebreak()
-          line
-        }
-      },
-    )
-  })
-}
-
-#let certificate(meta) = {
-  let c = meta.certificate
-  block(breakable: false, above: body-leading, width: 100%, {
-    v(body-leading)
-    align(center, text(weight: "bold", "CERTIFICATE OF SERVICE"))
-    v(body-leading)
-    [#h(para-indent)I, #c.signer, hereby certify that I served a true and correct copy of the foregoing document upon the following parties in the manner indicated:]
-    v(body-leading)
-    set par(leading: single-leading, spacing: 0pt)
-    [#c.method:]
-    v(single-leading)
-    for (k, block-lines) in c.served.enumerate() {
-      if k > 0 { v(body-leading) }
-      for (i, line) in block-lines.enumerate() {
-        if i > 0 { linebreak() }
-        line
-      }
-    }
-    v(body-leading)
-    grid(
-      columns: (3in, 1fr),
-      [Date: #c.date],
-      [By: /s/ #c.signer],
-    )
-  })
+/// One chunk: a heading ("#" to "###"), a list, a lead-in (">", flush, kept with the block after it) or a
+/// memorandum paragraph (not numbered: the rules of this court do not number them; see README.md). `tail` (the
+/// signature block) is kept on one page with the chunk's last paragraph.
+#let render-chunk(t, meta, tail: none) = {
+  let with-tail(c) = if tail == none { c } else {
+    block(width: 100%, breakable: false, above: 0pt, below: 0pt, { c; tail })
+  }
+  let h = t.match(regex("^(#{1,3})[ \\t]+(.*)$"))
+  if h != none {
+    heading-block(h.captures.at(0).len(), h.captures.at(1))
+    if tail != none { tail }
+  } else if t.match(regex("^(\\d+\\.|[-*+])[ \\t]")) != none {
+    list-items(t, meta, with-tail)
+  } else if t.starts-with(">") {
+    with-tail(block(width: 100%, above: 0pt, below: 0pt, sticky: true, body-par(inl(t.slice(1).trim()),
+      indent: false)))
+  } else {
+    with-tail(body-par(inl(t)))
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -170,55 +203,28 @@
 // ---------------------------------------------------------------------------
 
 #let motion-brief(meta, body) = {
-  set page(paper: "us-letter", margin: margin, numbering: "1", number-align: center)
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  set block(spacing: 0pt)
+  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim()).filter(c => c != "")
 
-  // Headings: level 1 bold capitals, kept with the text after them; levels 2 and 3 bold.
-  show heading.where(level: 1): it => block(sticky: true, width: 100%, above: body-leading, below: body-leading,
-    text(size: type-size, weight: "bold", upper(it.body)))
-  show heading.where(level: 2): it => block(sticky: true, width: 100%, above: body-leading, below: body-leading,
-    text(size: type-size, weight: "bold", it.body))
-  show heading.where(level: 3): it => block(sticky: true, width: 100%, above: body-leading, below: body-leading,
-    text(size: type-size, weight: "bold", it.body))
+  set page(paper: "us-letter", margin: margin, footer-descent: footer-descent,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch, a section sign kept with its number.
+  show: xengine.with(pitch: pitch-body, list-indent: none)
+  // A doubled sign stays with its number (xengine binds a single sign; docx: a no-break space).
+  show regex("[§¶]{2,} \\S+"): it => box(it)
 
-  court-title(meta)
-  v(body-leading)
-  caption(meta)
-  v(body-leading)
-  align(center, text(weight: "bold", meta.title))
-  v(body-leading)
-  if "lead_in" in meta {
-    block(width: 100%, below: body-leading, [#h(para-indent)#md(meta.lead_in)])
+  cover(meta)
+  if "lead_in" in meta { body-par(inl(meta.lead_in)) }
+  // L.B.R. 9014-3(b)(2): the motion states whether the movant consents to final orders. Printed only when the
+  // sample gives the statement (the motion half of the doc type); the memorandum exemplar has none.
+  if "consent" in meta { body-par(inl(meta.consent)) }
+  // The last paragraph (a list's last item) is kept on one page with the signature block, so a signature never
+  // starts a page alone.
+  for (i, t) in chunks.enumerate() {
+    render-chunk(t, meta, tail: if i + 1 == chunks.len() { signature-block(meta) })
   }
-  if "consent" in meta {
-    consent-block(meta)
-  }
-
-  // Headings and lead-ins (keep: true) are carried into the block of the piece after them, so they never
-  // end a page. The last piece stays on the page with the signature block: a signature never stands alone.
-  let pieces = body-pieces(body, meta)
-  let last = pieces.len() - 1
-  let carry = []
-  for (i, piece) in pieces.enumerate() {
-    if i == last {
-      block(breakable: false, width: 100%, {
-        carry
-        piece.content
-        signature-block(meta)
-      })
-    } else if piece.keep {
-      carry += piece.content
-    } else {
-      // Emitted as content, not wrapped in a block: a container drops the trailing spacing of its last child.
-      carry += piece.content
-      carry
-      carry = []
-    }
-  }
-  if pieces.len() == 0 { signature-block(meta) }
-  if "certificate" in meta {
-    certificate(meta)
-  }
+  if chunks.len() == 0 { signature-block(meta) }
+  if "certificate" in meta { certificate(meta) }
 }
