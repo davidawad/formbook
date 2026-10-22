@@ -23,6 +23,7 @@
 #let para-indent = 0.5in                  // style: first-line indent of body paragraphs (exemplars do the same).
 #let toc-depth = 3
 #let sig-indent = 3.2in                   // style: signature block starts right of centre (exemplars do the same).
+#let cover-gap = 0.3in                   // style: the space between the cover's blocks (court, caption, title, counsel); half of it around "v.". It was 0.4-0.6in, which with a long caption pushed the counsel onto a second cover page (DEF-COVER-001); Rule 38(b) sets the contents, not the spacing.
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -172,30 +173,30 @@
 
   // ---- Cover (Rule 38(b)): court, docket number, caption, title, counsel ----
   page[
-    #set par(leading: single-leading, first-line-indent: 0pt)
+    #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)   // single-spaced: the body's double paragraph spacing (Rule 38(a) is for the text) between the caption's lines and blocks ran a long caption onto a second cover page (DEF-COVER-001)
     #align(center)[
       #text(weight: "bold")[IN THE INTERMEDIATE COURT OF APPEALS OF WEST VIRGINIA]
     ]
-    #v(0.5in)
+    #v(cover-gap)
     #grid(
       columns: (1fr, 2.2in),
       gutter: 0.3in,
       [
         #caption-side(meta.caption.at(0))
-        #v(0.2in)
+        #v(cover-gap / 2)
         v.
-        #v(0.2in)
+        #v(cover-gap / 2)
         #caption-side(meta.caption.at(1))
       ],
       [
         #align(right + horizon)[#text(weight: "bold")[No. #need(meta, "docket")]]
       ],
     )
-    #v(0.6in)
+    #v(cover-gap)
     #align(center)[
       #text(weight: "bold", upper(inl(need(meta, "brief_title"))))
     ]
-    #v(0.4in)
+    #v(cover-gap)
     #v(1fr)
     #{
       set par(leading: single-leading, first-line-indent: 0pt)
