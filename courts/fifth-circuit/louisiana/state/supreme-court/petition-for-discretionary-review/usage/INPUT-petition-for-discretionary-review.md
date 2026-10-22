@@ -246,64 +246,64 @@ authorities:
     cite: "34314 (La. 3/22/37), 173 So. 726"
   const12:
     kind: statute
-    name: "La. Const. art. III, § 12"
+    cite: "La. Const. art. III, § 12"
   act54:
     kind: statute
-    name: "2019 La. Act 54"
+    cite: "2019 La. Act 54"
   rs22-1443:
     kind: statute
-    name: "La. Rev. Stat. § 22:1443"
+    cite: "La. Rev. Stat. § 22:1443"
   rs22-855:
     kind: statute
-    name: "La. Rev. Stat. § 22:855(E)"
+    cite: "La. Rev. Stat. § 22:855(E)"
   rs22-822:
     kind: statute
-    name: "La. Rev. Stat. § 22:822"
+    cite: "La. Rev. Stat. § 22:822"
   rs22-1065-1:
     kind: statute
-    name: "La. Rev. Stat. § 22:1065.1"
+    cite: "La. Rev. Stat. § 22:1065.1"
   rs13-718:
     kind: statute
-    name: "La. Rev. Stat. § 13:718(I)(2)"
+    cite: "La. Rev. Stat. § 13:718(I)(2)"
   rs22-6:
     kind: statute
-    name: "La. Rev. Stat. § 22:6(13)(e)"
+    cite: "La. Rev. Stat. § 22:6(13)(e)"
   rs22-695:
     kind: statute
-    name: "La. Rev. Stat. § 22:695"
+    cite: "La. Rev. Stat. § 22:695"
   rs22-1379:
     kind: statute
-    name: "La. Rev. Stat. § 22:1379(3)(f)"
+    cite: "La. Rev. Stat. § 22:1379(3)(f)"
   rs23-1395:
     kind: statute
-    name: "La. Rev. Stat. § 23:1395(D)"
+    cite: "La. Rev. Stat. § 23:1395(D)"
   rs22-2191:
     kind: statute
-    name: "La. Rev. Stat. § 22:2191(A)(2)"
+    cite: "La. Rev. Stat. § 22:2191(A)(2)"
   rs49-959:
     kind: statute
-    name: "La. Rev. Stat. § 49:959"
+    cite: "La. Rev. Stat. § 49:959"
   rs49-964-a1:
     kind: statute
-    name: "La. Rev. Stat. § 49:964(A)(1)"
+    cite: "La. Rev. Stat. § 49:964(A)(1)"
   rs49-964-a2a:
     kind: statute
-    name: "La. Rev. Stat. § 49:964(A)(2)(a)"
+    cite: "La. Rev. Stat. § 49:964(A)(2)(a)"
   rs49-964-b:
     kind: statute
-    name: "La. Stat. Ann. § 49:964(B)"
+    cite: "La. Stat. Ann. § 49:964(B)"
   civ1968:
     kind: statute
-    name: "La. Civ. Code Ann. art. 1968"
+    cite: "La. Civ. Code Ann. art. 1968"
   civ7:
     kind: statute
-    name: "La. Civ. Code Ann. art. 7"
+    cite: "La. Civ. Code Ann. art. 7"
   civ2033:
     kind: statute
-    name: "La. Civ. Code Ann. art. 2033"
+    cite: "La. Civ. Code Ann. art. 2033"
   rulex:
     kind: rule
-    name: "Louisiana Supreme Court Rule X"
+    cite: "Louisiana Supreme Court Rule X"
   agop:
     kind: other
     name: "La. Att’y Gen. Op., No. 05-0171"
@@ -438,7 +438,7 @@ Before the DAL, Bankers also argued that the Commissioner did not have authority
 
 Morgan argued in its opposition to the exceptions that Act 54’s constitutionality does not require the DAL to first determine the Directive’s validity and that the constitutionality of Act 54 is the threshold question, as no party disputes that the Directive is invalid if Act 54 is constitutional.
 
-The district court took Bankers’ exceptions under advisement, stating that “[t]his is a little bit more challenging than some things I normally [] have on my docket.” Bankers’ Exceptions Tr. 30:32–31:2. Six weeks later, the district court granted Bankers’ exceptions, dismissed Morgan’s claim seeking a declaratory judgment interpreting the pre-Act 54 statutory regime (claim one) [^8] and stayed his claims challenging the constitutionality of Act 54 (claims two through four). Judgment at 2. The district court’s reasons for granting a stay included only a single sentence: “Determining the validity of Directive 214 is a necessary predicate to any constitutional challenge to Act 54.” The court offered no explanation why it believed that to be true. Trial Ct.’s Written Reasons for Judgment.
+The district court took Bankers’ exceptions under advisement, stating that “[t]his is a little bit more challenging than some things I normally [] have on my docket.” Bankers’ Exceptions Tr. 30:32–31:2. Six weeks later, the district court granted Bankers’ exceptions, dismissed Morgan’s claim seeking a declaratory judgment interpreting the pre-Act 54 statutory regime (claim one)[^8] and stayed his claims challenging the constitutionality of Act 54 (claims two through four). Judgment at 2. The district court’s reasons for granting a stay included only a single sentence: “Determining the validity of Directive 214 is a necessary predicate to any constitutional challenge to Act 54.” The court offered no explanation why it believed that to be true. Trial Ct.’s Written Reasons for Judgment.
 
 Morgan filed a supervisory writ application to the court of appeal, which the court denied without reasons on June 8, 2021. Both the DAL and district court proceedings remain stayed. [^9]
 
@@ -509,7 +509,7 @@ Morgan alleges in his second claim that Act 54 is an unconstitutional local law 
 
 A statute is “local if it operates only in a particular locality or localities without the possibility of extending its coverage to other areas should the requisite criteria exist or come to exist there.” [*Deer Enters. LLC, v. Par. Council of Wash. Par.*, 10-0671 (La. 1/19/11), 56 So. 3d 936, 942](toa:deer). “Thus, a law which operates over the whole territory of the state instead of just a particular locality is clearly general, and not local.” [*Kimball*, 712 So. 2d at 51](toa:kimball). “When the operation of a law is limited to certain parishes, it is immediately suspect as a local law.” *Id.*
 
-Determining whether Act 54 is a local law can be done by facially examining Act 54; it does not require the DAL to first affirm the Directive’s validity. Act 54’s triggering criterion is a parish with a population of between 300,000 and 400,000 based on the most recent federal census. *See* Section B.(1), Act 54, Ex. C. (“In any parish having a population of more than three hundred thousand and fewer than four hundred thousand . . . .”). Orleans Parish is the only parish that can meet this trigger—the population of East Baton Rouge and Jefferson Parishes both exceed 400,000, and the next most populous parish is St. Tammany Parish with around 230,000 people. Indeed, several co-sponsors of the bill explained that Act 54 “is only relevant to New Orleans.” [^11] Act 54 cannot be extended to other localities because the population trigger is tied to the collection of an additional one percent under the provisions of Act 350 of the 2005 Regular Session—an Act which is no longer in effect because Act 54 superseded it.
+Determining whether Act 54 is a local law can be done by facially examining Act 54; it does not require the DAL to first affirm the Directive’s validity. Act 54’s triggering criterion is a parish with a population of between 300,000 and 400,000 based on the most recent federal census. *See* Section B.(1), Act 54, Ex. C. (“In any parish having a population of more than three hundred thousand and fewer than four hundred thousand . . . .”). Orleans Parish is the only parish that can meet this trigger—the population of East Baton Rouge and Jefferson Parishes both exceed 400,000, and the next most populous parish is St. Tammany Parish with around 230,000 people. Indeed, several co-sponsors of the bill explained that Act 54 “is only relevant to New Orleans.”[^11] Act 54 cannot be extended to other localities because the population trigger is tied to the collection of an additional one percent under the provisions of Act 350 of the 2005 Regular Session—an Act which is no longer in effect because Act 54 superseded it.
 
 An unconstitutional special law is “directed to secure some private advantage or advancement for the benefit of private persons,” [*La. High Sch. Athletics Ass’n, Inc. v. State*, 12-1471 (La. 1/29/13), 107 So. 3d 583, 601](toa:hsathletics) (citation and internal quotation marks omitted), “granting privileges to some persons while denying them to others,” [*Deer Enters.*, 56 So. 3d at 944](toa:deer) (citation and internal quotation marks omitted). “A privilege is a special legal right, exemption, or immunity granted to a person or class of persons; an exception to a duty. A privilege grants someone the legal freedom to do or not do a given act. It immunizes conduct that, under ordinary circumstances, would subject the actor to liability.” *Id.* (citation and internal quotation marks omitted). Louisiana’s “prohibition on special laws represents an important safeguard against the abuse of legislative power on behalf of special interests.” [*La. High Sch. Athletics Ass’n*, 107 So. 3d at 601](toa:hsathletics) (citation and internal quotation marks omitted).
 
