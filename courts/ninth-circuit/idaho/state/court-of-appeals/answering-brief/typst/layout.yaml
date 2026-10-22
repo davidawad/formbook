@@ -1,0 +1,76 @@
+# Idaho Court of Appeals (idahoctapp): respondent's brief (answering brief). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to the Idaho Appellate Rules (../../rules.md, IDAHOCTAPP-*); lengths in points. No
+# case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # IDAHOCTAPP-FORM-007 (I.A.R. 36(b)(3)): 14-point or larger, text and footnotes
+pitch:
+  body: 32.2              # IDAHOCTAPP-FORM-002 (I.A.R. 36(b)(1)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # headings, footnotes, block quotations, cover, tables, signature: single (1.15 x 14 pt)
+# IDAHOCTAPP-FORM-003 (I.A.R. 36(b)(1)): at least one inch on all sides; the bottom 0.1 in deeper so 14 pt footnote
+# descenders stay inside the one-inch line (DEF-FORM-002).
+margin: {top: 72, bottom: 79.2, left: 72, right: 72}
+indent: 36
+page_number: {align: center, from: 1}   # IDAHOCTAPP-FORM-004: page numbers in the bottom margin; the cover is page 1
+footnote: {size: 14, pitch: single, gap: 7}   # IDAHOCTAPP-FORM-007, -002: 14 points, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8, pitch: single}   # IDAHOCTAPP-FORM-002: block quotations single
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}   # a section: centred, capitals, bold
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# IDAHOCTAPP-CONT-001 (I.A.R. 36(a)): the court, the number, the title of the action, the court appealed from and its
+# judge, whose brief it is, and counsel of record with addresses and for whom they appear.
+cover:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF IDAHO", align: center, bold: true}
+  - {text: "{case_number}", align: center, bold: true, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, above: 21.6}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, above: 21.6, below: 21.6}
+  - columns:
+      each: counsel
+      per_row: 2
+      row_gap: 8.4
+      blocks:
+        - {text: "{names}", bold: true}
+        - {text: "{lines}"}
+    gutter: 28.8
+# IDAHOCTAPP-CONT-002: the table of contents and the table of authorities precede the argument, each on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 21, step: 21, above: 12.6}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 4.2}
+# The date, the word-count certificate (IDAHOCTAPP-CERT-001, I.A.R. 34(b)(4): immediately before the signature) and
+# the signature, never split; then the certificate of mailing or service (IDAHOCTAPP-CERT-002) on its own page.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, pitch: body, optional: true}
+      - {text: "This brief contains {word_count} words and complies with the word-count limit of I.A.R. 34(b).", indent: 36, pitch: body}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, below: 11.2}
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 5.6}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4}
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.heading|Certificate of Service}", align: center, bold: true, upper: true, below: 16.8}
+      - each: service.paragraphs
+        blocks:
+          - {text: "{.}", indent: 36, pitch: body}
+      - each: service.recipients
+        blocks:
+          - {text: "{.}", left: 72, above: 14, below: 14}
+      - group:
+          - {text: "/s/ *{service.signature.signer}*", underline: true, left: 230.4}
+          - {text: "{service.signature.signer}", left: 230.4}
+          - {text: "{service.signature.lines}", left: 230.4}
+        above: 14
