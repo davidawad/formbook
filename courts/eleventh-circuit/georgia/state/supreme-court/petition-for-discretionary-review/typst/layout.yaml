@@ -1,0 +1,94 @@
+# Supreme Court of Georgia (ga): petition for certiorari to the Court of Appeals (SCt R 38-45), set in Century
+# Schoolbook; the layout of ../../petition-for-review (the motion's, ../../motion-brief, with the questions presented
+# before the table of contents). The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/
+# and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to the Rules of the Supreme
+# Court of Georgia (../../rules.md, GA-SC-*); lengths in points. No case text here: every string printed comes from
+# the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # GA-SC-FONT-002, SCt R 16(2): body text and headings no smaller than 13 point
+pitch:
+  body: 19.5              # GA-SC-SPACE-001, SCt R 16(4): between 1.2 times and double (1.5 x the type size)
+  single: 15.6            # cover, headings, quotations, signature (1.2 x, the floor; R 16(4) lets block
+                          # quotations, headings and captions be single-spaced)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # GA-SC-MARGIN-001, SCt R 16(5): at least one inch on every side
+indent: 36                # a half-inch first-line indent (style choice)
+paragraph_gap: 7.8        # between body paragraphs (0.6 x the type size; style choice, not a rule)
+# GA-SC-ELEC-001, SCt R 17(3): no hyperlinks to other documents or external websites; a link prints its text.
+links: false
+# GA-SC-PAGE-001, SCt R 21: the counted pages numbered sequentially in Arabic numerals. The cover is unnumbered; the
+# questions presented (counted: R 20(6) does not exclude them), the contents and the body follow in one Arabic count.
+page_number: {align: center, from: 2}
+footnote: {size: 11, pitch: 13.2, gap: 6.6, clearance: 8.55}   # GA-SC-FONT-002: notes no smaller than 11 point, single
+quote: {left: 36, right: 36, above: 9.75, below: 9.75, gap: 9.75}   # GA-SC-SPACE-001: quotations may be single-spaced
+heading:
+  - {align: center, bold: true, above: 19.5, below: 9.75}
+  - {bold: true, above: 15.6, below: 7.8}
+  - {bold: true, italic: true, above: 15.6, below: 7.8}
+# The cover (R 16 applies; no page number): the docket number, the court, the caption beside the lower-court docket
+# (a ")" and the docket at the caption's top, the docket of two lines here), the title between rules, counsel two to
+# a row (the exemplars' arrangement), the party they represent.
+cover:
+  - {text: "{case_number}", align: center, bold: true}
+  - {text: "IN THE", align: center, bold: true, above: 15.6}
+  - {text: "SUPREME COURT OF GEORGIA", align: center, bold: true}
+  - columns:
+      - width: 230.4
+        blocks:
+          - each: caption
+            between:
+              - {text: "v.", align: center, above: 15.6, below: 15.6}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", align: right, above: 5.2}
+      - width: 21.6
+        blocks:
+          - {text: ")", align: center}
+      - blocks:
+          - {text: "{docket}"}
+    above: 19.5
+  - {rule: 0.75, above: 19.5}
+  - {text: "{title}", align: center, bold: true, upper: true, above: 11.7}
+  - {text: "{filed_by}", align: center, optional: true, above: 7.8}
+  - {rule: 0.75, above: 11.7}
+  - columns: {each: counsel, per_row: 2, row_gap: 13, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 15.6
+    above: 15.6
+  - {text: "{attorneys_for}", align: center, bold: true, above: 15.6}
+# GA-SC-ORDER-005, SCt R 41(2): the questions presented under a separate heading at the very beginning, before the
+# table of contents; each numbered, its later lines under its text (a half-inch label box), a body line between.
+before_tables:
+  - {text: "QUESTIONS PRESENTED", align: center, bold: true, below: 13}
+  - each: questions_presented
+    between:
+      - {text: "", pitch: body}
+    blocks:
+      - columns:
+          - width: 36
+            blocks:
+              - {text: "{#}.", pitch: body}
+          - blocks:
+              - {text: "{.}", pitch: body}
+contents: {title: "TABLE OF CONTENTS", style: {below: 10.4}, depth: 3, col: 36, hang: 0, step: 0, pitch: body}
+# The body's last paragraph is kept whole with the closing, as the earlier template set them in one block (no rule; the
+# signature block does not stand alone on a page).
+keep_with_closing: true
+# GA-SC-CERT-001, SCt R 20(7): the word-count statement immediately above the signature block; the date, the
+# statement and the signature never split. Then GA-SC-SERVE-001, SCt R 14: the certificate of service on its own page,
+# listed in the contents.
+closing:
+  - group:
+      - {text: "This submission does not exceed the word-count limit imposed by Rule 20."}
+      - {text: "{date}", optional: true, above: 15.9}
+      - {text: "Respectfully submitted,", above: 10.4}
+      - {text: "/s/ {signature.signer}", right: 165.6, above: 13}
+      - {text: "{signature.signer}", upper: true, right: 165.6}
+      - {text: "{signature.lines}", right: 165.6}
+    above: 19.5
+  - {break: true}
+  - {text: "Certificate of Service", heading: 1}
+  - {text: "{service.statement}", pitch: body}
+  - columns: {each: service.served, per_row: 2, row_gap: 13, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 13
+    above: 10.4
+  - {text: "{service.note}", optional: true, pitch: body, above: 10.4}
+  - {text: "/s/ {signature.signer}", above: 19.5}
+  - {text: "{signature.signer}", upper: true}
