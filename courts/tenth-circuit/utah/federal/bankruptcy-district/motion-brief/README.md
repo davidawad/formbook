@@ -1,6 +1,6 @@
 # Motion with supporting memorandum: U.S. Bankruptcy Court, D. Utah (utb)
 
-Doc type folder for a motion filed with its supporting memorandum in one document, the form LBR 9013-1 requires. Engine: typst (`typst/`). The exemplar and its filer are in `usage/SOURCE.md`.
+Doc type folder for a motion filed with its supporting memorandum in one document, the form LBR 9013-1 requires. Engines: typst (`typst/`, the reference) and docx (`docx/`). The exemplar and its filer are in `usage/SOURCE.md`.
 
 ## Files
 
@@ -8,8 +8,12 @@ Doc type folder for a motion filed with its supporting memorandum in one documen
 |---|---|
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...` |
 | `typst/utb-motion-brief.typ` | The template: parameters, counsel block, Form 416D-style caption, body (headings, paragraphs, lists), signature, certificate markers |
+| `docx/reference.xml` | The Word styles, page and footer (built by `fb render`; base `xengine`) |
+| `docx/utb-motion-brief.lua` | The docx filter: the same chunks, caption, signature and markers as the typst template |
+| `eval.yaml` | `params.cross_engine: gate` |
 | `usage/INPUT-motion-brief.md` | Our transcription of the Plaza 106 motion to dismiss and memorandum (Doc 32): caption, headings, body, signature, certificate of compliance, certificate of service |
 | `usage/OUTPUT-motion-brief.typst.pdf` | Our render, `sh tools/render.sh`, 13 pages |
+| `usage/OUTPUT-motion-brief.docx` / `.docx.pdf` | The docx render and its LibreOffice PDF, 13 pages |
 | `usage/OVERLAY-plaza106-motion-to-dismiss.pdf` / `.txt` | Red (ours) / blue (filed) / black (both) overlay against `FILED-EXAMPLE-motion-brief.pdf`, and the page map |
 | `usage/FILED-EXAMPLE-motion-brief.pdf` | Filed exemplar, Doc 32, 16 pp. |
 
@@ -52,20 +56,21 @@ The overlay compares our render (13 pp.) with the Plaza 106 motion (Doc 32, 16 p
 3. **Word-count certificate not checked.** The sample copies the filing's certificate (3285 words). The template does not compute the count, and the figure was not verified against the body text.
 4. **Word and page limits not enforced.** See the table: the 15-page and word limits in the rules are not verified, and the exemplar's note conflicts with the 2018 summary on the Rule 12(b) word limit. The template does not check either.
 5. **Counsel firm name differs across filings.** The motion's counsel block reads "VALERGA LLP"; the complaint sample (`../adversary-complaint/`) reads "VALERGA LAWYERS". Both are as filed in each document.
-6. **Certificate of service formatting.** The service list is rendered as indented single lines, close to the filing but not a match to its spacing.
+6. **Certificate of service formatting.** The service list is rendered as indented double-spaced lines, close to the filing but not a match to its spacing.
 7. **Heading styles approximate.** Level-1 headings are centered and bold; level-2 and level-3 headings are bold and left-aligned. The filing's heading treatment was matched by eye, not measured.
 8. **Second exemplar not present.** This folder has one exemplar (the Plaza 106 motion). The memorandum-form tier-2 comparison would need a second filer's motion with memorandum, which was not found in RECAP in this run.
 
 ## Engines
 
-The typst template is the primary form. The DOCX engine is in `docx/` (`reference.docx`, `utb-motion-brief.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md`.
+The typst template is the reference; the docx engine is in `docx/` (`reference.xml`, the Word styles; `utb-motion-brief.lua`, the filter). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md`. `fb render` builds the reference document from `docx/reference.xml`; no shell script and no binary `reference.docx` (fb-595.68).
 
-**What the docx matches** (the same mandated form as the typst template): EB Garamond 12 pt; exact 24 pt line pitch; 0.5 in first-line indent on body paragraphs; letter paper with a 1.5 in top margin and 1 in other margins; centred bold level-1 headings and bold left-aligned level-2 and level-3 headings; 12 pt single-spaced footnotes; a bottom-centre page number (PAGE field in the footer). The cover is built from the same metadata: counsel block, court title, Form 416D caption with the third-party group (a borderless table with a right and a bottom rule on the party column), title. Body paragraphs are not numbered. The signature block follows the paragraph before `[[SIGNATURE]]`, and that paragraph is kept with it (keep-with-next). `[[PAGEBREAK]]` starts the certificates on a new page.
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"), and the docx breaks every line and page where the typst render does: `eval.yaml` sets `params.cross_engine: gate`, and XENG-001..003 pass (301/301 lines, 13 = 13 pages).
 
-**What differs**: Word and LibreOffice break lines differently, so the docx page count is not the typst page count (the typst render is 13 pages). The page break is a paragraph that holds a break, so in Word the page after it begins with a 1 pt empty line. The signature and caption are tables with rules drawn by the application. The EB Garamond font must be installed where the file is opened. The template has no table of contents or table of authorities (the sample has none). The word-count certificate text is the sample's, as in the typst template.
-
-**BLOCKED for the docx engine** (not done on this box):
-- `docx.pdf` (`usage/OUTPUT-plaza106-motion-to-dismiss.docx.pdf`, the LibreOffice PDF on which Gates 0 and 1 are measured): BLOCKED, `soffice` not installed on the box (no conda-forge package, no root).
-- Zip integrity step of `tools/render-docx.sh` (`unzip -tq`): BLOCKED, `unzip` not installed on the box. `tools/render.sh --engine docx` wrote `usage/OUTPUT-motion-brief.docx` and then exited 1 with `render-docx.sh: unzip: not found` and `not a valid zip`. As a substitute, every XML and rels part was checked with `ziptool` and `xmllint --noout`: all well-formed.
-- Visual review of the docx pages (LibreOffice or Word, no repair prompt): BLOCKED, no LibreOffice and no Word. Pages reviewed: 0. The typst render (13 pages) was reviewed page by page; the docx was not.
-- `sh tools/check.sh <dir> --engine docx` not run to a pass: it needs the `.docx.pdf` (see above), so no `.check-docx.txt` stamp is written.
+- **Face and size**: Times New Roman 12 pt on both (no rule names a face, UTB-FORM-004; the docx used to name EB Garamond and failed DEF-FONT-002). The docx names the face only as `{font}`, the typst template's face.
+- **Pitches** (Word's exact line spacing; twips = 20 x pt): body paragraphs and list items double-spaced at 24 pt (480; DUCivR 10-1(4)), no extra space between paragraphs, the first line indented 0.5 in; counsel block, court title, caption, title, headings and signature single-spaced at 13.8 pt (276). Headings 12 pt bold (level 1 centered, levels 2 and 3 at the margin), 18 pt above and 6 pt below, kept with the text after them. The parts of the first page 24 pt apart. A list's label in a 0.5 in box, the text hanging after it.
+- **Caption** (Form 416D, with the third-party group): the party column 3.3 in wide, ruled on its right and at its foot (0.75 pt; its text 10 pt from the right rule and 8 pt above the foot), a blank single line between its elements; the case numbers and the judge 0.15 in right of the 0.25 in gutter. The docx writes it as a one-row table.
+- **Signature**: "DATED ..." at the margin, the firm beside it at 3.4 in, a blank single line, "/s/" and the signer's lines under the firm. At each `<!-- SIGNATURE -->` marker, kept on one page with the paragraph before it (typst: one unbreakable block; docx: keep-with-next and keep-lines). `<!-- PAGEBREAK -->` starts the certificates on a new page (docx: page break before, no space above the heading that opens the page, as typst drops it there).
+- **Page**: letter, top margin 1.5 in (DUCivR 10-1(1)), 1 in on the other sides; the page number centered at the foot of every page in a single-pitch line whose box ends 0.5 in above the page edge.
+- **Reading**: the docx filter reads the sample chunk by chunk (the text between blank lines), as typst does, and the frontmatter as written (`$FORMBOOK_META`). Break rules both engines share: no break inside ")(" or between a sign and its number ("(¶¶ 39–40,": typst boxes `[§¶]+ \S+`, the docx binds it with a no-break space and word joiners), a break after a slash before a letter ("CM/ECF").
+- **One docx difference, in the margin**: the docx right margin is one twip wider (1441 twips). LibreOffice places a line in whole twips and fitted "dollars" on p. 11, which overruns typst's 468 pt measure by 0.04 pt; with the measure 0.05 pt shorter every line breaks as in typst. The margin stays inside the 1 in minimum. Another text could still have a line that typst fits or overruns by a few hundredths of a point (docs/EVAL-LOOP.md, "What the first adoption found").
+- **Limits**: footnotes are not supported: both engines read the body chunk by chunk, so a footnote's definition would be a chunk of its own (the sample has none; gap 2). The numbers in the docx are typed text, not Word list numbering. No table of contents or authorities.
