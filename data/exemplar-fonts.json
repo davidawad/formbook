@@ -653,6 +653,8 @@
       "class": "metric-exact",
       "face": "Gelasio",
       "why": "Georgia metrics",
+      "template_face": "Times New Roman",
+      "note": "PM decision fb-595.54.9 under David's 2026-10-17 ruling that Times New Roman is the standard: the template is set in Times New Roman on every engine (typst, latex newtxtext/newtxmath, docx), not in Georgia's twin Gelasio; face stays the audited match. LibreOffice set Gelasio up to 1.67 pt a line narrower than typst and embedded it with a 1.269 em ascent (fb-595.54.4); with Times the docx PDF passes tier 1 and every page matches typst.",
       "fonts": [
         "Arial-BoldMT",
         "ArialMT",

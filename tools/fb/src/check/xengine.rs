@@ -14,9 +14,15 @@ pub fn is_method(m: &str) -> bool {
     m.starts_with("cross_engine_")
 }
 
-/// True when the folder gates the check; false when it only reports it.
+/// The yq expression for the mode of `engine`: `params.cross_engine_<engine>` (one engine held back, e.g. a docx
+/// whose renderer measures lines coarser than the reference) over the folder's `params.cross_engine`.
+fn mode_expr(engine: &str) -> String {
+    format!(".params.cross_engine_{engine} // .params.cross_engine // \"report\"")
+}
+
+/// True when the folder gates the check for this engine; false when it only reports it.
 pub fn gated(c: &Ctx) -> Res<bool> {
-    Ok(cfg(&c.env, &c.checks, ".params.cross_engine // \"report\"")?.trim() == "gate")
+    Ok(cfg(&c.env, &c.checks, &mode_expr(&c.engine))?.trim() == "gate")
 }
 
 /// The typst render of the sample whose `engine` render is `pdf` (usage/OUTPUT-<id>.<engine>.pdf).
@@ -112,6 +118,14 @@ mod tests {
         assert_eq!(
             reference("/a/usage/OUTPUT-motion.docx.pdf", "docx"),
             "/a/usage/OUTPUT-motion.typst.pdf"
+        );
+    }
+
+    #[test]
+    fn engine_mode_overrides_the_folder() {
+        assert_eq!(
+            mode_expr("docx"),
+            ".params.cross_engine_docx // .params.cross_engine // \"report\""
         );
     }
 

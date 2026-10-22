@@ -69,14 +69,15 @@ fn doc_dirs(dir: &Path, out: &mut Vec<PathBuf>) {
     }
 }
 
-fn yaml_mode(p: &Path) -> Option<String> {
+fn yaml_mode(p: &Path, key: &str) -> Option<String> {
     let v: serde_yaml::Value = serde_yaml::from_str(&std::fs::read_to_string(p).ok()?).ok()?;
-    v["params"]["cross_engine"].as_str().map(str::to_string)
+    v["params"][key].as_str().map(str::to_string)
 }
 
 /// The folder's cross-engine mode as `fb check` reads it: its own checks.yaml, else data/checks-default.yaml
-/// with the court's and then the folder's eval.yaml merged over it.
-pub fn mode(root: &Path, doc: &Path) -> String {
+/// with the court's and then the folder's eval.yaml merged over it; `params.cross_engine_<engine>` over
+/// `params.cross_engine`.
+pub fn mode(root: &Path, doc: &Path, engine: &str) -> String {
     let own = doc.join("checks.yaml");
     let files: Vec<PathBuf> = match own.is_file() {
         true => vec![own],
@@ -87,10 +88,9 @@ pub fn mode(root: &Path, doc: &Path) -> String {
             v
         }
     };
-    files
-        .iter()
-        .filter_map(|f| yaml_mode(f))
-        .last()
+    let last = |key: &str| files.iter().filter_map(|f| yaml_mode(f, key)).last();
+    last(&format!("cross_engine_{engine}"))
+        .or_else(|| last("cross_engine"))
         .unwrap_or_else(|| "report".into())
 }
 
@@ -172,7 +172,6 @@ fn jobs(root: &Path, filter: &str) -> Res<Vec<Job>> {
             continue;
         }
         let doc = Doc::open(&dir)?;
-        let mode = mode(root, &dir);
         for id in doc.ids(layout::INPUT) {
             let typst = doc.output(&id, "typst");
             for engine in ["latex", "docx"] {
@@ -187,7 +186,7 @@ fn jobs(root: &Path, filter: &str) -> Res<Vec<Job>> {
                     folder: folder.clone(),
                     id: id.clone(),
                     engine,
-                    mode: mode.clone(),
+                    mode: mode(root, &dir, engine),
                     typst: typst.clone(),
                     other,
                     docx,

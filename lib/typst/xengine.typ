@@ -15,10 +15,79 @@
 //     number (the LaTeX and Word filters bind them with a no-break space);
 //   - lists: the number or bullet in a box of `list-indent` at the margin, the text hanging after it, with no space
 //     of their own (`list-indent: none` keeps typst's lists).
+//   - no footnote widows: a paragraph whose last line carries a footnote that does not fit with it carries its
+//     second-to-last line over too, as LaTeX and Word do (widow-start, below; fb-595.54.9).
 // The template keeps its own numbers: type size, pitches (`edges`), spacings, indents, page column widths.
 
 /// The line box of a pitch: the baseline at 0.8 of it (Word's exact line spacing; LaTeX \pdfeachlineheight).
 #let edges(pitch) = (top-edge: 0.8 * pitch, bottom-edge: -0.2 * pitch)
+
+// One side of the page margin as an absolute length, or none (auto, a ratio, inside/outside).
+#let page-margin(side) = {
+  let m = page.margin
+  if type(m) == dictionary {
+    m = m.at(side, default: m.at(if side in ("top", "bottom") { "y" } else { "x" }, default: m.at("rest", default: none)))
+  }
+  if type(m) == relative and m.ratio == 0% { m = m.length }
+  if type(m) == length { m.to-absolute() } else { none }
+}
+
+// The marker the line count of a paragraph is measured under (so the measured copy does not place a guard itself).
+#let measuring = 0.0123pt
+
+// Footnote widows. typst keeps a paragraph's last two lines together by their heights alone: when the last line
+// carries a footnote that does not fit below it, the line moves to the next page by itself, a widow LaTeX and Word
+// never set (they move the line before it too). Each paragraph is tagged where it starts (<xe-ps>) and ends
+// (<xe-pe>); a footnote whose line is a widow (its paragraph started on the page before and has only this line on
+// this one) flags the paragraph by the position of its start, and on the next layout pass the paragraph places an
+// empty float at the foot of its first page that ends the text half a line above the bottom of its second-to-last
+// line, so that line moves on with the last. The flag holds while the float stands (the layout then converges);
+// a paragraph without such a footnote is laid out exactly as before.
+#let widow-start(it) = context {
+  let me = here().position()
+  if par.spacing == measuring or not query(<xe-widow>).any(m => m.value == me) { return }
+  let (mt, mb, ml, mr) = ("top", "bottom", "left", "right").map(page-margin)
+  if none in (mt, mb, ml, mr) { return }
+  let pitch = (text.top-edge - text.bottom-edge).to-absolute()
+  // where the text ends on that page: the float's own foot when it stood on the last pass, else the bottom margin
+  let prev = query(<xe-float>).filter(f => f.value.par == me)
+  let floor = if prev.len() > 0 { prev.first().location().position().y + prev.first().value.h } else { page.height - mb }
+  // the paragraph's lines (every line a box of the pitch), measured without its footnotes
+  let fields = it.fields()
+  let body = fields.remove("body")
+  if body.has("children") { body = body.children.filter(c => repr(c.func()) != "tag").join() }
+  let lines = calc.round(measure({ set par(spacing: measuring); par(..fields, body) },
+    width: page.width - ml - mr).height / pitch)
+  let h = floor - me.y - (lines - 1.5) * pitch
+  if h > 0pt {
+    place(bottom, float: true, clearance: 0pt, block(width: 0pt, height: h, [#metadata((par: me, h: h))<xe-float>]))
+  }
+}
+
+#let widow-check() = context {
+  let mark = here()
+  let top = page-margin("top")
+  if top == none { return }
+  // the paragraph the mark is in: its start and end tags, matched by nesting (a footnote entry is a paragraph too,
+  // and its tags may fall between the mark and its paragraph's end)
+  let tags = selector(<xe-ps>).or(<xe-pe>)
+  let enclosing(list, open) = {
+    let depth = 0
+    for t in list {
+      if (t.label == open) { if depth == 0 { return t.location().position() }; depth -= 1 } else { depth += 1 }
+    }
+    none
+  }
+  let s = enclosing(query(tags.before(mark, inclusive: false)).rev(), <xe-ps>)
+  let ep = enclosing(query(tags.after(mark, inclusive: false)), <xe-pe>)
+  if s == none or ep == none { return }
+  let pitch = (text.top-edge - text.bottom-edge).to-absolute()
+  let m = mark.position()
+  let line-top = m.y - text.top-edge.to-absolute()
+  let widow = (s.page + 1 == m.page and ep.page == m.page and line-top < top + 0.5 * pitch
+    and ep.y <= line-top + pitch + 0.5pt)
+  if widow or query(<xe-float>).any(f => f.value.par == s) [#metadata(s)<xe-widow>]
+}
 
 #let xengine(pitch: none, list-indent: 0.5in, body) = {
   if pitch == none { panic("xengine: `pitch` (the body's line pitch) is required") }
@@ -55,6 +124,9 @@
   show list: it => if list-indent == none { it } else {
     for item in it.children { list-item([•], item.body) }
   }
+  // No footnote widows (widow-start, above).
+  show par: it => [#widow-start(it)<xe-ps>#it#metadata(none)<xe-pe>]
+  show footnote: it => it + widow-check()
   body
 }
 

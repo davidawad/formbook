@@ -204,11 +204,13 @@ fn times_doc_dirs(root: &Path) -> Res<Vec<PathBuf>> {
 /// True when the audited exemplar calls for Times New Roman in the template (and so for an
 /// embedded `TimesNewRomanPSMT`). A Times New Roman body does. Adobe Times (`body == "times"`)
 /// does only when the audit maps it to Times itself; when the audit maps it to `TeX Gyre Termes`
-/// the template declares Termes (what `fb lint fonts` demands) and no TNR is expected.
+/// the template declares Termes (what `fb lint fonts` demands) and no TNR is expected. A recorded
+/// `template_face` of Times New Roman (a ruling over the audit, see [`template_face`]) does too.
 fn wants_tnr(record: &Value) -> bool {
     let text = |k: &str| record.get(k).and_then(Value::as_str).unwrap_or("");
     let body = text("body").to_ascii_lowercase();
-    body.contains("timesnewroman")
+    record.get("template_face").and_then(Value::as_str) == Some("Times New Roman")
+        || body.contains("timesnewroman")
         || (body == "times" && matches!(text("face"), "Times New Roman" | "Times" | "Times-Roman"))
 }
 
@@ -243,6 +245,18 @@ pub fn latex_alt_prefix(engine: &str, prefix: &str) -> String {
         true => LATEX_TIMES.join("|"),
         false => String::new(),
     }
+}
+
+/// The face the template of an audited exemplar declares: the record's `template_face` when one is set (a
+/// ruling that overrides the audit, its reason in `note`; the measured `face` stays as audited), else `face`.
+pub fn template_face(record: &Value) -> &str {
+    let text = |k: &str| {
+        record
+            .get(k)
+            .and_then(Value::as_str)
+            .filter(|s| !s.is_empty())
+    };
+    text("template_face").or_else(|| text("face")).unwrap_or("")
 }
 
 /// The doc folder of a font-audit key `<doc>/usage/FILED-EXAMPLE-<id>.pdf`.
@@ -466,5 +480,12 @@ mod tests {
             r#"{"body":"times","face":"TeX Gyre Termes"}"#
         )));
         assert!(!wants_tnr(&j(r#"{"body":"garamond","face":""}"#)));
+        let ruled = j(r#"{"body":"georgia","face":"Gelasio","template_face":"Times New Roman"}"#);
+        assert!(wants_tnr(&ruled));
+        assert_eq!(template_face(&ruled), "Times New Roman");
+        assert_eq!(
+            template_face(&j(r#"{"body":"georgia","face":"Gelasio"}"#)),
+            "Gelasio"
+        );
     }
 }

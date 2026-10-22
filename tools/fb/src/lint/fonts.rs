@@ -148,7 +148,7 @@ fn audit(root: &Path) -> Res<Vec<(PathBuf, String)>> {
         let Some(doc) = crate::fonts::audit_doc(path) else {
             continue;
         };
-        let face = record.get("face").and_then(Value::as_str).unwrap_or("");
+        let face = crate::fonts::template_face(record);
         if !face.is_empty() {
             docs.entry(doc.to_string())
                 .or_default()
