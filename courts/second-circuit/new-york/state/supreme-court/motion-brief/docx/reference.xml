@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The N.Y. Supreme Court memorandum of law's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs;
+     docs/EVAL-LOOP.md, "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; 22 NYCRR
+     202.5(a) and CPLR 2101(a) name no face) at 12 pt (size 24 half points; 202.5(a): print no smaller than
+     12-point); Body Text in exact 24 pt line boxes (480 twips: typst pitch-body, double spacing, 202.5(a)) with a
+     half-inch first-line indent; single lines in 13.8 pt boxes (276 twips: typst pitch-single); Footnote Text at 11 pt
+     (size 22; 202.5(a): footnotes no smaller than 10-point) in 12.65 pt boxes (253 twips: typst pitch-note), 6 pt
+     after each note (typst note-gap). Body Text Note: Body Text without widow control, for a paragraph that anchors a
+     footnote (typst may leave its last line alone). docx/nysupct-motion-brief.lua writes the three sections (letter
+     page, one-inch margins, 202.5(a): the cover without a page number, the tables in lower-case roman from i, the
+     body in arabic from 1) and the page-number footer (centred at 12 pt in a single-pitch line whose box ends 0.5 in
+     above the page edge, typst footer-distance), since its passes replace the last section, and every other
+     paragraph's own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="240" heading-after="240" note="253" note-size="22" note-after="120" footer="720">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+</reference>

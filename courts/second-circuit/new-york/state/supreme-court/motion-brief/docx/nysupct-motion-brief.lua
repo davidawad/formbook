@@ -1,377 +1,573 @@
--- nysupct memorandum of law on a motion, DOCX engine (docs/DOCX.md). The markdown contract (../README.md) becomes
--- a Word document on docx/reference.docx, laid out as typst/nysupct-motion-brief.typ: an unnumbered cover (caption,
--- title, counsel block), the table of contents and table of authorities (lower-case roman), the body (markdown,
--- arabic from 1) with the signature block and service list, and the word-count certificate on its own page.
--- Every value comes from the sample's YAML frontmatter. No case-specific text lives here.
--- Known limits (BLOCKED, README "Engines"): TOC entries and TOA entries carry no page numbers until a field
--- update (LibreOffice does not honour TA/TOA fields); the word count is the filter's count, not Word's.
+-- N.Y. Supreme Court memorandum of law on a motion, docx engine (docs/DOCX.md). The memorandum as Word paragraphs, so
+-- that it reads and breaks as typst/nysupct-motion-brief.typ does: the cover (court, county, the bordered party box
+-- with the index number, judge and motion sequence at its right, 22 NYCRR 202.5(a); the title; the counsel block)
+-- without a page number, the table of contents and the table of authorities (built from the `toa:` links of the
+-- body, as typst builds them) in lower-case roman from i, the body in arabic from 1 (headings, paragraphs,
+-- quotations, lists, footnotes), the signature block (CPLR 2101(a)), the service list and the word-count
+-- certification on a page of its own (202.8-b(c), the count made from the sample as typst makes it). Every
+-- case-specific word comes from the sample's frontmatter and body, never from this file. Font and paragraph styles
+-- are in docx/reference.xml.
+--
+-- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
+-- exact line boxes of the typst pitch (twips = 20 x pt: 480 the body, 276 a single line), the spaces between blocks
+-- those of the typst template, and the break rules of typst on every run. A paragraph that anchors a footnote stays a
+-- pandoc paragraph (style Body Text Note, without widow control: typst may leave its last line alone).
+--
+-- The tables' page numbers: fb render (tools/fb/src/docxpass.rs) renders the document, finds the needles this filter
+-- writes ($FORMBOOK_NEEDLES: the court line, the two table titles, each heading with the words after it, each
+-- citation with the words after it, in document order) in the LibreOffice PDF and renders again with their pages
+-- ($FORMBOOK_PAGES) until they settle.
+
+local xe = require("docx.xengine")
+local stringify = pandoc.utils.stringify
+
+local BODY, SINGLE = 480, 276            -- typst pitch-body 24 pt, pitch-single 13.8 pt
+local GAP = 480                          -- typst gap: a blank double line
+local HGAP = 240                         -- typst heading-gap 12 pt
+local INDENT = 720                       -- typst para-indent 0.5 in
+local TEXTW = 9360                       -- 6.5 in
+local CAP_BOX, CAP_GUTTER = 5184, 288    -- typst caption-box 3.6 in, caption-gutter 0.2 in
+local COVER_GAP = 2304                   -- typst cover-gap 1.6 in
+local COUNSEL_W = 5184                   -- typst counsel-width 3.6 in
+local QUOTE = 720                        -- typst quote-indent 0.5 in
+local TOC_INDENT, TOC_COL = 576, 720     -- typst toc-indent 0.4 in, toc-col 0.5 in
+local TOA_COL, TOA_HANG = 1440, 720      -- typst toa-col 1 in, toa-hang 0.5 in
+local TOA_ABOVE = 120                    -- typst toa-above 6 pt
+local SIG = 4608                         -- typst sig-col 3.2 in
+local RULE_SHORT = 864                   -- typst rule-short 0.6 in
+local TOC_DEPTH = 4
+local PASSIM_AT = 7                      -- typst passim-threshold
+local LIMIT_IN_CHIEF, LIMIT_REPLY = 7000, 4200 -- 22 NYCRR 202.8-b(a)(i), (ii)
+local NEEDLE_MAX = 60
+local GROUPS = { { "case", "Cases:" }, { "constitution", "Constitutional Provisions:" }, { "statute", "Statutes:" },
+  { "regulation", "Regulations:" }, { "rule", "Rules:" }, { "other", "Other Authorities:" } }
+
+-- The sections: letter page, one-inch margins (22 NYCRR 202.5(a)); the page number centered in a 13.8 pt line whose
+-- box ends 0.5 in above the page edge (typst footer-distance), none on the cover.
+local FOOTER = '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:jc w:val="center"/>'
+  .. '</w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText>'
+  .. '</w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/>'
+  .. '</w:r></w:p>'
+
+local function sect_pr(footer, fmt, start)
+  local pg = fmt and ('<w:pgNumType w:fmt="' .. fmt .. '" w:start="' .. start .. '"/>') or ""
+  return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/><w:pgSz w:w="12240" w:h="15840"/>'
+    .. '<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>'
+    .. pg .. '</w:sectPr>'
+end
+
+-- The paragraph that ends a section (a 1 pt line, so it never pushes a full page's last line on).
+local function section_end(footer, fmt, start)
+  return '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>'
+    .. sect_pr(footer, fmt, start) .. '</w:pPr></w:p>'
+end
+
+local function fail(msg) error("nysupct-motion-brief: " .. msg, 0) end
+
+local function plain(v)
+  if v == nil then return "" end
+  if type(v) == "string" then return v end
+  return stringify(v)
+end
+
+local function items(v)
+  if v == nil then return {} end
+  if pandoc.utils.type(v) == "List" then
+    local out = {}
+    for _, x in ipairs(v) do out[#out + 1] = x end
+    return out
+  end
+  return { v }
+end
+
+-- Break opportunities as typst has them (Unicode line breaking, UAX #14): none inside a token of adjacent parentheses
+-- ("3211(a)(1)"; lib/typst/xengine.typ boxes it): a word joiner (U+2060) between ")" and "("; one after a slash
+-- followed by a letter, where LibreOffice keeps the word whole: a zero-width space (U+200B) after it. Neither shows in
+-- the PDF text.
+local function brk(t)
+  if t:find(")(", 1, true) then t = t:gsub("%)%(", ")\u{2060}(") end
+  if t:find("/", 1, true) then t = t:gsub("/([^/%d%s])", "/\u{200B}%1") end
+  return t
+end
+
+local function break_rules(s)
+  local t = brk(s.text)
+  if t ~= s.text then return pandoc.Str(t) end
+end
+
+-- No break at a space before a period (". . ." after a word): the space becomes a no-break space, as wide. A doubled
+-- sign stays with its number ("§§ 3211": typst binds it with a box).
+local function bind(l)
+  for i = 2, #l do
+    local s = l[i]
+    if s.t == "Str" and l[i - 1].t == "Space" and s.text:sub(1, 1) == "." then l[i - 1] = pandoc.Str("\u{00A0}") end
+  end
+  for i = 1, #l - 1 do
+    local a = l[i]
+    if a.t == "Str" and (a.text == "\u{00A7}\u{00A7}" or a.text == "\u{00B6}\u{00B6}") and l[i + 1].t == "Space" then
+      l[i + 1] = pandoc.Str("\u{00A0}")
+    end
+  end
+  return l
+end
+
+-- A paragraph: o = { before, after, line, left, right, hanging, first, jc, keep, lines, pre, tabs, border }.
+local function p(body, o)
+  o = o or {}
+  local props = {}
+  if o.keep then props[#props + 1] = xe.KEEP elseif o.lines then props[#props + 1] = xe.LINES end
+  if o.pre then props[#props + 1] = o.pre end
+  if o.border then
+    props[#props + 1] = '<w:pBdr><w:' .. o.border .. ' w:val="single" w:sz="4" w:space="0" w:color="000000"/></w:pBdr>'
+  end
+  if o.tabs then props[#props + 1] = o.tabs end
+  props[#props + 1] = xe.spacing(o.before or 0, o.after or 0, o.line or SINGLE)
+  props[#props + 1] = xe.ind(o.left or 0, o.hanging, (not o.hanging) and (o.first or 0) or nil, o.right)
+  props[#props + 1] = xe.jc(o.jc or "left")
+  return xe.para(props, body or "")
+end
+
+local function line(xml, o)
+  return { xml = xml, o = o }
+end
+
+-- Single-spaced lines (typst line-stack): each item a line() or "" (a blank single line). `o.keep`: every line kept
+-- with the next (typst: an unbreakable block); `o.above`: the space above the first.
+local function stack(lines, o)
+  o = o or {}
+  local out = {}
+  for k, l in ipairs(lines) do
+    local po = {}
+    if l ~= "" then for key, v in pairs(l.o or {}) do po[key] = v end end
+    po.before = k == 1 and (o.above or 0) or 0
+    if o.keep and k < #lines then po.keep = true end
+    out[#out + 1] = p(l == "" and "" or l.xml, po)
+  end
+  if #out == 0 then out[1] = p("") end
+  return table.concat(out)
+end
+
+-- A one-row table with fixed column widths; cells = { { xml, tcpr } }; the row is not split across pages.
+local function table_xml(widths, cells)
+  local grid, tcs, total = {}, {}, 0
+  for i, w in ipairs(widths) do
+    grid[#grid + 1] = '<w:gridCol w:w="' .. w .. '"/>'
+    tcs[#tcs + 1] = '<w:tc><w:tcPr><w:tcW w:w="' .. w .. '" w:type="dxa"/>' .. (cells[i][2] or "") .. '</w:tcPr>'
+      .. cells[i][1] .. '</w:tc>'
+    total = total + w
+  end
+  return '<w:tbl><w:tblPr><w:tblW w:w="' .. total .. '" w:type="dxa"/><w:tblLayout w:type="fixed"/>'
+    .. '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/>'
+    .. '<w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
+    .. '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="0"/>'
+    .. '</w:tblPr><w:tblGrid>' .. table.concat(grid) .. '</w:tblGrid>'
+    .. '<w:tr><w:trPr><w:cantSplit/></w:trPr>' .. table.concat(tcs) .. '</w:tr></w:tbl>'
+end
 
 -- ---------------------------------------------------------------------------
--- Inline runs and paragraphs (WordprocessingML written as raw OpenXML)
+-- Needles and pages (tools/fb/src/docxpages.rs)
 -- ---------------------------------------------------------------------------
 
-local function esc(s)
-  s = s:gsub("&", "&amp;")
-  s = s:gsub("<", "&lt;")
-  s = s:gsub(">", "&gt;")
+local function norm(s)
+  return (s:lower():gsub("[^a-z0-9]", ""))
+end
+
+local needles = {}
+local function needle(id, kind, text, context)
+  local long = norm(text .. " " .. (context or "")):sub(1, NEEDLE_MAX)
+  local short = ""
+  for w in text:gmatch("%S+") do
+    short = short .. norm(w)
+    if #short >= 8 then break end
+  end
+  if short == "" then short = long end
+  needles[#needles + 1] = { id = id, kind = kind, needle = long, fallback = short:sub(1, NEEDLE_MAX) }
+end
+
+local labels = {}
+local function load_pages()
+  local path = os.getenv("FORMBOOK_PAGES")
+  if not path or path == "" then return end
+  local f = io.open(path, "r")
+  if not f then return end
+  for l in f:lines() do
+    local id, _, label = l:match("^([^\t]+)\t([^\t]*)\t(.*)$")
+    if id then labels[id] = label end
+  end
+  f:close()
+end
+
+local function write_file(env, text)
+  local path = os.getenv(env)
+  if not path or path == "" then return end
+  local f = assert(io.open(path, "w"))
+  f:write(text)
+  f:close()
+end
+
+local function has_note(b)
+  local found = false
+  pandoc.Blocks({ b }):walk({ Note = function() found = true end })
+  return found
+end
+
+-- ---------------------------------------------------------------------------
+
+local function read_file(path)
+  if path == nil or path == "" then return nil end
+  local f = io.open(path, "r")
+  if f == nil then return nil end
+  local s = f:read("a")
+  f:close()
   return s
 end
 
-local function run(text, f)
-  f = f or {}
-  local rpr = ""
-  if f.b then rpr = rpr .. "<w:b/>" end
-  if f.i then rpr = rpr .. "<w:i/>" end
-  if rpr ~= "" then rpr = "<w:rPr>" .. rpr .. "</w:rPr>" end
-  return "<w:r>" .. rpr .. '<w:t xml:space="preserve">' .. esc(text) .. "</w:t></w:r>"
-end
-
-local function runs(inlines, f)
-  f = f or {}
-  local out = {}
-  for _, e in ipairs(inlines) do
-    local t = e.t
-    if t == "Str" then
-      out[#out + 1] = run(e.text, f)
-    elseif t == "Space" or t == "SoftBreak" or t == "LineBreak" then
-      out[#out + 1] = run(" ", f)
-    elseif t == "Strong" or t == "Emph" then
-      out[#out + 1] = runs(e.content, { b = f.b or t == "Strong", i = f.i or t == "Emph" })
-    elseif t == "Quoted" then
-      local q = (e.quotetype == "DoubleQuote") and { "\u{201C}", "\u{201D}" } or { "\u{2018}", "\u{2019}" }
-      out[#out + 1] = run(q[1], f) .. runs(e.content, f) .. run(q[2], f)
-    elseif e.content then
-      out[#out + 1] = runs(e.content, f)
-    elseif e.text then
-      out[#out + 1] = run(e.text, f)
-    end
-  end
-  return table.concat(out)
-end
-
--- o: style, inls | text | raw, f (flags), keepNext, pageBreakBefore, rule, before, after, left, right, hanging, jc
-local function para(o)
-  local p = {}
-  if o.style then p[#p + 1] = '<w:pStyle w:val="' .. o.style .. '"/>' end
-  if o.keepNext then p[#p + 1] = "<w:keepNext/>" end
-  if o.pageBreakBefore then p[#p + 1] = "<w:pageBreakBefore/>" end
-  if o.rule then p[#p + 1] = '<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="000000"/></w:pBdr>' end
-  if o.before or o.after then
-    p[#p + 1] = "<w:spacing"
-      .. (o.before and (' w:before="' .. o.before .. '"') or "")
-      .. (o.after and (' w:after="' .. o.after .. '"') or "") .. "/>"
-  end
-  if o.left or o.right or o.hanging then
-    p[#p + 1] = "<w:ind" .. (o.left and (' w:left="' .. o.left .. '"') or "")
-      .. (o.right and (' w:right="' .. o.right .. '"') or "")
-      .. (o.hanging and (' w:hanging="' .. o.hanging .. '"') or "") .. "/>"
-  end
-  if o.jc then p[#p + 1] = '<w:jc w:val="' .. o.jc .. '"/>' end
-  local ppr = (#p > 0) and ("<w:pPr>" .. table.concat(p) .. "</w:pPr>") or ""
-  local body = o.raw or (o.inls and runs(o.inls, o.f)) or (o.text and run(o.text, o.f)) or ""
-  return "<w:p>" .. ppr .. body .. "</w:p>"
-end
-
-local function R(xml) return pandoc.RawBlock("openxml", xml) end
-
--- Borderless table, one row. cells: {w = twips, paras = xml, top/bottom/right = border, mar_left = twips}.
-local function table_row(cells)
-  local total, tcs, grid = 0, {}, {}
-  for _, c in ipairs(cells) do
-    total = total + c.w
-    grid[#grid + 1] = '<w:gridCol w:w="' .. c.w .. '"/>'
-    local b = {}
-    if c.top then b[#b + 1] = '<w:top w:val="single" w:sz="6" w:space="0" w:color="000000"/>' end
-    if c.bottom then b[#b + 1] = '<w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/>' end
-    if c.right then b[#b + 1] = '<w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/>' end
-    local tcpr = '<w:tcW w:w="' .. c.w .. '" w:type="dxa"/>'
-    if #b > 0 then tcpr = tcpr .. "<w:tcBorders>" .. table.concat(b) .. "</w:tcBorders>" end
-    if c.mar_left then tcpr = tcpr .. '<w:tcMar><w:left w:w="' .. c.mar_left .. '" w:type="dxa"/></w:tcMar>' end
-    tcs[#tcs + 1] = "<w:tc><w:tcPr>" .. tcpr .. "</w:tcPr>" .. c.paras .. "</w:tc>"
-  end
-  return '<w:tbl><w:tblPr><w:tblW w:w="' .. total .. '" w:type="dxa"/><w:tblLayout w:type="fixed"/>'
-    .. '<w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr>'
-    .. "<w:tblGrid>" .. table.concat(grid) .. "</w:tblGrid><w:tr>" .. table.concat(tcs) .. "</w:tr></w:tbl>"
-end
-
--- Section break (the paragraph that closes a section). fmt nil: the cover, with no footer.
-local PG = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" '
-  .. 'w:header="720" w:footer="720" w:gutter="0"/>'
-local function section_break(fmt)
-  local ref = fmt and '<w:footerReference w:type="default" r:id="rIdFtr1"/>' or ""
-  local num = fmt and ('<w:pgNumType w:fmt="' .. fmt .. '" w:start="1"/>') or ""
-  return '<w:p><w:pPr><w:sectPr>' .. ref .. PG .. num .. "</w:sectPr></w:pPr></w:p>"
-end
+-- The frontmatter as written (the authorities' names and citations print as typed, as typst prints them).
+local RAW = pandoc.json.decode(read_file(os.getenv("FORMBOOK_META")) or "{}", false)
 
 -- ---------------------------------------------------------------------------
--- Metadata readers (pandoc 3.12: scalars are lists of inlines; lists are lists of those)
+-- Word count (typst count-words, rule for rule; NYSUPCT-LEN-002)
 -- ---------------------------------------------------------------------------
 
-local function inls(v)
+local function each_line(s, f)
   local out = {}
-  if v == nil then return out end
-  if type(v) ~= "table" and type(v) ~= "userdata" then
-    out[1] = { t = "Str", text = tostring(v) }
-    return out
-  end
-  for _, e in ipairs(v) do
-    if e.t == "Para" or e.t == "Plain" then
-      for _, x in ipairs(e.content) do out[#out + 1] = x end
-    elseif e.t then
-      out[#out + 1] = e
-    else
-      for _, x in ipairs(inls(e)) do out[#out + 1] = x end
-    end
+  for l in (s .. "\n"):gmatch("(.-)\n") do out[#out + 1] = f(l) end
+  return table.concat(out, "\n")
+end
+
+local function count_words(md)
+  local s = md:gsub("<!%-%-.-%-%->", " ")
+  s = each_line(s, function(l) return (l:gsub("^%[%^[^%]]+%]:", " ")) end)   -- footnote definition labels
+  s = s:gsub("%[%^[^%]]+%]", "")                                              -- footnote references
+  s = s:gsub("%[([^%]]*)%]%([^)]*%)", "%1")                                   -- links keep their text
+  s = each_line(s, function(l)
+    l = l:gsub("^######?[ \t]+", ""):gsub("^#?#?#?#?#[ \t]+", "")
+    l = l:gsub("^>[ \t]?", "")
+    l = l:gsub("^[ \t]*[-*+][ \t]+", ""):gsub("^[ \t]*%d+[.)][ \t]+", "")    -- list markers are not words
+    return l
+  end)
+  s = s:gsub("\\(.)", "%1")                                                   -- backslash escapes
+  s = s:gsub("%*", "")
+  s = s:gsub("^_", ""):gsub("([%s%(%[\"])_", "%1"):gsub("\u{201C}_", "\u{201C}")
+  s = s:gsub("_([%s%.,;:%)%]\"!?])", "%1"):gsub("_\u{201D}", "\u{201D}"):gsub("_$", "")
+  local n = 0
+  for _ in s:gmatch("%S+") do n = n + 1 end
+  return n
+end
+
+local function group_digits(n)
+  local s = tostring(n)
+  local out = ""
+  for i = 1, #s do
+    if i > 1 and (#s - i + 1) % 3 == 0 then out = out .. "," end
+    out = out .. s:sub(i, i)
   end
   return out
 end
 
--- A list of lines: one inline list per item.
-local function items(v)
-  local out = {}
-  if v == nil then return out end
-  if type(v) ~= "table" and type(v) ~= "userdata" then
-    out[1] = inls(v)
-    return out
-  end
-  for _, e in ipairs(v) do out[#out + 1] = inls(e) end
-  return out
-end
-
--- Plain text of a metadata value (for sorting and checks).
-local function plain_of(v)
-  local s = {}
-  for _, e in ipairs(inls(v)) do s[#s + 1] = pandoc.utils.stringify(e) end
-  return table.concat(s)
-end
-
-local function para_lines(list, o)
-  local x = {}
-  for _, line in ipairs(list) do
-    local p = {}
-    for k, v in pairs(o) do p[k] = v end
-    p.inls = line
-    x[#x + 1] = para(p)
-  end
-  return table.concat(x)
-end
-
 -- ---------------------------------------------------------------------------
--- Blocks
+-- Cover: caption, title, counsel (typst cover)
 -- ---------------------------------------------------------------------------
-
-local TEXT_W = 9360          -- 6.5 in
-local CAPTION_BOX = 5184     -- 3.6 in
-local GAP = 288              -- 0.2 in
-local HALF = 4680            -- 3.25 in
 
 local function caption(m)
-  local box = {}
-  for i, g in ipairs(m.parties) do
-    if i > 1 then box[#box + 1] = para{ style = "Centered", text = "-against-", f = { i = true }, before = 240, after = 240 } end
-    box[#box + 1] = para_lines(items(g.names), { style = "Single", left = GAP, right = GAP, after = 120 })
-    box[#box + 1] = para{ style = "Single", inls = inls(g.designation), jc = "right", right = GAP, before = 60, after = 120 }
+  local out = { stack({
+    line(xe.runs("SUPREME COURT OF THE STATE OF NEW YORK", { b = true }), { jc = "center" }),
+    line(xe.runs("COUNTY OF " .. pandoc.text.upper(plain(m.county)), { b = true })),
+  }) }
+  local left = { "" }
+  for i, g in ipairs(items(m.parties)) do
+    if i > 1 then
+      left[#left + 1] = ""
+      left[#left + 1] = line(xe.runs("-against-", { i = true }), { jc = "center" })
+      left[#left + 1] = ""
+    end
+    for _, n in ipairs(items(g.names)) do
+      left[#left + 1] = line(xe.inl(n), { left = CAP_GUTTER, right = CAP_GUTTER })
+    end
+    left[#left + 1] = ""
+    left[#left + 1] = line(xe.inl(g.designation), { right = CAP_GUTTER, jc = "right" })
   end
-  local right = para{ style = "Single", inls = inls(m.index_no) }
-  if m.judge then right = right .. para{ style = "Single", inls = inls(m.judge), before = 120 } end
-  if m.motion_seq then right = right .. para{ style = "Single", inls = inls(m.motion_seq), before = 120 } end
-  return para{ style = "Centered", text = "SUPREME COURT OF THE STATE OF NEW YORK", f = { b = true } }
-    .. para{ style = "Single", inls = inls(m.county), f = { b = true }, before = 240, after = 240 }
-    .. table_row{
-      { w = CAPTION_BOX, paras = table.concat(box), top = true, bottom = true, right = true },
-      { w = TEXT_W - CAPTION_BOX, paras = right, mar_left = GAP },
-    }
-    .. para{ style = "Single", after = 240 }
+  left[#left + 1] = ""
+  local right = { "", line(xe.inl(m.index_no)) }
+  if m.judge then right[#right + 1] = line(xe.inl(m.judge)) end
+  if m.motion_seq then right[#right + 1] = line(xe.inl(m.motion_seq)) end
+  local rule = '<w:tcBorders><w:top w:val="single" w:sz="6" w:space="0" w:color="000000"/>'
+    .. '<w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/>'
+    .. '<w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:tcBorders>'
+  -- typst: the caption block 12 pt below the county line (Word has no space before a table: an empty paragraph)
+  out[#out + 1] = p("", { line = HGAP })
+  out[#out + 1] = table_xml({ CAP_BOX, TEXTW - CAP_BOX }, {
+    { stack(left), rule },
+    { stack(right), '<w:tcMar><w:left w:w="' .. CAP_GUTTER .. '" w:type="dxa"/></w:tcMar>' },
+  })
+  return table.concat(out)
 end
 
--- Cover: caption, the title centred, and the counsel block at the foot of the page (approximate spacing).
 local function cover(m)
-  local c = m.counsel
-  local foot = para_lines(items(c.names), { style = "Single" })
-    .. para_lines(items(c.lines), { style = "Single", before = 120 })
+  local c = m.counsel or {}
+  local ls = {}
+  for _, l in ipairs(items(c.names)) do ls[#ls + 1] = line(xe.inl(l)) end
+  for _, l in ipairs(items(c.lines)) do ls[#ls + 1] = line(xe.inl(l)) end
   if c.on_brief then
-    foot = foot .. para{ style = "Single", text = "On the Memorandum of Law:", before = 240 }
-      .. para_lines(items(c.on_brief), { style = "Single" })
+    ls[#ls + 1] = ""
+    ls[#ls + 1] = line(xe.runs("On the Memorandum of Law:"))
+    for _, l in ipairs(items(c.on_brief)) do ls[#ls + 1] = line(xe.inl(l)) end
   end
+  for _, l in ipairs(ls) do if l ~= "" then l.o = { right = TEXTW - COUNSEL_W } end end
   return caption(m)
-    .. para{ style = "Centered", inls = inls(m.title), f = { b = true }, before = 2304, after = 0 }
-    .. para{ style = "Single", text = "", before = 2880 }
-    .. foot
+    .. p(xe.inl(m.title, { b = true }), { before = COVER_GAP, jc = "center" })
+    .. stack(ls, { above = COVER_GAP, keep = true })
+    .. section_end("rIdFtrNone")
 end
 
-local function headings(blocks, maxlevel)
-  local out = {}
-  for _, b in ipairs(blocks) do
-    if b.t == "Header" and b.level <= maxlevel then
-      out[#out + 1] = { level = b.level, text = pandoc.utils.stringify(b.content) }
-    end
-  end
-  return out
+-- ---------------------------------------------------------------------------
+-- Tables of contents and authorities (typst toc-section, toa-section)
+-- ---------------------------------------------------------------------------
+
+-- A table's title, its column label at the right; the title opens a page.
+local function table_head(title, col, brk_before)
+  return p(xe.runs(title, { b = true }), { pre = brk_before and xe.BREAK or nil, after = HGAP, keep = true, jc = "center" })
+    .. p(xe.runs(col), { keep = true, jc = "right" })
 end
 
--- TOC field (TOC \o "1-N" \h \z \u) whose cached result is the heading list; page numbers need a field update.
-local function toc_field(hs, depth)
-  if #hs == 0 then return "" end
-  local out = {}
-  for i, h in ipairs(hs) do
-    local pre, post = "", ""
-    if i == 1 then
-      pre = '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> TOC \\o "1-'
-        .. depth .. '" \\h \\z \\u </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r>'
+-- A row: the text wraps before the page column, a dot leader runs to the page reference (typst listing-row).
+local function row(text_xml, pages_xml, left, hanging, col, before)
+  local tabs = '<w:tabs><w:tab w:val="right" w:leader="dot" w:pos="' .. TEXTW .. '"/></w:tabs>'
+  return p(text_xml .. xe.runs(xe.LEAD) .. pages_xml, { lines = true, tabs = tabs,
+    before = before, left = left, hanging = hanging, right = col })
+end
+
+local function toc(entries)
+  local out = { table_head("TABLE OF CONTENTS", "Page", false) }
+  for _, e in ipairs(entries) do
+    if e.level <= TOC_DEPTH then
+      local ind = (e.level - 1) * TOC_INDENT
+      out[#out + 1] = row(xe.inl(e.title), xe.runs(labels[e.id] or "0"), ind + TOC_INDENT, TOC_INDENT, TOC_COL, 0)
     end
-    if i == #hs then post = '<w:r><w:fldChar w:fldCharType="end"/></w:r>' end
-    out[#out + 1] = '<w:p><w:pPr><w:pStyle w:val="TOC' .. h.level .. '"/></w:pPr>' .. pre .. run(h.text) .. post .. "</w:p>"
   end
   return table.concat(out)
 end
 
-local TOA_GROUPS = {
-  { "case", "Cases:" }, { "constitution", "Constitutional Provisions:" }, { "statute", "Statutes:" },
-  { "regulation", "Regulations:" }, { "rule", "Rules:" }, { "other", "Other Authorities:" },
-}
-
 local function sort_key(a)
-  local s = plain_of(a.sort or ((a.name and plain_of(a.name) or "") .. " " .. plain_of(a.cite)))
-  return (s:lower():gsub("[^a-z0-9 ]", ""))
+  local s = a.sort or ((a.name or "") .. " " .. (a.cite or ""))
+  return (pandoc.text.lower(tostring(s)):gsub("[^a-z0-9 ]", ""))
 end
 
--- Table of authorities: the authorities linked from the body (toa:KEY), grouped as in the exemplar.
--- Page numbers are not printed (BLOCKED: TA/TOA fields are not honoured by LibreOffice).
-local function toa_section(m, used)
-  for key in pairs(used) do
-    if m.authorities[key] == nil then
-      error("nysupct-motion-brief: link toa:" .. key .. " has no entry under authorities:")
+local function toa(cites, brk_before)
+  local authorities = RAW.authorities or {}
+  local out = { table_head("TABLE OF AUTHORITIES", "Page(s)", brk_before) }
+  -- the distinct page labels of each authority, in document order (the page a citation starts on)
+  local pages, seen = {}, {}
+  for _, c in ipairs(cites) do
+    if authorities[c.key] == nil then fail("link `toa:" .. c.key .. "` has no entry under `authorities:` in the frontmatter") end
+    pages[c.key] = pages[c.key] or {}
+    seen[c.key] = seen[c.key] or {}
+    local l = labels[c.id] or "0"
+    if not seen[c.key][l] then
+      seen[c.key][l] = true
+      pages[c.key][#pages[c.key] + 1] = l
     end
   end
-  local x = {
-    para{ style = "Centered", text = "TABLE OF AUTHORITIES", f = { b = true }, after = 240 },
-    para{ style = "Single", text = "Page(s)", jc = "right", after = 240 },
-  }
-  for _, grp in ipairs(TOA_GROUPS) do
+  for _, g in ipairs(GROUPS) do
     local members = {}
-    for key, a in pairs(m.authorities) do
-      if used[key] and plain_of(a.kind) == grp[1] then members[#members + 1] = { key = key, a = a } end
+    for key, a in pairs(authorities) do
+      if pages[key] and a.kind == g[1] then members[#members + 1] = { key = key, a = a, sort = sort_key(a) } end
     end
     if #members > 0 then
-      table.sort(members, function(p, q) return sort_key(p.a) < sort_key(q.a) end)
-      x[#x + 1] = para{ style = "Single", text = grp[2], f = { b = true }, before = 240, after = 120, keepNext = true }
-      for _, e in ipairs(members) do
-        local is_case = plain_of(e.a.kind) == "case"
-        local body = ""
-        if e.a.name then body = runs(inls(e.a.name), { i = is_case }) .. run(", ") end
-        body = body .. runs(inls(e.a.cite))
-        x[#x + 1] = para{ style = "Single", raw = body, left = 504, hanging = 504, after = 120 }
+      table.sort(members, function(x, y)
+        if x.sort ~= y.sort then return x.sort < y.sort end
+        return x.key < y.key
+      end)
+      out[#out + 1] = p(xe.runs(g[2], { b = true }), { before = SINGLE, keep = true })
+      for _, mm in ipairs(members) do
+        local a = mm.a
+        -- the name and citation as typed (typst prints them as plain strings)
+        local text
+        if a.name ~= nil then
+          text = xe.runs(tostring(a.name), { i = g[1] == "case" }) .. xe.runs(", " .. tostring(a.cite))
+        else
+          text = xe.runs(tostring(a.cite))
+        end
+        local pl = pages[mm.key]
+        local pxml = #pl >= PASSIM_AT and xe.runs("passim", { i = true }) or xe.runs(table.concat(pl, ", "))
+        out[#out + 1] = row(text, pxml, TOA_HANG, TOA_HANG, TOA_COL, TOA_ABOVE)
       end
     end
   end
-  return table.concat(x)
+  return table.concat(out)
 end
 
-local function signature(m)
-  local sig = m.signature
-  local dated
-  if m.place then
-    dated = para{ style = "Single", text = "Dated:" } .. para{ style = "Single", inls = inls(m.place) }
-      .. para{ style = "Single", inls = inls(m.date) }
-  else
-    dated = para{ style = "Single", raw = run("Dated: ") .. runs(inls(m.date)) }
+-- The citations of a list of inlines, in document order, as needles (B in the body, N in a footnote): the link text
+-- and the words after it.
+local cites = {}
+local scan_blocks
+local function scan_inlines(list, in_note)
+  for i, el in ipairs(list) do
+    if el.t == "Link" and el.target:match("^toa:") then
+      local rest = {}
+      for j = i + 1, #list do rest[#rest + 1] = list[j] end
+      local id = "A:" .. (#cites + 1)
+      cites[#cites + 1] = { id = id, key = el.target:sub(5) }
+      needle(id, in_note and "N" or "B", stringify(el.content), stringify(rest):sub(1, 40))
+    elseif el.t == "Note" then
+      scan_blocks(el.content, true)
+    elseif el.content and type(el.content) ~= "string" and el.t ~= "Link" then
+      scan_inlines(el.content, in_note)
+    end
   end
-  local right = para{ style = "Single", text = "Respectfully submitted,", before = 240 }
-    .. para_lines(items(sig.firm), { style = "Single", before = 240 })
-    .. para{ style = "Single", text = "By:", rule = true, before = 480, right = 1080 }
-    .. para{ style = "Single", inls = inls(sig.signer), before = 60 }
-    .. para_lines(items(sig.lines), { style = "Single" })
-  return para{ style = "Single", after = 0, before = 240 }
-    .. table_row{ { w = HALF, paras = dated }, { w = HALF, paras = right } }
+end
+scan_blocks = function(blocks, in_note)
+  for _, b in ipairs(blocks) do
+    if b.t == "Para" or b.t == "Plain" then
+      scan_inlines(b.content, in_note)
+    elseif b.t == "BlockQuote" then
+      scan_blocks(b.content, in_note)
+    elseif b.t == "BulletList" or b.t == "OrderedList" then
+      for _, item in ipairs(b.content) do scan_blocks(item, in_note) end
+    end
+  end
+end
+
+-- ---------------------------------------------------------------------------
+-- Body blocks
+-- ---------------------------------------------------------------------------
+
+-- `top`: the heading opens the body section, where Word keeps the space above it and typst drops it.
+local function heading(b, top)
+  local lv = b.level
+  if lv > 5 then fail("headings deeper than level 5 are not supported") end
+  local o = { before = top and 0 or HGAP, after = HGAP, keep = true }
+  if lv == 1 then o.jc = "center" end
+  return p(xe.inl(b.content, { b = lv <= 4, i = lv >= 4 }), o)
+end
+
+local function body_block(b, out, top)
+  if b.t == "Para" or b.t == "Plain" then
+    if has_note(b) then
+      out[#out + 1] = pandoc.Div({ pandoc.Para(b.content) }, { ["custom-style"] = "Body Text Note" })
+    else
+      out[#out + 1] = xe.raw(p(xe.inl(b.content), { line = BODY, first = INDENT }))
+    end
+  elseif b.t == "Header" then
+    out[#out + 1] = xe.raw(heading(b, top))
+  elseif b.t == "BlockQuote" then
+    for k, q in ipairs(b.content) do
+      if q.t ~= "Para" and q.t ~= "Plain" then fail("unsupported block in a quotation: " .. q.t) end
+      out[#out + 1] = xe.raw(p(xe.inl(q.content), { left = QUOTE, right = QUOTE,
+        before = k == 1 and HGAP or 0, after = k == #b.content and HGAP or 0 }))
+    end
+  elseif b.t == "BulletList" or b.t == "OrderedList" then
+    local n = b.t == "OrderedList" and b.listAttributes.start or 1
+    for _, item in ipairs(b.content) do
+      if #item ~= 1 or (item[1].t ~= "Plain" and item[1].t ~= "Para") then fail("unsupported list item (one paragraph each)") end
+      local lab = b.t == "OrderedList" and (n .. ".") or "\u{2022}"
+      out[#out + 1] = xe.raw(p(xe.runs(lab .. "\t") .. xe.inl(item[1].content), { line = BODY, left = 2 * INDENT,
+        hanging = INDENT, tabs = '<w:tabs><w:tab w:val="left" w:pos="' .. (2 * INDENT) .. '"/></w:tabs>' }))
+      n = n + 1
+    end
+  else
+    fail("unsupported block " .. b.t)
+  end
+end
+
+-- ---------------------------------------------------------------------------
+-- Signature block, service list, certification
+-- ---------------------------------------------------------------------------
+
+local function signature(m)
+  local sig = m.signature or {}
+  local right = { line(xe.runs("Respectfully submitted,")), "" }
+  for _, l in ipairs(items(sig.firm)) do right[#right + 1] = line(xe.inl(l)) end
+  right[#right + 1] = ""
+  right[#right + 1] = line(xe.runs("By:"), { border = "bottom", right = RULE_SHORT })
+  right[#right + 1] = line(xe.inl(sig.signer))
+  for _, l in ipairs(items(sig.lines)) do right[#right + 1] = line(xe.inl(l)) end
+  local left = { line(xe.runs("Dated:")), line(xe.inl(m.place)), line(xe.inl(m.date)) }
+  -- the blank double line above is the block's own (typst: above gap)
+  return p("", { line = GAP, keep = true })
+    .. table_xml({ TEXTW - SIG, SIG }, { { stack(left) }, { stack(right) } })
 end
 
 local function service(m)
   if m.to == nil then return "" end
-  local x = { para{ style = "Single", text = "TO:", before = 480 } }
-  for _, g in ipairs(m.to) do
-    x[#x + 1] = para_lines(items(g.names), { style = "Single", before = 240 })
-    x[#x + 1] = para_lines(items(g.lines), { style = "Single", f = { i = true } })
+  local ls = { line(xe.runs("TO:")) }
+  for _, g in ipairs(items(m.to)) do
+    ls[#ls + 1] = ""
+    for _, n in ipairs(items(g.names)) do ls[#ls + 1] = line(xe.inl(n)) end
+    for _, l in ipairs(items(g.lines)) do ls[#ls + 1] = line(xe.inl(l)) end -- as typed (typst)
   end
-  return table.concat(x)
-end
-
--- Digits in groups of three (the certificate's count).
-local function group_digits(n)
-  local s = tostring(n)
-  local r = s:reverse():gsub("(%d%d%d)", "%1,"):reverse()
-  r = r:gsub("^,", "")
-  return r
+  return stack(ls, { above = GAP, keep = true })
 end
 
 local function certificate(m, words, filing)
-  local clause = (filing == "reply") and "202.8-b(a)(ii)" or "202.8-b(a)(i)"
+  local clause = filing == "reply" and "202.8-b(a)(ii)" or "202.8-b(a)(i)"
   local text = "I hereby certify pursuant to 22 NYCRR 202.8-b(c) that the total number of words in the foregoing "
     .. "memorandum of law, exclusive of the caption, table of contents, table of authorities, and signature block, is "
     .. group_digits(words) .. ", according to the word count of the document as prepared, and thus that the document "
     .. "complies with the word count limit set forth in 22 NYCRR " .. clause .. "."
-  local dated = para{ style = "Single", text = "Dated: " .. plain_of(m.place) .. ", " .. plain_of(m.date) }
-  local sig_right = para{ style = "Single", text = "", rule = true, before = 720, right = 1080 }
-    .. para{ style = "Single", inls = inls(m.signature.signer), before = 60 }
-  return para{ style = "Centered", text = "CERTIFICATION OF COMPLIANCE WITH WORD COUNT LIMIT", f = { b = true },
-      pageBreakBefore = true, after = 240 }
-    .. para{ style = "BodyText", raw = run(text) }
-    .. para{ style = "Single", after = 0, before = 240 }
-    .. table_row{ { w = HALF, paras = dated }, { w = HALF, paras = sig_right } }
+  return p(xe.runs("CERTIFICATION OF COMPLIANCE WITH WORD COUNT LIMIT", { b = true }),
+      { pre = xe.BREAK, after = GAP, keep = true, jc = "center" })
+    .. p(xe.runs(text), { line = BODY, first = INDENT })
+    .. stack({ line(xe.runs("Dated: ") .. xe.inl(m.place) .. xe.runs(", ") .. xe.inl(m.date)), "", "" },
+      { above = GAP, keep = true })
+    .. table_xml({ TEXTW - SIG, SIG }, { { p("") },
+      { stack({ line(xe.inl((m.signature or {}).signer), { border = "top" }) }) } })
 end
 
 -- ---------------------------------------------------------------------------
 -- The document
 -- ---------------------------------------------------------------------------
 
-function Pandoc(doc)
+local function finish(doc)
+  load_pages()
   local m = doc.meta
-  local filing = m.filing and plain_of(m.filing) or "in-chief"
-  if filing ~= "in-chief" and filing ~= "reply" then
-    error("nysupct-motion-brief: `filing` must be `in-chief` or `reply`, not `" .. filing .. "`")
+  for _, k in ipairs({ "county", "index_no", "parties", "title", "date", "place", "counsel", "signature", "authorities" }) do
+    if m[k] == nil then fail("missing required metadata field `" .. k .. "`") end
   end
-  local limit = (filing == "reply") and 4200 or 7000
+  local filing = plain(m.filing ~= nil and m.filing or "in-chief")
+  if filing ~= "in-chief" and filing ~= "reply" then fail("`filing` must be `in-chief` or `reply`, not `" .. filing .. "`") end
+  local src = assert(read_file(PANDOC_STATE.input_files[1]))
+  local words = count_words((src:gsub("\r", ""):gsub("^%-%-%-\n.-\n%-%-%-[ \t]*\n", "", 1)))
+  local limit = filing == "reply" and LIMIT_REPLY or LIMIT_IN_CHIEF
+  if words > limit then fail(words .. " words exceeds the 22 NYCRR 202.8-b(a) limit of " .. limit) end
+  local with_toc = m.toc ~= false
 
-  -- Links to toa:KEY are the authority hits: they print as their text.
-  local used = {}
-  local d = pandoc.Pandoc(doc.blocks):walk{
-    Link = function(l)
-      if l.target:sub(1, 4) == "toa:" then
-        used[l.target:sub(5)] = true
-        return l.content
+  needle("S:start", "B", "SUPREME COURT OF THE STATE OF NEW YORK", "COUNTY OF " .. plain(m.county))
+  if with_toc then needle("S:toc", "B", "TABLE OF CONTENTS", "Page") end
+  needle("S:toa", "B", "TABLE OF AUTHORITIES", "Page(s)")
+  local entries, body, first_id = {}, {}, nil
+  for i, b in ipairs(doc.blocks) do
+    local nxt = doc.blocks[i + 1] and stringify(doc.blocks[i + 1]):sub(1, 40) or ""
+    if b.t == "Header" then
+      local id = "H:" .. (#entries + 1)
+      needle(id, "B", stringify(b.content), nxt)
+      entries[#entries + 1] = { id = id, level = b.level, title = b.content }
+      first_id = first_id or (i == 1 and id or nil)
+    else
+      if i == 1 then
+        first_id = "S:body"
+        needle(first_id, "B", stringify(b):sub(1, 40), nxt)
       end
-    end,
-  }
-  local blocks = d.blocks
-
-  -- Word count (22 NYCRR 202.8-b(c)): the body and its footnotes, without caption, TOC, TOA and signature.
-  local words = 0
-  local function count(s) for _ in s:gmatch("%S+") do words = words + 1 end end
-  local bare = pandoc.Pandoc(blocks):walk{
-    Note = function(note)
-      count(pandoc.utils.stringify(note.content))
-      return {}
-    end,
-  }
-  count(pandoc.utils.stringify(bare.blocks))
-  if words > limit then
-    error("nysupct-motion-brief: " .. words .. " words exceeds the 22 NYCRR 202.8-b(a) limit of " .. limit)
+      scan_blocks({ b }, false)
+    end
+    body_block(b, body, i == 1)
   end
 
-  local out = { R(cover(m) .. section_break(nil)) }
-  local front = ""
-  if m.toc ~= false then
-    front = para{ style = "Centered", text = "TABLE OF CONTENTS", f = { b = true }, after = 240 }
-      .. para{ style = "Single", text = "Page", jc = "right", after = 240 }
-      .. toc_field(headings(blocks, 4), 4)
-      .. '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'
-  end
-  out[#out + 1] = R(front .. toa_section(m, used) .. section_break("lowerRoman"))
-  for _, b in ipairs(blocks) do out[#out + 1] = b end
-  out[#out + 1] = R(signature(m) .. service(m))
-  out[#out + 1] = R(certificate(m, words, filing))
-  doc.blocks = out
-  -- pandoc would print title and date above the body; the cover and certificate carry them instead
-  doc.meta.title = nil
-  doc.meta.date = nil
-  return doc
+  local nl = {}
+  for _, n in ipairs(needles) do nl[#nl + 1] = table.concat({ n.id, n.kind, n.needle, n.fallback }, "\t") end
+  nl[#nl + 1] = "#section\t" .. (with_toc and "S:toc" or "S:toa") .. "\tlower-roman\t"
+  nl[#nl + 1] = "#section\t" .. (first_id or "S:toa") .. "\tdecimal\t"
+  write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
+  write_file("FORMBOOK_FOOTERS", "rIdFtrNy\t" .. FOOTER .. "\n")
+  write_file("FORMBOOK_FINAL", sect_pr("rIdFtrNy", "decimal", 1))
+
+  local front = (with_toc and toc(entries) or "") .. toa(cites, with_toc) .. section_end("rIdFtrNy", "lowerRoman", 1)
+  local out = { xe.raw(cover(m) .. front) }
+  for _, x in ipairs(body) do out[#out + 1] = x end
+  out[#out + 1] = xe.raw(signature(m) .. service(m) .. certificate(m, words, filing))
+  local blocks = pandoc.Blocks(out):walk({ Link = function(el) return el.content end }):walk({ Inlines = xe.inlines })
+  -- The frontmatter was consumed above; pandoc would otherwise write its title and date at the top.
+  return pandoc.Pandoc(blocks, pandoc.Meta({}))
 end
+
+return { { Str = break_rules, Inlines = bind }, { Pandoc = finish } }
