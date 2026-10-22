@@ -1,0 +1,3 @@
+PASS
+012d26e75e54529ae829fef2a30af980decef35e6cba4f601e76cf3879b564c0  usage/OUTPUT-amicus-brief.docx
+805243579677d624343b622a885d02e3919f3e8bc5ddfb77c094758458947d44  usage/OUTPUT-amicus-brief.docx.pdf
