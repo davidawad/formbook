@@ -6003,6 +6003,8 @@
       "class": "approximate",
       "face": "TeX Gyre Schola",
       "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.19 under David's 2026-10-17 ruling that Times New Roman is the standard: M.D.N.C. LR 7.1(a) asks a proportional font no smaller than 13 point and names no face, so the template is set in Times New Roman 13 pt on typst and docx, as the ncmd motion brief is, not in the exemplar's Century Schoolbook stand-in Schola (the docx had named EB Garamond against a Schola typst face); face stays the audited match.",
       "fonts": [
         "Arial-BoldMT",
         "ArialMT",

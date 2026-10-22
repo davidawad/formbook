@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The ncmd complaint Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; LR 7.1(a) asks a proportional
+     font and names none) at 13 pt (size 26 half points; LR 7.1(a): no smaller than 13 point, footnotes too); Body Text
+     in exact 23 pt line boxes (460 twips, typst pitch-body; LR 7.1(a): no more than 27 lines on a page) with a
+     half-inch first-line indent (typst para-indent); single lines in 15 pt boxes (300 twips, typst pitch-single);
+     footnotes at 13 pt in single lines, 4 pt apart (typst note-gap). Added or replaced here, as the typst template sets
+     them: "Numbered Paragraph" (FRCP 10(b): the number half an inch in, a tab to 1 in, the text; typst number-box),
+     "Ncmd List" (the label half an inch in, the text hanging 1 in from the margin; typst label-box), the "Keep" variants
+     (a paragraph kept whole with the next: one that introduces a list, and the closing block kept with the signature;
+     typst sticky / unbreakable blocks), Footnote Text without keepLines (typst splits a long note across pages). The last section: letter page,
+     top margin 1.25 in, the others 1 in (LR 7.1(a)); the page number centred in a 15 pt line box whose foot is 0.4 in
+     above the bottom edge (footer 576; typst footer-descent 28.2 pt). Headings, caption and signature carry their own
+     spacing (docx/ncmd-complaint.lua). Twips: 20 x pt. pandoc-from: CommonMark with smart punctuation and footnotes,
+     which reads a footnote definition on the line after its paragraph as typst's cmarker does (was docx/render.sh's
+     blank line). -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="26" body="460" single="300" indent="720" note="300" note-after="80" footer="576" pandoc-from="commonmark+smart+footnotes+yaml_metadata_block">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraph"><w:name w:val="Numbered Paragraph"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="460" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraphKeep"><w:name w:val="Numbered Paragraph Keep"/><w:basedOn w:val="NumberedParagraph"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NcmdList"><w:name w:val="Ncmd List"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="460" w:lineRule="exact"/><w:ind w:left="1440" w:hanging="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NcmdListKeep"><w:name w:val="Ncmd List Keep"/><w:basedOn w:val="NcmdList"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="80" w:line="300" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr></w:style>
+<footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></footer>
+<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1800" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="576" w:gutter="0"/></w:sectPr>
+</reference>
