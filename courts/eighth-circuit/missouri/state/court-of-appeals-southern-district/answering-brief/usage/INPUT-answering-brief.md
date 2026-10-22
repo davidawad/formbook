@@ -11,7 +11,7 @@ proceeding: "APPEAL FROM THE LABOR AND INDUSTRIAL RELATIONS COMMISSION"
 brief_title: "BRIEF OF RESPONDENT"
 counsel:
   - names: ["CHRIS KOSTER", "Attorney General", "Cara Lee Harris", "Assistant Attorney General", "Missouri Bar No. 40691"]
-    lines: ["149 Park Central Square, Suite 1017", "Springfield, MO 65806", "Ph. (417) 895-6567", "Fax (417) 895-6382", "Cara.Harris@ago.mo.gov", "", "ATTORNEYS FOR RESPONDENT"]
+    lines: ["149 Park Central Square, Suite 1017", "Springfield, MO 65806", "Ph. (417) 895-6567", "Fax (417) 895-6382", "Cara.Harris@ago.mo.gov", "ATTORNEYS FOR RESPONDENT"]
 signature:
   firm: ["Respectfully submitted,", "CHRIS KOSTER", "ATTORNEY GENERAL"]
   signer: "Cara Lee Harris"
@@ -227,11 +227,11 @@ Section 287.020.2 defines “accident:”
 
 Section 287.020.3 defines “injury:”
 
-> (1) In this chapter the term ‘injury’ is hereby defined to be an injury which has arisen out of and in the course of employment. An injury by accident is compensable only if the accident was the prevailing factor in causing both the resulting medical condition and disability. ‘The prevailing factor’ is defined to be the primary factor, in relation to any other factor, causing both the resulting medical condition and disability.
+> \(1) In this chapter the term ‘injury’ is hereby defined to be an injury which has arisen out of and in the course of employment. An injury by accident is compensable only if the accident was the prevailing factor in causing both the resulting medical condition and disability. ‘The prevailing factor’ is defined to be the primary factor, in relation to any other factor, causing both the resulting medical condition and disability.
 >
-> (2) An injury shall be deemed to arise out of and in the course of the employment only if: (a) It is reasonably apparent, upon consideration of all the circumstances, that the accident is the prevailing factor in causing the injury; and it does not come from a hazard or risk unrelated to the employment to which workers would have been equally exposed outside of and unrelated to the employment and normal non-employment life.
+> \(2) An injury shall be deemed to arise out of and in the course of the employment only if: (a) It is reasonably apparent, upon consideration of all the circumstances, that the accident is the prevailing factor in causing the injury; and it does not come from a hazard or risk unrelated to the employment to which workers would have been equally exposed outside of and unrelated to the employment and normal non-employment life.
 >
-> (4) A cardiovascular, pulmonary, respiratory, or other disease, or cerebrovascular accident or myocardial infarction suffered by a worker is an injury only if the accident is the prevailing factor in causing the resulting medical condition.
+> \(4) A cardiovascular, pulmonary, respiratory, or other disease, or cerebrovascular accident or myocardial infarction suffered by a worker is an injury only if the accident is the prevailing factor in causing the resulting medical condition.
 
 (Emphasis added)
 

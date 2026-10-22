@@ -12,7 +12,7 @@ judge: "Case No. 05DU-CC00085, The Honorable Stephen R. Sharp"
 brief_title: "APPELLANTS’ REPLY BRIEF"
 counsel:
   - names: ["Sandberg, Phoenix & von Gontard, P.C.", "Stephen M. Strum, #37133", "Thais Ann Folta, #56991", "Jon W. Jordan, #58978"]
-    lines: ["One City Centre, 15th Floor", "St. Louis, MO 63101-1880", "314-231-3332", "314-241-7604 (fax)", "sstrum@spvg.com", "tfolta@spvg.com", "jjordan@spvg.com", "", "ATTORNEYS FOR APPELLANTS"]
+    lines: ["One City Centre, 15th Floor", "St. Louis, MO 63101-1880", "314-231-3332", "314-241-7604 (fax)", "sstrum@spvg.com", "tfolta@spvg.com", "jjordan@spvg.com", "ATTORNEYS FOR APPELLANTS"]
 signature:
   firm: ["SANDBERG, PHOENIX & von GONTARD, P.C."]
   signer: "Stephen M. Strum"
