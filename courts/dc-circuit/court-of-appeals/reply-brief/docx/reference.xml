@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D.C. Circuit reply brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of
+     the typst template (Times New Roman) at 14 pt (FRAP 32(a)(5), Handbook IX.A.6; size 28 half points); Body Text and
+     List Item in 29.4 pt line boxes (typst pitch-double, FRAP 32(a)(4)) with a half-inch indent; quotations, footnotes
+     and the heading styles in 17 pt boxes (typst pitch-single), quotations 14 pt above and below, 7 pt after each
+     footnote (cadc.lua sets every heading's and quotation paragraph's own spacing; the styles give the outline levels).
+     Page setup and footers come from cadc.lua's sections and fb render. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="588" single="340" indent="720" quote="280" note-after="140"/>

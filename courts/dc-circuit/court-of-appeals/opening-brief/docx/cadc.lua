@@ -1,6 +1,6 @@
 -- D.C. Circuit principal brief, docx engine: the brief as Word paragraphs and sections (typst:
 -- typst/cadc-opening-brief.typ, latex: latex/template.tex). pandoc writes the body text (paragraphs, quotations,
--- lists, footnotes) with docx/reference.docx (built by make-reference.sh); this filter writes what needs Word
+-- lists, footnotes) with the reference document fb render builds from docx/reference.xml; this filter writes what needs Word
 -- formatting:
 --   * the cover (FRAP 32(a)(2); Circuit Rule 28(a)(8)), the certificate as to parties (Circuit Rule 28(a)(1)), the
 --     table of contents, the table of authorities, the glossary, the signature block and the certificates, as

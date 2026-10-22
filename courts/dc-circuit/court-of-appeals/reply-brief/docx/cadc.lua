@@ -1,6 +1,6 @@
 -- D.C. Circuit reply brief, docx engine: the brief as Word paragraphs and sections (typst: typst/cadc-reply-brief.typ,
--- latex: latex/template.tex). pandoc writes the body text (paragraphs, lists, footnotes) with docx/reference.docx
--- (built by make-reference.sh); this filter writes what needs Word formatting:
+-- latex: latex/template.tex). pandoc writes the body text (paragraphs, lists, footnotes) with the reference document
+-- fb render builds from docx/reference.xml; this filter writes what needs Word formatting:
 --   * the cover (FRAP 32(a)(2); Cir. R. 28(a)(8)), the table of contents, the table of authorities, the quotations,
 --     the signature block and the certificates, as paragraphs with explicit spacing, indents and tabs;
 --   * the heading labels (I., A., 1., a. in the Argument; A., 1., a., (1) elsewhere) and each heading's outline level
