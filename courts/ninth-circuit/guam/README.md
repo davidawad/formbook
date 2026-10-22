@@ -7,7 +7,7 @@ Courts under `courts/ninth-circuit/guam` (3).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Guam](federal/bankruptcy-district) | `gub` | up for review | — | — | — | 14 |
 | [District Court, D. Guam](federal/district) | `gud` | up for review | — | — | — | 14 |
-| [Supreme Court of Guam](state/supreme-court) | `guam` | in progress | — | — | — | 14 |
+| [Supreme Court of Guam](state/supreme-court) | `guam` | up for review | — | — | — | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->

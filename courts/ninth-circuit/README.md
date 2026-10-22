@@ -53,7 +53,7 @@ Courts under `courts/ninth-circuit` (61).
 | [California Superior Court, San Diego County](california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | up for review | — | — | — | 14 |
 | [California Superior Court, Appellate Division](california/state/superior-court-appellate-division) | `calappdeptsuper` | todo | — | — | — | 0 |
 | [California Supreme Court](california/state/supreme-court) | `cal` | up for review | — | — | — | 29 |
-| [Supreme Court of Guam](guam/state/supreme-court) | `guam` | in progress | — | — | — | 14 |
+| [Supreme Court of Guam](guam/state/supreme-court) | `guam` | up for review | — | — | — | 29 |
 | [Hawaii Intermediate Court of Appeals](hawaii/state/intermediate-court-of-appeals) | `hawapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Hawaii](hawaii/state/supreme-court) | `haw` | in progress | — | — | — | 14 |
 | [Idaho Court of Appeals](idaho/state/court-of-appeals) | `idahoctapp` | up for review | — | — | — | 29 |

@@ -1,0 +1,3 @@
+# GRAP 16(a)(5)(A): a proportionally spaced face must be 14-point or larger.
+font:
+  size_pt: 14

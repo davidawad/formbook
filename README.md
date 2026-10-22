@@ -335,7 +335,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, S.D. Mississippi](courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district) | `mssb` | up for review | — | — | — | 14 |
 | [District Court, N.D. Mississippi](courts/fifth-circuit/mississippi/federal/northern-district) | `msnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Mississippi](courts/fifth-circuit/mississippi/federal/southern-district) | `mssd` | up for review | — | — | — | 14 |
-| [Court of Appeals of Mississippi](courts/fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | in progress | — | — | — | 14 |
+| [Court of Appeals of Mississippi](courts/fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | in progress | — | — | — | 29 |
 | [Mississippi Supreme Court](courts/fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | — | — | — | 29 |
 
 ### Texas
@@ -582,7 +582,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Guam](courts/ninth-circuit/guam/federal/bankruptcy-district) | `gub` | up for review | — | — | — | 14 |
 | [District Court, D. Guam](courts/ninth-circuit/guam/federal/district) | `gud` | up for review | — | — | — | 14 |
-| [Supreme Court of Guam](courts/ninth-circuit/guam/state/supreme-court) | `guam` | in progress | — | — | — | 14 |
+| [Supreme Court of Guam](courts/ninth-circuit/guam/state/supreme-court) | `guam` | up for review | — | — | — | 29 |
 
 ### Hawaii
 
@@ -676,7 +676,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Kansas](courts/tenth-circuit/kansas/federal/bankruptcy-district) | `ksb` | up for review | — | — | — | 14 |
 | [District Court, D. Kansas](courts/tenth-circuit/kansas/federal/district) | `ksd` | up for review | — | — | — | 14 |
 | [Court of Appeals of Kansas](courts/tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | up for review | — | — | — | 29 |
-| [Supreme Court of Kansas](courts/tenth-circuit/kansas/state/supreme-court) | `kan` | in progress | — | — | — | 14 |
+| [Supreme Court of Kansas](courts/tenth-circuit/kansas/state/supreme-court) | `kan` | up for review | — | — | — | 29 |
 
 ### New Mexico
 
@@ -698,9 +698,9 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court, Oklahoma Eastern](courts/tenth-circuit/oklahoma/federal/eastern-district) | `oked` | up for review | — | — | — | 14 |
 | [United States District Court, Oklahoma Northern](courts/tenth-circuit/oklahoma/federal/northern-district) | `oknd` | up for review | — | — | — | 14 |
 | [United States District Court, Oklahoma Western](courts/tenth-circuit/oklahoma/federal/western-district) | `okwd` | up for review | — | — | — | 14 |
-| [Court of Civil Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | in progress | — | — | — | 0 |
-| [Court of Criminal Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | in progress | — | — | — | 14 |
-| [Supreme Court of Oklahoma](courts/tenth-circuit/oklahoma/state/supreme-court) | `okla` | in progress | — | — | — | 14 |
+| [Court of Civil Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | up for review | — | — | — | 14 |
+| [Court of Criminal Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | up for review | — | — | — | 29 |
+| [Supreme Court of Oklahoma](courts/tenth-circuit/oklahoma/state/supreme-court) | `okla` | up for review | — | — | — | 29 |
 
 ### Utah
 
@@ -717,7 +717,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Wyoming](courts/tenth-circuit/wyoming/federal/bankruptcy-district) | `wyb` | up for review | — | — | — | 14 |
 | [District Court, D. Wyoming](courts/tenth-circuit/wyoming/federal/district) | `wyd` | up for review | — | — | — | 14 |
-| [Wyoming Supreme Court](courts/tenth-circuit/wyoming/state/supreme-court) | `wyo` | in progress | — | — | — | 14 |
+| [Wyoming Supreme Court](courts/tenth-circuit/wyoming/state/supreme-court) | `wyo` | up for review | — | — | — | 29 |
 
 ## Eleventh Circuit
 
@@ -752,7 +752,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [Florida District Courts of Appeal](courts/eleventh-circuit/florida/state/district-courts-of-appeal) | `fladistctapp` | up for review | — | — | — | 29 |
 | [Florida Fifth District Court of Appeal](courts/eleventh-circuit/florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | up for review | — | — | — | 29 |
 | [Florida First District Court of Appeal](courts/eleventh-circuit/florida/state/first-district-court-of-appeal) | `fladistctapp1` | up for review | — | — | — | 29 |
-| [Florida Fourth District Court of Appeal](courts/eleventh-circuit/florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | in progress | — | — | — | 14 |
+| [Florida Fourth District Court of Appeal](courts/eleventh-circuit/florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | up for review | — | — | — | 29 |
 | [Florida Second District Court of Appeal](courts/eleventh-circuit/florida/state/second-district-court-of-appeal) | `fladistctapp2` | up for review | — | — | — | 29 |
 | [Florida Sixth District Court of Appeal](courts/eleventh-circuit/florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | up for review | — | — | — | 29 |
 | [Florida Supreme Court](courts/eleventh-circuit/florida/state/supreme-court) | `fla` | up for review | — | — | — | 29 |
@@ -807,7 +807,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Supreme Court of the United States | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
-|  | 30 | 0 | 7 | 17 | 6 | 0.0% | 23.3% | 0 | 0 | 0 | 12.2% |
+|  | 30 | 0 | 7 | 17 | 6 | 0.0% | 23.3% | 0 | 0 | 0 | 12.7% |
 | Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 16.5% |
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 14.0% |
@@ -815,15 +815,15 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Second Circuit | 19 | 0 | 15 | 4 | 0 | 0.0% | 78.9% | 0 | 0 | 0 | 15.5% |
 | Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 19.1% |
-| Fifth Circuit | 26 | 0 | 25 | 1 | 0 | 0.0% | 96.1% | 0 | 0 | 0 | 17.4% |
+| Fifth Circuit | 26 | 0 | 25 | 1 | 0 | 0.0% | 96.1% | 0 | 0 | 0 | 18.0% |
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 18.6% |
 | Seventh Circuit | 21 | 0 | 20 | 1 | 0 | 0.0% | 95.2% | 0 | 0 | 0 | 18.2% |
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 20.3% |
-| Ninth Circuit | 61 | 0 | 43 | 16 | 2 | 0.0% | 70.4% | 1 | 1 | 1 | 17.6% |
-| Tenth Circuit | 31 | 0 | 26 | 5 | 0 | 0.0% | 83.8% | 0 | 0 | 0 | 16.9% |
-| Eleventh Circuit | 32 | 0 | 31 | 1 | 0 | 0.0% | 96.8% | 0 | 0 | 0 | 19.6% |
+| Ninth Circuit | 61 | 0 | 44 | 15 | 2 | 0.0% | 72.1% | 1 | 1 | 1 | 17.9% |
+| Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 19.3% |
+| Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 0 | 0 | 0 | 17.7% |
-| **Total** | 376 | 0 | 318 | 49 | 9 | 0.0% | 84.5% | 1 | 1 | 1 | 17.5% |
+| **Total** | 376 | 0 | 325 | 42 | 9 | 0.0% | 86.4% | 1 | 1 | 1 | 17.8% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -838,14 +838,14 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | First Circuit | 53 | 53 | 52 | 52 | 51 | 51 | 96.2% | 52 |
 | Second Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 42 |
 | Third Circuit | 58 | 58 | 58 | 58 | 58 | 58 | 100.0% | 58 |
-| Fourth Circuit | 103 | 103 | 103 | 103 | 103 | 103 | 100.0% | 103 |
+| Fourth Circuit | 107 | 107 | 107 | 107 | 107 | 107 | 100.0% | 107 |
 | Fifth Circuit | 71 | 71 | 71 | 71 | 71 | 71 | 100.0% | 71 |
-| Sixth Circuit | 87 | 87 | 87 | 87 | 83 | 83 | 95.4% | 87 |
-| Seventh Circuit | 56 | 56 | 56 | 56 | 56 | 56 | 100.0% | 56 |
+| Sixth Circuit | 94 | 94 | 94 | 94 | 90 | 90 | 95.7% | 94 |
+| Seventh Circuit | 59 | 59 | 59 | 59 | 59 | 59 | 100.0% | 59 |
 | Eighth Circuit | 134 | 134 | 134 | 134 | 133 | 133 | 99.2% | 134 |
-| Ninth Circuit | 116 | 116 | 115 | 115 | 113 | 113 | 97.4% | 115 |
-| Tenth Circuit | 94 | 94 | 94 | 94 | 91 | 91 | 96.8% | 94 |
-| Eleventh Circuit | 108 | 108 | 108 | 108 | 107 | 107 | 99.0% | 108 |
+| Ninth Circuit | 118 | 118 | 117 | 117 | 115 | 115 | 97.4% | 117 |
+| Tenth Circuit | 103 | 103 | 103 | 103 | 100 | 100 | 97.0% | 103 |
+| Eleventh Circuit | 115 | 115 | 115 | 115 | 114 | 114 | 99.1% | 115 |
 | D.C. Circuit | 9 | 9 | 9 | 9 | 9 | 9 | 100.0% | 9 |
-| **Total** | 985 | 985 | 983 | 983 | 969 | 969 | 98.3% | 983 |
+| **Total** | 1017 | 1017 | 1015 | 1015 | 1001 | 1001 | 98.4% | 1015 |
 <!-- tracker:end -->

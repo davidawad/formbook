@@ -27,15 +27,15 @@ Courts under `courts/tenth-circuit` (31).
 | [Colorado Court of Appeals](colorado/state/court-of-appeals) | `coloctapp` | up for review | — | — | — | 29 |
 | [Colorado Supreme Court](colorado/state/supreme-court) | `colo` | up for review | — | — | — | 29 |
 | [Court of Appeals of Kansas](kansas/state/court-of-appeals) | `kanctapp` | up for review | — | — | — | 29 |
-| [Supreme Court of Kansas](kansas/state/supreme-court) | `kan` | in progress | — | — | — | 14 |
+| [Supreme Court of Kansas](kansas/state/supreme-court) | `kan` | up for review | — | — | — | 29 |
 | [New Mexico Court of Appeals](new-mexico/state/court-of-appeals) | `nmctapp` | up for review | — | — | — | 29 |
 | [New Mexico Supreme Court](new-mexico/state/supreme-court) | `nm` | up for review | — | — | — | 29 |
-| [Court of Civil Appeals of Oklahoma](oklahoma/state/court-of-civil-appeals) | `oklacivapp` | in progress | — | — | — | 0 |
-| [Court of Criminal Appeals of Oklahoma](oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | in progress | — | — | — | 14 |
-| [Supreme Court of Oklahoma](oklahoma/state/supreme-court) | `okla` | in progress | — | — | — | 14 |
+| [Court of Civil Appeals of Oklahoma](oklahoma/state/court-of-civil-appeals) | `oklacivapp` | up for review | — | — | — | 14 |
+| [Court of Criminal Appeals of Oklahoma](oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | up for review | — | — | — | 29 |
+| [Supreme Court of Oklahoma](oklahoma/state/supreme-court) | `okla` | up for review | — | — | — | 29 |
 | [Court of Appeals of Utah](utah/state/court-of-appeals) | `utahctapp` | up for review | — | — | — | 29 |
 | [Utah Supreme Court](utah/state/supreme-court) | `utah` | up for review | — | — | — | 29 |
-| [Wyoming Supreme Court](wyoming/state/supreme-court) | `wyo` | in progress | — | — | — | 14 |
+| [Wyoming Supreme Court](wyoming/state/supreme-court) | `wyo` | up for review | — | — | — | 29 |
 
 [Formbook index](../../README.md)
 <!-- fb:generated:end -->

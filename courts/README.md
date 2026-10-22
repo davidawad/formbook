@@ -130,7 +130,7 @@ Courts under `courts` (346).
 | [District Court, W.D. Texas](fifth-circuit/texas/federal/western-district) | `txwd` | up for review | — | — | — | 14 |
 | [Louisiana Court of Appeal](fifth-circuit/louisiana/state/court-of-appeal) | `lactapp` | up for review | — | — | — | 29 |
 | [Supreme Court of Louisiana](fifth-circuit/louisiana/state/supreme-court) | `la` | up for review | — | — | — | 29 |
-| [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | in progress | — | — | — | 14 |
+| [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | in progress | — | — | — | 29 |
 | [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | — | — | — | 29 |
 | [Court of Civil Appeals of Texas](fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | — | — | — | 29 |
 | [Court of Criminal Appeals of Texas](fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | — | — | — | 29 |
@@ -271,7 +271,7 @@ Courts under `courts` (346).
 | [California Superior Court, San Diego County](ninth-circuit/california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | up for review | — | — | — | 14 |
 | [California Superior Court, Appellate Division](ninth-circuit/california/state/superior-court-appellate-division) | `calappdeptsuper` | todo | — | — | — | 0 |
 | [California Supreme Court](ninth-circuit/california/state/supreme-court) | `cal` | up for review | — | — | — | 29 |
-| [Supreme Court of Guam](ninth-circuit/guam/state/supreme-court) | `guam` | in progress | — | — | — | 14 |
+| [Supreme Court of Guam](ninth-circuit/guam/state/supreme-court) | `guam` | up for review | — | — | — | 29 |
 | [Hawaii Intermediate Court of Appeals](ninth-circuit/hawaii/state/intermediate-court-of-appeals) | `hawapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Hawaii](ninth-circuit/hawaii/state/supreme-court) | `haw` | in progress | — | — | — | 14 |
 | [Idaho Court of Appeals](ninth-circuit/idaho/state/court-of-appeals) | `idahoctapp` | up for review | — | — | — | 29 |
@@ -306,15 +306,15 @@ Courts under `courts` (346).
 | [Colorado Court of Appeals](tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | up for review | — | — | — | 29 |
 | [Colorado Supreme Court](tenth-circuit/colorado/state/supreme-court) | `colo` | up for review | — | — | — | 29 |
 | [Court of Appeals of Kansas](tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | up for review | — | — | — | 29 |
-| [Supreme Court of Kansas](tenth-circuit/kansas/state/supreme-court) | `kan` | in progress | — | — | — | 14 |
+| [Supreme Court of Kansas](tenth-circuit/kansas/state/supreme-court) | `kan` | up for review | — | — | — | 29 |
 | [New Mexico Court of Appeals](tenth-circuit/new-mexico/state/court-of-appeals) | `nmctapp` | up for review | — | — | — | 29 |
 | [New Mexico Supreme Court](tenth-circuit/new-mexico/state/supreme-court) | `nm` | up for review | — | — | — | 29 |
-| [Court of Civil Appeals of Oklahoma](tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | in progress | — | — | — | 0 |
-| [Court of Criminal Appeals of Oklahoma](tenth-circuit/oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | in progress | — | — | — | 14 |
-| [Supreme Court of Oklahoma](tenth-circuit/oklahoma/state/supreme-court) | `okla` | in progress | — | — | — | 14 |
+| [Court of Civil Appeals of Oklahoma](tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | up for review | — | — | — | 14 |
+| [Court of Criminal Appeals of Oklahoma](tenth-circuit/oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | up for review | — | — | — | 29 |
+| [Supreme Court of Oklahoma](tenth-circuit/oklahoma/state/supreme-court) | `okla` | up for review | — | — | — | 29 |
 | [Court of Appeals of Utah](tenth-circuit/utah/state/court-of-appeals) | `utahctapp` | up for review | — | — | — | 29 |
 | [Utah Supreme Court](tenth-circuit/utah/state/supreme-court) | `utah` | up for review | — | — | — | 29 |
-| [Wyoming Supreme Court](tenth-circuit/wyoming/state/supreme-court) | `wyo` | in progress | — | — | — | 14 |
+| [Wyoming Supreme Court](tenth-circuit/wyoming/state/supreme-court) | `wyo` | up for review | — | — | — | 29 |
 | [United States Court of Appeals for the Eleventh Circuit](eleventh-circuit/court-of-appeals) | `ca11` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court for the Middle District of Alabama](eleventh-circuit/alabama/federal/bankruptcy-middle-district) | `almb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Alabama](eleventh-circuit/alabama/federal/bankruptcy-northern-district) | `alnb` | up for review | — | — | — | 14 |
@@ -340,7 +340,7 @@ Courts under `courts` (346).
 | [Florida District Courts of Appeal](eleventh-circuit/florida/state/district-courts-of-appeal) | `fladistctapp` | up for review | — | — | — | 29 |
 | [Florida Fifth District Court of Appeal](eleventh-circuit/florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | up for review | — | — | — | 29 |
 | [Florida First District Court of Appeal](eleventh-circuit/florida/state/first-district-court-of-appeal) | `fladistctapp1` | up for review | — | — | — | 29 |
-| [Florida Fourth District Court of Appeal](eleventh-circuit/florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | in progress | — | — | — | 14 |
+| [Florida Fourth District Court of Appeal](eleventh-circuit/florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | up for review | — | — | — | 29 |
 | [Florida Second District Court of Appeal](eleventh-circuit/florida/state/second-district-court-of-appeal) | `fladistctapp2` | up for review | — | — | — | 29 |
 | [Florida Sixth District Court of Appeal](eleventh-circuit/florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | up for review | — | — | — | 29 |
 | [Florida Supreme Court](eleventh-circuit/florida/state/supreme-court) | `fla` | up for review | — | — | — | 29 |

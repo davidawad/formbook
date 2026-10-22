@@ -1,0 +1,3 @@
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `petition-for-review` — Petition for review (agency order or state high court) | COLLECTED: 42 pp., text layer verified 2026-10-17; appeal of PSC order (W. Va. Code 24-5-1); review of agency order is sought by petitioner's brief under R.App.P. 10 | `FILED-EXAMPLE-petition-for-review.pdf` | Beckley Water Co. (petitioner; Steptoe & Johnson PLLC) | Beckley Water Co. v. Public Service Commission of W. Va., No. 25-315 | 2025-05-16 | https://www.courtswv.gov/sites/default/pubfilesmnt/2026-01/25-315%20Petitioner%20Brief.pdf | `165c62998a91821757d2ee89d524b2a09fe9b6f442b37103ff3b087a78f60012` |

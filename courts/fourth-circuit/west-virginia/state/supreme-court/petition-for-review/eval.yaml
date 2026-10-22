@@ -1,0 +1,5 @@
+# West Virginia RAP 38(c) (rules.md WVA-LEN-001, WVA-WRIT-004): a petitioner's brief may not exceed 40 pages,
+# excluding the cover page, table of contents, table of authorities, and certificate of service. The default
+# check counts every page, so this total is stricter than the rule.
+params:
+  page_limit: 40
