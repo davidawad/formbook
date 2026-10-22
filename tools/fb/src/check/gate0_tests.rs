@@ -8,6 +8,16 @@ fn g0_missing(md: &str, runs: &[&str]) -> String {
 
 /// One metric of gate0 for `md` against PDF text runs given as (page, text).
 fn g0_metric(md: &str, runs: &[(u32, &str)], metric: &str) -> String {
+    let placed: Vec<(u32, f64, &str)> = runs
+        .iter()
+        .map(|(pg, top, t)| format!("{pg}\t{top}\t0\t0\t0\t0\t{t}\n"))|        .map(|(pg, top, t)| format!("{pg}\t{top}\t0\t0\t0\t0\t{t}\n"))
+)| (*pg, 100.0 + 20.0 * i as f64, *t))
+        .collect();
+    g0_metric_at(md, &placed, metric)
+}
+
+/// Like `g0_metric`, with each run's distance from the top of its page in points: (page, top, text).
+fn g0_metric_at(md: &str, runs: &[(u32, f64, &str)], metric: &str) -> String {
     let chk = format!("{}/../check", env!("CARGO_MANIFEST_DIR"));
     let dir = std::env::temp_dir().join(format!(
         "fb-g0-{}-{:x}",
@@ -23,8 +33,7 @@ fn g0_metric(md: &str, runs: &[(u32, &str)], metric: &str) -> String {
     std::fs::write(&mdf, md).unwrap();
     let rows: String = runs
         .iter()
-        .enumerate()
-        .map(|(i, (pg, t))| format!("{pg}\t{}\t0\t0\t0\t0\t{t}\n", 100 + 20 * i))
+        .map(|(pg, top, t)| format!("{pg}\t{top}\t0\t0\t0\t0\t{t}\n"))
         .collect();
     std::fs::write(&runsf, rows).unwrap();
     let b = std::process::Command::new("gawk")
@@ -174,4 +183,42 @@ fn table_cells_may_interleave_lines_but_must_all_be_present() {
         "After.",
     ];
     assert_ne!(g0_missing(md, &swapped), "0");
+}
+
+/// A paragraph that continues across page 2 (top-margin text between its halves): `blocks_missing`.
+fn g0_top_margin(md: &str, top_run: &str, top: f64) -> String {
+    let runs = [
+        (1, 100.0, "First half of a paragraph"),
+        (2, top, top_run),
+        (2, 100.0, "second half of it."),
+    ];
+    g0_metric_at(md, &runs, "blocks_missing")
+}
+
+#[test]
+fn a_page_number_alone_in_the_top_margin_is_dropped() {
+    // ORAP 5.05(3)(c): the number is at the top; it must not land inside the paragraph that crosses the page
+    let md = "First half of a paragraph second half of it.\n";
+    assert_eq!(g0_top_margin(md, "7", 27.0), "0");
+    assert_eq!(g0_top_margin(md, "ii", 27.0), "0");
+    assert_eq!(g0_top_margin(md, "XIV", 27.0), "0");
+    // below 54 pt it is body text again and splits the paragraph
+    assert_ne!(g0_top_margin(md, "7", 60.0), "0");
+}
+
+#[test]
+fn other_text_in_the_top_margin_is_kept() {
+    // a running header is content the INPUT must carry: it is not dropped
+    let md = "First half of a paragraph Running header second half of it.\n";
+    assert_eq!(g0_top_margin(md, "Running header", 27.0), "0");
+    let md = "First half of a paragraph second half of it.\n";
+    assert_ne!(g0_top_margin(md, "Running header", 27.0), "0");
+}
+
+#[test]
+fn a_number_with_other_text_on_its_line_is_kept() {
+    let md = "First half of a paragraph 7 Chapter second half of it.\n";
+    assert_eq!(g0_top_margin(md, "7 Chapter", 27.0), "0");
+    let md = "First half of a paragraph second half of it.\n";
+    assert_ne!(g0_top_margin(md, "7 Chapter", 27.0), "0");
 }
