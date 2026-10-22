@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: typst counts the
+# authority mark of "sec. 12." that ends the last line of p9 on p10 (the table of authorities reads "6, 10"; LaTeX and
+# Word, "6, 9"); every line and page end is the same in all three (docs/open-items/fb-595.54.28.md).
+params:
+  cross_engine: report
