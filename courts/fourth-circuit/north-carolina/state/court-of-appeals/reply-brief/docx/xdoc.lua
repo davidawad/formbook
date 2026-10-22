@@ -27,6 +27,7 @@ return require("docx.xdoc")({
     ["above"] = 9.6,
     ["below"] = 14.4,
   },
+  ["keep_with_closing"] = true,
   ["heading"] = {
     {
       ["align"] = "center",

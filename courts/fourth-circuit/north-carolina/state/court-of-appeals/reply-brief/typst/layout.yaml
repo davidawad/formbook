@@ -11,6 +11,7 @@ indent: 36                # paragraphs indented half an inch
 page_number: {align: center, from: 2}   # NCCTAPP-CONV-003: a paper without an index is numbered from its caption page, the number shown from page 2 (exemplars)
 footnote: {size: 12, gap: 7}   # NCCTAPP-FORM-001, -003: footnotes at the text size, single spaced
 quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # NCCTAPP-FORM-003: block quotations indented, single spaced
+keep_with_closing: true   # the conclusion's last paragraph on the page of the signature block, which never stands alone (a clerk's expectation, tier 2)
 heading:
   - {align: center, bold: true, upper: true, above: 14.4, below: 12}
   - {bold: true, hang: 36, above: 14.4, below: 9.6}

@@ -1,5 +1,11 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Report only, not gated: a spaced ellipsis or a space before a period (". . .", "17 .0109") binds to the word before it in typst only; a heading followed by a numbered list is not found by the Word page needles
-# (docs/open-items/fb-595.54.50.md, shared-model requests).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # Word sets the space above a kept group (the signature block, `above: 28.8`) as an empty paragraph of that height
+  # before the group's table; typst drops the space at a page break. INPUT-answering-brief: the body ends at the foot
+  # of page 60, the spacer takes page 61 alone and the signature block (a page tall) moves to page 62, one page later
+  # than typst and LaTeX (XENG-001, -002). A model change (docs/open-items/fb-595.54.50.md, shared-model requests);
+  # reported, not gated (fb-595.54.50).
+  cross_engine_docx: report
