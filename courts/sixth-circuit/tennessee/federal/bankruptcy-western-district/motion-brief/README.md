@@ -7,20 +7,19 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/moti
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (memorandum only, 1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (the full 7-page memorandum transcribed: caption, background, standard of review, argument, conclusion, footnotes, signature, certificate of service) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 6 pages, US Letter, typst 0.15.0, vendored EB Garamond only, no typst warnings |
-| overlay | ok: `usage/OVERLAY-kenney-motion-memorandum.pdf` and `usage/OVERLAY-kenney-motion-memorandum.txt` |
-| pages reviewed | 6 of 6 (every page of the final render rasterized at 60 dpi and viewed) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `usage/OUTPUT-motion-brief.docx.pdf`, 7 pages each, US Letter, Times New Roman (vendored), no typst warnings |
+| overlay | `just overlay <dir>` writes `.overlay/<doc path>/OVERLAY-motion-brief.pdf` (gitignored, not committed) |
+| pages reviewed | 7 of 7, typst and docx (every page rasterized at 60 dpi and viewed; fb-595.68.31) |
 | tier 2 | not met: one filer only (see Known gaps 1) |
-| typeface | face required by the rules: none (Known gaps 4) -> vendored substitute: none needed, EB Garamond kept per `docs/FONTS.md` ("No face named") -> not applicable |
+| typeface | face required by the rules: none (Known gaps 4) -> the exemplar's Times New Roman (vendored, `("Times New Roman", "Liberation Serif")`) |
 
-Commands (from the repo root, with `export PATH="$HOME/tb/bin:$PATH"`):
+Commands (from the repo root, toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief usage/INPUT-motion-brief.md
-sh tools/overlay.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief kenney-motion-memorandum
+sh tools/check.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief                 # typst: render and gates
+sh tools/check.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief --engine docx   # docx: render, gates, XENG
+just overlay courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief
 ```
-
-Output names are the tools' defaults (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`): `tools/overlay.sh` reads `OUTPUT-<id>.pdf`.
 
 ## Governing rules
 
@@ -39,16 +38,18 @@ Dates verified 2026-10-14.
 
 ## Layout
 
-- Letter paper, 1 in margins. Body EB Garamond 12 pt, double spaced (24 pt baseline pitch), first-line indent 0.5 in, paragraphs not numbered (the memorandum types its own paragraph numbers, as the exemplar does).
-- Court heading centered; caption as in the adversary complaint (debtor block, adversary block, § column, adversary number on the right).
-- Title centered in capitals between rules, after the caption.
-- `#` headings: centered bold capitals (PROCEDURAL/FACTUAL BACKGROUND, STANDARD OF REVIEW, ARGUMENT, CONCLUSION). `##`: centered bold, mixed case. `###`: left bold (lettered sub-headings such as `A.`).
-- Block quotations (`>`): indented 0.5 in on both sides, single spaced, as in the exemplar.
-- Tables (pipe tables): centered, single spaced, ruled; a table that breaks across pages repeats its header row.
-- Footnotes: `text[^key]` plus `[^key]: ...` definitions at the end; 10 pt.
-- Signature block at 3 in from the left margin: closing line ("Respectfully submitted,"), firm, `/s/` signer, name line with state bar number, address and contact lines, role. The last body paragraph is kept in one unbreakable block with the signature.
-- Certificate of service (if `service` is given): centered heading, the exemplar's wording with the date, the served parties in two columns, and `/s/` signer.
-- Page numbers centered at the foot of each page.
+The shared cross-engine layout model (`lib/typst/xengine.typ`; docs/EVAL-LOOP.md, "Cross-engine gate"): every line a box of its pitch with the baseline at 0.8 of it, the boxes touching, explicit spaces between blocks; first fit, ragged right, no kerning, ligatures or hyphenation. The docx sets the same pitches and spaces in twips (`docx/reference.xml`, `docx/tnwb-motion-brief.lua`). No TNWB rule sets any of these numbers (TNWB-FORM-011): they are conventions.
+
+- Letter paper, 1 in margins. Times New Roman 12 pt; body double spaced (24 pt pitch), first-line indent 0.5 in; single lines 13.8 pt (Word's single line at 12 pt). Paragraphs are not numbered by the template; a paragraph that opens with a typed number (`1\.` in the markdown) sets it in a half-inch box at the indent, the text from 1 in (as filed).
+- Court heading centered, plain capitals; caption as in the court's adversary complaint (the § column, one single line per row, party names in capitals, a 0.5 pt rule under the debtor block and under the parties).
+- Title centered bold capitals, 12 pt above and below.
+- `#` headings: centered bold capitals; `##`: centered bold; `###`: bold at the margin, a typed label (`A.`) in a half-inch box with the text hanging after it (as filed). Single lines, 12 pt above and below, kept with the text after them.
+- Block quotations (`>`): single lines, 0.5 in in on both sides, 12 pt above and below.
+- Tables (pipe tables, none in the sample): centered, 60 % of the text width, equal columns, 0.5 pt rules, the header row bold; rows not split, the header not repeated.
+- Footnotes: 10 pt in 11.5 pt lines, 6 pt apart, a 30 % rule 7.8 pt above (with the 6 pt, Word's 13.8 pt separator line).
+- Signature block 3 in from the margin (as filed), 12 pt below the last paragraph, single lines: the closing, the firm (bold) a line below it, `/s/` signer, name line with the state bar number, address and contact lines, role (italic). The last body paragraph is kept on one page with the signature block.
+- Certificate of service (if `service` is given), on a page of its own (as filed): centered bold underlined heading, the exemplar's wording at body pitch, the served parties two to a row (0.3 in apart, a single line between rows), `/s/` signer at 3 in.
+- Page number centered in the footer, in a 13.8 pt line.
 
 ## Markdown contract (for samples)
 
@@ -66,41 +67,41 @@ YAML frontmatter, then the body.
 | `signature` | yes | `closing`, `firm`, `signer`, optional `name_line`, `lines`, `role` |
 | `service` | no | `date` and `parties` (a list; each party is a list of lines) for the certificate of service |
 
-Body: blank-line separated blocks. `#` / `##` / `###` headings; `|` tables; `>` quotations; any other block is an unnumbered paragraph with a first-line indent. A literal `*` must be escaped (`at \*8`), and a paragraph that begins with a number and period must be escaped (`1\. On July 19, 2017`), or cmarker reads it as a list.
+Body: blank-line separated blocks. `#` / `##` / `###` headings; `|` tables; `>` quotations; any other block is an unnumbered paragraph with a first-line indent; one that opens with a typed number sets it in the number box. `- ` lists are set with the bullet in a half-inch box. A literal `*` must be escaped (`at \*8`), and a paragraph that begins with a number and period must be escaped (`1\. On July 19, 2017`), or cmarker reads it as a list.
 
 ## Known gaps and open choices
 
 1. **One exemplar, and it is the memorandum, not the motion.** The tier-2 test (2 or 3 filers) is not met. The search (CourtListener RECAP, `court=tnwb`, memoranda in support) found Johnson 18-00294 and Minnesota Life 18-00157 (memoranda whose PDFs are not in RECAP) and Brown 23-00021 (doc 15, the motion to dismiss, which did not download). None was saved. The motion that Kenney's memorandum supports is not in the exemplar; the template covers the memorandum only.
 2. **LBR 9013-1 and 7016-1 are not checked by the template.** The page limit (25 pages, LBR 7016-1(a)) and the motion-practice steps (LBR 9013-1(b)–(c): filing with the Clerk, the Courtroom Deputy's deadlines, the proposed order and certificate on Local Form 008F) are the filer's job. The template does not generate the motion, the proposed order or Local Form 008F.
 3. **Form 416 was not fetched.** See the adversary complaint README, Known gaps 3.
-4. **No court typeface, margin or spacing rule found.** See the adversary complaint README, Known gaps 2. The conventions here (12 pt, double spaced, 1 in margins) follow the exemplar.
+4. **No court typeface, margin or spacing rule found.** See the adversary complaint README, Known gaps 2. The conventions here (Times New Roman 12 pt, double spaced, 1 in margins) follow the exemplar. Until fb-595.68.31 the docx was EB Garamond (TNR-EMBEDDED and DEF-FONT-002 failed).
 5. **State bar number.** LBR 1001-3(h) requires the state bar disciplinary number. The exemplar's signature block shows "Jay A. Ebelhar (22770)", which is the number on the signature line; the template prints `name_line` as given. The template does not check for it.
 6. **Italics.** The exemplar's text layer does not show italics. The sample italicizes case names and signals (*Id.*, *see*, *In re ...*) as a convention; the exemplar's visual italics were not checked.
 7. **Certificate of service.** The wording and the layout follow the exemplar. The rule that requires a proof of service on each filed motion was not identified and was not verified; the certificate is an exemplar convention.
 8. **Transcription.** The sample is the exemplar's text transcribed from its text layer, with the exemplar's own errors kept (for example "fails to state a clam" in the Standard of Review). The footnote numbering is the exemplar's.
-9. **Justification.** Body text is ragged right. Not asserted.
-10. **Overlay pairing.** The overlay pairs pages by word overlap, not by index (`OVERLAY-kenney-motion-memorandum.txt`). Pages 1, 2, 5 and 6 match 78–85% with the same-numbered filed page. Page 3 matches its filed page at 48%, and page 4 pairs with filed page 5 (62%), because the page breaks of the sample do not follow the exemplar's. The overlay is a diagnostic, not a score.
-11. **Checker not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json`, `rules.md` and `checks.yaml`; this doc-type folder has none of those, and the brief forbids changes to `tools/`. Render and overlay were run; the page review below is the visual check.
+9. **Justification.** Body text is ragged right (the cross-engine model: first fit, no hyphenation). Not asserted.
+10. **Overlay.** The overlay (`just overlay`) pairs pages by word overlap; the sample breaks pages where the template does, not where the exemplar does. The overlay is a diagnostic, not a score.
+11. **Caption.** The exemplar (Baker Donelson) sets a ruled caption without a § column, with the designations at the right margin; the template keeps the § caption of the court's adversary complaint exemplar (another filer), so both doc types share one caption. Tier 2, ACCEPTED; a decision for David if the memorandum should follow its own filer.
 
-## Review of the rendered pages (final render, 6 pages)
+## Review of the rendered pages (final render, 7 pages, typst and docx; fb-595.68.31)
 
-Rendered at 60 dpi with `pdftoppm -r 60` and viewed page by page.
+Rendered at 60 dpi with `pdftoppm -r 60` and viewed page by page, typst beside docx. The docx breaks every line and page as the typst render (XENG-001..003, 177/177 lines); the findings hold for both.
 
 | Page | Content | Result |
 |---|---|---|
-| 1 | Court heading, caption, title, opening paragraph, background paragraphs 1–2; footnote 1 | Pass. Caption and title are not crowded; footnote 1 is in the footnote area. |
-| 2 | Background paragraphs 3–8; STANDARD OF REVIEW; footnote 2 (long, set in full at the foot of the page) | Pass. Footnote 2 fits on the page. |
-| 3 | Standard of review (cont.); ARGUMENT; sub-heading A; first paragraphs of A | Pass. Sub-heading A is left bold and kept with its paragraph. |
-| 4 | Sub-heading A (cont.): block quotation and the Moore citation; sub-heading B | Pass. Block quotation indented and single spaced. Italics on case names. |
-| 5 | Sub-heading B (cont.); CONCLUSION; "Respectfully submitted," firm, `/s/` signer, name line, contact lines, role | Pass. The signature stays with the last paragraph of the conclusion. |
-| 6 | CERTIFICATE OF SERVICE: wording, two columns of served parties, `/s/` signer | Pass after a fix (two columns instead of three, so "200 Jefferson Avenue, Ste. 1113" does not wrap). |
+| 1 | Court heading, caption, title, opening paragraph, PROCEDURAL/FACTUAL BACKGROUND, paragraphs 1–2; footnote 1 | Pass. Typed numbers in the number box, as filed. |
+| 2 | Paragraphs 3–8; STANDARD OF REVIEW; footnote 2 in full | Pass. |
+| 3 | Standard of review (cont.); ARGUMENT; sub-heading A (label in its box, text hanging) | Pass. |
+| 4 | Sub-heading A (cont.): block quotation and the Moore citation | Pass. The citation after the quotation takes the first-line indent (the exemplar sets it at the margin): ACCEPTED, tier 3. |
+| 5 | Sub-heading B; its paragraphs | Pass. The page ends early: CONCLUSION (kept with its paragraph) and the last paragraph (kept with the signature block) move to page 6 together, as in the exemplar. ACCEPTED. |
+| 6 | CONCLUSION; signature block | Pass. The firm name wraps to three lines in the 3.5 in column, alike in both engines. |
+| 7 | CERTIFICATE OF SERVICE: wording, served parties two to a row, `/s/` signer | Pass. |
 
-Open tier-2 findings (ACCEPTED): body text is ragged right; the caption uses the § column; the certificate of service wording follows the exemplar and is not tied to a verified rule (Known gaps 7).
+Open tier-2 findings: none. ACCEPTED: Known gaps 11 (caption), the pages 4 and 5 notes above.
 
 ## Engines
 
-docx (`docx/build-reference.sh` -> `docx/reference.docx`, filter `docx/tnwb.lua`; render `sh tools/render.sh --engine docx`; judged on `usage/OUTPUT-motion-brief.docx.pdf`, the LibreOffice conversion):
-
-- Matches the typst output: 6 pages in both; EB Garamond only (`pdffonts`); US Letter, 1 in margins; double spacing (exact 23.9 pt, 27 lines per page as in typst at 24 pt); single-spaced court heading, caption, signature block and the certificate of service's parties in two columns; centered caps, centered bold and left bold headings; block quotation indented 0.5 in on both sides and single spaced; footnotes at 10 pt; page number centered in the footer; the signature block kept with the last body paragraph; the certificate of service on its own page as in typst. Pages reviewed: 6 of 6 (every page of the final docx.pdf rasterized at 60 dpi and viewed, compared with the typst pages).
-- Differs (tier 2, not chased): (1) the signature firm name wraps to three lines in LibreOffice ("BAKER, DONELSON, BEARMAN, / CALDWELL & BERKOWITZ, A Professional / Corporation") where typst wraps to two; (2) pagination: the page 2 footnote is set a line tighter, so page 3 begins about one line earlier in the text than in typst; page counts agree; (3) footnote leading is exact 11.5 pt; (4) no PDF bookmarks.
-- BLOCKED: none in the template. `sh tools/check.sh <court-dir> --engine docx` cannot run on this folder: it needs `checks.yaml` and `rules.md` (and the court's `court.json`), which this unit does not create; the run exits 2 before any gate. No check ID is BLOCKED by the docx template itself.
+- **typst** (primary, `typst/tnwb-motion-brief.typ`): the reference for the form, on `lib/typst/xengine.typ` (`xengine.with(pitch: 24pt)`, single lines in `edges(13.8pt)` boxes, footnotes in `edges(11.5pt)`).
+- **docx** (`docx/reference.xml`, `docx/tnwb-motion-brief.lua`; built by `fb render`, no shell): `reference.xml` is the cross-engine recipe (`base="xengine"`, `{font}` = the typst face; Body Text 480-twip lines with a 720-twip indent, 276-twip single lines, headings 240 twips from the text, footnotes 10 pt in 230-twip lines 120 twips apart, the page number in a 276-twip footer line 735 twips from the page foot) plus "Numbered Paragraph" (tab at 1 in) with its "Note" and "Keep" variants, "Body Text Note" (no widow control, for a paragraph that anchors a footnote) and "Body Keep". The filter (`require("docx.xengine")`) writes the court heading, caption table, title, headings, tables, quotations, the signature block and the certificate of service (page break before it, parties in a three-column table) with the typst spacing in twips; body paragraphs go to pandoc in those styles (footnotes stay Word footnotes). Break rules as typst: no break inside ")(", a break after a slash before a letter ("CM/ECF"), `§§`/`¶¶` bound to the number. Until fb-595.68.31 the docx was EB Garamond from `docx/build-reference.sh`.
+- Checks (fb-595.68.31): typst `RESULT: 9 checks passed, 0 failed`; docx `RESULT: 13 checks passed, 0 failed`, XENG-001..003 PASS (7 pages each, 177/177 lines). `eval.yaml` sets `params.cross_engine: gate`.
+- **latex**: no latex template for this doc type.
