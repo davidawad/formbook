@@ -1,0 +1,51 @@
+# Court of Appeals of Mississippi (missctapp): motion (MRAP 27, 32(b), 40). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to MRAP 32(a) and 28 (../../rules.md, MISSCTAPP-*); lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # MISSCTAPP-FORM-002: body text at least 12-point
+pitch:
+  body: 27.6              # MISSCTAPP-FORM-004: double spacing (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # quotations, footnotes, cover, headings, tables, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 54, left: 108, right: 36}   # MISSCTAPP-FORM-003: 1 in top, 3/4 in bottom, 1 1/2 in left, 1/2 in right
+indent: 36
+page_number: {align: center, from: 1}   # MISSCTAPP-FORM-001: each page numbered, the cover page 1 (as the filed motions number it)
+footnote: {size: 11, pitch: 12.65, gap: 6}   # MISSCTAPP-FORM-002, -004: footnotes at least 11-point, single spaced (1.15 x 11 pt)
+quote: {left: 36, right: 36, above: 12, below: 12, gap: 12}   # MISSCTAPP-FORM-004: quotations excluded from double spacing
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 12}
+  - {bold: true, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, above: 13.2, below: 7.2}
+  - {bold: true, above: 13.2, below: 7.2}
+  - {italic: true, above: 13.2, below: 7.2}
+# The caption page (MISSCTAPP-MOT-002, MRAP 32(b)): the name of the court, the docket number, the style of the case
+# and a brief descriptive title, with counsel; page 1, the motion from page 2 (as the filed motions set it). Set as
+# the top of the body (`front`) ending in a page break: the model sets a `cover` only before tables.
+front:
+  - {text: "IN THE COURT OF APPEALS OF THE STATE OF MISSISSIPPI", align: center, bold: true}
+  - {text: "No. {case_number}", align: center, above: 9.6}
+  - {rule: 0.5, above: 19.2}
+  - {text: "{caption}", align: center, bold: true, above: 12}
+  - {rule: 0.5, above: 12}
+  - {text: "{proceeding}", align: center, optional: true, above: 12}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 24}
+  - {text: "{oral_argument}", align: center, bold: true, optional: true, above: 24}
+  - columns: {each: counsel, per_row: 2, row_gap: 13.8, blocks: [{text: "{names}", bold: true}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 48
+  - {break: true}
+# The date and the signature block (MISSCTAPP-CERT-002), never split; then the proof of service (MRAP 25(d),
+# MISSCTAPP-CERT-001) on a page of its own, in the filer's words, signed again.
+closing:
+  - group:
+      - {text: "Respectfully submitted, {date}.", pitch: body, indent: 36}
+      - each: signature
+        blocks: [{text: "{lines}", left: 216, above: 13.8}]
+    above: 13.8
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 12}
+      - {text: "{service.text}", pitch: body, indent: 36}
+      - {text: "{service.date}", pitch: body, indent: 36}
+      - each: signature
+        blocks: [{text: "{lines}", left: 216, above: 13.8}]

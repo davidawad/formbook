@@ -62,30 +62,36 @@ service:
   date: "On December 20, 2016."
 tables: true
 authorities:
-  dawson: {kind: case, name: "Dawson v. Miss. State Bd. of Massage Therapy", cite: "949 So. 2d 829 (Miss. Ct. App. 2006)"}
-  allstate: {kind: case, name: "State v. Allstate Ins. Co.", cite: "97 So. 2d 372 (Miss. 1957)"}
-  jackson: {kind: case, name: "Jackson v. State", cite: "924 So. 2d 531 (Miss. Ct. App. 2005)"}
-  bennett: {kind: case, name: "Bennett v. State", cite: "933 So. 2d 930 (Miss. 2006)"}
-  johnson: {kind: case, name: "Johnson v. State", cite: "756 So. 2d 4 (Miss. Ct. App. 1999)"}
-  anthony: {kind: case, name: "Anthony v. State", cite: "108 So. 3d 394 (Miss. 2013)"}
-  abel: {kind: case, name: "U.S. v. Abel", cite: "469 U.S. 45 (1984)"}
-  wells: {kind: case, name: "Wells v. Tucker", cite: "997 So. 2d 908 (Miss. 2008)"}
-  wellscoa: {kind: case, name: "Wells v. Tucker", cite: "997 So. 2d 925 (Miss. Ct. App. 2007)"}
-  davis: {kind: case, name: "Davis v. Alaska", cite: "415 U.S. 308 (1974)"}
-  crowe: {kind: case, name: "Crowe v. Bolduc", cite: "334 F.3d 124 (1st Cir. 2003)"}
-  lawson: {kind: case, name: "U.S. v. Lawson", cite: "683 F.2d 688 (2d Cir. 1982)"}
-  harris: {kind: case, name: "U.S. v. Harris", cite: "210 F.3d 165 (3d Cir. 2000)"}
-  turner: {kind: case, name: "U.S. v. Turner", cite: "198 F.3d 425 (4th Cir. 1999)"}
-  powell: {kind: case, name: "U.S. v. Powell", cite: "124 F.3d 655 (5th Cir. 1997)"}
-  schledwitz: {kind: case, name: "Schledwitz v. U.S.", cite: "169 F.3d 1003 (6th Cir. 1999)"}
-  salem: {kind: case, name: "U.S. v. Salem", cite: "578 F.3d 682 (7th Cir. 2009)"}
-  peyro: {kind: case, name: "U.S. v. Peyro", cite: "786 F.2d 826 (8th Cir. 1986)"}
-  hankey: {kind: case, name: "U.S. v. Hankey", cite: "203 F.3d 1160 (9th Cir. 2000)"}
-  baldridge: {kind: case, name: "U.S. v. Baldridge", cite: "559 F.3d 1126 (10th Cir. 2009)"}
-  smithkemp: {kind: case, name: "Smith v. Kemp", cite: "715 F.2d 1459 (11th Cir. 1983)"}
-  mre611: {kind: rule, name: "MRE 611(b)", cite: ""}
-  mre616: {kind: rule, name: "MRE 616", cite: ""}
-  mccarty: {kind: other, name: "David Neil McCarty, Evidence, 4 MS Prac. Encyclopedia MS Law § 33:65, Bias of Witnesses (ed. Jackson, Miller, & Campbell 2016)", cite: ""}
+  - heading: "CASES"
+    entries:
+      - {cite: "*Anthony v. State*, 108 So. 3d 394 (Miss. 2013)", find: "Anthony"}
+      - {cite: "*Bennett v. State*, 933 So. 2d 930 (Miss. 2006)", find: "Bennett"}
+      - {cite: "*Crowe v. Bolduc*, 334 F.3d 124 (1st Cir. 2003)", find: "Crowe"}
+      - {cite: "*Davis v. Alaska*, 415 U.S. 308 (1974)", find: "Davis v. Alaska"}
+      - {cite: "*Dawson v. Miss. State Bd. of Massage Therapy*, 949 So. 2d 829 (Miss. Ct. App. 2006)", find: "Dawson"}
+      - {cite: "*Jackson v. State*, 924 So. 2d 531 (Miss. Ct. App. 2005)", find: "Jackson v. State"}
+      - {cite: "*Johnson v. State*, 756 So. 2d 4 (Miss. Ct. App. 1999)", find: "Johnson v. State"}
+      - {cite: "*Schledwitz v. U.S.*, 169 F.3d 1003 (6th Cir. 1999)", find: "Schledwitz"}
+      - {cite: "*Smith v. Kemp*, 715 F.2d 1459 (11th Cir. 1983)", find: "Smith v. Kemp"}
+      - {cite: "*State v. Allstate Ins. Co.*, 97 So. 2d 372 (Miss. 1957)", find: "Allstate"}
+      - {cite: "*U.S. v. Abel*, 469 U.S. 45 (1984)", find: "Abel"}
+      - {cite: "*U.S. v. Baldridge*, 559 F.3d 1126 (10th Cir. 2009)", find: "Baldridge"}
+      - {cite: "*U.S. v. Hankey*, 203 F.3d 1160 (9th Cir. 2000)", find: "Hankey"}
+      - {cite: "*U.S. v. Harris*, 210 F.3d 165 (3d Cir. 2000)", find: "Harris"}
+      - {cite: "*U.S. v. Lawson*, 683 F.2d 688 (2d Cir. 1982)", find: "Lawson"}
+      - {cite: "*U.S. v. Peyro*, 786 F.2d 826 (8th Cir. 1986)", find: "Peyro"}
+      - {cite: "*U.S. v. Powell*, 124 F.3d 655 (5th Cir. 1997)", find: "Powell"}
+      - {cite: "*U.S. v. Salem*, 578 F.3d 682 (7th Cir. 2009)", find: "Salem"}
+      - {cite: "*U.S. v. Turner*, 198 F.3d 425 (4th Cir. 1999)", find: "Turner"}
+      - {cite: "*Wells v. Tucker*, 997 So. 2d 908 (Miss. 2008)", find: "997 So. 2d 908"}
+      - {cite: "*Wells v. Tucker*, 997 So. 2d 925 (Miss. Ct. App. 2007)", find: "997 So. 2d 925"}
+  - heading: "RULES"
+    entries:
+      - {cite: "MRE 611(b)", find: "611(b)"}
+      - {cite: "MRE 616", find: "MRE 616"}
+  - heading: "OTHER AUTHORITIES"
+    entries:
+      - {cite: "David Neil McCarty, Evidence, 4 MS Prac. Encyclopedia MS Law § 33:65, Bias of Witnesses (ed. Jackson, Miller, & Campbell 2016)", find: "Encyclopedia"}
 ---
 
 # Introduction
@@ -150,52 +156,52 @@ A universal tenet of law allows an advocate to test the bias of a witness, and t
 
 [^1]: The Mississippi Association for Justice is composed of attorneys from across the State of Mississippi. MAJ is committed to strengthening the civil justice system so that deserving individuals can get justice and wrongdoers are held accountable. MAJ opposes efforts to weaken basic legal protections and further stack the deck against average Mississippians. Many MAJ members have a varied practice representing clients in family law matters, criminal defense, real estate and business transactions, and a myriad of other areas. The group is adamant that all Mississippians benefit when individuals represented by attorneys have a fair chance to get justice through our civil justice system.
 
-[^2]: It is important to recall that the Constitution applies with equal force in Commission proceedings as it does in any other courtroom. For "[d]ue process always stands as a constitutionally grounded procedural safety net in administrative proceedings." [*Dawson v. Miss. State Bd. of Massage Therapy*, 949 So. 2d 829, 831 (Miss. Ct. App. 2006)](toa:dawson) (internal quotation and citation omitted). Furthermore, the Court will reverse an administrative decision if it "violates one's constitutional rights." [*Id.*](toa:dawson) (internal quotation and citation omitted); see also [*State v. Allstate Ins. Co.*, 97 So. 2d 372, 376 (Miss. 1957)](toa:allstate) ("A standard or rein upon an administrative agency is a constitutional requirement, and its presence or absence is a judicial question").
+[^2]: It is important to recall that the Constitution applies with equal force in Commission proceedings as it does in any other courtroom. For "[d]ue process always stands as a constitutionally grounded procedural safety net in administrative proceedings." *Dawson v. Miss. State Bd. of Massage Therapy*, 949 So. 2d 829, 831 (Miss. Ct. App. 2006) (internal quotation and citation omitted). Furthermore, the Court will reverse an administrative decision if it "violates one's constitutional rights." *Id.* (internal quotation and citation omitted); see also *State v. Allstate Ins. Co.*, 97 So. 2d 372, 376 (Miss. 1957) ("A standard or rein upon an administrative agency is a constitutional requirement, and its presence or absence is a judicial question").
 
-[^3]: [MRE 611(b)](toa:mre611).
+[^3]: MRE 611(b).
 
-[^4]: [*Jackson v. State*, 924 So. 2d 531, 539 (Miss. Ct. App. 2005)](toa:jackson) (emphasis added) (internal quotation and citation omitted) (internal quotation, citation, and alteration omitted).
+[^4]: *Jackson v. State*, 924 So. 2d 531, 539 (Miss. Ct. App. 2005) (emphasis added) (internal quotation and citation omitted) (internal quotation, citation, and alteration omitted).
 
-[^5]: [*Bennett v. State*, 933 So. 2d 930, 947 (Miss. 2006)](toa:bennett).
+[^5]: *Bennett v. State*, 933 So. 2d 930, 947 (Miss. 2006).
 
-[^6]: [David Neil McCarty, Evidence, 4 MS Prac. Encyclopedia MS Law § 33:65, Bias of Witnesses (ed. Jackson, Miller, & Campbell 2016)](toa:mccarty).
+[^6]: David Neil McCarty, Evidence, 4 MS Prac. Encyclopedia MS Law § 33:65, Bias of Witnesses (ed. Jackson, Miller, & Campbell 2016).
 
-[^7]: [MRE 616](toa:mre616).
+[^7]: MRE 616.
 
-[^8]: [*Bennett v. State*, 933 So. 2d 930, 947 (Miss. 2006)](toa:bennett).
+[^8]: *Bennett v. State*, 933 So. 2d 930, 947 (Miss. 2006).
 
-[^9]: [*Johnson v. State*, 756 So. 2d 4, 7 (Miss. Ct. App. 1999)](toa:johnson).
+[^9]: *Johnson v. State*, 756 So. 2d 4, 7 (Miss. Ct. App. 1999).
 
-[^10]: [*Anthony v. State*, 108 So. 3d 394, 397-98 (Miss. 2013)](toa:anthony) (internal quotation, citation, and alteration omitted).
+[^10]: *Anthony v. State*, 108 So. 3d 394, 397-98 (Miss. 2013) (internal quotation, citation, and alteration omitted).
 
-[^11]: [*U.S. v. Abel*, 469 U.S. 45, 51 (1984)](toa:abel).
+[^11]: *U.S. v. Abel*, 469 U.S. 45, 51 (1984).
 
-[^12]: [*Id.* at 52](toa:abel).
+[^12]: *Id.* at 52.
 
-[^13]: [*Id.*](toa:abel).
+[^13]: *Id.*.
 
-[^14]: [*Id.*](toa:abel).
+[^14]: *Id.*.
 
-[^15]: [*Wells v. Tucker*, 997 So. 2d 908, 916-17 (Miss. 2008)](toa:wells) (quoting [*Wells v. Tucker*, 997 So. 2d 925, 940 (Miss. Ct. App. 2007)](toa:wellscoa) (Griffis, P.J., dissenting)).
+[^15]: *Wells v. Tucker*, 997 So. 2d 908, 916-17 (Miss. 2008) (quoting *Wells v. Tucker*, 997 So. 2d 925, 940 (Miss. Ct. App. 2007) (Griffis, P.J., dissenting)).
 
-[^16]: [*Crowe v. Bolduc*, 334 F.3d 124, 132 (1st Cir. 2003)](toa:crowe).
+[^16]: *Crowe v. Bolduc*, 334 F.3d 124, 132 (1st Cir. 2003).
 
-[^17]: [*U.S. v. Lawson*, 683 F.2d 688, 693 (2d Cir. 1982)](toa:lawson).
+[^17]: *U.S. v. Lawson*, 683 F.2d 688, 693 (2d Cir. 1982).
 
-[^18]: [*U.S. v. Harris*, 210 F.3d 165, 167 (3d Cir. 2000)](toa:harris).
+[^18]: *U.S. v. Harris*, 210 F.3d 165, 167 (3d Cir. 2000).
 
-[^19]: [*U.S. v. Turner*, 198 F.3d 425, 429 (4th Cir. 1999)](toa:turner).
+[^19]: *U.S. v. Turner*, 198 F.3d 425, 429 (4th Cir. 1999).
 
-[^20]: [*U.S. v. Powell*, 124 F.3d 655, 661 (5th Cir. 1997)](toa:powell).
+[^20]: *U.S. v. Powell*, 124 F.3d 655, 661 (5th Cir. 1997).
 
-[^21]: [*Schledwitz v. U.S.*, 169 F.3d 1003, 1015 (6th Cir. 1999)](toa:schledwitz).
+[^21]: *Schledwitz v. U.S.*, 169 F.3d 1003, 1015 (6th Cir. 1999).
 
-[^22]: [*U.S. v. Salem*, 578 F.3d 682, 686 (7th Cir. 2009)](toa:salem).
+[^22]: *U.S. v. Salem*, 578 F.3d 682, 686 (7th Cir. 2009).
 
-[^23]: [*U.S. v. Peyro*, 786 F.2d 826, 828 (8th Cir. 1986)](toa:peyro) (citing to [*Davis v. Alaska*, 415 U.S. 308, 316 (1974)](toa:davis)).
+[^23]: *U.S. v. Peyro*, 786 F.2d 826, 828 (8th Cir. 1986) (citing to *Davis v. Alaska*, 415 U.S. 308, 316 (1974)).
 
-[^24]: [*U.S. v. Hankey*, 203 F.3d 1160, 1171 (9th Cir. 2000)](toa:hankey).
+[^24]: *U.S. v. Hankey*, 203 F.3d 1160, 1171 (9th Cir. 2000).
 
-[^25]: [*U.S. v. Baldridge*, 559 F.3d 1126, 1135 (10th Cir. 2009)](toa:baldridge).
+[^25]: *U.S. v. Baldridge*, 559 F.3d 1126, 1135 (10th Cir. 2009).
 
-[^26]: [*Smith v. Kemp*, 715 F.2d 1459, 1467 (11th Cir. 1983)](toa:smithkemp).
+[^26]: *Smith v. Kemp*, 715 F.2d 1459, 1467 (11th Cir. 1983).
