@@ -73,12 +73,13 @@ local function rule(kind, before, left_right)
 end
 
 -- A section's properties: its footer (rIdFtrNone or rIdFtrPage, written by fb render), page number format and
--- start, letter paper with 1 in margins.
+-- start, letter paper with 1 in margins. The right margin is one twip wider: LibreOffice lays lines out in twips and
+-- keeps a word that overruns the measure by less than one (a line typst, measuring exactly, breaks before it).
 local function sect_pr(footer, fmt, start)
   local pg = ""
   if fmt then pg = '<w:pgNumType w:fmt="' .. fmt .. '" w:start="' .. (start or 1) .. '"/>' end
   return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/>'
-    .. '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" '
+    .. '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1441" w:bottom="1440" w:left="1440" '
     .. 'w:header="720" w:footer="676" w:gutter="0"/>' .. pg .. "</w:sectPr>"
 end
 
@@ -458,13 +459,34 @@ scan_blocks = function(blocks, in_note)
   end
 end
 
+-- Unicode line breaking (UAX #14), as typst breaks, where LibreOffice breaks otherwise: no break at a space before
+-- closing punctuation (LB13: "on . . . planes" is not split between its dots), and none inside a token of adjacent
+-- parentheses ("7261(a)(3)": typst boxes it, lib/typst/xengine.typ), held by a word joiner.
+local CLOSING = { ["."] = true, [","] = true, [";"] = true, [":"] = true, ["!"] = true, ["?"] = true,
+  [")"] = true, ["]"] = true, ["}"] = true }
+local function uax14(l)
+  l = xe.inlines(l)
+  local out = pandoc.Inlines({})
+  for i, el in ipairs(l) do
+    local nxt = l[i + 1]
+    if el.t == "Space" and nxt and nxt.t == "Str" and CLOSING[nxt.text:sub(1, 1)] then
+      out:insert(pandoc.Str("\u{00A0}"))
+    elseif el.t == "Str" and el.text:find(")(", 1, true) then
+      out:insert(pandoc.Str((el.text:gsub("%)%(", ")\u{2060}("))))
+    else
+      out:insert(el)
+    end
+  end
+  return out
+end
+
 local function strip_links(blocks)
   return pandoc.Pandoc(blocks):walk({
     Link = function(el)
       if el.target:match("^toa:") then return el.content end
       return nil
     end,
-    Inlines = xe.inlines,
+    Inlines = uax14,
   }).blocks
 end
 
