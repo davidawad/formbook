@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The W.D. Mo. bankruptcy memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the
+     face of the typst template ({font}, Times New Roman) at 12 pt (size 24 half points, as the exemplars); Body Text
+     and the headings in exact 13.8 pt line boxes (typst pitch-single: single-spaced, a blank line between
+     paragraphs) with a half-inch indent; letter page with 1-inch margins and a centered page number, its line
+     36.75 pt above the page foot (735 twips: where typst sets it, footer-descent 30 %). docx/mowb.lua writes every
+     paragraph's own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="276" single="276" indent="720" heading="276" heading-before="276" heading-after="0" footer="735"/>
