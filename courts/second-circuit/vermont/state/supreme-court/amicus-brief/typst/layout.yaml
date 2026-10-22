@@ -1,0 +1,90 @@
+# Vermont Supreme Court (vt): amicus curiae brief. The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Lengths in
+# points. The Vermont Rules of Appellate Procedure (V.R.A.P. 28, 29, 32) could not be retrieved from this host
+# (vtcourts.gov answers 403; docs/open-items/fb-595.54.73.md), so every number is the convention of the filed
+# exemplar (usage/SOURCE.md) and of the template this file replaces, marked VT-CONV.
+# No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # VT-CONV: 12-point Times New Roman body text (the exemplar, the old template)
+pitch:
+  body: 27.6              # VT-CONV: double-spaced text (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # VT-CONV: one-inch margins
+indent: 36
+page_number: {align: center, front: lower-roman}   # VT-CONV: the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
+footnote: {size: 11, pitch: 12.65, gap: 6.3}       # VT-CONV: 11-point footnotes (the exemplar's), single spaced
+quote: {left: 36, right: 36, above: 13.8, below: 13.8}   # VT-CONV: block quotations single spaced, indented both sides
+heading:
+  - {align: center, bold: true, upper: true, above: 27.6, below: 13.8}
+  - {bold: true, above: 13.8, below: 6.9}
+  - {bold: true, italic: true, above: 13.8, below: 6.9}
+# The cover: the court, the docket number, the caption beside the tribunal appealed from, the title, counsel.
+cover:
+  - {text: "IN THE SUPREME COURT", align: center, bold: true}
+  - {text: "OF THE STATE OF VERMONT", align: center, bold: true}
+  - {text: "Docket No. {case_number}", align: center, above: 27.6}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 36, above: 13.8, below: 13.8}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36}
+      - blocks:
+          - {text: "Appeal from {lower_court}", optional: true}
+          - {text: "Case No. {lower_court_case}", optional: true, above: 13.8}
+    gutter: 28.8
+    above: 27.6
+  - {text: "{brief_title}", align: center, bold: true, above: 41.4}
+  - columns: {each: counsel, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 41.4
+contents: {title: "Table of Contents", depth: 2, col: 36, hang: 36, step: 36, above: 6.9}
+# VT-CONV: the table of authorities after the contents, from the body's `toa:` links, grouped under the old
+# template's titles; a case name in italics (the frontmatter's own markup), then a comma and the citation; seven
+# pages or more "passim".
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 28.8
+  above: 6.9
+  passim: 7
+  group: {bold: true, above: 13.8, below: 6.9}
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: statute, title: "Statutes and Regulations"}
+    - {kind: constitution, title: "Constitutional Provisions"}
+    - {kind: rule, title: "Rules"}
+    - {kind: other, title: "Other Authorities"}
+# "Respectfully submitted," the signature blocks side by side and the date at the right, never split and kept with
+# the conclusion's last paragraph; then the certificates of compliance (V.R.A.P. 32(a)(7) word count) and of
+# service, each on a page of its own and signed as the brief, from the frontmatter.
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "Respectfully submitted,"}
+      - columns: {each: signature, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 27.6
+      - {text: "{date}", align: right, above: 8.4}
+    above: 27.6
+  - when: compliance
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true}
+      - {text: "{compliance}", pitch: body, indent: 36, above: 13.8}
+      - group:
+          - columns: {each: signature, blocks: [{text: "{lines}"}]}
+            gutter: 21.6
+          - {text: "{date}", align: right, above: 8.4}
+        above: 27.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true}
+      - {text: "{service.text}", pitch: body, indent: 36, above: 13.8}
+      - group:
+          - columns: {each: signature, blocks: [{text: "{lines}"}]}
+            gutter: 21.6
+          - {text: "{date}", align: right, above: 8.4}
+        above: 27.6

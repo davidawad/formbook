@@ -13,30 +13,30 @@ counsel:
     lines: ["ACLU Foundation of Vermont", "P.O. Box 277", "Montpelier, VT 05601", "hstark@acluvt.org", "lernst@acluvt.org", "(802) 223-6304"]
 date: "February 2, 2024"
 signature:
-  - lines: ["___________/s/_____________", "Harrison Stark", "Lia Ernst", "ACLU Foundation of Vermont", "P.O. Box 277", "Montpelier, VT 05601", "hstark@acluvt.org", "lernst@acluvt.org", "(802) 223-6304", "Counsel for Amici Curiae"]
+  - lines: ["\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_/s/\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_", "Harrison Stark", "Lia Ernst", "ACLU Foundation of Vermont", "P.O. Box 277", "Montpelier, VT 05601", "hstark@acluvt.org", "lernst@acluvt.org", "(802) 223-6304", "Counsel for Amici Curiae"]
   - lines: ["On behalf of:", "ACLU Foundation of Vermont", "Disability Rights Vermont", "Vermonters for Criminal Justice Reform"]
 compliance: "I hereby certify that this brief totals 2839 words, excluding the table of contents, table of authorities, signature blocks, and this certificate as permitted by Vt. R. App. P. 32. I have relied upon the word processor used to produce this brief, Microsoft Word for Office 365, to calculate the word count."
 service:
   text: "Pursuant to Vt. R. App. P. 25(c), I hereby certify that I have served the above motion as required under Vt. R. App. P. 25(b) and 2020 V.R.E.F. 11 by filing this motion through the Court’s electronic filing system and providing copies to all parties via electronic mail."
 authorities:
-  ap: { kind: "case", name: "State v. A.P.", cite: "2021 VT 90, 216 Vt. 76, 268 A.3d 58" }
-  athens: { kind: "case", name: "Athens Sch. Dist. v. Vt. State Bd. of Educ.", cite: "2020 VT 52, 212 Vt. 455, 237 A.3d 671" }
-  barbuto: { kind: "case", name: "Barbuto v. Advantage Sales & Mktg., LLC", cite: "78 N.E.3d 37 (Mass. 2017)" }
-  braska: { kind: "case", name: "Braska v. Challenge Mfg. Co.", cite: "861 N.W.2d 289 (Mich. Ct. App. 2014)" }
-  gallipo: { kind: "case", name: "Gallipo v. City of Rutland", cite: "173 Vt. 223, 789 A.2d 942 (2001)" }
-  johnson: { kind: "case", name: "Johnson v. Dep’t of Emp. Sec.", cite: "138 Vt. 554, 420 A.2d 106 (1980)" }
-  kitchel: { kind: "case", name: "Vt. Dev. Credit Corp. v. Kitchel", cite: "149 Vt. 421, 544 A.2d 1165 (1988)" }
-  nolan: { kind: "case", name: "Nolan v. Davidson", cite: "134 Vt. 295, 357 A.2d 129 (1976)" }
-  paine: { kind: "case", name: "Paine v. Ride-Away, Inc.", cite: "274 A.3d 554 (N.H. 2022)" }
-  porter: { kind: "case", name: "Porter v. Dep’t of Emp. Sec.", cite: "139 Vt. 405, 430 A.2d 450 (1981)" }
-  therrien: { kind: "case", name: "In re Therrien", cite: "132 Vt. 535, 325 A.2d 357 (1974)" }
-  s7951: { kind: "statute", name: "7 V.S.A. § 951" }
-  s4230a: { kind: "statute", name: "18 V.S.A. § 4230a" }
-  s1344: { kind: "statute", name: "21 V.S.A. § 1344" }
-  mich: { kind: "statute", name: "Mich. Comp. Laws Ann. § 333.26424" }
-  cannabis-rules: { kind: "rule", name: "Rules Regulating Cannabis For Symptom Relief,", cite: "Code of Vt. Rules 28 000 0003" }
-  wershoven: { kind: "other", name: "Nicole Wershoven, Amanda G. Kennedy, & Charles D. MacLean, Use and Reported Helpfulness of Cannabinoids Among Primary Care Patients in Vermont, 11 J. of Primary Care and Cmty. Health 1 (2020)" }
-  ag-guide: { kind: "other", name: "Vermont Office of the Attorney General, Civil Rights Unit, Guide to Vermont’s Laws on Marijuana in the Workplace (June 2018)" }
+  ap: { kind: "case", name: "*State v. A.P.*", cite: "2021 VT 90, 216 Vt. 76, 268 A.3d 58" }
+  athens: { kind: "case", name: "*Athens Sch. Dist. v. Vt. State Bd. of Educ.*", cite: "2020 VT 52, 212 Vt. 455, 237 A.3d 671" }
+  barbuto: { kind: "case", name: "*Barbuto v. Advantage Sales & Mktg., LLC*", cite: "78 N.E.3d 37 (Mass. 2017)" }
+  braska: { kind: "case", name: "*Braska v. Challenge Mfg. Co.*", cite: "861 N.W.2d 289 (Mich. Ct. App. 2014)" }
+  gallipo: { kind: "case", name: "*Gallipo v. City of Rutland*", cite: "173 Vt. 223, 789 A.2d 942 (2001)" }
+  johnson: { kind: "case", name: "*Johnson v. Dep’t of Emp. Sec.*", cite: "138 Vt. 554, 420 A.2d 106 (1980)" }
+  kitchel: { kind: "case", name: "*Vt. Dev. Credit Corp. v. Kitchel*", cite: "149 Vt. 421, 544 A.2d 1165 (1988)" }
+  nolan: { kind: "case", name: "*Nolan v. Davidson*", cite: "134 Vt. 295, 357 A.2d 129 (1976)" }
+  paine: { kind: "case", name: "*Paine v. Ride-Away, Inc.*", cite: "274 A.3d 554 (N.H. 2022)" }
+  porter: { kind: "case", name: "*Porter v. Dep’t of Emp. Sec.*", cite: "139 Vt. 405, 430 A.2d 450 (1981)" }
+  therrien: { kind: "case", name: "*In re Therrien*", cite: "132 Vt. 535, 325 A.2d 357 (1974)" }
+  s7951: { kind: "statute", cite: "7 V.S.A. § 951" }
+  s4230a: { kind: "statute", cite: "18 V.S.A. § 4230a" }
+  s1344: { kind: "statute", cite: "21 V.S.A. § 1344" }
+  mich: { kind: "statute", cite: "Mich. Comp. Laws Ann. § 333.26424" }
+  cannabis-rules: { kind: "rule", name: "Rules Regulating Cannabis For Symptom Relief", cite: "Code of Vt. Rules 28 000 0003" }
+  wershoven: { kind: "other", cite: "Nicole Wershoven, Amanda G. Kennedy, & Charles D. MacLean, Use and Reported Helpfulness of Cannabinoids Among Primary Care Patients in Vermont, 11 J. of Primary Care and Cmty. Health 1 (2020)" }
+  ag-guide: { kind: "other", cite: "Vermont Office of the Attorney General, Civil Rights Unit, Guide to Vermont’s Laws on Marijuana in the Workplace (June 2018)" }
 ---
 
 # Interests of Amici Curiae

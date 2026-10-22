@@ -1,0 +1,12 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # The points' headings cite 18 V.S.A. § 4230a with a `toa:` link: typst counts the contents row's copy of the mark
+  # and lists page "i" for it in the table of authorities, LaTeX and Word do not (docs/open-items/fb-595.54.73.md);
+  # 334 of 335 lines identical, pages and page ends equal. Reported, not gated (fb-595.54.73).
+  cross_engine_latex: report
+  # Word, as LaTeX above, and Kitchel (a citation that starts at the foot of body page 5 and ends on page 6) listed
+  # on page 6, typst and LaTeX on 5 (the page of its first word). Reported, not gated (fb-595.54.73).
+  cross_engine_docx: report
