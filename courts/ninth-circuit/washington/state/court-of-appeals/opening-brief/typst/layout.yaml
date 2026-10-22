@@ -1,0 +1,66 @@
+# Court of Appeals of the State of Washington (washctapp): opening brief (brief of appellant). The whole layout, as
+# data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Rules: ../../rules.md (RAP 10.3, 18.17, RAP Form 5); a number with no rule is a
+# style choice of the template, kept from the template it replaces. Lengths in points. No case text: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # WASHCTAPP-FORM-004 (RAP 18.17(a)(2)): 14 point for all text, footnotes, block quotations
+pitch:
+  body: 32.2              # WASHCTAPP-FORM-005 (RAP 18.17(a)(2)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # footnotes, block quotations, headings, cover, tables, signature: single (1.15 x 14 pt)
+margin: {top: 108, bottom: 108, left: 144, right: 108}   # WASHCTAPP-FORM-002 (RAP 18.17(a)(1)): 2 in left, 1 1/2 in right, top, bottom
+indent: 36
+# RAP 18.17, RAP Form 5: page numbers at the bottom; the title page unnumbered, the tables i, ii .., the body from 1
+page_number: {align: center, from: 1, front: lower-roman}
+footnote: {size: 14, pitch: single, gap: 7}   # WASHCTAPP-FORM-004, -005: 14 pt, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # WASHCTAPP-FORM-005: block quotations single spaced, indented
+# The parts (A. INTRODUCTION.), the issues and arguments (1.), the sub-arguments (a.): bold, single spaced, the
+# later lines of an argument heading hung 1/2 inch.
+heading:
+  - {bold: true, above: 19.6, below: 14}
+  - {bold: true, hang: 36, above: 15.4, below: 12.6}
+  - {bold: true, left: 36, hang: 36, above: 14, below: 12.6}
+# RAP 10.3(a)(1), RAP Form 5 (WASHCTAPP-COVER-001): the title page: the case number, the court and division, the
+# caption with the parties designated, the title of the brief, counsel (right of centre).
+cover:
+  - {text: "{case_number}"}
+  - {text: "COURT OF APPEALS OF THE STATE OF WASHINGTON", align: center, bold: true, above: 21.6}
+  - {text: "DIVISION {division}", align: center, bold: true}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, above: 2.8}
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - group:
+          - {text: "{names}", left: 180}
+          - {text: "{lines}", left: 180, above: 7.2, optional: true}
+# RAP 10.3(a)(2): a table of contents and a table of authorities with page references, each on its own page.
+contents: {title: "TABLE OF CONTENTS", style: {align: center}, depth: 3, col: 36, hang: 21, step: 21, above: 12.6}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  style: {align: center}
+  col: 108
+  hang: 21
+  above: 11.2
+  group: {bold: true, above: 16.8, below: 8.4}
+# WASHCTAPP-CERT-001 (RAP 18.17(b)): the word count above the signature line; the statement, the date line and the
+# signature block never split.
+closing:
+  - group:
+      - {text: "Counsel certifies this brief complies with RAP 18.17 and contains {word_count} words.", indent: 36, pitch: body}
+      - {text: "{date}", indent: 36, pitch: body, optional: true}
+      - group:
+          - {text: "Respectfully submitted,", left: 180}
+          - {text: "{signature.signer}", left: 180, above: 64.8}
+          - {text: "{signature.lines}", left: 180, optional: true}
+        above: 2.8
+    above: 21.6
+# RAP 10.3(a)(8): the appendix, from its heading, after the signature on a page of its own (excluded from the word
+# count, RAP 18.17(c)).
+tail: {at: "APPENDIX", break: true}

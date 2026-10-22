@@ -20,87 +20,87 @@ signature:
 authorities:
   - heading: "Washington Supreme Court"
     entries:
-      - {cite: "City of Bothell v. Barnhart, 156 Wn. App. 531, 234 P.3d 264 (2010), aff'd, 172 Wn.2d 223, 257 P.3d 648 (2011)", finds: ["Barnhart"]}
-      - {cite: "In re Personal Restraint of Orange, 152 Wn.2d 795, 100 P.3d 291 (2004)", finds: ["Orange"]}
-      - {cite: "In re Postsentence Review of Leach, 161 Wn.2d 180, 163 P.3d 782 (2007)", finds: ["Leach"]}
-      - {cite: "State v. Bahl, 164 Wn.2d 739, 193 P.3d 678 (2008)", finds: ["Bahl"]}
-      - {cite: "State v. Boyce, 24 Wash. 514, 64 P. 719 (1901)", finds: ["Boyce"]}
-      - {cite: "State v. Cornwall, 190 Wn.2d 296, 412 P.3d 1265 (2018)", finds: ["Cornwall"]}
-      - {cite: "State v. Green, 94 Wn.2d 216, 616 P.2d 628 (1980)", finds: ["Green, 94"]}
-      - {cite: "State v. Guthrie, 185 Wash. 464, 56 P.2d 160 (1936)", finds: ["Guthrie"]}
-      - {cite: "State v. Hughes, 166 Wn.2d 675, 212 P.3d 558 (2009)", finds: ["Hughes"]}
-      - {cite: "State v. Hunley, 175 Wn.2d 901, 287 P.3d 584 (2012)", finds: ["Hunley"]}
-      - {cite: "State v. Kier, 164 Wn.2d 798, 194 P.3d 212 (2008)", finds: ["Kier"]}
-      - {cite: "State v. Mutch, 171 Wn.2d 646, 254 P.3d 803 (2011)", finds: ["Mutch"]}
-      - {cite: "State v. Newcomb, 58 Wash. 414, 109 P. 355 (1910)", finds: ["Newcomb"]}
-      - {cite: "State v. Olsen, 189 Wn.2d 118, 399 P.3d 1141 (2017)", finds: ["Olsen"]}
-      - {cite: "State v. Ortega-Martinez, 124 Wn.2d 702, 881 P.2d 231 (1994)", finds: ["Ortega-Martinez"]}
-      - {cite: "State v. Petrich, 101 Wn.2d 566, 683 P.2d 173 (1984)", finds: ["Petrich"]}
-      - {cite: "State v. Phillips, 65 Wash. 324, 118 P. 43 (1911)", finds: ["Phillips"]}
-      - {cite: "State v. Quismundo, 164 Wn.2d 499, 192 P.3d 342 (2008)", finds: ["Quismundo"]}
-      - {cite: "State v. Riles, 135 Wn.2d 326, 957 P.2d 655 (1998)", finds: ["Riles"]}
-      - {cite: "State v. Rolax, 104 Wn.2d 129, 702 P.2d 1185 (1985)", finds: ["Rolax"]}
-      - {cite: "State v. Sanchez Valencia, 169 Wn.2d 782, 239 P.3d 1059 (2010)", finds: ["Sanchez Valencia"]}
-      - {cite: "State v. Wallmuller, 194 Wn.2d 234, 449 P.3d 619 (2019)", finds: ["Wallmuller"]}
-      - {cite: "State v. Willis, 135 Wash. 312, 237 P. 711 (1925)", finds: ["Willis"]}
-      - {cite: "Washington State Motorcycle Dealers Ass'n v. State, 111 Wn.2d 667, 763 P.2d 442 (1988)", finds: ["Motorcycle Dealers"]}
+      - {cite: "City of Bothell v. Barnhart, 156 Wn. App. 531, 234 P.3d 264 (2010), aff'd, 172 Wn.2d 223, 257 P.3d 648 (2011)", find: "Barnhart"}
+      - {cite: "In re Personal Restraint of Orange, 152 Wn.2d 795, 100 P.3d 291 (2004)", find: "Orange"}
+      - {cite: "In re Postsentence Review of Leach, 161 Wn.2d 180, 163 P.3d 782 (2007)", find: "Leach"}
+      - {cite: "State v. Bahl, 164 Wn.2d 739, 193 P.3d 678 (2008)", find: "Bahl"}
+      - {cite: "State v. Boyce, 24 Wash. 514, 64 P. 719 (1901)", find: "Boyce"}
+      - {cite: "State v. Cornwall, 190 Wn.2d 296, 412 P.3d 1265 (2018)", find: "Cornwall"}
+      - {cite: "State v. Green, 94 Wn.2d 216, 616 P.2d 628 (1980)", find: "Green, 94"}
+      - {cite: "State v. Guthrie, 185 Wash. 464, 56 P.2d 160 (1936)", find: "Guthrie"}
+      - {cite: "State v. Hughes, 166 Wn.2d 675, 212 P.3d 558 (2009)", find: "Hughes"}
+      - {cite: "State v. Hunley, 175 Wn.2d 901, 287 P.3d 584 (2012)", find: "Hunley"}
+      - {cite: "State v. Kier, 164 Wn.2d 798, 194 P.3d 212 (2008)", find: "Kier"}
+      - {cite: "State v. Mutch, 171 Wn.2d 646, 254 P.3d 803 (2011)", find: "Mutch"}
+      - {cite: "State v. Newcomb, 58 Wash. 414, 109 P. 355 (1910)", find: "Newcomb"}
+      - {cite: "State v. Olsen, 189 Wn.2d 118, 399 P.3d 1141 (2017)", find: "Olsen"}
+      - {cite: "State v. Ortega-Martinez, 124 Wn.2d 702, 881 P.2d 231 (1994)", find: "Ortega-Martinez"}
+      - {cite: "State v. Petrich, 101 Wn.2d 566, 683 P.2d 173 (1984)", find: "Petrich"}
+      - {cite: "State v. Phillips, 65 Wash. 324, 118 P. 43 (1911)", find: "Phillips"}
+      - {cite: "State v. Quismundo, 164 Wn.2d 499, 192 P.3d 342 (2008)", find: "Quismundo"}
+      - {cite: "State v. Riles, 135 Wn.2d 326, 957 P.2d 655 (1998)", find: "Riles"}
+      - {cite: "State v. Rolax, 104 Wn.2d 129, 702 P.2d 1185 (1985)", find: "Rolax"}
+      - {cite: "State v. Sanchez Valencia, 169 Wn.2d 782, 239 P.3d 1059 (2010)", find: "Sanchez Valencia"}
+      - {cite: "State v. Wallmuller, 194 Wn.2d 234, 449 P.3d 619 (2019)", find: "Wallmuller"}
+      - {cite: "State v. Willis, 135 Wash. 312, 237 P. 711 (1925)", find: "Willis"}
+      - {cite: "Washington State Motorcycle Dealers Ass'n v. State, 111 Wn.2d 667, 763 P.2d 442 (1988)", find: "Motorcycle Dealers"}
   - heading: "Washington Court of Appeals"
     entries:
-      - {cite: "In re Pers. Restraint of Alaniz, No. 39631-2-III, 2024 WL 1209297 (Mar. 21, 2024)", finds: ["Alaniz"]}
-      - {cite: "In re Pers. Restraint of Bratcher, No. 39758-1-III, 2024 WL 1406540 (Apr. 2, 2024)", finds: ["Bratcher"]}
-      - {cite: "State v. Berg, 147 Wn. App. 923, 198 P.3d 529 (2008)", finds: ["Berg"]}
-      - {cite: "State v. Borshiem, 140 Wn. App. 357, 165 P.3d 417 (2007)", finds: ["Borshiem"]}
-      - {cite: "State v. Irwin, 191 Wn. App. 644, 364 P.3d 830 (2015)", finds: ["Irwin"]}
-      - {cite: "State v. Johnson, 184 Wn. App. 777, 340 P.3d 230 (2014)", finds: ["Johnson, 184"]}
-      - {cite: "State v. Johnson, 197 Wn.2d 740, 487 P.3d 893 (2021)", finds: ["Johnson, 197"]}
-      - {cite: "State v. Marsh, 106 Wn. App. 801, 24 P.3d 1127 (2001)", finds: ["Marsh"]}
-      - {cite: "State v. Reedy, 26 Wn. App. 2d 379, 527 P.3d 156, 2023 WL 2856749 (2023), rev. denied, 1 Wn.3d 1029 (2023)", finds: ["Reedy"]}
-      - {cite: "State v. Robinson, 8 Wn. App. 2d 628, 439 P.3d 710 (2019)", finds: ["Robinson"]}
-      - {cite: "State v. Sanford, 15 Wn. App. 2d 748, 477 P.3d 72 (2020)", finds: ["Sanford"]}
-      - {cite: "State v. Turner, 102 Wn. App. 202, 6 P.3d 1226 (2000)", finds: ["Turner"]}
+      - {cite: "In re Pers. Restraint of Alaniz, No. 39631-2-III, 2024 WL 1209297 (Mar. 21, 2024)", find: "Alaniz"}
+      - {cite: "In re Pers. Restraint of Bratcher, No. 39758-1-III, 2024 WL 1406540 (Apr. 2, 2024)", find: "Bratcher"}
+      - {cite: "State v. Berg, 147 Wn. App. 923, 198 P.3d 529 (2008)", find: "Berg"}
+      - {cite: "State v. Borshiem, 140 Wn. App. 357, 165 P.3d 417 (2007)", find: "Borshiem"}
+      - {cite: "State v. Irwin, 191 Wn. App. 644, 364 P.3d 830 (2015)", find: "Irwin"}
+      - {cite: "State v. Johnson, 184 Wn. App. 777, 340 P.3d 230 (2014)", find: "Johnson, 184"}
+      - {cite: "State v. Johnson, 197 Wn.2d 740, 487 P.3d 893 (2021)", find: "Johnson, 197"}
+      - {cite: "State v. Marsh, 106 Wn. App. 801, 24 P.3d 1127 (2001)", find: "Marsh"}
+      - {cite: "State v. Reedy, 26 Wn. App. 2d 379, 527 P.3d 156, 2023 WL 2856749 (2023), rev. denied, 1 Wn.3d 1029 (2023)", find: "Reedy"}
+      - {cite: "State v. Robinson, 8 Wn. App. 2d 628, 439 P.3d 710 (2019)", find: "Robinson"}
+      - {cite: "State v. Sanford, 15 Wn. App. 2d 748, 477 P.3d 72 (2020)", find: "Sanford"}
+      - {cite: "State v. Turner, 102 Wn. App. 202, 6 P.3d 1226 (2000)", find: "Turner"}
   - heading: "United States Supreme Court"
     entries:
-      - {cite: "Blockberger v. United States, 284 U.S. 299, 52 S. Ct. 180, 76 L. Ed. 306 (1932)", finds: ["Blockberger"]}
-      - {cite: "In re Winship, 397 U.S. 358, 90 S. Ct. 1068, 25 L. Ed. 2d 368 (1970)", finds: ["Winship"]}
-      - {cite: "Jackson v. Virginia, 443 U.S. 307, 99 S. Ct. 2781, 61 L. Ed. 2d 560 (1979)", finds: ["Jackson"]}
+      - {cite: "Blockberger v. United States, 284 U.S. 299, 52 S. Ct. 180, 76 L. Ed. 306 (1932)", find: "Blockberger"}
+      - {cite: "In re Winship, 397 U.S. 358, 90 S. Ct. 1068, 25 L. Ed. 2d 368 (1970)", find: "Winship"}
+      - {cite: "Jackson v. Virginia, 443 U.S. 307, 99 S. Ct. 2781, 61 L. Ed. 2d 560 (1979)", find: "Jackson"}
   - heading: "Other Jurisdictions"
     entries:
-      - {cite: "People v. Foster, 480 N.E.2d 340 (N.Y. 1985)", finds: ["Foster"]}
-      - {cite: "Reed v. Wainwright, 587 F.2d 260 (5th Cir. 1979)", finds: ["Reed v. Wainwright"]}
+      - {cite: "People v. Foster, 480 N.E.2d 340 (N.Y. 1985)", find: "Foster"}
+      - {cite: "Reed v. Wainwright, 587 F.2d 260 (5th Cir. 1979)", find: "Reed v. Wainwright"}
   - heading: "United States Constitution"
     entries:
-      - {cite: "Fifth Amendment", finds: ["amend. V"]}
-      - {cite: "Sixth Amendment", finds: ["Sixth Amendment"]}
-      - {cite: "Fourteenth Amendment", finds: ["amend. XIV"]}
+      - {cite: "Fifth Amendment", find: "amend. V"}
+      - {cite: "Sixth Amendment", find: "Sixth Amendment"}
+      - {cite: "Fourteenth Amendment", find: "amend. XIV"}
   - heading: "Washington Constitution"
     entries:
-      - {cite: "Article I, section 3", finds: ["art. I, § 3", "art. I, §§ 3"]}
-      - {cite: "Article I, section 7", finds: ["art. I, § 7"]}
-      - {cite: "Article I, section 9", finds: ["art. I, § 9", "I, section 9"]}
-      - {cite: "Article I, section 21", finds: ["art. I, § 21", "3, 21"]}
-      - {cite: "Article I, section 22", finds: ["art. I, § 22", "I, section 22"]}
+      - {cite: "Article I, section 3", find: "art. I, § 3", finds: ["art. I, § 3", "art. I, §§ 3"]}
+      - {cite: "Article I, section 7", find: "art. I, § 7"}
+      - {cite: "Article I, section 9", find: "art. I, § 9", finds: ["art. I, § 9", "I, section 9"]}
+      - {cite: "Article I, section 21", find: "art. I, § 21", finds: ["art. I, § 21", "3, 21"]}
+      - {cite: "Article I, section 22", find: "art. I, § 22", finds: ["art. I, § 22", "I, section 22"]}
   - heading: "Statutes"
     entries:
-      - {cite: "Laws 1909, ch. 73", finds: ["Laws 1909"]}
-      - {cite: "3 Rem. & Bal. Code, § 94-3", finds: ["Rem. & Bal. Code"]}
-      - {cite: "RCW 2.36.010", finds: ["2.36.010"]}
-      - {cite: "RCW 2.36.050", finds: ["2.36.050"]}
-      - {cite: "RCW 2.36.070", finds: ["2.36.070"]}
-      - {cite: "RCW 2.36.072", finds: ["2.36.072"]}
-      - {cite: "RCW 9.94A.030", finds: ["9.94A.030"]}
-      - {cite: "RCW 9.94A.505", finds: ["9.94A.505"]}
-      - {cite: "RCW 9.94A.631", finds: ["9.94A.631"]}
-      - {cite: "RCW 9.94A.715", finds: ["9.94A.715"]}
-      - {cite: "RCW 9A.44.010", finds: ["9A.44.010"]}
-      - {cite: "RCW 9A.44.073", finds: ["9A.44.073"]}
-      - {cite: "RCW 9A.44.083", finds: ["9A.44.083"]}
-      - {cite: "RCW 46.16A.140", finds: ["46.16A.140"]}
-      - {cite: "RCW 46.20.021", finds: ["46.20.021"]}
-      - {cite: "RCW 77.080.075", finds: ["77.080.075"]}
+      - {cite: "Laws 1909, ch. 73", find: "Laws 1909"}
+      - {cite: "3 Rem. & Bal. Code, § 94-3", find: "Rem. & Bal. Code"}
+      - {cite: "RCW 2.36.010", find: "2.36.010"}
+      - {cite: "RCW 2.36.050", find: "2.36.050"}
+      - {cite: "RCW 2.36.070", find: "2.36.070"}
+      - {cite: "RCW 2.36.072", find: "2.36.072"}
+      - {cite: "RCW 9.94A.030", find: "9.94A.030"}
+      - {cite: "RCW 9.94A.505", find: "9.94A.505"}
+      - {cite: "RCW 9.94A.631", find: "9.94A.631"}
+      - {cite: "RCW 9.94A.715", find: "9.94A.715"}
+      - {cite: "RCW 9A.44.010", find: "9A.44.010"}
+      - {cite: "RCW 9A.44.073", find: "9A.44.073"}
+      - {cite: "RCW 9A.44.083", find: "9A.44.083"}
+      - {cite: "RCW 46.16A.140", find: "46.16A.140"}
+      - {cite: "RCW 46.20.021", find: "46.20.021"}
+      - {cite: "RCW 77.080.075", find: "77.080.075"}
   - heading: "Court Rules"
     entries:
-      - {cite: "RAP 2.5(a)(3)", finds: ["RAP 2.5"]}
-      - {cite: "GR 14.1", finds: ["GR 14.1"]}
+      - {cite: "RAP 2.5(a)(3)", find: "RAP 2.5"}
+      - {cite: "GR 14.1", find: "GR 14.1"}
 ---
 
 # A. INTRODUCTION.
@@ -419,7 +419,7 @@ Mr. Hernandez-Escobar's case should be remanded for a new trial and alternativel
 
 [^4]: Unpublished, cited as persuasive authority under GR 14.1.
 
-[^5]: RCW 9.94A.631(1) authorizes a search only "[i]f there is reasonable cause to believe that an offender has violated a condition or requirement of the sentence. . . . "
+[^5]: RCW 9.94A.631(1) authorizes a search only "[i]f there is reasonable cause to believe that an offender has violated a condition or requirement of the sentence. . . .”
 
 # APPENDIX A
 
