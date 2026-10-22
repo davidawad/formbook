@@ -19,6 +19,7 @@ local INDENT = 720                       -- typst para-indent, 0.5 in
 local TEXTW = 9360                       -- 6.5 in
 local CAP_LEFT, CAP_PAD = 4896, 288      -- typst caption-left 3.4 in, caption-pad 0.2 in
 local DESIG = 2016                       -- typst designation-indent, 1.4 in
+local RULE = 15                         -- the caption rule, 0.75 pt: LibreOffice sets the cell text inside it, typst draws it over the gap
 local GUTTER = 432                       -- typst counsel-gutter, 0.3 in
 local SIG_LEFT = 4896                    -- typst sig-left, 3.4 in
 
@@ -105,7 +106,7 @@ local function caption(meta)
   local left = {}
   local function add(x, o)
     o = o or {}
-    o.right = CAP_PAD
+    o.right = CAP_PAD - RULE
     left[#left + 1] = p(x, o)
   end
   for k, side in ipairs(meta.caption) do
