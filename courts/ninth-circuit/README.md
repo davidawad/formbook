@@ -60,7 +60,7 @@ Courts under `courts/ninth-circuit` (61).
 | [Idaho Supreme Court](idaho/state/supreme-court) | `idaho` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Montana Supreme Court](montana/state/supreme-court) | `mont` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 | [Court of Appeals of Nevada](nevada/state/court-of-appeals) | `nevapp` | up for review | 5/5 | 1/1 | 1/1 | 29 |
-| [Nevada Supreme Court](nevada/state/supreme-court) | `nev` | up for review | 9/9 | 5/5 | 5/5 | 29 |
+| [Nevada Supreme Court](nevada/state/supreme-court) | `nev` | up for review | 9/9 | 7/7 | 7/7 | 29 |
 | [Supreme Court of The Commonwealth of The Northern Mariana Islands](northern-mariana-islands/state/supreme-court) | `nmi` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Court of Appeals of Oregon](oregon/state/court-of-appeals) | `orctapp` | up for review | 1/2 | — | — | 29 |
 | [Oregon Supreme Court](oregon/state/supreme-court) | `or` | up for review | 9/9 | — | — | 29 |
