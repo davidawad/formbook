@@ -12,7 +12,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Mono"    // no typeface rule (../rules.md, Finding 3); the audited exemplar face (data/exemplar-fonts.json: the Organic Power complaint is set in Courier New, Liberation Mono its metric twin; docs/FONTS.md). 12 pt at 10 characters per inch meets L.Cv.R. 7(e)
+#let font-family = ("Times New Roman", "Liberation Serif")   // no typeface rule (../rules.md, Finding 3); Times New Roman, the house standard (David 2026-10-17; data/exemplar-fonts.json template_face, fb-595.68.38), not the Organic Power filer's Courier New (one filer's style, tier 3); Liberation Serif its metric twin. A proportionally spaced face at 12 pt meets L.Cv.R. 7(e)
 #let type-size = 12pt                   // L.Cv.R. 7(e) via LBR 1001-1(b): no less than 12 points
 #let margin = 1in                       // convention (both exemplars have one-inch margins)
 #let para-indent = 0.5in                // first-line indent; the paragraph number's box; the prayer letters' box

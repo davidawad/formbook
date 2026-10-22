@@ -8,7 +8,7 @@
 - Date filed: 2020-04-27 (ECF stamp "Filed:04/27/20" on every page)
 - Fetched from: https://storage.courtlistener.com/recap/gov.uscourts.prb.348585/gov.uscourts.prb.348585.1.0.pdf (CourtListener RECAP, found by search of `court=prb`, `type=r`; the RECAP entry's description reads "Adversary case 20-00055 ... Complaint by Organic Power LLC")
 - Date fetched: 2026-10-14
-- Text layer: yes (`pdftotext` yields the complaint text; Times New Roman embedded; the cover sheet's check boxes are in a symbol font and extract as garbage, which is expected)
+- Text layer: yes (`pdftotext` yields the complaint text; the complaint body is set in Courier New, `CourierNewPSMT`, not embedded (`pdffonts -f 3 -l 26`; corrected 2026-10-22, fb-595.68.38: this line had said Times New Roman embedded, which is the cover sheet); the template is set in Times New Roman, the house standard, not in this filer's face; the cover sheet's check boxes are in a symbol font and extract as garbage, which is expected)
 - Public court record (RECAP). Used only as a visual and structural reference.
 
 Second filer: not collected. Two other bankruptcy-court adversary complaints on the same RECAP search were checked and rejected as exemplars: 20-00027 (scanned images only, no text layer) and 23-03241 entry 115 (scanned, 32 pages; this one is a pro se-style upload). The PROMESA complaints in the same court (for example 25-00043, LUMA v. PREPA) are captioned in the United States District Court, not the bankruptcy court, and do not match the form for this folder.

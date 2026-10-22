@@ -5276,6 +5276,8 @@
       "class": "impossible",
       "face": "",
       "why": "no redistributable metric-compatible face for leelawadeeuisemi",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.38 under David's 2026-10-17 ruling that Times New Roman is the standard: no D.P.R. bankruptcy or district rule names a face (L.Cv.R. 7(e) via LBR 1001-1(b) asks a proportionally spaced face of at least 12 points), and the four exemplars use four faces (Courier New, Leelawadee UI Semilight, Garamond, Times New Roman), each one filer's style (tier 3), so the template is set in Times New Roman 12 pt on typst and docx, not in Courier New's twin Liberation Mono; face stays the audited match.",
       "fonts": [
         "Calibri",
         "CenturyGothic",
@@ -5297,6 +5299,8 @@
       "class": "metric-exact",
       "face": "Liberation Mono",
       "why": "Courier New metrics",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.38 under David's 2026-10-17 ruling that Times New Roman is the standard: no D.P.R. bankruptcy or district rule names a face (L.Cv.R. 7(e) via LBR 1001-1(b) asks a proportionally spaced face of at least 12 points), and the four exemplars use four faces (Courier New, Leelawadee UI Semilight, Garamond, Times New Roman), each one filer's style (tier 3), so the template is set in Times New Roman 12 pt on typst and docx, not in Courier New's twin Liberation Mono; face stays the audited match.",
       "fonts": [
         "AdobeThai-Bold",
         "Arial-BoldMT",

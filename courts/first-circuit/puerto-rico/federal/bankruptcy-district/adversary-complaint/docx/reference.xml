@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- The D.P.R. bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in
-     the face of the typst template ({font}, Liberation Mono, the audited exemplar face; no rule names a face, ../rules.md Finding 3) at 12 pt
+     the face of the typst template ({font}, Times New Roman, the house standard; no rule names a face, ../rules.md Finding 3) at 12 pt
      (size 24 half points; L.Cv.R. 7(e) via LBR 1001-1(b)); Body Text in exact 24 pt line boxes (typst pitch-double,
      double spacing) with a half-inch first-line indent, and the headings in them; single lines in 13.8 pt boxes
      (typst pitch-single). Added: Numbered Paragraph (Body Text with a tab stop at 1 in: the number in the half-inch

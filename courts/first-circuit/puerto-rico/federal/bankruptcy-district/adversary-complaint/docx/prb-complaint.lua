@@ -53,9 +53,9 @@ end
 local function caption(meta)
   assert(meta.bankruptcy_case, "prb-complaint: LBR 1005-1(a) requires bankruptcy_case in the frontmatter")
   assert(meta.chapter, "prb-complaint: LBR 1005-1(a) requires chapter in the frontmatter")
-  -- the caption stands a double line below the court lines: the space on the first line of each column (Word sets
-  -- no space above a table)
-  local left = { p(xe.runs("In re:"), { before = BODY }) }
+  -- the caption stands a double line below the court lines: the space is after the last court line (Word sets no
+  -- space above a table, and space in the first cell would carry the column rule up beside it)
+  local left = { p(xe.runs("In re:")) }
   for _, n in ipairs(meta.debtor.names) do left[#left + 1] = p(xe.inl(n)) end
   left[#left + 1] = p(xe.inl(meta.debtor.designation), { rule = true })
   for k, party in ipairs(meta.parties) do
@@ -67,7 +67,7 @@ local function caption(meta)
   end
   local adv = plain(meta.adversary)
   local right = {
-    p(xe.runs("Bankr. Case No. ") .. xe.inl(meta.bankruptcy_case), { before = BODY }),
+    p(xe.runs("Bankr. Case No. ") .. xe.inl(meta.bankruptcy_case)),
     p(xe.inl(meta.chapter)),
     p(xe.runs("Adv. Proceeding No. ") .. (adv == "" and xe.runs("__________") or xe.inl(meta.adversary))),
   }
@@ -83,7 +83,7 @@ local function caption(meta)
     '<w:tc><w:tcPr><w:tcW w:w="' .. CAP_LEFT .. '" w:type="dxa"/><w:tcBorders>' .. B .. R .. '</w:tcBorders>' ..
     '<w:tcMar><w:bottom w:w="' .. CAP_PAD .. '" w:type="dxa"/><w:right w:w="' .. CAP_PAD .. '" w:type="dxa"/></w:tcMar></w:tcPr>' ..
     table.concat(left) .. '</w:tc>' ..
-    '<w:tc><w:tcPr><w:tcW w:w="' .. CAP_GUTTER .. '" w:type="dxa"/></w:tcPr>' .. p("", { before = BODY }) .. '</w:tc>' ..
+    '<w:tc><w:tcPr><w:tcW w:w="' .. CAP_GUTTER .. '" w:type="dxa"/></w:tcPr>' .. p("") .. '</w:tc>' ..
     '<w:tc><w:tcPr><w:tcW w:w="' .. rw .. '" w:type="dxa"/><w:tcMar><w:left w:w="' .. RIGHT_PAD .. '" w:type="dxa"/></w:tcMar></w:tcPr>' ..
     table.concat(right) .. '</w:tc></w:tr></w:tbl>'
 end
@@ -199,7 +199,9 @@ function Pandoc(doc)
   assert(meta.signature, "prb-complaint: the frontmatter needs a signature block (LBR 1005-1(c))")
   doc = pandoc.Pandoc(doc.blocks):walk({ Str = breaks }):walk({ Inlines = bind_doubled }):walk({ Inlines = xe.inlines })
   local out = {}
-  for _, l in ipairs(meta.court) do out[#out + 1] = p(xe.inl(upper(l), { b = true }), { jc = "center", keep = true }) end
+  for i, l in ipairs(meta.court) do
+    out[#out + 1] = p(xe.inl(upper(l), { b = true }), { jc = "center", keep = true, after = i == #meta.court and BODY or 0 })
+  end
   out[#out + 1] = caption(meta)
   -- the title stands a double line below the caption (Word has no space after a table: the title takes it)
   out[#out + 1] = p(xe.inl(meta.title, { b = true }), { before = BODY, after = SINGLE, jc = "center", keep = true })

@@ -18,7 +18,7 @@ Local rules text is from the court's "Local Bankruptcy Rules" compilation (PRLBR
 | LBR 5005-4(b)(2)(C)(ii) | An electronic signature is the filer's name preceded by "/s/". | `signature-block()`: prints `/s/ ` before the signer's name. |
 | LBR 7003-1 | With the complaint, counsel files the AO Form B 1040 cover sheet. | Not templated (a separate filing; see gap 5). |
 | LBR 7004-2 | The clerk issues a summons on the LBF D form; it is not part of the complaint. | Not templated (a separate filing). |
-| Typeface (fonts pass, 2026-10-14) | Face required: **none named** in the PR bankruptcy LBRs (2013 compilation, PRLBRs-2013, and the LBR 1005-1 text checked by search; no typeface or size clause found). LBR 1001-1(b) falls back to the District Court's local civil rules for matters not covered; their Local Rule 10 text was not retrieved, so this is OPEN. Vendored substitute: **none needed**; keeps **EB Garamond** (`docs/FONTS.md`, "No face named"). Metric fit: n/a. | `font-family` in `prb-adversary-complaint.typ`. |
+| Typeface (fb-595.68.38, 2026-10-22) | Face required: **none named** in the PR bankruptcy LBRs; L.Cv.R. 7(e), applied through LBR 1001-1(b) (../rules.md, Finding 2), asks only a proportionally spaced face of at least 12 points. The exemplars use four faces (Courier New, Leelawadee UI Semilight, Garamond, Times New Roman), each one filer's style (tier 3). Template face: **Times New Roman** 12 pt, the house standard (David, 2026-10-17; `template_face` on both entries in `data/exemplar-fonts.json`), Liberation Serif its metric twin. | `font-family` in `prb-adversary-complaint.typ`; the docx takes the same face (`docx/reference.xml`, `{font}`). |
 
 ## What the overlay shows
 
@@ -34,7 +34,7 @@ The filed pages between 11 and 24 (the body that holds Counts II and III) are no
 1. **Transcription is condensed.** `usage/INPUT-adversary-complaint.md` jumps from "V. Count I" to "VIII. Count IV" (the Roman numerals skip VI and VII), so Counts II and III and their headings are missing. It is a partial transcription, not the full complaint. Completing it would add about 12 exemplar pages. Not done in this pass: the sample was kept as the brief asked (not broken, renders, all required structure present).
 2. **Signature block (LBR 1005-1(c)).** The rule asks for the client's name and the filer's facsimile number. The sample's block reads "Counsel for Plaintiff" (client not named) and has no fax number. The filed exemplar's block is the same, so the sample reproduces it. Whether to add "Organic Power, LLC" and a fax line is for David to decide; the template prints the lines it is given.
 3. **Second exemplar not collected.** `usage/SOURCE.md` records that the only other bankruptcy-court adversary complaints found were scanned images (20-00027) or a pro se upload (23-03241, entry 115). Tier 2 (conventions) is therefore judged against one filer only. This is OPEN.
-4. **Typeface.** No PR bankruptcy rule sets a typeface or size. The template uses EB Garamond 12 pt (the only serif in `fonts/`, and the convention both exemplars follow at 12 pt). The exemplar's text is Times New Roman (embedded, per `usage/SOURCE.md`); EB Garamond at the same point size reads smaller, so the render is not a face match.
+4. **Typeface.** No PR bankruptcy rule names a typeface. The template uses Times New Roman 12 pt on typst and docx (the house standard; see the Typeface row above). Until fb-595.68.38 it was Liberation Mono, the twin of the Organic Power filer's Courier New; that face was one filer's style, not a convention.
 5. **Cover sheet and summons** (LBR 7003-1, 7004-2) are separate documents and are not generated.
 6. **Paragraph numbering** restarts for each complaint and is continuous across headings (as in the exemplar); a complaint with amendments is a separate document under LBR 1005-1(d), which requires the word "AMENDMENT" in bold. Not templated; the title field is the place to put it.
 
@@ -46,9 +46,9 @@ The filed pages between 11 and 24 (the body that holds Counts II and III) are no
 
 ## Engines
 
-docx: `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt double pitch, 13.8 pt single lines, 0.5 in first-line indent, 1 in margins, PAGE field in the footer); `docx/prb-complaint.lua` builds the caption table, the numbered paragraphs, the lettered prayer and the signature block from the frontmatter. Checked on `usage/OUTPUT-adversary-complaint.docx.pdf` (LibreOffice). Opened with LibreOffice only; Word was not checked.
+docx: `fb render` builds the reference document from `docx/reference.xml` (base="xengine": Times New Roman 12 pt, exact 24 pt double pitch, 13.8 pt single lines, 0.5 in first-line indent, 1 in margins, PAGE field in the footer); `docx/prb-complaint.lua` builds the caption table, the numbered paragraphs, the lettered prayer and the signature block from the frontmatter. Checked on `usage/OUTPUT-adversary-complaint.docx.pdf` (LibreOffice). Opened with LibreOffice only; Word was not checked.
 
-Matches the typst form (measured on the PDFs): US Letter, one-inch margins, EB Garamond 12 pt, body line pitch 24.0 pt and single-line pitch 13.8 pt in both, 8 pages in both, caption, title and lead-in positions within about 1 pt, numbers then a tab at 1 in, lettered prayer, footer page number, `/s/` signature block.
+Matches the typst form (cross-engine gate, `eval.yaml` params.cross_engine: gate; XENG-001..003 pass): US Letter, one-inch margins, Times New Roman 12 pt, body line pitch 24.0 pt and single-line pitch 13.8 pt in both, 8 pages in both, every line breaking after the same word, numbers then a tab at 1 in, lettered prayer, footer page number, `/s/` signature block.
 
 Differs:
 - LibreOffice breaks some lines at other words than typst (glyph advance and no justification), so the same text falls on a different line on most pages; the page count is the same.
