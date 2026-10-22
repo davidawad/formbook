@@ -1,0 +1,62 @@
+# California Court of Appeal, Sixth Appellate District (calctapp6d): a motion and its supporting memorandum. The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to CRC 8.204(b), 8.74 and 8.54 (../../rules.md, CALCTAPP6D-*);
+# lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a
+# court constant.
+size: 13                  # CALCTAPP6D-FORM-003: not smaller than 13 point, footnotes included
+pitch:
+  body: 25.45             # CALCTAPP6D-FORM-005: at least one-and-a-half spaced (1.5 x single, to the twip above)
+  single: 16.95           # cover, headings, quotations, footnotes, signature: single (EB Garamond's ascender + descender, 1.305 x 13 pt, to the twip)
+margin: {top: 72, bottom: 72, left: 108, right: 108}   # CALCTAPP6D-FORM-006: 1 1/2 in left and right, 1 in top and bottom
+indent: 36
+page_number: {align: center, from: 2}   # CALCTAPP6D-FORM-007: Arabic numbers, the cover is page 1, its number suppressed
+footnote: {size: 13, gap: 6.5, clearance: 11.7}   # CALCTAPP6D-FORM-003, -005: 13 point, single spaced
+quote: {left: 36, right: 36, above: 13, below: 13, gap: 11.7}   # CALCTAPP6D-FORM-005: block-indented, single spaced
+# CALCTAPP6D-FORM-004: headings may be uppercase. The memorandum's title centered in bold capitals; points bold, hung.
+heading:
+  - {align: center, bold: true, upper: true, above: 15.6, below: 13}
+  - {bold: true, hang: 36, above: 13, below: 10.4}
+  - {bold: true, hang: 36, above: 13, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# CALCTAPP6D-COVER-002, -003, MOT-004 (CRC 8.204(b)(10), 8.40(b)): the court, the caption beside the Court of Appeal
+# number, the trial court, its number and judge, the title, then counsel and the party represented. The cover is page 1,
+# set as the front blocks and a page break: lib/docx/xdoc.lua sets a `cover` only before tables, which a motion has not.
+front:
+  - {text: "{court_lines}", align: center, bold: true}
+  - columns:
+      - width: 252
+        blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 113.4, above: 6.25, below: 6.25}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 113.4, above: 7.8}
+      - valign: center
+        blocks:
+          - {text: "Court of Appeal Case No. {case_number}"}
+    gutter: 18
+    above: 15.6
+  - {text: "{trial_court}", align: center, above: 15.6}
+  - {text: "Case No. {superior_case_number}", align: center}
+  - {text: "{judge}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 25}
+  - each: counsel
+    above: 25
+    blocks:
+      - {text: "{names}", left: 198, above: 6.5}
+      - {text: "{lines}", left: 198, optional: true}
+  - {text: "{counsel_for}", italic: true, left: 198, above: 13}
+  - {break: true}
+# The date beside the signature block (firm, s/ signer, signer, role), never split.
+closing:
+  - columns:
+      - blocks:
+          - {text: "Dated: {date}"}
+      - width: 216
+        blocks:
+          - {text: "{signature.firm}"}
+          - {text: "s/{signature.signer}", above: 15.6}
+          - {text: "{signature.signer}"}
+          - {text: "{signature.role}", italic: true}
+    above: 18.2

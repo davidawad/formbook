@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the generated
+# LaTeX loads `ebgaramond` with its default old-style figures, typst and Word set lining figures, so LaTeX lines with
+# digits fit more (docs/open-items/fb-595.54.48.md). Docx passes XENG-001..003.
+params:
+  cross_engine: report
