@@ -6,23 +6,28 @@
 // blocks), 9004-1(e)(2) (adversary caption form).
 // Content-agnostic: every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")   // L.R. 9004-1(a)(3): 12-point font, no face named; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // L.R. 9004-1(a)(3): 12-point font, no face named; Times New Roman, the house standard (docs/FONTS.md)
 #let type-size = 12pt                   // L.R. 9004-1(a)(3)
-#let footnote-size = 10pt               // L.R. 9004-1(a)(3): footnotes may be 10-point
 #let margin = 1in                       // L.R. 9004-1(a)(2): at least one inch on every side
-#let page-w = 8.5in                     // US Letter
-#let page-h = 11in
-#let text-width = page-w - 2 * margin
-#let body-leading = 1.345em             // L.R. 9004-1(a)(4): double spacing; with Liberation Serif's 0.655em line box this is a 24 pt pitch at 12 pt
-#let single-leading = 0.495em            // single spacing for caption, signature block and certificate (about 13.8 pt)
-#let para-indent = 0.5in                // first-line indent of numbered paragraphs
+#let para-indent = 0.5in                // first-line indent of paragraphs; the paragraph number's box after it
+#let item-indent = 0.5in                // lettered WHEREFORE items stand this far in
 #let caption-left = 3.4in               // width of the party column of the caption
+#let caption-gutter = 0.2in
 #let quote-inset = 0.5in                // block quotations are indented on both sides
-#let pitch-gap = 24pt                   // one double-spaced line: the unit of vertical space between parts of the cover and signature
+#let sig-left = 2.6in                   // signature grid: the "Dated" column, a gutter, the signature column
+#let sig-gutter = 0.2in
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-double = 24pt                // L.R. 9004-1(a)(4): double spacing, two 12 pt lines
+#let pitch-single = 13.8pt              // single-spaced caption, title, headings, quotations, signature: 1.15 x 12 pt
+#let gap-half = 12pt                    // half a double line: inside the caption and the signature, around quotations and headings
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -35,66 +40,62 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// Inline markdown (names with *et al.*, etc.).
-#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+/// Inline and block markdown (names with *et al.*, the sample's emphasis).
+#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// One single-spaced line per item.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => inl(i)))
-}
+/// One single-spaced line block (a paragraph of its own), with explicit space above and below it.
+#let line-block(above: 0pt, below: 0pt, body) = block(width: 100%, above: above, below: below, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  body
+})
 
-/// A heading kept with the paragraph after it (a heading never ends a page).
-#let heading-block(c) = block(width: text-width, above: 0.5 * pitch-gap, below: body-leading, sticky: true, c)
+/// Single lines, the first with space above it.
+#let line-group(above, items) = for (i, l) in items.enumerate() { line-block(above: if i == 0 { above } else { 0pt }, md(l)) }
 
 // ---------------------------------------------------------------------------
-// Caption (Form 416 / L.R. 9004-1(e)(2)): court, division, debtor and case, party and adversary number
+// Caption (Form 416 / L.R. 9004-1(e)(2)): court, division, debtor and case, parties and adversary number
 // ---------------------------------------------------------------------------
 
 #let court-title(meta) = {
-  align(center, text(weight: "bold", stack(dir: ttb, spacing: single-leading,
-    "UNITED STATES BANKRUPTCY COURT",
-    meta.district,
-  )))
-  v(pitch-gap)
+  line-block(align(center, text(weight: "bold", "UNITED STATES BANKRUPTCY COURT")))
+  line-block(align(center, text(weight: "bold", meta.district)))
   // The division is printed as a blank line when the sample does not name one (L.R. 9004-1(e)(2)).
   let division = if "division" in meta { upper(meta.division) } else { "___________" }
-  align(center, text(weight: "bold", division + " DIVISION"))
+  line-block(above: pitch-double, align(center, text(weight: "bold", division + " DIVISION")))
 }
 
-#let caption(meta) = grid(
-  columns: (caption-left, 1fr),
-  column-gutter: 0.2in,
-  block(width: caption-left, {
-    set par(leading: single-leading, spacing: 0pt)
-    line-stack(("In re:", ..meta.debtor.names, meta.debtor.designation))
-    v(pitch-gap * 0.5)
-    line-stack(("_" * 36 + "/",))
-    v(pitch-gap * 0.5)
-    let rows = ()
-    for (k, p) in meta.parties.enumerate() {
-      if k > 0 { rows.push("vs.") }
-      rows += p.names + (p.designation,)
-    }
-    line-stack(rows)
-    v(pitch-gap * 0.5)
-    line-stack(("_" * 36 + "/",))
-  }),
-  block({
-    set par(leading: single-leading, spacing: 0pt)
-    line-stack(("CASE NO.: " + meta.case_number, "CHAPTER " + meta.chapter))
-    v(pitch-gap * 2)
-    line-stack(("ADV. CASE NO.: " + meta.adv_number,))
-  }),
-)
+/// The caption: two rows. The debtor ("In re:") with the case number and chapter; then the parties with the
+/// adversary number at the first party's line. Each row closes with the rule "____/".
+#let caption(meta) = {
+  let rule = "_" * 36 + "/"
+  let parties = ()
+  for (k, p) in meta.parties.enumerate() {
+    if k > 0 { parties.push("vs.") }
+    parties += p.names + (p.designation,)
+  }
+  block(width: 100%, above: pitch-double, below: 0pt, grid(
+    columns: (caption-left, caption-gutter, 1fr),
+    row-gutter: gap-half,
+    {
+      line-group(0pt, ("In re:", ..meta.debtor.names, meta.debtor.designation))
+      line-block(above: gap-half, rule)
+    },
+    [],
+    line-group(0pt, ("CASE NO.: " + meta.case_number, "CHAPTER " + meta.chapter)),
+    {
+      line-group(0pt, parties)
+      line-block(above: gap-half, rule)
+    },
+    [],
+    line-block("ADV. CASE NO.: " + meta.adv_number),
+  ))
+}
 
 #let cover(meta) = {
   court-title(meta)
-  v(pitch-gap)
   caption(meta)
-  v(pitch-gap)
-  align(center, text(weight: "bold", inl(meta.title)))
-  v(pitch-gap)
+  line-block(above: pitch-double, below: pitch-double, align(center, text(weight: "bold", md(meta.title))))
 }
 
 // ---------------------------------------------------------------------------
@@ -102,93 +103,80 @@
 // and the WHEREFORE clause are not numbered.
 // ---------------------------------------------------------------------------
 
-/// Only the paragraph's own text is passed to cmarker; its numbering is added around it.
-#let allegations(body) = {
+/// A body paragraph at the double pitch, first-line indented; a numbered one has its number in a box of the
+/// paragraph indent after the indent.
+#let body-par(num, content) = block(width: 100%, above: 0pt, below: 0pt,
+  par(first-line-indent: (amount: para-indent, all: true), if num == none { content } else {
+    [#box(width: para-indent, [#num.])#content]
+  }))
+
+/// Body chunks: each blank-line-separated chunk is a heading, a block quotation (single-spaced, indented on both
+/// sides), a lettered item ("(a) ...", indented), or a paragraph. Paragraphs after the first heading are numbered,
+/// except a WHEREFORE paragraph and a "Dated" line; the opening paragraph before the first heading is not
+/// (the exemplar; Rule 10(b) numbers allegations).
+#let allegations(body, tail) = {
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
-  let pending = []
   let n = 0
   let seen-heading = false
-  let has-pending = false
-  for c in chunks {
+  for (i, c) in chunks.enumerate() {
     let t = c.trim()
-    let piece = none
-    if t.starts-with("#") {
-      pending += cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+    let piece = if t.starts-with("#") {
       seen-heading = true
-      has-pending = true
-      continue
+      md(t)
     } else if t.starts-with(">") {
-      piece = block(width: text-width, inset: (left: quote-inset, right: quote-inset), {
-        set par(leading: single-leading, spacing: 0pt)
-        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-      })
-      piece = block(width: text-width, above: pitch-gap * 0.5, below: pitch-gap * 0.5, piece)
-    } else if not seen-heading {
-      // The opening paragraph before the first heading is not numbered (Slott exemplar; Rule 10(b) numbers allegations).
-      piece = block(width: text-width, above: 0pt, below: body-leading, {
-        set par(leading: body-leading, spacing: 0pt)
-        h(para-indent)
-        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-      })
-    } else if t.starts-with(regex("^\\([a-z]\\)[ \\t]")) or t.starts-with("WHEREFORE") or t.starts-with("Dated") {
-      piece = block(width: text-width, inset: (left: 0.5in), below: body-leading, {
-        set par(leading: body-leading)
-        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-      })
-    } else {
+      line-block(above: gap-half, below: gap-half, pad(x: quote-inset, md(t.replace(regex("(?m)^>[ \t]?"), ""))))
+    } else if t.starts-with(regex("^\\([a-z]+\\)[ \\t]")) {
+      block(width: 100%, above: 0pt, below: 0pt, pad(left: item-indent, par(first-line-indent: 0pt, md(t))))
+    } else if seen-heading and not t.starts-with("WHEREFORE") and not t.starts-with("Dated") {
       n += 1
-      piece = block(width: text-width, above: 0pt, below: body-leading, {
-        set par(leading: body-leading, spacing: 0pt)
-        h(para-indent)
-        [#str(n)#h(0.3in)]
-        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-      })
-    }
-    if has-pending {
-      block(breakable: false, width: text-width, below: body-leading, { pending; piece })
+      body-par(n, md(t))
     } else {
-      piece
+      body-par(none, md(t))
     }
-    pending = []
-    has-pending = false
+    // The last block stays on one page with the signature block, so a signature never stands alone.
+    if i == chunks.len() - 1 { block(width: 100%, breakable: false, above: 0pt, below: 0pt, { piece; tail }) } else { piece }
   }
-  if pending != [] { block(breakable: false, width: text-width, pending) }
 }
 
-#let signature-block(meta) = block(width: text-width, breakable: false, above: pitch-gap, grid(
-  columns: (2.6in, 1fr),
-  column-gutter: 0.2in,
-  [Dated: #meta.date],
+/// The signature block: "Dated" at the left; "Respectfully submitted,", the firm and the signer's lines at the right.
+#let signature-block(meta) = block(width: 100%, breakable: false, above: pitch-double, below: 0pt, grid(
+  columns: (sig-left, 1fr),
+  column-gutter: sig-gutter,
+  line-block[Dated: #meta.date],
   {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    [Respectfully submitted,]
-    v(pitch-gap * 0.5)
-    line-stack(meta.signature.firm)
-    v(pitch-gap * 0.5)
-    line-stack(("By: /s/ " + meta.signature.signer, meta.signature.signer) + meta.signature.lines)
+    line-block[Respectfully submitted,]
+    line-group(gap-half, meta.signature.firm)
+    line-group(gap-half, ("By: /s/ " + meta.signature.signer, meta.signature.signer, ..meta.signature.lines))
   },
 ))
 
 #let flsb-adversary-complaint(meta, body) = {
-
-
+  // The page number: centered in a single-spaced line box, at the same place on every page (Word's footer).
   set page(
     paper: "us-letter",
     margin: margin,
-    numbering: "1",
-    number-align: center,
+    footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  set footnote.entry(separator: line(length: 1.5in, stroke: 0.5pt))
-  show footnote.entry: set text(size: footnote-size)
-
-  // Headings: level 1 is a centered bold section; level 2 is a centered bold sub-heading; level 3 bold italic.
-  show heading.where(level: 1): it => heading-block(align(center, text(weight: "bold", upper(it.body))))
-  show heading.where(level: 2): it => heading-block(align(center, text(weight: "bold", it.body)))
-  show heading.where(level: 3): it => heading-block(text(weight: "bold", style: "italic", it.body))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch (double spaced).
+  show: xengine.with(pitch: pitch-double, list-indent: none)
+  // A doubled sign stays with its number too ("¶¶ 20", "§§ 157"; xengine binds a single one).
+  show regex("[§¶]+ \\S+"): it => box(it)
+  // A quotation mark right after sentence punctuation closes a quotation (cmarker reads an unmatched one as
+  // opening; pandoc, the docx reader, as closing).
+  show regex("[.,;:!?][\u{201C}]"): it => it.text.replace("\u{201C}", "\u{201D}")
+  // Headings (single-spaced, L.R. 9004-1(a)(4)): 12 pt, half a double line above and below, kept with the text
+  // after them; level 1 centered bold capitals, level 2 centered bold, level 3 bold italic.
+  show heading: it => block(sticky: true, width: 100%, above: gap-half, below: gap-half, {
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    if it.level == 1 { align(center, text(weight: "bold", upper(it.body))) } else if it.level == 2 {
+      align(center, text(weight: "bold", it.body))
+    } else { text(weight: "bold", style: "italic", it.body) }
+  })
 
   cover(meta)
-  allegations(body)
-  signature-block(meta)
+  allegations(body, signature-block(meta))
 }
