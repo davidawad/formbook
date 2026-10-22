@@ -80,6 +80,7 @@ authorities:
     kind: case
     name: "D’Amico v. Bd. of Med. Examiners"
     cite: "(1974) 11 Cal.3d 1"
+    sort: "damico v bd of med examiners 1974 11 cal3d 1"
   heller:
     kind: case
     name: "District of Columbia v. Heller"

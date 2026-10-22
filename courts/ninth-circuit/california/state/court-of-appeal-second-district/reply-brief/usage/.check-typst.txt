@@ -1,2 +1,2 @@
 PASS
-887402e8322ed9f580bc37ecac8cd9598f4dc793914ac4703820bfafbdf0e946  usage/OUTPUT-reply-brief.typst.pdf
+8e672e409dda5b6dcdf8fbb6af6473060a1a0999abded34d582903f95675e89d  usage/OUTPUT-reply-brief.typst.pdf
