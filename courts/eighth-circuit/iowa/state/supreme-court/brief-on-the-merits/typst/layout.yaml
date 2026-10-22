@@ -40,6 +40,9 @@ cover:
     blocks:
       - {text: "{lines}", above: 11.2}
   - {text: "{counsel_footer}", align: center, bold: true, optional: true, above: 8.4}
+# The filer's first `before_toc` level-1 sections (the certificate of compliance, as filed) on their own pages ahead of the
+# tables.
+body_before_tables: {count: "{before_toc}"}
 # 6.903(2)(a)(1), (2) (IOWA-BRF-001): the table of contents with page references, then the table of authorities.
 contents: {title: "Table of Contents", depth: 3, col: 36, hang: 0, step: 14, above: 9.8}
 authorities:

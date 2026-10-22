@@ -129,6 +129,9 @@ return require("latex.xdoc")({
       ["above"] = 8.4,
     },
   },
+  ["body_before_tables"] = {
+    ["count"] = "{before_toc}",
+  },
   ["contents"] = {
     ["title"] = "Table of Contents",
     ["depth"] = 3,
