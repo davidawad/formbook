@@ -12,7 +12,7 @@ judge: "The Honorable Jon E. Beetem"
 brief_title: "APPELLANT’S REPLY BRIEF"
 counsel:
   - names: ["Edward D. Robertson, Jr. #27183", "Mary D. Winter #38328"]
-    lines: ["Bartimus Frickleton Robertson Rader, P.C.", "715 Swifts Highway", "Jefferson City, MO 65109", "Tel: (573) 659-4454", "Fax: (573) 659-4460", "crobertson@bflawfirm.com", "mwinter@bflawfirm.com", "", "Charles William Hatfield", "Jeremy Alexander Root", "Stinson Lenoard Street", "230 W. McCarty Street", "Jefferson City, MO 65101", "Tel: (573) 636-6827", "chuck.hatfield@stinson.com"]
+    lines: ["Bartimus Frickleton Robertson Rader, P.C.", "715 Swifts Highway", "Jefferson City, MO 65109", "Tel: (573) 659-4454", "Fax: (573) 659-4460", "crobertson@bflawfirm.com", "mwinter@bflawfirm.com", "Charles William Hatfield", "Jeremy Alexander Root", "Stinson Lenoard Street", "230 W. McCarty Street", "Jefferson City, MO 65101", "Tel: (573) 636-6827", "chuck.hatfield@stinson.com"]
   - names: ["Christopher Blase Graville #53187"]
     lines: ["The Graville Law Firm, LLC", "130 S. Bemiston, Suite 700", "Clayton, Missouri 63105", "Tel: (636) 778-9810", "Fax: (636) 778-9812", "cbg@gravillelaw.com"]
 counsel_role: "ATTORNEYS FOR APPELLANT"
@@ -124,9 +124,9 @@ But the enactment of the 1991 law shows that the rationale for the Court’s rea
 
 In 2006, *Jefferson County* determined that legislative intent ought to become part of § 40(30) analysis, essentially abandoning the naïve assumption that a remote chance of some other entity falling into a category was enough to find an open-ended, population-based statute constitutional. This intent analysis is now measured in two ways by the Court:
 
-(A) where one political subdivision is targeted by a law even though others are similarly situated and the population targeted is so narrow that others are effectively excluded. When that occurs, the law can be sustained in a §40(30) challenge only if there is a substantial justification for the one-subdivision targeting because no general law would work. This is the teaching of *Jefferson County*.
+\(A) where one political subdivision is targeted by a law even though others are similarly situated and the population targeted is so narrow that others are effectively excluded. When that occurs, the law can be sustained in a §40(30) challenge only if there is a substantial justification for the one-subdivision targeting because no general law would work. This is the teaching of *Jefferson County*.
 
-(B) *City of Normandy v. Greitens*, 518 S.W.3d 183, 195–96 (Mo. 2017), extended the *Jefferson County* analysis “to apply to statutes setting a population minimum or maximum rather than a narrow population range.”
+\(B) *City of Normandy v. Greitens*, 518 S.W.3d 183, 195–96 (Mo. 2017), extended the *Jefferson County* analysis “to apply to statutes setting a population minimum or maximum rather than a narrow population range.”
 
 Both cases were applied prospectively only – but the party who advanced the argument that resulted in the law changing prevailed even if others could not.
 
@@ -284,13 +284,13 @@ Leaving aside this fact – that the law is different -- judicial estoppel would
 
 Stated simply: “Judicial estoppel applies [a] to prevent litigants from taking a position in one judicial proceeding, [b] thereby obtaining benefits from that position in that instance and later, [c] in a second proceeding, taking a contrary position [d] in order to obtain benefits from such a contrary position at that time.” *Besand v. Gibbar*, 982 S.W.2d 808, 810 (Mo.App.E.D.1998). The positions taken must be “clearly inconsistent.” *New Hampshire v. Maine*, 532 U.S. 742, 750 (2001). Further, judicial estoppel is about protecting the integrity of the judiciary. The doctrine avoids “judicial acceptance of an inconsistent position in a later proceeding [that] would create “the perception that either the first or the second court was misled….” *Id.*
 
-(a) The *Berry* court never considered whether §66.620 violated §§40(21) and/or 40(30). Its statements in *Berry* are simply not inconsistent with the position it takes here. The constitutional provisions at issue here were not in that case. The first court could not have been misled – and neither could the second court have been misled. Chesterfield was and is talking about two different issues.
+\(a) The *Berry* court never considered whether §66.620 violated §§40(21) and/or 40(30). Its statements in *Berry* are simply not inconsistent with the position it takes here. The constitutional provisions at issue here were not in that case. The first court could not have been misled – and neither could the second court have been misled. Chesterfield was and is talking about two different issues.
 
-(b) Chesterfield obtained no benefits from *Berry* as a result of any position it took there. It got what it would have gotten had it not intervened.
+\(b) Chesterfield obtained no benefits from *Berry* as a result of any position it took there. It got what it would have gotten had it not intervened.
 
-(c) Chesterfield has not taken a contrary position on the issues advanced in this case.
+\(c) Chesterfield has not taken a contrary position on the issues advanced in this case.
 
-(d) If Chesterfield prevails in this case, it will not have been as a result of the decision in *Berry* or on the reliance of any party in *Berry*.
+\(d) If Chesterfield prevails in this case, it will not have been as a result of the decision in *Berry* or on the reliance of any party in *Berry*.
 
 Respondents’ repeated assertions that Chesterfield’s arguments as an intervenor attempting to support the Law on some grounds means that Chesterfield necessarily asserted that the Law was constitutional on every ground misunderstands judicial estoppel.
 

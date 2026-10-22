@@ -12,11 +12,11 @@ proceeding: "Appeal from the Circuit Court of Cole County"
 judge: "The Honorable Cotton Walker"
 brief_title: "APPELLANT’S BRIEF"
 counsel_left: ["Office of the Attorney General", "Old Post Office Building", "P.O. Box 861", "St. Louis, MO 63188", "Tel. (314) 340-4869", "Fax (573) 751-0774", "Michael.Talent@ago.mo.gov"]
-counsel_right: ["ERIC S. SCHMITT", "ATTORNEY GENERAL", "", "Michael E. Talent, #73339", "Deputy Solicitor General", "*Counsel for Appellant*"]
+counsel_right: ["ERIC S. SCHMITT", "ATTORNEY GENERAL", "Michael E. Talent, #73339", "Deputy Solicitor General", "*Counsel for Appellant*"]
 signature:
-  firm: ["Respectfully submitted,", "", "ERIC S. SCHMITT", "ATTORNEY GENERAL"]
+  firm: ["Respectfully submitted,", "ERIC S. SCHMITT", "ATTORNEY GENERAL"]
   signer: "Michael E. Talent"
-  lines: ["Michael E. Talent, #73339", "Deputy Solicitor General", "", "Office of the Attorney General", "Old Post Office Building", "P.O. Box 861", "St. Louis, MO 63188", "Tel. (314) 340-4869", "Fax (573) 751-0774", "Michael.Talent@ago.mo.gov", "", "*Counsel for Appellant*"]
+  lines: ["Michael E. Talent, #73339", "Deputy Solicitor General", "Office of the Attorney General", "Old Post Office Building", "P.O. Box 861", "St. Louis, MO 63188", "Tel. (314) 340-4869", "Fax (573) 751-0774", "Michael.Talent@ago.mo.gov", "*Counsel for Appellant*"]
 authorities:
   - heading: "Cases"
     entries:
@@ -351,6 +351,7 @@ The point is not to establish the meaning of § 115.646 for all time and all cir
 # CONCLUSION
 
 For those reasons, Missouri respectfully asks this Court to reverse the judgment of the Circuit Court.
+
 # CERTIFICATE OF SERVICE
 
 I hereby certify that on August 26, 2021, Appellants’ Brief and Appendix were filed electronically through Case.net and, therefore, served on all counsel of record.

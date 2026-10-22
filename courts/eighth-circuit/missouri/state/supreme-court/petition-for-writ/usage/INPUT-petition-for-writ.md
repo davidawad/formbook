@@ -11,11 +11,11 @@ brief_title: "Petition for Writ of Habeas Corpus"
 subtitle: "Petitioner's Statement, Brief, and Argument"
 counsel:
   - names: ["Gwenda Reneé Robinson"]
-    lines: ["Missouri Bar No. 43213", "District Defender, Office B/Area 68", "1010 Market Street, Suite 1100", "St. Louis, MO 63101", "314.340.7662 (telephone)", "314.340.7685 (facsimile)", "Gwenda.Robinson@mspd.mo.gov", "", "ATTORNEY FOR PETITIONER"]
+    lines: ["Missouri Bar No. 43213", "District Defender, Office B/Area 68", "1010 Market Street, Suite 1100", "St. Louis, MO 63101", "314.340.7662 (telephone)", "314.340.7685 (facsimile)", "Gwenda.Robinson@mspd.mo.gov", "ATTORNEY FOR PETITIONER"]
 date: "Respectfully submitted,"
 signature:
   signer: "Gwenda Reneé Robinson"
-  lines: ["Gwenda Reneé Robinson, #43213", "District Defender, Office B/Area 68", "Missouri State Public Defender", "Eastern Appellate/Post-conviction", "1010 Market Street, Suite 1100", "St. Louis, MO 63101", "314.340.7662 (telephone)", "314.340.7685 (facsimile)", "Gwenda.Robinson@mspd.mo.gov", "", "ATTORNEY FOR PETITIONER"]
+  lines: ["Gwenda Reneé Robinson, #43213", "District Defender, Office B/Area 68", "Missouri State Public Defender", "Eastern Appellate/Post-conviction", "1010 Market Street, Suite 1100", "St. Louis, MO 63101", "314.340.7662 (telephone)", "314.340.7685 (facsimile)", "Gwenda.Robinson@mspd.mo.gov", "ATTORNEY FOR PETITIONER"]
 authorities:
   - heading: "Cases"
     entries:
@@ -76,7 +76,7 @@ authorities:
       - {cite: "Mo. Const., Art. I, § 10", find: "Article I, § 10"}
       - {cite: "Mo. Const., Art. V, § 4", find: "article V, section 4"}
       - {cite: "U.S. Const., Amend. V", find: "Fifth and Fourteenth"}
-      - {cite: "U.S. Const., Amend. XIV", find: "Fifth and Fourteenth"}
+      - {cite: "U.S. Const., Amend. XIV", find: "Fourteenth"}
 ---
 
 # Jurisdictional Statement
@@ -184,7 +184,7 @@ Mr. Kelly acknowledges that the relief available under a writ of habeas corpus i
 
 To counsel's knowledge, Mr. Kelly did not file either a direct appeal or a post-conviction proceeding under Rule 24.035 in which he advanced the claim now raised on habeas. But the failure to timely raise a claim on direct appeal or in a post-conviction proceeding under Rule 24.035 or Rule 29.15 does not foreclose habeas relief on procedurally barred claims if the petitioner can show:
 
-> (1) a claim of actual innocence or (2) a jurisdictional defect or (3)(a) that the procedural defect was caused by something external to the defense—that is, a cause for which the defense is not responsible—and (b) prejudice resulted from the underlying error that worked to the petitioner's actual and substantial disadvantage.
+> \(1) a claim of actual innocence or (2) a jurisdictional defect or (3)(a) that the procedural defect was caused by something external to the defense—that is, a cause for which the defense is not responsible—and (b) prejudice resulted from the underlying error that worked to the petitioner's actual and substantial disadvantage.
 
 Larkins, 475 S.W.3d at 76 (citing State ex rel. Zinna v. Steele, 301 S.W.3d 510, 516-17 (Mo. banc 2010)).
 

@@ -1,0 +1,62 @@
+# Supreme Court of Missouri (mo): petition for writ, the writ brief (Rule 84.24). The whole layout, as data for
+# the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to Mo. Sup. Ct. R. 84.03(b), 84.04 and 84.06 (../rules.md, MO-*); lengths in points.
+# No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # MO-FORM-004: not smaller than 13 point, Times New Roman, footnotes included
+pitch:
+  body: 22.45             # MO-FORM-003: line spacing not less than 1.5 (1.5 x the 14.95 pt single line, to the twip above)
+  single: 14.95           # MO-FORM-003: caption, headings, quotations, footnotes, certificates, signature (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MO-FORM-002: not less than one inch on every side
+indent: 36
+page_number: {align: center, from: 1}   # MO-FORM-001: every page, the cover included, numbered at the bottom
+footnote: {size: 13, gap: 6.5}           # MO-FORM-003, -004: footnotes 13 point, single spaced
+quote: {left: 36, right: 36, above: 7.8, below: 13}   # MO-FORM-003: quotations single spaced, indented
+heading:
+  - {align: center, bold: true, upper: true, above: 15.6, below: 13}
+  - {bold: true, hang: 36, above: 13, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# The cover (MO-FORM-007, as filed): the court, the parties beside the cause number, the title and subtitle between
+# rules, counsel.
+cover:
+  - {text: "{court_line}", align: center, bold: true, upper: true}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 26, above: 7.8, below: 7.8}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 26}
+      - valign: center
+        blocks:
+          - {text: "Cause No. {case_number}"}
+    gutter: 21.6
+    above: 15.6
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 18.2}
+  - {rule: 0.5}
+  - when: subtitle
+    blocks:
+      - {text: "{subtitle}", align: center, bold: true, upper: true, above: 3.9}
+      - {rule: 0.5, above: 3.9}
+  - each: counsel
+    above: 20.8
+    blocks:
+      - {text: "{names}", left: 230.4, above: 10.4}
+      - {text: "{lines}", left: 230.4}
+# Rule 84.04(a)(1) (Rule 84.24(h)): the index and the table of authorities, each on its own page.
+contents: {title: "Index", depth: 1, col: 36, hang: 36, above: 9.1}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 5.2
+  group: {bold: true, above: 14.3, below: 3.9}
+# MO-CERT-002: the closing words, then the signature block, single spaced, never split.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "/s/ {signature.signer}", underline: true, left: 230.4, above: 7.8}
+      - {text: "{signature.lines}", left: 230.4}
+    above: 28.8
+# MO-CERT-001: the certificate opens a page after the signature, in the body's form.
+tail: {at: "Certificate", break: true, pitch: body, indent: 36}

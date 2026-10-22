@@ -1,0 +1,53 @@
+# Supreme Court of Missouri (mo): motion with suggestions in support. The whole layout, as data for the shared document
+# model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to Mo. Sup. Ct. R. 84.03(b) (../rules.md, MO-FORM-*); lengths in points. No case text here: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # MO-FORM-004: not smaller than 13 point, Times New Roman, footnotes included
+pitch:
+  body: 29.9              # MO-FORM-003: not less than 1.5; double spaced, as filed (2 x the 14.95 pt single line)
+  single: 14.95           # MO-FORM-003: caption, headings, quotations, footnotes, certificates, signature (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MO-FORM-002: not less than one inch on every side
+indent: 36
+page_number: {align: center, from: 1}   # MO-FORM-001: every page numbered at the bottom, the first page is page one
+footnote: {size: 13, gap: 6.5}           # MO-FORM-003, -004: footnotes 13 point, single spaced
+quote: {left: 36, right: 36, above: 7.8, below: 13, gap: 10.4}   # MO-FORM-003: quotations single spaced, indented
+heading:
+  - {align: center, bold: true, above: 15.6, below: 13}
+  - {align: center, bold: true, above: 13, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# The caption (MO-FORM-007, as filed): the court, the parties beside a column of ")" (one a caption line) and the case
+# number, then the title.
+front:
+  - {text: "{court_line}", align: center, bold: true, upper: true}
+  - columns:
+      - width: 223.2
+        blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 57.6}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 72}
+      - width: 21.6
+        blocks:
+          - each: caption
+            between:
+              - {text: ")", align: center}
+            blocks:
+              - each: names
+                blocks: [{text: ")", align: center}]
+              - {text: ")", align: center}
+      - valign: center
+        blocks:
+          - {text: "Case No. {case_number}"}
+    above: 14.4
+  - {text: "{title}", align: center, bold: true, above: 10.8, below: 13}
+# MO-CERT-002: the closing words and the signature blocks, single spaced, never split.
+closing:
+  - group:
+      - {text: "{closing}", left: 230.4, optional: true}
+      - each: signature
+        blocks: [{text: "{.}", left: 230.4, above: 11.7}]
+    above: 21.6
+# MO-FORM-003: the certificate of service after the signature, single spaced.
+tail: {at: "Certificate", pitch: single, gap: 10.4, above: 21.6}

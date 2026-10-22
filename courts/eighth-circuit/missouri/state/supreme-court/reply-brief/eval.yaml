@@ -1,0 +1,5 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
+# (`fb engines gen`, fb-595.54.12) but do not yet break every line where typst does: differences of the shared model,
+# recorded in docs/open-items/fb-595.54.59.md, are reported, not counted, until fb-595.54.82 fixes them.
+params:
+  cross_engine: report
