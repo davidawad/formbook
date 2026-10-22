@@ -17,10 +17,11 @@ heading:
   - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
 # The flyleaf (HAW-COVER-001, -002): 3 inches clear at the top (the 1-inch margin and 2 inches more), the case
 # number, the court, the parties beside the proceedings below and their judge, the character of the document, then
-# counsel right of centre (HAW-COVER-003: the arrangement is the exemplar's).
+# counsel right of centre (HAW-COVER-003: the arrangement is the exemplar's; the blank lines between
+# the proceedings, as filed, take the room of wider gaps so the flyleaf stays one page).
 cover:
   - {text: "{case_number}", above: 144}
-  - {text: "{court_title}", align: center, bold: true, above: 28.8}
+  - {text: "{court_title}", align: center, bold: true, above: 21.6}
   - columns:
       - blocks:
           - each: caption
@@ -31,9 +32,9 @@ cover:
           - {text: "{caption_right}"}
     gutter: 21.6
     above: 28.8
-  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 43.2}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 27.6}
   - each: counsel
-    above: 43.2
+    above: 27.6
     blocks:
       - {text: "{names}", bold: true, left: 230.4, above: 7.2}
       - {text: "{lines}", left: 230.4}
