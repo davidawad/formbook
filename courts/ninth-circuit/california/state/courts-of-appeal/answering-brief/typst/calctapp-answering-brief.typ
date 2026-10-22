@@ -533,12 +533,12 @@
   // ---- cover (page 1, number suppressed) ----
   cover(meta)
 
-  // ---- certificate of interested entities (page 2) ----
+  // ---- certificate of interested entities (page 2, the first numbered page: rule 8.74(a)(2), the cover is page 1) ----
+  set page(numbering: "1")
   pagebreak(weak: true)
   interested-page(meta)
 
   // ---- table of contents and authorities (arabic, continuing from the cover) ----
-  set page(numbering: "1")
   pagebreak(weak: true)
   toc-section()
   pagebreak(weak: true)
