@@ -245,14 +245,14 @@
   show regex("[§¶]{2} \\S+"): it => box(it)
 
   // Footnotes: 12 pt, single-spaced (the entry sets its own leading: it does not inherit the body's); the mark, a
-  // space, the note (Word's footnote layout); a note may split as LibreOffice splits one.
+  // space, the note (Word's footnote layout); a note is kept whole on one page (Word keeps Footnote Text's lines together).
   set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
   show footnote.entry: it => {
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
-    set text(size: type-size, ..edges(pitch-single), costs: (widow: 0%, orphan: 0%))
+    set text(size: type-size, ..edges(pitch-single))
     set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
-    [#super(num) #note.body]
+    block(breakable: false)[#super(num) #note.body]
   }
 
   // INNB-FORM-002: the title is set out on the first page (B-5005-2(a)(2)); the caption is the first thing on it.
