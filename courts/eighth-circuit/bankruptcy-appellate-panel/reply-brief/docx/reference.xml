@@ -5,7 +5,7 @@
      model (lib/docx/xengine-reference.sh: Times New Roman 14 pt (FRBP 8015(a)(5)(A)), Body Text in 32.2 pt line boxes
      with a half-inch first-line indent (double spacing, FRBP 8015(a)(4); typst line-pitch), quotations and footnotes
      14 pt in 16.1 pt boxes (typst pitch-single), exact line spacing, widow control, 1 in margins on US Letter), plus the
-     paragraph styles front.jq and brief.lua write the cover, front matter, headings, tables and certificates in, with the
+     paragraph styles lib/front.lua and brief.lua write the cover, front matter, headings, tables and certificates in, with the
      typst template's pitches and spaces (twips = 20 x pt). The footer (a centered PAGE field) carries the id rIdBapFooter
      the front matter's sections name; the body section numbers its pages from 1.
      -->

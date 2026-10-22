@@ -1,7 +1,6 @@
 {
   "array_expansions": {},
   "branches": {
-    "courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief/docx/render.sh": 77,
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/make-reference.sh": 6,
     "courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/docx/render.sh": 31,
     "courts/federal-circuit/court-of-federal-claims/motion-brief/docx/make-reference.sh": 6,
