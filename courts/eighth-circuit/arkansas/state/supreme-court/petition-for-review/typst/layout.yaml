@@ -1,0 +1,54 @@
+# Arkansas Supreme Court (ark): petition for review (Rule 2-4). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to the Rules of the Supreme Court and Court of Appeals of the State of Arkansas, Rules 2-1, 4-1 and 4-2 (../rules.md,
+# ARK-*); lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field}).
+size: 14                  # ARK-FORM-002 (Rule 4-1(d)): not less than 14 points
+pitch:
+  body: 32.2              # ARK-FORM-003 (Rule 4-1(b)): double spaced (Word's double, 2 x 1.15 x 14 pt), footnotes too
+  single: 16.1            # caption, headings, tables, quotations, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # ARK-FORM-004 (Rule 4-1(c)): not less than one inch
+indent: 36
+page_number: {align: center, from: 1}   # ARK-FORM-005 (Rule 4-1(e)): consecutive numbers, the first page is page one
+footnote: {size: 14, pitch: body, gap: 7}   # ARK-FORM-002, -003: 14 points, footnote lines double spaced
+quote: {left: 36, right: 36, above: 8.4, below: 14}   # ARK-FORM-003: quoted material single spaced, indented
+heading:
+  - {align: center, bold: true, upper: true, above: 16.8, below: 14}
+  - {bold: true, hang: 36, above: 14, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The cover (Rule 4-2(a)(1), ARK-CONT-001), set as the top of page 1 and a page break (the document is numbered from
+# the cover, page one): two inches clear at the top for the file-mark (ARK-FORM-004); the court, the style with the
+# case number beside "v.", the court appealed from and its judge, the title, counsel.
+front:
+  - {text: "{court_line}", align: center, bold: true, upper: true, above: 72}
+  - each: caption
+    above: 23
+    between:
+      - columns:
+          - {width: 36, blocks: [{text: "v."}]}
+          - {blocks: [{text: "No. {case_number}", align: center, bold: true}]}
+          - {width: 36, blocks: []}
+        above: 16.1
+    blocks:
+      - {text: "{names}", above: 16.1}
+      - {text: "{designation}", align: right, bold: true, above: 16.1}
+  - {text: "{proceeding}", align: center, above: 20, optional: true}
+  - {text: "{judge}", align: center, above: 16.1, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 24.6}
+  - each: counsel
+    above: 24.6
+    blocks:
+      - {text: "{names}", above: 4.9}
+      - {text: "{lines}"}
+  - {break: true}
+# The signature after the conclusion (ARK-CERT-003, Rule 2-1(a)): the closing words, then the firm, "/s/" and the typed
+# name underlined, the bar number and address lines, right of center; never split.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "{signature.firm}", left: 172.8, above: 16.1, optional: true}
+      - {text: "/s/ {signature.signer}", underline: true, left: 172.8, above: 8.4}
+      - {text: "{signature.lines}", left: 172.8}
+    above: 28.8
+# The certificates (service, compliance, merit: Rules 2-1(c), 2-3(a), 4-2(a)(9), (10)) open a page after the
+# signature, in the body's form.
+tail: {at: "Certificate", break: true, pitch: body, indent: 36}
