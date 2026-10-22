@@ -3,6 +3,7 @@
 doc_name: "brief"
 case_number: "20190320-SC"
 brief_title: "PETITIONER’S OPENING BRIEF"
+visibility: "PUBLIC"
 lower_court:
   - "ON WRIT OF CERTIORARI TO THE UTAH COURT OF APPEALS"
   - "No. 20170736-CA"
@@ -22,7 +23,7 @@ compliance:
   position: "front"
   rules: "24(g) and 21(g)"
   words: "8,148"
-  limit: "14,000 words"
+  limit: "14,000"
 date: "DATED this 28th day of August, 2019."
 signature:
   signer: "Stephen D. Spencer"
@@ -152,7 +153,7 @@ The following acts or omissions in respect to a court or its
 
 proceedings are contempts of the authority of the court: . . .
 
-(4) “deceit, or abuse of the process or proceedings of the court, by a
+\(4) “deceit, or abuse of the process or proceedings of the court, by a
 
 party to an action or special proceeding[.]
 

@@ -2,6 +2,7 @@
 # Transcribed from FILED-EXAMPLE-reply-brief.pdf (petitioner's reply brief, Utah Supreme Court, 14 pages, BYU Law Digital Commons text layer; the BYU cover pages are not part of the brief). Body from the first paragraph after the table of authorities to the conclusion. The cover, certificate of compliance, table of contents and table of authorities are generated; the certificate of compliance and proof of service are in the frontmatter. Footnotes are transcribed as numbered in the filing.
 case_number: "20190320-SC"
 brief_title: "PETITIONER’S REPLY BRIEF"
+visibility: "PUBLIC"
 lower_court:
   - "ON WRIT OF CERTIORARI TO THE"
   - "UTAH COURT OF APPEALS"

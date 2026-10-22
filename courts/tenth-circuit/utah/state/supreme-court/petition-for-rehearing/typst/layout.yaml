@@ -1,0 +1,68 @@
+# Utah Supreme Court (utah): petition for rehearing. The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to the Utah Courts Checklist for Briefs (URAP 24, 26, 27; revised December 2025) and Checklist for Reply Briefs
+# (revised May 2026), ../../rules.md (UTAH-*); lengths in points. No case text here: every string printed comes from
+# the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # UTAH-FORM-003: proportionally spaced type 13-point or larger
+pitch:
+  body: 29.9              # UTAH-FORM-004: double spaced, 1 1/2 not acceptable (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # UTAH-FORM-004: block quotations, headings and footnotes may be single spaced (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # UTAH-FORM-002: at least one inch on every side
+indent: 36
+page_number: {align: center, from: 2}   # UTAH-FORM-005: cover unnumbered; no tables (the exemplars
+# have none, UTAH-CONT-005, -007), so the body is numbered from 2, the cover page 1
+footnote: {size: 13, pitch: single, gap: 7}   # UTAH-FORM-003, -004: 13 points like the text, single spaced
+quote: {left: 36, right: 36, above: 10.4, below: 15.6}   # UTAH-FORM-004: block quotations indented, single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
+  - {bold: true, hang: 36, above: 15.6, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# The cover (UTAH-CONT-001): the court, the proceeding below and the parties with their designations beside the
+# public/non-public designation and the case number, the title, and counsel (the exemplars: two columns). With no
+# tables, the cover opens the body (`front`) and the body starts on the next page.
+front:
+  - {text: "In the Utah Supreme Court", align: center, bold: true, upper: true}
+  - columns:
+      - blocks:
+          - {text: "{lower_court}"}
+          - each: parties
+            above: 7.8
+            blocks:
+              - {text: "{designation}", italic: true, optional: true, above: 5.2}
+              - {text: "{names}", optional: true, above: 5.2}
+      - width: 165.6
+        blocks:
+          - {text: "{visibility}", align: right, bold: true, upper: true}
+          - {text: "Case No. {case_number}", align: right, above: 14.95}
+    gutter: 21.6
+    above: 7.8
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 15.6}
+  - columns:
+      each: counsel
+      per_row: 2
+      row_gap: 7.8
+      blocks:
+        - {text: "{heading}", italic: true, optional: true}
+        - {text: "{lines}", optional: true}
+    gutter: 21.6
+    above: 15.6
+  - {break: true}
+# The date and the signature (UTAH-CONT-003, the typed "s/" signature), never split; then the certificate of service
+# (UTAH-CONT-004) on its own page, after the signature as in the exemplars.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, pitch: body, optional: true}
+      - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 5.2}
+      - {text: "{signature.lines}", left: 230.4, optional: true}
+      - {text: "{signature.role}", bold: true, left: 230.4, optional: true}
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 15.6}
+      - {text: "{service.paragraphs}", indent: 36, pitch: body}
+      - group:
+          - {text: "s/ {service.signature.signer}", underline: true, left: 230.4}
+          - {text: "{service.signature.lines}", left: 230.4, optional: true}
+          - {text: "{service.signature.role}", bold: true, left: 230.4, optional: true}
+        above: 5.2

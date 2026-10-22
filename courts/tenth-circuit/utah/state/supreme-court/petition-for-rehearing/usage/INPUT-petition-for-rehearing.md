@@ -47,13 +47,13 @@ Much of the focus of the briefing and arguments in this appeal, at oral argument
 
 § 78B-5-201. Definitions – Judgment recorded in Registry of Judgments
 
-(1) For purposes of this part, “Registry of Judgments” means the index where a
+\(1) For purposes of this part, “Registry of Judgments” means the index where a
 
 judgment is filed and searchable by the name of the judgment debtor through
 
 electronic means or by tangible documents.
 
-(2) On or after July 1, 1997, a judgment entered in a district court does not create a
+\(2) On or after July 1, 1997, a judgment entered in a district court does not create a
 
 lien upon or affect title to real property unless the judgment is filed in the
 
@@ -73,7 +73,7 @@ located.
 
 …
 
-(4) In addition to the requirements of Subsections (2) and (3)(a), any judgment
+\(4) In addition to the requirements of Subsections (2) and (3)(a), any judgment
 
 that is filed in the Registry of Judgments on or after September 1, 1998, or any
 
@@ -81,17 +81,17 @@ judgment or abstract of judgment that is recorded in the office of a county reco
 
 after July 1, 2002, shall include[^6]:
 
-(a) the information identifying the judgment debtor as required under
+\(a) the information identifying the judgment debtor as required under
 
 Subsection (4)(b) on the judgment or abstract of judgment; or
 
-(b) a copy of the separate information statement of the judgment creditor
+\(b) a copy of the separate information statement of the judgment creditor
 
 that contains:
 
 …
 
-(iii) the amount of the judgment as filed in the Registry of Judgments Utah law is clear that a judgment must be accompanied by information about the judgment debtor, whether in the judgment itself or attached separately as an information statement – and in either case, pursuant § 78B-5-201(4)(b)(iii), that information must include “the amount of the judgment as filed in the Registry of Judgments” thereby
+\(iii) the amount of the judgment as filed in the Registry of Judgments Utah law is clear that a judgment must be accompanied by information about the judgment debtor, whether in the judgment itself or attached separately as an information statement – and in either case, pursuant § 78B-5-201(4)(b)(iii), that information must include “the amount of the judgment as filed in the Registry of Judgments” thereby
 
 expressly incorporating both lien creation subsections (2) and (3)(a) – i.e., cumulative requirements added over time. See e.g., Irving Place Assocs. v. 628 Park Ave, LLC, 2015 UT 91, ¶ 24, 362 P.3d 1246; and, T3 Properties, 2013 UT App 38, ¶ 21, 299 P.3d at 6187.
 
@@ -119,27 +119,27 @@ court records.
 
 Statement of the Rule:
 
-(1) This list of interests served by public court records is not exhaustive but is
+\(1) This list of interests served by public court records is not exhaustive but is
 
 meant to illustrate the important objectives of open government:
 
-(F) to give notice of important claims, rights and obligations… Rule 4-202.02. Records Classification, provides in relevant part[^11]:
+\(F) to give notice of important claims, rights and obligations… Rule 4-202.02. Records Classification, provides in relevant part[^11]:
 
-(2) Public Court Records. Public court records include but are not limited to:
+\(2) Public Court Records. Public court records include but are not limited to:
 
-(L) indexes approved by the Management Committee of the Judicial Council,
+\(L) indexes approved by the Management Committee of the Judicial Council,
 
 including the following, in courts other than the juvenile court; an index may
 
 contain any other index information:
 
-(viii) civil judgment… Rule 4-205. Security of Court Records, provides in relevant part:
+\(viii) civil judgment… Rule 4-205. Security of Court Records, provides in relevant part:
 
 Intent: …To assure that authorized personnel have access to court records when
 
 appropriate producer or agency title insurance producer has conducted a reasonable examination of the title and has made a determination of insurability of title under sound underwriting principles. Evidence of this examination and reasonable determination shall be retained in the files of the title insurer…for not less than 15 years after the policy has been issued…” Accord Chapman v. Uintah County, 2003 UT App 383, 81 P.3d 761; Culp Constr. Co. v. Buildmart Mall, 795 P.3d 650 (Utah 1990); Johnson and Allphin v. First American Title Ins. Co., 2016 WL 6459579.
 
-(3) The clerk of the court may authorize, in writing, abstractors, credit bureau
+\(3) The clerk of the court may authorize, in writing, abstractors, credit bureau
 
 representatives, title company representatives and others who regularly
 
@@ -197,7 +197,7 @@ Additionally, the Mulligans respectfully submit that they did argue, and did pre
 
 attachment of Alum Rock’s lien because a judgment lien can only attach to “real property of the judgment debtor”. In their Reply and Request for Hearing, the Mulligans expressly argued this legal theory, including by tying it to §78B-5-202(7)(c), even though they were replying to a Writ of Execution issued under Rule 64E:
 
-(3) But the Plaintiff’s Application for Writ of Execution then goes on to
+\(3) But the Plaintiff’s Application for Writ of Execution then goes on to
 
 incorrectly state that the real property located at and commonly known as 1453 S.
 
@@ -225,7 +225,7 @@ presently – and it never has been – owned by Brett Del Valle in his individu
 
 and personal capacity
 
-(4) It further and provides and confirms that a judgment can become a lien upon
+\(4) It further and provides and confirms that a judgment can become a lien upon
 
 real property only if the above-referenced filings and recordings are made in the
 
@@ -245,11 +245,11 @@ debtor during the time the judgment is effective.” R000049 (some emphases adde
 
 The Mulligans respectfully submit that this Court also misapprehended the meaning of Section 78B-3-301, Actions involving real property, when it decided that the Salt Lake County District Court had jurisdiction to issue the Writ. § 78B-3-301 provides:
 
-(1) Actions for the following causes involving real property shall be tried in the
+\(1) Actions for the following causes involving real property shall be tried in the
 
 county in which the subject of the action, or some part, is situated:
 
-(e) for the foreclosure of all liens and mortgages on real property. The Court opined in ¶ 63 of its Opinion that the Mulligans “have not identified a relevant limitation on the district court’s jurisdiction to issue the writ” but the Mulligans argued on pages 3, 6, 11, and 30 of their Principal Brief, and on page 14 of their Reply, that § 78B-3-301 applies to limit the District Court’s jurisdiction because this is a solely in rem action – i.e., the California contract dispute resulted in a judgment and the Utah action pertains only to execution and foreclosure of Alum Rock’s purported lien on real property. But this Court did not address in rem principles at all, which the Mulligans expressly raised and argued in pages 3-4, 6, 11, 30, 32 of their Principal Brief and in pages 13-15 of their Reply. Notably, however, Alum Rock filed and recorded a Lis Pendens on the Mulligans’ Property, pursuant to § 78B-6-1303[^18], giving notice:
+\(e) for the foreclosure of all liens and mortgages on real property. The Court opined in ¶ 63 of its Opinion that the Mulligans “have not identified a relevant limitation on the district court’s jurisdiction to issue the writ” but the Mulligans argued on pages 3, 6, 11, and 30 of their Principal Brief, and on page 14 of their Reply, that § 78B-3-301 applies to limit the District Court’s jurisdiction because this is a solely in rem action – i.e., the California contract dispute resulted in a judgment and the Utah action pertains only to execution and foreclosure of Alum Rock’s purported lien on real property. But this Court did not address in rem principles at all, which the Mulligans expressly raised and argued in pages 3-4, 6, 11, 30, 32 of their Principal Brief and in pages 13-15 of their Reply. Notably, however, Alum Rock filed and recorded a Lis Pendens on the Mulligans’ Property, pursuant to § 78B-6-1303[^18], giving notice:
 
 …of an action pending in the Third Judicial District Court of Salt Lake County,
 

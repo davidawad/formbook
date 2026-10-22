@@ -1,3 +1,8 @@
 # Utah Supreme Court: Checklist for Briefs, Printing Requirements: proportionally spaced type 13-point or larger, text and footnotes (UTAH-FORM-003, see ../../rules.md)
 font:
   size_pt: 13
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
