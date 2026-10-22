@@ -1,0 +1,5 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. docx matches typst line for
+# line; latex keeps "awaiting" off p38 line 15, a line typst fills to 503.99 of 504 pt (the line-fit tolerance the
+# shared model lacks): docs/open-items/fb-595.54.17.md.
+params:
+  cross_engine: report

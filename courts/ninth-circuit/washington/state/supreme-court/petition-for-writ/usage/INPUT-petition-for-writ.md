@@ -21,54 +21,46 @@ signature:
   firm: "SPOKANE COUNTY PROSECUTOR"
   lines: ["Prosecuting Attorney", "Deputy Prosecuting Attorney", "*Attorneys for Petitioner Spokane County*"]
 authorities:
-  - heading: "Federal Cases"
-    entries:
-      - {cite: "*Baker v. McCollan*, 443 U.S. 137, 99 S. Ct. 2689, 61 L. Ed. 2d 433 (1979)", find: "McCollan"}
-      - {cite: "*Berger v. United States*, 295 U.S. 78, 55 S. Ct. 629, 79 L. Ed. 1314 (1935)", find: "Berger"}
-      - {cite: "*Ohlinger v. Watson*, 652 F.2d 775 (9th Cir. 1980)", find: "Ohlinger"}
-      - {cite: "*Oviatt By & Through Waugh v. Pearce*, 954 F.2d 1470 (9th Cir. 1992)", find: "Oviatt"}
-      - {cite: "*Trueblood v. Wash. State Dept. of Soc. & Health Servs.*, 101 F. Supp. 3d 1010 (W.D. Wash. 2015)", find: "Trueblood"}
-  - heading: "State Cases"
-    entries:
-      - {cite: "*Burrowes v. Killian*, 195 Wn.2d 350, 459 P.3d 1082 (2020)", find: "Burrowes"}
-      - {cite: "*City of Tacoma v. O’Brien*, 85 Wn.2d 266, 534 P.2d 114 (1975)", find: "O’Brien"}
-      - {cite: "*Eugster v. City of Spokane*, 118 Wn. App. 383, 76 P.3d 741 (2003)", find: "Eugster"}
-      - {cite: "*Kanekoa v. Wash. State Dept. of Soc. & Health Servs.*, 95 Wn.2d 445, 626 P.2d 6 (1981)", find: "Kanekoa"}
-      - {cite: "*Pierce County Office of Involuntary Commitment v. Western State Hospital*, 97 Wn.2d 264, 644 P.2d 131 (1982)", find: "Western State"}
-      - {cite: "*State v. Coley*, 180 Wn.2d 543, 326 P.3d 702 (2014)", find: "Coley"}
-      - {cite: "*State v. Hand*, 192 Wn.2d 289, 429 P.3d 502 (2018)", find: "Hand"}
-      - {cite: "*State v. Luvert*, 20 Wn. App. 2d 133, 499 P.3d 211 (2021)", find: "Luvert"}
-      - {cite: "*State v. Monday*, 171 Wn.2d 667, 257 P.3d 551 (2011)", find: "Monday"}
-      - {cite: "*State v. Striker*, 87 Wn.2d 870, 557 P.2d 847 (1976)", find: "Striker"}
-      - {cite: "*Walker v. Munro*, 124 Wn.2d 402, 879 P.2d 920 (1994)", find: "Munro"}
-      - {cite: "*Washington State Labor Council v. Reed*, 149 Wn.2d 48, 65 P.3d 1203 (2003)", find: "Reed"}
-  - heading: "State Statutes"
-    entries:
-      - {cite: "RCW 7.16.160", find: "7.16.160"}
-      - {cite: "RCW 7.16.170", find: "7.16.170"}
-      - {cite: "RCW 7.69", find: "7.69"}
-      - {cite: "RCW 71.05", find: "71.05"}
-      - {cite: "RCW 10.77", find: "10.77"}
-      - {cite: "RCW 10.77.010", find: "10.77.010"}
-      - {cite: "RCW 10.77.050", find: "10.77.050"}
-      - {cite: "RCW 10.77.060", find: "10.77.060"}
-      - {cite: "RCW 10.77.065", find: "10.77.065"}
-      - {cite: "RCW 10.77.068", find: "10.77.068"}
-      - {cite: "RCW 10.77.086", find: "10.77.086"}
-      - {cite: "RCW 36.27.020", find: "36.27.020"}
-      - {cite: "RCW 36.27.030", find: "36.27.030"}
-      - {cite: "WA CONST. art. I, § 35", find: "art. I, § 35"}
-      - {cite: "WA CONST. art. IV, § 4", find: "art. IV, sec. 4"}
-  - heading: "State Rules"
-    entries:
-      - {cite: "CrR 3.3", find: "CrR 3.3"}
-      - {cite: "RAP 16.2", find: "RAP 16.2"}
+  a0_0: {kind: case, cite: "*Baker v. McCollan*, 443 U.S. 137, 99 S. Ct. 2689, 61 L. Ed. 2d 433 (1979)"}
+  a0_1: {kind: case, cite: "*Berger v. United States*, 295 U.S. 78, 55 S. Ct. 629, 79 L. Ed. 1314 (1935)"}
+  a0_2: {kind: case, cite: "*Ohlinger v. Watson*, 652 F.2d 775 (9th Cir. 1980)"}
+  a0_3: {kind: case, cite: "*Oviatt By & Through Waugh v. Pearce*, 954 F.2d 1470 (9th Cir. 1992)"}
+  a0_4: {kind: case, cite: "*Trueblood v. Wash. State Dept. of Soc. & Health Servs.*, 101 F. Supp. 3d 1010 (W.D. Wash. 2015)"}
+  a1_0: {kind: case, cite: "*Burrowes v. Killian*, 195 Wn.2d 350, 459 P.3d 1082 (2020)"}
+  a1_1: {kind: case, cite: "*City of Tacoma v. O’Brien*, 85 Wn.2d 266, 534 P.2d 114 (1975)"}
+  a1_2: {kind: case, cite: "*Eugster v. City of Spokane*, 118 Wn. App. 383, 76 P.3d 741 (2003)"}
+  a1_3: {kind: case, cite: "*Kanekoa v. Wash. State Dept. of Soc. & Health Servs.*, 95 Wn.2d 445, 626 P.2d 6 (1981)"}
+  a1_4: {kind: case, cite: "*Pierce County Office of Involuntary Commitment v. Western State Hospital*, 97 Wn.2d 264, 644 P.2d 131 (1982)"}
+  a1_5: {kind: case, cite: "*State v. Coley*, 180 Wn.2d 543, 326 P.3d 702 (2014)"}
+  a1_6: {kind: case, cite: "*State v. Hand*, 192 Wn.2d 289, 429 P.3d 502 (2018)"}
+  a1_7: {kind: case, cite: "*State v. Luvert*, 20 Wn. App. 2d 133, 499 P.3d 211 (2021)"}
+  a1_8: {kind: case, cite: "*State v. Monday*, 171 Wn.2d 667, 257 P.3d 551 (2011)"}
+  a1_9: {kind: case, cite: "*State v. Striker*, 87 Wn.2d 870, 557 P.2d 847 (1976)"}
+  a1_10: {kind: case, cite: "*Walker v. Munro*, 124 Wn.2d 402, 879 P.2d 920 (1994)"}
+  a1_11: {kind: case, cite: "*Washington State Labor Council v. Reed*, 149 Wn.2d 48, 65 P.3d 1203 (2003)"}
+  a2_0: {kind: statute, cite: "RCW 7.16.160", sort: "02000"}
+  a2_1: {kind: statute, cite: "RCW 7.16.170", sort: "02001"}
+  a2_2: {kind: statute, cite: "RCW 7.69", sort: "02002"}
+  a2_3: {kind: statute, cite: "RCW 71.05", sort: "02003"}
+  a2_4: {kind: statute, cite: "RCW 10.77", sort: "02004"}
+  a2_5: {kind: statute, cite: "RCW 10.77.010", sort: "02005"}
+  a2_6: {kind: statute, cite: "RCW 10.77.050", sort: "02006"}
+  a2_7: {kind: statute, cite: "RCW 10.77.060", sort: "02007"}
+  a2_8: {kind: statute, cite: "RCW 10.77.065", sort: "02008"}
+  a2_9: {kind: statute, cite: "RCW 10.77.068", sort: "02009"}
+  a2_10: {kind: statute, cite: "RCW 10.77.086", sort: "02010"}
+  a2_11: {kind: statute, cite: "RCW 36.27.020", sort: "02011"}
+  a2_12: {kind: statute, cite: "RCW 36.27.030", sort: "02012"}
+  a2_13: {kind: constitution, cite: "WA CONST. art. I, § 35", sort: "02013"}
+  a2_14: {kind: constitution, cite: "WA CONST. art. IV, § 4", sort: "02014"}
+  a3_0: {kind: rule, cite: "CrR 3.3", sort: "03000"}
+  a3_1: {kind: rule, cite: "RAP 16.2", sort: "03001"}
 ---
 # I. INTRODUCTION
 
-Legally incompetent criminal defendants have liberty interests in freedom from incarceration and in restorative treatment. “The Supreme Court has recognized that an individual has a liberty interest in being free from incarceration absent a criminal conviction *.* ” *Oviatt By & Through Waugh v.* *Pearce* , 954 F.2d 1470, 1474 (9th Cir. 1992); *see also Baker v.* *McCollan,* 443 U.S. 137, 144, 99 S.Ct.2689, 61 L.Ed.2d 433 (1979). Because incompetent criminal defendants have not been convicted of any crime, they have a liberty interest in freedom from incarceration and receiving restorative treatment under the due process clause of the Fourteenth Amendment. *State v. Hand* , 192 Wn.2d 289, 296, 429 P.3d 502 (2018). “Lack of funds, staff or facilities cannot justify the State’s failure to provide [such persons] with [the] treatment necessary for rehabilitation.” *Ohlinger v. Watson,* 652 F.2d 775, 779 (9th Cir. 1980).
+Legally incompetent criminal defendants have liberty interests in freedom from incarceration and in restorative treatment. “The Supreme Court has recognized that an individual has a liberty interest in being free from incarceration absent a criminal conviction *.* ” *[Oviatt](toa:a0_3) By & Through Waugh v.* *Pearce*, 954 F.2d 1470, 1474 (9th Cir. 1992); *see also Baker v.* *[McCollan](toa:a0_0),* 443 U.S. 137, 144, 99 S.Ct.2689, 61 L.Ed.2d 433 (1979). Because incompetent criminal defendants have not been convicted of any crime, they have a liberty interest in freedom from incarceration and receiving restorative treatment under the due process clause of the Fourteenth Amendment. *State v. [Hand](toa:a1_6)*, 192 Wn.2d 289, 296, 429 P.3d 502 (2018). “Lack of funds, staff or facilities cannot justify the State’s failure to provide [such persons] with [the] treatment necessary for rehabilitation.” *[Ohlinger](toa:a0_2) v. Watson,* 652 F.2d 775, 779 (9th Cir. 1980).
 
-To that end, the Department of Social and Health Services (Department) is loosely projecting a five-to-six-month delay for in-custody restoration of defendants charged with one or more felonies who have been initially found incompetent to stand trial to gain admission into Eastern State Hospital. The Department cannot provide any reasonable timelines estimating when it will perform competency evaluations for out-of-custody defendants charged with felonies. The Department is statutorily required under chapter 10.77 RCW to perform *timely* competency evaluations and provide competency restoration services when ordered by a court. The statutory scheme identifies goals and deadlines by which the Department should complete these services. Failure to complete these competency evaluation and restoration services in a timely manner implicates a defendant’s due process rights. Indeed, this Court has recognized that, “[d]etaining an incompetent defendant in jail for months likely harms a defendant’s mental health and runs counter to the very purpose for which he was committed—which is to restore the defendant’s competency.” *Hand* , 192 Wn.2d at 298.
+To that end, the Department of Social and Health Services (Department) is loosely projecting a five-to-six-month delay for in-custody restoration of defendants charged with one or more felonies who have been initially found incompetent to stand trial to gain admission into Eastern State Hospital. The Department cannot provide any reasonable timelines estimating when it will perform competency evaluations for out-of-custody defendants charged with felonies. The Department is statutorily required under chapter [10.77](toa:a2_4) RCW to perform *timely* competency evaluations and provide competency restoration services when ordered by a court. The statutory scheme identifies goals and deadlines by which the Department should complete these services. Failure to complete these competency evaluation and restoration services in a timely manner implicates a defendant’s due process rights. Indeed, this Court has recognized that, “[d]etaining an incompetent defendant in jail for months likely harms a defendant’s mental health and runs counter to the very purpose for which he was committed—which is to restore the defendant’s competency.” [*Hand*](toa:a1_6), 192 Wn.2d at 298.
 
 While the Department indicates COVID-19 delays were largely mitigated by early 2022, the length of the delays for restoration treatment has drastically increased since then, even exceeding the delays seen during the height of the pandemic.
 
@@ -78,19 +70,19 @@ The Department has been indifferent to the needs of both in-custody and out-of-c
 
 # II. PARTIES
 
-1\. The Petitioner is the elected Spokane County Prosecutor, Lawrence Haskell, who possesses the authority to prosecute crimes on behalf of the State of Washington and serves as legal advisor to Spokane County as defined by RCW 36.27.020. The Petitioner has a statutory duty to “seek to reform and improve the administration of criminal justice and stimulate efforts to remedy inadequacies or injustice in substantive or procedural law.” RCW 36.27.030(11). Indeed, prosecutors are obliged to seek justice and to protect the rights of all people, including criminal defendants. *See* *Berger v. United States* , 295 U.S. 78, 88, 55 S.Ct.629, 79 L.Ed. 1314 (1935).
+1\. The Petitioner is the elected Spokane County Prosecutor, Lawrence Haskell, who possesses the authority to prosecute crimes on behalf of the State of Washington and serves as legal advisor to Spokane County as defined by RCW [36.27.020](toa:a2_11). The Petitioner has a statutory duty to “seek to reform and improve the administration of criminal justice and stimulate efforts to remedy inadequacies or injustice in substantive or procedural law.” RCW [36.27.030](toa:a2_12)(11). Indeed, prosecutors are obliged to seek justice and to protect the rights of all people, including criminal defendants. *See* *[Berger](toa:a0_1) v. United States*, 295 U.S. 78, 88, 55 S.Ct.629, 79 L.Ed. 1314 (1935).
 
-2\. Respondent is Jilma Meneses in her official capacity as Secretary of the Department. Per statute, incompetent defendants charged with felonies must be committed to the secretary or his or her designee. RCW 10.77.086(1); RCW 10.77.010(22). The secretary or his or her designee is required to designate a qualified person to perform an examination of a defendant’s competency when ordered to do so by a court. RCW 10.77.060(1)(a); RCW 10.77.010(22).
+2\. Respondent is Jilma Meneses in her official capacity as Secretary of the Department. Per statute, incompetent defendants charged with felonies must be committed to the secretary or his or her designee. RCW [10.77.086](toa:a2_10)(1); RCW [10.77.010](toa:a2_5)(22). The secretary or his or her designee is required to designate a qualified person to perform an examination of a defendant’s competency when ordered to do so by a court. RCW [10.77.060](toa:a2_7)(1)(a); RCW [10.77.010](toa:a2_5)(22).
 
 3\. The Petitioner brings this action to address the Department’s disregard of its statutory duties to timely (1) evaluate out-of-custody defendants when there is reason to doubt their competency and (2) provide restoration services for incompetent Spokane County criminal defendants, both in- and out-of-custody.
 
 # III. JURISDICTION
 
-4\. This Court has concurrent original jurisdiction with superior courts over petitions for writs of mandamus against state officers. RAP 16.2(a); W ASH . C ONST . art. IV, sec. 4.
+4\. This Court has concurrent original jurisdiction with superior courts over petitions for writs of mandamus against state officers. [RAP 16.2](toa:a3_1)(a); WASH. CONST. [art. IV, sec. 4](toa:a2_14).
 
-5\. This Court may accept original jurisdiction over a petition for writ of mandamus when it implicates a matter of public importance and when it promotes judicial economy by limiting the need for repetitive hearings in local courts. *City of* *Tacoma v. O’Brien* , 85 Wn.2d 266, 268, 534 P.2d 114 (1975); *Washington State Labor Council v. Reed* , 149 Wn.2d 48, 55, 65 P.3d 1203 (2003).
+5\. This Court may accept original jurisdiction over a petition for writ of mandamus when it implicates a matter of public importance and when it promotes judicial economy by limiting the need for repetitive hearings in local courts. *City of* *Tacoma v. [O’Brien](toa:a1_1)*, 85 Wn.2d 266, 268, 534 P.2d 114 (1975); *Washington State Labor Council v. [Reed](toa:a1_11)*, 149 Wn.2d 48, 55, 65 P.3d 1203 (2003).
 
-6\. As this Court recently discussed in *Burrowes v.* *Killian* , 195 Wn.2d 350, 459 P.3d 1082 (2020), a writ will not issue if there is a remedy available to the petitioner at law.
+6\. As this Court recently discussed in *[Burrowes](toa:a1_0) v.* *Killian*, 195 Wn.2d 350, 459 P.3d 1082 (2020), a writ will not issue if there is a remedy available to the petitioner at law.
 
 7\. Here, there is no plain, speedy, or adequate remedy available at law. The Petitioner’s motions for the Department to show cause for the Department’s failure to abide by its statutory mandate cannot address the ongoing, possibly unconstitutional, systematic violations, which only compound over time. The Respondent continues to fail to perform her statutory duties, leaving criminal defendants to await competency evaluations and restoration services for months to years.
 
@@ -98,11 +90,11 @@ The Department has been indifferent to the needs of both in-custody and out-of-c
 
 # IV. RELEVANT BACKGROUND
 
-9\. The Department operates several mental health facilities throughout the state to provide competency restoration services, including Eastern State Hospital (Eastern) and Western State Hospital (Western). In-custody defendants in Spokane County who have been found incompetent are primarily referred to Eastern but may be sent to any one of the Department’s facilities. Defendants who are held on bond in pre-trial custody currently await competency restoration in county jail facilities.
+9\. The Department operates several mental health facilities throughout the state to provide competency restoration services, including Eastern State Hospital (Eastern) and [Western State](toa:a1_4) Hospital (Western). In-custody defendants in Spokane County who have been found incompetent are primarily referred to Eastern but may be sent to any one of the Department’s facilities. Defendants who are held on bond in pre-trial custody currently await competency restoration in county jail facilities.
 
 ## Competency restoration
 
-10\. When a defendant charged with a felony is incompetent, the court shall commit the defendant to the Department for competency restoration treatment. RCW 10.77.086(1).
+10\. When a defendant charged with a felony is incompetent, the court shall commit the defendant to the Department for competency restoration treatment. RCW [10.77.086](toa:a2_10)(1).
 
 ### In-custody defendants.
 
@@ -130,7 +122,7 @@ Case dismissed following defense motion.
 
 > Larson: 20-1-02827-32; Cyberstalking; 22-1-00505-32; Assault 2 (x2); 143 days 20-1-01640-32; Assault 3 (x2); 19-1-04115-32; Custodial Assault 21-1-10548-32 Washington: Assault 2, 45 days 22-1-00197-32 Kidnapping 2 Myrick: Assault 2, 36 days 20-1-10674-32; Malicious Mischief 3; 22-1-01815-32 Robbery 2 Hines: Burglary 2; Possession 28 days 22-1-01671-32; of Stolen Property 2 22-1-01572-32
 
-12\. Unfortunately, the information provided by the Department establishes these delays will continue to worsen; the Department projects defendants may be forced to wait over six months in jail for court ordered treatment. Attach. B; Attach. D. Table 2 reflects in-custody defendants in the Spokane County jail Defendant waited months in jail for inpatient evaluation before consenting to an evaluation in jail; Department kept defendant’s place on waitlist to Eastern due to time spent waiting. Cases dismissed following defense motion. awaiting competency restoration treatment not yet admitted as of October 24, 2022. The supporting documents are contained in Attachment B and show the number of days between when competency restoration was ordered and the date the Department estimates a defendant will be admitted to a Department facility. As reflected in the supporting documents in Attachment B, the Department frankly acknowledges it lacks a legal justification for these prolonged wait times. *See e.g.* , Attach. B4, B21, B40.
+12\. Unfortunately, the information provided by the Department establishes these delays will continue to worsen; the Department projects defendants may be forced to wait over six months in jail for court ordered treatment. Attach. B; Attach. D. Table 2 reflects in-custody defendants in the Spokane County jail Defendant waited months in jail for inpatient evaluation before consenting to an evaluation in jail; Department kept defendant’s place on waitlist to Eastern due to time spent waiting. Cases dismissed following defense motion. awaiting competency restoration treatment not yet admitted as of October 24, 2022. The supporting documents are contained in Attachment B and show the number of days between when competency restoration was ordered and the date the Department estimates a defendant will be admitted to a Department facility. As reflected in the supporting documents in Attachment B, the Department frankly acknowledges it lacks a legal justification for these prolonged wait times. *See e.g.*, Attach. B4, B21, B40.
 
 > Table 2: In-Custody Defendants in Spokane County Awaiting Treatment (See Attachment B)
 
@@ -144,11 +136,11 @@ Department’s Estimated Wait
 
 15\. Spokane Superior Court finally found the Department in willful contempt on October 28, 2022 for failure to admit six defendants into restoration treatment despite previous court orders. Attach. E. The court limited its contempt finding to these six cases, and no sanction has yet been imposed. Attach. E61-63.
 
-16\. At that hearing, Eastern’s Forensic Service Unit Director, Dennis Wetzler, testified that Eastern prioritizes the guidelines from the Center for Disease Control (CDC) and Behavioral Health Administration over court orders or statutory mandates. Attach. E41-42. Eastern will not take action to change its procedures or increase bed space until approved by the CDC. Attach. E42. Mr. Wetzler identified the waitlist for Western for forensic and civil services exceeds Eastern’s backlog. Attach. E42-44. Mr. Wetzler further opined the Department would need to prioritize criminal restoration and civil conversion cases to the exclusion of other civil treatment if it is to have the bed space Cases dismissed pursuant to RCW 10.77.086(3), (5) and referred for civil commitment under RCW 71.05. to meet current court requirements. Attach. E46-49. Reallocating Eastern’s civil bed space to criminal defendants could net an additional 120 treatment beds. Attach. E48.
+16\. At that hearing, Eastern’s Forensic Service Unit Director, Dennis Wetzler, testified that Eastern prioritizes the guidelines from the Center for Disease Control (CDC) and Behavioral Health Administration over court orders or statutory mandates. Attach. E41-42. Eastern will not take action to change its procedures or increase bed space until approved by the CDC. Attach. E42. Mr. Wetzler identified the waitlist for Western for forensic and civil services exceeds Eastern’s backlog. Attach. E42-44. Mr. Wetzler further opined the Department would need to prioritize criminal restoration and civil conversion cases to the exclusion of other civil treatment if it is to have the bed space Cases dismissed pursuant to RCW [10.77.086](toa:a2_10)(3), (5) and referred for civil commitment under RCW [71.05](toa:a2_3). to meet current court requirements. Attach. E46-49. Reallocating Eastern’s civil bed space to criminal defendants could net an additional 120 treatment beds. Attach. E48.
 
 17\. Due to these delays, the Spokane County Superior Court has dismissed criminal charges against two defendants after finding the delayed inpatient competency restoration services infringed on the defendants’ due process rights. These cases involved violent offenses, including second degree assault and second degree robbery. Attach. F.
 
-18\. To facilitate speedier evaluations, reduce the Department’s rapidly increasing backlog, and move toward restoration for more serious or violent offenders, the Spokane County Prosecutor’s Office has reluctantly moved the court to dismiss less serious charges where possible. Attach. G includes some examples where such discretion was used. However, in most cases, this remedy is not in the interests of community safety or justice for crime victims. Other defendants are redirected towards outpatient competency restoration services. *See e.g.* , B79-84. Problematically, not all defendants agree to participate in the outpatient program, a statutory requirement, and the program may not meet the treatment needs or address the safety risk posed by a defendant even if they are willing to participate.
+18\. To facilitate speedier evaluations, reduce the Department’s rapidly increasing backlog, and move toward restoration for more serious or violent offenders, the Spokane County Prosecutor’s Office has reluctantly moved the court to dismiss less serious charges where possible. Attach. G includes some examples where such discretion was used. However, in most cases, this remedy is not in the interests of community safety or justice for crime victims. Other defendants are redirected towards outpatient competency restoration services. *See e.g.*, B79-84. Problematically, not all defendants agree to participate in the outpatient program, a statutory requirement, and the program may not meet the treatment needs or address the safety risk posed by a defendant even if they are willing to participate.
 
 ### Out-of-custody defendants.
 
@@ -162,7 +154,7 @@ Treatment as of Charges
 
 ## Competency evaluations.
 
-20\. Per RCW 10.77.060, if there is a reason to doubt a defendant’s competency, the court shall either appoint or request the Secretary of the Department to appoint an expert to evaluate the defendant’s competency.
+20\. Per RCW [10.77.060](toa:a2_7), if there is a reason to doubt a defendant’s competency, the court shall either appoint or request the Secretary of the Department to appoint an expert to evaluate the defendant’s competency.
 
 ### Out-of-custody defendants.
 
@@ -192,81 +184,81 @@ Awaiting Evaluation Name and Case No. Charges
 
 # V. ARGUMENT
 
-22\. This Court may issue a writ of mandamus to address an ongoing violation of duty when (1) the party subject to the writ is under a clear duty to act, RCW 7.16.160; (2) the petitioner has no “plain, speedy and adequate remedy in the ordinary course of law,” RCW 7.16.170; and (3) the petitioner is “beneficially interested.” RCW 7.16.170; *Walker v. Munro* , 124 Wn.2d 402, 408, 879 P.2d 920 (1994); *see also Eugster v. City of Spokane* , 118 Wn. App. 383, 403, 76 P.3d 741 (2003). The Department is failing to perform its clear statutory duties to timely evaluate and provide competency restoration services for criminal defendants in Spokane County.
+22\. This Court may issue a writ of mandamus to address an ongoing violation of duty when (1) the party subject to the writ is under a clear duty to act, RCW [7.16.160](toa:a2_0); (2) the petitioner has no “plain, speedy and adequate remedy in the ordinary course of law,” RCW [7.16.170](toa:a2_1); and (3) the petitioner is “beneficially interested.” RCW [7.16.170](toa:a2_1); *Walker v. [Munro](toa:a1_10)*, 124 Wn.2d 402, 408, 879 P.2d 920 (1994); *see also [Eugster](toa:a1_2) v. City of Spokane*, 118 Wn. App. 383, 403, 76 P.3d 741 (2003). The Department is failing to perform its clear statutory duties to timely evaluate and provide competency restoration services for criminal defendants in Spokane County.
 
-23\. To establish the first element for a writ of mandamus to issue, the government official or entity must have a clear duty to act on the particular issue, and the circumstances triggering the government official’s duty to act must have occurred. *Eugster* , 118 Wn. App. at 404. In addition to statutory language, this Court may look to legislative intent to interpret an obligation to act. *See Pierce County Office of Involuntary* *Commitment v. Western State Hospital* , 97 Wn.2d 264, 272, 644 P.2d 131 (1982).
+23\. To establish the first element for a writ of mandamus to issue, the government official or entity must have a clear duty to act on the particular issue, and the circumstances triggering the government official’s duty to act must have occurred. [*Eugster*](toa:a1_2), 118 Wn. App. at 404. In addition to statutory language, this Court may look to legislative intent to interpret an obligation to act. *See Pierce County Office of Involuntary* *Commitment v. [Western State](toa:a1_4) Hospital*, 97 Wn.2d 264, 272, 644 P.2d 131 (1982).
 
-24\. The Secretary of the Department is obligated to provide competency evaluations as ordered by the court. RCW 10.77.060 requires the Secretary to appoint a qualified competency evaluator when ordered by a court and requires the evaluator to provide a report to the court pursuant to RCW 10.77.065. It states:
+24\. The Secretary of the Department is obligated to provide competency evaluations as ordered by the court. RCW [10.77.060](toa:a2_7) requires the Secretary to appoint a qualified competency evaluator when ordered by a court and requires the evaluator to provide a report to the court pursuant to RCW [10.77.065](toa:a2_8). It states:
 
 > The evaluator shall assess the defendant in a jail, detention facility, in the community, or in court to determine whether a period of inpatient commitment will be necessary to complete an accurate evaluation. If inpatient commitment is needed, the signed order of the court shall serve as authority for the evaluator to request the jail or detention facility to transport the defendant to a hospital or secure mental health facility for a period of commitment not to exceed fifteen days from the time of admission to the facility. Otherwise, the evaluator shall complete the evaluation.
 
-RCW 10.77.060(c) (emphasis added).
+RCW [10.77.060](toa:a2_7)(c) (emphasis added).
 
-25\. The Secretary may execute agreements and appoint multiple appropriate evaluators to implement evaluations. RCW 10.77.060(4). The legislature has established a performance target for the Department to complete evaluations for out-of-custody defendants within 21 days. RCW 10.77.068(1)(c).
+25\. The Secretary may execute agreements and appoint multiple appropriate evaluators to implement evaluations. RCW [10.77.060](toa:a2_7)(4). The legislature has established a performance target for the Department to complete evaluations for out-of-custody defendants within 21 days. RCW [10.77.068](toa:a2_9)(1)(c).
 
-26\. While RCW 10.77.060(1)(a) allows the court to either request the Department to perform the evaluation or to appoint a qualified expert or professional person to do so, the availability of a potential provider apart from the Department does not alleviate the Department’s duty to appoint such a person to evaluate a defendant when ordered.
+26\. While RCW [10.77.060](toa:a2_7)(1)(a) allows the court to either request the Department to perform the evaluation or to appoint a qualified expert or professional person to do so, the availability of a potential provider apart from the Department does not alleviate the Department’s duty to appoint such a person to evaluate a defendant when ordered.
 
-27\. A similar issue was raised in *Pierce County* , where civil commitment evaluators had discretion to commit individuals to the Department’s facilities or county facilities. 97 Wn.2d at 267. This Court reasoned the statute gave discretion to the referring evaluators, who are presumed to act in good faith, but did not confer discretion on the Department to refuse to provide care when the evaluator chose its facilities. *Id* . at 268, 270-72.
+27\. A similar issue was raised in *Pierce County*, where civil commitment evaluators had discretion to commit individuals to the Department’s facilities or county facilities. 97 Wn.2d at 267. This Court reasoned the statute gave discretion to the referring evaluators, who are presumed to act in good faith, but did not confer discretion on the Department to refuse to provide care when the evaluator chose its facilities. *Id*. at 268, 270-72.
 
-28\. No statute, including RCW 10.77.068, confers discretion on the Department to refuse to appoint a qualified expert to conduct an evaluation and provide it to a court when so ordered. This Court’s reasoning in *Pierce County* should be applied to the Department’s obligations to perform competency evaluations when ordered.
+28\. No statute, including RCW [10.77.068](toa:a2_9), confers discretion on the Department to refuse to appoint a qualified expert to conduct an evaluation and provide it to a court when so ordered. This Court’s reasoning in *Pierce County* should be applied to the Department’s obligations to perform competency evaluations when ordered.
 
-29\. Regarding inpatient competency restoration, the court is required to order incompetent defendants into the custody of the Secretary for inpatient competency restoration. RCW 10.77.086(1). Once ordered, “the [D]epartment shall place the defendant in an appropriate facility of the [D]epartment for competency restoration.” RCW 10.77.086(1)(b) (emphasis added).
+29\. Regarding inpatient competency restoration, the court is required to order incompetent defendants into the custody of the Secretary for inpatient competency restoration. RCW [10.77.086](toa:a2_10)(1). Once ordered, “the [D]epartment shall place the defendant in an appropriate facility of the [D]epartment for competency restoration.” RCW [10.77.086](toa:a2_10)(1)(b) (emphasis added).
 
-30\. RCW 10.77.068 provides timelines for completion of these services. It gives the Department a performance target of seven days to admit a defendant in pre-trial custody into inpatient competency restoration treatment. RCW 10.77.068(1)(a). The Department has a maximum of seven days from receipt of the order or fourteen days from the date an order for competency restoration was signed by a judge to admit a defendant into treatment. RCW 10.77.068(2)(a).
+30\. RCW [10.77.068](toa:a2_9) provides timelines for completion of these services. It gives the Department a performance target of seven days to admit a defendant in pre-trial custody into inpatient competency restoration treatment. RCW [10.77.068](toa:a2_9)(1)(a). The Department has a maximum of seven days from receipt of the order or fourteen days from the date an order for competency restoration was signed by a judge to admit a defendant into treatment. RCW [10.77.068](toa:a2_9)(2)(a).
 
-31\. The express statutory language in RCW 10.77.060 and RCW 10.77.086 obligates the Department to perform evaluations and restoration services when ordered by a court. A statutory requirement to take a criminal defendant into one’s custody when the appropriate conditions are met creates a duty to act and does not confer discretion, unless granted by law. *See* *Kanekoa v. Wash. State Dept. of Soc. & Health Servs.* , 95 Wn.2d 445, 448, 626 P.2d 6 (1981).
+31\. The express statutory language in RCW [10.77.060](toa:a2_7) and RCW [10.77.086](toa:a2_10) obligates the Department to perform evaluations and restoration services when ordered by a court. A statutory requirement to take a criminal defendant into one’s custody when the appropriate conditions are met creates a duty to act and does not confer discretion, unless granted by law. *See* *[Kanekoa](toa:a1_3) v. Wash. State Dept. of Soc. & Health Servs.*, 95 Wn.2d 445, 448, 626 P.2d 6 (1981).
 
-32\. The chapter 10.77 RCW statutory scheme does not give the Department discretion to not perform services. RCW 10.77.068 provides some reasons why an evaluation or admission into inpatient treatment may be delayed. However, lack of resources is not one such statutory justification in RCW 10.77.068. The Department even explicitly acknowledges in its notifications of expected admission dates contained in Attachment A that it lacks legal authority to delay admission into inpatient treatment.
+32\. The chapter [10.77](toa:a2_4) RCW statutory scheme does not give the Department discretion to not perform services. RCW [10.77.068](toa:a2_9) provides some reasons why an evaluation or admission into inpatient treatment may be delayed. However, lack of resources is not one such statutory justification in RCW [10.77.068](toa:a2_9). The Department even explicitly acknowledges in its notifications of expected admission dates contained in Attachment A that it lacks legal authority to delay admission into inpatient treatment.
 
 > There exists no plain, speedy, or adequate remedy at law for the Department’s failure to act.
 
-33\. No plain, speedy, adequate remedies in the course of law are available under the statutory scheme or case law to ensure timely provision of competency services. RCW 10.77.068(9) specifies that violations of the time limits created by the legislature do not give any cause of action, including contempt.
+33\. No plain, speedy, adequate remedies in the course of law are available under the statutory scheme or case law to ensure timely provision of competency services. RCW [10.77.068](toa:a2_9)(9) specifies that violations of the time limits created by the legislature do not give any cause of action, including contempt.
 
-34\. Remedial sanctions for defendants awaiting competency restoration services may compensate the individual defendants and compel the Department to perform in an individual case. *See State v. Luvert* , 20 Wn. App. 2d 133, 499 P.3d 211 (2021). Even if the superior court holds the Department in contempt in individual cases as suggested by *Luvert* , this does not address the State’s interests in having the appropriate services performed in a timely manner before the Department is out of compliance. These sanctions cannot address the ever increasing delays that impede the State’s and defendants’ legitimate interests to bring criminal cases to trial or work to further the State’s interest in an effective, organized competency evaluation and restoration system.
+34\. Remedial sanctions for defendants awaiting competency restoration services may compensate the individual defendants and compel the Department to perform in an individual case. *See State v. [Luvert](toa:a1_7)*, 20 Wn. App. 2d 133, 499 P.3d 211 (2021). Even if the superior court holds the Department in contempt in individual cases as suggested by [*Luvert*](toa:a1_7), this does not address the State’s interests in having the appropriate services performed in a timely manner before the Department is out of compliance. These sanctions cannot address the ever increasing delays that impede the State’s and defendants’ legitimate interests to bring criminal cases to trial or work to further the State’s interest in an effective, organized competency evaluation and restoration system.
 
-35\. While the federal *Trueblood* court established a permanent injunction against the Department to ensure timely competency restoration services, the injunction is demonstrably insufficient to prevent the ongoing delays as evidenced in the Department’s competency evaluation and restoration system. *Trueblood v. Wash. State Dept. of Soc. & Health Servs.* , 101 F. Supp. 3d 1010, (W.D. Wn. 2015), *partially remanded and* *vacated by* *Trueblood v. Wash. State Dept. of Soc. & Health* *Servs* ., 822 F.3d 1037, 1043 (9th Cir. 2016). *Trueblood* also applies only to defendants in pre-trial custody. Out-of-custody defendants are not protected by *Trueblood* to ensure their timely evaluation and competency restoration. The lack of a viable remedy risks continued dismissal of criminal charges for defendants awaiting treatment as identified in Attachments A and E.
+35\. While the federal [*Trueblood*](toa:a0_4) court established a permanent injunction against the Department to ensure timely competency restoration services, the injunction is demonstrably insufficient to prevent the ongoing delays as evidenced in the Department’s competency evaluation and restoration system. *[Trueblood](toa:a0_4) v. Wash. State Dept. of Soc. & Health Servs.*, 101 F. Supp. 3d 1010, (W.D. Wn. 2015), *partially remanded and* *vacated by* *[Trueblood](toa:a0_4) v. Wash. State Dept. of Soc. & Health* *Servs* ., 822 F.3d 1037, 1043 (9th Cir. 2016). [*Trueblood*](toa:a0_4) also applies only to defendants in pre-trial custody. Out-of-custody defendants are not protected by [*Trueblood*](toa:a0_4) to ensure their timely evaluation and competency restoration. The lack of a viable remedy risks continued dismissal of criminal charges for defendants awaiting treatment as identified in Attachments A and E.
 
-36\. In analogous situations where no alternative remedies have existed, this Court has issued or affirmed writs of mandamus to address the Department’s nonfeasance. For example, this Court upheld a superior court writ of mandamus when the Department did not fulfill its statutory duties to accept inmates sentenced to prison into its reception and classification center. *Kanekoa* , 95 Wn.2d at 450. In doing so, this Court recognized the legislature creates a duty for the Department to act when the statutory language specifies the Department “shall” perform a given action, and the conditions to act are met. *Id.* at 448. Likewise, mandamus is appropriate to compel a state actor to perform ongoing actions in recurring cases, so long as the commanded actions are precisely defined. *Id* . at 450.
+36\. In analogous situations where no alternative remedies have existed, this Court has issued or affirmed writs of mandamus to address the Department’s nonfeasance. For example, this Court upheld a superior court writ of mandamus when the Department did not fulfill its statutory duties to accept inmates sentenced to prison into its reception and classification center. [*Kanekoa*](toa:a1_3), 95 Wn.2d at 450. In doing so, this Court recognized the legislature creates a duty for the Department to act when the statutory language specifies the Department “shall” perform a given action, and the conditions to act are met. *Id.* at 448. Likewise, mandamus is appropriate to compel a state actor to perform ongoing actions in recurring cases, so long as the commanded actions are precisely defined. *Id*. at 450.
 
-37\. This Court also upheld a writ of mandamus against the Department and Western to compel it to accept patients under chapter 71.05 RCW, the Involuntary Treatment Act. *Pierce* *County* , 97 Wn.2d at 272. In that case, the Department contended it could not accept patients when its facilities were full. *Id* . at 265.
+37\. This Court also upheld a writ of mandamus against the Department and Western to compel it to accept patients under chapter [71.05](toa:a2_3) RCW, the Involuntary Treatment Act. *Pierce* *County*, 97 Wn.2d at 272. In that case, the Department contended it could not accept patients when its facilities were full. *Id*. at 265.
 
-38\. This Court rejected the Department’s excuse, noting that the statute required patients to be evaluated and accepted when the statutory conditions were met. *Id* . at 270-71. The Court reasoned the statutory scheme and article 13, subsection 1 of the Washington State Constitution placed the burden on the State to provide the appropriate treatment, and the Department could not turn away patients just because it lacked capacity. *Id* . at 268-69, 271.
+38\. This Court rejected the Department’s excuse, noting that the statute required patients to be evaluated and accepted when the statutory conditions were met. *Id*. at 270-71. The Court reasoned the statutory scheme and article 13, subsection 1 of the Washington State Constitution placed the burden on the State to provide the appropriate treatment, and the Department could not turn away patients just because it lacked capacity. *Id*. at 268-69, 271.
 
-39\. The Court struggled with the issues of overcrowding faced by treatment facilities but concluded a state hospital was the most appropriate place for a patient (rather than jail or unsupervised release) and recognized “[t]reatment delayed and inadequate must surely be better than no treatment at all.” *Id* . at 268-70.
+39\. The Court struggled with the issues of overcrowding faced by treatment facilities but concluded a state hospital was the most appropriate place for a patient (rather than jail or unsupervised release) and recognized “[t]reatment delayed and inadequate must surely be better than no treatment at all.” *Id*. at 268-70.
 
-40\. The Court’s holding in *Pierce County* is analogous to the current situation. Chapter 10.77 RCW does not afford the Department authority to defer its competency evaluation and restoration obligations. While RCW 10.77.068 contemplates that not all services will be rendered within the target timeframes, it expresses the legislature’s intent that quality competency services be provided. And as demonstrated in the documents in Attachment B, the Department acknowledges it lacks a statutory basis for its delay in providing those services.
+40\. The Court’s holding in *Pierce County* is analogous to the current situation. Chapter [10.77](toa:a2_4) RCW does not afford the Department authority to defer its competency evaluation and restoration obligations. While RCW [10.77.068](toa:a2_9) contemplates that not all services will be rendered within the target timeframes, it expresses the legislature’s intent that quality competency services be provided. And as demonstrated in the documents in Attachment B, the Department acknowledges it lacks a statutory basis for its delay in providing those services.
 
 41\. The *Pierce* *County* decision demonstrates mandamus is an appropriate remedy when the Department fails to perform its statutory obligations to provide treatment when required. The Department cannot simply cite lack of bed space or resources to avoid its obligations.
 
 > The Petitioner is beneficially interested in the Department’s timely exercise of its statutory duties.
 
-42\. The Spokane County Prosecutor is beneficially interested in ensuring an effective and efficient competency restoration process, which facilitates its two functions: to “enforce the law by prosecuting those who have violated the peace and dignity of the state by breaking the law,” and to execute justice in a quasijudicial capacity as a representative of the people. *State v. Monday* , 171 Wn.2d 667, 676, 257 P.3d 551 (2011).
+42\. The Spokane County Prosecutor is beneficially interested in ensuring an effective and efficient competency restoration process, which facilitates its two functions: to “enforce the law by prosecuting those who have violated the peace and dignity of the state by breaking the law,” and to execute justice in a quasijudicial capacity as a representative of the people. *State v. [Monday](toa:a1_8)*, 171 Wn.2d 667, 676, 257 P.3d 551 (2011).
 
 43\. As the prosecuting authority within Spokane County for the State of Washington, the prosecutor
 
 > has a legitimate interest in evaluating a potentially incompetent defendant’s competency so as to determine whether he or she may stand trial, and in restoring the competency of those found incompetent so that they may be brought to trial. The state has a corresponding interest in an efficient and organized competency evaluation and restoration system, the administration of which uses public resources appropriately.
 
-*Trueblood* , 101 F. Supp. 3d at 1022.
+*[Trueblood](toa:a0_4)*, 101 F. Supp. 3d at 1022.
 
 44\. As this Court has observed, substantial delay affects the State’s ability to prosecute:
 
 > A defendant in a criminal case can achieve definite advantages through delay. Once trial starts, stale cases are more easily challenged by defense attorneys on cross examination. Juries are often disenchanted with offenses that have occurred in the remote past. If prosecution witnesses become unavailable over long periods of time or prosecutorial ardor should wane, the guilty benefits at society’s expense. Aside from affecting the probabilities of obtaining a conviction, the speedy trial right has significant impacts upon the quality of judicial action and the possibilities of future criminal conduct. The tendency to postpone trials adds to court congestion and the backlog of cases.
 
-*State v. Striker* , 87 Wn.2d 870, 876, 557 P.2d 847 (1976).
+*State v. [Striker](toa:a1_9)*, 87 Wn.2d 870, 876, 557 P.2d 847 (1976).
 
-45\. Because due process and Washington law protect incompetent defendants from trial, conviction, or sentencing so long as the incompetency continues, the prosecutor cannot fulfill its statutory obligations while defendants are awaiting competency evaluations or restoration services. RCW 10.77.050; *State v. Coley* , 180 Wn.2d 543, 551, 326 P.3d 702 (2014).
+45\. Because due process and Washington law protect incompetent defendants from trial, conviction, or sentencing so long as the incompetency continues, the prosecutor cannot fulfill its statutory obligations while defendants are awaiting competency evaluations or restoration services. RCW [10.77.050](toa:a2_6); *State v. [Coley](toa:a1_5)*, 180 Wn.2d 543, 551, 326 P.3d 702 (2014).
 
-46\. Incompetent defendants also have a liberty interest in receiving restorative treatment. *Trueblood* , 101 F. Supp. 3d at 1020-21. As this Court found, unreasonable delays in receipt of competency restoration services can violate criminal defendants’ due process rights. *Hand* , 192 Wn.2d at 292.
+46\. Incompetent defendants also have a liberty interest in receiving restorative treatment. [*Trueblood*](toa:a0_4), 101 F. Supp. 3d at 1020-21. As this Court found, unreasonable delays in receipt of competency restoration services can violate criminal defendants’ due process rights. [*Hand*](toa:a1_6), 192 Wn.2d at 292.
 
-47\. Additionally, Washington places a high premium on victim’s rights, which are not well-served by significant delays and, potentially, dismissal of charges. *See* W ASH . C ONST . art. I, § 35; chapter 7.69 RCW.
+47\. Additionally, Washington places a high premium on victim’s rights, which are not well-served by significant delays and, potentially, dismissal of charges. *See* WASH. CONST. [art. I, § 35](toa:a2_13); chapter [7.69](toa:a2_2) RCW.
 
-48\. Other considerations also impact the Spokane County Prosecutor’s Office. First, while competency restoration may stall the time for trial pursuant to CrR 3.3(e)(1), a defendant’s constitutional speedy trial rights may be implicated by the lengthy delays for services. Violations of those rights can also lead to dismissal.
+48\. Other considerations also impact the Spokane County Prosecutor’s Office. First, while competency restoration may stall the time for trial pursuant to [CrR 3.3](toa:a3_0)(e)(1), a defendant’s constitutional speedy trial rights may be implicated by the lengthy delays for services. Violations of those rights can also lead to dismissal.
 
 49\. Second, criminal defendants, who are also members of the population the prosecutor’s office serves, are denied treatment to address ongoing mental health issues often closely tied to their crimes. These delays may exacerbate defendants’ mental health conditions, both for in-custody and out-of-custody defendants. The Spokane County jail is put in the difficult position of caring for defendants with various mental health needs for increasingly prolonged periods of time until the individual can be taken to a Department facility. Those awaiting evaluation and restoration in the community most likely lack the mental health services they need to stabilize, which may result in the commission of additional crimes. Attachments F and I include examples where an out-of-custody defendant awaiting competency evaluations committed additional crimes after the parties waited several months for an evaluation.
 
 50\. Lastly, the effects of these delays directly impact victims of crime and the ability of the State to take their cases to trial. Crime victims must also wait for prolonged periods of time to resolve cases, causing increased stress and an inability to fully move on from what may have been a traumatic experience. And those whose cases are dismissed by a court because of the Department’s delays are not afforded any justice, as they lose the opportunity to be heard about the impact of the crime or see the alleged offender be held accountable.
 
-51\. As *Striker* explains in detail, pre-trial delays may impede the prosecution’s ability to effectively take a case to trial. 87 Wn.2d at 876. Waiting for years to tunnel through a backlogged competency restoration system means the prosecution cannot promptly resolve cases. Even if a defendant is eventually found competent, the extraordinary delays could result in various complications ranging from missing witnesses to faded memories.
+51\. As [*Striker*](toa:a1_9) explains in detail, pre-trial delays may impede the prosecution’s ability to effectively take a case to trial. 87 Wn.2d at 876. Waiting for years to tunnel through a backlogged competency restoration system means the prosecution cannot promptly resolve cases. Even if a defendant is eventually found competent, the extraordinary delays could result in various complications ranging from missing witnesses to faded memories.
 
 52\. Mandating the Department to perform its competency services obligations as required by law is essential for a functioning criminal justice system. Community-based competency and mental health services are important and may need expansion. However, individuals involved in the criminal justice competency system are often those with the greatest needs who, without appropriate care, risk harm to themselves and others. If individuals cannot be evaluated, there is no way to ascertain their needs or whether criminal charges can proceed. If adequate inpatient treatment cannot be provided, then those who require the most intensive mental health treatment (and those who do not qualify for outpatient treatment) cannot receive the appropriate care not only to address their criminal charges, but also to address often severely problematic mental health issues.
 
@@ -278,5 +270,5 @@ RCW 10.77.060(c) (emphasis added).
 
 55\. Criminal defendants, the Prosecutor, the community at large, and victims of crime alike have been placed into a proverbial “rock and a hard place” due to the Department’s inaction regarding its statutory and constitutional mandate to timely evaluate and, where possible, restore incompetent defendants. The longer a defendant awaits services from the Department, the greater the risk that he or she will harm himself or herself or others or suffer harm from other inmates or those in the community.
 
-56\. The Spokane County Prosecutor respectfully requests this Court grant a writ of mandamus to compel the Secretary to perform her statutory obligations to (i) conduct competency evaluations for out-of-custody defendants within a timely manner as prescribed by RCW 10.77.068, (ii) accept in-custody defendants into inpatient competency restoration within the timeframes set out in RCW 10.77.068 and *Trueblood* , and (iii) accept out-of-custody defendants into inpatient competency restoration as directed by RCW 10.77.068. The Prosecutor also asks this Court to issue such other orders as are necessary and proper for complete enforcement of the writ.
+56\. The Spokane County Prosecutor respectfully requests this Court grant a writ of mandamus to compel the Secretary to perform her statutory obligations to (i) conduct competency evaluations for out-of-custody defendants within a timely manner as prescribed by RCW [10.77.068](toa:a2_9), (ii) accept in-custody defendants into inpatient competency restoration within the timeframes set out in RCW [10.77.068](toa:a2_9) and [*Trueblood*](toa:a0_4), and (iii) accept out-of-custody defendants into inpatient competency restoration as directed by RCW [10.77.068](toa:a2_9). The Prosecutor also asks this Court to issue such other orders as are necessary and proper for complete enforcement of the writ.
 
