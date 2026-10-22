@@ -20,6 +20,10 @@
 local CFG = {
   kind = "answering-brief",
   required = { "summary of the argument", "argument", "conclusion" },
+  summary_may_open_argument = false,
+  -- the face (typst font-family) at 14 pt, in twips: digits 0.556 em, comma and space 0.278 em; about 64
+  -- characters on a 6.5 in line, 30 on the half line (the caption page's spacing estimate)
+  digit_w = 156, punct_w = 78, chars = 64, half_chars = 30,
 }
 
 local TOC_DEPTH = 4    -- heading levels listed in the table of contents (typst: toc-depth)
@@ -33,8 +37,7 @@ local SINGLE = 340     -- single-spaced material (headings, caption page, tables
 local DOUBLE = 588     -- body text (reference.docx Body Text): 29.4 pt, 2.1 x 14 pt (CAVC-FORM-003; typst pitch-double)
 local HEAD = 400       -- section headings: 20 pt line (typst pitch-heading)
 local HEAD_SZ = 32     -- section headings: 16 pt (half points; typst heading-size)
--- Liberation Sans (Arial metrics) at 14 pt, in twips: digits 0.556 em, comma and space 0.278 em
-local DIGIT_W, PUNCT_W = 156, 78
+local DIGIT_W, PUNCT_W = CFG.digit_w, CFG.punct_w
 local NEEDLE_MAX = 60  -- a needle is a prefix of the text (letters and digits only)
 
 local stringify = pandoc.utils.stringify
@@ -309,8 +312,7 @@ local function need_meta(meta, k)
   return meta[k]
 end
 
--- Lines a text takes in a column of `chars` characters (an estimate: Liberation Sans 14 pt averages about
--- 7.3 pt a character, so 6.5 in holds about 64).
+-- Lines a text takes in a column of `chars` characters (an estimate: CFG.chars on a full line).
 local function est_lines(text, chars)
   return math.max(1, math.ceil(#stringify(text) / chars))
 end
@@ -321,19 +323,19 @@ local function cover(meta)
   local proceeding = stringify(need_meta(meta, "proceeding"))
   -- The gap between the caption page's parts is the largest that keeps it on one page (typst: cover); the type
   -- size and line pitch never shrink. 9 in of text height = 648 pt, less a safety margin for the estimate.
-  local lines = 1 + 2 + est_lines(need_meta(meta, "brief_title"), 56)
+  local lines = 1 + 2 + est_lines(need_meta(meta, "brief_title"), CFG.chars - 8)
   local gaps = 10.6
   if proceeding ~= "" then
-    lines = lines + est_lines(proceeding, 56)
+    lines = lines + est_lines(proceeding, CFG.chars - 8)
     gaps = gaps + 2
   end
   for i, side in ipairs(sides) do
-    for _, n in ipairs(side.names) do lines = lines + est_lines(n, 62) end
+    for _, n in ipairs(side.names) do lines = lines + est_lines(n, CFG.chars - 2) end
     lines = lines + 1 + (i < #sides and 1 or 0)
   end
   for _, g in ipairs(counsel) do
-    for _, n in ipairs(g.names or {}) do lines = lines + est_lines(n, 30) end
-    for _, l in ipairs(g.lines or {}) do lines = lines + est_lines(l, 30) end
+    for _, n in ipairs(g.names or {}) do lines = lines + est_lines(n, CFG.half_chars) end
+    for _, l in ipairs(g.lines or {}) do lines = lines + est_lines(l, CFG.half_chars) end
   end
   lines = lines + 1 -- the telephone
   local free = (612 - lines * SINGLE / 20 - 6 * 6) * 20 -- twips left for the gaps
@@ -482,13 +484,25 @@ end
 -- Fails the build when a level-1 section required by Rule 28 is missing or out of order (typst check-sections).
 local function check_sections(blocks)
   local heads = {}
-  for _, b in ipairs(blocks) do
+  -- Rule 28(a)(5) (CFG.summary_may_open_argument): a summary that opens the Argument section (its first block is
+  -- a sub-heading or a paragraph starting with "Summary") meets the rule as a level-1 summary section does.
+  local summary_opens = false
+  for i, b in ipairs(blocks) do
     if b.t == "Header" and b.level == 1 then
       heads[#heads + 1] = (stringify(b.content):lower():gsub("^%s+", ""):gsub("%s+$", ""))
+      if heads[#heads] == "argument" and blocks[i + 1] then
+        summary_opens = stringify(blocks[i + 1]):lower():match("^%s*summary") ~= nil
+      end
+    end
+  end
+  local required = {}
+  for _, want in ipairs(CFG.required) do
+    if not (want == "summary of the argument" and summary_opens and CFG.summary_may_open_argument) then
+      required[#required + 1] = want
     end
   end
   local i = 1
-  for _, want in ipairs(CFG.required) do
+  for _, want in ipairs(required) do
     local found = false
     while i <= #heads and not found do
       found = heads[i]:sub(1, #want) == want
