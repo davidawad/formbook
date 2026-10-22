@@ -149,7 +149,8 @@ fn doc_type_status() {
 #[test]
 fn court_engines_aggregate() {
     let m = "a|G|l|A|p|todo|1000000\nb|G|l|B|p|todo|1000000\nc|G|l|C|p|todo|1000000";
-    let d = "a|G|x|pa/x|11211|220\na|G|y|pa/y|11211|222\nb|G|x|pb/x|11211|231\nb|G|y|pb/y|11211|200";
+    let d =
+        "a|G|x|pa/x|11211|220\na|G|y|pa/y|11211|222\nb|G|x|pb/x|11211|231\nb|G|y|pb/y|11211|200";
     let s = compute(m, d);
     let rows: Vec<&str> = s.rows.lines().collect();
     assert_eq!(
