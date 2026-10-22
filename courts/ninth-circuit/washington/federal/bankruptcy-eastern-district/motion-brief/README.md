@@ -7,10 +7,10 @@ Folder: `courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/mot
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (AP Defendants' memorandum supporting a motion to dismiss, Bush Kornfeld LLP and Eisenhower Carlson PLLC, filed 2025-02-19, 42 pages). One filer only. See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md`: caption, opening paragraph, Preliminary Statement, paragraphs 1 to 26 with Factual Background sections A and B, the Conclusion and the signature blocks. Paragraphs 27 to 101 and the Applicable Standards and Argument are not transcribed (see Known gaps). |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, letter, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-motion-brief.md`). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, letter, typst 0.15.0, vendored Times New Roman only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-motion-brief.md`). |
 | overlay | ok: `usage/OVERLAY-1min-motion-to-dismiss-memorandum.pdf` (14 pages) and `usage/OVERLAY-1min-motion-to-dismiss-memorandum.txt` (page map), from `sh tools/overlay.sh <this dir> 1min-motion-to-dismiss-memorandum <exemplar>` (2026-10-15). The exemplar PDF is not in the checkout; it was fetched from its CourtListener URL in `usage/SOURCE.md` (sha256 matches the recorded value). See Overlay. |
-| pages reviewed | 14 of 14 (2026-10-15: every rendered page rasterized at 70 dpi and viewed as a contact sheet, unchanged font). Earlier review 2026-10-14 at 70 dpi. |
-| typeface | LBR 9004-1(a)(3) names no face; EB Garamond kept (2026-10-15 check of the rule text). See Typeface. |
+| pages reviewed | every page, typst and docx (2026-10-22, fb-595.68.24: both renders at 50 dpi as contact sheets; `reviews/docx.md`). |
+| typeface | LBR 9004-1(a)(3) names no face; Times New Roman (vendored), the house standard, in typst and docx alike. See Typeface. |
 
 ## Governing rules
 
@@ -19,7 +19,7 @@ Primary sources, fetched 2026-10-14 (quoted or paraphrased from the fetched text
 | Rule | Requirement | Template |
 |---|---|---|
 | LBR 9004-1(a)(1) (Complete Set of Local Rules, https://www.waeb.uscourts.gov/sites/waeb/files/Complete_Set_Local%20Rules_20260717.pdf, rule dated AUGUST 1, 2020) | Documents prepared letter size, 8 " x 11". | `paper: "us-letter"`. |
-| LBR 9004-1(a)(3) (same source) | Typed and double-spaced; "a proportionately spaced typeface of 14 points or more"; roman type; "footnotes shall be double-spaced"; quoted material may be single-spaced; average of no more than 280 words per page, including footnotes and quotations. | `type-size = 14pt` (WAEB-MB-FORM-001); `body-leading = 0.94em`, measured line pitch 31.4 pt on 14-pt type, about 2.2 x (WAEB-MB-FORM-002); footnotes set with the body leading (same ID). On the render, pages 2 to 14 average 222 words each (footers excluded); the highest page has 270. |
+| LBR 9004-1(a)(3) (same source) | Typed and double-spaced; "a proportionately spaced typeface of 14 points or more"; roman type; "footnotes shall be double-spaced"; quoted material may be single-spaced; average of no more than 280 words per page, including footnotes and quotations. | `type-size = 14pt` (WAEB-MB-FORM-001); `pitch-body = 28pt`, double spacing at 14 pt: every body line, heading and footnote line in a 28 pt box (WAEB-MB-FORM-002); footnotes at 14 pt on the same pitch (same ID). On the render, pages 2 to 13 average 237 words each (2,847 words, footers included). |
 | LBR 9004-1(a)(4) (same source) | Title of the Court on or below the fifth line of the first page; all pleadings signed under FRBP 5005(a)(2) and 9011; names typed under each signature line. | `court-heading()` below the counsel block (WAEB-MB-CAP-003); `signature-block()` with the name typed under each `/s/` line (WAEB-MB-SIG-001). |
 | LBR 9004-1(a)(5)(A)-(D) (same source) | Right of centre, opposite the caption: case number and related case number above the adversary number; nature of the document; name and status of the party filing; "Demand for Jury Trial" when demanded. | `caption()` right column: `case_no` lines in order (WAEB-MB-CAP-004), `title`, `jury_demand`. |
 | LBR 9004-1(a)(6) (same source) | Attorney name, mailing address and telephone on the left side above line five. | `counsel-block()` (WAEB-MB-CAP-002). |
@@ -36,8 +36,8 @@ Primary sources, fetched 2026-10-14 (quoted or paraphrased from the fetched text
 ## Typeface
 
 - Court rule: LBR 9004-1(a)(3) requires "a proportionately spaced typeface of 14 points or more" and roman type; a monospaced face of no more than 10.5 characters per inch is allowed in a brief. It names no face (checked 2026-10-15 against the text of the Complete Set of Local Rules, dated 2026-07-17 on the court's site).
-- Substitution: none. The rule names no face, so the template keeps EB Garamond (`docs/FONTS.md`, "No face named"). No other typeface is used in the template.
-- Times New Roman in the filed exemplar is the filer's choice, not a rule requirement, and is not copied.
+- Choice: the rule names no face; the template sets Times New Roman (vendored, `docs/FONTS.md`), the face of both filed exemplars and the house standard, and the docx names the same face (`{font}` in `docx/reference.xml`; it named EB Garamond before fb-595.68.24, a DEF-FONT-002 failure). No other typeface is used.
+- The size is the rule's: 14 pt everywhere (the exemplars' 12 pt Times is below it).
 
 ## Layout
 
@@ -69,7 +69,7 @@ Primary sources, fetched 2026-10-14 (quoted or paraphrased from the fetched text
 
 - **Counsel block trimmed to the lead attorney.** The first version listed three attorneys for the debtors and their address: the caption then moved to page 2 (the caption is unbreakable and did not fit below the judge line). LBR 9004-1(a)(6) asks for the name, mailing address and telephone of the attorney submitting the document, which the lead attorney's line gives. The signature blocks keep the full list.
 - **Judge line kept.** It is a convention in the filed exemplar (top right, line 1). It is not required by the Complete Set of Local Rules. It takes one line on page 1, which is why the counsel block above it was trimmed.
-- **Footnotes double-spaced.** LBR 9004-1(a)(3) requires it. The adversary-complaint template sets footnotes single-spaced; that is a question for the adversary template, not changed here.
+- **Footnotes double-spaced.** LBR 9004-1(a)(3) requires it; both waeb templates set footnotes at 14 pt on the 28 pt body pitch (the adversary-complaint template set them single-spaced before fb-595.68.24).
 - **Date and signatures kept together.** A date alone at the foot of a page is not a signature, so the date and all blocks are one unbreakable block; the conclusion moves with them (page 14).
 - **Names-only signing block not transcribed.** The filed signature page also has a Mayer Brown LLP block (counsel names and contact, no `/s/` line) and a New York block for Jason I. Kirschner and Danielle A. Sigal under "and". Keeping the Mayer Brown block pushed the signature onto a page of its own, away from the conclusion. The template does support a block with no `signer` (it prints names only); the sample does not use that path.
 - **Caption and counsel single-spaced.** The filed exemplar sets its caption single-spaced. LBR 9004-1(a)(3) asks that material be double-spaced except quoted material; the rule text does not name captions as an exception. Kept as the exemplar's convention and flagged (see Open questions).
@@ -84,11 +84,11 @@ Primary sources, fetched 2026-10-14 (quoted or paraphrased from the fetched text
 | 2 to 13 | 8 to 16 (body) | 34.4% to 77.2% |
 | 14 (signature) | 42 | 34.5% |
 
-Page 1 pairs with the exemplar's signature page because both carry counsel names. The filing's own caption runs over its PDF pages 1 and 2, and the pairing does not use them, so the page-1 overlay does not compare captions. The overlay is diagnostic, not a score. The red and blue text do not line up by eye, because the sample is set at 14 pt in EB Garamond and the filing's body is set smaller in Times New Roman. Pages are paired by content, not by position on the page.
+Page 1 pairs with the exemplar's signature page because both carry counsel names. The filing's own caption runs over its PDF pages 1 and 2, and the pairing does not use them, so the page-1 overlay does not compare captions. The overlay is diagnostic, not a score. The red and blue text do not line up by eye, because the sample is set at 14 pt and the filing's body is set smaller (both Times New Roman). Pages are paired by content, not by position on the page.
 
 ## Known gaps
 
-0. **Typeface.** The rule names no face, so EB Garamond is kept. The exemplar's Times is the filer's choice (see Typeface).
+0. **Typeface.** The rule names no face; Times New Roman (vendored) is set in typst and docx, as in both exemplars (see Typeface).
 1. **Sample is partial.** The sample transcribes paragraphs 1 to 26 and the Factual Background sections A and B. Factual Background section C and paragraphs 27 to 101, the Applicable Standards, and the Argument are not transcribed; the sample says so in an italic note. The render is 14 pages, which is within the 8 to 14 target for a filing this long.
 2. **No table of contents or table of authorities.** The filed memorandum has both (pages i to iv of the filing), and the template does not produce them. Neither LBR 9004-1 nor LBR 9013-1 requires them for a memorandum; a clerk would expect them in a memorandum of this length. OPEN (tier 2): the template does not generate TOC/TOA, and the sample omits them.
 3. **No certificate of service.** The filed memorandum has none in its 42 pages. Service of a motion under FRBP 9013(b) is shown by a separate certificate or declaration, and LBR 2002-1(b)(4) requires a separate affidavit or unsworn declaration of mailing when notice is given under LBR 2002-1. The template has no certificate block.
@@ -133,13 +133,8 @@ Page 1 pairs with the exemplar's signature page because both carry counsel names
 
 ## Engines
 
-docx (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, double-spaced footnotes as the typst motion template), `motion-brief.lua` (the markdown contract to judge line, cover, caption, numbered paragraphs, lettered lists and the signature blocks), `render.sh` (pandoc, then the footer title). Render: `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8; `pdffonts` shows EB Garamond only). Pages: docx 14, typst 14.
+docx (`docx/`, fb-595.68.24): declarative inputs only. `docx/reference.xml` (the cross-engine style recipe, `base="xengine"`, in the typst face through `{font}`: Times New Roman 14 pt, Body Text in exact 28 pt lines, single lines 16.1 pt, footnotes double-spaced in 28 pt lines; pandoc reads the body as CommonMark, as cmarker does) and `docx/waeb.lua` (the same file in the adversary-complaint folder): judge line, cover, caption, headings, numbered paragraphs, lettered lists and the signature blocks as WordprocessingML on the shared layout model (`lib/docx/xengine.lua`), the footer `MEMORANDUM ISO MOTION TO DISMISS n` from `footer_title` (`$FORMBOOK_FOOTERS`) and the section (`$FORMBOOK_FINAL`). `fb render` builds the reference document, runs pandoc and LibreOffice: `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`. The former `docx/build-reference.sh`, `docx/render.sh`, `docx/reference.docx` and `docx/motion-brief.lua` are gone.
 
-What matches the typst output (`typst/`): letter, 1 in margins; EB Garamond 14 pt throughout; body lines on the typst line pitch (31.4 pt, exact spacing); footnotes double-spaced; counsel side by side, judge line, court title and caption with its rules on page 1; numbered paragraphs, (a) lists and A. headings; footer `MEMORANDUM ISO MOTION TO DISMISS n`; signature blocks after the conclusion, the date kept with the blocks, the excerpt and conclusion kept together.
+Cross-engine gate (`eval.yaml`: `params.cross_engine: gate`): the docx breaks every line and page as the typst render does (XENG-001..003 PASS, 14 pages, 306/306 lines, 2026-10-22). Both engines set every line in a box of its pitch (28 pt body, 16.1 pt single) with explicit spaces between blocks, paragraph numbers and heading letters in 0.5 in boxes (docx: tabs), footnotes 12 pt below the text, and the footer's gap as a 1 em space (see the adversary-complaint README, "Engines", for why).
 
-What differs (checked page by page, `reviews/docx.md`):
-- Exact line spacing puts the extra leading above each line, so text starts about 11 pt lower on every page than in typst. The pitch is the same, but a full page holds about one body line fewer, so page breaks differ slightly from the typst render (both 14 pages).
-- The caption and the signature block sit a few points off the typst positions (the caption box ends about 20 pt higher).
-- Word was not run here (no Word on this machine). Word may paginate slightly differently (docs/DOCX.md).
-
-BLOCKED: check.sh gates 0-3: `tools/check.sh <this dir> --engine docx` cannot run on a doc-type folder. It reads `court.json` and `checks.yaml` from the court dir; this folder has neither, and the court folder has `court.json` but no `checks.yaml`. No `usage/.check-docx.txt` is written. The pages were checked by hand (see `reviews/docx.md`), not by the gates.
+Word was not run here (no Word on this machine); Word may paginate slightly differently from LibreOffice (docs/DOCX.md).
