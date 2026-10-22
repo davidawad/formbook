@@ -48,17 +48,17 @@ sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-dis
 - `usage/OUTPUT-adversary-complaint.typst.pdf`: 7 pages. Typst compiled with no warnings (`render.sh` fails on any warning). `pdffonts`: TimesNewRomanPSMT and its bold only, embedded. Named `OUTPUT-` (the name `tools/render.sh` writes by default and `tools/overlay.sh` reads); the brief's `<id>.pdf` name was not used because the tool contract is fixed.
 - `usage/OVERLAY-keats-v-specialized.pdf` and `OVERLAY-keats-v-specialized.txt`: red = our render, blue = exemplar, black = both. The page map pairs pages by word overlap: ours p.1–3 ↔ filed p.1–3 (76–83%); ours p.4 ↔ p.4 (55%); p.5–6 ↔ p.5–6 (49%, 48%); p.7 ↔ p.8 (63%, our page 7 is the exhibit, the filed exhibit is page 8). The overlay is a diagnostic, not a score: the filing is set in a different face and at a different line length, so text lines will not coincide.
 
-## Visual review (Gate 2 record: all 7 pages, final render at 60 dpi, looked at)
+## Visual review (Gate 2 record: all 7 pages, typst and docx renders side by side at 60 dpi, looked at; fb-595.68.29)
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Caption (court title, debtor block, adversary block), title, lead-in, ¶1 | OK. The debtor block was widened (3.5 in left column) after "AND" wrapped onto its own line. "ROBERT W. KEATS, CHAPTER 7 TRUSTEE" still wraps to two lines in the party column; cosmetic. |
-| 2 | ¶¶2–7, Jurisdiction and Venue, Background | OK. Inter-paragraph spacing was measured with `pdftotext -bbox`: 24.0 pt pitch throughout. Before the fix, single-line paragraphs sat 17 pt apart; fixed by giving each block a leading-sized gap above. |
-| 3 | ¶¶8–12 | OK. |
+| 1 | Caption (court title, debtor block, adversary block), title, lead-in, heading, ¶¶1–2 | OK in both engines. "ROBERT W. KEATS, CHAPTER 7 TRUSTEE" wraps in the party column; cosmetic. The next heading and its two-line ¶3 do not fit below ¶2 and open page 2 (both engines). |
+| 2 | Jurisdiction and Venue, ¶¶3–5, Background, ¶¶6–7 | OK. 24 pt pitch, no extra space between paragraphs. |
+| 3 | ¶¶7–12 | OK. The Count I heading and ¶13 open page 4. |
 | 4 | Count I heading, ¶¶13–19 | OK. |
-| 5 | ¶¶20–26, Count II heading, Relief Requested heading | OK. |
-| 6 | Prayer (A.–C.), signature block | OK. Items hang under their text; the signature block sits on the right half. |
-| 7 | Exhibit A (transfer table), TOTAL row | OK as printed. The "Amount of Transfer" and "Last 4 digits" columns are right-aligned, including their headers. |
+| 5 | ¶¶19–26, Count II heading | OK. |
+| 6 | Relief Requested, prayer (A.–C.), signature block | OK. Items hang under their text; the signature block 3 in from the margin. |
+| 7 | Exhibit A (transfer table), TOTAL row | OK as printed. The amount and account columns right-aligned, header row bold. |
 
 ## Known gaps and open choices
 
