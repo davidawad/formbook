@@ -7,10 +7,10 @@ Folder: `courts/tenth-circuit/utah/federal/district/complaint/`. Self-contained:
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (15 pages, text layer; `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (abridged transcription of the exemplar, see Known gaps) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| typeface | face required: **none** (DUCivR 10-1(3) names no typeface; checked against the December 2023 text, 2026-10-15). Substitute: none needed. Font: **EB Garamond** kept (`docs/FONTS.md`: a court naming no face keeps EB Garamond). Not metric-compatible with any Times; not applicable here. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf` and `usage/OUTPUT-complaint.docx` (+ `.docx.pdf`), 8 pages each, typst 0.15.0 and LibreOffice, vendored Times New Roman only, no warnings (`tools/render.sh`) |
+| typeface | face required: **none** (DUCivR 10-1(3) names no typeface). Font: **Times New Roman** 12 pt on both engines (docs/FONTS.md; the docx names the typst face through `{font}`). The filed exemplar is set in Times New Roman too. |
 | overlay | ok: `usage/OVERLAY-fastre-complaint.pdf` and `usage/OVERLAY-fastre-complaint.txt` (`tools/overlay.sh`, exemplar passed as the third argument: see Render and overlay) |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-15 in the fonts pass, no change to the template) |
+| pages reviewed | 8 of 8 typst and 8 of 8 docx (rendered at 50 dpi and viewed after the last template change, fb-595.68.33) |
 
 File names. The brief names outputs `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh`, `tools/overlay.sh` and the court-folder convention (`CLAUDE.md`) name them `INPUT-<id>.md` → `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`. The tools were used as they are; `<id>` is `fastre-complaint`.
 
@@ -21,8 +21,8 @@ Primary source: D. Utah Local Civil Rules, December 2023 edition, https://www.ut
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
 | DUCivR 10-1(1) | Paper and margins | 8½ × 11 inch; top margin at least 1½ inches; remaining margins at least 1 inch. | `margins` (top 1.5 in, others 1 in) in `typst/utd-complaint.typ` |
-| DUCivR 10-1(3) | Font and size | Clearly legible; minimum 12 point, including footnotes. No typeface named in the text. | `type-size = 13pt`, `font-family = EB Garamond` |
-| DUCivR 10-1(4) | Spacing | Text double-spaced, except block quotes and footnotes. | `line-pitch = 26pt` (measured baseline pitch 25.94 pt), `body-leading` |
+| DUCivR 10-1(3) | Font and size | Clearly legible; minimum 12 point, including footnotes. No typeface named in the text. | `type-size = 12pt`, `font-family` Times New Roman |
+| DUCivR 10-1(4) | Spacing | Text double-spaced, except block quotes and footnotes. | `pitch-body = 24pt` (exact 24 pt line boxes, two 12 pt lines; docx 480 twips) for the body, headings and prayer; `pitch-single = 13.8pt` for the counsel block, court title, caption and signature |
 | DUCivR 10-1(5) | Pagination | Document pages numbered consecutively. | `numbering: "1"` on every page, cover included |
 | DUCivR 10-1(6)(A) | Contact information | Upper left, above the caption: counsel's name and bar number, firm, address, telephone, email, party represented. | `counsel` and `counsel_role` frontmatter, `counsel-block()` |
 | DUCivR 10-1(6)(B) | Caption table | Names of parties, title of the document, case number, assigned judge and referred magistrate judge if applicable. | `caption`, `brief_title`, `case_number`, `judge`, `magistrate` in `caption-table()` |
@@ -37,11 +37,12 @@ Not produced by this template (separate filings or documents, not part of the co
 
 ## Layout
 
-- Page 1 (cover): counsel block single-spaced at the upper left; court title centred; caption table (party column with a right and bottom rule; right column with title, "JURY DEMANDED", case number, judge). The caption fits on page 1 for the sample's counsel and defendant list (checked on the render).
-- Body: double-spaced, first-line indent 0.5 in. Numbered paragraphs (1, 2, …) with the number at the indent. Headings: level 1 centred bold capitals (PARTIES, JURISDICTION AND VENUE, GENERAL ALLEGATIONS, PRAYER FOR RELIEF, JURY DEMAND); level 2 centred bold (cause-of-action headings); level 3 bold, left (sub-headings under GENERAL ALLEGATIONS). A heading keeps a full line of space above and below and stays with the paragraph after it.
-- Prayer: the lead-in ("Plaintiffs pray …") is unnumbered; items are numbered 1., 2., …
-- Signature: "DATED this …" at left; "Respectfully submitted," firm name and the signing block at right; kept on the page with the last paragraph (see Known gaps for the rule that forces this).
-- No pleading paper (no line numbers, no rules down the margin). DUCivR 10-1 does not require numbered lines; the exemplar has none.
+- Shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): every line a box of its pitch, first-fit ragged-right breaking, no kerning, ligatures or hyphenation. The docx render breaks every line and page where typst does (XENG-001..003 gated in `eval.yaml`).
+- Page 1: counsel block single-spaced at the upper left with the party represented (`counsel_role`, italic; DUCivR 10-1(6)(A)); a blank double line; the court title centred bold capitals; a blank double line; the caption: the party column (4 in, names, designation 1.25 in in, "v.", blank single lines between) closed by a rule on its right and below; at the right the title in bold capitals, "JURY DEMANDED" directly below it (DUCivR 10-1(7)), the case number and the judge.
+- Body: a blank double line under the caption, then the lead-in (unnumbered). Paragraphs on the 24 pt pitch, first line indented 0.5 in, the number in a 0.5 in box after the indent (text from 1 in, later lines at the margin). Headings on the body pitch, bold, kept with the text after them: level 1 centred capitals, level 2 centred, level 3 at the margin; 12 pt above a heading that follows text. Prayer items: the number at 0.5 in, lines hanging at 1 in.
+- Signature: a blank double line, "DATED this ..." at the margin; "Respectfully submitted,", the firm, "By: /s/", the signer and the lines from 3.25 in, single-spaced; kept on one page with the last chunk of the body.
+- Page number centred at the foot of every page, its 13.8 pt line box ending 0.5 in above the page edge.
+- No pleading paper (no line numbers). DUCivR 10-1 does not require them; the exemplar has none.
 
 ## Markdown contract (for samples)
 
@@ -64,44 +65,35 @@ The exemplar PDF is not in the checkout (only `usage/SOURCE.md` is). On 2026-10-
 
 Overlay map: ours pp. 1–7 ↔ filed pp. 1–7 (word overlap 70–95%); ours p. 8 ↔ filed p. 15 (58%); ours p. 9 ↔ filed p. 15 (20%). Pages 8–9 pair with the exemplar's last page because the sample skips exemplar pp. 8–14 (see Known gaps), so the low overlap there is expected.
 
-## Visual review (Gate 2 record, all 9 pages, rendered at 60 dpi and looked at)
+## Visual review (Gate 2 record, fb-595.68.33: all 8 pages of each engine rendered at 50 dpi and looked at)
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Cover: counsel block, court title, caption (whole party list), JURY DEMANDED, case no., judge | OK. Caption fits on the page (a previous build spilled "Defendants." to page 2; fixed by widening the party column and tightening single spacing). |
-| 2 | Lead-in, PARTIES, ¶¶ 1–6 | OK. Numbers at indent, text double-spaced. |
-| 3 | ¶¶ 7–14, JURISDICTION AND VENUE, GENERAL ALLEGATIONS, first sub-heading | OK. Heading has space above and below. |
-| 4 | ¶¶ 15–25 | OK. |
-| 5 | ¶¶ 26–38, sub-heading "Hans Exhibits Obvious Symptoms …" | OK. |
-| 6 | ¶¶ 39–45, sub-heading "The Jail's Delayed Response and Lifesaving Efforts" | OK. |
-| 7 | ¶¶ 46–52, FIRST CAUSE OF ACTION (three heading lines) | OK. |
-| 8 | ¶ 53, PRAYER FOR RELIEF with items 1–8, JURY DEMAND heading | OK. Prayer items numbered, lead-in unnumbered. |
-| 9 | JURY DEMAND paragraph (unnumbered), DATED, signature block | OK. Signature stays with the jury-demand paragraph (was orphaned on its own page before the keep-with-signature rule). |
+| 1 | Counsel block with "Attorneys for Plaintiff", court title, caption (whole party list), JURY DEMANDED under the title, case no., judge | OK on both engines. The caption fills the page, so the lead-in starts page 2. |
+| 2 | Lead-in, PARTIES, paras 1-7 | OK. |
+| 3 | Paras 8-16, JURISDICTION AND VENUE, GENERAL ALLEGATIONS, first sub-heading | OK; 12 pt above each heading. |
+| 4 | Paras 16-25 | OK. |
+| 5 | Paras 26-37, sub-heading | OK. |
+| 6 | Paras 38-45, sub-heading | OK. |
+| 7 | Paras 45-53, the three cause-of-action heading lines together | OK. |
+| 8 | PRAYER FOR RELIEF items 1-8, JURY DEMAND, DATED, signature block | OK; signature kept with the jury-demand paragraph. |
 
-Pages reviewed: 9 of 9.
+The docx pages break every line and page as typst does (`fb diff --engines`: 213/213 lines, 8 = 8 pages).
 
 ## Known gaps and open choices
 
-1. **Abridged sample.** The sample transcribes exemplar ¶¶ 1–53, the first cause of action's heading and ¶¶ 52–53, the prayer and the jury demand. Omitted: exemplar ¶¶ 54–105 (the rest of the Monell count, the individual-liability count against the jail staff, and the detail of ¶¶ 54–85). The render is 9 pages against the exemplar's 15, within the 8–14 target.
+1. **Abridged sample.** The sample transcribes exemplar ¶¶ 1–53, the first cause of action's heading and ¶¶ 52–53, the prayer and the jury demand. Omitted: exemplar ¶¶ 54–105 (the rest of the Monell count, the individual-liability count against the jail staff, and the detail of ¶¶ 54–85). The render is 8 pages against the exemplar's 15, within the 8–14 target.
 2. **One exemplar.** Tier 2 asks for two or three filers. Alternates were found and recorded in `usage/SOURCE.md` (Keller v. Danford, The Preserve v. Kamas City, Owen v. State of Utah Legislative Services). Not run as a second-filer comparison.
-3. **Typeface.** DUCivR 10-1(3) names no typeface (checked 2026-10-15), so `docs/FONTS.md` keeps the template on EB Garamond, at 13 pt so that the visible size is close to Times 12 pt. The filed exemplar embeds TimesNewRoman (and Arial); that is one filer's choice that the rule leaves open, not a requirement. Whether the clerk convention is Times (which would mean Liberation Serif, the metric-compatible substitute in `fonts/`) is a question for David.
-4. **Type size.** 13 pt is a style choice above the 12-point minimum. The complaint template has no footnote styling and the sample has no footnotes, so the footnote minimum (DUCivR 10-1(3)) is not tested. If a footnote is added, check that it renders at 12 pt or larger.
+3. **Typeface.** DUCivR 10-1(3) names no typeface; the template sets Times New Roman 12 pt on both engines (the exemplar is set in Times New Roman too).
+4. **Type size.** 12 pt, the rule minimum. The sample has no footnotes and the template sets none, so the footnote minimum (DUCivR 10-1(3)) is not exercised.
 5. **Caption separator.** The template inserts "v." between sides; the exemplar uses "vs.". Utah filings use both; the template keeps one form.
 6. **Title.** The exemplar title is "COMPLAINT AND DEMAND FOR JURY TRIAL". The template prints "COMPLAINT" with "JURY DEMANDED" under it, as DUCivR 10-1(7) asks. The sample therefore carries the rule's form, not the exemplar's title line. A filer who keeps the long title should also keep the jury demand line.
 7. **Judge and case number.** Blank in the sample, as filed (the case was not yet assigned a judge's initials at the time of filing). The template prints "Judge ____" only when `judge` is given.
 8. **Keep-with-signature.** The template keeps the last plain paragraph with the signature block, so a signature never stands alone. A last list (the prayer) is not kept with the signature; in that case the signature may stand alone. Not seen in this sample.
 9. **Sub-heading styling.** The exemplar's sub-headings are bold at the left margin (template: level 3). Its cause-of-action title lines are centred (template: level 2). Both are conventions, not rule text.
 10. **Not checked by the template.** Content requirements of FRCP 8(a) (jurisdiction, claim, demand) and the accuracy of cited statutes. Local-rule compliance of exhibits (DUCivR 10-1 exhibits paragraph) is not generated.
-11. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, which this doc-type folder does not have; the brief forbids editing `tools/`. Render and overlay were run; the review above is the Gate 2 record for this doc type.
+11. **Checks.** `sh tools/check.sh <folder> --engine typst` (9 passed, 0 failed) and `--engine docx` (13 passed, 0 failed, XENG-001..003 gated).
 
 ## Engines
 
-**docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` (pandoc's reference with the styles, footer and section of `typst/utd-complaint.typ`), and the filter `docx/utd-complaint.lua` (cover with counsel block and caption table, numbering of the allegations, numbered prayer items, signature block). `sh tools/render.sh --engine docx <folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx`.
-
-- Matches the typst form: Letter; top margin 1 1/2 in, others 1 in; EB Garamond 13 pt; exact 26 pt line spacing for body text; first-line indent 0.5 in; numbered allegations 1 to 53 (none under the Prayer or Jury Demand headings); headings centred bold capitals (level 1) and centred bold (level 2), left bold (level 3); centred page number on every page; caption table with the rule at the right and bottom; "JURY DEMANDED" under the title; signature block.
-- Differs: the caption and signature are Word tables (border and row heights differ slightly between Word and LibreOffice); allegation numbers are typed text, not a list field (they do not renumber when a paragraph is inserted by hand); the spacing between the number and the text is a tab stop, not the typst gap.
-- Checked on the box: the .docx is a zip whose 17 XML parts are well-formed (`ziptool` + `xmllint`, because `unzip` is not installed).
-- BLOCKED, docx.pdf (Gates 0 to 3 on `usage/OUTPUT-fastre-complaint.docx.pdf`): `soffice` is not installed on this box and cannot be installed here (no conda-forge package, no root), so no LibreOffice PDF was made and `tools/check.sh --engine docx` cannot run.
-- BLOCKED, `tools/render.sh --engine docx` exits 1: the zip-integrity step runs `unzip -tq`, and `unzip` (and `zip`) are not installed on this box. The .docx is written before that step; the render stops there.
-- BLOCKED, visual review of the .docx pages: 0 of 9 pages reviewed (`pages_reviewed=0`); the pages cannot be rendered without LibreOffice. The typst pages were reviewed at 60 dpi (9 of 9) as the reference.
-- Not checked: that the file opens in Word or LibreOffice without a repair prompt (no Word, no LibreOffice on the box).
+**typst** (`typst/`): the reference. **docx** (`docx/`): `docx/reference.xml` (`base="xengine"`, `{font}`, Body Text 480 twips, single 276, a page-number footer 720 twips above the page edge, the letter section with the 1 1/2 in top margin) and the filter `docx/utd-complaint.lua`, which reads the sample chunk by chunk as the typst template does and writes every paragraph with its typst pitch and spacing (cover, caption table, numbered paragraphs, headings, prayer list, signature). The frontmatter is read as written (`$FORMBOOK_META`). `fb render` builds the reference document; there is no shell builder and no committed `reference.docx` (fb-595.68.33). Results: typst 9 and docx 13 checks passed, 0 failed; XENG-001..003 PASS (8 = 8 pages, 213/213 lines). No latex engine in this folder.
