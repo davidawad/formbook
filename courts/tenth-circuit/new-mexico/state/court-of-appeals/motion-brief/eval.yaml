@@ -1,11 +1,11 @@
 # NMRA 12-305(D)(1): 14-point or larger, serif (e.g. Times New Roman), for the body of the motion.
 font:
   size_pt: 14
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx engine is generated from the typst template's
-# layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated: a bare URL in footnote 1 (p9) breaks after a
-# period in typst ("https://www.nmlegis." / "gov/..."), where Word does not break it; the shared model has no URL rule.
-# The latex engine is BLOCKED and not delivered: the generated LaTeX does not break the URL either, and it runs 72 pt
-# into the right margin (DEF-FORM-002 fails); `fb engines gen` writes it again once the model has a URL rule
-# (docs/open-items/fb-595.54.54.md).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated: the shared model takes
+# footnote 1 as part of the token after "§" ("§ 13.[^1]"; lib/pandoc/xdoc.lua hold_sign_tokens). Word then gets a word
+# joiner after every slash and hyphen of the note, so its URL does not break after "http://" as typst's does (p9,
+# lines 20-21; pages equal); LaTeX sets the note in an \mbox and drops it, so the committed latex render is the one
+# before that rule (it has the note; its pages differ from p11). docs/open-items/fb-595.54.54.md.
 params:
   cross_engine: report
