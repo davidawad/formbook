@@ -1,0 +1,61 @@
+# Connecticut Supreme Court (conn): motion for reconsideration en banc (Practice Book §§ 71-5, 66-2, 66-3; CONN-MOT-005,
+# -007: a motion under P.B. 66-2, "en banc" in its title, from the frontmatter). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to P.B. 66-2 (format paragraph) and 67-2A(b), (c), (f) (../rules.md, CONN-MOT-*,
+# CONN-FORM-*, CONN-CERT-*); lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant (the certifications' form text).
+size: 12                  # CONN-MOT-003, CONN-FORM-002: 12-point serif, footnotes included
+pitch:
+  body: 20.7              # CONN-MOT-003, CONN-FORM-004: spacing 1.3 to 1.5, uniform; 1.5 lines (Word's 1.5 x 1.15 x 12 pt)
+  single: 13.8            # caption, signature block and service list (1.15 x 12 pt; not body text)
+margin: {top: 108, bottom: 108, left: 108, right: 108}   # CONN-MOT-003, CONN-FORM-003: 1 1/2 inches on all sides
+indent: 36                # first-line indent (style choice, as the old template)
+# CONN-MOT-003, CONN-FORM-007 (P.B. 66-2, 67-2A(c)): one pagination scheme from the first page, centered at the
+# bottom, "Page X of XX".
+page_number: {align: center, from: 1, text: "Page {page} of {pages}"}
+# CONN-MOT-003, CONN-FORM-002, -004: footnotes 12 point at the body's uniform 1.5 spacing.
+footnote: {size: 12, pitch: 20.7, gap: 6.9}
+# CONN-FORM-002, -004: block quotations 12 point at the same uniform spacing, indented on both sides.
+quote: {left: 36, right: 36, above: 6.9, below: 6.9, gap: 6.9, pitch: body}   # half a line around and between its paragraphs
+# CONN-MOT-003: section captions in 14-point serif (1.5 x 1.15 x 14 pt = 24.15); bold for emphasis (CONN-FORM-005),
+# level 1 centered, levels 2 and 3 flush left (all text left aligned).
+heading:
+  - {align: center, bold: true, size: 14, pitch: 24.15, above: 13.8, below: 6.9}
+  - {bold: true, size: 14, pitch: 24.15, above: 13.8, below: 6.9}
+  - {bold: true, italic: true, size: 14, pitch: 24.15, above: 13.8, below: 6.9}
+# P.B. 66-2 asks for no cover: the caption heads page 1 (the court, the case name beside the docket number, the
+# title of the motion).
+front:
+  - {text: "{court}", align: center, bold: true}
+  - columns:
+      - blocks:
+          - {text: "{case_title}"}
+      - width: 108
+        blocks:
+          - {text: "{docket}", align: right}
+    gutter: 14.4
+    above: 14.4
+  - {text: "{title}", align: center, bold: true, above: 18, below: 18}
+# CONN-SIG-001 (P.B. 62-8): counsel's signature after the text, never split; then the P.B. 66-3 certification
+# (CONN-MOT-004, CONN-CERT-003: the word count under the P.B. 66-2(b) limit; CONN-CERT-001: service under P.B. 62-7,
+# with the names and email addresses of the counsel served).
+# The text's last paragraph stays on the signature's page (no signature block standing alone).
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "Respectfully submitted,"}
+      - {text: "{signature.party}", right: 108, above: 9.6}
+      - {text: "/s/ {signature.signer}", right: 108, above: 14.4}
+      - {text: "{signature.lines}", right: 108, optional: true}
+      - {text: "{date}", right: 108, above: 6.9}
+    above: 14.4
+  - {text: "CERTIFICATION OF WORD COUNT", heading: 1}
+  - {text: "The undersigned certifies that this motion complies with the word limit of Practice Book § 66-2(b) and contains {word_count} words, counted as that section directs.", pitch: body}
+  - {text: "CERTIFICATION OF SERVICE", heading: 1}
+  # the certification, the counsel served and the signature never split (no signature line alone on a page)
+  - group:
+      - {text: "The undersigned certifies that a copy of this motion has been delivered electronically on {date} to each counsel of record listed below (on paper where so stated), in compliance with Practice Book § 62-7.", pitch: body}
+      - each: service
+        blocks:
+          - {text: "{.}", above: 6.9}
+      - {text: "/s/ {signature.signer}", right: 108, above: 14.4}
