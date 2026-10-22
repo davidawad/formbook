@@ -70,6 +70,26 @@
   v(0.6em)
 }
 
+/// Cover counsel in two columns across the text width, as in the filed covers (Tier 2: both exemplars set
+/// counsel side by side; one column right of centre pushed a three-group counsel list onto a second cover page,
+/// DEF-COVER-001). Groups keep their order and fill the left column first; the split is the one that leaves the
+/// taller column shortest, measured at the column width, so it holds for any counsel list.
+#let counsel-columns(groups) = layout(size => {
+  let gutter = 0.4in
+  let colw = (size.width - gutter) / 2
+  let blocks = groups.map(g => block(width: colw, counsel-group(g)))
+  let gap = 0.6em   // between groups: the group's own trailing v() is dropped at the end of its block
+  if blocks.len() < 2 { return stack(..blocks) }
+  let hs = blocks.map(b => measure(b).height)
+  let best = 1
+  let best-h = none
+  for k in range(1, blocks.len()) {
+    let tall = calc.max(hs.slice(0, k).sum() + gap.to-absolute() * (k - 1), hs.slice(k).sum() + gap.to-absolute() * (blocks.len() - k - 1))
+    if best-h == none or tall < best-h { best = k; best-h = tall }
+  }
+  grid(columns: (colw, colw), column-gutter: gutter, stack(spacing: gap, ..blocks.slice(0, best)), stack(spacing: gap, ..blocks.slice(best)))
+})
+
 /// Signature block: the signer's name under the signature line.
 #let signature-block(sig) = {
   block(width: 100%, breakable: false, pad(left: sig-indent)[
@@ -175,7 +195,7 @@
 
   // ---- Cover (COA 2-12.3(a)-(j)) ----
   page(numbering: none)[
-    #set par(leading: single-leading, first-line-indent: 0pt, justify: false)
+    #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt, justify: false)   // single-spaced cover: the body's paragraph spacing (body-leading) between its blocks helped push it past one page (DEF-COVER-001)
     #align(center)[
       #if meta.at("case_number", default: "") != "" [#text(weight: "bold")[No. #meta.case_number] \ ]
       #v(0.2in)
@@ -202,9 +222,7 @@
     #v(1fr)
     #{
       set par(leading: single-leading, first-line-indent: 0pt)
-      pad(left: sig-indent, {
-        for g in need(meta, "counsel") { counsel-group(g) }
-      })
+      counsel-columns(need(meta, "counsel"))   // two columns across the page, not one right of centre (see counsel-columns)
     }
   ]
 
