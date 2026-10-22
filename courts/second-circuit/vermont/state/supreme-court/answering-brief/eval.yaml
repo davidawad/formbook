@@ -1,6 +1,10 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: a URL longer than
-# a line breaks at a different character in each engine (typst after "/" or "%20", LaTeX at a hyphen, Word after a
-# period), a gap of the shared model (docs/open-items/fb-595.54.73.md, shared-model requests).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # Note 11's URL (page 28): typst and LaTeX fill the line to ".../2020-Jan/U." and break before "S.%20Border",
+  # LibreOffice fits "U.S." on the line by its twip rounding (the line-fit tolerance, not in the model:
+  # docs/open-items/fb-595.54.82.md, "Not implemented"); 737 of 739 lines identical, pages and page ends equal.
+  # Reported, not gated (fb-595.54.73).
+  cross_engine_docx: report
