@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Alaska memorandum's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman; L.R. 7.5(a)(1)(D) asks for a proportional face) at 13 pt (size 26 half
+     points, L.R. 7.5(a)(1)(D)); Body Text in exact 30 pt line boxes (typst pitch-double, L.R. 7.5(a)(1)(A) double
+     spacing) with a half-inch first-line indent; single lines in 15 pt boxes (typst pitch-single); Block Text
+     (quotations) single lines half an inch in on both sides, 15 pt above and below (typst half-gap); footnotes at the
+     text size in 15 pt boxes, 7 pt apart (typst note-gap); letter page with 1-inch margins. docx/akd-motion-brief.lua
+     writes every other paragraph's own spacing, the footer with the short title and the case name and number, and the
+     sections (fb render's $FORMBOOK_FOOTERS, $FORMBOOK_FINAL). Twips: 20 x pt.
+     Styles of its own: "Body Text Note", Body Text without widow control, for a paragraph that carries a footnote
+     mark (typst lets the line with the mark move on alone when its note does not fit); "Body Text Keep", kept with the
+     next paragraph (the last paragraph, kept with the signature block). Footnote Text is the recipe's without
+     keepLines: a long note splits across a page as typst's does. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="26" body="600" single="300" indent="720" heading="300" heading-before="600" heading-after="300" quote="300" note="300" note-after="140" footer="420">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="140" w:line="300" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="26"/><w:szCs w:val="26"/></w:rPr></w:style>
+</reference>
