@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Minn. Bankr. adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the
+     face of the typst template ({font}, Times New Roman) at 12 pt (size 24 half points; the exemplars' size, no local
+     rule); Body Text in exact 27.6 pt line boxes (typst pitch-double, the exemplars' double spacing) with a half-inch
+     indent, and the headings in them; the caption, signature and footer lines in 13.8 pt boxes (typst pitch-single);
+     letter page (LBR 9004-1(a)) with 1-inch margins and a centered page number, its line just below the text, 58.2 pt
+     above the page foot (1164 twips: typst footer-descent 0). Markdown is read without fancy list markers, so "(A)"
+     stays text as typst prints it. docx/mnb-adversary-complaint.lua writes every paragraph's own spacing.
+     Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" footer="1164" pandoc-from="markdown+smart-fancy_lists"/>
