@@ -7,7 +7,7 @@ Folder: `courts/sixth-circuit/ohio/federal/southern-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (partial transcription, see Known gaps) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored Times New Roman only, no warnings, exit 0 |
 | overlay | ok: `usage/OVERLAY-doe-complaint.pdf` and `OVERLAY-doe-complaint.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in the final layout) |
 
@@ -19,7 +19,7 @@ Primary source for the local rules: S.D. Ohio Local Rules as amended 2024-10-21,
 
 | Rule | Requirement (verified text unless noted) | Where it is in the template |
 |---|---|---|
-| S.D. Ohio Civ. R. 5.1(a) | 8½ × 11 paper; double-spaced except block quotations; each page numbered consecutively; side margins and top margin not less than one inch; electronic filings one-inch margins on all sides. The rule sets **no typeface and no point size**. | `page-w`, `page-h`, `margin = 1in`, `body-leading` (double spacing), page number in the footer. |
+| S.D. Ohio Civ. R. 5.1(a) | 8½ × 11 paper; double-spaced except block quotations; each page numbered consecutively; side margins and top margin not less than one inch; electronic filings one-inch margins on all sides. The rule sets **no typeface and no point size**. | `page-w`, `page-h`, `margin = 1in`, `pitch-body` (double spacing, 24 pt), page number in the footer. |
 | S.D. Ohio Civ. R. 5.2(a) | Proof of service on the pleading or on the document served (not used by the complaint; the complaint is served with the summons). | Not produced for a complaint. The certificate branch exists for filings that need one (see the motion-brief README). |
 | S.D. Ohio Civ. R. 7.2(a)(3) | Memoranda over 20 pages need a combined table of contents and summary. | Not applicable to a complaint. |
 | S.D. Ohio Civ. R. 10.1 | A pleading that challenges the constitutionality of a statute must say "Claim of Unconstitutionality" immediately after the title, and the civil cover sheet must be checked. | Not rendered. Add the words to `brief_title` when it applies. |
@@ -34,14 +34,14 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Layout
 
-- Letter paper, one-inch margins on all sides, EB Garamond 12 pt, double-spaced (baseline pitch 24 pt).
+- Letter paper, one-inch margins on all sides, Times New Roman 12 pt, double-spaced (24 pt line boxes, the cross-engine layout model `lib/typst/xengine.typ`); single-spaced lines (court title, caption, signature, footer) in 13.8 pt boxes.
 - Page number centred at the foot of every page. No pleading line numbers (S.D. Ohio does not require pleading paper; the CAND template does, and is not this one).
-- Court title: three centred bold lines (United States District Court; Southern District of Ohio; the division from the sample).
+- Court title: three centred bold single-spaced lines (United States District Court; Southern District of Ohio; the division from the sample).
 - Caption: the parties in a left column with a right rule and a bottom rule; the case number, optional judge line, title and optional legend on the right.
-- Body: numbered paragraphs with a 0.5 inch first-line indent; centred bold headings; count headings as level 1 (title) and level 2 (sub-title) lines.
-- Prayer for relief: lettered items (A., B., …) indented and unnumbered.
+- Body: numbered paragraphs with a 0.5 inch first-line indent, the number in a 0.5 inch box (the text starts 1 inch from the margin; a tab in the docx); headings at the type size on the body pitch with no space of their own (level 1 centred bold capitals, level 2 centred bold, level 3 bold italic at the margin), kept with the next block; count headings as level 1 (title) and level 2 (sub-title) lines.
+- Prayer for relief: lettered items (A., B., …), the letter half an inch in, the text hanging at 1 inch, unnumbered.
 - Closing: the last paragraph and the signature block are set in one unbreakable block, so the signature never stands alone on a page.
-- Typeface and size: EB Garamond is the only serif vendored in `fonts/`. The filed exemplar uses Garamond, so the face matches the filing; the size is 12 pt, a working standard (see Known gaps).
+- Typeface and size: Times New Roman 12 pt (vendored, docs/FONTS.md), the face of all three engines. The filed exemplar uses Garamond; the rules name no face, so the face is a working standard (see Known gaps).
 
 ## Overlay
 
@@ -61,7 +61,7 @@ Pages reviewed in the final layout: 1 (caption, parties), 2 (numbered parties an
 
 - **Tier 2 is not met: one filer.** A second S.D. Ohio complaint from a different filer was not found. RECAP entries for *Xiao v. General Electric*, 1:26-cv-01033, and other October 2026 complaints have no available document. EVAL-LOOP asks for 2 or 3 filers.
 - **The sample is a partial transcription.** It keeps the caption, parties, jurisdiction, Counts I–V and VII (count paragraphs that are procedural or legal theory), the prayer, the jury demand and the signature. Filed ¶¶ 31–64 (the factual narrative of a sexual-assault survivor's case) are replaced by a bracketed note, a deliberate choice recorded in `usage/SOURCE.md`. Counts VI and VIII and the state-court exhibits (filed pp. 21–53) are not transcribed. The render is 8 pages against a 20-page pleading (the brief's 8–14 target is for an exemplar of that length; this one is long, but the sample is short by design).
-- **Typeface and size are not set by the local rules.** S.D. Ohio Civ. R. 5.1 is silent on the face and the point size; the template uses EB Garamond 12 pt as a working standard, which matches the Garamond filing. Judges' standing orders may set something different. This needs a decision from David if a different face is wanted, since only EB Garamond is vendored.
+- **Typeface and size are not set by the local rules.** S.D. Ohio Civ. R. 5.1 is silent on the face and the point size; the template uses Times New Roman 12 pt as a working standard (the filing is in Garamond). Judges' standing orders may set something different.
 - **Division assignment is not checked.** `division` is written by the author; Civ. R. 82.1 (venue by county) is not implemented.
 - **Claim of unconstitutionality (Civ. R. 10.1)** is not rendered; the author adds it to the title when it applies.
 - **Paragraph numbers in the transcription are the template's, not the filing's.** Filed paragraph numbers are noted in brackets only where a note replaces text.
@@ -70,10 +70,12 @@ Pages reviewed in the final layout: 1 (caption, parties), 2 (numbered parties an
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default (EB Garamond 12 pt, exact 24 pt double spacing, one-inch margins, centred PAGE footer, heading and paragraph styles). `ohsd.lua` sets the court title, the caption table, the numbered allegations, the prayer, the signature block and the certificate (none here). Render: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice 26.8.1, EB Garamond embedded), 8 pages. Reviewed: all 8 pages of the `.docx.pdf` and all 8 pages of the typst render, at 60 dpi, in the final state.
 
-- Matches typst: letter paper, margins, EB Garamond 12 pt, 24 pt body pitch, the page count (8), the court title and caption (page 1 caption lines within 0.1 pt of the typst baselines), the PARTIES heading and first allegation (within about 1 pt), numbered allegations with a 0.5 in first-line indent and text at 1 in, count headings, the prayer, the signature block, the centred page number.
-- Differs (tier 2, not chased): line breaks differ on most pages (LibreOffice shaping: for example allegation 2 breaks after "sexual-"). Page breaks differ: the docx ends page 2 after allegation 14, and the prayer for relief moves to page 8 whole (kept with its items), where typst keeps it on page 7. Pages 3 and 5 end short because of widow control. The caption spacing constants differ between the complaint and motion-brief `ohsd.lua` (the left column is taller here, the right column in the motion); both are measured against the typst output.
+Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and every page where the typst render does, and `eval.yaml` gates it (`params.cross_engine: gate`, fb-595.68.30).
+
+**docx** (`docx/`): `docx/reference.xml` (`base="xengine"`, the typst face `{font}` = Times New Roman, 12 pt; Body Text in exact 24 pt line boxes with a 0.5 in first-line indent, single lines 13.8 pt; the heading levels at the type size on the body pitch; "Numbered Paragraph" with a tab 1 in from the margin; "Lettered" hanging at 1 in; letter page, 1 in margins, the footer 0.5 in above the edge) and `docx/complaint.lua` on `lib/docx/xengine.lua`, which writes the court title, the caption table (the party column ruled right and below; LibreOffice sets the bottom rule below the cell padding, so the docx padding is 0.75 pt less), the numbered allegations, the lettered prayer, the signature block (kept with the last paragraph), the certificate when the sample has one, the centred page-number footer (`$FORMBOOK_FOOTERS`) and the last section (`$FORMBOOK_FINAL`). The old `build-reference.sh` and `reference.docx` (EB Garamond) are gone; `fb render` builds the styles. Render: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice, Times New Roman embedded), 8 pages, as typst.
+
+- Cross-engine: XENG-001..003 pass, 215/215 typst lines break after the same word, 8/8 pages start and end on the same word; every line's baseline the same (the one 10 pt "difference" `fb diff` lists, 'v. HEREIN' on page 1, is pdftotext joining the caption's two columns).
+- Reviewed: all 8 pages of both renders, side by side at 60 dpi: caption rules and columns, headings kept with their paragraphs, the prayer, the signature on page 8 with the jury demand, the centred page number. Page 7 ends three lines short because the jury demand heading, its paragraph and the signature block stay together (as intended).
 - Word: not available here. The file converts in LibreOffice with no error; Word may paginate slightly differently (docs/DOCX.md).
 - BLOCKED: none. No table of contents, table of authorities, line numbering or bookmarks are required for this document.
-- Gates: `sh tools/check.sh courts/sixth-circuit/ohio/federal/southern-district --engine docx` exits 2 before any gate runs: `checks.yaml` (and `rules.md`) do not exist yet for this court, so Gates 0 to 3 are not run for docx. Not changed here.
