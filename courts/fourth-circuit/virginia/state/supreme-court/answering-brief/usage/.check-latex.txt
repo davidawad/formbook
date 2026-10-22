@@ -1,2 +1,3 @@
 PASS
-e36cc6bebb7a341fd5242b82064b3dc69e386b1d503d26825ad1b10119d14c59  usage/OUTPUT-answering-brief.latex.pdf
+711a74ca2ba6a7e649fb1cb779ecaba34f3ffee5ee5690dd1a8486244977d167  usage/OUTPUT-answering-brief.latex.pdf
+48ecb75496415cb7a4d27afe06c4b451ae35a962078e66b3b64f44267aa991fa  usage/OUTPUT-answering-brief.typst.pdf

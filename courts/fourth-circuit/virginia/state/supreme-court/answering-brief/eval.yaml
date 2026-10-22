@@ -1,5 +1,10 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the renders differ
-# where the shared model breaks a line or page differently in one engine (docs/open-items/fb-595.54.35.md).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LibreOffice sets a footnote that does not fit under its anchor's line on the next page and keeps the line (typst
+  # and LaTeX move the line on with its note): INPUT-answering-brief, page 8 ("(Va. Ct. App. Dec. 12, 2006).2"), and
+  # the pages after it shift until page 24 (XENG-002, XENG-003). No docx setting moves the line; reported, not gated
+  # (fb-595.54.13, docs/open-items/fb-595.54.35.md).
+  cross_engine_docx: report

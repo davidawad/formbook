@@ -164,7 +164,7 @@ authorities:
       - cite: '*Tvardek v. Powhatan Vill. Homeowners Ass’n, Inc.*, 291 Va. 269 (2016)'
         find: 291 Va.
       - cite: '*United States v. Anderson*, No. 3:04-cr-00030 (W.D. Va. May 12, 2005)'
-        find: (W.D. Va. Ma
+        find: Plea Agreement
       - cite: '*United States v. Brown*, 155 F.3d 561 (4th Cir. 1998)'
         find: 155 F.3d
       - cite: '*United States v. Frank*, 8 F.4th 320 (4th Cir. 2021)'
