@@ -30,10 +30,12 @@ cover:
             blocks:
               - {text: "{names}", above: 14.4}
               - {text: "{designation}", align: right, above: 5.6}
-      - width: 180
+      - {width: 4.8, repeat: ")"}          # the column of ")" between the parties and the docket lines (Texas caption style)
+      - width: 223.2
+        valign: center
         blocks:
           - {text: "{docket}"}
-    gutter: 28.8
+    gutter: 8.4
     above: 21
   - {rule: 0.75, above: 21}
   - {text: "{title}", align: center, bold: true, upper: true, above: 12.6}

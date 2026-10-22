@@ -60,7 +60,7 @@ authorities:
       - {cite: "Safer J, Tangpricha V. Care of the Transgender Patient. ANNALS OF INTERNAL MEDICINE (Jul. 2019)", find: "Safer J"}
       - {cite: "Tordoff D, et al. Mental Health Outcomes in Transgender and Nonbinary Youths Receiving Gender-Affirming Care. JAMA Netw Open (Feb. 2022)", find: "Tordoff D"}
       - {cite: "Turban JL, et al. Pubertal Suppression for Transgender Youth and Risk of Suicidal Ideation. PEDIATRICS (Jan. 2020)", find: "Turban JL"}
-      - {cite: "World Professional Association for Transgender Health. Standards of Care for the Health of Transsexual, Transgender and Gender Nonconforming People, 7th Version (2012)", find: "Standards of Care for the Health"}
+      - {cite: "World Professional Association for Transgender Health. Standards of Care for the Health of Transsexual, Transgender and Gender Nonconforming People, 7th Version (2012), available at https://www.wpath.org/publications/soc (accessed Mar. 10, 2022)", find: "Standards of Care for the Health"}
   - heading: "Other Authorities"
     entries:
       - {cite: "AMA Health Policy H-320-953, Definitions of “Screening” and “Medical Necessity”", find: "H-320-953"}

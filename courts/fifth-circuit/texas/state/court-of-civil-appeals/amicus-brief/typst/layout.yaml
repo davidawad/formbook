@@ -31,10 +31,14 @@ cover:
       - {text: "{designation}", align: center, italic: true}
   - {text: "{proceeding}", align: center, optional: true, above: 21.6}
   - {text: "{trial_court_case}", align: center, optional: true}
-  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 43.2}
+  - {fill: 1}              # the old template's v(1fr): the title and counsel at the foot of the cover, as the filed cover sets them
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4}
   - columns: {each: counsel, per_row: 2, row_gap: 14.4, blocks: [{text: "{names}", bold: true}, {text: "{lines}"}]}
     gutter: 21.6
     above: 43.2
+# TRAP 38.1(a), (b) (TEXAPP-OPEN-001): the identity of parties and counsel, the body's first level-1 section, comes before
+# the table of contents, on the lower-roman pages.
+body_before_tables: {count: 1}
 # TRAP 38.1(b), (c) (TEXAPP-OPEN-005): the table of contents and the index of authorities, with the pages.
 contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 8}
 authorities:
@@ -46,6 +50,8 @@ authorities:
 # The signature block (TRAP 9.4(g) counsel; the firm, each signer's /s/ line and name, the address), never split;
 # then the certificate of compliance (TRAP 9.4(i)(3)) and of service (TRAP 9.5, TEXAPP-AMI-004), each on its own
 # page in the filer's words, signed with the signers' /s/ lines.
+# The prayer, the body's last paragraph, kept on the page of the signature block (not left above it alone).
+keep_with_closing: true
 closing:
   - group:
       - {text: "{date}", optional: true, pitch: body, indent: 36}

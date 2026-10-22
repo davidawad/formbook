@@ -105,13 +105,15 @@ return require("docx.xdoc")({
       ["optional"] = true,
     },
     {
+      ["fill"] = 1,
+    },
+    {
       ["text"] = "{brief_title}",
       ["align"] = "center",
       ["bold"] = true,
       ["upper"] = true,
       ["size"] = 16,
       ["pitch"] = 18.4,
-      ["above"] = 43.2,
     },
     {
       ["columns"] = {
@@ -132,6 +134,9 @@ return require("docx.xdoc")({
       ["above"] = 43.2,
     },
   },
+  ["body_before_tables"] = {
+    ["count"] = 1,
+  },
   ["contents"] = {
     ["title"] = "Table of Contents",
     ["depth"] = 3,
@@ -151,6 +156,7 @@ return require("docx.xdoc")({
       ["below"] = 4,
     },
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {

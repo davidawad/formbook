@@ -97,7 +97,12 @@ return require("docx.xdoc")({
           },
         },
         {
-          ["width"] = 180,
+          ["width"] = 4.8,
+          ["repeat"] = ")",
+        },
+        {
+          ["width"] = 223.2,
+          ["valign"] = "center",
           ["blocks"] = {
             {
               ["text"] = "{docket}",
@@ -105,7 +110,7 @@ return require("docx.xdoc")({
           },
         },
       },
-      ["gutter"] = 28.8,
+      ["gutter"] = 8.4,
       ["above"] = 21,
     },
     {

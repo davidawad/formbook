@@ -1,8 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). The docx render breaks every line and
-# page where the typst render does: gated. The latex render is REPORTED: it keeps a word with an inner slash whole
-# where typst breaks after the slash, and sets a split footnote apart (docs/open-items/fb-595.54.69.md,
-# "shared-model requests").
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). REPORTED, not gated: the latex render
+# keeps a word with an inner slash whole where typst breaks after the slash (p14 "plaintiffs/appellees’"); the docx
+# render keeps footnote 19's anchor line on page 19 and sets the note on page 20, where typst, which sets a note
+# whole, moves the line with it (docs/open-items/fb-595.54.69.md, "shared-model requests").
 params:
   cross_engine: report
-  cross_engine_docx: gate
