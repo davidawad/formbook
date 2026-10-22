@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The M.D. Tenn. bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs)
+     in the face of the typst template ({font}, Times New Roman; no tnmb rule names one) at 12 pt (size 24 half
+     points; LBR 5005-3(a), "12-point font", footnotes too); Body Text in exact 24 pt line boxes (480 twips: typst
+     pitch-body, double spacing as filed) with a half-inch first-line indent (typst para-indent); single lines 13.8 pt
+     (276 twips: typst pitch-single); block quotations half an inch in on both sides; footnotes 12 pt in 13.8 pt
+     boxes, 7 pt after each (140 twips: typst note-gap), not kept whole (LibreOffice splits a note where typst does).
+     Added here: "Numbered Paragraph" (Civil Rule 10(b): the number at the half-inch indent, a tab to 1 in, typst
+     number-box), "Prayer Item" (the letter at the half-inch indent, the text hanging at 1 in, typst prayer-box),
+     "Body Keep" (the WHEREFORE paragraph, kept with the prayer after it: typst sticky) and "Body Flush" (the
+     unnumbered line right after a quotation, its citation, at the margin). Letter page with 1-inch margins
+     (LBR 5005-3(a)) and the page number centered in a 13.8 pt line whose foot is 15 pt above the page edge
+     (300 twips: where typst sets it, 1 in margin - footer-descent 0.6 in - 13.8 pt; LBR 5005-3(b)).
+     docx/tnmb-adversary-complaint.lua writes the court title, caption, title, headings, quotations and signature
+     with their own spacing. Pandoc's definition lists are off: a "~ " paragraph (unnumbered) after a one-line
+     paragraph stays a paragraph, as the typst template reads it. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="480" heading-before="0" heading-after="0" quote="240" note="276" note-after="140" footer="300" pandoc-from="markdown+smart-definition_lists">
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr><w:widowControl/><w:spacing w:before="0" w:after="140" w:line="276" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraph"><w:name w:val="Numbered Paragraph"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="PrayerItem"><w:name w:val="Prayer Item"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:ind w:left="1440" w:hanging="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyKeep"><w:name w:val="Body Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyFlush"><w:name w:val="Body Flush"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:ind w:firstLine="0"/></w:pPr></w:style>
+<footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></footer>
+</reference>
