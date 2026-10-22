@@ -7,8 +7,8 @@ Doc-type folder for the Court of Federal Claims (`uscfc`), complaint. Self-conta
 | Item | Result |
 |---|---|
 | Exemplar | yes: one filed complaint (Design Build, LLC, No. 1:26-cv-01361, filed 2026-09-15). See `usage/SOURCE.md`. |
-| Typeface | Rule names no face (RCFC 5.5(c)(2): text and footnotes no smaller than 12 point). Keeps EB Garamond; no vendored substitute applied. Visual-only comparison to the exemplar's Times New Roman, see Known gaps 1. |
-| Render | ok: `sh tools/render.sh courts/federal-circuit/court-of-federal-claims/complaint usage/INPUT-complaint.md`; exit 0, no typst warnings, EB Garamond only (`pdffonts`). 13 pages (re-rendered 2026-10-16). |
+| Typeface | Rule names no face (RCFC 5.5(c)(2): text and footnotes no smaller than 12 point). Times New Roman 12 pt, as the exemplars (Liberation Serif, its metric twin, in typst); see Engines. |
+| Render | ok: typst and docx, 14 pages each, on the shared cross-engine layout model; docx cross-engine gated (XENG-001..003 PASS). Re-rendered 2026-10-22, all pages viewed. |
 | Overlay | ok: `sh tools/overlay.sh courts/federal-circuit/court-of-federal-claims/complaint design-build-llc-26-1361`; exit 0, wrote `OVERLAY-…pdf` and `OVERLAY-….txt`. The exemplar PDF was restored from the URL in `usage/SOURCE.md` and matches its SHA-256. |
 | Pages reviewed | 13 of 13. Every page of the final render rasterized at 60 dpi (`pdftoppm -r 60`) and looked at, 2026-10-16 (earlier: 50 dpi, 2026-10-14). |
 | Tier 2 vs. a second filer | not done (one exemplar only). |
@@ -81,18 +81,11 @@ The map pairs by text, so it is approximate. Our pages 1–6 pair with exemplar 
 
 ## Engines
 
-The docx engine is `docx/` (`make-reference.sh` builds `reference.docx`; `uscfc-complaint.lua` adds the caption, the signature block, the certificate and the prayer-list indents). Render: `sh tools/render.sh --engine docx courts/federal-circuit/court-of-federal-claims/complaint usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` and its LibreOffice PDF (LibreOffice 26.8.1; on the render box `fonts/eb-garamond` was linked into fontconfig, see docs/DOCX.md).
+Engines: typst (the reference) and docx; no latex folder for this doc type. Both run on the shared cross-engine layout model (fb-595.54.6; `lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `lib/docx/xengine-reference.sh`; docs/EVAL-LOOP.md, "Cross-engine gate"): Times New Roman 12 pt (Liberation Serif in typst, the same metrics), first-fit ragged-right lines, no kerning, ligatures or hyphenation, exact line boxes of 27.6 pt (double-spaced text) and 13.8 pt (caption, headings, footnotes, signature), the typst spaces between blocks in twips. **Cross-engine gated** (`eval.yaml`: `params.cross_engine: gate`): the docx breaks every line and page where the typst render does (XENG-001..003 PASS, 303 of 303 lines).
 
-| Matches the typst render | Differs from it |
-|---|---|
-| EB Garamond 12 pt throughout; footnotes 12 pt single-spaced; block quotes single-spaced (RCFC 5.5(c)(2), (c)(4)) | Pages: the docx runs 14 pages, the typst render 13. Each page holds the same 22 double-spaced lines (27.6 pt pitch, measured on both), but LibreOffice places exact-spaced lines about 14 pt lower and the heading and caption spacing is set by eye, so the text drifts. |
-| Letter, 1-inch margins (RCFC 5.5(c)(1)(A), (c)(3)) | The signature block is alone on page 13 in the docx (kept whole, as typst keeps it); typst fits it under the prayer on page 12. |
-| Arabic page number at bottom centre on every page, the caption page included (RCFC 5.5(c)(6)) | Heading spacing is approximate (the typst gap between a level-2 and a level-3 heading is larger than the docx gap). |
-| Caption: court name, optional BID PROTEST line, parties with designations, file number or blank line, judge line (RCFC 10(a), 5.5(g)-(h)) | Word may paginate slightly differently from LibreOffice (docs/DOCX.md); the page numbers above are LibreOffice's. |
-| Centred bold capital level-2 headings; bold left level-3 headings; prayer items a., i. at the typst indents | The auto-numbered prayer letters of the sample are typed text, as in typst. |
-| Signature block: Dated, Respectfully submitted, `/s/`, name, contact lines (RCFC 5.5(d)-(f)); certificate of service on its own page | |
+`docx/make-reference.sh` builds `reference.docx` from the shared recipe, plus one style, "Body Text Note" (a paragraph that anchors a footnote has no widow control: typst moves the line with the mark to the next page with its note when the note does not fit, Word would move the whole paragraph). `docx/uscfc-complaint.lua` writes the caption, the headings, the prayer items at their typst indents, the signature block and the certificate of service. Render: `sh tools/render.sh --engine docx courts/federal-circuit/court-of-federal-claims/complaint usage/INPUT-complaint.md`. Check: `sh tools/check.sh <dir> --engine typst|docx` (both 0 failed).
 
-**docx BLOCKED:** `tools/check.sh <court> --engine docx` cannot run for this court yet: the court root has no `court.json`, `checks.yaml` or `rules.md`, so Gates 1 and 2 have nothing to check against. This is a court-level gap, not a docx check failure, and it is not fixed in this folder. The gates themselves were not run. Pages reviewed: all 14 pages of the docx PDF, rasterized at 60 dpi and viewed, 2026-10-15.
+Visible change of the port in the typst render (2026-10-22, all 14 pages viewed at 60 dpi): the text is ragged right (was justified) and paragraphs no longer have an extra space between them (the double spacing alone separates them, as in the exemplar); the caption, headings and signature block keep their layout. Still 14 pages.
 
 ## Verification pass 2026-10-16 (fb-595.26.14)
 
