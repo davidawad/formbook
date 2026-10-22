@@ -1,5 +1,6 @@
 ---
 # Transcription of FILED-EXAMPLE-petition-for-rehearing.pdf (Appellants' Petition for Rehearing, Supreme Court No. 20260059), 10 pages. Cover, table of contents and table of authorities are generated.
+# The lettered paragraphs "(a)" to "(d)" of paragraph 15 are typed "\(a)": paragraphs, as filed, in every engine (pandoc reads an unescaped "(a)" as a list) (fb-595.54.52).
 # Paragraph markers [¶N] are typed as filed (1 to 25); the text layer garbles them ("[,-rl]", "[i!12]", "(l,-[16]", "[,1 O]"). Certain OCR repairs: pinpoints "Id. , 15" is "Id. ¶ 15"; "2022 ND 85, , 15" is "¶ 15"; "2020 ND 12, , 42" is "¶ 42"; "117-9" is "¶¶ 7-9"; "11 1 1, 2 1" is "¶¶ 11, 21"; "1 15" is "¶ 15"; "r,r 2-7, 26--34" is "¶¶ 2-7, 26-34"; "938 N.W.2d 1 18" is 938 N.W.2d 118; "Minn-Kata" is Minn-Kota; "of\"good cause\"" gets its space; "project­specific" soft hyphen is a plain hyphen. The proposed list (a)-(d) under paragraph 15 is typed as four paragraphs.
 case_number: "20260059"
 court_lines: ["IN THE SUPREME COURT", "STATE OF NORTH DAKOTA"]
@@ -76,13 +77,13 @@ authorities:
 
 \[¶15\] The resulting sequence is:
 
-(a) Appellants cannot challenge the CPCN because they did not participate before it was issued;
+\(a) Appellants cannot challenge the CPCN because they did not participate before it was issued;
 
-(b) their nonparticipation does not establish good cause for intervention because publication notice was sufficient;
+\(b) their nonparticipation does not establish good cause for intervention because publication notice was sufficient;
 
-(c) whether Chapter 49-22 governed and required materially different procedures need not be decided; and
+\(c) whether Chapter 49-22 governed and required materially different procedures need not be decided; and
 
-(d) because that question is not decided, the absence of participation is attributed to Appellants rather than examined as the possible consequence of the PSC's use of the wrong statutory procedure.
+\(d) because that question is not decided, the absence of participation is attributed to Appellants rather than examined as the possible consequence of the PSC's use of the wrong statutory procedure.
 
 \[¶16\] That is the procedural catch-22. Appellants were denied review for failing to participate, without the Court deciding whether the process selected by the PSC deprived them of the notice and meaningful opportunity necessary to participate.
 

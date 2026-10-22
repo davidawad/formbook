@@ -1,0 +1,72 @@
+# North Dakota Supreme Court (nd): petition for rehearing (petition-for-rehearing). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to N.D.R.App.P. 28 and 32 (../../rules.md, ND-*); lengths in points. No case text here: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # ND-FORM-004: 12 point or larger (Rule 32(a)(5))
+pitch:
+  body: 27.6              # ND-FORM-005: text double-spaced (Word's double, 2 x 1.15 x 12 pt), footnotes too
+  single: 13.8            # ND-FORM-005: headings and quotations may be single-spaced (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 108, right: 72}   # ND-FORM-002: 1.5 in at the left, 1 in on all other sides
+indent: 36
+page_number: {align: center, from: 1}   # ND-FORM-003: bottom center, numbering begins on the cover page with 1
+footnote: {size: 12, pitch: body, gap: 7}   # ND-FORM-005: footnotes double-spaced in the same typeface (and size)
+quote: {left: 36, right: 36, above: 7.2, below: 12, gap: 13.8}   # ND-FORM-005: quotations single-spaced and indented, a line between paragraphs
+# ND-FORM-011 (exemplars): sections centred, bold capitals; points bold; sub-points bold italic; the fourth level
+# bold, half an inch in. Headings carry their own numbering, as typed.
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 12}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, left: 36, hang: 36, above: 12, below: 9.6}
+# ND-COVER-001 (Rule 32(a)(2)(A)-(F)): the court, the case numbers, the title of the case, the nature of the
+# proceeding and the court below between rules, the title of the brief and counsel; ND-COVER-002 (Rule 28(h)):
+# "ORAL ARGUMENT REQUESTED" when asked for.
+cover:
+  - {text: "{court_lines}", align: center, bold: true}
+  - {text: "{number_lines}", align: center, bold: true, above: 13.8}
+  - each: caption
+    above: 13.8
+    between:
+      - {text: "v.", align: center, above: 13.8}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, above: 13.8, below: 13.8}
+  - when: proceeding
+    blocks:
+      - {rule: 0.5, above: 13.8}
+      - {text: "{proceeding}", align: center, above: 13.8}
+      - {text: "{judge}", align: center, optional: true}
+      - {rule: 0.5, above: 13.8}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 28.8}
+  - {text: "{subtitle}", align: center, bold: true, optional: true}
+  - when: oral_argument
+    blocks:
+      - {text: "ORAL ARGUMENT REQUESTED", align: center, bold: true, above: 13.8}
+  - columns: {each: counsel, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 12
+    above: 28.8
+# ND-CONT-001 (Rule 28(b)(1), (2)): the table of contents and the table of authorities, each from a new page; page
+# references (ND-FORM-012).
+contents: {title: "Table of Contents", depth: 4, col: 36, hang: 0, step: 18, above: 8.4}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 8.4
+  group: {bold: true, above: 13.2, below: 4.8}
+# After the conclusion: the date, then the two co-counsel blocks side by side (the first counsel's lines, the
+# signer's "/s/" and lines), as the exemplar; never split.
+closing:
+  - when: signature
+    blocks:
+      - group:
+          - {text: "{date}", optional: true}
+          - columns:
+              - blocks:
+                  - {text: "{signature.firm}"}
+              - blocks:
+                  - {text: "/s/ {signature.signer}", underline: true}
+                  - {text: "{signature.lines}"}
+            gutter: 12
+            above: 9.6
+        above: 28.8

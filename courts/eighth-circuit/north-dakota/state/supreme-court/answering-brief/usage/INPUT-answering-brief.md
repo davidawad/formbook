@@ -1,6 +1,7 @@
 ---
 # Transcription of FILED-EXAMPLE-answering-brief.pdf (Brief of Appellee North Dakota Public Service Commission, No. 20260059), 19 pages. Cover, table of contents and table of authorities are generated.
 # Paragraph markers: the text layer garbles "[¶N]" (e.g. "[,-r4]", "[ill3 ]"); they run in sequence 1 to 29 and are typed as "[¶N]". Other certain text-layer garbles corrected: "¶" shown as ",-i", ",r", "1" or "il" before pinpoint numbers; "Woriforce" = Workforce; "OtterTail" = Otter Tail; "ND." = N.D.; "ofTransp." = of Transp.; "28-32-3 9" = 28-32-39; "4903-01" = 49-03-01; "49-03-01.l" = 49-03-01.1; "Bank o/Rhame" = Bank of Rhame; "Rl" = R1; "(R 80)" spacing.
+# The numbered subsections of the quoted N.D.A.C. rule (two paragraphs of one quotation) are typed "1\." and "2\.": paragraphs of the quotation, as the shared model sets a quotation (fb-595.54.52).
 case_number: "20260059"
 court_lines: ["IN THE SUPREME COURT", "STATE OF NORTH DAKOTA"]
 number_lines: ["Supreme Court No. 20260059", "Dist. Ct. No. 08-2025-CV-0268", "South Central Judicial District"]
@@ -122,9 +123,9 @@ N.D.C.C. § 28-32-46; *Voigt v. N.D. Public Serv. Comm'n*, 2017 ND 76, ¶ 8, 892
 
 > Any person with a substantial interest in a proceeding may petition to intervene in that proceeding by complying with this section. An intervention may be granted if the petitioner has a statutory right to be a party to the proceeding; or the petitioner has a legal interest which may be substantially affected by the proceeding, and the intervention would not unduly broaden the issues or delay the proceeding. The commission may impose conditions and limitations on an intervention to promote the interests of justice.
 >
-> 1. Contents of petition to intervene. A petition to intervene must be in writing and must set forth the grounds for intervention, the position and interest of the petitioner in the proceeding, what the petitioner would contribute to the hearing, and whether the petitioner's position is in support of or in opposition to the relief sought.
+> 1\. Contents of petition to intervene. A petition to intervene must be in writing and must set forth the grounds for intervention, the position and interest of the petitioner in the proceeding, what the petitioner would contribute to the hearing, and whether the petitioner's position is in support of or in opposition to the relief sought.
 >
-> 2. When filed. A petition to intervene in any proceeding must be filed at least ten days prior to the hearing, but not after except for good cause shown.
+> 2\. When filed. A petition to intervene in any proceeding must be filed at least ten days prior to the hearing, but not after except for good cause shown.
 
 N.D. Admin. Code 69-02-02-05 (emphasis added).
 

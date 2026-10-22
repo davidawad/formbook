@@ -1,3 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 # N.D.R.App.P. 32(a)(8)(A) (effective 4/1/2024): "a reply brief may not exceed 12 pages, excluding any addendum."
 params:
+  cross_engine: gate
   page_limit: 12

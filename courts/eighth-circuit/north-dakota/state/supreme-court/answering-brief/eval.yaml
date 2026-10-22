@@ -1,3 +1,7 @@
+# Gate 4 CROSS-ENGINE: report only. The latex and docx engines are generated from typst/layout.yaml (`fb engines gen`,
+# fb-595.54.12) but do not yet break every line where typst does, for want of a shared-model fix recorded in
+# docs/open-items/fb-595.54.52.md.
 # N.D.R.App.P. 32(a)(8)(A) (effective 4/1/2024): "A principal brief may not exceed 38 pages, ... excluding any addendum."
 params:
+  cross_engine: report
   page_limit: 38
