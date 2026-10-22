@@ -1,0 +1,83 @@
+# New Mexico Supreme Court (nm): motion. The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to NMRA 12-305 (../rules.md, NM-*); lengths in points. No case text here: every string printed comes from
+# the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # NM-FONT-001: proportionally spaced, 14 point or larger, footnotes included
+pitch:
+  body: 32.2              # NM-SPACE-001: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # NM-SPACE-001: cover, tables, headings, footnotes, quotations, signature single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NMRA 12-305(B)(2): one inch on all sides
+indent: 36
+page_number: {align: center, from: 1}   # NM-FORM-002: every page numbered at the bottom, the cover page 1 (as the filed motion)
+footnote: {size: 14, gap: 7}             # NM-FONT-001, NM-SPACE-001: 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # NM-SPACE-001: quotations single spaced, indented
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}   # sections
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}                     # point headings
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}         # sub-points
+  - {bold: true, hang: 36, above: 14, below: 11.2}
+  - {italic: true, hang: 36, above: 14, below: 11.2}
+# The cover (NMRA 12-305(F), (G); NM-COVER-*): the court, the parties beside the docket number, the free lines under
+# the caption (the proceeding, an oral-argument request), the county and judge, counsel two to a row (name, address,
+# telephone), the title between rules. The cover is 14 point (NM-FONT-003 allows 11 point only when needed to fit).
+# A motion has no tables: the cover is the top of the document (`front`), the motion starts on the next page. (`cover`
+# is set by the docx engine only before tables: docs/open-items/fb-595.54.29.md.)
+front:
+  - {text: "SUPREME COURT OF THE STATE OF NEW MEXICO", align: center, bold: true}   # NM-CAPTION: the court's name
+  - columns:
+      - blocks:
+          - each: parties
+            blocks:
+              - {text: "{designation}", italic: true, optional: true, above: 11.2}
+              - {text: "{names}", optional: true}
+      - width: 158.4
+        blocks:
+          - {text: "No. {case_number}", above: 11.2}
+    gutter: 21.6
+  - when: cover_lines
+    blocks:
+      - {text: "{cover_lines}", align: center, above: 11.2}
+  - when: lower_court
+    blocks:
+      - {text: "{lower_court}", above: 11.2}
+  - columns:
+      each: counsel
+      per_row: 2
+      row_gap: 11.2
+      blocks:
+        - {text: "{heading}", italic: true, optional: true}
+        - {text: "{lines}"}
+    gutter: 21.6
+    above: 11.2
+  - {rule: 0.75, above: 5.6}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 11.2, below: 11.2}
+  - {rule: 0.75}
+  - {break: true}
+# The date line and the signature block (NMRA 12-305(B)(5): counsel's name, address and telephone), never split;
+# then, each on a page of its own, the certificate of compliance (NM-CERT-003) and the certificate of service
+# (NM-CERT-002), in the body's form, the service addresses single spaced.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, optional: true}
+      - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 5.6}
+      - {text: "{signature.lines}", left: 230.4}
+      - {text: "{signature.role}", bold: true, left: 230.4, optional: true}
+    above: 21.6
+  - when: compliance
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Compliance with Rule 12-318(F), NMRA", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{compliance.statement}", pitch: body, indent: 36}
+      - when: compliance.signature
+        blocks:
+          - {text: "s/ {compliance.signature.signer}", underline: true, left: 230.4, above: 5.6}
+          - {text: "{compliance.signature.lines}", left: 230.4, optional: true}
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - when: service.signature
+        blocks:
+          - {text: "s/ {service.signature.signer}", underline: true, left: 230.4, above: 5.6}
+          - {text: "{service.signature.lines}", left: 230.4, optional: true}
