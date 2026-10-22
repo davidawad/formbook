@@ -1,0 +1,15 @@
+# Tenn. Sup. Ct. R. 46 3.02.3(b): 14-point font size; 3.02.3(c): footnotes in the same size as the text (TENN-FORM-005).
+font:
+  size_pt: 14
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12).
+# Not gated (docs/open-items/fb-595.54.54.md), every page counted alike:
+# - latex: p17 a URL in a note ("https://www.commercialappeal.com/story/" / "news/local/…") breaks at other pieces than in typst; p17-18 page ends follow.
+# - docx: p1 the cover's proceeding line and p2 contents rows, then body lines: lines LibreOffice's Schola advances fit (the line-fit tolerance); page ends from p8 differ.
+params:
+  cross_engine: report
+  # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,
+  # whose 16.8 pt line box starts at the 1 in margin, measures its box 3.99 pt into the margin on docx (box top
+  # 68.01 pt; typst 75.12 pt), as in the California courts of appeal motion brief and the Georgia Supreme Court's
+  # Schola folders. The vertical tolerance covers that box, not text: Gate 4 puts the engines on the same baselines.
+  eps_v_pt: 4

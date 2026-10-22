@@ -1,0 +1,107 @@
+# Tennessee Supreme Court (tenn): application for permission to appeal, Tenn. R. App. P. 11 and 30. The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to Tenn. Sup. Ct. R. 46 § 3.02 and Tenn. R. App. P. 20, 27 and 30
+# (../../rules.md, TENN-*); lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant (the certificates' form text).
+size: 14                  # TENN-FORM-005 (R. 46 § 3.02.3(b)): 14-point
+pitch:
+  body: 25.2              # TENN-FORM-002 (§ 3.02.2(a)): 1.5 line spacing (1.5 x Schola's single line, 1.2 x 14 pt)
+  single: 16.8            # cover, caption, counsel block, tables: single spaced (tier 2, TENN-FORM-002)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # TENN-FORM-003 (§ 3.02.2(b)): 1 inch on all sides
+indent: 36
+justify: true             # TENN-FORM-006 (§ 3.02.4): fully justified
+page_number: {align: center, from: 2}   # TENN-FORM-007 (§ 3.02.5): the cover is page 1, its number suppressed; numbers at the bottom
+footnote: {size: 14, pitch: 25.2, gap: 7}   # TENN-FORM-005 (§ 3.02.3(c)): notes in the face and size of the text; TENN-FORM-002: 1.5 spaced
+quote: {left: 36, right: 36, above: 11.2, below: 11.2, pitch: 25.2}   # TENN-FORM-002: quotations 1.5 spaced too (Rule 46 has no exception)
+# Sections bold capitals, centered; the argument's points numbered by the template, I., A., 1., a. (the label in a
+# half-inch box, the title's later lines under the title), bold, the lower two bold italic; headings 1.5 spaced.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 16.8, below: 8.4}
+  - {bold: true, number: "I.", label_box: 36, pitch: body, above: 11.2, below: 5.6}
+  - {bold: true, number: "A.", label_box: 36, left: 36, pitch: body, above: 11.2, below: 5.6}
+  - {bold: true, italic: true, number: "1.", label_box: 36, left: 72, pitch: body, above: 11.2, below: 5.6}
+  - {bold: true, italic: true, number: "a.", label_box: 36, left: 108, pitch: body, above: 11.2, below: 5.6}
+# TENN-COV-001 (Tenn. R. App. P. 30(b)): the court, the case number beside the title of the case with each party's
+# status, the nature of the proceeding and the court below, the title of the document, counsel's name and address.
+# Single spaced; the space between its parts is what gives, so the cover holds on its one page (page 1).
+cover:
+  - {text: "{court_lines}", align: center}
+  - {fill: 1}
+  - columns:
+      - width: 216
+        blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 57.6, above: 5.6, below: 5.6}
+            blocks:
+              - {each: names, blocks: [{text: "{.}", above: 8.4}]}
+              - {text: "{designation}", left: 57.6, above: 8.4}
+      - width: 244.8
+        valign: top
+        blocks:
+          - {text: "{case_number}", above: 8.4}
+    gutter: 7.2
+  - {fill: 1}
+  - {text: "{proceeding}", align: center, optional: true}
+  - {text: "{trial_court}", align: center, optional: true}
+  - {fill: 1.6}
+  - {text: "{brief_title}", align: center, bold: true, upper: true}
+  - {fill: 1.6}
+  - each: counsel
+    blocks:
+      - {text: "{names}", left: 234, above: 7}
+      - {text: "{lines}", left: 234, optional: true}
+  - {text: "{counsel_for}", italic: true, left: 234, above: 14}
+# Tenn. R. App. P. 27(a)(1), (2): the table of contents (the body's headings) and the table of authorities, by kind.
+contents: {title: "Table of Contents", depth: 5, col: 36, step: 36, above: 7}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 25
+  above: 9.8
+  passim: 7
+  page_heading: "Page(s)"
+  group: {bold: true, above: 16.8, below: 2.8}
+  kinds:
+    - {kind: case, title: "Cases:", italic: true}
+    - {kind: constitution, title: "Constitutional Provisions:"}
+    - {kind: statute, title: "Statutes:"}
+    - {kind: regulation, title: "Regulations:"}
+    - {kind: rule, title: "Rules:"}
+    - {kind: other, title: "Other Authorities:"}
+# TENN-LEN-004 (Tenn. R. App. P. 11(b), 30(e)(1)): 15,000 words; the certificate states the count of the
+# body (the cover, tables, certificates and signature block are not in it).
+words: {limit: 15000}
+# TENN-ELEC-001 (R. 46 § 3.04(a)): the signature block, kept with the brief's last paragraph; the certificate of
+# service (TENN-SVC-002, Tenn. R. App. P. 20(e)) and of compliance (TENN-FORM-011, R. 46 § 3.02.7(c)), each on a page
+# of its own.
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "Respectfully submitted,", pitch: body}
+      - {text: "/s/ {signature.signer}", pitch: body, above: 8.4}
+      - {text: "{signature.lines}", pitch: body}
+      - {text: "{signature.role}", italic: true, pitch: body, above: 5.6}
+    above: 16.8
+  - {break: true}
+  - {text: "Certificate of Service", align: center, bold: true, upper: true, pitch: body, keep: true, below: 8.4}
+  - {text: "I hereby certify that a true and exact copy of the foregoing *{brief_title}* was served {service.method} on the {service.date}, to the following:", pitch: body}
+  - each: service.served
+    blocks:
+      - group:
+          - {text: "{name}", left: 36, pitch: body}
+          - {text: "{address}", left: 36, pitch: body}
+        above: 8.4
+  - group:
+      - {text: "/s/ {service.declarant}", left: 234, pitch: body}
+      - {text: "{service.declarant_lines}", left: 234, pitch: body}
+    above: 19.6
+  - {break: true}
+  - {text: "Certificate of Compliance", align: center, bold: true, upper: true, pitch: body, keep: true, below: 8.4}
+  - {text: "In accordance with Tenn. Sup. Ct. R. 46, § 3.02, the total number of words in this brief, excluding the cover page, Table of Contents, Table of Authorities, Certificate of Compliance, attorney signature block and Certificate of Service, is {xd.words}. This word count is based upon the word processing system used to prepare this brief. The limit under Tenn. R. App. P. 30(e) and Tenn. Sup. Ct. R. 46, § 3.02.1 is 15,000 words.", pitch: body}
+  - group:
+      - {text: "Respectfully submitted,", pitch: body}
+      - {text: "/s/ {signature.signer}", pitch: body, above: 8.4}
+      - {text: "{signature.lines}", pitch: body}
+      - {text: "{signature.role}", italic: true, pitch: body, above: 5.6}
+    above: 16.8
