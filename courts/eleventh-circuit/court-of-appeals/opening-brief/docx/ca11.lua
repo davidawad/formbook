@@ -1,13 +1,15 @@
 -- ca11.lua (docx engine): the ca11 opening brief as Word paragraphs and sections (typst: ca11-opening-brief.typ).
--- pandoc writes the body text with docx/reference.docx; this filter writes what Word needs formatting for:
+-- pandoc writes the body text with the reference document fb render builds from docx/reference.xml; this filter
+-- writes what Word needs formatting for:
 --   * the cover, the Certificate of Interested Persons, the statement on oral argument, the tables, the certificates
 --     and the signature blocks, as paragraphs with explicit spacing, indents and tabs;
 --   * the heading labels (I., A., 1., a., (1)) and the outline level of each heading;
---   * the table of contents and the table of citations: their entries and page numbers. render.sh renders the
---     document once, finds the page of every heading and citation in the PDF (the needles this filter writes),
---     and renders again with those pages (the pages file this filter reads);
+--   * the table of contents and the table of citations: their entries and page numbers. fb render renders the
+--     document once, finds the page of every heading and citation in the PDF (the needles this filter writes,
+--     tools/fb/src/docxpages.rs), and renders again with those pages (the pages file this filter reads);
 --   * the sections whose footers number the pages: cover (none), Certificate of Interested Persons (C-1 ...),
---     front matter (i, ii ...), body and certificates (1 ...). render.sh adds the footers.
+--     front matter (i, ii ...), body and certificates (1 ...). fb render adds the
+--     footers this filter lists.
 -- Word may paginate slightly differently from the LibreOffice PDF the page numbers come from (docs/DOCX.md).
 --
 -- Cross-engine layout (docs/EVAL-LOOP.md, "Cross-engine gate"): every line and page breaks where the typst render
@@ -99,15 +101,18 @@ local function roman(n)
   return out
 end
 
--- Letters and digits only, lower case: render.sh normalizes the PDF text the same way.
+-- Letters and digits only, lower case: fb render normalizes the PDF text the same way.
 local function norm(s)
   return (s:lower():gsub("[^a-z0-9]", ""))
 end
 
-local needles = {} -- { id, kind, needle } in document order
-local function need(id, kind, text, short)
+local needles = {} -- { id, kind, needle, short, at }: `at` is the needle's place in the document (write_needles)
+local function need(id, kind, text, short, at)
   local n = norm(text):sub(1, NEEDLE_MAX)
-  if n ~= "" then needles[#needles + 1] = { id = id, kind = kind, needle = n, short = short and norm(short):sub(1, NEEDLE_MAX) or "" } end
+  if n ~= "" then
+    needles[#needles + 1] = { id = id, kind = kind, needle = n, short = short and norm(short):sub(1, NEEDLE_MAX) or "",
+      at = at, seq = #needles + 1 }
+  end
 end
 
 -- The pages of the first pass: id -> { page, label }. Absent on the first pass itself.
@@ -130,13 +135,49 @@ local function label_of(id)
   return "00" -- the first pass: a placeholder of the final width
 end
 
-local function write_needles()
+-- The needles for fb render (tools/fb/src/docxpages.rs), in document order (fb finds each after the one before it),
+-- and the sections that number the pages: `sections` is a list of { needle id, lower-roman|decimal, prefix }.
+local function write_needles(sections)
   local path = os.getenv("FORMBOOK_NEEDLES")
   if not path then return end
+  table.sort(needles, function(a, b)
+    if a.at ~= b.at then return a.at < b.at end
+    return a.seq < b.seq
+  end)
   local f = assert(io.open(path, "w"))
   for _, n in ipairs(needles) do
     f:write(n.id, "\t", n.kind, "\t", n.needle, "\t", n.short, "\n")
   end
+  for _, s in ipairs(sections) do
+    f:write("#section\t", s[1], "\t", s[2], "\t", s[3] or "", "\n")
+  end
+  f:close()
+end
+
+-- The footers the sections name (centered in a 20 pt line: the cover's empty, the others the page number, "C-" before it
+-- in the Certificate of Interested Persons) and the
+-- last section (the certificates: the page number of the recipe's footer, continuing the body's numbers), for fb
+-- render's $FORMBOOK_FOOTERS and $FORMBOOK_FINAL.
+local PAGE = '<w:r><w:fldChar w:fldCharType="begin" /></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r>'
+  .. '<w:r><w:fldChar w:fldCharType="separate" /></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end" /></w:r>'
+local function write_footers()
+  local path, final = os.getenv("FORMBOOK_FOOTERS"), os.getenv("FORMBOOK_FINAL")
+  if not path or not final then return end
+  local function footer(runs_xml)
+    return '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="' .. SINGLE .. '" w:lineRule="exact" />'
+      .. '<w:jc w:val="center" /></w:pPr>' .. runs_xml .. '</w:p>'
+  end
+  local f = assert(io.open(path, "w"))
+  f:write("rIdFtrCover\t", footer(""), "\n")
+  f:write("rIdFtrCip\t", footer('<w:r><w:t xml:space="preserve">C-</w:t></w:r>' .. PAGE), "\n")
+  f:write("rIdFtrFront\t", footer(PAGE), "\n")
+  f:write("rIdFtrBody\t", footer(PAGE), "\n")
+  f:write("rIdFtrEnd\t", '<w:p><w:pPr><w:jc w:val="center" /></w:pPr>' .. PAGE .. '</w:p>', "\n")
+  f:close()
+  f = assert(io.open(final, "w"))
+  f:write('<w:sectPr><w:footerReference w:type="default" r:id="rIdFtrEnd"/><w:pgSz w:w="12240" w:h="15840"/>'
+    .. '<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="608" '
+    .. 'w:gutter="0"/></w:sectPr>')
   f:close()
 end
 
@@ -406,7 +447,7 @@ function Pandoc(doc)
     end
   end
 
-  -- Every citation in document order, as a needle for the page lookup of render.sh: the link text and the words
+  -- Every citation in document order, as a needle for the page lookup of fb render: the link text and the words
   -- after it in its paragraph (up to a footnote, a quotation or another link), so that the same words elsewhere in
   -- the brief, unlinked, are not taken for it; its first words alone are the fallback. Kind T (body) moves the search
   -- on; N (in a footnote) is searched from the page the body has reached.
@@ -442,6 +483,18 @@ function Pandoc(doc)
   end
   scan_blocks(doc.blocks, "T")
 
+  -- Where each needle sits: the top-level block of every citation (in the order the walk below meets them), of every
+  -- heading and of the first paragraph; a needle's place is its block, then its order in it (the heading first).
+  local cite_at, head_at, para_at = {}, {}, nil
+  for i, b in ipairs(doc.blocks) do
+    if b.t == "Header" then head_at[#head_at + 1] = i end
+    if b.t == "Para" and para_at == nil then para_at = i end
+    pandoc.Blocks({ b }):walk({ Link = function(el)
+      if el.target:match("^toa%*?:") then cite_at[#cite_at + 1] = i end
+    end })
+  end
+  local function place(block, k) return block * 100000 + k end
+
   -- The body, walked in order: citations (their needles), headings (labels, outline, needles, table entries).
   local walked = pandoc.Pandoc(doc.blocks, meta):walk({
     Link = function(el)
@@ -449,7 +502,7 @@ function Pandoc(doc)
       if key == nil then return nil end
       occurrences[#occurrences + 1] = { key = key, primary = star == "*", index = #occurrences + 1 }
       local c = cites[#occurrences]
-      need("T:" .. #occurrences, c.kind, c.text, c.short)
+      need("T:" .. #occurrences, c.kind, c.text, c.short, place(cite_at[#occurrences], #occurrences))
       return el.content
     end,
   })
@@ -472,7 +525,7 @@ function Pandoc(doc)
       local lab = b.level == 1 and "" or label(b.level, counts[b.level], in_arg)
       h_n = h_n + 1
       local id = "H:" .. h_n
-      need(id, "H", lab .. stringify(b.content))   -- its label and title, at the start of a line
+      need(id, "H", lab .. stringify(b.content), nil, place(head_at[h_n], 0))   -- its label and title
       if b.level <= TOC_DEPTH then
         local arg_point = in_arg and b.level == 2
         headings[#headings + 1] = { id = id, level = b.level, label = b.level > 1 and lab or nil,
@@ -491,15 +544,16 @@ function Pandoc(doc)
   if last and last.t == "Para" and not has_note(last) then
     body[#body] = raw(para({ KEEP, spacing(0, 0, DOUBLE), ind(0, nil, TAB) }, inl(last.content, {})))
   end
-  need("S:cip", "S", "Certificate of Interested Persons and Corporate Disclosure Statement")
-  need("S:oral", "S", "Statement Regarding Oral Argument")
-  need("S:toc", "S", "Table of Contents")
+  need("S:cip", "S", "Certificate of Interested Persons and Corporate Disclosure Statement", nil, -4)
+  need("S:oral", "S", "Statement Regarding Oral Argument", nil, -3)
+  need("S:toc", "S", "Table of Contents", nil, -2)
   local toa, toa_first = toa_rows(authorities)
-  need("S:toa", "S", toa_first or "")
-  need("S:body", "S", (first_para or ""):sub(1, NEEDLE_MAX))
-  need("H:cert-c", "H", "Certificate of Compliance")
-  if meta.service_list then need("H:cert-s", "H", "Certificate of Service") end
-  write_needles()
+  need("S:toa", "S", toa_first or "", nil, -1)
+  need("S:body", "S", (first_para or ""):sub(1, NEEDLE_MAX), nil, place(para_at or 0, 0))
+  need("H:cert-c", "H", "Certificate of Compliance", nil, place(#doc.blocks + 1, 1))
+  if meta.service_list then need("H:cert-s", "H", "Certificate of Service", nil, place(#doc.blocks + 1, 2)) end
+  write_needles({ { "S:cip", "decimal", "C-" }, { "S:oral", "lower-roman" }, { "S:body", "decimal" } })
+  write_footers()
 
   local out = {}
   local function add(x) out[#out + 1] = x end

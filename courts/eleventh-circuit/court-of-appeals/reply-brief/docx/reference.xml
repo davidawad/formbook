@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The 11th Cir. brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template (Times New Roman, CA11-FORM-003) at 14 pt everywhere (size
+     28 half points); Body Text and List Item in 31.4 pt line boxes (typst pitch-double, 11th Cir. R. 32-3) with a
+     half-inch indent; block quotations (14 pt above and below) and footnotes (14 pt, 7 pt apart) in 20 pt boxes
+     (typst pitch-single); letter page with 1-inch margins. The cover, headings, tables and certificates are written
+     by docx/ca11.lua as paragraphs with their own spacing; it also names the sections' footers and writes the last
+     section (fb render adds them). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="628" single="400" indent="720" list="720" heading="400" quote="280" note="400" note-size="28" note-after="140" footer="608"/>
