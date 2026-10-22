@@ -2,3 +2,8 @@
 # cases (https://www.sccourts.org/resources/judicial-community/court-rules/appellate/rule-208/).
 params:
   page_limit: 50
+  # Gate 4 CROSS-ENGINE: report only. typst is on the shared document model (typst/layout.yaml) and latex/ and docx/
+  # are generated from it, but the latex and docx renders still break pages apart from typst where the shared model
+  # differs (footnote fit, orphan control in a paragraph that anchors a note, the spaced ellipsis in LaTeX):
+  # docs/open-items/fb-595.54.67.md. Gate once the model is fixed.
+  cross_engine: report

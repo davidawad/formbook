@@ -2,3 +2,7 @@
 # cases (https://www.sccourts.org/resources/judicial-community/court-rules/appellate/rule-208/).
 params:
   page_limit: 50
+  # Gate 4 CROSS-ENGINE: report only. The typst template is on the shared document model (typst/layout.yaml), but the
+  # sample's body holds a markdown table, which lib/pandoc/xdoc.lua does not set yet: no latex/ or docx/ engine is
+  # generated until it does (docs/open-items/fb-595.54.67.md, shared-model requests).
+  cross_engine: report
