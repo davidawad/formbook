@@ -1,0 +1,28 @@
+# Texas Judicial Panel on Multidistrict Litigation (texjpml): amicus curiae letter brief. The whole layout, as data for
+# the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to ../../rules.md (TEXJPML-*: TRAP 9.4 applied by convention); lengths in points. A
+# letter, not a bound brief (TEXJPML-AMI-001): no cover, contents or index. No case text here: every string printed
+# comes from the sample's frontmatter ({field}).
+size: 14                  # TEXJPML-FORM-006: 14-point for all text
+pitch:
+  body: 32.2              # TEXJPML-FORM-003: double-spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # date, addressee, salutation, headings, signatures: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # TEXJPML-FORM-002: at least one inch on all sides
+indent: 36
+page_number: {align: center, from: 1}   # TEXJPML-FORM-005: centred in the bottom margin, arabic from the first page
+footnote: {size: 12, pitch: 13.8, gap: 7}   # TEXJPML-FORM-003, -006: footnotes 12-point, single-spaced (1.15 x 12 pt)
+quote: {left: 36, right: 36, above: 16.8, below: 16.8}   # TEXJPML-FORM-003: block quotations single-spaced
+# The letter's headings ("TO THE TEXAS MDL PANEL"): centred, bold, single-spaced.
+heading:
+  - {align: center, bold: true, above: 8.4, below: 8.4}
+  - {align: center, bold: true, above: 8.4, below: 8.4}
+# TEXJPML-AMI-001: the date, the addressee (the Clerk) and the salutation open the letter, single-spaced.
+front:
+  - {text: "{date}", optional: true, below: 14}
+  - {text: "{addressee}", above: 14, below: 14}
+  - {text: "{salutation}", optional: true, above: 14, below: 14}
+# The signatures of counsel side by side, single-spaced, never split.
+closing:
+  - columns: {each: signature, blocks: [{text: "{.}"}]}
+    gutter: 21.6
+    above: 16.8
