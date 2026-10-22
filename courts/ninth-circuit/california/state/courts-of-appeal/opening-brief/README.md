@@ -6,7 +6,7 @@ Doc type `opening-brief` for the California Courts of Appeal (`court.json` alias
 |---|---|
 | `usage/FILED-EXAMPLE-opening-brief.pdf` | Filed appellant's opening brief, Sixth District, 40 pages, text layer present. Source and filer in `usage/SOURCE.md`. |
 | `usage/INPUT-opening-brief.md` | Transcription of a portion of the exemplar (cover, tables, statements, part of the argument, conclusion, certificates). Frontmatter carries the cover, counsel, signature, service and authorities. |
-| `usage/OUTPUT-opening-brief.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/opening-brief usage/INPUT-opening-brief.md`. 14 pages, EB Garamond only. |
+| `usage/OUTPUT-opening-brief.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/opening-brief usage/INPUT-opening-brief.md`. 13 pages, Times New Roman only. `usage/OUTPUT-opening-brief.docx` and `.docx.pdf`: the docx engine (`docx/calctapp.lua`, `docx/reference.xml`), the same 13 pages line for line. |
 | `usage/OVERLAY-kirk-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/california/state/courts-of-appeal/opening-brief kirk-opening-brief`. Red = ours, blue = filed, black = both. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 | `typst/calctapp-opening-brief.typ` | The template: `calctapp-opening-brief(meta, md)`. Parameters at the top; each traces to a rule or is a style choice. |
@@ -17,9 +17,9 @@ Verified 2026-10-14 against the courts.ca.gov rule pages. The pages were read th
 
 | Requirement | Source | Value used in the template |
 |---|---|---|
-| Font style | Rule 8.74(b)(1) (https://courts.ca.gov/cms/rules/index/eight/rule8_74) | Quoted 2026-10-15: "The font style must be a proportionally spaced serif face. Century Schoolbook is preferred." The rule allows any proportional serif, so the face is not named. EB Garamond (`font-family`) stays; the exemplar is Garamond. Visual-only stand-in if Century is wanted: TeX Gyre Schola (not used). |
+| Font style | Rule 8.74(b)(1) (https://courts.ca.gov/cms/rules/index/eight/rule8_74) | Quoted 2026-10-15: "The font style must be a proportionally spaced serif face. Century Schoolbook is preferred." The rule allows any proportional serif, so the face is not named. Century Schoolbook is preferred, not required (rules.md CALCTAPP-FORM-002), so the house face, Times New Roman (`font-family`, 2026-10-22, fb-595.68.37; was EB Garamond, the one exemplar filer's face, tier 3). |
 | Font size | Rule 8.204(b)(4) (https://courts.ca.gov/cms/rules/index/eight/rule8_204); Rule 8.74(b)(1) | 13 pt, including footnotes (`type-size`). |
-| Line spacing | Rule 8.74(b)(2) | 1.5 spaced. Measured on the render: body baseline pitch 25.41 pt against 16.97 pt single spacing, which is 1.50 (`body-leading`). |
+| Line spacing | Rule 8.74(b)(2) | 1.5 spaced: body lines in 22.5 pt boxes (`pitch-body`), one and a half of the 15 pt single line (`pitch-single`, Word's 1.15 x 13 pt). (The EB Garamond template had set a 25.4 pt pitch, about double spacing.) |
 | Margins | Rule 8.204(b)(6); Rule 8.74(b)(3) | Left and right 1.5 in, top and bottom 1 in (`side-margin`, `top-margin`). |
 | Alignment | Rule 8.74(b)(4) | Left-aligned, not justified (`justify: false`). |
 | Page size | Rule 8.204(b)(1); Rule 8.74(a)(7) | US Letter. |
@@ -39,7 +39,7 @@ Rule numbers marked "as summarized" or "not fetched" are not confirmed against t
 ## Known conflicts and choices
 
 - **The exemplar does not follow the current margin rule.** The 2021 filing measures 1.0 in at the left (text edge at 72 pt) and about 1.1 in at the right. Rule 8.204(b)(6) as fetched today requires 1.5 in left and right, so the template follows the rule. The exemplar settles nothing about margins, because the rule leaves nothing open here. David should confirm the current margin text against the official rule before a PR cites it.
-- **Font.** Century Schoolbook is the preferred face under Rule 8.74(b)(1), not a required one; the rule allows any proportional serif. EB Garamond stays. `fonts/tex-gyre-schola/` (the Century Schoolbook substitute in `docs/FONTS.md`) is vendored and could be used if David decides the preference should win; that is a change to this template, not made here. The render is checked for the 13 pt size and the embedded font names (`pdffonts`: EB Garamond only).
+- **Font.** Century Schoolbook is the preferred face under Rule 8.74(b)(1), not a required one; the rule allows any proportional serif. Times New Roman, the house standard (2026-10-22); `fonts/tex-gyre-schola/` (the Century Schoolbook substitute in `docs/FONTS.md`) is vendored and could be used if David decides the preference should win. DEF-FONT-002 checks the embedded font names on both engines (Times New Roman only).
 - **Heading scheme.** Roman, A, 1, a is used both in the statements and in the argument, matching the exemplar's table of contents. The exemplar's point headings are bold and hang under the label, which the template does too.
 
 ## Gate 2: visual review of `usage/OUTPUT-opening-brief.typst.pdf`
@@ -87,15 +87,7 @@ A second Court of Appeal filing from a different filer, PDF with a text layer, w
 
 ## Engines
 
-Docx engine (`docx/`), built 2026-10-15. `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/calctapp.lua` writes the cover (from the frontmatter) and the signature block; pandoc writes the body. Set in `styles.xml` and `sectPr`, not rendered: EB Garamond 13 pt everywhere, footnotes included; body lines exact 508 twips (25.4 pt, the typst body pitch measured on `/work/artifacts/calctapp/opening-brief.pdf`); first-line indent 0.5 in; headings single-spaced, bold, black; block quotations single-spaced, indented 0.5 in each side; US Letter; 1.5 in left and right, 1 in top and bottom; centered footer PAGE field, none on the cover (`titlePg`). Not set: line numbers (the typst template sets none).
-
-Differs from typst: no table of contents or table of authorities (no fields, no page numbers); no certificate of word count and no proof of service; the cover is paragraphs, not the caption grid; the signature block is paragraphs, not a grid. The body pitch is the typst pitch, which measures about 1.95 times the 13 pt size; that is double spacing, not the 1.5 this README states for Rule 8.74(b)(2). Flagged for David to check, not changed here.
-
-BLOCKED (docx engine, `usage/OUTPUT-opening-brief.docx`):
-- `docx.pdf` gates 0-3: BLOCKED, reason: `soffice` is not installed on the build box, so `tools/render-docx.sh` stops at the conversion step and no `.docx.pdf` exists. Pages reviewed for docx: 0.
-- TOC: not generated (typst builds it with page numbers). Reason: no TOC/TOA filter yet.
-- TOA: not generated. Reason: no TOA filter yet; LibreOffice does not honor TA/TOA fields (docs/DOCX.md).
-- Certificate of word count and proof of service: not generated by `calctapp.lua`. Reason: not yet written.
+Both engines on the shared cross-engine layout model (2026-10-22, fb-595.68.37; `lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): Times New Roman 13 pt everywhere, footnotes included; body lines in exact 22.5 pt boxes (450 twips), single lines (cover, headings, quotations, footnotes, tables, signature, certificates) in 15 pt boxes (300 twips); every space between blocks explicit and the same in both. `docx/reference.xml` (`base="xengine"`, `{font}`) holds the styles; `docx/calctapp.lua` writes the whole document as typst does: the cover with the ruled caption, the table of contents and the table of authorities with page numbers from `fb render`'s needles, the heading labels, the block quotations, the signature block (kept with the last paragraph), the certificate of word count (the same count as typst: 2,158 words on the sample) and the proof of service; the one section numbers the pages from the cover, the cover's number not printed (`titlePg`). `docx/make-reference.sh` and `reference.docx` are gone. `eval.yaml`: `params.cross_engine: gate`; docx XENG-001..003 pass (338/338 lines, 13 = 13 pages). No latex engine in this folder.
 
 ## Verification pass 2026-10-16 (fb-595.26.16)
 
