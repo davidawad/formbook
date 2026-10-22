@@ -1,0 +1,74 @@
+# Court of Criminal Appeals of Oklahoma (oklacrimapp): motion and brief in support (motion-brief). The whole layout,
+# as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). The OCCA rules were not retrieved (../../rules.md): the numbers are the default
+# tier-1 set (data/checks-default.yaml: US letter, one-inch margins, at least 12 pt) and the form the filed motion
+# (usage/FILED-EXAMPLE-motion-brief.pdf, ../../rules.md EX-MOTION) sets. Lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # EX-MOTION: 13-point body text (above the 12-point default floor)
+pitch:
+  body: 29.9              # EX-MOTION: double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # cover, headings, contents, quotations, footnotes, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # default tier 1: one-inch margins
+indent: 36                # EX-MOTION: paragraphs indented half an inch
+page_number: {align: center, front: lower-roman}     # the cover unnumbered, the contents i, the motion 1, 2 ..
+footnote: {size: 12, gap: 7}                         # EX-MOTION: footnotes 12-point, single spaced
+quote: {left: 36, right: 36, above: 7.8, below: 13}  # EX-MOTION: block quotations single spaced, indented
+heading:
+  - {align: center, bold: true, above: 13, below: 7.8}
+  - {bold: true, hang: 36, above: 7.8, below: 5.2}
+  - {bold: true, italic: true, hang: 36, above: 5.2, below: 3.9}
+# The cover (EX-MOTION): the case number, the court, the parties beside a column of ")" and the docket number, the
+# title between rules, counsel two to a row and the party they act for.
+cover:
+  - {text: "{case_number}", align: center, bold: true}
+  - {text: "{court}", align: center, bold: true, above: 15.6}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", align: center, above: 15.6, below: 15.6}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 72, above: 5.2}
+      - width: 13
+        valign: center
+        blocks:
+          - {text: ")"}
+      - valign: center
+        blocks:
+          - {text: "{docket}"}
+    gutter: 7.8
+    above: 19.5
+  - {rule: 0.75, above: 19.5}
+  - {text: "{title}", align: center, bold: true, upper: true, above: 11.7}
+  - {text: "{filed_by}", align: center, optional: true, above: 7.8}
+  - {rule: 0.75, above: 11.7}
+  - columns: {each: counsel, per_row: 1, row_gap: 13, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 15.6
+    above: 15.6
+  - {text: "{attorneys_for}", align: center, bold: true, above: 15.6}
+# The contents, on its own page after the cover.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 18, step: 18, above: 9.1}
+# The date, the closing and the signature, never split; then the certificate of service (generated from the
+# frontmatter) on a page of its own, signed again.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "Respectfully submitted,", above: 10.4}
+      - {text: "/s/ {signature.signer}", above: 13}
+      - {text: "{signature.signer}", upper: true}
+      - {text: "{signature.lines}"}
+    above: 28.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true}
+      - {text: "{service.statement}", pitch: body, indent: 36, above: 7.8}
+      - columns: {each: service.served, per_row: 2, row_gap: 13, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+        gutter: 13
+        above: 10.4
+      - {text: "{service.note}", optional: true, pitch: body, indent: 36, above: 10.4}
+      - group:
+          - {text: "/s/ {signature.signer}"}
+          - {text: "{signature.signer}", upper: true}
+        above: 13
