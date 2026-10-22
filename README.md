@@ -435,7 +435,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, S.D. Indiana](courts/seventh-circuit/indiana/federal/bankruptcy-southern-district) | `insb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, N.D. Indiana](courts/seventh-circuit/indiana/federal/northern-district) | `innd` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, S.D. Indiana](courts/seventh-circuit/indiana/federal/southern-district) | `insd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Indiana Court of Appeals](courts/seventh-circuit/indiana/state/court-of-appeals) | `indctapp` | in progress | — | — | — | 29 |
+| [Indiana Court of Appeals](courts/seventh-circuit/indiana/state/court-of-appeals) | `indctapp` | up for review | 3/3 | — | — | 29 |
 | [Indiana Supreme Court](courts/seventh-circuit/indiana/state/supreme-court) | `ind` | up for review | 1/1 | — | — | 29 |
 
 ### Wisconsin
@@ -634,7 +634,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Oregon](courts/ninth-circuit/oregon/federal/bankruptcy-district) | `orb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Oregon](courts/ninth-circuit/oregon/federal/district) | `ord` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Oregon](courts/ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | up for review | 1/2 | — | — | 29 |
-| [Oregon Supreme Court](courts/ninth-circuit/oregon/state/supreme-court) | `or` | in progress | — | — | — | 29 |
+| [Oregon Supreme Court](courts/ninth-circuit/oregon/state/supreme-court) | `or` | up for review | 9/9 | — | — | 29 |
 
 ### Washington
 
@@ -817,13 +817,13 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 10 | 28 | 19.1% |
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 6 | 24 | 18.0% |
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 5 | 24 | 18.6% |
-| Seventh Circuit | 21 | 0 | 20 | 1 | 0 | 0.0% | 95.2% | 20 | 3 | 17 | 18.2% |
+| Seventh Circuit | 21 | 0 | 21 | 0 | 0 | 0.0% | 100.0% | 21 | 3 | 17 | 18.2% |
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 15 | 36 | 20.3% |
-| Ninth Circuit | 61 | 0 | 58 | 3 | 0 | 0.0% | 95.0% | 57 | 16 | 50 | 21.0% |
+| Ninth Circuit | 61 | 0 | 59 | 2 | 0 | 0.0% | 96.7% | 58 | 16 | 50 | 21.0% |
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 8 | 21 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 4 | 21 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 2 | 4 | 17.7% |
-| **Total** | 376 | 0 | 351 | 25 | 0 | 0.0% | 93.3% | 350 | 88 | 297 | 19.0% |
+| **Total** | 376 | 0 | 353 | 23 | 0 | 0.0% | 93.8% | 352 | 88 | 297 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -841,11 +841,11 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Fourth Circuit | 109 | 109 | 109 | 109 | 109 | 109 | 100.0% | 109 |
 | Fifth Circuit | 78 | 78 | 78 | 78 | 78 | 78 | 100.0% | 78 |
 | Sixth Circuit | 100 | 100 | 100 | 100 | 96 | 96 | 96.0% | 100 |
-| Seventh Circuit | 62 | 62 | 62 | 62 | 62 | 62 | 100.0% | 62 |
+| Seventh Circuit | 65 | 65 | 65 | 65 | 65 | 65 | 100.0% | 65 |
 | Eighth Circuit | 134 | 134 | 134 | 134 | 133 | 133 | 99.2% | 134 |
-| Ninth Circuit | 200 | 200 | 199 | 199 | 197 | 197 | 98.5% | 199 |
+| Ninth Circuit | 209 | 209 | 208 | 208 | 206 | 206 | 98.5% | 208 |
 | Tenth Circuit | 106 | 106 | 106 | 106 | 103 | 103 | 97.1% | 106 |
 | Eleventh Circuit | 129 | 129 | 129 | 129 | 128 | 128 | 99.2% | 129 |
 | D.C. Circuit | 14 | 14 | 14 | 14 | 14 | 14 | 100.0% | 14 |
-| **Total** | 1173 | 1173 | 1172 | 1172 | 1158 | 1158 | 98.7% | 1172 |
+| **Total** | 1185 | 1185 | 1184 | 1184 | 1170 | 1170 | 98.7% | 1184 |
 <!-- tracker:end -->
