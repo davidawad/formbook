@@ -8,19 +8,37 @@
 // to the motion, section II.A.2): the motion, then the brief in support, each with its own caption and
 // its own page numbers.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")   // MIWB-FORM-001: the rules name no face (LBR 9004(f): "typewritten in at least 12-point type"); Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // MIWB-FORM-001: the rules name no face (LBR 9004(f): "typewritten in at least 12-point type"); Times New Roman (vendored), the default per docs/FONTS.md
 #let type-size = 12pt                   // MIWB-FORM-001: at least 12-point type (LBR 9004(f))
-#let pitch = 27.6pt                     // MIWB-FORM-001: double-spaced; the filed exemplars measure 27.6 pt baseline to baseline
-#let body-leading = 1.645em             // gap between lines of body text; with Liberation Serif's 0.655em line box this gives the 27.6 pt baseline pitch at 12 pt
-#let single-leading = 0.495em         // caption, counsel, signature, footers: single-spaced (1.15em, 13.8 pt pitch)
+#let footer-size = 11pt                 // the page number
 #let page-margin = 1in                  // MIWB-FORM-011: letter paper; margins are a layout choice (the exemplars use 1 in)
 #let para-indent = 0.5in                // first-line indent of body paragraphs (exemplars: 0.5 in)
+#let label-box = 0.5in                  // a list letter's box (docx: the tab stop 0.5 in on)
 #let caption-left = 3.5in               // width of the left (party) column of the caption
-#let footer-size = 11pt
+#let caption-gutter = 0.25in            // caption: between the two columns
+#let rule-width = caption-left - 0.1in  // the "_____/" rule that ends a party block
+#let rule-drop = 1.3pt                  // the rule below the baseline (Times New Roman's underline position, Word's underlined tab)
+#let rule-stroke = 0.6pt                // its thickness (Times New Roman's underline thickness)
+#let name-indent = 0.5in                // caption: the debtor's names
+#let designation-indent = 1.2in         // caption: "Debtor.", "Plaintiff", "Defendants."
+#let sig-left = 2.9in                   // signature: the "Dated" column
+#let sig-gutter = 0.2in                 // signature: between the two columns
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; docx/miwb-motion-brief.lua sets the same twips,
+// 20 x pt).
+#let pitch-body = 27.6pt                // MIWB-FORM-001: double-spaced; the filed exemplars measure 27.6 pt baseline to baseline
+#let pitch-single = 13.8pt              // caption, signature, footer: single-spaced (half the body pitch)
+#let row-gap = 7.2pt                    // caption: the debtor row to the adversary row
+#let v-gap = 4.8pt                      // caption: above and below "v."
+#let note-gap = 4pt                     // between two footnotes
+#let note-clearance = 12pt              // the body text to the footnote rule
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -42,51 +60,71 @@
 /// Inline markdown (names with *et al.*, italic case names) as inline content.
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
-/// One single-spaced line per item.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => inl(i)))
+/// Inline content without the paragraph breaks cmarker may put around it (they may not occur inside a paragraph).
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
 }
 
-/// Underscored rule ending a party block, as on the filed exemplars: "_______/".
-#let slash-rule(width) = block(width: width, stack(dir: ltr, box(width: 1fr, repeat("_")), "/"))
+/// One single-spaced line (a paragraph of its own), with an explicit space above it.
+#let line-block(above: 0pt, left: 0pt, body) = block(width: 100%, above: above, below: 0pt, pad(left: left, body))
+
+/// The rule ending a party block, as on the filed exemplars ("_______/"): a ruled fill and a slash (docx: an
+/// underlined tab to a right tab stop, then the slash).
+#let slash-rule() = line-block(block(width: rule-width,
+  [#box(width: 1fr, height: 0pt, baseline: rule-drop, stroke: (bottom: rule-stroke))/]))
+
+/// Two columns, the gutter between them; one row, not split across pages (docx: a table row).
+#let two-cols(above, cols, left, right) = block(width: 100%, above: above, below: 0pt, breakable: false, grid(
+  columns: cols, left, [], right))
 
 // ---------------------------------------------------------------------------
-// Caption (Fed. R. Bankr. P. 7010 and Form 416A; LBR 9004(a), (b))
+// Caption (Fed. R. Bankr. P. 7010 and Form 416A; LBR 9004(a), (b)) and the description of the document
 // ---------------------------------------------------------------------------
 
-/// The court's title, as the court prints it on its own papers (MIWB-FORM-002).
-#let court-title() = {
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  align(center, text(weight: "bold", [UNITED STATES BANKRUPTCY COURT #linebreak() FOR THE WESTERN DISTRICT OF MICHIGAN]))
-}
-
-#let caption(meta) = {
+#let document-head(meta, title) = {
   let debtor = need(meta, "debtor")
   let plaintiff = need(meta, "plaintiff")
   let defendants = need(meta, "defendants")
   let case = need(meta, "case")
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  // Each column is a stack of single lines, so every line gets the same single spacing.
-  let names(list) = stack(dir: ttb, spacing: single-leading, ..list.map(n => inl(n)))
-  let gap = block(height: pitch * 0.5)
-  let rule = slash-rule(caption-left - 0.1in)
-  let case-lines = ([Case No. #inl(case.number)], [Chapter #inl(case.chapter)])
-  if "judge" in case and case.judge != none { case-lines.push(inl(case.judge)) }
-  grid(
-    columns: (caption-left, 1fr),
-    column-gutter: 0.25in,
-    row-gutter: 0.6em,
+  {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    // The court's title, as the court prints it on its own papers (MIWB-FORM-002).
+    line-block(align(center, strong[UNITED STATES BANKRUPTCY COURT]))
+    line-block(align(center, strong[FOR THE WESTERN DISTRICT OF MICHIGAN]))
+    let cols = (caption-left, caption-gutter, 1fr)
     // Row 1: the debtor, in re; the case number, and the chapter directly below it (LBR 9004(a)).
-    stack(dir: ttb, spacing: single-leading,
-      [In re:], gap, pad(left: 0.5in, names(debtor.names)), pad(left: 1.2in, inl(debtor.designation)), rule),
-    stack(dir: ttb, spacing: single-leading, ..case-lines),
+    let left = {
+      line-block[In re:]
+      for (i, n) in debtor.names.enumerate() {
+        line-block(above: if i == 0 { pitch-single } else { 0pt }, left: name-indent, inl(n))
+      }
+      line-block(left: designation-indent, inl(debtor.designation))
+      slash-rule()
+    }
+    let right = {
+      line-block[Case No. #inl(case.number)]
+      line-block[Chapter #inl(case.chapter)]
+      if "judge" in case and case.judge != none { line-block(inl(case.judge)) }
+    }
+    two-cols(pitch-body, cols, left, right)
     // Row 2: the adversary parties; the adversary proceeding number on the right.
-    stack(dir: ttb, spacing: single-leading,
-      names(plaintiff.names), pad(left: 1.2in, inl(plaintiff.designation)), block(height: 0.4em), [v.],
-      block(height: 0.4em), names(defendants.names), pad(left: 1.2in, inl(defendants.designation)), rule),
-    [Adv. Proc. No. #inl(need(meta, "adversary_number"))],
-  )
+    let left = {
+      for n in plaintiff.names { line-block(inl(n)) }
+      line-block(left: designation-indent, inl(plaintiff.designation))
+      line-block(above: v-gap)[v.]
+      for (i, n) in defendants.names.enumerate() { line-block(above: if i == 0 { v-gap } else { 0pt }, inl(n)) }
+      line-block(left: designation-indent, inl(defendants.designation))
+      slash-rule()
+    }
+    two-cols(row-gap, cols, left, line-block[Adv. Proc. No. #inl(need(meta, "adversary_number"))])
+  }
+  // LBR 9004(b): the description of the document, centered, on the body pitch, immediately before the body.
+  block(width: 100%, above: pitch-body, below: pitch-single, align(center, strong(upper(inl(title)))))
 }
 
 // ---------------------------------------------------------------------------
@@ -101,16 +139,38 @@
   "The petition commencing the underlying Chapter " + case.chapter + " case was filed on " + dates.petition + ". " + dates.later
 }
 
-/// One body paragraph with a first-line indent.
-#let para(t) = block(width: 100%, above: 0pt, below: body-leading, breakable: true, {
-  set par(leading: body-leading, first-line-indent: 0pt, justify: false)
-  h(para-indent)
-  cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+/// A body paragraph at the body pitch, its first line indented half an inch.
+#let body-par(content) = block(width: 100%, above: 0pt, below: 0pt,
+  par(first-line-indent: (amount: para-indent, all: true), unloose(content)))
+
+/// Headings, on the body pitch and kept with the block after them: "#" centred bold capitals, "##" bold, "###" bold
+/// italic, at the margin. Their numbers are typed by the author.
+#let heading-block(level, s) = block(width: 100%, above: 0pt, below: 0pt, sticky: true, {
+  set par(first-line-indent: 0pt)
+  if level == 1 { align(center, strong(upper(inl(s)))) }
+  else if level == 2 { strong(inl(s)) }
+  else { strong(emph(inl(s))) }
 })
 
-/// Markdown body as blocks. Footnote definitions ("[^key]: text") are inlined into each chunk that refers
-/// to them: cmarker renders one chunk at a time, so a reference and its definition must be together.
-/// `insert` is an optional statement placed right after the first paragraph (the LBR 9004(c) statement).
+/// A list, lettered a., b., ... (the court's sub-list style): the letter in a half-inch box half an inch in, the text
+/// hanging after it.
+#let lettered(c) = {
+  let items = ()
+  for l in c.split("\n") {
+    let m = l.match(regex("^\\s*(?:-|\\*|\\+|\\d+\\.)\\s+(.*)$"))
+    if m != none { items.push(m.captures.at(0)) } else if items.len() > 0 { items.at(-1) += " " + l.trim() }
+  }
+  for (i, it) in items.enumerate() {
+    block(width: 100%, above: 0pt, below: 0pt, pad(left: para-indent,
+      par(first-line-indent: 0pt, hanging-indent: label-box,
+        [#box(width: label-box, numbering("a.", i + 1))#unloose(inl(it))])))
+  }
+}
+
+/// Markdown body as blocks: headings, block quotations (half an inch in, on the body pitch), lists (lettered),
+/// paragraphs. Footnote definitions ("[^key]: text") are appended to each chunk that refers to them: cmarker renders
+/// one chunk at a time, so a reference and its definition must be together. `insert` is an optional statement placed
+/// right after the first paragraph (the LBR 9004(c) statement).
 #let body-blocks(body, insert: none) = {
   let notes = (:)
   for line in body.split("\n") {
@@ -119,48 +179,31 @@
       notes.insert(key, line.slice(line.position("]:") + 2).trim())
     }
   }
-  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "" and not c.trim().starts-with("[^"))
-  let pending = []
-  let has-pending = false
+  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim()).filter(c => c != "" and not c.starts-with("[^"))
   let inserted = insert == none
   for c in chunks {
-    let t = c.trim()
+    let t = c
     for (key, note) in notes.pairs() {
       if t.contains("[^" + key + "]") { t += "\n\n[^" + key + "]: " + note }
     }
     if t.starts-with("#") {
-      pending += cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-      has-pending = true
+      let level = t.match(regex("^(#+)")).captures.at(0).len()
+      heading-block(level, t.replace(regex("^#+[ \t]*"), ""))
+    } else if t.starts-with(">") {
+      block(width: 100%, above: 0pt, below: 0pt, pad(left: para-indent, {
+        set par(first-line-indent: 0pt)
+        unloose(inl(t.replace(regex("(?m)^>[ \t]?"), "")))
+      }))
+    } else if t.match(regex("^(\\d+\\.|[-*+])[ \\t]")) != none {
+      lettered(t)
     } else {
-      let piece = if t.starts-with(">") {
-        block(width: 100%, below: body-leading, pad(left: 0.5in, {
-          set par(leading: body-leading, first-line-indent: 0pt, justify: false)
-          cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-        }))
-      } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
-        // A list may break across pages; items are lettered a., b., ... (the court's sub-list style).
-        block(width: 100%, below: body-leading, {
-          set enum(numbering: "a.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-          set par(leading: body-leading)
-          cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-        })
-      } else {
-        para(t)
-      }
-      if has-pending {
-        block(breakable: false, width: 100%, below: body-leading, { pending; piece })
-      } else {
-        piece
-      }
-      pending = []
-      has-pending = false
-      if not inserted and not t.starts-with("#") and not t.starts-with(">") {
-        para(insert)
+      body-par(inl(t))
+      if not inserted {
+        body-par(inl(insert))
         inserted = true
       }
     }
   }
-  if pending != [] { block(breakable: false, width: 100%, pending) }
 }
 
 // ---------------------------------------------------------------------------
@@ -169,40 +212,29 @@
 
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  block(breakable: false, above: pitch, {
-    set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-    grid(
-      columns: (2.9in, 1fr),
-      column-gutter: 0.2in,
-      [Dated: #need(meta, "date")],
-      {
-        [Respectfully submitted,]
-        v(pitch * 0.5)
-        line-stack(sig.firm)
-        v(pitch * 0.5)
-        // Further signing attorneys (optional `also`) are listed under the signer, before the role.
-        line-stack(("By: /s/ " + sig.signer, sig.signer + " (" + sig.bar_id + ")") + sig.at("also", default: ()) + (sig.role,))
-        v(pitch * 0.5)
-        line-stack(("BUSINESS ADDRESS:",) + sig.address + ("Telephone " + sig.phone, "Email " + sig.email))
-      },
-    )
-  })
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  let lines(items) = for l in items { line-block(inl(l)) }
+  block(width: 100%, above: pitch-body, below: 0pt, breakable: false, grid(
+    columns: (sig-left, sig-gutter, 1fr),
+    line-block[Dated: #need(meta, "date")],
+    [],
+    {
+      line-block[Respectfully submitted,]
+      line-block(above: pitch-single, inl(sig.firm.first()))
+      lines(sig.firm.slice(1))
+      line-block(above: pitch-single, inl("By: /s/ " + sig.signer))
+      // Further signing attorneys (optional `also`) are listed under the signer, before the role.
+      lines((sig.signer + " (" + sig.bar_id + ")",) + sig.at("also", default: ()) + (sig.role,))
+      line-block(above: pitch-single)[BUSINESS ADDRESS:]
+      lines(sig.address + ("Telephone " + sig.phone, "Email " + sig.email))
+    },
+  ))
 }
 
 // ---------------------------------------------------------------------------
 // The two documents
 // ---------------------------------------------------------------------------
-
-/// A document's heading block: the court, the caption, and the description of the document (LBR 9004(b)).
-#let document-head(meta, title) = {
-  court-title()
-  v(pitch)
-  caption(meta)
-  v(pitch)
-  // LBR 9004(b): the description of the document, centered, immediately before the body.
-  align(center, text(weight: "bold", upper(title)))
-  v(pitch * 0.5)
-}
 
 #let motion-document(meta) = {
   let motion = need(meta, "motion")
@@ -219,23 +251,29 @@
 }
 
 #let miwb-motion-brief(meta, body) = {
+  set document(title: need(meta, "motion").title, author: need(meta, "signature").signer)
+  // Every page numbered, bottom centre, in a single-spaced line box (Word's footer: a PAGE field).
   set page(
     paper: "us-letter",
     margin: page-margin,
-    numbering: "1",
-    footer: context align(center, text(size: footer-size, counter(page).display())),
+    footer-descent: 30%,
+    footer: context align(center, text(size: footer-size, ..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  // Headings in the brief: level 1 centered bold capitals; level 2 bold; level 3 bold italic. Numbers are typed.
-  show heading.where(level: 1): it => block(width: 100%, above: 0pt, below: body-leading, sticky: true,
-    align(center, text(size: type-size, weight: "bold", upper(it.body))))
-  show heading.where(level: 2): it => block(width: 100%, above: 0pt, below: body-leading, sticky: true,
-    text(size: type-size, weight: "bold", it.body))
-  show heading.where(level: 3): it => block(width: 100%, above: 0pt, below: body-leading, sticky: true,
-    text(size: type-size, weight: "bold", style: "italic", it.body))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  set par(first-line-indent: 0pt)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch, footnote marks at 58 %, a section sign kept with its number. No markdown list reaches typst's lists.
+  show: xengine.with(pitch: pitch-body, list-indent: none)
+  set footnote.entry(separator: line(length: 30%, stroke: 0.5pt), gap: note-gap, clearance: note-clearance, indent: 0pt)
+  show footnote.entry: it => {
+    set text(size: type-size, ..edges(pitch-single))
+    set par(first-line-indent: 0pt, leading: 0pt)
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    [#super(num)#h(0.25em)#note.body]
+  }
   motion-document(meta)
-  // The brief is a separate document: it starts on a new page and its page numbers restart.
+  // The brief is a separate document: it starts on a new page and its page numbers restart (docx: a new section).
   pagebreak()
   counter(page).update(1)
   brief-document(meta, body)
