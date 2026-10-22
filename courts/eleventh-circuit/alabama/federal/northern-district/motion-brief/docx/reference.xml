@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The N.D. Ala. motion brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman) at 12 pt (size 24 half points; the exemplar's size, no ALND rule sets
+     one); Body Text in exact 24 pt line boxes (typst pitch-double, the exemplar's double spacing) with a half-inch
+     indent; headings, tables, caption, signature and footer lines in 13.8 pt boxes (typst pitch-single), a single
+     line above and below a heading; letter page with 1-inch margins and a centered page number, its line 36.6 pt
+     above the page foot (732 twips: where typst sets it, footer-descent 30 %). docx/alnd-motion-brief.lua writes
+     every paragraph's own spacing, the sections and the page numbers of the tables. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="276" heading-after="276" footer="732"/>
