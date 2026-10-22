@@ -1,0 +1,12 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: pdfLaTeX does
+# not break after the slash inside "Race/Ethnicity" where typst and Word do (footnote 13, p20); LibreOffice sets
+# Schola's fi, ff and fl ligatures, which typst and LaTeX do not (p4 line 18). Pages and page ends are equal
+# (docs/open-items/fb-595.54.72.md).
+params:
+  cross_engine: report
+  # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent (a 23.1 pt box at 14 pt),
+  # so the first line of a page, whose 16.8 pt line box starts at the 1 in margin, measures its box 3.57 pt into the
+  # margin on docx (page 1 "No.", top 68.43 pt), as in the California and Georgia Schola folders. The vertical
+  # tolerance covers that box, not text: Gate 4 puts the engines on the same baselines.
+  eps_v_pt: 4

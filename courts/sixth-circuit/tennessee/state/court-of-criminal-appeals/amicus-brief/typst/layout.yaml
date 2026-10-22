@@ -1,0 +1,92 @@
+# Court of Criminal Appeals of Tennessee (tenncrimapp): amicus curiae brief (Tenn. R. App. P. 31, 30). The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to Tenn. Sup. Ct. R. 46 section 3.02 and Tenn. R. App. P. 20, 27, 30
+# (../../rules.md, TENNCRIMAPP-*); lengths in points. No case text here: every string printed comes from the sample's
+# frontmatter ({field}) or is a court constant (the court's name, the certificates' form text).
+size: 14                  # TENNCRIMAPP-FORM-005 (SCT-46 3.02(3)(b)-(c)): 14 point, footnotes included
+pitch:
+  body: 25.2              # TENNCRIMAPP-FORM-003 (SCT-46 3.02(2)(a)): body 1.5 spaced, 1.5 x Schola's single line
+  single: 16.8            # captions, headings, quotations, footnotes, tables, signature: single (1.2 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # TENNCRIMAPP-FORM-002 (SCT-46 3.02(2)(b)): 1 inch on all sides
+indent: 36
+justify: true             # TENNCRIMAPP-FORM-006: text fully justified
+# TENNCRIMAPP-FORM-007 (SCT-46 3.02(5)): pagination begins with page 1, the cover; every page numbered at the bottom.
+page_number: {align: center, from: 1}
+footnote: {size: 14, pitch: 16.8, gap: 7}   # TENNCRIMAPP-FORM-005: footnotes in the text's face and size, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # TENNCRIMAPP-FORM-003: block quotations single spaced
+# TENNCRIMAPP-SEC-007: sections centered in capitals; argument points numbered by the template I., A., 1., a., the
+# heading text after the label (a half-inch box) with its later lines hung under it; single spaced.
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, number: "I.", label_box: 36, above: 16.8, below: 11.2}
+  - {bold: true, number: "A.", label_box: 36, above: 14, below: 11.2}
+  - {bold: true, number: "1.", label_box: 36, above: 14, below: 11.2}
+  - {bold: true, italic: true, number: "a.", label_box: 36, above: 14, below: 11.2}
+# TENNCRIMAPP-COVER-001 to -005 (TRAP 27(a), 30(a)): any notice (a death-penalty case), the case number, the court
+# and its seat, the title of the case with each party's status, the proceeding below, the document's title halfway
+# down the rest of the page (with an oral argument request, TRAP 35(a)) and counsel at its foot, in two columns.
+cover:
+  - {text: "{cover_notes}", align: center, bold: true, optional: true}
+  - {text: "{case_number}", align: center, bold: true}
+  - {text: "IN THE COURT OF CRIMINAL APPEALS OF TENNESSEE", align: center, bold: true, above: 14.4}
+  - {text: "{court_seat}", align: center, bold: true, optional: true}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 19.2}
+  - when: oral_argument
+    blocks:
+      - {text: "ORAL ARGUMENT REQUESTED", align: center, bold: true, above: 21.6}
+  - {fill: 1}
+  - columns: {each: counsel, per_row: 2, row_gap: 8.4, blocks: [{text: "{names}", bold: true, optional: true}, {text: "{lines}", optional: true}]}
+    gutter: 21.6
+# TENNCRIMAPP-SEC-001 to -003 (TRAP 27(a)(1)-(2)): the table of contents, with the page of each heading, and the
+# table of authorities, cases then statutes and other authorities, each with the pages it is cited on.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 21, above: 12.6}
+authorities:
+  title: "Table of Authorities"
+  col: 72
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 5.6}
+# TENNCRIMAPP-LEN-003 (TRAP 30(e)): an amicus brief of 7,500 words at most, the parts TRAP 30(e) exempts (cover,
+# tables, certificates, signature block) not counted; the template counts the body for the certificate.
+words: {limit: 7500}
+# TENNCRIMAPP-CERT-003: the date and the e-filer's signature at the end, the signer's name and the lines beneath it,
+# never split. TENNCRIMAPP-CERT-001 (SCT-46 3.02(2)(c)): the certificate of compliance with the computed count.
+# TENNCRIMAPP-CERT-002, -004 (TRAP 20(e)): the certificate of service, from the frontmatter.
+closing:
+  - group:
+      - {text: "Dated: {date}", optional: true}
+      - {text: "Respectfully submitted,", left: 230.4, above: 5.6}
+      - {text: "/s/ {signature.signer}", left: 230.4, above: 5.6}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true}
+    above: 21.6
+  - {break: true}
+  - {text: "Certificate of Compliance", heading: 1}
+  - {text: "I certify that this brief complies with the word limit of Tenn. R. App. P. 30(e) and contains {xd.words} words, excluding the parts of the brief exempt under that rule. The count was made from the text of the brief as filed.", pitch: body, indent: 36}
+  - group:
+      - {text: "/s/ {signature.signer}", left: 230.4}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true}
+    above: 5.6
+  - {break: true}
+  - {text: "Certificate of Service", heading: 1}
+  - each: certificates
+    blocks:
+      - when: type
+        is: service
+        blocks:
+          - {markdown: "{text}", pitch: body, indent: 36, gap: 0}
+          - group:
+              - {text: "{date}", left: 230.4, optional: true}
+              - {text: "/s/ {signer}", left: 230.4, above: 5.6}
+              - {text: "{signer}", left: 230.4}
+            above: 5.6
