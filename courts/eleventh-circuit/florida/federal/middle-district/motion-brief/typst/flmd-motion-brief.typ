@@ -1,20 +1,32 @@
 // United States District Court, Middle District of Florida: motion with legal memorandum (Local Rules 1.08, 3.01).
 // Rule-driven and content-agnostic. No case-specific text, no coordinates measured off any filed brief, no forced
 // line breaks. The body is markdown rendered by cmarker; the metadata is the YAML frontmatter of the same sample
-// file (schema: ../README.md, "Markdown contract"). Rule IDs (FLMD-...) refer to ../README.md.
+// file (schema: ../README.md, "Markdown contract"). Rule IDs (FLMD-...) refer to ../rules.md.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "TeX Gyre Pagella"   // Book Antiqua substitute (docs/FONTS.md, visual only); Book Antiqua is named by LR 1.08(a) and used by the filed exemplar.
-#let type-size = 14pt              // FLMD-TYPE-002: main text at least 13-point (1.08(a)); Times New Roman must be 14-point (1.08(b)).
-#let body-leading = 1.31em         // FLMD-TYPE-001: 2.0 double-spaced. Measured baseline pitch with TeX Gyre Pagella at 14pt is 28.1pt (2.0em); 1.35em gives 2.05em.
-#let single-leading = 0.5em        // FLMD-TYPE-003: quotations, caption, counsel and signature blocks are single-spaced.
-#let page-margin = 1in             // FLMD-PAGE-002: 1 inch on all sides.
+#let font-family = ("Times New Roman", "Liberation Serif")   // FLMD-FORM-004: Times New Roman, allowed by LR 1.08(b) at 14 point (the house face; docs/FONTS.md: Liberation Serif is its metric twin). The filed exemplar sets Book Antiqua, LR 1.08(a).
+#let type-size = 14pt              // FLMD-FORM-003/004: Times New Roman main text at least 14-point (1.08(b)); quotations at least 13, footnotes 12: all text here is 14.
+#let page-margin = 1in             // FLMD-FORM-002: 1 inch on all sides.
 #let para-indent = 0.5in           // first-line indent of body paragraphs.
 #let caption-w = 2.9in             // width of the party column of the caption; the case number column must hold "CASE NO.: 8:26-cv-02634-SDM-AEP" on one line.
+#let caption-gutter = 0.25in       // between the party column and the case-number column.
+#let designation-indent = 0.5in    // a party's designation ("Plaintiffs,") stands half an inch in.
+#let case-number-drop = 0.5in      // the case number stands half an inch below the top of the caption.
+#let item-indent = 0.5in           // lettered items: the label half an inch in,
+#let item-label = 0.4in            // the text a label box after it.
+#let quote-indent = 0.5in          // indented quotations: half an inch in from both margins.
+#let sig-indent = 3in              // the signature block's left edge.
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-single = 16.1pt                 // FLMD-FORM-003: single-spaced lines: 1.15 x the type size (Word's single line in this face)
+#let pitch-double = 2 * pitch-single       // FLMD-FORM-003: main text double-spaced (2.0; 32.2 pt)
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -33,48 +45,50 @@
 /// Markdown chunk (heading, list or paragraph), with `#` as level 1.
 #let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// One centered line: a block, so consecutive lines stack instead of running together.
-#let center-line(c, below: 0pt) = block(width: 100%, above: 0pt, below: below, align(center, c))
+/// One single-spaced line block (a paragraph of its own), with explicit space above it.
+#let line-block(above: 0pt, below: 0pt, body) = block(width: 100%, above: above, below: below, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  body
+})
+
+/// A body paragraph at the double pitch, with or without the first-line indent.
+#let body-par(indent, content) = block(width: 100%, above: 0pt, below: 0pt,
+  par(first-line-indent: (amount: if indent { para-indent } else { 0pt }, all: true), content))
 
 // ---------------------------------------------------------------------------
 // Caption and cover (FRCP 10(a): court, title, file number, Rule 7(a) designation)
 // ---------------------------------------------------------------------------
 
 #let court-title(meta) = {
-  center-line(text(weight: "bold", "UNITED STATES DISTRICT COURT"), below: single-leading)
-  center-line(text(weight: "bold", "MIDDLE DISTRICT OF FLORIDA"), below: single-leading)
+  line-block(align(center, text(weight: "bold", "UNITED STATES DISTRICT COURT")))
+  line-block(align(center, text(weight: "bold", "MIDDLE DISTRICT OF FLORIDA")))
   if "division" in meta and meta.division != none {
-    center-line(text(weight: "bold", upper(meta.division)))
+    line-block(align(center, text(weight: "bold", upper(meta.division))))
   }
 }
 
-/// Party column: names, then the designation (indented); "vs." between the parties; a closing rule.
-#let caption(meta) = grid(
+/// Party column: names, then the designation (indented); "v." between the parties; a closing rule. The case
+/// number column at the right.
+#let caption(meta) = block(width: 100%, above: pitch-double, below: 0pt, grid(
   columns: (caption-w, 1fr),
-  column-gutter: 0.25in,
+  column-gutter: caption-gutter,
   {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    let items = ()
     for (k, p) in meta.caption.parties.enumerate() {
-      if k > 0 { items.push(meta.caption.at("versus", default: "v.")) }
-      for n in p.names { items.push(inl(n)) }
-      items.push(pad(left: 0.5in, p.designation))
+      if k > 0 { line-block(inl(meta.caption.at("versus", default: "v."))) }
+      for n in p.names { line-block(inl(n)) }
+      line-block(pad(left: designation-indent, inl(p.designation)))
     }
-    items.push("_" * 30 + "/")
-    stack(dir: ttb, spacing: single-leading, ..items)
+    line-block("_" * 29 + "/")   // fits the party column (29 underscores and the slash: 207 pt of 208.8)
   },
-  pad(top: 0.5in, {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    "CASE NO.: " + meta.case_number
-  }),
-)
+  pad(top: case-number-drop, line-block("CASE NO.: " + meta.case_number)),
+))
 
 #let cover(meta) = {
   court-title(meta)
-  v(body-leading)
   caption(meta)
-  v(body-leading)
-  center-line(text(weight: "bold", inl(meta.brief_title)), below: body-leading)
+  block(width: 100%, above: pitch-double, below: pitch-single,
+    line-block(align(center, text(weight: "bold", inl(meta.brief_title)))))
 }
 
 // ---------------------------------------------------------------------------
@@ -82,32 +96,23 @@
 // ---------------------------------------------------------------------------
 
 /// Each blank-line-separated chunk of markdown is one unit:
-///   `#` heading            centered caps (level 1); centered bold (level 2); bold, left (level 3); bold italic (level 4)
+///   `#` heading            centered bold (levels 1 and 2); bold, left (level 3); bold italic (level 4)
 ///   `1.` list              items lettered (a), (b), ...
+///   `>` quotation          indented, single-spaced
 ///   `~ text`               a paragraph with no first-line indent (certificate lines, signature lines)
 ///   any other text         a body paragraph with a first-line indent (not numbered: M.D. Fla. memoranda are not)
-/// Chunks are not split by the template: a heading is kept with the chunk after it (sticky).
 #let body-chunks(body) = {
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
   for c in chunks {
     let t = c.trim()
-    if t.starts-with("#") {
+    if t.starts-with("#") or t.starts-with(">") {
       md(t)
     } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
-      set par(leading: body-leading)
-      md(t)
-      v(body-leading)
+      pad(left: item-indent, md(t))
     } else if t.starts-with("~ ") {
-      block(width: 100%, {
-        set par(leading: body-leading, first-line-indent: 0pt)
-        inl(t.slice(2))
-      })
+      body-par(false, inl(t.slice(2)))
     } else {
-      // The indent is an explicit space: cmarker's paragraphs do not take the document's first-line-indent.
-      block(width: 100%, {
-        set par(leading: body-leading, first-line-indent: 0pt)
-        h(para-indent) + md(t)
-      })
+      body-par(true, md(t))
     }
   }
 }
@@ -116,24 +121,18 @@
 // Signature (Fed. R. Civ. P. 11(a): signed by counsel of record) and certificates
 // ---------------------------------------------------------------------------
 
-#let signature-block(meta) = {
-  // One unbreakable block: "Respectfully submitted," never ends a page apart from the signature.
-  v(body-leading)
-  block(width: 100%, breakable: false, {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    h(para-indent) + [Respectfully submitted,]
-    v(body-leading)
-    pad(left: 3in, {
-      stack(dir: ttb, spacing: single-leading, ..meta.signature.firm.map(inl))
-      v(body-leading)
-      for counsel in meta.signature.counsel {
-        stack(dir: ttb, spacing: single-leading, ..counsel.map(inl))
-        v(body-leading)
-      }
-      stack(dir: ttb, spacing: single-leading, ..meta.signature.address.map(inl), inl(meta.signature.at("for", default: "")))
-    })
+/// One unbreakable block: "Respectfully submitted," never ends a page apart from the signature. The firm, each
+/// counsel and the address single-spaced at the signature indent, a single line between the groups.
+#let signature-block(meta) = block(width: 100%, above: pitch-single, below: 0pt, breakable: false, {
+  line-block(pad(left: para-indent, [Respectfully submitted,]))
+  pad(left: sig-indent, {
+    let groups = (meta.signature.firm,) + meta.signature.counsel
+    groups.push(meta.signature.address + (meta.signature.at("for", default: ""),))
+    for g in groups {
+      for (k, l) in g.enumerate() { line-block(above: if k == 0 { pitch-single } else { 0pt }, inl(l)) }
+    }
   })
-}
+})
 
 // ---------------------------------------------------------------------------
 // The motion
@@ -148,42 +147,43 @@
   set page(
     paper: "us-letter",
     margin: page-margin,
+    footer-descent: 30%,
     footer: context {
-      // FLMD-PAGE-003: bottom center; no number is needed on page one.
+      // FLMD-FORM-005: bottom center; no number is needed on page one. The number in a single-spaced line box,
+      // so it sits where Word's footer sets it.
       let n = counter(page).get().first()
-      if n > 1 { align(center, text(size: type-size, str(n))) }
+      if n > 1 { align(center, text(..edges(pitch-single), str(n))) }
     },
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  // Blocks are separated by one leading unit, so the baseline gap between paragraphs is the full 2.0 em pitch.
-  set block(spacing: body-leading)
-  set enum(numbering: "(a)", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-  set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-  // FLMD-TYPE-004: indented quotations are single-spaced and smaller than the main text (1.08(a): 12-point).
-  show quote.where(block: true): it => block(width: 100%, inset: (left: 0.5in, right: 0.5in), {
-    set par(leading: single-leading, first-line-indent: 0pt)
-    it.body
-  })
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch (FLMD-FORM-003: double-spaced); lettered items as a label box with the text hanging.
+  show: xengine.with(pitch: pitch-double, list-indent: item-label)
+  // A doubled section sign or pilcrow stays with its number too ("¶¶ 24-39"; xengine binds a single sign).
+  show regex("[§¶]{2,} \\S+"): it => box(it)
+  set enum(numbering: "(a)")
+  // FLMD-FORM-003: indented quotations single-spaced, half an inch in from both margins, a single line below.
+  show quote.where(block: true): it => block(width: 100%, above: 0pt, below: pitch-single,
+    pad(left: quote-indent, right: quote-indent, {
+      set text(..edges(pitch-single))
+      set par(first-line-indent: 0pt)
+      it.body
+    }))
 
-  show heading: set block(above: body-leading, below: body-leading * 0.5)
-  show heading.where(level: 1): it => block(width: 100%, above: body-leading, below: body-leading * 0.5, sticky: true,
-    align(center, text(weight: "bold", it.body)))
-  show heading.where(level: 2): it => block(width: 100%, above: 0pt, below: body-leading * 0.5, sticky: true,
-    align(center, text(weight: "bold", it.body)))
-  show heading.where(level: 3): it => block(width: 100%, above: body-leading * 0.5, below: body-leading * 0.5, sticky: true,
-    text(weight: "bold", it.body))
-  show heading.where(level: 4): it => block(width: 100%, above: body-leading * 0.5, below: body-leading * 0.5, sticky: true,
-    text(weight: "bold", style: "italic", it.body))
+  // Headings at the body size and pitch, bold; levels 1 and 2 centered, 3 at the margin, 4 italic; no space of
+  // their own (the double pitch sets them off). Sticky: a heading never ends a page.
+  show heading: it => {
+    set text(size: type-size)
+    set par(first-line-indent: 0pt)
+    let b = if it.level <= 2 { align(center, text(weight: "bold", it.body)) } else if it.level == 3 {
+      text(weight: "bold", it.body)
+    } else { text(weight: "bold", style: "italic", it.body) }
+    block(sticky: true, width: 100%, above: 0pt, below: 0pt, b)
+  }
 
   cover(meta)
 
-  if "lead_in" in meta and meta.lead_in != none {
-    block(width: 100%, {
-      set par(leading: body-leading, first-line-indent: 0pt)
-      h(para-indent) + inl(meta.lead_in)
-    })
-  }
+  if "lead_in" in meta and meta.lead_in != none { body-par(true, inl(meta.lead_in)) }
 
   body-chunks(main)
 
@@ -191,6 +191,6 @@
 
   if cert != none {
     // Unbreakable: the certificate moves to the next page whole, rather than leaving its signature alone.
-    block(width: 100%, breakable: false, body-chunks(cert))
+    block(width: 100%, above: pitch-double, below: 0pt, breakable: false, body-chunks(cert))
   }
 }

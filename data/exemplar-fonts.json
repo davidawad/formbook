@@ -2338,6 +2338,8 @@
       "class": "approximate",
       "face": "TeX Gyre Pagella",
       "why": "Palatino lineage; widths differ slightly",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.11 under David's 2026-10-17 ruling that Times New Roman is the standard: M.D. Fla. LR 1.08(b) allows Times New Roman at 14 point (main text; 13 quotations, 12 footnotes), so the template is set in Times New Roman 14 pt on typst and docx, as the flmd complaint is, not in Book Antiqua's visual stand-in Pagella (widths differ; the docx had named Times New Roman against a Pagella typst face); face stays the audited match.",
       "fonts": [
         "Arial-BoldMT",
         "ArialMT",
