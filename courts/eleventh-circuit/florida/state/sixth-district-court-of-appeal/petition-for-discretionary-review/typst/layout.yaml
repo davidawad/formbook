@@ -1,0 +1,130 @@
+# Sixth District Court of Appeal of Florida (fladistctapp6): petition for review by certiorari (Fla. R. App. P. 9.100). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to Fla. R. App. P. 9.045 and 9.210 (../rules.md, FLADISTCTAPP6-*); lengths in points.
+# No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # FLADISTCTAPP6-FORM-003 (9.045(b)): Arial 14-point
+pitch:
+  body: 32.2              # FLADISTCTAPP6-FORM-004: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # FORM-005, -006: footnotes, quotations, headings single spaced (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # FLADISTCTAPP6-FORM-002 (RJA 2.520(a)(3)): at least 1 inch
+indent: 36
+# FLADISTCTAPP6-FORM-007: pages consecutively numbered: the cover unnumbered, the tables i, ii .., the body 1, 2 ..
+page_number: {align: center, front: lower-roman}
+footnote: {size: 14, gap: 7}   # FLADISTCTAPP6-FORM-005: footnotes in the body's size (14 pt), single spaced
+quote: {left: 72, right: 72, above: 11.2, below: 16.8}   # FLADISTCTAPP6-FORM-005: quotations 14 pt, single spaced
+# FLADISTCTAPP6-FORM-006: headings at least the body's size, single spaced. Sections centred in capitals; the
+# argument's points numbered by the template (the markdown carries no numerals): I., A., 1.
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, number: "I.", label_box: 36, above: 16.8, below: 11.2}
+  - {bold: true, number: "A.", label_box: 36, above: 14, below: 11.2}
+  - {italic: true, number: "1.", label_box: 36, above: 14, below: 11.2}
+# FLADISTCTAPP6-CONT-001, -002, -003, AMIC-003 (9.210(a)(1)): the court, the case number, the style of the cause (each
+# side's names and designation), the lower tribunal, the title and the party it is filed for, then counsel; the space
+# the page leaves is shared above and below the title.
+cover:
+  - {text: "IN THE DISTRICT COURT OF APPEAL", align: center, bold: true}
+  - {text: "OF THE STATE OF FLORIDA", align: center, bold: true}
+  - {text: "SIXTH DISTRICT", align: center, bold: true}
+  - {text: "CASE NO.: {case_number}", align: center, bold: true, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, above: 5.6}
+  - {text: "{lower_tribunal}", align: center, above: 21.6}
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true, upper: true}
+  - {text: "{filed_for}", align: center, optional: true, above: 4.2}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - {text: "{names}", bold: true, left: 230.4, above: 8.4}
+      - {text: "{lines}", left: 230.4, optional: true}
+# The table of contents (when the frontmatter asks for one) and the table of citations (9.210(a)(2)-(3)), each on
+# pages of its own; every authority's `find` marks its pages.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 21, step: 21, above: 12.6, when: toc}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 5.6}
+# After the conclusion: the date and the signature block (FLADISTCTAPP6-FORM-013: the form is the filer's: the firm,
+# "/s/" and each signer's name and lines), never split; the certificate of service (CERT-004) on a page of its own,
+# signed by the first signer unless the frontmatter says otherwise; then the certificate of compliance (CERT-001, -002: Fla. R. App. P. 9.100(g)), right after it.
+# The body's last paragraph kept with the date and signature (a signature block never stands alone on a page).
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 12.6}
+      - when: signature.signers
+        blocks:
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 12.6}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", left: 230.4, optional: true}
+      - when: signature.signer
+        blocks:
+          - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 12.6}
+          - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 8.4}
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36, optional: true}
+      - when: service.recipients
+        blocks:
+          - each: service.recipients
+            blocks:
+              - group:
+                  - {text: "{.}", left: 72}
+                above: 14
+                below: 14
+      - {text: "{service.closing}", pitch: body, indent: 36, optional: true}
+      - group:
+          - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 12.6}
+          - when: signature.signers
+            blocks:
+              - when: service.first_signer_only
+                blocks:
+                  - {text: "/s/ *{signature.signers.0.name}*", underline: true, left: 230.4, above: 12.6}
+                  - {text: "{signature.signers.0.name}", left: 230.4}
+                  - {text: "{signature.signers.0.lines}", left: 230.4, optional: true}
+              - unless: service.first_signer_only
+                blocks:
+                  - each: signature.signers
+                    blocks:
+                      - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 12.6}
+                      - {text: "{name}", left: 230.4}
+                      - {text: "{lines}", left: 230.4, optional: true}
+          - when: signature.signer
+            blocks:
+              - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 12.6}
+              - {text: "{signature.signer}", left: 230.4}
+          - {text: "{signature.lines}", left: 230.4, optional: true, above: 8.4}
+        above: 12.6
+  - {break: true}
+  - {text: "Certificate of Compliance", align: center, bold: true, upper: true, below: 16.8}
+  - {text: "I certify that this petition complies with the font and word count requirements of Fla. R. App. P. 9.045(b) and Fla. R. App. P. 9.100(g). The certificate relies on the word count of the word-processing system used to prepare the petition, as Fla. R. App. P. 9.045(e) permits.", pitch: body, indent: 36}
+  - group:
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 12.6}
+      - when: signature.signers
+        blocks:
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 12.6}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", left: 230.4, optional: true}
+      - when: signature.signer
+        blocks:
+          - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 12.6}
+          - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 8.4}
+    above: 12.6
