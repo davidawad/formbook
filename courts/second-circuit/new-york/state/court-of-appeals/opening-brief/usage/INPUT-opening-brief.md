@@ -47,11 +47,11 @@ signature:
 authorities:
   cortelle:
     kind: case
-    name: "State of New York v Cortelle"
+    name: "*State of New York v Cortelle*"
     cite: "38 NY2d 83 [1975]"
   schwab:
     kind: case
-    name: "People v Charles Schwab & Co., Inc."
+    name: "*People v Charles Schwab & Co., Inc.*"
     cite: "109 AD3d 445 [1st Dept 2013]"
   exec63:
     kind: statute

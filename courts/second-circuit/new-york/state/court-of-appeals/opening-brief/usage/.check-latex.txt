@@ -1,0 +1,3 @@
+PASS
+71dbbba4252b84b0b6dd1e225c3b0db650b70d53450f6e337d847168e7cff6c4  usage/OUTPUT-opening-brief.latex.pdf
+167cc919d1fcafa5c32f302d527ea53912005e304d60e72649391af0724ede08  usage/OUTPUT-opening-brief.typst.pdf
