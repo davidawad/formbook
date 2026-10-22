@@ -61,7 +61,8 @@ local function tex(inlines)
 end
 
 return function(spec)
-  local TEXTW = 612 - spec.margin.left - spec.margin.right
+  -- the text width, with the face's bias (the generated template widens the text block by it: gen.rs latex_bias)
+  local TEXTW = 612 - spec.margin.left - spec.margin.right + (spec.latex_bias or 0)
 
   local function lines(st)
     return "\\xe@lines{" .. (st.size or spec.size) .. "}{" .. xd.pitch(spec, st.pitch) .. "}"
@@ -69,7 +70,8 @@ return function(spec)
 
   local function open(n)
     local s = "\\par"
-    if (tonumber(n.lead) or 0) > 0 then s = s .. "\\vskip" .. bp(n.lead) .. "\\relax" end
+    -- the space that opens a container is kept at the top of a page too (typst v()): an empty rule before it
+    if (tonumber(n.lead) or 0) > 0 then s = s .. "\\hrule height0pt\\relax\\vskip" .. bp(n.lead) .. "\\relax" end
     if (tonumber(n.above) or 0) > 0 then s = s .. "\\addvspace{" .. bp(n.above) .. "}" end
     return s
   end
@@ -92,12 +94,12 @@ return function(spec)
       skips = "\\leftskip=" .. bp(l) .. "\\rightskip=" .. bp(r) .. " plus 1fil\\parfillskip=0pt plus 1fil"
     end
     local body = tex(n.text)
-    if st.underline then body = "\\underline{" .. body .. "}" end
+    if st.underline then body = "\\xd@ul{" .. body .. "}" end
     local face = (st.bold and "\\bfseries" or "") .. (st.italic and "\\itshape" or "")
     local start = (tonumber(st.indent) or 0) > 0 and ("\\parindent=" .. bp(st.indent) .. "\\relax\\indent")
       or "\\noindent"
     return open(n) .. "\\begingroup" .. start .. lines(st) .. skips .. "\\relax"
-      .. (h > 0 and ("\\hangindent=" .. bp(h) .. "\\hangafter=1\\relax") or "") .. face .. " " .. body
+      .. (h > 0 and ("\\hangindent=" .. bp(h) .. "\\hangafter=1\\relax") or "") .. face .. " " .. (n.prefix or "") .. body
       .. "\\par\\endgroup" .. close(n, st.keep)
   end
 
@@ -147,6 +149,7 @@ return function(spec)
         n = m
       end
       if n.t == "par" then out[#out + 1] = par(n)
+      elseif n.t == "break" then out[#out + 1] = "\\clearpage"
       elseif n.t == "rule" then out[#out + 1] = rule(n)
       elseif n.t == "cols" then out[#out + 1] = columns(n)
       else out[#out + 1] = group(n) end
@@ -156,13 +159,72 @@ return function(spec)
 
   -- `first`: the heading opens the tail, whose own space above replaces the heading's (typst drops a block's space
   -- above at the start of a container).
+  -- Every heading in document order is numbered (hn): its page goes to the .aux (\xd@hmark), and it is a bookmark.
+  local hn = 0
   local function heading(b, first)
     local st = {}
     for k, v in pairs(xd.heading(spec, b.level)) do st[k] = v end
     st.keep = true
     local text = b.content
     if st.upper then text = xd.upper(text) end
-    return par({ t = "par", text = text, st = st, lead = 0, above = first and 0 or st.above, below = st.below })
+    hn = hn + 1
+    local mark = "\\xd@hmark{" .. hn .. "}\\pdfbookmark[" .. (b.level - 1) .. "]{"
+      .. tex(pandoc.Inlines({ pandoc.Str(pandoc.utils.stringify(b.content)) })) .. "}{xd.h." .. hn .. "}"
+    return par({ t = "par", text = text, st = st, lead = 0, above = first and 0 or st.above, below = st.below,
+      prefix = mark })
+  end
+
+  -- The title of a table (contents, authorities): the level-1 heading style, on a new page.
+  local function table_title(t)
+    local st = {}
+    for k, v in pairs(xd.heading(spec, 1)) do st[k] = v end
+    for k, v in pairs(t.style or {}) do st[k] = v end
+    st.keep = true
+    local text = xd.inlines(t.title)
+    if st.upper then text = xd.upper(text) end
+    return "\\clearpage" .. par({ t = "par", text = text, st = st, lead = 0, above = 0, below = st.below })
+  end
+
+  -- A row of a table: the text wraps before a page column of `col` bp (wider when the page list is: `fit`), `hang`
+  -- under its first line, `left` in (lib/latex/xdoc.sty \xd@row).
+  local function row(above, left, hang, col, text, pages, fit)
+    local c = "\\setlength{\\xe@col}{" .. bp(col) .. "}"
+    if fit then c = c .. "\\setbox0=\\hbox{" .. pages .. "}\\ifdim\\wd0>\\xe@col\\setlength{\\xe@col}{\\wd0}\\fi" end
+    return "\\begingroup\\leftskip=" .. bp(left) .. "\\relax" .. c .. "\\xd@row{" .. bp(above) .. "}{" .. bp(hang)
+      .. "}{" .. text .. "}{" .. pages .. "}\\endgroup"
+  end
+
+  local function contents(c, heads)
+    local out = { table_title(c), lines(c) }
+    for _, h in ipairs(heads) do
+      if h.level <= (c.depth or 3) then
+        -- the heading's text without its authority marks (typst marks the body, not the contents)
+        local text = h.content:walk({ RawInline = function(r)
+          if r.text:find("xd@amark", 1, true) then return {} end
+        end })
+        out[#out + 1] = row(c.above, (h.level - 1) * (tonumber(c.step) or 0), tonumber(c.hang) or 0, c.col or 36,
+          tex(text), "\\xd@hpage{" .. h.n .. "}", false)
+      end
+    end
+    return table.concat(out, "%\n")
+  end
+
+  local function authorities(a, meta)
+    local out = { table_title(a), lines(a) }
+    local gst = a.group or { bold = true }
+    local entries = xd.authority_entries(meta)
+    local k = 0
+    for _, g in ipairs(meta.authorities) do
+      out[#out + 1] = par({ t = "par", text = xd.inlines(g.heading), st = setmetatable({ keep = true }, { __index = gst }),
+        lead = 0, above = gst.above, below = gst.below })
+      for _ = 1, #(g.entries or {}) do
+        k = k + 1
+        local e = entries[k]
+        local pages = e.find and ("\\xd@apages{" .. k .. "}") or tex(xd.inlines(e.pages and tostring(e.pages) or "--"))
+        out[#out + 1] = row(a.above, 0, tonumber(a.hang) or 0, a.col or 56, tex(xd.inlines(e.cite)), pages, true)
+      end
+    end
+    return table.concat(out, "%\n")
   end
 
   local function has_note(inlines)
@@ -210,17 +272,33 @@ return function(spec)
     {
       Pandoc = function(doc)
         local meta = xd.meta()
-        local main, rest = xd.split_tail(spec, doc.blocks)
+        local blocks = xd.mark(doc.blocks, xd.authority_entries(meta),
+          function(k) return pandoc.RawInline("latex", "\\xd@amark{" .. k .. "}") end)
+        local main, rest = xd.split_tail(spec, blocks)
+        local heads = xd.headings(blocks, 9)
         local out = pandoc.Blocks({})
         local first = pandoc.Blocks({})
-        if (spec.page_number and spec.page_number.from or 1) > 1 then first:insert(raw("\\thispagestyle{empty}")) end
+        -- the tables numbered apart (page_number.front): the cover unnumbered, the tables from i, the body from 1
+        local front = spec.page_number and spec.page_number.front
+        local TEX_FMT = { ["lower-roman"] = "roman", ["upper-roman"] = "Roman", decimal = "arabic" }
+        if (spec.page_number and spec.page_number.from or 1) > 1 or front then first:insert(raw("\\thispagestyle{empty}")) end
         out:extend(first)
+        if spec.cover then out:insert(raw(emit(xd.tree(spec, spec.cover, meta, true), false) .. "\\clearpage")) end
+        if front then out:insert(raw("\\pagenumbering{" .. TEX_FMT[front] .. "}")) end
+        -- the tables in a group: their line boxes end with them
+        if spec.contents then out:insert(raw("\\begingroup" .. contents(spec.contents, heads) .. "\\par\\endgroup")) end
+        if spec.authorities and meta.authorities then
+          out:insert(raw("\\begingroup" .. authorities(spec.authorities, meta) .. "\\par\\endgroup"))
+        end
+        if spec.contents or spec.authorities then
+          out:insert(raw("\\clearpage" .. (front and "\\pagenumbering{arabic}" or "")))
+        end
         out:insert(raw(emit(xd.tree(spec, spec.front, meta, true), false)))
         out:extend(body(main, 0))
         out:insert(raw(emit(xd.tree(spec, spec.closing, meta, false), false)))
         if #rest > 0 then
           local t = spec.tail
-          out:insert(raw("\\par\\addvspace{" .. bp(t.above) .. "}" .. lines(t) .. "\\setlength{\\parindent}{"
+          out:insert(raw((t["break"] and "\\clearpage" or "") .. "\\par\\addvspace{" .. bp(t.above) .. "}" .. lines(t) .. "\\setlength{\\parindent}{"
             .. bp(t.indent) .. "}"))
           out:extend(body(rest, tonumber(t.gap) or 0, true))
         end

@@ -117,4 +117,5 @@ return require("latex.xdoc")({
       },
     },
   },
+  ["latex_bias"] = 0.05,
 })

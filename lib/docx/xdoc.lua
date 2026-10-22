@@ -121,13 +121,19 @@ return function(spec)
       local last = inner and k == #items
       local above = math.max(tw(n.lead), tw(n.above))
       local after = last and 0 or tw(n.below)
-      if n.t == "par" or n.t == "rule" then
-        local before = math.max(above, s.pending)
+      if n.t == "break" then
+        -- a page break: an empty paragraph of one twip that starts a page (brk below)
+        out[#out + 1] = xe.para({ xe.BREAK, xe.spacing(0, 0, 1) }, "")
+        s.top, s.prev_after, s.pending = true, 0, 0
+      elseif n.t == "par" or n.t == "rule" then
+        local before = s.top and 0 or math.max(above, s.pending)
+        s.top = false
         out[#out + 1] = (n.t == "par" and par or rule)(n, before, after)
         s.prev_after, s.pending = after, 0
       else
         local h = math.max(above, s.pending) - s.prev_after
-        if h > 0 then out[#out + 1] = spacer(h) end
+        if h > 0 and not s.top then out[#out + 1] = spacer(h) end
+        s.top = false
         if n.t == "cols" then
           out[#out + 1] = columns(n)
         else
@@ -157,11 +163,195 @@ return function(spec)
     return false
   end
 
-  local list_items
+  local list_items, needles_of
 
   local function styled(style, inlines)
     return pandoc.Div({ pandoc.Para(inlines:walk({ Str = breaks }):walk({ Inlines = xe.inlines })) },
       { ["custom-style"] = style })
+  end
+
+  -- -------------------------------------------------------------------------------------------------------------
+  -- Pages: contents and authorities (lib/typst/xdoc.typ contents-pages, authorities-pages). Word cannot know a page:
+  -- every heading and every mark of an authority (lib/pandoc/xdoc.lua mark) is a needle, in document order, which
+  -- fb render finds in the LibreOffice PDF of the previous pass and hands back in $FORMBOOK_PAGES (docxpass.rs,
+  -- docxpages.rs); the first pass prints "00".
+  -- -------------------------------------------------------------------------------------------------------------
+  local needles, labels, hn, occ = {}, {}, 0, {}
+  local NEEDLE = 48 -- reduced characters of a needle: the text and what follows it
+
+  local function needle(id, kind, text, fallback)
+    needles[#needles + 1] = id .. "\t" .. kind .. "\t" .. xd.norm(text):sub(1, NEEDLE) .. "\t" .. xd.norm(fallback or "")
+  end
+
+  local function read_pages()
+    local path = os.getenv("FORMBOOK_PAGES")
+    local f = path and path ~= "" and io.open(path, "r")
+    if not f then return end
+    for line in f:lines() do
+      local id, _, label = line:match("^([^\t]+)\t([^\t]*)\t([^\t]*)")
+      if id then labels[id] = label end
+    end
+    f:close()
+  end
+
+  -- The text of inlines as printed, footnotes left out (their marks are digits Word sets apart).
+  local function plain(x)
+    if x == nil then return "" end
+    local out = {}
+    local function go(l)
+      for _, el in ipairs(l) do
+        if el.t == "Str" then out[#out + 1] = el.text
+        elseif el.t == "Space" or el.t == "SoftBreak" or el.t == "LineBreak" then out[#out + 1] = " "
+        elseif el.t ~= "Note" and el.content then go(el.content) -- italics, quotes, links: their words
+        end
+      end
+    end
+    if x.t == "Header" or x.t == "Para" or x.t == "Plain" then go(x.content)
+    elseif x.t == "BlockQuote" or x.t == "Div" then for _, b in ipairs(x.content) do out[#out + 1] = plain(b) .. " " end
+    elseif x.t == "BulletList" or x.t == "OrderedList" then
+      for _, it in ipairs(x.content) do for _, b in ipairs(it) do out[#out + 1] = plain(b) .. " " end end
+    end
+    return table.concat(out)
+  end
+
+  -- The needles of a body block: a heading by its text and the text after it; each authority mark by its text and
+  -- the words after it in its run (kind N in a footnote).
+  -- The numbering of the page labels (docxpages.rs `#section`): a numbering starts at the page of a needle; the one
+  -- wanted next (`want`) starts at the next needle written.
+  local sections, want, pn = {}, nil, 0
+  local function section_at(id)
+    if want then sections[#sections + 1] = "#section\t" .. id .. "\t" .. want .. "\t"; want = nil end
+  end
+
+  function needles_of(b, nxt)
+    if b.t == "Header" then
+      hn = hn + 1
+      needle("h" .. hn, "B", plain(b) .. " " .. plain(nxt), plain(b))
+      section_at("h" .. hn)
+    elseif want then
+      pn = pn + 1
+      needle("p" .. pn, "B", plain(b) .. " " .. plain(nxt), plain(b))
+      section_at("p" .. pn)
+    end
+    b:walk({ Span = function(sp)
+      local k = sp.attributes["xd-k"]
+      if k then
+        occ[k] = (occ[k] or 0) + 1
+        local e = sp.attributes["xd-find"]
+        needle("a" .. k .. "." .. occ[k], sp.attributes["xd-n"], e .. sp.attributes["xd-after"], e)
+      end
+    end })
+  end
+
+  -- A row of a table: the text wraps before a page column (a right indent of `col`), `hang` under its first line,
+  -- `left` in; a dot leader from three spaces after the text to the page at the margin (typst listing-row).
+  local function row(above, left, hang, col, xml, pages, pitch)
+    local h = tw(hang)
+    local first
+    if h == 0 then first = 0 end
+    return xe.para({ xe.LINES, xe.leader_tab(TEXTW), xe.spacing(tw(above), 0, tw(pitch)),
+      xe.ind(tw(left) + h, h > 0 and h or nil, first, col) }, xml .. xe.runs(xe.LEAD .. pages))
+  end
+
+  -- The width of a page list in twips at the type size: Times New Roman's advances (digits 1/2 em, comma and space
+  -- 1/4 em, hyphen 1/3 em), as typst measure() gives it.
+  local function list_width(s)
+    local em = 0
+    for c in s:gmatch(".") do
+      em = em + (c:match("%d") and 0.5 or c == "-" and 0.333 or 0.25)
+    end
+    return math.ceil(em * spec.size * 20)
+  end
+
+  local function table_title(t)
+    local st = {}
+    for k, v in pairs(xd.heading(spec, 1)) do st[k] = v end
+    for k, v in pairs(t.style or {}) do st[k] = v end
+    st.keep = true
+    local text = xd.inlines(t.title)
+    if st.upper then text = xd.upper(text) end
+    return { t = "par", text = text, st = st, lead = 0, above = 0, below = tonumber(st.below) or 0 }
+  end
+
+  local function contents(c, heads, s)
+    local out = emit_list({ table_title(c) }, s, false)
+    local pitch = xd.pitch(spec, c.pitch)
+    for _, h in ipairs(heads) do
+      if h.level <= (c.depth or 3) then
+        out[#out + 1] = row(c.above, (h.level - 1) * (tonumber(c.step) or 0), tonumber(c.hang) or 0,
+          tw(c.col or 36), xe.inl(bind_double_signs(h.content:walk({ Str = breaks }))), labels["h" .. h.n] or "00", pitch)
+      end
+    end
+    return out
+  end
+
+  local function authorities(a, meta, s, counts)
+    local out = emit_list({ table_title(a) }, s, false)
+    local gst = a.group or { bold = true }
+    local pitch = xd.pitch(spec, a.pitch)
+    local entries = xd.authority_entries(meta)
+    local k = 0
+    for _, g in ipairs(meta.authorities) do
+      for _, x in ipairs(emit_list({ { t = "par", text = xd.inlines(g.heading),
+        st = setmetatable({ keep = true }, { __index = gst }), lead = 0, above = gst.above, below = gst.below } }, s,
+        false)) do out[#out + 1] = x end
+      for _ = 1, #(g.entries or {}) do
+        k = k + 1
+        local e = entries[k]
+        local ls = {}
+        for i = 1, (counts[tostring(k)] or 0) do ls[#ls + 1] = labels["a" .. k .. "." .. i] or "00" end
+        local list = xd.page_list(e, ls)
+        out[#out + 1] = row(a.above, 0, tonumber(a.hang) or 0, math.max(tw(a.col or 56), list_width(list)),
+          xe.inl(bind_double_signs(xd.inlines(e.cite):walk({ Str = breaks }))), list, pitch)
+      end
+    end
+    s.prev_after = 0
+    return out
+  end
+
+  -- A page break: an empty paragraph of one twip that starts a page; what follows has no space above (typst drops it
+  -- at the top of a page, Word keeps it after a hard break).
+  local function brk(s)
+    s.top, s.prev_after, s.pending = true, 0, 0
+    return xe.para({ xe.BREAK, xe.spacing(0, 0, 1) }, "")
+  end
+
+  -- The document's footer (the page number in a single line box, layout.yaml page_number) and last section, which a
+  -- multi-pass build writes itself ($FORMBOOK_FOOTERS, $FORMBOOK_FINAL; docxpass.rs).
+  local function sect_xml(footer, fmt, first)
+    local m = spec.margin
+    local foot = tw(math.floor((0.7 * m.bottom - spec.pitch.single) * 20 + 0.5) / 20)
+    return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/>'
+      .. (first and '<w:footerReference w:type="first" r:id="rIdXdNone"/>' or "")
+      .. '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="' .. tw(m.top) .. '" w:right="' .. tw(m.right)
+      .. '" w:bottom="' .. tw(m.bottom) .. '" w:left="' .. tw(m.left) .. '" w:header="720" w:footer="' .. foot
+      .. '" w:gutter="0"/>' .. (fmt and ('<w:pgNumType w:fmt="' .. fmt .. '" w:start="1"/>') or "")
+      .. (first and "<w:titlePg/>" or "") .. "</w:sectPr>"
+  end
+
+  -- The end of a section (the cover, the tables numbered apart): an empty paragraph of one twip holding its sectPr;
+  -- the next section starts a page.
+  local function section_end(s, footer, fmt)
+    s.top, s.prev_after, s.pending = true, 0, 0
+    return '<w:p><w:pPr>' .. xe.spacing(0, 0, 1) .. sect_xml(footer, fmt, false) .. '</w:pPr></w:p>'
+  end
+
+  local WORD_FMT = { ["lower-roman"] = "lowerRoman", ["upper-roman"] = "upperRoman", decimal = "decimal" }
+
+  local function write_section()
+    local pn = spec.page_number or {}
+    local single = tw(spec.pitch.single)
+    local fld = '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText>'
+      .. '</w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r>'
+    local function ftr(runs_xml)
+      return xe.para({ xe.spacing(0, 0, single), xe.jc(pn.align or "center") }, runs_xml)
+    end
+    local f = io.open(os.getenv("FORMBOOK_FOOTERS"), "w")
+    f:write("rIdXdPage\t" .. ftr(fld) .. "\n" .. "rIdXdNone\t" .. ftr("") .. "\n")
+    f:close()
+    f = io.open(os.getenv("FORMBOOK_FINAL"), "w")
+    f:write(sect_xml("rIdXdPage", pn.front and "decimal" or nil, (pn.from or 1) > 1))
+    f:close()
   end
 
   -- A list at nesting `level` (lib/typst/xdoc.typ list-items): one paragraph per item in the level's style (the label,
@@ -195,10 +385,11 @@ return function(spec)
     local out = pandoc.Blocks({})
     local function raw(xml) out:insert(xe.raw(xml)) end
     local function flush()
-      if s.pending > s.prev_after then raw(spacer(s.pending - s.prev_after)) end
-      s.pending = 0
+      if s.pending > s.prev_after and not s.top then raw(spacer(s.pending - s.prev_after)) end
+      s.pending, s.top = 0, false
     end
     for k, b in ipairs(blocks) do
+      needles_of(b, blocks[k + 1])
       if b.t == "Header" then
         for _, x in ipairs(emit_list({ heading(b, first and k == 1) }, s, false)) do raw(x) end
       elseif b.t == "Para" or b.t == "Plain" then
@@ -230,17 +421,68 @@ return function(spec)
     {
       Pandoc = function(doc)
         local meta = xd.meta()
-        local main, rest = xd.split_tail(spec, doc.blocks:walk({ Inlines = bind_double_signs }))
+        local entries = xd.authority_entries(meta)
+        local blocks = xd.mark(doc.blocks:walk({ Inlines = bind_double_signs }), entries, function(k, note, after)
+          return pandoc.Span({}, { ["xd-k"] = tostring(k), ["xd-n"] = note and "N" or "B", ["xd-after"] = after,
+            ["xd-find"] = entries[k].find })
+        end)
+        local main, rest = xd.split_tail(spec, blocks)
         local s = { prev_after = 0, pending = 0 }
         local out = pandoc.Blocks({})
+        local paged = spec.contents or (spec.authorities and meta.authorities)
+        if paged then
+          read_pages()
+          -- the numbering starts at the first line of the document (page 1)
+          local first = xd.tree(spec, spec.cover or spec.front or {}, meta, true)[1]
+          needle("start", "B", first and first.text and pandoc.utils.stringify(first.text) or "", "")
+          local front = spec.page_number and spec.page_number.front
+          if not front then sections[1] = "#section\tstart\tdecimal\t" end
+          -- how often each authority is marked (its rows read one page per mark)
+          local counts = {}
+          blocks:walk({ Span = function(sp) local k = sp.attributes["xd-k"]
+            if k then counts[k] = (counts[k] or 0) + 1 end end })
+          local heads = xd.headings(blocks, 9)
+          if spec.cover then
+            for _, x in ipairs(emit_list(xd.tree(spec, spec.cover, meta, true), s, false)) do out:insert(xe.raw(x)) end
+            -- the cover a section of its own (no page number) when the tables are numbered apart
+            out:insert(xe.raw(front and section_end(s, "rIdXdNone", nil) or brk(s)))
+          end
+          if front then
+            -- the tables' numbering starts at the first of them: its title and its first row
+            local t = spec.contents or spec.authorities
+            local h1 = heads[1] and plain({ t = "Plain", content = heads[1].content }) or ""
+            needle("front", "B", t.title .. " " .. (spec.contents and h1 or ""), t.title)
+            sections[#sections + 1] = "#section\tfront\t" .. front .. "\t"
+          end
+          if spec.contents then
+            for _, x in ipairs(contents(spec.contents, heads, s)) do out:insert(xe.raw(x)) end
+          end
+          if spec.authorities and meta.authorities then
+            out:insert(xe.raw(brk(s)))
+            for _, x in ipairs(authorities(spec.authorities, meta, s, counts)) do out:insert(xe.raw(x)) end
+          end
+          if front then
+            out:insert(xe.raw(section_end(s, "rIdXdPage", WORD_FMT[front])))
+            want = "decimal" -- the body from 1, at its first needle
+          else
+            out:insert(xe.raw(brk(s)))
+          end
+        end
         for _, x in ipairs(emit_list(xd.tree(spec, spec.front, meta, true), s, false)) do out:insert(xe.raw(x)) end
         out:extend(body(main, s, "Body Text"))
         for _, x in ipairs(emit_list(xd.tree(spec, spec.closing, meta, false), s, false)) do
           out:insert(xe.raw(x))
         end
         if #rest > 0 then
+          if spec.tail["break"] then out:insert(xe.raw(brk(s))) end
           s.pending = math.max(tw(spec.tail.above), s.pending)
           out:extend(body(rest, s, "XdTail", true))
+        end
+        if paged then
+          local f = io.open(os.getenv("FORMBOOK_NEEDLES"), "w")
+          f:write(table.concat(sections, "\n") .. "\n" .. table.concat(needles, "\n") .. "\n")
+          f:close()
+          write_section()
         end
         return pandoc.Pandoc(out, pandoc.Meta({}))
       end,

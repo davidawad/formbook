@@ -152,4 +152,5 @@ return require("latex.xdoc")({
       ["above"] = 28.8,
     },
   },
+  ["latex_bias"] = 0.05,
 })

@@ -150,4 +150,5 @@ return require("latex.xdoc")({
     ["indent"] = 36,
     ["above"] = 16.8,
   },
+  ["latex_bias"] = 0.05,
 })

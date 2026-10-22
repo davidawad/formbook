@@ -1,0 +1,42 @@
+% lib/latex/xdoc.sty: the page bookkeeping of the shared document model in LaTeX (fb-595.54.12; lib/latex/xdoc.lua
+% writes the document, the generated latex/template.tex loads this after xengine.sty). fb render inlines it in place of
+% \usepackage{xdoc}, so the .tex still compiles alone with stock pdflatex. The pages come from the .aux of the previous
+% run (fb render runs pdflatex until doc.aux settles), as typst's query() gives them:
+%   \xd@hmark{<n>}        in heading n's paragraph: its page goes to the .aux;
+%   \xd@hpage{<n>}        the page of heading n ("00" before it is known);
+%   \xd@amark{<k>}        right after an occurrence of authority k (in the body or a footnote);
+%   \xd@apages{<k>}       authority k's pages, in order, without repeats, joined by ", " ("--" when none).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{xdoc}[2026/10/22 shared document model: page bookkeeping]
+
+\newcommand\xd@hmark[1]{\protected@write\@auxout{}{\string\xd@hat{#1}{\thepage}}}
+\newcommand\xd@hat[2]{\expandafter\gdef\csname xd@h@#1\endcsname{#2}}
+\newcommand\xd@hpage[1]{\@ifundefined{xd@h@#1}{00}{\csname xd@h@#1\endcsname}}
+
+\newcommand\xd@amark[1]{\protected@write\@auxout{}{\string\xd@aat{#1}{\thepage}}}
+% A page joins authority k's list unless it is the last one there (the marks come in page order).
+\newcommand\xd@aat[2]{%
+  \@ifundefined{xd@a@#1}{%
+    \expandafter\xdef\csname xd@a@#1\endcsname{#2}%
+  }{%
+    \edef\xd@last{\csname xd@al@#1\endcsname}\edef\xd@this{#2}%
+    \ifx\xd@last\xd@this\else
+      \expandafter\xdef\csname xd@a@#1\endcsname{\csname xd@a@#1\endcsname, #2}%
+    \fi
+  }%
+  \expandafter\xdef\csname xd@al@#1\endcsname{#2}}
+\newcommand\xd@apages[1]{\@ifundefined{xd@a@#1}{--}{\csname xd@a@#1\endcsname}}
+
+% \xd@row{<above>}{<hang>}{<text>}{<page>}: lib/latex/xengine.sty's \xe@row (the text wraps before a column of \xe@col
+% kept for the page, a leader from three spaces after it to the page), with the room LibreOffice keeps before the page
+% column: the leader never ends closer to it than 0.325 em (lib/typst/xdoc.typ LEADER-MIN).
+\newcommand\xd@row[4]{%
+  \par\addvspace{#1}%
+  \begingroup\interlinepenalty=10000\relax
+  \noindent\hangindent=#2\relax\hangafter=1\relax
+  \rightskip=\dimexpr\xe@col\relax plus 1fil\relax\parfillskip=-\dimexpr\xe@col\relax\relax
+  #3\xe@leader\hskip0.325em\hbox to \xe@col{\hss#4}\par\endgroup}
+
+% \xd@ul{<text>}: underlined as typst and Word underline (Times New Roman's underline 0.109 em below the baseline,
+% 0.049 em thick); \underline draws below the box's depth, through the next line's box.
+\newcommand\xd@ul[1]{\setbox0=\hbox{#1}\rlap{\vrule height -0.0845em depth 0.1335em width \wd0}\box0}

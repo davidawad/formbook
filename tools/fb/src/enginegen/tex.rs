@@ -92,11 +92,13 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
 \usepackage[T1]{{fontenc}}
 % the typst template's face, in the metrics typst and Word set (docs/EVAL-LOOP.md, step 0)
 {pkg}
-% the page (layout.yaml margin); the page number's baseline {skip} bp below the text, where typst sets it
+% the page (layout.yaml margin); the page number's baseline {skip} bp below the text, where typst sets it; the text
+% block {bias} bp wider at the right than typst's, the measured drift of the face's advances (gen.rs latex_bias)
 \usepackage[letterpaper,top={t}bp,bottom={b}bp,left={le}bp,right={r}bp,headheight=0pt,headsep=0pt,footskip={skip}bp]{{geometry}}
 \usepackage{{enumitem}}
 \usepackage[hidelinks]{{hyperref}}
 \usepackage{{xengine}} % lib/latex/xengine.sty, inlined by fb render
+\usepackage{{xdoc}} % lib/latex/xdoc.sty (page bookkeeping), inlined by fb render
 \makeatletter
 % the body: {size} bp type in {body} bp line boxes, the first line indented {indent} bp (layout.yaml size, pitch.body,
 % indent)
@@ -132,7 +134,7 @@ $body$
         t = fmt(m("top")?),
         b = fmt(m("bottom")?),
         le = fmt(m("left")?),
-        r = fmt(m("right")?),
+        r = fmt(m("right")? - super::gen::latex_bias(face)),
         skip = fmt(skip),
         size = fmt(size),
         body = fmt(body),
@@ -143,6 +145,7 @@ $body$
         npitch = fmt(npitch),
         gap = fmt(gap),
         clear = fmt(clear),
+        bias = fmt(super::gen::latex_bias(face)),
         nraise = fmt(0.29 * nsize),
         nmark = fmt(0.58 * nsize),
         markers = markers(l),

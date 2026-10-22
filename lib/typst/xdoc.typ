@@ -33,7 +33,7 @@
 
 /// The value at a dotted path ("a.b", "." the context itself), or none.
 #let lookup(ctx, path) = {
-  if path == "." { return ctx }
+  if path == "." { return ctx.at(".", default: none) }
   let v = ctx
   for k in path.split(".") {
     if type(v) == dictionary and k in v { v = v.at(k) } else { return none }
@@ -120,17 +120,27 @@
       first = false
     } else if "columns" in b {
       // the columns, each with its context: a list of columns, or one column per item of a list (`each`)
-      let cols = if type(b.columns) == dictionary {
+      // (`per_row`: that many columns a row, the rows `row_gap` apart; a short last row keeps the widths)
+      let rows = if type(b.columns) == dictionary {
         let items = lookup(ctx, b.columns.each)
         if items == none { panic("xdoc: missing required metadata field `" + b.columns.each + "`") }
-        items.map(it => b.columns + (ctx: item-ctx(ctx, it)))
-      } else { b.columns.map(c => c + (ctx: ctx)) }
-      let widths = cols.map(c => if c.at("width", default: none) == none { 1fr } else { pt(c.width) })
-      block(width: 100%, above: above, below: below, breakable: false, grid(
-        columns: widths, column-gutter: pt(b.at("gutter", default: 0)),
-        ..cols.map(c => grid.cell(align: if c.at("valign", default: "top") == "center" { horizon } else { top },
-          blocks(spec, c.blocks, c.ctx, first: true))),
-      ))
+        let cols = items.map(it => b.columns + (ctx: item-ctx(ctx, it)))
+        let n = b.columns.at("per_row", default: cols.len())
+        range(0, cols.len(), step: calc.max(n, 1)).map(i => {
+          let row = cols.slice(i, calc.min(i + n, cols.len()))
+          row + range(n - row.len()).map(_ => (blocks: (), ctx: ctx))
+        })
+      } else { (b.columns.map(c => c + (ctx: ctx)),) }
+      for (ri, cols) in rows.enumerate() {
+        let widths = cols.map(c => if c.at("width", default: none) == none { 1fr } else { pt(c.width) })
+        let gap = if type(b.columns) == dictionary { pt(b.columns.at("row_gap", default: 0)) } else { 0pt }
+        block(width: 100%, above: if ri == 0 { above } else { gap }, below: if ri == rows.len() - 1 { below } else { 0pt },
+          breakable: false, grid(
+          columns: widths, column-gutter: pt(b.at("gutter", default: 0)),
+          ..cols.map(c => grid.cell(align: if c.at("valign", default: "top") == "center" { horizon } else { top },
+            blocks(spec, c.blocks, c.ctx, first: true))),
+        ))
+      }
       first = false
     } else if "each" in b {
       let items = lookup(ctx, b.each)
@@ -144,6 +154,15 @@
         blocks(spec, bl, item-ctx(ctx, it), first: first and i == 0)
       }
       if items.len() > 0 { first = false }
+    } else if "when" in b {
+      // the blocks, when the frontmatter has the field
+      if lookup(ctx, b.when) != none {
+        blocks(spec, b.blocks, ctx, first: first)
+        first = false
+      }
+    } else if "break" in b {
+      pagebreak(weak: true)
+      first = false
     } else if "group" in b {
       block(width: 100%, above: above, below: below, breakable: not b.at("keep", default: true),
         blocks(spec, b.group, ctx, first: true))
@@ -188,9 +207,48 @@
   if hs.len() == 0 { (bold: true) } else { hs.at(calc.min(n, hs.len()) - 1) }
 }
 
+/// The entries of the frontmatter's table of authorities (`authorities: [{heading, entries: [{cite, find}]}]`), in
+/// order, each with its number k (from 1; lib/pandoc/xdoc.lua numbers them alike).
+#let authority-entries(meta) = {
+  let out = ()
+  for g in meta.at("authorities", default: ()) { for e in g.entries { out.push(e + (k: out.len() + 1)) } }
+  out
+}
+
+/// Content with every occurrence of an authority's `find` text marked (<xd-toa>, the entry's number) at the end of the
+/// word it ends in: the pages of the table of authorities. Not before the word (typst sets a mark that opens a line at
+/// the end of the line before, a page early), not inside it (see below).
+#let with-marks(meta, content) = {
+  let out = content
+  for e in authority-entries(meta) {
+    if "find" in e {
+      let k = e.k
+      out = {
+        // the whole word around the find: a show rule that split it ("MCL 15.243" from "(1)(f)") would let
+        // xengine's ")(" box start a word of its own, a place to break the line LaTeX and Word do not have
+        show regex("\\S*" + e.find.replace(regex("[.*+?^${}()|\\[\\]\\\\]"), m => "\\" + m.text) + "\\S*"): it => [#it#metadata(k)<xd-toa>]
+        out
+      }
+    }
+  }
+  out
+}
+
+/// The numbering of the pages from here on (a typst numbering pattern, or none): the document is numbered "1" from its
+/// first page, unless `page_number.front` numbers the tables before the body apart (cover none, tables "i" from 1,
+/// body "1" from 1).
+#let xd-num = state("xd-num", "1")
+#let FORMATS = ("lower-roman": "i", "upper-roman": "I", "decimal": "1")
+
+/// The label of the page at a location.
+#let page-label(loc) = {
+  let fmt = xd-num.at(loc)
+  if fmt == none { "" } else { numbering(fmt, ..counter(page).at(loc)) }
+}
+
 /// The body: markdown; paragraphs at the body pitch with a first-line indent, headings, quotations, lists and
-/// footnotes as layout.yaml says.
-#let body-of(spec, src) = {
+/// footnotes as layout.yaml says, the authorities marked.
+#let body-of(spec, meta, src) = {
   let q = spec.at("quote", default: (:))
   show heading: it => {
     let st = heading-style(spec, it.level)
@@ -205,7 +263,75 @@
     set par(first-line-indent: 0pt, spacing: pt(q.at("gap", default: 0)))
     pad(left: pt(q.at("left", default: spec.indent)), right: pt(q.at("right", default: spec.indent)), it.body)
   })
-  cmarker.render(src, raw-typst: false, smart-punctuation: true, h1-level: 1)
+  with-marks(meta, cmarker.render(src, raw-typst: false, smart-punctuation: true, h1-level: 1))
+}
+
+/// One row of a table of contents or authorities: lib/typst/xengine.typ's listing-row (the text wraps before a page
+/// column `col`, a leader from three spaces after it to the page), with the room LibreOffice keeps: a right tab whose
+/// leader has less than `LEADER-MIN` before the page column moves the last word to a new line (measured at 12 and 14
+/// pt: 0.3232 to 0.3267 em), so the leader here never ends closer than that to the column either.
+#let LEADER-MIN = 0.325em
+#let table-row(target, body, page, col, hang-by, above) = {
+  let row = block(width: 100%, above: above, below: 0pt, breakable: false, grid(
+    columns: (1fr, col), column-gutter: 0pt,
+    par(hanging-indent: hang-by, first-line-indent: 0pt, leading: 0pt, justify: false, {
+      body
+      h(0.75em)
+      box(width: 1fr, repeat[.])
+      h(LEADER-MIN)
+    }),
+    align(right + bottom, page),
+  ))
+  if target == none { row } else { link(target, row) }
+}
+
+/// The title of a table (contents, authorities): the level-1 heading style, not a heading itself; it opens a page.
+#let table-title(spec, t) = {
+  pagebreak(weak: true)
+  let st = heading-style(spec, 1) + t.at("style", default: (:))
+  line-block(spec, st + (keep: true), inl(st, t.title), 0pt, pt(st.at("below", default: 0)))
+}
+
+/// The table of contents (layout.yaml `contents`): a row per heading of the body (levels to `depth`), its text
+/// wrapping before a page column `col` and `hang` under its first line, `step` further in per level, `above` over
+/// each row; the leader runs from three spaces after the text to the page (lib/typst/xengine.typ listing-row).
+#let contents-pages(spec, c) = {
+  table-title(spec, c)
+  set text(..edges(pitch-of(spec, c.at("pitch", default: none))))
+  context {
+    let hs = query(selector(heading).after(<xd-body>)).filter(h => h.level <= c.at("depth", default: 3))
+    for h in hs {
+      // the row's space above outside the indent (inside it typst would drop it: the start of a container)
+      block(width: 100%, above: pt(c.at("above", default: 0)), below: 0pt,
+        pad(left: (h.level - 1) * pt(c.at("step", default: 0)), table-row(h.location(), h.body,
+          page-label(h.location()), pt(c.at("col", default: 36)), pt(c.at("hang", default: 0)), 0pt)))
+    }
+  }
+}
+
+/// The table of authorities (layout.yaml `authorities`, the frontmatter's `authorities`): each group's heading in
+/// the `group` style, then a row per entry, its pages (the distinct pages of its marks, or the entry's own `pages`,
+/// or "--") in a column of `col` or the list's own width when wider.
+#let authorities-pages(spec, a, meta) = {
+  table-title(spec, a)
+  set text(..edges(pitch-of(spec, a.at("pitch", default: none))))
+  let gst = a.at("group", default: (bold: true))
+  let k = 0
+  for g in meta.authorities {
+    line-block(spec, gst + (keep: true), inl(gst, g.heading), pt(gst.at("above", default: 0)),
+      pt(gst.at("below", default: 0)))
+    for e in g.entries {
+      k += 1
+      let key = k
+      context {
+        let pages = query(<xd-toa>).filter(m => m.value == key).map(m => page-label(m.location())).dedup()
+        let list = if "find" not in e { str(e.at("pages", default: "--")) } else if pages.len() == 0 { "--" } else {
+          pages.join(", ") }
+        table-row(none, md(e.cite), list, calc.max(pt(a.at("col", default: 56)), measure(list).width),
+          pt(a.at("hang", default: 0)), pt(a.at("above", default: 0)))
+      }
+    }
+  }
 }
 
 /// The whole document: page, type, the cross-engine model, front matter, body, closing, tail.
@@ -219,14 +345,18 @@
   set page(paper: "us-letter", margin: (top: pt(m.top), bottom: pt(m.bottom), left: pt(m.left), right: pt(m.right)),
     footer-descent: 30%, footer: context {
       let n = counter(page).get().first()
-      if pn != none and n >= pn.at("from", default: 1) {
+      let fmt = xd-num.get()
+      if pn != none and fmt != none and n >= pn.at("from", default: 1) {
         let al = (left: left, center: center, right: right).at(pn.at("align", default: "center"))
-        align(al, text(..edges(pt(spec.pitch.single)), str(n)))
+        align(al, text(..edges(pt(spec.pitch.single)), numbering(fmt, n)))
       }
     })
   set text(font: spec.font, size: pt(spec.size), lang: "en", region: "us", fallback: false)
   set par(first-line-indent: (amount: pt(spec.indent), all: true))
   show: xengine.with(pitch: pt(spec.pitch.body), list-indent: none) // lists: list-items
+  // no punctuation hanging into the margin (typst's overhang): LaTeX and Word set none, and a hanging period moved a
+  // centered line 1.4 pt and lets a line hold more
+  set text(overhang: false)
   set heading(numbering: none)
   set footnote.entry(gap: pt(fn.at("gap", default: 7)), clearance: pt(fn.at("clearance", default: 7.5)), indent: 0pt,
     separator: line(length: 30%, stroke: 0.5pt))
@@ -234,24 +364,42 @@
     set text(size: pt(fn.at("size", default: spec.size)), ..edges(note-pitch))
     set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt)
     let note = it.note
-    [#super(numbering(note.numbering, ..counter(footnote).at(note.location())))#h(0.25em)#note.body]
+    [#super(numbering(note.numbering, ..counter(footnote).at(note.location())))#h(0.25em)#with-marks(meta, note.body)]
   }
   // the body up to the tail heading, and the tail (certificates set after the closing)
   let tail = spec.at("tail", default: none)
   let (main, rest) = (body, "")
   if tail != none {
     let at = body.match(regex("(?m)^# +" + tail.at))
-    if at != none { (main, rest) = (body.slice(0, at.start), body.slice(at.start)) }
+    if at != none {
+      // footnote definitions (at the end of the sample) serve both parts: each part gets them all
+      let defs = body.matches(regex("(?m)^\\[\\^[^\\]]+\\]:.*(\\n(    |\\t).*)*")).map(m => m.text).join("\n\n")
+      (main, rest) = (body.slice(0, at.start) + "\n\n" + defs, body.slice(at.start))
+    }
   }
+  let front = if pn == none { none } else { pn.at("front", default: none) }
+  if front != none { xd-num.update(none) }
+  if "cover" in spec {
+    blocks(spec, spec.cover, meta, first: true)
+    pagebreak()
+  }
+  // the tables numbered apart (page_number.front), from 1
+  if front != none { xd-num.update(FORMATS.at(front)); counter(page).update(1) }
+  if "contents" in spec { contents-pages(spec, spec.contents) }
+  if "authorities" in spec and "authorities" in meta { authorities-pages(spec, spec.authorities, meta) }
+  if "contents" in spec or "authorities" in spec { pagebreak(weak: true) }
+  if front != none { xd-num.update("1"); counter(page).update(1) }
+  [#metadata(none)<xd-body>]
   blocks(spec, spec.at("front", default: ()), meta, first: true)
-  body-of(spec, main)
+  body-of(spec, meta, main)
   blocks(spec, spec.at("closing", default: ()), meta)
   if rest != "" {
+    if tail.at("break", default: false) { pagebreak(weak: true) }
     block(width: 100%, above: pt(tail.at("above", default: 0)), below: 0pt, {
       set text(..edges(pitch-of(spec, tail.at("pitch", default: none))))
       set par(first-line-indent: (amount: pt(tail.at("indent", default: 0)), all: true),
         spacing: pt(tail.at("gap", default: 0)))
-      body-of(spec, rest)
+      body-of(spec, meta, rest)
     })
   }
 }

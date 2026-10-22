@@ -161,6 +161,16 @@ pub fn latex_face(face: &str) -> Result<(&'static str, Option<f64>), String> {
     }
 }
 
+/// How much wider the LaTeX text block is than typst's (points): newtx sets a full line up to about 0.05 bp wider
+/// than Times New Roman (+0.05/1000 em per character; docs/EVAL-LOOP.md, fb-595.54.9), which moved the break of a line
+/// typst fills to within that (the Arkansas pilot: 0.05 pt to spare, 0.06 pt of drift).
+pub fn latex_bias(face: &str) -> f64 {
+    match face {
+        "Times New Roman" | "Liberation Serif" | "TeX Gyre Termes" => 0.05,
+        _ => 0.0,
+    }
+}
+
 /// The page number's line: its pitch and baseline below the text (typst: footer-descent 30 % of the bottom margin,
 /// the number in a single line box), and Word's footer distance (from the page foot to the bottom of that box).
 pub fn footer(l: &Value) -> Result<(f64, f64, f64), String> {
@@ -179,8 +189,14 @@ pub fn generate(l: &Value, face: &str) -> Result<Files, String> {
         return Err(errs.join("\n"));
     }
     let spec = lua(l, 0);
+    // the LaTeX text block is wider by the face's measured bias (latex_bias), and lib/latex/xdoc.lua must know it
+    let mut lt = l.clone();
+    if let Some(m) = lt.as_mapping_mut() {
+        m.insert("latex_bias".into(), latex_bias(face).into());
+    }
+    let latex_spec = lua(&lt, 0);
     let latex_lua = format!(
-        "-- {HEAD}\n-- The shared document model in LaTeX: lib/latex/xdoc.lua sets this layout.\nreturn require(\"latex.xdoc\")({spec})\n"
+        "-- {HEAD}\n-- The shared document model in LaTeX: lib/latex/xdoc.lua sets this layout.\nreturn require(\"latex.xdoc\")({latex_spec})\n"
     );
     let docx_lua = format!(
         "-- {HEAD}\n-- The shared document model in Word: lib/docx/xdoc.lua sets this layout.\nreturn require(\"docx.xdoc\")({spec})\n"
