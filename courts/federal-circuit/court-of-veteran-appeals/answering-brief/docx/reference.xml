@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The CAVC answering brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template (Liberation Sans, CAVC-FORM-004) at 14 pt (size 28 half points); Body Text and List Item in
+     29.4 pt line boxes (typst pitch-double, CAVC-FORM-003) with a half-inch indent; quotations and footnotes in 17 pt
+     boxes (typst pitch-single); the heading styles in 20 pt boxes (cavc.lua sets every heading's own spacing; the
+     styles give the outline levels). Twips: 20 x pt.
+     One change to the recipe: a footnote may run over to the next page (Footnote Text without keepLines), as typst
+     sets a note that does not fit: the recipe keeps a note whole, which moves it off its reference's page. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="588" single="340" indent="720" heading="400">
+  <w:style w:type="paragraph" w:styleId="FootnoteText">
+    <w:name w:val="Footnote Text"/>
+    <w:basedOn w:val="Normal"/>
+    <w:next w:val="FootnoteText"/>
+    <w:uiPriority w:val="9"/>
+    <w:unhideWhenUsed/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:before="0" w:after="140" w:line="340" w:lineRule="exact"/>
+    </w:pPr>
+    <w:rPr>
+      <w:sz w:val="28"/>
+      <w:szCs w:val="28"/>
+    </w:rPr>
+  </w:style>
+</reference>
