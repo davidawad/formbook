@@ -5,27 +5,48 @@
 // the rule text. No case-specific text, no coordinates measured off the exemplar, no forced line
 // breaks. Every case-specific word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
 #let font-family = ("Times New Roman", "Liberation Serif")        // CASB-FORM-002: vendored in fonts/; see README.md
 #let type-size = 12pt                   // CASB-FORM-002: 12 point; the rule text is not verified, see README.md
-#let pitch = 24pt                       // CASB-FORM-003: double spacing; the numbered lines are this pitch
 #let lines-per-page = 27                // CASB-FORM-003: pleading paper, 28 numbered lines (exemplars)
 #let page-w = 8.5in                     // CASB-FORM-001: 8 1/2 x 11 paper
 #let page-h = 11in
 #let top-margin = 72pt                  // the numbered lines start at the top margin
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the footer
 #let left-margin = 1.5in                // room for the line numbers and the rules
 #let right-margin = 1in
 #let text-width = page-w - left-margin - right-margin
-#let body-leading = 1.35em              // double spacing: 1.35em leading gives a 24 pt baseline pitch at 12 pt (measured, README.md)
-#let single-leading = 0.5em             // single spacing for counsel, caption, signature, tables of contents and authorities
-#let para-indent = 0.5in
+#let number-width = 1in                 // the line numbers stand right-aligned in the first inch of the page
+#let para-indent = 0.5in                // first-line indent of the motion's paragraphs
+#let quote-indent = 0.5in               // a block quotation is set in this far on both sides (Admin. Proc. 2.5)
 #let heading-tab = 0.5in                // the label column of a numbered heading
 #let passim-threshold = 7               // an authority cited on this many pages or more is "passim"
 #let counsel-lines = 7                  // the court title starts after at least this many numbered lines
+#let caption-left = 3.2in               // width of the party column of the caption
+#let caption-gutter = 0.2in             // between the party column's rule and the case column
+#let caption-inset = 10pt               // the party text stands off the column's rule
+#let right-inset = 0.1in                // the case column's text stands this far in
+#let sig-left = 2.6in                   // the date column of the signature block
+#let page-size = 10pt                   // the footer's page number
+#let footer-size = 9pt                  // the footer's title and case number
+#let footer-top = 4pt                   // the footer starts this far below the last numbered line
+#let footer-gap = 2pt                   // between the footer's lines
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch = 24pt                       // CASB-FORM-003: double spacing; the numbered lines are this pitch
+#let pitch-single = 12pt                // counsel, caption, headings, quotations, signature: single-spaced, exactly
+                                        // half a numbered line
+#let pitch-page = 11.5pt                // the footer's page number line, 1.15 x its size
+#let pitch-footer = 10.4pt              // the footer's title and case number lines
+#let half-gap = 12pt                    // between the caption's parts and the signature's groups
+#let drop = 9.6pt                       // a single-spaced block starts this far into its numbered line, so that its first
+                                        // line (and every second after it) stands on the line number's baseline
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the footer
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -40,37 +61,39 @@
 
 /// Inline markdown (italics, citations).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
 #let need(meta, key) = {
   if key not in meta { panic("casb-motion-brief: missing required metadata field `" + key + "`") }
   meta.at(key)
 }
 
-/// Fill whole numbered lines: the block is rounded up to a multiple of `pitch`, so whatever follows
-/// it stays on the grid of numbered lines.
-#let on-grid(c) = context {
-  let h = measure(width: text-width, c).height
-  block(width: text-width, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, c)
+/// One single-spaced line block (a paragraph of its own), with explicit space above it.
+#let line-block(above: 0pt, body) = block(width: 100%, above: above, below: 0pt, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  body
+})
+
+/// Whole numbered lines: a block of single lines starting `drop` into its first numbered line, rounded up to a
+/// multiple of `pitch` (at least `min` lines), so whatever follows it stays on the grid of numbered lines. The Word
+/// filter counts the same lines (docx/lib/lines.lua).
+#let on-grid(min: 0, c) = context {
+  let h = measure(width: text-width, c).height + drop
+  block(width: 100%, height: calc.max(min, calc.ceil(h / pitch)) * pitch, inset: (top: drop), above: 0pt,
+    below: 0pt, c)
 }
-
-/// A heading: whole numbered lines, kept with the text after it.
-#let heading-block(c) = block(width: text-width, sticky: true, above: 0pt, below: 0pt, on-grid(c))
-
-/// A single-spaced paragraph whose continuation lines are indented by `indent`.
-#let hang(indent, body) = par(
-  hanging-indent: indent, first-line-indent: 0pt, leading: single-leading, justify: false, body,
-)
 
 // ---------------------------------------------------------------------------
 // Page furniture (pleading paper, as in the exemplars)
 // ---------------------------------------------------------------------------
 
-/// Numbers 1 to 28 down the left margin, one per numbered line.
+/// Numbers 1 to 27 down the left margin, one per numbered line, on the baseline of its line.
 #let line-numbers() = {
   for i in range(1, lines-per-page + 1) {
     place(top + left, dx: 0pt, dy: top-margin + (i - 1) * pitch,
-      block(width: left-margin - 0.5in, height: pitch,
-        align(right, text(size: type-size, str(i)))))
+      block(width: number-width, height: pitch,
+        align(right, text(size: type-size, ..edges(pitch), str(i)))))
   }
 }
 
@@ -85,21 +108,22 @@
 #let footer-block(meta) = place(
   top + left,
   dx: left-margin,
-  dy: top-margin + lines-per-page * pitch + 4pt,
-  block(width: text-width, stack(
-    dir: ttb,
-    spacing: 2pt,
-    align(center, text(size: 10pt, context {
+  dy: top-margin + lines-per-page * pitch + footer-top,
+  block(width: text-width, {
+    set par(first-line-indent: 0pt)
+    block(width: 100%, below: 0pt, align(center, text(size: page-size, ..edges(pitch-page), context {
       let pn = here().page-numbering()
       if pn != none { numbering(pn, ..counter(page).get()) }
-    })),
-    align(center, text(size: 9pt, upper(need(meta, "footer_title")))),
-    align(center, text(size: 9pt, [CASE NO. #need(meta, "case_number")])),
-  )),
+    })))
+    set text(size: footer-size, ..edges(pitch-footer))
+    block(width: 100%, above: footer-gap, below: 0pt, align(center, upper(inl(need(meta, "footer_title")))))
+    block(width: 100%, above: footer-gap, below: 0pt, align(center, [CASE NO. #need(meta, "case_number")]))
+  }),
 )
 
 // ---------------------------------------------------------------------------
-// Tables of contents and authorities (LBR 9013-7(d)(3); see README.md)
+// Tables of contents and authorities (LBR 9013-7(d)(3); see README.md). The typst engine builds them; the Word
+// filter does not (it stops on `toc: true`).
 // ---------------------------------------------------------------------------
 
 // Headings: numbering (level 2 "I.", 3 "A.", 4 "1.", 5 "a."); level 1 is unnumbered.
@@ -115,6 +139,9 @@
 
 #let dot-leader = box(width: 1fr, repeat[.#h(0.25em)])
 
+/// A single-spaced paragraph whose continuation lines are indented by `indent`.
+#let hang(indent, body) = par(hanging-indent: indent, first-line-indent: 0pt, body)
+
 /// One table-of-contents row from a heading element; wrapped lines hang under the title.
 #let toc-entry(hd) = {
   let nums = counter(heading).at(hd.location()).slice(0, hd.level)
@@ -122,7 +149,7 @@
   let ind = if hd.level == 1 { 0pt } else { (hd.level - 2) * heading-tab }
   let pg = numbering(hd.location().page-numbering(), ..counter(page).at(hd.location()))
   // The page number sits in its own column so a wrapped title can never push it onto a new line.
-  link(hd.location(), block(width: 100%, above: 0.45em, below: 0pt, grid(
+  link(hd.location(), block(width: 100%, above: half-gap, below: 0pt, grid(
     columns: (1fr, auto), column-gutter: 0.4em,
     hang(ind + heading-tab, {
       h(ind)
@@ -137,7 +164,8 @@
 
 #let toc-section() = {
   heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  align(right, block(above: 0.3em, below: 0pt, strong[Page]))
+  set text(..edges(pitch-single))
+  align(right, block(above: half-gap, below: 0pt, strong[Page]))
   context {
     for hd in query(heading.where(outlined: true)) {
       if hd.level <= 4 { toc-entry(hd) }
@@ -158,7 +186,8 @@
 /// Table of authorities, built from the `toa:` links found in the body.
 #let toa-section(authorities) = {
   heading(level: 1, numbering: none, outlined: false)[Table of Authorities]
-  align(right, block(above: 0.3em, below: 0pt, strong[Page(s)]))
+  set text(..edges(pitch-single))
+  align(right, block(above: half-gap, below: 0pt, strong[Page(s)]))
   context {
     let hits = query(<toa-hit>)
     for h in hits {
@@ -166,17 +195,12 @@
         panic("casb-motion-brief: link `toa:" + h.value + "` has no entry under `authorities:` in the frontmatter")
       }
     }
-    let first = true
     for (kind, title) in toa-groups {
       let members = authorities.pairs()
         .filter(p => p.last().kind == kind and hits.any(h => h.value == p.first()))
         .sorted(key: p => sort-key(p.last()))
       if members.len() == 0 { continue }
-      block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
-        set par(first-line-indent: 0pt, leading: single-leading)
-        strong(title)
-      })
-      first = false
+      block(above: pitch, below: 0pt, sticky: true, strong(title))
       for (key, a) in members {
         // Distinct printed page labels, in document order.
         let pages = ()
@@ -186,7 +210,7 @@
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.6em, below: 0pt, width: 100%, hang(0.35in, {
+        block(breakable: false, above: half-gap, below: 0pt, width: 100%, hang(0.35in, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [, ]
@@ -206,29 +230,17 @@
 // Cover: counsel, court title, caption
 // ---------------------------------------------------------------------------
 
-/// One single-spaced line per item.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => inl(i)))
-}
-
 /// Counsel identification, upper left, from line 1. More counsel lines push the court title down.
-#let counsel-block(meta) = context {
-  let h = measure(width: text-width, line-stack(need(meta, "counsel"))).height
-  block(width: text-width, height: calc.max(counsel-lines, calc.ceil(h / pitch)) * pitch,
-    line-stack(need(meta, "counsel")))
-}
+#let counsel-block(meta) = on-grid(min: counsel-lines, for l in need(meta, "counsel") { line-block(inl(l)) })
 
 #let court-title(meta) = {
-  on-grid(align(center, text(weight: "bold", "UNITED STATES BANKRUPTCY COURT")))
-  on-grid(align(center, text(weight: "bold", "SOUTHERN DISTRICT OF CALIFORNIA")))
-  if "division" in meta {
-    on-grid(align(center, text(weight: "bold", upper(meta.division))))
-  }
+  let lines = ("UNITED STATES BANKRUPTCY COURT", "SOUTHERN DISTRICT OF CALIFORNIA")
+  if "division" in meta { lines.push(upper(meta.division)) }
+  for l in lines { block(width: 100%, above: 0pt, below: 0pt, align(center, strong(l))) }
 }
 
 /// A list of parties: each side's names, then its designation; "vs." between the sides.
-#let party-rows(sides) = {
+#let party-lines(sides) = {
   let rows = ()
   for (k, p) in sides.enumerate() {
     if k > 0 { rows.push("vs.") }
@@ -237,40 +249,34 @@
   rows
 }
 
-#let caption(meta) = on-grid(grid(
-  columns: (3.2in, 1fr),
-  column-gutter: 0.2in,
-  block(width: 3.2in, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt), {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    line-stack(("In re",) + party-rows(need(meta, "in_re")))
-    v(pitch * 0.5)
-    line-stack(party-rows(need(meta, "caption")))
-  }),
-  block(inset: (left: 0.1in), {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    line-stack(("Case No. " + need(meta, "case_number"), "Chapter " + need(meta, "chapter")))
-    if "adv_number" in meta {
-      v(pitch * 0.5)
-      line-stack(("Adv. Proc. No. " + meta.adv_number,))
+/// The caption, a numbered line below the court title, on whole numbered lines: the debtor ("In re"), then the
+/// adversary parties, in a column ruled on the right and bottom; the case numbers, the title of the paper, a hearing
+/// and the judge beside it.
+#let caption(meta) = block(width: 100%, above: pitch, below: 0pt, on-grid(grid(
+  columns: (caption-left, 1fr),
+  column-gutter: caption-gutter,
+  block(width: 100%, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: caption-inset, bottom: half-gap), {
+    for l in ("In re",) + party-lines(need(meta, "in_re")) { line-block(inl(l)) }
+    for (j, l) in party-lines(need(meta, "caption")).enumerate() {
+      line-block(above: if j == 0 { half-gap } else { 0pt }, inl(l))
     }
-    v(pitch * 0.5)
-    [#text(weight: "bold", inl(need(meta, "brief_title")))]
-    // A hearing, when one is set, goes two lines below the case number (AP 2.3(a); see README.md).
+  }),
+  pad(left: right-inset, {
+    line-block[Case No. #need(meta, "case_number")]
+    line-block[Chapter #need(meta, "chapter")]
+    if "adv_number" in meta { line-block(above: half-gap)[Adv. Proc. No. #meta.adv_number] }
+    line-block(above: half-gap, strong(inl(need(meta, "brief_title"))))
+    // A hearing, when one is set, follows the title (AP 2.3(a); see README.md).
     if "hearing" in meta {
-      v(pitch * 0.5)
-      line-stack(meta.hearing)
+      for (j, l) in meta.hearing.enumerate() { line-block(above: if j == 0 { half-gap } else { 0pt }, inl(l)) }
     }
-    if "judge" in meta {
-      v(pitch * 0.5)
-      inl(meta.judge)
-    }
+    if "judge" in meta { line-block(above: half-gap, inl(meta.judge)) }
   }),
-))
+)))
 
 #let cover(meta) = {
   counsel-block(meta)
   court-title(meta)
-  v(pitch)
   caption(meta)
 }
 
@@ -278,48 +284,67 @@
 // Signature block
 // ---------------------------------------------------------------------------
 
+// The signature block, a numbered line below the text, is kept whole: it never splits across a page break. The
+// space above it is an inset, kept at the top of a page as Word keeps the space above a table's first line.
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  on-grid(grid(columns: (2.6in, 1fr), column-gutter: 0.2in,
-    [Dated: #need(meta, "date")],
+  block(breakable: false, width: 100%, above: 0pt, below: 0pt, inset: (top: pitch + drop), grid(
+    columns: (sig-left, 1fr),
+    column-gutter: caption-gutter,
+    line-block[Dated: #need(meta, "date")],
     {
-      set par(leading: single-leading, spacing: 0pt, justify: false)
-      [Respectfully submitted,]
-      v(pitch * 0.5)
-      line-stack(sig.firm)
-      v(pitch * 0.5)
-      line-stack(("/s/ " + sig.signer,) + sig.at("lines", default: ()))
-    }))
+      line-block[Respectfully submitted,]
+      for (j, l) in sig.firm.enumerate() { line-block(above: if j == 0 { half-gap } else { 0pt }, inl(l)) }
+      line-block(above: half-gap, [/s/ #sig.signer])
+      for l in sig.at("lines", default: ()) { line-block(inl(l)) }
+    },
+  ))
 }
 
 // ---------------------------------------------------------------------------
 // The motion
 // ---------------------------------------------------------------------------
 
-/// The markdown body, one blank-line-separated chunk at a time, each chunk on whole numbered lines
-/// (as in the complaint template): a heading, a quotation (single-spaced and indented, Admin. Proc. 2.5),
-/// or a paragraph. Paragraph gaps come from the grid, not from `par.spacing`, which is 0 here.
-#let motion-body(md) = {
-  let chunks = md.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
+/// Headings: level 1 a centered section in capitals, one numbered line; level 2 and below single-spaced and bold,
+/// the label ("I.", "A.") in a box and the title hanging after it, rounded to whole numbered lines. Sticky: a heading
+/// never ends a page.
+#let heading-rule(it) = context {
+  set text(size: type-size)
+  set par(first-line-indent: 0pt)
+  if it.level == 1 {
+    block(sticky: true, width: 100%, above: 0pt, below: 0pt, align(center, strong(upper(it.body))))
+  } else {
+    let nums = counter(heading).at(it.location()).slice(0, it.level)
+    let lab = if it.numbering == none { "" } else { numbering(it.numbering, ..nums) }
+    let ind = (it.level - 2) * heading-tab
+    block(sticky: true, width: 100%, above: 0pt, below: 0pt, on-grid({
+      set text(..edges(pitch-single))
+      par(hanging-indent: ind + heading-tab, [#h(ind)#box(width: heading-tab, lab)#strong(it.body)])
+    }))
+  }
+}
+
+/// The markdown body, one blank-line-separated chunk at a time: a heading; a quotation (single-spaced and indented,
+/// Admin. Proc. 2.5), rounded to whole numbered lines; or a double-spaced paragraph with a first-line indent.
+#let motion-body(src) = {
+  let chunks = src.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
   for c in chunks {
     let t = c.trim()
     if t.starts-with("#") {
-      cmarker.render(t, raw-typst: false, smart-punctuation: true)
+      md(t)
     } else if t.starts-with(">") {
-      on-grid(pad(left: 0.5in, right: 0.5in, {
-        set par(leading: single-leading, first-line-indent: 0pt)
-        cmarker.render(t, raw-typst: false, smart-punctuation: true)
+      on-grid(pad(left: quote-indent, right: quote-indent, {
+        set text(..edges(pitch-single))
+        set par(first-line-indent: 0pt)
+        md(t.split(regex("\\r?\\n")).map(l => l.trim(">", at: start).trim()).join("\n"))
       }))
     } else {
-      on-grid({
-        set par(leading: body-leading, first-line-indent: para-indent)
-        cmarker.render(t, raw-typst: false, smart-punctuation: true)
-      })
+      block(width: 100%, above: 0pt, below: 0pt, par(first-line-indent: (amount: para-indent, all: true), md(t)))
     }
   }
 }
 
-#let casb-motion-brief(meta, md) = {
+#let casb-motion-brief(meta, src) = {
   // ---- metadata checks (loud failure beats silent omission) ----
   for k in ("case_number", "chapter", "caption", "in_re", "counsel", "brief_title", "footer_title", "signature", "date") {
     let _ = need(meta, k)
@@ -337,20 +362,22 @@
       pleading-rules()
     },
     foreground: footer-block(meta),
+    footer: none,
   )
   set document(
     title: need(meta, "brief_title") + ", No. " + need(meta, "case_number"),
     author: need(meta, "signature").signer,
   )
-  set text(
-    font: font-family, size: type-size, lang: "en", region: "us",
-    hyphenate: false, fallback: false,
-  )
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the numbered-line pitch.
+  show: xengine.with(pitch: pitch)
+  // A doubled sign stays with its number ("§§ 523(a)(2)(A)"), as the Word filter binds it (xengine binds one sign).
+  show regex("[§¶]{2,} \\S+"): it => box(it)
   set heading(numbering: heading-num)
-  set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
-  show footnote.entry: set text(size: type-size)
-  show footnote.entry: set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em)
+  set footnote.entry(indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
+  show footnote.entry: set text(size: type-size, ..edges(pitch-single))
+  show footnote.entry: set par(first-line-indent: 0pt, leading: 0pt)
 
   // Authority links: a link whose target is `toa:KEY` is recorded with the page it starts on.
   show link: it => {
@@ -361,34 +388,13 @@
       it
     }
   }
-
-  // Headings: level 1 a centered section; level 2 a numbered section ("I."), hanging; level 3 "A.", bold.
-  show heading: it => context {
-    if it.level == 1 {
-      heading-block(align(center, text(weight: "bold", upper(it.body))))
-    } else {
-      let nums = counter(heading).at(it.location()).slice(0, it.level)
-      let lab = if it.numbering == none { "" } else { numbering(it.numbering, ..nums) }
-      let ind = (it.level - 2) * heading-tab
-      heading-block(hang(ind + heading-tab, {
-        h(ind)
-        box(width: heading-tab, lab)
-        strong(it.body)
-      }))
-    }
-  }
+  show heading: heading-rule
 
   // The "TO:" line follows the caption; the body follows it. With a table of contents, the tables
   // come first (roman pages), then the body restarts at page 1.
   let body = {
-    set par(first-line-indent: para-indent)
-    if "lead_in" in meta {
-      on-grid({
-        set par(leading: body-leading)
-        inl(meta.lead_in)
-      })
-    }
-    motion-body(md)
+    if "lead_in" in meta { block(width: 100%, above: 0pt, below: 0pt, inl(meta.lead_in)) }
+    motion-body(src)
     signature-block(meta)
   }
 
