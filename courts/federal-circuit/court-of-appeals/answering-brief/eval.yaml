@@ -2,3 +2,8 @@
 # where the typst render does (fb-595.54.6, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-001: the cover and the representative-claim page after it are unnumbered. Fed. Cir. R. 32(a)(3) puts a
+  # patent appeal's exemplary claims inside the front cover or right after it (CAFC-AB-CONT-005), and EX-ABLYNX,
+  # this folder's FILED-EXAMPLE, prints them on an unnumbered page 2 before the certificate of interest (i). The
+  # sample carries patent_claims, so the front matter starts at page 3.
+  cover_pages: 2
