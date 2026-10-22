@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated yet: the docx render matches
+# typst line for line, but LaTeX does not break a long URL where typst and Word do (p7, footnote 11), a difference of
+# the shared model, not this folder's (docs/open-items/fb-595.54.18.md); it moves footnotes 14-15 and the p9-p10 page
+# ends.
+params:
+  cross_engine: report

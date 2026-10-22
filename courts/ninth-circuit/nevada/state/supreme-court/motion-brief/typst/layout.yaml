@@ -1,0 +1,107 @@
+# Nevada Supreme Court (nev): motion and supporting memorandum (NRAP 27; motion-brief). The whole layout, as data for
+# the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). NRAP 27(d)(1) asks for a caption, not a cover: the caption page (court, docket number, title of the
+# case, descriptive title, counsel) is page 1 and the motion starts on page 2, every page numbered. Numbers trace to
+# NRAP 27 and 32 (../../rules.md, NEV-*); lengths in points. No case text here: every string printed comes from the
+# sample's frontmatter ({field}) or is a court constant.
+size: 14                  # NEV-FORM-004 (NRAP 32(a)(5)(A), 27(d)(1)): proportionally spaced type, 14 points or larger
+pitch:
+  body: 32.2              # NEV-FORM-003 (NRAP 27(d)(1), 32(a)(4)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # caption, headings, footnotes, signature, recipients: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # NEV-FORM-002 (NRAP 27(d)(1), 32(a)(4)): at least one inch on all four sides
+indent: 36                # convention: half-inch first-line indent
+page_number: {align: center}   # NEV-FORM-006 (NRAP 32(a)(4)): consecutively numbered at the bottom, from page 1 (a motion has no tables)
+footnote: {size: 14, gap: 7}   # NEV-FORM-004 (NRAP 32(a)(5)): footnotes in the body's size and face; single spaced (NEV-FORM-003)
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # NEV-FORM-003: quotations of more than two lines indented, single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}   # convention: sections centred, capitals, bold (single spaced, NEV-FORM-003)
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}                     # convention: sub-headings bold, left
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The caption page (NRAP 27(d)(1)(B)): the court's name, the title of the case (the proceeding, each side and its
+# designation), the docket number and the descriptive title, with the NRAP 27(e)(2) statement of the date by which
+# action is needed on an emergency motion; then counsel, two groups a row (convention, as filed Nevada captions); the
+# motion from the next page. Set as `front` and a break, not `cover`: lib/docx/xdoc.lua writes a cover only when the
+# document has a table of contents or authorities (docs/open-items/fb-595.54.18.md).
+front:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF NEVADA", align: center, bold: true}
+  # The two caption columns keep to one grid of single lines (a blank line between parts), so side by side lines
+  # share their baselines (convention).
+  - columns:
+      - width: 280.8      # convention: the caption column, left of the docket number and title
+        blocks:
+          - {text: "{proceeding}", optional: true, below: 16.1}
+          - each: caption
+            between:
+              - {text: "v."}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", italic: true}
+      - blocks:
+          - {text: "{case_number}", above: 16.1}
+          - {text: "{brief_title}", bold: true, above: 16.1}
+          - {text: "{emergency_statement}", bold: true, optional: true, above: 16.1}   # NRAP 27(e)(2)
+    gutter: 18
+    above: 21.6
+  - columns: {each: counsel, per_row: 2, row_gap: 18, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 50.4
+  - {break: true}
+# The date and the signature block (NRAP 32(d)), never split; then, each from a page of its own, the NRAP 27(e)
+# certificate of an emergency motion (counsel's telephone numbers and office addresses, notice to the other parties
+# and the clerk; NRAP 27(e)(3)) and the certificate of service (NEV-CERT-003, NRAP 25(d)).
+closing:
+  - group:
+      - {text: "DATED this {date}.", indent: 36, optional: true}
+      - {text: "This motion contains {word_count} words.", indent: 36, optional: true, above: 5.6}   # NRAP 27(d)(2): a motion that relies on a word count states it
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 16.8}
+      - each: signature.signers
+        blocks:
+          - {text: "/s/ {name}", underline: true, left: 230.4, above: 11.2}
+          - {text: "{name}", left: 230.4}
+          - {text: "{lines}", left: 230.4, optional: true}
+      - {text: "{signature.lines}", left: 230.4, optional: true, above: 8.4}
+    above: 21.6
+  - when: emergency_certificate
+    blocks:
+      - {break: true}
+      - {text: "{emergency_certificate.heading}", align: center, bold: true}
+      - {text: "{emergency_certificate.paragraphs}", pitch: body, indent: 36, above: 16.8}
+      - when: emergency_certificate.recipients
+        blocks:
+          - each: emergency_certificate.recipients
+            blocks: [{group: [{text: "{.}", left: 72}], above: 14, below: 14}]
+      - {text: "{emergency_certificate.closing_paragraphs}", pitch: body, indent: 36, optional: true, above: 14}
+      - when: emergency_certificate.closing_recipients
+        blocks:
+          - each: emergency_certificate.closing_recipients
+            blocks: [{group: [{text: "{.}", left: 72}], above: 14, below: 14}]
+      - group:
+          - {text: "DATED this {emergency_certificate.date}.", indent: 36, optional: true}
+          - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 16.8}
+          - each: signature.signers
+            blocks:
+              - {text: "/s/ {name}", underline: true, left: 230.4, above: 11.2}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", left: 230.4, optional: true}
+        above: 16.8
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.heading}", align: center, bold: true, upper: true}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36, above: 16.8}
+      - when: service.recipients
+        blocks:
+          - each: service.recipients
+            blocks: [{group: [{text: "{.}", left: 72}], above: 14, below: 14}]
+      - {text: "{service.closing_paragraphs}", pitch: body, indent: 36, optional: true, above: 14}
+      - when: service.closing_recipients
+        blocks:
+          - each: service.closing_recipients
+            blocks: [{group: [{text: "{.}", left: 72}], above: 14, below: 14}]
+      - group:
+          - each: service.signature.signers
+            blocks:
+              - {text: "/s/ {name}", underline: true, left: 230.4, above: 11.2}
+              - {text: "{name}", left: 230.4}
+              - {text: "{lines}", left: 230.4, optional: true}
+        above: 16.8
