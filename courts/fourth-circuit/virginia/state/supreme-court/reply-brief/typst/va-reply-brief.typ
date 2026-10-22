@@ -80,12 +80,19 @@
   align(center, text(weight: "bold", meta.brief_title))
   v(2.4em)
   // Counsel name, VSB number, mailing address, telephone, fax (if any), e-mail (Rule 5:6(b)).
-  // Counsel blocks stack one under another: two columns overflow the right margin with long e-mail addresses.
-  for g in meta.counsel [
-    #lines-of(g.names)
-    #lines-of(g.lines)
-    #v(1.2em)
-  ]
+  // Counsel blocks sit side by side in two columns, as the filed exemplars set them (tier 2): stacked one under
+  // another at 14 pt (Rule 5:6(a)(3)), three counsel blocks ran the cover onto a second page (DEF-COVER-001). Each
+  // column is a fixed half of the text width, so a long line wraps inside its column, never into the one-inch right
+  // margin (Rule 5:6(a)(2)).
+  grid(
+    columns: (1fr, 1fr),
+    column-gutter: 0.3in,
+    row-gutter: 1.2em,
+    ..meta.counsel.map(g => {
+      lines-of(g.names)
+      lines-of(g.lines)
+    }),
+  )
 }
 
 // ---- Table of authorities (Rule 5:28(a); year of each citation in the cite text) ----------------
