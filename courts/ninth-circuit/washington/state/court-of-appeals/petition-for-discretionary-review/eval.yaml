@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: typst breaks
+# "¶¶ 180-82" between the two pilcrows (lib/typst/xengine.typ binds one sign to its number), LaTeX and Word do not
+# (p17; docs/open-items/fb-595.54.47.md).
+params:
+  cross_engine: report
