@@ -81,61 +81,61 @@ compliance:
         - "(802) 223-6304"
         - "jdiaz@acluvt.org"
 authorities:
-  judicial-watch: { kind: "case", name: "Judicial Watch, Inc. v. State", cite: "2005 VT 108, 179 Vt. 214, 892 A.2d 191" }
-  huntley: { kind: "case", name: "In re Huntley", cite: "2004 VT 115, 177 Vt. 596, 865 A.2d 1123 (mem.)" }
-  springfield: { kind: "case", name: "Springfield Terminal Ry. Co. v. Agency of Transp.", cite: "174 Vt. 341, 816 A.2d 448 (2002)" }
-  caledonian: { kind: "case", name: "Caledonian Record Publ’g Co. v. Walton", cite: "154 Vt. 15, 573 A.2d 296 (1990)" }
-  elkins: { kind: "case", name: "Elkins v. Microsoft Corp.", cite: "174 Vt. 328, 817 A.2d 9 (2002)" }
-  ne-materials: { kind: "case", name: "In re N.E. Materials Group LLC", cite: "2015 VT 79, 199 Vt. 577, 127 A.3d 926" }
-  viskup: { kind: "case", name: "Viskup v. Viskup", cite: "150 Vt. 208, 552 A.2d 400 (1988)" }
-  negotiations: { kind: "case", name: "Negotiations Comm. of Caledonia Cent. Supervisory Union v. Caledonia Cent. Educ. Ass’n", cite: "2018 VT 18, 184 A.3d 236" }
-  burch: { kind: "case", name: "Burch-Clay v. Taylor", cite: "2015 VT 110, 200 Vt. 166, 130 A.3d 180" }
-  killington: { kind: "case", name: "In re Killington, Ltd.", cite: "159 Vt. 206, 616 A.2d 241 (1992)" }
-  dubaniewicz: { kind: "case", name: "Dubaniewicz v. Houman", cite: "2006 VT 99, 180 Vt. 367, 910 A.2d 897" }
-  dept-corrs: { kind: "case", name: "Dep’t of Corrs. v. Human Rights Comm’n", cite: "2006 VT 134, 181 Vt. 225, 917 A.2d 451" }
-  leas: { kind: "case", name: "Leas v. Leas", cite: "169 Vt. 364, 737 A.2d 889 (1999)" }
-  st-amour: { kind: "case", name: "St. Amour v. Dep’t of Social Welfare", cite: "158 Vt. 77, 605 A.2d 1340 (1992)" }
-  sburl: { kind: "case", name: "S. Burlington Sch. Dist. v. Goodrich", cite: "135 Vt. 601, 382 A.2d 220 (1977)" }
-  uvm: { kind: "case", name: "Univ. of Vt. v. W.R. Grace & Co.", cite: "152 Vt. 287, 565 A.3d 1354 (1989)" }
-  lake-bomoseen: { kind: "case", name: "Lake Bomoseen Ass’n v. Vt. Water Res. Bd.", cite: "2005 VT 79, 178 Vt. 375, 886 A.2d 355" }
-  vsea: { kind: "case", name: "Vermont State Employees’ Ass’n v. Vermont Agency of Natural Resources", cite: "No. 517-7-10 Wncv, 2011 WL 121649 (Vt. Super. Ct. Jan. 6, 2011)" }
-  s315: { kind: "statute", name: "1 V.S.A. § 315" }
-  s316a: { kind: "statute", name: "§ 316(a)" }
-  s316b: { kind: "statute", name: "§ 316(b)" }
-  s316c: { kind: "statute", name: "1 V.S.A. § 316(c)" }
-  s316d: { kind: "statute", name: "§ 316(d)" }
-  s319a: { kind: "statute", name: "1 V.S.A. § 319(a)" }
-  s1671: { kind: "statute", name: "32 V.S.A. § 1671(a)" }
-  vrcp12c: { kind: "rule", name: "V.R.C.P. 12(c)" }
-  act231: { kind: "other", name: "1975 Acts & Resolves, No. 231 (Adj. Sess.)" }
-  act159: { kind: "other", name: "1995 Acts & Resolves, No. 159 (Adj. Sess.)" }
-  act158: { kind: "other", name: "2003 Acts & Resolves, No. 158 (Adj. Sess.)" }
-  act132: { kind: "other", name: "2005 Acts & Resolves, No. 132 (Adj. Sess.)" }
-  act110: { kind: "other", name: "2007 Acts & Resolves, No. 110 (Adj. Sess.)" }
-  act59: { kind: "other", name: "2011 Acts & Resolves, No. 59 (Adj. Sess.)" }
-  act166: { kind: "other", name: "2017 Acts & Resolves, No. 166 (Adj. Sess.)" }
-  act3: { kind: "other", name: "2013 Acts & Resolves, No. 3 (Adj. Sess.)" }
-  h73: { kind: "other", name: "H. 73 (2011) (as introduced)" }
-  h73-passed: { kind: "other", name: "H. 73 (official) (2011) (as passed by the House)" }
-  h780: { kind: "other", name: "H. 780 (1995 Adj. Sess.) (as introduced)" }
-  s229: { kind: "other", name: "S. 229 (2008) (as introduced)" }
-  house-j-1996: { kind: "other", name: "Vt. House Journal, March 27, 1996" }
-  house-j-2011a: { kind: "other", name: "Vt. House Journal, April 6, 2011" }
-  house-j-2011b: { kind: "other", name: "Vt. House Journal, May 4, 2011" }
-  senate-j-2011a: { kind: "other", name: "Vt. Senate Journal, May 2, 2011" }
-  senate-j-2011b: { kind: "other", name: "Vt. Senate Journal, May 5, 2011" }
-  wright: { kind: "other", name: "Charles Alan Wright et al., 5C Federal Practice and Procedure § 1367 (3d ed. 2004)" }
-  singer-stat: { kind: "other", name: "2A N. Singer, Statutes and Statutory Construction § 46.07 (6th ed. 2000)" }
-  singer-sutherland: { kind: "other", name: "2A N. Singer, Sutherland on Statutory Construction § 48.06 (5th ed. 1992)" }
-  singer-2b: { kind: "other", name: "2B N. Singer, Sutherland on Statutes and Statutory Construction § 49:10 (6th ed. 2000)" }
-  black: { kind: "other", name: "Black’s Law Dictionary (10th ed. 2014)" }
-  oxford: { kind: "other", name: "English Oxford Living Online Dictionary" }
-  merriam: { kind: "other", name: "Merriam-Webster Online Dictionary" }
-  pubrec-2012: { kind: "other", name: "Public Records Study Committee, 2012 Interim Report, January 2012" }
-  pubrec-2013: { kind: "other", name: "Public Records Study Committee, 2013 Interim Report, January 2013" }
-  pubrec-2014: { kind: "other", name: "Public Records Study Committee, 2014 Interim Report, January 2014" }
-  leg-council-2005: { kind: "other", name: "Final Legislative Council Staff Report, Public Records, Privacy, and Electronic Access in Vermont (2005)" }
-  leg-council-2007: { kind: "other", name: "Legislative Council Staff Report, Public Records Requirements in Vermont, January 2007" }
+  judicial-watch: { kind: "case", name: "*Judicial Watch, Inc. v. State*", cite: "2005 VT 108, 179 Vt. 214, 892 A.2d 191" }
+  huntley: { kind: "case", name: "*In re Huntley*", cite: "2004 VT 115, 177 Vt. 596, 865 A.2d 1123 (mem.)" }
+  springfield: { kind: "case", name: "*Springfield Terminal Ry. Co. v. Agency of Transp.*", cite: "174 Vt. 341, 816 A.2d 448 (2002)" }
+  caledonian: { kind: "case", name: "*Caledonian Record Publ’g Co. v. Walton*", cite: "154 Vt. 15, 573 A.2d 296 (1990)" }
+  elkins: { kind: "case", name: "*Elkins v. Microsoft Corp.*", cite: "174 Vt. 328, 817 A.2d 9 (2002)" }
+  ne-materials: { kind: "case", name: "*In re N.E. Materials Group LLC*", cite: "2015 VT 79, 199 Vt. 577, 127 A.3d 926" }
+  viskup: { kind: "case", name: "*Viskup v. Viskup*", cite: "150 Vt. 208, 552 A.2d 400 (1988)" }
+  negotiations: { kind: "case", name: "*Negotiations Comm. of Caledonia Cent. Supervisory Union v. Caledonia Cent. Educ. Ass’n*", cite: "2018 VT 18, 184 A.3d 236" }
+  burch: { kind: "case", name: "*Burch-Clay v. Taylor*", cite: "2015 VT 110, 200 Vt. 166, 130 A.3d 180" }
+  killington: { kind: "case", name: "*In re Killington, Ltd.*", cite: "159 Vt. 206, 616 A.2d 241 (1992)" }
+  dubaniewicz: { kind: "case", name: "*Dubaniewicz v. Houman*", cite: "2006 VT 99, 180 Vt. 367, 910 A.2d 897" }
+  dept-corrs: { kind: "case", name: "*Dep’t of Corrs. v. Human Rights Comm’n*", cite: "2006 VT 134, 181 Vt. 225, 917 A.2d 451" }
+  leas: { kind: "case", name: "*Leas v. Leas*", cite: "169 Vt. 364, 737 A.2d 889 (1999)" }
+  st-amour: { kind: "case", name: "*St. Amour v. Dep’t of Social Welfare*", cite: "158 Vt. 77, 605 A.2d 1340 (1992)" }
+  sburl: { kind: "case", name: "*S. Burlington Sch. Dist. v. Goodrich*", cite: "135 Vt. 601, 382 A.2d 220 (1977)" }
+  uvm: { kind: "case", name: "*Univ. of Vt. v. W.R. Grace & Co.*", cite: "152 Vt. 287, 565 A.3d 1354 (1989)" }
+  lake-bomoseen: { kind: "case", name: "*Lake Bomoseen Ass’n v. Vt. Water Res. Bd.*", cite: "2005 VT 79, 178 Vt. 375, 886 A.2d 355" }
+  vsea: { kind: "case", name: "*Vermont State Employees’ Ass’n v. Vermont Agency of Natural Resources*", cite: "No. 517-7-10 Wncv, 2011 WL 121649 (Vt. Super. Ct. Jan. 6, 2011)" }
+  s315: { kind: "statute", cite: "1 V.S.A. § 315" }
+  s316a: { kind: "statute", cite: "§ 316(a)", sort: "1 V.S.A. § 316(a)" }
+  s316b: { kind: "statute", cite: "§ 316(b)", sort: "1 V.S.A. § 316(b)" }
+  s316c: { kind: "statute", cite: "1 V.S.A. § 316(c)" }
+  s316d: { kind: "statute", cite: "§ 316(d)", sort: "1 V.S.A. § 316(d)" }
+  s319a: { kind: "statute", cite: "1 V.S.A. § 319(a)" }
+  s1671: { kind: "statute", cite: "32 V.S.A. § 1671(a)" }
+  vrcp12c: { kind: "rule", cite: "V.R.C.P. 12(c)" }
+  act231: { kind: "other", cite: "1975 Acts & Resolves, No. 231 (Adj. Sess.)" }
+  act159: { kind: "other", cite: "1995 Acts & Resolves, No. 159 (Adj. Sess.)" }
+  act158: { kind: "other", cite: "2003 Acts & Resolves, No. 158 (Adj. Sess.)" }
+  act132: { kind: "other", cite: "2005 Acts & Resolves, No. 132 (Adj. Sess.)" }
+  act110: { kind: "other", cite: "2007 Acts & Resolves, No. 110 (Adj. Sess.)" }
+  act59: { kind: "other", cite: "2011 Acts & Resolves, No. 59 (Adj. Sess.)" }
+  act166: { kind: "other", cite: "2017 Acts & Resolves, No. 166 (Adj. Sess.)" }
+  act3: { kind: "other", cite: "2013 Acts & Resolves, No. 3 (Adj. Sess.)" }
+  h73: { kind: "other", cite: "H. 73 (2011) (as introduced)" }
+  h73-passed: { kind: "other", cite: "H. 73 (official) (2011) (as passed by the House)" }
+  h780: { kind: "other", cite: "H. 780 (1995 Adj. Sess.) (as introduced)" }
+  s229: { kind: "other", cite: "S. 229 (2008) (as introduced)" }
+  house-j-1996: { kind: "other", cite: "Vt. House Journal, March 27, 1996" }
+  house-j-2011a: { kind: "other", cite: "Vt. House Journal, April 6, 2011" }
+  house-j-2011b: { kind: "other", cite: "Vt. House Journal, May 4, 2011" }
+  senate-j-2011a: { kind: "other", cite: "Vt. Senate Journal, May 2, 2011" }
+  senate-j-2011b: { kind: "other", cite: "Vt. Senate Journal, May 5, 2011" }
+  wright: { kind: "other", cite: "Charles Alan Wright et al., 5C Federal Practice and Procedure § 1367 (3d ed. 2004)" }
+  singer-stat: { kind: "other", cite: "2A N. Singer, Statutes and Statutory Construction § 46.07 (6th ed. 2000)" }
+  singer-sutherland: { kind: "other", cite: "2A N. Singer, Sutherland on Statutory Construction § 48.06 (5th ed. 1992)" }
+  singer-2b: { kind: "other", cite: "2B N. Singer, Sutherland on Statutes and Statutory Construction § 49:10 (6th ed. 2000)" }
+  black: { kind: "other", cite: "Black’s Law Dictionary (10th ed. 2014)" }
+  oxford: { kind: "other", cite: "English Oxford Living Online Dictionary" }
+  merriam: { kind: "other", cite: "Merriam-Webster Online Dictionary" }
+  pubrec-2012: { kind: "other", cite: "Public Records Study Committee, 2012 Interim Report, January 2012" }
+  pubrec-2013: { kind: "other", cite: "Public Records Study Committee, 2013 Interim Report, January 2013" }
+  pubrec-2014: { kind: "other", cite: "Public Records Study Committee, 2014 Interim Report, January 2014" }
+  leg-council-2005: { kind: "other", cite: "Final Legislative Council Staff Report, Public Records, Privacy, and Electronic Access in Vermont (2005)" }
+  leg-council-2007: { kind: "other", cite: "Legislative Council Staff Report, Public Records Requirements in Vermont, January 2007" }
 ---
 
 # STATEMENT OF THE ISSUE

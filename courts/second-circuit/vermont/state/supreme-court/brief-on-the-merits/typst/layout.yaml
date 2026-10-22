@@ -1,0 +1,76 @@
+# Vermont Supreme Court (vt): brief on the merits (the appellant's principal brief). The whole layout, as data for the
+# shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Lengths in points. The Vermont Rules of Appellate Procedure (V.R.A.P. 28, 32) could not be retrieved
+# from this host (vtcourts.gov answers 403; docs/open-items/fb-595.54.73.md), so every number is the convention of the
+# filed exemplars (usage/SOURCE.md) and of the template this file replaces, marked VT-CONV, as the answering brief's.
+# No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # VT-CONV: 12-point Times New Roman body text (the exemplars, the old template)
+pitch:
+  body: 27.6              # VT-CONV: double-spaced text (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # VT-CONV: one-inch margins
+indent: 36
+page_number: {align: center, front: lower-roman}   # VT-CONV: the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
+footnote: {size: 10, pitch: 11.5, gap: 5.75}       # VT-CONV: 10-point footnotes, single spaced (1.15 x 10 pt)
+quote: {left: 36, right: 36, above: 13.8, below: 13.8}   # VT-CONV: block quotations single spaced, indented both sides
+heading:
+  - {align: center, bold: true, upper: true, above: 27.6, below: 13.8}
+  - {bold: true, above: 13.8, below: 6.9}
+  - {bold: true, italic: true, above: 13.8, below: 6.9}
+# The cover: the court, the caption beside the docket numbers, the title, counsel side by side.
+cover:
+  - {text: "IN THE SUPREME COURT", align: center, bold: true}
+  - {text: "OF THE STATE OF VERMONT", align: center, bold: true}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 36, above: 13.8, below: 13.8}
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36}
+      - blocks:
+          - {text: "Docket No. {case_number}"}
+          - {text: "Lower Court Docket No. {lower_court_case}", optional: true, above: 13.8}
+    gutter: 28.8
+    above: 27.6
+  - {text: "{brief_title}", align: center, bold: true, above: 41.4}
+  - columns: {each: counsel, blocks: [{text: "{names}"}, {text: "{lines}", italic: true}]}
+    gutter: 21.6
+    above: 41.4
+# The table of contents, on its own page (the exemplars'): sections, points and their subpoints.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 36, above: 6.9}
+# VT-CONV: the table of authorities after the contents (the exemplars'), from the body's `toa:` links, grouped under
+# the exemplars' titles; a case name in italics (the frontmatter's own markup), then a comma and the citation; seven
+# pages or more "passim" (the old template's).
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 28.8
+  above: 6.9
+  passim: 7
+  group: {bold: true, upper: true, above: 13.8, below: 6.9}
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: constitution, title: "Constitutional Provisions"}
+    - {kind: rule, title: "Rules"}
+    - {kind: other, title: "Other Authorities"}
+# The date and the signature blocks side by side, never split, with the last paragraph of the conclusion; then the certificate of compliance (V.R.A.P. 32(a)(7)
+# word count, as the exemplars') on a page of its own, from the frontmatter.
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "Dated: {date}.", optional: true}
+      - columns: {each: signature, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 27.6
+    above: 27.6
+  - when: compliance
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true}
+      - {text: "{compliance.paragraphs}", pitch: body, indent: 36, above: 13.8}
+      - columns: {each: compliance.signature, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 27.6
