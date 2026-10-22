@@ -56,6 +56,18 @@
   for l in g.lines [ #inl(l) \ ]
 }
 
+/// The cover's counsel in two columns that flow, as the exemplars set them (one party's counsel runs on
+/// into the second column): the groups in order, the column height balanced so both columns end level.
+/// A grid with one group per cell left the longest group alone setting the height and pushed the cover
+/// onto a second page (DEF-COVER-001); Rule 132.01 subd. 2 lists the counsel but sets no layout.
+#let counsel-gap = 0.9em
+#let counsel-columns(groups, render, gutter: 0.3in) = layout(size => {
+  let flow = for (i, g) in groups.enumerate() { if i > 0 { v(counsel-gap, weak: true) }; render(g) }
+  let half = measure(block(width: (size.width - gutter) / 2, flow)).height / 2
+  let line = measure(block(width: (size.width - gutter) / 2, render((lines: ("X",))))).height   // one line's pitch: the slack for a break between lines
+  block(height: half + line, columns(2, gutter: gutter, flow))
+})
+
 /// Signature block: the firm lines, then "/s/" and the typed name, underlined, then the bar number
 /// and the party the signer represents.
 #let signature-block(sig) = {
@@ -152,7 +164,7 @@
   // ---- Cover (Rule 132.01 subd. 2: docket number half an inch from the top, court, title of the
   // case, title of the document, counsel with registration numbers) ----
   page(margin: (x: page-margin, top: cover-top-margin, bottom: page-margin + 4pt), numbering: none)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
+    #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)   // single-spaced (Rule 132.01 subd. 1 lets headings and tables be): the body's double paragraph spacing between the cover's blocks pushed it past one page (DEF-COVER-001)
     #align(center)[
       #strong[#need(meta, "case_number")]
       #v(0.1in)
@@ -167,8 +179,7 @@
     #v(0.2in)
     #align(center)[#strong(upper(inl(need(meta, "brief_title"))))]
     #v(0.25in)
-    #grid(columns: (1fr, 1fr), column-gutter: 0.3in, row-gutter: 0.9em,
-      ..need(meta, "counsel").map(counsel-group))
+    #counsel-columns(need(meta, "counsel"), counsel-group)
   ]
 
   // ---- Table of contents (Rule 128.02 subd. 1(a)) ----
