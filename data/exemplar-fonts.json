@@ -2714,6 +2714,8 @@
       "class": "approximate",
       "face": "TeX Gyre Schola",
       "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.36 under David's 2026-10-17 ruling that Times New Roman is the standard: Court of Appeals of Georgia Rule 2 (c) (3) names Times New Roman (and Century Schoolbook) as compliant examples and requires neither, so the template is set in Times New Roman 14 pt on typst and docx, as the court's opening and reply briefs are, not in Century Schoolbook's twin Schola; face stays the audited match.",
       "fonts": [
         "Arial-BoldMT",
         "Calibri",
@@ -2731,6 +2733,8 @@
       "class": "approximate",
       "face": "TeX Gyre Schola",
       "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.36 under David's 2026-10-17 ruling that Times New Roman is the standard: Court of Appeals of Georgia Rule 2 (c) (3) names Times New Roman (and Century Schoolbook) as compliant examples and requires neither, so the template is set in Times New Roman 14 pt on typst and docx, as the court's opening and reply briefs are, not in Century Schoolbook's twin Schola; face stays the audited match.",
       "fonts": [
         "Arial",
         "Arial-BoldMT",
