@@ -299,6 +299,33 @@ function M.context(spec, meta)
   return meta
 end
 
+-- Ordered lists as typst's markdown reader (cmarker, CommonMark) reads them: only "1." and "1)" start a list there, so a
+-- list pandoc reads with letters, roman numerals or "(1)" is paragraphs, each starting with its marker as written.
+local LIST_SYM = { LowerAlpha = "a", UpperAlpha = "A", LowerRoman = "i", UpperRoman = "I", Decimal = "1",
+  DefaultStyle = "1", Example = "1" }
+function M.commonmark_lists(blocks)
+  return blocks:walk({ OrderedList = function(l)
+    local a = l.listAttributes
+    local style, delim = a.style or "DefaultStyle", a.delimiter or "DefaultDelim"
+    if LIST_SYM[style] == "1" and delim ~= "TwoParens" then return nil end
+    local sym = LIST_SYM[style] or "1"
+    local pat = delim == "TwoParens" and ("(" .. sym .. ")") or delim == "OneParen" and (sym .. ")") or (sym .. ".")
+    local out = pandoc.Blocks({})
+    for k, item in ipairs(l.content) do
+      local label = pandoc.Inlines({ pandoc.Str(M.numbering(pat, a.start + k - 1)), pandoc.Space() })
+      for j, b in ipairs(item) do
+        if j == 1 and (b.t == "Para" or b.t == "Plain") then
+          label:extend(b.content)
+          out:insert(pandoc.Para(label))
+        else
+          out:insert(b)
+        end
+      end
+    end
+    return out
+  end })
+end
+
 -- The body blocks before the tail heading (`tail.at`, a level-1 heading that starts with it), and the rest.
 function M.split_tail(spec, blocks)
   local main, rest = pandoc.Blocks({}), pandoc.Blocks({})

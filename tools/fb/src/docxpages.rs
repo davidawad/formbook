@@ -218,7 +218,9 @@ pub fn lookup(needles: &str, pages: &[String]) -> Result<String, String> {
             })
             .or_else(|| find(&n.fallback, from));
         if let (Some(p), true) = (pos, n.place == Place::Body) {
-            cur = p + 1;
+            // past the needle's own text (its fallback), not past what follows it: a heading's needle "argument" + the
+            // next paragraph is found again inside "summary of argument" + the same words unless the search moves on
+            cur = p + n.fallback.len().min(n.needle.len()).max(1);
         }
         found.push(pos.map_or(0, page_at));
     }
@@ -309,6 +311,14 @@ mod tests {
         // a footnote needle is not split; its fallback still finds it
         let notes = "T:1\tN\t18usc2710onlyaperson\t18usc2710\n";
         assert_eq!(lookup(notes, &p).unwrap(), "T:1\t2\t-\n");
+    }
+
+    #[test]
+    fn a_needle_is_not_found_again_inside_the_one_before() {
+        // "argument" + the paragraph after it also reads inside "summary of argument" + the same words
+        let p = page_texts("SUMMARY OF ARGUMENT\nThe injunction holds\n1\n\u{c}ARGUMENT\nThe injunction allows\n2\n\u{c}");
+        let needles = "H:1\tB\tsummaryofargumenttheinjunction\tsummaryofargument\nH:2\tB\targumenttheinjunction\targument\n";
+        assert_eq!(lookup(needles, &p).unwrap(), "H:1\t1\t-\nH:2\t2\t-\n");
     }
 
     #[test]

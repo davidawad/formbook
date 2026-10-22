@@ -82,75 +82,35 @@ Joint Resolution 2019-1 proposes amending Article I of the Pennsylvania Constitu
 
 The many new victims’ rights that will be added to the Constitution include:
 
-- the right “to be treated with fairness and respect for the victim’s
+- the right “to be treated with fairness and respect for the victim’s safety, dignity and privacy”;
 
-safety, dignity and privacy”;
+- the right “to have the safety of the victim and the victim’s family considered in fixing the amount of bail and release conditions for the accused”;
 
-- the right “to have the safety of the victim and the victim’s
-
-family considered in fixing the amount of bail and release
-
-conditions for the accused”;
-
-- the right “to reasonable and timely notice of and to be present at
-
-all public proceedings involving the criminal or delinquent
-
-conduct”;
+- the right “to reasonable and timely notice of and to be present at all public proceedings involving the criminal or delinquent conduct”;
 
 - the right “to be notified of any pretrial disposition of the case”;
 
-- the right “to be heard in any proceeding where a right of the
+- the right “to be heard in any proceeding where a right of the victim is implicated, including, but not limited to, release, plea, sentencing, disposition, parole and pardon”;
 
-victim is implicated, including, but not limited to, release, plea,
+- the right “to be notified of all parole procedures, to participate in the parole process, to provide information to be considered before the parole of the offender, and to be notified of the parole of the offender”;
 
-sentencing, disposition, parole and pardon”;
+- the right “to reasonable protection from the accused or any person acting on behalf of the accused”;
 
-- the right “to be notified of all parole procedures, to participate
+- the right “to reasonable notice of any release or escape of the accused”;
 
-in the parole process, to provide information to be considered
+- the right “to refuse an interview, deposition or other discovery request made by the accused or any person acting on behalf of the accused”;
 
-before the parole of the offender, and to be notified of the
+- the right to “full and timely restitution from the person or entity convicted for the unlawful conduct”;
 
-parole of the offender”;
+- the right to “full and timely restitution as determined by the court in a juvenile delinquency proceeding”;
 
-- the right “to reasonable protection from the accused or any
+- the right “to the prompt return of property when no longer needed as evidence”;
 
-person acting on behalf of the accused”;
-
-- the right “to reasonable notice of any release or escape of the
-
-accused”;
-
-- the right “to refuse an interview, deposition or other discovery
-
-request made by the accused or any person acting on behalf of
-
-the accused”;
-
-- the right to “full and timely restitution from the person or entity
-
-convicted for the unlawful conduct”;
-
-- the right to “full and timely restitution as determined by the
-
-court in a juvenile delinquency proceeding”;
-
-- the right “to the prompt return of property when no longer
-
-needed as evidence”;
-
-- the right “to proceedings free from unreasonable delay and a
-
-prompt and final conclusion of the case and any related
-
-postconviction proceedings”;
+- the right “to proceedings free from unreasonable delay and a prompt and final conclusion of the case and any related postconviction proceedings”;
 
 - the right “to confer with the attorney for the government”; and
 
-- the right “to be informed of all rights enumerated in this
-
-section.” Id.
+- the right “to be informed of all rights enumerated in this section.” Id.
 
 Those new rights must be “protected in a manner no less vigorous than the rights afforded to the accused.” Id. Either the victim or the government’s attorney can then enforce any of the newly created rights “in any trial or appellate court, or before any other authority.” Id.
 
@@ -408,23 +368,15 @@ following new rights for victims:
 
 - To be treated with fairness and respect for the victim’s safety, dignity and privacy To have the safety of the victim and the victim’s family considered in fixing the amount of bail and release conditions for the accused To reasonable and timely notice of and to be present at all public proceedings involving the criminal or delinquent conduct To be notified of any pretrial disposition of the case With the exception of grand jury proceedings, to be heard in any proceeding where a right of the victim is implicated, including, but not limited to, release, plea, sentencing, disposition, parole and pardon To be notified of all parole procedures, to participate in the parole process, to provide information to be considered before the parole of the offender, and to be notified of the parole of the offender To reasonable protection from the accused or any person acting on behalf of the accused To reasonable notice of any release or escape of the accused
 
-- To refuse an interview, deposition or other discovery request made by
+- To refuse an interview, deposition or other discovery request made by the accused or any person acting on behalf of the accused
 
-the accused or any person acting on behalf of the accused
+- Full and timely restitution from the person or entity convicted for the unlawful conduct
 
-- Full and timely restitution from the person or entity convicted for the
-
-unlawful conduct
-
-- Full and timely restitution as determined by the court in a juvenile
-
-delinquency proceeding
+- Full and timely restitution as determined by the court in a juvenile delinquency proceeding
 
 - To the prompt return of property when no longer needed as evidence
 
-- To proceedings free from unreasonable delay and a prompt and final
-
-conclusion of the case and any related postconviction proceedings
+- To proceedings free from unreasonable delay and a prompt and final conclusion of the case and any related postconviction proceedings
 
 - To confer with the attorney for the government
 

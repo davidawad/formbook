@@ -278,7 +278,7 @@ return function(spec)
       Pandoc = function(doc)
         local meta = xd.context(spec, xd.meta())
         -- a URL's break opportunities (lib/pandoc/xengine.lua urls; lib/typst/xdoc.typ sets the same)
-        local blocks = xd.mark(doc.blocks:walk({ Inlines = require("pandoc.xengine").urls }), xd.authority_entries(meta),
+        local blocks = xd.mark(xd.commonmark_lists(doc.blocks):walk({ Inlines = require("pandoc.xengine").urls }), xd.authority_entries(meta),
           function(k) return pandoc.RawInline("latex", "\\xd@amark{" .. k .. "}") end)
         xd.number_headings(spec, blocks)
         local main, rest = xd.split_tail(spec, blocks)

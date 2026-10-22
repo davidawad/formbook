@@ -425,7 +425,7 @@ return function(spec)
         local meta = xd.context(spec, xd.meta())
         local entries = xd.authority_entries(meta)
         -- a URL's break opportunities (lib/pandoc/xengine.lua urls; lib/typst/xdoc.typ sets the same)
-        local blocks = xd.mark(doc.blocks:walk({ Inlines = require("pandoc.xengine").urls }):walk({ Inlines = bind_double_signs }), entries, function(k, note, after)
+        local blocks = xd.mark(xd.commonmark_lists(doc.blocks):walk({ Inlines = require("pandoc.xengine").urls }):walk({ Inlines = bind_double_signs }), entries, function(k, note, after)
           return pandoc.Span({}, { ["xd-k"] = tostring(k), ["xd-n"] = note and "N" or "B", ["xd-after"] = after,
             ["xd-find"] = entries[k].find })
         end)
