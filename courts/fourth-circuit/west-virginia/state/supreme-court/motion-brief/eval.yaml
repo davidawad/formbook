@@ -1,0 +1,8 @@
+# West Virginia motion (rules.md WVA-MOT-003): a motion may not exceed 15 pages, excluding the cover, tables and
+# certificate of service (RAP 38(c)); the total page count checked here is a stricter count.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  page_limit: 15
+  cross_engine: gate

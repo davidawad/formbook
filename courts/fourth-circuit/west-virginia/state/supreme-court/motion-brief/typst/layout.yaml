@@ -1,0 +1,66 @@
+# Supreme Court of Appeals of West Virginia (wva): motion (RAP 29, form per RAP 38). The whole layout, as data for the
+# shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to RAP 38(a), (b) (../../rules.md, WVA-*); lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # WVA-FORM-003: no smaller than 12-point proportionally spaced type
+pitch:
+  body: 27.6              # WVA-FORM-002: double-spaced text (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # caption, headings, quotations, footnotes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # WVA-FORM-005: no less than one inch on all sides
+indent: 36
+page_number: {align: center, from: 1}   # numbered at the foot from the first page (the caption page)
+footnote: {size: 12, gap: 7}            # WVA-FORM-004: no smaller than 11 point (12 used), single spaced
+quote: {left: 36, right: 36, above: 7.2, below: 14.4, gap: 6}   # WVA-FORM-002: indented quotations single spaced
+heading:
+  - {align: center, bold: true, above: 12, below: 9.6}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 7.2}
+# WVA-COVER-001, WVA-MOT-002 (RAP 29(d), 38(b)): the top of page 1: the court, the docket number, the caption with
+# the lower court beside it (as the filed motion sets it), the title, counsel's name, bar number, address, telephone
+# and e-mail.
+front:
+  - {text: "IN THE SUPREME COURT OF APPEALS OF WEST VIRGINIA", align: center, bold: true}
+  - each: appellate_case_numbers
+    above: 7.2
+    blocks: [{text: "No. {.}", align: center}]
+  - columns:
+      - blocks:
+          - each: caption
+            blocks:
+              - when: connector
+                blocks:
+                  - {text: "{connector}", above: 7.2}
+              - {text: "{lines}", above: 7.2}
+              - {text: "{role}", left: 36, above: 7.2}
+      - width: 180
+        blocks:
+          - {text: "{lower_court}", align: center, bold: true, above: 7.2}
+    gutter: 14.4
+    above: 14.4
+  - {text: "{brief_title}", align: center, bold: true, upper: true, left: 36, right: 36, above: 24}
+  - each: counsel
+    above: 19.2
+    blocks:
+      - {text: "{names}", bold: true, left: 216, above: 7.2}
+      - {text: "{lines}", left: 216}
+# WVA-CERT-001 (RAP 38A): the date at left, the signature block at right, never split; then the certificate of
+# service (RAP 37) when the sample gives one.
+closing:
+  - group:
+      - columns:
+          - blocks: [{text: "Dated: {date}"}]
+          - width: 244.8
+            blocks:
+              - each: signature
+                blocks: [{text: "{lines}", below: 9.6}]
+        gutter: 14.4
+    above: 12
+  - when: certificate_of_service
+    blocks:
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, above: 12, below: 9.6, keep: true}
+      - {text: "{certificate_of_service.text}", pitch: body, indent: 36}
+      - each: certificate_of_service.recipients
+        above: 9.6
+        blocks: [{text: "{.}", below: 4.8}]
+      - {text: "{certificate_of_service.signature_lines}", above: 7.2, optional: true}
+      - {text: "Dated: {certificate_of_service.date}", above: 7.2, optional: true}
