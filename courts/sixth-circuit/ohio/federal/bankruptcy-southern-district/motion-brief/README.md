@@ -7,10 +7,10 @@ Folder: `courts/sixth-circuit/ohio/federal/bankruptcy-southern-district/motion-b
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, the U.S. Trustee; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (full transcription of the motion and memorandum, all ten footnotes and the certificate of service; the exemplar's mailing matrix is not transcribed) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold, embedded), no warnings |
-| typeface | Face required: none. The LBRs name no face for filings (S.D. Ohio LBR 9004-1(b): "at least 10-12 font size"). Substitute: none, EB Garamond kept (checked 2026-10-15 against the LBR PDF). Metric note: not applicable. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `.docx.pdf`, 7 pages each, the same lines and pages (XENG-001..003 gated in `eval.yaml`), vendored Times New Roman only, no warnings (2026-10-22) |
+| typeface | Face required: none. The LBRs name no face for filings (S.D. Ohio LBR 9004-1(b): "at least 10-12 font size"). Template face: Times New Roman (vendored, the house face, also the exemplar's), typst and docx alike (the docx named EB Garamond until fb-595.68.30). |
 | overlay | ok: `usage/OVERLAY-actual-brewing-ust-motion.pdf` and `OVERLAY-actual-brewing-ust-motion.txt` (page map below). Run 2026-10-15 against the exemplar fetched from the CourtListener URL in `usage/SOURCE.md` to `/tmp`; the PDF is not kept in the repo |
-| pages reviewed | 7 of 7 (re-rendered 2026-10-15 with no template change; every page rendered at 60 dpi and viewed) |
+| pages reviewed | 7 of 7 on each engine (typst and docx, re-rendered 2026-10-22, every page at 60 dpi and viewed; see the visual review below) |
 
 ## Governing rules
 
@@ -20,7 +20,7 @@ Each rule was read from its primary source. The local rules are the S.D. Ohio Lo
 |---|---|---|
 | Fed. R. Bankr. P. 9013 (https://www.law.cornell.edu/rules/frbp/rule_9013, read 2026-10-14) | (a) A request for an order is made by written motion unless an exception applies. (b) The motion must state its grounds with particularity and set forth the relief requested; it must be served on the parties named in the rule. | the motion paragraph and the memorandum (author content); the template does not check grounds or relief |
 | Fed. R. Bankr. P. 9004(a)-(b) (https://www.law.cornell.edu/rules/frbp/rule_9004, read 2026-10-14) | Legible; a caption with the court's name, the case title, the case number, and a brief designation of the document. | `court-title`, `caption`, `brief_title` |
-| S.D. Ohio LBR 9004-1(b) | 8½ × 11 bond paper; double spaced; side margins; top margin of at least one inch; typed print at least 10 to 12 point. | `margin` = 1 in on all sides; `type-size` = 12 pt; `body-leading` = 1.35 em (24 pt pitch at 12 pt) |
+| S.D. Ohio LBR 9004-1(b) | 8½ × 11 bond paper; double spaced; side margins; top margin of at least one inch; typed print at least 10 to 12 point. | `margin` = 1 in on all sides; `type-size` = 12 pt; `pitch-body` = 24 pt line boxes (double spacing at 12 pt) |
 | S.D. Ohio LBR 9004-2 | Caption with the debtor's name, case number, chapter, adversary number (if any) and the judge's name; the nature of the paper and the specific relief requested; a statement of the relationship to prior filings. | caption right column (case number, chapter, judge); title (`brief_title`); the relief is in the motion paragraph |
 | S.D. Ohio LBR 9013-1(a)(1)(A) | A motion is accompanied by a memorandum in support. | the memorandum is part of the document (the exemplar's form) |
 | S.D. Ohio LBR 9013-1(a)(1)(B) and LBR 9013-3 | A certificate of service, except for ex parte relief or a motion the clerk notices; the parties to be served are the debtor, the debtor's attorney, the trustee, the U.S. Trustee, and parties directly affected or requesting notice. | `CERTIFICATE OF SERVICE` in the sample; the template does not check the list of parties |
@@ -29,12 +29,15 @@ Each rule was read from its primary source. The local rules are the S.D. Ohio Lo
 
 ## Layout
 
-- Court title (three centered lines in bold): UNITED STATES BANKRUPTCY COURT / SOUTHERN DISTRICT OF OHIO / the division.
-- Caption: the debtor on the left, a column of ")" marks, and the case information on the right (Case No., Chapter, Judge). Each line is a fixed-height row, so the marks line up with the debtor's lines.
-- Title of the paper, bold, centered.
-- Body: the motion paragraph (unnumbered, 0.5 inch first-line indent); the signature block ("Dated:" at the left, the firm and the signer at the right, single spaced); `MEMORANDUM IN SUPPORT` (level 1, centered bold capitals) with level-2 headings (centered bold); the enumerated summary of facts; the lettered quotation of § 1112(b)(4), indented 0.75 inch with the "***" omissions centered; footnotes at 12 pt single spaced; the WHEREFORE paragraph; a second signature block; the certificate of service.
-- Paragraph spacing equals the leading (1.35 em), so the gap between paragraphs carries the second half of the double-spaced pitch. Headings keep with the next paragraph (`sticky`).
-- Footer: page number, centered.
+The cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): every line a box of its pitch (24 pt body, 14 pt single lines), the spaces between blocks explicit, first-fit line breaking with no kerning, ligatures or hyphenation, so the docx breaks every line and page where typst does (Gate 4, `params.cross_engine: gate` in `eval.yaml`).
+
+- Court title (three centered bold single lines): UNITED STATES BANKRUPTCY COURT / SOUTHERN DISTRICT OF OHIO / the division.
+- Caption, a blank single line below: the debtor on the left (3.4 in), a column of ")" marks (0.3 in), and the case information on the right, 0.15 in in (Case No., Chapter, Judge); one row per single line (docx: a borderless table).
+- Title of the paper, bold, centered, single spaced, a blank single line below the caption; a blank double line, then the text.
+- Body: paragraphs unnumbered with a 0.5 inch first-line indent; headings at the type size on the body pitch, centered (`MEMORANDUM IN SUPPORT` level 1 in bold capitals, level 2 bold as written), kept with the next block; the numbered list of missing documents with the number half an inch in and the text hanging at 0.9 in; the lettered quotations of 11 U.S.C. § 1112(b)(4) double spaced 0.75 in in, the "***" elisions centered; the certificate's address blocks (hard-broken lines) single spaced, unindented, a blank single line around each.
+- Signature block at each `{{SIGNATURE}}` (after the motion and after the memorandum), 12 pt below the paragraph and kept on one page: "Dated:" and the date at the left of the first line, the firm, a blank line, and the signer's lines in a column 2.8 in from the margin, single spaced.
+- `{{NOTICE_21_DAY}}`: the LBR 9013-1(a)(2) notice (heading and six body paragraphs, the movant and relief from `notice` in the frontmatter).
+- Footnotes at 12 pt, single spaced, 7 pt apart, a short rule above them. Footer: the page number, centered, its line box ending 0.5 in above the page edge.
 
 ## Markdown contract (for samples)
 
@@ -58,64 +61,44 @@ ours p.6  filed p.6  word-overlap 50.0%
 ours p.7  filed p.7  word-overlap 38.7%
 ```
 
-Red = our render, blue = the filed exemplar, black = both. The exemplar is a Times New Roman document with no line numbers; the render is EB Garamond, so glyph outlines do not coincide, but the page-level pairing is right: the first seven pages of the exemplar are the motion and memorandum, and the render's seven pages are the same content. The overlay is a diagnostic, not a score. The word-overlap figures fall as the render's text moves across page breaks differently from the exemplar's (the typeface and line length differ), not because of missing text.
+The page map above is from the 2026-10-15 EB Garamond render; `just overlay <this folder>` writes a fresh one to `.overlay/`. Red = our render, blue = the filed exemplar, black = both. The exemplar is a Times New Roman document with no line numbers; the render is EB Garamond, so glyph outlines do not coincide, but the page-level pairing is right: the first seven pages of the exemplar are the motion and memorandum, and the render's seven pages are the same content. The overlay is a diagnostic, not a score. The word-overlap figures fall as the render's text moves across page breaks differently from the exemplar's (the typeface and line length differ), not because of missing text.
 
-## Visual review (Gate 2 record, all 7 pages, rendered at 60 dpi and looked at)
+## Visual review (Gate 2 record, all 7 pages on each engine, rendered at 60 dpi and looked at, 2026-10-22)
+
+The typst and docx renders were viewed side by side; every page carries the same lines (XENG-003, 195/195).
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Cover: court title, caption with ")" column, title, motion paragraph, "Dated" and the firm and signer block | OK. Caption and signature are aligned; no overlap. |
-| 2 | Memorandum heading, INTRODUCTION, SUMMARY OF FACTS, items 1 to 6, footnote 1 (quotation of § 1112(b)(1)) | OK. |
-| 3 | Items 7 to 13, the deadlines paragraph, CAUSE heading, the lettered quotation (A), (E), (F) with centered "***" | OK. |
-| 4 | Quotation (H), (K), (M) with footnote 2; the duties paragraphs with footnotes 3 to 6 | OK after the fix below. Footnote numbers 2 to 6 at the foot match the references (checked in the text layer). |
-| 5 | Summary of the Rule 1007(c) argument; footnotes 7 to 10 | OK after the fix below. |
-| 6 | CONCLUSION, WHEREFORE, the second signature block, the start of the certificate of service | OK. |
-| 7 | End of the certificate: address blocks and the "/s/" line | OK. Address blocks single spaced, unindented. |
+| 1 | Court title, caption with ")" column, title, the motion paragraph, "Dated:" and the firm and signer block | OK: the signature block fits under the motion, as filed. |
+| 2 | MEMORANDUM IN SUPPORT, INTRODUCTION, SUMMARY OF FACTS, items 1 to 5, footnote 1 | OK. |
+| 3 | Items 6 to 13, the deadlines paragraph, CAUSE heading, quotations (A), (E), (F) with a centered "***" | OK: list numbers aligned at 0.5 in, the text hanging at 0.9 in. |
+| 4 | Quotations (H), (K), (M) with footnote 2; the duties paragraphs with footnotes 3 to 5 | OK: footnote numbers 2 to 5 at the foot match the references. |
+| 5 | The Rule 1007(c) argument; footnotes 6 to 9 | OK. |
+| 6 | CONCLUSION, WHEREFORE, the second signature block, CERTIFICATE OF SERVICE (begun), footnote 10 | OK. |
+| 7 | End of the certificate: three address blocks, the matrix line and the "/s/" lines | OK: address blocks single spaced, unindented. |
 
-Defects found and fixed during this review (for the record): (1) the space after a footnote reference was lost ("Trustee.³The"), because markdown drops whitespace at segment edges; now kept (`seg()`); the same defect was found in the complaint (fixed there too); (2) the certificate's address lines were indented and double spaced, reading as separate paragraphs; now a hard-broken chunk is single spaced and unindented.
+No open tier-2 finding.
 
 ## Known gaps and open choices
 
 1. **One filer only.** The brief asks for one exemplar per doc type, and the CourtListener search was rate-limited before a second, post-2024 debtor-side motion with a memorandum was found. Tier 2 is judged against one filer, not two or three.
 2. **No 21-day notice in the sample.** The exemplar (filed March 2019) has no 21-day notice. LBR 9013-1(a)(1)(C), as posted with the 2020 amendments, requires one unless an exemption applies, and the template renders it when the sample carries `{{NOTICE_21_DAY}}` and a `notice:` block. The sample does not carry it, so the render does not show it. Whether the U.S. Trustee's motion to convert or dismiss is exempt under General Order #12 was not checked. Decide before a real filing; the template is ready.
 3. **Local-rule numbers in the filed text predate the 2020 numbering.** The exemplar cites LBR 1007-1, 1007-2, 1015-2, 1074-1 and 5005-4. These are kept as filed. Whether those numbers are current in the 2020 LBR was not checked against each rule.
-4. **Font.** EB Garamond at 12 pt. The exemplar is Times New Roman (embedded). The LBR names no typeface and requires 10 to 12 point, so no court-named substitute applies (`docs/FONTS.md`: "no face named" keeps EB Garamond). The only face the LBRs name is for the mailing list (LBR 1007-2(b)(1): "Courier New and Times New Roman"), which is a separate document not built by this template. Both are choices; the difference is recorded, not treated as a rule.
+4. **Font.** Times New Roman 12 pt in typst and docx (the docx named EB Garamond until fb-595.68.30), as the exemplar. The LBR names no typeface and requires 10 to 12 point.
 5. **Footnotes single spaced at 12 pt** and the certificate's address blocks single spaced. LBR 9004-1(b) asks for double spacing of the filing; footnotes and address blocks are conventionally single spaced, and the rule does not name either. This is a reading, recorded here.
 6. **Typos in the filed text are kept**, as transcribed: "exits" for "exists", "covert" for "convert", "Chapter11", "Non− Individuals", and a stray numeral before "or in the alternative" that is dropped (noted in the sample's header; it has no footnote behind it).
 7. **Mailing matrix not transcribed** (exemplar pages 8 and 9). The certificate lists the parties by name; the attached matrix is a separate document in practice.
 8. **Page count.** 7 pages for the body; the exemplar's body is also 7 pages (its pages 8 and 9 are the matrix). Inside the target for the content transcribed.
 9. **LBR 9013-2(a) 20-page limit** is not counted by the template; the sample is 7 pages.
-10. **`tools/check.sh` and `tools/check-selftest.sh` are not run.** They expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape; the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 record.
+10. **Tool checks.** `tools/check.sh <this folder>` and `--engine docx` run every gate: `RESULT: 9 checks passed, 0 failed` (typst) and `RESULT: 13 checks passed, 0 failed` (docx, XENG-001..003 gated). `tools/check-selftest.sh` takes a court root with `court.json` and does not run on this doc-type folder.
 11. **File names.** The brief names outputs `usage/<id>.pdf` and `usage/<id>-overlay.pdf`. The tools read and write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` by default, and `tools/overlay.sh` reads `OUTPUT-<id>.pdf` to build its overlay, so this folder follows the tools' names. The sample is `INPUT-<id>.md`, the same convention.
 
 ## Engines
 
-Engine status: typst `OUTPUT-motion-brief.typst.pdf` (above); docx built, not checked (see BLOCKED below); latex not built.
+Engine status: typst `OUTPUT-motion-brief.typst.pdf`; docx `OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice), 7 pages each, every line and page as typst (XENG-001..003 gated); latex not built.
 
-**docx** (`docx/`): `docx/build-reference.sh` writes `docx/reference.docx` (styles, page setup, footer page number); `docx/render.sh` runs pandoc with `docx/ohsb-motion-brief.lua` (caption table, unnumbered paragraphs, lettered quotations, signature blocks, certificate address blocks) and restores the reference styles and section. Output: `usage/OUTPUT-motion-brief.docx`. Checked by the tool here: the zip has no duplicate entries and every XML part is well formed (`tools/render-docx.sh` ran these before the LibreOffice step).
+**docx** (`docx/`): `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst face `{font}`: Times New Roman 12 pt; Body Text in exact 24 pt lines with a 0.5 in first-line indent; single lines and footnotes in 14 pt boxes, 7 pt after a footnote; "List Number", "Quotation Lettered" and "Lines" as the typst template sets them) and `docx/ohsb-motion-brief.lua` (on `lib/docx/xengine.lua`): the court title, the caption table, the headings, the signature blocks, the 21-day notice, the footer (a centered PAGE field, `$FORMBOOK_FOOTERS`) and the section (letter, 1 in margins, `$FORMBOOK_FINAL`). All 10 footnotes are Word footnotes. No shell: `fb render` builds the reference document and packs the archive (were `docx/build-reference.sh`, `docx/render.sh` and a committed `reference.docx` in EB Garamond). Not verified in Word (LibreOffice only); it opens and converts without a repair prompt (DEF-DOCX-OPEN).
 
-What the reference sets, the same values as the typst template (read back from `styles.xml` and `sectPr`):
-
-- Letter paper, 1 in margins on all four sides.
-- EB Garamond (vendored, `fonts/eb-garamond`), 12 pt body and footnotes, bold for the court title, caption title and headings.
-- Body exact 24 pt pitch (double spacing); single lines (caption, title, signature, certificate address blocks) exact 14 pt; footnotes single spaced.
-- First-line indent 0.5 in on body paragraphs; the lettered quotations of 11 U.S.C. § 1112(b)(4) indented 0.75 in; the numbered summary items hang from 0.5 in.
-- Heading 1 centered bold capitals, Heading 2 centered bold; keep with next and keep lines.
-- Centered PAGE field in the footer, 12 pt.
-- All 10 footnotes are native Word footnotes (`footnotes.xml`).
-
-What differs from the typst template, not verified against a rendered page:
-
-- Page count of the docx is not known; typst gives 7 pages for this sample. Word and LibreOffice may paginate differently from each other too.
-- Paragraph gaps: typst's gap equals one leading; the docx has no extra space between paragraphs, which gives the same 24 pt pitch. Extra space above and below headings and the signature block (typst: 1.35 em) is not set.
-- The "***" rules are centered paragraphs; typst puts 1.35 em above and below each.
-- The signature block's "Dated:" and signer columns use the typst widths (2.6 in and the rest); the typst block has 1.35 em above it, the docx one blank double-spaced line.
-
-**docx BLOCKED items**
-
-- `docx.pdf` and page-by-page review: `soffice` (LibreOffice) is not installed on this box, so `tools/render-docx.sh` stops at `soffice: not found` after writing the `.docx`. No `OUTPUT-ohsb-motion-brief-actualbrewingustmotion.docx.pdf` exists and no page has been rendered or viewed. The Gate 0 and Gate 1 docx checks (`tools/check.sh --engine docx`) cannot run.
-- Word opening check: no Word on this box; the file is checked by zip listing and `xmllint` only (see `docs/DOCX.md`, "Checking a docx", step 3).
-- Tables of contents and authorities: none in this doc type; no TOC or TOA field is used.
-- Notice directive: the sample does not use `{{NOTICE_21_DAY}}`; the docx filter raises an error if it appears, instead of dropping it silently (the typst template renders it).
+- The notice directive renders in both engines (checked on a scratch copy of the sample with `{{NOTICE_21_DAY}}` and a `notice` block; not part of the committed sample). On that copy a footnote that typst splits across a page end ran differently in LibreOffice (which keeps a note with its reference line), so pages 5 to 8 broke elsewhere; the committed sample has no such note.
 
 [Court folder](../README.md)
