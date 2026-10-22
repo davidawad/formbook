@@ -2,7 +2,7 @@
 
 Doc type: **motion-brief** (the brief, or memorandum of law, that supports a motion under Fed. R. Bankr. P. 9013 in a contested matter, filed with the motion). Court: United States Bankruptcy Court for the Middle District of Pennsylvania. Folder: `courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief/`.
 
-Status: exemplar=yes (one brief, one filer; the motion it supports is not in the exemplar), render=ok, overlay=ok, pages reviewed 7 of 7. Nothing here sets `status` in `court.json`.
+Status: exemplar=yes (one brief, one filer; the motion it supports is not in the exemplar), render=ok, pages reviewed 7 of 7 on typst and docx. Typst and docx are on the shared cross-engine layout model (fb-595.68.34): the docx breaks every line and page where typst does (XENG-001..003 gated, `eval.yaml`). Nothing here sets `status` in `court.json`.
 
 ## Governing rules
 
@@ -19,7 +19,7 @@ Sources, all fetched 2026-10-14:
 | PAMB-MOT-004 | L.B.R. 9013-1(c)-(e) | Service of the motion on the respondent, the debtor, committees and others, unless served through ECF. | Not generated (the service list is the author's). The certificate of service carries the service record (PAMB-MOT-006). |
 | PAMB-MOT-005 | L.B.R. 9013-2(a), (b), (d) | (a) "no brief ... shall exceed fifteen (15) pages"; (b) a brief may run to 5,000 words, with "a certificate ... that the brief complies with the word-count limit" that "must state the actual number of words"; (d) "a table of contents, with page references, and table of citations" for a brief of more than 15 pages. A brief "may address only one motion." | (a) and (d): the template **stops the build** with a message if the document exceeds 15 pages, because it does not generate the table of contents and table of authorities. (b): `word_count` in the frontmatter prints the certificate; the template does not count words. One-motion rule: author. |
 | PAMB-MOT-006 | L.B.R. 9013-3 | A certificate of service containing "(a) the title of the paper served; (b) the names and addresses of all persons upon whom the paper has been served; (c) the entities the persons served represent; and (d) a description of when and how service was made." | `certificate-of-service` (title, names, addresses, `represents`, date, method, signer). |
-| PAMB-MOT-007 | FRBP 9004(a) | "A petition, pleading, schedule, or other document must be clearly legible." No paper-size, font, or margin rule in the current text. | Vendored EB Garamond only (`fallback: false`); 13 pt; 1 in margins; US Letter. |
+| PAMB-MOT-007 | FRBP 9004(a) | "A petition, pleading, schedule, or other document must be clearly legible." No paper-size, font, or margin rule in the current text. | Vendored Times New Roman only (`fallback: false`); 12 pt; 1 in margins; US Letter. |
 | PAMB-MOT-008 | L.B.R. 9004-1 | A pleading in a contested matter must have a caption "substantially in compliance with L.B.F. 9004-1." The form was not retrieved. | `caption-table` follows the filed exemplar's main-case caption (court, debtor block, chapter, case no.). Not checked against L.B.F. 9004-1. |
 | PAMB-MOT-009 | L.B.R. 7007-1(a), (e) | For a motion filed in an adversary proceeding: a descriptive title, a caption substantially compliant with Official Form 416D, and a proposed order attached. | **Not built**: this template covers the contested-matter caption only. See gaps. |
 
@@ -46,22 +46,24 @@ sh tools/overlay.sh courts/third-circuit/pennsylvania/federal/bankruptcy-middle-
 ```
 
 - File names follow the tools: `usage/OUTPUT-motion-brief.typst.pdf` (our render; 7 pages; typst with no warnings), `usage/OVERLAY-mullen-deem-effective.pdf` and `.txt` (red = ours, blue = filed, black = both).
-- Fonts: `pdffonts` shows EBGaramond-Regular, -Bold, -Italic embedded.
-- Overlay page map: ours p.1-4 ↔ filed p.1-4 (89%, 75%, 61%, 49%); ours p.5 ↔ filed p.6 (59%); ours p.6 ↔ p.7 (73%); ours p.7 ↔ p.8 (74%). The filed brief has one page more of body than ours; the overlay is a diagnostic, not a score, and the typefaces differ.
+- Fonts: Times New Roman 12 pt (vendored), in typst and docx alike (it was EB Garamond until fb-595.68.34).
+- Overlay page map (of the earlier EB Garamond render, not re-run): ours p.1-4 ↔ filed p.1-4 (89%, 75%, 61%, 49%); ours p.5 ↔ filed p.6 (59%); ours p.6 ↔ p.7 (73%); ours p.7 ↔ p.8 (74%). The filed brief has one page more of body than ours; the overlay is a diagnostic, not a score, and the typefaces differ.
 
-## Visual review (Gate 2 record: every page of the final render, at 60 dpi, looked at)
+## Visual review (Gate 2 record: all 7 pages on each engine, rendered at 45 dpi and looked at, 2026-10-22)
+
+The typst and docx renders were viewed side by side; every page carries the same lines (XENG-003, 168/168).
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Court title, caption (IN RE block with the three name lines, Chapter 13, Case No.), title, lead-in, I. Statement of Facts begins | OK. Name lines are spaced by the cmarker paragraph spacing; accepted. |
-| 2 | Statement of Facts end, II. Question Presented, III. Argument begins | OK. Headings keep with their text. |
-| 3 | Argument: Rule 5005 discussion | OK. |
-| 4 | Argument: retroactive relief factors, italic *In re* and *nunc pro tunc* | OK. |
-| 5 | Argument: equities, Pennsylvania analogy | OK. |
-| 6 | Argument end, IV. Conclusion, signature block | OK after two fixes: the conclusion now stays with the signature (sticky), and its first line is indented (a leading indent is drawn, since a sticky block drops the first-line indent). |
-| 7 | Certificate of service: caption repeated, title, served persons with addresses and representation placeholders, date and signature | OK. The whole certificate fits on the page. |
+| 1 | Court title, caption (IN RE, the three name lines single spaced, "Debtor"; Chapter 13, Case No.), title, lead-in, I. Statement of Facts begins | OK. |
+| 2 | Statement of Facts end, II. Question Presented, III. Argument begins | OK. Headings keep with their text; the label in a 0.5 in box, the title after it. |
+| 3 | Argument: Rule 5005, retroactive relief, italic *In re* and *nunc pro tunc* | OK. |
+| 4 | Argument: the factors applied, equities | OK. |
+| 5 | Argument: equities end, Pennsylvania analogy | OK. The page ends a third short: the conclusion is kept with the signature. Accepted (the signature never stands alone). |
+| 6 | IV. Conclusion, signature block | OK. |
+| 7 | Certificate of service: court title and caption repeated, title, served persons with addresses and representation placeholders, date and signature | OK. The whole certificate fits on the page. |
 
-Pages reviewed: 7 of 7.
+Pages reviewed: 7 of 7 (typst), 7 of 7 (docx). No open tier-2 finding. Changes in this pass: the debtor's name lines single spaced (were apart by cmarker's paragraph spacing); headings on the body pitch with no space of their own (were single spaced with 12 pt around them); the signature and certificate lines single spaced from 3.3 in.
 
 ## Known gaps and open choices
 
@@ -71,19 +73,20 @@ Pages reviewed: 7 of 7.
 4. **Adversary-proceeding caption (PAMB-MOT-009).** Not built. A brief in an adversary must carry the complete adversary caption and be substantially compliant with Form 416D. The contested-matter caption here is not that.
 5. **L.B.F. 9004-1 caption.** The contested-matter caption is modeled on the filed exemplar; the form itself was not retrieved.
 6. **Title content (PAMB-MOT-002).** The template requires `title` but does not check that it names the filing party and the relief.
-7. **Font, margins, spacing.** Typeface row: face required = none; substitute = none needed (EB Garamond kept, `docs/FONTS.md` row "No face named"); fit = n/a. Checked 2026-10-15 against the full text of the local rules PDF (no rule on font, typeface, point size, margins or spacing; L.B.R. 9004-1 governs the caption only) and FRBP 9004(a) (legibility only). EB Garamond 13 pt, 1 in margins, double-spaced body (24 pt pitch), following the filed copy's look. Convention.
+7. **Font, margins, spacing.** Typeface row: face required = none; Times New Roman, the house face (`docs/FONTS.md` row "No face named"; was EB Garamond); fit = n/a. Checked 2026-10-15 against the full text of the local rules PDF (no rule on font, typeface, point size, margins or spacing; L.B.R. 9004-1 governs the caption only) and FRBP 9004(a) (legibility only). Times New Roman 12 pt, 1 in margins, double-spaced body (24 pt pitch), following the filed copy's look. Convention.
 8. **Paper size.** US Letter; no rule text found. Convention.
 9. **Tier-2 exemplars.** One exemplar. A second and third from different filers were not found as text-based PDFs. Also examined and not used: the Madeam trustee's Memorandum of Law in Support of Motion to Dismiss (5-22-bk-01575, Doc 33, 7 pages, text layer present), a standalone memorandum from a trustee; it could serve as a second tier-2 reference in a later pass.
 10. **Certificate placeholders.** `represents` is a bracketed placeholder for each served person (the filed certificate does not state it).
-11. **Lists in the body.** cmarker lists work; a paragraph that starts with a number or marker must be escaped (`1\.`). The sticky conclusion is rendered as its own block; if the conclusion is a list item, its numbering restarts.
+11. **Lists in the body.** Not supported: every chunk that is not a heading is a paragraph in both engines (typst sets a list chunk as a paragraph; the docx filter rejects a list, a quotation or a table rather than drop it). The sample has none.
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference. Reviewed: 7 of 7 pages of the render of `usage/INPUT-motion-brief.md` (checked at 60 dpi in /tmp, not written to usage/).
-- **docx** (`docx/`): `build-reference.sh <out.docx> 13 left` builds `docx/reference.docx` (pandoc's default reference, changed in place: EB Garamond 13 pt, exact 24 pt line pitch, 0.5 in first-line indent, US Letter, 1 in margins, centered PAGE footer at 13 pt, level-1 headings bold caps with a hanging label, 1 pt table grid, footnotes 13 pt single). `docx/pamb.lua` builds the caption (borderless table with the rule under the debtor block and the vertical rule), the title, the numbered heading labels (I., A., 1., a. typed by the filter, with a tab), the prayer kept with the signature, the signature block at 3.3 in, the certificate of service, and the word-count certificate when `word_count` is given. Built from the court folder with `pandoc --from markdown+smart --to docx --reference-doc=motion-brief/docx/reference.docx --lua-filter=motion-brief/docx/pamb.lua motion-brief/usage/INPUT-mullen-deem-effective.md -o motion-brief/usage/OUTPUT-mullen-deem-effective.docx`.
-  - Matches the typst template: page setup, font, line pitch, indents, caption layout, heading labels and their position, certificate and signature layout, the page number. Checked by reading the .docx back (pandoc text read-back, every paragraph style defined, `ziptool` reads all 17 entries, `xmllint` on all 17 XML parts). Not checked visually.
-  - Differs (pandoc and Word limits): heading labels are typed text, not a Word list, so they do not renumber when a heading is added; the caption and signature cells are plain text; the title is not written to the document properties; footnotes are 13 pt single-spaced (the template inherits the body pitch; the sample has no footnotes); the 15-page limit of L.B.R. 9013-2(a) is enforced by the typst template (it stops the build) and is NOT enforced by the docx (a page count is not measured here); no table of contents or table of authorities (the typst template does not generate them either).
-  - BLOCKED: every gate check on `usage/OUTPUT-mullen-deem-effective.docx.pdf` (Gates 0 to 3). This court folder has no `checks.yaml`, so no check IDs are readable here. Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+Engine status: typst `OUTPUT-motion-brief.typst.pdf`; docx `OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice), 7 pages each, every line and page as typst (XENG-001..003 gated); latex not built.
+
+- **typst** (primary, `typst/`): on `lib/typst/xengine.typ`: a 24 pt body pitch, 14 pt single lines (court title, caption, title, signature, certificate, footer), explicit block spaces.
+- **docx** (`docx/`): `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst face `{font}`: Times New Roman 12 pt; Body Text in exact 24 pt lines with a 0.5 in first-line indent; single lines in 14 pt boxes) and `docx/pamb.lua` (on `lib/docx/xengine.lua`; the same file as the adversary complaint's but for its `CFG.kind`), which writes every paragraph: the court title, the caption (a one-row table, the left cell bordered at the right and foot), the title, the labelled headings (I., A., 1., a. and a tab), the signature block, the certificate of service on its own page, the word-count certificate when `word_count` is given, the footer (a centred PAGE field, `$FORMBOOK_FOOTERS`) and the section (letter, 1 in margins, `$FORMBOOK_FINAL`). No shell: `fb render` builds the reference document and packs the archive (were `docx/build-reference.sh` and a committed `reference.docx` in EB Garamond 13 pt). Not verified in Word (LibreOffice only); it opens and converts without a repair prompt (DEF-DOCX-OPEN).
+- The 15-page limit of L.B.R. 9013-2(a) stops the typst build; the docx does not count pages (DEF-LEN-001 SKIPs: no machine-readable `page_limit`). No table of contents or authorities in either engine (see gaps).
+- **docx BLOCKED items:** none. `tools/check.sh <this folder> --engine docx`: `RESULT: 13 checks passed, 0 failed`; typst: `RESULT: 9 checks passed, 0 failed`.
 
 ## Searches tried
 

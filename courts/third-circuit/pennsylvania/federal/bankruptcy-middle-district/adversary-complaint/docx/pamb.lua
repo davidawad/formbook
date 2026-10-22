@@ -298,15 +298,16 @@ local function body(blocks)
       end
     elseif b.t == "Para" or b.t == "Plain" then
       out[#out + 1] = p(xe.inl(b.content), { pitch = BODY, first = INDENT, keep = keep })
-    elseif b.t == "OrderedList" then
+    elseif b.t == "OrderedList" and ADV then
       local start = b.listAttributes.start or 1
       for i, item in ipairs(b.content) do
         out[#out + 1] = p(xe.runs((start + i - 1) .. ".\t") .. xe.inl(pandoc.utils.blocks_to_inlines(item)),
           { pitch = BODY, first = INDENT, tab = 2 * INDENT, keep = keep and i == #b.content })
       end
-    elseif b.t == "Table" then
+    elseif b.t == "Table" and ADV then
       out[#out + 1] = pipe_table(b)
     else
+      -- (motion: headings and paragraphs only, as typst/pamb-motion-brief.typ reads them)
       error("pamb.lua: unexpected block " .. b.t)
     end
   end
@@ -320,7 +321,7 @@ end
 local function jurisdiction(m)
   local j, d = need(m, "jurisdiction"), need(m, "debtor")
   local function bp(x) return p(x, { pitch = BODY, first = INDENT }) end
-  return p(xe.runs("STATEMENT OF JURISDICTION", { b = true }), { pitch = BODY, jc = "center", keep = true, before = TITLE_BELOW })
+  return p(xe.runs("STATEMENT OF JURISDICTION", { b = true }), { pitch = BODY, jc = "center", keep = true })
     .. bp(xe.runs("This adversary proceeding arises in and relates to the ") .. xe.inl(d.chapter)
       .. xe.runs(" case of ") .. xe.inl(items(d.name)[1]) .. xe.runs(", Case No. " .. txt(d.case_number)
       .. ", pending in the United States Bankruptcy Court for the ") .. xe.inl(j.district) .. xe.runs("."))
@@ -333,22 +334,21 @@ end
 
 local function certificates(m)
   local cos = need(m, "certificate_of_service")
-  local out = { cover(m, true),
-    p(xe.runs("CERTIFICATE OF SERVICE", { b = true }), { pitch = BODY, jc = "center", keep = true, before = TITLE_BELOW }),
+  local out = { court_title(m, true), caption(m),
+    p(xe.runs("Certificate of Service", { b = true }), { jc = "center", before = COVER_GAP }), space(TITLE_BELOW),
     p(xe.runs("The undersigned certifies that on " .. txt(cos.date) .. ", the undersigned caused a true and correct copy of ")
       .. xe.inl(need(m, "title")) .. xe.runs(" to be served " .. txt(cos.method) .. ", on the following persons:"),
       { pitch = BODY, first = INDENT }) }
-  for i, s in ipairs(items(cos.served)) do
-    local o = { left = INDENT, keep = true }
+  for _, s in ipairs(items(cos.served)) do
     out[#out + 1] = p(xe.inl(s.name), { left = INDENT, keep = true, before = SERVED_GAP })
-    out[#out + 1] = p(xe.inl(s.address), o)
+    out[#out + 1] = p(xe.inl(s.address), { left = INDENT, keep = true })
     out[#out + 1] = p(xe.runs("Represents: ") .. xe.inl(s.represents), { left = INDENT })
   end
   out[#out + 1] = sig_lines({ { xe.runs("/s/ ") .. xe.inl(cos.signer), 0 }, { xe.inl(cos.signer), 0 } },
     xe.runs("Date: " .. txt(cos.date)), SIG_ABOVE)
   if m.word_count ~= nil then
     local signer = need(m, "signature").signer
-    out[#out + 1] = p(xe.runs("CERTIFICATE OF COMPLIANCE WITH WORD-COUNT LIMIT", { b = true }),
+    out[#out + 1] = p(xe.runs("Certificate of Compliance with Word-Count Limit", { b = true }),
       { pitch = BODY, jc = "center", keep = true, brk = true })
     out[#out + 1] = p(xe.runs("The undersigned certifies that this brief contains " .. txt(m.word_count)
       .. " words, as counted by the word-processing system used to prepare it, and complies with the 5,000-word"
@@ -395,8 +395,8 @@ local function finish(doc)
   write_file("FORMBOOK_FOOTERS", "rIdPambFooter\t" .. FOOTER_P .. "\n")
   write_file("FORMBOOK_FINAL", FINAL)
 
-  local out = { cover(m, false) }
-  if ADV then out[#out + 1] = jurisdiction(m) else out[#out + 1] = space(TITLE_BELOW) end
+  local out = { cover(m, false), space(TITLE_BELOW) }
+  if ADV then out[#out + 1] = jurisdiction(m) end
   out[#out + 1] = body(doc.blocks)
   out[#out + 1] = signature(m)
   if not ADV then out[#out + 1] = certificates(m) end
