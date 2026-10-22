@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated, until the shared
+# model sets two things alike (docs/open-items/fb-595.54.63.md): latex moves a body line whose footnote typst splits
+# across pages 11-12 to the next page (XENG-002 from p11); LibreOffice fits ". . . economic" on p17 line 5 where
+# typst breaks (XENG-003, docx).
+params:
+  cross_engine: report
