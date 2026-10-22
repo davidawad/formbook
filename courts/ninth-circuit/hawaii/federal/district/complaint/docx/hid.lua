@@ -16,7 +16,7 @@ local COUNSEL_SZ = 22                                -- typst counsel-size, 11 p
 local INDENT = 720                                   -- typst para-indent, 0.5 in
 local TEXTW = 9360                                   -- 6.5 in
 local CAP_LEFT, CAP_GAP = 4464, 288                -- typst caption-left, caption-gap
-local CAP_PAD = 127                                  -- typst caption-pad (180) less the 2.65 pt LibreOffice keeps off the right rule
+local CAP_PAD = 180                                  -- typst caption-pad, 0.125 in
 local CAP_FOOT = 145                                 -- typst caption-foot (160) less the 0.75 pt rule LibreOffice sets below the cell
 local SIG = 4320                                     -- typst signature-indent, 3 in
 local COUNSEL_W = {                                  -- typst counsel-widths
@@ -149,6 +149,39 @@ local function breaks(s)
 end
 
 -- A doubled section sign stays with its number, as the typst template boxes it.
+-- Another of typst's rules (Unicode line breaking): no break at a space before a period, comma, colon or semicolon
+-- (". . ."); that space becomes a no-break space.
+local function binds(l)
+  for i = 1, #l - 2 do
+    local b, nxt = l[i + 1], l[i + 2]
+    if l[i].t == "Str" and b.t == "Space" and nxt.t == "Str" and nxt.text:find("^[.,:;]") then
+      l[i + 1] = pandoc.Str("\u{00A0}")
+    end
+  end
+  return l
+end
+
+-- A character Times New Roman has no glyph for (the okina, U+02BB) is set in the typst template's fallback face,
+-- Liberation Serif, as typst sets it; named on its own run, since LibreOffice's own fallback splits the word around
+-- it in the PDF text.
+local FALLBACK = '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/>'
+local OKINA = "\u{02BB}"
+local function fallback_xml(xml)
+  return (xml:gsub("<w:r>(.-)</w:r>", function(inner)
+    local t = inner:match('<w:t xml:space="preserve">([^<]*)</w:t>$')
+    if not t or not t:find(OKINA, 1, true) then return nil end
+    local rpr = inner:match("^<w:rPr>.-</w:rPr>") or ""
+    local frpr = rpr == "" and ("<w:rPr>" .. FALLBACK .. "</w:rPr>") or rpr:gsub("^<w:rPr>", "<w:rPr>" .. FALLBACK, 1)
+    local out = {}
+    for piece, sep in (t .. OKINA):gmatch("(.-)(" .. OKINA .. ")") do
+      if piece ~= "" then out[#out + 1] = "<w:r>" .. rpr .. '<w:t xml:space="preserve">' .. piece .. "</w:t></w:r>" end
+      out[#out + 1] = "<w:r>" .. frpr .. "<w:t>" .. sep .. "</w:t></w:r>"
+    end
+    out[#out] = nil
+    return table.concat(out)
+  end))
+end
+
 local function bind_double_signs(l)
   for i = 1, #l - 1 do
     if l[i].t == "Str" and (l[i].text == "§§" or l[i].text == "¶¶") and l[i + 1].t == "Space" then
@@ -172,7 +205,7 @@ end
 
 function Pandoc(doc)
   local meta = doc.meta
-  doc.blocks = doc.blocks:walk({ Str = breaks }):walk({ Inlines = bind_double_signs })
+  doc.blocks = doc.blocks:walk({ Str = breaks }):walk({ Inlines = bind_double_signs }):walk({ Inlines = binds })
   local out = cover(meta)
   -- the body's blocks in order: { kind, content }
   local blocks = {}
@@ -219,6 +252,6 @@ function Pandoc(doc)
   end
   for _, x in ipairs(signature(meta)) do out[#out + 1] = x end
   local res = {}
-  for _, x in ipairs(out) do res[#res + 1] = xe.raw(x) end
+  for _, x in ipairs(out) do res[#res + 1] = xe.raw(fallback_xml(x)) end
   return pandoc.Pandoc(res, pandoc.Meta({}))
 end
