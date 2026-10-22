@@ -44,7 +44,9 @@ authorities:
   hang: 36
   above: 5.2
   group: {bold: true, above: 14.3, below: 3.9}
-# MO-CERT-002: the signature block after the conclusion, single spaced, never split.
+# MO-CERT-002: the signature block after the conclusion, single spaced, never split; the last paragraph kept with it
+# (tier 2: a signature page of its own reads as detached).
+keep_with_closing: true
 closing:
   - group:
       - {text: "{signature.firm}", left: 230.4}

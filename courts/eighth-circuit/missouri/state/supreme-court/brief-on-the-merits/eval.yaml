@@ -1,5 +1,10 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) but do not yet break every line where typst does: differences of the shared model,
-# recorded in docs/open-items/fb-595.54.59.md, are reported, not counted, until fb-595.54.82 fixes them.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). docx breaks every line and page where
+# typst does and is gated.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LaTeX drops footnote 6 (page 18, anchored "§ 115.646,[^6]"): lib/latex/xdoc.lua sets the token after a section
+  # sign in an \mbox (xd.hold_sign_tokens) and the note inside it is lost, so page 18 sets two more body lines and
+  # every page end from 19 on differs (XENG-002, XENG-003). A shared-model defect, recorded in
+  # docs/open-items/fb-595.54.59.md; reported, not gated, until it is fixed.
+  cross_engine_latex: report

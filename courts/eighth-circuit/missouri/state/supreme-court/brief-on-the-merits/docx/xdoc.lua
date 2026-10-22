@@ -146,6 +146,7 @@ return require("docx.xdoc")({
       ["below"] = 3.9,
     },
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {
