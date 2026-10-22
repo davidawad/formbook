@@ -1,4 +1,4 @@
 PASS
-58f92e42c4fa55ece39b31539684be5d2af5c453147abe60b167838736ba2db7  usage/OUTPUT-patent-owner-response.docx
+82841a4590ecb207b5fc62d488ba54218bd11ec458ae7d992434bf955c35c6d2  usage/OUTPUT-patent-owner-response.docx
 b1c2d695ba8862bd381f1378dd92dfcc7fc710c339fe4ca4e8a4036400303b7c  usage/OUTPUT-patent-owner-response.docx.pdf
 5ee500b5dd2b606fe754417c176c800a225bf61ae5abff767913012b3bae8e91  usage/OUTPUT-patent-owner-response.typst.pdf

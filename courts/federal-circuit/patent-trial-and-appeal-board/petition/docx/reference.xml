@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The PTAB petition's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the typst
+     template (Times New Roman) at 14 pt (size 28 half points); Body Text in 32 pt exact line boxes (double spacing,
+     PTAB-PET-FORM-003) with a half-inch first-line indent; List Item with the label in a half-inch box; footnotes
+     14 pt in 16 pt boxes, 7 pt apart (typst pitch-double, pitch-single, footnote.entry gap). Plus one style of its
+     own, "Body Keep": the body's last paragraph, kept on the page of the signature block. The cover, contents,
+     headings, signature, certificates, footers and the body's section are written by ptab-petition.lua with their own
+     exact spacing. pandoc reads the sample without fancy lists (markdown+smart-fancy_lists). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="640" single="320" indent="720" list="720" note-after="140" pandoc-from="markdown+smart-fancy_lists">
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyKeep"><w:name w:val="Body Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>

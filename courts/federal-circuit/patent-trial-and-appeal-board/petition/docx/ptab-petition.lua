@@ -3,9 +3,12 @@
 -- the cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): exact line spacing,
 -- typst's break rules on every run. It writes the cover, the contents, the headings (their labels as text), the
 -- signature block and the two certificates; the body's paragraphs, lists and footnotes are pandoc's, on
--- reference.docx (make-reference.sh). Everything comes from the frontmatter of the sample (schema: ../README.md,
--- "Markdown contract"); no text is specific to a case. render.sh adds the footers and the body's section, and fills
--- the contents' page numbers from a first pass (DOCX_MANIFEST, DOCX_PAGEMAP; see render.sh).
+-- reference.docx (docx/reference.xml). Everything comes from the frontmatter of the sample (schema: ../README.md,
+-- "Markdown contract"); no text is specific to a case. It also writes the footers (FORMBOOK_FOOTERS: roman for the
+-- contents; arabic from 1 for the body, with the running identification under the page number, as typst sets it) and
+-- the body's section (FORMBOOK_FINAL). The contents' page numbers come from the PDF (fb render,
+-- tools/fb/src/docxpass.rs): each pass writes a needle per heading (FORMBOOK_NEEDLES) and lists the pages of the
+-- pass before (FORMBOOK_PAGES; placeholders on the first), until they settle.
 --
 -- Sections: cover (no number), contents (lower-case roman), body and certificates (arabic from 1).
 
@@ -18,6 +21,7 @@ local CFG = {
   word_cert = "Under the provisions of 37 C.F.R. § 42.24, the undersigned hereby certifies that the word count for the foregoing Petition for inter partes review (excluding the table of contents, table of authorities, mandatory notices, certificate of service or word count, and appendix of exhibits or claim listing) totals {words} words, which is within the word limit allowed under 37 C.F.R. § 42.24(a)(1)(i).",
   service = "Pursuant to 37 C.F.R. §§ 42.6(e) and 42.105(a), the undersigned hereby certifies service on the Patent Owner of a copy of this Petition and its respective exhibits, by {manner}, on the following at the addresses shown:",
   toc_depth = 2,
+  running = "Petition for Inter Partes Review of {pn}", -- typst running-title
 }
 
 -- the typst numbers, in twips
@@ -105,22 +109,27 @@ local function plain_heading(s, pbb)
   return line(trun(s, { b = true }), { keep = true, pbb = pbb, after = 320, jc = "center" })
 end
 
--- The page map of the first pass: H<TAB>index<TAB>folio
+-- The pages of the pass before (FORMBOOK_PAGES: id<TAB>page<TAB>label per needle): heading index -> its folio;
+-- nil on the first pass.
 local function read_pagemap()
   local map = {}
-  local f = os.getenv("DOCX_PAGEMAP")
+  local f = os.getenv("FORMBOOK_PAGES")
   if f == nil or f == "" then return nil end
-  for l in io.lines(f) do
-    local kind, idx, folio = l:match("^(%u)\t([^\t]*)\t(.*)$")
-    if kind == "H" then map[tonumber(idx)] = folio end
+  local h = io.open(f, "r")
+  if h == nil then return nil end
+  for l in h:lines() do
+    local idx, folio = l:match("^H:(%d+)\t[^\t]*\t(.*)$")
+    if idx then map[tonumber(idx)] = folio end
   end
+  h:close()
+  if next(map) == nil then return nil end
   return map
 end
 
 -- Contents: one row per heading of levels 1..toc_depth (typst toc-entry and listing-row): the label in a half-inch
 -- box at the heading's depth, the title hanging after it and wrapping before the page column, a dot leader from
 -- three spaces after the text to the page number.
-local function contents(headings, map)
+local function contents(headings, map, last_row)
   local out = { plain_heading("TABLE OF CONTENTS") }
   local rows = {}
   for i, h in ipairs(headings) do
@@ -141,6 +150,7 @@ local function contents(headings, map)
     -- the last contents paragraph ends section 2 (roman numbers)
     if k == #rows then
       props[#props + 1] = '<w:sectPr><w:footerReference w:type="default" r:id="rIdFooterRoman"/>' .. PAGE .. '<w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>'
+      last_row(txt(h.content) .. " " .. page)
     end
     out[#out + 1] = P(props, xe.runs(h.label .. "\t") .. xe.inl(h.content) .. xe.runs(xe.LEAD .. page))
   end
@@ -234,6 +244,68 @@ local function block_quote(b)
   return out
 end
 
+-- ---------------------------------------------------------------------------
+-- Page search, footers and the body's section (fb render's multi-pass build)
+-- ---------------------------------------------------------------------------
+
+local NEEDLE_MAX = 60 -- a needle is a prefix of the text (letters and digits only, tools/fb/src/docxpages.rs)
+
+local function norm(s)
+  return (s:lower():gsub("[^a-z0-9]", ""))
+end
+
+-- a needle line: ID, B (body), the text and what follows it, and the text's first words (at least 8 letters and
+-- digits) for a needle that runs over a page break
+local function need(list, id, text, context)
+  local short = ""
+  for w in text:gmatch("%S+") do
+    short = short .. norm(w)
+    if #short >= 8 then break end
+  end
+  local long = norm(text .. " " .. (context or "")):sub(1, NEEDLE_MAX)
+  short = short:sub(1, NEEDLE_MAX)
+  if short == "" then short = long end
+  list[#list + 1] = id .. "\tB\t" .. long .. "\t" .. short
+end
+
+local function write_file(env, text)
+  local path = os.getenv(env)
+  if path == nil or path == "" then return end
+  local f = assert(io.open(path, "w"))
+  f:write(text)
+  f:close()
+end
+
+local function read_file(path)
+  if path == nil or path == "" then return nil end
+  local f = io.open(path, "r")
+  if f == nil then return nil end
+  local s = f:read("a")
+  f:close()
+  return s
+end
+
+-- the footer sits 18.4 pt above the page edge (typst: 30 % footer descent below the 1 in margin's text area, two
+-- 16 pt lines); the cover and the contents keep the filter's 34.4 pt (one line)
+local FPAGE = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="368" w:gutter="0"/>'
+local FLINE = '<w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/><w:ind w:left="0" w:firstLine="0"/>'
+local PAGENO = '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r>'
+
+-- The two footers (FORMBOOK_FOOTERS): the contents' page number; the body's, with the running identification
+-- (typst running-title) naming the patent number of the frontmatter as written, its hyphens unbreakable.
+local function footers(m)
+  local meta = pandoc.json.decode(read_file(os.getenv("FORMBOOK_META")) or "{}", false)
+  local pn = meta["patent-number"]
+  if type(pn) ~= "string" and type(pn) ~= "number" then fail("the frontmatter has no patent-number") end
+  pn = tostring(pn):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;")
+    :gsub("%-(%d)", '</w:t><w:noBreakHyphen/><w:t xml:space="preserve">%1')
+  local running = CFG.running:gsub("{pn}", function() return pn end)
+  local page = '<w:p><w:pPr>' .. FLINE .. '<w:jc w:val="center"/></w:pPr>' .. PAGENO .. '</w:p>'
+  return "rIdFooterRoman\t" .. page .. "\n" ..
+    "rIdFooterArabic\t" .. page .. '<w:p><w:pPr>' .. FLINE .. '<w:jc w:val="right"/></w:pPr><w:r><w:t xml:space="preserve">' ..
+    running .. "</w:t></w:r></w:p>\n"
+end
+
 function Pandoc(doc)
   local m = doc.meta
   local out = {}
@@ -241,35 +313,42 @@ function Pandoc(doc)
     out[#out + 1] = pandoc.RawBlock("openxml", table.concat(list, ""))
   end
 
-  -- number the headings (typst heading-number) and write the manifest of the page search: the first words of
-  -- each heading as the body sets them (label, then the title; level 1 in capitals)
+  -- number the headings (typst heading-number)
   local headings, counters = {}, { 0, 0, 0, 0, 0, 0 }
-  local manifest = {}
-  for _, b in ipairs(doc.blocks) do
+  for i, b in ipairs(doc.blocks) do
     if b.t == "Header" then
       local l = b.level
       counters[l] = counters[l] + 1
       for k = l + 1, #counters do counters[k] = 0 end
-      local h = { level = l, content = b.content, label = label(l, counters[l]) }
+      local h = { level = l, content = b.content, label = label(l, counters[l]), at = i }
       headings[#headings + 1] = h
-      local words = {}
-      for w in (h.label .. " " .. txt(b.content)):gmatch("%S+") do
-        if #words < 3 then words[#words + 1] = w end
-      end
-      manifest[#manifest + 1] = "H\t" .. #headings .. "\t" .. table.concat(words, " ")
     end
   end
-  local mf = os.getenv("DOCX_MANIFEST")
-  if mf and mf ~= "" then
-    local f = assert(io.open(mf, "w"))
-    f:write(table.concat(manifest, "\n"), "\n")
-    f:close()
+  -- the text of the block after a heading, as the body sets it (a heading with its label)
+  local function after(i)
+    local b = doc.blocks[i + 1]
+    if b == nil then return "" end
+    for _, h in ipairs(headings) do
+      if h.at == i + 1 then return h.label .. " " .. txt(h.content) end
+    end
+    return txt(b)
   end
 
+  -- the needles of the page search, in document order: the contents' last row, its title and page (the body's
+  -- headings are searched after it; the PDF text of the contents puts the labels out of order), then each heading as the body sets it (label and title) with the text after it
+  local needles = {}
   raw(cover(m))
-  raw(contents(headings, read_pagemap()))
+  raw(contents(headings, read_pagemap(), function(row) need(needles, "T:end", row) end))
+  for i, h in ipairs(headings) do
+    need(needles, "H:" .. i, h.label .. " " .. txt(h.content), after(h.at))
+  end
+  needles[#needles + 1] = "#section\tH:1\tdecimal\t"
+  write_file("FORMBOOK_NEEDLES", table.concat(needles, "\n") .. "\n")
+  write_file("FORMBOOK_FOOTERS", footers(m))
+  write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdFooterArabic"/>' .. FPAGE ..
+    '<w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>')
 
-  -- body: section 3 (render.sh gives it the arabic numbering and the footer)
+  -- body: section 3 (FORMBOOK_FINAL gives it the arabic numbering and the footer)
   local body = {}
   local hi = 0
   for _, b in ipairs(doc.blocks) do
