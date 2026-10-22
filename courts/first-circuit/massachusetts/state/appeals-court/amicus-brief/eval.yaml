@@ -3,8 +3,9 @@
 font:
   size_pt: 14
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx engine is generated from the typst layout
-# (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the shared filters drop widow control in a
-# paragraph that anchors a footnote and typst keeps it; the latex engine is BLOCKED (a long URL in a note runs into the
-# margin, DEF-FORM-002). See docs/open-items/fb-595.54.68.md.
+# (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated, and not re-rendered on the current model:
+# its URL rule has no break after "%", so the text-fragment URL of note 8 now runs into the right margin in typst too
+# (DEF-FORM-002, p40); the committed renders predate that rule. The latex engine is BLOCKED by the same line. See
+# docs/open-items/fb-595.54.68.md.
 params:
   cross_engine: report
