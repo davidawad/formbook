@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Del. motion brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; LR 5.1.1(a) and 7.1.3(a)(2) name
+     no face) at 12 pt (size 24 half points; at least 12 point for all printed matter, footnotes too); Body Text in
+     exact 27.6 pt line boxes (552 twips, typst pitch-body; LR 5.1.1(a): double spacing as typical word processing
+     software sets it, 2 x 1.15 x 12 pt) with a half-inch first-line indent (typst para-indent); single lines and
+     footnotes in 13.8 pt boxes (276 twips, typst pitch-single), 7 pt after a footnote (typst note-gap). Added here:
+     "Body Text Keep" (the last paragraph, kept whole with the signature block: typst one unbreakable block).
+     docx/ded-motion-brief.lua writes the cover, the contents and the citations with their pages (fb render's
+     passes), the headings, the signature block, the footers (none on the cover, the page number centred, its line
+     box ending 0.5 in above the edge: typst footer-descent) and the three sections (cover; front matter lower roman
+     from i; memorandum arabic from 1). Twips: 20 x pt. pandoc-from: CommonMark with smart punctuation, as typst's
+     cmarker reads the body. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="commonmark+smart+footnotes+yaml_metadata_block" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" note-after="140" footer="720">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+</reference>
