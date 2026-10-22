@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D.N.J. Bankruptcy memorandum of law's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs;
+     docs/EVAL-LOOP.md, "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; no rule names
+     a face, see ../README.md) at 14 pt (size 28 half points); Body Text in exact 28 pt line boxes (560 twips, typst
+     pitch-body: double spaced) with a half-inch first-line indent (typst para-indent); single lines and headings in
+     16 pt boxes (320 twips, typst pitch-single), 12 pt around a heading (240 twips, typst heading-above and
+     heading-below). docx/njb-motion-brief.lua writes every paragraph itself: the counsel block (LBR 9004-1(a)), the
+     court, the LBR 9004-1 note, the two captions with the hearing date (LBR 9004-1(b)), the title, the headings, the
+     paragraphs, the notes, the signature block, the footer (the page number at 12 pt, centred, its line box ending
+     0.5 in above the edge: typst footer-descent) and the section (letter, 1 in margins). Twips: 20 x pt.
+     pandoc-from: CommonMark with smart punctuation, as typst's cmarker reads the body. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="commonmark+smart+yaml_metadata_block" size="28" body="560" single="320" indent="720" heading="320" heading-before="240" heading-after="240" footer="720">
+</reference>
