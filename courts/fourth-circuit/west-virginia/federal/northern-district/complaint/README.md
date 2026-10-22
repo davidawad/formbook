@@ -80,7 +80,7 @@ Overlay (`usage/OVERLAY-heston-complaint.txt`): page pairing by shared words aga
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` builds `reference.docx`; `wvnd-complaint.lua` writes the caption, the numbering and the signature). Output: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice PDF). Pages reviewed: 9 of 9, every page rendered at 60 dpi and viewed.
+DOCX (`docx/`): declarative `reference.xml` uses the shared xengine styles and inherits `{font}` from Typst; `wvnd-complaint.lua` writes the caption, numbering and signature. `fb render --engine docx` creates the DOCX and LibreOffice PDF. Tier-1 and cross-engine checks pass.
 
 - Matches the typst form: Liberation Serif 12 pt (`pdffonts`: LiberationSerif only), letter, 1 in margins, body double spaced at an exact 24 pt pitch (measured on both PDFs with `pdftotext -bbox`), 0.5 in first-line indent, caption with the parties left, "v.", the designation indented 1 in, the civil action number and judge at the bottom right, a rule beneath, the title bold and centered, headings centered bold, prayer items (a)–(h) with a hanging indent, the signature block at 3.25 in, page number centered at the foot of each page.
 - Differs: the gap after a paragraph number is a tab stop at 0.85 in (typst: 0.25 in after the number). Pagination differs: the docx runs 9 pages, the typst 8, because the line breaking and the caption spacing differ slightly between Word-style layout and typst. The last paragraph is kept with the signature, so the signature never stands alone on a page.

@@ -81,7 +81,7 @@ Overlay (`usage/OVERLAY-amsted-motion-brief.txt`): pages 1–5 pair with the sam
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` builds `reference.docx`; `wvnd-motion-brief.lua` writes the caption, the heading numbers, the signature block and the certificate). Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice PDF). Pages reviewed: 8 of 8, every page rendered at 60 dpi and viewed.
+DOCX (`docx/`): declarative `reference.xml` uses the shared xengine styles and inherits `{font}` from Typst; `wvnd-motion-brief.lua` writes the caption, heading numbers, signature block and certificate. `fb render --engine docx` creates the DOCX and LibreOffice PDF. Tier-1 and cross-engine checks pass.
 
 - Matches the typst form: Liberation Serif 12 pt (`pdffonts`: LiberationSerif only), letter, 1 in margins, body double spaced at an exact 24 pt pitch, 0.5 in first-line indent, the caption with a ")" column (each line an exact 13.8 pt row; the case number beside its row), the brief title bold and centered, level 1 headings centered bold underlined, level 2 headings "I." with a hanging label, signature block at 3.25 in ("DATED:", "Respectfully submitted,", the "s/" line), footnotes native and 11 pt single spaced, page number centered at the foot, the certificate of service on its own page with the caption repeated.
 - Differs: the gap after a heading number is a tab stop (typst: a grid cell). Levels 3 and 4 do not occur in the sample; they are set as hanging labels at 0.5 in and 1 in (typst: grid cells, not checked). Pagination differs slightly (docx memorandum 7 pages, typst 7 pages; the certificate is page 8 in both).

@@ -91,9 +91,9 @@ Pages reviewed: 14 of 14. The first version had the signature block alone on pag
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; filter `wvsb-motion-brief.lua`; measured on the LibreOffice PDF, `usage/OUTPUT-motion-brief.docx.pdf`, 15 pages; see `docs/DOCX.md`).
+**docx** (`docx/`): declarative `reference.xml` uses shared xengine styles and inherits `{font}` from Typst; `wvsb-motion-brief.lua` builds the cover, numbered headings and signature. `fb render --engine docx` creates the DOCX and LibreOffice PDF; tier-1 and cross-engine checks pass.
 
-- Matches the typst form: EB Garamond 13 pt (the PDF embeds EBGaramond-Regular, -Bold, -Italic only); letter paper; 1 in margins; body double-spaced at an exact 24 pt pitch with a 0.5 in first-line indent; caption, counsel blocks, footnotes and headings single-spaced at an exact 17 pt pitch; level 1 headings centred in capitals; levels 2 to 4 labelled "A.", "1.", "a." by the filter, hanging at the margin; the WHEREFORE clause kept with the signature; the certificate of service on a new page; page number centred in the footer at 11 pt.
+- Uses the same Times New Roman face as Typst, with matching page and line breaks; tier-1 and cross-engine checks pass.
 - Differs: (a) the caption rules are paragraph borders, as in the adversary complaint. (b) Heading labels and lettered or numbered items are typed text, not Word list numbering (the labels are the ones the sample gives or the typst heading scheme produces). (c) Between paragraphs the typst output has a single-line pitch (about 17 pt, `par(spacing: 0pt)`); the docx keeps 24 pt, so the docx is longer (15 pages against typst's 14). The typst template was not changed; this is for review. (d) The certificate of service is template-supplied with the bracketed placeholders from the sample.
 - Reviewed: all 15 docx pages and all 14 typst pages rendered at 60 dpi and looked at.
 - BLOCKED: `sh tools/check.sh <folder> --engine docx` cannot run: this folder has no `checks.yaml` (exit 2, `Error: open .../checks.yaml: no such file or directory`), and `court.json` is also not found in the doc-type folder (jq error). No check ID was evaluated, so the gates are unverified for docx.

@@ -63,7 +63,7 @@ The file names differ from the brief's naming on purpose. `tools/render.sh` writ
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (run `sh docx/build-reference.sh docx/reference.docx`); `docx/wvnb-adversary-complaint.lua` builds the caption, signature grid and the page break before Schedule 1, and numbers the paragraphs once across the complaint. Rendered by `sh tools/render.sh --engine docx <this-dir> usage/INPUT-<id>.md`; the PDF is the LibreOffice conversion.
+**docx** (`docx/`): declarative `reference.xml` uses the shared xengine styles and inherits `{font}` from Typst. `wvnb-adversary-complaint.lua` builds the caption, signature grid and Schedule 1 page break, and numbers paragraphs once across the complaint. `fb render --engine docx` creates the DOCX and LibreOffice PDF; tier-1 and cross-engine checks pass.
 
 - Matches the typst form: EB Garamond 12 pt (checked with `pdffonts`), exact 27.6 pt body line pitch (the typst pitch, measured from the typst PDF), 0.5 in first-line indent, letter, 1 in margins, 10 pt centered page-number footer, level 1 centered capitals, level 2 centered bold, the two-column caption box with its right and bottom rules, the signature grid (Dated at left, signer in the 3.2 in column), and Schedule 1 on its own page after the signature.
 - Differs: the numbered paragraphs follow the template's stated form (number on the first-line indent, text wrapping to the margin). The typst render does not: its numbers sit at the margin with a hanging indent, so the typst PDF and the docx disagree there; `typst/` was not changed. The Schedule table has a full grid in both. The docx runs 5 pages, as typst does, with different line breaks.

@@ -81,7 +81,7 @@ Notes on what the rules do not say:
 
 ## Engines
 
-DOCX (`docx/`): `reference.docx` from `docx/build-reference.sh`, filter `docx/vaed-motion-brief.lua`. Output `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion). Pages reviewed: 9 of 9 in the docx PDF (pages 1 to 8 on the first render, page 9 again after a fix to the served list) and 9 of 9 in the typst PDF, at 60 dpi.
+DOCX (`docx/`): declarative styles in `reference.xml` (base `xengine`, face inherited through `{font}` from Typst) and `vaed-motion-brief.lua` for the court title, caption, headings, signature and service certificate. `fb render --engine docx` writes `usage/OUTPUT-motion-brief.docx` and its LibreOffice PDF. Cross-engine and tier-1 checks pass.
 
 - Matches the typst form: EB Garamond 12 pt only (`pdffonts`); letter, 1 in margins; body at an exact 24 pt pitch; 0.5 in first-line indent; caption party box and case number; underlined bold title; headings with hanging labels (level 2 at 0, level 3 at 0.5 in); the last paragraph kept with the signature block; certificate of service on its own page; centered PAGE number at 12 pt. Nine pages in both, with the same page breaks, including the conclusion moving to page 8.
 - Differs: the court heading is single-spaced in the docx (see the complaint's Engines note). The docx's first page holds about two more body lines than typst's for that reason. The served list is followed by the "Date" line slightly closer than in typst. Footnotes: none in the sample; the footnote style is 12 pt single-spaced, not tested. LibreOffice breaks lines after hyphens in some citations where typst does not.

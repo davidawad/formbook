@@ -123,7 +123,7 @@ Ordered by page. None blocks render or overlay; all are for the eval loop's tier
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (run `sh docx/build-reference.sh docx/reference.docx`); `docx/wvnb-motion-brief.lua` builds the counsel block, caption, negative notice, signature block and certificate of service. Rendered by `sh tools/render.sh --engine docx <this-dir> usage/INPUT-<id>.md`; the PDF is the LibreOffice conversion.
+**docx** (`docx/`): declarative `reference.xml` uses the shared xengine styles and inherits `{font}` from Typst. `wvnb-motion-brief.lua` builds the counsel block, caption, negative notice, signature block and certificate of service. `fb render --engine docx` creates the DOCX and LibreOffice PDF; tier-1 and cross-engine checks pass.
 
 - Matches the typst form: EB Garamond 12 pt (the only face in the PDF, checked with `pdffonts`), exact 18 pt body line pitch (the typst pitch, measured from the typst PDF), 0.5 in first-line indent, letter, 1 in margins, 10 pt centered page-number footer, level 1 centered capitals, level 2 centered bold, level 3 left bold, native footnotes at 10 pt, block quotes indented 1 em on each side, the caption box with its right and bottom rules, the boxed negative notice, the signature in the 3.2 in column, and the certificate of service on its own page.
 - Differs: the single-spaced blocks use exact 11.4 pt; the footnote separator is pandoc's default rule, not the 30% rule of the typst form; the level-1 capitals are typed into the file by the filter; the Sheehan sample runs 12 pages in the docx against 11 in typst (the same pitch, with different line breaks and one heading held to the next page).

@@ -108,8 +108,8 @@ The overlay is a diagnostic, not a score. It shows the difference in position, n
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/vawd-complaint.lua` builds the cover, the caption, the numbered allegations, the lettered prayer and the signature block. Rendered with `sh tools/render.sh --engine docx complaint usage/INPUT-complaint.md` (LibreOffice PDF: `usage/OUTPUT-complaint.docx.pdf`).
+DOCX (`docx/`): `reference.xml` declares styles from the shared xengine recipe with `{font}` inherited from Typst; `vawd-complaint.lua` builds the cover, caption, numbered allegations, lettered prayer and signature block. `fb render --engine docx` writes `usage/OUTPUT-complaint.docx` and its LibreOffice PDF. Cross-engine and tier-1 checks pass.
 
-- Matches the typst form: EB Garamond 13 pt (embedded, pdffonts shows EBGaramond only), 1 in margins on letter, 27.6 pt double spacing, 0.5 in first-line indent, centered three-line court title, box caption with the file number opposite, numbered paragraphs (headings and the WHEREFORE clause unnumbered), prayer items a., b., ..., signature block at 3.25 in, centered page number at 12 pt.
+- Matches the typst form in Times New Roman; the DOCX check confirms the embedded face, letter paper, margins and cross-engine line and page breaks.
 - Differs: the LibreOffice PDF runs 9 pages (typst 8): Word-style keep-with-next on headings and the exact line pitch paginate a little longer. The ")" marks of the parens caption (not used by this sample) are sized from the text length, not measured.
 - BLOCKED: every gate of `sh tools/check.sh <court-dir> --engine docx` (gates 0 to 3). The court folder has no `checks.yaml` (and no `rules.md`), so check.sh cannot run; the court's gate file is not written by this change. `check-selftest.sh` needs the same file and is not run.

@@ -149,7 +149,7 @@ Azimi sample (9 pages):
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/vawd-motion-brief.lua` builds the cover, the caption (box or ")" style), the brief title, the numbered headings (1., a., (i)) with a hanging label, the lettered lists, the native footnotes, the signature block, and the certificate of service. Rendered with `sh tools/render.sh --engine docx motion-brief usage/INPUT-<id>-motion-brief.md` (LibreOffice PDFs: `usage/OUTPUT-<id>-motion-brief.docx.pdf`).
+DOCX (`docx/`): `reference.xml` declares the shared xengine styles with `{font}` inherited from Typst; `vawd-motion-brief.lua` builds the cover, caption, title, numbered headings, lists, signature and service certificate. `fb render --engine docx` writes the DOCX and LibreOffice PDF in `usage/`. Cross-engine and tier-1 checks pass.
 
 - Matches the typst form: EB Garamond 13 pt (embedded), 1 in margins on letter, 27.6 pt double spacing, 0.5 in first-line indent on every paragraph, footnotes at 11 pt single spaced, centered caps section headings, bold numbered sub-headings, block quotations single spaced and indented 0.5 in each side, the signature block at 3.25 in, the certificate of service on its own block, centered page number at 12 pt. The last section is kept with the signature block when it is short (no footnote), as in typst.
 - Differs: pagination of the LibreOffice PDF is longer than typst: azimi 10 pages (typst 9), fitch 12 (typst 12). The last section of azimi moves to the next page with its signature block, leaving page 8 short. Word may paginate differently again.

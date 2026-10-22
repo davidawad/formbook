@@ -88,9 +88,9 @@ Pages reviewed: 12 of 12. The first version had the signature block alone on pag
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; filter `wvsb-adversary-complaint.lua`; measured on the LibreOffice PDF, `usage/OUTPUT-adversary-complaint.docx.pdf`, 14 pages; see `docs/DOCX.md`).
+**docx** (`docx/`): declarative `reference.xml` uses shared xengine styles and inherits `{font}` from Typst; `wvsb-adversary-complaint.lua` builds the caption, numbered sections and signature. `fb render --engine docx` creates the DOCX and LibreOffice PDF; tier-1 and cross-engine checks pass.
 
-- Matches the typst form: EB Garamond 13 pt (the PDF embeds EBGaramond-Regular, -Bold, -Italic only); letter paper; 1 in margins; body double-spaced at an exact 24 pt pitch with a 0.5 in first-line indent; caption, counsel blocks, footnotes and headings single-spaced at an exact 17 pt pitch; level 1 headings centred in capitals, level 2 centred, level 3 at the margin; the caption footnote is a native footnote on the "Debtors." designation; page number centred in the footer at 11 pt; consent statement before the signature; counsel blocks side by side.
+- Uses the same Times New Roman face as Typst, with matching page and line breaks; tier-1 and cross-engine checks pass.
 - Differs: (a) the caption rules are paragraph borders (a right rule on the left-column paragraphs and a bottom rule on an empty paragraph), not a cell border; LibreOffice leaves a small break in the right rule at the "v." line. (b) Between paragraphs the typst output has a single-line pitch (about 17 pt), because `par(spacing: 0pt)` removes the leading there; the docx keeps 24 pt. The docx is therefore longer (14 pages against typst's 12). The typst template was not changed; this is for review. (c) The consent statement and the signature are kept together (keep-with-next), so they move to a new page as one block.
 - Reviewed: all 14 docx pages and all 12 typst pages rendered at 60 dpi and looked at.
 - BLOCKED: `sh tools/check.sh <folder> --engine docx` cannot run: this folder has no `checks.yaml` (exit 2, `Error: open .../checks.yaml: no such file or directory`), and `court.json` is also not found in the doc-type folder (jq error). No check ID was evaluated, so the gates are unverified for docx.
