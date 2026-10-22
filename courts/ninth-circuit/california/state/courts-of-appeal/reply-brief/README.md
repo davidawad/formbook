@@ -6,7 +6,7 @@ Doc type `reply-brief` for the California Courts of Appeal (`court.json` alias `
 |---|---|
 | `usage/FILED-EXAMPLE-reply-brief.pdf` | Filed Appellants' Reply Brief, Sixth District, 33 pages, text layer present. Source and filer in `usage/SOURCE.md`. |
 | `usage/INPUT-reply-brief.md` | Transcription of a portion of the exemplar: cover, tables, Introduction, the first part of Argument I (with its footnotes), Conclusion, certificate of word count and proof of service. Frontmatter carries the cover, counsel, signature, service and authorities. |
-| `usage/OUTPUT-reply-brief.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/reply-brief usage/INPUT-reply-brief.md`. 15 pages, EB Garamond only (`pdffonts`). |
+| `usage/OUTPUT-reply-brief.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/reply-brief usage/INPUT-reply-brief.md`. 14 pages, Times New Roman only (`pdffonts`). `usage/OUTPUT-reply-brief.docx` and `.docx.pdf`: the docx engine, the same 14 pages line for line. |
 | `usage/OVERLAY-kirk-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/california/state/courts-of-appeal/reply-brief kirk-reply-brief`. Red = ours, blue = filed, black = both. The `.txt` is the page map. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 | `typst/calctapp-reply-brief.typ` | The template: `calctapp-reply-brief(meta, md)`. Copied from the `opening-brief` template, which is rule-driven and content-agnostic; the reply-specific parts are the metadata and the sample, not the layout. Parameters at the top; each traces to a rule or is a style choice. |
@@ -17,9 +17,9 @@ Verified 2026-10-14 against the courts.ca.gov rule pages (rule 8.204 and rule 8.
 
 | Requirement | Source | Value used in the template |
 |---|---|---|
-| Font style | Rule 8.74(b)(1) (https://courts.ca.gov/cms/rules/index/eight/rule8_74); Rule 8.204(b)(2)-(3) | Quoted 2026-10-15: "The font style must be a proportionally spaced serif face. Century Schoolbook is preferred." The rule allows any proportional serif, so the face is not named. EB Garamond (`font-family`) stays; the exemplar is Garamond. |
+| Font style | Rule 8.74(b)(1) (https://courts.ca.gov/cms/rules/index/eight/rule8_74); Rule 8.204(b)(2)-(3) | Quoted 2026-10-15: "The font style must be a proportionally spaced serif face. Century Schoolbook is preferred." The rule allows any proportional serif, so the face is not named. Century Schoolbook is preferred, not required (rules.md CALCTAPP-FORM-002), so the house face, Times New Roman (`font-family`; the docx named EB Garamond until 2026-10-22, fb-595.68.37). |
 | Font size | Rule 8.204(b)(4) (https://courts.ca.gov/cms/rules/index/eight/rule8_204); Rule 8.74(b)(1) | 13 pt, including footnotes (`type-size`). Confirmed in both rules. |
-| Line spacing | Rule 8.204(b)(5); Rule 8.74(b)(2) | 1.5 spaced (`body-leading`). Headings, footnotes and block quotations single-spaced. |
+| Line spacing | Rule 8.204(b)(5); Rule 8.74(b)(2) | 1.5 spaced: body lines in 22.5 pt boxes (`pitch-body`), one and a half of the 15 pt single line (`pitch-single`). Headings, footnotes and block quotations single-spaced. |
 | Margins | Rule 8.204(b)(6); Rule 8.74(b)(3) | Left and right 1.5 in, top and bottom 1 in (`side-margin`, `top-margin`). |
 | Alignment | Rule 8.74(b)(4) | Left-aligned, not justified (`justify: false`). |
 | Page size | Rule 8.204(b)(1); Rule 8.74(a) | US Letter. |
@@ -34,7 +34,7 @@ Verified 2026-10-14 against the courts.ca.gov rule pages (rule 8.204 and rule 8.
 - **Word limit for a reply brief.** From memory, a reply brief may be limited to 9,800 words; this is not in the repo and was not confirmed. The fetched text of rule 8.204(c)(1) does not state that figure and applies 14,000 words to any computer-produced brief. The exemplar's certificate says 10,532 words, which is over 9,800 and under 14,000, so the exemplar is consistent with the fetched text. **David should confirm the reply limit against the official rule before a PR cites it.** The template uses 14,000 until that is settled.
 - **The exemplar's margins.** The exemplar is from 2022 and was not measured for margins. The template follows the rule text as fetched (1.5 in left and right), the same choice as the `opening-brief` folder.
 - **The e-filing stamp.** The exemplar's "Document received by the CA 6th District Court of Appeal" header is not reproduced: it is an e-filing stamp, not part of the brief's text.
-- **Font.** Century Schoolbook is the preferred face under Rule 8.74(b)(1), not a required one; the rule allows any proportional serif. EB Garamond stays. `fonts/tex-gyre-schola/` is vendored and could replace it if David decides the preference should win; not changed here.
+- **Font.** Century Schoolbook is the preferred face under Rule 8.74(b)(1), not a required one; the rule allows any proportional serif. Times New Roman, the house standard (2026-10-22). `fonts/tex-gyre-schola/` is vendored and could replace it if David decides the preference should win; not changed here.
 
 ## Gate 2: visual review of `usage/OUTPUT-reply-brief.typst.pdf`
 
@@ -77,15 +77,8 @@ Pages reviewed: 15 of 15.
 
 ## Engines
 
-Docx engine (`docx/`), built 2026-10-15. `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/calctapp.lua` writes the cover (from the frontmatter) and the signature block; pandoc writes the body. Set in `styles.xml` and `sectPr`, not rendered: EB Garamond 13 pt everywhere, footnotes included; body lines exact 508 twips (25.4 pt, the typst body pitch measured on `/work/artifacts/calctapp/reply-brief.pdf`); first-line indent 0.5 in; headings single-spaced, bold, black; block quotations single-spaced, indented 0.5 in each side; US Letter; 1.5 in left and right, 1 in top and bottom; centered footer PAGE field, none on the cover (`titlePg`). Not set: line numbers (the typst template sets none).
+Both engines on the shared cross-engine layout model (2026-10-22, fb-595.68.37; `lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): Times New Roman 13 pt everywhere, footnotes included; body lines in exact 22.5 pt boxes (450 twips), single lines (cover, headings, quotations, footnotes, tables, signature, certificates) in 15 pt boxes (300 twips); every space between blocks explicit and the same in both. `docx/reference.xml` (`base="xengine"`, `{font}`) holds the styles; `docx/calctapp.lua` (the same filter as the opening brief's) writes the whole document as typst does: the cover with the ruled caption, the table of contents and the table of authorities with page numbers from `fb render`'s needles, the heading labels, the block quotations (one holds a footnote: Block Text Note), footnotes split over a page as typst splits them, the signature block (kept with the last paragraph), the certificate of word count (the same count as typst: 2,614 words on the sample) and the proof of service; the one section numbers the pages from the cover, the cover's number not printed (`titlePg`). `docx/make-reference.sh` and `reference.docx` are gone. `eval.yaml`: `params.cross_engine: gate`; docx XENG-001..003 pass (355/355 lines, 14 = 14 pages). No latex engine in this folder. The sample is transcribed from `FILED-EXAMPLE-reply-brief.pdf`; `FILED-EXAMPLE-reply-brief-2.pdf` (a second filer) has no INPUT.
 
-Differs from typst: no table of contents or table of authorities (no fields, no page numbers); no certificate of word count and no proof of service; the cover is paragraphs, not the caption grid; the signature block is paragraphs, not a grid. The body pitch is the typst pitch, which measures about 1.95 times the 13 pt size; that is double spacing, not the 1.5 this README states for Rule 8.74(b)(2). Flagged for David to check, not changed here.
-
-BLOCKED (docx engine, `usage/OUTPUT-reply-brief.docx`):
-- `docx.pdf` gates 0-3: BLOCKED, reason: `soffice` is not installed on the build box, so `tools/render-docx.sh` stops at the conversion step and no `.docx.pdf` exists. Pages reviewed for docx: 0.
-- TOC: not generated (typst builds it with page numbers). Reason: no TOC/TOA filter yet.
-- TOA: not generated. Reason: no TOA filter yet; LibreOffice does not honor TA/TOA fields (docs/DOCX.md).
-- Certificate of word count and proof of service: not generated by `calctapp.lua`. Reason: not yet written.
 
 ## Verification pass 2026-10-16 (fb-595.26.16)
 
