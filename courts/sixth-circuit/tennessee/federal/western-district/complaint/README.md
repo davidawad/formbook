@@ -6,7 +6,7 @@ Folder: `courts/sixth-circuit/tennessee/federal/western-district/complaint/`.
 | Item | Status |
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
-| typeface | **Times New Roman** named by the W.D. Tenn. CM/ECF manual, section "Setting up PDF Reader and Converting to PDF": "The court only allows use of the following fonts ... Times New Roman, Arial, and Courier New. Size of font must be (at least) 12 point." LR 7.1(b) itself names no face. Substitute: **Liberation Serif** (`docs/FONTS.md`, metric-compatible with Times New Roman). EB Garamond is not used. |
+| typeface | **Times New Roman** named by the W.D. Tenn. CM/ECF manual, section "Setting up PDF Reader and Converting to PDF": "The court only allows use of the following fonts ... Times New Roman, Arial, and Courier New. Size of font must be (at least) 12 point." LR 7.1(b) itself names no face. Both engines set the vendored Times New Roman (`fonts/`; Liberation Serif, metric-compatible, is only the declared fallback). EB Garamond is not used. |
 | sample md | `usage/INPUT-complaint.md` (a portion of the 26-page filing: caption, opening sections, paragraphs 1 to 46, prayer, jury demand, signature, verifications) |
 | render | ok: `usage/OUTPUT-complaint.typst.pdf` and `usage/OUTPUT-complaint.docx` / `.docx.pdf`, 14 pages each, on the shared cross-engine layout model (fb-595.68.31): typst 0.15.0 and LibreOffice, vendored Times New Roman only, no warnings; the docx breaks every line and page as typst (XENG-001..003 gated, `eval.yaml`) |
 | overlay | `just overlay` writes `.overlay/.../OVERLAY-complaint.pdf` (not committed) |
