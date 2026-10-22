@@ -45,8 +45,6 @@ signer:
   - "Stephen H. Greetham"
 ---
 
-{{contents}}
-
 # Summary of the Record
 
 Amici Nations adopt the Summary of the Record provided by CNE in its Brief-in-Chief.
@@ -81,7 +79,7 @@ The threshold issue in this case is who decides what the Compact means? Happily,
 
 > In the event that either party to this Compact believes that the other party has failed to comply with any requirement of this Compact, or in the event of any dispute hereunder, including . . . dispute[s] over the proper interpretation of the . . . Compact . . . :
 >
-> 2. [E]ither party may refer a dispute arising under this Compact to arbitration . . . subject to enforcement or pursuant to review as provided by paragraph 3 of this Part by a federal district court. [E]ither party . . . may bring an action against the other in a federal district court for the de novo review of any arbitration award . . . .
+> 2\. [E]ither party may refer a dispute arising under this Compact to arbitration . . . subject to enforcement or pursuant to review as provided by paragraph 3 of this Part by a federal district court. [E]ither party . . . may bring an action against the other in a federal district court for the de novo review of any arbitration award . . . .
 
 *See* 3A O.S. § 281, part 12 (emphasis added). This provision is consistent with the state-tribal policy choices made throughout the compact document. For example, Part 2(3) of the Compact states the mutual goal of promoting and maintaining a government-to-government relationship between the parties, and Part 2(24) defines the "State" as the whole State, including the Judicial Branch. The neutral forum and process established by Part 12 furthers not only this healthy intersovereign relationship but, equally clearly, also the uniform interpretation of compact provisions, taking those matters out of the hands of the judiciaries of the compacting parties and avoiding the multiplicity of rulings and directions that could otherwise (and unnecessarily) result.
 
@@ -211,11 +209,11 @@ For the reasons stated herein, Amici Nations--the Choctaw Nation of Oklahoma and
 
 [^30]: While summarily denying the existence of any ambiguities in the Compact, *see Dye*, at ¶ 35, the *Dye* Court does note elsewhere that: "Regrettably, neither 'court of competent jurisdiction' nor 'judicial proceeding' is defined by the Compact," *id.* at 18 & n.16; and that "Part 12 . . . includes a more precise consent to jurisdiction than Part 6," *id.* at 24 & n.16.
 
-{{signature}}
-
 # Certificate of Mailing
 
 I hereby certify that on February 13, 2008, I caused true copies of the foregoing Brief Amici Curiae of the Choctaw Nation of Oklahoma and the Chickasaw Nation in Support of Defendant-Petitioner Cherokee Nation Enterprises, L.L.C. to be separately served on Larry A. Tawwater and Darren M. Tawwater of the Tawwater Law Firm, P.L.L.C., at One Leadership Square, 211 N. Robinson, Suite 1950, Oklahoma City, OK 73102; and Stratton Taylor, Sean Burrage, Bradley H. Mallett, and Mark H. Ramsey, attorneys at P.O. Box 309, Claremore, OK 74018.
 
-{{signer}}
+Robert L. Rabon
+
+Stephen H. Greetham
 

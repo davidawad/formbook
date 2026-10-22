@@ -37,47 +37,45 @@ signer:
   - "Larry A. Tawwater"
   - "Darren M. Tawwater"
 authorities:
-  - group: "Cases"
-    items:
-      - {name: "Bittle v. Bahe", cite: "2008 OK 10, --- P.3d --- (mandate pending)", find: "Bittle"}
-      - {name: "Brendale v. Confederated Tribes and Bands of Yakima", cite: "492 U.S. 408, 109 S. Ct. 2994 (1989)", find: "Brendale"}
-      - {name: "Cherokee Nation v. Georgia", cite: "30 U.S. (5 Pet.) 1 (1831)", find: "Cherokee Nation v. Georgia"}
-      - {name: "Diepenbrock v. Merkel", cite: "97 P.3d 1063 (Kan. App. 2004)", find: "Diepenbrock"}
-      - {name: "Dixon v. Picopa Construction Co.", cite: "772 P.2d 1104 (Ariz. 1989)", find: "Dixon"}
-      - {name: "Gallegos v. Pueblo of Tesuque", cite: "46 P.3d 668 (N.M. 2002)", find: "Gallegos"}
-      - {name: "Kizis v. Morse Diesel International, Inc.", cite: "794 A.2d 498 (Conn. 2002)", find: "Kizis"}
-      - {name: "Lumber Industry Fund v. Warm Springs Forest Products Industries", cite: "939 F.2d 683 (9th Cir. 1991)", find: "Lumber Industry"}
-      - {name: "Maxa v. Yakima", cite: "924 P.2d 372 (Wash. App. Div. III 1996)", find: "Maxa"}
-      - {name: "Mescalero Apache Tribe v. Jones", cite: "411 U.S. 145, 93 S. Ct. 1267 (1973)", find: "Mescalero"}
-      - {name: "Montana v. United States", cite: "450 U.S. 544, 101 S. Ct. 1245 (1981)", find: "Montana v. U.S."}
-      - {name: "Organized Village of Kake v. Egan", cite: "369 U.S. 60 (1962)", find: "Kake"}
-      - {name: "Runyon v. Association of Village Council Presidents", cite: "84 P.3d 437 (Alaska 2004)", find: "Runyon"}
-      - {name: "Ruth v. Westinghouse Credit Co., Inc.", cite: "373 F. Supp. 468 (W.D. Okla. 1974)", find: "Ruth v."}
-      - {name: "San Manuel Indian Bingo & Casino v. NLRB", cite: "475 F.3d 1306 (D.C. Cir. 2007)", find: "San Manuel"}
-      - {name: "Tyler v. Shelter Mutual Insurance Co.", cite: "2008 OK 9, --- P.3d --- (mandate pending)", find: "Tyler v."}
-      - {name: "Washington v. Confederated Tribes of Colville Indian Reservation", cite: "447 U.S. 134, 100 S. Ct. 2069 (1980)", find: "Colville"}
-      - {name: "Worrall v. Mashantucket Pequot Gaming Enterprise", cite: "131 F. Supp. 2d 328 (D. Conn. 2001)", find: "Worrall"}
-      - {name: "Wylie v. Chesser", cite: "2007 OK 81, 173 P.3d 64", find: "Wylie"}
-  - group: "Statutes and Other Authority"
-    items:
-      - {name: "3A O.S. § 263", find: "§ 263"}
-      - {name: "3A O.S. § 271", find: "§ 271"}
-      - {name: "3A O.S. § 280", find: "§ 280"}
-      - {name: "3A O.S. § 281", find: "§ 281"}
-      - {name: "3A O.S. § 282", find: "§ 282"}
-      - {name: "18 O.S. § 1130", find: "§ 1130"}
-      - {name: "18 O.S. § 1134", find: "§ 1134"}
-      - {name: "18 O.S. § 1138", find: "§ 1138"}
-      - {name: "18 O.S. § 2003(1)", find: "§ 2003(1)"}
-      - {name: "18 O.S. § 2042(13)", find: "§ 2042(13)"}
-      - {name: "18 O.S. § 2048", find: "§ 2048"}
-      - {name: "18 O.S. § 2050", find: "§ 2050"}
-      - {name: "18 O.S. § 2059", find: "§ 2059"}
-      - {name: "25 U.S.C. § 1326", find: "§ 1326"}
-      - {name: "25 U.S.C. § 2703", find: "§ 2703"}
+  - heading: "Cases"
+    entries:
+      - {cite: "*Bittle v. Bahe*, 2008 OK 10, --- P.3d --- (mandate pending)", find: "Bittle"}
+      - {cite: "*Brendale v. Confederated Tribes and Bands of Yakima*, 492 U.S. 408, 109 S. Ct. 2994 (1989)", find: "Brendale"}
+      - {cite: "*Cherokee Nation v. Georgia*, 30 U.S. (5 Pet.) 1 (1831)", find: "Cherokee Nation v. Georgia"}
+      - {cite: "*Diepenbrock v. Merkel*, 97 P.3d 1063 (Kan. App. 2004)", find: "Diepenbrock"}
+      - {cite: "*Dixon v. Picopa Construction Co.*, 772 P.2d 1104 (Ariz. 1989)", find: "Dixon"}
+      - {cite: "*Gallegos v. Pueblo of Tesuque*, 46 P.3d 668 (N.M. 2002)", find: "Gallegos"}
+      - {cite: "*Kizis v. Morse Diesel International, Inc.*, 794 A.2d 498 (Conn. 2002)", find: "Kizis"}
+      - {cite: "*Lumber Industry Fund v. Warm Springs Forest Products Industries*, 939 F.2d 683 (9th Cir. 1991)", find: "Lumber Industry"}
+      - {cite: "*Maxa v. Yakima*, 924 P.2d 372 (Wash. App. Div. III 1996)", find: "Maxa"}
+      - {cite: "*Mescalero Apache Tribe v. Jones*, 411 U.S. 145, 93 S. Ct. 1267 (1973)", find: "Mescalero"}
+      - {cite: "*Montana v. United States*, 450 U.S. 544, 101 S. Ct. 1245 (1981)", find: "Montana v. U.S."}
+      - {cite: "*Organized Village of Kake v. Egan*, 369 U.S. 60 (1962)", find: "Kake"}
+      - {cite: "*Runyon v. Association of Village Council Presidents*, 84 P.3d 437 (Alaska 2004)", find: "Runyon"}
+      - {cite: "*Ruth v. Westinghouse Credit Co., Inc.*, 373 F. Supp. 468 (W.D. Okla. 1974)", find: "Ruth v."}
+      - {cite: "*San Manuel Indian Bingo & Casino v. NLRB*, 475 F.3d 1306 (D.C. Cir. 2007)", find: "San Manuel"}
+      - {cite: "*Tyler v. Shelter Mutual Insurance Co.*, 2008 OK 9, --- P.3d --- (mandate pending)", find: "Tyler v."}
+      - {cite: "*Washington v. Confederated Tribes of Colville Indian Reservation*, 447 U.S. 134, 100 S. Ct. 2069 (1980)", find: "Colville"}
+      - {cite: "*Worrall v. Mashantucket Pequot Gaming Enterprise*, 131 F. Supp. 2d 328 (D. Conn. 2001)", find: "Worrall"}
+      - {cite: "*Wylie v. Chesser*, 2007 OK 81, 173 P.3d 64", find: "Wylie"}
+  - heading: "Statutes and Other Authority"
+    entries:
+      - {cite: "3A O.S. § 263", find: "§ 263"}
+      - {cite: "3A O.S. § 271", find: "§ 271"}
+      - {cite: "3A O.S. § 280", find: "§ 280"}
+      - {cite: "3A O.S. § 281", find: "§ 281"}
+      - {cite: "3A O.S. § 282", find: "§ 282"}
+      - {cite: "18 O.S. § 1130", find: "§ 1130"}
+      - {cite: "18 O.S. § 1134", find: "§ 1134"}
+      - {cite: "18 O.S. § 1138", find: "§ 1138"}
+      - {cite: "18 O.S. § 2003(1)", find: "§ 2003(1)"}
+      - {cite: "18 O.S. § 2042(13)", find: "§ 2042(13)"}
+      - {cite: "18 O.S. § 2048", find: "§ 2048"}
+      - {cite: "18 O.S. § 2050", find: "§ 2050"}
+      - {cite: "18 O.S. § 2059", find: "§ 2059"}
+      - {cite: "25 U.S.C. § 1326", find: "§ 1326"}
+      - {cite: "25 U.S.C. § 2703", find: "§ 2703"}
 ---
-
-{{contents}}
 
 # Supplemental Summary of the Record
 
@@ -153,7 +151,7 @@ The insurance policy is not the only mechanism insulating the Cherokee Nation fr
 
 The Agreement states the "[m]ember shall not be personally liable for any debts, liabilities or obligations of the Company, whether arising in contract, tort, or otherwise, solely by reason of being a member of the Company." (Operating Agreement at ¶ 7.1, Rec. Page 21.) The following graphical depiction represents the layers of corporate structure involved:
 
-**Table 1.** Cherokee Nation → Cherokee Nation Businesses, L.L.C. → The L.L.C. (the insured; insurance company). Table 1 demonstrates there are two layers of corporate structure and an insurance policy between a judgment in this case and the Cherokee Nation. The Operating Agreement also states that the Company [The L.L.C.] is required to indemnify the Member [Cherokee Nation Businesses, L.L.C.] in the event of a third-party proceeding such as the present. (Operating Agreement at ¶ 8.1, Rec. Page 32.) Thus, there is nothing in the record to demonstrate Cherokee Nation could be responsible for paying a judgment in this case.[^6] Therefore, tribal assets and sovereignty are not at issue in this motion.
+**Table 1.** Cherokee Nation -> Cherokee Nation Businesses, L.L.C. -> The L.L.C. (the insured; insurance company). Table 1 demonstrates there are two layers of corporate structure and an insurance policy between a judgment in this case and the Cherokee Nation. The Operating Agreement also states that the Company [The L.L.C.] is required to indemnify the Member [Cherokee Nation Businesses, L.L.C.] in the event of a third-party proceeding such as the present. (Operating Agreement at ¶ 8.1, Rec. Page 32.) Thus, there is nothing in the record to demonstrate Cherokee Nation could be responsible for paying a judgment in this case.[^6] Therefore, tribal assets and sovereignty are not at issue in this motion.
 
 The Court in *Runyon* also stated:
 
@@ -181,7 +179,7 @@ The L.L.C. does not enjoy sovereign immunity and may be sued in State court. Ass
 
 The Compact established various rights and obligations the Cherokee Nation must meet in order to operate gaming facilities in Oklahoma. The Compact states in pertinent part:
 
-> A. Tort claims. The enterprise shall ensure that patrons of a facility are afforded due process in seeking and receiving just and reasonable compensation for a tort claim for personal injury or property damage against the enterprise arising out of incidents occurring at a facility, hereinafter "tort claim", as follows:
+> A\. Tort claims. The enterprise shall ensure that patrons of a facility are afforded due process in seeking and receiving just and reasonable compensation for a tort claim for personal injury or property damage against the enterprise arising out of incidents occurring at a facility, hereinafter "tort claim", as follows:
 >
 > 1\. During the term of this Compact, the enterprise shall maintain public liability insurance for the express purpose of covering and satisfying tort claims. The insurance shall have liability limits of not less than Two Hundred Fifty Thousand Dollars ($250,000.00) for any one person and Two Million Dollars ($2,000,000.00) for any one occurrence for personal injury, and One Million Dollars ($1,000,000.00) for any one occurrence for property damage, hereinafter the "limit of liability", or the corresponding limits under the Governmental Tort Claims Act, whichever is greater. No tort claim shall be paid, or be the subject of any award, in excess of the limit of liability;
 >
@@ -193,19 +191,19 @@ The Compact established various rights and obligations the Cherokee Nation must 
 
 The Compact states that the enterprise shall be subject to suit, and its insurance company is estopped from asserting sovereign immunity, so long as the notice provisions in the Compact are followed. *Id.* It is undisputed in this case that Plaintiff/Respondent complied with the notice provisions contained in the Compact. (Defendant/Petitioner's Opening Brief at page 4.) Once the provisions are met, the Compact states:
 
-> 9. A judicial proceeding for any cause arising from a tort claim may be maintained in accordance with and subject to the limitations of subsection C of this Part only if the following requirements are met:
+> 9\. A judicial proceeding for any cause arising from a tort claim may be maintained in accordance with and subject to the limitations of subsection C of this Part only if the following requirements are met:
 >
-> a. the claimant has followed all procedures required by this Part, including, without limitation, the delivery of a valid and timely written tort claim notice to the enterprise,
+> a\. the claimant has followed all procedures required by this Part, including, without limitation, the delivery of a valid and timely written tort claim notice to the enterprise,
 >
-> b. the enterprise has denied the tort claim, and
+> b\. the enterprise has denied the tort claim, and
 >
-> c. the claimant has filed the judicial proceeding no later than the one-hundred-eightieth day after denial of the claim by the enterprise; provided that neither the claimant nor the enterprise may agree to extend the time to commence a judicial proceeding, and . . . .
+> c\. the claimant has filed the judicial proceeding no later than the one-hundred-eightieth day after denial of the claim by the enterprise; provided that neither the claimant nor the enterprise may agree to extend the time to commence a judicial proceeding, and . . . .
 
 (Compact at Page 12, Rec. Page 203.)
 
 The Compact also states:
 
-> C. The tribe consents to suit against the enterprise in a court of competent jurisdiction with respect to a tort claim or prize claim if all requirements of paragraph 9 of subsection A or all requirements of paragraph 11 of subsection B of this Part have been met; provided that such consent shall be subject to the following additional conditions and limitations . . . .
+> C\. The tribe consents to suit against the enterprise in a court of competent jurisdiction with respect to a tort claim or prize claim if all requirements of paragraph 9 of subsection A or all requirements of paragraph 11 of subsection B of this Part have been met; provided that such consent shall be subject to the following additional conditions and limitations . . . .
 
 (Compact at Part 6(C), Rec. Page 205.)
 
@@ -357,9 +355,9 @@ The Indian Gaming Regulation Act, 25 U.S.C. § 2703, defines "Indian Country" as
 
 > The term "Indian lands" means--
 >
-> (A) all lands within the limits of any Indian reservation; and
+> \(A) all lands within the limits of any Indian reservation; and
 >
-> (B) any lands title to which is either held in trust by the United States for the benefit of any Indian tribe or individual or held by any Indian tribe or individual subject to restriction by the United States against alienation and over which an Indian tribe exercises governmental power.
+> \(B) any lands title to which is either held in trust by the United States for the benefit of any Indian tribe or individual or held by any Indian tribe or individual subject to restriction by the United States against alienation and over which an Indian tribe exercises governmental power.
 
 25 U.S.C. § 2703.
 
@@ -397,11 +395,11 @@ The trial court correctly ruled it has jurisdiction over Plaintiff/Respondent's 
 
 [^9]: There is nothing in the record to demonstrate the casino in this case is situated on the Cherokee reservation.
 
-{{signature}}
-
 # Certificate of Service
 
 This is to certify that on the 22nd day of February, 2008, this document was sent via First Class Mail, postage prepaid, to: Straton Taylor, Mark Ramsey, Bradley Mallett, Taylor, Burrage, Foster, Mallett, Downs & Ramsey, 400 West Fourth Street, Post Office Box 309, Claremore, OK 74018, attorneys for Defendant; Diane Hammonds, Attorney General of the Cherokee Nation, Post Office Box 948, Tahlequah, OK 74465; and Candi Czapansky, Rogers County Court Clerk, 219 South Missouri Street, Claremore, Oklahoma 74017.
 
-{{signer}}
+Larry A. Tawwater
+
+Darren M. Tawwater
 

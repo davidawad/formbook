@@ -1,0 +1,54 @@
+# Supreme Court of Oklahoma (okla): reply brief (form per R. 1.11). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to Okla. Sup. Ct. R. 1.11 (../rules.md, OKLA-*); what the rule leaves open follows the filed exemplars (OKLA-EX-*).
+# Lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a
+# court constant.
+size: 12                  # OKLA-FORM-002 (R. 1.11): clear type not less than 12 point
+pitch:
+  body: 27.6              # OKLA-FORM-003 (R. 1.11): unquoted matter double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # OKLA-FORM-003: quoted matter single spaced; headings, tables and counsel too (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 90, right: 72}   # OKLA-FORM-004 (R. 1.11): 1 1/4 in left, 1 in on the others
+indent: 36
+# OKLA-EX-001: the cover unnumbered, the tables in lower-roman numerals, the body from 1 (the filed briefs)
+page_number: {align: center, from: 1, front: lower-roman}
+footnote: {size: 11, pitch: 12.65, gap: 6}   # OKLA-FORM-002, -003: footnotes 11 point or larger, single spaced
+quote: {left: 36, right: 36, above: 16.8, below: 16.8, gap: 13.8}   # OKLA-FORM-003: quoted matter single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 25.2, below: 18}
+  - {bold: true, above: 21.6, below: 14.4}
+  - {bold: true, italic: true, above: 18, below: 14.4}
+  - {italic: true, above: 18, below: 14.4}
+# The cover (OKLA-EX-002, the filed briefs): the court, the case numbers of this court and the trial court, the parties
+# and their roles, the court and judge appealed from, the title of the filing, its date and the filing party's counsel.
+cover:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF OKLAHOMA", align: center, bold: true}
+  - {text: "Sup. Ct. Case No. {case_number}", align: right, optional: true, above: 14.4}
+  - {text: "Dist. Ct. Case No. {trial_cause}", optional: true, above: 7.2}
+  - {text: "{caption}", align: center, bold: true, optional: true, above: 10.8}
+  - {text: "{appellant}", align: center, bold: true, upper: true, above: 10.8}
+  - {text: "{appellant_role}", align: center}
+  - {text: "v.", align: center, above: 7.2}
+  - {text: "{appellee}", align: center, bold: true, upper: true, above: 7.2}
+  - {text: "{appellee_role}", align: center}
+  - {text: "Appeal from {trial_court}, {county} County, Oklahoma", align: center, optional: true, above: 10.8}
+  - {text: "{trial_judge}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 14.4}
+  - {text: "{date}", align: center, optional: true, above: 14.4}
+  - {text: "{counsel}", left: 180, above: 21.6}
+# The table of contents and the index of authorities (OKLA-EX-003), each opening a page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 28.8, step: 28.8, above: 8.6}
+authorities:
+  title: "Index of Authorities"
+  col: 56
+  hang: 18
+  above: 12
+  group: {bold: true, above: 19.2, below: 7.2}
+# The signature block after the body (OKLA-EX-004): single spaced in the right half of the page, never split.
+closing:
+  - when: signature
+    blocks:
+      - group:
+          - {text: "{signature}", left: 216}
+        above: 19.2
+# The certificate of service or mailing, set after the signature in the body's form (OKLA-EX-004).
+tail: {at: "Certificate", pitch: body, indent: 36, above: 25.2}

@@ -29,29 +29,27 @@ counsel:
   - "FREEDOM FROM RELIGION FOUNDATION"
   - "P.O. Box 750, Madison, WI 53701"
   - "(608) 256-8900; pelliott@ffrf.org; sgrover@ffrf.org"
-  - "* Admitted pro hac vice."
+  - "\\* Admitted pro hac vice."
   - "*Attorneys for Petitioners*"
 authorities:
-  - group: "Cases"
-    items:
-      - {name: "Fent v. Contingency Review Board", cite: "2007 OK 27, 163 P.3d 512", find: "Fent v."}
-      - {name: "Kellogg v. School District No. 10", cite: "1903 OK 81, 74 P. 110", find: "Kellogg"}
-      - {name: "Oklahoma Public Employees Association v. Oklahoma Military Department", cite: "2014 OK 48, 330 P.3d 497", find: "Okla. Pub. Emps."}
-      - {name: "State ex rel. Trapp v. Chambers", cite: "1923 OK 943, 220 P. 890", find: "Trapp v. Chambers"}
-  - group: "Constitutional Provisions"
-    items:
-      - {name: "Okla. Const. art. I, § 2", find: "art. I, § 2"}
-      - {name: "Okla. Const. art. II, § 5", find: "art. II, § 5"}
-  - group: "Statutes and Rules"
-    items:
-      - {name: "70 O.S. § 3-120", find: "§ 3-120"}
-      - {name: "Okla. Sup. Ct. R. 1.15(c)", find: "1.15(c)"}
-  - group: "Other Authorities"
-    items:
-      - {name: "2024 and 2025 Board Meeting Documents, State Board of Education", cite: "https://bit.ly/4hTraED (last visited Mar. 3, 2025)", find: "bit.ly"}
+  - heading: "Cases"
+    entries:
+      - {cite: "*Fent v. Contingency Review Board*, 2007 OK 27, 163 P.3d 512", find: "Fent v."}
+      - {cite: "*Kellogg v. School District No. 10*, 1903 OK 81, 74 P. 110", find: "Kellogg"}
+      - {cite: "*Oklahoma Public Employees Association v. Oklahoma Military Department*, 2014 OK 48, 330 P.3d 497", find: "Okla. Pub. Emps."}
+      - {cite: "*State ex rel. Trapp v. Chambers*, 1923 OK 943, 220 P. 890", find: "Trapp v. Chambers"}
+  - heading: "Constitutional Provisions"
+    entries:
+      - {cite: "Okla. Const. art. I, § 2", find: "art. I, § 2"}
+      - {cite: "Okla. Const. art. II, § 5", find: "art. II, § 5"}
+  - heading: "Statutes and Rules"
+    entries:
+      - {cite: "70 O.S. § 3-120", find: "§ 3-120"}
+      - {cite: "Okla. Sup. Ct. R. 1.15(c)", find: "1.15(c)"}
+  - heading: "Other Authorities"
+    entries:
+      - {cite: "2024 and 2025 Board Meeting Documents, State Board of Education, https://bit.ly/4hTraED (last visited Mar. 3, 2025)", find: "bit.ly"}
 ---
-
-{{contents}}
 
 # Summary of the Supplemental Record
 

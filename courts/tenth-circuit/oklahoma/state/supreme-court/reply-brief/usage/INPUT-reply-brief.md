@@ -37,54 +37,52 @@ signature:
 signer:
   - "Mark H. Ramsey"
 authorities:
-  - group: "Cases"
-    items:
-      - {name: "Bittle v. Bahe", cite: "2008 OK 10, --- P.3d --- , 2008 WL 314902", find: "Bittle"}
-      - {name: "Muscogee (Creek) Nation Gaming Commission v. Fitzgerald", cite: "Okla. Sup. Ct. Case No. 104,726 (July 2, 2007) (unpublished)", find: "Fitzgerald"}
-      - {name: "Santa Clara Pueblo v. Martinez", cite: "436 U.S. 49, 98 S. Ct. 1670 (1978)", find: "Santa Clara Pueblo"}
-      - {name: "Worcester v. Georgia", cite: "31 U.S. 515 (1832)", find: "Worcester"}
-      - {name: "Williams v. Lee", cite: "358 U.S. 217, 79 S. Ct. 269 (1959)", find: "Williams v. Lee"}
-      - {name: "Kennerly v. District Court of the Ninth Judicial District of Montana", cite: "400 U.S. 423, 91 S. Ct. 480 (1971)", find: "Kennerly"}
-      - {name: "United States v. King", cite: "395 U.S. 1, 89 S. Ct. 1501 (1969)", find: "United States v. King"}
-      - {name: "United States v. Testan", cite: "424 U.S. 392, 96 S. Ct. 948 (1976)", find: "Testan"}
-      - {name: "Cherokee Nation v. Nation's Bank", cite: "67 F. Supp. 2d 1303 (E.D. Okla. 1999)", find: "Nation's Bank"}
-      - {name: "Enterprise Management Consultants, Inc. v. State ex rel. Oklahoma Tax Commission", cite: "1988 OK 91, 768 P.2d 359", find: "Enterprise Mgmt."}
-      - {name: "Ex parte Hudson", cite: "1910 OK CR 18, 107 P. 735", find: "Hudson"}
-      - {name: "Hastings v. Whitmer", cite: "2 Ind. Terr. 335, 51 S.W. 967", find: "Hastings"}
-      - {name: "Dixon v. Picopa Construction Co.", cite: "772 P.2d 1101 (Ariz. 1989)", find: "Dixon"}
-      - {name: "Filer v. Tohono O'Odham Nation Gaming Enterprise", cite: "212 Ariz. 167, 129 P.3d 78 (Ariz. App. 2006)", find: "Filer"}
-      - {name: "Gavle v. Little Six, Inc.", cite: "555 N.W.2d 284 (Minn. 1996)", find: "Gavle"}
-      - {name: "Maxa v. Yakima Petroleum, Inc.", cite: "83 Wash. App. 763, 924 P.2d 372 (1996)", find: "Maxa"}
-      - {name: "Runyon v. Association of Village Council Presidents", cite: "84 P.3d 437 (Alaska 2004)", find: "Runyon"}
-      - {name: "Trudgeon v. Fantasy Springs Casino", cite: "71 Cal. App. 4th 632 (1999)", find: "Trudgeon"}
-      - {name: "Wright v. Colville Tribal Enterprise Corp.", cite: "159 Wash. 2d 10, 147 P.3d 1275 (2006)", find: "Wright v. Colville"}
-      - {name: "LaBellman v. Gleason & Sanders, Inc.", cite: "1966 OK 183, 418 P.2d 949", find: "LaBellman"}
-      - {name: "State ex rel. Oklahoma Tax Commission v. Bruner", cite: "1991 OK 77, 815 P.2d 667", find: "Bruner"}
-      - {name: "Ransom v. St. Regis Mohawk Educational and Community Fund, Inc.", cite: "86 N.Y.2d 553 (N.Y. 1995)", find: "Ransom"}
-      - {name: "Beecher v. Mohegan Tribe of Indians of Connecticut", cite: "282 Conn. 130, 918 A.2d 880 (2007)", find: "Beecher"}
-  - group: "Statutes, Regulations and Other Authority"
-    items:
-      - {name: "12 Okla. Stat. (Supp. 2007) § 2012(B)(1), (2) and (F)(3)", find: "§2012(B)(1)"}
-      - {name: "12 Okla. Stat. (2001) § 728(A)", find: "§728(A)"}
-      - {name: "3A Okla. Stat. (Supp. 2007) § 261", find: "§261"}
-      - {name: "3A Okla. Stat. (Supp. 2007) § 281", find: "§281"}
-      - {name: "Okla. Dist. Ct. R. 30(A)(1)", find: "30(A)(1)"}
-      - {name: "25 U.S.C. § 1301 et seq.", find: "1301"}
-      - {name: "25 U.S.C. § 1302(2)", find: "§1302(2)"}
-      - {name: "25 U.S.C. § 1302(8)", find: "§1302(8)"}
-      - {name: "25 U.S.C. § 1322(a)", find: "1322(a)"}
-      - {name: "25 U.S.C. § 1326", find: "§1326"}
-      - {name: "25 U.S.C. § 2701 et seq.", find: "§2701"}
-      - {name: "25 U.S.C. § 2702(1)", find: "2702(1)"}
-      - {name: "25 U.S.C. § 2710(b)(2)(B)", find: "2710(b)(2)(B)"}
-      - {name: "25 U.S.C. § 2710(d)", find: "2710(d)"}
-      - {name: "18 U.S.C. § 1161", find: "1161"}
-      - {name: "18 U.S.C. § 1861", find: "1861"}
-      - {name: "Compact, Part 2(1)", find: "Part 2(1)"}
-      - {name: "Compact, Part 9", find: "Part 9"}
+  - heading: "Cases"
+    entries:
+      - {cite: "*Bittle v. Bahe*, 2008 OK 10, --- P.3d --- , 2008 WL 314902", find: "Bittle"}
+      - {cite: "*Muscogee (Creek) Nation Gaming Commission v. Fitzgerald*, Okla. Sup. Ct. Case No. 104,726 (July 2, 2007) (unpublished)", find: "Fitzgerald"}
+      - {cite: "*Santa Clara Pueblo v. Martinez*, 436 U.S. 49, 98 S. Ct. 1670 (1978)", find: "Santa Clara Pueblo"}
+      - {cite: "*Worcester v. Georgia*, 31 U.S. 515 (1832)", find: "Worcester"}
+      - {cite: "*Williams v. Lee*, 358 U.S. 217, 79 S. Ct. 269 (1959)", find: "Williams v. Lee"}
+      - {cite: "*Kennerly v. District Court of the Ninth Judicial District of Montana*, 400 U.S. 423, 91 S. Ct. 480 (1971)", find: "Kennerly"}
+      - {cite: "*United States v. King*, 395 U.S. 1, 89 S. Ct. 1501 (1969)", find: "United States v. King"}
+      - {cite: "*United States v. Testan*, 424 U.S. 392, 96 S. Ct. 948 (1976)", find: "Testan"}
+      - {cite: "*Cherokee Nation v. Nation's Bank*, 67 F. Supp. 2d 1303 (E.D. Okla. 1999)", find: "Nation's Bank"}
+      - {cite: "*Enterprise Management Consultants, Inc. v. State ex rel. Oklahoma Tax Commission*, 1988 OK 91, 768 P.2d 359", find: "Enterprise Mgmt."}
+      - {cite: "*Ex parte Hudson*, 1910 OK CR 18, 107 P. 735", find: "Hudson"}
+      - {cite: "*Hastings v. Whitmer*, 2 Ind. Terr. 335, 51 S.W. 967", find: "Hastings"}
+      - {cite: "*Dixon v. Picopa Construction Co.*, 772 P.2d 1101 (Ariz. 1989)", find: "Dixon"}
+      - {cite: "*Filer v. Tohono O'Odham Nation Gaming Enterprise*, 212 Ariz. 167, 129 P.3d 78 (Ariz. App. 2006)", find: "Filer"}
+      - {cite: "*Gavle v. Little Six, Inc.*, 555 N.W.2d 284 (Minn. 1996)", find: "Gavle"}
+      - {cite: "*Maxa v. Yakima Petroleum, Inc.*, 83 Wash. App. 763, 924 P.2d 372 (1996)", find: "Maxa"}
+      - {cite: "*Runyon v. Association of Village Council Presidents*, 84 P.3d 437 (Alaska 2004)", find: "Runyon"}
+      - {cite: "*Trudgeon v. Fantasy Springs Casino*, 71 Cal. App. 4th 632 (1999)", find: "Trudgeon"}
+      - {cite: "*Wright v. Colville Tribal Enterprise Corp.*, 159 Wash. 2d 10, 147 P.3d 1275 (2006)", find: "Wright v. Colville"}
+      - {cite: "*LaBellman v. Gleason & Sanders, Inc.*, 1966 OK 183, 418 P.2d 949", find: "LaBellman"}
+      - {cite: "*State ex rel. Oklahoma Tax Commission v. Bruner*, 1991 OK 77, 815 P.2d 667", find: "Bruner"}
+      - {cite: "*Ransom v. St. Regis Mohawk Educational and Community Fund, Inc.*, 86 N.Y.2d 553 (N.Y. 1995)", find: "Ransom"}
+      - {cite: "*Beecher v. Mohegan Tribe of Indians of Connecticut*, 282 Conn. 130, 918 A.2d 880 (2007)", find: "Beecher"}
+  - heading: "Statutes, Regulations and Other Authority"
+    entries:
+      - {cite: "12 Okla. Stat. (Supp. 2007) § 2012(B)(1), (2) and (F)(3)", find: "§2012(B)(1)"}
+      - {cite: "12 Okla. Stat. (2001) § 728(A)", find: "§728(A)"}
+      - {cite: "3A Okla. Stat. (Supp. 2007) § 261", find: "§261"}
+      - {cite: "3A Okla. Stat. (Supp. 2007) § 281", find: "§281"}
+      - {cite: "Okla. Dist. Ct. R. 30(A)(1)", find: "30(A)(1)"}
+      - {cite: "25 U.S.C. § 1301 et seq.", find: "1301"}
+      - {cite: "25 U.S.C. § 1302(2)", find: "§1302(2)"}
+      - {cite: "25 U.S.C. § 1302(8)", find: "§1302(8)"}
+      - {cite: "25 U.S.C. § 1322(a)", find: "1322(a)"}
+      - {cite: "25 U.S.C. § 1326", find: "§1326"}
+      - {cite: "25 U.S.C. § 2701 et seq.", find: "§2701"}
+      - {cite: "25 U.S.C. § 2702(1)", find: "2702(1)"}
+      - {cite: "25 U.S.C. § 2710(b)(2)(B)", find: "2710(b)(2)(B)"}
+      - {cite: "25 U.S.C. § 2710(d)", find: "2710(d)"}
+      - {cite: "18 U.S.C. § 1161", find: "1161"}
+      - {cite: "18 U.S.C. § 1861", find: "1861"}
+      - {cite: "Compact, Part 2(1)", find: "Part 2(1)"}
+      - {cite: "Compact, Part 9", find: "Part 9"}
 ---
-
-{{contents}}
 
 # Overview
 
@@ -264,11 +262,9 @@ On the other hand, if the state court is allowed to exercise civil adjudicatory 
 
 [^14]: *Kennerly*, 400 U.S. at 429, 91 S. Ct. at 483 (footnote omitted).
 
-{{signature}}
-
 # Certificate of Mailing
 
 I hereby certify that a true and correct copy of the above and foregoing Entry of Appearance was mailed this ____ day of ________, 2007, to: Larry Tawwater, Darren M. Tawwater, The Tawwater Law Firm, P.L.L.C., One Leadership Square, 211 North Robinson, Suite 1950, Oklahoma City, Oklahoma 73102, by depositing it in the U.S. Mails, postage prepaid.
 
-{{signer}}
+Mark H. Ramsey
 

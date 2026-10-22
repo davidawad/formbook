@@ -17,7 +17,7 @@ counsel:
   - "*Attorneys for all Petitioners*"
 signature:
   - "Respectfully submitted,"
-  - "___________________________________"
+  - "\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_"
   - "Colleen McCarty, OBA No. 34410"
   - "Leslie Briggs, OBA No. 33845"
   - "OKLAHOMA APPLESEED CENTER FOR LAW & JUSTICE"
@@ -27,11 +27,9 @@ signature:
   - "leslie@okappleseed.org"
   - "*Attorneys for all Petitioners*"
 signer:
-  - "___________________________________"
+  - "\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_"
   - "LESLIE BRIGGS"
 ---
-
-{{contents}}
 
 # INTRODUCTION
 
@@ -359,12 +357,12 @@ material.” (PA87–88.)
 
 122\. Petitioners respectfully request that the Court grant the following relief:
 
-a. A declaratory judgment stating that the Bible Education Mandate is invalid and unenforceable and that the Bible RFP and any contract award or contract issued pursuant to the RFP are unlawful and void;
+a\. A declaratory judgment stating that the Bible Education Mandate is invalid and unenforceable and that the Bible RFP and any contract award or contract issued pursuant to the RFP are unlawful and void;
 
-b. An injunction or a writ of prohibition barring Respondents from taking any action to implement or enforce the Bible Education Mandate, including spending any state funds to purchase Bibles—pursuant to the Bible RFP or otherwise—or to further the Mandate in any other manner;
+b\. An injunction or a writ of prohibition barring Respondents from taking any action to implement or enforce the Bible Education Mandate, including spending any state funds to purchase Bibles—pursuant to the Bible RFP or otherwise—or to further the Mandate in any other manner;
 
-c. A writ of mandamus requiring Respondents to rescind the Bible Education Mandate, withdraw the Bible RFP, and cancel any contract award or contract issued pursuant to the RFP;
+c\. A writ of mandamus requiring Respondents to rescind the Bible Education Mandate, withdraw the Bible RFP, and cancel any contract award or contract issued pursuant to the RFP;
 
-d. An award of costs and attorneys’ fees to the extent allowed by law; and
+d\. An award of costs and attorneys’ fees to the extent allowed by law; and
 
-e. Such other relief as the Court deems just and proper.
+e\. Such other relief as the Court deems just and proper.

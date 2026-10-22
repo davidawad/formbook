@@ -22,7 +22,7 @@ counsel:
   - "*Counsel for Petitioner*"
 signature:
   - "Respectfully Submitted,"
-  - "___________________________________"
+  - "\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_"
   - "GENTNER DRUMMOND, OBA #16645"
   - "Attorney General"
   - "GARRY M. GASKINS, II, OBA #20212"
@@ -38,11 +38,9 @@ signature:
   - "garry.gaskins@oag.ok.gov"
   - "*Counsel for Petitioner*"
 signer:
-  - "___________________________________"
+  - "\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_"
   - "GARRY M. GASKINS, II"
 ---
-
-{{contents}}
 
 The Oklahoma Attorney General is compelled, as chief law officer of the State, to file this original action to repudiate the Oklahoma Statewide Virtual Charter School Board's ("the Board") Members' intentional violation of their oath of office and disregard for the clear and unambiguous provisions of the Oklahoma Constitution--one of which has been in place since statehood and was soundly reaffirmed by Oklahoma voters in 2016.[^1] Specifically, the Attorney General seeks to undo the unlawful sponsorship of St. Isidore of Seville Virtual Charter School ("St. Isidore"). He is duty bound to file this original action to protect religious liberty and prevent the type of state-funded religion that Oklahoma's constitutional framers and the founders of our country sought to prevent.
 
@@ -134,29 +132,29 @@ Moreover, this case is not about St. Isidore being precluded from receiving a pu
 
 For the foregoing reasons, this Court should grant Petitioner's requested relief to correct the Board's unlawful actions.
 
-[^1]: See State Question Number 790, the results of which are publicly available here: https://www.sos.ok.gov/documents/questions/790.pdf. Of note, over 57% of Oklahoma voters in 2016 rejected State Question 790 that would have repealed Section 5, Article II of the Oklahoma Constitution, i.e., the constitutional prohibition against directing public money to sectarian institutions. *Id.*
+[^1]: See State Question Number 790, the results of which are publicly available here: https://www.sos.ok.gov/​documents/​questions/​790.pdf. Of note, over 57% of Oklahoma voters in 2016 rejected State Question 790 that would have repealed Section 5, Article II of the Oklahoma Constitution, i.e., the constitutional prohibition against directing public money to sectarian institutions. *Id.*
 
 [^2]: Pet. App. Vol. I at 92 (citation and quotations omitted). In its words, St. Isidore intends to conduct its charter school in the same way the Catholic Church operates its schools and educates its students.
 
-[^3]: There is precedent for rescinding unlawful board action relating to charter schools. See May 24, 2021, meeting agenda and minutes, respectively, for the State Board of Education. Available at: https://sde.ok.gov/sites/default/files/Agenda%20May%2024%2C%202021%20Special%20Meeting.pdf ; https://sde.ok.gov/sites/default/files/May%2024%2C%202021%20SPECIAL%20Mtg.pdf.
+[^3]: There is precedent for rescinding unlawful board action relating to charter schools. See May 24, 2021, meeting agenda and minutes, respectively, for the State Board of Education. Available at: https://sde.ok.gov/​sites/​default/​files/​Agenda%20May%2024%2C%202021%20Special%20Meeting.pdf ; https://sde.ok.gov/​sites/​default/​files/​May%2024%2C%202021%20SPECIAL%20Mtg.pdf.
 
-[^4]: A state that wishes to obtain federal education funds for its public schools must submit a plan to the Secretary of the United States Department of Education, with certain assurances, stating that the state will comply with all applicable laws and regulations. 20 U.S.C. §§ 6311, 7842. Under the Elementary and Secondary Education Act, a charter school must be "nonsectarian in its programs, admissions policies, employment practices, and all other operations." 20 U.S.C. § 7221i(2)(E). Additionally, federal law authorizes the Secretary of Education to withhold funds or take other enforcement action if a state fails to comply with its approved state plan or any applicable laws and regulations. 20 U.S.C. §§ 1234c, 6311(a)(7). The State of Oklahoma has elected to participate in covered federal education programs and has an approved plan on file with the United States Department of Education. https://sde.ok.gov/ok-essa-state-plan. According to the National Center for Education Statistics--the primary statistical agency within the United States Department of Education--Oklahoma received $1,130,566,000 in fiscal year 2021. https://nces.ed.gov/pubs2023/2023301.pdf.
+[^4]: A state that wishes to obtain federal education funds for its public schools must submit a plan to the Secretary of the United States Department of Education, with certain assurances, stating that the state will comply with all applicable laws and regulations. 20 U.S.C. §§ 6311, 7842. Under the Elementary and Secondary Education Act, a charter school must be "nonsectarian in its programs, admissions policies, employment practices, and all other operations." 20 U.S.C. § 7221i(2)(E). Additionally, federal law authorizes the Secretary of Education to withhold funds or take other enforcement action if a state fails to comply with its approved state plan or any applicable laws and regulations. 20 U.S.C. §§ 1234c, 6311(a)(7). The State of Oklahoma has elected to participate in covered federal education programs and has an approved plan on file with the United States Department of Education. https://sde.ok.gov/​ok-essa-state-plan. According to the National Center for Education Statistics--the primary statistical agency within the United States Department of Education--Oklahoma received $1,130,566,000 in fiscal year 2021. https://nces.ed.gov/​pubs2023/​2023301.pdf.
 
 [^5]: "Generally, a discretionary writ of mandamus issues to compel the performance of an act by a respondent when a petitioner: has a clear legal right to have the act performed; the act arises from a duty of the respondent arising from an office, trust, or station; the act does not involve the exercise of discretion; the respondent has refused to perform the act; and the writ will provide adequate relief and no other adequate remedy at law exists." *Kelley v. Kelley*, 2007 OK 100, ¶ 2 n.5, 175 P.3d 400, 403 (citations omitted). The Oklahoma Attorney General, as Petitioner, has a clear legal right to have the act performed because he is "the proper party to maintain litigation to enforce a matter of public interest." *State ex rel. Howard v. Okla. Corp. Comm'n*, 1980 OK 96, ¶ 35, 614 P.2d 45, 52.
 
 [^6]: The Tenth Circuit previously determined the Oklahoma Secondary School Activities Association (the "OSSAA"), is a state actor due to its entwinement of public institutions and public officials, namely because its officials are public employees, and certain of its functions are authorized by statute. *Christian Heritage v. Oklahoma Secondary School Activities Ass'n*, 483 F.3d 1025, 1030-31 (10th Cir. 2007); *see also Scott v. Oklahoma Secondary School Activities Ass'n*, 2013 OK 84, 313 P.2d 891.
 
-[^7]: These are available on the Oklahoma State Department of Education's official government website. *Compare, e.g.*, 2015-2016 Application for Accreditation: Junior High/Middle School Available at: https://sde.ok.gov/sites/ok.gov.sde/files/documents/files/Mid-Jr%20Combined%20%202016-2017.pdf. *with* 2015-2016 Application for Accreditation: Charter School Available at: https://sde.ok.gov/sites/ok.gov.sde/files/documents/files/Charter%20Combined%202016-2017.pdf.
+[^7]: These are available on the Oklahoma State Department of Education's official government website. *Compare, e.g.*, 2015-2016 Application for Accreditation: Junior High/Middle School Available at: https://sde.ok.gov/​sites/​ok.gov.sde/​files/​documents/​files/​Mid-Jr%20Combined%20%202016-2017.pdf. *with* 2015-2016 Application for Accreditation: Charter School Available at: https://sde.ok.gov/​sites/​ok.gov.sde/​files/​documents/​files/​Charter%20Combined%202016-2017.pdf.
 
 [^8]: See also Pet. App. Vol. II at 704-15, Oklahoma State Department of Education Accreditation Compliance Review Sheet.
 
 [^9]: Moreover, the executed contract for sponsorship between the Board and St. Isidore demonstrates additional ways in which the State will be involved in the Catholic School's affairs. See e.g., Pet. App. Vol. I at 7-19; §§ 6.1.6, 6.1.8, 6.4, 7.2, 7.3, 7.9, 7.13, 7.14, 7.16, 7.17, 8.11.5, 9.2, 9.2.1, and 11.7.
 
-{{signature}}
-
 # Certificate of Service
 
 I hereby certify that on this 20th day of October 2023 a true and correct copy of the foregoing instrument was mailed by depositing it in the U.S. Mail, postage prepaid to the following: Robert Franklin, William Pearson, Nellie Tayloe Sanders, Brian Bobek, Scott Strawn, Oklahoma Statewide Virtual Charter School Board, M.C. Connors Building, 2501 N. Lincoln Blvd., Suite 301, Oklahoma City, OK 73105.
 
-{{signer}}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+GARRY M. GASKINS, II
 

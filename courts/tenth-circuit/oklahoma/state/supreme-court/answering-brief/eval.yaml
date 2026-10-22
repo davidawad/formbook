@@ -1,0 +1,9 @@
+# Okla. Sup. Ct. R. 1.11 (OKLA-FORM-002, ../rules.md): clear type not less than 12 point (footnotes 11 point).
+font:
+  size_pt: 12
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
+# (`fb engines gen`, fb-595.54.12) but not gated yet: LaTeX and Word drop widow control in a paragraph that anchors a
+# footnote and typst keeps it (p7 ends a line earlier in typst); Word lists one page fewer for an authority marked in
+# a note (Dixon, p3) (docs/open-items/fb-595.54.53.md, shared-model requests).
+params:
+  cross_engine: report
