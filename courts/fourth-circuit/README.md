@@ -24,7 +24,7 @@ Courts under `courts/fourth-circuit` (29).
 | [United States Bankruptcy Court, S.D. West Virginia](west-virginia/federal/bankruptcy-southern-district) | `wvsb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, N.D. West Virginia](west-virginia/federal/northern-district) | `wvnd` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, S.D. West Virginia](west-virginia/federal/southern-district) | `wvsd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Appeals of Maryland](maryland/state/court-of-appeals) | `md` | up for review | 9/9 | 4/4 | 7/7 | 29 |
+| [Court of Appeals of Maryland](maryland/state/court-of-appeals) | `md` | up for review | 9/9 | 7/7 | 8/8 | 29 |
 | [Court of Special Appeals of Maryland](maryland/state/court-of-special-appeals) | `mdctspecapp` | up for review | 6/6 | 6/6 | 5/5 | 29 |
 | [Court of Appeals of North Carolina](north-carolina/state/court-of-appeals) | `ncctapp` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Supreme Court of North Carolina](north-carolina/state/supreme-court) | `nc` | up for review | 9/9 | — | — | 29 |
