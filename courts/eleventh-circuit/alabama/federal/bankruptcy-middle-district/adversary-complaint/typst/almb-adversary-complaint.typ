@@ -6,6 +6,7 @@
 // comes from the YAML frontmatter of the same file (schema: ../README.md).
 
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
@@ -13,14 +14,22 @@
 
 #let font-family = ("Times New Roman", "Liberation Serif")    // No M.D. Ala. typography rule exists; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                    // Convention: 12 pt, the size of the filed complaint (no local rule sets a size).
-#let line-pitch = 24pt                   // Double spacing, as the filed complaint (convention, see ../README.md).
-#let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.
-#let single-leading = 0.398em            // Caption, counsel block, signature, headings, tables.
 #let page-margin = 1in                   // Style choice (no local margin rule; FRBP 9004(a) requires legibility only).
-#let margins = (top: page-margin, bottom: page-margin, x: page-margin)
 #let para-indent = 0.5in
 #let footer-size = 11pt                  // Page number only.
 #let caption-col = 3.3in                 // Width of the boxed party column of the Form 416D-style caption.
+#let caption-inset = 0.12in              // The party text stands off the box's rules.
+#let right-inset = 0.2in                 // The case-number column stands off the box.
+#let sig-col = 3.2in                     // The signature block: a column at the right margin.
+#let rule = 0.75pt
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
+#let pitch-double = 24pt                 // Double spacing, as the filed complaint (convention, see ../README.md).
+#let pitch-single = 13.8pt               // A single line: 1.15 x the type size (Word's single line in this face).
+#let pitch-footer = 1.15 * footer-size
+#let gap = pitch-single                  // The space between the groups of the caption and the signature block.
 
 // ---------------------------------------------------------------------------
 // Small helpers
@@ -41,50 +50,47 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
+/// One single-spaced paragraph of its own, with explicit space above it.
+#let line-block(above: 0pt, indent: 0pt, body) = block(width: 100%, above: above, below: 0pt, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  pad(left: indent, body)
+})
+
 // ---------------------------------------------------------------------------
 // Caption (FRBP 7010: caption must substantially conform to Form 416D; FRBP 9004(b): court, title, case
 // number, adversary number, designation of the document)
 // ---------------------------------------------------------------------------
 
-#let court-title(meta) = {
-  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-  align(center, strong(need(meta, "court").map(l => [#l]).join(linebreak())))
-}
+#let court-title(meta) = for l in need(meta, "court") { line-block(align(center, strong(inl(l)))) }
 
+/// The boxed left column in two parts, "IN RE:" and the debtor above the rule, the parties below it; the case
+/// number beside the first, the adversary number beside the second.
 #let caption-table(meta) = {
   let debtor = need(meta, "debtor")
   let sides = need(meta, "caption")
-  let left = {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    [IN RE:]
-    v(line-pitch * 0.5)
-    for n in debtor.name { pad(left: 0.5in, inl(n)); linebreak() }
-    v(line-pitch * 0.5)
-    line(length: 100%, stroke: 0.7pt)
-    v(line-pitch * 0.5)
+  let top = {
+    line-block[IN RE:]
+    for (i, n) in debtor.name.enumerate() { line-block(above: if i == 0 { gap } else { 0pt }, indent: para-indent, inl(n)) }
+  }
+  let bottom = {
     for (i, side) in sides.enumerate() {
-      for n in side.names { inl(n); linebreak() }
-      pad(left: 0.5in, inl(side.designation))
-      v(line-pitch * 0.5)
-      if i < sides.len() - 1 { align(center)[v.]; v(line-pitch * 0.5) }
+      for (k, n) in side.names.enumerate() { line-block(above: if k == 0 and i > 0 { gap } else { 0pt }, inl(n)) }
+      line-block(indent: para-indent, inl(side.designation))
+      if i < sides.len() - 1 { line-block(above: gap, align(center)[v.]) }
     }
   }
-  let rightcol = {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    v(line-pitch * 2.2)
-    [CASE NO. #debtor.case_number]
-    v(line-pitch * 2.5)
-    // FRBP 9004(b): the adversary number is assigned by the clerk; the blank is printed when none is given.
-    let adv = meta.at("adversary_number", default: "")
-    if adv == "" [ADV. PROC. NO. #box(width: 1.2in, line(length: 100%, stroke: 0.5pt))] else [ADV. PROC. NO. #adv]
-  }
-  table(
+  // FRBP 9004(b): the adversary number is assigned by the clerk; a blank is printed when none is given.
+  let adv = meta.at("adversary_number", default: "")
+  let box-cell(c) = pad(x: caption-inset, y: pitch-single / 2, c)
+  let right-cell(c) = align(horizon, pad(left: right-inset, c))
+  block(above: pitch-double, below: 0pt, table(
     columns: (caption-col, 1fr),
     inset: 0pt,
-    stroke: (x, y) => if x == 0 { 0.7pt } else { none },
-    pad(x: 0.12in, top: 0.6em, bottom: 1em, left),
-    pad(left: 1.2em, rightcol),
-  )
+    stroke: (x, y) => if x == 0 { rule } else { none },
+    box-cell(top), right-cell(line-block[CASE NO. #debtor.case_number]),
+    box-cell(bottom), right-cell(line-block(if adv == "" [ADV. PROC. NO. \_\_\_\_\_\_\_\_\_\_\_\_] else [ADV. PROC. NO. #adv])),
+  ))
 }
 
 // ---------------------------------------------------------------------------
@@ -96,16 +102,9 @@
 #let consent-block(meta) = {
   let j = need(meta, "jurisdiction")
   let debtor = need(meta, "debtor")
-  let name = debtor.name.first()
-  block(breakable: false, width: 100%, above: line-pitch * 0.5, below: body-leading, {
-    set par(first-line-indent: (amount: para-indent, all: true), leading: body-leading, justify: false)
-    align(center, strong[Jurisdiction and Consent])
-    v(0.4em)
-    par({
-      [This adversary proceeding arises in and relates to the #inl(debtor.chapter) case of #inl(name), Case No. #debtor.case_number, pending in the United States Bankruptcy Court for the #j.district.]
-    })
-    par(inl(need(j, "consent")))
-  })
+  block(sticky: true, width: 100%, above: 0pt, below: 0pt, align(center, strong[Jurisdiction and Consent]))
+  block(width: 100%, above: 0pt, below: 0pt, par[This adversary proceeding arises in and relates to the #inl(debtor.chapter) case of #inl(debtor.name.first()), Case No. #debtor.case_number, pending in the United States Bankruptcy Court for the #inl(j.district).])
+  block(width: 100%, above: 0pt, below: 0pt, par(inl(need(j, "consent"))))
 }
 
 // ---------------------------------------------------------------------------
@@ -113,29 +112,24 @@
 // and an email address for each signer; LBR 9011-1(b): /s/ is an acceptable signature)
 // ---------------------------------------------------------------------------
 
-#let signer-lines(sig) = {
-  [/s/ #sig.signer]
-  linebreak()
-  for l in sig.at("lines", default: ()) { inl(l); linebreak() }
+#let signer-lines(sig, above) = {
+  line-block(above: above)[/s/ #inl(sig.signer)]
+  for l in sig.at("lines", default: ()) { line-block(inl(l)) }
 }
 
+/// The date (when given) at the margin, then the signature column at the right margin; one block that never
+/// breaks across a page, so the firm name never separates from its signers.
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  // Unbreakable (about half a page), so the firm name never separates from its signers.
-  block(breakable: false, above: line-pitch, {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    grid(columns: (1fr, 3.2in), if "date" in meta [Dated: #meta.date] else [], {
-      [Respectfully submitted,]
-      v(line-pitch * 0.5)
-      inl(sig.firm)
-      linebreak()
-      v(line-pitch * 0.5)
-      signer-lines(sig)
+  block(breakable: false, width: 100%, above: pitch-single, below: 0pt, {
+    if "date" in meta { line-block[Dated: #inl(meta.date)] }
+    grid(columns: (1fr, sig-col), [], {
+      line-block[Respectfully submitted,]
+      line-block(above: gap, inl(sig.firm))
+      signer-lines(sig, gap)
       for also in sig.at("also", default: ()) {
-        v(line-pitch * 0.5)
-        [-and-]
-        v(line-pitch * 0.5)
-        signer-lines(also)
+        line-block(above: gap)[-and-]
+        signer-lines(also, gap)
       }
     })
   })
@@ -145,12 +139,12 @@
 // The complaint
 // ---------------------------------------------------------------------------
 
-/// Numbered allegation: "N. text" (FRCP 10(b): each averment in numbered paragraphs). The number is the one
-/// written in the markdown, so a paragraph keeps its number whatever the page break.
-#let allegation(b) = {
-  let m = b.match(regex("^(\\d+)\\.\\s+([\\s\\S]*)$"))
-  if m == none { return none }
-  par(first-line-indent: para-indent, [#m.captures.at(0).#h(0.5em)#inl(m.captures.at(1))])
+/// A body paragraph. "N. text" is a numbered allegation (FRCP 10(b)): the number is the one written in the
+/// markdown, so a paragraph keeps its number whatever the page break.
+#let body-par(t) = {
+  let m = t.match(regex("^(\\d+)\\.\\s+([\\s\\S]*)$"))
+  if t.starts-with(">") { return cmarker.render(t, raw-typst: false, smart-punctuation: true) }
+  block(width: 100%, above: 0pt, below: 0pt, par(if m != none [#m.captures.at(0). #inl(m.captures.at(1))] else { inl(t) }))
 }
 
 #let almb-adversary-complaint(meta, md) = {
@@ -160,66 +154,45 @@
   }
 
   // ---- document-wide settings ----
-  set page(paper: "us-letter", margin: margins, numbering: "-1-", footer: context {
-    set text(size: footer-size)
+  set page(paper: "us-letter", margin: page-margin, numbering: "-1-", footer-descent: 30%, footer: context {
+    set text(size: footer-size, ..edges(pitch-footer))
     align(center, numbering("-1-", ..counter(page).get()))
   })
   set document(
     title: need(meta, "title"),
     author: need(meta, "signature").signer,
   )
-  set text(
-    font: font-family, size: type-size, lang: "en", region: "us",
-    hyphenate: false, fallback: false,
-    top-edge: 0.891em, bottom-edge: -0.216em,  // Liberation Serif's hhea ascender and descender: a 1.107em line box
-  )
-  set par(
-    leading: body-leading, spacing: 0.9em,
-    first-line-indent: (amount: para-indent, all: true), justify: false,
-  )
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch (double-spaced).
+  show: xengine.with(pitch: pitch-double)
+  // A doubled section sign stays with its number ("§§ 1408"), as the docx engine binds it.
+  show regex("[§¶]{2,} \\S+"): it => box(it)
+  // Headings at the body size and pitch, centered, bold capitals; no space of their own. Sticky: a heading never
+  // ends a page.
   show heading: it => {
-    if it.level == 1 {
-      block(width: 100%, above: line-pitch * 0.5, below: line-pitch * 0.5, sticky: true,
-        align(center, strong(upper(it.body))))
-    } else {
-      block(width: 100%, above: line-pitch * 0.5, below: line-pitch * 0.5, sticky: true,
-        align(center, strong(it.body)))
-    }
-  }
-  show table: it => block(above: line-pitch * 0.5, below: line-pitch * 0.5, breakable: false, {
     set text(size: type-size)
-    it
+    set par(first-line-indent: 0pt)
+    block(sticky: true, width: 100%, above: 0pt, below: 0pt, align(center, strong(upper(it.body))))
+  }
+  // Quotations single-spaced (convention), indented half an inch both sides, half a double line off the text.
+  show quote.where(block: true): it => block(width: 100%, above: pitch-double / 2, below: pitch-double / 2, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    pad(x: para-indent, it.body)
   })
 
   // ---- first page: court, caption, title, consent ----
-  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
   court-title(meta)
-  v(line-pitch)
   caption-table(meta)
-  v(line-pitch)
-  align(center, strong(upper(inl(need(meta, "title")))))
-  v(line-pitch * 0.5)
-
-  // ---- consent statement, then the body (lead-in, headings, numbered allegations) and the signature ----
-  set par(first-line-indent: para-indent, leading: body-leading, justify: false)
+  block(above: pitch-double, below: pitch-single, line-block(align(center, strong(upper(inl(need(meta, "title")))))))
   consent-block(meta)
-  // The last block (the prayer) is kept with the signature block so the signature never stands alone.
-  let blocks = md.trim().split("\n\n")
-  // Each markdown block becomes its own block-level item, so consecutive paragraphs never run together.
-  for b in blocks.slice(0, -1) {
+
+  // ---- the body (lead-in, headings, numbered allegations, quotations) and the signature ----
+  for b in md.trim().split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(b => b.trim() != "") {
     let t = b.trim()
-    if t.starts-with("#") {
-      heading(level: 1, t.trim("#").trim())
-    } else {
-      let a = allegation(t)
-      // A block starts its first paragraph without a first-line indent, so the indent is drawn as a leading space.
-      let body = cmarker.render(t, raw-typst: false, smart-punctuation: true)
-      block(width: 100%, above: 0pt, below: 0pt, if a != none { a } else if t.starts-with(">") { body } else { h(para-indent) + body })
-    }
+    if t.starts-with("#") { heading(level: 1, t.trim("#").trim()) } else { body-par(t) }
   }
-  // The prayer is sticky to the signature block that follows it; the signature block is unbreakable on its own.
-  let last = blocks.last().trim()
-  let a = allegation(last)
-  block(sticky: true, width: 100%, if a != none { a } else { par(first-line-indent: para-indent, inl(last)) })
   signature-block(meta)
 }
