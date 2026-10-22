@@ -1,0 +1,4 @@
+PASS
+e16a5faca7598041c66d8a93224ad95e9724c8c14c4264247f9919e00ee6b4d1  usage/OUTPUT-reply-brief.docx
+86d64b497a01aab9042062c18e6822ab0469a1ccd7fabeb006754ddd5216ff1a  usage/OUTPUT-reply-brief.docx.pdf
+1803c21811a5ba4a50383a7c9a142e6a71264442cdd1c4ddde55d6af7b708322  usage/OUTPUT-reply-brief.typst.pdf
