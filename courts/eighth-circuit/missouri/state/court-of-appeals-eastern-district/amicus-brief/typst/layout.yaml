@@ -1,0 +1,59 @@
+# Missouri Court of Appeals, Eastern District (moctapped): amicus curiae brief. The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12).
+# Numbers trace to Mo. Sup. Ct. R. 84.03(b) and 84.06 (../rules.md, MOCTAPPED-*); lengths in points. No case text here:
+# every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # MOCTAPPED-FORM-004: not smaller than 13 point, footnotes included
+pitch:
+  body: 22.45             # MOCTAPPED-FORM-003: line spacing not less than 1.5 (1.5 x 14.95 = 22.425, up to whole twips)
+  single: 14.95           # MOCTAPPED-FORM-003: caption, headings, quotations, footnotes, signature single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MOCTAPPED-FORM-002: not less than one inch
+indent: 36
+page_number: {align: center, from: 1}   # MOCTAPPED-FORM-001: Arabic numerals at the bottom, the cover included
+footnote: {size: 13, gap: 7}            # MOCTAPPED-FORM-003, -004: 13 point, single spaced
+quote: {left: 36, right: 36, above: 7.8, below: 13}   # MOCTAPPED-FORM-003: long quotations single spaced, indented
+heading:
+  - {align: center, bold: true, upper: true, above: 15.6, below: 13}
+  - {bold: true, hang: 36, above: 13, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# The cover (MOCTAPPED-FORM-007: as the exemplars): the number and the court, the caption, the court appealed from
+# between rules, the title, counsel.
+cover:
+  - {text: "NO. {case_number}", align: center, bold: true}
+  - {text: "{court_line}", align: center, bold: true, above: 7.2}
+  - each: caption
+    above: 8.6
+    between:
+      - {text: "v.", align: center, above: 2.6, below: 2.6}
+    blocks:
+      - {text: "{names}"}
+      - {text: "{designation}", align: right, bold: true}
+  - {rule: 0.5, above: 5.2}
+  - {text: "{proceeding}", align: center, above: 8.6}
+  - {text: "{judge}", align: center, optional: true, above: 5.2}
+  - {rule: 0.5, above: 5.2}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 8.6}
+  - {rule: 0.5, above: 8.6}
+  - each: counsel
+    above: 14.4
+    blocks:
+      - {text: "{names}", above: 10.4}
+      - {text: "{lines}"}
+# The table of contents with page references, then the table of authorities (MOCTAPPED-FORM-007, as filed).
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 19.5, above: 7.8}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 7.8
+  group: {bold: true, above: 13, below: 2.6}
+# The signature block after the conclusion, single spaced (MOCTAPPED-FORM-003), right of center; never split.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "{closing}", left: 230.4, optional: true}
+      - {text: "{signature.firm}", left: 230.4, optional: true}
+      - {text: "/s/ {signature.signer}", underline: true, left: 230.4, above: 7.8}
+      - {text: "{signature.lines}", left: 230.4}
+    above: 28.8
+# The certificates (MOCTAPPED-CERT-001) open a page after the signature, in the body's form.
+tail: {at: "Certificate", break: true, pitch: body, indent: 36}

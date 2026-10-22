@@ -1,0 +1,8 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+# Not gated yet (fb-595.54.75, docs/open-items/fb-595.54.75.md): a URL in a table of authorities row or the body
+# breaks after "http://" or a "/" in typst and elsewhere in LaTeX and Word (TOA p5, p6; body p14), and Word finds
+# one authority mark a page early (TOA p4 "Planned Parenthood of Kan. v. Nixon": 14, typst 15) (XENG-002, -003).
+params:
+  cross_engine: report
