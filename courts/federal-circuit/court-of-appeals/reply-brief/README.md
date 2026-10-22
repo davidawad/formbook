@@ -2,7 +2,7 @@
 
 Doc type: **reply-brief**. Court: Court of Appeals for the Federal Circuit (`cafc`).
 
-Status: exemplar found (`usage/`); template, sample, render and overlay built; all 13 rendered pages reviewed (see "Page review"). Not a court-level deliverable: the court-root `typst/` and `usage/` are untouched.
+Status: exemplar found (`usage/`); template, sample, render and overlay built; typst, latex and docx render the sample to 13 pages each, on the shared cross-engine layout model, and the folder gates Gate 4 CROSS-ENGINE (`eval.yaml`: `params.cross_engine: gate`; fb-595.54.6, see "Cross-engine layout" below). Not a court-level deliverable: the court-root `typst/` and `usage/` are untouched.
 
 ## Files
 
@@ -91,8 +91,10 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 | Engine | Files | Output (`usage/`) | Pages |
 |---|---|---|---|
 | typst (reference) | `typst/` | `OUTPUT-reply-brief.typst.pdf` | 13 |
-| latex | `latex/template.tex`, `latex/cafc.lua` (stock pdflatex, newtx Times; the counsel block is a two-column table) | `OUTPUT-reply-brief.latex.pdf` | 13 |
-| docx | `docx/reference.docx` (`docx/make-reference.sh`, `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-reply-brief.docx` and `.docx.pdf` | 13 |
+| latex | `latex/template.tex`, `latex/cafc.lua` (stock pdflatex, newtx Times) | `OUTPUT-reply-brief.latex.pdf` | 13 |
+| docx | `docx/reference.docx` (`docx/build-reference.sh`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pagemap.awk`, `docx/footer.xml` | `OUTPUT-reply-brief.docx` and `.docx.pdf` | 13 |
+
+The paragraphs below, down to "docx items not verified", describe the engines before the cross-engine port and are kept as history; "Cross-engine layout" at the end of this file is the current state.
 
 **Matches the typst layout:** 14 pt EB Garamond, double spacing at the typst pitch (31.43 pt); 1 in margins; the cover with the counsel in two columns; the contents and authorities with page numbers; the Roman section headings (I. ARGUMENT, II. CONCLUSION) and the A./i./1. sub-headings; the certificate of compliance (Form 19 wording, box checked) and the certificate of service; the footers.
 
@@ -117,3 +119,14 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 - Checked, not changed: page 10 holds only the last four lines of the Conclusion and page 11 the whole signature block; the filed brief does the same (its signature block is on a page of its own). Reply briefs are not principal briefs, so Fed. Cir. R. 32(a)(3) (exemplary claims) does not apply.
 - LaTeX re-rendered, 13 pages; its cover still wraps the firm name flush left, and its PDF page 6 carries only the block quotation tail and "Appx68." before the Conclusion starts a new page. docx not re-rendered (no LibreOffice): `docx/cafc-docx.lua` keeps an "Is/" signature prefix in a code path this sample does not reach (the committed docx PDF has no "Is/").
 - Remaining gaps: as under Known gaps.
+
+## Cross-engine layout (2026-10-22, fb-595.54.6)
+
+The three engines now run on the shared layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; `docs/EVAL-LOOP.md`, "Adopting the reference breaker") and break every line and page alike: `check.sh --engine latex|docx` prints XENG-001..003 PASS, 245/245 lines (before: latex 12 against 13 pages, 71.2 % of lines alike; docx 12 against 13, 34.2 %), and `eval.yaml` gates it. Same port as `../answering-brief` (its README, "Cross-engine layout").
+
+- Pitches from the filed reply (`usage/FILED-EXAMPLE-reply-brief.pdf`, pp. 6 and 12: 32.2 pt; pp. 2 and 3: 16.1 pt): 32.2 pt for the double-spaced text, 16.1 pt for everything single-spaced (the typst template had 0.94em leading on an ascender-to-descender box, a 25.9 pt body pitch once the face became Times New Roman). Still 13 pages: the body runs pp. 1 to 8 (the signature block on p. 8), Form 19 p. 9, service p. 10.
+- Spaces between blocks in pt; contents and authorities as `listing-row` rows (36 pt / 56 pt page column; every page listed, no "passim"); footnote marks at 58 %; the cover designations start at the middle of the text width (typst's `pad(left: 50%)` inside `align` measured half the line's own width); the Form 19 check boxes are ruled boxes around a literal X (or three spaces' width), as ca9's.
+- Break rules this folder adds in latex and docx, where typst (Unicode line breaking) allows a break the shared libraries do not give: after a slash before a letter ("CM/ECF": latex `\allowbreak`, docx a zero-width space); an ellipsis is the one 1 em glyph (latex `\caellipsis`, three periods over 1 em read as U+2026 through ActualText, not `\ldots`).
+- A paragraph that anchors a footnote has no widow or orphan control in latex and docx (typst's rules do not see the note), as in `../answering-brief` and `../opening-brief`.
+- latex and docx rewritten on the model: `latex/cafc.lua` builds the cover (counsel in two minipage columns), tables, signature (the 3.9 in column), Form 19 and the service certificate as the typst template does; the docx is built by `docx/render.sh` in two passes with `docx/pagemap.awk` (copied from `../answering-brief`, no "passim").
+- Pages viewed (2026-10-22): all 13 pages of each engine at 40 dpi side by side, the cover and pp. 8 to 10 at 60 dpi, the Form 19 boxes at 110 dpi: no defect found. Positions differ only on the cover (the gaps between its parts) and by under 2.5 pt elsewhere (footnote marks).

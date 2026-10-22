@@ -1,146 +1,84 @@
--- cafc.lua: pandoc filter for the cafc LaTeX template (latex/template.tex). Run by latex/render.sh.
---
--- What it does, and nothing more (layout lives in template.tex):
---   1. Splits the document at `# Addendum`: the body stays in the body, the rest goes to meta `addendum`.
---   2. Marks the Argument for the heading macros: \ca@argtrue before `# Argument` (or `# Reply Argument`),
---      \ca@argfalse before any other level-1 heading, so level-2 to level-5 headings get the Argument's labels.
---   3. Turns every link whose target is `toa:KEY` into \ca@toacite{KEY}{text}: the text is set as written and
---      the page where the citation starts is recorded in the aux file (template.tex, \ca@toahit).
---   4. Builds the table of authorities from the `authorities:` registry, in the six groups of the typst template,
---      cases alphabetized, only the authorities the body cites. Page numbers come from the aux file.
---   5. Counts the words of the body (footnotes included, the addendum excluded) for the certificate of compliance.
---   6. Keeps the last paragraph of the body with the signature block (meta keep_signature).
---
--- A link to a key that is not in `authorities:` stops the build, as in the typst template.
+-- cafc.lua: pandoc Lua filter for the LaTeX engine of the Federal Circuit reply brief (template.tex).
+-- Builds the cover, the table of contents, the table of authorities, the signature block and the certificates
+-- (Form 19, service) from the YAML frontmatter (the same fields as ../typst/cafc-reply-brief.typ), numbers the
+-- headings as the typst template does and turns each [text](toa:key) citation into a counted hit for the table of
+-- authorities. Typesetting macros are in template.tex. No case-specific text lives here.
 
-local function text(x)
-  return pandoc.utils.stringify(x)
-end
+local WORD_LIMIT = 7000 -- Fed. Cir. R. 32(b)(1): reply brief (typst word-limit)
+local TOC_DEPTH = 4     -- typst toc-depth
 
--- A section or pilcrow sign stays with the number after it, as in the typst template ("§ 1331" is not split).
-local function bind_signs(inlines)
-  for i = 1, #inlines - 1 do
-    local a, b = inlines[i], inlines[i + 1]
-    if a.t == "Str" and (a.text == "\u{00A7}" or a.text == "\u{00B6}") and b.t == "Space" then
-      inlines[i + 1] = pandoc.Str("\u{00A0}")
+-- The inline rules of the cross-engine layout model (lib/latex/xengine.lua): break opportunities as typst has them,
+-- ligature characters as commands, a section sign bound to its number. Run on the body and on every metadata value.
+local xe_lib = require("latex.xengine").inlines
+
+-- Two break rules of typst this folder adds to the shared ones: a line may end after a slash before a letter
+-- ("CM/ECF", Unicode line breaking), and an ellipsis is the one 1 em glyph (template.tex \\caellipsis), not \\ldots.
+local function folder_inlines(inlines)
+  local out = pandoc.Inlines({})
+  for _, el in ipairs(inlines) do
+    if el.t == "Str" and (el.text:find("\u{2026}") or el.text:find("/%a")) then
+      -- marks: \1 a break after the slash, \2 the ellipsis
+      local s = el.text:gsub("/(%a)", "/\1%1"):gsub("\u{2026}", "\2")
+      for part, mark in (s .. "\3"):gmatch("([^\1\2\3]*)([\1\2\3])") do
+        if part ~= "" then out:insert(pandoc.Str(part)) end
+        if mark == "\1" then out:insert(pandoc.RawInline("latex", "\\allowbreak{}"))
+        elseif mark == "\2" then out:insert(pandoc.RawInline("latex", "\\caellipsis{}")) end
+      end
+    else
+      out:insert(el)
     end
   end
-  return inlines
-end
-
--- LaTeX for inline content (a list of inlines), trimmed.
-local function latex(x)
-  if x == nil then
-    return ""
-  end
-  local s = pandoc.write(pandoc.Pandoc({ pandoc.Plain(bind_signs(x)) }), "latex")
-  return (s:gsub("^%s+", ""):gsub("%s+$", ""))
-end
-
-local cited = {} -- keys in order of first citation
-local seen = {}
-
-local function link_filter(el)
-  local key = el.target:match("^toa:(.+)$")
-  if not key then
-    return nil
-  end
-  if not seen[key] then
-    seen[key] = true
-    cited[#cited + 1] = key
-  end
-  local out = { pandoc.RawInline("latex", "\\ca@toacite{" .. key .. "}{") }
-  for _, x in ipairs(el.content) do
-    out[#out + 1] = x
-  end
-  out[#out + 1] = pandoc.RawInline("latex", "}")
   return out
 end
 
--- The six groups of the table of authorities, in order (as in the typst template).
-local groups = {
-  { kind = "case", title = "Cases:" },
-  { kind = "constitution", title = "Constitutional Provisions:" },
-  { kind = "statute", title = "Statutes:" },
-  { kind = "regulation", title = "Regulations:" },
-  { kind = "rule", title = "Rules:" },
-  { kind = "other", title = "Other Authorities:" },
-}
+local function xe_inlines(l) return folder_inlines(xe_lib(l)) end
 
--- Same sort key as the typst template: lower case, letters, digits and spaces only.
-local function sort_key(a)
-  local s = a.sort and text(a.sort) or (text(a.name or "") .. " " .. text(a.cite))
-  return s:lower():gsub("[^a-z0-9 ]", "")
+local function fail(msg) error("cafc reply-brief: " .. msg, 0) end
+
+-- Inline markdown in a metadata value -> LaTeX.
+local function tex(v)
+  if v == nil then return "" end
+  if type(v) == "string" then v = pandoc.Inlines({ pandoc.Str(v) }) end
+  local s = pandoc.write(pandoc.Pandoc({ pandoc.Plain(xe_inlines(pandoc.Inlines(v))) }), "latex")
+  return (s:gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
-local function toa_block(authorities)
-  local out = {}
-  for _, g in ipairs(groups) do
-    local members = {}
-    for _, key in ipairs(cited) do
-      local a = authorities[key]
-      if a and text(a.kind) == g.kind then
-        members[#members + 1] = { key = key, a = a, sort = sort_key(a) }
-      end
-    end
-    if #members > 0 then
-      table.sort(members, function(p, q)
-        if p.sort == q.sort then
-          return p.key < q.key
-        end
-        return p.sort < q.sort
-      end)
-      out[#out + 1] = (#out == 0 and "\\ca@toagroupfirst{" or "\\ca@toagroup{") .. g.title .. "}"
-      for _, m in ipairs(members) do
-        local a = m.a
-        local name = ""
-        if a.name then
-          name = latex(a.name)
-          if g.kind == "case" then
-            name = "\\emph{" .. name .. "},\\\\ "
-          else
-            name = name .. ",\\\\ "
-          end
-        end
-        out[#out + 1] = "\\ca@toaline{" .. m.key .. "}{" .. name .. latex(a.cite) .. "}"
-      end
+-- Plain text of a metadata value (sort keys, word counts).
+local function plain(v)
+  if v == nil then return "" end
+  if type(v) == "string" then return v end
+  return pandoc.utils.stringify(v)
+end
+
+local function need(meta, k)
+  if meta[k] == nil then fail("missing required metadata field `" .. k .. "`") end
+  return meta[k]
+end
+
+local function roman(n, lower)
+  local vals = { { 1000, "M" }, { 900, "CM" }, { 500, "D" }, { 400, "CD" }, { 100, "C" }, { 90, "XC" },
+    { 50, "L" }, { 40, "XL" }, { 10, "X" }, { 9, "IX" }, { 5, "V" }, { 4, "IV" }, { 1, "I" } }
+  local out = ""
+  for _, p in ipairs(vals) do
+    while n >= p[1] do
+      out = out .. p[2]
+      n = n - p[1]
     end
   end
-  return table.concat(out, "\n")
+  return lower and out:lower() or out
 end
 
--- Word count of the brief: whitespace-delimited words of the body text, footnote text included, footnote
--- reference marks and list markers not counted (FRAP 32(f) exclusions are left to the author).
-local function words_in(s)
-  s = s:gsub("\194\160", " ") -- pandoc makes the space after a section sign non-breaking; the source has a plain one
-  local n = 0
-  for _ in s:gmatch("%S+") do
-    n = n + 1
-  end
-  return n
+-- Printed label of a numbered heading (typst heading-label): I. / A. / i. / 1. / a.
+local function label_for(level, n)
+  if level == 1 then return roman(n) .. "." end
+  if level == 2 then return string.char(64 + n) .. "." end
+  if level == 3 then return roman(n, true) .. "." end
+  if level == 4 then return tostring(n) .. "." end
+  if level == 5 then return string.char(96 + n) .. "." end
+  fail("headings deeper than level 5 are not supported")
 end
 
--- Each list item and quotation is counted on its own: stringify would run one item into the next.
-local function count_words(blocks)
-  local n = 0
-  for _, b in ipairs(blocks) do
-    if b.t == "BulletList" or b.t == "OrderedList" then
-      for _, item in ipairs(b.content) do
-        n = n + count_words(item)
-      end
-    elseif b.t == "BlockQuote" then
-      n = n + count_words(b.content)
-    else
-      n = n + words_in(text(b))
-      pandoc.Pandoc({ b }):walk({
-        Note = function(note)
-          n = n + count_words(note.content)
-        end,
-      })
-    end
-  end
-  return n
-end
+local function raw(s) return pandoc.RawBlock("latex", s) end
 
 local function group_digits(n)
   local s = tostring(n)
@@ -148,103 +86,294 @@ local function group_digits(n)
   return (out:gsub("^,", ""))
 end
 
+-- ---------------------------------------------------------------------------
+-- Cover (Fed. Cir. R. 32(a)(1); FRAP 32(a)(2); typst cover-body)
+-- ---------------------------------------------------------------------------
+
+-- Rules in vertical mode: they cost their own height, as in typst.
+local SHORT = "\\par\\hbox to\\linewidth{\\hss\\rule{2in}{0.7pt}\\hss}"
+local DOUBLE = "\\par\\hbox to\\linewidth{\\rule{\\linewidth}{1.6pt}}\\vskip 2.5pt\\hbox to\\linewidth{\\rule{\\linewidth}{0.5pt}}"
+
+local function cover(meta)
+  local L = {}
+  local function add(s) L[#L + 1] = s end
+  add("\\thispagestyle{empty}\\begingroup\\singlespacing\\centering\\parindent=0pt")
+  add("\\cagap[0.6]\\textbf{No.\\ " .. tex(need(meta, "case_number")) .. "}")
+  -- the court's name in a 4 in block, centered
+  add("\\cagap{\\leftskip=\\dimexpr(\\linewidth-4in)/2\\relax plus 1fil\\relax\\rightskip=\\leftskip\\bfseries " ..
+    "UNITED STATES COURT OF APPEALS FOR THE FEDERAL CIRCUIT\\par}")
+  add("\\cagap" .. SHORT .. "\\cagap")
+  local sides = need(meta, "caption")
+  for i, side in ipairs(sides) do
+    for j, name in ipairs(side.names) do
+      add((j > 1 and "\\par\\addvspace{4.9bp}" or "") .. tex(name))
+    end
+    add("\\par\\addvspace{4.9bp}{\\carighthalf " .. tex(side.designation) .. "\\par}")
+    if i < #sides then add("\\cagap[0.3]v.\\cagap[0.3]") end
+  end
+  add("\\cagap" .. SHORT .. "\\cagap")
+  add(tex(need(meta, "proceeding")))
+  add("\\cagap" .. SHORT .. "\\cagap")
+  add("\\textbf{\\MakeUppercase{" .. tex(need(meta, "brief_title")) .. "}}")
+  add("\\cagap" .. SHORT .. "\\cagap")
+  -- Counsel (FRAP 32(a)(2)(F)): two groups to a row, columns of (text width - 0.1 in) / 2; each line a paragraph,
+  -- a line too long for its column hanging 14 bp; 8.4 bp between the rows.
+  local counsel = need(meta, "counsel")
+  local function block(g)
+    local b = {}
+    for _, n in ipairs(g.names) do b[#b + 1] = tex(n) .. "\\par" end
+    for _, x in ipairs(g.lines or {}) do b[#b + 1] = tex(x) .. "\\par" end
+    return "\\begin{minipage}[t]{\\dimexpr(\\linewidth-0.1in)/2\\relax}\\singlespacing\\raggedright\\parindent=0pt" ..
+      "\\hangindent=14bp\\hangafter=1\\everypar{\\hangindent=14bp\\hangafter=1\\relax}" ..
+      table.concat(b, "\n") .. "\\end{minipage}"
+  end
+  for i = 1, #counsel, 2 do
+    local row = block(counsel[i])
+    if counsel[i + 1] ~= nil then row = row .. "\\hfill" .. block(counsel[i + 1]) else row = row .. "\\hfill\\null" end
+    add((i > 1 and "\\par\\addvspace{8.4bp}" or "\\par") .. "\\carow{" .. row .. "}")
+  end
+  add("\\cagap[0.6]" .. tex(need(meta, "counsel_for")))
+  add("\\cagap" .. DOUBLE)
+  add("\\par\\endgroup\\clearpage")
+  return table.concat(L, "\n")
+end
+
+-- ---------------------------------------------------------------------------
+-- Signature and certificates (typst signature-block, certificate-of-compliance, certificate-of-service)
+-- ---------------------------------------------------------------------------
+
+-- The signature's two columns [grid (1fr, 3.9 in)]: the date at the margin, the signature 3.9 in from the right.
+local LEFTCOL = "\\dimexpr\\linewidth-3.9in\\relax"
+
+-- the right column's lines: the first as it is, every further one 0.5 em in on its own line (typst: linebreak,
+-- h(0.5em)); a line that wraps goes on at the column's edge
+local function signer_lines(first, lines)
+  local L = { first }
+  for _, l in ipairs(lines or {}) do L[#L + 1] = "\\par\\nobreak\\hspace*{0.5em}" .. tex(l) end
+  return table.concat(L, "\n")
+end
+
+local function signature(meta)
+  local sig = need(meta, "signature")
+  local L = { "\\par\\addvspace{19.6bp}\\begingroup\\singlespacing\\parindent=0pt\\interlinepenalty=10000\\relax" }
+  L[#L + 1] = "\\noindent\\makebox[" .. LEFTCOL .. "][l]{" .. (meta.date ~= nil and ("Dated: " .. tex(meta.date)) or "") ..
+    "}Respectfully submitted,\\par\\nobreak\\leftskip=" .. LEFTCOL .. "\\vskip 16.8bp\\nobreak"
+  L[#L + 1] = signer_lines("/s/ " .. tex(sig.signer), sig.lines)
+  for _, o in ipairs(sig.also or {}) do
+    L[#L + 1] = "\\par\\nobreak\\vskip 16.8bp\\nobreak " .. signer_lines(tex(o.name), o.lines)
+  end
+  L[#L + 1] = "\\par\\nobreak\\vskip 11.2bp\\nobreak " .. tex(need(meta, "counsel_for")) .. "\\par\\endgroup"
+  return table.concat(L, "\n")
+end
+
+-- One option of Form 19 [option-row]: the box in a 22.4 bp column, the text hanging after it; 11.2 bp above.
+local function option_row(checked, text)
+  return "\\par\\addvspace{11.2bp}{\\interlinepenalty=10000\\noindent\\hangindent=22.4bp\\hangafter=1\\relax" ..
+    "\\makebox[22.4bp][l]{\\cabox{" .. (checked and 1 or 0) .. "}}" .. text .. "\\par}"
+end
+
+local BLANK = "\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_"
+
+local function certificate_of_compliance(meta, words)
+  local L = { "\\clearpage\\casection{Certificate of Compliance with Type-Volume Limitations}",
+    "\\begingroup\\singlespacing\\parindent=0pt" }
+  L[#L + 1] = "Case Number: " .. tex(need(meta, "case_number")) .. "\\par\\addvspace{14bp}"
+  L[#L + 1] = "Short Case Caption: " .. tex(need(meta, "short_caption")) .. "\\par\\addvspace{14bp}"
+  L[#L + 1] = "Instructions: When computing a word, line, or page count, you may exclude any items listed as " ..
+    "exempted under Fed. R. App. P. 5(c), Fed. R. App. P. 21(d), Fed. R. App. P. 27(d)(2), Fed. R. App. P. 32(f), " ..
+    "or Fed. Cir. R. 32(b)(2).\\par\\addvspace{14bp}"
+  L[#L + 1] = "The foregoing filing complies with the relevant type-volume limitation of the Federal Rules of " ..
+    "Appellate Procedure and Federal Circuit Rules because it meets one of the following:"
+  L[#L + 1] = option_row(true, "the filing has been prepared using a proportionally-spaced typeface and includes " ..
+    group_digits(words) .. " words.")
+  L[#L + 1] = option_row(false, "the filing has been prepared using a monospaced typeface and includes " .. BLANK ..
+    " lines of text.")
+  L[#L + 1] = option_row(false, "the filing contains " .. BLANK .. " pages / " .. BLANK .. " words / " .. BLANK ..
+    " lines of text, which does not exceed the maximum authorized by this court\u{2019}s order (ECF No. " .. BLANK .. ").")
+  -- [grid (1fr, 1fr), gutter 14 bp]: the date at the margin, the signature and the name in the right column
+  L[#L + 1] = "\\par\\nobreak\\addvspace{22.4bp}\\nobreak\\noindent\\makebox[\\dimexpr(\\linewidth+14bp)/2\\relax][l]{Date: " ..
+    tex(need(meta, "date")) .. "}Signature: /s/ " .. tex(need(meta, "signature").signer) ..
+    "\\par\\nobreak\\addvspace{14bp}\\nobreak\\leftskip=\\dimexpr(\\linewidth+14bp)/2\\relax Name: " ..
+    tex(need(meta, "signature").signer) .. "\\par\\endgroup"
+  return table.concat(L, "\n")
+end
+
+local function certificate_of_service(meta)
+  local sig = need(meta, "signature")
+  local L = { "\\clearpage\\casection{Certificate of Service}", "\\begingroup\\singlespacing\\parindent=0pt" }
+  L[#L + 1] = "I hereby certify that on " .. tex(need(meta, "date")) .. ", I electronically filed the foregoing " ..
+    tex(need(meta, "brief_title")) .. ", with the Court\u{2019}s CM/\\allowbreak{}ECF filing system, which constitutes service, " ..
+    "pursuant to Fed. R. App. P. 25(c) and Fed. Cir. R. 25(a).\\par"
+  -- [grid (1fr, 3.9 in)]: the date at the margin, the signature in the right column
+  L[#L + 1] = "\\nobreak\\addvspace{22.4bp}\\nobreak\\noindent\\makebox[" .. LEFTCOL .. "][l]{Date: " ..
+    tex(need(meta, "date")) .. "}/s/ " .. tex(sig.signer) .. "\\par\\leftskip=" .. LEFTCOL ..
+    signer_lines("", sig.lines) .. "\\par\\endgroup"
+  return table.concat(L, "\n")
+end
+
+-- ---------------------------------------------------------------------------
+-- Table of authorities
+-- ---------------------------------------------------------------------------
+
+local ORDER = { "case", "constitution", "statute", "regulation", "rule", "other" }
+local TITLES = {
+  case = "Cases:", constitution = "Constitutional Provisions:", statute = "Statutes:",
+  regulation = "Regulations:", rule = "Rules:", other = "Other Authorities:",
+}
+
+local function sort_key(a)
+  local s = a.sort ~= nil and plain(a.sort) or (plain(a.name) .. " " .. plain(a.cite))
+  return (s:lower():gsub("[^a-z0-9 ]", ""))
+end
+
+local function toa(meta, hits)
+  local out = {}
+  local auth = meta.authorities or {}
+  for key in pairs(hits) do
+    if auth[key] == nil then fail("link `toa:" .. key .. "` has no entry under `authorities:` in the frontmatter") end
+  end
+  out[#out + 1] = "\\casection{Table of Authorities}"
+  local first = true
+  for _, kind in ipairs(ORDER) do
+    local members = {}
+    for key, a in pairs(auth) do
+      if plain(a.kind) == kind and hits[key] ~= nil then members[#members + 1] = { key = key, a = a } end
+    end
+    table.sort(members, function(x, y)
+      local kx, ky = sort_key(x.a), sort_key(y.a)
+      if kx == ky then return x.key < y.key end
+      return kx < ky
+    end)
+    if #members > 0 then
+      out[#out + 1] = "\\toagroup{" .. TITLES[kind] .. "}{" .. (first and 1 or 0) .. "}"
+      first = false
+      for _, m in ipairs(members) do
+        local name = m.a.name ~= nil and tex(m.a.name) or ""
+        out[#out + 1] = string.format("\\toaitem{%s}{%s}{%d}{%s}", name, tex(m.a.cite), kind == "case" and 1 or 0, m.key)
+      end
+    end
+  end
+  return table.concat(out, "\n")
+end
+
+-- ---------------------------------------------------------------------------
+-- Words (Fed. Cir. R. 32(b)): whitespace-delimited words of the body, headings and footnotes included
+-- ---------------------------------------------------------------------------
+
+-- Block by block (stringify of the whole document would run the last word of one block into the first of the
+-- next), footnote text included, footnote marks and list markers not counted: the typst template's count.
+local function words_in(s)
+  local n = 0
+  for _ in s:gsub("\194\160", " "):gmatch("%S+") do n = n + 1 end
+  return n
+end
+
+local function count_blocks(blocks)
+  local n = 0
+  for _, b in ipairs(blocks) do
+    if b.t == "BulletList" or b.t == "OrderedList" then
+      for _, item in ipairs(b.content) do n = n + count_blocks(item) end
+    elseif b.t == "BlockQuote" or b.t == "Div" then
+      n = n + count_blocks(b.content)
+    elseif b.t ~= "RawBlock" then
+      local notes = {}
+      local without = pandoc.Pandoc({ b }):walk({
+        Note = function(note) notes[#notes + 1] = note.content; return {} end,
+      })
+      n = n + words_in(pandoc.utils.stringify(without.blocks))
+      for _, c in ipairs(notes) do n = n + count_blocks(c) end
+    end
+  end
+  return n
+end
+
+-- ---------------------------------------------------------------------------
+-- The filter
+-- ---------------------------------------------------------------------------
+
 function Pandoc(doc)
-  local body, add, in_add = {}, {}, false
+  local meta = doc.meta
+  for _, k in ipairs({ "case_number", "caption", "proceeding", "brief_title", "short_caption", "counsel",
+    "counsel_for", "signature", "date" }) do
+    need(meta, k)
+  end
+
+  local words = count_blocks(doc.blocks)
+  if words > WORD_LIMIT then
+    fail("the brief has " .. words .. " words; Fed. Cir. R. 32(b)(1) allows " .. WORD_LIMIT .. " for a reply brief")
+  end
+
+  -- the toa: citations; each writes its page to the aux file at its place (\toahit)
+  local hits = {}
+  doc = doc:walk({
+    Link = function(el)
+      if el.target:sub(1, 4) ~= "toa:" then return el.content end
+      local key = el.target:sub(5)
+      hits[key] = true
+      local out = pandoc.Inlines({ pandoc.RawInline("latex", "\\toahit{" .. key .. "}") })
+      out:extend(el.content)
+      return out
+    end,
+  })
+  -- the cross-engine inline rules over the body text
+  doc = doc:walk({ Inlines = xe_inlines })
+
+  -- headings: every heading of the body is numbered, I. / A. / i. / 1. / a.
+  local counters = { 0, 0, 0, 0, 0, 0 }
+  local heads = {}
+  doc = doc:walk({
+    Header = function(h)
+      counters[h.level] = counters[h.level] + 1
+      for i = h.level + 1, 6 do counters[i] = 0 end
+      local label = label_for(h.level, counters[h.level])
+      local title = tex(h.content)
+      heads[#heads + 1] = { level = h.level, label = label, title = title }
+      if h.level == 1 then return raw(string.format("\\casectionnum{%s}{%s}{h%d}", label, title, #heads)) end
+      return raw(string.format("\\cahead{%d}{%d}{%s}{%s}{h%d}", h.level, h.level - 1, label, title, #heads))
+    end,
+  })
+
+  -- A paragraph that anchors a footnote has no widow or orphan control: typst's widow and orphan rules do not see
+  -- the note, so a line whose note does not fit moves to the next page alone (docx: style "Body Text Note").
+  local nb = pandoc.Blocks({})
   for _, b in ipairs(doc.blocks) do
-    if not in_add and b.t == "Header" and b.level == 1 and text(b.content):lower() == "addendum" then
-      in_add = true
-    elseif in_add then
-      add[#add + 1] = b
+    local note = false
+    if b.t == "Para" then pandoc.Pandoc({ b }):walk({ Note = function(n) note = true return n end }) end
+    if note then
+      nb:insert(raw("\\begingroup\\widowpenalty=0 \\clubpenalty=0 "))
+      nb:insert(b)
+      nb:insert(raw("\\par\\endgroup"))
     else
-      body[#body + 1] = b
+      nb:insert(b)
     end
   end
+  doc.blocks = nb
 
-  doc.meta.words_fmt = pandoc.MetaInlines({ pandoc.Str(group_digits(count_words(body))) })
-  -- pandoc templates read `interest.for` as a keyword, so the template gets it as a flat field.
-  if doc.meta.interest and doc.meta.interest["for"] then
-    doc.meta.interest_for = doc.meta.interest["for"]
-  end
-
-  local function mark_arguments(blocks)
-    local out, in_arg = {}, false
-    for _, b in ipairs(blocks) do
-      if b.t == "Header" and b.level == 1 then
-        local title = text(b.content):lower()
-        local is_arg = title == "argument" or title == "reply argument"
-        if is_arg then
-          out[#out + 1] = pandoc.RawBlock("latex", "\\ca@argtrue")
-        elseif in_arg then
-          out[#out + 1] = pandoc.RawBlock("latex", "\\ca@argfalse")
-        end
-        in_arg = is_arg
-      end
-      out[#out + 1] = b
-    end
-    return out
-  end
-
-  -- Link conversion runs over the body first, then the addendum, so `cited` keeps document order.
-  local bodyd = pandoc.Pandoc(body):walk({ Link = link_filter, Inlines = bind_signs })
-  local addd = pandoc.Pandoc(add):walk({ Link = link_filter, Inlines = bind_signs })
-
-  local authorities = doc.meta.authorities or {}
-  for _, key in ipairs(cited) do
-    if not authorities[key] then
-      error("cafc.lua: link `toa:" .. key .. "` has no entry under `authorities:` in the frontmatter")
+  local front = { raw(cover(meta)) }
+  -- the front matter counts from i (typst: counter(page).update(1) after the cover)
+  local toc = { "\\pagenumbering{roman}\\singlespacing\\casection{Table of Contents}",
+    "\\par\\addvspace{4.2bp}\\begingroup\\raggedleft\\singlespacing\\bfseries\\underline{Page}\\par\\endgroup" }
+  for i, h in ipairs(heads) do
+    if h.level <= TOC_DEPTH then
+      local title = h.level == 1 and ("\\MakeUppercase{" .. h.title .. "}") or h.title
+      toc[#toc + 1] = string.format("\\tocline{%d}{%s}{%s}{h%d}{%s}", h.level - 1, h.label, title, i,
+        h.level == 1 and "8.4bp" or "4.9bp")
     end
   end
+  front[#front + 1] = raw(table.concat(toc, "\n"))
+  front[#front + 1] = raw("\\clearpage\n" .. toa(meta, hits))
+  front[#front + 1] = raw("\\clearpage\\pagenumbering{arabic}\\normalsize")
 
-  -- Headings followed directly by another heading (`# Argument` and its first point heading) share a samepage
-  -- group with it, so they never part at a page end.
-  local keep = {}
-  for i = 1, #bodyd.blocks - 1 do
-    local a, b = bodyd.blocks[i], bodyd.blocks[i + 1]
-    if a.t == "Header" and b.t == "Header" then
-      keep[i] = true
-    end
-  end
-  local joined = {}
-  for i, b in ipairs(bodyd.blocks) do
-    if keep[i] and not keep[i - 1] then
-      joined[#joined + 1] = pandoc.RawBlock("latex", "\\begin{samepage}")
-    end
-    joined[#joined + 1] = b
-    if keep[i - 1] and not keep[i] then
-      joined[#joined + 1] = pandoc.RawBlock("latex", "\\end{samepage}")
-    end
-  end
-  bodyd.blocks = joined
+  -- back matter: the signature block (kept whole, after the conclusion), then the certificates on new pages; the
+  -- arabic count goes on
+  local back = { raw(signature(meta)) }
+  back[#back + 1] = raw(certificate_of_compliance(meta, words))
+  back[#back + 1] = raw(certificate_of_service(meta))
 
-  -- The last paragraph of the brief and the signature block (added by the template) are one samepage group,
-  -- so the signature never stands alone on a page. A heading or a footnote definition at the end is not kept.
-  local last = bodyd.blocks[#bodyd.blocks]
-  -- reply: the signature block (about 25 lines with three signers) is kept whole by the template (\needspace, minipage);
-  -- the last paragraph is not joined to it, because the two do not fit on one page at 14 pt (see README).
-
-  -- reply brief: the counsel groups two to a row, as the typst grid sets them
-  do
-    local cells = {}
-    for _, g in ipairs(doc.meta.counsel or {}) do
-      local lines = {}
-      for _, n in ipairs(g.names or {}) do
-        lines[#lines + 1] = latex(n)
-      end
-      for _, x in ipairs(g.lines or {}) do
-        lines[#lines + 1] = latex(x)
-      end
-      cells[#cells + 1] = "\\raggedright " .. table.concat(lines, "\\\\\n")
-    end
-    local rows = {}
-    for i = 1, #cells, 2 do
-      rows[#rows + 1] = cells[i] .. (cells[i + 1] and (" & " .. cells[i + 1]) or "")
-    end
-    doc.meta.counsel_grid = pandoc.MetaBlocks({
-      pandoc.RawBlock("latex", "\\begin{tabular}{@{}p{0.42\\linewidth}@{\\hspace{0.16\\linewidth}}p{0.42\\linewidth}@{}}\n" .. table.concat(rows, " \\\\[1em]\n") .. "\n\\end{tabular}"),
-    })
-  end
-  doc.blocks = mark_arguments(bodyd.blocks)
-  doc.meta.addendum = pandoc.MetaBlocks(addd.blocks)
-  doc.meta.toa = pandoc.MetaBlocks({ pandoc.RawBlock("latex", toa_block(authorities)) })
+  local blocks = pandoc.Blocks({})
+  for _, b in ipairs(front) do blocks:insert(b) end
+  for _, b in ipairs(doc.blocks) do blocks:insert(b) end
+  for _, b in ipairs(back) do blocks:insert(b) end
+  doc.blocks = blocks
   return doc
 end

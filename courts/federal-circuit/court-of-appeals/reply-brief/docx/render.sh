@@ -1,74 +1,82 @@
 #!/bin/sh
-# Build one sample as a .docx (docs/EVAL-LOOP.md, "Engines"; tools/render-docx.sh calls this and converts the result).
-#   sh docx/render.sh <court-dir> <sample.md> <out.docx>
-# pandoc writes the body with cafc-docx.lua on docx/reference.docx. The package then gets its footers (arabic
-# pages, Add- pages) and the section numbering. The contents and the table of authorities need page numbers, which
-# only the rendered pages have: LibreOffice renders the .docx, pages.sh reads the page labels, and the document is
-# written again with them until they stop changing (at most 5 runs). The last run's .docx is the output.
+# docx/render.sh <court-dir> <sample.md, relative to the court dir> <out.docx>
+# Owns the build of the .docx (tools/render-docx.sh hands over to it). Pandoc writes the body from brief.lua on
+# reference.docx; this script then writes the sections (cover: no number; front matter: lower roman; body: arabic
+# from 1), the page-number footers and the page setup, which pandoc does not carry over from the reference.
+# The TOC and TOA page numbers come from the PDF: pass 1 writes the .docx with placeholders, LibreOffice converts
+# it, pagemap.awk reads the page of each heading and authority from that PDF; pass 2 writes the numbers into the
+# .docx, and its PDF must give the same numbers again (otherwise the render fails).
 set -eu
 D=$(cd "$(dirname "$0")" && pwd)
-ROOT=$(cd "$D/../../../../.." && pwd)
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
-OUT=$(cd "$(dirname "$3")" && pwd)/$(basename "$3")
-SCHEME=reply
-SOFFICE=${SOFFICE:-soffice}
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
-NS='xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"'
-footer() { # $1 file, $2 label prefix ("" or "Add-")
-  printf '%s\n' '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' \
-    "<w:ftr $NS><w:p><w:pPr><w:spacing w:before=\"0\" w:after=\"0\" w:line=\"399\" w:lineRule=\"exact\"/><w:jc w:val=\"center\"/></w:pPr>" \
-    "<w:r><w:t xml:space=\"preserve\">$2</w:t></w:r><w:fldSimple w:instr=\" PAGE \"><w:r><w:t>1</w:t></w:r></w:fldSimple></w:p></w:ftr>" > "$1"
+OUT=$3
+case $OUT in /*) ;; *) OUT=$PWD/$OUT ;; esac
+SOFFICE=${SOFFICE:-$(command -v soffice || echo /opt/homebrew/bin/soffice)}
+FILTER=$D/cafc-docx.lua
+W=${RENDER_WORK:-$(mktemp -d)}   # RENDER_WORK=<dir>: keep the intermediate files there
+[ -n "${RENDER_WORK:-}" ] || trap 'rm -rf "$W"' EXIT
+
+finish() { # <raw.docx> <out.docx>: sections, footers, page setup; a valid zip with well-formed XML
+  X=$W/pkg
+  rm -rf "$X" && mkdir "$X"
+  (cd "$X" && unzip -q "$1")
+  cp "$D/footer.xml" "$X/word/footer-roman.xml"
+  cp "$D/footer.xml" "$X/word/footer-arabic.xml"
+  sed -i 's|</Relationships>|<Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Id="rIdRomanFtr" Target="footer-roman.xml"/><Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Id="rIdArabicFtr" Target="footer-arabic.xml"/></Relationships>|' "$X/word/_rels/document.xml.rels"
+  sed -i 's|</Types>|<Override PartName="/word/footer-roman.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/><Override PartName="/word/footer-arabic.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/></Types>|' "$X/[Content_Types].xml"
+  perl -0pi -e 's/RIDROMAN/rIdRomanFtr/g; s{<w:sectPr>(?:(?!<w:sectPr>).)*?</w:sectPr>(\s*</w:body>)}{<w:sectPr><w:footerReference w:type="default" r:id="rIdArabicFtr"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="686" w:gutter="0"/><w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>$1}s' "$X/word/document.xml"
+  for part in word/document.xml word/footer-roman.xml word/footer-arabic.xml word/styles.xml word/_rels/document.xml.rels; do
+    xmllint --noout "$X/$part" || { echo "render.sh: $part is not well-formed XML" >&2; exit 1; }
+  done
+  rm -f "$2"
+  (cd "$X" && zip -q -X "$2" '[Content_Types].xml' && zip -q -X -r "$2" _rels word docProps)
+  unzip -tq "$2" > /dev/null || { echo "render.sh: $2 is not a valid zip" >&2; exit 1; }
 }
-# The package: footer parts, their relationships and content types, the page start of the certificates.
-package() { # $1 unpacked dir, $2 start page of the certificates, $3 output .docx
-  X=$1
-  footer "$X/word/footer-arabic.xml" ""
-  footer "$X/word/footer-add.xml" "Add-"
-  # bullets: pandoc's Symbol bullet (U+F0B7) becomes EB Garamond's bullet; LibreOffice would draw Symbol with OpenSymbol
-  perl -0pi -e 's/w:ascii="Symbol" w:hAnsi="Symbol" w:cs="Symbol"/w:ascii="EB Garamond" w:hAnsi="EB Garamond" w:cs="EB Garamond"/g; s/\xEF\x82\xB7/\xE2\x80\xA2/g' "$X/word/numbering.xml"
-  perl -0pi -e 's#</Relationships>#<Relationship Id="rIdFooterArabic" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer-arabic.xml"/><Relationship Id="rIdFooterAdd" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer-add.xml"/></Relationships>#' "$X/word/_rels/document.xml.rels"
-  perl -0pi -e 's#</Types>#<Override PartName="/word/footer-arabic.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/><Override PartName="/word/footer-add.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/></Types>#' "$X/[Content_Types].xml"
-  # the last section (the certificates) is the reference's body section: it gets the arabic footer and continues the
-  # numbering from the body's last page
-  perl -0pi -e "s#^(.*)<w:sectPr([^>]*)>(.*?)</w:sectPr>#\$1<w:sectPr\$2><w:footerReference w:type=\"default\" r:id=\"rIdFooterArabic\"/>\$3<w:pgNumType w:fmt=\"decimal\" w:start=\"$2\"/></w:sectPr>#s" "$X/word/document.xml"
-  rm -f "$3"
-  (cd "$X" && zip -X -q -r "$3" .)
-  unzip -tq "$3" > /dev/null
+
+build() { # <out.docx> <page map, or empty> <manifest>
+  (cd "$COURT" && DOCX_PAGEMAP="$2" DOCX_MANIFEST="$3" pandoc --from markdown+smart --to docx \
+    --reference-doc="$D/reference.docx" --lua-filter="$FILTER" "$SAMPLE" -o "$W/raw.docx") >&2 || return 1
+  finish "$W/raw.docx" "$1"
 }
-PAGES=$W/pages.tsv
-: > "$PAGES"
-prev=""
-n=0
-while :
-do
-  n=$((n + 1))
-  PATS=$W/patterns.txt
-  CAFC_PAGES=$PAGES CAFC_PATTERNS=$PATS \
-    pandoc --from markdown+smart --to docx --reference-doc="$D/reference.docx" \
-      --lua-filter="$D/cafc-docx.lua" -M label_scheme=$SCHEME \
-      -M "fontdir=$ROOT/fonts/" \
-      --resource-path="$COURT" "$COURT/$SAMPLE" -o "$W/build.docx" || exit 1
-  rm -rf "$W/x" && mkdir "$W/x" && (cd "$W/x" && unzip -q "$W/build.docx")
-  START=$(awk -F'\t' '$1 == "_cert_start" { print $2 }' "$PAGES")
-  package "$W/x" "${START:-1}" "$W/pass.docx"
-  rm -rf "$W/pdf" && mkdir "$W/pdf"
-  "$SOFFICE" "-env:UserInstallation=file://$W/profile" --headless --convert-to pdf --outdir "$W/pdf" "$W/pass.docx" > "$W/soffice.log" 2>&1 || {
+
+convert() { # <docx>: the LibreOffice PDF, in $W/pdf
+  mkdir -p "$W/pdf"
+  "$SOFFICE" "-env:UserInstallation=file://$W/profile" --headless --convert-to pdf --outdir "$W/pdf" "$1" > "$W/soffice.log" 2>&1 || {
     cat "$W/soffice.log" >&2
-    echo "render.sh: LibreOffice did not convert $W/pass.docx" >&2
-    exit 1
+    return 1
   }
-  sh "$D/pages.sh" "$W/pdf/pass.pdf" "$PATS" > "$W/pages.new"
-  if [ "$(cat "$W/pages.new")" = "$(cat "$PAGES")" ]; then
-    break
+  echo "$W/pdf/$(basename "${1%.docx}").pdf"
+}
+
+pagemap() { # <pdf> <manifest>: the page map on stdout; fails on any MISSING search
+  P=$W/pages.$$
+  rm -rf "$P" && mkdir "$P"
+  n=$(pdfinfo "$1" | awk '/^Pages:/ { print $2 }')
+  files=""
+  i=1
+  while [ "$i" -le "$n" ]; do
+    pdftotext -layout -f "$i" -l "$i" "$1" "$P/$i.txt"
+    files="$files $P/$i.txt"
+    i=$((i + 1))
+  done
+  # shellcheck disable=SC2086
+  awk -v man="$2" -f "$D/pagemap.awk" $files > "$P/map.txt"
+  if grep -q '^MISSING' "$P/map.txt"; then
+    grep '^MISSING' "$P/map.txt" | sed 's/^/render.sh: not found in the PDF: /' >&2
+    return 1
   fi
-  if [ "$n" -ge 5 ]; then
-    echo "render.sh: the page numbers did not settle in 5 runs" >&2
-    exit 1
-  fi
-  cp "$W/pages.new" "$PAGES"
-  prev=$n
-done
-cp "$W/pass.docx" "$OUT"
+  cat "$P/map.txt"
+}
+
+build "$W/p1.docx" "" "$W/man1.txt"
+pagemap "$(convert "$W/p1.docx")" "$W/man1.txt" > "$W/map1.txt" || exit 1
+build "$W/p2.docx" "$W/map1.txt" "$W/man2.txt"
+pagemap "$(convert "$W/p2.docx")" "$W/man2.txt" > "$W/map2.txt" || exit 1
+cmp -s "$W/map1.txt" "$W/map2.txt" || {
+  echo "render.sh: the page numbers of the second pass differ from the first:" >&2
+  diff "$W/map1.txt" "$W/map2.txt" >&2
+  exit 1
+}
+cp "$W/p2.docx" "$OUT"
 echo "$OUT"
