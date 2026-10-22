@@ -1,0 +1,85 @@
+# Fourth District Court of Appeal (fladistctapp4): petition for writ (petition-for-writ; mandamus, prohibition and the
+# other writs of Fla. R. App. P. 9.100). The whole layout, as data for the shared document model (lib/typst/xdoc.typ;
+# latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to Fla. R. App. P. 9.045 and 9.210 (../../rules.md, FLADISTCTAPP4-*); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court
+# constant.
+size: 14                  # FLADISTCTAPP4-FORM-005: Arial 14 point; footnotes and quotations too (-FORM-006)
+pitch:
+  body: 32.2              # FLADISTCTAPP4-FORM-004: double spaced (Word's double for Arial 14 pt, 2 x 16.1)
+  single: 16.1            # caption, headings, quotations, footnotes, signature: single (-FORM-006); Word's single line
+# FLADISTCTAPP4-FORM-003: no less than one inch; top and bottom 4 pt deeper, as the template had them
+margin: {top: 76, bottom: 76, left: 72, right: 72}
+indent: 36
+page_number: {align: center, from: 1}   # Arabic numerals at the foot from page 1 (Rule 9.045 sets none)
+footnote: {size: 14, gap: 7}             # FLADISTCTAPP4-FORM-006: 14 point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # FLADISTCTAPP4-FORM-006: quotations single spaced, 14 point
+# FLADISTCTAPP4-FORM-006: headings at least body size, single spaced. Level 1 a section, centred; the argument
+# points numbered by the template, level 2 "I." and level 3 "A.", the title hung 0.5 in under its number (the
+# filed petition; the INPUT carries the heading text alone).
+heading:
+  - {align: center, bold: true, upper: true, above: 19.6, below: 14}
+  - {bold: true, number: "I.", label_box: 36, above: 16.8, below: 16.8}
+  - {bold: true, number: "A.", label_box: 36, above: 16.8, below: 16.8}
+# FLADISTCTAPP4-PET-001 (a document under Rule 9.045): the court, the parties and their designations beside the
+# proceeding and the case numbers, the title; the petition starts under it on page 1.
+front:
+  - {text: "{court}", align: center, bold: true, upper: true}
+  - columns:
+      - width: 216
+        blocks:
+          - each: parties
+            blocks:
+              - {text: "{name}", above: 12.6}
+              - {text: "{role}", left: 54}
+          - {text: "{caption_close}", align: right, optional: true}
+      - blocks:
+          - {text: "{proceeding}", optional: true}
+          - {text: "CASE NO.: {case_number}", above: 18.2}
+          - {text: "{lower_court_case}", optional: true}
+    gutter: 14.4
+    above: 16.8
+  - {text: "{title}", align: center, bold: true, upper: true, left: 35, right: 35, above: 16.8, below: 16.8}
+# Rule 9.045 sets no signature form (Fla. R. Gen. Prac. & Jud. Admin. 2.515, not retrieved). As filed: the
+# certificate of service on a page of its own, the signature block 3 in from the margin under it, kept whole; then
+# the certificate of compliance (FLADISTCTAPP4-FORM-008, Rule 9.045(e)) when the sample gives the word count, on a
+# page of its own, signed. The certificate names Arial, the face the rule allows (Liberation Sans is its metric clone).
+# Rule 9.045 sets no signature form (Fla. R. Gen. Prac. & Jud. Admin. 2.515, not retrieved). As filed: the
+# signature block 3 in from the margin, kept whole (the firm lines, then the signer's line, name and contact lines);
+# the certificate of service on a page of its own, an oath or verification after it when the sample has one, then
+# the certificate of compliance (FLADISTCTAPP4-FORM-008, Rule 9.045(e)) on a page of its own, signed as the sample
+# gives it.
+closing:
+  - group:
+      - {text: "{signature.lead}", left: 216, optional: true}
+      - {text: "{signature.preface}", left: 216, optional: true}
+      - {text: "{signature.signer_line}", left: 216, above: 11.2}
+      - {text: "{signature.name}", left: 216}
+      - {text: "{signature.signer}", left: 216, optional: true}
+    above: 16.8
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", heading: 1}
+      - {text: "{service.paragraphs}", indent: 36, pitch: body}
+      - when: service.recipients
+        blocks:
+          - each: service.recipients
+            blocks:
+              - group:
+                  - {text: "{.}"}
+                above: 14
+                below: 14
+      - {text: "{service.closing}", indent: 36, pitch: body, optional: true}
+  - when: oath
+    blocks:
+      - {text: "{oath.heading}", heading: 1}
+      - {text: "{oath.paragraphs}", indent: 36, pitch: body}
+  - when: compliance
+    blocks:
+      - {break: true}
+      - {text: "{compliance.heading}", heading: 1}
+      - {text: "{compliance.paragraphs}", indent: 36, pitch: body}
+      - group:
+          - {text: "{compliance.signature}", left: 216, optional: true}
+        above: 11.2

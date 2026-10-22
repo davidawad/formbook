@@ -1,0 +1,4 @@
+PASS
+ca92be3142b1f85b147bd22c787270a5a771a53c3bf9f56768ee7b3a5bbf9ef9  usage/OUTPUT-petition-for-writ.docx
+64b403b0607917c4f15f95b7caa0bf9df399373b5e060f05c43b0e26ebeedf73  usage/OUTPUT-petition-for-writ.docx.pdf
+83a976707bfac4ac1fb29306adca3b5578e5017805921c772f4a1af7ea92a0a5  usage/OUTPUT-petition-for-writ.typst.pdf
