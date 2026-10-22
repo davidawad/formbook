@@ -7,22 +7,40 @@
 //   FRCP 5(b)(2)(E) (electronic service, for the certificate), FRCP 10(a) (caption).
 
 #import "@preview/cmarker:0.1.10"
-#import "/lib/typst/word-compat.typ": word-compat
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Rule-driven parameters
 // ---------------------------------------------------------------------------
 
-#let font-family = ("Times New Roman", "Liberation Serif") // LR 10.1 "standard font"; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif") // LR 10.1 "standard font"; Times New Roman (vendored) per docs/FONTS.md
 #let type-size = 12pt              // LR 10.1 sets no point size; 12 pt, as in the filed exemplar
-#let body-leading = 1.345em        // double spacing: the Liberation Serif line box is 0.655em, so 0.655em + 1.345em = 24 pt at 12 pt
-#let single-leading = 0.495em       // single spacing (caption, signature, block quotations): about 13.8 pt
 #let margin = 1in                  // LR 10.1: every margin no less than one inch
-#let footer-descent = 0.6in        // LR 10.1: a page number is not less than 1/2 inch from the bottom edge
+#let text-width = 8.5in - 2 * margin
+#let footer-distance = 0.6in       // LR 10.1: a page number is not less than 1/2 inch from the bottom edge (its line box ends here)
 #let para-indent = 0.5in           // first-line indent of body paragraphs
+#let letter-box = 0.5in            // a lettered item's label box after the indent, the text hanging after it
+#let quote-indent = 0.5in          // a block quotation's indent on both sides
 #let caption-left = 3.25in         // width of the party column of the caption
+#let caption-gutter = 0.35in       // between the party column and the case fields
+#let caption-pad = 0.2in           // the caption rules stand off the party block by this much
+#let versus-indent = 0.5in         // "VERSUS" between the sides
+#let designation-indent = 1.5in    // "Plaintiff" / "Defendant"
 #let sig-indent = 3.0in            // signature block starts at the right half of the page
 #let memo-page-limit = 25          // LR 7.7: a memorandum supporting a motion, excluding exhibits
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; docx/laed-motion-brief.lua sets the same twips).
+#let pitch-body = 24pt             // LR 10.1: double spaced; body text, headings, lettered items
+#let pitch-single = 13.8pt         // single spacing: court title, caption, title, quotations, signature
+#let court-below = 13.8pt          // the court title to the caption
+#let title-above = 24pt            // the caption to the document's title
+#let title-below = 12pt            // the title to the text
+#let quote-space = 12pt            // above and below a block quotation
+#let sig-above = 8.2pt             // the last paragraph to the signature block (a 24 pt baseline step)
+#let sig-gap = 10.2pt              // between the groups of the signature block (a blank single line's step)
+#let cert-above = 24pt             // the signature block to the certificate of service
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -38,8 +56,20 @@
 /// Inline markdown (italic case names, and so on).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// One line of a single-spaced stack (caption, counsel, signature): each line is its own block.
-#let sline(c) = block(above: 0pt, below: single-leading, c)
+/// Inline content without the paragraph breaks cmarker may put around it.
+#let unloose(body) = {
+  if type(body) != content or body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
+}
+
+/// One line paragraph (single pitch where the caller sets it), with an explicit space above it.
+#let sline(above: 0pt, left: 0pt, centered: false, c) = block(width: 100%, above: above, below: 0pt, {
+  set align(center) if centered
+  pad(left: left, par(first-line-indent: 0pt, unloose(c)))
+})
 
 /// A caption field the sample leaves empty (not yet assigned): a blank line to fill in.
 #let or-blank(v) = if v == none or v == "" { "______________" } else { v }
@@ -52,75 +82,58 @@
 // ---------------------------------------------------------------------------
 
 #let court-title() = {
-  block(above: 0pt, below: single-leading, align(center, text(weight: "bold", [UNITED STATES DISTRICT COURT])))
-  block(above: 0pt, below: body-leading, align(center, text(weight: "bold", [EASTERN DISTRICT OF LOUISIANA])))
+  sline(centered: true, text(weight: "bold", [UNITED STATES DISTRICT COURT]))
+  sline(centered: true, text(weight: "bold", [EASTERN DISTRICT OF LOUISIANA]))
 }
 
-/// One caption field on the right: a label line, then its value (or a blank to fill in).
-#let cap-field(label, v, above: single-leading) = {
-  block(above: above, below: single-leading, label)
-  block(above: 0pt, below: 0pt, or-blank(v))
-}
-
-// The party names are joined by VERSUS (the usage in the filed memorandum; no rule sets it).
-#let caption(meta) = grid(
-  columns: (caption-left, 1fr),
-  column-gutter: 0.35in,
-  {
-    set par(leading: single-leading)
-    rect(
-      width: 100%,
-      stroke: (right: 0.75pt + black, bottom: 0.75pt + black),
-      inset: (right: 0.2in, bottom: 0.2in, top: 0pt, left: 0pt),
-      {
-        for (i, side) in meta.caption.enumerate() {
-          if i > 0 {
-            block(above: single-leading, below: single-leading, pad(left: 0.5in, [VERSUS]))
-          }
-          for n in side.names { sline(inl(n)) }
-          block(above: single-leading, below: 0pt, pad(left: 1.5in, inl(side.designation)))
-        }
-      },
-    )
-  },
-  // Each field is a label over its value, so a long case number or a magistrate's name never wraps mid-token.
-  block(above: 0pt, below: 0pt, {
-    cap-field("CIVIL ACTION NO.", meta.at("civil_action_no", default: none), above: 0pt)
-    cap-field("SECTION:", meta.at("section", default: none))
-    cap-field("JUDGE", meta.at("judge", default: none))
-    cap-field("MAGISTRATE JUDGE", meta.at("magistrate", default: none))
+/// The parties on the left, joined by VERSUS (the usage in the filed memorandum; no rule sets it) and closed by a
+/// right and a bottom rule (docx: the cell's borders); on the right each case field is a label over its value, so a
+/// long case number or a magistrate's name never wraps mid-token. Every line single-pitch.
+#let caption(meta) = block(above: court-below, below: 0pt, grid(
+  columns: (caption-left, caption-gutter, text-width - caption-left - caption-gutter),
+  grid.cell(stroke: (right: 0.75pt + black, bottom: 0.75pt + black), inset: (right: caption-pad, bottom: caption-pad), {
+    for (i, side) in meta.caption.enumerate() {
+      if i > 0 { sline(left: versus-indent)[VERSUS] }
+      for n in side.names { sline(inl(n)) }
+      sline(left: designation-indent, inl(side.designation))
+    }
   }),
-)
+  [],
+  {
+    for (label, key) in (("CIVIL ACTION NO.", "civil_action_no"), ("SECTION:", "section"), ("JUDGE", "judge"),
+      ("MAGISTRATE JUDGE", "magistrate")) {
+      sline(label)
+      sline(or-blank(meta.at(key, default: none)))
+    }
+  },
+))
 
-#let title-block(meta) = {
-  block(above: body-leading, below: 0pt, align(center, text(weight: "bold", meta.title)))
-}
+#let title-block(meta) = block(width: 100%, above: title-above, below: title-below,
+  sline(centered: true, text(weight: "bold", inl(meta.title))))
 
 // ---------------------------------------------------------------------------
 // Body
 // ---------------------------------------------------------------------------
 
-/// Heading levels: 1 centered bold (the author types it in capitals); 2 bold; 3 bold italic.
+/// Heading levels, on the body pitch with no space of their own: 1 centered bold; 2 bold; 3 bold italic.
 /// Sticky, so a heading never ends a page.
-#let heading-block(level, t) = block(above: body-leading, below: 0pt, width: 100%, sticky: true, {
-  if level == 1 {
-    align(center, text(weight: "bold", inl(t)))
-  } else if level == 2 {
-    text(weight: "bold", inl(t))
+#let heading-block(level, t) = block(above: 0pt, below: 0pt, width: 100%, sticky: true, {
+  set align(center) if level == 1
+  par(first-line-indent: 0pt, if level <= 2 {
+    text(weight: "bold", unloose(inl(t)))
   } else {
-    text(weight: "bold", style: "italic", inl(t))
-  }
+    text(weight: "bold", style: "italic", unloose(inl(t)))
+  })
 })
 
-/// A lettered item: the author types the label ("A." or "(a)"); the template only hangs it.
+/// A body paragraph at the body pitch, its first line indented half an inch (memoranda are not paragraph-numbered).
+#let body-par(c) = block(width: 100%, above: 0pt, below: 0pt, par(unloose(c)))
+
+/// A lettered item: the author types the label ("A." or "(a)"); the text hangs after its box.
 #let lettered-item(t) = {
   let m = t.match(regex("^(\\(?[A-Za-z]\\)?\\.?)[ \\t]+([\\s\\S]*)$"))
-  grid(
-    columns: (para-indent + 0.4in, 1fr),
-    column-gutter: 0.1in,
-    pad(left: para-indent, [#m.captures.at(0)]),
-    inl(m.captures.at(1)),
-  )
+  block(width: 100%, above: 0pt, below: 0pt, par(first-line-indent: 0pt, hanging-indent: para-indent + letter-box,
+    [#h(para-indent)#box(width: letter-box, m.captures.at(0))#unloose(inl(m.captures.at(1)))]))
 }
 
 #let body-flow(body) = {
@@ -130,53 +143,45 @@
       let m = t.match(regex("^(#+)[ \\t]+([\\s\\S]*)$"))
       heading-block(m.captures.at(0).len(), m.captures.at(1))
     } else if t.match(regex("^([A-Za-z]\\.|\\([A-Za-z]\\))[ \\t]")) != none {
-      block(width: 100%, lettered-item(t))
+      lettered-item(t)
     } else if t.starts-with(">") {
-      // An indented, single-spaced block quotation (FRAP-style; the memorandum's quotations).
-      block(width: 100%, pad(left: 0.5in, right: 0.5in, {
-        set par(leading: single-leading)
-        inl(t)
+      // An indented, single-spaced block quotation.
+      block(width: 100%, above: quote-space, below: quote-space, pad(x: quote-indent, {
+        set text(..edges(pitch-single))
+        par(first-line-indent: 0pt, unloose(inl(t.replace(regex("(?m)^>[ \t]?"), ""))))
       }))
     } else {
-      // A body paragraph: first-line indent, not numbered (memoranda are not paragraph-numbered).
-      block(width: 100%, {
-        h(para-indent)
-        inl(t)
-      })
+      body-par(inl(t))
     }
   }
 }
 
-/// Signature block (single spaced, right half of the page). "Dated" sits on the left if the sample gives a date.
-#let signature-block(meta) = block(width: 100%, above: body-leading, breakable: false, {
-  grid(
-    columns: (sig-indent, 1fr),
-    block(above: 0pt, below: 0pt, if meta.at("date", default: none) != none [Dated: #meta.date] else []),
-    block(above: 0pt, below: 0pt, [Respectfully submitted,]),
-  )
+/// Signature block (single spaced, right half of the page), kept on one page. "Dated" sits on the left of
+/// "Respectfully submitted," if the sample gives a date (docx: a tab at the signature indent).
+#let signature-block(meta) = block(width: 100%, above: sig-above, below: 0pt, breakable: false, {
+  set text(..edges(pitch-single))
+  let date = meta.at("date", default: none)
+  sline[#box(width: sig-indent, if date != none [Dated: #date])Respectfully submitted,]
   for group in meta.signature {
-    pad(left: sig-indent, block(above: body-leading, below: 0pt, {
-      for n in group.names { sline(inl(n)) }
-      for l in group.at("lines", default: ()) { sline(inl(l)) }
-    }))
+    let ls = group.names + group.at("lines", default: ())
+    for (i, l) in ls.enumerate() {
+      sline(above: if i == 0 { sig-gap } else { 0pt }, left: sig-indent, inl(l))
+    }
   }
 })
 
-/// Certificate of service (FRCP 5(b)(2)(E)). Shown only when the sample gives a `service` map.
+/// Certificate of service (FRCP 5(b)(2)(E)). Shown only when the sample gives a `service` map: a centred bold title
+/// on the body pitch kept with the text, two body paragraphs, the electronic signature at the signature indent.
 #let certificate(meta) = {
   let s = meta.service
-  block(above: body-leading, below: 0pt, width: 100%, sticky: true, align(center, text(weight: "bold", [CERTIFICATE OF SERVICE])))
-  block(width: 100%, {
-    h(para-indent)
-    [I hereby certify that a copy of the foregoing has been served on all counsel of record via the Court’s Electronic Filing System.]
+  block(width: 100%, above: cert-above, below: 0pt, sticky: true,
+    sline(centered: true, text(weight: "bold", [CERTIFICATE OF SERVICE])))
+  body-par[I hereby certify that a copy of the foregoing has been served on all counsel of record via the Court’s Electronic Filing System.]
+  body-par[This #s.date.]
+  block(width: 100%, above: sig-above, below: 0pt, {
+    set text(..edges(pitch-single))
+    sline(left: sig-indent)[/s/ #s.signer]
   })
-  block(width: 100%, {
-    h(para-indent)
-    [This #s.date.]
-  })
-  pad(left: sig-indent, block(above: body-leading, below: 0pt, breakable: false, {
-    sline([/s/ #s.signer])
-  }))
 }
 
 // ---------------------------------------------------------------------------
@@ -187,23 +192,27 @@
   set page(
     paper: "us-letter",
     margin: margin,
-    footer-descent: footer-descent,
+    // the page number in a single-pitch line box that ends footer-distance above the page edge (Word: the footer
+    // distance); none on page 1 (Word: a different first page)
+    footer-descent: margin - footer-distance - pitch-single,
     footer: context {
       let n = counter(page).get().first()
-      if n > 1 { align(center, text(size: type-size, str(n))) }
+      if n > 1 { align(center, text(size: type-size, ..edges(pitch-single), str(n))) }
     },
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
-  show: word-compat.with(meta.at("word", default: (:)))
-  // Blocks are spaced by one double-spaced line, so the gap between paragraphs is the same as the gap between lines.
-  // Single-spaced stacks (caption, counsel, signature) set their own spacing.
-  set block(spacing: body-leading)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  // Every body paragraph opens with the half-inch indent (after a heading too).
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch. Lettered items are laid out here (list-indent: none).
+  show: xengine.with(pitch: pitch-body, list-indent: none)
 
-  court-title()
-  block(above: body-leading, below: body-leading, caption(meta))
-  title-block(meta)
+  {
+    set text(..edges(pitch-single))
+    court-title()
+    caption(meta)
+    title-block(meta)
+  }
   body-flow(body)
   signature-block(meta)
   if "service" in meta { certificate(meta) }
