@@ -7,7 +7,7 @@ Folder: `courts/sixth-circuit/kentucky/federal/western-district/motion-brief/` (
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief-2.pdf` (memorandum, 19 pages, 1 filer; see `usage/SOURCE.md`). Companion: `usage/FILED-EXAMPLE-motion-brief-3.pdf` (the 2-page motion, same filer). Second filer for comparison: `usage/FILED-EXAMPLE-motion-brief.pdf` (30-page memorandum, different filer). |
 | sample md | `usage/INPUT-motion-brief.md`: the whole memorandum (caption, introduction, statement of facts, all of Law & Argument I to VIII, conclusion, signature). The motion page and the certificate of service are not transcribed. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 16 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> usage/INPUT-motion-brief.md`). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 17 pages, typst 0.15, vendored Times New Roman only, no warnings (`sh tools/render.sh <this-dir> usage/INPUT-motion-brief.md`). |
 | overlay | ok: `usage/OVERLAY-zoeller-memorandum.pdf` and `usage/OVERLAY-zoeller-memorandum.txt` (`sh tools/overlay.sh <this-dir> zoeller-memorandum usage/FILED-EXAMPLE-motion-brief-2.pdf`). The tool's default exemplar is the first PDF in `usage/` alphabetically, which is the Glantz file; pass the Zoeller file explicitly. |
 | pages reviewed | 16 of 16 (every page rendered at 60 dpi and viewed). Pages 1 to 15 were viewed after the final caption-width change (page 16 was viewed before it). That change moved only the caption and left the pagination at 16 pages. |
 | checks | `tools/check.sh` is not run for this folder (it expects a court folder with `court.json` and `rules.md`; the brief forbids touching `tools/`). The review below is the Gate 2 equivalent. |
@@ -16,7 +16,7 @@ Folder: `courts/sixth-circuit/kentucky/federal/western-district/motion-brief/` (
 
 | Rule | Requirement | Where in the template | Source, verified |
 |---|---|---|---|
-| LR 5.2(a) (Joint Local Rules) | 8 1/2 x 11 inch page; margins of at least one inch on all sides; text double spaced (except block quotes, headings and footnotes); at least 12-point proportionately spaced font. | `margin = 1in`, `type-size = 12pt`, `body-leading = 1.35em`. | Text read from Joint General Order No. 2026-01 (https://www.kywd.uscourts.gov/sites/kywd/files/Joint%20General%20Order%2026-01-1.pdf). Same text in JGO 2018-02 (as LR 5.1(b)). Fetched 2026-10-14. |
+| LR 5.2(a) (Joint Local Rules) | 8 1/2 x 11 inch page; margins of at least one inch on all sides; text double spaced (except block quotes, headings and footnotes); at least 12-point proportionately spaced font. | `margin = 1in`, `type-size = 12pt`, `pitch-body = 24pt`. | Text read from Joint General Order No. 2026-01 (https://www.kywd.uscourts.gov/sites/kywd/files/Joint%20General%20Order%2026-01-1.pdf). Same text in JGO 2018-02 (as LR 5.1(b)). Fetched 2026-10-14. |
 | LR 7.1(a) | A motion must state with particularity the grounds, the relief sought and the legal argument necessary to support it (routine motions excepted). | Content, not layout. The template does not check it. | JGO 2017-01A (https://www.kyed.uscourts.gov/sites/kyed/files/JGO17-01A.pdf), which amended LR 7.1 to merge motions and memoranda. Fetched 2026-10-14. |
 | LR 7.1(d) | Motions and responses may not exceed 25 pages without leave; replies may not exceed 15 pages without leave. | Not enforced by the template (the count is not a layout property). See gap 3. | JGO 2018-02 (https://www.kywd.uscourts.gov/sites/kywd/files/general-ordes/Joint_General_Order_2018-02.pdf), which reduced the cap from 40 to 25 pages. JGO 2017-01A had 40 and 15. Fetched 2026-10-14. |
 | LR 7.1(e) | A party filing a motion must also file a separate proposed order. | Not part of this file (a separate document). | JGO 2017-01A. |
@@ -46,7 +46,7 @@ Not verified in this pass and not asserted by the template: the consolidated W.D
 
 ## Known gaps and open choices
 
-1. **Typeface.** Face required: none. Same as the complaint: LR 5.2(a) names no typeface (re-read 2026-10-15). Substitute: none; vendored EB Garamond stays as the no-face default (`docs/FONTS.md`). Metric-compatible or visual-only: n/a. The exemplars use Times New Roman, so the text looks smaller than the exemplar. The 12-point minimum is met. `Liberation Serif` (Times-metric) is available if David wants the exemplar look; it is not used here, because no rule requires it.
+1. **Typeface.** Face required: none. Same as the complaint: LR 5.2(a) names no typeface (re-read 2026-10-15). Times New Roman (vendored), the house default (`docs/FONTS.md`), in every engine; the exemplars use it too. The 12-point minimum is met.
 2. **Motion and memorandum are one document here.** The exemplar is two documents (2-page motion; 19-page memorandum), and the court's merged-filing rule (LR 7.1(a)) allows either. The template draws the memorandum with its caption and title. A separate motion page (for a motion-only filing) is not templated; the proposed order (LR 7.1(e)) is not templated.
 3. **Page limit (LR 7.1(d)).** The template does not count pages against the 25-page cap. The Zoeller memorandum (19 pages, with the 2-page motion, about 21 pages in total) is under the cap. The Glantz memorandum (30 pages, Document 11-1) is over 25 pages on its face; whether the cap counts caption, tables and signature pages is not verified here, so this is an observation about the exemplar, not a finding.
 4. **Page count vs. exemplar.** The render is 16 pages against the exemplar's 19. The sample transcribes the whole memorandum; the difference is leading and the caption layout, not missing text (the word-level comparison was not run as a gate; the overlay's word-overlap figures are the only text comparison made).
@@ -57,6 +57,8 @@ Not verified in this pass and not asserted by the template: the consolidated W.D
 9. **File names.** `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt`; these are the names used here.
 
 ## Review of the rendered pages (usage/OUTPUT-motion-brief.typst.pdf)
+
+The rows below are the review of the earlier 16-page render. The cross-engine adoption (fb-595.68.29) re-laid the pages: 17 pages, every one viewed against its docx page (see "Engines"); the structure noted per page holds, shifted by up to a page.
 
 - Page 1: court title (3 lines), caption with ")" column, `CIVIL ACTION NO. 3:25-CV-00740-DJH` on the vs. row (one line), title centered bold, opening paragraph, INTRODUCTION centered. Pass.
 - Page 2: introduction paragraphs; STATEMENT OF FACTS centered; paragraphs unnumbered with first-line indent. Pass.
@@ -79,26 +81,10 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh reference.docx`), `kywd-motion-brief.lua` (court title, caption table, signing block, optional certificate of service), `render.sh` (pandoc, then the reference's styles, page setup and footer are restored into the output). Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-motion-brief.md`. It writes `usage/OUTPUT-motion-brief.docx` and then stops at the soffice step (see BLOCKED).
+**typst** (`typst/`, the reference): on the shared cross-engine layout model (`lib/typst/xengine.typ`; docs/EVAL-LOOP.md, "Cross-engine gate"): Times New Roman 12 pt (vendored), every line a box of its pitch (body, headings and list items 24 pt, LR 5.2(a) double spacing; court title, caption, title, block quotations and signature 13.8 pt single lines), the spaces between blocks explicit (`court-below`, `title-above`, `title-below`, `heading-above`, `quote-space`, `sig-above`, `sig-gap`), first-fit ragged-right lines without kerning, ligatures or hyphenation. Headings at the type size (level 1 in capitals). List items with the label in a half-inch box at the indent, the text hanging at 1 in; block quotations single spaced, 0.5 in in on both sides. A doubled section or pilcrow sign ("¶¶ 32-33") stays with its number, as one sign does. The page number centred in a single line whose box ends 0.5 in above the page edge. 17 pages.
 
-What matches typst (set in `reference.docx`):
-- Letter paper, 1 in margins on all four sides (LR 5.2(a)).
-- EB Garamond 12 pt, the only face (vendored). Measured on the typst render: `pdffonts` shows EBGaramond Regular and Bold, embedded; 16 pages.
-- Body: exact 24 pt line pitch, measured on the typst render (24.0 pt between body lines); body paragraphs are not numbered, first-line indent 0.5 in.
-- Single lines (caption, title, signature): exact 13.8 pt, measured on the typst caption rows.
-- Signature block at 3.25 in (4680 twips).
-- Footer: bare page number, centered, 12 pt, `PAGE` field with cached result.
-- Headings: level 1 centered bold caps; level 2 bold left (roman numerals); level 3 bold left (letters), not italic; keep with next.
+**docx** (`docx/`): `reference.xml` (the Word styles: `base="xengine"` in the typst face `{font}`, the heading levels, List Para, Block Text, the footer; fb render builds `reference.docx` from it) and `kywd-motion-brief.lua` (court title, caption table with the ")" column and the case label, title, list items, signature block, optional certificate; `require("docx.xengine")` for the line boxes and break rules, and the doubled-sign binding). No shell script: `fb render` runs pandoc, converts with LibreOffice and packs the archive. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf`.
 
-What differs from typst or is not verified:
-- Case label: `CIVIL ACTION NO.` from `case_label` in the frontmatter (as in typst), on the "vs." row. Same as typst, but the caption column widths come from the table, not a grid; not measured.
-- Heading spacing: `before` and `after` are 6 pt in the reference; not measured against the typst headings.
-- Certificate of service: plain text (inline markup dropped); the sample has none.
-- Pagination: not measured (no LibreOffice PDF of the docx). The typst render is 16 pages.
+Cross-engine gate: `eval.yaml` sets `params.cross_engine: gate`; the docx breaks every line and page as typst does (XENG-001..003: 17 of 17 pages, 457/457 lines; fb-595.68.29). Every page of both renders viewed side by side at 40 dpi.
 
-docx BLOCKED items (no pass claimed):
-- `docx.pdf` and page review (Gates 0 to 3 and the per-page Gate 2 review): soffice is not installed on this box (`/opt/homebrew/bin/soffice: not found`). No LibreOffice PDF exists, so pages reviewed = 0.
-- Open-in-Word and open-in-LibreOffice check (no repair prompt): not done; neither application is on this box. The package check passed: a valid zip, no duplicate entries, every XML part well formed.
-- TOC, TOA and cross-reference fields: none in this template.
-- Pleading line numbers and vertical rules: not required by LR 5.2(a) and not in the typst template; not set.
-- The page limit (LR 7.1(d)) is a content rule and is not checked in the docx.
+Not applicable to the docx: TOC, TOA and cross-reference fields (none in this template); pleading line numbers and vertical rules (not required by LR 5.2(a)).
