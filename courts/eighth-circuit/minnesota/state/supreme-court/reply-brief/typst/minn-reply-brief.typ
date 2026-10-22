@@ -17,6 +17,7 @@
 #let single-leading = 0.46em               // Rule 132.01 subd. 1: tables, statements of issues, headings and footnotes may be single-spaced (1.15 em line).
 #let page-margin = 1in                     // Rule 132.01 subd. 1: written matter not over 6-1/2 by 9-1/2 inches on 8-1/2 by 11 paper; one inch is within it.
 #let cover-top-margin = 0.5in              // Rule 132.01 subd. 2(a): the docket number sits one-half inch from the top center of the cover.
+#let cover-gap = 0.06in                  // the space around the cover's rules and between its blocks (style). It was 0.1-0.25in, which with the single-spaced lines still left the counsel of a many-party case short of room and ran the cover onto a second page (DEF-COVER-001).
 #let para-indent = 0.5in
 #let sig-indent = 3in                      // signature block sits right of centre (style; the exemplars do the same).
 #let toc-depth = 4
@@ -52,6 +53,18 @@
   set par(leading: single-leading, spacing: 0pt, first-line-indent: 0pt)
   for l in col.lines { if l == "" { v(0.45em) } else [ #inl(l) \ ] }
 }
+
+/// The cover's counsel in two columns that flow, as the exemplars set them (one party's counsel runs on
+/// into the second column): the columns of the input in order, the height balanced so both columns end
+/// level. A grid with one input column per cell left the longest one alone setting the height and pushed
+/// the cover onto a second page (DEF-COVER-001); Rule 132.01 subd. 2 lists the counsel but sets no layout.
+#let counsel-gap = 0.9em
+#let counsel-columns(cols, render, gutter: 0.3in) = layout(size => {
+  let flow = for (i, c) in cols.enumerate() { if i > 0 { v(counsel-gap, weak: true) }; render(c) }
+  let half = measure(block(width: (size.width - gutter) / 2, flow)).height / 2
+  let line = measure(block(width: (size.width - gutter) / 2, render((lines: ("X",))))).height   // one line's pitch: the slack for a break between lines
+  block(height: half + line, columns(2, gutter: gutter, flow))
+})
 
 /// Signature block: the firm lines, then "/s/" and the typed name, underlined, then the lines below.
 #let signature-block(sig) = {
@@ -153,29 +166,29 @@
 
   // ---- Cover (Rule 132.01 subd. 2) ----
   page(margin: (x: page-margin, top: cover-top-margin, bottom: page-margin), numbering: none)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
+    #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)   // single-spaced (Rule 132.01 subd. 1 lets headings and tables be): the body's double paragraph spacing between the cover's blocks pushed it past one page (DEF-COVER-001)
     #align(center)[
       #text(size: 1.15em, strong[NO. #need(meta, "case_number")])
       #v(0.3em)
       #for l in need(meta, "court_lines") [ #strong(inl(l)) \ ]
     ]
-    #v(0.1in)
+    #v(cover-gap)
     #align(center, line(length: 1.6in, stroke: 0.5pt))
-    #v(0.1in)
+    #v(cover-gap)
     #for (i, side) in need(meta, "caption").enumerate() [
       #if i > 0 and side.at("joiner", default: meta.at("caption_joiner", default: "vs.")) != "" [ #align(center)[#side.at("joiner", default: meta.at("caption_joiner", default: "vs."))] #v(0.2em) ]
       #caption-side(side)
-      #v(0.3em)
+      #v(0.1em)
     ]
-    #v(0.1in)
+    #v(cover-gap)
     #align(center, line(length: 1.6in, stroke: 0.5pt))
-    #v(0.15in)
+    #v(cover-gap)
     #align(center)[#strong(upper(inl(need(meta, "brief_title"))))]
-    #if "subtitle" in meta [ #v(0.1in) #align(center, inl(meta.subtitle)) ]
-    #v(0.15in)
+    #if "subtitle" in meta [ #v(cover-gap) #align(center, inl(meta.subtitle)) ]
+    #v(cover-gap)
     #align(center, line(length: 1.6in, stroke: 0.5pt))
-    #v(0.25in)
-    #grid(columns: (1fr, 1fr), column-gutter: 0.3in, ..need(meta, "counsel").map(counsel-column))
+    #v(cover-gap)
+    #counsel-columns(need(meta, "counsel"), counsel-column)
   ]
 
   // ---- Table of contents (Rule 128.02 subd. 1(a)); front matter is numbered in roman numerals ----
