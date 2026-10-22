@@ -1,0 +1,106 @@
+# Court of Appeals of Wisconsin (wisctapp): respondent's brief (answering brief, Wis. Stat. 809.19(3)). The whole layout,
+# as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to Wis. Stat. 809.81 and 809.19(8)-(9) (../../rules.md, WISCTAPP-*);
+# lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a
+# court constant (the court's name, the certificate forms).
+size: 13                  # WISCTAPP-FORM-003 (809.19(8)(b)3.c): proportional serif body text, 13 point
+pitch:
+  body: 29.9              # WISCTAPP-FORM-004 (809.81(4)): double spaced (Word's double, 2 x 1.15 x 13 pt), as the court's
+                          # other briefs (the pass-1 template set about 1.5 lines, a spacing ../../rules.md does not state)
+  single: 14.95           # cover, headings, tables, quotations, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 90, right: 90}   # WISCTAPP-FORM-005 (809.81(4)): 1 in top and bottom, 1.25 in sides
+indent: 36
+# WISCTAPP-FORM-006 (809.81(5), 809.19(8)(b)4): Arabic, sequential from "1" on the first page (the cover, counted and
+# not printed on it), centered at the bottom
+page_number: {align: center, from: 2}
+cover_fill: "#f4c7c3"     # WISCTAPP-COVER-002 (809.19(9)): the respondent's brief cover is red (a light red)
+footnote: {size: 11, pitch: 12.65, gap: 7}   # WISCTAPP-FORM-003: footnotes 11 point, single spaced (1.15 x 11 pt)
+# WISCTAPP-FORM-003 lets quotations be 11 point; the model's quotation has no size of its own, so quotations are set
+# at the body's 13 point (within the rule), indented and single spaced
+quote: {left: 36, right: 36, above: 10.4, below: 15.6}
+# Level 1 a section (bold, capitals, centered); levels 2 to 4 argument headings the template numbers I., A., 1.
+heading:
+  - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
+  - {bold: true, number: "I.", hang: 36, above: 15.6, below: 10.4}
+  - {bold: true, number: "A.", hang: 36, above: 13, below: 10.4}
+  - {bold: true, italic: true, number: "1.", hang: 36, above: 11.7, below: 9.1}
+# WISCTAPP-LEN-002 (809.19(8)(c)1): the statement of the case, the argument and the conclusion (809.19(1)(d)-(f)) are
+# counted; 11,000 words at most with a proportional serif font. A respondent may omit the statement of the case
+# (809.19(3)(a)2), so the count is the body less the sections 809.19(1) does not count (issues, the statement on oral
+# argument and publication, the standards of review), as a filer writes their headings in capitals or not
+words:
+  exclude: ["ISSUE", "Issue", "STATEMENT ON", "Statement on", "STANDARD", "Standard"]
+  limit: 11000
+# WISCTAPP-COVER-001 (809.19(9)) and WISCTAPP-CAPT-001 (809.81(9)): the court, the case number, the caption, the court
+# and judge appealed from, the title, counsel's names and address; the cover is page 1.
+cover:
+  - {text: "STATE OF WISCONSIN", align: center, bold: true}
+  - {text: "COURT OF APPEALS", align: center, bold: true}
+  - {text: "DISTRICT {district}", align: center, bold: true}
+  - {text: "Case No. {case_number}", align: center, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true, upper: true}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - group:
+          - {text: "{names}", bold: true, left: 230.4}
+          - {text: "{lines}", left: 230.4, optional: true}
+        above: 7.8
+  - {text: "{phone}", left: 230.4, optional: true, above: 7.8}
+# WISCTAPP-OPEN-001 (809.19(1)(a), for the respondent 809.19(3)(a)): the table of contents with the argument headings,
+# and the table of authorities with
+# the pages on which each is cited, each on its own page.
+contents: {title: "Table of Contents", depth: 4, col: 36, hang: 19.5, step: 19.5, above: 11.7}
+authorities:
+  title: "Table of Authorities"
+  col: 72
+  hang: 19.5
+  above: 7.8
+  group: {bold: true, above: 15.6, below: 3.9}
+# The conclusion kept on the page of the signature (a signature never stands alone on a page).
+keep_with_closing: true
+# WISCTAPP-SIG-001 (809.19(1)(h)): the date and the signature of the attorney who files the brief; the statement of a
+# lawyer's assistance when the brief says so. WISCTAPP-CERT-001 (809.19(8)(d); the form of the pass-1 template, which
+# names (8) (b), (bm) and (c)): the certification of form and length, its count the counted portions' words, signed.
+# WISCTAPP-ELEC-003: the certificate of electronic filing and service
+# when the brief carries one.
+closing:
+  # the date and the signature one block, never split, so the kept conclusion is on the signature's page
+  - group:
+      - {text: "{date}", optional: true}
+      - &signature
+        columns:
+          - blocks:
+              - {text: ""}
+          - width: 201.6
+            blocks:
+              - {text: "Signed:"}
+              - {rule: 0.5, above: 28.6}
+              - {text: "{signature.signer}", above: 3.9}
+              - {text: "{signature.lines}"}
+        above: 5.2
+    above: 21.6
+  - when: assisted
+    blocks:
+      - {text: "This document was prepared with the assistance of a lawyer.", above: 15.6}
+  - {break: true}
+  - {text: "CERTIFICATION AS TO FORM AND LENGTH", align: center, bold: true, below: 15.6}
+  - {text: "I hereby certify that this brief conforms to the rules contained in s. 809.19 (8) (b), (bm), and (c) for a brief. The length of this brief is {xd.words} words.", pitch: body, indent: 36}
+  - group: [*signature]
+    above: 15.6
+  - when: efiling_certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATION OF ELECTRONIC FILING AND SERVICE", align: center, bold: true, below: 15.6}
+      - {text: "{efiling_certificate}", pitch: body, indent: 36}
+      - group: [*signature]
+        above: 15.6

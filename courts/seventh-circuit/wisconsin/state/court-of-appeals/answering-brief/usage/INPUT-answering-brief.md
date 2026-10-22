@@ -60,7 +60,7 @@ Throughout the pendency of these cases, the defendant has filed a torrid avalanc
 >
 > 2\. Pending the result of Mr. Buffo's appeals, this Court will no longer review or consider any further post-conviction filings in these cases, except as provided in #3.
 >
-> 3\. The only exception to these prohibitions relate to a legally-valid post-conviction motion regarding Mr. Buffo's recent sentencing following his probation revocations. Before such a filing(s) is accepted from Mr. Buffo in these cases, a Dane County judge must determine as set forth in a written order, whether the filing is procedurally appropriate and with legal merit." *Id.* p. 3
+> 3\. The only exception to these prohibitions relate to a legally-valid post-conviction motion regarding Mr. Buffo's recent sentencing following his probation revocations. Before such a filing(s) is accepted from Mr. Buffo in these cases, a Dane County judge must determine as set forth in a written order, whether the filing is procedurally appropriate and with legal merit.” *Id.* p. 3
 
 Between his two criminal cases, he has filed six appeals since September 2022: 22AP1803, 22AP1804, 23AP302, 23AP303, 23AP1007, and 23AP1008. The State understands that 23AP302 and 23AP303 relate to the trial court's February 8, 2023 order, including by virtue of the Court's ruling in *State v. Buffo*, 2022AP1803/22AP1804, Decision July 13, 2023, fn. 3.
 
