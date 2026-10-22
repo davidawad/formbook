@@ -1,151 +1,195 @@
--- pandoc filter for the ndd complaint (docx engine). Mirrors typst/ndd-complaint.typ: the cover (court title,
--- caption table with a column of ")" marks, case number and title), numbered allegations (Fed. R. Civ. P. 10(b)),
--- lettered lists (a), (b), ..., and the signature block. Frontmatter comes from the sample, never from this file.
--- Used by tools/render-docx.sh through docx/reference.docx; see ../README.md "Engines".
+-- Complaint for the U.S. District Court for the District of North Dakota (ndd), docx engine: what the Word output
+-- adds to pandoc's conversion, so that it reads and breaks as typst/ndd-complaint.typ does (README "Engines"): the
+-- court title with the division (Civil Rule 3.1(A)), the caption with its column of ")" marks (Fed. R. Civ. P.
+-- 10(a)), the numbered allegations (Fed. R. Civ. P. 10(b)), the unnumbered lead-in and WHEREFORE paragraphs, the
+-- lettered lists, the headings and the signature block. Everything printed comes from the sample's frontmatter and
+-- body: no case text lives in this file. Caption and signature are OOXML tables, because pandoc has no caption
+-- construct.
+--
+-- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
+-- exact line boxes of the typst pitch (twips = 20 x pt: 552 the double-spaced body, 276 a single line), the spaces
+-- between blocks those of the typst template, and the break rules of typst on every run.
 
--- Measures (twips; 1 in = 1440): text width 9360; caption party column 4896 (3.4 in), ")" column 432 (0.3 in),
--- right column 4032. Body and headings double (480 exact); caption and signature single (276 exact).
-local BODY = '<w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/>'
-local SINGLE = '<w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/>'
-local SIG_LEFT = 4680 -- signature block: 3.25 in from the margin
-local CAP_INSET = 288 -- right column of the caption: 0.2 in
+local xe = require("docx.xengine")
 
-local function esc(s)
-  return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
+local BODY, SINGLE = 552, 276             -- typst pitch-double, pitch-single
+local INDENT = 720                        -- typst para-indent, 0.5 in
+local NUM_BOX = 720                       -- typst num-box, 0.5 in: the text of a numbered paragraph at 1 in
+local TEXTW = 9360                        -- 6.5 in
+local CAP_LEFT, CAP_PAREN = 4896, 432     -- typst caption-left 3.4 in, caption-paren 0.3 in
+local CAP_INSET = 288                     -- typst caption-inset 0.2 in
+local SIG_INDENT = 4680                   -- typst sig-indent 3.25 in
+
+local function plain(m)
+  if m == nil then return "" end
+  if type(m) == "string" then return m end
+  return pandoc.utils.stringify(m)
 end
 
-local function text_of(v)
-  return pandoc.utils.stringify(v)
+-- A paragraph: o = { before, after, line, left, hanging, first, jc, keep, tab } (a hanging indent writes no
+-- firstLine: Word takes firstLine over hanging).
+local function p(body, o)
+  o = o or {}
+  local props = {}
+  if o.keep then props[#props + 1] = xe.KEEP end
+  if o.tab then props[#props + 1] = '<w:tabs><w:tab w:val="left" w:pos="' .. o.tab .. '"/></w:tabs>' end
+  props[#props + 1] = xe.spacing(o.before or 0, o.after or 0, o.line or SINGLE)
+  props[#props + 1] = xe.ind(o.left or 0, o.hanging, not o.hanging and (o.first or 0) or nil)
+  props[#props + 1] = xe.jc(o.jc or "left")
+  return xe.para(props, body)
 end
 
--- One paragraph as XML. ppr: paragraph properties; rpr: run properties (may be "").
-local function px(text, ppr, rpr)
-  return '<w:p><w:pPr>' .. ppr .. '</w:pPr><w:r><w:rPr>' .. (rpr or '') ..
-    '</w:rPr><w:t xml:space="preserve">' .. esc(text) .. '</w:t></w:r></w:p>'
-end
-
-local function blank(extra)
-  return '<w:p><w:pPr>' .. BODY .. (extra or '') .. '</w:pPr></w:p>'
-end
-
-local function raw(xml)
-  return pandoc.RawBlock('openxml', xml)
-end
-
-local function ind(left)
-  return '<w:ind w:left="' .. left .. '"/>'
-end
-
-local function caption(meta)
-  local left, paren = {}, {}
-  for k, p in ipairs(meta.caption.parties) do
-    if k > 1 then table.insert(left, 'v.') end
-    for _, n in ipairs(p.names) do table.insert(left, text_of(n)) end
-    local d = text_of(p.designation)
-    if d ~= '' then table.insert(left, d) end
+local function tbl(widths, cells, trpr)
+  local grid, tcs = {}, {}
+  for i, w in ipairs(widths) do
+    grid[#grid + 1] = '<w:gridCol w:w="' .. w .. '"/>'
+    tcs[#tcs + 1] = '<w:tc><w:tcPr><w:tcW w:w="' .. w .. '" w:type="dxa"/>' .. (cells[i].pr or "") .. '</w:tcPr>' ..
+      table.concat(cells[i].body) .. '</w:tc>'
   end
-  local lparas, pparas = {}, {}
-  for i, s in ipairs(left) do
-    table.insert(lparas, px(s, SINGLE .. '<w:jc w:val="left"/>'))
-    table.insert(pparas, px(')', SINGLE))
-  end
-  local case_no = text_of(meta.case_number)
-  if case_no == '' then case_no = '____________' end
-  local rparas = {
-    px('Case No. ' .. case_no, SINGLE .. ind(CAP_INSET)),
-    blank(ind(CAP_INSET)),
-    px(text_of(meta.title), SINGLE .. ind(CAP_INSET), '<w:b/><w:bCs/><w:caps/>'),
-  }
-  if meta.jury_demand == true then
-    table.insert(rparas, px('JURY DEMAND', '<w:spacing w:before="120" w:after="0" w:line="276" w:lineRule="exact"/>' .. ind(CAP_INSET), '<w:b/><w:bCs/>'))
-  end
-  local function cell(w, paras)
-    return '<w:tc><w:tcPr><w:tcW w:w="' .. w .. '" w:type="dxa"/></w:tcPr>' .. table.concat(paras) .. '</w:tc>'
-  end
-  return '<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/>' ..
-    '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/>' ..
-    '<w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>' ..
-    '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>' ..
-    '</w:tblPr><w:tblGrid><w:gridCol w:w="4896"/><w:gridCol w:w="432"/><w:gridCol w:w="4032"/></w:tblGrid><w:tr>' ..
-    cell(4896, lparas) .. cell(432, pparas) .. cell(4032, rparas) .. '</w:tr></w:tbl>'
+  return '<w:tbl><w:tblPr><w:tblW w:w="' .. TEXTW .. '" w:type="dxa"/><w:tblLayout w:type="fixed"/>' ..
+    '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/>' ..
+    '<w:right w:w="0" w:type="dxa"/></w:tblCellMar>' ..
+    '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="0"/></w:tblPr>' ..
+    '<w:tblGrid>' .. table.concat(grid) .. '</w:tblGrid><w:tr>' .. (trpr or "") .. table.concat(tcs) .. '</w:tr></w:tbl>'
 end
+
+local function upper_inlines(m)
+  if type(m) == "string" then return pandoc.text.upper(m) end
+  return pandoc.Inlines(m):walk({ Str = function(s) return pandoc.Str(pandoc.text.upper(s.text)) end })
+end
+
+-- ---------------------------------------------------------------------------
+-- Court title and caption (Civil Rule 3.1(A); Fed. R. Civ. P. 10(a))
+-- ---------------------------------------------------------------------------
 
 local function cover(meta)
   local out = {}
-  for _, key in ipairs({ 'court', 'district', 'division' }) do
-    table.insert(out, raw(px(text_of(meta[key]), SINGLE .. '<w:jc w:val="center"/>', '<w:b/><w:bCs/><w:caps/>')))
+  for _, key in ipairs({ "court", "district", "division" }) do
+    out[#out + 1] = p(xe.inl(upper_inlines(meta[key]), { b = true }), { jc = "center", after = SINGLE })
   end
-  table.insert(out, raw(blank()))
-  table.insert(out, raw(caption(meta)))
-  table.insert(out, raw(blank()))
+  -- only the last title line carries the space above the caption (typst: the caption block's above)
+  for i = 1, 2 do out[i] = out[i]:gsub('w:after="276"', 'w:after="0"', 1) end
+  -- Left cell: each party's names, then its designation; "v." between the parties; a ")" beside every row.
+  local left, paren = {}, {}
+  for k, party in ipairs(meta.caption.parties) do
+    if k > 1 then left[#left + 1] = p(xe.runs("v.")) end
+    for _, n in ipairs(party.names) do left[#left + 1] = p(xe.inl(n)) end
+    left[#left + 1] = p(xe.inl(party.designation))
+  end
+  for _ = 1, #left do paren[#paren + 1] = p(xe.runs(")")) end
+  -- Right cell: the case number (blank until assigned), the title, the jury legend.
+  local number = plain(meta.case_number)
+  if number == "" then number = "____________" end
+  local right = {
+    p(xe.runs("Case No. " .. number)),
+    p(xe.inl(upper_inlines(meta.title), { b = true }), { before = SINGLE }),
+  }
+  if meta.jury_demand == true then right[#right + 1] = p(xe.runs("JURY DEMAND", { b = true })) end
+  out[#out + 1] = tbl({ CAP_LEFT, CAP_PAREN, TEXTW - CAP_LEFT - CAP_PAREN }, {
+    { body = left }, { body = paren },
+    { pr = '<w:tcMar><w:left w:w="' .. CAP_INSET .. '" w:type="dxa"/></w:tcMar>', body = right },
+  })
   return out
 end
 
--- The signature block does not split across pages (typst: breakable: false). It is one borderless table row that
--- may not break (cantSplit); keepNext alone was not honoured by LibreOffice across a long signature chain. An
--- empty paragraph follows, since a table cannot end a block of content.
+-- ---------------------------------------------------------------------------
+-- Signature block: one table row that never splits (typst: breakable: false).
+-- ---------------------------------------------------------------------------
+
 local function signature(meta)
-  local items = {}
-  local function add(text, ppr)
-    table.insert(items, { text = text, ppr = ppr })
+  local sig = meta.signature
+  local cell = {}
+  local gap = BODY -- the block's own space above it (typst: above pitch-double)
+  local function add(body, left, before)
+    cell[#cell + 1] = p(body, { left = left, before = math.max(gap, before or 0) })
+    gap = 0
   end
-  if meta.date and text_of(meta.date) ~= '' then
-    add('', BODY)
-    add('Dated: ' .. text_of(meta.date), SINGLE)
+  local dated = plain(meta.date) ~= ""
+  if dated then add(xe.runs("Dated: ") .. xe.inl(meta.date), 0) end
+  local first = not dated
+  if meta.closing then
+    add(xe.inl(meta.closing), SIG_INDENT, first and 0 or BODY)
+    first = false
   end
-  add('', BODY)
-  for _, s in ipairs(meta.signature.firm) do add(text_of(s), SINGLE .. ind(SIG_LEFT)) end
-  add('', BODY)
-  for _, s in ipairs(meta.signature.lines) do add(text_of(s), SINGLE .. ind(SIG_LEFT)) end
-  local paras = {}
-  for _, it in ipairs(items) do
-    table.insert(paras, px(it.text, it.ppr))
+  for k, l in ipairs(sig.firm or {}) do add(xe.inl(l), SIG_INDENT, (k == 1 and not first) and BODY or 0) end
+  for k, l in ipairs(sig.lines or {}) do add(xe.inl(l), SIG_INDENT, k == 1 and BODY or 0) end
+  return tbl({ TEXTW }, { { body = cell } }, '<w:trPr><w:cantSplit/></w:trPr>')
+end
+
+-- ---------------------------------------------------------------------------
+-- The body
+-- ---------------------------------------------------------------------------
+
+-- A body paragraph at the double pitch: unnumbered (first-line indent), or numbered: after the first-line indent the
+-- number, a tab to the end of its box (typst: the number in a box of num-box), the text.
+local function body_par(label, inlines, before)
+  if label == nil then return p(xe.inl(inlines), { line = BODY, first = INDENT, before = before }) end
+  return p(xe.runs(label .. "\t") .. xe.inl(inlines),
+    { line = BODY, first = INDENT, before = before, tab = INDENT + NUM_BOX })
+end
+
+-- Headings at the body pitch: level 1 bold, centered, in capitals; level 2 bold, centered; level 3 bold italic at
+-- the margin; kept with the text.
+local function heading(el, before)
+  local content = el.content
+  if el.level == 1 then content = upper_inlines(content) end
+  return xe.para({ xe.style("Heading" .. el.level), xe.KEEP, xe.spacing(before or 0, 0, BODY), xe.ind(0, nil, 0),
+    xe.jc(el.level <= 2 and "center" or "left") }, xe.inl(content, { b = true, i = el.level >= 3 }))
+end
+
+-- Lettered lists (typst enum "(a)" in a pad of para-indent): the label at 0.5 in, the text hanging at 1 in.
+local function lettered(list, out, before)
+  for j, item in ipairs(list.content) do
+    for k, b in ipairs(item) do
+      local lab = k == 1 and ("(" .. string.char(96 + j) .. ")\t") or ""
+      out[#out + 1] = p(xe.runs(lab) .. xe.inl(b.content),
+        { line = BODY, left = INDENT + NUM_BOX, hanging = NUM_BOX, before = before })
+      before = 0
+    end
   end
-  local tbl = '<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/>' ..
-    '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/>' ..
-    '<w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>' ..
-    '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>' ..
-    '</w:tblPr><w:tblGrid><w:gridCol w:w="9360"/></w:tblGrid>' ..
-    '<w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="9360" w:type="dxa"/></w:tcPr>' ..
-    table.concat(paras) .. '</w:tc></w:tr></w:tbl>'
-  return { raw(tbl), raw(blank()) }
+end
+
+-- typst's break opportunities that LibreOffice does not share: none inside ")(" (a word joiner), one after a
+-- slash before a letter ("and/or" a zero-width space). Neither shows in the PDF text.
+local function breaks(s)
+  return pandoc.Str((s.text:gsub("%)%(", ")\u{2060}("):gsub("/([^%d])", "/\u{200B}%1")))
 end
 
 local function is_wherefore(b)
-  return b.t == 'Para' and text_of(b):match('^WHEREFORE') ~= nil
-end
-
-local function num_run(s)
-  return pandoc.RawInline('openxml', '<w:r><w:t xml:space="preserve">' .. s .. '</w:t></w:r><w:r><w:tab/></w:r>')
+  return plain(b):match("^WHEREFORE") ~= nil
 end
 
 function Pandoc(doc)
+  doc = doc:walk({ Str = breaks })
   local meta = doc.meta
-  assert(meta.division, 'ndd-complaint: the caption must designate the division (Civil Rule 3.1(A))')
+  assert(meta.division, "ndd-complaint: the caption must designate the division (Civil Rule 3.1(A))")
   local out = cover(meta)
-  if meta.lead_in then
-    table.insert(out, pandoc.Para(meta.lead_in))
+  -- the caption stands a single line above the text (typst: the caption block's below); Word has no space after a
+  -- table, so the first paragraph after it takes the space before it
+  local gap = SINGLE
+  local function take()
+    local g = gap
+    gap = 0
+    return g
   end
+  if meta.lead_in then out[#out + 1] = body_par(nil, meta.lead_in, take()) end
   local n = 0
   for _, b in ipairs(doc.blocks) do
-    if b.t == 'Para' and not is_wherefore(b) then
+    if b.t == "Header" then
+      out[#out + 1] = heading(b, take())
+    elseif (b.t == "Para" or b.t == "Plain") and is_wherefore(b) then
+      out[#out + 1] = body_par(nil, b.content, take())
+    elseif b.t == "Para" or b.t == "Plain" then
       n = n + 1
-      table.insert(b.content, 1, num_run(n .. '.'))
-      table.insert(out, b)
-    elseif b.t == 'OrderedList' then
-      -- Lettered sub-paragraphs: "(a)" at 0.5 in, text at 1 in (hanging, custom style "Lettered").
-      for i, item in ipairs(b.content) do
-        local blocks = pandoc.List(item)
-        local first = blocks[1]
-        if first and (first.t == 'Para' or first.t == 'Plain') then
-          table.insert(first.content, 1, num_run('(' .. string.char(96 + i) .. ')'))
-        end
-        table.insert(out, pandoc.Div(blocks, { ['custom-style'] = 'Lettered' }))
-      end
+      out[#out + 1] = body_par(n .. ".", b.content, take())
+    elseif b.t == "OrderedList" or b.t == "BulletList" then
+      lettered(b, out, take())
     else
-      table.insert(out, b)
+      error("ndd-complaint.lua: unsupported block " .. b.t)
     end
   end
-  for _, b in ipairs(signature(meta)) do table.insert(out, b) end
-  return pandoc.Pandoc(out, pandoc.Meta({}))
+  out[#out + 1] = signature(meta)
+  local blocks = {}
+  for _, x in ipairs(out) do blocks[#blocks + 1] = xe.raw(x) end
+  return pandoc.Pandoc(blocks, pandoc.Meta({}))
 end
