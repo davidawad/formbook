@@ -1,7 +1,9 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
-# the typst render does, so a difference fails. LaTeX is held back: pdfLaTeX's ebgaramond (Type 1) sets EB Garamond
-# narrower than the vendored face typst and Word use, and with old-style figures (docs/open-items/fb-595.54.57.md).
+# the typst render does, so a difference fails. LaTeX is held back (docs/open-items/fb-595.54.57.md, items 7 and 9):
+# the committed latex/ is the earlier generation (plain ebgaramond, narrower than the vendored face); regenerated at
+# the model's EB Garamond, a paragraph that opens with the boxed regular T sets the T on a line of its own (p2 line
+# 10), and fb check's pdflatex calibration does not know `\usepackage[lining,tabular]{ebgaramond}` (DEF-FORM-003).
 params:
   cross_engine: gate
   cross_engine_latex: report
