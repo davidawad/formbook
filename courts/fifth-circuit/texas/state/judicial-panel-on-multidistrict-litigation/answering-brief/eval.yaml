@@ -5,8 +5,8 @@
 # - latex: body page 5, the heading "B. Plaintiffs Have Sought to Cooperate with Moving Defendants to Identify ...":
 #   typst ends its first line before "Identify", LaTeX fits it, ending at 540.03 pt on a 540 pt measure (newtx's
 #   width allowance; the model's open line-fit tolerance item).
-# - docx: no render. The body starts with a paragraph whose first word carries a footnote mark ("Plaintiffs[^1]"):
-#   lib/docx/xdoc.lua writes the body's first needle without the mark, the PDF prints "Plaintiffs1", and fb render
-#   stops ("not found in the PDF: p1").
+# - docx: not generated (no docx/ folder) until the model renders it: the body starts with a paragraph whose first
+#   word carries a footnote mark ("Plaintiffs[^1]"): lib/docx/xdoc.lua writes the body's first needle without the
+#   mark, the PDF prints "Plaintiffs1", and fb render stops ("not found in the PDF: p1").
 params:
   cross_engine: report

@@ -4,8 +4,8 @@
 # reported, not gated, until it covers them.
 # - latex: body pages 7 and 8, the counsel groups after the signature: typst breaks after a slash inside a word ("f/k/" |
 #   "a Actavis"), LaTeX never does ("LLC" | "f/k/a Actavis").
-# - docx: no render. The body starts with a paragraph whose first word carries a footnote mark ("Plaintiffs[^1]"):
-#   lib/docx/xdoc.lua writes the body's first needle without the mark, the PDF prints "Plaintiffs1", and fb render
-#   stops ("not found in the PDF: p1").
+# - docx: not generated (no docx/ folder) until the model renders it: the body starts with a paragraph whose first
+#   word carries a footnote mark ("Plaintiffs[^1]"): lib/docx/xdoc.lua writes the body's first needle without the
+#   mark, the PDF prints "Plaintiffs1", and fb render stops ("not found in the PDF: p1").
 params:
   cross_engine: report
