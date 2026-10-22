@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The E.D. Mo. bankruptcy motion's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of
+     the typst template ({font}, Times New Roman) at 12 pt (L.R. 9004(C): standard 12-point font, footnotes too; size
+     24 half points); Body Text in exact 27.6 pt line boxes (typst pitch-double, double-spaced) with a half-inch
+     indent; quotations (Block Text) and footnotes in 13.8 pt boxes (typst pitch-single), a quotation a single line
+     above and below and indented half an inch both sides, 6 pt after each footnote (typst note-gap); letter page with
+     1-inch margins (L.R. 9004(C)) and a centered page number, its line 36.75 pt above the page foot (735 twips: where
+     typst sets it, footer-descent 30 %). Added: Numbered Paragraph (the number after the first-line indent, a tab to
+     1 in), Centered Paragraph, and Keep variants for the last paragraph before the signature (typst keeps it with the
+     signature), and Noted variants without widow control for a paragraph that holds a footnote (typst moves the line
+     with the reference to the next page with its note, even when that leaves a widow); a footnote is not split (Footnote
+     Text keeps its lines, typst sets each note unbreakable). docx/moeb-motion-brief.lua
+     writes the cover, headings, lists, signature and certificate with their own spacing. The body is read without
+     fancy_lists, as typst's CommonMark reads it ("a. Supplier ..." in a quotation is text, not a list). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" quote="276" note-after="120" footer="735" pandoc-from="markdown-fancy_lists">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraph"><w:name w:val="Numbered Paragraph"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraphKeep"><w:name w:val="Numbered Paragraph Keep"/><w:basedOn w:val="NumberedParagraph"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraphNoted"><w:name w:val="Numbered Paragraph Noted"/><w:basedOn w:val="NumberedParagraph"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNoted"><w:name w:val="Body Text Noted"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="CenteredParagraphNoted"><w:name w:val="Centered Paragraph Noted"/><w:basedOn w:val="CenteredParagraph"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextKeep"><w:name w:val="Body Text Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="CenteredParagraph"><w:name w:val="Centered Paragraph"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:ind w:firstLine="0"/><w:jc w:val="center"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="CenteredParagraphKeep"><w:name w:val="Centered Paragraph Keep"/><w:basedOn w:val="CenteredParagraph"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:spacing w:before="0" w:after="120" w:line="276" w:lineRule="exact"/></w:pPr><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+</reference>

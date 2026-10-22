@@ -1,0 +1,7 @@
+PASS
+a772829f0a24167e5c1c29039a093e1e6ee2bf689e4b3446e7ef6f62b75abdbe  usage/OUTPUT-motion-brief-2.docx
+93c6eb942a7d75c890815ce788f05a9b5ddec71c92ab1a09f9ff6ba3561a59a8  usage/OUTPUT-motion-brief-2.docx.pdf
+970c128a9e4f4283639ec49cb38ee847efdc93f4ea1a77ad68a8be6b18b6050a  usage/OUTPUT-motion-brief-2.typst.pdf
+ee8b883f2dabdb8aeee6257a5bdac0162d30b59a232459b9b8fb310a571cbb1b  usage/OUTPUT-motion-brief.docx
+8bb2359599cfec7d0bbe09d4c1480328c9ab5991035388e16976751ef26f5a2e  usage/OUTPUT-motion-brief.docx.pdf
+69a879c345d579cf5b18ce53a12a04728fc661629b153bf6cb16647714126b59  usage/OUTPUT-motion-brief.typst.pdf
