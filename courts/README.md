@@ -108,7 +108,7 @@ Courts under `courts` (346).
 | [Court of Appeals of Virginia](fourth-circuit/virginia/state/court-of-appeals) | `vactapp` | up for review | 5/5 | 3/3 | 3/3 | 29 |
 | [Supreme Court of Virginia](fourth-circuit/virginia/state/supreme-court) | `va` | up for review | 8/8 | 7/7 | 7/7 | 29 |
 | [Intermediate Court of Appeals of West Virginia](fourth-circuit/west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
-| [West Virginia Supreme Court](fourth-circuit/west-virginia/state/supreme-court) | `wva` | up for review | 9/9 | 3/3 | 3/3 | 29 |
+| [West Virginia Supreme Court](fourth-circuit/west-virginia/state/supreme-court) | `wva` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 | [Court of Appeals for the Fifth Circuit](fifth-circuit/court-of-appeals) | `ca5` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, E.D. Louisiana](fifth-circuit/louisiana/federal/bankruptcy-eastern-district) | `laeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, M.D. Louisiana](fifth-circuit/louisiana/federal/bankruptcy-middle-district) | `lamb` | up for review | 2/2 | — | 2/2 | 14 |
