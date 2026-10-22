@@ -931,6 +931,95 @@ The layout model is shared code, not a recipe to copy: `lib/typst/xengine.typ`, 
 - *Justification.* typst justifies by shrinking spaces too, so a justified line holds more than Word's; `justification-limits: (spacing: (min: 100%, ...))` stops that, but a justified 4 1/8 in measure without hyphenation (which no two engines share) opens wide gaps: the SCOTUS merits brief and cert petition went ragged right, as the amicus brief already was.
 - *Paragraph indents and structure.* typst indents a paragraph only after a paragraph (not after a heading, a quotation or a list): Word needs "First Paragraph" explicitly there (pandoc does not set it after raw headings), LaTeX a `\noindent`. A quotation that holds a list is a `\list` environment in LaTeX, or the list loses the quotation's margins. pandoc reads "b. The ..." and a value "(202) 787-1060" as list items; typst does not: the filters turn them back into text.
 
+### Generated engines: the shared document model (fb-595.54.12)
+
+The state doc folders (689 with a typst template: 656 typst-only, 3 with a docx folder, 30 with a `docx/*.sh` that fb-595.68 step 2 owns; no state doc folder has a LaTeX template, the "142 typst+latex" of the bead are empty court-root `latex/` folders) get their latex and docx engines generated, not written by hand.
+
+**Families** (`fb engines families`, tools/fb/src/enginegen/families.rs; measured before the pilot). Each template is read as tokens with the comments dropped, every string `S`, every number `N`, the template's own name `F`; templates with the same tokens are one exact family, and exact families are joined at a Jaccard similarity of their 5-token shingles (single linkage):
+
+| measure | families | of one folder | largest |
+|---|---|---|---|
+| exact (same code modulo strings, numbers, name) | 462 | 362 | 9 |
+| Jaccard >= 0.95 | 307 | 185 | 24 |
+| Jaccard >= 0.9 | 230 | 121 | 24 |
+| Jaccard >= 0.8 | 165 | 77 | 60 |
+| Jaccard >= 0.7 | 116 | 51 | 126 |
+| Jaccard >= 0.5 | 50 | 22 | 330 |
+
+At 0.9 the sizes are 24, 18, 14, 13, 12, 12, 11, 10, 10, nine of 9, eight of 8, eight of 7, twelve of 6, twelve of 5, ten of 4, twenty-one of 3, twenty-five of 2 and 121 of 1. The families follow court lines (one court's doc types share a template; the largest is California's courts of appeal, the next Colorado and Utah), so a typst-to-LaTeX translator per family would mean some 230 translators. The generator therefore does not translate typst code: a folder's layout becomes data that one shared model sets in all three engines.
+
+**The model.** `typst/layout.yaml` holds every number and every block of the folder's layout, each with its rule in a comment; the typst template names the face and hands the layout to `lib/typst/xdoc.typ`:
+
+```typst
+#import "/lib/typst/xdoc.typ": xdoc, split-frontmatter
+#let font-family = ("Times New Roman", "Liberation Serif")   // the rule that names the face
+#let mn-brief(meta, body) = xdoc(yaml("layout.yaml") + (font: font-family), meta, body)
+```
+
+`fb engines gen <folder>` (tools/fb/src/enginegen/gen.rs) writes, from the layout and the template's face (typstface.rs): `latex/template.tex` (the face's package, the page, `xengine.sty` and `xdoc.sty`, the body and footnote line boxes, footnote rule and marks, list labels, the ellipsis), `latex/xdoc.lua` and `docx/xdoc.lua` (`return require("latex.xdoc")(<layout>)`, the layout as a Lua table), and `docx/reference.xml` (the cross-engine recipe at the layout's size and pitches, `{font}`, Body Text Note, the quotation, list and tail styles, the page-number footer, the section). Every generated file says so; `fb engines gen --check` fails on a stale one. `lib/pandoc/xdoc.lua` builds the same tree of blocks for both pandoc engines (`lib/latex/xdoc.lua`, `lib/docx/xdoc.lua`), rule for rule as `lib/typst/xdoc.typ` lays them out, all on the cross-engine model (xengine): the latex and docx renders break every line where typst does by construction, and what one engine does differently is fixed once, in the shared code, for every folder.
+
+**`layout.yaml`** (lengths in points, each a whole number of twips; sizes in half points):
+
+| key | what |
+|---|---|
+| `size`, `pitch: {body, single}`, `margin: {top, bottom, left, right}`, `indent`, `list_indent` | type size, the two line pitches, the page, the first-line and list indents |
+| `page_number: {align, from, front}` | the page number in a single line box (typst's footer at 30 % of the bottom margin; Word's footer, LaTeX's `footskip` where typst sets it); `from: 2` leaves page 1 unnumbered; `front: lower-roman` numbers the tables apart (cover none, tables i, ii .., body from 1: Word sections) |
+| `footnote: {size, pitch, gap, clearance}`, `quote: {left, right, above, below, gap, pitch}`, `list: {markers}` | notes (a 30 % rule, the mark and a space), quotations, bullets per nesting level |
+| `heading: [style, ..]` | levels 1, 2, ..: a style (below) with `above`/`below`; kept with what follows |
+| `cover`, `front`, `closing: [block, ..]` | the cover page (before the tables), the top of page 1 of the body, after the body |
+| `contents: {title, depth, col, hang, step, above}` | a row per heading: the text wraps before a page column `col`, `hang` under its first line, `step` per level; a leader from three spaces after it |
+| `authorities: {title, col, hang, above, group}` | from the frontmatter's `authorities: [{heading, entries: [{cite, find}]}]`: every `find` in the body and its notes marks a page; the page list is the column when wider |
+| `tail: {at, break, pitch, indent, gap, above}` | the body from the level-1 heading that starts with `at` (certificates) set after the closing |
+
+Blocks: `{text: "Case No. {case_number}", ..style}` (one paragraph; `"{field}"` alone with a list gives one per item; `<br>` in a value starts a line; `optional`), `{rule: <stroke>}`, `{columns: [{width, valign, blocks}, ..], gutter}` or `{columns: {each: <list>, per_row, row_gap, blocks}}`, `{each: <list>, blocks, between}` (an item's fields and `{.}`), `{group: [..]}` (never split), `{when: <field>, blocks}`, `{break: true}`. A style: `align`, `bold`, `italic`, `upper`, `underline`, `size`, `pitch` (`body`, `single` or points), `left`, `right`, `hang`, `indent`, `above`, `below`, `keep`. Space between two blocks is the larger of the one's `below` and the other's `above`; the first block of a container (a column, a group, the cover) sets its `above` as explicit space (typst drops a block's space there; LaTeX and Word keep it).
+
+**Pages.** typst queries its marks; LaTeX writes them to the `.aux` (`lib/latex/xdoc.sty`: `\xd@hmark`, `\xd@amark`; fb render runs pdflatex until `doc.aux` settles); Word cannot know a page, so `lib/docx/xdoc.lua` writes a needle per heading and per authority mark in document order (docxpages.rs), declares where each numbering starts (`#section`), and writes its own footers and last section (`$FORMBOOK_FOOTERS`, `$FORMBOOK_FINAL`); fb render runs the passes until the pages settle (docxpass.rs). fb render now gives the LaTeX filters `$FORMBOOK_META` too (the frontmatter as written).
+
+**Pilot** (five typst-only folders from five families; typst moved onto the model, latex and docx generated, every page of the three renders looked at; `check.sh` with `params.cross_engine: gate`):
+
+| folder | family (0.9) | engine | XENG-001..003 | tier 1 (check.sh) |
+|---|---|---|---|---|
+| `eighth-circuit/minnesota/state/court-of-appeals/motion-brief` (caption between rules, 10 pages) | 113 | typst | reference | 8 passed, 0 failed |
+| | | latex | PASS (211/211 lines) | 11 passed, 0 failed |
+| | | docx | PASS (211/211) | 12 passed, 0 failed |
+| `first-circuit/maine/state/supreme-judicial-court/petition-for-writ` (signers side by side, nested lists, certificate tail, 12 pages) | 147 | typst | reference | 8 passed, 0 failed |
+| | | latex | PASS (260/260) | 11 passed, 0 failed |
+| | | docx | PASS (260/260) | 12 passed, 0 failed |
+| `third-circuit/new-jersey/state/supreme-court/motion-brief` (letter brief, numbered from page 2, 8 pages) | 222 | typst | reference | 8 passed, 0 failed |
+| | | latex | PASS (168/168) | 11 passed, 0 failed |
+| | | docx | PASS (168/168) | 12 passed, 0 failed |
+| `eighth-circuit/arkansas/state/court-of-appeals/amicus-brief` (cover, contents, authorities, notes double spaced, 12 pages) | 5 | typst | reference | 8 passed, 0 failed |
+| | | latex | PASS (207/207) | 11 passed, 0 failed |
+| | | docx | PASS (207/207) | 12 passed, 0 failed |
+| `sixth-circuit/michigan/state/court-of-appeals/reply-brief` (unnumbered cover, tables i-ii, body from 1, service page, 9 pages) | 21 | typst | reference | 8 passed, 0 failed |
+| | | latex | PASS (220/220) | 11 passed, 0 failed |
+| | | docx | PASS (220/220) | 12 passed, 0 failed |
+
+Tier 2, open: the Minnesota motion's signature block takes page 10 alone (the model keeps the closing whole but not with the last paragraph); the contents and authorities leaders of typst and LaTeX stop at the page column, Word's run to the number (as ca9). The typst renders changed with the move (exact pitches instead of em leadings): every tier-1 check was re-run on them.
+
+**What the pilot found** (each a line or page the gate caught, fixed in the shared code):
+- typst's `overhang` (on by default) hangs a final period into the margin: it moved a centered "v." 1.4 pt and lets a line hold more; the model sets `overhang: false`.
+- LibreOffice moves the last word of a contents or authorities row to a new line unless about 0.325 em is left after the three-space lead (0.3232 to 0.3267 em, measured at 12 and 14 pt); typst's `table-row` and LaTeX's `\xd@row` keep the same room.
+- A typst show rule that marks an authority's `find` inside a word ("MCL 15.243(1)(f)") split the word, and xengine's ")(" box then started a word of its own, a break LaTeX and Word do not have: the mark matches the whole word. A mark before a line's first word is set at the end of the line before (a page early): it goes after the word, in every engine.
+- A contents row must not carry the heading's authority marks (LaTeX listed the contents page as a page of the authority).
+- Typst drops a block's space above at the start of a container (a grid cell, a block): the model sets it there as explicit space, LaTeX as an empty rule and `\vskip` (which also keeps the cover's two inches at the top of the page), Word as the paragraph's space before.
+- newtx sets a full line about 0.05 bp wider than Times New Roman: the generated LaTeX text block is 0.05 bp wider for that face (a line typst filled to 0.05 pt broke early).
+- pandoc's `\ldots` is spaced dots, wider than the glyph: LaTeX sets three periods kerned to the face's ellipsis advance inside an `/ActualText` span, which `pdftotext` reads as "…".
+- `\emph` and `\textbf` add an italic correction (0.7 pt on a line with two): the model writes font switches. `\underline` draws below the line box: a rule at the face's underline position.
+- LibreOffice collapses a paragraph's space after with the next one's space before (the larger), as typst and `\addvspace` do; a table has none, so the space around it is an empty paragraph of exact height or the next paragraph's before; a cell ends in a paragraph (a nested table without one let LibreOffice split the row). After a page break Word keeps the space before; the model writes none there.
+- A ZWSP after a slash at the start of a word ("/s/") split the word in the PDF text: the slash rule applies inside a word only ("CM/ECF").
+
+**Not yet in the model** (a folder that needs one of these is ported when it is added, in the shared code): TeX Gyre Schola in LaTeX (`lib/latex/xeschola.lua` is not run by `lib/latex/xdoc.lua`; `fb engines gen` refuses the face), the ellipsis advance of EB Garamond and Gelasio (`\textellipsis` until measured), a page list's width for a face other than Times New Roman (lib/docx/xdoc.lua `list_width`), space that fills a page (typst `v(1fr)` on a cover), a ruled box of fixed size ("court use only"), a column of ")" beside a caption, headings numbered by the template, word counts the template computes (a count given in the frontmatter works), pleading paper, the last paragraph kept with the closing, and list items that hold more than a paragraph and their nested lists.
+
+**Fan-out checklist (one folder).** Not for a folder with `docx/*.sh` (fb-595.68 step 2 owns it).
+1. Read the folder's typst template and `rules.md`; render every INPUT on the current tree first and keep the PDFs.
+2. Write `typst/layout.yaml`: every number of the old template, each with its rule; pitches as Word sets them (single = 1.15 x size for Times New Roman, double = 2 x single, 1.5 lines = 1.5 x single), every length a whole number of twips; the cover, front, closing and tail as blocks reading the sample's frontmatter as it is (no new fields; a court constant is literal text). Replace the template with the three lines above (keep its function name for `main.typ`; the face as `#let font-family`).
+3. `fb render` typst; compare with step 1 page by page; fix the layout until it looks as professional as before and every tier-1 check passes (`check.sh --engine typst`).
+4. `fb engines gen <folder>`; `fb render --engine latex` and `--engine docx` for every INPUT; `fb diff --engines` against typst. A difference is fixed in the layout when it is the folder's, in `lib/*/xdoc*` when it is the model's (re-run every pilot then); a block the model lacks is added to all three engines and to this section.
+5. `params.cross_engine: gate` in the folder's `eval.yaml` once latex and docx pass XENG-001..003 on every INPUT; `check.sh` on all three engines, 0 failed; look at every page of the three renders; `fb engines gen --check`.
+
+**Recommended fan-out.** By court, largest family first (one court's doc types share a layout: write one `layout.yaml` and copy it with the doc type's own blocks), in the order of the 0.9 families above: the California courts of appeal (24), Colorado and Utah (18; needs the ruled case-number box), Georgia, Kansas, Oklahoma and Texas (14), Idaho, Montana and the Northern Mariana Islands (13), then the 9- to 12-folder courts; one bead per circuit group as for phase 2, each starting with the gaps above that its folders need (Schola for the courts that set Century Schoolbook, `v(1fr)` covers, the ruled box). The 121 one-folder families cost the same per folder as the large ones once the vocabulary covers them.
+
 ## Tools
 
 | Tool | Role |
@@ -942,6 +1031,7 @@ The layout model is shared code, not a recipe to copy: `lib/typst/xengine.typ`, 
 | `tools/calibrate.sh [--engine E] [--no-render] [dir]` | The word-compat calibration run over `data/calibration-set.json`: G0, G2, identical and same-start line breaks, word positions (`fb diff --content`, `fb diff --breaks`). |
 | `justfile` | `just render\|overlay\|check\|diff <doc-dir>`, `just render-all\|overlay-all\|check-all`, `just lint` (`fb lint fonts`, `fb lint paths`, `fb lint rules`). Straight pipelines into `fb` and the scripts above. |
 | `fb usage doctype\|dir\|inputs\|examples\|pairs\|input\|example\|pair\|output\|overlay <doc-dir> ...` | Prints the `usage/` and `.overlay/` names of a doc folder, so no script parses file names. |
+| `fb engines families [--threshold T] [--json FILE]`, `fb engines gen <doc-dir>... [--check]` | The state templates clustered into families; the latex and docx engines of a folder on the shared document model, written (or checked) from its `typst/layout.yaml` and face ("Generated engines" above). |
 | `tools/check-selftest.sh <court-dir>` | Mutation test of the checker. |
 | `tools/check/*.awk`, `tools/check/lib.sh` | The checks. Dependencies: gawk, yq (mikefarah), jq, typst, poppler (`pdfinfo pdffonts pdftotext pdftohtml pdfimages`), `shasum`; latex: pandoc, pdflatex (TeX Live 2025), or tectonic or xelatex; docx: pandoc, LibreOffice (`soffice`), unzip, xmllint. |
 

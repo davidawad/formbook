@@ -50,6 +50,8 @@ A court PR may deliver docx as BLOCKED or partial if it lists the exact failing 
 
 ## The docx template without shell (fb-595.68)
 
+A folder on the shared document model (docs/EVAL-LOOP.md, "Generated engines"; fb-595.54.12) does not write these by hand: `fb engines gen` writes its `docx/reference.xml` and a one-line `docx/xdoc.lua` (`require("docx.xdoc")`, lib/docx/xdoc.lua) from its `typst/layout.yaml`; change the layout and generate again.
+
 A court's docx folder holds declarative inputs only: `reference.xml` (the Word styles), `*.lua` filters (pandoc runs every top-level `docx/*.lua`, in name order; a module a filter loads with `dofile` goes in a subfolder, such as `docx/lib/`), and nothing else that runs. `fb render` (Rust) builds `reference.docx`, runs the pandoc passes, measures the pages, writes the footers and the last section and packs the archive. No `docx/*.sh`, no committed binary `reference.docx`, no `.shell-safety-baseline.json` entry under `courts/`.
 
 **`docx/reference.xml`** (tools/fb/src/docxref.rs; the grammar is in its module doc):
