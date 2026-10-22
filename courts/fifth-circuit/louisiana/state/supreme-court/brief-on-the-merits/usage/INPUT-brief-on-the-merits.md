@@ -251,10 +251,12 @@ authorities:
     kind: case
     name: "O’Callaghan v. Attorney General"
     cite: "[1993] 2 I.R. 17, 26"
+    sort: "ocallaghan v attorney general"
   odell:
     kind: case
     name: "O’Dell v. Netherland"
     cite: "521 U.S. 151 (1997)"
+    sort: "odell v netherland"
   roberts:
     kind: case
     name: "Ohio v. Roberts"
@@ -517,43 +519,43 @@ authorities:
     cite: "549 U.S. 406 (2007)"
   cr930:
     kind: statute
-    name: "La. C. Cr. P. art. 930.8(A)(2)"
+    cite: "La. C. Cr. P. art. 930.8(A)(2)"
   const3:
     kind: statute
-    name: "La. Const. art. I, § 3"
+    cite: "La. Const. art. I, § 3"
   const12:
     kind: statute
-    name: "Louisiana Constitution Article I, § 12"
+    cite: "Louisiana Constitution Article I, § 12"
   const13:
     kind: statute
-    name: "Louisiana Constitution Article I, § 13"
+    cite: "Louisiana Constitution Article I, § 13"
   amar:
     kind: other
-    name: "Akhil Reed Amar, Reinventing Juries: Ten Suggested Reforms, 28 U.C. Davis L. Rev. 1169, 1191 (1995)"
+    cite: "Akhil Reed Amar, Reinventing Juries: Ten Suggested Reforms, 28 U.C. Davis L. Rev. 1169, 1191 (1995)"
   ali:
     kind: other
-    name: "ALI, Code of Criminal Procedure §355 (1930)"
+    cite: "ALI, Code of Criminal Procedure §355 (1930)"
   aba:
     kind: other
-    name: "American Bar Association, Project on Standards for Criminal Justice, Trial By Jury § 1.1 (1968)"
+    cite: "American Bar Association, Project on Standards for Criminal Justice, Trial By Jury § 1.1 (1968)"
   lieb:
     kind: other
-    name: "Ethan J. Lieb, A Comparison of Criminal Jury Decision Rules in Democratic Countries, 5 Ohio St. J. Crim. L. 629, 642 (2008)"
+    cite: "Ethan J. Lieb, A Comparison of Criminal Jury Decision Rules in Democratic Countries, 5 Ohio St. J. Crim. L. 629, 642 (2008)"
   exonerations:
     kind: other
-    name: "National Registry of Exonerations, see https://bit.ly/3091xdd (last visited 4/4/2022)"
+    cite: "National Registry of Exonerations, see https://bit.ly/3091xdd (last visited 4/4/2022)"
   oyez:
     kind: other
-    name: "Oyez, Edwards v. Vannoy, https://www.oyez.org/cases/2020/19-5807"
+    cite: "Oyez, Edwards v. Vannoy, https://www.oyez.org/cases/2020/19-5807"
   lloyd:
     kind: other
-    name: "Sally Lloyd-Bostock & Cheryl Thomas, Decline of the “Little Parliament”: Juries and Jury Reform in England and Wales, 62-SPG Law & Contemp. Probs. 7, 36 (1999)"
+    cite: "Sally Lloyd-Bostock & Cheryl Thomas, Decline of the “Little Parliament”: Juries and Jury Reform in England and Wales, 62-SPG Law & Contemp. Probs. 7, 36 (1999)"
   census:
     kind: other
-    name: "U.S. Census Bureau, State Population Totals, https://bit.ly/363ZLxN"
+    cite: "U.S. Census Bureau, State Population Totals, https://bit.ly/363ZLxN"
   records:
     kind: other
-    name: "7 Records of the Louisiana Constitutional Convention of 1973: Convention Transcripts 1184–89 (La. Constitutional Convention Records Comm’n 1977)"
+    cite: "7 Records of the Louisiana Constitutional Convention of 1973: Convention Transcripts 1184–89 (La. Constitutional Convention Records Comm’n 1977)"
 ---
 
 # STATEMENT OF THE CASE
