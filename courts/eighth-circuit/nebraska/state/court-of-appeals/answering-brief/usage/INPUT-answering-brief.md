@@ -10,16 +10,16 @@ proceeding: "APPEAL FROM THE DISTRICT COURT OF GAGE COUNTY, NEBRASKA"
 judge: "The Honorable Ricky A. Schreiner, District Judge"
 brief_title: "BRIEF OF APPELLEE"
 counsel:
-  - lines: ["MICHAEL T. HILGERS, #24483", "Nebraska Attorney General", "", "Melissa R. Vincent, #23464", "Assistant Attorney General", "P.O. Box 98920", "Lincoln, NE 68509-8920", "Tel: (402) 471-2682", "melissa.vincent@nebraska.gov", "", "Attorneys for Appellee"]
+  - lines: ["MICHAEL T. HILGERS, #24483", "Nebraska Attorney General", " ", "Melissa R. Vincent, #23464", "Assistant Attorney General", "P.O. Box 98920", "Lincoln, NE 68509-8920", "Tel: (402) 471-2682", "melissa.vincent@nebraska.gov", " ", "Attorneys for Appellee"]
 signature:
-  - label: ""
+  - label: " "
     lines: ["STATE OF NEBRASKA, Appellee,"]
   - label: "BY"
     lines: ["MICHAEL T. HILGERS, #24483", "Nebraska Attorney General"]
   - label: "BY"
-    lines: ["s/Melissa R. Vincent, #23464", "Assistant Attorney General", "P.O. Box 98920", "Lincoln, NE 68509-8920", "Tel: (402) 471-2682", "melissa.vincent@nebraska.gov", "", "Attorneys for Appellee"]
+    lines: ["s/Melissa R. Vincent, #23464", "Assistant Attorney General", "P.O. Box 98920", "Lincoln, NE 68509-8920", "Tel: (402) 471-2682", "melissa.vincent@nebraska.gov", " ", "Attorneys for Appellee"]
 cert_signature:
-  - label: ""
+  - label: " "
     lines: ["s/Melissa R. Vincent, #23464", "Assistant Attorney General"]
 authorities:
   - heading: "CASES"

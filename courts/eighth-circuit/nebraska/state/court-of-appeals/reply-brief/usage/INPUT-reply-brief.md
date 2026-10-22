@@ -9,9 +9,9 @@ proceeding: "Appeal from the District Court of Hall County, Nebraska"
 judge: "Honorable Andew C. Butler, District Judge"
 brief_title: "APPELLANTS’ REPLY BRIEF"
 counsel:
-  - lines: ["SUBMITTED BY:", "", "Jared J, Krejci, #25785", "SMITH, JOHNSON, ALLEN,", "CONNICK & HANSEN", "104 N. Wheeler Avenue", "Grand Island, NE 68801", "(308) 382-1930", "jkrejci@gilawfirm.com", "Attorney for Appellants, Harder Capital, LLC and Ryan M. Harder"]
+  - lines: ["SUBMITTED BY:", " ", "Jared J, Krejci, #25785", "SMITH, JOHNSON, ALLEN,", "CONNICK & HANSEN", "104 N. Wheeler Avenue", "Grand Island, NE 68801", "(308) 382-1930", "jkrejci@gilawfirm.com", "Attorney for Appellants, Harder Capital, LLC and Ryan M. Harder"]
 signature:
-  - label: ""
+  - label: " "
     lines: ["HARDER CAPITAL, LLC and RYAN M. HARDER, Appellants"]
   - label: "BY"
     lines: ["SMITH, JOHNSON, ALLEN, CONNICK & HANSEN", "104 N. Wheeler Avenue", "Grand Island, NE 68801", "Telephone: (308) 382-1930", "jkrejci@gilawfirm.com"]

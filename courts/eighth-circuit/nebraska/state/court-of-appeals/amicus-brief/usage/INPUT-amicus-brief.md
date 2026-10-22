@@ -15,8 +15,8 @@ counsel:
 date: "Dated this 15th day of July, 2016."
 submitted: "Respectfully submitted,"
 signature_columns:
-  - lines: ["Robert McEwen, # 24817", "Sarah Helvey, #23410", "NEBRASKA APPLESEED CENTER FOR LAW IN THE PUBLIC INTEREST", "941 “O” Street, Suite 920", "Lincoln, NE 68508", "402-438-8853", "rmcewen@neappleseed.org", "shelvey@neappleseed.org", "", "*Attorneys for Nebraska Appleseed Center for Law in the Public Interest*"]
-  - lines: ["Daniel S. Volchok", "Kevin M. Lamb", "WILMER CUTLER PICKERING HALE AND DORR LLP", "1875 Pennsylvania Avenue N.W.", "Washington, D.C. 20006", "202-663-6000", "daniel.volchok@wilmerhale.com", "kevin.lamb@wilmerhale.com", "", "Robert F. Bartle, #15010", "BARTLE & GEIER LAW FIRM", "1141 H St., P.O. Box 83104", "Lincoln, NE 68508", "402-476-2847", "rfbartle@bartlegeierlaw.com", "", "*Attorneys for the Child Welfare League of America, the National Center for Adoption and Permanency, Voices for Children in Nebraska, and the Donaldson Adoption Institute*"]
+  - lines: ["Robert McEwen, # 24817", "Sarah Helvey, #23410", "NEBRASKA APPLESEED CENTER FOR LAW IN THE PUBLIC INTEREST", "941 “O” Street, Suite 920", "Lincoln, NE 68508", "402-438-8853", "rmcewen@neappleseed.org", "shelvey@neappleseed.org", " ", "*Attorneys for Nebraska Appleseed Center for Law in the Public Interest*"]
+  - lines: ["Daniel S. Volchok", "Kevin M. Lamb", "WILMER CUTLER PICKERING HALE AND DORR LLP", "1875 Pennsylvania Avenue N.W.", "Washington, D.C. 20006", "202-663-6000", "daniel.volchok@wilmerhale.com", "kevin.lamb@wilmerhale.com", " ", "Robert F. Bartle, #15010", "BARTLE & GEIER LAW FIRM", "1141 H St., P.O. Box 83104", "Lincoln, NE 68508", "402-476-2847", "rfbartle@bartlegeierlaw.com", " ", "*Attorneys for the Child Welfare League of America, the National Center for Adoption and Permanency, Voices for Children in Nebraska, and the Donaldson Adoption Institute*"]
 authorities:
   - heading: "CASES"
     entries:

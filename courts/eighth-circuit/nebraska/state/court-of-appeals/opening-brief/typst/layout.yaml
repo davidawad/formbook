@@ -1,0 +1,68 @@
+# Nebraska Court of Appeals (nebctapp): appellant's brief. The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to Neb. Ct. R. App. P. § 2-103 and § 2-109 (../../rules.md, NEBCTAPP-*); lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # NEBCTAPP-FORM-006: no less than 12 nor more than 13 point
+pitch:
+  body: 15.85             # NEBCTAPP-FORM-004: lines spaced at 1.15 (Word's 1.15 x the 13.8 pt single line, to the twip)
+  single: 13.8            # cover, headings, tables, signature: single (1.15 x 12 pt)
+margin: {top: 108, bottom: 108, left: 108, right: 108}   # NEBCTAPP-FORM-003: 1.5 inches on all sides
+indent: 36
+page_number: {align: center, from: 2}   # NEBCTAPP-FORM-008: the cover is page one, unnumbered; numbers in the bottom margin
+footnote: {size: 12, pitch: single, gap: 7}   # NEBCTAPP-FORM-005: footnotes are not permitted; a sample's note keeps text size
+quote: {left: 36, right: 36, above: 12, below: 12, pitch: body}   # NEBCTAPP-FORM-004: quotations at the text's spacing
+# NEBCTAPP-FORM-004: extra space before headings is allowed. Level 1 a section, centred, bold; level 2 a point heading,
+# bold, hanging; level 3 a sub-point, bold, from half an inch; level 4 a centred numeral (propositions).
+heading:
+  - {align: center, bold: true, above: 16.8, below: 12}
+  - {bold: true, hang: 36, above: 14.4, below: 10.8}
+  - {bold: true, left: 36, hang: 36, above: 13.2, below: 10.8}
+  - {align: center, bold: true, above: 12, below: 7.2}
+# The cover (NEBCTAPP-CONT-001, -002): the title page and page one: case number, court, caption (plaintiff first),
+# the court and county appealed from, the judge, the brief's title between rules, the filing attorney.
+cover:
+  - {text: "{case_number}", align: center, bold: true}
+  - {text: "{court_line}", align: center, bold: true, above: 9.6}
+  - {rule: 0.5, above: 12}
+  - each: caption
+    above: 12
+    between:
+      - {text: "v.", align: center, above: 3.6, below: 6}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, optional: true}
+  - {rule: 0.5, above: 12}
+  - {text: "{proceeding}", align: center, above: 12}
+  - {text: "{judge}", align: center, optional: true}
+  - {rule: 0.5, above: 12}
+  - {text: "{brief_title}", align: center, bold: true, above: 12}
+  - {rule: 0.5, above: 12}
+  - each: counsel
+    above: 72
+    blocks:
+      - {text: "{lines}", below: 7.2}
+# NEBCTAPP-CONT-003: a table of contents with page references and a table of authorities with page references.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 36, above: 4.2}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 6
+  group: {bold: true, above: 13.2, below: 6}
+# The signature after the conclusion (NEBCTAPP-CONT-001 names the filer): rows of an optional label and lines, right of
+# centre, never split.
+closing:
+  - group:
+      - each: signature
+        blocks:
+          - columns:
+              - width: 216
+                blocks:
+                  - {text: "{label}", bold: true, align: right}
+              - blocks:
+                  - {text: "{lines}"}
+            gutter: 7.2
+            above: 10.8
+    above: 14.4
+# NEBCTAPP-CERT-001: the word-count certificate ends the brief, after the signature, at the text's spacing.
+tail: {at: "Certificate", pitch: body, indent: 36, above: 16.8}

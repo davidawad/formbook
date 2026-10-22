@@ -9,9 +9,9 @@ proceeding: "Appeal from the District Court of Hall County, Nebraska"
 judge: "Honorable Andew C. Butler, District Judge"
 brief_title: "BRIEF OF APPELLANT"
 counsel:
-  - lines: ["SUBMITTED BY:", "", "Jared J, Krejci, #25785", "SMITH, JOHNSON, ALLEN,", "CONNICK & HANSEN", "104 N. Wheeler Avenue", "Grand Island, NE 68801", "(308) 382-1930", "jkrejci@gilawfirm.com", "Attorney for Appellants, Harder Capital, LLC and Ryan M. Harder"]
+  - lines: ["SUBMITTED BY:", " ", "Jared J, Krejci, #25785", "SMITH, JOHNSON, ALLEN,", "CONNICK & HANSEN", "104 N. Wheeler Avenue", "Grand Island, NE 68801", "(308) 382-1930", "jkrejci@gilawfirm.com", "Attorney for Appellants, Harder Capital, LLC and Ryan M. Harder"]
 signature:
-  - label: ""
+  - label: " "
     lines: ["HARDER CAPITAL, LLC and RYAN M. HARDER, Appellants"]
   - label: "BY"
     lines: ["SMITH, JOHNSON, ALLEN, CONNICK & HANSEN", "104 N. Wheeler Avenue", "Grand Island, NE 68801", "Telephone: (308) 382-1930", "jkrejci@gilawfirm.com"]
@@ -166,21 +166,21 @@ Notwithstanding non-equitable claims being referred to arbitration, the district
 
 > THE COURT: Where does Big Iron anticipate this being, this bond, value-wise? Just a general idea. I mean, I get –
 
-> [COUNSEL FOR BIG IRON]: No, I don’t anticipate a $5,000 bond. I think that’s ridiculous, but I do anticipate like a $150,000 bond, something in that nature, which whether we put up a cash bond with the clerk or whether we buy a bond and submit it, either way.
+> \[COUNSEL FOR BIG IRON]: No, I don’t anticipate a $5,000 bond. I think that’s ridiculous, but I do anticipate like a $150,000 bond, something in that nature, which whether we put up a cash bond with the clerk or whether we buy a bond and submit it, either way.
 
 > But yeah, that’s -- I mean, realistically, I think Big Iron has an expectation that a real bond is going to be put in place, and it’s going to be reflective of what the actual damages would be.
 
 > In this case, I mean, you know, if you’re looking at 2 percent of an $8 million figure, there you go. I mean, I think you’re fairly right on with that….
 
-> [COUNSEL FOR BIG IRON]: I think the other thing to consider here, whatever decision you make today on what the bond is can always be revisited. You’re not entering a static number that if we don’t get this case resolved for two years –
+> \[COUNSEL FOR BIG IRON]: I think the other thing to consider here, whatever decision you make today on what the bond is can always be revisited. You’re not entering a static number that if we don’t get this case resolved for two years –
 
 > THE COURT: And today I’m not entering a permanent injunction either.
 
-> [COUNSEL FOR BIG IRON]: Correct. So I guess –
+> \[COUNSEL FOR BIG IRON]: Correct. So I guess –
 
 > THE COURT: I could decide tomorrow, wake up, I don’t like it, and change it.
 
-> [COUNSEL FOR BIG IRON]: You absolutely could. I guess what I’m just trying to say is if the Court decides, okay, I’m going put together an injunction here and I’m going to attach it a $275,000 bond to it, and we’re six months down the road and Mr. Krejci’s client says, gee, Your Honor, the damages are actually going to be much greater because X, Y and Z, and we’re here and you decide, you know what, you’re probably right, I’m going to double that bond, that’s -- that’s your choice, Your Honor.
+> \[COUNSEL FOR BIG IRON]: You absolutely could. I guess what I’m just trying to say is if the Court decides, okay, I’m going put together an injunction here and I’m going to attach it a $275,000 bond to it, and we’re six months down the road and Mr. Krejci’s client says, gee, Your Honor, the damages are actually going to be much greater because X, Y and Z, and we’re here and you decide, you know what, you’re probably right, I’m going to double that bond, that’s -- that’s your choice, Your Honor.
 
 > So I guess what I’m saying is I don’t think you’re all that unreasonable in saying okay, if we put a $275,000 number on it today, and if it’s an issue, we’ll revisit it…
 
