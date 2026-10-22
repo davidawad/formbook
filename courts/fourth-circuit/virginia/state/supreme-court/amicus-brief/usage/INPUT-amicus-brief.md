@@ -106,354 +106,431 @@ authorities:
     kind: case
     name: "Ahart v. Colo. Dep’t of Corr."
     cite: "964 P.2d 517 (Colo. 1998)"
+    sort: "ahart v colo dept of corr 964 p2d 517 colo 1998"
   ashcroft-v-iqbal:
     kind: case
     name: "Ashcroft v. Iqbal"
     cite: "556 U.S. 662 (2009)"
+    sort: "ashcroft v iqbal 556 us 662 2009"
   camara:
     kind: case
     name: "Camara v. Municipal Ct."
     cite: "387 U.S. 523 (1967)"
+    sort: "camara v municipal ct 387 us 523 1967"
   carlisle:
     kind: case
     name: "Carlisle v. State ex rel. Trammell"
     cite: "163 So. 2d 596 (Ala. 1964)"
+    sort: "carlisle v state ex rel trammell 163 so 2d 596 ala 1964"
   carpenter:
     kind: case
     name: "Carpenter v. United States"
     cite: "138 S. Ct. 2206 (2018)"
+    sort: "carpenter v united states 138 s ct 2206 2018"
   carson:
     kind: case
     name: "Carson v. State ex rel. Price"
     cite: "144 S.E.2d 384 (Ga. 1965)"
+    sort: "carson v state ex rel price 144 se2d 384 ga 1965"
   britton:
     kind: case
     name: "Commonwealth v. Britton"
     cite: "229 A.3d 590 (Pa. 2020)"
+    sort: "commonwealth v britton 229 a3d 590 pa 2020"
   clore:
     kind: case
     name: "Commonwealth v. E.A. Clore Sons, Inc."
     cite: "281 S.E.2d 901 (Va. 1981)"
+    sort: "commonwealth v ea clore sons inc 281 se2d 901 va 1981"
   ehlers:
     kind: case
     name: "County of Henrico v. Ehlers"
     cite: "379 S.E.2d 457 (Va. 1989)"
+    sort: "county of henrico v ehlers 379 se2d 457 va 1989"
   cromartie:
     kind: case
     name: "Cromartie v. Billings"
     cite: "837 S.E.2d 247 (Va. 2020)"
+    sort: "cromartie v billings 837 se2d 247 va 2020"
   davis:
     kind: case
     name: "Davis v. United States"
     cite: "564 U.S. 229 (2011)"
+    sort: "davis v united states 564 us 229 2011"
   dickerson:
     kind: case
     name: "Dickerson v. United States"
     cite: "530 U.S. 428 (2000)"
+    sort: "dickerson v united states 530 us 428 2000"
   elkins:
     kind: case
     name: "Elkins v. United States"
     cite: "364 U.S. 206 (1960)"
+    sort: "elkins v united states 364 us 206 1960"
   finns-liquor:
     kind: case
     name: "Finn’s Liquor Shop, Inc. v. State Liquor Auth."
     cite: "249 N.E.2d 440 (N.Y. 1969)"
+    sort: "finns liquor shop inc v state liquor auth 249 ne2d 440 ny 1969"
   jardines:
     kind: case
     name: "Florida v. Jardines"
     cite: "569 U.S. 1 (2013)"
+    sort: "florida v jardines 569 us 1 2013"
   frisbie:
     kind: case
     name: "Frisbie v. Butler"
     cite: "1 Kirby 213 (Conn. Super. Ct. 1787)"
+    sort: "frisbie v butler 1 kirby 213 conn super ct 1787"
   goldin:
     kind: case
     name: "Goldin v. Pub. Util. Comm’n"
     cite: "23 Cal. 3d 638 (Cal. 1979)"
+    sort: "goldin v pub util commn 23 cal 3d 638 cal 1979"
   grafmuller:
     kind: case
     name: "Grafmuller v. Commonwealth"
     cite: "778 S.E.2d 114 (Va. 2015)"
+    sort: "grafmuller v commonwealth 778 se2d 114 va 2015"
   grimes:
     kind: case
     name: "Grimes v. Comm’r"
     cite: "82 F.3d 286 (9th Cir. 1996)"
+    sort: "grimes v commr 82 f3d 286 9th cir 1996"
   grumon:
     kind: case
     name: "Grumon v. Raymond"
     cite: "1 Conn. 40 (1814)"
+    sort: "grumon v raymond 1 conn 40 1814"
   hall:
     kind: case
     name: "Hall v. Commonwealth"
     cite: "121 S.E. 154 (Va. 1924)"
+    sort: "hall v commonwealth 121 se 154 va 1924"
   henry:
     kind: case
     name: "Henry v. Commonwealth"
     cite: "529 S.E.2d 796 (Va. App. 2000)"
+    sort: "henry v commonwealth 529 se2d 796 va app 2000"
   herring:
     kind: case
     name: "Herring v. United States"
     cite: "555 U.S. 135 (2009)"
+    sort: "herring v united states 555 us 135 2009"
   highlander:
     kind: case
     name: "Highlander v. Va. Dep’t of Wildlife Res."
     cite: "No. CL23-4100 (Va. Cir. Ct. Oct. 27, 2023), appeal filed (Va. Ct. App. Dec. 6, 2023)"
+    sort: "highlander v va dept of wildlife res no cl234100 va cir ct oct 27 2023 appeal filed va ct app dec 6 2023"
   burch:
     kind: case
     name: "In re Burch"
     cite: "294 P.3d 1155 (Kan. 2013)"
+    sort: "in re burch 294 p3d 1155 kan 2013"
   lopez-mendoza:
     kind: case
     name: "INS v. Lopez-Mendoza"
     cite: "468 U.S. 1032 (1984)"
+    sort: "ins v lopezmendoza 468 us 1032 1984"
   jefferson-parish:
     kind: case
     name: "Jefferson Parish v. Bayou Landing, Ltd."
     cite: "350 So. 2d 158 (La. 1977)"
+    sort: "jefferson parish v bayou landing ltd 350 so 2d 158 la 1977"
   jessop:
     kind: case
     name: "Jessop v. City of Fresno"
     cite: "936 F.3d 937 (9th Cir. 2019)"
+    sort: "jessop v city of fresno 936 f3d 937 9th cir 2019"
   jones-1842:
     kind: case
     name: "Jones v. Commonwealth"
     cite: "40 Va. 748 (1842)"
+    sort: "jones v commonwealth 40 va 748 1842"
   jones-2017:
     kind: case
     name: "Jones v. Commonwealth"
     cite: "795 S.E.2d 705 (Va. 2017)"
+    sort: "jones v commonwealth 795 se2d 705 va 2017"
   jones-latexo:
     kind: case
     name: "Jones v. Latexo Indep. Sch. Dist."
     cite: "499 F. Supp. 223 (E.D. Tex. 1980)"
+    sort: "jones v latexo indep sch dist 499 f supp 223 ed tex 1980"
   leach-lewis:
     kind: case
     name: "Leach-Lewis v. Bd. of Supervisors"
     cite: "No. 0815-22-4, 2023 WL 3956770 (Va. Ct. App. June 13, 2023)"
+    sort: "leachlewis v bd of supervisors no 0815224 2023 wl 3956770 va ct app june 13 2023"
   little-v-bareme:
     kind: case
     name: "Little v. Bareme"
     cite: "6 U.S. (2 Cranch) 170 (1804)"
+    sort: "little v bareme 6 us 2 cranch 170 1804"
   lowe:
     kind: case
     name: "Lowe v. Commonwealth"
     cite: "337 S.E.2d 273 (Va. 1985)"
+    sort: "lowe v commonwealth 337 se2d 273 va 1985"
   mapp:
     kind: case
     name: "Mapp v. Ohio"
     cite: "367 U.S. 643 (1961)"
+    sort: "mapp v ohio 367 us 643 1961"
   mcclannan:
     kind: case
     name: "McClannan v. Chaplain"
     cite: "116 S.E. 495 (Va. 1923)"
+    sort: "mcclannan v chaplain 116 se 495 va 1923"
   miller-grice:
     kind: case
     name: "Miller v. Grice"
     cite: "31 S.C.L. (2 Rich.) 27 (S.C. 1845)"
+    sort: "miller v grice 31 scl 2 rich 27 sc 1845"
   miranda:
     kind: case
     name: "Miranda v. Arizona"
     cite: "384 U.S. 436 (1966)"
+    sort: "miranda v arizona 384 us 436 1966"
   olson:
     kind: case
     name: "Olson v. Comm’r of Pub. Safety"
     cite: "371 N.W.2d 552 (Minn. 1985)"
+    sort: "olson v commr of pub safety 371 nw2d 552 minn 1985"
   plymouth-sedan:
     kind: case
     name: "One 1958 Plymouth Sedan v. Pennsylvania"
     cite: "380 U.S. 693 (1965)"
+    sort: "one 1958 plymouth sedan v pennsylvania 380 us 693 1965"
   scott:
     kind: case
     name: "Pa. Bd. of Prob. & Parole v. Scott"
     cite: "524 U.S. 357 (1998)"
+    sort: "pa bd of prob  parole v scott 524 us 357 1998"
   perrin:
     kind: case
     name: "Perrin v. Calhoun"
     cite: "4 S.C.L. (2 Brev.) 248 (S.C. 1808)"
+    sort: "perrin v calhoun 4 scl 2 brev 248 sc 1808"
   pike:
     kind: case
     name: "Pike v. Gallagher"
     cite: "829 F. Supp 1254 (D.N.M. 1993)"
+    sort: "pike v gallagher 829 f supp 1254 dnm 1993"
   pizzarello:
     kind: case
     name: "Pizzarello v. United States"
     cite: "408 F.2d 579 (2d Cir. 1969)"
+    sort: "pizzarello v united states 408 f2d 579 2d cir 1969"
   rickards:
     kind: case
     name: "Rickards v. State"
     cite: "77 A.2d 199 (Del. 1950)"
+    sort: "rickards v state 77 a2d 199 del 1950"
   safford:
     kind: case
     name: "Safford Unified Sch. Dist. No. 1 v. Redding"
     cite: "557 U.S. 364 (2009)"
+    sort: "safford unified sch dist no 1 v redding 557 us 364 2009"
   samson:
     kind: case
     name: "Samson v. California"
     cite: "547 U.S. 843 (2006)"
+    sort: "samson v california 547 us 843 2006"
   sarafin:
     kind: case
     name: "Sarafin v. Commonwealth"
     cite: "764 S.E.2d 71 (Va. 2014)"
+    sort: "sarafin v commonwealth 764 se2d 71 va 2014"
   savina:
     kind: case
     name: "Savina Home Indus. v. Sec’y of Lab."
     cite: "594 F.2d 1358 (10th Cir. 1979)"
+    sort: "savina home indus v secy of lab 594 f2d 1358 10th cir 1979"
   sims:
     kind: case
     name: "Sims v. Collection Div. of Utah State Tax Comm’n"
     cite: "841 P.2d 6 (Utah 1992)"
+    sort: "sims v collection div of utah state tax commn 841 p2d 6 utah 1992"
   state-brown:
     kind: case
     name: "State v. Brown"
     cite: "792 N.E.2d 175 (Ohio 2003)"
+    sort: "state v brown 792 ne2d 175 ohio 2003"
   cline:
     kind: case
     name: "State v. Cline"
     cite: "617 N.W.2d 277 (Iowa 2000)"
+    sort: "state v cline 617 nw2d 277 iowa 2000"
   leonard:
     kind: case
     name: "State v. Leonard"
     cite: "943 N.W.2d 149 (Minn. 2020)"
+    sort: "state v leonard 943 nw2d 149 minn 2020"
   lussier:
     kind: case
     name: "State v. Lussier"
     cite: "757 A.2d 1017 (Vt. 2000)"
+    sort: "state v lussier 757 a2d 1017 vt 2000"
   reynolds:
     kind: case
     name: "State v. Reynolds"
     cite: "504 S.W.3d 283 (Tenn. 2016)"
+    sort: "state v reynolds 504 sw3d 283 tenn 2016"
   wright:
     kind: case
     name: "State v. Wright"
     cite: "961 N.W.2d 396 (Iowa 2021)"
+    sort: "state v wright 961 nw2d 396 iowa 2021"
   tanzin:
     kind: case
     name: "Tanzin v. Tanvir"
     cite: "592 U.S. 43 (2020)"
+    sort: "tanzin v tanvir 592 us 43 2020"
   tirado:
     kind: case
     name: "Tirado v. Comm’r"
     cite: "689 F.2d 307 (2d Cir. 1982)"
+    sort: "tirado v commr 689 f2d 307 2d cir 1982"
   turner:
     kind: case
     name: "Turner v. City of Lawton"
     cite: "733 P.2d 375 (Okla. 1986)"
+    sort: "turner v city of lawton 733 p2d 375 okla 1986"
   calandra:
     kind: case
     name: "United States v. Calandra"
     cite: "414 U.S. 338 (1974)"
+    sort: "united states v calandra 414 us 338 1974"
   good-real-property:
     kind: case
     name: "United States v. James Daniel Good Real Prop."
     cite: "510 U.S. 43 (1993)"
+    sort: "united states v james daniel good real prop 510 us 43 1993"
   janis:
     kind: case
     name: "United States v. Janis"
     cite: "428 U.S. 433 (1976)"
+    sort: "united states v janis 428 us 433 1976"
   leon:
     kind: case
     name: "United States v. Leon"
     cite: "468 U.S. 897 (1984)"
+    sort: "united states v leon 468 us 897 1984"
   lindsey:
     kind: case
     name: "United States v. Lindsey"
     cite: "877 F.2d 777 (9th Cir. 1989)"
+    sort: "united states v lindsey 877 f2d 777 9th cir 1989"
   ramsey:
     kind: case
     name: "United States v. Ramsey"
     cite: "431 U.S. 606 (1977)"
+    sort: "united states v ramsey 431 us 606 1977"
   vasquez:
     kind: case
     name: "Vasquez v. Commonwealth"
     cite: "781 S.E.2d 920 (Va. 2016)"
+    sort: "vasquez v commonwealth 781 se2d 920 va 2016"
   vlaming:
     kind: case
     name: "Vlaming v. W. Point Sch. Bd."
     cite: "895 S.E.2d 705 (Va. 2023)"
+    sort: "vlaming v w point sch bd 895 se2d 705 va 2023"
   weeks:
     kind: case
     name: "Weeks v. United States"
     cite: "232 U.S. 383 (1914)"
+    sort: "weeks v united states 232 us 383 1914"
   zadeh:
     kind: case
     name: "Zadeh v. Robinson"
     cite: "928 F.3d 457 (5th Cir. 2019)"
+    sort: "zadeh v robinson 928 f3d 457 5th cir 2019"
   usc-42-1983:
     kind: statute
-    name: "42 U.S.C. § 1983"
-    cite: ""
+    cite: "42 U.S.C. § 1983"
+    sort: " 42 usc  1983"
   va-code-10-1-610-b:
     kind: statute
-    name: "Va. Code Ann. § 10.1-610(B)"
-    cite: ""
+    cite: "Va. Code Ann. § 10.1-610(B)"
+    sort: " va code ann  101610b"
   va-code-15-2-2286-a-16:
     kind: statute
-    name: "Va. Code Ann. § 15.2-2286(A)(16)"
-    cite: ""
+    cite: "Va. Code Ann. § 15.2-2286(A)(16)"
+    sort: " va code ann  1522286a16"
   va-code-15-2-2312:
     kind: statute
-    name: "Va. Code Ann. § 15.2-2312"
-    cite: ""
+    cite: "Va. Code Ann. § 15.2-2312"
+    sort: " va code ann  1522312"
   va-code-15-2-2314:
     kind: statute
-    name: "Va. Code Ann. § 15.2-2314"
-    cite: ""
+    cite: "Va. Code Ann. § 15.2-2314"
+    sort: " va code ann  1522314"
   va-code-19-2-59:
     kind: statute
-    name: "Va. Code Ann. § 19.2-59"
-    cite: ""
+    cite: "Va. Code Ann. § 19.2-59"
+    sort: " va code ann  19259"
   va-code-22-1-289-033:
     kind: statute
-    name: "Va. Code Ann. § 22.1-289.033"
-    cite: ""
+    cite: "Va. Code Ann. § 22.1-289.033"
+    sort: " va code ann  221289033"
   fczo-1108-1-g-3:
     kind: statute
-    name: "Fairfax County Zoning Ordinance § 1108.1(G)(3)"
-    cite: ""
+    cite: "Fairfax County Zoning Ordinance § 1108.1(G)(3)"
+    sort: " fairfax county zoning ordinance  11081g3"
   fczo-1108-1-g-4:
     kind: statute
-    name: "Fairfax County Zoning Ordinance § 1108.1(G)(4)"
-    cite: ""
+    cite: "Fairfax County Zoning Ordinance § 1108.1(G)(4)"
+    sort: " fairfax county zoning ordinance  11081g4"
   us-const-amend-4:
     kind: constitution
-    name: "U.S. Const. amend. IV"
-    cite: ""
+    cite: "U.S. Const. amend. IV"
+    sort: " us const amend iv"
   us-const-amend-5:
     kind: constitution
-    name: "U.S. Const. amend. V"
-    cite: ""
+    cite: "U.S. Const. amend. V"
+    sort: " us const amend v"
   howard-commentaries:
     kind: other
     name: "A.E. Dick Howard, Commentaries on the Constitution of Virginia"
     cite: "(1974)"
+    sort: "ae dick howard commentaries on the constitution of virginia 1974"
   miller-wright-criminal-procedures:
     kind: other
     name: "Marc L. Miller & Ronald F. Wright, Criminal Procedures: The Police"
     cite: "(3d ed. 2007)"
+    sort: "marc l miller  ronald f wright criminal procedures the police 3d ed 2007"
   schwartz-qualified-immunity:
     kind: other
     name: "Joanna C. Schwartz, The Case Against Qualified Immunity"
     cite: "93 Notre Dame L. Rev. 1797 (2018)"
+    sort: "joanna c schwartz the case against qualified immunity 93 notre dame l rev 1797 2018"
   theuman-alr:
     kind: other
     name: "John E. Theuman, Annotation, State Constitutional Requirements as to Exclusion of Evidence Unlawfully Seized—Post-Leon Cases"
     cite: "19 A.L.R.5th 470 (1994)"
+    sort: "john e theuman annotation state constitutional requirements as to exclusion of evidence unlawfully seizedpostleon cases 19 alr5th 470 1994"
   story-commentaries:
     kind: other
     name: "Joseph Story, Commentaries on the Constitution"
     cite: "(1833)"
+    sort: "joseph story commentaries on the constitution 1833"
   faulkner-green:
     kind: other
     name: "LaKeith Faulkner & Christopher R. Green, State-Constitutional Departures from the Supreme Court: The Fourth Amendment"
     cite: "89 Miss. L.J. 197 (2020)"
+    sort: "lakeith faulkner  christopher r green stateconstitutional departures from the supreme court the fourth amendment 89 miss lj 197 2020"
   roots-originalist:
     kind: other
     name: "Roger Roots, The Originalist Case for the Exclusionary Rule"
     cite: "45 Gonz. L. Rev. 1 (2010)"
+    sort: "roger roots the originalist case for the exclusionary rule 45 gonz l rev 1 2010"
   lafave-search-seizure:
     kind: other
     name: "Wayne R. LaFave, Search & Seizure: A Treatise on the Fourth Amendment"
     cite: "(6th ed. 2022)"
+    sort: "wayne r lafave search  seizure a treatise on the fourth amendment 6th ed 2022"
 ---
 
 # INTRODUCTION AND SUMMARY OF THE ARGUMENT
@@ -498,7 +575,7 @@ To start, both state and federal appellate courts have directly rejected the civ
 
 Many other cases have applied the exclusionary rule in civil proceedings with ease. For example, the U.S. Supreme Court has applied the rule to civil forfeiture proceedings for over half a century. [*One 1958 Plymouth Sedan v. Pennsylvania*, 380 U.S. 693, 700 & n.7 (1965)](toa:plymouth-sedan); *see also* [*United States v. James Daniel Good Real Prop.*, 510 U.S. 43, 49 (1993)](toa:good-real-property) (“the exclusionary rule applies to civil forfeiture”).
 
-Other state and federal courts have followed suit. Indeed, this Court has acknowledged “several lower courts” to conclude the Fourth Amendment exclusionary rule applies to civil cases. [*Commonwealth v. E.A. Clore Sons, Inc.*, 281 S.E.2d 901, 904 n.4 (Va. 1981)](toa:clore). That acknowledgment was well-founded: Several state supreme courts have done so.[^1] So have federal circuit courts.[^2] And federal district courts too.[^3] As a leading treatise summarizes, nothing in the caselaw “casts serious doubt upon the applicability of both the Fourth Amendment and its exclusionary rule to the[] investigative activities” of “nonpolice” civil investigators like “building inspectors” and “OSHA inspectors.” Wayne R. LaFave, *Search & Seizure: A Treatise on the Fourth Amendment* § 1.8(e) (6th ed. 2022). The County cannot be right unless each of these authorities is wrong.
+Other state and federal courts have followed suit. Indeed, this Court has acknowledged “several lower courts” to conclude the Fourth Amendment exclusionary rule applies to civil cases. [*Commonwealth v. E.A. Clore Sons, Inc.*, 281 S.E.2d 901, 904 n.4 (Va. 1981)](toa:clore). That acknowledgment was well-founded: Several state supreme courts have done so.[^1] So have federal circuit courts.[^2] And federal district courts too.[^3] As a leading treatise summarizes, nothing in the caselaw “casts serious doubt upon the applicability of both the Fourth Amendment and its exclusionary rule to the[] investigative activities” of “nonpolice” civil investigators like “building inspectors” and “OSHA inspectors.” [Wayne R. LaFave](toa:lafave-search-seizure), *Search & Seizure: A Treatise on the Fourth Amendment* § 1.8(e) (6th ed. 2022). The County cannot be right unless each of these authorities is wrong.
 
 3\. The County’s sole authority for limiting the exclusionary rule to criminal proceedings is *County of Henrico v. Ehlers*. County Br. 13–15 & nn.50, 53 (citing [379 S.E.2d 457, 462 (Va. 1989)](toa:ehlers)). But *Ehlers* self-consciously “has nothing whatever to do with the Fourth Amendment.” [379 S.E.2d at 460](toa:ehlers). The individual in that civil case alleged that officers violated his Fifth Amendment right against self-incrimination under [*Miranda v. Arizona*, 384 U.S. 436 (1966)](toa:miranda), not that they had conducted an illegal search under the Fourth Amendment. [*Ehlers*, 379 S.E.2d at 460](toa:ehlers).
 
@@ -550,13 +627,13 @@ In sum, the exclusionary rule would provide maximum deterrence benefits here wit
 
 Historical and modern context shows that adopting the County’s proposal to gut the exclusionary rule in all civil cases would open the door to “manifest neglect, if not [] open defiance” of our right to be free from unreasonable searches and seizures. [*Weeks v. United States*, 232 U.S. 383, 394 (1914)](toa:weeks).
 
-Start with history. Since before the Founding, the right to be secure against unreasonable searches and seizures has occupied a cardinal place in our system of ordered liberty. “[T]he patriot James Otis’s 1761 speech condemning writs of assistance was ‘the first act of opposition to the arbitrary claims of Great Britain’ and helped spark the Revolution itself.” [*Carpenter v. United States*, 138 S. Ct. 2206, 2213 (2018)](toa:carpenter); *see also* 1 A.E. Dick Howard, *Commentaries on the Constitution of Virginia* 176–77 (1974) (noting that Otis’s arguments had a “profound” impact on “colonial thinkers” which bore “fruit in the constitutions that they drafted”).
+Start with history. Since before the Founding, the right to be secure against unreasonable searches and seizures has occupied a cardinal place in our system of ordered liberty. “[T]he patriot James Otis’s 1761 speech condemning writs of assistance was ‘the first act of opposition to the arbitrary claims of Great Britain’ and helped spark the Revolution itself.” [*Carpenter v. United States*, 138 S. Ct. 2206, 2213 (2018)](toa:carpenter); *see also* [1 A.E. Dick Howard](toa:howard-commentaries), *Commentaries on the Constitution of Virginia* 176–77 (1974) (noting that Otis’s arguments had a “profound” impact on “colonial thinkers” which bore “fruit in the constitutions that they drafted”).
 
-But if no remedial mechanism deters officials from disregarding the right to be free from unreasonable searches, the right becomes “valueless.” [*Mapp v. Ohio*, 367 U.S. 643, 655 (1961)](toa:mapp). This principle influenced the Founders’ views of how the Fourth Amendment would be enforced. Roger Roots, *The Originalist Case for the Exclusionary Rule*, 45 Gonz. L. Rev. 1, 38 (2010). And it is reflected in the decisions of early American courts, which refused to consider evidence gathered (or refused to try defendants arrested) in violation of search-and-seizure protections. *See, e.g.*, [*Frisbie v. Butler*, 1 Kirby 213, 213–15 (Conn. Super. Ct. 1787)](toa:frisbie); [*Grumon v. Raymond*, 1 Conn. 40, 40–41 (1814)](toa:grumon); [*Miller v. Grice*, 31 S.C.L. (2 Rich.) 27, 27–28 (S.C. 1845)](toa:miller-grice). Indeed, Virginia’s courts were no exception. *See* [*Jones v. Commonwealth*, 40 Va. 748, 750 (1842)](toa:jones-1842) (ordering end to criminal perjury prosecution because the defendant’s arrest was unlawful).
+But if no remedial mechanism deters officials from disregarding the right to be free from unreasonable searches, the right becomes “valueless.” [*Mapp v. Ohio*, 367 U.S. 643, 655 (1961)](toa:mapp). This principle influenced the Founders’ views of how the Fourth Amendment would be enforced. [Roger Roots](toa:roots-originalist), *The Originalist Case for the Exclusionary Rule*, 45 Gonz. L. Rev. 1, 38 (2010). And it is reflected in the decisions of early American courts, which refused to consider evidence gathered (or refused to try defendants arrested) in violation of search-and-seizure protections. *See, e.g.*, [*Frisbie v. Butler*, 1 Kirby 213, 213–15 (Conn. Super. Ct. 1787)](toa:frisbie); [*Grumon v. Raymond*, 1 Conn. 40, 40–41 (1814)](toa:grumon); [*Miller v. Grice*, 31 S.C.L. (2 Rich.) 27, 27–28 (S.C. 1845)](toa:miller-grice). Indeed, Virginia’s courts were no exception. *See* [*Jones v. Commonwealth*, 40 Va. 748, 750 (1842)](toa:jones-1842) (ordering end to criminal perjury prosecution because the defendant’s arrest was unlawful).
 
-And exclusionary remedies were not the only mechanism propping up search-and-seizure rights in early America. The threat of civil damages, payable by officials who violated those rights, also stood as a bulwark. “[T]hrough the 19th century and into the 20th,” individuals could “test the legality of government conduct by filing suit against government officials for money damages payable by the officer.” [*Tanzin v. Tanvir*, 592 U.S. 43, 49 (2020)](toa:tanzin) (cleaned up); *see* Joseph Story, *Commentaries on the Constitution* § 1671 (1833) (“[If] any agent of the government shall unjustly invade the property of a citizen under colour of a public authority, he must, like every other violator of the laws, respond in damages.”). Strict liability was the rule. Even officials who claimed to rely on instructions from the President were not “excuse[d]” from personal liability for illegal seizures. [*Little v. Bareme*, 6 U.S. (2 Cranch) 170, 178–79 (1804)](toa:little-v-bareme). Nor could claims of “a mistaken sense of duty” (rather than “ill design”) preclude a damages award for an unlawful arrest. *See* [*Perrin v. Calhoun*, 4 S.C.L. (2 Brev.) 248, 250 (S.C. 1808)](toa:perrin).
+And exclusionary remedies were not the only mechanism propping up search-and-seizure rights in early America. The threat of civil damages, payable by officials who violated those rights, also stood as a bulwark. “[T]hrough the 19th century and into the 20th,” individuals could “test the legality of government conduct by filing suit against government officials for money damages payable by the officer.” [*Tanzin v. Tanvir*, 592 U.S. 43, 49 (2020)](toa:tanzin) (cleaned up); *see* [Joseph Story](toa:story-commentaries), *Commentaries on the Constitution* § 1671 (1833) (“[If] any agent of the government shall unjustly invade the property of a citizen under colour of a public authority, he must, like every other violator of the laws, respond in damages.”). Strict liability was the rule. Even officials who claimed to rely on instructions from the President were not “excuse[d]” from personal liability for illegal seizures. [*Little v. Bareme*, 6 U.S. (2 Cranch) 170, 178–79 (1804)](toa:little-v-bareme). Nor could claims of “a mistaken sense of duty” (rather than “ill design”) preclude a damages award for an unlawful arrest. *See* [*Perrin v. Calhoun*, 4 S.C.L. (2 Brev.) 248, 250 (S.C. 1808)](toa:perrin).
 
-Today, by contrast, a series of roadblocks often makes the threat of holding officers accountable through damages suits a hollow one. For instance, all government officials enjoy qualified immunity from civil damages suits under [42 U.S.C. § 1983](toa:usc-42-1983). That immunity—designed to insulate officials from even having to “stand trial or face the other burdens of litigation”—forecloses liability unless a plaintiff can show the rights violation was a “clearly established” one. [*Ashcroft v. Iqbal*, 556 U.S. 662, 672 (2009)](toa:ashcroft-v-iqbal). The U.S. Supreme Court has interpreted that immunity to make it ”increasingly difficult for plaintiffs to show that defendants have violated clearly established law.” Joanna C. Schwartz, *The Case Against Qualified Immunity*, 93 Notre Dame L. Rev. 1797, 1814 (2018). As a result, in practice, it can often be impossible for the threat of damages suits to deter even obvious Fourth Amendment violations, simply because no official has yet faced reprimand for that specific conduct in a published appellate decision. *See, e.g.*, [*Jessop v. City of Fresno*, 936 F.3d 937, 939 (9th Cir. 2019)](toa:jessop) (granting qualified immunity to officers who allegedly stole $225,000 in cash and rare coins because “[a]t the time of the incident, there was no clearly established law holding that officers violate the Fourth or Fourteenth Amendment when they steal property seized pursuant to a warrant”).
+Today, by contrast, a series of roadblocks often makes the threat of holding officers accountable through damages suits a hollow one. For instance, all government officials enjoy qualified immunity from civil damages suits under [42 U.S.C. § 1983](toa:usc-42-1983). That immunity—designed to insulate officials from even having to “stand trial or face the other burdens of litigation”—forecloses liability unless a plaintiff can show the rights violation was a “clearly established” one. [*Ashcroft v. Iqbal*, 556 U.S. 662, 672 (2009)](toa:ashcroft-v-iqbal). The U.S. Supreme Court has interpreted that immunity to make it ”increasingly difficult for plaintiffs to show that defendants have violated clearly established law.” [Joanna C. Schwartz](toa:schwartz-qualified-immunity), *The Case Against Qualified Immunity*, 93 Notre Dame L. Rev. 1797, 1814 (2018). As a result, in practice, it can often be impossible for the threat of damages suits to deter even obvious Fourth Amendment violations, simply because no official has yet faced reprimand for that specific conduct in a published appellate decision. *See, e.g.*, [*Jessop v. City of Fresno*, 936 F.3d 937, 939 (9th Cir. 2019)](toa:jessop) (granting qualified immunity to officers who allegedly stole $225,000 in cash and rare coins because “[a]t the time of the incident, there was no clearly established law holding that officers violate the Fourth or Fourteenth Amendment when they steal property seized pursuant to a warrant”).
 
 In short, the threat of civil damages provides little security against unconstitutional searches today. The exclusionary rule is often the only reliable incentive modern officials have to take care in respecting citizens’ Fourth Amendment rights. This Court should decline the County’s invitation to eviscerate that critical incentive.
 
@@ -568,7 +645,7 @@ Here, the relevant provision of the Virginia Constitution, Article I, § 10, pro
 
 ### The drafters of the Virginia Constitution sought to protect citizens’ liberty and privacy in their homes and papers.
 
-“Since at least the mid-eighteenth century, protections against arbitrary searches and seizures have been ‘permanent monuments’ of Anglo-American law.” 1 A.E. Dick Howard, *Commentaries on the Constitution of Virginia* 174 (1974). The drafters of the Virginia Constitution sought to protect Virginians from such oppressive measures used by the British in both England and the colonies. *Id.* at 175–76. At the time, the Crown was regularly issuing general warrants to enforce the Navigation Acts and tax colonial trade. *Id.* at 176. The colonists “detested” this practice, *id.*, and, in Virginia, responded with Article I, § 10 of the Virginia Constitution, which provides “[t]hat general warrants, whereby an officer or messenger may be commanded to search suspected places without evidence of a fact committed, or to seize any person or persons not named, or whose offense is not particularly described and supported by evidence, are grievous and oppressive, and ought not to be granted.”
+“Since at least the mid-eighteenth century, protections against arbitrary searches and seizures have been ‘permanent monuments’ of Anglo-American law.” [1 A.E. Dick Howard](toa:howard-commentaries), *Commentaries on the Constitution of Virginia* 174 (1974). The drafters of the Virginia Constitution sought to protect Virginians from such oppressive measures used by the British in both England and the colonies. *Id.* at 175–76. At the time, the Crown was regularly issuing general warrants to enforce the Navigation Acts and tax colonial trade. *Id.* at 176. The colonists “detested” this practice, *id.*, and, in Virginia, responded with Article I, § 10 of the Virginia Constitution, which provides “[t]hat general warrants, whereby an officer or messenger may be commanded to search suspected places without evidence of a fact committed, or to seize any person or persons not named, or whose offense is not particularly described and supported by evidence, are grievous and oppressive, and ought not to be granted.”
 
 While § 10’s language focused on prohibiting “general warrants” due to the political climate at the time, this Court has long recognized that the concerns underpinning § 10 apply equally to warrantless searches. Historical concerns about general warrants were that “officers might search private homes and seize private papers and persons indiscriminately, unrestrained by previous judicial sanction.” [*McClannan v. Chaplain*, 116 S.E. 495, 499 (Va. 1923)](toa:mcclannan). These concerns are “precisely the same with respect to searches and seizures by officers without a search warrant.” *Id.* In both situations, Virginia has consistently sought to protect “the personal and political liberty of the citizen, especially the privacy of his home and papers.” *Id.*
 
@@ -582,11 +659,11 @@ This Court’s decision in [*Hall v. Commonwealth*, 121 S.E. 154 (Va. 1924)](toa
 
 Even if this view were true in 1924, it is plainly not true today. First, unconstitutional searches and seizures continue, as the facts alleged here demonstrate. And in this Commonwealth, some courts have held that plaintiffs do not even have a cause of action to enforce Article I, § 10 through damages suits. *See* [*Highlander v. Va. Dep’t of Wildlife Res.*, No. CL23-4100, at 2 (Va. Cir. Ct. Oct. 27, 2023)](toa:highlander) (collecting cases), appeal filed (Va. Ct. App. Dec. 6, 2023).
 
-Moreover, while [Virginia Code § 19.2-59](toa:va-code-19-2-59) still prohibits warrantless searches and provides that those who violate it “shall be guilty of malfeasance in office,” this statute has been consistently interpreted by Virginia courts as “provid[ing] only the same protection as that afforded by the Fourth Amendment.” [*Cromartie v. Billings*, 837 S.E.2d 247, 254 (Va. 2020)](toa:cromartie). Claims under the statute are also subject to sovereign immunity, *see id.*, which makes it exceedingly difficult for plaintiffs to get any redress for constitutional harms. *See, e.g.*, Marc L. Miller & Ronald F. Wright, *Criminal Procedures: The Police* 425 (3d ed. 2007) (discussing theoretical existence of private remedies for those harmed by an unconstitutional search or seizure, but stating that these are not a “common method of dealing with improper searches or seizures” due to the significant obstacles plaintiffs face, such as sovereign immunity). The Hall court’s view that citizens can adequately “protect the sanctity” of their homes “by applying remedies which the law provides,” [*Hall*, 121 S.E. at 156](toa:hall), is simply no longer true.
+Moreover, while [Virginia Code § 19.2-59](toa:va-code-19-2-59) still prohibits warrantless searches and provides that those who violate it “shall be guilty of malfeasance in office,” this statute has been consistently interpreted by Virginia courts as “provid[ing] only the same protection as that afforded by the Fourth Amendment.” [*Cromartie v. Billings*, 837 S.E.2d 247, 254 (Va. 2020)](toa:cromartie). Claims under the statute are also subject to sovereign immunity, *see id.*, which makes it exceedingly difficult for plaintiffs to get any redress for constitutional harms. *See, e.g.*, [Marc L. Miller & Ronald F. Wright](toa:miller-wright-criminal-procedures), *Criminal Procedures: The Police* 425 (3d ed. 2007) (discussing theoretical existence of private remedies for those harmed by an unconstitutional search or seizure, but stating that these are not a “common method of dealing with improper searches or seizures” due to the significant obstacles plaintiffs face, such as sovereign immunity). The Hall court’s view that citizens can adequately “protect the sanctity” of their homes “by applying remedies which the law provides,” [*Hall*, 121 S.E. at 156](toa:hall), is simply no longer true.
 
 ### Virginia would be in good company if it adopted the exclusionary rule to protect state constitutional rights in this context.
 
-Adoption of the exclusionary rule as a remedy for state constitutional search-and-seizure violations would be consistent with case law in many other jurisdictions. As of 1994, at least 28 states “recognized the existence of an exclusionary rule which derived from the search and seizure provisions of their respective state constitutions.” John E. Theuman, Annotation, *State Constitutional Requirements as to Exclusion of Evidence Unlawfully Seized—Post-Leon Cases*, 19 A.L.R.5th 470, §3[a] (1994) (collecting cases). For instance, Supreme Court of Delaware held that it was “the duty of the courts to protect constitutional guarantees,” and that “[t]he most effective way to protect the guarantees against unreasonable search and seizure” in the Delaware Constitution was “to exclude from evidence any matter obtained by a violation of them.” [*Rickards v. State*, 77 A.2d 199, 205 (Del. 1950)](toa:rickards). The court explicitly rejected the “suggested remedy of a civil action,” noting that it was “as a practical matter no remedy at all.” *Id.*
+Adoption of the exclusionary rule as a remedy for state constitutional search-and-seizure violations would be consistent with case law in many other jurisdictions. As of 1994, at least 28 states “recognized the existence of an exclusionary rule which derived from the search and seizure provisions of their respective state constitutions.” [John E. Theuman](toa:theuman-alr), Annotation, *State Constitutional Requirements as to Exclusion of Evidence Unlawfully Seized—Post-Leon Cases*, 19 A.L.R.5th 470, §3[a] (1994) (collecting cases). For instance, Supreme Court of Delaware held that it was “the duty of the courts to protect constitutional guarantees,” and that “[t]he most effective way to protect the guarantees against unreasonable search and seizure” in the Delaware Constitution was “to exclude from evidence any matter obtained by a violation of them.” [*Rickards v. State*, 77 A.2d 199, 205 (Del. 1950)](toa:rickards). The court explicitly rejected the “suggested remedy of a civil action,” noting that it was “as a practical matter no remedy at all.” *Id.*
 
 The Supreme Court of Ohio has held that the state constitution both provides greater protection than the Fourth Amendment and mandates exclusion of evidence obtained in violation of those protections. [*State v. Brown*, 792 N.E.2d 175, 178–79 (Ohio 2003)](toa:state-brown). Many other state courts apply an exclusionary rule to protect state constitutional rights. *See, e.g.*, [*State v. Reynolds*, 504 S.W.3d 283, 312 (Tenn. 2016)](toa:reynolds) (discussing the “exclusionary rule that applies to violations of article I, section 7 of the Tennessee Constitution”); [*Commonwealth v. Britton*, 229 A.3d 590, 609 (Pa. 2020)](toa:britton) (Wecht, J., concurring) (noting the Supreme Court of Pennsylvania’s “recognition that the exclusionary rule is essential to protect the individual rights enumerated in our own Pennsylvania Constitution” (citation omitted)).
 
@@ -610,4 +687,4 @@ The Court should decline the County’s invitation to hold the exclusionary rule
 
 [^6]: *See* [*Samson v. California*, 547 U.S. 843, 850 (2006)](toa:samson) (holding suspicionless searches of parolees are valid because parolees remain under “state-imposed punishment[]”); [*United States v. Ramsey*, 431 U.S. 606, 616 (1977)](toa:ramsey) (holding that “searches made at the border … are reasonable simply by virtue of the fact that they occur at the border”).
 
-[^7]: Many states apply their exclusionary rule more broadly than the federal rule. For example, at least 17 state supreme courts have rejected the federal good-faith exception to the exclusionary rule under [*United States v. Leon*, 468 U.S. 897 (1984)](toa:leon). *See* LaKeith Faulkner & Christopher R. Green, *State-Constitutional Departures from the Supreme Court: The Fourth Amendment*, 89 Miss. L.J. 197, 200 & n.27 (2020). As one of those courts put it, “suppression of the evidence does not ‘cure’ the constitutional invasion … but it is clearly the best remedy available.” [*State v. Cline*, 617 N.W.2d 277, 289 (Iowa 2000)](toa:cline).
+[^7]: Many states apply their exclusionary rule more broadly than the federal rule. For example, at least 17 state supreme courts have rejected the federal good-faith exception to the exclusionary rule under [*United States v. Leon*, 468 U.S. 897 (1984)](toa:leon). *See* [LaKeith Faulkner & Christopher R. Green](toa:faulkner-green), *State-Constitutional Departures from the Supreme Court: The Fourth Amendment*, 89 Miss. L.J. 197, 200 & n.27 (2020). As one of those courts put it, “suppression of the evidence does not ‘cure’ the constitutional invasion … but it is clearly the best remedy available.” [*State v. Cline*, 617 N.W.2d 277, 289 (Iowa 2000)](toa:cline).

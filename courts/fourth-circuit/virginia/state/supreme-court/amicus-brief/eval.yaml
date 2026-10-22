@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated, on both engines
+# (docs/open-items/fb-595.54.35.md):
+# - LaTeX: typst sets the marks of notes 2 and 3 on body page 7 and the notes on page 8 (they do not fit under the
+#   page's lines); LaTeX keeps each note with its mark and moves the paragraph "Several state supreme courts ..." to
+#   page 8, and every page after it shifts (XENG-002, XENG-003 from PDF page 15).
+# - Word: the page lookup lists a keyed authority whose link opens on the last line of a page one page late
+#   ("Henry v. Commonwealth" 23 for 22, "U.S. Const. amend. V" 9, 15 for 9, 14); every page end is identical.
+params:
+  cross_engine: report
