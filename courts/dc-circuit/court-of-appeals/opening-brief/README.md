@@ -26,7 +26,7 @@ Verified 2026-10-14 against the D.C. Circuit's own rules PDF, "Circuit Rules Eff
 |---|---|---|---|
 | DC-FRAP-032-A2 | Cover: case number centered at top; court name; title of case; nature of proceeding and court below; brief title identifying the party; counsel name, office address and telephone | FRAP 32(a)(2)(A)–(F) | `cover()` |
 | DC-CR-028-A8 | The words "ORAL ARGUMENT NOT YET SCHEDULED" (or the argued/submitted statement) in capital letters at the top of the front cover | Circuit Rule 28(a)(8) | `cover()`, from `oral_argument` |
-| DC-FRAP-032-A4 | 8½ × 11 paper; double-spaced; quotations over two lines and headings and footnotes may be single-spaced; margins at least one inch on all sides | FRAP 32(a)(4) | `page-margin`, `body-leading`, `single-leading` |
+| DC-FRAP-032-A4 | 8½ × 11 paper; double-spaced; quotations over two lines and headings and footnotes may be single-spaced; margins at least one inch on all sides | FRAP 32(a)(4) | `page-margin`, `pitch-body`, `pitch-single` |
 | DC-FRAP-032-A5 | Proportionally spaced serif face, 14-point or larger; sans-serif allowed in headings and captions | FRAP 32(a)(5)(A) | `font-family`, `type-size` |
 | DC-HB-IX-A6 | Handbook, Format: encourages Century and Times New Roman; discourages Garamond; 14-point serif | D.C. Circuit Handbook IX.A.6, as revised 16 March 2021 (Clerk's notice "Preferred Typefaces for Briefs"): https://www.cadc.uscourts.gov/sites/cadc/files/noticeGen-noticePreferredTypefacesForBriefs.pdf | Face: Century → `TeX Gyre Schola` (`docs/FONTS.md`). See Known gaps, item 1. |
 | DC-FRAP-032-A6 | Plain roman type; case names italicized | FRAP 32(a)(6) | markdown `*...*` |
@@ -109,7 +109,7 @@ Defects found during review and fixed in the template: the bold lead-ins of the 
 ## Known gaps
 
 1. **Typeface (resolved 2026-10-15).** Face required: Century. The Handbook (IX.A.6) names Century and Times New Roman as the preferred faces and discourages Garamond; the filed exemplar is set in Century Schoolbook 14-pt. Substitute: `TeX Gyre Schola` (`docs/FONTS.md`; a Century Schoolbook clone, with glyph widths consistent with the Adobe base-35 New Century Schoolbook AFMs). The template was EB Garamond before this change. Page count went from 14 to 15; the sample reflows and no line is forced. The Handbook names Times New Roman too (`Liberation Serif`); Century is used here because the filed exemplar is set in it.
-2. **Line pitch.** `body-leading` is 1.07em, giving a baseline pitch of about 24 pt at 14 pt. That is the pitch of the filed exemplar's body text. FRAP 32(a)(4) says "double-spaced" without a number; a pitch of about 2× the nominal 14 pt line (≈28 pt) would be larger and would push the sample well past 15 pages. **Decision for David.**
+2. **Line pitch.** `pitch-body` is 25 pt at 14 pt (since fb-595.54.2 a line box of its own; it was a 1.07 em leading, 25.09 pt). That is the pitch of the filed exemplar's body text. FRAP 32(a)(4) says "double-spaced" without a number; a pitch of about 2× the nominal 14 pt line (≈28 pt) would be larger and would push the sample well past 15 pages. **Decision for David.**
 3. **Word count.** The certificate's count (1,312) is the template's count of the sample's body, which is a portion of the brief. The exemplar's own certificate states 10,418 words for the whole brief. The 13,000-word limit is enforced at build time for any sample.
 4. **Sample is a portion.** It is the exemplar's introduction through the start of the argument, then the conclusion, signature and certificates. The argument body and the statutory addendum are not transcribed. The summary's point I is transcribed only as far as the text read.
 5. **Signature alone on a page (resolved 2026-10-16).** The body's last paragraph is now kept with the signature block, as in the reply template.
@@ -133,33 +133,51 @@ Defects found during review and fixed in the template: the bold lead-ins of the 
 
 ## Engines
 
-Three engines per doc type (`docs/EVAL-LOOP.md`, "Engines"). The typst template is the reference.
+Three engines per doc type (`docs/EVAL-LOOP.md`, "Engines"). The typst template is the reference. All three are on the shared cross-engine layout model since fb-595.54.2 (see "Cross-engine" below): the latex and docx renders break every line and every page where typst does, and `eval.yaml` gates it.
 
 | Engine | Folder | Output | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `usage/OUTPUT-opening-brief.typst.pdf` | rendered, reviewed (Known gaps above) |
-| latex | `latex/` (`template.tex`, `cadc.lua`) | `usage/OUTPUT-opening-brief.latex.pdf` | rendered, 15 pages, same count as typst |
-| docx | `docx/` (`reference.docx`, `cadc.lua`, `make-reference.sh`) | `usage/OUTPUT-opening-brief.docx` | `.docx` written and XML-validated; `.docx.pdf` not produced (see below) |
+| typst (primary) | `typst/` | `usage/OUTPUT-opening-brief.typst.pdf` | 15 pages, reviewed |
+| latex | `latex/` (`template.tex`, `cadc.lua`) | `usage/OUTPUT-opening-brief.latex.pdf` | 15 pages, XENG-001..003 PASS |
+| docx | `docx/` (`reference.docx` from `make-reference.sh`, `cadc.lua`) | `usage/OUTPUT-opening-brief.docx`, `.docx.pdf` | 15 pages (LibreOffice PDF), XENG-001..003 PASS |
 
-Build:
+Build (`fb render` reruns pdflatex until the aux and toc files settle, and renders the docx in passes until the page map of its LibreOffice PDF settles):
 
 ```sh
 sh tools/render.sh --engine latex courts/dc-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md
 sh tools/render.sh --engine docx courts/dc-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md
 ```
 
-`fb render` runs pdflatex until the aux and toc files settle, so the table of contents and table of authorities carry the page numbers of the PDF. `tools/render-latex.sh` alone (single pass) would print placeholder page numbers and must not be used for this engine.
+- **latex**: TeX Gyre Schola 14 pt (`tgschola`, stock TeX Live) in the typst line boxes; the cover, the certificate as to parties, contents and authorities (page numbers in two passes, every page, no "passim"), glossary, signature kept with the last paragraph, both certificates; the certificate's word count (1,312) counted from the markdown as typst counts it. Differs only in positions that are not breaks: a centered line sits up to 2.2 pt further left than typst's.
+- **docx**: TeX Gyre Schola 14 pt; sections (cover without number; certificate, contents, authorities and glossary in lower-case roman; body and certificates from 1, footers written by fb render); the contents and authorities carry their page numbers (fb render's page map, `tools/fb/src/docxpass.rs`: `cadc.lua` writes a needle for every heading and citation); the cover's counsel in a two-column borderless table. The earlier BLOCKED items (no `.docx.pdf`; contents and authorities without page numbers; counsel stacked) and the tier-1 failure `DEF-FORM-002` are fixed. Opened in LibreOffice only, not in Word.
 
-**LaTeX: what matches typst.** Page size and margins (letter, 1 in); TeX Gyre Schola 14 pt (`tgschola`, stock TeX Live); double-spaced body at a 24 pt pitch; single-spaced footnotes, headings, quotations and certificate blocks; arabic body pages from 1, roman front matter from the certificate; cover contents and order; the certificate of parties, rulings, related cases and Rule 26.1 disclosure; contents with dot leaders; table of authorities in the six groups with every citation page (no "passim"); glossary; certificate of compliance (word count from the body, addendum excluded); certificate of service; addendum after the certificates. **What differs:** the compliance count is 1,311 against typst's 1,312 for the same sample (a one-word counting difference between the Lua and typst word counters); heading styling is a plain bold rather than typst's exact heading spacing; the cover's counsel columns wrap at slightly different points; the contents entries are set in regular weight, as in typst. Tier 2 judgement: the layout reads as the typst output at 50 dpi.
+## Cross-engine (fb-595.54.2)
 
-**DOCX: BLOCKED items.** The engine could not be checked against a rendered PDF on this box:
-- `docx.pdf` (LibreOffice render, Gates 0 and 1): BLOCKED. The docx engine needs `soffice`. conda-forge has no LibreOffice package. The Debian LibreOffice debs were extracted and the binary starts, but it aborts with a UNO `DeploymentException` (its bootstrap paths are hard-coded to `/usr/lib/libreoffice`, and the sandbox denies the bind mount that would fix them). The render log is in `/work/artifacts/docx-render-op.log` on the build box, not in the repo.
-- Table of contents page numbers: BLOCKED. The contents list is written without page numbers (Word fields are not updated by pandoc or LibreOffice here). A TOC check fails until a field update step exists (`docs/DOCX.md`, "Fields").
-- Table of authorities page numbers: BLOCKED for the same reason; the list is written without pages (`docs/DOCX.md` expects the TOA check to be BLOCKED for LibreOffice).
-- Cover and certificate layout: the cover is raw OOXML paragraphs, centered, in the body's 24 pt pitch; the counsel columns are stacked, not side by side (a table is needed; DOCX.md notes table rendering differs). Word and LibreOffice may paginate the cover differently.
-- Word check: `.docx` is a valid zip with well-formed XML parts (`unzip -tq`, `xmllint --noout`). Opening it in Word or LibreOffice without a repair prompt was not verified (no LibreOffice here).
+All three engines on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Adopting the reference breaker"), `params.cross_engine: gate` in `eval.yaml`.
 
-`docx/make-reference.sh` regenerates `docx/reference.docx` (TeX Gyre Schola 14 pt, body lines exactly 24 pt, first-line indent 0.5 in, black headings, letter page with 1 in margins, centered PAGE field in the footer).
+- typst: `show: xengine.with(pitch: 25pt, list-indent: 0.5in)`; line boxes of 25 pt (body), 21 pt (quotations, footnotes, tables, signature and certificate blocks, level-3 headings), 29 pt (level-1 headings, 19.5 pt bold) and 25 pt (level-2, 17 pt bold), 16.4 pt (the cover); every space in pt; `listing-row` contents and authorities (36 pt page column, or the page list's width); the glossary's abbreviations in a 1 in column. Changed from the earlier template: the body pitch is 25 pt (was 1.07 em leading, 25.09 pt); single spacing is 21 pt (was 16.4 pt; see the LibreOffice finding below); headings 19.5 / 17 pt (were 1.4 / 1.2 em, 19.6 / 16.8 pt: Word has only half points); the cover's spacing is fixed (was the largest of six that fits; the sample used 0.45 of the old gaps, which are now the gaps) and the date follows the counsel (was pushed to the foot of the page: Word has no fill); the signature's right column is a length (241 pt); each citation's page is taken after its first word (a citation that opens a line was filed under the line before). Kept: TeX Gyre Schola 14 pt, 1 in margins, the half-inch indents, the parts and their order.
+- latex: `\usepackage{xengine}`, `\xe@lines`, `\addvspace`, `\xe@row`, `\xe@footnotemarks{14}`, `\xe@lists{0.5in}`; `cadc.lua` writes the whole brief, through `require("latex.xengine")` over the body and every metadata value.
+- docx: `make-reference.sh` calls `lib/docx/xengine-reference.sh` (TeX Gyre Schola, 28 half points, body 500, single 420 twips; `reference.docx` committed); `cadc.lua` (rewritten on `require("docx.xengine")`) writes every paragraph with exact spacing, the table rows with the page column as right indent and a leader tab, and a word joiner between ")(" so LibreOffice does not break "6103(i)(2)".
+- Every engine certifies the same word count: the latex and docx filters count the markdown source as the typst template does (1,312).
+
+What the first TeX Gyre Schola adoption found (each a line or a tier-1 check the gate caught):
+- **The vendored Schola is not TeX Live's.** `fonts/tex-gyre-schola` (2.609) has wider ( ) [ ] { } * + / < = > \ | and ellipsis than the Type 1 `tgschola` of TeX Live (the New Century Schoolbook AFM widths: parentheses 483 against 333 thousandths of an em), and a bold interword space of 0.278 em against 0.287 em. `cadc.lua` writes each of those glyphs as `\dcg{<regular>}{<bold>}{<glyph>}`, scaled across to the OpenType advance (a box with a gap of its own split "6103(i)(2)" into two words in the PDF's text), and the template sets the bold space. Without it latex broke 8 lines differently.
+- **LibreOffice sets the ligatures of an OpenType face** (fi, fl, ff, ffi, ffl), which typst, LaTeX and Word by default do not; it reads no `w14:ligatures`, and a character style that alternates at the join does not stop it (it shapes across runs). A word joiner between the letters does, and is not in the PDF's text.
+- **LibreOffice places a line of exact spacing by the font's descent** (0.711 em in this face, 1.635 em high) when the face is taller than the box, where typst puts the baseline at 0.8 of the box: at 16.4 pt a line that opened a page reached 5 pt into the top margin (`DEF-FORM-002`). The single pitch is therefore 21 pt and the heading pitches 29 / 25 pt, so every line stays inside the margins wherever it falls; a line that opens a page by a hard break is moved down into typst's place (`DROP` in `cadc.lua`), taken from the space below it. Elsewhere LibreOffice's baselines sit 6 to 7 pt above typst's (reported by `fb diff --engines`, not gated: the breaks are).
+
+Before (baseline, `data/cross-engine-baseline.json`): latex 15 = 15 pages, 59.6 % of lines with typst's break, first difference p1 line 10; docx 14 pages against 15, 17.2 %, and tier 1 failing `DEF-FORM-002`. After: typst 15 pages; latex and docx 15 pages, 302/302 lines, every page starting and ending on typst's words (XENG-001..003 PASS); tier 1: typst 7 passed, latex 10 passed, docx 11 passed, 0 failed.
+
+Review (Gate 2) of the new renders, 2026-10-22: every page of the typst PDF viewed at 40 and 60 dpi, and the docx and latex PDFs page by page beside it (cover, certificate, contents, authorities, signature and certificate pages at 60 dpi side by side).
+
+| Page | Content | Finding |
+|---|---|---|
+| 1 | Cover | One page; parts closer than before (the old fit chose 0.45 of its gaps), date under the counsel. OK. |
+| 2-3 (i-ii) | Certificate as to parties | Heading three lines; parts A-C and Rule 26.1 with the body's indent. OK. |
+| 4 (iii) | Contents | Rows 25 pt apart, level 2 half an inch in, wrapped title hangs. OK. The docx leader runs to the number (Word's right tab), typst's stops at the page column: accepted, the model's design. |
+| 5 (iv) | Authorities | Two groups, every page listed. OK. |
+| 6 (v) | Glossary | 1 in abbreviation column. OK. |
+| 7-13 (1-7) | Body | Double spaced, headings kept with their text; conclusion kept with the signature on p. 13. OK. |
+| 14-15 (8-9) | Certificates | Word count 1,312, the typeface sentence; signer 45 % in. OK. |
 
 ## Verification pass 2026-10-16 (fb-595.26.12)
 
