@@ -1,5 +1,9 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) but still break lines or pages apart from typst where the shared model differs
-# between engines (docs/open-items/fb-595.54.31.md); reported, not gated, until the serial lane fb-595.54.82 fixes it.
+# (`fb engines gen`, fb-595.54.12); after the serial lane fb-595.54.82 they still break lines or pages apart from
+# typst where the shared model differs between engines (docs/open-items/fb-595.54.31.md, "Second pass"):
+# typst breaks "he/she" after the slash, LaTeX does not (p7); typst sets note 9 on the page after its anchor (a
+# one-line quotation that ends p22), LaTeX moves the line on with the note; pdftotext reads LaTeX's "* * *" as one
+# word (p36); docx places notes 3 and 4 on the page after their anchors (p12) and every later page shifts.
+# Reported, not gated.
 params:
   cross_engine: report
