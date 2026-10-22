@@ -1,7 +1,7 @@
 {
   "about": "fb-595.54 cross-engine baseline: typst render (reference) vs latex and docx renders of the same INPUT; regenerate with `fb cross-engine --write` (docs/EVAL-LOOP.md, Cross-engine gate)",
-  "pairs": 548,
-  "pairs_pass": 6,
+  "pairs": 549,
+  "pairs_pass": 24,
   "rows": [
     {
       "folder": "courts/dc-circuit/court-of-appeals/answering-brief",
@@ -1403,7 +1403,7 @@
       "lines": 286,
       "lines_same": 184,
       "pct_same": 64.3,
-      "first_differing": "p2 line 5",
+      "first_differing": "p2 line 7",
       "width_drift_pt": 10.8,
       "source": "committed"
     },
@@ -1419,10 +1419,10 @@
       "pages_equal": false,
       "page_ends_differ": 9,
       "lines": 286,
-      "lines_same": 104,
-      "pct_same": 36.4,
+      "lines_same": 220,
+      "pct_same": 76.9,
       "first_differing": "p2 line 5",
-      "width_drift_pt": 29.25,
+      "width_drift_pt": 5.38,
       "source": "committed"
     },
     {
@@ -1882,15 +1882,15 @@
       "mode": "report",
       "pages": [
         18,
-        5
+        14
       ],
       "pages_equal": false,
-      "page_ends_differ": 4,
+      "page_ends_differ": 12,
       "lines": 392,
-      "lines_same": 1,
-      "pct_same": 0.3,
+      "lines_same": 178,
+      "pct_same": 45.4,
       "first_differing": "p1 line 2",
-      "width_drift_pt": 43.8,
+      "width_drift_pt": 7.57,
       "source": "committed"
     },
     {
@@ -2041,300 +2041,324 @@
       "folder": "courts/federal-circuit/court-of-appeals/answering-brief",
       "id": "answering-brief",
       "engine": "latex",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
-        13,
+        15,
         15
       ],
-      "pages_equal": false,
-      "page_ends_differ": 7,
-      "lines": 258,
-      "lines_same": 171,
-      "pct_same": 66.3,
-      "first_differing": "p2 line 9",
-      "width_drift_pt": 35.16,
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 260,
+      "lines_same": 260,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.11,
       "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/court-of-appeals/answering-brief",
       "id": "answering-brief",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
+      "pages": [
+        15,
+        15
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 260,
+      "lines_same": 260,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.41,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/federal-circuit/court-of-appeals/opening-brief",
+      "id": "opening-brief",
+      "engine": "latex",
+      "mode": "gate",
+      "pages": [
+        22,
+        22
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 381,
+      "lines_same": 381,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.09,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/federal-circuit/court-of-appeals/opening-brief",
+      "id": "opening-brief",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        22,
+        22
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 381,
+      "lines_same": 381,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.4,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/federal-circuit/court-of-appeals/reply-brief",
+      "id": "reply-brief",
+      "engine": "latex",
+      "mode": "gate",
       "pages": [
         13,
-        14
-      ],
-      "pages_equal": false,
-      "page_ends_differ": 12,
-      "lines": 258,
-      "lines_same": 106,
-      "pct_same": 41.1,
-      "first_differing": "p1 line 5",
-      "width_drift_pt": 26.9,
-      "source": "committed"
-    },
-    {
-      "folder": "courts/federal-circuit/court-of-appeals/opening-brief",
-      "id": "opening-brief",
-      "engine": "latex",
-      "mode": "report",
-      "pages": [
-        18,
-        23
-      ],
-      "pages_equal": false,
-      "page_ends_differ": 14,
-      "lines": 375,
-      "lines_same": 248,
-      "pct_same": 66.1,
-      "first_differing": "p1 line 11",
-      "width_drift_pt": 38.9,
-      "source": "committed"
-    },
-    {
-      "folder": "courts/federal-circuit/court-of-appeals/opening-brief",
-      "id": "opening-brief",
-      "engine": "docx",
-      "mode": "report",
-      "pages": [
-        18,
-        21
-      ],
-      "pages_equal": false,
-      "page_ends_differ": 14,
-      "lines": 375,
-      "lines_same": 110,
-      "pct_same": 29.3,
-      "first_differing": "p1 line 8",
-      "width_drift_pt": 28.05,
-      "source": "committed"
-    },
-    {
-      "folder": "courts/federal-circuit/court-of-appeals/reply-brief",
-      "id": "reply-brief",
-      "engine": "latex",
-      "mode": "report",
-      "pages": [
-        12,
         13
       ],
-      "pages_equal": false,
-      "page_ends_differ": 7,
-      "lines": 243,
-      "lines_same": 173,
-      "pct_same": 71.2,
-      "first_differing": "p1 line 2",
-      "width_drift_pt": 102.78,
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 245,
+      "lines_same": 245,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.55,
       "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/court-of-appeals/reply-brief",
       "id": "reply-brief",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
-        12,
+        13,
         13
       ],
-      "pages_equal": false,
-      "page_ends_differ": 7,
-      "lines": 243,
-      "lines_same": 83,
-      "pct_same": 34.2,
-      "first_differing": "p1 line 2",
-      "width_drift_pt": 27.64,
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 245,
+      "lines_same": 245,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.39,
       "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/court-of-federal-claims/complaint",
       "id": "complaint",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
         14,
         14
       ],
       "pages_equal": true,
-      "page_ends_differ": 9,
-      "lines": 296,
-      "lines_same": 104,
-      "pct_same": 35.1,
-      "first_differing": "p1 line 6",
-      "width_drift_pt": 40.23,
+      "page_ends_differ": 0,
+      "lines": 303,
+      "lines_same": 303,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.44,
       "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/court-of-federal-claims/motion-brief",
       "id": "motion-brief",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
-        12,
-        13
+        14,
+        14
       ],
-      "pages_equal": false,
-      "page_ends_differ": 8,
-      "lines": 315,
-      "lines_same": 84,
-      "pct_same": 26.7,
-      "first_differing": "p1 line 5",
-      "width_drift_pt": 26.49,
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 319,
+      "lines_same": 319,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.46,
       "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/court-of-international-trade/complaint",
       "id": "complaint",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
-        7,
+        10,
         10
       ],
-      "pages_equal": false,
-      "page_ends_differ": 5,
-      "lines": 246,
-      "lines_same": 69,
-      "pct_same": 28.0,
-      "first_differing": "p1 line 10",
-      "width_drift_pt": 69.6,
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 249,
+      "lines_same": 249,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 1.2,
       "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/court-of-international-trade/motion-brief",
       "id": "motion-brief",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
-        10,
-        12
+        13,
+        13
       ],
-      "pages_equal": false,
-      "page_ends_differ": 8,
-      "lines": 301,
-      "lines_same": 115,
-      "pct_same": 38.2,
-      "first_differing": "p1 line 13",
-      "width_drift_pt": 102.44,
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 306,
+      "lines_same": 306,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 1.07,
       "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/court-of-veteran-appeals/answering-brief",
       "id": "answering-brief",
       "engine": "docx",
-      "mode": "report",
-      "pages": null,
-      "pages_equal": false,
+      "mode": "gate",
+      "pages": [
+        12,
+        12
+      ],
+      "pages_equal": true,
       "page_ends_differ": 0,
-      "lines": 0,
-      "lines_same": 0,
+      "lines": 231,
+      "lines_same": 231,
       "pct_same": 100.0,
       "first_differing": "-",
-      "width_drift_pt": 0.0,
-      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620275050007051/OUTPUT-answering-brief.pdf): No such file or directory (os error 2)"
+      "width_drift_pt": 0.64,
+      "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/court-of-veteran-appeals/opening-brief",
       "id": "opening-brief",
       "engine": "docx",
-      "mode": "report",
-      "pages": null,
-      "pages_equal": false,
+      "mode": "gate",
+      "pages": [
+        14,
+        14
+      ],
+      "pages_equal": true,
       "page_ends_differ": 0,
-      "lines": 0,
-      "lines_same": 0,
+      "lines": 285,
+      "lines_same": 285,
       "pct_same": 100.0,
       "first_differing": "-",
-      "width_drift_pt": 0.0,
-      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620275106806624/OUTPUT-opening-brief.pdf): No such file or directory (os error 2)"
+      "width_drift_pt": 0.34,
+      "source": "committed"
+    },
+    {
+      "folder": "courts/federal-circuit/court-of-veteran-appeals/opening-brief",
+      "id": "opening-brief-2",
+      "engine": "docx",
+      "mode": "gate",
+      "pages": [
+        12,
+        12
+      ],
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 223,
+      "lines_same": 223,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.35,
+      "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response",
       "id": "patent-owner-response",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
         13,
         13
       ],
       "pages_equal": true,
-      "page_ends_differ": 11,
-      "lines": 260,
-      "lines_same": 167,
-      "pct_same": 64.2,
-      "first_differing": "p2 line 2",
-      "width_drift_pt": 6.71,
-      "source": "converted"
+      "page_ends_differ": 0,
+      "lines": 256,
+      "lines_same": 256,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.35,
+      "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/patent-trial-and-appeal-board/petition",
       "id": "petition",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
-        14,
+        15,
         15
       ],
-      "pages_equal": false,
-      "page_ends_differ": 12,
-      "lines": 281,
-      "lines_same": 149,
-      "pct_same": 53.0,
-      "first_differing": "p1 line 13",
-      "width_drift_pt": 6.45,
-      "source": "converted"
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 283,
+      "lines_same": 283,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.36,
+      "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/trademark-trial-and-appeal-board/answer",
       "id": "answer-3",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
         4,
         4
       ],
       "pages_equal": true,
-      "page_ends_differ": 1,
-      "lines": 85,
-      "lines_same": 75,
-      "pct_same": 88.2,
-      "first_differing": "p1 line 6",
-      "width_drift_pt": 4.64,
+      "page_ends_differ": 0,
+      "lines": 84,
+      "lines_same": 84,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.4,
       "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/trademark-trial-and-appeal-board/notice-of-opposition",
       "id": "notice-of-opposition",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
-        7,
+        9,
         9
       ],
-      "pages_equal": false,
-      "page_ends_differ": 6,
-      "lines": 172,
-      "lines_same": 71,
-      "pct_same": 41.3,
-      "first_differing": "p1 line 21",
-      "width_drift_pt": 32.07,
+      "pages_equal": true,
+      "page_ends_differ": 0,
+      "lines": 175,
+      "lines_same": 175,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 1.78,
       "source": "committed"
     },
     {
       "folder": "courts/federal-circuit/trademark-trial-and-appeal-board/trial-brief",
       "id": "trial-brief",
       "engine": "docx",
-      "mode": "report",
+      "mode": "gate",
       "pages": [
-        8,
+        9,
         9
       ],
-      "pages_equal": false,
-      "page_ends_differ": 5,
+      "pages_equal": true,
+      "page_ends_differ": 0,
       "lines": 197,
-      "lines_same": 73,
-      "pct_same": 37.1,
-      "first_differing": "p1 line 4",
-      "width_drift_pt": 26.95,
+      "lines_same": 197,
+      "pct_same": 100.0,
+      "first_differing": "-",
+      "width_drift_pt": 0.4,
       "source": "committed"
     },
     {
@@ -3208,15 +3232,15 @@
       "mode": "report",
       "pages": [
         12,
-        12
+        13
       ],
-      "pages_equal": true,
-      "page_ends_differ": 6,
+      "pages_equal": false,
+      "page_ends_differ": 9,
       "lines": 258,
-      "lines_same": 82,
-      "pct_same": 31.8,
+      "lines_same": 201,
+      "pct_same": 77.9,
       "first_differing": "p2 line 1",
-      "width_drift_pt": 141.51,
+      "width_drift_pt": 124.83,
       "source": "committed"
     },
     {
@@ -3298,15 +3322,15 @@
       "mode": "report",
       "pages": [
         11,
-        6
+        10
       ],
       "pages_equal": false,
-      "page_ends_differ": 3,
-      "lines": 223,
-      "lines_same": 11,
-      "pct_same": 4.9,
-      "first_differing": "p1 line 1",
-      "width_drift_pt": 23.85,
+      "page_ends_differ": 10,
+      "lines": 218,
+      "lines_same": 108,
+      "pct_same": 49.5,
+      "first_differing": "p1 line 4",
+      "width_drift_pt": 74.87,
       "source": "committed"
     },
     {
@@ -3712,15 +3736,15 @@
       "mode": "report",
       "pages": [
         11,
-        10
+        11
       ],
-      "pages_equal": false,
-      "page_ends_differ": 8,
+      "pages_equal": true,
+      "page_ends_differ": 9,
       "lines": 293,
-      "lines_same": 91,
-      "pct_same": 31.1,
-      "first_differing": "p1 line 6",
-      "width_drift_pt": 25.28,
+      "lines_same": 218,
+      "pct_same": 74.4,
+      "first_differing": "p1 line 7",
+      "width_drift_pt": 4.21,
       "source": "committed"
     },
     {
@@ -3836,15 +3860,18 @@
       "id": "answering-brief",
       "engine": "docx",
       "mode": "report",
-      "pages": null,
+      "pages": [
+        13,
+        17
+      ],
       "pages_equal": false,
-      "page_ends_differ": 0,
-      "lines": 0,
-      "lines_same": 0,
-      "pct_same": 100.0,
-      "first_differing": "-",
-      "width_drift_pt": 0.0,
-      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620290093452789/OUTPUT-answering-brief.pdf): No such file or directory (os error 2)"
+      "page_ends_differ": 12,
+      "lines": 292,
+      "lines_same": 215,
+      "pct_same": 73.6,
+      "first_differing": "p1 line 2",
+      "width_drift_pt": 39.85,
+      "source": "committed"
     },
     {
       "folder": "courts/fourth-circuit/court-of-appeals/opening-brief",
@@ -3869,15 +3896,18 @@
       "id": "opening-brief",
       "engine": "docx",
       "mode": "report",
-      "pages": null,
+      "pages": [
+        12,
+        16
+      ],
       "pages_equal": false,
-      "page_ends_differ": 0,
-      "lines": 0,
-      "lines_same": 0,
-      "pct_same": 100.0,
-      "first_differing": "-",
-      "width_drift_pt": 0.0,
-      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620290055809657/OUTPUT-opening-brief.pdf): No such file or directory (os error 2)"
+      "page_ends_differ": 12,
+      "lines": 264,
+      "lines_same": 56,
+      "pct_same": 21.2,
+      "first_differing": "p1 line 8",
+      "width_drift_pt": 60.71,
+      "source": "committed"
     },
     {
       "folder": "courts/fourth-circuit/court-of-appeals/reply-brief",
@@ -3902,15 +3932,18 @@
       "id": "reply-brief",
       "engine": "docx",
       "mode": "report",
-      "pages": null,
+      "pages": [
+        10,
+        12
+      ],
       "pages_equal": false,
-      "page_ends_differ": 0,
-      "lines": 0,
-      "lines_same": 0,
-      "pct_same": 100.0,
-      "first_differing": "-",
-      "width_drift_pt": 0.0,
-      "source": "not measured: LibreOffice conversion failed: fb render: no PDF from soffice (/dev/shm/fb-xengine-107964-1792620290167189070/OUTPUT-reply-brief.pdf): No such file or directory (os error 2)"
+      "page_ends_differ": 10,
+      "lines": 193,
+      "lines_same": 151,
+      "pct_same": 78.2,
+      "first_differing": "p1 line 2",
+      "width_drift_pt": 30.97,
+      "source": "committed"
     },
     {
       "folder": "courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-complaint",
@@ -4662,8 +4695,8 @@
       "pages_equal": true,
       "page_ends_differ": 2,
       "lines": 139,
-      "lines_same": 70,
-      "pct_same": 50.4,
+      "lines_same": 74,
+      "pct_same": 53.2,
       "first_differing": "p1 line 6",
       "width_drift_pt": 24.1,
       "source": "committed"
@@ -4914,8 +4947,8 @@
       "pages_equal": false,
       "page_ends_differ": 4,
       "lines": 224,
-      "lines_same": 80,
-      "pct_same": 35.7,
+      "lines_same": 75,
+      "pct_same": 33.5,
       "first_differing": "p1 line 7",
       "width_drift_pt": 32.35,
       "source": "committed"
@@ -5328,8 +5361,8 @@
       "pages_equal": false,
       "page_ends_differ": 6,
       "lines": 309,
-      "lines_same": 71,
-      "pct_same": 23.0,
+      "lines_same": 62,
+      "pct_same": 20.1,
       "first_differing": "p1 line 1",
       "width_drift_pt": 25.67,
       "source": "committed"
@@ -5400,8 +5433,8 @@
       "pages_equal": true,
       "page_ends_differ": 9,
       "lines": 354,
-      "lines_same": 6,
-      "pct_same": 1.7,
+      "lines_same": 5,
+      "pct_same": 1.4,
       "first_differing": "p1 line 2",
       "width_drift_pt": 33.96,
       "source": "converted"
@@ -6444,10 +6477,10 @@
       "pages_equal": false,
       "page_ends_differ": 7,
       "lines": 221,
-      "lines_same": 75,
-      "pct_same": 33.9,
+      "lines_same": 80,
+      "pct_same": 36.2,
       "first_differing": "p1 line 11",
-      "width_drift_pt": 6.94,
+      "width_drift_pt": 12.17,
       "source": "committed"
     },
     {
@@ -6465,7 +6498,7 @@
       "lines_same": 63,
       "pct_same": 28.5,
       "first_differing": "p1 line 1",
-      "width_drift_pt": 64.13,
+      "width_drift_pt": 33.21,
       "source": "committed"
     },
     {
@@ -7092,8 +7125,8 @@
       "pages_equal": true,
       "page_ends_differ": 8,
       "lines": 257,
-      "lines_same": 87,
-      "pct_same": 33.9,
+      "lines_same": 88,
+      "pct_same": 34.2,
       "first_differing": "p1 line 1",
       "width_drift_pt": 25.2,
       "source": "committed"
@@ -7110,8 +7143,8 @@
       "pages_equal": true,
       "page_ends_differ": 5,
       "lines": 257,
-      "lines_same": 76,
-      "pct_same": 29.6,
+      "lines_same": 77,
+      "pct_same": 30.0,
       "first_differing": "p1 line 21",
       "width_drift_pt": 35.99,
       "source": "committed"
@@ -7128,8 +7161,8 @@
       "pages_equal": false,
       "page_ends_differ": 13,
       "lines": 321,
-      "lines_same": 118,
-      "pct_same": 36.8,
+      "lines_same": 120,
+      "pct_same": 37.4,
       "first_differing": "p1 line 1",
       "width_drift_pt": 49.26,
       "source": "committed"
@@ -7650,10 +7683,10 @@
       "pages_equal": true,
       "page_ends_differ": 7,
       "lines": 197,
-      "lines_same": 73,
-      "pct_same": 37.1,
+      "lines_same": 72,
+      "pct_same": 36.5,
       "first_differing": "p2 line 2",
-      "width_drift_pt": 29.09,
+      "width_drift_pt": 28.64,
       "source": "converted"
     },
     {
@@ -7668,10 +7701,10 @@
       "pages_equal": false,
       "page_ends_differ": 7,
       "lines": 211,
-      "lines_same": 87,
-      "pct_same": 41.2,
+      "lines_same": 84,
+      "pct_same": 39.8,
       "first_differing": "p3 line 4",
-      "width_drift_pt": 31.04,
+      "width_drift_pt": 28.63,
       "source": "converted"
     },
     {
@@ -7686,8 +7719,8 @@
       "pages_equal": true,
       "page_ends_differ": 5,
       "lines": 181,
-      "lines_same": 71,
-      "pct_same": 39.2,
+      "lines_same": 70,
+      "pct_same": 38.7,
       "first_differing": "p3 line 2",
       "width_drift_pt": 26.72,
       "source": "converted"
@@ -7703,11 +7736,11 @@
       ],
       "pages_equal": false,
       "page_ends_differ": 15,
-      "lines": 290,
-      "lines_same": 221,
-      "pct_same": 76.2,
+      "lines": 291,
+      "lines_same": 235,
+      "pct_same": 80.8,
       "first_differing": "p2 line 6",
-      "width_drift_pt": 12.9,
+      "width_drift_pt": 36.01,
       "source": "committed"
     },
     {
@@ -7721,9 +7754,9 @@
       ],
       "pages_equal": true,
       "page_ends_differ": 12,
-      "lines": 290,
-      "lines_same": 72,
-      "pct_same": 24.8,
+      "lines": 291,
+      "lines_same": 74,
+      "pct_same": 25.4,
       "first_differing": "p1 line 4",
       "width_drift_pt": 72.16,
       "source": "committed"
@@ -7740,8 +7773,8 @@
       "pages_equal": false,
       "page_ends_differ": 16,
       "lines": 323,
-      "lines_same": 226,
-      "pct_same": 70.0,
+      "lines_same": 238,
+      "pct_same": 73.7,
       "first_differing": "p1 line 13",
       "width_drift_pt": 7.24,
       "source": "committed"
@@ -7758,8 +7791,8 @@
       "pages_equal": false,
       "page_ends_differ": 16,
       "lines": 323,
-      "lines_same": 135,
-      "pct_same": 41.8,
+      "lines_same": 143,
+      "pct_same": 44.3,
       "first_differing": "p1 line 10",
       "width_drift_pt": 30.39,
       "source": "committed"
@@ -8514,8 +8547,8 @@
       "pages_equal": true,
       "page_ends_differ": 6,
       "lines": 341,
-      "lines_same": 110,
-      "pct_same": 32.3,
+      "lines_same": 113,
+      "pct_same": 33.1,
       "first_differing": "p1 line 19",
       "width_drift_pt": 49.66,
       "source": "committed"
@@ -8604,8 +8637,8 @@
       "pages_equal": true,
       "page_ends_differ": 1,
       "lines": 78,
-      "lines_same": 46,
-      "pct_same": 59.0,
+      "lines_same": 45,
+      "pct_same": 57.7,
       "first_differing": "p1 line 13",
       "width_drift_pt": 38.93,
       "source": "converted"
