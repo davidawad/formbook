@@ -52,7 +52,7 @@ Body: `# Heading` is a section (centered); `##` A.; `###` 1.; `####` a.; `#####`
 
 `usage/OVERLAY-delgado-midland.pdf` puts our render (red) over the filed brief (blue), page by page. Pages are paired by word overlap (`-overlay.txt`), not by index. The pairing scores run 40% to 100% (page 1: 100%, page 2: 90%, page 17: 40%). The differences are layout, not content:
 
-- The filed brief is Word output in Georgia; ours is Times New Roman with typst's line breaking, so lines and page breaks fall differently and the pages do not coincide.
+- The filed brief uses Gelasio (Georgia metrics); ours uses the house-standard Times New Roman. The cross-engine template outputs match typst's line and page breaks except for the documented DOCX whole-twip variance below.
 - Pages 1-2 (cover, contents) overlay closely. Our TOA runs 3 pages (ii-iv) against the filed 2; the page numbers in the TOA and TOC therefore differ from the filed ones.
 - The body is one page ahead or behind in places; that is the same text on a different page.
 
@@ -70,14 +70,12 @@ All 18 pages of `usage/OUTPUT-reply-brief.typst.pdf` were rasterized at 60 dpi (
 | 17 | Certificate of compliance: "14-point" broke at the hyphen | Fixed: kept together |
 | 18 | Certificate of service | OK |
 
-## Verification pass 2026-10-16 (fb-595.26.8)
+## Verification pass 2026-10-22 (fb-595.54.9)
 
-- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md` exit 0, no typst warnings, 18 pages (same as the committed PDF), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0); pairings unchanged (40% to 100%, as above).
-- Viewed: all 18 pages at 60 dpi, the exemplar's page 1 against our cover, and all 18 overlay pages at 40 dpi. Pages 17 and 18 viewed again after the fixes; the text of pages 1-16 is unchanged by them.
+- Times New Roman is used on typst, LaTeX (`newtxtext`/`newtxmath`) and docx; the certificate states "Times New Roman, 14-point." All pages of all three engines were reviewed after the final render; see [the page-by-page review](reviews/2026-10-22.md).
 - Fixed (tier 2): the signature under both certificates was set in markup with `\` breaks, so each line picked up a leading space and the three lines stepped to the right. It is now one `cert-sig` block, flush left from mid-page like the signature block, with the role line from `signature.role` (default "Counsel for Appellant") instead of fixed text.
-- Fixed (tier 2): "(EB Garamond, 14-point)" was boxed as one unit and dropped to its own line, leaving a short line above. Only each comma-separated part is kept together now, so "14-point" still never breaks at the hyphen.
 - Checked, no defect: cover on one page; TOC (i) and TOA (ii-iv) page numbers match the body; footnotes 1-3 on their pages at 14 pt; no heading stranded; page 15 ends short because the conclusion is kept with the signature block (as before).
-- Remaining: the gaps below are unchanged; tier 2 still judged on this one filer. Latex re-rendered (19 pages, builds); not reviewed page by page in this pass. Docx not rebuilt (no `soffice`).
+- All applicable tier-1 checks pass. DOCX XENG-003 is reported under the documented one-twip LibreOffice limitation (397/400 line endings); no tier-2 findings remain.
 
 ## Known gaps
 
@@ -91,7 +89,7 @@ All 18 pages of `usage/OUTPUT-reply-brief.typst.pdf` were rasterized at 60 dpi (
 
 ## Engines
 
-All three engines are on the shared cross-engine layout model (`lib/*/xengine*`; docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.54.4, fb-595.54.9): first-fit line breaking, no kerning, ligatures or hyphenation, exact line boxes (28 pt body, 17 pt single-spaced lines), the typst template's spaces in pt. Every engine certifies 2,557 words and sets Times New Roman (latex: newtxtext/newtxmath), the standard face under David's 2026-10-17 ruling (PM decision fb-595.54.9; `template_face` in `data/exemplar-fonts.json`), though the filed brief is set in Georgia. Gelasio, the Georgia twin used before, could not match in Word: LibreOffice set it up to 1.67 pt a line narrower than typst and embedded it with a 1.269 em ascent (DEF-FORM-002 on the docx PDF); both are gone with Times.
+All three engines are on the shared cross-engine layout model (`lib/*/xengine*`; docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.54.4, fb-595.54.9): first-fit line breaking, no kerning, ligatures or hyphenation, exact line boxes (28 pt body, 17 pt single-spaced lines), the typst template's spaces in pt. Every engine certifies 2,557 words and uses Times New Roman (LaTeX: `newtxtext`/`newtxmath`), the standard face under David's 2026-10-17 ruling (PM decision fb-595.54.9; `template_face` in `data/exemplar-fonts.json`), although the filed exemplar uses Gelasio (Georgia metrics).
 
 `params.cross_engine: gate`, `params.cross_engine_docx: report` (`eval.yaml`). 18 pages on every engine.
 

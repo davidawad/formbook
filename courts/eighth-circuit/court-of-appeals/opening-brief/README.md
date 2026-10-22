@@ -25,7 +25,7 @@ Verified against primary text on 2026-10-14:
 | Rule | Requirement | Where the template uses it |
 |---|---|---|
 | FRAP 32(a)(4) | Double-spaced; block quotations over two lines may be single-spaced; margins at least one inch on all four sides. Cornell LII text, <https://www.law.cornell.edu/rules/frap/rule_32> (amendments through Dec. 1, 2019; 2024 note). | `page-margin = 1in`, `pitch-double = 28pt` (2 x the 14 pt type), quotation style |
-| FRAP 32(a)(5)(A) | Proportionally spaced typeface must have serifs (sans-serif allowed only in headings and captions); 14-point or larger. Cornell LII text as above; the 14-point figure is also in the Clerk's pointers (below). | `type-size = 14pt`, Times New Roman (serif) everywhere, footnotes included. Typeface: the rule names no face, so Times metrics (`docs/FONTS.md`, "No face named"); EB Garamond is for rules that name Garamond (fb-595.54.4: LibreOffice also set the vendored EB Garamond up to 2 pt a line narrower than typst, so the docx could not break its lines alike). |
+| FRAP 32(a)(5)(A) | Proportionally spaced typeface must have serifs (sans-serif allowed only in headings and captions); 14-point or larger. Cornell LII text as above; the 14-point figure is also in the Clerk's pointers (below). | `type-size = 14pt`, Times New Roman (serif) everywhere, footnotes included. The rule names no face; the template follows the house standard in `docs/FONTS.md` rule 6. The filed exemplar's Garamond is a single-filer choice (tier 3), not a court requirement; see its `template_face` note in `data/exemplar-fonts.json` (fb-595.54.9). |
 | FRAP 32(a)(6) | Plain roman; italics or boldface for emphasis. Cornell LII text as above. | Markdown emphasis; the template does not guess case names |
 | FRAP 32(a)(7)(B)(i) | Principal brief: 13,000 words. Cornell LII text as above. | `word-limit = 13000` (the count excludes FRAP 32(f) items) |
 | FRAP 32(f) | Excluded from the count: cover, disclosure statement, TOC, table of citations, statement regarding oral argument, addendum with statutes and rules, certificate of counsel, signature block, proof of service. Cornell LII text as above. | `strip-oral-argument`; the rest is outside the body |
@@ -59,7 +59,7 @@ Not verified and not produced: the cover colour (FRAP 32(a)(2) and any circuit r
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-opening-brief.typst.pdf` was rendered at 60 dpi and viewed (15 of 15) on the last render. Typst printed no warnings. Fonts embedded: EB Garamond (Regular, Bold, Italic) only.
+Every page of all three engine PDFs was rendered and viewed after the final render; see [the 2026-10-22 Gate 2 review](reviews/2026-10-22.md). The PDFs embed Times New Roman (typst/docx) or its metric-compatible TeX equivalent (latex).
 
 | Page | Content | Result |
 |---|---|---|
@@ -79,15 +79,9 @@ Every page of `OUTPUT-opening-brief.typst.pdf` was rendered at 60 dpi and viewed
 | 14 | Certificate of compliance (8) | OK (checkbox wrap fixed 2026-10-16, see below). Word count shows 1,627 words: the count of the sample, not of the filed brief (6,272). Item 3 is the virus statement. |
 | 15 | Certificate of service (9) | OK. |
 
-Pages 1-12 and 14-15 were viewed on the render before the last edit. The last edit (splitting the signature address into two lines) changes only page 13, which was viewed again after it.
+## Verification pass 2026-10-22 (fb-595.54.9)
 
-## Verification pass 2026-10-16 (fb-595.26.8)
-
-- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md` exit 0, no typst warnings, 15 pages (same as the committed PDF), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0); the page pairings and overlaps are the same as listed under "Overlay" above.
-- Viewed: all 15 pages at 60 dpi, the exemplar's page 1 against our cover, and all 15 overlay pages at 40 dpi. Page 14 viewed again (60 dpi and 150 dpi) after the fix; the text of every other page is unchanged by it.
-- Fixed (tier 2): in the certificate of compliance, the second checkbox item wrapped its second line under the box instead of under the text. Each checkbox item is now a paragraph with a hanging indent the width of the box and its gap.
-- Checked, no defect: cover on one page; summary of the case one page, first item (8th Cir. R. 28A(i)(1)); TOC and TOA page numbers match the body; no heading stranded at a page foot; page numbering roman i-v then arabic 1-9. The pilcrow in record cites ("3 ¶ 11") is EB Garamond's own glyph.
-- Remaining: the gaps below are unchanged. Latex re-rendered (15 pages, builds); not reviewed page by page in this pass. Docx not rebuilt (no `soffice`).
+The template uses Times New Roman across typst, LaTeX (`newtxtext`/`newtxmath`) and docx, per the house standard. Gate 2 reviewed all pages of each engine; LaTeX and docx match typst at 269/269 line endings and 15/15 pages. All applicable tier-1 checks pass and no tier-2 findings remain. See `reviews/2026-10-22.md` for the page-by-page record.
 
 ## Known gaps
 
@@ -103,8 +97,8 @@ Pages 1-12 and 14-15 were viewed on the render before the last edit. The last ed
 
 ## Engines
 
-All three engines are on the shared cross-engine layout model (`lib/*/xengine*`; docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.54.4): first-fit line breaking, no kerning, ligatures or hyphenation, exact line boxes (28 pt body, 17 pt single-spaced lines, section headings 16 pt in 20 pt boxes), the typst template's spaces in pt. The latex and docx renders break every line and page where the typst render does (`fb check --engine latex|docx`: XENG-001..003 PASS, 269 of 269 lines, 15 pages), and `eval.yaml` sets `params.cross_engine: gate`. All three certify the same word count (1,627). The summary of the case stays on one page (8th Cir. R. 28A(i)(1)) in every engine; at the earlier 2.2 x pitch in Times it ran onto a second page, so the body pitch is 28 pt, double the type size, as in the answering brief.
+All three engines are on the shared cross-engine layout model (`lib/*/xengine*`; docs/EVAL-LOOP.md, "Cross-engine gate"; fb-595.54.4): first-fit line breaking, no kerning, ligatures or hyphenation, exact line boxes (28 pt body, 17 pt single-spaced lines, section headings 16 pt in 20 pt boxes), the typst template's spaces in pt. The latex and docx renders break every line and page where the typst render does (XENG-001..003 PASS, 269 of 269 lines, 15 pages), and `eval.yaml` sets `params.cross_engine: gate`. All three certify the same word count (1,627). The summary of the case stays on one page (8th Cir. R. 28A(i)(1)) in every engine; the body pitch is 28 pt, double the type size, as in the answering brief.
 
-- **typst** (primary, `typst/`): the reference. For the cross-engine model: Times New Roman instead of EB Garamond (above); point headings bold, not small capitals; section headings 16 pt (was 1.15 em, 16.1 pt: Word has whole half points only); the Form 6 check boxes a ruled box around a literal X; "1\.", "2\.", "3\." in the certificate are text, not a typst list; a URL breaks only after `?`, `=`, `&`, a hyphen or a slash.
+- **typst** (primary, `typst/`): the reference. The template uses Times New Roman per the house standard; point headings bold, not small capitals; section headings 16 pt (Word has whole half points only); the Form 6 check boxes a ruled box around a literal X; "1\.", "2\.", "3\." in the certificate are text, not a typst list; a URL breaks only after `?`, `=`, `&`, a hyphen or a slash.
 - **latex** (`latex/template.tex`, `latex/ca8.lua`): stock pdflatex (`fb render`; the .tex compiles alone on stock TeX Live), newtx Times; every block built as typst builds it, sizes and spaces in bp, TOA pages from the aux file (passim from 7 pages). An addendum in the same file is not rendered (8th Cir. R. 28A(g): it is filed as its own PDF; typst `addendum = "separate"`): the filter fails loudly.
 - **docx** (`docx/render.sh`, `docx/ca8.lua`, `docx/build-reference.sh`, `docx/reference.docx`, `docx/pagemap.awk`, `docx/footer.xml`): pandoc on the reference built by `lib/docx/xengine-reference.sh` plus the "CA ..." styles; render.sh writes the sections and footers and fills the TOC and TOA page numbers from a first LibreOffice pass (pagemap.awk). Counsel columns are a borderless table; the check boxes bordered runs. An addendum fails loudly, as in latex; so does a `toa:` citation inside the summary of the case (its roman page is not in the page map; the sample has none).
