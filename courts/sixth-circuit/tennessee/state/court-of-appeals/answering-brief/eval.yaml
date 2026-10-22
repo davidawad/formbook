@@ -1,0 +1,12 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated
+# (docs/open-items/fb-595.54.63.md): TeX Gyre Schola's interword space differs by engine at 14 pt (typst 3.892 pt;
+# LaTeX bold 4.018 pt, so a bold heading line typst fills breaks a word early, p10; LibreOffice regular 3.85 pt, so a
+# body line holds a word more, p7).
+params:
+  cross_engine: report
+  # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,
+  # whose 16.8 pt line box starts at the 1 in margin, measures its box 3.99 pt into the margin on docx (box top
+  # 68.01 pt; typst 75.12 pt), as the California Courts of Appeal motion brief (3.31 pt at 13 pt). The vertical
+  # tolerance covers that box, not text: the engines set the same baselines.
+  eps_v_pt: 4

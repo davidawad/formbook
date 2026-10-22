@@ -30,53 +30,53 @@ signature:
   lines: ["(#32381)", "Senior Assistant Attorney General", "Public Interest Division", "Post Office Box 20207", "Nashville, Tennessee 37202", "(615) 253-5463", "*Counsel for Respondent-Appellee*"]
 service:
   date: "July 17, 2023"
-  method: "by the Court’s electronic filing system and/or electronic transmission, to"
+  method: "by the Court’s electronic filing system and/or electronic transmission"
   recipients:
     - ["Paul R. McAdoo", "The Reporters Committee for Freedom of the Press", "6688 Nolensville Rd., Ste 108-20", "Brentwood, TN 37027", "pmcadoo@rcfp.org"]
 authorities:
   - heading: "Cases"
     entries:
-      - {cite: "*Appman v. Worthington*, 746 S.W.3d 165, 167 (Tenn. 1987)", find: ["Appman"]}
-      - {cite: '*Bearing Distributors, Inc. v. Gerregano*, No. M2020-01075-COA-R3-CV, 2022 WL 40008, at \*5 (Tenn. Ct. App. Jan. 5, 2022)', find: ["Bearing Distributors"]}
-      - {cite: "*Bowden v. Ward*, 27 S.W.3d 913, 916 (Tenn. 2000)", find: ["Bowden"]}
-      - {cite: '*Conley v. Knox Cnty. Sheriff*, No. E2020-01713-COA-R3-CV, 2022 WL 289275, at \*4 (Tenn. Ct. App. Feb. 1, 2022), perm. app. denied (Tenn. Aug. 3, 2022)', find: ["Conley"]}
-      - {cite: "*Graham v. Caples*, 325 S.W.3d 578, 582 (Tenn. 2010)", find: ["Graham"]}
-      - {cite: "*Hodge v. Craig*, 382 S.W.3d 325, 337 (Tenn. 2012)", find: ["Hodge"]}
-      - {cite: '*Jakes v. Sumner Cnty. Bd. of Educ.*, No. M2015-02471-COA-R3-CV, 2017 WL 3219511, at \*7 (Tenn. Ct. App. July 28, 2017)', find: ["Jakes"]}
-      - {cite: "*Marsh v. Henderson*, 424 S.W.2d 193, 196 (Tenn. 1968)", find: ["Marsh"]}
-      - {cite: "*Martin v. Powers*, 505 S.W.3d 512, 525 (Tenn. 2016)", find: ["Martin v. Powers"]}
-      - {cite: "*Memphis Publ’g Co v. Holt*, 710 S.W.2d 513, 517 (Tenn. 1986)", find: ["Holt"]}
-      - {cite: "*Piedmont Pub. Co. v. City of Winston-Salem*, 334 N.C. 595, 434 S.E.2d 176, 176–77 (1993)", find: ["Piedmont"]}
-      - {cite: '*Reguli v. Vick*, No. M2012-02709-COA-R3-CV, 2013 WL 5970480, at \*2 (Tenn. Ct. App. Sept. 10, 2013), perm. app. denied (Tenn. Apr. 8, 2014)', find: ["Reguli"]}
-      - {cite: "*Schneider v. City of Jackson*, 226 S.W.3d 332 (Tenn. 2007)", find: ["Schneider"]}
-      - {cite: '*Sharp v. Tenn. Dep’t of Com. & Ins.*, No. M2016-01207-COA-R3-CV, 2017 WL 5197291, at \*4 n.1 (Tenn. Ct. App. Nov. 9, 2017)', find: ["Sharp v."]}
-      - {cite: "*Tenn. Elec. Power Co. v. City of Chattanooga*, 114 S.W.2d 442, 444 (Tenn. 1937)", find: ["Tenn. Elec. Power"]}
-      - {cite: "*Tennessean v. Metro. Gov’t of Nashville*, 485 S.W.3d 857, 866 (Tenn. 2016)", find: ["Tennessean"]}
-      - {cite: "*Wright v. City of Knoxville*, 898 S.W.2d 177, 181 (Tenn. 1995)", find: ["Wright v. City"]}
+      - {cite: "*Appman v. Worthington*, 746 S.W.3d 165, 167 (Tenn. 1987)", find: "Appman"}
+      - {cite: '*Bearing Distributors, Inc. v. Gerregano*, No. M2020-01075-COA-R3-CV, 2022 WL 40008, at \*5 (Tenn. Ct. App. Jan. 5, 2022)', find: "Bearing Distributors"}
+      - {cite: "*Bowden v. Ward*, 27 S.W.3d 913, 916 (Tenn. 2000)", find: "Bowden"}
+      - {cite: '*Conley v. Knox Cnty. Sheriff*, No. E2020-01713-COA-R3-CV, 2022 WL 289275, at \*4 (Tenn. Ct. App. Feb. 1, 2022), perm. app. denied (Tenn. Aug. 3, 2022)', find: "Conley"}
+      - {cite: "*Graham v. Caples*, 325 S.W.3d 578, 582 (Tenn. 2010)", find: "Graham"}
+      - {cite: "*Hodge v. Craig*, 382 S.W.3d 325, 337 (Tenn. 2012)", find: "Hodge"}
+      - {cite: '*Jakes v. Sumner Cnty. Bd. of Educ.*, No. M2015-02471-COA-R3-CV, 2017 WL 3219511, at \*7 (Tenn. Ct. App. July 28, 2017)', find: "Jakes"}
+      - {cite: "*Marsh v. Henderson*, 424 S.W.2d 193, 196 (Tenn. 1968)", find: "Marsh"}
+      - {cite: "*Martin v. Powers*, 505 S.W.3d 512, 525 (Tenn. 2016)", find: "Martin v. Powers"}
+      - {cite: "*Memphis Publ’g Co v. Holt*, 710 S.W.2d 513, 517 (Tenn. 1986)", find: "Holt"}
+      - {cite: "*Piedmont Pub. Co. v. City of Winston-Salem*, 334 N.C. 595, 434 S.E.2d 176, 176–77 (1993)", find: "Piedmont"}
+      - {cite: '*Reguli v. Vick*, No. M2012-02709-COA-R3-CV, 2013 WL 5970480, at \*2 (Tenn. Ct. App. Sept. 10, 2013), perm. app. denied (Tenn. Apr. 8, 2014)', find: "Reguli"}
+      - {cite: "*Schneider v. City of Jackson*, 226 S.W.3d 332 (Tenn. 2007)", find: "Schneider"}
+      - {cite: '*Sharp v. Tenn. Dep’t of Com. & Ins.*, No. M2016-01207-COA-R3-CV, 2017 WL 5197291, at \*4 n.1 (Tenn. Ct. App. Nov. 9, 2017)', find: "Sharp v."}
+      - {cite: "*Tenn. Elec. Power Co. v. City of Chattanooga*, 114 S.W.2d 442, 444 (Tenn. 1937)", find: "Tenn. Elec. Power"}
+      - {cite: "*Tennessean v. Metro. Gov’t of Nashville*, 485 S.W.3d 857, 866 (Tenn. 2016)", find: "Tennessean"}
+      - {cite: "*Wright v. City of Knoxville*, 898 S.W.2d 177, 181 (Tenn. 1995)", find: "Wright v. City"}
   - heading: "Statutes"
     entries:
-      - {cite: "42 U.S.C. § 5106a", find: ["5106a"]}
-      - {cite: "45 C.F.R. §§ 1340.14(i)(1)", find: ["1340.14"]}
-      - {cite: "Tenn. Code Ann. § 10-7-503", find: ["10-7-503"]}
-      - {cite: "Tenn. Code Ann. § 10-7-504", find: ["10-7-504"]}
-      - {cite: "Tenn. Code Ann. § 10-7-505", find: ["10-7-505"]}
-      - {cite: "Tenn. Code Ann. § 16-15-716", find: ["16-15-716"]}
-      - {cite: "Tenn. Code Ann. § 33-3-103", find: ["33-3-103"]}
-      - {cite: "Tenn. Code Ann. § 33-3-108", find: ["33-3-108"]}
-      - {cite: "Tenn. Code Ann. § 37-1-403", find: ["37-1-403"]}
-      - {cite: "Tenn. Code Ann. § 37-1-406", find: ["37-1-406"]}
-      - {cite: "Tenn. Code Ann. § 37-1-409", find: ["37-1-409"]}
-      - {cite: "Tenn. Code Ann. § 37-1-607", find: ["37-1-607"]}
-      - {cite: "Tenn. Code Ann. § 37-1-612", find: ["37-1-612"]}
-      - {cite: "Tenn. Code Ann. § 37-3-803", find: ["37-3-803"]}
-      - {cite: "Tenn. Code Ann. § 37-3-810", find: ["37-3-810"]}
-      - {cite: "Tenn. Code Ann. § 37-5-107", find: ["37-5-107"]}
-      - {cite: "Tenn. Code Ann. §§ 68-142-101 to -111", find: ["68-142-"]}
+      - {cite: "42 U.S.C. § 5106a", find: "5106a"}
+      - {cite: "45 C.F.R. §§ 1340.14(i)(1)", find: "1340.14"}
+      - {cite: "Tenn. Code Ann. § 10-7-503", find: "10-7-503"}
+      - {cite: "Tenn. Code Ann. § 10-7-504", find: "10-7-504"}
+      - {cite: "Tenn. Code Ann. § 10-7-505", find: "10-7-505"}
+      - {cite: "Tenn. Code Ann. § 16-15-716", find: "16-15-716"}
+      - {cite: "Tenn. Code Ann. § 33-3-103", find: "33-3-103"}
+      - {cite: "Tenn. Code Ann. § 33-3-108", find: "33-3-108"}
+      - {cite: "Tenn. Code Ann. § 37-1-403", find: "37-1-403"}
+      - {cite: "Tenn. Code Ann. § 37-1-406", find: "37-1-406"}
+      - {cite: "Tenn. Code Ann. § 37-1-409", find: "37-1-409"}
+      - {cite: "Tenn. Code Ann. § 37-1-607", find: "37-1-607"}
+      - {cite: "Tenn. Code Ann. § 37-1-612", find: "37-1-612"}
+      - {cite: "Tenn. Code Ann. § 37-3-803", find: "37-3-803"}
+      - {cite: "Tenn. Code Ann. § 37-3-810", find: "37-3-810"}
+      - {cite: "Tenn. Code Ann. § 37-5-107", find: "37-5-107"}
+      - {cite: "Tenn. Code Ann. §§ 68-142-101 to -111", find: "68-142-"}
   - heading: "Rules"
     entries:
-      - {cite: "Tenn. R. App. P. 13(d)", find: ["13(d)"]}
-      - {cite: "Tenn. R. Civ. P. 59", find: ["Tenn. R. Civ. P. 59"]}
-      - {cite: "Tenn. R. Crim. P. 16", find: ["Rule 16", "Crim. P. 16", "Crim P. 16"]}
+      - {cite: "Tenn. R. App. P. 13(d)", find: "13(d)"}
+      - {cite: "Tenn. R. Civ. P. 59", find: "Tenn. R. Civ. P. 59"}
+      - {cite: "Tenn. R. Crim. P. 16", find: "Rule 16", finds: ["Rule 16", "Crim. P. 16", "Crim P. 16"]}
 ---
 
 # ISSUES PRESENTED FOR REVIEW
