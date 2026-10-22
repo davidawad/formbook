@@ -1,0 +1,76 @@
+# Court of Appeals of the State of Washington (washctapp): personal restraint petition (RAP 16.3-16.7). The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file
+# by `fb engines gen`, fb-595.54.12). Rules: ../../rules.md (RAP 16.7, 18.17, RAP Form 5); a number with no rule is
+# a style choice of the template, kept from the template it replaces. Lengths in points. No case text: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # WASHCTAPP-FORM-004 (RAP 18.17(a)(2)): 14 point for all text, footnotes, block quotations
+pitch:
+  body: 32.2              # WASHCTAPP-FORM-005 (RAP 18.17(a)(2)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # footnotes, block quotations, headings, cover, tables, signature: single (1.15 x 14 pt)
+margin: {top: 108, bottom: 108, left: 144, right: 108}   # WASHCTAPP-FORM-002 (RAP 18.17(a)(1)): 2 in left, 1 1/2 in right, top, bottom
+indent: 36
+# RAP 18.17: page numbers at the bottom; the cover unnumbered, the tables i, ii .., the petition from 1
+page_number: {align: center, from: 1, front: lower-roman}
+footnote: {size: 14, pitch: single, gap: 7}   # WASHCTAPP-FORM-004, -005: 14 pt, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # WASHCTAPP-FORM-005: block quotations single spaced, indented
+# The petition's parts (I. STATUS OF PETITIONER) centred in capitals; its sections, issues and sub-arguments bold,
+# 1/2 inch further in per level, later lines hung 1/2 inch.
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, left: 36, hang: 36, above: 14, below: 11.2}
+  - {bold: true, left: 72, hang: 36, above: 14, below: 11.2}
+  - {bold: true, italic: true, left: 108, hang: 36, above: 14, below: 11.2}
+# RAP 16.7, RAP Form 5 (WASHCTAPP-COVER-001, -004): the court and division, the case number, the caption with the
+# parties designated, the title, counsel at the right.
+cover:
+  - {text: "{court_heading}", align: center, bold: true}
+  - {text: "{case_number}", align: center, above: 21.6}
+  - each: caption
+    above: 28.8
+    between:
+      - {text: "v.", align: center, above: 21.6, below: 21.6}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true, above: 6.3}
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true, upper: true}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - group:
+          - {text: "{names}", bold: true, left: 129.6}
+          - {text: "{lines}", left: 129.6, above: 8.4, optional: true}
+# RAP 16.7(a)(2), (c) (RAP 10.3(a)(2)): a table of contents and a table of authorities, each on its own page.
+contents: {title: "TABLE OF CONTENTS", depth: 5, col: 36, hang: 21, step: 21, above: 12.6}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 11.2}
+# RAP 16.7(a)(6): the attorney's date and signature after the conclusion and the word-count certification
+# (WASHCTAPP-CERT-001), never split; the signer's "/s/" signature underlined, the typed name below it.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, pitch: body, optional: true}
+      - {text: "Respectfully submitted,", indent: 36, pitch: body}
+      - group:
+          - {text: "/s/ *{signature.signer}*", underline: true, left: 144}
+          - {text: "{signature.signer}", left: 144}
+          - {text: "{signature.lines}", left: 144, above: 8.4, optional: true}
+        above: 5.6
+    above: 21.6
+# RAP 16.7(a)(5)-(6): the request for relief and the petitioner's oath follow the attorney's signature, on a page of
+# their own; the oath is dated and signed by the petitioner.
+tail: {at: "IV. REQUEST FOR RELIEF", break: true, pitch: body, indent: 36}
+after_tail:
+  - when: oath
+    blocks:
+      - group:
+          - {text: "{oath.date}", indent: 36, pitch: body, optional: true}
+          - group:
+              - {text: "/s/ *{oath.signer}*", underline: true, left: 144}
+              - {text: "{oath.signer}", left: 144}
+            above: 5.6
+        above: 21.6
