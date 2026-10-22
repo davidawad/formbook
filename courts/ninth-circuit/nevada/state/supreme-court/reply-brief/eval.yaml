@@ -1,0 +1,8 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated yet: the differences are the
+# shared model's, not this folder's (docs/open-items/fb-595.54.18.md): a paragraph that anchors a footnote has no club
+# penalty in LaTeX and Word (lib/latex/xdoc.lua, lib/docx/xdoc.lua), so they set its first line under the "II. Argument"
+# heading at the foot of body p2 where typst carries heading and line to p3 (p6-p7 of the PDF); Word splits a long
+# footnote (note 3) across pages where typst and LaTeX keep it whole (p8-p9), and its pages differ from there to p19.
+params:
+  cross_engine: report
