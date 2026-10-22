@@ -20,9 +20,10 @@ local TW = 9360                               -- typst text-width: 6.5 in
 local CAP_LEFT, CAP_GUTTER = 4752, 288        -- typst caption-left 3.3 in, caption-gutter 0.2 in
 local CAP_PAD = 200                           -- typst caption-pad 10 pt
 local CAP_RULE = 6                            -- typst caption-rule 0.75 pt (eighths of a point)
-local CAP_RULE_TW = 15                        -- the same rule in twips: LibreOffice sets the bottom rule below the
-                                              -- cell's padding (a typst stroke takes no room), so the padding below
-                                              -- is that much less
+local CAP_RULE_TW = 15                        -- the same rule in twips: LibreOffice sets a cell's bottom rule below
+                                              -- the whole row (typst adds it below the grid), and gives a cell's
+                                              -- bottom margin to the whole row, so the party column's padding is
+                                              -- its last line's space after, less the rule
 local CAP_RIGHT_INSET = 144                   -- typst caption-right-inset 0.1 in
 local CAPTION_ABOVE = 240                     -- typst caption-above 12 pt
 local TITLE_ABOVE = 240                       -- typst title-above 12 pt
@@ -116,7 +117,7 @@ local function cover(m)
   for k, party in ipairs(m.caption.parties) do
     if k == 2 then left[#left + 1] = p(xe.runs("v.")) end
     for _, n in ipairs(items(party.names)) do left[#left + 1] = p(line(n)) end
-    left[#left + 1] = p(line(party.designation))
+    left[#left + 1] = p(line(party.designation), { after = k == #m.caption.parties and CAP_PAD - CAP_RULE_TW or 0 })
   end
   local right = { p(xe.runs("Case No. " .. txt(m.case_number))) }
   if m.judge then right[#right + 1] = p(line(m.judge)) end
@@ -135,8 +136,7 @@ local function cover(m)
     .. 'w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="0"/></w:tblPr><w:tblGrid>'
     .. '<w:gridCol w:w="' .. CAP_LEFT .. '"/><w:gridCol w:w="' .. CAP_GUTTER .. '"/><w:gridCol w:w="' .. right_w .. '"/>'
     .. '</w:tblGrid><w:tr><w:trPr><w:cantSplit/></w:trPr>'
-    .. tc(CAP_LEFT, table.concat(left), borders .. '<w:tcMar><w:bottom w:w="' .. (CAP_PAD - CAP_RULE_TW)
-      .. '" w:type="dxa"/><w:right w:w="' .. CAP_PAD .. '" w:type="dxa"/></w:tcMar>')
+    .. tc(CAP_LEFT, table.concat(left), borders .. '<w:tcMar><w:right w:w="' .. CAP_PAD .. '" w:type="dxa"/></w:tcMar>')
     .. tc(CAP_GUTTER, p(""))
     .. tc(right_w, table.concat(right), '<w:tcMar><w:left w:w="' .. CAP_RIGHT_INSET .. '" w:type="dxa"/></w:tcMar>')
     .. "</w:tr></w:tbl>"

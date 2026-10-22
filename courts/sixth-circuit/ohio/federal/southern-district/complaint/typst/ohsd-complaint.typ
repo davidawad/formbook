@@ -21,7 +21,9 @@
 #let caption-left = 3.3in               // width of the party column of the caption (its rules included)
 #let caption-gutter = 0.2in             // between the party column and the right column
 #let caption-pad = 10pt                 // the party column's text stops this far from its right and bottom rules
-#let caption-rule = 0.75pt              // the caption's rules
+#let caption-rule = 0.75pt              // the caption's rules; the bottom one takes its own room below the row, as
+                                        // LibreOffice sets a cell's bottom border (so the row is the taller column
+                                        // plus the rule in both engines)
 #let caption-right-inset = 0.1in        // the right column's text starts this far in
 #let sig-col = 3.1in                    // the signature's right column starts here; the date sits left of it
 
@@ -100,8 +102,8 @@
   if "judge" in meta and meta.judge != none { right.push(meta.judge) }
   block(width: 100%, above: caption-above, below: 0pt, breakable: false, grid(
     columns: (caption-left, caption-gutter, 1fr),
-    block(width: 100%, stroke: (right: caption-rule, bottom: caption-rule),
-      inset: (right: caption-pad, bottom: caption-pad), line-stack(rows)),
+    grid.cell(stroke: (right: caption-rule, bottom: caption-rule),
+      inset: (right: caption-pad, bottom: caption-pad - caption-rule), line-stack(rows)),
     [],
     pad(left: caption-right-inset, {
       line-stack(right)
@@ -207,7 +209,7 @@
 
   court-title(meta)
   caption(meta)
-  v(text-above)
+  v(caption-rule + text-above)
   let last-chunk = body.trim().split(regex("\\r?\\n[ \\t]*\\r?\\n")).last()
   assert(not last-chunk.starts-with("#"), message: "ohsd-complaint: the body must end with a paragraph (the signature is set with it)")
   body-chunks(body, meta, signature-block(meta))
