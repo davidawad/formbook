@@ -14,13 +14,17 @@
 --
 -- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
 -- exact line boxes of the typst pitch (twips = 20 x pt: 480 a numbered line, 240 a single line), the spaces
--- between blocks those of the typst template, and the break rules of typst on every run. Word cannot round a block of
--- wrapped single lines up to whole numbered lines, so neither engine does: the text after the caption follows it
--- directly (typst caption).
+-- between blocks those of the typst template, and the break rules of typst on every run. A block of single lines
+-- (counsel, caption) takes whole numbered lines, as typst's on-grid rounds it: the filter counts its wrapped lines
+-- (docx/lib/lines.lua) and sets the row to the next numbered line.
 
 local xe = require("docx.xengine")
+local here = PANDOC_SCRIPT_FILE:match("^(.*)[/\\]") or "."
+local L = dofile(here .. "/lib/lines.lua")
+L.prep = function(x) return xe.bind_signs(xe.unabbrev(x)) end
 
 local PITCH, SINGLE = 480, 240           -- typst pitch, pitch-single (half a numbered line)
+local SIZE = 24                          -- typst type-size 12 pt, in half points
 local PAGE_LINE, FOOT_LINE = 230, 208    -- typst pitch-page 11.5 pt, pitch-footer 10.4 pt
 local HALF = 240                         -- typst half-gap 12 pt
 local DROP = 192                         -- typst drop 9.6 pt: a single-spaced block's first line on a line number's baseline
@@ -33,12 +37,23 @@ local TEXTW = 8640                       -- 6 in: 8.5 in less the 1.5 in and 1 i
 local NUMBER_W = 1440                    -- typst number-width: the line numbers right-aligned in the first inch
 local CAP_LEFT, CAP_GUTTER = 4608, 288   -- typst caption-left 3.2 in, caption-gutter 0.2 in
 local CAP_INSET = 200                    -- typst caption-inset 10 pt
-local CAP_PAD = 225                      -- typst half-gap below the parties, less the 0.75 pt rule LibreOffice adds to the row
+local CAP_RULE = 15                      -- the 0.75 pt rule LibreOffice adds to the row (typst draws it over the cell)
 local RIGHT_INSET = 144                  -- typst right-inset 0.1 in
 local SIG_LEFT = 3744                    -- typst sig-left 2.6 in
 local FOOT_GAP = 40                      -- typst footer-gap 2 pt
 local PAGE_SIZE, FOOT_SIZE = 20, 18      -- typst page-size 10 pt, footer-size 9 pt, in half points
 local RULE = 'w:val="single" w:sz="6" w:space="0" w:color="000000"'
+
+-- The height of a block of single lines from DROP into its first numbered line, rounded up to whole numbered lines
+-- (typst on-grid).
+local function grid(h, min)
+  return math.max(min or 0, math.ceil((DROP + h) / PITCH)) * PITCH
+end
+
+-- Single lines a value wraps to in `width` twips (bold: o.b).
+local function count(v, width, o)
+  return L.count(L.runs(v, o), width, SIZE)
+end
 
 local function text(v) return pandoc.utils.stringify(v) end
 local function upper(content)
@@ -90,38 +105,52 @@ local function party_lines(sides)
   return rows
 end
 
-local function line(l)
-  return type(l) == "string" and xe.runs(l) or xe.inl(l)
+local function line(l, o)
+  return type(l) == "string" and xe.runs(l, o) or xe.inl(l, o)
 end
 
 local function cover(meta, out)
-  -- counsel, at least seven numbered lines high, half a line more than its lines (typst counsel-block)
-  local body = {}
-  for j, l in ipairs(meta.counsel) do body[#body + 1] = p(line(l), { before = j == 1 and DROP or 0 }) end
-  body[#body] = body[#body]:gsub('w:after="0"', 'w:after="' .. HALF .. '"', 1)
+  -- counsel, at least seven numbered lines, rounded up to whole ones (typst counsel-block)
+  local body, n = {}, 0
+  for j, l in ipairs(meta.counsel) do
+    body[#body + 1] = p(line(l), { before = j == 1 and DROP or 0 })
+    n = n + count(l, TEXTW)
+  end
   out[#out + 1] = tbl({ TEXTW }, { { body = body } },
-    '<w:trPr><w:cantSplit/><w:trHeight w:val="' .. COUNSEL_LINES * PITCH .. '" w:hRule="atLeast"/></w:trPr>')
+    '<w:trPr><w:cantSplit/><w:trHeight w:val="' .. grid(n * SINGLE, COUNSEL_LINES) .. '" w:hRule="atLeast"/></w:trPr>')
   local court = { "UNITED STATES BANKRUPTCY COURT", "SOUTHERN DISTRICT OF CALIFORNIA" }
   if meta.division then court[#court + 1] = pandoc.text.upper(text(meta.division)) end
   for _, l in ipairs(court) do out[#out + 1] = p(xe.runs(l, { b = true }), { line = PITCH, jc = "center", keep = true }) end
-  -- Caption: a numbered line below the court title (Word has no space before a table: the first paragraphs of the
-  -- row carry it).
-  local left = { p(xe.runs("In re"), { before = PITCH + DROP }) }
-  for _, l in ipairs(party_lines(meta.in_re)) do left[#left + 1] = p(line(l)) end
-  for j, l in ipairs(party_lines(meta.caption)) do left[#left + 1] = p(line(l), { before = j == 1 and HALF or 0 }) end
-  left[#left] = left[#left]:gsub('w:after="0"', 'w:after="' .. CAP_PAD .. '"', 1)
-  local right = { p(xe.runs("Case No. " .. text(meta.case_number)), { before = PITCH + DROP, left = RIGHT_INSET }) }
-  local function r(b, before) right[#right + 1] = p(b, { before = before or 0, left = RIGHT_INSET }) end
-  r(xe.runs("Chapter " .. text(meta.chapter)))
-  if meta.adv_number then r(xe.runs("Adv. Proc. No. " .. text(meta.adv_number)), HALF) end
-  r(xe.inl(meta.brief_title, { b = true }), HALF)
-  if meta.judge then r(xe.inl(meta.judge), HALF) end
+  -- Caption: a numbered line below the court title, on whole numbered lines (Word has no space before a table: the
+  -- first paragraphs of the row carry the line and the drop).
+  local lw, rw = CAP_LEFT - CAP_INSET, TEXTW - CAP_LEFT - CAP_GUTTER - RIGHT_INSET
+  local left, lh = { p(xe.runs("In re"), { before = PITCH + DROP }) }, SINGLE
+  for _, l in ipairs(party_lines(meta.in_re)) do
+    left[#left + 1] = p(line(l))
+    lh = lh + count(l, lw) * SINGLE
+  end
+  for j, l in ipairs(party_lines(meta.caption)) do
+    left[#left + 1] = p(line(l), { before = j == 1 and HALF or 0 })
+    lh = lh + count(l, lw) * SINGLE + (j == 1 and HALF or 0)
+  end
+  left[#left] = left[#left]:gsub('w:after="0"', 'w:after="' .. (HALF - CAP_RULE) .. '"', 1)
+  lh = lh + HALF
+  local right, rh = {}, 0
+  local function r(v, before, o)
+    right[#right + 1] = p(line(v, o), { before = (#right == 0 and PITCH + DROP or 0) + (before or 0), left = RIGHT_INSET })
+    rh = rh + (before or 0) + count(v, rw, o) * SINGLE
+  end
+  r("Case No. " .. text(meta.case_number))
+  r("Chapter " .. text(meta.chapter))
+  if meta.adv_number then r("Adv. Proc. No. " .. text(meta.adv_number), HALF) end
+  r(meta.brief_title, HALF, { b = true })
+  if meta.judge then r(meta.judge, HALF) end
   out[#out + 1] = tbl({ CAP_LEFT, CAP_GUTTER, TEXTW - CAP_LEFT - CAP_GUTTER }, {
     { pr = '<w:tcBorders><w:bottom ' .. RULE .. '/><w:right ' .. RULE .. '/></w:tcBorders>' ..
       '<w:tcMar><w:right w:w="' .. CAP_INSET .. '" w:type="dxa"/></w:tcMar>', body = left },
     { body = { p("", { before = PITCH + DROP }) } },
     { body = right },
-  })
+  }, '<w:trPr><w:cantSplit/><w:trHeight w:val="' .. (PITCH + grid(math.max(lh, rh)) - CAP_RULE) .. '" w:hRule="atLeast"/></w:trPr>')
 end
 
 -- ---------------------------------------------------------------------------

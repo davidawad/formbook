@@ -74,12 +74,12 @@
 #let body-par(above: 0pt, content) = block(width: 100%, above: above, below: 0pt,
   par(first-line-indent: (amount: para-indent, all: true), content))
 
-/// A block of single lines starting `drop` into its numbered line, at least `min` numbered lines high, and `pad` more than its lines. It is not
-/// rounded up to whole numbered lines: Word cannot round a block of wrapped lines, so the text after it follows it
-/// directly in both engines.
-#let single-block(min: 0, pad: 0pt, c) = context {
-  let h = measure(width: text-width, c).height + drop + pad
-  block(width: 100%, height: calc.max(min * pitch, h), inset: (top: drop), above: 0pt, below: 0pt, c)
+/// Whole numbered lines: a block of single lines starting `drop` into its first numbered line, rounded up to a
+/// multiple of `pitch` (at least `min` lines), so whatever follows it stays on the grid of numbered lines. The Word
+/// filter counts the same lines (docx/lib/lines.lua).
+#let on-grid(min: 0, c) = context {
+  let h = measure(width: text-width, c).height + drop
+  block(width: 100%, height: calc.max(min, calc.ceil(h / pitch)) * pitch, inset: (top: drop), above: 0pt, below: 0pt, c)
 }
 
 // ---------------------------------------------------------------------------
@@ -122,8 +122,8 @@
 // Cover: counsel, court title, caption (FRBP 7010 and Form 416; Fed. R. Civ. P. 10(a))
 // ---------------------------------------------------------------------------
 
-/// Counsel identification, upper left, from line 1. More counsel lines push the court title down, half a line below the last.
-#let counsel-block(meta) = single-block(min: counsel-lines, pad: half-gap, for l in meta.counsel { line-block(inl(l)) })
+/// Counsel identification, upper left, from line 1. More counsel lines push the court title down by whole lines.
+#let counsel-block(meta) = on-grid(min: counsel-lines, for l in meta.counsel { line-block(inl(l)) })
 
 #let court-title(meta) = {
   let lines = ("UNITED STATES BANKRUPTCY COURT", "SOUTHERN DISTRICT OF CALIFORNIA")
@@ -141,10 +141,10 @@
   rows
 }
 
-/// The caption, a numbered line below the court title: the debtor ("In re"), then
+/// The caption, a numbered line below the court title, on whole numbered lines: the debtor ("In re"), then
 /// the adversary parties, in a column ruled on the right and bottom; the case numbers, the title of the paper and the
 /// judge beside it.
-#let caption(meta) = block(width: 100%, above: pitch, below: 0pt, single-block(grid(
+#let caption(meta) = block(width: 100%, above: pitch, below: 0pt, on-grid(grid(
   columns: (caption-left, 1fr),
   column-gutter: caption-gutter,
   block(width: 100%, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: caption-inset, bottom: half-gap), {
