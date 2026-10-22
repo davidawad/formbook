@@ -1,0 +1,5 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. latex matches typst line for line; docx
+# keeps "City" on p23 line 14, a word typst ends at 504.04 against a 504 pt measure (the line-fit tolerance):
+# docs/open-items/fb-595.54.17.md.
+params:
+  cross_engine: report
