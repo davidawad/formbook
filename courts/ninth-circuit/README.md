@@ -37,7 +37,7 @@ Courts under `courts/ninth-circuit` (61).
 | [United States Bankruptcy Court, W.D. Washington](washington/federal/bankruptcy-western-district) | `wawb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, E.D. Washington](washington/federal/eastern-district) | `waed` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Washington](washington/federal/western-district) | `wawd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Alaska Court of Appeals](alaska/state/court-of-appeals) | `alaskactapp` | up for review | 1/1 | — | — | 14 |
+| [Alaska Court of Appeals](alaska/state/court-of-appeals) | `alaskactapp` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Alaska Supreme Court](alaska/state/supreme-court) | `alaska` | up for review | 6/6 | — | — | 29 |
 | [High Court of American Samoa](american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |
 | [Arizona Court of Appeals](arizona/state/court-of-appeals) | `arizctapp` | in progress | — | — | — | 14 |
@@ -46,26 +46,26 @@ Courts under `courts/ninth-circuit` (61).
 | [California Court of Appeal, First Appellate District](california/state/court-of-appeal-first-district) | `calctapp1d` | up for review | 7/7 | — | — | 29 |
 | [California Court of Appeal, Fourth Appellate District](california/state/court-of-appeal-fourth-district) | `calctapp4d` | in progress | — | — | — | 29 |
 | [California Court of Appeal, Second Appellate District](california/state/court-of-appeal-second-district) | `calctapp2d` | up for review | 5/5 | — | — | 29 |
-| [California Court of Appeal, Sixth Appellate District](california/state/court-of-appeal-sixth-district) | `calctapp6d` | up for review | 7/7 | — | — | 29 |
+| [California Court of Appeal, Sixth Appellate District](california/state/court-of-appeal-sixth-district) | `calctapp6d` | up for review | 7/7 | 1/1 | 1/1 | 29 |
 | [California Court of Appeal, Third Appellate District](california/state/court-of-appeal-third-district) | `calctapp3d` | up for review | 2/2 | — | — | 29 |
 | [California Courts of Appeal](california/state/courts-of-appeal) | `calctapp` | up for review | 5/5 | — | 3/3 | 29 |
 | [California Superior Court](california/state/superior-court) | `calsuperct` | up for review | 2/2 | — | 2/2 | 14 |
 | [California Superior Court, San Diego County](california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | up for review | 2/2 | — | 2/2 | 14 |
 | [California Superior Court, Appellate Division](california/state/superior-court-appellate-division) | `calappdeptsuper` | in progress | — | — | — | 14 |
 | [California Supreme Court](california/state/supreme-court) | `cal` | up for review | 5/5 | — | 2/2 | 29 |
-| [Supreme Court of Guam](guam/state/supreme-court) | `guam` | up for review | 2/2 | — | — | 29 |
+| [Supreme Court of Guam](guam/state/supreme-court) | `guam` | up for review | 2/2 | 2/2 | 2/2 | 29 |
 | [Hawaii Intermediate Court of Appeals](hawaii/state/intermediate-court-of-appeals) | `hawapp` | up for review | 5/5 | — | — | 29 |
-| [Supreme Court of Hawaii](hawaii/state/supreme-court) | `haw` | up for review | 9/9 | — | — | 29 |
+| [Supreme Court of Hawaii](hawaii/state/supreme-court) | `haw` | up for review | 9/9 | 2/2 | 3/3 | 29 |
 | [Idaho Court of Appeals](idaho/state/court-of-appeals) | `idahoctapp` | up for review | 3/3 | — | — | 29 |
-| [Idaho Supreme Court](idaho/state/supreme-court) | `idaho` | up for review | 7/7 | — | — | 29 |
+| [Idaho Supreme Court](idaho/state/supreme-court) | `idaho` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Montana Supreme Court](montana/state/supreme-court) | `mont` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals of Nevada](nevada/state/court-of-appeals) | `nevapp` | in progress | 5/5 | — | — | 14 |
 | [Nevada Supreme Court](nevada/state/supreme-court) | `nev` | in progress | 9/9 | — | — | 14 |
-| [Supreme Court of The Commonwealth of The Northern Mariana Islands](northern-mariana-islands/state/supreme-court) | `nmi` | up for review | 1/1 | — | — | 14 |
+| [Supreme Court of The Commonwealth of The Northern Mariana Islands](northern-mariana-islands/state/supreme-court) | `nmi` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Court of Appeals of Oregon](oregon/state/court-of-appeals) | `orctapp` | in progress | 0/1 | — | — | 29 |
 | [Oregon Supreme Court](oregon/state/supreme-court) | `or` | in progress | — | — | — | 29 |
-| [Court of Appeals of Washington](washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | — | — | 29 |
-| [Washington Supreme Court](washington/state/supreme-court) | `wash` | up for review | 9/9 | — | — | 29 |
+| [Court of Appeals of Washington](washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
+| [Washington Supreme Court](washington/state/supreme-court) | `wash` | up for review | 9/9 | 2/2 | 2/2 | 29 |
 
 [Formbook index](../../README.md)
 <!-- fb:generated:end -->

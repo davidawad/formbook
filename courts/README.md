@@ -40,7 +40,7 @@ Courts under `courts` (346).
 | [Massachusetts District Court, Appellate Division](first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` | in progress | — | — | — | 14 |
 | [Massachusetts Supreme Judicial Court](first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | in progress | 9/9 | — | — | 14 |
 | [Supreme Court of New Hampshire](first-circuit/new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | — | — | 29 |
-| [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | up for review | 1/1 | — | — | 29 |
+| [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | up for review | 1/1 | 1/1 | 1/1 | 29 |
 | [Supreme Court of Puerto Rico](first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | — | — | 29 |
 | [Supreme Court of Rhode Island](first-circuit/rhode-island/state/supreme-court) | `ri` | up for review | 3/3 | — | — | 29 |
 | [Court of Appeals for the Second Circuit](second-circuit/court-of-appeals) | `ca2` | up for review | 3/3 | 3/3 | 3/3 | 14 |
@@ -59,9 +59,9 @@ Courts under `courts` (346).
 | [Connecticut Court of Appeals](second-circuit/connecticut/state/court-of-appeals) | `connappct` | up for review | 6/6 | — | — | 29 |
 | [Connecticut Supreme Court](second-circuit/connecticut/state/supreme-court) | `conn` | up for review | 7/7 | — | — | 29 |
 | [Appellate Terms of the Supreme Court of New York](second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | up for review | 3/3 | — | — | 29 |
-| [New York Court of Appeals](second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | — | 2/2 | 29 |
+| [New York Court of Appeals](second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | 1/1 | 3/3 | 29 |
 | [The Four Departments of the Appellate Division](second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 3/3 | 29 |
-| [Supreme Court of Vermont](second-circuit/vermont/state/supreme-court) | `vt` | in progress | 4/4 | — | — | 14 |
+| [Supreme Court of Vermont](second-circuit/vermont/state/supreme-court) | `vt` | in progress | 4/4 | 1/1 | 1/1 | 14 |
 | [Court of Appeals for the Third Circuit](third-circuit/court-of-appeals) | `ca3` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, D. Delaware](third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Delaware](third-circuit/delaware/federal/district) | `ded` | up for review | 2/2 | — | 2/2 | 14 |
@@ -76,8 +76,8 @@ Courts under `courts` (346).
 | [United States Bankruptcy Court, D. Virgin Islands](third-circuit/virgin-islands/federal/bankruptcy-district) | `vib` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, Virgin Islands](third-circuit/virgin-islands/federal/district) | `vid` | up for review | 2/2 | — | 2/2 | 14 |
 | [Delaware Supreme Court](third-circuit/delaware/state/supreme-court) | `del` | up for review | 5/5 | — | — | 29 |
-| [Supreme Court of New Jersey](third-circuit/new-jersey/state/supreme-court) | `nj` | up for review | 5/5 | 1/1 | 1/1 | 29 |
-| [Commonwealth Court of Pennsylvania](third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | 7/7 | — | — | 29 |
+| [Supreme Court of New Jersey](third-circuit/new-jersey/state/supreme-court) | `nj` | up for review | 5/5 | 3/3 | 3/3 | 29 |
+| [Commonwealth Court of Pennsylvania](third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | 7/7 | 3/3 | 4/4 | 29 |
 | [Superior Court of Pennsylvania](third-circuit/pennsylvania/state/superior-court) | `pasuperct` | up for review | 5/5 | — | — | 29 |
 | [Supreme Court of Pennsylvania](third-circuit/pennsylvania/state/supreme-court) | `pa` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals for the Fourth Circuit](fourth-circuit/court-of-appeals) | `ca4` | up for review | 3/3 | 3/3 | 3/3 | 14 |
@@ -99,16 +99,16 @@ Courts under `courts` (346).
 | [United States Bankruptcy Court, S.D. West Virginia](fourth-circuit/west-virginia/federal/bankruptcy-southern-district) | `wvsb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, N.D. West Virginia](fourth-circuit/west-virginia/federal/northern-district) | `wvnd` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, S.D. West Virginia](fourth-circuit/west-virginia/federal/southern-district) | `wvsd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Appeals of Maryland](fourth-circuit/maryland/state/court-of-appeals) | `md` | up for review | 9/9 | — | — | 29 |
+| [Court of Appeals of Maryland](fourth-circuit/maryland/state/court-of-appeals) | `md` | up for review | 9/9 | 4/4 | 7/7 | 29 |
 | [Court of Special Appeals of Maryland](fourth-circuit/maryland/state/court-of-special-appeals) | `mdctspecapp` | up for review | 6/6 | — | — | 29 |
 | [Court of Appeals of North Carolina](fourth-circuit/north-carolina/state/court-of-appeals) | `ncctapp` | up for review | 7/7 | — | — | 29 |
 | [Supreme Court of North Carolina](fourth-circuit/north-carolina/state/supreme-court) | `nc` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals of South Carolina](fourth-circuit/south-carolina/state/court-of-appeals) | `scctapp` | up for review | 5/5 | — | — | 29 |
 | [Supreme Court of South Carolina](fourth-circuit/south-carolina/state/supreme-court) | `sc` | up for review | 7/7 | — | — | 29 |
 | [Court of Appeals of Virginia](fourth-circuit/virginia/state/court-of-appeals) | `vactapp` | up for review | 5/5 | — | — | 29 |
-| [Supreme Court of Virginia](fourth-circuit/virginia/state/supreme-court) | `va` | up for review | 8/8 | — | — | 29 |
+| [Supreme Court of Virginia](fourth-circuit/virginia/state/supreme-court) | `va` | up for review | 8/8 | 3/3 | 3/3 | 29 |
 | [Intermediate Court of Appeals of West Virginia](fourth-circuit/west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | up for review | 5/5 | — | — | 29 |
-| [West Virginia Supreme Court](fourth-circuit/west-virginia/state/supreme-court) | `wva` | up for review | 9/9 | — | — | 29 |
+| [West Virginia Supreme Court](fourth-circuit/west-virginia/state/supreme-court) | `wva` | up for review | 9/9 | 3/3 | 3/3 | 29 |
 | [Court of Appeals for the Fifth Circuit](fifth-circuit/court-of-appeals) | `ca5` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, E.D. Louisiana](fifth-circuit/louisiana/federal/bankruptcy-eastern-district) | `laeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, M.D. Louisiana](fifth-circuit/louisiana/federal/bankruptcy-middle-district) | `lamb` | up for review | 2/2 | — | 2/2 | 14 |
@@ -131,7 +131,7 @@ Courts under `courts` (346).
 | [Louisiana Court of Appeal](fifth-circuit/louisiana/state/court-of-appeal) | `lactapp` | up for review | 6/6 | — | — | 29 |
 | [Supreme Court of Louisiana](fifth-circuit/louisiana/state/supreme-court) | `la` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | up for review | 5/5 | — | — | 29 |
-| [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | 7/7 | — | — | 29 |
+| [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | 7/7 | 1/1 | 1/1 | 29 |
 | [Court of Civil Appeals of Texas](fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | — | 3/3 | 29 |
 | [Court of Criminal Appeals of Texas](fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | — | 2/2 | 29 |
 | [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | — | 2/2 | 29 |
@@ -157,7 +157,7 @@ Courts under `courts` (346).
 | [District Court, W.D. Tennessee](sixth-circuit/tennessee/federal/western-district) | `tnwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Kentucky](sixth-circuit/kentucky/state/court-of-appeals) | `kyctapp` | up for review | 6/6 | — | — | 29 |
 | [Kentucky Supreme Court](sixth-circuit/kentucky/state/supreme-court) | `ky` | up for review | 8/8 | — | — | 29 |
-| [Michigan Court of Appeals](sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | 1/1 | 1/1 | 29 |
+| [Michigan Court of Appeals](sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | 2/2 | 2/2 | 29 |
 | [Michigan Supreme Court](sixth-circuit/michigan/state/supreme-court) | `mich` | up for review | 8/8 | — | — | 29 |
 | [Ohio Court of Appeals](sixth-circuit/ohio/state/court-of-appeals) | `ohioctapp` | up for review | 6/6 | — | — | 29 |
 | [Ohio Supreme Court](sixth-circuit/ohio/state/supreme-court) | `ohio` | up for review | 9/9 | — | — | 29 |
@@ -207,20 +207,20 @@ Courts under `courts` (346).
 | [District Court, D. North Dakota](eighth-circuit/north-dakota/federal/district) | `ndd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. South Dakota](eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. South Dakota](eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Arkansas Court of Appeals](eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | up for review | 6/6 | 1/1 | 1/1 | 29 |
+| [Arkansas Court of Appeals](eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | up for review | 6/6 | 4/4 | 4/4 | 29 |
 | [Arkansas Supreme Court](eighth-circuit/arkansas/state/supreme-court) | `ark` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals of Iowa](eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | up for review | 4/4 | — | — | 29 |
-| [Supreme Court of Iowa](eighth-circuit/iowa/state/supreme-court) | `iowa` | up for review | 8/8 | — | — | 29 |
+| [Supreme Court of Iowa](eighth-circuit/iowa/state/supreme-court) | `iowa` | up for review | 8/8 | 6/6 | 6/6 | 29 |
 | [Court of Appeals of Minnesota](eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 1/1 | 1/1 | 29 |
 | [Supreme Court of Minnesota](eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | 8/8 | — | — | 29 |
-| [Missouri Court of Appeals](eighth-circuit/missouri/state/court-of-appeals) | `moctapp` | up for review | 5/5 | — | — | 29 |
+| [Missouri Court of Appeals](eighth-circuit/missouri/state/court-of-appeals) | `moctapp` | up for review | 5/5 | 1/1 | 1/1 | 29 |
 | [Missouri Court of Appeals, Eastern District](eighth-circuit/missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | — | — | 29 |
-| [Missouri Court of Appeals, Southern District](eighth-circuit/missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | — | — | 29 |
+| [Missouri Court of Appeals, Southern District](eighth-circuit/missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Missouri Court of Appeals, Western District](eighth-circuit/missouri/state/court-of-appeals-western-district) | `moctappwd` | up for review | 5/5 | — | — | 29 |
 | [Supreme Court of Missouri](eighth-circuit/missouri/state/supreme-court) | `mo` | up for review | 6/6 | — | — | 29 |
 | [Nebraska Court of Appeals](eighth-circuit/nebraska/state/court-of-appeals) | `nebctapp` | up for review | 4/4 | — | — | 29 |
 | [Nebraska Supreme Court](eighth-circuit/nebraska/state/supreme-court) | `neb` | up for review | 5/5 | — | — | 29 |
-| [North Dakota Court of Appeals](eighth-circuit/north-dakota/state/court-of-appeals) | `ndctapp` | up for review | 3/3 | — | — | 29 |
+| [North Dakota Court of Appeals](eighth-circuit/north-dakota/state/court-of-appeals) | `ndctapp` | up for review | 3/3 | 3/3 | 1/1 | 29 |
 | [North Dakota Supreme Court](eighth-circuit/north-dakota/state/supreme-court) | `nd` | up for review | 7/7 | — | — | 29 |
 | [Supreme Court of South Dakota](eighth-circuit/south-dakota/state/supreme-court) | `sd` | up for review | 4/4 | — | — | 29 |
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](ninth-circuit/bankruptcy-appellate-panel) | `bap9` | up for review | 3/3 | — | 3/3 | 14 |
@@ -255,7 +255,7 @@ Courts under `courts` (346).
 | [United States Bankruptcy Court, W.D. Washington](ninth-circuit/washington/federal/bankruptcy-western-district) | `wawb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, E.D. Washington](ninth-circuit/washington/federal/eastern-district) | `waed` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Washington](ninth-circuit/washington/federal/western-district) | `wawd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Alaska Court of Appeals](ninth-circuit/alaska/state/court-of-appeals) | `alaskactapp` | up for review | 1/1 | — | — | 14 |
+| [Alaska Court of Appeals](ninth-circuit/alaska/state/court-of-appeals) | `alaskactapp` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Alaska Supreme Court](ninth-circuit/alaska/state/supreme-court) | `alaska` | up for review | 6/6 | — | — | 29 |
 | [High Court of American Samoa](ninth-circuit/american-samoa/state/high-court) | `amsamoa` | todo | — | — | — | 0 |
 | [Arizona Court of Appeals](ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | in progress | — | — | — | 14 |
@@ -264,26 +264,26 @@ Courts under `courts` (346).
 | [California Court of Appeal, First Appellate District](ninth-circuit/california/state/court-of-appeal-first-district) | `calctapp1d` | up for review | 7/7 | — | — | 29 |
 | [California Court of Appeal, Fourth Appellate District](ninth-circuit/california/state/court-of-appeal-fourth-district) | `calctapp4d` | in progress | — | — | — | 29 |
 | [California Court of Appeal, Second Appellate District](ninth-circuit/california/state/court-of-appeal-second-district) | `calctapp2d` | up for review | 5/5 | — | — | 29 |
-| [California Court of Appeal, Sixth Appellate District](ninth-circuit/california/state/court-of-appeal-sixth-district) | `calctapp6d` | up for review | 7/7 | — | — | 29 |
+| [California Court of Appeal, Sixth Appellate District](ninth-circuit/california/state/court-of-appeal-sixth-district) | `calctapp6d` | up for review | 7/7 | 1/1 | 1/1 | 29 |
 | [California Court of Appeal, Third Appellate District](ninth-circuit/california/state/court-of-appeal-third-district) | `calctapp3d` | up for review | 2/2 | — | — | 29 |
 | [California Courts of Appeal](ninth-circuit/california/state/courts-of-appeal) | `calctapp` | up for review | 5/5 | — | 3/3 | 29 |
 | [California Superior Court](ninth-circuit/california/state/superior-court) | `calsuperct` | up for review | 2/2 | — | 2/2 | 14 |
 | [California Superior Court, San Diego County](ninth-circuit/california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | up for review | 2/2 | — | 2/2 | 14 |
 | [California Superior Court, Appellate Division](ninth-circuit/california/state/superior-court-appellate-division) | `calappdeptsuper` | in progress | — | — | — | 14 |
 | [California Supreme Court](ninth-circuit/california/state/supreme-court) | `cal` | up for review | 5/5 | — | 2/2 | 29 |
-| [Supreme Court of Guam](ninth-circuit/guam/state/supreme-court) | `guam` | up for review | 2/2 | — | — | 29 |
+| [Supreme Court of Guam](ninth-circuit/guam/state/supreme-court) | `guam` | up for review | 2/2 | 2/2 | 2/2 | 29 |
 | [Hawaii Intermediate Court of Appeals](ninth-circuit/hawaii/state/intermediate-court-of-appeals) | `hawapp` | up for review | 5/5 | — | — | 29 |
-| [Supreme Court of Hawaii](ninth-circuit/hawaii/state/supreme-court) | `haw` | up for review | 9/9 | — | — | 29 |
+| [Supreme Court of Hawaii](ninth-circuit/hawaii/state/supreme-court) | `haw` | up for review | 9/9 | 2/2 | 3/3 | 29 |
 | [Idaho Court of Appeals](ninth-circuit/idaho/state/court-of-appeals) | `idahoctapp` | up for review | 3/3 | — | — | 29 |
-| [Idaho Supreme Court](ninth-circuit/idaho/state/supreme-court) | `idaho` | up for review | 7/7 | — | — | 29 |
+| [Idaho Supreme Court](ninth-circuit/idaho/state/supreme-court) | `idaho` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Montana Supreme Court](ninth-circuit/montana/state/supreme-court) | `mont` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals of Nevada](ninth-circuit/nevada/state/court-of-appeals) | `nevapp` | in progress | 5/5 | — | — | 14 |
 | [Nevada Supreme Court](ninth-circuit/nevada/state/supreme-court) | `nev` | in progress | 9/9 | — | — | 14 |
-| [Supreme Court of The Commonwealth of The Northern Mariana Islands](ninth-circuit/northern-mariana-islands/state/supreme-court) | `nmi` | up for review | 1/1 | — | — | 14 |
+| [Supreme Court of The Commonwealth of The Northern Mariana Islands](ninth-circuit/northern-mariana-islands/state/supreme-court) | `nmi` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Court of Appeals of Oregon](ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | in progress | 0/1 | — | — | 29 |
 | [Oregon Supreme Court](ninth-circuit/oregon/state/supreme-court) | `or` | in progress | — | — | — | 29 |
-| [Court of Appeals of Washington](ninth-circuit/washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | — | — | 29 |
-| [Washington Supreme Court](ninth-circuit/washington/state/supreme-court) | `wash` | up for review | 9/9 | — | — | 29 |
+| [Court of Appeals of Washington](ninth-circuit/washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
+| [Washington Supreme Court](ninth-circuit/washington/state/supreme-court) | `wash` | up for review | 9/9 | 2/2 | 2/2 | 29 |
 | [United States Bankruptcy Appellate Panel of The Tenth Circuit](tenth-circuit/bankruptcy-appellate-panel) | `bap10` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Tenth Circuit](tenth-circuit/court-of-appeals) | `ca10` | up for review | 3/3 | 1/1 | 3/3 | 14 |
 | [United States Bankruptcy Court, D. Colorado](tenth-circuit/colorado/federal/bankruptcy-district) | `cob` | up for review | 2/2 | — | 2/2 | 14 |
@@ -305,15 +305,15 @@ Courts under `courts` (346).
 | [District Court, D. Wyoming](tenth-circuit/wyoming/federal/district) | `wyd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Colorado Court of Appeals](tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | up for review | 5/5 | — | — | 29 |
 | [Colorado Supreme Court](tenth-circuit/colorado/state/supreme-court) | `colo` | up for review | 8/8 | — | — | 29 |
-| [Court of Appeals of Kansas](tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | up for review | 5/5 | — | — | 29 |
+| [Court of Appeals of Kansas](tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | up for review | 5/5 | 4/4 | 5/5 | 29 |
 | [Supreme Court of Kansas](tenth-circuit/kansas/state/supreme-court) | `kan` | up for review | 9/9 | — | — | 29 |
 | [New Mexico Court of Appeals](tenth-circuit/new-mexico/state/court-of-appeals) | `nmctapp` | up for review | 6/6 | — | — | 29 |
-| [New Mexico Supreme Court](tenth-circuit/new-mexico/state/supreme-court) | `nm` | up for review | 8/8 | — | — | 29 |
+| [New Mexico Supreme Court](tenth-circuit/new-mexico/state/supreme-court) | `nm` | up for review | 8/8 | 1/1 | 1/1 | 29 |
 | [Court of Civil Appeals of Oklahoma](tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | up for review | 1/1 | — | — | 14 |
 | [Court of Criminal Appeals of Oklahoma](tenth-circuit/oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | up for review | 5/5 | — | — | 29 |
 | [Supreme Court of Oklahoma](tenth-circuit/oklahoma/state/supreme-court) | `okla` | up for review | 6/6 | — | — | 29 |
-| [Court of Appeals of Utah](tenth-circuit/utah/state/court-of-appeals) | `utahctapp` | up for review | 4/4 | — | — | 29 |
-| [Utah Supreme Court](tenth-circuit/utah/state/supreme-court) | `utah` | up for review | 7/7 | — | — | 29 |
+| [Court of Appeals of Utah](tenth-circuit/utah/state/court-of-appeals) | `utahctapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
+| [Utah Supreme Court](tenth-circuit/utah/state/supreme-court) | `utah` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Wyoming Supreme Court](tenth-circuit/wyoming/state/supreme-court) | `wyo` | up for review | 3/3 | — | — | 29 |
 | [United States Court of Appeals for the Eleventh Circuit](eleventh-circuit/court-of-appeals) | `ca11` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court for the Middle District of Alabama](eleventh-circuit/alabama/federal/bankruptcy-middle-district) | `almb` | up for review | 2/2 | — | 2/2 | 14 |
@@ -346,7 +346,7 @@ Courts under `courts` (346).
 | [Florida Supreme Court](eleventh-circuit/florida/state/supreme-court) | `fla` | up for review | 9/9 | — | — | 29 |
 | [Florida Third District Court of Appeal](eleventh-circuit/florida/state/third-district-court-of-appeal) | `fladistctapp3` | up for review | 8/8 | — | — | 29 |
 | [Georgia Court of Appeals](eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | — | 5/5 | 29 |
-| [Georgia Supreme Court](eleventh-circuit/georgia/state/supreme-court) | `ga` | up for review | 8/8 | — | 5/5 | 29 |
+| [Georgia Supreme Court](eleventh-circuit/georgia/state/supreme-court) | `ga` | up for review | 8/8 | 1/1 | 5/5 | 29 |
 | [Court of Appeals for the D.C. Circuit](dc-circuit/court-of-appeals) | `cadc` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, District of Columbia](dc-circuit/district-of-columbia/federal/bankruptcy-district) | `dcb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, District of Columbia](dc-circuit/district-of-columbia/federal/district) | `dcd` | up for review | 2/2 | — | 2/2 | 14 |

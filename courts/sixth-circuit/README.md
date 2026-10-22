@@ -27,7 +27,7 @@ Courts under `courts/sixth-circuit` (29).
 | [District Court, W.D. Tennessee](tennessee/federal/western-district) | `tnwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Kentucky](kentucky/state/court-of-appeals) | `kyctapp` | up for review | 6/6 | — | — | 29 |
 | [Kentucky Supreme Court](kentucky/state/supreme-court) | `ky` | up for review | 8/8 | — | — | 29 |
-| [Michigan Court of Appeals](michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | 1/1 | 1/1 | 29 |
+| [Michigan Court of Appeals](michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | 2/2 | 2/2 | 29 |
 | [Michigan Supreme Court](michigan/state/supreme-court) | `mich` | up for review | 8/8 | — | — | 29 |
 | [Ohio Court of Appeals](ohio/state/court-of-appeals) | `ohioctapp` | up for review | 6/6 | — | — | 29 |
 | [Ohio Supreme Court](ohio/state/supreme-court) | `ohio` | up for review | 9/9 | — | — | 29 |
