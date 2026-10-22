@@ -6,21 +6,42 @@
 // spacing: those are layout choices, marked as such in ../README.md.
 // Content-agnostic: every case word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or is a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")      // layout choice: no S.D.Ind. font rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")      // layout choice: no S.D.Ind. font rule; Times New Roman, the house standard (docs/FONTS.md), vendored in fonts/
 #let type-size = 12pt                 // layout choice: the Rule 9004(a) legibility floor is the only requirement
-#let pitch = 27.6pt                   // layout choice: double spacing, matching the filed exemplar (27.6 pt baseline pitch, measured)
 #let page-w = 8.5in                   // S.D.Ind. B-5005-3: no larger than 8-1/2 by 11 inches
 #let page-h = 11in
 #let margin = 1in                     // layout choice
-#let text-width = page-w - 2 * margin
-#let body-leading = 1.645em           // double spacing: 0.655 em line box + 1.645 em leading = 27.6 pt at 12 pt (measured, README.md)
-#let single-leading = 0.5em           // single spacing for the caption, the counsel and the signature block
-#let para-indent = 0.5in              // first-line indent of numbered allegations
+#let footer-distance = 0.5in          // the page number's line box ends half an inch above the page edge (docx: footer 720)
+#let para-indent = 0.5in              // first-line indent of numbered allegations; a paragraph number starts here
+#let number-box = 0.5in               // an allegation's number in a box after the indent: its text starts 1 in from the margin
+#let label-box = 0.6in                // a lettered item's label "(a)" in a box after the indent; its lines hang at 1.1 in
 #let caption-left = 3.4in             // width of the party column of each caption
+#let caption-gutter = 0.2in           // between the party column's rule and the right column
+#let caption-pad-right = 10pt         // the party column's text stands this far from its right rule
+#let caption-pad-bottom = 8pt         // and this far above its bottom rule
+#let caption-right-pad = 0.1in        // the right column's text stands this far in
+#let caption-rule = 0.75pt
+#let quote-left = 1in                 // block quotations: indented 1 in at the left, 0.5 in at the right
+#let quote-right = 0.5in
+#let sig-col = 2.8in                  // signature: "Dated:" in a 2.6 in column and a 0.2 in gutter, the firm and signer after it
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; docx/insb.lua and docx/reference.xml set the same
+// twips: 20 x pt).
+#let pitch-body = 27.6pt              // layout choice: double spacing, matching the filed exemplar (27.6 pt baseline pitch, measured)
+#let pitch-single = 13.8pt            // single spacing: court title, captions, title, block quotations, signature
+#let cover-gap = 27.6pt               // court title to the bankruptcy caption, the adversary caption to the title, the title to the lead-in
+#let caption-gap = 13.8pt             // between the bankruptcy and the adversary caption
+#let heading-gap = 13.8pt             // above and below a heading (half a double line)
+#let quote-gap = 13.8pt               // above, between and below the paragraphs of a block quotation
+#let sig-above = 27.6pt               // the last paragraph to the signature block
+#let sig-gap = 13.8pt                 // the firm to "By: /s/"
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -33,56 +54,56 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// Inline markdown (for names with *et al.*, etc.).
-#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+/// Markdown (for names with *et al.*, etc.).
+#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// Block markdown: a chunk of body text, rendered double spaced.
-#let body-md(t) = {
-  set par(leading: body-leading, spacing: 0pt, justify: false)
-  cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+/// Inline content without the paragraph breaks cmarker may put around it.
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
 }
 
-/// Fill whole lines: the block is rounded up to a multiple of `pitch`, so every paragraph ends on the
-/// line grid and the next one cannot be drawn over it (measured, not left to automatic block height).
-#let on-grid(c, w: text-width) = context {
-  let h = measure(width: w, c).height
-  block(width: w, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, c)
+/// One single-pitch line (a paragraph of its own), with an explicit space above it; "" is a blank line.
+#let sline(above: 0pt, centered: false, c) = if c == "" {
+  block(width: 100%, height: pitch-single, above: above, below: 0pt)
+} else {
+  block(width: 100%, above: above, below: 0pt, {
+    set text(..edges(pitch-single))
+    set align(center) if centered
+    par(first-line-indent: 0pt, if type(c) == str { unloose(md(c)) } else { c })
+  })
 }
 
-/// One single-spaced line per item.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => inl(i)))
-}
-
-/// A heading: one or more lines, kept with the chunk after it so it never ends a page.
-#let heading-block(c) = block(width: text-width, above: pitch * 0.5, below: pitch * 0.5, sticky: true, on-grid(c))
+/// Single-pitch lines, one paragraph each.
+#let slines(items) = for i in items { sline(i) }
 
 // ---------------------------------------------------------------------------
 // Cover: court title, bankruptcy caption, adversary caption, title of the paper
 // ---------------------------------------------------------------------------
 
 #let court-title(meta) = {
-  set par(leading: single-leading, spacing: 0pt)
-  align(center, text(weight: "bold", [UNITED STATES BANKRUPTCY COURT])) + linebreak()
-  align(center, text(weight: "bold", [SOUTHERN DISTRICT OF INDIANA])) + linebreak()
-  if "division" in meta and meta.division != none {
-    align(center, text(weight: "bold", upper(meta.division) + " DIVISION"))
-  }
+  let ls = ([UNITED STATES BANKRUPTCY COURT], [SOUTHERN DISTRICT OF INDIANA])
+  if "division" in meta and meta.division != none { ls.push(upper(meta.division) + " DIVISION") }
+  for l in ls { sline(centered: true, text(weight: "bold", l)) }
 }
 
+/// A caption: the party column ruled at its right and foot, the numbers beside it (docx: a table row).
+#let caption-grid(above, left, right) = block(width: 100%, above: above, below: 0pt, grid(
+  columns: (caption-left, caption-gutter, 1fr),
+  stroke: (x, y) => if x == 0 { (right: caption-rule, bottom: caption-rule) },
+  inset: (x, y) => if x == 0 { (right: caption-pad-right, bottom: caption-pad-bottom) } else { (bottom: caption-pad-bottom) },
+  slines(left),
+  [],
+  pad(left: caption-right-pad, slines(right)),
+))
+
 /// The bankruptcy caption: the debtor in the left column, the case number and chapter on the right.
-#let bankruptcy-caption(meta) = grid(
-  columns: (caption-left, 1fr),
-  column-gutter: 0.2in,
-  block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt), {
-    line-stack(("In re:", "") + meta.debtor.names + (meta.debtor.designation,))
-  }),
-  block(inset: (left: 0.1in), line-stack((
-    "Case No. " + meta.case_number,
-    "Chapter " + meta.chapter,
-  ))),
-)
+#let bankruptcy-caption(meta) = caption-grid(cover-gap,
+  ("In re:", "") + meta.debtor.names + (meta.debtor.designation,),
+  ("Case No. " + meta.case_number, "Chapter " + meta.chapter))
 
 /// The adversary caption: each party, then its designation; "v." between the parties.
 #let adversary-caption(meta) = {
@@ -92,129 +113,120 @@
     rows += p.names + (p.designation,)
   }
   let number = if meta.adversary.adv_number == "" { "Adv. Pro. No. ____________" } else { "Adv. Pro. No. " + meta.adversary.adv_number }
-  grid(
-    columns: (caption-left, 1fr),
-    column-gutter: 0.2in,
-    block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt), line-stack(rows)),
-    block(inset: (left: 0.1in), line-stack((number,))),
-  )
+  caption-grid(caption-gap, rows, (number,))
 }
 
 #let cover(meta) = {
   court-title(meta)
-  v(pitch)
   bankruptcy-caption(meta)
-  v(pitch * 0.5)
   adversary-caption(meta)
-  v(pitch)
-  align(center, text(weight: "bold", inl(meta.title)))
-  v(pitch)
+  sline(above: cover-gap, centered: true, text(weight: "bold", unloose(md(meta.title))))
 }
 
 // ---------------------------------------------------------------------------
 // Body and signature
 // ---------------------------------------------------------------------------
 
-#let signature-block(meta) = block(width: text-width, breakable: false, {
-  grid(
-    columns: (2.6in, 1fr),
-    column-gutter: 0.2in,
-    [Dated: #meta.date],
-    {
-      set par(leading: single-leading, spacing: 0pt, justify: false)
-      line-stack(meta.signature.firm)
-      v(pitch * 0.5)
-      line-stack(("By: /s/ " + meta.signature.signer, upper(meta.signature.signer)) + meta.signature.lines)
-    },
-  )
-})
+/// A body paragraph on the body pitch: `first` its first-line indent, `hang` the indent of its other lines.
+#let body-par(above: 0pt, first: para-indent, hang: 0pt, sticky: false, centered: false, c) = block(width: 100%,
+  above: above, below: 0pt, sticky: sticky, {
+    set align(center) if centered
+    par(first-line-indent: (amount: first, all: true), hanging-indent: hang, unloose(c))
+  })
+
+/// The signature block, single-spaced and kept on one page: "Dated:" at the left of the first line, the firm,
+/// "By: /s/", the signer in capitals and the counsel lines in a column from `sig-col` (docx: a tab and a hanging
+/// indent there).
+#let signature-block(meta) = {
+  let sig = meta.signature
+  let lines = sig.firm.map(l => (l, 0pt))
+  lines.push(("By: /s/ " + sig.signer, if sig.firm.len() > 0 { sig-gap } else { 0pt }))
+  lines.push((upper(sig.signer), 0pt))
+  lines += sig.lines.map(l => (l, 0pt))
+  block(width: 100%, breakable: false, above: sig-above, below: 0pt, {
+    set text(..edges(pitch-single))
+    for (i, (l, gap)) in lines.enumerate() {
+      block(width: 100%, above: gap, below: 0pt, par(first-line-indent: 0pt, hanging-indent: sig-col,
+        [#box(width: sig-col, if i == 0 [Dated: #meta.date])#unloose(md(l))]))
+    }
+  })
+}
+
+/// A block quotation: single-spaced, indented on both sides, not numbered; a blank single line between its
+/// paragraphs.
+#let quotation(t) = {
+  let ps = t.replace(regex("(?m)^>[ \\t]?"), "").split(regex("\\n[ \\t]*\\n")).filter(s => s.trim() != "")
+  for q in ps {
+    block(width: 100%, above: quote-gap, below: quote-gap, pad(left: quote-left, right: quote-right, sline(q.trim())))
+  }
+}
 
 /// Body chunks, each separated by a blank line in the sample:
 ///   `#` heading                    centered (level 1) or bold (level 2); kept with the next chunk
-///   `(a) ...` / `(1) ...`           labeled sub-item, shown as `a.` / `1.`, hanging indent, not numbered
+///   `(a) ...` / `(1) ...`           labeled sub-item, the label kept, hanging indent, not numbered
 ///   `> ...`                         block quotation, single spaced, indented both sides, not numbered
 ///   `[...]`                         centered bracketed note, not numbered
-///   `WHEREFORE ...`                 prayer paragraph, indented, not numbered
+///   `WHEREFORE ...`                 prayer paragraph, indented, not numbered, kept with the items after it
 ///   starts with a lowercase letter  continues the paragraph before it, not numbered
 ///   anything else                   numbered allegation (Fed.R.Civ.P. 10(b)); the count runs through the body
-/// The count is a plain variable, not a counter: a counter display needs `context`, which block sizing
-/// does not see. Numbering is per chunk, not a `show par` rule (that recurses without end in typst 0.15).
+/// Numbering is per chunk, not a `show par` rule (that recurses without end in typst 0.15).
 #let allegations(body) = {
-  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
+  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim()).filter(c => c != "")
   let n = 0
-  let pending = []
-  let has-pending = false
-  for c in chunks {
-    let t = c.trim()
+  for t in chunks {
     let labeled = t.match(regex("^\\(([a-z]+|[0-9]+)\\)[ \t]+"))
-    let piece = if t.starts-with("#") {
-      pending += body-md(t)
-      has-pending = true
-      none
+    if t.starts-with("#") {
+      md(t)
     } else if t.starts-with(">") {
-      let inner = t.split("\n").map(l => {
-        let s = l.trim()
-        if s.starts-with(">") { s = s.slice(1) }
-        s.trim()
-      }).join("\n")
-      pad(left: 1in, right: 0.5in, on-grid(w: text-width - 1.5in, {
-        set par(leading: single-leading, spacing: single-leading, justify: false)
-        cmarker.render(inner, raw-typst: false, smart-punctuation: true)
-      }))
+      quotation(t)
     } else if t.starts-with("[") {
-      on-grid({ set par(leading: body-leading); align(center, inl(t)) })
+      body-par(first: 0pt, centered: true, md(t))
     } else if labeled != none {
       let label = "(" + labeled.captures.at(0) + ")"
-      let rest = t.slice(labeled.end)
-      pad(left: para-indent, on-grid(w: text-width - para-indent, grid(
-        columns: (0.6in, 1fr),
-        [#label],
-        body-md(rest),
-      )))
+      body-par(first: 0pt, hang: para-indent + label-box, [#h(para-indent)#box(width: label-box, label)#unloose(md(t.slice(labeled.end)))])
     } else if t.starts-with("WHEREFORE") {
-      on-grid({ set par(leading: body-leading); h(para-indent); inl(t) })
+      body-par(sticky: true, md(t))
     } else if t.match(regex("^[a-z]")) != none {
       // Continues the paragraph before it (e.g. the total after a lettered list): not numbered, no indent.
-      on-grid({ set par(leading: body-leading); inl(t) })
+      body-par(first: 0pt, md(t))
     } else {
       n += 1
-      on-grid({ set par(leading: body-leading); h(para-indent); [#n.#h(0.3in)]; inl(t) })
-    }
-    // A heading is held until the chunk after it, so it never ends a page.
-    if piece != none {
-      if has-pending {
-        block(breakable: false, width: text-width, { pending; piece })
-      } else {
-        piece
-      }
-      pending = []
-      has-pending = false
+      body-par([#box(width: number-box, [#n.])#unloose(md(t))])
     }
   }
-  if pending != [] { block(breakable: false, width: text-width, pending) }
 }
 
 #let insb-adversary-complaint(meta, body) = {
   set page(
-    paper: "us-letter",
+    width: page-w,
+    height: page-h,
     margin: margin,
     numbering: none,
-    footer: context align(center, text(size: type-size, counter(page).display())),
+    // The page number centered at the foot of every page from page 1, in a single-pitch line box that ends
+    // footer-distance above the page edge.
+    footer-descent: margin - footer-distance - pitch-single,
+    footer: context align(center, text(size: type-size, ..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch, a section sign kept with its number.
+  show: xengine.with(pitch: pitch-body, list-indent: none)
+  // A doubled sign stays with its number too ("§§ 1334(b)"; xengine binds a single one).
+  show regex("[§¶]+ \\S+"): it => box(it)
 
-  show heading.where(level: 1): it => heading-block(align(center, text(size: type-size, weight: "bold", upper(it.body))))
-  show heading.where(level: 2): it => heading-block(text(size: type-size, weight: "bold", it.body))
+  // Headings at the type size on the body pitch, half a double line above and below, kept with the text after
+  // them: level 1 centered bold capitals, level 2 bold at the margin (docx: the same paragraphs).
+  show heading: it => block(width: 100%, above: heading-gap, below: heading-gap, sticky: true, {
+    set text(size: type-size, weight: "bold")
+    set par(first-line-indent: 0pt)
+    if it.level == 1 { align(center, upper(it.body)) } else { it.body }
+  })
 
   cover(meta)
 
-  if "lead_in" in meta and meta.lead_in != none {
-    on-grid({ set par(leading: body-leading); h(para-indent); inl(meta.lead_in) })
-  }
+  if "lead_in" in meta and meta.lead_in != none { body-par(above: cover-gap, md(meta.lead_in)) }
 
   allegations(body)
 
-  v(pitch)
   signature-block(meta)
 }

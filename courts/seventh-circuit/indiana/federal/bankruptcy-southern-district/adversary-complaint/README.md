@@ -2,7 +2,7 @@
 
 Doc type: **adversary complaint** (complaint commencing an adversary proceeding, with numbered allegations, counts, prayer and signature). Court: United States Bankruptcy Court, Southern District of Indiana. Folder: `courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/adversary-complaint/`.
 
-Status: exemplar=yes, render=ok, overlay=ok, pages reviewed 6 of 6. Nothing here sets `court.json` status.
+Status: exemplar=yes, render=ok, overlay=ok, pages reviewed 7 of 7 (typst and docx). Nothing here sets `court.json` status.
 
 ## Governing rules
 
@@ -24,10 +24,10 @@ Not used, and why:
 
 ## Layout choices (not rules)
 
-- **Typeface.** Face required by the rules: none. The S.D.Ind. Local Rules (as amended through Dec. 1, 2025; checked 2026-10-15, `Local-Rules.pdf`) name no typeface; B-5005-1(b)(1) requires documents to be "plainly and legibly typewritten, printed, or reproduced". Substitute: none. EB Garamond 12 pt is kept (vendored, OFL), as `docs/FONTS.md` says for a court that names no face. The exemplar is Times New Roman, which the rules do not require.
-- Double spacing at a 27.6 pt baseline pitch: the exemplar's body text measured at 27.6 pt with `pdftotext -bbox-layout`. Set as `body-leading = 1.65em` on the 0.65 em line box (measured, same method as the CAND template).
+- **Typeface.** Face required by the rules: none. The S.D.Ind. Local Rules (as amended through Dec. 1, 2025; checked 2026-10-15, `Local-Rules.pdf`) name no typeface; B-5005-1(b)(1) requires documents to be "plainly and legibly typewritten, printed, or reproduced". Substitute: none. Times New Roman 12 pt (vendored), the house standard (`docs/FONTS.md`), in typst and docx alike; the exemplar is Times New Roman too.
+- Double spacing at a 27.6 pt baseline pitch: the exemplar's body text measured at 27.6 pt with `pdftotext -bbox-layout`. Set as exact 27.6 pt line boxes (`pitch-body`; single lines 13.8 pt, `pitch-single`) on the shared cross-engine layout model (`lib/typst/xengine.typ`), with no extra space between paragraphs.
 - 1 inch margins on all sides. The exemplar's margins are similar.
-- Numbered allegations run continuously from 1 through the whole complaint, across counts, as in the filing; lettered items display `a.`, `b.` (the exemplar's style).
+- Numbered allegations run continuously from 1 through the whole complaint, across counts, as in the filing; lettered items keep their label as written (`(a)`, `(1)`) in a 0.6 in box after the 0.5 in indent, their lines hanging at 1.1 in; an allegation number sits in a 0.5 in box after the 0.5 in indent, its text from 1 in.
 - The statute quotation is set as a block quotation, indented on both sides.
 
 ## Exemplar
@@ -50,30 +50,31 @@ sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-southern-di
 sh tools/overlay.sh courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/adversary-complaint rabo-bayes-adversary-complaint
 ```
 
-- `usage/OUTPUT-adversary-complaint.typst.pdf`: 6 pages. Typst compiled with no warnings (`render.sh` fails on any). Vendored font only: `pdffonts` shows EBGaramond-Regular and -Bold, embedded (Identity-H).
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 7 pages. Typst compiled with no warnings (`render.sh` fails on any). Vendored font only: `pdffonts` shows Times New Roman regular and bold, embedded.
 - `usage/OVERLAY-rabo-bayes-adversary-complaint.pdf` and `.txt`: red = our render, blue = exemplar, black = both. The page map pairs pages one to one: ours p.1-6 ↔ filed p.1-6 (word overlap 47-64%). The overlay is a diagnostic, not a score: the exemplar's text sits at a different position on the page (its own spacing and caption layout), so the layers do not coincide line for line.
 - File names: the repo's tools read `OUTPUT-<id>.pdf` and write `OVERLAY-<id>.pdf/.txt` (CLAUDE.md naming), so this folder uses `INPUT-`/`OUTPUT-`/`OVERLAY-`, not the `<id>.pdf` and `<id>-overlay.pdf` in the task brief.
 
-## Visual review (Gate 2 record, all 6 pages, rendered at 60 dpi and looked at)
+## Visual review (Gate 2 record, all 7 pages, typst and docx, rendered at 50 dpi and looked at; fb-595.68.28)
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Cover (court title, bankruptcy caption, adversary caption, title), Preliminary Statement, paragraphs 1-2 | OK. Captions single-spaced; the adversary caption rule and the "Adv. Pro. No." blank are in place. |
-| 2 | Parties, Jurisdiction and Venue; Facts (paragraphs 3-11) | OK. Headings centered and bold; numbered paragraphs on the 27.6 pt grid. |
-| 3 | Paragraphs 12-17: four lettered credit lines (a-d) and the total | OK. The total continues the paragraph unnumbered, as in the filing. |
-| 4 | Paragraphs 18-23; page ends with white space because Count I's heading is kept with its first paragraph | OK. Heading kept with text (no orphan). |
-| 5 | Count I heading, the realleged paragraph, paragraphs 24-31; the statute quotation starts | OK. Quotation block indented on both sides, single-spaced. |
-| 6 | Quotation end, paragraphs 32-33, prayer (1-4), bracketed note, signature block | OK. Signature block: "Dated" left, firm and "/s/" right, name in capitals as filed. |
+| 1 | Cover (court title, bankruptcy caption, adversary caption, title), lead-in, Preliminary Statement, paragraphs 1-2 | OK. Captions single-spaced, the party columns ruled at right and foot; the "Adv. Pro. No." blank in place. |
+| 2 | Parties, Jurisdiction and Venue; Facts (paragraphs 3-10) | OK. Headings centered and bold, half a double line above and below; numbered paragraphs on the 27.6 pt pitch. |
+| 3 | Paragraphs 11-16 and lettered items (a)-(c) | OK. Labels at 0.5 in, the item lines hanging at 1.1 in. |
+| 4 | Item (d), the unnumbered total, paragraphs 17-22 with items (a)-(b) | OK. The total continues the paragraph unnumbered, as in the filing. |
+| 5 | Paragraph 23, Count I and its title heading, paragraphs 24-29 | OK. Both headings kept with paragraph 24. |
+| 6 | Paragraphs 30-33 with the statute quotation, the prayer (1)-(4), the bracketed note | OK. Quotation single-spaced, indented 1 in left and 0.5 in right; WHEREFORE kept with the prayer. |
+| 7 | Signature block | OK. Kept whole (it does not fit under the note on page 6): "Dated" left, firm and "/s/" from 2.8 in, the name in capitals as filed. |
 
-Reviewed pages: 6 of 6 (final state). Earlier passes found and fixed: line overlaps where block heights were measured at the wrong width (fixed by measuring each chunk at the width it is set at), and heading size (fixed by setting heading size to body size).
+Reviewed pages: 7 of 7 on both engines; the docx breaks every line and page as typst does (XENG-001..003).
 
 ## Known gaps and open choices
 
 1. **Tier-2 exemplars.** One exemplar from one filer. The eval loop asks for two or three from different filers. Not done; a second S.D. Ind. bankruptcy adversary complaint would be needed. Searches tried are in `usage/SOURCE.md`.
 2. **Form 416.** The caption layout is the exemplar's, checked against Rule 7010's wording. The Official Form 416 text itself was not fetched, so the caption is not checked line by line against the form.
 3. **Corporate Ownership Statement (B-7007-2).** Not generated. Required for the LLC plaintiff in a real filing.
-4. **Font.** No face named by the rules (checked 2026-10-15); EB Garamond at 12 pt is kept. Not a Times New Roman template, because the rules do not require one.
-5. **Length.** The exemplar is 7 pages; the render is 6. The 8-14 page target applies to exemplars of that length, so it does not apply here. The sample is the whole filing.
+4. **Font.** No face named by the rules (checked 2026-10-15); Times New Roman 12 pt, the house standard, in both engines.
+5. **Length.** The exemplar is 7 pages; the render is 7 (the signature block, kept whole, opens page 7). The 8-14 page target applies to exemplars of that length, so it does not apply here. The sample is the whole filing.
 6. **Quotation spacing.** The statute quotation is single-spaced, as set by the template's quotation block.
 7. **Certificates.** None generated (see the rules table: B-9013-2 does not apply to a Rule 7001 complaint).
 8. **Summons and other filings.** Not part of this doc type.
@@ -81,10 +82,8 @@ Reviewed pages: 6 of 6 (final state). Earlier passes found and fixed: line overl
 
 ## Engines
 
-**DOCX** (`docx/`). `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference: EB Garamond 12 pt, exact 27.6 pt (double) line spacing, 0.5 in first-line indent, letter page with 1 in margins, a centered page number in the footer, and single-spaced caption and signature styles. `docx/insb.lua` lays out the cover, the two caption tables, the numbered allegations (Rule 10(b)), the lettered items as "a." and "1.", the block quotation and the signature table, all from the sample's frontmatter and body.
+**DOCX** (`docx/`). `docx/reference.xml` holds the Word styles: `base="xengine"` in the typst face (`{font}`, Times New Roman), 12 pt, 552-twip body and 276-twip single line boxes, headings with 276 twips above and below, and the 12 pt page-number footer 0.5 in above the page edge; `fb render` builds the reference document from it. `docx/insb.lua` reads the sample's body chunk by chunk, as the typst template does, and writes every paragraph as WordprocessingML on `lib/docx/xengine.lua`: the cover, the two caption tables, the numbered allegations (Rule 10(b)), the lettered items, the block quotation, the prayer and the signature, all from the sample's frontmatter and body. No script: `fb render` runs pandoc with the filter and packs the archive (fb-595.68.28; were `build-reference.sh` and a committed `reference.docx` naming EB Garamond, which failed DEF-FONT-002).
 
-- Matches the typst form, by construction: font and size, double spacing, first-line indent, margins, the page-number footer, the caption and signature text.
-- Differs or is unverified: the allegation number is followed by a tab stop at 1 in (typst uses a 0.3 in gap); the body grid is kept by exact line spacing, not by typst's block rounding, so page breaks may fall differently; the caption rule (0.75 pt, right and bottom) and the borderless signature table are written as XML and not checked against the typst layout.
-- BLOCKED: docx.pdf checks (Gates 0 and 1 on `usage/OUTPUT-rabo-bayes-adversary-complaint.docx.pdf`): not produced, because `soffice` is not installed on this box. No page was rendered or reviewed (pages reviewed 0).
-- `sh tools/render.sh --engine docx` writes `usage/OUTPUT-adversary-complaint.docx`, then fails at the soffice step (expected here). The `.docx` was checked with `unzip -tq` and `xmllint --noout` on every XML part.
+- Cross-engine (fb-595.68.28): typst and docx share the layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`). `sh tools/check.sh <this folder> --engine docx`: XENG-001..003 PASS (7 = 7 pages, every line breaks after the same word); `params.cross_engine: gate` in `eval.yaml`. typst 9 and docx 13 checks passed, 0 failed.
+- The `.docx` converts in LibreOffice without error (the check's conversion); not opened in Word.
 - TOC and TOA: none in this doc type.
