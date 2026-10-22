@@ -221,7 +221,7 @@ Courts under `courts` (346).
 | [Nebraska Court of Appeals](eighth-circuit/nebraska/state/court-of-appeals) | `nebctapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Nebraska Supreme Court](eighth-circuit/nebraska/state/supreme-court) | `neb` | up for review | 5/5 | 4/4 | 3/3 | 29 |
 | [North Dakota Court of Appeals](eighth-circuit/north-dakota/state/court-of-appeals) | `ndctapp` | up for review | 3/3 | 3/3 | 2/2 | 29 |
-| [North Dakota Supreme Court](eighth-circuit/north-dakota/state/supreme-court) | `nd` | up for review | 7/7 | 6/6 | 5/5 | 29 |
+| [North Dakota Supreme Court](eighth-circuit/north-dakota/state/supreme-court) | `nd` | up for review | 7/7 | 6/6 | 6/6 | 29 |
 | [Supreme Court of South Dakota](eighth-circuit/south-dakota/state/supreme-court) | `sd` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](ninth-circuit/bankruptcy-appellate-panel) | `bap9` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Ninth Circuit](ninth-circuit/court-of-appeals) | `ca9` | up for review | 3/3 | 3/3 | 3/3 | 100 |
@@ -336,7 +336,7 @@ Courts under `courts` (346).
 | [United States District Court for the Southern District of Georgia](eleventh-circuit/georgia/federal/southern-district) | `gasd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Alabama Court of Civil Appeals](eleventh-circuit/alabama/state/court-of-civil-appeals) | `alacivapp` | up for review | 3/3 | — | — | 29 |
 | [Alabama Court of Criminal Appeals](eleventh-circuit/alabama/state/court-of-criminal-appeals) | `alacrimapp` | up for review | 3/3 | — | — | 29 |
-| [Supreme Court of Alabama](eleventh-circuit/alabama/state/supreme-court) | `ala` | up for review | 7/7 | — | — | 29 |
+| [Supreme Court of Alabama](eleventh-circuit/alabama/state/supreme-court) | `ala` | up for review | 7/7 | 5/5 | 6/6 | 29 |
 | [Florida District Courts of Appeal](eleventh-circuit/florida/state/district-courts-of-appeal) | `fladistctapp` | up for review | 8/8 | — | — | 29 |
 | [Florida Fifth District Court of Appeal](eleventh-circuit/florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | up for review | 8/8 | 8/8 | 8/8 | 29 |
 | [Florida First District Court of Appeal](eleventh-circuit/florida/state/first-district-court-of-appeal) | `fladistctapp1` | up for review | 8/8 | — | — | 29 |
