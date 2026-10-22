@@ -163,28 +163,28 @@ authorities:
     cite: "348 U.S. 483 (1954)"
   rs9_2800:
     kind: statute
-    name: "La. R.S. 9:2800.9"
+    cite: "La. R.S. 9:2800.9"
   rs13_4448:
     kind: statute
-    name: "La. R.S. 13:4448"
+    cite: "La. R.S. 13:4448"
   rs49_257:
     kind: statute
-    name: "La. R.S. 49:257(C)"
+    cite: "La. R.S. 49:257(C)"
   const2:
     kind: constitution
-    name: "La. Const. art. I, § 2"
+    cite: "La. Const. art. I, § 2"
   const2_2:
     kind: constitution
-    name: "La. Const. art. 2, § 2"
+    cite: "La. Const. art. 2, § 2"
   const4_8:
     kind: constitution
-    name: "La. Const. art. IV, § 8"
+    cite: "La. Const. art. IV, § 8"
   eo_bj2008:
     kind: other
-    name: "Executive Order BJ 2008-92"
+    cite: "Executive Order BJ 2008-92"
   eo_jbe2016:
     kind: other
-    name: "Executive Order No. JBE 2016-53"
+    cite: "Executive Order No. JBE 2016-53"
 ---
 
 Pursuant to this Court’s Rule IX, Attorney General Liz Murrill, in her official capacity as the Attorney General of the State of Louisiana,[^1] respectfully requests rehearing and states as follows:

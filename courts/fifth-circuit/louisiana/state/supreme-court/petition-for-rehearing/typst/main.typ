@@ -1,5 +1,5 @@
-// Entry point. tools/render.sh compiles it with --root <court-dir> and --input sample=usage/NAME.md:
-//   typst compile --root <court-dir> --font-path <repo>/fonts --ignore-system-fonts \
+// Entry point. tools/render.sh compiles it with --root <doc-dir> and --input sample=usage/NAME.md:
+//   typst compile --root <doc-dir> --font-path <repo>/fonts --ignore-system-fonts \
 //     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
 //     typst/main.typ out.pdf
 #import "la-petition-for-rehearing.typ": la-petition-for-rehearing, split-frontmatter
