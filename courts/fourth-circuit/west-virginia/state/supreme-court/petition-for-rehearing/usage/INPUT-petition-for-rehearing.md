@@ -10,40 +10,40 @@ proceeding: "Upon Certified Questions from the United States District Court for 
 brief_title: "RESPONDENT'S PETITION FOR REHEARING"
 toc: true
 authorities:
-  amoco: {kind: case, name: "Amoco Prod. Co. v. Andrus", cite: "527 F. Supp. 790 (E.D. La. 1981)"}
-  anderson: {kind: case, name: "Anderson Living Trust v. Energen Res. Corp.", cite: "161 F. Supp. 3d 1055 (D.N.M. 2016)"}
-  appalachian: {kind: case, name: "Appalachian Land Co. v. EQT Prod. Co.", cite: "468 S.W.3d 841 (Ky. 2015)"}
-  holbein: {kind: case, name: "Atlantic Richfield Co. v. Holbein", cite: "672 S.W.2d 507 (Tex. App. 1984)"}
-  baker: {kind: case, name: "Baker v. Magnum Hunter Prod., Inc.", cite: "473 S.W.3d 588 (Ky. 2015)"}
-  barefield: {kind: case, name: "Barefield v. DPIC Companies, Inc.", cite: "215 W. Va. 544, 600 S.E.2d 256 (2004)"}
-  bower: {kind: case, name: "Bower v. Westinghouse Elec. Corp.", cite: "206 W. Va. 133, 522 S.E.2d 424 (1999)"}
-  boyd: {kind: case, name: "Boyd v. Merritt", cite: "177 W. Va. 472, 354 S.E.2d 106 (1986)"}
-  bruen: {kind: case, name: "Bruen v. Columbia Gas Transmission Corp.", cite: "188 W. Va. 730, 426 S.E.2d 522 (1992)"}
-  clough: {kind: case, name: "Clough v. Williams Prod. RMT Co.", cite: "179 P.3d 32 (Colo. App. 2007)"}
-  conoco: {kind: case, name: "ConocoPhillips Co. v. Lyons", cite: "299 P.3d 844 (N.M. 2012)"}
-  crockett: {kind: case, name: "Crockett v. Andrews", cite: "153 W. Va. 714, 172 S.E.2d 384 (1970)"}
-  dynegy: {kind: case, name: "Dynegy Midstream Servs., Ltd. P'ship v. Apache Corp.", cite: "294 S.W.3d 164 (Tex. 2009)"}
-  hall: {kind: case, name: "Hall v. CNX Gas Co., LLC", cite: "137 A.3d 597 (Pa. Super. Ct. 2016)"}
-  henthorn: {kind: case, name: "Henthorn v. Collins", cite: "146 W. Va. 108, 118 S.E.2d 358 (1961)"}
-  kilmer: {kind: case, name: "Kilmer v. Elexco Land Servs., Inc.", cite: "990 A.2d 1147 (Pa. 2010)"}
-  kincaid: {kind: case, name: "Kincaid v. Mangum", cite: "189 W. Va. 404, 432 S.E.2d 74 (1993)"}
-  marathon: {kind: case, name: "Marathon Oil Co. v. Andrus", cite: "452 F. Supp. 548 (D. Wyo. 1978)"}
-  mittelstaedt: {kind: case, name: "Mittelstaedt v. Santa Fe Minerals, Inc.", cite: "954 P.2d 1203 (Okla. 1998)"}
-  pollock: {kind: case, name: "Pollock v. Energy Corp. of America", cite: "Civ. A. 10-1553, 2011 WL 3667289 (W.D. Pa. June 27, 2011)"}
-  raynes: {kind: case, name: "Raynes v. Nitro Pencil Co.", cite: "132 W. Va. 417, 52 S.E.2d 248 (1949)"}
-  roberts: {kind: case, name: "Roberts Ranch Co. v. Exxon Corp.", cite: "43 F. Supp. 2d 1252 (W.D. Okla. 1997)"}
-  rogers: {kind: case, name: "Rogers v. Westerman Farm Co.", cite: "29 P.3d 887 (Colo. 2001)"}
-  morgan: {kind: case, name: "State v. Gen. Daniel Morgan Post No. 548", cite: "144 W. Va. 137, 107 S.E.2d 353 (1959)"}
-  biafore: {kind: case, name: "State ex rel. Biafore v. Tomblin", cite: "236 W. Va. 528, 782 S.E.2d 223 (2016)"}
-  riffle: {kind: case, name: "State ex rel. Riffle v. Ranson", cite: "195 W. Va. 121, 464 S.E.2d 763 (1995)"}
-  sternberger: {kind: case, name: "Sternberger v. Marathon Oil Co.", cite: "894 P.2d 788 (Kan. 1995)"}
-  tawney: {kind: case, name: "Tawney v. Columbia Natural Res., L.L.C.", cite: "219 W. Va. 266, 633 S.E.2d 22 (2006)"}
-  mcdonald: {kind: case, name: "W. W. McDonald Land Co. v. EQT Prod. Co.", cite: "983 F. Supp. 2d 790 (S.D. W. Va. 2014)"}
-  s22-6-8: {kind: statute, name: "W. Va. Code § 22-6-8"}
-  s22-6-8a1: {kind: statute, name: "W. Va. Code § 22-6-8(a)(1)"}
-  s22-6-8a4: {kind: statute, name: "W. Va. Code § 22-6-8(a)(4)"}
-  s22-6-8e: {kind: statute, name: "W. Va. Code § 22-6-8(e)"}
-  rap25: {kind: rule, name: "W. Va. R. App. P. 25"}
+  amoco: {kind: case, name: "*Amoco Prod. Co. v. Andrus*", cite: "527 F. Supp. 790 (E.D. La. 1981)"}
+  anderson: {kind: case, name: "*Anderson Living Trust v. Energen Res. Corp.*", cite: "161 F. Supp. 3d 1055 (D.N.M. 2016)"}
+  appalachian: {kind: case, name: "*Appalachian Land Co. v. EQT Prod. Co.*", cite: "468 S.W.3d 841 (Ky. 2015)"}
+  holbein: {kind: case, name: "*Atlantic Richfield Co. v. Holbein*", cite: "672 S.W.2d 507 (Tex. App. 1984)"}
+  baker: {kind: case, name: "*Baker v. Magnum Hunter Prod., Inc.*", cite: "473 S.W.3d 588 (Ky. 2015)"}
+  barefield: {kind: case, name: "*Barefield v. DPIC Companies, Inc.*", cite: "215 W. Va. 544, 600 S.E.2d 256 (2004)"}
+  bower: {kind: case, name: "*Bower v. Westinghouse Elec. Corp.*", cite: "206 W. Va. 133, 522 S.E.2d 424 (1999)"}
+  boyd: {kind: case, name: "*Boyd v. Merritt*", cite: "177 W. Va. 472, 354 S.E.2d 106 (1986)"}
+  bruen: {kind: case, name: "*Bruen v. Columbia Gas Transmission Corp.*", cite: "188 W. Va. 730, 426 S.E.2d 522 (1992)"}
+  clough: {kind: case, name: "*Clough v. Williams Prod. RMT Co.*", cite: "179 P.3d 32 (Colo. App. 2007)"}
+  conoco: {kind: case, name: "*ConocoPhillips Co. v. Lyons*", cite: "299 P.3d 844 (N.M. 2012)"}
+  crockett: {kind: case, name: "*Crockett v. Andrews*", cite: "153 W. Va. 714, 172 S.E.2d 384 (1970)"}
+  dynegy: {kind: case, name: "*Dynegy Midstream Servs., Ltd. P'ship v. Apache Corp.*", cite: "294 S.W.3d 164 (Tex. 2009)"}
+  hall: {kind: case, name: "*Hall v. CNX Gas Co., LLC*", cite: "137 A.3d 597 (Pa. Super. Ct. 2016)"}
+  henthorn: {kind: case, name: "*Henthorn v. Collins*", cite: "146 W. Va. 108, 118 S.E.2d 358 (1961)"}
+  kilmer: {kind: case, name: "*Kilmer v. Elexco Land Servs., Inc.*", cite: "990 A.2d 1147 (Pa. 2010)"}
+  kincaid: {kind: case, name: "*Kincaid v. Mangum*", cite: "189 W. Va. 404, 432 S.E.2d 74 (1993)"}
+  marathon: {kind: case, name: "*Marathon Oil Co. v. Andrus*", cite: "452 F. Supp. 548 (D. Wyo. 1978)"}
+  mittelstaedt: {kind: case, name: "*Mittelstaedt v. Santa Fe Minerals, Inc.*", cite: "954 P.2d 1203 (Okla. 1998)"}
+  pollock: {kind: case, name: "*Pollock v. Energy Corp. of America*", cite: "Civ. A. 10-1553, 2011 WL 3667289 (W.D. Pa. June 27, 2011)"}
+  raynes: {kind: case, name: "*Raynes v. Nitro Pencil Co.*", cite: "132 W. Va. 417, 52 S.E.2d 248 (1949)"}
+  roberts: {kind: case, name: "*Roberts Ranch Co. v. Exxon Corp.*", cite: "43 F. Supp. 2d 1252 (W.D. Okla. 1997)"}
+  rogers: {kind: case, name: "*Rogers v. Westerman Farm Co.*", cite: "29 P.3d 887 (Colo. 2001)"}
+  morgan: {kind: case, name: "*State v. Gen. Daniel Morgan Post No. 548*", cite: "144 W. Va. 137, 107 S.E.2d 353 (1959)"}
+  biafore: {kind: case, name: "*State ex rel. Biafore v. Tomblin*", cite: "236 W. Va. 528, 782 S.E.2d 223 (2016)"}
+  riffle: {kind: case, name: "*State ex rel. Riffle v. Ranson*", cite: "195 W. Va. 121, 464 S.E.2d 763 (1995)"}
+  sternberger: {kind: case, name: "*Sternberger v. Marathon Oil Co.*", cite: "894 P.2d 788 (Kan. 1995)"}
+  tawney: {kind: case, name: "*Tawney v. Columbia Natural Res., L.L.C.*", cite: "219 W. Va. 266, 633 S.E.2d 22 (2006)"}
+  mcdonald: {kind: case, name: "*W. W. McDonald Land Co. v. EQT Prod. Co.*", cite: "983 F. Supp. 2d 790 (S.D. W. Va. 2014)"}
+  s22-6-8: {kind: statute, cite: "W. Va. Code § 22-6-8"}
+  s22-6-8a1: {kind: statute, cite: "W. Va. Code § 22-6-8(a)(1)"}
+  s22-6-8a4: {kind: statute, cite: "W. Va. Code § 22-6-8(a)(4)"}
+  s22-6-8e: {kind: statute, cite: "W. Va. Code § 22-6-8(e)"}
+  rap25: {kind: rule, cite: "W. Va. R. App. P. 25"}
 counsel:
   - names: ["David K. Hendrickson (WV Bar No. 1678)", "Counsel of Record", "Carl L. Fletcher, Jr. (WV Bar No. 1225)"]
     lines: ["HENDRICKSON & LONG PLLC", "P.O. Box 11070", "Charleston, West Virginia 25339", "Telephone: 304/346-5500", "Facsimile: 304/346-5515", "daveh@handl.com", "cfletcher@handl.com", "*Counsel for Defendant/Respondent EQT Production Company*"]
