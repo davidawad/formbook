@@ -82,29 +82,29 @@ None.
 
 This matter presents the following questions:
 
-I. Whether, as a threshold matter, Laws 2022, 9:1 (repealing and reenacting RSA 662:5) complies with the Federal Equal Protection Clause (U.S. CONST. amend. XIV) and Part II, Article 9 of the State Constitution, given the redistricting scheme’s population deviation is greater than 10%.
+I\. Whether, as a threshold matter, Laws 2022, 9:1 (repealing and reenacting RSA 662:5) complies with the Federal Equal Protection Clause (U.S. CONST. amend. XIV) and Part II, Article 9 of the State Constitution, given the redistricting scheme’s population deviation is greater than 10%.
 
-II. Whether the State/respondent can carry the burden of demonstrating any justification for enacting a House redistricting scheme that exceeds 10% population deviation.
+II\. Whether the State/respondent can carry the burden of demonstrating any justification for enacting a House redistricting scheme that exceeds 10% population deviation.
 
-III. Whether Laws 2022, 9:1 is entitled to any presumption of constitutionality, given that Laws 2022, 9:1 enacts a reapportionment scheme that exceeds 10% population deviation.
+III\. Whether Laws 2022, 9:1 is entitled to any presumption of constitutionality, given that Laws 2022, 9:1 enacts a reapportionment scheme that exceeds 10% population deviation.
 
-IV. Whether redistricting of the New Hampshire House is required to minimize violations of Part II, Article 11 of the State Constitution and/or avoid unnecessary violations of Part II, Article 11 of the State Constitution.
+IV\. Whether redistricting of the New Hampshire House is required to minimize violations of Part II, Article 11 of the State Constitution and/or avoid unnecessary violations of Part II, Article 11 of the State Constitution.
 
-V. Whether Laws 2022, 9:1 complies with Part II, Article 11 of the State Constitution with respect to the Strafford County Districts of the New Hampshire House, given that Laws 2022, 9:1 failed to minimize violations of Part II, Article 11’s mandatory requirement for a “town or ward . . . [to] have its own district” and, instead, enacted at least four unnecessary such violations in Strafford County (including Dover’s Ward 4).
+V\. Whether Laws 2022, 9:1 complies with Part II, Article 11 of the State Constitution with respect to the Strafford County Districts of the New Hampshire House, given that Laws 2022, 9:1 failed to minimize violations of Part II, Article 11’s mandatory requirement for a “town or ward . . . [to] have its own district” and, instead, enacted at least four unnecessary such violations in Strafford County (including Dover’s Ward 4).
 
-VI. To the extent necessary for this Court to decide, whether Laws 2022, 9:1 complies statewide and/or in any county in redistricting the New Hampshire House, given that Laws 2022, 9:1 failed to minimize violations of Part II, Article 11’s mandatory requirement for a “town or ward . . . [to] have its own district” and, instead, enacted at least 14 unnecessary such violations statewide.
+VI\. To the extent necessary for this Court to decide, whether Laws 2022, 9:1 complies statewide and/or in any county in redistricting the New Hampshire House, given that Laws 2022, 9:1 failed to minimize violations of Part II, Article 11’s mandatory requirement for a “town or ward . . . [to] have its own district” and, instead, enacted at least 14 unnecessary such violations statewide.
 
-VII. Whether any rational basis supports Laws 2022, 9:1’s failure to minimize violations of the State Constitution and/or avoid unnecessary violations of the State Constitution.
+VII\. Whether any rational basis supports Laws 2022, 9:1’s failure to minimize violations of the State Constitution and/or avoid unnecessary violations of the State Constitution.
 
-VIII. Whether the unconstitutionality of Laws 2022, 9:1 warrants preliminary injunctive, permanent injunctive, and/or declaratory relief from this Court to protect voters, protect representative rights, and ensure the 2022 New Hampshire House membership and elections are lawful and based on constitutionally apportioned and configured districts.
+VIII\. Whether the unconstitutionality of Laws 2022, 9:1 warrants preliminary injunctive, permanent injunctive, and/or declaratory relief from this Court to protect voters, protect representative rights, and ensure the 2022 New Hampshire House membership and elections are lawful and based on constitutionally apportioned and configured districts.
 
-IX. Whether this Court should temporarily stay or enjoin the candidate filing period in RSA 655:14 with respect to the New Hampshire House election, in order to allow briefing and resolution of this matter.
+IX\. Whether this Court should temporarily stay or enjoin the candidate filing period in RSA 655:14 with respect to the New Hampshire House election, in order to allow briefing and resolution of this matter.
 
-X. Whether this Court should itself redraw the New Hampshire House districts based upon the 2020 census data, to remedy and address the unconstitutionality of Laws 2022, 9:1.
+X\. Whether this Court should itself redraw the New Hampshire House districts based upon the 2020 census data, to remedy and address the unconstitutionality of Laws 2022, 9:1.
 
-XI. Whether this Court should adopt Map-a-Thon’s proposed map (or maps) to cure and address the unconstitutionality of Laws 2022, 9:1 (unnecessary violations of Part II, Article 11 of the State Constitution and/or the population deviation in excess of that allowed by the Federal Equal Protection Clause (U.S. CONST. amend. XIV) and Part II, Article 9 of the State Constitution).
+XI\. Whether this Court should adopt Map-a-Thon’s proposed map (or maps) to cure and address the unconstitutionality of Laws 2022, 9:1 (unnecessary violations of Part II, Article 11 of the State Constitution and/or the population deviation in excess of that allowed by the Federal Equal Protection Clause (U.S. CONST. amend. XIV) and Part II, Article 9 of the State Constitution).
 
-XII. Whether this Court should declare a set of procedural instructions to guide future legislative redistricting by the State to ensure vindication of important State Constitutional considerations, similar to *Hickel v. Southeast Conference*, 846 P.2d 38, 49 (Alaska 1992).
+XII\. Whether this Court should declare a set of procedural instructions to guide future legislative redistricting by the State to ensure vindication of important State Constitutional considerations, similar to *Hickel v. Southeast Conference*, 846 P.2d 38, 49 (Alaska 1992).
 
 # E. PROVISIONS OF CONSTITUTION, STATUTES, RULES, AND REGULATIONS INVOLVED
 

@@ -1,0 +1,4 @@
+# Gate 4 CROSS-ENGINE: typst only. Not on the shared document model yet: the frontmatter's authorities
+# ({key, category, text}, cited by toa: links) are a shape the model does not read (docs/open-items/fb-595.54.24.md).
+params:
+  cross_engine: report
