@@ -66,6 +66,11 @@ print(xd.numbering("(a)", 28), xd.numbering("i.", 4), xd.numbering("1.", 12))
 print(xd.count_words(src, "Certificate"), xd.count_words(src, nil))
 local s = xe.urls(pandoc.Inlines({{ pandoc.Str("https://a.org/b/c-d/2015/") }}))[1].text
 print((s:gsub("\u{{200B}}", "|")))
+print(xd.lookup({{ a = {{}} }}, "a.b|___"), xd.lookup({{ a = {{ b = "x" }} }}, "a.b|___"))
+local ls = xd.commonmark_lists(pandoc.read("a. one\n\nb. two\n\n(1) three\n\n1. four\n", "markdown").blocks)
+local t = {{}}
+for _, b in ipairs(ls) do t[#t + 1] = b.t .. ":" .. pandoc.utils.stringify(b) end
+print(table.concat(t, " "))
 "#,
         src = SAMPLE
     );
@@ -77,6 +82,9 @@ print((s:gsub("\u{{200B}}", "|")))
     // the body before the certificate: "#" and "—" alone are no words; with the certificate and the note 22
     assert_eq!(lines[2], "13\t22");
     assert_eq!(lines[3], "https://|a.org/|b/|c-d/|2015/");
+    // a missing field's default; lists CommonMark does not read are paragraphs with their markers
+    assert_eq!(lines[4], "___\tx");
+    assert_eq!(lines[5], "Para:a. one Para:b. two Para:(1) three OrderedList:four");
 }
 
 #[test]
@@ -97,7 +105,7 @@ fn typst_side_agrees() {
         let p = e.unwrap().path();
         std::fs::copy(&p, lib.join(p.file_name().unwrap())).unwrap();
     }
-    let layout = "size: 12\npitch: {body: 27.6, single: 13.8}\nmargin: {top: 72, bottom: 72, left: 72, right: 72}\nindent: 36\nheading:\n  - {align: center, bold: true}\n  - {bold: true, number: \"I.\", hang: 36}\n  - {bold: true, number: \"A.\", hang: 36}\ncontents: {title: \"Contents\", depth: 3, col: 36}\nclosing:\n  - {text: \"Words: {body_words}.\"}\ntail: {at: \"Certificate\"}\n";
+    let layout = "size: 12\npitch: {body: 27.6, single: 13.8}\nmargin: {top: 72, bottom: 72, left: 72, right: 72}\nindent: 36\nheading:\n  - {align: center, bold: true}\n  - {bold: true, number: \"I.\", hang: 36}\n  - {bold: true, number: \"A.\", hang: 36}\ncontents: {title: \"Contents\", depth: 3, col: 36}\nclosing:\n  - {text: \"Words: {body_words}. {missing|___} {title|no}.\"}\ntail: {at: \"Certificate\"}\n";
     std::fs::write(dir.path().join("INPUT.md"), SAMPLE).unwrap();
     std::fs::write(dir.path().join("layout.yaml"), layout).unwrap();
     let main = dir.path().join("main.typ");
@@ -133,7 +141,7 @@ fn typst_side_agrees() {
     );
     assert!(text.contains("II."), "{text}");
     assert!(text.contains("A."), "{text}");
-    assert!(text.contains("Words: 13."), "{text}");
+    assert!(text.contains("Words: 13. ___ x."), "{text}");
     assert!(
         text.contains("https://|a.org/|b/|c-d/|2015/|11/|x."),
         "{text}"

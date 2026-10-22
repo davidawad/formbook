@@ -30,8 +30,15 @@ function M.meta()
   return m
 end
 
--- The value at a dotted path ("a.b"; "." the context itself), or nil.
+-- The value at a dotted path ("a.b"; "." the context itself), or nil; "a.b|text": the text when there is none
+-- (lib/typst/xdoc.typ lookup alike).
 function M.lookup(ctx, path)
+  local bar = path:find("|", 1, true)
+  if bar then
+    local v = M.lookup(ctx, path:sub(1, bar - 1))
+    if v == nil then return path:sub(bar + 1) end
+    return v
+  end
   if path == "." then return ctx["."] end
   local v = ctx
   for k in path:gmatch("[^.]+") do

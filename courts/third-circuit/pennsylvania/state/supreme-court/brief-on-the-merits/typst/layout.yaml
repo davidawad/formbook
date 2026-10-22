@@ -1,0 +1,76 @@
+# Supreme Court of Pennsylvania (pa): brief on the merits, the appellant's brief (Pa.R.A.P. 2111). The whole layout, as
+# data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to Pa.R.A.P. 124, 127, 2135 and 2171-2174 (../rules.md, PA-*); lengths
+# in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court
+# constant (the court's name, the certificates' form text).
+size: 14                  # PA-FORM-004 (Pa.R.A.P. 124(a)(4)): text no smaller than 14 point
+pitch:
+  body: 32.2              # PA-FORM-003 (124(a)(3)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # PA-FORM-002 (124(a)(3)): at least one inch on all four sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
+footnote: {size: 14, gap: 7}   # PA-FORM-003, -004: footnotes single spaced, here at the text's 14 point
+quote: {left: 36, right: 36, above: 14, below: 14}   # PA-FORM-003: quotations indented and single spaced
+heading:
+  - {align: center, bold: true, above: 16.8, below: 14}
+  - {bold: true, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, above: 15.4, below: 8.4}
+# PA-COVER-001 (Pa.R.A.P. 2172(a)): the court, the docket number, the caption, the proceeding below, the title and
+# counsel, under the three-inch space PA-FORM-002 keeps at the top of the first page (72 + 144 pt).
+cover:
+  - {text: "IN THE", align: center, bold: true, above: 144}
+  - {text: "SUPREME COURT OF PENNSYLVANIA", align: center, bold: true}
+  - {text: "No. {case_number}", align: center, bold: true, above: 11.2}
+  - each: caption
+    above: 14
+    between:
+      - {text: "v.", left: 36, above: 5.6, below: 5.6}
+    blocks:
+      - {text: "{names}"}
+      - {text: "{designation}", left: 36}
+  - {text: "{proceeding}", align: center, optional: true, above: 11.2}
+  - {text: "{brief_title}", align: center, bold: true, above: 19.6}
+  - each: counsel
+    above: 19.6
+    blocks:
+      - {text: "{names}", above: 11.2}
+      - {text: "{lines}", optional: true}
+# Pa.R.A.P. 2111(a)(1), 2174: the table of contents (and the table of citations when the brief lists its authorities).
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 36, step: 21, above: 9.8}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 56
+  hang: 28.8
+  above: 7
+  group: {bold: true, above: 15.4, below: 7}
+# The closing and the signature blocks side by side, never split; the certificate of compliance (Pa.R.A.P. 2135(d):
+# the word count when one is given; Pa.R.A.P. 127 and its Comment: the Public Access Policy form, PA-CERT-001) and
+# the certificate of filing and service, each on a page of its own; a date the filer has not given is a blank.
+closing:
+  - group:
+      - {text: "Respectfully submitted,", pitch: body}
+      - when: signing_party
+        blocks:
+          - {text: "{signing_party}", pitch: body, above: 11.2}
+          - {text: "By Counsel", pitch: body}
+      - {text: "this {date}.", pitch: body, optional: true, above: 11.2}
+      - columns: {each: signature, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 11.2
+    above: 16.1
+  - {break: true}
+  - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true, below: 16.8}
+  - {text: "I hereby certify that this brief complies with Pa.R.A.P. 124, 127 and 2135(d) of the Pennsylvania Rules of Appellate Procedure.", pitch: body, indent: 36}
+  - {text: "It contains {word_count} words, excluding the cover page, table of contents, table of authorities, signature blocks, and this certificate (Pa.R.A.P. 2135(d)).", pitch: body, indent: 36, optional: true}
+  - {text: "I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial System of Pennsylvania that require filing confidential information and documents differently than non-confidential information and documents.", pitch: body, indent: 36}
+  - {break: true}
+  - {text: "CERTIFICATE OF FILING AND SERVICE", align: center, bold: true, below: 16.8}
+  - {text: "I hereby certify that on the {service.filed_date|____________} I electronically filed the foregoing with the Prothonotary of the Supreme Court of Pennsylvania, and that on the {service.service_date|____________} I served true and correct copies of it on the following counsel of record:", pitch: body, indent: 36}
+  - when: service.recipients
+    blocks:
+      - each: service.recipients
+        above: 16.8
+        blocks:
+          - {text: "{names}", above: 11.2}
+          - {text: "{lines}", optional: true}

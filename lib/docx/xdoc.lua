@@ -20,8 +20,10 @@ local function tw(x) return math.floor((tonumber(x) or 0) * 20 + 0.5) end
 -- typst's break opportunities that LibreOffice does not share: none inside ")(" (a word joiner), one after a slash
 -- inside a word before a letter ("CM/ECF": a zero-width space; not in "/s/", where neither engine breaks and the
 -- space would split the word in the PDF text).
+-- And one after a hyphen that starts a word before a letter ("social -media"): typst breaks there, LibreOffice does not
+-- (Unicode 15.1 LB20a).
 local function breaks(x)
-  return pandoc.Str((x.text:gsub("%)%(", ")\u{2060}("):gsub("([^%s/])/(%a)", "%1/\u{200B}%2")))
+  return pandoc.Str((x.text:gsub("%)%(", ")\u{2060}("):gsub("([^%s/])/(%a)", "%1/\u{200B}%2"):gsub("^%-(%a)", "-\u{200B}%1")))
 end
 
 -- A doubled section sign stays with its number, as typst binds it.

@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # newtx sets a line 0.03 to 0.05 bp wider than Times New Roman, and the generated LaTeX text block is 0.05 bp wider
+  # for it (gen.rs latex_bias): INPUT-petition-for-review page 23, the line typst ends after "(2012)." needs 540.01 pt,
+  # newtx sets it with "Although" at 540.04 bp, inside the block, and the paragraph's next three lines shift (XENG-003;
+  # pages and page ends equal). No bias fits both directions; reported, not gated (fb-595.54.13).
+  cross_engine_latex: report

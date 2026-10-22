@@ -31,8 +31,14 @@
 // A rule's line box besides its stroke (lib/pandoc/xdoc.lua RULE): LibreOffice's smallest exact line, one twip.
 #let RULE = 0.05
 
-/// The value at a dotted path ("a.b", "." the context itself), or none.
+/// The value at a dotted path ("a.b", "." the context itself), or none; "a.b|text": the text when there is none (a blank a
+/// filer completes, e.g. "{service.date|____________}"; lib/pandoc/xdoc.lua lookup alike).
 #let lookup(ctx, path) = {
+  let bar = path.position("|")
+  if bar != none {
+    let v = lookup(ctx, path.slice(0, bar))
+    return if v == none { path.slice(bar + 1) } else { v }
+  }
   if path == "." { return ctx.at(".", default: none) }
   let v = ctx
   for k in path.split(".") {
@@ -404,9 +410,10 @@
   // no punctuation hanging into the margin (typst's overhang): LaTeX and Word set none, and a hanging period moved a
   // centered line 1.4 pt and lets a line hold more
   set text(overhang: false)
-  // inside a URL a line may end after every slash not followed by another (lib/pandoc/xengine.lua urls; here, not in
-  // body-of: the footnotes are laid out outside its show rules)
+  // inside a URL a line may end after every slash not followed by another and every dot before an ASCII letter or digit
+  // (lib/pandoc/xengine.lua urls; here, not in body-of: the footnotes are laid out outside its show rules)
   show regex("(https?://|\\(?www\\.)\\S+"): it => it.text.replace(regex("/([^/])"), m => "/\u{200B}" + m.captures.at(0))
+    .replace(regex("\\.([A-Za-z0-9])"), m => ".\u{200B}" + m.captures.at(0))
   // every heading steps the heading counter when a style numbers them (heading-label)
   set heading(numbering: if numbered(spec) { "1.1" } else { none })
   set footnote.entry(gap: pt(fn.at("gap", default: 7)), clearance: pt(fn.at("clearance", default: 9.1)), indent: 0pt,
