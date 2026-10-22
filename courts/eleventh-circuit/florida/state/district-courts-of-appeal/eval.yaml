@@ -1,5 +1,21 @@
 # Fla. R. App. P. 9.045(b) (as amended, No. SC2025-1458): computer-generated documents must be filed in Arial 14-point or
 # Bookman Old Style 14-point. Text size 14 pt is the floor for every doc type under this court (FLADISTCTAPP-FORM-003).
 # Arial is declared by the templates; Liberation Sans is its metric-compatible substitute (fonts/liberation-sans).
+#
+# fb-595.54.42 continuation status (2026-10-22): NOT PORTED. The eight doc-type
+# templates still use the hand-written Typst engine; the court root has no
+# document template (only court-wide filed examples). In particular, the brief
+# covers use `v(1fr)` to place counsel at the bottom of the cover. The shared
+# layout model does not represent page-filling space, so substituting a fixed
+# gap would alter the cover and is not an acceptable cross-engine match. This
+# same blocker applies to amicus-brief, answering-brief, opening-brief,
+# petition-for-discretionary-review, petition-for-review and reply-brief; the
+# motion-brief and petition-for-writ have their own cover composition and need
+# separate model mapping before generation. No layout.yaml, generated engine,
+# cross-engine gate, or rendered output was produced in this continuation.
+# The checkout also lacks cargo/rustc, so `fb engines gen`, fb rendering/checks,
+# and touched-crate tests cannot run here. Resume after the shared model adds a
+# page-filling block and the Rust toolchain is available; then port and inspect
+# all eight doc-type folders individually. Do not treat this note as a pass.
 font:
   size_pt: 14
