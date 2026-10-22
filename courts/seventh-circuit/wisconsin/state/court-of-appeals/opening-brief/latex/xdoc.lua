@@ -146,7 +146,7 @@ return require("latex.xdoc")({
               ["optional"] = true,
             },
           },
-          ["below"] = 7.8,
+          ["above"] = 7.8,
         },
       },
     },
@@ -154,6 +154,7 @@ return require("latex.xdoc")({
       ["text"] = "{phone}",
       ["left"] = 230.4,
       ["optional"] = true,
+      ["above"] = 7.8,
     },
   },
   ["contents"] = {
@@ -178,12 +179,11 @@ return require("latex.xdoc")({
   ["keep_with_closing"] = true,
   ["closing"] = {
     {
-      ["text"] = "{date}",
-      ["optional"] = true,
-      ["above"] = 21.6,
-    },
-    {
       ["group"] = {
+        {
+          ["text"] = "{date}",
+          ["optional"] = true,
+        },
         {
           ["columns"] = {
             {
@@ -213,6 +213,7 @@ return require("latex.xdoc")({
               },
             },
           },
+          ["above"] = 5.2,
         },
       },
       ["above"] = 21.6,
@@ -271,6 +272,7 @@ return require("latex.xdoc")({
               },
             },
           },
+          ["above"] = 5.2,
         },
       },
       ["above"] = 15.6,
@@ -323,6 +325,7 @@ return require("latex.xdoc")({
                   },
                 },
               },
+              ["above"] = 5.2,
             },
           },
           ["above"] = 15.6,
