@@ -1,0 +1,65 @@
+# North Dakota Court of Appeals (ndctapp): reply brief. The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to N.D.R.App.P. 28 and 32 (../../rules.md, NDCTAPP-*); lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # NDCTAPP-FORM-004: 12 point or larger
+pitch:
+  body: 27.6              # NDCTAPP-FORM-005: double spaced (Word's double, 2 x 1.15 x 12 pt), footnotes too
+  single: 13.8            # NDCTAPP-FORM-005: headings and quotations may be single spaced (1.15 x 12 pt); cover, tables
+margin: {top: 72, bottom: 72, left: 108, right: 72}   # NDCTAPP-FORM-002: 1 1/2 inch at the left, 1 inch elsewhere
+indent: 36
+page_number: {align: center, from: 1}   # NDCTAPP-FORM-003: bottom center, the cover is page 1
+footnote: {size: 12, pitch: body, gap: 7}   # NDCTAPP-FORM-005: footnotes double spaced, same typeface (and size)
+quote: {left: 36, right: 36, above: 7.2, below: 12}   # NDCTAPP-FORM-005: quotations single spaced and indented
+# Headings are typed with their own paragraph numbers (NDCTAPP-FORM-007), as filed: level 1 a section, level 2 a
+# point, level 3 a sub-point.
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 12}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# The cover (NDCTAPP-COVER-001, Rule 32(a)(2)(A)-(F)): the court, the case numbers, the title of the case, the
+# proceeding and the court below between rules, the title of the brief, and counsel with bar number, address and
+# telephone. NDCTAPP-COVER-002 (Rule 28(h)): "ORAL ARGUMENT REQUESTED" when the frontmatter has `oral_argument`.
+cover:
+  - {text: "{court_lines}", align: center, bold: true}
+  - {text: "{number_lines}", align: center, bold: true, above: 13.8}
+  - each: caption
+    above: 13.8
+    between:
+      - {text: "v.", align: center, above: 13.8}
+    blocks:
+      - {text: "{names}", align: center, above: 13.8}
+      - {text: "{designation}", align: center, above: 13.8}
+  - {rule: 0.5, above: 20.7}
+  - {text: "{proceeding}", align: center, above: 13.8}
+  - {text: "{judge}", align: center, optional: true, above: 13.8}
+  - {rule: 0.5, above: 13.8}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 20.7}
+  - when: oral_argument
+    blocks:
+      - {text: "ORAL ARGUMENT REQUESTED", align: center, bold: true, above: 13.8}
+  - each: counsel
+    above: 27.6
+    blocks:
+      - {text: "{names}", above: 13.8}
+      - {text: "{lines}"}
+# Rule 28(b)(1), (2), 28(d) (NDCTAPP-CONT-001, -004): the table of contents and the table of authorities, each on its
+# own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 18, above: 8.4}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 8.4
+  group: {bold: true, above: 13.2, below: 3}
+# The date and the signature block after the request for relief, never split.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - {text: "{signature.firm}", left: 230.4, above: 4.8, optional: true}
+      - {text: "/s/ {signature.signer}", underline: true, left: 230.4, above: 7.2}
+      - {text: "{signature.lines}", left: 230.4}
+    above: 28.8
+# The certificates open a page after the signature, in the body's form (as filed); a heading may carry its
+# paragraph number ("26. CERTIFICATE OF SERVICE").
+tail: {at: "[0-9]*[.]? *CERTIFICATE", break: true, pitch: body, indent: 36}
