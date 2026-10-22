@@ -28,12 +28,12 @@ Verified 2026-10-14 (date fetched). "Primary" means the text came from the offic
 
 Conventions (not rules; each is named in the template):
 
-- **Font.** Face required: none. 22 NYCRR 202.5(a) and CPLR 2101(a) set a minimum point size and name no typeface, so the template keeps EB Garamond at 12 pt (`fonts/eb-garamond`, the no-face default in `docs/FONTS.md`). Not a Times New Roman substitute: the exemplar is set in Times New Roman, which is a convention, not a rule. 12 pt meets 202.5(a). Typeface is visual-only against the exemplar.
-- **Spacing.** Body leading is tuned so the baseline pitch matches the exemplar's: measured 27.6 pt from both our render and the exemplar (double spacing at 12 pt). The paragraph spacing equals the body leading, so each numbered paragraph advances one line, as in the exemplar.
+- **Font.** Face required: none. 22 NYCRR 202.5(a) and CPLR 2101(a) set a minimum point size and name no typeface, so the template sets Times New Roman (the house standard, docs/FONTS.md; vendored) at 12 pt, footnotes at 10 pt (the 202.5(a) floors), on typst and docx alike (the docx names the typst face through `{font}` in docx/reference.xml).
+- **Spacing.** Double spacing (202.5(a)) as exact 24 pt line boxes (two 12 pt lines); the caption, headings, quotations, contents and the signature and service blocks in 13.8 pt single lines (202.5(a) excepts quotations and the names and addresses of attorneys); footnotes in 11.5 pt lines. The pitches are those of the shared cross-engine layout model (lib/typst/xengine.typ), so the docx breaks every line and page where typst does.
 - **Margins.** One inch on every side (202.5(a)); the exemplar's left and right text edges fall at the same 72 pt and 540 pt positions. These are the rule values, not coordinates measured off the exemplar.
 - **Caption.** Court and county on the first lines; a bordered party box on the left with `-against-` between the sides; the index number and the title on the right (exemplar layout, generated from the frontmatter).
 - **Headings.** Level 1 is centred bold capitals; level 2 is left bold; level 3 is bold italic. The author types the numbering (I., A., 1.), as the exemplar does.
-- **Table of contents.** Generated from levels 1-2 when `toc: true`.
+- **Table of contents.** Generated from levels 1-2 when `toc: true`, with page numbers on both engines (the docx finds them in its own LibreOffice render: fb render needles).
 - **Signature block.** Dated line, "Respectfully submitted," the firm lines, "By:" over a rule, and the signer's printed name beneath (CPLR 2101(a)).
 - **Verification.** A separate page, under the heading VERIFICATION, with the verifier and capacity from the frontmatter.
 
@@ -107,7 +107,6 @@ After the fixes, all 9 pages were re-rendered and looked at again (the final ren
 - **Official rule text.** 22 NYCRR 202.5 and 202.8-b are cited from a Cornell LII mirror because nycourts.gov returned HTTP 403. Re-check the margins, the 10-pt footnote floor and the word-limit list against the official text.
 - **E-filing.** 202.5-b (NYSCEF) formatting is not implemented beyond producing a text PDF. The NYSCEF legend is not generated.
 - **Caption placement.** The exemplar puts the table of contents on its own pages after the summons. The template puts it on the page after the caption, which is a convention; the exemplar's layout is not copied.
-- **Typeface.** EB Garamond at 12 pt, not Times New Roman. The rules name no face, so no vendored substitute applies (`docs/FONTS.md`: no face named → EB Garamond). Visible difference from the exemplar, which is a convention and not a requirement.
 - **Sample coverage.** The sample is a portion of the 222-page filing (introduction, part of section A, the first cause of action, prayer, signature, verification). Parties (section II), jurisdiction (section III), most of section IV, and the other causes of action are not transcribed. The prayer's missing letter H is in the exemplar itself and is kept as it appears there.
 - **Index number.** The exemplar copy reads "INDEX NO. UNASSIGNED". The index no. 452564/2022 appears in a secondary source only (see `usage/SOURCE.md`).
 
@@ -117,10 +116,8 @@ Searched (2026-10-14): NYSCEF and nycourts.gov form pages (blank forms only); Ju
 
 ## Engines
 
-Three engines per doc type: `typst/` (primary), `docx/` and `latex/` (not built here; see the Engines section of the PR). The docx engine is `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc 3.12's default reference) plus `docx/nysupct-complaint.lua` (caption table, TOC field, signature block, service list, verification page). Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/supreme-court/complaint usage/INPUT-complaint.md`.
+Two engines: `typst/` (the reference) and `docx/` (no `latex/` for this court yet). The docx engine is declarative: `docx/reference.xml` (the cross-engine style recipe, `base="xengine"`, in the typst face) and `docx/nysupct-complaint.lua` (caption table, contents with page numbers from fb render's needles, body, signature block, service list, verification page; the section and the page-number footer). `fb render` builds the reference document and runs the passes; there is no shell script. Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/supreme-court/complaint usage/INPUT-complaint.md`.
 
-- **Matches the typst form.** Letter paper; 1 in margins (22 NYCRR 202.5(a)); EB Garamond 12 pt body (no face named by the rules); double line spacing (`w:line="480"`, auto); 0.5 in first-line indent; footnotes 10 pt single-spaced; centred bold level-1 headings; caption with the bordered party box and `-against-`; centred page number in the footer; verification on its own page.
-- **Differs.** Word's "double" is two times the font's line height, not the typst leading of 1.65 em, so the line pitch will not equal the typst pitch. The caption and signature blocks are tables, whose borders Word and LibreOffice draw slightly differently. The TOC is a TOC field: its cached entries are the headings, without page numbers, until the field is updated.
-- **Generated.** `usage/OUTPUT-complaint.docx` (validated: `unzip -tq` passes; all 17 XML parts pass `xmllint --noout`). Not generated, as in typst: the summons and the NYSCEF legend.
-- **BLOCKED (docx.pdf gates).** LibreOffice (`soffice`) is not installed on the box that built this engine, so no `usage/OUTPUT-people-v-trump.docx.pdf` exists and no page was rendered or reviewed. Gates 0 and 1 on the docx PDF cannot run here.
-- **BLOCKED (TOC page numbers).** The TOC check cannot pass by construction until a LibreOffice field update (or a Word update with `w:updateFields`) fills the page numbers; the cached result carries no pages.
+- **Cross-engine gate.** `eval.yaml` sets `params.cross_engine: gate`: the docx render breaks every line and every page where the typst render does (XENG-001..003, fb-595.68.37).
+- **Known docx difference (diagnostic only).** LibreOffice sets the right-aligned party designations in the caption box about 2.6 pt further left than typst (the box's right rule); no line or page break moves.
+- **Not generated, as in typst:** the summons and the NYSCEF legend.
