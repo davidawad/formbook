@@ -1,0 +1,83 @@
+# Court of Appeals of Texas (texapp): motion (TRAP 10.1; 9.4). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to TRAP 9.4 (../../rules.md, TEXAPP-*); lengths in points. No case text here: every string printed comes from the
+# sample's frontmatter ({field}) or is a court constant.
+size: 14                  # TEXAPP-FORM-005: a conventional typeface no smaller than 14-point
+pitch:
+  body: 32.2              # TEXAPP-FORM-004: double-spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # TEXAPP-FORM-004: footnotes, block quotations, short lists, issues may be single-spaced; the
+                          # cover, headings, tables and signature too (Word's single, 1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # TEXAPP-FORM-003: at least one inch on all four sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the tables i, ii .., the document 1, 2 ..
+footnote: {size: 12, pitch: 13.8, gap: 4, clearance: 12.1}   # TEXAPP-FORM-005: footnotes no smaller than 12-point, single-spaced (1.15 x 12 pt)
+quote: {left: 36, right: 36, above: 14, below: 14, gap: 14}   # TEXAPP-FORM-004: block quotations single-spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 24, below: 12}
+  - {bold: true, hang: 36, above: 16, below: 8}
+  - {bold: true, italic: true, hang: 36, above: 16, below: 8}
+  - {italic: true, above: 16, below: 8}
+# The cover (TEXAPP-FORM-009, TRAP 9.4(g)): the case number, the court, the case style beside the docket lines, the
+# title and the filing party between rules, counsel two to a row, the party they represent.
+cover:
+  - {text: "{case_number}", align: center, bold: true}
+  - {text: "{court}", align: center, bold: true, above: 16.8}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", align: center, above: 14.4}
+            blocks:
+              - {text: "{names}", above: 14.4}
+              - {text: "{designation}", align: right, above: 5.6}
+      - width: 180
+        blocks:
+          - {text: "{docket}"}
+    gutter: 28.8
+    above: 21
+  - {rule: 0.75, above: 21}
+  - {text: "{title}", align: center, bold: true, upper: true, above: 12.6}
+  - {text: "{filed_by}", align: center, optional: true, above: 8.4}
+  - {rule: 0.75, above: 12.6}
+  - columns: {each: counsel, per_row: 2, row_gap: 14, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+    gutter: 16.8
+    above: 16.8
+  - {text: "{attorneys_for}", align: center, bold: true, above: 16.8}
+# The table of contents (the motion's sections and certificates are headings of the body).
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 8}
+# The date and the signature block, never split; then the certificate of conference (TRAP 10.1(a)(5),
+# TEXAPP-MOT-002), of compliance (TRAP 9.4(i)(3)) and of service (TRAP 9.5(e): the date and manner, each person
+# served), each on its own page in the filer's words, signed.
+closing:
+  - group:
+      - {text: "{date}", optional: true, pitch: body, indent: 36}
+      - {text: "Respectfully submitted,", left: 216, above: 16.1}
+      - {text: "/s/ {signature.signer}", left: 216, above: 16.1}
+      - {text: "{signature.signer}", upper: true, left: 216}
+      - {text: "{signature.lines}", left: 216}
+    above: 28.8
+  - when: conference
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Conference", align: center, bold: true, upper: true, below: 12}
+      - {text: "{conference}", pitch: body, indent: 36}
+      - {text: "/s/ {signature.signer}", left: 216, above: 16.1}
+      - {text: "{signature.signer}", upper: true, left: 216}
+  - when: compliance
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Compliance", align: center, bold: true, upper: true, below: 12}
+      - {text: "{compliance}", pitch: body, indent: 36}
+      - {text: "/s/ {signature.signer}", left: 216, above: 16.1}
+      - {text: "{signature.signer}", upper: true, left: 216}
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 12}
+      - {text: "{service.statement}", pitch: body, indent: 36}
+      - columns: {each: service.served, per_row: 2, row_gap: 14, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+        gutter: 16.8
+        above: 14
+      - {text: "{service.note}", optional: true, pitch: body, indent: 36, above: 14}
+      - {text: "/s/ {signature.signer}", left: 216, above: 16.1}
+      - {text: "{signature.signer}", upper: true, left: 216}

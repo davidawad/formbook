@@ -1,0 +1,76 @@
+# Court of Appeals of Texas (texapp): amicus curiae brief (TRAP 11; 9.4; 38.1). The whole layout, as data for the
+# shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to TRAP 9.4 (../../rules.md, TEXAPP-*); lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # TEXAPP-FORM-005: a conventional typeface no smaller than 14-point
+pitch:
+  body: 32.2              # TEXAPP-FORM-004: double-spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # TEXAPP-FORM-004: footnotes, block quotations, short lists, issues may be single-spaced; the
+                          # cover, headings, tables and signature too (Word's single, 1.15 x 14 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # TEXAPP-FORM-003: at least one inch on all four sides
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the tables i, ii .., the document 1, 2 ..
+footnote: {size: 12, pitch: 13.8, gap: 4, clearance: 12.1}   # TEXAPP-FORM-005: footnotes no smaller than 12-point, single-spaced (1.15 x 12 pt)
+quote: {left: 36, right: 36, above: 14, below: 14, gap: 14}   # TEXAPP-FORM-004: block quotations single-spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 24, below: 12}
+  - {bold: true, hang: 36, above: 16, below: 8}
+  - {bold: true, italic: true, hang: 36, above: 16, below: 8}
+  - {italic: true, above: 16, below: 8}
+# The cover (TEXAPP-FORM-009, TRAP 9.4(g)): the court, the case number, the case style, the court below, the title
+# and the filing party, lead counsel with bar numbers and contact details, two to a row.
+cover:
+  - {text: "{court}", align: center, bold: true}
+  - {text: "Cause No. {case_number}", align: center, bold: true, upper: true, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4}
+    blocks:
+      - {text: "{names}", align: center, above: 14.4}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 43.2}
+  - columns: {each: counsel, per_row: 2, row_gap: 14.4, blocks: [{text: "{names}", bold: true}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 43.2
+# TRAP 38.1(b), (c) (TEXAPP-OPEN-005): the table of contents and the index of authorities, with the pages.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 8}
+authorities:
+  title: "Index of Authorities"
+  col: 56
+  hang: 18
+  above: 8
+  group: {bold: true, above: 16, below: 4}
+# The signature block (TRAP 9.4(g) counsel; the firm, each signer's /s/ line and name, the address), never split;
+# then the certificate of compliance (TRAP 9.4(i)(3)) and of service (TRAP 9.5, TEXAPP-AMI-004), each on its own
+# page in the filer's words, signed with the signers' /s/ lines.
+closing:
+  - group:
+      - {text: "{date}", optional: true, pitch: body, indent: 36}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 16.1}
+      - each: signature.signers
+        blocks:
+          - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 16.1}
+          - {text: "{name}", left: 230.4}
+          - {text: "{lines}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, above: 8}
+    above: 28.8
+  - when: compliance
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Compliance", align: center, bold: true, upper: true, below: 12}
+      - {text: "{compliance}", pitch: body, indent: 36}
+      - each: signature.signers
+        blocks: [{text: "/s/ *{name}*", underline: true, left: 230.4, above: 16.1}]
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 12}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - each: service.recipients
+        blocks: [{text: "{.}", left: 72, above: 14.4}]
+      - {text: "{service.closing}", pitch: body, indent: 36, optional: true, above: 14.4}
+      - each: signature.signers
+        blocks: [{text: "/s/ *{name}*", underline: true, left: 230.4, above: 16.1}]
