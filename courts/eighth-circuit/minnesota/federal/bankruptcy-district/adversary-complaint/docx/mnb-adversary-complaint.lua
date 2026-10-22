@@ -31,10 +31,13 @@ end
 -- The frontmatter as written (pandoc's metadata would read "> Debtors." as a block quotation).
 local RAW = pandoc.json.decode(read_file(os.getenv("FORMBOOK_META")) or "{}", false)
 
--- A frontmatter string as inlines: its markdown read as pandoc reads the body.
+-- A frontmatter string as inlines: its markdown read as pandoc reads the body (no fancy list markers: "(612) ..."
+-- is text); a line that still reads as a block of another kind is its text.
 local function md(s)
-  local blocks = pandoc.read(s, "markdown+smart", PANDOC_READER_OPTIONS).blocks
-  return blocks[1] and blocks[1].content or pandoc.Inlines({})
+  local b = pandoc.read(s, "markdown+smart-fancy_lists", PANDOC_READER_OPTIONS).blocks[1]
+  if b == nil then return pandoc.Inlines({}) end
+  if b.t == "Para" or b.t == "Plain" then return b.content end
+  return pandoc.Inlines({ pandoc.Str(s) })
 end
 
 -- A paragraph: o = { before, after, line, left, hanging, first, tab, jc, keep } (a hanging indent writes no
@@ -142,12 +145,12 @@ local function body_par(label, inlines, o)
 end
 
 -- Headings at the body pitch, bold: levels 1 and 2 centered (1 in capitals), level 3 italic; kept with the text.
-local function heading(el)
+local function heading(el, before)
   local content = el.content
   if el.level == 1 then
     content = content:walk({ Str = function(s) return pandoc.Str(pandoc.text.upper(s.text)) end })
   end
-  return xe.para({ xe.style("Heading" .. el.level), xe.KEEP, xe.spacing(0, 0, BODY), xe.ind(0, nil, 0),
+  return xe.para({ xe.style("Heading" .. el.level), xe.KEEP, xe.spacing(before or 0, 0, BODY), xe.ind(0, nil, 0),
     xe.jc(el.level <= 2 and "center" or "left") }, xe.inl(content, { b = true, i = el.level >= 3 }))
 end
 
@@ -182,7 +185,7 @@ function Pandoc(doc)
   local n = 0
   for _, b in ipairs(doc.blocks) do
     if b.t == "Header" then
-      paras[#paras + 1] = { xml = heading(b), before = take() }
+      paras[#paras + 1] = { xml = heading(b, take()) }
     elseif b.t == "Para" or b.t == "Plain" then
       local label = nil
       if not is_wherefore(b) then
