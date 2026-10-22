@@ -260,7 +260,7 @@ Courts under `courts` (346).
 | [High Court of American Samoa](ninth-circuit/american-samoa/state/high-court) | `amsamoa` | in progress | — | — | — | 14 |
 | [Arizona Court of Appeals](ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | up for review | 7/7 | — | — | 29 |
 | [Arizona Supreme Court](ninth-circuit/arizona/state/supreme-court) | `ariz` | up for review | 9/9 | — | — | 29 |
-| [California Court of Appeal, Fifth Appellate District](ninth-circuit/california/state/court-of-appeal-fifth-district) | `calctapp5d` | up for review | 6/6 | 1/1 | 1/1 | 29 |
+| [California Court of Appeal, Fifth Appellate District](ninth-circuit/california/state/court-of-appeal-fifth-district) | `calctapp5d` | up for review | 6/6 | 1/1 | 5/5 | 29 |
 | [California Court of Appeal, First Appellate District](ninth-circuit/california/state/court-of-appeal-first-district) | `calctapp1d` | up for review | 7/7 | 6/6 | 6/6 | 29 |
 | [California Court of Appeal, Fourth Appellate District](ninth-circuit/california/state/court-of-appeal-fourth-district) | `calctapp4d` | up for review | 5/5 | — | — | 29 |
 | [California Court of Appeal, Second Appellate District](ninth-circuit/california/state/court-of-appeal-second-district) | `calctapp2d` | up for review | 5/5 | — | — | 29 |

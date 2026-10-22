@@ -564,7 +564,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court for the Eastern District of California](courts/ninth-circuit/california/federal/eastern-district) | `caed` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Northern District of California](courts/ninth-circuit/california/federal/northern-district) | `cand` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Southern District of California](courts/ninth-circuit/california/federal/southern-district) | `casd` | up for review | 2/2 | — | 2/2 | 14 |
-| [California Court of Appeal, Fifth Appellate District](courts/ninth-circuit/california/state/court-of-appeal-fifth-district) | `calctapp5d` | up for review | 6/6 | 1/1 | 1/1 | 29 |
+| [California Court of Appeal, Fifth Appellate District](courts/ninth-circuit/california/state/court-of-appeal-fifth-district) | `calctapp5d` | up for review | 6/6 | 1/1 | 5/5 | 29 |
 | [California Court of Appeal, First Appellate District](courts/ninth-circuit/california/state/court-of-appeal-first-district) | `calctapp1d` | up for review | 7/7 | 6/6 | 6/6 | 29 |
 | [California Court of Appeal, Fourth Appellate District](courts/ninth-circuit/california/state/court-of-appeal-fourth-district) | `calctapp4d` | up for review | 5/5 | — | — | 29 |
 | [California Court of Appeal, Second Appellate District](courts/ninth-circuit/california/state/court-of-appeal-second-district) | `calctapp2d` | up for review | 5/5 | — | — | 29 |
