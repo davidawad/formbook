@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The NY Court of Appeals answering brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs;
+     docs/EVAL-LOOP.md, "Cross-engine gate") in the face of the typst template ({font}, Times New Roman: 22 NYCRR
+     500.1(i) names it as its example of a serifed, proportionally spaced face) at 14 pt (size 28 half points, 500.1(j)(1));
+     Body Text and List Item in 31.4 pt line boxes (628 twips: typst pitch-double, double spacing, 500.1(l)) with a
+     half-inch first-line indent; quotations and headings in 19 pt boxes (380 twips: typst pitch-single), quotations
+     14 pt above and below; Footnote Text at 12 pt (500.1(j)(1): footnotes no smaller than 12-point) in 16.3 pt boxes
+     (326 twips: typst pitch-note), 7 pt after each note (typst note-gap). One style is added: Body Text Note, Body Text
+     without widow control, for a paragraph that holds a footnote (typst moves the line with the reference to the next
+     page with its note, even when that leaves a widow). Page setup, sections and footers come from docx/ny-answering.lua
+     and fb render; the filter writes every other paragraph's own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="628" single="380" indent="720" quote="280" note="326" note-size="24" note-after="140">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyTextNote"><w:name w:val="Body Text Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/></w:pPr></w:style>
+</reference>
