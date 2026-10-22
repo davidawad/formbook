@@ -1,6 +1,6 @@
 -- Second Circuit brief, docx engine: the brief as Word paragraphs and sections (typst: typst/ca2-<doc>.typ, latex:
 -- latex/template.tex). pandoc writes the body text (paragraphs, quotations, lists, footnotes) with
--- docx/reference.docx (built by make-reference.sh); this filter writes what needs Word formatting:
+-- docx/reference.docx (fb render builds it from docx/reference.xml); this filter writes what needs Word formatting:
 --   * the cover (FRAP 32(a)(2)), the table of contents, the table of authorities, the signature block and the
 --     certificates, as paragraphs with explicit spacing, indents and tabs;
 --   * the heading labels (I., A., 1., a. in the Argument; A., 1., a., (1) elsewhere) and each heading's outline
