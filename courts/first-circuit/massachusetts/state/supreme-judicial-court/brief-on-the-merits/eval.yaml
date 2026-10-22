@@ -1,0 +1,15 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # pdfTeX breaks between a closing quote and an em dash ("screening testing” / —is", INPUT-brief-on-the-merits,
+  # page 11 line 12); typst and LibreOffice keep ”— together (Unicode line breaking: no break after a closing
+  # quote), so the paragraph's next 7 lines and the end of page 12 differ (XENG-002/-003, 1231/1243 lines; pages
+  # equal). A behaviour of the shared model, not of this folder: reported, not gated (fb-595.54.25).
+  cross_engine_latex: report
+  # The docx page lookup (tools/fb/src/docxpages.rs) lists Turner v. Safley at "49, 50" where typst and LaTeX list
+  # "49, 50, 51": the mark of "Turner, 482 U.S. at 89" on page 51 line 3 (in a paragraph that starts on page 50) is
+  # not found on its page (table of authorities, page 7 line 11; XENG-002, 1242/1243 lines; pages and page ends
+  # equal). A behaviour of the shared model: reported, not gated (fb-595.54.25).
+  cross_engine_docx: report

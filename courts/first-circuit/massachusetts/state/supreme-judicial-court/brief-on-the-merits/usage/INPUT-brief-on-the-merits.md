@@ -63,7 +63,7 @@ authorities:
       - {key: castro, cite: "*Castro v. Cnty. of Los Angeles*, 833 F.3d 1060 (9th Cir. 2016)", find: "Castro"}
       - {key: ching, cite: "*Ching v. Lewis*, 895 F.2d 608 (9th Cir. 1990)", find: "Ching"}
       - {key: clancy, cite: "*Clancy v. McCabe*, 441 Mass. 311 (2004)", find: "Clancy"}
-      - {key: cpcs, cite: "*Comm. for Pub. Counsel Servs. v. Chief Justice of the Trial Court*, 484 Mass. 431 (2020)", find: ["Comm. for Pub. Counsel Servs.", "CPCS,"]}
+      - {key: cpcs, cite: "*Comm. for Pub. Counsel Servs. v. Chief Justice of the Trial Court*, 484 Mass. 431 (2020)", find: "Comm. for Pub. Counsel Servs."}
       - {key: fernandes, cite: "*Commonwealth v. Fernandes*, 485 Mass. 172 (2020)", find: "Fernandes"}
       - {key: lee, cite: "*Commonwealth v. Lee*, 394 Mass. 209 (1985)", find: "Commonwealth v. Lee"}
       - {key: nash, cite: "*Commonwealth v. Nash*, 486 Mass. 394 (2020)", find: "Nash"}
@@ -90,12 +90,12 @@ authorities:
       - {key: mirandarivera, cite: "*Miranda-Rivera v. Toledo-Dávila*, 813 F.3d 64 (1st Cir. 2016)", find: "Miranda-Rivera"}
       - {key: morales1, cite: "*Morales Feliciano v. Calderon Serra*, 13 F. Supp. 2d 151 (D.P.R. 1998)", find: "Morales Feliciano v. Calderon"}
       - {key: morales2, cite: "*Morales Feliciano v. Rossello Gonzalez*, 13 F. Supp. 2d 151 (D.P.R. 1998)", find: "Morales Feliciano v. Rossello"}
-      - {key: naacp, cite: "*N.C. State Conference of the NAACP v. Cooper*, North Carolina Superior Court Division – Wake County, No. 20-CV-500110 (June 16, 2020)", find: ["N.C. State Conference", "N.C. State Conf."]}
+      - {key: naacp, cite: "*N.C. State Conference of the NAACP v. Cooper*, North Carolina Superior Court Division – Wake County, No. 20-CV-500110 (June 16, 2020)", find: "N.C. State Conf"}
       - {key: pimental, cite: "*Pimental-Estrada v. Barr*, 464 F. Supp. 3d 1225 (W.D. Wash. 2020)", find: "Pimental-Estrada"}
       - {key: procunier, cite: "*Procunier v. Martinez*, 416 U.S. 396 (1974)", find: "Procunier"}
       - {key: richmond, cite: "*Richmond v. Huq*, 885 F.3d 928 (6th Cir. 2018)", find: "Richmond v. Huq"}
-      - {key: zepeda, cite: "*Zepeda Rivas v. Jennings*, No. 20-CV-02731, 2020 WL 7066346 (N.D. Cal. Dec. 3, 2020)", find: ["Zepeda Rivas", "Rivas v. Jennings"]}
-      - {key: splc, cite: "*S. Poverty L. Ctr. v. United States Dep't of Homeland Sec.*, No. 18-760, 2020 WL 3265533 (D.D.C. June 17, 2020)", find: ["S. Poverty L. Ctr.", "SPLC"]}
+      - {key: zepeda, cite: "*Zepeda Rivas v. Jennings*, No. 20-CV-02731, 2020 WL 7066346 (N.D. Cal. Dec. 3, 2020)", find: "Zepeda Rivas"}
+      - {key: splc, cite: "*S. Poverty L. Ctr. v. United States Dep't of Homeland Sec.*, No. 18-760, 2020 WL 3265533 (D.D.C. June 17, 2020)", find: "3265533"}
       - {key: savino, cite: "*Savino v. Souza*, 459 F. Supp. 3d 317 (D. Mass. 2020)", find: "Savino"}
       - {key: smith, cite: "*Smith v. Robbins*, 454 F.2d 696 (1st Cir. 1972)", find: "Smith v. Robbins"}
       - {key: thornburgh, cite: "*Thornburgh v. Abbott*, 490 U.S. 401 (1994)", find: "Thornburgh"}
