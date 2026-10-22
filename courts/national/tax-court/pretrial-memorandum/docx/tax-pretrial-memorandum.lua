@@ -1,7 +1,7 @@
 -- Tax Court pretrial memorandum for pandoc's docx writer. Matches typst/tax-pretrial-memorandum.typ.
 -- The caption, the form fields, the attorney block, the amounts table, the status boxes and the signature
 -- block come from the YAML frontmatter (the same keys the typst template reads). The narrative sections are
--- pandoc's own markdown rendering, styled by reference.docx (build-reference.sh). No case-specific text and
+-- pandoc's own markdown rendering, styled by reference.docx (fb render builds it from docx/reference.xml). No case-specific text and
 -- no forced line breaks live here.
 
 local function esc(s)
