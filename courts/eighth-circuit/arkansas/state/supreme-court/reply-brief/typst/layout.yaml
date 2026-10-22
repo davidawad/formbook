@@ -49,6 +49,8 @@ authorities:
   group: {bold: true, above: 15.4, below: 2.8}
 # The signature after the conclusion (ARK-CERT-003, Rule 2-1(a)): the closing words, then the firm, "/s/" and the typed
 # name underlined, the bar number and address lines, right of center; never split.
+# The last paragraph stays on the signature's page (no signature alone on a page; tier 2).
+keep_with_closing: true
 closing:
   - group:
       - {text: "{date}", optional: true}
