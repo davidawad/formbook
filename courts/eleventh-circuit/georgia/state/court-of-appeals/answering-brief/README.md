@@ -8,9 +8,9 @@ In Georgia this is the "Brief of Appellee" (Rule 25 (b)). Exemplar: **yes** (`us
 |---|---|
 | `usage/` | 1 filed brief, text PDF, 11 pages (Century Schoolbook, court e-filing stamp on every page) |
 | `usage/INPUT-answering-brief.md` | transcription of the whole filed brief, both footnotes included. Id kept for the existing docx outputs |
-| render | ok: `usage/OUTPUT-answering-brief.typst.pdf`, 11 pages, exit 0, no warnings, Liberation Serif embedded |
+| render | ok: `usage/OUTPUT-answering-brief.typst.pdf`, 10 pages, exit 0, no warnings, Times New Roman embedded |
 | overlay | ok: `.overlay/courts/eleventh-circuit/georgia/state/court-of-appeals/answering-brief/OVERLAY-answering-brief.pdf` / `.txt` |
-| pages reviewed | all 11 output pages and all 11 exemplar pages rendered at 60 dpi and inspected |
+| pages reviewed | all 10 output pages (typst and docx) and all 11 exemplar pages rendered at 60 dpi and inspected |
 
 ## Governing rules
 
@@ -18,19 +18,20 @@ Same rules and template as `../opening-brief/README.md` (Rules 2, 6, 24, 25, eff
 
 ## Overlay page map
 
-The regenerated same-id overlay pairs ours pages 1-11 with filed pages 1-11. Text flow and pagination now match page for page; Liberation Serif at 14 pt is narrower than the filer's Century Schoolbook (also named in Rule 2 (c) (3)).
+(Measured before the fb-595.68.36 port, which moved the layout onto exact line boxes; regenerate with `just overlay` for current pages.)
 
-## Gate 2 review (11 of 11 pages)
+The regenerated same-id overlay pairs ours pages 1-11 with filed pages 1-11. Text flow and pagination now match page for page; the template is set in Times New Roman 14 pt (Rule 2 (c) (3) names it; the house standard, docs/FONTS.md rule 6; `template_face` in data/exemplar-fonts.json), narrower than the filer's Century Schoolbook, so ours runs to 10 pages against the filed 11.
+
+## Gate 2 review (10 of 10 pages, typst and docx renders at 50 dpi; re-done for fb-595.68.36)
 
 | Page | Finding |
 |---|---|
 | 1 | Cover: court, case no., caption, "On Appeal from the Superior Court of Lowndes County / No. 2024CV0039", title, counsel. OK |
-| 2 | Contents with two argument headings and Certificate of Service. OK |
+| 2 | Contents with two argument headings (wrapped lines hanging) and Certificate of Service. OK |
 | 3 | Statement of the Case, footnote 1 at 14 pt single spaced. OK |
-| 4-6 | Argument, heading I, footnote 2. OK |
-| 7-9 | Heading II, deposition Q/A block quote. OK (the filer sets "V2-109" flush after the quote; ours indents it: tier 3) |
-| 10 | Conclusion, Rule 24 certification, date and underlined /s/ signature with counsel lines. OK |
-| 11 | Certificate of service (prior-agreement e-mail certification, Rule 6 (b) (2)), recipients, signature. OK; our certificate signature repeats the counsel lines (the filer lists only the signer): tier 3 |
+| 4-8 | Argument, heading I, footnote 2 (p. 5), heading II (p. 7), deposition Q/A block quote (p. 8). OK (the filer sets "V2-109" flush after the quote; ours indents it: tier 3) |
+| 9 | Conclusion, Rule 24 certification, date and underlined /s/ signature with counsel lines. OK |
+| 10 | Certificate of service (prior-agreement e-mail certification, Rule 6 (b) (2)), recipients, signature. OK; our certificate signature repeats the counsel lines (the filer lists only the signer): tier 3 |
 
 ## What changed
 
@@ -38,4 +39,8 @@ Template: as listed in `../opening-brief/README.md` (shared template, copied to 
 
 ## Gaps
 
-Word count not computed. docx outputs are stale renders of the old synthetic sample (no `soffice` on this box): open docx items are Rule 24 (e) numbering, Rule 24 (f) (1) certification, Rule 6 certificate, the new frontmatter keys. See `../opening-brief/README.md`, Engines.
+Word count not computed.
+
+## Engines
+
+typst and docx on the cross-engine layout model, gated (`eval.yaml`); the same template, filter and numbers as `../opening-brief/README.md`, Engines (fb-595.68.36). The face moved from TeX Gyre Schola to Times New Roman with the port (house standard, docs/FONTS.md rule 6).

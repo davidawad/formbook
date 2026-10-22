@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Court of Appeals of Georgia brief's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the
+     typst template's face ({font}, Times New Roman; Rule 2 (c) (3)) at 14 pt (size 28 half points; Rule 2 (c) (3),
+     footnotes too); Body Text in exact 32.2 pt line boxes (644 twips: typst pitch-double, Rule 2 (c) (2) double
+     spacing) with a half-inch first-line indent (typst para-indent); single lines 16.1 pt (322 twips: typst
+     pitch-single); Block Text (quotations) single-spaced, half an inch in on both sides, a blank single line (322
+     twips: typst gap) around a quotation and between its paragraphs; footnotes 14 pt in 16.1 pt boxes, 8 pt after
+     each (160 twips: typst gap-small), kept whole on one page (typst sets each note as one unbreakable block).
+     docx/gactapp-brief.lua writes the cover, the tables, the headings, the signature block and the certificate of
+     service with their own spacing, and the footer and section (FORMBOOK_FOOTERS, FORMBOOK_FINAL). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="28" body="644" single="322" indent="720" list="720" quote="322" note="322" note-after="160" footer="720">
+</reference>
