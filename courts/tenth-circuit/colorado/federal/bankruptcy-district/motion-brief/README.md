@@ -6,9 +6,9 @@ Doc type: **motion with memorandum** (FRBP 9013) in the United States Bankruptcy
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (adversary motion, Point Digital Finance's counsel, 15 pp.). A second filer is saved as `usage/FILED-EXAMPLE-motion-brief-2.pdf` (main-case ex parte motion, Receiver's counsel, 12 pp.), not transcribed. See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md`: full transcription of the 15-page filing (caption, motion, facts, argument I to VIII, conclusion, signature block, certificate of service). |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, typst 0.15.0, vendored Times New Roman only, no warnings, on the shared cross-engine layout model (fb-595.68.32) |
 | overlay | ok: `usage/OVERLAY-katzenberger-motion-brief.pdf` and `OVERLAY-katzenberger-motion-brief.txt` |
-| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 14 of 14 on typst and docx (every page of both renders viewed side by side at 45 dpi after the last template change, 2026-10-22; the review table below was made on the earlier EB Garamond render) |
 
 File names follow the repo tools rather than the bare `<id>.pdf` in the brief: `render.sh` writes `OUTPUT-<id>.pdf` from `INPUT-<id>.md`, and `overlay.sh` writes `OVERLAY-<id>.pdf` and `.txt`.
 
@@ -23,8 +23,8 @@ Rule text was read from the primary sources below. The Colorado **local** bankru
 | COB-RULE-003 | Fed. R. Bankr. P. 9004(a) (same) | A petition, pleading, schedule, or other document must be clearly legible. | Typst output (vendored font, no warnings) |
 | COB-RULE-004 | Fed. R. Bankr. P. 9004(b) (same) | Caption: (1) court's name; (2) case title; (3) case number and, if appropriate, adversary-proceeding number; (4) brief designation of the document's character. | `court`, `debtor`, `adversary`, `title` in the frontmatter; `caption()` and `title-block()` |
 | COB-RULE-005 | Fed. R. Bankr. P. 7010 (same) | In an adversary proceeding, Fed. R. Civ. P. 10 applies, except that a pleading's caption must substantially conform to the appropriate version of Official Form 416. | the adversary caption block (Form 416 is not reproduced verbatim; see gaps) |
-| COB-FORM-002 | Proxy: D.C.COLO.LCivR 10.1 (district court, not the bankruptcy LBR), text from a third-party aggregator (courtrules.net, quoted via search 2026-10-14); the district text is "FORMAT OF PLEADINGS AND DOCUMENTS PRESENTED FOR FILING" with a 2005 general order as its source. | Typewritten documents: black ink, font at least 12 point, 8½ × 11 white paper, one side. | `type-size = 13pt`, `font-family = "EB Garamond"` |
-| COB-FORM-003 | Proxy: same district rule | Double spacing for all documents. | `line-pitch = 24pt` |
+| COB-FORM-002 | Proxy: D.C.COLO.LCivR 10.1 (district court, not the bankruptcy LBR), text from a third-party aggregator (courtrules.net, quoted via search 2026-10-14); the district text is "FORMAT OF PLEADINGS AND DOCUMENTS PRESENTED FOR FILING" with a 2005 general order as its source. | Typewritten documents: black ink, font at least 12 point, 8½ × 11 white paper, one side. | `type-size = 12pt`, footnotes included; `font-family = ("Times New Roman", "Liberation Serif")` (no rule names a face: Times New Roman, the house standard; the docx names it through `{font}`) |
+| COB-FORM-003 | Proxy: same district rule | Double spacing for all documents. | `pitch-double = 24pt`: every body line a 24 pt box (2 x 12 pt), the cross-engine layout model (`lib/typst/xengine.typ`); single lines (caption, title, headings, quotations, footnotes, signature) 13.8 pt (`pitch-single`) |
 | COB-FORM-004 | Proxy: same district rule | Top margin 1½ inches; left, right and bottom 1 inch. | `margin-top = 1.5in`, `margin-other = 1in` |
 
 Not used, and why:
@@ -44,9 +44,9 @@ Not used, and why:
 ## Layout
 
 - Page 1: court title (two lines, centered bold capitals), the debtor block ("IN RE:", case number, chapter) on the left and right, the adversary block (parties and "Adv. Proc. No.") below, then the title in centered bold capitals.
-- Body: double-spaced, first-line indent ½ inch, headings numbered by the template (level 1 unnumbered centered caps, level 2 "I.", level 3 "A.", level 4 "1."), block quotations single-spaced and indented both sides, footnotes at 13 pt.
+- Body: double-spaced (24 pt lines), first-line indent ½ inch; headings single-spaced, a single line above and below, sticky, numbered by the template (level 1 unnumbered centered bold capitals; level 2 "I.", level 3 "A.", level 4 "1.", bold, the label in a half-inch box and the title hanging after it, each level half an inch further in); block quotations single-spaced, half an inch in on both sides, a single line above and below; footnotes at 12 pt in single lines under a 30 % rule, 7 pt apart.
 - Footer: centered page number, arabic from 1 (the caption page is page 1, as in the exemplar).
-- After the body: signature block (Dated left; Respectfully submitted, firm, `/s/` and signer, bar number and address lines right), then the optional certificate of service.
+- After the body, a double line below it: signature block (Dated left; in a 3.2 in column at the right "Respectfully submitted,", the firm, `/s/` and signer, bar number and address lines, a blank line between the groups), never split, the last paragraph kept with it; then, a double line below, the optional certificate of service (heading, the text at the body pitch, Dated and `/s/` line), never split.
 
 ## Markdown contract (for samples)
 
@@ -66,7 +66,7 @@ sh tools/overlay.sh $D katzenberger-motion-brief $D/usage/SAMPLE-katzenberger-26
 
 `overlay.sh` pairs pages by word overlap. Pairs (ours → filed): 1→1, 2→2, 3→3, 4→4, 5→5, 6→6, 7→8, 8→9, 9→10, 10→11, 11→12, 12→13, 13→14, 14→15. The overlay is a diagnostic, not a score: the filed document is in the Times-set pleading form with no page numbers in its body text, and our render is not, so the layers will not coincide line for line.
 
-## Visual review (Gate 2 record, all 14 pages, 60 dpi, viewed after the last template change)
+## Visual review (Gate 2 record, made on the earlier 14-page EB Garamond render; the 14 pages of the current typst and docx renders were viewed side by side on 2026-10-22, no defect found: caption, headings I to VIII, the block quotation, footnote 1 on page 1, the signature on page 13 and the certificate on page 14)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -96,17 +96,15 @@ sh tools/overlay.sh $D katzenberger-motion-brief $D/usage/SAMPLE-katzenberger-26
 7. **Date and signature.** `/s/` lines are transcribed from the filing's own `/s/` marks. No signature was added.
 8. **ECF header** ("Case 26-01048-MER Doc#:28 Filed:08/17/26 Entered...") is not printed in the render; it is the filing system's stamp and is not part of the document text.
 9. **Certificate of service** content is from the exemplar. Whether D.C.COLO requires it in this form was not verified.
-10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, which this doc-type folder is not. The brief forbids editing `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
+10. **Automated check.** `tools/check.sh` runs on this folder (typst and docx); the RESULT lines are under Engines. `tools/check-selftest.sh` needs a `court.json` and does not run on a doc-type folder.
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `cob.lua` builds the caption, the signature table, the heading labels (`I.`, `A.`, `1.`) and the certificate of service). Render: `sh tools/render.sh --engine docx <doc-folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8.1, vendored EB Garamond). Footnotes are native Word footnotes.
+The typst template is the reference; the docx breaks every line and page where it does (Gate 4 CROSS-ENGINE, `params.cross_engine: gate` in `eval.yaml`).
 
-- Matches the typst reference: court title, caption (debtor block, adversary block with its case number), bold capital title, 13 pt EB Garamond, letter, 1.5 in top margin and 1 in elsewhere, double spacing (exact 24 pt), 0.5 in first-line indent, `#` headings centered bold capitals, `##` and `###` headings numbered `I.` and `A.` and hung at the margin, single-spaced block quotation indented 0.5 in both sides, the footnote at 13 pt, the signature block (`Dated:` left, `Respectfully submitted,` and the firm and signer right), the certificate of service after the signature, and the 11 pt centered page number starting at 1. Page count 14 = typst 14. All 14 docx pages and all 14 typst pages were rasterized at 60 dpi and viewed.
-- Differs from typst (renderer or tier 2, not a mandated-form miss):
-  - Page breaks: the body in LibreOffice starts about 6 pt lower on each page and loses a line or two over the document, so breaks fall within a line or two of typst's; page 2 starts with a different paragraph than typst. Page count matches.
-  - Signature block: typst keeps it on page 13; the docx moves the signature table to page 14 with the certificate, because the docx has about one line less space on page 13. The signature content is identical.
-  - Heading VI: the typst heading wraps "Code." to a second line; the docx heading fits on one line (hanging-indent measure differs).
-  - Caption: the adversary designation lines sit a few points lower than typst.
-- BLOCKED: none declared. This folder has no `checks.yaml`, so there are no docx check IDs to block. `sh tools/check.sh <court-dir> --engine docx` fails at the court folder (`checks.yaml` missing), see the PR notes; it was not made to pass.
-- Not checked: Microsoft Word (not available here). The `.docx` is a valid zip with well-formed XML parts and converts in LibreOffice without error.
+DOCX (`docx/`): `reference.xml` (`base="xengine"`: the face is the typst template's through `{font}`, 12 pt, exact 24 pt body lines, 13.8 pt single lines and footnotes 7 pt apart, Body Text Note without widow control, Body Text Last kept with the signature a double line below, letter page with a 1.5 in top margin and 1 in elsewhere, the centered 11 pt page-number footer; the markdown read as CommonMark with footnotes, as cmarker reads it) and `cob-motion-brief.lua` (on `lib/docx/xengine.lua`: the court title, the two caption blocks as one-row tables, the title, the numbered headings, the quotations, the paragraphs with native footnotes, the signature and certificate tables, each in the typst template's line boxes and spaces). `fb render` builds the reference document; no shell script and no committed `reference.docx` (fb-595.68.32; were `build-reference.sh`, `reference.docx` and `cob.lua`, EB Garamond 13 pt). Samples: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion; opened in LibreOffice, not Word).
+
+- `tools/check.sh <dir>`: RESULT: 9 checks passed, 0 failed (DEF-TOC-001, DEF-COVER-001 pass).
+- `tools/check.sh <dir> --engine docx`: RESULT: 13 checks passed, 0 failed; XENG-001..003 PASS (14 pages, 337/337 lines).
+- The footnote definition may stand anywhere in the body: the typst template folds it into the paragraph that cites it (the sample keeps it at the end; the earlier template left the note unresolved there).
+- No latex engine for this folder.
