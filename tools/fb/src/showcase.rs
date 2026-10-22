@@ -1,6 +1,5 @@
 //! `fb showcase`: regenerate every image in docs/showcase/ from files committed in this repo (was
-//! docs/showcase/make-screenshots.sh). The overlay is regenerated into the gitignored .overlay/ by `fb overlay`
-//! first; overlays are never committed.
+//! docs/showcase/make-screenshots.sh). Every image pairs formbook output with the filed example it is modelled on.
 //! Needs pdftoppm (poppler), magick (ImageMagick), typst; the formbook toolchain
 //! ($HOME/.local/share/formbook/env/bin, see `fb bootstrap`) is put on PATH first. Layout and labels are typeset
 //! by typst with its bundled fonts (--ignore-system-fonts), so output does not depend on installed fonts. Page
@@ -11,14 +10,8 @@ use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
 const HERO: &str = "courts/dc-circuit/court-of-appeals/opening-brief";
-const TRES: &str = "courts/third-circuit/court-of-appeals/opening-brief";
-const NYS: &str = "courts/second-circuit/new-york/state/supreme-court/motion-brief";
-const CAND: &str = "courts/ninth-circuit/california/federal/northern-district/complaint";
-const SCOTUS: &str = "courts/supreme-court-of-the-united-states/merits-brief";
-const CA1: &str = "courts/first-circuit/court-of-appeals/opening-brief";
 const MDB: &str = "courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-complaint";
 const CASUP: &str = "courts/ninth-circuit/california/state/superior-court/complaint";
-const TXSC: &str = "courts/fifth-circuit/texas/state/supreme-court/brief-on-the-merits";
 
 const HERO_TYP: &str = r####"#let bx = eval("bo" + "x", mode: "code")  // typst's inline layout primitive
 #set page(width: 1180pt, height: 520pt, margin: 18pt, fill: rgb("#f6f4ee"))
@@ -37,33 +30,31 @@ const HERO_TYP: &str = r####"#let bx = eval("bo" + "x", mode: "code")  // typst'
   lab[your markdown], [], lab[formbook render], [], lab[filed with the court (the target)])
 "####;
 
-const OVERLAY_TYP: &str = r####"#let bx = eval("bo" + "x", mode: "code")  // typst's inline layout primitive
-#set page(width: auto, height: auto, margin: 14pt, fill: rgb("#f6f4ee"))
-#set text(font: "Libertinus Serif", size: 14pt, fill: rgb("#222"))
-#align(center)[
-  #bx(stroke: 0.8pt + rgb("#999"), image("o.png", height: 640pt))
-  #v(6pt)
-  #text(fill: rgb("#d00000"), weight: "bold")[red] = only in our render · #text(fill: rgb("#0044cc"), weight: "bold")[blue] = only in the filed exemplar · black = both agree
-]
-"####;
-
 const PAGES_TYP: &str = r####"#let bx = eval("bo" + "x", mode: "code")  // typst's inline layout primitive
 #set page(width: auto, height: auto, margin: 14pt, fill: rgb("#f6f4ee"))
 #set text(font: "Libertinus Serif", size: 13pt, fill: rgb("#222"))
+#let pair(a, b, w) = grid(columns: 2, column-gutter: 4pt,
+  bx(stroke: 0.8pt + rgb("#999"), image(a, width: w)), bx(stroke: 0.8pt + rgb("#999"), image(b, width: w)))
 #let names = ("cover", "certificate as to parties", "table of contents", "table of authorities", "introduction", "summary of argument", "certificate of compliance", "certificate of service")
-#grid(columns: 4, column-gutter: 10pt, row-gutter: 12pt,
+#align(center, text(size: 15pt, weight: "bold")[each pair: formbook render (left) next to the filed brief (right)])
+#v(6pt)
+#grid(columns: 4, column-gutter: 14pt, row-gutter: 12pt,
   ..range(8).map(i => align(center, stack(spacing: 5pt,
-    bx(stroke: 0.8pt + rgb("#999"), image("p" + str(i + 1) + ".png", width: 215pt)),
+    pair("p" + str(i + 1) + ".png", "f" + str(i + 1) + ".png", 150pt),
     names.at(i)))))
 "####;
 
 const COURTS_TAIL_TYP: &str = r####"#let bx = eval("bo" + "x", mode: "code")  // typst's inline layout primitive
 #set page(width: auto, height: auto, margin: 14pt, fill: rgb("#f6f4ee"))
 #set text(font: "Libertinus Serif", size: 13pt, fill: rgb("#222"))
-#let labels = (l1, l2, l3, l4, l5, l6, l7, l8)
-#grid(columns: 4, column-gutter: 10pt, row-gutter: 12pt,
-  ..range(8).map(i => align(center, stack(spacing: 5pt,
-    bx(stroke: 0.8pt + rgb("#999"), image("c" + str(i + 1) + ".png", width: 215pt)),
+#let pair(a, b, w) = grid(columns: 2, column-gutter: 4pt,
+  bx(stroke: 0.8pt + rgb("#999"), image(a, width: w)), bx(stroke: 0.8pt + rgb("#999"), image(b, width: w)))
+#align(center, text(size: 15pt, weight: "bold")[each pair: formbook render (left) next to the filed example (right)])
+#v(6pt)
+#let labels = (l1, l2, l3)
+#grid(columns: 3, column-gutter: 16pt, row-gutter: 12pt,
+  ..range(3).map(i => align(center, stack(spacing: 5pt,
+    pair("c" + str(i + 1) + ".png", "d" + str(i + 1) + ".png", 230pt),
     labels.at(i)))))
 "####;
 
@@ -216,73 +207,37 @@ impl Shots {
         self.compose("hero.typ", HERO_TYP, "hero.png", 96)
     }
 
-    fn overlay(&self) -> Res<()> {
-        let exe = std::env::current_exe().map_err(|e| fail(2, format!("fb showcase: {e}")))?;
-        run(
-            Command::new(exe).args(["overlay", CAND, "complaint"]),
-            "fb overlay",
-        )?;
-        self.page(
-            &format!(".overlay/{CAND}/OVERLAY-complaint.pdf"),
-            2,
-            "o",
-            130,
-        )?;
-        self.compose("overlay.typ", OVERLAY_TYP, "overlay.png", 64)
-    }
-
     fn pages(&self) -> Res<()> {
         let t_out = format!("{HERO}/usage/OUTPUT-opening-brief.typst.pdf");
-        for (i, p) in [1, 2, 4, 5, 7, 11, 14, 15].iter().enumerate() {
-            self.page(&t_out, *p, &format!("p{}", i + 1), 70)?;
+        let t_filed = format!("{HERO}/usage/FILED-EXAMPLE-opening-brief.pdf");
+        // our page, the filed page it corresponds to (the same part of the same brief)
+        for (i, (ours, filed)) in [(1, 1), (2, 2), (4, 5), (5, 6), (7, 16), (11, 40), (14, 71), (15, 72)]
+            .iter()
+            .enumerate()
+        {
+            self.page(&t_out, *ours, &format!("p{}", i + 1), 70)?;
+            self.page(&t_filed, *filed, &format!("f{}", i + 1), 70)?;
         }
-        self.compose("pages.typ", PAGES_TYP, "pages.png", 48)
+        self.compose("pages.typ", PAGES_TYP, "pages.png", 64)
     }
 
     fn courts(&self) -> Res<()> {
+        // only courts whose current render visibly matches the filed example
         let list = [
-            (
-                format!("{SCOTUS}/usage/OUTPUT-merits-brief.typst.pdf"),
-                "U.S. Supreme Court: merits brief",
-            ),
-            (
-                format!("{CA1}/usage/OUTPUT-opening-brief.typst.pdf"),
-                "1st Circuit: opening brief",
-            ),
-            (
-                format!("{TRES}/usage/OUTPUT-opening-brief.typst.pdf"),
-                "3rd Circuit: opening brief",
-            ),
-            (
-                format!("{CAND}/usage/OUTPUT-complaint.typst.pdf"),
-                "N.D. Cal.: complaint",
-            ),
-            (
-                format!("{MDB}/usage/OUTPUT-adversary-complaint.typst.pdf"),
-                "D. Md. Bankruptcy: adversary complaint",
-            ),
-            (
-                format!("{CASUP}/usage/OUTPUT-complaint.typst.pdf"),
-                "California Superior Court: complaint",
-            ),
-            (
-                format!("{NYS}/usage/OUTPUT-motion-brief.typst.pdf"),
-                "New York Supreme Court: motion brief",
-            ),
-            (
-                format!("{TXSC}/usage/OUTPUT-brief-on-the-merits.typst.pdf"),
-                "Texas Supreme Court: brief on the merits",
-            ),
+            (HERO, "opening-brief", "D.C. Circuit: opening brief"),
+            (MDB, "adversary-complaint", "D. Md. Bankruptcy: adversary complaint"),
+            (CASUP, "complaint", "California Superior Court: complaint"),
         ];
-        for (i, (pdf, _)) in list.iter().enumerate() {
-            self.page(pdf, 1, &format!("c{}", i + 1), 70)?;
+        for (i, (dir, id, _)) in list.iter().enumerate() {
+            self.page(&format!("{dir}/usage/OUTPUT-{id}.typst.pdf"), 1, &format!("c{}", i + 1), 70)?;
+            self.page(&format!("{dir}/usage/FILED-EXAMPLE-{id}.pdf"), 1, &format!("d{}", i + 1), 70)?;
         }
-        let labels: Vec<&str> = list.iter().map(|(_, l)| *l).collect();
-        self.compose("courts.typ", &courts_typ(&labels), "courts.png", 48)
+        let labels: Vec<&str> = list.iter().map(|(_, _, l)| *l).collect();
+        self.compose("courts.typ", &courts_typ(&labels), "courts.png", 64)
     }
 
     fn folder(&self) -> Res<()> {
-        let tree = tree_lines(TRES, &depth_two(&self.root.join(TRES)));
+        let tree = tree_lines(HERO, &depth_two(&self.root.join(HERO)));
         std::fs::write(
             self.w("tree.txt"),
             tree.iter().map(|l| format!("{l}\n")).collect::<String>(),
@@ -319,7 +274,6 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         work: TempDir::new("showcase")?,
     };
     s.hero()?;
-    s.overlay()?;
     s.pages()?;
     s.courts()?;
     s.folder()?;

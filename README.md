@@ -12,7 +12,7 @@ Every template is checked against public record: each folder's `usage/` carries 
 - 614 folders have at least one filed exemplar PDF (1,528 PDFs in all).
 - **v0.2.0 status.** All 224 federal courts (including bankruptcy and the Supreme Court) are *up for review*: each has a `rules.md` written from fetched primary sources, and every doc folder under it passes the default eval in `data/checks-default.yaml`. Renders are pinned (typst 0.15.1, Times New Roman 2.82). The 152 state courts are in progress; none is up for review yet. 4 California superior-court folders currently fail the default content check.
 - **"Up for review" means machine-checked, not human-reviewed.** No court is marked `done`; that status is set by hand, and no court has been human-verified yet.
-- More pictures, and the command that regenerates each: [docs/showcase.md](docs/showcase.md). Per-court progress is in the [index](#index) at the bottom.
+- More pictures, and the command that regenerates each: [docs/showcase/README.md](docs/showcase/README.md). Per-court progress is in the [index](#index) at the bottom.
 
 These templates are not legal advice and do not check your arguments or citations. Verify every output against the court's current rules before you file; the court index below marks what is finished and what is still in progress.
 
