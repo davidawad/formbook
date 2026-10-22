@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The E.D. Tenn. bankruptcy motion brief (memorandum), Word styles: the cross-engine recipe
+     (tools/fb/src/docxxengine.rs) in the face of the typst template ({font}, Times New Roman; LBR 9004-1 names none)
+     at 12 pt (size 24 half points, typst type-size); Body Text in exact 24 pt line boxes (480 twips: typst pitch-body,
+     double spacing, LBR 9004-1(a)) with a half-inch first-line indent (720, typst para-indent); Body Keep the same
+     kept with the next paragraph (the last paragraph, kept with the signature block); single lines 13.8 pt
+     (276 twips: typst pitch-single). Letter page with 1-inch margins (LBR 9004-1(a): 8 1/2 by 11 inches); the page
+     number centered at the foot from the second page on (LBR 9004-1(a); titlePg, an empty first-page footer) in a
+     13.8 pt line, 36.75 pt above the page foot (735 twips: where typst sets it, footer-descent 30 %).
+     docx/tneb-motion-brief.lua writes the court title, caption, title, headings, signature block and certificate
+     of service with their own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="276" heading-before="0" heading-after="0" footer="735">
+<footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>2</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></footer>
+<footer id="rIdFooterFirst"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr></w:p></footer>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyKeep"><w:name w:val="Body Keep"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/><w:footerReference w:type="first" r:id="rIdFooterFirst"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="735" w:gutter="0"/><w:titlePg/></w:sectPr>
+</reference>
