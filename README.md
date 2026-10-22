@@ -140,7 +140,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/district) | `mad` | up for review | 2/2 | — | 2/2 | 14 |
 | [Massachusetts Appeals Court](courts/first-circuit/massachusetts/state/appeals-court) | `massappct` | up for review | 5/5 | 1/1 | 2/2 | 29 |
 | [Massachusetts District Court, Appellate Division](courts/first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` | in progress | — | — | — | 14 |
-| [Massachusetts Supreme Judicial Court](courts/first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | up for review | 9/9 | — | — | 29 |
+| [Massachusetts Supreme Judicial Court](courts/first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 
 ### New Hampshire
 
@@ -485,7 +485,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/district) | `mnd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Minnesota](courts/eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
-| [Supreme Court of Minnesota](courts/eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | 8/8 | — | — | 29 |
+| [Supreme Court of Minnesota](courts/eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | 8/8 | 2/2 | 2/2 | 29 |
 
 ### Missouri
 
@@ -811,19 +811,19 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 1 | 6 | 16.5% |
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 0 | 6 | 14.0% |
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 5 | 0 | 5 | 14.0% |
-| First Circuit | 20 | 0 | 19 | 1 | 0 | 0.0% | 95.0% | 19 | 6 | 17 | 19.2% |
+| First Circuit | 20 | 0 | 19 | 1 | 0 | 0.0% | 95.0% | 19 | 7 | 18 | 19.2% |
 | Second Circuit | 19 | 0 | 19 | 0 | 0 | 0.0% | 100.0% | 19 | 4 | 17 | 18.7% |
 | Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 4 | 16 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 10 | 28 | 19.1% |
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 6 | 24 | 18.0% |
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 5 | 24 | 18.6% |
 | Seventh Circuit | 21 | 0 | 21 | 0 | 0 | 0.0% | 100.0% | 21 | 3 | 17 | 18.2% |
-| Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 15 | 36 | 20.3% |
+| Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 16 | 37 | 20.3% |
 | Ninth Circuit | 61 | 0 | 59 | 2 | 0 | 0.0% | 96.7% | 58 | 16 | 50 | 21.0% |
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 8 | 21 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 4 | 21 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 2 | 4 | 17.7% |
-| **Total** | 376 | 0 | 353 | 23 | 0 | 0.0% | 93.8% | 352 | 88 | 297 | 19.0% |
+| **Total** | 376 | 0 | 353 | 23 | 0 | 0.0% | 93.8% | 352 | 90 | 299 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 

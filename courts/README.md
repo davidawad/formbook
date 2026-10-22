@@ -38,7 +38,7 @@ Courts under `courts` (346).
 | [Supreme Judicial Court of Maine](first-circuit/maine/state/supreme-judicial-court) | `me` | up for review | 8/8 | 8/8 | 8/8 | 29 |
 | [Massachusetts Appeals Court](first-circuit/massachusetts/state/appeals-court) | `massappct` | up for review | 5/5 | 1/1 | 2/2 | 29 |
 | [Massachusetts District Court, Appellate Division](first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` | in progress | — | — | — | 14 |
-| [Massachusetts Supreme Judicial Court](first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | up for review | 9/9 | — | — | 29 |
+| [Massachusetts Supreme Judicial Court](first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | up for review | 9/9 | 5/5 | 5/5 | 29 |
 | [Supreme Court of New Hampshire](first-circuit/new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | 4/4 | 4/4 | 29 |
 | [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | up for review | 1/1 | 1/1 | 1/1 | 29 |
 | [Supreme Court of Puerto Rico](first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | — | — | 29 |
@@ -212,7 +212,7 @@ Courts under `courts` (346).
 | [Court of Appeals of Iowa](eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 3/3 | 3/3 | 29 |
 | [Supreme Court of Iowa](eighth-circuit/iowa/state/supreme-court) | `iowa` | up for review | 8/8 | 6/6 | 6/6 | 29 |
 | [Court of Appeals of Minnesota](eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
-| [Supreme Court of Minnesota](eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | 8/8 | — | — | 29 |
+| [Supreme Court of Minnesota](eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | 8/8 | 2/2 | 2/2 | 29 |
 | [Missouri Court of Appeals](eighth-circuit/missouri/state/court-of-appeals) | `moctapp` | up for review | 5/5 | 1/1 | 1/1 | 29 |
 | [Missouri Court of Appeals, Eastern District](eighth-circuit/missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 3/3 | 29 |
 | [Missouri Court of Appeals, Southern District](eighth-circuit/missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 3/3 | 29 |
