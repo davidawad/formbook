@@ -1,0 +1,4 @@
+PASS
+44b2e4cd4a5584ed18075b2c61eec391211162ead5c4856137ec3c71030a7e1e  usage/OUTPUT-motion-brief.docx
+0a120ed3fa1937eecff7c54ea9c43090504583b94747b60dc033b6caae232e31  usage/OUTPUT-motion-brief.docx.pdf
+497a40afb111a218956db14a022bebdd5c05a8aaf782938fe38e31610077619b  usage/OUTPUT-motion-brief.typst.pdf
