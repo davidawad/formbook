@@ -1,0 +1,80 @@
+# Court of Appeals of Tennessee (tennctapp): application for permission to appeal (Tenn. R. App. P. 9), e-filed PDF;
+# no word limit (TENNCTAPP-APP-004): the certificate of compliance only when the INPUT gives word_count. The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are
+# generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to Tenn. Sup. Ct. R. 46 § 3.02 and Tenn.
+# R. App. P. 27, 30 (../rules.md, TENNCTAPP-*); lengths in points. No case text here: every string printed comes from
+# the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # TENNCTAPP-FORM-003: 14-point, footnotes in the same size
+pitch:
+  body: 25.2              # TENNCTAPP-FORM-004: 1.5 line spacing (1.5 x 1.2 x 14 pt, Schola's single line)
+  single: 16.8            # TENNCTAPP-FORM-010: block quotations, headings, footnotes single spaced; cover, tables
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # TENNCTAPP-FORM-005: 1-inch margins
+indent: 36
+justify: true             # TENNCTAPP-FORM-006: full justification of the body
+# TENNCTAPP-FORM-007: pagination begins with page 1, the cover; Arabic numerals at the bottom.
+page_number: {align: center, from: 1}
+footnote: {size: 14}      # TENNCTAPP-FORM-003, -010: footnotes 14-point, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # TENNCTAPP-FORM-010: indented, single spaced
+# Headings single spaced (TENNCTAPP-FORM-010), kept with their text: a section centred in bold capitals; argument
+# points bold at the left, their later lines hung half an inch (the author numbers them, TENNCTAPP-SEC-008).
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, hang: 36, above: 14, below: 11.2}
+# TENNCTAPP-COV-001, -002 (Tenn. R. App. P. 30(b)): the case number and the court at the head, the caption centred,
+# the proceeding below, the title, counsel at the foot.
+cover:
+  - {text: "No. {case_number}", align: center}
+  - {text: "IN THE COURT OF APPEALS OF TENNESSEE", align: center, bold: true, above: 25.2}
+  - {text: "{court_seat}", align: center, bold: true, optional: true}
+  - each: caption
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true, above: 5.6}
+    above: 21.6
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true, upper: true}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - {text: "{names}", bold: true, left: 172.8, above: 8.4}
+      - {text: "{lines}", left: 172.8}
+# TENNCTAPP-SEC-001 (Tenn. R. App. P. 27(a)(1), (2)): the table of contents and the table of authorities.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 21, above: 7}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 8.4
+  group: {bold: true, above: 16.8, below: 11.2}
+# TENNCTAPP-SIG-001 (Tenn. Sup. Ct. R. 46 § 3.04): "s/" and the typed name, then the signer's address, telephone,
+# e-mail and BPR number; never split, with the last paragraph. Then TENNCTAPP-CERT-001 (Rule 46 § 3.02(1)) and
+# TENNCTAPP-SVC-001 (Tenn. R. App. P. 20(e)), in the filed order, each on its own page, signed again.
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "Dated: {date}", optional: true}
+      - {text: "Respectfully submitted,", left: 230.4, above: 5.6}
+      - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 5.6}
+      - {text: "{signature.lines}", left: 230.4}
+    above: 21.6
+  - when: word_count
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Compliance", heading: 1}
+      - {text: "The undersigned certifies that this document complies with the word limit of Tenn. R. App. P. 30 (e) and Tenn. Sup. Ct. R. 46, section 3.02 (1).", pitch: body, indent: 36}
+      - {text: "Based on the word-count function of the word-processing system used to prepare the brief, the brief contains {word_count} words, exclusive of the material excluded by Tenn. R. App. P. 30 (e), and the Rule 27 (e) addendum is not included in that count.", pitch: body, indent: 36}
+      - {text: "{date}", optional: true, pitch: body, indent: 36}
+      - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 5.6}
+      - {text: "{signature.lines}", left: 230.4}
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", heading: 1}
+      - {text: "The undersigned certifies that on {service.date}, a true and correct copy of the foregoing was served {service.method|through the court’s e-filing system} on:", pitch: body, indent: 36}
+      - each: service.recipients
+        blocks: [{text: "{.}", left: 72, above: 14, below: 14}]
+      - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 5.6}
+      - {text: "{signature.lines}", left: 230.4}

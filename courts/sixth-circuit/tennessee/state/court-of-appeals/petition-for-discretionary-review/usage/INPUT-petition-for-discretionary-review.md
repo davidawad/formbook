@@ -32,7 +32,7 @@ signature:
   lines: ["BEACON CENTER OF TENNESSEE", "P.O. Box 198646", "Nashville, TN 37219", "Tel: (615) 383-6431", "Email: braden@beacontn.org", "*Attorney for Bria Davis / Star Brumfield*"]
 service:
   date: "May 6, 2020"
-  method: "via the court’s electronic filing system and via electronic mail to"
+  method: "via the court’s electronic filing system and via electronic mail"
   recipients:
     - ["Director Robert E. Cooper, Jr.", "Lora Barkenbus Fox", "Allison L. Bussell", "Department of Law of the Metropolitan Government of Nashville and Davidson County", "Metropolitan Courthouse, Suite 108", "P.O. Box 196300", "Nashville, Tennessee 37219", "Attorneys for Plaintiffs Metropolitan Government of Nashville and Davidson County and Metropolitan Nashville Board of Public Education"]
     - ["Marlinee C. Iverson", "E. Lee Whitwell", "Shelby County Attorney’s Office", "160 North Main Street, Suite 950", "Memphis, Tennessee 38103", "Attorneys for Plaintiff Shelby County Government"]
@@ -41,24 +41,24 @@ service:
 authorities:
   - heading: "Constitutional Provisions"
     entries:
-      - {cite: "Tenn. Const. art. XI, § 9", find: ["article XI, section 9"]}
+      - {cite: "Tenn. Const. art. XI, § 9", find: "article XI, section 9"}
   - heading: "Statutes"
     entries:
-      - {cite: "Tenn. Code Ann. § 16-3-201", find: ["16-3-201"]}
-      - {cite: "Tenn. Code Ann. § 49-1-103(2)", find: ["49-1-103(2)"]}
-      - {cite: "Tenn. Code Ann. § 49-6-2611(a)(1)", find: ["49-6-2611(a)(1)"]}
-      - {cite: "Tenn. Code Ann. §§ 49-6-2601–2612", find: ["49-6-2601–2612"]}
+      - {cite: "Tenn. Code Ann. § 16-3-201", find: "16-3-201"}
+      - {cite: "Tenn. Code Ann. § 49-1-103(2)", find: "49-1-103(2)"}
+      - {cite: "Tenn. Code Ann. § 49-6-2611(a)(1)", find: "49-6-2611(a)(1)"}
+      - {cite: "Tenn. Code Ann. §§ 49-6-2601–2612", find: "49-6-2601–2612"}
   - heading: "Cases"
     entries:
-      - {cite: "*State v. Gilley*, 173 S.W.3d 1 (Tenn. 2005)", find: ["Gilley"]}
+      - {cite: "*State v. Gilley*, 173 S.W.3d 1 (Tenn. 2005)", find: "Gilley"}
   - heading: "Rules"
     entries:
-      - {cite: "Tennessee Rule of Civil Procedure 12.03", find: ["Rule of Civil Procedure 12.03"]}
-      - {cite: "Tennessee Rule of Appellate Procedure 7a", find: ["Rule 7(a)"]}
-      - {cite: "Tennessee Rule of Appellate Procedure 9", find: ["Rule 9"]}
+      - {cite: "Tennessee Rule of Civil Procedure 12.03", find: "Rule of Civil Procedure 12.03"}
+      - {cite: "Tennessee Rule of Appellate Procedure 7a", find: "Rule 7(a)"}
+      - {cite: "Tennessee Rule of Appellate Procedure 9", find: "Rule 9"}
   - heading: "Other Authorities"
     entries:
-      - {cite: "A. Maceo Walker Middle School Report Card, Tenn. Dep’t of Educ., https://reportcard.tnk12.gov/districts/792/schools/2740/page/SchoolAchievement", find: ["Maceo Walker Middle School Report Card"]}
+      - {cite: "A. Maceo Walker Middle School Report Card, Tenn. Dep’t of Educ., https://reportcard.tnk12.gov/districts/792/schools/2740/page/SchoolAchievement", find: "Maceo Walker Middle School Report Card"}
 ---
 
 # QUESTION PRESENTED FOR REVIEW

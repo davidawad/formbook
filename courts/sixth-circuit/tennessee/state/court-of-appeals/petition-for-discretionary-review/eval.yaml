@@ -1,0 +1,12 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). latex is gated. docx is reported
+# (docs/open-items/fb-595.54.63.md): the cover's five counsel groups run past page 1, and LibreOffice breaks that
+# overflowing cover two lines earlier (p1 line 32); the body pages match line for line.
+params:
+  cross_engine: gate
+  cross_engine_docx: report
+  # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,
+  # whose 16.8 pt line box starts at the 1 in margin, measures its box 3.99 pt into the margin on docx (box top
+  # 68.01 pt; typst 75.12 pt), as the California Courts of Appeal motion brief (3.31 pt at 13 pt). The vertical
+  # tolerance covers that box, not text: the engines set the same baselines.
+  eps_v_pt: 4
