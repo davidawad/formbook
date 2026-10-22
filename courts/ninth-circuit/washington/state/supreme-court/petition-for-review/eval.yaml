@@ -1,0 +1,5 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. latex and docx keep "after" on p11 line 15, a
+# word typst ends at 504.02 against a 504 pt measure (the line-fit tolerance the shared model lacks):
+# docs/open-items/fb-595.54.17.md.
+params:
+  cross_engine: report
