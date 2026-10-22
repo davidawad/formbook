@@ -23,7 +23,7 @@
 #let margin-bottom = 0.75in                // OR-FORM-002: bottom 3/4 inch.
 #let margin-inside = 1.25in                // OR-FORM-002: inside 1 1/4 inch (single-sided: the left edge).
 #let margin-outside = 1in                  // OR-FORM-002: outside 1 inch (single-sided: the right edge).
-#let page-number-descent = 0.3in          // OR-FORM-007 (ORAP 5.05(3)(c)) asks for the number at the top within 3/8 inch of the edge. The eval loop's content gate (tools/check/gate0.awk) drops only bottom-margin page numbers, so a number in the top margin lands inside every paragraph that breaks across a page and fails DEF-CONT-001; the number sits at the bottom centre until the gate can read a running header (docs/open-items).
+#let page-number-ascent = 0.375in          // OR-FORM-007 (ORAP 5.05(3)(c)): page numbers at the top, within 3/8 inch of the top edge.
 #let para-indent = 0.5in
 #let toc-depth = 3
 #let sig-indent = 3.2in                    // signature block right of centre (style; the exemplars do the same).
@@ -149,14 +149,14 @@
 
 #let or-petition-for-rehearing(meta, body) = {
   set document(title: need(meta, "title").join(" "))
-  // OR-FORM-001, -002, -007: US letter; margins as above; consecutive page numbers (bottom centre, see
-  // page-number-descent). The cover and the back of the cover carry no number.
+  // OR-FORM-001, -002, -007: US letter; margins as above; consecutive page numbers at the top right
+  // (page-number-ascent). The cover and the back of the cover carry no number.
   set page(
     paper: "us-letter",
     margin: (top: margin-top, bottom: margin-bottom, left: margin-inside, right: margin-outside),
-    footer-descent: page-number-descent,
-    footer: context {
-      if here().page-numbering() != none { align(center, counter(page).display()) }
+    header-ascent: page-number-ascent,
+    header: context {
+      if here().page-numbering() != none { align(right, counter(page).display()) }
     },
     numbering: none,
   )

@@ -225,6 +225,7 @@ FILENAME == ARGV[1] {
   rr++
   page[rr] = $1
   if ($2 + $5 / 2 >= footer_top) next              # page numbers live in the bottom margin (judged by the run's middle: a footer box may start a few points above the margin line)
+  if ($2 + $5 / 2 < (header_top == "" ? 54 : header_top + 0) && $7 ~ /^[ ]*([0-9]+|[ivxlcdm]+|[IVXLCDM]+)[ ]*$/) next   # a page number alone on its line in the TOP margin (ORAP 5.05(3)(c) and the like): dropped like a footer number; header_top defaults to 54 pt, inside every court margin
   t = leader(S, norm1($7))
   if (t == "") next
   nruns++

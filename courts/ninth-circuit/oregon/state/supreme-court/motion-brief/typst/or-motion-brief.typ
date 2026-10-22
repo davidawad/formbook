@@ -2,7 +2,7 @@
 //
 // ORAP 7.10 (motion titles, OR-MOT-001) and 1.45 (caption, type, OR-FORM-010, -011); the printed area of ORAP
 // 5.05(3)(a)(ii) (OR-FORM-002) applies to every document the court receives. Motions carry no word or page limit
-// (OR-MOT-004). ORAP 5.05(3)(c) top page numbering is a brief rule, so a motion is numbered at the bottom centre.
+// (OR-MOT-004). ORAP 5.05(3)(c) top page numbering is a brief rule; the court applies the same top numbering to a motion.
 // Content-agnostic: no case-specific text, no measured coordinates, no forced line breaks.
 // The body is markdown: `#` a section heading (centred, bold, capitals). The signature block and the certificate
 // of filing and service come from the frontmatter.
@@ -96,8 +96,8 @@
   set page(
     paper: "us-letter",
     margin: (top: margin-top, bottom: margin-bottom, left: margin-inside, right: margin-outside),
-    footer-descent: 0.3in,
-    footer: context align(center, counter(page).display()),
+    header-ascent: 0.375in,                 // ORAP 5.05(3)(c): number at the top within 3/8 inch of the edge
+    header: context align(right, counter(page).display()),
     numbering: "1",
   )
   set text(font: font-family, size: type-size, lang: "en", hyphenate: false)
