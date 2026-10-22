@@ -45,7 +45,6 @@ service:
 authorities:
   - heading: "New Mexico Cases"
     entries:
-      - {cite: "*Duke City Lumber*", find: "Duke City Lumber"}
       - {cite: "*Earthworks Oil & Gas Accountability Project v. N.M. Oil Conservation Comm’n*, 2016-NMCA-055, 374 P.3d 710", find: "2016-NMCA-055"}
       - {cite: "*Kleinberg v. Bd. of Educ. of Albuquerque Pub. Sch.*, 1988-NMCA-014, 107 N.M. 38, 751 P.2d 722", find: "Kleinberg"}
       - {cite: "*Livingston v. Ewing*, 1982-NMSC-110, 98 N.M. 685, 652 P.2d 235", find: "Livingston"}
