@@ -1,12 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # docx/render.sh <court-dir> <sample.md, relative to the court dir> <out.docx>
-# Owns the build of the .docx (tools/render-docx.sh hands over to it). Pandoc writes the body from brief.lua on
+# Owns the build of the .docx (tools/render-docx.sh hands over to it). Pandoc writes the body from ca8.lua on
 # reference.docx; this script then writes the sections (cover: no number; front matter: lower roman; body: arabic
 # from 1), the page-number footers and the page setup, which pandoc does not carry over from the reference.
 # The TOC and TOA page numbers come from the PDF: pass 1 writes the .docx with placeholders, LibreOffice converts
 # it, pagemap.awk reads the page of each heading and authority from that PDF; pass 2 writes the numbers into the
 # .docx, and its PDF must give the same numbers again (otherwise the render fails).
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
@@ -14,12 +14,19 @@ OUT=$3
 case $OUT in /*) ;; *) OUT=$PWD/$OUT ;; esac
 SOFFICE=${SOFFICE:-$(command -v soffice || echo /opt/homebrew/bin/soffice)}
 FILTER=$D/ca8.lua
-W=${RENDER_WORK:-$(mktemp -d)}   # RENDER_WORK=<dir>: keep the intermediate files there
-[ -n "${RENDER_WORK:-}" ] || trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d (or one inside it), and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 
 finish() { # <raw.docx> <out.docx>: sections, footers, page setup; a valid zip with well-formed XML
-  X=$W/pkg
-  rm -rf "$X" && mkdir "$X"
+  X=$(mktemp -d "$W/pkg.XXXXXX") || exit 1
   (cd "$X" && unzip -q "$1")
   cp "$D/footer.xml" "$X/word/footer-roman.xml"
   cp "$D/footer.xml" "$X/word/footer-arabic.xml"
@@ -50,18 +57,14 @@ convert() { # <docx>: the LibreOffice PDF, in $W/pdf
 }
 
 pagemap() { # <pdf> <manifest>: the page map on stdout; fails on any MISSING search
-  P=$W/pages.$$
-  rm -rf "$P" && mkdir "$P"
+  P=$(mktemp -d "$W/pages.XXXXXX") || exit 1
   n=$(pdfinfo "$1" | awk '/^Pages:/ { print $2 }')
-  files=""
   i=1
-  while [ "$i" -le "$n" ]; do
-    pdftotext -layout -f "$i" -l "$i" "$1" "$P/$i.txt"
-    files="$files $P/$i.txt"
+  while [ "$i" -le "$n" ]; do   # one text file a page, named so that the glob below lists them in page order
+    pdftotext -layout -f "$i" -l "$i" "$1" "$P/$(printf %05d "$i").txt"
     i=$((i + 1))
   done
-  # shellcheck disable=SC2086
-  awk -v man="$2" -f "$D/pagemap.awk" $files > "$P/map.txt"
+  awk -v man="$2" -f "$D/pagemap.awk" "$P"/[0-9]*.txt > "$P/map.txt"
   if grep -q '^MISSING' "$P/map.txt"; then
     grep '^MISSING' "$P/map.txt" | sed 's/^/render.sh: not found in the PDF: /' >&2
     return 1
