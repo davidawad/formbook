@@ -156,7 +156,7 @@ Moreover, when confronted with Plaintiff Ms. Ramjit's deposition testimony, Mr. 
 
 > Q. All right. I'm going to show you. Starting at page 11, line 20 of the deposition of Ms. Ramj it. Starting with the question.
 >
-> "Q. All right. One of your claims that you originally included, you know, in the complaint, was Count JV negligence as to D.R. Horton asserting supposed liability of the window installation subcontractor. But looking at your allegations, and these are 43 through 50 of Exhibit 1 of your complaint, would you agree with me that the alleged allegations regarding window installation was limited to the type of window that was installed, talking abou1 a "C" channel window, as opposed to the methodology of the window installation?
+> "Q. All right. One of your claims that you originally included, you know, in the complaint, was Count JV negligence as to D.R. Horton asserting supposed liability of the window installation subcontractor. But looking at your allegations, and these are 43 through 50 of Exhibit 1 of your complaint, would you agree with me that the alleged allegations regarding window installation was limited to the type of window that was installed, talking abou1 a “C” channel window, as opposed to the methodology of the window installation?
 >
 > "Answer: That is correct."
 >
@@ -326,7 +326,7 @@ This complete absence of any claim regarding installation execution or workmansh
 
 > Q. All right. I'm going to show you. Starting at page 11, line 20 of the deposition of Ms. Ramj it. Starting with the question.
 >
-> "Q. All right. One of your claims that you originally included, you know, in the complaint, was Count JV negligence as to D.R. Horton asserting supposed liability of the window installation subcontractor. But looking at your allegations, and these are 43 through 50 of Exhibit 1 of your complaint, would you agree with me that the alleged allegations regarding window installation was limited to the type of window that was installed, talking abou1 a "C" channel window, as opposed to the methodology of the window installation?
+> "Q. All right. One of your claims that you originally included, you know, in the complaint, was Count JV negligence as to D.R. Horton asserting supposed liability of the window installation subcontractor. But looking at your allegations, and these are 43 through 50 of Exhibit 1 of your complaint, would you agree with me that the alleged allegations regarding window installation was limited to the type of window that was installed, talking abou1 a “C” channel window, as opposed to the methodology of the window installation?
 >
 > "Answer: That is correct."
 >
