@@ -1,4 +1,4 @@
-# TTAB: notice of opposition (typst)
+# TTAB: notice of opposition (typst + docx)
 
 Doc type `notice-of-opposition` under the Trademark Trial and Appeal Board (`court` ttab). Self-contained: the exemplars, the sample, the template and this README live in this folder. The court root's `typst/` and `usage/` are not touched.
 
@@ -8,10 +8,11 @@ Doc type `notice-of-opposition` under the Trademark Trial and Appeal Board (`cou
 |---|---|
 | Exemplar | yes: two filers (Brink Biologics 2022, text-based; Vitamin World 2006, mostly scanned). See `usage/SOURCE.md` |
 | Sample | `usage/INPUT-notice-of-opposition.md`: the Brink notice, transcribed in full (caption, applications block, Counts I-III, prayer, signature). The ESTTA cover and the two exhibits are not transcribed; slip sheets for the exhibits are generated |
-| Render (typst) | ok: `sh tools/render.sh courts/federal-circuit/trademark-trial-and-appeal-board/notice-of-opposition usage/INPUT-notice-of-opposition.md` writes `usage/OUTPUT-notice-of-opposition.typst.pdf`, 8 pages, no typst warnings, fonts EB Garamond only (embedded) |
+| Render (typst) | ok: `sh tools/render.sh courts/federal-circuit/trademark-trial-and-appeal-board/notice-of-opposition usage/INPUT-notice-of-opposition.md` writes `usage/OUTPUT-notice-of-opposition.typst.pdf`, 9 pages (7 and two exhibit slip sheets), no typst warnings, TeX Gyre Termes only (embedded) |
 | Overlay | ok: `sh tools/overlay.sh <dir> brink-notice-of-opposition <dir>/usage/FILED-EXAMPLE-notice-of-opposition.pdf` writes `usage/OVERLAY-brink-notice-of-opposition.pdf` and `.txt` |
-| Pages reviewed | 8 of 8 (every page of the current `OUTPUT-` PDF rendered at 60 dpi and looked at; see "Page review") |
-| Check gates (`tools/check.sh`) | not run (box task: no tracker, no gates in this unit) |
+| Pages reviewed | 9 of 9 of each engine (typst and docx renders at 50-80 dpi, after the cross-engine port; see "Page review") |
+| Check gates (`tools/check.sh`) | typst and docx: 0 failed (`data/checks-default.yaml` with `eval.yaml`) |
+| Cross-engine (Gate 4) | gated (`eval.yaml` `params.cross_engine: gate`): the docx breaks every line and page as typst does (XENG-001..003 PASS), on the shared layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`, `lib/docx/xengine-reference.sh`; fb-595.54.6) |
 
 File names: `tools/render.sh` and `tools/overlay.sh` write and read `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the repo's naming: the role is in the name). The brief named `<id>.pdf` and `<id>-overlay.pdf`; the tools' names are used instead so that the tools run unchanged.
 
@@ -21,8 +22,8 @@ Verified 2026-10-14. Primary text: 37 C.F.R. Part 2 from the Cornell LII mirror 
 
 | ID | Kind | Rule | Source | What the template does |
 |---|---|---|---|---|
-| TTAB-NOP-FORM-001 | court-mandated (tier 1) | Text in an electronic submission must be at least 11-point and double-spaced. | 37 C.F.R. § 2.126(a)(1) (https://www.law.cornell.edu/cfr/text/37/2.126); TBMP § 801.03 (June 2025) repeats it | 12-point EB Garamond throughout the body; 11 pt is the floor |
-| TTAB-NOP-FORM-002 | court-mandated (tier 1) | Double-spaced text. | same | Baseline pitch 24 pt at 12 pt (measured: see "Measurements") |
+| TTAB-NOP-FORM-001 | court-mandated (tier 1) | Text in an electronic submission must be at least 11-point and double-spaced. | 37 C.F.R. § 2.126(a)(1) (https://www.law.cornell.edu/cfr/text/37/2.126); TBMP § 801.03 (June 2025) repeats it | 12-point TeX Gyre Termes (Adobe Times metrics, the font audit's face for the Brink exemplar) throughout; 11 pt is the floor |
+| TTAB-NOP-FORM-002 | court-mandated (tier 1) | Double-spaced text. | same | Baseline pitch 24 pt at 12 pt (exact line boxes, see "Measurements") |
 | TTAB-NOP-FORM-003 | convention (tier 2) | 8.5 x 11 in. paper, 1 in. margins, page numbers at the foot. | 37 C.F.R. § 2.126(b)(2) fixes the paper size for paper filings only; the margins and the numbering are not stated in any rule | US Letter, 1 in. on all sides, centered Arabic page number |
 | TTAB-NOP-CONTENT-001 | court-mandated (tier 1) | The heading "IN THE UNITED STATES PATENT AND TRADEMARK OFFICE / BEFORE THE TRADEMARK TRIAL AND APPEAL BOARD" at the top of a complaint. | TBMP § 309.02(a) (format for complaint) | The two heading lines, bold, centered |
 | TTAB-NOP-CONTENT-002 | court-mandated (tier 1) | Identification of the application or registration ("Serial No."), the name of the proceeding ("X v. Y" and "Opposition No."), the title of the paper, the opposer's name, entity and address, the substance (entitlement and grounds), and the signature with the capacity of the signer. | TBMP § 309.02(a), (b); 37 C.F.R. § 2.101(b) (signed by the opposer or its attorney; electronic signature under § 2.193(c)) | "In re Application of" block from `applications`, the caption from `caption`, the title from `title`, the signature from `signature` as "By: /Name/" with the capacity line |
@@ -51,9 +52,9 @@ Body: `# COUNT I` and `## LIKELIHOOD OF CONFUSION` are centered bold capitals. P
 
 ## Measurements
 
-- Line pitch: typst's default line box is far too small for this font (the first render overlapped lines). With `top-edge: "ascender"` and `bottom-edge: "descender"`, the natural line is 15.66 pt at 12 pt (1.305 em). Adding `leading: 0.695em` (8.34 pt) gives a 24.0 pt pitch, which is double spacing. Measured by rendering a test document and reading the `yMin` values with `pdftotext -bbox`: pitches 23.46 pt at 0.65 em, 25.50 pt at 0.82 em, and 24.0 pt at 0.695 em.
+- Line pitch (cross-engine layout model, `lib/typst/xengine.typ`; fb-595.54.6): every line is a box of its pitch with the baseline at 0.8 of it, the boxes touching, as Word's exact line spacing sets them. Body 24 pt (double spacing at 12 pt), single-spaced lines (caption, applications, headings, signature, slip sheets) 13.8 pt. The spaces between blocks are explicit, in pt, the same in the docx (twips = 20 x pt).
 - Paragraph spacing: 0 (the first-line indent marks paragraphs, as in the exemplar).
-- Single spacing (caption, headings, signature, slip sheets): leading 0 em, a 15.66 pt pitch.
+- A 4 pt space above the first line keeps the face's ascender (as LibreOffice embeds it) inside the 1 in top margin.
 
 ## Overlay
 
@@ -66,20 +67,21 @@ The overlay is a diagnostic. Differences in leading, the exact position of the c
 
 ## Page review
 
-Every page of `OUTPUT-notice-of-opposition.typst.pdf` (8 pages) was rendered at 60 dpi and looked at, after the final template change.
+Every page of `OUTPUT-notice-of-opposition.typst.pdf` and `OUTPUT-notice-of-opposition.docx.pdf` (9 pages each) was rendered and looked at after the cross-engine port (fb-595.54.6), side by side with the render before it.
 
 | Page | Content | Finding |
 |---|---|---|
-| 1 | Heading, "In re Application" blocks, caption, title, preamble, para 1 starts | OK. Caption ")" column lines up with the names; opposition number blank printed |
-| 2 | Paras 1-4 | OK. Double spacing consistent; first-line indent on every paragraph |
-| 3 | Paras 5-12 | OK |
-| 4 | Paras 13-22, COUNT I heading | OK after fix: paragraph 14, which follows a heading, was flush left until `first-line-indent: (amount, all: true)` was set |
-| 5 | Paras 23-28, COUNT II heading | OK |
-| 6 | Paras 29-30, COUNT III heading, WHEREFORE, the "Please charge" sentence, date, signature block | OK |
-| 7 | Exhibit 1 slip sheet | OK; centered, label and description |
-| 8 | Exhibit 2 slip sheet | OK |
+| 1 | Heading, "In re Application" blocks, caption, title, preamble, para 1 starts | OK. Caption ")" column lines up with the names; opposition number blank printed on the "v." row |
+| 2 | Paras 1-4 | OK. Double spacing now also between paragraphs (before the port the space between two paragraphs was a single line) |
+| 3 | Paras 5-11 | OK |
+| 4 | Paras 12-19, COUNT I heading | OK. Count headings now at the body size (were typst's default 16.8 / 14.4 pt) |
+| 5 | Paras 20-27, COUNT II heading | OK |
+| 6 | Para 28, COUNT III heading, paras 29-30, WHEREFORE | OK |
+| 7 | The "Please charge" sentence, date, signature block | OK: the last paragraph is kept with the signature block, which never stands alone |
+| 8 | Exhibit 1 slip sheet | OK; centered, label and description |
+| 9 | Exhibit 2 slip sheet | OK |
 
-Defects found and fixed in the process: (1) overlapping lines, from the default line box (fixed by the measured edges and leading); (2) first paragraph after a heading not indented (fixed by `all: true`).
+Defects found and fixed earlier: overlapping lines from the default line box; first paragraph after a heading not indented (`all: true`).
 
 ## Known gaps
 
@@ -91,16 +93,15 @@ Defects found and fixed in the process: (1) overlapping lines, from the default 
 
 ## Engines
 
-The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`: EB Garamond 12 pt, double-spaced body at 24 pt exact, half-inch first-line indent, single-spaced footnotes and block quotations, headings at the typst template's default sizes) and `docx/ttab-notice.lua` (the USPTO heading, the applications block, the caption table, the title, the signature block kept together, one slip sheet per exhibit). Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-notice-of-opposition.md` writes `usage/OUTPUT-notice-of-opposition.docx` and `.docx.pdf`.
+The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`, from the shared recipe `lib/docx/xengine-reference.sh`: TeX Gyre Termes 12 pt, the body in 24 pt exact line boxes with a half-inch first-line indent) and `docx/ttab-notice.lua` (the USPTO heading, the applications block, the caption table, the title, the count headings, the signature block kept with the last paragraph, one slip sheet per exhibit; every paragraph with the typst pitch and spaces). Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-notice-of-opposition.md` writes `usage/OUTPUT-notice-of-opposition.docx` and `.docx.pdf`.
 
 | Item | docx vs typst |
 |---|---|
+| Lines and pages | Identical breaks: Gate 4 XENG-001..003 PASS, gated in `eval.yaml` |
 | Font, size, double spacing, margins, US Letter, centered page number from 1 | Matches (TTAB-NOP-FORM-001 to 003) |
-| Heading, applications, caption with the ")" column, title, signature block at 3 in., exhibit slip sheets | Matches in content and position; the caption table is a Word table, so its borders are off by design |
-| Pagination | The typst sample runs 8 pages; the docx runs 9. The signature block is kept on one page, which moves it to page 7; the typst block fits on page 6. Word will paginate slightly differently again (line height of the single-spaced lines) |
 | Exhibit slip sheets | A one-cell table of exact height, vertically centered; the same page as the typst slip sheet |
 
-BLOCKED (docx): `check.sh --engine docx` cannot run on this folder: the checks read `checks.yaml` and `court.json` in the court root, and this doc-type folder has neither (the court root has `court.json` but no `checks.yaml`). So no gate ID is green or red for this engine; the render and the page-by-page review are the only checks made. Pages reviewed: every page of `OUTPUT-notice-of-opposition.docx.pdf` (9 pages) was rendered at 60 dpi and compared with the typst pages.
+Word itself (not LibreOffice) needs TeX Gyre Termes installed to show the same face; otherwise it substitutes.
 
 ## Searches
 

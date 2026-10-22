@@ -1,0 +1,4 @@
+PASS
+74b75c7cf41fd46444272823ec842fc4718b07421111a14f2ef5eb3eb2e111bb  usage/OUTPUT-notice-of-opposition.docx
+28416cba56cbb36dab4aaf2a54bcaa8d116a4b48b6c0f782d19a95d45c5af195  usage/OUTPUT-notice-of-opposition.docx.pdf
+93c912fb0c37144474b4ecfc15b55c804bcff665ed74205408bac9343417936a  usage/OUTPUT-notice-of-opposition.typst.pdf
