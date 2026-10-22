@@ -1,0 +1,99 @@
+# Fourth District Court of Appeal (fladistctapp4): appellant's initial brief (opening-brief). The whole layout, as data
+# for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to Fla. R. App. P. 9.045 and 9.210 (../../rules.md, FLADISTCTAPP4-*);
+# lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a
+# court constant.
+size: 14                  # FLADISTCTAPP4-FORM-005: Bookman Old Style 14 point; footnotes and quotations too (-FORM-006)
+pitch:
+  body: 32.9              # FLADISTCTAPP4-FORM-004: double spaced (Word's double for Bookman Old Style 14 pt, 2 x 16.45)
+  single: 16.45           # cover, headings, tables, quotations, footnotes, signature: single (-FORM-006); Word's single
+# FLADISTCTAPP4-FORM-003: no less than one inch; top and bottom 4 pt deeper, as the template had them
+margin: {top: 76, bottom: 76, left: 72, right: 72}
+indent: 36
+page_number: {align: center, from: 1}   # numbered at the foot, the cover is page 1 (Rule 9.045 sets none; the exemplars)
+# FLADISTCTAPP4-FORM-006: 14 point, single spaced. The clearance: LibreOffice sets a Bonum body line (32.9 pt) 15.25 pt
+# above a note line box where the model's default (gap 7 + 9.1) asked 16.1 (p7 of the opening brief); 7.5 lets typst
+# and LaTeX keep that line too.
+footnote: {size: 14, gap: 7, clearance: 7.5}
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # FLADISTCTAPP4-FORM-006: quotations single spaced, 14 point
+heading:                                 # FLADISTCTAPP4-FORM-006: at least body size, single spaced
+  - {align: center, bold: true, upper: true, above: 19.6, below: 14}
+  - {bold: true, hang: 36, above: 16.8, below: 15.4}
+  - {bold: true, hang: 36, above: 14, below: 15.4}
+# FLADISTCTAPP4-BRIEF-001: the cover carries the court, the case number, the parties and their designations, the
+# lower-court case, the title of the brief and counsel with bar numbers. The title halfway between the caption and
+# counsel, counsel at the foot of the cover (both filed briefs).
+cover:
+  - {text: "{court}", align: center, bold: true, upper: true, pitch: body}
+  - {text: "Case No. {case_number}", align: center, bold: true, above: 16.8}
+  - each: parties
+    above: 16.8
+    blocks:
+      - {text: "{name}", align: center, above: 16.8}
+      - {text: "{role}", align: center, italic: true, left: 108}
+  - {text: "{lower_court_case}", align: center, optional: true, above: 15.4}
+  - {fill: 1}
+  - {text: "{title}", align: center, bold: true, upper: true, left: 35, right: 35}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - {text: "{names}", bold: true, left: 162, above: 11.2}
+      - {text: "{lines}", left: 162, optional: true}
+# The tables, each on its own page (the filed briefs): the contents when the sample asks for them (`toc`), the
+# authorities with the pages where each `find` appears.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 21, step: 21, above: 12.6, when: toc}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 4.2}
+# Rule 9.045 sets no signature form (Fla. R. Gen. Prac. & Jud. Admin. 2.515, not retrieved): the date line and each
+# counsel's block 3 in from the margin, a second firm after "-and-", kept whole; then the certificate of service on a
+# page of its own and the certificate of compliance right after it (FLADISTCTAPP4-FORM-008), each signed with the
+# "/s/" line, the name and the bar number.
+closing:
+  - group:
+      - when: signature.date
+        blocks:
+          - {text: "Respectfully submitted this {signature.date}.", indent: 36, pitch: body}
+      - unless: signature.date
+        blocks:
+          - {text: "Respectfully submitted,", pitch: body}
+      - {text: "{signature.lines}", left: 216, optional: true, above: 8.4}
+      - {text: "{signature.signer_line}", left: 216, underline: true, optional: true, above: 8.4}
+      - {text: "{signature.name}", left: 216, optional: true}
+      - {text: "{signature.signer}", left: 216, optional: true}
+      - each: signature.also
+        blocks:
+          - {text: "-and-", left: 216, above: 16.8, below: 16.8}
+          - {text: "{signer_line}", left: 216, underline: true, optional: true}
+          - {text: "{name}", left: 216, optional: true}
+          - {text: "{signer}", left: 216, optional: true}
+    above: 16.8
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", heading: 1}
+      - {text: "{service.paragraphs}", indent: 36, pitch: body}
+      - each: service.recipients
+        blocks:
+          - group:
+              - {text: "{.}", left: 72}
+            above: 14
+            below: 14
+      - {text: "{service.closing}", indent: 36, pitch: body, optional: true}
+      - group:
+          - {text: "{signature.signer_line}", left: 216, underline: true, optional: true}
+          - {text: "{signature.name}", left: 216, optional: true}
+          - {text: "{signature.signer.0}", left: 216, optional: true}
+        above: 8.4
+  - when: compliance
+    blocks:
+      - {text: "Certificate of Compliance", heading: 1}
+      - {text: "{compliance.text}", indent: 36, pitch: body}
+      - group:
+          - {text: "{signature.signer_line}", left: 216, underline: true, optional: true}
+          - {text: "{signature.name}", left: 216, optional: true}
+          - {text: "{signature.signer.0}", left: 216, optional: true}
+        above: 8.4
