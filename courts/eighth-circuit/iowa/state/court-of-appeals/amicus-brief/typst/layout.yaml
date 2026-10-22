@@ -46,7 +46,9 @@ authorities:
   hang: 36
   above: 9.8
   group: {bold: true, above: 15.4, below: 2.8}
-# The signature after the conclusion: "Respectfully submitted," and counsel, right of center; never split.
+# The signature after the conclusion: "Respectfully submitted," and counsel, right of center; never split, and kept
+# on the page of the conclusion's last paragraph (tier 2: a signature never stands alone on a page).
+keep_with_closing: true
 closing:
   - group:
       - {text: "{signature.intro}", left: 216, optional: true}
