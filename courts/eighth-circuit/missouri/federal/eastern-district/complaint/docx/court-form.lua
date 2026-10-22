@@ -173,7 +173,7 @@ function Pandoc(doc)
         signed = true
       end
       out[#out + 1] = heading(b)
-    elseif (b.t == "Para" or b.t == "Plain") and starts_with(plain(b.content), "/s/") then
+    elseif (b.t == "Para" or b.t == "Plain") and starts_with(plain(b.content):gsub("\u{200B}", ""), "/s/") then
       -- A signature line (certificate of service): single spaced, at the signature indent.
       out[#out + 1] = p(xe.inl(b.content), { left = SIG, before = SINGLE })
     elseif b.t == "Para" or b.t == "Plain" then
