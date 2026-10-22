@@ -1,0 +1,127 @@
+# California Court of Appeal, Sixth Appellate District (calctapp6d): a petition for rehearing (rule 8.268; the doc type's exemplar is a rehearing petition). The whole layout, as data
+# for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to CRC 8.204 and 8.74 (../../rules.md, CALCTAPP6D-*); lengths in
+# points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # CALCTAPP6D-FORM-003: not smaller than 13 point, footnotes included (8.204(b)(4))
+pitch:
+  body: 22.45             # CALCTAPP6D-FORM-005: at least one-and-a-half spaced (1.5 x Word's single line)
+  single: 14.95           # headings, cover, quotations, footnotes, tables, certificates: single (Word: 1.15 x 13 pt)
+# CALCTAPP6D-FORM-006: 1 1/2 in left and right, 1 in top and bottom.
+margin: {top: 72, bottom: 72, left: 108, right: 108}
+indent: 36
+# CALCTAPP6D-FORM-007: Arabic numbers from the cover as page 1, the cover's number suppressed (8.74(a)(2)).
+page_number: {align: center, from: 2}
+footnote: {size: 13, gap: 6.5}                          # CALCTAPP6D-FORM-003, -005: 13 point, single spaced
+quote: {left: 36, right: 36, above: 13, below: 13, gap: 11.7}   # CALCTAPP6D-FORM-005: block-indented, single spaced
+# CALCTAPP6D-FORM-004, CONT-002: each point under its own heading; headings may be uppercase. Sections (level 1)
+# centered bold capitals; points numbered I. / A. / 1. / a. by the template, the label in a half-inch box, the title's
+# later lines hung under the title, each level half an inch further in; the deepest two in bold italics.
+heading:
+  - {align: center, bold: true, upper: true, above: 15.6, below: 13}
+  - {bold: true, number: "I.", label_box: 36, above: 13, below: 10.4}
+  - {bold: true, number: "A.", label_box: 36, left: 36, above: 13, below: 10.4}
+  - {bold: true, italic: true, number: "1.", label_box: 36, left: 72, above: 13, below: 10.4}
+  - {bold: true, italic: true, number: "a.", label_box: 36, left: 108, above: 13, below: 10.4}
+# CALCTAPP6D-CONT-001 (8.204(a)(1)(A)): a table of contents and a table of authorities (cases, constitutions,
+# statutes, court rules, other authorities), each from page 2 on.
+contents: {title: "Table of Contents", depth: 5, col: 36, step: 36, above: 6.5}
+authorities:
+  title: "Table of Authorities"
+  col: 36
+  hang: 25.2
+  above: 9.1
+  passim: 7
+  page_heading: "Page(s)"
+  group: {bold: true, above: 18.2, below: 2.6}
+  kinds:
+    - {kind: case, title: "Cases:", italic: true}
+    - {kind: constitution, title: "Constitutional Provisions:"}
+    - {kind: statute, title: "Statutes:"}
+    - {kind: regulation, title: "Regulations:"}
+    - {kind: rule, title: "Rules:"}
+    - {kind: other, title: "Other Authorities:"}
+# CALCTAPP6D-REHR-002, CERT-001 (8.268(b)(3), 8.204(c)(5), (c)(1)): at most 7,000 words, counted by the template (body and
+# footnotes; the cover, tables, certificate and signature are outside the body); over the limit the render stops.
+words: {limit: 7000}
+keep_with_closing: true
+# CALCTAPP6D-COVER-001, -002 (8.204(b)(10), 8.40(b)): the court, the caption beside the Court of Appeal number, the
+# trial court, its number and judge, the title, then counsel and the party represented. The space between the parts
+# is fixed (the old template's largest gaps; a fill of the page does not settle in Word here, docs/open-items/fb-595.54.48.md S14).
+cover:
+  - {text: "{court_lines}", align: center, bold: true}
+  - columns:
+      - width: 214.2
+        blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 113.4, above: 5.2, below: 5.2}
+            blocks:
+              - {text: "{names}", below: 4.55}
+              - {text: "{designation}", left: 113.4}
+      - valign: top
+        blocks:
+          - {text: "Court of Appeal Case No. {case_number}"}
+    gutter: 18
+    above: 15.6
+  - {text: "{trial_court}", align: center, above: 15.6}
+  - {text: "Case No. {superior_case_number}", align: center}
+  - {text: "{judge}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 25}
+  - each: counsel
+    above: 25
+    blocks:
+      - {text: "{names}", left: 198, above: 6.5}
+      - {text: "{lines}", left: 198, optional: true}
+  - {text: "{counsel_for}", italic: true, left: 198, above: 6.5}
+# The date beside the signature block (firm, s/ signer, signer, party), never split; then the certificate of word
+# count (CALCTAPP6D-CERT-001, 8.204(c)(1): the count the template made) and the proof of service, each a component
+# with its own page and bookmark (CALCTAPP6D-PDF-002).
+closing:
+  - columns:
+      - blocks:
+          - {text: "Dated: {date}"}
+      - width: 216
+        blocks:
+          - {text: "{signature.firm}"}
+          - {text: "s/{signature.signer}"}
+          - {text: "{signature.signer}"}
+          - {text: "{signature.role}", italic: true}
+    above: 18.2
+  - {break: true}
+  - {text: "Certificate of Word Count", heading: 1}
+  - {text: "Under rule 8.268(b)(3) and rule 8.204, subdivision (c)(5), of the California Rules of Court, I certify that the attached *{brief_title}* is 1½-spaced, typed in a proportionally spaced, 13-point font, and the brief contains {xd.words} words of text, including footnotes, as counted by the word-count feature of the word-processing program used to prepare the brief."}
+  - columns:
+      - blocks:
+          - {text: "Dated: {date}"}
+      - width: 216
+        blocks:
+          - {text: "{signature.firm}"}
+          - {text: "s/{signature.signer}"}
+          - {text: "{signature.signer}"}
+          - {text: "{signature.role}", italic: true}
+    above: 18.2
+  - {break: true}
+  # CRC 8.25(a): the proof of service; its wording a court constant, the parties and the method from the frontmatter.
+  - {text: "Proof of Service", heading: 1}
+  - {text: "Case Name: {case_name}"}
+  - {text: "Court of Appeal Case No.: {case_number}"}
+  - {text: "Superior Court Case No.: {superior_case_number}"}
+  - {text: "I, {service.declarant}, am employed in {service.employed_in}. I am over the age of eighteen (18) years and am not a party to the within action. My business address is {service.business_address}.", above: 10.4}
+  - when: service.date
+    blocks:
+      - {text: "On {service.date}, I served a copy of the foregoing document described as: {brief_title}, on the following parties, as follows:", above: 10.4}
+  - unless: service.date
+    blocks:
+      - {text: "On {date}, I served a copy of the foregoing document described as: {brief_title}, on the following parties, as follows:", above: 10.4}
+  - each: service.served
+    blocks:
+      - group:
+          - {text: "{name}", left: 36}
+          - {text: "Served {method}.", left: 36}
+        above: 7.8
+  - {text: "I declare under penalty of perjury under the laws of the State of California that the foregoing is true and correct.", above: 10.4}
+  - {text: "Executed on {service.executed}.", above: 10.4}
+  - group:
+      - {text: "{service.declarant}", left: 198}
+      - {text: "Declarant", left: 198}
+    above: 18.2
