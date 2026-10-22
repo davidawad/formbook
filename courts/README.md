@@ -63,13 +63,13 @@ Courts under `courts` (346).
 | [The Four Departments of the Appellate Division](second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 0/3 | 29 |
 | [Supreme Court of Vermont](second-circuit/vermont/state/supreme-court) | `vt` | in progress | 4/4 | — | — | 14 |
 | [Court of Appeals for the Third Circuit](third-circuit/court-of-appeals) | `ca3` | up for review | 3/3 | 3/3 | 3/3 | 14 |
-| [United States Bankruptcy Court, D. Delaware](third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States District Court for the District of Delaware](third-circuit/delaware/federal/district) | `ded` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, D. New Jersey](third-circuit/new-jersey/federal/bankruptcy-district) | `njb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, D. New Jersey](third-circuit/new-jersey/federal/district) | `njd` | up for review | 2/2 | — | 1/2 | 14 |
-| [United States Bankruptcy Court, E.D. Pennsylvania](third-circuit/pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, M.D. Pennsylvania](third-circuit/pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, W.D. Pennsylvania](third-circuit/pennsylvania/federal/bankruptcy-western-district) | `pawb` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, D. Delaware](third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Delaware](third-circuit/delaware/federal/district) | `ded` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, D. New Jersey](third-circuit/new-jersey/federal/bankruptcy-district) | `njb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. New Jersey](third-circuit/new-jersey/federal/district) | `njd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, E.D. Pennsylvania](third-circuit/pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, M.D. Pennsylvania](third-circuit/pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, W.D. Pennsylvania](third-circuit/pennsylvania/federal/bankruptcy-western-district) | `pawb` | up for review | 2/2 | — | 1/2 | 14 |
 | [District Court, E.D. Pennsylvania](third-circuit/pennsylvania/federal/eastern-district) | `paed` | up for review | 2/2 | — | 0/2 | 14 |
 | [District Court, M.D. Pennsylvania](third-circuit/pennsylvania/federal/middle-district) | `pamd` | up for review | 2/2 | — | 0/2 | 14 |
 | [District Court, W.D. Pennsylvania](third-circuit/pennsylvania/federal/western-district) | `pawd` | up for review | 2/2 | — | 0/2 | 14 |
@@ -132,29 +132,29 @@ Courts under `courts` (346).
 | [Supreme Court of Louisiana](fifth-circuit/louisiana/state/supreme-court) | `la` | up for review | 9/9 | — | — | 29 |
 | [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | up for review | 5/5 | — | — | 29 |
 | [Mississippi Supreme Court](fifth-circuit/mississippi/state/supreme-court) | `miss` | up for review | 7/7 | — | — | 29 |
-| [Court of Civil Appeals of Texas](fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | — | 0/3 | 29 |
-| [Court of Criminal Appeals of Texas](fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | — | 1/2 | 29 |
-| [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | — | 0/2 | 29 |
+| [Court of Civil Appeals of Texas](fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | — | 3/3 | 29 |
+| [Court of Criminal Appeals of Texas](fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | — | 2/2 | 29 |
+| [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | — | 2/2 | 29 |
 | [United States Bankruptcy Appellate Panel of The Sixth Circuit](sixth-circuit/bankruptcy-appellate-panel) | `bap6` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Sixth Circuit](sixth-circuit/court-of-appeals) | `ca6` | up for review | 3/3 | 3/3 | 3/3 | 14 |
-| [United States Bankruptcy Court, E.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-eastern-district) | `kyeb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, W.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-western-district) | `kywb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, E.D. Kentucky](sixth-circuit/kentucky/federal/eastern-district) | `kyed` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, W.D. Kentucky](sixth-circuit/kentucky/federal/western-district) | `kywd` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, E.D. Michigan](sixth-circuit/michigan/federal/bankruptcy-eastern-district) | `mieb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, W.D. Michigan](sixth-circuit/michigan/federal/bankruptcy-western-district) | `miwb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, E.D. Michigan](sixth-circuit/michigan/federal/eastern-district) | `mied` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, W.D. Michigan](sixth-circuit/michigan/federal/western-district) | `miwd` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, N.D. Ohio](sixth-circuit/ohio/federal/bankruptcy-northern-district) | `ohnb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, S.D. Ohio](sixth-circuit/ohio/federal/bankruptcy-southern-district) | `ohsb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, N.D. Ohio](sixth-circuit/ohio/federal/northern-district) | `ohnd` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, S.D. Ohio](sixth-circuit/ohio/federal/southern-district) | `ohsd` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, E.D. Tennessee](sixth-circuit/tennessee/federal/bankruptcy-eastern-district) | `tneb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, M.D. Tennessee](sixth-circuit/tennessee/federal/bankruptcy-middle-district) | `tnmb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, W.D. Tennessee](sixth-circuit/tennessee/federal/bankruptcy-western-district) | `tnwb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, E.D. Tennessee](sixth-circuit/tennessee/federal/eastern-district) | `tned` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, M.D. Tennessee](sixth-circuit/tennessee/federal/middle-district) | `tnmd` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, W.D. Tennessee](sixth-circuit/tennessee/federal/western-district) | `tnwd` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, E.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-eastern-district) | `kyeb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, W.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-western-district) | `kywb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Kentucky](sixth-circuit/kentucky/federal/eastern-district) | `kyed` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, W.D. Kentucky](sixth-circuit/kentucky/federal/western-district) | `kywd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, E.D. Michigan](sixth-circuit/michigan/federal/bankruptcy-eastern-district) | `mieb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, W.D. Michigan](sixth-circuit/michigan/federal/bankruptcy-western-district) | `miwb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Michigan](sixth-circuit/michigan/federal/eastern-district) | `mied` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, W.D. Michigan](sixth-circuit/michigan/federal/western-district) | `miwd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, N.D. Ohio](sixth-circuit/ohio/federal/bankruptcy-northern-district) | `ohnb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, S.D. Ohio](sixth-circuit/ohio/federal/bankruptcy-southern-district) | `ohsb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, N.D. Ohio](sixth-circuit/ohio/federal/northern-district) | `ohnd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, S.D. Ohio](sixth-circuit/ohio/federal/southern-district) | `ohsd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, E.D. Tennessee](sixth-circuit/tennessee/federal/bankruptcy-eastern-district) | `tneb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, M.D. Tennessee](sixth-circuit/tennessee/federal/bankruptcy-middle-district) | `tnmb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, W.D. Tennessee](sixth-circuit/tennessee/federal/bankruptcy-western-district) | `tnwb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Tennessee](sixth-circuit/tennessee/federal/eastern-district) | `tned` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, M.D. Tennessee](sixth-circuit/tennessee/federal/middle-district) | `tnmd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, W.D. Tennessee](sixth-circuit/tennessee/federal/western-district) | `tnwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Kentucky](sixth-circuit/kentucky/state/court-of-appeals) | `kyctapp` | up for review | 6/6 | — | — | 29 |
 | [Kentucky Supreme Court](sixth-circuit/kentucky/state/supreme-court) | `ky` | up for review | 8/8 | — | — | 29 |
 | [Michigan Court of Appeals](sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | — | — | 29 |
@@ -286,23 +286,23 @@ Courts under `courts` (346).
 | [Washington Supreme Court](ninth-circuit/washington/state/supreme-court) | `wash` | up for review | 9/9 | — | — | 29 |
 | [United States Bankruptcy Appellate Panel of The Tenth Circuit](tenth-circuit/bankruptcy-appellate-panel) | `bap10` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Tenth Circuit](tenth-circuit/court-of-appeals) | `ca10` | up for review | 3/3 | 1/1 | 3/3 | 14 |
-| [United States Bankruptcy Court, D. Colorado](tenth-circuit/colorado/federal/bankruptcy-district) | `cob` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States District Court for the District of Colorado](tenth-circuit/colorado/federal/district) | `cod` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, D. Kansas](tenth-circuit/kansas/federal/bankruptcy-district) | `ksb` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, D. Colorado](tenth-circuit/colorado/federal/bankruptcy-district) | `cob` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Colorado](tenth-circuit/colorado/federal/district) | `cod` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, D. Kansas](tenth-circuit/kansas/federal/bankruptcy-district) | `ksb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Kansas](tenth-circuit/kansas/federal/district) | `ksd` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, D. New Mexico](tenth-circuit/new-mexico/federal/bankruptcy-district) | `nmb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, D. New Mexico](tenth-circuit/new-mexico/federal/district) | `nmd` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, E.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-eastern-district) | `okeb` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, D. New Mexico](tenth-circuit/new-mexico/federal/bankruptcy-district) | `nmb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. New Mexico](tenth-circuit/new-mexico/federal/district) | `nmd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, E.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-eastern-district) | `okeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-northern-district) | `oknb` | up for review | 2/2 | — | 0/2 | 14 |
 | [United States Bankruptcy Court, W.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-western-district) | `okwb` | up for review | 1/1 | — | 0/1 | 14 |
 | [United States District Court for the District of Oklahoma](tenth-circuit/oklahoma/federal/district) | `okd` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States District Court, Oklahoma Eastern](tenth-circuit/oklahoma/federal/eastern-district) | `oked` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States District Court, Oklahoma Northern](tenth-circuit/oklahoma/federal/northern-district) | `oknd` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States District Court, Oklahoma Western](tenth-circuit/oklahoma/federal/western-district) | `okwd` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, D. Utah](tenth-circuit/utah/federal/bankruptcy-district) | `utb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, D. Utah](tenth-circuit/utah/federal/district) | `utd` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States District Court, Oklahoma Eastern](tenth-circuit/oklahoma/federal/eastern-district) | `oked` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court, Oklahoma Northern](tenth-circuit/oklahoma/federal/northern-district) | `oknd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court, Oklahoma Western](tenth-circuit/oklahoma/federal/western-district) | `okwd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, D. Utah](tenth-circuit/utah/federal/bankruptcy-district) | `utb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Utah](tenth-circuit/utah/federal/district) | `utd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Wyoming](tenth-circuit/wyoming/federal/bankruptcy-district) | `wyb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, D. Wyoming](tenth-circuit/wyoming/federal/district) | `wyd` | up for review | 2/2 | — | 0/2 | 14 |
+| [District Court, D. Wyoming](tenth-circuit/wyoming/federal/district) | `wyd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Colorado Court of Appeals](tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | up for review | 5/5 | — | — | 29 |
 | [Colorado Supreme Court](tenth-circuit/colorado/state/supreme-court) | `colo` | up for review | 8/8 | — | — | 29 |
 | [Court of Appeals of Kansas](tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | up for review | 5/5 | — | — | 29 |
@@ -345,8 +345,8 @@ Courts under `courts` (346).
 | [Florida Sixth District Court of Appeal](eleventh-circuit/florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | up for review | 7/7 | — | — | 29 |
 | [Florida Supreme Court](eleventh-circuit/florida/state/supreme-court) | `fla` | up for review | 9/9 | — | — | 29 |
 | [Florida Third District Court of Appeal](eleventh-circuit/florida/state/third-district-court-of-appeal) | `fladistctapp3` | up for review | 8/8 | — | — | 29 |
-| [Georgia Court of Appeals](eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | — | 1/5 | 29 |
-| [Georgia Supreme Court](eleventh-circuit/georgia/state/supreme-court) | `ga` | up for review | 8/8 | — | 0/5 | 29 |
+| [Georgia Court of Appeals](eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | — | 5/5 | 29 |
+| [Georgia Supreme Court](eleventh-circuit/georgia/state/supreme-court) | `ga` | up for review | 8/8 | — | 5/5 | 29 |
 | [Court of Appeals for the D.C. Circuit](dc-circuit/court-of-appeals) | `cadc` | up for review | 3/3 | 2/3 | 2/3 | 14 |
 | [United States Bankruptcy Court, District of Columbia](dc-circuit/district-of-columbia/federal/bankruptcy-district) | `dcb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, District of Columbia](dc-circuit/district-of-columbia/federal/district) | `dcd` | up for review | 2/2 | — | 2/2 | 14 |

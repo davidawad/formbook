@@ -6,13 +6,13 @@ Courts under `courts/third-circuit` (18).
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [Court of Appeals for the Third Circuit](court-of-appeals) | `ca3` | up for review | 3/3 | 3/3 | 3/3 | 14 |
-| [United States Bankruptcy Court, D. Delaware](delaware/federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States District Court for the District of Delaware](delaware/federal/district) | `ded` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, D. New Jersey](new-jersey/federal/bankruptcy-district) | `njb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, D. New Jersey](new-jersey/federal/district) | `njd` | up for review | 2/2 | — | 1/2 | 14 |
-| [United States Bankruptcy Court, E.D. Pennsylvania](pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, M.D. Pennsylvania](pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, W.D. Pennsylvania](pennsylvania/federal/bankruptcy-western-district) | `pawb` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, D. Delaware](delaware/federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Delaware](delaware/federal/district) | `ded` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, D. New Jersey](new-jersey/federal/bankruptcy-district) | `njb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. New Jersey](new-jersey/federal/district) | `njd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, E.D. Pennsylvania](pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, M.D. Pennsylvania](pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, W.D. Pennsylvania](pennsylvania/federal/bankruptcy-western-district) | `pawb` | up for review | 2/2 | — | 1/2 | 14 |
 | [District Court, E.D. Pennsylvania](pennsylvania/federal/eastern-district) | `paed` | up for review | 2/2 | — | 0/2 | 14 |
 | [District Court, M.D. Pennsylvania](pennsylvania/federal/middle-district) | `pamd` | up for review | 2/2 | — | 0/2 | 14 |
 | [District Court, W.D. Pennsylvania](pennsylvania/federal/western-district) | `pawd` | up for review | 2/2 | — | 0/2 | 14 |

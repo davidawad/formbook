@@ -216,25 +216,25 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Delaware](courts/third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States District Court for the District of Delaware](courts/third-circuit/delaware/federal/district) | `ded` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, D. Delaware](courts/third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Delaware](courts/third-circuit/delaware/federal/district) | `ded` | up for review | 2/2 | — | 2/2 | 14 |
 | [Delaware Supreme Court](courts/third-circuit/delaware/state/supreme-court) | `del` | up for review | 5/5 | — | — | 29 |
 
 ### New Jersey
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. New Jersey](courts/third-circuit/new-jersey/federal/bankruptcy-district) | `njb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, D. New Jersey](courts/third-circuit/new-jersey/federal/district) | `njd` | up for review | 2/2 | — | 1/2 | 14 |
+| [United States Bankruptcy Court, D. New Jersey](courts/third-circuit/new-jersey/federal/bankruptcy-district) | `njb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. New Jersey](courts/third-circuit/new-jersey/federal/district) | `njd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Supreme Court of New Jersey](courts/third-circuit/new-jersey/state/supreme-court) | `nj` | up for review | 5/5 | — | — | 29 |
 
 ### Pennsylvania
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-western-district) | `pawb` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-western-district) | `pawb` | up for review | 2/2 | — | 1/2 | 14 |
 | [District Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/eastern-district) | `paed` | up for review | 2/2 | — | 0/2 | 14 |
 | [District Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/middle-district) | `pamd` | up for review | 2/2 | — | 0/2 | 14 |
 | [District Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/western-district) | `pawd` | up for review | 2/2 | — | 0/2 | 14 |
@@ -350,9 +350,9 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, N.D. Texas](courts/fifth-circuit/texas/federal/northern-district) | `txnd` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, S.D. Texas](courts/fifth-circuit/texas/federal/southern-district) | `txsd` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Texas](courts/fifth-circuit/texas/federal/western-district) | `txwd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Civil Appeals of Texas](courts/fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | — | 0/3 | 29 |
-| [Court of Criminal Appeals of Texas](courts/fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | — | 1/2 | 29 |
-| [Texas Supreme Court](courts/fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | — | 0/2 | 29 |
+| [Court of Civil Appeals of Texas](courts/fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | — | 3/3 | 29 |
+| [Court of Criminal Appeals of Texas](courts/fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | — | 2/2 | 29 |
+| [Texas Supreme Court](courts/fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | — | 2/2 | 29 |
 
 ## Sixth Circuit
 
@@ -365,10 +365,10 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Kentucky](courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district) | `kyeb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, W.D. Kentucky](courts/sixth-circuit/kentucky/federal/bankruptcy-western-district) | `kywb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, E.D. Kentucky](courts/sixth-circuit/kentucky/federal/eastern-district) | `kyed` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, W.D. Kentucky](courts/sixth-circuit/kentucky/federal/western-district) | `kywd` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, E.D. Kentucky](courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district) | `kyeb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, W.D. Kentucky](courts/sixth-circuit/kentucky/federal/bankruptcy-western-district) | `kywb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Kentucky](courts/sixth-circuit/kentucky/federal/eastern-district) | `kyed` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, W.D. Kentucky](courts/sixth-circuit/kentucky/federal/western-district) | `kywd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Kentucky](courts/sixth-circuit/kentucky/state/court-of-appeals) | `kyctapp` | up for review | 6/6 | — | — | 29 |
 | [Kentucky Supreme Court](courts/sixth-circuit/kentucky/state/supreme-court) | `ky` | up for review | 8/8 | — | — | 29 |
 
@@ -376,10 +376,10 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Michigan](courts/sixth-circuit/michigan/federal/bankruptcy-eastern-district) | `mieb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, W.D. Michigan](courts/sixth-circuit/michigan/federal/bankruptcy-western-district) | `miwb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, E.D. Michigan](courts/sixth-circuit/michigan/federal/eastern-district) | `mied` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, W.D. Michigan](courts/sixth-circuit/michigan/federal/western-district) | `miwd` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, E.D. Michigan](courts/sixth-circuit/michigan/federal/bankruptcy-eastern-district) | `mieb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, W.D. Michigan](courts/sixth-circuit/michigan/federal/bankruptcy-western-district) | `miwb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Michigan](courts/sixth-circuit/michigan/federal/eastern-district) | `mied` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, W.D. Michigan](courts/sixth-circuit/michigan/federal/western-district) | `miwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Michigan Court of Appeals](courts/sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | — | — | 29 |
 | [Michigan Supreme Court](courts/sixth-circuit/michigan/state/supreme-court) | `mich` | up for review | 8/8 | — | — | 29 |
 
@@ -387,10 +387,10 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/bankruptcy-northern-district) | `ohnb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, S.D. Ohio](courts/sixth-circuit/ohio/federal/bankruptcy-southern-district) | `ohsb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/northern-district) | `ohnd` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, S.D. Ohio](courts/sixth-circuit/ohio/federal/southern-district) | `ohsd` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/bankruptcy-northern-district) | `ohnb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, S.D. Ohio](courts/sixth-circuit/ohio/federal/bankruptcy-southern-district) | `ohsb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/northern-district) | `ohnd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, S.D. Ohio](courts/sixth-circuit/ohio/federal/southern-district) | `ohsd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Ohio Court of Appeals](courts/sixth-circuit/ohio/state/court-of-appeals) | `ohioctapp` | up for review | 6/6 | — | — | 29 |
 | [Ohio Supreme Court](courts/sixth-circuit/ohio/state/supreme-court) | `ohio` | up for review | 9/9 | — | — | 29 |
 
@@ -398,12 +398,12 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Tennessee](courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district) | `tneb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, M.D. Tennessee](courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district) | `tnmb` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States Bankruptcy Court, W.D. Tennessee](courts/sixth-circuit/tennessee/federal/bankruptcy-western-district) | `tnwb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, E.D. Tennessee](courts/sixth-circuit/tennessee/federal/eastern-district) | `tned` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, M.D. Tennessee](courts/sixth-circuit/tennessee/federal/middle-district) | `tnmd` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, W.D. Tennessee](courts/sixth-circuit/tennessee/federal/western-district) | `tnwd` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, E.D. Tennessee](courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district) | `tneb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, M.D. Tennessee](courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district) | `tnmb` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States Bankruptcy Court, W.D. Tennessee](courts/sixth-circuit/tennessee/federal/bankruptcy-western-district) | `tnwb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Tennessee](courts/sixth-circuit/tennessee/federal/eastern-district) | `tned` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, M.D. Tennessee](courts/sixth-circuit/tennessee/federal/middle-district) | `tnmd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, W.D. Tennessee](courts/sixth-circuit/tennessee/federal/western-district) | `tnwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Tennessee](courts/sixth-circuit/tennessee/state/court-of-appeals) | `tennctapp` | up for review | 5/5 | — | — | 29 |
 | [Court of Criminal Appeals of Tennessee](courts/sixth-circuit/tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | up for review | 4/4 | — | — | 29 |
 | [Tennessee Supreme Court](courts/sixth-circuit/tennessee/state/supreme-court) | `tenn` | up for review | 6/6 | — | — | 29 |
@@ -664,8 +664,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Colorado](courts/tenth-circuit/colorado/federal/bankruptcy-district) | `cob` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States District Court for the District of Colorado](courts/tenth-circuit/colorado/federal/district) | `cod` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, D. Colorado](courts/tenth-circuit/colorado/federal/bankruptcy-district) | `cob` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Colorado](courts/tenth-circuit/colorado/federal/district) | `cod` | up for review | 2/2 | — | 2/2 | 14 |
 | [Colorado Court of Appeals](courts/tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | up for review | 5/5 | — | — | 29 |
 | [Colorado Supreme Court](courts/tenth-circuit/colorado/state/supreme-court) | `colo` | up for review | 8/8 | — | — | 29 |
 
@@ -673,7 +673,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Kansas](courts/tenth-circuit/kansas/federal/bankruptcy-district) | `ksb` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, D. Kansas](courts/tenth-circuit/kansas/federal/bankruptcy-district) | `ksb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Kansas](courts/tenth-circuit/kansas/federal/district) | `ksd` | up for review | 2/2 | — | 0/2 | 14 |
 | [Court of Appeals of Kansas](courts/tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | up for review | 5/5 | — | — | 29 |
 | [Supreme Court of Kansas](courts/tenth-circuit/kansas/state/supreme-court) | `kan` | up for review | 9/9 | — | — | 29 |
@@ -682,8 +682,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. New Mexico](courts/tenth-circuit/new-mexico/federal/bankruptcy-district) | `nmb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, D. New Mexico](courts/tenth-circuit/new-mexico/federal/district) | `nmd` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, D. New Mexico](courts/tenth-circuit/new-mexico/federal/bankruptcy-district) | `nmb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. New Mexico](courts/tenth-circuit/new-mexico/federal/district) | `nmd` | up for review | 2/2 | — | 2/2 | 14 |
 | [New Mexico Court of Appeals](courts/tenth-circuit/new-mexico/state/court-of-appeals) | `nmctapp` | up for review | 6/6 | — | — | 29 |
 | [New Mexico Supreme Court](courts/tenth-circuit/new-mexico/state/supreme-court) | `nm` | up for review | 8/8 | — | — | 29 |
 
@@ -691,13 +691,13 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Oklahoma](courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district) | `okeb` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, E.D. Oklahoma](courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district) | `okeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Oklahoma](courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district) | `oknb` | up for review | 2/2 | — | 0/2 | 14 |
 | [United States Bankruptcy Court, W.D. Oklahoma](courts/tenth-circuit/oklahoma/federal/bankruptcy-western-district) | `okwb` | up for review | 1/1 | — | 0/1 | 14 |
 | [United States District Court for the District of Oklahoma](courts/tenth-circuit/oklahoma/federal/district) | `okd` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States District Court, Oklahoma Eastern](courts/tenth-circuit/oklahoma/federal/eastern-district) | `oked` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States District Court, Oklahoma Northern](courts/tenth-circuit/oklahoma/federal/northern-district) | `oknd` | up for review | 2/2 | — | 0/2 | 14 |
-| [United States District Court, Oklahoma Western](courts/tenth-circuit/oklahoma/federal/western-district) | `okwd` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States District Court, Oklahoma Eastern](courts/tenth-circuit/oklahoma/federal/eastern-district) | `oked` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court, Oklahoma Northern](courts/tenth-circuit/oklahoma/federal/northern-district) | `oknd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court, Oklahoma Western](courts/tenth-circuit/oklahoma/federal/western-district) | `okwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Civil Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | up for review | 1/1 | — | — | 14 |
 | [Court of Criminal Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | up for review | 5/5 | — | — | 29 |
 | [Supreme Court of Oklahoma](courts/tenth-circuit/oklahoma/state/supreme-court) | `okla` | up for review | 6/6 | — | — | 29 |
@@ -706,8 +706,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Utah](courts/tenth-circuit/utah/federal/bankruptcy-district) | `utb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, D. Utah](courts/tenth-circuit/utah/federal/district) | `utd` | up for review | 2/2 | — | 0/2 | 14 |
+| [United States Bankruptcy Court, D. Utah](courts/tenth-circuit/utah/federal/bankruptcy-district) | `utb` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Utah](courts/tenth-circuit/utah/federal/district) | `utd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Utah](courts/tenth-circuit/utah/state/court-of-appeals) | `utahctapp` | up for review | 4/4 | — | — | 29 |
 | [Utah Supreme Court](courts/tenth-circuit/utah/state/supreme-court) | `utah` | up for review | 7/7 | — | — | 29 |
 
@@ -716,7 +716,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Wyoming](courts/tenth-circuit/wyoming/federal/bankruptcy-district) | `wyb` | up for review | 2/2 | — | 0/2 | 14 |
-| [District Court, D. Wyoming](courts/tenth-circuit/wyoming/federal/district) | `wyd` | up for review | 2/2 | — | 0/2 | 14 |
+| [District Court, D. Wyoming](courts/tenth-circuit/wyoming/federal/district) | `wyd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Wyoming Supreme Court](courts/tenth-circuit/wyoming/state/supreme-court) | `wyo` | up for review | 3/3 | — | — | 29 |
 
 ## Eleventh Circuit
@@ -768,8 +768,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court for the Middle District of Georgia](courts/eleventh-circuit/georgia/federal/middle-district) | `gamd` | up for review | 2/2 | — | 0/2 | 14 |
 | [United States District Court for the Northern District of Georgia](courts/eleventh-circuit/georgia/federal/northern-district) | `gand` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Southern District of Georgia](courts/eleventh-circuit/georgia/federal/southern-district) | `gasd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Georgia Court of Appeals](courts/eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | — | 1/5 | 29 |
-| [Georgia Supreme Court](courts/eleventh-circuit/georgia/state/supreme-court) | `ga` | up for review | 8/8 | — | 0/5 | 29 |
+| [Georgia Court of Appeals](courts/eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | — | 5/5 | 29 |
+| [Georgia Supreme Court](courts/eleventh-circuit/georgia/state/supreme-court) | `ga` | up for review | 8/8 | — | 5/5 | 29 |
 
 ## D.C. Circuit
 
@@ -813,17 +813,17 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 5 | 0 | 5 | 14.0% |
 | First Circuit | 20 | 0 | 18 | 2 | 0 | 0.0% | 90.0% | 19 | 1 | 12 | 18.5% |
 | Second Circuit | 19 | 0 | 18 | 1 | 0 | 0.0% | 94.7% | 19 | 1 | 13 | 17.9% |
-| Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 1 | 1 | 18.1% |
+| Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 1 | 7 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 1 | 19 | 19.1% |
-| Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 1 | 19 | 18.0% |
-| Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 1 | 2 | 18.6% |
+| Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 1 | 22 | 18.0% |
+| Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 1 | 20 | 18.6% |
 | Seventh Circuit | 21 | 0 | 20 | 1 | 0 | 0.0% | 95.2% | 20 | 1 | 15 | 18.2% |
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 1 | 22 | 20.3% |
 | Ninth Circuit | 61 | 0 | 51 | 9 | 1 | 0.0% | 83.6% | 53 | 1 | 32 | 19.8% |
-| Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 1 | 2 | 19.3% |
-| Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 1 | 18 | 20.0% |
+| Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 1 | 14 | 19.3% |
+| Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 1 | 20 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 0 | 2 | 17.7% |
-| **Total** | 376 | 0 | 341 | 33 | 2 | 0.0% | 90.6% | 345 | 13 | 175 | 18.6% |
+| **Total** | 376 | 0 | 341 | 33 | 2 | 0.0% | 90.6% | 345 | 13 | 216 | 18.6% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
