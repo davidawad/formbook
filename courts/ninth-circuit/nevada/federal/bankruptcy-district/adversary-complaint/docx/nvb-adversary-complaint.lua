@@ -6,7 +6,7 @@
 -- file. Font, size, pitches, margins, the line numbers and the page number are in docx/reference.xml.
 --
 -- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
--- exact line boxes of the typst pitch (twips = 20 x pt: 480 the double-spaced body on the numbered lines, 280 a
+-- exact line boxes of the typst pitch (twips = 20 x pt: 480 the double-spaced body on the numbered lines, 240 a
 -- single line), the spaces between blocks those of the typst template, and the break rules of typst on every run.
 -- A single-spaced block (counsel, caption, signature: a table row; a quotation: the space after it) is rounded up to
 -- whole numbered lines, as typst's grid-row and quote-item do; its lines are counted first fit with the face's
@@ -171,9 +171,8 @@ local function caption(meta)
   local rules = '<w:tcBorders><w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/>'
     .. '<w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:tcBorders>'
   return grid_row({
-    { w = CAP_LEFT, xml = lx, h = lh + BOX_PAD, pr = rules .. '<w:tcMar><w:bottom w:w="' .. BOX_PAD
-      .. '" w:type="dxa"/><w:right w:w="' .. RULE_PAD .. '" w:type="dxa"/></w:tcMar>' },
-    { w = TEXTW - CAP_LEFT, xml = rx, h = rh, pr = mar("left", CAP_GUT) },
+    { w = CAP_LEFT, xml = lx, h = lh + BOX_PAD, pr = rules .. mar("right", RULE_PAD) },
+    { w = TEXTW - CAP_LEFT, xml = rx, h = rh + RULE, pr = mar("left", CAP_GUT) },
   }, true)
 end
 

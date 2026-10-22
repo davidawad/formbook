@@ -36,6 +36,7 @@
 #let rule-pad = 8pt                       // and this far left of its right rule
 #let caption-gutter = 0.2in               // the right column's text starts this far right of the rule
 #let caption-gap = 12pt                   // between the parts of the caption's right column
+#let rule-width = 0.75pt                  // the caption rules; the row keeps room for its foot rule below the right column too
 #let para-indent = 0.5in                  // the paragraph number stands half an inch in
 #let number-box = 0.5in                   // the text after the number starts 1 in from the margin (as filed)
 #let list-left = 1in                      // a list's label stands 1 in from the margin (as filed)
@@ -158,8 +159,8 @@
     right.push((text: "DEMAND FOR JURY TRIAL", bold: true, above: caption-gap))
   }
   grid-row((
-    (caption-left, stack(left-rows), (right: 0.75pt, bottom: 0.75pt), (right: rule-pad, bottom: box-pad)),
-    (text-width - caption-left, stack(right), none, (left: caption-gutter)),
+    (caption-left, stack(left-rows), (right: rule-width, bottom: rule-width), (right: rule-pad, bottom: box-pad)),
+    (text-width - caption-left, stack(right), none, (left: caption-gutter, bottom: rule-width)),
   ))
 }
 
@@ -179,12 +180,16 @@
 
 /// A heading on the numbered lines, kept with what follows. Level 1 centered bold capitals underlined (as filed),
 /// level 2 centered bold, level 3 bold at the margin.
-#let heading-item(level, t) = block(width: 100%, above: 0pt, below: 0pt, sticky: true, {
-  set par(first-line-indent: 0pt, hanging-indent: 0pt)
-  if level == 1 { align(center, underline(text(weight: "bold", upper(inl(t))))) } else if level == 2 {
-    align(center, text(weight: "bold", inl(t)))
-  } else { text(weight: "bold", inl(t)) }
-})
+#let heading-item(level, t) = {
+  // a heading that starts with its own number ("1. The ...") is text, not a list
+  t = t.replace(regex("^(\\d+)\\. "), m => m.captures.at(0) + "\\. ")
+  block(width: 100%, above: 0pt, below: 0pt, sticky: true, {
+    set par(first-line-indent: 0pt, hanging-indent: 0pt)
+    if level == 1 { align(center, underline(text(weight: "bold", upper(inl(t))))) } else if level == 2 {
+      align(center, text(weight: "bold", inl(t)))
+    } else { text(weight: "bold", inl(t)) }
+  })
+}
 
 /// A block quotation: single-spaced, indented on both sides (LR 9004(a) exempts quotations); the space after it
 /// brings the text after it back onto the numbered lines.
