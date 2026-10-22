@@ -1,0 +1,7 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (fb-595.68.35, on the shared layout model lib/*/xengine*), so a difference fails.
+# W.PA.LBR 7008-1(e) (PAWB-LEN-001): briefs "are limited to twenty (20) pages"; the whole-file count is the safe
+# upper bound.
+params:
+  cross_engine: gate
+  page_limit: 20
