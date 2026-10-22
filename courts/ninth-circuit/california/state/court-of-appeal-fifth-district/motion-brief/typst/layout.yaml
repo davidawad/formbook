@@ -1,0 +1,59 @@
+# California Court of Appeal, Fifth Appellate District (calctapp5d): motion with its memorandum of points and
+# authorities. The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are
+# generated from this file by `fb engines gen`, fb-595.54.12). No motion-form rule was retrieved (../rules.md,
+# "Motions"): the motion takes the brief form of CRC 8.204(b) and 8.74(b) (CALCTAPP5D-FORM-*); lengths in points. No
+# case text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # CALCTAPP5D-FORM-003: not smaller than 13 point, footnotes included
+pitch:
+  body: 25.35             # CALCTAPP5D-FORM-005: one-and-a-half spaced (1.5 x the single line)
+  single: 16.9            # headings, footnotes, quotations, cover, signature: single (1.3 x 13 pt, EB Garamond's line)
+margin: {top: 72, bottom: 72, left: 108, right: 108}   # CALCTAPP5D-FORM-006: 1-1/2 in left and right, 1 in top and bottom
+indent: 36
+page_number: {align: center, from: 2}   # CALCTAPP5D-FORM-007: the cover is page 1, its number suppressed
+footnote: {size: 13, gap: 6.5, clearance: 11.7}   # CALCTAPP5D-FORM-003, -005: 13 point, single spaced
+quote: {left: 36, right: 36, above: 13, below: 13, gap: 11.7}   # CALCTAPP5D-FORM-005: block-indented, single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 15.6, below: 13}
+  - {bold: true, above: 13, below: 10.4}
+# CALCTAPP5D-COVER-002, -003: the court, the caption beside the Court of Appeal number, the superior court, its number
+# and the judge, the title, counsel and the party they represent; the cover is page 1 (no tables: the blocks open the
+# body and end the page).
+front:
+  - {text: "{court_lines}", align: center, bold: true}
+  - columns:
+      - blocks:
+          - each: caption
+            between:
+              - {text: "v.", left: 113.4, above: 6.2, below: 6.2}
+            blocks:
+              - {text: "{names}", below: 7.8}
+              - {text: "{designation}", left: 113.4}
+      - width: 126
+        valign: center
+        blocks:
+          - {text: "Court of Appeal Case No. {case_number}"}
+    gutter: 18
+    above: 15.6
+  - {text: "{trial_court}", align: center, above: 15.6}
+  - {text: "Case No. {superior_case_number}", align: center}
+  - {text: "{judge}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 25}
+  - each: counsel
+    above: 25
+    blocks:
+      - {text: "{names}", left: 198, above: 6.5}
+      - {text: "{lines}", left: 198}
+  - {text: "{counsel_for}", italic: true, left: 198, above: 6.5}
+  - {break: true}
+# The date beside the signature block, never split.
+closing:
+  - columns:
+      - blocks:
+          - {text: "Dated: {date}"}
+      - width: 216
+        blocks:
+          - {text: "{signature.firm}"}
+          - {text: "s/{signature.signer}", above: 15.6}
+          - {text: "{signature.signer}"}
+          - {text: "{signature.role}", italic: true}
+    above: 18.2
