@@ -18,9 +18,9 @@
 // Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
 // its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
 // below the one and above the other (Word's exact line spacing; LaTeX \pdfeachlineheight).
-#let pitch-double = 32.2pt                 // FRAP 32(a)(4): double-spaced; the exemplar's body pitch (32.2 pt, README)
+#let pitch-double = 32.2pt                 // FRAP 32(a)(4): double-spaced, as Word sets it: twice the single line
 #let pitch-single = 16.1pt                 // headings, quotations, footnotes, TOC/TOA, cover, certificates: single-spaced
-                                           // (the exemplar's single pitch, 16.1 pt: Word's single line of 14 pt Times)
+                                           // (Word's single line of 14 pt Times New Roman: 1.15 x 14 pt)
 #let single-leading = 0pt                  // the line boxes carry the spacing: no leading between them
 #let toc-page-col = 36pt                   // TOC: the page numbers keep the last 36 pt of the line to themselves
 #let toa-page-col = 56pt                   // TOA: page lists such as 1, 4, 6, 8 (a longer list widens its own row's column)
