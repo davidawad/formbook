@@ -40,6 +40,8 @@ Sweet v. McMahon (the principal-brief exemplar at the court root) is a principal
 
 ## Render and page review
 
+*Before the cross-engine port of 2026-10-22, which moved the typst pages (Times New Roman, the root's pitches): the review of the current renders is under "Engines".*
+
 Commands (from the repo root, with `$HOME/tb/bin` on `PATH` for typst, poppler and ImageMagick):
 
 ```sh
@@ -78,36 +80,49 @@ Defects found in the review and fixed: an Argument sub-heading was typed at leve
 - **Certificate of service** is supported (`service.certificate: true`) but not exercised by this sample.
 - **Cross-appeal replies** (FRAP 28.1(c)(4), Cir. R. 28.1-1(d)) and the appellant's response-and-reply brief (FRAP 28.1(c)(3), 14,000 words) are different filings. They are not built here.
 - **Sample is a portion** (point I.A, introduction, conclusion and certificates). The filed reply is 6,998 counted words in 24 body pages; the exemplar's own introduction stops mid-sentence and the errata notice (DktEntry 31) adds two missing words to it. The sample keeps the filed text, including that.
-- **Not run:** `tools/check.sh`, `checks.yaml` and `court.json` are the eval-loop contract for the principal brief and do not apply to this folder. The gates in `../rules.md` are not machine-checked here.
+- **Checks:** `tools/check.sh` runs the default checks (`data/checks-default.yaml`) and Gate 4 on this folder (see "Engines"); the CA9-* checks of `../checks.yaml` are the principal brief's contract and are not machine-checked here.
 
 ## Engines
 
-The same markdown renders through three engines. Typst (`typst/`) is the reference; the LaTeX and DOCX engines were built to its form and checked against it page by page.
+The same markdown renders through three engines, on the cross-engine layout model of the court root (docs/EVAL-LOOP.md, "Cross-engine gate"; ported in fb-595.54.4, 2026-10-22). Typst (`typst/`) is the reference; the LaTeX and Word renders break every line and every page where it does, and Gate 4 gates that (`params.cross_engine: gate` in `eval.yaml`).
 
-| Engine | Output (`usage/`) | Status |
+| Engine | Output (`usage/`) | `tools/check.sh --engine …` |
 |---|---|---|
-| typst | `OUTPUT-reply-brief.typst.pdf` (14 pp) | reference |
-| latex | `OUTPUT-reply-brief.latex.pdf` (14 pp) | ok: rendered, every page compared with the typst page |
-| docx | `OUTPUT-reply-brief.docx`; no `.docx.pdf` | BLOCKED: no LibreOffice on this box (below) |
+| typst | `OUTPUT-reply-brief.typst.pdf` (14 pp) | RESULT: 8 checks passed, 0 failed (XENG: reference, SKIP) |
+| latex | `OUTPUT-reply-brief.latex.pdf` (14 pp) | RESULT: 11 checks passed, 0 failed (XENG-001..003 PASS, 302 of 302 lines) |
+| docx | `OUTPUT-reply-brief.docx`, `.docx.pdf` (14 pp) | RESULT: 12 checks passed, 0 failed (XENG-001..003 PASS) |
 
 ```sh
-sh tools/render.sh --engine latex courts/ninth-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md
-sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md
+sh tools/render.sh --engine typst|latex|docx courts/ninth-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md
+sh tools/check.sh courts/ninth-circuit/court-of-appeals/reply-brief --engine typst|latex|docx
 ```
 
-**latex** (`latex/template.tex`, `latex/ca9.lua`). `fb render` builds it: pandoc writes the `.tex` from the template and the filter, then stock pdflatex runs until the aux file settles, so the table of contents and the table of authorities take their page numbers from the final layout. Fonts: Times from newtx (TeXGyreTermesX, metric-compatible with Times New Roman); the PDF embeds those faces and nothing else, on US Letter.
+**The port.** The three templates are copies of the court root's, which pass the gate (`../typst/ca9-brief.typ`, `../latex/template.tex` and `ca9.lua`, `../docx/ca9.lua` and `make-reference.sh`), changed only where the reply brief differs:
 
-- *Matches typst:* 14 pt type; double spacing at the typst baseline pitch (31.4 pt); single spacing for headings, quotations, footnotes and the tables; 1-inch margins; the cover (case number, rules, caption with the designations, proceeding and district docket, title, both counsel groups with their telephone numbers); the table of contents and table of authorities with dot leaders and page numbers (groups, sorting, "passim" at seven or more pages); heading labels (I., A., 1., a. in the Argument; A., 1., a., (1) elsewhere); footnotes at 14 pt; block quotations; the signature block kept with the last paragraph; the Statement of Related Cases (Form 17) with its boxes; the Certificate of Compliance (Form 8) with the word count. The count is 1,964 here, the same as typst's. Page numbers: none on the cover, roman in front matter, arabic from 1 in the body.
-- *Differs:* body lines break at slightly different words (TeX and typst use different line-breaking), so some pages start a line or two apart from typst's. Page count and the page of every heading and authority match. The signature block sits at half the text width, where typst's sits at about 40%. The cover spacing is fixed rather than fitted to the page. The dot leaders are drawn with a different spacing.
-- *Not exercised by this sample:* the Certificate of Service (Form 15) with unregistered parties, the addendum (Add-n), "passim", and the five heading levels. These were checked on a synthetic sample kept outside the repo: each compiled and laid out as intended. The Statement of Related Cases with a pending case is exercised.
-- *Gates:* `tools/check.sh` does not apply to this folder (no `checks.yaml` or `court.json`; see "Not run" above), so no gate was run. The review is by eye: all 13 pages of the LaTeX PDF were rendered at 60 dpi and set beside the typst page (before 2026-10-16; see the verification pass for the 14-page rebuild).
+- *all engines:* the 7,000-word limit (Circuit Rule 32-1(b)) stops the build; the Statement of Related Cases only when the metadata has `related_cases` (Circuit Rule 28-2.6); a footnote is never split across pages (typst `keep-together`, LaTeX `\interfootnotelinepenalty=10000`, Word's Footnote Text style keeps its lines).
+- *typst:* the word count drops emphasis underscores before it reads backslash escapes, so the escaped blanks of "\_\_ U.S. \_\_" are words, as the pandoc engines count them (1,965; it was 1,964).
+- *latex:* a counsel group's own `phone` after its lines (the last group without one takes the brief's `phone`, as the typst cover does); the table of authorities sorts by the citation as written (the inline rules bind "§" to its number with a no-break space, which the sort key dropped); an ellipsis (U+2026) set as one 1 em glyph whose PDF text is the character ("Amendment….”" and "exchange … products"; T1 newtx has no such glyph and `\ldots` put three periods into the text).
+- *docx:* `docx/reference.docx` rebuilt by `docx/make-reference.sh` on `lib/docx/xengine-reference.sh` (Times New Roman 14 pt; before, EB Garamond); the cover, tables, signature, Form 17 and Form 8 are built (before: BLOCKED, pandoc's body only).
 
-**docx** (`docx/reference.docx`, `docx/ca9.lua`, `docx/make-reference.sh`). **BLOCKED.**
+Typst moved with the port (it is the reference, so every page was looked at again): Times New Roman 14 pt (was EB Garamond), the root's line pitches (29.4 pt body, 17 pt single, 20 pt section headings), contents and authorities rows with the page column, no kerning or ligatures. Before the port: latex 12 vs 14 pages, 59.3 % of lines alike; docx 12 vs 8 pages, 5.4 %.
 
-- *Why:* `soffice` is not installed on this box and conda-forge has no LibreOffice package (`micromamba search` finds none), and there is no root to install it another way. The `.docx.pdf` is therefore not produced and no Gate 0 to 3 check runs on the docx. `tools/render-docx.sh` also needs `unzip`, which `tools/bootstrap.sh` does not install; it was added to the toolchain prefix from conda-forge.
-- *Delivered:* `usage/OUTPUT-reply-brief.docx`. It is a valid zip with well-formed XML (checked by `render-docx.sh`). It has the reference's styles (EB Garamond 14 pt, double-spaced body with a half-inch first-line indent, single-spaced headings, footnotes and block quotations, letter page, 1-inch margins, a centered page-number footer) and the heading labels. It has not been opened in Word or LibreOffice, so the no-repair check is not done.
-- *BLOCKED check IDs (not built for docx, a missing feature, not a Word limit):* CA9-COVER-001 to -007 (no cover; the caption is a table in Word, and the cover is not built); CA9-CONT-001 (no table of contents field); CA9-CONT-002 (no table of authorities: TA/TOA fields are not written, and LibreOffice does not honor them, see `docs/DOCX.md`); CA9-CERT-001, -003 and -004 (the certificates are not built); CA9-ADD-001 (the addendum is not numbered Add-n); CA9-FORM-008 (the footer counts arabic from the cover, with no roman front matter); CA9-CONT-012 (the labels are typed text, not Word list numbering, and are not measured on a PDF). Every Gate 1 and Gate 2 check is unmeasured for the docx for lack of a PDF.
-- *Rebuild the reference:* `sh docx/make-reference.sh` (from pandoc's default reference document; needs `perl`, `unzip`, `zip` and `xmllint`).
+**Page review of the port (2026-10-22).** All 14 pages of the typst PDF and of the latex and docx PDFs were rendered at 50 dpi and looked at side by side (the ellipsis at 150 dpi). PDF page | content | finding:
+
+| PDF page | Content | Finding |
+|---|---|---|
+| 1 | Cover | OK. One page; caption, D.C. No. and judge, title, two counsel groups each with its own telephone. The gaps between the cover's parts differ a little between engines; every line breaks alike. |
+| 2 | Table of contents (i) | OK. Argument I and I.A, conclusion, Form 17 and Form 8 with their pages. |
+| 3 | Table of authorities (ii) | OK. Cases italic; constitutional provisions; statutes. A page list wider than the 56 pt column ("3, 4, 5, 6, 7") widens its own row; its leader then runs up to the list. |
+| 4 | Table of authorities (iii) | OK. Rules; other authorities. |
+| 5 | Introduction (1) | OK. Ends mid-sentence, as the filed introduction does. |
+| 6 | Argument; point I; sub-heading A (2) | OK. |
+| 7-8 | Argument; footnotes 1 and 2 (3-4) | OK. Each footnote whole on its page, single-spaced, 14 pt. |
+| 9-11 | Argument; block quotation (5-7) | OK. Page 5 ends a line early: the next paragraph's first line may not stand alone at the foot of a page (no orphans), the same in every engine. |
+| 12 | Conclusion; signature (8) | OK. |
+| 13 | Statement of Related Cases (Form 17) | OK. The pending-case box checked; the case listed. |
+| 14 | Certificate of Compliance (Form 8) | OK. 1,965 words in every engine. |
+
+Open (tier 2, not changed): in Word the leader runs up to the page number (the right indent and tab, the root's design), in typst and LaTeX it stops three spaces short of the page column; the relationship text of the related case ends in a period inside the parenthesis, so the line reads "together.)." (sample text, tier 3).
 
 ## Verification pass 2026-10-16 (fb-595.26.9)
 

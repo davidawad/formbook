@@ -1,12 +1,13 @@
 // U.S. Court of Appeals for the Ninth Circuit: appellant's reply brief (FRAP 28(c)).
+// Copied from ../../typst/ca9-brief.typ (the principal brief, on the cross-engine layout model) and changed only
+// where the reply-brief rules differ: the length limit (Cir. R. 32-1(b)), footnotes kept whole on a page, and the
+// Statement of Related Cases (Cir. R. 28-2.6 applies to initial briefs), emitted only when the metadata supplies
+// `related_cases`.
 //
-// Copied from ../../typst/ca9-brief.typ (the principal brief) and changed only where the
-// reply-brief rules differ: the length limit (Cir. R. 32-1(b)), the counsel phone numbers
-// (per group), and the Statement of Related Cases (Cir. R. 28-2.6 applies to initial briefs,
-// so it is emitted only when the metadata supplies `related_cases`). The rest is the same
-// rule-driven, content-agnostic form. No case-specific text, no coordinates measured off any
-// filed brief, no forced line breaks. The markdown body is rendered by cmarker; the metadata
-// comes from the YAML frontmatter of the same file (schema: ../README.md, "Markdown contract").
+// Rule-driven and content-agnostic. Requirement IDs (CA9-...) refer to ../../rules.md (the form rules are the same for every brief type).
+// No case-specific text, no coordinates measured off any filed brief, no forced
+// line breaks. The markdown body is rendered by cmarker; the metadata comes from
+// the YAML frontmatter of the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
 #import "../../../../../lib/typst/ca9-cover.typ": cover-body as shared-cover-body, ca9-cover as shared-ca9-cover
@@ -16,6 +17,7 @@
 #import "../../../../../lib/typst/typography.typ": footnote-body as shared-footnote-body
 #import "../../../../../lib/typst/certificates.typ": ca9-compliance as shared-ca9-compliance, ca9-service as shared-ca9-service
 #import "../../../../../lib/typst/toa.typ": linked-authorities as shared-linked-authorities, cited-authorities as shared-cited-authorities, authority-page-labels as shared-authority-page-labels
+#import "../../../../../lib/typst/xengine.typ": xengine, edges, listing-row
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -23,12 +25,20 @@
 
 #let font-family = ("Times New Roman", "Liberation Serif")          // CA9-FORM-004: serif, proportional. Vendored in /fonts.
 #let type-size = 14pt                      // CA9-FORM-004: 14-point or larger, everywhere.
-#let body-leading = 0.94em                 // CA9-FORM-003: with the metric-aligned line box below this
-                                           // gives a baseline pitch of about 2.2 x type size (double spacing).
-#let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced.
+#let heading-size = 16pt                   // section headings: a little larger than the body (a whole half point, as Word sizes go)
+// Cross-engine layout model (docs/EVAL-LOOP.md, "Cross-engine gate"): the typst, LaTeX and Word renders break every
+// line and page alike. Every line is a box of a fixed height (its pitch) with the baseline at 0.8 of it, the boxes
+// stack with no leading, and the space between blocks is the larger of the space below the one and above the other
+// (dropped at the top of a page). That is Word's exact line spacing; LaTeX sets the same boxes with \pdfeachlineheight.
+#let pitch-double = 29.4pt                 // CA9-FORM-003: body text, 2.1 x type size (double spacing)
+#let pitch-single = 17pt                   // headings, quotations, footnotes, TOC/TOA, certificates: single-spaced
+#let pitch-heading = 20pt                  // section headings (16 pt)
+#let single-leading = 0pt                  // the line boxes carry the spacing: no leading between them
 #let page-margin = 1in                     // CA9-FORM-002
 #let para-indent = 0.5in
 #let toc-depth = 4
+#let toc-page-col = 36pt                   // TOC: the page numbers keep the last 36 pt of the line to themselves
+#let toa-page-col = 56pt                   // TOA: page lists such as 1, 4, 6, 8 (a longer list widens its own row's column)
 #let passim-threshold = 7                  // authority cited on this many pages or more: "passim"
 
 // ---------------------------------------------------------------------------
@@ -54,13 +64,11 @@
   meta.at(key)
 }
 
-/// A drawn check box (no font glyph needed, so no fallback can occur).
+/// A check box: a ruled box around an "X" when checked, around three spaces' width when not (Word's bordered run,
+/// so every engine sets the same text in it).
 #let checkbox(checked) = box(
-  width: 0.72em, height: 0.72em, baseline: 0.05em, stroke: 0.7pt, inset: 0pt,
-  if checked {
-    place(top + left, line(start: (0pt, 0pt), end: (100%, 100%), stroke: 0.9pt))
-    place(top + left, line(start: (0pt, 100%), end: (100%, 0pt), stroke: 0.9pt))
-  },
+  stroke: 0.6pt, inset: (x: 1pt), outset: (y: 0.6pt),
+  if checked [X] else { hide("\u{a0}\u{a0}\u{a0}") },
 )
 
 /// Split "---\nyaml\n---\nbody" into (meta, body).
@@ -119,10 +127,12 @@
   s = s.replace(regex("(?m)^#{1,6}[ \t]+"), "")
   s = s.replace(regex("(?m)^>[ \t]?"), "")
   s = s.replace(regex("(?m)^[ \t]*([-*+]|[0-9]+[.)])[ \t]+"), "")   // list markers are not words
+  // Emphasis underscores before the backslash escapes: an escaped \_ is text (a blank such as \_\_ is a word, as the
+  // latex and docx engines count it).
+  s = s.replace(regex("(^|[\\s(\\[\u{201C}\"])_"), keep)
+  s = s.replace(regex("([^\\\\])_([\\s.,;:)\\]\u{201D}\"!?]|$)"), m => m.captures.at(0) + m.captures.at(1))
   s = s.replace(regex("\\\\(.)"), keep)                    // backslash escapes
   s = s.replace(regex("[*]"), "")
-  s = s.replace(regex("(^|[\\s(\\[\u{201C}\"])_"), keep)
-  s = s.replace(regex("_([\\s.,;:)\\]\u{201D}\"!?]|$)"), keep)
   s.split(regex("\\s+")).filter(w => w != "").len()
 }
 
@@ -171,24 +181,34 @@
   (h.level - first + 1) * heading-tab
 }
 
+// Spacing above and below each kind of block, in points (the larger of below/above applies between two blocks).
+#let space = (
+  section: (above: 21pt, below: 15.4pt),
+  point: (above: 16.8pt, below: 14pt),
+  sub: (above: 15.4pt, below: 12.6pt),
+  plain: (above: 16.8pt, below: 12.6pt),
+)
+
 #let style-heading(it) = {
-  set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
-  set text(size: type-size)   // typst's built-in heading sizes are not used; every heading is body size or larger
+  set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt, justify: false)
+  set text(size: type-size, ..edges(pitch-single))   // typst's built-in heading sizes are not used
   if it.level == 1 {
     // Section headings: bold, capitals, centered, a little larger than the body.
-    shared-section-heading(it.body, type-size, single-leading, above: 1.5em, below: 1.1em)
+    block(width: 100%, sticky: true, ..space.section,
+      align(center, text(size: heading-size, ..edges(pitch-heading), strong(upper(it.body)))))
   } else if it.numbering == none {
     // Unnumbered sub-headings (addendum entries): bold, left.
-    block(width: 100%, sticky: true, above: 1.2em, below: 0.9em, strong(it.body))
+    block(width: 100%, sticky: true, ..space.plain, strong(it.body))
   } else if in-argument(it.location()) and it.level == 2 {
-    // Point headings: bold small capitals, centered, with the roman numeral.
-    block(width: 100%, sticky: true, above: 1.2em, below: 1em,
-      align(center, strong(smallcaps(heading-label(it) + [ ] + it.body))))
+    // Point headings: bold, centered, with the roman numeral. Not small capitals: Times New Roman has none, and Word
+    // and LaTeX would synthesize different ones (the engines must set the same glyphs).
+    block(width: 100%, sticky: true, ..space.point,
+      align(center, strong(heading-label(it) + [ ] + it.body)))
   } else {
     // Sub-headings: label in a fixed box, text hangs under the text, bold (italic below level 3).
     let ind = label-indent(it)
     let lab = heading-label(it)
-    block(width: 100%, sticky: true, above: 1.1em, below: 0.9em, hang(ind + heading-tab, {
+    block(width: 100%, sticky: true, ..space.sub, hang(ind + heading-tab, {
       h(ind)
       box(width: heading-tab, if it.level >= 4 { strong(emph(lab)) } else { strong(lab) })
       if it.level >= 4 { strong(emph(it.body)) } else { strong(it.body) }
@@ -210,13 +230,17 @@
   if numbered and in-argument(hd.location()) and hd.level == 2 { ind = 0pt }
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
-  shared-outline-row(hd.location(), title, lab, ind, heading-tab,
-    it.page(), single-leading, 0.16em, above: if hd.level == 1 { 0.6em } else { 0.35em })
+  let lw = if lab == none { 0pt } else { heading-tab }
+  listing-row(hd.location(), {
+    h(ind)
+    if lab != none { box(width: heading-tab, lab) }
+    title
+  }, it.page(), toc-page-col, ind + lw, if hd.level == 1 { 8.4pt } else { 4.9pt })
 }
 
 #let toc-section(has-addendum) = {
   heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  align(right, block(above: 0.3em, below: 0pt, strong(underline[Page])))
+  align(right, block(above: 4.2pt, below: 0pt, strong(underline[Page])))
   let target = if has-addendum {
     selector(heading.where(outlined: true)).before(<add-start>, inclusive: true)
   } else {
@@ -247,7 +271,7 @@
     for (kind, title) in toa-groups {
       let members = shared-cited-authorities(authorities, hits, kind, sort-key)
       if members.len() == 0 { continue }
-      block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
+      block(above: if first { 14pt } else { 19.6pt }, below: 2.8pt, sticky: true, {
         set par(first-line-indent: 0pt)
         strong(title)
         if first { h(1fr); strong(underline[Page(s)]) }
@@ -256,18 +280,14 @@
       for (key, a) in members {
         // Distinct printed page labels, in document order.
         let page-text = shared-authority-page-labels(hits, key, passim-threshold)
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
+        listing-row(none, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
             linebreak()
           }
           inl(a.cite)
-          h(0.8em)
-          shared-dot-leader(0.16em)
-          h(0.3em)
-          page-text
-        }))
+        }, page-text, calc.max(toa-page-col, measure(page-text).width), 0.35in, 9.8pt)
       }
     }
   }
@@ -287,9 +307,10 @@
 
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  block(breakable: false, above: 1.4em, {
+  block(breakable: false, above: 19.6pt, {
+    set text(..edges(pitch-single))
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    align(left, pad(left: 50%, {
+    align(left, pad(left: 3.25in, {   // the right half of the 6.5 in text block
       [Respectfully submitted,]
       v(1.2em)
       signature-line(meta)
@@ -385,36 +406,32 @@
     title: plain(inl(need(meta, "brief_title"))) + ", No. " + need(meta, "case_number"),
     author: need(meta, "signature").signer,
   )
-  set page(paper: "us-letter", margin: page-margin, number-align: center, footer-descent: 30%)
-  set text(
-    font: font-family, size: type-size, lang: "en", region: "us",
-    hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
-  )
-  set par(
-    leading: body-leading, spacing: body-leading,
-    first-line-indent: (amount: para-indent, all: true), justify: false,
-  )
+  // The page number: centered in a single-spaced line box whatever the text around it (Word's footer, LaTeX's
+  // plain page style), so it sits at the same place on every page.
+  set page(paper: "us-letter", margin: page-margin, footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model (lib/typst/xengine.typ): first fit, no kerning or ligatures, no hyphenation, line
+  // boxes of the body pitch, footnote marks at 58 %, lists with the number in a half-inch box.
+  show: xengine.with(pitch: pitch-double, list-indent: para-indent)
   set heading(numbering: none)
   set footnote.entry(
-    gap: 0.5em, clearance: 0.9em, indent: 0pt,
+    gap: 7pt, clearance: 12.6pt, indent: 0pt,
     separator: line(length: 30%, stroke: 0.5pt),
   )
   show footnote.entry: it => {
     // marker, a thin space, then the note (typst's default runs them together)
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
-    shared-footnote-body(note.body, num, type-size, single-leading, 0.5em, keep-together: true)
+    set text(..edges(pitch-single))
+    shared-footnote-body(note.body, num, type-size, single-leading, 7pt, keep-together: true)
   }
-  show quote.where(block: true): it => block(above: 1em, below: 1em, pad(left: para-indent, right: para-indent, {
-    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
+  show quote.where(block: true): it => block(above: 14pt, below: 14pt, pad(left: para-indent, right: para-indent, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: 14pt)
     it.body
   }))
-  // Typography that holds for any text: never break inside a token of adjacent parentheses
-  // ("60(b)(5)"), and never between a section sign / pilcrow and its number. Done with
-  // unbreakable boxes so the extracted text stays exactly the author's characters.
-  show regex("\\S*\\)\\(\\S*"): it => box(it)
-  show regex("[§¶] \\S+"): it => box(it)
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {
@@ -423,14 +440,17 @@
   }
 
   // ---- cover ----
-  cover(meta)
+  { set text(..edges(pitch-single)); cover(meta) }
 
   // ---- front matter (lowercase roman) ----
   set page(numbering: "i")
   counter(page).update(1)
-  toc-section(add != none)
-  pagebreak()
-  toa-section(authorities)
+  {
+    set text(..edges(pitch-single))
+    toc-section(add != none)
+    pagebreak()
+    toa-section(authorities)
+  }
 
   // ---- body (arabic from 1) ----
   set page(numbering: "1")
@@ -455,6 +475,9 @@
   }
 
   // ---- certificates of counsel ----
+  set text(..edges(pitch-single))
+  // Circuit Rule 28-2.6 requires the related-cases statement in an INITIAL brief only; a later brief carries
+  // one only when the metadata has a `related_cases` map (for example, a related case the other side did not list).
   if "related_cases" in meta {
     pagebreak(weak: true)
     related-cases(meta)
@@ -471,8 +494,9 @@
     set page(numbering: (..n) => "Add-" + str(n.pos().first()))
     counter(page).update(1)
     [#heading(level: 1, numbering: none)[Addendum] <add-start>]
-    toc-addendum()
+    { set text(..edges(pitch-single)); toc-addendum() }
     pagebreak()
+    set text(..edges(pitch-double))
     cmarker.render(add-md, raw-typst: false, smart-punctuation: true, h1-level: 1)
   }
 }

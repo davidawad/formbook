@@ -11,7 +11,7 @@
 | Path | What |
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` (default `usage/INPUT-answering-brief.md`) and calls `ca9-answering-brief`. |
-| `typst/ca9-answering-brief.typ` | Template. A copy of the ca9 opening-brief template (`../typst/ca9-brief.typ`) with four changes: the header says answering brief; the Statement of Related Cases page is generated only when the metadata has a `related_cases` map (Circuit Rule 28-2.6, see below); `toc-depth` is 5 (all argument levels); the function is named `ca9-answering-brief`. The page geometry, type, cover, TOA, Form 8 and addendum code are unchanged. |
+| `typst/ca9-answering-brief.typ` | Template. A copy of the ca9 opening-brief template (`../typst/ca9-brief.typ`, on the cross-engine layout model since fb-595.54.4; see "Engines" for the changes since) with these changes: the header says answering brief; the Statement of Related Cases page is generated only when the metadata has a `related_cases` map (Circuit Rule 28-2.6, see below); `toc-depth` is 5 (all argument levels); the function is named `ca9-answering-brief`. The page geometry, type, cover, TOA, Form 8 and addendum code are unchanged. |
 | `usage/INPUT-answering-brief.md` | Markdown contract sample (frontmatter + body). |
 | `usage/OUTPUT-answering-brief.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md` (15 pages). |
 | `usage/OVERLAY-newsom-answering-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/court-of-appeals/answering-brief newsom-answering-brief`. |
@@ -51,6 +51,8 @@ Primary sources, read on 2026-10-14 in the Ninth Circuit's "FRAP, Ninth Circuit 
 - sample p.15 ↔ filed p.71 (73%): Form 8.
 
 ## Page review (Gate 2)
+
+*Before the cross-engine port of 2026-10-22, which moved the typst pages (Times New Roman, the root's pitches): the review of the current renders is under "Engines".*
 
 Every page of `OUTPUT-answering-brief.typst.pdf` was rendered at 60 dpi and viewed (15 of 15, 2026-10-16). Typst printed no warnings. Fonts embedded: EB Garamond only (Regular, Italic, Bold, Bold Italic). Page numbers below are PDF pages; the brief's own page numbers are printed on the page.
 
@@ -92,27 +94,44 @@ Fixes made during review:
 
 ## Engines
 
-The same markdown renders through three engines. Typst (`typst/`) is the reference; the LaTeX and DOCX engines were built to its form and checked against it page by page.
+The same markdown renders through three engines, on the cross-engine layout model of the court root (docs/EVAL-LOOP.md, "Cross-engine gate"; ported in fb-595.54.4, 2026-10-22). Typst (`typst/`) is the reference; the LaTeX and Word renders break every line and every page where it does, and Gate 4 gates that (`params.cross_engine: gate` in `eval.yaml`).
 
-| Engine | Output (`usage/`) | Status |
+| Engine | Output (`usage/`) | `tools/check.sh --engine …` |
 |---|---|---|
-| typst | `OUTPUT-answering-brief.typst.pdf` (15 pp) | reference |
-| latex | `OUTPUT-answering-brief.latex.pdf` (15 pp) | ok: rendered, every page compared with the typst page |
-| docx | `OUTPUT-answering-brief.docx`; no `.docx.pdf` | BLOCKED: no LibreOffice on this box (below) |
+| typst | `OUTPUT-answering-brief.typst.pdf` (15 pp) | RESULT: 8 checks passed, 0 failed (XENG: reference, SKIP) |
+| latex | `OUTPUT-answering-brief.latex.pdf` (15 pp) | RESULT: 11 checks passed, 0 failed (XENG-001..003 PASS, 313 of 313 lines) |
+| docx | `OUTPUT-answering-brief.docx`, `.docx.pdf` (15 pp) | RESULT: 12 checks passed, 0 failed (XENG-001..003 PASS) |
 
 ```sh
-sh tools/render.sh --engine latex courts/ninth-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md
-sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md
+sh tools/render.sh --engine typst|latex|docx courts/ninth-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md
+sh tools/check.sh courts/ninth-circuit/court-of-appeals/answering-brief --engine typst|latex|docx
 ```
 
-**latex** (`latex/template.tex`, `latex/ca9.lua`). This is the reply-brief LaTeX engine (see `../reply-brief/README.md`, "Engines") with the answering limits: `ca9.lua` checks the 14,000-word limit of Circuit Rule 32-1(a) and lists five heading levels in the table of contents, as the typst answering template does. `fb render` builds it: pandoc writes the `.tex`, then stock pdflatex runs until the aux file settles, so the tables take their page numbers from the final layout. Fonts: Times from newtx (TeXGyreTermesX, metric-compatible with Times New Roman); the PDF embeds those faces and nothing else, on US Letter.
+**The port.** The three templates are copies of the court root's, which pass the gate (`../typst/ca9-brief.typ`, `../latex/template.tex` and `ca9.lua`, `../docx/ca9.lua` and `make-reference.sh`), changed only where this brief differs:
 
-- *Matches typst:* the same form elements as the reply brief, with the same page for every heading, the Introduction, Jurisdiction, Statement and its "A. Legal Background", Summary of Argument, Argument with all five levels, Conclusion and certificate. The table of authorities (groups, page lists, the statute and the other authorities) matches. The certificate's word count, 2,213, is the same as typst's.
-- *Differs:* body lines break at slightly different words, so a few pages begin a line or two apart from typst's; the page count is the same. The signature block sits at half the text width, where typst's sits at about 40%. The cover spacing is fixed rather than fitted. The deepest table-of-contents entry wraps its title in the same place as typst.
-- *Not exercised by this sample:* a related-cases statement (the sample has none; the template emits one only when the metadata has `related_cases`), the Certificate of Service, the addendum, and "passim". These were checked on the synthetic sample used for the reply brief.
-- *Gates:* `tools/check.sh` does not apply to this folder (no `checks.yaml` or `court.json`). The review is by eye: all 14 pages of the LaTeX PDF were rendered at 60 dpi and set beside the typst page (before 2026-10-16; see the verification pass for the 15-page rebuild).
+- *all engines:* five heading levels in the table of contents (latex: `tocAFive`/`tocOFive` entries; docx: `TOC_DEPTH = 5`); the Statement of Related Cases only when the metadata has `related_cases` (Circuit Rule 28-2.6); the 14,000-word limit (Circuit Rule 32-1(a)) stops the build in every engine.
+- *typst:* the word count drops emphasis underscores before it reads backslash escapes, so an escaped blank (`\_\_`) is a word, as the pandoc engines count it.
+- *latex:* a counsel group's own `phone` after its lines (`ca9.lua` gives the last group the brief's `phone`, as the typst cover does); the table of authorities sorts by the citation as written (the inline rules bind "§" to its number with a no-break space, which the sort key dropped, so "§ 12406" sorted after "§§ 251-255"); an ellipsis (U+2026) set as one 1 em glyph whose PDF text is the character (T1 newtx has none).
+- *docx:* `docx/reference.docx` rebuilt by `docx/make-reference.sh` on `lib/docx/xengine-reference.sh` (Times New Roman 14 pt; before, EB Garamond, so DEF-FONT-002 failed for a Times template); the cover, tables, signature and certificates are built (before: BLOCKED, pandoc's body only).
 
-**docx** (`docx/reference.docx`, `docx/ca9.lua`, `docx/make-reference.sh`). **BLOCKED.** The reasons are the reply brief's (`../reply-brief/README.md`, "Engines"): no `soffice` on this box, so no `.docx.pdf` and no gate on the docx. The `.docx` is delivered as a valid zip with well-formed XML. The BLOCKED check IDs are the same as for the reply brief, with one difference: the related-cases statement is not in the sample, so CA9-CERT-003 is not exercised. CA9-COVER-001 to -007, CA9-CONT-001, CA9-CONT-002, CA9-CERT-001 and -004, CA9-ADD-001, CA9-FORM-008 and CA9-CONT-012 are not built for docx.
+Typst moved with the port (it is the reference, so every page was looked at again): Times New Roman 14 pt (was EB Garamond), the root's line pitches (29.4 pt body, 17 pt single, 20 pt section headings), contents and authorities rows with the page column, no kerning or ligatures. Before the port: latex 14 vs 16 pages, 60.6 % of lines alike; docx 14 vs 10 pages, 7.7 %.
+
+**Page review of the port (2026-10-22).** All 15 pages of the typst PDF and of the latex and docx PDFs were rendered at 50 dpi and looked at side by side (the ellipsis and leader rows also at 150 dpi). PDF page | content | finding:
+
+| PDF page | Content | Finding |
+|---|---|---|
+| 1 | Cover | OK. One page; caption, D.C. No. and judge, title, two counsel groups, the telephone after the last. The gaps between the cover's parts differ a little between engines (fitted per engine); every line breaks alike. |
+| 2 | Table of contents (i) | OK. Five levels; I. at the margin, A., 1., a. half an inch further each; page column 36 pt, leaders from three spaces after the text. |
+| 3 | Table of authorities (ii) | OK. Cases italic, then constitutional provisions, statutes (§ 12406 before §§ 251-255 in all engines). |
+| 4 | Table of authorities (iii) | OK. Other authorities. |
+| 5-8 | Introduction; Jurisdiction; Statement A.; Summary of Argument (1-4) | OK. Double-spaced, 14 pt, half-inch indents. |
+| 9 | Summary end; Argument; point I (5) | OK. Point heading bold, centered. |
+| 10 | Argument I.A and I.A.1 headings (6) | OK. Labels hang; level 4 bold italic. |
+| 11-13 | I.A.1.a heading; argument (7-9) | OK. |
+| 14 | Conclusion; signature (10) | OK. The signature stays with the last paragraph. |
+| 15 | Certificate of Compliance (Form 8) | OK. 2,213 words in every engine; the standard box checked. |
+
+Open (tier 2, not changed): in Word the leader runs up to the page number (the right indent and tab, the root's design), in typst and LaTeX it stops three spaces short of the page column.
 
 ## Verification pass 2026-10-16 (fb-595.26.9)
 
