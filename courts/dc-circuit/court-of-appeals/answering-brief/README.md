@@ -7,7 +7,7 @@ Self-contained doc-type folder for `cadc` (D.C. Circuit). Built from one filed e
 | `usage/FILED-EXAMPLE-answering-brief.pdf` | Brief for the United States (appellee), *United States v. Wilson*, No. 25-3041, filed 10/20/2025. Text-based, 32 pages. |
 | `usage/SOURCE.md` | URL fetched from, case, docket, filer, dates. |
 | `usage/INPUT-answering-brief.md` | Transcription of the exemplar: front matter, a portion of the statement, summary, first half of argument, conclusion, certificates. |
-| `usage/OUTPUT-answering-brief.typst.pdf` | Render of the sample (13 pages). |
+| `usage/OUTPUT-answering-brief.typst.pdf` | Render of the sample (14 pages; latex and docx renders beside it). |
 | `usage/OVERLAY-wilson.pdf`, `OVERLAY-wilson.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`), and its page map. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 | `typst/cadc-answering-brief.typ` | The template: `cadc-answering-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top. |
@@ -105,7 +105,7 @@ Re-reviewed 2026-10-15 after the font change to TeX Gyre Schola: all 13 rendered
 - p.3 (iii) TOC: lists Issue Presented, the statement and its sub-headings, summary, argument and its point heading, conclusion, with page numbers that match the body (checked against pp. 5-11). Defect found 2026-10-16 and fixed: when a title filled its last line, the page number wrapped onto a line of its own (B. and I.). See the verification pass below.
 - p.4 (iv) TOA: cases, statutes, rules, other authorities on one page. Every citing page listed (the template had a "passim" path from seven pages, removed 2026-10-16: Circuit Rule 28(a)(2) forbids "passim").
 - pp.5-7 (body 1-3): double-spaced 14-point TeX Gyre Schola; bold sub-heading A. and B. hang correctly. No defect.
-- pp.8-11 (body 4-7): summary, centered point heading I. with small caps, argument text, conclusion, signature block with `/s/` and counsel lines. The signature block stays with the conclusion. No defect.
+- pp.8-11 (body 4-7): summary, centered point heading I. (bold since fb-595.54.2; was small caps), argument text, conclusion, signature block with `/s/` and counsel lines. The signature block stays with the conclusion. No defect.
 - p.12 certificate of compliance: wording follows FRAP 32(g); the typeface is named as TeX Gyre Schola (see gap 1). No defect.
 - p.13 certificate of service: wording follows FRAP 25(d) as the exemplar. No defect.
 
@@ -126,31 +126,20 @@ Searches tried for the exemplar: the FCC library (appellee briefs in D.C. Circui
 
 ## Engines
 
-The typst template is the primary engine (`typst/`). Two more engines build the same sample: LaTeX (`latex/`) and DOCX (`docx/`). Build commands, from the repo root:
+The typst template is the primary engine (`typst/`) and the reference; LaTeX (`latex/`: `template.tex` + `cadc.lua`) and DOCX (`docx/`: `reference.docx` from `make-reference.sh` + `cadc.lua`) build the same sample and break every line and page where typst breaks them (see "Cross-engine"). From the repo root:
 
 ```sh
 A=courts/dc-circuit/court-of-appeals/answering-brief
 sh tools/render.sh --engine latex $A usage/INPUT-answering-brief.md
-cd $A && pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/cadc-docx.lua usage/INPUT-answering-brief.md -o usage/OUTPUT-answering-brief.docx
+sh tools/render.sh --engine docx $A usage/INPUT-answering-brief.md
 ```
 
-The latex engine needs pandoc and pdflatex (stock TeX Live; TeX Gyre Schola comes from `tgschola`, package tex-gyre); `fb render` reruns pdflatex until the aux, toc and adt files settle. `docx/reference.docx` is pandoc's default reference with the styles and the 1 inch letter page set in place, plus a centered PAGE footer. Its styles: Normal and the body text (TeX Gyre Schola 14 pt, double-spaced, 0.5 in first-line indent), Heading 1 (centered bold capitals), Heading 2 (bold, hanging), footnote text 14 pt, and the custom styles Cover Line, Single Line, Signature Block and Counsel Block that `docx/cadc-docx.lua` uses.
+The latex engine needs pandoc and pdflatex (stock TeX Live; TeX Gyre Schola comes from `tgschola`, package tex-gyre); `fb render` reruns pdflatex until the aux, toc and adt files settle. The docx engine needs pandoc and LibreOffice: `fb render` runs pandoc with `docx/cadc.lua` twice or more, reading the page of every heading and citation from the LibreOffice PDF of the previous pass (needles), so the contents and authorities carry page numbers; it writes the footers (none on the cover, roman from ii, arabic from 1, `Add-` in an addendum).
 
-**LaTeX (`latex/`): matches the typst output (tier 1).** Page size and margins; TeX Gyre Schola 14 pt, footnotes 14 pt; double-spaced body at the typst pitch (26.3 pt, measured on `usage/OUTPUT-answering-brief.typst.pdf`; single 14.8 pt); front matter in roman (cover i, certificate of parties ii, contents iii, authorities iv); body 1 to 7 with the same page numbers as the typst render in the contents; certificate of compliance on page 8 and certificate of service on page 9, with the typst wording; the signature block kept with the last paragraph; word count 1,505 (the typst count). The sample is 13 pages, as the typst render. Heading numbering (I., A., 1., a. inside the Argument; A., 1., a., (1) elsewhere) is done in `latex/cadc.lua`. Fonts: only TeX Gyre Schola is embedded.
+- **latex** (`usage/OUTPUT-answering-brief.latex.pdf`, 14 pages, as typst): cover, certificate of parties (ii), contents and authorities with computed page numbers, the body, the signature kept with the Conclusion, both certificates; word count 1,505 (the typst count, from the markdown source). The addendum (Add-1 contents, Add-N pages) was tested on a copy of the sample with an addendum appended (typst, latex and docx alike, every line); the sample has none.
+- **docx** (`usage/OUTPUT-answering-brief.docx`, `.docx.pdf` 14 pages): the same parts, sections and numbering, word count 1,505. The earlier BLOCKED items (no `.docx.pdf`, no contents or authorities, arabic front matter, signature not kept with the last paragraph) are built. Word may paginate slightly differently from LibreOffice (`docs/DOCX.md`).
 
-LaTeX differences (tier 2 or line breaking, not form): line breaks come from TeX's paragraph breaker, not typst's, so a few body lines and therefore some page numbers in the contents and table of authorities differ from the typst render (for example, the first citation of *Ingersoll-Rand* is on body page 4 here and on page 5 in typst; *Id.* cites of *United States v. Wilson* (2025 WL 1009047) fall on page 3 here, page 3 and 4 in typst). The cover uses fixed gaps (typst fits its gaps to the page). The small capitals of the Argument point headings are the TeX Gyre Schola small capitals of `tgschola`. The addendum (contents on Add-1, pages Add-N) is built and was tested on a copy of the sample with an addendum appended; the sample has none.
-
-**DOCX (`docx/`): BLOCKED in part.**
-
-- Gate 0 and Gate 1 (measured on the LibreOffice PDF): BLOCKED. The `.docx.pdf` could not be made: `soffice` is not on PATH, and the LibreOffice tree in `~/lo` fails to start (missing `libXinerama.so.1`; the UNO `DeploymentException` seen earlier). The `.docx` itself is written and validated (`unzip -tq`; `xmllint --noout` on every XML and rels part).
-- Table of contents: not built (BLOCKED). The contents need page numbers from a layout pass, which needs LibreOffice here; a TOC field would be empty until updated (`docs/DOCX.md`). The `.docx` has no contents page.
-- Table of authorities: not built (BLOCKED), for the same reason. Its links to the registry are plain text in the `.docx`. The `.docx` has no authorities page.
-- Front matter numbering: not built (BLOCKED). The footer counts every page in arabic from the cover; the typst and LaTeX renders number the front matter in roman.
-- Keep the signature with the last paragraph: not built (BLOCKED). A Word block has no keep-with-next across the paragraph and the signature block.
-- Pagination: not checked against any renderer. Word may paginate differently (`docs/DOCX.md`).
-- Cover and certificates are paragraphs, not tables (no vertical rule in the caption).
-
-Word limits that apply here: the body count (13,000 words, FRAP 32(a)(7)(B)(i)) is checked in `docx/cadc-docx.lua` and the certificate of compliance states the same count (1,505).
+Word limits that apply here: the body count (13,000 words, FRAP 32(a)(7)(B)(i)) is checked by every engine and the certificate of compliance states the same count (1,505).
 
 ## Verification pass 2026-10-16 (fb-595.26.12)
 
@@ -161,3 +150,16 @@ Word limits that apply here: the body count (13,000 words, FRAP 32(a)(7)(B)(i)) 
 - Fixed (tier 2): table of contents rows whose title filled the last line pushed the page number onto a new line, unaligned (p. iii, entries B. and I.). Page numbers now sit in their own column (`toc-page-col`), bottom-aligned with the title's last line.
 - LaTeX re-rendered after the passim change: 13 pages, builds.
 - Remaining gaps: as listed under Known gaps; unchanged.
+
+## Cross-engine (fb-595.54.2)
+
+All three engines on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, the adoption checklist); `params.cross_engine: gate` in `eval.yaml`.
+
+- typst: `show: xengine.with(pitch: 26.4pt, list-indent: 0.5in)`; line boxes of 26.4 pt (body, as before), 17.5 pt (single; was about 14.9 pt) and 21 pt (section headings, 16 pt type; were 1.15 em); spaces in pt; `listing-row` contents and authorities (the contents' page column 36 pt, 56 pt for an addendum page; the authorities' 56 pt or the page list's width: a long list no longer wraps inside a 1.5 in column); point headings bold, not small capitals; the cover's designations and counsel and the signatures at the middle of the text width as a length (a relative pad was relative to the padded block: the signature sat 17 pt left of the middle, the designations at the width of the word); the Conclusion kept with the signature block (the keep rule reads the text before the footnote definitions; before, the signature block followed the last footnote definition's rule and the Conclusion was not kept).
+- Three findings particular to TeX Gyre Schola, each a break or page the gate caught:
+  - Glyph advances: the vendored OpenType face (typst, LibreOffice) and TeX Live's Type 1 `tgschola` differ for ( ) [ ] / * + (e.g. "(" 0.483 em against 0.333 em) and for the bold interword space (0.278 em against 0.287 em). `latex/cadc.lua` sets each such glyph centered in a box of the OpenType advance (`\cadcg`), with the word's text as ActualText (otherwise the PDF text reads ") ("), and `template.tex` sets the bold space.
+  - Ligatures: LibreOffice sets the face's f-ligatures (OpenType liga, on by default; a .docx cannot turn them off, and a zero-width non-joiner would stay in the document's text). typst sets them too (`ligatures: true`), the LaTeX engine writes the T1 font's ligature glyphs (the same advances).
+  - LibreOffice's PDF reports the face 1.21 em above the baseline: a line box under about 17.5 pt (14 pt type) or 20.5 pt (16 pt) at the top of a page put the word above the top margin (DEF-FORM-002 failed on the docx). Hence the single and heading pitches above.
+- Also: no punctuation overhang in typst (`overhang: false`; a centered line ending in a period sat 1.5 pt off Word's and TeX's), no break after a solidus inside a word ("CM/ECF": LibreOffice and TeX keep it whole), the footnote separator 13.9 pt from the text (typst clearance 6.4 pt, LaTeX `\skip\footins` 6.9 bp), the space LibreOffice keeps (measured; with typst's 12.6 pt the docx fitted one more body line on page 1).
+- Before (baseline): latex 13 = 13 pages, 65.2 % of lines with typst's break (first difference p2 line 3); docx 13 vs 11 pages, 64.4 %, and no contents, authorities or roman numbering in the docx. After: typst 14 pages; latex and docx 14 pages, 271/271 lines, every page starting and ending on typst's words (XENG-001..003 PASS); tier 1: typst 7 passed, latex 10 passed, docx 11 passed, 0 failed.
+- Pages reviewed after the port (`pdftoppm -r 50`, every page of typst, latex and docx): 1-14 of each. Cover, certificate of parties, contents, authorities (its last group, Other Authorities, now runs onto page v: open, tier 2), body with footnote 1 at the foot of page 1, the point heading, the Conclusion with the signature block, both certificates; no overlapping or clipped text, nothing in the margins.
