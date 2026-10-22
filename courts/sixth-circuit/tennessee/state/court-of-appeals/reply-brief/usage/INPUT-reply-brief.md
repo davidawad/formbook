@@ -23,55 +23,55 @@ signature:
   lines: ["REPORTERS COMMITTEE FOR FREEDOM OF THE PRESS", "6688 Nolensville Rd., Suite 108-20", "Brentwood, TN 37027", "Phone: 615.823.3633", "Facsimile: 202.795.9310", "pmcadoo@rcfp.org", "*Counsel for Petitioner-Appellant*"]
 service:
   date: "July 31, 2023"
-  method: "through the court’s e-filing system on:"
+  method: "through the court’s e-filing system"
   recipients:
     - ["Michael Stahl, BPR No. 032381", "P.O. Box 20207", "Nashville, TN 37202", "Tel: (615) 253-5463", "Michael.Stahl@ag.tn.gov"]
 authorities:
   - heading: "Cases"
     entries:
-      - {cite: "*Arnwine v. Union Cnty. Bd. of Educ.*, 120 S.W.3d 804 (Tenn. 2003)", find: ["Arnwine"]}
-      - {cite: "*Bearing Distribs., Inc. v. Gerregano*, No. M2020-01075-COA-R3-CV, 2022 WL 40008 (Tenn. Ct. App. Jan. 5, 2022)", find: ["Bearing Distribs"]}
-      - {cite: "*Champa v. Weston Pub. Schs.*, 39 N.E.3d 435 (Mass. 2015)", find: ["Champa"]}
-      - {cite: "*DTH Media Corp. v. Folt*, 841 S.E.2d 251 (N.C. 2020)", find: ["DTH Media"]}
-      - {cite: "*Dye v. Witco Corp.*, 216 S.W.3d 317 (Tenn. 2007)", find: ["Dye v. Witco"]}
-      - {cite: "*Graham v. Caples*, 325 S.W.3d 578 (Tenn. 2010)", find: ["Graham"]}
-      - {cite: "*Green v. Green*, 293 S.W.3d 493 (Tenn. 2009)", find: ["Green"]}
-      - {cite: "*Hodge v. Craig*, 382 S.W.3d 325 (Tenn. 2012)", find: ["Hodge v. Craig"]}
-      - {cite: "*Martin v. Powers*, 505 S.W.3d 512 (Tenn. 2016)", find: ["Martin v. Powers"]}
-      - {cite: "*Schneider v. City of Jackson*, 226 S.W.3d 332 (Tenn. 2007)", find: ["Schneider"]}
-      - {cite: "*State v. Cawood*, 134 S.W.3d 159 (Tenn. 2004)", find: ["Cawood"]}
-      - {cite: "*State v. Mann*, 959 S.W.2d 503 (Tenn. 1997)", find: ["State v. Mann"]}
-      - {cite: "*State v. Rogers*, 188 S.W.3d 593 (Tenn. 2006)", find: ["State v. Rogers"]}
-      - {cite: "*Tennessean v. Metro. Gov’t of Nashville*, 485 S.W.3d 857 (Tenn. 2016)", find: ["Tennessean v. Metropolitan"]}
-      - {cite: "*Univ. of Kentucky v. Kernel Press, Inc.*, 620 S.W.3d 43 (Ky. 2021)", find: ["Kernel Press"]}
-      - {cite: "*Warger v. Shauers*, 574 U.S. 40 (2014)", find: ["Warger"]}
-      - {cite: "*Young v. Frist Cardiology, PLLC*, 599 S.W.3d 568 (Tenn. 2020)", find: ["Young"]}
+      - {cite: "*Arnwine v. Union Cnty. Bd. of Educ.*, 120 S.W.3d 804 (Tenn. 2003)", find: "Arnwine"}
+      - {cite: "*Bearing Distribs., Inc. v. Gerregano*, No. M2020-01075-COA-R3-CV, 2022 WL 40008 (Tenn. Ct. App. Jan. 5, 2022)", find: "Bearing Distribs"}
+      - {cite: "*Champa v. Weston Pub. Schs.*, 39 N.E.3d 435 (Mass. 2015)", find: "Champa"}
+      - {cite: "*DTH Media Corp. v. Folt*, 841 S.E.2d 251 (N.C. 2020)", find: "DTH Media"}
+      - {cite: "*Dye v. Witco Corp.*, 216 S.W.3d 317 (Tenn. 2007)", find: "Dye v. Witco"}
+      - {cite: "*Graham v. Caples*, 325 S.W.3d 578 (Tenn. 2010)", find: "Graham"}
+      - {cite: "*Green v. Green*, 293 S.W.3d 493 (Tenn. 2009)", find: "Green"}
+      - {cite: "*Hodge v. Craig*, 382 S.W.3d 325 (Tenn. 2012)", find: "Hodge v. Craig"}
+      - {cite: "*Martin v. Powers*, 505 S.W.3d 512 (Tenn. 2016)", find: "Martin v. Powers"}
+      - {cite: "*Schneider v. City of Jackson*, 226 S.W.3d 332 (Tenn. 2007)", find: "Schneider"}
+      - {cite: "*State v. Cawood*, 134 S.W.3d 159 (Tenn. 2004)", find: "Cawood"}
+      - {cite: "*State v. Mann*, 959 S.W.2d 503 (Tenn. 1997)", find: "State v. Mann"}
+      - {cite: "*State v. Rogers*, 188 S.W.3d 593 (Tenn. 2006)", find: "State v. Rogers"}
+      - {cite: "*Tennessean v. Metro. Gov’t of Nashville*, 485 S.W.3d 857 (Tenn. 2016)", find: "Tennessean v. Metropolitan"}
+      - {cite: "*Univ. of Kentucky v. Kernel Press, Inc.*, 620 S.W.3d 43 (Ky. 2021)", find: "Kernel Press"}
+      - {cite: "*Warger v. Shauers*, 574 U.S. 40 (2014)", find: "Warger"}
+      - {cite: "*Young v. Frist Cardiology, PLLC*, 599 S.W.3d 568 (Tenn. 2020)", find: "Young"}
   - heading: "Statutes"
     entries:
-      - {cite: "20 U.S.C. § 1232g", find: ["1232g"]}
-      - {cite: "2014 Tenn. Laws Pub. Ch. 771 (H.B. 1505)", find: ["Pub. Ch. 771"]}
-      - {cite: "42 U.S.C. § 5106a", find: ["5106a"]}
-      - {cite: "Tenn. Code Ann. § 10-7-504", find: ["10-7-504"]}
-      - {cite: "Tenn. Code Ann. § 33-3-103", find: ["33-3-103"]}
-      - {cite: "Tenn. Code Ann. § 33-3-108", find: ["33-3-108"]}
-      - {cite: "Tenn. Code Ann. § 37-1-409", find: ["37-1-409"]}
-      - {cite: "Tenn. Code Ann. § 37-1-612", find: ["37-1-612"]}
-      - {cite: "Tenn. Code Ann. § 37-3-803", find: ["37-3-803"]}
-      - {cite: "Tenn. Code Ann. § 37-3-810", find: ["37-3-803, 810"]}
-      - {cite: "Tenn. Code Ann. § 37-5-107", find: ["37-5-107"], passim: true}
-      - {cite: "Tenn. Code Ann. § 63-2-101", find: ["63-2-101"]}
-      - {cite: "Tenn. Code Ann. § 68-142-108", find: ["68-142-108"]}
+      - {cite: "20 U.S.C. § 1232g", find: "1232g"}
+      - {cite: "2014 Tenn. Laws Pub. Ch. 771 (H.B. 1505)", find: "Pub. Ch. 771"}
+      - {cite: "42 U.S.C. § 5106a", find: "5106a"}
+      - {cite: "Tenn. Code Ann. § 10-7-504", find: "10-7-504"}
+      - {cite: "Tenn. Code Ann. § 33-3-103", find: "33-3-103"}
+      - {cite: "Tenn. Code Ann. § 33-3-108", find: "33-3-108"}
+      - {cite: "Tenn. Code Ann. § 37-1-409", find: "37-1-409"}
+      - {cite: "Tenn. Code Ann. § 37-1-612", find: "37-1-612"}
+      - {cite: "Tenn. Code Ann. § 37-3-803", find: "37-3-803"}
+      - {cite: "Tenn. Code Ann. § 37-3-810", find: "810"}
+      - {cite: "Tenn. Code Ann. § 37-5-107", pages: "passim"}
+      - {cite: "Tenn. Code Ann. § 63-2-101", find: "63-2-101"}
+      - {cite: "Tenn. Code Ann. § 68-142-108", find: "68-142-108"}
   - heading: "Other Authorities"
     entries:
-      - {cite: "121 Cong. Rec. 13,990 (1975)", find: ["121 Cong. Rec."]}
-      - {cite: "34 C.F.R. Part 99", find: ["34 C.F.R. Part 99"]}
-      - {cite: "45 C.F.R. § 164.512", find: ["164.512"]}
-      - {cite: "45 C.F.R. § 1340.14", find: ["1340.14"]}
-      - {cite: "Standards for Privacy of Individually Identifiable Health Information, 65 Fed. Reg. 82462 (Dec. 28, 2000)", find: ["Standards for Privacy"]}
-      - {cite: "Tenn. Op. Att’y Gen. No. 15-48 (June 5, 2015)", find: ["15-48"]}
-      - {cite: "Tenn. R. App. P. 13", find: ["Tenn. R. App. P. 13"]}
-      - {cite: "Tenn. R. Crim. P. 1", find: ["Tenn. R. Crim. P. 1(a)"]}
-      - {cite: "Tenn. R. Crim. P. 16", find: ["Tenn. R. Crim. P. 16"], passim: true}
+      - {cite: "121 Cong. Rec. 13,990 (1975)", find: "121 Cong. Rec."}
+      - {cite: "34 C.F.R. Part 99", find: "34 C.F.R. Part 99"}
+      - {cite: "45 C.F.R. § 164.512", find: "164.512"}
+      - {cite: "45 C.F.R. § 1340.14", find: "1340.14"}
+      - {cite: "Standards for Privacy of Individually Identifiable Health Information, 65 Fed. Reg. 82462 (Dec. 28, 2000)", find: "Standards for Privacy"}
+      - {cite: "Tenn. Op. Att’y Gen. No. 15-48 (June 5, 2015)", find: "15-48"}
+      - {cite: "Tenn. R. App. P. 13", find: "Tenn. R. App. P. 13"}
+      - {cite: "Tenn. R. Crim. P. 1", find: "Tenn. R. Crim. P. 1(a)"}
+      - {cite: "Tenn. R. Crim. P. 16", pages: "passim"}
 ---
 
 # INTRODUCTION
