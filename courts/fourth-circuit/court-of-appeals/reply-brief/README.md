@@ -128,8 +128,9 @@ All 10 pages were looked at after the first render, and again after the font cha
 | 8 body p.5 (2026-10-16) | Footnote 1 now sits at the foot of this page; the rest of the page is blank because the CONCLUSION heading, its paragraph and the signature block are kept together (the keep rule) and do not fit. | ACCEPTED |
 | 9 body p.6 | CONCLUSION; signature block with `s/`, capitals name, italic lines and date. | OK |
 | 10 certificate of compliance | Word count and typeface statement; signature line. | OK |
+| all (2026-10-22, fb-595.54.3) | After the port to the cross-engine model all 10 pages of the typst, latex and docx renders were looked at (40 dpi): the same pages, lines and page ends in each; the cover keeps one page; the footnote stays on page 5. | OK |
 
-Nothing is `OPEN` that blocks the build. The docx and latex engines were not built (the brief asks for typst only).
+Nothing is `OPEN` that blocks the build.
 
 ## Known gaps
 
@@ -151,18 +152,11 @@ Nothing is `OPEN` that blocks the build. The docx and latex engines were not bui
 
 ## Engines
 
-Three renderings of the same markdown (`usage/INPUT-reply-brief.md`). The typst template is the reference.
+Three renderings of the same markdown (`usage/INPUT-reply-brief.md`). The typst template is the reference. All three are on the shared cross-engine layout model since fb-595.54.3 (`lib/typst/xengine.typ`, `lib/latex/xengine.sty` and `xengine.lua`, `lib/docx/xengine.lua` and `xengine-reference.sh`; docs/EVAL-LOOP.md, "Adopting the reference breaker"), with the opening brief's numbers: Times New Roman (newtx in latex) 14 pt, section headings 16 pt (typst's 1.15 em in whole half points), the body in 25.9 pt line boxes, headings, tables, footnotes, cover and certificates in 16 pt boxes. latex and docx break every line and page where typst does, and `eval.yaml` gates it (`params.cross_engine: gate`, XENG-001..003). 10 pages in each engine; the certificate word count is 1,334 in each.
 
-**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `usage/OUTPUT-reply-brief.latex.pdf`, 11 pages, every page rendered at 50 dpi and viewed after the font change. Layout item the font change exposed, not fixed here: the "CONCLUSION" heading sits at the foot of page 6 with its text on page 7. Matches: Liberation Serif only, double spacing at the typst pitch, 1-inch margins, the cover with the case number and judge line and counsel's telephone number, contents (addendum headings are kept out of the main contents) and authorities, the Form 6 style certificate of compliance (1,334 words, the same as typst's count) with its signature and date line, and the certificate of service on its own page. The addendum's `Add-N` folios are built but the sample has no addendum. Differs: the cover is tighter (fixed gap); body spacing differs slightly, so page breaks and folios differ from typst. Signature: typst's reply `signature-line` writes `s/` with no leading slash; this engine writes `/s/` as the other briefs do. Confirm which is wanted. Not checked by `check.sh` (no `checks.yaml` in this court).
-
-**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `usage/OUTPUT-reply-brief.docx` is written; the `.docx.pdf` is not (see BLOCKED). Styles and sections as in the opening brief. Contents and authorities are Word fields. Certificate word count 1,334.
-
-BLOCKED (docx):
-- All gates on the `.docx.pdf`: no LibreOffice on this box (see the opening brief's README, Engines).
-- Contents and authorities page numbers: Word fills them on update; LibreOffice does not honour TA/TOA fields (docs/DOCX.md).
-- The addendum's `Add-N` folios are not built in the docx (the sample has no addendum).
-- The cover's rules and caption positions are paragraph borders and indents, approximated.
-- Opened in neither Word nor LibreOffice: well-formed XML only.
+- **typst** (`typst/ca4-reply-brief.typ`): as the opening brief (see its README, Engines): pitches and spaces in pt, `listing-row` tables, counsel and signature in a true right half. Every page viewed at 40 dpi after the port.
+- **LaTeX** (`latex/template.tex`, `latex/ca4.lua`, the opening brief's files with `DOCTYPE = 'reply-brief'`): the signature now writes `s/` as typst's `signature-line` does. The addendum (`Add-N` folios, its own contents) is built but the sample has none. Every page viewed at 40 dpi.
+- **docx** (`docx/`, the opening brief's machinery with `DOCTYPE = 'reply-brief'`): every page of `usage/OUTPUT-reply-brief.docx.pdf` viewed at 40 dpi. BLOCKED: an addendum; the filter stops with an error (`the docx engine does not yet render the addendum`) rather than drop it; the sample has none. Not opened in Word.
 
 ## Verification pass 2026-10-16 (fb-595.26.4)
 
