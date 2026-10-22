@@ -38,7 +38,7 @@ front:
     gutter: 21.6
     above: 14.4
   - {break: true}
-# After the conclusion: the closing line and each signature block, never split (Rule 1-311).
+# After the conclusion: the closing line and each signature block, never split.
 closing:
   - {text: "{submitted}", pitch: body, above: 10.4, optional: true}
   - each: signature

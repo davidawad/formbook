@@ -38,7 +38,7 @@ front:
       - {text: "{names}", bold: true, left: 230.4}
       - {text: "{lines}", left: 230.4, below: 7.8}
   - {break: true}
-# The date and the signature block after the conclusion, never split (Rule 1-311): "/s/" and the typed name underlined,
+# The date and the signature block after the conclusion, never split: "/s/" and the typed name underlined,
 # the bar number, address, telephone and e-mail beneath; then the certificate of service (Md. Rule 1-321) on its own
 # page.
 closing:

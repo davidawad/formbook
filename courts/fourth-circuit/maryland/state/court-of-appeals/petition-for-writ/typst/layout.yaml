@@ -40,7 +40,7 @@ cover:
         below: 15.6
 # MD-CONV-004: the table of contents (headings to level 3, each level a half inch in).
 contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 18, step: 36, above: 7.8}
-# After the conclusion: the date line and each signature block, never split (Rule 1-311). Then the certification of
+# After the conclusion: the date line and each signature block, never split. Then the certification of
 # word count and compliance (MD-CERT-001, the official form) and the certificate of service (Md. Rule 1-321), each on
 # its own page when the frontmatter has them.
 closing:
