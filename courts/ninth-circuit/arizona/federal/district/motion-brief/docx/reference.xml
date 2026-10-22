@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The D. Ariz. motion's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the typst
+     template ({font}, Times New Roman; LRCiv 7.1(b)(1) names no typeface) at 13 pt (size 26 half points, LRCiv
+     7.1(b)(1): a proportional font of at least 13 point); Body Text in exact 24 pt line boxes (typst pitch, the
+     numbered lines, LRCiv 7.1(b)(1) double spacing) with a half-inch indent, and the headings in them; single lines
+     in 16 pt boxes (typst pitch-single). The page, its pleading numbers, rules and footers are not here: the running
+     line comes from the sample, so docx/azd-motion.lua writes the footers and the section (left margin 1.5 in, right
+     1 in, 27 numbered lines from the 1-inch top margin). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="26" body="480" single="320" indent="720" heading="480" heading-before="0" heading-after="0">
+</reference>
