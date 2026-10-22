@@ -7,9 +7,9 @@ Folder: `courts/second-circuit/new-york/federal/western-district/complaint/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md` (the whole complaint text, from the text layer; see Known gaps) |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, vendored Times New Roman only, no warnings (`tools/render.sh`), on the shared cross-engine layout model (`lib/typst/xengine.typ`; fb-595.68.26) |
 | overlay | ok: `usage/OVERLAY-kerrick-complaint.pdf` and `usage/OVERLAY-kerrick-complaint.txt` (`tools/overlay.sh`) |
-| pages reviewed | 9 of 9 rendered at 60 dpi and viewed (pages 2, 3, 4 and 6 were viewed before the caption-width and emphasis-escape fixes; neither touches those pages, which have no caption or emphasis; see the review below) |
+| pages reviewed | 9 of 9 on typst and docx (every page rendered at 40 dpi and viewed side by side after the last template change, 2026-10-22) |
 
 ## Governing rules
 
@@ -21,7 +21,7 @@ Primary sources, fetched 2026-10-14:
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | L.R. Civ. P. 10(a)(1) | All text and footnotes at least 12-point type. | `type-size = 12pt` everywhere (the footer page number is the same size). |
-| L.R. Civ. P. 10(a)(2) | Text in the body double-spaced; block quotations and footnotes may be single-spaced. | `body-leading = 1.35em` with paragraph spacing of the same amount, so each line and each paragraph break sits on a 24 pt pitch at 12 pt. Block quotations single-spaced (none in this doc type). |
+| L.R. Civ. P. 10(a)(2) | Text in the body double-spaced; block quotations and footnotes may be single-spaced. | `pitch-double = 24pt`: every body line a 24 pt box (the cross-engine model), no space between paragraphs. Block quotations single-spaced (none in this doc type). |
 | L.R. Civ. P. 10(a)(3) | Footnotes and block quotes may not circumvent page limits. | No footnotes are supported by the template. |
 | L.R. Civ. P. 10(a)(4) | At least one-inch margins on all four sides. | `margin = 1in`. |
 | L.R. Civ. P. 10(a)(5) | Pages consecutively numbered. | Arabic page numbers, centered in the footer, from page 1 (the cover is page 1). |
@@ -38,7 +38,7 @@ Court-mandated (tier 1): the type size, double spacing, margins, page numbers, c
 ## Layout
 
 - Cover (page 1): court title, caption box (parties left, title and `Civil Action No.` right), jury legend, then the unnumbered lead-in.
-- Body: `#` headings are centered bold capitals (PARTIES, JURISDICTION, FACTUAL BACKGROUND, the cause headings, REQUESTS FOR RELIEF, DEMAND FOR JURY TRIAL); `##` is the centered bold subtitle of a cause of action. Numbered paragraphs are numbered in the template. A `::` prefix marks an unnumbered paragraph. A `1.` list is lettered (a), (b).
+- Body: `#` headings are centered bold capitals (PARTIES, JURISDICTION, FACTUAL BACKGROUND, the cause headings, REQUESTS FOR RELIEF, DEMAND FOR JURY TRIAL); `##` is the centered bold subtitle of a cause of action. Numbered paragraphs are numbered in the template. A leading `<!-- unnumbered -->` comment marks an unnumbered paragraph. Headings, the caption, quotations and the signature are single-spaced (13.8 pt lines); the last block of the body is kept with the signature block. A `1.` list is lettered (a), (b).
 - Signature block after the jury demand: `Dated:` at left, firm and signer at right, kept together on one page.
 
 Markdown contract for samples: YAML frontmatter (`case_number`, `caption.parties` (names are joined and wrapped in the box), `title`, `jury_demand`, `lead_in`, `date`, `signature` with `firm`, `by`, `signer`, `lines`), then the body. Blank lines separate blocks. List items must be contiguous (no blank line between `1.` and `2.`). `*text*` is italic; a literal star is written `\*`. Paragraph numbers are not written in the text.
@@ -50,7 +50,7 @@ Markdown contract for samples: YAML frontmatter (`case_number`, `caption.parties
 ## Known gaps and open choices
 
 1. **Only one filer.** The brief asks for one exemplar per doc type. Kerrick v. Town of Gorham is the only complaint in this court that was checked for text and layout; tier 2 is judged against this one filer only.
-2. **Font.** The rules name no typeface. The template uses EB Garamond (vendored; the only family in `fonts/`). At 12 pt it is smaller to the eye than the Times-family exemplar, so the text looks lighter. Meets the rule as written.
+2. **Font.** The rules name no typeface. The template sets Times New Roman, the house standard and the exemplar's face, on typst and docx alike (fb-595.68.26; was EB Garamond). Meets the rule as written.
 3. **Civil cover sheet (JS-44)** and the summons are separate filings and are not produced.
 4. **Caption box.** The box is closed by a rule (right and bottom), not the column of ")" marks some filers use. Tier 2, not asserted.
 5. **Keep-together.** The signature block is kept together and moves to its own page (page 9) in this render. A party line (`Defendant Town of Gorham`) can end a page (page 7). Layout only; not corrected.
@@ -58,6 +58,8 @@ Markdown contract for samples: YAML frontmatter (`case_number`, `caption.parties
 7. **Rule version.** The rules are the 2025 edition from the court's site. A later edition could change the Local Rule 10 wording; re-check before relying on this folder.
 
 ## Review of the rendered pages (Gate 2)
+
+The rows below were made on the earlier EB Garamond render; the 9 pages of the current typst and docx renders were viewed side by side on 2026-10-22, no defect found.
 
 Every page was rendered with `pdftoppm -r 60` and viewed.
 
@@ -84,9 +86,10 @@ sh tools/overlay.sh courts/second-circuit/new-york/federal/western-district/comp
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt body pitch, 15.6 pt single lines, 1 in margins, centered page-number footer); `docx/nywd-complaint.lua` builds the caption, the numbered paragraphs (number, tab, text), the lettered items, the unnumbered paragraphs (a leading `<!-- unnumbered -->` comment) and the signature block as Word paragraphs and tables. Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice; converts with no error; 9 pages).
+The typst template is the reference; the docx breaks every line and page where it does (Gate 4 CROSS-ENGINE, `params.cross_engine: gate` in `eval.yaml`).
 
-- Matches typst: page size and margins, font and size, double spacing, paragraph numbering 1 to 66, lettered items, caption layout (court title, parties box with rules, title and `Civil Action No.`, jury legend), signature block, centered page numbers. Pagination matches the typst render page for page (each page starts with the same paragraph in both).
-- Differs: the number is followed by a tab to 1 in (typst: a 0.5 em gap); the space above the signature block and the caption is a few points different where a page starts with it; Word and LibreOffice place text in exact-height lines a few points lower than typst does.
-- Pages looked at: all 9 pages of `usage/OUTPUT-complaint.docx.pdf`, side by side with the typst render at 60 dpi.
-- BLOCKED: `tools/check.sh --engine docx` cannot run for this folder: there is no `checks.yaml` (and no `court.json` at the doc-type level), so every Gate 0 to 3 check ID is BLOCKED, not passed. No stamp is written.
+DOCX (`docx/`): `reference.xml` (`base="xengine"`: the face is the typst template's through `{font}`, 12 pt, exact 24 pt body lines, 13.8 pt single lines, 1 in margins, the centered page-number footer) and `nywd-complaint.lua` (on `lib/docx/xengine.lua`: the court title, the caption table with the parties box's two rules, the lead-in, the numbered paragraphs (number at 0.5 in, tab to 1 in), the unnumbered paragraphs, headings, lettered items, quotations and the signature table, each in the typst template's line boxes and spaces). `fb render` builds the reference document; no shell script and no committed `reference.docx` (fb-595.68.26). Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice; opened in LibreOffice, not Word).
+
+- `tools/check.sh <dir>`: RESULT: 9 checks passed, 0 failed (DEF-TOC-001, DEF-COVER-001 pass).
+- `tools/check.sh <dir> --engine docx`: RESULT: 13 checks passed, 0 failed; XENG-001..003 PASS (9 pages, 235/235 lines).
+- No latex engine for this folder.
