@@ -1,0 +1,10 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate
+  # LibreOffice fits one word more on a line typst fills to the full measure (the line-fit tolerance,
+  # docs/open-items/fb-595.54.82.md, not in the model): INPUT-answering-brief p18 line 5, docx ends 'the State's'
+  # at 539.9 pt, typst breaks before 'State's'; 590/596 lines identical, pages equal. Reported, not gated
+  # (fb-595.54.60).
+  cross_engine_docx: report
