@@ -195,7 +195,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, S.D. New York](courts/second-circuit/new-york/federal/southern-district) | `nysd` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. New York](courts/second-circuit/new-york/federal/western-district) | `nywd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Appellate Terms of the Supreme Court of New York](courts/second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | up for review | 3/3 | 3/3 | 3/3 | 29 |
-| [New York Court of Appeals](courts/second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | 1/1 | 3/3 | 29 |
+| [New York Court of Appeals](courts/second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | 7/7 | 7/7 | 29 |
 | [The Four Departments of the Appellate Division](courts/second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 3/3 | 29 |
 
 ### Vermont

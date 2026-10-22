@@ -59,7 +59,7 @@ Courts under `courts` (346).
 | [Connecticut Court of Appeals](second-circuit/connecticut/state/court-of-appeals) | `connappct` | up for review | 6/6 | 6/6 | 5/5 | 29 |
 | [Connecticut Supreme Court](second-circuit/connecticut/state/supreme-court) | `conn` | up for review | 7/7 | 6/6 | 6/6 | 29 |
 | [Appellate Terms of the Supreme Court of New York](second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | up for review | 3/3 | 3/3 | 3/3 | 29 |
-| [New York Court of Appeals](second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | 1/1 | 3/3 | 29 |
+| [New York Court of Appeals](second-circuit/new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | 7/7 | 7/7 | 29 |
 | [The Four Departments of the Appellate Division](second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | — | 3/3 | 29 |
 | [Supreme Court of Vermont](second-circuit/vermont/state/supreme-court) | `vt` | up for review | 4/4 | 1/1 | 1/1 | 29 |
 | [Court of Appeals for the Third Circuit](third-circuit/court-of-appeals) | `ca3` | up for review | 3/3 | 3/3 | 3/3 | 14 |
