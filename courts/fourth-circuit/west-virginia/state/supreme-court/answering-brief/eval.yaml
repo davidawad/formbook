@@ -1,0 +1,7 @@
+# West Virginia respondent's brief (rules.md WVA-LEN-001): 40 pages, excluding the cover, tables and certificate of
+# service (RAP 38(c)); DEF-LEN-001 counts every page of the PDF, so no page_limit is set here.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+params:
+  cross_engine: gate

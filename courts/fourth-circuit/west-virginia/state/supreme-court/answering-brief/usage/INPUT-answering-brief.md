@@ -20,34 +20,34 @@ service:
   method: "by electronic filing through the Court's electronic filing system (File & ServeXpress)"
   date: "April 22, 2024"
 authorities:
-  blankenship: {kind: case, name: "Blankenship v. Ethicon, Inc.", cite: "221 W.Va. 700, 656 S.E.2d 451 (2007)"}
-  gaujot: {kind: case, name: "State ex rel. Morgantown Operating Company, LLC v. Gaujot", cite: "245 W.Va. 415, 859 S.E.2d 358 (2021)"}
-  damron: {kind: case, name: "Damron v. Primecare Medical of West Virginia, Inc.", cite: "No. 20-0862, 2022 WL 2078178 (W.Va. June 9, 2022)"}
-  haynes: {kind: case, name: "Haynes v. Yale-New Haven Hospital", cite: "699 A.2d 964 (Conn. 1997)"}
-  manor: {kind: case, name: "Manor Care, Inc. v. Douglas", cite: "234 W.Va. 57, 763 S.E.2d 73 (2014)"}
-  mcdavid: {kind: case, name: "McDavid v. United States", cite: "213 W.Va. 592, 584 S.E.2d 226 (2003)"}
-  mills: {kind: case, name: "Mills v. Van Kirk", cite: "192 W.Va. 695, 453 S.E.2d 678 (1994)"}
-  minnich: {kind: case, name: "Minnich v. MedExpress Urgent Care, Inc. – West Virginia", cite: "238 W.Va. 533, 796 S.E.2d 642"}
-  camc: {kind: case, name: "State ex rel. Charleston Area Medical Center, Inc. v. Thompson", cite: "248 W.Va. 351, 888 S.E.2d 852 (2023)"}
-  copper: {kind: case, name: "State ex rel. Morrisey v. Copper Beech Townhome Communities Twenty-Six, LLC", cite: "239 W.Va. 741, 806 S.E.2d 172 (2017)"}
-  faircloth: {kind: case, name: "State ex rel. PrimeCare Medical of West Virginia, Inc. v. Faircloth", cite: "242 W.Va. 335, 835 S.E.2d 579 (2019)"}
-  tucker: {kind: case, name: "State ex rel. Tucker County Solid Waste Authority v. West Virginia Div. of Labor", cite: "222 W.Va. 588, 668 S.E.2d 217 (2008)"}
-  scott: {kind: case, name: "State ex rel. West Virginia University Hospitals, Inc. v. Scott", cite: "246 W.Va. 184, 866 S.E.2d 350 (2021)"}
-  vanderbilt: {kind: case, name: "Vanderbilt Mortg. & Fin., Inc. v. Cole", cite: "230 W.Va. 505, 740 S.E.2d 562 (2013)"}
-  wamsley: {kind: case, name: "Wamsley v. LifeNet Transplant Servs. Inc.", cite: "No. 2:10-cv-00990, 2011 WL 5520245 (S.D.W. Va. Nov. 10, 2011)"}
-  wilson: {kind: case, name: "Wilson v. Wiggin", cite: "77 W.Va. 1, 87 S.E. 92 (1915)"}
-  s46a-1-102: {kind: statute, name: "W. Va. Code § 46A-1-102"}
-  s46a-5-101: {kind: statute, name: "W. Va. Code § 46A-5-101"}
-  s46a-5-104: {kind: statute, name: "W. Va. Code § 46A-5-104"}
-  s46a-6-101: {kind: statute, name: "W. Va. Code § 46A-6-101"}
-  s46a-6-102: {kind: statute, name: "W. Va. Code § 46A-6-102"}
-  s46a-6-104: {kind: statute, name: "W. Va. Code § 46A-6-104"}
-  s51-1a-4: {kind: statute, name: "W. Va. Code § 51-1A-4"}
-  s55-7b-1: {kind: statute, name: "W. Va. Code § 55-7B-1"}
-  s55-7b-2: {kind: statute, name: "W. Va. Code § 55-7B-2"}
-  s55-7b-3: {kind: statute, name: "W. Va. Code § 55-7B-3"}
-  s55-7b-4: {kind: statute, name: "W. Va. Code § 55-7B-4"}
-  s55-7b-6: {kind: statute, name: "W. Va. Code § 55-7B-6"}
+  blankenship: {kind: case, name: "*Blankenship v. Ethicon, Inc.*", cite: "221 W.Va. 700, 656 S.E.2d 451 (2007)"}
+  gaujot: {kind: case, name: "*State ex rel. Morgantown Operating Company, LLC v. Gaujot*", cite: "245 W.Va. 415, 859 S.E.2d 358 (2021)"}
+  damron: {kind: case, name: "*Damron v. Primecare Medical of West Virginia, Inc.*", cite: "No. 20-0862, 2022 WL 2078178 (W.Va. June 9, 2022)"}
+  haynes: {kind: case, name: "*Haynes v. Yale-New Haven Hospital*", cite: "699 A.2d 964 (Conn. 1997)"}
+  manor: {kind: case, name: "*Manor Care, Inc. v. Douglas*", cite: "234 W.Va. 57, 763 S.E.2d 73 (2014)"}
+  mcdavid: {kind: case, name: "*McDavid v. United States*", cite: "213 W.Va. 592, 584 S.E.2d 226 (2003)"}
+  mills: {kind: case, name: "*Mills v. Van Kirk*", cite: "192 W.Va. 695, 453 S.E.2d 678 (1994)"}
+  minnich: {kind: case, name: "*Minnich v. MedExpress Urgent Care, Inc. – West Virginia*", cite: "238 W.Va. 533, 796 S.E.2d 642"}
+  camc: {kind: case, name: "*State ex rel. Charleston Area Medical Center, Inc. v. Thompson*", cite: "248 W.Va. 351, 888 S.E.2d 852 (2023)"}
+  copper: {kind: case, name: "*State ex rel. Morrisey v. Copper Beech Townhome Communities Twenty-Six, LLC*", cite: "239 W.Va. 741, 806 S.E.2d 172 (2017)"}
+  faircloth: {kind: case, name: "*State ex rel. PrimeCare Medical of West Virginia, Inc. v. Faircloth*", cite: "242 W.Va. 335, 835 S.E.2d 579 (2019)"}
+  tucker: {kind: case, name: "*State ex rel. Tucker County Solid Waste Authority v. West Virginia Div. of Labor*", cite: "222 W.Va. 588, 668 S.E.2d 217 (2008)"}
+  scott: {kind: case, name: "*State ex rel. West Virginia University Hospitals, Inc. v. Scott*", cite: "246 W.Va. 184, 866 S.E.2d 350 (2021)"}
+  vanderbilt: {kind: case, name: "*Vanderbilt Mortg. & Fin., Inc. v. Cole*", cite: "230 W.Va. 505, 740 S.E.2d 562 (2013)"}
+  wamsley: {kind: case, name: "*Wamsley v. LifeNet Transplant Servs. Inc.*", cite: "No. 2:10-cv-00990, 2011 WL 5520245 (S.D.W. Va. Nov. 10, 2011)"}
+  wilson: {kind: case, name: "*Wilson v. Wiggin*", cite: "77 W.Va. 1, 87 S.E. 92 (1915)"}
+  s46a-1-102: {kind: statute, cite: "W. Va. Code § 46A-1-102"}
+  s46a-5-101: {kind: statute, cite: "W. Va. Code § 46A-5-101"}
+  s46a-5-104: {kind: statute, cite: "W. Va. Code § 46A-5-104"}
+  s46a-6-101: {kind: statute, cite: "W. Va. Code § 46A-6-101"}
+  s46a-6-102: {kind: statute, cite: "W. Va. Code § 46A-6-102"}
+  s46a-6-104: {kind: statute, cite: "W. Va. Code § 46A-6-104"}
+  s51-1a-4: {kind: statute, cite: "W. Va. Code § 51-1A-4"}
+  s55-7b-1: {kind: statute, cite: "W. Va. Code § 55-7B-1"}
+  s55-7b-2: {kind: statute, cite: "W. Va. Code § 55-7B-2"}
+  s55-7b-3: {kind: statute, cite: "W. Va. Code § 55-7B-3"}
+  s55-7b-4: {kind: statute, cite: "W. Va. Code § 55-7B-4"}
+  s55-7b-6: {kind: statute, cite: "W. Va. Code § 55-7B-6"}
 ---
 
 
@@ -184,7 +184,7 @@ Cf. W. Va. Code §§ [55-7B-1](toa:s55-7b-1) (stating that the MPLA reforms the 
 
 Appellant seeks to avoid the MPLA, including its procedural requirements, damages caps, and two-year statute of limitation, by recasting her medical professional liability claims as “a consumer case” arising from Valley Health’s “advertising and billing practices.” JA 146, 148. See also Appellant Br. at 1 (characterizing this case as “a run of the [mill] billing dispute”). Specifically, Appellant seeks to turn this case into a class action for over $6 million in damages, plus statutory penalties and attorneys’ fees, under the unfair and deceptive acts or practices (“UDAP”) provisions of the WVCCPA, which “is among the most ambiguous provisions of the consumer protection act.” State ex rel. Morrisey v. Copper Beech Townhome Communities Twenty-Six, LLC, 239 W. Va. 741, 750-751, 806 S.E.2d 172, 181-182 (2017). See also JA 10-12 (alleging violations of W. Va. Code §§ 46A-6-102 & 46A-6-104).
 
-Again, Appellant “cannot avoid the MPLA with creative pleading.” [Scott](toa:scott), 866 S.E.2d at 359. Underlying her references to “advertising” and “billing” is a medical professional liability claim based on substandard mammography services. The WVCCPA was never intended to regulate claims that implicate the provision of “health care” to a “patient” and depend upon proof that a “health care provider” failed to follow the accepted standard of care – those claims are specifically and extensively regulated by the MPLA. Appellant has not, and cannot, cite a single West Virginia case in which a plaintiff has been permitted to bring a claim under the WVCCPA that is premised on substandard health care services. In fact, this Court has already rejected attempts to recast MPLA claims as violations of the UDAP provisions of the WVCCPA, and it should again reject such efforts in this case. [Blankenship](toa:blankenship), 656 S.E.2d at 454, 456-459 (plaintiff’s claims for “violations of the West Virginia Consumer Credit and Protection Act, W.Va. Code§ 46[A]-6-101 et seq.” fell within the MPLA).
+Again, Appellant “cannot avoid the MPLA with creative pleading.” [Scott](toa:scott), 866 S.E.2d at 359. Underlying her references to “advertising” and “billing” is a medical professional liability claim based on substandard mammography services. The WVCCPA was never intended to regulate claims that implicate the provision of “health care” to a “patient” and depend upon proof that a “health care provider” failed to follow the accepted standard of care – those claims are specifically and extensively regulated by the MPLA. Appellant has not, and cannot, cite a single West Virginia case in which a plaintiff has been permitted to bring a claim under the WVCCPA that is premised on substandard health care services. In fact, this Court has already rejected attempts to recast MPLA claims as violations of the UDAP provisions of the WVCCPA, and it should again reject such efforts in this case. [Blankenship](toa:blankenship), 656 S.E.2d at 454, 456-459 (plaintiff’s claims for “violations of the West Virginia Consumer Credit and Protection Act, W.Va. Code § 46[A]-6-101 et seq.” fell within the MPLA).
 
 ### 1. The Ambiguous UDAP Provisions of the WVCCPA Do Not Apply to Medical Professional Liability Claims.
 
@@ -212,7 +212,7 @@ Appellant concludes by declaring that Valley Health seeks “the limitless appli
 
 A claim “must be in the overall context of rendering health care services” to fall within the MPLA. See [Scott](toa:scott), 246 W. Va. at 194. Appellant’s claim obviously meets this criteria: as stated by the district court, “her claims clearly arise from alleged deficient health care she received, which occurred in the context of medical professional liability.” JA 125. The Fourth Circuit correctly articulated the material difference between Appellant’s MPLA claim and a true “run of the [mill] billing dispute” that would fall outside of the Act: “[a] claim for an erroneously high copay charge, for example … might not constitute an anchor claim under [Scott](toa:scott) because it does not implicate a medical judgment.” JA 305. Cf. Appellant Br. at 1. Appellant’s straw man is easily addressed because the “absurd results” she offers do not arise “in the overall context of rendering health care services” and do not “implicate a medical judgment.” Simply put, driving a hospital van does not implicate a medical judgment. See, e.g., Appellant Br. at 23. A claim that a patient was billed twice for services does not require proof that the underlying “health care” rendered to the “patient” did not meet the standard of care. Id. A claim on a hospital’s bond is governed by the terms and conditions of the bond. Id. at 24. The distinguishing factor is not whether a plaintiff seeks “an economic injury” as Appellant claims, but whether the facts that proximately caused the injury “arise from ‘health care’ rendered to ‘a patient’” and implicate a medical judgment.
 
-This is consistent with the Legislature’s intent. As this Court noted in [Scott](toa:scott), “one would be remiss to ignore the legislative pathway of the MPLA.” 246 W. Va. at 193. The Legislature specifically defined “medical professional liability” to encompass “any liability for damages,” under any theory of liability (i.e., “death or injury of a person for any tort,” “breach of contract,” and “other claims that may be contemporaneous to or related to the alleged tort or breach of contract”), so long as the claim is “based on health care services rendered, or which should have been rendered, by a health care provider or health care facility to a patient.” W. Va. Code § 55- 7B-2(i). The Legislature, as it did in 2015 in the wake of [Manor Care](toa:manor) and again in 2022 in the wake of [Gaujot](toa:gaujot), has made it crystal clear that the MPLA is the exclusive remedy for all claims that “arise[] from ‘health care’ rendered to ‘a patient.’” [Thompson](toa:camc), 248 W. Va. at 358. Appellant’s claim for breach of contract is no different just because she is disclaiming physical injury.
+This is consistent with the Legislature’s intent. As this Court noted in [Scott](toa:scott), “one would be remiss to ignore the legislative pathway of the MPLA.” 246 W. Va. at 193. The Legislature specifically defined “medical professional liability” to encompass “any liability for damages,” under any theory of liability (i.e., “death or injury of a person for any tort,” “breach of contract,” and “other claims that may be contemporaneous to or related to the alleged tort or breach of contract”), so long as the claim is “based on health care services rendered, or which should have been rendered, by a health care provider or health care facility to a patient.” W. Va. Code § 55-7B-2(i). The Legislature, as it did in 2015 in the wake of [Manor Care](toa:manor) and again in 2022 in the wake of [Gaujot](toa:gaujot), has made it crystal clear that the MPLA is the exclusive remedy for all claims that “arise[] from ‘health care’ rendered to ‘a patient.’” [Thompson](toa:camc), 248 W. Va. at 358. Appellant’s claim for breach of contract is no different just because she is disclaiming physical injury.
 
 What is decidedly inconsistent with the Legislature’s intent, and what would lead to absurd results, is allowing a “consumer” class action for over $6 million, plus statutory penalties and attorneys’ fees, to proceed outside of the MPLA when the actual conduct at issue arises from the provision of “health care” (i.e., mammograms) to a “patient.” The MPLA is designed to limit the risk of outsize legal liability against health care providers, and thereby stabilize the cost and improve the quality of health care in West Virginia, by ensuring that medical malpractice claims proceed within certain parameters. To accomplish these goals, among other provisions the MPLA requires claims to be brought within two years (or one year against nursing homes), requires pre- suit notice and a screening certificate of merit from a qualified expert, defines the qualifications required of experts, places caps on certain types of damages, requires adjustments to damages based on collateral sources, and establishes specialized trial procedures and evidentiary rules. See, e.g., W. Va. Code §§ [55-7B-4](toa:s55-7b-4) through 6c, 55-7B-7 through 9d. In contrast, the WVCCPA has a four-year statute of limitation, its pre-suit notice and opportunity to cure requirement does not require expert review like an MPLA screening certificate of merit, there are no qualifications for experts beyond those generally required by the Rules of Evidence, and in addition to actual damages plaintiffs can recover statutory penalties and attorneys’ fees and costs that are not available remedies under the MPLA. See W. Va. Code §§ [46A-5-101](toa:s46a-5-101), [46A-5-104](toa:s46a-5-104), and 46A-5- 108. Allowing Appellant to sue for “deceptive billing and advertising” under the WVCCPA, instead of medical professional liability under the MPLA, is contrary to the intent of the MPLA and would “amount to a judicial repeal” of the Act. See [Scott](toa:scott), 866 S.E.2d at 365.
 
