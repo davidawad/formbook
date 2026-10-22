@@ -58,36 +58,62 @@
 
 #let cover(meta) = {
   set par(leading: leading-single, spacing: leading-single, first-line-indent: 0pt)
-  align(center, text(weight: "bold", court-line))
-  v(0.6em)
-  align(center, text(weight: "bold", "DOCKET NO.: " + meta.case_number))
-  v(1.6em)
-  // The party named first is the appellant or petitioner in the trial or appellate record (Rule 2:6-6(a)).
-  caption-side(meta.caption.at(0))
-  v(0.8em)
-  block(width: 100%, [#h(0.5in) #versus])
-  v(0.8em)
-  caption-side(meta.caption.at(1))
-  if "nature" in meta [
-    #v(1.2em)
-    #block(width: 100%, [#meta.nature])
-  ]
-  if "below" in meta [
-    #v(1.2em)
-    #block(width: 100%, [On Appeal From:])
-    #block(width: 100%, [#h(0.5in)#lines-of(meta.below)])
-  ]
-  v(2.2em)
-  align(center, text(weight: "bold", meta.brief_title))
-  v(2.4em)
-  // Attorney of Record, On the Brief, then the counsel line. Counsel blocks stack one under another.
-  for g in meta.counsel [
+  // DEF-COVER-001: the caption is two columns (parties left; court, docket, nature and court below right), the NJ
+  // convention in both filed examples, so the R. 2:6-6(a) cover fits one page at 14 pt.
+  let parties = {
+    // The party named first is the appellant or petitioner in the trial or appellate record (Rule 2:6-6(a)).
+    caption-side(meta.caption.at(0))
+    v(0.8em)
+    block(width: 100%, [#h(0.5in) #versus])
+    v(0.8em)
+    caption-side(meta.caption.at(1))
+  }
+  let court = {
+    block(width: 100%, text(weight: "bold", court-line))
+    block(width: 100%, text(weight: "bold", "DOCKET NO.: " + meta.case_number))
+    if "nature" in meta [
+      #v(1.2em)
+      #block(width: 100%, [#meta.nature])
+    ]
+    if "below" in meta [
+      #v(1.2em)
+      #block(width: 100%, [On Appeal From:])
+      #lines-of(meta.below)
+    ]
+  }
+  let head = {
+    grid(columns: (1fr, 1fr), column-gutter: 0.3in, parties, court)
+    v(2.2em)
+    align(center, text(weight: "bold", meta.brief_title))
+    v(2.4em)
+  }
+  // Attorney of Record, On the Brief, then the counsel line.
+  let group(g) = block(width: 100%, breakable: false, below: 1.2em)[
     #if "heading" in g [#block(width: 100%, text(weight: "bold", g.heading))]
     #lines-of(g.names)
     #lines-of(g.lines)
-    #v(1.2em)
   ]
-  lines-of((meta.counsel_for,))
+  let n-lines(g) = g.names.len() + g.lines.len() + if "heading" in g { 1 } else { 0 }
+  let groups = meta.counsel
+  layout(size => {
+    let stacked = { for g in groups { group(g) }; lines-of((meta.counsel_for,)) }
+    if measure(block(width: size.width, { head; stacked })).height <= size.height {
+      head
+      stacked
+    } else {
+      // DEF-COVER-001: counsel blocks that do not fit stacked sit in two columns, split where the columns balance.
+      let cost(k) = calc.max(groups.slice(0, k).map(n-lines).sum(default: 0), groups.slice(k).map(n-lines).sum(default: 0))
+      let k = range(1, calc.max(groups.len(), 2)).sorted(key: cost).first()
+      head
+      grid(
+        columns: (1fr, 1fr),
+        column-gutter: 0.3in,
+        for g in groups.slice(0, k) { group(g) },
+        for g in groups.slice(k) { group(g) },
+      )
+      lines-of((meta.counsel_for,))
+    }
+  })
 }
 
 // ---- Table of authorities (R. 2:6-2(a)(5)): a link whose target is `toa:KEY` in the body is recorded with its page;
@@ -209,6 +235,7 @@
   ]
   page(numbering: "i", footer: folio)[
     #show: style-body
+    #counter(page).update(1) // front matter starts at i after the unnumbered cover, as both filed examples print
     #front-title[TABLE OF CONTENTS]
     #outline(title: none, depth: 3, indent: 0pt)
   ]
