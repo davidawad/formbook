@@ -26,6 +26,12 @@
 \providecommand{\hyperlink}[2]{#2}
 \providecommand{\tightlist}{}
 \providecommand{\pandocbounded}[1]{#1}
+% The ellipsis character (U+2026) as the font's own glyph, one em wide like Times New Roman's (typst and Word set the
+% character; \ldots sets three spaced periods): T1 has no ellipsis, LY1 has it at 133 (newtx ships LY1 fonts; the
+% encoding is declared bare, as TeX Live's basic scheme has no ly1enc.def).
+\DeclareFontEncoding{LY1}{}{}
+\DeclareFontSubstitution{LY1}{ntxtlf}{m}{n}
+\newcommand\caellipsis{{\fontencoding{LY1}\selectfont\char133}}
 
 \makeatletter
 % Line boxes [typst pitch-double, pitch-single, pitch-note]: CA5-FORM-004 double spacing, 30.8 bp, for the text;
@@ -38,14 +44,20 @@
 \setlength{\parindent}{0.5in} % after xengine.sty's \raggedright, which sets it to zero
 \setcounter{secnumdepth}{-\maxdimen}
 \xe@lists{0.5in}
+% Widows and orphans are allowed, as in the typst template: typst's widow control moves a line to the next page but
+% leaves that line's footnote behind (a note on the page before its reference), so the template turns it off.
+\clubpenalty=0
+\widowpenalty=0
+\displaywidowpenalty=0
 % The page number in the 14 bp type, single-spaced.
 \def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
   \def\@oddfoot{\reset@font\singlespacing\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}
 \pagestyle{plain}
 
-% Footnotes [footnote.entry]: 14 bp clear of the text, a 30 % rule, 7 bp between notes; the mark (58 % of the note's
-% 12 pt) and a quarter em before the text. LaTeX resets the right skip inside a footnote: it is set back here.
-\setlength{\skip\footins}{14bp}
+% Footnotes [footnote.entry]: a 30 % rule 14 bp clear of the text, 7 bp between notes (each note opens with its 7 bp
+% \parskip, so \skip\footins is the other 7 bp of the clearance); the mark (58 % of the note's 12 pt) and a quarter
+% em before the text. LaTeX resets the right skip inside a footnote: it is set back here.
+\setlength{\skip\footins}{7bp}
 \renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
 \xe@footnotemarks{14}
 \newcommand\ca@notemark[1]{\raisebox{\fpeval{0.29*12}bp}{\fontsize{\fpeval{0.58*12}bp}{0bp}\selectfont #1}}
@@ -56,13 +68,14 @@
 \renewenvironment{quote}{%
   \par\addvspace{14bp}%
   \begingroup\leftskip=0.5in\rightskip=\dimexpr0.5in\relax plus 1fil\relax\singlespacing\parindent=0pt\relax
-  \parskip=7bp\relax
+  \parskip=7bp\relax\vskip-7bp\relax % the first paragraph's \parskip: 14 bp above it, not 21
 }{%
   \par\endgroup\addvspace{14bp}%
 }
 
-% A centered single-spaced cover line, #1 bp clear of the line before.
-\newcommand\caline[2]{\par\addvspace{#1bp}\begingroup\centering\singlespacing\noindent #2\par\endgroup}
+% A centered single-spaced cover line, #1 bp clear of the line before; the gap closes when the cover would not fit
+% its page (typst: the gaps close when the lines with them are taller than the page).
+\newcommand\caline[2]{\par\addvspace{#1bp minus #1bp}\begingroup\centering\singlespacing\noindent #2\par\endgroup}
 
 % Headings. Level 1 [heading level 1]: centered bold capitals at 16 bp, 28 bp above and 12.6 bp below; #2 the TOC label.
 \newcommand\caone[2]{%

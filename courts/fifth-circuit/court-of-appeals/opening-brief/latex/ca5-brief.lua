@@ -12,6 +12,29 @@ local xe_inlines = require('latex.xengine').inlines
 local function raw(s) return pandoc.RawBlock('latex', s) end
 local function rawi(s) return pandoc.RawInline('latex', s) end
 
+-- Two more inline rules of this template: the ellipsis character as the font's glyph (\caellipsis, template.tex), and a
+-- hard line break that stays inside its paragraph (\raggedright's \\ ends the paragraph, and the next would indent).
+local function ca_inlines(l)
+  local out = pandoc.Inlines({})
+  for _, el in ipairs(l) do
+    if el.t == 'Str' and el.text:find('\u{2026}', 1, true) then
+      local first = true
+      for part in (el.text .. '\u{2026}'):gmatch('(.-)\u{2026}') do
+        if not first then out:insert(rawi('\\caellipsis{}')) end
+        if part ~= '' then out:insert(pandoc.Str(part)) end
+        first = false
+      end
+    elseif el.t == 'LineBreak' then
+      out:insert(rawi('\\newline{}'))
+    else
+      out:insert(el)
+    end
+  end
+  return out
+end
+local xe_base = xe_inlines
+xe_inlines = function(l) return ca_inlines(xe_base(l)) end
+
 local function trim(s) return (s:gsub('^%s+', ''):gsub('%s+$', '')) end
 local function norm(s) return trim(s):lower() end
 
@@ -23,8 +46,8 @@ end
 
 -- Inlines -> LaTeX, with the cross-engine inline rules.
 local function inl_tex(inlines)
-  local s = pandoc.write(pandoc.Pandoc({ pandoc.Plain(xe_inlines(pandoc.Inlines(inlines))) }), 'latex')
-  return trim(s)
+  local d = pandoc.Pandoc({ pandoc.Plain(pandoc.Inlines(inlines)) }):walk({ Inlines = xe_inlines })
+  return trim(pandoc.write(d, 'latex'))
 end
 
 -- Metadata value -> LaTeX. Frontmatter strings are markdown (italics, dashes), so they go through pandoc.

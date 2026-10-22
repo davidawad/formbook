@@ -21,7 +21,7 @@ sh tools/render.sh courts/fifth-circuit/court-of-appeals/reply-brief usage/INPUT
 sh tools/overlay.sh courts/fifth-circuit/court-of-appeals/reply-brief fisher-reply-brief
 ```
 
-Typst runs with the vendored fonts only (`--ignore-system-fonts`); any typst warning fails the render. The font is EB Garamond (`fonts/eb-garamond/`), and cmarker 0.1.10 is vendored under `vendor/typst-packages/`. Both are the same choices as the ca5 opening-brief template.
+Typst runs with the vendored fonts only (`--ignore-system-fonts`); any typst warning fails the render. The font is Times New Roman (vendored under `fonts/`), and cmarker 0.1.10 is vendored under `vendor/typst-packages/`. Both are the same choices as the ca5 opening-brief template.
 
 ## Typeface (fonts pass, 2026-10-14)
 
@@ -29,7 +29,7 @@ Typst runs with the vendored fonts only (`--ignore-system-fonts`); any typst war
 |---|---|---|---|
 | CA5-FORM-005: proportionally spaced serif, 14 pt text, 12 pt footnotes (FRAP 32(a)(5)-(6); Checklist 2(a), 2(d)) | None. FRAP 32(a)(5)(A)-(B) allows any proportionally spaced face with serifs; Form 6 asks only for the program and font used. The local rule (5th Cir. R. 32.3) text was not fetched. | None needed: EB Garamond (`fonts/eb-garamond/`) kept | n/a (no court-named face; `docs/FONTS.md` "No face named") |
 
-The rules name no face, so the template keeps EB Garamond in typst, latex and docx. The filed exemplar is set in Century Schoolbook; the rules allow it but do not require it, so the difference is a tier-2 visual choice, not a rule failure. Checked on the typst render: `pdffonts` lists only `EBGaramond` (Regular, Bold, Italic) and nothing else is embedded.
+The rules name no face; the template sets Times New Roman (newtx in LaTeX, metric-compatible) in typst, latex and docx.
 
 ## Governing rules
 
@@ -109,7 +109,7 @@ Defects found and fixed during the first review (2026-10-14): none needed a chan
 - **Cover colour and paper** (checklist 3(b)-(c), 4): gray cover, spiral binding and the paper-copy count are paper requirements and are not produced.
 - **Word limit vs page limit**: the checklist allows a reply of 15 pages, 650 lines or 6,500 words. The template enforces the word option only. The 15-page option is not checked; a reply that uses it and exceeds 6,500 words will not build, which is the correct result under the word option but must be read against the page option when counsel files under it.
 - **Record references** are typed by the author (`ROA.1177`); the template does not validate them.
-- **Certificate typeface statement** names EB Garamond 14 point and footnotes 12 point, as the template sets them. If a different face is used in filing, the statement must change.
+- **Certificate typeface statement** states 14-point text and 12-point footnotes, as the template sets them. If a different face is used in filing, the statement must change.
 - **Word count**: the certificate of compliance uses the count computed from the markdown, not the PDF. Counsel must check it against the word processor before filing.
 - **Not run**: `tools/check.sh` and `tools/check-selftest.sh` (no check contract exists for this doc type yet).
 
@@ -135,5 +135,13 @@ Defects found and fixed during the first review (2026-10-14): none needed a chan
 
 ## Engines
 
-- **latex** (`latex/template.tex`, `latex/ca5-brief.lua`; `sh tools/render.sh --engine latex`): matches the typst form for the mandated items: EB Garamond from `fonts/` (`fontdir`), 14 pt text, 12 pt footnotes, 30.8 pt double pitch, 17 pt single pitch for headings, quotations and certificates, 1 in margins, letter paper, roman front pages and arabic body from 1, certificates on their own pages, TOC and TOA built from the headings and `toa:` citations (two tectonic passes). Differs: the TOA page list is read from the previous pass, so it settles on the second run; the word count is computed from the markdown body and may differ from typst by a few words. Open tier-1 findings: see the PR description and the Gate 2 review rows.
-- **docx** (`docx/reference.docx`, built by `docx/make-reference.sh`; `docx/ca5-docx.lua`): styles only (font, sizes, spacing, margins, heading styles). BLOCKED: `<id>.docx.pdf` (no LibreOffice on this box: `soffice` not found, and conda-forge has no package), so Gates 0 and 1 cannot run on the docx. Not in the docx yet: the cover and caption layout, the front statements from frontmatter, the TOC and TOA (TOA citations are plain text), heading numbering labels, the page-number footer, and the generated certificates of service and compliance from frontmatter (the body certificates are in).
+All three engines run on the shared cross-engine layout model (fb-595.54.3; `lib/typst/xengine.typ`, `lib/latex/xengine.sty`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): Times New Roman (newtx in LaTeX) 14 pt in 30.8 pt line boxes for the text, 17 pt boxes for headings, quotations, tables, the cover, the signature and the certificate of interested persons, 12 pt footnotes in 14 pt boxes; first-fit line breaking, no kerning, ligatures or hyphenation; the spaces between blocks in pt. A paragraph's first line is indented only after another paragraph (typst's rule), in every engine. `eval.yaml` sets `params.cross_engine: gate`: the latex and docx renders must break every line and page where the typst render does (XENG-001..003 PASS on both: 10 pages, 202 of 202 lines).
+
+Choices the three engines share, beyond the model:
+- **Widows and orphans are allowed.** typst's widow control moves a line to the next page but leaves that line's footnote behind (seen on the reply brief: footnote 2 on the page before its reference), so the typst template turns it off (`costs: (widow: 0%, orphan: 0%)`), and LaTeX (`\clubpenalty`, `\widowpenalty` 0) and Word (widow control off in `reference.docx`) follow.
+- **The cover fits one page.** When the cover's lines with their gaps are taller than the page (a long caption), every gap shrinks alike as far as needed: typst measures, LaTeX's gaps are shrinkable glue, and the docx filter scales them from an estimate of the cover's lines that errs high (so its cover can be tighter than typst's). The counsel stand at the foot of the page (typst `v(1fr)`, LaTeX `\vfill`; Word has no fill, so the gap above them is what the estimate leaves).
+- **The word count** in the certificate of compliance is the typst template's count-words on the markdown source of the main sections, computed the same way by the LaTeX and docx filters, so every engine certifies the same number.
+
+- **typst** (`typst/ca5-reply-brief.typ`): the reference. A loose list (blank lines between the items) is set by the template's own list rule (the number in a half-inch box, the text hanging), as xengine's list rule cannot hold an item's paragraph break.
+- **latex** (`latex/template.tex`, `latex/ca5-brief.lua`; pdflatex): cover, front statements, TOC (`\pageref`) and TOA (pages written to the aux file at shipout) built from the headings and `toa:` citations. The ellipsis character is the font's own glyph (LY1 slot 133), not `\ldots`; a hard line break stays inside its paragraph (`\newline`).
+- **docx** (`docx/render.sh`, `docx/ca5-docx.lua`, `docx/reference.docx` built by `docx/make-reference.sh` on `lib/docx/xengine-reference.sh`): the cover, headings with their labels, TOC and TOA, signature blocks and certificates are written by the filter; sections (cover unnumbered, front matter lower roman, body arabic from 1) and footers by `render.sh`. The TOC and TOA page numbers come from a first LibreOffice pass (`docx/pagemap.awk`), and a second pass must give the same numbers. Differs from typst (tier 2, no line or page break moves): the cover's vertical spacing (above); a TOC/TOA page number sits at the right margin after the leader (Word's right tab) rather than right-aligned in its column.

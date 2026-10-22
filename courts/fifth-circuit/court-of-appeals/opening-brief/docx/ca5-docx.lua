@@ -172,7 +172,8 @@ end
 -- one paragraph: style, inlines, extra pPr elements in schema order, run format
 local function P(style, il, extra, f)
   local out = {}
-  inl_xml(xe.inlines(pandoc.Inlines(il)), f or {}, out)
+  local d = pandoc.Pandoc({ pandoc.Plain(pandoc.Inlines(il)) }):walk({ Inlines = xe.inlines })
+  inl_xml(d.blocks[1].content, f or {}, out)
   return pandoc.RawBlock('openxml', '<w:p><w:pPr><w:pStyle w:val="' .. style .. '"/>' .. (extra or '') .. '</w:pPr>'
     .. table.concat(out) .. '</w:p>')
 end
@@ -245,11 +246,9 @@ end
 -- ---------------------------------------------------------------------------
 
 local function cover(meta, out)
-  local lines = 0   -- an estimate of the cover's height in lines, for the gap above the counsel
-  local function line(before, il, f)
-    out[#out + 1] = P('CA5Centered', il, sp(before, 0), f)
-    lines = lines + math.ceil(math.max(1, #plain(il)) / 70) + before / 340
-  end
+  -- the lines: {gap above in twips, inlines, run format, counsel}
+  local L = {}
+  local function line(before, il, f, counsel) L[#L + 1] = { before, il, f, counsel } end
   line(0, cat('No. ', minl(meta.case_number)))
   line(360, cat('In the United States Court of Appeals for the Fifth Circuit'))
   local sides = meta.caption or {}
@@ -260,23 +259,27 @@ local function cover(meta, out)
   end
   line(312, minl(meta.proceeding))
   line(360, minl(meta.brief_title), { b = true })
-  local tail = 0
   for gi, g in ipairs(meta.counsel or {}) do
-    tail = tail + #(g.names or {}) + #(g.lines or {}) + (gi > 1 and 140 / 340 or 0)
+    for j, n in ipairs(g.names or {}) do line((j == 1 and gi > 1) and 140 or 0, minl(n), nil, j == 1 and gi == 1) end
+    for _, l in ipairs(g.lines or {}) do line(0, minl(l)) end
   end
-  if meta.date then tail = tail + 1 + 280 / 340 end
+  if meta.date then line(280, minl(meta.date)) end
+  -- An estimate of the cover's height (a line of the text width holds about 70 characters; the estimate errs
+  -- high, and one line is kept spare): typst shrinks every gap alike as far as the page needs, and so does this.
+  local lines, gaps = 0, 0
+  for _, x in ipairs(L) do
+    lines = lines + math.ceil(math.max(1, #plain(x[2])) / 70)
+    gaps = gaps + x[1]
+  end
+  local cap = 12960 / 340   -- the page's text height (9 in) in single-spaced lines
+  local s = 1
+  if gaps > 0 then s = math.min(1, math.max(0, (cap - lines - 1) * 340 / gaps)) end
   -- typst sets the counsel at the foot of the page (v(1fr)); Word has no fill: the gap is what the page leaves
   -- after the estimated lines, less one line to spare
-  local gap = math.max(280, math.floor((648 / 17 - lines - tail - 1) * 340))
-  for gi, g in ipairs(meta.counsel or {}) do
-    for j, n in ipairs(g.names or {}) do
-      local before = 0
-      if gi == 1 and j == 1 then before = gap elseif j == 1 then before = 140 end
-      out[#out + 1] = P('CA5Centered', minl(n), sp(before, 0))
-    end
-    for _, l in ipairs(g.lines or {}) do out[#out + 1] = P('CA5Centered', minl(l), sp(0, 0)) end
+  local fill = math.max(0, math.floor((cap - lines - s * gaps / 340 - 1) * 340))
+  for _, x in ipairs(L) do
+    out[#out + 1] = P('CA5Centered', x[2], sp(x[4] and fill or math.floor(x[1] * s), 0), x[3])
   end
-  if meta.date then out[#out + 1] = P('CA5Centered', minl(meta.date), sp(280, 0)) end
   out[#out + 1] = pandoc.RawBlock('openxml', '<w:p><w:pPr>' .. SECT_LINE .. SECT_COVER .. '</w:pPr></w:p>')
 end
 

@@ -139,29 +139,39 @@
 
 /// Cover (CA5-CONT-003, 5th Cir. checklist 3(a)): case number, court, case title, nature of the
 /// proceeding and court below, brief title, counsel. The cover is one page; the spacing is the
-/// only thing that adapts.
+/// only thing that adapts: when the lines with their gaps would not fit, the gaps shrink alike as far
+/// as the page needs (a long caption), and the counsel stand at the foot of the page.
 /// One single-spaced line or paragraph of the cover, centered, `above` clear of the one before.
 #let cover-line(above, body) = block(width: 100%, above: above, below: 0pt, align(center, body))
 
-#let cover(meta) = {
+/// The cover's lines; every gap scaled by `s` (0 to 1), the counsel after a fill when `fill`.
+#let cover-body(meta, s, fill) = {
   set text(..edges(pitch-single))
   set par(first-line-indent: 0pt)
   cover-line(0pt)[No. #meta.case_number]
-  cover-line(18pt)[In the United States Court of Appeals for the Fifth Circuit]
+  cover-line(18pt * s)[In the United States Court of Appeals for the Fifth Circuit]
   for (i, side) in meta.caption.enumerate() {
-    for (j, n) in side.names.enumerate() { cover-line(if j == 0 { if i == 0 { 18pt } else { 8.4pt } } else { 0pt }, inl(n)) }
-    cover-line(2.8pt, inl(side.designation))
-    if i < meta.caption.len() - 1 { cover-line(8.4pt)[v.] }
+    for (j, n) in side.names.enumerate() { cover-line(if j == 0 { if i == 0 { 18pt * s } else { 8.4pt * s } } else { 0pt }, inl(n)) }
+    cover-line(2.8pt * s, inl(side.designation))
+    if i < meta.caption.len() - 1 { cover-line(8.4pt * s)[v.] }
   }
-  cover-line(15.6pt, inl(meta.proceeding))
-  cover-line(18pt, strong(inl(meta.brief_title)))
-  v(1fr)
+  cover-line(15.6pt * s, inl(meta.proceeding))
+  cover-line(18pt * s, strong(inl(meta.brief_title)))
+  if fill { v(1fr) }
   for (gi, g) in meta.counsel.enumerate() {
-    for (j, n) in g.names.enumerate() { cover-line(if j == 0 and gi > 0 { 7pt } else { 0pt }, inl(n)) }
+    for (j, n) in g.names.enumerate() { cover-line(if j == 0 and gi > 0 { 7pt * s } else { 0pt }, inl(n)) }
     for l in g.lines { cover-line(0pt, inl(l)) }
   }
-  if meta.at("date", default: none) != none { cover-line(14pt, meta.date) }
+  if meta.at("date", default: none) != none { cover-line(14pt * s, meta.date) }
 }
+
+#let cover(meta) = layout(size => {
+  let full = measure(block(width: size.width, cover-body(meta, 1, false))).height
+  let bare = measure(block(width: size.width, cover-body(meta, 0, false))).height
+  // the gaps shrink, all alike, as far as the page needs (LaTeX: shrinkable glue)
+  let s = if full <= size.height or full == bare { 1 } else { calc.max(0, (size.height - bare) / (full - bare)) }
+  cover-body(meta, s, true)
+})
 
 /// One single-spaced line of the signature, 3 in from the margin.
 #let sig-line(above, body) = block(width: 100%, above: above, below: 0pt, sticky: true,
@@ -285,6 +295,9 @@
   // boxes of the body pitch, footnote marks at 58 %, lists with the number in a half-inch box, a section sign kept
   // with its number, no break inside "60(b)(5)".
   show: xengine.with(pitch: pitch-double, list-indent: para-indent)
+  // Widows and orphans are allowed: typst's widow control moves a line to the next page but leaves that line's
+  // footnote behind (a note on the page before its reference). The latex and docx engines allow them too.
+  set text(costs: (widow: 0%, orphan: 0%))
   // A loose list (blank lines between the items) gives each item a paragraph break that xengine's list paragraph
   // cannot hold: the item is set as that one paragraph without it (the number in a half-inch box, the text hanging,
   // no space between items: the layout xengine and the other engines' "List Item" paragraphs set).

@@ -50,6 +50,8 @@ style('CA5Signature', 'CA5 Signature', 'Normal', '<w:keepNext/><w:keepLines/>' .
 # the certificate of interested persons: single-spaced, 7 pt between paragraphs
 style('CA5Cip', 'CA5 CIP', 'Normal', sp(140, 0) . '<w:ind w:firstLine="720"/>', '');
 style('CA5CipNoIndent', 'CA5 CIP No Indent', 'CA5Cip', '<w:ind w:firstLine="0"/>', '');
+# widows and orphans are allowed, as in the typst template (its widow control leaves a moved line's footnote behind)
+$s =~ s{<w:widowControl/>}{<w:widowControl w:val="0"/>}g or die "styles: no widow control to turn off";
 my $add = join('', @st);
 $s =~ s{</w:styles>}{$add</w:styles>} or die "styles: no end tag";
 open my $out, '>:encoding(UTF-8)', $file or die "styles: $!";
