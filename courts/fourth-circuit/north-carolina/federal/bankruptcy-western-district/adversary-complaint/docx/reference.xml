@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The W.D.N.C. Bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs)
+     in the face of the typst template ({font}, Times New Roman) at 12 pt (no complaint rule; the LR 9013-2(a) floor
+     for briefs; size 24 half points); Body Text in exact 24 pt line boxes (typst pitch-double: double spacing, as in
+     the exemplar) with a half-inch first-line indent, and the headings in them, 16 pt (320 twips) above and below;
+     the caption, quotations and signature in 14 pt boxes (typst pitch-single); letter page with 1-inch margins
+     (LR 9013-2(a), applied to the complaint) and a centered page number, its line 36.75 pt above the page foot
+     (735 twips: where typst sets it, footer-descent 30 %). docx/ncwb.lua writes every paragraph's own spacing.
+     Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="280" indent="720" heading="480" heading-before="320" heading-after="320" quote="120" footer="735" pandoc-from="markdown+smart-fancy_lists"/>
