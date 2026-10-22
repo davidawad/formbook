@@ -6,7 +6,8 @@ Doc type: **complaint commencing an adversary proceeding** in the United States 
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (one filer: a creditor-plaintiff; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-adversary-complaint.md`: the whole filed text (10 pages of exemplar), transcribed as filed |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf` and `.docx.pdf`, 9 pages each, typst 0.15.0, vendored Times New Roman only, no warnings, exit 0 |
+| checks | typst `RESULT: 9 checks passed, 0 failed`; docx `RESULT: 13 checks passed, 0 failed`, XENG-001..003 PASS (229/229 lines break alike), `params.cross_engine: gate` in `eval.yaml` (fb-595.68.27) |
 | overlay | ok: `usage/OVERLAY-vendramin-henry-adversary-complaint.pdf` and `.txt` (exit 0) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -18,14 +19,14 @@ Rule text was read from the sources below on 2026-10-14. Local rule PDFs were re
 
 | ID | Rule | Requirement (quoted or closely paraphrased) | Where it is in the template |
 |---|---|---|---|
-| INNB-FORM-001 | N.D. Ind. L.B.R. B-5005-2(a)(1) (https://www.innb.uscourts.gov/sites/innb/files/local_rules/B-5005-2_0.pdf) | "They shall be plainly typewritten or printed and double spaced, except for quoted material." | `line-pitch = 24pt`, `body-leading`; paragraphs flow on the 24-pt pitch. |
+| INNB-FORM-001 | N.D. Ind. L.B.R. B-5005-2(a)(1) (https://www.innb.uscourts.gov/sites/innb/files/local_rules/B-5005-2_0.pdf) | "They shall be plainly typewritten or printed and double spaced, except for quoted material." | `pitch-body = 24pt`; paragraphs flow on the 24-pt pitch (exact line boxes, `lib/typst/xengine.typ`). |
 | INNB-FORM-002 | B-5005-2(a)(2) | "The title must be set out on the first page." | `title-block` directly under the caption, on page 1. |
 | INNB-FORM-003 | B-5005-2(a)(3) | "Each page shall be consecutively numbered." | Footer page number, 1 to end, centred. |
 | INNB-FORM-004 | B-5005-2(a)(4), (b)(2) | "All papers must be clearly legible." Paper: "white paper of good quality, 8½" x 11" in size, printed on one side of the paper only." | `paper: "us-letter"`; 1-inch margins (a style choice; no margin figure in the rule). |
-| INNB-FORM-005 | (none) | No typeface or point size is named in B-5005-2 or FRBP 9004(a). B-5005-2(a)(1) says only "plainly typewritten or printed" (text checked 2026-10-15); FRBP 9004(a) says only "clearly legible". Typeface row: face required = none; substitute = none needed, so EB Garamond kept (`docs/FONTS.md`, "No face named"). | `font-family = "EB Garamond"`, `type-size = 13pt` (style choices; see gaps). |
+| INNB-FORM-005 | (none) | No typeface or point size is named in B-5005-2 or FRBP 9004(a). B-5005-2(a)(1) says only "plainly typewritten or printed" (text checked 2026-10-15); FRBP 9004(a) says only "clearly legible". Typeface row: face required = none; Times New Roman (the exemplar's face) set by its vendored substitute (`docs/FONTS.md`). | `font-family = ("Times New Roman", "Liberation Serif")`, `type-size = 12pt` (style choices; see gaps); the docx names the same face (`{font}` in `docx/reference.xml`). |
 | INNB-CAP-001 | Fed. R. Bankr. P. 9004(b) (https://www.law.cornell.edu/rules/frbp/rule_9004; amended Apr. 2, 2024, eff. Dec. 1, 2024) | "A document presented for filing must contain a caption that sets forth: the court's name; the case's title; the case number and, if appropriate, adversary-proceeding number; and a brief designation of the document's character." | `court-title`, `debtor-table` (case no., chapter), `parties-table` (adversary number), `title-block` (designation). |
 | INNB-CAP-002 | Fed. R. Bankr. P. 7010 (https://www.law.cornell.edu/rules/frbp/rule_7010; amended Apr. 2, 2024, eff. Dec. 1, 2024) | "Fed. R. Civ. P. 10 applies in an adversary proceeding except that a pleading's caption must substantially conform to the appropriate version of Form 416." | Caption laid out on the Form 416D (adversary) pattern: debtor block, then plaintiff/defendants with "Adv. Proc. No.". Form text was not retrieved verbatim (see gaps). |
-| INNB-CMP-001 | Fed. R. Civ. P. 10(a), (b) via FRBP 7010 (https://www.law.cornell.edu/rules/frcp/rule_10; amended Apr. 30, 2007, eff. Dec. 1, 2007) | 10(a): "Every pleading must have a caption with the court's name, a title, a file number, and a Rule 7(a) designation." 10(b): "A party must state its claims or defenses in numbered paragraphs" (the excerpt returned stops there; the rest of 10(b) was not read). | Body paragraphs numbered 1, 2, ... by the template (`render-body`); headings, lettered sub-items and the WHEREFORE paragraph are unnumbered. |
+| INNB-CMP-001 | Fed. R. Civ. P. 10(a), (b) via FRBP 7010 (https://www.law.cornell.edu/rules/frcp/rule_10; amended Apr. 30, 2007, eff. Dec. 1, 2007) | 10(a): "Every pleading must have a caption with the court's name, a title, a file number, and a Rule 7(a) designation." 10(b): "A party must state its claims or defenses in numbered paragraphs" (the excerpt returned stops there; the rest of 10(b) was not read). | Body paragraphs numbered 1, 2, ... by the template (`para-chunk`; the number in a half-inch box at the first-line indent); headings, lettered sub-items and the WHEREFORE paragraph are unnumbered. |
 | INNB-PLD-001 | Fed. R. Bankr. P. 7008(a) (https://www.law.cornell.edu/rules/frbp/rule_7008; amended Apr. 2, 2024, eff. Dec. 1, 2024) | "Fed. R. Civ. P. 8 applies in an adversary proceeding." The complaint must state the jurisdiction (the related case's name, number and chapter, and the district and division), and "must state whether the pleader does or does not consent to the entry of final orders or judgment." (quoted from the page summary; the full text was not reproduced) | **Not generated.** The template does not check for a jurisdiction or consent statement. The exemplar has neither. See gaps. |
 | INNB-SIG-001 | Convention (no rule cites the form) | Signature block: "Respectfully Submitted," firm, role, "By:" line, signer and bar number, address, telephone, email. | `signature-block`. The exemplar has no date line; none is printed. |
 
@@ -35,9 +36,11 @@ Not produced by this template (separate filings; no rule was checked for them): 
 
 ## Layout
 
-- US Letter, 1-inch margins, one side. Double spaced (24 pt) body; single-spaced caption, debtor block, signature block and block quotations.
-- Page 1: court title (three centred lines), debtor block (`In re:`, debtor and joint debtor designations, case number and chapter at right), plaintiff/defendant block closed by a right and bottom rule with the adversary number at right, then the title in centred bold caps.
-- Headings: `# ...` centred bold caps; `## ...` left bold. Headings are written by the author (the template does not number them).
+- US Letter, 1-inch margins, one side, Times New Roman 12 pt. The cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`): every line an exact box of its pitch, 24 pt for the double-spaced body, 13.8 pt (Word's single line at 12 pt) for the court title, caption, title, headings, block quotations, footnotes and signature; spaces between blocks in pt (half a body line, 12 pt, around headings and quotations and between the caption's groups); first-fit, ragged right, no hyphenation, kerning or ligatures. The 11 pt page number sits in a 13.8 pt line, footer-descent 30 %.
+- Page 1: court title (three centred bold lines), debtor block (`In re:`, each debtor's names half an inch in and designation 1.6 in in; case number and chapter at right, from the line of the first name), plaintiff/defendant block closed by a right and bottom rule with the adversary number at right, then the title in centred bold caps, one line per entry.
+- Headings: `# ...` centred bold caps; `## ...` left bold; single-spaced, half a body line above and below, kept with the text. Headings are written by the author (the template does not number them).
+- Block quotations: single-spaced, half an inch in on both sides, half a body line around them.
+- Signature: the last paragraph (the prayer) is kept on one page with the signature block, a body line below it: the date (when given) at the margin, the preamble, firm, role, a "By:" rule, signer and address lines in a 3.2 in right-hand column.
 - Paragraphs: every ordinary paragraph is numbered by the template, so the sample must not type the numbers. A chunk starting with a capital letter and a period (`A. ...`) is an unnumbered lettered sub-item. A line starting `WHEREFORE` is unnumbered. The optional `lead_in` frontmatter field is the unnumbered lead-in paragraph ("Comes now ...").
 - Footnotes: `[^key]` in the body and `[^key]: text` as a separate chunk; the definition is attached to the chunk that cites it.
 
@@ -57,44 +60,43 @@ sh tools/overlay.sh courts/seventh-circuit/indiana/federal/bankruptcy-northern-d
 
 File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf` (it strips the `INPUT-` prefix), and `tools/overlay.sh` reads that and writes `OVERLAY-<id>.pdf` and `OVERLAY-<id>.txt`. The brief's `<id>.pdf` and `<id>-overlay.pdf` names were not used, because the tools fix these names.
 
-- Render: exit 0, no warnings, `pdffonts` shows EBGaramond-Regular and -Bold only (embedded).
-- Line pitch: measured with `pdftotext -bbox-layout` on page 3: lines fall 23.98 pt apart, i.e. the 24-pt pitch.
-- Overlay (red = our render, blue = exemplar, black = both). The page map pairs by word overlap: ours p.1-4 with filed p.1-4; ours p.5 with filed p.6; ours p.6 with p.7; ours p.7 with p.8; ours p.8 and p.9 with p.10. The exemplar uses a different typeface, a different layout (plain caption, no rules) and a different paragraph numbering, so the lines will not coincide. The overlay is a diagnostic, not a score.
+- Render: exit 0, no warnings, `pdffonts` shows Times New Roman (regular, bold, italic) only, embedded.
+- Line pitch: 24 pt body lines (exact line boxes on both engines).
+- Overlay (red = our render, blue = exemplar, black = both). The page map pairs by word overlap: ours p.1-4 with filed p.1-4; ours p.5 with filed p.6; ours p.6 with p.7; ours p.7 with p.8; ours p.8 and p.9 with p.10. The exemplar uses a different layout (plain caption, no rules) and a different paragraph numbering, so the lines will not coincide. The overlay is a diagnostic, not a score.
 
-## Visual review (Gate 2 record, all 9 pages, rendered at 60 dpi and viewed)
+## Visual review (Gate 2 record, all 9 pages of both engines, rendered at 60 dpi and viewed, fb-595.68.27)
+
+The typst and docx renders break every line and page alike (XENG-001..003), so one row covers both.
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Court title, debtor block, caption, adversary number, title, lead-in, paragraph 1 | Pass. The caption fits inside its rule after the designation indent was narrowed (`DEFENDANTS` had crossed the rule, and `JOINT DEBTOR` wrapped). |
-| 2 | Paragraphs 2 to 7 | Pass. |
+| 1 | Court title, debtor block, caption, adversary number, title, lead-in, heading, paragraphs 1 to 3 | Pass. The debtor and party names fit their column; the rule closes the parties block. |
+| 2 | Paragraphs 3 (end) to 7 | Pass. |
 | 3 | Paragraphs 8 to 12 | Pass. |
-| 4 | Paragraphs 12 to 13 (filed numbering: see gaps) and lettered sub-items A to D | Pass. Sub-items are unnumbered and indented. |
-| 5 | Sub-items D to J, paragraph 14 | Pass. |
+| 4 | Paragraphs 12 (end) and 13, lettered sub-items A to D | Pass. Sub-items are unnumbered and indented. |
+| 5 | Sub-items D (end) to J, paragraph 14 | Pass. |
 | 6 | Paragraph 14 (end), paragraph 15 | Pass. |
-| 7 | Paragraphs 16 to 19 | Pass. |
-| 8 | RELIEF heading, paragraphs 20 to 25, WHEREFORE | Pass. The WHEREFORE paragraph is unnumbered and indented. |
-| 9 | Signature block alone | OPEN: the signature block does not fit at the foot of page 8 and moves to page 9 with no text above it. The block is unbreakable and the template has no keep-with-previous rule. A litigator would usually want the last paragraph carried onto the signature page. |
+| 7 | Paragraphs 15 (end) to 19 | Pass. |
+| 8 | Paragraph 19 (end), RELIEF heading, paragraphs 20 to 25 | Pass. The foot of the page is left free: the prayer moves on with the signature. |
+| 9 | WHEREFORE paragraph and the signature block | Pass (was OPEN: the signature stood alone on the last page; the prayer is now kept with it). |
 
 ## Known gaps and open choices
 
-1. **Typeface and size (INNB-FORM-005).** Neither B-5005-2 nor FRBP 9004(a) names one. The exemplar is Times New Roman. Only EB Garamond is vendored (no system fonts allowed), so the template uses EB Garamond at 13 pt, the same choice as the ca9 templates. Whether the court would accept Garamond is a question for David.
-2. **One exemplar.** The eval-loop tier-2 rule asks for two or three filers. A second filer is available: Fischer, Trustee v. Radio Shack Credit Services, adv. 08-01025 (Doc 1, filed 02/06/08, two pages, a trustee filing). It was read and not saved (see `usage/SOURCE.md`). It would be the second filer for tier 2 if the box has room to add it.
+1. **Typeface and size (INNB-FORM-005).** Neither B-5005-2 nor FRBP 9004(a) names one. The exemplar is Times New Roman, set here at 12 pt through its vendored substitute (`docs/FONTS.md`), on all engines.
+2. **One exemplar.** The eval-loop tier-2 rule asks for two or three filers. A second filer is available: Fischer, Trustee v. Radio Shack Credit Services, adv. 08-01025 (Doc 1, filed 02/06/08, two pages, a trustee filing; see `usage/SOURCE.md`).
 3. **Jurisdiction and consent statements (INNB-PLD-001).** FRBP 7008(a) requires them, and the template does not check for them. The exemplar does not include them, so the sample does not either. A real filing should carry them; the template does not generate them, because they are case-specific.
 4. **Form 416D caption.** Rule 7010 requires a caption that "substantially conform[s]" to Form 416. The official form text was not retrieved (the uscourts.gov form page returned HTTP 404; search summaries describe Form 416D). The layout here follows those summaries. This is the main unverified element of the caption.
 5. **Cover sheet, summons, fee, service.** Not generated. The FRBP 7003 text available was a stub ("Fed. R. Civ. P. 3 applies"); whether an adversary cover sheet is required was not verified, so nothing is asserted about it.
 6. **Paragraph numbering in the exemplar.** The filed complaint numbers 1 to 14 in order, then runs 13, 12, 13, 14, 15 (the numbers repeat and go backwards), then 16 to 21. The template numbers the paragraphs it finds in filed order, 1 to 25, so the sample's numbers differ from the filed ones. The filed errors are otherwise transcribed as filed: "Venderamin" (for Vendramin), "relief on or about , BK Filing", "Fax: 219-531-4 732", "Henry's" in several places, and "Plaintiff/Creditor" usage. These are the exemplar's own text, not template defects.
 7. **Sub-item detection.** A line starting with a capital letter and a period is treated as a sub-item. A paragraph starting that way would lose its number; none in this sample does.
 8. **Italics.** Case names and citations are not italic in the complaint sample (the complaint cites none); the template italicises `*...*` markup.
-9. **Signature block.** No date line (none in the exemplar). `By:` line drawn as a rule, not `/s/`. The block is unbreakable (see page 9 above).
+9. **Signature block.** No date line (none in the exemplar). `By:` line drawn as a rule (docx: an underlined tab), not `/s/`. The block is unbreakable and carries the prayer with it.
 10. **Page count.** The sample is 9 pages, inside the 8-14 page target the brief set for full-depth samples.
 
 ## Engines
 
-DOCX engine (`docx/`): `reference.docx` built by `docx/build-reference.sh`, filter `docx/innb.lua`. Output `usage/OUTPUT-adversary-complaint.docx`.
+DOCX engine (`docx/`, no shell, fb-595.68): `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst face `{font}`, Times New Roman: Body Text in exact 24 pt lines (480 twips), the single 13.8 pt line (276), headings and quotations 12 pt (240) from the text, footnotes in 13.8 pt lines 7 pt apart, the 11 pt page number in a 13.8 pt footer line 735 twips above the page foot; styles added for numbered paragraphs (a left tab an inch in), paragraphs that anchor a footnote (no widow control) and the prayer (kept with the signature); pandoc's fancy lists off, so the typed sub-item labels "A." stay text) and the filter `docx/innb-adversary-complaint.lua` (on `require("docx.xengine")`). `fb render` builds the reference and runs pandoc; there is no `build-reference.sh` and no committed `reference.docx`. Output `usage/OUTPUT-adversary-complaint.docx` and its LibreOffice render `.docx.pdf`.
 
-- Matches the typst form: EB Garamond 13 pt body; exact 24 pt line pitch; 0.5 in first-line indent; US Letter with 1 in margins; single-spaced caption, counsel, signature and footnote text; centred page number (11 pt) in the footer; court title, debtor block, parties block with the adversary number, title, lead-in, numbered paragraphs (numbered by the filter, not the sample), lettered sub-items and WHEREFORE unnumbered; signature block in one unbreakable row. Everything case-specific comes from the frontmatter.
-- Differs or unverified: the caption rules and cell paddings are approximations of the typst stroke and inset values and have not been compared on a page. Single spacing is Word's "single", not typst's 0.2 em leading. The "By:" line is underlined spaces, not a drawn line. The signature block does not carry the last paragraph to the next page (same open item as typst, page 9 of the typst render); it is not fixed here. The font must be installed on the machine that opens the file (Word substitutes silently otherwise).
-- BLOCKED: the docx.pdf (LibreOffice render) is not produced: `soffice` is not installed on this box, so `tools/render.sh --engine docx` stops after writing the `.docx` (`tools/render-docx.sh` fails at the soffice step). Gates 0 and 1 for the docx engine (`tools/check.sh --engine docx`) therefore cannot run.
-- BLOCKED: no page review. 0 pages of the docx were rendered or viewed.
+- The filter writes the court title, the two caption tables (the parties' cell with Word borders right and below, a 12 pt spacer paragraph between the tables, since Word joins adjacent tables), the title, the headings and the signature row (cantSplit) with the typst pitches and spaces in twips; pandoc writes the lead-in, the numbered paragraphs ("n." and a tab, numbered by the filter), the sub-items, the prayer, the block quotations and the footnotes in the reference's styles, the inlines walked with `xe.inlines`; ')(' gets a word joiner and a slash before a letter a zero-width space, a doubled section sign a no-break space, as typst breaks them.
+- Checks: `RESULT: 13 checks passed, 0 failed`; XENG-001..003 PASS, 229/229 typst lines break after the same word, every page starts and ends on the same word (9 pages); largest width drift of an identical line 0.41 pt. Before the port the docx was EB Garamond 13 pt (DEF-FONT-002 and TNR-EMBEDDED failed).
 - Not applicable: no table of contents or table of authorities in this form, so no field update is needed.
-- The `.docx` was validated only as a zip with well-formed XML parts. It has not been opened in Word or LibreOffice.
