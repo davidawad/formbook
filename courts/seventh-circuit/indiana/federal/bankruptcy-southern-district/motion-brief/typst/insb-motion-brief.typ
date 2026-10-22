@@ -8,21 +8,38 @@
 // spacing: those are layout choices, marked as such in ../README.md.
 // Content-agnostic: every case word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or is a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")      // layout choice: no S.D.Ind. font rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")      // layout choice: no S.D.Ind. font rule; Times New Roman, the house standard (docs/FONTS.md), vendored in fonts/
 #let type-size = 12pt                 // layout choice: the Rule 9004(a) legibility floor is the only requirement
-#let pitch = 27.6pt                   // layout choice: double spacing, matching the filed exemplar (27.6 pt baseline pitch, measured)
 #let page-w = 8.5in                   // S.D.Ind. B-5005-3: no larger than 8-1/2 by 11 inches
 #let page-h = 11in
 #let margin = 1in                     // layout choice
-#let text-width = page-w - 2 * margin
-#let body-leading = 1.645em           // double spacing: 0.655 em line box + 1.645 em leading = 27.6 pt at 12 pt (measured, README.md)
-#let single-leading = 0.5em           // single spacing for the caption, the counsel and the signature block
+#let footer-distance = 0.5in          // the page number's line box ends half an inch above the page edge (docx: footer 720)
 #let para-indent = 0.5in              // first-line indent of body paragraphs
-#let caption-left = 3.4in             // width of the party column of each caption
+#let caption-left = 3.4in             // width of the party column of the caption
+#let caption-gutter = 0.2in           // between the party column's rule and the right column
+#let caption-pad-right = 10pt         // the party column's text stands this far from its right rule
+#let caption-pad-bottom = 8pt         // and this far above its bottom rule
+#let caption-right-pad = 0.1in        // the right column's text stands this far in
+#let caption-rule = 0.75pt
+#let quote-left = 1in                 // block quotations: indented 1 in at the left, 0.5 in at the right
+#let quote-right = 0.5in
+#let sig-left = 3in                   // the signature lines start 3 in from the margin
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; docx/insb.lua and docx/reference.xml set the same
+// twips: 20 x pt).
+#let pitch-body = 27.6pt              // layout choice: double spacing, matching the filed exemplar (27.6 pt baseline pitch, measured)
+#let pitch-single = 13.8pt            // single spacing: court title, caption, block quotations, signature
+#let cover-gap = 27.6pt               // court title to caption, caption to title, title to the body
+#let heading-gap = 13.8pt             // above and below a heading (half a double line)
+#let quote-gap = 13.8pt               // above, between and below the paragraphs of a block quotation
+#let sig-gap = 13.8pt                 // the date line to the signature lines
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -35,151 +52,143 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// Inline markdown (for names with *et al.*, etc.).
-#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+/// Markdown (for names with *et al.*, etc.).
+#let md(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
 
-/// Block markdown: a chunk of body text, rendered double spaced.
-#let body-md(t) = {
-  set par(leading: body-leading, spacing: 0pt, justify: false)
-  cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+/// Inline content without the paragraph breaks cmarker may put around it.
+#let unloose(body) = {
+  if body.func() != [].func() { return body }
+  let cs = body.children
+  while cs.len() > 0 and cs.last().func() in (parbreak, [ ].func()) { cs = cs.slice(0, -1) }
+  while cs.len() > 0 and cs.first().func() in (parbreak, [ ].func()) { cs = cs.slice(1) }
+  cs.join()
 }
 
-/// Fill whole lines: the block is rounded up to a multiple of `pitch`, so every paragraph ends on the
-/// line grid and the next one cannot be drawn over it. `w` is the width the content is set at, so the
-/// measurement matches the layout (a measure at a wider width under-counts the lines).
-#let on-grid(c, w: text-width) = context {
-  let h = measure(width: w, c).height
-  block(width: w, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, c)
+/// One single-pitch line (a paragraph of its own), with an explicit space above it; "" is a blank line.
+#let sline(above: 0pt, left: 0pt, centered: false, c) = if c == "" {
+  block(width: 100%, height: pitch-single, above: above, below: 0pt)
+} else {
+  block(width: 100%, above: above, below: 0pt, {
+    set text(..edges(pitch-single))
+    set align(center) if centered
+    pad(left: left, par(first-line-indent: 0pt, if type(c) == str { unloose(md(c)) } else { c }))
+  })
 }
 
-/// One single-spaced line per item.
-#let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  stack(dir: ttb, spacing: single-leading, ..items.map(i => inl(i)))
-}
+/// Single-pitch lines, one paragraph each.
+#let slines(items, left: 0pt) = for i in items { sline(left: left, i) }
 
-/// A heading: one or more lines, kept with the chunk after it so it never ends a page.
-#let heading-block(c) = block(width: text-width, above: pitch * 0.5, below: pitch * 0.5, sticky: true, on-grid(c))
+/// A body paragraph on the body pitch: `first` its first-line indent.
+#let body-par(above: 0pt, below: 0pt, first: para-indent, sticky: false, centered: false, c) = block(width: 100%,
+  above: above, below: below, sticky: sticky, {
+    set align(center) if centered
+    par(first-line-indent: (amount: first, all: true), unloose(c))
+  })
 
 // ---------------------------------------------------------------------------
 // Cover: court title, caption, title of the paper (B-9013-1(a): the request is named in the caption)
 // ---------------------------------------------------------------------------
 
 #let court-title(meta) = {
-  set par(leading: single-leading, spacing: 0pt)
-  align(center, text(weight: "bold", [UNITED STATES BANKRUPTCY COURT])) + linebreak()
-  align(center, text(weight: "bold", [SOUTHERN DISTRICT OF INDIANA])) + linebreak()
-  if "division" in meta and meta.division != none {
-    align(center, text(weight: "bold", upper(meta.division) + " DIVISION"))
-  }
+  let ls = ([UNITED STATES BANKRUPTCY COURT], [SOUTHERN DISTRICT OF INDIANA])
+  if "division" in meta and meta.division != none { ls.push(upper(meta.division) + " DIVISION") }
+  for l in ls { sline(centered: true, text(weight: "bold", l)) }
 }
 
-/// The bankruptcy caption: the debtor in the left column, the case number and chapter on the right.
-#let bankruptcy-caption(meta) = grid(
-  columns: (caption-left, 1fr),
-  column-gutter: 0.2in,
-  block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt), {
-    line-stack(("In re:", "") + meta.debtor.names + (meta.debtor.designation,))
-  }),
-  block(inset: (left: 0.1in), line-stack((
-    "Case No. " + meta.case_number,
-    "Chapter " + meta.chapter,
-  ))),
-)
+/// The bankruptcy caption: the debtor in the party column, ruled at its right and foot; the case number and chapter
+/// on the right (docx: a table row).
+#let bankruptcy-caption(meta) = block(width: 100%, above: cover-gap, below: 0pt, grid(
+  columns: (caption-left, caption-gutter, 1fr),
+  stroke: (x, y) => if x == 0 { (right: caption-rule, bottom: caption-rule) },
+  inset: (x, y) => if x == 0 { (right: caption-pad-right, bottom: caption-pad-bottom) } else { (bottom: caption-pad-bottom) },
+  slines(("In re:", "") + meta.debtor.names + (meta.debtor.designation,)),
+  [],
+  pad(left: caption-right-pad, slines(("Case No. " + meta.case_number, "Chapter " + meta.chapter))),
+))
 
 #let cover(meta) = {
   court-title(meta)
-  v(pitch)
   bankruptcy-caption(meta)
-  v(pitch)
-  align(center, text(weight: "bold", inl(meta.title)))
-  v(pitch)
+  body-par(above: cover-gap, below: cover-gap, first: 0pt, centered: true, sticky: true, text(weight: "bold", md(meta.title)))
 }
 
 // ---------------------------------------------------------------------------
 // Body, signature and certificate of service
 // ---------------------------------------------------------------------------
 
-#let signature-block(meta) = block(width: text-width, breakable: false, {
-  if "date_line" in meta and meta.date_line != none {
-    on-grid({ set par(leading: body-leading); h(para-indent); inl(meta.date_line) })
-  }
-  v(pitch * 0.5)
-  pad(left: 3in, block(width: 3.5in, {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    line-stack(("/s/ " + meta.signature.signer, meta.signature.signer) + meta.signature.lines)
-  }))
+/// The date line and the signature lines from `sig-left`, kept on one page.
+#let signature-block(meta) = block(width: 100%, breakable: false, above: 0pt, below: 0pt, {
+  if "date_line" in meta and meta.date_line != none { body-par(md(meta.date_line)) }
+  block(width: 100%, above: sig-gap, below: 0pt,
+    slines(("/s/ " + meta.signature.signer, meta.signature.signer) + meta.signature.lines, left: sig-left))
 })
+
+/// A block quotation: single-spaced, indented on both sides, not indented on the first line; a blank single line
+/// between its paragraphs.
+#let quotation(t) = {
+  let ps = t.replace(regex("(?m)^>[ \\t]?"), "").split(regex("\\n[ \\t]*\\n")).filter(s => s.trim() != "")
+  for q in ps {
+    block(width: 100%, above: quote-gap, below: quote-gap, pad(left: quote-left, right: quote-right, sline(q.trim())))
+  }
+}
 
 /// Body chunks, each separated by a blank line in the sample:
 ///   `#` heading                    centered (level 1) or bold (level 2); kept with the next chunk
 ///   `> ...`                         block quotation, indented both sides, not indented on the first line
+///   `Id.` or a digit first          a citation line that continues after a block quotation: flush left
 ///   anything else                   paragraph, first-line indent (motions are not numbered)
-/// Each chunk is measured at the width it is set at (see on-grid).
 #let argument(body) = {
-  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
-  let pending = []
-  let has-pending = false
-  for c in chunks {
-    let t = c.trim()
-    let piece = if t.starts-with("#") {
-      pending += body-md(t)
-      has-pending = true
-      none
+  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim()).filter(c => c != "")
+  for (i, t) in chunks.enumerate() {
+    // the last chunk is kept with the signature after it: a signature never stands alone on a page
+    let last = i == chunks.len() - 1
+    if t.starts-with("#") {
+      md(t)
     } else if t.starts-with(">") {
-      let inner = t.split("\n").map(l => {
-        let s = l.trim()
-        if s.starts-with(">") { s = s.slice(1) }
-        s.trim()
-      }).join("\n")
-      pad(left: 1in, right: 0.5in, on-grid(w: text-width - 1.5in, {
-        set par(leading: single-leading, spacing: single-leading, justify: false)
-        cmarker.render(inner, raw-typst: false, smart-punctuation: true)
-      }))
+      quotation(t)
     } else if t.match(regex("^(Id\\.|[0-9])")) != none {
-      // A citation line that continues after a block quotation: flush left, not indented.
-      on-grid({ set par(leading: body-leading); inl(t) })
+      body-par(first: 0pt, sticky: last, md(t))
     } else {
-      on-grid({ set par(leading: body-leading); h(para-indent); inl(t) })
-    }
-    // A heading is held until the chunk after it, so it never ends a page.
-    if piece != none {
-      if has-pending {
-        block(breakable: false, width: text-width, { pending; piece })
-      } else {
-        piece
-      }
-      pending = []
-      has-pending = false
+      body-par(sticky: last, md(t))
     }
   }
-  if pending != [] { block(breakable: false, width: text-width, pending) }
 }
 
+/// The certificate of service (B-9013-2) on a page of its own, as the filed exemplar sets it: the title, the text,
+/// the signer's lines from `sig-left`.
 #let certificate(meta) = {
-  pagebreak()
-  align(center, text(weight: "bold", [CERTIFICATE OF SERVICE]))
-  v(pitch)
-  on-grid({ set par(leading: body-leading); h(para-indent); inl(meta.certificate.text) })
-  v(pitch)
-  pad(left: 3in, block(width: 3.5in, {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
-    line-stack((("/s/ " + meta.certificate.signer),) + meta.certificate.lines)
-  }))
+  pagebreak(weak: true)
+  sline(centered: true, text(weight: "bold", [CERTIFICATE OF SERVICE]))
+  body-par(above: cover-gap, md(meta.certificate.text))
+  block(width: 100%, above: cover-gap, below: 0pt,
+    slines(("/s/ " + meta.certificate.signer,) + meta.certificate.lines, left: sig-left))
 }
 
 #let insb-motion-brief(meta, body) = {
   set page(
-    paper: "us-letter",
+    width: page-w,
+    height: page-h,
     margin: margin,
     numbering: none,
-    footer: context align(center, text(size: type-size, counter(page).display())),
+    // The page number centered at the foot of every page from page 1, in a single-pitch line box that ends
+    // footer-distance above the page edge.
+    footer-descent: margin - footer-distance - pitch-single,
+    footer: context align(center, text(size: type-size, ..edges(pitch-single), counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fill: black, fallback: false)
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of the
+  // body pitch, a section sign kept with its number.
+  show: xengine.with(pitch: pitch-body, list-indent: none)
+  // A doubled sign stays with its number too (xengine binds a single one).
+  show regex("[§¶]+ \\S+"): it => box(it)
 
-  show heading.where(level: 1): it => heading-block(align(center, text(size: type-size, weight: "bold", upper(it.body))))
-  show heading.where(level: 2): it => heading-block(text(size: type-size, weight: "bold", it.body))
+  // Headings at the type size on the body pitch, half a double line above and below, kept with the text after
+  // them: level 1 centered bold capitals, level 2 bold at the margin (docx: the same paragraphs).
+  show heading: it => block(width: 100%, above: heading-gap, below: heading-gap, sticky: true, {
+    set text(size: type-size, weight: "bold")
+    set par(first-line-indent: 0pt)
+    if it.level == 1 { align(center, upper(it.body)) } else { it.body }
+  })
 
   cover(meta)
   argument(body)
