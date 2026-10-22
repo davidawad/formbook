@@ -1,43 +1,58 @@
--- docx engine, PTAB petition for inter partes review (37 C.F.R. 42.100 et seq.). The typst template (../typst/ptab-petition.typ)
--- is the reference for the form. This filter writes what pandoc's markdown cannot express as WordprocessingML: the
--- cover, the contents, the signature block and the two certificates. The body is pandoc's, styled by reference.docx.
--- Everything here comes from the frontmatter of the sample (schema: ../README.md, "Markdown contract"); no text is
--- specific to a case. render.sh adds the running header and the footers, and sets the body's section.
+-- docx engine, PTAB petition for inter partes review. The typst template (../typst/ptab-petition.typ)
+-- is the reference: this filter writes the same blocks with the same pitches and spaces (twips = 20 x the typst pt) on
+-- the cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): exact line spacing,
+-- typst's break rules on every run. It writes the cover, the contents, the headings (their labels as text), the
+-- signature block and the two certificates; the body's paragraphs, lists and footnotes are pandoc's, on
+-- reference.docx (make-reference.sh). Everything comes from the frontmatter of the sample (schema: ../README.md,
+-- "Markdown contract"); no text is specific to a case. render.sh adds the footers and the body's section, and fills
+-- the contents' page numbers from a first pass (DOCX_MANIFEST, DOCX_PAGEMAP; see render.sh).
 --
 -- Sections: cover (no number), contents (lower-case roman), body and certificates (arabic from 1).
 
-local LIMIT = 14000 -- PTAB-PET-LEN-001: 37 C.F.R. 42.24(a)(1)(i), the petition limit (14,000 words for an IPR)
-local BOLD = "<w:b/><w:bCs/>"
-local FIELD_BEGIN = '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> TOC \\o "1-2" \\h \\z \\u </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r>'
-local FIELD_END = '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
--- page: letter, one inch on all sides (PTAB-PET-FORM-001, -004); header and footer 0.5 in from the edge
-local PAGE = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>'
+local xe = require("docx.xengine")
+
+local CFG = {
+  kind = "ptab-petition",
+  limit = 14000, -- PTAB-PET-LEN-001: 37 C.F.R. 42.24(a)(1)(i), 14,000 words for an IPR petition
+  limit_cite = "42.24(a)(1)(i)",
+  word_cert = "Under the provisions of 37 C.F.R. § 42.24, the undersigned hereby certifies that the word count for the foregoing Petition for inter partes review (excluding the table of contents, table of authorities, mandatory notices, certificate of service or word count, and appendix of exhibits or claim listing) totals {words} words, which is within the word limit allowed under 37 C.F.R. § 42.24(a)(1)(i).",
+  service = "Pursuant to 37 C.F.R. §§ 42.6(e) and 42.105(a), the undersigned hereby certifies service on the Patent Owner of a copy of this Petition and its respective exhibits, by {manner}, on the following at the addresses shown:",
+  toc_depth = 2,
+}
+
+-- the typst numbers, in twips
+local SINGLE, DOUBLE, QUOTE = 320, 640, 480 -- pitch-single 16 pt, pitch-double 32 pt, pitch-quote 24 pt
+local INDENT = 720                          -- para-indent, label-box: 0.5 in
+local SIG = 4320                            -- sig-indent: 3 in
+local TEXTW = 9360                          -- 6.5 in, the text width
+local PCOL = 720                            -- toc-page-col: 36 pt
+local PAGE = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="688" w:gutter="0"/>'
+
+local function fail(msg) error(CFG.kind .. ": " .. msg, 0) end
 
 local function txt(v)
   if v == nil then return "" end
   return pandoc.utils.stringify(v)
 end
 
-local function esc(s)
-  return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
+-- plain template text as runs: a section sign kept with its number (typst boxes "§ 42.24")
+local function trun(s, o)
+  return xe.runs((s:gsub("§ ", "§\u{00A0}")), o)
 end
 
-local function run(s, rpr)
-  return "<w:r>" .. (rpr and ("<w:rPr>" .. rpr .. "</w:rPr>") or "") .. '<w:t xml:space="preserve">' .. esc(s) .. "</w:t></w:r>"
-end
+local function P(props, body) return xe.para(props, body) end
 
--- one paragraph; o.sect is a sectPr that ends a section (it goes last in pPr)
-local function para(o)
-  local ppr = ""
-  if o.style then ppr = ppr .. '<w:pStyle w:val="' .. o.style .. '"/>' end
-  if o.pbb then ppr = ppr .. "<w:pageBreakBefore/>" end
-  if o.before then ppr = ppr .. '<w:spacing w:before="' .. o.before .. '"/>' end
-  if o.sect then ppr = ppr .. o.sect end
-  return "<w:p>" .. (ppr ~= "" and ("<w:pPr>" .. ppr .. "</w:pPr>") or "") .. (o.runs or "") .. "</w:p>"
-end
-
-local function sect(extra)
-  return "<w:sectPr>" .. (extra or "") .. PAGE .. "</w:sectPr>"
+-- one single-spaced line: before (twips), alignment, left indent, keep with the next
+local function line(body, o)
+  o = o or {}
+  local props = {}
+  if o.keep then props[#props + 1] = xe.KEEP elseif o.lines then props[#props + 1] = xe.LINES end
+  if o.pbb then props[#props + 1] = xe.BREAK end
+  props[#props + 1] = xe.spacing(o.before or 0, o.after or 0, o.pitch or SINGLE)
+  props[#props + 1] = xe.ind(o.left or 0, nil, o.first or 0)
+  props[#props + 1] = xe.jc(o.jc or "left")
+  if o.sect then props[#props + 1] = o.sect end
+  return P(props, body)
 end
 
 -- 10543 -> "10,543"
@@ -47,123 +62,176 @@ local function thousands(n)
 end
 
 local function roman(n)
-  local vals = { { 10, "x" }, { 9, "ix" }, { 5, "v" }, { 4, "iv" }, { 1, "i" } }
+  local vals = { { 1000, "M" }, { 900, "CM" }, { 500, "D" }, { 400, "CD" }, { 100, "C" }, { 90, "XC" }, { 50, "L" },
+    { 40, "XL" }, { 10, "X" }, { 9, "IX" }, { 5, "V" }, { 4, "IV" }, { 1, "I" } }
   local s = ""
   for _, v in ipairs(vals) do
-    while n >= v[1] do
-      s = s .. v[2]
-      n = n - v[1]
-    end
+    while n >= v[1] do s = s .. v[2]; n = n - v[1] end
   end
   return s
 end
 
+-- typst heading-number: I. / A. / 1. / a.
+local function label(level, n)
+  if level == 1 then return roman(n) .. "."
+  elseif level == 2 then return string.char(64 + n) .. "."
+  elseif level == 3 then return n .. "."
+  else return string.char(96 + n) .. "." end
+end
+
 local function cover(m)
   local out = {}
-  local function line(s, o)
+  local function c(body, before, o)
     o = o or {}
-    local style = o.right and "CoverRight" or "CoverCenter"
-    out[#out + 1] = para({ style = style, before = o.before, sect = o.sect, runs = run(s, o.bold and BOLD or nil) })
+    out[#out + 1] = line(body, { before = before, jc = o.jc or "center", sect = o.sect })
   end
-  line("UNITED STATES PATENT AND TRADEMARK OFFICE")
-  line("BEFORE THE PATENT TRIAL AND APPEAL BOARD", { before = 240 })
-  line(txt(m.petitioner.name), { bold = true, before = 680 })
-  line(txt(m.petitioner.role), { right = true })
-  line("v.", { before = 340 })
-  line(txt(m["patent-owner"].name), { bold = true, before = 340 })
-  line(txt(m["patent-owner"].role), { right = true })
-  line(txt(m["patent-number"]), { before = 680 })
-  line(txt(m["patent-title"]), { before = 240 })
-  line(txt(m["case-number"]), { before = 170 })
+  c(trun("UNITED STATES PATENT AND TRADEMARK OFFICE"), 0)
+  c(trun("BEFORE THE PATENT TRIAL AND APPEAL BOARD"), 240)
+  c(xe.inl(m.petitioner.name, { b = true }), 680)
+  c(xe.inl(m.petitioner.role), 0, { jc = "right" })
+  c(trun("v."), 340)
+  c(xe.inl(m["patent-owner"].name, { b = true }), 340)
+  c(xe.inl(m["patent-owner"].role), 0, { jc = "right" })
+  c(xe.inl(m["patent-number"]), 680)
+  c(xe.inl(m["patent-title"]), 240)
+  c(xe.inl(m["case-number"]), 240)
   -- the last cover paragraph ends section 1: no footer, no page number
-  line(txt(m.title), { bold = true, before = 680, sect = sect() })
+  c(xe.inl(m.title, { b = true }), 680, { sect = "<w:sectPr>" .. PAGE .. "</w:sectPr>" })
   return out
 end
 
--- Contents: one TOC field whose cached result lists the headings (levels 1 and 2, typst toc-depth 2). Page numbers
--- are not in the cached result: LibreOffice cannot compute them here, and Word fills them in on open (updateFields).
-local function contents(headings)
-  local out = { para({ style = "CenteredHeading", runs = run("TABLE OF CONTENTS") }) }
-  local entries = {}
-  local c1, c2 = 0, 0
-  for _, h in ipairs(headings) do
-    local label
-    if h.level == 1 then
-      c1 = c1 + 1
-      c2 = 0
-      label = roman(c1):upper() .. "."
-    else
-      c2 = c2 + 1
-      label = string.char(64 + c2) .. "."
-    end
-    entries[#entries + 1] = { style = h.level == 1 and "TOC1" or "TOC2", text = label .. " " .. h.text }
+-- a centered bold heading of the front matter and the certificates (typst plain-heading: 16 pt below)
+local function plain_heading(s, pbb)
+  return line(trun(s, { b = true }), { keep = true, pbb = pbb, after = 320, jc = "center" })
+end
+
+-- The page map of the first pass: H<TAB>index<TAB>folio
+local function read_pagemap()
+  local map = {}
+  local f = os.getenv("DOCX_PAGEMAP")
+  if f == nil or f == "" then return nil end
+  for l in io.lines(f) do
+    local kind, idx, folio = l:match("^(%u)\t([^\t]*)\t(.*)$")
+    if kind == "H" then map[tonumber(idx)] = folio end
   end
-  if #entries == 0 then entries[1] = { style = "TOC1", text = "" } end
-  for i, e in ipairs(entries) do
-    local runs = (i == 1 and FIELD_BEGIN or "") .. (e.text ~= "" and run(e.text) or "") .. (i == #entries and FIELD_END or "")
-    local o = { style = e.style, runs = runs }
-    -- the last contents paragraph ends section 2 (roman numbers, the contents page)
-    if i == #entries then
-      o.sect = '<w:sectPr><w:footerReference w:type="default" r:id="rIdFooterRoman"/>' .. PAGE .. '<w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>'
+  return map
+end
+
+-- Contents: one row per heading of levels 1..toc_depth (typst toc-entry and listing-row): the label in a half-inch
+-- box at the heading's depth, the title hanging after it and wrapping before the page column, a dot leader from
+-- three spaces after the text to the page number.
+local function contents(headings, map)
+  local out = { plain_heading("TABLE OF CONTENTS") }
+  local rows = {}
+  for i, h in ipairs(headings) do
+    if h.level <= CFG.toc_depth then rows[#rows + 1] = { i = i, h = h } end
+  end
+  for k, r in ipairs(rows) do
+    local h = r.h
+    local ind = (h.level - 1) * INDENT
+    local page = map and map[r.i] or "0"
+    if map and not map[r.i] then fail("no page for heading " .. r.i) end
+    local props = {
+      xe.LINES,
+      '<w:tabs><w:tab w:val="left" w:pos="' .. (ind + INDENT) .. '"/><w:tab w:val="right" w:leader="dot" w:pos="' .. TEXTW .. '"/></w:tabs>',
+      xe.spacing(h.level == 1 and 200 or 140, 0, SINGLE),
+      xe.ind(ind + INDENT, INDENT, nil, PCOL),
+      xe.jc("left"),
+    }
+    -- the last contents paragraph ends section 2 (roman numbers)
+    if k == #rows then
+      props[#props + 1] = '<w:sectPr><w:footerReference w:type="default" r:id="rIdFooterRoman"/>' .. PAGE .. '<w:pgNumType w:fmt="lowerRoman" w:start="1"/></w:sectPr>'
     end
-    out[#out + 1] = para(o)
+    out[#out + 1] = P(props, xe.runs(h.label .. "\t") .. xe.inl(h.content) .. xe.runs(xe.LEAD .. page))
   end
   return out
 end
 
+-- a body heading (typst style-heading): level 1 centered capitals, 16 pt above, 12 pt below; deeper levels flush
+-- left, 14 pt above, 10 pt below, level 3 and deeper italic; all bold, single spaced, kept with the next block. A
+-- heading that opens the body's section has no space above: Word keeps the space above the first paragraph of a
+-- section, typst drops it at the top of a page.
+local function heading(h, opens)
+  local content = h.content
+  if h.level == 1 then
+    content = content:walk({ Str = function(s) return pandoc.Str(pandoc.text.upper(s.text)) end })
+  end
+  local o = { b = true, i = h.level >= 3 }
+  local body = xe.runs(h.label .. " ", o) .. xe.inl(content, o)
+  local props = { xe.style("Heading" .. math.min(h.level, 5)), xe.KEEP }
+  if h.level == 1 then
+    props[#props + 1] = xe.spacing(opens and 0 or 320, 240, SINGLE)
+    props[#props + 1] = xe.ind(0, nil, 0)
+    props[#props + 1] = xe.jc("center")
+  else
+    props[#props + 1] = xe.spacing(opens and 0 or 280, 200, SINGLE)
+    props[#props + 1] = xe.ind(0, nil, 0)
+    props[#props + 1] = xe.jc("left")
+  end
+  return P(props, body)
+end
+
+-- The signature block (typst signature-block): "Dated:" 24 pt below the text above, the signature 32 pt below it,
+-- at 3 in; the block is kept together.
 local function signature_block(m)
   local sig = m.signature
+  local lines = {}
+  if m.date then lines[#lines + 1] = { trun("Dated: " .. txt(m.date)), 480, 0 } end
+  lines[#lines + 1] = { trun("/s/ " .. txt(sig.signer)), 640, SIG }
+  lines[#lines + 1] = { trun(txt(sig["signer-name"]) .. " (Reg. No. " .. txt(sig["reg-no"]) .. ")"), 0, SIG }
+  for _, l in ipairs(sig.lines or {}) do lines[#lines + 1] = { xe.inl(l), 0, SIG } end
   local out = {}
-  if m.date then out[#out + 1] = para({ style = "SingleLine", before = 240, runs = run("Dated: " .. txt(m.date)) }) end
-  out[#out + 1] = para({ style = "SignatureBlock", before = 340, runs = run("/s/ " .. txt(sig.signer)) })
-  out[#out + 1] = para({ style = "SignatureBlock", runs = run(txt(sig["signer-name"]) .. " (Reg. No. " .. txt(sig["reg-no"]) .. ")") })
-  for _, l in ipairs(sig.lines or {}) do
-    out[#out + 1] = para({ style = "SignatureBlock", runs = run(txt(l)) })
+  for i, l in ipairs(lines) do
+    out[#out + 1] = line(l[1], { before = l[2], left = l[3], keep = i < #lines, lines = true })
   end
   return out
+end
+
+-- a certificate's statement (typst statement): double spaced, first line indented, never split
+local function statement(s)
+  return line(trun(s), { lines = true, pitch = DOUBLE, first = INDENT })
 end
 
 local function certificate_of_word_count(m)
   local words = tonumber(txt(m["word-count"]))
-  if words == nil then error("ptab-petition: word-count must be a number") end
-  if words > LIMIT then
-    error("ptab-petition: word count " .. words .. " exceeds the " .. LIMIT .. "-word limit (42.24(a)(1)(i))")
+  if words == nil then fail("word-count must be a number") end
+  if words > CFG.limit then
+    fail("word count " .. words .. " exceeds the " .. CFG.limit .. "-word limit (" .. CFG.limit_cite .. ")")
   end
-  local out = { para({ style = "CenteredHeading", pbb = true, runs = run("CERTIFICATION UNDER 37 C.F.R. § 42.24") }) }
-  out[#out + 1] = para({
-    style = "CertificateText",
-    runs = run("Under the provisions of 37 C.F.R. § 42.24, the undersigned hereby certifies that the word count for the foregoing Petition for inter partes review (excluding the table of contents, table of authorities, mandatory notices, certificate of service or word count, and appendix of exhibits or claim listing) totals " .. thousands(words) .. " words, which is within the word limit allowed under 37 C.F.R. § 42.24(a)(1)(i)."),
-  })
+  local out = { plain_heading("CERTIFICATION UNDER 37 C.F.R. § 42.24", true) }
+  out[#out + 1] = statement((CFG.word_cert:gsub("{words}", thousands(words))))
   for _, p in ipairs(signature_block(m)) do out[#out + 1] = p end
   return out
 end
 
 local function certificate_of_service(m)
   local svc = m.service
-  local out = { para({ style = "CenteredHeading", pbb = true, runs = run("CERTIFICATE OF SERVICE") }) }
-  out[#out + 1] = para({
-    style = "CertificateText",
-    runs = run("Pursuant to 37 C.F.R. §§ 42.6(e) and 42.105(a), the undersigned hereby certifies service on the Patent Owner of a copy of this Petition and its respective exhibits, by " .. txt(svc.manner) .. ", on the following at the addresses shown:"),
-  })
+  local out = { plain_heading("CERTIFICATE OF SERVICE", true) }
+  out[#out + 1] = statement((CFG.service:gsub("{manner}", function() return txt(svc.manner) end)))
   for _, r in ipairs(svc.recipients or {}) do
-    out[#out + 1] = para({ style = "ServiceRecipient", before = 240, runs = run(txt(r.name)) })
-    for _, l in ipairs(r.lines or {}) do
-      out[#out + 1] = para({ style = "ServiceRecipient", before = 0, runs = run(txt(l)) })
+    local ls = { xe.inl(r.name) }
+    for _, l in ipairs(r.lines or {}) do ls[#ls + 1] = xe.inl(l) end
+    for i, l in ipairs(ls) do
+      out[#out + 1] = line(l, { before = i == 1 and 240 or 0, left = INDENT, keep = i < #ls, lines = true })
     end
   end
   for _, p in ipairs(signature_block(m)) do out[#out + 1] = p end
   return out
 end
 
--- the table of contents reads the headings of the body (levels 1 and 2)
-local function headings_of(blocks)
-  local hs = {}
-  for _, b in ipairs(blocks) do
-    if b.t == "Header" and b.level <= 2 then
-      hs[#hs + 1] = { level = b.level, text = txt(b.content) }
-    end
+-- a block quotation (typst show quote): 1.5 spaced, indented a half inch from both margins, 12 pt above and below
+local function block_quote(b)
+  local out = {}
+  local paras = {}
+  for _, p in ipairs(b.content) do
+    if p.t ~= "Para" and p.t ~= "Plain" then return { b } end
+    paras[#paras + 1] = p
   end
-  return hs
+  for i, p in ipairs(paras) do
+    out[#out + 1] = xe.raw(P({ xe.spacing(i == 1 and 240 or 0, i == #paras and 240 or 0, QUOTE),
+      xe.ind(INDENT, nil, 0, INDENT), xe.jc("left") }, xe.inl(p.content)))
+  end
+  return out
 end
 
 function Pandoc(doc)
@@ -173,19 +241,53 @@ function Pandoc(doc)
     out[#out + 1] = pandoc.RawBlock("openxml", table.concat(list, ""))
   end
 
-  -- cover: section 1
+  -- number the headings (typst heading-number) and write the manifest of the page search: the first words of
+  -- each heading as the body sets them (label, then the title; level 1 in capitals)
+  local headings, counters = {}, { 0, 0, 0, 0, 0, 0 }
+  local manifest = {}
+  for _, b in ipairs(doc.blocks) do
+    if b.t == "Header" then
+      local l = b.level
+      counters[l] = counters[l] + 1
+      for k = l + 1, #counters do counters[k] = 0 end
+      local h = { level = l, content = b.content, label = label(l, counters[l]) }
+      headings[#headings + 1] = h
+      local words = {}
+      for w in (h.label .. " " .. txt(b.content)):gmatch("%S+") do
+        if #words < 3 then words[#words + 1] = w end
+      end
+      manifest[#manifest + 1] = "H\t" .. #headings .. "\t" .. table.concat(words, " ")
+    end
+  end
+  local mf = os.getenv("DOCX_MANIFEST")
+  if mf and mf ~= "" then
+    local f = assert(io.open(mf, "w"))
+    f:write(table.concat(manifest, "\n"), "\n")
+    f:close()
+  end
+
   raw(cover(m))
+  raw(contents(headings, read_pagemap()))
 
-  -- contents: section 2
-  raw(contents(headings_of(doc.blocks)))
-
-  -- body: section 3 (render.sh gives it the arabic numbering and the running header)
+  -- body: section 3 (render.sh gives it the arabic numbering and the footer)
   local body = {}
-  for i, b in ipairs(doc.blocks) do body[i] = b end
-  -- the conclusion stays on the page of the signature block (typst: block(breakable: false))
+  local hi = 0
+  for _, b in ipairs(doc.blocks) do
+    if b.t == "Header" then
+      hi = hi + 1
+      body[#body + 1] = xe.raw(heading(headings[hi], #body == 0))
+    elseif b.t == "BulletList" or b.t == "OrderedList" then
+      for _, x in ipairs(xe.list_items(b)) do body[#body + 1] = x end
+    elseif b.t == "BlockQuote" then
+      for _, x in ipairs(block_quote(b)) do body[#body + 1] = x end
+    else
+      body[#body + 1] = b
+    end
+  end
+  -- the last paragraph stays on the page of the signature block (typst: block(breakable: false))
   local last = body[#body]
   if last and (last.t == "Para" or last.t == "Plain") then
-    body[#body] = pandoc.Div({ last }, pandoc.Attr("", {}, { ["custom-style"] = "Body Keep Next" }))
+    body[#body] = pandoc.Div({ pandoc.Para(last.content) }, pandoc.Attr("", {}, { ["custom-style"] = "Body Keep" }))
   end
   for _, b in ipairs(body) do out[#out + 1] = b end
   raw(signature_block(m))
@@ -197,5 +299,5 @@ function Pandoc(doc)
   -- pandoc would print the title and the date as a title block ahead of the cover; the cover carries them
   doc.meta.title = nil
   doc.meta.date = nil
-  return pandoc.Pandoc(out, doc.meta)
+  return pandoc.Pandoc(out, doc.meta):walk({ Inlines = xe.inlines })
 end
