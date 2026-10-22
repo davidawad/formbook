@@ -12,9 +12,9 @@ filer is on file, so a second complaint is still wanted (candidate: Stevens, Adv
 |---|---|
 | exemplar | **yes**: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (6 pages, text layer) |
 | sample md | `usage/INPUT-adversary-complaint.md`: transcription of the filing's text (the 37 numbered paragraphs, the preamble, the WHEREFORE clause, the prayer, the signature block). Frontmatter comment lists every difference from the filing. |
-| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 6 pages, letter, EB Garamond only (embedded), `tools/render.sh` exit 0, no typst warnings |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 6 pages, letter, Times New Roman only (embedded), `tools/render.sh` exit 0, no typst warnings; `tools/check.sh` typst 9 passed, 0 failed |
 | overlay | ok: `usage/OVERLAY-adversary-complaint.pdf` and `.txt`, `tools/overlay.sh` exit 0. Page word-overlap: 70.3, 66.6, 66.3, 55.2, 50.5, 84.2 percent (pages 1 to 6) |
-| pages reviewed | 6 of 6, each rendered at 70 dpi and viewed. Pages 1 to 4 were viewed before the last template change (the prayer's sticky chain, which begins on page 5); that change cannot move text on pages 1 to 4. Pages 5 and 6 were viewed after it. |
+| pages reviewed | 6 of 6 of the typst and of the docx render (fb-595.68.25), each rendered at 60 dpi and viewed beside the other and the filed exemplar. |
 
 File names: the sample is `INPUT-adversary-complaint.md`; the id is `adversary-complaint` (the render and overlay default
 names are `OUTPUT-adversary-complaint.typst.pdf`, `OVERLAY-adversary-complaint.pdf/.txt`).
@@ -45,7 +45,7 @@ Primary sources, fetched 2026-10-14 (the date verified for every row).
 | Rule | Requirement | Kind | Where it is in the template |
 |---|---|---|---|
 | LBR 9004-1(a)(1)(A) (N.D.N.Y. Local Bankruptcy Rules, effective 12-01-2024, https://www.nynb.uscourts.gov/sites/nynb/files/LBR_GenOrders/Local%20Bankruptcy%20Rules_Effective%2012-01-2024%20Final.pdf; text extracted with pdftotext) | Text, in the body or a footnote, is a minimum of 12-point font | M | `type-size = 12pt`, set on the page for the whole document |
-| LBR 9004-1(a)(1)(B) | Double-spaced, except block quotations and footnotes may be single-spaced | M | `pitch = 24pt`, `body-leading = 1.35em` (0.65em line box + 1.35em = 2.0em = 24 pt; the leading after each unit is added by hand) |
+| LBR 9004-1(a)(1)(B) | Double-spaced, except block quotations and footnotes may be single-spaced | M | `pitch-double = 24pt` (every body line a 24 pt box, lib/typst/xengine.typ; the docx sets exact 480-twip lines) |
 | LBR 9004-1(a)(1)(C)-(E) | Legible, single-sided, black ink | M | Output is a single-sided black-ink PDF; not a template choice |
 | LBR 9004-1(a)(2)(A) | One-inch margin on all four sides | M | `margin = 1in` |
 | LBR 9004-1(a)(2)(B) | Consecutively numbered pages | M | `numbering: "1"`, centred at the foot, on every page including page 1 |
@@ -88,27 +88,18 @@ keeps the template's rule-based form. Layout choices the rules leave open are th
   number).
 - **TIN placeholder.** The 2015 filing has no TIN line; the sample prints `TIN: xx-xxx0000` as a placeholder so that the
   template's rule-required line exists. The author supplies the real last four digits.
-- **No gate checks.** There is no `checks.yaml` for this doc type, so `tools/check.sh` is not wired here and no stamp exists.
-  Gates 0 and 1 are not run.
 - **Pleading paper is not used.** LBR 9004-1 does not require numbered lines, so the template has none (the cand complaint
   uses line numbers because N.D. Cal. requires them).
 - **Footnotes are not exercised** by the sample. The rule (12-point, single-spaced allowed) is stated but no footnote is
   rendered, so the footnote style is untested.
-- **Typeface.** LBR 9004-1 sets a minimum size, not a typeface. EB Garamond is our choice, vendored in `fonts/`.
+- **Typeface.** LBR 9004-1 sets a minimum size, not a typeface. Times New Roman (the house standard, vendored in `fonts/`) on both engines.
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt body lines,
-13.8 pt single lines, 1 in margins, letter, PAGE field centred in the footer); `docx/nynb-adversary-complaint.lua` builds
-the cover, the two caption tables, the numbered paragraphs, the prayer and the signature block. Output:
-`usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice). The `.docx` converts in LibreOffice with no
-error; the zip and XML parts are well formed.
-
-- Matches the typst output: font and size, line pitch, margins, page numbers, caption layout and rules, the numbering
-  1 to 37, the prayer (a) to (e) with the last item kept with the signature, the signature block. Page count 6 = 6;
-  each of the 6 pages of the `.docx.pdf` was viewed beside the typst page.
-- Differs: line breaks fall on other words (Word and LibreOffice set text differently from typst), so a line or two
-  moves between pages. Numbers are typed with a tab (text starts at
-  1 in); typst sets them with a fixed gap. The caption rules are table borders.
-- BLOCKED: `docx`: no `checks.yaml` exists for this doc type, so `tools/check.sh --engine docx` cannot run (exit 2,
-  "no such file"). No gate has been run on the docx; the `.docx.pdf` has not been checked against the rules.
+**docx** (`docx/`): `docx/reference.xml` (`base="xengine"`, the typst face as `{font}`: Times New Roman 12 pt, exact 24 pt
+body lines, 13.8 pt single lines, 1 in margins, letter, page number centred in the footer) and
+`docx/nynb-adversary-complaint.lua`, run by `fb render` (no shell): the cover, the two caption tables (the party
+column ruled right and bottom), the numbered paragraphs (number in a 0.5 in box after the 0.5 in indent, as typst), the
+prayer (a) to (e) with the last item kept with the signature, and the signature table. Both engines are on the shared
+cross-engine layout model (lib/typst/xengine.typ, lib/docx/xengine.lua): `tools/check.sh --engine docx` 13 passed, 0
+failed, XENG-001..003 PASS (151/151 lines, 6 = 6 pages), gated (`eval.yaml`: `params.cross_engine: gate`).

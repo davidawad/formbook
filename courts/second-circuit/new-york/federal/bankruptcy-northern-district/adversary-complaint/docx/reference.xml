@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The N.D.N.Y. Bankruptcy adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in
+     the face of the typst template ({font}, Times New Roman: the house standard; was EB Garamond) at 12 pt (LBR
+     9004-1(a)(1)(A): minimum 12-point; size 24 half points); Body Text in exact 24 pt line boxes (typst pitch-double:
+     LBR 9004-1(a)(1)(B), double-spaced) with a half-inch first-line indent; headings on the body pitch, 24 pt above;
+     caption, counsel and signature in 13.8 pt boxes (typst pitch-single); letter page with 1-inch margins (LBR
+     9004-1(a)(2)(A), (C)) and a centered page number on every page (LBR 9004-1(a)(2)(B)), its line 36.75 pt above the
+     page foot (735 twips: where typst sets it, footer-descent 30 %). docx/nynb-adversary-complaint.lua writes every
+     paragraph's own spacing. pandoc reads the sample without fancy lists, so the prayer's "(a) ..." stays a
+     paragraph, as typst reads it. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="276" indent="720" heading="480" heading-before="480" heading-after="0" quote="276" footer="735" pandoc-from="markdown+smart-fancy_lists"/>
