@@ -23,6 +23,7 @@
 #let para-indent = 0.5in                  // Tier 2: first-line indent of body paragraphs, as in the exemplars.
 #let toc-depth = 3
 #let sig-indent = 3.2in                   // Tier 2: counsel block and signature set right of centre, as in the exemplars.
+#let counsel-two-col = 4                 // Tier 2: four or more counsel groups on the cover go in two columns (exemplar convention, VACTAPP-TMPL-002).
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -186,7 +187,7 @@
 
   // ---- Cover (Rule 5A:4(b)) ----
   page(numbering: none)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
+    #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)   // single-spaced: the body's double paragraph spacing (Rule 5A:4(a)) between the cover's blocks pushed the cover past one page (DEF-COVER-001)
     #align(center)[
       #text(weight: "bold")[IN THE COURT OF APPEALS OF VIRGINIA] \
       #v(0.3in)
@@ -204,14 +205,26 @@
     ]
     #v(1fr)
     #{
-      set par(leading: single-leading, first-line-indent: 0pt)
-      pad(left: sig-indent, {
-        for g in need(meta, "counsel") { counsel-group(g) }
-        if "counsel_for" in meta [ #emph(inl(meta.counsel_for)) \ ]
-        if "date" in meta { inl(meta.date) }
-      })
+      let groups = need(meta, "counsel")
+      if groups.len() >= counsel-two-col {
+        // Many counsel (Rule 5A:4(b) lists each one's name, bar number and contact details): two columns across the
+        // full width, first half left, as in the exemplars (VACTAPP-TMPL-002); one column at 14 pt runs off the page.
+        let half = calc.ceil(groups.len() / 2)
+        grid(columns: (1fr, 1fr), column-gutter: 0.3in, row-gutter: 0.6em,
+          { for g in groups.slice(0, half) { counsel-group(g) } },
+          { for g in groups.slice(half) { counsel-group(g) } },
+          if "date" in meta { inl(meta.date) },
+          if "counsel_for" in meta { emph(inl(meta.counsel_for)) })
+      } else {
+        pad(left: sig-indent, {
+          for g in groups { counsel-group(g) }
+          if "counsel_for" in meta [ #emph(inl(meta.counsel_for)) \ ]
+          if "date" in meta { inl(meta.date) }
+        })
+      }
     }
-    #v(0.3in)  // keeps the last cover line inside the 1 in bottom margin (Rule 5A:4(a))
+    // No bottom pad after v(1fr): the page's bottom margin (page-margin + 4pt) already keeps the last line's
+    // descender inside the 1 in margin (Rule 5A:4(a)); the former v(0.3in) only cost cover space.
   ]
 
   // ---- Front matter (roman numerals, Tier 2) ----
