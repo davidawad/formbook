@@ -7,9 +7,9 @@ Folder: `courts/second-circuit/new-york/federal/eastern-district/complaint/` (se
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-complaint.md`: a transcription of selected passages of that filing (caption, opening, parties and jurisdiction, Claims I to VI, prayer, jury demand line, signature). |
-| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`). Re-rendered 2026-10-15; `pdffonts` shows only EB Garamond (Regular, Italic, Bold), all embedded. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, vendored Times New Roman only, no warnings (`tools/render.sh`), on the shared cross-engine layout model (`lib/typst/xengine.typ`; fb-595.68.26). |
 | overlay | ok: `usage/OVERLAY-blade-complaint.pdf` (red = ours, blue = filed) and `usage/OVERLAY-blade-complaint.txt` (page map). Regenerated 2026-10-15 from `usage/FILED-EXAMPLE-complaint.pdf`, restored from the URL in `usage/SOURCE.md` (18 pages, as recorded). |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-checked 2026-10-15). |
+| pages reviewed | 10 of 10 on typst and docx (every page rendered at 40 dpi and viewed side by side after the last template change, 2026-10-22). |
 | tier-2 exemplars | 1 filer. EVAL-LOOP asks for 2 or 3 filers; not met (see Known gaps). |
 
 Naming: the brief's `<id>.pdf` / `<id>-overlay.pdf` are written as `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, because `tools/render.sh` and `tools/overlay.sh` read and write those names (file role in the name, per CLAUDE.md).
@@ -28,9 +28,9 @@ Each requirement is from a primary source. Verified 2026-10-14.
 | Local Civil Rule 7.1(b)(2) (same) | At least one-inch margins on all sides. | `margins = 1in` on all sides. |
 | Local Civil Rule 7.1(b)(3) (same) | All text double-spaced, except headings, footnotes, or block quotations. | `line-pitch = 24pt`: baseline pitch measured at 24.0 pt in the PDF (`pdftotext -bbox`). Body paragraphs and prayer items use it. |
 | Local Civil Rule 11.1 | Form of pleadings. | Marked "[Withdrawn]" in the 2026 joint rules. No EDNY local form rule applies to the complaint's layout. |
-| Local Civil Rule 7.1(b), lead-in (same, text read 2026-10-15) | "The typeface, margins, and spacing of all documents presented for filing must meet the following requirements". The rule names no typeface; its only typeface requirement is the 12-point minimum in (b)(1). | Face: **none named**, so the template keeps **EB Garamond** (`docs/FONTS.md`, "No face named"). See Typeface row below. |
+| Local Civil Rule 7.1(b), lead-in (same, text read 2026-10-15) | "The typeface, margins, and spacing of all documents presented for filing must meet the following requirements". The rule names no typeface; its only typeface requirement is the 12-point minimum in (b)(1). | Face: **none named**, so the template sets **Times New Roman**, the house standard. See Typeface below. |
 
-Typeface (fonts pass, 2026-10-15): face required = none (LCR 7.1(b) names no face; the 12-point minimum is the only type-size rule). Substitute = EB Garamond (the default, not a stand-in). Fit = n/a. The judge's individual practices, not retrieved, could name a face; if one does, change `font-family` in `typst/nyed-complaint.typ` to that face's substitute from `docs/FONTS.md`.
+Typeface: face required = none (LCR 7.1(b) names no face; the 12-point minimum is the only type-size rule). The template sets Times New Roman (vendored), the house standard and the exemplar's face, on typst and docx alike (fb-595.68.26; was EB Garamond). The judge's individual practices, not retrieved, could name a face; if one does, change `font-family` in `typst/nyed-complaint.typ` (the docx follows it through `{font}`).
 
 Not produced by this template (separate filings): the civil cover sheet, the Fed. R. Civ. P. 7.1 disclosure statement and its Local Civil Rule 7.1.1 supplemental statement, the summons. Any of these may be required with the first filing.
 
@@ -42,10 +42,10 @@ Not retrieved, so not asserted: the EDNY ECF Rules and Instructions (the PDF-for
 - Court name centered, bold capitals; caption as a two-column table with rules above and below the party column, "-against-" between the sides; `Docket No.` and `JURY TRIAL DEMANDED` at right.
 - Title ("COMPLAINT") centered bold capitals.
 - Unnumbered lead-in (`lead_in` frontmatter; the "Plaintiff ... states as follows" paragraph).
-- Headings: `#` centered bold capitals; `##` centered bold; `###` left bold. Single-spaced, with a half-line gap.
-- Numbered paragraphs: number at 0.5 inch, text at 1 inch, continuation lines at the margin, double-spaced.
+- Headings: `#` centered bold capitals; `##` centered bold; `###` left bold. Single-spaced (13.8 pt lines), a single line above and below, kept with the next block.
+- Numbered paragraphs: number at 0.5 inch, text at 1 inch, continuation lines at the margin, double-spaced (24 pt lines). The last block of the body is kept with the signature block.
 - Prayer: a `WHEREFORE` paragraph (unnumbered by rule), then items lettered A., B., ... in a label column at 0.5 inch.
-- Signature block: "Dated:" at left; "Respectfully submitted," and the signer block at right; "By: /s/ <signer>".
+- Signature block, a double line below the body and never split: "Dated:" at left; "Respectfully submitted," and, a double line below, "By: /s/ <signer>", the signer's name and lines in a 3.2 in column at right.
 
 ## Markdown contract (for samples)
 
@@ -58,13 +58,13 @@ Not retrieved, so not asserted: the EDNY ECF Rules and Instructions (the PDF-for
 
 1. **One filer only.** EVAL-LOOP tier 2 asks for 2 or 3 filers. The CourtListener RECAP search (court `nyed`, complaints filed 2026-10-02 to 2026-10-13, type `r`) found several complaints, but only Blade's was available with a text layer and was downloaded. Tier 2 is therefore not judged against two filers.
 2. **Caption and counsel block single-spaced.** LCR 7.1(b)(3) requires double spacing except for headings, footnotes and block quotations. The caption, counsel block and signature block are not in that list. The template single-spaces them, following the exemplar's practice. Whether the rule reaches captions is a reading question for David, and it is a tier-1 question because it changes the form. **Open: David to decide.**
-3. **Font (kept EB Garamond; tier 2, open).** LCR 7.1(b) names no typeface, so `docs/FONTS.md` keeps EB Garamond for this doc type. The filed exemplar is set in Times New Roman, and a filer's choice of face is not a rule. EB Garamond at 12 pt has a smaller x-height than Times New Roman, so text looks smaller than the exemplar; the 12-point minimum is met. A Times-metric substitute (`Liberation Serif`) would match the exemplar's look, but it is a tier-2 choice for David, not a court requirement. **Open: David to decide.**
+3. **Font (resolved).** LCR 7.1(b) names no typeface; the template sets Times New Roman, the house standard (David, 2026-10-17) and the exemplar's face, at 12 pt.
 4. **Headings must fit the flow.** Headings use `sticky` so a heading does not end a page; a very long heading wraps and is not measured.
 5. **Paragraph numbers differ.** The sample is a selection and the template numbers from 1. The filed numbers are not transcribed; the overlay pairs pages by words, not paragraph numbers.
 6. **Paragraph spacing.** Paragraphs are separated only by the double-space line, with no extra gap. This matches the exemplar's look; it is a tier-2 choice.
-7. **No automated check.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. The Gate 2 review below is the only review of this PDF. No `checks.yaml` exists.
+7. **Automated check.** `tools/check.sh` runs on this folder (typst and docx); the RESULT lines are under Engines.
 
-## Review of the rendered pages (current PDF, `OUTPUT-complaint.typst.pdf`)
+## Review of the rendered pages (made on the earlier 9-page EB Garamond render; the 10 pages of the current typst and docx renders were viewed side by side on 2026-10-22, no defect found)
 
 Compared with the exemplar page that the overlay pairs with each page (`OVERLAY-blade-complaint.txt`); pages 1 to 3 pair with the same page number, pages 4 to 9 do not, because the sample skips passages of the filing.
 
@@ -84,8 +84,10 @@ Overlay (word-overlap pairing, not a score): page 3 pairs with the lowest overla
 
 ## Engines
 
-DOCX (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond 12 pt, exact 24 pt body spacing, 0.5 in first-line indent, 1 in margins, centered PAGE footer); `nyed-complaint.lua` builds the counsel block, caption table, title, numbered paragraphs (number at 0.5 in, tab to 1 in), prayer letters, and signature block. Samples: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice conversion, no errors; opened in LibreOffice, not Word).
+The typst template is the reference; the docx breaks every line and page where it does (Gate 4 CROSS-ENGINE, `params.cross_engine: gate` in `eval.yaml`).
 
-- Matches the typst output: font and size, 24 pt double spacing, margins, caption layout and rules, heading styles, numbering positions, prayer indents, signature block, page-number footer. Pages reviewed: 10 of 10 (`docx-01` to `docx-10` at 60 dpi, compared with the typst pages).
-- Differs: 10 pages in docx, 9 in typst. Line breaks and per-page line counts differ between LibreOffice and typst (docx pages carry 25 to 28 text lines, typst 28 to 30); the mandated line pitch is the same in both. Paragraph numbers are typed text, not a Word list, so a paragraph inserted in Word must be renumbered by hand.
-- BLOCKED: `tools/check.sh <doc-dir> --engine docx` cannot run on this folder (exit 2): it needs `court.json` and `checks.yaml` at the court root, and neither exists for a doc-type folder. No gate has passed for the docx engine; the `.docx.pdf` was reviewed by eye only.
+DOCX (`docx/`): `reference.xml` (`base="xengine"`: the face is the typst template's through `{font}`, 12 pt, exact 24 pt body lines, 13.8 pt single lines, 1 in margins, the centered page-number footer) and `nyed-complaint.lua` (on `lib/docx/xengine.lua`: the counsel block, court name, caption table with its two rules, title, lead-in, numbered paragraphs (number at 0.5 in, tab to 1 in), headings, prayer letters and the signature table, each in the typst template's line boxes and spaces). `fb render` builds the reference document; no shell script and no committed `reference.docx` (fb-595.68.26). Samples: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice conversion; opened in LibreOffice, not Word). Paragraph numbers are typed text, not a Word list, so a paragraph inserted in Word must be renumbered by hand.
+
+- `tools/check.sh <dir>`: RESULT: 9 checks passed, 0 failed (DEF-TOC-001, DEF-COVER-001 pass).
+- `tools/check.sh <dir> --engine docx`: RESULT: 13 checks passed, 0 failed; XENG-001..003 PASS (10 pages, 260/260 lines).
+- No latex engine for this folder.
