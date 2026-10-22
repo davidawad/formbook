@@ -72,7 +72,7 @@ sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-dis
 sh tools/render.sh courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-motion-brief-2.md
 ```
 
-- `usage/OUTPUT-motion-brief.typst.pdf`: 3 pages, render ran with no typst warnings. `pdffonts`: EB Garamond Regular and Bold, embedded (no system fonts).
+- `usage/OUTPUT-motion-brief.typst.pdf`: 3 pages, render ran with no typst warnings. `pdffonts`: Times New Roman Regular and Bold, embedded (no system fonts).
 - `usage/OVERLAY-williams-24-60490.pdf` and `.txt`: the overlay pairs our pages 1, 2 and 3 with the filing's pages 1, 2 and 3. The filing's page 4 (the signature block that the filing itself overflows onto) has no counterpart in our render, and its pages 5 to 8 (the matrix) are not paired. The overlay is a diagnostic, not a score; no visual claim below comes from it alone.
 - `usage/OUTPUT-motion-brief-2.typst.pdf`: 3 pages, no typst warnings.
 
@@ -104,7 +104,7 @@ Pages reviewed: 3 of 3 (fictional sample).
 4. **Certificate recipient spacing.** The recipients are set closer than the exemplar's, so the certificate and its signature fit one page. The exemplar's signature runs onto a second page, which a clerk would notice more. ACCEPTED.
 5. **"WHEREFORE" indent.** Indented in the template, flush in the exemplar. One exemplar; ACCEPTED.
 6. **Page numbers.** The template prints a centred page number at the foot (KYEB-FORM-004); the exemplar has none, and its pages are numbered by the ECF header. The footer is kept because it costs nothing and KYEB-FORM-004 cites it as a convention.
-7. **Typeface.** No face named by a rule (KYEB-FORM-001), so EB Garamond at 13 pt stays, per `docs/FONTS.md`. The exemplar is Times New Roman; the substitute rule applies only to a court that names a face. Glyph-level differences from the exemplar are tier 3.
+7. **Typeface.** No face named by a rule (KYEB-FORM-001). The template is set in Times New Roman 12 pt (vendored), the house standard (docs/FONTS.md, fb-9fyu; `template_face` in `data/exemplar-fonts.json`, fb-595.68.29); the audited exemplar's Courier is one filer's style (tier 3).
 8. **Hearing wording.** LBR 9014-1 requires the date, time and location; the labels "Hearing:", "Time:", "Place:", "Objections due:" are the template's own. The exemplar has no hearing block (it has the NOTICE paragraph), so the block is not checked against a filing.
 9. **Proposed order.** Required by LBR 9013-1(d); not generated. The APM (§ XVIII) governs how it is attached.
 10. **Certificate of service.** Printed when `certificate_of_service` is given. The FRBP 9014(b) requirement is for service, not a particular form; the recipient list in the transcription is the filing's, and the generic sample's wording is the template's sample.
@@ -113,7 +113,7 @@ Pages reviewed: 3 of 3 (fictional sample).
 13. **Not run:** `tools/tracker.sh` (it rewrites the root `README.md`, `STATUS.md` and per-folder READMEs, which this bead does not own), and `tools/check.sh` (this doc type has no `checks.yaml`, so there are no Gate 0 or Gate 1 checks to run). `court.json` is not changed.
 14. **Unverified:** whether the court's chambers require a separate memorandum under a judge's standing order; not searched.
 1. **No exemplar (BLOCKED).** Every layout choice above that a clerk would expect to see (heading style, hearing-block wording, certificate wording, sub-heading spacing) is a convention unconfirmed by a filing. See `usage/SOURCE.md` for the searches and what would unblock it.
-2. **Typeface.** No face named by a rule (KYEB-FORM-001), so EB Garamond at 13 pt stays, per `docs/FONTS.md` (fonts pass, 2026-10-15). Times (`Liberation Serif`) is vendored; see the adversary-complaint README, gap 1, for the open choice.
+2. **Typeface.** Resolved: Times New Roman 12 pt on typst and docx (gap 7).
 3. **Hearing wording.** LBR 9014-1 requires the date, time and location; the labels "Hearing:", "Time:", "Place:", "Objections due:" are the template's own. Not checked against a filing.
 4. **Proposed order.** Required by LBR 9013-1(d); not generated. The APM (§ XVIII) governs how it is attached.
 5. **Certificate of service.** Printed only when `certificate_of_service` is given. The FRBP 9014(b) requirement is for service, not a particular certificate form; the wording in the test sample is the template's sample, not a form.
@@ -123,7 +123,7 @@ Pages reviewed: 3 of 3 (fictional sample).
 
 ## Engines
 
-- **typst** (primary): `typst/`, unchanged.
-- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 13 pt, exact 24 pt body line pitch, 0.5 in first-line indent, 1 in margins on US Letter, single-spaced caption, notice of hearing, signature and footnotes, 12 pt centered PAGE footer). `docx/kyeb-motion-brief.lua` builds the caption table, court and title lines, the notice of hearing (under the title, as in the typst form), the signature block and the certificate of service. Headings are the author's markdown headings; lists are lettered a., b., c.
-- **Differs from typst**: (a) the caption rules come from the table style: the rule under the right column and the rule between the two caption rows are drawn too (typst draws them under the left column only). (b) Line and page breaks follow Word or LibreOffice font metrics, not typst's.
-- **BLOCKED (docx.pdf gates, Gates 0 to 3 on `OUTPUT-<id>.docx.pdf`)**: LibreOffice (`soffice`) is not installed on the box used for this build, so the LibreOffice PDF was not produced and no page was reviewed in the docx engine. `usage/OUTPUT-motion-brief-2.docx` was produced and checked only for a valid zip and well-formed XML parts; it has not been opened in Word or LibreOffice. The motion has no filed exemplar (see the BLOCKED line above), so the docx layout is no more verified than the typst layout.
+- **typst** (primary): `typst/`, on the shared cross-engine layout model (`lib/typst/xengine.typ`, fb-595.68.29): Times New Roman 12 pt in 14 pt lines throughout, a 12 pt gap below every block (none above, so no space is lost or kept at a page top), numbered paragraphs running on through the motion (number at 0.25 in, text at 0.6 in), the title between two rules, the certificate kept whole with its signature block.
+- **docx**: `docx/reference.xml` (base="xengine", `{font}` = the typst face; `fb render` builds the reference document) and `docx/kyeb-motion-brief.lua` (on `lib/docx/xengine.lua`): the same twips as the typst pitch and gaps; caption, title (a cell ruled above and below) and signature blocks as fixed-width tables, the rule under the signer a paragraph border. No shell scripts. `params.cross_engine: gate` (`eval.yaml`): XENG-001..003 pass on both samples.
+- **Differs from typst**: nothing measured; every line and page break is the same (XENG-003).
+- **docx.pdf gates**: `sh tools/check.sh <dir> --engine docx` passes (26 checks, 0 failed) on both samples; both `.docx.pdf` reviewed page by page against typst.

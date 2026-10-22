@@ -11599,6 +11599,8 @@
       "class": "metric-exact",
       "face": "TeX Gyre Cursor",
       "why": "Adobe Courier metrics",
+      "template_face": "Times New Roman",
+      "note": "fb-595.68.29 under David's 2026-10-17 ruling that Times New Roman is the standard: no E.D. Ky. bankruptcy rule names a face (LBR 1001-3; the District Court's LR 5.1 does not apply), and Courier is one filer's style (tier 3), so the template is set in Times New Roman 12 pt on typst and docx, as the kyeb adversary complaint is, not in Courier's twin TeX Gyre Cursor (the docx had named EB Garamond against the Cursor typst face); face stays the audited match.",
       "fonts": [
         "Arial",
         "Courier",
