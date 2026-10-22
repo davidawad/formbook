@@ -1,0 +1,8 @@
+# LCvR7-1(d) (../../rules.md OKND-LEN-002): opening and response briefs are limited to 25 pages (reply and
+# supplemental briefs to 10). The sample is an opening brief (a motion and brief in one document, LCvR7-1(b)); the
+# check counts every page, the caption page and the certificate of service included, so it is stricter than the rule.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (fb-595.68.33, on the shared layout model lib/*/xengine*), so a difference fails.
+params:
+  page_limit: 25
+  cross_engine: gate
