@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Bankr. D. Vt. motion's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the
+     face of the typst template ({font}, Times New Roman; no rule names a face for filings) at 12 pt (size 24 half
+     points; D. Vt. LBR 10(a)(4)); Body Text in exact 27.6 pt line boxes (typst pitch-double, Vt. LBR 5005-1(a)(5)
+     2.0 spacing) with a half-inch indent; the court, caption, title, quotation and signature lines in 13.8 pt boxes
+     (typst pitch-single); letter page with 1-inch margins (Vt. LBR 5005-1(a)(3)) and a centered page number at the
+     bottom, its line 36 pt above the page foot (720 twips: where typst sets it, footer-descent 30 %). The markdown
+     is read as CommonMark, as cmarker reads it ("(a) Unfair ..." in a quotation is text, not a list).
+     docx/vtb-motion-brief.lua writes every paragraph's own spacing. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="commonmark+smart+yaml_metadata_block" size="24" body="552" single="276" indent="720" heading="552" heading-before="0" heading-after="0" quote="276" footer="720"/>
