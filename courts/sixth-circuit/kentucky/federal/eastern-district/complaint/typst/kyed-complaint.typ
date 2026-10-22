@@ -86,7 +86,8 @@
 #let party-column(meta) = for (i, p) in need(meta, "caption").enumerate() {
   if i > 0 { sline(above: versus-space, left: versus-indent)[v.] }
   for (j, n) in p.names.enumerate() { sline(above: if i > 0 and j == 0 { versus-space } else { 0pt }, inl(n)) }
-  if p.designation != "" { sline(above: desig-above, right: designation-pad, align-to: right, inl(p.designation)) }
+  // right-aligned without typst's hanging punctuation ("Plaintiff,"), as Word sets it
+  if p.designation != "" { sline(above: desig-above, right: designation-pad, align-to: right, text(overhang: false, inl(p.designation))) }
 }
 
 /// The civil action number and the e-filing legend centered above the caption; the parties and, on the right,
