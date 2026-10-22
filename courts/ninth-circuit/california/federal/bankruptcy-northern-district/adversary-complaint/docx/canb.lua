@@ -13,7 +13,7 @@
 -- puts in the document (tools/fb/src/docxpass.rs).
 --
 -- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
--- exact line boxes of the typst pitch (twips = 20 x pt: 480 a numbered line, 276 a single line), the spaces
+-- exact line boxes of the typst pitch (twips = 20 x pt: 480 a numbered line, 240 a single line), the spaces
 -- between blocks those of the typst template, and the break rules of typst on every run.
 
 local xe = require("docx.xengine")
