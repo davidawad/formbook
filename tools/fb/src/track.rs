@@ -29,13 +29,12 @@ fn check(root: &Path) -> Res<ExitCode> {
     let status_path = root.join("STATUS.md");
     let expected_status = status_md(&s);
     let current_status = fs::read_to_string(&status_path).map_err(|e| io_fail(&status_path, e))?;
-    let stale = [
-        ("README.md", current_readme != expected_readme),
-        ("STATUS.md", current_status != expected_status),
-    ]
-    .into_iter()
-    .filter_map(|(name, differs)| differs.then_some(name))
-    .collect::<Vec<_>>();
+    let stale = stale_files(
+        &current_readme,
+        &expected_readme,
+        &current_status,
+        &expected_status,
+    );
     if stale.is_empty() {
         println!("RESULT: TRACKER CHECK PASS");
         Ok(ExitCode::SUCCESS)
@@ -44,6 +43,21 @@ fn check(root: &Path) -> Res<ExitCode> {
         println!("Run `tools/tracker.sh` to regenerate the tracker files.");
         Ok(ExitCode::from(1))
     }
+}
+
+fn stale_files<'a>(
+    current_readme: &str,
+    expected_readme: &str,
+    current_status: &str,
+    expected_status: &str,
+) -> Vec<&'a str> {
+    [
+        ("README.md", current_readme != expected_readme),
+        ("STATUS.md", current_status != expected_status),
+    ]
+    .into_iter()
+    .filter_map(|(name, differs)| differs.then_some(name))
+    .collect()
 }
 
 fn run(root: &Path) -> Res<ExitCode> {
@@ -169,5 +183,22 @@ mod tests {
     fn splice_no_markers_keeps_text() {
         assert_eq!(splice("", "X\n"), "");
         assert_eq!(splice("a\nb\n", "X\n"), "a\nb\n");
+    }
+
+    #[test]
+    fn freshness_check_names_each_stale_root_file() {
+        assert_eq!(
+            stale_files("old README", "fresh README", "fresh status", "fresh status"),
+            ["README.md"]
+        );
+        assert_eq!(
+            stale_files("fresh README", "fresh README", "old status", "fresh status"),
+            ["STATUS.md"]
+        );
+        assert_eq!(
+            stale_files("old README", "fresh README", "old status", "fresh status"),
+            ["README.md", "STATUS.md"]
+        );
+        assert!(stale_files("same", "same", "same", "same").is_empty());
     }
 }
