@@ -68,32 +68,32 @@ signature:
     - Leslie A. Brueckner (lbrueckner@publicjustice.net)
     - Public Justice, Oakland, CA 94612
 authorities:
-  - {key: basko, category: cases, text: "*Basko v. Sterling Drug, Inc.*, 416 F.2d 417 (2d Cir. 1969)"}
-  - {key: bausch-stryker, category: cases, text: "*Bausch v. Stryker*, 630 F.3d 546 (7th Cir. 2010)"}
-  - {key: buckman, category: cases, text: "*Buckman v. Plaintiffs' Legal Committee*, 531 U.S. 341 (2001)"}
-  - {key: caplinger, category: cases, text: "*Caplinger v. Medtronic, Inc.*, 784 F.3d 1335 (10th Cir. 2015)"}
-  - {key: desiano, category: cases, text: "*Desiano v. Warner-Lambert & Co.*, 467 F.3d 85 (2d Cir. 2006)"}
-  - {key: gerrity, category: cases, text: "*Gerrity v. R.J. Reynolds Tobacco Co.*, 263 Conn. 120 (2003)"}
-  - {key: glover, category: cases, text: "*Glover v. Bausch & Lomb Inc.*, 6 F.4th 229 (2d Cir. 2021)"}
-  - {key: hurley, category: cases, text: "*Hurley v. Heart Physicians, P.C.*, 278 Conn. 305 (2006)"}
-  - {key: allergan, category: cases, text: "*In re Allergan Biocell Textured Breast Implant Prods. Liab. Litig.*, No. 2:19-MD-2921-BRM-ESK, 2021 WL 1050910 (D.N.J. Mar. 19, 2021)"}
-  - {key: medtronic-sprint, category: cases, text: "*In re Medtronic, Inc. Sprint Fidelis Leads Prods. Liab. Litig.*, 623 F.3d 1200 (8th Cir. 2010)"}
-  - {key: lohr, category: cases, text: "*Lohr v. Medtronic*, 518 U.S. 470 (1996)"}
-  - {key: mcconologue, category: cases, text: "*McConologue v. Smith & Nephew, Inc.*, 8 F. Supp. 3d 93 (D. Conn. 2014)"}
-  - {key: mendez, category: cases, text: "*Mendez v. Shah*, 28 F. Supp. 3d 282 (D.N.J. 2014)"}
-  - {key: nagel, category: cases, text: "*Nagel v. Smith & Nephew*, No. 15-cv-00927-JAM, 2016 WL 4098715 (D. Conn. July 28, 2016)"}
-  - {key: prokolkin, category: cases, text: "*Prokolkin v. General Motors Corp.*, 170 Conn. 289 (1976)"}
-  - {key: richardson, category: cases, text: "*Richardson v. Bayer Healthcare Pharms. Inc.*, No. 4:15-CV-00443-BLW, 2016 WL 4546369 (D. Idaho Aug. 30, 2016)"}
-  - {key: riegel, category: cases, text: "*Riegel v. Medtronic, Inc.*, 552 U.S. 312 (2008)"}
-  - {key: riley, category: cases, text: "*Riley v. Cordis Corp.*, 625 F. Supp. 2d 769 (D. Minn. 2009)"}
-  - {key: silver, category: cases, text: "*Silver v. Medtronic, Inc.*, 236 F. Supp. 3d 889 (M.D. Pa. 2017)"}
-  - {key: soto, category: cases, text: "*Soto v. Bushmaster Firearms Int'l, LLC*, 331 Conn. 53 (2019)"}
-  - {key: vitanza, category: cases, text: "*Vitanza v. Upjohn Co.*, 257 Conn. 365 (2001)"}
-  - {key: ward, category: cases, text: "*Ward v. Greene*, 267 Conn. 539 (2004)"}
-  - {key: usc-360k, category: statutes, text: "21 U.S.C. § 360k(a)(1)"}
-  - {key: cga-52-572n, category: statutes, text: "Conn. Gen. Stat. § 52-572n(a)"}
-  - {key: cga-52-572q, category: statutes, text: "Conn. Gen. Stat. § 52-572q"}
-  - {key: restatement-388, category: statutes, text: "Restatement (Second) of Torts § 388"}
+  basko: {kind: cases, cite: "*Basko v. Sterling Drug, Inc.*, 416 F.2d 417 (2d Cir. 1969)", sort: "basko v sterling drug inc 416 f2d 417 2d cir 1969"}
+  bausch-stryker: {kind: cases, cite: "*Bausch v. Stryker*, 630 F.3d 546 (7th Cir. 2010)", sort: "bausch v stryker 630 f3d 546 7th cir 2010"}
+  buckman: {kind: cases, cite: "*Buckman v. Plaintiffs' Legal Committee*, 531 U.S. 341 (2001)", sort: "buckman v plaintiffs legal committee 531 us 341 2001"}
+  caplinger: {kind: cases, cite: "*Caplinger v. Medtronic, Inc.*, 784 F.3d 1335 (10th Cir. 2015)", sort: "caplinger v medtronic inc 784 f3d 1335 10th cir 2015"}
+  desiano: {kind: cases, cite: "*Desiano v. Warner-Lambert & Co.*, 467 F.3d 85 (2d Cir. 2006)", sort: "desiano v warnerlambert co 467 f3d 85 2d cir 2006"}
+  gerrity: {kind: cases, cite: "*Gerrity v. R.J. Reynolds Tobacco Co.*, 263 Conn. 120 (2003)", sort: "gerrity v rj reynolds tobacco co 263 conn 120 2003"}
+  glover: {kind: cases, cite: "*Glover v. Bausch & Lomb Inc.*, 6 F.4th 229 (2d Cir. 2021)", sort: "glover v bausch lomb inc 6 f4th 229 2d cir 2021"}
+  hurley: {kind: cases, cite: "*Hurley v. Heart Physicians, P.C.*, 278 Conn. 305 (2006)", sort: "hurley v heart physicians pc 278 conn 305 2006"}
+  allergan: {kind: cases, cite: "*In re Allergan Biocell Textured Breast Implant Prods. Liab. Litig.*, No. 2:19-MD-2921-BRM-ESK, 2021 WL 1050910 (D.N.J. Mar. 19, 2021)", sort: "in re allergan biocell textured breast implant prods liab litig no 219md2921brmesk 2021 wl 1050910 dnj mar 19 2021"}
+  medtronic-sprint: {kind: cases, cite: "*In re Medtronic, Inc. Sprint Fidelis Leads Prods. Liab. Litig.*, 623 F.3d 1200 (8th Cir. 2010)", sort: "in re medtronic inc sprint fidelis leads prods liab litig 623 f3d 1200 8th cir 2010"}
+  lohr: {kind: cases, cite: "*Lohr v. Medtronic*, 518 U.S. 470 (1996)", sort: "lohr v medtronic 518 us 470 1996"}
+  mcconologue: {kind: cases, cite: "*McConologue v. Smith & Nephew, Inc.*, 8 F. Supp. 3d 93 (D. Conn. 2014)", sort: "mcconologue v smith nephew inc 8 f supp 3d 93 d conn 2014"}
+  mendez: {kind: cases, cite: "*Mendez v. Shah*, 28 F. Supp. 3d 282 (D.N.J. 2014)", sort: "mendez v shah 28 f supp 3d 282 dnj 2014"}
+  nagel: {kind: cases, cite: "*Nagel v. Smith & Nephew*, No. 15-cv-00927-JAM, 2016 WL 4098715 (D. Conn. July 28, 2016)", sort: "nagel v smith nephew no 15cv00927jam 2016 wl 4098715 d conn july 28 2016"}
+  prokolkin: {kind: cases, cite: "*Prokolkin v. General Motors Corp.*, 170 Conn. 289 (1976)", sort: "prokolkin v general motors corp 170 conn 289 1976"}
+  richardson: {kind: cases, cite: "*Richardson v. Bayer Healthcare Pharms. Inc.*, No. 4:15-CV-00443-BLW, 2016 WL 4546369 (D. Idaho Aug. 30, 2016)", sort: "richardson v bayer healthcare pharms inc no 415cv00443blw 2016 wl 4546369 d idaho aug 30 2016"}
+  riegel: {kind: cases, cite: "*Riegel v. Medtronic, Inc.*, 552 U.S. 312 (2008)", sort: "riegel v medtronic inc 552 us 312 2008"}
+  riley: {kind: cases, cite: "*Riley v. Cordis Corp.*, 625 F. Supp. 2d 769 (D. Minn. 2009)", sort: "riley v cordis corp 625 f supp 2d 769 d minn 2009"}
+  silver: {kind: cases, cite: "*Silver v. Medtronic, Inc.*, 236 F. Supp. 3d 889 (M.D. Pa. 2017)", sort: "silver v medtronic inc 236 f supp 3d 889 md pa 2017"}
+  soto: {kind: cases, cite: "*Soto v. Bushmaster Firearms Int'l, LLC*, 331 Conn. 53 (2019)", sort: "soto v bushmaster firearms intl llc 331 conn 53 2019"}
+  vitanza: {kind: cases, cite: "*Vitanza v. Upjohn Co.*, 257 Conn. 365 (2001)", sort: "vitanza v upjohn co 257 conn 365 2001"}
+  ward: {kind: cases, cite: "*Ward v. Greene*, 267 Conn. 539 (2004)", sort: "ward v greene 267 conn 539 2004"}
+  usc-360k: {kind: statutes, cite: "21 U.S.C. § 360k(a)(1)", sort: "21 usc 360ka1"}
+  cga-52-572n: {kind: statutes, cite: "Conn. Gen. Stat. § 52-572n(a)", sort: "conn gen stat 52572na"}
+  cga-52-572q: {kind: statutes, cite: "Conn. Gen. Stat. § 52-572q", sort: "conn gen stat 52572q"}
+  restatement-388: {kind: statutes, cite: "Restatement (Second) of Torts § 388", sort: "restatement second of torts 388"}
 ---
 
 # INTRODUCTION
@@ -168,7 +168,7 @@ As previously argued, this Court need only adhere to its prior holdings to concl
 
 B&L nonetheless insists that allowing Plaintiffs' claim under CUTPA would render the CPLA's exclusivity provision "useless," because the CPLA is the exclusive remedy for "actions of negligence, strict liability and warranty, for harm caused by a product." Br. at 28. (citing [Conn. Gen. Stat. § 52-572n(a)](toa:cga-52-572n); emphasis added). B&L argues that because Plaintiffs' failure-to-warn claim is negligence-based, allowing Plaintiffs to sue under CUTPA would render the exclusivity provision's reference to "actions of negligence" superfluous.
 
-B&L is wrong on two counts. First, Plaintiffs' CUTPA claim is not a negligence claim; to the contrary, it is based on B&L's unfair trade practices: specifically, B&L's unlawful and aggressive marketing of its device as safe and effective. This is exactly the type of unscrupulous trade practice that CUTPA was designed to address. It is also a claim that was conspicuously omitted from [§ 52-572n(a)](toa:cga-52-572n), which merely provides that the CPLA is the exclusive remedy for "actions of negligence, strict liability and warranty…". As this Court explained in [*Gerrity v. R.J. Reynolds Tobacco Co.*, 263 Conn. 120, 128–29 (2003)](toa:gerrity), CUTPA's legislative history reveals that the exclusivity provision was merely "intended to cut down on the number of counts in a complaint for injuries caused by a product. It [was] not intended to affect other state statutory schemes such as anti-trust acts or the state unfair trade practice act." (Emphasis altered from original). If anyone's interpretation runs afoul of the CPLA's exclusivity provision, it is B&L's, not the Glovers'.
+B&L is wrong on two counts. First, Plaintiffs' CUTPA claim is not a negligence claim; to the contrary, it is based on B&L's unfair trade practices: specifically, B&L's unlawful and aggressive marketing of its device as safe and effective. This is exactly the type of unscrupulous trade practice that CUTPA was designed to address. It is also a claim that was conspicuously omitted from § [52-572n(a)](toa:cga-52-572n), which merely provides that the CPLA is the exclusive remedy for "actions of negligence, strict liability and warranty…". As this Court explained in [*Gerrity v. R.J. Reynolds Tobacco Co.*, 263 Conn. 120, 128–29 (2003)](toa:gerrity), CUTPA's legislative history reveals that the exclusivity provision was merely "intended to cut down on the number of counts in a complaint for injuries caused by a product. It [was] not intended to affect other state statutory schemes such as anti-trust acts or the state unfair trade practice act." (Emphasis altered from original). If anyone's interpretation runs afoul of the CPLA's exclusivity provision, it is B&L's, not the Glovers'.
 
 Second, B&L's argument that excluding unfair trade practices claims from the CPLA's exclusivity provision would render that provision "useless" ignores that, under Plaintiffs' reading, the provision will still make the CPLA the exclusive remedy for all the claims listed therein—including negligent failure-to-warn claims, strict liability claims, and warranty claims. The only type of claim that would not be included under the Glovers' reading of that provision are marketing claims that are distinct from failure-to-warn claims. Excluding that type of claim from the CPLA does no violence to the statute's text; is consistent with its legislative history; and ensures that CUTPA's powerful remedies remain available to address unethical marketing practices designed to trick consumers into using dangerous products.
 
