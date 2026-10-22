@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The N.D. Ind. complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman; no N.D. Ind. rule names a face)
+     at 12 pt (size 24 half points, L.R. 5-4(a)(4)); Body Text in exact 27.6 pt line boxes (552 twips: typst
+     pitch-body, double spacing, L.R. 5-4(a)(5)) with a half-inch first-line indent; single lines in 13.8 pt boxes
+     (276 twips: typst pitch-single); headings on the body pitch, 27.6 pt above and 19.8 pt below (552, 396);
+     footnotes at 10 pt (L.R. 5-4(a)(4)) in 11.5 pt boxes (230: typst pitch-note), no space between them. Letter page
+     with one-inch margins (L.R. 5-4(a)(2), (3)), the page number centred at 12 pt from page 1 in a single-pitch
+     line whose box ends 0.5 in above the page edge (typst footer-distance). docx/innd.lua writes every paragraph's
+     own spacing; a paragraph that carries a footnote (which only pandoc writes) is a native paragraph in Body Note
+     or List Note, the same spacing as a style, without widow control (docs/EVAL-LOOP.md: typst's widow rule does
+     not see the note). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="552" heading-before="552" heading-after="396" quote="720" note="230" note-size="20" note-after="0" footer="720">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyNote"><w:name w:val="Body Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="396" w:line="552" w:lineRule="exact"/><w:ind w:left="0" w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="ListNote"><w:name w:val="List Note"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:widowControl w:val="0"/><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="396" w:line="552" w:lineRule="exact"/><w:ind w:left="1440" w:hanging="720"/></w:pPr></w:style>
+<footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:ind w:firstLine="0"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></footer>
+</reference>
