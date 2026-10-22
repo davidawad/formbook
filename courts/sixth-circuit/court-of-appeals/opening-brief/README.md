@@ -12,9 +12,9 @@ Doc type `opening-brief` of `courts/sixth-circuit/court-of-appeals`. Self-contai
 | `typst/main.typ` | Entry point; reads `--input sample=...`. |
 | `typst/ca6-opening-brief.typ` | Template `ca6-brief(meta, md)`. Content-agnostic; the numbers are named parameters traced to the rules. |
 
-Typeface: no face named, so EB Garamond stays. FRAP 32(a)(5)(A) and (a)(6) require a proportionally spaced serif at 14 pt and name no face; the Sixth Circuit Briefs Checklist ("Typefaces") gives "such as Times New Roman" as an example only. The template uses the vendored EB Garamond (`fonts/eb-garamond/`), per `docs/FONTS.md`. The exemplar's Palatino is a visual comparison only.
+Typeface: Times New Roman (Liberation Serif, its metric twin, as the fallback), since fb-595.54.3. FRAP 32(a)(5)(A) and (a)(6) require a proportionally spaced serif at 14 pt and name no face; the Sixth Circuit Briefs Checklist ("Typefaces") gives "such as Times New Roman" as its example, and Times New Roman is the one face all three engines set with the same metrics (LaTeX: newtx; Word: Times New Roman), which the cross-engine gate needs (`docs/FONTS.md`, `docs/EVAL-LOOP.md`). The exemplar's Palatino is a visual comparison only.
 
-Build (from the repo root, with the toolchain on PATH): the render uses only the vendored EB Garamond (`--ignore-system-fonts`), and any typst warning fails the build.
+Build (from the repo root, with the toolchain on PATH): the render uses only the pinned Times New Roman and the vendored fonts (`--ignore-system-fonts`), and any typst warning fails the build.
 
 ## Governing rules
 
@@ -30,14 +30,14 @@ Verified 2026-10-14 against the Sixth Circuit's combined rules PDF, `https://www
 | Jurisdictional statement; issues; statement of the case; summary; argument; conclusion; signature | FRAP 28(a)(4)–(9) | body headings (author supplies; order is the author's) |
 | Standard of review for each issue (may sit in the argument) | FRAP 28(a)(8)(B) | author's responsibility; not checked |
 | Typeface: proportionally spaced, serif, 14-point or larger; plain roman, case names italic | FRAP 32(a)(5)(A), 32(a)(6) | `font-family`, `type-size`; all text 14 pt (footnotes too) |
-| Paper, double spacing (quotations over two lines may be single-spaced; headings and footnotes single-spaced), margins ≥ 1 in | FRAP 32(a)(4) | `body-leading`, `single-leading`, `page-margin` |
+| Paper, double spacing (quotations over two lines may be single-spaced; headings and footnotes single-spaced), margins ≥ 1 in | FRAP 32(a)(4) | `pitch-double` (31.4 pt), `pitch-single` (20 pt), `page-margin` |
 | Length: principal brief ≤ 13,000 words (or 1,300 monospaced lines) | FRAP 32(a)(7)(A)–(B)(i); 6 Cir. R. 28(e)(1)–(2)(A)(i) | `word-limit` (the template panics above it) |
 | Excluded from length: cover, disclosure, TOC, TOA, oral-argument statement, certificates, signature block, proof of service, designation | FRAP 32(f); 6 Cir. R. 32(b)(1) | the word count runs over the body only (everything before the Table of Authorities' section and the certificates) |
 | Certificate of compliance (type-volume and typeface), Form 6 wording, immediately after the signature | FRAP 32(g)(1)–(2); 6 Cir. R. 32(a) | `certificate-of-compliance` |
 | Proof of service when served other than through ECF | FRAP 25(d); 6 Cir. R. 25(f)(2) | `certificate-of-service` (always included; CM/ECF wording as in the exemplar) |
 | Designation of relevant district-court documents, at the end of the brief as an addendum: entry number, description, Page ID range | 6 Cir. R. 28(b)(1)(A)(i), 30(g)(1)(A)–(C) | `designation-section` |
 | Record references use "Page ID #" for district-court appeals | 6 Cir. R. 28(a)(1) | author supplies the citations; not checked |
-| Electronic filing: PDF, native rather than scanned, text-searchable | 6 Cir. R. 25(a)(2) (Form of Electronic Filing) | the render is native text (`pdffonts`: embedded EB Garamond, text extracts) |
+| Electronic filing: PDF, native rather than scanned, text-searchable | 6 Cir. R. 25(a)(2) (Form of Electronic Filing) | the render is native text (`pdffonts`: embedded Times New Roman, text extracts) |
 
 ## Markdown contract
 
@@ -61,10 +61,10 @@ Body: `# Heading` sections (Introduction optional; then Statement of Jurisdictio
 
 - pp. 1–3 (cover, disclosure, TOC) pair with filed pp. 1–3, with word overlap 100%, 90%, 61%. The disclosure text is the same in both; the TOC's differences are the sample's own page numbers.
 - pp. 4–5 (TOA) pair with filed TOA pages 10–11 at 26% and 21%. This is expected: the filed TOA runs seven pages (filed pp. 6–12); ours lists only the authorities the excerpt cites.
-- pp. 6–13 (oral-argument statement, Introduction, Jurisdiction, Issues, Statement of the Case, Summary, Argument) pair with filed pp. 13–39 at 30–77%. The filed text is the same, but our excerpt skips paragraphs and uses EB Garamond where the exemplar uses Palatino.
+- pp. 6–13 (oral-argument statement, Introduction, Jurisdiction, Issues, Statement of the Case, Summary, Argument) pair with filed pp. 13–39 at 30–77%. The filed text is the same, but our excerpt skips paragraphs and uses another face than the exemplar's Palatino.
 - pp. 14–18 (conclusion, certificates, designation) pair with filed pp. 86–90 at 47–87%.
 
-Font difference: the exemplar is Palatino Linotype; the template is EB Garamond (vendored, OFL), a serif face that FRAP 32(a)(5)(A) allows. The overlay therefore never matches glyph for glyph.
+Font difference: the exemplar is Palatino Linotype; the template is Times New Roman, a serif face that FRAP 32(a)(5)(A) allows. The overlay therefore never matches glyph for glyph.
 
 ## Page review (Gate 2)
 
@@ -80,7 +80,9 @@ All 18 pages of `usage/OUTPUT-opening-brief.typst.pdf` were rasterised at `pdfto
 
 Every other page was checked for: cover fitting one page (p. 1); disclosure page numbered i; roman numbering run i–v through the front matter; arabic numbering from 1 at the Introduction; TOC page numbers equal to the printed footers (checked for pp. 9, 10, 11 — Certificate of Compliance, Service, Designation); TOA page lists equal to the body pages where each authority is cited (e.g. *Brown* 1, 7 and *Biden* 2, 6); 14-pt type throughout; no widow lines on the body pages.
 
-Pages reviewed: 18 of 18. Final render: 18 pages, zero typst warnings, `pdffonts` shows only embedded EB Garamond.
+Pages reviewed: 18 of 18. Final render: 18 pages, zero typst warnings, `pdffonts` showed only embedded EB Garamond (the face then; Times New Roman since fb-595.54.3, see "Cross-engine layout").
+
+2026-10-22 (fb-595.54.3): all 19 pages of the new typst render viewed (`pdftoppm -r 50`), and all 19 of the latex and docx renders. Changed pages against the 18-page render: the TOC and TOA rows are single-spaced 20 pt rows with the page in a 36 pt / 56 pt column; the TOA runs two pages (iii–iv) and the oral-argument statement is page v; the body is one page longer (pp. 1–9, the conclusion and signature on p. 9); certificates pp. 10–11, designation pp. 12–13 (the table breaks between rows, no row split). Checked: the cover fits one page; roman i–v, arabic from 1; TOC numbers equal the printed footers (Introduction 1, Argument 7, Conclusion 9, Certificate of Compliance 10, Designation 12); TOA pages equal the citing pages; no heading ends a page; the last paragraph stands with the signature block. No defect open.
 
 ## Known gaps (for review)
 
@@ -100,11 +102,17 @@ Pages reviewed: 18 of 18. Final render: 18 pages, zero typst warnings, `pdffonts
 
 ## Engines
 
-Same rules and numbers as the typst template; the typst output is the reference for what each engine must match.
+Same rules and numbers as the typst template; the typst output is the reference every engine matches line for line (Gate 4 CROSS-ENGINE, `params.cross_engine: gate` in `eval.yaml`).
 
-**latex** (`latex/template.tex`, `latex/ca6-opening-brief.lua`; tectonic). Matches: EB Garamond 14 pt from `fonts/` only (embedded, `pdffonts`), double spacing (31.43 bp body pitch, measured from the typst render), single-spaced blocks, 1 in margins, roman front matter and arabic body, one-page cover, TOC and TOA page numbers (checked against the body pages), certificates, designation, 14-pt footnotes. Differs: 19 pages against typst's 18; the TOC runs two pages; the cover rules are drawn with `\vrule` and sit a few points from typst's. The appellant's blue cover is not drawn (same as typst). Tectonic fetches its TeX packages on the first run.
+**latex** (`latex/template.tex`, `latex/*.lua`; pdflatex). The shared layout package `lib/latex/xengine.sty` (inlined into the generated `.tex` by `fb render`) and the inline rules `lib/latex/xengine.lua`: Times (newtx) 14 bp in 31.4 bp line boxes (body) and 20 bp boxes (headings, footnotes, tables, cover, certificates), the typst spaces as `\addvspace`, contents and authorities rows as `\xe@row` with `\pageref` and `.aux` page lists, the cover's counsel columns as typst's grid. XENG-001..003 pass: every page and every line breaks where typst breaks it.
 
-**docx** (`docx/reference.xml`, `docx/ca6-opening-brief.lua`; fb-595.63): fb render builds `reference.docx` from `docx/reference.xml` (pandoc's default reference with these styles; the old `make-reference.sh`, `reference-src/`, `reference.docx`, `reference-addendum.docx`, `render.sh` and `pages.lua` are gone). Liberation Serif 14 pt, the typst face, is the only font embedded (Regular, Bold, Italic); body lines exact at the typst pitch (31.43 pt), single-spaced blocks at 19.95 pt, 1 in margins. The TOC is the rows of one table with dot leaders, the page column inside the margin. TOC and TOA page numbers come from fb render's multi-pass engine (the filter writes needles to `FORMBOOK_NEEDLES`, a citation in a footnote as kind N, reads `FORMBOOK_PAGES`, names the footers `rIdFtrNone` and `rIdFtrPage` and writes the last section to `FORMBOOK_FINAL`; an addendum gets `rIdFtrAdd`, Add-1, Add-2, checked with a scratch sample). The Form 6 certificate names 14-point Liberation Serif and pandoc with LibreOffice as the program; word count 1,472, as typst. Matches: 18 pages as typst; one-page cover with the `counsel_for` line; roman front matter from the disclosure page; body from 1; every TOC and TOA page number checked against the pages; the certificate of service carries the full date; the designation repeats its header row on the continuation page. Differs (tier 2): the cover counsel block is one column (typst two); some body lines break differently, so a citation near a page end can land a page apart from typst (Virginia v. Am. Booksellers: 3, typst 2, 3); the TOC and TOA are text, so they do not update in Word if the text changes; Word may paginate slightly differently from the checked LibreOffice PDF (docs/DOCX.md). `check.sh --engine docx`: 9 passed, 0 failed. BLOCKED: none.
+**docx** (`docx/reference.xml`, `docx/ca6-opening-brief.lua`). fb render builds `reference.docx` from `docx/reference.xml` (pandoc's default reference with these styles, fb-595.63; the old `make-reference.sh`, `reference-src/`, `reference.docx`, `reference-addendum.docx`, `render.sh` and `pages.lua` are gone): the recipe of `lib/docx/xengine-reference.sh`, Times New Roman 14 pt, the typst face, the only font embedded (theme fonts stripped). Every paragraph the filter writes carries the typst line box and spaces (exact line spacing, twips = 20 x pt) and its text as runs with typst's break rules (`lib/docx/xengine.lua`); the contents and authorities rows wrap before their page column (a right indent) with three no-break spaces and a dot leader to the page. TOC and TOA page numbers come from fb render's multi-pass engine (fb-595.63): the filter writes a needle for every heading (its label, title and the text after it, so the body heading is found, not its contents row), citation (from its first word, as typst tags it; kind N in a footnote) and section start to `FORMBOOK_NEEDLES`, reads `FORMBOOK_PAGES`, writes its page-number footers (the number in a 20 pt line; `Add-1`, `Add-2` in an addendum) to `FORMBOOK_FOOTERS` and the last section to `FORMBOOK_FINAL`. The old reference's Word 2013 compatibility mode is not carried over: without it LibreOffice sets the phone number (cover, signature block) 53.65 pt wide, typst 53.66 pt (with it 54.95 pt); nothing else moves. XENG-001..003 pass. The TOC and TOA are text, so they do not update in Word if the text changes (render again); Word itself may paginate slightly differently from the LibreOffice PDF that is checked (`docs/DOCX.md`). BLOCKED: none.
+
+All three engines certify the same word count: each counts the markdown source of the body as typst's `count-words` does, and the certificate names the typeface, not the program.
+
+### Cross-engine layout (fb-595.54.3)
+
+Ported onto the shared model (`lib/typst/xengine.typ`, `lib/latex/xengine.sty`, `lib/docx/xengine.lua`; `docs/EVAL-LOOP.md`, adoption checklist). typst: Times New Roman (was Liberation Serif in typst, newtx in LaTeX, EB Garamond in Word: three faces, docx DEF-FONT-002 failed), pitches instead of leadings, spaces in pt, section headings at 16 pt (whole half points; was 1.15 em), `listing-row` contents and authorities, the page number in a 20 pt line, the right half of the cover and signature at an explicit 3.25 in (typst resolved `pad(left: 50%)` against the padded block, 9 pt short of the half), the certificate naming the typeface only. A space before a closing or separating mark (". . . .") is a no-break space in the LaTeX and Word filters, as Unicode line breaking (typst) treats it. Result: typst 19 pages; latex and docx 19 pages, 100 % of lines alike (before: latex 70.0 %, docx 41.8 %, both 19 pages against 18).
 
 ## Verification pass 2026-10-16 (fb-595.26.6)
 
@@ -116,4 +124,4 @@ Same rules and numbers as the typst template; the typst output is the reference 
   - Cover: the filed cover's "Counsel for Plaintiff-Appellant NetChoice" line was not transcribed and the template had no place for it. Added the optional `counsel_for` field. With it the single right-half counsel column no longer fit one page, so several counsel groups are now set in two columns across the measure (one group stays in the right half), as on the filed cover.
   - Certificate of compliance: "14-point" is kept on one line (boxed).
   - Signature block and cover: an indented italic line too long for its column now wraps with the same indent.
-- Remaining gaps: as in Known gaps above. The latex PDF was re-rendered (19 pages, unchanged count) but the latex and docx engines do not read `counsel_for`, so their covers lack that line; the docx outputs were not touched (no LibreOffice in this box). The designation table does not repeat its header row on the continuation page (p. 12).
+- Remaining gaps: as in Known gaps above. (Since fb-595.54.3 the latex and docx engines read `counsel_for` too.) The designation table does not repeat its header row on the continuation page (p. 12).
