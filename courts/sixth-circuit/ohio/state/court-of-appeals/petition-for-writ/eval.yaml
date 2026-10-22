@@ -1,6 +1,9 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the renders
-# differ where the shared model does (docs/open-items/fb-595.54.55.md): "¶ ¶ 8-9" is one box in LaTeX and Word
-# (lib/pandoc/xengine.lua binds every sign to what follows) but typst boxes only "¶ ¶" and breaks before "8-9".
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # Word: "¶ ¶ 8–9" (as filed, a space between the signs) is one unbreakable run in Word, typst boxes "¶ ¶" and
+  # breaks before "8–9": p6 line 22, p8 line 5 (XENG-003; docs/open-items/fb-595.54.55.md, S8). Reported, not gated
+  # (fb-595.54.55).
+  cross_engine_docx: report

@@ -1,6 +1,8 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the renders
-# differ where the shared model does (docs/open-items/fb-595.54.55.md): long URLs in the notes break at other
-# places in LaTeX and Word, and LaTeX sets an underlined heading in one unbreakable box.
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LaTeX does not break after the slash of "AND/OR" in the memorandum heading, typst and Word do (p1 line 18,
+  # XENG-003; docs/open-items/fb-595.54.55.md, S14). Reported, not gated (fb-595.54.55).
+  cross_engine_latex: report
