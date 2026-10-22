@@ -296,6 +296,22 @@ function Pandoc(doc)
   front[#front + 1] = raw(table.concat(rel, "\n"))
   front[#front + 1] = raw("\\clearpage\\pagenumbering{arabic}\\normalsize")
 
+  -- A paragraph that anchors a footnote has no widow or orphan control: typst's widow and orphan rules do not see
+  -- the note, so a line whose note does not fit moves to the next page alone (docx: style "Body Text Note").
+  local nb = pandoc.Blocks({})
+  for _, b in ipairs(doc.blocks) do
+    local note = false
+    if b.t == "Para" then pandoc.Pandoc({ b }):walk({ Note = function(n) note = true return n end }) end
+    if note then
+      nb:insert(raw("\\begingroup\\widowpenalty=0 \\clubpenalty=0 "))
+      nb:insert(b)
+      nb:insert(raw("\\par\\endgroup"))
+    else
+      nb:insert(b)
+    end
+  end
+  doc.blocks = nb
+
   -- The signature never stands alone: the brief's last paragraph is not broken across pages and stays with the
   -- signature block (typst: one unbreakable block).
   local n = #doc.blocks

@@ -400,31 +400,6 @@
   certificate-signature(meta)
 }
 
-/// No orphan where a footnote moves a line on. typst keeps the first two lines of a paragraph together, but when the
-/// second line carries a footnote that does not fit under it, typst moves that line to the next page and leaves the
-/// first behind alone; Word and LaTeX (widow control, club penalty) move the whole paragraph. This rule does what they
-/// do: a paragraph that runs over to the next page with one line on the page before starts on the next page.
-/// (A paragraph is measured at the text width in body lines; one that runs over more than one page end is left
-/// alone.)
-#let no-footnote-orphan(it) = context {
-  // only the lines of the text (double-spaced): not footnotes, headings, quotations or the signature
-  if text.top-edge != 0.8 * pitch-double { return it }
-  // the tag where the paragraph starts comes before the page break this rule may put in, so it stays where it is
-  [#metadata(none)<cafc-par-start>]
-  context {
-    let s = query(selector(<cafc-par-start>).before(here())).last().location()
-    let e = query(selector(<cafc-par-end>).after(here())).at(0, default: none)
-    let e = if e == none { none } else { e.location() }
-    if e != none and e.page() == s.page() + 1 {
-      let n = calc.round(measure(block(width: page.width - 2 * page-margin, it)).height / pitch-double)
-      let last = calc.round((e.position().y - page-margin) / pitch-double)
-      if n - last <= 1 { pagebreak(weak: true) }
-    }
-  }
-  it
-  [#metadata(none)<cafc-par-end>]
-}
-
 // ---------------------------------------------------------------------------
 // The brief
 // ---------------------------------------------------------------------------
@@ -501,7 +476,6 @@
   counter(page).update(1)
   {
     set heading(numbering: "1")
-    show par: no-footnote-orphan
     // The signature block never stands alone on a page: the brief's last paragraph is
     // kept together with it (unless that last block is a heading or a footnote definition).
     let text-md = md.trim(at: end)

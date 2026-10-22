@@ -362,7 +362,15 @@ function Pandoc(doc)
       heads[#heads + 1] = { level = b.level, label = lab, title = b.content,
         key = search_key(lab .. " " .. plain(title)) }
     else
-      for _, x in ipairs(xe.list_items(b)) do body[#body + 1] = x end
+      -- a paragraph that anchors a footnote has no widow control: typst's widow and orphan rules do not see the note,
+      -- so a line whose note does not fit moves to the next page alone
+      local note = false
+      if b.t == "Para" then pandoc.Pandoc({ b }):walk({ Note = function(n) note = true return n end }) end
+      if note then
+        body[#body + 1] = pandoc.Div({ b }, pandoc.Attr("", {}, { ["custom-style"] = "Body Text Note" }))
+      else
+        for _, x in ipairs(xe.list_items(b)) do body[#body + 1] = x end
+      end
     end
   end
   -- the last paragraph stays with the signature block (typst keeps them together)
