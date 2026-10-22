@@ -7,10 +7,14 @@ stranded because these repositories do not have a land-queue consumer.
 
 ## Finalize contract
 
-After staging, quality gates, and the final commit have succeeded:
+After staging, the repository's configured quality command has succeeded, and
+the final commit has been created:
 
 1. Read the configured default branch and landing mode from the repository
    policy. Do not infer direct-push from a missing or unreadable policy.
+   Resolve and run the repository's configured quality command using the
+   captured repository policy; a missing or failing command makes finalize
+   fail before any default-branch push.
 2. Fetch the default branch from the captured origin URL. Do not trust an
    agent-modified remote or a stale local tracking ref.
 3. Confirm the finalized commit descends from the fetched default-branch tip.
@@ -22,10 +26,10 @@ After staging, quality gates, and the final commit have succeeded:
    push must leave that branch available and must make the run fail visibly;
    it must not be reported as landed.
 
-Do not attempt direct landing for agent failures, an empty diff, a failed or
-unavailable required quality gate, or a failed finalize. Existing `box_ship`
-repositories continue through the box-ship path, and land-queue repositories
-continue publishing their task branch for the lander.
+Do not attempt direct landing for agent failures, an empty diff, a missing,
+failed or unavailable required quality command, or a failed finalize. Existing
+`box_ship` repositories continue through the box-ship path, and land-queue
+repositories continue publishing their task branch for the lander.
 
 ## Acceptance checks for the runner change
 
@@ -39,7 +43,7 @@ to a real default branch:
   rejected without changing that branch; the task branch remains published.
 - A transport failure, rejected update, or remote-tip mismatch is reported as
   a failed landing and preserves the task branch.
-- An agent failure, empty diff, failed quality gate, unreadable policy, or a
-  non-direct landing mode does not push the default branch.
+- An agent failure, empty diff, missing/failed quality command, unreadable
+  policy, or a non-direct landing mode does not push the default branch.
 - Re-running after the default branch already points at the finalized commit
   succeeds idempotently.
