@@ -1,0 +1,8 @@
+# RoP 3.07(A)-(G) and RoP 12.02(A)(1) (rules.md OHIO-COVER-001, OHIO-WRIT-001): the complaint's cover carries the case
+# name with every relator and respondent (name and title), the nature of the proceeding, the title, the party filed
+# for, and each attorney's name, registration number, address, telephone and e-mail. This complaint's seven relators,
+# eight respondents and eleven attorneys do not fit one page at RoP 3.09 12-point type and 1-inch margins; the counsel
+# blocks run to a second, unnumbered cover page (the filed complaint's cover runs onto its fourth page) and the
+# complaint's text starts at 1 after it (cover_pages 2).
+params:
+  cover_pages: 2
