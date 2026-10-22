@@ -1,212 +1,243 @@
--- W.D. Va. brief in support of a motion, DOCX engine (docs/DOCX.md). The markdown contract of ../README.md -> a
--- Word document on reference.docx (built by build-reference.sh). The same form as typst/vawd-motion-brief.typ:
---   cover: the three-line court title, the caption (box or ")" style), the brief title in capitals;
---   body: section headings (# ) centered caps; numbered headings (## 1., ### a., #### (i)) with a hanging label;
---         paragraphs first-line indented; lettered lists (a., b., ...) with a hanging indent; block quotes single;
---         native footnotes;
---   signature block at 3.25 in ("Dated:", the preamble, the e-signature, each counsel, the role lines);
---   certificate of service (centered caps title, the text, the recipients, the signature block).
--- Everything typed here is styled by reference.docx (Centered, Single, SigIndent, Gap, GapHalf, Recipient,
--- Hanging); the body keeps its markdown structure. Page numbers come from the footer.
--- Known limits: see ../README.md "## Engines".
+-- W.D. Va. brief in support of a motion, docx engine (docs/DOCX.md), so that it reads and breaks as
+-- typst/vawd-motion-brief.typ does: the three-line court title, the caption (box or ")" style), the brief title in
+-- capitals; section headings (# ) centered bold capitals; numbered headings (## 1., ### a., #### (i)) with a hanging
+-- label; paragraphs double-spaced and first-line indented; block quotations single-spaced; native footnotes; the
+-- signature block at 3.25 in ("Dated:", the preamble, the e-signature, each counsel, the role lines); the certificate
+-- of service (centered bold title, the text, the recipients, the signer's block). Every case word comes from the
+-- sample's frontmatter and body, never from this file.
+--
+-- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
+-- exact line boxes of the typst pitch (twips = 20 x pt: 552 the double-spaced body, 276 a single line), the spaces
+-- between blocks those of the typst template, and the break rules of typst on every run. Body paragraphs, headings,
+-- quotations, list items and footnotes are written by pandoc in the styles of docx/reference.xml; the cover,
+-- signature and certificate are written here.
 
-local TAB = pandoc.RawInline("openxml", '<w:r><w:tab/></w:r>')
+local xe = require("docx.xengine")
 
-local function esc(s)
-  return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
+local BODY, SINGLE = 552, 276            -- typst pitch-body, pitch-single
+local GAP = 276                          -- typst gap: a blank single line
+local INDENT = 720                       -- typst para-indent
+local TEXTW = 9360                       -- 6.5 in
+local CAPTION = 4752                     -- typst caption-width, 3.3 in
+local INSET = 180                        -- typst caption-inset, 0.125 in
+local GUTTER = 216                       -- typst caption-gutter, 0.15 in
+local NUMBER = 144                       -- typst number-inset, 0.1 in
+local PARENS = 576                       -- typst parens-width, 0.4 in
+local VERSUS, DESIGNATION = 864, 2160    -- typst versus-indent 0.6 in, designation-indent 1.5 in
+local SIG = 4680                         -- typst signature-indent, 3.25 in
+local RECIPIENT = 720                    -- typst recipient-indent, 0.5 in
+
+local function plain(m)
+  if m == nil then return "" end
+  if type(m) == "string" then return m end
+  return pandoc.utils.stringify(m)
 end
 
-local function stringify(v)
-  if v == nil then return "" end
-  return pandoc.utils.stringify(v)
+local function list(m)
+  if m == nil then return {} end
+  return m
 end
 
--- inlines -> w:r runs; italics and bold kept, everything else as text
-local function runs(inls, rpr)
-  rpr = rpr or ""
-  local out = {}
-  for _, el in ipairs(inls) do
+-- Inlines in capitals (typst upper), footnotes left as written.
+local function upper(x)
+  if type(x) == "string" then return pandoc.text.upper(x) end
+  if pandoc.utils.type(x) ~= "Inlines" then return pandoc.text.upper(plain(x)) end
+  local out = pandoc.Inlines({})
+  for _, el in ipairs(x) do
     if el.t == "Str" then
-      out[#out + 1] = '<w:r><w:rPr>' .. rpr .. '</w:rPr><w:t xml:space="preserve">' .. esc(el.text) .. '</w:t></w:r>'
-    elseif el.t == "Space" or el.t == "SoftBreak" then
-      out[#out + 1] = '<w:r><w:rPr>' .. rpr .. '</w:rPr><w:t xml:space="preserve"> </w:t></w:r>'
-    elseif el.t == "Emph" then
-      out[#out + 1] = runs(el.content, rpr .. '<w:i/>')
-    elseif el.t == "Strong" then
-      out[#out + 1] = runs(el.content, rpr .. '<w:b/>')
+      out:insert(pandoc.Str(pandoc.text.upper(el.text)))
+    elseif el.t == "Note" then
+      out:insert(el)
+    elseif el.content and pandoc.utils.type(el.content) == "Inlines" then
+      local c = el:clone()
+      c.content = upper(el.content)
+      out:insert(c)
     else
-      out[#out + 1] = runs({ pandoc.Str(stringify(el)) }, rpr)
+      out:insert(el)
     end
   end
-  return table.concat(out)
+  return out
 end
 
-local function xpara(style, inner, ppr)
-  return '<w:p><w:pPr><w:pStyle w:val="' .. style .. '"/>' .. (ppr or '') .. '</w:pPr>' .. inner .. '</w:p>'
+-- A paragraph: o = { before, after, line, left, first, jc, keep }.
+local function p(body, o)
+  o = o or {}
+  local props = {}
+  if o.keep then props[#props + 1] = xe.KEEP end
+  props[#props + 1] = xe.spacing(o.before or 0, o.after or 0, o.line or SINGLE)
+  props[#props + 1] = xe.ind(o.left or 0, nil, o.first or 0)
+  props[#props + 1] = xe.jc(o.jc or "left")
+  return xe.para(props, body)
 end
 
-local function raw(xml)
-  return pandoc.RawBlock("openxml", xml)
-end
+-- ---------------------------------------------------------------------------
+-- Cover: court title, caption, title of the paper (Fed. R. Civ. P. 10(a))
+-- ---------------------------------------------------------------------------
 
-local function gap(style)
-  return raw(xpara(style or "Gap", ""))
-end
-
-local function div(style, blocks)
-  return pandoc.Div(blocks, pandoc.Attr("", {}, { ["custom-style"] = style }))
-end
-
-local function centered(inls, bold)
-  return raw(xpara("Centered", runs(inls, bold and '<w:b/>' or '')))
-end
-
-local function line(style, inls, ppr)
-  return raw(xpara(style, runs(inls), ppr))
-end
-
-local function meta_inlines(v)
-  if v == nil then return {} end
-  if v.t == "MetaInlines" then return v end
-  if v.t == "MetaBlocks" and v[1] then return v[1].content or {} end
-  return { pandoc.Str(stringify(v)) }
-end
-
-local function caseLabel(meta)
-  return meta.case_label and stringify(meta.case_label) or "Civil Action No."
-end
-
-local function caption_lines(s)
-  local units = 0
-  for ch in s:gmatch(".") do
-    if ch:match("%u") then units = units + 1.5 else units = units + 1 end
-  end
-  return math.max(1, math.ceil(units / 40))
-end
-
-local function tc(width, borders, valign, paras)
-  return '<w:tc><w:tcPr><w:tcW w:w="' .. width .. '" w:type="dxa"/>' .. (borders or '')
-    .. (valign and ('<w:vAlign w:val="' .. valign .. '"/>') or '') .. '</w:tcPr>' .. table.concat(paras) .. '</w:tc>'
-end
-
-local NOBORDER = '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/>'
-  .. '<w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>'
-
-local function table_xml(cols, rows)
-  local grid, total = {}, 0
-  for _, c in ipairs(cols) do grid[#grid + 1] = '<w:gridCol w:w="' .. c .. '"/>'; total = total + c end
-  return '<w:tbl><w:tblPr><w:tblW w:w="' .. total .. '" w:type="dxa"/>' .. NOBORDER
-    .. '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/>'
-    .. '</w:tblCellMar></w:tblPr><w:tblGrid>' .. table.concat(grid) .. '</w:tblGrid>'
-    .. table.concat(rows) .. '</w:tbl>'
-end
-
+-- The party lines of the caption, in order: { inlines, left indent, is "v." }.
 local function party_lines(caption)
   local items = {}
-  for i, p in ipairs(caption.parties) do
-    if i > 1 then items[#items + 1] = { text = "v.", style = "Single", ppr = '<w:ind w:left="864" w:firstLine="0"/>' } end
-    for _, n in ipairs(p.names) do items[#items + 1] = { inl = n, style = "Single", ppr = "" } end
-    items[#items + 1] = { inl = p.designation, style = "Single", ppr = '<w:ind w:left="2160" w:firstLine="0"/>' }
+  for i, party in ipairs(list(caption.parties)) do
+    if i > 1 then items[#items + 1] = { xe.runs("v."), VERSUS, true, "v." } end
+    for _, n in ipairs(list(party.names)) do items[#items + 1] = { xe.inl(n), 0, false, plain(n) } end
+    items[#items + 1] = { xe.inl(party.designation), DESIGNATION, false, plain(party.designation) }
   end
   return items
 end
 
-local function item_inner(it)
-  if it.text then return runs({ pandoc.Str(it.text) }) end
-  return runs(meta_inlines(it.inl))
+-- The lines a caption line takes in its column (typst measures it): its width estimated from Times New Roman's
+-- advances at 12 pt (capitals and wide letters 0.72 em, small letters 0.47 em, spaces 0.25 em, the rest 0.4 em).
+local function caption_rows(text, indent)
+  local w = indent / 20
+  for _, c in utf8.codes(text) do
+    local ch = utf8.char(c)
+    if ch == " " then w = w + 3
+    elseif ch:match("^[A-Z]$") or ch == "m" or ch == "w" then w = w + 8.64
+    elseif ch:match("^[a-z]$") then w = w + 5.64
+    else w = w + 4.8 end
+  end
+  return math.max(1, math.ceil(w / (CAPTION / 20)))
 end
 
-local function item_text(it)
-  return it.text or stringify(it.inl)
+local function tc(w, body, extra)
+  return '<w:tc><w:tcPr><w:tcW w:w="' .. w .. '" w:type="dxa"/>' .. (extra or '') .. '</w:tcPr>' .. body .. '</w:tc>'
 end
 
+local function tbl(cols, rows, mar)
+  local grid, total = {}, 0
+  for _, c in ipairs(cols) do grid[#grid + 1] = '<w:gridCol w:w="' .. c .. '"/>'; total = total + c end
+  return '<w:tbl><w:tblPr><w:tblW w:w="' .. total .. '" w:type="dxa"/>' ..
+    '<w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/>' ..
+    '<w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders><w:tblLayout w:type="fixed"/>' ..
+    '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/>' ..
+    '<w:right w:w="0" w:type="dxa"/></w:tblCellMar>' ..
+    '<w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="0"/></w:tblPr>' ..
+    '<w:tblGrid>' .. table.concat(grid) .. '</w:tblGrid>' .. table.concat(rows) .. '</w:tbl>'
+end
+
+local function case_number(meta)
+  return xe.runs(plain(meta.case_label) .. " " .. plain(meta.case_number))
+end
+
+-- Box caption: the party lines closed by a rule at their right and under the last; the file number opposite, on the
+-- first "v." row. One table row per party line, a blank single line between rows.
 local function caption_box(meta, caption)
-  local left = {}
-  for _, it in ipairs(party_lines(caption)) do left[#left + 1] = xpara(it.style, item_inner(it), it.ppr) end
-  local borders = '<w:tcBorders><w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/>'
-    .. '<w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:tcBorders>'
-  local right = xpara("Single", runs({ pandoc.Str(caseLabel(meta)), pandoc.Space(), pandoc.Str(stringify(meta.case_number)) }),
-    '<w:ind w:left="144" w:firstLine="0"/>')
-  return raw(table_xml({ 4752, 216, 4392 }, {
-    '<w:tr>' .. tc(4752, borders, nil, left) .. tc(216, nil, nil, { xpara("Single", "") })
-      .. tc(4392, nil, "center", { right }) .. '</w:tr>' }))
+  local lines = party_lines(caption)
+  local right = TEXTW - CAPTION - GUTTER
+  local rows, numbered = {}, false
+  for k, it in ipairs(lines) do
+    local last = k == #lines
+    local before = k > 1 and GAP or 0
+    local box = '<w:tcBorders><w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/>' ..
+      (last and '<w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/>' or '') .. '</w:tcBorders>' ..
+      '<w:tcMar><w:right w:w="' .. INSET .. '" w:type="dxa"/>' ..
+      (last and ('<w:bottom w:w="' .. INSET .. '" w:type="dxa"/>') or '') .. '</w:tcMar>'
+    local num = p("", { before = before })
+    if it[3] and not numbered then numbered = true; num = p(case_number(meta), { before = before, left = NUMBER }) end
+    rows[#rows + 1] = '<w:tr>' .. tc(CAPTION, p(it[1], { before = before, left = it[2] }), box) ..
+      tc(GUTTER, p("", { before = before })) .. tc(right, num) .. '</w:tr>'
+  end
+  return tbl({ CAPTION, GUTTER, right }, rows)
 end
 
+-- ")" caption: a ")" per line of each party line, and the file number right of the marks on the first "v." row.
 local function caption_parens(meta, caption)
-  local rows = {}
+  local rows, numbered = {}, false
+  local right = TEXTW - CAPTION - PARENS
   for _, it in ipairs(party_lines(caption)) do
     local marks = {}
-    for _ = 1, caption_lines(item_text(it)) do marks[#marks + 1] = xpara("ParensMark", runs({ pandoc.Str(")") })) end
-    rows[#rows + 1] = '<w:tr>' .. tc(4752, nil, nil, { xpara(it.style, item_inner(it), it.ppr) })
-      .. tc(576, nil, nil, marks) .. '</w:tr>'
+    for _ = 1, caption_rows(it[4], it[2]) do marks[#marks + 1] = p(xe.runs(")"), { jc = "center" }) end
+    local num = p("")
+    if it[3] and not numbered then numbered = true; num = p(case_number(meta)) end
+    rows[#rows + 1] = '<w:tr>' .. tc(CAPTION, p(it[1], { left = it[2] })) .. tc(PARENS, table.concat(marks)) ..
+      tc(right, num) .. '</w:tr>'
   end
-  return raw(table_xml({ 4752, 576 }, rows))
+  return tbl({ CAPTION, PARENS, right }, rows)
 end
 
--- the cover (Fed. R. Civ. P. 10(a); the brief's title)
-local function cover(meta)
+local function cover(meta, out)
+  local lines = { "UNITED STATES DISTRICT COURT", "WESTERN DISTRICT OF VIRGINIA", pandoc.text.upper(plain(meta.division)) }
+  for i, l in ipairs(lines) do
+    out[#out + 1] = p(xe.runs(l), { jc = "center", after = i == #lines and BODY or 0 })
+  end
   local caption = meta.caption or {}
-  local blocks = {}
-  blocks[#blocks + 1] = centered({ pandoc.Str("UNITED STATES DISTRICT COURT") })
-  blocks[#blocks + 1] = centered({ pandoc.Str("WESTERN DISTRICT OF VIRGINIA") })
-  blocks[#blocks + 1] = centered({ pandoc.Str(string.upper(stringify(meta.division))) })
-  blocks[#blocks + 1] = gap()
-  if stringify(caption.style or "box") == "parens" then
-    blocks[#blocks + 1] = caption_parens(meta, caption)
-    blocks[#blocks + 1] = gap("GapHalf")
-    blocks[#blocks + 1] = line("Single", { pandoc.Str(caseLabel(meta)), pandoc.Space(), pandoc.Str(stringify(meta.case_number)) }, '<w:ind w:firstLine="720"/>')
+  if plain(caption.style) == "parens" then
+    out[#out + 1] = caption_parens(meta, caption)
   else
-    blocks[#blocks + 1] = caption_box(meta, caption)
+    out[#out + 1] = caption_box(meta, caption)
   end
-  blocks[#blocks + 1] = gap()
-  blocks[#blocks + 1] = centered({ pandoc.Str(string.upper(stringify(meta.brief_title))) }, true)
-  blocks[#blocks + 1] = gap("GapHalf")
-  return blocks
+  -- the title: Word has no space after a table, so it takes the space before it
+  out[#out + 1] = p(xe.inl(upper(meta.brief_title), { b = true }), { before = BODY, after = GAP, jc = "center" })
 end
 
--- the signer's block (Fed. R. Civ. P. 11(a); Local Rule 11(a)): preamble, e-signature, each counsel, role lines
-local function signer_block(sig, preamble)
+-- ---------------------------------------------------------------------------
+-- Signature block and certificate of service (Fed. R. Civ. P. 11(a); Local Rule 11(a))
+-- ---------------------------------------------------------------------------
+
+-- The signer's block: { inlines, space before } per line; each group a blank line from the one before.
+local function signer_lines(sig, preamble, above)
+  local groups = {}
+  local pre = preamble and list(sig.preamble) or {}
+  if #pre > 0 then groups[#groups + 1] = pre end
+  local first = { sig.signed_by }
+  for k, g in ipairs(list(sig.counsel)) do
+    local lines = {}
+    for _, n in ipairs(list(g.names)) do lines[#lines + 1] = n end
+    for _, l in ipairs(list(g.lines)) do lines[#lines + 1] = l end
+    if k == 1 then
+      for _, l in ipairs(lines) do first[#first + 1] = l end
+    else
+      groups[#groups + 1] = first
+      first = lines
+    end
+  end
+  groups[#groups + 1] = first
+  if #list(sig.role) > 0 then groups[#groups + 1] = sig.role end
   local out = {}
-  local function sl(inls) out[#out + 1] = line("SigIndent", inls) end
-  local pre = preamble and (sig.preamble or {}) or {}
-  for _, l in ipairs(pre) do sl(meta_inlines(l)) end
-  if #pre > 0 then out[#out + 1] = gap() end
-  sl(meta_inlines(sig.signed_by))
-  for k, g in ipairs(sig.counsel or {}) do
-    if k > 1 then out[#out + 1] = gap() end
-    for _, n in ipairs(g.names or {}) do sl(meta_inlines(n)) end
-    for _, l in ipairs(g.lines or {}) do sl(meta_inlines(l)) end
+  for k, g in ipairs(groups) do
+    for i, l in ipairs(g) do
+      out[#out + 1] = { xe.inl(l), i == 1 and (k == 1 and above or GAP) or 0 }
+    end
   end
-  local role = sig.role or {}
-  if #role > 0 then out[#out + 1] = gap() end
-  for _, l in ipairs(role) do sl(meta_inlines(l)) end
   return out
 end
 
-local function signature(meta)
-  local out = { gap() }
+-- Lines kept together on one page (typst's unbreakable block): every one but the last keeps with the next.
+local function kept(lines, out)
+  for i, l in ipairs(lines) do
+    local o = l[3] or {}
+    o.before, o.left, o.keep = l[2], o.left or SIG, i < #lines
+    out[#out + 1] = p(l[1], o)
+  end
+end
+
+local function signature(meta, out)
+  local sig = meta.signature or {}
+  local lines
   if meta.date then
-    out[#out + 1] = line("Single", { pandoc.Str("Dated: " .. stringify(meta.date)) })
-    out[#out + 1] = gap()
+    lines = { { xe.runs("Dated: " .. plain(meta.date)), BODY, { left = 0 } } }
+    for _, l in ipairs(signer_lines(sig, true, GAP)) do lines[#lines + 1] = l end
+  else
+    lines = signer_lines(sig, true, BODY)
   end
-  for _, b in ipairs(signer_block(meta.signature or {}, true)) do out[#out + 1] = b end
-  return out
+  kept(lines, out)
 end
 
-local function certificate(meta)
-  if not meta.service then return {} end
+local function certificate(meta, out)
   local svc = meta.service
-  -- kept on one page (typst's unbreakable block): every paragraph but the last keeps with the next
-  local out = { gap("GapPlain"), centered({ pandoc.Str("CERTIFICATE OF SERVICE") }, true), gap("GapHalfKeep") }
-  out[#out + 1] = div("BodyKeep", { pandoc.Para(meta_inlines(svc.text)) })
-  out[#out + 1] = gap("GapHalfKeep")
-  for _, l in ipairs(svc.recipients or {}) do out[#out + 1] = line("Recipient", meta_inlines(l)) end
-  out[#out + 1] = gap()
-  for _, b in ipairs(signer_block(meta.signature or {}, false)) do out[#out + 1] = b end
-  return out
+  if not svc then return end
+  out[#out + 1] = p(xe.inl("CERTIFICATE OF SERVICE", { b = true }), { before = BODY, after = GAP, jc = "center", keep = true })
+  out[#out + 1] = p(xe.inl(svc.text), { after = GAP, line = BODY, first = INDENT, keep = true })
+  local lines = {}
+  for _, l in ipairs(list(svc.recipients)) do lines[#lines + 1] = { xe.inl(l), 0, { left = RECIPIENT, keep = true } } end
+  for _, l in ipairs(signer_lines(meta.signature or {}, false, GAP)) do lines[#lines + 1] = l end
+  kept(lines, out)
 end
 
--- heading labels: level 2 "1.", level 3 "a.", level 4 "(i)"; level 1 has none (typst's numbering)
+-- ---------------------------------------------------------------------------
+-- The body
+-- ---------------------------------------------------------------------------
+
 local function roman(n)
   local vals = { { 10, "x" }, { 9, "ix" }, { 5, "v" }, { 4, "iv" }, { 1, "i" } }
   local s = ""
@@ -216,77 +247,100 @@ local function roman(n)
   return s
 end
 
-local function letter(n)
-  return string.char(96 + n)
+local function has_note(b)
+  local note = false
+  b:walk({ Note = function() note = true end })
+  return note
 end
 
-local function list_blocks(items, ordered)
-  local out = {}
-  for i, item in ipairs(items) do
-    local label = ordered and (letter(i) .. ".") or "•"
-    local first = item[1]
-    if first and (first.t == "Plain" or first.t == "Para") then
-      out[#out + 1] = div("Hanging", { pandoc.Para({ pandoc.Str(label), TAB, table.unpack(first.content) }) })
-      for k = 2, #item do out[#out + 1] = item[k] end
+-- The last section (its level-1 heading and what follows) is kept on one page with the signature block when it is
+-- short and has no footnote: typst's final-section, the same test on the same markdown (the body split at blank
+-- lines, footnote definitions left out, the chunks from the last "# " heading joined by a blank line, under 1200
+-- bytes and no "[^"). Returns the index of that heading among the blocks, or nil.
+local function final_section(blocks)
+  local f = io.open(PANDOC_STATE.input_files[1], "r")
+  local src = f:read("a")
+  f:close()
+  local md = src:gsub("^%-%-%-\r?\n.-\r?\n%-%-%-[ \t]*\r?\n", "", 1)
+  md = md:gsub("\r?\n[ \t]*\r?\n", "\30")
+  local chunks = {}
+  for c in (md .. "\30"):gmatch("([^\30]*)\30") do
+    local t = c:match("^%s*(.-)%s*$")
+    if t ~= "" and t:sub(1, 2) ~= "[^" then chunks[#chunks + 1] = c end
+  end
+  local last
+  for i, c in ipairs(chunks) do
+    if c:match("^%s*# ") then last = i end
+  end
+  if not last then return nil end
+  local tail = table.concat(chunks, "\n\n", last)
+  if #tail >= 1200 or tail:find("[^", 1, true) then return nil end
+  local h
+  for i, b in ipairs(blocks) do
+    if b.t == "Header" and b.level == 1 then h = i end
+  end
+  return h
+end
+
+local function body(blocks, out)
+  local keep_from = final_section(blocks)
+  local c = { 0, 0, 0, 0 }
+  for i, b in ipairs(blocks) do
+    if b.t == "Header" then
+      local lvl = math.min(b.level, 4)
+      c[lvl] = c[lvl] + 1
+      for k = lvl + 1, 4 do c[k] = 0 end
+      if lvl == 1 then
+        out[#out + 1] = pandoc.Header(1, upper(b.content))
+      else
+        local label = lvl == 2 and (c[2] .. ".") or lvl == 3 and (string.char(96 + c[3]) .. ".") or
+          ("(" .. roman(c[4]) .. ")")
+        local inl = pandoc.Inlines({ pandoc.Str(label), pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>") })
+        inl:extend(b.content)
+        out[#out + 1] = pandoc.Header(lvl, inl)
+      end
+    elseif b.t == "Para" or b.t == "Plain" then
+      local style = (keep_from and i > keep_from) and "Body Keep" or "Body Text"
+      out[#out + 1] = pandoc.Div({ pandoc.Para(b.content) }, { ["custom-style"] = style })
+    elseif b.t == "BlockQuote" then
+      out[#out + 1] = b
+    elseif b.t == "OrderedList" or b.t == "BulletList" then
+      for _, x in ipairs(xe.list_items(b)) do out[#out + 1] = x end
     else
-      out[#out + 1] = div("Hanging", { pandoc.Para({ pandoc.Str(label) }) })
-      for _, b in ipairs(item) do out[#out + 1] = b end
+      error("vawd-motion-brief.lua: unsupported block " .. b.t)
     end
   end
-  return out
+end
+
+-- typst's break opportunities that LibreOffice does not share: none inside ")(" (a word joiner), one after a
+-- slash before a letter ("CM/ECF": a zero-width space). Neither shows in the PDF text.
+local function breaks(s)
+  return pandoc.Str((s.text:gsub("%)%(", ")\u{2060}("):gsub("/([^%d])", "/\u{200B}%1")))
+end
+
+-- A doubled sign stays with its number ("¶¶ 55–57": a no-break space; typst binds it with a box).
+local function bind_doubled(inlines)
+  for i = 1, #inlines - 1 do
+    local a, b = inlines[i], inlines[i + 1]
+    if a.t == "Str" and (a.text == "\u{00A7}\u{00A7}" or a.text == "\u{00B6}\u{00B6}") and b.t == "Space" then
+      inlines[i + 1] = pandoc.Str("\u{00A0}")
+    end
+  end
+  return inlines
 end
 
 function Pandoc(doc)
+  doc = doc:walk({ Str = breaks }):walk({ Inlines = bind_doubled })
+  doc.blocks = doc.blocks:walk({ Inlines = xe.inlines })
   local meta = doc.meta
-  local blocks = {}
-  for _, b in ipairs(cover(meta)) do blocks[#blocks + 1] = b end
-
-  -- the last section (its level-1 heading and what follows) is kept on one page with the signature block when it
-  -- is short and has no footnote (typst's final-section): its paragraphs get the BodyKeep style (keep with next)
-  local last = nil
-  for i, b in ipairs(doc.blocks) do
-    if b.t == "Header" and b.level == 1 then last = i end
-  end
-  local keep_from = nil
-  if last then
-    local text, note = "", false
-    for i = last, #doc.blocks do
-      text = text .. stringify(doc.blocks[i])
-      pandoc.walk_block(doc.blocks[i], { Note = function(n) note = true end })
-    end
-    if #text < 1200 and not note then keep_from = last end
-  end
-
-  local c = { 0, 0, 0, 0 }
-  for i, b in ipairs(doc.blocks) do
-    if keep_from and i >= keep_from and b.t == "Para" then
-      blocks[#blocks + 1] = div("BodyKeep", { b })
-    elseif b.t == "Header" then
-      local lvl = b.level
-      if lvl == 1 then
-        c[1] = c[1] + 1; c[2], c[3], c[4] = 0, 0, 0
-        blocks[#blocks + 1] = b
-      else
-        c[lvl] = c[lvl] + 1
-        for k = lvl + 1, 4 do c[k] = 0 end
-        local label
-        if lvl == 2 then label = tostring(c[2]) .. "."
-        elseif lvl == 3 then label = letter(c[3]) .. "."
-        else label = "(" .. roman(c[4]) .. ")" end
-        local inls = { pandoc.Str(label), TAB }
-        for _, el in ipairs(b.content) do inls[#inls + 1] = el end
-        blocks[#blocks + 1] = pandoc.Header(lvl, inls, b.attr)
-      end
-    elseif b.t == "OrderedList" then
-      for _, x in ipairs(list_blocks(b.content, true)) do blocks[#blocks + 1] = x end
-    elseif b.t == "BulletList" then
-      for _, x in ipairs(list_blocks(b.content, false)) do blocks[#blocks + 1] = x end
-    else
-      blocks[#blocks + 1] = b
-    end
-  end
-
-  for _, b in ipairs(signature(meta)) do blocks[#blocks + 1] = b end
-  for _, b in ipairs(certificate(meta)) do blocks[#blocks + 1] = b end
-  return pandoc.Pandoc(blocks, pandoc.Meta({}))
+  local raw = {}
+  cover(meta, raw)
+  local out = {}
+  for _, x in ipairs(raw) do out[#out + 1] = xe.raw(x) end
+  body(doc.blocks, out)
+  raw = {}
+  signature(meta, raw)
+  certificate(meta, raw)
+  for _, x in ipairs(raw) do out[#out + 1] = xe.raw(x) end
+  return pandoc.Pandoc(out, pandoc.Meta({}))
 end

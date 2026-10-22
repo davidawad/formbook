@@ -6,22 +6,40 @@
 // the values below are the convention both filed exemplars show (see ../README.md). Content-agnostic: every
 // case word comes from the sample's frontmatter, never from this file.
 #import "@preview/cmarker:0.1.10"
-#import "/lib/typst/word-compat.typ": word-compat
+#import "/lib/typst/xengine.typ": xengine, edges
 
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the exemplars; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")        // no rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/. See README "Known gaps".
+#let font-family = ("Times New Roman", "Liberation Serif")        // no rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                   // no rule sets a size; 12 pt, the size of the Times used by the exemplars (docs/FONTS.md)
-#let line-pitch = 27.6pt                // double spacing: baseline-to-baseline distance measured on both exemplars
-#let body-leading = line-pitch - 1.15em // the text runs in a 1.15em line box (top-edge 0.9em, bottom-edge -0.25em); the gap makes the 27.6 pt pitch
-#let single-pitch = 13.8pt              // one line of single-spaced text (1.15 x 12 pt, word-processor single spacing); the ")" marks are counted in these rows
-#let single-leading = single-pitch - 1.15em // single spacing: the 1.15em line box plus this gap is single-pitch
 #let margins = (top: 1in, bottom: 1in, left: 1in, right: 1in)
 #let para-indent = 0.5in                // first line of a paragraph of text
+#let label-box = 0.4in                  // a numbered heading's label; each deeper level half an inch further in
+#let level-indent = 0.5in
+#let quote-indent = 0.5in               // block quotations, both sides
 #let caption-width = 3.3in              // width of the party block in the caption
-#let footer-size = 12pt
+#let caption-inset = 0.125in            // the party text off the box caption's right and bottom rules
+#let caption-gutter = 0.15in            // between the box and the file number
+#let number-inset = 0.1in               // the file number off the gutter
+#let parens-width = 0.4in               // the ")" column of the parens caption
+#let versus-indent = 0.6in              // "v." in the caption
+#let designation-indent = 1.5in         // a party's designation under its names
+#let signature-indent = 3.25in          // the signer's block
+#let recipient-indent = 0.5in           // the certificate's recipients
 #let footnote-size = 11pt
+
+// Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
+// its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
+// below the one and above the other (Word's exact line spacing; the docx engine sets the same twips). An INPUT's
+// `word:` map (justify, shrink; lib/typst/word-compat.typ) is not read: the model sets the text ragged right.
+#let pitch-body = 27.6pt                // double spacing: Word's double line at 12 pt (2 x 1.15 x 12 pt), as both exemplars set it
+#let pitch-single = 13.8pt              // single spacing (court title, caption, headings, quotations, signature): 1.15 x 12 pt
+#let pitch-note = 12.65pt               // a footnote line: 1.15 x 11 pt
+#let gap = pitch-single                 // a blank single line: around quotations, under the title, in the signature
+#let note-gap = 7pt                     // between footnotes
+#let note-clearance = 7pt              // between the text and the footnote rule: with the 7 pt gap, the room LibreOffice keeps above a
+                                        // note in this docx (a page of text and one note breaks within 1 pt of the same height in both)
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -42,6 +60,13 @@
 /// Inline markdown (for names with *et al.*, etc.).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
+/// One single-spaced paragraph with explicit space above and below it.
+#let line-block(above: 0pt, below: 0pt, left: 0pt, body) = block(width: 100%, above: above, below: below, {
+  set text(..edges(pitch-single))
+  set par(first-line-indent: 0pt)
+  pad(left: left, body)
+})
+
 /// Heading labels: level 2 is "1.", level 3 is "a.", level 4 is "(i)"; level 1 (a section) is unnumbered.
 #let heading-num(..n) = {
   let nums = n.pos()
@@ -56,73 +81,68 @@
 // ---------------------------------------------------------------------------
 
 #let court-title(meta) = {
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  align(center)[
-    UNITED STATES DISTRICT COURT \
-    WESTERN DISTRICT OF VIRGINIA \
-    #upper(need(meta, "division"))
-  ]
+  let lines = ("UNITED STATES DISTRICT COURT", "WESTERN DISTRICT OF VIRGINIA", upper(need(meta, "division")))
+  for (i, l) in lines.enumerate() {
+    line-block(below: if i == lines.len() - 1 { pitch-body } else { 0pt }, align(center, l))
+  }
 }
 
-/// Box caption: the party block is closed by a rule at its right and bottom; the file number sits opposite.
-#let caption-box(meta) = {
-  let parties = need(meta, "caption").parties
+/// The party lines of the caption, in order: (content, left indent, is "v.").
+#let party-lines(meta) = {
   let items = ()
-  for (i, p) in parties.enumerate() {
-    if i > 0 { items.push(pad(left: 0.6in, [v.])) }
-    for n in p.names { items.push(inl(n)) }
-    items.push(pad(left: 1.5in, inl(p.designation)))
+  for (i, p) in need(meta, "caption").parties.enumerate() {
+    if i > 0 { items.push(([v.], versus-indent, true)) }
+    for n in p.names { items.push((inl(n), 0pt, false)) }
+    items.push((inl(p.designation), designation-indent, false))
   }
-  grid(
-    columns: (caption-width, 1fr),
-    column-gutter: 0.15in,
-    block(width: caption-width, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 0.12in, bottom: 0.12in, top: 0.06in), {
-      set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-      stack(dir: ttb, spacing: 0.9em, ..items)
-    }),
-    align(horizon, block(inset: (left: 0.1in), {
-      set par(leading: single-leading, first-line-indent: 0pt)
-      [#need(meta, "case_label") #need(meta, "case_number")]
-    })),
-  )
+  items
 }
 
-/// ")" caption: a column of ")" marks beside the party block. Each party line is one row of the grid; its ")"
-/// column gets as many marks as the line takes up (a name can wrap), so the marks follow the text.
+/// Box caption: the party lines closed by a rule at their right and under the last; the file number opposite, on the
+/// first "v." row. One grid row per party line, a blank single line between rows.
+#let caption-box(meta) = {
+  let lines = party-lines(meta)
+  let cells = ()
+  let numbered = false
+  for (k, (c, ind, versus)) in lines.enumerate() {
+    let last = k == lines.len() - 1
+    let top = if k > 0 { gap } else { 0pt }
+    cells.push(grid.cell(stroke: (right: 0.75pt, bottom: if last { 0.75pt } else { none }),
+      inset: (top: top, right: caption-inset, bottom: if last { caption-inset } else { 0pt }), line-block(left: ind, c)))
+    cells.push([])
+    let right = if versus and not numbered {
+      numbered = true
+      line-block(left: number-inset)[#need(meta, "case_label") #need(meta, "case_number")]
+    } else { [] }
+    cells.push(grid.cell(inset: (top: top), right))
+  }
+  grid(columns: (caption-width, caption-gutter, 1fr), ..cells)
+}
+
+/// ")" caption: a column of ")" marks beside the party lines, one per line of text (a name can wrap), and the file
+/// number to the right of the marks on the first "v." row.
 #let caption-parens(meta) = {
-  let parties = need(meta, "caption").parties
-  let rows = ()
-  for (i, p) in parties.enumerate() {
-    if i > 0 { rows.push(pad(left: 0.6in, [v.])) }
-    for n in p.names { rows.push(inl(n)) }
-    rows.push(pad(left: 1.5in, inl(p.designation)))
+  let cells = ()
+  let numbered = false
+  for (c, ind, versus) in party-lines(meta) {
+    let text-cell = line-block(left: ind, c)
+    let marks = context {
+      let n = calc.max(1, calc.round(measure(width: caption-width, text-cell).height / pitch-single))
+      for _ in range(n) { line-block(align(center)[)]) }
+    }
+    let right = if versus and not numbered {
+      numbered = true
+      line-block[#need(meta, "case_label") #need(meta, "case_number")]
+    } else { [] }
+    cells += (text-cell, marks, right)
   }
-  // Rows are sized from the measured height of the line, so the call is in a context.
-  let cell-text(c) = context {
-    let n = calc.max(1, calc.ceil(measure(width: caption-width, c).height / single-pitch))
-    block(width: caption-width, height: n * single-pitch, c)
-  }
-  let cell-marks(c) = context {
-    let n = calc.max(1, calc.ceil(measure(width: caption-width, c).height / single-pitch))
-    stack(dir: ttb, spacing: 0pt, ..range(n).map(_ => block(height: single-pitch, width: 100%, align(center)[)])))
-  }
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  grid(columns: (caption-width, 0.4in), ..rows.map(c => (cell-text(c), cell-marks(c))).flatten())
+  grid(columns: (caption-width, parens-width, 1fr), ..cells)
 }
 
 #let cover(meta) = {
   court-title(meta)
-  v(line-pitch)
-  if need(meta, "caption").at("style", default: "box") == "parens" {
-    caption-parens(meta)
-    v(line-pitch * 0.5)
-    [#need(meta, "case_label") #need(meta, "case_number")]
-  } else {
-    caption-box(meta)
-  }
-  v(line-pitch)
-  align(center, strong(upper(inl(need(meta, "brief_title")))))
-  v(line-pitch * 0.5)
+  if need(meta, "caption").at("style", default: "box") == "parens" { caption-parens(meta) } else { caption-box(meta) }
+  line-block(above: pitch-body, below: gap, align(center, strong(upper(inl(need(meta, "brief_title"))))))
 }
 
 // ---------------------------------------------------------------------------
@@ -130,53 +150,47 @@
 // ---------------------------------------------------------------------------
 
 /// The signer's block: an optional preamble (the parties, or "Respectfully submitted,"), the e-signature line, then
-/// one group per counsel (names, then the firm, address, telephone, fax and e-mail lines), then the role lines.
-#let signer-block(sig, preamble: true) = pad(left: 3.25in, {
-  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+/// one group per counsel (names, then the firm, address, telephone, fax and e-mail lines), then the role lines. Each
+/// group is a blank line from the one before.
+#let signer-block(sig, preamble: true, above: 0pt) = {
+  let groups = ()
   let pre = if preamble { sig.at("preamble", default: ()) } else { () }
-  for l in pre { inl(l); linebreak() }
-  if pre.len() > 0 { v(line-pitch) }
-  inl(sig.signed_by)
-  linebreak()
+  if pre.len() > 0 { groups.push(pre) }
+  let first = (sig.signed_by,)
   for (k, g) in sig.counsel.enumerate() {
-    if k > 0 { v(line-pitch) }
-    for n in g.names { inl(n); linebreak() }
-    for l in g.at("lines", default: ()) { inl(l); linebreak() }
+    let lines = g.names + g.at("lines", default: ())
+    if k == 0 { first += lines } else { groups.push(first); first = lines }
   }
+  groups.push(first)
   let role = sig.at("role", default: ())
-  if role.len() > 0 { v(line-pitch) }
-  for l in role { inl(l); linebreak() }
-})
+  if role.len() > 0 { groups.push(role) }
+  for (k, g) in groups.enumerate() {
+    for (i, l) in g.enumerate() {
+      line-block(above: if i == 0 { if k == 0 { above } else { gap } } else { 0pt }, left: signature-indent, inl(l))
+    }
+  }
+}
 
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  block(breakable: false, above: line-pitch, width: 100%, {
-    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+  block(breakable: false, above: pitch-body, below: 0pt, width: 100%, {
     if "date" in meta and meta.date != none {
-      [Dated: #meta.date]
-      v(line-pitch)
+      line-block[Dated: #meta.date]
+      signer-block(sig, above: gap)
+    } else {
+      signer-block(sig)
     }
-    signer-block(sig)
   })
 }
 
 #let certificate(meta) = {
   if "service" in meta and meta.service != none {
     let svc = meta.service
-    block(breakable: false, above: line-pitch, width: 100%, {
-      align(center, strong("CERTIFICATE OF SERVICE"))
-      v(line-pitch * 0.5)
-      block(width: 100%, {
-        set par(leading: body-leading, first-line-indent: para-indent)
-        inl(svc.text)
-      })
-      v(line-pitch * 0.5)
-      pad(left: 0.5in, {
-        set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-        for l in svc.recipients { inl(l); linebreak() }
-      })
-      v(line-pitch)
-      signer-block(need(meta, "signature"), preamble: false)
+    block(breakable: false, above: pitch-body, below: 0pt, width: 100%, {
+      line-block(below: gap, align(center, strong("CERTIFICATE OF SERVICE")))
+      block(width: 100%, above: 0pt, below: gap, par(first-line-indent: (amount: para-indent, all: true), inl(svc.text)))
+      for l in svc.recipients { line-block(left: recipient-indent, inl(l)) }
+      signer-block(need(meta, "signature"), preamble: false, above: gap)
     })
   }
 }
@@ -215,58 +229,57 @@
     title: need(meta, "brief_title") + ", No. " + need(meta, "case_number"),
     author: need(meta, "signature").signed_by,
   )
-  set page(
-    paper: "us-letter",
-    margin: margins,
-    footer: context align(center, text(size: footer-size, counter(page).display())),
-  )
-  set text(
-    font: font-family, size: type-size, lang: "en", region: "us",
-    hyphenate: false, fallback: false,
-    // A 1.15em line box (a word-processor single line); Liberation Serif's ascender-descender box is only 0.909em,
-    // so single-spaced lines with no gap would touch.
-    top-edge: 0.9em, bottom-edge: -0.25em,
-  )
-  set par(
-    leading: body-leading, spacing: 0pt,
-    first-line-indent: (amount: para-indent, all: true), justify: false,
-  )
-  // Word paragraph composition (lib/typst/word-compat.typ); the INPUT's `word:` map sets justify/shrink.
-  show: word-compat.with(meta.at("word", default: (:)))
+  // The page number centered at the foot of every page, in a single-spaced line box (Word's footer).
+  set page(paper: "us-letter", margin: margins, footer-descent: 30%,
+    footer: context align(center, text(..edges(pitch-single), counter(page).display())))
+  set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false)
+  set par(first-line-indent: (amount: para-indent, all: true))
+  // The cross-engine layout model: first fit, ragged right, no kerning, ligatures or hyphenation, line boxes of
+  // the body pitch.
+  show: xengine.with(pitch: pitch-body, list-indent: para-indent)
+  // A doubled sign stays with its number ("¶¶ 55–57"), as a single one does in xengine.
+  show regex("[§¶]{2} \\S+"): it => box(it)
   set heading(numbering: heading-num)
-  set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
-  // each footnote is unbreakable, so its text is never split across a page break
-  show footnote.entry: it => block(breakable: false, {
-    set text(size: footnote-size)
-    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em)
-    it
-  })
 
-  // Headings: level 1 a centered caps section (no number); levels 2 to 4 numbered, hung from the left margin.
-  // Kept with the paragraph after them (a heading never ends a page).
-  show heading: it => context {
+  // Footnotes: 11 pt, single-spaced (1.15 x 11 pt boxes), the mark, a space, the note (Word's footnote layout).
+  set footnote.entry(gap: note-gap, clearance: note-clearance, indent: 0pt,
+    separator: line(length: 30%, stroke: 0.5pt))
+  show footnote.entry: it => {
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    set text(size: footnote-size, ..edges(pitch-note))
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: 0pt, spacing: 0pt)
+    [#super(num) #note.body]
+  }
+
+  // Headings, kept with the text after them. Level 1: a centered bold capital section (no number) in a double-spaced
+  // line, half a line below the text above (so a footnote mark on it stays inside the top margin). Levels 2 to 4: bold
+  // and single-spaced, the number in a label box hung from the margin (each level half an inch further in), a single line
+  // below the text above.
+  show heading: it => {
     if it.level == 1 {
-      block(width: 100%, above: line-pitch, below: 0pt, sticky: true,
-        text(size: type-size, align(center, strong(upper(it.body)))))
+      block(width: 100%, above: gap, below: 0pt, sticky: true, {
+        set text(size: type-size)
+        set par(first-line-indent: 0pt)
+        align(center, strong(upper(it.body)))
+      })
     } else {
-      let nums = counter(heading).at(it.location()).slice(0, it.level)
-      let lab = numbering(it.numbering, ..nums)
-      let ind = (it.level - 2) * 0.5in
-      block(width: 100%, above: line-pitch * 0.5, below: 0pt, sticky: true,
-        pad(left: ind, grid(
-          columns: (0.4in, 1fr),
-          text(size: type-size, strong(lab)),
-          text(size: type-size, strong(it.body)),
-        )))
+      let lab = numbering(it.numbering, ..counter(heading).at(it.location()).slice(0, it.level))
+      block(width: 100%, above: gap, below: 0pt, sticky: true, {
+        set text(size: type-size, ..edges(pitch-single))
+        set par(first-line-indent: 0pt)
+        pad(left: (it.level - 2) * level-indent,
+          par(hanging-indent: label-box, [#box(width: label-box, strong(lab))#strong(it.body)]))
+      })
     }
   }
 
-  // Block quotations: single-spaced, indented on both sides, a line apart from the text.
-  show quote.where(block: true): it => block(width: 100%, above: line-pitch * 0.5, below: line-pitch * 0.5,
-    inset: (left: 0.5in, right: 0.5in), {
-      set par(leading: single-leading, first-line-indent: 0pt)
-      it.body
-    })
+  // Block quotations: single-spaced, indented on both sides, a single line apart from the text.
+  show quote.where(block: true): it => block(width: 100%, above: gap, below: gap, {
+    set text(..edges(pitch-single))
+    set par(first-line-indent: 0pt)
+    pad(x: quote-indent, it.body)
+  })
 
   cover(meta)
   let parts = final-section(md)
@@ -274,7 +287,7 @@
   if parts.tail == none {
     signature-block(meta)
   } else {
-    block(breakable: false, width: 100%, {
+    block(breakable: false, width: 100%, above: gap, below: 0pt, {
       cmarker.render(parts.tail, raw-typst: false, smart-punctuation: true, h1-level: 1)
       signature-block(meta)
     })
