@@ -1,7 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex/ and docx/ are generated from typst/layout.yaml
 # (`fb engines gen`, fb-595.54.12) and render with tier 1 at 0 failed, but do not yet break every line where the typst
-# render does, for shared-model reasons recorded in docs/open-items/fb-595.54.66.md (fb-595.54.82 fixes them):
-# docx: the heading before a numbered list has no needle Word finds, so every docx table page is 3 too high (open
-# item 3); latex: p7, a URL typst and Word break and LaTeX does not (open item 4).
+# render does, for a shared-model reason recorded in docs/open-items/fb-595.54.66.md (second serial lane):
+# latex and docx: p9-p10, the list "1) Under Section IV ..." (the filed brief's own "1)" labels): typst (cmarker) prints
+# "1." for a ")" list, pandoc keeps "1)" (898/903 lines identical, every other line and page the same).
 params:
   cross_engine: report
