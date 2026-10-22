@@ -1,6 +1,7 @@
 ---
 caption:
   debtor: "Joshua Lee Shook and Jessica Lynn Shook"
+  debtor_designation: "Debtors"
   parties:
     - names: ["Robert Ruxton III, Margaret Ruxton, and Garage Candy Autos, LLC"]
       designation: "Plaintiffs"

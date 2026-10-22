@@ -1,6 +1,7 @@
 ---
 caption:
   debtor: "PrimaLend Capital Partners, LP, et al."
+  debtor_designation: "Debtors"
   parties:
     - names: ["PRIME ASSET, LLC"]
       designation: "Plaintiff"
