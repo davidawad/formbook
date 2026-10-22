@@ -19,6 +19,13 @@
 //! Every pass also gets `$FORMBOOK_META`: the sample's YAML frontmatter as JSON (`pandoc.json.decode`), the values as
 //! written, where pandoc's own metadata reads each string as markdown.
 //!
+//! Every pass also gets `$FORMBOOK_STATE`: a file that is empty before the first pass and is kept across the passes
+//! of one render, for a layout decision a pass makes from the pages and every later pass must keep (the Fourth
+//! Circuit's sticky headings: a heading a pass left at the foot of a page opens the next page from then on, though
+//! it no longer ends a page once moved). The filter reads it, adds what the pages of `$FORMBOOK_PAGES` call for and
+//! writes it back; what it adds must depend only on those pages and what is already there, so equal pages give the
+//! same document.
+//!
 //! The passes go on until the pages stop changing (a page list longer than its placeholder can move text).
 //! Word may paginate slightly differently from LibreOffice (docs/DOCX.md).
 use crate::proc::capture;
@@ -68,6 +75,7 @@ fn pandoc(
             .env("FORMBOOK_FINAL", work.join("final.xml"))
             .env("FORMBOOK_FOOTERS", work.join("footers.tsv"))
             .env("FORMBOOK_META", work.join("meta.json"))
+            .env("FORMBOOK_STATE", work.join("state.tsv"))
             .env("FORMBOOK_PAGES", pages)
             .args(["--to", "docx"])
             .args(args)
@@ -198,6 +206,7 @@ fn pages_of(docx: &Path, n: usize, work: &Path) -> Res<String> {
 /// settle. `args` are the `--from`, `--reference-doc` and `--lua-filter` arguments; `work` is scratch space.
 pub fn render(court: &Path, args: &[String], sample: &str, out: &Path, work: &Path) -> Res<()> {
     write_meta(&court.join(sample), work)?;
+    write(&work.join("state.tsv"), "")?;
     let pass = |n: usize| work.join(format!("pass{n}.docx"));
     pandoc(court, args, sample, "", work, &pass(1))?;
     if !work.join("needles.tsv").is_file() {
