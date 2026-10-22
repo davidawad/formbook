@@ -87,3 +87,7 @@ Run 2026-10-21: exits 1 (`no FILED-EXAMPLE-reply-brief.pdf`). No overlay is writ
 - BLOCKED: none for this sample. `tools/check.sh --engine docx` passes (2026-10-22).
 
 **latex**: none in this folder.
+
+Reference styles (2026-10-22, fb-595.54.4): `docx/build-reference.sh` and the committed `docx/reference.docx` are replaced by `docx/reference.xml`, from which fb render builds the reference (`tools/fb/src/docxref.rs`, as master's fb-595.63 folders do); its styles are XML-identical to the old reference's, theme-font attributes stripped. Every `.docx.pdf` re-rendered byte-identical; `check.sh --engine docx` 0 failed, XENG-001..003 PASS.
+
+`docx/render.sh` (2026-10-22, fb-595.54.4): bash strict mode (`set -euo pipefail`), checked `mktemp` with every scratch folder inside it and the whole removed through `safe_rmdir`, shellcheck clean; its branch count is in `.shell-safety-baseline.json`. The `.docx.pdf` re-renders byte-identical.

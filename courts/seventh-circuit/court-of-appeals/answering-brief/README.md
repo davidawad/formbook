@@ -147,3 +147,5 @@ authorities and signature pages of the latex and docx PDFs): no tier-1 defect. T
 authorities runs onto a third page (two statute rows on iii); the signature block stands alone on body page 9 (the
 markdown ends with footnote definitions, so the last paragraph is not kept with it, as before the port); the cover's
 gaps differ between engines (typst picks the largest gap that fits, LaTeX stretches, Word sets fixed gaps).
+
+Reference styles (2026-10-22, fb-595.54.4): `docx/build-reference.sh` and the committed `docx/reference.docx` are replaced by `docx/reference.xml`, from which fb render builds the reference (`tools/fb/src/docxref.rs`, as master's fb-595.63 folders do); its styles are XML-identical to the old reference's, theme-font attributes stripped. Every `.docx.pdf` re-rendered byte-identical; `check.sh --engine docx` 0 failed, XENG-001..003 PASS.

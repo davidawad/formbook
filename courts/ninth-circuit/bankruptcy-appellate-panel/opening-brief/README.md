@@ -129,3 +129,5 @@ The template moved onto the shared layout model (see "Engines"): Times New Roman
 | 3 (ii) authorities | Cases, Statutes, Rules; entries hang 0.4 in; page lists match the citations (e.g. 11 U.S.C. § 108(b): 2, 5, 7). | PASS |
 | 4-11 (1-8) body | Double-spaced 31 pt lines, centered bold section headings, bold hanging argument headings; the statement of issues as a numbered list with the text hanging; footnote 1 on page 1 under a 2 in rule; the conclusion kept with the signature block on page 8. | PASS |
 | 12-13 (9-10) certificates | Interested parties (11 entries) and related cases on page 9, compliance (1,782 words, 14-point Times New Roman) and service on page 10; each certificate whole on its page. | PASS |
+
+Reference styles (2026-10-22, fb-595.54.4): `docx/build-reference.sh` and the committed `docx/reference.docx` are replaced by `docx/reference.xml`, from which fb render builds the reference (`tools/fb/src/docxref.rs`, as master's fb-595.63 folders do); its styles are XML-identical to the old reference's, theme-font attributes stripped. Every `.docx.pdf` re-rendered byte-identical; `check.sh --engine docx` 0 failed, XENG-001..003 PASS.

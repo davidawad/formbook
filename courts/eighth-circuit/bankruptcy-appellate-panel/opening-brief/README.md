@@ -125,3 +125,5 @@ What the overlay shows: our text and the filing's text share words and paragraph
 - BLOCKED: none for this engine. `tools/check.sh --engine docx` passes, BAP8-FORM-003 and XENG-001..003 included (2026-10-22).
 
 **latex**: none. This doc type has no `latex/` folder.
+
+`docx/render.sh` (2026-10-22, fb-595.54.4): bash strict mode (`set -euo pipefail`), checked `mktemp` with every scratch folder inside it and the whole removed through `safe_rmdir`, shellcheck clean; its branch count is in `.shell-safety-baseline.json`. The `.docx.pdf` re-renders byte-identical.

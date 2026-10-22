@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # docx/render.sh <court-dir> <sample.md> <out.docx>   (the court's own build, called by tools/render-docx.sh)
 #
 # Builds the brief as a .docx from the sample's frontmatter and body:
@@ -9,7 +9,7 @@
 # The TOC and TOA page numbers are measured, not guessed: the .docx is converted with LibreOffice, each body
 # heading and each authority is found on its page, and the build repeats until the numbers stop changing.
 # Needs: pandoc, soffice (LibreOffice), pdfinfo, pdftotext, jq, yq (mikefarah), perl, awk, xmllint, zip, unzip.
-set -eu
+set -euo pipefail
 D=$(cd "$(dirname "$0")" && pwd)
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
@@ -22,8 +22,16 @@ SOFFICE=${SOFFICE:-$(command -v soffice || true)}
 for tool in pandoc pdfinfo pdftotext jq yq perl awk xmllint zip unzip; do
   command -v "$tool" > /dev/null || { echo "render.sh: $tool not found" >&2; exit 1; }
 done
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
+W=$(mktemp -d) || exit 1
+# safe_rmdir <dir>: delete a directory made by mktemp -d, and nothing else
+safe_rmdir() {
+  t=${TMPDIR:-/tmp}
+  case "${1:?}" in
+    "${t%/}"/tmp.* | /tmp/tmp.*) find "$1" -depth -delete ;;
+    *) return 1 ;;
+  esac
+}
+trap 'safe_rmdir "$W"' EXIT
 
 # ---- 1. split the sample: frontmatter (YAML) and body (markdown) ----
 : > "$W/meta.yaml"
@@ -73,7 +81,6 @@ jq -r '.back' "$W/parts.json" > "$W/back.md"
 
 # ---- 4. headings, citations and the authorities cited (the page map's keys) ----
 grep -E '^#{1,5}[[:space:]]' "$W/body.md" | sed -E 's/^#+[[:space:]]+//' > "$W/heads.txt" || true
-NH=$(wc -l < "$W/heads.txt" | tr -d ' ')
 # Each citation as a needle for the page map: its link text and the first letters and digits after it in its paragraph
 # (up to a footnote mark), or, at the end of a paragraph, the ones before it; so the same words elsewhere in the brief,
 # unlinked, are not taken for it (typst counts the links only).
@@ -130,14 +137,13 @@ build() {  # $1 = map, $2 = out docx
 
 # the footer relationship id is whatever pandoc chose; put it where the section properties ask for it
 finish() {  # $1 = docx, rewritten in place
-  X=$W/unpack
-  rm -rf "$X"; mkdir "$X"
+  X=$(mktemp -d "$W/unpack.XXXXXX") || exit 1
   unzip -q "$1" -d "$X"
   FID=$(perl -0ne 'while (/<Relationship\b[^>]*\/>/g) { my $r = $&; if ($r =~ /\/footer"/ && $r =~ /Id="([^"]+)"/) { print $1; last } }' "$X/word/_rels/document.xml.rels")
   [ -n "$FID" ] || { echo "render.sh: no footer part in the output" >&2; exit 1; }
   perl -pi -e 's/r:id="rIdBapFooter"/r:id="'"$FID"'"/g' "$X/word/document.xml"
   find "$X" -type f \( -name '*.xml' -o -name '*.rels' \) | while IFS= read -r part; do
-    xmllint --noout "$part" 2> /dev/null || { echo "render.sh: ${part#$X/} is not well-formed" >&2; exit 1; }
+    xmllint --noout "$part" 2> /dev/null || { echo "render.sh: ${part#"$X"/} is not well-formed" >&2; exit 1; }
   done
   rm -f "$1"
   (cd "$X" && zip -q -X "$1" '[Content_Types].xml' && zip -q -X -r "$1" . -x '[Content_Types].xml')
@@ -178,7 +184,7 @@ hit_on() {
 
 # measure PDF: sets N and BODY_START, writes $W/H.new (body heading pages) and $W/A.new (authority pages)
 measure() {
-  M=$W/m; rm -rf "$M"; mkdir -p "$M"
+  M=$(mktemp -d "$W/m.XXXXXX") || exit 1
   N=$(pdfinfo "$1" | awk '/^Pages:/ { print $2 }')
   last_front=0
   p=1
@@ -187,14 +193,14 @@ measure() {
     if grep -Eq '(\. ?){5,}' "$M/raw$p.txt"; then last_front=$p; fi   # dot leaders: the TOC and TOA pages
     # the text of the page without its footer (the page number is the last line), normalized to a-z0-9
     tr -d '\f' < "$M/raw$p.txt" | awk 'NF { line[++n] = $0 } END { if (n > 0 && line[n] ~ /^[ivxlcdmIVXLCDM0-9]+$/) n--; for (i = 1; i <= n; i++) print line[i] }' \
-      | tr 'A-Z' 'a-z' | tr -cd 'a-z0-9' > "$M/n$p.txt"
+      | tr '[:upper:]' '[:lower:]' | tr -cd 'a-z0-9' > "$M/n$p.txt"
     p=$((p + 1))
   done
   BODY_START=$((last_front + 1))
   : > "$W/H.new"
   cur=$BODY_START
   while IFS= read -r title; do
-    needle=$(printf '%s' "$title" | tr 'A-Z' 'a-z' | tr -c 'a-z0-9' ' ' | tr -s ' ' | sed 's/^ //; s/ $//')
+    needle=$(printf '%s' "$title" | tr '[:upper:]' '[:lower:]' | tr -c 'a-z0-9' ' ' | tr -s ' ' | sed 's/^ //; s/ $//')
     [ -n "$needle" ] || { echo "render.sh: a heading has no letters or digits: $title" >&2; exit 1; }
     found=""
     p=$cur
@@ -209,7 +215,7 @@ measure() {
   : > "$W/A.new"
   while IFS= read -r k; do
     awk -F'\t' -v k="$k" '$1 == k { print $2 }' "$W/links.tsv" | while IFS= read -r t; do
-      nn=$(printf '%s' "$t" | tr 'A-Z' 'a-z' | tr -cd 'a-z0-9')
+      nn=$(printf '%s' "$t" | tr '[:upper:]' '[:lower:]' | tr -cd 'a-z0-9')
       [ -n "$nn" ] || continue
       p=$BODY_START
       while [ "$p" -le "$N" ]; do

@@ -186,3 +186,5 @@ The template moved onto the shared layout model (see "Engines"): 31 pt body line
 | answering-brief-3 p1-p3 | Cover with the bankruptcy case title above the parties; contents (sections I-VII, argument A-D); authorities with "passim" for F.R.B.P. 5009(a). | PASS |
 | answering-brief-3 p4-p17 (1-14) | Body; the numbered statement of issues as a list; three block quotations single-spaced and indented both sides; the six "///" filler lines as filed; the conclusion and signature on page 14. | PASS |
 | answering-brief-3 p18-p19 (15-16) | Interested parties and compliance (2,971 words) on 15; service with the mailed party on 16 ("CM/ECF" kept whole). | PASS |
+
+Reference styles (2026-10-22, fb-595.54.4): `docx/build-reference.sh` and the committed `docx/reference.docx` are replaced by `docx/reference.xml`, from which fb render builds the reference (`tools/fb/src/docxref.rs`, as master's fb-595.63 folders do); its styles are XML-identical to the old reference's, theme-font attributes stripped. Every `.docx.pdf` re-rendered byte-identical; `check.sh --engine docx` 0 failed, XENG-001..003 PASS.

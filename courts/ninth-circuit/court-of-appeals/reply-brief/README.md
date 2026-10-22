@@ -140,3 +140,5 @@ Open (tier 2, not changed): in Word the leader runs up to the page number (the r
 - **Template:** no change.
 - **LaTeX:** rebuilt with `sh tools/render.sh --engine latex` (exit 0, 14 pages, the same page count as typst, EB Garamond only). Pages 1-4 (cover, TOC, TOA) were viewed this pass; the TOA groups and page numbers match typst. Pages 5-14 of the latex PDF were not viewed this pass.
 - **Remaining gaps:** as listed under Known gaps (excerpt sample, one signature, stacked counsel groups, cover colour). Also, the Forms 17 and 8 are not in the court's form layout. DOCX is untouched (no `soffice`).
+
+Reference styles (2026-10-22, fb-595.54.4): `docx/make-reference.sh` and the committed `docx/reference.docx` are replaced by `docx/reference.xml`, from which fb render builds the reference (`tools/fb/src/docxref.rs`, as master's fb-595.63 folders do); its styles are XML-identical to the old reference's, theme-font attributes stripped. Every `.docx.pdf` re-rendered byte-identical; `check.sh --engine docx` 0 failed, XENG-001..003 PASS.
