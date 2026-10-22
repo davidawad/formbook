@@ -2,17 +2,20 @@
 
 Alias `monttc`. Scope: papers filed with the Montana Tax Appeal Board, the state's administrative tribunal for appeals of property-tax and other tax determinations. The board has no filed exemplars in usage/ (see the court README), so this file records the sources checked and states no form requirement.
 
-Local rules not retrieved: https://courts.mt.gov/Rules/Supreme (HTTP 404, 2026-10-22); https://courts.mt.gov/Courts/supreme (HTTP 200, the Supreme Court home page, which links to its rules index at ../Rules/Supreme; the index itself returned 404); https://www.tax.mt.gov/ (not reachable, HTTP 000, 2026-10-22). The board's own procedural rules (Administrative Rules of Montana, Title 2, and the Tax Appeal Board's notice of appeal and hearing rules) were not retrieved. The Montana Rules of Appellate Procedure (Rule 11 form of papers) govern the Supreme Court, not this board, and the only copy reached was the 2015 Montana Code Annotated archive (https://archive.legmt.gov/bills/2015/mca/25/21/25021001110.htm, HTTP 200), which is not current and is not cited here.
+Local rules not retrieved: the board's adopted procedural rules (Administrative Rules of Montana, the board's own chapter) were not found on the board's site, and the Montana rules gateway chapter page (https://rules.mt.gov/gateway/ChapterHome.asp?Chapter=2%2E51) returned HTTP 405 to a direct request on 2026-10-22. The board's reference page links to the rules gateway and the Montana Code Annotated, and it lists only a proposed rule (MAR Notice 2025-365.1, a rule on informal review of class four residential property appeals), which states no format requirement. The Montana Rules of Appellate Procedure (Rule 11 form of papers) govern the Montana Supreme Court, not this board. The only copy of the Montana Code Annotated Title 25 reached was the 2015 archive (https://archive.legmt.gov/bills/2015/mca/25/21/25021001110.htm, HTTP 200), which is not current and is not cited for any requirement here.
 
 ## Sources
 
 | Tag | Source | URL |
 |---|---|---|
+| MTAB-REF | Montana Tax Appeal Board, Reference Materials page (lists the board's forms and links to the Montana Code Annotated and the Administrative Rules of Montana) | https://mtab.mt.gov/reference/index (HTTP 200, 2026-10-22) |
+| MTAB-MAR-2025 | Montana Tax Appeal Board, Notice of Proposed Rulemaking, MAR Notice No. 2025-365.1 (issue 19, October 10, 2025); proposed only, no format rule | https://mtab.mt.gov/reference/MTAB-published-MAR-notice-2025.365.1.pdf (HTTP 200, 2026-10-22) |
+| MTAB-PROC | Montana Tax Appeal Board, Procedures and Suggestions for Property Tax Appeals (non-attorney guidance; no format rule) | https://mtab.mt.gov/appealprocess/Procedures-and-Suggestions (HTTP 200, 2026-10-22) |
 | MCA-ARCHIVE-2015 | Montana Code Annotated 2015, Title 25, ch. 21 (Rules of Appellate Procedure), archive copy; background only, superseded for current text | https://archive.legmt.gov/bills/2015/mca/25/21/25021001110.htm (HTTP 200, 2026-10-22) |
 
 ## Form of papers
 
-Verified against the sources above on 2026-10-22 (no current board rule retrieved).
+Verified against the sources above on 2026-10-22 (no current board format rule retrieved).
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
