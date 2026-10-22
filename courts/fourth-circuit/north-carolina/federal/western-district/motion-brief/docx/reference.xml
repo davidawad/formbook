@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The ncwd motion-brief Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs; docs/EVAL-LOOP.md,
+     "Cross-engine gate") in the face of the typst template ({font}, Times New Roman) at 12 pt (size 24 half points;
+     LCvR 7.1(d): a minimum of 12 point); Body Text in exact 27.6 pt line boxes (typst pitch-body, LCvR 7.1(d)
+     double-spaced) with a half-inch first-line indent (typst para-indent); single lines in 13.8 pt boxes (typst
+     pitch-single); letter page, 1 in margins (LCvR 7.1(d)). Added here, as the typst template sets them: "Brief List"
+     (a list item's label half an inch in, the text hanging 1 in from the margin; typst list-indent, label-box).
+     The footer: the page number centred in a 13.8 pt line box whose foot is 0.5 in above the bottom edge (footer="720";
+     typst footer-descent 22.2 pt; LCvR 7.1(d): numbered pages). Headings, caption, signature and counsel blocks carry
+     their own spacing (docx/motion-brief.lua). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="552" single="276" indent="720" heading="276" heading-before="480" heading-after="276" footer="720">
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BriefList"><w:name w:val="Brief List"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1440"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="552" w:lineRule="exact"/><w:ind w:left="1440" w:hanging="720"/></w:pPr></w:style>
+<footer id="rIdFooter1"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p></footer>
+</reference>
