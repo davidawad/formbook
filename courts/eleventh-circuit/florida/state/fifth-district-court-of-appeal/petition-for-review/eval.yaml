@@ -3,3 +3,8 @@
 font:
   size_pt: 14
   pdf_prefix: "LiberationSans"
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. The typst template is on the
+# shared document model (typst/layout.yaml), but `fb engines gen` has no LaTeX face for Arial / Liberation Sans
+# (FLADISTCTAPP5-FORM-005), so latex/ and docx/ are not generated yet (docs/open-items/fb-595.54.41.md).
+params:
+  cross_engine: report

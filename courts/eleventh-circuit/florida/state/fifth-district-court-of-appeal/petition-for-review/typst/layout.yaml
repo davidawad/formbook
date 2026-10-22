@@ -1,0 +1,61 @@
+# Florida Fifth District Court of Appeal (fladistctapp5): petition for review of nonfinal agency action. The whole
+# layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Numbers trace to Fla. R. App. P. 9.045 and 9.210 (../../rules.md,
+# FLADISTCTAPP5-*); lengths in points. No case text here: every string printed comes from the sample's frontmatter
+# ({field}) or is a court constant.
+size: 14                  # FLADISTCTAPP5-FORM-005: Arial 14 point; footnotes and quotations too (-FORM-006)
+pitch:
+  body: 32.2              # FLADISTCTAPP5-FORM-004: double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # caption, headings, quotations, footnotes, signature: single (-FORM-006)
+# FLADISTCTAPP5-FORM-003: at least one inch; 3 pt more at top and bottom keeps the first cap height and the last
+# descender inside the inch
+margin: {top: 75, bottom: 75, left: 72, right: 72}
+indent: 36                # style: half-inch first-line indent
+page_number: {align: center, from: 2}   # style: the caption page unnumbered, every later page numbered at the bottom
+footnote: {size: 14, gap: 7}             # FLADISTCTAPP5-FORM-006: 14 point, single spaced
+quote: {left: 36, right: 36, above: 8.4, below: 16.8}   # FLADISTCTAPP5-FORM-006: quotations single spaced, 14 point
+heading:                                 # FLADISTCTAPP5-FORM-006: at the text size, single spaced
+  - {bold: true, upper: true, above: 16.8, below: 0}
+  - {bold: true, hang: 36, above: 14, below: 0}
+  - {bold: true, hang: 36, above: 14, below: 0}
+# FLADISTCTAPP5-PET-001, -BRIEF-001: the court, the parties and their designations, the case numbers, the title; the
+# petition's text follows on the same page.
+front:
+  - {text: "{court}", align: center, bold: true, upper: true}
+  - columns:
+      - width: 288
+        blocks:
+          - each: parties
+            blocks:
+              - {text: "{name}", above: 12.6}
+              - {text: "{role}", left: 36, optional: true}
+          - {text: "{caption_end}", above: 12.6}
+      - valign: center
+        blocks:
+          - {text: "CASE NO:{case_number}"}
+          - {text: "{lower_court_case}", optional: true}
+    above: 19.6
+  - {text: "{title}", align: center, bold: true, upper: true, underline: true, left: 20, right: 20, above: 19.6, below: 16.8}
+# Rule 2.515 (FLADISTCTAPP5-FORM-001): the signature block 2.5 in from the margin, never split; then the certificate
+# of service and, when the filer gives one, the certificate of compliance (FLADISTCTAPP5-FORM-008), each signed and kept
+# whole.
+closing:
+  - group:
+      - {text: "{signature.closing}", left: 180}
+      - {text: "{signature.signer_line}", left: 180, underline: true, above: 14}
+      - {text: "{signature.lines}", left: 180}
+    above: 16.8
+  - group:
+      - {text: "{service.heading}", align: center, bold: true, underline: true, upper: true, below: 12.6}
+      - {text: "{service.statement}", indent: 36, pitch: body}
+      - {text: "{service.signer_line}", left: 180, underline: true, above: 11.2}
+      - {text: "{service.signer_role}", left: 180}
+    above: 19.6
+  - when: compliance
+    blocks:
+      - group:
+          - {text: "{compliance.heading}", align: center, bold: true, underline: true, upper: true, below: 12.6}
+          - {text: "{compliance.statement}", indent: 36, pitch: body}
+          - {text: "{compliance.signer_line}", left: 180, underline: true, above: 11.2}
+          - {text: "{compliance.signer_role}", left: 180}
+        above: 19.6
