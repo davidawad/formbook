@@ -185,7 +185,7 @@
 
   // ---- Cover (FLADISTCTAPP-CONT-001) ----
   page(numbering: none)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
+    #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)   // single-spaced cover: the body's double paragraph spacing (body-leading) between its blocks pushed the date onto a second page (DEF-COVER-001); Fla. R. App. P. 9.045(b) sets no cover spacing
     #align(center)[
       #text(weight: "bold")[IN THE DISTRICT COURT OF APPEAL OF FLORIDA] \
       #text(weight: "bold")[#need(meta, "district") DISTRICT] \
@@ -212,7 +212,7 @@
         if "date" in meta { inl(meta.date) }
       })
     }
-    #v(0.3in)  // keeps the last cover line inside the 1 in bottom margin (Fla. R. App. P. 9.045(b))
+    // no bottom pad after the 1fr: the page's bottom margin (page-margin + 4pt) already keeps the last line's descender inside the 1 in margin (Fla. R. App. P. 9.045(b)); the extra 0.3in pushed the date onto a second page (DEF-COVER-001)
   ]
 
   // ---- Front matter (roman numerals, Tier 2) ----
