@@ -1,0 +1,61 @@
+# Supreme Court of Iowa (iowa): amicus curiae brief. The whole layout, as data for the shared document model (lib/typst/xdoc.typ;
+# latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to the Iowa Rules of
+# Appellate Procedure, Feb. 2026 edition (../../rules.md, IOWA-*); lengths in points. No case text here: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # IOWA-FORM-004 (6.903(1)(g)(1)): 14-point or larger for all text, footnotes included
+pitch:
+  body: 32.2              # IOWA-FORM-003 (6.903(1)(e)): double-spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # IOWA-FORM-003: headings, footnotes, quotations over 50 words single-spaced; cover, tables
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # IOWA-FORM-002 (6.903(1)(e)): 1 inch on all sides
+indent: 36                # first-line indent of a body paragraph (convention, the exemplars)
+page_number: {align: center, from: 1}   # IOWA-FORM-006 (6.903(1)(f)): bottom center, Arabic, the cover is page one
+footnote: {size: 14, pitch: single, gap: 7}   # IOWA-FORM-003, -004: footnotes 14 point, single-spaced
+quote: {left: 36, right: 36, above: 8.4, below: 14}   # IOWA-FORM-003: quotations indented and single-spaced
+# Level 1: a section, centred, capitals, bold. Level 2: point heading, bold. Level 3: sub-heading, bold italic. All
+# single-spaced (IOWA-FORM-003); headings carry their own numbering, as filed.
+heading:
+  - {align: center, bold: true, upper: true, above: 16.8, below: 14}
+  - {bold: true, hang: 36, above: 14, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 11.2}
+# The cover (IOWA-COVER-001..005, 6.903(1)(c)): the court and the case numbers, the caption between rules, the nature
+# of the proceeding and the court and judge under review, the title, counsel.
+cover:
+  - {text: "{cover_head}", align: center}
+  - {rule: 0.5, above: 7.2}
+  - each: caption
+    above: 5.8
+    between:
+      - {text: "v.", align: center, above: 11.2}
+    blocks:
+      - {text: "{names}", align: center, above: 11.2}
+      - {text: "{designation}", align: center, optional: true}
+  - {rule: 0.5, above: 11.2}
+  - {text: "{proceeding}", align: center, above: 5.8}
+  - {rule: 0.5, above: 5.8}
+  - {text: "{notice}", align: center, optional: true, above: 5.8}
+  - {text: "{brief_title}", align: center, bold: true, above: 5.8}
+  - {rule: 0.5, above: 5.8}
+  - columns: {each: counsel, per_row: 2, row_gap: 11.2, blocks: [{text: "{lines}"}]}
+    gutter: 10.8
+    above: 7.2
+  - {text: "{counsel_footer}", align: center, bold: true, optional: true, above: 8.4}
+# 6.903(2)(a)(1), (2) (IOWA-BRF-001): the table of contents with page references, then the table of authorities.
+contents: {title: "Table of Contents", depth: 2, col: 36, hang: 0, step: 14, above: 9.8}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 36
+  above: 9.8
+  group: {bold: true, above: 15.4, below: 2.8}
+# The lead-in and the signature block (right of centre, as the exemplars), never split.
+closing:
+  - when: signature
+    blocks:
+      - group:
+          - {text: "{lead_in}", optional: true}
+          - {text: "{signature.firm}", left: 230.4, optional: true, above: 8.4}
+          - {text: "/s/ {signature.signer}", underline: true, left: 230.4, optional: true, above: 8.4}
+          - {text: "{signature.lines}", left: 230.4}
+        above: 28.8
+# The certificates (IOWA-FORM-009) open a page after the signature, in the body's form.
+tail: {at: "Certificate", break: true, pitch: body, indent: 36}
