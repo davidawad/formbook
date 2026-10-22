@@ -55,68 +55,69 @@ signature:
 authorities:
   cepnp:
     kind: case
-    name: "Comisionado Electoral PNP v. CEE"
+    name: "*Comisionado Electoral PNP v. CEE*"
     cite: "2016 TSPR 227, 196 D.P.R. 706, 711"
   guadalupe:
     kind: case
-    name: "Guadalupe v. C.E.E."
+    name: "*Guadalupe v. C.E.E.*"
     cite: "165 D.P.R. 106 (2005)"
   ppd:
     kind: case
-    name: "P.P.D. v. Administrador Gen. de Elecciones"
+    name: "*P.P.D. v. Administrador Gen. de Elecciones*"
     cite: "111 D.P.R. 199, 221 (1981)"
   pnp1988:
     kind: case
-    name: "P.N.P. v. Rodríguez Estrada"
+    name: "*P.N.P. v. Rodríguez Estrada*"
     cite: "123 D.P.R. 1, 30 (1988)"
   classic:
     kind: case
-    name: "US v. Classic"
+    name: "*US v. Classic*"
     cite: "313 US 299 (1941)"
   smith:
     kind: case
-    name: "Smith v. Allwright"
+    name: "*Smith v. Allwright*"
     cite: "321 US 649 (1944)"
   terry:
     kind: case
-    name: "Terry v. Adams"
+    name: "*Terry v. Adams*"
     cite: "345 US 461 (1953)"
   southbay:
     kind: case
-    name: "South Bay United Pentecostal Church v. Gavin Newsom"
+    name: "*South Bay United Pentecostal Church v. Gavin Newsom*"
     cite: "590 U. S. __ (2020)"
   reynolds:
     kind: case
-    name: "Reynold v. Sims"
+    name: "*Reynold v. Sims*"
     cite: "377 US 533 (1964)"
   mundo:
     kind: case
-    name: "Mundo Ríos v. CEE"
+    name: "*Mundo Ríos v. CEE*"
     cite: "2012 TSPR 166"
   granados:
     kind: case
-    name: "Granados v. Rodríguez Estrada"
+    name: "*Granados v. Rodríguez Estrada*"
     cite: "124 D.P.R. 1, 20 (1989)"
   francisco:
     kind: case
-    name: "Francisco González, Comisionado PNP v. Rodríguez Estrada"
+    name: "*Francisco González, Comisionado PNP v. Rodríguez Estrada*"
     cite: "122 D.P.R. 490"
   seguros:
     kind: case
-    name: "Comisionado de Seguros v. Real Legacy Assurance"
+    name: "*Comisionado de Seguros v. Real Legacy Assurance*"
     cite: "179 D.P.R. 692, 716-717 (2010)"
   velez:
     kind: case
-    name: "Vélez v. A.R.Pe."
+    name: "*Vélez v. A.R.Pe.*"
     cite: "167 D.P.R. 684, 693 (2006)"
   torres:
     kind: case
-    name: "Torres v. Junta de Ingenieros"
+    name: "*Torres v. Junta de Ingenieros*"
     cite: "161 D.P.R. 696, 708 (2004)"
   tjac:
     kind: case
-    name: "T-JAC, Inc. v. Caguas Centrum Limited"
+    name: "*T-JAC, Inc. v. Caguas Centrum Limited*"
     cite: "148 D.P.R. 70, 80 (1999)"
+    sort: "*TJAC Inc v Caguas Centrum Limited"
 ---
 
 AL HONORABLE TRIBUNAL:
@@ -125,7 +126,7 @@ COMPARECE la Parte Recurrida, la Comisionada Electoral del Partido Nuevo Progres
 
 ## I. Introducción
 
-Comparecemos en cumplimiento con la "Orden de Mostrar Causa" del 10 de agosto de 2020 que otorgaba hasta las 2:00pm del 11 de agosto de 2020 para expresar nuestra posición A FAVOR de certificar todos los recursos de Revisión Judicial e Injunction, no permitir la divulgación de resultados de los Precintos que pudieron votar el pasado domingo, 9 de agosto de 2020, sostener el Acuerdo Unánime de la CEE de permitir continuar el Proceso de Primarias el próximo domingo, 16 de agosto de 2020 en los Precintos que no han votado garantizando igual acceso a ejercer el derecho al voto libres de toda coacción e influencia indebida.
+Comparecemos en cumplimiento con la “Orden de Mostrar Causa” del 10 de agosto de 2020 que otorgaba hasta las 2:00pm del 11 de agosto de 2020 para expresar nuestra posición A FAVOR de certificar todos los recursos de Revisión Judicial e Injunction, no permitir la divulgación de resultados de los Precintos que pudieron votar el pasado domingo, 9 de agosto de 2020, sostener el Acuerdo Unánime de la CEE de permitir continuar el Proceso de Primarias el próximo domingo, 16 de agosto de 2020 en los Precintos que no han votado garantizando igual acceso a ejercer el derecho al voto libres de toda coacción e influencia indebida.
 
 La controversia ante este Honorable Tribunal es del más alto interés público al representar dos deberes constitucionales del Estado:
 
@@ -141,11 +142,11 @@ La Comisión de Primarias de Partido Nuevo Progresista (PNP) recibió varias con
 
 Las Comisiones de Primarias del PNP y PPD, por unanimidad, acordaron que el domingo, 9 de agosto de 2020, culminarían su proceso de votación en aquellos precintos electorales donde se abrieron maletines electorales. El Acuerdo CEE-AC-20-224 dispuso que:
 
-> "Se garantizará las ocho (8) horas para que los electores puedan ejercer su derecho al voto. Por el contrario, aquellos precintos electorales donde no se haya comenzado la votación a la 1:45p.m., se suspenderá la elección hasta el próximo domingo, 16 de agosto de 2020, en el horario 8:00 a.m. a 4:00 p.m."
+> “Se garantizará las ocho (8) horas para que los electores puedan ejercer su derecho al voto. Por el contrario, aquellos precintos electorales donde no se haya comenzado la votación a la 1:45p.m., se suspenderá la elección hasta el próximo domingo, 16 de agosto de 2020, en el horario 8:00 a.m. a 4:00 p.m.”
 
 Específicamente, sobre el asunto en la controversia alegada por la parte Recurrente sobre los resultados de las votaciones en los colegios, indica este acuerdo:
 
-> "Queda terminantemente prohibido la divulgación de resultados preliminares de cualquier colegio, unidad o precinto. Las máquinas de escrutinio electrónico serán apagadas sin divulgar resultado alguno."
+> “Queda terminantemente prohibido la divulgación de resultados preliminares de cualquier colegio, unidad o precinto. Las máquinas de escrutinio electrónico serán apagadas sin divulgar resultado alguno.”
 
 En este acuerdo unánime de los Comisionados de ambos partidos con Primarias, entiéndase el PNP y el PPD, junto al Presidente de la CEE, tuvo el aval de los presidentes de ambos partidos, Hon. Thomas Rivera Schatz, presidente del PNP y Hon. Anibal José Torres, presidente del PPD.
 
@@ -395,7 +396,7 @@ La Oficina de Sistemas de Información y Procesamiento Electrónico (Osipe), emi
 >
 > Aníbal J. Zambrana Quiñones
 >
-> Subdirector de la Osipe" (énfasis suplido)
+> Subdirector de la Osipe” (énfasis suplido)
 
 ## III. Garantía del Derecho al Voto
 
@@ -427,39 +428,39 @@ Para salvaguardar el derecho al voto y reglamentar el sistema electoral de Puert
 
 La CEE ha sido diseñada por la Asamblea Legislativa como un organismo sui generis no enmarcable entre las demás agencias administrativas del Ejecutivo.
 
-> "Debido a la naturaleza de las funciones y los propósitos que animan su creación, la Comisión goza de autonomía legal, funcional y administrativa, que la liberan de controles de otros organismos gubernamentales, y que, por ello, en el ejercicio de dicha discreción e independencia administrativa, es la propia Comisión quien regula lo pertinente a su funcionamiento. A esos efectos, expresa la ley, dicha agencia tiene aprobadas normas y procedimientos que garantizan el desarrollo de unos eventos electorales transparentes, ágiles y confiables, enmarcados dentro de un régimen de eficiencia y sana administración pública, y la fiscalización de los partidos políticos." Véase, Opinión del Secretario de Justicia de 22 de abril de 2010, Consulta Núm. 10-253-A.
+> “Debido a la naturaleza de las funciones y los propósitos que animan su creación, la Comisión goza de autonomía legal, funcional y administrativa, que la liberan de controles de otros organismos gubernamentales, y que, por ello, en el ejercicio de dicha discreción e independencia administrativa, es la propia Comisión quien regula lo pertinente a su funcionamiento. A esos efectos, expresa la ley, dicha agencia tiene aprobadas normas y procedimientos que garantizan el desarrollo de unos eventos electorales transparentes, ágiles y confiables, enmarcados dentro de un régimen de eficiencia y sana administración pública, y la fiscalización de los partidos políticos.” Véase, Opinión del Secretario de Justicia de 22 de abril de 2010, Consulta Núm. 10-253-A.
 
 Desde [*US v Classic*, 313 US 299 (1941)](toa:classic) los tribunales han resuelto que el estado tiene un deber de administrar procesos primaristas con el deber de velar y garantizar la igual protección de los electores a ejercer su derecho fundamental al voto y velar que los aspirantes tengan también igual oportunidad a correr para un cargo. El estado tiene un deber de administrar y fiscalizar elecciones confiables que consisten de un proceso integrado por las primarias de los partidos y la votación final entre los candidatos de cada partido.
 
-En [*Smith v. Allwright*, 321 US 649 (1944)](toa:smith) el Tribunal Supremo Federal decidió que la XV Enmienda de la Constitución Federal era la base del derecho de los electores de votar sin discrimen racial en una primaria. El Tribunal concluyó que US v. Classic "fused the primary and general elections into a single intrumentality". Convirtió la administración de las Primarias en una función estatal.
+En [*Smith v. Allwright*, 321 US 649 (1944)](toa:smith) el Tribunal Supremo Federal decidió que la XV Enmienda de la Constitución Federal era la base del derecho de los electores de votar sin discrimen racial en una primaria. El Tribunal concluyó que US v. Classic “fused the primary and general elections into a single intrumentality”. Convirtió la administración de las Primarias en una función estatal.
 
 En [*Terry v. Adams*, 345 US 461 (1953)](toa:terry) el Tribunal Supremo Federal extendió todavía más la protección de las minorías en los procesos primaristas. Una vez la Ley conforma el proceso de Primarias y provee para su funcionamiento incluyendo un mandato presupuestario, no se puede pretender limitar los recursos así su efectividad como los canalizadores de alternativas para el votante en las elecciones generales, el proceso más importante de la democracia. En el caso de Puerto Rico, donde solo se vota cada cuatro (4) años, es la única oportunidad que tiene el ciudadano para votar sobre la administración de gobierno.
 
-El Artículo 3.1 (1) de la Ley 58-2020, Código Electoral de Puerto Rico, dispone que la misión de CEE es "garantizar que los servicios, procesos y eventos electorales se planifiquen, organicen y realicen con pureza, transparencia, seguridad, certeza, rapidez, accesibilidad y facilidad para los electores de manera costoeficiente, libre de fraude y coacción, y sin inclinación a ningún grupo o sector ni tendencia ideológica o partidista."
+El Artículo 3.1 (1) de la Ley 58-2020, Código Electoral de Puerto Rico, dispone que la misión de CEE es “garantizar que los servicios, procesos y eventos electorales se planifiquen, organicen y realicen con pureza, transparencia, seguridad, certeza, rapidez, accesibilidad y facilidad para los electores de manera costoeficiente, libre de fraude y coacción, y sin inclinación a ningún grupo o sector ni tendencia ideológica o partidista.”
 
 El Artículo 3.2 de la Ley 58-2020 le da la autoridad a la CEE para organizar eventos electorales.
 
-> "Artículo 3.2. - Funciones, Deberes y Facultades de la Comisión.
+> “Artículo 3.2. - Funciones, Deberes y Facultades de la Comisión.
 >
 > La Comisión será responsable de planificar, organizar, dirigir y supervisar el organismo electoral y los procedimientos de naturaleza electoral que, conforme a esta Ley, y a leyes federales aplicables, rijan en cualquier Votación a realizarse en Puerto Rico. En el desempeño de tal función tendrá, además, de cualesquiera otras dispuestas en esta Ley, los siguientes deberes:
 >
 > (8) Gestionar y hacer todos los acuerdos y convenios ordenados en esta Ley y aquellos que considere necesarios, dentro y fuera de la jurisdicción de Puerto Rico, para cumplir con sus obligaciones legales y electorales.
 >
-> "
+> “
 
 A su vez, el Artículo 3.2(8) de la Ley 58-2020 le da la facultad a la CEE a llegar a los acuerdos necesarios para cumplir con sus obligaciones legales y electorales.
 
 El Artículo 3.4 de la Ley 58-2020 dispone que cuando surja cualquier controversia sobre asuntos electorales la CEE decidirá por UNANIMIDAD, y dicho acuerdo se consignará mediante una certificación de acuerdo:
 
-> "Artículo 3.4. - Decisiones de la Comisión. -
+> “Artículo 3.4. - Decisiones de la Comisión. -
 >
 > (1) Las decisiones de la Comisión relacionadas con asuntos de específica naturaleza electoral se tomarán con la unanimidad de los Comisionados Electorales propietarios presentes que la componen y se consignarán mediante Certificación de Acuerdo suscrita por el Secretario.
 >
-> (2) El voto del Presidente solo será necesario cuando no haya unanimidad entre los Comisionados Electorales, a menos que otra cosa se disponga en esta Ley ..."
+> (2) El voto del Presidente solo será necesario cuando no haya unanimidad entre los Comisionados Electorales, a menos que otra cosa se disponga en esta Ley ...”
 
 Por otra parte, el Artículo 7.1 de la Ley 58-2020 dispone que la Comisión de Primarias, compuesta por el Comisionado Electoral y el Presidente de la CEE, administrarán todo lo relacionado a las Primarias de los Partidos.
 
-> "Artículo 7.1. - Comisión de Primarias y Reglamento. -
+> “Artículo 7.1. - Comisión de Primarias y Reglamento. -
 >
 > Se crea una Comisión de Primarias para cada Partido Político. Esta Comisión de Primarias estará compuesta por el Presidente de la Comisión y el Comisionado Electoral del Partido Político que deba realizar primarias. No será un organismo de operación continua. La Comisión de Primarias quedará automáticamente activada en todo su rigor una vez el Partido deba realizar primarias para la nominación de los candidatos a uno o más cargos públicos electivos y hasta que se certifiquen los resultados finales de las primarias en escrutinio general o recuento. Las decisiones de la Comisión de Primarias se tomarán con la unanimidad del Presidente de la Comisión y el Comisionado Electoral del Partido Político; pero no habiéndola, prevalecerá la decisión del Presidente.
 >
@@ -469,13 +470,13 @@ Por otra parte, el Artículo 7.1 de la Ley 58-2020 dispone que la Comisión de P
 >
 > Confirmado lo anterior, la Comisión de Primarias dirigirá e inspeccionará las primarias y pondrá en vigor el reglamento que apruebe el organismo directivo central del Partido en proceso de primarias.
 >
-> Cada reglamento de primarias de los Partidos Políticos dispondrá, entre otros asuntos, la creación y los deberes de una Junta Local de Primarias en cada precinto donde se realicen primarias. Además, cada Partido Político dispondrá en ese reglamento la creación de una Junta de Colegio de primarias, compuesta por un director, un subdirector y un Secretario. En el proceso de votación y escrutinio, el reglamento también garantizará la representación efectiva de los Aspirantes."
+> Cada reglamento de primarias de los Partidos Políticos dispondrá, entre otros asuntos, la creación y los deberes de una Junta Local de Primarias en cada precinto donde se realicen primarias. Además, cada Partido Político dispondrá en ese reglamento la creación de una Junta de Colegio de primarias, compuesta por un director, un subdirector y un Secretario. En el proceso de votación y escrutinio, el reglamento también garantizará la representación efectiva de los Aspirantes.”
 
 Las decisiones sobre la situación de emergencia que surgió durante las Primarias se tomaron por ambas Comisiones de Primarias. En la decisión unánime se tomaron con la unanimidad del Presidente de la CEE y el Comisionado Electoral de cada Partido Político. Esta decisión unánime se consignó mediante Certificación de Acuerdo suscrita por el Secretario.
 
 Los partidos y la CEE tienen un deber principal de garantizarle el derecho al voto a sus afiliados, conforme el Artículo 5.1 de la Ley 58-2020:
 
-> "Artículo 5.1. - Derechos y Prerrogativas de los Electores. -
+> “Artículo 5.1. - Derechos y Prerrogativas de los Electores. -
 >
 > Reafirmando el derecho fundamental al voto universal, igual, directo, secreto y protegido contra toda coacción y la garantía de la más clara expresión e intención de la voluntad democrática del pueblo, también reconocemos los siguientes derechos y prerrogativas de los Electores:
 >
@@ -517,27 +518,27 @@ Los partidos y la CEE tienen un deber principal de garantizarle el derecho al vo
 >
 > La Comisión deberá educar al Elector sobre sus derechos y prerrogativas dispuestas en este Artículo.
 >
-> Se concede a los electores la legitimación activa para iniciar o promover cualesquiera acciones legales al amparo de este Artículo, ante el Tribunal de Primera Instancia que corresponda de conformidad con el Capítulo XIII de esta Ley."
+> Se concede a los electores la legitimación activa para iniciar o promover cualesquiera acciones legales al amparo de este Artículo, ante el Tribunal de Primera Instancia que corresponda de conformidad con el Capítulo XIII de esta Ley.”
 
 La Resolución Conjunta Número 37, fue aprobada el 4 de junio de 2020, como una medida legislativa especial y de emergencia para mover la fecha de la administración de Primarias al 9 de agosto de 2020 (RC 37-2020). [^1]
 
-> "Como medida preventiva y en respuesta a la pandemia del Coronavirus (COVID-19), la gobernadora de Puerto Rico, Hon. Wanda Vázquez Garced, declaró un estado de emergencia mediante la Orden Ejecutiva Núm. 2020-0020. El 15 de marzo de 2020, promulgó la Orden Ejecutiva Núm. 2020-0023, con el propósito de adoptar las medidas necesarias para evitar la propagación descontrolada del COVID-19 en la isla. Dicha Orden, dispuso restricciones como el distanciamiento social y un toque de queda, implicando el cierre de todas las operaciones gubernamentales y el cierre parcial de las operaciones comerciales. En su origen, el toque de queda sería implementado del 15 de marzo al 30 de marzo de 2020. No obstante, fue necesario extender la medida de distanciamiento social total hasta el 3 de mayo de 2020. Al día de hoy, tomando en consideración la importancia y la prioridad del gobierno de proteger a la ciudadanía, existe aún la posibilidad de que dichas medidas se extiendan, aunque ocurra de manera parcial. ..
+> “Como medida preventiva y en respuesta a la pandemia del Coronavirus (COVID-19), la gobernadora de Puerto Rico, Hon. Wanda Vázquez Garced, declaró un estado de emergencia mediante la Orden Ejecutiva Núm. 2020-0020. El 15 de marzo de 2020, promulgó la Orden Ejecutiva Núm. 2020-0023, con el propósito de adoptar las medidas necesarias para evitar la propagación descontrolada del COVID-19 en la isla. Dicha Orden, dispuso restricciones como el distanciamiento social y un toque de queda, implicando el cierre de todas las operaciones gubernamentales y el cierre parcial de las operaciones comerciales. En su origen, el toque de queda sería implementado del 15 de marzo al 30 de marzo de 2020. No obstante, fue necesario extender la medida de distanciamiento social total hasta el 3 de mayo de 2020. Al día de hoy, tomando en consideración la importancia y la prioridad del gobierno de proteger a la ciudadanía, existe aún la posibilidad de que dichas medidas se extiendan, aunque ocurra de manera parcial. ..
 >
 > Sin embargo, la situación de emergencia que vivimos y el cierre total de las operaciones gubernamentales, incide directamente en el calendario electoral previo a las primarias. Al punto que, debido a la suspensión de las labores en la Comisión Estatal de Elecciones, no se han podido poner en marcha los preparativos que anteceden dicho evento electoral. Es de suma importancia para la Comisión, la revisión de los reglamentos y manuales de primarias, así como la selección de los centros de votación, reclutamiento y adiestramiento de los funcionarios de colegios, y demás personal que labora antes, durante y después del día de la celebración del evento. Como parte de ese proceso preparatorio, se trabaja con el voto adelantado, el voto ausente y el diseño e impresión de las papeletas, (incluyendo las papeletas modelos) entre otros asuntos.
 >
-> La Comisión, no está operando a su máxima capacidad durante la emergencia conforme a las órdenes ejecutivas vigentes, por lo que todas sus operaciones han sido detenidas y en suspenso. Estos trabajos no se pueden llevar a cabo hasta tanto se levante el toque de queda y se restablezca el funcionamiento ordinario en la Comisión ..."
+> La Comisión, no está operando a su máxima capacidad durante la emergencia conforme a las órdenes ejecutivas vigentes, por lo que todas sus operaciones han sido detenidas y en suspenso. Estos trabajos no se pueden llevar a cabo hasta tanto se levante el toque de queda y se restablezca el funcionamiento ordinario en la Comisión ...”
 
 En la Sección 2 de la RC 37-2020, la Asamblea Legislativa le delegó a la CEE la autoridad de extender términos que se hubieran vencido durante el cierre de gobierno por la emergencia:
 
-> "Sección 2.- La Comisión Estatal de Elecciones revisará y ajustará el calendario electoral para las primarias, con el fin de que se ajuste a la fecha dispuesta en esta Resolución Conjunta para la celebración de la primaria y las enumeradas a continuación:
+> “Sección 2.- La Comisión Estatal de Elecciones revisará y ajustará el calendario electoral para las primarias, con el fin de que se ajuste a la fecha dispuesta en esta Resolución Conjunta para la celebración de la primaria y las enumeradas a continuación:
 >
 > 1. 10 de junio de 2020- La Comisión preparará la lista oficial de todos los Aspirantes presentados y, a partir de ese momento, no se podrá añadir o eliminar nombres en esta.
 >
-> 2. Cualquier otro trámite cuya fecha establecida en el calendario electoral que haya vencido durante el periodo comprendido entre el 16 de marzo de 2020 y la fecha de la aprobación de esta Resolución Conjunta, será extendido por la Comisión en el calendario electoral revisado según las disposiciones de esta Sección." (énfasis suplido)
+> 2. Cualquier otro trámite cuya fecha establecida en el calendario electoral que haya vencido durante el periodo comprendido entre el 16 de marzo de 2020 y la fecha de la aprobación de esta Resolución Conjunta, será extendido por la Comisión en el calendario electoral revisado según las disposiciones de esta Sección.” (énfasis suplido)
 
 La Sección 3 de la RC 37-2020, dispone que en los casos en que no haya acuerdo entre los comisionados electorales sobre alguna situación o decisión conforme a esta Resolución Conjunta, el Presidente de la Comisión consultará el asunto o determinación únicamente con los Comisionados Electorales de los Partidos que vayan a celebrar primarias para seleccionar a los candidatos a figurar en la papeleta en las elecciones generales:
 
-> "Sección 3.- En los casos en que no haya acuerdo entre los comisionados electorales sobre alguna situación o decisión conforme a esta Resolución Conjunta, a manera de excepción del procedimiento dispuesto en el Artículo 3.004 (b} de la Ley 78-2011, según enmendada, el Presidente de la Comisión, consultará el asunto o determinación únicamente con los comisionados electorales de los partidos que vayan a celebrar primarias para seleccionar a los candidatos a figurar en la papeleta en las elecciones generales. El Presidente, tomando en cuenta la recomendación de los comisionados de los partidos que vayan a celebrar la primaria, tomará la decisión que mejor se ajuste a los propósitos de esta Resolución Conjunta."
+> “Sección 3.- En los casos en que no haya acuerdo entre los comisionados electorales sobre alguna situación o decisión conforme a esta Resolución Conjunta, a manera de excepción del procedimiento dispuesto en el Artículo 3.004 (b} de la Ley 78-2011, según enmendada, el Presidente de la Comisión, consultará el asunto o determinación únicamente con los comisionados electorales de los partidos que vayan a celebrar primarias para seleccionar a los candidatos a figurar en la papeleta en las elecciones generales. El Presidente, tomando en cuenta la recomendación de los comisionados de los partidos que vayan a celebrar la primaria, tomará la decisión que mejor se ajuste a los propósitos de esta Resolución Conjunta.”
 
 El acuerdo unánime de continuar la Primaria el próximo domingo, 16 de agosto de 2020, no fue una decisión caprichosa. Fue el mejor remedio que pudieron encontrar las Comisiones de Primarias dentro de la emergencia para garantizar el derecho al voto de todos los electores hábiles.
 
@@ -561,15 +562,15 @@ En los medios se han discutido alternativas como suspender e invalidar la primar
 
 Dentro de la facultad que el Legislador le extendió a la CEE a través de la RC 37-2020 y la Ley 58-2020, las Comisiones de Primarias acordaron por unanimidad un remedio que fue la única solución justa, lógica que protege la democracia y garantiza el derecho fundamental en un sistema republicano de Gobierno, el derecho al voto del ciudadano.
 
-[^1]: Exposición de Motivos de la Resolución Conjunta Número 37 del 2020, "Para posponer la fecha de celebración de las primarias dispuesta en el Artículo 8.009 de la Ley 78-2011, según enmendada, conocida como "Código Electoral de Puerto Rico para el Siglo XXI", para el 9 de agosto de 2020, a consecuencia del estado de emergencia declarado mediante la Orden Ejecutiva Núm. 2020-0020 en consideración al brote del Coronavirus (COVID-19); para autorizar al Presidente de la Comisión Estatal de Elecciones a coordinar con los partidos políticos que celebren primarias el ajuste en el calendario electoral, según las fechas límites establecidas en dicho calendario para los preparativos de la celebración de las primarias de Ley; disponer los procesos especiales para la primaria; establecer penalidades; y para otros fines relacionados."
+[^1]: Exposición de Motivos de la Resolución Conjunta Número 37 del 2020, “Para posponer la fecha de celebración de las primarias dispuesta en el Artículo 8.009 de la Ley 78-2011, según enmendada, conocida como “Código Electoral de Puerto Rico para el Siglo XXI”, para el 9 de agosto de 2020, a consecuencia del estado de emergencia declarado mediante la Orden Ejecutiva Núm. 2020-0020 en consideración al brote del Coronavirus (COVID-19); para autorizar al Presidente de la Comisión Estatal de Elecciones a coordinar con los partidos políticos que celebren primarias el ajuste en el calendario electoral, según las fechas límites establecidas en dicho calendario para los preparativos de la celebración de las primarias de Ley; disponer los procesos especiales para la primaria; establecer penalidades; y para otros fines relacionados.”
 
 [^2]: Puerto Rico Oversight, Management, and Economic Stability Act, PROMESA 402, Public Law 114-187, 42 USC 2192
 
-[^3]: Véase, PROMESA Sección 402 "Right of the Puerto Rico to determine its future political status;" y el Artículo 11.1 de la Ley 58-2020; Artículo 8.1 de la Ley 51-2020.
+[^3]: Véase, PROMESA Sección 402 “Right of the Puerto Rico to determine its future political status;” y el Artículo 11.1 de la Ley 58-2020; Artículo 8.1 de la Ley 51-2020.
 
 [^4]: CEE admite no estará lista para retomar primarias antes del domingo, Gobierno, elvocero.com, martes, 11 de agosto de 2020, https://www.elvocero.com/gobierno/cee-admite-no-estar-lista-para-retomar-primarias-antes-del-domingo/article_5727818e-dbd6-11ea-9ff2-53927f2d746c.html
 
-[^5]: El tener acceso a los resultados de la máquina de escrutinio electrónico sin la aprobación de la CEE es un delito grave electoral bajo el Artículo 12.8 de la Ley 58-2020: "Artículo 12.8. - Interferencia, Manipulación, Alteración, Divulgación o Acceso No Autorizado o Ataque a Sistemas Electrónicos. Toda persona que, personalmente o a través de otros medios, interfiera, manipule, altere, dañe, sustraiga datos, los divulgue o acceda sin autorización, ataque o intente algunas de las anteriores en cualquier sistema electrónico, informático, cibernético o telecomunicación operado por la Comisión, incurrirá en delito grave y, convicta que fuere, será sancionada con pena de reclusión por un término fijo de diez (10) años y multa de cien mil dólares ($100,000)."
+[^5]: El tener acceso a los resultados de la máquina de escrutinio electrónico sin la aprobación de la CEE es un delito grave electoral bajo el Artículo 12.8 de la Ley 58-2020: “Artículo 12.8. - Interferencia, Manipulación, Alteración, Divulgación o Acceso No Autorizado o Ataque a Sistemas Electrónicos. Toda persona que, personalmente o a través de otros medios, interfiera, manipule, altere, dañe, sustraiga datos, los divulgue o acceda sin autorización, ataque o intente algunas de las anteriores en cualquier sistema electrónico, informático, cibernético o telecomunicación operado por la Comisión, incurrirá en delito grave y, convicta que fuere, será sancionada con pena de reclusión por un término fijo de diez (10) años y multa de cien mil dólares ($100,000).”
 
 ## IV. Deber de proteger la seguridad y salud de los ciudadanos
 
@@ -577,7 +578,7 @@ La CEE, como agencia con autonomía administrativa, fue delegada con jurisdicci�
 
 El Estado tiene un interés apremiante en proteger la seguridad y la salud de sus ciudadanos. El 29 de mayo de 2020, el Juez Presidente del Tribunal Supremo Federal, John Roberts, emitió una opinión concurrente en una decisión denegando paralizar una decisión contra una Orden Ejecutiva del Gobernador de California, Gavin Newsom, donde cita el poder de razón del estado para proteger a la ciudadanía y la deferencia de los tribunales ante ese poder. [*South Bay United Pentecostal Church v. Gavin Newsom, Governor of California*, 590 U. S. __ (2020)](toa:southbay) [May 29, 2020]
 
-> "Our Constitution principally entrusts "[t]he safety and the health of the people" to the politically accountable officials of the States "to guard and protect." Jacobson v. Massachusetts, 197 U. S. 11, 38 (1905). When those officials "undertake[] to act in areas fraught with medical and scientific uncertainties," their latitude "must be especially broad." Marshall v. United States, 414 U. S. 417, 427 (1974). Where those broad limits are not exceeded, they should not be subject to second-guessing by an "unelected federal judiciary," which lacks the background, competence, and expertise to assess public health and is not accountable to the people. See García v. San Antonio Metropolitan Transit Authority, 469 U. S. 528, 545 (1985)."
+> “Our Constitution principally entrusts “[t]he safety and the health of the people” to the politically accountable officials of the States “to guard and protect.” Jacobson v. Massachusetts, 197 U. S. 11, 38 (1905). When those officials “undertake[] to act in areas fraught with medical and scientific uncertainties,” their latitude “must be especially broad.” Marshall v. United States, 414 U. S. 417, 427 (1974). Where those broad limits are not exceeded, they should not be subject to second-guessing by an “unelected federal judiciary,” which lacks the background, competence, and expertise to assess public health and is not accountable to the people. See García v. San Antonio Metropolitan Transit Authority, 469 U. S. 528, 545 (1985).”
 
 Estas Primarias se celebran bajo grandes retos, terremotos, tormentas, el cierre de Gobierno por tres meses para evitar el riesgo de contagio del COVID-19, la crisis fiscal y los presupuestos aprobados por la Junta de PROMESA. En Puerto Rico, sobre 3 millones de ciudadanos Americanos domiciliados en la Isla, tenemos la oportunidad de ejercer el derecho fundamental al voto solo una vez cada cuatro (4) años, entiéndase en Primarias y en Elecciones Generales. En el caso de las próximas Elecciones Generales del 3 de noviembre de 2020, también los ciudadanos podrán reclamar su derecho a resolver el status político como aclaró el Congreso en la Sección PROMESA 402 [^2] en el plebiscito bajo la Ley 51-2020, Ley para la Definición Final del Estatus Político de Puerto Rico. [^3] El Artículo 11.11. de la Ley 58-2020, protege y garantiza el derecho de los Puertorriqueños a votar en procesos electorales para determinar su futuro estatus político. Incorpora la Sección 402 de PROMESA que, limita la facultad de la Junta a cortar recursos de la CEE para administrar este tipo de evento electoral.
 
@@ -601,29 +602,29 @@ Divulgar resultados antes de haber culminado el proceso electoral en todos los P
 
 Divulgar los resultados sin haber culminado el evento electoral, crearía más inseguridad, desasosiego y falta de confianza en el proceso primarista ya comenzado.
 
-El Artículo 2.3(1) de la Ley 58-2020 define "Acta de Escrutinio de Colegio" como el "Documento en el que se consigna el resultado oficial del escrutinio de votos en un colegio de votación."
+El Artículo 2.3(1) de la Ley 58-2020 define “Acta de Escrutinio de Colegio” como el “Documento en el que se consigna el resultado oficial del escrutinio de votos en un colegio de votación.”
 
-El Artículo 2.3(101) de la Ley 58-2020 define "Sistema de Escrutinio Electrónico" como:
+El Artículo 2.3(101) de la Ley 58-2020 define “Sistema de Escrutinio Electrónico” como:
 
-> "Toda máquina, programación, dispositivo mecánico, informático, sistema electrónico o cibernético utilizado por la Comisión, y bajo su supervisión, para contabilizar votos emitidos durante cualquier evento electoral, así como cualquiera de sus componentes, incluyendo, sin que se entienda como una limitación, cables, conexiones eléctricas, conexiones para transmitir data por vía alámbrica, inalámbrica o red telemática, sistemas de baterías, urnas para depositar papeletas y cualquier otro componente que sea necesario para que la máquina o sistema puedan contar los votos y transmitir la tabulación y resultados de esas votaciones. Este sistema o la combinación de algunos de los anteriores elementos tecnológicos tendrá la o las certificaciones de cumplimiento con los estándares federales de sistemas de votación, según apliquen.
+> “Toda máquina, programación, dispositivo mecánico, informático, sistema electrónico o cibernético utilizado por la Comisión, y bajo su supervisión, para contabilizar votos emitidos durante cualquier evento electoral, así como cualquiera de sus componentes, incluyendo, sin que se entienda como una limitación, cables, conexiones eléctricas, conexiones para transmitir data por vía alámbrica, inalámbrica o red telemática, sistemas de baterías, urnas para depositar papeletas y cualquier otro componente que sea necesario para que la máquina o sistema puedan contar los votos y transmitir la tabulación y resultados de esas votaciones. Este sistema o la combinación de algunos de los anteriores elementos tecnológicos tendrá la o las certificaciones de cumplimiento con los estándares federales de sistemas de votación, según apliquen.
 >
-> Cualesquiera de los métodos de Escrutinio Electrónico utilizado por la Comisión deberán contar con sistemas de seguridad en su utilización y transmisión e incluirá el mecanismo de aviso para confirmar que el voto fue emitido conforme a la intención del Elector."
+> Cualesquiera de los métodos de Escrutinio Electrónico utilizado por la Comisión deberán contar con sistemas de seguridad en su utilización y transmisión e incluirá el mecanismo de aviso para confirmar que el voto fue emitido conforme a la intención del Elector.”
 
 Las actas de Escrutinio de Colegio dan resultados que emite la máquina de escrutinio electrónico para todos los cargos que compiten en una elección. Estos resultados no se segregan por elecciones municipales y de legisladores de distrito. Incluye todas las papeletas estatales de Gobernación y de legisladores por Acumulación.
 
-Para garantizar la confiabilidad del proceso electoral en toda la estructura, hubo igual participación de funcionarios representantes de las campañas a la Gobernación con voz y voto, y observadores de todos los demás aspirantes. Como dice el Presidente del PNP, Hon. Thomas Rivera Schatz "Visión hace fe". Véase, Secciones A-4 y A-5 del Manual de Procedimientos de Primarias del PNP, aprobado el 15 de junio de 2020, páginas 4-11. Conforme al Artículo 7.1 de la Ley 58-2020, la Comisión de Primarias solo certificará los resultados de las primarias después de un escrutinio general o recuento donde habrá Representación de los Aspirantes a la Gobernación y Observadores. Véase, Artículos 7.23, 10.7 y 10.8 de la Ley 58-2020.
+Para garantizar la confiabilidad del proceso electoral en toda la estructura, hubo igual participación de funcionarios representantes de las campañas a la Gobernación con voz y voto, y observadores de todos los demás aspirantes. Como dice el Presidente del PNP, Hon. Thomas Rivera Schatz “Visión hace fe”. Véase, Secciones A-4 y A-5 del Manual de Procedimientos de Primarias del PNP, aprobado el 15 de junio de 2020, páginas 4-11. Conforme al Artículo 7.1 de la Ley 58-2020, la Comisión de Primarias solo certificará los resultados de las primarias después de un escrutinio general o recuento donde habrá Representación de los Aspirantes a la Gobernación y Observadores. Véase, Artículos 7.23, 10.7 y 10.8 de la Ley 58-2020.
 
 No se pueden certificar resultados o declarar un ganador sin acabar una elección. No se puede acabar una elección sin garantizar el derecho al voto a todos los electores de forma igual, privada e independiente. No existe un derecho constitucional a la divulgación de los resultados sin haber culminado el evento electoral. El derecho constitucional recae sobre el ejercicio del voto, el cual la CEE está procurando garantizar mediante el Acuerdo alcanzado, sin menoscabar el derecho de los que aún no han podido ejercer el mismo. Pretender divulgar los resultados preliminares, como pretende el recurrente, sin lugar a dudas resultaría en un menoscabo del derecho fundamental al voto.
 
-El Artículo 2.3(18) de la Ley 58-2020 define "Certificación de Elección" como "Documento donde la Comisión declara electo a un candidato a un cargo público electivo o el resultado de cualquier elección, después de un escrutinio general o recuento."
+El Artículo 2.3(18) de la Ley 58-2020 define “Certificación de Elección” como “Documento donde la Comisión declara electo a un candidato a un cargo público electivo o el resultado de cualquier elección, después de un escrutinio general o recuento.”
 
 El derecho del elector que ya ejerció su voto no va por encima de ningún balance de intereses del que no lo ha ejercido su voto todavía. El derecho electoral lo rige la garantía de la igualdad. Esta doctrina de igualdad en el derecho al voto se analizó mejor por el Juez Presidente del Tribunal Supremo Federal Earl Warren en el caso [*Reynold v. Sims*, 377 US 533 a la página 561 a 562 (1964)](toa:reynolds):
 
-> "Undoubtedly, the right of suffrage is a fundamental matter in a free and democratic society. Especially since the right to exercise the franchise in a free and unimpaired manner is preservative of other basic civil and political rights, any alleged infringement of the right of citizens to vote must be carefully and meticulously scrutinized. Almost a century ago, in Yick Wo v. Hopkins, 118 U. S. 356, the Court referred to "the political franchise of voting" as "a fundamental political right, because preservative of all rights." 118 U. S., at 370 ..."
+> “Undoubtedly, the right of suffrage is a fundamental matter in a free and democratic society. Especially since the right to exercise the franchise in a free and unimpaired manner is preservative of other basic civil and political rights, any alleged infringement of the right of citizens to vote must be carefully and meticulously scrutinized. Almost a century ago, in Yick Wo v. Hopkins, 118 U. S. 356, the Court referred to “the political franchise of voting” as “a fundamental political right, because preservative of all rights.” 118 U. S., at 370 ...”
 
 El Juez Warren continua su análisis de igualdad del peso del voto de cada elector no importa el área donde viva en [*Reynold v. Sims*, a la página 567](toa:reynolds):
 
-> "... To the extent that a citizen's right to vote is debased, he is that much less a citizen. The fact that an individual lives here or there is not a legitimate reason for overweighting or diluting the efficacy of his vote. The complexions of societies and civilizations change, often with amazing rapidity. A nation once primarily rural in character becomes predominantly urban. Representation schemes once fair and equitable become archaic and outdated. But the basic principle of representative government remains, and must remain, unchanged-the weight of a citizen's vote cannot be made to depend on where he lives. Population is, of necessity, the starting point for consideration and the controlling criterion for judgment in legislative apportionment controversies. A citizen, a qualified voter, is no more nor no less so because he lives in the city or on the farm. This is the clear and strong command of our Constitution's Equal Protection Clause. This is an essential part of the concept of a government of laws and not men. This is at the heart of Lincoln's vision of "government of the people, by the people, [and] for the people." The Equal Protection Clause demands no less than substantially equal state legislative representation for all citizens, of all places as well as of all races."
+> “... To the extent that a citizen's right to vote is debased, he is that much less a citizen. The fact that an individual lives here or there is not a legitimate reason for overweighting or diluting the efficacy of his vote. The complexions of societies and civilizations change, often with amazing rapidity. A nation once primarily rural in character becomes predominantly urban. Representation schemes once fair and equitable become archaic and outdated. But the basic principle of representative government remains, and must remain, unchanged-the weight of a citizen's vote cannot be made to depend on where he lives. Population is, of necessity, the starting point for consideration and the controlling criterion for judgment in legislative apportionment controversies. A citizen, a qualified voter, is no more nor no less so because he lives in the city or on the farm. This is the clear and strong command of our Constitution's Equal Protection Clause. This is an essential part of the concept of a government of laws and not men. This is at the heart of Lincoln's vision of “government of the people, by the people, [and] for the people.” The Equal Protection Clause demands no less than substantially equal state legislative representation for all citizens, of all places as well as of all races.”
 
 El deber de la CEE, y las Comisiones de Primarias, es garantizar el igual acceso a ejercer el derecho al voto a todo elector de forma privada, libre e independiente. Si se divulgan los resultados de los 47 Precintos que votaron sin ofrecer igual oportunidad de votar en los 63 Precintos que no votaron, resultará en la privación del derecho al voto de 57% de la Isla.
 
@@ -637,13 +638,13 @@ Si el Tribunal, quiere ayudar a lograr el mejor remedio posible, debe hacerlo en
 
 Este análisis, es conforme a la opinión del Juez Asociado Estrella Martínez en la Resolución del 10 de agosto de 2020 de este Honorable Tribunal en el presente caso CT-2020-11:
 
-> "Voto particular del Juez Asociado Estrella Martínez:
+> “Voto particular del Juez Asociado Estrella Martínez:
 >
-> "Lo acordó el Tribunal y certifica el Secretario del Tribunal Supremo.
+> “Lo acordó el Tribunal y certifica el Secretario del Tribunal Supremo.
 >
 > El Juez Asociado señor Estrella Martínez está conforme y hace constar la expresión siguiente:
 >
-> Estoy conforme con actuar prontamente en el recurso de epígrafe habida cuenta de que la Rama Judicial tiene el deber de actuar diligentemente en una controversia de alto interés público. Ahora bien, el peticionario Ledo. Pedro Pierluisi se concentra en cuestionar un aspecto del acuerdo de la Comisión Especial de Primarias referente al conteo de votos, a pesar de que no han concluido el proceso en todos los colegios de votación. Es decir, no impugna la fecha de continuación de las primarias y otros extremos de los acuerdos de la Comisión Especial de Primarias. En ese sentido, existen otros peticionarios ante la Rama Judicial que cuestionan aspectos adicionales del referido acuerdo, por lo que estimo que se debieron atender conjuntamente. Por tanto, a tenor con la facultad legal de certificar recursos motu proprio, hubiese certificado y consolidado el caso de la Sra. Carmen Damaris Quiñones v. Comisión Estatal de Elecciones, entre otros, Civil Núm: SJ2020CV04145. De este modo, atendemos todos los extremos de las controversias que rodean estas primarias y proveemos un remedio adecuado, completo y oportuno. Por último, espero que la certificación, por parte de este Tribunal Supremo, abone a detener la práctica ilícita de filtrar resultados electorales en medio de un proceso de votación, diluyendo la secretividad del voto y el peso igualitario que deben tener los votos de todos los electores, los de la ciudad y los de la montaña, los del norte y los del sur, los que pudieron votar y especialmente los que fueron privados de votar el 9 de agosto. Traer a la Rama Judicial el debate de escaramuzas electoreras es seguir aniquilando los procesos democráticos. Por eso, estoy conforme con erradicar prontamente esa posibilidad y ciertamente el auto de certificación es el vehículo adecuado para tratar de redirigir los esfuerzos a lo que debe ser la máxima prioridad de todos los candidatos y funcionarios electorales: que voten los electores de los precintos en que no llegaron los maletines electorales."
+> Estoy conforme con actuar prontamente en el recurso de epígrafe habida cuenta de que la Rama Judicial tiene el deber de actuar diligentemente en una controversia de alto interés público. Ahora bien, el peticionario Ledo. Pedro Pierluisi se concentra en cuestionar un aspecto del acuerdo de la Comisión Especial de Primarias referente al conteo de votos, a pesar de que no han concluido el proceso en todos los colegios de votación. Es decir, no impugna la fecha de continuación de las primarias y otros extremos de los acuerdos de la Comisión Especial de Primarias. En ese sentido, existen otros peticionarios ante la Rama Judicial que cuestionan aspectos adicionales del referido acuerdo, por lo que estimo que se debieron atender conjuntamente. Por tanto, a tenor con la facultad legal de certificar recursos motu proprio, hubiese certificado y consolidado el caso de la Sra. Carmen Damaris Quiñones v. Comisión Estatal de Elecciones, entre otros, Civil Núm: SJ2020CV04145. De este modo, atendemos todos los extremos de las controversias que rodean estas primarias y proveemos un remedio adecuado, completo y oportuno. Por último, espero que la certificación, por parte de este Tribunal Supremo, abone a detener la práctica ilícita de filtrar resultados electorales en medio de un proceso de votación, diluyendo la secretividad del voto y el peso igualitario que deben tener los votos de todos los electores, los de la ciudad y los de la montaña, los del norte y los del sur, los que pudieron votar y especialmente los que fueron privados de votar el 9 de agosto. Traer a la Rama Judicial el debate de escaramuzas electoreras es seguir aniquilando los procesos democráticos. Por eso, estoy conforme con erradicar prontamente esa posibilidad y ciertamente el auto de certificación es el vehículo adecuado para tratar de redirigir los esfuerzos a lo que debe ser la máxima prioridad de todos los candidatos y funcionarios electorales: que voten los electores de los precintos en que no llegaron los maletines electorales.”
 
 Estamos de acuerdo a la posición del Juez Asociado Estrella Martínez que es un conocedor de asuntos electorales. Por dicha razón, el filtrar resultados en medio un proceso electoral está prohibido. [^5]
 

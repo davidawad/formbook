@@ -1,0 +1,66 @@
+# Supreme Court of Puerto Rico (prsupreme): answering brief (alegato de la parte recurrida).
+# The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to the Reglamento del Tribunal Supremo (TSPR R, ../../rules.md, PRSUPREME-*) and the template this file replaces;
+# lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a
+# court constant.
+paper: legal              # PRSUPREME-FORM-003 (TSPR R 40(b)): legal paper, 8 1/2 x 14 in
+size: 12                  # PRSUPREME-FORM-001 (TSPR R 40(b)): Times New Roman, size 12
+pitch:
+  body: 27.6              # PRSUPREME-FORM-002 (TSPR R 40(b)): double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # quotations, headings, captions, signature, footnotes: single (the exemplars' convention)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # PRSUPREME-FORM-004: 1 in (left and right at least 1/2 in)
+indent: 36                # PRSUPREME-CONV-001: the body indented at the first line
+# The cover unnumbered, the índices i, ii .., the body from 1 (the old template's).
+page_number: {align: center, front: lower-roman}
+footnote: {size: 12, pitch: 13.8, gap: 6.9}         # TSPR R 40(b): size 12 throughout; single spaced
+quote: {left: 36, right: 36, above: 12, below: 12}  # quotations indented both sides, single spaced
+# PRSUPREME-CONV-001: the parts' headings bold (the INPUTs' parts are level 2, their subparts level 3 in italics);
+# level 1 is the índices' titles, bold and centred.
+heading:
+  - {align: center, bold: true, above: 14.4, below: 14.4}
+  - {bold: true, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, above: 13.2, below: 7.2}
+# PRSUPREME-COVER-001, -002 (TSPR R 33(b), 17(d)(1)(C)): the court, the caption beside the case numbers, the title of
+# the filing, and counsel (name, RUA, address, telephone, e-mail), two a row.
+cover:
+  - {text: "ESTADO LIBRE ASOCIADO DE PUERTO RICO", align: center, bold: true}
+  - {text: "TRIBUNAL SUPREMO DE PUERTO RICO", align: center, bold: true}
+  - columns:
+      - blocks: [{text: "{caption_left}"}]
+      - blocks: [{text: "{caption_right}"}]
+    gutter: 28.8
+    above: 19.2
+  - {text: "{brief_title}", align: center, bold: true, above: 19.2}
+  - columns:
+      each: counsel
+      per_row: 2
+      row_gap: 12
+      blocks:
+        - {text: "{names}"}
+        - {text: "{lines}"}
+    gutter: 21.6
+    above: 19.2
+# PRSUPREME-INDEX-001 (TSPR R 33(c), 38(a)): the Índice de Materias, every part and subpart with its page.
+contents: {title: "ÍNDICE DE MATERIAS", depth: 3, col: 36, hang: 36, step: 18, above: 6}
+# PRSUPREME-INDEX-002 (TSPR R 38(b)): the Índice Legal, from the body's `toa:` links, grouped under the court's titles;
+# a case name in italics (the frontmatter's own markup), a comma and the citation; seven pages or more "passim".
+authorities:
+  title: "ÍNDICE LEGAL"
+  col: 56
+  hang: 28.8
+  above: 6
+  passim: 7
+  group: {bold: true, above: 13.2, below: 6}
+  kinds:
+    - {kind: case, title: "JURISPRUDENCIA"}
+    - {kind: statute, title: "LEYES Y ESTATUTOS"}
+    - {kind: rule, title: "REGLAMENTOS Y REGLAS"}
+    - {kind: other, title: "OTRAS FUENTES"}
+# PRSUPREME-CONT-001 (TSPR R 40(a)): the signature of counsel, a block 3.3 in wide at the right margin, never split
+# and kept with the last paragraph (the place and date).
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "{signature}", left: 230.4}
+    above: 14.4

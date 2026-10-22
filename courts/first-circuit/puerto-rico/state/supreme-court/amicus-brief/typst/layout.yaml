@@ -56,7 +56,9 @@ authorities:
     - {kind: statute, title: "LEYES Y ESTATUTOS"}
     - {kind: rule, title: "REGLAMENTOS Y REGLAS"}
     - {kind: other, title: "OTRAS FUENTES"}
-# PRSUPREME-CONT-001 (TSPR R 40(a)): the signature of counsel, a block 3.3 in wide at the right margin, never split.
+# PRSUPREME-CONT-001 (TSPR R 40(a)): the signature of counsel, a block 3.3 in wide at the right margin, never split
+# and kept with the last paragraph (the place and date).
+keep_with_closing: true
 closing:
   - group:
       - {text: "{signature}", left: 230.4}

@@ -141,6 +141,7 @@ return require("latex.xdoc")({
       },
     },
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {

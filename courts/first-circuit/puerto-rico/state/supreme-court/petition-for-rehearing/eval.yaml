@@ -1,7 +1,20 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 # Rule 40(b): legal paper, 8 1/2 x 14 in (612 x 1008 pt), not the letter default.
-# Rule 33(f): an appellee's alegato is at most 50 pages, excluding the indice and appendix; the default
-# check counts every page, so 50 is the stricter bound.
+# Rule 45(b) (PRSUPREME-RECON-002): a motion for reconsideration does not exceed ten pages; the default check
+# counts every page, the cover included, so 10 is the stricter bound.
 params:
   page_width_pt: 612
   page_height_pt: 1008
-  page_limit: 50
+  page_limit: 10
+  cross_engine: gate
+  # Body page 4 (the Art. 5.005 quotation, notes 1 to 3): LaTeX sets two lines fewer above the notes than typst,
+  # and the PDF text loses the quoted paragraph after a paragraph that is a lone "…" (pdftotext: "Mismatched EMC
+  # operator", the ellipsis's ActualText span); pages 4 to 9 end a few lines apart (docs/open-items/fb-595.54.73.md).
+  # Reported, not gated (fb-595.54.73).
+  cross_engine_latex: report
+  # Word fits one line fewer above notes 1 to 3 on body page 4 (Word's footnote area, not in the model:
+  # docs/open-items/fb-595.54.82.md, "Not implemented"), and pages 4 to 7 end a line apart. Reported, not gated
+  # (fb-595.54.73).
+  cross_engine_docx: report
