@@ -3,6 +3,3 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # A slash inside a word ("Clerk/Warden"): typst and Word may break after it, LaTeX does not (page 3 line 18;
-  # docs/open-items/fb-595.54.50.md, request 12). Reported, not gated.
-  cross_engine_latex: report

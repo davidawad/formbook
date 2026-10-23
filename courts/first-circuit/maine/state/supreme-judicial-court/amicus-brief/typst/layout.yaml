@@ -7,6 +7,9 @@ pitch:
   body: 32.2              # ME-FORM-005: double spaced (Word's double, 2 x 1.15 x 14 pt)
   single: 16.1            # caption, headings, quotations, footnotes, signature blocks: single (1.15 x 14 pt)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # ME-FORM-003, -004: one inch
+# Word only: the right margin one twip (0.05 pt) wider (docs/EVAL-LOOP.md, `docx_bias`): at 0 Word fits note 11's first
+# line on p12, which typst fills to 540.02 pt of 540, and breaks the URL after it a piece later (fb-595.54.50).
+docx_bias: 0.05
 indent: 36                # paragraphs indented half an inch
 page_number: {align: center, from: 2}   # ME-FORM-007: Arabic numerals, the cover is page 1 (its number suppressed)
 footnote: {size: 11, pitch: 12.65, gap: 7}   # ME-FORM-001, -005: footnotes may be 11-point, single (1.15 x 11 pt)

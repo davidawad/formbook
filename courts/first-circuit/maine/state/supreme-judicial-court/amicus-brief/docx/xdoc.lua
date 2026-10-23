@@ -10,7 +10,111 @@ return require("docx.xdoc")({
     ["top"] = 72,
     ["bottom"] = 72,
     ["left"] = 72,
-    ["right"] = 72,
+    ["right"] = 72.05,
+  },
+  ["closing"] = {
+    {
+      ["group"] = {
+        {
+          ["text"] = "Respectfully submitted,",
+        },
+        {
+          ["text"] = "Dated: {date}",
+          ["above"] = 8.4,
+        },
+        {
+          ["each"] = "signature",
+          ["blocks"] = {
+            {
+              ["columns"] = {
+                {
+                  ["blocks"] = {
+                    {
+                      ["text"] = "",
+                    },
+                  },
+                },
+                {
+                  ["width"] = 244.8,
+                  ["blocks"] = {
+                    {
+                      ["rule"] = 0.5,
+                    },
+                    {
+                      ["text"] = "{lines}",
+                    },
+                  },
+                },
+              },
+              ["above"] = 19.6,
+            },
+          },
+        },
+      },
+      ["above"] = 16.8,
+    },
+    {
+      ["break"] = true,
+    },
+    {
+      ["text"] = "CERTIFICATE OF SERVICE",
+      ["align"] = "center",
+      ["bold"] = true,
+      ["below"] = 16.8,
+    },
+    {
+      ["text"] = "I certify that I have on this day served a true and correct copy of the foregoing upon the following counsel of record by {service.method}:",
+      ["pitch"] = "body",
+      ["indent"] = 36,
+    },
+    {
+      ["columns"] = {
+        ["each"] = "service.recipients",
+        ["per_row"] = 2,
+        ["row_gap"] = 12,
+        ["blocks"] = {
+          {
+            ["text"] = "{names}",
+          },
+          {
+            ["text"] = "{lines}",
+          },
+        },
+      },
+      ["gutter"] = 21.6,
+      ["above"] = 16.8,
+    },
+    {
+      ["group"] = {
+        {
+          ["text"] = "Dated: {date}",
+        },
+        {
+          ["columns"] = {
+            {
+              ["blocks"] = {
+                {
+                  ["text"] = "",
+                },
+              },
+            },
+            {
+              ["width"] = 244.8,
+              ["blocks"] = {
+                {
+                  ["rule"] = 0.5,
+                },
+                {
+                  ["text"] = "{certificate_signature.lines}",
+                },
+              },
+            },
+          },
+          ["above"] = 19.6,
+        },
+      },
+      ["above"] = 22.4,
+    },
   },
   ["indent"] = 36,
   ["page_number"] = {
@@ -131,110 +235,6 @@ return require("docx.xdoc")({
       ["bold"] = true,
       ["above"] = 15.4,
       ["below"] = 7,
-    },
-  },
-  ["closing"] = {
-    {
-      ["group"] = {
-        {
-          ["text"] = "Respectfully submitted,",
-        },
-        {
-          ["text"] = "Dated: {date}",
-          ["above"] = 8.4,
-        },
-        {
-          ["each"] = "signature",
-          ["blocks"] = {
-            {
-              ["columns"] = {
-                {
-                  ["blocks"] = {
-                    {
-                      ["text"] = "",
-                    },
-                  },
-                },
-                {
-                  ["width"] = 244.8,
-                  ["blocks"] = {
-                    {
-                      ["rule"] = 0.5,
-                    },
-                    {
-                      ["text"] = "{lines}",
-                    },
-                  },
-                },
-              },
-              ["above"] = 19.6,
-            },
-          },
-        },
-      },
-      ["above"] = 16.8,
-    },
-    {
-      ["break"] = true,
-    },
-    {
-      ["text"] = "CERTIFICATE OF SERVICE",
-      ["align"] = "center",
-      ["bold"] = true,
-      ["below"] = 16.8,
-    },
-    {
-      ["text"] = "I certify that I have on this day served a true and correct copy of the foregoing upon the following counsel of record by {service.method}:",
-      ["pitch"] = "body",
-      ["indent"] = 36,
-    },
-    {
-      ["columns"] = {
-        ["each"] = "service.recipients",
-        ["per_row"] = 2,
-        ["row_gap"] = 12,
-        ["blocks"] = {
-          {
-            ["text"] = "{names}",
-          },
-          {
-            ["text"] = "{lines}",
-          },
-        },
-      },
-      ["gutter"] = 21.6,
-      ["above"] = 16.8,
-    },
-    {
-      ["group"] = {
-        {
-          ["text"] = "Dated: {date}",
-        },
-        {
-          ["columns"] = {
-            {
-              ["blocks"] = {
-                {
-                  ["text"] = "",
-                },
-              },
-            },
-            {
-              ["width"] = 244.8,
-              ["blocks"] = {
-                {
-                  ["rule"] = 0.5,
-                },
-                {
-                  ["text"] = "{certificate_signature.lines}",
-                },
-              },
-            },
-          },
-          ["above"] = 19.6,
-        },
-      },
-      ["above"] = 22.4,
     },
   },
 })

@@ -458,7 +458,7 @@ If this Court is unwilling to overturn Bell II regarding ownership between the m
 
 [^36]: Peloso & Caldwell; and Matthews v. Bay Head Improvement Ass’n, 471 A.2d 321, 323, and 326 (N.J. 1984).
 
-[^37]: Bor. of Neptune City v. Bor. of Avon-By-The-Sea (61 N.J. 296 (1972) (we have no difficulty in finding that, in this latter half of the twentieth century, the public rights in tidal lands are not limited to the ancient prerogatives of navigation and fishing, but extend as well to recreational uses, including bathing, swimming and other shore activities. The public trust doctrine, like all common law principles, should not be considered fixed or static, but should be molded and extended to meet changing conditions and needs of the public it was created to benefit").
+[^37]: Bor. of Neptune City v. Bor. of Avon-By-The-Sea (61 N.J. 296 (1972) (we have no difficulty in finding that, in this latter half of the twentieth century, the public rights in tidal lands are not limited to the ancient prerogatives of navigation and fishing, but extend as well to recreational uses, including bathing, swimming and other shore activities. The public trust doctrine, like all common law principles, should not be considered fixed or static, but should be molded and extended to meet changing conditions and needs of the public it was created to benefit”).
 
 [^38]: See Van Ness v. Borough of Deal, 139 N.J. Super. Ct. Ch. Div. 83, 93–97, 352 A.2d 599 (1975) (Surfing and other recreational uses held protected under the public trust doctrine);
 
