@@ -8,8 +8,14 @@ pitch:
   single: 14.95           # ALASKA-FORM-004: headings, footnotes, quotations single spaced (1.15 x 13 pt); cover, tables
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # ALASKA-FORM-005, -006: one-inch sides, 6-1/2 x 9 in of matter
 indent: 36
+# LaTeX only: the text block 0.1 pt wider than typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias): newtx
+# runs 0.05 pt wider than typst over the first line of note 8 (p16), which typst fills to 0.01 pt of the margin.
+latex_bias: 0.1
 page_number: {align: center, from: 1}   # ALASKA-FORM-007: consecutive numbers at the bottom center, the cover page one
 footnote: {size: 13, gap: 7}            # ALASKA-FORM-003, -004: 13 point, single spaced
+# The district tables of the body (pipe tables): ruled rows, single spaced as a quotation (ALASKA-FORM-004 does
+# not name tables; the filed petition sets them single spaced).
+table: {stroke: 0.5, pad: 3.6, gutter: 14.4, above: 13, below: 13}
 quote: {left: 36, right: 36, above: 10.4, below: 15.6}   # ALASKA-FORM-004: single spaced, indented half an inch each side
 heading:
   - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
