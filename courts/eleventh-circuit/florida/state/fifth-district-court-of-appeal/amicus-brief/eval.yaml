@@ -3,10 +3,11 @@
 font:
   size_pt: 14
   pdf_prefix: "TeXGyreBonum"
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. The folder is on the shared
-# document model and latex/ and docx/ are generated (tier 1 0 failed in every engine; pages and page ends equal), but
-# one line each differs (docs/open-items/fb-595.54.41.md): pdfLaTeX does not break after the slash inside a word
-# ("counsel/parties", certificate of service, page 19), which typst and Word do; LibreOffice sets Bonum up to 1.16 pt
-# wider over a line than typst and ends one line a word early (page 8).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex/ and docx/ are generated from typst/layout.yaml.
+# LaTeX is gated (383/383 lines; it breaks after the slash in "counsel/parties" now, fb-595.54.82). Word is reported
+# (pages and page ends equal, 381/383 lines): LibreOffice sets Bonum up to 1.16 pt wider over a line than typst and
+# ends page 8 line 13 a word early; no docx_bias fits (0.1 leaves that line, 0.2 already carries an extra word onto
+# page 7 line 18; docs/open-items/fb-595.54.41.md).
 params:
-  cross_engine: report
+  cross_engine: gate
+  cross_engine_docx: report
