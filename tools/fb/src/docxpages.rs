@@ -12,9 +12,10 @@
 //! (kind `N`) is searched from where the body has reached (its mark comes after that, and footnotes are printed at the
 //! foot of the page, after its body text), else from the start of that page, and moves nothing. When NEEDLE runs over
 //! a page break with footnotes between, it is found by its halves: a body needle's head on a page and its tail where
-//! the next page starts (the longest head first); failing that, FALLBACK (the text alone) is tried. An authority's
-//! needle (id `a..`) that runs over a page end is on the page its FALLBACK (the find) ends on (typst marks a citation
-//! before its last character).
+//! the next page starts (the longest head first), also when its whole text comes again later (the halves, when they
+//! come first, win); failing both, FALLBACK (the text alone) is tried. An authority's needle (id `a..`) that runs over
+//! a page end is on the page its FALLBACK (the find) ends on (typst marks a citation before its last character); its
+//! find, not the words before the find in NEEDLE, is searched from where the body has reached.
 //!
 //! A position needle (kind `T` or `Y`, lib/docx/xdoc.lua's fills) asks where a line is, not its page: NEEDLE is found in
 //! the words of the PDF's lines (`pdftotext -bbox-layout`, bbox_lines), on the page the body has reached or a later
@@ -346,17 +347,21 @@ pub fn lookup_all(
     // a body needle that runs over a page end, with the footnotes and the page number between its halves: its head on
     // a page (from `from`), its tail (MIN_TAIL characters or more) where the next page starts; the position of the
     // head, or where the tail starts when the find (`text`, an authority's fallback) ends in the tail: typst marks a
-    // citation before its last character, so one that runs over a page end is on the next page
-    let split = |s: &str, text: &str, from: usize| -> Option<usize> {
+    // citation before its last character, so one that runs over a page end is on the next page. Only a head that starts
+    // before `until`, of `min_head` characters or more (a split before a whole match, below)
+    let split = |s: &str, text: &str, from: usize, until: usize, min_head: usize| -> Option<usize> {
         for q in page_at(from)..starts.len() {
             let (b, a) = (starts[q], starts[q - 1].max(from));
+            if a >= until {
+                break;
+            }
             if b <= a {
                 continue;
             }
-            for k in (1..=s.len().saturating_sub(MIN_TAIL)).rev() {
+            for k in (min_head.max(1)..=s.len().saturating_sub(MIN_TAIL)).rev() {
                 let (head, tail) = s.split_at(k);
                 if all[b..].starts_with(tail) {
-                    if let Some(i) = all[a..b].find(head) {
+                    if let Some(i) = all[a..b].find(head).filter(|i| a + i < until) {
                         let ends_in_tail =
                             !text.is_empty() && s.find(text).is_some_and(|t| t + text.len() > k);
                         return Some(if ends_in_tail { b } else { a + i });
@@ -422,7 +427,9 @@ pub fn lookup_all(
                     p.saturating_sub(k)
                 }
                 _ if heading => cur.max(past_heading),
-                _ => cur,
+                // an authority's find from `cur` on, the words before it in its needle earlier (they may be the text
+                // of the needle found before, a heading's "MCL" before "14.102")
+                _ => cur.saturating_sub(k),
             }
         } else {
             cur
@@ -433,9 +440,14 @@ pub fn lookup_all(
             } else {
                 ""
             };
-            find(&n.needle, from)
-                .or_else(|| split(&n.needle, find_text, from))
-                .or_else(|| find(&n.fallback, from))
+            // the first occurrence from `from`, whole or over a page end: a needle whose whole text is found pages
+            // later (the same words again, "protest-filing requirements in section 163-182.9") is the one split
+            // before it, when that split's head is MIN_TAIL characters or more
+            match find(&n.needle, from) {
+                Some(p) => split(&n.needle, find_text, from, p, MIN_TAIL).or(Some(p)),
+                None => split(&n.needle, find_text, from, usize::MAX, 1),
+            }
+            .or_else(|| find(&n.fallback, from))
         } else {
             // a footnote's needle from where the body is (the note's mark is after it, and the note is printed at the
             // foot of this page or a later one, after its body text), else from the start of the body's page, and after
@@ -643,6 +655,26 @@ mod tests {
             lookup(needles, &p).unwrap(),
             "a1.1\t1\t-\nP:1\t2\t-\na1.2\t2\t-\n"
         );
+    }
+
+    #[test]
+    fn a_needle_over_a_page_end_is_found_before_its_words_again() {
+        // "protest-filing" ends page 1 above a footnote, "requirements in section 163-182.9" starts page 2; the same
+        // words come again whole on page 3: the citation is the one over the page end, on page 2
+        let pdf = "the protest filing\n3 See note.\n6\n\u{c}requirements in section 163-182.9. Id. more\n7\n\u{c}failed the protest filing requirements in section 163-182.9 again\n8\n\u{c}";
+        let p = page_texts(pdf);
+        let needles = "a38.3\tB\tprotestfilingrequirementsinsection1631829\t1631829\nh6\tB\tmore\tmore\n";
+        assert_eq!(lookup(needles, &p).unwrap(), "a38.3\t2\t-\nh6\t2\t-\n");
+    }
+
+    #[test]
+    fn an_authority_needle_starts_in_the_heading_before_it() {
+        // the heading "MCL 14.102" and the authority it cites: the authority's needle holds "MCL" before its find, the
+        // heading's text the search is past
+        let pdf = "mcl 14.102 any action at law\n4\n\u{c}see mcl 14.102 later\n5\n\u{c}";
+        let p = page_texts(pdf);
+        let needles = "h4\tB\tmcl14102anyactionatlaw\tmcl14102\na32.1\tB\tmcl14102\t14102\nh5\tB\tanyaction\tanyaction\n";
+        assert_eq!(lookup(needles, &p).unwrap(), "h4\t1\t-\na32.1\t1\t-\nh5\t1\t-\n");
     }
 
     #[test]
