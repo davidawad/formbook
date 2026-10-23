@@ -1,5 +1,6 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. latex and docx break after the hyphen of
-# "RCW 4.16.300-.310" (p7 line 13, p22 line 7); typst never breaks before the "." (Unicode LB13):
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. latex matches typst line for line
+# (fb-595.54.82: no break after a hyphen before a closing mark); docx still breaks after the hyphen of
+# "RCW 4.16.300-.310" (p7 line 13, p22 line 7), which typst never breaks before the "." (Unicode LB13):
 # docs/open-items/fb-595.54.17.md.
 params:
   cross_engine: report
