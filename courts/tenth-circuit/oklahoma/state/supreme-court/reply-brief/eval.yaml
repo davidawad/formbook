@@ -2,8 +2,8 @@
 font:
   size_pt: 12
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) but not gated yet: typst keeps "§2710(b)(2)(B)(i)-(v)" (a section sign with no
-# space before its number) whole, LaTeX and Word break after its hyphen (p12); Word misses "Bittle" in note 5 (p2 of
-# the table of authorities' list, p3) (docs/open-items/fb-595.54.53.md, shared-model requests).
+# (`fb engines gen`, fb-595.54.12) but not gated yet: typst boxes a whole token holding ")(" ("§2710(b)(2)(B)(i)-(v)",
+# lib/typst/xengine.typ), LaTeX and Word bind only the ")(" and break after "(i)-" (note 12, p12 line 22; 575/581
+# lines identical, pages equal) (docs/open-items/fb-595.54.53.md, not in the model).
 params:
   cross_engine: report

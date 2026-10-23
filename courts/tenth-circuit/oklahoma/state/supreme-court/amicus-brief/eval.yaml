@@ -1,9 +1,12 @@
 # Okla. Sup. Ct. R. 1.11 (OKLA-FORM-002, ../rules.md): clear type not less than 12 point (footnotes 11 point).
 font:
   size_pt: 12
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) but not gated yet: LaTeX breaks after an en dash before an opening quote
-# ("here– | “court", p22) where typst does not (UAX #14 LB19); LibreOffice sets a note that does not fit under its
-# anchor line on the next page and keeps the line (p21-22) (docs/open-items/fb-595.54.53.md, shared-model requests).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LibreOffice sets a note that does not fit under its anchor's line on the next page and keeps the line (typst
+  # and LaTeX move the line on with its note): note 25, p21-22, and the pages after it shift (XENG-002, XENG-003;
+  # docs/open-items/fb-595.54.53.md, not in the model). Reported, not gated (fb-595.54.53).
+  cross_engine_docx: report

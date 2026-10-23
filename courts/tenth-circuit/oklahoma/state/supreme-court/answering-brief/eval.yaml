@@ -1,9 +1,12 @@
 # Okla. Sup. Ct. R. 1.11 (OKLA-FORM-002, ../rules.md): clear type not less than 12 point (footnotes 11 point).
 font:
   size_pt: 12
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex and docx are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) but not gated yet: typst breaks after a slash inside a word outside a URL; LaTeX
-# does not ("Plaintiff/ | Respondent", note 8, p19: every page from p20 differs), nor Word in "(newsok.com/ |
-# article/..)" (p11) (docs/open-items/fb-595.54.53.md, shared-model requests).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LibreOffice does not break after the slash of a bare domain path where typst does ("(newsok.com/ |
+  # article/3196433/..)", note 5, p11 line 22; 810/815 lines identical, pages equal; docs/open-items/fb-595.54.53.md,
+  # not in the model). Reported, not gated (fb-595.54.53).
+  cross_engine_docx: report
