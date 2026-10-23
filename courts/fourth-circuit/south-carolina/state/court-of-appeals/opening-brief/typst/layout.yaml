@@ -11,6 +11,7 @@ indent: 36
 page_number: {align: center, front: lower-roman}   # SCCTAPP-FORM-009: bottom centre; cover unnumbered, tables i, ii .., brief 1, 2 ..
 footnote: {size: 12, gap: 7}                        # SCCTAPP-FORM-005: footnotes 12 pt; single spaced (FORM-004 convention)
 quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # SCCTAPP-FORM-004: block quotations single spaced, indented
+table: {above: 9.6, below: 14.4, pad: 2.4}   # a table of the body set off as a quotation is (tier 2), the rules clear of the text
 heading:                  # SCCTAPP-FORM-010: sections centred, capitals, bold; argument headings bold (R208(b)(1)(E))
   - {align: center, bold: true, upper: true, above: 14.4, below: 12}
   - {bold: true, hang: 36, above: 14.4, below: 9.6}

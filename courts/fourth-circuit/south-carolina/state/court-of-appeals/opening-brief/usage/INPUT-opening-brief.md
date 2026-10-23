@@ -156,7 +156,7 @@ authorities:
       - cite: "S.C. Code Ann. § 16-17-495(C)"
         find: "16-17-495"
       - cite: "S.C. Code Ann. §§ 16-23-30, 50"
-        find: "16-23-30, 50"
+        find: "16-23-30"
       - cite: "S.C. Code Ann. § 16-23-410"
         find: "16-23-410"
       - cite: "S.C. Code Ann. § 16-25-20(C)"

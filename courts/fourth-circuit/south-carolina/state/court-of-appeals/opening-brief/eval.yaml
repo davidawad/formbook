@@ -2,7 +2,8 @@
 # cases (https://www.sccourts.org/resources/judicial-community/court-rules/appellate/rule-208/).
 params:
   page_limit: 50
-  # Gate 4 CROSS-ENGINE: report only. The typst template is on the shared document model (typst/layout.yaml), but the
-  # sample's body holds a markdown table, which lib/pandoc/xdoc.lua does not set yet: no latex/ or docx/ engine is
-  # generated until it does (docs/open-items/fb-595.54.67.md, shared-model requests).
-  cross_engine: report
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12; the body's table, fb-595.54.14) and
+  # break every line and page where the typst render does, so a difference fails. The table's `pad` and `above` give
+  # LaTeX the places to break a page that typst has between the rows (docs/open-items/fb-595.54.67.md).
+  cross_engine: gate
