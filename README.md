@@ -312,7 +312,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. South Carolina](courts/fourth-circuit/south-carolina/federal/bankruptcy-district) | `scb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. South Carolina](courts/fourth-circuit/south-carolina/federal/district) | `scd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Appeals of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-appeals) | `scctapp` | up for review | 5/5 | 4/4 | 4/4 | 29 |
+| [Court of Appeals of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-appeals) | `scctapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
 | [Supreme Court of South Carolina](courts/fourth-circuit/south-carolina/state/supreme-court) | `sc` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 
 ### Virginia
@@ -323,7 +323,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, W.D. Virginia](courts/fourth-circuit/virginia/federal/bankruptcy-western-district) | `vawb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, E.D. Virginia](courts/fourth-circuit/virginia/federal/eastern-district) | `vaed` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Virginia](courts/fourth-circuit/virginia/federal/western-district) | `vawd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Appeals of Virginia](courts/fourth-circuit/virginia/state/court-of-appeals) | `vactapp` | up for review | 5/5 | 3/3 | 3/3 | 29 |
+| [Court of Appeals of Virginia](courts/fourth-circuit/virginia/state/court-of-appeals) | `vactapp` | up for review | 5/5 | 4/4 | 4/4 | 29 |
 | [Supreme Court of Virginia](courts/fourth-circuit/virginia/state/supreme-court) | `va` | up for review | 8/8 | 8/8 | 8/8 | 29 |
 
 ### West Virginia
