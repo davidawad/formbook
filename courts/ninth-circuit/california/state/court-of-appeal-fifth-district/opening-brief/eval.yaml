@@ -2,10 +2,11 @@
 # The default margin (1 in) is the top and bottom minimum of rule 8.204(b)(6) and 8.74(b)(3); the 1-1/2 in side margins are in the layout.
 font:
   size_pt: 13
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): typst is on the shared model (typst/layout.yaml). Not
-# gated (docs/open-items/fb-595.54.57.md): the docx engine is not delivered (Word breaks the citation "Cal. Code Regs,
-# tit. 11, § 5471" that ends a paragraph over a page, and fb render's page lookup then finds its needle at a later
-# occurrence: every later heading and authority "not found in the PDF"); the latex engine is not delivered (EB
-# Garamond's boxed regular T opens a paragraph on a line of its own, lib/latex/xdoc.sty \xd@glyph in vertical mode).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): typst is on the shared model (typst/layout.yaml) and the
+# docx engine is generated from it (`fb engines gen`). Not gated yet (docs/open-items/fb-595.54.57.md, third pass):
+# Word sets each EB Garamond word a few hundredths of a point narrower than typst (a line typst fills holds one more
+# word there; no docx_bias settles every line) and its footnote marks 0.1 pt after the word they follow (read as a word
+# of their own); the latex engine is not delivered (EB Garamond's boxed regular T opens a paragraph on a line of its
+# own, lib/latex/xdoc.sty \xd@glyph in vertical mode).
 params:
   cross_engine: report
