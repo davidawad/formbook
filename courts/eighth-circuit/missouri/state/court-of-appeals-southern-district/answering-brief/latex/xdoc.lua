@@ -17,9 +17,11 @@ return require("latex.xdoc")({
     ["align"] = "center",
     ["from"] = 1,
   },
+  ["latex_bias"] = 0.08,
   ["footnote"] = {
     ["size"] = 13,
     ["gap"] = 7,
+    ["clearance"] = 7.5,
   },
   ["quote"] = {
     ["left"] = 36,
@@ -179,5 +181,4 @@ return require("latex.xdoc")({
     ["pitch"] = "body",
     ["indent"] = 36,
   },
-  ["latex_bias"] = 0.05,
 })

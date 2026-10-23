@@ -17,9 +17,11 @@ return require("docx.xdoc")({
     ["align"] = "center",
     ["from"] = 1,
   },
+  ["latex_bias"] = 0.08,
   ["footnote"] = {
     ["size"] = 13,
     ["gap"] = 7,
+    ["clearance"] = 7.5,
   },
   ["quote"] = {
     ["left"] = 36,
