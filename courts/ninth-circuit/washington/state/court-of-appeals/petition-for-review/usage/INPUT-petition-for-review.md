@@ -21,25 +21,25 @@ signature:
 authorities:
   - heading: "Washington Supreme Court"
     entries:
-      - {cite: "*HomeStreet, Inc. v. Department of Revenue*, 166 Wn.2d 444 (2009)", finds: ["HomeStreet"]}
-      - {cite: "*John H. Sellen Construction Co. v. Department of Revenue*, 87 Wn.2d 878 (1976)", finds: ["Sellen"]}
-      - {cite: "*O'Leary v. Department of Revenue*, 105 Wn.2d 679 (1986)", finds: ["Leary"]}
-      - {cite: "*Simpson Investment Co. v. Department of Revenue*, 141 Wn.2d 139 (2000)", finds: ["Simpson"]}
+      - {cite: "*HomeStreet, Inc. v. Department of Revenue*, 166 Wn.2d 444 (2009)", find: "HomeStreet"}
+      - {cite: "*John H. Sellen Construction Co. v. Department of Revenue*, 87 Wn.2d 878 (1976)", find: "Sellen"}
+      - {cite: "*O'Leary v. Department of Revenue*, 105 Wn.2d 679 (1986)", find: "Leary"}
+      - {cite: "*Simpson Investment Co. v. Department of Revenue*, 141 Wn.2d 139 (2000)", find: "Simpson"}
   - heading: "Washington Court of Appeals"
     entries:
-      - {cite: "*Bravern Residential II, LLC v. Department of Revenue*, 183 Wn. App. 769 (2014)", finds: ["Bravern"]}
-      - {cite: "*Dynamic Resources, Inc. v. Department of Revenue*, 21 Wn. App. 2d 814 (2022)", finds: ["Dynamic Resources"]}
+      - {cite: "*Bravern Residential II, LLC v. Department of Revenue*, 183 Wn. App. 769 (2014)", find: "Bravern"}
+      - {cite: "*Dynamic Resources, Inc. v. Department of Revenue*, 21 Wn. App. 2d 814 (2022)", find: "Dynamic Resources"}
   - heading: "Federal Courts"
     entries:
-      - {cite: "*Morganbesser v. United States*, 984 F.2d 560 (2d Cir. 1993)", finds: ["Morganbesser"]}
-      - {cite: "*Rauenhorst v. Commissioner*, 119 T.C. 157 (2002)", finds: ["Rauenhorst"]}
+      - {cite: "*Morganbesser v. United States*, 984 F.2d 560 (2d Cir. 1993)", find: "Morganbesser"}
+      - {cite: "*Rauenhorst v. Commissioner*, 119 T.C. 157 (2002)", find: "Rauenhorst"}
   - heading: "Statutes"
     entries:
-      - {cite: "RCW 82.04.4281", finds: ["82.04.4281"]}
-      - {cite: "RCW 82.04.4292", finds: ["82.04.4292"]}
+      - {cite: "RCW 82.04.4281", find: "82.04.4281"}
+      - {cite: "RCW 82.04.4292", find: "82.04.4292"}
   - heading: "Regulations"
     entries:
-      - {cite: "WAC 458-20-228", finds: ["458-20-228"]}
+      - {cite: "WAC 458-20-228", find: "458-20-228"}
 ---
 
 # I. INTRODUCTION, PETITIONERS, AND CITATION TO OPINION
@@ -380,7 +380,7 @@ NOTES:
 
 Severability-2007 c 54: See note following RCW 82.04.050.
 
-Findings-Intent-2002 c 150: "The legislature finds that the application of the business and occupation tax deductions provided in RCW 82.04.4281 for investment income of persons deemed to be "other financial businesses" has been the subject of uncertainty, and therefore, disagreement and litigation between taxpayers and the state. The legislature further finds that the decision of the state supreme court in Simpson Investment Co. v. Department of Revenue could lead to a restrictive, narrow interpretation of the deductibility of investment income for business and occupation tax purposes. As a result, the legislature directed the department of revenue to work with affected businesses to develop a revision of the statute that would provide certainty and stability for taxpayers and the state. The legislature intends, by adopting this recommended revision of the statute, to provide a positive environment for capital investment in this state, while continuing to treat similarly situated taxpayers fairly." [2002 c 150 § 1.]
+Findings-Intent-2002 c 150: “The legislature finds that the application of the business and occupation tax deductions provided in RCW 82.04.4281 for investment income of persons deemed to be “other financial businesses” has been the subject of uncertainty, and therefore, disagreement and litigation between taxpayers and the state. The legislature further finds that the decision of the state supreme court in Simpson Investment Co. v. Department of Revenue could lead to a restrictive, narrow interpretation of the deductibility of investment income for business and occupation tax purposes. As a result, the legislature directed the department of revenue to work with affected businesses to develop a revision of the statute that would provide certainty and stability for taxpayers and the state. The legislature intends, by adopting this recommended revision of the statute, to provide a positive environment for capital investment in this state, while continuing to treat similarly situated taxpayers fairly.” [2002 c 150 § 1.]
 
 Effective date-2002 c 150: "This act takes effect July 1, 2002." [2002 c 150 § 3.]
 
@@ -400,7 +400,7 @@ ANTIO, LLC; AZUREA I, LLC; BACK BOWL I, LLC; CANDICA, LLC; CERASTES-WTB, LLC; GC
 
 Appellant,
 
-v.
+v\.
 
 WASHINGTON STATE DEPARTMENT OF REVENUE,
 
@@ -444,7 +444,7 @@ The LLCs appeal the trial court's grant of summary judgment in favor of DOR.
 
 ANALYSIS
 
-A. LEGAL PRINCIPLES
+A\. LEGAL PRINCIPLES
 
 1. Summary Judgment Standard
 
@@ -476,7 +476,7 @@ Tax exemptions are narrowly construed. Green Collar Club v. Dept. of Revenue, 3 
 
 In addition, we are bound by the Supreme Court's interpretation of a statute. Yuchasz v. Dep't of Labor & Indus., 183 Wn. App. 879, 888, 335 P.3d 998 (2014).
 
-B. GENUINE ISSUES OF MATERIAL FACT
+B\. GENUINE ISSUES OF MATERIAL FACT
 
 The LLCs argue that the trial court erred in concluding that there were no genuine issues of material fact and that the trial court failed to consider the facts in a light most favorable to them as the nonmoving parties. We disagree.
 
@@ -486,7 +486,7 @@ The LLCs argue that a genuine issue of material fact exists because DOR's interp
 
 Therefore, we hold that no genuine issues of material fact existed on summary judgment.
 
-C. APPLICATION OF RCW 82.04.4281(1)(a)
+C\. APPLICATION OF RCW 82.04.4281(1)(a)
 
 The LLCs argue that the trial court erred in determining that they were not entitled to deduct their investment income under RCW 82.04.4281(1)(a). We disagree.
 

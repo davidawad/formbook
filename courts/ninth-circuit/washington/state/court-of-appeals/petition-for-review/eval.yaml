@@ -1,0 +1,8 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated
+# (docs/open-items/fb-595.54.47.md): LaTeX XENG-003 p43 line 8 (appendix), a line newtx fits a word more ("1961,") where typst
+# breaks (the line-fit tolerance; a latex_bias of 0.04 keeps it, 0.03 breaks p11 line 12 short; pages and page ends
+# equal); DOCX p10 line 10, LibreOffice ends the URL line after "uploads/" (503.95 pt) where typst breaks before it,
+# so the next line carries note 2 a page late and every later page shifts.
+params:
+  cross_engine: report
