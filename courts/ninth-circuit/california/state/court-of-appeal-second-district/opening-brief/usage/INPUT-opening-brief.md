@@ -129,6 +129,7 @@ authorities:
     kind: case
     name: "N.Y. State Rifle & Pistol Ass’n v. Bruen"
     cite: "(2022) 598 U.S. 1"
+    sort: "ny state rifle pistol assn v bruen 2022 598 us 1"
   ezell:
     kind: case
     name: "Ezell v. City of Chicago"
@@ -203,8 +204,7 @@ authorities:
     cite: "Gov. Code, § 820.2"
   govapa:
     kind: statute
-    name: "Gov. Code, § 11340"
-    cite: "Gov. Code, § 11340 et seq."
+    cite: "Gov. Code, § 11340"
   penfirearm:
     kind: statute
     cite: "Pen. Code, § 16520"
@@ -259,6 +259,7 @@ authorities:
   penrange:
     kind: statute
     cite: "Pen. Code, §§ 28200-28255"
+    sort: " pen. code, § 28200-28255"
   penreg:
     kind: statute
     cite: "Pen. Code, § 11106"
@@ -283,6 +284,7 @@ authorities:
   usprocess:
     kind: constitution
     cite: "U.S. Const., amend XIV"
+    sort: " u.s. const., amend 14"
   usarms:
     kind: constitution
     cite: "U.S. Const., amend. II"
@@ -291,7 +293,6 @@ authorities:
     cite: "U.S. Const., art. I"
   oal:
     kind: other
-    name: "Office of Administrative Law, State of California, Administrative Procedure Act & OAL Regulations"
     cite: "Office of Administrative Law, State of California, Administrative Procedure Act & OAL Regulations, https://www.oal.ca.gov/publications/administrative\\_procedure\\_act/"
   sbill:
     kind: other
