@@ -1,6 +1,11 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the typst template is on the shared document model
-# (typst/layout.yaml, fb-595.54.12). Reported, not gated, and no latex or docx engine yet: the INPUT's statement of
-# facts holds a markdown table (the sentences, page 8), and the model's pandoc engines set no table in the body
-# ("xdoc: unsupported block Table"; docs/open-items/fb-595.54.35.md, shared-model requests).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12); the statement of facts' table of
+# sentences is the model's body `table`. Reported, not gated (docs/open-items/fb-595.54.35.md, third pass):
+# - LaTeX and Word: the pandoc engines mark no keyed authority inside a table cell (lib/pandoc/xdoc.lua mark_blocks
+#   does not enter a Table), so Va. Code Ann. §§ 18.2-478, 18.2-48.1 and 18.2-57, cited only in the table (page 8),
+#   are missing from their tables of authorities (XENG-003, PDF p5 lines 13-16); every other line and page end of
+#   the LaTeX render matches typst (947/951).
+# - Word: notes 6 and 7 (body p15) do not fit under their anchor line; LibreOffice keeps the line and sets the notes
+#   on the next page, typst moves the line (pages 21 to 35 shift, XENG-002).
 params:
   cross_engine: report
