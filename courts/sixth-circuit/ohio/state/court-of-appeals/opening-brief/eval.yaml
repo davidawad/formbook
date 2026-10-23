@@ -1,6 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: the renders
 # differ where the shared model does (docs/open-items/fb-595.54.55.md): typst does not break "807-1-A4" after a
-# hyphen (p7, S1), and it sets one body line more above notes 2 and 3 on p9 than LaTeX and Word (p10-17 follow).
+# hyphen (p7, S1), and typst splits the two-line paragraph after the bulleted list (note 3) over p9 and p10, which
+# LaTeX and Word keep whole on p10 (S18; p10-17 follow).
 params:
   cross_engine: report
