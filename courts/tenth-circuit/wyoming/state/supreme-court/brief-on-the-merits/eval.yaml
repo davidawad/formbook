@@ -3,11 +3,10 @@
 # the typst render does, so a difference fails.
 font:
   size_pt: 13             # WYO-FORM-005: no smaller than 13 point
-# Not gated yet (fb-595.54.75, docs/open-items/fb-595.54.75.md): the body breaks alike in all three engines but
-# - typst marks an authority a page late when its find is the last word of a paragraph that ends a page (p11 "Wyo.
-#   Const. art. 1, § 33.", p17 "Id. § 73(b)."): the table of authorities on p iii, iv differs (LaTeX and Word list 11,
-#   17; XENG-003 there only);
-# - Word sets fewer body lines above a double-spaced footnote (WYO-FORM-006) than typst: p7 ends two lines early
-#   (XENG-002, -003 from p7).
 params:
-  cross_engine: report
+  cross_engine: gate
+  # Word only: LibreOffice sets the line that cites footnote 2 on p10 and the note on p11 (the double-spaced note,
+  # WYO-FORM-006, does not fit p10 and LibreOffice moves the note, not its line); typst and LaTeX move the line with
+  # the note to p11 (XENG-002, -003 from p11; the table's pages follow). A renderer limit outside the layout
+  # (fb-595.54.82, "LibreOffice's note placement"); docs/open-items/fb-595.54.75.md
+  cross_engine_docx: report
