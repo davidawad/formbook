@@ -1,6 +1,12 @@
-# Gate 4 CROSS-ENGINE: report only. The typst template is on the shared document model (typst/layout.yaml). The
-# model now sets the quoted list, but its LaTeX drops note 20 (a footnote on the token after "§" is boxed with it) and
-# Word places the notes of p8 apart from typst: no latex/ or docx/ engine is kept until the model is fixed
-# (docs/open-items/fb-595.54.67.md). The court folder's eval.yaml (14 pt, Rule 5A:4(a)) applies too.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12); the latex render breaks every line and
+# page where the typst render does, so a difference fails. The layout's `footnote.clearance` (6; 4 to 7.5 give the
+# same LaTeX pages) is measured: at the default 9.1 typst set the first line of a two-line list item alone at the foot
+# of p14, LaTeX moved it whole (the model has no orphan rule for a list item in typst; docs/open-items/fb-595.54.67.md).
+# The court folder's eval.yaml (14 pt, Rule 5A:4(a)) applies too.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LibreOffice's note placement: on p8 and p29 Word keeps the line that cites a note (6; 23) and moves the note to
+  # the next page, typst and LaTeX move the line (docs/open-items/fb-595.54.82.md, "Still missing"). Reported, not
+  # gated (docs/open-items/fb-595.54.67.md).
+  cross_engine_docx: report

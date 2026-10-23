@@ -9,7 +9,7 @@ pitch:
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # VACTAPP-FORM-004: at least one inch on all four sides
 indent: 36
 page_number: {align: center, front: lower-roman}   # the page number alone in the bottom margin (FORM-004); cover unnumbered, tables i, ii .., brief 1, 2 ..
-footnote: {size: 14, gap: 7}                        # VACTAPP-FORM-002, -003: footnotes 14 pt, single spaced
+footnote: {size: 14, gap: 7, clearance: 6}                        # VACTAPP-FORM-002, -003: footnotes 14 pt, single spaced; clearance measured (4 to 7.5 agree in LaTeX)
 quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # VACTAPP-FORM-003: quotations over 49 words single spaced
 heading:                  # VACTAPP-FORM-003: headings single spaced; sections centred, capitals, bold
   - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
@@ -47,6 +47,8 @@ authorities:
 # The signature block (Rule 5A:20(g); VACTAPP-OPEN-003: name, bar number, address, telephone, e-mail), never split;
 # then the certificate on a page of its own (Rule 5A:20(h), 5A:4(d); VACTAPP-OPEN-004: service, oral argument, the
 # word count), signed again.
+# the last paragraph kept with the signature block, which never takes a page alone (tier 2)
+keep_with_closing: true
 closing:
   - group:
       - {text: "{signature.firm}", bold: true, left: 230.4, optional: true}
