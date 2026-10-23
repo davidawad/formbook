@@ -8,6 +8,10 @@ pitch:
   single: 16.1            # 124(a)(3): block quotations single spaced; the cover, headings, tables, signature (1.15 x 14)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # PACOMMWCT-FORM-002: at least one inch on all four sides
 indent: 36
+# LaTeX only: the text block 0.08 pt wider than typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias): typst
+# fills p9 line 3 ("... the United States District Court") to 539.99 of 540 pt, which newtx breaks a word early at
+# 0.05; every line breaks as in typst from 0.06 to 0.12 (measured, fb-595.54.45).
+latex_bias: 0.08
 page_number: {align: center, from: 1, front: lower-roman}   # cover unnumbered, tables roman, the brief from 1
 footnote: {size: 12, pitch: 13.8, gap: 7}   # PACOMMWCT-FORM-002, -003: footnotes 12 point, single spaced (1.15 x 12)
 quote: {left: 72, right: 72, above: 11.2, below: 16.8}   # PACOMMWCT-FORM-002: block quotations indented, single

@@ -3,7 +3,3 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # LaTeX does not break after the slash inside the italic case name "Project Vote/Voting for Am." where typst and
-  # Word do (INPUT-amicus-brief, page 8 line 5, and the lines after it; XENG-003): a gap of the shared model
-  # (docs/open-items/fb-595.54.45.md, shared-model request 6); reported, not gated.
-  cross_engine_latex: report
