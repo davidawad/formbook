@@ -11,7 +11,7 @@ indent: 36                # convention: paragraphs indented half an inch
 # NEV-FORM-006 (NRAP 32(a)(4)): at the bottom; the cover unnumbered, the disclosure and the tables i, ii .., the
 # petition 1, 2 ..
 page_number: {align: center, front: lower-roman}
-footnote: {size: 14, gap: 7}             # NEV-FORM-004 (NRAP 32(a)(5)): footnotes in the body's size and face; single spaced (NRAP 32(a)(4))
+footnote: {size: 14, gap: 7, widows: true}   # NEV-FORM-004 (NRAP 32(a)(5)): footnotes in the body's size and face; single spaced (NRAP 32(a)(4)); widows: a list item that calls a note keeps its lines together in every engine (convention)
 quote: {left: 36, right: 36, above: 11.2, below: 16.8, gap: 8.4}   # NEV-FORM-003: quotations of more than two lines indented, single spaced; a paragraph of one 8.4 below the last (convention)
 heading:                  # NEV-FORM-003: headings single spaced; their look is convention
   - {align: center, bold: true, above: 22.4, below: 16.8}
