@@ -4,11 +4,6 @@
 # (legal paper, 612 x 1008 pt, top 108 pt: LA-FORM-001, -002, -005).
 params:
   cross_engine: gate
-  # lib/latex/xdoc.lua sets the token after a section sign in one \mbox (xd.hold_sign_tokens), and a footnote called
-  # inside it is lost: "Article I, § 3.[^104]" prints the mark 104 and no note (page 35), so the table of authorities
-  # misses the note's page for Sibley (page 4). Shared-model request in docs/open-items/fb-595.54.26.md; reported, not
-  # gated (fb-595.54.26).
-  cross_engine_latex: report
   # LibreOffice sets a footnote that does not fit under its anchor's line on the next page and keeps the line (typst
   # and LaTeX move the line on with its note): page 9 (notes 9 to 11 of "Louisiana did not receive the Reconstruction
   # Acts gracefully"), and pages 10 to 16 shift (XENG-002, XENG-003). No docx setting moves the line; reported, not

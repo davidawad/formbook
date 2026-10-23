@@ -4,7 +4,3 @@
 # (legal paper, 612 x 1008 pt, top 108 pt: LA-FORM-001, -002, -005).
 params:
   cross_engine: gate
-  # lib/latex/xdoc.lua sets the token after a pilcrow sign in one \mbox (xd.hold_sign_tokens), and a footnote called
-  # inside it is lost: "Aff. of Former LDH Secretary ¶ 8.[^1]" prints the mark and no note (page 6), and pages 3 to
-  # 11 shift. Shared-model request in docs/open-items/fb-595.54.26.md; reported, not gated (fb-595.54.26).
-  cross_engine_latex: report

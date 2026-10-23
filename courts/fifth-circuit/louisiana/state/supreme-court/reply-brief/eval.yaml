@@ -4,7 +4,3 @@
 # (legal paper, 612 x 1008 pt, top 108 pt: LA-FORM-001, -002, -005).
 params:
   cross_engine: gate
-  # A URL in note 1 (page 8): typst moves its last piece ("20190816150657072_18-5924%20Respondent%20BOM.pdf.") whole to
-  # the next line, LibreOffice breaks inside it. Shared docx URL breaking (docs/open-items/fb-595.54.26.md); reported,
-  # not gated (fb-595.54.26).
-  cross_engine_docx: report
