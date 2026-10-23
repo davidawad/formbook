@@ -2,15 +2,15 @@
 
 **Court-filing templates for markdown-first lawyers: write your brief in markdown, get a PDF that meets the court's rules, checked against a real filed example.**
 
-![markdown input, formbook's rendered cover page, and the cover page of the brief actually filed with the court](docs/showcase/hero.png)
+![your markdown, formbook's rendered cover page, and the cover page of the brief actually filed with the court (the target): the two covers share their layout](docs/showcase/hero.png)
 
 formbook is an open collection of court-filing templates, one folder per court and document type (opening brief, complaint, motion brief, and so on). Templates are written in [Typst](https://typst.app) and take markdown with a YAML header; the template generates the cover or caption, tables of contents and authorities, spacing, fonts, certificates and signature block that the court's rules call for.
 
 Every template is checked against public record: each folder's `usage/` carries a real filed exemplar PDF (`FILED-EXAMPLE-*.pdf`, with its source URL in `SOURCE.md`), a markdown input (`INPUT-*.md`) and our rendered output PDF (`OUTPUT-*.typst.pdf`). `just overlay <folder>` lays our render over the filed exemplar as a red/blue overlay PDF (generated on demand into the gitignored `.overlay/`, not committed). As of this checkout:
 
-- 492 folders have a Typst template (`typst/main.typ`), across 376 courts (federal, state, bankruptcy, and the U.S. Supreme Court).
-- 614 folders have at least one filed exemplar PDF (1,528 PDFs in all).
-- **v0.2.0 status.** All 224 federal courts (including bankruptcy and the Supreme Court) are *up for review*: each has a `rules.md` written from fetched primary sources, and every doc folder under it passes the default eval in `data/checks-default.yaml`. Renders are pinned (typst 0.15.1, Times New Roman 2.82). The 152 state courts are in progress; none is up for review yet. 4 California superior-court folders currently fail the default content check.
+- 1,185 folders have a Typst template (`typst/main.typ`), across 376 courts (federal, state, bankruptcy, and the U.S. Supreme Court).
+- 1,307 folders have at least one filed exemplar PDF (2,223 PDFs in all).
+- **v0.2.0 status.** All 224 federal courts (including bankruptcy and the Supreme Court) are *up for review*: each has a `rules.md` written from fetched primary sources, and every doc folder under it passes the default eval in `data/checks-default.yaml`. Renders are pinned (typst 0.15.1, Times New Roman 2.82). Of the 152 state courts, 129 are up for review; the other 23 have no public filed example yet (see [Help wanted](#help-wanted-filed-examples-for-23-state-courts)).
 - **"Up for review" means machine-checked, not human-reviewed.** No court is marked `done`; that status is set by hand, and no court has been human-verified yet.
 - More pictures, and the command that regenerates each: [docs/showcase/README.md](docs/showcase/README.md). Per-court progress is in the [index](#index) at the bottom.
 
@@ -32,14 +32,43 @@ just contribute verify <id>     # mechanical floor: layout, renders, exemplar so
 just contribute submit <id>     # reruns verify, opens the PR
 ```
 
-**The agent skill.** [`skills/formbook`](skills/formbook/SKILL.md) teaches an agent to use these templates (find the court, start from a sample, render, look at every page) and to write a new one when a court or document type is missing. To install it for Claude Code, symlink it into a skills directory:
+**The agent skill.** The [`skills/formbook/`](skills/formbook) folder holds one `SKILL.md` that teaches an agent to use these templates (find the court, start from a sample, render, look at every page) and to write a new one when a court or document type is missing. Install it for Claude Code with one command from this checkout:
 
 ```sh
-mkdir -p ~/.claude/skills && ln -s "$PWD/skills/formbook" ~/.claude/skills/formbook   # every project
-mkdir -p .claude/skills && ln -s "$PWD/skills/formbook" .claude/skills/formbook       # one project
+sh skills/install.sh ~/.claude/skills
 ```
 
-For other agents (Codex, Cursor, a plain LLM with a shell), point them at `skills/formbook/SKILL.md`, for example "Read skills/formbook/SKILL.md and follow it". Details: [skills/README.md](skills/README.md). Full contribution rules, quality bar and review process: [CONTRIBUTING.md](CONTRIBUTING.md).
+For other agents (Codex, Cursor, a plain LLM with a shell), point them at `skills/formbook/SKILL.md`. Details: [skills/README.md](skills/README.md). Full contribution rules, quality bar and review process: [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Help wanted: filed examples for 23 state courts
+
+These courts have a `rules.md` written from primary sources, but we have not found a single publicly available filing from them to build and check a template against. Most are tax courts, workers' compensation boards and small specialty tribunals whose filings are not on free dockets. If you can point to a public filed brief, petition or motion from one of them (a court website, a public agency record, an appellate record), open an issue or PR with the PDF's source URL; that is all it takes to unblock the court.
+
+| Court | Alias |
+|---|---|
+| [Arkansas Workers' Compensation Commission](courts/eighth-circuit/arkansas/state/workers-compensation-commission) | `arkworkcompcom` |
+| [California Superior Court, Appellate Division](courts/ninth-circuit/california/state/superior-court-appellate-division) | `calappdeptsuper` |
+| [Colorado Industrial Claim Appeals office](courts/tenth-circuit/colorado/state/industrial-claim-appeals-office) | `coloworkcompcom` |
+| [Connecticut Compensation Review Board](courts/second-circuit/connecticut/state/compensation-review-board) | `connworkcompcom` |
+| [Court for the Trial of Impeachments](courts/second-circuit/new-york/state/court-for-the-trial-of-impeachments) | `nyimpct` |
+| [Court of Chancery of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-chancery) | `ctchansc` |
+| [Court on the Judiciary of Delaware](courts/third-circuit/delaware/state/court-on-the-judiciary) | `deljudct` |
+| [Court on the Judiciary of Oklahoma](courts/tenth-circuit/oklahoma/state/court-on-the-judiciary) | `oklacoj` |
+| [Delaware Family Court](courts/third-circuit/delaware/state/family-court) | `delfamct` |
+| [High Court of American Samoa](courts/ninth-circuit/american-samoa/state/high-court) | `amsamoa` |
+| [Indiana Tax Court](courts/seventh-circuit/indiana/state/tax-court) | `indtc` |
+| [Massachusetts Appellate Tax Board](courts/first-circuit/massachusetts/state/appellate-tax-board) | `masstaxbd` |
+| [Massachusetts Department of Industrial Accidents](courts/first-circuit/massachusetts/state/department-of-industrial-accidents) | `maworkcompcom` |
+| [Massachusetts District Court, Appellate Division](courts/first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` |
+| [Montana Tax Appeal Board](courts/ninth-circuit/montana/state/tax-appeal-board) | `monttc` |
+| [New Jersey Tax Court](courts/third-circuit/new-jersey/state/tax-court) | `njtaxct` |
+| [New York Commission of Appeals](courts/second-circuit/new-york/state/commission-of-appeals) | `nycommnapp` |
+| [North Carolina Industrial Commission](courts/fourth-circuit/north-carolina/state/industrial-commission) | `ncworkcompcom` |
+| [Oklahoma Judicial Ethics Advisory Panel](courts/tenth-circuit/oklahoma/state/judicial-ethics-advisory-panel) | `oklajeap` |
+| [Oregon Tax Court](courts/ninth-circuit/oregon/state/tax-court) | `ortc` |
+| [Saratoga Chancery Court](courts/second-circuit/new-york/state/saratoga-chancery-court) | `nychanctsara` |
+| [Superior Court of Rhode Island](courts/first-circuit/rhode-island/state/superior-court) | `risuperct` |
+| [Texas Court of Review Tribunal](courts/fifth-circuit/texas/state/court-of-review-tribunal) | `texrevtrib` |
 
 ## Use a template
 
