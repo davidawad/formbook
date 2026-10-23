@@ -10,9 +10,30 @@ return require("docx.xdoc")({
     ["top"] = 72,
     ["bottom"] = 72,
     ["left"] = 72,
-    ["right"] = 72,
+    ["right"] = 72.05,
   },
   ["indent"] = 36,
+  ["closing"] = {
+    {
+      ["group"] = {
+        {
+          ["text"] = "{date}",
+          ["optional"] = true,
+        },
+        {
+          ["text"] = "{signature.firm}",
+          ["left"] = 230.4,
+          ["above"] = 7.8,
+        },
+        {
+          ["text"] = "{signature.lines}",
+          ["left"] = 230.4,
+          ["above"] = 7.8,
+        },
+      },
+      ["above"] = 28.8,
+    },
+  },
   ["page_number"] = {
     ["align"] = "center",
     ["from"] = 1,
@@ -90,27 +111,6 @@ return require("docx.xdoc")({
       ["upper"] = true,
       ["above"] = 18.2,
       ["below"] = 10.4,
-    },
-  },
-  ["closing"] = {
-    {
-      ["group"] = {
-        {
-          ["text"] = "{date}",
-          ["optional"] = true,
-        },
-        {
-          ["text"] = "{signature.firm}",
-          ["left"] = 230.4,
-          ["above"] = 7.8,
-        },
-        {
-          ["text"] = "{signature.lines}",
-          ["left"] = 230.4,
-          ["above"] = 7.8,
-        },
-      },
-      ["above"] = 28.8,
     },
   },
 })

@@ -8,6 +8,10 @@ pitch:
   single: 14.95           # MOCTAPPWD-FORM-003: caption, headings, quotations, footnotes, certificates, signature (1.15 x 13 pt)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # MOCTAPPWD-FORM-002: not less than one inch on every side
 indent: 36                # paragraphs indented half an inch (MOCTAPPWD-FORM-007, as filed)
+# LaTeX only: the text block 0.02 pt wider than typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias): newtx
+# fit "men" on a bold level-4 heading line typst fills to within hundredths of a point (page 14 line 13). Measured: 0.015
+# to 0.03 break every line as typst does; 0.01 and below break a URL line elsewhere (page 17 line 11), 0.04 and up page 14.
+latex_bias: 0.02
 page_number: {align: center, from: 1}   # MOCTAPPWD-FORM-001: every page, the cover included, Arabic numerals at the bottom
 footnote: {size: 13, pitch: single, gap: 7}   # MOCTAPPWD-FORM-003, -004: 13 point, single spaced
 quote: {left: 36, right: 36, above: 7.8, below: 13}   # MOCTAPPWD-FORM-003: quotations single spaced, indented

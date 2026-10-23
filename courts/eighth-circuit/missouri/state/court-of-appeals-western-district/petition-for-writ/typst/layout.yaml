@@ -8,6 +8,10 @@ pitch:
   single: 14.95           # MOCTAPPWD-FORM-003: caption, headings, quotations, footnotes, signature (1.15 x 13 pt)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # MOCTAPPWD-FORM-002: not less than one inch on every side
 indent: 36                # paragraphs indented half an inch (MOCTAPPWD-FORM-007, as filed)
+# Word only: the right margin 0.05 pt (1 twip) wider. LibreOffice rounds each run of text to its layout units and fit
+# "signatures." on footnote 1 (page 3) and "deadline" on page 10, lines typst fills to within its last fraction of a
+# point. Measured: 0.05 and 0.1 break every line and page as typst does; 0.15 and up break page 4 line 23 earlier.
+docx_bias: 0.05
 page_number: {align: center, from: 1}   # MOCTAPPWD-FORM-001: every page consecutively, Arabic numerals at the bottom
 footnote: {size: 13, pitch: single, gap: 6.5}   # MOCTAPPWD-FORM-003, -004: 13 point, single spaced
 quote: {left: 36, right: 36, above: 7.8, below: 13}   # MOCTAPPWD-FORM-003: quotations single spaced, indented
