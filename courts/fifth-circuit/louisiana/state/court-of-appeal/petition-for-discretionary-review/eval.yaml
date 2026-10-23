@@ -1,0 +1,13 @@
+# Uniform Rules of Louisiana Courts of Appeal, Rule 2-12.2(D)(2) (../rules.md, LACTAPP-FORM-002): 14-point or larger,
+# all text and footnotes.
+font:
+  size_pt: 14
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails; a difference that is the shared model's is reported, not gated
+# (docs/open-items/fb-595.54.58.md).
+params:
+  cross_engine: gate
+  # Footnote 4 does not fit under the last line of p9: typst moves the line that cites it to p10, LibreOffice keeps
+  # the line on p9 and sets the whole note on p10 (p10 line 1; every other line breaks as in typst).
+  cross_engine_docx: report
