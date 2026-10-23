@@ -1,9 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12); the latex render breaks every line and
-# page where the typst render does, so a difference fails.
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where the
+# typst render does, so a difference fails. Word's footnote area is the layout's measured `footnote.clearance` (7.5)
+# and the tail's `gap` is the quotation's space above (7.2): LibreOffice collapses a paragraph's space below and a
+# quotation's above to the larger, typst sets the quotation's (fb-595.54.74).
 params:
   cross_engine: gate
-  # Word's footnote area: on body page 1 (three notes) LibreOffice sets one body line more above the notes than typst
-  # and LaTeX ("Scott, 139 S.Ct 2162 (2019), ..."), and every page after it shifts (XENG-001..003). The model's open
-  # item "Word's footnote area" (docs/open-items/fb-595.54.82.md); reported, not gated (fb-595.54.74).
-  cross_engine_docx: report

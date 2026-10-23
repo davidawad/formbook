@@ -11,7 +11,7 @@ indent: 36
 # SD-FORM-005: every page but the front index numbered in Arabic figures, centred at the bottom; the cover unnumbered,
 # the tables in lower-case roman (SD-FORM-011, as filed), the brief from 1.
 page_number: {align: center, front: lower-roman}
-footnote: {size: 12, pitch: single, gap: 7}   # SD-FORM-006: footnotes 12-point too; single-spaced as filed
+footnote: {size: 12, pitch: single, gap: 7, clearance: 7.5}   # SD-FORM-006: footnotes 12-point too; single-spaced as filed
 quote: {left: 36, right: 36, above: 7.2, below: 12, gap: 9.6}   # SD-FORM-002: lengthy quotations indented, single-spaced
 # SD-FORM-007: boldface for section names and argument headings. Level 1 a section name, centred; level 2 an argument
 # heading, hanging; level 3 bold italic.
@@ -63,4 +63,4 @@ closing:
           - {text: "{.}", left: 216, above: 10.8}
     above: 21.6
 # SD-CERT-001: the certificates start a new page after the signature (as filed), single-spaced.
-tail: {at: "CERTIFICATE", break: true, pitch: single, indent: 36, gap: 13.2, above: 0}
+tail: {at: "CERTIFICATE", break: true, pitch: single, indent: 36, gap: 7.2, above: 0}

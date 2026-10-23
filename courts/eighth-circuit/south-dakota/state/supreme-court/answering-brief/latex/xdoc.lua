@@ -21,6 +21,7 @@ return require("latex.xdoc")({
     ["size"] = 12,
     ["pitch"] = "single",
     ["gap"] = 7,
+    ["clearance"] = 7.5,
   },
   ["quote"] = {
     ["left"] = 36,
@@ -185,7 +186,7 @@ return require("latex.xdoc")({
     ["break"] = true,
     ["pitch"] = "single",
     ["indent"] = 36,
-    ["gap"] = 13.2,
+    ["gap"] = 7.2,
     ["above"] = 0,
   },
   ["latex_bias"] = 0.05,
