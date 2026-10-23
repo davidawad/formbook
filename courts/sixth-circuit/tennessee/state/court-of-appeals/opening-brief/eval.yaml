@@ -1,9 +1,10 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated
-# (docs/open-items/fb-595.54.63.md): LaTeX sets the token after a "§" in one \mbox with
-# what follows it, so footnote 3 after "§ 37-5-107(a)." is lost (pages differ from p21) and "(B)–(C)," reads apart
-# (p16); LibreOffice sets Schola's interword space at 3.85 pt (typst 3.892 at 14 pt), so a line holds a word more
-# (p8).
+# (docs/open-items/fb-595.54.63.md):
+# LaTeX: a dash after ")" is set apart ("(B) –(C)", p16, p20; "(d)(1) –", p39, where the line then fits more):
+# lib/latex/xeschola.lua flushes the parentheses' kept Schola width before the dash. Footnote 3 after
+# "§ 37-5-107(a)." is set now (fb-595.54.82). Word: LibreOffice sets Schola's interword space at 3.85 pt (typst
+# 3.892 at 14 pt), so a line holds a word more (p8); no docx_bias settles it.
 params:
   cross_engine: report
   # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,

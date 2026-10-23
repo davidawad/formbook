@@ -1,8 +1,11 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated
-# (docs/open-items/fb-595.54.63.md): TeX Gyre Schola's interword space differs by engine at 14 pt (typst 3.892 pt;
-# LaTeX bold 4.018 pt, so a bold heading line typst fills breaks a word early, p10; LibreOffice regular 3.85 pt, so a
-# body line holds a word more, p7).
+# (docs/open-items/fb-595.54.63.md):
+# LaTeX: lib/latex/xeschola.sty never finds a bold series (`\in@{b}{\f@series}` does not expand `\f@series`),
+# so bold Schola keeps its 4.018 pt space (typst 3.892 at 14 pt) and the p10 heading breaks a word early (35 pages for
+# 34); a dash after ")" is set apart ("2016) —", p20; xeschola.lua flushes the parentheses' kept width before it); a
+# justified line does not break after "gov/" in a URL where typst does (p28). Word: LibreOffice sets Schola's space
+# at 3.85 pt, so a line holds a word more (p7, p24); no docx_bias settles it.
 params:
   cross_engine: report
   # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,

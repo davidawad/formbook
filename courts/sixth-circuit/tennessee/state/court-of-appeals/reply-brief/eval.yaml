@@ -1,8 +1,9 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated
-# (docs/open-items/fb-595.54.63.md): LaTeX sets the em dash after a "§" token apart from it
-# ("(C) —", p21, p23: the token is one \mbox); LibreOffice sets Schola's interword space at 3.85 pt (typst 3.892 at
-# 14 pt), so a line holds a word more (p2, p10).
+# (docs/open-items/fb-595.54.63.md):
+# LaTeX: the em dash after "§ 37-5-107(c)(4)(C)" is set apart ("(C) —", p21, p23): lib/latex/xeschola.lua
+# flushes the parentheses' kept Schola width before the dash. Word: LibreOffice sets Schola's interword space at
+# 3.85 pt (typst 3.892 at 14 pt), so a line holds a word more (p2, p10); no docx_bias settles it.
 params:
   cross_engine: report
   # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,
