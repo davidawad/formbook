@@ -3,6 +3,3 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # pdfLaTeX has no break after a slash inside a word ("and/", p5 line 1), where typst and Word break: a shared-model
-  # feature (lib/latex; docs/open-items/fb-595.54.24.md).
-  cross_engine_latex: report
