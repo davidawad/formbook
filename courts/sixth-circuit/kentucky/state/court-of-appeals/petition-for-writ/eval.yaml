@@ -3,6 +3,8 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # LaTeX: "* * *" reads "***" (p21, p25; S6), and typst and Word break before an em dash where LaTeX breaks only
-  # after it (p15 line 18, "conduct—“operate[s]"; S13). Reported, not gated (docs/open-items/fb-595.54.55.md; fb-595.54.55).
+  # LaTeX: every line and page breaks as typst's, but the "* * *" paragraph opening p21 starts with the model's
+  # /ActualText BDC literal, which pdfTeX puts on the page list before the paragraph: the span opens on p20, the
+  # folio "20" falls inside it and pdftotext loses it, and p21 reads an unmatched EMC (XENG-002 p20, XENG-003 p20
+  # line 24, p21 line 1). Reported, not gated (docs/open-items/fb-595.54.55.md, S17; fb-595.54.55).
   cross_engine_latex: report
