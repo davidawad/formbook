@@ -157,7 +157,7 @@ Courts under `courts` (346).
 | [District Court, W.D. Tennessee](sixth-circuit/tennessee/federal/western-district) | `tnwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Kentucky](sixth-circuit/kentucky/state/court-of-appeals) | `kyctapp` | up for review | 6/6 | 3/3 | 3/3 | 29 |
 | [Kentucky Supreme Court](sixth-circuit/kentucky/state/supreme-court) | `ky` | up for review | 8/8 | — | — | 29 |
-| [Michigan Court of Appeals](sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | 5/5 | 5/5 | 29 |
+| [Michigan Court of Appeals](sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [Michigan Supreme Court](sixth-circuit/michigan/state/supreme-court) | `mich` | up for review | 8/8 | 8/8 | 8/8 | 29 |
 | [Ohio Court of Appeals](sixth-circuit/ohio/state/court-of-appeals) | `ohioctapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [Ohio Supreme Court](sixth-circuit/ohio/state/supreme-court) | `ohio` | up for review | 9/9 | 9/9 | 9/9 | 29 |
