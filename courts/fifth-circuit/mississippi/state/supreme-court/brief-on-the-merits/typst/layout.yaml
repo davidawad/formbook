@@ -10,7 +10,7 @@ margin: {top: 72, bottom: 54, left: 108, right: 36}   # MISS-FORM-003: 1 in top,
 indent: 36
 # MISS-FORM-001: every page numbered: the cover unnumbered, the tables i, ii .., the body from 1.
 page_number: {align: center, front: lower-roman}
-footnote: {size: 11, pitch: 12.65, gap: 6}   # MISS-FORM-002, -004: footnotes at least 11-point, single spaced (1.15 x 11 pt)
+footnote: {size: 11, pitch: 12.65, gap: 6, clearance: 7.5}   # MISS-FORM-002, -004: footnotes at least 11-point, single spaced (1.15 x 11 pt); clearance: Word's footnote area on pages of two or three notes, measured (fb-595.54.51)
 quote: {left: 36, right: 36, above: 12, below: 12}   # MISS-FORM-004: quotations single spaced, indented
 heading:
   - {align: center, bold: true, above: 14.4, below: 12}
