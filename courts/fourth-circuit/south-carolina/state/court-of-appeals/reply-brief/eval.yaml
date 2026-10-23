@@ -2,7 +2,7 @@
 # (https://www.sccourts.org/resources/judicial-community/court-rules/appellate/rule-208/).
 params:
   page_limit: 25
-  # Gate 4 CROSS-ENGINE: report only. typst is on the shared document model (typst/layout.yaml) and latex/ and docx/
-  # are generated from it; LaTeX matches typst line for line, Word's table of authorities misses a page cited only in
-  # a footnote (Herron, note 3, docx page lookup): docs/open-items/fb-595.54.67.md. Gate once the model is fixed.
-  cross_engine: report
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where the
+  # typst render does, so a difference fails (fb-595.54.67; the docx page lookup of a note's find, fb-595.54.82).
+  cross_engine: gate
