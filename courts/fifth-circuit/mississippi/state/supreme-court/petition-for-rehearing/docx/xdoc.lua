@@ -21,6 +21,7 @@ return require("docx.xdoc")({
     ["size"] = 11,
     ["pitch"] = 12.65,
     ["gap"] = 6,
+    ["clearance"] = 7.5,
   },
   ["quote"] = {
     ["left"] = 36,

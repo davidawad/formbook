@@ -3,9 +3,8 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # Word's footnote area: under the 19-line footnote 1 that runs from p2 onto p3 Word keeps one more body line on p3
-  # than typst and LaTeX (page 3/4 end differs, the pages after it agree); and LibreOffice fits a line typst fills
-  # past the measure (p17 line 4, "(last" at 576.04 of 576 pt). Both are open shared-model items
-  # (docs/open-items/fb-595.54.82.md: Word's footnote area, the line-fit tolerance); 502/505 lines identical, pages
-  # equal. Reported, not gated (fb-595.54.51).
+  # LibreOffice fits a line typst fills past the measure: INPUT-petition-for-rehearing p17 line 4, "(last" at 576.04
+  # of 576 pt (503/505 lines identical, pages and page ends equal). No docx_bias settles it: 0.05 pt already breaks
+  # p2 line 2 earlier than typst. The line-fit tolerance is an open shared-model item (docs/open-items/fb-595.54.82.md);
+  # reported, not gated (fb-595.54.51). Word's footnote area (p3/p4) is settled by the layout's footnote clearance.
   cross_engine_docx: report
