@@ -1,6 +1,5 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: LaTeX sets the token after a
-# section sign in an \mbox, and a footnote inside it is lost (note 5 after "§ 5(a).”", p11), so its pages run on;
-# Word breaks one note line typst fills (p11). See docs/open-items/fb-595.54.68.md.
+# typst layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where typst does
+# (the lost note after "§ 5(a).”" and Word's note line on p11 were settled in the shared model, fb-595.54.82).
 params:
-  cross_engine: report
+  cross_engine: gate

@@ -8,6 +8,9 @@ pitch:
   single: 16.1            # cover, headings, quotations, counsel and signature blocks: single (1.15 x 14 pt)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # TEXCRIMAPP-FORM-002 (TRAP 9.4(c)): at least one inch
 indent: 36                # every body paragraph indented half an inch
+# LaTeX only: the text block 0.1 pt wider than typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias):
+# typst fills p23 "... “easy to meet”). When" to 539.995 pt, and newtx set it past the 0.05 allowance.
+latex_bias: 0.1
 page_number: {align: center, from: 2}   # the cover unnumbered; the contents and the motion numbered
 footnote: {size: 12, pitch: 13.8, gap: 7, clearance: 14}   # TEXCRIMAPP-FORM-003, -004: footnotes 12-point, single
 quote: {left: 36, right: 36, above: 8, below: 16.1}          # TEXCRIMAPP-FORM-003: block quotations single-spaced
