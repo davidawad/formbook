@@ -40,7 +40,9 @@ cover:
       - group:
           - {text: "{names}", left: 180}
           - {text: "{lines}", left: 180, above: 7.2, optional: true}
-# RAP 10.3(a)(2): a table of contents and a table of authorities with page references, each on its own page.
+# RAP 10.3(a)(2): a table of contents and a table of authorities with page references, each on its own page. An
+# authority cited on six pages or more is *passim*, as the Washington filers set it (the Washington Supreme Court
+# layouts, docs/open-items/fb-595.54.17.md), where a list of every page would be wider than the line.
 contents: {title: "TABLE OF CONTENTS", style: {align: center}, depth: 3, col: 36, hang: 21, step: 21, above: 12.6}
 authorities:
   title: "TABLE OF AUTHORITIES"
@@ -49,6 +51,7 @@ authorities:
   hang: 21
   above: 11.2
   group: {bold: true, above: 16.8, below: 8.4}
+  passim: 6
 # WASHCTAPP-CERT-001 (RAP 18.17(b)): the word count above the signature line; the statement, the date line and the
 # signature block never split.
 closing:

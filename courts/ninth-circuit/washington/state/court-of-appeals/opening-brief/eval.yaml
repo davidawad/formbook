@@ -1,7 +1,8 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated (pages and page
-# ends equal in both engines; docs/open-items/fb-595.54.47.md): LaTeX XENG-003 p27 line 4, a line typst fills to
-# 504.01 pt on the 504 pt measure that newtx keeps whole (the line-fit tolerance); DOCX XENG-003 p9 line 1, the page
-# list of "Article I, section 22" (12 pages) as wide as the row, where Word's leader runs into the list.
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). DOCX passes XENG-001..003 (passim
+# at six pages keeps every page list narrower than its row). LaTeX reported, not gated (pages and page ends equal;
+# docs/open-items/fb-595.54.47.md): XENG-003 p27 line 4, a line typst fills to 504.01 pt on the 504 pt measure that
+# newtx keeps whole (the line-fit tolerance; a latex_bias of 0.03 still keeps it and breaks p15 line 4 short).
 params:
-  cross_engine: report
+  cross_engine: gate
+  cross_engine_latex: report

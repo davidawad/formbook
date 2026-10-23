@@ -142,6 +142,7 @@ return require("docx.xdoc")({
       ["above"] = 16.8,
       ["below"] = 8.4,
     },
+    ["passim"] = 6,
   },
   ["closing"] = {
     {
