@@ -10,7 +10,71 @@ return require("docx.xdoc")({
     ["top"] = 72,
     ["bottom"] = 72,
     ["left"] = 72,
-    ["right"] = 72,
+    ["right"] = 72.05,
+  },
+  ["closing"] = {
+    {
+      ["group"] = {
+        {
+          ["text"] = "{date}",
+          ["optional"] = true,
+          ["pitch"] = "body",
+          ["indent"] = 36,
+        },
+        {
+          ["text"] = "s/ {signature.signer}",
+          ["underline"] = true,
+          ["left"] = 230.4,
+          ["above"] = 5.6,
+        },
+        {
+          ["text"] = "{signature.lines}",
+          ["left"] = 230.4,
+        },
+        {
+          ["text"] = "{signature.role}",
+          ["bold"] = true,
+          ["optional"] = true,
+          ["left"] = 230.4,
+        },
+      },
+      ["above"] = 21.6,
+    },
+    {
+      ["when"] = "service",
+      ["blocks"] = {
+        {
+          ["break"] = true,
+        },
+        {
+          ["text"] = "Certificate of Service",
+          ["align"] = "center",
+          ["bold"] = true,
+          ["upper"] = true,
+          ["keep"] = true,
+          ["below"] = 16.8,
+        },
+        {
+          ["text"] = "{service.paragraphs}",
+          ["pitch"] = "body",
+          ["indent"] = 36,
+        },
+        {
+          ["group"] = {
+            {
+              ["text"] = "s/ {service.signature.signer}",
+              ["underline"] = true,
+              ["left"] = 230.4,
+            },
+            {
+              ["text"] = "{service.signature.lines}",
+              ["left"] = 230.4,
+            },
+          },
+          ["above"] = 5.6,
+        },
+      },
+    },
   },
   ["indent"] = 36,
   ["page_number"] = {
@@ -230,68 +294,4 @@ return require("docx.xdoc")({
     },
   },
   ["keep_with_closing"] = true,
-  ["closing"] = {
-    {
-      ["group"] = {
-        {
-          ["text"] = "{date}",
-          ["optional"] = true,
-          ["pitch"] = "body",
-          ["indent"] = 36,
-        },
-        {
-          ["text"] = "s/ {signature.signer}",
-          ["underline"] = true,
-          ["left"] = 230.4,
-          ["above"] = 5.6,
-        },
-        {
-          ["text"] = "{signature.lines}",
-          ["left"] = 230.4,
-        },
-        {
-          ["text"] = "{signature.role}",
-          ["bold"] = true,
-          ["optional"] = true,
-          ["left"] = 230.4,
-        },
-      },
-      ["above"] = 21.6,
-    },
-    {
-      ["when"] = "service",
-      ["blocks"] = {
-        {
-          ["break"] = true,
-        },
-        {
-          ["text"] = "Certificate of Service",
-          ["align"] = "center",
-          ["bold"] = true,
-          ["upper"] = true,
-          ["keep"] = true,
-          ["below"] = 16.8,
-        },
-        {
-          ["text"] = "{service.paragraphs}",
-          ["pitch"] = "body",
-          ["indent"] = 36,
-        },
-        {
-          ["group"] = {
-            {
-              ["text"] = "s/ {service.signature.signer}",
-              ["underline"] = true,
-              ["left"] = 230.4,
-            },
-            {
-              ["text"] = "{service.signature.lines}",
-              ["left"] = 230.4,
-            },
-          },
-          ["above"] = 5.6,
-        },
-      },
-    },
-  },
 })

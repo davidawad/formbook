@@ -2,10 +2,8 @@
 font:
   size_pt: 14
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Not gated: the shared model takes
-# footnote 1 as part of the token after "§" ("§ 13.[^1]"; lib/pandoc/xdoc.lua hold_sign_tokens). Word then gets a word
-# joiner after every slash and hyphen of the note, so its URL does not break after "http://" as typst's does (p9,
-# lines 20-21; pages equal); LaTeX sets the note in an \mbox and drops it, so the committed latex render is the one
-# before that rule (it has the note; its pages differ from p11). docs/open-items/fb-595.54.54.md.
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# typst does (XENG-001..003 pass on both). The footnote after a "§" or "¶" token stays outside the token's box
+# (fb-595.54.82), so LaTeX keeps it.
 params:
-  cross_engine: report
+  cross_engine: gate

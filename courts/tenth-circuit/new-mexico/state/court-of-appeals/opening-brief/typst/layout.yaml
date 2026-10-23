@@ -7,6 +7,10 @@ pitch:
   body: 32.2              # NMCTAPP-FORM-006: double spaced (Word's double, 2 x 1.15 x 14 pt)
   single: 16.1            # NMCTAPP-FORM-006: headings, tables, footnotes, quotations, signature blocks may be single (1.15 x 14 pt)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # NMCTAPP-FORM-002: one inch on every side
+# Word only: the right margin 0.05 pt (1 twip) wider. p15 line 3 "… entirely new part of § 20.11.72" overflows the
+# 468 pt measure by 0.05 pt in typst, which moves "§ 20.11.72" down; LibreOffice's twip-rounded advances set it
+# 0.27 pt narrower and kept it. Measured: 0.05, 0.1 and 0.2 all break every line and page as typst does.
+docx_bias: 0.05
 indent: 36
 page_number: {align: center, front: lower-roman}   # NMCTAPP-FORM-003: numbers at the bottom; the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
 footnote: {size: 14, gap: 7}                        # NMCTAPP-FORM-004, -006: 14 point, single spaced
