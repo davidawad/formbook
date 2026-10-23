@@ -9,6 +9,10 @@ pitch:
   single: 16.1            # cover, headings, contents, quotations, counsel, signature: single (1.15 x 14 pt)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # TEXJPML-FORM-002: at least one inch on all sides
 indent: 36
+# LaTeX only: the text block 0.01 pt wider than typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias): newtx
+# sets the level-3 heading of body page 5 (line 10 of p7) at 540.03 pt on the 540 pt measure and fits "Identify" from
+# 0.04 up; every line breaks as in typst from -0.03 to 0.03 (measured, fb-595.54.74).
+latex_bias: 0.01
 # TEXJPML-FORM-005: the cover unnumbered, front matter lower-roman, the text arabic from 1, centred at the bottom.
 page_number: {align: center, front: lower-roman}
 footnote: {size: 12, pitch: 13.8, gap: 7}   # TEXJPML-FORM-003, -006: footnotes 12-point, single-spaced (1.15 x 12 pt)
