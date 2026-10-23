@@ -45,33 +45,33 @@ signature:
     - "Juris No. 443705"
     - jeffrey.gentes@ylsclinics.org
 authorities:
-  - {key: bridgeport, category: cases, text: "*Bridgeport Harbour Place I, LLC v. Ganim*, 131 Conn. App. 99, 30 A.3d 703 (2011)"}
-  - {key: carrillo, category: cases, text: "*Carrillo v. Goldberg*, 141 Conn. App. 299, 61 A.3d 1164 (2013)"}
-  - {key: hennessey, category: cases, text: "*Hennessey v. Connecticut Valley Fitness Centers, Inc.*, Superior Court, judicial district of Hartford, Docket No. CV-980504488S, 2001 WL 1199840 (Sept. 12, 2001)"}
-  - {key: herron-app, category: cases, text: "*Herron v. Daniels*, 208 Conn. App. 75, 264 A.3d 184 (2021)"}
-  - {key: herron-super, category: cases, text: "*Herron v. Daniels*, Superior Court, judicial district of Fairfield at Bridgeport, Housing Session, Docket No. BPH-CV18-6005426-S, 2019 WL 7497101 (Oct. 21, 2019), aff'd, 208 Conn. App. 75, 264 A.3d 184 (2021)"}
-  - {key: hinchliffe, category: cases, text: "*Hinchliffe v. American Motors Corp.*, 184 Conn. 607, 440 A.2d 810 (1981)"}
-  - {key: lenz, category: cases, text: "*Lenz v. CNA Assurance Co.*, 42 Conn. Supp. 514, 630 A.2d 1082 (1993)"}
-  - {key: mead, category: cases, text: "*Mead v. Burns*, 199 Conn. 651, 509 A.2d 11 (1986)"}
-  - {key: murphy, category: cases, text: "*Murphy v. McNamara*, 36 Conn. Supp. 183, 416 A.2d 170 (1979)"}
-  - {key: odell, category: cases, text: "*Odell v. Wallingford Mun. Federal Credit Union*, Superior Court, judicial district of New Haven, Docket No. NNH-CV-106012228-S, 2013 WL 4734783 (Aug. 8, 2013)"}
-  - {key: sportsmens, category: cases, text: "*Sportsmen's Boating Corp. v. Hensley*, 192 Conn. 747, 474 A.2d 780 (1984)"}
-  - {key: state-farm, category: cases, text: "*State Farm Mutual Ins. Co. v. Campbell*, 538 U.S. 408 (2003)"}
-  - {key: thorne, category: cases, text: "*Thorne v. Mackeyboy Auto, LLC*, Superior Court, judicial district of New Haven, Docket No. NNH-CV11-6017210-S, 2013 WL 5879081 (Oct. 11, 2013)"}
-  - {key: ulbrich, category: cases, text: "*Ulbrich v. Groth*, 310 Conn. 375, 78 A.3d 76 (2013)"}
-  - {key: waterbury, category: cases, text: "*Waterbury Petroleum Products, Inc. v. Canaan Oil and Fuel Co., Inc.*, 193 Conn. 208, 477 A.2d 988 (1984)"}
-  - {key: white-app, category: cases, text: "*White v. FCW Law Offices*, 228 Conn. App. 1, 323 A.3d 406 (2024)"}
-  - {key: white-super, category: cases, text: "*White v. FCW Law Offices*, Superior Court, judicial district of Middlesex, Docket No. MMX-CV20-6028538-S, 2023 WL 4322728 (Jun. 28, 2023), aff'd in part, rev'd in part, 228 Conn. App. 1 (2024)"}
-  - {key: cga-42-110b-a, category: statutes, text: "General Statutes § 42-110b(a)"}
-  - {key: cga-42-110b-d, category: statutes, text: "General Statutes § 42-110b(d)"}
-  - {key: cga-42-110g-a, category: statutes, text: "General Statutes § 42-110g(a)"}
-  - {key: cga-42-110g-d, category: statutes, text: "General Statutes § 42-110g(d)"}
-  - {key: cga-52-571h, category: statutes, text: "General Statutes § 52-571h"}
-  - {key: pa-76-303, category: statutes, text: "Public Acts 1976, No. 76-303"}
-  - {key: house-1976, category: other, text: "Conn. Gen. Assembly House Proceedings, Pt. 6, 1976 Sess."}
-  - {key: joint-1973, category: other, text: "Conn. Joint Standing Committee Hearings, General Law, Pt. 2, 1973 Sess."}
-  - {key: olr-97, category: other, text: "Office of Legislative Research, Research Report 97-R-1140 (Oct. 2, 2003)"}
-  - {key: langer, category: other, text: "Robert M. Langer & David E. Ormstedt, *The Connecticut Unfair Trade Practices Act*, 54 Conn. B.J. 388 (1980)"}
+  bridgeport: {kind: cases, cite: "*Bridgeport Harbour Place I, LLC v. Ganim*, 131 Conn. App. 99, 30 A.3d 703 (2011)", sort: "bridgeport harbour place i llc v ganim 131 conn app 99 30 a3d 703 2011"}
+  carrillo: {kind: cases, cite: "*Carrillo v. Goldberg*, 141 Conn. App. 299, 61 A.3d 1164 (2013)", sort: "carrillo v goldberg 141 conn app 299 61 a3d 1164 2013"}
+  hennessey: {kind: cases, cite: "*Hennessey v. Connecticut Valley Fitness Centers, Inc.*, Superior Court, judicial district of Hartford, Docket No. CV-980504488S, 2001 WL 1199840 (Sept. 12, 2001)", sort: "hennessey v connecticut valley fitness centers inc superior court judicial district of hartford docket no cv980504488s 2001 wl 1199840 sept 12 2001"}
+  herron-app: {kind: cases, cite: "*Herron v. Daniels*, 208 Conn. App. 75, 264 A.3d 184 (2021)", sort: "herron v daniels 208 conn app 75 264 a3d 184 2021"}
+  herron-super: {kind: cases, cite: "*Herron v. Daniels*, Superior Court, judicial district of Fairfield at Bridgeport, Housing Session, Docket No. BPH-CV18-6005426-S, 2019 WL 7497101 (Oct. 21, 2019), aff'd, 208 Conn. App. 75, 264 A.3d 184 (2021)", sort: "herron v daniels superior court judicial district of fairfield at bridgeport housing session docket no bphcv186005426s 2019 wl 7497101 oct 21 2019 affd 208 conn app 75 264 a3d 184 2021"}
+  hinchliffe: {kind: cases, cite: "*Hinchliffe v. American Motors Corp.*, 184 Conn. 607, 440 A.2d 810 (1981)", sort: "hinchliffe v american motors corp 184 conn 607 440 a2d 810 1981"}
+  lenz: {kind: cases, cite: "*Lenz v. CNA Assurance Co.*, 42 Conn. Supp. 514, 630 A.2d 1082 (1993)", sort: "lenz v cna assurance co 42 conn supp 514 630 a2d 1082 1993"}
+  mead: {kind: cases, cite: "*Mead v. Burns*, 199 Conn. 651, 509 A.2d 11 (1986)", sort: "mead v burns 199 conn 651 509 a2d 11 1986"}
+  murphy: {kind: cases, cite: "*Murphy v. McNamara*, 36 Conn. Supp. 183, 416 A.2d 170 (1979)", sort: "murphy v mcnamara 36 conn supp 183 416 a2d 170 1979"}
+  odell: {kind: cases, cite: "*Odell v. Wallingford Mun. Federal Credit Union*, Superior Court, judicial district of New Haven, Docket No. NNH-CV-106012228-S, 2013 WL 4734783 (Aug. 8, 2013)", sort: "odell v wallingford mun federal credit union superior court judicial district of new haven docket no nnhcv106012228s 2013 wl 4734783 aug 8 2013"}
+  sportsmens: {kind: cases, cite: "*Sportsmen's Boating Corp. v. Hensley*, 192 Conn. 747, 474 A.2d 780 (1984)", sort: "sportsmens boating corp v hensley 192 conn 747 474 a2d 780 1984"}
+  state-farm: {kind: cases, cite: "*State Farm Mutual Ins. Co. v. Campbell*, 538 U.S. 408 (2003)", sort: "state farm mutual ins co v campbell 538 us 408 2003"}
+  thorne: {kind: cases, cite: "*Thorne v. Mackeyboy Auto, LLC*, Superior Court, judicial district of New Haven, Docket No. NNH-CV11-6017210-S, 2013 WL 5879081 (Oct. 11, 2013)", sort: "thorne v mackeyboy auto llc superior court judicial district of new haven docket no nnhcv116017210s 2013 wl 5879081 oct 11 2013"}
+  ulbrich: {kind: cases, cite: "*Ulbrich v. Groth*, 310 Conn. 375, 78 A.3d 76 (2013)", sort: "ulbrich v groth 310 conn 375 78 a3d 76 2013"}
+  waterbury: {kind: cases, cite: "*Waterbury Petroleum Products, Inc. v. Canaan Oil and Fuel Co., Inc.*, 193 Conn. 208, 477 A.2d 988 (1984)", sort: "waterbury petroleum products inc v canaan oil and fuel co inc 193 conn 208 477 a2d 988 1984"}
+  white-app: {kind: cases, cite: "*White v. FCW Law Offices*, 228 Conn. App. 1, 323 A.3d 406 (2024)", sort: "white v fcw law offices 228 conn app 1 323 a3d 406 2024"}
+  white-super: {kind: cases, cite: "*White v. FCW Law Offices*, Superior Court, judicial district of Middlesex, Docket No. MMX-CV20-6028538-S, 2023 WL 4322728 (Jun. 28, 2023), aff'd in part, rev'd in part, 228 Conn. App. 1 (2024)", sort: "white v fcw law offices superior court judicial district of middlesex docket no mmxcv206028538s 2023 wl 4322728 jun 28 2023 affd in part revd in part 228 conn app 1 2024"}
+  cga-42-110b-a: {kind: statutes, cite: "General Statutes § 42-110b(a)", sort: "general statutes 42110ba"}
+  cga-42-110b-d: {kind: statutes, cite: "General Statutes § 42-110b(d)", sort: "general statutes 42110bd"}
+  cga-42-110g-a: {kind: statutes, cite: "General Statutes § 42-110g(a)", sort: "general statutes 42110ga"}
+  cga-42-110g-d: {kind: statutes, cite: "General Statutes § 42-110g(d)", sort: "general statutes 42110gd"}
+  cga-52-571h: {kind: statutes, cite: "General Statutes § 52-571h", sort: "general statutes 52571h"}
+  pa-76-303: {kind: statutes, cite: "Public Acts 1976, No. 76-303", sort: "public acts 1976 no 76303"}
+  house-1976: {kind: other, cite: "Conn. Gen. Assembly House Proceedings, Pt. 6, 1976 Sess.", sort: "conn gen assembly house proceedings pt 6 1976 sess"}
+  joint-1973: {kind: other, cite: "Conn. Joint Standing Committee Hearings, General Law, Pt. 2, 1973 Sess.", sort: "conn joint standing committee hearings general law pt 2 1973 sess"}
+  olr-97: {kind: other, cite: "Office of Legislative Research, Research Report 97-R-1140 (Oct. 2, 2003)", sort: "office of legislative research research report 97r1140 oct 2 2003"}
+  langer: {kind: other, cite: "Robert M. Langer & David E. Ormstedt, *The Connecticut Unfair Trade Practices Act*, 54 Conn. B.J. 388 (1980)", sort: "robert m langer david e ormstedt the connecticut unfair trade practices act 54 conn bj 388 1980"}
 ---
 
 # STATEMENT OF ISSUE
@@ -92,7 +92,7 @@ Each year, commercial parties of all types rip off Connecticut residents through
 
 With respect to this matter and all others that may enter our court system moving forward, the Appellate Court's decision to preclude recovery of CUTPA punitives based on the recovery of statutory double or treble damages threatens to undermine CUTPA's design and purpose. It would enable predatory businesses to limit their liability, weakening the statute's deterrent effect and forcing claimants to choose between statutory remedies, thereby discouraging valid claims and restricting the full scope of consumer protection that CUTPA was intended to provide. Courts must retain discretion to stack CUTPA punitives on top of statutory multiple damages in order to deter egregious misconduct and repeated "minor" infractions for which formulaic multipliers are insufficient.
 
-The amicus curiae therefore respectfully asks that this Court reverse the judgment of the Appellate Court and remand with direction to have the trial court (1) enter an award of treble damages pursuant to [§ 52-571h](toa:cga-52-571h) and (2) exercise its discretion in awarding punitive damages under CUTPA.
+The amicus curiae therefore respectfully asks that this Court reverse the judgment of the Appellate Court and remand with direction to have the trial court (1) enter an award of treble damages pursuant to § [52-571h](toa:cga-52-571h) and (2) exercise its discretion in awarding punitive damages under CUTPA.
 
 # 2. FACTS OF THE CASE
 
@@ -174,7 +174,7 @@ Because double and treble damages will not always change the decision-making cal
 
 # 4. CONCLUSION
 
-For the foregoing reasons, the Amicus Curiae respectfully requests that this Court reverse the judgment of the Appellate Court and remand with direction to have the trial court (1) enter an award of treble damages pursuant to [§ 52-571h](toa:cga-52-571h) and (2) exercise its discretion in awarding punitive damages under CUTPA.
+For the foregoing reasons, the Amicus Curiae respectfully requests that this Court reverse the judgment of the Appellate Court and remand with direction to have the trial court (1) enter an award of treble damages pursuant to § [52-571h](toa:cga-52-571h) and (2) exercise its discretion in awarding punitive damages under CUTPA.
 
 [^1]: The students of the Housing Clinic are the primary authors of this brief. This brief does not purport to represent the institutional views of LSO, the Yale Law School, or Yale University. Furthermore, the undersigned counsel confirms, in accordance with Practice Book § 67-7A, that no counsel for any party to this case wrote this brief in whole or in part and neither counsel nor any party contributed to the cost of the preparation or submission of this brief.
 
