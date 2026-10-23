@@ -1,10 +1,8 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) but do not yet break every line where
-# typst does. Differences of the shared model, recorded in docs/open-items/fb-595.54.59.md, are reported, not counted:
-# - both: the numbered list inside a quotation (page 16, the Implied Consent warnings) is set narrower by typst than
-#   by LaTeX and Word (typst ends "I am", the others "I am requesting").
-# - latex: page 12 line 17, a line typst fills to 503.99 pt of a 504 pt measure ("... is given effect by").
-# - docx: page 18 sets one body line more above its notes than typst (pages 19-21 then end elsewhere); the table of
-#   authorities misses note pages whose cite repeats an earlier note's (p10 Provaznik, p16 Teson, p21-22 § 577.010).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: typst sets the
+# numbered list inside the quotation on page 16 narrower than LaTeX and Word (its lines end by 490.2 pt of the 504 pt
+# quotation measure; LaTeX and Word reach 502.2), 9 lines in LaTeX and Word (XENG-003); Word also sets a body line
+# more above the notes of page 18, so pages 19-21 end elsewhere (XENG-002; a folder footnote clearance under 9.1 pt
+# fixes them and moves page 7's end in typst). Shared-model gaps, recorded in docs/open-items/fb-595.54.59.md.
 params:
   cross_engine: report

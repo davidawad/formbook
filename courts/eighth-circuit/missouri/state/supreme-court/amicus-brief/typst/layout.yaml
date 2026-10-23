@@ -7,6 +7,9 @@ pitch:
   body: 22.45             # MO-FORM-003: line spacing not less than 1.5 (1.5 x the 14.95 pt single line, to the twip above)
   single: 14.95           # MO-FORM-003: caption, headings, quotations, footnotes, certificates, signature (1.15 x 13 pt)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # MO-FORM-002: not less than one inch on every side
+# LaTeX only: the text block 0.1 pt wider than typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias): typst
+# fills p12 line 17 to within hundredths of a point of the 504 pt measure, newtx's per-glyph drift set it a word short.
+latex_bias: 0.1
 indent: 36
 page_number: {align: center, from: 1}   # MO-FORM-001: every page, the cover included, numbered at the bottom
 footnote: {size: 13, gap: 6.5}           # MO-FORM-003, -004: footnotes 13 point, single spaced
