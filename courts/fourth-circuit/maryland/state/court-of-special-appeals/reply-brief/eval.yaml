@@ -8,7 +8,8 @@ font:
 # the typst render does, so a difference fails; a difference that is the shared model's is reported, not gated
 # (docs/open-items/fb-595.54.58.md).
 params:
-  cross_engine: report
-  # latex: typst breaks before "¶¶ 40–41", pdfTeX after "40–" (p11 line 11), and a long URL of a footnote elsewhere
-  # (p32 line 16). docx: pages 30 to 41 start on other words, from p30 (its footnote 4 runs long URLs; the cause is not
-  # isolated), and the page numbers of the tables follow.
+  cross_engine: gate
+  # docx: LibreOffice keeps the last line of p29, which cites footnote 4 (long URLs), and sets the note on p30, where
+  # typst moves the line with it (p30 line 1); pages 30 to 41 then start on other words and the tables' page numbers
+  # follow (open item 11, docs/open-items/fb-595.54.58.md). latex breaks every line as typst does.
+  cross_engine_docx: report

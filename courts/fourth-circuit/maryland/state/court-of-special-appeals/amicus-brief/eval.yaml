@@ -8,7 +8,8 @@ font:
 # the typst render does, so a difference fails; a difference that is the shared model's is reported, not gated
 # (docs/open-items/fb-595.54.58.md).
 params:
-  cross_engine: report
-  # latex: typst breaks after the en dash of "1688–1766" in the table of authorities (p3 line 21) and "Success –"
-  # (p4 line 9), pdfTeX does not; a URL of footnote breaks elsewhere (p11 line 23). docx: pages 13 to 22
-  # start on other words, from p13 (a page of notes; the cause is not isolated), and the tables' page numbers follow.
+  cross_engine: gate
+  # docx: LibreOffice keeps the line "...District." that cites footnote 32 on p12 and sets the note on p13, where typst
+  # moves the line with it (p13 line 1); pages 13 to 22 then start on other words and the tables' page numbers follow
+  # (open item 11, docs/open-items/fb-595.54.58.md). latex breaks every line as typst does.
+  cross_engine_docx: report
