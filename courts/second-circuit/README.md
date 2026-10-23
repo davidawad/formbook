@@ -19,7 +19,7 @@ Courts under `courts/second-circuit` (19).
 | [United States Bankruptcy Court, D. Vermont](vermont/federal/bankruptcy-district) | `vtb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Vermont](vermont/federal/district) | `vtd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Connecticut Court of Appeals](connecticut/state/court-of-appeals) | `connappct` | up for review | 6/6 | 6/6 | 5/5 | 29 |
-| [Connecticut Supreme Court](connecticut/state/supreme-court) | `conn` | up for review | 7/7 | 6/6 | 6/6 | 29 |
+| [Connecticut Supreme Court](connecticut/state/supreme-court) | `conn` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Appellate Terms of the Supreme Court of New York](new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [New York Court of Appeals](new-york/state/court-of-appeals) | `ny` | up for review | 8/8 | 7/7 | 7/7 | 29 |
 | [The Four Departments of the Appellate Division](new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | up for review | 4/4 | 1/1 | 4/4 | 29 |
