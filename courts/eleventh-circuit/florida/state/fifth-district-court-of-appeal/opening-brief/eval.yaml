@@ -4,9 +4,10 @@ font:
   size_pt: 14
   pdf_prefix: "TeXGyreBonum"
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex/ and docx/ are generated from typst/layout.yaml.
-# LaTeX is gated (873/873 lines). Word is reported (pages equal, 15 page ends differ from page 22): LibreOffice keeps a
-# body line more above note 1 on page 21 than typst and LaTeX do (Word's footnote area, an open item of the model:
-# docs/open-items/fb-595.54.41.md), and every later page starts a line early.
+# LaTeX is gated (873/873 lines). Word is reported (pages equal, 3 page ends differ, 853/873 lines): with the footnote
+# clearance at 7.5 (Word's footnote area, as the Wisconsin folders) Word keeps the notes' pages as typst does; it then
+# sets page 35 line 16 a word short (LibreOffice sets Bonum up to 1.62 pt wider over a line, and no docx_bias fits:
+# -0.2 already carries an extra word onto page 33 line 7; docs/open-items/fb-595.54.41.md).
 params:
   cross_engine: gate
   cross_engine_docx: report

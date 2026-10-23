@@ -11,7 +11,7 @@ pitch:
 margin: {top: 76, bottom: 76, left: 72, right: 72}
 indent: 36                # style: half-inch first-line indent
 page_number: {align: center, from: 1}   # style (Rule 9.045 sets none; the filed briefs): the cover is page 1
-footnote: {size: 14, gap: 7}             # FLADISTCTAPP5-FORM-006: 14 point, single spaced
+footnote: {size: 14, gap: 7, clearance: 7.5}   # FLADISTCTAPP5-FORM-006: 14 point, single spaced; clearance: Word's footnote area (7.5 as the Wisconsin folders, fb-595.54.82)
 quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # FLADISTCTAPP5-FORM-006: quotations single spaced, 14 point
 heading:                                 # FLADISTCTAPP5-FORM-006: at the text size, single spaced
   - {align: center, bold: true, upper: true, above: 19.6, below: 14}
