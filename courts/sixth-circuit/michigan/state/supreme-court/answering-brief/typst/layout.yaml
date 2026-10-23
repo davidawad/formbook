@@ -8,6 +8,11 @@ pitch:
   single: 13.8            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 12 pt)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # MSC-FORM-003, MCR 7.212(B)(5): at least one-inch margins
 indent: 36
+# Word only: the right margin 0.05 pt (1 twip) wider. LibreOffice rounds each run of text to its layout units and fit
+# "Appeal." on the first line of note 1 (page 7), a line typst fills to within its last fraction of a point; the note
+# grew a line and every later page shifted. Measured as the least bias at which pages 7 to 14 break as in typst
+# (0.1 to 0.3 keep that and break 4 to 6 other lines apart from typst).
+docx_bias: 0.05
 page_number: {align: center, front: lower-roman}   # MSC-FORM-006: the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
 footnote: {size: 12, gap: 6}             # MSC-FORM-004: footnotes may be single spaced
 quote: {left: 36, right: 36, above: 7.2, below: 12, gap: 7.2}   # MSC-FORM-004: quotations may be single spaced

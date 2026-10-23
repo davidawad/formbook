@@ -3,7 +3,3 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # Word's page lookup misses the authority find "Pompey" in footnote 4 on page 6 (INPUT-reply-brief: typst and
-  # LaTeX list Pompey at 4, 5, 6, Word at 4, 5; the page itself breaks alike) (docs/open-items/fb-595.54.31.md);
-  # reported, not gated.
-  cross_engine_docx: report

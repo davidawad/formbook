@@ -10,9 +10,67 @@ return require("docx.xdoc")({
     ["top"] = 72,
     ["bottom"] = 72,
     ["left"] = 72,
-    ["right"] = 72,
+    ["right"] = 72.05,
   },
   ["indent"] = 36,
+  ["closing"] = {
+    {
+      ["group"] = {
+        {
+          ["text"] = "{date}",
+          ["optional"] = true,
+        },
+        {
+          ["each"] = "signature",
+          ["blocks"] = {
+            {
+              ["text"] = "{firm}",
+              ["left"] = 208.8,
+              ["above"] = 14.4,
+            },
+            {
+              ["text"] = "/s/ {signer}",
+              ["underline"] = true,
+              ["left"] = 208.8,
+              ["above"] = 7.2,
+            },
+            {
+              ["text"] = "{lines}",
+              ["left"] = 208.8,
+            },
+          },
+        },
+      },
+      ["above"] = 21.6,
+    },
+    {
+      ["each"] = "certificates",
+      ["blocks"] = {
+        {
+          ["break"] = true,
+        },
+        {
+          ["text"] = "{heading}",
+          ["align"] = "center",
+          ["bold"] = true,
+          ["upper"] = true,
+        },
+        {
+          ["text"] = "{text}",
+          ["pitch"] = "body",
+          ["indent"] = 36,
+          ["above"] = 4.8,
+        },
+        {
+          ["text"] = "/s/ {signer}",
+          ["underline"] = true,
+          ["left"] = 208.8,
+          ["optional"] = true,
+          ["above"] = 4.8,
+        },
+      },
+    },
+  },
   ["page_number"] = {
     ["align"] = "center",
     ["front"] = "lower-roman",
@@ -171,64 +229,6 @@ return require("docx.xdoc")({
       ["bold"] = true,
       ["above"] = 13.2,
       ["below"] = 8.4,
-    },
-  },
-  ["closing"] = {
-    {
-      ["group"] = {
-        {
-          ["text"] = "{date}",
-          ["optional"] = true,
-        },
-        {
-          ["each"] = "signature",
-          ["blocks"] = {
-            {
-              ["text"] = "{firm}",
-              ["left"] = 208.8,
-              ["above"] = 14.4,
-            },
-            {
-              ["text"] = "/s/ {signer}",
-              ["underline"] = true,
-              ["left"] = 208.8,
-              ["above"] = 7.2,
-            },
-            {
-              ["text"] = "{lines}",
-              ["left"] = 208.8,
-            },
-          },
-        },
-      },
-      ["above"] = 21.6,
-    },
-    {
-      ["each"] = "certificates",
-      ["blocks"] = {
-        {
-          ["break"] = true,
-        },
-        {
-          ["text"] = "{heading}",
-          ["align"] = "center",
-          ["bold"] = true,
-          ["upper"] = true,
-        },
-        {
-          ["text"] = "{text}",
-          ["pitch"] = "body",
-          ["indent"] = 36,
-          ["above"] = 4.8,
-        },
-        {
-          ["text"] = "/s/ {signer}",
-          ["underline"] = true,
-          ["left"] = 208.8,
-          ["optional"] = true,
-          ["above"] = 4.8,
-        },
-      },
     },
   },
 })
