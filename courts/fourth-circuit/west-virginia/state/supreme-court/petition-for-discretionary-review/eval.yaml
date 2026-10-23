@@ -1,12 +1,13 @@
 # West Virginia Rule 10 brief form for a petition for discretionary review of an ICA decision (rules.md WVA-BRIEF rows).
 # The default checks assume 12 pt type and 1 in margins, which RAP 38(a) and 38(a) state. The page limit is 40 pages
 # excluding the cover, tables and certificate of service (RAP 38(c)); total pages here are a stricter count.
-# Gate 4 CROSS-ENGINE: report, not gate. The latex and docx engines are generated from typst/layout.yaml (`fb engines
-# gen`, fb-595.54.12); each meets an open defect of the shared model (docs/open-items/fb-595.54.21.md):
-# - latex: footnote 2 follows a section-sign citation ("§ 11-10A-19(e),[^2]"); the model binds the token after "§"
-#   in an \mbox, the note with it, and LaTeX drops a note set inside an \mbox: the note's text is missing (p10), the
-#   page runs on and the latex render has 13 pages to typst's 14; H.D. 4305, cited only in that note, has no page.
-# - docx: Word's table of authorities lists Hudkins at 9 only (typst 8, 9): its two marks carry the same text.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
   page_limit: 40
-  cross_engine: report
+  cross_engine: gate
+  # Word's table of authorities lists Hudkins at 9 only (typst and LaTeX 8, 9): its two marks carry the same text
+  # and the Word page lookup finds one page (docs/open-items/fb-595.54.21.md, B4); lines and page ends are otherwise
+  # identical (295/296). Reported, not gated.
+  cross_engine_docx: report

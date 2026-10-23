@@ -1,2 +1,3 @@
 PASS
-173516621a8cfa91d08294295354a04e9d0c38a3edb56e19567a2589da75b3cc  usage/OUTPUT-petition-for-discretionary-review.latex.pdf
+4c6807d565052231d1298375a6fd2a166d634eccb7f22d071b4c88aa5184919c  usage/OUTPUT-petition-for-discretionary-review.latex.pdf
+55e0d415415677134cea081d3d8f23b70656a8a78dc2a8bd665375ae32ee4a25  usage/OUTPUT-petition-for-discretionary-review.typst.pdf
