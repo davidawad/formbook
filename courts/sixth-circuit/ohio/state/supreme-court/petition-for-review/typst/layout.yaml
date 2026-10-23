@@ -1,0 +1,62 @@
+# Ohio Supreme Court (ohio): memorandum in support of jurisdiction (RoP 7.02). The whole layout, as data for the shared
+# document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`,
+# fb-595.54.12). Numbers trace to RoP 3.07, 3.09 and 7.02 (../../rules.md, OHIO-*); lengths in points. No case text
+# here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # OHIO-FORM-004: at least 12-point type, footnotes and quotations too (RoP 3.09(B)(1)(b), (B)(3))
+pitch:
+  body: 27.6              # OHIO-FORM-005: double-spaced (RoP 3.09(B)(3); Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, footnotes, quotations, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # OHIO-FORM-002: at least one inch on all sides (RoP 3.09(B)(2)(c))
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the contents i, the memorandum from 1 (RoP 7.02(B)(1) counts numbered pages)
+footnote: {size: 12, gap: 6}             # OHIO-FORM-004, -005: 12-point footnotes, which may be single-spaced
+quote: {left: 36, right: 36, above: 12, below: 12}   # OHIO-FORM-005: quotations may be single-spaced
+heading:
+  - {align: center, bold: true, above: 14.4, below: 12}
+  - {bold: true, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, above: 13.2, below: 7.2}
+# The cover (RoP 3.07(A)-(G), OHIO-COVER-001, OHIO-JURIS-003): the court, the case number and the court of appeals
+# appealed from (RoP 3.07(C)), the parties, the title, then counsel two side by side.
+cover:
+  - {text: "IN THE SUPREME COURT OF OHIO", align: center, bold: true}
+  - {text: "Case No. {case_number}", align: center, above: 6}
+  - {text: "{lower_court}", align: center, optional: true}
+  - each: caption
+    above: 12
+    between:
+      - {text: "-VS-", left: 36, above: 6, below: 6}
+    blocks:
+      - {text: "{names}"}
+      - {text: "{designation}", align: right}
+  - {text: "{brief_title}", align: center, bold: true, above: 9.6}
+  - {text: "{party_line}", optional: true, above: 6}
+  - columns: {each: counsel, per_row: 2, row_gap: 9.6, blocks: [{text: "{names}"}, {text: "{lines}", italic: true}]}
+    gutter: 21.6
+    above: 14.4
+# RoP 7.02(C)(1), OHIO-JURIS-002: the table of contents, the propositions of law in order, on its own page.
+contents: {title: "TABLE OF CONTENTS", depth: 2, col: 36, hang: 18, step: 18, above: 9.6}
+# The date and the signature blocks (OHIO-SIG-001: "/s/" and the typed name, in the frontmatter's lines) side by side,
+# never split; then the certificate of service on a page of its own (RoP 3.11(B)(1)(a); OHIO-SERV-001, OHIO-SERV-002).
+closing:
+  - group:
+      - {text: "DATE: {dated}", optional: true, pitch: body}
+      - {text: "Respectfully submitted,", pitch: body}
+      - columns: {each: signature, per_row: 2, row_gap: 9.6, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+    above: 13.8
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 14.4}
+      - {text: "A copy of the foregoing was served by {service.method} on {service.date} upon the following counsel of record:", pitch: body, indent: 36}
+      - columns: {each: service.recipients, per_row: 2, row_gap: 9.6, blocks: [{text: "{names}"}, {text: "{lines}"}]}
+        gutter: 21.6
+        above: 9.6
+      - {text: "{service.signer}", above: 16.8}
+  # A word-count certificate, for a filer who gives one (none is required: the page limit applies).
+  - when: word_count
+    blocks:
+      - {break: true}
+      - {text: "WORD-COUNT CERTIFICATE", align: center, bold: true, below: 14.4}
+      - {text: "{word_count}", pitch: body, indent: 36}
+      - {text: "{word_count_signer}", above: 9.6}

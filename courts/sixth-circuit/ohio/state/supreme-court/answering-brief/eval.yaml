@@ -1,0 +1,10 @@
+params:
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+  # the typst render does, so a difference fails.
+  cross_engine: gate
+  # Word only: LibreOffice sets the line that cites footnote 6 on p15 and the note on p16 (the note does not fit p15 and
+  # keeps its lines); typst moves the line on with its note, so p15 onward breaks apart and the tables' pages with it
+  # (XENG-001..003; measured fb-595.54.82, the same at a footnote clearance of 7.5 or 9.1). A renderer limitation, not
+  # the template's (docs/open-items/fb-595.54.82.md, Word's note placement).
+  cross_engine_docx: report

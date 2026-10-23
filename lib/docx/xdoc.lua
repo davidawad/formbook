@@ -16,6 +16,7 @@
 -- lists as List Item paragraphs (lib/docx/xengine.lua), headings written here; footnotes are Word's own.
 local xe = require("docx.xengine")
 local xd = require("pandoc.xdoc")
+local common = require("pandoc.xengine")
 
 local function tw(x) return math.floor((tonumber(x) or 0) * 20 + 0.5) end
 
@@ -25,16 +26,27 @@ local function tw(x) return math.floor((tonumber(x) or 0) * 20 + 0.5) end
 -- And one after a hyphen that starts a word before a letter ("social -media"): typst breaks there, LibreOffice does not
 -- (Unicode 15.1 LB20a).
 local function breaks(x)
-  -- a URL breaks only between its pieces (lib/pandoc/xdoc.lua url_pieces), as typst and LaTeX break it
+  -- a URL breaks only between its pieces (lib/pandoc/xdoc.lua url_pieces), as typst and LaTeX break it; a hyphen before
+  -- a digit inside a piece is held by a word joiner, not Word's no-break hyphen (lib/docx/xengine.lua), which LibreOffice
+  -- broke a piece at when it ran over a line ("8796-5576b" in a table row)
   local pre, pieces, post = xd.url_pieces(x.text)
-  if pre then return pandoc.Str(pre .. table.concat(pieces, "\u{200B}") .. post) end
+  if pre then
+    for i, p in ipairs(pieces) do pieces[i] = p:gsub("%-(%d)", "-\u{2060}%1") end
+    return pandoc.Str(pre .. table.concat(pieces, "\u{200B}") .. post)
+  end
   return pandoc.Str((x.text:gsub("%)%(", ")\u{2060}("):gsub("([^%s/])/(%a)", "%1/\u{200B}%2"):gsub("^%-(%a)", "-\u{200B}%1")))
 end
 
--- A doubled section sign stays with its number, and no line breaks before a closing mark (lib/pandoc/xdoc.lua
--- bind_double_signs, bind_punct).
+-- The space before a closing mark that must not break (xd.bind_punct): a no-break space, or in a face whose space is a
+-- quarter em (Times New Roman: the layout has no face_advances) a four-per-em space and a word joiner. LibreOffice
+-- breaks a line at a no-break space when a run of them overflows (". . . ." after a word), and fits such a run as if it
+-- were wider; it keeps the joiner (fb-595.54.16, measured).
+local GLUE = "\u{00A0}"
+
+-- A doubled section sign stays with its number, no line breaks before a closing mark (lib/pandoc/xdoc.lua
+-- bind_double_signs, bind_punct), hyphen runs as CommonMark sets them (lib/pandoc/xengine.lua dashes).
 local function bind_double_signs(l)
-  return xd.bind_punct(xd.bind_double_signs(l), function() return pandoc.Str("\u{00A0}") end)
+  return xd.bind_punct(xd.bind_double_signs(common.dashes(l)), function() return pandoc.Str(GLUE) end)
 end
 
 local TBL = '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/>'
@@ -43,6 +55,7 @@ local TBL = '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="0" w:type="d
   .. 'w:noVBand="0"/>'
 
 return function(spec)
+  GLUE = spec.face_advances == nil and "\u{2005}\u{2060}" or "\u{00A0}"
   local PAGE_W, PAGE_H = xd.paper(spec)
   local TEXTW = tw(PAGE_W - spec.margin.left - spec.margin.right)
 
@@ -79,8 +92,10 @@ return function(spec)
   end
 
   local function rule(n, before, after)
-    return xe.para({ '<w:pBdr><w:top w:val="single" w:sz="' .. math.floor(n.w * 8 + 0.5)
-      .. '" w:space="0" w:color="000000"/></w:pBdr>', xe.spacing(before, after, tw(xd.RULE)) }, "")
+    -- a rule of 0: the one-twip paragraph without a border
+    local border = n.w > 0 and ('<w:pBdr><w:top w:val="single" w:sz="' .. math.floor(n.w * 8 + 0.5)
+      .. '" w:space="0" w:color="000000"/></w:pBdr>') or ""
+    return xe.para({ border, xe.spacing(before, after, tw(xd.RULE)) }, "")
   end
 
   local emit_list
@@ -233,9 +248,11 @@ return function(spec)
       labeltab = w ~= nil } }
   end
 
+  -- a footnote anywhere in the paragraph (inside emphasis or a link too)
   local function has_note(inlines)
-    for _, el in ipairs(inlines) do if el.t == "Note" then return true end end
-    return false
+    local found = false
+    pandoc.Inlines(inlines):walk({ Note = function() found = true end })
+    return found
   end
 
   local list_items, needles_of
@@ -477,7 +494,7 @@ return function(spec)
   end
 
   -- The needles of a body block: a heading by its text and the text after it; each authority mark by its text and
-  -- the words after it in its run (kind N in a footnote).
+  -- the words after it in its run, and before it when few follow (kind N in a footnote).
   -- The numbering of the page labels (docxpages.rs `#section`): a numbering starts at the page of a needle; the one
   -- wanted next (`want`) starts at the next needle written.
   local sections, want, pn = {}, nil, 0
@@ -509,7 +526,8 @@ return function(spec)
       if k then
         occ[k] = (occ[k] or 0) + 1
         local e = sp.attributes["xd-find"]
-        needle("a" .. k .. "." .. occ[k], sp.attributes["xd-n"], e .. sp.attributes["xd-after"], e)
+        needle("a" .. k .. "." .. occ[k], sp.attributes["xd-n"],
+          (sp.attributes["xd-before"] or "") .. e .. sp.attributes["xd-after"], e)
       end
     end })
   end
@@ -605,11 +623,7 @@ return function(spec)
         for _, e in ipairs(members) do
           local ls = {}
           for i = 1, (counts[tostring(e.k)] or 0) do ls[#ls + 1] = labels["a" .. e.k .. "." .. i] or "00" end
-          local list = xd.page_list(e, ls)
-          local n = 0
-          for _ in list:gmatch("[^,]+") do n = n + 1 end
-          local passim = a.passim and n >= a.passim
-          if passim then list = "passim" end
+          local list, passim = xd.page_list(e, ls, a.passim)
           out[#out + 1] = row(a.above, 0, tonumber(a.hang) or 0, math.max(tw(a.col or 56), list_width(list)),
             xe.inl(bind_double_signs(xd.inlines(xd.keyed_text(g, e)):walk({ Str = breaks }))), list, pitch, passim)
         end
@@ -637,9 +651,9 @@ return function(spec)
         local e = entries[k]
         local ls = {}
         for i = 1, (counts[tostring(k)] or 0) do ls[#ls + 1] = labels["a" .. k .. "." .. i] or "00" end
-        local list = xd.page_list(e, ls)
+        local list, passim = xd.page_list(e, ls, a.passim)
         out[#out + 1] = row(a.above, 0, tonumber(a.hang) or 0, math.max(tw(a.col or 56), list_width(list)),
-          xe.inl(bind_double_signs(xd.inlines(e.cite):walk({ Str = breaks }))), list, pitch)
+          xe.inl(bind_double_signs(xd.inlines(e.cite):walk({ Str = breaks }))), list, pitch, passim)
       end
     end
     s.prev_after = 0
@@ -763,12 +777,17 @@ return function(spec)
         for _, x in ipairs(emit_list(heading(b, first and k == 1), s, false)) do raw(x) end
       elseif b.t == "Para" or b.t == "Plain" then
         flush()
-        local st = para == "Body Text" and has_note(b.content) and "Body Text Note" or para
+        -- (layout.yaml footnote.widows: Body Text, with widow control, for it too)
+        local widows = spec.footnote and spec.footnote.widows
+        local st = para == "Body Text" and not widows and has_note(b.content) and "Body Text Note" or para
         -- after a paragraph or list of the body, the space between them (paragraph_gap): the style's Gap variant
         if gapped() then st = st .. " Gap" end
         out:insert(styled(st, b.content))
         -- the space it leaves below: Body Text's (paragraph_gap), the tail's gap
         s.prev_after = para:find("^Body Text") and tw(spec.paragraph_gap) or tw(spec.tail and spec.tail.gap)
+      elseif b.t == "Table" then
+        -- a table of the body (lib/pandoc/xdoc.lua table_nodes): its rules and rows as the layout's blocks
+        for _, x in ipairs(emit_list(xd.table_nodes(spec, b), s, false)) do raw(x) end
       elseif b.t == "BlockQuote" then
         flush()
         local ps = b.content
@@ -820,10 +839,10 @@ return function(spec)
         local meta = xd.computed(spec, xd.context(spec, xd.meta()))
         local entries = xd.authority_entries(meta)
         local _, keyed = xd.keyed(spec, meta)
-        local blocks = xd.mark(xd.commonmark_lists(doc.blocks):walk({ Inlines = bind_double_signs }), entries,
-          function(k, note, after, find)
+        local blocks = xd.mark(xd.attach_notes(xd.commonmark_lists(doc.blocks)):walk({ Inlines = bind_double_signs }), entries,
+          function(k, note, after, find, before)
             return pandoc.Span({}, { ["xd-k"] = tostring(k), ["xd-n"] = note and "N" or "B", ["xd-after"] = after,
-              ["xd-find"] = find })
+              ["xd-find"] = find, ["xd-before"] = before or "" })
           end, keyed)
         xd.check(spec, doc.blocks)
         xd.switch_contents(spec, meta)

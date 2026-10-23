@@ -1,0 +1,64 @@
+# Ohio Supreme Court (ohio): amicus brief (RoP 16.06). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to RoP 3.07, 3.09 and 16.02-16.06 (../../rules.md, OHIO-*); lengths in points. No case text here: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # OHIO-FORM-004: at least 12-point type, footnotes and quotations too (RoP 3.09(B)(1)(b), (B)(3))
+pitch:
+  body: 27.6              # OHIO-FORM-005: double-spaced (RoP 3.09(B)(3); Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, footnotes, quotations, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # OHIO-FORM-002: at least one inch on all sides (RoP 3.09(B)(2)(c))
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the contents i, the brief from 1 (RoP 16.02(C)(1) counts numbered pages)
+footnote: {size: 12, gap: 6}             # OHIO-FORM-004, -005: 12-point footnotes, which may be single-spaced
+quote: {left: 36, right: 36, above: 12, below: 12}   # OHIO-FORM-005: quotations may be single-spaced
+heading:
+  - {align: center, bold: true, above: 14.4, below: 12}
+  - {bold: true, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, above: 13.2, below: 7.2}
+# The cover (RoP 3.07(A)-(G), OHIO-COVER-001; RoP 16.06(B)(1), OHIO-AMIC-002): the court, the caption beside the case
+# number, the proceeding and the court appealed from, the title, the party supported, then counsel side by side.
+cover:
+  - {text: "IN THE SUPREME COURT OF OHIO", align: center, bold: true}
+  - columns:
+      - width: 244.8
+        blocks:
+          - each: caption
+            blocks:
+              - {text: "{names}", above: 12}
+              - {text: "{designation}", left: 129.6, above: 4.8}
+      - blocks:
+          - {text: "Supreme Court Case No. {case_number}", above: 12}
+          - {text: "{proceeding}", optional: true, above: 14.4}
+          - {text: "{lower_court}", optional: true, above: 14.4}
+    gutter: 18
+    above: 7.2
+  - {text: "{filing_type}", align: center, bold: true, above: 24}
+  - {text: "{on_behalf_of}", align: center, optional: true, above: 9.6}
+  # counsel set solid (single-spaced at a 12 pt pitch, RoP 3.09(B)(3)): three counsel groups in narrow columns fit the
+  # one cover page RoP 3.07 describes
+  # (the middle column, the widest, holds the longest line of a firm's e-mail address)
+  - columns: {each: counsel, widths: [136.8, 165.6, 136.8], blocks: [{text: "{lines}", pitch: 12}]}
+    gutter: 14.4
+    above: 21.6
+# RoP 16.02(B)(1) (as applied by RoP 16.06(A)): the table of contents, on its own page.
+contents: {title: "TABLE OF CONTENTS", depth: 2, col: 36, hang: 18, step: 18, above: 9.6}
+# Then the signature blocks (OHIO-SIG-001: "/s/" and the typed name, in the frontmatter's lines), never split, and the
+# certificate of service on a page of its own (RoP 3.11(B)(1)(a), OHIO-SERV-001).
+closing:
+  - group:
+      - {text: "Respectfully submitted,", pitch: body}
+      - columns: {each: signature, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 9.6
+    above: 13.8
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 14.4}
+      - {text: "I hereby certify that a copy of the foregoing was sent by {service.method} on {service.date} to the following counsel of record:", pitch: body, indent: 36}
+      - columns: {each: service.recipients, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 12
+      - columns: {each: signature, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 19.2

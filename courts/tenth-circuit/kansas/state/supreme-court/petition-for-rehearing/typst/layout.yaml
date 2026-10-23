@@ -1,0 +1,66 @@
+# Supreme Court of Kansas (kan): petition for rehearing (the exemplar is a motion for rehearing). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). The Kansas
+# Supreme Court Rules were not retrieved (../rules.md): the numbers are the default tier-1 set (data/checks-default.yaml)
+# and the conventions the filed exemplars share (KAN-FORM-*, KAN-CONT-001, KAN-CERT-001); lengths in points. No case
+# text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # default body size (12 pt)
+pitch:
+  body: 27.6              # KAN-FORM-002: double spaced (Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, quotations, notes, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # one inch on every side (default)
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the contents i, ii .., the body 1, 2 ..
+footnote: {size: 12, gap: 7}             # KAN-FORM-002: footnotes at the text size, single spaced
+quote: {left: 36, right: 36, above: 9.6, below: 14.4, gap: 6}   # KAN-FORM-002: block quotations indented, single
+heading:
+  - {align: center, bold: true, upper: true, above: 14.4, below: 9.6}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {italic: true, hang: 36, above: 12, below: 9.6}
+table: {pad: 3.6, gutter: 14.4, above: 14.4, below: 14.4, stroke: 0.5}
+# KAN-CONT-001: the cover carries the court, the caption with the party designations beside the case number, the
+# appeal lines, counsel's name, address and telephone, and the title between rules.
+cover:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF KANSAS", align: center, bold: true}
+  - columns:
+      - blocks:
+          - each: parties
+            blocks:
+              - {text: "{names}", above: 9.6}
+              - {text: "{designation}", italic: true, optional: true}
+      - width: 158.4
+        blocks:
+          - {text: "{case_number}"}
+    gutter: 21.6
+    above: 9.6
+  - {text: "{cover_lines}", align: center, optional: true, above: 14.4}
+  - {text: "{lower_court}", optional: true, above: 14.4}
+  - each: counsel
+    above: 14.4
+    blocks:
+      - {text: "{lines}", left: 230.4, above: 7.2}
+  - {rule: 0.75, above: 9.6}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 14, pitch: 16.1, above: 9.6, below: 9.6}
+  - {rule: 0.75}
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 18, step: 18, above: 10.8}
+# KAN-CERT-001: the signature block (it may run longer than a page: the date and the signature line kept with the
+# first line under it, an empty rule holding the space above), then the certificate of service on a page of its own.
+closing:
+  - {rule: 0, above: 21.6}
+  - {text: "{date}", indent: 36, optional: true, keep: true}
+  - {text: "s/ {signature.signer}", underline: true, left: 230.4, above: 4.8, keep: true}
+  - {text: "{signature.lines}", left: 230.4}
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 9.6}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36, lines: {pitch: single, indent: 0, left: 36, above: 7.2}}
+      - when: service.served
+        blocks:
+          - each: service.served
+            blocks: [{text: "{.}", left: 36, above: 7.2}]
+      - when: service.signature
+        blocks:
+          - {text: "s/ {service.signature.signer}", underline: true, left: 230.4, above: 21.6, keep: true}
+          - {text: "{service.signature.lines}", left: 230.4}

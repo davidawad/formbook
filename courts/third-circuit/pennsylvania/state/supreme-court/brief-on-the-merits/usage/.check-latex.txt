@@ -1,3 +1,3 @@
 PASS
-80ab3a66e20e02bcdf01f8115732f266cfb137722722ee778a1ba27dd9f1e96e  usage/OUTPUT-brief-on-the-merits.latex.pdf
-5e138edd553f639d7a98ea532e3efd9bf7037bc257f1e71d1cf5fb0984b9da4e  usage/OUTPUT-brief-on-the-merits.typst.pdf
+c53b456a49666a47dbbee70a0178610ef192665325dad26d8f5bfa0c5519c990  usage/OUTPUT-brief-on-the-merits.latex.pdf
+c1fe804ae42055ba9641082bd1339beb42dabe439d3256205cd99acf0fa84fcc  usage/OUTPUT-brief-on-the-merits.typst.pdf

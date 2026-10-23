@@ -1,0 +1,3 @@
+PASS
+6ac3514b5dc3f8d825f83d8e3471ced50765f829bda19da2b4992712c86b6c38  usage/OUTPUT-petition-for-rehearing.latex.pdf
+07212e347e4b54e5b60de32a5bf2168dbb502b16e35726bda697f73deaaa025c  usage/OUTPUT-petition-for-rehearing.typst.pdf

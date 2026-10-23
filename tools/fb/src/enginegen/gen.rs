@@ -80,7 +80,9 @@ pub fn validate(l: &Value, path: &str, errs: &mut Vec<String>) {
         Value::Number(n) => {
             let x = n.as_f64().unwrap_or(0.0);
             let leaf = path.rsplit('.').next().unwrap_or("");
-            if leaf == "size" || leaf == "from" {
+            if leaf == "latex_bias" {
+                // a measured fraction of a point (folder_latex_bias), not a length LaTeX or Word sets on its own
+            } else if leaf == "size" || leaf == "from" {
                 if (x * 2.0 - (x * 2.0).round()).abs() > 1e-9 {
                     errs.push(format!(
                         "layout.yaml: `{path}` = {x}: sizes are whole half points"
@@ -280,6 +282,33 @@ pub fn latex_bias(face: &str) -> f64 {
     }
 }
 
+/// The LaTeX bias of a folder: its layout's `latex_bias` (points, measured for the folder when one of its lines ties
+/// inside the face's window: the Wisconsin answering brief's 0.06, fb-595.54.16), else the face's (latex_bias).
+pub fn folder_latex_bias(l: &Value, face: &str) -> f64 {
+    l.get("latex_bias")
+        .and_then(Value::as_f64)
+        .unwrap_or_else(|| latex_bias(face))
+}
+
+/// The layout Word sets: `margin.right` wider by the folder's measured `docx_bias` (points, whole twips), the key
+/// itself dropped. LibreOffice rounds each run of text to its layout units, so a line of many runs (italics) that typst
+/// overflows by a tenth of a point may still fit there (the Wisconsin amicus brief's 0.1, fb-595.54.16; none by
+/// default).
+pub fn word_layout(l: &Value) -> Result<Value, String> {
+    let bias = num(l, "docx_bias", Some(0.0))?;
+    let mut ld = l.clone();
+    if let Some(m) = ld.as_mapping_mut() {
+        m.remove("docx_bias");
+    }
+    if bias != 0.0 {
+        let right = num(l, "margin.right", None)?;
+        if let Some(Value::Mapping(mg)) = ld.get_mut("margin") {
+            mg.insert("right".into(), (right + bias).into());
+        }
+    }
+    Ok(ld)
+}
+
 /// The page number's line: its pitch and baseline below the text (typst: footer-descent 30 % of the bottom margin,
 /// the number in a single line box), and Word's footer distance (from the page foot to the bottom of that box).
 pub fn footer(l: &Value) -> Result<(f64, f64, f64), String> {
@@ -301,8 +330,10 @@ pub fn generate(l: &Value, face: &str) -> Result<Files, String> {
     if !errs.is_empty() {
         return Err(errs.join("\n"));
     }
-    // Word measures a page list with the face's advances (Times New Roman's unless given)
-    let mut wl = l.clone();
+    // Word measures a page list with the face's advances (Times New Roman's unless given), its right margin wider by
+    // the folder's docx_bias (word_layout)
+    let ld = word_layout(l)?;
+    let mut wl = ld.clone();
     if let (Some(m), Some(a)) = (wl.as_mapping_mut(), face_advances(face)) {
         let adv: serde_yaml::Mapping = ["digit", "comma", "space", "hyphen"]
             .iter()
@@ -316,7 +347,7 @@ pub fn generate(l: &Value, face: &str) -> Result<Files, String> {
     // and the glyph filter of the face (latex_glyphs)
     let mut lt = l.clone();
     if let Some(m) = lt.as_mapping_mut() {
-        m.insert("latex_bias".into(), latex_bias(face).into());
+        m.insert("latex_bias".into(), folder_latex_bias(l, face).into());
         if let Some(g) = latex_glyphs(face) {
             m.insert("latex_glyphs".into(), g.into());
         }
@@ -336,7 +367,7 @@ pub fn generate(l: &Value, face: &str) -> Result<Files, String> {
         ("latex/xdoc.lua".into(), latex_lua),
         (
             "docx/reference.xml".into(),
-            super::word::reference(l, face)?,
+            super::word::reference(&ld, face)?,
         ),
         ("docx/xdoc.lua".into(), docx_lua),
     ])

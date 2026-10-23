@@ -171,3 +171,41 @@ fn the_ellipsis_is_kerned_to_the_face_s_advance() {
         sans[0].1
     );
 }
+
+#[test]
+fn a_docx_bias_widens_only_words_right_margin() {
+    let plain = super::gen::generate(&layout(LAYOUT), "Times New Roman").unwrap();
+    let biased = super::gen::generate(
+        &layout(&format!("{LAYOUT}docx_bias: 0.1\n")),
+        "Times New Roman",
+    )
+    .unwrap();
+    let right = |xml: &str| {
+        xml.split("<w:pgMar")
+            .nth(1)
+            .unwrap()
+            .split("w:right=\"")
+            .nth(1)
+            .unwrap()
+            .split('"')
+            .next()
+            .unwrap()
+            .to_string()
+    };
+    let r: i64 = right(&plain[2].1).parse().unwrap();
+    assert_eq!(right(&biased[2].1), (r + 2).to_string());
+    assert!(!biased[3].1.contains("docx_bias") && biased[3].1 != plain[3].1);
+    assert_eq!(biased[0].1, plain[0].1);
+}
+
+#[test]
+fn a_folder_may_measure_its_own_latex_bias() {
+    let plain = super::gen::generate(&layout(LAYOUT), "Times New Roman").unwrap();
+    let own = super::gen::generate(
+        &layout(&format!("{LAYOUT}latex_bias: 0.1\n")),
+        "Times New Roman",
+    )
+    .unwrap();
+    assert!(plain[0].1.contains("right=71.95bp"), "{}", plain[0].1);
+    assert!(own[0].1.contains("right=71.9bp") && own[1].1.contains("[\"latex_bias\"] = 0.1,"));
+}

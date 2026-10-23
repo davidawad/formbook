@@ -1,0 +1,104 @@
+# Supreme Court of Wisconsin (wis): brief of a nonparty (amicus curiae), Wis. Stat. 809.19(7), applied in the supreme
+# court by 809.63. The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are
+# generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace to Wis. Stat. chapter 809 (../../rules.md,
+# SUPCT-*); lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field})
+# or is a court constant.
+size: 13                  # SUPCT-FORM-004: 809.19(8)(b)3.c, body text at least 13 point
+pitch:
+  body: 22.4              # SUPCT-FORM-005, 809.19(8)(b)3.c: between 1.15 and 1.5 lines (Word's 1.5 lines, 1.5 x 1.15 x 13 pt, to the twip)
+  single: 14.95           # cover, headings, tables, quotations, signature, appendix: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 90, right: 90}   # SUPCT-FORM-002: 809.81(4), at least 1.25 in left and right, 1 in top and bottom
+indent: 36
+# Word only: the right margin 0.1 pt (2 twips) wider. LibreOffice rounds each run of text to its layout units, and a
+# line of several italic runs that typst overflows by 0.09 pt (p12, "(Johnson II),") fit there; measured as the bias at
+# which every line breaks as in typst (0.05 still kept it; docs/EVAL-LOOP.md, the SCOTUS docx).
+docx_bias: 0.1
+page_number: {align: center, from: 2}   # SUPCT-FORM-007: 809.19(8)(bm), Arabic numbers centered at the foot; the cover counts as page 1, unprinted
+footnote: {size: 11, pitch: 12.65, gap: 7}   # SUPCT-FORM-004, -005: footnotes at least 11 point, single-spaced (1.15 x 11 pt)
+quote: {left: 36, right: 36, above: 10.4, below: 15.6}   # SUPCT-FORM-005: block quotations single-spaced, indented
+# Level 1 a section (bold capitals, centered); levels 2 to 4 argument headings numbered by the template (I., A., 1.)
+heading:
+  - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
+  - {bold: true, hang: 36, number: "I.", above: 15.6, below: 10.4}
+  - {bold: true, hang: 36, number: "A.", above: 13, below: 10.4}
+  - {bold: true, italic: true, hang: 36, number: "1.", above: 11.7, below: 9.1}
+# SUPCT-COVER-001 (809.19(9)): a white cover with the court, the caption and case number, the title and counsel (one
+# column per counsel group, the telephone below). Between two caption sides "v." unless the side before it says
+# `v: false`; a side's role lines may be among its names (an empty designation prints nothing). The caption and
+# counsel single-spaced at 11 point (cover type is not body text, SUPCT-FORM-004), so a caption that names every
+# party leaves the cover one page.
+cover:
+  - {text: "IN THE SUPREME COURT OF WISCONSIN", align: center, bold: true}
+  - {text: "No. {case_number}", align: center, above: 10.8}
+  - each: caption
+    above: 10.8
+    between:
+      - {when: v, default: true, blocks: [{text: "v.", align: center, above: 7.2}]}
+    blocks:
+      - {text: "{names}", align: center, size: 11, pitch: 12.65, above: 7.2}
+      - {when: designation, blocks: [{text: "{designation}", align: center, italic: true, size: 11, pitch: 12.65, above: 3.9}]}
+  - {text: "{proceeding}", align: center, optional: true, above: 10.8}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 36}
+  - columns: {each: counsel, blocks: [{text: "{names}", bold: true, size: 11, pitch: 12.65}, {text: "{lines}", size: 11, pitch: 12.65}]}
+    gutter: 21.6
+    above: 36
+  - {text: "{phone}", optional: true, size: 11, pitch: 12.65, above: 7.8}
+# SUPCT-BRIEF-001 (809.19(1)(a)), SUPCT-AMICUS-002: a table of contents with page references (the sections and the
+# argument headings with their A. and B. parts) and a table of authorities, each on its own page.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 36, step: 19.5, above: 11.7, when: toc, default: true}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 19.5
+  above: 11.7
+  group: {bold: true, above: 15.6, below: 10.4}
+# SUPCT-LEN-003 (809.19(8)(c)3.): 3,000 words in a proportional serif font, the argument and conclusion counted
+# (809.19(1)(e), (f)); a court order may set another limit (word_limit), and the filer's certified count
+# (certified_words) is the count the certification states.
+words: {sections: [argument, conclusion], limit: 3000, given: certified_words, limit_field: word_limit}
+# The date and the signature (SUPCT-SIG-001), never split; the names of amici (appendix) on a page of their own; then
+# the certification of form and length (SUPCT-CERT-001, 809.19(8g)(a), in the rule's words, and the court order a
+# certification cites) on its own page, signed again; a certificate of e-filing and service under 801.18(6), in the
+# filer's words.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - columns:
+          - {width: 230.4, blocks: []}
+          - blocks:
+              - {text: "Signed:"}
+              - {rule: 0.5, above: 28.6}
+              - {text: "{signature.signer}", above: 3.9}
+              - {text: "{signature.lines}"}
+        above: 5.2
+    above: 21.6
+  - {when: assisted, blocks: [{text: "This document was prepared with the assistance of a lawyer.", above: 5.2}]}
+  - when: appendix
+    blocks:
+      - {break: true}
+      - {text: "{appendix.heading}", align: center, bold: true, below: 6.5}
+      - {each: appendix.paragraphs, above: 5.2, blocks: [{text: "{.}", above: 7.8}]}
+  - {break: true}
+  - {text: "CERTIFICATION AS TO FORM AND LENGTH", align: center, bold: true, below: 6.5}
+  - {text: "I hereby certify that this brief conforms to the rules contained in s. 809.19 (8) (b), (bm), and (c) for a brief. The length of this brief is {xd.words} words. {certification_order|}", indent: 36, pitch: body}
+  - columns:
+      - {width: 230.4, blocks: []}
+      - blocks:
+          - {text: "Signed:"}
+          - {rule: 0.5, above: 28.6}
+          - {text: "{signature.signer}", above: 3.9}
+          - {text: "{signature.lines}"}
+    above: 7.8
+  - when: efiling_certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATION OF ELECTRONIC FILING AND SERVICE", align: center, bold: true, below: 6.5}
+      - {text: "{efiling_certificate}", indent: 36, pitch: body}
+      - columns:
+          - {width: 230.4, blocks: []}
+          - blocks:
+              - {text: "Signed:"}
+              - {rule: 0.5, above: 28.6}
+              - {text: "{signature.signer}", above: 3.9}
+              - {text: "{signature.lines}"}
+        above: 7.8

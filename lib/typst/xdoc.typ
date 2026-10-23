@@ -32,6 +32,10 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
+/// An apostrophe right after closing emphasis ("*Rucho*'s"): cmarker's smart punctuation makes it an opening quote
+/// ("Rucho‘s"), pandoc a right one, as written (fb-595.54.14).
+#let apostrophes(s) = s.replace(regex("(\\S[*_]+)'(\\w)"), m => m.captures.at(0) + "\u{2019}" + m.captures.at(1))
+
 /// A frontmatter string as markdown inlines. A value that starts like a block ("* Pro hac vice", "1. ", "# ", "> ") is text:
 /// its marker escaped (lib/pandoc/xdoc.lua inlines alike).
 #let md(s) = {
@@ -41,7 +45,7 @@
   }
   let s = str(s).replace(regex("^(\\s*)([-*+>#])(\\s|$)"), m => m.captures.at(0) + "\\" + m.captures.at(1) + m.captures.at(2))
     .replace(regex("^(\\s*)(\\d+)([.)])(\\s|$)"), m => m.captures.at(0) + m.captures.at(1) + "\\" + m.captures.at(2) + m.captures.at(3))
-  cmarker.render(s, raw-typst: false, smart-punctuation: true)
+  cmarker.render(apostrophes(s), raw-typst: false, smart-punctuation: true)
 }
 #let pt(x) = if x == none { 0pt } else { x * 1pt }
 
@@ -139,7 +143,8 @@
 
 /// The text a word count reads (layout.yaml `words`): the body up to the tail heading, its level-1 sections from the
 /// one whose heading starts with `from` through the one that starts with `through`, less the sections whose headings
-/// start with an `exclude`, and the footnotes those sections call (each once). Footnote definitions are the lines
+/// start with an `exclude` (with `sections`, only those whose title starts with one listed, in any case), and the
+/// footnotes those sections call (each once). Footnote definitions are the lines
 /// `[^label]: ..` and the lines indented four spaces or a tab after them. lib/pandoc/xdoc.lua `counted_text` alike.
 #let counted-text(spec, body) = {
   let w = spec.words
@@ -185,6 +190,11 @@
     if i == none { panic("xdoc: words.through: no level-1 heading starts with `" + through + "`") }
     secs = secs.slice(0, i + 1)
   }
+  // `sections`: only the level-1 sections whose title (lower case, without "*") starts with one listed
+  let only = w.at("sections", default: ()).map(lower)
+  if only.len() > 0 {
+    secs = secs.filter(s => s.head != none and only.any(p => lower(s.head.replace("*", "").trim()).starts-with(p)))
+  }
   let ex = w.at("exclude", default: ())
   let text = secs.filter(s => not ex.any(p => starts(s, p))).map(s => s.lines.join("\n")).join("\n")
   let called = ()
@@ -196,11 +206,15 @@
 }
 
 /// The values the model computes for the text blocks (`{xd.words}`), over the frontmatter; a count over
-/// `words.limit` stops the render.
+/// `words.limit` (or the frontmatter field `words.limit_field` names, a court order's limit) stops the render;
+/// `words.given`: a frontmatter field that states the count (the filer's certified count) instead.
 #let computed(spec, meta, body) = {
   if "words" not in spec { return meta }
-  let n = count-words(counted-text(spec, body))
-  let limit = spec.words.at("limit", default: none)
+  let w = spec.words
+  let n = if "given" in w and is-set(meta.at(w.given, default: none)) { int(meta.at(w.given)) } else {
+    count-words(counted-text(spec, body)) }
+  let limit = meta.at(w.at("limit_field", default: ""), default: w.at("limit", default: none))
+  let limit = if limit == none { none } else { int(limit) }
   if limit != none and n > limit {
     panic("xdoc: the body has " + str(n) + " words, over the limit of " + str(limit) + " (layout.yaml words.limit)")
   }
@@ -208,10 +222,11 @@
 }
 
 /// A URL (`http://`, `https://`, `www.`) as the pieces a line may end between: after a slash not followed by another
-/// (so after "https://", not inside it), a dot before an ASCII letter or digit, a hyphen before a letter, a "?" or "!"
-/// before a letter or digit (where LibreOffice breaks by Unicode line breaking, unboxed in Word); the same
-/// places in every engine (lib/pandoc/xdoc.lua url_pieces; LaTeX \allowbreak, Word a zero-width space): each piece in a
-/// box, a zero-width space between them, so no engine breaks a URL anywhere else.
+/// (so after "https://", not inside it), a dot before an ASCII letter or digit, a hyphen before a letter, a "?", "!"
+/// or "&" before a letter or digit (where LibreOffice breaks by Unicode line breaking, unboxed in Word; "&" between a
+/// query string's fields, a long one overflowed the margin otherwise); the same places in every engine
+/// (lib/pandoc/xdoc.lua url_pieces; LaTeX \allowbreak, Word a zero-width space): each piece in a box, a zero-width
+/// space between them, so no engine breaks a URL anywhere else.
 #let URL = regex("(https?://|www\\.)[^\\s<>]+")
 #let url-pieces(s) = {
   let cs = s.clusters()
@@ -222,7 +237,7 @@
     let next = cs.at(i + 1, default: none)
     let cut = next != none and ((c == "/" and next != "/") or (c == "." and next.match(regex("^[A-Za-z0-9]$")) != none)
       or (c == "-" and next.match(regex("^[A-Za-z]$")) != none)
-      or (c in ("?", "!") and next.match(regex("^[A-Za-z0-9]$")) != none))
+      or (c in ("?", "!", "&") and next.match(regex("^[A-Za-z0-9]$")) != none))
     if cut { pieces.push(cur); cur = "" }
   }
   if cur != "" { pieces.push(cur) }
@@ -312,7 +327,16 @@
     if lead > 0pt and not texty { v(lead) }
     let below = pt(b.at("below", default: 0))
     if texty {
-      let ps = if "text" in b { expand(b.text, ctx, b.at("optional", default: false)) } else {
+      // `lines`: the style of a value of more than one line, a paragraph per line (an address among paragraphs), with
+      // its `above` over it and over the value after it (lib/pandoc/xdoc.lua tree alike): each paragraph with `ml` (it
+      // comes from such a value) and `first` (it opens its value)
+      let ps = if "lines" in b and "text" in b {
+        expand(b.text, ctx, b.at("optional", default: false), lines: false).map(v => {
+          let t = v.trim("\n", at: end).replace("\r\n", "\n")
+          let ml = t.contains("\n")
+          t.split("\n").enumerate().map(((j, l)) => (s: l, ml: ml, first: j == 0))
+        }).flatten()
+      } else if "text" in b { expand(b.text, ctx, b.at("optional", default: false)) } else {
         md-paragraphs(expand(b.markdown, ctx, b.at("optional", default: false), lines: false))
       }
       // its space above only when it sets a paragraph (an optional block whose field is missing sets none: the next
@@ -320,33 +344,53 @@
       if lead > 0pt and ps.len() > 0 { v(lead) }
       // the space between the block's paragraphs (`gap`)
       let gap = pt(b.at("gap", default: 0))
-      for (i, s) in ps.enumerate() {
+      for (i, p) in ps.enumerate() {
+        let (s, st, gap) = if type(p) == dictionary {
+          (p.s, if p.ml { b + b.lines } else { b },
+            if i > 0 and p.first and (p.ml or ps.at(i - 1).ml) { pt(b.lines.at("above", default: 0)) } else { gap })
+        } else { (p, b, gap) }
         // a layout heading (`heading: <level>`, a certificate's title): a heading as the body's, set in its level's
         // style (show-heading), listed in the contents and bookmarked, never numbered (labelled <xd-lh>)
         if "heading" in b { [#heading(level: b.heading, outlined: true, bookmarked: true, inl((:), s)) <xd-lh>]; continue }
         // an empty paragraph is a line of its pitch, as Word sets it (lib/latex/xdoc.lua par: \mbox{})
-        let body = if s.trim() == "" { box(height: pitch-of(spec, b.at("pitch", default: none)), baseline: 20%) } else {
-          inl(b, s) }
-        line-block(spec, b, body, if i == 0 { above } else { gap }, if i == ps.len() - 1 { below } else { 0pt })
+        let body = if s.trim() == "" { box(height: pitch-of(spec, st.at("pitch", default: none)), baseline: 20%) } else {
+          inl(st, s) }
+        line-block(spec, st, body, if i == 0 { above } else { gap }, if i == ps.len() - 1 { below } else { 0pt })
       }
       if ps.len() > 0 { first = false }
     } else if "rule" in b {
-      // a box of RULE + the stroke, the line at its top (LibreOffice: a bordered paragraph of one twip)
-      block(width: 100%, height: pt(RULE + b.rule), above: above, below: below,
-        place(top + left, dy: pt(b.rule) / 2, line(length: 100%, stroke: pt(b.rule))))
+      // a box of RULE + the stroke, the line at its top (LibreOffice: a bordered paragraph of one twip); a rule of 0 is
+      // the box alone, space that holds at the top of a page too (fb-595.54.14)
+      block(width: 100%, height: pt(RULE + b.rule), above: above, below: below, if b.rule > 0 {
+        place(top + left, dy: pt(b.rule) / 2, line(length: 100%, stroke: pt(b.rule))) })
       first = false
     } else if "columns" in b {
       // the columns, each with its context: a list of columns, or one column per item of a list (`each`)
-      // (`per_row`: that many columns a row, the rows `row_gap` apart; a short last row keeps the widths)
+      // (`per_row`: that many columns a row, the rows `row_gap` apart; a short last row keeps the widths; `widths`: the
+      // width of the column at each place in a row, from the left, the places it does not give shared alike)
       let rows = if type(b.columns) == dictionary {
+        let ws = b.columns.at("widths", default: ())
+        let at-width(j, c) = if j < ws.len() { c + (width: ws.at(j)) } else { c }
         let items = lookup(ctx, b.columns.each)
         if items == none { panic("xdoc: missing required metadata field `" + b.columns.each + "`") }
-        let cols = items.enumerate().map(((i, it)) => b.columns + (ctx: item-ctx(ctx, it, i: i)))
-        let n = b.columns.at("per_row", default: cols.len())
-        range(0, cols.len(), step: calc.max(n, 1)).map(i => {
-          let row = cols.slice(i, calc.min(i + n, cols.len()))
-          row + range(n - row.len()).map(_ => (blocks: (), ctx: ctx))
-        })
+        if "split" in b.columns {
+          // `split`: two columns, the first holding the first N items (N the frontmatter field `split` names, or a
+          // number; half of them, rounded up, without it), the second the rest, the items of a column `gap` apart
+          // (lib/pandoc/xdoc.lua tree alike)
+          let s = b.columns.split
+          let k = if type(s) == str { lookup(ctx, s) } else { s }
+          let k = if k == none { calc.ceil(items.len() / 2) } else { calc.min(int(k), items.len()) }
+          let col(part) = (ctx: ctx + ("__split": part), blocks: ((each: "__split",
+            gap: b.columns.at("gap", default: 0), blocks: b.columns.blocks),))
+          ((col(items.slice(0, k)), col(items.slice(k))).enumerate().map(((j, c)) => at-width(j, c)),)
+        } else {
+          let cols = items.enumerate().map(((i, it)) => b.columns + (ctx: item-ctx(ctx, it, i: i)))
+          let n = b.columns.at("per_row", default: cols.len())
+          range(0, cols.len(), step: calc.max(n, 1)).map(i => {
+            let row = cols.slice(i, calc.min(i + n, cols.len()))
+            (row + range(n - row.len()).map(_ => (blocks: (), ctx: ctx))).enumerate().map(((j, c)) => at-width(j, c))
+          })
+        }
       } else { (b.columns.map(c => c + (ctx: ctx)),) }
       let gutter = pt(b.at("gutter", default: 0))
       for (ri, cols) in rows.enumerate() {
@@ -378,10 +422,17 @@
       let items = lookup(ctx, b.each)
       if items == none { panic("xdoc: missing required metadata field `" + b.each + "`") }
       for (i, it) in items.enumerate() {
-        if i > 0 and "between" in b { blocks(spec, b.between, ctx, first: false, page: page) }
+        // between two items: the blocks in the context of the item before (its fields decide a `when`), the item after
+        // as `next` ("when: next.versus"; lib/pandoc/xdoc.lua tree alike)
+        if i > 0 and "between" in b {
+          blocks(spec, b.between, item-ctx(ctx, items.at(i - 1), i: i - 1) + (next: it), first: false, page: page)
+        }
         // the space above the first item's first block: the each block's own
         let bl = b.blocks
         if i == 0 and bl.len() > 0 { bl.at(0).insert("above", calc.max(b.at("above", default: 0),
+          bl.at(0).at("above", default: 0))) }
+        // `gap`: the least space between two items (above the first block of every item after the first)
+        if i > 0 and bl.len() > 0 and b.at("gap", default: 0) > 0 { bl.at(0).insert("above", calc.max(b.gap,
           bl.at(0).at("above", default: 0))) }
         blocks(spec, bl, item-ctx(ctx, it, i: i), first: first and i == 0, page: page)
       }
@@ -582,7 +633,13 @@
         // line (a page late), before it end the line before (a page early); LaTeX and Word read the find's end too
         show regex("\\S*" + find.replace(regex("[.*+?^${}()|\\[\\]\\\\]"), m => "\\" + m.text) + bound + "\\S*"): it => {
           let cs = it.text.clusters()
-          if cs.len() < 2 { [#it#metadata(k)<xd-toa>] } else { [#cs.slice(0, -1).join()#metadata(k)<xd-toa>#cs.last()] }
+          // (a match that ends in a section or pilcrow sign and its token, which lib/typst/xengine.typ boxes: before the
+          // sign, as a tag inside that box is set a line below, after the paragraph when it ends one: a page late at a page
+          // end, "art. XVI, § 1.")
+          let signs = cs.enumerate().filter(((i, c)) => c in ("§", "¶") and cs.at(i + 1, default: "") == " ")
+          let at = if signs.len() == 0 or " " in cs.slice(signs.last().first() + 2) { cs.len() - 1 } else {
+            signs.last().first() }
+          if cs.len() < 2 { [#it#metadata(k)<xd-toa>] } else { [#cs.slice(0, at).join()#metadata(k)<xd-toa>#cs.slice(at).join()] }
         }
         out
       }
@@ -647,7 +704,7 @@
 
 /// The paragraphs of a body (cmarker's sequence, split at its paragraph breaks) that anchor a footnote, with no widow or
 /// orphan control, as lib/latex/xdoc.lua and lib/docx/xdoc.lua set them (a show rule on par comes too late: the note is
-/// realized by then).
+/// realized by then). Not with layout.yaml `footnote.widows: true` (the paragraph keeps its widow and orphan control).
 #let free-notes(body) = {
   if body.func() != [].func() { return body }
   let (out, run) = ((), ())
@@ -668,6 +725,37 @@
 #let justified(spec) = if spec.at("justify", default: false) {
   (justify: true, justification-limits: (spacing: (min: 100%, max: 100000%), tracking: (min: 0pt, max: 0pt)))
 } else { (:) }
+/// A table of the body, in place of cmarker's (lib/pandoc/xdoc.lua table_nodes, rule for rule): a rule, then each
+/// row as columns of equal width `table.gutter` apart, its cells one paragraph each in the `table` style (`head` over
+/// it for the header rows, bold by default), a rule between two rows and after the last, `table.pad` between a rule
+/// and a row; `table.above` and `table.below` around the whole. cmarker gives no alignment; spans are not supported
+/// (fb-595.54.14).
+#let body-table(spec, n, children) = {
+  let t = spec.at("table", default: (:))
+  let stroke = t.at("stroke", default: 0.5)
+  let pad = t.at("pad", default: 0)
+  let base = (:)
+  for k in ("pitch", "size") { if k in t { base.insert(k, t.at(k)) } }
+  let rows = ()
+  let cells = ()
+  for a in children {
+    if a.func() == table.header {
+      rows += a.children.map(c => c.body).chunks(n).map(r => (head: true, cells: r))
+    } else if a.func() == table.cell { cells.push(a.body) } else { cells.push(a) }
+  }
+  rows += cells.chunks(n).map(r => (head: false, cells: r))
+  let rule(above, below) = block(width: 100%, height: pt(RULE + stroke), above: pt(above), below: pt(below),
+    place(top + left, dy: pt(stroke) / 2, line(length: 100%, stroke: pt(stroke))))
+  rule(t.at("above", default: 0), pad)
+  for (i, r) in rows.enumerate() {
+    let st = base + if r.head { t.at("head", default: (bold: true)) } else { (:) }
+    let cs = r.cells + range(n - r.cells.len()).map(_ => [])
+    block(width: 100%, above: 0pt, below: 0pt, breakable: false, grid(columns: (1fr,) * n,
+      column-gutter: pt(t.at("gutter", default: 0)), ..cs.map(c => line-block(spec, st, c, 0pt, 0pt))))
+    rule(pad, if i == rows.len() - 1 { t.at("below", default: 0) } else { pad })
+  }
+}
+
 /// The body: markdown; paragraphs at the body pitch with a first-line indent, headings, quotations, lists and
 /// footnotes as layout.yaml says, the authorities marked.
 #let body-of(spec, meta, src) = {
@@ -681,6 +769,7 @@
   show heading: show-heading(spec)
   show list: it => if pgap == none { list-items(spec, it, 0) } else { block(above: pt(pgap), below: pt(pgap), list-items(spec, it, 0)) }
   show enum: it => if pgap == none { list-items(spec, it, 0) } else { block(above: pt(pgap), below: pt(pgap), list-items(spec, it, 0)) }
+  show table: it => body-table(spec, if type(it.columns) == int { it.columns } else { it.columns.len() }, it.children)
   show quote.where(block: true): it => block(width: 100%, above: pt(q.at("above", default: 0)),
     below: pt(q.at("below", default: 0)), {
     set text(..edges(pitch-of(spec, q.at("pitch", default: none))))
@@ -691,7 +780,8 @@
     show enum: it => block(above: qgap, below: qgap, list-items(spec, it, 0))
     pad(left: pt(q.at("left", default: spec.indent)), right: pt(q.at("right", default: spec.indent)), it.body)
   })
-  with-marks(meta, free-notes(cmarker.render(src, raw-typst: false, smart-punctuation: true, h1-level: 1)))
+  let rendered = cmarker.render(apostrophes(src), raw-typst: false, smart-punctuation: true, h1-level: 1)
+  with-marks(meta, if spec.at("footnote", default: (:)).at("widows", default: false) { rendered } else { free-notes(rendered) })
 }
 
 /// One row of a table of contents or authorities: lib/typst/xengine.typ's listing-row (the text wraps before a page
@@ -789,8 +879,9 @@
       let key = k
       context {
         let pages = query(<xd-toa>).filter(m => m.value == key).map(m => page-label(m.location())).dedup()
-        let list = if "find" not in e { str(e.at("pages", default: "--")) } else if pages.len() == 0 { "--" } else {
-          pages.join(", ") }
+        // `passim` pages or more: "passim", in italics (as the keyed list)
+        let list = if "find" not in e { str(e.at("pages", default: "--")) } else if pages.len() == 0 { "--" } else if (
+          pages.len() >= a.at("passim", default: 1000000)) { emph[passim] } else { pages.join(", ") }
         table-row(none, md(e.cite), list, calc.max(pt(a.at("col", default: 56)), measure(list).width),
           pt(a.at("hang", default: 0)), pt(a.at("above", default: 0)))
       }
@@ -918,8 +1009,11 @@
   // the computed fields: the words of the body before the tail
   let words = plain-words(if rest == "" { body } else { body.slice(0, body.len() - rest.len()) })
   let meta = if "body_words" in meta { meta } else { meta + (body_words: words) }
-  // a table of contents a frontmatter field switches (layout.yaml contents.when; lib/pandoc/xdoc.lua switch_contents)
-  let spec = if "contents" in spec and "when" in spec.contents and not is-set(lookup(meta, spec.contents.when)) {
+  // a table of contents a frontmatter field switches (layout.yaml contents.when, `default` when the frontmatter lacks
+  // the field; lib/pandoc/xdoc.lua switch_contents)
+  let spec = if "contents" in spec and "when" in spec.contents and not is-set({
+    let v = lookup(meta, spec.contents.when)
+    if v == none { spec.contents.at("default", default: none) } else { v } }) {
     let s = spec
     let _ = s.remove("contents")
     s

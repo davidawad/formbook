@@ -1,0 +1,73 @@
+# Supreme Court of Kansas (kan): reply brief. The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). The Kansas
+# Supreme Court Rules were not retrieved (../rules.md): the numbers are the default tier-1 set (data/checks-default.yaml)
+# and the conventions the filed exemplars share (KAN-FORM-*, KAN-CONT-001, KAN-CERT-001); lengths in points. No case
+# text here: every string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # the Kansas exemplars set the body in Times at about 13 pt (default floor 12 pt)
+pitch:
+  body: 29.9              # KAN-FORM-002: double spaced (Word's double, 2 x 1.15 x 13 pt)
+  single: 14.95           # cover, headings, tables, quotations, notes, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # one inch on every side (default; the exemplars do the same)
+indent: 36
+page_number: {align: center, from: 1}   # every page numbered at the foot, the cover is page 1 (Kansas exemplars)
+footnote: {size: 13, gap: 7}             # KAN-FORM-002: footnotes at the text size, single spaced
+quote: {left: 36, right: 36, above: 10.4, below: 15.6, gap: 6.5}   # KAN-FORM-002: block quotations indented, single spaced
+heading:
+  - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
+  - {bold: true, hang: 36, above: 15.6, below: 10.4}
+  - {bold: true, italic: true, hang: 36, above: 13, below: 10.4}
+# KAN-CONT-001: the cover carries the court, the case number, the caption with the party designations, the title and
+# counsel's name, address and telephone.
+cover:
+  - {text: "IN THE SUPREME COURT OF THE STATE OF KANSAS", align: center, bold: true}
+  - {text: "No. {case_number}", align: center, bold: true, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 108, below: 108}
+  - each: counsel
+    blocks:
+      - {text: "{names}", bold: true, left: 230.4, above: 7.8}
+      - {text: "{lines}", left: 230.4}
+  - {text: "{phone}", left: 230.4, optional: true}
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 19.5, step: 19.5, above: 11.7}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 19.5
+  above: 11.7
+  group: {bold: true, above: 15.6, below: 2.6}
+# KAN-CERT-001: the date and the signature block, never split, then the certificate of service on a page of its own,
+# signed by the first signer.
+closing:
+  - group:
+      - {text: "{date}", indent: 36, optional: true}
+      - {text: "{signature.firm}", bold: true, left: 230.4, optional: true, above: 5.2}
+      - each: signature.signers
+        above: 5.2
+        blocks:
+          - {text: "/s/ *{name}*", underline: true, left: 230.4, above: 11.7}
+          - {text: "{name}", left: 230.4}
+          - {text: "{lines}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, above: 7.8}
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", align: center, bold: true, upper: true, below: 15.6}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - when: service.recipients
+        blocks:
+          - each: service.recipients
+            blocks: [{text: "{.}", left: 72, above: 13}]
+      - {text: "{service.closing}", optional: true, pitch: body, indent: 36}
+      - {text: "/s/ *{signature.signers.0.name}*", underline: true, left: 230.4, above: 5.2}
+      - {text: "{signature.signers.0.name}", left: 230.4}
+      - {text: "{signature.signers.0.lines}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4, above: 7.8}

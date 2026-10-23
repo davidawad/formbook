@@ -12,7 +12,7 @@ The live statute site (docs.legis.wisconsin.gov) refused connections on 2026-10-
 
 Kinds: **M** mandated by a rule; **C** convention where the rule leaves the choice open; **A** filer responsibility; **T** template contract.
 
-Typeface. Wis. Stat. 809.19(8)(b)3.a.-c. and 809.81(3) require a proportional serif font or a monospaced font at 10 characters per inch. No face is named, so the templates declare Liberation Serif, the face docs/FONTS.md assigns to a court that names none (the sibling Wisconsin Court of Appeals templates do the same). Exemplars vary across filers (Century Schoolbook, Times, and Courier monospace); the rule allows any proportional serif face at the stated size.
+Typeface. Wis. Stat. 809.19(8)(b)3.a.-c. and 809.81(3) require a proportional serif font or a monospaced font at 10 characters per inch. No face is named. The templates declare Times New Roman with Liberation Serif, its metric twin (the face docs/FONTS.md assigns to a court that names none), so the typst, LaTeX (newtx) and Word renders set the same advances and the Word file names the face LibreOffice embeds (DEF-FONT-002; docs/EVAL-LOOP.md, "Generated engines"). Exemplars vary across filers (Century Schoolbook, Times, and Courier monospace); the rule allows any proportional serif face at the stated size.
 
 ## Format of every document (Wis. Stat. 809.81; briefs also 809.19(8))
 

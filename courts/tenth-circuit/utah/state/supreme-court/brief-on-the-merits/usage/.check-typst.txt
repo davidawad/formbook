@@ -1,2 +1,2 @@
 PASS
-5af8f9def2f5635957ae22e79d4ec196d03138dd0c2095c612541dbd450ccca8  usage/OUTPUT-brief-on-the-merits.typst.pdf
+708cb78f9508140a60c313ac59d1f3cfb4c4588fd0a36ad0536c68b73d42b92a  usage/OUTPUT-brief-on-the-merits.typst.pdf

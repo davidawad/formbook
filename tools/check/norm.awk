@@ -4,7 +4,8 @@
 
 function norm1(s) {
   if (WS_RE == "") {      # invisible characters are built from code points so the file stays readable
-    WS_RE = "[ \t\r\n" sprintf("%c%c%c%c%c%c%c", 160, 8201, 8202, 8239, 8288, 173, 8203) "]"
+    # (8197, a four-per-em space: lib/docx/xdoc.lua binds a space before a closing mark with it in a quarter-em face)
+    WS_RE = "[ \t\r\n" sprintf("%c%c%c%c%c%c%c%c", 160, 8197, 8201, 8202, 8239, 8288, 173, 8203) "]"
   }
   s = tolower(s)
   gsub(/[‘’‛]/, "'", s)

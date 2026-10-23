@@ -66,3 +66,7 @@
     \ifdim\fontdimen1\font>\z@\dimen0=#5\fontdimen6\font\else\dimen0=#3\fontdimen6\font\fi
   \fi
   \pdfliteral page{/Span<</ActualText<FEFF#1>>>BDC}\hbox to\dimen0{\hss#2\hss}\pdfliteral page{EMC}\endgroup}
+
+% Lists break where typst breaks them: LaTeX gives a break bonus (-\@lowpenalty) at a list's start and end and between
+% its items, typst none (fb-595.54.14; a list right after a heading is kept with it, lib/latex/xdoc.lua).
+\@beginparpenalty=0 \@endparpenalty=0 \@itempenalty=0

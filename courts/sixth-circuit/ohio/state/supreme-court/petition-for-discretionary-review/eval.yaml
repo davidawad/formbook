@@ -1,0 +1,11 @@
+# OHIO-JURIS-001 (RoP 7.02(B)(1), (D)(1), (D)(3)): the memorandum in support of jurisdiction is not longer than 15
+# numbered pages, the table of contents, signature block and certificate of service left out. This sample (the filed
+# memorandum, transcribed whole) runs to 18 numbered pages at Word's double spacing (27.6 pt) without kerning, the
+# certificate page 19; the filed memorandum itself runs to page 16 at a 26.5 pt pitch. Before the move onto the shared
+# model the template set 0.9 em leadings (not double spacing) and the render ended on page 14. No page limit is
+# checked here (DEF-LEN-001 counts the whole PDF); open question on bead fb-595.54.15, with the reply brief's.
+params:
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+  # the typst render does, so a difference fails.
+  cross_engine: gate

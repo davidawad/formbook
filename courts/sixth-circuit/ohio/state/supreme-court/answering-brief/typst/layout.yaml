@@ -1,0 +1,67 @@
+# Ohio Supreme Court (ohio): merit brief of appellees (RoP 16.03). The whole layout, as data for the shared document
+# model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers
+# trace to RoP 3.07, 3.09, 16.02 and 16.03 (../../rules.md, OHIO-*); lengths in points. No case text here: every
+# string printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # OHIO-FORM-004: at least 12-point type, footnotes and quotations too (RoP 3.09(B)(1)(b), (B)(3))
+pitch:
+  body: 27.6              # OHIO-FORM-005: double-spaced (RoP 3.09(B)(3); Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, footnotes, quotations, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # OHIO-FORM-002: at least one inch on all sides (RoP 3.09(B)(2)(c))
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the tables i, ii .., the brief from 1 (RoP 16.03(C)(1) counts numbered pages)
+footnote: {size: 12, gap: 6}           # OHIO-FORM-004, -005: 12-point footnotes, which may be single-spaced
+# (a paragraph that cites a note has no widow or orphan rule, the model's default: notes are never split, and typst
+# moves such a paragraph's line on with its note; the fan-out's `widows: true` set one line alone above a note in typst,
+# fb-595.54.82)
+quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # OHIO-FORM-005: quotations may be single-spaced
+heading:
+  - {bold: true, above: 14.4, below: 9.6}
+  - {bold: true, hang: 36, above: 12, below: 9.6}
+  - {bold: true, italic: true, hang: 36, above: 12, below: 9.6}
+# The cover (RoP 3.07(A)-(G), OHIO-COVER-001, OHIO-MERIT-005): the court and the case number, the parties, the court
+# appealed from, the title, then counsel in two columns (the frontmatter's counsel_split groups on the left), on one
+# page.
+cover:
+  - {text: "IN THE SUPREME COURT OF OHIO", align: center, bold: true}
+  - {text: "Supreme Court Case No. {case_number}", align: center, bold: true, above: 7.2}
+  - each: caption
+    above: 7.2
+    between:
+      - {text: "v.", align: center, above: 7.2, below: 7.2}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true, above: 4.8}
+  - {text: "{proceeding}", align: center, optional: true, above: 7.2}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4, above: 18}
+  # counsel set solid (single-spaced at a 12 pt pitch, RoP 3.09(B)(3)): five counsel groups fit the one cover page
+  - columns: {each: counsel, split: counsel_split, gap: 3, blocks: [{text: "{names}", bold: true, pitch: 12}, {text: "{lines}", pitch: 12}]}
+    gutter: 21.6
+    above: 7.2
+# RoP 16.02(B)(1), (2) (as applied by RoP 16.03(B)): the table of contents and the table of authorities, each on its
+# own pages.
+contents: {title: "TABLE OF CONTENTS", style: {align: center}, depth: 3, col: 36, hang: 18, step: 18, above: 10.8}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 18
+  above: 10.8
+  group: {bold: true, above: 14.4, below: 2.4}
+# The signature block (OHIO-SIG-001: "/s/" and the typed name), never split, then the certificate of service on a page
+# of its own (RoP 3.11(B)(1)(a); OHIO-SERV-001, OHIO-SERV-002), signed by its signer.
+closing:
+  - group:
+      - {text: "Respectfully submitted,"}
+      - {text: "/s/ *{signature.signer}*", underline: true, left: 230.4, above: 4.8}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.lines}", left: 230.4}
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 6}
+      - {text: "{service.paragraphs}", pitch: body, indent: 36}
+      - each: service.recipients
+        blocks: [{text: "{.}", left: 36, above: 12}]
+      - {text: "/s/ *{service.signature.signer}*", underline: true, left: 230.4, above: 12}
+      - {text: "{service.signature.signer}", left: 230.4}
+      - {text: "{service.signature.lines}", left: 230.4}

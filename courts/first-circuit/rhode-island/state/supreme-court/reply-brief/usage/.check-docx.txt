@@ -1,3 +1,3 @@
 PASS
-e7ffba155ed57d0e6bb9516b7815456a3fedf8d876178aef56ba82a143ed52b2  usage/OUTPUT-reply-brief.docx
-1646c965e07db62ff76285e322e3f3ba93a6c1887fda79422ced2a71be7baff4  usage/OUTPUT-reply-brief.docx.pdf
+2d544d7fe8399dc90edca83bfa703528e008865ff6f0d5cc6678aefd757a747f  usage/OUTPUT-reply-brief.docx
+1b9234077c929070ce3e620437a6dfed81ee727e9aaa461abd10ab891ef79452  usage/OUTPUT-reply-brief.docx.pdf

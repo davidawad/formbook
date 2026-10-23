@@ -1,2 +1,2 @@
 PASS
-6420bd2d1a5c1054e22c4d12623da37a2ac269197c97f16a9509a9553ee009fa  usage/OUTPUT-opening-brief.latex.pdf
+80e2e6de2c55b3ff1d9628a9bfe78c0b9cc7c2325b18699b7364d6949889e830  usage/OUTPUT-opening-brief.latex.pdf

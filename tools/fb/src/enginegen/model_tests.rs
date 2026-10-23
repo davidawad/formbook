@@ -1367,10 +1367,11 @@ fn no_break_before_a_closing_mark_after_a_space() {
         tex.contains("so\\nobreak\\space{}, then\\nobreak\\space{}) x."),
         "{tex}"
     );
-    // Word: the body's Strs (pandoc's writer), a no-break space before each dot
+    // Word: the body's Strs (pandoc's writer), a four-per-em space and a word joiner before each dot (Times New
+    // Roman; LibreOffice breaks a run of no-break spaces that overflows)
     let doc: String = f.docx().unwrap().split_whitespace().collect();
     assert!(
-        doc.contains(r#"Str"means",Str"\160",Str".",Str"\160",Str".""#),
+        doc.contains(r#"Str"means",Str"\8197\8288",Str".",Str"\8197\8288",Str".""#),
         "{doc}"
     );
 }
@@ -2186,4 +2187,436 @@ fn the_token_after_a_section_sign_is_never_broken() {
     assert!(tex.contains("¶¶~\\mbox{37\\mbox{-}39}"), "{tex}");
     let doc = f.docx().unwrap();
     assert!(doc.contains(r#"Str "807-\8288\&1-\8288A4"#), "{doc}");
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// fb-595.54.82 serial lane 2: the features ported from the Wisconsin fan-out (fb-595.54.16)
+
+#[test]
+fn between_blocks_read_the_item_before_and_the_next_one() {
+    // "v." only before an item whose `versus` is set (`next.versus`); a field of the item before decides a `when`
+    let l = layout("cover:\n  - each: caption\n    between:\n      - {when: next.versus, blocks: [{text: \"v.\", align: center}]}\n      - {when: and, blocks: [{text: \"and\"}]}\n    blocks:\n      - {text: \"{name}\"}\n  - {break: true}\n");
+    let Some(f) = fx(
+        "between-next",
+        &l,
+        "---\ncaption:\n  - {name: ALPHA, and: true}\n  - {name: BETA}\n  - {name: GAMMA, versus: true}\n---\nThe body.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    let words = |s: &str| s.split_whitespace().collect::<Vec<_>>().join(" ");
+    let text = words(&f.typst_pages().unwrap()[0]);
+    assert!(text.contains("ALPHA and BETA v. GAMMA"), "{text}");
+    let tex = f.latex().unwrap();
+    let (a, n, b, v, g) = (
+        tex.find("ALPHA").unwrap(),
+        tex.find("and").unwrap(),
+        tex.find("BETA").unwrap(),
+        tex.find("v.").unwrap(),
+        tex.find("GAMMA").unwrap(),
+    );
+    assert!(a < n && n < b && b < v && v < g, "{tex}");
+    assert_eq!(tex.matches("v.").count(), 1);
+    let doc = f.docx().unwrap();
+    assert_eq!(doc.matches(">v.<").count(), 1, "{doc}");
+}
+
+#[test]
+fn a_word_count_of_listed_sections_a_stated_count_and_a_frontmatter_limit() {
+    // `sections`: the Statement and the Argument (any case), 14 + 5 words and the one note the Statement calls (3)
+    let l = layout("words: {sections: [statement of the case, argument]}\ntail: {at: Certificate}\nclosing:\n  - {text: \"This brief has {xd.words} words.\"}\n");
+    let Some(f) = fx(
+        "words-sections",
+        &l,
+        WORDS_SAMPLE,
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    let text = f.typst_pages().unwrap().join("");
+    assert!(text.contains("This brief has 22 words."), "{text}");
+    assert!(f.latex().unwrap().contains("This brief has 22 words."));
+    // `given`: the frontmatter states the count; `limit_field`: the frontmatter's limit, over the layout's
+    let sample = WORDS_SAMPLE.replace("x: 1", "x: 1\ncertified: 4271\nword_limit: 21");
+    let l = layout("words: {sections: [argument], given: certified, limit: 9000, limit_field: word_limit}\nclosing:\n  - {text: \"This brief has {xd.words} words.\"}\n");
+    let f = fx(
+        "words-given",
+        &l,
+        &sample,
+        &["typst", "pandoc", "pdftotext"],
+    )
+    .unwrap();
+    assert!(f
+        .typst_pages()
+        .unwrap_err()
+        .contains("4271 words, over the limit of 21"));
+    assert!(f
+        .latex()
+        .unwrap_err()
+        .contains("4271 words, over the limit of 21"));
+    let sample = WORDS_SAMPLE.replace("x: 1", "x: 1\ncertified: 4271");
+    let f = fx(
+        "words-given-ok",
+        &l,
+        &sample,
+        &["typst", "pandoc", "pdftotext"],
+    )
+    .unwrap();
+    assert!(f
+        .typst_pages()
+        .unwrap()
+        .join("")
+        .contains("This brief has 4,271 words."));
+    assert!(f.latex().unwrap().contains("This brief has 4,271 words."));
+}
+
+#[test]
+fn a_contents_switch_takes_its_default_when_the_field_is_missing() {
+    let l = layout("contents: {title: Contents, depth: 1, col: 36, when: toc, default: true}\n");
+    for (name, front, shown) in [
+        ("toc-default-on", "x: 1", true),
+        ("toc-default-off", "toc: false", false),
+    ] {
+        let Some(f) = fx(
+            name,
+            &l,
+            &format!("---\n{front}\n---\n# Argument\n\nThe body.\n"),
+            &["typst", "pandoc", "pdftotext"],
+        ) else {
+            return;
+        };
+        let text = f.typst_pages().unwrap().join("");
+        assert_eq!(text.contains("Contents"), shown, "{name}: {text}");
+        assert_eq!(f.latex().unwrap().contains("Contents"), shown, "{name}");
+        assert_eq!(f.docx().unwrap().contains(">Contents<"), shown, "{name}");
+    }
+}
+
+#[test]
+fn a_listed_authority_on_passim_pages_or_more_is_passim() {
+    let l = layout("authorities:\n  title: Authorities\n  col: 56\n  passim: 2\n");
+    let body = "Smith v. Jones held it.\n\n".repeat(60);
+    let Some(f) = fx(
+        "passim-list",
+        &l,
+        &format!("---\nauthorities:\n  - heading: Cases\n    entries:\n      - {{cite: \"Smith v. Jones\", find: \"Smith v. Jones\"}}\n---\n{body}"),
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    let pages = f.typst_pages().unwrap();
+    assert!(pages.len() > 2 && pages[0].contains("passim"), "{pages:?}");
+    assert!(f.latex().unwrap().contains("\\xd@apagesp{1}{2}"));
+    // Word: the list from the pages pass, "passim" in italics
+    f.docx().unwrap();
+    let doc = f.docx_after("a1.1\t2\t1\na1.2\t3\t2\n").unwrap();
+    assert!(doc.contains(">passim<"), "{doc}");
+}
+
+#[test]
+fn the_model_s_inline_rules_in_latex_and_word() {
+    let l = layout("");
+    let Some(f) = fx(
+        "inline-rules",
+        &l,
+        "---\nx: 1\n---\nRuns a----b and c---d. Signed by /s/ Jane. He said—“go.” See ¶ 63.[^1] At https://a.org/x?p=1&q=2.\n\nAn *emphasised note*[^2] here.\n\n[^1]: The note.\n[^2]: Another.\n",
+        &["pandoc"],
+    ) else {
+        return;
+    };
+    let tex = f.latex().unwrap().replace('\n', " ");
+    // four hyphens are two en dashes (CommonMark), three an em dash
+    assert!(
+        tex.contains("a\\textendash\\allowbreak{}\\textendash\\allowbreak{}b"),
+        "{tex}"
+    );
+    // no break before a spaced slash; none between an em dash and the quotation mark after it
+    assert!(tex.contains("by\\nobreak\\space{}/s/"), "{tex}");
+    assert!(
+        tex.contains("said\\allowbreak\\textemdash{}\\textquotedblleft{}"),
+        "{tex}"
+    );
+    // the note after "¶ 63." is not held in the sign's \mbox (LaTeX loses a note in a box)
+    assert!(tex.contains("\\mbox{63.}\\footnote{"), "{tex}");
+    // a URL's query string breaks after "&"
+    assert!(
+        tex.contains("p=1&\\allowbreak{}q=2") || tex.contains("p=1\\&\\allowbreak{}q=2"),
+        "{tex}"
+    );
+    // a paragraph whose note is inside emphasis has no widow or club penalty
+    let at = tex.find("An ").unwrap();
+    assert!(
+        tex[..at]
+            .rfind("\\widowpenalty=0")
+            .is_some_and(|w| w > tex[..at].rfind("Jane").unwrap()),
+        "{tex}"
+    );
+    // Word (Times New Roman): a four-per-em space and a word joiner before the slash
+    let doc: String = f.docx().unwrap().split_whitespace().collect();
+    assert!(doc.contains(r#"Str"by",Str"\8197\8288",Str"/s/"#), "{doc}");
+    assert!(doc.contains("a\\8211\\8211b"), "{doc}");
+    // a face whose space is not a quarter em: a no-break space
+    let f = fx_face(
+        "inline-rules-arial",
+        &l,
+        "---\nx: 1\n---\nSigned by /s/ Jane.\n",
+        &["pandoc"],
+        "Liberation Sans",
+    )
+    .unwrap();
+    let doc: String = f.docx().unwrap().split_whitespace().collect();
+    assert!(doc.contains(r#"Str"by",Str"\160",Str"/s/"#), "{doc}");
+}
+
+#[test]
+fn an_empty_latex_column_keeps_its_width() {
+    let l = layout("closing:\n  - columns:\n      - {width: 230.4, blocks: []}\n      - blocks: [{text: \"Signed\"}]\n");
+    let Some(f) = fx(
+        "empty-column",
+        &l,
+        "---\nx: 1\n---\nThe body.\n",
+        &["pandoc"],
+    ) else {
+        return;
+    };
+    assert!(f
+        .latex()
+        .unwrap()
+        .contains("\\hsize=230.4bp\\linewidth=\\hsize\\hrule height0pt width\\hsize"));
+}
+
+#[test]
+fn an_authority_needle_takes_the_words_before_it_when_few_follow() {
+    let Some(f) = fx(
+        "needle-before",
+        &layout("authorities: {title: Authorities, col: 56}\n"),
+        "---\nauthorities:\n  - heading: Statutes\n    entries:\n      - {cite: \"Wis. Stat. § 6.855\", find: \"6.855\"}\n---\nThe clerk must follow Wis. Stat. § 6.855.\n",
+        &["pandoc"],
+    ) else {
+        return;
+    };
+    f.docx().unwrap();
+    let needles = f.written("needles.tsv").unwrap();
+    let line = needles.lines().find(|l| l.starts_with("a1.1\t")).unwrap();
+    assert!(line.contains("theclerkmustfollowwisstat6855"), "{needles}");
+}
+
+// fb-595.54.82 serial lane 2: the features ported from the Ohio fan-out (fb-595.54.15)
+
+#[test]
+fn columns_at_given_widths_and_a_list_split_in_two() {
+    // `widths`: the width of each place in a row; `split`: the first N items (a frontmatter field) in the first column,
+    // the rest in the second, `gap` apart; `each.gap`: the least space between two items
+    let l = layout("cover:\n  - columns: {each: counsel, widths: [100, 200], blocks: [{text: \"{name}\"}]}\n  - columns: {each: counsel, split: left, gap: 6, blocks: [{text: \"{name}\"}]}\n  - each: counsel\n    gap: 12\n    blocks: [{text: \"{name}\"}]\n  - {break: true}\n");
+    let Some(f) = fx(
+        "columns-split",
+        &l,
+        "---\nleft: 1\ncounsel:\n  - {name: ALPHA}\n  - {name: BETA}\n  - {name: GAMMA}\n---\nThe body.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    // the split: ALPHA alone at the left, BETA and GAMMA one under the other at the right
+    let page = f.typst_pages().unwrap()[0].clone();
+    let words: Vec<&str> = page
+        .lines()
+        .map(str::trim)
+        .filter(|l| !l.is_empty())
+        .collect();
+    assert!(
+        words
+            .iter()
+            .any(|l| l.starts_with("ALPHA") && l.ends_with("BETA")),
+        "{words:?}"
+    );
+    assert!(
+        words.iter().filter(|l| **l == "GAMMA").count() == 2,
+        "{words:?}"
+    );
+    // LaTeX: the widths given, two columns for the split
+    let tex = f.latex().unwrap();
+    assert!(
+        tex.contains("\\hsize=100bp") && tex.contains("\\hsize=200bp"),
+        "{tex}"
+    );
+    // Word: the column widths in twips
+    let doc = f.docx().unwrap();
+    assert!(
+        doc.contains(r#"w:w=\"2000\""#) && doc.contains(r#"w:w=\"4000\""#),
+        "{doc}"
+    );
+    // the each gap: 12 pt above the second and third items (240 twips), none above the first
+    assert!(doc.matches(r#"w:before=\"240\""#).count() >= 2, "{doc}");
+}
+
+#[test]
+fn a_note_s_paragraph_keeps_its_widow_rule_with_footnote_widows() {
+    let l = layout("footnote: {size: 12, widows: true}\n");
+    let Some(f) = fx(
+        "note-widows",
+        &l,
+        "---\nx: 1\n---\nA paragraph.[^1]\n\n[^1]: The note.\n",
+        &["pandoc"],
+    ) else {
+        return;
+    };
+    assert!(!f.latex().unwrap().contains("\\widowpenalty=0"));
+    assert!(!f.docx().unwrap().contains("Body Text Note"));
+    let f = fx(
+        "note-no-widows",
+        &layout(""),
+        "---\nx: 1\n---\nA paragraph.[^1]\n\n[^1]: The note.\n",
+        &["pandoc"],
+    )
+    .unwrap();
+    assert!(f.latex().unwrap().contains("\\widowpenalty=0"));
+    assert!(f.docx().unwrap().contains("Body Text Note"));
+}
+
+#[test]
+fn latex_slashes_closing_hyphens_and_spaced_asterisks() {
+    let Some(f) = fx(
+        "latex-inline-15",
+        &layout(""),
+        "---\nx: 1\n---\nFiled on CM/ECF as a full- or part-time (pre-) job. Omitted * * * here, and /s/ Jane.\n",
+        &["pandoc"],
+    ) else {
+        return;
+    };
+    let tex = f.latex().unwrap().replace('\n', " ");
+    assert!(tex.contains("CM/\\allowbreak{}ECF"), "{tex}");
+    assert!(!tex.contains("/\\allowbreak{}s/"), "{tex}");
+    assert!(tex.contains("(pre\\mbox{-})"), "{tex}");
+    assert!(tex.contains("/ActualText<FEFF002A0020>"), "{tex}");
+}
+
+#[test]
+fn a_typst_mark_after_a_section_sign_stays_on_its_line() {
+    // a find that ends in a sign's token ("§ 1."): the mark before the sign, not in xengine's box (set a line below,
+    // after the paragraph when it ends one)
+    let Some(f) = fx(
+        "sign-mark",
+        &layout("authorities: {title: Authorities, col: 56}\n"),
+        "---\nauthorities:\n  - heading: Other\n    entries:\n      - {cite: C, find: \"art. XVI, § 1\"}\n---\nThe title on the ballot itself, R.C. 3519.21; Ohio Const., art. XVI, § 1.\n\nNext paragraph.\n",
+        &["typst", "pdftotext"],
+    ) else {
+        return;
+    };
+    f.typst_pages().unwrap();
+    let pos = f
+        .typst_eval("query(<xd-toa>).map(m => m.location().position().y.pt())")
+        .unwrap();
+    let ys: Vec<f64> = serde_json::from_str(&pos).unwrap();
+    let lines = f.typst_lines().unwrap();
+    let p = &lines[1];
+    // on the line of "§ 1." (its yMax is the line's foot, the mark at most a line box above it)
+    let y = y_of(p, "artxvi1");
+    assert!(ys[0] < y && ys[0] > y - 14.0, "{ys:?} {y}");
+}
+
+#[test]
+fn a_hyphen_before_a_digit_in_a_url_is_held_by_a_word_joiner_in_word() {
+    let Some(f) = fx(
+        "url-hyphen",
+        &layout(""),
+        "---\nx: 1\n---\nSee https://a.gov/x/672548a6-97ff-46e8/Untitled-Petition.aspx here.\n",
+        &["pandoc"],
+    ) else {
+        return;
+    };
+    let doc = f.docx().unwrap();
+    assert!(
+        doc.contains("672548a6-\u{2060}97ff")
+            || doc.contains("672548a6-\\8288\\&97ff")
+            || doc.contains("672548a6-\\8288"),
+        "{doc}"
+    );
+    assert!(!doc.contains("noBreakHyphen"), "{doc}");
+}
+
+// fb-595.54.82 serial lane 2: the features ported from the Kansas fan-out (fb-595.54.14)
+
+#[test]
+fn a_body_table_is_set_as_rules_and_rows_in_every_engine() {
+    let l = layout("table: {pad: 3.6, gutter: 14.4, above: 14.4, below: 14.4, stroke: 0.5}\n");
+    let Some(f) = fx(
+        "body-table",
+        &l,
+        "---\nx: 1\n---\nBefore.\n\n| Year | Gap |\n|---|---|\n| 2012 | 10.7% |\n| 2022 | 22.4% |\n\nAfter.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    let words = |s: &str| s.split_whitespace().collect::<Vec<_>>().join(" ");
+    let text = words(&f.typst_pages().unwrap()[0]);
+    assert!(
+        text.contains("Before. Year Gap 2012 10.7% 2022 22.4% After."),
+        "{text}"
+    );
+    // LaTeX: four rules (above, between the rows, below) and a row of two columns per table row
+    let tex = f.latex().unwrap();
+    assert_eq!(tex.matches("\\hrule height 0.5bp").count(), 4, "{tex}");
+    assert!(
+        tex.contains("{\\bfseries") || tex.contains("\\bfseries"),
+        "{tex}"
+    );
+    // Word: the same rules as bordered paragraphs, the rows as one-row tables
+    let doc = f.docx().unwrap();
+    assert_eq!(doc.matches("<w:pBdr>").count(), 4, "{doc}");
+    assert!(doc.matches("<w:tbl>").count() >= 3, "{doc}");
+}
+
+#[test]
+fn a_rule_of_zero_is_space_alone_and_lines_take_their_style() {
+    let l = layout("closing:\n  - {rule: 0, above: 21.6}\n  - {text: \"{service.paragraphs}\", indent: 36, lines: {indent: 0, left: 36, above: 7.2}}\n");
+    let Some(f) = fx(
+        "rule-zero-lines",
+        &l,
+        "---\nservice:\n  paragraphs:\n    - \"Served by mail on:\"\n    - \"Jane Roe\\n1 Main St.\\nTopeka, KS\"\n    - \"And by e-mail.\"\n---\nThe body.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    let lines = f.typst_lines().unwrap();
+    let p = &lines[0];
+    // the address one line per line at its own indent, 7.2 pt above it and above the value after it
+    let (a, b, c) = (
+        y_of(p, "janeroe"),
+        y_of(p, "1mainst"),
+        y_of(p, "andbyemail"),
+    );
+    assert!(
+        (b - a - 13.8).abs() < 0.1 && (c - y_of(p, "topekaks") - 13.8 - 7.2).abs() < 0.1,
+        "{a} {b} {c}"
+    );
+    let tex = f.latex().unwrap();
+    assert!(tex.contains("width 0pt"), "{tex}");
+    let doc = f.docx().unwrap();
+    assert_eq!(doc.matches("<w:pBdr>").count(), 0, "{doc}");
+    assert!(
+        doc.contains(r#"w:left=\"720\""#) && doc.contains(r#"w:before=\"144\""#),
+        "{doc}"
+    );
+}
+
+#[test]
+fn a_note_mark_is_attached_and_an_apostrophe_after_emphasis_is_closing() {
+    let Some(f) = fx(
+        "attach-notes",
+        &layout(""),
+        "---\nx: 1\n---\nThe system. [^1] And *Rucho*'s holding \u{2013}\u{201C}quoted\u{201D}.\n\n- one\n- two\n\n[^1]: A note.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    let text = f.typst_pages().unwrap().join("");
+    assert!(text.contains("Rucho\u{2019}s"), "{text}");
+    let tex = f.latex().unwrap().replace('\n', " ");
+    assert!(tex.contains("system.\\footnote{"), "{tex}");
+    assert!(tex.contains("\\textendash{}\\textquotedblleft{}"), "{tex}");
+    let doc = f.docx().unwrap();
+    assert!(!doc.contains("Str \"system.\" , Space , Note"), "{doc}");
+    // LaTeX lists: no break bonus at a list's start, end and items (lib/latex/xdoc.sty)
+    let sty = std::fs::read_to_string(f.root.join("lib/latex/xdoc.sty")).unwrap();
+    assert!(sty.contains("\\@beginparpenalty=0 \\@endparpenalty=0 \\@itempenalty=0"));
 }

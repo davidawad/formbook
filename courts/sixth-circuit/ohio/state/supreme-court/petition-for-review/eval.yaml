@@ -1,5 +1,12 @@
 # RoP 7.02(B)(1), (D)(1), (D)(3) (rules.md OHIO-JURIS-001): the memorandum in support of jurisdiction is not longer than
-# 15 numbered pages, excluding the table of contents, signature block and certificate of service. Applied to the whole
-# rendered PDF (cover included), which is stricter; this render is 15 pages in all, cover and certificate included.
+# 15 numbered pages, excluding the table of contents, signature block and certificate of service. DEF-LEN-001 counts the
+# whole rendered PDF, so the limit here is those 15 pages plus the cover, the one-page table of contents and the
+# certificate of service on its own page (18): stricter than the rule, which also leaves the signature block out. This
+# render is 16 pages, the memorandum 13 numbered pages (1-13), the certificate page 14. (Before the move onto the shared
+# model the render was 15 pages in all only because its paragraphs' lines overlapped.)
 params:
-  page_limit: 15
+  page_limit: 18
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+  # the typst render does, so a difference fails.
+  cross_engine: gate

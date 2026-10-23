@@ -14,6 +14,7 @@
 -- widow or club penalty (typst may move its last line alone with the note, as lib/docx/xdoc.lua allows too).
 local xe = require("latex.xengine")
 local xd = require("pandoc.xdoc")
+local common = require("pandoc.xengine")
 local xs = require("latex.xeschola")
 
 -- The face's glyph filter (layout latex_glyphs, gen.rs): "schola" writes the glyphs whose TeX Live advances differ
@@ -107,9 +108,107 @@ local function specials(s)
   return out
 end
 
+-- typst breaks a line after a slash inside a word before a letter ("cgi/viewcontent", "CM/ECF"), as lib/docx/xdoc.lua
+-- lets LibreOffice (a zero-width space): an \allowbreak there. Not in "/s/" (neither engine breaks there).
+local function slashes(s)
+  local out = pandoc.Inlines({})
+  local rest = s.text
+  while true do
+    local a = rest:find("[^%s/]/%a")
+    if not a then break end
+    out:insert(pandoc.Str(rest:sub(1, a + 1)))
+    out:insert(pandoc.RawInline("latex", "\\allowbreak{}"))
+    rest = rest:sub(a + 2)
+  end
+  if #out == 0 then return nil end
+  if rest ~= "" then out:insert(pandoc.Str(rest)) end
+  return out
+end
+
+-- No break after a hyphen before a closing mark ("full[-]time", "-)", "-”"): Unicode line breaking never breaks before
+-- one; TeX breaks after every explicit hyphen (lib/latex/xengine.sty).
+local function closing_hyphens(s)
+  local out, rest = pandoc.Inlines({}), s.text
+  while true do
+    local a
+    for _, p in ipairs({ "%-[%]%)}\"',.;:!?]", "%-\u{201D}", "%-\u{2019}" }) do
+      local x = rest:find(p)
+      if x and (not a or x < a) then a = x end
+    end
+    if not a then break end
+    if a > 1 then out:insert(pandoc.Str(rest:sub(1, a - 1))) end
+    out:insert(pandoc.RawInline("latex", "\\mbox{-}"))
+    rest = rest:sub(a + 1)
+  end
+  if #out == 0 then return nil end
+  if rest ~= "" then out:insert(pandoc.Str(rest)) end
+  return out
+end
+
+-- A Str that is not a URL: its hyphens before a closing mark, its slashes inside a word, its ellipses.
+local function plain(s)
+  local out = pandoc.Inlines({})
+  for _, x in ipairs(closing_hyphens(s) or { s }) do
+    if x.t ~= "Str" then out:insert(x)
+    else
+      local l = slashes(x)
+      if l then out:extend(l:walk({ Str = function(y) return ellipses(y) end })) else out:extend(ellipses(x) or { x }) end
+    end
+  end
+  return out
+end
+
+-- A run of asterisks between spaces ("* * *", an omission): pdftotext reads pdfTeX's as one word "***" (typst's and
+-- LibreOffice's as three), so each asterisk before a space is an /ActualText span of itself and the space.
+local function asterisks(l)
+  local out = pandoc.Inlines({})
+  local function star(x) return x and x.t == "Str" and x.text:match("^%*+$") end
+  for i, x in ipairs(l) do
+    if star(x) and l[i + 1] and l[i + 1].t == "Space" and (star(l[i + 2]) or star(l[i - 2]) and l[i - 1].t == "Space") then
+      local hex = ((x.text .. " "):gsub(".", function(c) return string.format("%04X", c:byte()) end))
+      out:insert(pandoc.RawInline("latex", "\\pdfliteral page{/Span<</ActualText<FEFF" .. hex .. ">>>BDC}"))
+      out:insert(x)
+      out:insert(pandoc.RawInline("latex", "\\pdfliteral page{EMC}"))
+    else
+      out:insert(x)
+    end
+  end
+  return out
+end
+
+-- typst never breaks between an em dash and a quotation mark next to it (UAX #14 QU); xengine's em dash allows a break
+-- on either side, so the side a quotation mark is on loses it.
+local EMDASH = "\\allowbreak\\textemdash\\allowbreak{}"
+local ENDASH = "\\textendash\\allowbreak{}"
+local QUOTES = { ["\\textquotedblleft{}"] = true, ["\\textquotedblright{}"] = true, ["\\textquoteleft{}"] = true }
+-- whether the element at the end (`last`) or start of `el` is a quotation mark
+local function quote_at(el, last)
+  if not el then return false end
+  if el.t == "RawInline" then return QUOTES[el.text] or false end
+  if el.t ~= "Str" or el.text == "" then return false end
+  local c = el.text:match(last and (utf8.charpattern .. "$") or ("^" .. utf8.charpattern))
+  return c == "\u{201C}" or c == "\u{201D}" or c == "\u{2018}" or c == "\u{2019}" or c == '"' or c == "'"
+end
+
+local function dash_quotes(l)
+  for i, el in ipairs(l) do
+    if el.t == "RawInline" and el.text == EMDASH then
+      local before, after = quote_at(l[i - 1], true), quote_at(l[i + 1], false)
+      if before or after then
+        l[i] = pandoc.RawInline("latex", (before and "" or "\\allowbreak") .. "\\textemdash" .. (after and "{}" or "\\allowbreak{}"))
+      end
+    elseif el.t == "RawInline" and el.text == ENDASH and quote_at(l[i + 1], false) then
+      -- an en dash breaks after itself only, and not before a quotation mark either (fb-595.54.14)
+      l[i] = pandoc.RawInline("latex", "\\textendash{}")
+    end
+  end
+  return l
+end
+
 -- The cross-engine inline rules (lib/latex/xengine.lua) on inlines whose URLs are cut into their pieces first (its
 -- unbreakable hyphen before a digit would join two pieces: "election-|2024"), no break before a closing mark
--- (xd.bind_punct).
+-- (xd.bind_punct), hyphen runs as CommonMark sets them (lib/pandoc/xengine.lua dashes), no break between an em dash and a
+-- quotation mark (dash_quotes), spaced asterisks read as written (asterisks).
 local function texify(inlines)
   -- a space that does not break (\nobreak: no break at the glue after a penalty), the body's \spaceskip when justified
   local glue = function() return pandoc.RawInline("latex", "\\nobreak\\space{}") end
@@ -120,8 +219,8 @@ local function texify(inlines)
     out:insert(pandoc.RawInline("latex", "}"))
     return out
   end
-  local held = xd.hold_sign_tokens(inlines:walk({ Str = urls }), mbox)
-  return xe.inlines(xd.bind_punct(held, glue):walk({ Str = specials }))
+  local held = xd.hold_sign_tokens(common.dashes(inlines):walk({ Str = urls }), mbox)
+  return asterisks(dash_quotes(xe.inlines(xd.bind_punct(held, glue):walk({ Str = specials }))))
 end
 
 local function switches(inlines)
@@ -129,7 +228,7 @@ local function switches(inlines)
     -- a hard line break inside the paragraph (\\ under \raggedright ends it: the next line indented, the club
     -- penalty again); \hfill outranks a justified line's fil spaces, as typst does not justify the line before it
     LineBreak = function() return pandoc.RawInline("latex", "\\hfill\\break{}") end,
-    Str = function(s) return urls(s) or ellipses(s) end,
+    Str = function(s) return urls(s) or plain(s) end,
     -- emphasis toggles italics (lib/latex/xdoc.sty \xd@em), as typst's emph does
     Emph = function(e) return wrap("{\\xd@em ", e.content) end,
     Strong = function(e) return wrap("{\\bfseries ", e.content) end,
@@ -234,13 +333,16 @@ return function(spec)
   local emit
 
   local function rule(n)
-    return open(n) .. "\\hrule height " .. bp(n.w) .. " depth " .. bp(xd.RULE) .. close(n)
+    -- a rule of 0 is its line box alone (no width, nothing drawn)
+    return open(n) .. "\\hrule height " .. bp(n.w) .. " depth " .. bp(xd.RULE) .. (n.w > 0 and "" or " width 0pt")
+      .. close(n)
   end
 
   -- `width` in bp, or a TeX dimension (the container's \hsize, an expression of it)
   local function vtop(width, items)
     local w = type(width) == "string" and width or bp(width)
-    return "\\vtop{\\hsize=" .. w .. "\\linewidth=\\hsize\\vskip0pt " .. emit(items, true) .. "}"
+    -- an empty rule of the column's width first: an empty column keeps its width (a \vtop is as wide as its widest line)
+    return "\\vtop{\\hsize=" .. w .. "\\linewidth=\\hsize\\hrule height0pt width\\hsize\\vskip0pt " .. emit(items, true) .. "}"
   end
 
   -- Each column is set in a box first (scratch boxes 0, 2, ..., local to the group), so a column centered in the
@@ -475,21 +577,25 @@ return function(spec)
       for _ = 1, #(g.entries or {}) do
         k = k + 1
         local e = entries[k]
-        local pages = e.find and ("\\xd@apages{" .. k .. "}") or tex(xd.inlines(e.pages and tostring(e.pages) or "--"))
+        local list = a.passim and ("\\xd@apagesp{" .. k .. "}{" .. a.passim .. "}") or ("\\xd@apages{" .. k .. "}")
+        local pages = e.find and list or tex(xd.inlines(e.pages and tostring(e.pages) or "--"))
         out[#out + 1] = row(a.above, 0, tonumber(a.hang) or 0, a.col or 56, tex(xd.inlines(e.cite)), pages, true)
       end
     end
     return table.concat(out, "%\n")
   end
 
+  -- a footnote anywhere in the paragraph (inside emphasis or a link too)
   local function has_note(inlines)
-    for _, el in ipairs(inlines) do if el.t == "Note" then return true end end
-    return false
+    local found = false
+    pandoc.Inlines(inlines):walk({ Note = function() found = true end })
+    return found
   end
 
   local function para(inlines)
     local p = faced(pandoc.Para(switches(inlines:walk({ Inlines = texify }))))
-    if not has_note(inlines) then return { p } end
+    -- (layout.yaml footnote.widows: the widow and club penalties kept, as typst keeps them then)
+    if not has_note(inlines) or (spec.footnote and spec.footnote.widows) then return { p } end
     return { raw("\\begingroup\\widowpenalty=0\\clubpenalty=0\\relax"), p, raw("\\par\\endgroup") }
   end
 
@@ -511,6 +617,9 @@ return function(spec)
         if prev == "Para" and gap > 0 then out:insert(raw("\\par\\addvspace{" .. bp(gap) .. "}")) end
         sep()
         out:extend(para(b.content))
+      elseif b.t == "Table" then
+        -- a table of the body (lib/pandoc/xdoc.lua table_nodes): its rules and rows as the layout's blocks
+        out:insert(raw(emit(xd.table_nodes(spec, b), false)))
       elseif b.t == "BlockQuote" then
         out:insert(raw("\\par\\addvspace{" .. bp(q.above) .. "}\\begingroup\\leftskip=" .. bp(q.left or spec.indent)
           .. "\\rightskip=" .. bp(q.right or spec.indent) .. (spec.justify and "" or " plus 1fil") .. "\\parindent=0pt" .. lines(q)))
@@ -554,7 +663,7 @@ return function(spec)
         xd.check_fills(spec.after_tail)
         local _, keyed = xd.keyed(spec, meta)
         local cited = {}
-        local blocks = xd.mark(xd.commonmark_lists(doc.blocks):walk({ Inlines = xd.bind_double_signs }),
+        local blocks = xd.mark(xd.attach_notes(xd.commonmark_lists(doc.blocks)):walk({ Inlines = xd.bind_double_signs }),
           xd.authority_entries(meta),
           function(k) cited[k] = true; return pandoc.RawInline("latex", "\\xd@amark{" .. k .. "}") end, keyed)
         xd.check(spec, doc.blocks)

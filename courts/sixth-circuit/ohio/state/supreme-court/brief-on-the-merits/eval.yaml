@@ -3,3 +3,7 @@
 # to the whole PDF (cover included), which is stricter.
 params:
   page_limit: 50
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+  # the typst render does, so a difference fails.
+  cross_engine: gate

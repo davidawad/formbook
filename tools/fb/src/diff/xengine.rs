@@ -124,10 +124,11 @@ fn without_leaders(m: &Measured) -> Measured {
                 .words
                 .iter()
                 .flat_map(|w| {
-                    // a no-break space is a space: Word's keeps "Â§ 1331" in one pdftotext word; zero-width characters
+                    // a no-break space is a space: Word's keeps "Â§ 1331" in one pdftotext word (and a four-per-em space,
+                    // lib/docx/xdoc.lua's before a closing mark); zero-width characters
                     // (the break rules of a URL: lib/pandoc/xengine.lua urls) are not text
                     w.t.replace(['\u{200b}', '\u{2060}', '\u{feff}'], "")
-                        .split('\u{a0}')
+                        .split(['\u{a0}', '\u{2005}'])
                         .flat_map(unleader)
                         .map(|t| t.trim_end_matches('.').to_string())
                         .filter(|t| !t.is_empty())

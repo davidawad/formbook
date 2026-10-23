@@ -90,6 +90,7 @@ transcription_note: "Transcribed from FILED-EXAMPLE-motion-brief.pdf: the motion
 ---
 
 Respondent Dave Yost, Ohio Attorney General, respectfully moves this Court to dismiss Relators’ Complaint for failure to state a claim under S.Ct.Prac.R. 12.04 and Civ.R. 12(B)(6). A memorandum in support is attached.
+
 # MEMORANDUM IN SUPPORT
 
 # INTRODUCTION

@@ -63,7 +63,7 @@ III. Did the district court err in holding SB 355 unconstitutional?
 
 ## A. A supermajority of the Kansas Legislature enacts SB 355.
 
-"[E]very ten years, the Kansas legislature must draw new districts for the United States Congress . . . . " *Essex v. Kobach*, 874 F. Supp. 2d 1069, 1073 (D. Kan. 2012); *see* U.S. Const. art. I, §§ 2, 4.
+"[E]very ten years, the Kansas legislature must draw new districts for the United States Congress . . . ." *Essex v. Kobach*, 874 F. Supp. 2d 1069, 1073 (D. Kan. 2012); *see* U.S. Const. art. I, §§ 2, 4.
 
 The Kansas Legislature began the process of redrawing those districts according to the 2020 Census in 2021. Although not legally required to, the House and Senate Committees on Redistricting jointly held a listening tour of town hall meetings across Kansas. (J.A. XIX, 2-7.) All of the meetings were live-streamed, and the public was invited to submit written or oral testimony (or both). (J.A. XIX, 2-7.) Fourteen meetings were held in fourteen cities in August. (J.A. XIX, 5-7.) And four additional meetings were held virtually in November. (J.A. XIX, 2-4.)
 
@@ -267,7 +267,7 @@ A racial vote dilution claim under the Kansas Constitution, then, requires (1) d
 
 #### SB 355 does not have a discriminatory intent.
 
-"Discriminatory intent 'implies that the decisionmaker, in this case a state legislature, selected or reaffirmed a particular course of action at least in part "because of," not merely "in spite of," its adverse effects upon an identifiable group.'" *Pers. Adm'r of Mass. v. Feeney*, 442 U.S. 256, 279 (1979). "[V]olition" or "awareness of consequences" is not enough. *Id.*
+“Discriminatory intent ‘implies that the decisionmaker, in this case a state legislature, selected or reaffirmed a particular course of action at least in part “because of,” not merely “in spite of,” its adverse effects upon an identifiable group.’” *Pers. Adm'r of Mass. v. Feeney*, 442 U.S. 256, 279 (1979). "[V]olition" or "awareness of consequences" is not enough. *Id.*
 
 The U.S. Supreme Court has warned courts to "'exercise extraordinary caution in adjudicating claims that a State has drawn district lines on the basis of race,'" especially where "the voting population is one in which race and political affiliation are highly correlated." *Easley v. Cromartie*, 532 U.S. 234, 242 (2001) (citation omitted). Where "district lines merely correlate with race because they are drawn on the basis of political affiliation, which correlates with race, there is no racial classification to justify." *Bush v. Vera*, 517 U.S. 952, 968 (1996) (plurality op.). Drawing lines for partisan reasons is not drawing lines for racial reasons, even if "the most loyal Democrats happen to be black Democrats and even if the State were conscious of that fact." *Hunt v. Cromartie*, 526 U.S. 541, 551 (1999).
 
@@ -311,7 +311,7 @@ The judgment of the district court should be reversed.
 
 [^7]: The Legislature's override of the Governor's veto, Kan. Const. art. 2, § 14.
 
-[^8]: While some courts have discerned standards, those standards are rooted at least in large part in constitutional provisions that find no counterpart in the Kansas Constitution. *See, e.g.*, *Harkenrider v. Hochul*, 2022 WL 1236822, at *9-11 (N.Y. Apr. 27, 2022) (relying on N.Y. Const. article III, § 4(c)(5)); *Harper v. Hall*, 2022-NCSC-17, ¶¶133-41 (relying on N.C. Const. art. I, § 10); *Adams v. DeWine*, 2022-Ohio-89, ¶¶30-40 (relying on Ohio Const. art. XIX, § 1(C)(3)(a)); *League of Women Voters of Pa. v. Commonwealth*, 645 Pa. 1, 97-117, 178 A.3d 737 (2018) (relying on Pa. Const. art. 1, § 5); *League of Women Voters of Fla. v. Detzner*, 172 So. 3d 363, 373-76 (2015) (relying on Fla. Const. art. III, § 20(a)).
+[^8]: While some courts have discerned standards, those standards are rooted at least in large part in constitutional provisions that find no counterpart in the Kansas Constitution. *See, e.g.*, *Harkenrider v. Hochul*, 2022 WL 1236822, at \*9-11 (N.Y. Apr. 27, 2022) (relying on N.Y. Const. article III, § 4(c)(5)); *Harper v. Hall*, 2022-NCSC-17, ¶¶133-41 (relying on N.C. Const. art. I, § 10); *Adams v. DeWine*, 2022-Ohio-89, ¶¶30-40 (relying on Ohio Const. art. XIX, § 1(C)(3)(a)); *League of Women Voters of Pa. v. Commonwealth*, 645 Pa. 1, 97-117, 178 A.3d 737 (2018) (relying on Pa. Const. art. 1, § 5); *League of Women Voters of Fla. v. Detzner*, 172 So. 3d 363, 373-76 (2015) (relying on Fla. Const. art. III, § 20(a)).
 
 [^9]: Judge Bill Klapper was elected in 2018 as a member of the Democratic party. *See* Defts' Resp., *In re Joint Request of Seventh Judicial Dist. & Twenty-Ninth Judicial Dist.*, No. 124927 (Mar. 18, 2022). He is up for reelection this year. *See Become a Judge Through Election*, Kansas Judicial Branch, https://www.kscourts.org/Judges/Become-a-Judge-(2) (last visited May 2, 2022) (noting that elected "judges run for office every four years on a partisan ballot").
 

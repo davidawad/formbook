@@ -1,0 +1,12 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
+# The docx is reported, not gated (fb-595.54.14): every page and page end match typst, and 1141 of 1143 lines, but on
+# p12 line 5 ("U.S. Const. art. I, § 2; *id.* § 3; *id.* art. II, § 1; *id.* art. IV, § 3; *id.*") typst overflows the
+# measure by 0.25 pt with "id." and LibreOffice, which measures each font run of a line on its own in whole units (nine
+# italic changes in this line; its PDF sets the line 0.34 pt narrower), keeps the word. The same paragraph with the
+# "id."s upright breaks as typst does. A narrower Word text block (measured over every model folder) breaks lines typst
+# fills to within 0.1 pt: 0.05 pt in two other Kansas folders, 0.1 pt in six and a pilot. No layout setting reproduces it.
+params:
+  cross_engine: gate
+  cross_engine_docx: report

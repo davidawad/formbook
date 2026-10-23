@@ -1,2 +1,2 @@
 PASS
-2586985368d713e17dfb4f5126d94ef3b984bd36249026519fb9c26719ffb572  usage/OUTPUT-amicus-brief.latex.pdf
+f541f6d9e3fc9ece7ba99f3e514da1c8553c927181ed7ff1e20397d4ad76206c  usage/OUTPUT-amicus-brief.latex.pdf

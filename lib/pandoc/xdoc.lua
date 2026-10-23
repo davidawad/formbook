@@ -199,9 +199,12 @@ function M.check(spec, blocks)
 end
 
 -- A table of contents a frontmatter field switches (layout.yaml `contents.when`): none when the field is not set
--- (lib/typst/xdoc.typ alike). Changes the layout for this run.
+-- (`contents.default` when the frontmatter lacks it; lib/typst/xdoc.typ alike). Changes the layout for this run.
 function M.switch_contents(spec, meta)
-  if spec.contents and spec.contents["when"] and not M.is_set(M.lookup(meta, spec.contents["when"])) then
+  local c = spec.contents
+  local v = c and c["when"] and M.lookup(meta, c["when"])
+  if v == nil and c then v = c.default end
+  if c and c["when"] and not M.is_set(v) then
     spec.contents = nil
   end
 end
@@ -229,8 +232,29 @@ function M.tree(spec, list, ctx, first, page)
     if b.text ~= nil or b.markdown ~= nil then
       local ps = b.text ~= nil and M.expand(tostring(b.text), ctx, b.optional)
         or M.md_paragraphs(M.expand(tostring(b.markdown), ctx, b.optional, true))
+      -- `lines`: the style of a value of more than one line, a paragraph per line, its `above` over it and over the
+      -- value after it (lib/typst/xdoc.typ blocks alike)
+      local ml, opens = {}, {}
+      if b.lines and b.text ~= nil then
+        ps = {}
+        for _, v in ipairs(M.expand(tostring(b.text), ctx, b.optional, true)) do
+          local t = v:gsub("\r\n", "\n"):gsub("\n+$", "")
+          local multi = t:find("\n", 1, true) ~= nil
+          local j = 0
+          for l in (t .. "\n"):gmatch("(.-)\n") do
+            j = j + 1
+            ps[#ps + 1] = l
+            ml[#ps], opens[#ps] = multi, j == 1
+          end
+        end
+      end
       for i, s in ipairs(ps) do
         local text = M.inlines(s)
+        local bs, gap = b, num(b.gap)
+        if b.lines and b.text ~= nil then
+          if ml[i] then bs = copy(b); for k, v in pairs(b.lines) do bs[k] = v end end
+          if i > 1 and opens[i] and (ml[i] or ml[i - 1]) then gap = num(b.lines.above) end
+        end
         if b.heading then
           -- a layout heading (a certificate's title): its level's style, kept with what follows, `head` its level
           -- (bookmarked and in the contents, never numbered: lib/typst/xdoc.typ <xd-lh>)
@@ -240,9 +264,9 @@ function M.tree(spec, list, ctx, first, page)
           out[#out + 1] = { t = "par", text = text, title = M.inlines(s), st = st, head = b.heading, lead = 0,
             above = first and 0 or num(st.above), below = num(st.below) }
         else
-          if b.upper then text = M.upper(text) end
-          out[#out + 1] = { t = "par", text = text, st = b, lead = i == 1 and lead or 0,
-            above = i == 1 and above or num(b.gap), below = i == #ps and below or 0 }
+          if bs.upper then text = M.upper(text) end
+          out[#out + 1] = { t = "par", text = text, st = bs, lead = i == 1 and lead or 0,
+            above = i == 1 and above or gap, below = i == #ps and below or 0 }
         end
       end
       if #ps > 0 then first = false end
@@ -251,17 +275,38 @@ function M.tree(spec, list, ctx, first, page)
       first = false
     elseif b.columns ~= nil then
       -- a list of columns, or one column per item of a list (`each`), each with its context
-      -- (`per_row`: that many columns a row, the rows `row_gap` apart; a short last row keeps the widths)
+      -- (`per_row`: that many columns a row, the rows `row_gap` apart; a short last row keeps the widths; `widths`: the
+      -- width of the column at each place in a row, the places it does not give shared alike)
       local rows = {}
       if b.columns.each ~= nil then
         local items = M.lookup(ctx, b.columns.each)
         if items == nil then error("xdoc: missing required metadata field `" .. b.columns.each .. "`", 0) end
         local n = tonumber(b.columns.per_row) or #items
-        for i = 1, #items, math.max(n, 1) do
+        local ws = b.columns.widths or {}
+        if b.columns.split ~= nil then
+          -- `split`: two columns, the first holding the first N items (N the frontmatter field `split` names, or a
+          -- number; half of them, rounded up, without it), the second the rest, the items of a column `gap` apart
+          -- (lib/typst/xdoc.typ blocks alike)
+          local s = b.columns.split
+          local k = tonumber(type(s) == "string" and M.lookup(ctx, s) or s) or math.ceil(#items / 2)
+          k = math.min(k, #items)
+          local parts = { {}, {} }
+          for i, it in ipairs(items) do table.insert(parts[i <= k and 1 or 2], it) end
+          local cols = {}
+          for j, part in ipairs(parts) do
+            local c = copy(ctx)
+            c.__split = part
+            cols[j] = { width = tonumber(ws[j]) or b.columns.width, valign = b.columns.valign,
+              items = M.tree(spec, { { each = "__split", gap = b.columns.gap, blocks = b.columns.blocks } }, c, true) }
+          end
+          rows[1] = cols
+          n = 0
+        end
+        for i = 1, (n > 0 and #items or 0), math.max(n, 1) do
           local cols = {}
           for j = i, i + n - 1 do
             local it = items[j]
-            cols[#cols + 1] = { width = b.columns.width, valign = b.columns.valign,
+            cols[#cols + 1] = { width = tonumber(ws[j - i + 1]) or b.columns.width, valign = b.columns.valign,
               items = it ~= nil and M.tree(spec, b.columns.blocks, M.item_ctx(ctx, it, j), true) or {} }
           end
           rows[#rows + 1] = cols
@@ -286,7 +331,11 @@ function M.tree(spec, list, ctx, first, page)
       if items == nil then error("xdoc: missing required metadata field `" .. b.each .. "`", 0) end
       for i, it in ipairs(items) do
         if i > 1 and b.between then
-          for _, n in ipairs(M.tree(spec, b.between, ctx, false, page)) do out[#out + 1] = n end
+          -- in the context of the item before (its fields decide a `when`), the item after as `next` ("when:
+          -- next.versus"; lib/typst/xdoc.typ blocks alike)
+          local bctx = M.item_ctx(ctx, items[i - 1], i - 1)
+          bctx.next = it
+          for _, n in ipairs(M.tree(spec, b.between, bctx, false, page)) do out[#out + 1] = n end
         end
         local ictx = M.item_ctx(ctx, it, i)
         local bl = b.blocks
@@ -294,6 +343,11 @@ function M.tree(spec, list, ctx, first, page)
           bl = copy(bl)
           bl[1] = copy(bl[1])
           bl[1].above = math.max(num(b.above), num(bl[1].above))
+        elseif i > 1 and #bl > 0 and num(b.gap) > 0 then
+          -- `gap`: the least space between two items (above the first block of every item after the first)
+          bl = copy(bl)
+          bl[1] = copy(bl[1])
+          bl[1].above = math.max(num(b.gap), num(bl[1].above))
         end
         for _, n in ipairs(M.tree(spec, bl, ictx, first and i == 1, page)) do out[#out + 1] = n end
       end
@@ -351,7 +405,8 @@ end
 
 -- A Str's text with the URL in it (http://, https://, www.) cut into the pieces a line may end between: after a slash
 -- not followed by another (after "https://", not inside it), a dot before an ASCII letter or digit, a hyphen before a
--- letter, a "?" or "!" before a letter or digit (lib/typst/xdoc.typ url-pieces): the text before the URL, the pieces; nil when the text holds no URL.
+-- letter, a "?", "!" or "&" before a letter or digit (lib/typst/xdoc.typ url-pieces): the text before the URL, the
+-- pieces; nil when the text holds no URL.
 function M.url_pieces(s)
   local at = s:find("https?://") or s:find("www%.")
   if not at then return nil end
@@ -366,7 +421,7 @@ function M.url_pieces(s)
     cur = cur .. c
     local nx = cs[i + 1]
     if nx and ((c == "/" and nx ~= "/") or (c == "." and nx:find("^[A-Za-z0-9]$")) or (c == "-" and nx:find("^%a$"))
-      or ((c == "?" or c == "!") and nx:find("^[A-Za-z0-9]$"))) then
+      or ((c == "?" or c == "!" or c == "&") and nx:find("^[A-Za-z0-9]$"))) then
       pieces[#pieces + 1] = cur; cur = ""
     end
   end
@@ -547,6 +602,61 @@ function M.context(spec, meta)
   return meta
 end
 
+-- A table of the body (a pipe table; lib/typst/xdoc.typ body-table): a rule, then each row as columns of equal width
+-- `table.gutter` apart, its cells one paragraph each in the `table` style (`head` over it for the header rows, bold by
+-- default), a rule between two rows and after the last, `table.pad` between a rule and a row; `table.above` and
+-- `table.below` around the whole. No cell spans, no alignment (cmarker sets neither); a cell holds text only
+-- (fb-595.54.14).
+function M.table_nodes(spec, tbl)
+  local t = spec.table or {}
+  local stroke, pad = tonumber(t.stroke) or 0.5, num(t.pad)
+  local function style(head)
+    local st = { pitch = t.pitch, size = t.size }
+    if head then for k, v in pairs(t.head or { bold = true }) do st[k] = v end end
+    return st
+  end
+  local rows = {}
+  for _, r in ipairs(tbl.head.rows) do rows[#rows + 1] = { r, true } end
+  for _, b in ipairs(tbl.bodies) do
+    for _, r in ipairs(b.head) do rows[#rows + 1] = { r, true } end
+    for _, r in ipairs(b.body) do rows[#rows + 1] = { r, false } end
+  end
+  local n = #tbl.colspecs
+  local out = { { t = "rule", w = stroke, lead = 0, above = num(t.above), below = pad } }
+  for i, rh in ipairs(rows) do
+    local cols = {}
+    for j = 1, n do
+      local c = rh[1].cells[j]
+      local text = pandoc.Inlines({})
+      for _, b in ipairs(c and c.contents or {}) do
+        if b.t ~= "Plain" and b.t ~= "Para" then error("xdoc: a table cell holds text only", 0) end
+        if #text > 0 then text:insert(pandoc.Space()) end
+        text:extend(b.content)
+      end
+      cols[j] = { items = { { t = "par", text = text, st = style(rh[2]), lead = 0, above = 0, below = 0 } } }
+    end
+    out[#out + 1] = { t = "cols", cols = cols, gutter = num(t.gutter), lead = 0, above = 0, below = 0 }
+    out[#out + 1] = { t = "rule", w = stroke, lead = 0, above = pad, below = i == #rows and num(t.below) or pad }
+  end
+  return out
+end
+
+-- A footnote mark attached to the word before it: typst (cmarker) sets "system. [^1]" as "system.¹", one word, where
+-- pandoc keeps the space, a place to break the line that typst does not have. The space before a note goes
+-- (fb-595.54.14).
+function M.attach_notes(blocks)
+  return blocks:walk({
+    Inlines = function(list)
+      local out = pandoc.Inlines({})
+      for i, el in ipairs(list) do
+        local nxt = list[i + 1]
+        if not ((el.t == "Space" or el.t == "SoftBreak") and nxt and nxt.t == "Note") then out:insert(el) end
+      end
+      return out
+    end,
+  })
+end
+
 -- Ordered lists as typst's markdown reader (cmarker, CommonMark) reads them: only "1." and "1)" start a list there, so a
 -- list pandoc reads with letters, roman numerals or "(1)" is paragraphs, each starting with its marker as written.
 local LIST_SYM = { LowerAlpha = "a", UpperAlpha = "A", LowerRoman = "i", UpperRoman = "I", Decimal = "1",
@@ -588,10 +698,10 @@ end
 
 
 -- No line break at a space before a closing mark (". . .", "word ,", "x )"): typst never breaks there, even after a
--- space (Unicode LB13: no break before a full stop, comma, colon, semicolon, "!", "?" or a closing bracket), LaTeX and
--- LibreOffice did at any space of a spaced ellipsis. Such a space becomes `glue()`, a no-break space of the engine
--- (LaTeX \nobreakspace: xengine.lua turns a U+00A0 after a period back into a space; Word U+00A0).
-M.NO_BREAK_BEFORE = "^[%.,:;!%?%)%]}]"
+-- space (Unicode LB13: no break before a full stop, comma, colon, semicolon, "!", "?", a closing bracket or a slash:
+-- " /s/"), LaTeX and LibreOffice did at any space of a spaced ellipsis. Such a space becomes `glue()`, a no-break
+-- space of the engine (LaTeX \nobreakspace: xengine.lua turns a U+00A0 after a period back into a space; Word U+00A0).
+M.NO_BREAK_BEFORE = "^[%.,:;!%?%)%]}/]"
 function M.bind_punct(l, glue)
   for i = 1, #l - 1 do
     local a, b = l[i], l[i + 1]
@@ -611,7 +721,8 @@ end
 
 -- The token after a section or pilcrow sign ("§ 75–1–102(1)(a)–(b)", "§ 807-1-A4") is never broken: typst boxes the
 -- sign with it (lib/typst/xengine.typ "[§¶] \S+"), while LaTeX and LibreOffice break after its hyphens and dashes.
--- `hold(pieces)` gives what replaces the token's inlines (up to the next space); the sign and its space as before.
+-- `hold(pieces)` gives what replaces the token's inlines (up to the next space or footnote: a note held in a LaTeX
+-- \mbox is lost); the sign and its space as before.
 function M.hold_sign_tokens(l, hold)
   local out, i = pandoc.Inlines({}), 1
   local function space(x) return x and (x.t == "Space" or (x.t == "Str" and x.text == "\u{00A0}")) end
@@ -621,7 +732,7 @@ function M.hold_sign_tokens(l, hold)
     if el.t == "Str" and (el.text:find("\u{00A7}$") or el.text:find("\u{00B6}$")) and space(l[i + 1]) then
       out:insert(l[i + 1])
       local j, pieces = i + 2, pandoc.Inlines({})
-      while j <= #l and l[j].t ~= "Space" and l[j].t ~= "SoftBreak" and l[j].t ~= "LineBreak" do
+      while j <= #l and l[j].t ~= "Space" and l[j].t ~= "SoftBreak" and l[j].t ~= "LineBreak" and l[j].t ~= "Note" do
         pieces:insert(l[j])
         j = j + 1
       end
@@ -776,8 +887,9 @@ local CONTAINERS = { Emph = true, Strong = true, Underline = true, Strikeout = t
   Link = true, Quoted = true, Superscript = true, Subscript = true }
 
 -- Every occurrence of an authority's `find` text in the blocks, marked right after the text element it ends in (typst
--- marks the end of the word the match ends in): `mark(k, note, after)` gives the inline to insert (`note`: inside a footnote; `after`:
--- the text of the run from the end of the match on). Matches are found within one run of words and spaces (typst
+-- marks the end of the word the match ends in): `mark(k, note, after, find, before)` gives the inline to insert (`note`:
+-- inside a footnote; `after`: the text of the run from the end of the match on; `before`: when fewer than 16 letters
+-- and digits follow in the run, up to 40 characters of the run before the match, else ""). Matches are found within one run of words and spaces (typst
 -- matches text the same way: not across italics), and come out in document order (a footnote's where its mark is).
 function M.mark(blocks, entries, mark, keyed)
   local mark_blocks
@@ -818,13 +930,21 @@ function M.mark(blocks, entries, mark, keyed)
             -- a find that ends in a letter or digit ends where the word does ("Art. V" is not in "Art. VII"; lib/typst/xdoc.typ
             -- with-marks \b)
             if not (fd:find("%w$") and text:sub(b + 1, b + 1):find("^%w")) then
-              found[#found + 1] = { e = b, k = e.k, after = text:sub(b + 1), find = fd }
+              found[#found + 1] = { s = a, e = b, k = e.k, after = text:sub(b + 1), find = fd }
             end
             from = b + 1
           end
         end
       end
       table.sort(found, function(x, y) if x.e ~= y.e then return x.e < y.e end return x.k < y.k end)
+      -- the words before a match too when few follow it in the run (a footnote mark or the paragraph's end cuts it: the
+      -- citation alone, "6.855(1)", would be found at an earlier occurrence), back to the end of the match before it at
+      -- most (the needles are found in document order, each after the one before)
+      local prev = 0
+      for _, f in ipairs(found) do
+        f.before = #M.norm(f.after) < 16 and text:sub(math.max(prev + 1, f.s - 40), f.s - 1) or ""
+        prev = f.e
+      end
       for _, f in ipairs(found) do
         for i = 1, #run do
           if ends[i] >= f.e then
@@ -836,7 +956,7 @@ function M.mark(blocks, entries, mark, keyed)
       end
       for i, r in ipairs(run) do
         out:insert(r.el)
-        for _, f in ipairs(hits[i] or {}) do out:insert(mark(f.k, note, f.after, f.find)) end
+        for _, f in ipairs(hits[i] or {}) do out:insert(mark(f.k, note, f.after, f.find, f.before)) end
       end
       run = {}
     end
@@ -910,14 +1030,16 @@ function M.norm(s)
 end
 
 -- The pages of an authority from the page labels of its marks, in order and without repeats ("--" when none; the
--- entry's own `pages` when it has no `find`): typst's dedup.
-function M.page_list(e, labels)
+-- entry's own `pages` when it has no `find`): typst's dedup; `passim` (layout.yaml authorities.passim) pages or more
+-- are "passim" and true (set in italics, as lib/typst/xdoc.typ sets it).
+function M.page_list(e, labels, passim)
   if not e.find and not e.key then return e.pages and tostring(e.pages) or "--" end
   local seen, out = {}, {}
   for _, l in ipairs(labels) do
     if not seen[l] then seen[l] = true; out[#out + 1] = l end
   end
   if #out == 0 then return "--" end
+  if passim and #out >= tonumber(passim) then return "passim", true end
   return table.concat(out, ", ")
 end
 
@@ -960,7 +1082,8 @@ end
 local function starts(s, p) return s:sub(1, #p) == p end
 
 -- The text a word count reads (layout.yaml `words`; lib/typst/xdoc.typ counted-text): the body up to the tail
--- heading, the level-1 sections from `from` through `through`, less the `exclude`d ones, and the footnotes they call.
+-- heading, the level-1 sections from `from` through `through` (with `sections`, those whose title starts with one
+-- listed), less the `exclude`d ones, and the footnotes they call.
 function M.counted_text(spec, body)
   local w = spec.words
   local at = spec.tail and spec.tail.at
@@ -995,6 +1118,17 @@ function M.counted_text(spec, body)
   end
   if w.from then secs = { table.unpack(secs, find(w.from, "from")) } end
   if w.through then secs = { table.unpack(secs, 1, find(w.through, "through")) } end
+  -- `sections`: only the level-1 sections whose title (lower case, without "*") starts with one listed
+  if w.sections and #w.sections > 0 then
+    local only = {}
+    for _, s in ipairs(secs) do
+      local t = s.head and s.head:gsub("%*", ""):gsub("^%s+", ""):gsub("%s+$", ""):lower()
+      for _, p in ipairs(w.sections) do
+        if t and starts(t, tostring(p):lower()) then only[#only + 1] = s; break end
+      end
+    end
+    secs = only
+  end
   local kept = {}
   for _, s in ipairs(secs) do
     local out = false
@@ -1020,11 +1154,16 @@ function M.sample_body()
   return e and src:sub(e + 1) or src
 end
 
--- The frontmatter with the values the model computes (`xd.words`); a count over `words.limit` stops the render.
+-- The frontmatter with the values the model computes (`xd.words`); a count over `words.limit` (or the frontmatter
+-- field `words.limit_field` names) stops the render; `words.given`: a frontmatter field that states the count instead
+-- (lib/typst/xdoc.typ computed alike).
 function M.computed(spec, meta)
   if not spec.words then return meta end
-  local n = M.count_words(M.counted_text(spec, M.sample_body()))
-  local limit = tonumber(spec.words.limit)
+  local w = spec.words
+  local n
+  if w.given and M.is_set(meta[w.given]) then n = math.floor(tonumber(meta[w.given])) else
+    n = M.count_words(M.counted_text(spec, M.sample_body())) end
+  local limit = tonumber(w.limit_field and meta[w.limit_field] or nil) or tonumber(w.limit)
   if limit and n > limit then
     error("xdoc: the body has " .. n .. " words, over the limit of " .. string.format("%d", limit)
       .. " (layout.yaml words.limit)", 0)

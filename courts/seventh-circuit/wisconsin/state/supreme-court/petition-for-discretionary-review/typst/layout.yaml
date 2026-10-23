@@ -1,0 +1,64 @@
+# Supreme Court of Wisconsin (wis): petition to bypass the court of appeals (Wis. Stat. 809.60).
+# The whole layout, as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from
+# this file by `fb engines gen`, fb-595.54.12). Numbers trace to Wis. Stat. chapter 809 (../../rules.md, SUPCT-*);
+# lengths in points. No case text here: every string printed comes from the sample's frontmatter ({field}) or is a
+# court constant.
+size: 13                  # SUPCT-FORM-004: 809.19(8)(b)3.c, applied here as to a petition for review (809.62(4)): body text at least 13 point
+pitch:
+  body: 22.4              # SUPCT-FORM-005 (as for a petition for review, 809.62(4)): between 1.15 and 1.5 lines (Word's 1.5 lines, 1.5 x 1.15 x 13 pt, to the twip)
+  single: 14.95           # cover, headings, tables, quotations, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 90, right: 90}   # SUPCT-FORM-002: 809.81(4), at least 1.25 in left and right, 1 in top and bottom
+indent: 36
+# LaTeX only: the text block 0.1 pt wider than typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias): newtx
+# sets the line of p29 that typst ends after "Wis." (line 24) wider, and breaks it a word early below 0.075; every line
+# breaks as in typst from 0.075 to 0.12 (measured, fb-595.54.82).
+latex_bias: 0.1
+page_number: {align: center, from: 1}   # SUPCT-FORM-007: 809.81(5), Arabic numbers centered at the foot; the cover is page 1, numbered
+footnote: {size: 11, pitch: 12.65, gap: 7}   # SUPCT-FORM-004, -005: footnotes at least 11 point, single-spaced (1.15 x 11 pt)
+quote: {left: 36, right: 36, above: 10.4, below: 15.6}   # SUPCT-FORM-005: block quotations single-spaced, indented
+# Level 1 a section (bold capitals, centered); levels 2 to 4 argument headings numbered by the template (I., A., 1.)
+heading:
+  - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
+  - {bold: true, hang: 36, number: "I.", above: 15.6, below: 10.4}
+  - {bold: true, hang: 36, number: "A.", above: 13, below: 10.4}
+  - {bold: true, italic: true, hang: 36, number: "1.", above: 11.7, below: 9.1}
+# SUPCT-COVER-001 (809.19(9), the form the exemplar follows): the court, the case number, the caption, the court
+# appealed from, the title and counsel (one column per counsel group).
+cover:
+  - {text: "STATE OF WISCONSIN<br>IN SUPREME COURT", align: center, bold: true}
+  - {text: "No. {case_number}", align: center, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4}
+    blocks:
+      - {text: "{names}", align: center, above: 14.4}
+      - {text: "{designation}", align: center, italic: true, above: 5.2}
+  - {text: "{proceeding}", align: center, optional: true, above: 21.6}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 50.4}
+  - columns: {each: counsel, blocks: [{text: "{names}", bold: true}, {text: "{lines}"}]}
+    gutter: 21.6
+    above: 50.4
+  - {text: "{phone}", optional: true, above: 7.8}
+# 809.19(1)(a), as the exemplar sets them: a table of contents and a table of authorities, each on its own page.
+contents: {title: "Table of Contents", depth: 4, col: 36, hang: 36, step: 19.5, above: 11.7, when: toc, default: true}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 19.5
+  above: 11.7
+  group: {bold: true, above: 15.6, below: 10.4}
+# The date and the signature (SUPCT-SIG-001), never split. SUPCT-MOT-002: 809.60 states no length and no certification.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - columns:
+          - {width: 230.4, blocks: []}
+          - blocks:
+              - {text: "Signed:"}
+              - {rule: 0.5, above: 28.6}
+              - {text: "{signature.signer}", above: 3.9}
+              - {text: "{signature.lines}"}
+        above: 5.2
+    above: 21.6
+  - {when: assisted, blocks: [{text: "This document was prepared with the assistance of a lawyer.", above: 5.2}]}

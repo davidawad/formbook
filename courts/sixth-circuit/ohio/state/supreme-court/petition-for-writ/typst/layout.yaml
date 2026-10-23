@@ -1,0 +1,64 @@
+# Ohio Supreme Court (ohio): complaint in an original action (RoP 12.02). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to RoP 3.07, 3.09 and 12.02 (../../rules.md, OHIO-*); lengths in points. No case text here: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # OHIO-FORM-004: at least 12-point type, footnotes and quotations too (RoP 3.09(B)(1)(b), (B)(3))
+pitch:
+  body: 27.6              # OHIO-FORM-005: double-spaced (RoP 3.09(B)(3); Word's double, 2 x 1.15 x 12 pt)
+  single: 13.8            # cover, headings, tables, footnotes, quotations, signature: single (1.15 x 12 pt)
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # OHIO-FORM-002: at least one inch on all sides (RoP 3.09(B)(2)(c))
+indent: 36
+page_number: {align: center, front: lower-roman}   # the cover unnumbered, the brief from 1
+footnote: {size: 12, gap: 6}             # OHIO-FORM-004, -005: 12-point footnotes, which may be single-spaced
+quote: {left: 36, right: 36, above: 12, below: 12}   # OHIO-FORM-005: quotations may be single-spaced
+heading:
+  - {align: center, bold: true, above: 14.4, below: 12}
+  - {bold: true, above: 14.4, below: 9.6}
+  - {bold: true, italic: true, above: 13.2, below: 7.2}
+# The cover (RoP 3.07(A)-(G), RoP 12.02(A)(1); OHIO-COVER-001, OHIO-WRIT-001): the court, the caption (every
+# relator and respondent, by name and title) beside the case number and the nature of the proceeding, the title, the
+# party it is filed for; then counsel two side by side on a second cover page (eval.yaml cover_pages: 2: a long caption
+# and many counsel do not fit one page at RoP 3.09 type and margins).
+cover:
+  - {text: "IN THE SUPREME COURT OF OHIO", align: center, bold: true}
+  - columns:
+      - width: 284.4
+        blocks:
+          - each: caption
+            blocks:
+              - {text: "{names}", above: 7.2}
+              - {text: "{designation}", left: 129.6, above: 4.8}
+      - blocks:
+          # on the caption's line grid (a whole line between the blocks), its first line beside the first relator's
+          - {text: "Supreme Court Case No. {case_number}", above: 7.2}
+          - {text: "{proceeding}", optional: true, above: 13.8}
+          - {text: "{lower_court}", optional: true, above: 13.8}
+    gutter: 18
+    above: 7.2
+  - {text: "{filing_type}", align: center, bold: true, above: 24}
+  - {text: "{on_behalf_of}", align: center, optional: true, above: 9.6}
+  - {break: true}
+  - columns: {each: counsel, per_row: 2, row_gap: 14.4, blocks: [{text: "{lines}"}]}
+    gutter: 21.6
+# No table of contents: none is required for a complaint (RoP 12.02(B); OHIO-WRIT-002).
+# Then the signature blocks (OHIO-SIG-001: "/s/" and the typed name, in the frontmatter's lines), never split, and the
+# certificate of service on a page of its own when the frontmatter has one (RoP 3.11(B)(1)(a), OHIO-SERV-001; the
+# relator does not serve the complaint, RoP 3.11(B)(1)(b), OHIO-WRIT-003).
+closing:
+  - group:
+      - {text: "Respectfully submitted,", pitch: body}
+      - columns: {each: signature, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 9.6
+    above: 13.8
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 14.4}
+      - {text: "I hereby certify that a copy of the foregoing was sent by {service.method} on {service.date} to the following counsel of record:", pitch: body, indent: 36}
+      - columns: {each: service.recipients, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 12
+      - columns: {each: signature, blocks: [{text: "{lines}"}]}
+        gutter: 21.6
+        above: 19.2

@@ -9,10 +9,12 @@
 //! The text of every page (its page-number line dropped) is reduced the same way and the pages are joined into one
 //! string. Body needles (kind `B`) are found in document order, each from where the one before it was found, so a
 //! short citation ("Id.") is found after the text before it, not earlier on the page. A needle inside a footnote
-//! (kind `N`) is searched from the start of the page the body has reached (footnotes are printed at the foot of the
-//! page) and moves nothing. When NEEDLE runs over a page break with footnotes between, it is found by its halves: a
-//! body needle's head on a page and its tail where the next page starts (the longest head first); failing that,
-//! FALLBACK (the text alone) is tried.
+//! (kind `N`) is searched from where the body has reached (its mark comes after that, and footnotes are printed at the
+//! foot of the page, after its body text), else from the start of that page, and moves nothing. When NEEDLE runs over
+//! a page break with footnotes between, it is found by its halves: a body needle's head on a page and its tail where
+//! the next page starts (the longest head first); failing that, FALLBACK (the text alone) is tried. An authority's
+//! needle (id `a..`) that runs over a page end is on the page its FALLBACK (the find) ends on (typst marks a citation
+//! before its last character).
 //!
 //! A position needle (kind `T` or `Y`, lib/docx/xdoc.lua's fills) asks where a line is, not its page: NEEDLE is found in
 //! the words of the PDF's lines (`pdftotext -bbox-layout`, bbox_lines), on the page the body has reached or a later
@@ -342,8 +344,10 @@ pub fn lookup_all(
             .flatten()
     };
     // a body needle that runs over a page end, with the footnotes and the page number between its halves: its head on
-    // a page (from `from`), its tail (MIN_TAIL characters or more) where the next page starts
-    let split = |s: &str, from: usize| -> Option<usize> {
+    // a page (from `from`), its tail (MIN_TAIL characters or more) where the next page starts; the position of the
+    // head, or where the tail starts when the find (`text`, an authority's fallback) ends in the tail: typst marks a
+    // citation before its last character, so one that runs over a page end is on the next page
+    let split = |s: &str, text: &str, from: usize| -> Option<usize> {
         for q in page_at(from)..starts.len() {
             let (b, a) = (starts[q], starts[q - 1].max(from));
             if b <= a {
@@ -353,7 +357,9 @@ pub fn lookup_all(
                 let (head, tail) = s.split_at(k);
                 if all[b..].starts_with(tail) {
                     if let Some(i) = all[a..b].find(head) {
-                        return Some(a + i);
+                        let ends_in_tail =
+                            !text.is_empty() && s.find(text).is_some_and(|t| t + text.len() > k);
+                        return Some(if ends_in_tail { b } else { a + i });
                     }
                 }
             }
@@ -364,14 +370,26 @@ pub fn lookup_all(
     // the last body needle found, where, and its id: a needle equal to it is found at the same place, not after it,
     // when the two are two authorities' (their finds mark the same word) or the last one a section's start (the
     // tables' numbering starts at the first text after the cover, a heading's); the same authority's next mark is
-    // another occurrence, searched after it
+    // another occurrence, searched after it. An authority's needle is compared from its find on, and its place is its
+    // find's: the words before the find (lib/pandoc/xdoc.lua mark) differ from one needle to the next
+    let anchored = |n: &Needle| -> (usize, String) {
+        let k = if n.id.0.starts_with('a') && !n.fallback.is_empty() {
+            n.needle.find(&n.fallback).unwrap_or(0)
+        } else {
+            0
+        };
+        (k, n.needle[k..].to_string())
+    };
     let authority = |id: &str| {
         id.strip_prefix('a')
             .and_then(|r| r.split_once('.'))
             .map(|(k, _)| k.to_string())
     };
     let section = |id: &str| id == "front" || id == "start";
-    let mut last: Option<(&str, usize, &str)> = None;
+    let mut last: Option<(String, usize, &str)> = None;
+    // just after the last footnote needle found
+    let mut note = 0;
+    let mut last_note: Option<(String, usize, &str)> = None;
     // the end of the last heading's own text: a heading is searched from there (below)
     let mut past_heading = 0;
     let mut found = vec![];
@@ -391,36 +409,76 @@ pub fn lookup_all(
         }
         ys.push(None);
         let heading = n.id.0.starts_with('h') || n.id.0.starts_with('H');
+        let (k, at) = anchored(n);
         let from = if n.place == Place::Body {
             match &last {
                 Some((t, p, id))
-                    if *t == n.needle
+                    if *t == at
                         && (section(id)
                             || authority(id)
                                 .zip(authority(&n.id.0))
                                 .is_some_and(|(a, b)| a != b)) =>
                 {
-                    *p
+                    p.saturating_sub(k)
                 }
                 _ if heading => cur.max(past_heading),
                 _ => cur,
             }
         } else {
-            starts
+            cur
+        };
+        let pos = if n.place == Place::Body {
+            let find_text = if n.id.0.starts_with('a') {
+                n.fallback.as_str()
+            } else {
+                ""
+            };
+            find(&n.needle, from)
+                .or_else(|| split(&n.needle, find_text, from))
+                .or_else(|| find(&n.fallback, from))
+        } else {
+            // a footnote's needle from where the body is (the note's mark is after it, and the note is printed at the
+            // foot of this page or a later one, after its body text), else from the start of the body's page, and after
+            // the last note's needle found (notes are printed in document order: a note that repeats an earlier one's
+            // text is found after it, not on the earlier note's page)
+            // (an equal needle of another authority, the same note's: where the last note needle was found)
+            let note = match &last_note {
+                Some((t, p, id))
+                    if *t == at
+                        && authority(id)
+                            .zip(authority(&n.id.0))
+                            .is_some_and(|(a, b)| a != b) =>
+                {
+                    *p
+                }
+                _ => note,
+            };
+            let page = starts
                 .get(page_at(cur).saturating_sub(1))
                 .copied()
                 .unwrap_or(0)
+                .max(note);
+            let from = from.max(note);
+            find(&n.needle, from)
+                .or_else(|| find(&n.fallback, from))
+                .or_else(|| find(&n.needle, page))
+                .or_else(|| find(&n.fallback, page))
         };
-        let pos = find(&n.needle, from)
-            .or_else(|| {
-                (n.place == Place::Body)
-                    .then(|| split(&n.needle, from))
-                    .flatten()
-            })
-            .or_else(|| find(&n.fallback, from));
+        if let (Some(p), Place::Note) = (pos, n.place) {
+            note = p + 1;
+            last_note = Some((at.clone(), p, &n.id.0));
+        }
         if let (Some(p), true) = (pos, n.place == Place::Body) {
-            cur = cur.max(p + 1);
-            last = Some((&n.needle, p, &n.id.0));
+            // past the start of an authority's find, not of the words before it in its needle: the same authority's next
+            // needle is the find's next occurrence ("statevjones", then "jones"); another authority's equal one, the same
+            // (above)
+            let skip = if all[p..].starts_with(&n.needle) {
+                k
+            } else {
+                0
+            };
+            cur = cur.max(p + skip + 1);
+            last = Some((at, p + skip, &n.id.0));
             // the next heading is searched past this one's own text (its fallback), not past what follows it: its
             // needle "argument" + the next paragraph is found again inside "summary of argument" + the same words
             // otherwise; any other needle (an authority cited in the heading) is searched from the next character
@@ -430,8 +488,13 @@ pub fn lookup_all(
         }
         // an authority's mark is where its find ends (its fallback, the find alone), as LaTeX writes it and typst sets it:
         // a citation over a page end counts on the later page
+        // (the find inside the needle: the words before it come first when few follow it, lib/pandoc/xdoc.lua mark)
         let end = |p: usize| {
-            if n.id.0.starts_with('a') && !n.fallback.is_empty() {
+            if !n.id.0.starts_with('a') || n.fallback.is_empty() {
+                p
+            } else if all[p..].starts_with(&n.needle) {
+                p + n.needle.find(&n.fallback).unwrap_or(0) + n.fallback.len() - 1
+            } else if all[p..].starts_with(&n.fallback) {
                 p + n.fallback.len() - 1
             } else {
                 p
@@ -527,6 +590,59 @@ mod tests {
         // a footnote needle is not split; its fallback still finds it
         let notes = "T:1\tN\t18usc2710onlyaperson\t18usc2710\n";
         assert_eq!(lookup(notes, &p).unwrap(), "T:1\t2\t-\n");
+        // an authority's citation that ends on page 2 is on page 2 (typst marks it before its last character)
+        let cite = "a1.1\tB\t18usc2710onlyaperson\t18usc2710\n";
+        assert_eq!(lookup(cite, &p).unwrap(), "a1.1\t2\t-\n");
+    }
+
+    #[test]
+    fn an_authority_needle_with_the_words_before_it_counts_where_its_find_ends() {
+        // "see Iowa Code" ends page 1, "§ 17A.19(10)(i), (j)" starts page 2: the needle holds the words before the find
+        let pdf = "relevant evidence. see iowa code\n5\n\u{c}17A.19(10)(i), (j). More\n6\n\u{c}";
+        let p = page_texts(pdf);
+        let needles = "a1.1\tB\tevidenceseeiowacode17a1910ij\t17a1910i\n";
+        assert_eq!(lookup(needles, &p).unwrap(), "a1.1\t2\t-\n");
+        // the next needle, the same find alone, is its next occurrence, not the one inside the needle before
+        let pdf = "held in state v jones that\n6\n\u{c}and jones again\n7\n\u{c}";
+        let p = page_texts(pdf);
+        let needles = "a7.1\tB\tstatevjones\tjones\na7.2\tB\tjones\tjones\n";
+        assert_eq!(lookup(needles, &p).unwrap(), "a7.1\t1\t-\na7.2\t2\t-\n");
+        // two authorities marking the same word, the first needle with the words before its find
+        let pdf =
+            "closed pursuant to 84.344.8 and 610.021(13) here\n6\n\u{c}610.021(13) again\n7\n\u{c}";
+        let p = page_texts(pdf);
+        let needles = "a30.1\tB\tand61002113\t610021\na28.1\tB\t61002113\t61002113\n";
+        assert_eq!(lookup(needles, &p).unwrap(), "a30.1\t1\t-\na28.1\t1\t-\n");
+    }
+
+    #[test]
+    fn a_note_that_repeats_an_earlier_one_is_found_after_it() {
+        let pdf = "Body one.1\n1 Smith, A Book 2011 at 4.\n1\n\u{c}Body two.2\n2 Smith, A Book 2011 at 9.\n2\n\u{c}";
+        let p = page_texts(pdf);
+        let notes = "a:1\tN\tsmithabook2011\tsmith\na:2\tN\tsmithabook2011\tsmith\n";
+        assert_eq!(lookup(notes, &p).unwrap(), "a:1\t1\t-\na:2\t2\t-\n");
+        // two authorities' equal needles in one note are found in that note; the next note that repeats it, after
+        // another needle, in the next note
+        let pdf = "Body one.1\n1 Smith, A Book 2011 at 4, and Jones.\n1\n\u{c}Body two.2\n2 Smith, A Book 2011 at 9, and Jones.\n2\n\u{c}";
+        let p = page_texts(pdf);
+        let notes = "a30.2\tN\tsmithabook2011\tsmith\na28.2\tN\tsmithabook2011\tsmith\na5.1\tN\tjones\tjones\na30.7\tN\tsmithabook2011\tsmith\n";
+        assert_eq!(
+            lookup(notes, &p).unwrap(),
+            "a30.2\t1\t-\na28.2\t1\t-\na5.1\t1\t-\na30.7\t2\t-\n"
+        );
+    }
+
+    #[test]
+    fn a_footnote_needle_is_found_after_the_body() {
+        // the body cites Town of Delavan on page 1; the note that cites it again has its mark on page 2
+        let pdf =
+            "in Town of Delavan the Court\n1\n\u{c}held more\n1 Despite Town of Delavan\n2\n\u{c}";
+        let p = page_texts(pdf);
+        let needles = "a1.1\tB\ttownofdelavanthecourt\tdelavan\nP:1\tB\theldmore\theld\na1.2\tN\ttownofdelavan\tdelavan\n";
+        assert_eq!(
+            lookup(needles, &p).unwrap(),
+            "a1.1\t1\t-\nP:1\t2\t-\na1.2\t2\t-\n"
+        );
     }
 
     #[test]

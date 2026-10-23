@@ -1,0 +1,86 @@
+# Supreme Court of Wisconsin (wis): respondent's (answering) brief, Wis. Stat. 809.19(3), applied in the supreme court
+# by 809.63 (original actions under 809.70 and reviews). The whole layout, as data for the shared document model
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by `fb engines gen`, fb-595.54.12). Numbers trace
+# to Wis. Stat. chapter 809 (../../rules.md, SUPCT-*); lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}) or is a court constant.
+size: 13                  # SUPCT-FORM-004: 809.19(8)(b)3.c, body text at least 13 point
+pitch:
+  body: 22.4              # SUPCT-FORM-005, 809.19(8)(b)3.c: between 1.15 and 1.5 lines (Word's 1.5 lines, 1.5 x 1.15 x 13 pt, to the twip)
+  single: 14.95           # headings, tables, quotations, signature: single (1.15 x 13 pt)
+margin: {top: 72, bottom: 72, left: 90, right: 90}   # SUPCT-FORM-002: 809.81(4), at least 1.25 in left and right, 1 in top and bottom
+indent: 36
+page_number: {align: center, from: 2}   # SUPCT-FORM-007: 809.19(8)(bm), Arabic numbers centered at the foot; the cover counts as page 1, unprinted
+footnote: {size: 11, pitch: 12.65, gap: 7, clearance: 7.5}   # SUPCT-FORM-004, -005: footnotes at least 11 point, single-spaced (1.15 x 11 pt)
+# the footnote clearance 7.5 pt, not the model's 9.1 (tools/fb/src/enginegen/tex.rs CLEARANCE, measured on LibreOffice
+# under one note): on a page of two notes LibreOffice keeps less, and at 9.1 typst moved a heading and its first lines
+# on that Word kept (measured, fb-595.54.82; docs/open-items/fb-595.54.82.md, Word's footnote area)
+quote: {left: 36, right: 36, above: 10.4, below: 15.6}   # SUPCT-FORM-005: block quotations single-spaced, indented
+# Level 1 a section (bold capitals, centered); levels 2 to 4 argument headings numbered by the template (I., A., 1.)
+heading:
+  - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
+  - {bold: true, hang: 36, number: "I.", above: 15.6, below: 10.4}
+  - {bold: true, hang: 36, number: "A.", above: 13, below: 10.4}
+  - {bold: true, italic: true, hang: 36, number: "1.", above: 11.7, below: 9.1}
+# SUPCT-COVER-001 (809.19(9)): a white cover with the court, the caption and case number, the title and counsel. The
+# parties' sides one after another, "v." before the side that says `versus: true`. The whole cover at 10 point,
+# single-spaced (cover type is not body text, SUPCT-FORM-004), the counsel three to a row: a caption that names every
+# party and six counsel groups leave it one page (10 point type in 10 point lines, the counsel three to a row).
+cover:
+  - {text: "IN THE SUPREME COURT OF WISCONSIN", align: center, bold: true, size: 10, pitch: 10}
+  - {text: "No. {case_number}", align: center, size: 10, pitch: 10, above: 10.8}
+  - each: caption
+    above: 7.2
+    between:
+      - {when: next.versus, blocks: [{text: "v.", align: center, size: 10, pitch: 10, above: 9}]}
+    blocks:
+      - {text: "{names}", align: center, size: 10, pitch: 10, above: 9}
+      - {when: designation, blocks: [{text: "{designation}", align: center, italic: true, size: 10, pitch: 10}]}
+  - {text: "{proceeding}", align: center, optional: true, size: 10, pitch: 10, above: 10.8}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 10, pitch: 10, above: 18}
+  - columns:
+      each: counsel
+      per_row: 3
+      row_gap: 7.2
+      blocks: [{text: "{names}", bold: true, size: 10, pitch: 10}, {text: "{lines}", size: 10, pitch: 10}]
+    gutter: 7.2
+    above: 18
+  - {text: "{phone}", optional: true, size: 10, pitch: 10, above: 7.8}
+# SUPCT-BRIEF-001 (809.19(1)(a), (3)(a)): a table of contents with page references and a table of authorities, each on
+# its own page.
+contents: {title: "Table of Contents", depth: 4, col: 36, hang: 36, step: 19.5, above: 11.7, when: toc, default: true}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 19.5
+  above: 11.7
+  group: {bold: true, above: 15.6, below: 10.4}
+  passim: 11              # an authority cited on more than ten pages (eleven or more): "passim" (The Bluebook R. 3.2(a)), not a list wider than the citation
+# SUPCT-LEN-001 (809.19(8)(c)1.): 11,000 words in a proportional serif font, the statement of the case, argument and
+# conclusion counted (809.19(1)(d), (e), (f); 809.19(3)(a)), footnotes included.
+words: {sections: [statement of the case, argument, conclusion], limit: 11000, limit_field: word_limit}
+# The date and the signature (SUPCT-SIG-001), never split; then the certification of form and length (SUPCT-CERT-001,
+# 809.19(8g)(a), in the rule's words) on its own page, signed again.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - columns:
+          - {width: 230.4, blocks: []}
+          - blocks:
+              - {text: "Signed:"}
+              - {rule: 0.5, above: 28.6}
+              - {text: "{signature.signer}", above: 3.9}
+              - {text: "{signature.lines}"}
+        above: 5.2
+    above: 21.6
+  - {when: assisted, blocks: [{text: "This document was prepared with the assistance of a lawyer.", above: 5.2}]}
+  - {break: true}
+  - {text: "CERTIFICATION AS TO FORM AND LENGTH", align: center, bold: true, below: 6.5}
+  - {text: "I hereby certify that this brief conforms to the rules contained in s. 809.19 (8) (b), (bm), and (c) for a brief. The length of this brief is {xd.words} words.", indent: 36, pitch: body}
+  - columns:
+      - {width: 230.4, blocks: []}
+      - blocks:
+          - {text: "Signed:"}
+          - {rule: 0.5, above: 28.6}
+          - {text: "{signature.signer}", above: 3.9}
+          - {text: "{signature.lines}"}
+    above: 7.8

@@ -1,0 +1,12 @@
+# OHIO-REPLY-001 (RoP 16.04(B)(1)): a reply is limited to 20 numbered pages, the signature block counted (the table of
+# contents, the table of authorities, the certificate of service and the appendix are not). This sample (the filed
+# reply, transcribed whole) runs to 21: its argument ends at the foot of page 20 and the signature block takes page 21,
+# at Word's double spacing (27.6 pt, as the filed brief measures). The filed brief, set in Word with kerning, fits more
+# words to a line and ends its argument on page 19; the cross-engine model sets no kerning in any engine. The page
+# count is not checked here (DEF-LEN-001 counts the whole PDF, cover and tables included); open question on bead
+# fb-595.54.15: a 24 pt (2 x 12 pt) double spacing for this folder, or the sample as is.
+params:
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+  # the typst render does, so a difference fails.
+  cross_engine: gate
