@@ -123,7 +123,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Court of International Trade](courts/federal-circuit/court-of-international-trade) | `cit` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Court of Veteran Appeals](courts/federal-circuit/court-of-veteran-appeals) | `cavc` | up for review | 2/2 | — | 2/2 | 14 |
 | [Patent Trial and Appeal Board](courts/federal-circuit/patent-trial-and-appeal-board) | `ptab` | up for review | 2/2 | — | 2/2 | 14 |
-| [Trademark Trial and Appeal Board](courts/federal-circuit/trademark-trial-and-appeal-board) | `ttab` | up for review | 3/3 | — | 3/3 | 29 |
+| [Trademark Trial and Appeal Board](courts/federal-circuit/trademark-trial-and-appeal-board) | `ttab` | up for review | 4/4 | — | 4/4 | 29 |
 
 ## Military courts
 
@@ -861,7 +861,7 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 |  | 17 | 17 | 17 | 17 | 17 | 17 | 100.0% | 17 |
 | Supreme Court of the United States | 3 | 3 | 3 | 3 | 3 | 3 | 100.0% | 3 |
 |  | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| Federal Circuit and feeder courts | 14 | 14 | 14 | 14 | 14 | 14 | 100.0% | 14 |
+| Federal Circuit and feeder courts | 15 | 15 | 15 | 15 | 15 | 15 | 100.0% | 15 |
 | Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 12 |
 | National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 6 |
 | First Circuit | 65 | 65 | 65 | 65 | 64 | 64 | 98.4% | 65 |
@@ -876,5 +876,5 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Tenth Circuit | 106 | 106 | 106 | 106 | 103 | 103 | 97.1% | 106 |
 | Eleventh Circuit | 129 | 129 | 129 | 129 | 128 | 128 | 99.2% | 129 |
 | D.C. Circuit | 14 | 14 | 14 | 14 | 14 | 14 | 100.0% | 14 |
-| **Total** | 1185 | 1185 | 1184 | 1184 | 1170 | 1170 | 98.7% | 1184 |
+| **Total** | 1186 | 1186 | 1185 | 1185 | 1171 | 1171 | 98.7% | 1185 |
 <!-- tracker:end -->
