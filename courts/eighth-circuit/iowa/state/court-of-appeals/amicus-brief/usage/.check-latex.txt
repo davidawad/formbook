@@ -1,2 +1,3 @@
 PASS
-9db700e77484b673b1074506cd2ccd18cbe5a0db2cf6d565f9832cff88fee4b7  usage/OUTPUT-amicus-brief.latex.pdf
+3f9fc5c0f316cbb4fc96e50a5aed883e6f220dc902ad50e78c1bfc2a08325953  usage/OUTPUT-amicus-brief.latex.pdf
+73daf31222463781dcf75016568bccee4f3ffe0aaf07ec8779add52ba8a53c20  usage/OUTPUT-amicus-brief.typst.pdf
