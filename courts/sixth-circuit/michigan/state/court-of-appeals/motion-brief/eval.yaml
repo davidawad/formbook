@@ -1,7 +1,8 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated, until the shared
-# model sets two things alike (docs/open-items/fb-595.54.63.md): typst and LibreOffice break after the slash of
-# "cash/surety", LaTeX does not (XENG-003 p13 line 5, p21 line 4; pages equal); LibreOffice keeps a note's anchor
-# line on p11 and moves the note (the Word footnote area), so the docx pages differ from p12.
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). latex is gated: the model now breaks
+# after the slash of "cash/surety" in LaTeX as typst and Word do (fb-595.54.82). docx is reported
+# (docs/open-items/fb-595.54.63.md): LibreOffice keeps a note's anchor line on p11 and moves the note (the model's
+# Word footnote area), so the docx pages differ from p12.
 params:
-  cross_engine: report
+  cross_engine: gate
+  cross_engine_docx: report
