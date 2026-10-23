@@ -3,10 +3,10 @@
 font:
   size_pt: 14
   pdf_prefix: "TeXGyreBonum"
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. typst is on the shared document
-# model (typst/layout.yaml) and latex/ and docx/ are generated (TeX Gyre Bonum, fb-595.54.82); pages are equal in all
-# three engines, but the remaining line differences are the model's (docs/open-items/fb-595.54.39.md): latex has no
-# break after a slash inside a word ("employment/partnership", p10), so its pages 20-27 end apart; LibreOffice sets
-# "different" in Bonum 0.8 pt wider than typst and LaTeX (p20 line 8: 597/603 lines).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): typst is on the shared document model
+# (typst/layout.yaml); latex/ and docx/ are generated (TeX Gyre Bonum, fb-595.54.82). latex is gated: 603/603 lines as
+# typst. docx is reported: pages equal, 597/603 lines; LibreOffice sets "different" in Bonum 0.8 pt wider than typst
+# and LaTeX (p20 line 8), the face's advances in Word (docs/open-items/fb-595.54.39.md).
 params:
-  cross_engine: report
+  cross_engine: gate
+  cross_engine_docx: report

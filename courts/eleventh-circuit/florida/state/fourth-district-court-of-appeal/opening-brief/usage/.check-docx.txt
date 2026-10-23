@@ -1,3 +1,3 @@
 PASS
-68d9e96b00f4ef7e924193c5f633d6ef04d42fb6e3cd800f02c51b74d89133ed  usage/OUTPUT-opening-brief.docx
-ef2b8cb9b693ffad86ecb8dd41b0360257a1cc958355f0e696e5124a1f4fc69a  usage/OUTPUT-opening-brief.docx.pdf
+a7ad8884d9e26a20710c9bb2ba88f34449e06861aa13da432462eccc874c2144  usage/OUTPUT-opening-brief.docx
+208c939ba13cd17c480b17debc8aa3a984ab7e98f6c3106cf9432d53ffc3e890  usage/OUTPUT-opening-brief.docx.pdf
