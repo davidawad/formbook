@@ -8,6 +8,10 @@ pitch:
   body: 25.2              # TENN-FORM-002 (§ 3.02.2(a)): 1.5 line spacing (1.5 x Schola's single line, 1.2 x 14 pt)
   single: 16.8            # cover, caption, counsel block, tables: single spaced (tier 2, TENN-FORM-002)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # TENN-FORM-003 (§ 3.02.2(b)): 1 inch on all sides
+# Word only: the right margin 0.2 pt (4 twips) wider. p10 "… (Tenn. 2015), this Court" fills 467.83 of the 468 pt
+# measure in typst, which moves "Court" down; LibreOffice's twip-rounded Schola advances kept it and p11 ended a
+# line apart. Measured as the least bias at which every line breaks as in typst (0.05, 0.1, 0.15 keep p10).
+docx_bias: 0.2
 indent: 36
 justify: true             # TENN-FORM-006 (§ 3.02.4): fully justified
 page_number: {align: center, from: 2}   # TENN-FORM-007 (§ 3.02.5): the cover is page 1, its number suppressed; numbers at the bottom

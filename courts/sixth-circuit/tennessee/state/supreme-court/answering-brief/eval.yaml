@@ -3,6 +3,8 @@ font:
   size_pt: 14
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12).
+# latex and docx break every line and page where typst does (XENG-001..003 pass): the shared model now keeps an em dash
+# with a quotation mark after it and breaks after a slash inside a word in LaTeX (fb-595.54.82).
 params:
   cross_engine: gate
   # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,
@@ -10,8 +12,3 @@ params:
   # 68.01 pt; typst 75.12 pt), as in the California courts of appeal motion brief and the Georgia Supreme Court's
   # Schola folders. The vertical tolerance covers that box, not text: Gate 4 puts the engines on the same baselines.
   eps_v_pt: 4
-  # latex is reported (the shared LaTeX model, docs/open-items/fb-595.54.54.md): p12 "… pain—‘superadd[ing]’": typst
-  # and Word break before the em dash (UAX #14 LB19: no break before the quote after it), LaTeX after it; p38
-  # "Baze/" "Glossip", p43 "supplier/" "compounder": typst and Word break after a slash inside a word, LaTeX does not.
-  # Every page starts and ends alike.
-  cross_engine_latex: report

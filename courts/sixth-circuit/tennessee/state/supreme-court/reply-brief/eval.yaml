@@ -3,13 +3,15 @@ font:
   size_pt: 14
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12).
-# Not gated (docs/open-items/fb-595.54.54.md), every page counted alike:
-# - latex: p8 "… Plaintiffs—“that the …": typst and Word break before the em dash (UAX #14 LB19), LaTeX after it.
-# - docx: p4 line 25 and later: lines typst fills to within a point of the measure, which LibreOffice's twip-rounded Schola advances fit (the line-fit tolerance); p5 starts a word later.
+# latex breaks every line and page where typst does (XENG-001..003 pass).
 params:
-  cross_engine: report
+  cross_engine: gate
   # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,
   # whose 16.8 pt line box starts at the 1 in margin, measures its box 3.99 pt into the margin on docx (box top
   # 68.01 pt; typst 75.12 pt), as in the California courts of appeal motion brief and the Georgia Supreme Court's
   # Schola folders. The vertical tolerance covers that box, not text: Gate 4 puts the engines on the same baselines.
   eps_v_pt: 4
+  # docx is reported (docs/open-items/fb-595.54.54.md, C4): p11 line 9 "… (R. XVI, 2216-28).¹⁰ Second,": LibreOffice
+  # sets Schola's "ff" ligature ("Plaintiffs" 0.57 pt narrower than typst), so the line takes "Plaintiffs"; no
+  # docx_bias fits (0.25 keeps p11, 0.3 breaks p9 line 16 a word early). Pages and page ends equal.
+  cross_engine_docx: report

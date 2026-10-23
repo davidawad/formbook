@@ -3,13 +3,15 @@ font:
   size_pt: 14
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12).
-# Not gated (docs/open-items/fb-595.54.54.md), every page counted alike:
-# - latex: p17 a URL in a note ("https://www.commercialappeal.com/story/" / "news/local/…") breaks at other pieces than in typst; p17-18 page ends follow.
-# - docx: p1 the cover's proceeding line and p2 contents rows, then body lines: lines LibreOffice's Schola advances fit (the line-fit tolerance); page ends from p8 differ.
+# latex breaks every line and page where typst does (XENG-001..003 pass).
 params:
-  cross_engine: report
+  cross_engine: gate
   # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,
   # whose 16.8 pt line box starts at the 1 in margin, measures its box 3.99 pt into the margin on docx (box top
   # 68.01 pt; typst 75.12 pt), as in the California courts of appeal motion brief and the Georgia Supreme Court's
   # Schola folders. The vertical tolerance covers that box, not text: Gate 4 puts the engines on the same baselines.
   eps_v_pt: 4
+  # docx is reported (docs/open-items/fb-595.54.54.md, C5): p7's last line cites note 5, which does not fit below it;
+  # typst moves the line to p8 with its note, LibreOffice keeps the line and moves the note (the note placement open
+  # in docs/open-items/fb-595.54.82.md); page ends from p8 follow.
+  cross_engine_docx: report

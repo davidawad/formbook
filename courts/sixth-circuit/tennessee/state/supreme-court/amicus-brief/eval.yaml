@@ -2,8 +2,8 @@
 font:
   size_pt: 14
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). latex breaks every line and page where
-# typst does (XENG-001..003 pass).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12).
+# latex and docx break every line and page where typst does (XENG-001..003 pass); docx with the layout's docx_bias.
 params:
   cross_engine: gate
   # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,
@@ -11,7 +11,3 @@ params:
   # 68.01 pt; typst 75.12 pt), as in the California courts of appeal motion brief and the Georgia Supreme Court's
   # Schola folders. The vertical tolerance covers that box, not text: Gate 4 puts the engines on the same baselines.
   eps_v_pt: 4
-  # docx is reported: p10 "… (Tenn. 2015), this Court" fills 467.83 of the 468 pt measure; typst moves "Court" down,
-  # LibreOffice's twip-rounded Schola advances keep it (the line-fit tolerance open in docs/open-items/fb-595.54.82.md);
-  # later lines and p11's end follow (docs/open-items/fb-595.54.54.md).
-  cross_engine_docx: report

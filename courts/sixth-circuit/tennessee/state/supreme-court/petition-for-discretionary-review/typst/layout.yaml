@@ -8,6 +8,10 @@ pitch:
   body: 25.2              # TENN-FORM-002 (§ 3.02.2(a)): 1.5 line spacing (1.5 x Schola's single line, 1.2 x 14 pt)
   single: 16.8            # cover, caption, counsel block, tables: single spaced (tier 2, TENN-FORM-002)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # TENN-FORM-003 (§ 3.02.2(b)): 1 inch on all sides
+# Word only: the right margin 0.25 pt (5 twips) wider. LibreOffice's twip-rounded Schola advances fit a word more
+# on p2 line 7 (the contents' "… Annotated" / "§ 40-30-117.") and p4 line 7 ("… filed" / "a Motion") than
+# typst; 0.2 keeps p2, 0.3 breaks the p8 bold heading a word early. Measured: 0.25 breaks every line and page as typst does.
+docx_bias: 0.25
 indent: 36
 justify: true             # TENN-FORM-006 (§ 3.02.4): fully justified
 page_number: {align: center, from: 2}   # TENN-FORM-007 (§ 3.02.5): the cover is page 1, its number suppressed; numbers at the bottom

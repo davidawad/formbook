@@ -8,6 +8,10 @@ pitch:
   body: 25.2              # TENN-FORM-002 (§ 3.02.2(a)): 1.5 line spacing (1.5 x Schola's single line, 1.2 x 14 pt)
   single: 16.8            # cover, caption, counsel block, tables: single spaced (tier 2, TENN-FORM-002)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # TENN-FORM-003 (§ 3.02.2(b)): 1 inch on all sides
+# Word only: the right margin 0.05 pt (1 twip) wider. p4 line 25 "… determined" fills the 468 pt measure in typst;
+# LibreOffice's twip-rounded Schola advances fit "upon" too and p5 started a word later. 0.05 to 0.25 break it as
+# typst does; p11 line 9 (eval.yaml) needs 0.3, which breaks p9 line 16 early, so docx stays reported.
+docx_bias: 0.05
 indent: 36
 justify: true             # TENN-FORM-006 (§ 3.02.4): fully justified
 page_number: {align: center, from: 2}   # TENN-FORM-007 (§ 3.02.5): the cover is page 1, its number suppressed; numbers at the bottom

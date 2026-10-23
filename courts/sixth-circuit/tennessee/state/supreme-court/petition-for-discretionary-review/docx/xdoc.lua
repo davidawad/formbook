@@ -10,7 +10,124 @@ return require("docx.xdoc")({
     ["top"] = 72,
     ["bottom"] = 72,
     ["left"] = 72,
-    ["right"] = 72,
+    ["right"] = 72.25,
+  },
+  ["closing"] = {
+    {
+      ["group"] = {
+        {
+          ["text"] = "Respectfully submitted,",
+          ["pitch"] = "body",
+        },
+        {
+          ["text"] = "/s/ {signature.signer}",
+          ["pitch"] = "body",
+          ["above"] = 8.4,
+        },
+        {
+          ["text"] = "{signature.lines}",
+          ["pitch"] = "body",
+        },
+        {
+          ["text"] = "{signature.role}",
+          ["italic"] = true,
+          ["pitch"] = "body",
+          ["above"] = 5.6,
+        },
+      },
+      ["above"] = 16.8,
+    },
+    {
+      ["break"] = true,
+    },
+    {
+      ["text"] = "Certificate of Service",
+      ["align"] = "center",
+      ["bold"] = true,
+      ["upper"] = true,
+      ["pitch"] = "body",
+      ["keep"] = true,
+      ["below"] = 8.4,
+    },
+    {
+      ["text"] = "I hereby certify that a true and exact copy of the foregoing *{brief_title}* was served {service.method} on the {service.date}, to the following:",
+      ["pitch"] = "body",
+    },
+    {
+      ["each"] = "service.served",
+      ["blocks"] = {
+        {
+          ["group"] = {
+            {
+              ["text"] = "{name}",
+              ["left"] = 36,
+              ["pitch"] = "body",
+            },
+            {
+              ["text"] = "{address}",
+              ["left"] = 36,
+              ["pitch"] = "body",
+            },
+          },
+          ["above"] = 8.4,
+        },
+      },
+    },
+    {
+      ["group"] = {
+        {
+          ["text"] = "/s/ {service.declarant}",
+          ["left"] = 234,
+          ["pitch"] = "body",
+        },
+        {
+          ["text"] = "{service.declarant_lines}",
+          ["left"] = 234,
+          ["pitch"] = "body",
+        },
+      },
+      ["above"] = 19.6,
+    },
+    {
+      ["break"] = true,
+    },
+    {
+      ["text"] = "Certificate of Compliance",
+      ["align"] = "center",
+      ["bold"] = true,
+      ["upper"] = true,
+      ["pitch"] = "body",
+      ["keep"] = true,
+      ["below"] = 8.4,
+    },
+    {
+      ["text"] = "In accordance with Tenn. Sup. Ct. R. 46, § 3.02, the total number of words in this brief, excluding the cover page, Table of Contents, Table of Authorities, Certificate of Compliance, attorney signature block and Certificate of Service, is {xd.words}. This word count is based upon the word processing system used to prepare this brief. The limit under Tenn. R. App. P. 30(e) and Tenn. Sup. Ct. R. 46, § 3.02.1 is 15,000 words.",
+      ["pitch"] = "body",
+    },
+    {
+      ["group"] = {
+        {
+          ["text"] = "Respectfully submitted,",
+          ["pitch"] = "body",
+        },
+        {
+          ["text"] = "/s/ {signature.signer}",
+          ["pitch"] = "body",
+          ["above"] = 8.4,
+        },
+        {
+          ["text"] = "{signature.lines}",
+          ["pitch"] = "body",
+        },
+        {
+          ["text"] = "{signature.role}",
+          ["italic"] = true,
+          ["pitch"] = "body",
+          ["above"] = 5.6,
+        },
+      },
+      ["above"] = 16.8,
+    },
   },
   ["indent"] = 36,
   ["justify"] = true,
@@ -228,123 +345,6 @@ return require("docx.xdoc")({
   },
   ["words"] = {
     ["limit"] = 15000,
-  },
-  ["closing"] = {
-    {
-      ["group"] = {
-        {
-          ["text"] = "Respectfully submitted,",
-          ["pitch"] = "body",
-        },
-        {
-          ["text"] = "/s/ {signature.signer}",
-          ["pitch"] = "body",
-          ["above"] = 8.4,
-        },
-        {
-          ["text"] = "{signature.lines}",
-          ["pitch"] = "body",
-        },
-        {
-          ["text"] = "{signature.role}",
-          ["italic"] = true,
-          ["pitch"] = "body",
-          ["above"] = 5.6,
-        },
-      },
-      ["above"] = 16.8,
-    },
-    {
-      ["break"] = true,
-    },
-    {
-      ["text"] = "Certificate of Service",
-      ["align"] = "center",
-      ["bold"] = true,
-      ["upper"] = true,
-      ["pitch"] = "body",
-      ["keep"] = true,
-      ["below"] = 8.4,
-    },
-    {
-      ["text"] = "I hereby certify that a true and exact copy of the foregoing *{brief_title}* was served {service.method} on the {service.date}, to the following:",
-      ["pitch"] = "body",
-    },
-    {
-      ["each"] = "service.served",
-      ["blocks"] = {
-        {
-          ["group"] = {
-            {
-              ["text"] = "{name}",
-              ["left"] = 36,
-              ["pitch"] = "body",
-            },
-            {
-              ["text"] = "{address}",
-              ["left"] = 36,
-              ["pitch"] = "body",
-            },
-          },
-          ["above"] = 8.4,
-        },
-      },
-    },
-    {
-      ["group"] = {
-        {
-          ["text"] = "/s/ {service.declarant}",
-          ["left"] = 234,
-          ["pitch"] = "body",
-        },
-        {
-          ["text"] = "{service.declarant_lines}",
-          ["left"] = 234,
-          ["pitch"] = "body",
-        },
-      },
-      ["above"] = 19.6,
-    },
-    {
-      ["break"] = true,
-    },
-    {
-      ["text"] = "Certificate of Compliance",
-      ["align"] = "center",
-      ["bold"] = true,
-      ["upper"] = true,
-      ["pitch"] = "body",
-      ["keep"] = true,
-      ["below"] = 8.4,
-    },
-    {
-      ["text"] = "In accordance with Tenn. Sup. Ct. R. 46, § 3.02, the total number of words in this brief, excluding the cover page, Table of Contents, Table of Authorities, Certificate of Compliance, attorney signature block and Certificate of Service, is {xd.words}. This word count is based upon the word processing system used to prepare this brief. The limit under Tenn. R. App. P. 30(e) and Tenn. Sup. Ct. R. 46, § 3.02.1 is 15,000 words.",
-      ["pitch"] = "body",
-    },
-    {
-      ["group"] = {
-        {
-          ["text"] = "Respectfully submitted,",
-          ["pitch"] = "body",
-        },
-        {
-          ["text"] = "/s/ {signature.signer}",
-          ["pitch"] = "body",
-          ["above"] = 8.4,
-        },
-        {
-          ["text"] = "{signature.lines}",
-          ["pitch"] = "body",
-        },
-        {
-          ["text"] = "{signature.role}",
-          ["italic"] = true,
-          ["pitch"] = "body",
-          ["above"] = 5.6,
-        },
-      },
-      ["above"] = 16.8,
-    },
   },
   ["face_advances"] = {
     ["digit"] = 0.556,

@@ -10,6 +10,7 @@ params:
   # 68.01 pt; typst 75.12 pt), as in the California courts of appeal motion brief and the Georgia Supreme Court's
   # Schola folders. The vertical tolerance covers that box, not text: Gate 4 puts the engines on the same baselines.
   eps_v_pt: 4
-  # latex is reported (the shared LaTeX model, docs/open-items/fb-595.54.54.md): p4 and p5, a URL after "https://www."
-  # breaks there in typst and Word, LaTeX keeps it whole on the next line and stretches the line before.
+  # latex is reported (the shared LaTeX model, docs/open-items/fb-595.54.54.md, C1): p4 and p5, a URL after "https://www."
+  # breaks there in typst and Word; in LaTeX the URL-only line after that break has no space to stretch (underfull,
+  # badness 10000), so TeX breaks elsewhere and stretches the line before.
   cross_engine_latex: report

@@ -3,16 +3,19 @@ font:
   size_pt: 14
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12).
-# Not gated (docs/open-items/fb-595.54.54.md), every page counted alike:
-# - latex: p8 a bold numbered heading's line ("… standard set forth") is wider in LaTeX's tgschola bold than in the vendored face, so "forth" moves down; p9 "(b)(2)—and": typst breaks after the em dash, LaTeX does not.
-# - docx: p2 a contents row and p4 line 7: lines LibreOffice's Schola advances fit (the line-fit tolerance).
+# docx breaks every line and page where typst does (XENG-001..003 pass) with the layout's docx_bias.
 params:
-  cross_engine: report
+  cross_engine: gate
   # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,
   # whose 16.8 pt line box starts at the 1 in margin, measures its box 3.99 pt into the margin on docx (box top
   # 68.01 pt; typst 75.12 pt), as in the California courts of appeal motion brief and the Georgia Supreme Court's
   # Schola folders. The vertical tolerance covers that box, not text: Gate 4 puts the engines on the same baselines.
   eps_v_pt: 4
+  # latex is reported (the shared LaTeX model, docs/open-items/fb-595.54.54.md, C2 and C3): p8 the bold heading
+  # "… standard set forth": lib/latex/xeschola.sty never sees a bold series, so bold Schola keeps TeX Live's 0.287 em
+  # space (typst 0.278) and "forth" moves down; p9 "(b)(2)—and": the parentheses' kept width is set before the em
+  # dash's break point, a 3.4 pt gap (same breaks, one word less in the text). Every page starts and ends alike.
+  cross_engine_latex: report
 # Tier 2, open: the signature block opens page 13 alone. keep_with_closing would keep the conclusion's paragraph with
 # it, but then lib/docx/xdoc.lua writes the CONCLUSION heading's page needle without the paragraph after it, which
 # finds "conclusion" in the body on page 10, so the docx contents printed 10 for a heading on 13.
