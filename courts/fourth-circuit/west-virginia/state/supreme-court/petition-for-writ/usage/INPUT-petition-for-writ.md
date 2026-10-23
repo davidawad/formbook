@@ -10,29 +10,31 @@ proceeding: "Action Pending in the Circuit Court of Monongalia County, Civil Act
 brief_title: "VERIFIED PETITION FOR WRIT OF PROHIBITION"
 toc: true
 authorities:
-  blankenship: {kind: case, name: "*Blankenship v. Ethicon, Inc.*", cite: "221 W.Va. 700, 656 S.E.2d 451 (2007)"}
-  chrystal: {kind: case, name: "*Chrystal R.M. v. Charlie A.L.*", cite: "194 W.Va. 459 S.E.2d 415 (1995)"}
-  ewing: {kind: case, name: "*Ewing v. Bd. Of Educ. of Cnty. Of Summers*", cite: "202 W.Va. 228, 503 S.E.2d 541 (1998)"}
-  hinchman: {kind: case, name: "*Hinchman v. Gillette*", cite: "217 W.Va. 378, 618 S.E.2d 387 (2005)"}
-  lewis: {kind: case, name: "*Lewis v. Fisher*", cite: "114 W.Va. 151, 154-55, 171 S.E. 106-07 (1933)"}
-  malone: {kind: case, name: "*Malone v. Potomac Highlands Airport Auth.*", cite: "237 W.Va. 235, 786 S.E.2d 594 (2015)"}
-  ricottilli: {kind: case, name: "*Ricottilli v. Summersville Memorial Hosp.*", cite: "188 W.Va. 674, 425 S.E.2d 629 (1992)"}
-  faircloth: {kind: case, name: "*State ex rel Primecare Med. Of W.Va., Inc. v. Faircloth*", cite: "242 W.Va. 335, 835 S.E.2d 579 (2019)"}
-  thompson: {kind: case, name: "*State ex rel. Charleston Area Medical Center, Inc. v. Thompson*", cite: "248 W.Va. 352, 888 S.E.2d 852 (2023)"}
-  hoover: {kind: case, name: "*State ex rel. Hoover v. Berger*", cite: "199 W.Va. 12, 483 S.E.2d 12 (1996)"}
-  scott: {kind: case, name: "*State ex rel. West Virginia University Hospitals, Inc. v. Scott*", cite: "246 W.Va. 184, 866 S.E.2d 350 (2021)"}
-  cipoletti: {kind: case, name: "*W. Va. Dep't of Health v. Cipoletti*", cite: "250 W.Va. 1, 902 S.E.2d 133 (2024)"}
-  s55-7b-1: {kind: statute, cite: "W. Va. Code §§ 55-7B-1 et seq."}
-  s55-7b-2e: {kind: statute, cite: "W.Va. Code § 55-7B-2(e)"}
-  s55-7b-2e2: {kind: statute, cite: "W.Va. Code § 55-7B-2(e)(2)"}
-  s55-7b-2i: {kind: statute, cite: "W.Va. Code § 55-7B-2(i)"}
-  s55-7b-2m: {kind: statute, cite: "W.Va. Code § 55-7B-2(m)"}
-  s55-7b-6: {kind: statute, cite: "W. Va. Code § 55-7B-6"}
-  s55-7b-6a: {kind: statute, cite: "W. Va. Code § 55-7B-6(a)"}
-  s55-7b-6b: {kind: statute, cite: "W. Va. Code § 55-7B-6(b)"}
-  s55-7b-6bd: {kind: statute, cite: "W. Va. Code § 55-7B-6(b)(D)"}
-  s55-7b-6f: {kind: statute, cite: "W. Va. Code § 55-7B-6(f)"}
-  s55-7b-9g: {kind: statute, cite: "W. Va. Code § 55-7B-9(g)"}
+  # sort: the order of the filed table of authorities, which keeps "rel" before "rel." and "§" before "§§"
+  # (the pandoc engines sort the text without its punctuation; docs/open-items/fb-595.54.21.md, B3).
+  blankenship: {kind: case, sort: "01", name: "*Blankenship v. Ethicon, Inc.*", cite: "221 W.Va. 700, 656 S.E.2d 451 (2007)"}
+  chrystal: {kind: case, sort: "02", name: "*Chrystal R.M. v. Charlie A.L.*", cite: "194 W.Va. 459 S.E.2d 415 (1995)"}
+  ewing: {kind: case, sort: "03", name: "*Ewing v. Bd. Of Educ. of Cnty. Of Summers*", cite: "202 W.Va. 228, 503 S.E.2d 541 (1998)"}
+  hinchman: {kind: case, sort: "04", name: "*Hinchman v. Gillette*", cite: "217 W.Va. 378, 618 S.E.2d 387 (2005)"}
+  lewis: {kind: case, sort: "05", name: "*Lewis v. Fisher*", cite: "114 W.Va. 151, 154-55, 171 S.E. 106-07 (1933)"}
+  malone: {kind: case, sort: "06", name: "*Malone v. Potomac Highlands Airport Auth.*", cite: "237 W.Va. 235, 786 S.E.2d 594 (2015)"}
+  ricottilli: {kind: case, sort: "07", name: "*Ricottilli v. Summersville Memorial Hosp.*", cite: "188 W.Va. 674, 425 S.E.2d 629 (1992)"}
+  faircloth: {kind: case, sort: "08", name: "*State ex rel Primecare Med. Of W.Va., Inc. v. Faircloth*", cite: "242 W.Va. 335, 835 S.E.2d 579 (2019)"}
+  thompson: {kind: case, sort: "09", name: "*State ex rel. Charleston Area Medical Center, Inc. v. Thompson*", cite: "248 W.Va. 352, 888 S.E.2d 852 (2023)"}
+  hoover: {kind: case, sort: "10", name: "*State ex rel. Hoover v. Berger*", cite: "199 W.Va. 12, 483 S.E.2d 12 (1996)"}
+  scott: {kind: case, sort: "11", name: "*State ex rel. West Virginia University Hospitals, Inc. v. Scott*", cite: "246 W.Va. 184, 866 S.E.2d 350 (2021)"}
+  cipoletti: {kind: case, sort: "12", name: "*W. Va. Dep't of Health v. Cipoletti*", cite: "250 W.Va. 1, 902 S.E.2d 133 (2024)"}
+  s55-7b-1: {kind: statute, sort: "19", cite: "W. Va. Code §§ 55-7B-1 et seq."}
+  s55-7b-2e: {kind: statute, sort: "20", cite: "W.Va. Code § 55-7B-2(e)"}
+  s55-7b-2e2: {kind: statute, sort: "21", cite: "W.Va. Code § 55-7B-2(e)(2)"}
+  s55-7b-2i: {kind: statute, sort: "22", cite: "W.Va. Code § 55-7B-2(i)"}
+  s55-7b-2m: {kind: statute, sort: "23", cite: "W.Va. Code § 55-7B-2(m)"}
+  s55-7b-6: {kind: statute, sort: "13", cite: "W. Va. Code § 55-7B-6"}
+  s55-7b-6a: {kind: statute, sort: "14", cite: "W. Va. Code § 55-7B-6(a)"}
+  s55-7b-6b: {kind: statute, sort: "15", cite: "W. Va. Code § 55-7B-6(b)"}
+  s55-7b-6bd: {kind: statute, sort: "16", cite: "W. Va. Code § 55-7B-6(b)(D)"}
+  s55-7b-6f: {kind: statute, sort: "17", cite: "W. Va. Code § 55-7B-6(f)"}
+  s55-7b-9g: {kind: statute, sort: "18", cite: "W. Va. Code § 55-7B-9(g)"}
   rap16: {kind: rule, cite: "West Virginia Rule of Appellate Procedure 16(d)(6)"}
   rap18: {kind: rule, cite: "West Virginia Rule of Appellate Procedure 18(a)"}
   rap19: {kind: rule, cite: "West Virginia Rule of Appellate Procedure 19(a)"}
