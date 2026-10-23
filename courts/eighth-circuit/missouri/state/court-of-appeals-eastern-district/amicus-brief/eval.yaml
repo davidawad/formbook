@@ -1,11 +1,10 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
 # the typst render does, so a difference fails.
-# Not gated yet (fb-595.54.75, docs/open-items/fb-595.54.75.md; the URL breaks of pass 1 now match):
-# - LaTeX: lib/latex/xdoc.lua binds the token after "§" in an \mbox, and the token "1.205." carries footnote 4
-#   (p10: "§~\mbox{1.205.\footnote{...}}"); a footnote inside a box is lost, so note 4 is not set and its six
-#   authorities have no page in the table (TOA p5 "--"; XENG-003).
-# - Word splits footnote 2 between p8 and p9 and keeps the body line with mark 3 on p8; typst keeps note 2 whole
-#   and moves that line to p9 (XENG-002 from p9).
 params:
-  cross_engine: report
+  cross_engine: gate
+  # Word only: LibreOffice sets the line that cites footnote 3 on p8 and the note on p9 (the note does not fit p8
+  # and LibreOffice moves the note, not its line); typst and LaTeX move the line with the note to p9 (XENG-002 from
+  # p9, the table's pages follow). A renderer limit outside the layout (fb-595.54.82, "LibreOffice's note
+  # placement"); docs/open-items/fb-595.54.75.md
+  cross_engine_docx: report

@@ -3,8 +3,9 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # LaTeX reported, not gated: a shared-model defect outside this folder's layout (fb-595.54.75): lib/latex/xdoc.lua
-  # binds the token after "§" in an \mbox, and on p6 that token carries footnote 4 ("§ 84.344.8[^4]"); a footnote
-  # inside a box is lost, so LaTeX never sets note 4 and the pages after it move (XENG-002, -003 from p6).
-  # docs/open-items/fb-595.54.75.md
+  # LaTeX reported, not gated: a shared-model limitation outside this folder's layout (fb-595.54.75; the note lost
+  # in the "§" box is fixed in the model, fb-595.54.82): p6's last body line cites notes 4 and 5 ("§ 84.344.8[^4] and
+  # § 610.021(13).[^5]"); note 5 does not fit p6, so typst (and Word) set the line and note 4 on p6 and carry note 5
+  # to p7, while LaTeX, whose notes never split or leave their mark's page, moves the line with both notes to p7
+  # (XENG-002, -003 from p6; the table's pages follow). docs/open-items/fb-595.54.75.md
   cross_engine_latex: report
