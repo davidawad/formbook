@@ -2,10 +2,11 @@
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
 # the typst render does, so a difference fails.
 params:
-  # LaTeX: a slash inside a word after an opening quotation mark ("good defense/claim," p14 lines 4-8): typst and Word
-  # may break after the slash, LaTeX keeps the word whole (697 of 703 lines identical, pages equal; request 9).
+  # LaTeX: gated (third pass; the model's slash rule of fb-595.54.82 lane 2 settled request 9, "good defense/claim,"
+  # p14; 703 of 703 lines identical).
+  cross_engine: gate
   # docx: the contents row of the CPLR 5531 statement (before_tables, opening with its heading) reads "ii" where typst
   # reads "i" (p3 line 2): the docx page lookup searches the heading's needle past the tables' "front" needle, which is
-  # the same heading text, so it is found in the contents row (702 of 703 lines; request 14). Both are the shared
-  # model's (docs/open-items/fb-595.54.76.md); reported, not gated.
-  cross_engine: report
+  # the same heading text, so it is found in the contents row (702 of 703 lines; request 14). The shared model's
+  # (docs/open-items/fb-595.54.76.md); reported, not gated.
+  cross_engine_docx: report
