@@ -9,8 +9,8 @@ pitch:
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # VA-FORM-001 (Rule 5:6(a)(2)): at least one inch on all sides
 indent: 36
 page_number: {align: center, front: lower-roman}   # VA-FORM-006: numbered; the cover none, the tables i, ii .., the text 1, 2 ..
-footnote: {size: 14, gap: 7}                       # VA-FORM-003, -004: 14-point footnotes, single spaced
-quote: {left: 36, right: 36, above: 14, below: 14}  # VA-FORM-004: quotations over 49 words single spaced
+footnote: {size: 14, gap: 7, widows: true}   # VA-FORM-003, -004: 14-point footnotes, single spaced; a paragraph that calls a note keeps its widow and orphan rule in every engine (the heading III and its note-calling paragraph move together, p29-p30)
+quote: {left: 36, right: 36, above: 14, below: 14}  # VA-FORM-004: quotations over 49 words single spaced; a paragraph that calls a note keeps its widow and orphan rule in every engine (the heading III and its note-calling paragraph move together, p29-p30)
 heading:
   - {align: center, bold: true, above: 16.8, below: 14}
   - {bold: true, above: 16.8, below: 11.2}
