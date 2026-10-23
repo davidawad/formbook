@@ -1,7 +1,10 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: LaTeX does not
-# break inside "d/b/a" on the cover (p1 line 4), and LibreOffice does not break note 15's URL after the hyphens of
-# "INVESTIGATING-GRAND-JURY-REPORT-NO.-1_FINAL..." and splits it inside a word instead (p29; every later page start
-# differs). Shared-model gaps, docs/open-items/fb-595.54.23.md.
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # Word only: LibreOffice sets the line that cites footnote 20 on p31 and the note on p32 (the note does not fit p31
+  # and keeps its lines); typst moves the line on with its note, so p31 onward breaks apart (XENG-002, -003; the
+  # contents row of CONCLUSION, p2, follows). A renderer limitation, not the template's (docs/open-items/fb-595.54.82.md,
+  # LibreOffice's note placement). The footnote clearance of 7.5 (layout.yaml) settles p29, a page of three notes.
+  cross_engine_docx: report

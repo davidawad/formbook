@@ -9,7 +9,7 @@ pitch:
 margin: {top: 108, bottom: 72, left: 108, right: 72}   # MD-FORM-001: top and left 1 1/2 in, bottom and right 1 in
 indent: 36
 page_number: {align: center, from: 1}   # MD-FORM-005: every page numbered consecutively, the cover is page 1
-footnote: {size: 13, gap: 7}            # MD-FORM-004, -002: 13 points, single spaced
+footnote: {size: 13, gap: 7, clearance: 7.5}   # MD-FORM-004, -002: 13 points, single spaced; clearance: Word's footnote area on a page of three notes (p29), fb-595.54.82
 quote: {left: 36, right: 36, above: 10.4, below: 15.6}   # MD-FORM-002: indented quotations, single spaced
 heading:
   - {align: center, bold: true, upper: true, above: 20.8, below: 15.6}
