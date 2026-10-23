@@ -1,0 +1,96 @@
+# Court of Appeals of the State of Washington (washctapp): answering brief (brief of respondent). The whole layout,
+# as data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Rules: ../../rules.md (RAP 10.3, 18.17, RAP Form 5); a number with no rule is a
+# style choice of the template, kept from the template it replaces. Lengths in points. No case text: every string
+# printed comes from the sample's frontmatter ({field}) or is a court constant.
+size: 14                  # WASHCTAPP-FORM-004 (RAP 18.17(a)(2)): 14 point for all text, footnotes, block quotations
+pitch:
+  body: 32.2              # WASHCTAPP-FORM-005 (RAP 18.17(a)(2)): double spaced (Word's double, 2 x 1.15 x 14 pt)
+  single: 16.1            # footnotes, block quotations, headings, cover, tables, signature: single (1.15 x 14 pt)
+margin: {top: 108, bottom: 108, left: 144, right: 108}   # WASHCTAPP-FORM-002 (RAP 18.17(a)(1)): 2 in left, 1 1/2 in right, top, bottom
+indent: 36
+# RAP 18.17, RAP Form 5: page numbers at the bottom; the title page unnumbered, the tables i, ii .., the body from 1
+page_number: {align: center, from: 1, front: lower-roman}
+footnote: {size: 14, pitch: single, gap: 7}   # WASHCTAPP-FORM-004, -005: 14 pt, single spaced
+quote: {left: 36, right: 36, above: 11.2, below: 16.8}   # WASHCTAPP-FORM-005: block quotations single spaced, indented
+# The sections (centred capitals), the arguments (bold, later lines hung 1/2 inch), the sub-arguments (bold italic).
+heading:
+  - {align: center, bold: true, upper: true, above: 22.4, below: 16.8}
+  - {bold: true, hang: 36, above: 16.8, below: 11.2}
+  - {bold: true, italic: true, hang: 36, above: 14, below: 16.8}
+# RAP 10.3(a)(1), RAP Form 5 (WASHCTAPP-COVER-001): the title page: the court and division, the case number, the
+# caption with the parties designated, the court appealed from and the judge, the title of the brief, counsel (one
+# column on the right half, as the filed title pages set it, so the title page keeps to one page).
+cover:
+  - {text: "COURT OF APPEALS OF THE STATE OF WASHINGTON", align: center, bold: true}
+  - {text: "DIVISION {division}", align: center, bold: true}
+  - {text: "NO. {case_number}", align: center, bold: true, above: 21.6}
+  - each: caption
+    above: 21.6
+    between:
+      - {text: "v.", align: center, above: 14.4, below: 14.4}
+    blocks:
+      - {text: "{names}", align: center}
+      - {text: "{designation}", align: center, italic: true}
+  - {text: "{proceeding}", align: center, above: 21.6, optional: true}
+  - {text: "{trial_court_case}", align: center, optional: true}
+  - {fill: 1}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, size: 16, pitch: 18.4}
+  - {fill: 1}
+  - each: counsel
+    blocks:
+      - group:
+          - {text: "{names}", bold: true, left: 144}
+          - {text: "{lines}", left: 144, optional: true}
+        above: 8.4
+# RAP 10.3(a)(2), (c): a table of contents and a table of authorities, each on its own page. An authority cited on
+# six pages or more is *passim*, as the Washington filers set it (the Washington Supreme Court layouts,
+# docs/open-items/fb-595.54.17.md), where a list of every page would be wider than the line.
+contents: {title: "Table of Contents", depth: 3, col: 36, hang: 21, step: 21, above: 12.6}
+authorities:
+  title: "Table of Authorities"
+  col: 56
+  hang: 21
+  above: 12.6
+  group: {bold: true, above: 16.8, below: 2.8}
+  passim: 6
+# WASHCTAPP-CERT-001 (RAP 18.17(b)): the word count, above the signature line; the statement, the date line and the
+# signature block never split. A certificate of service, when the frontmatter has one, on a page of its own.
+closing:
+  - group:
+      - {text: "This document contains {word_count} words, excluding the parts of the document exempted from the word count by RAP 18.17.", indent: 36, pitch: body}
+      - {text: "{date}", indent: 36, pitch: body, optional: true}
+      - group:
+          - when: signature.firm
+            blocks:
+              - {text: "{signature.firm}", bold: true, left: 108}
+          - when: signature.signer
+            blocks:
+              - {text: "/s/ *{signature.signer}*", underline: true, left: 108, above: 11.2}
+              - {text: "{signature.signer}", left: 108}
+          - when: signature.signers
+            blocks:
+              - each: signature.signers
+                blocks:
+                  - {text: "/s/ *{name}*", underline: true, left: 108, above: 12.6}
+                  - {text: "{name}", left: 108}
+                  - {text: "{lines}", left: 144, optional: true}
+          - {text: "{signature.lines}", left: 108, optional: true}
+        above: 5.6
+    above: 21.6
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.heading}", align: center, bold: true, upper: true, below: 16.8}
+      - {text: "{service.paragraphs}", indent: 36, pitch: body}
+      - when: service.recipients
+        blocks:
+          - each: service.recipients
+            blocks:
+              - {text: "{.}", left: 72, above: 14}
+      - {text: "{service.closing}", indent: 36, pitch: body, optional: true}
+      - group:
+          - {text: "/s/ *{service.signature.signer}*", underline: true, left: 108}
+          - {text: "{service.signature.signer}", left: 108}
+          - {text: "{service.signature.lines}", left: 108, optional: true}
+        above: 19.6

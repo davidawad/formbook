@@ -42,8 +42,8 @@ authorities:
       - {cite: "*State v. Batson*, 196 Wn.2d 670, 478 P.3d 75 (2020)", find: "Batson"}
       - {cite: "*State v. Blake*, 2019 WL 276047, 7 Wn. App. 2d 1025 (2019) (unpublished), rev'd on other grounds, 197 Wn.2d 170, 481 P.3d 521 (2021)", find: "Blake"}
       - {cite: "*State v. Borsheim*, 140 Wn. App. 357, 165 P.3d 417 (2007)", find: "Borsheim"}
-      - {cite: "*State v. Brown*, 55 Wn. App. 738, 780 P.2d 880 (1989)", find: "Brown, 55"}
-      - {cite: "*State v. Brown*, 78 Wn. App. 891, 899 P.2d 34 (1995)", find: "Brown, 78"}
+      - {cite: "*State v. Brown*, 55 Wn. App. 738, 780 P.2d 880 (1989)", find: "55 Wn. App."}
+      - {cite: "*State v. Brown*, 78 Wn. App. 891, 899 P.2d 34 (1995)", find: "78 Wn. App."}
       - {cite: "*State v. Calle*, 125 Wn.2d 769, 888 P.2d 155 (1995)", find: "Calle"}
       - {cite: "*State v. Cates*, 183 Wn.2d 531, 354 P.3d 832 (2015)", find: "Cates"}
       - {cite: "*State v. Coleman*, 159 Wn.2d 509, 150 P.3d 1126 (2007)", find: "Coleman"}
@@ -57,7 +57,7 @@ authorities:
       - {cite: "*State v. Hai Minh Nguyen*, 191 Wn.2d 671, 425 P.3d 847 (2018)", find: "Nguyen"}
       - {cite: "*State v. Hughes*, 166 Wn.2d 675, 212 P.3d 558 (2009)", find: "Hughes"}
       - {cite: "*State v. Johnson*, 197 Wn.2d 740, 487 P.3d 893 (2021)", find: "Johnson"}
-      - {cite: "*State v. Jones*, 71 Wn. App. 798, 863 P.2d 85 (1993)", find: "Jones, 71"}
+      - {cite: "*State v. Jones*, 71 Wn. App. 798, 863 P.2d 85 (1993)", find: "71 Wn. App."}
       - {cite: "*State v. Kelley*, 168 Wn.2d 72, 226 P.3d 773 (2010)", find: "Kelley"}
       - {cite: "*State v. Kier*, 164 Wn.2d 798, 194 P.3d 212 (2008)", find: "Kier"}
       - {cite: "*State v. Kintz*, 169 Wn.2d 537, 238 P.3d 470 (2010)", find: "Kintz"}
@@ -79,7 +79,7 @@ authorities:
       - {cite: "*State v. Phillips*, 65 Wash. 324, 118 P. 43 (1911)", find: "Phillips"}
       - {cite: "*State v. Pockert*, 49 Wn. App. 859, 746 P.2d 839 (1987)", find: "Pockert"}
       - {cite: "*State v. Sanford*, 15 Wn. App. 2d 748, 477 P.3d 72 (2020)", find: "Sanford"}
-      - {cite: "*State v. Smith*, 165 Wn. App. 296, 266 P.3d 250 (2011), aff'd on other grounds, 177 Wn.2d 533, 303 P.3d 1047 (2013)", find: "Smith, 165"}
+      - {cite: "*State v. Smith*, 165 Wn. App. 296, 266 P.3d 250 (2011), aff'd on other grounds, 177 Wn.2d 533, 303 P.3d 1047 (2013)", find: "165 Wn. App."}
       - {cite: "*State v. Teninty*, 17 Wn. App. 2d 957, 489 P.3d 679 (2021)", find: "Teninty"}
       - {cite: "*State v. Vander Houwen*, 163 Wn.2d 25, 177 P.3d 93 (2008)", find: "Vander Houwen"}
       - {cite: "*State v. Willis*, 135 Wash. 312, 237 P. 711 (1925)", find: "Willis"}

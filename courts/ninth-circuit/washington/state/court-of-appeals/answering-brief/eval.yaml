@@ -1,0 +1,8 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails. LaTeX passes XENG-001..003. DOCX reports XENG-003 (pages and page
+# ends equal; docs/open-items/fb-595.54.47.md): p5, a page list beside a cite's last line that Word's leader runs
+# into (".67, 69, 71"), and two lines (p66, p74) LibreOffice fits a word more (the line-fit tolerance).
+params:
+  cross_engine: gate
+  cross_engine_docx: report
