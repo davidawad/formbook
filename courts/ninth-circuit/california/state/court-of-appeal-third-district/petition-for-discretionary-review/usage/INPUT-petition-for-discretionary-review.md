@@ -27,55 +27,55 @@ date: "June 20, 2025"
 authorities:
   alice:
     kind: case
-    name: "[People v. Alice](toa:alice)"
+    name: "People v. Alice"
     cite: "41 Cal.4th 668 (2007)"
   dieckmeyer:
     kind: case
-    name: "[Dieckmeyer v. Redevelopment Agency of Huntington Beach](toa:dieckmeyer)"
+    name: "Dieckmeyer v. Redevelopment Agency of Huntington Beach"
     cite: "127 Cal.App.4th 248 (2005)"
   alameda:
     kind: case
-    name: "[Alameda County Management Employees Assn. v. Super. Ct.](toa:alameda)"
+    name: "Alameda County Management Employees Assn. v. Super. Ct."
     cite: "195 Cal.App.4th 325 (2011)"
   stiglitz:
     kind: case
-    name: "[Riverside County Sheriff’s Dep’t v. Stiglitz](toa:stiglitz)"
+    name: "Riverside County Sheriff’s Dep’t v. Stiglitz"
     cite: "60 Cal.4th 624 (2014)"
   aclu:
     kind: case
-    name: "[ACLU v. Super. Ct.](toa:aclu)"
+    name: "ACLU v. Super. Ct."
     cite: "202 Cal.App.4th 55 (2011)"
   kleitman:
     kind: case
-    name: "[Kleitman v. Super. Ct.](toa:kleitman)"
+    name: "Kleitman v. Super. Ct."
     cite: "74 Cal.App.4th 324 (1999)"
   courthouse:
     kind: case
-    name: "[Courthouse News Serv. v. Planet](toa:courthouse)"
+    name: "Courthouse News Serv. v. Planet"
     cite: "947 F.3d 581 (9th Cir. 2020)"
   corrections:
     kind: case
-    name: "[Dep’t of Corrections v. Superior Court](toa:corrections)"
+    name: "Dep’t of Corrections v. Superior Court"
     cite: "199 Cal.App.3d 1087 (1988)"
   hobbs:
     kind: case
-    name: "[People v. Hobbs](toa:hobbs)"
+    name: "People v. Hobbs"
     cite: "7 Cal.4th 948 (1994)"
   jessup:
     kind: case
-    name: "[In re Jessup](toa:jessup)"
+    name: "In re Jessup"
     cite: "81 Cal. 408 (1889)"
   ducoing:
     kind: case
-    name: "[Ducoing Mgmt. Inc. v. Superior Court](toa:ducoing)"
+    name: "Ducoing Mgmt. Inc. v. Superior Court"
     cite: "234 Cal.App.4th 306 (2015)"
   becerra:
     kind: case
-    name: "[Becerra v. Super. Ct.](toa:becerra)"
+    name: "Becerra v. Super. Ct."
     cite: "44 Cal.App.5th 897 (2020)"
   first-amendment:
     kind: constitution
-    name: "[First Amendment](toa:first-amendment)"
+    name: "First Amendment"
     cite: "U.S. Const., 1st Amend."
   art-1-3b:
     kind: constitution
