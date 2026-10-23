@@ -1,6 +1,10 @@
-# Gate 4 CROSS-ENGINE: report only. typst is on the shared document model (typst/layout.yaml) and latex/ and docx/
-# are generated from it, but the latex and docx renders still break lines and pages apart from typst where the shared
-# model differs (URLs, "§§", a quote before an em dash, footnote placement): docs/open-items/fb-595.54.67.md. Gate
-# once the model is fixed. The court folder's eval.yaml (14 pt, Rule 5A:4(a)) applies too.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12); the latex render breaks every line and
+# page where the typst render does, so a difference fails. The court folder's eval.yaml (14 pt, Rule 5A:4(a)) applies
+# too.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # LibreOffice's note placement: on p10 Word keeps the line that cites note 7 and moves the note to p11, typst and
+  # LaTeX move the line (docs/open-items/fb-595.54.82.md, "Still missing"); every later page shifts, 21 pages to
+  # typst's 22. Reported, not gated (docs/open-items/fb-595.54.67.md).
+  cross_engine_docx: report

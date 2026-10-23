@@ -47,6 +47,8 @@ authorities:
 # The signature block (Rule 5A:20(g); VACTAPP-OPEN-003: name, bar number, address, telephone, e-mail), never split;
 # then the certificate on a page of its own (Rule 5A:20(h), 5A:4(d); VACTAPP-OPEN-004: service, oral argument, the
 # word count), signed again.
+# the last paragraph kept with the signature block, which never takes a page alone (tier 2)
+keep_with_closing: true
 closing:
   - group:
       - {text: "{signature.firm}", bold: true, left: 230.4, optional: true}
