@@ -113,7 +113,7 @@ Recently enacted W.Va. Code § 23-5-12a(b) contains exactly the same standard pr
 
 As the Supreme Court has held, weighing the evidence in a toxic chemical exposure claim
 
-involves a mode of logical reasoning often described as ‘‘inference to the best explanation,’’ in which the conclusion is not guaranteed by the premises . . . [I]nference to the best explanation can be thought of as involving six general steps, some of which may be implicit. The scientist must (1) identify an association between an exposure and a disease, (2) consider a range of plausible explanations for the association, (3) rank the rival explanations according to their plausibility, (4) seek additional evidence to separate the more plausible from the less plausible explanations, (5) consider all of the relevant available evidence, and (6) integrate the evidence using professional judgment to come to a conclusion about the best explanation.
+involves a mode of logical reasoning often described as “inference to the best explanation,” in which the conclusion is not guaranteed by the premises . . . [I]nference to the best explanation can be thought of as involving six general steps, some of which may be implicit. The scientist must (1) identify an association between an exposure and a disease, (2) consider a range of plausible explanations for the association, (3) rank the rival explanations according to their plausibility, (4) seek additional evidence to separate the more plausible from the less plausible explanations, (5) consider all of the relevant available evidence, and (6) integrate the evidence using professional judgment to come to a conclusion about the best explanation.
 
 Harris v. CSX Transportation, Inc., 223 W.Va. 617, 753 S.E.2d 275, 289 (2013).
 

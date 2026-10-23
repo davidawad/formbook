@@ -1,8 +1,10 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): latex/ and docx/ are generated from typst/layout.yaml
-# (`fb engines gen`, fb-595.54.12) and render with tier 1 at 0 failed, but do not yet break every line where the typst
-# render does, for shared-model reasons recorded in docs/open-items/fb-595.54.66.md (second serial lane):
-# latex: p7 line 10, the two right single quotes "’’" of a quoted opinion come out of pandoc's LaTeX with a space
-# between them (the lines and pages are the same, 602/603 lines identical); docx: p11, Word's footnote area is smaller
-# than typst's, so Word keeps two more lines above footnote 16 and every page end from p12 to p19 moves.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails. LaTeX passes XENG-001..003 (603/603 lines).
 params:
-  cross_engine: report
+  cross_engine: gate
+  # docx: INPUT-answering-brief p11 (printed 8): footnote 16 (unsplit, the model's rule) does not fit under the line
+  # "including gasoline, glues, and tar-based products.16"; typst and LaTeX move line and note to the next page,
+  # LibreOffice keeps the line and moves only the note, so the page ends of p12-p19 follow. A renderer difference
+  # (LibreOffice's note placement, docs/open-items/fb-595.54.82.md "Still missing"; docs/open-items/fb-595.54.66.md).
+  cross_engine_docx: report
