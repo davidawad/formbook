@@ -1,7 +1,9 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated
-# (docs/open-items/fb-595.54.61.md, shared-model requests): lib/typst/xdoc.typ drops widow and orphan control for a
-# whole block quotation when one of its paragraphs calls a footnote (LaTeX and Word only for that paragraph), so typst
-# leaves one line of a quoted paragraph at the foot of p7; and pdftotext reads LaTeX's "* * * *" as one word.
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12); typst and Word match (XENG-001..003).
+# LaTeX reported, not gated: lib/latex/xdoc.lua `asterisks` writes the /ActualText BDC of a paragraph that opens with
+# spaced asterisks ("* * * *") in vertical mode, so at a page end the BDC stays on p7 and its EMC goes to p8 with the
+# line: pdftotext reads p7's footnote 26 and page number as the span's text (INPUT-motion-brief p7 lines 28-29, p8
+# line 1; XENG-002, -003; pages equal). A shared-model fix (docs/open-items/fb-595.54.61.md, request 18).
 params:
-  cross_engine: report
+  cross_engine: gate
+  cross_engine_latex: report

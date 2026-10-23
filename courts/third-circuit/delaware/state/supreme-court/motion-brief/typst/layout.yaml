@@ -9,7 +9,10 @@ pitch:
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # DEL-FORM-003 (R. 13(a)(ii)): margins not less than one inch
 indent: 36
 page_number: {align: center}                       # every page numbered from 1 (the filed answer)
-footnote: {size: 14, gap: 7}                       # DEL-FORM-001, -002: 14-point footnotes, single spaced
+# DEL-FORM-001, -002: 14-point footnotes, single spaced. `widows: true`: a paragraph that calls a note keeps its widow
+# and orphan rule; without it typst drops the rule for a whole quotation one of whose paragraphs calls a note, LaTeX
+# and Word for that paragraph only (docs/open-items/fb-595.54.61.md, request 14).
+footnote: {size: 14, gap: 7, widows: true}
 quote: {left: 72, right: 72, above: 14, below: 14}  # DEL-FORM-002: long quotations single spaced, indented
 heading:
   - {align: center, bold: true, above: 16.8, below: 14}
