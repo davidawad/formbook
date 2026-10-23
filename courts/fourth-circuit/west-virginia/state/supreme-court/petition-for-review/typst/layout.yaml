@@ -9,6 +9,10 @@ pitch:
   single: 13.8            # cover, headings, tables, quotations, signature: single (1.15 x 12 pt)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # WVA-FORM-005: no less than one inch on all sides
 indent: 36
+# LaTeX only: the text block 0.02 pt wider than typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias):
+# at 0.05 the bold heading III of the argument (p25) fits "gray" in LaTeX where typst breaks before it; 0 and 0.02
+# both break every line as typst does (1074/1074, measured, fb-595.54.21).
+latex_bias: 0.02
 page_number: {align: center, front: lower-roman}   # the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
 footnote: {size: 11, pitch: 12.65, gap: 7}   # WVA-FORM-004: footnotes no smaller than 11 point, single spaced (1.15 x 11)
 quote: {left: 36, right: 36, above: 9.6, below: 14.4, gap: 6}   # WVA-FORM-002: indented quotations single spaced

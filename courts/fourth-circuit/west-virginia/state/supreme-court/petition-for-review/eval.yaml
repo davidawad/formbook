@@ -1,12 +1,13 @@
 # West Virginia RAP 38(c) (rules.md WVA-LEN-001, WVA-WRIT-004): a petitioner's brief may not exceed 40 pages,
 # excluding the cover page, table of contents, table of authorities, and certificate of service. The default
 # check counts every page, so this total is stricter than the rule.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails.
 params:
   page_limit: 40
-# Gate 4 CROSS-ENGINE: report, not gate. The latex and docx engines are generated from typst/layout.yaml (`fb engines
-# gen`, fb-595.54.12); each meets an open defect of the shared model (docs/open-items/fb-595.54.21.md):
-# - latex: footnote 48 follows a section-sign citation ("§ 16-13A-8.”[^48]"); the model binds the token after "§"
-#   in an \mbox, the note with it, and LaTeX drops a note set inside an \mbox (p13): pages 14-16 end differently.
-# - docx: Word's footnote area holds note 46 and its anchor line on page 12, where typst moves them to page 13; 7 of
-#   40 page ends differ, the page count is equal.
-  cross_engine: report
+  cross_engine: gate
+  # Word's footnote area holds note 46 and its anchor line on page 12, where typst and LaTeX move them to page 13;
+  # 7 of 40 page ends differ, the page count is equal; a footnote clearance of 7.5 does not move it
+  # (docs/open-items/fb-595.54.21.md, B7). Reported, not gated.
+  cross_engine_docx: report
