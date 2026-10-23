@@ -19,6 +19,7 @@ return require("latex.xdoc")({
   ["footnote"] = {
     ["size"] = 12,
     ["gap"] = 6,
+    ["clearance"] = 7.5,
   },
   ["quote"] = {
     ["left"] = 36,

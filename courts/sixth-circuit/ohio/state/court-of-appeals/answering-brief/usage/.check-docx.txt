@@ -1,3 +1,4 @@
 PASS
 cd890657cd55f7c8a7b61b1177b08ab3a3e3353ed303d0a192e239d7f46d3649  usage/OUTPUT-answering-brief.docx
 dbba64876681be068d79d47e1771fbe3c7d8488687b5c8d0bf6876345e5669df  usage/OUTPUT-answering-brief.docx.pdf
+2664c571c728ca2d8eb47a259c412eaf2cf10dba6192083b8631626017721d13  usage/OUTPUT-answering-brief.typst.pdf

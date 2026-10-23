@@ -9,7 +9,10 @@ pitch:
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # OHIOCTAPP-FORM-001: type matter at most 6 1/2 by 9 1/2 inches
 indent: 36
 page_number: {align: center}   # OHIOCTAPP-FORM-005: numbering conventional; the cover is page 1, as filed
-footnote: {size: 12, gap: 6}   # OHIOCTAPP-FORM-002, -003: notes 12 point, single spaced
+# OHIOCTAPP-FORM-002, -003: notes 12 point, single spaced. The footnote clearance 7.5 pt, not the model's 9.1 (measured on
+# LibreOffice under one note): above note 3 (p11) LibreOffice kept a line of the quoted list more than typst at 9.1
+# (docs/open-items/fb-595.54.82.md, Word's footnote area; fb-595.54.55)
+footnote: {size: 12, gap: 6, clearance: 7.5}
 quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # OHIOCTAPP-FORM-003: quoted matter single spaced
 # The author numbers the headings ("I.", "A."): level 1 a section, flush left; level 2 a point heading; level 3 below it.
 heading:
