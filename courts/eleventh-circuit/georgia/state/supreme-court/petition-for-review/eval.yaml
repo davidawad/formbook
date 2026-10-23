@@ -4,8 +4,3 @@
 # body, SCt R 16(2)) are in ../eval.yaml.
 params:
   cross_engine: gate
-  # latex (XENG-003, p6 line 31; pages and page ends equal, 294 of 295 lines): footnote 3 is lost. Its mark follows
-  # "§ 21-2-385(d)(1)(B)." with no space, and the model sets the token after a section sign in one \mbox
-  # (lib/pandoc/xdoc.lua hold_sign_tokens takes the Note into it; a footnote inside an \mbox is dropped by LaTeX).
-  # A shared-model fix (docs/open-items/fb-595.54.36.md); reported, not gated, until it lands.
-  cross_engine_latex: report

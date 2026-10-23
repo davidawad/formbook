@@ -1,2 +1,3 @@
 PASS
-26aaf4f78a3c69430dc39a538544021b42078a90958a7be01415e1076b32e858  usage/OUTPUT-petition-for-review.latex.pdf
+74fa8b6396715f619f3e1eec8fd51f208fcc93126985b172eb3fcbc3c3e1d5d8  usage/OUTPUT-petition-for-review.latex.pdf
+e2007ff3c9141d625b6833554749148882339ae5bc12177b93810b1baf11fc8b  usage/OUTPUT-petition-for-review.typst.pdf
