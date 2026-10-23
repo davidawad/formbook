@@ -3,7 +3,3 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # pdfLaTeX writes no space character between the stars of "* * *" (the INPUT's scene break), so pdftotext
-  # reads "***" where typst and Word give "* * *": p4 line 10 (XENG-003). Reported, not gated
-  # (docs/open-items/fb-595.54.55.md, S6; fb-595.54.55).
-  cross_engine_latex: report
