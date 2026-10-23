@@ -1,11 +1,12 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated
-# (docs/open-items/fb-595.54.63.md): LaTeX sets the token after a "§" in one \mbox with
-# what follows it, so footnote 3 after "§ 17.40.610." is lost and the mark of "§ 40-35-110(d)," is not read (table of
-# authorities p3), then pages differ from p22; LibreOffice sets Schola's interword space at 3.85 pt (typst 3.892 at
-# 14 pt), so a line holds a word more (p3, p18).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). latex is gated: the model now ends the
+# token after a "§" before a footnote and sets an authority mark outside it (fb-595.54.82), so note 3 after
+# "§ 17.40.610." and the mark of "§ 40-35-110(d)," are there. docx is reported (docs/open-items/fb-595.54.63.md):
+# LibreOffice sets Schola's interword space at 3.85 pt (typst 3.892 at 14 pt), so a line holds a word more (p3, p18);
+# no docx_bias settles it (the difference grows with a line's spaces: 0.1 to 1 pt each fixed one line, broke others).
 params:
-  cross_engine: report
+  cross_engine: gate
+  cross_engine_docx: report
   # DEF-FORM-002: LibreOffice embeds TeX Gyre Schola with word boxes from the font's ascent, so the cover's first line,
   # whose 16.8 pt line box starts at the 1 in margin, measures its box 3.99 pt into the margin on docx (box top
   # 68.01 pt; typst 75.12 pt), as the California Courts of Appeal motion brief (3.31 pt at 13 pt). The vertical
