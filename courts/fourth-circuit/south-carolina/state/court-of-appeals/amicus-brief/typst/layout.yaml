@@ -9,7 +9,7 @@ pitch:
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # SCCTAPP-FORM-002: one inch on all sides (R267(d))
 indent: 36
 page_number: {align: center, front: lower-roman}   # SCCTAPP-FORM-009: bottom centre; cover unnumbered, tables i, ii .., brief 1, 2 ..
-footnote: {size: 12, gap: 7}                        # SCCTAPP-FORM-005: footnotes 12 pt; single spaced (FORM-004 convention)
+footnote: {size: 12, gap: 7, clearance: 12.5}                      # SCCTAPP-FORM-005: footnotes 12 pt; single spaced (FORM-004 convention); clearance measured (11 to 14 agree)
 quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # SCCTAPP-FORM-004: block quotations single spaced, indented
 heading:                  # SCCTAPP-FORM-010: sections centred, capitals, bold; argument headings bold (R208(b)(1)(E))
   - {align: center, bold: true, upper: true, above: 14.4, below: 12}
@@ -52,6 +52,8 @@ authorities:
   group: {bold: true, above: 14.4, below: 2.4}
 # The date and the signature block, never split (R211(a), R267(b): "/s/ [typed name]" with counsel's name, address
 # and telephone; SCCTAPP-CERT-001).
+# the last paragraph kept with the signature block, which never takes a page alone (tier 2)
+keep_with_closing: true
 closing:
   - group:
       - {text: "{date}", indent: 36, optional: true}

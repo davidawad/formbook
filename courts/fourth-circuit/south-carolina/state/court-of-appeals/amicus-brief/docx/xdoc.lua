@@ -20,6 +20,7 @@ return require("docx.xdoc")({
   ["footnote"] = {
     ["size"] = 12,
     ["gap"] = 7,
+    ["clearance"] = 12.5,
   },
   ["quote"] = {
     ["left"] = 36,
@@ -160,6 +161,7 @@ return require("docx.xdoc")({
       ["below"] = 2.4,
     },
   },
+  ["keep_with_closing"] = true,
   ["closing"] = {
     {
       ["group"] = {
