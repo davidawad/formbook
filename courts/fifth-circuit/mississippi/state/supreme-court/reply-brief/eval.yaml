@@ -3,7 +3,3 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # Word's footnote area: on p9 (two notes) Word keeps one more body line above the notes than typst and LaTeX, so
-  # the p9/p10 page end differs (676/679 lines identical, pages equal). An open shared-model item
-  # (docs/open-items/fb-595.54.82.md, "Word's footnote area"); reported, not gated (fb-595.54.51).
-  cross_engine_docx: report
