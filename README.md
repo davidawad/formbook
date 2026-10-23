@@ -673,7 +673,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, W.D. Washington](courts/ninth-circuit/washington/federal/bankruptcy-western-district) | `wawb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, E.D. Washington](courts/ninth-circuit/washington/federal/eastern-district) | `waed` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Washington](courts/ninth-circuit/washington/federal/western-district) | `wawd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Court of Appeals of Washington](courts/ninth-circuit/washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | 5/5 | 5/5 | 29 |
+| [Court of Appeals of Washington](courts/ninth-circuit/washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Washington Supreme Court](courts/ninth-circuit/washington/state/supreme-court) | `wash` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 
 ### American Samoa

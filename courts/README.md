@@ -282,7 +282,7 @@ Courts under `courts` (346).
 | [Supreme Court of The Commonwealth of The Northern Mariana Islands](ninth-circuit/northern-mariana-islands/state/supreme-court) | `nmi` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Court of Appeals of Oregon](ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | up for review | 1/2 | — | — | 29 |
 | [Oregon Supreme Court](ninth-circuit/oregon/state/supreme-court) | `or` | up for review | 9/9 | — | — | 29 |
-| [Court of Appeals of Washington](ninth-circuit/washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | 5/5 | 5/5 | 29 |
+| [Court of Appeals of Washington](ninth-circuit/washington/state/court-of-appeals) | `washctapp` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Washington Supreme Court](ninth-circuit/washington/state/supreme-court) | `wash` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 | [United States Bankruptcy Appellate Panel of The Tenth Circuit](tenth-circuit/bankruptcy-appellate-panel) | `bap10` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Tenth Circuit](tenth-circuit/court-of-appeals) | `ca10` | up for review | 3/3 | 1/1 | 3/3 | 14 |
