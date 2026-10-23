@@ -1,8 +1,6 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). LaTeX gated (1329/1329 lines). Docx
-# reported: Word's page lookup finds an authority's mark inside a footnote ("Saenz", "Forsyth") at the body's earlier
-# mark of the same word on the page before, so two authorities rows lack their later page (pages 5 and 6; lines and
-# page ends otherwise equal; docs/open-items/fb-595.54.72.md).
+# gated (third pass, fb-595.54.72): the docx page lookup now takes a note's needle from where the body is
+# (fb-595.54.82 lane 2), so the "Saenz" and "Forsyth" rows carry their later pages (36, 37 and 41, 42) as typst does.
 params:
   cross_engine: gate
-  cross_engine_docx: report
