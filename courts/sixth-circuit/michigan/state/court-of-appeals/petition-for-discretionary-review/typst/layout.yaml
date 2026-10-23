@@ -8,6 +8,10 @@ pitch:
   single: 13.8            # cover, headings, tables, quotations, footnotes, signature: single (1.15 x 12 pt)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # MCR 7.212(B)(5): at least one-inch margins
 indent: 36
+# LaTeX only: the text block as wide as typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias): newtx
+# fits "probation" on line 20 of p9 from 0.04 up; every line breaks as in typst from -0.05 to 0.03 (measured,
+# fb-595.54.63).
+latex_bias: 0
 page_number: {align: center, front: lower-roman}   # the cover unnumbered, the tables i, ii .., the brief 1, 2 ..
 footnote: {size: 12, gap: 7}             # MCR 7.212(B)(5): footnotes may be single spaced
 quote: {left: 36, right: 36, above: 9.6, below: 14.4}   # MCR 7.212(B)(5): quotations may be single spaced

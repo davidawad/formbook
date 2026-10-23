@@ -13,6 +13,7 @@ return require("latex.xdoc")({
     ["right"] = 72,
   },
   ["indent"] = 36,
+  ["latex_bias"] = 0,
   ["page_number"] = {
     ["align"] = "center",
     ["front"] = "lower-roman",
@@ -237,5 +238,4 @@ return require("latex.xdoc")({
       },
     },
   },
-  ["latex_bias"] = 0.05,
 })
