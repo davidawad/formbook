@@ -1,0 +1,68 @@
+# Mississippi chancery courts (misschanceryct): memorandum in support of a motion (motion-brief). The whole layout, as
+# data for the shared document model (lib/typst/xdoc.typ; latex/ and docx/ are generated from this file by
+# `fb engines gen`, fb-595.54.12). Requirement IDs (MISSCHANCERYCT-...) refer to ../../rules.md. The retrieved rules fix
+# the paper, caption, signature, service and the e-filing form (MRCP 7(c), 10(a), 11(a); MEC 3(A)(1), 3(B)(2), 3(G));
+# they state no margin, face, size, spacing or page limit for a memorandum (MISSCHANCERYCT-FORM-003), so those follow
+# the filed exemplar (tier 2) and the one-inch default. Lengths in points. No case text here: every string printed
+# comes from the sample's frontmatter ({field}) or is a court constant.
+size: 12                  # MISSCHANCERYCT-FORM-003 (no rule): the exemplar's text is 12 pt
+pitch:
+  body: 24                # double spaced, as the exemplar (tier 2)
+  single: 14              # caption, headings, quotations, tables, signature: single
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # MISSCHANCERYCT-FORM-003 (no rule): one inch, as the exemplar
+indent: 36                # paragraphs open with a half-inch indent (convention)
+page_number: {align: center, from: 1}   # every page numbered at the foot (the exemplar)
+footnote: {size: 11, pitch: 13, gap: 2} # notes a size below the text, single spaced (convention)
+quote: {left: 36, right: 36, above: 6, below: 6}   # block quotations indented on both sides, single spaced
+# Headings: the author types the numbers, as the exemplar does. The memorandum's points start at level 2 (the
+# exemplar's "I. Introduction."); level 1 is not used by the samples and is set as level 2.
+heading:
+  - {bold: true, hang: 36, above: 24, below: 12}
+  - {bold: true, hang: 36, above: 24, below: 12}
+  - {bold: true, left: 36, hang: 36, above: 19.2, below: 12}
+  - {bold: true, italic: true, left: 72, hang: 36, above: 19.2, below: 12}
+# The exemplar's payment tables: single spaced cells between thin rules.
+table: {stroke: 0.5, pad: 4, gutter: 10, above: 12, below: 12}
+# MISSCHANCERYCT-FORM-002 (MRCP 10(a)): the court and district, the parties with their designations, the cause
+# number on the line of "V.", then the title between two rules (the exemplar's caption).
+front:
+  - {text: "{court}", align: center, bold: true}
+  - {text: "{district}", align: center, bold: true}
+  - each: parties
+    above: 24
+    between:
+      - columns:
+          - blocks: [{text: "V."}]
+          - blocks: [{text: "{cause_number}", align: right}]
+        above: 24
+        below: 24
+    blocks:
+      - columns:
+          - blocks: [{text: "{names}"}]
+          - blocks: [{text: "{designation}", align: right}]
+        gutter: 21.6
+  - {rule: 0.6, above: 24, below: 7.2}
+  - {text: "{title}", align: center, bold: true}
+  - {rule: 0.6, above: 7.2, below: 24}
+# MISSCHANCERYCT-SIG-001, -SIG-002 (MRCP 11(a), MEC 3(B)(2)): "s/" and the signer, kept whole, then the counsel's
+# names, bar numbers, firm, address, telephone, fax and e-mail. MISSCHANCERYCT-CERT-001 (MEC 3(G)): the certificate
+# of service from the frontmatter.
+closing:
+  - group:
+      - {text: "RESPECTFULLY SUBMITTED this {date}.", pitch: body, indent: 36}
+      - {text: "/s/ {signature.signer}", left: 230.4, above: 24}
+      - {text: "{signature.signer}", left: 230.4}
+      - {text: "{signature.role}", left: 230.4}
+    above: 24
+  - group:
+      - {text: "OF COUNSEL:"}
+      - {text: "{of_counsel}"}
+    above: 24
+  - group:
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 12}
+      - {text: "{certificate.text}", pitch: body, indent: 36}
+      - {text: "SO CERTIFIED this {date}.", pitch: body, indent: 36, above: 12}
+      - {text: "/s/ {certificate.signer}", left: 230.4, above: 24}
+      - {text: "{certificate.signer}", left: 230.4}
+      - {text: "{certificate.role}", left: 230.4}
+    above: 36

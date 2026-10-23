@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): typst is on the shared document model
+# (typst/layout.yaml). LaTeX and docx are not generated yet: the model's body table cannot hold a footnote in a cell
+# (LaTeX prints the mark and loses the note, Word drops both), and the payment tables carry notes 14-23
+# (docs/open-items/fb-595.54.80.md, request 7).
+params:
+  cross_engine: report
