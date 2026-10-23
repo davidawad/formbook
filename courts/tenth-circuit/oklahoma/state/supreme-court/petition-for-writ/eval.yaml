@@ -3,9 +3,7 @@ font:
   size_pt: 12
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
-# the typst render does, so a difference fails. latex is held back: on the cover's upper-case bold caption LaTeX
-# fits "F.H. AND" on a line typst ends after "F.H." (the LaTeX line 450.02 pt on a 450 pt measure; p1), the line-fit
-# tolerance the model lacks (docs/open-items/fb-595.54.53.md, shared-model requests).
+# the typst render does, so a difference fails. The cover's bold upper-case caption line that LaTeX fit at 450.02 pt
+# on the 450 pt measure breaks as in typst with the folder's latex_bias (typst/layout.yaml, fb-595.54.53).
 params:
   cross_engine: gate
-  cross_engine_latex: report

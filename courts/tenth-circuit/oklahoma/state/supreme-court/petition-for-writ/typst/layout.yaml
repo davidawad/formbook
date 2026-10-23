@@ -9,6 +9,10 @@ pitch:
   single: 13.8            # OKLA-FORM-003: quoted matter single spaced; headings, tables and counsel too (1.15 x 12 pt)
 margin: {top: 72, bottom: 72, left: 90, right: 72}   # OKLA-FORM-004 (R. 1.11): 1 1/4 in left, 1 in on the others
 indent: 36
+# LaTeX only: the text block 0.01 pt wider than typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias): on the
+# cover's bold upper-case caption newtx sets "F.H. AND" at 450.02 pt on the 450 pt measure and fits it from 0.03 up; every
+# line breaks as in typst from 0 to 0.02, -0.03 breaks p40 (measured, fb-595.54.53).
+latex_bias: 0.01
 # OKLA-EX-001: the cover unnumbered, the tables in lower-roman numerals, the body from 1 (the filed briefs)
 page_number: {align: center, from: 1, front: lower-roman}
 footnote: {size: 11, pitch: 12.65, gap: 6}   # OKLA-FORM-002, -003: footnotes 11 point or larger, single spaced
