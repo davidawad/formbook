@@ -3,7 +3,7 @@
 -- the correspondence block, the signature blocks and the certificate of service from the YAML frontmatter (same
 -- contract as the typst engine, ../README.md). Requirement IDs refer to ../rules.md.
 --
--- The generated paragraphs are the same markdown string as typst/ttab-notice-of-appearance.typ `generated-md`
+-- The generated paragraphs are the same markdown strings as typst/ttab-notice-of-appearance.typ `generated-paras`
 -- (keep the two in step), read by pandoc and set in the body style, so both engines break the lines alike.
 --
 -- Cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): exact line spacing at
@@ -86,8 +86,8 @@ local function title_of(meta)
   return pandoc.text.upper(party_of(meta).label) .. "’S " .. joined
 end
 
--- typst generated-md, character for character
-local function generated_md(meta)
+-- typst generated-paras, character for character
+local function generated_paras(meta)
   local party = party_of(meta)
   local counsel = need(meta, "counsel")
   local atts = list_of(need(counsel, "attorneys"))
@@ -132,7 +132,7 @@ local function generated_md(meta)
       " and all service on " .. party.label .. " be made on, " .. party.label .. "’s counsel at the following address" ..
       " (" .. CFR .. "§ 2.18(a)(2), 2.119(b); TBMP §§ 117.01, 117.07):"
   end
-  return table.concat(paras, "\n\n")
+  return paras
 end
 
 local function caption(meta)
@@ -262,9 +262,16 @@ function Pandoc(doc)
   local out = pandoc.List()
   out:insert(caption(meta))
   if generate then
-    local gen = pandoc.read(generated_md(meta), "commonmark+smart")
-    gen = gen:walk({ Inlines = xe.inlines })
-    for _, b in ipairs(gen.blocks) do out:insert(b) end
+    local paras = generated_paras(meta)
+    for i, s in ipairs(paras) do
+      local b = pandoc.read(s, "commonmark+smart"):walk({ Inlines = xe.inlines }).blocks[1]
+      if i == #paras and meta.correspondence then
+        -- the request paragraph is kept with the block it introduces (typst: one unbreakable block)
+        out:insert(xe.raw(xe.para({ KEEP, xe.spacing(0, 0, 552), xe.ind(0, nil, INDENT) }, I(b.content))))
+      else
+        out:insert(b)
+      end
+    end
     if meta.correspondence then out:insert(correspondence(meta, #body > 0)) end
     for _, b in ipairs(body) do out:insert(b) end
   else

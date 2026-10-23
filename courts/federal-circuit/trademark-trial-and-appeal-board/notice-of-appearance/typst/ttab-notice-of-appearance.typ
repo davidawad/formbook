@@ -6,7 +6,7 @@
 // and correspondence paragraphs, the signature blocks and the certificate of service are built from the YAML
 // frontmatter (schema: ../README.md); the markdown body adds any further paragraphs.
 //
-// The generated paragraphs are written as one markdown string (`generated-md`) and set exactly like the body, so
+// The generated paragraphs are markdown strings (`generated-paras`) set exactly like the body, so
 // docx/ttab-notice-of-appearance.lua builds the identical string and the two engines break every line alike.
 //
 // Cross-engine layout model (lib/typst/xengine.typ; docs/EVAL-LOOP.md, "Cross-engine gate"): every line is a box of
@@ -96,10 +96,10 @@
 }
 
 // ---------------------------------------------------------------------------
-// Generated paragraphs (TTAB-NOA-003 to -006). The docx filter builds the same string; keep the two in step.
+// Generated paragraphs (TTAB-NOA-003 to -006). the docx filter builds the same strings; keep the two in step.
 // ---------------------------------------------------------------------------
 
-#let generated-md(meta) = {
+#let generated-paras(meta) = {
   let party = party-of(meta)
   let counsel = need(meta, "counsel")
   let atts = need(counsel, "attorneys")
@@ -143,7 +143,7 @@
       " and all service on " + party.label + " be made on, " + party.label + "’s counsel at the following address" +
       " (37\u{a0}C.F.R. §§ 2.18(a)(2), 2.119(b); TBMP §§ 117.01, 117.07):")
   }
-  paras.join("\n\n")
+  paras
 }
 
 // ---------------------------------------------------------------------------
@@ -205,7 +205,7 @@
 #let correspondence-block(meta) = {
   set text(..edges(pitch-single))
   let ls = correspondence-lines(meta.correspondence)
-  block(breakable: false, width: 100%, above: 6pt, below: 13.8pt,
+  block(breakable: false, width: 100%, above: 6pt, below: 0pt,
     for l in ls { line-par(inl(l), indent: block-indent) })
 }
 
@@ -311,8 +311,17 @@
 
   caption(meta)
   if generate {
-    render(generated-md(meta))
-    if "correspondence" in meta { correspondence-block(meta) }
+    let paras = generated-paras(meta)
+    if "correspondence" in meta {
+      // the request paragraph never ends a page without the block it introduces (TTAB-NOA-006)
+      render(paras.slice(0, -1).join("\n\n"))
+      block(breakable: false, width: 100%, above: 0pt, below: 13.8pt, {
+        render(paras.last())
+        correspondence-block(meta)
+      })
+    } else {
+      render(paras.join("\n\n"))
+    }
     if body.trim() != "" { render(body) }
   } else {
     render(body)
