@@ -2,7 +2,12 @@
 # cases (https://www.sccourts.org/resources/judicial-community/court-rules/appellate/rule-208/).
 params:
   page_limit: 50
-  # Gate 4 CROSS-ENGINE: report only. typst is on the shared document model (typst/layout.yaml) and latex/ and docx/
-  # are generated from it; LaTeX matches typst line for line, Word sets one body line more above the notes on p8, p9
-  # and p14 (Word's footnote area, not yet in the shared model): docs/open-items/fb-595.54.67.md. Gate once it is.
-  cross_engine: report
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12); the latex render breaks every line and
+  # page where the typst render does, so a difference fails.
+  cross_engine: gate
+  # Word's footnote area: on p8 (one 12 pt note) LibreOffice sets one body line more above the note than typst and
+  # LaTeX ("exploring other means ..."), and p9 to p11 shift; a folder `footnote.clearance` of 7.5 or 6 moves other
+  # pages instead. The model's open item "Word's footnote area" (docs/open-items/fb-595.54.82.md); reported, not gated
+  # (docs/open-items/fb-595.54.67.md).
+  cross_engine_docx: report
