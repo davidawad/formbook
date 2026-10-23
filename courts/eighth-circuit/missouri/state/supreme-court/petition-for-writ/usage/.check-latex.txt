@@ -1,2 +1,3 @@
 PASS
 ad610e5de2f74404d9c2a82673347a8eb175fc9b7f0ea869909603a16ccaeea0  usage/OUTPUT-petition-for-writ.latex.pdf
+5e0f355d30f4f29e085b35396108e0639c499fada509654364f65f84f07f2fd5  usage/OUTPUT-petition-for-writ.typst.pdf

@@ -1,9 +1,5 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). docx breaks every line and page where
-# typst does and is gated.
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). latex and docx break every line and page where
+# typst does and are gated.
 params:
   cross_engine: gate
-  # LaTeX has no break after a slash inside a word ("annex/incorporate", "annexation/incorporation"), where typst and Word (a zero-width
-  # space, lib/docx/xdoc.lua) break: page 11 lines 15-21, and the page end of page 12 (XENG-002) (XENG-003). A shared-model gap, recorded in docs/open-items/fb-595.54.59.md;
-  # reported, not gated, until it is fixed.
-  cross_engine_latex: report
