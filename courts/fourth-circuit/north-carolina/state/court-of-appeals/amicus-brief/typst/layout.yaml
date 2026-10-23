@@ -7,6 +7,10 @@ pitch:
   body: 27.6              # NCCTAPP-FORM-003: body double spaced (Word's double, 2 x 1.15 x 12 pt)
   single: 13.8            # cover, headings, tables, quotations, footnotes, signature blocks: single (1.15 x 12 pt)
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # NCCTAPP-FORM-002: one inch on all sides
+# LaTeX only: the text block as wide as typst's, not the face's 0.05 wider (tools/fb/src/enginegen/gen.rs latex_bias):
+# at 0.05 and 0.02 newtx sets "190" on p9 line 20 (540.012 bp) where typst ends the line after "S.E." (the next word
+# needs 540.006 pt of 540); at 0 every line breaks as typst does (440/440, measured, fb-595.54.50).
+latex_bias: 0
 indent: 36                # paragraphs indented half an inch
 page_number: {align: center, front: lower-roman}   # NCCTAPP-CONV-003: cover unnumbered, index and tables i, ii .., body 1, 2 ..
 footnote: {size: 12, gap: 7}   # NCCTAPP-FORM-001, -003: footnotes at the text size, single spaced
