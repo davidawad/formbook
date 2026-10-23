@@ -160,7 +160,7 @@ Courts under `courts` (346).
 | [Michigan Court of Appeals](sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | 5/5 | 5/5 | 29 |
 | [Michigan Supreme Court](sixth-circuit/michigan/state/supreme-court) | `mich` | up for review | 8/8 | 8/8 | 8/8 | 29 |
 | [Ohio Court of Appeals](sixth-circuit/ohio/state/court-of-appeals) | `ohioctapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
-| [Ohio Supreme Court](sixth-circuit/ohio/state/supreme-court) | `ohio` | up for review | 9/9 | — | — | 29 |
+| [Ohio Supreme Court](sixth-circuit/ohio/state/supreme-court) | `ohio` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 | [Court of Appeals of Tennessee](sixth-circuit/tennessee/state/court-of-appeals) | `tennctapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
 | [Court of Criminal Appeals of Tennessee](sixth-circuit/tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | up for review | 4/4 | 3/3 | 3/3 | 29 |
 | [Tennessee Supreme Court](sixth-circuit/tennessee/state/supreme-court) | `tenn` | up for review | 6/6 | 6/6 | 6/6 | 29 |
@@ -184,7 +184,7 @@ Courts under `courts` (346).
 | [Indiana Court of Appeals](seventh-circuit/indiana/state/court-of-appeals) | `indctapp` | up for review | 3/3 | — | — | 29 |
 | [Indiana Supreme Court](seventh-circuit/indiana/state/supreme-court) | `ind` | up for review | 1/1 | — | — | 29 |
 | [Court of Appeals of Wisconsin](seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | up for review | 7/7 | 7/7 | 7/7 | 29 |
-| [Wisconsin Supreme Court](seventh-circuit/wisconsin/state/supreme-court) | `wis` | up for review | 9/9 | — | — | 29 |
+| [Wisconsin Supreme Court](seventh-circuit/wisconsin/state/supreme-court) | `wis` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 | [United States Bankruptcy Appellate Panel of The Eighth Circuit](eighth-circuit/bankruptcy-appellate-panel) | `bap8` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Eighth Circuit](eighth-circuit/court-of-appeals) | `ca8` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, E.D. Arkansas](eighth-circuit/arkansas/federal/bankruptcy-eastern-district) | `areb` | up for review | 2/2 | — | 2/2 | 14 |
@@ -306,7 +306,7 @@ Courts under `courts` (346).
 | [Colorado Court of Appeals](tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | up for review | 5/5 | — | — | 29 |
 | [Colorado Supreme Court](tenth-circuit/colorado/state/supreme-court) | `colo` | up for review | 8/8 | — | — | 29 |
 | [Court of Appeals of Kansas](tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
-| [Supreme Court of Kansas](tenth-circuit/kansas/state/supreme-court) | `kan` | up for review | 9/9 | — | — | 29 |
+| [Supreme Court of Kansas](tenth-circuit/kansas/state/supreme-court) | `kan` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 | [New Mexico Court of Appeals](tenth-circuit/new-mexico/state/court-of-appeals) | `nmctapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [New Mexico Supreme Court](tenth-circuit/new-mexico/state/supreme-court) | `nm` | up for review | 8/8 | 1/1 | 1/1 | 29 |
 | [Court of Civil Appeals of Oklahoma](tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | up for review | 1/1 | — | — | 14 |

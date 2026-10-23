@@ -421,7 +421,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/northern-district) | `ohnd` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, S.D. Ohio](courts/sixth-circuit/ohio/federal/southern-district) | `ohsd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Ohio Court of Appeals](courts/sixth-circuit/ohio/state/court-of-appeals) | `ohioctapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
-| [Ohio Supreme Court](courts/sixth-circuit/ohio/state/supreme-court) | `ohio` | up for review | 9/9 | — | — | 29 |
+| [Ohio Supreme Court](courts/sixth-circuit/ohio/state/supreme-court) | `ohio` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 
 ### Tennessee
 
@@ -476,7 +476,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, E.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/eastern-district) | `wied` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/western-district) | `wiwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Wisconsin](courts/seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | up for review | 7/7 | 7/7 | 7/7 | 29 |
-| [Wisconsin Supreme Court](courts/seventh-circuit/wisconsin/state/supreme-court) | `wis` | up for review | 9/9 | — | — | 29 |
+| [Wisconsin Supreme Court](courts/seventh-circuit/wisconsin/state/supreme-court) | `wis` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 
 ## Eighth Circuit
 
@@ -705,7 +705,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, D. Kansas](courts/tenth-circuit/kansas/federal/bankruptcy-district) | `ksb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Kansas](courts/tenth-circuit/kansas/federal/district) | `ksd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Appeals of Kansas](courts/tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
-| [Supreme Court of Kansas](courts/tenth-circuit/kansas/state/supreme-court) | `kan` | up for review | 9/9 | — | — | 29 |
+| [Supreme Court of Kansas](courts/tenth-circuit/kansas/state/supreme-court) | `kan` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 
 ### New Mexico
 
@@ -845,14 +845,14 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 6 | 18 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 10 | 28 | 19.1% |
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 8 | 26 | 18.0% |
-| Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 8 | 27 | 18.6% |
-| Seventh Circuit | 21 | 0 | 21 | 0 | 0 | 0.0% | 100.0% | 21 | 3 | 17 | 18.2% |
+| Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 9 | 28 | 18.6% |
+| Seventh Circuit | 21 | 0 | 21 | 0 | 0 | 0.0% | 100.0% | 21 | 4 | 18 | 18.2% |
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 17 | 38 | 20.3% |
 | Ninth Circuit | 61 | 0 | 59 | 2 | 0 | 0.0% | 96.7% | 58 | 19 | 53 | 21.0% |
-| Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 9 | 27 | 19.3% |
+| Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 10 | 28 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 8 | 26 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 2 | 4 | 17.7% |
-| **Total** | 376 | 0 | 353 | 23 | 0 | 0.0% | 93.8% | 352 | 110 | 324 | 19.0% |
+| **Total** | 376 | 0 | 353 | 23 | 0 | 0.0% | 93.8% | 352 | 113 | 327 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
