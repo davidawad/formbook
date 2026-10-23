@@ -1,7 +1,6 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
-# the typst render does, so a difference fails. LaTeX reported, not gated: it does not break after a slash inside a
-# word ("affixed/attached", p19), typst and Word do (docs/open-items/fb-595.54.47.md).
+# the typst render does, so a difference fails. Both gated: LaTeX breaks after a slash inside a word
+# ("affixed/attached") since the shared model's slash rule (fb-595.54.82).
 params:
   cross_engine: gate
-  cross_engine_latex: report
