@@ -8,6 +8,10 @@ pitch:
   single: 16.1            # IOWA-FORM-003: headings, footnotes, quotations over 50 words single-spaced; cover, tables
 margin: {top: 72, bottom: 72, left: 72, right: 72}   # IOWA-FORM-002 (6.903(1)(e)): 1 inch on all sides
 indent: 36                # first-line indent of a body paragraph (convention, the exemplars)
+# Word only: the right margin 0.05 pt (1 twip) wider. LibreOffice rounds each run of text to its layout units, and a
+# line typst and LaTeX fill to 539.96 pt (p12, "... loom as impediments to finding") fit there; measured: 0.05 breaks
+# every line as typst does, 0.1 already fits less (p18, p20; docs/EVAL-LOOP.md, `docx_bias`).
+docx_bias: 0.05
 page_number: {align: center, from: 1}   # IOWA-FORM-006 (6.903(1)(f)): bottom center, Arabic, the cover is page one
 footnote: {size: 14, pitch: single, gap: 7}   # IOWA-FORM-003, -004: footnotes 14 point, single-spaced
 quote: {left: 36, right: 36, above: 8.4, below: 14}   # IOWA-FORM-003: quotations indented and single-spaced

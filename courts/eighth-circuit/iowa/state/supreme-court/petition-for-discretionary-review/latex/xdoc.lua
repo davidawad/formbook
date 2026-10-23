@@ -13,6 +13,7 @@ return require("latex.xdoc")({
     ["right"] = 72,
   },
   ["indent"] = 36,
+  ["docx_bias"] = 0.05,
   ["page_number"] = {
     ["align"] = "center",
     ["from"] = 1,

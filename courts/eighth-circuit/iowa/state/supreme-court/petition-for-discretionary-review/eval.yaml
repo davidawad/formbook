@@ -1,5 +1,5 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
-# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Reported, not gated: Word fits a body line typst and LaTeX break, 0.04 pt inside the margin (p12)
-# (a shared-model gap, docs/open-items/fb-595.54.44.md).
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12). Gated: Word's right margin 0.05 pt
+# wider (layout `docx_bias`) breaks the p12 line LibreOffice fit 0.04 pt inside the margin as typst does.
 params:
-  cross_engine: report
+  cross_engine: gate

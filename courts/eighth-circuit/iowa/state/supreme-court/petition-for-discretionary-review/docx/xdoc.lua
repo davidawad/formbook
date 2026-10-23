@@ -10,9 +10,15 @@ return require("docx.xdoc")({
     ["top"] = 72,
     ["bottom"] = 72,
     ["left"] = 72,
-    ["right"] = 72,
+    ["right"] = 72.05,
   },
   ["indent"] = 36,
+  ["tail"] = {
+    ["at"] = "Certificate",
+    ["break"] = true,
+    ["pitch"] = "body",
+    ["indent"] = 36,
+  },
   ["page_number"] = {
     ["align"] = "center",
     ["from"] = 1,
@@ -157,11 +163,5 @@ return require("docx.xdoc")({
         },
       },
     },
-  },
-  ["tail"] = {
-    ["at"] = "Certificate",
-    ["break"] = true,
-    ["pitch"] = "body",
-    ["indent"] = 36,
   },
 })
