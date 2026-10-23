@@ -9,6 +9,11 @@ pitch:
 margin: {top: 108, bottom: 108, left: 108, right: 108}   # NH-FORM-002: at least one and one-half inches on all sides
 indent: 36                # first-line indent, half an inch (style choice)
 list_indent: 21.6         # a list label's box (style choice)
+# LaTeX only: the text block 0.065 pt wider than typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias): typst
+# fills p18 line 9 ("... and that the detail") to 503.9985 of 504 pt, which newtx breaks a word early below 0.06;
+# from 0.075 newtx keeps a word more on p11 line 5. Every line breaks as in typst from 0.06 to 0.07 (measured,
+# fb-595.54.24).
+latex_bias: 0.065
 page_number: {align: center, from: 2}   # NH-FORM-005: numbered from the cover as page 1, its number suppressed
 footnote: {size: 13, gap: 7.5}   # NH-FORM-003: footnotes keep the 13-point size; single spaced, as every exemplar sets them
 quote: {left: 36, right: 36, above: 7.5, below: 7.5, pitch: body}   # NH-FORM-004: quotations indented, at 1.5

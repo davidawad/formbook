@@ -14,6 +14,7 @@ return require("docx.xdoc")({
   },
   ["indent"] = 36,
   ["list_indent"] = 21.6,
+  ["latex_bias"] = 0.065,
   ["page_number"] = {
     ["align"] = "center",
     ["from"] = 2,
