@@ -8,6 +8,11 @@ pitch:
   single: 13.8            # ND-FORM-005: headings and quotations may be single-spaced (1.15 x 12 pt)
 margin: {top: 72, bottom: 72, left: 108, right: 72}   # ND-FORM-002: 1.5 in at the left, 1 in on all other sides
 indent: 36
+# LaTeX only: the text block 0.04 pt wider than typst's, not the face's 0.05 (tools/fb/src/enginegen/gen.rs latex_bias):
+# typst ends p16 line 13 before "Dep't", whose right edge would be 540.04 pt on the 540 pt measure, and newtx fits it
+# at 0.05; at 0.03 newtx no longer fits p19 line 7 ("mandatory,"). Every line breaks as in typst from 0.04 to 0.045
+# (measured, fb-595.54.52).
+latex_bias: 0.04
 page_number: {align: center, from: 1}   # ND-FORM-003: bottom center, numbering begins on the cover page with 1
 footnote: {size: 12, pitch: body, gap: 7}   # ND-FORM-005: footnotes double-spaced in the same typeface (and size)
 quote: {left: 36, right: 36, above: 7.2, below: 12, gap: 13.8}   # ND-FORM-005: quotations single-spaced and indented, a line between paragraphs

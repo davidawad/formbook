@@ -1,7 +1,13 @@
-# Gate 4 CROSS-ENGINE: report only. The latex and docx engines are generated from typst/layout.yaml (`fb engines gen`,
-# fb-595.54.12) but do not yet break every line where typst does, for want of a shared-model fix recorded in
-# docs/open-items/fb-595.54.52.md.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
+# the typst render does, so a difference fails. LaTeX at the folder's latex_bias (typst/layout.yaml) breaks every
+# line as typst does.
 # N.D.R.App.P. 32(a)(8)(A) (effective 4/1/2024): "A principal brief may not exceed 38 pages, ... excluding any addendum."
 params:
-  cross_engine: report
+  cross_engine: gate
+  # Word fits p16 line 13 ("Dep't", 540.04 pt in typst on the 540 pt measure; a docx_bias of 0.05 still fits it, 0.1
+  # moves 15 page ends), and binds "§ § 49-22-08(5)" (a section sign repeated after a space) whole where typst and
+  # LaTeX break after "§ §" (p19 line 11). Shared-model items (docs/open-items/fb-595.54.52.md); reported, not gated
+  # (fb-595.54.52).
+  cross_engine_docx: report
   page_limit: 38
