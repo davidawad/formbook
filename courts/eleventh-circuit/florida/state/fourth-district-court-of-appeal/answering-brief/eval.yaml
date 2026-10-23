@@ -3,10 +3,11 @@
 font:
   size_pt: 14
   pdf_prefix: "TeXGyreBonum"
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): reported, not gated. typst is on the shared document
-# model (typst/layout.yaml) and latex/ is generated (TeX Gyre Bonum, fb-595.54.82): 32 pages as typst, 618/623 lines;
-# latex has no break after a slash inside a word ("Plaintiff/Counterdefendant", p9). docx/ is not generated: Word's
-# page lookup (tools/fb docxpages.rs) misses an authority whose find starts a heading ("Applegate requires
-# affirmance ...") and the render stops (docs/open-items/fb-595.54.39.md).
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): typst is on the shared document model
+# (typst/layout.yaml); latex/ and docx/ are generated (TeX Gyre Bonum, fb-595.54.82). latex is gated: 623/623 lines as
+# typst. docx is reported: pages equal, 622/623 lines; one contents row (p2, "C. No error appears ... Final
+# Judgment.") typst holds on its line, LibreOffice carries its last word, the model's contents row in Word
+# (docs/open-items/fb-595.54.39.md).
 params:
-  cross_engine: report
+  cross_engine: gate
+  cross_engine_docx: report

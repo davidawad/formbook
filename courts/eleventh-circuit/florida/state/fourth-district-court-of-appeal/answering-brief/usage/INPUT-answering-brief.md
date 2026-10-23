@@ -147,7 +147,7 @@ Summary disposition and questions of statutory interpretation are reviewed de no
 
 This case did not end on pretrial motions. The court tried damages and Appellant's remaining counterclaims, heard testimony from both parties, and found for Appellee on all of them. (R. 1386, 1421). Appellant's own post-trial filings confirm that Appellee's records custodian testified and was cross-examined. (R. 1457 ¶ 51). Much of Appellant's brief asks this Court to revisit that trial: whether her communications were valid billing-error notices, whether Appellee's statements were knowingly false, how the court handled her exhibits, and how the evidence should be weighed. (IB. 21-28). There is no record from which this Court can do so.
 
-### Applegate requires affirmance when the appellant provides no record of the trial.
+### A. Applegate requires affirmance when the appellant provides no record of the trial.
 
 "In appellate proceedings the decision of a trial court has the presumption of correctness and the burden is on the appellant to demonstrate error." *Applegate*, 377 So. 2d at 1152. The Florida Supreme Court explained why a missing transcript is fatal:
 
@@ -159,13 +159,13 @@ The district courts apply this rule consistently to un-transcribed bench trials.
 
 *Applegate* controls every trial-based ruling Appellant challenges, including the rejection of her counterclaims. Whether she sent a qualifying written billing-error notice, whether Appellee's statements were false or misleading, whether Appellee knew it, and whether Appellant suffered damages are fact questions the court resolved against her at trial. So is the balance owed. Her complaints that the court excluded her credit report and limited her exhibits (IB. 26-28) cannot be evaluated without knowing what was offered, what objections were made, and what the court said. Her motion for new trial likewise asked the trial court to revisit evidence of which there is no record. (R. 1387-1398). The same is true of the October 29, 2025 hearing, which both parties attended and argued, and of which there is no transcript. (R. 666, 692).
 
-### Rule 9.200(b)(5) gave Appellant the means to reconstruct the record, and she did not use it.
+### B. Rule 9.200(b)(5) gave Appellant the means to reconstruct the record, and she did not use it.
 
 When no transcript exists, "a party may prepare a statement of the evidence or proceedings from the best available means, including the party's recollection," which is served on the other parties and then settled and approved by the lower tribunal. Fla. R. App. P. 9.200(b)(5). The rule exists for exactly this situation: a bench trial held without a court reporter. (IB. 26). Appellant prepared no such statement. Absent "a trial transcript or other record," this Court's "review is limited to those errors that may appear on the face of the final judgment." *Edman*, 407 So. 3d at 455.
 
 Nor does it matter why the record is missing. In *Miranda v. RBS Citizens, N.A.*, 253 So. 3d 746 (Fla. 3d DCA 2018), the court reporter's notes of a foreclosure trial were stolen, yet the Third District affirmed because the borrowers never attempted to reconstruct the record under former Rule 9.200(b)(4), now Rule 9.200(b)(5). The court was "under no obligation to afford Appellants 'a second opportunity to create an entire transcript because [they] ignored the rule when the record on appeal was being prepared,'" and it "must affirm the final judgment." *Id.* at 748-49 (quoting *Chisholm v. Chisholm*, 538 So. 2d 961, 963 (Fla. 3d DCA 1989)). If appellants whose transcript was stolen cannot obtain reversal, Appellant, who never sought to reconstruct the trial at all, cannot either.
 
-### No error appears on the face of the Final Judgment.
+### C. No error appears on the face of the Final Judgment.
 
 The Final Judgment identifies the parties, recites that the court heard testimony from both sides, and awards $1,761.94, the same principal amount demanded in the Complaint. (R. 010-012, 1421). It awards only that principal and $249.85 in court costs, which are supported by a costs declaration, with no interest or attorney's fees requiring separate authorization, and the county court had jurisdiction over a $1,761.94 small claims action. (R. 1385, 1421). Every challenge Appellant raises to the judgment instead turns on what the evidence did or did not show, which is precisely what *Applegate* holds an appellate court cannot resolve without a record. 377 So. 2d at 1152. And even if the trial court's reasoning were flawed, its judgment "will generally be affirmed if the evidence or an alternative theory supports it." *Id.*; see also *Robertson v. State*, 829 So. 2d 901, 906 (Fla. 2002). As shown below, the existing record independently supports the judgment.
 
@@ -191,7 +191,7 @@ Nor did Appellant assert a billing error recognized under Regulation Z. Regulati
 
 Appellant's brief narrows her FCCPA claim to a single theory. She contends that Appellee's billing statements from June through August 2024, which stated, "To ensure uninterrupted use of your account, please make a payment to bring your balance under the Total Credit Line," were false because the account could not be reactivated. She further contends that Appellee knew this, that the statements induced payments that delayed charge-off and allowed interest and fees to accrue, and that this conduct was "oppressive" and "reassert[ed] a nonexistent right." (IB. 23-24). She asks this Court to find a "prima facie case" on "undisputed facts" and to direct judgment in her favor. (IB. 23-24, 30). The claim is unsupportable on the facts and on the law.
 
-### The trial court rejected the claim on the facts, and that finding is presumed correct.
+### A. The trial court rejected the claim on the facts, and that finding is presumed correct.
 
 The FCCPA counterclaim was not decided on undisputed facts. By Appellant's own account, at the October 29, 2025 hearing the parties disputed "whether the account had been permanently closed during the relevant period," and the counterclaim was left for trial. (IB. 8; R. 666, 692). Appellee denied her requests to admit that it permanently closed the account in February 2024, that it represented the account as "restricted" rather than closed, and that it told her payments would restore the account to active status. (R. 1378-1379). At trial, the court heard testimony from both parties, received Appellant's evidence, and found "[a]s to the Counterclaims . . . in favor of the Plaintiff/Counterdefendant." (R. 1421; see IB. 10, 26). Appellant concedes that "no transcript exists." (IB. 26).
 
@@ -199,7 +199,7 @@ Each element of Appellant's theory is a question of fact: whether the statements
 
 Appellant's real complaint is that the court "admitted evidence establishing the account's closure" yet "declined to apply the FCCPA to the facts it established." (IB. 10, 26). That is a request to reweigh the evidence, not a showing of legal error. Her invocation of de novo review of "conclusions following a nonjury trial based upon legal error" (IB. 23) does not change the analysis, because no legal error appears on the face of the judgment, and the relief she seeks, judgment in her favor, would require this Court to find facts in her favor on a record that does not contain them.
 
-### The claim also fails as a matter of law.
+### B. The claim also fails as a matter of law.
 
 Even accepting Appellant's version of the facts, the claim fails. Section 559.72(9) prohibits attempting to enforce a debt "when such person knows that the debt is not legitimate, or assert[ing] the existence of some other legal right when such person knows that the right does not exist." § 559.72(9), Fla. Stat. A claim under that subsection requires "an illegitimate debt, a threat or attempt to enforce that debt, and knowledge that the debt is illegitimate." *Colombo v. Robertson, Anschutz & Schneid, P.L.*, 341 So. 3d 1126, 1129 (Fla. 4th DCA 2022) (quoting *Davis v. Sheridan Healthcare, Inc.*, 281 So. 3d 1259, 1264 (Fla. 2d DCA 2019)). The knowledge required is actual knowledge. See *Cornette v. I.C. Sys., Inc.*, 280 F. Supp. 3d 1362, 1371 (S.D. Fla. 2017). The debt here was legitimate; Appellant admitted it. (R. 258-259). Asking Appellant to pay down a balance she admittedly owed asserted no right Appellee lacked. At most, the statements concerned whether Appellee would extend future credit, which is not a "legal right" asserted against the debtor at all.
 
@@ -207,7 +207,7 @@ Nor is a monthly billing statement requesting payment of a balance owed conduct 
 
 Finally, the claim could not have defeated the judgment in any event. Appellant's alleged injury is the interest and fees that accrued before charge-off (IB. 23; R. 025, 285), and the FCCPA's remedy is actual damages and statutory damages "not exceeding $1,000." § 559.77(2), Fla. Stat. Even a meritorious claim would not have extinguished the debt or entitled Appellant to the judgment she seeks.
 
-### The FCCPA theories Appellant does not brief are abandoned.
+### C. The FCCPA theories Appellant does not brief are abandoned.
 
 Appellant's counterclaim also pleaded FCCPA theories under subsections (6) and (7) based on credit reporting, collection referrals, collection emails, and the filing of this lawsuit, and theories under subsection (9) based on Appellee's response to her consumer complaint and this lawsuit. (R. 270-274 ¶¶ 29-44). The court separately granted summary disposition on her FDCPA counterclaim. (R. 692). The Initial Brief argues none of these. (IB. 23-24). "When points, positions, facts and supporting authorities are omitted from the brief, a court is entitled to believe that such are waived, abandoned, or deemed by counsel to be unworthy." *Polyglycoat Corp. v. Hirsch Distribs., Inc.*, 442 So. 2d 958, 960 (Fla. 4th DCA 1983). Nor is the separate FCCPA count against Appellee's counsel, Hayt, Hayt & Landau, P.L. (R. 274-276 ¶¶ 46-51), before the Court. The trial court dismissed the firm as a party at the October 29, 2025 hearing (R. 666), the Initial Brief does not challenge that ruling, and the amended notice of appeal names only Appellee (R. 1500-1503).
 
