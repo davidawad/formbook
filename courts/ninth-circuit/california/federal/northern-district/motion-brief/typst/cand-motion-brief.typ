@@ -15,11 +15,11 @@
 
 #let font-family = ("Times New Roman", "Liberation Serif")    // CAND-FORM-002: standard, proportionally spaced font; the rule's example is Times New Roman (vendored, docs/FONTS.md).
 #let type-size = 12pt                    // CAND-FORM-002: 12 point or larger, footnotes and quotations too.
-#let margins = (top: 1in, bottom: 1in, x: 1in)
+#let margins = (top: 60pt, bottom: 60pt, left: 1.5in, right: 1in)   // pleading paper (Civil L.R. 3-4(c)(1)-(2)): 28 numbered lines of 24 pt; 792 - 28*24 = 120 pt split top/bottom
 #let para-indent = 0.5in
 #let heading-tab = 0.5in                 // the label of a numbered heading hangs in this space; each deeper level steps in by it
-#let footer-size = 11pt                  // footer: page number, paper title and case number (CAND-FORM-003); not body text
-#let footer-foot = 18pt                  // the footer's last line ends this far above the page's foot
+#let footer-size = 10pt                  // footer: page number, paper title and case number (CAND-FORM-003); not body text
+#let footer-foot = 8pt                   // the footer's last line ends this far above the page's foot
 #let passim-threshold = 7                // authority cited on this many pages or more: "passim"
 #let caption-pad = 14.4pt                // the caption's text stands this far off its rule (left column) and the rule (right column)
 #let caption-below = 12pt                // the caption's bottom rule stands this far below the last party line
@@ -34,8 +34,8 @@
 // its pitch with the baseline at 0.8 of it, the boxes touch, and the space between blocks is the larger of the space
 // below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
 #let pitch-double = 24pt                 // CAND-FORM-001: double spacing; 27 lines fit the page (limit 28)
-#let pitch-single = 13.8pt               // counsel, caption, headings, footnotes, tables, signature: single spaced, 1.15 x the size
-#let pitch-footer = 12.65pt              // the footer's lines, 1.15 x its size
+#let pitch-single = 12pt   // counsel, caption, headings, footnotes, tables, signature: single spaced, two lines to a numbered line (as cand-complaint)
+#let pitch-footer = 11.5pt               // the footer's lines, 1.15 x its size; four fit the 52 pt under the last numbered line (page, a two-line title, case number)
 #let half-gap = 12pt                     // around a heading and the caption's items; above a table's groups and its column label
 #let row-gap = 6pt                       // between the rows of the contents and the authorities
 #let note-gap = 7pt                      // between two footnotes (Word: Footnote Text's space after)
@@ -224,7 +224,7 @@
       for (i, l) in sig.at("preamble", default: ()).enumerate() {
         line-block(above: if i == 0 { pitch-double } else { 0pt }, inl(l))
       }
-      line-block(above: pitch-double)[/s/ #sig.signer]
+      line-block(above: pitch-double)[#emph[/s/ #sig.signer]]
       line-block(inl(sig.signer))
       for l in sig.at("lines", default: ()) { line-block(inl(l)) }
     },
@@ -246,6 +246,22 @@
   line[No. #need(meta, "case_number")]
 }))
 
+// Pleading-paper furniture (line numbers 1-28 and the rules), as courts/.../northern-district/complaint/typst/cand-complaint.typ.
+#let lines-per-page = 28
+#let number-col = 1in
+#let line-numbers() = {
+  set text(font: font-family, size: type-size, ..edges(pitch-double))
+  place(top + left, dy: margins.top, block(width: number-col, {
+    set par(leading: 0pt, spacing: 0pt)
+    for i in range(1, lines-per-page + 1) { block(width: 100%, above: 0pt, below: 0pt, align(right, str(i))) }
+  }))
+}
+#let pleading-rules() = {
+  place(top + left, dx: margins.left - 0.2in, line(start: (0pt, 0pt), end: (0pt, 11in), stroke: 0.75pt))
+  place(top + left, dx: margins.left - 0.16in, line(start: (0pt, 0pt), end: (0pt, 11in), stroke: 0.75pt))
+  place(top + left, dx: 8.5in - margins.right + 0.1in, line(start: (0pt, 0pt), end: (0pt, 11in), stroke: 0.75pt))
+}
+
 #let cand-motion-brief(meta, md) = {
   // ---- metadata checks (loud failure beats silent omission) ----
   for k in ("case_number", "court", "caption", "counsel", "counsel_role", "brief_title", "footer_title", "hearing", "signature", "date") {
@@ -254,7 +270,7 @@
   let authorities = meta.at("authorities", default: (:))
 
   // ---- document-wide settings ----
-  set page(paper: "us-letter", margin: margins, numbering: none, footer: none)   // Civil L.R. 3-4(c)(1): 8 1/2 x 11 inch
+  set page(paper: "us-letter", margin: margins, numbering: none, footer: none, background: { line-numbers(); pleading-rules() })   // Civil L.R. 3-4(c)(1): 8 1/2 x 11 inch
   set document(
     title: need(meta, "brief_title") + ", No. " + need(meta, "case_number"),
     author: need(meta, "signature").signer,
