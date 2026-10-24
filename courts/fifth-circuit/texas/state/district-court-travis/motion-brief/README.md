@@ -34,7 +34,7 @@ Frontmatter (YAML), then the body. Unknown keys are ignored.
 
 Body: paragraphs before the first heading are the unnumbered opening; `# Heading` is a part (the template prints the Roman numeral above the title); `## A. Heading` and `### 1. Heading` are sub-headings with the label you type; each other paragraph is numbered by the template (a heading that begins "Prayer", and a paragraph that begins "WHEREFORE", are not); `> quote`; `- list` (one chunk); footnotes `[^k]`. No tables, HTML or raw Typst. Never type the numerals, paragraph numbers, salutation, signature block or certificates: the template prints them.
 
-Motion-only: `conference` (required): `dispositive: true` for a 91a, motion to dismiss or summary judgment (then only the setting certification prints); `setting: conferred|efforts`; for a motion that is not dispositive, `issues: conferred|efforts`; optional `detail` (who, when, how, result). `document`: `motion` (default) or `proposed-order`. A proposed order needs only `cause_number`, `judicial_district`, `caption`, `title` and the body (the order's text, no numbering); the template prints "SIGNED on ___, 20__." and the judge's line. A notice of hearing is a body part (TRCP 21(b), 91a.6 content) or its own paper.
+Motion-only: `conference` (required): `dispositive: true` for a 91a, motion to dismiss or summary judgment (then only the setting certification prints); `setting: conferred|efforts`; for a motion that is not dispositive, `issues: conferred|efforts`; optional `detail` (who, when, how, result). `document`: `motion` (default), `notice` or `proposed-order`. A `notice` (notice of appearance or designation of attorney in charge, TRCP 8; notice of hearing or submission, TRCP 21(b)) needs `signature` and `service` but no `conference` (Local Rule 2.2 reaches motions only); its paragraphs are unnumbered unless `numbered_paragraphs: true`. A proposed order needs only `cause_number`, `judicial_district`, `caption`, `title` and the body (the order's text, no numbering); the template prints "SIGNED on ___, 20__." and the judge's line. A notice of hearing is a body part (TRCP 21(b), 91a.6 content) or its own paper.
 
 Render: `just render-filing courts/fifth-circuit/texas/state/district-court-travis/motion-brief <in.md> <out.pdf>`.
 
@@ -44,6 +44,7 @@ Render: `just render-filing courts/fifth-circuit/texas/state/district-court-trav
 |---|---|---|---|
 | `INPUT-motion-brief.md` | Rule 91a motion to dismiss, 201st (Chamberlain McHaney) | 5 | dispositive motion, footnotes, two lawyers, long closing paragraph with signature |
 | `INPUT-motion-brief-2.md` | the order on that motion | 1 | proposed-order document |
+| `INPUT-motion-brief-4.md` | fictional notice of appearance | 1 | notice document |
 | `INPUT-motion-brief-3.md` | none (fictional) | 3 | non-dispositive motion, efforts certificates with detail, block quote, list, sub-headings, prayer, two recipients |
 
 ## Page-by-page review (every page viewed)

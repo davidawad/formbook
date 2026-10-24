@@ -1,5 +1,8 @@
 // Travis County district courts (txdistrict-travis): motion with its brief incorporated, certificate of conference,
-// certificate of service; or, with `document: proposed-order`, the proposed order as its own paper.
+// certificate of service; with `document: proposed-order`, the proposed order as its own paper; or, with
+// `document: notice`, a notice that asks the court for no ruling (notice of appearance or designation of attorney in
+// charge, TRCP 8; notice of hearing or submission, TRCP 21(b)): signature and service certificate, no certificate of
+// conference, because Local Rule 2.2 reaches motions only.
 //
 // Rule-driven and content-agnostic; shared parts in ../../typst/travis-common.typ, rules in ../../rules.md.
 // TRCP 21(a): a motion states its grounds and sets out the relief sought; TRCP 91a.2: a Rule 91a motion says it is made
@@ -20,7 +23,12 @@
     with-signature(body-blocks(body, numbered: meta.at("numbered_paragraphs", default: true)), signature-block(meta))
     conference-certificate(meta)
     service-certificate(meta)
+  } else if doc == "notice" {
+    for k in ("signature", "service") { let _ = need(meta, k) }
+    head(meta)
+    with-signature(body-blocks(body, numbered: meta.at("numbered_paragraphs", default: false)), signature-block(meta))
+    service-certificate(meta)
   } else {
-    panic("txdistrict-travis: document must be `motion` or `proposed-order`")
+    panic("txdistrict-travis: document must be `motion`, `notice` or `proposed-order`")
   }
 }
