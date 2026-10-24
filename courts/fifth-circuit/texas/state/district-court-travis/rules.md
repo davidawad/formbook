@@ -1,0 +1,62 @@
+# District Courts of Travis County, Texas (Austin): original answer, motion with incorporated brief, proposed order
+
+Alias `txdistrict-travis`. Scope: papers filed in the civil district courts of Travis County, Texas (the 53rd, 98th, 126th, 200th, 201st, 261st, 345th, 353rd, 419th and other civil district courts that sit as the Travis County Civil and Family District Courts). Doc types: `original-answer` (an original answer, with any special exceptions, verified denials, affirmative defenses and counterclaim) and `motion-brief` (a motion with its argument incorporated, with certificate of conference and of service; the same folder renders a proposed order as its own paper).
+
+Verified against the TRCP (official txcourts.gov PDF), the Travis County Local Rules effective November 15, 2024, the Technology Standards v11.0 and Tex. Civ. Prac. & Rem. Code § 132.001 on 2026-10-24. Rule numbers below are the rule numbers of the sources in the table. Where the sources are silent the project rule applies and is marked T (house style from the filed exemplars; `usage/SOURCE.md`).
+
+## Sources
+
+| Tag | Source | URL | Read |
+|---|---|---|---|
+| TRCP | Texas Rules of Civil Procedure (official txcourts.gov PDF, 369 pp.; the file's Rule 21, 21a, 21c, 45, 47, 57, 91a, 92-94, 97 text read) | https://www.txcourts.gov/media/1463426/texas-rules-of-civil-procedure.pdf (linked from https://www.txcourts.gov/rules-forms/rules-standards/) | 2026-10-24, HTTP 200 |
+| LR | Local Rules of Civil Procedure and Rules of Decorum, Civil and Family District Courts of Travis County, effective November 15, 2024 (35 pp., clerk file stamp 2024-11-19) | https://www.traviscountytx.gov/images/courts/Docs/20241120-Amended_LOCAL_RULES_as_of_Nov_15_2024.pdf (index page https://www.traviscountytx.gov/courts/files/civil-district) | 2026-10-24, HTTP 200 |
+| TS | Texas Judicial Committee on Information Technology, Technology Standards v11.0, released June 2026 | https://www.txcourts.gov/media/1435816/technology-standards.pdf | 2026-10-24, HTTP 200 |
+| CPRC | Tex. Civ. Prac. & Rem. Code § 132.001 (unsworn declaration), text from a secondary republication (the official statutes.capitol.texas.gov page serves no text without a script) | https://texas.public.law/statutes/tex._civ._practice_and_remedies_code_section_132.001 | 2026-10-24 |
+| SO-MC | Travis County Civil and Family District Courts, Standing Order on the Master Calendar (took effect 2026-07-01; a scanned PDF with no text layer; first page read) | https://www.traviscountytx.gov/images/courts/Docs/Standing-Order-for-Master-Calendar.pdf | 2026-10-24, HTTP 200 |
+
+Not read, and a gap: the Travis County civil district courts' page states that the county has until 2026-10-31 to amend its local rules to comply with amended Texas rules, and lists the Standing Order on Master Calendar (effective 2026-07-01) and a Standing Order for Motions for Summary Judgment dated 2026-06-29 (https://www.traviscountytx.gov/images/courts/Docs/6-29-2026-Civil-Standing-Orders-Family-Cases.pdf). The local rules read are the November 2024 text. Re-read the local rules, the standing orders and the individual judge's procedures before any filing. Not covered: judge-specific procedures (each court's page on https://www.traviscountytx.gov/courts), and the e-filing manager's own guidance (eFileTexas).
+
+## Form of papers (all doc types)
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| TXTRAVIS-FORM-001 | No rule of the TRCP or the Travis local rules read sets a typeface, type size, margin, line spacing or page limit for a pleading or motion in a district court. These are style choices, taken from the filed exemplars: 12-point Times-metric face, one-inch margins, double-spaced text, single-spaced caption, quotations, notes and signature block. | TRCP and LR (silent); `usage/SOURCE.md` | T |
+| TXTRAVIS-FORM-002 | A paper filed on paper measures approximately 8½ by 11 inches. An e-filed document is text-searchable PDF on 8.5x11 pages, generated directly from the originating software where possible, with no password or encryption, no embedded video, audio or programming, and a filename of Latin-1 alphanumerics up to 50 characters. | TRCP 45 (paper size); TS 3.1(A)-(D), (F) | M |
+| TXTRAVIS-FORM-003 | A PDF "may not contain embedded fonts" and uses "fonts specified in the PDF specification". The template's Typst PDF embeds subset fonts (Liberation Serif, the Times metric twin) as every formbook template does; see README "Open questions". | TS 3.1(A), (E) | M (not met) |
+| TXTRAVIS-FORM-004 | Each document is a single PDF. A proposed order is its own standalone PDF document type in the e-filing manager (the table of document types lists Proposed Order as its own document). The template renders the order from its own sample, never in the motion's PDF. | TS 3.1(E); TS document-type table | M |
+| TXTRAVIS-FORM-005 | Sensitive data (a driver's license, passport, social security, tax identification or similar government-issued number; a bank, credit card or other financial account number; a birth date, a home address, and the name of any person who was a minor when the suit was filed) may not be filed unless redacted, unless a statute, court rule or regulation requires it; if a filed document must contain it, the filer designates it when e-filing. Author responsibility: the template does not redact. The verification block's jurat requires a date of birth and an address by statute (CPRC 132.001(d)), which is the statute exception; the filer designates the document as containing sensitive data at e-filing. | TRCP 21c(a)-(d); CPRC 132.001(d) | A |
+| TXTRAVIS-FORM-006 | Pleadings consist of a petition and an answer, in plain and concise language. | TRCP 45(a)-(b) | M |
+| TXTRAVIS-FORM-007 | Every pleading of a party represented by an attorney is signed by at least one attorney of record in his individual name, with his State Bar of Texas identification number, address, telephone number, email address and, if available, fax number. | TRCP 57 | M |
+| TXTRAVIS-FORM-008 | An attorney who e-files a document puts his email address on it. | TRCP 21(f)(2) | M |
+| TXTRAVIS-FORM-009 | The caption: the cause number, the district court, the county, the parties, the title; the three-column section-sign grid (parties, section signs, "IN THE DISTRICT COURT OF / ___ JUDICIAL DISTRICT / TRAVIS COUNTY, TEXAS") is the convention of every exemplar. The opening salutation "TO THE HONORABLE JUDGE OF SAID COURT:" likewise. | usage/SOURCE.md exemplars | C |
+| TXTRAVIS-FORM-010 | Paragraphs are numbered consecutively through a pleading under the parts (I., II., ...), a convention of two of three exemplars; the template numbers them by default and the `numbered_paragraphs: false` option turns it off. | usage/SOURCE.md exemplars | C |
+| TXTRAVIS-FORM-011 | Page footer with the paper's short title and the page number. | usage/SOURCE.md exemplars | C |
+
+## Original answer
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| TXTRAVIS-ANS-001 | A general denial of matters not required to be denied under oath puts them in issue. | TRCP 92 | A |
+| TXTRAVIS-ANS-002 | Matters listed in Rule 93 (capacity, another suit pending, defect of parties, denial of partnership, denial of execution of an instrument, failure of consideration, usury, notice and proof of loss, and the rest) are verified by affidavit. The template prints a verification by unsworn declaration with the CPRC 132.001 jurat when the frontmatter has `verification:`. | TRCP 93(1)-(13); CPRC 132.001(a), (c), (d) | M |
+| TXTRAVIS-ANS-003 | Affirmative defenses (accord and satisfaction, estoppel, failure of consideration, fraud, limitations, waiver, and others) are pleaded affirmatively. | TRCP 94 | A |
+| TXTRAVIS-ANS-004 | A counterclaim states, in the pleading, a short statement of the cause of action, that the damages sought are within the jurisdictional limits, the relief category of Rule 47(c) (monetary relief of $325,000 or less; or $325,000 or less and non-monetary; or over $325,000 to $1,000,000; or over $1,000,000; or only non-monetary), and a demand for judgment for all other relief. Failing 47(c) bars discovery until the pleading is amended. Author responsibility: body text. | TRCP 47(a)-(d); TRCP 97 | A |
+| TXTRAVIS-ANS-005 | The pleading carries a certificate of service signed on the filed paper, stating compliance with Rule 21a. | TRCP 21(d), 21a(e) | M |
+
+## Motion with incorporated brief
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| TXTRAVIS-MOT-001 | Every motion states its grounds and sets out the relief or order sought, is filed with the clerk, and is served on all other parties at the same time. | TRCP 21(a) | A |
+| TXTRAVIS-MOT-002 | An application for an order and notice of a court proceeding not presented during a proceeding must be served not less than three days before the time specified for the proceeding, unless these rules say otherwise; notice of a court proceeding must contain the information participants need (location or joining instructions, the court's designated contact, instructions for submitting evidence). Author responsibility: a notice of hearing is its own paper or a part of the motion. | TRCP 21(b) | A |
+| TXTRAVIS-MOT-003 | A Rule 91a motion to dismiss states that it is made under the rule, identifies each cause of action it addresses, and states specifically the reasons the cause of action has no basis in law or fact; it is filed within 60 days after the first pleading containing the challenged cause of action is served on the movant, and at least 21 days before the hearing; the respondent gets at least 14 days' notice of the hearing and responds no later than 7 days before it. Author responsibility; the template does not compute dates. | TRCP 91a.1-91a.6 | A |
+| TXTRAVIS-MOT-004 | Before a hearing is set the parties make reasonable efforts to speak to each other. Every motion includes a certification that counsel "has conferred with (or made reasonable efforts to confer with) all parties about the date, time, and format of the setting." The template prints the chosen variant (`conference.setting`: `conferred` or `efforts`). | LR 2.2 | M |
+| TXTRAVIS-MOT-005 | Every motion other than a dispositive motion also certifies either (a) "Counsel has conferred with all parties who may be affected by the relief sought in this motion in a good faith effort to resolve or narrow the issues raised." or (b) "Counsel has made reasonable efforts to confer with all parties who may be affected by the relief sought in this motion but has been unable to do so." The template prints the chosen variant (`conference.issues`: `conferred` or `efforts`) unless `conference.dispositive: true`. The court may strike a setting where the motion lacks these. A party must not request a setting unless the motion has been filed with the LR 2.2 certifications or will file it immediately, and no later than 24 hours after obtaining the setting. | LR 2.2, 2.3 | M |
+| TXTRAVIS-MOT-006 | A certificate of service on the filed paper: the party or attorney of record certifies compliance with Rule 21a in writing over signature, stating the date and manner. A document e-filed must be served electronically through the electronic filing manager when the recipient's email is on file; it may otherwise be served in person, by mail, commercial delivery, fax or email. A certificate is prima facie evidence of service. | TRCP 21(d), 21a(a)(1)-(2), 21a(e) | M |
+
+## Proposed order
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| TXTRAVIS-ORD-001 | A draft order must not be typed on the same page with a pleading, motion, certificate of service or any part thereof; each draft has a heading showing the cause number, the style of the case and the court. The template renders the order as its own paper. | LR 11.4 | M |
+| TXTRAVIS-ORD-002 | The signature line for the judge must not be on a separate page but on a page with other text. The template keeps the last paragraph with the signature line. | LR 11.4 | M |
+| TXTRAVIS-ORD-003 | The word "entered" is not used to show the date an order is signed; the template prints "SIGNED on ___, 20__." | LR 11.5 | M |

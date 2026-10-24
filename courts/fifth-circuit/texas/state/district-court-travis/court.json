@@ -1,0 +1,14 @@
+{
+  "alias": "txdistrict-travis",
+  "courtlistener_id": null,
+  "name": "District Courts of Travis County, Texas (Austin)",
+  "level": "state-trial",
+  "circuit": "ca5",
+  "state": "Texas",
+  "path": "courts/fifth-circuit/texas/state/district-court-travis",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "county subdivision of the Texas district courts; not a CourtListener id. Alias convention: tex (Supreme Court), texapp, texcrimapp are CourtListener ids; a Texas district court is not on CourtListener, so the alias follows the calsuperct-sandiego pattern (state trial-court class + county), tx + district + county.",
+  "parent_alias": null,
+  "legacy_aliases": []
+}
