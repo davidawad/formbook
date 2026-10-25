@@ -1,6 +1,6 @@
 # txdistrict-travis: original-answer
 
-Doc type `original-answer` for the civil district courts of Travis County, Texas (alias `txdistrict-travis`): an original answer with any special exceptions, verified denials, affirmative defenses, counterclaim, jury demand and prayer, a signature block (TRCP 57), a certificate of service (TRCP 21a(e)) and, when the frontmatter has `verification:`, an unsworn-declaration verification (Tex. Civ. Prac. & Rem. Code 132.001). Template: `typst/txdistrict-travis-original-answer.typ` over `../typst/travis-common.typ`; entry `typst/main.typ`. Engines: typst only (no latex or docx).
+Doc type `original-answer` for the civil district courts of Travis County, Texas (alias `txdistrict-travis`): an original answer with any special exceptions, verified denials, affirmative defenses, counterclaim, jury demand and prayer, a signature block (TRCP 57), a certificate of service (TRCP 21a(e)) and, when the frontmatter has `verification:`, an unsworn-declaration verification (Tex. Civ. Prac. & Rem. Code 132.001). Template: `typst/txdistrict-travis-original-answer.typ` over `/lib/typst/txdistrict-travis-common.typ`; entry `typst/main.typ`. Engines: typst only (no latex or docx).
 
 ## Governing rules
 
@@ -14,7 +14,7 @@ Full table with sources, URLs and the date read: `../rules.md`. The ones this te
 | TRCP 93; CPRC 132.001 | Verified pleas; unsworn declaration with jurat in place of an affidavit | `verification` page |
 | TRCP 47, 92, 94, 97 | Counterclaim statements, general denial, affirmative defenses | author's body text (not generated) |
 | TS 3.1 | Text-searchable PDF, 8.5x11, no encryption | Typst output; fonts are embedded (open question) |
-| Style (no rule) | 12 pt, 1 in margins, double spacing, caption grid | named parameters at the top of `travis-common.typ` |
+| Style (no rule) | 12 pt, 1 in margins, double spacing, caption grid | named parameters at the top of `/lib/typst/txdistrict-travis-common.typ` |
 
 ## Markdown contract
 

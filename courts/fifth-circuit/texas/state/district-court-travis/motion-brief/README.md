@@ -1,6 +1,6 @@
 # txdistrict-travis: motion-brief
 
-Doc type `motion-brief` for the civil district courts of Travis County, Texas (alias `txdistrict-travis`): a motion with its argument incorporated (for example a Rule 91a motion to dismiss), a signature block (TRCP 57), a certificate of conference (Travis Local Rule 2.2) and a certificate of service (TRCP 21a). With `document: proposed-order` the same template renders the proposed order as its own paper (Local Rules 11.4, 11.5). Template: `typst/txdistrict-travis-motion-brief.typ` over `../typst/travis-common.typ`; entry `typst/main.typ`. Engines: typst only.
+Doc type `motion-brief` for the civil district courts of Travis County, Texas (alias `txdistrict-travis`): a motion with its argument incorporated (for example a Rule 91a motion to dismiss), a signature block (TRCP 57), a certificate of conference (Travis Local Rule 2.2) and a certificate of service (TRCP 21a). With `document: proposed-order` the same template renders the proposed order as its own paper (Local Rules 11.4, 11.5). Template: `typst/txdistrict-travis-motion-brief.typ` over `/lib/typst/txdistrict-travis-common.typ`; entry `typst/main.typ`. Engines: typst only.
 
 ## Governing rules
 

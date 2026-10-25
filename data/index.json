@@ -4152,6 +4152,18 @@
    "group_key": "cadc",
    "kind": "state",
    "parent_alias": null
+  },
+  "txdistrict-travis": {
+   "path": "courts/fifth-circuit/texas/state/district-court-travis",
+   "name": "District Courts of Travis County, Texas (Austin)",
+   "level": "state-trial",
+   "courtlistener_id": null,
+   "circuit": "ca5",
+   "state": "Texas",
+   "group": "Fifth Circuit",
+   "group_key": "ca5",
+   "kind": "state",
+   "parent_alias": null
   }
  },
  "legacy_aliases": {

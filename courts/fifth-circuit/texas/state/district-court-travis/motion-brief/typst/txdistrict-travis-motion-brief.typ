@@ -4,12 +4,12 @@
 // charge, TRCP 8; notice of hearing or submission, TRCP 21(b)): signature and service certificate, no certificate of
 // conference, because Local Rule 2.2 reaches motions only.
 //
-// Rule-driven and content-agnostic; shared parts in ../../typst/travis-common.typ, rules in ../../rules.md.
+// Rule-driven and content-agnostic; shared parts in /lib/typst/txdistrict-travis-common.typ, rules in ../../rules.md.
 // TRCP 21(a): a motion states its grounds and sets out the relief sought; TRCP 91a.2: a Rule 91a motion says it is made
 // under the rule, identifies each cause of action and states the reasons; Travis Local Rule 2.2: certification of
 // conference and of the setting; TRCP 21(d), 21a(e): certificate of service; Local Rules 11.4, 11.5: the order.
 // The Technology Standards treat a proposed order as its own PDF, so it is rendered from its own sample.
-#import "/courts/fifth-circuit/texas/state/district-court-travis/typst/travis-common.typ": *
+#import "/lib/typst/txdistrict-travis-common.typ": *
 
 #let txdistrict-travis-motion-brief(meta, body) = {
   for k in ("cause_number", "judicial_district", "caption", "title") { let _ = need(meta, k) }
