@@ -1,0 +1,5 @@
+# Sample source
+
+- `INPUT-notice.md` is a synthetic sample, not a transcription: a notice of appearance of counsel for the Federal Defendants in *Tsi Akim Maidu of Taylorsville Rancheria v. United States Department of the Interior*, No. 16-cv-7189-LB (N.D. Cal.), reusing the caption and counsel block of `../../motion-brief/usage/INPUT-motion-brief.md` (a transcription of the filed motion to dismiss, `../../motion-brief/usage/FILED-EXAMPLE-motion-brief.pdf`). The notice text was written for this folder; no such notice was filed on that date.
+- No `FILED-EXAMPLE-notice*.pdf` is saved. The layout is the motion-brief and complaint furniture (cover, caption, pleading paper, footer, signature block), which the two exemplars above and the complaint's exemplars show. The format came from a notice of special appearance drafted for a matter, approved by David 2026-10-23, then generalized here; none of that matter's content is in this folder.
+- Searches for a filed N.D. Cal. notice of appearance as a second exemplar: not run. The eval loop's tier 2 asks for 2 or 3 filers; not met (see README, Known gaps).

@@ -2,7 +2,7 @@
 
 Verified against the primary sources cited in this file on 2026-10-17.
 
-Alias `cand`. Applies to complaint and motion-brief document types under this court folder. Primary source verified 2026-10-17 against Civil Local Rules effective October 2, 2026. Re-check at each published revision and at least annually; judge standing orders can add requirements.
+Alias `cand`. Applies to complaint, motion-brief and notice document types under this court folder. Primary source verified 2026-10-17 against Civil Local Rules effective October 2, 2026. Re-check at each published revision and at least annually; judge standing orders can add requirements.
 
 ## Sources
 
@@ -48,3 +48,11 @@ Applies to `motion-brief/`. A motion must comply with Civil L.R. 7-2; an accompa
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
 | CAND-CONT-009 | Motion states grounds and relief with particularity. | FRCP 7(b)(1) | M |
+
+### Notice
+
+Applies to `notice/`: a short paper filed on its own (notice of appearance, notice of special appearance, notice of withdrawal). It follows the same Civil L.R. 3-4 form as the complaint and the motion brief (rows CAND-FORM-001 to 006); a hearing block appears only when the notice itself sets a hearing.
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| CAND-CONT-010 | A notice filed on its own has the first-page counsel block, caption, title, numbered lines and footer of any paper; a table of contents and a table of authorities are required only of a brief of more than 10 pages. | CAND-LR, Civil L.R. 3-4(a), (c); 7-4(a)(2) | M |

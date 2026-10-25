@@ -8,7 +8,7 @@
 -- paragraphs (style "Body Text"), so pandoc writes their footnotes.
 --
 -- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
--- exact line boxes of the typst pitch (twips = 20 x pt: 480 the double-spaced body, 276 a single line), the spaces
+-- exact line boxes of the typst pitch (twips = 20 x pt: 480 the double-spaced body, 240 a single line), the spaces
 -- between blocks those of the typst template, and the break rules of typst on every run.
 --
 -- Page numbers: fb render (tools/fb/src/docxpass.rs) renders the document, finds the needles this filter writes
@@ -20,13 +20,16 @@
 local xe = require("docx.xengine")
 local stringify = pandoc.utils.stringify
 
-local BODY, SINGLE = 480, 276            -- typst pitch-double, pitch-single
-local FOOT_LINE, FOOT_SZ = 253, 22       -- typst pitch-footer 12.65 pt, footer-size 11 pt
-local FOOT_DIST = 360                    -- typst footer-foot 18 pt
+local BODY, SINGLE = 480, 240            -- typst pitch-double, pitch-single
+local FOOT_LINE, FOOT_SZ = 230, 20       -- typst pitch-footer 11.5 pt, footer-size 10 pt
+local FOOT_DIST = 160                    -- typst footer-foot 8 pt
+local LINES = 28                         -- typst lines-per-page: the pleading paper's numbered lines
+local TOP, LEFT, RIGHT = 1200, 2160, 1440 -- typst margins: top and bottom 60 pt, left 1.5 in, right 1 in
+local NUMBER_COL = 1440                  -- typst number-col: the line numbers end 1 in from the page edge
 local HALF = 240                         -- typst half-gap 12 pt
 local INDENT = 720                       -- typst para-indent, 0.5 in
 local TAB = 720                          -- typst heading-tab, 0.5 in
-local TEXTW = 9360                       -- 6.5 in
+local TEXTW = 8640                       -- 6 in: letter, 1.5 in left and 1 in right margins
 local CAP_PAD, CAP_BELOW, CAP_TOP = 288, 240, 72 -- typst caption-pad 14.4 pt, caption-below 12 pt, caption-top 3.6 pt
 local DESIGNATION = 2592                 -- typst designation-indent 1.8 in
 local SIG_W = 4608                       -- typst signature-width 3.2 in
@@ -130,21 +133,56 @@ local PAGE_FIELD = '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrTe
   '</w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r>' ..
   '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
 
+local VML = 'xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"'
+-- LibreOffice keeps a VML text box's inset whatever its `inset` says: the box moves by the difference, so that its
+-- lines are typst's (the numbers end at number-col, each on its body line's baseline; measured in the PDF).
+local BOX_DX, BOX_DY = 4, -4.25
+local BOX_PAD = 12                            -- and room below the last number for the inset LibreOffice keeps
+local PAGE_POS = 'position:absolute;mso-position-horizontal:absolute;mso-position-horizontal-relative:page;' ..
+  'mso-position-vertical:absolute;mso-position-vertical-relative:page'
+
+-- The pleading paper (typst line-numbers, pleading-rules; as ../../complaint/docx/cand.lua): the numbers 1 to 28 in
+-- a text box at the left of the page, one per exact 24 pt line from the top margin, ending at number-col; and the
+-- rules, a double one at the text's left edge and a single one at its right, the height of the page. Both behind
+-- the text, anchored to the page, in the footer so that they take no room in the text and repeat on every page.
+local function furniture()
+  local nums = {}
+  for i = 1, LINES do
+    nums[#nums + 1] = p(xe.runs(tostring(i)), { line = BODY, jc = "right" })
+  end
+  -- a rule: a black box 0.75 pt wide, centered on x_in inches, the height of the page
+  local function rule(x_in, id)
+    return '<w:r><w:pict ' .. VML .. '><v:rect id="CandRule' .. id .. '" fillcolor="black" filled="t" stroked="f" style="' .. PAGE_POS ..
+      string.format(";margin-left:%.2fpt;margin-top:0;width:0.75pt;height:792pt", x_in * 72 - 0.375) ..
+      ";z-index:-251658" .. (700 + id) .. '"/></w:pict></w:r>'
+  end
+  return '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/></w:pPr><w:r><w:pict ' ..
+    VML .. '>' ..
+    '<v:shape id="CandLineNumbers" filled="f" stroked="f" style="' .. PAGE_POS .. ';margin-left:' .. BOX_DX .. 'pt;margin-top:' ..
+    (TOP / 20 + BOX_DY) .. 'pt;width:' .. (NUMBER_COL / 20) .. 'pt;height:' .. (LINES * BODY / 20 + BOX_PAD) .. 'pt;z-index:-251658752">' ..
+    '<v:textbox inset="0pt,0pt,0pt,0pt"><w:txbxContent>' .. table.concat(nums) .. '</w:txbxContent></v:textbox></v:shape>' ..
+    '</w:pict></w:r>' .. rule(LEFT / 1440 - 0.2, 1) .. rule(LEFT / 1440 - 0.16, 2) .. rule(8.5 - RIGHT / 1440 + 0.1, 3) ..
+    '</w:p>'
+end
+
 -- The footer (typst running-footer): the page number, the paper's title in capitals and the case number, centered,
--- 11 pt in 12.65 pt line boxes, its last line FOOT_DIST above the page's foot.
+-- 10 pt in 11.5 pt line boxes, its last line FOOT_DIST above the page's foot.
 local function footer(meta)
   local sz = '<w:rPr><w:sz w:val="' .. FOOT_SZ .. '"/><w:szCs w:val="' .. FOOT_SZ .. '"/></w:rPr>'
   local function line(body) return p(body, { line = FOOT_LINE, jc = "center" }) end
   local o = { sz = FOOT_SZ }
-  return line((PAGE_FIELD:gsub("<w:r>", "<w:r>" .. sz))) ..
+  return furniture() .. line((PAGE_FIELD:gsub("<w:r>", "<w:r>" .. sz))) ..
     line(xe.inl(upper(need_meta(meta, "footer_title")), o)) ..
     line(xe.runs("No. " .. stringify(need_meta(meta, "case_number")), o))
 end
 
+-- The cover's footer: the pleading paper alone (typst: no footer text on the cover, the page's background stays).
+local function cover_footer() return furniture() end
+
 local function sect_pr(footer_id, fmt)
   local pg = fmt and ('<w:pgNumType w:fmt="' .. fmt .. '" w:start="1"/>') or ""
   return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer_id .. '"/>'
-    .. '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" '
+    .. '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="' .. TOP .. '" w:right="' .. RIGHT .. '" w:bottom="' .. TOP .. '" w:left="' .. LEFT .. '" '
     .. 'w:header="720" w:footer="' .. FOOT_DIST .. '" w:gutter="0"/>' .. pg .. "</w:sectPr>"
 end
 
@@ -274,7 +312,7 @@ local function signature(meta, out)
   local sig = need_meta(meta, "signature")
   local right = { p(xe.runs("Respectfully submitted,")) }
   for i, l in ipairs(sig.preamble or {}) do right[#right + 1] = p(xe.inl(l), { before = i == 1 and BODY or 0 }) end
-  right[#right + 1] = p(xe.runs("/s/ " .. stringify(sig.signer)), { before = BODY })
+  right[#right + 1] = p(xe.runs("/s/ " .. stringify(sig.signer), { i = true }), { before = BODY })
   right[#right + 1] = p(xe.inl(sig.signer))
   for _, l in ipairs(sig.lines or {}) do right[#right + 1] = p(xe.inl(l)) end
   out[#out + 1] = p("", { keep = true, before = BODY - 20, line = 20 })
@@ -368,7 +406,7 @@ function Pandoc(doc)
   local meta = doc.meta
   for _, k in ipairs({ "case_number", "court", "caption", "counsel", "counsel_role", "brief_title", "footer_title",
     "hearing", "signature", "date" }) do need_meta(meta, k) end
-  write_file("FORMBOOK_FOOTERS", "rIdCandFooter\t" .. footer(meta) .. "\n")
+  write_file("FORMBOOK_FOOTERS", "rIdCandFooter\t" .. footer(meta) .. "\nrIdCandCover\t" .. cover_footer() .. "\n")
   doc = doc:walk({ Str = breaks }):walk({ Inlines = signs })
   meta = doc.meta
   local blocks = doc.blocks
@@ -434,7 +472,7 @@ function Pandoc(doc)
 
   local out = {}
   cover(meta, out)
-  out[#out + 1] = section("rIdFtrNone")
+  out[#out + 1] = section("rIdCandCover")
   contents(entries, out)
   authorities(meta, cites, out)
   out[#out + 1] = section("rIdCandFooter", "lowerRoman")
